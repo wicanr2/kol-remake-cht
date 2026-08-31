@@ -13,6 +13,7 @@
   `docs/re/fixed-charpics-ega-visual-probe.json`、
   `docs/re/charpics-archive-ega-visual-probe.json`、
   `docs/re/twn-archives-ega-visual-probe.json`
+- 完整 EGA 母體：[002-ega-extraction-set.md](002-ega-extraction-set.md)
 
 ## 目的
 
@@ -119,8 +120,9 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   `0x00` 不進下游 consumer。80 張 PNG／接觸表方向一致；逐張語意仍只記圖號。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
-- [ ] EGA 預定 extraction set 仍須列出全部 archive 與排除項；PCGA／HERC 的尺寸、
-  位平面、palette 與轉換規則尚未證實。
+- [x] EGA extraction set 已逐列覆蓋 30 個邏輯 archive、1,022 個 payload：925 筆來源
+  已證實、71 筆仍待證實、26 筆明確為非圖片；目前可形成 681 個已證實 PNG 單位。
+  PCGA／HERC 的尺寸、位平面、palette 與轉換規則尚未證實。
 
 ## READY gate
 

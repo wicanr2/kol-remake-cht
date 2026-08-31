@@ -73,6 +73,10 @@
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
   轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
   相符。完整轉換像素規則尚未動態驗證；三種 theme 的產品範圍待使用者決定。
+- SPEC-002 的完整 EGA extraction set 已建立並由 verifier 對清冊核對：30 個邏輯 archive、
+  1,022 payload 中，925 筆來源已證實、26 筆為明確非圖片 placeholder、71 筆仍須排除為
+  unknown；目前可形成 681 個已證實 PNG 單位。71 筆缺口只剩 KOLMPICS 68 筆動態圖示與
+  KOLPICS 三筆 raw-planar 幾何，不能因研究探針已有 PNG 就冒稱 production-ready。
 
 ## 固定輸入
 
@@ -113,6 +117,6 @@ KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸�
 KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 交付範圍仍等待使用者決定；TWN 與固定角色圖片已關閉像素格式。下一工作是
-建立 SPEC-002 的完整 EGA extraction set／排除清單，盤點尚未達已證實像素契約的 archive，
-並設計原子化 production 抽取器。SPEC-002 READY 前不接 production runtime。
+顯示 theme 交付範圍仍等待使用者決定。下一工作是以最窄 RE 切片關閉 KOLMPICS 68 筆
+動態圖示與 KOLPICS 三筆 raw-planar 幾何；其餘 EGA archive 不再重開。71 筆歸零後再設計
+原子化 production 抽取器。SPEC-002 READY 前不接 production runtime。
