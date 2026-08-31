@@ -14,6 +14,7 @@ NUMBER = re.compile(r"(?<![\w.,-])(\d{1,3}(?:,\d{3})+|\d+)(?![\w,])")
 CJK = re.compile(r"[\u3400-\u9fff]")
 WORD = re.compile(r"[A-Za-z][A-Za-z'’-]*")
 ENGLISH_RUN = re.compile(r"(?:\b[A-Za-z][A-Za-z'’.-]*\b[ ,]+){7}\b[A-Za-z]")
+ICON_DECORATION = re.compile(r"[-•!~_=|]")
 CJK_VALUES = {
     "零": 0, "一": 1, "二": 2, "兩": 2, "三": 3, "四": 4,
     "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
@@ -45,6 +46,16 @@ def numbers(text: str) -> set[str]:
         if value is not None:
             result.add(str(value))
     return result
+
+
+def source_body(text: str) -> str:
+    """排除圖示水平線的 OCR 數字，但保留目錄等純數字內容。"""
+    lines = []
+    for line in text.splitlines():
+        if not re.search(r"[A-Za-z]", line) and ICON_DECORATION.search(line):
+            continue
+        lines.append(line)
+    return "\n".join(lines)
 
 
 def expand_ranges(ranges: list[list[int]]) -> set[int]:
@@ -109,7 +120,7 @@ def main() -> None:
             translation = segments.get(key, "")
             if not translation:
                 raise SystemExit(f"{key}: reviewed 但沒有 Markdown 區塊")
-            source = sources[key]["source"]
+            source = source_body(sources[key]["source"])
             source_numbers = {n for n in numbers(source) if int(n) > 1}
             missing = sorted(source_numbers - numbers(translation), key=int)
             if missing:

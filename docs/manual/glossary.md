@@ -30,3 +30,27 @@
 | Character Disk | 角色磁碟 | 核准 | 原版媒體／存檔概念 |
 | RETURN | RETURN 鍵 | 核准 | 保留原鍵名 |
 | ESCAPE | ESCAPE 鍵 | 核准 | 保留原鍵名 |
+| Icon Plaque | 圖示板 | 核准 | 遊戲畫面底部的行動圖示區 |
+| Character Profile | 角色資料 | 核准 | 角色狀態與裝備入口 |
+| Gold crowns | 金冠 | 核准 | 王國貨幣 |
+| adventure points | 冒險點數 | 核准 | 成長相關數值 |
+| movement rate | 移動率 | 核准 | 角色移動數值 |
+| magic order | 魔法教團 | 暫譯 | 待魔法章核對組織正式名稱 |
+| rank | 階級 | 核准 | 角色成長等級 |
+| encumbrance | 負重值 | 核准 | 裝備攜帶負擔 |
+| SPACEBAR | 空白鍵 | 核准 | 圖示／按鍵 |
+| DOOR | 門 | 核准 | 進出地點圖示 |
+| MIRROR | 鏡子 | 核准 | 角色資料圖示 |
+| VIEW PARTY | 查看隊伍 | 核准 | 隊伍總覽圖示 |
+| ARMOR UP | 穿戴裝備 | 核准 | 裝備檢視／穿戴圖示 |
+| EXAMINE | 檢視 | 核准 | 詳細查看物品或商品 |
+| SHEATH | 入鞘 | 核准 | 把武器掛在腰帶 |
+| READY | 備戰 | 核准 | 把武器拿在手中 |
+| PACK | 收入背包 | 核准 | 把手中物品放入背包 |
+| DROP | 丟棄 | 核准 | 非戰鬥時永久丟棄物品 |
+| U-TURN | 返回／取消 | 核准 | 返回上一層；戰鬥時撤銷決定 |
+| LISTEN | 聆聽 | 核准 | 詢問傳聞 |
+| MOUTH | 交談／進食 | 核准 | 依場景詢問主題或吃下食物 |
+| REST | 休息 | 核准 | 旅店存檔；修道院接受治療 |
+| COMPANION | 同伴 | 核准 | 從旅店招募已建立角色 |
+| Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |

@@ -6,7 +6,7 @@ PDF 頁碼及文字層 SHA-256 回查。
 
 ## 目前狀態
 
-- 玩家手冊：79 個實體 PDF 頁；第 1–5 頁已逐頁對照並翻譯，第 6–79 頁待處理。
+- 玩家手冊：79 個實體 PDF 頁；第 1–10 頁已逐頁對照並翻譯，第 11–75、78–79 頁待處理。
 - 參考卡：5 個實體 PDF 頁，待翻譯。
 - 正式狀態只有 `todo`、`translated`、`reviewed`：`translated` 只是初譯；只有逐頁比對
   原文、核對數字／專名／段落後才能標成 `reviewed`。
@@ -21,6 +21,7 @@ PDF 頁碼及文字層 SHA-256 回查。
 - [術語表](glossary.md)
 - [封面、製作緣起與目錄](chapters/00-front-matter.md)
 - [開始遊戲與建立角色](chapters/01-getting-started.md)
+- [在城鎮裡四處看看](chapters/02-poking-around-town.md)
 - 來源清冊：`source-catalog.json`
 - 翻譯狀態：`translation-status.json`
 
