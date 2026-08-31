@@ -72,7 +72,12 @@
 | 63 | 矮人戰士、凱爾登與 Cliff Guard（印刷頁 120–121） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 64 | Rock Ranger、Far Seeker、精靈與 Brek（印刷頁 122–123） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 65 | Brek、Klvar 與 Melod（印刷頁 124–125） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
-| 66–75 | 種族、精靈語與索引 | todo | — |
+| 66 | Melod、Pyar、Thism 與 Usip（印刷頁 126–127） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 67 | Usip 與精靈語附錄導言／歷史（印刷頁 128–129） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 68 | 精靈語發音、三家族與十五棵樹（印刷頁 130–131） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 69 | ëavorfël 魔法構詞、拼字、屬性與種類表（印刷頁 132–133） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 70 | 種類、嚴重度、距離、時間、亞類及通用語衍生詞（印刷頁 134–135） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 71–75 | 精靈語與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 

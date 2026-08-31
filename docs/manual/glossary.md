@@ -149,3 +149,6 @@
 | Klakar / Kelkret | Klakar／Kelkret | 待查 | 凱爾登交配季／儀式；正式譯名待世界資料 consumer |
 | Allaranethel | Allaranethel（美麗土地） | 待查 | 精靈對 Lintle 平原的稱呼 |
 | Brek / Klvar / Melod | Brek／Klvar／Melod | 待查 | 精靈部族；正式譯名待種族資料 consumer |
+| Pyar / Thism / Usip | Pyar／Thism／Usip | 待查 | 精靈部族；正式譯名待種族資料 consumer |
+| Anfël / Kafarifël / ëavorfël | Anfël／Kafarifël／ëavorfël | 核准 | 一般精靈語／領主祕語／魔法語；保留手冊附加符號 |
+| ëna / Tree | ëna／樹 | 核准 | 精靈語十五個根詞的原書術語 |
