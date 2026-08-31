@@ -175,6 +175,16 @@
       ]
     },
     {
+      "string_ea": "0x2f694",
+      "text": "awd%d%s",
+      "dgroup_relative_offset": 6084,
+      "xref_count": 0,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "sub_168F8"
+      ]
+    },
+    {
       "string_ea": "0x2f6a8",
       "text": "per%s",
       "dgroup_relative_offset": 6104,
@@ -339,6 +349,13 @@
       "start_ea": "0x166cc",
       "end_ea": "0x167d9",
       "instruction_count": 96,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_168F8",
+      "start_ea": "0x168f8",
+      "end_ea": "0x16986",
+      "instruction_count": 58,
       "caller_count": 1
     },
     {

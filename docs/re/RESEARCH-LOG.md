@@ -214,16 +214,17 @@ derivative 值加 `0824`，全部通過；扣除 relocation 後整份 load image
   相鄰 offset 差與 offset 10 的最末 payload 長度。
 - `sub_1A04E`／`sub_1A26B` 顯示 9-bit 起始、LSB-first、`0x100` 碼寬增加標記、
   `0x101` 起字典與 LZW 特例；語意為 `強推論`。
-- 清冊有 42 個候選；30 個符合容器契約，共 960 個 payload。全部 offset 嚴格遞增且
-  payload 有界；`AWD1PICS.0` 在索引 payload 後另有 520 bytes，用途未知。
+- 當時清冊有 42 個候選；後續 RE-007 補入 AWD PCGA／HERC 變體後為 44 個。30 個符合
+  容器契約，共 960 個 payload。全部 offset 嚴格遞增且 payload 有界；當時
+  `AWD1PICS.0` 的 520-byte 尾區尚未知，後由 RE-007 訂正分類。
 - 一次性探針對 960 個 payload 完成解碼且無無效字典碼；只證明機械自洽，不證明像素。
 
 ### 結論與停止線
 
 容器 index 契約為 `已證實`；LZW 變體為 `強推論`。尺寸、顯示 suffix、位平面、palette、
-透明色、畫面方向及尾端 520 bytes 都未關閉，因此尚不能產生正式 PNG，也不能接 Go
-runtime。格式細節、固定顯示契約與未解問題集中於 `image-formats.md`；`SPEC-002` 保持
-DRAFT，下一窄任務是沿一個 consumer 完成來源到 blit 的垂直鏈並做原版視覺交叉驗證。
+透明色、畫面方向及尾端 520 bytes 在 RE-005 當時都未關閉，因此尚不能產生正式 PNG，
+也不能接 Go runtime。格式細節、固定顯示契約與後續訂正集中於 `image-formats.md`；當時
+的下一窄任務是沿一個 consumer 完成來源到 blit 的垂直鏈並做原版視覺交叉驗證。
 
 ## RE-006：COMBPICS EGA 垂直鏈與外部視覺 Oracle
 
@@ -256,4 +257,42 @@ TITLE 只重設模式與操作 speaker／timer／EGA plane，`MAKEMODE` 沒有 v
 COMBPICS 前五項的 LZW、二階 RLE、4-bit 索引、296×144 幾何、方向、EGA palette mapping
 與同場景身分均為 `已證實`；JPEG 不能證明 byte-exact RGB。此結論只關閉單一 PICS／
 mode 0Dh 分支，不能泛化到其他 archive、PCGA、HERC、透明圖或無副檔名 runtime 檔。
-SPEC-002 仍為 DRAFT；下一步追查 `AWD1PICS.0` 尾端與三個無副檔名檔案。
+SPEC-002 當時仍為 DRAFT；RE-007 接續追查 `AWD1PICS.0` 尾端與三個無副檔名檔案。
+
+## RE-007：AWD 工作區快照與角色圖片記錄表
+
+### AWD 固定快照邊界
+
+- 輸入 KOLBOOK SHA-256 `2cada028…e5832`；IDA Pro 9.4 loaded-MZ linear EA。
+- KOLBOOK `_main` 以 `awd%dpics.0`／`awd%dpcga.0`／`awd%dherc.0` 選檔，分別從 far
+  offset `0x0100`／`0x1000`／`0x2000` 呼叫 `sub_137C0`，長度一律為 `0x0fa0`。
+- `sub_137C0`（`0x137c0..0x13843`）使用 `__dos_creat`、指定長度的 `__dos_write`、
+  短寫檢查與 `__dos_close`；`sub_1374E`（`0x1374e..0x137c0`）則以最大 `0xffff`
+  bytes 做整檔讀取。原始名稱、位址、指令與呼叫端保存在 ignored private JSON。
+- KOLTOWN `sub_168F8` 建立 `awd%d%s` 檔名後呼叫索引 loader `sub_1A4FE`，故 PICS 的
+  玩家顯示路徑只消費索引 payload，止於 byte 3480。
+
+結論：三個 AWD 變體都是固定 4000-byte 編輯器工作區快照，`已證實`。PICS 在索引資料後
+的 520 bytes 已排除於 KOLTOWN 圖片流，但內容仍未解析；分類為 opaque workspace tail，
+不可改稱 padding，也不可輸出成 PNG。
+
+### 固定角色圖片記錄表
+
+- `CHARPICS`、`SHLDPICS`、`STEEDPIC` 實檔皆為 `0x2f80` bytes。
+- KOLBOOK `sub_135DB` 整檔讀入 CHARPICS／SHLDPICS；`sub_11820`、`sub_1293E` 以
+  `sub_137C0` 固定寫回 `0x2f80` bytes。
+- KOLTOWN `sub_14DB1` 以 CHARDATA 的 `0x300`-byte 槽位計算圖片槽位 `0x2f8` bytes，
+  每次複製 `0x17c` words，再依 DGROUP offsets `0x1744..0x176c` 寫 STEEDPIC、讀寫
+  CHARPICS、讀寫 SHLDPICS，每次寫檔長度均為 `0x2f80`。
+- `steedpics` 是另一個複數檔名；`sub_14779` 以最大 `0x7530` bytes 載入，不得和單數
+  `STEEDPIC` 的固定記錄表混稱同一檔案。
+
+結論：三個單數／無副檔名檔是 16 筆、每筆 760 bytes 的可變角色圖片記錄表，`已證實`；
+記錄內像素寬高、位平面及透明規則仍為 `未知`。SPEC-002 的兩項 READY gate 已關閉，
+但完整命名、manifest schema、失敗政策與權利審查未完成，故仍維持 DRAFT。
+
+### 失敗紀錄與證據邊界
+
+第一版 KOLBOOK IDA probe 使用 IDA 9.4 不存在的 `idc.get_segm_class`，未產生可採用輸出；
+改用 `ida_segment.get_segm_class` 後在全新資料庫重跑。之後再明確匯出兩個底層 helper，
+避免僅由呼叫端常數推測其 I/O 語意。安全摘要不含原版 bytes 或 disassembly。

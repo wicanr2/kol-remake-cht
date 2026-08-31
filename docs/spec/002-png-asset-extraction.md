@@ -21,15 +21,39 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 
 ## 預定輸出契約
 
-- 每個可顯示圖像輸出獨立 PNG；命名必須可回查來源 archive、圖號與顯示模式。
-- manifest 至少記錄來源 ZIP／entry SHA-256、來源圖號、壓縮範圍、尺寸、色彩型別、
-  palette 來源、透明規則與 PNG SHA-256。
+- 每個已驗證的可顯示圖像輸出獨立 PNG，路徑固定為
+  `png/<正規化來源檔名>/<四位十進位圖號>.png`。正規化只允許 ASCII 小寫、數字、點、
+  底線與連字號；兩個來源若正規化後碰撞，必須失敗，禁止自行覆寫或加隨機尾碼。
+- manifest 必須符合 [png-asset-manifest.schema.json](schemas/png-asset-manifest.schema.json)，
+  記錄來源 ZIP／entry SHA-256、來源種類與圖號、顯示模式、證據等級、處置、壓縮範圍、
+  解碼契約、尺寸、色彩型別、palette 來源、透明規則、權利分類與 PNG SHA-256。
+- 未證實項目也必須有一筆 manifest，`disposition` 設為 `excluded_unknown`，且不得產生
+  `output_png`。只有 `evidence_status=confirmed` 且欄位完整者可設為 `png`。
 - 抽取器不得把不明尾端 bytes、越界索引、未知 palette 或猜測尺寸靜默 fallback。
 - remake 的素材載入測試必須拒絕非 PNG 圖像格式與原版 archive。
 
+## 失敗政策
+
+下列任一條件立即非零退出，且不得留下半套現行輸出：輸入或 entry 雜湊不符、重複或
+非遞增 offset、payload 越界、解壓錯誤、像素數不符、色彩索引越界、未知 palette／透明
+規則卻要求輸出、命名碰撞、schema 驗證失敗、輸出 PNG 重讀不一致。工具先寫入同一輸出
+根目錄下的新暫存批次，整批驗證後才替換該版本；舊批次與其他專案不得刪除。
+
+未知或尚未支援的格式不是整份清冊錯誤：它必須明列 `excluded_unknown`，不可被 runtime
+引用。若使用者要求的 extraction set 含任何 excluded 項目，該批次仍失敗，以免把「部分
+成功」冒充「素材已全部抽取」。
+
+## 權利審查
+
+- 原版 archive、解碼像素與其 PNG 衍生物一律標為 `local_original_derivative`，只留本機
+  ignored 工作區或明確授權的 private 交付位置，不加入 Git、GitHub Release 或公開包。
+- Git 可保存不含 payload 的工具、schema、來源雜湊、位址、統計與 manifest 範本。
+- 公開 `dist-all/<版本>/release/` 只能使用另行證明可散布的素材，或提供合法原版資料的
+  本機匯入流程；private GitHub 本身不會把原版素材轉成可公開授權。
+
 ## 已有證據
 
-- [x] 42 個圖片候選的大小與 SHA-256 已固定。
+- [x] 44 個圖片候選的大小與 SHA-256 已固定；新增涵蓋 AWD 的 PCGA／HERC 變體。
 - [x] 30 個容器的 20-byte 固定區、2-byte offset table、count、payload bounds 已盤點。
 - [x] 30 個容器共 960 個 payload 通過一次性 LZW 機械解碼。
 - [x] IDA 已定位索引 reader、LZW core、bit reader、檔名 consumer 與 blitter 候選。
@@ -43,11 +67,15 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 
 - [x] 以 IDA consumer 或原版執行期證據固定至少一個完整格式分支：來源 → 解壓 → 尺寸 →
   位平面／palette → blit。
-- [ ] 解釋或排除 `AWD1PICS.0` 索引 payload 後的 520 bytes，不得稱作無害 padding。
-- [ ] 對無副檔名 `CHARPICS`／`SHLDPICS`／`STEEDPIC` 建立 writer／reader 與格式分類。
+- [x] `AWD1PICS.0` 尾端 520 bytes 已排除於 KOLTOWN 索引圖片流，分類為固定 4000-byte
+  編輯器工作區快照的未解析尾區；不得稱作 padding 或輸出為 PNG 像素。
+- [x] `CHARPICS`／`SHLDPICS`／`STEEDPIC` 已由 writer／reader 資料流分類為 16 筆、
+  每筆 760 bytes 的固定可變記錄表；內部像素佈局仍未知，未授權正式抽取。
 - [x] 可丟棄 probe 產生至少一張真實 PNG，並通過 bounds、預期尺寸、非空像素、palette、
   畫面方向及原版同狀態視覺抽樣。
-- [ ] 預先定義全部 archive 的失敗政策、命名與 manifest schema，完成權利審查。
+- [x] 已預先定義全部 archive 的失敗政策、可回查命名、manifest schema 與權利審查。
+- [ ] 每種預定輸出格式皆已有已證實像素契約；其餘明列排除，且完整 extraction set 不得
+  把排除項目冒充成功。
 - [x] 由第二條獨立證據（兩張原版文章截圖＋DOSBox-X mode／palette 契約）交叉驗證像素結果。
 
 ## 實作狀態

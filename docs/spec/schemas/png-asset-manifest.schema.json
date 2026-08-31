@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/wicanr2/kol-remake-cht/docs/spec/schemas/png-asset-manifest.schema.json",
+  "title": "武士傳說 PNG 素材 manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "source_zip", "generator", "assets"],
+  "properties": {
+    "schema": { "const": "kol-png-asset-manifest-v1" },
+    "source_zip": { "$ref": "#/$defs/source" },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "container_image"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "container_image": { "type": "string", "minLength": 1 }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "sha256"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_entry", "source_entry_sha256", "source_kind", "source_index",
+        "display_mode", "evidence_status", "disposition", "rights"
+      ],
+      "properties": {
+        "source_entry": { "type": "string", "minLength": 1 },
+        "source_entry_sha256": { "$ref": "#/$defs/sha256" },
+        "source_kind": { "enum": ["indexed_archive", "fixed_record_table"] },
+        "source_index": { "type": "integer", "minimum": 0 },
+        "compressed_offset": { "type": "integer", "minimum": 0 },
+        "compressed_bytes": { "type": "integer", "minimum": 0 },
+        "display_mode": { "enum": ["ega_mode_0d", "pcga", "hercules", "unknown"] },
+        "evidence_status": { "enum": ["confirmed", "strong_inference", "hypothesis", "unknown"] },
+        "disposition": { "enum": ["png", "excluded_unknown", "excluded_non_image"] },
+        "decode_contract": { "type": "string", "minLength": 1 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "color_type": { "enum": ["indexed", "grayscale", "rgb", "rgba"] },
+        "palette_source": { "type": "string", "minLength": 1 },
+        "transparency": { "type": ["integer", "string", "null"] },
+        "output_png": { "type": "string", "pattern": "^png/[a-z0-9._-]+/[0-9]{4}\\.png$" },
+        "output_png_sha256": { "$ref": "#/$defs/sha256" },
+        "rights": { "enum": ["local_original_derivative", "redistributable"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "disposition": { "const": "png" } } },
+          "then": {
+            "properties": { "evidence_status": { "const": "confirmed" } },
+            "required": [
+              "decode_contract", "width", "height", "color_type", "palette_source",
+              "transparency", "output_png", "output_png_sha256"
+            ]
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                { "required": ["output_png"] },
+                { "required": ["output_png_sha256"] }
+              ]
+            }
+          }
+        },
+        {
+          "if": { "properties": { "source_kind": { "const": "indexed_archive" } } },
+          "then": { "required": ["compressed_offset", "compressed_bytes"] }
+        }
+      ]
+    }
+  }
+}

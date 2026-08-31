@@ -12,6 +12,7 @@ from pathlib import Path
 
 EXPECTED_ZIP_SHA256 = "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
 EXACT_NAMES = {"CHARPICS", "SHLDPICS", "STEEDPIC"}
+AWD_VARIANT_MARKERS = ("PICS", "PCGA", "HERC")
 
 
 def sha256(data: bytes) -> str:
@@ -20,7 +21,27 @@ def sha256(data: bytes) -> str:
 
 def is_candidate(name: str) -> bool:
     base = Path(name).name.upper()
-    return "PIC" in base or base in EXACT_NAMES
+    return (
+        "PIC" in base
+        or base in EXACT_NAMES
+        or (base.startswith("AWD") and any(marker in base for marker in AWD_VARIANT_MARKERS))
+    )
+
+
+def fixed_record_contract(name: str, data: bytes) -> dict | None:
+    base = Path(name).name.upper()
+    if base not in EXACT_NAMES or len(data) != 0x2F80:
+        return None
+    record_bytes = 0x2F8
+    return {
+        "record_count": len(data) // record_bytes,
+        "record_bytes": record_bytes,
+        "file_bytes": len(data),
+        "record_sha256": [
+            sha256(data[offset : offset + record_bytes])
+            for offset in range(0, len(data), record_bytes)
+        ],
+    }
 
 
 def archive_contract(data: bytes) -> dict | None:
@@ -87,6 +108,7 @@ def main() -> None:
                     "size": len(data),
                     "sha256": sha256(data),
                     "archive_contract": archive_contract(data),
+                    "fixed_record_contract": fixed_record_contract(info.filename, data),
                 }
             )
 
@@ -94,7 +116,9 @@ def main() -> None:
         "schema": "kol-image-asset-inventory-v1",
         "input_name": args.zip_path.name,
         "input_sha256": digest,
-        "candidate_rule": "basename contains PIC (case-insensitive), plus exact legacy names",
+        "candidate_rule": (
+            "basename contains PIC (case-insensitive), plus exact legacy names, plus AWD PCGA/HERC variants"
+        ),
         "candidate_count": len(records),
         "records": sorted(records, key=lambda item: item["name"].upper()),
     }

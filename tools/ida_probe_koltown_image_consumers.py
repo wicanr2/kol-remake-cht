@@ -21,6 +21,7 @@ EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d
 KEYWORDS = (
     "pics", "twn", "head", "legs", "weap", "shld", "hand", "charpic",
     "steedpic", "kolm", "comb", "back", "face", "misc", "mon", "per",
+    "awd", "pcga", "herc",
 )
 DGROUP_EA = 0x2DED0
 

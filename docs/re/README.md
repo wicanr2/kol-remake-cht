@@ -33,12 +33,12 @@
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
 | 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-006 |
-| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS EGA 垂直鏈已證實；其餘格式仍待查 |
+| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-007 |
+| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、AWD 邊界與三個固定記錄表已分類 |
 | IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口
 
-SPEC-002 仍為 DRAFT，但 COMBPICS 的 EGA 垂直鏈與兩張外部視覺 oracle 已關閉。下一步
-追查 `AWD1PICS.0` 尾端 520 bytes 與無副檔名三檔的 writer／reader；不得把單一成功
-分支直接泛化成全部 archive 或接進 runtime。
+SPEC-002 仍為 DRAFT；失敗政策、命名、manifest schema 與權利分類已定義。下一步追查
+一個 `.1`／`.2` 或 PCGA／HERC 圖片分支的完整像素契約；不得把單一成功分支直接泛化
+成全部 archive 或接進 runtime。

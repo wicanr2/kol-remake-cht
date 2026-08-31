@@ -2,9 +2,23 @@
   "schema": "kol-image-asset-inventory-v1",
   "input_name": "Knights-of-legend.zip",
   "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
-  "candidate_rule": "basename contains PIC (case-insensitive), plus exact legacy names",
-  "candidate_count": 42,
+  "candidate_rule": "basename contains PIC (case-insensitive), plus exact legacy names, plus AWD PCGA/HERC variants",
+  "candidate_count": 44,
   "records": [
+    {
+      "name": "Knights-of-legend/AWD1HERC.0",
+      "size": 4000,
+      "sha256": "9c6b05c11cf7efaac7a701c761c7bdcd82abdeba99172e431049741f90ba4977",
+      "archive_contract": null,
+      "fixed_record_contract": null
+    },
+    {
+      "name": "Knights-of-legend/AWD1PCGA.0",
+      "size": 4000,
+      "sha256": "3196cd7bdf3daa7530ee97b53ec8cd28cd9e99a31c1c3fb102ab723976854b0d",
+      "archive_contract": null,
+      "fixed_record_contract": null
+    },
     {
       "name": "Knights-of-legend/AWD1PICS.0",
       "size": 4000,
@@ -27,7 +41,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 82,
         "maximum_compressed_payload_bytes": 200
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/BACKPICS.0",
@@ -51,7 +66,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 2472,
         "maximum_compressed_payload_bytes": 7477
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/BOOKPICS.0",
@@ -75,13 +91,37 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 776,
         "maximum_compressed_payload_bytes": 9939
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/CHARPICS",
       "size": 12160,
       "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": {
+        "record_count": 16,
+        "record_bytes": 760,
+        "file_bytes": 12160,
+        "record_sha256": [
+          "db626d4871004754185efbab2c4637a6b9fbd0aed2a257b76793f8571534d6e9",
+          "baf1e7282c50933e170854fb3dc8ff9dca08624aa8bc103ab18a617347882621",
+          "01a7604eda0b781962e0da3a0a5d0e77ca88951818e9baeb28f5281add3a41a4",
+          "c1c92e99398f82bb4bf10085ee928ee2b489996144cf3c56bb5671aa1396b826",
+          "00c387eb166129c7bbbfe8b37c4b439c4758c5e01255bd9bb8fc1f5f8bc9dd64",
+          "1e427cb5973d0de51f4ea22eb75a4ed3bf76267c3609a46f7f735c060cc02c9c",
+          "de1db9987379837acc5e4e1f674290fba03fbce288057223757ca4e73c0e74c8",
+          "3677941fe7ac2ef1958d365603a85a950eb528c23094726bfc3c053cc2ec654a",
+          "6ae69ea4793e88d6f456e57fe2706f9f02ab0487a4a3fe6eae65ce74beb37aed",
+          "1e0049566d80611d75aa73e947fe014dedf05d95fb6d1b60f01988011bcfa9e3",
+          "6f436aa9652a041754f6ec4435f2dfc2cea802f03e8dd850d99e72573a3566bd",
+          "00c387eb166129c7bbbfe8b37c4b439c4758c5e01255bd9bb8fc1f5f8bc9dd64",
+          "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906",
+          "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906",
+          "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906",
+          "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906"
+        ]
+      }
     },
     {
       "name": "Knights-of-legend/CHARPICS.0",
@@ -105,7 +145,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 274,
         "maximum_compressed_payload_bytes": 512
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/COMBPICS.0",
@@ -129,7 +170,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1673,
         "maximum_compressed_payload_bytes": 9845
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/ENDPICS.0",
@@ -153,7 +195,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 2020,
         "maximum_compressed_payload_bytes": 5777
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/FACEPICS.0",
@@ -177,7 +220,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1376,
         "maximum_compressed_payload_bytes": 1491
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/HANDPICS.0",
@@ -201,7 +245,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 11,
         "maximum_compressed_payload_bytes": 68
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/HEADPICS.0",
@@ -225,7 +270,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 25,
         "maximum_compressed_payload_bytes": 539
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/KOLMPICS.0",
@@ -249,7 +295,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 3421
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/KOLPICS.0",
@@ -273,7 +320,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 7605
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/LEGSPICS.0",
@@ -297,7 +345,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 73,
         "maximum_compressed_payload_bytes": 1044
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/MISCPICS.0",
@@ -321,7 +370,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 3462
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/MONPICS.0",
@@ -345,7 +395,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 103,
         "maximum_compressed_payload_bytes": 1619
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/PERPICS.0",
@@ -369,7 +420,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 249,
         "maximum_compressed_payload_bytes": 4560
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/SET0PICS.0",
@@ -393,7 +445,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 285,
         "maximum_compressed_payload_bytes": 1058
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/SET1PICS.0",
@@ -417,7 +470,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 361,
         "maximum_compressed_payload_bytes": 1508
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/SET2PICS.0",
@@ -441,13 +495,37 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 719,
         "maximum_compressed_payload_bytes": 2964
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/SHLDPICS",
       "size": 12160,
       "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": {
+        "record_count": 16,
+        "record_bytes": 760,
+        "file_bytes": 12160,
+        "record_sha256": [
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb"
+        ]
+      }
     },
     {
       "name": "Knights-of-legend/SHLDPICS.0",
@@ -471,13 +549,37 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 80,
         "maximum_compressed_payload_bytes": 786
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/STEEDPIC",
       "size": 12160,
       "sha256": "1bac851d19b4320f747f3ae85c8f467cc886e73b7fdcf1efc3ef9f6d58307b1a",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": {
+        "record_count": 16,
+        "record_bytes": 760,
+        "file_bytes": 12160,
+        "record_sha256": [
+          "65074eba191eb732c37c3de4ccf2983f317da1a64caf46b69d53095ceebbe223",
+          "19f33e1a55cf6b358d94de1014a4f310fde5933f25e711ffac4c3426b50313f2",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+          "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5"
+        ]
+      }
     },
     {
       "name": "Knights-of-legend/TORPICS.0",
@@ -501,7 +603,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 127,
         "maximum_compressed_payload_bytes": 1409
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN0PICS.0",
@@ -525,13 +628,15 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 2192,
         "maximum_compressed_payload_bytes": 4803
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN0PICS.1",
       "size": 22734,
       "sha256": "ee4d5ffe9d17d49b634fb16376087385db5eb65d7186d404ccf950019ccc5e0f",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN1PICS.0",
@@ -555,13 +660,15 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 5079
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN1PICS.1",
       "size": 32265,
       "sha256": "7f1a2b1a0098c732a5491529726da39fa432c30f8a06c8e75b5ae3660a82f2e9",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN2PICS.0",
@@ -585,13 +692,15 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 5475
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN2PICS.1",
       "size": 20716,
       "sha256": "05061f63af054ed2b017c421e71570d08f87baab983b31c4e0642ec939f15f42",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN3PICS.0",
@@ -615,13 +724,15 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 5176
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN3PICS.1",
       "size": 11691,
       "sha256": "6944fd0f409eb617c4cf45917a61c9124358b19b9968a753daf7bb72a7195407",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN4PICS.0",
@@ -645,13 +756,15 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 4693
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN4PICS.1",
       "size": 10875,
       "sha256": "40ffb621eeb9d4684cf3885ce5ef8b868c0214756ea533c635ee71d8db947836",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN5PICS.0",
@@ -675,13 +788,15 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 5077
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN5PICS.1",
       "size": 22519,
       "sha256": "c679660617a416c53913aef0d69a9bcf64924c2f3d0018e8745ddff24e40449a",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN6PICS.0",
@@ -705,13 +820,15 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 5215
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN6PICS.1",
       "size": 6257,
       "sha256": "10cf1124761d6b695ba85d76c47b44353c695cd4588f05bd6288a211c1061930",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN7PICS.0",
@@ -735,19 +852,22 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 1,
         "maximum_compressed_payload_bytes": 5423
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN7PICS.1",
       "size": 60995,
       "sha256": "cfb438af726d17dd42d49a7b777f69dee8a5b55b30053eb371506792021c5156",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/TWN7PICS.2",
       "size": 10643,
       "sha256": "0a015b61e7e3c1a854386dc47d4d7831cc8a25aa12a66382f782f15814505096",
-      "archive_contract": null
+      "archive_contract": null,
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/WEAPPICS.0",
@@ -771,7 +891,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 26,
         "maximum_compressed_payload_bytes": 529
-      }
+      },
+      "fixed_record_contract": null
     },
     {
       "name": "Knights-of-legend/WEATPICS.0",
@@ -795,7 +916,8 @@
         "all_payload_bounds_valid": true,
         "minimum_compressed_payload_bytes": 116,
         "maximum_compressed_payload_bytes": 699
-      }
+      },
+      "fixed_record_contract": null
     }
   ]
 }

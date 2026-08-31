@@ -24,12 +24,21 @@ archive。完整反組譯與原始 bytes 僅存本機 ignored 證據；版控內
 | `0x1a446..0x1a469` | byte 0 是項目數；索引 word 是 payload offset | 已證實 | count 比較與 offset 傳入解碼器 |
 | `0x1a49a..0x1a4c4` | 最末項長度來自 offset 10 的 word；其餘為相鄰 offset 差 | 已證實 | 兩條長度分支均流入同一解碼器 |
 
-清冊找到 42 個圖片候選，其中 30 個通過這個基本容器形狀，共 960 個索引項。所有 30
+清冊找到 44 個圖片候選，其中 30 個通過這個基本容器形狀，共 960 個索引項。所有 30
 個容器的 offset 嚴格遞增且 payload 位於檔案範圍內；29 個恰好抵達檔尾。`AWD1PICS.0`
-在索引 payload 後另有 520 bytes，內容用途為 `未知`，不得先稱為 padding 或 palette。
+在索引 payload 後另有 520 bytes。KOLBOOK `_main` 以 `sub_137C0` 將 PICS、PCGA、HERC
+三個工作區 buffer 各固定寫成 `0x0fa0 = 4000` bytes；KOLTOWN `sub_168F8` 則以
+`sub_1A4FE` 只依 PICS 索引載入指定 payload。故這 520 bytes 已排除於 KOLTOWN 的索引
+圖片流之外，分類為「固定大小編輯器工作區快照的未解析尾區」，等級為 `已證實`；它不是
+可丟棄 padding，抽取器不得解讀或複製為 PNG 像素。
 
-無副檔名 `CHARPICS`、`SHLDPICS`、`STEEDPIC`，以及部分 `TWN*PICS.1/.2` 不符合上述
-容器形狀；consumer 證實前三者會被整檔讀入，但其像素佈局與是否為 cache／存檔仍未知。
+無副檔名 `CHARPICS`、`SHLDPICS`、`STEEDPIC` 均為 `0x2f80 = 12160` bytes。KOLBOOK
+`sub_11820`／`sub_1293E` 固定長度寫回前兩檔，`sub_135DB` 整檔讀入；KOLTOWN
+`sub_14DB1` 以角色槽位 `0x300` bytes 推導圖片槽位 `0x2f8 = 760` bytes，複製
+`0x17c` words，並將三檔各固定寫回 `0x2f80` bytes。清冊因此把三檔分類為 16 筆、每筆
+760 bytes 的可變角色圖片記錄表，並保存逐筆 SHA-256；記錄內的像素形狀仍是 `未知`。
+`STEEDPIC` 是這條儲存流程的單數輸出；另有 `steedpics` 由 `sub_14779` 以最大
+`0x7530` bytes 載入，兩者不得混為同一格式。部分 `TWN*PICS.1/.2` 仍待分類。
 
 ## 壓縮流
 
@@ -90,8 +99,11 @@ Git 只保存 URL、SHA-256 與量化摘要 `combpics-visual-oracle.json`。
 
 ## Loader 與 consumer
 
-- `sub_19D98`／`sub_19E12`：整檔或指定長度讀取 helper，語意為 `強推論`；DOS runtime
-  wrapper 的精確 library 名稱尚未定名。
+- `sub_19D98`／`sub_19E12`：KOLTOWN 的整檔或指定長度讀寫 helper，語意為 `強推論`。
+- KOLBOOK `sub_1374E`（`0x1374e..0x137c0`）以 `__dos_open`、最大 `0xffff` bytes 的
+  `__dos_read`、`__dos_close` 做整檔讀取；`sub_137C0`（`0x137c0..0x13843`）以
+  `__dos_creat`、呼叫端指定長度的 `__dos_write`、短寫檢查及 `__dos_close` 寫檔，均為
+  `已證實`。完整指令只留本機 private JSON，版控摘要保留原始定位與雜湊。
 - `sub_1A4FE`：依圖號與顯示模式選檔、選取 payload 並呼叫解碼器，`已證實`。
 - `sub_19E9D`：依顯示模式做矩形 copy／blit，`強推論`。
 - `sub_1BD17`：含 clipping 與 mask 的顯示模式分支 blitter，`強推論`。
@@ -103,8 +115,9 @@ Git 只保存 URL、SHA-256 與量化摘要 `combpics-visual-oracle.json`。
 
 1. `PICS`／mode 0Dh 的 COMBPICS 垂直鏈已關閉；PCGA／HERC 與其他 archive 尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
-3. `AWD1PICS.0` 尾端 520 bytes 的 consumer。
-4. 不符合 archive 形狀之無副檔名／`.1`／`.2` 檔案的 writer 與生命週期。
+3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
+4. 不符合 archive 形狀之 `.1`／`.2` 檔案的 writer 與生命週期。
 5. COMBPICS 已有兩張外部原版截圖交叉驗證；仍待本機 runtime framebuffer 的無損抽樣。
 
-以上問題關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得接入 Go／Ebitengine。
+在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得
+接入 Go／Ebitengine。
