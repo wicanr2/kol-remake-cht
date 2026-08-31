@@ -33,12 +33,12 @@
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
 | 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-007 |
-| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、AWD 邊界與三個固定記錄表已分類 |
+| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-008 |
+| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、TWN 分卷／index 24、AWD 與固定記錄表已分類 |
 | IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口
 
-SPEC-002 仍為 DRAFT；失敗政策、命名、manifest schema 與權利分類已定義。下一步追查
-一個 `.1`／`.2` 或 PCGA／HERC 圖片分支的完整像素契約；不得把單一成功分支直接泛化
-成全部 archive 或接進 runtime。
+SPEC-002 仍為 DRAFT；TWN `.1/.2` 與 index 24 已關閉。下一步界定固定 ZIP 沒有 PCGA／
+HERC 發行素材的範圍，再追下一個 PICS consumer；不得把兩個成功分支直接泛化成全部
+archive 或接進 runtime。

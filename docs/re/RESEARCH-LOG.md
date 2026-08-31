@@ -296,3 +296,43 @@ SPEC-002 當時仍為 DRAFT；RE-007 接續追查 `AWD1PICS.0` 尾端與三個�
 第一版 KOLBOOK IDA probe 使用 IDA 9.4 不存在的 `idc.get_segm_class`，未產生可採用輸出；
 改用 `ida_segment.get_segm_class` 後在全新資料庫重跑。之後再明確匯出兩個底層 helper，
 避免僅由呼叫端常數推測其 I/O 語意。安全摘要不含原版 bytes 或 disassembly。
+
+## RE-008：TWN 邏輯分卷與全域圖號 24
+
+### 舊結論勘誤
+
+舊 v1 清冊把 `TWN*PICS.1/.2` 當成不符合 archive 形狀的獨立檔，因此只解碼 `.0` 第一卷，
+報告 30 archive／960 payload。這個數字只覆蓋第一卷，不是完整邏輯 archive。舊摘要仍留在
+Git 歷史；現行 v2 清冊改以 KOLTOWN consumer 的分卷契約重生。
+
+### 分卷 reader 證據
+
+- 固定 KOLTOWN derivative SHA-256 `01f6f9…d1d2`，IDA Pro 9.4，unpacked loaded-MZ
+  linear EA；完整指令留在 `KOLTOWN-image-pipeline-private.json`。
+- `sub_1A4FE` 在 `0x1a71c..0x1a770` 從 `.0` header 讀全域 offset 與最多五個累計門檻；
+  `0x1a770..0x1a783` 以門檻選 `.0` 至 `.4`；`0x1a786..0x1a7c3` 對卷界最後一項改讀
+  header offsets `10+volume*2` 的 last-length；其餘以相鄰 offset 差求長度。
+- 固定 ZIP 中 TWN0..6 各有 `.0/.1`，TWN7 有 `.0/.1/.2`。第一卷 payload 從 byte 200
+  起，續卷從 byte 0 起；每卷最後一項加 last-length 都精確等於實體檔案大小。
+- 實際邏輯圖數為 25、34、30、26、26、30、26、46，合計比舊清冊多 62 張；30 個邏輯
+  archive 總數為 1,022。v2 LZW 探針全部解碼，無越界或無效字典碼。
+
+結論：`.1/.2` 是同一 TWN archive 的 continuation volume，分卷選擇、全域圖號、offset
+基準與末項長度為 `已證實`。LZW 語意仍依既有證據標為 `強推論`，不能從 1,022 次機械
+成功外推所有像素形狀。
+
+### 全域圖號 24 垂直鏈
+
+- `sub_2AAA8` `0x2aab1..0x2aab5` 傳常數 24 給 `sub_11302`。
+- `sub_11302` 以 `twn%d%s` 選當前 town／顯示 suffix；圖號 24 在八組 archive 全部由
+  `.1` 提供。town 0 設矩形 byte-column `[13,37)`、scanline `[58,154)`；其餘 town 設
+  `[1,12)`、`[64,128)`。
+- `sub_10F9C` 完整串接 `sub_1A4FE` → `sub_1C907`／`sub_1A2BB` → `sub_19E9D`。
+  因 mode 0Dh 每 byte-column 為 8 pixels，兩種輸出分別為 192×96 與 88×64。
+- 可丟棄探針對八張圖的像素數全部精確相符，palette index 均在 0..15；兩次 PNG 逐 byte
+  相同。接觸表目視為 town 0 道路／提示畫面及七張人物肖像，無鏡像、旋轉、空白或明顯
+  scanline 錯位。PNG 與接觸表只留 ignored 工作區，安全摘要 SHA-256 `642a68c6…ed54`。
+
+結論：TWN 圖號 24 的分卷、LZW、二階 RLE、4-bit indices、幾何、方向與 blit 為
+`已證實`；EGA RGB mapping 維持 `hardware-spec approximation`。圖片的劇情／人物語意
+未由文字 consumer 證實，因此只以「全域圖號 24」稱呼，不作推測性命名。

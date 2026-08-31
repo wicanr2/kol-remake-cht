@@ -4,7 +4,7 @@
 - 日期：2026-08-31
 - 範圍：由固定原版輸入重生本機 PNG 衍生素材；不定義玩法
 - RE 來源：`docs/re/image-formats.md`、`docs/re/image-asset-inventory.json`、
-  `docs/re/image-lzw-probe-summary.json`
+  `docs/re/image-lzw-probe-summary.json`、`docs/re/town-index24-png-probe-summary.json`
 
 ## 目的
 
@@ -55,10 +55,13 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 
 - [x] 44 個圖片候選的大小與 SHA-256 已固定；新增涵蓋 AWD 的 PCGA／HERC 變體。
 - [x] 30 個容器的 20-byte 固定區、2-byte offset table、count、payload bounds 已盤點。
-- [x] 30 個容器共 960 個 payload 通過一次性 LZW 機械解碼。
+- [x] 30 個邏輯 archive 共 1,022 個 payload 通過一次性 LZW 機械解碼；`.1/.2` 已依
+  KOLTOWN 分卷 consumer 納入，不再被誤列為未知獨立格式。
 - [x] IDA 已定位索引 reader、LZW core、bit reader、檔名 consumer 與 blitter 候選。
 - [x] `COMBPICS.0[0..4]` 的 mode 0Dh／PICS、296×144、二階 RLE、4-bit 索引與 EGA
   palette 垂直鏈已證實。
+- [x] `TWN0..7PICS` 全域圖號 24 均跨入 `.1`，已證實 town 0 為 192×96、其餘為
+  88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
 - [ ] 其他 archive／PCGA／HERC 的尺寸、位平面、palette 與透明規則尚未證實。

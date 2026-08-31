@@ -5,11 +5,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import struct
 import zipfile
 from pathlib import Path
 
-from inventory_image_archives import EXPECTED_ZIP_SHA256, archive_contract, is_candidate
+from inventory_image_archives import (
+    EXPECTED_ZIP_SHA256,
+    is_candidate,
+    logical_archive_contract,
+)
 
 
 def decode(source: bytes) -> bytes:
@@ -74,32 +77,38 @@ def main() -> None:
 
     records = []
     with zipfile.ZipFile(args.zip_path) as archive:
-        for info in archive.infolist():
-            if info.is_dir() or not is_candidate(info.filename):
+        files = {
+            info.filename: archive.read(info)
+            for info in archive.infolist()
+            if not info.is_dir()
+        }
+        for name in sorted(files, key=str.upper):
+            if not name.upper().endswith(".0") or not is_candidate(name):
                 continue
-            data = archive.read(info)
-            contract = archive_contract(data)
+            contract = logical_archive_contract(name[:-2], files)
             if contract is None or not contract["all_payload_bounds_valid"]:
                 continue
-            count = contract["count"]
-            offsets = list(struct.unpack_from(f"<{count}H", data, 20))
-            lengths = [right - left for left, right in zip(offsets, offsets[1:])]
-            lengths.append(contract["last_payload_length"])
             outputs = []
-            for index, (offset, length) in enumerate(zip(offsets, lengths)):
-                decoded = decode(data[offset : offset + length])
+            for item in contract["items"]:
+                source = files[item["volume_name"]]
+                offset = item["offset"]
+                length = item["compressed_bytes"]
+                decoded = decode(source[offset : offset + length])
                 outputs.append(
                     {
-                        "index": index,
+                        "index": item["index"],
+                        "volume_index": item["volume_index"],
+                        "volume_name": item["volume_name"],
+                        "compressed_offset": offset,
                         "compressed_bytes": length,
                         "decoded_bytes": len(decoded),
                         "decoded_sha256": hashlib.sha256(decoded).hexdigest(),
                     }
                 )
-            records.append({"name": info.filename, "outputs": outputs})
+            records.append({"name": contract["root_name"], "outputs": outputs})
 
     result = {
-        "schema": "kol-image-lzw-probe-summary-v1",
+        "schema": "kol-image-lzw-probe-summary-v2",
         "input_name": args.zip_path.name,
         "input_sha256": digest,
         "status": "mechanical decode only; dimensions, pixels and palette not validated",

@@ -98,6 +98,6 @@
 
 ## 下一個唯一工作
 
-SPEC-002 仍為 DRAFT；失敗政策、可回查命名、manifest schema 與權利審查已寫入規格。
-下一個窄任務是追一個尚未證實的 `.1`／`.2` 或 PCGA／HERC 圖片分支，補齊來源、尺寸、
-位平面、palette 與透明規則。READY 前不接 Go／Ebitengine production runtime。
+SPEC-002 仍為 DRAFT；TWN `.1/.2` 分卷契約與全域圖號 24 的 continuation 垂直鏈已關閉。
+下一個窄任務是界定固定 ZIP 缺少 PCGA／HERC 發行素材的範圍，再追下一個尚未證實的
+PICS consumer 圖號。READY 前不接 Go／Ebitengine production runtime。

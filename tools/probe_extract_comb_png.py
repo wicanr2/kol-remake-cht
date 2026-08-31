@@ -72,12 +72,12 @@ def chunk(kind: bytes, payload: bytes) -> bytes:
     )
 
 
-def encode_rgb_png(indices: bytes) -> bytes:
+def encode_rgb_png(indices: bytes, width: int = WIDTH, height: int = HEIGHT) -> bytes:
     rows = []
-    for y in range(HEIGHT):
-        row = indices[y * WIDTH : (y + 1) * WIDTH]
+    for y in range(height):
+        row = indices[y * width : (y + 1) * width]
         rows.append(b"\0" + bytes(channel for index in row for channel in PALETTE[index]))
-    header = struct.pack(">IIBBBBB", WIDTH, HEIGHT, 8, 2, 0, 0, 0)
+    header = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
     return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", header) + chunk(
         b"IDAT", zlib.compress(b"".join(rows), 9)
     ) + chunk(b"IEND", b"")
@@ -110,7 +110,7 @@ def main() -> None:
     if not 0 <= min(indices) <= max(indices) <= 15:
         raise SystemExit("色彩索引超出 4-bit 範圍")
     args.output_path.parent.mkdir(parents=True, exist_ok=True)
-    args.output_path.write_bytes(encode_rgb_png(indices))
+    args.output_path.write_bytes(encode_rgb_png(indices, WIDTH, HEIGHT))
     print(
         f"index={args.index} size={WIDTH}x{HEIGHT} colors={len(set(indices))} "
         f"png_sha256={hashlib.sha256(args.output_path.read_bytes()).hexdigest()}"

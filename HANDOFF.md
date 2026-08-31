@@ -16,12 +16,15 @@
   候選，`KOLTOWN`／`TANDYPIN` 仍未知。
 - RE 知識庫已建立；KOLTOWN 的 Microsoft EXEPACK、真正入口與 337-function unpacked IDA
   derivative 已固定。SPEC-001 已 READY，startup 前 runtime load image 完整零差異核對通過。
-- 圖片 RE 清冊已固定 44 個候選；30 個索引容器共 960 payload 通過 LZW 機械探針。
+- 圖片 RE 清冊已固定 44 個實體候選、30 個邏輯 archive；TWN `.1/.2` 為 continuation
+  volume，總計 1,022 payload 通過 LZW 機械探針。
   SPEC-002 已建立為 DRAFT；大多數 archive 的像素、尺寸與 palette 尚未證實。
 - COMBPICS EGA 窄分支已證實 296×144、二階 RLE、4-bit 索引與 BIOS mode 0Dh palette；
   兩張 ignored 測試 PNG 對上魔旅士文章的同場景 JPEG，仍沒有 production PNG。
 - AWD 三變體已證實為固定 4000-byte 工作區快照；PICS 尾端 520 bytes 不屬索引圖片流，
   但仍是 opaque workspace tail。三個無副檔名角色圖片檔已證實為 16×760-byte 記錄表。
+- TWN 全域圖號 24 已完成 `.1` continuation → LZW → 二階 RLE → 4-bit EGA → blit 垂直鏈；
+  town 0 為 192×96，其餘七城為 88×64，八張 ignored PNG 接觸表方向正常。
 
 ## 證據入口
 
@@ -29,7 +32,7 @@
 |---|---|---|
 | 目前真相 | `CONTEXT.md` | 不用歷史工作清單反向覆蓋 |
 | 原版清冊 | `docs/re/original-inventory.json` | 雙容器重生逐 byte 相同；只有雜湊與 metadata |
-| 研究結論 | `docs/re/RESEARCH-LOG.md` | RE-001 至 RE-007 |
+| 研究結論 | `docs/re/RESEARCH-LOG.md` | RE-001 至 RE-008 |
 | 圖片格式 | `docs/re/image-formats.md` | 索引、LZW、consumer 與未知項 |
 | entry 原始 bytes | `docs/re/ida-fingerprints/KOLTOWN-entry.json` | 僅本機，Git 精確排除 |
 
@@ -37,7 +40,7 @@
 
 | 優先 | 類型 | 工作 | 下一個精確動作 | 阻塞 |
 |---|---|---|---|---|
-| 1 | asset RE | SPEC-002 READY 證據 | 追一個 `.1`／`.2` 或 PCGA／HERC 分支的完整像素契約 | 格式未知 |
+| 1 | asset RE | SPEC-002 READY 證據 | 界定缺少 PCGA／HERC 發行素材的範圍，再追下一個 PICS consumer 圖號 | 多數像素契約未知 |
 | 3 | documentation | 中文手冊 | 建頁面索引、OCR 草稿與術語表 | M1 後開始 |
 
 ## 執行中程序與暫存物
@@ -48,7 +51,7 @@
 
 - 不要把 1998 timestamp 的檔案當成已證實原始發行媒體。
 - 不要因檔名含 `PICS` 就宣稱圖像格式已解碼。
-- 不要把 960 個 LZW payload 機械成功冒充正確像素；AWD 尾區雖已排除於圖片流，仍不是
+- 不要把 1,022 個 LZW payload 機械成功冒充全部正確像素；AWD 尾區雖已排除於圖片流，仍不是
   可任意丟棄的 padding。
 - 不要在各格式／玩法 spec READY 前開始對應的 Go runtime。
 - 不要把 `KOLTOWN-entry.json` 的線性 32 條指令當成完整控制流。

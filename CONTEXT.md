@@ -28,8 +28,9 @@
   2,281 個 relocation 全通過，正規化後 129,312-byte load image 與 derivative 零差異。
 - 魔旅士 2010-04-16 的玩家心得與《CRPG 通鑑》中文版已進入 README；只作專案起源，
   不作玩法 oracle。
-- 圖片 RE 已建立 SPEC-002 DRAFT：44 個候選中有 30 個符合 20-byte 固定區＋2-byte
-  offset table，共 960 個 payload 通過 LZW 機械探針。索引契約已證實，LZW 為強推論；
+- 圖片 RE 已建立 SPEC-002 DRAFT：44 個實體候選歸併為 30 個邏輯 archive；TWN `.1/.2`
+  已證實是 continuation volume，總數由 960 訂正為 1,022 個 payload，全部通過 LZW 機械
+  探針。索引／分卷契約已證實，LZW 為強推論；
   尺寸、位平面、palette、透明色與原版視覺仍未知，尚未授權 PNG production 抽取。
 - `AWD1PICS.0` 是 KOLBOOK 固定寫出的 4000-byte 工作區快照；KOLTOWN 只讀其中索引
   payload。尾端 520 bytes 已排除於圖片流，但仍是未解析工作區資料，不是 padding。
@@ -38,6 +39,8 @@
 - COMBPICS EGA 分支已由 IDA 關閉到 296×144、二階 RLE、4-bit 色彩與 BIOS mode 0Dh
   palette；兩張本機測試 PNG 分別對上魔旅士文章的同場景原版 JPEG。這只證實該窄分支，
   不代表全部圖片格式完成。
+- TWN 全域圖號 24 已關閉 continuation 垂直鏈：八城均從 `.1` 讀取；town 0 為 192×96，
+  其餘為 88×64。八張 ignored PNG 與接觸表通過像素數、4-bit bounds、方向及非空目視。
 
 ## 固定輸入
 
@@ -63,5 +66,5 @@
 
 ## 下一個唯一工作
 
-追查一個尚未證實的 `.1`／`.2` 或 PCGA／HERC 圖片分支，補齊來源、尺寸、位平面、palette
-與透明規則；SPEC-002 READY 前不接 runtime。
+盤點固定 ZIP 缺少 PCGA／HERC 發行素材的影響，並追下一個尚未證實的 PICS consumer
+圖號；SPEC-002 READY 前不接 runtime。

@@ -24,8 +24,8 @@ archive。完整反組譯與原始 bytes 僅存本機 ignored 證據；版控內
 | `0x1a446..0x1a469` | byte 0 是項目數；索引 word 是 payload offset | 已證實 | count 比較與 offset 傳入解碼器 |
 | `0x1a49a..0x1a4c4` | 最末項長度來自 offset 10 的 word；其餘為相鄰 offset 差 | 已證實 | 兩條長度分支均流入同一解碼器 |
 
-清冊找到 44 個圖片候選，其中 30 個通過這個基本容器形狀，共 960 個索引項。所有 30
-個容器的 offset 嚴格遞增且 payload 位於檔案範圍內；29 個恰好抵達檔尾。`AWD1PICS.0`
+清冊找到 44 個實體圖片候選，歸併為 30 個邏輯 archive，共 1,022 個索引項。所有 payload
+都位於所屬分卷範圍內；單卷 archive 中 29 個恰好抵達檔尾。`AWD1PICS.0`
 在索引 payload 後另有 520 bytes。KOLBOOK `_main` 以 `sub_137C0` 將 PICS、PCGA、HERC
 三個工作區 buffer 各固定寫成 `0x0fa0 = 4000` bytes；KOLTOWN `sub_168F8` 則以
 `sub_1A4FE` 只依 PICS 索引載入指定 payload。故這 520 bytes 已排除於 KOLTOWN 的索引
@@ -38,7 +38,22 @@ archive。完整反組譯與原始 bytes 僅存本機 ignored 證據；版控內
 `0x17c` words，並將三檔各固定寫回 `0x2f80` bytes。清冊因此把三檔分類為 16 筆、每筆
 760 bytes 的可變角色圖片記錄表，並保存逐筆 SHA-256；記錄內的像素形狀仍是 `未知`。
 `STEEDPIC` 是這條儲存流程的單數輸出；另有 `steedpics` 由 `sub_14779` 以最大
-`0x7530` bytes 載入，兩者不得混為同一格式。部分 `TWN*PICS.1/.2` 仍待分類。
+`0x7530` bytes 載入，兩者不得混為同一格式。
+
+### TWN 多分卷契約
+
+`sub_1A4FE`（`0x1a6b4..0x1a85d`）證實 `.0` 的前 20 bytes 同時管理最多五個分卷：
+
+- offsets `0,2,4,6,8` 是各非末卷的累計圖數門檻；零值表示目前已到末卷；
+- offsets `10,12,14,16,18` 是各卷最後一個 payload 的長度；
+- 全域圖號的 16-bit offset table 從 byte 20 開始，offset 是相對於被選中的實體分卷；
+- loader 比較 `image_index+1` 與累計門檻，選出 `.0` 至 `.4`，卷界的最後一項使用對應
+  last-length；末卷以 table 中等於檔案大小的 sentinel 界定最終圖數。
+
+固定輸入實際有七組兩卷與一組三卷：TWN0..6 分別為 25、34、30、26、26、30、26 張；
+TWN7 為 46 張。所有卷內 offset 嚴格遞增、第一卷從 byte 200 起、續卷從 byte 0 起，且
+最後 payload 精確抵達各實體檔尾。這使舊清冊漏算的 62 張 continuation payload 從 960
+訂正為 1,022；v2 清冊逐張記錄 volume、offset、長度與雜湊。
 
 ## 壓縮流
 
@@ -51,7 +66,7 @@ archive。完整反組譯與原始 bytes 僅存本機 ignored 證據；版控內
 - 字典項保存前綴碼與尾 byte，並處理 `code == next_code` 的 LZW 特例；
 - 壓縮流長度由上述索引契約提供，沒有在此證據中發現獨立 end code。
 
-結論等級為 `強推論`：靜態控制流與資料流一致，而且一次性探針已對 30 個容器、960 個
+結論等級為 `強推論`：靜態控制流與資料流一致，而且一次性探針已對 30 個 archive、1,022 個
 payload 全部完成機械解碼，沒有越界或無效字典碼。但尚未證實解碼輸出的尺寸、位平面、
 palette、透明色與畫面方向，因此不能把「可解出 bytes」升格成「圖片已正確抽取」。
 
@@ -97,6 +112,21 @@ archive 仍維持前述 `強推論`。
 色彩索引排列；JPEG 壓縮與縮放不能證明 byte-exact RGB。下載圖片只在 ignored 工作區，
 Git 只保存 URL、SHA-256 與量化摘要 `combpics-visual-oracle.json`。
 
+### TWN 全域圖號 24 的 continuation 垂直鏈
+
+`sub_11302`（`0x11302..0x11390`）以 `twn%d%s` 建檔名後把呼叫端圖號交給
+`sub_10F9C`。`sub_10F9C` 經 `sub_1A4FE` 選卷並 LZW 解碼，mode 大於 8 時再走
+`sub_1C907`／`sub_1A2BB`，最後由 `sub_19E9D` blit。caller `sub_2AAA8` 在
+`0x2aab1..0x2aab5` 明確傳入全域圖號 24。
+
+圖號 24 在八組 TWN archive 全部位於 `.1`。對 town 0，`sub_11302` 設 byte-column
+`x=[13,37)`、scanline `y=[58,154)`，即 192×96；town 1..7 設 `x=[1,12)`、
+`y=[64,128)`，即 88×64。一次性探針對八張圖均精確展開至 consumer 像素數，索引落在
+0..15，重跑 PNG 逐 byte 相同。接觸表目視為一張道路／提示畫面與七張正向人物肖像，
+沒有旋轉、鏡像、空白或明顯 scanline 錯位。其 LZW、分卷選擇、二階 RLE、4-bit 索引、
+尺寸與方向為 `已證實`；RGB 仍沿用 mode 0Dh 的 `hardware-spec approximation`。
+安全統計見 `town-index24-png-probe-summary.json`，PNG／接觸表只留 ignored 工作區。
+
 ## Loader 與 consumer
 
 - `sub_19D98`／`sub_19E12`：KOLTOWN 的整檔或指定長度讀寫 helper，語意為 `強推論`。
@@ -113,10 +143,11 @@ Git 只保存 URL、SHA-256 與量化摘要 `combpics-visual-oracle.json`。
 
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS 垂直鏈已關閉；PCGA／HERC 與其他 archive 尚未關閉。
+1. `PICS`／mode 0Dh 的 COMBPICS 與 TWN 圖號 24 垂直鏈已關閉；PCGA／HERC 與其他
+   archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
 3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
-4. 不符合 archive 形狀之 `.1`／`.2` 檔案的 writer 與生命週期。
+4. PCGA／HERC 的實體素材不在固定 ZIP（AWD 工作區除外），其可驗證範圍與排除政策。
 5. COMBPICS 已有兩張外部原版截圖交叉驗證；仍待本機 runtime framebuffer 的無損抽樣。
 
 在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得
