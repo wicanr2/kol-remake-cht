@@ -114,4 +114,10 @@
 | Order of the Silver Stave | 銀杖教團 | 暫譯 | 騎士教團；待世界觀專名一致性審查 |
 | arena | 競技場 | 核准 | 升階的一對一、不可撤退戰鬥 |
 | talisman | 護符 | 核准 | 魔法教團成員身分物品 |
+| SCROLL | 卷軸 | 核准 | 角色資料中的法術清單入口 |
+| MEDAL | 勳章 | 核准 | 完成任務後取得的證明 |
+| quest | 任務 | 核准 | 村民委託；完成遊戲的關鍵 |
+| Ashtel Arra | Ashtel Arra（上方世界） | 待查 | 矮人語；音譯待世界觀一致性審查 |
+| Day of Lighting | 照明日 | 暫譯 | Ghor 矮人紀念出土的聖日 |
+| Walbar | Walbar | 待查 | 北方航海／戰士種族；正式音譯待生物資料 consumer |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |

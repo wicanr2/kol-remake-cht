@@ -47,7 +47,12 @@
 | 38 | 最高階級、競技場與法術構詞（印刷頁 70–71） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
 | 39 | 法術種族、屬性、強度、距離、時間與亞種（印刷頁 72–73） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
 | 40 | 法術範例、學習、教團與修改（印刷頁 74–75） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
-| 41–75 | 魔法、征戰、世界觀、種族與索引 | todo | — |
+| 41 | 法術選擇、任務、勳章與新區域（印刷頁 76–77） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 42 | 阿什塔拉瑞亞王國與矮人出土（印刷頁 78–79） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 43 | 精靈抵達、Zolod 矮人與食人魔戰爭前史（印刷頁 80–81） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 44 | 食人魔戰爭與人類跨越山脈（印刷頁 82–83） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 45 | 公國、Crelek 重返 Ghor 與 Walbar（印刷頁 84–85） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 46–75 | 世界史、種族、精靈語與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 

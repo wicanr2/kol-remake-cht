@@ -348,3 +348,20 @@
 - 更新後進階玩家章與狀態 ledger SHA-256 分別為 `40071778…d8e3`、`41ca879d…8f08`；
   Python syntax、全部 JSON 與本地 Markdown 連結均通過；UID/GID 與 `git diff --check`
   正常，`docker ps -a` 未見 KOL／手冊／PDF 專案殘留容器。
+
+## 2026-08-31：中文手冊實體頁 41–45
+
+- 依 SPEC-003 READY 翻譯玩家手冊印刷頁 76–85；完成法術選擇、SCROLL、任務、MEDAL 與
+  原版規劃的擴充區域操作，並新增〈阿什塔拉瑞亞王國〉世界史章。
+- 世界史依 100 DPI 掃描保留 Cullen 敘事框架、矮人出土與 Ashtel Arra、精靈抵達、
+  Ghor／Zolod 兩族、三次食人魔戰事、人類跨越 Tyme、城鎮建立、公國化、Crelek 遠征與
+  Walbar 抵達；938、952、963、962、972、977、1003 等年代均通過逐頁數字 gate。
+- 地名與人名未由 OCR 自行音譯；Ashtel Arra、Walbar 等維持待查，Day of Lighting 暫譯
+  「照明日」。手冊世界觀與任務描述仍不直接授權 runtime 或新增不存在的擴充內容。
+- 現況為 reviewed 47（內容 1–45、空白 76–77）、translated 0、todo 37；全 84 頁狀態
+  完整覆蓋，九個 Markdown 輸出通過來源 hash、數字、篇幅與英文殘留 gate。下一批從
+  實體頁 46–50 開始。
+- 更新後進階玩家章、世界史章與狀態 ledger SHA-256 分別為 `abda34f2…0251`、
+  `b033d86f…21d5`、`131693d0…15d7`；Python syntax、全部 JSON 與本地 Markdown 連結
+  均通過；UID/GID 與 `git diff --check` 正常，`docker ps -a` 未見 KOL／手冊／PDF
+  專案殘留容器。
