@@ -1,0 +1,55 @@
+{
+  "schema": "kol-ida-koltown-kolmpics-index28-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "archive_load": {
+    "filename_format": "kolm%s.0",
+    "filename_format_dgroup_offset": "0x165a",
+    "format_call_ea": "0x1037a",
+    "whole_file_reader_original_name": "sub_19D98",
+    "whole_file_reader_call_ea": "0x1038e",
+    "archive_buffer_original_name": "word_39820",
+    "status": "confirmed"
+  },
+  "consumer": {
+    "original_name": "sub_14047",
+    "start_ea": "0x14047",
+    "archive_buffer_push_eas": [
+      "0x14150",
+      "0x14154"
+    ],
+    "image_index": 28,
+    "image_index_instruction_ea": "0x14158",
+    "indexed_decoder_original_name": "sub_1A429",
+    "indexed_decoder_call_ea": "0x1415c",
+    "blitter_original_name": "sub_1BD17",
+    "blitter_call_ea": "0x1417b",
+    "ega_composite": {
+      "destination_read_ea": "0x1bf4c",
+      "and_mask_ea": "0x1bf4f",
+      "or_color_ea": "0x1bf51",
+      "destination_write_ea": "0x1bf53",
+      "formula": "destination = (destination AND mask) OR color",
+      "mask_bit_1": "preserve destination (transparent)",
+      "mask_bit_0": "clear destination before OR color (opaque)",
+      "status": "confirmed"
+    },
+    "source_rectangle": {
+      "x0_byte_column": 0,
+      "y0_scanline": 0,
+      "x1_byte_column_exclusive": 7,
+      "y1_scanline_exclusive": 57,
+      "width_bytes": 7,
+      "width_pixels": 56,
+      "height_pixels": 57
+    },
+    "status": "confirmed"
+  },
+  "notes": [
+    "\u539f\u59cb\u51fd\u5f0f\u540d\u3001\u7dda\u6027\u4f4d\u5740\u3001\u904b\u7b97\u5143\u8207 bytes \u4fdd\u7559\u5728 private JSON\u3002",
+    "\u672c\u6458\u8981\u53ea\u8b49\u5be6 KOLMPICS \u5716\u865f 28\uff0c\u4e0d\u628a\u5951\u7d04\u6cdb\u5316\u5230\u5176\u4ed6 82 \u500b payload\u3002",
+    "MSB-first \u4f4d\u5143\u9806\u5e8f\u3001\u756b\u9762\u65b9\u5411\u8207\u5c3e byte \u4ecd\u9808\u7531\u89e3\u78bc\u53ca\u76ee\u8996 probe \u9a57\u8b49\u3002"
+  ]
+}

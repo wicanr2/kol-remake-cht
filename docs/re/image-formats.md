@@ -207,9 +207,27 @@ DGROUP offset `0x0168` 的六筆三-byte 記錄為 `(x0, y0, x1_exclusive)`，�
 `已證實`。每筆遮罩最後一 byte 均為零且不進入 consumer 矩形；其形成原因仍是
 `強推論：壓縮流終止／padding artifact`，不得當像素輸出。
 
+### KOLMPICS 圖號 28 的 EGA AND-mask
+
+`sub_10000` 在 loaded-MZ EA `0x1037a` 以 DGROUP offset `0x165a` 的 `kolm%s.0`
+建立檔名，並於 `0x1038e` 呼叫 `sub_19D98` 把整個 archive 讀入 `word_39820`。
+`sub_14047` 在 `0x14150/0x14154` 傳入同一 buffer、以 `0x14158` 的常數 `0x1c` 選圖號
+28，再於 `0x1415c` 呼叫索引解碼器 `sub_1A429`。來源矩形固定為 byte-column `[0,7)`、
+scanline `[0,57)`，即 mode 0Dh 下 56×57。
+
+圖號 28 的 LZW 輸出為 400 bytes；前 399 bytes 以 MSB-first 展開後正好填滿 56×57，
+末端單一零 byte 不進入矩形。`sub_1BD17` 的 EGA 路徑在 `0x1bf4c..0x1bf53` 執行
+`destination = (destination AND mask) OR color`，故 mask bit 1 表示保留目的背景（透明），
+bit 0 表示先清除再寫入彩圖（不透明）。bit-map PNG 目視為右上切角與圓弧下緣，方向連續。
+
+以上 archive 載入、圖號、幾何、MSB-first 位序、AND-mask 語意與方向為 `已證實`；尾端
+零 byte 成因維持 `強推論：壓縮流終止／padding artifact`。這只關閉 KOLMPICS 圖號 28，
+不得泛化到其他 82 個 payload，也不得把純 mask 冒充可獨立顯示的彩圖。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24、MONPICS 與 PERPICS 垂直鏈已關閉；PCGA／HERC 與其他
+1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24、MONPICS、PERPICS 與 KOLMPICS 圖號 28
+   垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
 3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。

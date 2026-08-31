@@ -1,0 +1,22 @@
+{
+  "schema": "kol-kolmpics-index28-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "KOLTOWN-kolmpics-index28-summary.json",
+  "ida_summary_sha256": "3f600d9b0806d1425222b778a4454eb0dbce717899a1f81580856e2acc231716",
+  "status": "mechanically validated MSB-first EGA AND-mask; orientation requires human inspection",
+  "archive_root": "Knights-of-legend/KOLMPICS",
+  "image_index": 28,
+  "width_pixels": 56,
+  "height_pixels": 57,
+  "decoded_bytes": 400,
+  "visible_mask_bytes": 399,
+  "trailing_bytes": 1,
+  "trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+  "preserve_transparent_bit_count": 438,
+  "replace_opaque_bit_count": 2754,
+  "composite_formula": "destination = (destination AND mask) OR color",
+  "mask_sha256": "6179a7537e9d2248376f6662ffa464a07ccbb50483f4cc2f4c13fe175476d63a",
+  "bits_png_sha256": "74e243a806fa2d9e840c206b411f710b27141217baecbab51860a335ab476b8a",
+  "alpha_png_sha256": "01cd742cdefcf0b9f0815d519783c2164552e714cc2523880cc3a63f00ba009a"
+}

@@ -497,3 +497,21 @@
 - 同一輸入第二次重生的安全摘要與 PNG 接觸表逐 byte 相同；接觸表 SHA-256
   `4ada9b74…6ec3`。Python syntax、全部 JSON、本地 Markdown 連結、UID/GID 與
   `git diff --check` 均通過；private JSON SHA-256 `4e2e9cb0…ee3b` 只作本機收據。
+
+## 2026-08-31：KOLMPICS 圖號 28 EGA AND-mask
+
+- 由 `sub_10000` 的 `kolm%s.0` whole-file load、`word_39820` buffer，追到
+  `sub_14047:0x1415c` 以常數 `0x1c` 呼叫 `sub_1A429`；只關閉圖號 28，不泛化 83 筆。
+- IDA 矩形固定為 7 byte-columns×57 scanlines，即 56×57。LZW 輸出 400 bytes，前
+  399 bytes 以 MSB-first 展開精確填滿矩形，最後一個零 byte 不作像素。
+- 初版預覽錯套其他 archive 的 1=opaque，畫面幾乎全空，未採用。回查
+  `sub_1BD17:0x1bf4c..0x1bf53` 的 `(destination AND mask) OR color` 後，訂正為 bit 1
+  保留背景／透明、bit 0 覆寫／不透明；bit-map 目視為連續切角與圓弧遮罩。
+- 新增全新 DB 可重生 IDA 探針、安全摘要、ignored PNG probe 與統計；SPEC-002 仍是
+  DRAFT，未實作 production importer 或 Go runtime。
+- 兩次全新 IDA DB 的 private／safe JSON 逐 byte 相同，SHA-256 分別為
+  `7c39c3df…f25b`、`3f600d9b…716`；兩次視覺摘要與兩張 PNG 也逐 byte 相同，視覺摘要
+  SHA-256 `d2b8b32e…ac34`。
+- Python syntax、全部 JSON、本地 Markdown 連結、版控摘要與重生摘要、UID/GID、
+  `git diff --check` 均通過。本輪三個 `/tmp/kol-kolmpics28-*` 與重複 PNG 目錄已刪除；
+  Docker inspect 未見掛載 KOL 工作樹的殘留容器，其他專案容器未動。

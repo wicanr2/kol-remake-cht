@@ -49,6 +49,8 @@
   單一 LZW byte 不作像素，仍標為壓縮終止／padding 的強推論。
 - PERPICS 已關閉六組人物圖垂直鏈：前六個 payload 是 4-bit EGA 彩圖，後六個依
   `[i,i+6]` 配成 MSB-first 1-bit 遮罩；六組 IDA 矩形、像素數與透明接觸表全部吻合。
+- KOLMPICS 圖號 28 已關閉為 56×57 MSB-first EGA AND-mask；`sub_1BD17` 證實 bit 1
+  保留背景、bit 0 清除後覆寫。它不是獨立彩圖，其餘 82 個 payload 仍未知。
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
   轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
   相符。完整轉換像素規則尚未動態驗證；三種 theme 的產品範圍待使用者決定。

@@ -437,3 +437,32 @@ PCGA／HERC 是遺失素材、另一版發行物，還是可由工具生成？
 `已證實`。每個遮罩末端多出的單一零 byte 不進入矩形，成因維持
 `強推論：壓縮流終止／padding artifact`。SPEC-002 仍因其他 archive 與 theme 範圍未
 關閉而保持 DRAFT；本結論不授權 production extractor 或 Go runtime。
+
+## RE-012：KOLMPICS 圖號 28 的 EGA AND-mask
+
+### archive 到 consumer
+
+- 固定輸入與工具：`KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`、IDA Pro 9.4
+  `locked-v1`、unpacked loaded-MZ linear EA；每次探針修改都在全新 `/tmp` DB 重跑。
+- `sub_10000:0x1037a` 消費 DGROUP `0x165a` 的 `kolm%s.0`，`0x1038e` 以 `sub_19D98`
+  把 archive 讀入原始全域 `word_39820`。完整運算元與 bytes 只留 private JSON。
+- `sub_14047:0x14150/0x14154` 傳入 `word_39820`，`0x14158` 放入常數 `0x1c`，並於
+  `0x1415c` 呼叫 `sub_1A429`；因此圖號 28 與 buffer consumer 為 `已證實`，不是 near-offset
+  猜測。來源矩形 `[0,7)×[0,57)` 對應 56×57 pixels。
+
+### 遮罩語意與視覺驗證
+
+- 圖號 28 LZW 輸出 400 bytes；前 399 bytes 恰為 `7*57`，MSB-first 展開得到 3,192 bits，
+  末端一個零 byte 不進入 consumer 矩形。
+- 初版透明預覽沿用其他 archive 的 1=opaque，幾乎全空；未採為證據。回查
+  `sub_1BD17:0x1bf4c..0x1bf53` 證實 EGA 式為 `(destination AND mask) OR color`，訂正為
+  bit 1 保留背景／透明、bit 0 清除後覆寫／不透明。
+- 修正後 bit-map 目視為右上切角、圓弧下緣的連續遮罩，沒有鏡像、scanline 錯位或亂碼。
+  PNG 只留 ignored `workplace/`，安全摘要保存尺寸、bit count 與 SHA-256。
+
+### 結論與限制
+
+KOLMPICS 圖號 28 的來源、索引、56×57 幾何、MSB-first 位序、EGA AND-mask 語意與方向為
+`已證實`。末端零 byte 的成因仍是 `強推論：壓縮流終止／padding artifact`。圖號 28 是
+合成遮罩，不是可獨立當彩圖輸出的素材；其餘 82 個 KOLMPICS payload 保持未知，SPEC-002
+仍為 DRAFT。
