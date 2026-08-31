@@ -45,11 +45,11 @@
 - [x] 記錄說明書與參考卡 SHA-256、頁數、頁面尺寸及 metadata 擷取工具版本；OCR 工具
   版本待正式文字擷取時記錄。
 - [x] 建立 `docs/manual/README.md`、章節檔、逐頁原文定位表與 `glossary.md`；SPEC-003
-  已 READY，只授權手冊文件工作。
-- [ ] 逐頁文字擷取、翻譯、人工校對；玩家手冊 79 頁已全部 reviewed（76–77 為目視確認
-  空白跨頁）；只剩參考卡 5 頁仍為 todo。
+  已 CONFORMED，且只證實手冊文件工作。
+- [x] 逐頁文字擷取、翻譯、人工校對；玩家手冊 79 頁與 Apple II 參考卡 5 頁全部 reviewed
+  （玩家手冊 76–77 為目視確認空白跨頁）。
 - [ ] 讓規則 spec 連回說明書頁碼；說明書未涵蓋的邊界行為不得自行推定。
-- [ ] 驗證 Markdown 連結、表格、圖片權利分類與完整章節清冊。
+- [x] 驗證 Markdown 連結、表格、圖片權利分類與完整章節清冊；84 頁／12 輸出全套 gate 通過。
 
 完成條件：全書與參考卡都有可回查的繁體中文 Markdown；零個未標示的 OCR／專名疑點。
 
@@ -101,5 +101,5 @@
 
 ## 下一個唯一工作
 
-以 SPEC-003 READY 契約翻譯參考卡實體頁 1–5，逐頁翻譯並以掃描影像校對；
-theme 範圍仍等待使用者決定，SPEC-002 READY 前不接 Go／Ebitengine production runtime。
+等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定時，繼續收斂 SPEC-002
+的下一個 EGA PICS consumer。SPEC-002 READY 前不接 Go／Ebitengine production runtime。

@@ -29,8 +29,8 @@
   尺寸表逐組吻合，ignored RGBA PNG 接觸表的方向與透明邊界正常。
 - MAKEMODE 已證實是官方 CGA／Hercules 轉換器；28 組 PICS 圖數與 v2 清冊逐組相符，
   會生成 `PCGA`／`HERC` 分卷。完整像素規則未關閉，首版 theme 範圍待使用者決定。
-- SPEC-003 已 READY；玩家手冊 79 頁與參考卡 5 頁的逐頁 Poppler 雜湊清冊可重生。
-  玩家手冊 79 個實體頁已全部 reviewed；全手冊套件只剩參考卡 5 頁 todo。
+- SPEC-003 已 CONFORMED；玩家手冊 79 頁與參考卡 5 頁的逐頁 Poppler 雜湊清冊可重生。
+  玩家手冊 79 頁與 Apple II 參考卡 5 頁已全部 reviewed；84 頁總 gate 通過。
 
 ## 證據入口
 
@@ -47,8 +47,7 @@
 | 優先 | 類型 | 工作 | 下一個精確動作 | 阻塞 |
 |---|---|---|---|---|
 | 1 | product decision | theme 範圍 | 使用者選 EGA-only、CGA／Hercules 後續，或三者首版必備 | 等待使用者 |
-| 2 | documentation | 中文手冊 | 依 SPEC-003 翻譯並校對參考卡實體頁 1–5 | 5 頁仍 todo |
-| 3 | asset RE | SPEC-002 READY 證據 | MONPICS 已關閉；追下一個 EGA PICS consumer 圖號 | 多數像素契約未知 |
+| 2 | asset RE | SPEC-002 READY 證據 | 追下一個 EGA PICS consumer 圖號 | 多數像素契約未知 |
 
 ## 執行中程序與暫存物
 

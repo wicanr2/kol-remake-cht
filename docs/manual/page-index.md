@@ -90,4 +90,8 @@
 
 | PDF 頁 | 內容 | 狀態 | Markdown |
 |---:|---|---|---|
-| 1–5 | 安裝、快捷操作、圖示與快速遊玩說明 | todo | — |
+| 1 | Apple II 開始前準備、磁碟與選單操作 | reviewed | [11-apple-ii-reference-card.md](chapters/11-apple-ii-reference-card.md) |
+| 2 | 圖示、啟動、角色建立與圖像編輯 | reviewed | [11-apple-ii-reference-card.md](chapters/11-apple-ii-reference-card.md) |
+| 3 | 圖像繪製、開始遊玩及城鎮／荒野移動 | reviewed | [11-apple-ii-reference-card.md](chapters/11-apple-ii-reference-card.md) |
+| 4 | 城鎮互動、戰鬥、保存及通用／城鎮圖示 | reviewed | [11-apple-ii-reference-card.md](chapters/11-apple-ii-reference-card.md) |
+| 5 | 旅行／戰鬥圖示及原版商標資訊 | reviewed | [11-apple-ii-reference-card.md](chapters/11-apple-ii-reference-card.md) |

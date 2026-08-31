@@ -7,7 +7,7 @@ PDF 頁碼及文字層 SHA-256 回查。
 ## 目前狀態
 
 - 玩家手冊：79 個實體 PDF 頁全部 reviewed；第 76–77 頁為目視確認空白跨頁。
-- 參考卡：5 個實體 PDF 頁，待翻譯。
+- Apple II 參考卡：5 個實體 PDF 頁全部 reviewed。
 - 正式狀態只有 `todo`、`translated`、`reviewed`：`translated` 只是初譯；只有逐頁比對
   原文、核對數字／專名／段落後才能標成 `reviewed`。
 - 文字層來自 Poppler `pdftotext -raw`。它是 Adobe Paper Capture OCR 的衍生文字，已知有

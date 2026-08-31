@@ -24,11 +24,13 @@
     },
     "reference-card": {
       "physical_pages": 5,
-      "reviewed_pages": [],
+      "reviewed_pages": [1, 2, 3, 4, 5],
       "translated_pages": [],
-      "todo_ranges": [[1, 5]],
+      "todo_ranges": [],
       "blank_pages": [],
-      "outputs": []
+      "outputs": [
+        "docs/manual/chapters/11-apple-ii-reference-card.md"
+      ]
     }
   }
 }

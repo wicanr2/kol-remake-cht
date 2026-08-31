@@ -1,6 +1,6 @@
 # SPEC-003：繁體中文說明書翻譯與校對契約
 
-- 狀態：`READY`
+- 狀態：`CONFORMED`
 - 日期：2026-08-31
 - 範圍：玩家手冊與參考卡的繁體中文 Markdown；不定義隱藏遊戲規則
 - 一手來源：使用者自備的兩份固定 SHA-256 PDF
@@ -71,3 +71,14 @@ Markdown marker，不能取代 PDF 實體頁定位。來源清冊必須保存 PD
 
 本規格授權逐頁翻譯、校對與 Markdown 產出；不授權玩法或 Go runtime 實作。全 84 頁完成
 且逐頁 gate 通過後，才可升為 `CONFORMED`。
+
+## CONFORMED 驗證
+
+- [x] 玩家手冊 79 頁與 Apple II 參考卡 5 頁全部為 `reviewed`；`todo` 與 `translated` 均為零。
+- [x] 12 個 Markdown 輸出涵蓋全部非空白頁；玩家手冊 76–77 維持經掃描確認的空白狀態。
+- [x] `verify_manual_translation.py` 對固定來源清冊通過：`pages=84 reviewed=84 translated=0 todo=0 outputs=12`。
+- [x] 每批均逐頁對照掃描；已記錄文字層錯序、專名、數字及圖示 OCR 校勘。
+- [x] 原始 PDF、英文 TSV 與校對 PNG 未加入版控；Markdown 保留公開前另作權利審查的界線。
+
+`CONFORMED` 只表示本規格的中文文件產出與驗證契約已滿足，不證實原版 executable 的隱藏
+行為，也不授權 Go／Ebitengine production runtime。
