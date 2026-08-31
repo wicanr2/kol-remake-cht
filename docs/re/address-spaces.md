@@ -38,4 +38,3 @@
 - packed IDA `0x2f548..0x2f627` 是解壓 stub 的來源表示，不是解壓後產品函式地址。
 - 解壓後所有函式與資料語意只能引用 unpacked derivative SHA-256
   `01f6f9…d1d2` 的 unpacked IDA EA；不得把 packed 與 unpacked EA 並列成同一位址。
-

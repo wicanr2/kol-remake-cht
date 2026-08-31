@@ -61,3 +61,5 @@
 - 驗證／清理：5 支 Python 工具語法通過；safe summary 不含 instruction bytes／disassembly；
   本機 unpacked EXE／`.i64` 存在且由 UID 1000 擁有。本輪 `/tmp/kol-stage2-*` 與 pycache
   已刪除，無遺留 IDA／GCC 容器。
+- 提交／推送：RE 知識庫、safe summaries 與 SPEC-001 DRAFT 已以 `5832a45` 推送至
+  private `main`；完整 disassembly、unpacked EXE 與 `.i64` 未上傳。

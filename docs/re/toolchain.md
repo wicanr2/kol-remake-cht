@@ -29,4 +29,3 @@
 EXEPACK stub、DOS relocation、compiler startup 與 runtime helper 不移植到 Go remake。
 它們只用來取得可追溯的原版產品程式。後續研究會從 337 個函式中先排除工具鏈，再按
 玩家可見 consumer 排序；函式數量不是完成度。
-

@@ -36,4 +36,3 @@
 上游 C99 原始碼在 GCC 13 加 `-Werror` 時因舊式 `%d`／pointer signedness／未使用變數
 警告而失敗。正式成功命令保留 `-Wall -Wextra` warnings，但不修改上游來源；輸出仍須由
 header、hash 與 IDA 重載三層驗證。
-

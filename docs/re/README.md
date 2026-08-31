@@ -40,4 +40,3 @@
 
 以 unpacked derivative 的 337 個 IDA 函式為基礎，先分出 compiler runtime、啟動碼與
 產品函式，再選一條玩家可見垂直鏈。不得用函式數量宣稱完成度。
-

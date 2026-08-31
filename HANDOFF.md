@@ -2,6 +2,7 @@
 
 - 日期：2026-08-31
 - 儲存庫：`wicanr2/kol-remake-cht`（private）
+- HEAD：`5832a45`
 - 分支：`main`
 - 目標：完成 M1 原版身分、來源與研究台帳。
 
