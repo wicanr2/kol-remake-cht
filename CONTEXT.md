@@ -86,8 +86,10 @@
   人耳驗收與 OGG 呈現決策尚未完成。
 - 角色建立已建立 SPEC-005 DRAFT。手冊固定名字→種族→性別→職業→reroll→圖像→保存
   狀態機；`CHARDATA` 為 16×768 bytes、`CHARPICS` 為 16×760 bytes。IDA 固定 KOLBOOK
-  `chardata` EA `0x1945a`、路由 `sub_134C2` 與五個立即 arg=0 caller。職業 enum、RNG、
-  768-byte 欄位與 typed schema 尚未關閉，因此不授權實作。
+  `chardata` EA `0x1945a`、路由 `sub_134C2` 與五個立即 arg=0 caller。屬性 RNG 已證實為
+  BIOS tick seed、`rand()%N+1` wrapper、八值骰面表及七個職業編碼 byte 的擲骰公式；三個
+  衍生值均為對應兩屬性的向下取整平均。職業 enum／eligibility、初始技能物品、768-byte
+  欄位與 typed schema 尚未關閉，因此仍不授權實作。
 
 ## 固定輸入
 
@@ -128,5 +130,6 @@ KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸�
 KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 與 TITLE OGG 呈現方向都等待使用者決定。SPEC-002／004 READY 前不接
-production runtime。
+顯示 theme 與 TITLE OGG 呈現方向都等待使用者決定。可獨立前進的下一窄切片是完成
+35 個職業與 `BOOKDATA` 16-byte 記錄的對應、eligibility 及初始技能／物品 writer；
+SPEC-002／004／005 READY 前不接 production runtime。

@@ -87,7 +87,9 @@
 
 - [x] 建立角色建立 RE 證據表與 SPEC-005 DRAFT；固定手冊流程、16 個角色槽、768-byte
   CHARDATA stride 與 KOLBOOK 開檔路由，但不授權 production 實作。
-- [ ] 關閉 35 個職業 eligibility、屬性 RNG、初始技能／物品與最小 768-byte 欄位索引；
+- [x] 關閉主要屬性 RNG 的 seed、bounded-roll、職業 byte 編碼、骰面表與三項衍生公式；
+  兩個全新 IDA DB 輸出一致。
+- [ ] 關閉 35 個職業 enum／16-byte 記錄對應、eligibility、初始技能／物品與最小 768-byte 欄位索引；
   經證據審查後把 SPEC-005 升 READY。
 - [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
 - [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。
@@ -121,6 +123,7 @@
 
 ## 下一個唯一工作
 
-完整 EGA extraction set 已無 unknown，但圖片 theme 決策仍待使用者回答。音訊直接 I/O
-母體與正常流程機械擷取已關閉；下一步需要使用者決定 TITLE cue 的 OGG 呈現方向。
-SPEC-002／004 READY 前不接 Go／Ebitengine production runtime。
+完整 EGA extraction set 已無 unknown，但圖片 theme 決策仍待使用者回答；TITLE cue 的
+OGG 呈現方向也待決。可先做且不依賴兩項決策的下一工作，是完成 35 個職業與
+`BOOKDATA` 16-byte 記錄對應、eligibility 及初始技能／物品 writer。SPEC-002／004／005
+READY 前不接 Go／Ebitengine production runtime。

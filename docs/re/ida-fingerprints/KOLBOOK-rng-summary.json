@@ -1,0 +1,193 @@
+{
+  "schema": "kol-ida-kolbook-rng-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLBOOK.EXE",
+  "input_sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+  "address_space": "IDA linear effective address for KOLBOOK loaded MZ",
+  "rng_routes": [
+    {
+      "target_original_name": "_srand",
+      "target_start_ea": "0x18922",
+      "call_sites": [
+        {
+          "call_ea": "0x1015b",
+          "caller_original_function": "_main",
+          "caller_function_start_ea": "0x10010"
+        }
+      ]
+    },
+    {
+      "target_original_name": "_rand",
+      "target_start_ea": "0x18934",
+      "call_sites": [
+        {
+          "call_ea": "0x14bed",
+          "caller_original_function": "sub_14BE4",
+          "caller_function_start_ea": "0x14be4"
+        }
+      ]
+    }
+  ],
+  "wrapper_routes": [
+    {
+      "wrapper_original_name": "sub_14BE4",
+      "wrapper_start_ea": "0x14be4",
+      "call_sites": [
+        {
+          "call_ea": "0x1043c",
+          "caller_original_function": "_main",
+          "caller_function_start_ea": "0x10010"
+        },
+        {
+          "call_ea": "0x11cfa",
+          "caller_original_function": "sub_11820",
+          "caller_function_start_ea": "0x11820"
+        }
+      ]
+    }
+  ],
+  "instruction_checks": [
+    {
+      "ea": "0x1001e",
+      "bytes": "cd1a",
+      "disassembly": "int     1Ah; CLOCK - GET TIME OF DAY"
+    },
+    {
+      "ea": "0x10020",
+      "bytes": "8916e679",
+      "disassembly": "mov     word_20C26, dx"
+    },
+    {
+      "ea": "0x1011f",
+      "bytes": "c706e6790000",
+      "disassembly": "mov     word_20C26, 0"
+    },
+    {
+      "ea": "0x10157",
+      "bytes": "ff36e679",
+      "disassembly": "push    word_20C26; unsigned int"
+    },
+    {
+      "ea": "0x1015b",
+      "bytes": "e8c487",
+      "disassembly": "call    _srand"
+    },
+    {
+      "ea": "0x14bed",
+      "bytes": "e8443d",
+      "disassembly": "call    _rand"
+    },
+    {
+      "ea": "0x14bf1",
+      "bytes": "f77e04",
+      "disassembly": "idiv    [bp+arg_0]"
+    },
+    {
+      "ea": "0x14bf4",
+      "bytes": "8bc2",
+      "disassembly": "mov     ax, dx"
+    },
+    {
+      "ea": "0x14bf6",
+      "bytes": "050100",
+      "disassembly": "add     ax, 1"
+    },
+    {
+      "ea": "0x11cbc",
+      "bytes": "8a877277",
+      "disassembly": "mov     al, [bx+7772h]"
+    },
+    {
+      "ea": "0x11ccc",
+      "bytes": "8a877277",
+      "disassembly": "mov     al, [bx+7772h]"
+    },
+    {
+      "ea": "0x11ce1",
+      "bytes": "8a875c00",
+      "disassembly": "mov     al, [bx+5Ch]"
+    },
+    {
+      "ea": "0x11ceb",
+      "bytes": "8366ec0f",
+      "disassembly": "and     [bp+var_14], 0Fh"
+    },
+    {
+      "ea": "0x11cfa",
+      "bytes": "e8e72e",
+      "disassembly": "call    sub_14BE4"
+    },
+    {
+      "ea": "0x11d00",
+      "bytes": "0146f6",
+      "disassembly": "add     [bp+var_A], ax"
+    },
+    {
+      "ea": "0x11d18",
+      "bytes": "88873412",
+      "disassembly": "mov     [bx+1234h], al"
+    },
+    {
+      "ea": "0x11d44",
+      "bytes": "a23b12",
+      "disassembly": "mov     byte_1A47B, al"
+    },
+    {
+      "ea": "0x11d62",
+      "bytes": "a23c12",
+      "disassembly": "mov     byte_1A47C, al"
+    },
+    {
+      "ea": "0x11d80",
+      "bytes": "a23d12",
+      "disassembly": "mov     byte_1A47D, al"
+    }
+  ],
+  "caller_function_count": 2,
+  "wrapper_caller_function_count": 2,
+  "confirmed_contract": {
+    "seed": {
+      "normal_path": "BIOS INT 1Ah low tick word DX passed to srand",
+      "mode_7_path": "global is reset and incremented to 16 before srand",
+      "status": "confirmed"
+    },
+    "bounded_roll": "sub_14BE4(N) = rand() % N + 1",
+    "dice_sides_table_ea": "0x1929c",
+    "dice_sides": [
+      3,
+      4,
+      6,
+      8,
+      10,
+      12,
+      20,
+      100
+    ],
+    "primary_stat_contract": "for each of 7 fields: encoded byte + low_nibble rolls of sub_14BE4(dice_sides[high_nibble])",
+    "primary_output_eas": [
+      "0x1a474",
+      "0x1a475",
+      "0x1a476",
+      "0x1a477",
+      "0x1a478",
+      "0x1a479",
+      "0x1a47a"
+    ],
+    "derived_output_contracts": [
+      {
+        "ea": "0x1a47b",
+        "formula": "floor((EA 0x1a474 + EA 0x1a47a) / 2)"
+      },
+      {
+        "ea": "0x1a47c",
+        "formula": "floor((EA 0x1a474 + EA 0x1a477) / 2)"
+      },
+      {
+        "ea": "0x1a47d",
+        "formula": "floor((EA 0x1a476 + EA 0x1a477) / 2)"
+      }
+    ],
+    "status": "confirmed"
+  },
+  "limitation": "本摘要只固定 RNG routes；每個 caller 的產品語意與結果欄位需另作資料流審查。"
+}

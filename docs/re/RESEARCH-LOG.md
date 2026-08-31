@@ -917,3 +917,20 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - 兩個全新 IDA DB 的 safe JSON 逐 byte 相同，SHA-256 `e71a6ca3…ec5d`。
 - **限制**：職業表數字是手冊標示的平均值，不能當亂數上下界。RNG、初始技能／物品 writer、
   768-byte 欄位與保存 transaction 仍未知；SPEC-005 維持 DRAFT。
+
+## RE-035：KOLBOOK 職業屬性亂數與衍生公式
+
+- 固定 `KOLBOOK.EXE` SHA-256 `2cada028…e5832`；IDA Pro 9.4 loaded-MZ linear EA。
+  `_main:0x1001e..0x1015b` 以 BIOS `INT 1Ah` 的低 tick word 為一般 seed；顯示模式值 7
+  分支改傳 16。`_rand` 唯一 caller `sub_14BE4` 已證實回傳 `rand()%N+1`。
+- `sub_11820:0x11c9d..0x11d18` 以 `profession_index×16` 選記錄，對前七個編碼 byte `E`
+  計算 `E + Σ roll(dice[E>>4])`，次數為 `E&0x0f`；骰面表為
+  `[3,4,6,8,10,12,20,100]`。早期把同一 byte 誤讀成「另一份 base」的假說，已由兩次
+  相同位址 load 的原始指令否定。
+- EA `0x1a47b`、`0x1a47c`、`0x1a47d` 分別是力量／智力、力量／健康、體型／健康的
+  無號整數平均，全部向下取整。欄位語意由手冊順序與公式交叉分級，不以改名代替證據。
+- 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `f8ff1103…187b`／`9575adcf…d7f`。安全摘要固定原始 EA、bytes、函式名與限制；完整
+  指令及 `.i64` 不進版控；本輪比對完成後已清除，可由固定探針與輸入重生。
+- **限制**：尚未關閉 35 個職業 enum 與 16-byte 記錄逐項對應，也未證實 DOS library
+  `_rand` 的完整序列；SPEC-005 維持 DRAFT，不進 production implementation。

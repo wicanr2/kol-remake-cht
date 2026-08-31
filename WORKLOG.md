@@ -841,3 +841,16 @@
 - SPEC-005 維持 DRAFT；沒有建立角色 production code 或臆測 768-byte 欄位。
 - 全部探針與驗證使用 `docker run --rm --network none`；八個精確暫存 IDA 目錄已刪除，
   結束檢查沒有 KOL／KOLBOOK／chardata 容器，其他專案容器未動。
+
+## 2026-09-01：角色主要屬性 RNG 與衍生公式
+
+- 新增 KOLBOOK RNG 探針，窮舉 `_srand`、`_rand`、唯一 bounded-roll wrapper 及二階 caller；
+  固定 BIOS tick seed、模式值 7 的 seed 16 分支、八值骰面表與七項主要屬性擲骰公式。
+- 回查 `sub_11820` 證實同一職業編碼 byte 同時作起始數值、骰面 selector 與擲骰次數；
+  排除「另有 base table／LZW 後處理」的早期假說，並固定三個向下取整的衍生平均公式。
+- 使用既有 `ida-pro-9.4-ver2:civ1-py312-uidfix-v2`，兩個全新 DB 的 safe／private JSON
+  逐 byte 相同，SHA-256 為 `f8ff1103…187b`／`9575adcf…d7f`。安全摘要已版控，完整
+  private 輸出與 `.i64` 不進版控，並已在逐 byte 比對後隨本輪精確暫存目錄清除。
+- 更新 RE-035、角色證據表與 SPEC-005 DRAFT；沒有建立 Go／Ebitengine production code。
+- 全部分析與驗證使用有界 `docker run --rm --network none`；五個 `/tmp/kol-rng-*` 目錄已
+  精確清除，結束檢查沒有 KOL／IDA 專案容器。
