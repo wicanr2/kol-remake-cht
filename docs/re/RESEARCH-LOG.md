@@ -559,3 +559,16 @@ SPEC-002 仍因其他 archive 與 theme 決策維持 DRAFT。
 - 七張 ignored PNG 目視為結局敘事人物／場景，方向、scanline、plane 與裁切正常。
   ENDPICS 全 archive 的 consumer、索引、幾何、像素格式與無透明 direct-blit 政策為
   `已證實`；SPEC-002 仍為 DRAFT。
+
+## RE-018：KOLBOOK 的 BOOKPICS 全 14 張
+
+- 固定 `KOLBOOK.EXE` SHA-256 `2cada028…5832`；IDA Pro 9.4 `locked-v1`、loaded-MZ
+  linear EA。每次探針修改均使用全新 DB；完整指令與 `.i64` 僅留 `/tmp`。
+- `_main:0x10292..0x102ac` 以 `book%s.0` 建檔名並整檔載入；另一個 raw word 命中
+  `sub_172CC:0x172e2 mov al,5`，已排除為巧合，沒有冒充字串 consumer。
+- `sub_1137B` 全部 caller 的常數集合為 0..13 與 100；100 在函式入口映為 9。
+  圖號 0..3 是 320×200，4..12 是 112×31，13 是 248×22；幾何 operand 由探針硬閘門。
+- 14 筆 LZW／二階 RLE 全部精確吻合矩形，索引在 0..15。PNG 目視為書本介面、章節標題
+  與圖示列，方向、scanline、plane、裁切正常；PNG 僅留 ignored 工作區。
+- BOOKPICS 全 archive 的來源、consumer、alias、索引、幾何、4-bit EGA 與無透明
+  direct-blit 政策為 `已證實`。SPEC-002 整體仍為 DRAFT。

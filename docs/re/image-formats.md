@@ -293,9 +293,25 @@ plane 錯排或裁切。
 ENDPICS 0..6 的來源、完整 caller 集、尺寸、LZW、二階 RLE、4-bit EGA、方向與無透明
 direct-blit 政策為 `已證實`；RGB 仍採 mode 0Dh `hardware-spec approximation`。
 
+### KOLBOOK 的 BOOKPICS 書本介面
+
+固定 `KOLBOOK.EXE`（SHA-256 `2cada028…5832`）的 `_main` 以 `book%s.0` 建檔名，於
+loaded-MZ EA `0x102ac` 以整檔 reader `sub_1374E` 載入 archive。`sub_1137B`
+（`0x1137b..0x114f5`）把圖號交給 `sub_13D7D` 做索引／LZW 解碼，再經 `sub_15702`
+二階 RLE／EGA planes 與 `sub_13843` rectangle blit。
+
+`sub_1137B` 的全部 caller 只傳常數 0..13 與特殊值 100；`0x11396/0x1139f` 證實
+100 會先映為圖號 9，所以實際 archive 索引完整且只限 0..13。幾何分支為：0..3 各
+320×200；4..12 各 112×31（9、11 只是右側位置）；13 為 248×22。
+
+14 個 payload 的 LZW／二階 RLE 像素數全部精確吻合，索引均為 0..15。ignored PNG
+目視為書本封面／目錄／頁面、章節標題與圖示列，無鏡像、旋轉、plane 錯排或裁切。
+BOOKPICS 全 archive 的來源、consumer、alias、索引、幾何、像素格式、方向與無透明
+direct-blit 政策為 `已證實`；RGB 是 mode 0Dh `hardware-spec approximation`。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

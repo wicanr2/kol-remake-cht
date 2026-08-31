@@ -1,0 +1,154 @@
+{
+  "schema": "kol-kolbook-bookpics-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "KOLBOOK-bookpics-summary.json",
+  "ida_summary_sha256": "83e59a16ee6af17d6c9b67e9691960db77cf82cb0a34cc17dc18091d0bedef9a",
+  "status": "mechanically validated all fourteen direct-blit 4-bit EGA images; orientation requires human inspection",
+  "source_payload_count": 14,
+  "png_count": 14,
+  "all_archive_indices_have_consumer": true,
+  "all_pixel_counts_match": true,
+  "records": [
+    {
+      "image_index": 0,
+      "geometry_branch": "default_full_screen",
+      "width_pixels": 320,
+      "height_pixels": 200,
+      "pixel_count": 64000,
+      "color_count": 8,
+      "pixel_sha256": "4bd605b02ecd3243f40e2ea8e78014969f9e0773ac4ab82d2bef991833c0cc06",
+      "png_sha256": "d3666b9d54c7427b247d8d31d3c6e64dddde8988ca6a9fb94c4fae5b077a484f"
+    },
+    {
+      "image_index": 1,
+      "geometry_branch": "default_full_screen",
+      "width_pixels": 320,
+      "height_pixels": 200,
+      "pixel_count": 64000,
+      "color_count": 11,
+      "pixel_sha256": "1ecc85bdfc08a50bf0243ea01eaa38e49f3b698281e68bcf1a623fa3125ec20e",
+      "png_sha256": "52cc9b7749cf7c96a90435102beb7575ae34a2b56f30e0a672f76b469a3c341c"
+    },
+    {
+      "image_index": 2,
+      "geometry_branch": "default_full_screen",
+      "width_pixels": 320,
+      "height_pixels": 200,
+      "pixel_count": 64000,
+      "color_count": 7,
+      "pixel_sha256": "9fec31a217c646276099f600561769eb0af90a20ac5bee83b890d2781a42d5b7",
+      "png_sha256": "b2660a921d6e5d3bd4877e421b5720a3c540ec9bd26eacc95564c1d1cdcc7c46"
+    },
+    {
+      "image_index": 3,
+      "geometry_branch": "default_full_screen",
+      "width_pixels": 320,
+      "height_pixels": 200,
+      "pixel_count": 64000,
+      "color_count": 6,
+      "pixel_sha256": "7fc862a0f8f2f9e9160dd2b8b97d66c21e726a43c56463ce103e9ffd6fa7a08a",
+      "png_sha256": "83e871ebda65178468f54e5729cb64c3f66b599cc643e6e65ac87d5267fffe73"
+    },
+    {
+      "image_index": 4,
+      "geometry_branch": "small_left",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 10,
+      "pixel_sha256": "34bbf632156255e7a6520bf8038cf3d50258d4f9b2ae58efc310a2c3e1523a4e",
+      "png_sha256": "129ec2aa39a05f6bfb4064943095a254eaa322c83248079c085ace0f3fcbf44b"
+    },
+    {
+      "image_index": 5,
+      "geometry_branch": "small_left",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 10,
+      "pixel_sha256": "4aa2af78358ad77f803644d2f32c7b6d3341d9e759f6ba43860b5c82352f64f9",
+      "png_sha256": "e0c6506f6b4a620e19f2b1f6fec16ce23dc303ddde0e992b6b50116f982ab308"
+    },
+    {
+      "image_index": 6,
+      "geometry_branch": "small_left",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 7,
+      "pixel_sha256": "75a82fffe2116fff7ef54c98dc23ae30c0c6cafeb371a00d7d4c93df6194bf5b",
+      "png_sha256": "a9697d767e722045311dac30e7e94a653d495b004757329377e906a2057d881b"
+    },
+    {
+      "image_index": 7,
+      "geometry_branch": "small_left",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 13,
+      "pixel_sha256": "9785c361ff5613bf1d60e7c36a8d87fa77ed65c7375c4f0bbc6d989f01fa0ac0",
+      "png_sha256": "b7de3dd6e5363982d49effc7b881ab549ff2e370a4acdb0ac60090cdabfbed64"
+    },
+    {
+      "image_index": 8,
+      "geometry_branch": "small_left",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 10,
+      "pixel_sha256": "f68c9cdca274acff76c445559f52c9320db67bb65eda96982749b7d9a607e235",
+      "png_sha256": "5d64d7dcd8fd62c8935411774ec4b3c98d712c238bb2be4facb8a9f8da43c042"
+    },
+    {
+      "image_index": 9,
+      "geometry_branch": "small_right",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 11,
+      "pixel_sha256": "ae03ce574ceef13937c6c55c63983f47bbd7ec01ba36fb062c69ee9fda268bd2",
+      "png_sha256": "0f475205f8feea470f6ab3506cd5d258733df1f4e8147dbe5cd218bde2ef0315"
+    },
+    {
+      "image_index": 10,
+      "geometry_branch": "small_left",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 9,
+      "pixel_sha256": "d0a9a120011b65e6df63bf6b313b4d00825a28608e3ac152833dea3a2794282b",
+      "png_sha256": "1a59baef3b43268812fa53ef13a2d328d3172734ecbf0c1b77fccc675612bcc6"
+    },
+    {
+      "image_index": 11,
+      "geometry_branch": "small_right",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 9,
+      "pixel_sha256": "2f6f50108a68f9f0278daf657b155b52aaf23325ca0f516727dd097b3635f1c6",
+      "png_sha256": "4cbe9518c5dacb03b94f2ad2cdfdcebbba84d8d38593c8ce6247ed4e6b32bcf8"
+    },
+    {
+      "image_index": 12,
+      "geometry_branch": "small_left",
+      "width_pixels": 112,
+      "height_pixels": 31,
+      "pixel_count": 3472,
+      "color_count": 12,
+      "pixel_sha256": "8bed47d0502e03ec779d81226ee3350c4a29ed93a181cd35b3fc9331d785d88c",
+      "png_sha256": "406a7387eb47400aaf3f99c8fbd8c87cdc3a16fd0f1281a49c0c949afa1a2d43"
+    },
+    {
+      "image_index": 13,
+      "geometry_branch": "wide_bottom",
+      "width_pixels": 248,
+      "height_pixels": 22,
+      "pixel_count": 5456,
+      "color_count": 13,
+      "pixel_sha256": "f40a2731b76d0449c76ad5ab99bf80c08216b1aca88947fa11133b742eab94f7",
+      "png_sha256": "fa263931cd5b62a4b4bae1a382ec93907f62f873b2434f5889062f25e5600d68"
+    }
+  ]
+}

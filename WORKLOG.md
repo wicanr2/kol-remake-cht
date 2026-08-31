@@ -585,3 +585,15 @@
 - 新增安全 IDA 摘要、視覺統計與可重生探針；ENDPICS 全 archive 升為已證實，
   SPEC-002 整體仍維持 DRAFT。
 - 第二個最終全新 IDA DB 摘要，以及第二批七張 PNG／安全統計，均與第一批逐 byte 相同。
+
+## 2026-08-31：KOLBOOK BOOKPICS 全 14 張
+
+- `_main` 以 `book%s.0` 整檔載入 archive；raw offset 另一命中只是 `mov al,5`，已排除。
+  `sub_1137B` 全部 caller 只傳 0..13 與 100，後者在函式入口映為圖號 9。
+- 幾何分支為 0..3 的 320×200、4..12 的 112×31、13 的 248×22；探針對 alias、
+  caller 常數集合及全部幾何 operand 設 fail-closed 斷言。
+- 14 筆 LZW／二階 RLE 像素數全部吻合、索引不超過 15；ignored PNG 目視為書本介面、
+  章節標題與圖示列，無鏡像、旋轉、plane 錯排或裁切。
+- 新增安全 IDA 摘要、視覺統計與可重生探針；BOOKPICS 全 archive 升為已證實，
+  SPEC-002 仍維持 DRAFT。
+- 第二個最終全新 IDA DB 摘要，以及第二批 14 張 PNG／安全統計，均與第一批逐 byte 相同。
