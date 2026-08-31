@@ -99,4 +99,6 @@
 
 完成 `docs/spec/001-original-oracle-preparation.md` 的兩個 DRAFT gate：用獨立 DOS 原版
 runtime memory oracle 核對三個 unpacked offset，並檢查解包器 garbage-byte 差異是否會
-進入有效 consumer。SPEC-001 未升 READY 前不得開始玩法 spec 或 Go implementation。
+進入有效 consumer。直接執行 `KOLTOWN` 已證實會提早退出；下一個窄任務是由 IDA 9.4
+追查它的啟動參數／主程式 exec contract，再以正常呼叫狀態重跑 oracle。SPEC-001 未升
+READY 前不得開始玩法 spec 或 Go implementation。

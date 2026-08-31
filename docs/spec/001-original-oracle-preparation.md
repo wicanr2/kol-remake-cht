@@ -36,6 +36,9 @@
 - [ ] 以第二個獨立方法驗證至少三個 unpacked file offset 對回 packed／runtime bytes。
 - [ ] 審查解包器 garbage-byte 差異不影響 code、relocation 或玩家資料 consumer。
 
+DOSBox-X 啟動收據見 `docs/re/RESEARCH-LOG.md` RE-004。目前直接啟動 `KOLTOWN` 會在採樣
+前退出，故兩個 gate 均維持未完成；不得把失敗採樣當作解包器正確性的反證或佐證。
+
 ## READY 條件
 
 上列兩個未完成 gate 關閉，且 RE 知識庫與 generated summary 可由乾淨輸入重生。READY

@@ -160,3 +160,22 @@ Stage 2 是否為已知 packer？能否建立具 relocation、真正入口及 ID
 
 先前把 `KOLTOWN` 81-byte 尾端列為 appended payload／overlay 候選；已由全 `0x1A` 原始
 bytes 推翻，改為 DOS EOF padding。先前「packer 未知」也由本節證據升級為已證實 EXEPACK。
+
+## RE-004：DOSBox-X 執行期 oracle 啟動切片
+
+### 固定工具與問題
+
+- DOSBox-X 2026.06.02，既有 image `rich2-dosbox-dbg:latest`，原生唯讀 AI bridge。
+- 原始 ZIP 仍以唯讀方式掛載；解壓副本只存在 `/tmp`，不加入版控。
+- 問題：能否在 packed 程式自行解包後，擷取載入映像並與 CC0 derivative 比較？
+
+### 目前結果
+
+`-break-start` 實際停在 BIOS `F000:FFF0`，不是 MZ entry；已停止把該狀態誤當程式入口。
+直接執行 `KOLTOWN.EXE` 與暫定 `KOLTOWN.EXE 0` 都會在三秒觀察窗前退出，傳統記憶體內
+找不到檔案中固定的 `Packed file is corrupt` marker。因此本輪沒有 runtime bytes，不能
+關閉 SPEC-001 的三點核對 gate。
+
+這項結果只證實 `KOLTOWN` 不是可用上述命令獨立維持的 oracle；「必須由主程式帶哪些
+狀態／參數呼叫」仍為 `未知`。下一步由 IDA 9.4 追查啟動參數 consumer 或主程式 exec
+contract，不以猜參數的方式繼續。

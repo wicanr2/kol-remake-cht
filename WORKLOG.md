@@ -63,3 +63,14 @@
   已刪除，無遺留 IDA／GCC 容器。
 - 提交／推送：RE 知識庫、safe summaries 與 SPEC-001 DRAFT 已以 `5832a45` 推送至
   private `main`；完整 disassembly、unpacked EXE 與 `.i64` 未上傳。
+
+## 2026-08-31：DOSBox-X runtime oracle 啟動探針
+
+- 沿用 `rich2-dosbox-dbg:latest`（DOSBox-X 2026.06.02）與原生唯讀 bridge，新增可重生
+  的 KOLTOWN 記憶體擷取探針；原始 ZIP 唯讀、執行期 dump 位於 ignored `workplace/`。
+- 啟動勘誤：`-break-start` 停在 BIOS `F000:FFF0`，不是 packed MZ entry；探針改以
+  EXEPACK marker 的固定 load offset 反推 DOS 載入段。
+- 實測：`KOLTOWN.EXE` 與暫定 town index `0` 都在三秒採樣前退出，沒有產生 runtime
+  dump；依失敗即關閉原則，SPEC-001 仍為 DRAFT，三點核對與 garbage-byte gate 未通過。
+- 下一步：用 IDA 9.4 追查啟動參數 consumer／主程式 exec contract，不再猜參數；仍不
+  開始 Go／Ebitengine implementation。
