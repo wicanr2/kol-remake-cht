@@ -562,3 +562,14 @@
   或裁切。新增安全 IDA 摘要、視覺統計及可重生探針；SPEC-002 仍維持 DRAFT。
 - 第二個最終全新 IDA DB 的安全摘要，以及第二批 24 張 PNG／視覺統計，均與第一批逐
   byte 相同。Python 語法、全部 JSON、Markdown 本地連結與 `git diff --check` 通過。
+
+## 2026-08-31：TITLE BACKPICS 全 14 張
+
+- 專用 IDA 探針列出 `sub_10E9F` 的全部 30 個 caller；僅 `_main` 與 `sub_10C86`，每處
+  都是立即值圖號，集合完整覆蓋 0..13，沒有把部分 caller 冒充整包。
+- 匯出並核對 TITLE 自己的 LZW、二階 RLE／四 EGA planes 與 mode 0Dh blit pipeline。
+  14 筆全部精確得到 320×200、索引 0..15、無透明的全螢幕畫面。
+- 代表性 ignored PNG 為山谷雷雨、閃電與製作名單，無鏡像、旋轉、plane 錯排或裁切。
+  新增安全 IDA 摘要、視覺統計與可重生探針；SPEC-002 仍為 DRAFT。
+- 第二個最終全新 IDA DB 的安全摘要，以及第二批 14 張 PNG／視覺統計，均與第一批逐
+  byte 相同。

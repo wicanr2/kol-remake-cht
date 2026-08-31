@@ -263,9 +263,23 @@ bit 0 表示先清除再寫入彩圖（不透明）。bit-map PNG 目視為右�
 plane 錯排或裁切。來源、完整索引集合、尺寸、像素契約、方向與 direct-blit 政策為
 `已證實`；RGB 仍沿用 mode 0Dh 的 `hardware-spec approximation`。
 
+### TITLE 的 BACKPICS 全螢幕背景
+
+固定 `TITLE.EXE` 的 `sub_10E9F`（loaded-MZ EA `0x10e9f..0x10f33`）以 `back%s`
+建立檔名，並呼叫 `sub_11728` 選取 archive payload。IDA 列出的全部 30 個 caller 只來自
+`_main` 與 `sub_10C86`，每個呼叫點皆以立即值傳圖號，集合完整覆蓋 0..13。
+
+`sub_11291` 是本 executable 的 9-bit 起始、LSB-first LZW decoder；`sub_114F8` 的控制碼、
+high-nibble-first 色彩流與四 EGA planes 寫入邏輯，和既有二階 RLE 契約一致。14 個 payload
+全部精確展開為 64,000 個 4-bit indices，即 320×200，且索引皆在 0..15。代表性 ignored
+PNG 為山谷雷雨動畫、閃電過場與製作名單，無鏡像、旋轉、plane 錯排或裁切。
+
+BACKPICS 0..13 的 selector、完整 caller 集、LZW、二階 RLE、尺寸、方向與無透明全螢幕
+direct-blit 政策為 `已證實`；RGB 仍是 mode 0Dh `hardware-spec approximation`。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

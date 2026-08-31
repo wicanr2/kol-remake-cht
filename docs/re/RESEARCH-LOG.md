@@ -533,3 +533,16 @@ SPEC-002 仍因其他 archive 與 theme 決策維持 DRAFT。
   動畫與正向臉部影格，方向、scanline、plane 與裁切正常；PNG 只留 ignored 工作區。
 - 四個 archive 的來源、consumer、完整索引、尺寸、二階 RLE、4-bit EGA、方向與
   direct-blit 政策升為 `已證實`。SPEC-002 整體仍為 DRAFT，不授權 production importer。
+
+## RE-016：TITLE 的 BACKPICS 全 14 張
+
+- 固定 `TITLE.EXE` SHA-256 `8a2879d9…ad6`；IDA Pro 9.4 `locked-v1`、loaded-MZ linear
+  EA。探索與最終探針每次修改均用全新 DB；完整指令與 `.i64` 只留 `/tmp`。
+- `sub_10E9F:0x10e9f` 以 `back%s` 選檔；IDA 全部 30 個 code refs 只屬 `_main` 與
+  `sub_10C86`，且每個呼叫均傳立即值圖號。集合恰為 0..13，沒有動態索引旁路。
+- `sub_11728 → sub_11291 → sub_11A69 → sub_114F8` 串起 archive 選取、LZW 與二階
+  RLE／四 EGA planes；`sub_11133` 提供 mode 0Dh blit 契約。
+- 14 筆全部精確展開為 320×200、4-bit index 0..15。代表性 PNG 顯示山谷雷雨、閃電
+  過場及製作名單，方向、scanline、plane 與裁切正常；PNG 僅留 ignored 工作區。
+- BACKPICS 全 archive 的來源、consumer、完整索引、像素格式、尺寸、方向與無透明
+  direct-blit 政策為 `已證實`。SPEC-002 仍維持 DRAFT，不建立 production importer。
