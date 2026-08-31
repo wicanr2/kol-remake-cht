@@ -30,7 +30,7 @@
   不作玩法 oracle。
 - 中文手冊 SPEC-003 已 READY：Poppler 22.12.0 對 79 頁玩家手冊與 5 頁參考卡建立逐頁
   雜湊清冊；82 個內容頁都有文字層，玩家手冊 76、77 經頁面 PNG 目視為空白跨頁。
-  玩家手冊實體頁 1–70 已逐頁對照掃描並翻譯為 Markdown；目前 reviewed 72、todo 12。
+  玩家手冊實體頁 1–75 已逐頁對照掃描並翻譯為 Markdown；目前 reviewed 77、todo 7。
 - 圖片 RE 已建立 SPEC-002 DRAFT：44 個實體候選歸併為 30 個邏輯 archive；TWN `.1/.2`
   已證實是 continuation volume，總數由 960 訂正為 1,022 個 payload，全部通過 LZW 機械
   探針。索引／分卷契約已證實，LZW 為強推論；
@@ -76,4 +76,4 @@
 ## 下一個唯一工作
 
 等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定的下一工作是依
-SPEC-003 翻譯玩家手冊實體頁 71–75。MONPICS 已完成，不重開；SPEC-002 READY 前不接 runtime。
+SPEC-003 翻譯玩家手冊實體頁 78–79。MONPICS 已完成，不重開；SPEC-002 READY 前不接 runtime。

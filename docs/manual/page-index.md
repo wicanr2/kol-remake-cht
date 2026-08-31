@@ -77,7 +77,11 @@
 | 68 | 精靈語發音、三家族與十五棵樹（印刷頁 130–131） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 69 | ëavorfël 魔法構詞、拼字、屬性與種類表（印刷頁 132–133） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 70 | 種類、嚴重度、距離、時間、亞類及通用語衍生詞（印刷頁 134–135） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
-| 71–75 | 精靈語與索引 | todo | — |
+| 71 | 阿什塔拉瑞亞年表（印刷頁 136–137） | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
+| 72 | 索引 A–H（印刷頁 138–139） | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
+| 73 | 索引 I–S（印刷頁 140–141） | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
+| 74 | 索引 S–Z 與製作名單（印刷頁 142–143） | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
+| 75 | 原版保固條款（印刷頁 144） | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 
