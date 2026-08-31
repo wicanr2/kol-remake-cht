@@ -97,4 +97,15 @@
 | Astimiah Eckhart | Astimiah Eckhart | 待查 | 布雷特爾法師；正式音譯待角色資料 consumer |
 | Lonely Page Pub | Lonely Page 酒館 | 暫譯 | 布雷特爾酒館；專名待城鎮資料 consumer |
 | Orc | Orc | 待查 | 怪物專名；正式譯名待怪物資料 consumer |
+| Health | 健康 | 核准 | 主要屬性；亦指可由修道院恢復的健康狀態 |
+| Strength | 力量 | 核准 | 主要屬性 |
+| Quickness | 敏捷 | 核准 | 主要屬性；影響行動先後 |
+| Size | 體型 | 核准 | 主要屬性；衡量身高與體重 |
+| Foresight | 先見 | 暫譯 | 主要屬性；預知對手行動的直覺 |
+| Charisma | 魅力 | 核准 | 主要屬性 |
+| Intelligence / Intellect | 智力 | 核准 | 主要屬性；表格縮寫 I |
+| Balance | 平衡 | 暫譯 | 次要屬性；由力量與智力推導 |
+| Endurance | 耐力 | 暫譯 | 次要屬性；由力量與健康推導 |
+| Body Points | 身體點數 | 暫譯 | 次要屬性；由健康與體型推導 |
+| Huxley / Dancing Friar | Huxley／舞僧 | 待查 | 聖保羅修道院院長；正式音譯待城鎮資料 consumer |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |

@@ -32,7 +32,12 @@
 | 23 | 戰利品、逃跑與全隊敗北（印刷頁 40–41） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
 | 24 | 回到城鎮、交易與武器技能訓練（印刷頁 42–43） | reviewed | [06-back-in-town.md](chapters/06-back-in-town.md) |
 | 25 | 訓練、魔法、酒館餐飲與新裝備（印刷頁 44–45） | reviewed | [06-back-in-town.md](chapters/06-back-in-town.md) |
-| 26–75 | 城鎮服務、進階規則、世界觀、種族與索引 | todo | — |
+| 26 | 新裝備、修道院治療與旅店保存（印刷頁 46–47） | reviewed | [06-back-in-town.md](chapters/06-back-in-town.md) |
+| 27 | 進階玩家；角色職業與男性人類表（印刷頁 48–49） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 28 | 人類、精靈與矮人職業表（印刷頁 50–51） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 29 | 凱爾登職業表；屬性、力量與敏捷（印刷頁 52–53） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 30 | 體型、健康、先見、魅力與智力（印刷頁 54–55） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 31–75 | 進階規則、世界觀、種族與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 
