@@ -68,7 +68,7 @@
   `sub_1BD17` 重生為 bit 1 透明、bit 0 不透明，並用 8×8 棋盤背景重驗。
 - [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。
 - [x] 建立完整 EGA extraction set：30 個邏輯 archive／1,022 payload 全數有 disposition；
-  925 筆已證實、71 筆待證實、26 筆非圖片，並有清冊一致性 verifier。
+  928 筆已證實、68 筆待證實、26 筆非圖片，並有清冊一致性 verifier。
 - [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。
 - [ ] 建立 OGG 轉換管線與 catalog；驗證 codec、時長、非靜音、峰值、loop 與人耳聆聽。
 - [ ] 建立測試，保證 remake runtime 只會讀 PNG 與 OGG，禁止讀原版 archive／EXE。
@@ -111,6 +111,6 @@
 ## 下一個唯一工作
 
 等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定時，下一個切片只追
-KOLMPICS 68 筆動態圖示與 KOLPICS 三筆 raw-planar 幾何。其餘 28 個 EGA archive 不重開；
-71 筆 unknown 歸零後才撰寫原子化 production 抽取器設計。
+KOLMPICS 68 筆動態圖示。其餘 EGA archive 不重開；68 筆 unknown 歸零後才撰寫
+原子化 production 抽取器設計。
 SPEC-002 READY 前不接 Go／Ebitengine production runtime。

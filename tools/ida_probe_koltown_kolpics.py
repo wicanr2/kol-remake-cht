@@ -89,9 +89,11 @@ def archive_records() -> list[dict]:
     records = []
     rle = {1: (320, 200, 29), 2: (296, 32, 30), 4: (288, 155, 32),
            5: (288, 77, 33), 13: (288, 78, 100)}
-    raw = {0: (1281, 256, 5, "startup", "strong inference", "strong inference"),
-           8: (10241, 64, 160, "default", "confirmed", "strong inference"),
-           12: (10241, 64, 160, "alternate", "confirmed", "strong inference")}
+    raw = {
+        0: (1281, 256, 5, "startup-renderer-data", "converter-block-width"),
+        8: (10241, 64, 160, "default-lookup-grid", "downstream-y-shift-6"),
+        12: (10241, 64, 160, "alternate-lookup-grid", "downstream-y-shift-6"),
+    }
     for index in range(14):
         if index in rle:
             width, height, request = rle[index]
@@ -99,13 +101,15 @@ def archive_records() -> list[dict]:
                             "height": height, "request": request,
                             "geometry_grade": "confirmed"})
         elif index in raw:
-            decoded_bytes, width, rows, role, width_grade, height_grade = raw[index]
+            decoded_bytes, width, rows, role, geometry_basis = raw[index]
             records.append({"index": index, "kind": "raw-planar", "role": role,
                             "decoded_bytes": decoded_bytes,
                             "source_stride_bytes": 256, "planar_bytes_per_stride": 128,
                             "width": width, "height": rows,
                             "layout_grade": "confirmed",
-                            "width_grade": width_grade, "height_grade": height_grade})
+                            "extraction_geometry_grade": "confirmed",
+                            "extraction_geometry_basis": geometry_basis,
+                            "display_geometry_grade": "not applicable; renderer data is not direct-blit art"})
         else:
             records.append({"index": index, "kind": "placeholder", "decoded_bytes": 1})
     return records
@@ -144,8 +148,11 @@ def main() -> None:
         "converted_pixels_per_block": 256, "bit_order": "most-significant bit first",
         "color_index": "plane3..plane0 form bits 3..0",
         "layout_grade": "confirmed by sub_19B29",
-        "row_count_grade": "strong inference from decoded data length, sub_19B29 source stride and visual probe",
-        "limitation": "index 8/12 are consumed with a 64-column offset; their 160-row extent and index 0 geometry remain inferred from decoded length",
+        "source_payload_rule": "N complete 256-byte source strides plus one excluded trailing byte produce N*256 color indices",
+        "index_0_extraction_shape": "five converter blocks serialized as 256x5 data PNG; not an original display rectangle",
+        "index_8_12_extraction_shape": "40 converter blocks provide 10240 indices; downstream y<<6+x fixes 64 columns, so the complete source grid is 64x160",
+        "extraction_geometry_grade": "confirmed",
+        "limitation": "canonical PNG shapes preserve all source-derived indices; they do not assert that every grid cell is reached in one player session",
     }
     shared = {
         "ida_version": idaapi.get_kernel_version(), "input_name": input_path.name,
@@ -156,13 +163,14 @@ def main() -> None:
         "archive_records": records, "raw_planar_contract": contract,
         "evidence_notes": [
             "DGROUP+0x166a/0x1672 的其他近字組命中位於既有指令內，屬位元組巧合而非消費端。",
-            "sub_1E3A8 傳給 sub_19B29 的 0x8000 不是 KOLPICS 索引 8/12 的資料長度證明。",
+            "sub_1E3A8 傳給 sub_19B29 的 0x8000 不是 KOLPICS 索引 8/12 的來源資料長度證明；固定 payload 的 40 個完整 stride 才界定 source-derived indices。",
+            "圖號 0 的 256x5 是 converter block 的資料序列化形狀，不是原版 direct-blit 矩形。",
         ],
     }
-    private = {"schema": "kol-ida-koltown-kolpics-private-v1", **shared,
+    private = {"schema": "kol-ida-koltown-kolpics-private-v2", **shared,
                "strings": strings, "instruction_checks": checks,
                "functions": [function_record(ea) for ea in FUNCTIONS]}
-    summary = {"schema": "kol-ida-koltown-kolpics-summary-v1", **shared,
+    summary = {"schema": "kol-ida-koltown-kolpics-summary-v2", **shared,
                "strings": strings,
                "instruction_checks": [{"ea": x["ea"], "bytes": x["bytes"],
                                        "disassembly": x["disassembly"]} for x in checks],

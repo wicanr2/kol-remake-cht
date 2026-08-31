@@ -834,3 +834,24 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   `twn-archives-ega-visual-probe.json`。
 - TWN 的 EGA payload、幾何、遮罩與排除項已關閉；SPEC-002 仍為 DRAFT，因首版顯示
   theme 範圍尚待使用者決定，且尚未建立正式、原子化的全包抽取器。
+
+## RE-030：KOLPICS raw-planar extraction geometry 勘誤
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4、重建
+  unpacked MZ linear EA。這一節追加勘誤，不重寫 RE-025 當時的保守結論。
+- `sub_19B29:0x19b41..0x19ba9` 每輪從 256-byte source stride 的前 128 bytes 讀四個
+  32-byte planes，寫出 256 個 chunky color indices，並以 output offset 與 caller endpoint
+  比較決定下一輪。圖號 0 caller 的 endpoint 是 `0x500`，因此正好是五個 converter block；
+  其無損資料 PNG 形狀固定為 256×5。這是 renderer data serialization，不是螢幕矩形。
+- 圖號 8／12 各有 10,241 decoded bytes：40 個完整 256-byte stride 加一個共同 `0x00`
+  非像素尾 byte，故來源恰產生 10,240 indices。下游 `0x1eafe..0x1eb06` 以
+  `y<<6+x` 存取，固定 64 欄；完整來源 grid 因此是 64×160。這只宣稱來源資料形狀，
+  不宣稱單次玩家路徑會觸及每一格。
+- 兩份全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `a8ee8476…e63d`／`c6538475…45a5`。兩輪八張 PNG、接觸表與 v2 視覺摘要亦逐 byte相同；
+  摘要／接觸表 SHA-256 為 `82281d7a…8f67`／`d6f3a288…524e`。接觸表與舊正確排列完全
+  相同，未見 serialization 或 plane-order 退化。
+- RE-025 的「160 列與圖號 0 幾何仍為強推論」現訂正為：original display geometry
+  不適用；production extraction geometry 為已證實的 renderer-data PNG。六筆 placeholder
+  仍排除，KOLPICS 全包不再有 `excluded_unknown`。SPEC-002 尚因 KOLMPICS 與 theme 決策
+  維持 DRAFT。

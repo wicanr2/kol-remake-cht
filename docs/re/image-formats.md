@@ -427,9 +427,11 @@ KOLTOWN startup、`sub_1103F` 與 `sub_1E3A8` 證實 active indices 是
 direct-blit 4-bit EGA 圖。
 
 索引 0／8／12 不走二階 RLE，而由 `sub_19B29` 把每個 256-byte source stride 前半的
-四個 32-byte planes 轉成 256 個 chunky pixels。索引 8／12 的 consumer 直接以
-`y<<6+x` 存取，故 64 欄為 `已證實`；160 列仍是有效長度推論。索引 0 的 256×5 亦只為
-強推論。第一次 256×80 排列已由目視交錯雜訊否定並保留勘誤。精確位址、bytes 與等級見
+四個 32-byte planes 轉成 256 個 chunky indices。索引 0 caller endpoint `0x500` 證實五個
+converter block，固定序列化為 256×5 renderer-data PNG。索引 8／12 各有 40 個完整 stride，
+其 consumer 以 `y<<6+x` 固定 64 欄，故完整來源 grid 為 64×160。這些是 `已證實` 的
+production extraction shapes，不是 original display rectangles。第一次 256×80 排列已由
+目視交錯雜訊否定並保留勘誤。精確位址、bytes 與等級見
 `ida-fingerprints/KOLTOWN-kolpics-summary.json`；八張 ignored PNG 的統計見
 `kolpics-ega-visual-probe.json`。這是 RE probe，不是 production importer。
 

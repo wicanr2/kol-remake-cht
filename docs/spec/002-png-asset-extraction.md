@@ -109,9 +109,9 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] `MISCPICS.0` 已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA
   彩圖；image 2 是全程未引用的一-byte placeholder，必須 `excluded_non_image`、無 PNG。
 - [x] `KOLPICS.0` 全 14 筆已分類：1／2／4／5／13 是已證實尺寸的 RLE 圖；0／8／12
-  是 `sub_19B29` raw-planar 轉換資料；3／6／7／9／10／11 是一-byte placeholder。
-  索引 8／12 的 64 欄已由下游位移證實，高度 160 與索引 0 幾何仍保留強推論，故本項
-  關閉 archive 分類但不把未證實幾何升為 production 契約。
+  是 `sub_19B29` raw-planar renderer data；3／6／7／9／10／11 是一-byte placeholder。
+  索引 0 依五個 converter block 固定為 256×5 data PNG；8／12 依 40 個完整 stride 與
+  下游 `y<<6+x` 固定為 64×160 grid PNG。三者是無損 extraction shape，不宣稱 display rectangle。
 - [x] 無副檔名 `CHARPICS`／`SHLDPICS`／`STEEDPIC` 各 16 筆已由 KOLBOOK 原尺寸與
   4 倍顯示 consumer 證實為 40×38、high-nibble-first 的 4-bit EGA 圖；48 張本機 PNG
   與接觸表通過機械驗證。逐槽語意及未使用槽內容不由像素外觀推定。
@@ -120,8 +120,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   `0x00` 不進下游 consumer。80 張 PNG／接觸表方向一致；逐張語意仍只記圖號。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
-- [x] EGA extraction set 已逐列覆蓋 30 個邏輯 archive、1,022 個 payload：925 筆來源
-  已證實、71 筆仍待證實、26 筆明確為非圖片；目前可形成 681 個已證實 PNG 單位。
+- [x] EGA extraction set 已逐列覆蓋 30 個邏輯 archive、1,022 個 payload：928 筆來源
+  已證實、68 筆仍待證實、26 筆明確為非圖片；目前可形成 684 個已證實 PNG 單位。
   PCGA／HERC 的尺寸、位平面、palette 與轉換規則尚未證實。
 
 ## READY gate

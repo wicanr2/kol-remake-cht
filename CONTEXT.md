@@ -66,17 +66,18 @@
   彩圖／AND-mask；共享 selector 是 `9*renderer_class+variant`，三份 6×9 接觸表與
   324 筆像素／mask 長度均吻合。指令允許 variant 0..15，實際合法資料範圍仍待另證。
 - KOLPICS 全 14 筆已分類：0／8／12 是 `sub_19B29` 轉換的 raw-planar 資料，1／2／4／5／13
-  是 direct-blit RLE 圖，3／6／7／9／10／11 是一-byte placeholder。索引 8／12 的 64 欄
-  由下游 `y<<6+x` 已證實，高度 160 與索引 0 的 256×5 仍是依有效長度與目視的強推論。
+  是 direct-blit RLE 圖，3／6／7／9／10／11 是一-byte placeholder。RE-030 已證實圖號 0
+  是五個 converter block 的 256×5 renderer-data PNG；8／12 由 40 個完整 stride 與
+  `y<<6+x` 固定為 64×160 grid PNG。這些不是 original display rectangles。
 - MISCPICS 六筆已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA 彩圖；
   image 2 是唯一一-byte、全程未引用的非圖片 placeholder，不產生 PNG。
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
   轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
   相符。完整轉換像素規則尚未動態驗證；三種 theme 的產品範圍待使用者決定。
 - SPEC-002 的完整 EGA extraction set 已建立並由 verifier 對清冊核對：30 個邏輯 archive、
-  1,022 payload 中，925 筆來源已證實、26 筆為明確非圖片 placeholder、71 筆仍須排除為
-  unknown；目前可形成 681 個已證實 PNG 單位。71 筆缺口只剩 KOLMPICS 68 筆動態圖示與
-  KOLPICS 三筆 raw-planar 幾何，不能因研究探針已有 PNG 就冒稱 production-ready。
+  1,022 payload 中，928 筆來源已證實、26 筆為明確非圖片 placeholder、68 筆仍須排除為
+  unknown；目前可形成 684 個已證實 PNG 單位。缺口只剩 KOLMPICS 68 筆動態圖示，不能
+  因研究探針已有 PNG 就冒稱 production-ready。
 
 ## 固定輸入
 
@@ -118,5 +119,5 @@ KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
 顯示 theme 交付範圍仍等待使用者決定。下一工作是以最窄 RE 切片關閉 KOLMPICS 68 筆
-動態圖示與 KOLPICS 三筆 raw-planar 幾何；其餘 EGA archive 不再重開。71 筆歸零後再設計
+動態圖示；其餘 EGA archive 不再重開。68 筆歸零後再設計
 原子化 production 抽取器。SPEC-002 READY 前不接 production runtime。

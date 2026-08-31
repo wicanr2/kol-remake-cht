@@ -769,3 +769,19 @@
   分析推論寫成已證實契約。
 - 本輪 verifier 與 IDA 均在 `docker run --rm` 執行；兩個暫存 IDA DB 目錄已精確移除，
   結束檢查沒有 KOL／KOLPICS／KOLMPICS 專案容器。
+
+## 2026-09-01：KOLPICS raw-planar renderer-data PNG
+
+- 重新審查 `sub_19B29` 的 256-byte source stride／128-byte planar input／256-index output
+  契約，並將 original display geometry 與 production extraction geometry 明確分開。
+- 圖號 0 caller endpoint `0x500` 證實五個 converter block，固定為 256×5 data PNG；
+  圖號 8／12 各有 40 個完整 stride，配合下游 `y<<6+x` 證實 64×160 source grid。
+  三者都不是 direct-blit 螢幕矩形。
+- IDA 探針與視覺探針升 v2。兩個全新 DB 的 safe／private JSON 逐 byte 相同，SHA-256
+  為 `a8ee8476…e63d`／`c6538475…45a5`；兩輪八張 PNG、接觸表與摘要亦逐 byte 相同，
+  摘要／接觸表為 `82281d7a…8f67`／`d6f3a288…524e`。
+- 追加 RE-030 勘誤，不覆寫 RE-025 的歷史形成原因。extraction set 更新為 928 筆已證實、
+  68 筆待證實、26 筆非圖片與 684 個 PNG 單位；KOLPICS 不再有 `excluded_unknown`。
+- 本輪 IDA、抽取與驗證全部使用 `docker run --rm`；第二輪 PNG、Python cache、兩個 IDA DB
+  與暫存摘要已精確移除，保留第一輪 ignored PNG 作視覺證據。結束檢查沒有 KOL／KOLPICS
+  專案容器。

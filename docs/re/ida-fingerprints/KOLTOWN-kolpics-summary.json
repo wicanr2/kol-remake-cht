@@ -1,5 +1,5 @@
 {
-  "schema": "kol-ida-koltown-kolpics-summary-v1",
+  "schema": "kol-ida-koltown-kolpics-summary-v2",
   "ida_version": "9.4",
   "input_name": "KOLTOWN-unpacked.EXE",
   "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
@@ -38,15 +38,16 @@
     {
       "index": 0,
       "kind": "raw-planar",
-      "role": "startup",
+      "role": "startup-renderer-data",
       "decoded_bytes": 1281,
       "source_stride_bytes": 256,
       "planar_bytes_per_stride": 128,
       "width": 256,
       "height": 5,
       "layout_grade": "confirmed",
-      "width_grade": "strong inference",
-      "height_grade": "strong inference"
+      "extraction_geometry_grade": "confirmed",
+      "extraction_geometry_basis": "converter-block-width",
+      "display_geometry_grade": "not applicable; renderer data is not direct-blit art"
     },
     {
       "index": 1,
@@ -98,15 +99,16 @@
     {
       "index": 8,
       "kind": "raw-planar",
-      "role": "default",
+      "role": "default-lookup-grid",
       "decoded_bytes": 10241,
       "source_stride_bytes": 256,
       "planar_bytes_per_stride": 128,
       "width": 64,
       "height": 160,
       "layout_grade": "confirmed",
-      "width_grade": "confirmed",
-      "height_grade": "strong inference"
+      "extraction_geometry_grade": "confirmed",
+      "extraction_geometry_basis": "downstream-y-shift-6",
+      "display_geometry_grade": "not applicable; renderer data is not direct-blit art"
     },
     {
       "index": 9,
@@ -126,15 +128,16 @@
     {
       "index": 12,
       "kind": "raw-planar",
-      "role": "alternate",
+      "role": "alternate-lookup-grid",
       "decoded_bytes": 10241,
       "source_stride_bytes": 256,
       "planar_bytes_per_stride": 128,
       "width": 64,
       "height": 160,
       "layout_grade": "confirmed",
-      "width_grade": "confirmed",
-      "height_grade": "strong inference"
+      "extraction_geometry_grade": "confirmed",
+      "extraction_geometry_basis": "downstream-y-shift-6",
+      "display_geometry_grade": "not applicable; renderer data is not direct-blit art"
     },
     {
       "index": 13,
@@ -154,12 +157,16 @@
     "bit_order": "most-significant bit first",
     "color_index": "plane3..plane0 form bits 3..0",
     "layout_grade": "confirmed by sub_19B29",
-    "row_count_grade": "strong inference from decoded data length, sub_19B29 source stride and visual probe",
-    "limitation": "index 8/12 are consumed with a 64-column offset; their 160-row extent and index 0 geometry remain inferred from decoded length"
+    "source_payload_rule": "N complete 256-byte source strides plus one excluded trailing byte produce N*256 color indices",
+    "index_0_extraction_shape": "five converter blocks serialized as 256x5 data PNG; not an original display rectangle",
+    "index_8_12_extraction_shape": "40 converter blocks provide 10240 indices; downstream y<<6+x fixes 64 columns, so the complete source grid is 64x160",
+    "extraction_geometry_grade": "confirmed",
+    "limitation": "canonical PNG shapes preserve all source-derived indices; they do not assert that every grid cell is reached in one player session"
   },
   "evidence_notes": [
     "DGROUP+0x166a/0x1672 的其他近字組命中位於既有指令內，屬位元組巧合而非消費端。",
-    "sub_1E3A8 傳給 sub_19B29 的 0x8000 不是 KOLPICS 索引 8/12 的資料長度證明。"
+    "sub_1E3A8 傳給 sub_19B29 的 0x8000 不是 KOLPICS 索引 8/12 的來源資料長度證明；固定 payload 的 40 個完整 stride 才界定 source-derived indices。",
+    "圖號 0 的 256x5 是 converter block 的資料序列化形狀，不是原版 direct-blit 矩形。"
   ],
   "strings": [
     {

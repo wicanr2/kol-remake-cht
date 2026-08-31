@@ -52,7 +52,7 @@ def main() -> None:
         raise SystemExit("非預期 ZIP SHA-256")
     ida_bytes = args.ida_summary_path.read_bytes()
     ida = json.loads(ida_bytes)
-    if ida.get("schema") != "kol-ida-koltown-kolpics-summary-v1":
+    if ida.get("schema") != "kol-ida-koltown-kolpics-summary-v2":
         raise SystemExit("非預期 KOLPICS IDA 摘要 schema")
     evidence = {x["index"]: x for x in ida["archive_records"]}
     if sorted(evidence) != list(range(14)):
@@ -90,8 +90,13 @@ def main() -> None:
         if kind == "rle":
             pixels = decode_nibbles(stage1)
         elif kind == "raw-planar":
+            if expected.get("extraction_geometry_grade") != "confirmed":
+                raise SystemExit(f"KOLPICS[{index}] extraction geometry 尚未證實")
             pixels = decode_planar(stage1, width * height, expected["source_stride_bytes"])
+            if stage1[-1:] != b"\0":
+                raise SystemExit(f"KOLPICS[{index}] 非預期 trailing byte")
             record["trailing_byte_sha256"] = sha(stage1[-1:])
+            record["representation"] = "renderer_data_png; not an original display rectangle"
         else:
             raise SystemExit(f"未知 KOLPICS kind：{kind}")
         if len(pixels) != width * height or any(x > 15 for x in pixels):
@@ -113,12 +118,12 @@ def main() -> None:
     contact.write_bytes(encode_rgba_png(bytes(sheet), bytes([1]) * len(sheet),
                                         sheet_width, sheet_height))
     result = {
-        "schema": "kol-kolpics-ega-visual-probe-v1",
+        "schema": "kol-kolpics-ega-visual-probe-v2",
         "input_name": args.zip_path.name, "input_sha256": sha(zip_bytes),
         "ida_summary_name": args.ida_summary_path.name,
         "ida_summary_sha256": sha(ida_bytes),
-        "status": "mechanically validated and human-inspected all eight active payloads",
-        "human_inspection": "five RLE images show coherent UI frames or town scenery; index 0 is a coherent narrow patterned strip; indices 8 and 12 form coherent 64-column atlas-like strips after applying the confirmed downstream y*64+x access, with no visible plane-order or orientation defect",
+        "status": "mechanically validated all eight active payloads; raw-planar extraction geometry confirmed as renderer-data serialization",
+        "human_inspection": "five RLE images show coherent UI frames or town scenery; index 0 forms five coherent 256-entry converter blocks; indices 8 and 12 form coherent 64-column lookup grids after applying the confirmed downstream y*64+x access; no plane-order or serialization defect is visible",
         "active_indices": active, "placeholder_indices": ida["placeholder_indices"],
         "png_count": len(active), "contact_sheet_layout": "two columns by four rows",
         "contact_sheet_sha256": sha(contact.read_bytes()), "records": records,

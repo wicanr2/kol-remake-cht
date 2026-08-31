@@ -13,7 +13,7 @@ ROW = re.compile(
     r"(?P<confirmed>[0-9,]+) \| (?P<pending>[0-9,]+) \| "
     r"(?P<non_image>[0-9,]+) \| (?P<png>[0-9,]+) \|"
 )
-EXPECTED_TOTALS = (1022, 925, 71, 26, 681)
+EXPECTED_TOTALS = (1022, 928, 68, 26, 684)
 
 
 def number(value: str) -> int:
