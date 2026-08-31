@@ -28,6 +28,10 @@
   2,281 個 relocation 全通過，正規化後 129,312-byte load image 與 derivative 零差異。
 - 魔旅士 2010-04-16 的玩家心得與《CRPG 通鑑》中文版已進入 README；只作專案起源，
   不作玩法 oracle。
+- 圖片 RE 已建立 SPEC-002 DRAFT：42 個候選中有 30 個符合 20-byte 固定區＋2-byte
+  offset table，共 960 個 payload 通過 LZW 機械探針。索引契約已證實，LZW 為強推論；
+  尺寸、位平面、palette、透明色與原版視覺仍未知，尚未授權 PNG production 抽取。
+- `AWD1PICS.0` 的索引 payload 後仍有 520 bytes；用途未知，不得先當 padding。
 
 ## 固定輸入
 
@@ -53,5 +57,5 @@
 
 ## 下一個唯一工作
 
-建立原版圖像 archive、palette 與 compression 的 RE 證據，撰寫 PNG 抽取 DRAFT spec；
-spec READY 前只做 disposable decoder probe，不接 Go／Ebitengine production runtime。
+沿一個已定位的圖片 consumer 固定顯示 suffix、尺寸、位平面與 palette，讓 disposable
+probe 產生至少一張可與原版同狀態比對的 PNG；SPEC-002 READY 前不接 production runtime。

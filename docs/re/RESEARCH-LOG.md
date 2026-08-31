@@ -201,3 +201,26 @@ derivative 值加 `0824`，全部通過；扣除 relocation 後整份 load image
 - 上游對一般 EXEPACK garbage bytes 的警告仍保留；本 build 在 startup 前實測零差異，故
   不存在會進入 code、relocation 或玩家資料 consumer 的實際差異。
 - SPEC-001 可由 DRAFT 升 READY；只授權 derivative 作後續研究 oracle。
+
+## RE-005：圖片容器索引與 LZW 解碼核心
+
+### 問題與固定證據
+
+如何由 `*PICS*` 候選選取單張圖？壓縮資料如何解碼？目前證據是否足以產生正式 PNG？
+
+- 輸入 ZIP：SHA-256 `2b455e3c…9f46`；KOLTOWN derivative：`01f6f9…d1d2`。
+- IDA Pro 9.4 locked-v1，unpacked linear EA；完整指令在本機 `*-private.json`。
+- `sub_1A429`／`sub_1A4FE` 證實 `20 + index*2` 的 word offset table、byte 0 count、
+  相鄰 offset 差與 offset 10 的最末 payload 長度。
+- `sub_1A04E`／`sub_1A26B` 顯示 9-bit 起始、LSB-first、`0x100` 碼寬增加標記、
+  `0x101` 起字典與 LZW 特例；語意為 `強推論`。
+- 清冊有 42 個候選；30 個符合容器契約，共 960 個 payload。全部 offset 嚴格遞增且
+  payload 有界；`AWD1PICS.0` 在索引 payload 後另有 520 bytes，用途未知。
+- 一次性探針對 960 個 payload 完成解碼且無無效字典碼；只證明機械自洽，不證明像素。
+
+### 結論與停止線
+
+容器 index 契約為 `已證實`；LZW 變體為 `強推論`。尺寸、顯示 suffix、位平面、palette、
+透明色、畫面方向及尾端 520 bytes 都未關閉，因此尚不能產生正式 PNG，也不能接 Go
+runtime。格式細節、固定顯示契約與未解問題集中於 `image-formats.md`；`SPEC-002` 保持
+DRAFT，下一窄任務是沿一個 consumer 完成來源到 blit 的垂直鏈並做原版視覺交叉驗證。

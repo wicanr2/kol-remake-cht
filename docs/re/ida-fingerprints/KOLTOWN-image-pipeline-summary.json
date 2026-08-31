@@ -1,0 +1,113 @@
+{
+  "schema": "kol-ida-koltown-image-pipeline-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "functions": [
+    {
+      "requested_ea": "0x10f9c",
+      "original_name": "sub_10F9C",
+      "start_ea": "0x10f9c",
+      "end_ea": "0x1103f",
+      "instruction_count": 54,
+      "caller_count": 6
+    },
+    {
+      "requested_ea": "0x16fa6",
+      "original_name": "sub_16FA6",
+      "start_ea": "0x16fa6",
+      "end_ea": "0x17095",
+      "instruction_count": 80,
+      "caller_count": 8
+    },
+    {
+      "requested_ea": "0x19d98",
+      "original_name": "sub_19D98",
+      "start_ea": "0x19d98",
+      "end_ea": "0x19e12",
+      "instruction_count": 46,
+      "caller_count": 13
+    },
+    {
+      "requested_ea": "0x19e12",
+      "original_name": "sub_19E12",
+      "start_ea": "0x19e12",
+      "end_ea": "0x19e9d",
+      "instruction_count": 53,
+      "caller_count": 4
+    },
+    {
+      "requested_ea": "0x19e9d",
+      "original_name": "sub_19E9D",
+      "start_ea": "0x19e9d",
+      "end_ea": "0x1a04e",
+      "instruction_count": 167,
+      "caller_count": 9
+    },
+    {
+      "requested_ea": "0x1a04e",
+      "original_name": "sub_1A04E",
+      "start_ea": "0x1a04e",
+      "end_ea": "0x1a26b",
+      "instruction_count": 182,
+      "caller_count": 2
+    },
+    {
+      "requested_ea": "0x1a26b",
+      "original_name": "sub_1A26B",
+      "start_ea": "0x1a26b",
+      "end_ea": "0x1a2bb",
+      "instruction_count": 37,
+      "caller_count": 3
+    },
+    {
+      "requested_ea": "0x1a429",
+      "original_name": "sub_1A429",
+      "start_ea": "0x1a429",
+      "end_ea": "0x1a4e4",
+      "instruction_count": 67,
+      "caller_count": 6
+    },
+    {
+      "requested_ea": "0x1a4e4",
+      "original_name": "sub_1A4E4",
+      "start_ea": "0x1a4e4",
+      "end_ea": "0x1a4fe",
+      "instruction_count": 14,
+      "caller_count": 8
+    },
+    {
+      "requested_ea": "0x1a4fe",
+      "original_name": "sub_1A4FE",
+      "start_ea": "0x1a4fe",
+      "end_ea": "0x1a866",
+      "instruction_count": 300,
+      "caller_count": 29
+    },
+    {
+      "requested_ea": "0x1a866",
+      "original_name": "sub_1A866",
+      "start_ea": "0x1a866",
+      "end_ea": "0x1a8df",
+      "instruction_count": 51,
+      "caller_count": 4
+    },
+    {
+      "requested_ea": "0x1bd17",
+      "original_name": "sub_1BD17",
+      "start_ea": "0x1bd17",
+      "end_ea": "0x1c0f6",
+      "instruction_count": 403,
+      "caller_count": 3
+    },
+    {
+      "requested_ea": "0x2d3fa",
+      "original_name": "sub_2D3FA",
+      "start_ea": "0x2d3fa",
+      "end_ea": "0x2d454",
+      "instruction_count": 39,
+      "caller_count": 56
+    }
+  ]
+}

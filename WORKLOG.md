@@ -87,3 +87,15 @@
   通過；正規化後全映像零差異，五個分散 32-byte 錨點全吻合。
 - SPEC-001 由 DRAFT 升 READY，只授權 derivative 當研究 oracle；下一步進圖像格式 RE／
   PNG 抽取 DRAFT spec，仍不開始 production runtime。
+
+## 2026-08-31：圖片 archive 與 SPEC-002 DRAFT
+
+- 新增固定 ZIP 圖片清冊：42 個候選中 30 個符合 20-byte 固定區、2-byte offset table；
+  共 960 個 payload，offset 全部嚴格遞增且有界。
+- IDA 9.4 非破壞性探針定位 `sub_1A429`／`sub_1A4FE` 索引 consumer、`sub_1A04E`
+  LZW core 與 `sub_1A26B` LSB-first bit reader；完整指令留本機 private JSON。
+- 一次性 LZW 探針對 960 個 payload 全部完成機械解碼，輸出只含大小與 SHA-256；尚未
+  證實尺寸、位平面、palette、透明色或畫面方向，不產生 production PNG。
+- 發現 `AWD1PICS.0` 索引 payload 後有 520 bytes，保留為未知，不當作 padding。
+- 新增 `image-formats.md` 與 SPEC-002 DRAFT。下一步完成單一 consumer 的來源到 blit
+  垂直鏈與原版視覺交叉驗證；READY 前不接 Go／Ebitengine。

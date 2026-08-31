@@ -6,7 +6,7 @@
 
 | 分類 | 狀態 | 目前證據／限制 |
 |---|---|---|
-| remake | 尚未開始 | RE 知識庫已建立；SPEC-001 READY 只授權研究 oracle，玩法／格式 spec 尚未授權 Go implementation |
+| remake | 尚未開始 | RE 知識庫已建立；SPEC-001 READY 只授權研究 oracle，SPEC-002 DRAFT 不授權 Go implementation |
 | 原版 oracle | build 已固定 | ZIP 與全部項目逐檔雜湊已固定；發行來源／1998 timestamp 成因未知 |
 | 玩家觀點 | 起源資料完成 | 魔旅士繁中個人心得＋《CRPG 通鑑》中文長篇評介已進 README |
 | 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
@@ -54,7 +54,7 @@
 ## M3：可重現素材抽取
 
 - [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
-- [ ] 寫唯讀輸入的資產 inventory 與格式規格，驗證 count、offset、bounds、palette。
+- [ ] 寫唯讀輸入的資產 inventory 與格式規格：count／offset／bounds 已證實，LZW 為強推論；palette 未證實，故尚未完成。
 - [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。
 - [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。
 - [ ] 建立 OGG 轉換管線與 catalog；驗證 codec、時長、非靜音、峰值、loop 與人耳聆聽。
@@ -97,6 +97,6 @@
 
 ## 下一個唯一工作
 
-SPEC-001 已 READY。下一個窄任務是盤點原版 `*PICS*`／無副檔名圖像 archive 的 header、
-索引、palette、compression 與 consumer，建立 PNG 抽取 DRAFT spec；READY 前只允許
-disposable decoder probe，不接 Go／Ebitengine production runtime。
+SPEC-002 已 DRAFT。下一個窄任務是沿一個 IDA consumer 固定顯示 suffix、尺寸、位平面、
+palette 與 blit 契約，並用 disposable probe 產生至少一張原版同狀態可交叉驗證的 PNG；
+READY 前不接 Go／Ebitengine production runtime。

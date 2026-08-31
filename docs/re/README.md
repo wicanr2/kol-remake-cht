@@ -33,10 +33,11 @@
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
 | 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-004 |
+| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-005 |
+| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | index 已證實；LZW 強推論；像素／palette 未證實 |
 | IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口
 
-SPEC-001 已 READY。下一步先建立原版圖像 archive／palette／compression 的格式證據與
-DRAFT spec，讓素材可重生為 PNG；不得把格式猜測或一次成功 dump 直接接進 runtime。
+SPEC-002 已建立為 DRAFT。下一步沿 IDA consumer 固定一個顯示模式的尺寸、位平面與
+palette，產生並對照至少一張真實 PNG；不得把機械解碼成功直接接進 runtime。
