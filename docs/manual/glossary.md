@@ -142,3 +142,10 @@
 | Lintle Plainswoman | Lintle Plainswoman | 待查 | Lintle 平原女性弓手；正式譯名待世界資料 consumer |
 | Tegal Amazon | Tegal Amazon | 待查 | Tegal 森林女性部族；正式譯名待世界資料 consumer |
 | Ghor Digger / Mytrone Tunneler | Ghor Digger／Mytrone Tunneler | 待查 | 矮人採礦職業；正式譯名待職業資料 consumer |
+| Ghor Spiderguard / Mytrone Ratguard | Ghor Spiderguard／Mytrone Ratguard | 待查 | 矮人地下守衛職業；正式譯名待職業資料 consumer |
+| Ghor Trollbane / Mytrone Orcbane | Ghor Trollbane／Mytrone Orcbane | 待查 | 矮人地表冒險職業；正式譯名待職業資料 consumer |
+| Ghor Militia / Mytrone Levie | Ghor Militia／Mytrone Levie | 待查 | 矮人世襲戰士階級；原文作 `Levie`，正式譯名待職業資料 consumer |
+| Cliff Guard / Rock Ranger / Far Seeker | Cliff Guard／Rock Ranger／Far Seeker | 待查 | 凱爾登三個已知階級；正式譯名待職業資料 consumer |
+| Klakar / Kelkret | Klakar／Kelkret | 待查 | 凱爾登交配季／儀式；正式譯名待世界資料 consumer |
+| Allaranethel | Allaranethel（美麗土地） | 待查 | 精靈對 Lintle 平原的稱呼 |
+| Brek / Klvar / Melod | Brek／Klvar／Melod | 待查 | 精靈部族；正式譯名待種族資料 consumer |

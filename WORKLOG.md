@@ -412,3 +412,18 @@
   實體頁 61–65 開始。
 - 更新後種族章與狀態 ledger SHA-256 分別為 `93c7d71e…fe47`、`49d3d92f…f422`；
   Python syntax、全部 JSON 與本地 Markdown 連結均通過。
+
+## 2026-08-31：中文手冊實體頁 61–65
+
+- 依 SPEC-003 READY 翻譯玩家手冊印刷頁 116–125；完成矮人 tunnelers、
+  Ghor Spiderguard／Mytrone Ratguard、Ghor Trollbane／Mytrone Orcbane、
+  Ghor Militia／Mytrone Levie，並涵蓋凱爾登三階級與精靈 Brek、Klvar、Melod。
+- 逐頁對照 100 DPI 掃描，保留原書 `Levie` 拼法，訂正 OCR 的 `Ores` 為 `Orcs`；
+  Klakar 五天、Kelkret 十五天與遠行數千里等數量均保留並通過數字 gate。
+- 凱爾登文化是 Blacksteel 有限觀察，明示三階級只是當時所知的簡化；手冊內容不直接授權
+  runtime 的職業、儀式、語言或戰鬥規則。
+- 現況為 reviewed 67（內容 1–65、空白 76–77）、translated 0、todo 17；全 84 頁狀態
+  完整覆蓋，十個 Markdown 輸出通過來源 hash、數字、篇幅與英文殘留 gate。下一批從
+  實體頁 66–70 開始。
+- 更新後種族章與狀態 ledger SHA-256 分別為 `091b2d0e…dc7d`、`54f85c21…3449`；
+  Python syntax、全部 JSON 與本地 Markdown 連結均通過。

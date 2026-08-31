@@ -67,7 +67,12 @@
 | 58 | Shellernoon Watchmen、Ghor Tigress 與 Lintle Plainswoman（印刷頁 110–111） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 59 | Lintle Plainswoman 與 Olanthan Huntress（印刷頁 112–113） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 60 | Tegal Amazon、矮人與 Ghor Digger／Mytrone Tunneler（印刷頁 114–115） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
-| 61–75 | 種族、精靈語與索引 | todo | — |
+| 61 | 矮人 tunnelers 與 Ghor Spiderguard／Mytrone Ratguard（印刷頁 116–117） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 62 | Ghor Trollbane／Mytrone Orcbane 與 militia／levie（印刷頁 118–119） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 63 | 矮人戰士、凱爾登與 Cliff Guard（印刷頁 120–121） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 64 | Rock Ranger、Far Seeker、精靈與 Brek（印刷頁 122–123） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 65 | Brek、Klvar 與 Melod（印刷頁 124–125） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 66–75 | 種族、精靈語與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 
