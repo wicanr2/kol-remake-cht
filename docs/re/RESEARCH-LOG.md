@@ -519,3 +519,17 @@ PNG 與接觸表只留 ignored `workplace/`；安全摘要只保存雜湊與統�
 COMBPICS 不再只是「前五項已證實」，而是全七筆的 consumer、尺寸、二階 RLE、4-bit EGA、
 方向與 direct-blit 契約均為 `已證實`。這是對舊結論範圍的追加，不抹除 RE-006 當時限制；
 SPEC-002 仍因其他 archive 與 theme 決策維持 DRAFT。
+
+## RE-015：TITLE 的 SET0／SET1／SET2／FACE 全 archive
+
+- 固定輸入 `TITLE.EXE` SHA-256 `8a2879d9…ad6`；IDA Pro 9.4 `locked-v1`、loaded-MZ
+  linear EA。每次探針修改均建立全新 `/tmp` DB；完整指令、bytes 與 `.i64` 不入 Git。
+- `_main` 在 `0x1021b/0x103e0/0x10558/0x10723` 將四個格式化檔名送入整檔 reader
+  `sub_11058`。`sub_11666`／`sub_1170E` 證實索引 offset table，`sub_11133` 證實 mode
+  0Dh 四 plane 矩形 blit；原始函式名與位址均保留在安全摘要。
+- SET0／SET1／SET2 各由 `sub_10AF0` 完整使用 0..5，尺寸依序 88×70、104×84、
+  160×125；FACE 的 18 個呼叫完整涵蓋 0..5，固定 112×80。
+- 24 筆 LZW＋二階 RLE 像素數全部精確吻合，索引皆在 0..15。代表性 PNG 目視為山谷騎士
+  動畫與正向臉部影格，方向、scanline、plane 與裁切正常；PNG 只留 ignored 工作區。
+- 四個 archive 的來源、consumer、完整索引、尺寸、二階 RLE、4-bit EGA、方向與
+  direct-blit 政策升為 `已證實`。SPEC-002 整體仍為 DRAFT，不授權 production importer。

@@ -248,9 +248,24 @@ bit 0 表示先清除再寫入彩圖（不透明）。bit-map PNG 目視為右�
 全程沒有 consumer，可分類為 `已證實：未引用非圖片 placeholder`，manifest 必須用
 `excluded_non_image` 且不得產生 PNG。
 
+### TITLE 的 SET0／SET1／SET2／FACE 動畫素材
+
+固定 `TITLE.EXE`（SHA-256 `8a2879d9…ad6`）的 `_main` 依序以 `set0%s.0`、
+`set1%s.0`、`set2%s.0`、`face%s.0` 建檔名，並在 loaded-MZ EA `0x1021b`、
+`0x103e0`、`0x10558`、`0x10723` 呼叫整檔 reader `sub_11058`。`sub_11666`
+以 `20+index*2` 讀取 archive offset，`sub_1170E` 是 little-endian word reader，最後由
+`sub_11133` 依 mode 0Dh 的 40-byte scanline、四個 EGA planes 做矩形 blit。
+
+`sub_10AF0` 對 SET0／1／2 完整消費圖號 0..5，矩形依序是 88×70、104×84、
+160×125；FACE 主流程的 18 個呼叫涵蓋圖號 0..5，矩形固定 112×80。四個 archive 共
+24 筆經 LZW 與二階 RLE 後，全部精確得到對應矩形的 4-bit 色彩索引，範圍均為 0..15。
+代表性 ignored PNG 目視為三組逐步擴大的山谷騎士場景及正向臉部影格，沒有鏡像、旋轉、
+plane 錯排或裁切。來源、完整索引集合、尺寸、像素契約、方向與 direct-blit 政策為
+`已證實`；RGB 仍沿用 mode 0Dh 的 `hardware-spec approximation`。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

@@ -1,0 +1,259 @@
+{
+  "schema": "kol-ida-title-image-consumers-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "TITLE.EXE",
+  "input_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "dgroup_ea": "0x141f0",
+  "strings": [
+    {
+      "string_ea": "0x144c9",
+      "effective_string_ea": "0x144ca",
+      "text": ">set0%s.0",
+      "dgroup_relative_offset": 730,
+      "xref_count": 0,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x144d4",
+      "effective_string_ea": "0x144d4",
+      "text": "set1%s.0",
+      "dgroup_relative_offset": 740,
+      "xref_count": 0,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x144de",
+      "effective_string_ea": "0x144de",
+      "text": "set2%s.0",
+      "dgroup_relative_offset": 750,
+      "xref_count": 0,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x144e8",
+      "effective_string_ea": "0x144e8",
+      "text": "face%s.0",
+      "dgroup_relative_offset": 760,
+      "xref_count": 0,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x14560",
+      "effective_string_ea": "0x14560",
+      "text": "back%s",
+      "dgroup_relative_offset": 880,
+      "xref_count": 0,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "sub_10E9F"
+      ]
+    }
+  ],
+  "consumer_functions": [
+    {
+      "original_name": "_main",
+      "start_ea": "0x10010",
+      "end_ea": "0x10af0",
+      "instruction_count": 1051,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_10AF0",
+      "start_ea": "0x10af0",
+      "end_ea": "0x10c86",
+      "instruction_count": 142,
+      "caller_count": 3
+    },
+    {
+      "original_name": "sub_10E04",
+      "start_ea": "0x10e04",
+      "end_ea": "0x10e9f",
+      "instruction_count": 52,
+      "caller_count": 24
+    },
+    {
+      "original_name": "sub_10E9F",
+      "start_ea": "0x10e9f",
+      "end_ea": "0x10f33",
+      "instruction_count": 56,
+      "caller_count": 30
+    },
+    {
+      "original_name": "sub_11022",
+      "start_ea": "0x11022",
+      "end_ea": "0x11039",
+      "instruction_count": 13,
+      "caller_count": 38
+    },
+    {
+      "original_name": "sub_11058",
+      "start_ea": "0x11058",
+      "end_ea": "0x110bd",
+      "instruction_count": 42,
+      "caller_count": 4
+    },
+    {
+      "original_name": "sub_11133",
+      "start_ea": "0x11133",
+      "end_ea": "0x11291",
+      "instruction_count": 140,
+      "caller_count": 26
+    },
+    {
+      "original_name": "sub_11666",
+      "start_ea": "0x11666",
+      "end_ea": "0x1170e",
+      "instruction_count": 64,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_1170E",
+      "start_ea": "0x1170e",
+      "end_ea": "0x11728",
+      "instruction_count": 14,
+      "caller_count": 8
+    },
+    {
+      "original_name": "sub_11728",
+      "start_ea": "0x11728",
+      "end_ea": "0x118d1",
+      "instruction_count": 164,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_11A69",
+      "start_ea": "0x11a69",
+      "end_ea": "0x11aac",
+      "instruction_count": 27,
+      "caller_count": 2
+    }
+  ],
+  "archive_contracts": [
+    {
+      "archive_root": "SET0PICS",
+      "load_call_ea": "0x1021b",
+      "presentation_call_ea": "0x102a6",
+      "presentation_argument": 0,
+      "image_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "rectangle": {
+        "x0_byte": 14,
+        "y0": 53,
+        "x1_byte": 25,
+        "y1": 123,
+        "width_pixels": 88,
+        "height_pixels": 70
+      }
+    },
+    {
+      "archive_root": "SET1PICS",
+      "load_call_ea": "0x103e0",
+      "presentation_call_ea": "0x103f8",
+      "presentation_argument": 1,
+      "image_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "rectangle": {
+        "x0_byte": 12,
+        "y0": 53,
+        "x1_byte": 25,
+        "y1": 137,
+        "width_pixels": 104,
+        "height_pixels": 84
+      }
+    },
+    {
+      "archive_root": "SET2PICS",
+      "load_call_ea": "0x10558",
+      "presentation_call_ea": "0x10570",
+      "presentation_argument": 2,
+      "image_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "rectangle": {
+        "x0_byte": 6,
+        "y0": 53,
+        "x1_byte": 26,
+        "y1": 178,
+        "width_pixels": 160,
+        "height_pixels": 125
+      }
+    },
+    {
+      "archive_root": "FACEPICS",
+      "load_call_ea": "0x10723",
+      "presentation_call_eas": [
+        "0x1074b",
+        "0x10785",
+        "0x1079c",
+        "0x107b3",
+        "0x107ca",
+        "0x107e1",
+        "0x10833",
+        "0x1086d",
+        "0x10884",
+        "0x1089b",
+        "0x108b2",
+        "0x10904",
+        "0x1093e",
+        "0x10955",
+        "0x1096c",
+        "0x10983",
+        "0x1099a",
+        "0x109b1"
+      ],
+      "image_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "rectangle": {
+        "x0_byte": 13,
+        "y0": 80,
+        "x1_byte": 27,
+        "y1": 160,
+        "width_pixels": 112,
+        "height_pixels": 80
+      }
+    }
+  ],
+  "semantic_assessment": {
+    "whole_file_loader_sub_11058": "confirmed",
+    "indexed_payload_selector_sub_11666": "confirmed",
+    "little_endian_word_reader_sub_1170E": "confirmed",
+    "rectangle_blit_sub_11133": "confirmed for mode 0x0d geometry",
+    "second_stage_rle_and_ega_pixels": "strong inference pending payload validation"
+  }
+}

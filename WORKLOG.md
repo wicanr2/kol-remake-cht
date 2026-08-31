@@ -550,3 +550,15 @@
 - Python syntax、全部 JSON、本地 Markdown 連結、版控／重生摘要與 UID/GID 均通過；
   兩個 `/tmp/kol-combpics-*` 與重複 PNG 目錄已刪除。Docker inspect 未見掛載 KOL
   工作樹的殘留容器，其他專案容器未動。
+
+## 2026-08-31：TITLE SET0／SET1／SET2／FACE 共 24 張
+
+- 以固定 SHA-256 的 `TITLE.EXE` 建立全新 IDA 9.4 DB，定位四個檔名字串、整檔 reader、
+  索引 selector、little-endian word reader 與 mode 0Dh blit；早期探針漏掉 `>set0%s.0`
+  的有效子字串起點，修正後每次均用全新 DB 重跑，未沿用舊 `.i64`。
+- SET0／1／2 與 FACE 各完整覆蓋圖號 0..5；尺寸為 88×70、104×84、160×125、112×80。
+  24 筆 LZW／二階 RLE 像素數全部吻合，索引不超過 15。
+- 代表性 ignored PNG 目視為三組山谷騎士動畫與正向臉部影格，無鏡像、旋轉、plane 錯排
+  或裁切。新增安全 IDA 摘要、視覺統計及可重生探針；SPEC-002 仍維持 DRAFT。
+- 第二個最終全新 IDA DB 的安全摘要，以及第二批 24 張 PNG／視覺統計，均與第一批逐
+  byte 相同。Python 語法、全部 JSON、Markdown 本地連結與 `git diff --check` 通過。

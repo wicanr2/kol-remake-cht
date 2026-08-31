@@ -1,0 +1,255 @@
+{
+  "schema": "kol-title-set-face-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "TITLE-image-consumers-summary.json",
+  "ida_summary_sha256": "f907ebdfb76767ef0f126b9d8e841e6289d40ab620d259d324f0c9e24f4e177e",
+  "status": "mechanically validated 24 direct-blit 4-bit EGA images; orientation requires human inspection",
+  "archive_count": 4,
+  "source_payload_count": 24,
+  "png_count": 24,
+  "all_archive_indices_have_consumer": true,
+  "all_pixel_counts_match": true,
+  "records": [
+    {
+      "archive_root": "SET0PICS",
+      "image_index": 0,
+      "width_pixels": 88,
+      "height_pixels": 70,
+      "pixel_count": 6160,
+      "color_count": 2,
+      "pixel_sha256": "a5d9a844124ca1ecb8b2971cb6438d5adb94257b8d36f52b0e82f48da157b530",
+      "png_sha256": "616536f42a42f4c6c21e7f7ce9f98df73265393353475ca8b0dae7bf74b24748"
+    },
+    {
+      "archive_root": "SET0PICS",
+      "image_index": 1,
+      "width_pixels": 88,
+      "height_pixels": 70,
+      "pixel_count": 6160,
+      "color_count": 2,
+      "pixel_sha256": "e15c3e3c3365f14ece4a14346d3bf442b9e836849d3ee8d6a74db43c3bd95796",
+      "png_sha256": "fa630185eadaa3b912d97e7b003bf380750252bd33227daac4fcd0d8c2935de0"
+    },
+    {
+      "archive_root": "SET0PICS",
+      "image_index": 2,
+      "width_pixels": 88,
+      "height_pixels": 70,
+      "pixel_count": 6160,
+      "color_count": 2,
+      "pixel_sha256": "96d3f2159c9de8afca503fb456ba9f0d8a0d97384f04311b567878c74bf2bb2b",
+      "png_sha256": "d0779f9366ae2f60021bfd67c90eb22ed2c348b35eb0d49e3ae50f3722a87df6"
+    },
+    {
+      "archive_root": "SET0PICS",
+      "image_index": 3,
+      "width_pixels": 88,
+      "height_pixels": 70,
+      "pixel_count": 6160,
+      "color_count": 2,
+      "pixel_sha256": "3bba22d0dfbb790b801dcd7515a3024f0a3c1cb0c35095719e6479e9c614f234",
+      "png_sha256": "3f17bcdb7620a366dc9840d3fa5b6d07f5522539f7e7227583de4d2bd6c1ef2c"
+    },
+    {
+      "archive_root": "SET0PICS",
+      "image_index": 4,
+      "width_pixels": 88,
+      "height_pixels": 70,
+      "pixel_count": 6160,
+      "color_count": 10,
+      "pixel_sha256": "c8a94b65cf6cf6e87c8328f64c29da1ad576e4a9c51a1a6c16d69c3b33548b43",
+      "png_sha256": "bf2d9b7d32d0dd99d1b2765992abe347ffb5a12008092991bc6ec0f193d04be7"
+    },
+    {
+      "archive_root": "SET0PICS",
+      "image_index": 5,
+      "width_pixels": 88,
+      "height_pixels": 70,
+      "pixel_count": 6160,
+      "color_count": 9,
+      "pixel_sha256": "3ce83d1aa922ab5e81aff9dfe3b9c3d0501f3b6c1e22fcfaafee36f24333aead",
+      "png_sha256": "cf7ee9f2f3f93b8304d21da942e7ecd3df9e72fa0bc6f10eca4d3506744fa344"
+    },
+    {
+      "archive_root": "SET1PICS",
+      "image_index": 0,
+      "width_pixels": 104,
+      "height_pixels": 84,
+      "pixel_count": 8736,
+      "color_count": 2,
+      "pixel_sha256": "f7cf85e354f7244655d1064cd502953b89691ca392bbe94d7a2950a7b880ac70",
+      "png_sha256": "e89f7eeb5c0517247d97d4b0cdc9c8596d760cf341588213fef5eae288b162d7"
+    },
+    {
+      "archive_root": "SET1PICS",
+      "image_index": 1,
+      "width_pixels": 104,
+      "height_pixels": 84,
+      "pixel_count": 8736,
+      "color_count": 2,
+      "pixel_sha256": "770a52c43387d49b2faf2f6b123ecf9769f1fa879f0761c0728b4f6e0537d8a7",
+      "png_sha256": "0c0fba092b4bde709f83149cbba0c0b06eee1d697f582ed93ccb809d769513d2"
+    },
+    {
+      "archive_root": "SET1PICS",
+      "image_index": 2,
+      "width_pixels": 104,
+      "height_pixels": 84,
+      "pixel_count": 8736,
+      "color_count": 2,
+      "pixel_sha256": "bbfbb8e08584b9291c1a0211cb39a69c0f3d74f7f1bc59b31cf7e4d9df5097e6",
+      "png_sha256": "6d22df59401ff7cb980d27086515b553804404aeac4c3b559e0639457fa7db10"
+    },
+    {
+      "archive_root": "SET1PICS",
+      "image_index": 3,
+      "width_pixels": 104,
+      "height_pixels": 84,
+      "pixel_count": 8736,
+      "color_count": 2,
+      "pixel_sha256": "1971c81a0f98545657a165058333e21c7d4ec1572b6d67d2475b1a42476799ff",
+      "png_sha256": "13e1b710fb11af6cf049f7511500400f3fd4885de95ab86a32a2cbe6815f44b6"
+    },
+    {
+      "archive_root": "SET1PICS",
+      "image_index": 4,
+      "width_pixels": 104,
+      "height_pixels": 84,
+      "pixel_count": 8736,
+      "color_count": 10,
+      "pixel_sha256": "26ed463a62dce42f9f957c231a454061b4753fccc1a23862b9a27b3486f81b7c",
+      "png_sha256": "f826b4d694d6eb6c77e81795df4e2e63799ac17baaf42178050731f6c754f967"
+    },
+    {
+      "archive_root": "SET1PICS",
+      "image_index": 5,
+      "width_pixels": 104,
+      "height_pixels": 84,
+      "pixel_count": 8736,
+      "color_count": 9,
+      "pixel_sha256": "67c4f6f1f04b895441d2dac2e6b06d02279ff8704e879f851fc39b9a5b0fb3ff",
+      "png_sha256": "a7f38c4a1a37dc2f663153e0e7d653ab4b45e36452df2ffd09b4976b72cb12e5"
+    },
+    {
+      "archive_root": "SET2PICS",
+      "image_index": 0,
+      "width_pixels": 160,
+      "height_pixels": 125,
+      "pixel_count": 20000,
+      "color_count": 2,
+      "pixel_sha256": "11c886b57bad8865854cffb2d28c9406cb34df867c75d70a7e84320c4cd82c85",
+      "png_sha256": "bfa3d5117e38f0cb1e33c68c3a5aa48765446d890fe85cbd86ed0f9f8aed4cad"
+    },
+    {
+      "archive_root": "SET2PICS",
+      "image_index": 1,
+      "width_pixels": 160,
+      "height_pixels": 125,
+      "pixel_count": 20000,
+      "color_count": 2,
+      "pixel_sha256": "af525d324af32c4e92cde55d50b122a2086169a1207e135820bccc267c746b5c",
+      "png_sha256": "e79aef66989ad262711e7f896504e7bf20b1d93f457d4b9afae8e633fa39741f"
+    },
+    {
+      "archive_root": "SET2PICS",
+      "image_index": 2,
+      "width_pixels": 160,
+      "height_pixels": 125,
+      "pixel_count": 20000,
+      "color_count": 2,
+      "pixel_sha256": "051a05d335669efd2a3de9cf60763479a64801ead16e1aa92a982f80ef02cb2b",
+      "png_sha256": "5ee139a874f6ff94c9c6d3c58765e78e47e508f0f98538dce67da3c77eabb945"
+    },
+    {
+      "archive_root": "SET2PICS",
+      "image_index": 3,
+      "width_pixels": 160,
+      "height_pixels": 125,
+      "pixel_count": 20000,
+      "color_count": 2,
+      "pixel_sha256": "c4dc20960101fb3299bb2506f4ef3903eae6a61014d2329d3c1530ed9e716e78",
+      "png_sha256": "2a2c8fb280502cb164c70e58e122ff111c07cd511a097b823693ecd8b3cb39b2"
+    },
+    {
+      "archive_root": "SET2PICS",
+      "image_index": 4,
+      "width_pixels": 160,
+      "height_pixels": 125,
+      "pixel_count": 20000,
+      "color_count": 9,
+      "pixel_sha256": "9e693cc8c440f3df2518abf06782f055a09d4cb543559077730b747e7ca7508f",
+      "png_sha256": "e3202cc7c3a98a5a8704ea15eb01155c7370987ece43ccea6bc03474e37dbb47"
+    },
+    {
+      "archive_root": "SET2PICS",
+      "image_index": 5,
+      "width_pixels": 160,
+      "height_pixels": 125,
+      "pixel_count": 20000,
+      "color_count": 11,
+      "pixel_sha256": "f7301f8f98471e252e622cf04b4bad1c91e6a1bf455512df039dc74daf7b8c6c",
+      "png_sha256": "5a32d908926d5aac08aa1ad017918edbdd556705ac0471656d34a2ead88f3e73"
+    },
+    {
+      "archive_root": "FACEPICS",
+      "image_index": 0,
+      "width_pixels": 112,
+      "height_pixels": 80,
+      "pixel_count": 8960,
+      "color_count": 8,
+      "pixel_sha256": "c0ce4c0e93ed7929527c50ab308781fe367797ff6b66410efb548a7bfe426498",
+      "png_sha256": "367c052562b9a9b8568619560de6a08856132ac19e3145f35d9b4e5b440b4933"
+    },
+    {
+      "archive_root": "FACEPICS",
+      "image_index": 1,
+      "width_pixels": 112,
+      "height_pixels": 80,
+      "pixel_count": 8960,
+      "color_count": 9,
+      "pixel_sha256": "d70ca71c6f85f354defbd22d66418f58fad29c6246cd601cfb9e531f4c938245",
+      "png_sha256": "1f794f6a790f6e46cb5e22f65e2043d64bceb157576f48bb22817b2d03406e2c"
+    },
+    {
+      "archive_root": "FACEPICS",
+      "image_index": 2,
+      "width_pixels": 112,
+      "height_pixels": 80,
+      "pixel_count": 8960,
+      "color_count": 9,
+      "pixel_sha256": "dd75849b99fe88ff679974530ed5611f90c80ec9f43674aaa9aeae2c41d7431a",
+      "png_sha256": "4a522716042bfc30ced1b8409d795ee3c508e7db6234e72e455624e33810cdc2"
+    },
+    {
+      "archive_root": "FACEPICS",
+      "image_index": 3,
+      "width_pixels": 112,
+      "height_pixels": 80,
+      "pixel_count": 8960,
+      "color_count": 8,
+      "pixel_sha256": "1c7c6d83412a7d2dc069d1e0169911cd115603c6136283d637933421084840da",
+      "png_sha256": "c3ad2df5875fee119cbe4bf2bc5a5dd036989b3604b3fd8b2a89e8bae1b2f0ac"
+    },
+    {
+      "archive_root": "FACEPICS",
+      "image_index": 4,
+      "width_pixels": 112,
+      "height_pixels": 80,
+      "pixel_count": 8960,
+      "color_count": 8,
+      "pixel_sha256": "1bc1cf2177275fa87b4a609657b2ae034a062c8b1fe06d1ad3ec0de8c36d1616",
+      "png_sha256": "68b91a3e8170a7838c2fadc0dcc9589780f8f83ec10d1f404080f3ff18f4e00e"
+    },
+    {
+      "archive_root": "FACEPICS",
+      "image_index": 5,
+      "width_pixels": 112,
+      "height_pixels": 80,
+      "pixel_count": 8960,
+      "color_count": 8,
+      "pixel_sha256": "7a9c78d1a3ab8e4f0e74e1d8a9bed46e83a5ab966fda15a2cf0e4961628db1d0",
+      "png_sha256": "38cfcdec4c1b8a82cef3b02f9fe14086a6abe0cc8d5c8e1955fe99741e7ceda7"
+    }
+  ]
+}

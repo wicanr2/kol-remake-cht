@@ -7,7 +7,7 @@
   `docs/re/image-lzw-probe-summary.json`、`docs/re/town-index24-png-probe-summary.json`、
   `docs/re/monpics-ega-visual-probe.json`、`docs/re/perpics-ega-visual-probe.json`、
   `docs/re/kolmpics-index28-visual-probe.json`、`docs/re/miscpics-ega-visual-probe.json`、
-  `docs/re/combpics-all-ega-visual-probe.json`
+  `docs/re/combpics-all-ega-visual-probe.json`、`docs/re/title-set-face-ega-visual-probe.json`
 
 ## 目的
 
@@ -63,6 +63,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] IDA 已定位索引 reader、LZW core、bit reader、檔名 consumer 與 blitter 候選。
 - [x] `COMBPICS.0` 全七筆已證實：0..4 是 296×144、5..6 是 88×64；全部使用 mode
   0Dh／PICS、二階 RLE、4-bit indices 與 EGA palette，consumer 集合完整覆蓋 0..6。
+- [x] TITLE 的 `SET0PICS.0`、`SET1PICS.0`、`SET2PICS.0`、`FACEPICS.0` 共 24 筆已
+  完整證實；每包圖號 0..5，尺寸依序為 88×70、104×84、160×125、112×80。
 - [x] `TWN0..7PICS` 全域圖號 24 均跨入 `.1`，已證實 town 0 為 192×96、其餘為
   88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
 - [x] `MONPICS.0` 的 64 個 payload 已證實是 32 組「偶數 4-bit EGA 彩圖＋奇數 1-bit
@@ -102,6 +104,7 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 `tools/probe_extract_perpics_png.py` 只關閉各自的窄分支，也不得作 runtime importer；
 `tools/probe_extract_kolmpics_index28_png.py` 同樣只驗證單一純 mask，不能直接成為正式素材；
 `tools/probe_extract_miscpics_png.py` 驗證 MISCPICS 全 archive，但仍是 RE probe，不是正式
-抽取器；`tools/probe_extract_comb_all_png.py` 同樣只作 COMBPICS 全 archive 的 RE 驗證。
+抽取器；`tools/probe_extract_comb_all_png.py` 與 `tools/probe_extract_title_set_face_png.py`
+同樣只作各自 archive 的 RE 驗證。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。
