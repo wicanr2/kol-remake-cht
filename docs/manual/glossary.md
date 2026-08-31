@@ -89,4 +89,12 @@
 | DUCK / JUMP | 蹲低／跳起 | 暫譯 | 對應高、低位攻擊的防禦 |
 | LOAD | 裝填 | 核准 | 準備十字弓射擊 |
 | SWITCH | 切換 | 核准 | 交換備戰武器與腰帶武器 |
+| PICK UP | 撿起 | 核准 | 戰鬥中撿取所在格的物品 |
+| PANIC | 逃跑 | 核准 | 讓全隊撤離戰鬥 |
+| Items Found | 找到的物品 | 核准 | 戰後戰利品分配清單 |
+| TRAIN | 訓練 | 核准 | 向武器大師提升武器技能 |
+| Hvrad Myth | Hvrad Myth | 待查 | 布雷特爾武器大師；正式音譯待角色資料 consumer |
+| Astimiah Eckhart | Astimiah Eckhart | 待查 | 布雷特爾法師；正式音譯待角色資料 consumer |
+| Lonely Page Pub | Lonely Page 酒館 | 暫譯 | 布雷特爾酒館；專名待城鎮資料 consumer |
+| Orc | Orc | 待查 | 怪物專名；正式譯名待怪物資料 consumer |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |

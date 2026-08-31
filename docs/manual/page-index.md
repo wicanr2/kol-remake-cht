@@ -27,7 +27,12 @@
 | 18 | 飛行、攻擊類型與射擊目標（印刷頁 30–31） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
 | 19 | 武器／徒手攻擊與瞄準部位（印刷頁 32–33） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
 | 20 | 防禦、十字弓裝填與切換武器（印刷頁 34–35） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
-| 21–75 | 戰鬥、進階規則、世界觀、種族與索引 | todo | — |
+| 21 | 武器切換、撿取、疲勞恢復與命令檢查（印刷頁 36–37） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 22 | 行動順序、持久戰、箭矢與戰鬥結局（印刷頁 38–39） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 23 | 戰利品、逃跑與全隊敗北（印刷頁 40–41） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 24 | 回到城鎮、交易與武器技能訓練（印刷頁 42–43） | reviewed | [06-back-in-town.md](chapters/06-back-in-town.md) |
+| 25 | 訓練、魔法、酒館餐飲與新裝備（印刷頁 44–45） | reviewed | [06-back-in-town.md](chapters/06-back-in-town.md) |
+| 26–75 | 城鎮服務、進階規則、世界觀、種族與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 
