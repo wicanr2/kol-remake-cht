@@ -54,6 +54,9 @@
 - WEAPPICS 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask：`sub_18F3A` 由裝備欄位、
   六值 selector 基表與 family 5 的 variant 2／3 交換規則產生偶數圖號；28 組尺寸、
   像素數與透明棋盤接觸表全部吻合。family／variant 只是導覽標籤，尚未推定遊戲內分類名稱。
+- HEADPICS／TORPICS／LEGSPICS 各 108 筆已關閉為各 54 組角色頭部、軀幹與腿部
+  彩圖／AND-mask；共享 selector 是 `9*renderer_class+variant`，三份 6×9 接觸表與
+  324 筆像素／mask 長度均吻合。指令允許 variant 0..15，實際合法資料範圍仍待另證。
 - MISCPICS 六筆已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA 彩圖；
   image 2 是唯一一-byte、全程未引用的非圖片 placeholder，不產生 PNG。
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
@@ -92,6 +95,8 @@ SHLDPICS.0 八筆已關閉為四組彩圖／AND-mask 盾牌，並與無副檔名
 HANDPICS.0 全 24 筆已關閉為六個 renderer class×兩個位置的 12 組手部彩圖／AND-mask。
 WEAPPICS.0 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask，selector、尺寸與位置表均有
 IDA 9.4 安全摘要，28 張 ignored PNG 已用棋盤接觸表重驗。
+HEADPICS.0／TORPICS.0／LEGSPICS.0 共 324 筆已關閉為 162 組角色分層 sprite；共享
+selector、三部件幾何／位置表與三份 6×9 棋盤接觸表皆已驗證。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
 顯示 theme 交付範圍仍等待使用者決定；不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。

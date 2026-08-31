@@ -87,6 +87,10 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   MSB-first AND-mask」；裝備欄位 selector、六值基表、特殊 variant 交換、28 組尺寸、
   六類位置表、像素數與 `alpha=1-mask` 均由 IDA／棋盤接觸表證實。family／variant
   只作資料流導覽，不宣稱遊戲內分類語意。
+- [x] `HEADPICS.0`／`TORPICS.0`／`LEGSPICS.0` 各 108 筆已證實為各 54 組角色頭部、
+  軀幹與腿部的偶數彩圖／奇數 AND-mask；共享 `9*renderer_class+variant` selector、
+  162 組尺寸／位置、324 筆像素與三份 6×9 棋盤接觸表均已驗證。實際合法 variant
+  資料域仍須角色／物品 writer 證據，不由 archive table 大小反推。
 - [x] `TWN0..7PICS` 全域圖號 24 均跨入 `.1`，已證實 town 0 為 192×96、其餘為
   88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
 - [x] `MONPICS.0` 的 64 個 payload 已證實是 32 組「偶數 4-bit EGA 彩圖＋奇數 1-bit
@@ -142,5 +146,7 @@ AND-mask bit 當 alpha，與已證實的 `sub_1BD17` 極性契約衝突；已改
 驗證透明輪廓；manifest 只能使用「第一／第二位置」，未有更強證據前不命名解剖學左／右手。
 `tools/probe_extract_weappics_png.py` 只關閉 `WEAPPICS.0` 的 28 組武器；它依安全 IDA
 摘要取得尺寸並以 `1-mask` 生成 RGBA，不能據此泛化角色其他身體部件或成為 runtime importer。
+`tools/probe_extract_bodypics_png.py` 只關閉 HEAD／TOR／LEGS 三個 archive 的既有 54 組；
+三層共享 selector 不代表可跳過角色資料域驗證，也不能直接成為 runtime importer。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。

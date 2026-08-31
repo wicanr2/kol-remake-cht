@@ -350,6 +350,30 @@ bit 0 不透明／覆寫，所以 RGBA alpha 為 `1-mask`。四張 PNG 目視為
 精確順序見 RE-022 與 safe JSON。每組為 4-bit EGA 彩圖／MSB-first 1-bit AND-mask，
 PNG alpha 固定為 `1-mask`。棋盤接觸表顯示六列成對手部，全契約為 `已證實`。
 
+### HEADPICS／TORPICS／LEGSPICS 角色分層 sprite
+
+`sub_18F3A:0x1903a..0x19164` 以 component 2→1→0 迴圈處理 `legs`、`tor`、`head`
+三層。DGROUP `0x05fa` 的 15 bytes 是 `head\0tor\0\0legs\0` token 表；`0x17de`
+實際為 `%s%s\0`，會把 component token 與 active renderer suffix 相接。初版探針曾猜成
+`%spics`，已由 fail-closed 斷言否定；不能把 archive 的可見名稱倒推成 format bytes。
+
+每層先檢查角色 offset `0x100+16*component` 是否非零，再取
+`variant=byte[0x10e+16*component]&0x0f`，以 `group=9*renderer_class+variant`
+選同名 archive 的 `[2*group,2*group+1]` 彩圖／AND-mask。archive 各有 54 組、108 筆，
+對應六個 renderer class×九個實體 table slots；但指令 mask 本身允許 0..15，因此
+「合法存檔 variant 只會是 0..8」尚未由本切片證實，必須另追角色／物品資料 writer。
+
+DGROUP `0x017a` 與 `0x02be` 都是 54×3×2-byte 表，分別保存三部件的寬／高及 x／y。
+HEADPICS 尺寸範圍 24–56×8–52、TORPICS 為 56–88×28–71、LEGSPICS 為
+48–56×13–84 pixels；精確 162 組記錄與原始 table bytes 在
+`ida-fingerprints/KOLTOWN-bodypics-summary.json`。324 筆全部通過 LZW、二階 RLE／4-bit
+彩圖、MSB-first 1-bit mask 與一-byte 非像素尾端驗證；RGBA 使用 `alpha=1-mask`。
+
+三份 6×9 棋盤接觸表顯示跨列一致的髮型／頭盔、衣甲／軀幹與褲裙／腿甲。部分 sprite
+本來就是分離的小片段，透明間隙保持正常；未見旋轉、配對、plane-order 或裁切錯誤。
+完整統計在 `bodypics-ega-visual-probe.json`；語意與像素契約為 `已證實`，探針仍不是
+production importer。
+
 ### WEAPPICS.0 角色武器 sprite
 
 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4、重建 unpacked MZ
@@ -375,7 +399,7 @@ AND-mask 加一個非像素尾 byte。RGBA 依已證實的 `(destination AND mas
 
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

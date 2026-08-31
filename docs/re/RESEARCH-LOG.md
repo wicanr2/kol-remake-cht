@@ -716,3 +716,24 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   摘要／接觸表 SHA-256 為 `f3f48278…f9fb`／`9af11e5a…7346`。
 - 新增可重生 IDA／PNG 探針與安全摘要；SPEC-002 只新增此窄分支，仍為 DRAFT，未接
   production importer 或 Go／Ebitengine runtime。
+
+## RE-024：HEADPICS／TORPICS／LEGSPICS 全 162 組角色分層 sprite
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4、重建 unpacked MZ
+  linear EA。`sub_18F3A:0x1903a..0x19164` 以 component 2→1→0 處理 legs／tor／head。
+- 初版探針由 archive 名稱猜 `0x17de` 是 `%spics`，實際 bytes 為 `%s%s\0`，所以
+  fail-closed 且未產生摘要。最終證據固定 DGROUP `0x05fa` 的
+  `head\0tor\0\0legs\0` token 表、`%s%s` 與 active renderer suffix 的組合資料流。
+- 每部件由角色存在欄位、`variant=byte[0x10e+16*component]&0x0f` 與
+  `group=9*renderer_class+variant` 選 `[2*group,2*group+1]`。三 archive 各 54 組／108 筆；
+  0..53 table slots 對應六類×九格，但合法存檔 variant 是否只取 0..8 仍未證實。
+- DGROUP `0x017a`／`0x02be` 提供 162 組寬高／位置。HEAD 尺寸 24–56×8–52、TOR
+  56–88×28–71、LEGS 48–56×13–84；324 筆彩圖、mask 與尾 byte 全部吻合。
+- 162 張 RGBA PNG 使用 `alpha=1-mask`。三份 6×9 棋盤接觸表呈現協調的髮型／頭盔、
+  衣甲／軀幹與褲裙／腿甲；分離片段保留合理透明間隙，未見旋轉、pair-order、
+  plane-order 或裁切錯誤。
+- 兩個最終全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
+  `87151ef1…1b1b`、`20a82ec0…c932`；兩輪 165 個 PNG 與視覺摘要也逐 byte 相同。
+  視覺摘要／HEAD／TOR／LEGS 接觸表 SHA-256 分別為 `d01b16e1…f3ba`、
+  `3a4bd8a0…92a3`、`3dc7994e…58bc`、`fc0c8382…d53e`。
+- 新增可重生 IDA／PNG 探針與安全摘要；SPEC-002 維持 DRAFT，未接 production importer。

@@ -59,7 +59,8 @@
 - [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS 全 archive、TWN index 24、MONPICS、PERPICS、
   MISCPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、KOLMPICS index 28 EGA
   垂直鏈、WEATPICS 全 18 筆六組分層合成、AWD1PICS 全 24 張勳章圖示、SHLDPICS
-  全四組盾牌、HANDPICS 全 12 組手部 sprite、WEAPPICS 全 28 組角色武器、AWD
+  全四組盾牌、HANDPICS 全 12 組手部 sprite、WEAPPICS 全 28 組角色武器、
+  HEADPICS／TORPICS／LEGSPICS 各 54 組角色分層 sprite、AWD
   固定快照邊界與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
   像素格式尚未完成。
 - [x] 勘誤 MONPICS／PERPICS 早期 PNG 探針的 AND-mask alpha 極性；依

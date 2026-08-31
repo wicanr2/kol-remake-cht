@@ -33,13 +33,13 @@
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
 | 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-023 |
-| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、WEAPPICS、TWN index 24、MONPICS、PERPICS、MISCPICS、KOLMPICS index 28 與固定記錄表已分類 |
+| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-024 |
+| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、WEAPPICS、HEADPICS／TORPICS／LEGSPICS、TWN index 24、MONPICS、PERPICS、MISCPICS、KOLMPICS index 28 與固定記錄表已分類 |
 | IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口
 
 SPEC-002 仍為 DRAFT；MAKEMODE 已證實會由 PICS 生成 PCGA／HERC，首版 theme 範圍待
 使用者決定。COMBPICS、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28 已關閉；下一步是追另一個
-PICS consumer。WEAPPICS 全 56 筆已關閉，但不得把同一 renderer 內的成功直接泛化成
-HEADPICS／TORPICS／LEGSPICS 或接進 runtime。
+PICS consumer。WEAPPICS 及 HEADPICS／TORPICS／LEGSPICS 已關閉，但不得把同一
+renderer 的成功直接泛化成其他 archive、未證實 variant 資料域或接進 runtime。
