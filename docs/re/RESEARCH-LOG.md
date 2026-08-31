@@ -494,3 +494,28 @@ MISCPICS 六個 payload 已完整分類：五張已證實 EGA 彩圖與一筆已
 來源、索引、尺寸、二階 RLE、4-bit palette bounds、方向及 direct-blit 透明政策均已關閉。
 PNG 與接觸表只留 ignored `workplace/`；安全摘要只保存雜湊與統計。這不改變 SPEC-002
 整體 DRAFT 狀態，也不授權 production importer。
+
+## RE-014：COMBPICS 圖號 5／6 與全 archive 完成
+
+### 舊結論範圍與新 consumer
+
+- RE-006 只證實 `sub_288D4` 使用的前五張 296×144 圖，不能解釋 archive 的七筆；舊證據
+  保留，不改寫成當時已完成。本輪另追 `sub_2B454`，補齊圖號 5、6。
+- 固定輸入 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`、IDA Pro 9.4 `locked-v1`、
+  unpacked loaded-MZ linear EA。完整函式與 bytes 只留 private JSON。
+- `sub_288D4` 全部 call sites `0x2125c/0x2157b/0x215ac/0x2161f/0x216b5` 分別傳
+  3／2／0／4／1；矩形固定 296×144。`sub_2B454` 全部 call sites `0x2abd2/0x2adcb`
+  分別傳 6／5；矩形固定 88×64。兩組集合恰為 archive 0..6，沒有未歸屬 payload。
+
+### 像素與視覺
+
+- 七筆 LZW 後皆通過同一 big-endian 分界、high-nibble-first 二階 RLE；0..4 各得到
+  42,624 pixels，5..6 各得到 5,632 pixels，所有 index 均在 0..15。
+- 七張 ignored PNG 接觸表顯示五張戰鬥結果／場景與兩張肖像，方向、scanline、plane、
+  裁切皆正常。圖號 0、1 仍引用 RE-006 的魔旅士文章同場景獨立交叉證據。
+
+### 訂正後結論
+
+COMBPICS 不再只是「前五項已證實」，而是全七筆的 consumer、尺寸、二階 RLE、4-bit EGA、
+方向與 direct-blit 契約均為 `已證實`。這是對舊結論範圍的追加，不抹除 RE-006 當時限制；
+SPEC-002 仍因其他 archive 與 theme 決策維持 DRAFT。

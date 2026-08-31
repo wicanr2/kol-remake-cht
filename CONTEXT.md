@@ -39,9 +39,9 @@
   payload。尾端 520 bytes 已排除於圖片流，但仍是未解析工作區資料，不是 padding。
 - `CHARPICS`／`SHLDPICS`／`STEEDPIC` 已由 KOLBOOK／KOLTOWN 讀寫資料流證實為 16 筆、
   每筆 760 bytes 的固定可變角色圖片記錄表；記錄內像素佈局尚未證實。
-- COMBPICS EGA 分支已由 IDA 關閉到 296×144、二階 RLE、4-bit 色彩與 BIOS mode 0Dh
-  palette；兩張本機測試 PNG 分別對上魔旅士文章的同場景原版 JPEG。這只證實該窄分支，
-  不代表全部圖片格式完成。
+- COMBPICS 全七筆已關閉：0..4 為 296×144 戰鬥場景，5..6 為 88×64 肖像，皆使用
+  二階 RLE、4-bit 色彩與 BIOS mode 0Dh palette；圖號 0、1 另對上魔旅士文章同場景 JPEG。
+  這只證實 COMBPICS archive，不代表全部圖片格式完成。
 - TWN 全域圖號 24 已關閉 continuation 垂直鏈：八城均從 `.1` 讀取；town 0 為 192×96，
   其餘為 88×64。八張 ignored PNG 與接觸表通過像素數、4-bit bounds、方向及非空目視。
 - MONPICS 已關閉 32 組怪物 sprite 垂直鏈：64 個 payload 依序配成 4-bit EGA 彩圖與

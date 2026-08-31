@@ -83,10 +83,17 @@ palette、透明色與畫面方向，因此不能把「可解出 bytes」升格�
 
 `sub_1A2BB`（`0x1a2bb..0x1a428`）把第一段 byte 當控制流、第二段當 high-nibble-first
 的 4-bit 色彩流。控制碼 `<0x80` 重複一個色彩 `control+1` 次；`>=0x80` 複製
-`control-0x7f` 個 literal。每八個色彩索引拆成四個 EGA bitplane bytes。前五個
-`COMBPICS.0` 項目均精確展開為 `42,624 = 37×8×144 = 296×144` pixels，與 consumer
-矩形獨立吻合。此分支的 LZW、二階 RLE、4-bit 索引、方向與尺寸為 `已證實`；其餘
-archive 仍維持前述 `強推論`。
+`control-0x7f` 個 literal。每八個色彩索引拆成四個 EGA bitplane bytes。
+
+`sub_288D4` 的全部五個 caller 傳入圖號 3、2、0、4、1，完整覆蓋 0..4；五筆均精確展開
+為 `42,624 = 37×8×144 = 296×144` pixels。另一 consumer `sub_2B454` 在
+`0x2b45d..0x2b46f` 固定矩形 byte-column `[1,12)`、scanline `[64,128)`，兩個 caller
+分別傳圖號 6 與 5；兩筆各精確展開為 `5,632 = 11×8×64 = 88×64` pixels。兩組 caller
+集合完整覆蓋 archive 0..6。
+
+七張接觸表目視為五張戰鬥場景與兩張肖像，均無鏡像、旋轉、plane 錯排或裁切。故
+COMBPICS 全七筆的 LZW、二階 RLE、4-bit indices、尺寸、方向及 direct-blit 政策為
+`已證實`；其中圖號 0、1 另有魔旅士文章同場景截圖交叉驗證。
 
 ### 顯示模式、suffix 與色盤
 
@@ -249,7 +256,8 @@ bit 0 表示先清除再寫入彩圖（不透明）。bit-map PNG 目視為右�
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
 3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
 4. 使用者尚未決定 PCGA／HERC 是必要交付 theme、可選後續 theme，或不納入產品範圍。
-5. COMBPICS 已有兩張外部原版截圖交叉驗證；仍待本機 runtime framebuffer 的無損抽樣。
+5. COMBPICS 全 archive 已關閉，且兩張有外部原版截圖交叉驗證；仍待本機 runtime
+   framebuffer 的無損抽樣。
 
 在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得
 接入 Go／Ebitengine。

@@ -533,3 +533,20 @@
 - Python syntax、全部 JSON、本地 Markdown 連結、版控／重生摘要與 UID/GID 均通過；
   本輪五個 `/tmp/kol-*` 與重複 PNG 目錄已刪除。Docker 只餘已確認屬其他專案或服務的
   容器，未停止或刪除它們。
+
+## 2026-08-31：COMBPICS 全七筆完成
+
+- 盤點 30 個邏輯 archive 時發現 COMBPICS 有七筆，而 RE-006／SPEC-002 只關閉前五筆；
+  保留舊限制並追查第二 consumer，沒有把「前五張成功」冒充整包完成。
+- `sub_288D4` 五個 caller 完整覆蓋 0..4，固定 296×144；`sub_2B454` 兩個 caller 傳
+  6／5，固定 88×64。兩組 caller 與 archive 0..6 一一覆蓋。
+- 七筆二階 RLE 全部精確吻合矩形；七張 ignored PNG 接觸表為五張戰鬥場景與兩張肖像，
+  無鏡像、旋轉、plane 錯排或裁切。0、1 繼續由魔旅士文章同場景截圖交叉驗證。
+- 新增 fail-closed IDA 探針、安全摘要、全 archive 視覺 probe 與統計；COMBPICS 狀態由
+  部分完成訂正為全 archive 已證實，SPEC-002 整體仍維持 DRAFT。
+- 兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
+  `765f2223…618c`、`a30919d8…e657`；兩次視覺摘要、七張 PNG 與接觸表均逐 byte 相同，
+  視覺摘要與接觸表 SHA-256 分別為 `95c1ca7a…4ced`、`c1b2aaeb…d031`。
+- Python syntax、全部 JSON、本地 Markdown 連結、版控／重生摘要與 UID/GID 均通過；
+  兩個 `/tmp/kol-combpics-*` 與重複 PNG 目錄已刪除。Docker inspect 未見掛載 KOL
+  工作樹的殘留容器，其他專案容器未動。

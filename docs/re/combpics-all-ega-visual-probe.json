@@ -1,0 +1,86 @@
+{
+  "schema": "kol-combpics-all-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "KOLTOWN-combpics-summary.json",
+  "ida_summary_sha256": "765f2223e2f6420fc6216f3d2e3314a9cada1d0372c1ef18ab51b4633953618c",
+  "status": "mechanically validated all seven 4-bit EGA images; orientation requires human inspection",
+  "archive_root": "Knights-of-legend/COMBPICS",
+  "source_payload_count": 7,
+  "png_count": 7,
+  "all_archive_indices_have_consumer": true,
+  "all_pixel_counts_match": true,
+  "contact_sheet_sha256": "c1b2aaeba992d098272172167a4343db509f5b23df10ccee354ca9aa6c35d031",
+  "records": [
+    {
+      "image_index": 0,
+      "consumer_original_name": "sub_288D4",
+      "width_pixels": 296,
+      "height_pixels": 144,
+      "pixel_count": 42624,
+      "color_count": 12,
+      "pixel_sha256": "3c1e3b951623e725866497a5b4fcb343f60a59b57c0de785881e6cef5997a52a",
+      "png_sha256": "37d0b6bf3f6cfe25188db493787a072075bf52d478c104842da1f3eb690380cd"
+    },
+    {
+      "image_index": 1,
+      "consumer_original_name": "sub_288D4",
+      "width_pixels": 296,
+      "height_pixels": 144,
+      "pixel_count": 42624,
+      "color_count": 14,
+      "pixel_sha256": "203397ad0d720bab277e2bb08d74285e52c66e9f7ad05e8c04ca1c26a718b848",
+      "png_sha256": "b25c0ec74f1c3a7261789e01ffb912c11e76d581753dffbae3c3dbfda70479a8"
+    },
+    {
+      "image_index": 2,
+      "consumer_original_name": "sub_288D4",
+      "width_pixels": 296,
+      "height_pixels": 144,
+      "pixel_count": 42624,
+      "color_count": 15,
+      "pixel_sha256": "6fe164aea64edf4eba93a800dbfedebed5ae6eca74c47eba82309b7089d7f4a3",
+      "png_sha256": "4104bbe47df92ec8827278f257676cbfac0790e3b0947b1f5a23fe8d11cb3544"
+    },
+    {
+      "image_index": 3,
+      "consumer_original_name": "sub_288D4",
+      "width_pixels": 296,
+      "height_pixels": 144,
+      "pixel_count": 42624,
+      "color_count": 14,
+      "pixel_sha256": "ff837d2741c36a0f69676dbed95874ac979ded4ec0d87776626b054fdbee7fd6",
+      "png_sha256": "fa39c616cca81aa4cf0d03be1415bdfb7b1f4f598200fe339c9d260a315337a9"
+    },
+    {
+      "image_index": 4,
+      "consumer_original_name": "sub_288D4",
+      "width_pixels": 296,
+      "height_pixels": 144,
+      "pixel_count": 42624,
+      "color_count": 14,
+      "pixel_sha256": "a5689d56ed488bcae6ace519264ab2eab1f8f62ecb6263c290cfa4f761cfa391",
+      "png_sha256": "ebf8a16f419aea9fb0fc66db64f1fc4b28a2380c128ccc25afb885c437572fa9"
+    },
+    {
+      "image_index": 5,
+      "consumer_original_name": "sub_2B454",
+      "width_pixels": 88,
+      "height_pixels": 64,
+      "pixel_count": 5632,
+      "color_count": 11,
+      "pixel_sha256": "adc160e6ec7564f332636f2ef1a0d7b24f4b481595b756a20080b0b77fcaf3cb",
+      "png_sha256": "9a9a8cac65d61fa722036151b92029bf92b8c996a4e22f348936a09b35cee9e1"
+    },
+    {
+      "image_index": 6,
+      "consumer_original_name": "sub_2B454",
+      "width_pixels": 88,
+      "height_pixels": 64,
+      "pixel_count": 5632,
+      "color_count": 11,
+      "pixel_sha256": "bb0a5da668056c956e736c44abb1c5a63f21a922738da85d2560ade1fd1f1857",
+      "png_sha256": "e548d73f83513366a095d1f5f780684ac72e062cbafc8691532fe7c7cc9786f8"
+    }
+  ]
+}

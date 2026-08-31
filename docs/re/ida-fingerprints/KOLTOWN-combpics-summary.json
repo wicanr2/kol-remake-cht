@@ -1,0 +1,121 @@
+{
+  "schema": "kol-ida-koltown-combpics-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "archive": {
+    "filename_format": "comb%s",
+    "payload_count": 7,
+    "status": "confirmed"
+  },
+  "consumer_groups": [
+    {
+      "original_name": "sub_288D4",
+      "start_ea": "0x288d4",
+      "filename_format_dgroup_offset": "0x1856",
+      "calls": [
+        {
+          "call_ea": "0x2125c",
+          "image_index": 3
+        },
+        {
+          "call_ea": "0x2157b",
+          "image_index": 2
+        },
+        {
+          "call_ea": "0x215ac",
+          "image_index": 0
+        },
+        {
+          "call_ea": "0x2161f",
+          "image_index": 4
+        },
+        {
+          "call_ea": "0x216b5",
+          "image_index": 1
+        }
+      ],
+      "image_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "rectangle": {
+        "x0_byte_column": 1,
+        "y0_scanline": 8,
+        "x1_byte_column_exclusive": 38,
+        "y1_scanline_exclusive": 152,
+        "width_bytes": 37,
+        "width_pixels": 296,
+        "height_pixels": 144
+      },
+      "loader_original_name": "sub_1A4FE",
+      "loader_call_ea": "0x28937",
+      "second_stage_original_name": "sub_1C907",
+      "second_stage_call_ea": "0x28984",
+      "blitter_original_name": "sub_19E9D",
+      "blitter_call_ea": "0x289ac",
+      "status": "confirmed"
+    },
+    {
+      "original_name": "sub_2B454",
+      "start_ea": "0x2b454",
+      "filename_format_dgroup_offset": "0x18a8",
+      "calls": [
+        {
+          "call_ea": "0x2abd2",
+          "image_index": 6
+        },
+        {
+          "call_ea": "0x2adcb",
+          "image_index": 5
+        }
+      ],
+      "image_indices": [
+        5,
+        6
+      ],
+      "rectangle": {
+        "x0_byte_column": 1,
+        "y0_scanline": 64,
+        "x1_byte_column_exclusive": 12,
+        "y1_scanline_exclusive": 128,
+        "width_bytes": 11,
+        "width_pixels": 88,
+        "height_pixels": 64
+      },
+      "loader_and_blit_original_name": "sub_10F9C",
+      "loader_and_blit_call_ea": "0x2b499",
+      "status": "confirmed"
+    }
+  ],
+  "coverage": {
+    "consumer_image_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "archive_image_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "all_archive_indices_have_consumer": true,
+    "status": "confirmed"
+  },
+  "notes": [
+    "\u5b8c\u6574\u51fd\u5f0f\u3001\u539f\u59cb\u4f4d\u5740\u3001\u904b\u7b97\u5143\u8207 bytes \u53ea\u4fdd\u5b58\u65bc private JSON\u3002",
+    "\u4e8c\u968e RLE\u30014-bit EGA pixels\u3001palette bounds \u8207\u65b9\u5411\u4ecd\u9808\u7531\u89e3\u78bc\u53ca\u8996\u89ba probe \u9a57\u8b49\u3002"
+  ]
+}
