@@ -83,7 +83,8 @@
 | 74 | 索引 S–Z 與製作名單（印刷頁 142–143） | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
 | 75 | 原版保固條款（印刷頁 144） | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
-| 78–79 | 索引／封底內容 | todo | — |
+| 78 | Todd Mitchell Porter 作者介紹 | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
+| 79 | ORIGIN 封底地址與產品碼 | reviewed | [10-timeline-index-credits.md](chapters/10-timeline-index-credits.md) |
 
 ## 參考卡
 

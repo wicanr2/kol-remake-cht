@@ -455,3 +455,15 @@
   實體頁 78–79，另有參考卡五頁。
 - 新增章與狀態 ledger SHA-256 分別為 `6bf476db…4e14`、`5017bfc8…e884`；Python syntax、
   全部 JSON 與本地 Markdown 連結均通過。
+
+## 2026-08-31：中文玩家手冊實體頁 78–79 完成
+
+- 依 SPEC-003 READY 翻譯玩家手冊作者介紹與封底識別；第 78 頁掃描為左側空白、右側
+  Todd Mitchell Porter 介紹，不能把整個實體頁誤標為空白。
+- 保留 1981、1987、四兄弟、兩姊妹、Central College、Penguin Software、ORIGIN 與
+  《Ultima》等可核對內容；第 79 頁記錄地址及產品碼 `ORI-3123`，但不宣稱商標授權。
+- 封底文字層數字 `11` 經 120 DPI 掃描證實為商標圖形 OCR 誤辨，已留下校勘而未升格為內容。
+- 玩家手冊 79 個實體頁至此全部 reviewed；全 84 頁套件現為 reviewed 79、todo 5，剩下
+  參考卡五頁。十一個 Markdown 輸出通過來源 hash、數字、篇幅與英文殘留 gate。
+- 更新後末章與狀態 ledger SHA-256 分別為 `a1fd4cf1…504e`、`fa0ba16d…7278`；Python syntax、
+  全部 JSON 與本地 Markdown 連結均通過。
