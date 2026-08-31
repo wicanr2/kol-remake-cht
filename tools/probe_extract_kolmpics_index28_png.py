@@ -55,7 +55,7 @@ def main() -> None:
     item = contract["items"][IMAGE_INDEX]
     source = files[item["volume_name"]]
     first_stage = decode(source[item["offset"] : item["offset"] + item["compressed_bytes"]])
-    mask, trailing = unpack_mask(first_stage, width_bytes, height)
+    mask, composite_opaque, trailing = unpack_mask(first_stage, width_bytes, height)
     expected_pixels = width * height
     if len(mask) != expected_pixels:
         raise SystemExit(f"遮罩像素數不符：{len(mask)} != {expected_pixels}")
@@ -64,7 +64,6 @@ def main() -> None:
     bits_path = args.output_directory / "kolmpics-index-0028-mask-bits.png"
     alpha_path = args.output_directory / "kolmpics-index-0028-composite-alpha.png"
     bits_path.write_bytes(encode_rgba_png(bytes(15 if bit else 0 for bit in mask), bytes([1]) * len(mask), width, height))
-    composite_opaque = bytes(1 - bit for bit in mask)
     alpha_path.write_bytes(encode_rgba_png(bytes([15]) * len(mask), composite_opaque, width, height))
     result = {
         "schema": "kol-kolmpics-index28-visual-probe-v1",

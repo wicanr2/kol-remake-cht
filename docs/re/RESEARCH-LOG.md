@@ -758,3 +758,21 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   `25193b3d…58d`；兩輪 PNG 與摘要亦逐 byte 一致。安全摘要見
   `ida-fingerprints/KOLTOWN-kolpics-summary.json`，視覺摘要見
   `kolpics-ega-visual-probe.json`。SPEC-002 維持 DRAFT。
+
+## RE-026：KOLMPICS.0 全 83 筆
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`、IDA Pro 9.4、重建 unpacked MZ
+  linear EA。startup 以 `kolm%s.0` 預載 archive；`word_39820` 的直接 data refs 只進
+  `sub_1103F`／`sub_11262` 與既有圖號 28 的 `sub_14047`，排除其他直接 consumer。
+- router 證實 KOLMPICS 候選 request 集合為 0..28、31、36..70、74..82；29／30／
+  32..35／71..73／100 轉交 KOLPICS 或 MISCPICS。archive 的 12 個一-byte payload
+  `[1,29,30,32,33,34,35,70,71,72,73,82]` 分類為非圖片 placeholder。
+- 圖號 0／2 依 caller 矩形與二階 RLE 精確得到 320×200／296×32；圖號 28 維持
+  56×57 AND-mask、bit 1 透明。其餘 68 筆全部精確得到 480 pixels，並與兩個固定
+  24×20 helper 契約吻合；`sub_27E20` 繼承 caller 幾何，因此相關個別圖號仍標強推論。
+- 68 圖示接觸表呈現連續的手勢、武器、狀態符號、人物與方向箭頭，未見 RLE、plane-order、
+  旋轉或裁切錯誤。這份目視支持共同 24×20 分組，但不取代動態 caller 證據。
+- 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為 `79fceaaf…e5ba`／
+  `c39152e8…71d2`；兩輪 PNG／摘要亦逐 byte 相同。安全摘要見
+  `ida-fingerprints/KOLTOWN-kolmpics-routes-summary.json`，視覺摘要見
+  `kolmpics-all-ega-visual-probe.json`。SPEC-002 維持 DRAFT，未接 production importer。

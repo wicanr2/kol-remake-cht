@@ -49,8 +49,9 @@
   單一 LZW byte 不作像素，仍標為壓縮終止／padding 的強推論。
 - PERPICS 已關閉六組人物圖垂直鏈：前六個 payload 是 4-bit EGA 彩圖，後六個依
   `[i,i+6]` 配成 MSB-first 1-bit 遮罩；六組 IDA 矩形、像素數與透明接觸表全部吻合。
-- KOLMPICS 圖號 28 已關閉為 56×57 MSB-first EGA AND-mask；`sub_1BD17` 證實 bit 1
-  保留背景、bit 0 清除後覆寫。它不是獨立彩圖，其餘 82 個 payload 仍未知。
+- KOLMPICS 全 83 筆已分類：71 筆 active、12 筆一-byte placeholder。圖號 0 是
+  320×200、2 是 296×32；68 筆共同展開為 24×20 UI 圖示，其中非固定 caller 的個別幾何
+  保留強推論；28 是 56×57 AND-mask。68 圖示接觸表方向與序列均連貫。
 - WEAPPICS 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask：`sub_18F3A` 由裝備欄位、
   六值 selector 基表與 family 5 的 variant 2／3 交換規則產生偶數圖號；28 組尺寸、
   像素數與透明棋盤接觸表全部吻合。family／variant 只是導覽標籤，尚未推定遊戲內分類名稱。
@@ -102,6 +103,8 @@ HEADPICS.0／TORPICS.0／LEGSPICS.0 共 324 筆已關閉為 162 組角色分層 
 selector、三部件幾何／位置表與三份 6×9 棋盤接觸表皆已驗證。
 KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸表驗證；六筆 placeholder
 不輸出 PNG，raw-planar 的未證實幾何仍保留證據等級。
+KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
+分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
 顯示 theme 交付範圍仍等待使用者決定；不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。

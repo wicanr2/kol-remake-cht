@@ -97,8 +97,10 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   MSB-first 遮罩」；逐組尺寸表、像素數、透明邊界與方向均經接觸表抽查。
 - [x] `PERPICS.0` 的 12 個 payload 已證實是六組「前六筆 4-bit EGA 彩圖＋後六筆 1-bit
   MSB-first 遮罩」；`[i,i+6]` 配對、六組尺寸、像素數、方向與透明邊界均已抽查。
-- [x] `KOLMPICS.0` 圖號 28 已證實為 56×57、MSB-first EGA AND-mask；bit 1 保留背景、
-  bit 0 讓彩圖覆寫。它只能作合成 mask，禁止冒充獨立彩圖；其餘 82 筆仍未知。
+- [x] `KOLMPICS.0` 全 83 筆已分類為 71 筆 active 與 12 筆一-byte placeholder：0 是
+  320×200、2 是 296×32、28 是 56×57 AND-mask，其餘 68 筆都精確展開為 24×20。
+  固定 helper 的 24×20 幾何已證實；只有動態 caller 的個別索引映射仍為強推論，manifest
+  必須保留此等級，不得冒稱全數 caller-exact。
 - [x] `MISCPICS.0` 已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA
   彩圖；image 2 是全程未引用的一-byte placeholder，必須 `excluded_non_image`、無 PNG。
 - [x] `KOLPICS.0` 全 14 筆已分類：1／2／4／5／13 是已證實尺寸的 RLE 圖；0／8／12

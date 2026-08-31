@@ -1,0 +1,411 @@
+{
+  "schema": "kol-ida-koltown-kolmpics-routes-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "archive_load": {
+    "filename_format": "kolm%s.0",
+    "archive_buffer_original_name": "word_39820",
+    "whole_file_reader_call_ea": "0x1038e",
+    "status": "confirmed"
+  },
+  "router": {
+    "original_name": "sub_1103F",
+    "start_ea": "0x1103f",
+    "kolmpics_candidate_indices_within_archive": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      31,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82
+    ],
+    "requests_routed_elsewhere": [
+      29,
+      30,
+      32,
+      33,
+      34,
+      35,
+      71,
+      72,
+      73,
+      100
+    ],
+    "status": "confirmed"
+  },
+  "geometry_contracts": [
+    {
+      "request_or_index": 0,
+      "width_pixels": 320,
+      "height_pixels": 200,
+      "basis": "sub_1103F default rectangle",
+      "status": "confirmed"
+    },
+    {
+      "request_or_index": 2,
+      "width_pixels": 296,
+      "height_pixels": 32,
+      "basis": "sub_1103F request 2 rectangle",
+      "status": "confirmed"
+    },
+    {
+      "request_or_index": "runtime table value + 3",
+      "width_pixels": 24,
+      "height_pixels": 20,
+      "basis": "sub_11722 fixed rectangle",
+      "status": "confirmed"
+    },
+    {
+      "request_or_index": "arg_6 + 3",
+      "width_pixels": 24,
+      "height_pixels": 20,
+      "basis": "sub_23638 fixed rectangle",
+      "status": "confirmed"
+    },
+    {
+      "request_or_index": "sub_27E20 arg_0",
+      "width_pixels": null,
+      "height_pixels": null,
+      "basis": "geometry inherited from caller; 24x20 requires archive/visual evidence",
+      "status": "unknown in this IDA slice"
+    },
+    {
+      "request_or_index": 28,
+      "width_pixels": 56,
+      "height_pixels": 57,
+      "basis": "sub_14047 AND-mask rectangle",
+      "status": "confirmed"
+    }
+  ],
+  "router_call_eas": [
+    "0x1039a",
+    "0x106d5",
+    "0x10b25",
+    "0x11767",
+    "0x119af",
+    "0x144b5",
+    "0x152d3",
+    "0x16246",
+    "0x169b1",
+    "0x169cd",
+    "0x169dc",
+    "0x169e8",
+    "0x16bc8",
+    "0x18064",
+    "0x18126",
+    "0x1818e",
+    "0x181f4",
+    "0x1875b",
+    "0x1899e",
+    "0x18da4",
+    "0x18dba",
+    "0x18dc9",
+    "0x18dd5",
+    "0x19cfc",
+    "0x1c1ea",
+    "0x1e53c",
+    "0x211b1",
+    "0x23675",
+    "0x27e2c",
+    "0x2a3a8",
+    "0x2a835",
+    "0x2ab32",
+    "0x2b055",
+    "0x2b2d1",
+    "0x2b7c6"
+  ],
+  "dynamic_helper_call_eas": {
+    "0x11722": [
+      "0x10739",
+      "0x11a1b",
+      "0x11a74",
+      "0x11b52",
+      "0x11e17",
+      "0x11e71",
+      "0x12215",
+      "0x129b0",
+      "0x12dc5",
+      "0x1392f",
+      "0x13aa2",
+      "0x144e1",
+      "0x14519",
+      "0x14a20",
+      "0x1614f",
+      "0x167cb",
+      "0x16b5c",
+      "0x17258",
+      "0x175f3",
+      "0x17720",
+      "0x179c7",
+      "0x18088",
+      "0x18849",
+      "0x18965",
+      "0x18a13",
+      "0x1ccb8",
+      "0x1f4c0",
+      "0x1f5a3",
+      "0x1f70f",
+      "0x1f8e0",
+      "0x1f995",
+      "0x1fb6f",
+      "0x22d1a",
+      "0x242d9",
+      "0x24ac0",
+      "0x24b6e",
+      "0x28c4a",
+      "0x28df5",
+      "0x29584",
+      "0x29933",
+      "0x29a7b",
+      "0x29c0e",
+      "0x29c73",
+      "0x29c8f",
+      "0x2a407",
+      "0x2aade",
+      "0x2ab1d",
+      "0x2acf4",
+      "0x2ae49"
+    ],
+    "0x23638": [
+      "0x234b3",
+      "0x234de",
+      "0x23500",
+      "0x23517",
+      "0x2352e",
+      "0x23548",
+      "0x2355f",
+      "0x23583",
+      "0x235a1",
+      "0x235b8",
+      "0x235cf",
+      "0x235e9"
+    ],
+    "0x27e20": [
+      "0x2344c",
+      "0x2345b",
+      "0x284cd",
+      "0x284dc"
+    ]
+  },
+  "instruction_checks": [
+    {
+      "ea": "0x10359",
+      "bytes": "a150b9",
+      "disassembly": "mov     ax, word_39820"
+    },
+    {
+      "ea": "0x1038e",
+      "bytes": "9a0800d919",
+      "disassembly": "call    sub_19D98"
+    },
+    {
+      "ea": "0x11048",
+      "bytes": "837e0602",
+      "disassembly": "cmp     [bp+arg_0], 2"
+    },
+    {
+      "ea": "0x11051",
+      "bytes": "837e061d",
+      "disassembly": "cmp     [bp+arg_0], 1Dh"
+    },
+    {
+      "ea": "0x11072",
+      "bytes": "837e0602",
+      "disassembly": "cmp     [bp+arg_0], 2"
+    },
+    {
+      "ea": "0x1107b",
+      "bytes": "837e061e",
+      "disassembly": "cmp     [bp+arg_0], 1Eh"
+    },
+    {
+      "ea": "0x11084",
+      "bytes": "837e0623",
+      "disassembly": "cmp     [bp+arg_0], 23h"
+    },
+    {
+      "ea": "0x11153",
+      "bytes": "837e0664",
+      "disassembly": "cmp     [bp+arg_0], 64h"
+    },
+    {
+      "ea": "0x1115c",
+      "bytes": "837e061c",
+      "disassembly": "cmp     [bp+arg_0], 1Ch"
+    },
+    {
+      "ea": "0x11165",
+      "bytes": "837e0624",
+      "disassembly": "cmp     [bp+arg_0], 24h"
+    },
+    {
+      "ea": "0x1116e",
+      "bytes": "837e061f",
+      "disassembly": "cmp     [bp+arg_0], 1Fh"
+    },
+    {
+      "ea": "0x11177",
+      "bytes": "837e0646",
+      "disassembly": "cmp     [bp+arg_0], 46h"
+    },
+    {
+      "ea": "0x11180",
+      "bytes": "837e064a",
+      "disassembly": "cmp     [bp+arg_0], 4Ah"
+    },
+    {
+      "ea": "0x1124d",
+      "bytes": "ff3650b9",
+      "disassembly": "push    word_39820"
+    },
+    {
+      "ea": "0x11254",
+      "bytes": "9a62120010",
+      "disassembly": "call    sub_11262"
+    },
+    {
+      "ea": "0x11746",
+      "bytes": "050400",
+      "disassembly": "add     ax, 4"
+    },
+    {
+      "ea": "0x11753",
+      "bytes": "050700",
+      "disassembly": "add     ax, 7"
+    },
+    {
+      "ea": "0x11763",
+      "bytes": "050300",
+      "disassembly": "add     ax, 3"
+    },
+    {
+      "ea": "0x140bb",
+      "bytes": "c706366b0700",
+      "disassembly": "mov     word_34A06, 7"
+    },
+    {
+      "ea": "0x140c1",
+      "bytes": "c7063e6b3900",
+      "disassembly": "mov     word_34A0E, 39h"
+    },
+    {
+      "ea": "0x14158",
+      "bytes": "b81c00",
+      "disassembly": "mov     ax, 1Ch"
+    },
+    {
+      "ea": "0x1415c",
+      "bytes": "9a9906d919",
+      "disassembly": "call    sub_1A429"
+    },
+    {
+      "ea": "0x1417b",
+      "bytes": "9a871fd919",
+      "disassembly": "call    sub_1BD17"
+    },
+    {
+      "ea": "0x2365f",
+      "bytes": "050300",
+      "disassembly": "add     ax, 3"
+    },
+    {
+      "ea": "0x23668",
+      "bytes": "051400",
+      "disassembly": "add     ax, 14h"
+    },
+    {
+      "ea": "0x23671",
+      "bytes": "050300",
+      "disassembly": "add     ax, 3"
+    },
+    {
+      "ea": "0x27e29",
+      "bytes": "ff7606",
+      "disassembly": "push    [bp+arg_0]"
+    },
+    {
+      "ea": "0x27e2c",
+      "bytes": "9a3f100010",
+      "disassembly": "call    sub_1103F"
+    },
+    {
+      "ea": "0x27e34",
+      "bytes": "836e0647",
+      "disassembly": "sub     [bp+arg_0], 47h"
+    }
+  ],
+  "limits": [
+    "候選 route 不等於每個索引都有可達 caller；placeholder 與二階像素數由 archive probe 分類。",
+    "sub_27E20 的 24x20 幾何不能只由本 IDA 摘要宣稱。"
+  ]
+}

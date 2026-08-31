@@ -57,7 +57,7 @@
 
 - [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
 - [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS 全 archive、TWN index 24、MONPICS、PERPICS、
-  MISCPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、KOLMPICS index 28 EGA
+  MISCPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、KOLMPICS 全 83 筆 EGA
   垂直鏈、WEATPICS 全 18 筆六組分層合成、AWD1PICS 全 24 張勳章圖示、SHLDPICS
   全四組盾牌、HANDPICS 全 12 組手部 sprite、WEAPPICS 全 28 組角色武器、
   HEADPICS／TORPICS／LEGSPICS 各 54 組角色分層 sprite、AWD
@@ -108,4 +108,4 @@
 ## 下一個唯一工作
 
 等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定時，下一個切片追
-`CHARPICS` 或 KOLMPICS 未解圖號。SPEC-002 READY 前不接 Go／Ebitengine production runtime。
+`CHARPICS` 760-byte 可變角色圖片記錄。SPEC-002 READY 前不接 Go／Ebitengine production runtime。

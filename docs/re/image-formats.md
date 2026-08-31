@@ -227,7 +227,8 @@ scanline `[0,57)`，即 mode 0Dh 下 56×57。
 `destination = (destination AND mask) OR color`，故 mask bit 1 表示保留目的背景（透明），
 bit 0 表示先清除再寫入彩圖（不透明）。bit-map PNG 目視為右上切角與圓弧下緣，方向連續。
 
-以上 archive 載入、圖號、幾何、MSB-first 位序、AND-mask 語意與方向為 `已證實`；尾端
+以上是 RE-012 當時只追圖號 28 的窄結論；全包分類已由後文 RE-026 更新。archive 載入、
+圖號、幾何、MSB-first 位序、AND-mask 語意與方向為 `已證實`；尾端
 零 byte 成因維持 `強推論：壓縮流終止／padding artifact`。這只關閉 KOLMPICS 圖號 28，
 不得泛化到其他 82 個 payload，也不得把純 mask 冒充可獨立顯示的彩圖。
 
@@ -397,20 +398,6 @@ AND-mask 加一個非像素尾 byte。RGBA 依已證實的 `(destination AND mas
 錘與連枷等連續輪廓，未見旋轉、配對、plane-order 或裁切錯誤。完整統計在
 `weappics-ega-visual-probe.json`；這仍是 RE probe，不是 production importer。
 
-## 未關閉問題
-
-1. `PICS`／mode 0Dh 的 COMBPICS、KOLPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
-   垂直鏈已關閉；PCGA／HERC 與其他
-   archive 圖號尚未關閉。
-2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
-3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
-4. 使用者尚未決定 PCGA／HERC 是必要交付 theme、可選後續 theme，或不納入產品範圍。
-5. COMBPICS 全 archive 已關閉，且兩張有外部原版截圖交叉驗證；仍待本機 runtime
-   framebuffer 的無損抽樣。
-
-在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得
-接入 Go／Ebitengine。
-
 ### KOLPICS.0 混合 RLE／raw-planar archive
 
 KOLTOWN startup、`sub_1103F` 與 `sub_1E3A8` 證實 active indices 是
@@ -424,3 +411,35 @@ direct-blit 4-bit EGA 圖。
 強推論。第一次 256×80 排列已由目視交錯雜訊否定並保留勘誤。精確位址、bytes 與等級見
 `ida-fingerprints/KOLTOWN-kolpics-summary.json`；八張 ignored PNG 的統計見
 `kolpics-ega-visual-probe.json`。這是 RE probe，不是 production importer。
+
+### KOLMPICS.0 全包 UI 素材與 AND-mask
+
+startup 以 `kolm%s.0` 將 archive 預載到 `word_39820`；`sub_1103F` 的直接分支證實
+KOLMPICS 候選 request 是 0..28、31、36..70、74..82，其他相關 request 轉交 KOLPICS
+或 MISCPICS。archive 機械分類為 71 筆 active、12 筆一-byte placeholder：
+`[1,29,30,32,33,34,35,70,71,72,73,82]`。
+
+圖號 0／2 的矩形分別是 320×200／296×32；其二階 RLE 精確得到 64,000／9,472 pixels。
+圖號 28 是既有已證實的 56×57 AND-mask。其餘 68 筆均精確得到 480 pixels，與
+`sub_11722`／`sub_23638` 固定三個 byte-columns×20 scanlines 的 helper 及 68 圖示接觸表
+吻合，輸出為 24×20。因 `sub_27E20` 繼承 caller 幾何且索引來自角色資料，未逐筆固定 caller
+的圖號仍標為 `強推論`，不因全批視覺連貫就升格成 caller-exact。
+
+接觸表呈現手勢、武器、狀態符號、人物與方向箭頭等 UI 圖示，方向與序列連續；圖號 0／2
+亦無旋轉或裁切異常。安全證據見 `ida-fingerprints/KOLTOWN-kolmpics-routes-summary.json`，
+完整 PNG 統計見 `kolmpics-all-ega-visual-probe.json`。placeholder 不產生 PNG；圖號 28
+只輸出 mask-bits 與具正確 alpha 的 mask PNG，不冒充獨立彩圖。
+
+## 未關閉問題
+
+1. `PICS`／mode 0Dh 的 COMBPICS、KOLPICS、KOLMPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS 與 MISCPICS
+   垂直鏈已關閉；PCGA／HERC 與其他
+   archive 圖號尚未關閉。
+2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
+3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
+4. 使用者尚未決定 PCGA／HERC 是必要交付 theme、可選後續 theme，或不納入產品範圍。
+5. COMBPICS 全 archive 已關閉，且兩張有外部原版截圖交叉驗證；仍待本機 runtime
+   framebuffer 的無損抽樣。
+
+在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得
+接入 Go／Ebitengine。
