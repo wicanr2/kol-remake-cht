@@ -61,6 +61,22 @@ TWN7 為 46 張。所有卷內 offset 嚴格遞增、第一卷從 byte 200 起�
 最後 payload 精確抵達各實體檔尾。這使舊清冊漏算的 62 張 continuation payload 從 960
 訂正為 1,022；v2 清冊逐張記錄 volume、offset、長度與雜湊。
 
+### TWN 全包像素契約
+
+KOLTOWN `sub_11302` 的原始矩形與圖號奇偶分支、`sub_14047` 的圖號 0 合成路徑，以及
+243 筆 payload 的實際二階 RLE 長度共同證實：
+
+- TWN0 的 25 筆全部是 192×96、high-nibble-first 4-bit EGA 彩圖；
+- TWN1..7 圖號 0 是 56×57 彩圖，使用 `KOLMPICS.0` 圖號 28 的 MSB-first AND-mask，
+  PNG alpha 必須是 `1-mask`；
+- TWN1..7 圖號 1 都是單一 byte 的非圖片 placeholder，不得輸出 PNG；
+- TWN1..7 偶數圖號 2 起是 88×64，奇數圖號 3 起是 192×96。
+
+236 張 PNG 與八張接觸表經兩輪逐 byte 重生；TWN0、TWN1、TWN7 接觸表人工檢查未見
+方向、位平面、透明極性或裁切錯誤。上述格式與排除契約為 `已證實`；個別人物、建築、
+地點及劇情語意仍是 `未知`。可重生摘要為 `twn-archives-ega-visual-probe.json`，IDA
+安全摘要為 `ida-fingerprints/KOLTOWN-twn-archives-summary.json`。
+
 ## 壓縮流
 
 `sub_1A04E`（`0x1a04e..0x1a26a`）與 bit reader `sub_1A26B`

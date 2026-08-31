@@ -47,8 +47,10 @@
 - COMBPICS 全七筆已關閉：0..4 為 296×144 戰鬥場景，5..6 為 88×64 肖像，皆使用
   二階 RLE、4-bit 色彩與 BIOS mode 0Dh palette；圖號 0、1 另對上魔旅士文章同場景 JPEG。
   這只證實 COMBPICS archive，不代表全部圖片格式完成。
-- TWN 全域圖號 24 已關閉 continuation 垂直鏈：八城均從 `.1` 讀取；town 0 為 192×96，
-  其餘為 88×64。八張 ignored PNG 與接觸表通過像素數、4-bit bounds、方向及非空目視。
+- TWN0..7PICS 全 243 筆已關閉：TWN0 全 25 筆為 192×96；TWN1..7 圖號 0 為
+  56×57 彩圖加共享 AND-mask、圖號 1 為七筆一-byte placeholder、偶數圖號 2 起為
+  88×64、奇數圖號 3 起為 192×96。236 張 ignored PNG 與八張接觸表已兩輪重生；
+  TWN0、TWN1、TWN7 人工抽查通過，個別 NPC／地點語意仍未知。
 - MONPICS 已關閉 32 組怪物 sprite 垂直鏈：64 個 payload 依序配成 4-bit EGA 彩圖與
   MSB-first 1-bit 遮罩；IDA 尺寸表、逐張像素數與透明接觸表均吻合。遮罩有效資料後多出的
   單一 LZW byte 不作像素，仍標為壓縮終止／padding 的強推論。
@@ -111,6 +113,6 @@ KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸�
 KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 交付範圍仍等待使用者決定；固定角色記錄與 `CHARPICS.0` 全包已關閉像素格式。
-下一工作是盤點 TWN 除全域圖號 24 外的 consumer 與 SPEC-002 完整 extraction set 排除項。
-SPEC-002 READY 前不接 production runtime。
+顯示 theme 交付範圍仍等待使用者決定；TWN 與固定角色圖片已關閉像素格式。下一工作是
+建立 SPEC-002 的完整 EGA extraction set／排除清單，盤點尚未達已證實像素契約的 archive，
+並設計原子化 production 抽取器。SPEC-002 READY 前不接 production runtime。

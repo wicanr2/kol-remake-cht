@@ -1,0 +1,159 @@
+{
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed KOLTOWN MZ",
+  "schema": "kol-ida-koltown-twn-archives-summary-v1",
+  "geometry_contract": {
+    "status": "confirmed",
+    "general_consumer_original_function": "sub_11302",
+    "general_consumer_ea_range": "0x11302..0x11390",
+    "town_zero_rectangle": {
+      "condition": "word_2DF2C == 0",
+      "width_pixels": 192,
+      "height_pixels": 96
+    },
+    "nonzero_town_even_rectangle": {
+      "condition": "word_2DF2C != 0 and image_index is even",
+      "width_pixels": 88,
+      "height_pixels": 64
+    },
+    "nonzero_town_odd_rectangle": {
+      "condition": "word_2DF2C != 0 and image_index is odd",
+      "width_pixels": 192,
+      "height_pixels": 96
+    },
+    "town_nonzero_image_zero": {
+      "consumer_original_function": "sub_14047",
+      "consumer_ea_range": "0x14047..0x14189",
+      "image_index": 0,
+      "width_pixels": 56,
+      "height_pixels": 57,
+      "and_mask_archive": "KOLMPICS.0",
+      "and_mask_image_index": 28,
+      "composition": "(destination AND mask) OR color"
+    },
+    "archive_loader_original_function": "sub_15920",
+    "archive_loader_ea_range": "0x15920..0x15abf",
+    "filename_patterns": [
+      "twn%d%s.0",
+      "twn%d%s.1"
+    ],
+    "limitation": "fixed archive counts, image 1 placeholders and per-item decoded pixel counts require fixed-file evidence"
+  },
+  "functions": [
+    {
+      "original_name": "sub_11302",
+      "start_ea": "0x11302",
+      "end_ea": "0x11390",
+      "instruction_count": 46,
+      "caller_count": 5,
+      "callers": [
+        "0x119c1",
+        "0x152e2",
+        "0x298da",
+        "0x29bdf",
+        "0x2aab5"
+      ]
+    },
+    {
+      "original_name": "sub_14047",
+      "start_ea": "0x14047",
+      "end_ea": "0x14189",
+      "instruction_count": 110,
+      "caller_count": 1,
+      "callers": [
+        "0x10716"
+      ]
+    },
+    {
+      "original_name": "sub_15920",
+      "start_ea": "0x15920",
+      "end_ea": "0x15abf",
+      "instruction_count": 140,
+      "caller_count": 8,
+      "callers": [
+        "0x1067c",
+        "0x10d1b",
+        "0x16194",
+        "0x161ad",
+        "0x29025",
+        "0x2a95e",
+        "0x2b0dd",
+        "0x2b35a"
+      ]
+    }
+  ],
+  "call_sites": [
+    {
+      "call_ea": "0x119c1",
+      "caller_original_name": "sub_1198E",
+      "caller_start_ea": "0x1198e"
+    },
+    {
+      "call_ea": "0x152e2",
+      "caller_original_name": "sub_152C6",
+      "caller_start_ea": "0x152c6"
+    },
+    {
+      "call_ea": "0x298da",
+      "caller_original_name": "sub_297F2",
+      "caller_start_ea": "0x297f2"
+    },
+    {
+      "call_ea": "0x29bdf",
+      "caller_original_name": "sub_29BBB",
+      "caller_start_ea": "0x29bbb"
+    },
+    {
+      "call_ea": "0x2aab5",
+      "caller_original_name": "sub_2AAA8",
+      "caller_start_ea": "0x2aaa8"
+    },
+    {
+      "call_ea": "0x10716",
+      "caller_original_name": "sub_10000",
+      "caller_start_ea": "0x10000"
+    },
+    {
+      "call_ea": "0x1067c",
+      "caller_original_name": "sub_10000",
+      "caller_start_ea": "0x10000"
+    },
+    {
+      "call_ea": "0x10d1b",
+      "caller_original_name": "sub_10000",
+      "caller_start_ea": "0x10000"
+    },
+    {
+      "call_ea": "0x16194",
+      "caller_original_name": "sub_15ABF",
+      "caller_start_ea": "0x15abf"
+    },
+    {
+      "call_ea": "0x161ad",
+      "caller_original_name": "sub_15ABF",
+      "caller_start_ea": "0x15abf"
+    },
+    {
+      "call_ea": "0x29025",
+      "caller_original_name": "sub_29004",
+      "caller_start_ea": "0x29004"
+    },
+    {
+      "call_ea": "0x2a95e",
+      "caller_original_name": "sub_2A4E5",
+      "caller_start_ea": "0x2a4e5"
+    },
+    {
+      "call_ea": "0x2b0dd",
+      "caller_original_name": "sub_2AAA8",
+      "caller_start_ea": "0x2aaa8"
+    },
+    {
+      "call_ea": "0x2b35a",
+      "caller_original_name": "sub_2B0FF",
+      "caller_start_ea": "0x2b0ff"
+    }
+  ]
+}

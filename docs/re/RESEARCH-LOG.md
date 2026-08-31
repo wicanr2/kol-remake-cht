@@ -810,3 +810,27 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   `b4877736…ff30`／`18d44d22…f74b`；兩輪 80 張 PNG、接觸表與視覺摘要亦逐 byte 相同。
   視覺摘要／接觸表 SHA-256 為 `0bcb3709…7575`／`cd0a65db…a5a4`。
 - 新增可重生 IDA／PNG 探針與安全摘要；SPEC-002 仍為 DRAFT，未接 production importer。
+
+## RE-029：TWN0..7PICS 全 243 筆城鎮圖像
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4、重建
+  unpacked MZ linear EA。安全探針保留原函式名、EA、operand 與 caller；完整指令只存
+  本機 ignored private JSON。
+- `sub_11302:0x11302..0x11390` 證實一般城鎮圖矩形：目前城鎮 selector 為 0 或圖號為
+  奇數時使用 192×96；非零城鎮的偶數圖號使用 88×64。`sub_14047:0x14047..0x14189`
+  另證實非零城鎮圖號 0 是 56×57 彩圖，與 `KOLMPICS.0` 圖號 28 的 AND-mask 依
+  `(destination AND mask) OR color` 合成。`sub_15920` 證實 `twn%d%s` 檔名路由；`.1/.2`
+  延續卷仍沿用 RE-008 已證實的 `sub_1A4FE` 分卷契約。
+- 固定八包共 243 筆：TWN0 的 25 筆全部精確展開為 192×96；TWN1..7 的圖號 0 都是
+  56×57，圖號 1 都是單一 byte 的非圖片 placeholder，偶數圖號 2 起都是 88×64，奇數
+  圖號 3 起都是 192×96。故輸出 236 張 PNG，七筆 placeholder 明列排除。
+- 三份接觸表人工抽查涵蓋 TWN0、TWN1、TWN7：TWN0 為連續場景；後兩包呈交錯人像、
+  建築與場景，方向、色盤、透明輪廓及裁切一致。外觀只作視覺驗證，不據此命名 NPC、
+  地點或劇情用途。
+- 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `123cf073…ca52`／`76b2f51d…f360`。兩輪 236 張個別 PNG、八張接觸表與摘要亦逐 byte
+  相同；視覺摘要 SHA-256 為 `13a3b6d8…dce3`。安全摘要見
+  `ida-fingerprints/KOLTOWN-twn-archives-summary.json`，視覺摘要見
+  `twn-archives-ega-visual-probe.json`。
+- TWN 的 EGA payload、幾何、遮罩與排除項已關閉；SPEC-002 仍為 DRAFT，因首版顯示
+  theme 範圍尚待使用者決定，且尚未建立正式、原子化的全包抽取器。

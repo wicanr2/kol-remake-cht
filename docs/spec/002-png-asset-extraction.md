@@ -11,7 +11,8 @@
   `docs/re/title-backpics-ega-visual-probe.json`、`docs/re/koltown-endpics-ega-visual-probe.json`、
   `docs/re/kolbook-bookpics-ega-visual-probe.json`、
   `docs/re/fixed-charpics-ega-visual-probe.json`、
-  `docs/re/charpics-archive-ega-visual-probe.json`
+  `docs/re/charpics-archive-ega-visual-probe.json`、
+  `docs/re/twn-archives-ega-visual-probe.json`
 
 ## 目的
 
@@ -93,8 +94,9 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   軀幹與腿部的偶數彩圖／奇數 AND-mask；共享 `9*renderer_class+variant` selector、
   162 組尺寸／位置、324 筆像素與三份 6×9 棋盤接觸表均已驗證。實際合法 variant
   資料域仍須角色／物品 writer 證據，不由 archive table 大小反推。
-- [x] `TWN0..7PICS` 全域圖號 24 均跨入 `.1`，已證實 town 0 為 192×96、其餘為
-  88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
+- [x] `TWN0..7PICS` 全 243 筆已分類：TWN0 全 25 筆為 192×96；TWN1..7 圖號 0 為
+  56×57 彩圖加共享 AND-mask、圖號 1 為七筆一-byte placeholder、偶數圖號 2 起為
+  88×64、奇數圖號 3 起為 192×96。236 張 PNG 與八張接觸表通過兩輪重生與目視。
 - [x] `MONPICS.0` 的 64 個 payload 已證實是 32 組「偶數 4-bit EGA 彩圖＋奇數 1-bit
   MSB-first 遮罩」；逐組尺寸表、像素數、透明邊界與方向均經接觸表抽查。
 - [x] `PERPICS.0` 的 12 個 payload 已證實是六組「前六筆 4-bit EGA 彩圖＋後六筆 1-bit
@@ -117,7 +119,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   `0x00` 不進下游 consumer。80 張 PNG／接觸表方向一致；逐張語意仍只記圖號。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
-- [ ] 其他 archive／PCGA／HERC 的尺寸、位平面、palette 與透明規則尚未證實。
+- [ ] EGA 預定 extraction set 仍須列出全部 archive 與排除項；PCGA／HERC 的尺寸、
+  位平面、palette 與轉換規則尚未證實。
 
 ## READY gate
 
@@ -167,5 +170,7 @@ AND-mask bit 當 alpha，與已證實的 `sub_1BD17` 極性契約衝突；已改
 雜訊或未使用槽不會因此成為可公開素材，也不得由工具自動賦予角色語意。
 `tools/probe_extract_charpics_archive_png.py` 只關閉 `CHARPICS.0` 的 80 張角色模板；完整
 角色外觀不等於已證實職業、裝備或姿勢名稱，production manifest 在另有資料證據前只用圖號。
+`tools/probe_extract_twn_archives_png.py` 只關閉八個 TWN archive；它依 IDA 幾何契約排除
+七筆圖號 1 placeholder，且不得把接觸表上的人物、建築或場景外觀轉成未證實語意名稱。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。
