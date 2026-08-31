@@ -1,0 +1,109 @@
+{
+  "ida_version": "9.4",
+  "input_name": "KOLBOOK.EXE",
+  "input_sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+  "address_space": "IDA linear effective address for loaded KOLBOOK MZ",
+  "root_original_functions": [
+    "sub_13D7D"
+  ],
+  "max_call_depth": 4,
+  "schema": "kol-ida-kolbook-charpics-archive-summary-v1",
+  "archive_consumer_contract": {
+    "status": "confirmed",
+    "indexed_archive_name": "CHARPICS.0",
+    "index_entry_offset_formula": "20 + 2 * image_index",
+    "index_entry_formula_instruction_range": "0x13d8f..0x13d97",
+    "payload_decoder_original_function": "sub_139A8",
+    "payload_decoder_call_ea": "0x13e19",
+    "source_segment": "word_19B52",
+    "destination_segment": "word_20C2A + 0x400 paragraphs",
+    "destination_offset": 0,
+    "subsequent_display_original_function": "sub_15335",
+    "subsequent_display_call_ea": "0x11f57",
+    "limitation": "archive count, 40x38 geometry and trailing-byte exclusion require fixed-file and downstream-consumer evidence"
+  },
+  "call_site": [
+    {
+      "ea": "0x11e43",
+      "disassembly": "mov     ax, word_20C2A"
+    },
+    {
+      "ea": "0x11e46",
+      "disassembly": "add     ax, 400h"
+    },
+    {
+      "ea": "0x11e49",
+      "disassembly": "mov     word_1A472, ax"
+    },
+    {
+      "ea": "0x11f2f",
+      "disassembly": "push    word_1A472"
+    },
+    {
+      "ea": "0x11f33",
+      "disassembly": "push    word_1A470"
+    },
+    {
+      "ea": "0x11f37",
+      "disassembly": "push    word_19B52"
+    },
+    {
+      "ea": "0x11f3b",
+      "disassembly": "push    word_19B52"
+    },
+    {
+      "ea": "0x11f3f",
+      "disassembly": "push    [bp+var_E]"
+    },
+    {
+      "ea": "0x11f42",
+      "disassembly": "call    sub_13D7D"
+    },
+    {
+      "ea": "0x11f50",
+      "disassembly": "mov     ax, word_20C2A"
+    },
+    {
+      "ea": "0x11f53",
+      "disassembly": "add     ax, 400h"
+    },
+    {
+      "ea": "0x11f57",
+      "disassembly": "call    sub_15335"
+    }
+  ],
+  "functions": [
+    {
+      "original_name": "sub_139A8",
+      "start_ea": "0x139a8",
+      "end_ea": "0x13bbf",
+      "discovery_depth": 1,
+      "instruction_count": 182,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_13BBF",
+      "start_ea": "0x13bbf",
+      "end_ea": "0x13c0f",
+      "discovery_depth": 2,
+      "instruction_count": 37,
+      "caller_count": 3
+    },
+    {
+      "original_name": "sub_13D7D",
+      "start_ea": "0x13d7d",
+      "end_ea": "0x13e25",
+      "discovery_depth": 0,
+      "instruction_count": 64,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_13E25",
+      "start_ea": "0x13e25",
+      "end_ea": "0x13e3f",
+      "discovery_depth": 1,
+      "instruction_count": 14,
+      "caller_count": 8
+    }
+  ]
+}

@@ -1,0 +1,822 @@
+{
+  "schema": "kol-charpics-archive-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "archive_ida_summary_name": "KOLBOOK-charpics-archive-summary.json",
+  "archive_ida_summary_sha256": "b48777363e99cc683696056cfbbde96f33600d8a8ac3650a44738e07256eff30",
+  "record_ida_summary_name": "KOLBOOK-charpic-record-summary.json",
+  "record_ida_summary_sha256": "db71511ef0b904c0aebefc926035d4bf925511d6d66fcb809a402f6afc22b316",
+  "status": "mechanically validated all 80 images; orientation and semantic groups require human inspection",
+  "source_archive": "CHARPICS.0",
+  "image_count": 80,
+  "width_pixels": 40,
+  "height_pixels": 38,
+  "packing": "high nibble first, then low nibble",
+  "decoded_bytes_per_item": 761,
+  "pixel_bytes_per_item": 760,
+  "trailing_byte_disposition": "excluded_non_pixel; downstream 40x38 consumer reads exactly 760 bytes",
+  "png_count": 80,
+  "contact_sheet_sha256": "cd0a65dbc3b37cab16eb8cb14ce1cac4dd56d87cd7a98cd3148c4253f0dba5a4",
+  "records": [
+    {
+      "image_index": 0,
+      "compressed_bytes": 302,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "0023a309249f09fbb3049b1f9cc4686931775291ed7d68bf69ff31e51385dce6",
+      "png_sha256": "8fa0908779e1553b6891c9bb2716a7de9def234e4f3e4053ef78cd0db379fbd5",
+      "color_count": 10
+    },
+    {
+      "image_index": 1,
+      "compressed_bytes": 324,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "c14ed76c90b2cb020a30c952931ef451e1934883438d512d06baadea00f39c68",
+      "png_sha256": "ba15f984364f9fd549469d6e928c4176093b3855d6878424325c43eb96892277",
+      "color_count": 10
+    },
+    {
+      "image_index": 2,
+      "compressed_bytes": 405,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "0bc74f4f7907cec49728093553274cf303a389344361612487c8bcd98b407640",
+      "png_sha256": "3cbdc4abd644b8e134db82a414c0463727f2452261fc1cd61d0d90dab937251f",
+      "color_count": 11
+    },
+    {
+      "image_index": 3,
+      "compressed_bytes": 380,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "2a072eb813ed0acf33fc57052daf0c9f3c20604618ed8b95e1b2a19577b9da11",
+      "png_sha256": "f8b35f1a24883d96f4ba688d50111acad5f257759b80aab8fce7e0c4f4967107",
+      "color_count": 9
+    },
+    {
+      "image_index": 4,
+      "compressed_bytes": 512,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "3a6f521ead54cbbe7d6a5ecbe807bc17eb6e785179c38b9218c769dbd0b70c8a",
+      "png_sha256": "9f0f5fb09af3ee2627978d1168366dc221de5168588726170f439ef2612bddc7",
+      "color_count": 15
+    },
+    {
+      "image_index": 5,
+      "compressed_bytes": 360,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "bdaa598f9f3de4111258cfb2997636fc79c025f987df68f8187e95aec98280f0",
+      "png_sha256": "17741a6ca6d94a67cd0ddedcd907571e1c04f1e8b172b754eb2fc1c8089773f1",
+      "color_count": 12
+    },
+    {
+      "image_index": 6,
+      "compressed_bytes": 412,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "a5297e3ac858c5ef2fa565b017d4cbe2f28968e46800f02bec79b9dbb972c6ad",
+      "png_sha256": "34e1b55ed707b6c3122807362970fb707ba3bcd6ff7e3bc9846f43452ed65bfc",
+      "color_count": 13
+    },
+    {
+      "image_index": 7,
+      "compressed_bytes": 334,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "02ae4eedafadf3c84bbc9fb249f222ca8aa0d03aedcb7a858decb9a85bee42b4",
+      "png_sha256": "450df95d4c00a13265788a5e45102b4356a67c629725f21d0dcb038c3ad0e61c",
+      "color_count": 9
+    },
+    {
+      "image_index": 8,
+      "compressed_bytes": 385,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "c433f1dc759cb6c2b3852a864a589b1df5357df3e323f84071781ada4d55cf06",
+      "png_sha256": "5d51569e6f8befba0421948d47ae9ee3f1d38293c29bec7456a99132655e80e0",
+      "color_count": 11
+    },
+    {
+      "image_index": 9,
+      "compressed_bytes": 321,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "cef5f201197add1b134293475debe93e7bade00f9d28cd61c3bb621de6fba335",
+      "png_sha256": "8d0f9ea25b13a21af3f804d68313477dbe2628801bdef58704687544c096d903",
+      "color_count": 12
+    },
+    {
+      "image_index": 10,
+      "compressed_bytes": 366,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "2438e91fbe97e9ec4d13681a9932c6b0dadd3c6f54c4242800a4e36463128764",
+      "png_sha256": "ac1ba61f33c834770cfba535806fac982ce73b31272c87e5452db3002e240a3a",
+      "color_count": 12
+    },
+    {
+      "image_index": 11,
+      "compressed_bytes": 350,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "e8f3d61040388b4f38922c864cfe383796e5ca504e2eac5d6413ffcda7eae3ba",
+      "png_sha256": "ee12950ecc9168fec8e49d7f5b6a0af037557e392293f3ffe4688ca3b83d4135",
+      "color_count": 11
+    },
+    {
+      "image_index": 12,
+      "compressed_bytes": 311,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "b99200b81f96bf337f2210e0a56a59023859b78c45dea0f7770e5ca063dccad0",
+      "png_sha256": "3cb36a11bfab079c97ced13dbf29c293b601c58ffc0b1aec8f36f002c9b7f3ef",
+      "color_count": 10
+    },
+    {
+      "image_index": 13,
+      "compressed_bytes": 315,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "40c61760d7e3f4dd1e7805ff4300fdd9df545f07ed4684886e1716129948b81f",
+      "png_sha256": "a958d7e09f862d98287c39b23698b1b93ecc256f66ff119c604b2784eb4b0ea8",
+      "color_count": 11
+    },
+    {
+      "image_index": 14,
+      "compressed_bytes": 341,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "3b74e1a629fbb843f89c638d3ba313a139033fd78765199f193142e024d4981c",
+      "png_sha256": "448f472277d8c29bcf7442a1b24f391cc51de749b1c1f0639b6d20c90eeb42c9",
+      "color_count": 13
+    },
+    {
+      "image_index": 15,
+      "compressed_bytes": 340,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "dc8407216a4a1167b650d3130695ab220961ad5b1721d65cb13591b74ec3c18a",
+      "png_sha256": "d813ac350c3f73d84669c0a0f2c4879c0cb86058c1912108943829a6bbfa1542",
+      "color_count": 9
+    },
+    {
+      "image_index": 16,
+      "compressed_bytes": 390,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "78ec94efbfac6158280aab5c603477e17d90018ef35d498b4c2c93e685a865bc",
+      "png_sha256": "6abb9141a068173cf9202c5b03903337cb994f76ef6a49814cf429778ed9c83f",
+      "color_count": 12
+    },
+    {
+      "image_index": 17,
+      "compressed_bytes": 294,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "dd3eb89ed97a6ca9f6a1d5694c0fb47c24891216ef3fd7fd1148522558a39662",
+      "png_sha256": "0884a568c98868f2eb8c24c6e75afc591edacdcd617588b99c35b86a6eab3d2f",
+      "color_count": 10
+    },
+    {
+      "image_index": 18,
+      "compressed_bytes": 362,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "c941efff7c18516db44f22b08e743840a4946a4e3b59ad68bf76ace3c2ec4624",
+      "png_sha256": "577f49851eac5f41101a9fecc02265f6773e8cc3f3a54eb3cb7aaf90129939a9",
+      "color_count": 10
+    },
+    {
+      "image_index": 19,
+      "compressed_bytes": 334,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "651b7de64e1ab52320db248c4d92637c60a2a21a9e3e86c9698d1a1ea19630ad",
+      "png_sha256": "b89070391844509534cfc81c5b82e483509402a62e3b6b8218fa0a23172e1ccd",
+      "color_count": 12
+    },
+    {
+      "image_index": 20,
+      "compressed_bytes": 435,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "bbececbf241c14ebdc5b39325b40f4f84cdb35318f9138ec4403be13b1643788",
+      "png_sha256": "8f84626af2ce7763c2e9f3eed2dac38a33c809108ed51947f6d45ed6567817f8",
+      "color_count": 13
+    },
+    {
+      "image_index": 21,
+      "compressed_bytes": 326,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "dd8e5df3bd43ffcf1f560117716e7f68aa00c5ae27328e6bba03bcccf128b10f",
+      "png_sha256": "a0ad533be2e5bed04ae1213ea386252f775244f5c16727390b58da44955e3ac6",
+      "color_count": 12
+    },
+    {
+      "image_index": 22,
+      "compressed_bytes": 394,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "500f07b2da67aad28920543f03d187c38ea254e5dd0089343470824911d8c6bf",
+      "png_sha256": "6d17994be684f28e88c0e0b01ad46e666044f1e5d13d7d858d1ea66d00e4654d",
+      "color_count": 11
+    },
+    {
+      "image_index": 23,
+      "compressed_bytes": 342,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "05bb7853d62b5c99989eebcefe5b48d9c2363e0aa902fb2f537c48aacd61d291",
+      "png_sha256": "40801ca99a82000f1afc06f713f8b0d2070ba3059756587bd632fd8f39e5bbd2",
+      "color_count": 12
+    },
+    {
+      "image_index": 24,
+      "compressed_bytes": 319,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "eb9eb1cb049747be415da2399c732ac038a8c42a10b9369bb715fed7b11c9db4",
+      "png_sha256": "7fae082d8f1ad18c657cc4c618ab96cb2b6a4032ee19756475acf7ba713ea4a1",
+      "color_count": 11
+    },
+    {
+      "image_index": 25,
+      "compressed_bytes": 331,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "dea2c902d3b071e996d1c86c823e9b6eeb1d89168ffd4c1f468b49a9a1fd2d99",
+      "png_sha256": "8a003b9b81d87907c214911f7d9296576b49f47251da700dbf435c9eae7be2db",
+      "color_count": 9
+    },
+    {
+      "image_index": 26,
+      "compressed_bytes": 351,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "6b70e4919b9079b23fa69ca0fd4066ba3f071c2e0d05e71fe0e5d6f3b6fe1d04",
+      "png_sha256": "57e16a5c9b51e229712bfa568e297b24a9ecda361b3c8854988a471aabbb8cdf",
+      "color_count": 15
+    },
+    {
+      "image_index": 27,
+      "compressed_bytes": 311,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "ea5d069acee93884d34c7d5288000af4d49ef4a2aeb8ed10cc7e90bbd4feb790",
+      "png_sha256": "3eaf7a51cdd58c13347b9fc69e0da49d42bbae524c0766cd268dce84ad3d57df",
+      "color_count": 12
+    },
+    {
+      "image_index": 28,
+      "compressed_bytes": 337,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "152f1cfa946b7b23c48f461d93fec2ebfa5496d350077094759f22da4130f765",
+      "png_sha256": "5b2907fb3f552260e8a68809dea01b0c2fcc0522d25fabce0642c23b2c7c7b98",
+      "color_count": 12
+    },
+    {
+      "image_index": 29,
+      "compressed_bytes": 395,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "0389937e280cbf5a1af74b75ccf26cd3b010a488e536e07801ef27d01d3a5ca5",
+      "png_sha256": "91eca380bb53c2de8fa2828a1972330d5ea1f48962a0195272d00f0a51b31e6b",
+      "color_count": 11
+    },
+    {
+      "image_index": 30,
+      "compressed_bytes": 311,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "a3f12e72a4e446f62578571dcab43613890011ad9393f3ba267681f95ba3fba6",
+      "png_sha256": "cb72285f21661e01beecaf3b429edbfe6b837b295586c58e3cf93cdcdb0d29cf",
+      "color_count": 14
+    },
+    {
+      "image_index": 31,
+      "compressed_bytes": 304,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "c8c22385c67baf581f8a595f014cb5791648f9e157d3fe26942585b653a0726f",
+      "png_sha256": "7d0e7be756351420c9de4268b99cdddd9e587846d3b5434257c918181d5a362f",
+      "color_count": 11
+    },
+    {
+      "image_index": 32,
+      "compressed_bytes": 374,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "9943319752061e131ab4ef95999de15844cd42ed8063453242188efcdbfb5c91",
+      "png_sha256": "6c28dc024588aa5bf1f1a2a3965d019f652912cd27e8692beb91c9838b802124",
+      "color_count": 12
+    },
+    {
+      "image_index": 33,
+      "compressed_bytes": 424,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "ec508e179831c6f7fcf930476e238b3694d354671f62aac262068a291dee27e6",
+      "png_sha256": "efb61aeb9659eca2aed8446f9038aa2ddfc3ea7c8611873ff24c123386baf067",
+      "color_count": 13
+    },
+    {
+      "image_index": 34,
+      "compressed_bytes": 381,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "22da8a769338d26ad03e00e50f9ba3fba2cbba28f3aa56948a3f8fe16c2a458f",
+      "png_sha256": "91a2f73aa3269f26723f0f3034fa4ba077efed59286ae0dcd3710bdeb7c3b44a",
+      "color_count": 11
+    },
+    {
+      "image_index": 35,
+      "compressed_bytes": 300,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "8a04c0185cb08e9c1ba6fd3b23d5753f81214873e3a8f1a5fc3128852022b3b8",
+      "png_sha256": "954e586d5c1d44ee94e3f9eec3245f822361f97f4fd843e46789b51ab25312f9",
+      "color_count": 11
+    },
+    {
+      "image_index": 36,
+      "compressed_bytes": 304,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "720c82feef4e477bd912b70b1538eefc58b08d6969322f3bc17841e3144baa9a",
+      "png_sha256": "d4fc3a2b452b3793c8a8e724463e48daa4309706783df913614a83dd375d6fdc",
+      "color_count": 12
+    },
+    {
+      "image_index": 37,
+      "compressed_bytes": 356,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "6c274dae177d50ab4d88951e09c6d66cc6cf68bb8eecce72bbd536cd124e242e",
+      "png_sha256": "5322ef47b8b233a98446f96d0ea51641bafce017a55ee32e2779cff5c599aa21",
+      "color_count": 10
+    },
+    {
+      "image_index": 38,
+      "compressed_bytes": 309,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "af66a88578d0841b4c059e01d39f96be9abd6a03a1412ffa2333fa49bee7dc77",
+      "png_sha256": "b8beeea9464e49055ae88ab8fa2dda7efd478e2ebf68a393a3aead0cfedc2b86",
+      "color_count": 11
+    },
+    {
+      "image_index": 39,
+      "compressed_bytes": 286,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "0b80f368a9e57d187557234baef48df72ac3b1178ae4df10aa67e9f41dd9c2d4",
+      "png_sha256": "c87acaf6b623d0209a223c5d62338e9a26f0615493247f4ea15fc593ae19ef3b",
+      "color_count": 9
+    },
+    {
+      "image_index": 40,
+      "compressed_bytes": 341,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "45a64c3fb6ad9b92c728baf4813cccf402368a0a9968b7461ca473b176171d4f",
+      "png_sha256": "b02ba38e6f8e3ff793722f94d4a7b5405bd872ec76bfe863a7a27f2279372762",
+      "color_count": 13
+    },
+    {
+      "image_index": 41,
+      "compressed_bytes": 302,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "104e3ca5c2e278c8f877d3803de8c6d2595914a7c53b9ee9dce6ff7ae76d8138",
+      "png_sha256": "1c1c987e7294dbc2d8fc3bd2af06ed8d5e9f502f319452ee66e2748abb927446",
+      "color_count": 12
+    },
+    {
+      "image_index": 42,
+      "compressed_bytes": 314,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "3da784891d6b85f4ca69daa3349353854552fd7a997d59727e27e57ae325e55b",
+      "png_sha256": "897ea0db90fe9444c3eccdece67f4c367ff56e02ad17b3de133edadf9ba63c74",
+      "color_count": 10
+    },
+    {
+      "image_index": 43,
+      "compressed_bytes": 446,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "bdbdab688defb685472c35cca3de2d54af847ca9df4269aa1c66b293635b59f7",
+      "png_sha256": "4960b783240c6ca27fee7c41537aa4d9e02f6594b1ffcde7fcc5eacfbf7f55af",
+      "color_count": 12
+    },
+    {
+      "image_index": 44,
+      "compressed_bytes": 459,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "44e5f3967603e309fc823ba85dc7065e739030ec463ccb9c26e4da675ed35766",
+      "png_sha256": "d83f1d9c3fffd75bbd2380724aad94f46d9f11e3b6655faadf4249b37f60cd79",
+      "color_count": 12
+    },
+    {
+      "image_index": 45,
+      "compressed_bytes": 462,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "0aaf56bcb081c2460776f0ed3a67bd1e2ef1d4c6c30424307f334af815574209",
+      "png_sha256": "9ba5a08d600f9232a1095cd575605854bc08fb336e27a226b261de2ac03ace1e",
+      "color_count": 12
+    },
+    {
+      "image_index": 46,
+      "compressed_bytes": 475,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "9ed361afa1d25a45d3350e2267d712f1a5f3c5578d57fe554495c55640186481",
+      "png_sha256": "3c7fa9b767f6e2a19edc61b901f44b0f03c2b660e1d908a0616d286bb3521f8e",
+      "color_count": 12
+    },
+    {
+      "image_index": 47,
+      "compressed_bytes": 510,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "c733be97e34c9e6e177fdd952ca605c2f1ad2b1c963527e1dfe034e7b81cfb24",
+      "png_sha256": "71c5d42311d7c4ffa6ebf5c3dcca2ab1ef4b70c8421108b838788d026a5105b9",
+      "color_count": 12
+    },
+    {
+      "image_index": 48,
+      "compressed_bytes": 487,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "47218ec912ae846f4998ebf41462d834900dc47bf2336b4bae7a459acb259f77",
+      "png_sha256": "ab73661064a0917dd4cca5367012ef485a05adbe581571427f7285c3181dc3c2",
+      "color_count": 11
+    },
+    {
+      "image_index": 49,
+      "compressed_bytes": 462,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "01d2c885773f0053ea7f04e76286d427b359bc8e9305fb91d4a357d663c2917c",
+      "png_sha256": "2d12f14ed337524601f7e01ea19363b841feb0fbef00b809e4dc51db9ed3d282",
+      "color_count": 9
+    },
+    {
+      "image_index": 50,
+      "compressed_bytes": 321,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "7bae0131f646c32620aaaebb2704d7af893c5ff6cd3b94d28e83ac0668ce9a54",
+      "png_sha256": "f90b0be2596b9cd180ca07c3a4eac517c50a840ed13202fefa1b97ae99235f9b",
+      "color_count": 12
+    },
+    {
+      "image_index": 51,
+      "compressed_bytes": 349,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "9c2c7ba1f8c221624fc80d5a06f7e9e375a1847a0a8b72d36eeac51a1b00518f",
+      "png_sha256": "da1ed073d85fd6c7a027e3ed52d5cc5ca5a315d39147296735db0e11b9d833f8",
+      "color_count": 11
+    },
+    {
+      "image_index": 52,
+      "compressed_bytes": 335,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "25d5fdbad23670106e88f93babf7858984e0965fab8a423376693258d83d64e0",
+      "png_sha256": "ac393ccd8d0e0b97c600aedcae996cb6a4f86aacf586f462715e2a648a6a531d",
+      "color_count": 13
+    },
+    {
+      "image_index": 53,
+      "compressed_bytes": 332,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "42867d6ae630cea85b4ddd7f59cb816c63488052d40300406b6d66d06d4f350c",
+      "png_sha256": "e2251243520d9e1f0dea812733e0722a5c33f320eba62d89695f68ca0d90a9a9",
+      "color_count": 11
+    },
+    {
+      "image_index": 54,
+      "compressed_bytes": 367,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "e97e5722dc803986ec5f41e91e3a4f698fa613d4fbda66348cc4906ce9ad26cb",
+      "png_sha256": "92bd273aa3a59227c27af13c9b7b9ca64c19492ecb2aff72d3c394e176c408b6",
+      "color_count": 11
+    },
+    {
+      "image_index": 55,
+      "compressed_bytes": 397,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "6cfd3fe15b2d6a06edf1b071122c661872159a9577722229e48c0e9b85b87794",
+      "png_sha256": "fe5cb6b1852876d0f61eb096ec1b103021e64c75eeaff735bbb701e10ad13d39",
+      "color_count": 11
+    },
+    {
+      "image_index": 56,
+      "compressed_bytes": 341,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "421250f065d296a383deb7255286ec62a5c6ac31cccc157d8886b9cb65cbc217",
+      "png_sha256": "6b2c04b485fba6352bdad7626c6c5efb9d362e3e58e4b4a0517b6893fcd843c3",
+      "color_count": 12
+    },
+    {
+      "image_index": 57,
+      "compressed_bytes": 310,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "474d95d7bdbb736a136cb493c8f09ae2ee086fc5284e9879573829a26c4bfca6",
+      "png_sha256": "6ac28ccc7661126b85b63433b2b9e416028c0c026abbe2c4da3481bae140e5b1",
+      "color_count": 13
+    },
+    {
+      "image_index": 58,
+      "compressed_bytes": 304,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "d25931dbd97fd4b8fdb13f80c856fdb2fffa692c26172e49e79b7dbe69d686a0",
+      "png_sha256": "838865a079c405b1f202e3990d8560505abf410858d8979746944e8c70b18599",
+      "color_count": 12
+    },
+    {
+      "image_index": 59,
+      "compressed_bytes": 429,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "cd71884b069224964b3ac2481923c29c7cb07d15f0293e51bc1db9ea3aacbbd8",
+      "png_sha256": "ca2abcf801c974091cd2a45e32e0fb58e9b1097a4e5c423a4521491c79aa84f8",
+      "color_count": 11
+    },
+    {
+      "image_index": 60,
+      "compressed_bytes": 399,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "8fd13b08f4649b639d7beb29663e0d224af6ce2f114563fbd3fb52e1c18c3a72",
+      "png_sha256": "c64571ea1df1748730bf3ccf95fbd0f718cd9110bdd3ed93f51af184a49aa9c3",
+      "color_count": 10
+    },
+    {
+      "image_index": 61,
+      "compressed_bytes": 326,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "84ed2b60b5a85cccdfd356c1247923d49caebb84df25af35a03378f66885d024",
+      "png_sha256": "68408d22681bba654013566f4cd9c24fb64d89aff5b5cd3372e601215a40b48f",
+      "color_count": 9
+    },
+    {
+      "image_index": 62,
+      "compressed_bytes": 347,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "288f8415540a32a05e741fb7a0c0ccfc4fee137ea727443458e8577e2013655e",
+      "png_sha256": "6c23f9a96c55732af5dfc57e26a50b9b0e1c135bb7b1e5795233840303d52be0",
+      "color_count": 11
+    },
+    {
+      "image_index": 63,
+      "compressed_bytes": 366,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "310b77cb25638e247168833e9ed20bbca0c8be7fb97bcbcc402f541704e4f4a7",
+      "png_sha256": "cabe12f5839c72bd4b0c0962270582b8ce1a282b7dcaf2da556856782e23d503",
+      "color_count": 15
+    },
+    {
+      "image_index": 64,
+      "compressed_bytes": 352,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "a2d1980c1b0535ef07a755fa3824bfc608ba115e59a4115ef7cd8b6c19f3a3d7",
+      "png_sha256": "eab780ecfaae123045ec99001184b7f0663a3d0003e64c11bce8ba95d72f5e9f",
+      "color_count": 12
+    },
+    {
+      "image_index": 65,
+      "compressed_bytes": 356,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "9bb9b3a606ba10a9e5c9ac7113da97e07734fba0b73c1ed1dded841e0c6467c7",
+      "png_sha256": "293dc6c3c04fd4689eaad8ed834d68c6cb03307a87192dfdc096e4cafa9a985f",
+      "color_count": 10
+    },
+    {
+      "image_index": 66,
+      "compressed_bytes": 347,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "5090f04f7bbacb3ea0685afa4b7e3fd257397cd91ea007c4849f93c86c983862",
+      "png_sha256": "1c3360a157a396c112c526b39c4d07cddade5ba823b25f911f5ea8829f8c2b50",
+      "color_count": 13
+    },
+    {
+      "image_index": 67,
+      "compressed_bytes": 387,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "6f564fc3ce459b171dbae143ced0b8451492c7995b14ef06dc808ec74120f584",
+      "png_sha256": "b5055a5ab3fc068774e525643ed7928b1bec4df2a7b971c8e0749768efdc270b",
+      "color_count": 13
+    },
+    {
+      "image_index": 68,
+      "compressed_bytes": 361,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "d2cb064a47593f09080c20d588498a9a93ad267f38e578e77189d6ed57ec20e0",
+      "png_sha256": "163be3a027ca97145bcb35043002d698f7e5b382f976b5efb9ee9e5af1373a95",
+      "color_count": 13
+    },
+    {
+      "image_index": 69,
+      "compressed_bytes": 287,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "bbbb5280e47f57cab4b8d408a99b6434e1007f0edc727f19944f2a99dc1df821",
+      "png_sha256": "3ebe62a27af7ffb0e51b722028ac829366a89b7fe00ffa88fb9d57219b8951af",
+      "color_count": 14
+    },
+    {
+      "image_index": 70,
+      "compressed_bytes": 430,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "5b340dbd1510a199b3ea579ab88dd3cff75c4ac92184abc0241bab8092259956",
+      "png_sha256": "4ca82e878760c7646982dff747035473d4a065ae4770534198008c531b099819",
+      "color_count": 13
+    },
+    {
+      "image_index": 71,
+      "compressed_bytes": 377,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "12e20bb44fd9e7b55f8b9b15b868b4ffe2e35a3f1bec883c8a7d8c672de94624",
+      "png_sha256": "fbf8eaa5df2f26a66ea9f8e38722562424587d7972578e6d7f8468d28a515f94",
+      "color_count": 13
+    },
+    {
+      "image_index": 72,
+      "compressed_bytes": 369,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "84894149524beb7a0a98b466b2aeeb88fdba5565b98f29ce075cfaf605aa015a",
+      "png_sha256": "04feb4e97590d574d0ff8dd579eca55ff526f1310bb5759116e478c273863ce6",
+      "color_count": 10
+    },
+    {
+      "image_index": 73,
+      "compressed_bytes": 317,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "bc0ed6a6b10570c1f52ecf22cf50681d04bc0dae877315977109953b86520a1c",
+      "png_sha256": "a8fdf3690e599074b06a0781f06c8e0b3fdb2fc78fe322d622e7c325476f194a",
+      "color_count": 14
+    },
+    {
+      "image_index": 74,
+      "compressed_bytes": 294,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "e79bcd1164c1f56f2b2bde0ca98a90c98815b8bf4e3673cb87507d1ed72fdb0b",
+      "png_sha256": "b3cc7928ea9eff400f7232500c16b9f2991e29bcc0b5c85ea354328c40ccf469",
+      "color_count": 12
+    },
+    {
+      "image_index": 75,
+      "compressed_bytes": 295,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "c3b7480ee3e74acd8d049fc7a460cc11f0cbb64d5626b28ef8cd7bc8590c7073",
+      "png_sha256": "acc9799dc1db7842005d847ea7931e86510f2f5ffaf95fee25e30ec956daa12f",
+      "color_count": 12
+    },
+    {
+      "image_index": 76,
+      "compressed_bytes": 274,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "5a0fba0dcefcdb3573f9c374b78957c42d2748c309c21cb24a16275a3f38a6fe",
+      "png_sha256": "350023f9abe117f3b8e55783a269a026659fce815729e99183c2173b380fc6a7",
+      "color_count": 9
+    },
+    {
+      "image_index": 77,
+      "compressed_bytes": 496,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "1254a24b65b9314621c5045ed61eb762e9c7833b81fcba4eab06547e973eea14",
+      "png_sha256": "4ee5e09c4a57a07c2e7775f14762e4cdd9f57014b95279654116a7b923861ecf",
+      "color_count": 12
+    },
+    {
+      "image_index": 78,
+      "compressed_bytes": 485,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "95cc02b60c338ff6b80d11cb2f1650b6f3f7d63e25663c7c1f2660d7e2a100cd",
+      "png_sha256": "a8d37c36148c377c1c7b20f1813be7c1b7ebff6534ca78c5dc0b4e6e19758f78",
+      "color_count": 11
+    },
+    {
+      "image_index": 79,
+      "compressed_bytes": 451,
+      "decoded_bytes": 761,
+      "pixel_bytes_consumed": 760,
+      "trailing_byte_hex": "00",
+      "pixel_sha256": "8b963c4e580902cff7647d0b4d8540358746ef6c6cb108d820e96d0e8d2c4df0",
+      "png_sha256": "033f4ee004aed98e12a0fecbc41fed937d381ca48586325c1d85f2c695ad7f40",
+      "color_count": 12
+    }
+  ]
+}

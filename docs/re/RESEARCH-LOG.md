@@ -794,3 +794,19 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - 視覺摘要／接觸表 SHA-256 為 `7eede045…bb55`／`fd552865…37d1`。像素格式為
   `已證實`；逐槽角色、盾牌或坐騎語意及未使用槽狀態仍為 `未知`，不由目視自動命名。
   SPEC-002 仍為 DRAFT，未建立 production importer 或 Go／Ebitengine runtime。
+
+## RE-028：CHARPICS.0 全 80 張角色模板
+
+- 固定 `KOLBOOK.EXE` SHA-256 `2cada028…e5832`；IDA Pro 9.4、loaded-MZ linear EA。
+  `sub_11820` 載入 `CHARPICS.0` 後，以 `sub_13D7D` 將選定圖號解碼到
+  `word_20C2A+0x400`，再立即交給 `sub_15335` 顯示。
+- `sub_13D7D:0x13d7d..0x13e25` 以 `20+2*image_index` 取得 offset，呼叫
+  `sub_139A8` 解碼。固定 archive 恰有 80 筆，全部機械解碼為 761 bytes；RE-027 的
+  40×38 consumer 只消費前 760 bytes，最後一 byte 全為 `0x00`，分類為非像素尾端。
+- 80 張 ignored PNG 全部含 9–15 種 EGA 色彩；10×8 接觸表顯示方向一致的完整人物、
+  武器、盾牌、服裝與坐騎組合，未見 nibble、列寬、旋轉或裁切錯誤。此目視支持「完整角色
+  模板」分類，但不證實逐張職業、裝備或姿勢名稱。
+- 兩份全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `b4877736…ff30`／`18d44d22…f74b`；兩輪 80 張 PNG、接觸表與視覺摘要亦逐 byte 相同。
+  視覺摘要／接觸表 SHA-256 為 `0bcb3709…7575`／`cd0a65db…a5a4`。
+- 新增可重生 IDA／PNG 探針與安全摘要；SPEC-002 仍為 DRAFT，未接 production importer。

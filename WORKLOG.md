@@ -724,3 +724,17 @@
   以同一 image 重跑後，48 張 PNG、接觸表、JSON 與 Python 語法全部通過。
 - 本輪 IDA、解碼與驗證容器均使用 `--rm`；本輪 `/tmp` 資料庫、重跑輸出與 Python cache
   已精確刪除。結束檢查未見 KOL 專案容器；其他專案及系統既有容器保持不動。
+
+## 2026-09-01：CHARPICS.0 全 80 張角色模板
+
+- 沿 KOLBOOK `sub_11820` 追出 `CHARPICS.0` → `sub_13D7D` → 目的 buffer →
+  `sub_15335` 的完整鏈；索引公式為 `20+2*image_index`。
+- 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `b4877736…ff30`／`18d44d22…f74b`。
+- 80 筆全部解成 761 bytes；前 760 bytes 依 RE-027 轉成 40×38 EGA PNG，末端共同
+  `0x00` 排除於像素。10×8 接觸表顯示完整人物、武器、盾牌、服裝與坐騎組合，逐圖語意
+  未由外觀猜定。
+- 兩輪 80 張 PNG、接觸表與摘要逐 byte 相同；摘要／接觸表 SHA-256 為
+  `0bcb3709…7575`／`cd0a65db…a5a4`。SPEC-002 維持 DRAFT，未接 production runtime。
+- 本輪 IDA、抽取與驗證全部使用 `docker run --rm`；`/tmp` 資料庫與重跑輸出已精確移除。
+  結束檢查沒有 KOL 專案容器，其他專案與系統容器未動。

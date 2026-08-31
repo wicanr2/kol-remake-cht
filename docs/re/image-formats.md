@@ -435,15 +435,27 @@ KOLMPICS 候選 request 是 0..28、31、36..70、74..82，其他相關 request 
 完整 PNG 統計見 `kolmpics-all-ega-visual-probe.json`。placeholder 不產生 PNG；圖號 28
 只輸出 mask-bits 與具正確 alpha 的 mask PNG，不冒充獨立彩圖。
 
+### CHARPICS.0 全 80 張角色模板
+
+KOLBOOK `sub_11820` 以 `sub_1374E` 將 `CHARPICS.0` 整檔載入 `word_19B52`。其選圖路徑
+`0x11f2f..0x11f57` 把來源 archive segment、圖號與目的 `word_20C2A+0x400` 傳給
+`sub_13D7D`，完成後立刻以 `sub_15335` 顯示同一目的 segment。
+
+`sub_13D7D`（`0x13d7d..0x13e25`）以 `20 + 2*image_index` 找索引 word，再呼叫
+`sub_139A8` 解碼 payload。固定 archive 的 80 筆全部 LZW 解成 761 bytes；已證實的
+`sub_15335` → `sub_15AEC` 下游只讀 20 bytes×38 列，因此前 760 bytes 是 40×38、
+high-nibble-first 的 4-bit EGA 像素，最後一個 `0x00` 不進像素。80 張 PNG 與接觸表均為
+方向一致的完整角色／裝備／盾牌／坐騎組合圖；「完整角色模板」由全批外觀及同一 40×38
+consumer 共同支持。逐張職業、裝備與姿勢名稱仍為 `未知`，manifest 只可使用圖號。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、KOLPICS、KOLMPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS 與 MISCPICS
+1. `PICS`／mode 0Dh 的 COMBPICS、KOLPICS、KOLMPICS、CHARPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS 與 MISCPICS
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
-3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
-4. 使用者尚未決定 PCGA／HERC 是必要交付 theme、可選後續 theme，或不納入產品範圍。
-5. COMBPICS 全 archive 已關閉，且兩張有外部原版截圖交叉驗證；仍待本機 runtime
+3. 使用者尚未決定 PCGA／HERC 是必要交付 theme、可選後續 theme，或不納入產品範圍。
+4. COMBPICS 全 archive 已關閉，且兩張有外部原版截圖交叉驗證；仍待本機 runtime
    framebuffer 的無損抽樣。
 
 在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得

@@ -41,6 +41,9 @@
   每筆 760 bytes 的固定可變角色圖片記錄表。KOLBOOK `sub_15AEC` 與 4 倍顯示
   `sub_15B6E` 已證實每筆是 40×38、high-nibble-first 的 4-bit EGA 圖；48 張 ignored
   PNG 與接觸表已重生。逐槽語意與未使用槽內容仍未知。
+- `CHARPICS.0` 全 80 筆已由 KOLBOOK `sub_13D7D` 索引／解碼鏈與 RE-027 下游 consumer
+  證實為 40×38、high-nibble-first 的 4-bit EGA 完整角色模板；每筆第 761 byte 為
+  `0x00` 且不進像素。80 張 ignored PNG 與接觸表已重生；逐圖職業／裝備名稱仍未知。
 - COMBPICS 全七筆已關閉：0..4 為 296×144 戰鬥場景，5..6 為 88×64 肖像，皆使用
   二階 RLE、4-bit 色彩與 BIOS mode 0Dh palette；圖號 0、1 另對上魔旅士文章同場景 JPEG。
   這只證實 COMBPICS archive，不代表全部圖片格式完成。
@@ -108,6 +111,6 @@ KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸�
 KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 交付範圍仍等待使用者決定；固定角色圖片記錄已關閉像素格式。下一工作是
-盤點尚未關閉的 EGA PICS consumer 與 SPEC-002 完整 extraction set 排除項。
+顯示 theme 交付範圍仍等待使用者決定；固定角色記錄與 `CHARPICS.0` 全包已關閉像素格式。
+下一工作是盤點 TWN 除全域圖號 24 外的 consumer 與 SPEC-002 完整 extraction set 排除項。
 SPEC-002 READY 前不接 production runtime。
