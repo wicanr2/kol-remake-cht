@@ -375,3 +375,35 @@ PCGA／HERC 是遺失素材、另一版發行物，還是可由工具生成？
   MAKEMODE 動態輸出做 byte-level／runtime round-trip，Hercules 的單色／抖色規則也未關閉。
 - 是否讓 CGA／Hercules 成為首版必要 theme 是產品範圍，不由 RE 代決。共同決策前停止
   深挖 23 個 transform case；仍可繼續不依賴該答案的 EGA PICS consumer 研究。
+
+## RE-010：MONPICS 彩圖／遮罩垂直鏈
+
+### IDA 尺寸與 consumer
+
+- 輸入 `KOLTOWN-unpacked.EXE`，SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4
+  `locked-v1`，unpacked loaded-MZ linear EA。正式 `.i64` 唯讀，探針只在 `/tmp` 副本執行。
+- DGROUP offset `0x1370`、IDA EA `0x2f240` 至下一張表前共有 32 組兩-byte 記錄。
+  `sub_22EFC` 以 `2 * word_3B262` 取出 8-pixel 寬度單位與 scanline 高度，建立置中矩形；
+  `0x22fb9` 以同一偶數索引呼叫 `sub_10F9C` 載入 `mon%s`。
+- `sub_2A975` 使用同一尺寸表，並在 `0x2aa0f` 令 `sub_16FA6` 消費
+  `[2 * monster_index, 2 * monster_index + 1]`。這解釋實檔 64 個 payload 與 32 組尺寸。
+
+### 像素驗證與勘誤
+
+- 第一版探針錯把 64 個 payload 當 64 個怪物，尺寸表後半出現零值而失敗；回查下一張表
+  `0x13b0` 與兩條索引運算後，訂正為 32 個怪物、每個兩筆資料。
+- 第二版又把 COMBPICS 的二階 RLE 套到每一筆；奇數 payload 首二 bytes 不構成合法分界，
+  探針在 index 1 失敗。逐筆長度與 `sub_16FA6` 範圍證明偶數是彩圖、奇數是遮罩。
+- 32 個偶數 payload 全部精確展開為 `width_bytes * 8 * height` 個 4-bit index。32 個奇數
+  payload 均為 `width_bytes * height + 1` bytes；前段以 MSB-first 展開為 1-bit 遮罩，
+  多出的單一 byte 不進入可見矩形。
+- 兩筆合成的 32 張 RGBA PNG 與接觸表均只留 ignored `workplace/`。人工抽查顯示完整、
+  可辨識的怪物，沒有鏡像、反相、位元錯位或遮罩偏移。
+
+### 結論與限制
+
+32 組尺寸、偶數 4-bit EGA 彩圖、奇數 MSB-first 1-bit 遮罩、配對、方向與透明邊界為
+`已證實`。奇數 LZW 輸出末端多出的單一 byte 不影響 consumer 尺寸，但成因未由終止碼
+證實，維持 `強推論：壓縮流終止／padding artifact`。安全摘要只保存尺寸、雜湊與統計；
+完整指令與 table bytes 在 ignored private JSON。SPEC-002 仍因其餘預定格式與 theme
+範圍未關閉而維持 DRAFT，不接 production extractor 或 Go runtime。

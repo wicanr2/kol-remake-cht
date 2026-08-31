@@ -10,7 +10,8 @@ archive。完整反組譯與原始 bytes 僅存本機 ignored 證據；版控內
 - IDA Pro 9.4，`ida-pro-9.4-idapython:locked-v1`。
 - 位址空間：重建後 MZ 的 IDA linear effective address。
 - 可重生摘要：`image-asset-inventory.json`、`image-lzw-probe-summary.json`、
-  `combpics-visual-oracle.json`、`ida-fingerprints/KOL*-video-io-summary.json`、
+  `combpics-visual-oracle.json`、`monpics-ega-visual-probe.json`、
+  `ida-fingerprints/KOL*-video-io-summary.json`、
   `ida-fingerprints/KOLTOWN-image-*-summary.json`。
 
 ## 容器索引契約
@@ -127,6 +128,28 @@ Git 只保存 URL、SHA-256 與量化摘要 `combpics-visual-oracle.json`。
 尺寸與方向為 `已證實`；RGB 仍沿用 mode 0Dh 的 `hardware-spec approximation`。
 安全統計見 `town-index24-png-probe-summary.json`，PNG／接觸表只留 ignored 工作區。
 
+### MONPICS 彩圖與遮罩配對
+
+固定 KOLTOWN derivative 的 DGROUP offset `0x1370`（IDA linear EA `0x2f240`）保存
+32 組兩 byte 記錄。`sub_22EFC` 在 `0x22f3b..0x22f73` 以
+`2 * word_3B262` 查表；第一 byte 參與水平範圍，且 EGA blit 以 byte-column 計算，故是
+8-pixel 寬度單位，第二 byte 是 scanline 高度。它在 `0x22fb3..0x22fbe` 又以同一
+`2 * word_3B262` 當 `mon%s` 圖號呼叫 `sub_10F9C`。另一條玩家路徑 `sub_2A975`
+在 `0x2a9ac..0x2aa14` 使用同一尺寸表，並把圖號範圍
+`[2 * monster_index, 2 * monster_index + 1]` 交給 `sub_16FA6`。
+
+實檔 `MONPICS.0` 有 64 個 payload，正好是 32 組。每組偶數 payload 經 LZW 與
+`sub_1A2BB` 二階 RLE 後，精確展開為 `width_bytes * 8 * height` 個 4-bit EGA index；
+奇數 payload 的 LZW 輸出前 `width_bytes * height` bytes 是逐 scanline 的 1-bit
+遮罩，每 byte 由 MSB 到 LSB 對應八個像素。一次性探針將兩者合成 32 張 RGBA PNG，
+全部尺寸、色彩範圍與遮罩長度通過；接觸表人工抽查可辨識 32 個完整怪物，無鏡像、反相、
+位元錯位或彩圖／遮罩邊界偏移。
+
+彩圖／遮罩配對、32 組尺寸、MSB-first 遮罩與可見方向為 `已證實`。奇數 payload 在有效
+遮罩後各多一個 LZW 解碼 byte；它不參與 `width_bytes * height` 的玩家可見遮罩，現分類為
+`強推論：壓縮流終止／padding artifact`，抽取器必須記錄但不得當像素。安全統計見
+`monpics-ega-visual-probe.json`；32 張 PNG 與接觸表只留 ignored 工作區。
+
 ### PCGA／HERC 是 MAKEMODE 衍生素材
 
 固定 ZIP 中除 `AWD1PCGA.0`／`AWD1HERC.0` 工作區快照外，沒有一般 `*PCGA*` 或
@@ -168,7 +191,7 @@ Hercules 單色／抖色規則及生成檔的動態 round-trip 尚未驗證，�
 
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS 與 TWN 圖號 24 垂直鏈已關閉；PCGA／HERC 與其他
+1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24 與 MONPICS 垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
 3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。

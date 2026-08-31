@@ -1,0 +1,233 @@
+{
+  "schema": "kol-ida-koltown-monpics-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "dimension_table": {
+    "dgroup_relative_offset": 4976,
+    "ida_linear_ea": "0x2f240",
+    "entry_count": 32,
+    "entry_contract": "two unsigned bytes: width in 8-pixel bytes, height in pixels",
+    "dimensions": [
+      {
+        "monster_index": 0,
+        "width_bytes": 8,
+        "width_pixels": 64,
+        "height_pixels": 47
+      },
+      {
+        "monster_index": 1,
+        "width_bytes": 5,
+        "width_pixels": 40,
+        "height_pixels": 41
+      },
+      {
+        "monster_index": 2,
+        "width_bytes": 10,
+        "width_pixels": 80,
+        "height_pixels": 70
+      },
+      {
+        "monster_index": 3,
+        "width_bytes": 10,
+        "width_pixels": 80,
+        "height_pixels": 51
+      },
+      {
+        "monster_index": 4,
+        "width_bytes": 7,
+        "width_pixels": 56,
+        "height_pixels": 49
+      },
+      {
+        "monster_index": 5,
+        "width_bytes": 10,
+        "width_pixels": 80,
+        "height_pixels": 73
+      },
+      {
+        "monster_index": 6,
+        "width_bytes": 10,
+        "width_pixels": 80,
+        "height_pixels": 63
+      },
+      {
+        "monster_index": 7,
+        "width_bytes": 7,
+        "width_pixels": 56,
+        "height_pixels": 35
+      },
+      {
+        "monster_index": 8,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 69
+      },
+      {
+        "monster_index": 9,
+        "width_bytes": 10,
+        "width_pixels": 80,
+        "height_pixels": 57
+      },
+      {
+        "monster_index": 10,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 43
+      },
+      {
+        "monster_index": 11,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 57
+      },
+      {
+        "monster_index": 12,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 70
+      },
+      {
+        "monster_index": 13,
+        "width_bytes": 6,
+        "width_pixels": 48,
+        "height_pixels": 26
+      },
+      {
+        "monster_index": 14,
+        "width_bytes": 11,
+        "width_pixels": 88,
+        "height_pixels": 61
+      },
+      {
+        "monster_index": 15,
+        "width_bytes": 7,
+        "width_pixels": 56,
+        "height_pixels": 37
+      },
+      {
+        "monster_index": 16,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 38
+      },
+      {
+        "monster_index": 17,
+        "width_bytes": 10,
+        "width_pixels": 80,
+        "height_pixels": 51
+      },
+      {
+        "monster_index": 18,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 68
+      },
+      {
+        "monster_index": 19,
+        "width_bytes": 10,
+        "width_pixels": 80,
+        "height_pixels": 50
+      },
+      {
+        "monster_index": 20,
+        "width_bytes": 11,
+        "width_pixels": 88,
+        "height_pixels": 71
+      },
+      {
+        "monster_index": 21,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 71
+      },
+      {
+        "monster_index": 22,
+        "width_bytes": 7,
+        "width_pixels": 56,
+        "height_pixels": 44
+      },
+      {
+        "monster_index": 23,
+        "width_bytes": 8,
+        "width_pixels": 64,
+        "height_pixels": 47
+      },
+      {
+        "monster_index": 24,
+        "width_bytes": 11,
+        "width_pixels": 88,
+        "height_pixels": 68
+      },
+      {
+        "monster_index": 25,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 73
+      },
+      {
+        "monster_index": 26,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 38
+      },
+      {
+        "monster_index": 27,
+        "width_bytes": 9,
+        "width_pixels": 72,
+        "height_pixels": 68
+      },
+      {
+        "monster_index": 28,
+        "width_bytes": 8,
+        "width_pixels": 64,
+        "height_pixels": 40
+      },
+      {
+        "monster_index": 29,
+        "width_bytes": 5,
+        "width_pixels": 40,
+        "height_pixels": 41
+      },
+      {
+        "monster_index": 30,
+        "width_bytes": 7,
+        "width_pixels": 56,
+        "height_pixels": 41
+      },
+      {
+        "monster_index": 31,
+        "width_bytes": 11,
+        "width_pixels": 88,
+        "height_pixels": 64
+      }
+    ]
+  },
+  "archive_contract": {
+    "image_count": 64,
+    "images_per_monster": 2,
+    "image_index_contract": "2 * monster_index and 2 * monster_index + 1"
+  },
+  "consumer_contracts": [
+    {
+      "original_function": "sub_22EFC",
+      "start_ea": "0x22efc",
+      "archive_name_offset": 6224,
+      "archive_pattern": "mon%s",
+      "image_index_expression": "2 * word_3B262",
+      "dimension_index_expression": "2 * word_3B262",
+      "generic_loader": "sub_10F9C",
+      "generic_loader_call_ea": "0x22fb9",
+      "evidence_grade": "confirmed"
+    },
+    {
+      "original_function": "sub_2A975",
+      "start_ea": "0x2a975",
+      "dimension_index_expression": "2 * word_3B262",
+      "rectangle_copy_function": "sub_16FA6",
+      "rectangle_copy_call_ea": "0x2aa0f",
+      "evidence_grade": "confirmed"
+    }
+  ]
+}

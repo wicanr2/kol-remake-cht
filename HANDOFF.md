@@ -25,6 +25,8 @@
   但仍是 opaque workspace tail。三個無副檔名角色圖片檔已證實為 16×760-byte 記錄表。
 - TWN 全域圖號 24 已完成 `.1` continuation → LZW → 二階 RLE → 4-bit EGA → blit 垂直鏈；
   town 0 為 192×96，其餘七城為 88×64，八張 ignored PNG 接觸表方向正常。
+- MONPICS 已完成 32 組「4-bit EGA 彩圖＋1-bit 遮罩」垂直鏈；64 個 payload 與 IDA
+  尺寸表逐組吻合，ignored RGBA PNG 接觸表的方向與透明邊界正常。
 - MAKEMODE 已證實是官方 CGA／Hercules 轉換器；28 組 PICS 圖數與 v2 清冊逐組相符，
   會生成 `PCGA`／`HERC` 分卷。完整像素規則未關閉，首版 theme 範圍待使用者決定。
 
@@ -34,7 +36,7 @@
 |---|---|---|
 | 目前真相 | `CONTEXT.md` | 不用歷史工作清單反向覆蓋 |
 | 原版清冊 | `docs/re/original-inventory.json` | 雙容器重生逐 byte 相同；只有雜湊與 metadata |
-| 研究結論 | `docs/re/RESEARCH-LOG.md` | RE-001 至 RE-008 |
+| 研究結論 | `docs/re/RESEARCH-LOG.md` | RE-001 至 RE-010 |
 | 圖片格式 | `docs/re/image-formats.md` | 索引、LZW、consumer 與未知項 |
 | entry 原始 bytes | `docs/re/ida-fingerprints/KOLTOWN-entry.json` | 僅本機，Git 精確排除 |
 
@@ -43,7 +45,7 @@
 | 優先 | 類型 | 工作 | 下一個精確動作 | 阻塞 |
 |---|---|---|---|---|
 | 1 | product decision | theme 範圍 | 使用者選 EGA-only、CGA／Hercules 後續，或三者首版必備 | 等待使用者 |
-| 2 | asset RE | SPEC-002 READY 證據 | 追下一個 EGA PICS consumer 圖號 | 多數像素契約未知 |
+| 2 | asset RE | SPEC-002 READY 證據 | MONPICS 已關閉；追下一個 EGA PICS consumer 圖號 | 多數像素契約未知 |
 | 3 | documentation | 中文手冊 | 建頁面索引、OCR 草稿與術語表 | M1 後開始 |
 
 ## 執行中程序與暫存物

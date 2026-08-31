@@ -54,8 +54,9 @@
 ## M3：可重現素材抽取
 
 - [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
-- [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS EGA 垂直鏈、AWD 固定快照邊界與
-  三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC 像素格式尚未完成。
+- [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS、TWN index 24、MONPICS EGA
+  垂直鏈、AWD 固定快照邊界與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
+  像素格式尚未完成。
 - [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。
 - [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。
 - [ ] 建立 OGG 轉換管線與 catalog；驗證 codec、時長、非靜音、峰值、loop 與人耳聆聽。
