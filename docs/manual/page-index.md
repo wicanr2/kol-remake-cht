@@ -37,7 +37,12 @@
 | 28 | 人類、精靈與矮人職業表（印刷頁 50–51） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
 | 29 | 凱爾登職業表；屬性、力量與敏捷（印刷頁 52–53） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
 | 30 | 體型、健康、先見、魅力與智力（印刷頁 54–55） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
-| 31–75 | 進階規則、世界觀、種族與索引 | todo | — |
+| 31 | 次要屬性、身體點數與疲勞（印刷頁 56–57） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 32 | 疲勞效果、武器／盾牌數值表（印刷頁 58–59） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 33 | 武器／盔甲表與戰鬥選項順序（印刷頁 60–61） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 34 | 戰鬥執行、命中、傷害與擊退（印刷頁 62–63） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 35 | 回合結束、實戰建議與角色成長（印刷頁 64–65） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 36–75 | 征戰、進階規則、世界觀、種族與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 

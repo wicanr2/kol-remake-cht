@@ -37,7 +37,7 @@
 | movement rate | 移動率 | 核准 | 角色移動數值 |
 | magic order | 魔法教團 | 暫譯 | 待魔法章核對組織正式名稱 |
 | rank | 階級 | 核准 | 角色成長等級 |
-| encumbrance | 負重值 | 核准 | 裝備攜帶負擔 |
+| encumbrance | 負重值／負重 | 核准 | 裝備攜帶負擔；表格欄名可簡寫「負重」 |
 | SPACEBAR | 空白鍵 | 核准 | 圖示／按鍵 |
 | DOOR | 門 | 核准 | 進出地點圖示 |
 | MIRROR | 鏡子 | 核准 | 角色資料圖示 |
@@ -108,4 +108,7 @@
 | Endurance | 耐力 | 暫譯 | 次要屬性；由力量與健康推導 |
 | Body Points | 身體點數 | 暫譯 | 次要屬性；由健康與體型推導 |
 | Huxley / Dancing Friar | Huxley／舞僧 | 待查 | 聖保羅修道院院長；正式音譯待城鎮資料 consumer |
+| fatigue | 疲勞 | 核准 | 戰鬥能量不足後累積的狀態 |
+| knock back | 擊退 | 核准 | 重擊使目標掉落武器並後移一格 |
+| protection | 防護 | 核准 | 盔甲表的 `Prt` |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |
