@@ -33,16 +33,17 @@
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
 | 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-037 |
+| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-038 |
 | 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、KOLPICS、KOLMPICS、TWN 全包、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、WEAPPICS、HEADPICS／TORPICS／LEGSPICS、MONPICS、PERPICS、MISCPICS 與固定記錄表已分類 |
 | 音訊 cue 母體 | [audio-inventory.json](audio-inventory.json) | 六個 executable 直接 I/O 母體已關閉；只有 TITLE PC Speaker cue |
 | TITLE 音訊 oracle | [title-audio-oracle.json](title-audio-oracle.json) | DOSBox-X 正常流程非靜音擷取已證實；人耳驗收待辦 |
-| 角色建立 | [character-creation.md](character-creation.md) | 起始金冠、武器／武器技能、最小 writer 欄位與三檔保存順序已固定；其餘技能物品／reader 待 RE |
+| 角色建立 | [character-creation.md](character-creation.md) | 起始 writer coverage 與 KOLTOWN 最小 reader 已關閉；正常 UI oracle／產品決策待辦 |
 | IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口
 
 SPEC-002、004、005 仍為 DRAFT。圖片 theme 範圍等待使用者決定；音訊直接 I/O 母體與
 正常流程機械擷取已關閉，下一步是人耳驗收及 TITLE cue 的 OGG 處理決策。這些規格未達
-READY 前不得接進 runtime。角色建立已固定手冊狀態機、原版 slot stride、職業起始武器
-資料與最小 writer 欄位；下一窄切片是必要 reader 與武器以外起始技能／物品的存在性查核。
+READY 前不得接進 runtime。角色建立已固定手冊狀態機、原版 slot stride、完整起始 writer
+coverage 與最小 reader；下一窄切片是正常 DOS UI 的名字、ESC、reroll、slot-full 與保存
+邊界 oracle。

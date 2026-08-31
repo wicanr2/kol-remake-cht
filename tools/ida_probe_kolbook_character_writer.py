@@ -66,6 +66,9 @@ EXPECTED_INSTRUCTION_BYTES = {
     0x122A6: "8887bea6",
     0x12327: "83c328",
     0x1232A: "8887bea6",
+    0x1232E: "8b1ebaa6",
+    0x12332: "83c37f",
+    0x12335: "c687bea603",
     0x1249C: "83c32e",
     0x1249F: "8887bea6",
     0x124B1: "83c32f",
@@ -234,15 +237,19 @@ def main() -> None:
                 {"offset": "0x1c", "bytes": 1, "semantic": "profession record index", "status": "confirmed"},
                 {"offset": "0x1d", "bytes": 7, "semantic": "primary internal stats", "status": "confirmed"},
                 {"offset": "0x24", "bytes": 1, "semantic": "race enum", "status": "confirmed"},
+                {"offset": "0x28", "bytes": 1, "semantic": "(race enum + 1) * 16 selector", "status": "confirmed"},
+                {"offset": "0x29", "bytes": 1, "semantic": "floor(sum of four profession weapon-skill bytes / 200)", "status": "confirmed"},
                 {"offset": "0x2b", "bytes": 2, "semantic": "starting gold crowns little-endian", "status": "confirmed"},
                 {"offset": "0x30", "bytes": 16, "semantic": "primary starting weapon template", "status": "confirmed"},
-                {"offset": "0x4a", "bytes": 8, "semantic": "primary weapon auxiliary block", "status": "strong inference"},
+                {"offset": "0x4a", "bytes": 8, "semantic": "primary starting weapon template prefix", "status": "confirmed"},
+                {"offset": "0x52", "bytes": 1, "semantic": "primary starting weapon template byte 13", "status": "confirmed"},
                 {"offset": "0x54", "bytes": 1, "semantic": "primary weapon first skill internal", "status": "confirmed"},
                 {"offset": "0x56", "bytes": 1, "semantic": "primary weapon second skill internal", "status": "confirmed"},
                 {"offset": "0x57", "bytes": 8, "semantic": "secondary starting weapon template prefix", "status": "confirmed"},
                 {"offset": "0x5f", "bytes": 1, "semantic": "secondary weapon template byte 13", "status": "confirmed"},
                 {"offset": "0x61", "bytes": 1, "semantic": "secondary weapon first skill internal", "status": "confirmed"},
-                {"offset": "0x63", "bytes": 1, "semantic": "secondary weapon second skill internal", "status": "confirmed"}
+                {"offset": "0x63", "bytes": 1, "semantic": "secondary weapon second skill internal", "status": "confirmed"},
+                {"offset": "0x7f", "bytes": 1, "semantic": "constant 3; gameplay meaning unknown", "status": "confirmed write, unknown semantics"},
             ],
             "region_metadata_copy_map": [
                 {"region_source_offset": "0x01", "record_offset": "0x2e", "bytes": 1},
@@ -279,7 +286,8 @@ def main() -> None:
         },
         "weapon_selector_map": [{"selector": key, "manual_abbreviation": value} for key, value in WEAPON_SELECTORS.items()],
         "profession_starting_contracts": starting_contracts,
-        "status": "writer offsets and starting gold/weapon/skill contracts confirmed; unlisted offsets remain unknown",
+        "writer_coverage": "after clearing the 768-byte slot, all direct CHARDATA writes in sub_11820 are covered by fields plus region_metadata_copy_map; no additional profession-derived starting item or skill write exists in this function",
+        "status": "writer offsets and starting gold/weapon/skill contracts confirmed; unlisted offsets remain zero after creation or have no direct write in sub_11820",
     }
     private_path.write_text(json.dumps(private, indent=2) + "\n", encoding="utf-8")
     safe_path.write_text(json.dumps(safe, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

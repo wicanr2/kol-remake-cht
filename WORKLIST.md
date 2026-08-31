@@ -92,8 +92,8 @@
 - [x] 關閉 35 個手冊職業列與 39 個 executable 記錄的 enum／名稱／eligibility 對應；
   解釋男女精靈共名及四對矮人記錄逐 byte 相同。
 - [x] 關閉 39 筆起始金冠、主要／次要武器、武器技能與最小 writer 欄位索引。
-- [ ] 查核必要 reader 與武器以外起始技能／物品是否另有 writer；
-  經證據審查後把 SPEC-005 升 READY。
+- [x] 查核必要 KOLTOWN reader，並以完整 writer coverage 排除其他職業衍生起始資料。
+- [ ] 完成正常 DOS UI 名字、ESC、reroll、slot-full 與保存邊界 oracle；再審查 SPEC-005。
 - [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
 - [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。
 - [ ] 選一條最小玩家鏈：真實 PNG → typed data → 世界／城鎮一個互動 → UI → 存讀檔。
@@ -127,6 +127,6 @@
 ## 下一個唯一工作
 
 完整 EGA extraction set 已無 unknown，但圖片 theme 決策仍待使用者回答；TITLE cue 的
-OGG 呈現方向也待決。可先做且不依賴兩項決策的下一工作，是查核必要 CHARDATA reader
-與武器以外起始技能／物品是否另有 writer。SPEC-002／004／005
+OGG 呈現方向也待決。角色 writer／reader gate 已關閉；可先做且不依賴兩項決策的下一
+工作，是正常 DOS UI 名字、ESC、reroll、slot-full 與保存邊界 oracle。SPEC-002／004／005
 READY 前不接 Go／Ebitengine production runtime。

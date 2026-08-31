@@ -971,3 +971,21 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - **限制**：只關閉起始金冠、武器與武器技能，不能推廣成全部一般技能／物品。最小 writer
   offset 已建立，其他欄位 reader、圖像 selector、UI 邊界與失敗路徑仍未知；SPEC-005
   維持 DRAFT，不授權 production implementation。
+
+## RE-038：writer coverage 與 KOLTOWN 最小 reader
+
+- 固定 `KOLBOOK.EXE` SHA-256 `2cada028…e5832` 與 unpacked KOLTOWN derivative
+  `01f6f9…d1d2`；兩者皆使用 IDA Pro 9.4 linear EA，從全新一次性 DB 匯出。
+- **勘誤**：RE-037 將 CHARDATA `0x4a..0x51` 暫稱主要武器輔助區塊；回查 source
+  `BOOKDATA` item 3 與完整 copy loop，證實它是主要武器模板 bytes 0..7，`0x52` 是同模板
+  byte 13。舊稱不再作語意依據。
+- writer coverage 固定 `0x28=(race+1)*16`、`0x29=floor(sum(meta[1:5])/200)` 與
+  `0x7f=3` 等先前漏列的直接寫入。由於 slot 先完整清零，`sub_11820` 其後全部直接寫入均
+  落在欄位表或 REGION route；沒有其他職業衍生起始技能／物品 writer。
+- KOLTOWN `sub_147DD` 讀 16-byte 名字，`sub_14DB1` 讀 race／profession eligibility，
+  `sub_14CCF` 讀 little-endian gold，`sub_18F3A` 讀主要武器模板並路由 renderer。這是角色
+  建立所需最小 reader 交叉查核，不是完整 768-byte schema。
+- KOLBOOK safe／private 兩輪 SHA-256 為 `2884a1ae…c129`／`6c00db3a…fdb6`；KOLTOWN
+  safe／private 為 `16f8b24d…67ba`／`dcfa8c59…18e1`，各自逐 byte 相同。
+- **限制**：武器技能仍由 writer＋手冊交叉證實，本切片不替其他一般技能命名；REGION
+  欄位、正常 UI 邊界、圖像 selector 與失敗 rollback 仍未知。SPEC-005 保持 DRAFT。

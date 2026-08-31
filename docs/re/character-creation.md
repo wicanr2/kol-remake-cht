@@ -19,7 +19,8 @@
 本機 ignored 證據區。
 
 角色保存 writer 的安全摘要另見
-`ida-fingerprints/KOLBOOK-character-writer-summary.json`。
+`ida-fingerprints/KOLBOOK-character-writer-summary.json`；KOLTOWN 最小 reader 摘要見
+`ida-fingerprints/KOLTOWN-character-reader-summary.json`。
 
 ## 玩家可見契約
 
@@ -107,12 +108,16 @@
 | `0x1c` | profession record index | 已證實 |
 | `0x1d..0x23` | 七項主要屬性內部值 | 已證實；欄位語意分級沿用上節 |
 | `0x24` | race enum | 已證實 |
+| `0x28` | `(race enum + 1) × 16` selector | 已證實寫法；下游完整語意未知 |
+| `0x29` | `floor(四個職業武器技能 bytes 總和 ÷ 200)` | 已證實寫法；下游完整語意未知 |
 | `0x2b..0x2c` | 起始金冠 | 已證實，little-endian |
 | `0x30..0x3f` | 主要武器 16-byte 模板 | 已證實 |
-| `0x4a..0x51` | 主要武器輔助區塊 | 強推論；逐 byte 語意未知 |
+| `0x4a..0x51` | 主要武器模板 bytes `0..7` | 已證實；前版「輔助區塊」名稱已訂正 |
+| `0x52` | 主要武器模板 byte `13` | 已證實 |
 | `0x54`, `0x56` | 主要武器兩個內部技能值 | 已證實 |
 | `0x57..0x5e`, `0x5f` | 次要武器模板的已寫入部分 | 已證實；不是完整 16-byte copy |
 | `0x61`, `0x63` | 次要武器兩個內部技能值 | 已證實 |
+| `0x7f` | 常數 `3` | 寫入已證實；玩法語意未知 |
 
 - writer 清空 768-byte slot 後寫入欄位；選定肖像與初始盾牌各以 760 bytes 寫入同 slot 的
   `CHARPICS`／`SHLDPICS`，最後依序保存 `0x3000`、`0x2f80`、`0x2f80` bytes。這證實
@@ -120,12 +125,27 @@
 - `region%d.dat` 最多載入五筆、每筆 48 bytes；固定 ZIP 只有 `REGION0.DAT`。固定來源與
   CHARDATA 目的 offset 的路由已收入安全摘要，但欄位語意保持未知。
 - 最終兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
-  `39beef72…b178`／`099e0d2b…9f73`。
+  最新 `2884a1ae…c129`／`6c00db3a…fdb6`。
+
+## KOLTOWN 最小 reader 交叉查核
+
+- 固定 unpacked KOLTOWN derivative SHA-256 `01f6f9…d1d2`；IDA Pro 9.4 linear EA。
+- `sub_147DD:0x14fad..0x14fc1` 從載入的 CHARDATA 逐槽複製 16-byte 名字，
+  `0x14fcb..0x14fdd` 再以名字比對目前角色，交叉確認 offset `0x00..0x0f`。
+- `sub_14DB1:0x14de7..0x14e23` 讀 offset `0x24`／`0x1c` 作種族／職業 eligibility；
+  `sub_14CCF:0x14cf1..0x14d1e` 將 `0x2b..0x2c` 合成 little-endian 金冠；
+  `sub_18F3A:0x19167..0x1917e` 讀 `0x30` 判斷主要武器並進入 renderer route。
+- writer 在先清空 768-byte slot 後，所有直接 CHARDATA 寫入都已由固定欄位表與 region
+  routing 涵蓋。因此 `sub_11820` 沒有其他職業衍生的起始技能／物品寫入；這不代表
+  768-byte record 的所有後續遊戲欄位已解析。
+- 兩個全新 KOLTOWN IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
+  `16f8b24d…67ba`／`dcfa8c59…18e1`。
 
 ## 尚未關閉的 RE 問題
 
-1. 武器以外的起始技能／物品是否另有 writer；起始金冠、武器與武器技能已關閉。
+1. 已排除 `sub_11820` 另有職業衍生的起始技能／物品寫入；region metadata 的玩法語意仍未知。
 2. DOS `rand` 的確切 library 序列與 reroll／接受按鍵的正常 UI 資料流；目前已固定 seed 與 bounded-roll caller 契約。
-3. 768-byte record 其餘欄位的 reader／writer 與 checksum／狀態語意；目前只建立最小索引。
+3. 768-byte record 其餘、非角色建立必要欄位的 reader／writer 與 checksum／狀態語意；
+   角色建立最小 reader／writer 索引已交叉查核。
 4. 空名、重名、16 字元邊界、ESC 每層返回、角色槽已滿等正常 UI oracle。
 5. 圖像模板 selector；三個檔案的寫入順序已證實，但失敗、rollback 與共同 commit 邊界未知。

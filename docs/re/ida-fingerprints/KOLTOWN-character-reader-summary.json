@@ -1,0 +1,179 @@
+{
+  "schema": "kol-ida-koltown-character-reader-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for fixed unpacked KOLTOWN MZ derivative",
+  "storage_route_strings": [
+    {
+      "ea": "0x2f600",
+      "value": "chardata"
+    },
+    {
+      "ea": "0x2f60a",
+      "value": "chardata"
+    },
+    {
+      "ea": "0x2f61e",
+      "value": "charpics"
+    },
+    {
+      "ea": "0x2f628",
+      "value": "charpics"
+    },
+    {
+      "ea": "0x2f632",
+      "value": "shldpics"
+    },
+    {
+      "ea": "0x2f63c",
+      "value": "shldpics"
+    }
+  ],
+  "instruction_checks": [
+    {
+      "ea": "0x14de7",
+      "bytes": "8b1e82bb",
+      "disassembly": "mov     bx, word_39A52"
+    },
+    {
+      "ea": "0x14deb",
+      "bytes": "83c324",
+      "disassembly": "add     bx, 24h ; '$'"
+    },
+    {
+      "ea": "0x14df1",
+      "bytes": "8a8788bb",
+      "disassembly": "mov     al, [bx-4478h]"
+    },
+    {
+      "ea": "0x14e05",
+      "bytes": "8b1e82bb",
+      "disassembly": "mov     bx, word_39A52"
+    },
+    {
+      "ea": "0x14e09",
+      "bytes": "83c31c",
+      "disassembly": "add     bx, 1Ch"
+    },
+    {
+      "ea": "0x14e0f",
+      "bytes": "8a8788bb",
+      "disassembly": "mov     al, [bx-4478h]"
+    },
+    {
+      "ea": "0x14fad",
+      "bytes": "8e063a6b",
+      "disassembly": "mov     es, word_34A0A"
+    },
+    {
+      "ea": "0x14fb7",
+      "bytes": "b91000",
+      "disassembly": "mov     cx, 10h"
+    },
+    {
+      "ea": "0x14fba",
+      "bytes": "268a04",
+      "disassembly": "mov     al, es:[si]"
+    },
+    {
+      "ea": "0x14fcb",
+      "bytes": "8b1e82bb",
+      "disassembly": "mov     bx, word_39A52"
+    },
+    {
+      "ea": "0x14fd2",
+      "bytes": "8a8788bb",
+      "disassembly": "mov     al, [bx-4478h]"
+    },
+    {
+      "ea": "0x14cf1",
+      "bytes": "8b1e82bb",
+      "disassembly": "mov     bx, word_39A52"
+    },
+    {
+      "ea": "0x14cf5",
+      "bytes": "83c32b",
+      "disassembly": "add     bx, 2Bh ; '+'"
+    },
+    {
+      "ea": "0x14cfe",
+      "bytes": "8a8788bb",
+      "disassembly": "mov     al, [bx-4478h]"
+    },
+    {
+      "ea": "0x14d0a",
+      "bytes": "8b1e82bb",
+      "disassembly": "mov     bx, word_39A52"
+    },
+    {
+      "ea": "0x14d0e",
+      "bytes": "83c32c",
+      "disassembly": "add     bx, 2Ch ; ','"
+    },
+    {
+      "ea": "0x14d14",
+      "bytes": "8a8788bb",
+      "disassembly": "mov     al, [bx-4478h]"
+    },
+    {
+      "ea": "0x19167",
+      "bytes": "8b1e82bb",
+      "disassembly": "mov     bx, word_39A52"
+    },
+    {
+      "ea": "0x1916b",
+      "bytes": "83c330",
+      "disassembly": "add     bx, 30h ; '0'"
+    },
+    {
+      "ea": "0x1916e",
+      "bytes": "8a8788bb",
+      "disassembly": "mov     al, [bx-4478h]"
+    }
+  ],
+  "reader_contracts": [
+    {
+      "record_offset": "0x00..0x0f",
+      "consumer": "sub_147DD",
+      "sites": [
+        "0x14fad..0x14fc1",
+        "0x14fcb..0x14fdd"
+      ],
+      "status": "confirmed 16-byte name roster and comparison"
+    },
+    {
+      "record_offset": "0x24",
+      "consumer": "sub_14DB1",
+      "sites": [
+        "0x14de7..0x14dfd"
+      ],
+      "status": "confirmed race eligibility input"
+    },
+    {
+      "record_offset": "0x1c",
+      "consumer": "sub_14DB1",
+      "sites": [
+        "0x14e05..0x14e23"
+      ],
+      "status": "confirmed profession eligibility input"
+    },
+    {
+      "record_offset": "0x2b..0x2c",
+      "consumer": "sub_14CCF",
+      "sites": [
+        "0x14cf1..0x14d1e"
+      ],
+      "status": "confirmed little-endian gold reader"
+    },
+    {
+      "record_offset": "0x30",
+      "consumer": "sub_18F3A",
+      "sites": [
+        "0x19167..0x1917e"
+      ],
+      "status": "confirmed primary weapon template presence and renderer route"
+    }
+  ],
+  "limitation": "This is the minimal reader cross-check for creation fields, not a complete 768-byte schema. Weapon-skill values remain writer-plus-manual confirmed; this probe does not assign broader skill semantics."
+}

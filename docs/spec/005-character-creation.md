@@ -43,6 +43,9 @@ reader 與存檔 schema 一起審查後，才可建立 READY typed data。
 逐列交叉驗證。這只關閉起始武器垂直鏈；不得推廣成所有一般技能、物品或裝備欄位均已知。
 最小 CHARDATA writer offset、CHARPICS／SHLDPICS 同槽寫入與三檔保存順序已固定，但原版
 跨檔案 atomicity／rollback 未知。remake 的原子保存是設計要求，不是原版 parity 宣稱。
+完整 writer coverage 已證實：slot 清零後，所有直接 CHARDATA 寫入都落在固定欄位或
+REGION metadata route，沒有其他職業衍生的起始技能／物品。KOLTOWN 亦已讀回名字、種族、
+職業、金冠與主要武器，足以關閉本規格的最小 reader／writer 欄位 gate；未列欄位仍不命名。
 
 ## 存檔草案限制
 
@@ -52,9 +55,9 @@ Unicode 名字規則與角色圖像引用尚未完成共同決策，本 DRAFT �
 
 ## READY gate
 
-1. 起始金冠、武器與武器技能已關閉；確認武器以外是否另有起始技能／物品 writer。
+1. [x] 起始金冠、武器與武器技能已關閉；writer coverage 排除其他職業衍生起始資料。
 2. 以正常 DOS UI oracle 抽測名字邊界、每層 ESC、reroll、slot full 與保存 commit。
-3. 最小 writer 欄位索引已建立；再以必要 reader 查核用途，未知 offset 不猜補。
+3. [x] 最小 writer 欄位索引與 KOLTOWN 必要 reader 已交叉查核；未知 offset 不猜補。
 4. 由使用者決定繁中名字長度／重名 policy 與是否保留原版性別限制；決策前不現代化。
 5. 固定 remake typed schema、migration 與 deterministic RNG 契約。
 6. 證據審查通過後才可升 READY 並開始 production implementation。

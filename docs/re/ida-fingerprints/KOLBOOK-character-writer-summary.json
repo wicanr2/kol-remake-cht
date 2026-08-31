@@ -163,6 +163,21 @@
       "disassembly": "mov     [bx-5942h], al"
     },
     {
+      "ea": "0x1232e",
+      "bytes": "8b1ebaa6",
+      "disassembly": "mov     bx, word_238FA"
+    },
+    {
+      "ea": "0x12332",
+      "bytes": "83c37f",
+      "disassembly": "add     bx, 7Fh"
+    },
+    {
+      "ea": "0x12335",
+      "bytes": "c687bea603",
+      "disassembly": "mov     byte ptr [bx-5942h], 3"
+    },
+    {
       "ea": "0x1249c",
       "bytes": "83c32e",
       "disassembly": "add     bx, 2Eh ; '.'"
@@ -297,6 +312,18 @@
         "status": "confirmed"
       },
       {
+        "offset": "0x28",
+        "bytes": 1,
+        "semantic": "(race enum + 1) * 16 selector",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x29",
+        "bytes": 1,
+        "semantic": "floor(sum of four profession weapon-skill bytes / 200)",
+        "status": "confirmed"
+      },
+      {
         "offset": "0x2b",
         "bytes": 2,
         "semantic": "starting gold crowns little-endian",
@@ -311,8 +338,14 @@
       {
         "offset": "0x4a",
         "bytes": 8,
-        "semantic": "primary weapon auxiliary block",
-        "status": "strong inference"
+        "semantic": "primary starting weapon template prefix",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x52",
+        "bytes": 1,
+        "semantic": "primary starting weapon template byte 13",
+        "status": "confirmed"
       },
       {
         "offset": "0x54",
@@ -349,6 +382,12 @@
         "bytes": 1,
         "semantic": "secondary weapon second skill internal",
         "status": "confirmed"
+      },
+      {
+        "offset": "0x7f",
+        "bytes": 1,
+        "semantic": "constant 3; gameplay meaning unknown",
+        "status": "confirmed write, unknown semantics"
       }
     ],
     "region_metadata_copy_map": [
@@ -1397,5 +1436,6 @@
       ]
     }
   ],
-  "status": "writer offsets and starting gold/weapon/skill contracts confirmed; unlisted offsets remain unknown"
+  "writer_coverage": "after clearing the 768-byte slot, all direct CHARDATA writes in sub_11820 are covered by fields plus region_metadata_copy_map; no additional profession-derived starting item or skill write exists in this function",
+  "status": "writer offsets and starting gold/weapon/skill contracts confirmed; unlisted offsets remain zero after creation or have no direct write in sub_11820"
 }
