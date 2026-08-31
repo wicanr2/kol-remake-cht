@@ -1,0 +1,43 @@
+{
+  "schema": "kol-ida-tandypin-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "TANDYPIN.EXE",
+  "input_sha256": "036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3",
+  "address_space": "IDA linear effective address for TANDYPIN loaded MZ",
+  "instruction_checks": [
+    {
+      "ea": "0x10000",
+      "bytes": "b80110",
+      "disassembly": "mov     ax, seg dseg"
+    },
+    {
+      "ea": "0x10003",
+      "bytes": "8ed8",
+      "disassembly": "mov     ds, ax"
+    },
+    {
+      "ea": "0x10005",
+      "bytes": "ba0104",
+      "disassembly": "mov     dx, 401h"
+    },
+    {
+      "ea": "0x10008",
+      "bytes": "b80031",
+      "disassembly": "mov     ax, 3100h"
+    },
+    {
+      "ea": "0x1000b",
+      "bytes": "cd21",
+      "disassembly": "int     21h"
+    }
+  ],
+  "contract": {
+    "dos_interrupt": "INT 21h, AH=31h terminate-and-stay-resident",
+    "return_code_al": 0,
+    "resident_paragraphs_dx": "0x0401",
+    "speaker_or_pit_io_in_entry": false,
+    "audio_asset_or_player": false,
+    "status": "confirmed"
+  },
+  "limitation": "KOL 啟動它的條件與保留這段記憶體的產品目的仍需由 KOL.EXE caller 證據判定。"
+}

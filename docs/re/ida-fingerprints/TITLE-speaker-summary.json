@@ -1,0 +1,170 @@
+{
+  "schema": "kol-ida-title-speaker-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "TITLE.EXE",
+  "input_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+  "address_space": "IDA linear effective address for TITLE loaded MZ",
+  "root_original_functions": [
+    "sub_10F33",
+    "sub_10F48",
+    "sub_10F5D",
+    "sub_10F75",
+    "sub_11904",
+    "sub_11953"
+  ],
+  "root_start_eas": [
+    "0x10f33",
+    "0x10f48",
+    "0x10f5d",
+    "0x10f75",
+    "0x11904",
+    "0x11953"
+  ],
+  "caller_sites": {
+    "0x10f33": [
+      "0x10f86"
+    ],
+    "0x10f48": [
+      "0x10fea"
+    ],
+    "0x10f5d": [
+      "0x10fad"
+    ],
+    "0x10f75": [
+      "0x1080e",
+      "0x108df",
+      "0x109db",
+      "0x10c55",
+      "0x10cb7",
+      "0x10cba",
+      "0x10ceb",
+      "0x10cee"
+    ],
+    "0x11904": [
+      "0x11009"
+    ],
+    "0x11953": [
+      "0x10470",
+      "0x10622",
+      "0x10be1",
+      "0x10f9e",
+      "0x10ff1"
+    ]
+  },
+  "primitive_contract": {
+    "speaker_enable_original_function": "sub_10F33",
+    "speaker_disable_original_function": "sub_10F48",
+    "pit_channel_2_divisor_original_function": "sub_10F5D",
+    "status": "confirmed"
+  },
+  "cue_contract": {
+    "navigation_label": "title-random-tone-burst",
+    "original_function": "sub_10F75",
+    "start_ea": "0x10f75",
+    "outer_burst_count": 2,
+    "divisor_updates_per_burst": 100,
+    "random_helper_original_function": "sub_11953",
+    "random_helper_contract": "rand() % N + 1",
+    "busy_wait_helper_original_function": "sub_11904",
+    "speaker_order": [
+      "sub_10F33",
+      "sub_10F5D repeated",
+      "sub_10F48"
+    ],
+    "caller_sites": [
+      "0x1080e",
+      "0x108df",
+      "0x109db",
+      "0x10c55",
+      "0x10cb7",
+      "0x10cba",
+      "0x10ceb",
+      "0x10cee"
+    ],
+    "status": "confirmed",
+    "label_is_evidence": false
+  },
+  "instruction_checks": [
+    {
+      "ea": "0x10f3c",
+      "bytes": "e461",
+      "disassembly": "in      al, 61h"
+    },
+    {
+      "ea": "0x10f3e",
+      "bytes": "0c03",
+      "disassembly": "or      al, 3"
+    },
+    {
+      "ea": "0x10f40",
+      "bytes": "e661",
+      "disassembly": "out     61h, al"
+    },
+    {
+      "ea": "0x10f51",
+      "bytes": "e461",
+      "disassembly": "in      al, 61h"
+    },
+    {
+      "ea": "0x10f53",
+      "bytes": "24fc",
+      "disassembly": "and     al, 0FCh"
+    },
+    {
+      "ea": "0x10f55",
+      "bytes": "e661",
+      "disassembly": "out     61h, al"
+    },
+    {
+      "ea": "0x10f66",
+      "bytes": "8b4604",
+      "disassembly": "mov     ax, [bp+arg_0]"
+    },
+    {
+      "ea": "0x10f69",
+      "bytes": "e642",
+      "disassembly": "out     42h, al"
+    },
+    {
+      "ea": "0x10f6d",
+      "bytes": "e642",
+      "disassembly": "out     42h, al"
+    },
+    {
+      "ea": "0x10f86",
+      "bytes": "e8aaff",
+      "disassembly": "call    sub_10F33"
+    },
+    {
+      "ea": "0x10f9a",
+      "bytes": "b81027",
+      "disassembly": "mov     ax, 2710h"
+    },
+    {
+      "ea": "0x10f9e",
+      "bytes": "e8b209",
+      "disassembly": "call    sub_11953"
+    },
+    {
+      "ea": "0x10fad",
+      "bytes": "e8adff",
+      "disassembly": "call    sub_10F5D"
+    },
+    {
+      "ea": "0x10fe1",
+      "bytes": "837efe64",
+      "disassembly": "cmp     [bp+var_2], 64h"
+    },
+    {
+      "ea": "0x10fea",
+      "bytes": "e85bff",
+      "disassembly": "call    sub_10F48"
+    },
+    {
+      "ea": "0x11013",
+      "bytes": "837efc02",
+      "disassembly": "cmp     [bp+var_4], 2"
+    }
+  ],
+  "limitation": "已確認 TITLE 呼叫順序與演算法形狀；未宣稱逐週期 PIT／busy-wait 時長、實機波形或精確 wall-clock parity。後續 OGG 只能標為 hardware-spec approximation。"
+}

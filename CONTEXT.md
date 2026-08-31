@@ -78,6 +78,9 @@
 - SPEC-002 的完整 EGA extraction set 已建立並由 verifier 對清冊核對：30 個邏輯 archive、
   1,022 payload 中，996 筆來源已證實、26 筆為明確非圖片 placeholder、0 筆 unknown；
   目前可形成 752 個已證實 PNG 單位。這只關閉 EGA 素材格式，尚未建立 production extractor。
+- 音訊 RE 已建立 SPEC-004 DRAFT。固定 ZIP 沒有獨立音訊檔；TITLE `sub_10F75` 已證實為
+  兩段、每段 100 次隨機 PIT 除數更新的 PC Speaker cue。`TANDYPIN.EXE` 已證實是 DOS
+  `AH=31h` 常駐記憶體程式，不是音訊播放器。其餘 executable 的 cue 母體尚未關閉。
 
 ## 固定輸入
 
@@ -118,6 +121,5 @@ KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸�
 KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 交付範圍仍等待使用者決定；完整 EGA extraction set 已無 unknown。下一工作
-必須先確認首版採 EGA-only、EGA 基準後續追加 CGA／Hercules，或三者同時交付；決策後才
-完成原子化 production 抽取器設計。SPEC-002 READY 前不接 production runtime。
+顯示 theme 交付範圍仍等待使用者決定；在等待期間先關閉其餘 executable 的可聽 cue 母體。
+SPEC-002／004 READY 前不接 production runtime。

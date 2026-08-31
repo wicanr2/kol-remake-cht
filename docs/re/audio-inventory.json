@@ -1,0 +1,27 @@
+{
+  "schema": "kol-original-audio-inventory-v1",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "standalone_audio_files": [],
+  "confirmed_algorithmic_cues": [
+    {
+      "navigation_label": "title-random-tone-burst",
+      "source": "TITLE.EXE",
+      "source_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+      "original_function": "sub_10F75",
+      "start_ea": "0x10f75",
+      "mechanism": "PC Speaker and PIT channel 2",
+      "status": "confirmed",
+      "evidence": "ida-fingerprints/TITLE-speaker-summary.json",
+      "semantic_limit": "導覽標籤不是原版命名；精確硬體時長與波形未宣稱。"
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "name": "TANDYPIN.EXE",
+      "reason": "DOS INT 21h AH=31h terminate-and-stay-resident；入口沒有 speaker/PIT I/O",
+      "status": "confirmed",
+      "evidence": "ida-fingerprints/TANDYPIN-residency-summary.json"
+    }
+  ],
+  "coverage_limit": "目前只登錄已證實的 TITLE cue；尚未宣稱所有 executable 的演算法音效已窮舉。"
+}

@@ -873,3 +873,18 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - KOLMPICS 全 83 筆現為 71 筆已證實來源與 12 筆 `excluded_non_image`，不再有
   `excluded_unknown`。完整 EGA extraction set 的 pending 因此歸零；SPEC-002 仍等待
   顯示 theme 決策與 production extractor 設計，未接 Go runtime。
+
+## RE-032：TITLE PC Speaker cue 與 TANDYPIN 排除
+
+- 輸入：`TITLE.EXE` SHA-256 `8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6`；
+  `TANDYPIN.EXE` SHA-256 `036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3`。
+- 工具／位址空間：IDA Pro 9.4；DOS MZ 載入後的 IDA linear effective address。安全摘要為
+  `ida-fingerprints/TITLE-speaker-summary.json` 與 `TANDYPIN-residency-summary.json`。
+- **已證實**：TITLE `sub_10F33` 啟用 PC Speaker、`sub_10F48` 關閉 speaker、`sub_10F5D`
+  將除數寫入 PIT channel 2。`sub_10F75` 執行兩段音爆，每段 100 次除數更新；
+  `sub_11953` 呼叫 `_rand` 並回傳 `rand() % N + 1`，`sub_11904` 為忙等延遲。
+- **已證實**：`TANDYPIN.EXE` 入口執行 `INT 21h`、`AH=31h`，以 `DX=0x0401` terminate-and-
+  stay-resident；入口沒有 speaker／PIT I/O，因此排除為獨立音訊素材或音效播放器。
+- **限制**：`title-random-tone-burst` 只是導覽標籤；不宣稱原版語意名稱。依硬體時序停止線，
+  不追逐週期 PIT／busy-wait parity。其餘 executable 尚未完成 cue 母體掃描。
+- 可重生性：TITLE 與 TANDYPIN 各以兩個全新 IDA DB 執行，兩份 safe JSON 都逐 byte 相同。
