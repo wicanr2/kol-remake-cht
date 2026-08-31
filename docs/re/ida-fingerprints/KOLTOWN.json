@@ -1,0 +1,52 @@
+{
+  "schema": "kol-ida-fingerprint-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN.EXE",
+  "input_bytes": 133760,
+  "input_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+  "loader_file_type": "MS-DOS executable (EXE)",
+  "file_type_code": 22,
+  "processor": "metapc",
+  "address_space": "IDA linear effective address",
+  "min_ea": "0x10000",
+  "max_ea": "0x30cc0",
+  "start_ip": "0x12",
+  "start_cs": "0x2f51",
+  "function_count": 0,
+  "segments": [
+    {
+      "name": "dseg",
+      "class": "DATA",
+      "start_ea": "0x10000",
+      "end_ea": "0x2f510",
+      "size": 128272,
+      "bitness": 0,
+      "permissions": 0
+    },
+    {
+      "name": "seg001",
+      "class": "CODE",
+      "start_ea": "0x2f510",
+      "end_ea": "0x30c40",
+      "size": 5936,
+      "bitness": 0,
+      "permissions": 0
+    },
+    {
+      "name": "seg002",
+      "class": "STACK",
+      "start_ea": "0x30c40",
+      "end_ea": "0x30cc0",
+      "size": 128,
+      "bitness": 0,
+      "permissions": 0
+    }
+  ],
+  "entries": [
+    {
+      "ordinal": 193826,
+      "ea": "0x2f522",
+      "name": "start"
+    }
+  ]
+}

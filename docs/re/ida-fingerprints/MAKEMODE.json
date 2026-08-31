@@ -1,0 +1,52 @@
+{
+  "schema": "kol-ida-fingerprint-v1",
+  "ida_version": "9.4",
+  "input_name": "MAKEMODE.EXE",
+  "input_bytes": 15744,
+  "input_sha256": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56",
+  "loader_file_type": "MS-DOS executable (EXE)",
+  "file_type_code": 22,
+  "processor": "metapc",
+  "address_space": "IDA linear effective address",
+  "min_ea": "0x10000",
+  "max_ea": "0x226d8",
+  "start_ip": "0x1964",
+  "start_cs": "0x1000",
+  "function_count": 2,
+  "segments": [
+    {
+      "name": "seg000",
+      "class": "CODE",
+      "start_ea": "0x10000",
+      "end_ea": "0x13210",
+      "size": 12816,
+      "bitness": 0,
+      "permissions": 0
+    },
+    {
+      "name": "dseg",
+      "class": "DATA",
+      "start_ea": "0x13210",
+      "end_ea": "0x222f0",
+      "size": 61664,
+      "bitness": 0,
+      "permissions": 0
+    },
+    {
+      "name": "seg002",
+      "class": "STACK",
+      "start_ea": "0x222f0",
+      "end_ea": "0x226d8",
+      "size": 1000,
+      "bitness": 0,
+      "permissions": 0
+    }
+  ],
+  "entries": [
+    {
+      "ordinal": 72036,
+      "ea": "0x11964",
+      "name": "start"
+    }
+  ]
+}

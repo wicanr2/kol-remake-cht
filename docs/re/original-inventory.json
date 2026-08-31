@@ -1,0 +1,898 @@
+{
+  "schema": "kol-original-inventory-v1",
+  "inputs": [
+    {
+      "name": "Knights-of-legend.zip",
+      "bytes": 1699452,
+      "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "name": "knightslegend-manual.pdf",
+      "bytes": 35942482,
+      "sha256": "4c80f5d4c7221f9d3376546d249d52e2fc7fc0f73b48ee9daf6e20ce87d7086a"
+    },
+    {
+      "name": "knightslegend-refcard.pdf",
+      "bytes": 2253388,
+      "sha256": "4815bc6c3a51ff7abaa610a071f08e05eb2dd180e5130b0674de8b4a94b2abd3"
+    },
+    {
+      "name": "KOL-MAP-001a4s2.jpg",
+      "bytes": 92661,
+      "sha256": "9528ca50e14d09d746d2ecce523ac56f78baeaec5cdd4ba5e3351679bd52dff9"
+    },
+    {
+      "name": "knightslegend.jpg",
+      "bytes": 433061,
+      "sha256": "76b08e4b6a6da9b616d7f57ce3e77c2973591379c8897779d849126555defb9b"
+    },
+    {
+      "name": "knightslegend-back.jpg",
+      "bytes": 525582,
+      "sha256": "10d3e63358d6604b807d4afae3b53acf9a2962ce10871390dd815e325e53b194"
+    }
+  ],
+  "zip": {
+    "entry_count": 76,
+    "comment_hex": "",
+    "crc_check": "pass",
+    "entries": [
+      {
+        "name": "Knights-of-legend/",
+        "directory": true,
+        "bytes": 0,
+        "compressed_bytes": 0,
+        "compression_method": 0,
+        "crc32": "00000000",
+        "dos_timestamp": "2019-08-21T15:00:04",
+        "sha256": null
+      },
+      {
+        "name": "Knights-of-legend/AWD1HERC.0",
+        "directory": false,
+        "bytes": 4000,
+        "compressed_bytes": 2349,
+        "compression_method": 8,
+        "crc32": "6d4ccc8b",
+        "dos_timestamp": "1998-01-25T16:00:34",
+        "sha256": "9c6b05c11cf7efaac7a701c761c7bdcd82abdeba99172e431049741f90ba4977"
+      },
+      {
+        "name": "Knights-of-legend/AWD1PCGA.0",
+        "directory": false,
+        "bytes": 4000,
+        "compressed_bytes": 3148,
+        "compression_method": 8,
+        "crc32": "bab3379f",
+        "dos_timestamp": "1998-01-25T16:00:34",
+        "sha256": "3196cd7bdf3daa7530ee97b53ec8cd28cd9e99a31c1c3fb102ab723976854b0d"
+      },
+      {
+        "name": "Knights-of-legend/AWD1PICS.0",
+        "directory": false,
+        "bytes": 4000,
+        "compressed_bytes": 3421,
+        "compression_method": 8,
+        "crc32": "23800b4c",
+        "dos_timestamp": "1998-01-25T16:00:34",
+        "sha256": "01b8461fb6bf1d697662ef4358284628287deabd5db65dd043247d1be41e5f8f"
+      },
+      {
+        "name": "Knights-of-legend/BACKPICS.0",
+        "directory": false,
+        "bytes": 64982,
+        "compressed_bytes": 63759,
+        "compression_method": 8,
+        "crc32": "3b233869",
+        "dos_timestamp": "1989-11-12T01:19:58",
+        "sha256": "24c0283b9c6d719053b98ee34b04ff4d8ec342ba499546eafdb7666d8176c8b6"
+      },
+      {
+        "name": "Knights-of-legend/BOOKDATA.0",
+        "directory": false,
+        "bytes": 3441,
+        "compressed_bytes": 3274,
+        "compression_method": 8,
+        "crc32": "76c3f9c5",
+        "dos_timestamp": "1989-12-13T15:51:14",
+        "sha256": "d63a8b5b5e28e3b47dfd17bee1315ad5a9c3578856e84790b36d9c633ae2353b"
+      },
+      {
+        "name": "Knights-of-legend/BOOKPICS.0",
+        "directory": false,
+        "bytes": 37996,
+        "compressed_bytes": 37151,
+        "compression_method": 8,
+        "crc32": "8a71c332",
+        "dos_timestamp": "1989-11-30T15:36:00",
+        "sha256": "ef3aff1d003d44d7828290b8e80217606b8fecd05a90ee6b6c2dac2a4a92be39"
+      },
+      {
+        "name": "Knights-of-legend/CHARDATA",
+        "directory": false,
+        "bytes": 12288,
+        "compressed_bytes": 1628,
+        "compression_method": 8,
+        "crc32": "d6409b95",
+        "dos_timestamp": "1998-02-03T20:22:28",
+        "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+      },
+      {
+        "name": "Knights-of-legend/CHARPICS",
+        "directory": false,
+        "bytes": 12160,
+        "compressed_bytes": 3749,
+        "compression_method": 8,
+        "crc32": "971f1240",
+        "dos_timestamp": "1998-02-03T20:22:28",
+        "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+      },
+      {
+        "name": "Knights-of-legend/CHARPICS.0",
+        "directory": false,
+        "bytes": 29387,
+        "compressed_bytes": 27767,
+        "compression_method": 8,
+        "crc32": "43b1dd85",
+        "dos_timestamp": "1989-11-30T15:35:28",
+        "sha256": "21ff648157f5ba12e1687d3fdc09ed5044db3ffab980be9a815eff84df278b17"
+      },
+      {
+        "name": "Knights-of-legend/COMBPICS.0",
+        "directory": false,
+        "bytes": 44315,
+        "compressed_bytes": 43599,
+        "compression_method": 8,
+        "crc32": "ad5efd3c",
+        "dos_timestamp": "1989-11-30T15:54:32",
+        "sha256": "03bfa87ba848483eb091f4197946824c915aed5814ea96a25c0a1135ed273895"
+      },
+      {
+        "name": "Knights-of-legend/DISKA0",
+        "directory": false,
+        "bytes": 1,
+        "compressed_bytes": 1,
+        "compression_method": 0,
+        "crc32": "76d32be0",
+        "dos_timestamp": "1989-06-22T19:32:32",
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"
+      },
+      {
+        "name": "Knights-of-legend/DISKA1",
+        "directory": false,
+        "bytes": 1,
+        "compressed_bytes": 1,
+        "compression_method": 0,
+        "crc32": "76d32be0",
+        "dos_timestamp": "1989-06-22T19:32:32",
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"
+      },
+      {
+        "name": "Knights-of-legend/DISKA2",
+        "directory": false,
+        "bytes": 1,
+        "compressed_bytes": 1,
+        "compression_method": 0,
+        "crc32": "76d32be0",
+        "dos_timestamp": "1989-06-22T19:32:32",
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"
+      },
+      {
+        "name": "Knights-of-legend/DISKA3",
+        "directory": false,
+        "bytes": 1,
+        "compressed_bytes": 1,
+        "compression_method": 0,
+        "crc32": "76d32be0",
+        "dos_timestamp": "1989-06-22T19:32:32",
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"
+      },
+      {
+        "name": "Knights-of-legend/DISKA4",
+        "directory": false,
+        "bytes": 1,
+        "compressed_bytes": 1,
+        "compression_method": 0,
+        "crc32": "76d32be0",
+        "dos_timestamp": "1989-06-22T19:32:32",
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"
+      },
+      {
+        "name": "Knights-of-legend/DISKA5",
+        "directory": false,
+        "bytes": 1,
+        "compressed_bytes": 1,
+        "compression_method": 0,
+        "crc32": "76d32be0",
+        "dos_timestamp": "1989-06-22T19:32:32",
+        "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"
+      },
+      {
+        "name": "Knights-of-legend/ENDPICS.0",
+        "directory": false,
+        "bytes": 24327,
+        "compressed_bytes": 23799,
+        "compression_method": 8,
+        "crc32": "22c955d6",
+        "dos_timestamp": "1989-11-03T20:43:52",
+        "sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e"
+      },
+      {
+        "name": "Knights-of-legend/ENDTXT.0",
+        "directory": false,
+        "bytes": 2277,
+        "compressed_bytes": 2128,
+        "compression_method": 8,
+        "crc32": "3d6d191f",
+        "dos_timestamp": "1989-11-30T16:03:44",
+        "sha256": "ccd8a8d69b0a257fc33574c51e401988dc65dad891d863d41c28f2e918e22b7a"
+      },
+      {
+        "name": "Knights-of-legend/FACEPICS.0",
+        "directory": false,
+        "bytes": 8880,
+        "compressed_bytes": 8494,
+        "compression_method": 8,
+        "crc32": "a5bf8dd5",
+        "dos_timestamp": "1989-11-07T05:18:56",
+        "sha256": "73e4cc6e9c3481235be0e06477a25f10cb1308cfa62df2de0bb4eef305577951"
+      },
+      {
+        "name": "Knights-of-legend/HANDPICS.0",
+        "directory": false,
+        "bytes": 990,
+        "compressed_bytes": 749,
+        "compression_method": 8,
+        "crc32": "59868509",
+        "dos_timestamp": "1989-10-26T23:23:08",
+        "sha256": "cfd10a817e2e31c5ddd233385da9231f29d9f3b8e4937ace8481913b342b16e6"
+      },
+      {
+        "name": "Knights-of-legend/HEADPICS.0",
+        "directory": false,
+        "bytes": 17354,
+        "compressed_bytes": 15512,
+        "compression_method": 8,
+        "crc32": "ba69881e",
+        "dos_timestamp": "1989-10-25T16:22:30",
+        "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643"
+      },
+      {
+        "name": "Knights-of-legend/INSTALL.BAT",
+        "directory": false,
+        "bytes": 1995,
+        "compressed_bytes": 455,
+        "compression_method": 8,
+        "crc32": "42ad8ba3",
+        "dos_timestamp": "1989-12-05T12:29:48",
+        "sha256": "63aa5c529b45940143a46170ff15f59c507cde6b900ed4fd19e9923fca13f9bc"
+      },
+      {
+        "name": "Knights-of-legend/INSUB.BAT",
+        "directory": false,
+        "bytes": 1696,
+        "compressed_bytes": 313,
+        "compression_method": 8,
+        "crc32": "16b36e85",
+        "dos_timestamp": "1989-12-11T17:29:44",
+        "sha256": "7255f2083aef794170d3c8fd7dbe114f2b4d24b47b9d6853fc4c12f5e96d01dd"
+      },
+      {
+        "name": "Knights-of-legend/ITEM.LST",
+        "directory": false,
+        "bytes": 976,
+        "compressed_bytes": 845,
+        "compression_method": 8,
+        "crc32": "14d379bb",
+        "dos_timestamp": "1989-09-25T11:50:42",
+        "sha256": "1fc3d8f83eb796d01154efb3b5d33977bf43c146daf76d300a07713fe05c3e80"
+      },
+      {
+        "name": "Knights-of-legend/KOL.EXE",
+        "directory": false,
+        "bytes": 11971,
+        "compressed_bytes": 7745,
+        "compression_method": 8,
+        "crc32": "9688aed6",
+        "dos_timestamp": "1989-12-02T12:16:36",
+        "sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+        "mz_header": {
+          "magic": "MZ",
+          "bytes_in_last_page": 195,
+          "pages": 24,
+          "relocations": 6,
+          "header_paragraphs": 32,
+          "min_extra_paragraphs": 99,
+          "max_extra_paragraphs": 65535,
+          "initial_ss": 752,
+          "initial_sp": 1000,
+          "checksum": 26086,
+          "initial_ip": 584,
+          "initial_cs": 0,
+          "relocation_table_offset": 30,
+          "overlay_number": 0
+        }
+      },
+      {
+        "name": "Knights-of-legend/KOLBOOK.EXE",
+        "directory": false,
+        "bytes": 40192,
+        "compressed_bytes": 20563,
+        "compression_method": 8,
+        "crc32": "7bc77757",
+        "dos_timestamp": "1989-12-18T18:53:34",
+        "sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+        "mz_header": {
+          "magic": "MZ",
+          "bytes_in_last_page": 201,
+          "pages": 79,
+          "relocations": 4,
+          "header_paragraphs": 32,
+          "min_extra_paragraphs": 3426,
+          "max_extra_paragraphs": 65535,
+          "initial_ss": 5777,
+          "initial_sp": 2000,
+          "checksum": 7409,
+          "initial_ip": 27998,
+          "initial_cs": 0,
+          "relocation_table_offset": 30,
+          "overlay_number": 0
+        }
+      },
+      {
+        "name": "Knights-of-legend/KOLDATA.0",
+        "directory": false,
+        "bytes": 5162,
+        "compressed_bytes": 4990,
+        "compression_method": 8,
+        "crc32": "879b5e9d",
+        "dos_timestamp": "1989-12-12T16:55:58",
+        "sha256": "25bd997fcaaeb22ccfa9a2f832f4d86a321a2b18a56b404134b83bc66bae9cb6"
+      },
+      {
+        "name": "Knights-of-legend/KOLMPICS.0",
+        "directory": false,
+        "bytes": 11974,
+        "compressed_bytes": 10980,
+        "compression_method": 8,
+        "crc32": "88f07c7f",
+        "dos_timestamp": "1989-11-30T15:52:02",
+        "sha256": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d"
+      },
+      {
+        "name": "Knights-of-legend/KOLPICS.0",
+        "directory": false,
+        "bytes": 35201,
+        "compressed_bytes": 32837,
+        "compression_method": 8,
+        "crc32": "6d000601",
+        "dos_timestamp": "1989-12-02T14:54:48",
+        "sha256": "502367c613109eb326e57c54a727c8e3e414c1f8c3d73c9ad16497c453b8b402"
+      },
+      {
+        "name": "Knights-of-legend/KOLTOWN.EXE",
+        "directory": false,
+        "bytes": 133760,
+        "compressed_bytes": 57197,
+        "compression_method": 8,
+        "crc32": "d3ccfee9",
+        "dos_timestamp": "1998-01-25T15:19:30",
+        "sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+        "mz_header": {
+          "magic": "MZ",
+          "bytes_in_last_page": 47,
+          "pages": 262,
+          "relocations": 0,
+          "header_paragraphs": 32,
+          "min_extra_paragraphs": 2883,
+          "max_extra_paragraphs": 65535,
+          "initial_ss": 8388,
+          "initial_sp": 128,
+          "checksum": 0,
+          "initial_ip": 18,
+          "initial_cs": 8017,
+          "relocation_table_offset": 30,
+          "overlay_number": 0
+        }
+      },
+      {
+        "name": "Knights-of-legend/LEGSPICS.0",
+        "directory": false,
+        "bytes": 39694,
+        "compressed_bytes": 37074,
+        "compression_method": 8,
+        "crc32": "434944e3",
+        "dos_timestamp": "1989-10-25T16:37:06",
+        "sha256": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f"
+      },
+      {
+        "name": "Knights-of-legend/MAGIC.0",
+        "directory": false,
+        "bytes": 1268,
+        "compressed_bytes": 1121,
+        "compression_method": 8,
+        "crc32": "317d5e50",
+        "dos_timestamp": "1989-10-24T20:22:28",
+        "sha256": "2fb9389f6ccf3a79fbdcac7d702469641f0698b608739a75bc5b2ce7ca2c08b2"
+      },
+      {
+        "name": "Knights-of-legend/MAKEMODE.EXE",
+        "directory": false,
+        "bytes": 15744,
+        "compressed_bytes": 9194,
+        "compression_method": 8,
+        "crc32": "68b8601c",
+        "dos_timestamp": "1989-12-18T19:31:36",
+        "sha256": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56",
+        "mz_header": {
+          "magic": "MZ",
+          "bytes_in_last_page": 321,
+          "pages": 31,
+          "relocations": 4,
+          "header_paragraphs": 32,
+          "min_extra_paragraphs": 3770,
+          "max_extra_paragraphs": 65535,
+          "initial_ss": 4655,
+          "initial_sp": 1000,
+          "checksum": 18587,
+          "initial_ip": 6500,
+          "initial_cs": 0,
+          "relocation_table_offset": 30,
+          "overlay_number": 0
+        }
+      },
+      {
+        "name": "Knights-of-legend/MISCPICS.0",
+        "directory": false,
+        "bytes": 6877,
+        "compressed_bytes": 6605,
+        "compression_method": 8,
+        "crc32": "834ef250",
+        "dos_timestamp": "1989-12-02T14:55:14",
+        "sha256": "39664ad806ee26df8ca588ce0eff633e916486ac4e313984b582b06703efea7c"
+      },
+      {
+        "name": "Knights-of-legend/MONPICS.0",
+        "directory": false,
+        "bytes": 35131,
+        "compressed_bytes": 34161,
+        "compression_method": 8,
+        "crc32": "397801d7",
+        "dos_timestamp": "1989-11-06T13:18:56",
+        "sha256": "b97aa9299e6fe62ca6f54b35b6cc8cb94779700c8535ff960d18ca66bebeb6a9"
+      },
+      {
+        "name": "Knights-of-legend/PERPICS.0",
+        "directory": false,
+        "bytes": 14921,
+        "compressed_bytes": 14575,
+        "compression_method": 8,
+        "crc32": "ddab26f6",
+        "dos_timestamp": "1989-10-24T13:20:42",
+        "sha256": "a164492edc146880b5ba809d0898a19c4758fc1ea1e1c3966a7dce96871fb5bc"
+      },
+      {
+        "name": "Knights-of-legend/REGION0.DAT",
+        "directory": false,
+        "bytes": 48,
+        "compressed_bytes": 48,
+        "compression_method": 0,
+        "crc32": "d2323a5b",
+        "dos_timestamp": "1998-01-25T16:00:34",
+        "sha256": "21d1291a41792688268af02bbeabcf56a5402c614d3c0d86da2adbe55a9e6ca4"
+      },
+      {
+        "name": "Knights-of-legend/SET0PICS.0",
+        "directory": false,
+        "bytes": 3360,
+        "compressed_bytes": 2839,
+        "compression_method": 8,
+        "crc32": "86bb9f49",
+        "dos_timestamp": "1989-11-07T19:20:12",
+        "sha256": "d565cd010f3caab65a60a1277c5067bdf765873ca3ff923331211813211ead56"
+      },
+      {
+        "name": "Knights-of-legend/SET1PICS.0",
+        "directory": false,
+        "bytes": 4518,
+        "compressed_bytes": 3861,
+        "compression_method": 8,
+        "crc32": "dcc18303",
+        "dos_timestamp": "1989-11-07T05:18:08",
+        "sha256": "3ada5b50c2137be3b4630b861e958d933f566509b8435756e832a5ebf60d38ea"
+      },
+      {
+        "name": "Knights-of-legend/SET2PICS.0",
+        "directory": false,
+        "bytes": 8707,
+        "compressed_bytes": 7587,
+        "compression_method": 8,
+        "crc32": "2035313a",
+        "dos_timestamp": "1989-11-07T05:31:06",
+        "sha256": "b32d70b876a8eb1dc65eabe8bab9a0ef65cd25c2568bc5fb1ab3101ff36b9f5f"
+      },
+      {
+        "name": "Knights-of-legend/SHLDPICS",
+        "directory": false,
+        "bytes": 12160,
+        "compressed_bytes": 65,
+        "compression_method": 8,
+        "crc32": "19497397",
+        "dos_timestamp": "1998-02-03T20:22:28",
+        "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+      },
+      {
+        "name": "Knights-of-legend/SHLDPICS.0",
+        "directory": false,
+        "bytes": 2614,
+        "compressed_bytes": 2409,
+        "compression_method": 8,
+        "crc32": "9c0c376b",
+        "dos_timestamp": "1989-11-17T06:24:00",
+        "sha256": "95f089d3c0d7b276c61676dfbd0ed577dce180d541b6603963060dd60e793190"
+      },
+      {
+        "name": "Knights-of-legend/STEEDPIC",
+        "directory": false,
+        "bytes": 12160,
+        "compressed_bytes": 1207,
+        "compression_method": 8,
+        "crc32": "ee1bbf7d",
+        "dos_timestamp": "1998-02-03T20:22:28",
+        "sha256": "1bac851d19b4320f747f3ae85c8f467cc886e73b7fdcf1efc3ef9f6d58307b1a"
+      },
+      {
+        "name": "Knights-of-legend/STEEDS.0",
+        "directory": false,
+        "bytes": 2101,
+        "compressed_bytes": 1900,
+        "compression_method": 8,
+        "crc32": "8a101910",
+        "dos_timestamp": "1989-10-22T13:19:58",
+        "sha256": "a4df9f866323a7661312f735bf4e01b86a3723a6a18a7a8857d20589f0d60206"
+      },
+      {
+        "name": "Knights-of-legend/TANDYPIN.EXE",
+        "directory": false,
+        "bytes": 624,
+        "compressed_bytes": 71,
+        "compression_method": 8,
+        "crc32": "e78ee18c",
+        "dos_timestamp": "1989-09-28T12:20:28",
+        "sha256": "036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3",
+        "mz_header": {
+          "magic": "MZ",
+          "bytes_in_last_page": 112,
+          "pages": 2,
+          "relocations": 1,
+          "header_paragraphs": 32,
+          "min_extra_paragraphs": 0,
+          "max_extra_paragraphs": 65535,
+          "initial_ss": 1,
+          "initial_sp": 96,
+          "checksum": 1044,
+          "initial_ip": 0,
+          "initial_cs": 0,
+          "relocation_table_offset": 30,
+          "overlay_number": 0
+        }
+      },
+      {
+        "name": "Knights-of-legend/TITLE.EXE",
+        "directory": false,
+        "bytes": 18671,
+        "compressed_bytes": 10983,
+        "compression_method": 8,
+        "crc32": "8b74b500",
+        "dos_timestamp": "1989-12-13T16:16:26",
+        "sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+        "mz_header": {
+          "magic": "MZ",
+          "bytes_in_last_page": 239,
+          "pages": 37,
+          "relocations": 4,
+          "header_paragraphs": 32,
+          "min_extra_paragraphs": 694,
+          "max_extra_paragraphs": 65535,
+          "initial_ss": 1766,
+          "initial_sp": 1000,
+          "checksum": 55712,
+          "initial_ip": 7390,
+          "initial_cs": 0,
+          "relocation_table_offset": 30,
+          "overlay_number": 0
+        }
+      },
+      {
+        "name": "Knights-of-legend/TORPICS.0",
+        "directory": false,
+        "bytes": 56394,
+        "compressed_bytes": 53188,
+        "compression_method": 8,
+        "crc32": "98230f08",
+        "dos_timestamp": "1989-10-24T20:31:40",
+        "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3"
+      },
+      {
+        "name": "Knights-of-legend/TOWN0.0",
+        "directory": false,
+        "bytes": 54543,
+        "compressed_bytes": 52049,
+        "compression_method": 8,
+        "crc32": "62147a71",
+        "dos_timestamp": "1989-12-04T16:36:40",
+        "sha256": "73097c17543124c91cd4a8eca71d3926112cda0a8de68c0224116c460098f8ea"
+      },
+      {
+        "name": "Knights-of-legend/TOWN1.0",
+        "directory": false,
+        "bytes": 56199,
+        "compressed_bytes": 52730,
+        "compression_method": 8,
+        "crc32": "07d216b0",
+        "dos_timestamp": "1989-12-08T12:36:28",
+        "sha256": "5177e54b55750653827d46f7680280be7c0b38bdf7b0a55b2309a6bd234915be"
+      },
+      {
+        "name": "Knights-of-legend/TOWN2.0",
+        "directory": false,
+        "bytes": 53571,
+        "compressed_bytes": 50089,
+        "compression_method": 8,
+        "crc32": "da2c3489",
+        "dos_timestamp": "1989-12-08T12:36:32",
+        "sha256": "07876099e66384a011ab1b0306b813e613fcf5872634410bbafc3c431d29916d"
+      },
+      {
+        "name": "Knights-of-legend/TOWN3.0",
+        "directory": false,
+        "bytes": 49479,
+        "compressed_bytes": 46498,
+        "compression_method": 8,
+        "crc32": "aaf21355",
+        "dos_timestamp": "1989-12-08T12:36:38",
+        "sha256": "5a0f38720a91d538b8e99eaacd8bfba22587398cf7f67370e34356e6a23e76b9"
+      },
+      {
+        "name": "Knights-of-legend/TOWN4.0",
+        "directory": false,
+        "bytes": 50518,
+        "compressed_bytes": 47522,
+        "compression_method": 8,
+        "crc32": "d31f5a56",
+        "dos_timestamp": "1989-12-08T12:36:42",
+        "sha256": "10762cfecfa8b889d37da3e70e8c4b720a8ca04f7fcb823911e01b2f3d54dfd3"
+      },
+      {
+        "name": "Knights-of-legend/TOWN5.0",
+        "directory": false,
+        "bytes": 51692,
+        "compressed_bytes": 48693,
+        "compression_method": 8,
+        "crc32": "bcf86037",
+        "dos_timestamp": "1989-12-08T12:36:46",
+        "sha256": "cae3ca9c6277fbffb28b07d4898d22d133143241b8851e7fff1628959ae87d69"
+      },
+      {
+        "name": "Knights-of-legend/TOWN6.0",
+        "directory": false,
+        "bytes": 50752,
+        "compressed_bytes": 47716,
+        "compression_method": 8,
+        "crc32": "bd6a6208",
+        "dos_timestamp": "1989-12-08T12:36:50",
+        "sha256": "a8f01ef46614295fd3e15a4b730184e2968d036e5f323c99a88dd54e7a2aecf4"
+      },
+      {
+        "name": "Knights-of-legend/TOWN7.0",
+        "directory": false,
+        "bytes": 65375,
+        "compressed_bytes": 61096,
+        "compression_method": 8,
+        "crc32": "0a097484",
+        "dos_timestamp": "1989-12-08T12:36:56",
+        "sha256": "3eae92a02e2c719d04a03490a6fa2eb4e7453044eb99b50605c61a25bcaabb93"
+      },
+      {
+        "name": "Knights-of-legend/TOWN7.1",
+        "directory": false,
+        "bytes": 2195,
+        "compressed_bytes": 2096,
+        "compression_method": 8,
+        "crc32": "6395d8fa",
+        "dos_timestamp": "1989-12-08T12:36:54",
+        "sha256": "700b16704a3f48a22b2a28a28179e664301bc156140b8e591c01cc036fbe70c4"
+      },
+      {
+        "name": "Knights-of-legend/TWN0PICS.0",
+        "directory": false,
+        "bytes": 65334,
+        "compressed_bytes": 64176,
+        "compression_method": 8,
+        "crc32": "9d6c6625",
+        "dos_timestamp": "1989-11-30T15:57:02",
+        "sha256": "ba754f43423a5aa9ab2cac9cbe538a06a2f11b5b4a8c4e77d089d496e782b320"
+      },
+      {
+        "name": "Knights-of-legend/TWN0PICS.1",
+        "directory": false,
+        "bytes": 22734,
+        "compressed_bytes": 22325,
+        "compression_method": 8,
+        "crc32": "3a6eb4c8",
+        "dos_timestamp": "1989-11-30T15:57:02",
+        "sha256": "ee4d5ffe9d17d49b634fb16376087385db5eb65d7186d404ccf950019ccc5e0f"
+      },
+      {
+        "name": "Knights-of-legend/TWN1PICS.0",
+        "directory": false,
+        "bytes": 62779,
+        "compressed_bytes": 62030,
+        "compression_method": 8,
+        "crc32": "82fca096",
+        "dos_timestamp": "1989-11-30T15:57:12",
+        "sha256": "fe4e6824266d5f894c4eb9fb21d70e9ea717b0200dd91ce233945b6946dd546e"
+      },
+      {
+        "name": "Knights-of-legend/TWN1PICS.1",
+        "directory": false,
+        "bytes": 32265,
+        "compressed_bytes": 31955,
+        "compression_method": 8,
+        "crc32": "de0d1253",
+        "dos_timestamp": "1989-11-30T15:57:12",
+        "sha256": "7f1a2b1a0098c732a5491529726da39fa432c30f8a06c8e75b5ae3660a82f2e9"
+      },
+      {
+        "name": "Knights-of-legend/TWN2PICS.0",
+        "directory": false,
+        "bytes": 63045,
+        "compressed_bytes": 62246,
+        "compression_method": 8,
+        "crc32": "2ccce64b",
+        "dos_timestamp": "1989-11-30T15:57:22",
+        "sha256": "d49348171855f6702ac757535812ab8474871a2d5c6032eac7de10c917a47a32"
+      },
+      {
+        "name": "Knights-of-legend/TWN2PICS.1",
+        "directory": false,
+        "bytes": 20716,
+        "compressed_bytes": 20503,
+        "compression_method": 8,
+        "crc32": "460f9527",
+        "dos_timestamp": "1989-11-30T15:57:20",
+        "sha256": "05061f63af054ed2b017c421e71570d08f87baab983b31c4e0642ec939f15f42"
+      },
+      {
+        "name": "Knights-of-legend/TWN3PICS.0",
+        "directory": false,
+        "bytes": 65455,
+        "compressed_bytes": 64482,
+        "compression_method": 8,
+        "crc32": "f7d32c35",
+        "dos_timestamp": "1989-11-30T15:57:30",
+        "sha256": "09de032a9bc683c7411765d60caf0416e8df88154737904b25c974de6c4043d8"
+      },
+      {
+        "name": "Knights-of-legend/TWN3PICS.1",
+        "directory": false,
+        "bytes": 11691,
+        "compressed_bytes": 11562,
+        "compression_method": 8,
+        "crc32": "dfe0e230",
+        "dos_timestamp": "1989-11-30T15:57:28",
+        "sha256": "6944fd0f409eb617c4cf45917a61c9124358b19b9968a753daf7bb72a7195407"
+      },
+      {
+        "name": "Knights-of-legend/TWN4PICS.0",
+        "directory": false,
+        "bytes": 60885,
+        "compressed_bytes": 60133,
+        "compression_method": 8,
+        "crc32": "4830eb8f",
+        "dos_timestamp": "1989-11-30T15:57:38",
+        "sha256": "db2c1e0962ce0c2b09cb98cb1a8bf00b1765d39a25adc89c24531313bb89f307"
+      },
+      {
+        "name": "Knights-of-legend/TWN4PICS.1",
+        "directory": false,
+        "bytes": 10875,
+        "compressed_bytes": 10765,
+        "compression_method": 8,
+        "crc32": "2c58e674",
+        "dos_timestamp": "1989-11-30T15:57:38",
+        "sha256": "40ffb621eeb9d4684cf3885ce5ef8b868c0214756ea533c635ee71d8db947836"
+      },
+      {
+        "name": "Knights-of-legend/TWN5PICS.0",
+        "directory": false,
+        "bytes": 63524,
+        "compressed_bytes": 62745,
+        "compression_method": 8,
+        "crc32": "04b53126",
+        "dos_timestamp": "1989-11-30T15:57:48",
+        "sha256": "e9c5da9168231157ca40eeb0b55795f6208fca599347f52fd002dc037f804cc6"
+      },
+      {
+        "name": "Knights-of-legend/TWN5PICS.1",
+        "directory": false,
+        "bytes": 22519,
+        "compressed_bytes": 22248,
+        "compression_method": 8,
+        "crc32": "2bdde3a1",
+        "dos_timestamp": "1989-11-30T15:57:46",
+        "sha256": "c679660617a416c53913aef0d69a9bcf64924c2f3d0018e8745ddff24e40449a"
+      },
+      {
+        "name": "Knights-of-legend/TWN6PICS.0",
+        "directory": false,
+        "bytes": 65438,
+        "compressed_bytes": 64557,
+        "compression_method": 8,
+        "crc32": "18b2b6ba",
+        "dos_timestamp": "1989-11-30T15:57:54",
+        "sha256": "24114b9586b2e8d5f5b0ddc2b602675eafa60be24dc10bbf8b67b7be66de547d"
+      },
+      {
+        "name": "Knights-of-legend/TWN6PICS.1",
+        "directory": false,
+        "bytes": 6257,
+        "compressed_bytes": 6210,
+        "compression_method": 8,
+        "crc32": "c1a42e0e",
+        "dos_timestamp": "1989-11-30T15:57:52",
+        "sha256": "10cf1124761d6b695ba85d76c47b44353c695cd4588f05bd6288a211c1061930"
+      },
+      {
+        "name": "Knights-of-legend/TWN7PICS.0",
+        "directory": false,
+        "bytes": 63668,
+        "compressed_bytes": 62813,
+        "compression_method": 8,
+        "crc32": "0fa108ae",
+        "dos_timestamp": "1989-11-30T15:58:02",
+        "sha256": "752e282fdacba251b553ff25b6892e16563d6c9afa334b42c11abdbfec82d137"
+      },
+      {
+        "name": "Knights-of-legend/TWN7PICS.1",
+        "directory": false,
+        "bytes": 60995,
+        "compressed_bytes": 60312,
+        "compression_method": 8,
+        "crc32": "4ac38de4",
+        "dos_timestamp": "1989-11-30T15:58:00",
+        "sha256": "cfb438af726d17dd42d49a7b777f69dee8a5b55b30053eb371506792021c5156"
+      },
+      {
+        "name": "Knights-of-legend/TWN7PICS.2",
+        "directory": false,
+        "bytes": 10643,
+        "compressed_bytes": 10492,
+        "compression_method": 8,
+        "crc32": "34d6ad1a",
+        "dos_timestamp": "1989-11-30T15:58:00",
+        "sha256": "0a015b61e7e3c1a854386dc47d4d7831cc8a25aa12a66382f782f15814505096"
+      },
+      {
+        "name": "Knights-of-legend/WEAPPICS.0",
+        "directory": false,
+        "bytes": 9169,
+        "compressed_bytes": 8643,
+        "compression_method": 8,
+        "crc32": "aafe9c05",
+        "dos_timestamp": "1989-10-26T16:03:46",
+        "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533"
+      },
+      {
+        "name": "Knights-of-legend/WEATPICS.0",
+        "directory": false,
+        "bytes": 7392,
+        "compressed_bytes": 6792,
+        "compression_method": 8,
+        "crc32": "6aa091d1",
+        "dos_timestamp": "1989-11-30T15:55:46",
+        "sha256": "7c6b481a65d4cb294fe98d759e7241ffba32532eef02a7d0254cb0a8b0dad042"
+      }
+    ]
+  }
+}

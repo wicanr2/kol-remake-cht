@@ -7,8 +7,8 @@
 | 分類 | 狀態 | 目前證據／限制 |
 |---|---|---|
 | remake | 尚未開始 | 尚無 Go module、runtime、抽取器或測試 |
-| 原版 oracle | 待盤點 | 根目錄有 ZIP、英文說明書、參考卡、地圖與盒圖；版本與雜湊尚未固定 |
-| 玩家觀點 | 部分完成 | 已確認魔旅士原文與《CRPG 通鑑》中文版評介；仍需擴充其他繁中個人心得 |
+| 原版 oracle | build 已固定 | ZIP 與全部項目逐檔雜湊已固定；發行來源／1998 timestamp 成因未知 |
+| 玩家觀點 | 起源資料完成 | 魔旅士繁中個人心得＋《CRPG 通鑑》中文長篇評介已進 README |
 | 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
 | GitHub | 已建立 | private：`wicanr2/kol-remake-cht`；`main` 已推送 |
 
@@ -25,16 +25,18 @@
 
 ## M1：鎖定原版與研究來源
 
-- [ ] 在唯讀 Docker 容器中列出 ZIP 內容，記錄全部輸入大小、SHA-256、版本、平台與來源。
-- [ ] 確認 `Knights-of-legend.zip` 中的 DOS executable、資料檔、圖像與音訊驅動；原始檔
+- [x] 在唯讀 Docker 容器中列出 ZIP 內容，記錄全部輸入大小、SHA-256、平台與已知來源；
+  發行 revision／修改歷史明示為未知。
+- [x] 確認 `Knights-of-legend.zip` 中的 DOS MZ executable、資料檔與圖像候選；音訊 driver
+  ／資料尚未辨識，留給工具鏈指紋階段。原始檔
   不寫回、不提交。
-- [ ] 建立 `CONTEXT.md`、`WORKLOG.md`、`docs/re/RESEARCH-LOG.md`、`docs/spec/` 與
+- [x] 建立 `CONTEXT.md`、`WORKLOG.md`、`docs/re/RESEARCH-LOG.md`、`docs/spec/` 與
   `docs/verification/`。
 - [x] 確認魔旅士 2010-04-16〈Knights of Legend 武士傳說〉原文，README 已記錄直接
   連結、作者、日期與摘要。
-- [ ] 擴充華人玩家來源，至少涵蓋一篇繁體中文個人心得與一篇中文長篇評介；逐篇記錄
+- [x] 華人玩家來源涵蓋魔旅士繁體中文個人心得與《CRPG 通鑑》中文長篇評介；逐篇記錄
   作者、網址、日期、摘要及其是玩家觀點而非規則 oracle 的限制。
-- [ ] 更新 README「專案起源」，只納入可直接回查的來源，不杜撰魔旅士連結。
+- [x] 更新 README「專案起源」，只納入可直接回查的來源，不杜撰魔旅士連結。
 
 完成條件：原版身分固定；README 每項起源敘述可回查；找不到的來源有查詢紀錄。
 
@@ -94,4 +96,6 @@
 
 ## 下一個唯一工作
 
-以唯讀容器執行 M1 的原版清冊與雜湊。不要在原版身分固定前開始解碼或建立 Go runtime。
+使用 IDA Pro 9.4 沿 `KOLTOWN.EXE` entry 的 far-transfer 目標建立第二階段 code，辨識
+真正入口、relocation／解包完成狀態與 packer 家族。不要把線性解碼冒充完整控制流，也
+不要在核心 executable 載入方式釐清前開始玩法逆向。
