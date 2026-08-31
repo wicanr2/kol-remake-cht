@@ -2,7 +2,8 @@
 
 這是 Origin Systems *Knights of Legend* 的繁體中文乾淨重寫專案。正式重製版預定使用
 Go 與 Ebitengine，畫面執行期只讀經可重現流程抽出的 PNG，音樂與音效使用 Ogg Vorbis。
-目前處於專案建立與原版盤點前階段，尚未有可玩版本。
+目前處於「逆向知識庫與規格建立」階段，尚未有可玩版本；玩法必須依序通過
+「RE 證據 → DRAFT spec → 證據審查 → READY spec」才會進入正式實作。
 
 ## 專案起源
 
@@ -26,9 +27,26 @@ Go 與 Ebitengine，畫面執行期只讀經可重現流程抽出的 PNG，音�
 
 ## 現況與入口
 
+- 私有 GitHub 儲存庫：[wicanr2/kol-remake-cht](https://github.com/wicanr2/kol-remake-cht)
 - 專案規則：[AGENTS.md](AGENTS.md)
+- 目前真相與交接：[CONTEXT.md](CONTEXT.md)
 - 唯一工作清單：[WORKLIST.md](WORKLIST.md)
-- GitHub 儲存庫預定為 private；原版與衍生素材不會上傳。
+- 工作歷程：[WORKLOG.md](WORKLOG.md)
+- 逆向知識庫：[docs/re/README.md](docs/re/README.md)
+- 規格狀態：[docs/spec/README.md](docs/spec/README.md)
+- 中文說明書：[docs/manual/README.md](docs/manual/README.md)
 
-英文說明書與參考卡將逐頁翻譯為繁體中文 Markdown。原版執行檔、資料、美術、地圖、
+截至 2026-09-01：
+
+- 79 頁玩家手冊與 5 頁參考卡已完成繁體中文 Markdown 校對，SPEC-003 為 CONFORMED。
+- EGA 圖片清冊共 1,022 個 payload；996 筆已證實為可抽取來源、26 筆為非圖片，形成
+  752 個已證實 PNG 單位。SPEC-002 仍為 DRAFT，正式 extractor 與顯示 theme 尚未決定。
+- 六個 executable 的音訊 I/O 母體已普查；只有 TITLE 使用 PC Speaker，正常流程 WAV
+  oracle 已取得。SPEC-004 仍為 DRAFT，OGG 呈現與人耳驗收尚未完成。
+- 角色建立的資料表、RNG、主要屬性、起始金冠／武器、最小 writer／reader 與靜態 UI
+  返回邊界已建立可重生證據。SPEC-005 仍為 DRAFT，正常 DOS UI oracle、繁中名字規則、
+  typed schema 與 deterministic RNG 契約尚未關閉。
+- Go／Ebitengine production runtime 尚未建立；未達 READY 的研究結果不會先接入正式路徑。
+
+英文說明書與參考卡已逐頁翻譯並校對為繁體中文 Markdown。原版執行檔、資料、美術、地圖、
 音樂、音效與轉換後素材均受獨立權利限制；程式碼授權不代表可散布這些內容。
