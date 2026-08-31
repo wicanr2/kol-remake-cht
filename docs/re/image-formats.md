@@ -342,9 +342,17 @@ bit 0 不透明／覆寫，所以 RGBA alpha 為 `1-mask`。四張 PNG 目視為
 六張人物 PNG。所有輪廓現在正確露出棋盤，沒有黑色矩形；兩批重生結果逐 byte 相同。
 舊 PNG／舊視覺摘要作廢，不得當作正式 extraction 輸入。
 
+### HANDPICS.0 成對手部 sprite
+
+`sub_18F3A` 先以 `2*renderer_class` 選同類別的兩個手部組，再用
+`[2*group,2*group+1]` 送入 `sub_16FA6`，共完整對應 6×2 組、24 個 payload。
+12 組尺寸分佈為六張 16×8、兩張 16×6、兩張 24×8、兩張 24×7；
+精確順序見 RE-022 與 safe JSON。每組為 4-bit EGA 彩圖／MSB-first 1-bit AND-mask，
+PNG alpha 固定為 `1-mask`。棋盤接觸表顯示六列成對手部，全契約為 `已證實`。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

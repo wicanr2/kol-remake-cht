@@ -667,3 +667,32 @@ SHLDPICS 的同一 `sub_1BD17` consumer 證據顯示，MONPICS／PERPICS 早期�
 輪廓正確露出棋盤，且兩輪全部 PNG、接觸表與摘要逐 byte 相同。MONPICS 摘要／接觸表
 SHA-256 為 `7a5a5258…3b29`／`934f1eb3…f2b5`；PERPICS 為
 `d6d87f46…9fc5`／`b1a90a2f…9ff8`。訂正不改變原始尺寸與配對結論，但取代所有舊 alpha 產物。
+
+## RE-022：HANDPICS.0 十二組手部 sprite
+
+### selector 與幾何
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4，位址空間為
+  reconstructed unpacked MZ linear EA。
+- `hand\0` 位於 DGROUP EA `0x2e4e3`、offset `0x0613`；`sub_18F3A:0x19493`與
+  `0x19556` 以它建立 archive 檔名。
+- `0x1941d..0x19422` 將 renderer class 乘 2，選擇同類別的兩個手部位置組；
+  `0x194ab..0x194ba` 與 `0x1956e..0x1957d` 再各以 `2*group` 與 `2*group+1`
+  載入彩圖、AND-mask。六個 renderer class 因此完整對應 archive 的 12 組／24 筆。
+- DGROUP EA `0x2e492` 的 24-byte 表依序給出 12 組 byte-column／scanline。尺寸為
+  class 0／1 各兩張 16×8，class 2 兩張 16×6，class 3 兩張 24×8，
+  class 4 兩張 24×7，class 5 兩張 16×8。
+
+### 像素、alpha 與結論
+
+24 個 payload 全部依尺寸表精確展開；每組偶數索引為 4-bit EGA 彩圖，奇數索引為
+MSB-first 1-bit AND-mask，且尾端多一 byte。`sub_16FA6`→`sub_1BD17` 證實
+bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
+
+6×2 棋盤接觸表目視為六種角色外觀的成對手部 sprite，每列兩個相對位置的輪廓
+正確露出棋盤，無旋轉、pair-order、plane 或裁切錯誤。但「第一／第二位置」不直接
+宣稱為角色解剖學左／右手。格式、尺寸、配對、alpha 與手部身分為 `已證實`。
+
+兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+`8067fa1f…d88b`、`ddd7637a…ce18`；兩輪 12 張 PNG、接觸表與摘要也逐 byte 相同，
+摘要／接觸表 SHA-256 為 `a180983f…1b03`、`6ed86cb0…75b2`。SPEC-002 維持 DRAFT。

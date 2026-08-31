@@ -86,6 +86,7 @@ KOLTOWN ENDPICS 全七張及 KOLBOOK BOOKPICS 全 14 張，已由 IDA consumer �
 完整關閉；KOLTOWN WEATPICS 全 18 筆也已關閉為六組 64×62 天候／時段分層背景，
 AWD1PICS 全 24 筆已關閉為 24×21 任務勳章圖示。
 SHLDPICS.0 八筆已關閉為四組彩圖／AND-mask 盾牌，並與無副檔名 SHLDPICS 記錄表分流。
+HANDPICS.0 全 24 筆已關閉為六個 renderer class×兩個位置的 12 組手部彩圖／AND-mask。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
 顯示 theme 交付範圍仍等待使用者決定；不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。

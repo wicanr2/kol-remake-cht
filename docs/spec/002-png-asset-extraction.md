@@ -81,6 +81,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] `SHLDPICS.0` 八筆已證實為四組彩圖／AND-mask 盾牌；尺寸為 40×29、
   56×45、48×63、48×61，mask bit 1 透明、bit 0 不透明。它與無副檔名
   `SHLDPICS` 的 16×760-byte 角色記錄表是不同格式。
+- [x] `HANDPICS.0` 全 24 筆已證實為六個 renderer class×兩個相對位置的 12 組
+  手部彩圖／AND-mask；尺寸只取 16×6、16×8、24×7、24×8，alpha 為 `1-mask`。
 - [x] `TWN0..7PICS` 全域圖號 24 均跨入 `.1`，已證實 town 0 為 192×96、其餘為
   88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
 - [x] `MONPICS.0` 的 64 個 payload 已證實是 32 組「偶數 4-bit EGA 彩圖＋奇數 1-bit
@@ -132,5 +134,7 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 產生 PNG alpha；禁止把無副檔名記錄表交給它。MONPICS／PERPICS 早期探針直接把
 AND-mask bit 當 alpha，與已證實的 `sub_1BD17` 極性契約衝突；已改為 `1-mask`
 並用 8×8 棋盤背景重生全部 PNG、接觸表與安全摘要。
+`tools/probe_extract_handpics_png.py` 同樣將 mask 當作 AND 運算資料，並以棋盤接觸表
+驗證透明輪廓；manifest 只能使用「第一／第二位置」，未有更強證據前不命名解剖學左／右手。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。
