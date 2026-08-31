@@ -37,7 +37,12 @@ archive。完整反組譯與原始 bytes 僅存本機 ignored 證據；版控內
 `sub_11820`／`sub_1293E` 固定長度寫回前兩檔，`sub_135DB` 整檔讀入；KOLTOWN
 `sub_14DB1` 以角色槽位 `0x300` bytes 推導圖片槽位 `0x2f8 = 760` bytes，複製
 `0x17c` words，並將三檔各固定寫回 `0x2f80` bytes。清冊因此把三檔分類為 16 筆、每筆
-760 bytes 的可變角色圖片記錄表，並保存逐筆 SHA-256；記錄內的像素形狀仍是 `未知`。
+760 bytes 的可變角色圖片記錄表，並保存逐筆 SHA-256。KOLBOOK 原尺寸 EGA consumer
+`sub_15AEC`（`0x15aec..0x15b6e`）逐列讀 `0x14 = 20` bytes、共 `0x26 = 38` 列；每 byte
+先取 high nibble、再取 low nibble，故每筆正好是 `40×38×4-bit = 760` bytes。
+`sub_15B6E`（`0x15b6e..0x15c14`）以同一輸入做 4 倍顯示，提供第二條同程式內 consumer
+交叉驗證。此像素契約為 `已證實`；逐槽角色／盾牌／坐騎語意仍是 `未知`，不得由接觸表
+外觀或空白槽自行命名。
 `STEEDPIC` 是這條儲存流程的單數輸出；另有 `steedpics` 由 `sub_14779` 以最大
 `0x7530` bytes 載入，兩者不得混為同一格式。
 

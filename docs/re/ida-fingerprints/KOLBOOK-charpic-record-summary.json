@@ -1,0 +1,203 @@
+{
+  "ida_version": "9.4",
+  "input_name": "KOLBOOK.EXE",
+  "input_sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+  "address_space": "IDA linear effective address for loaded KOLBOOK MZ",
+  "root_original_functions": [
+    "sub_15335",
+    "sub_153EA"
+  ],
+  "max_call_depth": 3,
+  "schema": "kol-ida-kolbook-charpic-record-summary-v1",
+  "record_contract": {
+    "status": "confirmed",
+    "record_bytes": 760,
+    "width_pixels": 40,
+    "height_pixels": 38,
+    "bits_per_pixel": 4,
+    "pixels_per_byte": 2,
+    "packing": "high nibble first, then low nibble",
+    "direct_consumer": {
+      "original_function": "sub_15AEC",
+      "ea_range": "0x15aec..0x15b6e",
+      "row_count_instruction_ea": "0x15b1d",
+      "bytes_per_row_instruction_ea": "0x15b20"
+    },
+    "four_times_enlarged_consumer": {
+      "original_function": "sub_15B6E",
+      "ea_range": "0x15b6e..0x15c14",
+      "row_count_instruction_ea": "0x15b9f",
+      "bytes_per_row_instruction_ea": "0x15ba2"
+    }
+  },
+  "functions": [
+    {
+      "original_name": "sub_112D5",
+      "start_ea": "0x112d5",
+      "end_ea": "0x1137b",
+      "discovery_depth": 3,
+      "instruction_count": 62,
+      "caller_count": 7
+    },
+    {
+      "original_name": "sub_13843",
+      "start_ea": "0x13843",
+      "end_ea": "0x139a8",
+      "discovery_depth": 2,
+      "instruction_count": 143,
+      "caller_count": 4
+    },
+    {
+      "original_name": "sub_15175",
+      "start_ea": "0x15175",
+      "end_ea": "0x151d5",
+      "discovery_depth": 1,
+      "instruction_count": 36,
+      "caller_count": 13
+    },
+    {
+      "original_name": "sub_151D5",
+      "start_ea": "0x151d5",
+      "end_ea": "0x15211",
+      "discovery_depth": 2,
+      "instruction_count": 24,
+      "caller_count": 5
+    },
+    {
+      "original_name": "sub_15211",
+      "start_ea": "0x15211",
+      "end_ea": "0x15287",
+      "discovery_depth": 1,
+      "instruction_count": 43,
+      "caller_count": 10
+    },
+    {
+      "original_name": "sub_15335",
+      "start_ea": "0x15335",
+      "end_ea": "0x153ea",
+      "discovery_depth": 0,
+      "instruction_count": 70,
+      "caller_count": 4
+    },
+    {
+      "original_name": "sub_153EA",
+      "start_ea": "0x153ea",
+      "end_ea": "0x15481",
+      "discovery_depth": 0,
+      "instruction_count": 58,
+      "caller_count": 3
+    },
+    {
+      "original_name": "sub_15A3B",
+      "start_ea": "0x15a3b",
+      "end_ea": "0x15ab4",
+      "discovery_depth": 3,
+      "instruction_count": 58,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_15AEC",
+      "start_ea": "0x15aec",
+      "end_ea": "0x15b6e",
+      "discovery_depth": 1,
+      "instruction_count": 65,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_15B6E",
+      "start_ea": "0x15b6e",
+      "end_ea": "0x15c14",
+      "discovery_depth": 1,
+      "instruction_count": 70,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_15DB5",
+      "start_ea": "0x15db5",
+      "end_ea": "0x15e5f",
+      "discovery_depth": 2,
+      "instruction_count": 84,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_15E5F",
+      "start_ea": "0x15e5f",
+      "end_ea": "0x15ea7",
+      "discovery_depth": 3,
+      "instruction_count": 35,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_15EA7",
+      "start_ea": "0x15ea7",
+      "end_ea": "0x15eee",
+      "discovery_depth": 1,
+      "instruction_count": 37,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_16192",
+      "start_ea": "0x16192",
+      "end_ea": "0x16216",
+      "discovery_depth": 1,
+      "instruction_count": 65,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_1624C",
+      "start_ea": "0x1624c",
+      "end_ea": "0x162f2",
+      "discovery_depth": 2,
+      "instruction_count": 77,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_162F2",
+      "start_ea": "0x162f2",
+      "end_ea": "0x16324",
+      "discovery_depth": 3,
+      "instruction_count": 25,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_16324",
+      "start_ea": "0x16324",
+      "end_ea": "0x16367",
+      "discovery_depth": 3,
+      "instruction_count": 34,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_16519",
+      "start_ea": "0x16519",
+      "end_ea": "0x165ab",
+      "discovery_depth": 1,
+      "instruction_count": 65,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_165AB",
+      "start_ea": "0x165ab",
+      "end_ea": "0x1663f",
+      "discovery_depth": 1,
+      "instruction_count": 73,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_1678C",
+      "start_ea": "0x1678c",
+      "end_ea": "0x16832",
+      "discovery_depth": 2,
+      "instruction_count": 84,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_16832",
+      "start_ea": "0x16832",
+      "end_ea": "0x16867",
+      "discovery_depth": 3,
+      "instruction_count": 26,
+      "caller_count": 2
+    }
+  ]
+}

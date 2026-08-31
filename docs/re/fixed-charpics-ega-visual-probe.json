@@ -1,0 +1,411 @@
+{
+  "schema": "kol-fixed-charpics-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "KOLBOOK-charpic-record-summary.json",
+  "ida_summary_sha256": "db71511ef0b904c0aebefc926035d4bf925511d6d66fcb809a402f6afc22b316",
+  "status": "mechanically validated; orientation and semantic identities require human inspection",
+  "source_names": [
+    "CHARPICS",
+    "SHLDPICS",
+    "STEEDPIC"
+  ],
+  "source_sha256": {
+    "CHARPICS": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7",
+    "SHLDPICS": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd",
+    "STEEDPIC": "1bac851d19b4320f747f3ae85c8f467cc886e73b7fdcf1efc3ef9f6d58307b1a"
+  },
+  "record_count_per_source": 16,
+  "record_bytes": 760,
+  "width_pixels": 40,
+  "height_pixels": 38,
+  "packing": "high nibble first, then low nibble",
+  "png_count": 48,
+  "contact_sheet_sha256": "fd5528657846c3b420a41ac328516fa0635ecc57f5a33e8a029f0bf2abe537d1",
+  "records": [
+    {
+      "source_name": "CHARPICS",
+      "record_index": 0,
+      "record_sha256": "db626d4871004754185efbab2c4637a6b9fbd0aed2a257b76793f8571534d6e9",
+      "pixel_sha256": "c733be97e34c9e6e177fdd952ca605c2f1ad2b1c963527e1dfe034e7b81cfb24",
+      "png_sha256": "71c5d42311d7c4ffa6ebf5c3dcca2ab1ef4b70c8421108b838788d026a5105b9",
+      "color_count": 12
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 1,
+      "record_sha256": "baf1e7282c50933e170854fb3dc8ff9dca08624aa8bc103ab18a617347882621",
+      "pixel_sha256": "bdbdab688defb685472c35cca3de2d54af847ca9df4269aa1c66b293635b59f7",
+      "png_sha256": "4960b783240c6ca27fee7c41537aa4d9e02f6594b1ffcde7fcc5eacfbf7f55af",
+      "color_count": 12
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 2,
+      "record_sha256": "01a7604eda0b781962e0da3a0a5d0e77ca88951818e9baeb28f5281add3a41a4",
+      "pixel_sha256": "dd8e5df3bd43ffcf1f560117716e7f68aa00c5ae27328e6bba03bcccf128b10f",
+      "png_sha256": "a0ad533be2e5bed04ae1213ea386252f775244f5c16727390b58da44955e3ac6",
+      "color_count": 12
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 3,
+      "record_sha256": "c1c92e99398f82bb4bf10085ee928ee2b489996144cf3c56bb5671aa1396b826",
+      "pixel_sha256": "9943319752061e131ab4ef95999de15844cd42ed8063453242188efcdbfb5c91",
+      "png_sha256": "6c28dc024588aa5bf1f1a2a3965d019f652912cd27e8692beb91c9838b802124",
+      "color_count": 12
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 4,
+      "record_sha256": "00c387eb166129c7bbbfe8b37c4b439c4758c5e01255bd9bb8fc1f5f8bc9dd64",
+      "pixel_sha256": "8a04c0185cb08e9c1ba6fd3b23d5753f81214873e3a8f1a5fc3128852022b3b8",
+      "png_sha256": "954e586d5c1d44ee94e3f9eec3245f822361f97f4fd843e46789b51ab25312f9",
+      "color_count": 11
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 5,
+      "record_sha256": "1e427cb5973d0de51f4ea22eb75a4ed3bf76267c3609a46f7f735c060cc02c9c",
+      "pixel_sha256": "e97e5722dc803986ec5f41e91e3a4f698fa613d4fbda66348cc4906ce9ad26cb",
+      "png_sha256": "92bd273aa3a59227c27af13c9b7b9ca64c19492ecb2aff72d3c394e176c408b6",
+      "color_count": 11
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 6,
+      "record_sha256": "de1db9987379837acc5e4e1f674290fba03fbce288057223757ca4e73c0e74c8",
+      "pixel_sha256": "bbececbf241c14ebdc5b39325b40f4f84cdb35318f9138ec4403be13b1643788",
+      "png_sha256": "8f84626af2ce7763c2e9f3eed2dac38a33c809108ed51947f6d45ed6567817f8",
+      "color_count": 13
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 7,
+      "record_sha256": "3677941fe7ac2ef1958d365603a85a950eb528c23094726bfc3c053cc2ec654a",
+      "pixel_sha256": "2a072eb813ed0acf33fc57052daf0c9f3c20604618ed8b95e1b2a19577b9da11",
+      "png_sha256": "f8b35f1a24883d96f4ba688d50111acad5f257759b80aab8fce7e0c4f4967107",
+      "color_count": 9
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 8,
+      "record_sha256": "6ae69ea4793e88d6f456e57fe2706f9f02ab0487a4a3fe6eae65ce74beb37aed",
+      "pixel_sha256": "cef5f201197add1b134293475debe93e7bade00f9d28cd61c3bb621de6fba335",
+      "png_sha256": "8d0f9ea25b13a21af3f804d68313477dbe2628801bdef58704687544c096d903",
+      "color_count": 12
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 9,
+      "record_sha256": "1e0049566d80611d75aa73e947fe014dedf05d95fb6d1b60f01988011bcfa9e3",
+      "pixel_sha256": "152f1cfa946b7b23c48f461d93fec2ebfa5496d350077094759f22da4130f765",
+      "png_sha256": "5b2907fb3f552260e8a68809dea01b0c2fcc0522d25fabce0642c23b2c7c7b98",
+      "color_count": 12
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 10,
+      "record_sha256": "6f436aa9652a041754f6ec4435f2dfc2cea802f03e8dd850d99e72573a3566bd",
+      "pixel_sha256": "7bae0131f646c32620aaaebb2704d7af893c5ff6cd3b94d28e83ac0668ce9a54",
+      "png_sha256": "f90b0be2596b9cd180ca07c3a4eac517c50a840ed13202fefa1b97ae99235f9b",
+      "color_count": 12
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 11,
+      "record_sha256": "00c387eb166129c7bbbfe8b37c4b439c4758c5e01255bd9bb8fc1f5f8bc9dd64",
+      "pixel_sha256": "8a04c0185cb08e9c1ba6fd3b23d5753f81214873e3a8f1a5fc3128852022b3b8",
+      "png_sha256": "954e586d5c1d44ee94e3f9eec3245f822361f97f4fd843e46789b51ab25312f9",
+      "color_count": 11
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 12,
+      "record_sha256": "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906",
+      "pixel_sha256": "0023a309249f09fbb3049b1f9cc4686931775291ed7d68bf69ff31e51385dce6",
+      "png_sha256": "8fa0908779e1553b6891c9bb2716a7de9def234e4f3e4053ef78cd0db379fbd5",
+      "color_count": 10
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 13,
+      "record_sha256": "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906",
+      "pixel_sha256": "0023a309249f09fbb3049b1f9cc4686931775291ed7d68bf69ff31e51385dce6",
+      "png_sha256": "8fa0908779e1553b6891c9bb2716a7de9def234e4f3e4053ef78cd0db379fbd5",
+      "color_count": 10
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 14,
+      "record_sha256": "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906",
+      "pixel_sha256": "0023a309249f09fbb3049b1f9cc4686931775291ed7d68bf69ff31e51385dce6",
+      "png_sha256": "8fa0908779e1553b6891c9bb2716a7de9def234e4f3e4053ef78cd0db379fbd5",
+      "color_count": 10
+    },
+    {
+      "source_name": "CHARPICS",
+      "record_index": 15,
+      "record_sha256": "aca89e70ab75ea543d42daaa99e0af569c1842f61a8cdd822862901fe62cc906",
+      "pixel_sha256": "0023a309249f09fbb3049b1f9cc4686931775291ed7d68bf69ff31e51385dce6",
+      "png_sha256": "8fa0908779e1553b6891c9bb2716a7de9def234e4f3e4053ef78cd0db379fbd5",
+      "color_count": 10
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 0,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 1,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 2,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 3,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 4,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 5,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 6,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 7,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 8,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 9,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 10,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 11,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 12,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 13,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 14,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "SHLDPICS",
+      "record_index": 15,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 0,
+      "record_sha256": "65074eba191eb732c37c3de4ccf2983f317da1a64caf46b69d53095ceebbe223",
+      "pixel_sha256": "81425c2eb9ce58e54e6bebf7977b01d93092db3d5a8f5c394e4fe4da93380673",
+      "png_sha256": "ab2ba582ff40c477cf9b73358d5837135d4801529b41f8f4f096297d4876d902",
+      "color_count": 16
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 1,
+      "record_sha256": "19f33e1a55cf6b358d94de1014a4f310fde5933f25e711ffac4c3426b50313f2",
+      "pixel_sha256": "e9ea52f58f99c861152da832dfef566b2c2a4bd13a841b36f563ac3bb65887f7",
+      "png_sha256": "a5972872efe153f1eddf7f4a9de8df8444facad93bd5fc131a2b7ea956c3bd97",
+      "color_count": 16
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 2,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 3,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 4,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 5,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 6,
+      "record_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+      "pixel_sha256": "75ca350121ffdbd5c7e60147bbe8fce56f1eec7f735126510f9daff240c67ef7",
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf",
+      "color_count": 3
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 7,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 8,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 9,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 10,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 11,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 12,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 13,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 14,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    },
+    {
+      "source_name": "STEEDPIC",
+      "record_index": 15,
+      "record_sha256": "4f30fcacbfd63bac8e76d8a4e97e451d48353631dfa7064250df934b872232f5",
+      "pixel_sha256": "be3f3d5517d4a3b8c7e9c08513aeb806cf86832bdc452d8f06a29fdc11ff695c",
+      "png_sha256": "f82fd9d8da7c49fb6270b6437bff471d4fe28dc4aea0f2b2b46b42a79b7cb92f",
+      "color_count": 1
+    }
+  ]
+}

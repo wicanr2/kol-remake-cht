@@ -9,7 +9,8 @@
   `docs/re/kolmpics-index28-visual-probe.json`、`docs/re/miscpics-ega-visual-probe.json`、
   `docs/re/combpics-all-ega-visual-probe.json`、`docs/re/title-set-face-ega-visual-probe.json`、
   `docs/re/title-backpics-ega-visual-probe.json`、`docs/re/koltown-endpics-ega-visual-probe.json`、
-  `docs/re/kolbook-bookpics-ega-visual-probe.json`
+  `docs/re/kolbook-bookpics-ega-visual-probe.json`、
+  `docs/re/fixed-charpics-ega-visual-probe.json`
 
 ## 目的
 
@@ -107,6 +108,9 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   是 `sub_19B29` raw-planar 轉換資料；3／6／7／9／10／11 是一-byte placeholder。
   索引 8／12 的 64 欄已由下游位移證實，高度 160 與索引 0 幾何仍保留強推論，故本項
   關閉 archive 分類但不把未證實幾何升為 production 契約。
+- [x] 無副檔名 `CHARPICS`／`SHLDPICS`／`STEEDPIC` 各 16 筆已由 KOLBOOK 原尺寸與
+  4 倍顯示 consumer 證實為 40×38、high-nibble-first 的 4-bit EGA 圖；48 張本機 PNG
+  與接觸表通過機械驗證。逐槽語意及未使用槽內容不由像素外觀推定。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
 - [ ] 其他 archive／PCGA／HERC 的尺寸、位平面、palette 與透明規則尚未證實。
@@ -118,7 +122,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] `AWD1PICS.0` 尾端 520 bytes 已排除於 KOLTOWN 索引圖片流，分類為固定 4000-byte
   編輯器工作區快照的未解析尾區；不得稱作 padding 或輸出為 PNG 像素。
 - [x] `CHARPICS`／`SHLDPICS`／`STEEDPIC` 已由 writer／reader 資料流分類為 16 筆、
-  每筆 760 bytes 的固定可變記錄表；內部像素佈局仍未知，未授權正式抽取。
+  每筆 760 bytes 的固定可變記錄表；KOLBOOK consumer 已進一步證實每筆是 40×38、
+  high-nibble-first 的 4-bit EGA 圖。這只關閉像素格式，仍不授權 production 抽取器。
 - [x] 可丟棄 probe 產生至少一張真實 PNG，並通過 bounds、預期尺寸、非空像素、palette、
   畫面方向及原版同狀態視覺抽樣。
 - [x] 已預先定義全部 archive 的失敗政策、可回查命名、manifest schema 與權利審查。
@@ -154,5 +159,7 @@ AND-mask bit 當 alpha，與已證實的 `sub_1BD17` 極性契約衝突；已改
 摘要取得尺寸並以 `1-mask` 生成 RGBA，不能據此泛化角色其他身體部件或成為 runtime importer。
 `tools/probe_extract_bodypics_png.py` 只關閉 HEAD／TOR／LEGS 三個 archive 的既有 54 組；
 三層共享 selector 不代表可跳過角色資料域驗證，也不能直接成為 runtime importer。
+`tools/probe_extract_fixed_charpics_png.py` 只驗證三個可變角色圖片表的固定像素契約；空白、
+雜訊或未使用槽不會因此成為可公開素材，也不得由工具自動賦予角色語意。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。

@@ -776,3 +776,21 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   `c39152e8…71d2`；兩輪 PNG／摘要亦逐 byte 相同。安全摘要見
   `ida-fingerprints/KOLTOWN-kolmpics-routes-summary.json`，視覺摘要見
   `kolmpics-all-ega-visual-probe.json`。SPEC-002 維持 DRAFT，未接 production importer。
+
+## RE-027：固定角色圖片記錄的 40×38 EGA 像素契約
+
+- 固定 `KOLBOOK.EXE` SHA-256 `2cada028…e5832`；IDA Pro 9.4、loaded-MZ linear EA。
+  KOLBOOK `sub_1293E` 先以 `rep movsw` 複製 `0x17c` words 的單筆記錄到暫存 segment，
+  再將同一 segment 分別交給原尺寸與 4 倍顯示 wrapper。
+- 原尺寸 EGA consumer `sub_15AEC:0x15aec..0x15b6e` 設 `CH=0x26` 列、每列
+  `CL=0x14` bytes；每次先將 source byte 右移四次取 high nibble，再使用原 byte 取 low
+  nibble。故單筆為 `38×20×2 = 1520` pixels，即 40×38、high-nibble-first 4-bit EGA，
+  恰好耗盡 760 bytes。
+- 4 倍顯示 consumer `sub_15B6E:0x15b6e..0x15c14` 使用同一 38×20 source loop，並將
+  每個 nibble 擴展到四條 scanline，提供同程式內的獨立放大路徑交叉驗證。
+- 兩份全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
+  `db71511e…b316`／`8bcbfc6e…815a`。三個來源各 16 筆皆機械解成 40×38 PNG；48 張
+  ignored PNG 與接觸表已檢查，接觸表可見有效角色合成圖，也有空白或雜訊槽。
+- 視覺摘要／接觸表 SHA-256 為 `7eede045…bb55`／`fd552865…37d1`。像素格式為
+  `已證實`；逐槽角色、盾牌或坐騎語意及未使用槽狀態仍為 `未知`，不由目視自動命名。
+  SPEC-002 仍為 DRAFT，未建立 production importer 或 Go／Ebitengine runtime。

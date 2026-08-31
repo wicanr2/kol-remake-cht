@@ -61,7 +61,8 @@
   垂直鏈、WEATPICS 全 18 筆六組分層合成、AWD1PICS 全 24 張勳章圖示、SHLDPICS
   全四組盾牌、HANDPICS 全 12 組手部 sprite、WEAPPICS 全 28 組角色武器、
   HEADPICS／TORPICS／LEGSPICS 各 54 組角色分層 sprite、AWD
-  固定快照邊界、KOLPICS 全 14 筆混合 archive 與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
+  固定快照邊界、KOLPICS 全 14 筆混合 archive 與三個無副檔名固定記錄表的 40×38
+  4-bit EGA 像素契約已證實；其餘 archive、PCGA／HERC
   像素格式尚未完成。
 - [x] 勘誤 MONPICS／PERPICS 早期 PNG 探針的 AND-mask alpha 極性；依
   `sub_1BD17` 重生為 bit 1 透明、bit 0 不透明，並用 8×8 棋盤背景重驗。
@@ -107,5 +108,6 @@
 
 ## 下一個唯一工作
 
-等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定時，下一個切片追
-`CHARPICS` 760-byte 可變角色圖片記錄。SPEC-002 READY 前不接 Go／Ebitengine production runtime。
+等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定時，下一個切片繼續
+盤點尚未關閉的 EGA PICS consumer，並列出 SPEC-002 完整 extraction set 的排除項。
+SPEC-002 READY 前不接 Go／Ebitengine production runtime。

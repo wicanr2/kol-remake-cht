@@ -707,3 +707,20 @@
 - 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
   `79fceaaf…e5ba`／`c39152e8…71d2`；兩輪全 PNG 與摘要逐 byte 相同，視覺摘要／接觸表為
   `bd8a5858…4bfb`／`2f335771…d15a`。SPEC-002 仍為 DRAFT，未接 production importer。
+
+## 2026-09-01：固定角色圖片表 40×38 格式
+
+- 從 KOLBOOK 的 760-byte 記錄複製點追到原尺寸 `sub_15AEC` 與 4 倍顯示
+  `sub_15B6E`；兩者都逐列讀 20 bytes、共 38 列，並以 high nibble、low nibble 順序
+  取得 40 個 4-bit EGA pixels。
+- 新增可重生 IDA consumer 探針；兩個全新 DB 的 safe／private JSON 逐 byte 相同，
+  SHA-256 為 `db71511e…b316`／`8bcbfc6e…815a`。
+- 新增固定記錄 PNG 探針，解出 `CHARPICS`、`SHLDPICS`、`STEEDPIC` 各 16 張、共 48 張
+  ignored PNG。接觸表目視支持方向與 nibble 次序；空白及雜訊槽不推定語意。
+- 安全視覺摘要／接觸表 SHA-256 為 `7eede045…bb55`／`fd552865…37d1`。已更新
+  RE-027、圖片格式、SPEC-002、CONTEXT 與 WORKLIST；SPEC-002 維持 DRAFT，未進入實作。
+- 首次重生比對因容器輸出路徑未含獨立 `workplace` 目錄而被探針拒絕；該驗證 shell 又未
+  啟用 `set -e`，因此留下連續 `cmp` 路徑錯誤。修正為新 `workplace` 路徑並用 `set -eu`
+  以同一 image 重跑後，48 張 PNG、接觸表、JSON 與 Python 語法全部通過。
+- 本輪 IDA、解碼與驗證容器均使用 `--rm`；本輪 `/tmp` 資料庫、重跑輸出與 Python cache
+  已精確刪除。結束檢查未見 KOL 專案容器；其他專案及系統既有容器保持不動。
