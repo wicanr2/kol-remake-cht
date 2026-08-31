@@ -22,7 +22,12 @@
 | 13 | 盔甲合身調整；進入荒野與旅店（印刷頁 20–21） | reviewed | [03-at-the-armorers.md](chapters/03-at-the-armorers.md)、[04-into-the-wilderness.md](chapters/04-into-the-wilderness.md) |
 | 14 | 旅店保存、離城與道路旅行（印刷頁 22–23） | reviewed | [04-into-the-wilderness.md](chapters/04-into-the-wilderness.md) |
 | 15 | 荒野伏擊、地形、天候與營養（印刷頁 24–25） | reviewed | [04-into-the-wilderness.md](chapters/04-into-the-wilderness.md) |
-| 16–75 | 荒野、戰鬥、進階規則、世界觀、種族與索引 | todo | — |
+| 16 | 野外營養；短兵相接與戰鬥畫面（印刷頁 26–27） | reviewed | [04-into-the-wilderness.md](chapters/04-into-the-wilderness.md)、[05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 17 | 戰鬥回合、戰鬥者視窗與移動（印刷頁 28–29） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 18 | 飛行、攻擊類型與射擊目標（印刷頁 30–31） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 19 | 武器／徒手攻擊與瞄準部位（印刷頁 32–33） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 20 | 防禦、十字弓裝填與切換武器（印刷頁 34–35） | reviewed | [05-coming-to-blows.md](chapters/05-coming-to-blows.md) |
+| 21–75 | 戰鬥、進階規則、世界觀、種族與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 

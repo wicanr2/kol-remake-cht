@@ -70,4 +70,23 @@
 | Cliff Troll | 懸崖巨魔 | 暫譯 | 怪物專名；待怪物資料 consumer 複核 |
 | Zombie | 殭屍 | 核准 | 怪物名稱 |
 | Djinn | Djinn | 待查 | 怪物專名；音譯或意譯待怪物資料 consumer 複核 |
+| Combatant Window | 戰鬥者視窗 | 核准 | 顯示目前戰士、傷勢與體力 |
+| Combat Map | 戰鬥地圖 | 核准 | 顯示戰士位置的格狀地圖 |
+| MOVE | 移動 | 核准 | 戰鬥移動入口 |
+| WALK / RUN / SPRINT | 步行／奔跑／衝刺 | 核准 | 地面移動速度；分別一、一、二格 |
+| FLY / FLY FASTER / ZOOM | 飛行／快速飛行／疾飛 | 暫譯 | 凱爾登空中移動速度 |
+| LAND | 降落 | 核准 | 結束飛行並回到地面 |
+| ATTACK | 武器攻擊 | 核准 | 以備戰近身武器攻擊相鄰敵人 |
+| FIRE | 射擊 | 核准 | 使用備戰飛射武器攻擊非相鄰敵人 |
+| FIST | 徒手攻擊 | 核准 | 徒手攻擊相鄰敵人 |
+| MAGIC | 魔法 | 核准 | 施放法術入口 |
+| NONE | 不攻擊／不防禦 | 核准 | 依選擇階段放棄攻擊或防禦 |
+| BERSERK / HACK / THRUST / SLASH | 狂暴攻擊／劈砍／突刺／橫斬 | 暫譯 | 近身武器攻擊類型，待遊戲 UI 統一 |
+| KICK / HEAD BUTT / BASH / PUNCH | 踢擊／頭槌／重拳／拳擊 | 暫譯 | 徒手攻擊類型，待遊戲 UI 統一 |
+| HIGH SHOT / BODY SHOT / LOW SHOT | 高位攻擊／身軀攻擊／低位攻擊 | 暫譯 | 近身武器瞄準區域 |
+| PANIC DEFEND | 全力防禦 | 暫譯 | 最有效但取消攻擊的防禦 |
+| STAND / BACK UP / DODGE | 站穩／後退／閃避 | 暫譯 | 戰鬥防禦類型 |
+| DUCK / JUMP | 蹲低／跳起 | 暫譯 | 對應高、低位攻擊的防禦 |
+| LOAD | 裝填 | 核准 | 準備十字弓射擊 |
+| SWITCH | 切換 | 核准 | 交換備戰武器與腰帶武器 |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |
