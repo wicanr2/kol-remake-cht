@@ -5,4 +5,3 @@
 `RE 證據 → DRAFT → 證據審查 → READY → implementation → 同狀態驗證 → CONFORMED`
 
 在 M1 executable 與資料身分完成前，不建立玩法規格。
-

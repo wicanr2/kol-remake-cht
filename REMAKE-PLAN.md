@@ -43,4 +43,3 @@ cmd／平台／UI → Knights of Legend 適配器／規則 → typed data
 ## 刻意差異
 
 目前無。戰鬥加速、簡化確認、現代化 UI 或其他玩家體驗差異都尚未經使用者決策。
-
