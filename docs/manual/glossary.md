@@ -35,8 +35,8 @@
 | Gold crowns | 金冠 | 核准 | 王國貨幣 |
 | adventure points | 冒險點數 | 核准 | 成長相關數值 |
 | movement rate | 移動率 | 核准 | 角色移動數值 |
-| magic order | 魔法教團 | 暫譯 | 待魔法章核對組織正式名稱 |
-| rank | 階級 | 核准 | 角色成長等級 |
+| magic / magical order | 魔法教團 | 暫譯 | 法術修改與護符成員制組織；正式專名待各教團資料 |
+| rank | 階級 | 核准 | 角色社會與能力成長稱號 |
 | encumbrance | 負重值／負重 | 核准 | 裝備攜帶負擔；表格欄名可簡寫「負重」 |
 | SPACEBAR | 空白鍵 | 核准 | 圖示／按鍵 |
 | DOOR | 門 | 核准 | 進出地點圖示 |
@@ -111,4 +111,7 @@
 | fatigue | 疲勞 | 核准 | 戰鬥能量不足後累積的狀態 |
 | knock back | 擊退 | 核准 | 重擊使目標掉落武器並後移一格 |
 | protection | 防護 | 核准 | 盔甲表的 `Prt` |
+| Order of the Silver Stave | 銀杖教團 | 暫譯 | 騎士教團；待世界觀專名一致性審查 |
+| arena | 競技場 | 核准 | 升階的一對一、不可撤退戰鬥 |
+| talisman | 護符 | 核准 | 魔法教團成員身分物品 |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |

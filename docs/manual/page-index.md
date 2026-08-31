@@ -42,7 +42,12 @@
 | 33 | 武器／盔甲表與戰鬥選項順序（印刷頁 60–61） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
 | 34 | 戰鬥執行、命中、傷害與擊退（印刷頁 62–63） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
 | 35 | 回合結束、實戰建議與角色成長（印刷頁 64–65） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
-| 36–75 | 征戰、進階規則、世界觀、種族與索引 | todo | — |
+| 36 | 階級：農民、平民與紳士（印刷頁 66–67） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 37 | 階級：侍從與騎士（印刷頁 68–69） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 38 | 最高階級、競技場與法術構詞（印刷頁 70–71） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 39 | 法術種族、屬性、強度、距離、時間與亞種（印刷頁 72–73） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 40 | 法術範例、學習、教團與修改（印刷頁 74–75） | reviewed | [07-advanced-gamers.md](chapters/07-advanced-gamers.md) |
+| 41–75 | 魔法、征戰、世界觀、種族與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 
