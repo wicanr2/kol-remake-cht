@@ -164,3 +164,24 @@
   `git diff --check`、安全摘要 deny-list 與 UID/GID 抽查通過。
 - 收尾刪除 Python bytecode 與第二份重複 PNG 目錄；`docker ps -a` 未見 KOL、IDA 或
   Pillow 遺留容器。本輪沿用既有映像，未建立或取代 Docker image。
+
+## 2026-08-31：MAKEMODE 顯示 theme 範圍查證
+
+- 以固定 SHA-256 的 MAKEMODE.EXE 建立全新 IDA 9.4 DB；`locked-v1` image ID、UID 1000、
+  `HOME=/home/ubuntu` 與 `idat` 入口先通過最小探針。
+- 第一輪匯出定位 mode 提示、`%spics.0`／`%spics.%d` 與 `_main`／`sub_10464`；第二輪
+  以另一新 DB 加入 I/O、LZW、二階轉換與重壓縮 helper；第三輪加入 28-call catalog；
+  第四輪把安全摘要的長篇原版文字改成 length＋SHA-256。每輪都用新 DB，未污染正式 i64。
+- 證實官方工具由 PICS 生成 `basepcga.N` 或 `baseherc.N`。28 組 base／count／transform
+  case 已機械匯出，所有 count 與 image inventory v2 逐組一致。
+- 靜態資料流已閉合到 PICS header／分卷 → LZW decode → per-case geometry → EGA planes →
+  packed 2-bit → recompress → checked write；尚無官方工具動態輸出 round-trip，故完整像素
+  轉換維持強推論。
+- 此證據把「PCGA／HERC 素材缺失」訂正為「官方可生成衍生 theme」。是否列為首版必要
+  交付會實質改變 scope，依 grilling 技能留待使用者選擇，未寫入正式 extraction set。
+- 安全摘要 SHA-256 `a5ca5e13…e0a7`；Python syntax、全部 JSON parse、28 組 count 對
+  inventory v2、長文不入版控 deny-list、原始 bytes／disassembly deny-list 與 UID/GID
+  抽查均通過。
+- 收尾已刪除四個一次性 MAKEMODE `.i64` 與 EXE 暫存副本；private JSON 仍由精確
+  `.gitignore` 規則排除。`docker ps -a` 未見 KOL／MAKEMODE／IDA 遺留容器，本輪未建立
+  或取代 Docker image。

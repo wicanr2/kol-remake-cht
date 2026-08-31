@@ -336,3 +336,42 @@ Git 歷史；現行 v2 清冊改以 KOLTOWN consumer 的分卷契約重生。
 結論：TWN 圖號 24 的分卷、LZW、二階 RLE、4-bit indices、幾何、方向與 blit 為
 `已證實`；EGA RGB mapping 維持 `hardware-spec approximation`。圖片的劇情／人物語意
 未由文字 consumer 證實，因此只以「全域圖號 24」稱呼，不作推測性命名。
+
+## RE-009：MAKEMODE 的 CGA／Hercules 素材生成鏈
+
+### 問題與固定證據
+
+固定 ZIP 為何只有一般 `*PICS*`，KOLTOWN 卻有 `pics/pcga/herc` suffix consumer？缺少的
+PCGA／HERC 是遺失素材、另一版發行物，還是可由工具生成？
+
+- 輸入 `MAKEMODE.EXE`，SHA-256 `3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56`。
+- IDA Pro 9.4 `locked-v1`，image ID `6f6d59af…e2780`，loaded-MZ linear EA；DGROUP EA
+  `0x13210`。完整指令只留 ignored private JSON。
+- `_main` 的模式提示 consumer 明確提供 CGA／Hercules 轉換；mode 1 suffix 為 `pcga`，
+  mode 2 suffix 為 `herc`。長篇原版提示在版控摘要只留長度與 SHA-256，不提交全文。
+- `_main` `0x1019d..0x103c4` 共 28 次呼叫 `sub_10464`。安全 probe 機械匯出每次的
+  原始 call EA、base、image count 與 transform case；28 個 count 全部與 v2 邏輯清冊
+  相符。表中不含 AWD 工作區與動態角色 CHARPICS。
+
+### 轉換資料流
+
+- `sub_10464` `0x10491..0x104e5` 以 `%spics.0` 讀來源 header；`0x10544..0x10565`
+  依全域圖號選來源分卷並整檔讀取。
+- `sub_114F4`（`0x114f4..0x116e4`）是 9-bit 起始、`0x100` 增寬標記的 LZW 解碼器，
+  與 KOLTOWN decoder 結構獨立吻合。
+- `sub_10464` 依 0..22 transform case 建立矩形；`0x10fb5..0x10fe0` 計算面積並呼叫
+  `sub_11734`。後者將二階 RLE／nibble stream 展開為四個 EGA bitplanes。
+- `sub_118A8`（`0x118a8..0x11964`）逐八像素合成 4-bit EGA index，套 16-entry mapping，
+  再打包為兩個 2-bit bytes；`sub_11242` 接著重壓縮。
+- `sub_10464` 以 `%s%s.%d`／`%s%s.0` 重建 header 與分卷，`sub_1142C` 透過
+  `__dos_creat`／`__dos_write`／短寫檢查寫出 `basepcga.N` 或 `baseherc.N`。
+
+### 結論與停止線
+
+- PCGA／HERC 的一般圖片不是固定 ZIP 中遺失的靜態輸入，而是官方 MAKEMODE 由 EGA
+  PICS 生成的衍生 archive：`已證實`。
+- 28 組來源基名、圖數與輸出命名：`已證實`；全部圖數與獨立 v2 清冊一致。
+- 解碼 → transform case → 4-plane 至 2-bit → 重壓縮的整體靜態鏈：`強推論`。尚未用
+  MAKEMODE 動態輸出做 byte-level／runtime round-trip，Hercules 的單色／抖色規則也未關閉。
+- 是否讓 CGA／Hercules 成為首版必要 theme 是產品範圍，不由 RE 代決。共同決策前停止
+  深挖 23 個 transform case；仍可繼續不依賴該答案的 EGA PICS consumer 研究。

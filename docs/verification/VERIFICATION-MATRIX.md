@@ -11,7 +11,7 @@
 | 戰鬥／AI／獎勵 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 事件／任務 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 存讀檔 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
-| 圖像／主題 | 30 邏輯 archive／1,022 payload LZW 探針；COMBPICS 與 TWN index 24 二階 RLE | IDA consumer＋BIOS mode 0Dh；TWN 八張 continuation PNG | 兩張魔旅士同場景 JPEG 正配 MAE < 錯配一半；TWN 接觸表目視 | 尚無 | SPEC-002 DRAFT；兩個 EGA 分支已證實 |
+| 圖像／主題 | 30 邏輯 archive／1,022 payload LZW 探針；COMBPICS 與 TWN index 24 二階 RLE | IDA consumer＋BIOS mode 0Dh；TWN 八張 continuation PNG；MAKEMODE 28 組 catalog | 兩張魔旅士同場景 JPEG 正配 MAE < 錯配一半；TWN 接觸表目視 | 尚無 | SPEC-002 DRAFT；CGA／Hercules 首版範圍待決策 |
 | 在地化／字型 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 封包 | 尚無 | 不適用 | 不適用 | 尚無 | 未開始 |
 

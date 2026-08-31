@@ -1,0 +1,360 @@
+{
+  "schema": "kol-ida-makemode-display-selection-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "MAKEMODE.EXE",
+  "input_sha256": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56",
+  "address_space": "IDA linear effective address for loaded MAKEMODE MZ",
+  "dgroup_ea": "0x13210",
+  "strings": [
+    {
+      "string_ea": "0x13298",
+      "text": "Hercules",
+      "text_length": 8,
+      "text_sha256": "ef97a66f04394990d341c2a51eab11d6490d90f92318b50cc02988bd5fde0d88",
+      "dgroup_relative_offset": 136,
+      "near_offset_occurrence_count": 2,
+      "consumer_original_functions": [
+        "__output",
+        "sub_11734"
+      ]
+    },
+    {
+      "string_ea": "0x136fa",
+      "text": null,
+      "text_length": 77,
+      "text_sha256": "195c58d7119cd284415e457734fae415e71ea68dea063cbafaa87a991678b7ef",
+      "dgroup_relative_offset": 1258,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x13748",
+      "text": null,
+      "text_length": 64,
+      "text_sha256": "fd806039a8dade2573f532e598537d8f7def78b72da33c66a9c9a18892653f42",
+      "dgroup_relative_offset": 1336,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x13810",
+      "text": null,
+      "text_length": 159,
+      "text_sha256": "fde23f3f4d08919de06bb5b0437b400e5cb6848a000d355e71c75e3151e3c150",
+      "dgroup_relative_offset": 1536,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x138d0",
+      "text": null,
+      "text_length": 42,
+      "text_sha256": "33f1783cdd46a18e32554a4ac594600387b6093644e2a200771b0d4c4c3bb20e",
+      "dgroup_relative_offset": 1728,
+      "near_offset_occurrence_count": 1,
+      "consumer_original_functions": [
+        "_main"
+      ]
+    },
+    {
+      "string_ea": "0x139d0",
+      "text": "%spics.0",
+      "text_length": 8,
+      "text_sha256": "90bf90b04d7784b6392ea019b7013d729b3df1b43de0b0537cf35728b3b02ee1",
+      "dgroup_relative_offset": 1984,
+      "near_offset_occurrence_count": 2,
+      "consumer_original_functions": [
+        "_brkctl",
+        "sub_10464"
+      ]
+    },
+    {
+      "string_ea": "0x139dc",
+      "text": "%spics.%d",
+      "text_length": 9,
+      "text_sha256": "881f8a61bbb6e9cd3aee278ab361a3684da02b0c8176dd9fa33c53ff36b91ba7",
+      "dgroup_relative_offset": 1996,
+      "near_offset_occurrence_count": 2,
+      "consumer_original_functions": [
+        "__output",
+        "sub_10464"
+      ]
+    }
+  ],
+  "consumer_functions": [
+    {
+      "original_name": "_main",
+      "start_ea": "0x10010",
+      "end_ea": "0x103d8",
+      "instruction_count": 395,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_10464",
+      "start_ea": "0x10464",
+      "end_ea": "0x11199",
+      "instruction_count": 1002,
+      "caller_count": 28
+    },
+    {
+      "original_name": "sub_11242",
+      "start_ea": "0x11242",
+      "end_ea": "0x11318",
+      "instruction_count": 67,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_1142C",
+      "start_ea": "0x1142c",
+      "end_ea": "0x11497",
+      "instruction_count": 46,
+      "caller_count": 4
+    },
+    {
+      "original_name": "sub_11497",
+      "start_ea": "0x11497",
+      "end_ea": "0x114f4",
+      "instruction_count": 40,
+      "caller_count": 2
+    },
+    {
+      "original_name": "sub_114F4",
+      "start_ea": "0x114f4",
+      "end_ea": "0x116e4",
+      "instruction_count": 167,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_11734",
+      "start_ea": "0x11734",
+      "end_ea": "0x118a8",
+      "instruction_count": 140,
+      "caller_count": 1
+    },
+    {
+      "original_name": "sub_118A8",
+      "start_ea": "0x118a8",
+      "end_ea": "0x11964",
+      "instruction_count": 77,
+      "caller_count": 1
+    },
+    {
+      "original_name": "__output",
+      "start_ea": "0x122d4",
+      "end_ea": "0x12640",
+      "instruction_count": 303,
+      "caller_count": 2
+    },
+    {
+      "original_name": "_brkctl",
+      "start_ea": "0x12f7e",
+      "end_ea": "0x12ff2",
+      "instruction_count": 55,
+      "caller_count": 1
+    }
+  ],
+  "conversion_calls": [
+    {
+      "call_ea": "0x101a9",
+      "base_name": "book",
+      "base_dgroup_offset": 1772,
+      "image_count": 14,
+      "transform_case": 7
+    },
+    {
+      "call_ea": "0x101bb",
+      "base_name": "hand",
+      "base_dgroup_offset": 1778,
+      "image_count": 24,
+      "transform_case": 16
+    },
+    {
+      "call_ea": "0x101cd",
+      "base_name": "per",
+      "base_dgroup_offset": 1784,
+      "image_count": 12,
+      "transform_case": 10
+    },
+    {
+      "call_ea": "0x101df",
+      "base_name": "head",
+      "base_dgroup_offset": 1788,
+      "image_count": 108,
+      "transform_case": 11
+    },
+    {
+      "call_ea": "0x101f1",
+      "base_name": "tor",
+      "base_dgroup_offset": 1794,
+      "image_count": 108,
+      "transform_case": 12
+    },
+    {
+      "call_ea": "0x10203",
+      "base_name": "legs",
+      "base_dgroup_offset": 1798,
+      "image_count": 108,
+      "transform_case": 13
+    },
+    {
+      "call_ea": "0x10215",
+      "base_name": "weap",
+      "base_dgroup_offset": 1804,
+      "image_count": 56,
+      "transform_case": 14
+    },
+    {
+      "call_ea": "0x10227",
+      "base_name": "shld",
+      "base_dgroup_offset": 1810,
+      "image_count": 8,
+      "transform_case": 15
+    },
+    {
+      "call_ea": "0x10243",
+      "base_name": "kol",
+      "base_dgroup_offset": 1816,
+      "image_count": 14,
+      "transform_case": 9
+    },
+    {
+      "call_ea": "0x10255",
+      "base_name": "comb",
+      "base_dgroup_offset": 1820,
+      "image_count": 7,
+      "transform_case": 17
+    },
+    {
+      "call_ea": "0x10267",
+      "base_name": "TWN0",
+      "base_dgroup_offset": 1826,
+      "image_count": 25,
+      "transform_case": 1
+    },
+    {
+      "call_ea": "0x10279",
+      "base_name": "mon",
+      "base_dgroup_offset": 1832,
+      "image_count": 64,
+      "transform_case": 18
+    },
+    {
+      "call_ea": "0x1028b",
+      "base_name": "weat",
+      "base_dgroup_offset": 1836,
+      "image_count": 18,
+      "transform_case": 19
+    },
+    {
+      "call_ea": "0x1029d",
+      "base_name": "misc",
+      "base_dgroup_offset": 1842,
+      "image_count": 6,
+      "transform_case": 22
+    },
+    {
+      "call_ea": "0x102b9",
+      "base_name": "TWN1",
+      "base_dgroup_offset": 1848,
+      "image_count": 34,
+      "transform_case": 0
+    },
+    {
+      "call_ea": "0x102cb",
+      "base_name": "TWN2",
+      "base_dgroup_offset": 1854,
+      "image_count": 30,
+      "transform_case": 0
+    },
+    {
+      "call_ea": "0x102dd",
+      "base_name": "end",
+      "base_dgroup_offset": 1860,
+      "image_count": 7,
+      "transform_case": 21
+    },
+    {
+      "call_ea": "0x102f9",
+      "base_name": "TWN3",
+      "base_dgroup_offset": 1864,
+      "image_count": 26,
+      "transform_case": 0
+    },
+    {
+      "call_ea": "0x1030b",
+      "base_name": "TWN5",
+      "base_dgroup_offset": 1870,
+      "image_count": 30,
+      "transform_case": 0
+    },
+    {
+      "call_ea": "0x10327",
+      "base_name": "kolm",
+      "base_dgroup_offset": 1876,
+      "image_count": 83,
+      "transform_case": 8
+    },
+    {
+      "call_ea": "0x10339",
+      "base_name": "TWN7",
+      "base_dgroup_offset": 1882,
+      "image_count": 46,
+      "transform_case": 0
+    },
+    {
+      "call_ea": "0x10355",
+      "base_name": "TWN4",
+      "base_dgroup_offset": 1888,
+      "image_count": 26,
+      "transform_case": 0
+    },
+    {
+      "call_ea": "0x10367",
+      "base_name": "TWN6",
+      "base_dgroup_offset": 1894,
+      "image_count": 26,
+      "transform_case": 0
+    },
+    {
+      "call_ea": "0x10379",
+      "base_name": "back",
+      "base_dgroup_offset": 1900,
+      "image_count": 14,
+      "transform_case": 2
+    },
+    {
+      "call_ea": "0x1038b",
+      "base_name": "set0",
+      "base_dgroup_offset": 1906,
+      "image_count": 6,
+      "transform_case": 3
+    },
+    {
+      "call_ea": "0x1039d",
+      "base_name": "set1",
+      "base_dgroup_offset": 1912,
+      "image_count": 6,
+      "transform_case": 4
+    },
+    {
+      "call_ea": "0x103af",
+      "base_name": "set2",
+      "base_dgroup_offset": 1918,
+      "image_count": 6,
+      "transform_case": 5
+    },
+    {
+      "call_ea": "0x103c1",
+      "base_name": "face",
+      "base_dgroup_offset": 1924,
+      "image_count": 6,
+      "transform_case": 6
+    }
+  ]
+}

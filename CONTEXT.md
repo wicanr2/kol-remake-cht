@@ -41,6 +41,9 @@
   不代表全部圖片格式完成。
 - TWN 全域圖號 24 已關閉 continuation 垂直鏈：八城均從 `.1` 讀取；town 0 為 192×96，
   其餘為 88×64。八張 ignored PNG 與接觸表通過像素數、4-bit bounds、方向及非空目視。
+- 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
+  轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
+  相符。完整轉換像素規則尚未動態驗證；三種 theme 的產品範圍待使用者決定。
 
 ## 固定輸入
 
@@ -66,5 +69,5 @@
 
 ## 下一個唯一工作
 
-盤點固定 ZIP 缺少 PCGA／HERC 發行素材的影響，並追下一個尚未證實的 PICS consumer
-圖號；SPEC-002 READY 前不接 runtime。
+等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定的工作可繼續追下一個
+PICS consumer。SPEC-002 READY 前不接 runtime。

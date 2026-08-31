@@ -79,6 +79,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] 已預先定義全部 archive 的失敗政策、可回查命名、manifest schema 與權利審查。
 - [ ] 每種預定輸出格式皆已有已證實像素契約；其餘明列排除，且完整 extraction set 不得
   把排除項目冒充成功。
+- [ ] 使用者確認顯示 theme 範圍：EGA-only、EGA 基準加後續 CGA／Hercules，或三者同為
+  首版必要交付；未確認前不得把建議固化成正式 extraction set。
 - [x] 由第二條獨立證據（兩張原版文章截圖＋DOSBox-X mode／palette 契約）交叉驗證像素結果。
 
 ## 實作狀態
@@ -86,3 +88,5 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 無 production implementation。`tools/probe_image_lzw.py` 是 RE 階段一次性機械探針，
 其批次輸出仍明示未驗證多數圖片的尺寸、像素與 palette，不能被 runtime import；
 `tools/probe_extract_comb_png.py` 只關閉 COMBPICS 的窄分支，也不得作 runtime importer。
+官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
+且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。

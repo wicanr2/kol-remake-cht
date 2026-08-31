@@ -98,6 +98,6 @@
 
 ## 下一個唯一工作
 
-SPEC-002 仍為 DRAFT；TWN `.1/.2` 分卷契約與全域圖號 24 的 continuation 垂直鏈已關閉。
-下一個窄任務是界定固定 ZIP 缺少 PCGA／HERC 發行素材的範圍，再追下一個尚未證實的
-PICS consumer 圖號。READY 前不接 Go／Ebitengine production runtime。
+SPEC-002 仍為 DRAFT；MAKEMODE 已證實可由 28 組 EGA PICS 生成 PCGA／HERC，但完整
+轉換規則未關閉。下一個共同決策是首版 theme 範圍；等待回答期間，只繼續不依賴此決策的
+PICS consumer RE。READY 前不接 Go／Ebitengine production runtime。

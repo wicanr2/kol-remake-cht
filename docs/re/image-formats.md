@@ -127,6 +127,31 @@ Git 只保存 URL、SHA-256 與量化摘要 `combpics-visual-oracle.json`。
 尺寸與方向為 `已證實`；RGB 仍沿用 mode 0Dh 的 `hardware-spec approximation`。
 安全統計見 `town-index24-png-probe-summary.json`，PNG／接觸表只留 ignored 工作區。
 
+### PCGA／HERC 是 MAKEMODE 衍生素材
+
+固定 ZIP 中除 `AWD1PCGA.0`／`AWD1HERC.0` 工作區快照外，沒有一般 `*PCGA*` 或
+`*HERC*` 圖片檔；但它包含官方工具 `MAKEMODE.EXE`（SHA-256 `3051cc98…6c56`）。
+MAKEMODE `_main` 的提示 consumer 明確提供 CGA 與 Hercules 兩種轉換選項；選項 1 把
+輸出 suffix 設為 `pcga`，選項 2 設為 `herc`。
+
+`_main` 在 loaded-MZ EA `0x1019d..0x103c4` 對 28 個 archive 基名逐一呼叫
+`sub_10464`，每筆同時傳入全域圖數與 transform case。28 個圖數全部與 v2 邏輯清冊相符，
+包括 TWN 分卷的 25／34／30／26／26／30／26／46；不在表內的是 AWD 編輯器工作區與
+動態角色 `CHARPICS`。安全 catalog 保存在
+`ida-fingerprints/MAKEMODE-display-selection-summary.json`。
+
+`sub_10464` 讀 `basepics.0` 的 header／全域 offsets，並以 `base+suffix+volume` 寫出新
+archive。靜態資料流串接 `sub_114F4` 的 LZW 解碼、依 transform case 的矩形處理、
+`sub_11734` 的二階 RLE／四 EGA planes 展開、`sub_118A8` 的 4-plane 至 packed 2-bit
+映射、`sub_11242` 的重壓縮，以及 `sub_1142C` 的 checked DOS write。官方「由 PICS
+生成 PCGA／HERC」的來源與輸出契約為 `已證實`；完整 transform-case 幾何、CGA palette、
+Hercules 單色／抖色規則及生成檔的動態 round-trip 尚未驗證，整體像素轉換仍是
+`強推論`，不得直接寫成 production converter。
+
+這形成一個產品範圍決策：remake 可只以固定安裝的 EGA PICS 作必要基準，也可把官方
+生成的 CGA／Hercules 當額外原版 theme。此決定會改變抽取、驗證與發行範圍，尚未由
+使用者確認，因此 SPEC-002 不代選。
+
 ## Loader 與 consumer
 
 - `sub_19D98`／`sub_19E12`：KOLTOWN 的整檔或指定長度讀寫 helper，語意為 `強推論`。
@@ -147,7 +172,7 @@ Git 只保存 URL、SHA-256 與量化摘要 `combpics-visual-oracle.json`。
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
 3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
-4. PCGA／HERC 的實體素材不在固定 ZIP（AWD 工作區除外），其可驗證範圍與排除政策。
+4. 使用者尚未決定 PCGA／HERC 是必要交付 theme、可選後續 theme，或不納入產品範圍。
 5. COMBPICS 已有兩張外部原版截圖交叉驗證；仍待本機 runtime framebuffer 的無損抽樣。
 
 在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得
