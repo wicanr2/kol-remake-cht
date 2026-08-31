@@ -855,3 +855,21 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   不適用；production extraction geometry 為已證實的 renderer-data PNG。六筆 placeholder
   仍排除，KOLPICS 全包不再有 `excluded_unknown`。SPEC-002 尚因 KOLMPICS 與 theme 決策
   維持 DRAFT。
+
+## RE-031：KOLMPICS 68 筆圖示的 canonical extraction shape
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4、重建
+  unpacked MZ linear EA。`sub_11722` 以三個 byte-columns×20 scanlines、`sub_23638`
+  以 `x+3`／`y+20` 建立兩條獨立 24×20 consumer 契約。
+- 排除圖號 0／2、圖號 28 AND-mask 與 12 筆 placeholder 後，其餘 68 筆全部經相同二階
+  RLE 精確得到 480 個 4-bit indices。完整 archive-order 接觸表在 24×20 下呈現連續的
+  手勢、武器、狀態、人物與方向圖示，沒有 row-width、plane-order、旋轉或裁切異常。
+- 三項證據共同證實 68 筆的 canonical 24×20 lossless extraction shape。這不等於每個
+  dynamic caller 都使用相同螢幕座標或 clipping rectangle；`sub_27E20` 的 caller-specific
+  display geometry 仍未由本切片宣稱，不能拿 extraction PNG 尺寸冒充畫面 parity。
+- 兩份全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `93a4a3be…f6ef`／`cf44a187…a160`。兩輪 73 個 PNG 與 v2 摘要逐 byte 相同；摘要／接觸表
+  SHA-256 為 `2647e6a6…572e`／`2f335771…15a`。
+- KOLMPICS 全 83 筆現為 71 筆已證實來源與 12 筆 `excluded_non_image`，不再有
+  `excluded_unknown`。完整 EGA extraction set 的 pending 因此歸零；SPEC-002 仍等待
+  顯示 theme 決策與 production extractor 設計，未接 Go runtime。

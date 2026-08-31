@@ -1,5 +1,5 @@
 {
-  "schema": "kol-ida-koltown-kolmpics-routes-summary-v1",
+  "schema": "kol-ida-koltown-kolmpics-routes-summary-v2",
   "ida_version": "9.4",
   "input_name": "KOLTOWN-unpacked.EXE",
   "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
@@ -147,6 +147,18 @@
       "status": "confirmed"
     }
   ],
+  "canonical_icon_extraction_contract": {
+    "width_pixels": 24,
+    "height_pixels": 20,
+    "fixed_consumer_bases": [
+      "sub_11722 fixed rectangle",
+      "sub_23638 fixed rectangle"
+    ],
+    "required_archive_evidence": "each classified icon payload must decode to exactly 480 4-bit indices",
+    "required_visual_evidence": "the complete archive-order contact sheet must remain coherent at 24x20",
+    "status": "confirmed only when combined with fixed archive and visual probes",
+    "scope": "lossless extraction shape; not a claim that every dynamic caller uses the same screen placement or clipping rectangle"
+  },
   "router_call_eas": [
     "0x1039a",
     "0x106d5",
@@ -406,6 +418,7 @@
   ],
   "limits": [
     "候選 route 不等於每個索引都有可達 caller；placeholder 與二階像素數由 archive probe 分類。",
-    "sub_27E20 的 24x20 幾何不能只由本 IDA 摘要宣稱。"
+    "sub_27E20 的逐 caller display geometry 不能只由本 IDA 摘要宣稱。",
+    "canonical 24x20 extraction shape 仍須固定 archive 的 480-index 全批證據與接觸表共同成立。"
   ]
 }

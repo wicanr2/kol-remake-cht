@@ -785,3 +785,19 @@
 - 本輪 IDA、抽取與驗證全部使用 `docker run --rm`；第二輪 PNG、Python cache、兩個 IDA DB
   與暫存摘要已精確移除，保留第一輪 ignored PNG 作視覺證據。結束檢查沒有 KOL／KOLPICS
   專案容器。
+
+## 2026-09-01：KOLMPICS 68 筆 canonical 24×20 extraction shape
+
+- 將 lossless extraction shape 與 caller-specific display geometry 分流。`sub_11722` 與
+  `sub_23638` 提供兩條固定 24×20 consumer；68 筆圖示各精確展開為 480 indices，完整
+  接觸表在 24×20 下維持連續 UI 圖示，三層證據共同關閉 extraction geometry。
+- `sub_27E20` 的動態螢幕位置與 clipping 仍明列為未宣稱，不由 PNG shape 冒充 caller-exact
+  parity。IDA／視覺探針升 v2，保留這項限制於 safe summary 與逐筆紀錄。
+- 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `93a4a3be…f6ef`／`cf44a187…a160`；兩輪 73 個 PNG 與摘要逐 byte 相同，摘要／接觸表為
+  `2647e6a6…572e`／`2f335771…15a`。
+- EGA extraction set 更新為 996 筆已證實、0 筆待證實、26 筆非圖片與 752 個 PNG 單位。
+  SPEC-002 的 EGA 格式 gate 已通過，但 theme 決策與 production extractor 尚未完成。
+- 本輪 IDA、抽取與驗證全部使用 `docker run --rm`；第二輪 PNG、Python cache、兩個 IDA DB
+  與暫存摘要已精確移除，保留第一輪 ignored PNG 作視覺證據。結束檢查沒有 KOL／KOLMPICS
+  專案容器。

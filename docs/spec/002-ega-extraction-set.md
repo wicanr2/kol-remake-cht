@@ -21,7 +21,7 @@ payload 已有足夠契約；多筆彩圖／遮罩可合成一張 runtime PNG，
 | FACEPICS | 6 | 6 | 0 | 0 | 6 | direct color | `title-set-face-ega-visual-probe.json` |
 | HANDPICS | 24 | 24 | 0 | 0 | 12 | color＋AND-mask | `handpics-ega-visual-probe.json` |
 | HEADPICS | 108 | 108 | 0 | 0 | 54 | color＋AND-mask | `bodypics-ega-visual-probe.json` |
-| KOLMPICS | 83 | 3 | 68 | 12 | 3 | color；圖號 28 是 AND-mask data PNG | `kolmpics-all-ega-visual-probe.json` |
+| KOLMPICS | 83 | 71 | 0 | 12 | 71 | color；圖號 28 是 AND-mask data PNG | `kolmpics-all-ega-visual-probe.json` |
 | KOLPICS | 14 | 8 | 0 | 6 | 8 | direct color＋renderer-data PNG | `kolpics-ega-visual-probe.json` |
 | LEGSPICS | 108 | 108 | 0 | 0 | 54 | color＋AND-mask | `bodypics-ega-visual-probe.json` |
 | MISCPICS | 6 | 5 | 0 | 1 | 5 | direct color | `miscpics-ega-visual-probe.json` |
@@ -42,14 +42,13 @@ payload 已有足夠契約；多筆彩圖／遮罩可合成一張 runtime PNG，
 | TWN7PICS | 46 | 45 | 0 | 1 | 45 | 圖號 0 color＋共享 mask | `twn-archives-ega-visual-probe.json` |
 | WEAPPICS | 56 | 56 | 0 | 0 | 28 | color＋AND-mask | `weappics-ega-visual-probe.json` |
 | WEATPICS | 18 | 18 | 0 | 0 | 18 | 三層 data PNG；另可重生六張 preview | `koltown-weatpics-layered-visual-probe.json` |
-| **總計** | **1,022** | **928** | **68** | **26** | **684** |  |  |
+| **總計** | **1,022** | **996** | **0** | **26** | **752** |  |  |
 
-## 尚未關閉的 68 筆
+## 尚未關閉的來源
 
-1. `KOLMPICS` 68 筆 24×20 圖示：全部機械展開為 480 pixels，且共用 helper 已證實
-   24×20；但動態 caller 尚未逐圖號封閉，因此目前逐筆 `geometry_grade` 是
-   `strong inference`。下一窄任務是證實 router 的 active index 集合確實都走同一
-   24×20 consumer，或將無法證實者保留排除。
+固定 EGA 母體目前為 0 筆。KOLMPICS 的 68 筆圖示已由 480-index 全批證據、兩條固定
+24×20 consumer 與完整接觸表共同關閉 canonical extraction shape；動態 caller 的螢幕
+位置／裁切仍是 UI parity 限制，不再混入素材格式 gate。
 ## 已關閉的 26 筆非圖片來源
 
 - `KOLMPICS`：12 筆一-byte placeholder。

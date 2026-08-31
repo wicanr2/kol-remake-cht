@@ -1,10 +1,10 @@
 {
-  "schema": "kol-kolmpics-all-ega-visual-probe-v1",
+  "schema": "kol-kolmpics-all-ega-visual-probe-v2",
   "input_name": "Knights-of-legend.zip",
   "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
-  "ida_summary_name": "summary.json",
-  "ida_summary_sha256": "79fceaafc7cc41bbebbe18e6e5fde68a0b80b44c1faea3b748633b31fe30e5ba",
-  "status": "mechanically validated and human-inspected all 71 active payloads",
+  "ida_summary_name": "KOLTOWN-kolmpics-routes-summary.json",
+  "ida_summary_sha256": "93a4a3bebfa1907aad932ad9908ae784ef52c23e91db61aeaabfa98c1914f6ef",
+  "status": "mechanically validated and human-inspected all 71 active payloads; all 68 icons have confirmed 24x20 extraction geometry",
   "human_inspection": "the 68-item 24x20 contact sheet forms a coherent UI icon set containing gestures, weapons, status marks, figures and direction arrows; the 320x200 frame and 296x32 bar are correctly oriented; index 28 mask-bits view preserves the previously verified rounded silhouette; no RLE, plane-order, rotation or clipping defect is visible",
   "active_indices": [
     0,
@@ -101,7 +101,8 @@
   "icon_geometry": {
     "width_pixels": 24,
     "height_pixels": 20,
-    "grade": "strong inference outside directly fixed helper calls"
+    "extraction_grade": "confirmed by 480-index payloads, two fixed consumers and complete contact sheet",
+    "caller_display_limit": "dynamic screen placement and clipping are not claimed"
   },
   "contact_sheet_layout": "ten columns by seven rows, archive index order with gaps removed",
   "contact_sheet_sha256": "2f33577100b5aa638872efab985f24253fcc3bc3168effdd4ea79b1bf1bfd15a",
@@ -113,7 +114,8 @@
       "kind": "rle-color",
       "width_pixels": 320,
       "height_pixels": 200,
-      "geometry_grade": "confirmed",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "confirmed for fixed index 0/2 rectangles",
       "color_count": 6,
       "pixel_sha256": "7fc862a0f8f2f9e9160dd2b8b97d66c21e726a43c56463ce103e9ffd6fa7a08a",
       "png_sha256": "83e871ebda65178468f54e5729cb64c3f66b599cc643e6e65ac87d5267fffe73"
@@ -132,7 +134,8 @@
       "kind": "rle-color",
       "width_pixels": 296,
       "height_pixels": 32,
-      "geometry_grade": "confirmed",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "confirmed for fixed index 0/2 rectangles",
       "color_count": 6,
       "pixel_sha256": "2e9449a86613729d1fdfe3e46fda2dcd98f281a4e7810ac437644079dcd65458",
       "png_sha256": "ec25cb99029a56affca33e4b6d259bf3c3b62ee13b9ca8e1ffc4a1620a156bc0"
@@ -144,7 +147,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 5,
       "pixel_sha256": "ab227d5b501addc759e337322fc90568e37c3efd0ab8bd72bc730d26b6b3fb34",
       "png_sha256": "72a75ed162ff338b82c069b880618c414372bef6fe7f8caef058e98e6d49f7ed"
@@ -156,7 +160,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 7,
       "pixel_sha256": "37e8bb24f7de628ca401f3a2caaae9ef0a0d4a7e7c060bfa359ec4096090f46c",
       "png_sha256": "1db119649e367322ead20eeeeb62330d75bba8c440716607db32cffb2e212e3f"
@@ -168,7 +173,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 6,
       "pixel_sha256": "7d33d4bb5b713f106adabce1f9c7b1bd0d5dc9279738dcfa66848e2f2f92e4f3",
       "png_sha256": "7c1273cceeb4648df232cebeaebc756bb73f8abbdbbec58e26bc9ab3988b195a"
@@ -180,7 +186,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 7,
       "pixel_sha256": "974bebcc8bbf5ef669594dbf1cb965dc7a71bddce022a87d1b1eeeee0488c2db",
       "png_sha256": "03e991ba622fb18f41940b336a0c7d569de918ed05a1938797c716a5f4a56388"
@@ -192,7 +199,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 5,
       "pixel_sha256": "0c585ac4d1ce4032d45a488e55f3de45a307e269e8a5e855e6ce5b3c8d4e93bf",
       "png_sha256": "6a41e06de41eebd4ca6a9e4f2b26011d9c1310ac825a77efc4e6e70955967002"
@@ -204,7 +212,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 7,
       "pixel_sha256": "536b962de4f0cbc26b868e63c764a16a697aaca8157b9258a1769d9866bdc996",
       "png_sha256": "6331e41f616bfb2a036be5875266cd8069b8deae1b15f38c9710f99e06c97225"
@@ -216,7 +225,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "9e8efbc586448164f4837f18a8711a56b8853a2381079391c3d09012959b5be7",
       "png_sha256": "14e8d5d4e0ebb6665a43d229c26d8797badb107fce47be9153505ab5974f6775"
@@ -228,7 +238,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 4,
       "pixel_sha256": "863a67b79687171f504228e0c59114cc6e794ec128c088c3eb4be236e3c05e82",
       "png_sha256": "5b1fd80fb51112509f390ec004e6c670f26cf050911af2c19f520d5f0a3ec4ed"
@@ -240,7 +251,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 4,
       "pixel_sha256": "6dbfd4e24edfec853b0ff715f3b4115d97edb0c18efeb94f9253332335f21ec8",
       "png_sha256": "7cef032ad15b8e14fa8dc15c0d540de73ed0567098b79a24a54db7666914e90b"
@@ -252,7 +264,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 7,
       "pixel_sha256": "ff5486e1c00aab49d0e9de5589f188753f7bd52762172a725ba8b1a9a1695b75",
       "png_sha256": "88ab17d7d44ad73366c7ef760a3759d8eec2f0850d4353c55ab85413795245f7"
@@ -264,7 +277,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "cd4737e1ec01aa9ef92678cc9fd57a7892bb4a4440f3ce34dda34a4cd255b907",
       "png_sha256": "c4585829f2be3762813f8b87f5b2f4396ecb77d5f7fe656e0bdf476f9945bb6f"
@@ -276,7 +290,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 12,
       "pixel_sha256": "b5d013cbaf56bdba4cfb6b922a89518d3aeab25dfdba824365b58ae21ddff913",
       "png_sha256": "2eed8294943acf2112a446c6faa148ae15f824bfc075e9521755fa114ba784ad"
@@ -288,7 +303,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "cabcc04155079fd77840de3a0080f6b41a697b57b38bcb0bc671f00b0f3a48d0",
       "png_sha256": "fcb3af060ce688e2e2e3237735f9d184b0f284a3a7b388381e428e5192727c5e"
@@ -300,7 +316,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 7,
       "pixel_sha256": "9c49fb0f2e507f2bfcce368fd3c57149fc37be99856c6aefa8bad260ab0aba5b",
       "png_sha256": "de65fe259c7a26fe3792afd848cf48052966f09276dd3bbfba35d54e1d4a89fe"
@@ -312,7 +329,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 7,
       "pixel_sha256": "8b5106a5593169622dabeadbf846153e725b4959ab54e56ae46edc626a6299ab",
       "png_sha256": "d43b48ecbc158c19cee02736aaf8eb2c39f28b418288e2842fc7aa4c194fda86"
@@ -324,7 +342,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "a6e2efa90664120e464bf14da16361597db173b10edd3c002d30f015c7cea98e",
       "png_sha256": "0d04b035c4f147316e34bc3e73134c6851a9f2eaf44830723d19a148265069a9"
@@ -336,7 +355,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 14,
       "pixel_sha256": "9d5bcfd668bc97f40e8a83ce5bc64e37941b19ce6e66a747e53c8a47b95257eb",
       "png_sha256": "f7c8422a35db93d6ba4b753ebe00ad722fb5219ffc315882e61bf69d897ecb47"
@@ -348,7 +368,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 12,
       "pixel_sha256": "7c41d97ba567d2298ec706dab857f7f7dc6cdca58b28d53a7e4b9ec56c639396",
       "png_sha256": "1bb46b97e0be3f0551f593038a48899a6680c364a37a9ed4f4307af344d52121"
@@ -360,7 +381,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 6,
       "pixel_sha256": "45763fd0ff3b21e3f06809efc272f8413a16db19ddefa5aa8c465666c9fe8a2f",
       "png_sha256": "ffa430a61fc0e82524bfd22eb8b328ede0444c47fad3bc8fd46c3442b59517b6"
@@ -372,7 +394,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 8,
       "pixel_sha256": "818130fa08931e3fad9d648a6b60917cc5bd83684df9ae815b937e401bbd255f",
       "png_sha256": "15f5f457ac0e5fefd31997d8f4b48976af0206ff72522a352d40af780cc36a94"
@@ -384,7 +407,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 8,
       "pixel_sha256": "b4f5d0f7c3453cdefd7223919b74909a05542727d150db7602dbdc23b3dffa55",
       "png_sha256": "e89fec44f67d2e147c2eebdecbaf0df4d4cfda9f97c672361b1ab05021df171b"
@@ -396,7 +420,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 11,
       "pixel_sha256": "43c4490cf9077c469dfb5b8ad49eaec52f534534d6a7fdf667be5e3fa1b53dae",
       "png_sha256": "9af0b16c5a8dadc7ec6ec88521b5780f063992b53fde8ca4cc7910851c9fa0de"
@@ -408,7 +433,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "26c3d21920babb28e999a22d3ddc59d041556a503fcb0bd3c755bd7a7fcc547a",
       "png_sha256": "f789e2560373a0606e19ea1aef3e5ccc3ce44b6af9f4e69c811f2b5a95155a19"
@@ -420,7 +446,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "75296702ae8ac188dbc7fe8b755ef6dcd0d4923253d5cc6654e3c5a6686a1fe0",
       "png_sha256": "3e9f68416937fe1feed83b9747b50f1886cc4ef0b7836a35024452fda12a60ed"
@@ -432,7 +459,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 6,
       "pixel_sha256": "54383ceafbe58c3a53a0ef683845b7f91fb342ee5451401088f8670b2d354eab",
       "png_sha256": "926115a4f3462baac9d551b06ce1f61a33e3f941093213fe59a0998e20bcc9e3"
@@ -473,7 +501,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "edeff78620e5af5fa53d70fb89c6d848ca624157928974b739b6476991c569da",
       "png_sha256": "b99abd9d1f42bf9a8aa9ff3f6ec959f56d02b00b4f6ef5b24d15d8f1d916648c"
@@ -513,7 +542,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "6cffccd870d38dcdece9ecac7a2484657fabf6af61d448748e3740b20b86d91e",
       "png_sha256": "c61c8e28afbb370514c53101f4efbffb276f8fef534694b4d634659e5303483c"
@@ -525,7 +555,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 6,
       "pixel_sha256": "95163664f72047bb024d35082577b28553d2545c2d9ed2f2d5efa2e9cf6df50e",
       "png_sha256": "2c449a82de40083a65880487dd80cfa36eb8057e093a23e31f7b271c478a7969"
@@ -537,7 +568,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 6,
       "pixel_sha256": "696478850404684738bad734c7c741f7d319f42fc6fe0abe66e09bb7d2fac4c9",
       "png_sha256": "420dbb18632953ed996c53c1868a08766af1dc8d311fd07d1d1c9a65fe3bd4df"
@@ -549,7 +581,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "9966b13a864da5be8bc7896e000ad120d4346a20fed497c84d54ce291ec93f7d",
       "png_sha256": "a0225d1082b41a3c2fa2f3d7e0855cc3bd50b546d2c313f208a976af85ab65be"
@@ -561,7 +594,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "6145d8d88f4d2468d4947055254ea31455857e207f78f446c1682b075a3f518f",
       "png_sha256": "8afb5de60fceac745efd61c26e421c31a5d2c1295b6c98dae16a69587f613f65"
@@ -573,7 +607,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 11,
       "pixel_sha256": "d87e0e5db3236ea08adb6c7ca65cbf91fc057a81015edadd355604512cdcb6c4",
       "png_sha256": "a8412e1d848ca59bbf0f938de1cf4370c2f49028a673251c006a197d4fb2fb68"
@@ -585,7 +620,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "db0d48bf7c9909c21ccde410c29bc95f9baff1e21f81daa32af978373164aba3",
       "png_sha256": "b01ecdefa945c5ce6b60cd3de9b0a0e7b1ec0d5e6bfdad13503a64ed75324ef6"
@@ -597,7 +633,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 6,
       "pixel_sha256": "342af112556d6531308ff22c6e20ada54ea338f89e6fc7cd22b8a7c5dd6914a7",
       "png_sha256": "99d9374a6a4c639dd6332c4dba1b2de89f139f8c4c3cf5fa65118dac1ac9420c"
@@ -609,7 +646,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 4,
       "pixel_sha256": "1cf0e2ac97f5ef287273d532ce5715541c476aecf02efaec1ebde5d59c8e8d59",
       "png_sha256": "fed193ef30a4c552c96ad0661d56fcb82d55f4a242802683e1823046fb294f12"
@@ -621,7 +659,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "77eb8003dbcb7b20396c7813649edd284484e9cc7c638634927a17a44a0ec2a3",
       "png_sha256": "db12f75259cef6d63966fa470c50b84cf0f8e4ac141123939187a09b14a346a8"
@@ -633,7 +672,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 11,
       "pixel_sha256": "f84dc3cad21b810e0746b3fc8119dc507c19763040e6c9562f154598f86a3cde",
       "png_sha256": "e819ed31a225d59a835ca9011b05aaa2cfa93e36f2770776b4fe821b7a6d8ceb"
@@ -645,7 +685,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 8,
       "pixel_sha256": "d8352009ce23e2c106281cdfbdf5fbd18f94a9775a64e7360249c91b1a4e4874",
       "png_sha256": "cf95b3fe6b69e832bfe02af46aeb077dc455984b8c5feb0bb3da5bdb93350852"
@@ -657,7 +698,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "ff7168c547febbfde4b94436be5ad7e41256353538c59a8499a462f1b6e3fd77",
       "png_sha256": "6b3ea6f4b2d1181ca4fbc18855a9ce58b8b6726f01f8d5597778fd59a815c5f0"
@@ -669,7 +711,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "620cec169e3254631c74432c7152fd7ead5ee1c7465d58888da9b20cb8badd50",
       "png_sha256": "bb918906d98a3f6ea53c5977f8f3a438611dd5c2d844beb4cfd67d566045d96f"
@@ -681,7 +724,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "f32324c7809d2308fa429a5843cab76897d64ed5731085ec7a6105f049e264ef",
       "png_sha256": "1245dd2c2ebf64f5225c3ea19f68b3116118230ac4cff90afae6053d137bb5ee"
@@ -693,7 +737,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "ec105ebc0b582424ff6cb91d2ab8ba0ffd8605b8f20cef1959578a77198c6ff7",
       "png_sha256": "5731057051091164f55de0e1406dd5a1416a1a03a4309bb543b00a046ea0b121"
@@ -705,7 +750,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "2b14d1ef7e0041588bd404907d0931e1ff2390b4c484dcec613e64dfcd96c393",
       "png_sha256": "ced8fb0a9391afd7e2d5a9887001e5db3fb892b7d0c465e5240512d7c3e11124"
@@ -717,7 +763,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "7dd3075790ce29efef7793530e87adff947fb14b9f13691d8cd953addfe97791",
       "png_sha256": "2f97049266b360aed602bd5a0e173b5f0277fdb33130450523fbe09f18a66a52"
@@ -729,7 +776,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 11,
       "pixel_sha256": "b3718bb00176b3ab6d573a3f9bde6ccb259b11b51ffef876b809fadcd85d91dc",
       "png_sha256": "df4312c06dc1823c0547b1b93032a3e9dd35d07ae8e329540141a51a22077b39"
@@ -741,7 +789,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 8,
       "pixel_sha256": "1ad1500cdc33a3a6a24fdb966eb5c57bfc1edc04fc19824da1181cbf95c55c51",
       "png_sha256": "749cfc99c4627fde25645c7cf1cf9185f68b0d5ab81230146103bd59bc98e0ff"
@@ -753,7 +802,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 4,
       "pixel_sha256": "711f4e377a1db229b629499ca10e5ee27299d8765ebab8a006b8faa988027290",
       "png_sha256": "fce78624fc84799b23f31c69a351a4e37dd84cc8b7bf1484d37b4ab929dbc5ce"
@@ -765,7 +815,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 7,
       "pixel_sha256": "1ed356dbbe6bc85b4bb1fe754731027c8cb736a4f1e017cf2eb0a27fc06e27f0",
       "png_sha256": "1ef8a803540c15e038141a6743f2d158fc9ad1b9af61fa9512c01f6c28e0c4cc"
@@ -777,7 +828,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 12,
       "pixel_sha256": "d641c49b45c65e5ff771afea1575db2fef94131fae048fd56cf1cd765c1fa8c4",
       "png_sha256": "7c5626273a0bfd43522dfa3b897c6d5adc5f57a89efaeefdc0cddf0578f483c4"
@@ -789,7 +841,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "4abbaa2f00df21c469cdf032b4b940ec28758f8be224a656c3ab849258fe9190",
       "png_sha256": "bb3ef178b413df8ac7cb065fa6c555ade38eac470f87e4d61eb4df0437896603"
@@ -801,7 +854,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 8,
       "pixel_sha256": "9744ab8d609d501ddd4003a801dc330fa381c13de0f4be0381d30c43cfaeea0d",
       "png_sha256": "c6c27cb3543a8ca0d2e6d4912e4450e6939903ac1b4a89f5743c393893804e9b"
@@ -813,7 +867,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 11,
       "pixel_sha256": "74c46449d90e96f9f717ae1c9643babed9ac3acccd1e79e5bf954a7edd9b6019",
       "png_sha256": "d5da3e0c8ab7918274dbd4fce5c4e62a9fc5d50bc691f47672a76bc5b7dbfa8b"
@@ -825,7 +880,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 12,
       "pixel_sha256": "2addd05c57c40572e5c7a48c7ecf00ac5bc8a900e458655c5ca560c3fdb33868",
       "png_sha256": "9738745d354df4f02d7b82698cf6c6ba19a460b25f1174f56bfffc8ac7582752"
@@ -837,7 +893,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "08df9dd20f1f31b14f23703e83ea31b2ca767f0319f28303e9771357669e97c5",
       "png_sha256": "90ee6a8820ba895336fbeb60837e8e200f280e0ca60a76c0ed0dae8154affec2"
@@ -849,7 +906,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "b65e677ca79fde9fdee4bc81f287931e09950382a239a70a23629e2dd5c92d4c",
       "png_sha256": "db1c105841c256abfa95f32652537f84ed9fd5ac1a4067df58aeefe679fe729c"
@@ -861,7 +919,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 10,
       "pixel_sha256": "3188b909729c718e55a75abc9552c6d9cec2c09e1a8675832ef509efa8a2412a",
       "png_sha256": "01dd9267babb25f4c4e20b966b2da4bb9abe9c2030bd649ad05a7d088c26fc3c"
@@ -873,7 +932,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 4,
       "pixel_sha256": "51d2fa2a624d2bd0fdb143c1eed77ad3824e4d57daf3dd1535a9495d8de0a9b1",
       "png_sha256": "ef2f72275490f9e5805f7f115c270cc5739570baf90f96910f08f315315b4a69"
@@ -885,7 +945,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 4,
       "pixel_sha256": "12aaa42e87cf8e179dc55aef9175a52bdc66db544c7736921298bfb608d0fabc",
       "png_sha256": "ab9074a8fe91ce1fc8a269ddb03d8383fcb1e6d1f772cfc463ff37bdb6d48fd8"
@@ -897,7 +958,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "667a9d98fb559779d3c1292b0177ec439634a53bde0371f1cc1c91a933d71ab8",
       "png_sha256": "a8911f9720eb7b1ecfb8d4c936b85433078fd6bc5a616309eeaebab38e8e3dd3"
@@ -909,7 +971,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 9,
       "pixel_sha256": "c53d3b67bb38bba4103a18eac13b55ba8a914152d048d50ccf784f59ce696b8e",
       "png_sha256": "d96bfd3ecdb9943a1daf4ee443aaf6108ecd1b3b3a53423344f0f9ae72c7c3c2"
@@ -949,7 +1012,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "366ae0a1a6fc8934b68de551cd6929a330c5a53e694cb5a245574f59701f689f",
       "png_sha256": "ee6785d42d56adb7605ce4f81df76973a52aa2dee005b0c371d794b63f64783e"
@@ -961,7 +1025,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "d35fc9f5748669d3042d13437dbb30948cd8920cb28fd7066d58b0bc86832d5e",
       "png_sha256": "ca6d88d022b0f5b610c25c2d3cc103e05d6a58d90cfe04e62987f1c79ad7ac40"
@@ -973,7 +1038,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "4b378fcd0cb53a2b94e4739ec4fc0cadfa6c74464848d6a92d7ce1ecccbd2ec9",
       "png_sha256": "46277ca1265ae0cad4805f492274b42e62b488634e71c314a4bae2dc0769ee8f"
@@ -985,7 +1051,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "bc9917d7ff848acf5f82d8a29c7a6647b3bacee8af28c62546f0bcd666fb5125",
       "png_sha256": "bd6ccdab707a3c7586aff6c301b0f7b0c585e6ca0015abb2d1e74d5edae33024"
@@ -997,7 +1064,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "a68e2ef9c42a0ffdb4264a8aefb1c7d96baff1a6844b6c8ffbddb92aaf98ada3",
       "png_sha256": "29c461ac6f247b0e0bd2ca96eda7ab9feeef0a3e23788c49c6451badd1eeb345"
@@ -1009,7 +1077,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "a2b3a386dbf6a2b68af6e8f40638afac13e2e199b8f4c114bf0434e4f34b7579",
       "png_sha256": "45dc889d4bd13aabd9fa9cf18e76902ab1f8ffd44e1c901a3215c9220dbe9210"
@@ -1021,7 +1090,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "5700c15c8553a5f574253454891693c81eedf5edc004ebadfe24d9afcec5474d",
       "png_sha256": "876618efbe6acb7ea2778d2a218c358e16d6e4e4cf8073727e8b285ef966d7fc"
@@ -1033,7 +1103,8 @@
       "kind": "rle-color",
       "width_pixels": 24,
       "height_pixels": 20,
-      "geometry_grade": "strong inference",
+      "extraction_geometry_grade": "confirmed",
+      "caller_display_geometry_grade": "not claimed; dynamic placement/clipping remains caller-specific",
       "color_count": 3,
       "pixel_sha256": "92485f791d760938861b2c3f05d8797ed51bb1144423f2bb4fc7a62cddeab046",
       "png_sha256": "0ca7535d46578bb5ef6534b02c4925e005af467bcb422b955c8d1a07e7244d3d"

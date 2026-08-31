@@ -445,8 +445,9 @@ KOLMPICS 候選 request 是 0..28、31、36..70、74..82，其他相關 request 
 圖號 0／2 的矩形分別是 320×200／296×32；其二階 RLE 精確得到 64,000／9,472 pixels。
 圖號 28 是既有已證實的 56×57 AND-mask。其餘 68 筆均精確得到 480 pixels，與
 `sub_11722`／`sub_23638` 固定三個 byte-columns×20 scanlines 的 helper 及 68 圖示接觸表
-吻合，輸出為 24×20。因 `sub_27E20` 繼承 caller 幾何且索引來自角色資料，未逐筆固定 caller
-的圖號仍標為 `強推論`，不因全批視覺連貫就升格成 caller-exact。
+吻合，故 canonical 24×20 lossless extraction shape 為 `已證實`。`sub_27E20` 繼承
+caller geometry，因此動態螢幕位置與 clipping 仍是 caller-specific；這項限制不改變來源
+PNG 的無損序列化形狀，也不可由 PNG 尺寸反向宣稱 caller-exact parity。
 
 接觸表呈現手勢、武器、狀態符號、人物與方向箭頭等 UI 圖示，方向與序列連續；圖號 0／2
 亦無旋轉或裁切異常。安全證據見 `ida-fingerprints/KOLTOWN-kolmpics-routes-summary.json`，
@@ -468,11 +469,11 @@ consumer 共同支持。逐張職業、裝備與姿勢名稱仍為 `未知`，ma
 
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、KOLPICS、KOLMPICS、CHARPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS 與 MISCPICS
-   垂直鏈已關閉；PCGA／HERC 與其他
-   archive 圖號尚未關閉。
-2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
-3. 使用者尚未決定 PCGA／HERC 是必要交付 theme、可選後續 theme，或不納入產品範圍。
+1. 固定 EGA `PICS` 母體的 30 個邏輯 archive、1,022 payload 已全部具 disposition；
+   996 筆來源已證實、26 筆為非圖片，沒有 `excluded_unknown`。
+2. PCGA／HERC 的像素轉換規則尚未關閉；是否納入首版等待使用者決定。
+3. dynamic caller 的畫面位置／裁切屬 UI parity 證據，不影響已關閉的 lossless extraction
+   shapes；未來實作 UI 時仍須逐玩家路徑驗證。
 4. COMBPICS 全 archive 已關閉，且兩張有外部原版截圖交叉驗證；仍待本機 runtime
    framebuffer 的無損抽樣。
 

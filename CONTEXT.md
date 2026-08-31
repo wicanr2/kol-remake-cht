@@ -58,7 +58,8 @@
   `[i,i+6]` 配成 MSB-first 1-bit 遮罩；六組 IDA 矩形、像素數與透明接觸表全部吻合。
 - KOLMPICS 全 83 筆已分類：71 筆 active、12 筆一-byte placeholder。圖號 0 是
   320×200、2 是 296×32；68 筆共同展開為 24×20 UI 圖示，其中非固定 caller 的個別幾何
-  保留強推論；28 是 56×57 AND-mask。68 圖示接觸表方向與序列均連貫。
+  位置／裁切不宣稱 caller-exact；canonical extraction shape 已證實。28 是 56×57
+  AND-mask。68 圖示接觸表方向與序列均連貫。
 - WEAPPICS 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask：`sub_18F3A` 由裝備欄位、
   六值 selector 基表與 family 5 的 variant 2／3 交換規則產生偶數圖號；28 組尺寸、
   像素數與透明棋盤接觸表全部吻合。family／variant 只是導覽標籤，尚未推定遊戲內分類名稱。
@@ -75,9 +76,8 @@
   轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
   相符。完整轉換像素規則尚未動態驗證；三種 theme 的產品範圍待使用者決定。
 - SPEC-002 的完整 EGA extraction set 已建立並由 verifier 對清冊核對：30 個邏輯 archive、
-  1,022 payload 中，928 筆來源已證實、26 筆為明確非圖片 placeholder、68 筆仍須排除為
-  unknown；目前可形成 684 個已證實 PNG 單位。缺口只剩 KOLMPICS 68 筆動態圖示，不能
-  因研究探針已有 PNG 就冒稱 production-ready。
+  1,022 payload 中，996 筆來源已證實、26 筆為明確非圖片 placeholder、0 筆 unknown；
+  目前可形成 752 個已證實 PNG 單位。這只關閉 EGA 素材格式，尚未建立 production extractor。
 
 ## 固定輸入
 
@@ -118,6 +118,6 @@ KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸�
 KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 交付範圍仍等待使用者決定。下一工作是以最窄 RE 切片關閉 KOLMPICS 68 筆
-動態圖示；其餘 EGA archive 不再重開。68 筆歸零後再設計
-原子化 production 抽取器。SPEC-002 READY 前不接 production runtime。
+顯示 theme 交付範圍仍等待使用者決定；完整 EGA extraction set 已無 unknown。下一工作
+必須先確認首版採 EGA-only、EGA 基準後續追加 CGA／Hercules，或三者同時交付；決策後才
+完成原子化 production 抽取器設計。SPEC-002 READY 前不接 production runtime。

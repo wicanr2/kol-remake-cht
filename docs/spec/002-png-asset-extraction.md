@@ -104,8 +104,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   MSB-first 遮罩」；`[i,i+6]` 配對、六組尺寸、像素數、方向與透明邊界均已抽查。
 - [x] `KOLMPICS.0` 全 83 筆已分類為 71 筆 active 與 12 筆一-byte placeholder：0 是
   320×200、2 是 296×32、28 是 56×57 AND-mask，其餘 68 筆都精確展開為 24×20。
-  固定 helper 的 24×20 幾何已證實；只有動態 caller 的個別索引映射仍為強推論，manifest
-  必須保留此等級，不得冒稱全數 caller-exact。
+  480-index 全批證據、兩條固定 helper 與完整接觸表共同證實 canonical 24×20 extraction
+  shape；dynamic caller 的位置／裁切仍不宣稱 caller-exact。
 - [x] `MISCPICS.0` 已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA
   彩圖；image 2 是全程未引用的一-byte placeholder，必須 `excluded_non_image`、無 PNG。
 - [x] `KOLPICS.0` 全 14 筆已分類：1／2／4／5／13 是已證實尺寸的 RLE 圖；0／8／12
@@ -120,8 +120,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   `0x00` 不進下游 consumer。80 張 PNG／接觸表方向一致；逐張語意仍只記圖號。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
-- [x] EGA extraction set 已逐列覆蓋 30 個邏輯 archive、1,022 個 payload：928 筆來源
-  已證實、68 筆仍待證實、26 筆明確為非圖片；目前可形成 684 個已證實 PNG 單位。
+- [x] EGA extraction set 已逐列覆蓋 30 個邏輯 archive、1,022 個 payload：996 筆來源
+  已證實、0 筆待證實、26 筆明確為非圖片；目前可形成 752 個已證實 PNG 單位。
   PCGA／HERC 的尺寸、位平面、palette 與轉換規則尚未證實。
 
 ## READY gate
@@ -136,8 +136,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] 可丟棄 probe 產生至少一張真實 PNG，並通過 bounds、預期尺寸、非空像素、palette、
   畫面方向及原版同狀態視覺抽樣。
 - [x] 已預先定義全部 archive 的失敗政策、可回查命名、manifest schema 與權利審查。
-- [ ] 每種預定輸出格式皆已有已證實像素契約；其餘明列排除，且完整 extraction set 不得
-  把排除項目冒充成功。
+- [x] EGA 預定輸出格式皆已有已證實像素契約；26 筆非圖片明列排除，沒有 unknown。
+  若 theme 決策納入 PCGA／HERC，該分支必須另行通過同一 gate。
 - [ ] 使用者確認顯示 theme 範圍：EGA-only、EGA 基準加後續 CGA／Hercules，或三者同為
   首版必要交付；未確認前不得把建議固化成正式 extraction set。
 - [x] 由第二條獨立證據（兩張原版文章截圖＋DOSBox-X mode／palette 契約）交叉驗證像素結果。

@@ -131,7 +131,7 @@ def main() -> None:
                 "window": [instruction(ea) for ea in items[max(0, position - 28):position + 3]],
             })
     output = {
-        "schema": "kol-ida-koltown-kolmpics-routes-private-v1",
+        "schema": "kol-ida-koltown-kolmpics-routes-private-v2",
         "ida_version": idaapi.get_kernel_version(),
         "input_name": input_path.name,
         "input_sha256": digest,
@@ -146,7 +146,7 @@ def main() -> None:
         "functions": [function_record(ea) for ea in sorted(starts)],
     }
     safe = {
-        "schema": "kol-ida-koltown-kolmpics-routes-summary-v1",
+        "schema": "kol-ida-koltown-kolmpics-routes-summary-v2",
         "ida_version": idaapi.get_kernel_version(),
         "input_name": input_path.name,
         "input_sha256": digest,
@@ -178,6 +178,15 @@ def main() -> None:
             {"request_or_index": 28, "width_pixels": 56, "height_pixels": 57,
              "basis": "sub_14047 AND-mask rectangle", "status": "confirmed"},
         ],
+        "canonical_icon_extraction_contract": {
+            "width_pixels": 24,
+            "height_pixels": 20,
+            "fixed_consumer_bases": ["sub_11722 fixed rectangle", "sub_23638 fixed rectangle"],
+            "required_archive_evidence": "each classified icon payload must decode to exactly 480 4-bit indices",
+            "required_visual_evidence": "the complete archive-order contact sheet must remain coherent at 24x20",
+            "status": "confirmed only when combined with fixed archive and visual probes",
+            "scope": "lossless extraction shape; not a claim that every dynamic caller uses the same screen placement or clipping rectangle",
+        },
         "router_call_eas": output["router_call_eas"],
         "dynamic_helper_call_eas": helper_calls,
         "instruction_checks": [
@@ -186,7 +195,8 @@ def main() -> None:
         ],
         "limits": [
             "候選 route 不等於每個索引都有可達 caller；placeholder 與二階像素數由 archive probe 分類。",
-            "sub_27E20 的 24x20 幾何不能只由本 IDA 摘要宣稱。",
+            "sub_27E20 的逐 caller display geometry 不能只由本 IDA 摘要宣稱。",
+            "canonical 24x20 extraction shape 仍須固定 archive 的 480-index 全批證據與接觸表共同成立。",
         ],
     }
     private_path.parent.mkdir(parents=True, exist_ok=True)

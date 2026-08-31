@@ -41,11 +41,19 @@ def main() -> None:
         raise SystemExit("非預期 ZIP SHA-256")
     ida_bytes = args.ida_summary_path.read_bytes()
     ida = json.loads(ida_bytes)
-    if ida.get("schema") != "kol-ida-koltown-kolmpics-routes-summary-v1":
+    if ida.get("schema") != "kol-ida-koltown-kolmpics-routes-summary-v2":
         raise SystemExit("非預期 KOLMPICS route IDA 摘要 schema")
     route_candidates = ida["router"]["kolmpics_candidate_indices_within_archive"]
     if route_candidates != [*range(0, 29), 31, *range(36, 71), *range(74, 83)]:
         raise SystemExit("KOLMPICS router 候選集合不符")
+    extraction_contract = ida.get("canonical_icon_extraction_contract", {})
+    if (
+        extraction_contract.get("width_pixels") != 24
+        or extraction_contract.get("height_pixels") != 20
+        or extraction_contract.get("status")
+        != "confirmed only when combined with fixed archive and visual probes"
+    ):
+        raise SystemExit("KOLMPICS canonical icon extraction contract 不符")
 
     with zipfile.ZipFile(args.zip_path) as archive:
         files = {i.filename: archive.read(i) for i in archive.infolist() if not i.is_dir()}
@@ -105,7 +113,11 @@ def main() -> None:
                 sheet[start : start + width] = pixels[y * width : (y + 1) * width]
         record.update({
             "kind": "rle-color", "width_pixels": width, "height_pixels": height,
-            "geometry_grade": "confirmed" if index in (0, 2) else "strong inference",
+            "extraction_geometry_grade": "confirmed",
+            "caller_display_geometry_grade": (
+                "confirmed for fixed index 0/2 rectangles" if index in (0, 2)
+                else "not claimed; dynamic placement/clipping remains caller-specific"
+            ),
             "color_count": len(set(pixels)), "pixel_sha256": sha(pixels),
             "png_sha256": sha(output.read_bytes()),
         })
@@ -115,17 +127,18 @@ def main() -> None:
     contact.write_bytes(encode_rgba_png(bytes(sheet), bytes([1]) * len(sheet), sheet_width, sheet_height))
     active = sorted(set(range(83)) - set(PLACEHOLDERS))
     result = {
-        "schema": "kol-kolmpics-all-ega-visual-probe-v1",
+        "schema": "kol-kolmpics-all-ega-visual-probe-v2",
         "input_name": args.zip_path.name, "input_sha256": sha(zip_bytes),
         "ida_summary_name": args.ida_summary_path.name, "ida_summary_sha256": sha(ida_bytes),
-        "status": "mechanically validated and human-inspected all 71 active payloads",
+        "status": "mechanically validated and human-inspected all 71 active payloads; all 68 icons have confirmed 24x20 extraction geometry",
         "human_inspection": "the 68-item 24x20 contact sheet forms a coherent UI icon set containing gestures, weapons, status marks, figures and direction arrows; the 320x200 frame and 296x32 bar are correctly oriented; index 28 mask-bits view preserves the previously verified rounded silhouette; no RLE, plane-order, rotation or clipping defect is visible",
         "active_indices": active, "placeholder_indices": PLACEHOLDERS,
         "active_payload_count": len(active), "placeholder_count": len(PLACEHOLDERS),
         "color_png_count": len(COLOR_DIMENSIONS), "and_mask_png_count": 1,
         "mask_visualization_png_count": 1,
         "icon_geometry": {"width_pixels": 24, "height_pixels": 20,
-                          "grade": "strong inference outside directly fixed helper calls"},
+                          "extraction_grade": "confirmed by 480-index payloads, two fixed consumers and complete contact sheet",
+                          "caller_display_limit": "dynamic screen placement and clipping are not claimed"},
         "contact_sheet_layout": "ten columns by seven rows, archive index order with gaps removed",
         "contact_sheet_sha256": sha(contact.read_bytes()), "records": records,
     }
