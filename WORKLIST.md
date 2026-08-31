@@ -10,16 +10,16 @@
 | 原版 oracle | 待盤點 | 根目錄有 ZIP、英文說明書、參考卡、地圖與盒圖；版本與雜湊尚未固定 |
 | 玩家觀點 | 部分完成 | 已確認魔旅士原文與《CRPG 通鑑》中文版評介；仍需擴充其他繁中個人心得 |
 | 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
-| GitHub | 待建立 | 預定 private：`wicanr2/kol-remake-cht` |
+| GitHub | 已建立 | private：`wicanr2/kol-remake-cht`；`main` 已推送 |
 
 ## M0：專案建立
 
 - [x] 撰寫 `AGENTS.md`，固定 Docker-only、證據、Go／Ebitengine、PNG-only runtime、
   OGG、中文說明書、授權與 `dist-all/` 契約。
 - [x] 建立本工作清單與 README 起源骨架。
-- [ ] 初始化 Git，確認原版封裝與衍生素材由 `.gitignore` 排除。
-- [x] 建立 `wicanr2/kol-remake-cht` private GitHub 儲存庫並設定 `origin`；待推送後複核 visibility。
-- [ ] 提交並推送專案骨架；在 `WORKLOG.md` 記錄 commit、push 與 Docker 清理狀態。
+- [x] 初始化 Git，確認原版封裝與衍生素材由 `.gitignore` 排除。
+- [x] 建立 `wicanr2/kol-remake-cht` private GitHub 儲存庫、設定 `origin` 並複核 visibility。
+- [x] 提交並推送專案骨架；在 `WORKLOG.md` 記錄 commit、push 與 Docker 清理狀態。
 
 完成條件：private 遠端可查、工作樹無誤納原版素材、`AGENTS.md` 與本清單已推送。
 
@@ -94,5 +94,4 @@
 
 ## 下一個唯一工作
 
-完成 M0：建立 private GitHub 儲存庫、提交並推送目前骨架，再以唯讀容器執行 M1 的原版
-清冊與雜湊。不要在原版身分固定前開始解碼或建立 Go runtime。
+以唯讀容器執行 M1 的原版清冊與雜湊。不要在原版身分固定前開始解碼或建立 Go runtime。

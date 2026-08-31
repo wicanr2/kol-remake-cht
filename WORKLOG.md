@@ -8,6 +8,6 @@
 - 來源查證：確認魔旅士 2010-04-16〈Knights of Legend 武士傳說〉，並搭配《CRPG
   通鑑》中文版評介撰寫 README 專案起源；兩者均只列為玩家觀點，不作規則 oracle。
 - 安全：六個原版／參考素材檔均由 `.gitignore` 排除，未上傳 GitHub。
-- 驗證：待完成 Markdown／Git 差異檢查、初始提交、推送、遠端 visibility 與 Docker
-  容器清理確認。
+- 驗證：Markdown 必要契約、檔案擁有權、`git diff --check` 與 `.gitignore` 排除規則
+  通過；初始提交 `b635703` 已推送。遠端 visibility 與 Docker 容器清理於收尾複核。
 - 下一步：以唯讀 Docker 容器建立原版清冊與 SHA-256；尚未授權實作遊戲本體。
