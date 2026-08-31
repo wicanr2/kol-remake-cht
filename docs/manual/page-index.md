@@ -17,7 +17,12 @@
 | 8 | 物品、入鞘、備戰、背包與丟棄（印刷頁 10–11） | reviewed | [02-poking-around-town.md](chapters/02-poking-around-town.md) |
 | 9 | 返回／取消；與居民交談（印刷頁 12–13） | reviewed | [02-poking-around-town.md](chapters/02-poking-around-town.md) |
 | 10 | 招募同伴；行走於布雷特爾（印刷頁 14–15） | reviewed | [02-poking-around-town.md](chapters/02-poking-around-town.md) |
-| 11–75 | 城鎮、荒野、戰鬥、進階規則、世界觀、種族與索引 | todo | — |
+| 11 | 盔甲種類、尺寸與購買（印刷頁 16–17） | reviewed | [03-at-the-armorers.md](chapters/03-at-the-armorers.md) |
+| 12 | 交給、出售與鐵砧（印刷頁 18–19） | reviewed | [03-at-the-armorers.md](chapters/03-at-the-armorers.md) |
+| 13 | 盔甲合身調整；進入荒野與旅店（印刷頁 20–21） | reviewed | [03-at-the-armorers.md](chapters/03-at-the-armorers.md)、[04-into-the-wilderness.md](chapters/04-into-the-wilderness.md) |
+| 14 | 旅店保存、離城與道路旅行（印刷頁 22–23） | reviewed | [04-into-the-wilderness.md](chapters/04-into-the-wilderness.md) |
+| 15 | 荒野伏擊、地形、天候與營養（印刷頁 24–25） | reviewed | [04-into-the-wilderness.md](chapters/04-into-the-wilderness.md) |
+| 16–75 | 荒野、戰鬥、進階規則、世界觀、種族與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 

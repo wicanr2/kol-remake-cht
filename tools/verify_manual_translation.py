@@ -50,6 +50,8 @@ def numbers(text: str) -> set[str]:
 
 def source_body(text: str) -> str:
     """排除圖示水平線的 OCR 數字，但保留目錄等純數字內容。"""
+    # Adobe Paper Capture 偶爾把縮寫尾端的兩個小寫 l 辨識成數字 11；這不是原文數值。
+    text = re.sub(r"\b(you|he|she|it|we|they)'11\b", r"\1'll", text, flags=re.IGNORECASE)
     lines = []
     for line in text.splitlines():
         if not re.search(r"[A-Za-z]", line) and ICON_DECORATION.search(line):
