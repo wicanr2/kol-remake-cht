@@ -6,7 +6,7 @@ PDF 頁碼及文字層 SHA-256 回查。
 
 ## 目前狀態
 
-- 玩家手冊：79 個實體 PDF 頁；第 1–45 頁已逐頁對照並翻譯，第 46–75、78–79 頁待處理。
+- 玩家手冊：79 個實體 PDF 頁；第 1–50 頁已逐頁對照並翻譯，第 51–75、78–79 頁待處理。
 - 參考卡：5 個實體 PDF 頁，待翻譯。
 - 正式狀態只有 `todo`、`translated`、`reviewed`：`translated` 只是初譯；只有逐頁比對
   原文、核對數字／專名／段落後才能標成 `reviewed`。
@@ -28,6 +28,7 @@ PDF 頁碼及文字層 SHA-256 回查。
 - [回到城鎮](chapters/06-back-in-town.md)
 - [進階玩家](chapters/07-advanced-gamers.md)
 - [阿什塔拉瑞亞王國](chapters/08-realm-of-ashtalarea.md)
+- [傳說種族](chapters/09-races-of-legend.md)
 - 來源清冊：`source-catalog.json`
 - 翻譯狀態：`translation-status.json`
 

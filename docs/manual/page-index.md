@@ -52,7 +52,12 @@
 | 43 | 精靈抵達、Zolod 矮人與食人魔戰爭前史（印刷頁 80–81） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
 | 44 | 食人魔戰爭與人類跨越山脈（印刷頁 82–83） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
 | 45 | 公國、Crelek 重返 Ghor 與 Walbar（印刷頁 84–85） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
-| 46–75 | 世界史、種族、精靈語與索引 | todo | — |
+| 46 | Walbar 貿易、Poitle 海盜與黑暗戰爭序幕（印刷頁 86–87） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 47 | 黑暗戰爭、Sodden Hills 與 Dom Zolod（印刷頁 88–89） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 48 | Olegar's End、戰局逆轉與 Shellernoon（印刷頁 90–91） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 49 | 戰後重建、凱爾登降臨與今日局勢（印刷頁 92–93） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
+| 50 | 傳說種族、人類與 Brettle Regular（印刷頁 94–95） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 51–75 | 種族、精靈語與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 

@@ -142,3 +142,145 @@ Htron 建村僅八年，第一批 Walbar 船隻抵達。你也許聽過北方森
 
 第一批 Walbar 是探險者，前來北岸尋找文明跡象；數世紀前，他們曾與 Htron 原址古城居民
 貿易。發現人類雖令他們驚訝，卻很快看出此地有可觀商機……
+
+<!-- handbook/page/046｜印刷頁 86–87 -->
+
+……。一年內，Walbar 船隻便定期駛入 Anchoring Bay；僅再過兩年，人類人口已增加三倍
+以上，眾人湧入城中貿易。Walbar 又使用按他們標準十分廉價的人類勞力，在 Htron 建造新船，
+進一步擴大與故鄉的商業。
+
+此時布雷特爾已大到容得下一批竊賊、乞丐與惡棍。正派居民將他們趕出後，多數漂到公爵控制
+之外的 Htron。低下階層越來越多，偷竊、破壞與遊蕩使 Walbar 商人無利可圖；1023 年最後
+一艘商船離開 Anchoring Bay，此後再無 Walbar 船隻出現在阿什塔拉瑞亞水域。
+
+並非所有 Walbar 都跟商人離開。部分士兵與水手遭留下，與怨恨商人拋棄 Htron 的人類共同
+生活。敵意惡化後，他們逃到鄉間成為攔路賊與強盜；今日襲擊旅人的幫派就是那些士兵或後裔，
+沒人確定他們究竟能活多久。
+
+## Poitle 的海盜
+
+「Walbar 離開時沒帶走所有船。」說書人說。「幾艘較小、較不適航的船留在 Anchoring Bay，
+卻仍勝過人類漁船與木筏。Htron 的竊賊遲早會想到沿岸劫掠。」
+
+當時最兇狠、聰明、富有的竊賊是 Poitle。他帶忠誠惡徒占據三艘最好的棄船，出海冒險。
+從 1026 到 1044 的 18 年間，他恐嚇沿岸村落；其他人開始航海後，他更發明海盜行徑，奪取
+貨物與乘客，再把船燒至水線。
+
+1044 年，Poitle 在 Westwash 與 Enchanted 河口的基地已成小鎮。他年老退休於同名城鎮，
+交由手下繼續劫掠。隔年最後一次親自率船沿 Westwash 上行，抵達 Mytrone 山脈源頭時，
+發現 Zolod 一族正受邪惡巫師爪牙攻擊；黑暗戰爭已經開始。
+
+## 黑暗戰爭
+
+Cullen 填好菸斗：「老 Poitle 讓故事稍微超前。你們年輕人也許記不清，但黑暗戰爭並不
+久遠。我曾與偉大騎士 Seggallion 並肩作戰；那些日子既光榮又悲傷。」
+
+<!-- handbook/page/047｜印刷頁 88–89 -->
+
+戰爭始於 1042 年，Pildar 派 Orc、巨魔及食人魔軍隊攻擊 Mytrone 的老 Zolod。矮人起初
+措手不及，因為 Pildar 此前一直扮演模範鄰居。1043（原文簡寫 ’43）年春，南 Mytrone
+村落全數淪陷；1044（’44）年圍攻首都 Dom Zolod 時，要塞城已塞滿難民。
+
+同年另一支由哥布林及人類 Dark Guardsmen 組成的軍隊攻擊有城牆的 Shellernoon。後者被
+Pildar 誘惑，與同族為敵；雖已放棄效忠邪惡巫師，仍遭善良居民畏懼排斥。
+
+Shellernoon 向布雷特爾公爵求援。公爵迅速派 Regulars，又召回修路的 Highwaymen 並武裝
+成軍；兩軍合力仍無法解除圍城。
+
+### 各場戰役
+
+「那些年有過偉大戰役：Sodden Hills、Olegar's End、Sheller's Ridge、Raven's Point……
+無論勝敗都很光榮。」Cullen 沉浸在回憶中。
+
+Zolod City 與 Shellernoon 被圍三年後，Pildar 首次在 Eyren 湖南側 Sodden Hills 敗北。
+Lintle 精靈繞湖從南方攻擊西岸集結地，途中獲一小支由 Astle 河航來的 Poitle 部隊加入。
+奇襲勝利迫使 Pildar 放棄登陸地、把軍隊北撤至爭奪中的 Mytrone，代價則是 Usip Wood
+最後領主 Elbaraman 戰死。
+
+接著是 1048（’48）年 Dom Zolod 陷落。堅守六年後，Zolod 國王知道飢餓、士氣崩潰的
+城市無望；Pildar 軍隊把俘虜當玩物，因此他與顧問決定誘敵入城，再摧毀城市。
+
+Zolod 撤回城周守軍，怪物以為終於破敵，湧入搜尋戰利品與俘虜。大半敵軍入城後，他破壞
+複雜水道與水庫系統的水壩。Dom Zolod 幾分鐘內淹沒，Pildar 爪牙三分之二與全城矮人一同
+死亡；原谷地今日是 Sanat 湖，也就是「末日之湖」。若非這份勇氣與犧牲，敵軍可能足以
+席捲全境。
+
+同時 Cullen 正在 Seggallion 爵士麾下，與 Hobe 侍從駐守 Great Forest 西側 Raven's Point。
+谷地對面的 Sheller Ridge 是包圍 Shellernoon 的哥布林軍後方。為突破入城，Seggallion
+率軍下谷登脊，只留 Old Guard 小隊守視野極佳的高地。
+
+他們一下谷，敵軍主力便退向城市，精銳哥布林騎兵則從北側繞往 Raven's Point。眾人登脊
+只見少數 Dark Guardsmen，才知道中計；立即折返，卻已太遲。
+
+<!-- handbook/page/048｜印刷頁 90–91 -->
+
+抵達時哥布林已完成任務並逃走。除 Old Guard 生還者外人人遭殺；Pildar 殘酷下令砍掉所有
+生還守衛的手，使他們終身依賴他人、蒙受羞辱。有人稱該地為「Seggallion 的愚行」，但
+仍活著的 Old Guard 不這麼想；他只是被戰術擊敗，守衛命運應歸咎 Pildar。
+
+1049 年又發生 Olegar's End。Highwayman 軍官 Olegar 率軍攻擊 Orc 大祭司 Tranzadeel，
+把其部隊與 Pildar 主軍切開，追過 Thorn Hills，困在 Prazen Point 北方數英里的西岸。
+Highwaymen 對抗 Orc，Olegar 隊中的 Klvar 法師則挑戰 Tranzadeel 與侍僧。
+
+精靈高手成功分散法團注意，Olegar 偷襲大祭司，以一記突刺穿心。劍命中時，Tranzadeel
+化為巨大魔火球，吞噬戰場、融化土地；火焰熄滅後海水灌入新海灣，因 Olegar 得名。
+
+### 戰局逆轉
+
+Raven's Point 後，Seggallion 更決心阻止 Pildar。Dom Zolod 的消息使他明白，必須在 Orc
+軍重整前行動。他聯絡自 Sodden Hills 起駐紮 Eyren 湖西岸的 Lintle 精靈，在 Thanakesh
+Hills 會合，向北追剿散布 Mytrone 的 Orc 與巨魔。1049 年夏季一連串小戰消滅北方殘軍，
+仍不足以解放 Shellernoon。
+
+奇蹟隨後出現。斥候在東 Mytrone 搜尋零散食人魔與巨魔時，發現陌生大軍，靠近才看出是
+矮人：失蹤超過四十年的 Crelek，率 2,000 名矮人從 Ghor 丘陵歸來。
+
+Seggallion 與自稱 Ghor 矮人王子的 Crelek 商議戰略，Brettle Regulars、Highwaymen 指揮官
+與 Lintle 精靈領主也參與。1050 年春，五支軍隊向南進軍，途中 Tegal Amazons 加入，成為
+六軍；戰爭消息才剛傳到她們孤立的森林家園。
+
+Shellernoon 戰役相對短暫。Pildar 軍圍城六年未果，見六軍翻越 Sheller Ridge 便士氣崩潰；
+第一天結束前，多數哥布林營已潰散。Dark Guard 面對必敗，轉而攻擊怪物盟友、加入聯軍。
+Pildar 帶少數哥布林越過 Eyren 湖，退到 Pildar 島的黑塔；黑暗戰爭結束。
+
+### 近年
+
+Cullen 說：「戰後沒那麼刺激，阿什塔拉瑞亞也受夠了。最近十五年大家多半重建戰爭失去的
+一切。」隨 Zolod 國王死亡與……
+
+<!-- handbook/page/049｜印刷頁 92–93 -->
+
+……Crelek 王子歸來，矮人文化中心移回重建中的 Ghor。精靈回到 Lintle 平原森林，學著與
+他們參戰期間遷入平原的人類相處。
+
+Highwaymen 回歸修路本業，穿越 Krell 沼澤開闢 Hobe 至 Thimblewald 的新路；又與 Poitle
+前惡棍合建一系列船閘，使船能從海上沿 Westwash 直達 Mytrone，城鎮因此命名 Poitle's Lock。
+
+Htron 富裕家族為逃避自由城陰暗面建立 Olanthen。矮人 Dungar Stiffknuckles 完成 Ghor
+丘陵至布雷特爾道路，Highwaymen 再延伸至 Htron。貿易持續成長，布雷特爾與 Hobe 間的
+Tradewater 尤其繁忙。
+
+## 凱爾登降臨
+
+「戰後最非凡的事一定是 Kelderheit。」Cullen 斷言。「聽說七年前從 Tyme 山頂下來。」
+
+阿什塔拉瑞亞目前只有少數這些怪鳥，也不知是否還會有更多。其實牠們沒有羽毛或喙，不是
+鳥，但巨大蝙蝠狀翅膀使其能飛。外形高大嚇人，大多卻相當和平；據說語言甚至沒有「殺」與
+「戰爭」，雖然熟悉劍弓。下山者似乎是觀察生活方式的斥候，高處巢穴還有多少同族無人知道。
+
+居民很快便喜歡上凱爾登忠實的靈魂與智慧。起初看似遲緩，別受騙；他們只是反對倉促發言，
+腦中思考並不比人少。
+
+## 今日阿什塔拉瑞亞
+
+「戰後王國獲得應有休息，但最近又開始變化；剛解決一個問題，另一個便像地鼠洞冒出。」
+
+西北 Krag Barbarians 不斷襲擊 Downing 河沿岸農民與城民，近幾年已攻擊村落十一次，甚至
+進攻 Thimblewald。最近請矮人建新要塞，石牆能否約束身穿毛皮的無政府者仍待時間證明。
+
+有人散播 Seggallion 壞話，尤其在他不久前失蹤後；Cullen 以舊部身分堅稱他是全境最優秀
+騎士。Usip 精靈也似乎走到盡頭：最後的女領主 Callicara 去年去世，她是 Elbaraman 遺孀，
+沒有子嗣，餘民命運未卜。
+
+森林怪物又多到多年未見；有些是 Pildar 敗軍殘部，另一些是本地生物，同樣危險。要馴服
+荒野、保障土地安全，阿什塔拉瑞亞需要幾位傳說武士……

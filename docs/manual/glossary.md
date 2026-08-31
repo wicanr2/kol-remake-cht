@@ -120,4 +120,7 @@
 | Ashtel Arra | Ashtel Arra（上方世界） | 待查 | 矮人語；音譯待世界觀一致性審查 |
 | Day of Lighting | 照明日 | 暫譯 | Ghor 矮人紀念出土的聖日 |
 | Walbar | Walbar | 待查 | 北方航海／戰士種族；正式音譯待生物資料 consumer |
+| War of Darkness | 黑暗戰爭 | 核准 | Pildar 發動的世界史戰爭 |
+| Kelderheit / Kelder | 凱爾登／凱爾登族 | 暫譯 | 原文在族名與個體稱呼間交替使用 |
+| Blacksteel | Blacksteel | 待查 | 〈傳說種族〉敘事者；正式譯名待角色資料 consumer |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |
