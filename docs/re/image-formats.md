@@ -325,9 +325,26 @@ direct-blit 管線顯示。24 筆均精確展開為 504 個 0..15 色彩索引�
 索引 0 不得擅自轉透明。接觸表與手冊 `Medal` 命令交叉支持「角色任務勳章圖示」
 分類（`強推論`）；尺寸、像素、方向與 direct-blit 為 `已證實`。
 
+### SHLDPICS.0 盾牌圖與 SHLDPICS 記錄表
+
+無副檔名 `SHLDPICS` 是 16×760-byte 固定角色記錄表；`SHLDPICS.0` 則是八個
+索引 payload，不得依同名近似而混用。四組依 `[2*i,2*i+1]` 配成彩圖／AND mask，
+尺寸為 40×29、56×45、48×63、48×61。彩圖是二階 RLE 的 4-bit EGA indices；mask 是
+MSB-first 1-bit，尾端一 byte 不進入像素矩形。`sub_1BD17` 證實 bit 1 透明／保留背景、
+bit 0 不透明／覆寫，所以 RGBA alpha 為 `1-mask`。四張 PNG 目視為正向盾牌；全契約為 `已證實`。
+
+### MONPICS／PERPICS alpha 極性勘誤
+
+早期兩個探針的 `unpack_mask` 直接把 AND-mask bit 當成 PNG opaque bit；在黑色接觸表上
+因外圍彩圖索引也是 0，視覺上隱藏了不透明黑矩形。這與
+`sub_1BD17:0x1bf4c..0x1bf53` 的 `(destination AND mask) OR color` 衝突。
+探針已統一改為 `opaque=1-mask`，並以不透明 8×8 棋盤背景重生 32 張怪物與
+六張人物 PNG。所有輪廓現在正確露出棋盤，沒有黑色矩形；兩批重生結果逐 byte 相同。
+舊 PNG／舊視覺摘要作廢，不得當作正式 extraction 輸入。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

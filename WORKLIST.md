@@ -1,6 +1,6 @@
 # 《武士傳說》重製工作清單
 
-更新日期：2026-08-31
+更新日期：2026-09-01
 
 ## 目前狀態
 
@@ -58,8 +58,11 @@
 - [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
 - [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS 全 archive、TWN index 24、MONPICS、PERPICS、
   MISCPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、KOLMPICS index 28 EGA
-  垂直鏈、WEATPICS 全 18 筆六組分層合成、AWD1PICS 全 24 張勳章圖示、AWD 固定快照邊界與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
+  垂直鏈、WEATPICS 全 18 筆六組分層合成、AWD1PICS 全 24 張勳章圖示、SHLDPICS
+  全四組盾牌、AWD 固定快照邊界與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
   像素格式尚未完成。
+- [x] 勘誤 MONPICS／PERPICS 早期 PNG 探針的 AND-mask alpha 極性；依
+  `sub_1BD17` 重生為 bit 1 透明、bit 0 不透明，並用 8×8 棋盤背景重驗。
 - [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。
 - [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。
 - [ ] 建立 OGG 轉換管線與 catalog；驗證 codec、時長、非靜音、峰值、loop 與人耳聆聽。

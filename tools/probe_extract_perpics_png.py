@@ -54,8 +54,9 @@ def main() -> None:
     args.output_directory.mkdir(parents=True, exist_ok=True)
     sheet_width = GRID_COLUMNS * CELL_WIDTH
     sheet_height = 2 * CELL_HEIGHT
-    sheet_indices = bytearray(sheet_width * sheet_height)
-    sheet_opaque = bytearray(sheet_width * sheet_height)
+    sheet_indices = bytearray(7 if ((x // 8) + (y // 8)) % 2 == 0 else 8
+                              for y in range(sheet_height) for x in range(sheet_width))
+    sheet_opaque = bytearray([1]) * (sheet_width * sheet_height)
     records = []
     for dimension in dimensions:
         portrait_index = dimension["portrait_index"]
@@ -70,10 +71,12 @@ def main() -> None:
             return decode(source[item["offset"] : item["offset"] + item["compressed_bytes"]])
 
         pixels = decode_nibbles(first_stage(color_item))
-        opaque, mask_trailing = unpack_mask(first_stage(mask_item), width_bytes, height)
+        mask_bits, opaque, mask_trailing = unpack_mask(first_stage(mask_item), width_bytes, height)
         expected_pixels = width * height
         if len(pixels) != expected_pixels or len(opaque) != expected_pixels:
             raise SystemExit(f"portrait {portrait_index} 像素數不符")
+        if set(opaque) != {0, 1}:
+            raise SystemExit(f"portrait {portrait_index} alpha 未同時含透明與不透明")
         if any(index > 15 for index in pixels):
             raise SystemExit(f"portrait {portrait_index} EGA 色彩索引越界")
 
@@ -84,8 +87,9 @@ def main() -> None:
         for y in range(height):
             destination = (origin_y + y) * sheet_width + origin_x
             source_row = y * width
-            sheet_indices[destination : destination + width] = pixels[source_row : source_row + width]
-            sheet_opaque[destination : destination + width] = opaque[source_row : source_row + width]
+            for x in range(width):
+                if opaque[source_row + x]:
+                    sheet_indices[destination + x] = pixels[source_row + x]
         records.append({
             "portrait_index": portrait_index,
             "color_image_index": color_item["index"],
@@ -94,7 +98,8 @@ def main() -> None:
             "height_pixels": height,
             "pixel_count": len(pixels),
             "pixel_sha256": hashlib.sha256(pixels).hexdigest(),
-            "mask_sha256": hashlib.sha256(opaque).hexdigest(),
+            "and_mask_sha256": hashlib.sha256(mask_bits).hexdigest(),
+            "opaque_sha256": hashlib.sha256(opaque).hexdigest(),
             "mask_trailing_byte_sha256": hashlib.sha256(mask_trailing).hexdigest(),
             "color_count": len(set(pixels)),
             "png_sha256": hashlib.sha256(output_path.read_bytes()).hexdigest(),
@@ -110,12 +115,14 @@ def main() -> None:
         "input_sha256": zip_digest,
         "ida_summary_name": args.ida_summary_path.name,
         "ida_summary_sha256": hashlib.sha256(args.ida_summary_path.read_bytes()).hexdigest(),
-        "status": "mechanically validated EGA color and 1-bit mask candidates; orientation and mask semantics require human inspection",
+        "status": "mechanically validated EGA color and AND-mask pairs with corrected alpha polarity",
         "archive_root": ARCHIVE_ROOT,
         "portrait_count": 6,
         "source_payload_count": 12,
         "combined_png_count": 6,
         "all_pixel_counts_match": True,
+        "mask_semantics": "bit 1 preserves background/transparent; PNG alpha is 1-mask",
+        "contact_sheet_background": "opaque 8x8 checkerboard verifies transparent silhouettes",
         "contact_sheet_sha256": hashlib.sha256(sheet_path.read_bytes()).hexdigest(),
         "records": records,
     }

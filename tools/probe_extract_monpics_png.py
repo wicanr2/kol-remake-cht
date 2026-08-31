@@ -38,14 +38,15 @@ def encode_rgba_png(indices: bytes, opaque: bytes, width: int, height: int) -> b
     ) + chunk(b"IEND", b"")
 
 
-def unpack_mask(data: bytes, width_bytes: int, height: int) -> tuple[bytes, bytes]:
+def unpack_mask(data: bytes, width_bytes: int, height: int) -> tuple[bytes, bytes, bytes]:
     expected = width_bytes * height
     if len(data) != expected + 1:
         raise ValueError(f"遮罩長度不符：{len(data)} != {expected + 1}")
-    pixels = bytearray()
+    mask_bits = bytearray()
     for value in data[:expected]:
-        pixels.extend((value >> bit) & 1 for bit in range(7, -1, -1))
-    return bytes(pixels), data[expected:]
+        mask_bits.extend((value >> bit) & 1 for bit in range(7, -1, -1))
+    opaque = bytes(1 - value for value in mask_bits)
+    return bytes(mask_bits), opaque, data[expected:]
 
 
 def main() -> None:
@@ -80,8 +81,9 @@ def main() -> None:
     args.output_directory.mkdir(parents=True, exist_ok=True)
     sheet_width = GRID_COLUMNS * CELL_WIDTH
     sheet_height = 4 * CELL_HEIGHT
-    sheet_indices = bytearray([BACKGROUND]) * (sheet_width * sheet_height)
-    sheet_opaque = bytearray([0]) * (sheet_width * sheet_height)
+    sheet_indices = bytearray(7 if ((x // 8) + (y // 8)) % 2 == 0 else 8
+                              for y in range(sheet_height) for x in range(sheet_width))
+    sheet_opaque = bytearray([1]) * (sheet_width * sheet_height)
     records = []
     for monster_index in range(32):
         dimension = dimensions[monster_index]
@@ -99,12 +101,14 @@ def main() -> None:
             mask_item["offset"] : mask_item["offset"] + mask_item["compressed_bytes"]
         ])
         pixels = decode_nibbles(color_first_stage)
-        opaque, mask_trailing = unpack_mask(mask_first_stage, width_bytes, height)
+        mask_bits, opaque, mask_trailing = unpack_mask(mask_first_stage, width_bytes, height)
         expected_pixels = width * height
         if len(pixels) != expected_pixels:
             raise SystemExit(
                 f"monster {monster_index} 像素數不符：{len(pixels)} != {expected_pixels}"
             )
+        if set(opaque) != {0, 1}:
+            raise SystemExit(f"monster {monster_index} alpha 未同時含透明與不透明")
         output_path = args.output_directory / f"monster-{monster_index:02d}.png"
         output_path.write_bytes(encode_rgba_png(pixels, opaque, width, height))
 
@@ -114,8 +118,9 @@ def main() -> None:
         for y in range(height):
             destination = (origin_y + y) * sheet_width + origin_x
             source_row = y * width
-            sheet_indices[destination : destination + width] = pixels[source_row : source_row + width]
-            sheet_opaque[destination : destination + width] = opaque[source_row : source_row + width]
+            for x in range(width):
+                if opaque[source_row + x]:
+                    sheet_indices[destination + x] = pixels[source_row + x]
         records.append({
             "monster_index": monster_index,
             "color_image_index": monster_index * 2,
@@ -124,7 +129,8 @@ def main() -> None:
             "height_pixels": height,
             "pixel_count": len(pixels),
             "pixel_sha256": hashlib.sha256(pixels).hexdigest(),
-            "mask_sha256": hashlib.sha256(opaque).hexdigest(),
+            "and_mask_sha256": hashlib.sha256(mask_bits).hexdigest(),
+            "opaque_sha256": hashlib.sha256(opaque).hexdigest(),
             "mask_trailing_byte_sha256": hashlib.sha256(mask_trailing).hexdigest(),
             "color_count": len(set(pixels)),
             "png_sha256": hashlib.sha256(output_path.read_bytes()).hexdigest(),
@@ -140,12 +146,14 @@ def main() -> None:
         "input_sha256": zip_digest,
         "ida_summary_name": args.ida_summary_path.name,
         "ida_summary_sha256": hashlib.sha256(args.ida_summary_path.read_bytes()).hexdigest(),
-        "status": "mechanically validated EGA color and 1-bit mask candidates; mask semantics require human inspection",
+        "status": "mechanically validated EGA color and AND-mask pairs with corrected alpha polarity",
         "archive_root": ARCHIVE_ROOT,
         "monster_count": 32,
         "source_payload_count": 64,
         "combined_png_count": 32,
         "all_pixel_counts_match": True,
+        "mask_semantics": "bit 1 preserves background/transparent; PNG alpha is 1-mask",
+        "contact_sheet_background": "opaque 8x8 checkerboard verifies transparent silhouettes",
         "contact_sheet_sha256": hashlib.sha256(sheet_path.read_bytes()).hexdigest(),
         "records": records,
     }

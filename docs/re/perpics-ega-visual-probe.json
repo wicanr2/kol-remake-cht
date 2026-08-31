@@ -4,13 +4,15 @@
   "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
   "ida_summary_name": "KOLTOWN-perpics-summary.json",
   "ida_summary_sha256": "0dd545a177fb2f2c752f4117e9a1fe279ab7b0daaa0403ec4cb38fe02934a083",
-  "status": "mechanically validated EGA color and 1-bit mask candidates; orientation and mask semantics require human inspection",
+  "status": "mechanically validated EGA color and AND-mask pairs with corrected alpha polarity",
   "archive_root": "Knights-of-legend/PERPICS",
   "portrait_count": 6,
   "source_payload_count": 12,
   "combined_png_count": 6,
   "all_pixel_counts_match": true,
-  "contact_sheet_sha256": "4ada9b7433f18396a7336b9e369d586f9c50e74175711d409de433f987e56ec3",
+  "mask_semantics": "bit 1 preserves background/transparent; PNG alpha is 1-mask",
+  "contact_sheet_background": "opaque 8x8 checkerboard verifies transparent silhouettes",
+  "contact_sheet_sha256": "b1a90a2f0c91c0fc30995af32dfad798e7ee0b2518b2a867347b05a91e69ff8c",
   "records": [
     {
       "portrait_index": 0,
@@ -20,10 +22,11 @@
       "height_pixels": 103,
       "pixel_count": 7416,
       "pixel_sha256": "044e655e31888f88795ed6b67e24cdd3fe48c4d7940de6ccac49689e9d2ad32e",
-      "mask_sha256": "7c88212f783a869e082f9328c82fd4dbd7e6049e254a228d4743c2574d2881d2",
+      "and_mask_sha256": "7c88212f783a869e082f9328c82fd4dbd7e6049e254a228d4743c2574d2881d2",
+      "opaque_sha256": "c20d83b57ff2ba8e0719ca32b1ff2cf75d505048b8cc91861e6f914b369b2b24",
       "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
       "color_count": 7,
-      "png_sha256": "b5ed8a4a1e9ca6b89bd9765601aa4d7ae21a5d2cf0b16df5bce96307466565e3"
+      "png_sha256": "76db14553db571154435c4322098a6d5e33850c1860cfe783fed5b0fbc2b194c"
     },
     {
       "portrait_index": 1,
@@ -33,10 +36,11 @@
       "height_pixels": 111,
       "pixel_count": 7104,
       "pixel_sha256": "56c399b263488ce8190429fd36d1fdebc83b77470604a20588ff6d18cd1eedc5",
-      "mask_sha256": "fa09435c5fce48a3b6b6a470d26153341e69817e746ccfe4b8af9f080a366ad5",
+      "and_mask_sha256": "fa09435c5fce48a3b6b6a470d26153341e69817e746ccfe4b8af9f080a366ad5",
+      "opaque_sha256": "4240d5e1a95960b1bf51ad14338df54db33e2830709a199caebadc74bbf3ea65",
       "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
       "color_count": 9,
-      "png_sha256": "287217c82611487f38af32d8067dedb9727611046ae00e6c464723a3661d5ed9"
+      "png_sha256": "758e719a6b2bf654f2d902c5b81cb55c87c6bc23e375ab63eaf87ece8ed6e67f"
     },
     {
       "portrait_index": 2,
@@ -46,10 +50,11 @@
       "height_pixels": 64,
       "pixel_count": 4608,
       "pixel_sha256": "9e84971e6a2563e24137117fb05f562765e4060e371f05b1063c1241d4ae1e04",
-      "mask_sha256": "8e2037afb6f9481ed426f8e48d14784d0f6228e51850ad976a67e9f57c8a0692",
+      "and_mask_sha256": "8e2037afb6f9481ed426f8e48d14784d0f6228e51850ad976a67e9f57c8a0692",
+      "opaque_sha256": "8e2a76a12a705a1c5c8ec2e85f193c7b4f28360656bb8506582dc1e7f84c33f4",
       "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
       "color_count": 9,
-      "png_sha256": "f82d179358c6b87144684e1cbc89cb0ff3f09fb14fd4a3eeaedb0fcaf41d7629"
+      "png_sha256": "87fccbb717b1089cc7ce8484d341d067a616c2d7332c7d723e3eafd9e92e4e2d"
     },
     {
       "portrait_index": 3,
@@ -59,10 +64,11 @@
       "height_pixels": 148,
       "pixel_count": 16576,
       "pixel_sha256": "311ae5bdbdfebca9907f6a7c8736ba07f610c6bf6c4e4744f324d81373909d90",
-      "mask_sha256": "fb3493c3cadc84448b571189defd47c79b1606fb268fd81139742fbc3cc14d69",
+      "and_mask_sha256": "fb3493c3cadc84448b571189defd47c79b1606fb268fd81139742fbc3cc14d69",
+      "opaque_sha256": "bb3a79f6ce9ba6e27e0916ebe109de05b8d7940756bed09e0fa0805d913f9430",
       "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
       "color_count": 12,
-      "png_sha256": "6a841a9d1b06e568bed643d918d053e893f39593ef0efe1d19f545d3f80150b9"
+      "png_sha256": "aea716ae07bc8e82eae0c0192a3d8a3daf9915e119dac30dd041c8b425109b86"
     },
     {
       "portrait_index": 4,
@@ -72,10 +78,11 @@
       "height_pixels": 103,
       "pixel_count": 7416,
       "pixel_sha256": "636b118f8ccadc861474af6e339cf1031a0ea3241175ce2bad598b4027fa449b",
-      "mask_sha256": "b1e911f5ef6772081c417c4be9301b51e05f025b1d158c580836107eaf053c64",
+      "and_mask_sha256": "b1e911f5ef6772081c417c4be9301b51e05f025b1d158c580836107eaf053c64",
+      "opaque_sha256": "dd1ca1c8256c0490cea99bbde3c9603c094eb27526a67edf901df15b6e12f834",
       "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
       "color_count": 9,
-      "png_sha256": "4a80606007ddc2b72cd43996b9d32ed848ca060f6b8fa5ba0fcca166796c9be2"
+      "png_sha256": "cf7d8c0e346404ecb5813d881cbb3db412a294881d61e1c1daf0e07ec32a0e46"
     },
     {
       "portrait_index": 5,
@@ -85,10 +92,11 @@
       "height_pixels": 110,
       "pixel_count": 6160,
       "pixel_sha256": "4f792520e23a6ed85a9e8ecfe0a45011aeb9d8e76f78808fc27748e64b545499",
-      "mask_sha256": "796eb1b4be49dcb9f55a898bd9686e50b27dea04437bf66e223b35c112779251",
+      "and_mask_sha256": "796eb1b4be49dcb9f55a898bd9686e50b27dea04437bf66e223b35c112779251",
+      "opaque_sha256": "bc58760350208bc361e48504c6214ca23ec38de163e1fa4c16fbe0a5fe9f98a3",
       "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
       "color_count": 9,
-      "png_sha256": "103f67fd7a1e419b41c2cc94e80f9e4cc2face3e2dd2fe30a5aaeebc906a2214"
+      "png_sha256": "5ecb72ee1783e0f7301c71881d7b9fc95c9e3db4d4ac476feb5e733b49cdf25f"
     }
   ]
 }

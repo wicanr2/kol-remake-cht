@@ -1,0 +1,71 @@
+{
+  "schema": "kol-shldpics-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "KOLTOWN-shldpics-summary.json",
+  "ida_summary_sha256": "bfd58326946f3b34383c8376d62dbc6812da4982a072501885df236a96cc34fe",
+  "status": "mechanically validated and human-inspected all four color/AND-mask pairs",
+  "human_inspection": "four upright round or heater-style shield images; transparent silhouettes are coherent and no rotation, mirroring, plane-order or clipping defect is visible",
+  "semantic_classification": {
+    "label": "character shield images",
+    "confidence": "confirmed",
+    "basis": "shld filename operand, character equipment consumer and visual silhouettes"
+  },
+  "indexed_archive_name": "SHLDPICS.0",
+  "fixed_record_name": "SHLDPICS",
+  "names_are_distinct_formats": true,
+  "source_payload_count": 8,
+  "combined_png_count": 4,
+  "mask_semantics": "bit 1 preserves background; bit 0 is opaque",
+  "contact_sheet_sha256": "079a90ad2824a502670c54c7d46f99418ecb51dc09acee6e7b445597708f0da9",
+  "records": [
+    {
+      "group": 0,
+      "color_image_index": 0,
+      "mask_image_index": 1,
+      "width_pixels": 40,
+      "height_pixels": 29,
+      "pixel_sha256": "e0a7cb141fd84b5807f6b12b08b20d0aea752a0ae78f86338a14fda727ada5b3",
+      "and_mask_sha256": "fa67d3df0aab3a1d7a99b34edbb06f0ba116bd582325af49fa87cd94997d5e88",
+      "opaque_sha256": "ba0bb7bc471020ff665024d6037020eecb043752448bf7109ff6df461cd81dd9",
+      "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "png_sha256": "8c49f8d6fe83637cb60731e64488f71715f155a5385722f3b4e7efe366525398"
+    },
+    {
+      "group": 1,
+      "color_image_index": 2,
+      "mask_image_index": 3,
+      "width_pixels": 56,
+      "height_pixels": 45,
+      "pixel_sha256": "e76d6872f8ffd5fd2c3a8f60cacf339500d759fa4a962fd95b6c6fce3143157a",
+      "and_mask_sha256": "8286e609639a20dba82900c54e9c2423b7f1bf14a2068352ab7f83be7ff31c4e",
+      "opaque_sha256": "65965d1ba4c0296d2913f27f02f360eae59c86f5de6263c12e023571df9490e7",
+      "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "png_sha256": "86f3f9d19087819cdb0d5cbc04b43f1cd6c4e82c85e870f39676312cb3aa4148"
+    },
+    {
+      "group": 2,
+      "color_image_index": 4,
+      "mask_image_index": 5,
+      "width_pixels": 48,
+      "height_pixels": 63,
+      "pixel_sha256": "3e7d012132d5f1f932726422b71865985f9e7b874f6f06a18e015b69fa587f18",
+      "and_mask_sha256": "b3c29c44f3e4475065056783470229f529a2c08f7ac736456faf9674fff72038",
+      "opaque_sha256": "e602707262aa9e56b91ac88936a23b05f62b4997911ab64bd201caf35496c277",
+      "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "png_sha256": "1277681a02981d30744985979ae2c0e266e48b0f4532d7cfd1701a7e7def21c8"
+    },
+    {
+      "group": 3,
+      "color_image_index": 6,
+      "mask_image_index": 7,
+      "width_pixels": 48,
+      "height_pixels": 61,
+      "pixel_sha256": "5d4394da869d2ffbee73ecf0ff87f2de1ec2061a32b75a58cf5fa70cf0c1c029",
+      "and_mask_sha256": "38908fbdbcd4cb4cf61ea1e2b6a82a6791c44913cf4f85209fe5396c7d6235d2",
+      "opaque_sha256": "90203780fbc22f324d9ea5fbc487b6372a486cc762740d260e335437551c1db8",
+      "mask_trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "png_sha256": "c4da0088cc979fa0523e39b6c898959713a5ebcaf9affc1d245b8845b6f63f67"
+    }
+  ]
+}

@@ -625,3 +625,45 @@ alpha；runtime 可只讀 PNG，但必須依 manifest role 合成，不得把 ma
 兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
 `5684459b…df8`、`445767bb…af2`；兩輪 24 張 PNG、接觸表與視覺摘要也逐 byte 相同，
 摘要與接觸表 SHA-256 為 `8c9ed5fe…b5fe`、`b11f2e05…14d3`。SPEC-002 維持 DRAFT。
+
+## RE-021：SHLDPICS.0 四組角色盾牌
+
+### 名稱分流與 consumer
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4，位址空間為
+  reconstructed unpacked MZ linear EA。
+- 無副檔名 `SHLDPICS`（12,160 bytes）只走 `sub_13D9A`／`sub_14DB1` 的固定角色記錄表
+  讀寫；它與有 20-byte index header 的 `SHLDPICS.0` 是兩種格式，不得互相代替。
+- 圖片基名 `shld` 只有四字元，因 IDA `Strings()` 預設最短長度而曾漏列。它在
+  DGROUP EA `0x2e4de`、offset `0x060e`；真正 operand consumer 是
+  `sub_18F3A:0x1929e mov ax,60Eh`。raw word 另兩個命中只是遠呼叫位址 bytes 巧合。
+- `sub_18F3A:0x192b6..0x192c5` 將盾牌型別 `i` 映為 `[2*i,2*i+1]`；
+  `sub_16FA6` 分別載入彩圖與 mask，最後在 `0x17087` 呼叫 `sub_1BD17` 合成。
+
+### 幾何、遮罩與視覺
+
+DGROUP `0x2e30a` 的前四組 byte-column／scanline 配對為 `(5,29)`、`(7,45)`、
+`(6,63)`、`(6,61)`，即 40×29、56×45、48×63、48×61。偶數 payload 的二階 RLE
+均精確展開為對應 4-bit EGA pixels；奇數 payload 則是 MSB-first 1-bit AND mask，
+有效長度後各多一 byte。
+
+`sub_1BD17` 的 `(destination AND mask) OR color` 證實 mask bit 1 保留背景／透明，
+bit 0 清除後覆寫／不透明；PNG alpha 必須是 `1-mask` 而不是直接複製 mask。
+四張 RGBA PNG 目視為兩張圓盾與兩張徽章形盾，邊界連續，無鏡像、旋轉、plane 錯排或裁切。
+「角色盾牌圖」與像素契約為 `已證實`。
+
+兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+`bfd58326…34fe`、`739147f4…6bcd`；兩輪四張 PNG、接觸表與摘要也逐 byte 相同，
+路徑無關的最終摘要與接觸表 SHA-256 為 `13dd97ae…a6ef`、`079a90ad…0da9`。
+早期摘要因寫入暫存 basename 而無法跨路徑重生，已作廢。SPEC-002 維持 DRAFT。
+
+### 連帶勘誤：MONPICS／PERPICS PNG alpha
+
+SHLDPICS 的同一 `sub_1BD17` consumer 證據顯示，MONPICS／PERPICS 早期探針的
+`unpack_mask` 極性顫倒：它把 bit 1 當不透明，實際上 bit 1 是保留背景／透明。黑底
+接觸表曾掩蓋不透明黑矩形，因此舊 PNG 與舊視覺摘要作廢。
+
+兩探針已改為 `opaque=1-mask`，並用 8×8 棋盤背景重生 32 張怪物與六張人物。
+輪廓正確露出棋盤，且兩輪全部 PNG、接觸表與摘要逐 byte 相同。MONPICS 摘要／接觸表
+SHA-256 為 `7a5a5258…3b29`／`934f1eb3…f2b5`；PERPICS 為
+`d6d87f46…9fc5`／`b1a90a2f…9ff8`。訂正不改變原始尺寸與配對結論，但取代所有舊 alpha 產物。
