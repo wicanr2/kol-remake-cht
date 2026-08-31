@@ -1,0 +1,779 @@
+{
+  "schema": "kol-manual-source-catalog-v1",
+  "extractor": "Poppler pdftotext -raw",
+  "extractor_version": "pdftotext version 22.12.0",
+  "inputs": [
+    {
+      "id": "handbook",
+      "filename": "knightslegend-manual.pdf",
+      "sha256": "4c80f5d4c7221f9d3376546d249d52e2fc7fc0f73b48ee9daf6e20ce87d7086a",
+      "physical_pages": 79
+    },
+    {
+      "id": "reference-card",
+      "filename": "knightslegend-refcard.pdf",
+      "sha256": "4815bc6c3a51ff7abaa610a071f08e05eb2dd180e5130b0674de8b4a94b2abd3",
+      "physical_pages": 5
+    }
+  ],
+  "page_count": 84,
+  "all_expected_text_layers_present": true,
+  "pages": [
+    {
+      "key": "handbook/page/001",
+      "source_sha256": "2d19f08401c25603bc8cb82a6ae2a95107a908b01804d1ecbbef0fbe2e4dec1e",
+      "characters": 18,
+      "words": 2,
+      "lines": 1,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/002",
+      "source_sha256": "62c9898adf92a0644622a47b99c818206a34cacba3e80c8529a5e9eb5e228a70",
+      "characters": 3434,
+      "words": 585,
+      "lines": 164,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/003",
+      "source_sha256": "42324eb2590a1363a809ffaa3826c9d243994adf3c3efa65ceb03b388ec5637c",
+      "characters": 2372,
+      "words": 404,
+      "lines": 149,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/004",
+      "source_sha256": "20564212ffe387b4241431ad3def21ff639ace6c289ec5ca2b0f8466efc87e60",
+      "characters": 3753,
+      "words": 637,
+      "lines": 75,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/005",
+      "source_sha256": "5aaa08259548aea7f3d0383deedd7d181109081c4965395eecc475c702f4221a",
+      "characters": 2558,
+      "words": 439,
+      "lines": 50,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/006",
+      "source_sha256": "cbb12cb4bf05973dbf0ca967735742fd5018e3f437905cce434232fa91f91934",
+      "characters": 2608,
+      "words": 470,
+      "lines": 52,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/007",
+      "source_sha256": "8e222714f09660efb2bce66faab432c4d2bb6b83c2d8015bad1c57da8ba578bb",
+      "characters": 3173,
+      "words": 547,
+      "lines": 65,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/008",
+      "source_sha256": "ab3a41225bb3d94fba889a3d39544d2c006693c4715e91190133f62773192798",
+      "characters": 2937,
+      "words": 532,
+      "lines": 61,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/009",
+      "source_sha256": "dde4c48c4fdeb1819aae8963e8686a209ee27a5ea4bd1ba8416ee4089b26212b",
+      "characters": 2956,
+      "words": 535,
+      "lines": 64,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/010",
+      "source_sha256": "19ed932f577faaa63323b39a9cf33e6f76621d38064bb0f3db39e72346c2a82c",
+      "characters": 3455,
+      "words": 640,
+      "lines": 68,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/011",
+      "source_sha256": "9b751001dec4914b6128aa206dca27aaa308ff15f06a800a9ccb96b5d17fb5e5",
+      "characters": 3916,
+      "words": 706,
+      "lines": 73,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/012",
+      "source_sha256": "f039511de9c1ffec992e6f10d06d3a697018aa48d1f17a15d36e884f9403a98c",
+      "characters": 3438,
+      "words": 645,
+      "lines": 70,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/013",
+      "source_sha256": "a85a4a976f8710ecaa4e519f1a2167a3c59123c066fbefa4c3e13d5ff7d6f032",
+      "characters": 2191,
+      "words": 394,
+      "lines": 42,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/014",
+      "source_sha256": "eadcf6bfcd5939407c0d67a01bd2d2c341c5a28f66796ede9582d0c53b792b83",
+      "characters": 3302,
+      "words": 609,
+      "lines": 65,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/015",
+      "source_sha256": "27ffd716e5ded1adb5bacabddbbf445af5e628163a6b744ee55b19c0c5105f27",
+      "characters": 3729,
+      "words": 633,
+      "lines": 70,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/016",
+      "source_sha256": "572cd0ce1f09d167ffefcc80e4ad200e1aac3c5fbd5c687d0014c2d1a61efeb5",
+      "characters": 2720,
+      "words": 478,
+      "lines": 49,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/017",
+      "source_sha256": "5164afd5690c7c54020297d4aa821d24efd25b1b2fcf27b84d84ba6a3b24be1e",
+      "characters": 3581,
+      "words": 648,
+      "lines": 74,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/018",
+      "source_sha256": "de6a4e238a0ee2e4ac839952282276145ed36ad284770746e6e1b88ffe111979",
+      "characters": 4046,
+      "words": 737,
+      "lines": 75,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/019",
+      "source_sha256": "bf4a0ed8dd9a541a3fa01ac29173cc6c8f9428655a681b24a954ab7d5fe5916f",
+      "characters": 3057,
+      "words": 555,
+      "lines": 69,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/020",
+      "source_sha256": "c4160d8f337490d305c5e7f729a761558d6cdc35374fc0e842fd309b30731518",
+      "characters": 2968,
+      "words": 528,
+      "lines": 65,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/021",
+      "source_sha256": "eb71f5d90c698cb7d5d9ac9896a4f1e0e7fc3d21cee8fb450be3022185965d0e",
+      "characters": 3472,
+      "words": 649,
+      "lines": 70,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/022",
+      "source_sha256": "e0e11ec86cd7d926a73ae98e27d7b663046bc821c3868f99c35214e8e9dda793",
+      "characters": 4055,
+      "words": 726,
+      "lines": 73,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/023",
+      "source_sha256": "15ffcb91850d8d60f9a7d7396881c0a99db00f981887fe6533d1ffb43458b283",
+      "characters": 2590,
+      "words": 455,
+      "lines": 49,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/024",
+      "source_sha256": "48b0e724f0dba036a1532043b5db45551867db7a2cf412cf4b47f8b782d958d8",
+      "characters": 2917,
+      "words": 546,
+      "lines": 56,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/025",
+      "source_sha256": "1e588db2788bdea3853ed02cf973f306b38ff8ba976d74b9e4817c574aee4882",
+      "characters": 3453,
+      "words": 623,
+      "lines": 68,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/026",
+      "source_sha256": "0c5ee8353568bec3bb08606b60145d72c720c1430488a68b5243ca8c42ef538b",
+      "characters": 2784,
+      "words": 503,
+      "lines": 51,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/027",
+      "source_sha256": "488e587f8ca143ae95d664fec8f5aa0f9367c9a2a606649b19febf28e9abc67e",
+      "characters": 1956,
+      "words": 395,
+      "lines": 57,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/028",
+      "source_sha256": "6abfcb652b813b7fcf24983dfa0dcb2cb05685686f395ebc5b84c7ff9c5ba446",
+      "characters": 1317,
+      "words": 359,
+      "lines": 41,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/029",
+      "source_sha256": "889dab643f6e96c41b46474a4e0f9a0ea69a51b5d78cee06afa3e672d9409a89",
+      "characters": 2929,
+      "words": 497,
+      "lines": 68,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/030",
+      "source_sha256": "a9aa98e7dcafd2d8b66e30115d55809b705a1724fbe812549e1121bc87b5f931",
+      "characters": 3833,
+      "words": 641,
+      "lines": 73,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/031",
+      "source_sha256": "121bf93d2a8a41956d1d5ca8fbbe00abb817e5022da9db852620eae9866f61bf",
+      "characters": 3437,
+      "words": 568,
+      "lines": 67,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/032",
+      "source_sha256": "886d5712726b5aff1312322d7c6f90c9399977986d9746496c0a2922cfbbc24a",
+      "characters": 2630,
+      "words": 495,
+      "lines": 55,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/033",
+      "source_sha256": "f50c59823fb9063b6ae064c4ec4ff3620a657eb30f1b4dbba828aa1ea9e6119b",
+      "characters": 2694,
+      "words": 481,
+      "lines": 120,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/034",
+      "source_sha256": "1333702850c588d79e68014d1dd0a8f15b707dfd6b49c39a3fac399637119b4c",
+      "characters": 4085,
+      "words": 663,
+      "lines": 78,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/035",
+      "source_sha256": "6a3225a013975a8da111079b0164921a27c3c005a1640cfc8c0f4d67b7cf0d53",
+      "characters": 3428,
+      "words": 595,
+      "lines": 66,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/036",
+      "source_sha256": "40b391547c03c3c0a7e740aa43b1c09d58570a9c7621a799ae0b493dcbb545ed",
+      "characters": 4392,
+      "words": 784,
+      "lines": 80,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/037",
+      "source_sha256": "6ecda1a71befa37a04fd6d8520f346e367f74a7802bda7cd79776a992e877067",
+      "characters": 4333,
+      "words": 769,
+      "lines": 82,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/038",
+      "source_sha256": "58144dc93dba2fc25a50b1c36f29564b728ee15ab92d00577652318efa3c9fc5",
+      "characters": 2433,
+      "words": 422,
+      "lines": 47,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/039",
+      "source_sha256": "7434a36428db03ff18ac5c36a8fe6bc37fa884f20e696a652462d14aba574f22",
+      "characters": 2263,
+      "words": 389,
+      "lines": 95,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/040",
+      "source_sha256": "784b9507202f959759b4103a10c283bcedc681efe2542e91c4699df469bdc5f2",
+      "characters": 2944,
+      "words": 517,
+      "lines": 67,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/041",
+      "source_sha256": "6f049e9919d938e5dc2d5cf2fbed6227e1ca7e05b72f3453862b33a2f925c372",
+      "characters": 2464,
+      "words": 435,
+      "lines": 52,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/042",
+      "source_sha256": "8aa38b8280ca9838c877d43f753535967eede0837f190db0006d440ba2b9fefd",
+      "characters": 3353,
+      "words": 602,
+      "lines": 72,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/043",
+      "source_sha256": "f438f7668bce6fe5f83dd769202bc29aee85a0d76e6b021bf23da7542a89d3d3",
+      "characters": 4203,
+      "words": 751,
+      "lines": 77,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/044",
+      "source_sha256": "f659838b8327dc35cf5da16ab254f9ea501bdcb5277593f5bdfc1ee0ec221494",
+      "characters": 4325,
+      "words": 756,
+      "lines": 79,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/045",
+      "source_sha256": "b8b9fa75c208b5422f31a3288f0dff3c8f371d3877be162a875edf065bd62f4d",
+      "characters": 3783,
+      "words": 655,
+      "lines": 71,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/046",
+      "source_sha256": "be02757db4b1341c388259bdb7e3daace792e8b67bccdad1874bbff43a63e36b",
+      "characters": 3103,
+      "words": 533,
+      "lines": 56,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/047",
+      "source_sha256": "0ffb49f59cc42c5654673a5b2741b092101c3203b69bf942189310f310e662ae",
+      "characters": 4264,
+      "words": 753,
+      "lines": 78,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/048",
+      "source_sha256": "10028acfd885a2274daa8618057b8c883003080b54b345c715a861380440413d",
+      "characters": 3985,
+      "words": 688,
+      "lines": 74,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/049",
+      "source_sha256": "54e654401fab765b51b52ed80722659c17b51236d1a556eca7b2b6b22dbf2c1c",
+      "characters": 3569,
+      "words": 636,
+      "lines": 67,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/050",
+      "source_sha256": "d67885854f41fbc8834c842cf0aec1381ca12d51d7298e3f2336de466902ecec",
+      "characters": 2402,
+      "words": 446,
+      "lines": 69,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/051",
+      "source_sha256": "7ad2623f81605b47613ac3ee04312b686028314caa711195b384431962d9493e",
+      "characters": 3212,
+      "words": 607,
+      "lines": 80,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/052",
+      "source_sha256": "23f6dd1d79df26a0e7d34fd833e3a61e1cf965a6afa01a889b534c7871fdfc1a",
+      "characters": 3698,
+      "words": 694,
+      "lines": 76,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/053",
+      "source_sha256": "abccfb825467fe2a8416753ef64058d91253dd12a5d04fba037639a28c380b0e",
+      "characters": 3778,
+      "words": 691,
+      "lines": 76,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/054",
+      "source_sha256": "adfd1958d6e4e264f4efe1bdad3f2d532d7cd31e8892be949e020cd31f86b69b",
+      "characters": 3351,
+      "words": 609,
+      "lines": 78,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/055",
+      "source_sha256": "012b40932026702acc7a387f0c5dff281b78de3d4a653c5f3590b92ac29368f7",
+      "characters": 3711,
+      "words": 659,
+      "lines": 76,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/056",
+      "source_sha256": "524cb2321ec2ad467a3fb4424d70cefb2a74935f4ee71919398afefc79fc9dcd",
+      "characters": 3375,
+      "words": 591,
+      "lines": 77,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/057",
+      "source_sha256": "128a6840ea5484654ec64be30ab1c2fb4c4c88c948f09a4715ecb3c4bc8cda8d",
+      "characters": 3337,
+      "words": 615,
+      "lines": 85,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/058",
+      "source_sha256": "f378e2e6122a6c471dc0a2f525447234783ffe5ac2196de9d698649f8fcc4d50",
+      "characters": 3591,
+      "words": 648,
+      "lines": 78,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/059",
+      "source_sha256": "906a8352cf2bb10512f692fb2afc9c9027195f8921807d60e8f9b51be079a56d",
+      "characters": 3271,
+      "words": 626,
+      "lines": 76,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/060",
+      "source_sha256": "69603ee63075dabe0dae7c6ec84b6ba6e184dcd8c72d9eea2f8f18de9b651570",
+      "characters": 3179,
+      "words": 539,
+      "lines": 81,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/061",
+      "source_sha256": "87e2cffb8e69c7cdb7185d7b644928d647299d6786127bb7e199286baa7a2d53",
+      "characters": 3894,
+      "words": 677,
+      "lines": 82,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/062",
+      "source_sha256": "95d3bc01ace42a08d82472ef9d92718360c6075029759733d57a88e295e66032",
+      "characters": 3281,
+      "words": 591,
+      "lines": 78,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/063",
+      "source_sha256": "9023e470fe76fba66b5e186171dede6a5901a4d56719992d8ebad88acab710e5",
+      "characters": 3442,
+      "words": 620,
+      "lines": 72,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/064",
+      "source_sha256": "c8c52e727bef807729a9358694bf709919d0eef28163821b7094710abb919dfc",
+      "characters": 2741,
+      "words": 492,
+      "lines": 71,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/065",
+      "source_sha256": "35bd5b8c7b56592cdfc78c9d324810f780904c24060a51efc09f2e1a5c63b870",
+      "characters": 3394,
+      "words": 614,
+      "lines": 76,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/066",
+      "source_sha256": "ea0fb012feaada4c5795611cb38df6119c35e4c623843e55dc30bf8e8e6eb64a",
+      "characters": 2588,
+      "words": 486,
+      "lines": 73,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/067",
+      "source_sha256": "fed21d8dfa922a3bbf935b4998aaeff94447cd7b2bb566c2b85ead4a72983a7d",
+      "characters": 3323,
+      "words": 583,
+      "lines": 65,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/068",
+      "source_sha256": "ab3083737cf196d237b3cf0b58d38dbb9334bc99ea77056af4fd26985a63c18a",
+      "characters": 3306,
+      "words": 583,
+      "lines": 85,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/069",
+      "source_sha256": "65a00702c079ec5179dbdc4efd8908527d2b7de04902017da7bfd44a03eac3d9",
+      "characters": 3184,
+      "words": 515,
+      "lines": 89,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/070",
+      "source_sha256": "0e118fdd10ee24a5afa5920b9510fbfc44d289531a3a2bd8844f8c15a8a66b89",
+      "characters": 1476,
+      "words": 262,
+      "lines": 92,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/071",
+      "source_sha256": "733b771104af730f464108d289b1e606d547afd22b7ad6050080e13aa3935a77",
+      "characters": 3319,
+      "words": 550,
+      "lines": 42,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/072",
+      "source_sha256": "79aa933565a3870d7e3d325eb29404f96e87b3e388d25833db155ed9a7a1d9ef",
+      "characters": 2737,
+      "words": 457,
+      "lines": 99,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/073",
+      "source_sha256": "2e8c4d358bacf3accb253d0414da75a4af85c6694197cf601bb505abb2ee26e3",
+      "characters": 2785,
+      "words": 507,
+      "lines": 96,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/074",
+      "source_sha256": "d4b7ec798a822dc8d203d3179cd7e6db3758330141fbd43c48cd8720bf305c1c",
+      "characters": 2180,
+      "words": 320,
+      "lines": 94,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/075",
+      "source_sha256": "e73d716bc5704e9909a206de84aac6bade0f5ba288d836a3fb534dea86f7ca52",
+      "characters": 2449,
+      "words": 345,
+      "lines": 39,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/076",
+      "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "characters": 1,
+      "words": 0,
+      "lines": 1,
+      "text_layer_nonempty": false,
+      "page_kind": "expected_blank"
+    },
+    {
+      "key": "handbook/page/077",
+      "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "characters": 1,
+      "words": 0,
+      "lines": 1,
+      "text_layer_nonempty": false,
+      "page_kind": "expected_blank"
+    },
+    {
+      "key": "handbook/page/078",
+      "source_sha256": "6c017ffbaaaaaa42a5335b900b65e3fbd9aabd76c75e82fcfca91753a8d59c83",
+      "characters": 1806,
+      "words": 300,
+      "lines": 39,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "handbook/page/079",
+      "source_sha256": "747e5833eabcf9f34ed760043df73e0c679b18232ff8a6ab97a965ca247730c5",
+      "characters": 92,
+      "words": 14,
+      "lines": 7,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "reference-card/page/001",
+      "source_sha256": "c41b652ce5047844c7414103b36967efbccc6f0e5c886e49f8c71edda46d6aa7",
+      "characters": 2604,
+      "words": 474,
+      "lines": 41,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "reference-card/page/002",
+      "source_sha256": "dfa1afe04bb47d3673fa68ba28ce807db97fe30a29cf7044b70e42fa455a6c74",
+      "characters": 7468,
+      "words": 1322,
+      "lines": 105,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "reference-card/page/003",
+      "source_sha256": "362434b10cd102fc0be609ab1fcdeeba1d8d04ea2f961898232ea3102749c3d8",
+      "characters": 3843,
+      "words": 716,
+      "lines": 57,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "reference-card/page/004",
+      "source_sha256": "1ea07a77885608bb1b2e5ecd6beb2be1238eb39512815cf4390f72ae8f9df2fc",
+      "characters": 5619,
+      "words": 1008,
+      "lines": 122,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    },
+    {
+      "key": "reference-card/page/005",
+      "source_sha256": "e65a178f68905de4ad19e3f0ed8f01bd2e41a9817a1155241165e9ba6c8a1ce5",
+      "characters": 2393,
+      "words": 423,
+      "lines": 100,
+      "text_layer_nonempty": true,
+      "page_kind": "content"
+    }
+  ]
+}

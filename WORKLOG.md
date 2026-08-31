@@ -208,3 +208,28 @@
   安全摘要 deny-list、UID/GID 1000:1000 與 `git diff --check` 均通過。
 - 本輪暫存 rerun JSON／PNG 目錄已刪除，沒有 `__pycache__` 或懸空 image；`docker ps -a`
   未見 KOL／IDA／MONPICS 容器。清單中的其他執行中／已建立容器不屬本專案，未擅自停止。
+
+## 2026-08-31：中文手冊管線與首批 reviewed 頁
+
+- 依使用者要求唯讀參考 `~/cht/civ1` 的手冊翻譯經驗，沿用既有
+  `civ1-manual-pdf:local`，未建立重複 image。採其逐頁 hash、`todo → translated →
+  reviewed`、機械 gate＋人工逐頁對照與英文全文不入版控的契約。
+- 固定玩家手冊 79 個 PDF 實體頁、參考卡 5 頁；Poppler `pdftotext 22.12.0 -raw` 建立
+  84 頁清冊。清冊 SHA-256 `bd27f093…6131`，兩次重生與本機英文 TSV 均逐 byte 相同。
+- 初次清冊的 `all_text_layers_nonempty` 因玩家手冊 76、77 只有換頁字元而失敗。以
+  `pdftoppm` 120 DPI PNG 目視確認兩頁是真正空白跨頁、只有背頁透印；工具改為明示
+  `expected_blank`，其餘 82 頁全部具文字層，不啟動不必要 OCR。
+- 新增 SPEC-003 READY、手冊入口、逐頁索引、術語表、狀態 ledger、來源清冊與兩支
+  Docker-only 工具。英文全文、掃描頁 PNG 與原 PDF 均留在 ignored 工作區。
+- 玩家手冊實體頁 1–5 已翻譯並逐頁對照掃描影像。影像對照抓到實體頁 3 的 OCR 錯序：
+  raw 文字把矮人／凱爾登／精靈職業群拆開，初稿目錄頁碼錯配；已依掃描訂正並保留成
+  SPEC-003 的正對照。
+- 目前狀態為 reviewed 7 頁（內容 1–5、空白 76–77）、translated 0、todo 77。gate 檢查
+  key／hash、狀態覆蓋、數字、篇幅、連續英文與 Markdown 連結；狀態重疊及漏數字兩個
+  正對照都會非零失敗。
+- 翻譯狀態 ledger SHA-256 `e12d8f49…a401`；全部 JSON parse、安全清冊不含英文 `source`
+  欄位、Python syntax、全 `docs/` 本地 Markdown 連結、UID/GID 1000:1000 與
+  `git diff --check` 均通過。
+- ignored 工作區保留實體頁 1–5、76–77 的校對 PNG 與英文逐頁 TSV；沒有重生副本、
+  `__pycache__` 或懸空 image。短暫顯示的 `alpine:3.22` Created 容器在 inspect 前已由
+  `--rm` 自動消失；重查 `docker ps -a` 未見 KOL／PDF 容器，其他專案容器未動。

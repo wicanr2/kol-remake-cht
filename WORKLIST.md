@@ -44,8 +44,10 @@
 
 - [x] 記錄說明書與參考卡 SHA-256、頁數、頁面尺寸及 metadata 擷取工具版本；OCR 工具
   版本待正式文字擷取時記錄。
-- [ ] 建立 `docs/manual/README.md`、章節檔、逐頁原文定位表與 `glossary.md`。
-- [ ] 逐頁 OCR／文字擷取、翻譯、人工校對；保留表格、圖說、頁碼與未確定標記。
+- [x] 建立 `docs/manual/README.md`、章節檔、逐頁原文定位表與 `glossary.md`；SPEC-003
+  已 READY，只授權手冊文件工作。
+- [ ] 逐頁文字擷取、翻譯、人工校對；目前玩家手冊實體頁 1–5 已 reviewed，76–77 為
+  目視確認空白頁；其餘玩家手冊 72 頁與參考卡 5 頁仍為 todo。
 - [ ] 讓規則 spec 連回說明書頁碼；說明書未涵蓋的邊界行為不得自行推定。
 - [ ] 驗證 Markdown 連結、表格、圖片權利分類與完整章節清冊。
 
@@ -99,6 +101,5 @@
 
 ## 下一個唯一工作
 
-SPEC-002 仍為 DRAFT；MAKEMODE 已證實可由 28 組 EGA PICS 生成 PCGA／HERC，但完整
-轉換規則未關閉。下一個共同決策是首版 theme 範圍；等待回答期間，只繼續不依賴此決策的
-PICS consumer RE。READY 前不接 Go／Ebitengine production runtime。
+以 SPEC-003 READY 契約繼續玩家手冊實體頁 6–10（城鎮操作）逐頁翻譯與掃描影像校對；
+theme 範圍仍等待使用者決定，SPEC-002 READY 前不接 Go／Ebitengine production runtime。

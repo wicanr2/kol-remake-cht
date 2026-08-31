@@ -1,0 +1,25 @@
+{
+  "schema": "kol-manual-translation-status-v1",
+  "allowed_statuses": ["todo", "translated", "reviewed"],
+  "documents": {
+    "handbook": {
+      "physical_pages": 79,
+      "reviewed_pages": [1, 2, 3, 4, 5, 76, 77],
+      "translated_pages": [],
+      "todo_ranges": [[6, 75], [78, 79]],
+      "blank_pages": [76, 77],
+      "outputs": [
+        "docs/manual/chapters/00-front-matter.md",
+        "docs/manual/chapters/01-getting-started.md"
+      ]
+    },
+    "reference-card": {
+      "physical_pages": 5,
+      "reviewed_pages": [],
+      "translated_pages": [],
+      "todo_ranges": [[1, 5]],
+      "blank_pages": [],
+      "outputs": []
+    }
+  }
+}

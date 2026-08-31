@@ -1,7 +1,7 @@
 # 規格索引
 
-目前有一份只授權研究 oracle 的 READY 規格；尚無授權 remake production implementation
-或 CONFORMED 的規格。所有原版衍生行為必須依序經過：
+目前有一份只授權研究 oracle 的 READY 規格，以及一份授權手冊翻譯工作的 READY 規格；
+尚無授權 remake production implementation 或 CONFORMED 的規格。所有原版衍生行為必須依序經過：
 
 `RE 證據 → DRAFT → 證據審查 → READY → implementation → 同狀態驗證 → CONFORMED`
 
@@ -11,3 +11,4 @@
 |---|---|---|---|
 | SPEC-001 | [原版 Oracle 準備與位址契約](001-original-oracle-preparation.md) | READY | 僅授權研究 derivative，不授權玩法實作 |
 | SPEC-002 | [PNG 素材抽取契約](002-png-asset-extraction.md) | DRAFT | 否；只允許 disposable probe |
+| SPEC-003 | [繁中說明書翻譯與校對契約](003-manual-translation.md) | READY | 僅授權文件翻譯，不授權玩法／runtime |
