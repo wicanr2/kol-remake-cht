@@ -134,3 +134,11 @@
 | Krag Barbarian | Krag Barbarian | 待查 | 北方岩地的野蠻戰士；正式音譯待世界資料 consumer |
 | Krell Warrion | Krell Warrion | 待查 | 北方沼澤傳聞及疑似借其名行動的人群；正式譯名待世界資料 consumer |
 | Lintle Plainsmen | Lintle Plainsmen | 待查 | 東南平原游牧民族；正式譯名待世界資料 consumer |
+| Olanthan Hunter / Huntress | Olanthan Hunter／Olanthan Huntress | 待查 | 中立村落 Olanth 的獵人；正式譯名待世界資料 consumer |
+| Poitle Rogue | Poitle Rogue | 待查 | Poitle's Lock 的盜賊文化；正式譯名待世界資料 consumer |
+| Shellernoon Watchmen | Shellernoon Watchmen | 待查 | 看守 Eyren 湖黑塔的守衛；正式譯名待世界資料 consumer |
+| Great Oath | Great Oath | 待查 | Shellernoon Watchmen 入隊誓言；內容未知 |
+| Ghor Tigress | Ghor Tigress | 待查 | Ghor 女戰士；正式譯名待世界資料 consumer |
+| Lintle Plainswoman | Lintle Plainswoman | 待查 | Lintle 平原女性弓手；正式譯名待世界資料 consumer |
+| Tegal Amazon | Tegal Amazon | 待查 | Tegal 森林女性部族；正式譯名待世界資料 consumer |
+| Ghor Digger / Mytrone Tunneler | Ghor Digger／Mytrone Tunneler | 待查 | 矮人採礦職業；正式譯名待職業資料 consumer |

@@ -62,7 +62,12 @@
 | 53 | Duke's Highwaymen 與 Hobean Squire（印刷頁 100–101） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 54 | Htron Pirate 與 Krag Barbarian（印刷頁 102–103） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
 | 55 | Krag Barbarian、Krell Warrion 與 Lintle Plainsmen（印刷頁 104–105） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
-| 56–75 | 種族、精靈語與索引 | todo | — |
+| 56 | Lintle Plainsmen 與 Olanthan Hunter（印刷頁 106–107） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 57 | Poitle Rogue 與 Shellernoon Watchmen（印刷頁 108–109） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 58 | Shellernoon Watchmen、Ghor Tigress 與 Lintle Plainswoman（印刷頁 110–111） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 59 | Lintle Plainswoman 與 Olanthan Huntress（印刷頁 112–113） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 60 | Tegal Amazon、矮人與 Ghor Digger／Mytrone Tunneler（印刷頁 114–115） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 61–75 | 種族、精靈語與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 

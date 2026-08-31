@@ -397,3 +397,18 @@
   實體頁 56–60 開始。
 - 更新後種族章與狀態 ledger SHA-256 分別為 `57c4e947…6ef1`、`7f605dd2…eea5`；
   Python syntax、全部 JSON 與本地 Markdown 連結均通過。
+
+## 2026-08-31：中文手冊實體頁 56–60
+
+- 依 SPEC-003 READY 翻譯玩家手冊印刷頁 106–115；完成 Lintle Plainsmen、
+  Olanthan Hunter、Poitle Rogue、Shellernoon Watchmen、Ghor Tigress、
+  Lintle Plainswoman、Olanthan Huntress 與 Tegal Amazon，並開始矮人及其採礦職業。
+- 逐頁對照 100 DPI 掃描，確認 OCR 的 `Ores` 實為 `Orcs`、`aTroll` 實為 `a Troll`，
+  並保留 `48` 小時、七年與逾十年等可機械複核數字。
+- `Great Oath` 原文明示外人不知內容，維持待查；各文化敘事只作手冊世界觀證據，
+  不直接授權職業、AI、戰鬥或其他 runtime 行為。
+- 現況為 reviewed 62（內容 1–60、空白 76–77）、translated 0、todo 22；全 84 頁狀態
+  完整覆蓋，十個 Markdown 輸出通過來源 hash、數字、篇幅與英文殘留 gate。下一批從
+  實體頁 61–65 開始。
+- 更新後種族章與狀態 ledger SHA-256 分別為 `93c7d71e…fe47`、`49d3d92f…f422`；
+  Python syntax、全部 JSON 與本地 Markdown 連結均通過。
