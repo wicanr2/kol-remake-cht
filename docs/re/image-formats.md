@@ -350,9 +350,32 @@ bit 0 不透明／覆寫，所以 RGBA alpha 為 `1-mask`。四張 PNG 目視為
 精確順序見 RE-022 與 safe JSON。每組為 4-bit EGA 彩圖／MSB-first 1-bit AND-mask，
 PNG alpha 固定為 `1-mask`。棋盤接觸表顯示六列成對手部，全契約為 `已證實`。
 
+### WEAPPICS.0 角色武器 sprite
+
+固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4、重建 unpacked MZ
+linear EA。`sub_18F3A:0x19303..0x19415` 從角色裝備 bytes 取 `family=byte[0x3d]/0x20`
+與 `variant=byte[0x3e]&0x0f`；當 family 5 且 variant 為 2／3 時先 `variant ^= 1`，再依
+DGROUP `0x05f2` 的六值基表 `[0,10,14,28,38,42]` 計算
+`selector=base[family]+2*variant`。family／variant 是資料流導覽標籤，不是已證實的
+遊戲內武器分類名稱；合法輸入範圍仍由角色／物品資料約束，不可因 `&0x0f` 就假定
+每個 family 都有 16 種武器。
+
+`selector` 是偶數彩圖號，`selector+1` 是其 AND-mask；`selector/2` 選 DGROUP
+`0x0402` 的 28 組寬高，以及 `0x0472 + 56*renderer_class` 的相對位置。尺寸範圍為
+48–192 pixels 寬、5–63 pixels 高；逐組精確值、原始 table bytes、六類位置表與固定
+instruction bytes 收在 `ida-fingerprints/KOLTOWN-weappics-summary.json`。檔名由 DGROUP
+`0x0609` 的 `weap` token、`0x17ea` 的 `%s%s` 與 active renderer suffix 組成；不能把
+格式字串本身誤記成 `weap`。
+
+56 筆全部通過 LZW：偶數筆為二階 RLE／4-bit EGA 彩圖，奇數筆為 MSB-first 1-bit
+AND-mask 加一個非像素尾 byte。RGBA 依已證實的 `(destination AND mask) OR color`
+採 `alpha=1-mask`。28 張 ignored PNG 的 4×7 棋盤接觸表顯示弓、刃器、斧、長柄武器、
+錘與連枷等連續輪廓，未見旋轉、配對、plane-order 或裁切錯誤。完整統計在
+`weappics-ega-visual-probe.json`；這仍是 RE probe，不是 production importer。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

@@ -51,6 +51,9 @@
   `[i,i+6]` 配成 MSB-first 1-bit 遮罩；六組 IDA 矩形、像素數與透明接觸表全部吻合。
 - KOLMPICS 圖號 28 已關閉為 56×57 MSB-first EGA AND-mask；`sub_1BD17` 證實 bit 1
   保留背景、bit 0 清除後覆寫。它不是獨立彩圖，其餘 82 個 payload 仍未知。
+- WEAPPICS 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask：`sub_18F3A` 由裝備欄位、
+  六值 selector 基表與 family 5 的 variant 2／3 交換規則產生偶數圖號；28 組尺寸、
+  像素數與透明棋盤接觸表全部吻合。family／variant 只是導覽標籤，尚未推定遊戲內分類名稱。
 - MISCPICS 六筆已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA 彩圖；
   image 2 是唯一一-byte、全程未引用的非圖片 placeholder，不產生 PNG。
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
@@ -87,6 +90,8 @@ KOLTOWN ENDPICS 全七張及 KOLBOOK BOOKPICS 全 14 張，已由 IDA consumer �
 AWD1PICS 全 24 筆已關閉為 24×21 任務勳章圖示。
 SHLDPICS.0 八筆已關閉為四組彩圖／AND-mask 盾牌，並與無副檔名 SHLDPICS 記錄表分流。
 HANDPICS.0 全 24 筆已關閉為六個 renderer class×兩個位置的 12 組手部彩圖／AND-mask。
+WEAPPICS.0 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask，selector、尺寸與位置表均有
+IDA 9.4 安全摘要，28 張 ignored PNG 已用棋盤接觸表重驗。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
 顯示 theme 交付範圍仍等待使用者決定；不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。

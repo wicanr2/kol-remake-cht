@@ -696,3 +696,23 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
 `8067fa1f…d88b`、`ddd7637a…ce18`；兩輪 12 張 PNG、接觸表與摘要也逐 byte 相同，
 摘要／接觸表 SHA-256 為 `a180983f…1b03`、`6ed86cb0…75b2`。SPEC-002 維持 DRAFT。
+
+## RE-023：WEAPPICS.0 全 28 組角色武器 sprite
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4、重建 unpacked MZ
+  linear EA。第一版探針把 `0x17ea` 猜成 `weap`，實際 bytes 是 `%s%s\0`，因此失敗即關閉
+  且未產生摘要；回查指令後修正為 DGROUP `0x0609` 的 `weap\0` token 加 active renderer
+  suffix，保留這項勘誤而不把舊假設藏起來。
+- `sub_18F3A:0x19303..0x19415` 由角色裝備欄位算出 family、variant 與偶數 selector；
+  六值基表為 `[0,10,14,28,38,42]`，family 5 的 variant 2／3 另有交換。這些名稱只作
+  導覽；遊戲內武器分類名稱與各 family 合法 variant 範圍未由本切片宣稱。
+- 56 筆完整配成 `[selector,selector+1]` 的 28 組彩圖／AND-mask。DGROUP `0x0402`
+  幾何表逐組固定 48–192×5–63 pixels；二階 RLE 彩圖、MSB-first mask 與一-byte 非像素尾端
+  全部吻合。六個 renderer class 的 28 組相對位置表亦收進安全摘要。
+- 28 張 RGBA PNG 依 `sub_1BD17` 使用 `alpha=1-mask`；4×7 棋盤接觸表顯示弓、刃器、斧、
+  長柄武器、錘與連枷，透明輪廓連續，未見旋轉、pair-order、plane-order 或裁切錯誤。
+- 兩個獨立全新 IDA DB 的 safe／private JSON 均逐 byte 相同，SHA-256 分別為
+  `ea84a195…4831`、`fa282fe0…17f9`；兩輪 28 張 PNG、接觸表與視覺摘要也逐 byte 相同，
+  摘要／接觸表 SHA-256 為 `f3f48278…f9fb`／`9af11e5a…7346`。
+- 新增可重生 IDA／PNG 探針與安全摘要；SPEC-002 只新增此窄分支，仍為 DRAFT，未接
+  production importer 或 Go／Ebitengine runtime。
