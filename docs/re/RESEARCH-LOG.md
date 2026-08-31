@@ -120,3 +120,43 @@ RE-002 先前的 appended payload／overlay 候選已被推翻，訂正為 DOS E
 entry probe 又經兩次失敗即關閉訂正：先修 `generate_disasm_line` 所屬 module，再修 MZ
 last-page／pages 的 offset；最終輸出以 `trailing_bytes=81`、尾端全 `0x1A`、128 entry bytes
 及輸入 SHA-256 作硬閘。
+
+## RE-003：KOLTOWN EXEPACK 與 unpacked derivative
+
+### 問題
+
+Stage 2 是否為已知 packer？能否建立具 relocation、真正入口及 IDA 函式圖的研究映像？
+
+### 固定證據
+
+- 原始輸入：`KOLTOWN.EXE` SHA-256 `c2442c…b221`。
+- IDA：9.4 locked-v1；packed 位址空間。
+- Stage 2：packed EA `0x2f548..0x2f627`，104 instructions、12 direct xrefs。
+- Marker：stub base `+0x117` 的 `Packed file is corrupt`。
+- 解壓命令：`0xB0/0xB1` fill、`0xB2/0xB3` copy、low bit 是 last-block flag。
+- Relocation：stub offset `0x12d` 起的 16-section table；逐項加 load segment。
+- Final transfer：`CS:IP=1b8f:001c`，`SS:SP=2b48:07d0`。
+
+上述 marker、資料格式、控制流及成功 consumer 共同證實 Microsoft EXEPACK；精確工具版本
+未知。安全摘要見 `ida-fingerprints/KOLTOWN-stage2-summary.json`；含完整 bytes／disassembly
+的 private JSON 只留本機 ignored。
+
+### 解包與 IDA consumer
+
+沿用既有 CC0 `unexepack.c`，來源 SHA-256 `0e1da11a…b03c`，在 GCC 13 容器原樣編譯。
+輸出 derivative SHA-256 `01f6f9a9…d1d2`、138,528 bytes、2,281 relocations。IDA 9.4
+重載入口為 unpacked EA `0x2b90c`；手動建立入口函式後辨識 337 functions，入口函式
+`0x2b90c..0x2b9af` 有 63 instructions／7 call sites。
+
+### 結論與 remake mapping
+
+- Packer：Microsoft EXEPACK，`已證實`；版本 `未知`。
+- Unpacked derivative：可作後續 IDA xref／函式邊界 oracle，仍待 SPEC-001 的 runtime
+  memory 三點核對與 garbage-byte consumer gate，故 spec 保持 DRAFT。
+- Remake 不移植 EXEPACK／DOS relocation／compiler startup；只使用它們抵達產品程式。
+- 未達 READY 前不建立玩法 implementation。
+
+### 勘誤
+
+先前把 `KOLTOWN` 81-byte 尾端列為 appended payload／overlay 候選；已由全 `0x1A` 原始
+bytes 推翻，改為 DOS EOF padding。先前「packer 未知」也由本節證據升級為已證實 EXEPACK。

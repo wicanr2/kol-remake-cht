@@ -42,3 +42,22 @@
   該檔精確加入 `.gitignore`，GitHub 只保存工具、雜湊、metadata 與不含 payload 的摘要。
 - 提交／推送：安全版本提交 `c6424fe` 已推送至 private `main`；遠端 visibility 複核為
   `PRIVATE`。原始 bytes JSON 仍只在本機且為 ignored。
+
+## 2026-08-31：KOLTOWN EXEPACK 與 RE 知識庫
+
+- 範圍：沿 stage 1 far-transfer 建立 stage 2 control flow；辨識 packer、重建研究用
+  unpacked derivative，並依使用者指示先建立 RE 知識庫與 DRAFT spec。
+- IDA 證據：stage 2 source packed EA `0x2f548..0x2f627` 共 104 instructions／12 direct
+  xrefs；marker `Packed file is corrupt`、B0/B1 fill、B2/B3 copy、16-section relocation
+  與 final transfer 共同證實 Microsoft EXEPACK，精確版本未知。
+- 解包：沿用 `/home/anr2/openkb/openkb-code/src/tools/unexepack.c`（CC0，SHA-256
+  `0e1da11a…b03c`），GCC 13 原樣編譯。`-Werror` 因舊式 warnings 失敗後，保留
+  `-Wall -Wextra` warnings、不修改上游，產生 derivative `01f6f9a9…d1d2`。
+- 獨立驗證：IDA 9.4 重載後 unpacked entry EA `0x2b90c`；強制建立入口函式得到 63
+  instructions、7 call sites，整個 DB 辨識 337 functions。
+- 權利邊界：解包 EXE、`.i64`、含 bytes JSON 只存本機 ignored；Git 只保存 safe summary。
+- 文件：新增 `docs/re/` 知識庫索引、build／address-space／toolchain 台帳與 SPEC-001 DRAFT。
+- 下一閘門：DOS runtime memory 三點核對與 garbage-byte consumer 審查；未 READY 不實作。
+- 驗證／清理：5 支 Python 工具語法通過；safe summary 不含 instruction bytes／disassembly；
+  本機 unpacked EXE／`.i64` 存在且由 UID 1000 擁有。本輪 `/tmp/kol-stage2-*` 與 pycache
+  已刪除，無遺留 IDA／GCC 容器。

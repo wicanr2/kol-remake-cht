@@ -6,7 +6,7 @@
 
 | 分類 | 狀態 | 目前證據／限制 |
 |---|---|---|
-| remake | 尚未開始 | 尚無 Go module、runtime、抽取器或測試 |
+| remake | 尚未開始 | RE 知識庫已建立；SPEC-001 DRAFT，尚未授權 Go implementation |
 | 原版 oracle | build 已固定 | ZIP 與全部項目逐檔雜湊已固定；發行來源／1998 timestamp 成因未知 |
 | 玩家觀點 | 起源資料完成 | 魔旅士繁中個人心得＋《CRPG 通鑑》中文長篇評介已進 README |
 | 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
@@ -42,7 +42,8 @@
 
 ## M2：說明書繁體中文化
 
-- [ ] 記錄說明書與參考卡 SHA-256、頁數、頁面尺寸及 OCR／擷取工具版本。
+- [x] 記錄說明書與參考卡 SHA-256、頁數、頁面尺寸及 metadata 擷取工具版本；OCR 工具
+  版本待正式文字擷取時記錄。
 - [ ] 建立 `docs/manual/README.md`、章節檔、逐頁原文定位表與 `glossary.md`。
 - [ ] 逐頁 OCR／文字擷取、翻譯、人工校對；保留表格、圖說、頁碼與未確定標記。
 - [ ] 讓規則 spec 連回說明書頁碼；說明書未涵蓋的邊界行為不得自行推定。
@@ -96,6 +97,6 @@
 
 ## 下一個唯一工作
 
-使用 IDA Pro 9.4 沿 `KOLTOWN.EXE` entry 的 far-transfer 目標建立第二階段 code，辨識
-真正入口、relocation／解包完成狀態與 packer 家族。不要把線性解碼冒充完整控制流，也
-不要在核心 executable 載入方式釐清前開始玩法逆向。
+完成 `docs/spec/001-original-oracle-preparation.md` 的兩個 DRAFT gate：用獨立 DOS 原版
+runtime memory oracle 核對三個 unpacked offset，並檢查解包器 garbage-byte 差異是否會
+進入有效 consumer。SPEC-001 未升 READY 前不得開始玩法 spec 或 Go implementation。

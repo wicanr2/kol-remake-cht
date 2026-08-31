@@ -7,7 +7,8 @@
 - 本專案是 *Knights of Legend* 的繁體中文乾淨重寫，正式 runtime 使用 Go／Ebitengine、
   PNG 圖像與 Ogg Vorbis 音訊。
 - GitHub `wicanr2/kol-remake-cht` 已建立為 private；原版與衍生素材不得提交。
-- remake 尚未開始。現階段是 M1「鎖定原版與研究來源」，不能宣稱可啟動或可玩。
+- remake 尚未開始。RE 知識庫已建立，SPEC-001 仍為 DRAFT；在 spec 升 READY 前不能
+  宣稱可啟動、可玩或開始 production implementation。
 - `Knights-of-legend.zip` 已在唯讀容器中通過 ZIP CRC 檢查，共 76 個中央目錄項目；可見
   6 個 MZ executable、安裝批次檔、城鎮／角色／物品資料及多組 `*PICS` 圖像候選。
 - ZIP 多數遊戲檔時間為 1989，但 `KOLTOWN.EXE`、`CHARDATA`、`CHARPICS`、`SHLDPICS`、
@@ -17,9 +18,12 @@
   為 16-bit MS-DOS EXE；`KOL`、`KOLBOOK`、`MAKEMODE`、`TITLE` 出現同一個 Microsoft
   Quick C／MSC 5.1 runtime FLIRT 候選，這只證實可套用的 library signature 候選，不能
   鎖定精確 compiler 版本。`TANDYPIN` 尚未辨識函式，仍屬未知。
-- `KOLTOWN` entry 已證實會把 `0x131f` bytes 由高位址向低位址複製到另一 segment，隨後
-  `retf` 至新 segment 的 `IP=0x0038`；這是自我重定位／解包前置 stub 的強推論。檔案相對
+- `KOLTOWN` entry 已證實會由區塊尾端向前迭代，把 `0x131f` bytes 搬到較高的重疊
+  segment，隨後 `retf` 至新 segment 的 `IP=0x0038`；這是 EXEPACK 前置搬移。檔案相對
   MZ 宣告長度多出的 81 bytes 已證實全為 `0x1A`，屬 DOS EOF padding，不是 overlay payload。
+- `KOLTOWN` 已證實使用 Microsoft EXEPACK；精確版本未知。以固定 SHA-256 的 CC0
+  `unexepack.c` 產生本機 derivative `01f6f9…d1d2`，IDA 9.4 在 unpacked EA `0x2b90c`
+  建立真正入口後辨識 337 個函式。解包 EXE、`.i64` 與完整 disassembly 僅留本機 ignored。
 - 魔旅士 2010-04-16 的玩家心得與《CRPG 通鑑》中文版已進入 README；只作專案起源，
   不作玩法 oracle。
 
@@ -40,11 +44,13 @@
 - 唯一待辦：`WORKLIST.md`
 - 工作歷程：`WORKLOG.md`
 - 研究證據：`docs/re/RESEARCH-LOG.md`
+- RE 知識庫索引：`docs/re/README.md`
 - 重製計畫：`REMAKE-PLAN.md`
 - 驗證矩陣：`docs/verification/VERIFICATION-MATRIX.md`
 - 交接：`HANDOFF.md`
 
 ## 下一個唯一工作
 
-在 IDA 一次性 DB 中沿 `KOLTOWN` 的 far-transfer 目標建立第二階段 code，辨識 relocation／
-解壓完成後的真正入口與 packer 家族；不得把目前 32 條線性解碼當成完整控制流。
+關閉 SPEC-001 的兩個 DRAFT gate：以獨立原版執行／記憶體 oracle 核對至少三個 unpacked
+offset，並確認 CC0 解包器已知 garbage-byte 差異不進入 code、relocation 或玩家資料
+consumer。未升 READY 前不開始玩法 spec 或 Go 實作。

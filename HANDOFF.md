@@ -13,7 +13,8 @@
 - PDF 頁數／尺寸與 JPEG 尺寸已記錄。
 - 六個 executable 已由 IDA Pro 9.4 匯出第一層指紋；四檔有 Microsoft runtime signature
   候選，`KOLTOWN`／`TANDYPIN` 仍未知。
-- `KOLTOWN` entry 搬移／far-transfer 已有原始 bytes 收據；packer 與第二階段入口未知。
+- RE 知識庫已建立；KOLTOWN 的 Microsoft EXEPACK、真正入口與 337-function unpacked IDA
+  derivative 已固定。SPEC-001 仍是 DRAFT，不授權 implementation。
 
 ## 證據入口
 
@@ -28,7 +29,7 @@
 
 | 優先 | 類型 | 工作 | 下一個精確動作 | 阻塞 |
 |---|---|---|---|---|
-| 1 | reverse engineering | `KOLTOWN` 第二階段 | 沿 far-transfer 目標建立 code，辨識真正入口／packer | 無 |
+| 1 | original oracle | SPEC-001 runtime gate | DOS runtime memory 核對三個 unpacked offset | 尚未建立 KOL 專用 DOSBox probe |
 | 3 | documentation | 中文手冊 | 建頁面索引、OCR 草稿與術語表 | M1 後開始 |
 
 ## 執行中程序與暫存物
@@ -41,3 +42,4 @@
 - 不要因檔名含 `PICS` 就宣稱圖像格式已解碼。
 - 不要在 executable 身分固定前開始寫玩法或 Go runtime。
 - 不要把 `KOLTOWN-entry.json` 的線性 32 條指令當成完整控制流。
+- 不要因 unpacked IDA 已有 337 函式就開始實作；SPEC-001 仍是 DRAFT。

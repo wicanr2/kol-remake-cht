@@ -1,0 +1,41 @@
+{
+  "schema": "kol-ida-koltown-stage2-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN.EXE",
+  "input_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+  "address_space": "IDA linear effective address; runtime relocated EA shown separately",
+  "stage1_entry_ea": "0x2f522",
+  "source_stub_base_ea": "0x2f510",
+  "copy_length": 4895,
+  "copy_source_range": [
+    "0x2f510",
+    "0x3082f"
+  ],
+  "copy_destination_range": [
+    "0x2f920",
+    "0x30c3f"
+  ],
+  "mapping_delta": "0x410",
+  "source_stage2_ea": "0x2f548",
+  "runtime_stage2_ea": "0x2f958",
+  "decompressed_entry": {
+    "relative_cs": "0x1b8f",
+    "ip": "0x1c",
+    "ida_linear_ea": "0x2b90c"
+  },
+  "decompressed_stack": {
+    "relative_ss": "0x2b48",
+    "sp": "0x7d0"
+  },
+  "packer_error_marker": "Packed file is corrupt",
+  "decompression_command_families": {
+    "0xb0_0xb1": "repeat one byte for count",
+    "0xb2_0xb3": "copy count bytes",
+    "low_bit": "last-block flag"
+  },
+  "relocation_table_source_offset": "0x12d",
+  "stage2_function_start_ea": "0x2f548",
+  "stage2_function_end_ea": "0x2f627",
+  "stage2_instruction_count": 104,
+  "stage2_code_xref_count": 12
+}

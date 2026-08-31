@@ -1,0 +1,14 @@
+{
+  "schema": "kol-ida-unpacked-entry-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "input_derivation": "CC0 unexepack source SHA-256 0e1da11a... applied to fixed KOLTOWN.EXE",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "entry_ea": "0x2b90c",
+  "function_start_ea": "0x2b90c",
+  "function_end_ea": "0x2b9af",
+  "instruction_count": 63,
+  "direct_call_site_count": 7,
+  "database_function_count_after_probe": 337
+}
