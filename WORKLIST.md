@@ -1,0 +1,98 @@
+# 《武士傳說》重製工作清單
+
+更新日期：2026-08-31
+
+## 目前狀態
+
+| 分類 | 狀態 | 目前證據／限制 |
+|---|---|---|
+| remake | 尚未開始 | 尚無 Go module、runtime、抽取器或測試 |
+| 原版 oracle | 待盤點 | 根目錄有 ZIP、英文說明書、參考卡、地圖與盒圖；版本與雜湊尚未固定 |
+| 玩家觀點 | 部分完成 | 已確認魔旅士原文與《CRPG 通鑑》中文版評介；仍需擴充其他繁中個人心得 |
+| 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
+| GitHub | 待建立 | 預定 private：`wicanr2/kol-remake-cht` |
+
+## M0：專案建立
+
+- [x] 撰寫 `AGENTS.md`，固定 Docker-only、證據、Go／Ebitengine、PNG-only runtime、
+  OGG、中文說明書、授權與 `dist-all/` 契約。
+- [x] 建立本工作清單與 README 起源骨架。
+- [ ] 初始化 Git，確認原版封裝與衍生素材由 `.gitignore` 排除。
+- [x] 建立 `wicanr2/kol-remake-cht` private GitHub 儲存庫並設定 `origin`；待推送後複核 visibility。
+- [ ] 提交並推送專案骨架；在 `WORKLOG.md` 記錄 commit、push 與 Docker 清理狀態。
+
+完成條件：private 遠端可查、工作樹無誤納原版素材、`AGENTS.md` 與本清單已推送。
+
+## M1：鎖定原版與研究來源
+
+- [ ] 在唯讀 Docker 容器中列出 ZIP 內容，記錄全部輸入大小、SHA-256、版本、平台與來源。
+- [ ] 確認 `Knights-of-legend.zip` 中的 DOS executable、資料檔、圖像與音訊驅動；原始檔
+  不寫回、不提交。
+- [ ] 建立 `CONTEXT.md`、`WORKLOG.md`、`docs/re/RESEARCH-LOG.md`、`docs/spec/` 與
+  `docs/verification/`。
+- [x] 確認魔旅士 2010-04-16〈Knights of Legend 武士傳說〉原文，README 已記錄直接
+  連結、作者、日期與摘要。
+- [ ] 擴充華人玩家來源，至少涵蓋一篇繁體中文個人心得與一篇中文長篇評介；逐篇記錄
+  作者、網址、日期、摘要及其是玩家觀點而非規則 oracle 的限制。
+- [ ] 更新 README「專案起源」，只納入可直接回查的來源，不杜撰魔旅士連結。
+
+完成條件：原版身分固定；README 每項起源敘述可回查；找不到的來源有查詢紀錄。
+
+## M2：說明書繁體中文化
+
+- [ ] 記錄說明書與參考卡 SHA-256、頁數、頁面尺寸及 OCR／擷取工具版本。
+- [ ] 建立 `docs/manual/README.md`、章節檔、逐頁原文定位表與 `glossary.md`。
+- [ ] 逐頁 OCR／文字擷取、翻譯、人工校對；保留表格、圖說、頁碼與未確定標記。
+- [ ] 讓規則 spec 連回說明書頁碼；說明書未涵蓋的邊界行為不得自行推定。
+- [ ] 驗證 Markdown 連結、表格、圖片權利分類與完整章節清冊。
+
+完成條件：全書與參考卡都有可回查的繁體中文 Markdown；零個未標示的 OCR／專名疑點。
+
+## M3：可重現素材抽取
+
+- [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
+- [ ] 寫唯讀輸入的資產 inventory 與格式規格，驗證 count、offset、bounds、palette。
+- [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。
+- [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。
+- [ ] 建立 OGG 轉換管線與 catalog；驗證 codec、時長、非靜音、峰值、loop 與人耳聆聽。
+- [ ] 建立測試，保證 remake runtime 只會讀 PNG 與 OGG，禁止讀原版 archive／EXE。
+- [ ] 分離本機衍生素材與可公開輸出；Git／release deny-list 預設失敗即關閉。
+
+完成條件：從固定雜湊原版可重生 PNG／OGG；runtime 格式守門全綠；權利分類齊全。
+
+## M4：Go／Ebitengine 垂直切片
+
+- [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
+- [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。
+- [ ] 選一條最小玩家鏈：真實 PNG → typed data → 世界／城鎮一個互動 → UI → 存讀檔。
+- [ ] 對應原版同狀態畫面與操作，記錄差異及證據等級。
+- [ ] 建立 Linux／Windows／macOS 可重現編譯與最小啟動 smoke；真機驗收另列。
+
+完成條件：不靠 debug 入口可啟動、操作、存檔與重載；沒有 runtime 原版格式依賴。
+
+## M5：戰鬥、任務與正常玩家路徑
+
+- [ ] 以 IDA Pro 9.4、說明書與原版實驗建立戰鬥規劃／先見／疲勞／傷害的 DRAFT spec。
+- [ ] 由使用者決定是否保留原版繁複節奏、提供可選加速，或另作現代化模式；決策前只做
+  可丟棄 prototype，不改正式規則。
+- [ ] 每份玩法 spec 經證據審查升 READY 後才實作，完成同狀態驗證再標 CONFORMED。
+- [ ] 貫通隊伍建立、城鎮、世界旅行、隨機遭遇、任務戰場、物品、訓練與勝負流程。
+- [ ] 驗證存檔可跨事件與戰鬥階段恢復，避免重複付款、任務或戰鬥結算。
+
+完成條件：正常玩家路徑不用 direct-entry 可走到預定結局；核心規則宣稱都有收據。
+
+## M6：中文 UI、驗收與交付
+
+- [ ] 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy。
+- [ ] 完成最長繁中內容的視覺回歸、正常路徑截圖與輸入測試。
+- [ ] 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣。
+- [ ] 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}`。
+- [ ] 驗證每包啟動、manifest、SHA-256、授權、素材 deny-list、存檔位置與平台／架構。
+- [ ] 真機驗收 Windows／macOS；Linux 容器 smoke 不冒充真機結果。
+
+完成條件：交付包、證據、權利分類與已知限制一致；本專案 Docker 容器已清理。
+
+## 下一個唯一工作
+
+完成 M0：建立 private GitHub 儲存庫、提交並推送目前骨架，再以唯讀容器執行 M1 的原版
+清冊與雜湊。不要在原版身分固定前開始解碼或建立 Go runtime。
