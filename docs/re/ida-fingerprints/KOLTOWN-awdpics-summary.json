@@ -1,0 +1,429 @@
+{
+  "schema": "kol-ida-koltown-awdpics-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "consumer": {
+    "original_name": "sub_168F8",
+    "start_ea": "0x168f8",
+    "end_ea": "0x16986"
+  },
+  "caller_count": 1,
+  "callers": [
+    {
+      "call_ea": "0x168a8",
+      "caller": {
+        "original_name": "sub_167D9",
+        "start_ea": "0x167d9",
+        "end_ea": "0x168f8"
+      },
+      "preceding_instructions": [
+        {
+          "ea": "0x16883",
+          "bytes": "f7f9",
+          "disassembly": "idiv    cx",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x16885",
+          "bytes": "b92300",
+          "disassembly": "mov     cx, 23h ; '#'",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x16888",
+          "bytes": "f7e9",
+          "disassembly": "imul    cx",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x1688a",
+          "bytes": "053c00",
+          "disassembly": "add     ax, 3Ch ; '<'",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x1688d",
+          "bytes": "50",
+          "disassembly": "push    ax",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x1688e",
+          "bytes": "b90800",
+          "disassembly": "mov     cx, 8",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x16891",
+          "bytes": "8b46f0",
+          "disassembly": "mov     ax, [bp+var_10]",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x16894",
+          "bytes": "99",
+          "disassembly": "cwd",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x16895",
+          "bytes": "f7f9",
+          "disassembly": "idiv    cx",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x16897",
+          "bytes": "8bc2",
+          "disassembly": "mov     ax, dx",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x16899",
+          "bytes": "b90500",
+          "disassembly": "mov     cx, 5",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x1689c",
+          "bytes": "f7e9",
+          "disassembly": "imul    cx",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x1689e",
+          "bytes": "050100",
+          "disassembly": "add     ax, 1",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x168a1",
+          "bytes": "50",
+          "disassembly": "push    ax",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x168a2",
+          "bytes": "ff76fe",
+          "disassembly": "push    [bp+var_2]",
+          "code_refs_to": [],
+          "code_refs_from": []
+        },
+        {
+          "ea": "0x168a5",
+          "bytes": "ff76fa",
+          "disassembly": "push    [bp+var_6]",
+          "code_refs_to": [],
+          "code_refs_from": []
+        }
+      ]
+    }
+  ],
+  "consumer_direct_calls": [
+    {
+      "instruction": {
+        "ea": "0x1691d",
+        "bytes": "9a0a1b8f2b",
+        "disassembly": "call    sub_2D3FA",
+        "code_refs_to": [],
+        "code_refs_from": [
+          "0x2d3fa"
+        ]
+      },
+      "targets": [
+        {
+          "original_name": "sub_2D3FA",
+          "start_ea": "0x2d3fa",
+          "end_ea": "0x2d454"
+        }
+      ]
+    },
+    {
+      "instruction": {
+        "ea": "0x16969",
+        "bytes": "9a0d1dd919",
+        "disassembly": "call    sub_1BA9D",
+        "code_refs_to": [],
+        "code_refs_from": [
+          "0x1ba9d"
+        ]
+      },
+      "targets": [
+        {
+          "original_name": "sub_1BA9D",
+          "start_ea": "0x1ba9d",
+          "end_ea": "0x1baff"
+        }
+      ]
+    },
+    {
+      "instruction": {
+        "ea": "0x16978",
+        "bytes": "9a9c0f0010",
+        "disassembly": "call    sub_10F9C",
+        "code_refs_to": [],
+        "code_refs_from": [
+          "0x10f9c"
+        ]
+      },
+      "targets": [
+        {
+          "original_name": "sub_10F9C",
+          "start_ea": "0x10f9c",
+          "end_ea": "0x1103f"
+        }
+      ]
+    }
+  ],
+  "archive_contract": {
+    "archive_family": "AWD%dPICS",
+    "bundled_archive": "AWD1PICS",
+    "image_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "width_pixels": 24,
+    "height_pixels": 21,
+    "pixel_format": "4-bit EGA direct-blit",
+    "transparency": "none",
+    "confidence": "confirmed"
+  },
+  "index_derivation": "outer 0..5 and inner 0..3 produce 4*outer+inner = 0..23",
+  "filename_number_derivation": "caller slot 0..4 becomes AWD1..AWD5",
+  "contract_instructions": [
+    {
+      "ea": "0x16839",
+      "bytes": "c746fc0000",
+      "disassembly": "mov     [bp+var_4], 0",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16851",
+      "bytes": "c746f20000",
+      "disassembly": "mov     [bp+var_E], 0",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1685c",
+      "bytes": "8b56fc",
+      "disassembly": "mov     dx, [bp+var_4]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1685f",
+      "bytes": "d1e2",
+      "disassembly": "shl     dx, 1",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16861",
+      "bytes": "d1e2",
+      "disassembly": "shl     dx, 1",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16863",
+      "bytes": "03d0",
+      "disassembly": "add     dx, ax",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168ba",
+      "bytes": "8346f201",
+      "disassembly": "add     [bp+var_E], 1",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168be",
+      "bytes": "837ef204",
+      "disassembly": "cmp     [bp+var_E], 4",
+      "code_refs_to": [
+        "0x16856"
+      ],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168c7",
+      "bytes": "8346fc01",
+      "disassembly": "add     [bp+var_4], 1",
+      "code_refs_to": [
+        "0x168c2"
+      ],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168cb",
+      "bytes": "837efc06",
+      "disassembly": "cmp     [bp+var_4], 6",
+      "code_refs_to": [
+        "0x1683e"
+      ],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168a2",
+      "bytes": "ff76fe",
+      "disassembly": "push    [bp+var_2]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168a5",
+      "bytes": "ff76fa",
+      "disassembly": "push    [bp+var_6]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168a8",
+      "bytes": "9af8680010",
+      "disassembly": "call    sub_168F8",
+      "code_refs_to": [],
+      "code_refs_from": [
+        "0x168f8"
+      ]
+    },
+    {
+      "ea": "0x168d9",
+      "bytes": "8346fe01",
+      "disassembly": "add     [bp+var_2], 1",
+      "code_refs_to": [
+        "0x16819"
+      ],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x168dd",
+      "bytes": "837efe05",
+      "disassembly": "cmp     [bp+var_2], 5",
+      "code_refs_to": [
+        "0x16801"
+      ],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1690e",
+      "bytes": "8b4608",
+      "disassembly": "mov     ax, [bp+arg_2]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16911",
+      "bytes": "050100",
+      "disassembly": "add     ax, 1",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16925",
+      "bytes": "8b460a",
+      "disassembly": "mov     ax, [bp+arg_4]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16931",
+      "bytes": "8b460a",
+      "disassembly": "mov     ax, [bp+arg_4]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16934",
+      "bytes": "050300",
+      "disassembly": "add     ax, 3",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1692b",
+      "bytes": "8b460c",
+      "disassembly": "mov     ax, [bp+arg_6]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1693a",
+      "bytes": "8b460c",
+      "disassembly": "mov     ax, [bp+arg_6]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1693d",
+      "bytes": "051500",
+      "disassembly": "add     ax, 15h",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16971",
+      "bytes": "b8502d",
+      "disassembly": "mov     ax, 2D50h",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16975",
+      "bytes": "ff7606",
+      "disassembly": "push    [bp+arg_0]",
+      "code_refs_to": [],
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x16978",
+      "bytes": "9a9c0f0010",
+      "disassembly": "call    sub_10F9C",
+      "code_refs_to": [],
+      "code_refs_from": [
+        "0x10f9c"
+      ]
+    }
+  ],
+  "evidence_note": "Original names, linear EAs, bytes and disassembly are retained; no semantic rename is evidence."
+}

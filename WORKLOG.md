@@ -611,3 +611,16 @@
   `11ef4d0e…bc35`、`638bce39…ae4a`、`7bb4e514…bed9`。
 - 新增可重生 IDA 探針、PNG 探針、安全證據摘要與格式規格；SPEC-002 仍為 DRAFT，
   未建立 production importer 或 Go runtime。
+
+## 2026-08-31：AWD1PICS 全 24 張勳章圖示
+
+- `sub_167D9` 以 6×4 迴圈完整產生圖號 0..23，再對五個角色槽的 packed 2-bit
+  狀態判斷是否畫出；`sub_168F8` 固定 24×21 矩形並走共用 EGA direct-blit 管線。
+- 24 筆 payload 均精確展開為 504 個 4-bit indices；接觸表是正向勳章、獎盃、盾牌、
+  戒指與紋章圖示，無鏡像、旋轉、plane 錯排或裁切。中文手冊與參考卡的 `Medal`
+  命令提供獨立語意交叉證據。
+- 兩個全新 IDA DB 的 safe／private JSON，以及兩輪 24 張 PNG、接觸表與摘要均逐 byte
+  相同。safe、private、視覺摘要、接觸表 SHA-256 分別為 `5684459b…df8`、
+  `445767bb…af2`、`8c9ed5fe…b5fe`、`b11f2e05…14d3`。
+- 固定 ZIP 只附 bundled `AWD1PICS`；consumer 會建立 `AWD1..AWD5` 檔名，但未把未出現的
+  其餘角色檔猜成相同資料。SPEC-002 仍為 DRAFT，未接 production importer。

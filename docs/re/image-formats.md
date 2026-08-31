@@ -317,9 +317,17 @@ direct-blit 政策為 `已證實`；RGB 是 mode 0Dh `hardware-spec approximatio
 `(base AND mask) OR overlay`。因此 mask PNG 的像素值是運算資料，不是 alpha。
 六張合成圖目視支持晴空／雲／風暴／雨／雪／夜景的分類（`強推論`）；像素契約與公式為 `已證實`。
 
+### AWD1PICS 勳章圖示
+
+`sub_167D9:0x16839..0x168cb` 以 6×4 迴圈完整消費圖號 0..23；`sub_168F8`
+設定 3 byte-columns×21 scanlines，即 24×21，並透過共用 LZW／二階 RLE／EGA
+direct-blit 管線顯示。24 筆均精確展開為 504 個 0..15 色彩索引，沒有獨立 mask；
+索引 0 不得擅自轉透明。接觸表與手冊 `Medal` 命令交叉支持「角色任務勳章圖示」
+分類（`強推論`）；尺寸、像素、方向與 direct-blit 為 `已證實`。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

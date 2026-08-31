@@ -76,6 +76,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] KOLTOWN 的 `WEATPICS.0` 全 18 筆已證實分為六組 64×62 圖層；每組依序為
   `base_color`、`or_color`、`and_mask`，以 `(base AND mask) OR overlay` 合成。第 3、4 組
   遮罩為四平面 4-bit，其餘為 MSB-first 1-bit；六張合成圖目視支持野外天候／時段背景分類。
+- [x] `AWD1PICS.0` 全 24 筆已證實為 24×21、4-bit EGA、無獨立透明遮罩的 direct-blit
+  圖示；consumer 完整覆蓋 0..23，接觸表與手冊 `Medal` 命令交叉支持任務勳章分類。
 - [x] `TWN0..7PICS` 全域圖號 24 均跨入 `.1`，已證實 town 0 為 192×96、其餘為
   88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
 - [x] `MONPICS.0` 的 64 個 payload 已證實是 32 組「偶數 4-bit EGA 彩圖＋奇數 1-bit
@@ -121,5 +123,7 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 `tools/probe_extract_kolbook_bookpics_png.py` 也僅驗證 BOOKPICS，不是 production importer。
 `tools/probe_extract_koltown_weatpics_png.py` 僅驗證 WEATPICS 圖層與合成契約；
 遮罩 PNG 儲存的是 AND 資料，不是 RGBA 透明度，不得作為獨立美術圖顯示。
+`tools/probe_extract_awdpics_png.py` 僅關閉 bundled `AWD1PICS`；consumer 可建立
+`AWD1..AWD5` 檔名不代表其餘角色檔可以未驗證資料代替。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。

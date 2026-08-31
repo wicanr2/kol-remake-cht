@@ -599,3 +599,29 @@ alpha；runtime 可只讀 PNG，但必須依 manifest role 合成，不得把 ma
 兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
 `11ef4d0e…bc35`、`638bce39…ae4a`；兩輪 18 張圖層 PNG、6 張 composite 與摘要也逐 byte 相同，
 摘要 SHA-256 `7bb4e514…bed9`。SPEC-002 維持 DRAFT，未授權 production importer。
+
+## RE-020：AWD1PICS 全 24 張勳章圖示
+
+### 原版資料流
+
+- 輸入：`KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4，reconstructed
+  unpacked MZ linear EA。安全摘要為 `ida-fingerprints/KOLTOWN-awdpics-summary.json`。
+- `sub_167D9:0x16839..0x168cb` 的 6×4 迴圈以 `4*outer+inner` 完整產生圖號 0..23；
+  `0x168fc..0x168dd` 另遍歷五個角色槽。每個 packed 2-bit 值為 3 時才畫出對應圖示。
+- `sub_168F8:0x16925..0x16940` 將矩形設為 3 byte-columns×21 scanlines，即 24×21；
+  `0x16975..0x16978` 把圖號交給共用 loader `sub_10F9C`，再經 LZW、二階 RLE、
+  四 EGA planes 與 direct blit。
+- 固定 ZIP 只附 `AWD1PICS`；consumer 的角色槽 0..4 會建立 `AWD1..AWD5` 檔名。
+  本切片只證實 bundled `AWD1PICS` 內容，不宣稱其餘四檔與它 byte-identical。
+
+### 格式、視覺與結論
+
+24 個 payload 均精確展開為 `24×21=504` 個 4-bit 色彩索引，無獨立 mask，故索引 0
+也是色彩而不得自動轉透明。8×3 接觸表目視為正向的勳章、獎盃、盾牌、戒指與
+紋章圖示，無鏡像、旋轉、plane 錯排或裁切。中文手冊第 41 頁與 Apple II 參考卡另證實
+`Medal` 命令會顯示角色完成任務贏得的所有勳章。因此像素契約為 `已證實`，
+「角色任務勳章圖示」為具獨立文件交叉支持的 `強推論`。
+
+兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+`5684459b…df8`、`445767bb…af2`；兩輪 24 張 PNG、接觸表與視覺摘要也逐 byte 相同，
+摘要與接觸表 SHA-256 為 `8c9ed5fe…b5fe`、`b11f2e05…14d3`。SPEC-002 維持 DRAFT。

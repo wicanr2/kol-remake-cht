@@ -83,7 +83,8 @@
 
 TITLE 的 SET0／SET1／SET2／FACE 四個 archive 共 24 張、BACKPICS 全 14 張，以及
 KOLTOWN ENDPICS 全七張及 KOLBOOK BOOKPICS 全 14 張，已由 IDA consumer 與 PNG 探針
-完整關閉；KOLTOWN WEATPICS 全 18 筆也已關閉為六組 64×62 天候／時段分層背景。等待使用者決定
+完整關閉；KOLTOWN WEATPICS 全 18 筆也已關閉為六組 64×62 天候／時段分層背景，
+AWD1PICS 全 24 筆已關閉為 24×21 任務勳章圖示。等待使用者決定
 EGA／CGA／Hercules theme 交付範圍；
 不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。

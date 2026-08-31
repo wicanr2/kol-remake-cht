@@ -58,7 +58,7 @@
 - [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
 - [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS 全 archive、TWN index 24、MONPICS、PERPICS、
   MISCPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、KOLMPICS index 28 EGA
-  垂直鏈、WEATPICS 全 18 筆六組分層合成、AWD 固定快照邊界與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
+  垂直鏈、WEATPICS 全 18 筆六組分層合成、AWD1PICS 全 24 張勳章圖示、AWD 固定快照邊界與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
   像素格式尚未完成。
 - [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。
 - [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。

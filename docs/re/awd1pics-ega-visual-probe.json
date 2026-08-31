@@ -1,0 +1,214 @@
+{
+  "schema": "kol-awd1pics-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "summary.json",
+  "ida_summary_sha256": "5684459bb3d09300b1de7fa6351f356197cf40d791798a68776cb7ef4f3c2df8",
+  "status": "mechanically validated all 24 direct-blit 4-bit EGA images; orientation and sequence require human inspection",
+  "human_inspection": "24 upright medal, trophy, shield, ring and other heraldic icons; no rotation, mirroring or plane-order defect observed",
+  "semantic_classification": {
+    "label": "character quest-medal icons",
+    "confidence": "strong inference",
+    "cross_reference": "Traditional Chinese manual page 41 and Apple II reference card Medal command"
+  },
+  "source_payload_count": 24,
+  "png_count": 24,
+  "width_pixels": 24,
+  "height_pixels": 21,
+  "contact_sheet_layout": "8 columns by 3 rows in archive index order",
+  "contact_sheet_sha256": "b11f2e05405075bdbf590bb5c9d85b55e310cc83fd21955709fca1d31c0614d3",
+  "records": [
+    {
+      "image_index": 0,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 5,
+      "pixel_sha256": "63a0538aa25e60dbe019c83b5aeb9c6b053eabc23ccef9c18091410615dd8b77",
+      "png_sha256": "c1bb0db2e97caaeb14b153a09a8671fd67aaaaecdea53eaba59fd5de0a5d5bee"
+    },
+    {
+      "image_index": 1,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 5,
+      "pixel_sha256": "3173ec78ba5c8f51529e2a7671d0bda14c0aff6bf207aedbad56da6ab0718aea",
+      "png_sha256": "f151f089305880fda590a1356f2f8a1e72b534bd9718b8dfc64d71ac86d4515d"
+    },
+    {
+      "image_index": 2,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 5,
+      "pixel_sha256": "04dd3e6c966494ab0303cb40994edd9b701498318c702b0e33bd3eab9c13c838",
+      "png_sha256": "03227eaa08f0082365724ba4e1f28a8bca8380591e8c59690921d8c86f8dd95b"
+    },
+    {
+      "image_index": 3,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 6,
+      "pixel_sha256": "6cc931a8ed04d1bf771de6170186ca8ffe942df29936db2293ba8a69c28e9552",
+      "png_sha256": "5f5e8b058ddb3a9f4eb10449cae7e5ff0fbe23f51b6e233c3919ae63c3d7722c"
+    },
+    {
+      "image_index": 4,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 5,
+      "pixel_sha256": "1fc6b476734894d4ce277f4b686fc64ecc1c4fbf98f43df3f523ed6e5e127f1b",
+      "png_sha256": "33d4fe5560b47e5e23e0b8bab4a0d8e27bd74e78c63681d23ff70cbd9d978885"
+    },
+    {
+      "image_index": 5,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 8,
+      "pixel_sha256": "6cbe90f4b09de77b8210eb9982bb8f1ca6edec5d00a00b6e27f4c57e7e217f2e",
+      "png_sha256": "334a30d01d517985064c75105adad75ae6a38cf29f29f933e05ce9886d8bac83"
+    },
+    {
+      "image_index": 6,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 6,
+      "pixel_sha256": "e587f66bcad2338d93a6b3b477c8cd77d7e8d19276395c383d80179549f4799e",
+      "png_sha256": "37a5ac0fb7358869b255215c336cb61a25392f180b2faa106dede490e1271056"
+    },
+    {
+      "image_index": 7,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 7,
+      "pixel_sha256": "45b7023b4cb31a3edd6d0c755570b58af737c0d164928e1158e7d5070c4b239b",
+      "png_sha256": "c2193bfe56a7c843d6d44e89e5aa75d50fe8bbcea7275eb8e52ebc7db02b299f"
+    },
+    {
+      "image_index": 8,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 4,
+      "pixel_sha256": "7187718acf43db6a7422b830ab49771aacbd5ba3d6b5336d4c12143fbedf85fd",
+      "png_sha256": "01b905469b03568fdf1df329c1739dba0d04e5c805ba93013a1bd9429ab0492a"
+    },
+    {
+      "image_index": 9,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 9,
+      "pixel_sha256": "6ed6349735cc17dadb80253f0e36a07dc5c1c796baf4395472db09f155478990",
+      "png_sha256": "0d9c087e71c40a9dfc13413bb663439e8104540153d48a75133b98405b2ab83b"
+    },
+    {
+      "image_index": 10,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 8,
+      "pixel_sha256": "5b7c5a7bba2079ed8841d6a1d30f461c844b1289465ebf68fd672a7d6a6ee718",
+      "png_sha256": "c91ed31bcfabfcea8d4565fafe8f845964cc252e5df363187d9af8accedd013e"
+    },
+    {
+      "image_index": 11,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 6,
+      "pixel_sha256": "903698fb1b85953b5ed5a3cf4844c49ef1edfbbff598c4d9a64bdb9c1a65fa35",
+      "png_sha256": "e3bdbbb98777066b6481e720b904735e0bf2b830ff953bca9bfd8efd0fb7fa5b"
+    },
+    {
+      "image_index": 12,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 8,
+      "pixel_sha256": "9734f67bc072153223bef0c0a45ed83f00621b36369aae0fb97d035366a35d91",
+      "png_sha256": "b413643aec866c25ed7491af2419a5a59dcde760560f54ec4215792cf065f046"
+    },
+    {
+      "image_index": 13,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 6,
+      "pixel_sha256": "6adf4ea3815c4fc436ebbc950aaa5071a8354be03df42fc9c2e59d920818daee",
+      "png_sha256": "c45eec01b46a645e9472a8d372e4655f247300bc3e4b9c76584d180f1f406584"
+    },
+    {
+      "image_index": 14,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 7,
+      "pixel_sha256": "d3e4e41aa4a40df982ccfe13e8da1c5dead9557b1a2787f669a2e70728687453",
+      "png_sha256": "037bdb2c501cb80dda89f5d772af7b204cbae4d33a4c0737410a6b0b2fc86c16"
+    },
+    {
+      "image_index": 15,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 4,
+      "pixel_sha256": "e6412c89ffb06708d2c5618392f965441cb407a1b80280b2249c314cbfddeabe",
+      "png_sha256": "4e1bd5da76d05e287ce5e6ee74d89ce9eec6e6d2f100a0a4d516a35c8ffbc862"
+    },
+    {
+      "image_index": 16,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 5,
+      "pixel_sha256": "09b2c2ee4f91a07e86fa210ac057abe0b28b08361e3cf205d5d897945732896a",
+      "png_sha256": "8d537777d0b93a18485016ef2938a943123192fa35c3142e9540189efabdd7bf"
+    },
+    {
+      "image_index": 17,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 5,
+      "pixel_sha256": "7e257a931cada19bcc07d1765385da79efa4e837f83adca4729be90be25ba6ca",
+      "png_sha256": "768c9c227d8cdcd1fb7d8b1b093b8732dd167c97342e7573893c0ba7752c7159"
+    },
+    {
+      "image_index": 18,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 8,
+      "pixel_sha256": "46ecb235c29574a30cb64e32d76e1b33c5518304fa81a138c01bf98e65ef4afd",
+      "png_sha256": "d96aecdee0b369f1b21a18e6458c105f679ed14bb4746544d55f0bc7da44bd35"
+    },
+    {
+      "image_index": 19,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 6,
+      "pixel_sha256": "a4a3d3a79f33f18165affeb46c003d98286f737a63f59f7c8d43662f231ad1a9",
+      "png_sha256": "d474fe647b64498cedf04f0e46257302443d45bab08278ab98c436d85b4a682d"
+    },
+    {
+      "image_index": 20,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 6,
+      "pixel_sha256": "4203f26b8e34b68a0fe9044f493814711e63b58c732581356a328166c175e8cd",
+      "png_sha256": "302e95645455f8f8dbc6de5a794b3da4b61557765f3e9084338169216a0e0dd4"
+    },
+    {
+      "image_index": 21,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 8,
+      "pixel_sha256": "a607e62102978b010ad114d32a62d16b4c8e6d2b514e073fd2253a4872facefb",
+      "png_sha256": "f5fe1f89fe9bec167badd26aa4e35561ba46324dc05969b8491926ffec22ea4f"
+    },
+    {
+      "image_index": 22,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 7,
+      "pixel_sha256": "a149736a52681f868fb1e87b892fbeeab0c94e5889e401a496c785a3563a58ce",
+      "png_sha256": "cb4ebbe0bd6fe64029b4ec1e6aaed131aefa3226431b27a3b9d10ee8c3455915"
+    },
+    {
+      "image_index": 23,
+      "width_pixels": 24,
+      "height_pixels": 21,
+      "color_count": 4,
+      "pixel_sha256": "703923e5c56c4c6e6352bf7cb7ff34209ba48b87498c0388c362029c861bd66f",
+      "png_sha256": "3a13a3a5f9a5d41183a79736321c35a73025ebae7e98ae102568f956b285f273"
+    }
+  ]
+}
