@@ -24,6 +24,10 @@
 - 接受圖像是唯一 commit 點。角色資料與其 PNG 圖像引用必須同一交易成功；任一寫入失敗
   即全部不保存。
 - 角色儲存區上限 16 名；開始遊戲的隊伍上限六名。這兩個限制不得混成同一容量。
+- 原版已證實的返回關係為：種族→名字、secondary→種族、職業→上一個適用選擇層、
+  屬性→職業、圖像→commit 前的職業流程。空名不得前進；滿 16 槽時不得開始修改記錄。
+- 相容流程的圖像 selector 固定為 80 筆，方向鍵循環、Return 接受；typed PNG 引用與原版
+  selector 的對照仍須在 READY 前固定。
 - remake runtime 只讀 typed data、PNG 與 OGG；不得在 runtime 解析 `CHARDATA`、
   `CHARPICS` 或任何原版 executable。
 
@@ -56,7 +60,8 @@ Unicode 名字規則與角色圖像引用尚未完成共同決策，本 DRAFT �
 ## READY gate
 
 1. [x] 起始金冠、武器與武器技能已關閉；writer coverage 排除其他職業衍生起始資料。
-2. 以正常 DOS UI oracle 抽測名字邊界、每層 ESC、reroll、slot full 與保存 commit。
+2. 靜態控制流已關閉空名、每層取消、reroll、80 張圖像循環與 slot full 不進 writer；仍須
+   以正常 DOS UI oracle 抽測 16 字元／重名、畫面返回、slot full 與保存 commit。
 3. [x] 最小 writer 欄位索引與 KOLTOWN 必要 reader 已交叉查核；未知 offset 不猜補。
 4. 由使用者決定繁中名字長度／重名 policy 與是否保留原版性別限制；決策前不現代化。
 5. 固定 remake typed schema、migration 與 deterministic RNG 契約。

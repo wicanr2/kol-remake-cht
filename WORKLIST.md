@@ -93,6 +93,8 @@
   解釋男女精靈共名及四對矮人記錄逐 byte 相同。
 - [x] 關閉 39 筆起始金冠、主要／次要武器、武器技能與最小 writer 欄位索引。
 - [x] 查核必要 KOLTOWN reader，並以完整 writer coverage 排除其他職業衍生起始資料。
+- [x] 以雙新建 IDA DB 固定空名、各層取消、reroll、80 張肖像循環與滿槽不進 writer；
+  保留正常 DOS UI oracle 為獨立 gate。
 - [ ] 完成正常 DOS UI 名字、ESC、reroll、slot-full 與保存邊界 oracle；再審查 SPEC-005。
 - [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
 - [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。

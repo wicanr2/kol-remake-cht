@@ -1,0 +1,373 @@
+{
+  "schema": "kol-ida-kolbook-character-ui-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLBOOK.EXE",
+  "input_sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+  "address_space": "IDA linear effective address for KOLBOOK loaded MZ",
+  "instruction_checks": [
+    {
+      "ea": "0x11907",
+      "bytes": "b81000",
+      "disassembly": "mov     ax, 10h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11915",
+      "bytes": "a05014",
+      "disassembly": "mov     al, byte_1A690",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1194d",
+      "bytes": "833e500000",
+      "disassembly": "cmp     word_19290, 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11957",
+      "bytes": "e9170d",
+      "disassembly": "jmp     loc_12671",
+      "code_refs_from": [
+        "0x12671"
+      ]
+    },
+    {
+      "ea": "0x119a4",
+      "bytes": "e81229",
+      "disassembly": "call    sub_142B9",
+      "code_refs_from": [
+        "0x142b9"
+      ]
+    },
+    {
+      "ea": "0x119ad",
+      "bytes": "833e500000",
+      "disassembly": "cmp     word_19290, 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x119ed",
+      "bytes": "e90706",
+      "disassembly": "jmp     loc_11FF7",
+      "code_refs_from": [
+        "0x11ff7"
+      ]
+    },
+    {
+      "ea": "0x11a87",
+      "bytes": "e82f28",
+      "disassembly": "call    sub_142B9",
+      "code_refs_from": [
+        "0x142b9"
+      ]
+    },
+    {
+      "ea": "0x11abe",
+      "bytes": "833e500000",
+      "disassembly": "cmp     word_19290, 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11ac8",
+      "bytes": "e98ffe",
+      "disassembly": "jmp     loc_1195A",
+      "code_refs_from": [
+        "0x1195a"
+      ]
+    },
+    {
+      "ea": "0x11bd4",
+      "bytes": "e8e226",
+      "disassembly": "call    sub_142B9",
+      "code_refs_from": [
+        "0x142b9"
+      ]
+    },
+    {
+      "ea": "0x11c11",
+      "bytes": "833e500000",
+      "disassembly": "cmp     word_19290, 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11c24",
+      "bytes": "e92bfe",
+      "disassembly": "jmp     loc_11A52",
+      "code_refs_from": [
+        "0x11a52"
+      ]
+    },
+    {
+      "ea": "0x11c2a",
+      "bytes": "e92dfd",
+      "disassembly": "jmp     loc_1195A",
+      "code_refs_from": [
+        "0x1195a"
+      ]
+    },
+    {
+      "ea": "0x11c9d",
+      "bytes": "8b46fa",
+      "disassembly": "mov     ax, [bp+var_6]",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11da9",
+      "bytes": "e80d25",
+      "disassembly": "call    sub_142B9",
+      "code_refs_from": [
+        "0x142b9"
+      ]
+    },
+    {
+      "ea": "0x11db2",
+      "bytes": "833e500000",
+      "disassembly": "cmp     word_19290, 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11dc5",
+      "bytes": "e9d5fe",
+      "disassembly": "jmp     loc_11C9D",
+      "code_refs_from": [
+        "0x11c9d"
+      ]
+    },
+    {
+      "ea": "0x11df6",
+      "bytes": "833e500000",
+      "disassembly": "cmp     word_19290, 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11e00",
+      "bytes": "e908fd",
+      "disassembly": "jmp     loc_11B0B",
+      "code_refs_from": [
+        "0x11b0b"
+      ]
+    },
+    {
+      "ea": "0x11f6a",
+      "bytes": "817ef4004b",
+      "disassembly": "cmp     [bp+var_C], 4B00h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11f74",
+      "bytes": "817ef40048",
+      "disassembly": "cmp     [bp+var_C], 4800h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11f85",
+      "bytes": "3dffff",
+      "disassembly": "cmp     ax, 0FFFFh",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11f8d",
+      "bytes": "c746f24f00",
+      "disassembly": "mov     [bp+var_E], 4Fh ; 'O'",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11f92",
+      "bytes": "817ef4004d",
+      "disassembly": "cmp     [bp+var_C], 4D00h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11f9c",
+      "bytes": "817ef40050",
+      "disassembly": "cmp     [bp+var_C], 5000h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11fad",
+      "bytes": "3d5000",
+      "disassembly": "cmp     ax, 50h ; 'P'",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11fb5",
+      "bytes": "c746f20000",
+      "disassembly": "mov     [bp+var_E], 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11fba",
+      "bytes": "833e500000",
+      "disassembly": "cmp     word_19290, 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11fc4",
+      "bytes": "837ef40d",
+      "disassembly": "cmp     [bp+var_C], 0Dh",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11fd7",
+      "bytes": "b8b400",
+      "disassembly": "mov     ax, 0B4h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x11ff1",
+      "bytes": "e995fc",
+      "disassembly": "jmp     loc_11C89",
+      "code_refs_from": [
+        "0x11c89"
+      ]
+    },
+    {
+      "ea": "0x12007",
+      "bytes": "833ebaa6ff",
+      "disassembly": "cmp     word_238FA, 0FFFFh",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x12011",
+      "bytes": "c746f20000",
+      "disassembly": "mov     [bp+var_E], 0",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x12034",
+      "bytes": "8146f20003",
+      "disassembly": "add     [bp+var_E], 300h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x12039",
+      "bytes": "817ef20030",
+      "disassembly": "cmp     [bp+var_E], 3000h",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x12043",
+      "bytes": "833ebaa6ff",
+      "disassembly": "cmp     word_238FA, 0FFFFh",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1204d",
+      "bytes": "b83800",
+      "disassembly": "mov     ax, 38h ; '8'",
+      "code_refs_from": []
+    },
+    {
+      "ea": "0x1205b",
+      "bytes": "e87026",
+      "disassembly": "call    sub_146CE",
+      "code_refs_from": [
+        "0x146ce"
+      ]
+    },
+    {
+      "ea": "0x12061",
+      "bytes": "e90d06",
+      "disassembly": "jmp     loc_12671",
+      "code_refs_from": [
+        "0x12671"
+      ]
+    },
+    {
+      "ea": "0x12064",
+      "bytes": "b90003",
+      "disassembly": "mov     cx, 300h",
+      "code_refs_from": []
+    }
+  ],
+  "contracts": [
+    {
+      "semantic": "name input capacity is 16 bytes; empty first byte loops; cancel exits creation",
+      "status": "confirmed",
+      "eas": [
+        "0x11907",
+        "0x11915",
+        "0x1194d",
+        "0x11957"
+      ]
+    },
+    {
+      "semantic": "race cancel returns to name",
+      "status": "confirmed",
+      "eas": [
+        "0x119a4",
+        "0x119ad",
+        "0x119ed",
+        "0x11ff7"
+      ]
+    },
+    {
+      "semantic": "secondary menu cancel returns to race",
+      "status": "confirmed",
+      "eas": [
+        "0x11a87",
+        "0x11abe",
+        "0x11ac8"
+      ]
+    },
+    {
+      "semantic": "profession cancel returns to secondary menu for selector below 2, otherwise race",
+      "status": "confirmed",
+      "eas": [
+        "0x11bd4",
+        "0x11c11",
+        "0x11c24",
+        "0x11c2a"
+      ]
+    },
+    {
+      "semantic": "attribute menu result zero rerolls; cancel returns to profession",
+      "status": "confirmed",
+      "eas": [
+        "0x11c9d",
+        "0x11da9",
+        "0x11db2",
+        "0x11dc5",
+        "0x11df6",
+        "0x11e00"
+      ]
+    },
+    {
+      "semantic": "portrait arrows wrap over indices 0 through 79; Return accepts; cancel returns before commit",
+      "status": "confirmed",
+      "eas": [
+        "0x11f6a",
+        "0x11f74",
+        "0x11f85",
+        "0x11f8d",
+        "0x11f92",
+        "0x11f9c",
+        "0x11fad",
+        "0x11fb5",
+        "0x11fba",
+        "0x11fc4",
+        "0x11ff1"
+      ]
+    },
+    {
+      "semantic": "slot scan tests 16 records at stride 0x300; full storage reports and exits before record clearing",
+      "status": "confirmed",
+      "eas": [
+        "0x12007",
+        "0x12011",
+        "0x12034",
+        "0x12039",
+        "0x12043",
+        "0x1204d",
+        "0x1205b",
+        "0x12061",
+        "0x12064"
+      ]
+    }
+  ],
+  "limitations": [
+    "Static control flow does not replace a normal DOS UI oracle.",
+    "Duplicate-name handling and save-failure rollback remain unknown.",
+    "word_19290 is described as a cancel flag from consistent control-flow use; original address is retained."
+  ]
+}

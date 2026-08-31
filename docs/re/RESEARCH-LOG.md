@@ -989,3 +989,19 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   safe／private 為 `16f8b24d…67ba`／`dcfa8c59…18e1`，各自逐 byte 相同。
 - **限制**：武器技能仍由 writer＋手冊交叉證實，本切片不替其他一般技能命名；REGION
   欄位、正常 UI 邊界、圖像 selector 與失敗 rollback 仍未知。SPEC-005 保持 DRAFT。
+
+## RE-039：KOLBOOK 角色建立 UI 返回與滿槽邊界
+
+- 固定 `KOLBOOK.EXE` SHA-256 `2cada028…e5832`；IDA Pro 9.4 loaded-MZ linear EA，所有
+  附加語意均保留原始 `sub_11820`、全域名稱、EA、instruction bytes 與控制流目的地。
+- 名字 helper 容量為 `0x10` bytes；空第一 byte 且未取消會回到名字輸入，取消則離開建立。
+  種族取消回名字、secondary 取消回種族；職業依 selector 回 secondary 或種族；屬性選項
+  0 回完整擲骰起點，取消回職業。
+- 肖像接受左／上／右／下，selector 在 `0..79` 循環；Return 接受，取消回 commit 前流程。
+  slot scan 以 `0x300` stride 走到 `0x3000`，全 16 槽非空時於 `0x12061` 退出，早於
+  `0x12064` 的記錄清零與後續 writes。
+- 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `9ecd4b76…aa82`／`ef84a41e…50c`。private 完整函式與 `.i64` 不進版控。
+- DOSBox-X 實驗訂正啟動方式：直接 `KOLBOOK.EXE A` 只停在黑畫面；`KOL.EXE` 才是正常
+  玩家入口並進入 EGA 開場動畫。尚未走到主選單，因此本節只宣稱靜態控制流已證實，正常
+  UI 截圖、重名、16 字元終止呈現、保存失敗 rollback 仍未知；SPEC-005 維持 DRAFT。

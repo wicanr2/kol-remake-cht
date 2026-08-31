@@ -93,8 +93,9 @@
   男女精靈共名及矮人雙名稱同記錄解釋。39 筆起始金冠、主要／次要武器及武器技能已與
   中文手冊逐列相符；最小 writer offset、CHARPICS／SHLDPICS 同槽寫入及三檔保存順序亦已
   固定。完整 writer coverage 已排除其他職業衍生起始技能／物品，KOLTOWN 最小 reader 亦
-  交叉確認名字、種族、職業、金冠與主要武器。UI 邊界、產品決策與 typed schema 尚未關閉，
-  仍不授權實作。
+  交叉確認名字、種族、職業、金冠與主要武器。KOLBOOK 靜態控制流另已固定空名不前進、
+  各層取消返回、選項 0 reroll、80 張肖像循環與 16 槽全滿時在 writer 前退出；正常 DOS UI
+  oracle、產品決策與 typed schema 尚未關閉，仍不授權實作。
 
 ## 固定輸入
 

@@ -894,3 +894,14 @@
 - SPEC-005 仍為 DRAFT，沒有把探索程式接入 Go runtime；下一步轉向正常 DOS UI oracle。
 - 全部 IDA 與驗證均使用有界 `docker run --rm --network none`；探索腳本、六個全新 DB
   目錄、摘要副本與 Python cache 已精確清除。容器清冊未見 KOL／IDA 遺留，其他專案容器未動。
+
+## 2026-09-01：角色建立 UI 靜態邊界與正常入口訂正
+
+- 新增失敗即關閉的 KOLBOOK UI 探針，固定名字 16-byte 容量、空名、各層取消、屬性
+  reroll、80 張肖像循環與滿 16 槽時在 writer 前退出。
+- 兩個全新 IDA Pro 9.4 DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `9ecd4b76…aa82`／`ef84a41e…50c`；安全摘要入版控，完整函式只留本機暫存。
+- DOSBox-X 證實直接 `KOLBOOK.EXE A` 不是正常玩家入口；改由 `KOL.EXE` 成功進 EGA 開場。
+  尚未完成主選單後的角色建立截圖，因此 SPEC-005 保持 DRAFT，沒有建立 production code。
+- IDA、DOSBox-X、Xvfb 與格式驗證均在有界 `docker run --rm --network none` 執行；雙 DB、
+  writable 原版副本、截圖與一次性 capture script 已精確刪除，專案容器清冊無遺留。
