@@ -99,3 +99,22 @@
 - 發現 `AWD1PICS.0` 索引 payload 後有 520 bytes，保留為未知，不當作 padding。
 - 新增 `image-formats.md` 與 SPEC-002 DRAFT。下一步完成單一 consumer 的來源到 blit
   垂直鏈與原版視覺交叉驗證；READY 前不接 Go／Ebitengine。
+
+## 2026-08-31：COMBPICS EGA 垂直鏈
+
+- IDA 9.4 證實 KOL launcher 選 BIOS mode 0Dh，KOLTOWN suffix 表為 PICS／PCGA／HERC；
+  COMBPICS consumer 使用 37 byte-columns×144 scanlines，即 296×144。
+- KOL 第一次新建 DB 的 video-I/O probe 未等待 autoanalysis，錯誤輸出空 hits；原始檔仍有
+  三個 `INT 10h` opcode 候選，故空摘要作廢。加入 `ida_auto.auto_wait()` 後以全新 DB
+  重跑，得到 3 個 BIOS video 與 6 個 direct-port hits。
+- `sub_1C907`／`sub_1A2BB` 二階格式已解出：big-endian stream 分界、high-nibble-first、
+  repeat／literal RLE、4-bit 色彩與四 EGA bitplanes。第一次 probe 把兩種 control 分支
+  對調而越界，未產生 PNG；回查原始指令後修正並重跑。
+- 前三張 ignored PNG 均通過 296×144、4-bit bounds 與非空色彩；其中 index 0／1 分別
+  精確對上魔旅士文章的逃跑／戰敗同場景 JPEG。
+- 固定 crop 的正配 RGB MAE 為 20.12／19.17，交叉錯配為 62.00／62.88。外部圖片只留
+  ignored 工作區；Git 保存 URL、雜湊與矩陣。
+- Palette 依 DOSBox-X pinned commit `63a4357` mode 0Dh／EGA table，並標記為
+  hardware-spec approximation；KOL／TITLE／KOLTOWN IDA-defined code 未見 palette
+  寫入，MAKEMODE 無 video I/O。不深入 DOS 硬體逐週期或類比色彩。
+- SPEC-002 仍為 DRAFT。下一步查 AWD1 尾端 520 bytes 與三個無副檔名 runtime 檔。

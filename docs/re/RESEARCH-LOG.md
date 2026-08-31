@@ -224,3 +224,36 @@ derivative 值加 `0824`，全部通過；扣除 relocation 後整份 load image
 透明色、畫面方向及尾端 520 bytes 都未關閉，因此尚不能產生正式 PNG，也不能接 Go
 runtime。格式細節、固定顯示契約與未解問題集中於 `image-formats.md`；`SPEC-002` 保持
 DRAFT，下一窄任務是沿一個 consumer 完成來源到 blit 的垂直鏈並做原版視覺交叉驗證。
+
+## RE-006：COMBPICS EGA 垂直鏈與外部視覺 Oracle
+
+### 原版資料流
+
+- KOL loaded-MZ EA `0x100d1..0x10219` 以 BIOS EGA query 選 mode `0x0d`，再呼叫
+  `INT 10h` 設定模式；KOLTOWN EA `0x10032..0x10053` 由 BDA `0040:0049` 讀回模式。
+- DGROUP offset `0x0670` 是 `pics\0pcga\0herc\0`；mode 4 選 PCGA、mode 7 選 HERC，
+  mode 0Dh 使用 PICS。
+- `sub_288D4` 載入 `COMBPICS` 後設定 `x=[1,38)` byte-columns、`y=[8,152)`，經
+  `sub_1C907` → `sub_1A2BB` 做二階轉換，再以 `sub_19E9D` blit。
+- `sub_1A2BB` 證實 big-endian 16-bit stream 分界、high-nibble-first 4-bit 色彩、repeat／
+  literal RLE 與四 EGA bitplanes。前五張均展開為 `296×144=42,624` pixels。
+
+### Palette 停止線與視覺對照
+
+KOL／TITLE／KOLTOWN 的 IDA-defined code `INT 10h`／port I/O 清冊未見 palette 寫入；
+TITLE 只重設模式與操作 speaker／timer／EGA plane，`MAKEMODE` 沒有 video I/O。依硬體
+規格停止線，RGB 對應採成熟 DOSBox-X commit `63a4357` 的 mode 0Dh 與 `ega_palette`
+契約（來源 SHA-256 `42044a6d…4060`），換算 6-bit 值為
+`00/55/aa/ff`。此色彩是 `hardware-spec approximation`，不宣稱類比螢幕逐波形一致。
+
+可丟棄探針產生 `COMBPICS[0]`、`[1]` 296×144 PNG，分別與魔旅士文章的同場景 JPEG
+匹配。固定 crop／BICUBIC 的 RGB MAE 正配為 `20.12`、`19.17`，交叉錯配為 `62.00`、
+`62.88`。原圖只留 ignored 工作區；安全 URL、SHA-256 與矩陣見
+`combpics-visual-oracle.json`。
+
+### 結論
+
+COMBPICS 前五項的 LZW、二階 RLE、4-bit 索引、296×144 幾何、方向、EGA palette mapping
+與同場景身分均為 `已證實`；JPEG 不能證明 byte-exact RGB。此結論只關閉單一 PICS／
+mode 0Dh 分支，不能泛化到其他 archive、PCGA、HERC、透明圖或無副檔名 runtime 檔。
+SPEC-002 仍為 DRAFT；下一步追查 `AWD1PICS.0` 尾端與三個無副檔名檔案。

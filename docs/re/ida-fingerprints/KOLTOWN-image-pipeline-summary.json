@@ -62,6 +62,14 @@
       "caller_count": 3
     },
     {
+      "requested_ea": "0x1a2bb",
+      "original_name": "sub_1A2BB",
+      "start_ea": "0x1a2bb",
+      "end_ea": "0x1a429",
+      "instruction_count": 138,
+      "caller_count": 1
+    },
+    {
       "requested_ea": "0x1a429",
       "original_name": "sub_1A429",
       "start_ea": "0x1a429",
@@ -100,6 +108,30 @@
       "end_ea": "0x1c0f6",
       "instruction_count": 403,
       "caller_count": 3
+    },
+    {
+      "requested_ea": "0x1c80f",
+      "original_name": "sub_1C80F",
+      "start_ea": "0x1c80f",
+      "end_ea": "0x1c907",
+      "instruction_count": 126,
+      "caller_count": 1
+    },
+    {
+      "requested_ea": "0x1c907",
+      "original_name": "sub_1C907",
+      "start_ea": "0x1c907",
+      "end_ea": "0x1c94e",
+      "instruction_count": 27,
+      "caller_count": 6
+    },
+    {
+      "requested_ea": "0x1cba9",
+      "original_name": "sub_1CBA9",
+      "start_ea": "0x1cba9",
+      "end_ea": "0x1cdcc",
+      "instruction_count": 186,
+      "caller_count": 30
     },
     {
       "requested_ea": "0x2d3fa",

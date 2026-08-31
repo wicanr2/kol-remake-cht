@@ -11,7 +11,7 @@
 | 戰鬥／AI／獎勵 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 事件／任務 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 存讀檔 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
-| 圖像／主題 | 30 archive／960 payload LZW 機械探針通過 | IDA index／decoder／consumer 已定位 | 尚無原版同狀態像素對照 | 尚無 | SPEC-002 DRAFT；尺寸／palette 未證實 |
+| 圖像／主題 | 30 archive／960 payload LZW 探針；COMBPICS 296×144 二階 RLE | COMBPICS IDA consumer＋BIOS mode 0Dh | 兩張魔旅士同場景 JPEG 正配 MAE < 錯配一半 | 尚無 | SPEC-002 DRAFT；單一 EGA 分支已證實 |
 | 在地化／字型 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 封包 | 尚無 | 不適用 | 不適用 | 尚無 | 未開始 |
 

@@ -54,7 +54,7 @@
 ## M3：可重現素材抽取
 
 - [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
-- [ ] 寫唯讀輸入的資產 inventory 與格式規格：count／offset／bounds 已證實，LZW 為強推論；palette 未證實，故尚未完成。
+- [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS EGA 垂直鏈已證實；其餘 archive、PCGA／HERC 與無副檔名格式未完成。
 - [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。
 - [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。
 - [ ] 建立 OGG 轉換管線與 catalog；驗證 codec、時長、非靜音、峰值、loop 與人耳聆聽。
@@ -97,6 +97,6 @@
 
 ## 下一個唯一工作
 
-SPEC-002 已 DRAFT。下一個窄任務是沿一個 IDA consumer 固定顯示 suffix、尺寸、位平面、
-palette 與 blit 契約，並用 disposable probe 產生至少一張原版同狀態可交叉驗證的 PNG；
-READY 前不接 Go／Ebitengine production runtime。
+SPEC-002 仍為 DRAFT；COMBPICS EGA 與兩張原版視覺 oracle 已關閉。下一個窄任務是追查
+`AWD1PICS.0` 索引 payload 後的 520 bytes，以及無副檔名 `CHARPICS`／`SHLDPICS`／
+`STEEDPIC` 的 writer／reader。READY 前不接 Go／Ebitengine production runtime。

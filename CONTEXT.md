@@ -32,6 +32,9 @@
   offset table，共 960 個 payload 通過 LZW 機械探針。索引契約已證實，LZW 為強推論；
   尺寸、位平面、palette、透明色與原版視覺仍未知，尚未授權 PNG production 抽取。
 - `AWD1PICS.0` 的索引 payload 後仍有 520 bytes；用途未知，不得先當 padding。
+- COMBPICS EGA 分支已由 IDA 關閉到 296×144、二階 RLE、4-bit 色彩與 BIOS mode 0Dh
+  palette；兩張本機測試 PNG 分別對上魔旅士文章的同場景原版 JPEG。這只證實該窄分支，
+  不代表全部圖片格式完成。
 
 ## 固定輸入
 
@@ -57,5 +60,5 @@
 
 ## 下一個唯一工作
 
-沿一個已定位的圖片 consumer 固定顯示 suffix、尺寸、位平面與 palette，讓 disposable
-probe 產生至少一張可與原版同狀態比對的 PNG；SPEC-002 READY 前不接 production runtime。
+追查 `AWD1PICS.0` 索引 payload 後的 520 bytes consumer，並分類無副檔名
+`CHARPICS`／`SHLDPICS`／`STEEDPIC` 的 writer／reader；SPEC-002 READY 前不接 runtime。

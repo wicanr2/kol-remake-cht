@@ -1,0 +1,63 @@
+{
+  "schema": "kol-ida-video-io-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOL.EXE",
+  "input_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+  "address_space": "IDA linear effective address for the named loaded MZ image",
+  "hits": [
+    {
+      "ea": "0x100d8",
+      "category": "bios_int_10h",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x100f5",
+      "category": "bios_int_10h",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x10100",
+      "category": "direct_port_io",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x10108",
+      "category": "direct_port_io",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x101e1",
+      "category": "direct_port_io",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x101e7",
+      "category": "direct_port_io",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x101f2",
+      "category": "direct_port_io",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x101fa",
+      "category": "direct_port_io",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x10219",
+      "category": "bios_int_10h",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    }
+  ]
+}

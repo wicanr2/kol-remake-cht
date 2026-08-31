@@ -1,0 +1,99 @@
+{
+  "schema": "kol-ida-video-io-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "TITLE.EXE",
+  "input_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+  "address_space": "IDA linear effective address for the named loaded MZ image",
+  "hits": [
+    {
+      "ea": "0x10a9b",
+      "category": "bios_int_10h",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x10ad4",
+      "category": "bios_int_10h",
+      "original_function": "_main",
+      "function_start_ea": "0x10010"
+    },
+    {
+      "ea": "0x10dcc",
+      "category": "bios_int_10h",
+      "original_function": "sub_10CFA",
+      "function_start_ea": "0x10cfa"
+    },
+    {
+      "ea": "0x10f3c",
+      "category": "direct_port_io",
+      "original_function": "sub_10F33",
+      "function_start_ea": "0x10f33"
+    },
+    {
+      "ea": "0x10f40",
+      "category": "direct_port_io",
+      "original_function": "sub_10F33",
+      "function_start_ea": "0x10f33"
+    },
+    {
+      "ea": "0x10f51",
+      "category": "direct_port_io",
+      "original_function": "sub_10F48",
+      "function_start_ea": "0x10f48"
+    },
+    {
+      "ea": "0x10f55",
+      "category": "direct_port_io",
+      "original_function": "sub_10F48",
+      "function_start_ea": "0x10f48"
+    },
+    {
+      "ea": "0x10f69",
+      "category": "direct_port_io",
+      "original_function": "sub_10F5D",
+      "function_start_ea": "0x10f5d"
+    },
+    {
+      "ea": "0x10f6d",
+      "category": "direct_port_io",
+      "original_function": "sub_10F5D",
+      "function_start_ea": "0x10f5d"
+    },
+    {
+      "ea": "0x11b4a",
+      "category": "direct_port_io",
+      "original_function": "sub_11B36",
+      "function_start_ea": "0x11b36"
+    },
+    {
+      "ea": "0x11bb5",
+      "category": "direct_port_io",
+      "original_function": "sub_11B5A",
+      "function_start_ea": "0x11b5a"
+    },
+    {
+      "ea": "0x11c6b",
+      "category": "direct_port_io",
+      "original_function": "sub_11C5D",
+      "function_start_ea": "0x11c5d"
+    },
+    {
+      "ea": "0x11c71",
+      "category": "direct_port_io",
+      "original_function": "sub_11C5D",
+      "function_start_ea": "0x11c5d"
+    },
+    {
+      "ea": "0x11c7c",
+      "category": "direct_port_io",
+      "original_function": "sub_11C5D",
+      "function_start_ea": "0x11c5d"
+    },
+    {
+      "ea": "0x11c84",
+      "category": "direct_port_io",
+      "original_function": "sub_11C5D",
+      "function_start_ea": "0x11c5d"
+    }
+  ]
+}

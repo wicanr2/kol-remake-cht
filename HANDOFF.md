@@ -17,7 +17,9 @@
 - RE 知識庫已建立；KOLTOWN 的 Microsoft EXEPACK、真正入口與 337-function unpacked IDA
   derivative 已固定。SPEC-001 已 READY，startup 前 runtime load image 完整零差異核對通過。
 - 圖片 RE 清冊已固定 42 個候選；30 個索引容器共 960 payload 通過 LZW 機械探針。
-  SPEC-002 已建立為 DRAFT；像素、尺寸與 palette 尚未證實，沒有 production PNG。
+  SPEC-002 已建立為 DRAFT；大多數 archive 的像素、尺寸與 palette 尚未證實。
+- COMBPICS EGA 窄分支已證實 296×144、二階 RLE、4-bit 索引與 BIOS mode 0Dh palette；
+  兩張 ignored 測試 PNG 對上魔旅士文章的同場景 JPEG，仍沒有 production PNG。
 
 ## 證據入口
 
@@ -25,7 +27,7 @@
 |---|---|---|
 | 目前真相 | `CONTEXT.md` | 不用歷史工作清單反向覆蓋 |
 | 原版清冊 | `docs/re/original-inventory.json` | 雙容器重生逐 byte 相同；只有雜湊與 metadata |
-| 研究結論 | `docs/re/RESEARCH-LOG.md` | RE-001 至 RE-005 |
+| 研究結論 | `docs/re/RESEARCH-LOG.md` | RE-001 至 RE-006 |
 | 圖片格式 | `docs/re/image-formats.md` | 索引、LZW、consumer 與未知項 |
 | entry 原始 bytes | `docs/re/ida-fingerprints/KOLTOWN-entry.json` | 僅本機，Git 精確排除 |
 
@@ -33,7 +35,7 @@
 
 | 優先 | 類型 | 工作 | 下一個精確動作 | 阻塞 |
 |---|---|---|---|---|
-| 1 | asset RE | SPEC-002 READY 證據 | 沿一個 consumer 固定尺寸／位平面／palette，產生同狀態 PNG probe | 像素契約未知 |
+| 1 | asset RE | SPEC-002 READY 證據 | 追 AWD1 尾端 520 bytes 與三個無副檔名檔的 writer／reader | 格式用途未知 |
 | 3 | documentation | 中文手冊 | 建頁面索引、OCR 草稿與術語表 | M1 後開始 |
 
 ## 執行中程序與暫存物

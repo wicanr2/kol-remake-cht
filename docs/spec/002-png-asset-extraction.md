@@ -33,21 +33,25 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] 30 個容器的 20-byte 固定區、2-byte offset table、count、payload bounds 已盤點。
 - [x] 30 個容器共 960 個 payload 通過一次性 LZW 機械解碼。
 - [x] IDA 已定位索引 reader、LZW core、bit reader、檔名 consumer 與 blitter 候選。
-- [ ] suffix／顯示模式、尺寸、位平面、palette 與透明規則尚未證實。
-- [ ] 尚無 PNG 通過原版同狀態畫面與像素抽樣。
+- [x] `COMBPICS.0[0..4]` 的 mode 0Dh／PICS、296×144、二階 RLE、4-bit 索引與 EGA
+  palette 垂直鏈已證實。
+- [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
+  與交叉錯配矩陣，圖片本身不入 Git。
+- [ ] 其他 archive／PCGA／HERC 的尺寸、位平面、palette 與透明規則尚未證實。
 
 ## READY gate
 
-- [ ] 以 IDA consumer 或原版執行期證據固定至少一個完整格式分支：來源 → 解壓 → 尺寸 →
+- [x] 以 IDA consumer 或原版執行期證據固定至少一個完整格式分支：來源 → 解壓 → 尺寸 →
   位平面／palette → blit。
 - [ ] 解釋或排除 `AWD1PICS.0` 索引 payload 後的 520 bytes，不得稱作無害 padding。
 - [ ] 對無副檔名 `CHARPICS`／`SHLDPICS`／`STEEDPIC` 建立 writer／reader 與格式分類。
-- [ ] 可丟棄 probe 產生至少一張真實 PNG，並通過 bounds、預期尺寸、非空像素、palette、
+- [x] 可丟棄 probe 產生至少一張真實 PNG，並通過 bounds、預期尺寸、非空像素、palette、
   畫面方向及原版同狀態視覺抽樣。
 - [ ] 預先定義全部 archive 的失敗政策、命名與 manifest schema，完成權利審查。
-- [ ] 由第二條獨立證據（原版截圖、runtime buffer 或另一 consumer）交叉驗證像素結果。
+- [x] 由第二條獨立證據（兩張原版文章截圖＋DOSBox-X mode／palette 契約）交叉驗證像素結果。
 
 ## 實作狀態
 
 無 production implementation。`tools/probe_image_lzw.py` 是 RE 階段一次性機械探針，
-其輸出明示未驗證尺寸、像素與 palette，不能被 runtime import。
+其批次輸出仍明示未驗證多數圖片的尺寸、像素與 palette，不能被 runtime import；
+`tools/probe_extract_comb_png.py` 只關閉 COMBPICS 的窄分支，也不得作 runtime importer。
