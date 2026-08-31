@@ -515,3 +515,21 @@
 - Python syntax、全部 JSON、本地 Markdown 連結、版控摘要與重生摘要、UID/GID、
   `git diff --check` 均通過。本輪三個 `/tmp/kol-kolmpics28-*` 與重複 PNG 目錄已刪除；
   Docker inspect 未見掛載 KOL 工作樹的殘留容器，其他專案容器未動。
+
+## 2026-08-31：MISCPICS 完整 archive 分類
+
+- 先用 discovery probe 盤點 `sub_1A429` caller 與預載 buffer；確認 MISCPICS 正常鏈是
+  `sub_1103F → sub_11262 → sub_1A429 → sub_19E9D`，再建立專用 fail-closed 探針。
+- request code 34／35／71／72／73 映到 image 0／1／3／4／5，尺寸依序 192×96、
+  296×32 與三張 56×70。五筆二階 RLE／4-bit EGA 像素數全部吻合，接觸表方向正常。
+- 為避免把「router 未用」誤寫成「全程未用」，另列 `word_2FBB8` 全部 data refs；結果只有
+  啟動、cleanup、唯一 consumer 三處，故 image 2 的一-byte payload 可證實為未引用
+  `excluded_non_image` placeholder，而非猜測性 PNG。
+- 初次專用摘要尚未帶 buffer 排他 refs；補入後以全新 DB 重跑，沒有沿用舊 `.i64`
+  冒充驗證。新增安全 IDA 摘要、視覺統計與 ignored 五張 PNG／接觸表；SPEC-002 維持 DRAFT。
+- 兩次最終全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
+  `e96ec3d7…0c3a`、`a6b77e8d…5c79`；兩次視覺摘要與接觸表也逐 byte 相同，SHA-256
+  分別為 `67a76253…c456`、`d595b820…a972`。
+- Python syntax、全部 JSON、本地 Markdown 連結、版控／重生摘要與 UID/GID 均通過；
+  本輪五個 `/tmp/kol-*` 與重複 PNG 目錄已刪除。Docker 只餘已確認屬其他專案或服務的
+  容器，未停止或刪除它們。

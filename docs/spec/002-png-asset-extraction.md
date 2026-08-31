@@ -6,7 +6,7 @@
 - RE 來源：`docs/re/image-formats.md`、`docs/re/image-asset-inventory.json`、
   `docs/re/image-lzw-probe-summary.json`、`docs/re/town-index24-png-probe-summary.json`、
   `docs/re/monpics-ega-visual-probe.json`、`docs/re/perpics-ega-visual-probe.json`、
-  `docs/re/kolmpics-index28-visual-probe.json`
+  `docs/re/kolmpics-index28-visual-probe.json`、`docs/re/miscpics-ega-visual-probe.json`
 
 ## 目的
 
@@ -70,6 +70,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   MSB-first 遮罩」；`[i,i+6]` 配對、六組尺寸、像素數、方向與透明邊界均已抽查。
 - [x] `KOLMPICS.0` 圖號 28 已證實為 56×57、MSB-first EGA AND-mask；bit 1 保留背景、
   bit 0 讓彩圖覆寫。它只能作合成 mask，禁止冒充獨立彩圖；其餘 82 筆仍未知。
+- [x] `MISCPICS.0` 已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA
+  彩圖；image 2 是全程未引用的一-byte placeholder，必須 `excluded_non_image`、無 PNG。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
 - [ ] 其他 archive／PCGA／HERC 的尺寸、位平面、palette 與透明規則尚未證實。
@@ -97,6 +99,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 其批次輸出仍明示未驗證多數圖片的尺寸、像素與 palette，不能被 runtime import；
 `tools/probe_extract_comb_png.py`、`tools/probe_extract_monpics_png.py` 與
 `tools/probe_extract_perpics_png.py` 只關閉各自的窄分支，也不得作 runtime importer；
-`tools/probe_extract_kolmpics_index28_png.py` 同樣只驗證單一純 mask，不能直接成為正式素材。
+`tools/probe_extract_kolmpics_index28_png.py` 同樣只驗證單一純 mask，不能直接成為正式素材；
+`tools/probe_extract_miscpics_png.py` 驗證 MISCPICS 全 archive，但仍是 RE probe，不是正式
+抽取器。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。

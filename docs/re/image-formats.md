@@ -224,9 +224,26 @@ bit 0 表示先清除再寫入彩圖（不透明）。bit-map PNG 目視為右�
 零 byte 成因維持 `強推論：壓縮流終止／padding artifact`。這只關閉 KOLMPICS 圖號 28，
 不得泛化到其他 82 個 payload，也不得把純 mask 冒充可獨立顯示的彩圖。
 
+### MISCPICS 五張 EGA 彩圖與 placeholder
+
+`sub_10000:0x1060d` 以 DGROUP `0x1678` 的 `misc%s.0` 建檔名，`0x10621` 呼叫
+`sub_19D98` 把 archive 讀入 `word_2FBB8`。IDA 全域 data refs 只有啟動配置 `0x105ec`、
+清理釋放 `0x10e62` 與唯一 consumer `sub_1103F:0x111c0`；不存在另一條直接讀取端。
+
+`sub_1103F` 的 request-code 映射與矩形為：34 → image 0（192×96）、35 → image 1
+（296×32）、71／72／73 → image 3／4／5（各 56×70）。`0x111c7` 以
+`mapped_request_code-6` 算索引，證實集合是 `{0,1,3,4,5}`；image 2 永遠不會被選中。
+`sub_11262:0x11288` 呼叫 `sub_1A429` 解碼，`0x112f4` 用 `sub_19E9D` 直接 blit。
+
+五個被引用 payload 經 LZW、二階 RLE 後均精確得到矩形所需的 4-bit EGA pixels；接觸表
+目視為一張場景、一張橫幅與三張人物／標記圖，無鏡像、旋轉或 plane 錯排。直接 blit
+沒有獨立 mask，故索引 0 是圖像色彩，不得擅自轉透明。image 2 解碼後只有一 byte，且
+全程沒有 consumer，可分類為 `已證實：未引用非圖片 placeholder`，manifest 必須用
+`excluded_non_image` 且不得產生 PNG。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24、MONPICS、PERPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

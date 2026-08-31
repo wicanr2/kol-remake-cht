@@ -466,3 +466,31 @@ KOLMPICS 圖號 28 的來源、索引、56×57 幾何、MSB-first 位序、EGA A
 `已證實`。末端零 byte 的成因仍是 `強推論：壓縮流終止／padding artifact`。圖號 28 是
 合成遮罩，不是可獨立當彩圖輸出的素材；其餘 82 個 KOLMPICS payload 保持未知，SPEC-002
 仍為 DRAFT。
+
+## RE-013：MISCPICS 完整 archive 垂直鏈
+
+### 唯一 consumer 與路由
+
+- 固定輸入 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4
+  `locked-v1`，unpacked loaded-MZ linear EA。探索與專用探針均使用全新 `/tmp` DB。
+- `sub_10000:0x1060d/0x10621` 以 `misc%s.0` 載入 `word_2FBB8`。該全域全部 data refs
+  僅 `0x105ec` 啟動配置、`0x10e62` cleanup、`0x111c0` consumer，排除旁路直接讀取。
+- `sub_1103F` 證實 request code 34／35／71／72／73 依序映到 image 0／1／3／4／5；
+  `0x111c7` 的 `mapped-6` 後索引集合不含 2。`sub_11262:0x11288` 解碼，`0x112f4`
+  直接 blit。原始函式名、位址、operand 與 bytes 保留 private JSON。
+
+### 幾何、像素與 placeholder
+
+- IDA 矩形依序固定為 192×96、296×32、56×70、56×70、56×70。五個 payload 經 LZW
+  與二階 RLE 後分別得到 18,432、9,472 與三組 3,920 個 4-bit indices，全部精確吻合。
+- 接觸表目視為一張場景、一張橫幅及三張人物／標記圖；方向、scanline、plane 與裁切正常。
+  consumer 是 direct blit，沒有 mask 證據，因此黑色索引保留為色彩，不轉 alpha。
+- image 2 是唯一一-byte payload；控制流不會選到，且 buffer 沒有其他 consumer。它分類為
+  `已證實：未引用非圖片 placeholder`，正式 manifest 應是 `excluded_non_image`、無 PNG。
+
+### 結論
+
+MISCPICS 六個 payload 已完整分類：五張已證實 EGA 彩圖與一筆已證實非圖片 placeholder。
+來源、索引、尺寸、二階 RLE、4-bit palette bounds、方向及 direct-blit 透明政策均已關閉。
+PNG 與接觸表只留 ignored `workplace/`；安全摘要只保存雜湊與統計。這不改變 SPEC-002
+整體 DRAFT 狀態，也不授權 production importer。
