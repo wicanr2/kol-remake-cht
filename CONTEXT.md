@@ -47,6 +47,8 @@
 - MONPICS 已關閉 32 組怪物 sprite 垂直鏈：64 個 payload 依序配成 4-bit EGA 彩圖與
   MSB-first 1-bit 遮罩；IDA 尺寸表、逐張像素數與透明接觸表均吻合。遮罩有效資料後多出的
   單一 LZW byte 不作像素，仍標為壓縮終止／padding 的強推論。
+- PERPICS 已關閉六組人物圖垂直鏈：前六個 payload 是 4-bit EGA 彩圖，後六個依
+  `[i,i+6]` 配成 MSB-first 1-bit 遮罩；六組 IDA 矩形、像素數與透明接觸表全部吻合。
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
   轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
   相符。完整轉換像素規則尚未動態驗證；三種 theme 的產品範圍待使用者決定。
@@ -75,6 +77,5 @@
 
 ## 下一個唯一工作
 
-等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定的下一工作是依
 等待使用者決定 EGA／CGA／Hercules theme 交付範圍；不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。

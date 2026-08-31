@@ -1,0 +1,101 @@
+{
+  "schema": "kol-ida-koltown-perpics-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "evidence_contract": {
+    "filename_format_dgroup_offset": "0x17d8",
+    "filename_format": "per%s",
+    "filename_format_call_ea": "0x18fdd",
+    "consumer_original_name": "sub_18F3A",
+    "consumer_start_ea": "0x18f3a",
+    "rectangle_pair_call_ea": "0x18ff3",
+    "rectangle_pair_original_name": "sub_16FA6",
+    "shared_loader_original_name": "sub_1A4FE",
+    "color_index_expression": "portrait_index",
+    "mask_index_expression": "portrait_index + 6",
+    "dimensions_dgroup_offset": "0x168",
+    "fixed_y1_exclusive": 154,
+    "status": "confirmed"
+  },
+  "dimensions": [
+    {
+      "portrait_index": 0,
+      "color_image_index": 0,
+      "mask_image_index": 6,
+      "x0": 15,
+      "y0": 51,
+      "x1_exclusive": 24,
+      "y1_exclusive": 154,
+      "width_bytes": 9,
+      "width_pixels": 72,
+      "height_pixels": 103
+    },
+    {
+      "portrait_index": 1,
+      "color_image_index": 1,
+      "mask_image_index": 7,
+      "x0": 15,
+      "y0": 43,
+      "x1_exclusive": 23,
+      "y1_exclusive": 154,
+      "width_bytes": 8,
+      "width_pixels": 64,
+      "height_pixels": 111
+    },
+    {
+      "portrait_index": 2,
+      "color_image_index": 2,
+      "mask_image_index": 8,
+      "x0": 14,
+      "y0": 90,
+      "x1_exclusive": 23,
+      "y1_exclusive": 154,
+      "width_bytes": 9,
+      "width_pixels": 72,
+      "height_pixels": 64
+    },
+    {
+      "portrait_index": 3,
+      "color_image_index": 3,
+      "mask_image_index": 9,
+      "x0": 12,
+      "y0": 6,
+      "x1_exclusive": 26,
+      "y1_exclusive": 154,
+      "width_bytes": 14,
+      "width_pixels": 112,
+      "height_pixels": 148
+    },
+    {
+      "portrait_index": 4,
+      "color_image_index": 4,
+      "mask_image_index": 10,
+      "x0": 15,
+      "y0": 51,
+      "x1_exclusive": 24,
+      "y1_exclusive": 154,
+      "width_bytes": 9,
+      "width_pixels": 72,
+      "height_pixels": 103
+    },
+    {
+      "portrait_index": 5,
+      "color_image_index": 5,
+      "mask_image_index": 11,
+      "x0": 15,
+      "y0": 44,
+      "x1_exclusive": 22,
+      "y1_exclusive": 154,
+      "width_bytes": 7,
+      "width_pixels": 56,
+      "height_pixels": 110
+    }
+  ],
+  "notes": [
+    "\u539f\u59cb\u51fd\u5f0f\u540d\u3001\u7dda\u6027\u4f4d\u5740\u8207\u547c\u53eb\u9ede\u5747\u4fdd\u7559\uff1b\u5b8c\u6574\u6307\u4ee4\u8207 bytes \u50c5\u5b58 private JSON\u3002",
+    "sub_1CBA9 \u662f\u5a92\u9ad4\uff0f\u78c1\u789f\u63d0\u793a\u6d41\u7a0b\uff0c\u4e0d\u662f PERPICS \u5716\u7247 loader\u3002",
+    "\u5f8c\u516d\u500b payload \u7684 1-bit \u906e\u7f69\u6392\u5217\u8207\u5c3e byte \u8a9e\u610f\u4ecd\u9808\u7531\u89e3\u78bc\u63a2\u91dd\u9a57\u8b49\u3002"
+  ]
+}

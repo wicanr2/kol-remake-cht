@@ -407,3 +407,33 @@ PCGA／HERC 是遺失素材、另一版發行物，還是可由工具生成？
 證實，維持 `強推論：壓縮流終止／padding artifact`。安全摘要只保存尺寸、雜湊與統計；
 完整指令與 table bytes 在 ignored private JSON。SPEC-002 仍因其餘預定格式與 theme
 範圍未關閉而維持 DRAFT，不接 production extractor 或 Go runtime。
+
+## RE-011：PERPICS 六組人物彩圖／遮罩垂直鏈
+
+### IDA consumer 與索引
+
+- 輸入 `KOLTOWN-unpacked.EXE`，SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4 `locked-v1`，
+  unpacked loaded-MZ linear EA。探針在全新 `/tmp` DB 執行，完整指令與 bytes 只存 private。
+- 第一輪自動化因未等待 IDA auto-analysis 而只產生 `.i64`、沒有 JSON，不列成功證據；
+  加入 `ida_auto.auto_wait()` 後在全新 DB 重跑通過。後續擴充探針也另用全新 DB 驗證。
+- `sub_18F3A:0x18fdd` 直接消費 DGROUP `0x17d8` 的 `per%s`；`0x18ff3` 以
+  `[portrait_index, portrait_index+6]` 呼叫 `sub_16FA6`。`sub_16FA6:0x16fe3/0x1706b`
+  兩次呼叫 `sub_1A4FE`，`0x17087` 再呼叫 `sub_1BD17` 做遮罩 blit。
+- 舊 fingerprint 的 near-offset occurrence 本身不足以證實 consumer；本輪參數資料流才將
+  `per%s` 歸屬升為 `已證實`。另追查的 `sub_1CBA9` 已排除為媒體／磁碟提示流程。
+
+### 幾何、像素與目視
+
+- DGROUP `0x0168` 六筆三-byte 記錄配合固定 `y1=154`，給出 72×103、64×111、72×64、
+  112×148、72×103、56×110 六種矩形；原始 operand、table bytes 與位址保留 private JSON。
+- `PERPICS.0` 前六筆經 LZW 與二階 RLE 全部精確得到矩形所需 4-bit EGA pixels；後六筆
+  全部等於 `width_bytes*height+1`，以前段 MSB-first bits 作遮罩後與彩圖逐像素吻合。
+- 六張 RGBA PNG 與接觸表只留 ignored `workplace/`；人工抽查為完整直立人物，沒有鏡像、
+  反相、plane 錯排、遮罩位移或裁切。安全摘要保存尺寸、雜湊與統計，不含原版 bytes。
+
+### 結論與限制
+
+六組尺寸、`[i,i+6]` 彩圖／遮罩配對、4-bit EGA、MSB-first 遮罩、方向及透明邊界為
+`已證實`。每個遮罩末端多出的單一零 byte 不進入矩形，成因維持
+`強推論：壓縮流終止／padding artifact`。SPEC-002 仍因其他 archive 與 theme 範圍未
+關閉而保持 DRAFT；本結論不授權 production extractor 或 Go runtime。

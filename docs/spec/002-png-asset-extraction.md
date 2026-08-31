@@ -5,7 +5,7 @@
 - 範圍：由固定原版輸入重生本機 PNG 衍生素材；不定義玩法
 - RE 來源：`docs/re/image-formats.md`、`docs/re/image-asset-inventory.json`、
   `docs/re/image-lzw-probe-summary.json`、`docs/re/town-index24-png-probe-summary.json`、
-  `docs/re/monpics-ega-visual-probe.json`
+  `docs/re/monpics-ega-visual-probe.json`、`docs/re/perpics-ega-visual-probe.json`
 
 ## 目的
 
@@ -65,6 +65,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
 - [x] `MONPICS.0` 的 64 個 payload 已證實是 32 組「偶數 4-bit EGA 彩圖＋奇數 1-bit
   MSB-first 遮罩」；逐組尺寸表、像素數、透明邊界與方向均經接觸表抽查。
+- [x] `PERPICS.0` 的 12 個 payload 已證實是六組「前六筆 4-bit EGA 彩圖＋後六筆 1-bit
+  MSB-first 遮罩」；`[i,i+6]` 配對、六組尺寸、像素數、方向與透明邊界均已抽查。
 - [x] 兩張 COMBPICS 測試 PNG 已對上魔旅士原版文章中的同場景截圖；量化摘要保留正配
   與交叉錯配矩陣，圖片本身不入 Git。
 - [ ] 其他 archive／PCGA／HERC 的尺寸、位平面、palette 與透明規則尚未證實。
@@ -90,7 +92,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 
 無 production implementation。`tools/probe_image_lzw.py` 是 RE 階段一次性機械探針，
 其批次輸出仍明示未驗證多數圖片的尺寸、像素與 palette，不能被 runtime import；
-`tools/probe_extract_comb_png.py` 與 `tools/probe_extract_monpics_png.py` 只關閉各自的窄分支，
+`tools/probe_extract_comb_png.py`、`tools/probe_extract_monpics_png.py` 與
+`tools/probe_extract_perpics_png.py` 只關閉各自的窄分支，
 也不得作 runtime importer。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。

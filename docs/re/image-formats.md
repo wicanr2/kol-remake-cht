@@ -189,9 +189,27 @@ Hercules 單色／抖色規則及生成檔的動態 round-trip 尚未驗證，�
   `kolm%s.0`、`misc%s.0`、`mon%s`、`comb%s`、`per%s`；近位址 raw word 命中可能巧合，
   只有結合函式與參數資料流者才可當 consumer。
 
+### PERPICS 六組人物彩圖／遮罩
+
+`sub_18F3A` 在 loaded-MZ EA `0x18fdd` 以 DGROUP offset `0x17d8` 的 `per%s` 與目前
+顯示 suffix 建立檔名，接著於 `0x18ff3` 把 `[portrait_index, portrait_index + 6]`
+交給 `sub_16FA6`。後者在 `0x16fe3`、`0x1706b` 兩次呼叫共用 loader `sub_1A4FE`，最後
+於 `0x17087` 呼叫遮罩 blitter `sub_1BD17`。舊清冊只憑 near-offset 把 `per%s` 歸到
+`sub_18F3A`；本次已用參數資料流證實，而 `sub_1CBA9` 則排除為媒體／磁碟提示流程。
+
+DGROUP offset `0x0168` 的六筆三-byte 記錄為 `(x0, y0, x1_exclusive)`，固定
+`y1_exclusive=154`；mode 0Dh 下寬度為 `(x1-x0)*8`。六組尺寸依序是 72×103、64×111、
+72×64、112×148、72×103、56×110。前六個 payload 的二階 RLE／4-bit EGA 展開像素數
+全數精確相符；後六個 payload 各為對應 `width_bytes*height+1` bytes，前段以 MSB-first
+展開為 1-bit 遮罩。六張 RGBA PNG 接觸表目視為完整直立人物，方向與透明邊界正確。
+
+因此 EGA `PERPICS.0` 的六組尺寸、前半彩圖／後半遮罩配對、索引、方向與透明邊界為
+`已證實`。每筆遮罩最後一 byte 均為零且不進入 consumer 矩形；其形成原因仍是
+`強推論：壓縮流終止／padding artifact`，不得當像素輸出。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24 與 MONPICS 垂直鏈已關閉；PCGA／HERC 與其他
+1. `PICS`／mode 0Dh 的 COMBPICS、TWN 圖號 24、MONPICS 與 PERPICS 垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
 3. 三個固定角色圖片記錄表內部的寬、高、位平面與透明規則。
