@@ -597,3 +597,17 @@
 - 新增安全 IDA 摘要、視覺統計與可重生探針；BOOKPICS 全 archive 升為已證實，
   SPEC-002 仍維持 DRAFT。
 - 第二個最終全新 IDA DB 摘要，以及第二批 14 張 PNG／安全統計，均與第一批逐 byte 相同。
+
+## 2026-08-31：WEATPICS 全 18 筆分層合成
+
+- 由 `weat%s.0` 預載 buffer 追到 `sub_2A0C6`、`sub_2A01C`與 `sub_2A18E`，證實六組
+  64×62 圖層依 `(base AND mask) OR overlay` 合成。
+- group 0／1／2／5 的第三層為 496-byte MSB-first 1-bit mask；group 3／4 為四平面
+  4-bit mask。遮罩 PNG 是運算資料，不是 alpha。
+- 六張 composite 目視為晴空、雲景、風暴、雨、雪、夜景。早期僅依 caller 位置所作的
+  「戰鬥效果」判斷已由圖像證據否定，勘誤已寫入 RE-019。
+- 兩個全新 IDA 9.4 DB 的 safe／private JSON，以及兩輪 18 張圖層 PNG、6 張 composite
+  與摘要均逐 byte 相同。safe、private、視覺摘要 SHA-256 分別為
+  `11ef4d0e…bc35`、`638bce39…ae4a`、`7bb4e514…bed9`。
+- 新增可重生 IDA 探針、PNG 探針、安全證據摘要與格式規格；SPEC-002 仍為 DRAFT，
+  未建立 production importer 或 Go runtime。

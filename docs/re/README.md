@@ -33,8 +33,8 @@
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
 | 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-018 |
-| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、TWN index 24、MONPICS、PERPICS、MISCPICS、KOLMPICS index 28、AWD 與固定記錄表已分類 |
+| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-019 |
+| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、TWN index 24、MONPICS、PERPICS、MISCPICS、KOLMPICS index 28、AWD 與固定記錄表已分類 |
 | IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口

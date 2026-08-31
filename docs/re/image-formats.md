@@ -309,9 +309,17 @@ loaded-MZ EA `0x102ac` 以整檔 reader `sub_1374E` 載入 archive。`sub_1137B`
 BOOKPICS 全 archive 的來源、consumer、alias、索引、幾何、像素格式、方向與無透明
 direct-blit 政策為 `已證實`；RGB 是 mode 0Dh `hardware-spec approximation`。
 
+### WEATPICS 分層合成
+
+`sub_2A0C6:0x2a0d5..0x2a11d` 以 `3*group+[0,1,2]` 選擇三層；六組均是
+64×62。group 0／1／2／5 的第三層是 496-byte MSB-first 1-bit AND mask，group 3／4
+則是二階 RLE 後的四平面 AND mask。`sub_2A18E:0x2a1de..0x2a1e8` 的原始運算是
+`(base AND mask) OR overlay`。因此 mask PNG 的像素值是運算資料，不是 alpha。
+六張合成圖目視支持晴空／雲／風暴／雨／雪／夜景的分類（`強推論`）；像素契約與公式為 `已證實`。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

@@ -572,3 +572,30 @@ SPEC-002 仍因其他 archive 與 theme 決策維持 DRAFT。
   與圖示列，方向、scanline、plane、裁切正常；PNG 僅留 ignored 工作區。
 - BOOKPICS 全 archive 的來源、consumer、alias、索引、幾何、4-bit EGA 與無透明
   direct-blit 政策為 `已證實`。SPEC-002 整體仍為 DRAFT。
+
+## RE-019：KOLTOWN WEATPICS 六組分層背景
+
+### 問題與證據
+
+固定 KOLTOWN derivative（SHA-256 `01f6f9a9…d1d2`）的 `weat%s.0` 是否可安全轉為
+runtime-only PNG？IDA Pro 9.4 位址空間為 reconstructed unpacked MZ linear EA；原始名稱、
+EA、bytes 與 disassembly 保留於 ignored private JSON，版控摘要為
+`koltown-weatpics-layered-visual-probe.json`。
+
+- `sub_2A0C6:0x2a0d5..0x2a11d` 將 group 乘 3，依序載入三個 payload。
+- 全 18 筆分成六組 64×62；前兩層為 4-bit 色彩。group 0／1／2／5 第三層
+  為 496-byte MSB-first 1-bit mask，group 3／4 為二階 RLE 後的四平面 mask。
+- `sub_2A18E:0x2a1de..0x2a1e8` 已證實合成公式為 `(base AND mask) OR overlay`。
+- 六張合成圖目視為晴空、雲景、風暴、降雨、降雪與夜景；故「野外天候／時段」
+  為 `強推論`，不由縮寫檔名單獨宣稱。
+
+### 勘誤、結論與 remake mapping
+
+早期僅根據 caller 位置曾短暫歸為「戰鬥效果」；六張合成圖的直接視覺證據否定此說，
+改為天候／時段背景候選。這項訂正保留於此，不重寫為從未誤判。
+
+圖層角色、尺寸、像素值與合成公式為 `已證實`。mask PNG 是運算資料，不是 RGBA
+alpha；runtime 可只讀 PNG，但必須依 manifest role 合成，不得把 mask 單獨顯示。
+兩次全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
+`11ef4d0e…bc35`、`638bce39…ae4a`；兩輪 18 張圖層 PNG、6 張 composite 與摘要也逐 byte 相同，
+摘要 SHA-256 `7bb4e514…bed9`。SPEC-002 維持 DRAFT，未授權 production importer。
