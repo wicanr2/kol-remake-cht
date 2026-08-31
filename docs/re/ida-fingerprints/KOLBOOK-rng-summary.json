@@ -103,6 +103,11 @@
       "disassembly": "mov     al, [bx+7772h]"
     },
     {
+      "ea": "0x11cb6",
+      "bytes": "83c308",
+      "disassembly": "add     bx, 8"
+    },
+    {
       "ea": "0x11ce1",
       "bytes": "8a875c00",
       "disassembly": "mov     al, [bx+5Ch]"
@@ -141,6 +146,36 @@
       "ea": "0x11d80",
       "bytes": "a23d12",
       "disassembly": "mov     byte_1A47D, al"
+    },
+    {
+      "ea": "0x11bda",
+      "bytes": "0346f8",
+      "disassembly": "add     ax, [bp+var_8]"
+    },
+    {
+      "ea": "0x11bdd",
+      "bytes": "05ebff",
+      "disassembly": "add     ax, 0FFEBh"
+    },
+    {
+      "ea": "0x11c85",
+      "bytes": "8346fa06",
+      "disassembly": "add     [bp+var_6], 6"
+    },
+    {
+      "ea": "0x126b3",
+      "bytes": "8a873412",
+      "disassembly": "mov     al, [bx+1234h]"
+    },
+    {
+      "ea": "0x126ba",
+      "bytes": "b96400",
+      "disassembly": "mov     cx, 64h ; 'd'"
+    },
+    {
+      "ea": "0x126c4",
+      "bytes": "f7f1",
+      "disassembly": "div     cx"
     }
   ],
   "caller_function_count": 2,
@@ -163,7 +198,7 @@
       20,
       100
     ],
-    "primary_stat_contract": "for each of 7 fields: encoded byte + low_nibble rolls of sub_14BE4(dice_sides[high_nibble])",
+    "primary_internal_stat_contract": "for each of 7 fields: record byte[8+i] + low_nibble of byte[i] rolls of sub_14BE4(dice_sides[high_nibble])",
     "primary_output_eas": [
       "0x1a474",
       "0x1a475",
@@ -187,7 +222,52 @@
         "formula": "floor((EA 0x1a476 + EA 0x1a477) / 2)"
       }
     ],
+    "display_contract": "floor(internal_stat * 100 / 150)",
+    "profession_record_groups": [
+      {
+        "selector": "race=0 HUMAN, secondary=0 MALE",
+        "indices": [
+          0,
+          11
+        ]
+      },
+      {
+        "selector": "race=0 HUMAN, secondary=1 FEMALE",
+        "indices": [
+          12,
+          15
+        ]
+      },
+      {
+        "selector": "race=1 ELVEN, secondary=0 MALE",
+        "indices": [
+          16,
+          21
+        ]
+      },
+      {
+        "selector": "race=1 ELVEN, secondary=1 FEMALE",
+        "indices": [
+          22,
+          27
+        ]
+      },
+      {
+        "selector": "race=2 DWARVEN",
+        "indices": [
+          28,
+          35
+        ]
+      },
+      {
+        "selector": "race=3 KELDEN",
+        "indices": [
+          36,
+          38
+        ]
+      }
+    ],
     "status": "confirmed"
   },
-  "limitation": "本摘要只固定 RNG routes；每個 caller 的產品語意與結果欄位需另作資料流審查。"
+  "limitation": "本摘要固定亂數、職業 selector、內部屬性與顯示換算；初始技能／物品與存檔 writer 另作審查。"
 }

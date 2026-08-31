@@ -923,14 +923,32 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - 固定 `KOLBOOK.EXE` SHA-256 `2cada028…e5832`；IDA Pro 9.4 loaded-MZ linear EA。
   `_main:0x1001e..0x1015b` 以 BIOS `INT 1Ah` 的低 tick word 為一般 seed；顯示模式值 7
   分支改傳 16。`_rand` 唯一 caller `sub_14BE4` 已證實回傳 `rand()%N+1`。
-- `sub_11820:0x11c9d..0x11d18` 以 `profession_index×16` 選記錄，對前七個編碼 byte `E`
-  計算 `E + Σ roll(dice[E>>4])`，次數為 `E&0x0f`；骰面表為
-  `[3,4,6,8,10,12,20,100]`。早期把同一 byte 誤讀成「另一份 base」的假說，已由兩次
-  相同位址 load 的原始指令否定。
+- 本節初次把兩個 `[bx+7772h]` load 誤讀為同一 record offset，因而寫成骰式 byte 同時
+  是基值。後續回查前一指令 `0x11cb6 add bx,8` 已否定該結論：offset 0..6 是骰式，
+  offset 8..14 才是獨立內部基值。形成原因與訂正保留於 RE-036，不把舊誤判藏起來。
 - EA `0x1a47b`、`0x1a47c`、`0x1a47d` 分別是力量／智力、力量／健康、體型／健康的
   無號整數平均，全部向下取整。欄位語意由手冊順序與公式交叉分級，不以改名代替證據。
 - 兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
-  `f8ff1103…187b`／`9575adcf…d7f`。安全摘要固定原始 EA、bytes、函式名與限制；完整
+  當輪 `f8ff1103…187b`／`9575adcf…d7f`；此版本現由 RE-036 的修正版摘要取代。完整
   指令及 `.i64` 不進版控；本輪比對完成後已清除，可由固定探針與輸入重生。
-- **限制**：尚未關閉 35 個職業 enum 與 16-byte 記錄逐項對應，也未證實 DOS library
+- **限制（當時）**：尚未關閉 35 個職業 enum 與 16-byte 記錄逐項對應，也未證實 DOS library
   `_rand` 的完整序列；SPEC-005 維持 DRAFT，不進 production implementation。
+
+## RE-036：職業記錄、名稱 selector 與屬性顯示量尺
+
+- `BOOKDATA` 項目 2 固定為 424-byte 壓縮流；LZW 解成 625 bytes、SHA-256
+  `848ad877…b321`，結構是 39×16-byte 記錄加一個零尾 byte。每筆 offset 0..6 是七個
+  骰式 `D`，8..14 是七個內部基值 `B`，7／15 固定為零。內部公式訂正為
+  `B + Σ roll(dice[D>>4])`，次數 `D&0x0f`。
+- `sub_12677:0x126b3..0x126c4` 對十項內部屬性顯示
+  `floor(value×100/150)`；因此手冊的 0–100 平均表不能直接與 raw byte 比較。
+- `sub_14101` 以 CR 遍歷 `BOOKDATA` 文字項目；行 14..19 固定 HUMAN／ELVEN／DWARVEN／
+  KELDEN 與 MALE／FEMALE enum，行 21..53 固定 33 個 menu names。`sub_11820` 的 selector
+  將它們映到 12＋4＋6＋6＋8＋3＝39 筆記錄；男女精靈共用名稱而使用不同記錄。
+- 矮人記錄 `[28..31]` 與 `[32..35]` 成對逐 byte 相同，對應手冊把八個 menu names 合併
+  為四列共同數值；故「35 個手冊列」與「39 個 executable 記錄」不再互相矛盾。
+- 最終兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `e3309787…1116`／`a6e07f2a…8401`；兩輪 archive safe／private 為
+  `aaa112ef…cb2d`／`7d13f6ea…9b36`。private raw records 與 `.i64` 不進版控。
+- **限制**：本輪尚未關閉初始技能／物品 writer、768-byte 存檔欄位與 DOS `_rand` 完整
+  序列；SPEC-005 維持 DRAFT，不授權 production implementation。

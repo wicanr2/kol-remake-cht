@@ -31,6 +31,7 @@ EXPECTED_INSTRUCTION_BYTES = {
     0x14BF6: "050100",
     0x11CBC: "8a877277",
     0x11CCC: "8a877277",
+    0x11CB6: "83c308",
     0x11CE1: "8a875c00",
     0x11CEB: "8366ec0f",
     0x11CFA: "e8e72e",
@@ -39,6 +40,12 @@ EXPECTED_INSTRUCTION_BYTES = {
     0x11D44: "a23b12",
     0x11D62: "a23c12",
     0x11D80: "a23d12",
+    0x11BDA: "0346f8",
+    0x11BDD: "05ebff",
+    0x11C85: "8346fa06",
+    0x126B3: "8a873412",
+    0x126BA: "b96400",
+    0x126C4: "f7f1",
 }
 
 
@@ -64,6 +71,21 @@ def function_record(start: int) -> dict:
         "callers": [f"0x{x:x}" for x in sorted(idautils.CodeRefsTo(start, False))],
         "instructions": [insn(ea) for ea in idautils.FuncItems(start)],
     }
+
+
+def operand_sites(*needles: str) -> list[dict]:
+    rows = []
+    lowered = tuple(needle.lower() for needle in needles)
+    for start in idautils.Functions():
+        for ea in idautils.FuncItems(start):
+            row = insn(ea)
+            if any(needle in row["disassembly"].lower() for needle in lowered):
+                rows.append({
+                    "original_function": idc.get_func_name(start),
+                    "function_start_ea": f"0x{start:x}",
+                    **row,
+                })
+    return rows
 
 
 def main() -> None:
@@ -153,6 +175,10 @@ def main() -> None:
         "caller_functions": [function_record(x) for x in sorted(caller_starts)],
         "wrapper_caller_functions": [function_record(x) for x in sorted(second_level_starts)],
         "bookdata_loader_function": function_record(0x13E3F),
+        "bookdata_postload_function": function_record(0x13FFC),
+        "bookdata_buffer_operand_sites": operand_sites("7772h", "209b2"),
+        "character_stat_display_function": function_record(0x12677),
+        "text_resource_function": function_record(0x14101),
     }
     safe = {
         "schema": "kol-ida-kolbook-rng-summary-v1",
@@ -168,8 +194,8 @@ def main() -> None:
             "bounded_roll": "sub_14BE4(N) = rand() % N + 1",
             "dice_sides_table_ea": f"0x{DICE_SIDES_EA:x}",
             "dice_sides": list(dice_sides),
-            "primary_stat_contract": (
-                "for each of 7 fields: encoded byte + low_nibble rolls of "
+            "primary_internal_stat_contract": (
+                "for each of 7 fields: record byte[8+i] + low_nibble of byte[i] rolls of "
                 "sub_14BE4(dice_sides[high_nibble])"
             ),
             "primary_output_eas": [f"0x{x:x}" for x in range(0x1A474, 0x1A47B)],
@@ -178,9 +204,18 @@ def main() -> None:
                 {"ea": "0x1a47c", "formula": "floor((EA 0x1a474 + EA 0x1a477) / 2)"},
                 {"ea": "0x1a47d", "formula": "floor((EA 0x1a476 + EA 0x1a477) / 2)"},
             ],
+            "display_contract": "floor(internal_stat * 100 / 150)",
+            "profession_record_groups": [
+                {"selector": "race=0 HUMAN, secondary=0 MALE", "indices": [0, 11]},
+                {"selector": "race=0 HUMAN, secondary=1 FEMALE", "indices": [12, 15]},
+                {"selector": "race=1 ELVEN, secondary=0 MALE", "indices": [16, 21]},
+                {"selector": "race=1 ELVEN, secondary=1 FEMALE", "indices": [22, 27]},
+                {"selector": "race=2 DWARVEN", "indices": [28, 35]},
+                {"selector": "race=3 KELDEN", "indices": [36, 38]},
+            ],
             "status": "confirmed",
         },
-        "limitation": "本摘要只固定 RNG routes；每個 caller 的產品語意與結果欄位需另作資料流審查。",
+        "limitation": "本摘要固定亂數、職業 selector、內部屬性與顯示換算；初始技能／物品與存檔 writer 另作審查。",
     }
     private_path.write_text(json.dumps(private, indent=2) + "\n", encoding="utf-8")
     safe_path.write_text(json.dumps(safe, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

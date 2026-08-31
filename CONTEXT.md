@@ -87,9 +87,11 @@
 - 角色建立已建立 SPEC-005 DRAFT。手冊固定名字→種族→性別→職業→reroll→圖像→保存
   狀態機；`CHARDATA` 為 16×768 bytes、`CHARPICS` 為 16×760 bytes。IDA 固定 KOLBOOK
   `chardata` EA `0x1945a`、路由 `sub_134C2` 與五個立即 arg=0 caller。屬性 RNG 已證實為
-  BIOS tick seed、`rand()%N+1` wrapper、八值骰面表及七個職業編碼 byte 的擲骰公式；三個
-  衍生值均為對應兩屬性的向下取整平均。職業 enum／eligibility、初始技能物品、768-byte
-  欄位與 typed schema 尚未關閉，因此仍不授權實作。
+  BIOS tick seed、`rand()%N+1` wrapper、八值骰面表、獨立骰式／內部基值與 100/150 顯示
+  量尺；三個衍生值均為內部屬性的向下取整平均。`BOOKDATA` 的 39 筆記錄、四種族、兩個
+  secondary 值及 33 個 menu names 已建立完整 selector；35 個手冊列與 39 筆記錄的差異由
+  男女精靈共名及矮人雙名稱同記錄解釋。初始技能物品、768-byte 欄位與 typed schema 尚未
+  關閉，因此仍不授權實作。
 
 ## 固定輸入
 
@@ -131,5 +133,5 @@ KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
 顯示 theme 與 TITLE OGG 呈現方向都等待使用者決定。可獨立前進的下一窄切片是完成
-35 個職業與 `BOOKDATA` 16-byte 記錄的對應、eligibility 及初始技能／物品 writer；
+39 個職業記錄的初始技能／物品 writer 與最小 768-byte 存檔欄位索引；
 SPEC-002／004／005 READY 前不接 production runtime。

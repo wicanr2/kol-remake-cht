@@ -854,3 +854,18 @@
 - 更新 RE-035、角色證據表與 SPEC-005 DRAFT；沒有建立 Go／Ebitengine production code。
 - 全部分析與驗證使用有界 `docker run --rm --network none`；五個 `/tmp/kol-rng-*` 目錄已
   精確清除，結束檢查沒有 KOL／IDA 專案容器。
+
+## 2026-09-01：職業記錄與屬性量尺勘誤
+
+- 回查 `sub_11820` 發現前輪漏讀 `0x11cb6 add bx,8`，因此「骰式 byte 同時是基值」結論
+  作廢；正確記錄 layout 為七個骰式、零、七個內部基值、零。RE-035 保留形成原因，
+  RE-036 追加訂正。
+- `sub_12677` 證實玩家畫面使用 `floor(internal×100/150)`；新增 archive 探針，固定
+  `BOOKDATA` 項目 2 為 39×16＋1 bytes，並以項目 1 的 CR-delimited 文字關閉 race、
+  secondary 與 33 個 menu names 的記錄順序。
+- 39 筆 selector 分組為 12／4／6／6／8／3；男女精靈共名但分用記錄，四對矮人記錄逐
+  byte 相同，解釋手冊只有 35 列。沒有把 raw records 寫入 production typed data。
+- 最終雙新建 IDA safe／private SHA-256 為 `e3309787…1116`／`a6e07f2a…8401`；雙重生
+  archive safe／private 為 `aaa112ef…cb2d`／`7d13f6ea…9b36`。
+- IDA、archive 解碼與驗證全用有界 `docker run --rm --network none`；十個
+  `/tmp/kol-prof-*` 目錄已精確清除，結束檢查沒有 KOLBOOK／IDA 專案容器。

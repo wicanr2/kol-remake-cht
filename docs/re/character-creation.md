@@ -50,13 +50,16 @@
 - `_rand` 只有 `sub_14BE4:0x14be4` 一個 caller；該 wrapper 已證實為
   `rand() % N + 1`。固定骰面表位於 EA `0x1929c`，依序為
   `[3, 4, 6, 8, 10, 12, 20, 100]`。
-- `sub_11820:0x11c9d..0x11d18` 以 `profession_index × 16` 選記錄，前七個 byte
-  分別產生七項主要屬性。若編碼 byte 為 `E`，則：
+- `sub_11820:0x11c9d..0x11d18` 以 `profession_index × 16` 選記錄。offset `0..6`
+  是七個骰式 byte `D`，offset `8..14` 是七個內部基值 `B`；offset 7／15 固定為零。
+  每項主要屬性的內部值為：
 
-  `結果 = E + Σ roll(骰面表[E >> 4])`，擲骰次數為 `E & 0x0f`，每骰落在 `1..N`。
+  `內部值 = B + Σ roll(骰面表[D >> 4])`，擲骰次數為 `D & 0x0f`，每骰落在 `1..N`。
 
-  同一個 `E` 同時是結果的起始數值與骰式編碼；沒有另一份已證實的 base table。輸出依序
-  寫入 EA `0x1a474..0x1a47a`。
+  先前把 offset `8..14` 的 load 漏看成同一位址、因而誤記為「骰式 byte 同時是基值」；
+  原始 operand `add bx,8` 足以否定該解釋。內部輸出依序寫入 EA `0x1a474..0x1a47a`。
+- `sub_12677:0x126b3..0x126c4` 顯示十項屬性時採
+  `floor(內部值 × 100 / 150)`；手冊 0–100 表與內部 byte 不可直接逐值比較。
 - 手冊順序與後續公式共同支持主要欄位依序為力量、敏捷、體型、健康、先見、魅力、智力；
   其中力量、體型、健康、智力可由衍生公式交叉確認，其餘三項目前列為強推論。
 - 三項衍生值皆採無號整數除二、向下取整：平衡 EA `0x1a47b` =
@@ -64,12 +67,23 @@
   EA `0x1a47d` = `(體型 + 健康) / 2`。這補足手冊只說「由兩項屬性計算」而未明載的
   耐力公式。
 - 兩個最終全新 IDA DB 的 safe／private JSON 均逐 byte 相同；SHA-256 分別為
-  `f8ff110347d6ceb166d193f3bc47b722bacf05ef61e729d64094c1fac1f2187b` 與
-  `9575adcfbfb3b67d446eb55a1989879ca72ceee08bda98cf9d6893061622ad7f`。
+  `e3309787e6281c0a0837394b19fbcfc4be493b1e996898f4d695890cf3b71116` 與
+  `a6e07f2a8cb5f8ce62ff795a75598eb6958317c9a9a675661f7b1d2b8ee48401`。
+
+## BOOKDATA 職業記錄結構
+
+- `BOOKDATA` 項目 2 壓縮 424 bytes，機械解碼為 625 bytes，SHA-256
+  `848ad877…b321`；結構為 39×16-byte 記錄加一個 `0x00` 尾 byte。
+- `sub_14101` 證實文字項目以 CR 分列；行 14..19 固定 race／secondary enum，行 21..53
+  固定職業選單順序。selector 分組為 12、4、6、6、8、3 筆；男性／女性精靈共用六個
+  選單名稱但各自使用不同的六筆記錄。記錄 28..31 分別與 32..35 逐 byte 相同，和手冊把
+  八個矮人名稱合併為四列共同數值交叉吻合。
+- 可重生安全摘要為 `profession-data-summary.json`；兩輪 safe／private 輸出逐 byte 相同，
+  SHA-256 為 `aaa112ef…cb2d`／`7d13f6ea…9b36`。private raw records 不進版控。
 
 ## 尚未關閉的 RE 問題
 
-1. 35 個職業的 executable enum、16-byte 記錄對應、種族／性別 eligibility table 與初始物品／技能 writer。
+1. 39 個 executable 職業記錄的初始物品／技能 writer；35 個手冊列與 39 個 menu name／record 的對應已關閉。
 2. DOS `rand` 的確切 library 序列與 reroll／接受按鍵的正常 UI 資料流；目前已固定 seed 與 bounded-roll caller 契約。
 3. 768-byte record 的名字、種族、性別、職業、屬性、技能、裝備與 checksum／狀態欄位。
 4. 空名、重名、16 字元邊界、ESC 每層返回、角色槽已滿等正常 UI oracle。

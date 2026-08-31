@@ -1,0 +1,161 @@
+"""機械驗證 KOLBOOK 的 BOOKDATA 職業記錄；不輸出原版 raw bytes。"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import zipfile
+from pathlib import Path
+
+from inventory_image_archives import EXPECTED_ZIP_SHA256, logical_archive_contract
+from probe_image_lzw import decode
+
+
+ROOT = "Knights-of-legend/BOOKDATA"
+ITEM_INDEX = 2
+EXPECTED_COMPRESSED_BYTES = 424
+EXPECTED_DECODED_BYTES = 625
+EXPECTED_DECODED_SHA256 = "848ad877f8176b8b3d950d8853b36cf7e0271629c8822ce15c7f420ea2e7b321"
+DICE_SIDES = [3, 4, 6, 8, 10, 12, 20, 100]
+EXPECTED_TEXT_DECODED_SHA256 = "0378dedd8b41e7dc07a4e154fe38a662ae53bb30e02c924fce3745a4f1d36b41"
+EXPECTED_RACES = ["HUMAN", "ELVEN", "DWARVEN", "KELDEN"]
+EXPECTED_SECONDARY = ["MALE", "FEMALE"]
+EXPECTED_MENU_NAMES = [
+    "BARBARIAN", "RANGER", "WARRION", "SQUIRE", "DARKGUARD", "WATCHMAN",
+    "PLAINSMAN", "HUNTER", "REGULAR", "HIGHWAYMAN", "PIRATE", "ROGUE",
+    "TIGRESS", "AMAZON", "HUNTRESS", "PLAINSWOMAN", "BREKLAND", "KLVAR",
+    "MELOD", "PYAR", "THISM", "USIP", "TUNNELER", "RATGUARD", "TROLLBANE",
+    "MILITIA", "DIGGER", "SPIDER GUARD", "ORCBANE", "LEVY", "CLIFF GUARD",
+    "ROCK RANGER", "FAR SEEKER",
+]
+
+
+def sha(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("zip_path", type=Path)
+    parser.add_argument("safe_output", type=Path)
+    parser.add_argument("private_output", type=Path)
+    args = parser.parse_args()
+
+    zip_bytes = args.zip_path.read_bytes()
+    if sha(zip_bytes) != EXPECTED_ZIP_SHA256:
+        raise SystemExit("非預期原版 ZIP SHA-256")
+
+    with zipfile.ZipFile(args.zip_path) as archive:
+        files = {
+            info.filename: archive.read(info)
+            for info in archive.infolist()
+            if not info.is_dir()
+        }
+    contract = logical_archive_contract(ROOT, files)
+    if contract is None or not contract["all_payload_bounds_valid"]:
+        raise SystemExit("BOOKDATA archive 契約無效")
+    if contract["count"] != 5:
+        raise SystemExit(f"非預期 BOOKDATA 項目數：{contract['count']}")
+
+    item = contract["items"][ITEM_INDEX]
+    if item["compressed_bytes"] != EXPECTED_COMPRESSED_BYTES:
+        raise SystemExit("職業項目壓縮長度改變")
+    source = files[item["volume_name"]]
+    payload = source[item["offset"] : item["offset"] + item["compressed_bytes"]]
+    decoded = decode(payload)
+    if len(decoded) != EXPECTED_DECODED_BYTES or sha(decoded) != EXPECTED_DECODED_SHA256:
+        raise SystemExit("職業項目解碼結果改變")
+    if decoded[-1] != 0:
+        raise SystemExit("職業項目尾 byte 不再是 0")
+
+    text_item = contract["items"][1]
+    text_source = files[text_item["volume_name"]]
+    text_payload = text_source[
+        text_item["offset"] : text_item["offset"] + text_item["compressed_bytes"]
+    ]
+    text_decoded = decode(text_payload)
+    if sha(text_decoded) != EXPECTED_TEXT_DECODED_SHA256:
+        raise SystemExit("BOOKDATA 文字項目解碼結果改變")
+    lines = [line.decode("ascii") for line in text_decoded.split(b"\r")]
+    if lines[14:18] != EXPECTED_RACES or lines[18:20] != EXPECTED_SECONDARY:
+        raise SystemExit("種族／secondary 選單文字順序改變")
+    if lines[21:54] != EXPECTED_MENU_NAMES:
+        raise SystemExit("職業選單文字順序改變")
+
+    records = [decoded[index * 16 : (index + 1) * 16] for index in range(39)]
+    if any(len(record) != 16 for record in records):
+        raise SystemExit("職業記錄 stride 改變")
+    if any(record[7] != 0 or record[15] != 0 for record in records):
+        raise SystemExit("職業記錄保留 byte 改變")
+    if any((code >> 4) >= len(DICE_SIDES) for record in records for code in record[:7]):
+        raise SystemExit("職業骰面 selector 超界")
+    duplicate_pairs = [[left, right] for left, right in zip(range(28, 32), range(32, 36))]
+    if any(records[left] != records[right] for left, right in duplicate_pairs):
+        raise SystemExit("矮人雙名稱記錄不再成對相同")
+
+    group_contract = [
+        {"selector": "race=0 HUMAN, secondary=0 MALE", "record_indices": [0, 11], "count": 12},
+        {"selector": "race=0 HUMAN, secondary=1 FEMALE", "record_indices": [12, 15], "count": 4},
+        {"selector": "race=1 ELVEN, secondary=0 MALE", "record_indices": [16, 21], "count": 6},
+        {"selector": "race=1 ELVEN, secondary=1 FEMALE", "record_indices": [22, 27], "count": 6},
+        {"selector": "race=2 DWARVEN", "record_indices": [28, 35], "count": 8},
+        {"selector": "race=3 KELDEN", "record_indices": [36, 38], "count": 3},
+    ]
+    record_names = [
+        *EXPECTED_MENU_NAMES[0:16],
+        *EXPECTED_MENU_NAMES[16:22],
+        *EXPECTED_MENU_NAMES[16:22],
+        *EXPECTED_MENU_NAMES[22:33],
+    ]
+    if len(record_names) != 39:
+        raise SystemExit("職業名稱映射數量錯誤")
+    safe = {
+        "schema": "kol-kolbook-profession-data-summary-v1",
+        "input_name": "Knights-of-legend.zip",
+        "input_sha256": sha(zip_bytes),
+        "archive_root": ROOT,
+        "archive_item_index": ITEM_INDEX,
+        "compressed_bytes": len(payload),
+        "decoded_bytes": len(decoded),
+        "decoded_sha256": sha(decoded),
+        "record_count": len(records),
+        "record_stride": 16,
+        "trailing_bytes": 1,
+        "trailing_byte_hex": "00",
+        "dice_sides": DICE_SIDES,
+        "record_layout": {
+            "dice_codes": {"offset": 0, "count": 7},
+            "reserved_zero_0": {"offset": 7, "count": 1},
+            "internal_bases": {"offset": 8, "count": 7},
+            "reserved_zero_1": {"offset": 15, "count": 1},
+        },
+        "text_item_decoded_sha256": sha(text_decoded),
+        "race_enum": [{"value": index, "name": name} for index, name in enumerate(EXPECTED_RACES)],
+        "secondary_enum": [{"value": index, "name": name} for index, name in enumerate(EXPECTED_SECONDARY)],
+        "selector_groups": group_contract,
+        "record_name_map": [{"record_index": index, "menu_name": name} for index, name in enumerate(record_names)],
+        "byte_identical_record_pairs": duplicate_pairs,
+        "status": "mechanically confirmed structure and profession menu-name order",
+    }
+    private = {
+        "schema": "kol-kolbook-profession-data-private-v1",
+        **safe,
+        "records": [
+            {
+                "index": index,
+                "raw_hex": record.hex(),
+                "dice_codes": list(record[:7]),
+                "internal_bases": list(record[8:15]),
+            }
+            for index, record in enumerate(records)
+        ],
+    }
+    args.safe_output.parent.mkdir(parents=True, exist_ok=True)
+    args.private_output.parent.mkdir(parents=True, exist_ok=True)
+    args.safe_output.write_text(json.dumps(safe, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.private_output.write_text(json.dumps(private, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()
