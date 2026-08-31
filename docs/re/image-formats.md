@@ -399,7 +399,7 @@ AND-mask 加一個非像素尾 byte。RGBA 依已證實的 `(destination AND mas
 
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、KOLPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、HEADPICS、TORPICS、LEGSPICS、WEAPPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。
@@ -410,3 +410,17 @@ AND-mask 加一個非像素尾 byte。RGBA 依已證實的 `(destination AND mas
 
 在完整命名、manifest 與失敗政策關閉前，`SPEC-002` 保持 DRAFT；一次性解碼成功不得
 接入 Go／Ebitengine。
+
+### KOLPICS.0 混合 RLE／raw-planar archive
+
+KOLTOWN startup、`sub_1103F` 與 `sub_1E3A8` 證實 active indices 是
+0／1／2／4／5／8／12／13；3／6／7／9／10／11 是一-byte placeholder。索引
+1／2／4／5／13 依 caller 矩形解為 320×200、296×32、288×155、288×77、288×78 的
+direct-blit 4-bit EGA 圖。
+
+索引 0／8／12 不走二階 RLE，而由 `sub_19B29` 把每個 256-byte source stride 前半的
+四個 32-byte planes 轉成 256 個 chunky pixels。索引 8／12 的 consumer 直接以
+`y<<6+x` 存取，故 64 欄為 `已證實`；160 列仍是有效長度推論。索引 0 的 256×5 亦只為
+強推論。第一次 256×80 排列已由目視交錯雜訊否定並保留勘誤。精確位址、bytes 與等級見
+`ida-fingerprints/KOLTOWN-kolpics-summary.json`；八張 ignored PNG 的統計見
+`kolpics-ega-visual-probe.json`。這是 RE probe，不是 production importer。

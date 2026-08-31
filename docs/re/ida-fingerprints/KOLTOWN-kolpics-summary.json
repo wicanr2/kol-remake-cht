@@ -1,0 +1,427 @@
+{
+  "schema": "kol-ida-koltown-kolpics-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "active_indices": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    8,
+    12,
+    13
+  ],
+  "placeholder_indices": [
+    3,
+    6,
+    7,
+    9,
+    10,
+    11
+  ],
+  "rle_indices": [
+    1,
+    2,
+    4,
+    5,
+    13
+  ],
+  "raw_planar_indices": [
+    0,
+    8,
+    12
+  ],
+  "archive_records": [
+    {
+      "index": 0,
+      "kind": "raw-planar",
+      "role": "startup",
+      "decoded_bytes": 1281,
+      "source_stride_bytes": 256,
+      "planar_bytes_per_stride": 128,
+      "width": 256,
+      "height": 5,
+      "layout_grade": "confirmed",
+      "width_grade": "strong inference",
+      "height_grade": "strong inference"
+    },
+    {
+      "index": 1,
+      "kind": "rle",
+      "width": 320,
+      "height": 200,
+      "request": 29,
+      "geometry_grade": "confirmed"
+    },
+    {
+      "index": 2,
+      "kind": "rle",
+      "width": 296,
+      "height": 32,
+      "request": 30,
+      "geometry_grade": "confirmed"
+    },
+    {
+      "index": 3,
+      "kind": "placeholder",
+      "decoded_bytes": 1
+    },
+    {
+      "index": 4,
+      "kind": "rle",
+      "width": 288,
+      "height": 155,
+      "request": 32,
+      "geometry_grade": "confirmed"
+    },
+    {
+      "index": 5,
+      "kind": "rle",
+      "width": 288,
+      "height": 77,
+      "request": 33,
+      "geometry_grade": "confirmed"
+    },
+    {
+      "index": 6,
+      "kind": "placeholder",
+      "decoded_bytes": 1
+    },
+    {
+      "index": 7,
+      "kind": "placeholder",
+      "decoded_bytes": 1
+    },
+    {
+      "index": 8,
+      "kind": "raw-planar",
+      "role": "default",
+      "decoded_bytes": 10241,
+      "source_stride_bytes": 256,
+      "planar_bytes_per_stride": 128,
+      "width": 64,
+      "height": 160,
+      "layout_grade": "confirmed",
+      "width_grade": "confirmed",
+      "height_grade": "strong inference"
+    },
+    {
+      "index": 9,
+      "kind": "placeholder",
+      "decoded_bytes": 1
+    },
+    {
+      "index": 10,
+      "kind": "placeholder",
+      "decoded_bytes": 1
+    },
+    {
+      "index": 11,
+      "kind": "placeholder",
+      "decoded_bytes": 1
+    },
+    {
+      "index": 12,
+      "kind": "raw-planar",
+      "role": "alternate",
+      "decoded_bytes": 10241,
+      "source_stride_bytes": 256,
+      "planar_bytes_per_stride": 128,
+      "width": 64,
+      "height": 160,
+      "layout_grade": "confirmed",
+      "width_grade": "confirmed",
+      "height_grade": "strong inference"
+    },
+    {
+      "index": 13,
+      "kind": "rle",
+      "width": 288,
+      "height": 78,
+      "request": 100,
+      "geometry_grade": "confirmed"
+    }
+  ],
+  "raw_planar_contract": {
+    "source_stride_bytes": 256,
+    "planar_bytes_per_stride": 128,
+    "plane_bytes_per_row": 32,
+    "plane_count": 4,
+    "converted_pixels_per_block": 256,
+    "bit_order": "most-significant bit first",
+    "color_index": "plane3..plane0 form bits 3..0",
+    "layout_grade": "confirmed by sub_19B29",
+    "row_count_grade": "strong inference from decoded data length, sub_19B29 source stride and visual probe",
+    "limitation": "index 8/12 are consumed with a 64-column offset; their 160-row extent and index 0 geometry remain inferred from decoded length"
+  },
+  "evidence_notes": [
+    "DGROUP+0x166a/0x1672 的其他近字組命中位於既有指令內，屬位元組巧合而非消費端。",
+    "sub_1E3A8 傳給 sub_19B29 的 0x8000 不是 KOLPICS 索引 8/12 的資料長度證明。"
+  ],
+  "strings": [
+    {
+      "ea": "0x2f53a",
+      "dgroup_offset": "0x166a",
+      "bytes": "6b6f6c25732e3000",
+      "text": "kol%s.0"
+    },
+    {
+      "ea": "0x2f542",
+      "dgroup_offset": "0x1672",
+      "bytes": "6b6f6c257300",
+      "text": "kol%s"
+    },
+    {
+      "ea": "0x2f58a",
+      "dgroup_offset": "0x16ba",
+      "bytes": "6b6f6c257300",
+      "text": "kol%s"
+    },
+    {
+      "ea": "0x2f6d2",
+      "dgroup_offset": "0x1802",
+      "bytes": "6b6f6c257300",
+      "text": "kol%s"
+    },
+    {
+      "ea": "0x2f71a",
+      "dgroup_offset": "0x184a",
+      "bytes": "6b6f6c257300",
+      "text": "kol%s"
+    }
+  ],
+  "instruction_checks": [
+    {
+      "ea": "0x10570",
+      "bytes": "b86a16",
+      "disassembly": "mov     ax, 166Ah"
+    },
+    {
+      "ea": "0x10578",
+      "bytes": "9a0a1b8f2b",
+      "disassembly": "call    sub_2D3FA"
+    },
+    {
+      "ea": "0x10580",
+      "bytes": "ff369c2b",
+      "disassembly": "push    word_30A6C"
+    },
+    {
+      "ea": "0x10584",
+      "bytes": "ff369a2b",
+      "disassembly": "push    word_30A6A"
+    },
+    {
+      "ea": "0x1058c",
+      "bytes": "9a0800d919",
+      "disassembly": "call    sub_19D98"
+    },
+    {
+      "ea": "0x105ad",
+      "bytes": "b87216",
+      "disassembly": "mov     ax, 1672h"
+    },
+    {
+      "ea": "0x105bd",
+      "bytes": "a13a6b",
+      "disassembly": "mov     ax, word_34A0A"
+    },
+    {
+      "ea": "0x105cc",
+      "bytes": "b80000",
+      "disassembly": "mov     ax, 0"
+    },
+    {
+      "ea": "0x105d4",
+      "bytes": "9a6e07d919",
+      "disassembly": "call    sub_1A4FE"
+    },
+    {
+      "ea": "0x105dc",
+      "bytes": "b80005",
+      "disassembly": "mov     ax, 500h"
+    },
+    {
+      "ea": "0x105e0",
+      "bytes": "ff3654b9",
+      "disassembly": "push    word_39824"
+    },
+    {
+      "ea": "0x105e4",
+      "bytes": "9a299b0010",
+      "disassembly": "call    sub_19B29"
+    },
+    {
+      "ea": "0x10fc0",
+      "bytes": "ff7606",
+      "disassembly": "push    [bp+arg_0]"
+    },
+    {
+      "ea": "0x10fc3",
+      "bytes": "ff7608",
+      "disassembly": "push    [bp+arg_2]"
+    },
+    {
+      "ea": "0x10fc6",
+      "bytes": "9a6e07d919",
+      "disassembly": "call    sub_1A4FE"
+    },
+    {
+      "ea": "0x1101d",
+      "bytes": "ff363e6b",
+      "disassembly": "push    word_34A0E"
+    },
+    {
+      "ea": "0x1102d",
+      "bytes": "ff36981a",
+      "disassembly": "push    word_2F968"
+    },
+    {
+      "ea": "0x11031",
+      "bytes": "9a0d01d919",
+      "disassembly": "call    sub_19E9D"
+    },
+    {
+      "ea": "0x11189",
+      "bytes": "837e0664",
+      "disassembly": "cmp     [bp+arg_0], 64h"
+    },
+    {
+      "ea": "0x11192",
+      "bytes": "c746060d00",
+      "disassembly": "mov     [bp+arg_0], 0Dh"
+    },
+    {
+      "ea": "0x111a3",
+      "bytes": "836e061c",
+      "disassembly": "sub     [bp+arg_0], 1Ch"
+    },
+    {
+      "ea": "0x111aa",
+      "bytes": "836e063e",
+      "disassembly": "sub     [bp+arg_0], 3Eh"
+    },
+    {
+      "ea": "0x111ae",
+      "bytes": "837e0605",
+      "disassembly": "cmp     [bp+arg_0], 5"
+    },
+    {
+      "ea": "0x111b7",
+      "bytes": "837e060c",
+      "disassembly": "cmp     [bp+arg_0], 0Ch"
+    },
+    {
+      "ea": "0x111c0",
+      "bytes": "ff36e81c",
+      "disassembly": "push    word_2FBB8"
+    },
+    {
+      "ea": "0x111c7",
+      "bytes": "05faff",
+      "disassembly": "add     ax, 0FFFAh"
+    },
+    {
+      "ea": "0x111cb",
+      "bytes": "9a62120010",
+      "disassembly": "call    sub_11262"
+    },
+    {
+      "ea": "0x111f9",
+      "bytes": "b8ba16",
+      "disassembly": "mov     ax, 16BAh"
+    },
+    {
+      "ea": "0x1120d",
+      "bytes": "ff7606",
+      "disassembly": "push    [bp+arg_0]"
+    },
+    {
+      "ea": "0x11210",
+      "bytes": "9a9c0f0010",
+      "disassembly": "call    sub_10F9C"
+    },
+    {
+      "ea": "0x1a548",
+      "bytes": "b80218",
+      "disassembly": "mov     ax, 1802h"
+    },
+    {
+      "ea": "0x1a575",
+      "bytes": "ff36a400",
+      "disassembly": "push    word_2DF74"
+    },
+    {
+      "ea": "0x1a57d",
+      "bytes": "ff76ee",
+      "disassembly": "push    [bp+var_12]"
+    },
+    {
+      "ea": "0x1a580",
+      "bytes": "9a9906d919",
+      "disassembly": "call    sub_1A429"
+    },
+    {
+      "ea": "0x1e4c0",
+      "bytes": "c7067ebb0800",
+      "disassembly": "mov     word_39A4E, 8"
+    },
+    {
+      "ea": "0x1e4d0",
+      "bytes": "c7067ebb0c00",
+      "disassembly": "mov     word_39A4E, 0Ch"
+    },
+    {
+      "ea": "0x1e4f2",
+      "bytes": "b84a18",
+      "disassembly": "mov     ax, 184Ah"
+    },
+    {
+      "ea": "0x1e511",
+      "bytes": "ff367ebb",
+      "disassembly": "push    word_39A4E"
+    },
+    {
+      "ea": "0x1e519",
+      "bytes": "9a6e07d919",
+      "disassembly": "call    sub_1A4FE"
+    },
+    {
+      "ea": "0x1e521",
+      "bytes": "b80080",
+      "disassembly": "mov     ax, 8000h"
+    },
+    {
+      "ea": "0x1e530",
+      "bytes": "9a299b0010",
+      "disassembly": "call    sub_19B29"
+    },
+    {
+      "ea": "0x1eafe",
+      "bytes": "b90600",
+      "disassembly": "mov     cx, 6"
+    },
+    {
+      "ea": "0x1eb04",
+      "bytes": "d3e0",
+      "disassembly": "shl     ax, cl"
+    }
+  ],
+  "function_starts": [
+    "0x10000",
+    "0x10f9c",
+    "0x1103f",
+    "0x11262",
+    "0x19b29",
+    "0x19d98",
+    "0x19e9d",
+    "0x1a429",
+    "0x1a4fe",
+    "0x1bd17",
+    "0x1e3a8",
+    "0x2d3fa"
+  ]
+}

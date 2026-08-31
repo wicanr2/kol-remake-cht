@@ -737,3 +737,24 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   視覺摘要／HEAD／TOR／LEGS 接觸表 SHA-256 分別為 `d01b16e1…f3ba`、
   `3a4bd8a0…92a3`、`3dc7994e…58bc`、`fc0c8382…d53e`。
 - 新增可重生 IDA／PNG 探針與安全摘要；SPEC-002 維持 DRAFT，未接 production importer。
+
+## RE-025：KOLPICS.0 混合 archive 與 raw-planar 勘誤
+
+- 固定輸入是 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`，IDA Pro 9.4、重建
+  unpacked MZ linear EA。先檢查同名 `KOL.EXE`，已證實它只是顯示模式偵測／launcher，
+  不是 KOLPICS consumer；此排除結論保留，避免日後因名稱相同重走錯路。
+- startup、`sub_1103F` 與 `sub_1E3A8` 完整覆蓋 active indices
+  `[0,1,2,4,5,8,12,13]`；`[3,6,7,9,10,11]` 解碼後都只有一 byte，且沒有 consumer，
+  分類為 placeholder、不輸出 PNG。
+- 索引 1／2／4／5／13 的 caller 矩形分別是 320×200、296×32、288×155、288×77、
+  288×78，二階 RLE 像素數完全吻合，為 `已證實`。
+- `sub_19B29:0x19b41..0x19ba9` 每次從 source stride 256 的前 128 bytes 取四個 32-byte
+  planes，MSB-first 組成 256 個 4-bit chunky pixels。索引 8／12 的下游
+  `0x1eafe..0x1eb06` 以 `y<<6+x` 存取，因此 64 欄為 `已證實`；160 列只由 10,241-byte
+  有效長度與目視推得，仍是 `強推論`。索引 0 的 256×5 也只列為 `強推論`。
+- 初版曾把每 128 bytes 當相鄰一列而輸出 256×80，接觸表呈明顯交錯雜訊；這項目視反證
+  促使回查 in-place source stride 與下游 64 欄 consumer。舊幾何已作廢，不得當證據。
+- 兩份全新 IDA DB 的安全／私有 JSON 逐 byte 一致，SHA-256 為 `af3fe195…9e2`／
+  `25193b3d…58d`；兩輪 PNG 與摘要亦逐 byte 一致。安全摘要見
+  `ida-fingerprints/KOLTOWN-kolpics-summary.json`，視覺摘要見
+  `kolpics-ega-visual-probe.json`。SPEC-002 維持 DRAFT。

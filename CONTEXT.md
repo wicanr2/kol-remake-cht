@@ -57,6 +57,9 @@
 - HEADPICS／TORPICS／LEGSPICS 各 108 筆已關閉為各 54 組角色頭部、軀幹與腿部
   彩圖／AND-mask；共享 selector 是 `9*renderer_class+variant`，三份 6×9 接觸表與
   324 筆像素／mask 長度均吻合。指令允許 variant 0..15，實際合法資料範圍仍待另證。
+- KOLPICS 全 14 筆已分類：0／8／12 是 `sub_19B29` 轉換的 raw-planar 資料，1／2／4／5／13
+  是 direct-blit RLE 圖，3／6／7／9／10／11 是一-byte placeholder。索引 8／12 的 64 欄
+  由下游 `y<<6+x` 已證實，高度 160 與索引 0 的 256×5 仍是依有效長度與目視的強推論。
 - MISCPICS 六筆已完整分類：image 0／1／3／4／5 是五張 direct-blit 4-bit EGA 彩圖；
   image 2 是唯一一-byte、全程未引用的非圖片 placeholder，不產生 PNG。
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
@@ -97,6 +100,8 @@ WEAPPICS.0 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask，selector
 IDA 9.4 安全摘要，28 張 ignored PNG 已用棋盤接觸表重驗。
 HEADPICS.0／TORPICS.0／LEGSPICS.0 共 324 筆已關閉為 162 組角色分層 sprite；共享
 selector、三部件幾何／位置表與三份 6×9 棋盤接觸表皆已驗證。
+KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸表驗證；六筆 placeholder
+不輸出 PNG，raw-planar 的未證實幾何仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
 顯示 theme 交付範圍仍等待使用者決定；不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。

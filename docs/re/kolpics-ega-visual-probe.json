@@ -1,0 +1,165 @@
+{
+  "schema": "kol-kolpics-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "summary.json",
+  "ida_summary_sha256": "af3fe1951674d3c6c69f901f94ad8a777004d76a92788e75e8476676c24ef9e2",
+  "status": "mechanically validated and human-inspected all eight active payloads",
+  "human_inspection": "five RLE images show coherent UI frames or town scenery; index 0 is a coherent narrow patterned strip; indices 8 and 12 form coherent 64-column atlas-like strips after applying the confirmed downstream y*64+x access, with no visible plane-order or orientation defect",
+  "active_indices": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    8,
+    12,
+    13
+  ],
+  "placeholder_indices": [
+    3,
+    6,
+    7,
+    9,
+    10,
+    11
+  ],
+  "png_count": 8,
+  "contact_sheet_layout": "two columns by four rows",
+  "contact_sheet_sha256": "d6f3a2886c983cc08f7c6785890cd87247755828ae0c29c21152b22244ee524e",
+  "records": [
+    {
+      "image_index": 0,
+      "kind": "raw-planar",
+      "stage1_bytes": 1281,
+      "stage1_sha256": "bcf415a2b034b850ecb21dcf03328672e07a2652aab08e3a172f3f410767eae1",
+      "trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "width_pixels": 256,
+      "height_pixels": 5,
+      "color_count": 6,
+      "pixel_sha256": "9a433940e304649e6c04919ff92b489dfdddf4e138ac3ebfc116f8361b5edcc3",
+      "png_sha256": "d2a4526f4126a67c22c17c291d9ca0115d4f5bd8045df606bbb46fe6431a5d71"
+    },
+    {
+      "image_index": 1,
+      "kind": "rle",
+      "stage1_bytes": 16690,
+      "stage1_sha256": "27d7db0c0173fd634febfea2ab0bfaaff3cb03df667600b83abb810b32ff8a37",
+      "width_pixels": 320,
+      "height_pixels": 200,
+      "color_count": 14,
+      "pixel_sha256": "2b5a307653765012f1b8680c45cc5f43a273a9e412f7ebfd342ff751d258130c",
+      "png_sha256": "44d92fa8eb399ba73df0b152ade737d72f691153c582cc6e68911f61177a7cd2"
+    },
+    {
+      "image_index": 2,
+      "kind": "rle",
+      "stage1_bytes": 4574,
+      "stage1_sha256": "b93cc609e63cd56dc5354f2d711b2f86f4d09577adfe2f762951be1231b5e112",
+      "width_pixels": 296,
+      "height_pixels": 32,
+      "color_count": 6,
+      "pixel_sha256": "2df12c7419047cd3cf56d650f7ef677d2533eefef087c839aad71a81b9d59859",
+      "png_sha256": "03c3d2f130cf8fd459a6473539c88ec29775d9b11b45dedb0f752ef981e5ade0"
+    },
+    {
+      "image_index": 3,
+      "kind": "placeholder",
+      "stage1_bytes": 1,
+      "stage1_sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+      "placeholder_value": 102
+    },
+    {
+      "image_index": 4,
+      "kind": "rle",
+      "stage1_bytes": 15742,
+      "stage1_sha256": "a4930df7896ef2dcddfcbd8387a578321cc9aba557d662e7eafcb5fe716feea9",
+      "width_pixels": 288,
+      "height_pixels": 155,
+      "color_count": 12,
+      "pixel_sha256": "950c939142bd4e106024c33674c62b00516e705b8051bd115930929e81e7485f",
+      "png_sha256": "c070307a317f7521fb8b7695f7b23f9c5b51b2877e05daed29928a417b31ae73"
+    },
+    {
+      "image_index": 5,
+      "kind": "rle",
+      "stage1_bytes": 11600,
+      "stage1_sha256": "0f4560b4d5dc707ea7ffce0e7e8435e0617389d78eaaa316ea3e07ff33887f4e",
+      "width_pixels": 288,
+      "height_pixels": 77,
+      "color_count": 9,
+      "pixel_sha256": "da16102cdab79fe079df0fe05acefbd2fe6b240c36a16d46678ac3f73bb18664",
+      "png_sha256": "6856761735ee62ccd306a1490779423c5258140cd987c8985a61af9a56e7d3ab"
+    },
+    {
+      "image_index": 6,
+      "kind": "placeholder",
+      "stage1_bytes": 1,
+      "stage1_sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+      "placeholder_value": 102
+    },
+    {
+      "image_index": 7,
+      "kind": "placeholder",
+      "stage1_bytes": 1,
+      "stage1_sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+      "placeholder_value": 102
+    },
+    {
+      "image_index": 8,
+      "kind": "raw-planar",
+      "stage1_bytes": 10241,
+      "stage1_sha256": "8662af8be550de35f49364fa994107a0dd51b004a20b4949a0976b2ab2c97a00",
+      "trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "width_pixels": 64,
+      "height_pixels": 160,
+      "color_count": 14,
+      "pixel_sha256": "7954723a31a8821f7b21bf54346f6b38120b821cc4a34203982d747085d03f45",
+      "png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99"
+    },
+    {
+      "image_index": 9,
+      "kind": "placeholder",
+      "stage1_bytes": 1,
+      "stage1_sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+      "placeholder_value": 102
+    },
+    {
+      "image_index": 10,
+      "kind": "placeholder",
+      "stage1_bytes": 1,
+      "stage1_sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+      "placeholder_value": 102
+    },
+    {
+      "image_index": 11,
+      "kind": "placeholder",
+      "stage1_bytes": 1,
+      "stage1_sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+      "placeholder_value": 102
+    },
+    {
+      "image_index": 12,
+      "kind": "raw-planar",
+      "stage1_bytes": 10241,
+      "stage1_sha256": "986de6e323cf102f26131bf09c8d19e6d6f594e1354bd24370efa550bc33e2e5",
+      "trailing_byte_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "width_pixels": 64,
+      "height_pixels": 160,
+      "color_count": 16,
+      "pixel_sha256": "94d225cff0d0fae0446f76a44c6e2b0e7e72dc39f8384cbe6da1bb1bc1727733",
+      "png_sha256": "7a7ecd59dba535d3db3829da3a44f1c19ddef8494f20ec17ccf2db5bccb3c35d"
+    },
+    {
+      "image_index": 13,
+      "kind": "rle",
+      "stage1_bytes": 11335,
+      "stage1_sha256": "53effb751928093e6693c0bfba5af029482aae51f7ad4d9ce6a8d63590faddd8",
+      "width_pixels": 288,
+      "height_pixels": 78,
+      "color_count": 9,
+      "pixel_sha256": "5a918869376a4607a50c413dcaea437a2c2531f7b4e771a579909761a111620f",
+      "png_sha256": "e2b68a0e513957d9c3547778006486c8ce843dd5ad308f3a63d9970f0df9afd9"
+    }
+  ]
+}
