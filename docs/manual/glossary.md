@@ -124,3 +124,13 @@
 | Kelderheit / Kelder | 凱爾登／凱爾登族 | 暫譯 | 原文在族名與個體稱呼間交替使用 |
 | Blacksteel | Blacksteel | 待查 | 〈傳說種族〉敘事者；正式譯名待角色資料 consumer |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |
+| Dark Guard | Dark Guard | 待查 | Pildar 舊部；正式譯名待遊戲資料 consumer |
+| Shellemoon | Shellemoon | 待查 | 設防城市；正式音譯待地圖／城鎮資料 consumer |
+| Drezin Wood / Drezin Ranger | Drezin Wood／Drezin Ranger | 待查 | 西部大森林及其遊俠；正式音譯待世界資料 consumer |
+| Sledge | Sledge | 待查 | 以樹木為食的巨人；正式譯名待怪物資料 consumer |
+| Duke's Highwaymen | Duke's Highwaymen | 待查 | 公爵麾下築路工班；正式譯名待世界資料 consumer |
+| Hobe / Hobean Squire | Hobe／Hobean Squire | 待查 | 岩鑿城堡及其侍從；正式音譯待世界資料 consumer |
+| Htron Pirate | Htron Pirate | 待查 | Htron 海盜文化；正式音譯待世界資料 consumer |
+| Krag Barbarian | Krag Barbarian | 待查 | 北方岩地的野蠻戰士；正式音譯待世界資料 consumer |
+| Krell Warrion | Krell Warrion | 待查 | 北方沼澤傳聞及疑似借其名行動的人群；正式譯名待世界資料 consumer |
+| Lintle Plainsmen | Lintle Plainsmen | 待查 | 東南平原游牧民族；正式譯名待世界資料 consumer |

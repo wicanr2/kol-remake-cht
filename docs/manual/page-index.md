@@ -57,7 +57,12 @@
 | 48 | Olegar's End、戰局逆轉與 Shellernoon（印刷頁 90–91） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
 | 49 | 戰後重建、凱爾登降臨與今日局勢（印刷頁 92–93） | reviewed | [08-realm-of-ashtalarea.md](chapters/08-realm-of-ashtalarea.md) |
 | 50 | 傳說種族、人類與 Brettle Regular（印刷頁 94–95） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
-| 51–75 | 種族、精靈語與索引 | todo | — |
+| 51 | Brettle Regular、Dark Guard 與 Drezin Ranger（印刷頁 96–97） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 52 | Drezin Ranger 與 Duke's Highwaymen（印刷頁 98–99） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 53 | Duke's Highwaymen 與 Hobean Squire（印刷頁 100–101） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 54 | Htron Pirate 與 Krag Barbarian（印刷頁 102–103） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 55 | Krag Barbarian、Krell Warrion 與 Lintle Plainsmen（印刷頁 104–105） | reviewed | [09-races-of-legend.md](chapters/09-races-of-legend.md) |
+| 56–75 | 種族、精靈語與索引 | todo | — |
 | 76–77 | 空白跨頁；120 DPI 頁面目視確認只有背頁透印 | reviewed（空白） | — |
 | 78–79 | 索引／封底內容 | todo | — |
 
