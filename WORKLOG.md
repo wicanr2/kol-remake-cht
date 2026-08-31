@@ -869,3 +869,16 @@
   archive safe／private 為 `aaa112ef…cb2d`／`7d13f6ea…9b36`。
 - IDA、archive 解碼與驗證全用有界 `docker run --rm --network none`；十個
   `/tmp/kol-prof-*` 目錄已精確清除，結束檢查沒有 KOLBOOK／IDA 專案容器。
+
+## 2026-09-01：角色 writer 與起始武器資料
+
+- 以 KOLBOOK `sub_11820` 建立最小非破壞性 CHARDATA writer offset 索引，並固定
+  CHARPICS／SHLDPICS 同槽初始化及三檔保存順序；未把未知 region 欄位擅自命名。
+- 解出 39 筆金冠、主要／次要武器 selector 與兩組武器技能，另固定 14 筆武器模板和
+  760-byte 初始盾牌模板。機械 verifier 對中文手冊 35 列展開為 39 記錄後全部通過。
+- 兩個全新 IDA DB 的 safe／private SHA-256 為 `39beef72…b178`／`099e0d2b…9f73`；
+  archive safe／private 為 `ae711e3b…2176`／`f42fbbf1…97bc`。
+- SPEC-005 仍為 DRAFT：只關閉起始武器垂直鏈，不冒稱全部技能／物品或存檔 schema 已知，
+  也沒有建立 Go／Ebitengine production code。
+- IDA、archive 解碼與驗證皆使用有界 `docker run --rm --network none`；本輪精確清除
+  `/tmp/kol-writer-*` 與 Python cache，專案容器檢查未見遺留，其他專案容器未動。

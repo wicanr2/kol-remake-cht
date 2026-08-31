@@ -36,8 +36,13 @@ offset `0..6` 保存骰式 `D`、offset `8..14` 保存內部基值 `B`；每項�
 體型與健康的內部無號整數平均，皆向下取整；畫面再顯示
 `floor(內部值 × 100 / 150)`。手冊職業表仍只是玩家量尺的平均值，不能直接當固定初始值、
 最小值或最大值。39 筆記錄的 selector 分組、race／secondary enum 與逐名稱順序已由文字
-資源 consumer 關閉；raw 記錄仍只作 RE 輸入，需待初始技能／物品與存檔欄位一起審查後，
-才可建立 READY typed data。
+資源 consumer 關閉；raw 記錄仍只作 RE 輸入，需待武器以外技能／物品的存在性、必要
+reader 與存檔 schema 一起審查後，才可建立 READY typed data。
+
+起始金冠、主要／次要武器及其兩個武器技能值已由 39 筆 executable metadata 與中文手冊
+逐列交叉驗證。這只關閉起始武器垂直鏈；不得推廣成所有一般技能、物品或裝備欄位均已知。
+最小 CHARDATA writer offset、CHARPICS／SHLDPICS 同槽寫入與三檔保存順序已固定，但原版
+跨檔案 atomicity／rollback 未知。remake 的原子保存是設計要求，不是原版 parity 宣稱。
 
 ## 存檔草案限制
 
@@ -47,9 +52,9 @@ Unicode 名字規則與角色圖像引用尚未完成共同決策，本 DRAFT �
 
 ## READY gate
 
-1. 以 IDA writer／reader 關閉初始技能／物品；35 個手冊列、39 個 executable 記錄、eligibility 與主要屬性公式已關閉。
+1. 起始金冠、武器與武器技能已關閉；確認武器以外是否另有起始技能／物品 writer。
 2. 以正常 DOS UI oracle 抽測名字邊界、每層 ESC、reroll、slot full 與保存 commit。
-3. 建立 768-byte record 的最小必要欄位索引；每欄保留原位址、偏移、證據等級與來源。
+3. 最小 writer 欄位索引已建立；再以必要 reader 查核用途，未知 offset 不猜補。
 4. 由使用者決定繁中名字長度／重名 policy 與是否保留原版性別限制；決策前不現代化。
 5. 固定 remake typed schema、migration 與 deterministic RNG 契約。
 6. 證據審查通過後才可升 READY 並開始 production implementation。

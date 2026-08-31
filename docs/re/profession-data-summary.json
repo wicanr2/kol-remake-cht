@@ -40,6 +40,25 @@
     }
   },
   "text_item_decoded_sha256": "0378dedd8b41e7dc07a4e154fe38a662ae53bb30e02c924fce3745a4f1d36b41",
+  "weapon_template_contract": {
+    "archive_item_index": 3,
+    "compressed_bytes": 224,
+    "decoded_bytes": 225,
+    "decoded_sha256": "65650081e865b3b23f29d1a555d3d49bd59baf5f9801a9b3e849f32acadbb77f",
+    "trailing_byte_hex": "00",
+    "template_count": 14,
+    "template_stride": 16,
+    "non_template_trailing_bytes": 1
+  },
+  "initial_shield_template_contract": {
+    "archive_item_index": 4,
+    "compressed_bytes": 140,
+    "decoded_bytes": 761,
+    "decoded_sha256": "d8004e1c4a71bece38f848a73624867dcfe6119efc6aadaebd0219bcd811a562",
+    "trailing_byte_hex": "00",
+    "pixel_bytes_consumed": 760,
+    "non_pixel_trailing_bytes": 1
+  },
   "race_enum": [
     {
       "value": 0,

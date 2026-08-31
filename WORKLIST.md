@@ -91,7 +91,8 @@
   量尺與三項衍生公式；兩個全新 IDA DB 輸出一致。
 - [x] 關閉 35 個手冊職業列與 39 個 executable 記錄的 enum／名稱／eligibility 對應；
   解釋男女精靈共名及四對矮人記錄逐 byte 相同。
-- [ ] 關閉初始技能／物品與最小 768-byte 欄位索引；
+- [x] 關閉 39 筆起始金冠、主要／次要武器、武器技能與最小 writer 欄位索引。
+- [ ] 查核必要 reader 與武器以外起始技能／物品是否另有 writer；
   經證據審查後把 SPEC-005 升 READY。
 - [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
 - [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。
@@ -126,6 +127,6 @@
 ## 下一個唯一工作
 
 完整 EGA extraction set 已無 unknown，但圖片 theme 決策仍待使用者回答；TITLE cue 的
-OGG 呈現方向也待決。可先做且不依賴兩項決策的下一工作，是完成 39 個職業記錄的
-初始技能／物品 writer 與最小 768-byte 存檔欄位索引。SPEC-002／004／005
+OGG 呈現方向也待決。可先做且不依賴兩項決策的下一工作，是查核必要 CHARDATA reader
+與武器以外起始技能／物品是否另有 writer。SPEC-002／004／005
 READY 前不接 Go／Ebitengine production runtime。

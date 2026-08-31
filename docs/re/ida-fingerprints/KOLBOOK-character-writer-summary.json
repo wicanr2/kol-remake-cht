@@ -1,0 +1,1401 @@
+{
+  "schema": "kol-ida-kolbook-character-writer-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLBOOK.EXE",
+  "input_sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+  "address_space": "IDA linear effective address for KOLBOOK loaded MZ",
+  "profession_meta": {
+    "ea": "0x19348",
+    "record_count": 39,
+    "record_stride": 5,
+    "sha256": "c15a9bfa5b026607e4377f52c01c4796bc8d3df685efcca1c523df016a264945"
+  },
+  "profession_word_table": {
+    "ea": "0x1940c",
+    "record_count": 39,
+    "record_stride": 2,
+    "sha256": "93845e8224b196978ccea8d0d5804ac8e4158cf751d63b85bf82f9c0064a842e"
+  },
+  "instruction_checks": [
+    {
+      "ea": "0x12064",
+      "bytes": "b90003",
+      "disassembly": "mov     cx, 300h"
+    },
+    {
+      "ea": "0x1206d",
+      "bytes": "b9f802",
+      "disassembly": "mov     cx, 2F8h"
+    },
+    {
+      "ea": "0x12075",
+      "bytes": "bf4418",
+      "disassembly": "mov     di, 1844h"
+    },
+    {
+      "ea": "0x12088",
+      "bytes": "b97c01",
+      "disassembly": "mov     cx, 17Ch"
+    },
+    {
+      "ea": "0x120b8",
+      "bytes": "8b5ef2",
+      "disassembly": "mov     bx, [bp+var_E]"
+    },
+    {
+      "ea": "0x120c6",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x120d7",
+      "bytes": "8b46fe",
+      "disassembly": "mov     ax, [bp+var_2]"
+    },
+    {
+      "ea": "0x120de",
+      "bytes": "83c324",
+      "disassembly": "add     bx, 24h ; '$'"
+    },
+    {
+      "ea": "0x120e1",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x120ec",
+      "bytes": "83c31a",
+      "disassembly": "add     bx, 1Ah"
+    },
+    {
+      "ea": "0x120ef",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x120fa",
+      "bytes": "83c31c",
+      "disassembly": "add     bx, 1Ch"
+    },
+    {
+      "ea": "0x120fd",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x12117",
+      "bytes": "83c31d",
+      "disassembly": "add     bx, 1Dh"
+    },
+    {
+      "ea": "0x1211a",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x12130",
+      "bytes": "8b87cc01",
+      "disassembly": "mov     ax, [bx+1CCh]"
+    },
+    {
+      "ea": "0x12144",
+      "bytes": "83c32b",
+      "disassembly": "add     bx, 2Bh ; '+'"
+    },
+    {
+      "ea": "0x12147",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x12158",
+      "bytes": "83c32c",
+      "disassembly": "add     bx, 2Ch ; ','"
+    },
+    {
+      "ea": "0x1215b",
+      "bytes": "8897bea6",
+      "disassembly": "mov     [bx-5942h], dl"
+    },
+    {
+      "ea": "0x1216b",
+      "bytes": "8a870801",
+      "disassembly": "mov     al, [bx+108h]"
+    },
+    {
+      "ea": "0x121ba",
+      "bytes": "83c357",
+      "disassembly": "add     bx, 57h ; 'W'"
+    },
+    {
+      "ea": "0x121c0",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x1220a",
+      "bytes": "83c34a",
+      "disassembly": "add     bx, 4Ah ; 'J'"
+    },
+    {
+      "ea": "0x12210",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x122a0",
+      "bytes": "83c330",
+      "disassembly": "add     bx, 30h ; '0'"
+    },
+    {
+      "ea": "0x122a6",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x12327",
+      "bytes": "83c328",
+      "disassembly": "add     bx, 28h ; '('"
+    },
+    {
+      "ea": "0x1232a",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x1249c",
+      "bytes": "83c32e",
+      "disassembly": "add     bx, 2Eh ; '.'"
+    },
+    {
+      "ea": "0x1249f",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x124b1",
+      "bytes": "83c32f",
+      "disassembly": "add     bx, 2Fh ; '/'"
+    },
+    {
+      "ea": "0x124b4",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x124d1",
+      "bytes": "83c340",
+      "disassembly": "add     bx, 40h ; '@'"
+    },
+    {
+      "ea": "0x124d7",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x12501",
+      "bytes": "81c39000",
+      "disassembly": "add     bx, 90h"
+    },
+    {
+      "ea": "0x12508",
+      "bytes": "8887bea6",
+      "disassembly": "mov     [bx-5942h], al"
+    },
+    {
+      "ea": "0x125f4",
+      "bytes": "e8cb0e",
+      "disassembly": "call    sub_134C2"
+    },
+    {
+      "ea": "0x125fa",
+      "bytes": "b80030",
+      "disassembly": "mov     ax, 3000h"
+    },
+    {
+      "ea": "0x12609",
+      "bytes": "e8b411",
+      "disassembly": "call    sub_137C0"
+    },
+    {
+      "ea": "0x12620",
+      "bytes": "b8802f",
+      "disassembly": "mov     ax, 2F80h"
+    },
+    {
+      "ea": "0x1263d",
+      "bytes": "8b5ef2",
+      "disassembly": "mov     bx, [bp+var_E]"
+    },
+    {
+      "ea": "0x12640",
+      "bytes": "8a871a09",
+      "disassembly": "mov     al, [bx+91Ah]"
+    },
+    {
+      "ea": "0x1264a",
+      "bytes": "8887c847",
+      "disassembly": "mov     [bx+47C8h], al"
+    },
+    {
+      "ea": "0x1266b",
+      "bytes": "e85211",
+      "disassembly": "call    sub_137C0"
+    }
+  ],
+  "storage_route_strings": [
+    {
+      "ea": "0x19912",
+      "value": "chardata"
+    },
+    {
+      "ea": "0x1991c",
+      "value": "charpics"
+    },
+    {
+      "ea": "0x19926",
+      "value": "shldpics"
+    },
+    {
+      "ea": "0x19930",
+      "value": "region%d.dat"
+    }
+  ],
+  "record_storage_contract": {
+    "chardata_buffer_ea": "0x238fe",
+    "slot_count": 16,
+    "record_stride": 768,
+    "fields": [
+      {
+        "offset": "0x00",
+        "bytes": 16,
+        "semantic": "name",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x1a",
+        "bytes": 1,
+        "semantic": "secondary selector",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x1c",
+        "bytes": 1,
+        "semantic": "profession record index",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x1d",
+        "bytes": 7,
+        "semantic": "primary internal stats",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x24",
+        "bytes": 1,
+        "semantic": "race enum",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x2b",
+        "bytes": 2,
+        "semantic": "starting gold crowns little-endian",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x30",
+        "bytes": 16,
+        "semantic": "primary starting weapon template",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x4a",
+        "bytes": 8,
+        "semantic": "primary weapon auxiliary block",
+        "status": "strong inference"
+      },
+      {
+        "offset": "0x54",
+        "bytes": 1,
+        "semantic": "primary weapon first skill internal",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x56",
+        "bytes": 1,
+        "semantic": "primary weapon second skill internal",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x57",
+        "bytes": 8,
+        "semantic": "secondary starting weapon template prefix",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x5f",
+        "bytes": 1,
+        "semantic": "secondary weapon template byte 13",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x61",
+        "bytes": 1,
+        "semantic": "secondary weapon first skill internal",
+        "status": "confirmed"
+      },
+      {
+        "offset": "0x63",
+        "bytes": 1,
+        "semantic": "secondary weapon second skill internal",
+        "status": "confirmed"
+      }
+    ],
+    "region_metadata_copy_map": [
+      {
+        "region_source_offset": "0x01",
+        "record_offset": "0x2e",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x02",
+        "record_offset": "0x2f",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x03",
+        "record_offset": "0x40",
+        "bytes": 10
+      },
+      {
+        "region_source_offset": "0x0d",
+        "record_offset": "0x90",
+        "bytes": 3
+      },
+      {
+        "region_source_offset": "0x10",
+        "record_offset": "0x93",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x11",
+        "record_offset": "0x94",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x12",
+        "record_offset": "0x97",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x13",
+        "record_offset": "0x13",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x15",
+        "record_offset": "0x99",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x18",
+        "record_offset": "0x9c",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x1a",
+        "record_offset": "0x14",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x1b",
+        "record_offset": "0x15",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x1d",
+        "record_offset": "0x17",
+        "bytes": 1
+      },
+      {
+        "region_source_offset": "0x1e",
+        "record_offset": "0x18",
+        "bytes": 1
+      }
+    ],
+    "region_metadata_semantics": "unknown; byte routing from selected REGION%d.DAT record is confirmed",
+    "save_bytes": 12288
+  },
+  "charpics_storage_contract": {
+    "buffer_ea": "0x1aa84",
+    "slot_count": 16,
+    "record_stride": 760,
+    "save_bytes": 12160
+  },
+  "shldpics_storage_contract": {
+    "buffer_ea": "0x1da08",
+    "slot_count": 16,
+    "record_stride": 760,
+    "initial_template_source_ea": "0x19b5a",
+    "copied_bytes_on_character_commit": 760,
+    "save_bytes": 12160
+  },
+  "weapon_selector_map": [
+    {
+      "selector": 1,
+      "manual_abbreviation": "LO"
+    },
+    {
+      "selector": 2,
+      "manual_abbreviation": "BA"
+    },
+    {
+      "selector": 3,
+      "manual_abbreviation": "LB"
+    },
+    {
+      "selector": 4,
+      "manual_abbreviation": "GS"
+    },
+    {
+      "selector": 5,
+      "manual_abbreviation": "LC"
+    },
+    {
+      "selector": 6,
+      "manual_abbreviation": "WH"
+    },
+    {
+      "selector": 7,
+      "manual_abbreviation": "SC"
+    },
+    {
+      "selector": 8,
+      "manual_abbreviation": "HL"
+    },
+    {
+      "selector": 9,
+      "manual_abbreviation": "BR"
+    },
+    {
+      "selector": 10,
+      "manual_abbreviation": "SB"
+    },
+    {
+      "selector": 11,
+      "manual_abbreviation": "MA"
+    },
+    {
+      "selector": 12,
+      "manual_abbreviation": "SS"
+    },
+    {
+      "selector": 13,
+      "manual_abbreviation": "LS"
+    },
+    {
+      "selector": 14,
+      "manual_abbreviation": "EB"
+    }
+  ],
+  "profession_starting_contracts": [
+    {
+      "record_index": 0,
+      "menu_name": "BARBARIAN",
+      "gold_crowns": 1500,
+      "primary_weapon": "GS",
+      "primary_skill_pair_internal": [
+        100,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        5
+      ],
+      "secondary_weapon": "HL",
+      "secondary_skill_pair_internal": [
+        50,
+        50
+      ],
+      "secondary_skill_pair_manual_units": [
+        5,
+        5
+      ]
+    },
+    {
+      "record_index": 1,
+      "menu_name": "RANGER",
+      "gold_crowns": 1500,
+      "primary_weapon": "BR",
+      "primary_skill_pair_internal": [
+        100,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        7
+      ],
+      "secondary_weapon": "LB",
+      "secondary_skill_pair_internal": [
+        100,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        10,
+        0
+      ]
+    },
+    {
+      "record_index": 2,
+      "menu_name": "WARRION",
+      "gold_crowns": 1500,
+      "primary_weapon": "BA",
+      "primary_skill_pair_internal": [
+        120,
+        100
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        10
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 3,
+      "menu_name": "SQUIRE",
+      "gold_crowns": 2000,
+      "primary_weapon": "BR",
+      "primary_skill_pair_internal": [
+        120,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        5
+      ],
+      "secondary_weapon": "SB",
+      "secondary_skill_pair_internal": [
+        50,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        5,
+        0
+      ]
+    },
+    {
+      "record_index": 4,
+      "menu_name": "DARKGUARD",
+      "gold_crowns": 2000,
+      "primary_weapon": "MA",
+      "primary_skill_pair_internal": [
+        120,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        5
+      ],
+      "secondary_weapon": "LC",
+      "secondary_skill_pair_internal": [
+        50,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        5,
+        0
+      ]
+    },
+    {
+      "record_index": 5,
+      "menu_name": "WATCHMAN",
+      "gold_crowns": 1500,
+      "primary_weapon": "BA",
+      "primary_skill_pair_internal": [
+        100,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        7
+      ],
+      "secondary_weapon": "LB",
+      "secondary_skill_pair_internal": [
+        70,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        7,
+        0
+      ]
+    },
+    {
+      "record_index": 6,
+      "menu_name": "PLAINSMAN",
+      "gold_crowns": 1500,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        120,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        0
+      ],
+      "secondary_weapon": "LO",
+      "secondary_skill_pair_internal": [
+        50,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        5,
+        0
+      ]
+    },
+    {
+      "record_index": 7,
+      "menu_name": "HUNTER",
+      "gold_crowns": 1500,
+      "primary_weapon": "SB",
+      "primary_skill_pair_internal": [
+        100,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        0
+      ],
+      "secondary_weapon": "LS",
+      "secondary_skill_pair_internal": [
+        70,
+        50
+      ],
+      "secondary_skill_pair_manual_units": [
+        7,
+        5
+      ]
+    },
+    {
+      "record_index": 8,
+      "menu_name": "REGULAR",
+      "gold_crowns": 3000,
+      "primary_weapon": "LS",
+      "primary_skill_pair_internal": [
+        100,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        5
+      ],
+      "secondary_weapon": "BA",
+      "secondary_skill_pair_internal": [
+        100,
+        100
+      ],
+      "secondary_skill_pair_manual_units": [
+        10,
+        10
+      ]
+    },
+    {
+      "record_index": 9,
+      "menu_name": "HIGHWAYMAN",
+      "gold_crowns": 1500,
+      "primary_weapon": "WH",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": "LO",
+      "secondary_skill_pair_internal": [
+        50,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        5,
+        0
+      ]
+    },
+    {
+      "record_index": 10,
+      "menu_name": "PIRATE",
+      "gold_crowns": 3000,
+      "primary_weapon": "SC",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": "SB",
+      "secondary_skill_pair_internal": [
+        70,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        7,
+        0
+      ]
+    },
+    {
+      "record_index": 11,
+      "menu_name": "ROGUE",
+      "gold_crowns": 3000,
+      "primary_weapon": "LO",
+      "primary_skill_pair_internal": [
+        100,
+        100
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        10
+      ],
+      "secondary_weapon": "SB",
+      "secondary_skill_pair_internal": [
+        50,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        5,
+        0
+      ]
+    },
+    {
+      "record_index": 12,
+      "menu_name": "TIGRESS",
+      "gold_crowns": 1500,
+      "primary_weapon": "HL",
+      "primary_skill_pair_internal": [
+        120,
+        100
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        10
+      ],
+      "secondary_weapon": "LO",
+      "secondary_skill_pair_internal": [
+        70,
+        50
+      ],
+      "secondary_skill_pair_manual_units": [
+        7,
+        5
+      ]
+    },
+    {
+      "record_index": 13,
+      "menu_name": "AMAZON",
+      "gold_crowns": 1500,
+      "primary_weapon": "BR",
+      "primary_skill_pair_internal": [
+        100,
+        100
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        10
+      ],
+      "secondary_weapon": "SB",
+      "secondary_skill_pair_internal": [
+        100,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        10,
+        0
+      ]
+    },
+    {
+      "record_index": 14,
+      "menu_name": "HUNTRESS",
+      "gold_crowns": 1500,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        120,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        0
+      ],
+      "secondary_weapon": "SS",
+      "secondary_skill_pair_internal": [
+        70,
+        70
+      ],
+      "secondary_skill_pair_manual_units": [
+        7,
+        7
+      ]
+    },
+    {
+      "record_index": 15,
+      "menu_name": "PLAINSWOMAN",
+      "gold_crowns": 1500,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        100,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        0
+      ],
+      "secondary_weapon": "LO",
+      "secondary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "secondary_skill_pair_manual_units": [
+        12,
+        7
+      ]
+    },
+    {
+      "record_index": 16,
+      "menu_name": "BREKLAND",
+      "gold_crowns": 1500,
+      "primary_weapon": "LO",
+      "primary_skill_pair_internal": [
+        120,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        5
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 17,
+      "menu_name": "KLVAR",
+      "gold_crowns": 1500,
+      "primary_weapon": "LO",
+      "primary_skill_pair_internal": [
+        120,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        5
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 18,
+      "menu_name": "MELOD",
+      "gold_crowns": 1500,
+      "primary_weapon": "LO",
+      "primary_skill_pair_internal": [
+        120,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        5
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 19,
+      "menu_name": "PYAR",
+      "gold_crowns": 1000,
+      "primary_weapon": "EB",
+      "primary_skill_pair_internal": [
+        150,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        15,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 20,
+      "menu_name": "THISM",
+      "gold_crowns": 1500,
+      "primary_weapon": "LO",
+      "primary_skill_pair_internal": [
+        120,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        5
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 21,
+      "menu_name": "USIP",
+      "gold_crowns": 200,
+      "primary_weapon": "EB",
+      "primary_skill_pair_internal": [
+        250,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        25,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 22,
+      "menu_name": "BREKLAND",
+      "gold_crowns": 1500,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        120,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 23,
+      "menu_name": "KLVAR",
+      "gold_crowns": 1500,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        120,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 24,
+      "menu_name": "MELOD",
+      "gold_crowns": 1500,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        120,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 25,
+      "menu_name": "PYAR",
+      "gold_crowns": 1000,
+      "primary_weapon": "EB",
+      "primary_skill_pair_internal": [
+        150,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        15,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 26,
+      "menu_name": "THISM",
+      "gold_crowns": 1500,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        120,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 27,
+      "menu_name": "USIP",
+      "gold_crowns": 200,
+      "primary_weapon": "EB",
+      "primary_skill_pair_internal": [
+        250,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        25,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 28,
+      "menu_name": "TUNNELER",
+      "gold_crowns": 3000,
+      "primary_weapon": "SS",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 29,
+      "menu_name": "RATGUARD",
+      "gold_crowns": 1500,
+      "primary_weapon": "BA",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 30,
+      "menu_name": "TROLLBANE",
+      "gold_crowns": 1500,
+      "primary_weapon": "WH",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 31,
+      "menu_name": "MILITIA",
+      "gold_crowns": 1500,
+      "primary_weapon": "BA",
+      "primary_skill_pair_internal": [
+        50,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        5,
+        5
+      ],
+      "secondary_weapon": "LC",
+      "secondary_skill_pair_internal": [
+        100,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        10,
+        0
+      ]
+    },
+    {
+      "record_index": 32,
+      "menu_name": "DIGGER",
+      "gold_crowns": 3000,
+      "primary_weapon": "SS",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 33,
+      "menu_name": "SPIDER GUARD",
+      "gold_crowns": 1500,
+      "primary_weapon": "BA",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 34,
+      "menu_name": "ORCBANE",
+      "gold_crowns": 1500,
+      "primary_weapon": "WH",
+      "primary_skill_pair_internal": [
+        120,
+        70
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        7
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 35,
+      "menu_name": "LEVY",
+      "gold_crowns": 1500,
+      "primary_weapon": "BA",
+      "primary_skill_pair_internal": [
+        50,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        5,
+        5
+      ],
+      "secondary_weapon": "LC",
+      "secondary_skill_pair_internal": [
+        100,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        10,
+        0
+      ]
+    },
+    {
+      "record_index": 36,
+      "menu_name": "CLIFF GUARD",
+      "gold_crowns": 1250,
+      "primary_weapon": "GS",
+      "primary_skill_pair_internal": [
+        100,
+        100
+      ],
+      "primary_skill_pair_manual_units": [
+        10,
+        10
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 37,
+      "menu_name": "ROCK RANGER",
+      "gold_crowns": 1250,
+      "primary_weapon": "LB",
+      "primary_skill_pair_internal": [
+        120,
+        0
+      ],
+      "primary_skill_pair_manual_units": [
+        12,
+        0
+      ],
+      "secondary_weapon": null,
+      "secondary_skill_pair_internal": [
+        0,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        0,
+        0
+      ]
+    },
+    {
+      "record_index": 38,
+      "menu_name": "FAR SEEKER",
+      "gold_crowns": 1250,
+      "primary_weapon": "GS",
+      "primary_skill_pair_internal": [
+        50,
+        50
+      ],
+      "primary_skill_pair_manual_units": [
+        5,
+        5
+      ],
+      "secondary_weapon": "LB",
+      "secondary_skill_pair_internal": [
+        50,
+        0
+      ],
+      "secondary_skill_pair_manual_units": [
+        5,
+        0
+      ]
+    }
+  ],
+  "status": "writer offsets and starting gold/weapon/skill contracts confirmed; unlisted offsets remain unknown"
+}

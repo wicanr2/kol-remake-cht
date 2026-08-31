@@ -19,6 +19,8 @@ EXPECTED_DECODED_BYTES = 625
 EXPECTED_DECODED_SHA256 = "848ad877f8176b8b3d950d8853b36cf7e0271629c8822ce15c7f420ea2e7b321"
 DICE_SIDES = [3, 4, 6, 8, 10, 12, 20, 100]
 EXPECTED_TEXT_DECODED_SHA256 = "0378dedd8b41e7dc07a4e154fe38a662ae53bb30e02c924fce3745a4f1d36b41"
+EXPECTED_WEAPON_DECODED_SHA256 = "65650081e865b3b23f29d1a555d3d49bd59baf5f9801a9b3e849f32acadbb77f"
+EXPECTED_SHIELD_DECODED_SHA256 = "d8004e1c4a71bece38f848a73624867dcfe6119efc6aadaebd0219bcd811a562"
 EXPECTED_RACES = ["HUMAN", "ELVEN", "DWARVEN", "KELDEN"]
 EXPECTED_SECONDARY = ["MALE", "FEMALE"]
 EXPECTED_MENU_NAMES = [
@@ -83,6 +85,29 @@ def main() -> None:
     if lines[21:54] != EXPECTED_MENU_NAMES:
         raise SystemExit("職業選單文字順序改變")
 
+    decoded_auxiliary = {}
+    for index, expected_length, expected_hash, label in [
+        (3, 225, EXPECTED_WEAPON_DECODED_SHA256, "weapon_templates"),
+        (4, 761, EXPECTED_SHIELD_DECODED_SHA256, "initial_shield_template"),
+    ]:
+        auxiliary_item = contract["items"][index]
+        auxiliary_source = files[auxiliary_item["volume_name"]]
+        auxiliary_payload = auxiliary_source[
+            auxiliary_item["offset"] : auxiliary_item["offset"] + auxiliary_item["compressed_bytes"]
+        ]
+        auxiliary_decoded = decode(auxiliary_payload)
+        if len(auxiliary_decoded) != expected_length or sha(auxiliary_decoded) != expected_hash:
+            raise SystemExit(f"{label} 解碼結果改變")
+        if auxiliary_decoded[-1] != 0:
+            raise SystemExit(f"{label} 尾 byte 不再是 0")
+        decoded_auxiliary[label] = {
+            "archive_item_index": index,
+            "compressed_bytes": auxiliary_item["compressed_bytes"],
+            "decoded_bytes": len(auxiliary_decoded),
+            "decoded_sha256": sha(auxiliary_decoded),
+            "trailing_byte_hex": "00",
+        }
+
     records = [decoded[index * 16 : (index + 1) * 16] for index in range(39)]
     if any(len(record) != 16 for record in records):
         raise SystemExit("職業記錄 stride 改變")
@@ -131,6 +156,17 @@ def main() -> None:
             "reserved_zero_1": {"offset": 15, "count": 1},
         },
         "text_item_decoded_sha256": sha(text_decoded),
+        "weapon_template_contract": {
+            **decoded_auxiliary["weapon_templates"],
+            "template_count": 14,
+            "template_stride": 16,
+            "non_template_trailing_bytes": 1,
+        },
+        "initial_shield_template_contract": {
+            **decoded_auxiliary["initial_shield_template"],
+            "pixel_bytes_consumed": 760,
+            "non_pixel_trailing_bytes": 1,
+        },
         "race_enum": [{"value": index, "name": name} for index, name in enumerate(EXPECTED_RACES)],
         "secondary_enum": [{"value": index, "name": name} for index, name in enumerate(EXPECTED_SECONDARY)],
         "selector_groups": group_contract,

@@ -952,3 +952,22 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   `aaa112ef…cb2d`／`7d13f6ea…9b36`。private raw records 與 `.i64` 不進版控。
 - **限制**：本輪尚未關閉初始技能／物品 writer、768-byte 存檔欄位與 DOS `_rand` 完整
   序列；SPEC-005 維持 DRAFT，不授權 production implementation。
+
+## RE-037：角色 writer、起始武器與三檔保存順序
+
+- 固定 `KOLBOOK.EXE` SHA-256 `2cada028…e5832`；IDA Pro 9.4 loaded-MZ linear EA。
+  `sub_11820` 清空 768-byte CHARDATA slot，寫入名字、selector、職業、七項屬性、種族、
+  起始金冠、武器模板與武器技能；同槽另寫 760-byte CHARPICS 與 SHLDPICS。
+- EA `0x1940c` 的 39×2-byte 金冠表及 EA `0x19348` 的 39×5-byte 武器／技能 metadata，
+  配合 BOOKDATA 項目 3 的 14×16-byte 武器模板，全部 39 筆均與中文手冊職業表一致。
+  項目 4 則提供 760-byte 初始盾牌模板。
+- 三份工作區依序保存為 `chardata` 0x3000 bytes、`charpics` 0x2f80 bytes、`shldpics`
+  0x2f80 bytes。這只證實呼叫順序，不宣稱原版具跨檔案 transaction 或 rollback。
+- `region%d.dat` 每筆 48 bytes、最多五筆；固定 ZIP 只有 REGION0。固定 source→record
+  offset 路由已收入安全摘要，所有 region 欄位語意仍標未知。
+- 最終兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
+  `39beef72…b178`／`099e0d2b…9f73`；archive safe／private 為
+  `ae711e3b…2176`／`f42fbbf1…97bc`。完整函式、operand 掃描及 `.i64` 不進版控。
+- **限制**：只關閉起始金冠、武器與武器技能，不能推廣成全部一般技能／物品。最小 writer
+  offset 已建立，其他欄位 reader、圖像 selector、UI 邊界與失敗路徑仍未知；SPEC-005
+  維持 DRAFT，不授權 production implementation。
