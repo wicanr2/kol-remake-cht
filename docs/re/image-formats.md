@@ -277,9 +277,25 @@ PNG 為山谷雷雨動畫、閃電過場與製作名單，無鏡像、旋轉、p
 BACKPICS 0..13 的 selector、完整 caller 集、LZW、二階 RLE、尺寸、方向與無透明全螢幕
 direct-blit 政策為 `已證實`；RGB 仍是 mode 0Dh `hardware-spec approximation`。
 
+### KOLTOWN 的 ENDPICS 結局圖片
+
+固定 KOLTOWN derivative 的 `sub_2B80A`（loaded-MZ EA `0x2b80a..0x2b845`）以
+`end%s` 建檔名並把呼叫端圖號交給共用 loader `sub_10F9C`。它的全部七個 caller 都在
+`sub_2B4A7`，call EA `0x2b525/0x2b57d/0x2b5d5/0x2b62d/0x2b695/0x2b6ed/0x2b755`
+依序傳入 0..6，完整覆蓋 archive。
+
+caller 在每次載入前設定 mode 0Dh byte-column／scanline 矩形；七張尺寸依序為 168×122、
+192×111、296×93、176×97、168×123、192×102、184×98。七個 payload 經共用
+`sub_1A4FE` LZW、`sub_1C907`／`sub_1A2BB` 二階 RLE 與 EGA planes 後，像素數全數
+精確吻合，索引均為 0..15。七張 ignored PNG 目視為結局敘事人物／場景，無鏡像、旋轉、
+plane 錯排或裁切。
+
+ENDPICS 0..6 的來源、完整 caller 集、尺寸、LZW、二階 RLE、4-bit EGA、方向與無透明
+direct-blit 政策為 `已證實`；RGB 仍採 mode 0Dh `hardware-spec approximation`。
+
 ## 未關閉問題
 
-1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
+1. `PICS`／mode 0Dh 的 COMBPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、TWN 圖號 24、MONPICS、PERPICS、MISCPICS 與 KOLMPICS 圖號 28
    垂直鏈已關閉；PCGA／HERC 與其他
    archive 圖號尚未關閉。
 2. 其餘圖號到寬、高、透明規則與裁切矩形的完整映射。

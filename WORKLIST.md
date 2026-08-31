@@ -57,7 +57,7 @@
 
 - [ ] 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 `Dockerfile`。
 - [ ] 寫唯讀輸入的資產 inventory 與格式規格：COMBPICS 全 archive、TWN index 24、MONPICS、PERPICS、
-  MISCPICS、TITLE SET0／1／2／FACE／BACK、KOLMPICS index 28 EGA
+  MISCPICS、TITLE SET0／1／2／FACE／BACK、ENDPICS、KOLMPICS index 28 EGA
   垂直鏈、AWD 固定快照邊界與三個無副檔名固定記錄表已證實；其餘 archive、PCGA／HERC
   像素格式尚未完成。
 - [ ] 建立離線抽取器，將所有 runtime 圖像輸出為 PNG；生成 manifest、來源索引與 SHA-256。

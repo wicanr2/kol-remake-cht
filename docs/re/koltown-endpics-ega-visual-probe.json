@@ -1,0 +1,77 @@
+{
+  "schema": "kol-koltown-endpics-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "ida_summary_name": "KOLTOWN-endpics-summary.json",
+  "ida_summary_sha256": "bfc2ab3f76a13f81cc6889bfe143ab83209803a962e3c6ef4005abd0c558baff",
+  "status": "mechanically validated all seven direct-blit 4-bit EGA images; orientation requires human inspection",
+  "source_payload_count": 7,
+  "png_count": 7,
+  "all_archive_indices_have_consumer": true,
+  "all_pixel_counts_match": true,
+  "records": [
+    {
+      "image_index": 0,
+      "width_pixels": 168,
+      "height_pixels": 122,
+      "pixel_count": 20496,
+      "color_count": 12,
+      "pixel_sha256": "30655a4174ea27daecaa86cbc6a1c3edd551afbf8d7de52923e5cb9d74e95775",
+      "png_sha256": "4d15f8f2709b9edde83e725ca58f55589bc2975429e20ca9bfce2a407fb56f0b"
+    },
+    {
+      "image_index": 1,
+      "width_pixels": 192,
+      "height_pixels": 111,
+      "pixel_count": 21312,
+      "color_count": 10,
+      "pixel_sha256": "23753027fc4c3eb95c60c35eea3885ecef89536693a4ca11d2946d63d983e07a",
+      "png_sha256": "493dc69fc56a7bf868c3b03eac39aa67030cb39cfe0129197bf463fe705a3840"
+    },
+    {
+      "image_index": 2,
+      "width_pixels": 296,
+      "height_pixels": 93,
+      "pixel_count": 27528,
+      "color_count": 8,
+      "pixel_sha256": "4b43da945c4ae480affc9f1425d412f1d4e77cb9b334a7935e70607786b3983f",
+      "png_sha256": "f58ceff45ca217473f26741f351f84be558960c41289310093899aad45e55c28"
+    },
+    {
+      "image_index": 3,
+      "width_pixels": 176,
+      "height_pixels": 97,
+      "pixel_count": 17072,
+      "color_count": 8,
+      "pixel_sha256": "1d9e7aa8362c4fbe893ccd6b695693efaebdd84928220854a223173140ba662b",
+      "png_sha256": "145e1586e2852dd693aeeb050aff34496def333b9a79d61eb87bccc86a979d18"
+    },
+    {
+      "image_index": 4,
+      "width_pixels": 168,
+      "height_pixels": 123,
+      "pixel_count": 20664,
+      "color_count": 8,
+      "pixel_sha256": "1ff9b48b8dcf6ac886d54ca1858b05c367be4668b87806d3eff5685111632ce3",
+      "png_sha256": "d351013be3ae22a1973914219c36321f0e18b3b159792561e461fb5b9f78789c"
+    },
+    {
+      "image_index": 5,
+      "width_pixels": 192,
+      "height_pixels": 102,
+      "pixel_count": 19584,
+      "color_count": 6,
+      "pixel_sha256": "b22db26581fbd54322752f93671e44401adbf36be6b532a5fb0627d33976b350",
+      "png_sha256": "07ae261d6b883fb17041246f61f427493731e25fe6403ef0987195199428fac9"
+    },
+    {
+      "image_index": 6,
+      "width_pixels": 184,
+      "height_pixels": 98,
+      "pixel_count": 18032,
+      "color_count": 9,
+      "pixel_sha256": "56586e762155e34cead5666668a1875b3d6b5d0535f836c34c04ebe3636f50e3",
+      "png_sha256": "bffd4d61697bc6338a7fb9b66b245637b745531f1fea0c6c339d7d7d7c43c5cd"
+    }
+  ]
+}

@@ -546,3 +546,16 @@ SPEC-002 仍因其他 archive 與 theme 決策維持 DRAFT。
   過場及製作名單，方向、scanline、plane 與裁切正常；PNG 僅留 ignored 工作區。
 - BACKPICS 全 archive 的來源、consumer、完整索引、像素格式、尺寸、方向與無透明
   direct-blit 政策為 `已證實`。SPEC-002 仍維持 DRAFT，不建立 production importer。
+
+## RE-017：KOLTOWN 的 ENDPICS 全七張
+
+- 固定 `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`；IDA Pro 9.4 `locked-v1`、
+  unpacked loaded-MZ linear EA。字串探針最初未將 `end%s` 歸入函式，但原始 DGROUP offset
+  唯一出現在 `0x2b821`；回查 IDA DB 證實它位於 `sub_2B80A`，不是未使用字串。
+- `sub_2B80A` 的全部七個 caller 都來自 `sub_2B4A7`，立即值圖號依序為 0..6。
+  探針同時硬閘門每個 call 前四筆矩形 assignment，避免人工抄錄成為唯一證據。
+- 七張尺寸依序 168×122、192×111、296×93、176×97、168×123、192×102、184×98；
+  LZW＋二階 RLE 像素數全數吻合，索引皆在 0..15。
+- 七張 ignored PNG 目視為結局敘事人物／場景，方向、scanline、plane 與裁切正常。
+  ENDPICS 全 archive 的 consumer、索引、幾何、像素格式與無透明 direct-blit 政策為
+  `已證實`；SPEC-002 仍為 DRAFT。

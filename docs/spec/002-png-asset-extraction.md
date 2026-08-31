@@ -8,7 +8,7 @@
   `docs/re/monpics-ega-visual-probe.json`、`docs/re/perpics-ega-visual-probe.json`、
   `docs/re/kolmpics-index28-visual-probe.json`、`docs/re/miscpics-ega-visual-probe.json`、
   `docs/re/combpics-all-ega-visual-probe.json`、`docs/re/title-set-face-ega-visual-probe.json`、
-  `docs/re/title-backpics-ega-visual-probe.json`
+  `docs/re/title-backpics-ega-visual-probe.json`、`docs/re/koltown-endpics-ega-visual-probe.json`
 
 ## 目的
 
@@ -68,6 +68,8 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
   完整證實；每包圖號 0..5，尺寸依序為 88×70、104×84、160×125、112×80。
 - [x] TITLE 的 `BACKPICS.0` 全 14 筆已證實為 320×200、4-bit EGA、無透明全螢幕背景；
   全部 30 個 caller 的常數圖號集合完整覆蓋 0..13。
+- [x] KOLTOWN 的 `ENDPICS.0` 全七筆已證實；圖號 0..6、七種 caller 矩形、4-bit EGA
+  與無透明 direct-blit 政策均已關閉。
 - [x] `TWN0..7PICS` 全域圖號 24 均跨入 `.1`，已證實 town 0 為 192×96、其餘為
   88×64，並通過八張 continuation PNG 的幾何、方向、4-bit bounds 與接觸表目視。
 - [x] `MONPICS.0` 的 64 個 payload 已證實是 32 組「偶數 4-bit EGA 彩圖＋奇數 1-bit
@@ -109,5 +111,6 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 `tools/probe_extract_miscpics_png.py` 驗證 MISCPICS 全 archive，但仍是 RE probe，不是正式
 抽取器；`tools/probe_extract_comb_all_png.py` 與 `tools/probe_extract_title_set_face_png.py`
 以及 `tools/probe_extract_title_backpics_png.py` 同樣只作各自 archive 的 RE 驗證。
+`tools/probe_extract_koltown_endpics_png.py` 也僅驗證 ENDPICS，不是 production importer。
 官方 `MAKEMODE.EXE` 已證實可由 PICS 生成 PCGA／HERC archive，但完整轉換規則尚未關閉，
 且產品 theme 範圍待使用者決策，故不得先接入正式抽取流程。

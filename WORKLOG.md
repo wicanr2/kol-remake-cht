@@ -573,3 +573,15 @@
   新增安全 IDA 摘要、視覺統計與可重生探針；SPEC-002 仍為 DRAFT。
 - 第二個最終全新 IDA DB 的安全摘要，以及第二批 14 張 PNG／視覺統計，均與第一批逐
   byte 相同。
+
+## 2026-08-31：KOLTOWN ENDPICS 全七張
+
+- 一般字串探針未列 `end%s` consumer；原始 offset 唯一命中 `0x2b821` 後，回查 IDA DB
+  證實位於 `sub_2B80A`。未把缺少自動 xref 誤判成未使用資料。
+- `sub_2B80A` 全部七個 caller 均在 `sub_2B4A7`，傳入圖號 0..6；專用探針對 call set、
+  圖號與 28 筆矩形 assignment 設 fail-closed 斷言。
+- 七筆 LZW／二階 RLE 全部精確吻合各自矩形，索引不超過 15；七張 ignored PNG 為結局
+  敘事人物／場景，無鏡像、旋轉、plane 錯排或裁切。
+- 新增安全 IDA 摘要、視覺統計與可重生探針；ENDPICS 全 archive 升為已證實，
+  SPEC-002 整體仍維持 DRAFT。
+- 第二個最終全新 IDA DB 摘要，以及第二批七張 PNG／安全統計，均與第一批逐 byte 相同。

@@ -81,7 +81,8 @@
 
 ## 下一個唯一工作
 
-TITLE 的 SET0／SET1／SET2／FACE 四個 archive 共 24 張，以及 BACKPICS 全 14 張，已由
-IDA consumer 與 PNG 探針完整關閉。等待使用者決定 EGA／CGA／Hercules theme 交付範圍；
+TITLE 的 SET0／SET1／SET2／FACE 四個 archive 共 24 張、BACKPICS 全 14 張，以及
+KOLTOWN ENDPICS 全七張，已由 IDA consumer 與 PNG 探針完整關閉。等待使用者決定
+EGA／CGA／Hercules theme 交付範圍；
 不依賴該決定的下一工作是繼續收斂
 SPEC-002 的下一個 EGA PICS consumer。SPEC-002 READY 前不接 production runtime。
