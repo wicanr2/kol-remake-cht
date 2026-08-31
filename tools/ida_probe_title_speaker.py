@@ -103,6 +103,11 @@ def main() -> None:
         "root_start_eas": [f"0x{x:x}" for x in ROOTS],
         "caller_sites": caller_sites,
     }
+    cue_caller_functions = sorted({
+        idc.get_func_name(ida_funcs.get_func(ref).start_ea)
+        for ref in idautils.CodeRefsTo(0x10F75, False)
+        if ida_funcs.get_func(ref) is not None
+    })
     private = {
         "schema": "kol-ida-title-speaker-private-v1",
         **shared,
@@ -129,6 +134,11 @@ def main() -> None:
             "busy_wait_helper_original_function": "sub_11904",
             "speaker_order": ["sub_10F33", "sub_10F5D repeated", "sub_10F48"],
             "caller_sites": caller_sites["0x10f75"],
+            "caller_original_functions": cue_caller_functions,
+            "normal_flow_evidence": (
+                "all eight sites are in _main, sub_10AF0, or sub_10C86; each follows the title image "
+                "blit sub_11133, and the single-call presentation paths continue to keyboard polling"
+            ),
             "status": "confirmed",
             "label_is_evidence": False,
         },

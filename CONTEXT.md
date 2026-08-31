@@ -80,7 +80,10 @@
   目前可形成 752 個已證實 PNG 單位。這只關閉 EGA 素材格式，尚未建立 production extractor。
 - 音訊 RE 已建立 SPEC-004 DRAFT。固定 ZIP 沒有獨立音訊檔；TITLE `sub_10F75` 已證實為
   兩段、每段 100 次隨機 PIT 除數更新的 PC Speaker cue。`TANDYPIN.EXE` 已證實是 DOS
-  `AH=31h` 常駐記憶體程式，不是音訊播放器。其餘 executable 的 cue 母體尚未關閉。
+  `AH=31h` 常駐記憶體程式，不是音訊播放器。六個 executable 的雙新建 IDA DB 直接 I/O
+  普查只有 TITLE 命中音訊埠；六個未解析 DX 點均已人工排除為 EGA renderer。正常啟動的
+  DOSBox-X `DX-CAPTURE /A` 已取得 38.229333 秒 WAV，四段非靜音窗及 peak 均已固定；
+  人耳驗收與 OGG 呈現決策尚未完成。
 
 ## 固定輸入
 
@@ -121,5 +124,5 @@ KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸�
 KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
 分類；24×20 動態圖示的個別可達索引仍保留證據等級。
 MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 交付範圍仍等待使用者決定；在等待期間先關閉其餘 executable 的可聽 cue 母體。
-SPEC-002／004 READY 前不接 production runtime。
+顯示 theme 與 TITLE OGG 呈現方向都等待使用者決定。SPEC-002／004 READY 前不接
+production runtime。

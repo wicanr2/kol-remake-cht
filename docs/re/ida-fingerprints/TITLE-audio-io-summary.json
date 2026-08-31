@@ -1,0 +1,60 @@
+{
+  "schema": "kol-ida-audio-io-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "TITLE.EXE",
+  "input_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+  "address_space": "IDA linear effective address for the named loaded MZ image",
+  "io_instruction_count": 12,
+  "audio_candidate_count": 6,
+  "audio_candidates": [
+    {
+      "ea": "0x10f3c",
+      "bytes": "e461",
+      "disassembly": "in      al, 61h; PC/XT PPI port B bits:",
+      "original_function": "sub_10F33",
+      "function_start_ea": "0x10f33",
+      "reason": "immediate port 0x61"
+    },
+    {
+      "ea": "0x10f40",
+      "bytes": "e661",
+      "disassembly": "out     61h, al; PC/XT PPI port B bits:",
+      "original_function": "sub_10F33",
+      "function_start_ea": "0x10f33",
+      "reason": "immediate port 0x61"
+    },
+    {
+      "ea": "0x10f51",
+      "bytes": "e461",
+      "disassembly": "in      al, 61h; PC/XT PPI port B bits:",
+      "original_function": "sub_10F48",
+      "function_start_ea": "0x10f48",
+      "reason": "immediate port 0x61"
+    },
+    {
+      "ea": "0x10f55",
+      "bytes": "e661",
+      "disassembly": "out     61h, al; PC/XT PPI port B bits:",
+      "original_function": "sub_10F48",
+      "function_start_ea": "0x10f48",
+      "reason": "immediate port 0x61"
+    },
+    {
+      "ea": "0x10f69",
+      "bytes": "e642",
+      "disassembly": "out     42h, al; Timer 8253-5 (AT: 8254.2).",
+      "original_function": "sub_10F5D",
+      "function_start_ea": "0x10f5d",
+      "reason": "immediate port 0x42"
+    },
+    {
+      "ea": "0x10f6d",
+      "bytes": "e642",
+      "disassembly": "out     42h, al; Timer 8253-5 (AT: 8254.2).",
+      "original_function": "sub_10F5D",
+      "function_start_ea": "0x10f5d",
+      "reason": "immediate port 0x42"
+    }
+  ],
+  "method_limit": "窮舉 IDA 已定義 code 的 x86 IN/OUT；DX 僅以同函式向前 32 個 instruction 的最近直接設定作候選，不把它當完整資料流證明。無候選不單獨證明沒有間接 port route。"
+}

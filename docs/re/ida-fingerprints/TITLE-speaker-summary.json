@@ -81,6 +81,12 @@
       "0x10ceb",
       "0x10cee"
     ],
+    "caller_original_functions": [
+      "_main",
+      "sub_10AF0",
+      "sub_10C86"
+    ],
+    "normal_flow_evidence": "all eight sites are in _main, sub_10AF0, or sub_10C86; each follows the title image blit sub_11133, and the single-call presentation paths continue to keyboard polling",
     "status": "confirmed",
     "label_is_evidence": false
   },

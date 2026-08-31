@@ -1,0 +1,11 @@
+{
+  "schema": "kol-ida-audio-io-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for the named loaded MZ image",
+  "io_instruction_count": 54,
+  "audio_candidate_count": 0,
+  "audio_candidates": [],
+  "method_limit": "窮舉 IDA 已定義 code 的 x86 IN/OUT；DX 僅以同函式向前 32 個 instruction 的最近直接設定作候選，不把它當完整資料流證明。無候選不單獨證明沒有間接 port route。"
+}

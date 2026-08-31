@@ -16,6 +16,15 @@ Ebitengine 音訊路徑。
   更新 100 次除數；`sub_11953` 是 `rand() % N + 1`，`sub_11904` 是依全域校正常數忙等。
 - `TANDYPIN.EXE` 入口執行 DOS `INT 21h`、`AH=31h` 常駐記憶體，保留 `0x0401`
   paragraphs；它不是獨立音訊素材或音效播放器。
+- 六個 executable 均以兩個全新 IDA DB 窮舉已定義 code 的 x86 `IN`／`OUT`。只有
+  `TITLE.EXE` 命中 `0x61`／`0x42`；其餘五個沒有音訊候選。六個保守未解析的 `DX`
+  I/O 點經人工審查全是既有圖片 renderer 的 EGA graph-register writes。
+- `sub_10F75` 的八個 caller 全在 `_main`、`sub_10AF0`、`sub_10C86`，且都緊接
+  `sub_11133` 圖片 blit；單次 cue 路徑隨後進入鍵盤輪詢。這證實 cue 位於正常 TITLE
+  presentation flow，但尚未把各張畫面推定成原版語意名稱。
+- 依 DOSBox-X 官方 `DX-CAPTURE /A` 契約，在正常 `TITLE.EXE` 流程取得 48 kHz、stereo、
+  PCM WAV。38.229333 秒觀察窗內有四段非靜音輸出，約為 0.935、1.057、0.942、0.910 秒；
+  peak 為 -10.317 dB。這是 emulator machine capture，不冒充人耳驗收或原硬體時鐘 parity。
 - 原始定位、bytes、caller 與工具版本見 `docs/re/ida-fingerprints/`；目錄見
   `docs/re/audio-inventory.json`。
 
@@ -36,8 +45,6 @@ Ebitengine 音訊路徑。
 
 ## 尚未通過的 READY gate
 
-1. 逐一掃描其餘 executable 的 speaker／PIT 與可聽事件路徑，關閉 cue 母體。
-2. 以正常玩家路徑確認各 cue 的觸發情境；caller 不可只靠導覽標籤推定。
-3. 由使用者決定已證實演算法 cue 採「規格近似合成 OGG」、新作替代音效或靜音；目前不代決。
-4. 固定 OGG 編碼參數、loop 契約、權利分類與人耳抽樣方式。
-5. 證據審查後才可把本規格升為 READY。
+1. 由使用者決定已證實演算法 cue 採「規格近似合成 OGG」、新作替代音效或靜音；目前不代決。
+2. 固定 OGG 編碼參數、loop 契約、權利分類與人耳抽樣方式；人耳驗收仍待執行。
+3. 證據審查後才可把本規格升為 READY。

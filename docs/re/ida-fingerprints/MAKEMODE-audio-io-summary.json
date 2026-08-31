@@ -1,0 +1,11 @@
+{
+  "schema": "kol-ida-audio-io-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "MAKEMODE.EXE",
+  "input_sha256": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56",
+  "address_space": "IDA linear effective address for the named loaded MZ image",
+  "io_instruction_count": 0,
+  "audio_candidate_count": 0,
+  "audio_candidates": [],
+  "method_limit": "窮舉 IDA 已定義 code 的 x86 IN/OUT；DX 僅以同函式向前 32 個 instruction 的最近直接設定作候選，不把它當完整資料流證明。無候選不單獨證明沒有間接 port route。"
+}

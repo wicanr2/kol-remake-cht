@@ -70,8 +70,11 @@
 - [x] 建立完整 EGA extraction set：30 個邏輯 archive／1,022 payload 全數有 disposition；
   996 筆已證實、0 筆待證實、26 筆非圖片，並有清冊一致性 verifier。
 - [ ] 生成 atlas／接觸表，逐批人工檢查尺寸、色盤、透明色、裁切與動畫序列。
-- [ ] 關閉全部 executable 的可聽 cue 母體；目前已證實 TITLE PC Speaker 音爆，並排除
-  `TANDYPIN.EXE` 是音訊播放器。
+- [x] 以雙新建 IDA DB 關閉六個 executable 的直接 x86 音訊 I/O 母體；只有 TITLE
+  PC Speaker 音爆，並排除 `TANDYPIN.EXE` 是音訊播放器。
+- [x] 用 DOSBox-X `DX-CAPTURE /A` 在正常 TITLE 流程取得非靜音 WAV，固定四段活動窗、
+  codec、時長、峰值與 SHA-256；不追逐週期 parity。
+- [ ] 完成 TITLE cue 人耳驗收，並由使用者決定 OGG 採規格近似合成、新作替代或靜音。
 - [x] 建立 OGG catalog 的 SPEC-004 DRAFT 與機器可讀音訊 inventory；尚不授權轉換實作。
 - [ ] SPEC-004 證據審查並升 READY 後，建立 OGG 轉換管線；驗證 codec、時長、非靜音、
   峰值、loop 與人耳聆聽。
@@ -114,6 +117,6 @@
 
 ## 下一個唯一工作
 
-完整 EGA extraction set 已無 unknown，但圖片 theme 決策仍待使用者回答。可獨立前進的
-下一步是掃描其餘 executable 的可聽事件，關閉 SPEC-004 cue 母體。
+完整 EGA extraction set 已無 unknown，但圖片 theme 決策仍待使用者回答。音訊直接 I/O
+母體與正常流程機械擷取已關閉；下一步需要使用者決定 TITLE cue 的 OGG 呈現方向。
 SPEC-002／004 READY 前不接 Go／Ebitengine production runtime。

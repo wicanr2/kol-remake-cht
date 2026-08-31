@@ -1,0 +1,28 @@
+{
+  "schema": "kol-title-audio-oracle-v1",
+  "source_executable": "TITLE.EXE",
+  "source_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+  "emulator": "DOSBox-X 2026.06.02 commit d75a57c",
+  "capture_method": "DX-CAPTURE /A /-D TITLE.EXE",
+  "capture_contract_source": "https://dosbox-x.com/wiki/DOSBox%E2%80%90X%E2%80%99s-Supported-Commands",
+  "environment": "Docker, no network, Xvfb, SDL dummy audio sink",
+  "local_ignored_wav": "workplace/oracle/title-audio/title_000.wav",
+  "captured_wav_sha256": "f2c5191545b3bae1f066c9328db184c9406541941c8a008426d95a8f2260936b",
+  "wav": {
+    "codec": "pcm_s16le",
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "duration_seconds": 38.229333,
+    "bytes": 7340076,
+    "peak_db": -10.317424,
+    "rms_db": -36.092743
+  },
+  "non_silent_windows_seconds": [
+    [1.892854, 2.827854],
+    [5.881188, 6.937854],
+    [9.868958, 10.811271],
+    [13.856187, 14.765688]
+  ],
+  "status": "confirmed technical capture",
+  "evidence_grade_limit": "DOSBox-X machine capture proves non-silent normal-flow output, not human listening approval or original hardware wall-clock parity."
+}

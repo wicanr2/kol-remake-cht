@@ -23,5 +23,20 @@
       "evidence": "ida-fingerprints/TANDYPIN-residency-summary.json"
     }
   ],
-  "coverage_limit": "目前只登錄已證實的 TITLE cue；尚未宣稱所有 executable 的演算法音效已窮舉。"
+  "executable_io_scan": {
+    "status": "confirmed",
+    "method": "IDA-defined x86 IN/OUT inventory with conservative immediate/DX port classification",
+    "double_fresh_database_reproduction": true,
+    "inputs": [
+      {"name": "KOL.EXE", "io_instructions": 6, "audio_candidates": 0, "evidence": "ida-fingerprints/KOL-audio-io-summary.json"},
+      {"name": "KOLBOOK.EXE", "io_instructions": 43, "audio_candidates": 0, "evidence": "ida-fingerprints/KOLBOOK-audio-io-summary.json"},
+      {"name": "KOLTOWN-unpacked.EXE", "io_instructions": 54, "audio_candidates": 0, "evidence": "ida-fingerprints/KOLTOWN-audio-io-summary.json"},
+      {"name": "MAKEMODE.EXE", "io_instructions": 0, "audio_candidates": 0, "evidence": "ida-fingerprints/MAKEMODE-audio-io-summary.json"},
+      {"name": "TANDYPIN.EXE", "io_instructions": 0, "audio_candidates": 0, "evidence": "ida-fingerprints/TANDYPIN-audio-io-summary.json"},
+      {"name": "TITLE.EXE", "io_instructions": 12, "audio_candidates": 6, "evidence": "ida-fingerprints/TITLE-audio-io-summary.json"}
+    ],
+    "reviewed_unresolved_dx_hits": 6,
+    "reviewed_unresolved_dx_disposition": "all confirmed EGA graph-register writes in previously evidenced image renderer functions"
+  },
+  "coverage_limit": "固定 executable 的直接 x86 speaker/PIT/Tandy I/O 母體已關閉；未把無法由 IN/OUT 普查涵蓋的外部裝置或 DOS console bell 冒稱為已排除。"
 }

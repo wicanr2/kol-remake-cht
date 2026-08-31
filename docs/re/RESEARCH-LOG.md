@@ -888,3 +888,19 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - **限制**：`title-random-tone-burst` 只是導覽標籤；不宣稱原版語意名稱。依硬體時序停止線，
   不追逐週期 PIT／busy-wait parity。其餘 executable 尚未完成 cue 母體掃描。
 - 可重生性：TITLE 與 TANDYPIN 各以兩個全新 IDA DB 執行，兩份 safe JSON 都逐 byte 相同。
+
+## RE-033：全 executable 音訊 I/O 母體與正常流程 WAV oracle
+
+- 六個 executable 均以兩個全新 IDA DB 窮舉 IDA-defined code 的 x86 `IN`／`OUT`。
+  KOL／KOLBOOK／KOLTOWN-unpacked／MAKEMODE／TANDYPIN／TITLE 的 I/O 指令數依序為
+  6／43／54／0／0／12，只有 TITLE 六個 instruction 命中 `0x61`／`0x42` 音訊埠。
+- **已證實**：KOLBOOK 四個、KOLTOWN 兩個保守未解析的 `DX` I/O 點都有原始 EGA
+  graph-register 註記，且位於 RE-027 等既有圖片 renderer 垂直鏈，排除為音訊。
+- **已證實**：TITLE cue 八個 caller 位於 `_main`、`sub_10AF0`、`sub_10C86`，全都緊接
+  `sub_11133` 圖片 blit；單次 cue 路徑隨後進入 `_kbhit`。這是正常 TITLE presentation flow。
+- DOSBox-X 2026.06.02 依官方 `DX-CAPTURE /A /-D` 契約取得正常流程 WAV：48 kHz stereo
+  PCM、38.229333 秒、7,340,076 bytes、peak -10.317424 dB，SHA-256
+  `f2c5191545b3bae1f066c9328db184c9406541941c8a008426d95a8f2260936b`。四段非靜音窗見
+  `title-audio-oracle.json`。
+- **限制**：機械擷取證實非靜音輸出，不等於人耳驗收；DOSBox-X timing 不冒充原硬體
+  wall-clock parity。WAV 為本機 ignored oracle，不加入 Git。
