@@ -6,7 +6,7 @@
 
 | 分類 | 狀態 | 目前證據／限制 |
 |---|---|---|
-| remake | 尚未開始 | RE 知識庫已建立；SPEC-001 DRAFT，尚未授權 Go implementation |
+| remake | 尚未開始 | RE 知識庫已建立；SPEC-001 READY 只授權研究 oracle，玩法／格式 spec 尚未授權 Go implementation |
 | 原版 oracle | build 已固定 | ZIP 與全部項目逐檔雜湊已固定；發行來源／1998 timestamp 成因未知 |
 | 玩家觀點 | 起源資料完成 | 魔旅士繁中個人心得＋《CRPG 通鑑》中文長篇評介已進 README |
 | 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
@@ -97,8 +97,6 @@
 
 ## 下一個唯一工作
 
-完成 `docs/spec/001-original-oracle-preparation.md` 的兩個 DRAFT gate：用獨立 DOS 原版
-runtime memory oracle 核對三個 unpacked offset，並檢查解包器 garbage-byte 差異是否會
-進入有效 consumer。直接執行 `KOLTOWN` 已證實會提早退出；下一個窄任務是由 IDA 9.4
-追查它的啟動參數／主程式 exec contract，再以正常呼叫狀態重跑 oracle。SPEC-001 未升
-READY 前不得開始玩法 spec 或 Go implementation。
+SPEC-001 已 READY。下一個窄任務是盤點原版 `*PICS*`／無副檔名圖像 archive 的 header、
+索引、palette、compression 與 consumer，建立 PNG 抽取 DRAFT spec；READY 前只允許
+disposable decoder probe，不接 Go／Ebitengine production runtime。

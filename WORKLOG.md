@@ -74,3 +74,16 @@
   dump；依失敗即關閉原則，SPEC-001 仍為 DRAFT，三點核對與 garbage-byte gate 未通過。
 - 下一步：用 IDA 9.4 追查啟動參數 consumer／主程式 exec contract，不再猜參數；仍不
   開始 Go／Ebitengine implementation。
+
+## 2026-08-31：SPEC-001 runtime oracle 關閉
+
+- IDA 9.4 證實 main 於 unpacked EA `0x103b3..0x103bc` 讀 `argv[1][0]-'A'`；最小合法
+  命令為 `KOLTOWN.EXE A`。完整指令保留 private，Git 只收 safe startup summary。
+- 保留三項勘誤：短採樣仍在 BIOS／DOS，不是程式退出；DOS 長目錄 `cd` 未成功；MZ
+  header `0x0240` 是 paragraph 數，正確 header 為 `0x2400` bytes。
+- 修正掛載與位址後，第一輪量得 load segment `0824`；第二次乾淨啟動預設
+  `23B3:001C` 斷點並在 C startup 前精確命中。
+- runtime dump 129,312 bytes、SHA-256 `df79480d…67f6`。2,281 個 relocation 契約全部
+  通過；正規化後全映像零差異，五個分散 32-byte 錨點全吻合。
+- SPEC-001 由 DRAFT 升 READY，只授權 derivative 當研究 oracle；下一步進圖像格式 RE／
+  PNG 抽取 DRAFT spec，仍不開始 production runtime。

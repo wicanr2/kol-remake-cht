@@ -1,0 +1,54 @@
+{
+  "schema": "kol-koltown-runtime-compare-summary-v1",
+  "derivative_name": "KOLTOWN-unpacked.EXE",
+  "derivative_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "runtime_name": "KOLTOWN-runtime-load.bin",
+  "runtime_sha256": "df79480d218c33f681e127db5d956e95a67159cb3c0bcfb6e474f9938bac67f6",
+  "address_space": "load-image offsets; IDA EA = 0x10000 + load offset",
+  "mz_header_bytes": 9216,
+  "load_image_bytes": 129312,
+  "runtime_load_segment": "0824",
+  "relocation_count": 2281,
+  "relocation_contract_match_count": 2281,
+  "relocation_contract_mismatch_count": 0,
+  "normalized_diff_byte_count": 0,
+  "normalized_diff_run_count": 0,
+  "anchors": [
+    {
+      "load_offset": 0,
+      "ida_ea": "0x10000",
+      "length": 32,
+      "matched": true,
+      "sha256": "7d2cf34189a48abd95e4ef26647463f3cb36e35c6e35f4589f75e8236bbf6a48"
+    },
+    {
+      "load_offset": 32768,
+      "ida_ea": "0x18000",
+      "length": 32,
+      "matched": true,
+      "sha256": "832cf92cc942f71da62b7d5042614034c7d1dd690c72db60a6be22fddc752b9b"
+    },
+    {
+      "load_offset": 65536,
+      "ida_ea": "0x20000",
+      "length": 32,
+      "matched": true,
+      "sha256": "0c9d60c4b5d44dd655d329e42ac5f4ccc14bf2cf8c4e0561ddee95e55f58f629"
+    },
+    {
+      "load_offset": 98304,
+      "ida_ea": "0x28000",
+      "length": 32,
+      "matched": true,
+      "sha256": "f79532f12be691ddb4ff6eed5370e0d9355a86e411e4a0ab43117703678cb56c"
+    },
+    {
+      "load_offset": 122584,
+      "ida_ea": "0x2ded8",
+      "length": 32,
+      "matched": true,
+      "sha256": "bc2aa427d4da14d8d129df2e2478905e787dcfdf9540fbc1d82a1481e6aaf095"
+    }
+  ],
+  "diff_runs": []
+}

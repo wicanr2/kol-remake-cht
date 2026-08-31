@@ -9,6 +9,7 @@
 | runtime relocated EA | packed IDA EA 加 stage 1 搬移差額 | 描述 stub 在 DOS 記憶體搬移後的執行位置 |
 | unpacked file offset | 衍生 EXE 檔頭 byte 0 | CC0 unexepack 重建輸出 |
 | unpacked IDA EA | 衍生 EXE 的 IDA load base `0x10000` | 真正程式 entry、函式、xref 與後續 RE |
+| DOS runtime SEG:OFF | 本次固定 DOSBox-X 啟動的 load segment `0824` | 第二個獨立解包 oracle；不可假設跨組態固定 |
 
 後續證據必須寫出空間名稱，不能只寫 `0x2b90c`。
 
@@ -38,3 +39,6 @@
 - packed IDA `0x2f548..0x2f627` 是解壓 stub 的來源表示，不是解壓後產品函式地址。
 - 解壓後所有函式與資料語意只能引用 unpacked derivative SHA-256
   `01f6f9…d1d2` 的 unpacked IDA EA；不得把 packed 與 unpacked EA 並列成同一位址。
+- 本次 DOS runtime 入口為 `23B3:001C`，因 `0824+1B8F=23B3`。一般換算為
+  `runtime segment = load segment + relative segment`；load segment 必須由當次 marker
+  或其他正對照量得，不能寫死為跨執行常數。

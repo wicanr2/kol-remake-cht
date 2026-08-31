@@ -3,7 +3,7 @@
 | 子系統 | 單元／真實資料測試 | 原版 oracle | 視覺 oracle | 玩家路徑 | 結果 |
 |---|---|---|---|---|---|
 | 原版輸入清冊 | ZIP CRC、逐檔 SHA-256、雙容器重生 byte compare | 不適用 | 不適用 | 不適用 | 通過 |
-| KOLTOWN 解包研究映像 | header、2,281 relocations、IDA entry／337 functions | runtime memory 三點尚缺 | 不適用 | 不適用 | DRAFT |
+| KOLTOWN 解包研究映像 | header、2,281 relocations、IDA entry／337 functions | startup 前 129,312 bytes、2,281 relocations、五錨點全吻合 | 不適用 | `KOLTOWN.EXE A` 正常啟動至 entry | SPEC-001 READY |
 | 啟動／新遊戲 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 移動／時間 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 地圖轉換 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |

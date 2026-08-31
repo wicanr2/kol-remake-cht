@@ -4,11 +4,18 @@ set -eu
 export DISPLAY=:99
 export TERM=xterm
 OUT=/out
+EXPECTED_KOLTOWN_SHA256=c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221
 
 cleanup() {
   kill "${DOSBOX_PID:-}" "${XVFB_PID:-}" 2>/dev/null || true
 }
 trap cleanup EXIT INT TERM
+
+actual_sha256=$(sha256sum /game/Knights-of-legend/KOLTOWN.EXE | cut -d' ' -f1)
+if [ "$actual_sha256" != "$EXPECTED_KOLTOWN_SHA256" ]; then
+  echo "KOLTOWN.EXE SHA-256 不符：$actual_sha256" >&2
+  exit 1
+fi
 
 Xvfb :99 -screen 0 800x600x24 -ac >/tmp/kol-xvfb.log 2>&1 &
 XVFB_PID=$!
@@ -28,10 +35,9 @@ cycles=fixed 20000
 [mixer]
 nosound=true
 [autoexec]
-mount c /game
+mount c /game/Knights-of-legend
 c:
-cd Knights-of-legend
-KOLTOWN.EXE 0
+KOLTOWN.EXE A
 CONF
 
 script -q -f -c "dosbox-x -conf /tmp/kol-oracle.conf -break-start" \
@@ -53,7 +59,12 @@ if [ "$connected" -ne 1 ]; then
   exit 1
 fi
 
-python3 /repo/tools/oracle/koltown_runtime_oracle.py \
-  "$OUT/KOLTOWN-runtime-load.bin" "$OUT/KOLTOWN-runtime-receipt.json"
+if ! python3 /repo/tools/oracle/koltown_runtime_oracle.py \
+  "$OUT/KOLTOWN-runtime-load.bin" "$OUT/KOLTOWN-runtime-receipt.json"; then
+  import -window root "$OUT/KOLTOWN-oracle-failure.png" 2>/dev/null || true
+  cp /tmp/kol-dosbox.log "$OUT/KOLTOWN-oracle-failure.log" || true
+  tail -60 /tmp/kol-dosbox.log >&2
+  exit 1
+fi
 
 tail -20 /tmp/kol-dosbox.log

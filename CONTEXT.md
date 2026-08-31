@@ -7,8 +7,8 @@
 - 本專案是 *Knights of Legend* 的繁體中文乾淨重寫，正式 runtime 使用 Go／Ebitengine、
   PNG 圖像與 Ogg Vorbis 音訊。
 - GitHub `wicanr2/kol-remake-cht` 已建立為 private；原版與衍生素材不得提交。
-- remake 尚未開始。RE 知識庫已建立，SPEC-001 仍為 DRAFT；在 spec 升 READY 前不能
-  宣稱可啟動、可玩或開始 production implementation。
+- remake 尚未開始。RE 知識庫已建立，SPEC-001 已 READY，只授權固定 KOLTOWN derivative
+  作研究 oracle；任何玩法、格式或玩家路徑仍須自己的 DRAFT／READY spec。
 - `Knights-of-legend.zip` 已在唯讀容器中通過 ZIP CRC 檢查，共 76 個中央目錄項目；可見
   6 個 MZ executable、安裝批次檔、城鎮／角色／物品資料及多組 `*PICS` 圖像候選。
 - ZIP 多數遊戲檔時間為 1989，但 `KOLTOWN.EXE`、`CHARDATA`、`CHARPICS`、`SHLDPICS`、
@@ -24,6 +24,8 @@
 - `KOLTOWN` 已證實使用 Microsoft EXEPACK；精確版本未知。以固定 SHA-256 的 CC0
   `unexepack.c` 產生本機 derivative `01f6f9…d1d2`，IDA 9.4 在 unpacked EA `0x2b90c`
   建立真正入口後辨識 337 個函式。解包 EXE、`.i64` 與完整 disassembly 僅留本機 ignored。
+- DOSBox-X 第二次乾淨啟動以 `KOLTOWN.EXE A` 在 runtime `23B3:001C`、C startup 前命中；
+  2,281 個 relocation 全通過，正規化後 129,312-byte load image 與 derivative 零差異。
 - 魔旅士 2010-04-16 的玩家心得與《CRPG 通鑑》中文版已進入 README；只作專案起源，
   不作玩法 oracle。
 
@@ -51,6 +53,5 @@
 
 ## 下一個唯一工作
 
-關閉 SPEC-001 的兩個 DRAFT gate：以獨立原版執行／記憶體 oracle 核對至少三個 unpacked
-offset，並確認 CC0 解包器已知 garbage-byte 差異不進入 code、relocation 或玩家資料
-consumer。未升 READY 前不開始玩法 spec 或 Go 實作。
+建立原版圖像 archive、palette 與 compression 的 RE 證據，撰寫 PNG 抽取 DRAFT spec；
+spec READY 前只做 disposable decoder probe，不接 Go／Ebitengine production runtime。

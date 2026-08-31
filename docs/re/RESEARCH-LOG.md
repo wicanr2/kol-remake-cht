@@ -171,11 +171,33 @@ bytes 推翻，改為 DOS EOF padding。先前「packer 未知」也由本節證
 
 ### 目前結果
 
-`-break-start` 實際停在 BIOS `F000:FFF0`，不是 MZ entry；已停止把該狀態誤當程式入口。
-直接執行 `KOLTOWN.EXE` 與暫定 `KOLTOWN.EXE 0` 都會在三秒觀察窗前退出，傳統記憶體內
-找不到檔案中固定的 `Packed file is corrupt` marker。因此本輪沒有 runtime bytes，不能
-關閉 SPEC-001 的三點核對 gate。
+`-break-start` 實際停在 BIOS `F000:FFF0`，不是 MZ entry。IDA unpacked EA `0x103b3` 讀
+第二個 C 參數 `argv`，`0x103b6` 取 `argv[1]`，`0x103b9..0x103bc` 以首字元減 ASCII `A`
+形成 0..15 索引；因此最小合法命令列為 `KOLTOWN.EXE A`。startup 原始函式與全域摘要見
+`ida-fingerprints/KOLTOWN-startup-summary.json`；完整指令只留 private JSON。
 
-這項結果只證實 `KOLTOWN` 不是可用上述命令獨立維持的 oracle；「必須由主程式帶哪些
-狀態／參數呼叫」仍為 `未知`。下一步由 IDA 9.4 追查啟動參數 consumer 或主程式 exec
-contract，不以猜參數的方式繼續。
+第一次啟動探針有三項已保留的勘誤：
+
+1. 0.1／1／2／3 秒採樣時 DOS 尚未完成 BIOS／COMMAND.COM 啟動，不能解釋成 KOLTOWN 退出。
+2. `cd Knights-of-legend` 依賴 DOS 8.3 長檔名映射，實際未進入遊戲目錄；改為直接把該
+   目錄掛為 `C:`。
+3. derivative MZ header 欄位 `0x0240` 的單位是 paragraph，故 header 是 `0x2400`
+   bytes，不是 `0x240`；錯誤 dump 向前偏 `0x21c` 段，已作廢並重生。
+
+修正後，第一輪持續執行採樣由 Microsoft runtime marker 推得 load segment `0824`。
+第二次乾淨啟動預先設定 `23B3:001C`（`0824+1B8F:001C`）斷點，精確命中 EXEPACK final
+transfer 後、C startup 前。runtime marker 再次獨立反推 `0824`，129,312-byte load image
+SHA-256 為 `df79480d…67f6`。
+
+比較器依 derivative 的 2,281-entry MZ relocation table，逐 word 驗證 runtime 值等於
+derivative 值加 `0824`，全部通過；扣除 relocation 後整份 load image **0 byte 差異**。
+另有五個分散 32-byte 錨點（unpacked IDA EA `0x10000`、`0x18000`、`0x20000`、
+`0x28000`、`0x2ded8`）全部吻合，超過 SPEC-001 的三點最低要求。
+
+### 結論
+
+- KOLTOWN 的合法最小啟動參數 `A`：`已證實`（IDA argv consumer＋DOS 正常執行）。
+- CC0 derivative 對此固定 build 的 canonical startup load image：`已證實`逐 byte 一致。
+- 上游對一般 EXEPACK garbage bytes 的警告仍保留；本 build 在 startup 前實測零差異，故
+  不存在會進入 code、relocation 或玩家資料 consumer 的實際差異。
+- SPEC-001 可由 DRAFT 升 READY；只授權 derivative 作後續研究 oracle。

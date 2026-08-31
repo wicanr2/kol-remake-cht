@@ -1,0 +1,79 @@
+{
+  "schema": "kol-ida-koltown-startup-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLTOWN-unpacked.EXE",
+  "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+  "targets": [
+    {
+      "requested_ea": "0x10000",
+      "original_name": "sub_10000",
+      "start_ea": "0x10000",
+      "end_ea": "0x10ddc",
+      "instruction_count": 1095,
+      "caller_count": 1
+    },
+    {
+      "requested_ea": "0x2b9e6",
+      "original_name": "sub_2B9BE",
+      "start_ea": "0x2b9be",
+      "end_ea": "0x2baaa",
+      "instruction_count": 95,
+      "caller_count": 3
+    },
+    {
+      "requested_ea": "0x2bab1",
+      "original_name": "sub_2BAB1",
+      "start_ea": "0x2bab1",
+      "end_ea": "0x2bad4",
+      "instruction_count": 12,
+      "caller_count": 2
+    },
+    {
+      "requested_ea": "0x2bbd0",
+      "original_name": "sub_2BBD0",
+      "start_ea": "0x2bbd0",
+      "end_ea": "0x2bd63",
+      "instruction_count": 204,
+      "caller_count": 1
+    },
+    {
+      "requested_ea": "0x2bd64",
+      "original_name": "sub_2BD64",
+      "start_ea": "0x2bd64",
+      "end_ea": "0x2bdd2",
+      "instruction_count": 59,
+      "caller_count": 1
+    }
+  ],
+  "argument_globals": [
+    {
+      "ea": "0x2f32c",
+      "original_name": "word_2F32C",
+      "raw_word": 0,
+      "xrefs_to": [
+        "0x2b99f",
+        "0x2bc92"
+      ]
+    },
+    {
+      "ea": "0x2f32e",
+      "original_name": "word_2F32E",
+      "raw_word": 0,
+      "xrefs_to": [
+        "0x2b99b",
+        "0x2bca5"
+      ]
+    },
+    {
+      "ea": "0x2f330",
+      "original_name": "word_2F330",
+      "raw_word": 0,
+      "xrefs_to": [
+        "0x2b997",
+        "0x2bda8",
+        "0x2d56f"
+      ]
+    }
+  ]
+}

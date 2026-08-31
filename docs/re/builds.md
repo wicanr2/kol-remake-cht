@@ -21,7 +21,7 @@
 | 解包器授權 | 檔頭明示 CC0 1.0；未把來源複製進本專案 |
 | 建置環境 | `gcc:13`、`-std=c99 -O2 -Wall -Wextra`、無網路容器、UID/GID 1000 |
 | 解包器 binary SHA-256 | `998569497d3e29c137821e79635b2a411f04c1d236bbf2a66b7d52929ca12bec` |
-| 限制 | 上游明示 garbage bytes 不保證與 Microsoft 原解包結果逐 byte 相同；只作研究衍生映像 |
+| 限制 | 上游明示一般情況的 garbage bytes 不保證一致；本固定 build 已由 startup 前 runtime oracle 證實完整 load image 零差異 |
 
 ### 解包結果不變量
 
@@ -30,6 +30,8 @@
 - 解壓資料長度：129,312 bytes；解壓寫入 16,421 bytes，消耗 15,381 packed bytes。
 - IDA Pro 9.4 重新載入後，entry linear EA 為 `0x2b90c`；強制建立入口函式後資料庫辨識
   337 個函式，證明衍生映像可供 xref／函式邊界研究。
+- DOSBox-X 第二次乾淨啟動於 unpacked entry 中斷；runtime load segment `0824`，正規化
+  2,281 個 relocation 後，129,312-byte load image 與 derivative 逐 byte 相同。
 
 ### 已知建置失敗
 

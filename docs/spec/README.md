@@ -8,4 +8,4 @@
 
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
-| SPEC-001 | [原版 Oracle 準備與位址契約](001-original-oracle-preparation.md) | DRAFT | 否 |
+| SPEC-001 | [原版 Oracle 準備與位址契約](001-original-oracle-preparation.md) | READY | 僅授權研究 derivative，不授權玩法實作 |

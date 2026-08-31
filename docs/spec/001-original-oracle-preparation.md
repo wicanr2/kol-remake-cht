@@ -1,6 +1,6 @@
 # SPEC-001：原版 Oracle 準備與位址契約
 
-- 狀態：`DRAFT`
+- 狀態：`READY`
 - 日期：2026-08-31
 - 範圍：研究工具與證據輸入；不定義任何玩家玩法
 - RE 來源：`docs/re/builds.md`、`docs/re/address-spaces.md`、`docs/re/toolchain.md`
@@ -33,17 +33,20 @@
 - [x] 解包輸出 header 為 `1b8f:001c`、`2b48:07d0`、2,281 relocations。
 - [x] IDA 9.4 重載入口為 unpacked EA `0x2b90c`。
 - [x] 強制建立入口函式後可辨識 337 個函式。
-- [ ] 以第二個獨立方法驗證至少三個 unpacked file offset 對回 packed／runtime bytes。
-- [ ] 審查解包器 garbage-byte 差異不影響 code、relocation 或玩家資料 consumer。
+- [x] 以第二個獨立方法驗證至少三個 unpacked file offset 對回 packed／runtime bytes。
+- [x] 審查解包器 garbage-byte 差異不影響 code、relocation 或玩家資料 consumer。
 
-DOSBox-X 啟動收據見 `docs/re/RESEARCH-LOG.md` RE-004。目前直接啟動 `KOLTOWN` 會在採樣
-前退出，故兩個 gate 均維持未完成；不得把失敗採樣當作解包器正確性的反證或佐證。
+DOSBox-X 啟動收據見 `docs/re/RESEARCH-LOG.md` RE-004，機械摘要見
+`docs/re/ida-fingerprints/KOLTOWN-runtime-compare-summary.json`。第二次乾淨啟動在
+`23B3:001C`、C startup 執行前命中：2,281 個 relocation 全部符合契約，正規化後完整
+129,312-byte load image 與 derivative 零差異；五個分散 32-byte 錨點亦全數吻合。
 
 ## READY 條件
 
-上列兩個未完成 gate 關閉，且 RE 知識庫與 generated summary 可由乾淨輸入重生。READY
-只授權「把此 derivative 當研究 oracle」，不授權任何玩法實作。
+上列 gate 已關閉，RE 知識庫與 generated summary 可由乾淨輸入重生。READY 只授權
+「把此 derivative 當研究 oracle」，不授權任何玩法實作；玩法、格式與玩家路徑仍須各自
+經 RE → DRAFT → READY。
 
 ## 實作狀態
 
-無。依使用者要求，RE 知識庫與 spec 審查完成前不進入 remake implementation。
+無。本 spec 不包含 production implementation。

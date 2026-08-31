@@ -33,10 +33,10 @@
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
 | 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001、RE-002 |
-| IDA 安全摘要 | `ida-fingerprints/*.json` | 8 份可提交摘要；3 份含 bytes 私密檔 ignored |
+| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-004 |
+| IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口
 
-以 unpacked derivative 的 337 個 IDA 函式為基礎，先分出 compiler runtime、啟動碼與
-產品函式，再選一條玩家可見垂直鏈。不得用函式數量宣稱完成度。
+SPEC-001 已 READY。下一步先建立原版圖像 archive／palette／compression 的格式證據與
+DRAFT spec，讓素材可重生為 PNG；不得把格式猜測或一次成功 dump 直接接進 runtime。
