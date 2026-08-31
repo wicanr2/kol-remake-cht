@@ -85,6 +85,10 @@
 
 ## M4：Go／Ebitengine 垂直切片
 
+- [x] 建立角色建立 RE 證據表與 SPEC-005 DRAFT；固定手冊流程、16 個角色槽、768-byte
+  CHARDATA stride 與 KOLBOOK 開檔路由，但不授權 production 實作。
+- [ ] 關閉 35 個職業 eligibility、屬性 RNG、初始技能／物品與最小 768-byte 欄位索引；
+  經證據審查後把 SPEC-005 升 READY。
 - [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
 - [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。
 - [ ] 選一條最小玩家鏈：真實 PNG → typed data → 世界／城鎮一個互動 → UI → 存讀檔。

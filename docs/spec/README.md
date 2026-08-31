@@ -13,3 +13,4 @@ production implementation 的規格。所有原版衍生行為必須依序經過
 | SPEC-002 | [PNG 素材抽取契約](002-png-asset-extraction.md) | DRAFT | 否；只允許 disposable probe |
 | SPEC-003 | [繁中說明書翻譯與校對契約](003-manual-translation.md) | READY | 僅授權文件翻譯，不授權玩法／runtime |
 | SPEC-004 | [OGG 音訊目錄與執行期契約](004-ogg-audio-catalog.md) | DRAFT | 否；先完成 cue 母體與產品決策 |
+| SPEC-005 | [角色建立與角色儲存區](005-character-creation.md) | DRAFT | 否；先關閉 RNG、職業表與存檔 schema |

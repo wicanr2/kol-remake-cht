@@ -37,10 +37,12 @@
 | 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、KOLPICS、KOLMPICS、TWN 全包、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、WEAPPICS、HEADPICS／TORPICS／LEGSPICS、MONPICS、PERPICS、MISCPICS 與固定記錄表已分類 |
 | 音訊 cue 母體 | [audio-inventory.json](audio-inventory.json) | 六個 executable 直接 I/O 母體已關閉；只有 TITLE PC Speaker cue |
 | TITLE 音訊 oracle | [title-audio-oracle.json](title-audio-oracle.json) | DOSBox-X 正常流程非靜音擷取已證實；人耳驗收待辦 |
+| 角色建立 | [character-creation.md](character-creation.md) | 手冊流程與 16-slot stride 已固定；RNG／欄位待 RE |
 | IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
 
 ## 下一個知識缺口
 
-SPEC-002 與 SPEC-004 仍為 DRAFT。圖片 theme 範圍等待使用者決定；音訊直接 I/O 母體與
-正常流程機械擷取已關閉，下一步是人耳驗收及 TITLE cue 的 OGG 處理決策。兩份規格未達
-READY 前不得接進 runtime。
+SPEC-002、004、005 仍為 DRAFT。圖片 theme 範圍等待使用者決定；音訊直接 I/O 母體與
+正常流程機械擷取已關閉，下一步是人耳驗收及 TITLE cue 的 OGG 處理決策。這些規格未達
+READY 前不得接進 runtime。角色建立已固定手冊狀態機與原版 slot stride，下一窄切片是
+職業／RNG writer 資料流。

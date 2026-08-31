@@ -1,0 +1,52 @@
+{
+  "schema": "kol-ida-kolbook-chardata-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLBOOK.EXE",
+  "input_sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+  "address_space": "IDA linear effective address for KOLBOOK loaded MZ",
+  "dgroup_ea": "0x19240",
+  "string_ea": "0x1945a",
+  "string_text": "chardata",
+  "dgroup_relative_offset": 538,
+  "occurrences": [
+    {
+      "ea": "0x134f7",
+      "bytes": "b91a02",
+      "disassembly": "mov     cx, 21Ah",
+      "original_function": "sub_134C2",
+      "function_start_ea": "0x134c2"
+    }
+  ],
+  "consumer_original_functions": [
+    "sub_134C2"
+  ],
+  "route_call_site_count": 12,
+  "chardata_call_sites": [
+    {
+      "call_ea": "0x10a33",
+      "caller_original_function": "_main",
+      "caller_function_start_ea": "0x10010"
+    },
+    {
+      "call_ea": "0x1109b",
+      "caller_original_function": "_main",
+      "caller_function_start_ea": "0x10010"
+    },
+    {
+      "call_ea": "0x125f4",
+      "caller_original_function": "sub_11820",
+      "caller_function_start_ea": "0x11820"
+    },
+    {
+      "call_ea": "0x12d55",
+      "caller_original_function": "sub_1293E",
+      "caller_function_start_ea": "0x1293e"
+    },
+    {
+      "call_ea": "0x135f8",
+      "caller_original_function": "sub_135DB",
+      "caller_function_start_ea": "0x135db"
+    }
+  ],
+  "limitation": "檔案路由已固定；768-byte record 內欄位仍需 writer／reader 資料流證據。"
+}

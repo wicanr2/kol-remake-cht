@@ -84,6 +84,10 @@
   普查只有 TITLE 命中音訊埠；六個未解析 DX 點均已人工排除為 EGA renderer。正常啟動的
   DOSBox-X `DX-CAPTURE /A` 已取得 38.229333 秒 WAV，四段非靜音窗及 peak 均已固定；
   人耳驗收與 OGG 呈現決策尚未完成。
+- 角色建立已建立 SPEC-005 DRAFT。手冊固定名字→種族→性別→職業→reroll→圖像→保存
+  狀態機；`CHARDATA` 為 16×768 bytes、`CHARPICS` 為 16×760 bytes。IDA 固定 KOLBOOK
+  `chardata` EA `0x1945a`、路由 `sub_134C2` 與五個立即 arg=0 caller。職業 enum、RNG、
+  768-byte 欄位與 typed schema 尚未關閉，因此不授權實作。
 
 ## 固定輸入
 

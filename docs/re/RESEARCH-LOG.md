@@ -904,3 +904,16 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   `title-audio-oracle.json`。
 - **限制**：機械擷取證實非靜音輸出，不等於人耳驗收；DOSBox-X timing 不冒充原硬體
   wall-clock parity。WAV 為本機 ignored oracle，不加入 Git。
+
+## RE-034：角色建立手冊契約與 CHARDATA 路由
+
+- 手冊實體頁 4–5、27–31 與 Apple II 參考卡實體頁 2 固定角色建立順序、四種族、性別限制、
+  不限次 reroll、圖像接受、16 名角色儲存上限與六人隊伍上限。
+- 固定 ZIP 的 `CHARDATA` 是 12,288 bytes＝16×768；`CHARPICS` 是 12,160 bytes＝16×760。
+  這與手冊 16 名上限交叉吻合，但不證實 record 內欄位。
+- **已證實**：KOLBOOK loaded MZ 的 `chardata` 位於 EA `0x1945a`、DGROUP offset `0x021a`；
+  `sub_134C2` 以 `arg_0<<4` 選 16-byte filename entry。五個立即 `arg_0=0` caller 位於
+  `_main`、`sub_11820`、`sub_1293E`、`sub_135DB`。
+- 兩個全新 IDA DB 的 safe JSON 逐 byte 相同，SHA-256 `e71a6ca3…ec5d`。
+- **限制**：職業表數字是手冊標示的平均值，不能當亂數上下界。RNG、初始技能／物品 writer、
+  768-byte 欄位與保存 transaction 仍未知；SPEC-005 維持 DRAFT。

@@ -828,3 +828,16 @@
   metadata、SHA-256 與證據限制。SPEC-004 仍為 DRAFT，未建立 OGG production 資產。
 - IDA、DOSBox-X、Xvfb、FFmpeg 與驗證皆用有界 `docker run --rm`；十二個 IDA 暫存目錄與
   DOSBox-X 暫存目錄已精確刪除，結束檢查沒有 KOL／TITLE／TANDY／DOSBox 容器。
+
+## 2026-09-01：角色建立 RE 與 SPEC-005 DRAFT
+
+- 從已校對手冊建立角色建立狀態機、16 名儲存上限、六人隊伍上限與 35 個職業表的證據入口；
+  明列職業數值是平均值，不猜作 RNG range。
+- 固定 `CHARDATA` 16×768 與 `CHARPICS` 16×760 stride；新增 IDA 探針定位 KOLBOOK
+  `chardata` 字串、`sub_134C2` 路由及五個立即 arg=0 caller。
+- 初版探針誤把 little-endian immediate 的位址當 instruction 起點；依原始 bytes
+  `b9 1a 02` 訂正為 EA `0x134f7`，保留形成原因後以兩個全新 DB 重跑。safe JSON 逐 byte
+  相同，SHA-256 `e71a6ca3…ec5d`。
+- SPEC-005 維持 DRAFT；沒有建立角色 production code 或臆測 768-byte 欄位。
+- 全部探針與驗證使用 `docker run --rm --network none`；八個精確暫存 IDA 目錄已刪除，
+  結束檢查沒有 KOL／KOLBOOK／chardata 容器，其他專案容器未動。
