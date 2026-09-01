@@ -921,3 +921,10 @@
 - 使用者隨後要求暫停；依主機衛生規則，暫存截圖、可寫原版副本、IDA DB 與 capture script
   均已清除，沒有留下可版控 receipt。因此上述動態結果只列為「待重跑初步觀察」，不可
   升格成正式 oracle；靜態 bytes 契約已立即訂正，SPEC-005 維持 DRAFT。
+
+## 2026-09-01：README 已確認畫面
+
+- README 新增魔旅士文章的兩張外部原版截圖，分別對應已交叉驗證的 COMBPICS 圖號 0／1；
+  圖片不複製進 Git，點擊會回到來源文章。
+- 沿用 `docs/re/combpics-visual-oracle.json` 的證據限制：只確認場景身分、幾何與方向，不把
+  JPEG 配準結果宣稱為逐像素 RGB parity；README 同時明列圖片權利仍屬原權利人。

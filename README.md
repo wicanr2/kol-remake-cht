@@ -25,6 +25,19 @@ Go 與 Ebitengine，畫面執行期只讀經可重現流程抽出的 PNG，音�
 代價。這些文章說明「值得保存的系統深度」和「值得重新檢視的操作節奏」為何同時存在；
 它們屬於玩家觀點與專案動機，不會被直接當成原版規則證據。
 
+## 已確認的原版畫面
+
+以下兩張外部截圖來自魔旅士的原文，未複製進本儲存庫。它們已和固定原版
+`COMBPICS.0` 的解碼結果做配準交叉驗證：左圖對應 archive 圖號 0，右圖對應圖號 1。
+這項證據確認場景身分、幾何與方向，不代表 JPEG 與解碼 PNG 逐像素相同；量化結果見
+[COMBPICS 視覺 oracle](docs/re/combpics-visual-oracle.json)。
+
+| 戰鬥失利後逃跑（圖號 0） | 競技場戰敗（圖號 1） |
+|---|---|
+| [![《武士傳說》逃跑戰鬥畫面](https://morrisjfwong.com/blog/wp-content/uploads/2010/03/kol-flee-001a-s.jpg)](https://morrisjfwong.com/blog/knights-of-legend-%E6%AD%A6%E5%A3%AB%E5%82%B3%E8%AA%AA-dos-game/) | [![《武士傳說》競技場戰敗畫面](https://morrisjfwong.com/blog/wp-content/uploads/2010/04/war-lose-001a-s.jpg)](https://morrisjfwong.com/blog/knights-of-legend-%E6%AD%A6%E5%A3%AB%E5%82%B3%E8%AA%AA-dos-game/) |
+
+圖片著作權屬原權利人；此處只作研究來源標示與外部引用，不授予再利用或散布權。
+
 ## 現況與入口
 
 - 私有 GitHub 儲存庫：[wicanr2/kol-remake-cht](https://github.com/wicanr2/kol-remake-cht)
