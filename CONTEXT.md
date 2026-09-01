@@ -17,10 +17,18 @@
   目前只畫底圖與角色圖像，玩法規則、文字與輸入尚未接上。
   SPEC-001／002／003／005 為 READY 或 CONFORMED，SPEC-004（音訊）仍為 DRAFT；
   其餘玩法（戰鬥、任務、城鎮、世界地圖）仍須各自的 DRAFT／READY spec。
-- 首個 remake 對拍收據已建立（`docs/verification/remake-parity/`）：82 對畫面全部通過。
+- 原版內嵌點陣字型已抽出：`BOOKDATA.0`／`KOLDATA.0` 的第一個 payload 是同一份
+  1,303-byte 區塊（SHA-256 `819e4f82…d318`），前 744 bytes 是 93 個 8×8 字模、
+  `0x2e8` 起是 93 個 8×6 字模，都由 ASCII 32 起算涵蓋 32–124。
+  `tools/extract_fonts.py` 產出 `assets/original-derived-png/fonts/`。書本內文用小字型。
+- 書本文字版面已機械量得並版控於 `docs/re/text-layout.json`；原版繪字規則為
+  逐字模格清成白底、但空白字元不清底。中文化的字框限制已浮現：字模格 8×6、字距 8，
+  繁體中文字形放不進同一格，版面策略待決策。
+- remake 對拍收據已建立（`docs/verification/remake-parity/`）：83 對畫面全部通過。
   書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
-  畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同。對拍判準分成「素材與版面
-  必須相同」、「明列允許差異區（原版游標、原版自繪文字）」與「必須相同區」三層。
+  畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同；空白 New Character 頁
+  以原版字型與版面重繪後，64,000 個像素中只有 31 個不同且全部落在名字欄的原版殘留
+  字元。對拍判準分成「素材與版面必須相同」、「明列允許差異區」與「必須相同區」三層。
 - `Knights-of-legend.zip` 已在唯讀容器中通過 ZIP CRC 檢查，共 76 個中央目錄項目；可見
   6 個 MZ executable、安裝批次檔、城鎮／角色／物品資料及多組 `*PICS` 圖像候選。
 - ZIP 多數遊戲檔時間為 1989，但 `KOLTOWN.EXE`、`CHARDATA`、`CHARPICS`、`SHLDPICS`、

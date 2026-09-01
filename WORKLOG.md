@@ -1040,3 +1040,24 @@
 - 全部建置與執行使用有界 `docker run --rm --network none`（Go `--memory 3g --cpus 2`，
   比對 `--memory 2g --cpus 1`）。中止的一個 Go 容器已 `docker stop`，結束檢查沒有
   eob／DOSBox 容器殘留，其他專案容器未動。
+
+## 2026-09-01：原版字型抽取與含文字畫面的逐像素對拍
+
+- 從原版畫面反推字模再回頭搜尋原始檔：`RACE : HUMAN` 的五個字模逐 byte 取出後，
+  在固定 ZIP 的所有檔案與所有 archive payload 中搜尋，命中 `BOOKDATA.0` 與
+  `KOLDATA.0` 的第一個 payload（同一份 1,303-byte 區塊）。直接在 EXE 裡掃 1bpp
+  圖樣沒有結果，因為字型在壓縮 payload 裡。
+- 該區塊含兩套字型：8×8 與 8×6，各 93 個字模、ASCII 32–124。
+  `tools/extract_fonts.py` 產出 RGBA 字模表與含逐字模 hex 的 manifest。
+- 新增 `tools/locate_text_in_frame.py` 與 `tools/extract_text_layout.py`：用抽出的
+  字型在原版畫面上機械定位字串，要求唯一命中，輸出 `docs/re/text-layout.json`。
+  初版只比對墨點同色，會在單色背景整片誤命中；加上「文字框內非墨點須大多不同色」
+  的對比條件後每個字串都唯一命中。
+- Go 端新增 `internal/font`（讀字模表、以 ColorScale 上色）與 `internal/book/layout.go`
+  （版面表，座標與顏色全部引用機械量測結果）。
+- 逐像素比對逼出兩條原版繪字規則：每個字模格先清成白底再畫墨色，但空白字元不清底；
+  最後一列的實際文字是 `BODY PTS.`。修正後空白 New Character 頁與原版只差 31 個像素。
+- 那 31 個像素全在名字欄：原版在種族層取消後於該處殘留一個字元，字模逐 byte 命中為
+  前次名字的首字 `t`。成因未確認，列為原版狀態而非版面問題。
+- 對拍計畫擴為 83 對，全部通過。
+- 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。

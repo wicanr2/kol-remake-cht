@@ -1,0 +1,26 @@
+{
+  "screens": [
+    {
+      "name": "new-character-blank",
+      "frame": "docs/verification/character-ui/escape-layers-run1/frames/frame-085.png",
+      "font": "book-small",
+      "note": "由種族層 ESC 回到名字層後的空白 New Character 頁：只有靜態標籤，沒有 RNG 數值",
+      "strings": [
+        "NAME",
+        "RACE",
+        "SEX",
+        "CLASS",
+        "STRENGTH",
+        "QUICKNESS",
+        "SIZE",
+        "HEALTH",
+        "FORESIGHT",
+        "CHARISMA",
+        "INTELLECT",
+        "BALANCE",
+        "ENDURANCE",
+        "BODY PTS"
+      ]
+    }
+  ]
+}

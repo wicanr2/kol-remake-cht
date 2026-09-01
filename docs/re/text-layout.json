@@ -1,0 +1,186 @@
+{
+  "tool": "tools/extract_text_layout.py",
+  "purpose": "原版文字的座標與顏色，供 remake 照座標繪字與中文化排版沿用",
+  "font_source": "assets/original-derived-png/fonts/manifest.json",
+  "unique_hit_required": true,
+  "failure_count": 0,
+  "failures": [],
+  "screens": [
+    {
+      "name": "new-character-blank",
+      "frame": "docs/verification/character-ui/escape-layers-run1/frames/frame-085.png",
+      "font": "book-small",
+      "note": "由種族層 ESC 回到名字層後的空白 New Character 頁：只有靜態標籤，沒有 RNG 數值",
+      "strings": [
+        {
+          "text": "NAME",
+          "x": 24,
+          "y": 52,
+          "width": 32,
+          "height": 6,
+          "colour_rgb": [
+            170,
+            85,
+            0
+          ]
+        },
+        {
+          "text": "RACE",
+          "x": 24,
+          "y": 68,
+          "width": 32,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "SEX",
+          "x": 24,
+          "y": 84,
+          "width": 24,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "CLASS",
+          "x": 24,
+          "y": 100,
+          "width": 40,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "STRENGTH",
+          "x": 24,
+          "y": 118,
+          "width": 64,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "QUICKNESS",
+          "x": 24,
+          "y": 124,
+          "width": 72,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "SIZE",
+          "x": 24,
+          "y": 130,
+          "width": 32,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "HEALTH",
+          "x": 24,
+          "y": 136,
+          "width": 48,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "FORESIGHT",
+          "x": 24,
+          "y": 142,
+          "width": 72,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "CHARISMA",
+          "x": 24,
+          "y": 148,
+          "width": 64,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "INTELLECT",
+          "x": 24,
+          "y": 154,
+          "width": 72,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "BALANCE",
+          "x": 24,
+          "y": 160,
+          "width": 56,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "ENDURANCE",
+          "x": 24,
+          "y": 166,
+          "width": 72,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        },
+        {
+          "text": "BODY PTS",
+          "x": 24,
+          "y": 172,
+          "width": 64,
+          "height": 6,
+          "colour_rgb": [
+            0,
+            170,
+            170
+          ]
+        }
+      ]
+    }
+  ]
+}

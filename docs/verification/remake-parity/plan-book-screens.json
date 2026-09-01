@@ -33,6 +33,21 @@
       ]
     },
     {
+      "label": "空白 New Character 頁",
+      "remake": "docs/verification/remake-parity/shots/newchar-blank.png",
+      "original": "docs/verification/character-ui/escape-layers-run1/frames/frame-085.png",
+      "allow": [
+        {
+          "name": "名字欄殘留字元",
+          "reason": "原版在種族層取消後，名字欄位置殘留一個字元（本例為前次名字首字 t，字模已逐 byte 命中）；remake 尚未實作名字輸入狀態",
+          "x": 24,
+          "y": 58,
+          "width": 128,
+          "height": 6
+        }
+      ]
+    },
+    {
       "label": "New Character 角色圖像 selector 0",
       "remake": "docs/verification/remake-parity/shots/newchar-000.png",
       "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-084.png",

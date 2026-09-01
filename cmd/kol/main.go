@@ -14,6 +14,7 @@ import (
 
 	"github.com/wicanr2/kol-remake-cht/internal/assets"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
+	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 )
 
@@ -24,9 +25,11 @@ const (
 	sceneContents   scene = "contents"
 	sceneNewChar    scene = "newchar"
 	sceneOpenSpread scene = "spread"
+	sceneNewCharBlank scene = "newchar-blank"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneNewChar, sceneOpenSpread}
+var scenes = []scene{sceneCover, sceneContents, sceneNewChar, sceneOpenSpread,
+	sceneNewCharBlank}
 
 // shotJob 是截圖模式的一項工作：畫哪個場景、用哪個角色圖像、寫到哪個檔案。
 type shotJob struct {
@@ -38,6 +41,7 @@ type shotJob struct {
 
 type game struct {
 	lib     *assets.Library
+	small   *font.Font
 	canvas  *screen.Canvas
 	scene   scene
 	portrai int
@@ -86,6 +90,22 @@ func (g *game) render() error {
 			return err
 		}
 		g.canvas.DrawAt(img, 0, 0)
+	case sceneNewCharBlank:
+		bg, err := cache.get(g.lib, "BOOKPICS", book.OpenSpread)
+		if err != nil {
+			return err
+		}
+		g.canvas.DrawAt(bg, 0, 0)
+		heading, err := cache.get(g.lib, "BOOKPICS", book.NewCharacterHeading.ImageIndex)
+		if err != nil {
+			return err
+		}
+		g.canvas.DrawAt(heading, book.NewCharacterHeading.X, book.NewCharacterHeading.Y)
+		for _, l := range append(append([]book.Label{}, book.NewCharacterLabels...),
+			book.NewCharacterSeparators...) {
+			g.small.DrawOpaque(g.canvas.Image(), l.X, l.Y, l.Text,
+				l.R, l.G, l.B, book.PageInk.R, book.PageInk.G, book.PageInk.B)
+		}
 	case sceneNewChar:
 		bg, err := cache.get(g.lib, "BOOKPICS", book.OpenSpread)
 		if err != nil {
@@ -147,6 +167,7 @@ func main() {
 	shot := flag.String("shot", "", "單張截圖輸出路徑；指定後畫一幀就結束")
 	shotDir := flag.String("shot-dir", "", "批次截圖輸出目錄：三個書本畫面加全部角色圖像")
 	scaleFlag := flag.Int("scale", 3, "視窗放大倍率")
+	fontRoot := flag.String("fonts", "assets/original-derived-png/fonts", "字型資產目錄")
 	listAssets := flag.Bool("list-assets", false, "只列出 manifest 摘要後結束")
 	flag.Parse()
 
@@ -176,8 +197,15 @@ func main() {
 		os.Exit(2)
 	}
 
+	small, err := font.Load(*fontRoot, "book-small")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
 	g := &game{
 		lib:     lib,
+		small:   small,
 		canvas:  screen.NewCanvas(),
 		scene:   scene(*sceneName),
 		portrai: *portrait,
@@ -187,7 +215,8 @@ func main() {
 		for _, s := range []struct {
 			name  string
 			scene scene
-		}{{"cover", sceneCover}, {"contents", sceneContents}, {"spread", sceneOpenSpread}} {
+		}{{"cover", sceneCover}, {"contents", sceneContents}, {"spread", sceneOpenSpread},
+			{"newchar-blank", sceneNewCharBlank}} {
 			g.jobs = append(g.jobs, shotJob{
 				name: s.name, scene: s.scene,
 				path: filepath.Join(*shotDir, s.name+".png"),
