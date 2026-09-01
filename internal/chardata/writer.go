@@ -68,53 +68,60 @@ func (c *Contracts) Get(index int) (StartingContract, bool) {
 	return v, ok
 }
 
-// ItemTemplates 是 ITEM.LST 的物品樣板與已觀測到的職業起始武器對應。
-type ItemTemplates struct {
+// WeaponTemplates 是起始武器樣板表與每個職業的武器 selector。
+//
+// 樣板來自 `BOOKDATA` 的第 3 個項目（原版載到 dgroup+0x79ee），記錄索引 ＝ selector − 1；
+// selector 藏在職業 metadata 第一個 byte 的兩個 nibble 裡。規則見 RE-050。
+type WeaponTemplates struct {
 	Schema      string   `json:"schema"`
 	RecordBytes int      `json:"record_bytes"`
 	RecordCount int      `json:"record_count"`
 	Records     []string `json:"records"`
-	Observed    []struct {
-		ProfessionRecord int `json:"profession_record"`
-		PrimaryItem      int `json:"primary_item"`
-		SecondaryItem    int `json:"secondary_item"`
-	} `json:"observed_profession_weapons"`
+	Professions []struct {
+		RecordIndex     int  `json:"record_index"`
+		PrimaryRecord   int  `json:"primary_record"`
+		SecondaryRecord *int `json:"secondary_record"`
+	} `json:"professions"`
 }
 
-// LoadItemTemplates 讀取物品樣板。
-func LoadItemTemplates(path string) (*ItemTemplates, error) {
+// LoadWeaponTemplates 讀取武器樣板表。
+func LoadWeaponTemplates(path string) (*WeaponTemplates, error) {
 	raw, err := os.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("讀取物品樣板失敗：%w", err)
+		return nil, fmt.Errorf("讀取武器樣板失敗：%w", err)
 	}
-	var t ItemTemplates
+	var t WeaponTemplates
 	if err := json.Unmarshal(raw, &t); err != nil {
-		return nil, fmt.Errorf("解析物品樣板失敗：%w", err)
+		return nil, fmt.Errorf("解析武器樣板失敗：%w", err)
 	}
-	if t.Schema != "kol-item-templates-v1" {
-		return nil, fmt.Errorf("非預期的物品樣板 schema：%s", t.Schema)
+	if t.Schema != "kol-weapon-templates-v1" {
+		return nil, fmt.Errorf("非預期的武器樣板 schema：%s", t.Schema)
 	}
-	if len(t.Records) != t.RecordCount {
-		return nil, fmt.Errorf("物品筆數 %d 與宣告的 %d 不符", len(t.Records), t.RecordCount)
+	if len(t.Records) != t.RecordCount || len(t.Professions) != 39 {
+		return nil, fmt.Errorf("武器樣板內容不完整")
 	}
 	return &t, nil
 }
 
-// Weapons 回傳指定職業的起始武器物品索引。**只認實際觀測過的職業**——
-// selector 與 ITEM.LST 索引之間不是算術關係，通則尚未反追，猜一個比留空更糟。
-func (t *ItemTemplates) Weapons(professionRecord int) (primary, secondary int, ok bool) {
-	for _, o := range t.Observed {
-		if o.ProfessionRecord == professionRecord {
-			return o.PrimaryItem, o.SecondaryItem, true
+// Weapons 回傳指定職業的主／副武器樣板索引；沒有副武器時 secondary 為 -1。
+func (t *WeaponTemplates) Weapons(professionRecord int) (primary, secondary int, ok bool) {
+	for _, p := range t.Professions {
+		if p.RecordIndex != professionRecord {
+			continue
 		}
+		secondary = -1
+		if p.SecondaryRecord != nil {
+			secondary = *p.SecondaryRecord
+		}
+		return p.PrimaryRecord, secondary, true
 	}
 	return 0, 0, false
 }
 
-// Record 回傳一筆物品樣板的 bytes。
-func (t *ItemTemplates) Record(index int) ([]byte, error) {
+// Record 回傳一筆武器樣板的 bytes。
+func (t *WeaponTemplates) Record(index int) ([]byte, error) {
 	if index < 0 || index >= len(t.Records) {
-		return nil, fmt.Errorf("物品索引 %d 超出範圍", index)
+		return nil, fmt.Errorf("武器樣板索引 %d 超出範圍", index)
 	}
 	return hex.DecodeString(t.Records[index])
 }
@@ -161,7 +168,7 @@ const (
 // 的來源尚未反追，因此那些位移保留樣板原值——寫進猜出來的 bytes 比留白更糟。
 // 覆蓋率由 tools/verify_chardata_write.py 對原版實際寫入的結果逐 byte 量出來。
 func WriteRecord(template []byte, c NewCharacter, contract StartingContract,
-	items *ItemTemplates) ([]byte, error) {
+	weapons *WeaponTemplates) ([]byte, error) {
 	if len(template) != RecordBytes {
 		return nil, fmt.Errorf("樣板長度 %d，不是 %d", len(template), RecordBytes)
 	}
@@ -210,17 +217,12 @@ func WriteRecord(template []byte, c NewCharacter, contract StartingContract,
 	}
 	out[offConstantThree] = 3
 
-	if items != nil {
-		primary, secondary, ok := items.Weapons(c.ProfessionIndex)
+	if weapons != nil {
+		primary, secondary, ok := weapons.Weapons(c.ProfessionIndex)
 		if !ok {
-			return nil, fmt.Errorf("職業記錄 %d 的起始武器物品索引尚未觀測，"+
-				"不寫入武器樣板", c.ProfessionIndex)
+			return nil, fmt.Errorf("沒有職業記錄 %d 的武器樣板", c.ProfessionIndex)
 		}
-		pr, err := items.Record(primary)
-		if err != nil {
-			return nil, err
-		}
-		sr, err := items.Record(secondary)
+		pr, err := weapons.Record(primary)
 		if err != nil {
 			return nil, err
 		}
@@ -228,9 +230,16 @@ func WriteRecord(template []byte, c NewCharacter, contract StartingContract,
 		copy(out[offPrimaryPrefix:offPrimaryPrefix+weaponPrefixBytes],
 			pr[:weaponPrefixBytes])
 		out[offPrimaryByte13] = pr[weaponByte13Index]
-		copy(out[offSecondaryPrefix:offSecondaryPrefix+weaponPrefixBytes],
-			sr[:weaponPrefixBytes])
-		out[offSecondaryByte13] = sr[weaponByte13Index]
+		// 沒有副武器的職業，原版不動 0x57 與 0x5f。
+		if secondary >= 0 {
+			sr, err := weapons.Record(secondary)
+			if err != nil {
+				return nil, err
+			}
+			copy(out[offSecondaryPrefix:offSecondaryPrefix+weaponPrefixBytes],
+				sr[:weaponPrefixBytes])
+			out[offSecondaryByte13] = sr[weaponByte13Index]
+		}
 	}
 	return out, nil
 }

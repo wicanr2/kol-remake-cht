@@ -151,7 +151,7 @@ func runCharacterWrite(outPath, templatePath string, slot int, contractPath,
 	if !ok {
 		return fmt.Errorf("沒有職業記錄 %d 的起始契約", c.ProfessionIndex)
 	}
-	items, err := chardata.LoadItemTemplates(itemPath)
+	items, err := chardata.LoadWeaponTemplates(itemPath)
 	if err != nil {
 		return err
 	}
@@ -499,8 +499,8 @@ func main() {
 		"改用操作腳本跑完整個建立流程，把結果寫進槽位；與 -chardata-stats 二選一")
 	writeOut := flag.String("chardata-out", "",
 		"把寫入後的完整 CHARDATA 存到這個檔案（含原版樣板 bytes，只作本機比對）")
-	itemTemplates := flag.String("chardata-items",
-		"assets/original-derived-data/item-templates.json", "ITEM.LST 物品樣板")
+	itemTemplates := flag.String("chardata-weapons",
+		"assets/original-derived-data/weapon-templates.json", "起始武器樣板表")
 	writerSummary := flag.String("chardata-contract",
 		"docs/re/ida-fingerprints/KOLBOOK-character-writer-summary.json",
 		"職業起始契約（IDA 安全摘要）")
