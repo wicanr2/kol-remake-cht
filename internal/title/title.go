@@ -209,3 +209,77 @@ func (s *Sequence) Expand(rng Rand) ([]Frame, error) {
 	}
 	return out, nil
 }
+
+// ThunderSeconds 是一次雷聲的長度。原版這段是用開機期校正值算出的忙等，不是 tick
+// 數，靜態讀不出來；這裡採 DOSBox-X 擷取量測到的四段非靜音視窗平均值，
+// 標為 hardware-spec approximation（見 docs/verification/audio/）。
+const ThunderSeconds = 0.961
+
+// MinDwellTicks 是每一格至少停留的 tick 數。
+//
+// 序列裡有幾格的程式碼沒有等待——原版在那裡停留多久，取決於載入下一批圖片花了多少
+// 時間，那是機器速度而不是設計時序，靜態讀不出來。remake 給一個最小停留，畫面才不會
+// 一閃而過；這是 remake 的取捨，不是原版時序的宣稱。
+const MinDwellTicks = 1.0
+
+// Player 依 tick 播放展開後的畫面清單，並在最後一格之後回到開頭。
+type Player struct {
+	frames  []Frame
+	index   int
+	pending float64 // 目前這一格還要停留幾個 tick
+	thunder float64
+}
+
+// NewPlayer 建立播放器。thunderTicks 為一次雷聲佔用的 tick 數。
+func NewPlayer(frames []Frame, thunderTicks float64) *Player {
+	p := &Player{frames: frames, thunder: thunderTicks}
+	p.load()
+	return p
+}
+
+func (p *Player) load() {
+	f := p.frames[p.index]
+	p.pending = float64(f.Ticks)
+	if f.Thunder {
+		p.pending += p.thunder
+	}
+	if p.pending < MinDwellTicks {
+		p.pending = MinDwellTicks
+	}
+}
+
+// Pending 是目前這一格還要停留的 tick 數。
+func (p *Player) Pending() float64 { return p.pending }
+
+// Current 是目前該顯示的畫面。
+func (p *Player) Current() Frame { return p.frames[p.index] }
+
+// Advance 前進指定的 tick 數，必要時換格；回傳是否換過格。
+func (p *Player) Advance(ticks float64) bool {
+	changed := false
+	for ticks > 0 && len(p.frames) > 0 {
+		if ticks < p.pending {
+			p.pending -= ticks
+			break
+		}
+		ticks -= p.pending
+		p.index = (p.index + 1) % len(p.frames)
+		p.load()
+		changed = true
+	}
+	return changed
+}
+
+// Timeline 回傳一輪播放的時間軸（秒），供與原版觀察時間軸核對。
+func (s *Sequence) Timeline(frames []Frame, thunderTicks float64) []float64 {
+	out := make([]float64, 0, len(frames))
+	t := 0.0
+	for _, f := range frames {
+		out = append(out, t/TickHz)
+		t += float64(f.Ticks)
+		if f.Thunder {
+			t += thunderTicks
+		}
+	}
+	return append(out, t/TickHz)
+}

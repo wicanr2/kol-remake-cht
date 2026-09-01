@@ -115,6 +115,7 @@ type game struct {
 	canvas  *screen.Canvas
 	state   *charcreate.State
 	sequence *title.Sequence
+	player   *title.Player
 
 	scene    scene
 	portrait int
@@ -200,6 +201,11 @@ func (g *game) Update() error {
 	if ebiten.IsKeyPressed(ebiten.KeyEscape) {
 		return ebiten.Termination
 	}
+	if g.scene == sceneTitle && g.player != nil {
+		// 原版的等待單位是 BIOS tick；Ebitengine 固定 60 TPS，換算後推進播放器。
+		g.player.Advance(title.TickHz / 60)
+		g.frame = g.player.Current()
+	}
 	return nil
 }
 
@@ -264,6 +270,8 @@ func main() {
 	titlePath := flag.String("title-sequence", "docs/re/title-sequence.json",
 		"標題序列腳本（由 RE-047 從 TITLE.EXE 的 _main 轉寫）")
 	titleShots := flag.String("title-shot-dir", "", "把標題序列一輪的每個畫面輸出到這個目錄")
+	titleTimeline := flag.String("title-timeline", "",
+		"把一輪標題序列的時間軸寫成 JSON 後結束")
 	titleChoice := flag.String("title-choice", "rng",
 		"標題序列兩處亂數的取法：rng 依 seed 重播，first／second 固定取第一或第二個選項")
 	scaleFlag := flag.Int("scale", 3, "視窗放大倍率")
@@ -356,7 +364,42 @@ func main() {
 		portrait: *portrait,
 	}
 
+	if scene(*sceneName) == sceneTitle {
+		// 實際播放模式：依 BIOS tick 推進，按鍵中止，與原版同一條腳本。
+		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		g.player = title.NewPlayer(frames, title.ThunderSeconds*title.TickHz)
+		g.frame = g.player.Current()
+	}
+
 	switch {
+	case *titleTimeline != "":
+		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		thunder := title.ThunderSeconds * title.TickHz
+		times := sequence.Timeline(frames, thunder)
+		raw, err := json.MarshalIndent(map[string]any{
+			"schema": "kol-title-timeline-v1", "seed": *seed,
+			"thunder_seconds": title.ThunderSeconds, "tick_hz": title.TickHz,
+			"loop_seconds": times[len(times)-1],
+			"frames": frames, "start_seconds": times[:len(times)-1],
+		}, "", "  ")
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := os.WriteFile(*titleTimeline, append(raw, '\n'), 0o644); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		fmt.Printf("frames=%d loop_seconds=%.2f\n", len(frames), times[len(times)-1])
+		return
 	case *titleShots != "":
 		var chooser title.Rand
 		switch *titleChoice {
