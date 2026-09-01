@@ -1,0 +1,674 @@
+{
+  "schema": "kol-town-data-probe-v1",
+  "tile_layout_search": {
+    "searched": true,
+    "rows_available": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "hits": []
+  },
+  "tool": "tools/probe_town_data.py",
+  "town": "TOWN7",
+  "volumes": {
+    "TOWN7.0": 65375,
+    "TOWN7.1": 2195
+  },
+  "container_contract": {
+    "count": 26,
+    "fixed_header_bytes": 20,
+    "index_entry_bytes": 2,
+    "index_start": 20,
+    "index_end": 72,
+    "first_payload_offset": 200,
+    "last_payload_offset": 63729,
+    "last_payload_length": 1646,
+    "payload_end": 65375,
+    "trailing_bytes_after_indexed_payloads": 0,
+    "strictly_increasing_offsets": true,
+    "first_payload_after_index": true,
+    "payload_end_equals_file_size": true,
+    "payload_end_within_file": true,
+    "all_payload_bounds_valid": true,
+    "minimum_compressed_payload_bytes": 120,
+    "maximum_compressed_payload_bytes": 8918
+  },
+  "payloads": [
+    {
+      "index": 0,
+      "compressed_bytes": 8824,
+      "decoded_bytes": 12289,
+      "sha256": "8e110d5e0e2555ceb5b63fab92c82b0bc03fb2505a73f73f7ed19b2ce78db726"
+    },
+    {
+      "index": 1,
+      "compressed_bytes": 8918,
+      "decoded_bytes": 12289,
+      "sha256": "252b0c1d3adeef35c7fed55a1e84f7c6d8e2d11877dfd69fb884c9fdb1c66ad5"
+    },
+    {
+      "index": 2,
+      "compressed_bytes": 8166,
+      "decoded_bytes": 12289,
+      "sha256": "23fec589913aadc42448bcc67b53c21df6a57e0c975afc6c2d9a0b8969ca270c"
+    },
+    {
+      "index": 3,
+      "compressed_bytes": 120,
+      "decoded_bytes": 116,
+      "sha256": "4fd45f0bfccc5137fcad2fc7b117036ea01b4cad25322f5041d3e55d6a1829af"
+    },
+    {
+      "index": 4,
+      "compressed_bytes": 1739,
+      "decoded_bytes": 2049,
+      "sha256": "398cb79b7bad643b17fe21e65a27a88c0c2b0512eff08925746da3f3ebabae95"
+    },
+    {
+      "index": 5,
+      "compressed_bytes": 1679,
+      "decoded_bytes": 2049,
+      "sha256": "105d62d039d54637d894e2eff0f9ccb5245ede34c0c3b586f4b983e86fc0cf71"
+    },
+    {
+      "index": 6,
+      "compressed_bytes": 2195,
+      "decoded_bytes": 2049,
+      "sha256": "562ec1982888925de284f491f8453a0482260d3f8ede9a5aa5327b548193aa39"
+    },
+    {
+      "index": 7,
+      "compressed_bytes": 1737,
+      "decoded_bytes": 2049,
+      "sha256": "ea56b347f8004792ed4c117efa052d51dbb0d57391e14ff5fb29c2584a979313"
+    },
+    {
+      "index": 8,
+      "compressed_bytes": 1747,
+      "decoded_bytes": 2049,
+      "sha256": "9cd6d2165ff03b0151e03eda0dcd05df58a456a621cc893c0beb615fc6a7d8d8"
+    },
+    {
+      "index": 9,
+      "compressed_bytes": 1701,
+      "decoded_bytes": 2049,
+      "sha256": "c76314f2d7ef14e96eff936c76a212c2103e93cd2976486523b0452c32a28271"
+    },
+    {
+      "index": 10,
+      "compressed_bytes": 1685,
+      "decoded_bytes": 2049,
+      "sha256": "cfed97456911cca81b5dff90466ee2c63f025d5a8fb27a320c2034f763912a34"
+    },
+    {
+      "index": 11,
+      "compressed_bytes": 2034,
+      "decoded_bytes": 2049,
+      "sha256": "430edca02bd125bb71e30f0f112ae3d9409dd55cada29251e5c624bf6e9939d1"
+    },
+    {
+      "index": 12,
+      "compressed_bytes": 2144,
+      "decoded_bytes": 2049,
+      "sha256": "447c0f6f850c5423104c38050aa03f9979d9bc1e8a6fdf188799352e007181df"
+    },
+    {
+      "index": 13,
+      "compressed_bytes": 2126,
+      "decoded_bytes": 2049,
+      "sha256": "7d96080d8dee8f5b26808a1951f92c88f8bc0aa7245334454eaaf700b13f1b64"
+    },
+    {
+      "index": 14,
+      "compressed_bytes": 2089,
+      "decoded_bytes": 2049,
+      "sha256": "928871861a409321e3a7fc22aebd0e0b40be3ad2a12cad8ea29f456f572d1e29"
+    },
+    {
+      "index": 15,
+      "compressed_bytes": 1673,
+      "decoded_bytes": 2049,
+      "sha256": "dde5eedcdd8bbd84a30182598af0edb290ab44055f0af84bca5b8b790d55e027"
+    },
+    {
+      "index": 16,
+      "compressed_bytes": 1858,
+      "decoded_bytes": 2049,
+      "sha256": "aa91a84a3b889550b9498ad3690f6716717d012e24927cf3fbba9f5daf61d7ac"
+    },
+    {
+      "index": 17,
+      "compressed_bytes": 1700,
+      "decoded_bytes": 2049,
+      "sha256": "23d3b1df9d8a133873442164edb0f6508236b0ba1e2dfb718448264d6d354587"
+    },
+    {
+      "index": 18,
+      "compressed_bytes": 1990,
+      "decoded_bytes": 2049,
+      "sha256": "160159faa4dba84442b390d3719d0389d46a8bd67e813afc2c0aba174b3cdbf8"
+    },
+    {
+      "index": 19,
+      "compressed_bytes": 2147,
+      "decoded_bytes": 2049,
+      "sha256": "208058e06943da51e834cc5f14971bb7209a5ddd178722e80f2c641964967fd9"
+    },
+    {
+      "index": 20,
+      "compressed_bytes": 472,
+      "decoded_bytes": 513,
+      "sha256": "b8d747b88c17cf9a360ae16918ddf465e73cf8d00228452d261e79fb89602d6e"
+    },
+    {
+      "index": 21,
+      "compressed_bytes": 1685,
+      "decoded_bytes": 2049,
+      "sha256": "4a30aedaea90ab6a9ee320b43aadf62295d1e27415ebd9270437b979d8adbe11"
+    },
+    {
+      "index": 22,
+      "compressed_bytes": 1840,
+      "decoded_bytes": 2049,
+      "sha256": "c9f903244e4760a65876c1adf12ef2c276021df745186c17c2e155e5e672c615"
+    },
+    {
+      "index": 23,
+      "compressed_bytes": 1605,
+      "decoded_bytes": 2049,
+      "sha256": "5e63165777e0eaf8ac592e5fb00cfc3a8fd5a74b3e9fa12e8518e716dd1c38ea"
+    },
+    {
+      "index": 24,
+      "compressed_bytes": 1655,
+      "decoded_bytes": 2049,
+      "sha256": "f4bcea444ea61fe32117f15f04d77a6ff894eb8169c2b15e04530c6093bfdb5b"
+    },
+    {
+      "index": 25,
+      "compressed_bytes": 1646,
+      "decoded_bytes": 2049,
+      "sha256": "1d726fafcc2fb1f278def2c1782f7be8ba017ffb9f41c9b27a1efee58175e231"
+    }
+  ],
+  "frame": "docs/verification/character-ui/town-icon-bar-run1/frames/frame-077.png",
+  "tiles_checked": 72,
+  "tile_matches": [
+    {
+      "tile_x": 0,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 12032
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6912
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 3968
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 3456
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 3456
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 4224
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 5248
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6656
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 10112
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 11136
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 12032
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 0,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 12032
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 6528
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 6400
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 4096
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 3200
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 3200
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 4480
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 4992
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6528
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 8576
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 7936
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 4224
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 1,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6272
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 5632
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 5376
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 6656
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 5120
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6784
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 384
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 7936
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 11520
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 2,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6272
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 6016
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 5888
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 6784
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6656
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 4224
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6656
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 896
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 7936
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 4224
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 3,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 4224
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 6144
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 4608
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 5120
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 4224
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 8064
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 7936
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6656
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6528
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 8576
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 1,
+      "offset": 384
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6912
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 4,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6272
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 11264
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 4224
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6912
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 11520
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 7680
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 7808
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 12032
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 6784
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 9216
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 10880
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 0,
+      "offset": 11264
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 5,
+      "encoding": "planar-plane-major",
+      "payload": 2,
+      "offset": 4224
+    }
+  ],
+  "criterion": "畫面磚塊轉成 4-bit 封裝 bytes 後，若能在解碼 payload 裡找到，就證實磚圖住在城鎮資料檔裡",
+  "note": "只保留長度、雜湊、offset 與命中統計；不含原版 payload 內容。磚圖與地圖配置屬原版資料，著作權仍屬原權利人。",
+  "rights": {
+    "classification": "摘要可入庫；解碼後的 payload 只留本機"
+  }
+}
