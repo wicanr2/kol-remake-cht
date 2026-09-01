@@ -1,0 +1,149 @@
+{
+  "tool": "tools/compare_character_ui_runs.py",
+  "scenario": "name-length",
+  "run_a": {
+    "generated_utc": "2026-09-01T05:42:08Z",
+    "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+    "character_files_changed": []
+  },
+  "run_b": {
+    "generated_utc": "2026-09-01T05:54:58Z",
+    "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+    "character_files_changed": []
+  },
+  "checkpoint_count": 26,
+  "identical_count": 26,
+  "differing_count": 0,
+  "checkpoints": [
+    {
+      "index": 0,
+      "label": "TITLE 標題序列",
+      "identical": true
+    },
+    {
+      "index": 1,
+      "label": "書本封面",
+      "identical": true
+    },
+    {
+      "index": 2,
+      "label": "目錄頁",
+      "identical": true
+    },
+    {
+      "index": 3,
+      "label": "角色選項選單（反白 LIST CHARACTERS）",
+      "identical": true
+    },
+    {
+      "index": 4,
+      "label": "角色選項選單（反白 CREATE CHARACTER）",
+      "identical": true
+    },
+    {
+      "index": 5,
+      "label": "名字欄內容 （空）",
+      "identical": true
+    },
+    {
+      "index": 6,
+      "label": "名字欄內容 A",
+      "identical": true
+    },
+    {
+      "index": 7,
+      "label": "名字欄內容 AB",
+      "identical": true
+    },
+    {
+      "index": 8,
+      "label": "名字欄內容 ABC",
+      "identical": true
+    },
+    {
+      "index": 9,
+      "label": "名字欄內容 ABCD",
+      "identical": true
+    },
+    {
+      "index": 10,
+      "label": "名字欄內容 ABCDE",
+      "identical": true
+    },
+    {
+      "index": 11,
+      "label": "名字欄內容 ABCDEF",
+      "identical": true
+    },
+    {
+      "index": 12,
+      "label": "名字欄內容 ABCDEFG",
+      "identical": true
+    },
+    {
+      "index": 13,
+      "label": "名字欄內容 ABCDEFGH",
+      "identical": true
+    },
+    {
+      "index": 14,
+      "label": "名字欄內容 ABCDEFGHI",
+      "identical": true
+    },
+    {
+      "index": 15,
+      "label": "名字欄內容 ABCDEFGHIJ",
+      "identical": true
+    },
+    {
+      "index": 16,
+      "label": "名字欄內容 ABCDEFGHIJK",
+      "identical": true
+    },
+    {
+      "index": 17,
+      "label": "名字欄內容 ABCDEFGHIJKL",
+      "identical": true
+    },
+    {
+      "index": 18,
+      "label": "名字欄內容 ABCDEFGHIJKLM",
+      "identical": true
+    },
+    {
+      "index": 19,
+      "label": "名字欄內容 ABCDEFGHIJKLMN",
+      "identical": true
+    },
+    {
+      "index": 20,
+      "label": "名字欄內容 ABCDEFGHIJKLMNO",
+      "identical": true
+    },
+    {
+      "index": 21,
+      "label": "名字欄內容 ABCDEFGHIJKLMNOP",
+      "identical": true
+    },
+    {
+      "index": 22,
+      "label": "送出全部 17 個字母之後的名字欄",
+      "identical": true
+    },
+    {
+      "index": 23,
+      "label": "第一次 Backspace 之後",
+      "identical": true
+    },
+    {
+      "index": 24,
+      "label": "第二次 Backspace 之後",
+      "identical": true
+    },
+    {
+      "index": 25,
+      "label": "名字層取消之後",
+      "identical": true
+    }
+  ]
+}

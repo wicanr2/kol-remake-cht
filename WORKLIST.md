@@ -10,6 +10,8 @@
 | 原版 oracle | build 已固定 | ZIP 與全部項目逐檔雜湊已固定；發行來源／1998 timestamp 成因未知 |
 | 玩家觀點 | 起源資料完成 | 魔旅士繁中個人心得＋《CRPG 通鑑》中文長篇評介已進 README |
 | 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
+| 圖像 theme | 已決策 | 2026-09-01：首版 EGA-only；CGA／Hercules 列後續選項 |
+| TITLE 音訊 | 已決策 | 2026-09-01：OGG 採規格近似合成，不散布原版錄音 |
 | GitHub | 已建立 | private：`wicanr2/kol-remake-cht`；`main` 已推送 |
 
 ## M0：專案建立
@@ -75,7 +77,10 @@
   PC Speaker 音爆，並排除 `TANDYPIN.EXE` 是音訊播放器。
 - [x] 用 DOSBox-X `DX-CAPTURE /A` 在正常 TITLE 流程取得非靜音 WAV，固定四段活動窗、
   codec、時長、峰值與 SHA-256；不追逐週期 parity。
-- [ ] 完成 TITLE cue 人耳驗收，並由使用者決定 OGG 採規格近似合成、新作替代或靜音。
+- [x] TITLE cue 的 OGG 呈現方向已決策：規格近似合成（依已證實 PIT 除數序列與公開硬體
+  規格自行合成，不散布原版錄音）。
+- [ ] 依決策實作 PIT 方波合成器並完成人耳驗收；合成輸出與 DX-CAPTURE WAV 的段落結構
+  比對後才可升 SPEC-004。
 - [x] 建立 OGG catalog 的 SPEC-004 DRAFT 與機器可讀音訊 inventory；尚不授權轉換實作。
 - [ ] SPEC-004 證據審查並升 READY 後，建立 OGG 轉換管線；驗證 codec、時長、非靜音、
   峰值、loop 與人耳聆聽。
@@ -97,9 +102,11 @@
 - [x] 查核必要 KOLTOWN reader，並以完整 writer coverage 排除其他職業衍生起始資料。
 - [x] 以雙新建 IDA DB 固定「輸入 buffer 首 byte 為零」分支、各層取消、reroll、80 張
   肖像循環與滿槽不進 writer；零 byte 不再擅自等同玩家按 Enter 的空名。
-- [ ] 重跑並封存正常 DOS UI 初步發現：空白名字可前進、DOS 畫面最多接受 15 個可見 ASCII
-  字元、各層 ESC 與 reroll；建立截圖、輸入序列及三檔前後 SHA-256 receipt。
-- [ ] 完成正常 DOS UI 名字、ESC、reroll、slot-full 與保存邊界 oracle；再審查 SPEC-005。
+- [x] 建立畫面驅動的正常 DOS UI 擷取器（`tools/dosbox_character_ui_oracle.py`、
+  `tools/x11_key_inject.py`、`tools/compare_character_ui_runs.py`），並封存名字長度、
+  空名、各層 ESC 與 reroll 四個情境各兩輪的畫格、輸入序列與三檔前後 SHA-256 收據。
+- [ ] 完成正常 DOS UI 的接受屬性、圖像選擇、實際保存與 16 槽全滿 oracle；
+  再審查 SPEC-005。
 - [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
 - [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。
 - [ ] 選一條最小玩家鏈：真實 PNG → typed data → 世界／城鎮一個互動 → UI → 存讀檔。
@@ -132,7 +139,9 @@
 
 ## 下一個唯一工作
 
-完整 EGA extraction set 已無 unknown，但圖片 theme 決策仍待使用者回答；TITLE cue 的
-OGG 呈現方向也待決。角色 writer／reader gate 已關閉；可先做且不依賴兩項決策的下一
-工作，是正常 DOS UI 名字、ESC、reroll、slot-full 與保存邊界 oracle。SPEC-002／004／005
-READY 前不接 Go／Ebitengine production runtime。
+theme 與音訊兩項決策已定案（EGA 首版、規格近似合成）。角色建立 UI 的名字、空名、
+ESC 與 reroll 已有兩輪可重生收據，下一個唯一工作是同一擷取器的第二批情境：接受屬性、
+角色圖像選擇、實際保存的三檔差異，以及 16 槽全滿邊界。固定 ZIP 的 `CHARDATA` 十六槽
+都非全零（前十四槽有名字），因此滿槽情境不需先建滿十六名角色，但槽位可用判準要先由
+UI 確認。原版執行畫面 PNG 是否可進 private repo 尚待使用者決定，目前只留本機。
+SPEC-002／004／005 READY 前不接 Go／Ebitengine production runtime。

@@ -938,3 +938,39 @@
   反組譯 payload 與未驗證圖片仍禁止提交。
 - private 保存不等於公開散布權；repo 改為 public、public fork、GitHub Release 與公開
   `dist-all/.../release/` 仍維持失敗即關閉並要求重新權利審查。
+
+## 2026-09-01：圖像 theme 與 TITLE 音訊決策
+
+- 使用者決定首版重製只涵蓋 EGA 素材，CGA／Hercules（`MAKEMODE.EXE` 產生的
+  `PCGA`／`HERC` 分卷）列為後續選項，其完整轉換像素規則保留為待辦 RE。
+- 使用者決定 TITLE cue 的 OGG 呈現採規格近似合成：依已證實的兩段 PIT 除數序列與
+  公開硬體規格自行合成方波再轉 OGG，不散布原版錄音。DX-CAPTURE 取得的 WAV 仍只作
+  本機比對 oracle。
+
+## 2026-09-01：正常 DOS UI 角色建立 oracle 擷取器與四情境收據
+
+- 建立三個版控工具：`tools/dosbox_character_ui_oracle.py`（唯讀 ZIP → 容器 tmpfs
+  重建遊戲目錄 → Xvfb ＋ DOSBox-X → 畫格去重擷取 → 三檔前後 SHA-256 收據）、
+  `tools/x11_key_inject.py`（純標準函式庫的最小 X11 XTEST 客戶端）、
+  `tools/compare_character_ui_runs.py`（兩輪檢查點畫面比對）。
+- 先用 DOSBox-X `AUTOTYPE` 的固定時序盲打，同一顆按鍵在不同執行的反應延遲介於
+  1.5 秒到 11 秒，無法對齊選單層；容器映像沒有 xdotool／ImageMagick，因此改為自寫
+  X11 XTEST 注入加「等畫面靜止再送下一鍵」。改成畫面驅動後四個情境全部穩定完成。
+- **勘誤（工具，非遊戲規則）**：X11 客戶端最初把 server 主動送出的 32-byte event 封包
+  當成 reply 解析，取到任意長度後永久 block 在 `recv`，表面症狀是「畫面凍結」。
+  實際上凍結的是取樣端，模擬器仍在跑。修正為逐包檢查封包型別並加上 socket timeout。
+- **勘誤（遊戲行為）**：上一輪暫存實驗記下的「空白名字可前進」與「可見 ASCII 上限 15」
+  兩點皆不成立。實測名字欄容量為 16 個可見字元，輸入第 16 個字元即直接前進種族層、
+  不需 Return；空名按 Return 停在名字層。當時看到的「15 個字元」是自動前進前的最後
+  一格畫面，「Backspace 刪除 O」則是按鍵落在已切換的種族層而無作用。正文已改寫為
+  現況，`docs/re/character-creation.md` 與 SPEC-005 同步訂正。
+- 四個情境（`name-length`／`blank-name`／`escape-layers`／`reroll`）各執行兩輪全新流程，
+  收據存入 `docs/verification/character-ui/`。跨輪比對：`name-length` 26/26 檢查點
+  逐 byte 相同；其餘差異只出現在 TITLE 循環動畫落點（13.98%）、名字欄閃爍游標
+  （0.0125%）與 BIOS tick 播種的屬性數值（0.175%–0.280%）。
+- 四個情境全程未接受屬性或圖像，`CHARDATA`／`CHARPICS`／`SHLDPICS` 前後 SHA-256
+  均未變動。畫面 PNG 只留本機；原版執行畫面截圖與 `assets/original-derived-png/`
+  是不同素材類別，2026-09-01 的 PNG 特例未涵蓋，入庫前要另行權利決策。
+- 全部執行使用有界 `docker run --rm --network none --memory 1g --cpus 1
+  --pids-limit 256`，原版 ZIP 唯讀掛載，遊戲副本建在容器 tmpfs。中止的三個探索容器
+  已逐一 `docker stop`，結束檢查沒有 DOSBox 容器殘留，其他專案容器未動。

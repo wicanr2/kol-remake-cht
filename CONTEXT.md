@@ -76,7 +76,8 @@
   image 2 是唯一一-byte、全程未引用的非圖片 placeholder，不產生 PNG。
 - 固定 ZIP 一般圖片只有 EGA `PICS`，但 `MAKEMODE.EXE` 已證實是官方 CGA／Hercules
   轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
-  相符。完整轉換像素規則尚未動態驗證；三種 theme 的產品範圍待使用者決定。
+  相符。使用者已於 2026-09-01 決定首版只做 EGA，CGA／Hercules 列為後續選項；
+  MAKEMODE 的完整轉換像素規則保留為待辦 RE，不進首版交付範圍。
 - SPEC-002 的完整 EGA extraction set 已建立並由 verifier 對清冊核對：30 個邏輯 archive、
   1,022 payload 中，996 筆來源已證實、26 筆為明確非圖片 placeholder、0 筆 unknown；
   目前可形成 752 個已證實 PNG 單位。這只關閉 EGA 素材格式，尚未建立 production extractor。
@@ -84,8 +85,9 @@
   兩段、每段 100 次隨機 PIT 除數更新的 PC Speaker cue。`TANDYPIN.EXE` 已證實是 DOS
   `AH=31h` 常駐記憶體程式，不是音訊播放器。六個 executable 的雙新建 IDA DB 直接 I/O
   普查只有 TITLE 命中音訊埠；六個未解析 DX 點均已人工排除為 EGA renderer。正常啟動的
-  DOSBox-X `DX-CAPTURE /A` 已取得 38.229333 秒 WAV，四段非靜音窗及 peak 均已固定；
-  人耳驗收與 OGG 呈現決策尚未完成。
+  DOSBox-X `DX-CAPTURE /A` 已取得 38.229333 秒 WAV，四段非靜音窗及 peak 均已固定。
+  使用者已於 2026-09-01 決定 OGG 採規格近似合成：依已證實的 PIT 除數序列與公開硬體
+  規格自行合成方波再轉 OGG，不散布原版錄音。合成器實作與人耳驗收尚未完成。
 - 角色建立已建立 SPEC-005 DRAFT。手冊固定名字→種族→性別→職業→reroll→圖像→保存
   狀態機；`CHARDATA` 為 16×768 bytes、`CHARPICS` 為 16×760 bytes。IDA 固定 KOLBOOK
   `chardata` EA `0x1945a`、路由 `sub_134C2` 與五個立即 arg=0 caller。屬性 RNG 已證實為
@@ -97,9 +99,15 @@
   固定。完整 writer coverage 已排除其他職業衍生起始技能／物品，KOLTOWN 最小 reader 亦
   交叉確認名字、種族、職業、金冠與主要武器。KOLBOOK 靜態控制流另已固定輸入 buffer
   首 byte 為零時重試、各層取消返回、選項 0 reroll、80 張肖像循環與 16 槽全滿時在 writer
-  前退出；首 byte 零不能再等同玩家空名。暫存 DOS 實驗曾觀察空白 Enter 可前進及最多 15 個
-  可見 ASCII 字元，但截圖已依暫停要求清除，須重跑封存後才能升為正式 oracle。產品決策與
-  typed schema 尚未關閉，仍不授權實作。
+  前退出。
+- 正常 DOS 玩家路徑的角色建立 UI 已有可重生收據（`docs/verification/character-ui/`）。
+  入口鏈為 `KOL.EXE` → TITLE 循環標題序列 → 任意鍵 → 書本封面 → 任意鍵 → 目錄頁 →
+  `5` → Character options → `CREATE CHARACTER`。名字欄容量為 16 個可見字元，輸入第 16
+  個字元即直接前進種族層、不需 Return；空名按 Return 不前進。取消目的地為種族→名字、
+  性別→種族、職業→性別、屬性→職業，回到名字層時欄位清空。`REROLL STATS` 重擲九個
+  顯示值。四個情境各跑兩輪，`CHARDATA`／`CHARPICS`／`SHLDPICS` 前後 SHA-256 皆未變動；
+  跨輪差異只出現在 TITLE 動畫落點、名字欄游標與屬性數值三類畫面且差異量已量化。
+  接受屬性、圖像選擇、實際保存與 16 槽全滿仍未由 UI 證實，SPEC-005 維持 DRAFT。
 
 ## 固定輸入
 

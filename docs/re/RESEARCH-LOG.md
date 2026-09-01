@@ -1005,3 +1005,38 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - DOSBox-X 實驗訂正啟動方式：直接 `KOLBOOK.EXE A` 只停在黑畫面；`KOL.EXE` 才是正常
   玩家入口並進入 EGA 開場動畫。尚未走到主選單，因此本節只宣稱靜態控制流已證實，正常
   UI 截圖、重名、16 字元終止呈現、保存失敗 rollback 仍未知；SPEC-005 維持 DRAFT。
+
+## RE-040：正常 DOS 玩家路徑的角色建立 UI oracle
+
+- 輸入為固定 `Knights-of-legend.zip`（SHA-256 `2b455e3c…9f46`），唯讀掛載後於容器
+  tmpfs 重建遊戲目錄。容器映像 `rich2-dosbox-dbg:latest`（DOSBox-X 2026.06.02 SDL2），
+  機器設定固定 `machine=ega`、`memsize=4`、`core=normal`、`cputype=386`、
+  `cycles=fixed 3000`；設定檔 SHA-256 記在每份收據內。
+- 擷取器 `tools/dosbox_character_ui_oracle.py` 以 X11 XTEST（`tools/x11_key_inject.py`）
+  送鍵，並在畫面靜止到指定秒數後才送下一鍵。先前用 DOSBox-X `AUTOTYPE` 的固定時序
+  盲打，同一顆按鍵在不同執行的反應延遲介於 1.5 秒到 11 秒，無法對齊選單層；改成畫面
+  驅動之後四個情境全部穩定完成。
+- 正常入口鏈已證實：`KOL.EXE` → TITLE 標題序列（循環動畫）→ 任意鍵離開 → KOLBOOK
+  書本封面 → 任意鍵 → 目錄頁 → `5` → Character options → 反白條下移一格 →
+  `CREATE CHARACTER` → New Character 名字層。
+- **名字欄容量 16 個可見字元，輸入第 16 個字元即前進到種族層，不需 Return。**
+  連送 `ABCDEFGHIJKLMNOPQ` 時第 15 個字元顯示 `abcdefghijklmno`，第 16 個顯示
+  `abcdefghijklmnop` 並同時開啟種族選單；第 17 個字元與其後兩次 Backspace 落在種族層
+  而無作用。此情境 26 個檢查點在兩次全新執行之間逐 byte 相同。
+- **空名按 Return 不前進**，畫面停在名字層，與 `sub_11820` 的「輸入 buffer 首 byte 為零
+  時回到同一輸入點」一致。
+- 取消目的地：種族→名字、性別→種族、職業→性別、屬性→職業，再往上依序回到性別、
+  種族、名字層；回到名字層時名字與右頁摘要欄位皆清空。與 RE-039 的靜態控制流一致。
+- `REROLL STATS` 重擲九個顯示值；HUMAN／MALE／BARBARIAN 連續兩次 reroll 的力量為
+  88 → 85 → 89、體型 74 → 72 → 73、健康 75 → 75 → 74。
+- 四個情境全程未接受屬性或角色圖像，`CHARDATA`、`CHARPICS`、`SHLDPICS` 的前後
+  SHA-256 均未變動。
+- 每個情境各執行兩次全新流程並以 `tools/compare_character_ui_runs.py` 比對：
+  `name-length` 26/26 檢查點逐 byte 相同；`blank-name` 8/10、`escape-layers` 22/28、
+  `reroll` 13/20。全部差異都落在三類本來就不可能相同的畫面，且差異量已量化——
+  TITLE 循環動畫落點 13.98%、名字欄閃爍游標 0.0125%、BIOS tick 播種的屬性數值
+  0.175%–0.280%。
+- **限制**：接受屬性、圖像選擇與實際保存的寫入邊界未涵蓋；16 槽全滿只有靜態控制流
+  證據。固定 ZIP 的 `CHARDATA` 十六槽都非全零，前十四槽有名字，第 15、16 槽名字為空
+  但記錄非零，槽位可用性的 UI 判準尚未確認。畫面 PNG 只留本機，未進版控。
+  SPEC-005 維持 DRAFT。
