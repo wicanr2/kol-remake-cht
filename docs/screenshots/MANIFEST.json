@@ -1,0 +1,230 @@
+{
+  "schema": "kol-remake-screenshots-v1",
+  "tool": "tools/build_screenshot_manifest.py",
+  "spec": "docs/screenshots/shots.spec",
+  "runner": "tools/run_kol_shots.sh",
+  "producer": {
+    "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
+    "commit": "8594a3289e80300241014ec532b0ca03aba7062e"
+  },
+  "inputs": {
+    "ega_assets_manifest_sha256": "410477c5bdeb6d79ab098623ae74eca47568976e874c30c764ee7ee4a03bf3d1",
+    "fonts_manifest_sha256": "5db3baecce7a0ca28559688f08f98b7c0648765bbf82348de8c490243079f393",
+    "ui_font_manifest_sha256": "2839e8ff1530741bffda034062aa9af40ee3f1e820ae4b59f7618a0fee8bc57d"
+  },
+  "rights": {
+    "classification": "private-repo 可保存；不得公開散布",
+    "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
+  },
+  "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
+  "count": 19,
+  "failed": 0,
+  "screenshots": [
+    {
+      "file": "docs/screenshots/en-title.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -title-frame 89 -shot docs/screenshots/en-title.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 9,
+      "sha256": "51191b557a970e1a787f28828ebc28de53279ba73adaabdf7331b75bed8485f2",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-title-knight.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -title-frame 66 -shot docs/screenshots/en-title-knight.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 11,
+      "sha256": "71e4f0a046e84e93c8f126eb1470fa5683bef5b1790aea7f233ecfed6c98e0d0",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-book-cover.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene cover -shot docs/screenshots/en-book-cover.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 8,
+      "sha256": "2f3126398d179d592f72a955d041b69aed8335dcb5383abf903c13f32451dc82",
+      "parity_twin": "docs/verification/remake-parity/shots/cover.png",
+      "parity_receipt": "docs/verification/remake-parity/book-screens.json",
+      "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-book-contents.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene contents -shot docs/screenshots/en-book-contents.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 11,
+      "sha256": "b0f827038752461f18c3b6a3877533d4ae1ee1ff39541e62d9a725d00b41f7fe",
+      "parity_twin": "docs/verification/remake-parity/shots/contents.png",
+      "parity_receipt": "docs/verification/remake-parity/book-screens.json",
+      "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-newchar-stats.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene script -script t e s t RET RET RET RET -shot docs/screenshots/en-newchar-stats.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "b9161d60d2203c13c1ac23e0b2d9e279aa9edc3dfbe9f81249eae3e21fbaf8e9",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-newchar-picture.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene script -script z e d RET RET RET RET DOWN RET -shot docs/screenshots/en-newchar-picture.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 15,
+      "sha256": "5b5b91451396cb172b8bd0357e2bf5bfa71828a1ec3b6128856ba79de6490890",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-book-menu.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene menu -menu-selected 1 -shot docs/screenshots/en-book-menu.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 12,
+      "sha256": "a4070a7dcfaa694bce99c531f2ad766bcaa3142787570a36ceaf5eec0206b689",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-book-roster.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene roster -shot docs/screenshots/en-book-roster.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "e7c2b8f6dd8f759d244fc11a0bae84ab5538d553d91fc0ca40afda5546eda06f",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-book-delete.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene delete -delete-script DOWN RET -shot docs/screenshots/en-book-delete.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "86602b88a3b7e22579a7f4f3c51aa65a62f14bbb0b504b61d3a8b2f2e053416e",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-book-harbor.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene harbor -shot docs/screenshots/en-book-harbor.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 7,
+      "sha256": "d860f6d58dc922f3cb046db266107a1a0de484823c4b5f25c42c32030f210d76",
+      "parity_twin": "docs/verification/remake-parity/shots/harbor.png",
+      "parity_receipt": "docs/verification/remake-parity/harbor.json",
+      "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-inn.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene inn -shot docs/screenshots/en-town-inn.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "670865b46cbf69673e6ce0427301ab0e89bcdada2110b15337524efbe47e572d",
+      "parity_twin": "docs/verification/remake-parity/shots/inn.png",
+      "parity_receipt": "docs/verification/remake-parity/town-inn.json",
+      "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-inn-party2.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene inn -inn docs/re/town-inn-sample-recruited.json -shot docs/screenshots/en-town-inn-party2.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "64fb3bf48b26993dd2ee8ceeba8ceb170aba8e36b815603794eb15d7962b6b87",
+      "parity_twin": "docs/verification/remake-parity/shots/town-inn/recruited.png",
+      "parity_receipt": "docs/verification/remake-parity/town-inn.json",
+      "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-newchar-picture.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene script -script z e d RET RET RET RET DOWN RET -shot docs/screenshots/zh-newchar-picture.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 12,
+      "sha256": "ffa3b9b2e5a066ce22a1a4f7943712444e77657b8923d7101ed985ed9560eff5",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-book-menu.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene menu -menu-selected 2 -shot docs/screenshots/zh-book-menu.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 8,
+      "sha256": "0db59cb35ed4a0157179cc821c1c38dbe4444c2c338d67f02b58f2f32516de2a",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-book-roster.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene roster -shot docs/screenshots/zh-book-roster.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 7,
+      "sha256": "84aafdbb4d1bd3e0af459a712eeaebc6fbd3e8c52aa08d74366ccafc24f98434",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-book-delete.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene delete -delete-script DOWN RET -shot docs/screenshots/zh-book-delete.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 8,
+      "sha256": "b8b3e5cd2da3143c3e831df2f897d1c9b6f71e7c10fc9d8638bff3aa962c924e",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-book-harbor.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene harbor -shot docs/screenshots/zh-book-harbor.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 7,
+      "sha256": "6ccf16a94a6d5c1494e28e343b639655750c3791917d157757500716f2b051ae",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-inn.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene inn -shot docs/screenshots/zh-town-inn.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 15,
+      "sha256": "4018c855b6b834deb08c4455537498f241bf36675d3d33ec7588a483072da8e3",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-inn-party2.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene inn -inn docs/re/town-inn-sample-recruited.json -shot docs/screenshots/zh-town-inn-party2.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 15,
+      "sha256": "fed1455031dea0b43bcda9b4071fd74a83c4b71da1124a7b7efd0b6eb8304be6",
+      "pass": true
+    }
+  ]
+}

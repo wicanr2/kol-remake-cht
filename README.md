@@ -1,9 +1,29 @@
 # 《武士傳說》繁體中文重製
 
-這是 Origin Systems *Knights of Legend* 的繁體中文乾淨重寫專案。正式重製版預定使用
-Go 與 Ebitengine，畫面執行期只讀經可重現流程抽出的 PNG，音樂與音效使用 Ogg Vorbis。
-目前處於「逆向知識庫與規格建立」階段，尚未有可玩版本；玩法必須依序通過
+這是 Origin Systems *Knights of Legend* 的繁體中文乾淨重寫專案。重製版用 Go 與
+Ebitengine，執行期只讀經可重現流程抽出的 PNG，音樂與音效使用 Ogg Vorbis。
+
+目前已重繪出標題序列、書本（封面、目錄、建立角色、角色清單、刪除、Harbor Master）
+與城鎮的旅店畫面，並與 DOS EGA 原版逐畫面對拍；還沒有可玩版本——輸入迴圈只有標題
+序列與翻書動畫接上了，城鎮的戶外地圖與戰鬥都還沒實作。玩法必須依序通過
 「RE 證據 → DRAFT spec → 證據審查 → READY spec」才會進入正式實作。
+
+## 目前畫面
+
+完整畫廊與產生流程見 [docs/screenshots/](docs/screenshots/README.md)。左欄是**英文
+模式**（320×200、原版字模，逐畫面對拍用）；右欄是**繁體中文模式**（640×400、16×18
+中文字模格，不對拍）。
+
+| 標題序列 | 繁中：建立角色 |
+|---|---|
+| ![標題序列](docs/screenshots/en-title-knight.png) | ![繁中建立角色](docs/screenshots/zh-newchar-picture.png) |
+
+| 建立角色（英文模式） | 繁中：旅店與組隊 |
+|---|---|
+| ![建立角色](docs/screenshots/en-newchar-picture.png) | ![繁中旅店](docs/screenshots/zh-town-inn-party2.png) |
+
+這些畫面全部由 `tools/run_kol_shots.sh` 在鎖定容器內重生，`docs/screenshots/MANIFEST.json`
+記下每張的產生指令、輸入雜湊與 PNG SHA-256，並要求有對拍收據的畫面與那張逐 byte 相同。
 
 ## 專案起源
 
@@ -50,18 +70,22 @@ Go 與 Ebitengine，畫面執行期只讀經可重現流程抽出的 PNG，音�
 - 逆向知識庫：[docs/re/README.md](docs/re/README.md)
 - 規格狀態：[docs/spec/README.md](docs/spec/README.md)
 - 中文說明書：[docs/manual/README.md](docs/manual/README.md)
+- 目前畫面：[docs/screenshots/README.md](docs/screenshots/README.md)
 
-截至 2026-09-01：
+截至 2026-09-02：
 
 - 79 頁玩家手冊與 5 頁參考卡已完成繁體中文 Markdown 校對，SPEC-003 為 CONFORMED。
 - EGA 圖片清冊共 1,022 個 payload；996 筆已證實為可抽取來源、26 筆為非圖片，形成
-  752 個已證實 PNG 單位。SPEC-002 仍為 DRAFT，正式 extractor 與顯示 theme 尚未決定。
+  752 個已證實 PNG 單位。SPEC-002 已 READY，首版採 EGA-only，CGA／Hercules 列為後續。
+- 角色建立與刪除的資料表、RNG、屬性、起始金冠／武器與寫入欄位都已由正常 DOS 玩家
+  路徑收據關閉，SPEC-005 已 READY。刪除只寫一個 byte，remake 的輸出與原版逐 byte 相同。
+- remake 對拍收據十份共 180 對畫面，允許差異區之外全部零像素差；允許區只列原版自畫的
+  滑鼠游標與已查證成因的殘影。收據見 [remake 對拍](docs/verification/remake-parity/README.md)。
+- 繁體中文介面採雙模式：英文模式維持原版解析度供嚴格對拍，中文模式放大兩倍以容納
+  16×18 中文字模格。書本五個畫面與旅店畫面已中文化，文字安全矩形檢查 122 項全過。
 - 六個 executable 的音訊 I/O 母體已普查；只有 TITLE 使用 PC Speaker，正常流程 WAV
-  oracle 已取得。SPEC-004 仍為 DRAFT，OGG 呈現與人耳驗收尚未完成。
-- 角色建立的資料表、RNG、主要屬性、起始金冠／武器、最小 writer／reader 與靜態 UI
-  返回邊界已建立可重生證據。SPEC-005 仍為 DRAFT，正常 DOS UI oracle、繁中名字規則、
-  typed schema 與 deterministic RNG 契約尚未關閉。
-- Go／Ebitengine production runtime 尚未建立；未達 READY 的研究結果不會先接入正式路徑。
+  oracle 已取得。SPEC-004 仍為 DRAFT，OGG 的人耳驗收尚未完成，因此還沒接上音訊路徑。
+- 城鎮只做到旅店畫面；戶外地圖、商店、修道院與戰鬥都還沒實作，也還沒有對應的 spec。
 
 英文說明書與參考卡已逐頁翻譯並校對為繁體中文 Markdown。原版執行檔、資料、美術、地圖、
 音樂、音效與轉換後素材均受獨立權利限制；程式碼授權不代表可散布這些內容。

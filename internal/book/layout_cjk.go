@@ -79,3 +79,12 @@ var CJKConfirm = struct {
 	ShadowOffset: 8, ShadowThickness: 8,
 	Line1X: 264, Line1Y: 124, Line2X: 296, Line2Y: 148,
 }
+
+// CJKPictureInstructions 是圖像層右頁說明的中文版。原版把一句話拆成五行是英文字距下的
+// 排版；中文一行放得下較多字，逐行硬譯會讀成「選擇角色／圖像」這種斷句，因此中文模式
+// 另給一組自己的行。
+var CJKPictureInstructions = []string{
+	"USE ARROW KEYS TO BROWSE",
+	"CHARACTER PICTURES",
+	"PRESS RETURN TO ACCEPT",
+}

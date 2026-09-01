@@ -94,8 +94,9 @@ def main() -> int:
             seen.add(prof["name"])
             check("value", prof["name"], layout["ValueX"], left_right)
             check("list", prof["name"], layout["RightX"], right_right)
-    for en in ("REROLL STATS", "ACCEPT STATS", "USE ARROW KEYS", "TO SELECT A",
-               "CHARACTER", "PRESS RETURN", "TO ACCEPT"):
+    for en in ("REROLL STATS", "ACCEPT STATS",
+               "USE ARROW KEYS TO BROWSE", "CHARACTER PICTURES",
+               "PRESS RETURN TO ACCEPT"):
         check("list", en, layout["RightX"], right_right)
     check("actions", "CANCEL", layout["ActionsX"], right_right)
 

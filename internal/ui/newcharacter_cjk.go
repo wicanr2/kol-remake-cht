@@ -126,7 +126,7 @@ func NewCharacterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 
 	if st.Stage == charcreate.StagePicture {
 		text(dst, f, l.RightX, l.RightHeadingY, t.T("Select one"), book.ColourValue)
-		for i, line := range book.PictureInstructions {
+		for i, line := range book.CJKPictureInstructions {
 			text(dst, f, l.RightX, l.InstructionsY+i*l.RightStep, t.T(line),
 				book.ColourInactive)
 		}

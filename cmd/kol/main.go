@@ -520,6 +520,8 @@ func main() {
 	titlePath := flag.String("title-sequence", "docs/re/title-sequence.json",
 		"標題序列腳本（由 RE-047 從 TITLE.EXE 的 _main 轉寫）")
 	titleShots := flag.String("title-shot-dir", "", "把標題序列一輪的每個畫面輸出到這個目錄")
+	titleFrame := flag.Int("title-frame", -1,
+		"只輸出標題序列展開後的第 N 個畫面到 -shot，供展示圖使用")
 	bookAnimPath := flag.String("book-animation",
 		"assets/original-derived-data/book-open-animation.json", "翻書動畫參數表")
 	bookShots := flag.String("book-shot-dir", "",
@@ -799,6 +801,23 @@ func main() {
 		}
 		fmt.Printf("frames=%d loop_seconds=%.2f\n", len(frames), times[len(times)-1])
 		return
+	case *titleFrame >= 0:
+		if *shot == "" {
+			fmt.Fprintln(os.Stderr, "-title-frame 需要搭配 -shot")
+			os.Exit(2)
+		}
+		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if *titleFrame >= len(frames) {
+			fmt.Fprintf(os.Stderr, "-title-frame %d 超出 %d 個畫面\n", *titleFrame, len(frames))
+			os.Exit(2)
+		}
+		g.scene = sceneTitle
+		g.frame = frames[*titleFrame]
+		g.jobs = []shotJob{{name: "title", path: *shot}}
 	case *titleShots != "":
 		var chooser title.Rand
 		switch *titleChoice {
@@ -846,11 +865,22 @@ func main() {
 			os.Exit(1)
 		}
 	case *deleteScript != "":
-		if *shotDir == "" {
-			fmt.Fprintln(os.Stderr, "-delete-script 需要搭配 -shot-dir")
+		if *shotDir == "" && *shot == "" {
+			fmt.Fprintln(os.Stderr, "-delete-script 需要搭配 -shot-dir 或 -shot")
 			os.Exit(2)
 		}
 		g.scene = sceneDelete
+		if *shotDir == "" {
+			// 只要最後一張：先把整串 token 套完，再截一張圖。
+			for _, token := range strings.Fields(*deleteScript) {
+				if err := applyDeleteToken(g.remove, token); err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(2)
+				}
+			}
+			g.jobs = []shotJob{{name: "delete", path: *shot}}
+			break
+		}
 		g.jobs = append(g.jobs, shotJob{
 			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
 		for i, token := range strings.Fields(*deleteScript) {
@@ -867,13 +897,24 @@ func main() {
 			})
 		}
 	case *script != "":
-		if *shotDir == "" {
-			fmt.Fprintln(os.Stderr, "-script 需要搭配 -shot-dir")
+		if *shotDir == "" && *shot == "" {
+			fmt.Fprintln(os.Stderr, "-script 需要搭配 -shot-dir 或 -shot")
 			os.Exit(2)
 		}
 		g.scene = sceneScript
 		if *lang != "en" {
 			g.scene = sceneScriptCJK
+		}
+		if *shotDir == "" {
+			// 只要最後一張：先把整串 token 套完，再截一張圖。
+			for _, token := range strings.Fields(*script) {
+				if err := applyToken(g.state, token); err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(2)
+				}
+			}
+			g.jobs = []shotJob{{name: "script", path: *shot}}
+			break
 		}
 		g.jobs = append(g.jobs, shotJob{
 			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})

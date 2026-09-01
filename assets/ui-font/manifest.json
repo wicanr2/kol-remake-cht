@@ -31,8 +31,8 @@
         "width": 256,
         "height": 396
       },
-      "glyph_count": 342,
-      "png_sha256": "06bcf7e888011d43219e0e7a4947d1f45210d6fc1124c1dca9459ace1036a68e",
+      "glyph_count": 344,
+      "png_sha256": "526b0af0f20fc22bd9a85d24cfde6bc11e583b0884854a98df66dca975e460ff",
       "glyphs": [
         {
           "codepoint": 33,
@@ -1931,9 +1931,17 @@
           "rows_hex": "004018600ffe004003fc308017fe010807fe0c6213fc10e031b8230c0600000000000000"
         },
         {
+          "codepoint": 28687,
+          "character": "瀏",
+          "sheet_column": 13,
+          "sheet_row": 14,
+          "advance": 16,
+          "rows_hex": "010236e21c6a05ea07aa24ea11ca066a07ca110a17ea1142334227e2000e000000000000"
+        },
+        {
           "codepoint": 28858,
           "character": "為",
-          "sheet_column": 13,
+          "sheet_column": 14,
           "sheet_row": 14,
           "advance": 16,
           "rows_hex": "08c004c004803ff80118031003fc060c0c0c1ffe30022ad21a561346101c000000000000"
@@ -1941,7 +1949,7 @@
         {
           "codepoint": 29246,
           "character": "爾",
-          "sheet_column": 14,
+          "sheet_column": 15,
           "sheet_row": 14,
           "advance": 16,
           "rows_hex": "3ffe0c98188c3ffe108416b416b41ce4129416b416b41ce41084109c0000000000000000"
@@ -1949,15 +1957,15 @@
         {
           "codepoint": 29256,
           "character": "版",
-          "sheet_column": 15,
-          "sheet_row": 14,
+          "sheet_column": 0,
+          "sheet_row": 15,
           "advance": 16,
           "rows_hex": "100032fe3280328032803efe30e630a63ea436bc32982298229c23e62342000000000000"
         },
         {
           "codepoint": 29260,
           "character": "牌",
-          "sheet_column": 0,
+          "sheet_column": 1,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "0420346035fe353635fe3d26312631fe3c4034c8348827ff240824082408000000000000"
@@ -1965,7 +1973,7 @@
         {
           "codepoint": 29376,
           "character": "狀",
-          "sheet_column": 1,
+          "sheet_column": 2,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "0620262c2626262226303ffe063006303e301678167816c8368c27860702000000000000"
@@ -1973,7 +1981,7 @@
         {
           "codepoint": 29557,
           "character": "獵",
-          "sheet_column": 2,
+          "sheet_column": 3,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "01243b6c1b6c19363bfc2a640adc1bfc1a203bfc2a240bf40a240bfe33f2000000000000"
@@ -1981,7 +1989,7 @@
         {
           "codepoint": 29560,
           "character": "獸",
-          "sheet_column": 3,
+          "sheet_column": 4,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "3b942a9e2a9a3b9a3f9824fe3f983f9800183fd800343fa431a63fe210c2000000000000"
@@ -1989,7 +1997,7 @@
         {
           "codepoint": 29992,
           "character": "用",
-          "sheet_column": 4,
+          "sheet_column": 5,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "1ffc1884188418841ffc1884188418841ffc1084108430842084209c0000000000000000"
@@ -1997,7 +2005,7 @@
         {
           "codepoint": 30001,
           "character": "由",
-          "sheet_column": 5,
+          "sheet_column": 6,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "0080008000801ffc10841084108410841ffc10841084108410841ffc1004000000000000"
@@ -2005,7 +2013,7 @@
         {
           "codepoint": 30007,
           "character": "男",
-          "sheet_column": 6,
+          "sheet_column": 7,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "1ffc188c188c1ffc188c1ffc018001803ffc0104030406041c0c30780000000000000000"
@@ -2013,7 +2021,7 @@
         {
           "codepoint": 30059,
           "character": "畫",
-          "sheet_column": 7,
+          "sheet_column": 8,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "00801ffc008c3ffe1ffc00801ffc3ffe00001ffc1ffc188c0ffc3ffe0000000000000000"
@@ -2021,7 +2029,7 @@
         {
           "codepoint": 30331,
           "character": "登",
-          "sheet_column": 8,
+          "sheet_column": 9,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "00403f58037012260e180ffc30062ffa081808180ff8063002203ffe0000000000000000"
@@ -2029,7 +2037,7 @@
         {
           "codepoint": 30332,
           "character": "發",
-          "sheet_column": 9,
+          "sheet_column": 10,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "00081f5812721e3c1c1c3e7e02c802c81f8e10001efc02c8027802781fcc000000000000"
@@ -2037,7 +2045,7 @@
         {
           "codepoint": 30333,
           "character": "白",
-          "sheet_column": 10,
+          "sheet_column": 11,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "0180018001001ffc100410041004100c1ffc100410041004100c1ffc1004000000000000"
@@ -2045,7 +2053,7 @@
         {
           "codepoint": 30340,
           "character": "的",
-          "sheet_column": 11,
+          "sheet_column": 12,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "0c200c6008603f7e23c2238223023f2223322316230623063f042004003c000000000000"
@@ -2053,7 +2061,7 @@
         {
           "codepoint": 30428,
           "character": "盜",
-          "sheet_column": 12,
+          "sheet_column": 13,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "10801d8001fe3b2602240c7818cc138620001ffc1364136413643ffe0000000000000000"
@@ -2061,7 +2069,7 @@
         {
           "codepoint": 30462,
           "character": "盾",
-          "sheet_column": 13,
+          "sheet_column": 14,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "001c1ff0104010401fff104017fc1604160417fc160417fc360427fc2204000000000000"
@@ -2069,7 +2077,7 @@
         {
           "codepoint": 30475,
           "character": "看",
-          "sheet_column": 14,
+          "sheet_column": 15,
           "sheet_row": 15,
           "advance": 16,
           "rows_hex": "000c1ff801001ffc03003ffe06000ffc1c0c37fc240c07fc040c07fc0404000000000000"
@@ -2077,15 +2085,15 @@
         {
           "codepoint": 30702,
           "character": "矮",
-          "sheet_column": 15,
-          "sheet_row": 15,
+          "sheet_column": 0,
+          "sheet_row": 16,
           "advance": 16,
           "rows_hex": "100e11f83e3039fe2838287c08b63f02082409fe1ccc16c8327820ee0182000000000000"
         },
         {
           "codepoint": 30906,
           "character": "確",
-          "sheet_column": 0,
+          "sheet_column": 1,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "00103e3019fe1172105810fe3f98379836fe369816fe16981c9810fe0080000000000000"
@@ -2093,7 +2101,7 @@
         {
           "codepoint": 31034,
           "character": "示",
-          "sheet_column": 1,
+          "sheet_column": 2,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "1ffc0000000000003ffe008000800888088c188430862082008000800000000000000000"
@@ -2101,7 +2109,7 @@
         {
           "codepoint": 31278,
           "character": "種",
-          "sheet_column": 2,
+          "sheet_column": 3,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "02063ffe283009fe08303ffe09b21dfe1fb23bfe283009fe083008300bff000000000000"
@@ -2109,7 +2117,7 @@
         {
           "codepoint": 31435,
           "character": "立",
-          "sheet_column": 3,
+          "sheet_column": 4,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "0180008000803ffe0000041804100410063006300220022000603ffe0000000000000000"
@@ -2117,7 +2125,7 @@
         {
           "codepoint": 31934,
           "character": "精",
-          "sheet_column": 4,
+          "sheet_column": 5,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "08302bfe2a302cfe0c300ffe3e0018fe1c862afe2a8668fe08860986090c000000000000"
@@ -2125,7 +2133,7 @@
         {
           "codepoint": 32232,
           "character": "編",
-          "sheet_column": 5,
+          "sheet_column": 6,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "080c09f8118015fe2d06790619fe15003ffe3baa01aa2ffe2baa2baa00ae000000000000"
@@ -2133,7 +2141,7 @@
         {
           "codepoint": 32380,
           "character": "繼",
-          "sheet_column": 6,
+          "sheet_column": 7,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "0840194811fc15dc2dee39fa190015fe35483ffc054c2dee2fba29ff0000000000000000"
@@ -2141,7 +2149,7 @@
         {
           "codepoint": 32396,
           "character": "續",
-          "sheet_column": 7,
+          "sheet_column": 8,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "08301bfe103015fc3dfe3b4a1ffe14003ffe33fe25fe2d062bfc29cc0302000000000000"
@@ -2149,7 +2157,7 @@
         {
           "codepoint": 32773,
           "character": "者",
-          "sheet_column": 8,
+          "sheet_column": 9,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "010001041ff8011801303ffe018007000ff83c08240807f8040807f80408000000000000"
@@ -2157,7 +2165,7 @@
         {
           "codepoint": 32784,
           "character": "耐",
-          "sheet_column": 9,
+          "sheet_column": 10,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "00043fc404040c043fff2a842a842aa42ab42a942a942a842a842a84219c000000000000"
@@ -2165,7 +2173,7 @@
         {
           "codepoint": 32838,
           "character": "聆",
-          "sheet_column": 10,
+          "sheet_column": 11,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "00103f303678364c3ec637fe36003e0036fe360436083e58363006100608000000000000"
@@ -2173,7 +2181,7 @@
         {
           "codepoint": 32887,
           "character": "職",
-          "sheet_column": 11,
+          "sheet_column": 12,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "00983e9c27fc257a3d4827fe24083dea252e25ec3d2c3d2825fe05360426000000000000"
@@ -2181,7 +2189,7 @@
         {
           "codepoint": 32893,
           "character": "聽",
-          "sheet_column": 12,
+          "sheet_column": 13,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "00103f1032fe3e3032fe3eaa32fe7e0003fe3a0012343ad613c63f460278000000000000"
@@ -2189,7 +2197,7 @@
         {
           "codepoint": 33258,
           "character": "自",
-          "sheet_column": 13,
+          "sheet_column": 14,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "008001801ffc180c180c180c1ffc180c180c1ffc180c180c180c1ffc1804000000000000"
@@ -2197,7 +2205,7 @@
         {
           "codepoint": 33394,
           "character": "色",
-          "sheet_column": 14,
+          "sheet_column": 15,
           "sheet_row": 16,
           "advance": 16,
           "rows_hex": "0200060007f00c6018403ffc3884188418841ffc18041800180208020ffe000000000000"
@@ -2205,15 +2213,15 @@
         {
           "codepoint": 34253,
           "character": "藍",
-          "sheet_column": 15,
-          "sheet_row": 16,
+          "sheet_column": 0,
+          "sheet_row": 17,
           "advance": 16,
           "rows_hex": "04103f7e04101fa034203f7e31403fc03fbe00001ffc1b641b643fff0000000000000000"
         },
         {
           "codepoint": 34382,
           "character": "虎",
-          "sheet_column": 0,
+          "sheet_column": 1,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "018001fc01801ffe110611f417e0118010fc100011301330333322322c1e000000000000"
@@ -2221,7 +2229,7 @@
         {
           "codepoint": 34523,
           "character": "蛛",
-          "sheet_column": 1,
+          "sheet_column": 2,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "0810085008503efe2a902b902a102bfe3e3828780a540ed63f9221120010000000000000"
@@ -2229,7 +2237,7 @@
         {
           "codepoint": 34875,
           "character": "蠻",
-          "sheet_column": 2,
+          "sheet_column": 3,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "008013e8141639fc15ce3c1027da2bfa00801ffc10841ffc008c3ffe0002000000000000"
@@ -2237,7 +2245,7 @@
         {
           "codepoint": 34892,
           "character": "行",
-          "sheet_column": 3,
+          "sheet_column": 4,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "040009fe1800300026000c0009fe18083808280808080808080808080878000000000000"
@@ -2245,7 +2253,7 @@
         {
           "codepoint": 34907,
           "character": "衛",
-          "sheet_column": 4,
+          "sheet_column": 5,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "090013ee21200ff0180013fe3224722453e410c417f416c417f410c4109c000000000000"
@@ -2253,7 +2261,7 @@
         {
           "codepoint": 34913,
           "character": "衡",
-          "sheet_column": 5,
+          "sheet_column": 6,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "090013ce32402e400fe01abe33e432a413e4108417f411c411641624100c000000000000"
@@ -2261,7 +2269,7 @@
         {
           "codepoint": 35037,
           "character": "裝",
-          "sheet_column": 6,
+          "sheet_column": 7,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "063036303ffe06303e30163036fe268000803ffe07443c78243007ce0e02000000000000"
@@ -2269,7 +2277,7 @@
         {
           "codepoint": 35201,
           "character": "要",
-          "sheet_column": 7,
+          "sheet_column": 8,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "3ffe02201ffc122412241ffc020002183ffe04300c6007e007f83c0e0000000000000000"
@@ -2277,7 +2285,7 @@
         {
           "codepoint": 35211,
           "character": "見",
-          "sheet_column": 8,
+          "sheet_column": 9,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "0ff808080ff8080808080ff8080808080ff80260066004621c62303e0000000000000000"
@@ -2285,7 +2293,7 @@
         {
           "codepoint": 35215,
           "character": "規",
-          "sheet_column": 9,
+          "sheet_column": 10,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "080008fe08863efe0886088608fe3f8608860cfe0e481a4812cb308b230e000000000000"
@@ -2293,15 +2301,23 @@
         {
           "codepoint": 35242,
           "character": "親",
-          "sheet_column": 10,
+          "sheet_column": 11,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "08000c7e3f461246127e02467ffe04463fc6047e17283528256b04cb058e000000000000"
         },
         {
+          "codepoint": 35261,
+          "character": "覽",
+          "sheet_column": 12,
+          "sheet_row": 17,
+          "advance": 16,
+          "rows_hex": "00203f7e3ffc21003f7e3f7e00000ff80ff808080ff80ff802621c62303e000000000000"
+        },
+        {
           "codepoint": 35282,
           "character": "角",
-          "sheet_column": 11,
+          "sheet_column": 13,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "020007e00c2008403ffc388408840ffc088408841ffc100410043004203c000000000000"
@@ -2309,7 +2325,7 @@
         {
           "codepoint": 35328,
           "character": "言",
-          "sheet_column": 12,
+          "sheet_column": 14,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "0180008000c03ffe00000ff800000ff8000000000ff8080808080ff80808000000000000"
@@ -2317,7 +2333,7 @@
         {
           "codepoint": 35442,
           "character": "該",
-          "sheet_column": 13,
+          "sheet_column": 15,
           "sheet_row": 17,
           "advance": 16,
           "rows_hex": "1010081009fe3e2000603e4c00f83e3000263ec423882218226c3fc62102000000000000"
@@ -2325,23 +2341,23 @@
         {
           "codepoint": 35469,
           "character": "認",
-          "sheet_column": 14,
-          "sheet_row": 17,
+          "sheet_column": 0,
+          "sheet_row": 18,
           "advance": 16,
           "rows_hex": "100019fe08327ee200663e6600c63f9c00203e5627d2274227463e4c2078000000000000"
         },
         {
           "codepoint": 35498,
           "character": "說",
-          "sheet_column": 15,
-          "sheet_row": 17,
+          "sheet_column": 1,
+          "sheet_row": 18,
           "advance": 16,
           "rows_hex": "104818c808c43f8601023cfc00843c8400fc3e682648264826ca3e8a218e000000000000"
         },
         {
           "codepoint": 35527,
           "character": "談",
-          "sheet_column": 0,
+          "sheet_column": 2,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "1030083208b63ee400383e6c01c63e3001363eb426fc267826483fc62102000000000000"
@@ -2349,7 +2365,7 @@
         {
           "codepoint": 35531,
           "character": "請",
-          "sheet_column": 1,
+          "sheet_column": 3,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "083009fe08303efe00303dfe00003cfe00863cfe248624fe24863d86210c000000000000"
@@ -2357,7 +2373,7 @@
         {
           "codepoint": 35695,
           "character": "譯",
-          "sheet_column": 2,
+          "sheet_column": 4,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "100019fe094a3ffe00303dfe00303ffe00003c4825fe243027fe3c302020000000000000"
@@ -2365,7 +2381,7 @@
         {
           "codepoint": 35712,
           "character": "讀",
-          "sheet_column": 3,
+          "sheet_column": 5,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "103019fe08307efc01fe3d4a01fe3c0001fe01fe3dfe258625fe3ccc2302000000000000"
@@ -2373,7 +2389,7 @@
         {
           "codepoint": 36039,
           "character": "資",
-          "sheet_column": 4,
+          "sheet_column": 6,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "00803dfe012401743fce02020ffc080c0ffc0ffc080c0ffc06303c1c3006000000000000"
@@ -2381,7 +2397,7 @@
         {
           "codepoint": 36042,
           "character": "賊",
-          "sheet_column": 5,
+          "sheet_column": 7,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "00103e16221223ff3e1022d022de3ffc22cc228c3e881598363f22662046000000000000"
@@ -2389,7 +2405,7 @@
         {
           "codepoint": 36335,
           "character": "路",
-          "sheet_column": 6,
+          "sheet_column": 8,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "00203e60227c22c423ec3fb80c382c7c2fc62dfe2cc62cc63ec630fe0044000000000000"
@@ -2397,7 +2413,7 @@
         {
           "codepoint": 36523,
           "character": "身",
-          "sheet_column": 7,
+          "sheet_column": 9,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "008001800ff808180ff8081a081e0ffc08180ff83cf8019807183c183070000000000000"
@@ -2405,7 +2421,7 @@
         {
           "codepoint": 36655,
           "character": "輯",
-          "sheet_column": 8,
+          "sheet_column": 10,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "0800087e3f46087e3f0029ff3f46297e29463f46087e7f4608fe08060806000000000000"
@@ -2413,7 +2429,7 @@
         {
           "codepoint": 36664,
           "character": "輸",
-          "sheet_column": 9,
+          "sheet_column": 11,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "081008303e6808c63ffe2a003eea2aaa2aea3eaa08aa3fea09a20922096e000000000000"
@@ -2421,7 +2437,7 @@
         {
           "codepoint": 36817,
           "character": "近",
-          "sheet_column": 10,
+          "sheet_column": 12,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "300c19f809803d80098019fe119831183d180d180b180a181a18360023ff000000000000"
@@ -2429,7 +2445,7 @@
         {
           "codepoint": 36880,
           "character": "逐",
-          "sheet_column": 11,
+          "sheet_column": 13,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "300013fe186000c43bec0e7810f03338387c09d20b1018e01c00360023fe000000000000"
@@ -2437,7 +2453,7 @@
         {
           "codepoint": 36884,
           "character": "途",
-          "sheet_column": 12,
+          "sheet_column": 14,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "000030201070089803063ffa0820102033fe382009ac09241a221820360023fe00000000"
@@ -2445,7 +2461,7 @@
         {
           "codepoint": 36938,
           "character": "遊",
-          "sheet_column": 13,
+          "sheet_column": 15,
           "sheet_row": 18,
           "advance": 16,
           "rows_hex": "311011901ffe03203b3e0bc6134c32483a7e0a480a481ec81d98360023fe000000000000"
@@ -2453,23 +2469,23 @@
         {
           "codepoint": 36947,
           "character": "道",
-          "sheet_column": 14,
-          "sheet_row": 18,
+          "sheet_column": 0,
+          "sheet_row": 19,
           "advance": 16,
           "rows_hex": "310810980bfe00603dfc0904110431fc3d0409fc090409fc1800360023fe000000000000"
         },
         {
           "codepoint": 36956,
           "character": "遜",
-          "sheet_column": 15,
-          "sheet_row": 18,
+          "sheet_column": 1,
+          "sheet_row": 19,
           "advance": 16,
           "rows_hex": "200417fc18f00134397819dc13b6377e395a093c097a195a1f18360023fe000000000000"
         },
         {
           "codepoint": 36960,
           "character": "遠",
-          "sheet_column": 0,
+          "sheet_column": 2,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "202013fc182007fe380019fc110c210c39fc08e40b981ebc18c63e0023fe000000000000"
@@ -2477,7 +2493,7 @@
         {
           "codepoint": 36984,
           "character": "選",
-          "sheet_column": 1,
+          "sheet_column": 3,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "000033de1a5203de3a501b9e109833fe38980ffe0898198c1b06360023fe000000000000"
@@ -2485,7 +2501,7 @@
         {
           "codepoint": 37325,
           "character": "重",
-          "sheet_column": 2,
+          "sheet_column": 4,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "00181ff000803ffe00801ffc188c1ffc188c1ffc00801ffc00803ffe0000000000000000"
@@ -2493,7 +2509,7 @@
         {
           "codepoint": 37326,
           "character": "野",
-          "sheet_column": 3,
+          "sheet_column": 5,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "00003ffe258625ac3f98258c3fff041a041a3f9e041804180f983e180070000000000000"
@@ -2501,7 +2517,7 @@
         {
           "codepoint": 37327,
           "character": "量",
-          "sheet_column": 4,
+          "sheet_column": 6,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "0ff80ff808080ff83ffe00001ffc1ffc18841ffc00801ffc3ffe00000000000000000000"
@@ -2509,7 +2525,7 @@
         {
           "codepoint": 37749,
           "character": "鍵",
-          "sheet_column": 5,
+          "sheet_column": 7,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "08101bfe149222923d7f09120bfe3c9008fe2f902dfe3d901f903b60023e000000000000"
@@ -2517,7 +2533,7 @@
         {
           "codepoint": 37857,
           "character": "鏡",
-          "sheet_column": 6,
+          "sheet_column": 8,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "000008301cfe164433487ffe080008fe3e8208fe2a822afe1a680f483ccb038e00000000"
@@ -2525,7 +2541,7 @@
         {
           "codepoint": 38263,
           "character": "長",
-          "sheet_column": 7,
+          "sheet_column": 9,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "0ffc0c000ff80c000ff80c000c003ffe088408cc087008b80f8e08020000000000000000"
@@ -2533,7 +2549,7 @@
         {
           "codepoint": 38272,
           "character": "門",
-          "sheet_column": 8,
+          "sheet_column": 10,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "3f7e31463f7e314631463f7e3006300630063006300630063006301c0000000000000000"
@@ -2541,7 +2557,7 @@
         {
           "codepoint": 38283,
           "character": "開",
-          "sheet_column": 9,
+          "sheet_column": 11,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "3f7e31423f7e31423f7e300237f2326232623ffa326232623666340e0000000000000000"
@@ -2549,7 +2565,7 @@
         {
           "codepoint": 38498,
           "character": "院",
-          "sheet_column": 10,
+          "sheet_column": 12,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "00003c20243025fe2d02290228fc2400240027fe24582c5820d8209b219a230e00000000"
@@ -2557,7 +2573,7 @@
         {
           "codepoint": 38500,
           "character": "除",
-          "sheet_column": 11,
+          "sheet_column": 13,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "00103c3024782ccc298628fc2c30243027fe24303cb421b6213222322060000000000000"
@@ -2565,7 +2581,7 @@
         {
           "codepoint": 38538,
           "character": "隊",
-          "sheet_column": 12,
+          "sheet_column": 14,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "00843cc8245827fe286028e62f3c247825dc25343c762192211020302060000000000000"
@@ -2573,7 +2589,7 @@
         {
           "codepoint": 38555,
           "character": "際",
-          "sheet_column": 13,
+          "sheet_column": 15,
           "sheet_row": 19,
           "advance": 16,
           "rows_hex": "00803dfe25362fdc28cc2bcc2d8427fe240225fe3c2021a4212623222020000000000000"
@@ -2581,23 +2597,23 @@
         {
           "codepoint": 38656,
           "character": "需",
-          "sheet_column": 14,
-          "sheet_row": 19,
+          "sheet_column": 0,
+          "sheet_row": 20,
           "advance": 16,
           "rows_hex": "1ffc00803ffe2c9a22a20eb808883ffe01801ffc132413241324122c0000000000000000"
         },
         {
           "codepoint": 38728,
           "character": "靈",
-          "sheet_column": 15,
-          "sheet_row": 19,
+          "sheet_column": 1,
+          "sheet_row": 20,
           "advance": 16,
           "rows_hex": "1ffc3ffe2c9a22a20eb81ddc15541ddc00001ffc0c901aac3ffe00000000000000000000"
         },
         {
           "codepoint": 38754,
           "character": "面",
-          "sheet_column": 0,
+          "sheet_column": 2,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "3ffe018001803ffe3226322633e63226322633e6322632263ffe30040000000000000000"
@@ -2605,7 +2621,7 @@
         {
           "codepoint": 38917,
           "character": "項",
-          "sheet_column": 1,
+          "sheet_column": 3,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "01ff3e3008fe0882088208fe088208fe0f82388220fe0048018603020000000000000000"
@@ -2613,7 +2629,7 @@
         {
           "codepoint": 38928,
           "character": "預",
-          "sheet_column": 2,
+          "sheet_column": 4,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "00003ffe06101cfe0c8204827ffe0b820afe0a82088208fe084008c63982000000000000"
@@ -2621,7 +2637,7 @@
         {
           "codepoint": 38936,
           "character": "領",
-          "sheet_column": 3,
+          "sheet_column": 5,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "08000cfe1c1012fe33c23ec200fe00c23ffe02c206c214fe0c6404c60482000000000000"
@@ -2629,7 +2645,7 @@
         {
           "codepoint": 39006,
           "character": "類",
-          "sheet_column": 4,
+          "sheet_column": 6,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "00002dfe0e100c7e3f421e423f7e2c42027e0d423f420c7e0e24336620c2000000000000"
@@ -2637,7 +2653,7 @@
         {
           "codepoint": 39023,
           "character": "顯",
-          "sheet_column": 5,
+          "sheet_column": 7,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "3ffe20983fbe20a23fa2133e2aa23f3e1ba23fe2017e2a842ae628420000000000000000"
@@ -2645,7 +2661,7 @@
         {
           "codepoint": 39340,
           "character": "馬",
-          "sheet_column": 6,
+          "sheet_column": 8,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "1ffc188018801ffc18801ffc188018801ffe0002169212d63246201c0000000000000000"
@@ -2653,7 +2669,7 @@
         {
           "codepoint": 39600,
           "character": "骰",
-          "sheet_column": 7,
+          "sheet_column": 9,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "3f7c33643f643b443fc621803ffe12441e64122816383a3822ee26820000000000000000"
@@ -2661,7 +2677,7 @@
         {
           "codepoint": 39636,
           "character": "體",
-          "sheet_column": 8,
+          "sheet_column": 10,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "00283efe22aa2efe2aaa3ffe23003ffe32003afe36c63efe3a4422682ffe000000000000"
@@ -2669,7 +2685,7 @@
         {
           "codepoint": 39749,
           "character": "魅",
-          "sheet_column": 9,
+          "sheet_column": 11,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "0c1008183f7e2d183f182dfe2d183f3c143e157a17da17983410240363fe000000000000"
@@ -2677,7 +2693,7 @@
         {
           "codepoint": 39764,
           "character": "魔",
-          "sheet_column": 10,
+          "sheet_column": 12,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "00c01ffe10001ffe121016b41bd617fc344437fc344427fc21ac233a2c3e000000000000"
@@ -2685,7 +2701,7 @@
         {
           "codepoint": 40636,
           "character": "麼",
-          "sheet_column": 11,
+          "sheet_column": 13,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "000000c01ffe100012181ffe123c16bc1afe10803190333027c8218c27fc240200000000"
@@ -2693,7 +2709,7 @@
         {
           "codepoint": 40670,
           "character": "點",
-          "sheet_column": 12,
+          "sheet_column": 14,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "00103f1035103f103f1f3f100c103f100c7e0c423fc200422d422afe0042000000000000"
@@ -2701,7 +2717,7 @@
         {
           "codepoint": 40736,
           "character": "鼠",
-          "sheet_column": 13,
+          "sheet_column": 15,
           "sheet_row": 20,
           "advance": 16,
           "rows_hex": "02001e7c10041f7c10041ffc000010881ff810881f8810f8108c1ff61986000000000000"
@@ -2709,23 +2725,23 @@
         {
           "codepoint": 65281,
           "character": "！",
-          "sheet_column": 14,
-          "sheet_row": 20,
+          "sheet_column": 0,
+          "sheet_row": 21,
           "advance": 16,
           "rows_hex": "000000800080008000800080008000800080000000000080008000000000000000000000"
         },
         {
           "codepoint": 65288,
           "character": "（",
-          "sheet_column": 15,
-          "sheet_row": 20,
+          "sheet_column": 1,
+          "sheet_row": 21,
           "advance": 16,
           "rows_hex": "00020006000c00080008001800180018001800080008000c000400020000000000000000"
         },
         {
           "codepoint": 65289,
           "character": "）",
-          "sheet_column": 0,
+          "sheet_column": 2,
           "sheet_row": 21,
           "advance": 16,
           "rows_hex": "200030001000080008000c000c000c000c00080008001800100020000000000000000000"
@@ -2733,7 +2749,7 @@
         {
           "codepoint": 65292,
           "character": "，",
-          "sheet_column": 1,
+          "sheet_column": 3,
           "sheet_row": 21,
           "advance": 16,
           "rows_hex": "00c000c000c000c001800000000000000000000000000000000000000000000000000000"
@@ -2741,7 +2757,7 @@
         {
           "codepoint": 65295,
           "character": "／",
-          "sheet_column": 2,
+          "sheet_column": 4,
           "sheet_row": 21,
           "advance": 16,
           "rows_hex": "00020006000c00180030006000c00180030006000c001800300020000000000000000000"
@@ -2749,7 +2765,7 @@
         {
           "codepoint": 65306,
           "character": "：",
-          "sheet_column": 3,
+          "sheet_column": 5,
           "sheet_row": 21,
           "advance": 16,
           "rows_hex": "000001c0008000000000000000000000000001c000800000000000000000000000000000"
@@ -2757,7 +2773,7 @@
         {
           "codepoint": 65307,
           "character": "；",
-          "sheet_column": 4,
+          "sheet_column": 6,
           "sheet_row": 21,
           "advance": 16,
           "rows_hex": "000001c000800000000000000000000000c000c000400080018000000000000000000000"
@@ -2765,7 +2781,7 @@
         {
           "codepoint": 65311,
           "character": "？",
-          "sheet_column": 5,
+          "sheet_column": 7,
           "sheet_row": 21,
           "advance": 16,
           "rows_hex": "03e00730043000100030006000c000800080000000000180018000000000000000000000"
