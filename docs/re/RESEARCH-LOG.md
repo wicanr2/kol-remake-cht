@@ -1287,3 +1287,30 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - **限制**：REGION 中繼資料的來源（`region_metadata_copy_map`）在本例中與槽位樣板相同，
   因此無法分辨原版是否真的寫過；武器記錄 16 個 byte 的內部欄位語意未知；
   39 筆職業都能寫出樣板，但只有 BARBARIAN 與 RANGER 有原版寫入可對照。
+
+## RE-051：DELETE CHARACTER 的畫面、確認視窗與一個 byte 的刪除
+
+- 新增三個正常 DOS UI 情境：`delete-character-probe`（進刪除畫面後直接取消）、
+  `delete-character`（反白條上下移動、叫出確認視窗）、`delete-character-confirm`
+  （實際回答 YES 刪除，再回答 NO 驗證取消分支）。後兩個各跑兩輪，13/13 與 15/15 個
+  checkpoint 畫面 SHA-256 逐一相同——包含 TITLE 標題序列那一張。
+- **刪除畫面就是角色清單頁**，標題圖、兩欄起點與行距都和 `LIST CHARACTERS` 相同，
+  差別只有顏色語意：反白那一列是黑字、其餘青字，左右兩欄同時反白。反白條起點是第 0 列，
+  上下移動不繞圈（送 Up 到第 0 列、Down 到末列都停住）。
+- **確認視窗**：黑框白底 132×24 位於 (94,58)，投影是往右下各偏移 4 px、厚 4 px 的黑塊。
+  兩行暗紅（EGA 170,0,0）文字 `ARE YOU SURE?` 在 (104,64)、`YES/NO` 在 (128,70)，
+  由 `tools/read_text_from_frame.py` 以抽出的原版字型逐格讀回，不是人眼抄的。
+  兩輪執行、清單長度不同（14 列與 13 列）時視窗位置完全相同。
+- **視窗只認字母鍵**：送出 Down 與 Return 之後畫面逐像素沒有任何變化（`delete-character`
+  的 checkpoint 10–12 是同一張 PNG）；`y` 才會刪除，`n` 取消。視窗開著時清單沒有任何
+  一列反白。兩種回答都回到刪除清單，且反白條重置為第 0 列。
+- **刪除只寫一個 byte**：把該槽位名字的第一個 byte 寫成 0。兩輪的 12288 bytes `CHARDATA`
+  差分完全相同——只有 slot 1 的 offset `0x000` 由 `0x50` 變成 `0x00`，`CHARPICS` 與
+  `SHLDPICS` 的 SHA-256 沒變。畫面上名冊往上補齊是「只列出已建立的槽位」造成的，
+  不是資料搬移。
+- **對拍結果**：`plan-delete.json` 8 對、`plan-delete-move.json` 5 對全部通過，允許差異
+  只有原版滑鼠游標（55 px）與展開跨頁的頁尾殘影（112 px）。remake 的 `DeleteSlot`
+  對同一份 `CHARDATA` 產出與原版**逐 byte 相同**的檔案
+  （`docs/verification/chardata-delete/`）。
+- **限制**：確認視窗按 ESC 的行為沒有量測；`Y`／`N` 大寫、滑鼠按鍵與「名冊為空時進入
+  刪除畫面」都未測；`EDIT PICTURE`、`EDIT SHIELD`、`HARBOR MASTER` 仍未探。

@@ -97,6 +97,13 @@ def main() -> int:
         check("list", en, layout["RightX"], right_right)
     check("actions", "CANCEL", layout["ActionsX"], right_right)
 
+    # 刪除確認視窗是覆蓋在書頁上的獨立視窗，安全矩形就是視窗自己的內緣。
+    confirm = layout_doc.get("confirm")
+    if confirm:
+        limit = confirm["X"] + confirm["Width"] - 1
+        check("confirm", "ARE YOU SURE?", confirm["Line1X"], limit)
+        check("confirm", "YES/NO", confirm["Line2X"], limit)
+
     # 名字欄容量：16 個 ASCII 字元的最寬情形。
     widest = max(advance[chr(c)] for c in range(0x21, 0x7F) if chr(c) in advance)
     name_width = widest * 16
@@ -120,7 +127,12 @@ def main() -> int:
              layout["MenuY"] + 5 * layout["MenuStep"] + font["cell"]["height"], limit),
             ("roster (16 slots)",
              layout["RosterY"] + 15 * layout["RosterStep"] + font["cell"]["height"],
-             limit)):
+             limit),
+            ("delete confirm window",
+             (layout_doc.get("confirm") or {"Line2Y": 0})["Line2Y"]
+             + font["cell"]["height"],
+             (layout_doc.get("confirm") or {"Y": 0, "Height": 0})["Y"]
+             + (layout_doc.get("confirm") or {"Height": 0})["Height"] - 1)):
         checks.append({"kind": "vertical", "en": name, "zh": "", "x": 0,
                        "width": bottom, "right_limit": lim,
                        "overflow": max(0, bottom - lim), "missing_glyphs": [],

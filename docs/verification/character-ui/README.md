@@ -31,7 +31,7 @@ tools/compare_character_ui_runs.py <第一輪目錄> <第二輪目錄> --out cro
 與 `frames/`；收據以相對路徑索引畫格。`cross-run/` 是兩輪檢查點畫面的比對結果，
 `MANIFEST.json` 記錄來源、產生工具、雜湊入口與權利分類。
 
-1,368 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
+2,115 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
 衍生自原版執行檔與資料，著作權仍屬原權利人；此決定不涵蓋 public repo、public fork、
 GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序，不是原版 archive 圖號。
 
@@ -45,6 +45,8 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 | `reroll` | 20 | 12 | 無 |
 | `accept-and-save` | 16 | 12 | `CHARDATA` |
 | `picture-cycle` | 99 | 10 | 無 |
+| `delete-character` | 13 | 13 | 無 |
+| `delete-character-confirm` | 15 | 15 | `CHARDATA` |
 
 兩輪之間的差異全部落在三類本來就不可能逐 byte 相同的畫面：
 
@@ -72,6 +74,13 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
   角色連續兩次 reroll，力量 88 → 85 → 89、體型 74 → 72 → 73、健康 75 → 75 → 74。
 - **角色圖像 selector 恰好循環 80 張。** 由 selector 0 向左一次得到的畫面，與由 0
   連續向右 80 次得到的畫面相同；再向右一次回到 selector 0。方向鍵瀏覽、Return 接受。
+- **DELETE CHARACTER 用的就是角色清單頁。** 版面與 `LIST CHARACTERS` 完全相同，
+  差別只有顏色語意：反白那一列黑字、其餘青字，左右兩欄同時反白；反白條起點是第 0 列，
+  不繞圈。Return 叫出 (94,58) 的 132×24 確認視窗（黑框白底、右下 4 px 投影），
+  視窗內兩行暗紅字 `ARE YOU SURE?` 與 `YES/NO`；視窗開著時清單沒有任何一列反白。
+- **確認視窗不吃方向鍵與 Return。** 送出這兩個鍵之後畫面逐像素沒有變化；`y` 刪除、
+  `n` 取消，兩者都回到刪除清單並把反白條重置為第 0 列。刪除只把該槽位名字的第一個
+  byte 寫成 0（見 `../chardata-delete/`），名冊往上補齊是「只列已建立槽位」的結果。
 - **接受圖像是保存點。** 走完「ACCEPT STATS → 接受圖像」之後畫面回到 Character
   options，`CHARDATA` 出現變動；本批兩輪都只寫入 slot 14，`CHARPICS` 與 `SHLDPICS`
   的 SHA-256 未變。逐 offset 差異見 `../asset-parity/chardata-write-run{1,2}.json`。

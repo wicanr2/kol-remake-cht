@@ -1,0 +1,84 @@
+{
+  "tool": "tools/compare_character_ui_runs.py",
+  "scenario": "delete-character",
+  "run_a": {
+    "generated_utc": "2026-09-01T14:17:17Z",
+    "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+    "character_files_changed": []
+  },
+  "run_b": {
+    "generated_utc": "2026-09-01T14:29:52Z",
+    "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+    "character_files_changed": []
+  },
+  "checkpoint_count": 13,
+  "identical_count": 13,
+  "differing_count": 0,
+  "checkpoints": [
+    {
+      "index": 0,
+      "label": "TITLE 標題序列",
+      "identical": true
+    },
+    {
+      "index": 1,
+      "label": "書本封面",
+      "identical": true
+    },
+    {
+      "index": 2,
+      "label": "目錄頁",
+      "identical": true
+    },
+    {
+      "index": 3,
+      "label": "角色選項選單（反白 LIST CHARACTERS）",
+      "identical": true
+    },
+    {
+      "index": 4,
+      "label": "角色選項選單（反白 CREATE CHARACTER）",
+      "identical": true
+    },
+    {
+      "index": 5,
+      "label": "角色選項選單（反白 DELETE CHARACTER）",
+      "identical": true
+    },
+    {
+      "index": 6,
+      "label": "刪除清單（反白第 1 名）",
+      "identical": true
+    },
+    {
+      "index": 7,
+      "label": "刪除清單（反白第 2 名）",
+      "identical": true
+    },
+    {
+      "index": 8,
+      "label": "刪除清單（反白第 3 名）",
+      "identical": true
+    },
+    {
+      "index": 9,
+      "label": "刪除清單（回到第 2 名）",
+      "identical": true
+    },
+    {
+      "index": 10,
+      "label": "確認視窗（預設反白）",
+      "identical": true
+    },
+    {
+      "index": 11,
+      "label": "確認視窗（反白第二項）",
+      "identical": true
+    },
+    {
+      "index": 12,
+      "label": "送出確認之後",
+      "identical": true
+    }
+  ]
+}

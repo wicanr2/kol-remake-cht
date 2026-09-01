@@ -4,7 +4,7 @@
   "layout": "workplace/cjk-layout.json",
   "font": "assets/ui-font/manifest.json",
   "strings": "docs/i18n/newchar-zh-Hant.json",
-  "checked": 110,
+  "checked": 113,
   "failed": 0,
   "criterion": "每個字元都要有字模，且字串右緣不得超出所屬的文字安全矩形",
   "failures": [],
@@ -1165,6 +1165,28 @@
       "pass": true
     },
     {
+      "kind": "confirm",
+      "en": "ARE YOU SURE?",
+      "zh": "確定要刪除嗎？",
+      "x": 264,
+      "width": 112,
+      "right_limit": 451,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true
+    },
+    {
+      "kind": "confirm",
+      "en": "YES/NO",
+      "zh": "是／否",
+      "x": 296,
+      "width": 48,
+      "right_limit": 451,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true
+    },
+    {
       "kind": "name",
       "en": "name field capacity 16",
       "zh": "",
@@ -1215,6 +1237,17 @@
       "x": 0,
       "width": 380,
       "right_limit": 380,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true
+    },
+    {
+      "kind": "vertical",
+      "en": "delete confirm window",
+      "zh": "",
+      "x": 0,
+      "width": 166,
+      "right_limit": 171,
       "overflow": 0,
       "missing_glyphs": [],
       "pass": true

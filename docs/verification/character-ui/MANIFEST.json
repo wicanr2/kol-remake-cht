@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 1737,
+  "total_frames": 2115,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -115,6 +115,82 @@
       "checkpoint_count": 10,
       "frame_count": 104,
       "frame_dir": "blank-name-run2/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "delete-character-confirm-run1",
+      "scenario": "delete-character-confirm",
+      "description": "在確認視窗回答 YES 實際刪除第二名角色，保存刪除前後的角色檔；隨後再次進入刪除清單觀察刪除後的名冊，並在確認視窗回答 NO 驗證取消分支。",
+      "receipt": "docs/verification/character-ui/delete-character-confirm-run1/receipt.json",
+      "generated_utc": "2026-09-01T14:19:50Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 15,
+      "frame_count": 74,
+      "frame_dir": "docs/verification/character-ui/delete-character-confirm-run1/frames",
+      "character_files_changed": [
+        "CHARDATA"
+      ],
+      "note": "以 --save-character-files 保留刪除後的角色檔，供 docs/verification/chardata-delete/ 的逐 byte 對拍；角色檔本身不入庫。"
+    },
+    {
+      "run": "delete-character-confirm-run2",
+      "scenario": "delete-character-confirm",
+      "description": "在確認視窗回答 YES 實際刪除第二名角色，保存刪除前後的角色檔；隨後再次進入刪除清單觀察刪除後的名冊，並在確認視窗回答 NO 驗證取消分支。",
+      "receipt": "docs/verification/character-ui/delete-character-confirm-run2/receipt.json",
+      "generated_utc": "2026-09-01T14:31:35Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 15,
+      "frame_count": 74,
+      "frame_dir": "docs/verification/character-ui/delete-character-confirm-run2/frames",
+      "character_files_changed": [
+        "CHARDATA"
+      ],
+      "note": "同上，第二輪；兩輪的 CHARDATA 差分完全相同。"
+    },
+    {
+      "run": "delete-character-probe-run1",
+      "scenario": "delete-character-probe",
+      "description": "從角色選項選單進入 DELETE CHARACTER，擷取刪除畫面之後直接取消，不刪除任何角色。用來看清楚刪除流程的畫面與按鍵。",
+      "receipt": "docs/verification/character-ui/delete-character-probe-run1/receipt.json",
+      "generated_utc": "2026-09-01T14:10:19Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 8,
+      "frame_count": 86,
+      "frame_dir": "docs/verification/character-ui/delete-character-probe-run1/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "delete-character-run1",
+      "scenario": "delete-character",
+      "description": "實際刪除一名角色：進入 DELETE CHARACTER 後上下移動反白條，選第二名角色按 Return 叫出確認視窗，在視窗內移動一次再送出，並保存刪除前後的角色檔以便逐位元比對。",
+      "receipt": "docs/verification/character-ui/delete-character-run1/receipt.json",
+      "generated_utc": "2026-09-01T14:17:17Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 13,
+      "frame_count": 72,
+      "frame_dir": "docs/verification/character-ui/delete-character-run1/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "delete-character-run2",
+      "scenario": "delete-character",
+      "description": "實際刪除一名角色：進入 DELETE CHARACTER 後上下移動反白條，選第二名角色按 Return 叫出確認視窗，在視窗內移動一次再送出，並保存刪除前後的角色檔以便逐位元比對。",
+      "receipt": "docs/verification/character-ui/delete-character-run2/receipt.json",
+      "generated_utc": "2026-09-01T14:29:52Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 13,
+      "frame_count": 72,
+      "frame_dir": "docs/verification/character-ui/delete-character-run2/frames",
       "character_files_changed": []
     },
     {

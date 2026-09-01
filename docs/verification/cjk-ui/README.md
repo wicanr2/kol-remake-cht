@@ -18,7 +18,7 @@
 用 ffmpeg 的 drawtext（libfreetype）在固定格點上畫出每個字元，再以固定門檻二值化。
 執行期只讀烘好的 PNG，不在執行期做字型排版，和原版抽出的英文字型走同一條路。
 
-目前烘焙參數：`Noto Sans CJK TC`、字級 15、門檻 96、字模格 16×18，共 215 個字元
+目前烘焙參數：`Noto Sans CJK TC`、字級 15、門檻 96、字模格 16×18，共 222 個字元
 （全部可見 ASCII ＋ 中文 UI 用到的漢字）。漢字是全形固定一格；ASCII 是比例字，字寬取
 墨跡右緣加一個間隙——用半形固定字距畫會把相鄰字模切掉。
 
@@ -34,7 +34,7 @@
 
 ## 文字安全矩形檢查
 
-`text-fit.json`：110 項，0 項失敗。
+`text-fit.json`：113 項，0 項失敗。
 
 檢查用實際字模表的逐字字寬計算每個字串的寬度，逐條要求：
 
@@ -61,10 +61,17 @@ python3 tools/verify_text_fit.py --layout workplace/cjk-layout.json \
     --out docs/verification/cjk-ui/text-fit.json
 tools/run_kol_headless.sh -lang zh-Hant \
     -script "z e d RET RET RET RET DOWN RET" -shot-dir docs/verification/cjk-ui/shots
+tools/run_kol_headless.sh -lang zh-Hant -delete-script "DOWN RET y" \
+    -shot-dir docs/verification/cjk-ui/shots/delete
 ```
 
+字模表的烘焙要用 `tools/run_cjk_font_build.sh`（有界容器＋主機字型目錄唯讀掛載）；
+新增中文字串之後要重烘，否則新字沒有字模會被畫成空白。
+
 `shots/` 是名字→種族→性別→職業→擲屬性→圖像層的中文畫面，加上角色選項頁
-（`menu.png`）與角色清單頁（`roster.png`），供版面審閱。
+（`menu.png`）、角色清單頁（`roster.png`）與刪除流程（`delete/`），供版面審閱。
+刪除確認視窗在中文模式是原版視窗放大兩倍再加高，讓兩行 16×16 中文字上下各留 8 px；
+文字安全矩形就是視窗自己的內緣，一併進 `text-fit.json` 檢查。
 
 ## 這份收據不宣稱什麼
 

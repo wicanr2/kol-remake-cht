@@ -6,7 +6,7 @@
 ## 範圍
 
 本規格定義 remake 的角色建立狀態機與角色儲存區邊界。它不包含旅店招募、隊伍排序、戰鬥
-屬性計算、角色圖像編輯器或原版磁碟交換。證據入口為
+屬性計算、角色圖像編輯器或原版磁碟交換；角色刪除屬於儲存區邊界，含在本規格內。證據入口為
 `docs/re/character-creation.md`。
 
 ## DRAFT 狀態機
@@ -67,8 +67,15 @@ REGION metadata route，沒有其他職業衍生的起始技能／物品。KOLTO
 | REROLL STATS 重擲九個顯示值 | `character-ui/reroll-run{1,2}` |
 | 圖像 selector 恰好 80 張循環 | `character-ui/picture-cycle-run{1,2}` |
 | 接受圖像後才寫入，且只寫單一槽位 | `character-ui/accept-and-save-run{1,2}`、`asset-parity/chardata-write-run{1,2}` |
+| 刪除角色用角色清單頁選取，確認視窗只認 `y`／`n` | `character-ui/delete-character-run{1,2}` |
+| 刪除只把槽位名字的第一個 byte 寫成 0，其餘欄位與兩個圖像檔不動 | `character-ui/delete-character-confirm-run{1,2}`、`chardata-delete/` |
 
-尚未由 UI 證實：16 槽全滿的訊息與退出、重名處理、名字欄接受的字元集合與大小寫保存。
+刪除是角色儲存區的第二個 commit 點，和建立同樣是原子的：回答 `n` 不寫任何 byte。
+畫面上名冊往上補齊是「只列出已建立槽位」的結果，不是資料搬移——remake 的槽位身分
+因此不隨刪除改變。
+
+尚未由 UI 證實：16 槽全滿的訊息與退出、重名處理、名字欄接受的字元集合與大小寫保存、
+刪除確認視窗按 ESC 與空名冊進入刪除畫面。
 remake 必須把這三項標為未驗證分支，不得以推測實作後宣稱 parity。
 
 ## 存檔草案限制

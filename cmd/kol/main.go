@@ -44,9 +44,10 @@ const (
 	sceneBookOpen   scene = "book-open"
 	sceneMenu       scene = "menu"
 	sceneRoster     scene = "roster"
+	sceneDelete     scene = "delete"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -220,6 +221,7 @@ type game struct {
 	cjk     *font.Font
 	strings *i18n.Table
 	roster  *roster.Roster
+	remove  *roster.DeleteFlow
 	canvas  *screen.Canvas
 	state   *charcreate.State
 	sequence *title.Sequence
@@ -275,6 +277,13 @@ func (g *game) render() error {
 				g.roster.Occupied())
 		}
 		return ui.Roster(g.canvas.Image(), g.sprites, g.small, g.roster.Occupied())
+	case sceneDelete:
+		if g.strings != nil {
+			return ui.DeleteListCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings,
+				g.remove.List(), g.remove.Cursor, g.remove.Confirm)
+		}
+		return ui.DeleteList(g.canvas.Image(), g.sprites, g.small,
+			g.remove.List(), g.remove.Cursor, g.remove.Confirm)
 	case sceneMenu:
 		if g.strings != nil {
 			return ui.CharacterOptionsCJK(g.canvas.Image(), g.sprites, g.cjk,
@@ -456,6 +465,25 @@ func applyToken(st *charcreate.State, token string) error {
 	return nil
 }
 
+// applyDeleteToken 把腳本 token 套到刪除流程；token 對應原版的鍵盤操作。
+func applyDeleteToken(f *roster.DeleteFlow, token string) error {
+	switch token {
+	case "RET":
+		f.Accept()
+	case "UP":
+		f.MoveCursor(-1)
+	case "DOWN":
+		f.MoveCursor(1)
+	case "y", "Y":
+		f.Answer(true)
+	case "n", "N":
+		f.Answer(false)
+	default:
+		return fmt.Errorf("未知刪除腳本 token %q", token)
+	}
+	return nil
+}
+
 func main() {
 	assetRoot := flag.String("assets", "assets/original-derived-png/ega", "抽取資產根目錄")
 	fontRoot := flag.String("fonts", "assets/original-derived-png/fonts", "字型資產目錄")
@@ -464,6 +492,8 @@ func main() {
 	sceneName := flag.String("scene", string(sceneCover), "要繪製的場景")
 	portrait := flag.Int("portrait", 0, "newchar 場景使用的角色圖像圖號")
 	menuSelected := flag.Int("menu-selected", 0, "menu 場景反白的項目索引")
+	deleteScript := flag.String("delete-script", "",
+		"delete 場景的按鍵腳本，token 為 UP／DOWN／RET／y／n，逐步輸出截圖")
 	rosterPath := flag.String("roster",
 		"assets/original-derived-data/character-roster.json", "角色槽位 typed data")
 	shot := flag.String("shot", "", "單張截圖輸出路徑")
@@ -499,6 +529,8 @@ func main() {
 		"改用操作腳本跑完整個建立流程，把結果寫進槽位；與 -chardata-stats 二選一")
 	writeOut := flag.String("chardata-out", "",
 		"把寫入後的完整 CHARDATA 存到這個檔案（含原版樣板 bytes，只作本機比對）")
+	deleteSlot := flag.Int("chardata-delete-slot", -1,
+		"以 remake 的刪除規則清掉這個槽位，把結果寫到 -chardata-out（本機比對用）")
 	itemTemplates := flag.String("chardata-weapons",
 		"assets/original-derived-data/weapon-templates.json", "起始武器樣板表")
 	writerSummary := flag.String("chardata-contract",
@@ -517,6 +549,26 @@ func main() {
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
+	}
+	if *deleteSlot >= 0 {
+		if *writeTemplate == "" || *writeOut == "" {
+			fmt.Fprintln(os.Stderr, "-chardata-delete-slot 需要 -chardata-template 與 -chardata-out")
+			os.Exit(2)
+		}
+		raw, err := os.ReadFile(*writeTemplate)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := chardata.DeleteSlot(raw, *deleteSlot); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := os.WriteFile(*writeOut, raw, 0o644); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		return
 	}
 	if *writeRecord != "" {
 		spec := chardata.NewCharacter{
@@ -561,6 +613,7 @@ func main() {
 		raw, err := json.MarshalIndent(map[string]any{
 			"schema": "kol-cjk-layout-v1", "scale": book.CJKScale,
 			"cell": book.CJKCell, "layout": book.CJKLayout, "text_box": book.CJKTextBox,
+			"confirm": book.CJKConfirm,
 		}, "", "  ")
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -607,7 +660,8 @@ func main() {
 	}
 
 	var slots *roster.Roster
-	if scene(*sceneName) == sceneRoster || (*bookShots != "" && *bookTransition == "roster") {
+	if scene(*sceneName) == sceneRoster || scene(*sceneName) == sceneDelete ||
+		*deleteScript != "" || (*bookShots != "" && *bookTransition == "roster") {
 		if slots, err = roster.Load(*rosterPath); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -639,6 +693,9 @@ func main() {
 		portrait: *portrait,
 		selected: *menuSelected,
 		roster:   slots,
+	}
+	if slots != nil {
+		g.remove = roster.NewDeleteFlow(slots)
 	}
 
 	if scene(*sceneName) == sceneBookOpen || *bookShots != "" {
@@ -754,6 +811,27 @@ func main() {
 			append(raw, '\n'), 0o644); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
+		}
+	case *deleteScript != "":
+		if *shotDir == "" {
+			fmt.Fprintln(os.Stderr, "-delete-script 需要搭配 -shot-dir")
+			os.Exit(2)
+		}
+		g.scene = sceneDelete
+		g.jobs = append(g.jobs, shotJob{
+			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
+		for i, token := range strings.Fields(*deleteScript) {
+			tok := token
+			g.jobs = append(g.jobs, shotJob{
+				name: fmt.Sprintf("step-%03d", i+1),
+				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
+				apply: func() {
+					if err := applyDeleteToken(g.remove, tok); err != nil {
+						fmt.Fprintln(os.Stderr, err)
+						os.Exit(2)
+					}
+				},
+			})
 		}
 	case *script != "":
 		if *shotDir == "" {

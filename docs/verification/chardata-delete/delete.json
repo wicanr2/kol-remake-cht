@@ -1,0 +1,31 @@
+{
+  "schema": "kol-chardata-delete-v1",
+  "tool": "tools/verify_chardata_delete.py",
+  "criterion": "同一份 CHARDATA 刪同一個槽位，原版與 remake 的輸出必須逐 byte 相同",
+  "slot": 1,
+  "sha256": {
+    "before": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e",
+    "original_after": "efc4453bb051ed444eec4eac799ffd4a12bbea91ce75bd08b7e269834d79fc3f",
+    "remake_after": "efc4453bb051ed444eec4eac799ffd4a12bbea91ce75bd08b7e269834d79fc3f"
+  },
+  "original_changed_bytes": [
+    {
+      "offset": 768,
+      "slot": 1,
+      "slot_offset": "0x000",
+      "before": "50",
+      "after": "00"
+    }
+  ],
+  "remake_changed_bytes": [
+    {
+      "offset": 768,
+      "slot": 1,
+      "slot_offset": "0x000",
+      "before": "50",
+      "after": "00"
+    }
+  ],
+  "identical": true,
+  "pass": true
+}

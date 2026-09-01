@@ -66,3 +66,16 @@ var CJKTextBox = struct {
 	LeftX: 48, LeftY: 32, LeftW: 292, LeftH: 348,
 	RightX: 352, RightY: 32, RightW: 272, RightH: 348,
 }
+
+// CJKConfirm 是中文模式的刪除確認視窗。位置與尺寸是原版視窗放大兩倍之後再加高，
+// 讓兩行 16×16 中文字上下各留 8 px；投影厚度與偏移同樣是原版的兩倍。
+// 這一份和其他中文版面一樣是 remake 自訂的，不對拍。
+var CJKConfirm = struct {
+	X, Y, Width, Height             int
+	ShadowOffset, ShadowThickness   int
+	Line1X, Line1Y, Line2X, Line2Y  int
+}{
+	X: 188, Y: 116, Width: 264, Height: 56,
+	ShadowOffset: 8, ShadowThickness: 8,
+	Line1X: 264, Line1Y: 124, Line2X: 296, Line2Y: 148,
+}

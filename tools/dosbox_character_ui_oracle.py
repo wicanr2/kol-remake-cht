@@ -112,6 +112,17 @@ LIST_PRELUDE = [
     step("目錄頁", "5", settle=2.5),
 ]
 
+# 走到刪除角色清單的前置。目錄頁按 5 之後有一段約六秒的翻頁動畫；用固定等待跨過去，
+# 避免在動畫途中誤判畫面已靜止而把後續按鍵送進動畫裡（第一次試跑就是這樣整串失步）。
+DELETE_PRELUDE = [
+    step("TITLE 標題序列", "space", delay=8.0),
+    step("書本封面", "space", delay=9.0),
+    step("目錄頁", "5", delay=10.0),
+    step("角色選項選單（反白 LIST CHARACTERS）", "Down", settle=2.5),
+    step("角色選項選單（反白 CREATE CHARACTER）", "Down", settle=2.0),
+    step("角色選項選單（反白 DELETE CHARACTER）", "Return", settle=3.5),
+]
+
 SCENARIOS: dict[str, dict] = {
     "list-characters": {
         "description": "從角色選項選單選 LIST CHARACTERS，擷取角色清單畫面，"
@@ -120,6 +131,46 @@ SCENARIOS: dict[str, dict] = {
             step("角色選項選單（反白 LIST CHARACTERS）", "Return", settle=3.0),
             step("角色清單", "Escape", settle=2.5),
             step("角色清單取消之後", None, settle=3.0),
+        ],
+    },
+    "delete-character-probe": {
+        "description": "從角色選項選單進入 DELETE CHARACTER，擷取刪除畫面之後直接取消，"
+                       "不刪除任何角色。用來看清楚刪除流程的畫面與按鍵。",
+        "steps": list(DELETE_PRELUDE) + [
+            step("刪除角色畫面", "Escape", settle=3.0),
+            step("取消之後", None, settle=3.0),
+        ],
+    },
+    "delete-character": {
+        "description": "實際刪除一名角色：進入 DELETE CHARACTER 後上下移動反白條，"
+                       "選第二名角色按 Return 叫出確認視窗，在視窗內移動一次再送出，"
+                       "並保存刪除前後的角色檔以便逐位元比對。",
+        "steps": list(DELETE_PRELUDE) + [
+            step("刪除清單（反白第 1 名）", "Down", settle=1.5),
+            step("刪除清單（反白第 2 名）", "Down", settle=1.5),
+            step("刪除清單（反白第 3 名）", "Up", settle=1.5),
+            step("刪除清單（回到第 2 名）", "Return", settle=3.0),
+            step("確認視窗（預設反白）", "Down", settle=2.0),
+            step("確認視窗（反白第二項）", "Return", settle=4.0),
+            step("送出確認之後", None, settle=4.0),
+        ],
+    },
+    "delete-character-confirm": {
+        "description": "在確認視窗回答 YES 實際刪除第二名角色，保存刪除前後的角色檔；"
+                       "隨後再次進入刪除清單觀察刪除後的名冊，並在確認視窗回答 NO "
+                       "驗證取消分支。",
+        # 確認視窗不吃方向鍵與 Return（delete-character 收據：送 Down／Return 後畫面
+        # 完全沒變），視窗上寫的是 YES/NO，因此用字母鍵回答。
+        "steps": list(DELETE_PRELUDE) + [
+            step("刪除清單（反白第 1 名）", "Down", settle=1.5),
+            step("刪除清單（反白第 2 名）", "Return", settle=3.0),
+            step("確認視窗（回答 YES）", "y", settle=4.0),
+            step("刪除完成後的畫面", "Down", settle=2.5),
+            step("選單（反白第二項）", "Down", settle=2.0),
+            step("選單（反白第三項）", "Return", settle=3.5),
+            step("刪除後的清單", "Return", settle=3.0),
+            step("確認視窗（回答 NO）", "n", settle=4.0),
+            step("回答 NO 之後", None, settle=4.0),
         ],
     },
     "accept-and-save-ranger": {

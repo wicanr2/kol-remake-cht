@@ -175,3 +175,23 @@ var PortraitArrows = struct {
 // NameCursor 是名字輸入游標：原版在下一個字模格的底列畫一條 8 px 寬的黑線。
 // 由原版首次進入 New Character 頁的畫面量得（空名字時位於 x=24、y=63）。
 var NameCursor = struct{ X, Y, Width, Height int }{24, 63, 8, 1}
+
+// ColourPrompt 是確認視窗文字的 EGA 暗紅，量測自原版 delete-character-run1/frame-071。
+var ColourPrompt = [3]uint8{170, 0, 0}
+
+// ConfirmWindow 是刪除確認視窗的外框與投影。座標量自原版
+// delete-character-run1/frame-071 與 delete-character-confirm-run1/frame-073：
+// 兩次執行、清單長度不同（14 與 13 列），視窗位置完全相同。
+//
+// 外框是 132×24 的黑框白底；投影是往右下各偏移 4 px、厚 4 px 的黑塊，因此右側黑塊
+// 佔 x 226..229、y 62..85，底部黑塊佔 y 82..85、x 98..229。
+var ConfirmWindow = struct {
+	X, Y, Width, Height, ShadowOffset, ShadowThickness int
+}{X: 94, Y: 58, Width: 132, Height: 24, ShadowOffset: 4, ShadowThickness: 4}
+
+// ConfirmLines 是視窗內的兩行文字。字串由 tools/read_text_from_frame.py 以抽出的原版
+// 字型逐格讀回，座標是命中的字模格起點，不是人眼估的。
+var ConfirmLines = []Label{
+	{"ARE YOU SURE?", 104, 64, 170, 0, 0},
+	{"YES/NO", 128, 70, 170, 0, 0},
+}

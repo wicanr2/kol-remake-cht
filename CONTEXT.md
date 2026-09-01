@@ -24,7 +24,8 @@
 - 書本文字版面已機械量得並版控於 `docs/re/text-layout.json`；原版繪字規則為
   逐字模格清成白底、但空白字元不清底。中文化的字框限制已浮現：字模格 8×6、字距 8，
   繁體中文字形放不進同一格，版面策略待決策。
-- remake 對拍收據已建立（`docs/verification/remake-parity/`）：83 對畫面全部通過。
+- remake 對拍收據已建立（`docs/verification/remake-parity/`）：八份收據 171 對畫面
+  全部通過（書本畫面 3、角色建立 9、圖像層 92、三段翻頁 54、刪除流程 13）。
   書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
   畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同；空白 New Character 頁
   以原版字型與版面重繪後，64,000 個像素中只有 31 個不同且全部落在名字欄的原版殘留
@@ -159,6 +160,11 @@
 `newchar-pictures.json` 92 對（對 `picture-cycle-run1`，含 80 張圖像循環與兩端回繞）、
 `book-screens.json` 3 對，全部在允許差異區之外零像素差。殘餘差異只有四類，成因都已
 查證並記於 RE-045、RE-046。
+
+刪除角色（DELETE CHARACTER）已閉環：畫面 13 對逐張通過（`delete.json` 8 對、
+`delete-move.json` 5 對），確認視窗的座標與兩行文字都由原版畫面機械量得，刪除本身
+只寫一個 byte，remake 的輸出與原版逐 byte 相同（`chardata-delete/`）。書中還沒探的
+只剩 `EDIT PICTURE`、`EDIT SHIELD` 與 `HARBOR MASTER`。
 
 接下來依序做三件事：
 
