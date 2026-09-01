@@ -110,10 +110,13 @@
 - [x] 完成正常 DOS UI 的接受屬性、圖像選擇與實際保存 oracle；SPEC-005 經證據審查升
   READY。16 槽全滿仍只有靜態證據。
 - [ ] 補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle。
-- [ ] 鎖定 Go、Ebitengine 與 Docker build image，建立最小可啟動程式。
+- [x] 鎖定 Go 1.26.7、Ebitengine v2.9.9 與建置映像 `eob-remake-go:1.26.7-ebiten2.9.9-audio`；
+  `cmd/kol` 可建置、可啟動，並有 `tools/go_docker.sh`／`tools/run_kol_headless.sh` 兩支包裝。
 - [ ] 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案。
 - [ ] 選一條最小玩家鏈：真實 PNG → typed data → 世界／城鎮一個互動 → UI → 存讀檔。
-- [ ] 對應原版同狀態畫面與操作，記錄差異及證據等級。
+- [x] 建立畫面對拍工具與首批收據：`tools/verify_remake_parity.py` 的三層判準，
+  82 對書本畫面全部通過（`docs/verification/remake-parity/`）。
+- [ ] 擴充對拍到有文字與互動的畫面；需先決定繁中字型與是否保留英文字模嚴格比對模式。
 - [ ] 建立 Linux／Windows／macOS 可重現編譯與最小啟動 smoke；真機驗收另列。
 
 完成條件：不靠 debug 入口可啟動、操作、存檔與重載；沒有 runtime 原版格式依賴。
@@ -142,11 +145,14 @@
 
 ## 下一個唯一工作
 
-M4 的 Go／Ebitengine 垂直切片：鎖定 Go、Ebitengine 與 Docker build image，建立最小
-可啟動程式，再把 SPEC-005 的角色建立流程接到 `assets/original-derived-png/ega/` 的
-PNG 上，並以 `tools/compare_frames.py` 對 `docs/verification/character-ui/` 的原版
-同狀態畫面做對拍。
+角色建立的文字層。目前 remake 只畫底圖與角色圖像，New Character 頁面的左右頁文字
+整片列為允許差異。要往前推必須先解決兩件事：
 
-對拍判準要先寫進 spec 再實作：繁中文字與原版英文字模不可能逐像素相同，因此必須把
-「版面、色盤、素材位置、動畫序列」與「文字內容」分成兩層驗收，並決定是否保留一個
-英文字模模式供嚴格像素比對。
+1. **原版書本字模**：`KOLBOOK.EXE` 內的點陣字型尚未取出。取出後才知道字高、字距與
+   文字基準點，繁中排版才有可對照的版面基準。
+2. **繁中字型與對拍模式決策**：繁中字形不可能等於原版英文字模。需要決定是否保留一個
+   英文字模模式供嚴格像素比對，或只以「文字方塊位置與範圍」層級驗收。這會影響 UI
+   佈局與驗收標準，屬共同決策項。
+
+在這兩項之前，可先做不依賴文字的部分：TITLE 標題序列與翻頁動畫的逐幀對拍
+（原版側畫面已在 `docs/verification/character-ui/` 的時間軸內）。

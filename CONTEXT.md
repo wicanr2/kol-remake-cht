@@ -11,9 +11,16 @@
   的 PNG 衍生物入庫：抽取器產生的素材 PNG 放 `assets/original-derived-png/`，模擬器
   擷取的原版執行畫面 PNG 與其收據同目錄放 `docs/verification/`。這不授權 GitHub Release
   或公開散布。
-- Go／Ebitengine 實作尚未開始，但素材與規格已就緒：SPEC-001／002／003／005 為
-  READY 或 CONFORMED，752 張 EGA PNG 已可重生。SPEC-004（音訊）仍為 DRAFT。
+- Go／Ebitengine 垂直切片已啟動：`cmd/kol` 以 Go 1.26.7＋Ebitengine v2.9.9 建於固定
+  映像 `eob-remake-go:1.26.7-ebiten2.9.9-audio`，只讀 `assets/original-derived-png/ega/`
+  的 manifest 與 PNG，畫在 320×200 原版解析度離屏畫布上，並提供截圖模式供對拍。
+  目前只畫底圖與角色圖像，玩法規則、文字與輸入尚未接上。
+  SPEC-001／002／003／005 為 READY 或 CONFORMED，SPEC-004（音訊）仍為 DRAFT；
   其餘玩法（戰鬥、任務、城鎮、世界地圖）仍須各自的 DRAFT／READY spec。
+- 首個 remake 對拍收據已建立（`docs/verification/remake-parity/`）：82 對畫面全部通過。
+  書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
+  畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同。對拍判準分成「素材與版面
+  必須相同」、「明列允許差異區（原版游標、原版自繪文字）」與「必須相同區」三層。
 - `Knights-of-legend.zip` 已在唯讀容器中通過 ZIP CRC 檢查，共 76 個中央目錄項目；可見
   6 個 MZ executable、安裝批次檔、城鎮／角色／物品資料及多組 `*PICS` 圖像候選。
 - ZIP 多數遊戲檔時間為 1989，但 `KOLTOWN.EXE`、`CHARDATA`、`CHARPICS`、`SHLDPICS`、

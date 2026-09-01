@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|
 | 原版輸入清冊 | ZIP CRC、逐檔 SHA-256、雙容器重生 byte compare | 不適用 | 不適用 | 不適用 | 通過 |
 | KOLTOWN 解包研究映像 | header、2,281 relocations、IDA entry／337 functions | startup 前 129,312 bytes、2,281 relocations、五錨點全吻合 | 不適用 | `KOLTOWN.EXE A` 正常啟動至 entry | SPEC-001 READY |
-| 啟動／新遊戲 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
+| 啟動／新遊戲 | Go 1.26.7＋Ebitengine v2.9.9 建置通過；資產載入拒非 PNG | 書本封面／目錄頁對原版畫面 | 82 對對拍，游標與原版自繪文字外逐像素相同 | 尚無互動；只有截圖模式 | M4 垂直切片；玩法未接 |
 | 角色建立 UI | 六個情境各兩輪，檢查點畫面 SHA-256 交叉比對 | KOL.EXE 正常入口；DOSBox-X 2026.06.02 固定機器設定 | 1,368 張去重畫格 PNG，含 80 張圖像 selector | 目錄頁 → Character options → Create Character → 接受屬性 → 接受圖像 → 保存 | SPEC-005 READY；16 槽全滿、重名、字元集合未涵蓋 |
 | 移動／時間 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 地圖轉換 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
