@@ -154,13 +154,15 @@
 
 ## 下一個唯一工作
 
-角色建立的名字→種族→性別→職業→擲屬性五層已在 Go／Ebitengine 實作，並與原版
-`reroll-run1` 的同狀態畫格逐畫面對拍通過（`docs/verification/remake-parity/newchar-steps.json`，
-9 對全通過）。殘餘差異只剩四類，成因都已查證並記於 RE-045。
+角色建立的名字→種族→性別→職業→擲屬性→圖像層已在 Go／Ebitengine 實作，並與原版
+同狀態畫格逐畫面對拍通過：`newchar-steps.json` 9 對（對 `reroll-run1`）、
+`newchar-pictures.json` 92 對（對 `picture-cycle-run1`，含 80 張圖像循環與兩端回繞）、
+`book-screens.json` 3 對，全部在允許差異區之外零像素差。殘餘差異只有四類，成因都已
+查證並記於 RE-045、RE-046。
 
 接下來依序做三件事：
 
-1. 接上圖像選擇層與 CHARDATA 寫入，對 `accept-and-save-run1` 的三檔前後 SHA-256
+1. 接上接受圖像後的 CHARDATA 寫入，對 `accept-and-save-run1` 的三檔前後 SHA-256
    收據做同狀態驗證，讓「建立隊伍」整條路徑貫通。
 2. TITLE 標題序列：先反組譯閃爍段的機制，再實作並建立逐幀時間軸的比較方式。
 3. SPEC-004 的 PIT 方波合成器：轉成 OGG，對 DX-CAPTURE WAV 比對段落結構並做人耳驗收。

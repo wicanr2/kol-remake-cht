@@ -72,6 +72,17 @@ var SelectHeading = struct {
 // 右頁清單：起點與行距。
 var RightList = struct{ X, Y, Step int }{X: 176, Y: 52, Step: 6}
 
+// PictureInstructions 是圖像層右頁的說明文字，排在右頁清單的同一個起點與行距。
+// 內容由 tools/read_text_from_frame.py 以抽出的原版字型從
+// picture-cycle-run1/frame-084 逐格讀回，不是由人眼抄的。
+var PictureInstructions = []string{
+	"USE ARROW KEYS",
+	"TO SELECT A",
+	"CHARACTER",
+	"PRESS RETURN",
+	"TO ACCEPT",
+}
+
 // 左頁的欄位值位置。名字與職業的值另起一行，種族與性別的值和標籤同一行。
 var (
 	NameValue      = struct{ X, Y int }{24, 58}
@@ -103,6 +114,28 @@ const (
 // RowFirstAttribute 是十列屬性標籤在 NewCharacterLabels 內的起始索引。擲屬性層會把
 // 這十列同時標成作用中，量測自原版 picture-cycle-run1/frame-082（1668 px 由青轉棕）。
 const RowFirstAttribute = 4
+
+// PictureActions 是圖像層右頁底部的操作提示，棕色。字串與座標由
+// tools/read_text_from_frame.py 從 picture-cycle-run1/frame-084 逐格讀回。
+var PictureActions = Label{"CANCEL   ACCEPT", 176, 166, 170, 85, 0}
+
+// PortraitFrame 是圖像層右頁的雙格外框：上格放 40×38 的角色圖像，下格放名字。
+// 框線為 EGA 青，兩格內部填黑。座標量自 picture-cycle-run1/frame-084：
+// 框線在 x=206 與 x=248、y=105／144／152。
+var PortraitFrame = struct{ X, Y, Width, Height, Divider int }{
+	X: 206, Y: 105, Width: 43, Height: 48, Divider: 144,
+}
+
+// PortraitName 是名牌文字起點。白字直接畫在黑底上，不另清字模格；字型與書頁內文相同。
+var PortraitName = struct{ X, Y int }{208, 146}
+
+// PortraitArrows 是圖像層右側的上下箭頭。兩個字模是 8×8 大字型的 codepoint 94 與 95
+// （`^` 與 `_`），畫法與書頁文字相同：先把字模格清成白底再畫黑墨。這也是大字型第一個
+// 被指認的畫面用途。
+var PortraitArrows = struct {
+	X, Up, Down        int
+	UpRune, DownRune   rune
+}{X: 264, Up: 105, Down: 144, UpRune: '^', DownRune: '_'}
 
 // NameCursor 是名字輸入游標：原版在下一個字模格的底列畫一條 8 px 寬的黑線。
 // 由原版首次進入 New Character 頁的畫面量得（空名字時位於 x=24、y=63）。

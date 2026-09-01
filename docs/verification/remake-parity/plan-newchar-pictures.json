@@ -1,0 +1,3554 @@
+{
+  "name": "newchar-pictures",
+  "description": "remake 以固定腳本重播完整角色建立流程（名字→種族→性別→職業→擲屬性→圖像層），並走完 80 張角色圖像的循環與兩端回繞，對原版 picture-cycle-run1 的同狀態畫面逐張對拍。",
+  "input": {
+    "script": "z e d RET RET RET RET DOWN RET LEFT + RIGHT×81",
+    "seed": 1,
+    "command": "tools/run_kol_headless.sh -script \"z e d RET RET RET RET DOWN RET LEFT $(RIGHT ×81)\" -shot-dir docs/verification/remake-parity/shots/newchar-pictures"
+  },
+  "pairs": [
+    {
+      "label": "名字層（空名字）",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-000.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-068.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止的時點決定；游標的格子位置本身仍受驗證。",
+          "x": 24,
+          "y": 63,
+          "width": 8,
+          "height": 1
+        }
+      ]
+    },
+    {
+      "label": "名字輸入 Z",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-001.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-071.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止的時點決定；游標的格子位置本身仍受驗證。",
+          "x": 32,
+          "y": 63,
+          "width": 8,
+          "height": 1
+        }
+      ]
+    },
+    {
+      "label": "名字輸入 ZE",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-002.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-074.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止的時點決定；游標的格子位置本身仍受驗證。",
+          "x": 40,
+          "y": 63,
+          "width": 8,
+          "height": 1
+        }
+      ]
+    },
+    {
+      "label": "名字輸入 ZED",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-003.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-077.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止的時點決定；游標的格子位置本身仍受驗證。",
+          "x": 48,
+          "y": 63,
+          "width": 8,
+          "height": 1
+        }
+      ]
+    },
+    {
+      "label": "種族層",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-004.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-079.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "label": "性別層",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-005.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-080.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "label": "職業層",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-006.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-081.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "label": "擲屬性層（反白 REROLL STATS）",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-007.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-082.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "label": "擲屬性層（反白 ACCEPT STATS）",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-008.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-083.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 0",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-009.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-084.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層向左一次（回繞到 79）",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-010.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-085.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層向右回到 0",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-011.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-084.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 1",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-012.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-086.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 2",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-013.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-087.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 3",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-014.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-088.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 4",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-015.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-089.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 5",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-016.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-090.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 6",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-017.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-091.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 7",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-018.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-092.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 8",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-019.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-093.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 9",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-020.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-094.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 10",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-021.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-095.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 11",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-022.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-096.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 12",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-023.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-097.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 13",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-024.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-098.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 14",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-025.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-099.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 15",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-026.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-100.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 16",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-027.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-101.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 17",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-028.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-102.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 18",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-029.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-103.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 19",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-030.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-104.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 20",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-031.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-105.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 21",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-032.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-106.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 22",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-033.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-107.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 23",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-034.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-108.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 24",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-035.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-109.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 25",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-036.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-110.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 26",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-037.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-111.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 27",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-038.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-112.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 28",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-039.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-113.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 29",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-040.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-114.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 30",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-041.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-115.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 31",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-042.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-116.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 32",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-043.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-117.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 33",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-044.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-118.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 34",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-045.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-119.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 35",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-046.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-120.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 36",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-047.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-121.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 37",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-048.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-122.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 38",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-049.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-123.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 39",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-050.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-124.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 40",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-051.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-125.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 41",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-052.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-126.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 42",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-053.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-127.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 43",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-054.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-128.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 44",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-055.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-129.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 45",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-056.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-130.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 46",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-057.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-131.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 47",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-058.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-132.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 48",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-059.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-133.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 49",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-060.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-134.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 50",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-061.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-135.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 51",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-062.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-136.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 52",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-063.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-137.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 53",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-064.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-138.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 54",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-065.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-139.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 55",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-066.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-140.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 56",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-067.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-141.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 57",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-068.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-142.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 58",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-069.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-143.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 59",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-070.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-144.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 60",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-071.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-145.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 61",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-072.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-146.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 62",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-073.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-147.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 63",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-074.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-148.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 64",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-075.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-149.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 65",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-076.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-150.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 66",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-077.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-151.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 67",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-078.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-152.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 68",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-079.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-153.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 69",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-080.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-154.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 70",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-081.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-155.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 71",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-082.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-156.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 72",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-083.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-157.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 73",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-084.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-158.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 74",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-085.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-159.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 75",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-086.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-160.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 76",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-087.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-161.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 77",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-088.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-162.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 78",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-089.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-163.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層 selector 79",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-090.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-085.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "label": "圖像層走完一圈回到 0",
+      "remake": "docs/verification/remake-parity/shots/newchar-pictures/step-091.png",
+      "original": "docs/verification/character-ui/picture-cycle-run1/frames/frame-084.png",
+      "allow": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；帶內每一個像素都等於 BOOKPICS[0]（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "x": 155,
+          "y": 96,
+          "width": 21,
+          "height": 25
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播；骰式相同、點數不同。標籤與冒號不在允許區內，仍逐像素驗證。",
+          "x": 112,
+          "y": 116,
+          "width": 25,
+          "height": 64
+        }
+      ],
+      "require": [
+        {
+          "name": "角色圖像 blit 矩形",
+          "x": 208,
+          "y": 106,
+          "width": 40,
+          "height": 38
+        }
+      ]
+    }
+  ]
+}

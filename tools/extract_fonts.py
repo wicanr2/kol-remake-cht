@@ -45,7 +45,7 @@ SHEET_COLUMNS = 16
 
 FONTS = [
     {"name": "book-large", "offset": 0x000, "bytes_per_glyph": 8, "width": 8, "height": 8,
-     "note": "大字型；本輪尚未指認其在畫面上的使用位置"},
+     "note": "大字型；已指認的畫面用途是角色圖像層的上下箭頭（codepoint 94／95）"},
     {"name": "book-small", "offset": 0x2E8, "bytes_per_glyph": 6, "width": 8, "height": 6,
      "note": "書本內文字型；HUMAN 五字模已由原版畫面逐 byte 命中"},
 ]

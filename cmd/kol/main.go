@@ -77,6 +77,7 @@ type shotJob struct {
 type game struct {
 	sprites *spriteCache
 	small   *font.Font
+	large   *font.Font
 	canvas  *screen.Canvas
 	state   *charcreate.State
 
@@ -113,7 +114,7 @@ func (g *game) render() error {
 		}
 		g.canvas.DrawAt(portrait, book.PortraitOrigin.X, book.PortraitOrigin.Y)
 	case sceneScript:
-		return ui.NewCharacter(g.canvas.Image(), g.sprites, g.small, g.state)
+		return ui.NewCharacter(g.canvas.Image(), g.sprites, g.small, g.large, g.state)
 	default:
 		return fmt.Errorf("未知場景 %q", g.scene)
 	}
@@ -224,6 +225,11 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+	large, err := font.Load(*fontRoot, "book-large")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 	data, err := chardata.Load(*dataPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -233,6 +239,7 @@ func main() {
 	g := &game{
 		sprites:  &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
 		small:    small,
+		large:    large,
 		canvas:   screen.NewCanvas(),
 		state:    charcreate.New(data, &lcg{state: uint32(*seed)}),
 		scene:    scene(*sceneName),

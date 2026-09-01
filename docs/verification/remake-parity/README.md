@@ -24,6 +24,13 @@ tools/run_kol_headless.sh -script "t e s t RET RET RET RET" \
 python3 tools/verify_remake_parity.py \
     --plan docs/verification/remake-parity/plan-newchar-steps.json \
     --out docs/verification/remake-parity/newchar-steps.json
+
+tools/run_kol_headless.sh \
+    -script "z e d RET RET RET RET DOWN RET LEFT$(printf ' RIGHT%.0s' $(seq 81))" \
+    -shot-dir docs/verification/remake-parity/shots/newchar-pictures
+python3 tools/verify_remake_parity.py \
+    --plan docs/verification/remake-parity/plan-newchar-pictures.json \
+    --out docs/verification/remake-parity/newchar-pictures.json
 ```
 
 remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
@@ -34,15 +41,19 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 
 ## 目前結果
 
-`book-screens.json`：83 對，83 通過，0 失敗。
-`newchar-steps.json`：9 對，9 通過，0 失敗。
+| 收據 | 對數 | 通過 |
+|---|---:|---:|
+| `book-screens.json`（封面、目錄頁、空白 New Character 頁） | 3 | 3 |
+| `newchar-steps.json`（名字→擲屬性，對 `reroll-run1`） | 9 | 9 |
+| `newchar-pictures.json`（完整流程＋80 張圖像循環，對 `picture-cycle-run1`） | 92 | 92 |
+
+三份收據的允許差異區之外都是**零像素差**。
 
 | 對拍項目 | 允許差異區實際差異 | 結果 |
 |---|---|---|
 | 書本封面 | 原版滑鼠游標 50 px | 通過 |
 | 目錄頁 | 原版滑鼠游標 55 px | 通過 |
 | 空白 New Character 頁 | 名字欄殘留字元 31 px | 通過 |
-| New Character 角色圖像 selector 0–79（80 對） | 游標 55 px、左頁文字 6,524 px、右頁文字與選單 3,979 px | 通過 |
 
 - 書本封面與目錄頁在游標以外**完全相同**：這兩個畫面在原版是整張烘好的 BOOKPICS
   素材，remake 直接畫同一張抽取 PNG。
@@ -66,6 +77,11 @@ remake 以固定腳本 `t e s t RET RET RET RET`（seed 1）重播名字→種�
 | 職業層 | frame-081 | 頁尾殘影 112 px、滑鼠 55 px | 通過 |
 | 擲屬性層 | frame-082 | 頁尾殘影 112 px、滑鼠 55 px、數值欄 163 px | 通過 |
 
+`newchar-pictures.json` 走得更遠：名字 `zed`、完整五層、進圖像層之後向左回繞一次、
+再向右走完 80 張並回到起點，共 92 張畫面。圖像層的右頁說明、`CANCEL   ACCEPT` 提示、
+青色雙格外框、名牌白字與右側上下箭頭都由狀態機畫出來，全部逐像素相同；80 張圖像的
+blit 矩形 (208,106,40×38) 另外列為必須相同區。
+
 四類允許差異的成因都查證過（RE-045）：
 
 - **頁尾殘影**是原版行為，不是 remake 缺漏。原版把展開跨頁貼到前一個書本畫面之上時，
@@ -80,7 +96,8 @@ remake 以固定腳本 `t e s t RET RET RET RET`（seed 1）重播名字→種�
 
 ## 這份收據不宣稱什麼
 
-- 不宣稱角色建立已完成。存檔寫入、16 槽管理、重名與名字欄字元集合都還沒對拍。
+- 不宣稱角色建立已完成。接受圖像後寫入 CHARDATA、16 槽管理、重名與名字欄字元集合
+  都還沒對拍。
 - 不宣稱動畫對拍。TITLE 標題序列與翻頁動畫尚未實作，也還沒建立逐幀時間軸的比較方式。
 - 不宣稱繁中排版已決策。目前 remake 畫的是原版英文字模，不是譯文；雙模式（英文字模
   嚴格對拍模式＋中文大字格模式）已決策方向但尚未實作。

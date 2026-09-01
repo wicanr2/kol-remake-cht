@@ -21,7 +21,7 @@ type Sprites interface {
 }
 
 // NewCharacter 畫出 New Character 頁的目前狀態。
-func NewCharacter(dst *ebiten.Image, sprites Sprites, small *font.Font,
+func NewCharacter(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	st *charcreate.State) error {
 	bg, err := sprites.Get("BOOKPICS", book.OpenSpread)
 	if err != nil {
@@ -129,13 +129,40 @@ func NewCharacter(dst *ebiten.Image, sprites Sprites, small *font.Font,
 			return err
 		}
 		draw(dst, sel, book.SelectHeading.X, book.SelectHeading.Y)
+		for i, line := range book.PictureInstructions {
+			text(dst, small, book.RightList.X, book.RightList.Y+i*book.RightList.Step,
+				line, book.ColourInactive)
+		}
+		f := book.PortraitFrame
+		fill(dst, f.X, f.Y, f.Width, f.Height, book.ColourInactive)
+		fill(dst, f.X+1, f.Y+1, f.Width-2, f.Divider-f.Y-1, book.ColourValue)
+		fill(dst, f.X+1, f.Divider+1, f.Width-2, f.Y+f.Height-f.Divider-2,
+			book.ColourValue)
+
 		portrait, err := sprites.Get("CHARPICS", st.Portrait)
 		if err != nil {
 			return err
 		}
 		draw(dst, portrait, book.PortraitOrigin.X, book.PortraitOrigin.Y)
+		small.Draw(dst, book.PortraitName.X, book.PortraitName.Y, st.Name,
+			book.PageInk.R, book.PageInk.G, book.PageInk.B)
+
+		act := book.PictureActions
+		text(dst, small, act.X, act.Y, act.Text, [3]uint8{act.R, act.G, act.B})
+
+		a := book.PortraitArrows
+		text(dst, large, a.X, a.Up, string(a.UpRune), book.ColourValue)
+		text(dst, large, a.X, a.Down, string(a.DownRune), book.ColourValue)
 	}
 	return nil
+}
+
+func fill(dst *ebiten.Image, x, y, w, h int, c [3]uint8) {
+	rect := ebiten.NewImage(w, h)
+	rect.Fill(color.RGBA{c[0], c[1], c[2], 0xFF})
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(float64(x), float64(y))
+	dst.DrawImage(rect, op)
 }
 
 func draw(dst, src *ebiten.Image, x, y int) {

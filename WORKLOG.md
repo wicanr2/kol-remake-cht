@@ -1086,3 +1086,18 @@
   以及「索引 0 當透明」不成立（2857 個黑像素只有 100 個透出前一畫面）。
 - 全部建置與比對使用有界 `docker run --rm --network none`（Go `--memory 3g --cpus 2`，
   比對 `--memory 1–2g --cpus 1–2`）；結束檢查沒有容器殘留，其他專案資源未動。
+
+## 2026-09-01：圖像層版面與完整流程 92 對逐畫面對拍
+
+- 把角色建立的圖像層畫完：右頁五行說明（`USE ARROW KEYS` …）、底部的
+  `CANCEL   ACCEPT`、青色雙格外框、名牌白字與右側上下箭頭。字串全部用
+  `tools/read_text_from_frame.py` 以抽出的原版字型逐格讀回，座標由原版畫面量得。
+- 上下箭頭是 8×8 大字型的 codepoint 94／95，字模逐 byte 命中。`extract_fonts.py` 的
+  大字型註記與 manifest 同步改寫，重跑抽取器產出的 manifest 與手改後逐 byte 相同。
+- 新增 `plan-newchar-pictures.json`：`z e d` 建到圖像層，先向左回繞一次，再向右走完
+  80 張並回到起點，共 92 對；92 對全通過，允許差異區之外零像素差。80 張圖像的
+  blit 矩形另列為必須相同區。
+- `plan-book-screens.json` 的 80 張圖像對拍由上述計畫取代（原本把左右頁文字整片列為
+  允許差異，現在文字全部受檢），該計畫縮為封面、目錄頁與空白 New Character 頁三對，
+  對應的 `shots/newchar-0*.png` 一併移除。
+- 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。
