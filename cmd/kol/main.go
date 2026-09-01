@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"flag"
 	"image"
@@ -13,6 +14,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -110,6 +112,80 @@ func writeRGBA(path string, img *image.RGBA) error {
 	}
 	defer f.Close()
 	return png.Encode(f, img)
+}
+
+// runCharacterWrite 用 remake 的 writer 產出一筆槽位記錄，供與原版實際寫入逐 byte 對拍。
+// 樣板是本機的原版 CHARDATA，不入庫；輸出也只作本機比對。
+func runCharacterWrite(outPath, templatePath string, slot int, contractPath,
+	itemPath, chardataOut string, c chardata.NewCharacter, stats string) error {
+	if templatePath == "" {
+		return fmt.Errorf("需要 -chardata-template")
+	}
+	raw, err := os.ReadFile(templatePath)
+	if err != nil {
+		return err
+	}
+	if len(raw) != chardata.RecordBytes*chardata.SlotCount {
+		return fmt.Errorf("樣板長度 %d 不是 %d", len(raw),
+			chardata.RecordBytes*chardata.SlotCount)
+	}
+	if slot < 0 || slot >= chardata.SlotCount {
+		return fmt.Errorf("槽位 %d 超出範圍", slot)
+	}
+	parts := strings.Split(stats, ",")
+	if len(parts) != 7 {
+		return fmt.Errorf("-chardata-stats 需要七個值")
+	}
+	for i, p := range parts {
+		v, err := strconv.Atoi(strings.TrimSpace(p))
+		if err != nil {
+			return fmt.Errorf("屬性 %d 不是整數：%w", i, err)
+		}
+		c.Primary[i] = v
+	}
+	contracts, err := chardata.LoadContracts(contractPath)
+	if err != nil {
+		return err
+	}
+	contract, ok := contracts.Get(c.ProfessionIndex)
+	if !ok {
+		return fmt.Errorf("沒有職業記錄 %d 的起始契約", c.ProfessionIndex)
+	}
+	items, err := chardata.LoadItemTemplates(itemPath)
+	if err != nil {
+		return err
+	}
+	base := slot * chardata.RecordBytes
+	record, err := chardata.WriteRecord(raw[base:base+chardata.RecordBytes], c,
+		contract, items)
+	if err != nil {
+		return err
+	}
+	doc := map[string]any{
+		"schema": "kol-chardata-write-v1", "slot": slot,
+		"character": map[string]any{"name": c.Name, "race": c.Race,
+			"secondary": c.Secondary, "profession_index": c.ProfessionIndex,
+			"primary_internal": c.Primary},
+		"contract": contract,
+		"written_offsets": chardata.WrittenOffsets(),
+		"record_hex": hex.EncodeToString(record),
+	}
+	blob, err := json.MarshalIndent(doc, "", "  ")
+	if err != nil {
+		return err
+	}
+	if err := os.WriteFile(outPath, append(blob, '\n'), 0o644); err != nil {
+		return err
+	}
+	if chardataOut != "" {
+		updated := make([]byte, len(raw))
+		copy(updated, raw)
+		copy(updated[base:base+chardata.RecordBytes], record)
+		if err := os.WriteFile(chardataOut, updated, 0o644); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 type spriteCache struct {
@@ -409,6 +485,25 @@ func main() {
 		"標題序列兩處亂數的取法：rng 依 seed 重播，first／second 固定取第一或第二個選項")
 	scaleFlag := flag.Int("scale", 3, "視窗放大倍率")
 	listAssets := flag.Bool("list-assets", false, "只列出 manifest 摘要後結束")
+	writeRecord := flag.String("chardata-write", "",
+		"把一筆角色記錄寫成 JSON 後結束，供 tools/verify_chardata_write.py 對拍")
+	writeTemplate := flag.String("chardata-template", "",
+		"槽位樣板檔（本機的原版 CHARDATA），與 -chardata-slot 搭配")
+	writeSlot := flag.Int("chardata-slot", 14, "要寫入的槽位編號")
+	writeName := flag.String("chardata-name", "zed", "要寫入的角色名字")
+	writeRace := flag.Int("chardata-race", 0, "種族 enum")
+	writeSecondary := flag.Int("chardata-secondary", 0, "secondary selector")
+	writeProfession := flag.Int("chardata-profession", 0, "職業記錄索引")
+	writeStats := flag.String("chardata-stats", "", "七個逗號分隔的內部屬性值")
+	writeScript := flag.String("chardata-script", "",
+		"改用操作腳本跑完整個建立流程，把結果寫進槽位；與 -chardata-stats 二選一")
+	writeOut := flag.String("chardata-out", "",
+		"把寫入後的完整 CHARDATA 存到這個檔案（含原版樣板 bytes，只作本機比對）")
+	itemTemplates := flag.String("chardata-items",
+		"assets/original-derived-data/item-templates.json", "ITEM.LST 物品樣板")
+	writerSummary := flag.String("chardata-contract",
+		"docs/re/ida-fingerprints/KOLBOOK-character-writer-summary.json",
+		"職業起始契約（IDA 安全摘要）")
 	dumpLayout := flag.String("dump-cjk-layout", "",
 		"把中文模式的版面座標寫成 JSON 後結束，供文字安全矩形檢查使用")
 	lang := flag.String("lang", "en", "介面語言：en 走原版英文字模的嚴格對拍模式，"+
@@ -422,6 +517,45 @@ func main() {
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
+	}
+	if *writeRecord != "" {
+		spec := chardata.NewCharacter{
+			Name: *writeName, Race: *writeRace, Secondary: *writeSecondary,
+			ProfessionIndex: *writeProfession,
+		}
+		stats := *writeStats
+		if *writeScript != "" {
+			createData, err := chardata.Load(*dataPath)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			st := charcreate.New(createData, &lcg{state: uint32(*seed)})
+			for _, token := range strings.Fields(*writeScript) {
+				if err := applyToken(st, token); err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(2)
+				}
+			}
+			if st.Stage != charcreate.StageDone {
+				fmt.Fprintf(os.Stderr, "腳本沒有走到完成，停在第 %d 層\n", st.Stage)
+				os.Exit(2)
+			}
+			spec = chardata.NewCharacter{Name: st.Name, Race: st.Race,
+				Secondary: st.Secondary,
+				ProfessionIndex: st.ProfessionRecordIndex()}
+			values := make([]string, 0, 7)
+			for _, v := range st.Primary {
+				values = append(values, strconv.Itoa(v))
+			}
+			stats = strings.Join(values, ",")
+		}
+		if err := runCharacterWrite(*writeRecord, *writeTemplate, *writeSlot,
+			*writerSummary, *itemTemplates, *writeOut, spec, stats); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		return
 	}
 	if *dumpLayout != "" {
 		raw, err := json.MarshalIndent(map[string]any{

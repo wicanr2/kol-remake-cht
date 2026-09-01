@@ -122,6 +122,25 @@ SCENARIOS: dict[str, dict] = {
             step("角色清單取消之後", None, settle=3.0),
         ],
     },
+    "accept-and-save-ranger": {
+        "description": "同 accept-and-save，但職業層往下一項（RANGER）。用來把"
+                       "「武器 selector → ITEM.LST 記錄索引」的對應再取兩個資料點，"
+                       "避免只靠單一職業推廣。",
+        "steps": list(PRELUDE) + [
+            step("名字層", "r", settle=1.5),
+            step("名字欄 r", "a", settle=1.2),
+            step("名字欄 ra", "n", settle=1.2),
+            step("名字欄 ran", "Return", settle=1.5),
+            step("種族層（選 HUMAN）", "Return", settle=2.5),
+            step("性別層（選 MALE）", "Return", settle=2.5),
+            step("職業層（反白第一項）", "Down", settle=2.0),
+            step("職業層（選第二項）", "Return", settle=3.0),
+            step("屬性頁（反白 REROLL STATS）", "Down", settle=3.0),
+            step("屬性頁（反白 ACCEPT STATS）", "Return", settle=3.0),
+            step("圖像層（selector 0）", "Return", settle=3.0),
+            step("接受圖像之後", None, settle=4.0),
+        ],
+    },
     "prelude": {
         "description": "正常玩家路徑走到 New Character 名字輸入層。",
         "steps": list(PRELUDE) + [step("新角色名字層", None, settle=3.0)],

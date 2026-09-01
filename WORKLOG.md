@@ -1196,3 +1196,19 @@
 - 文字安全矩形檢查擴充到 110 項（含右頁 12 項清單、六項選單、16 槽清單的底緣），全過。
   書頁底緣裝飾從原版第 190 列開始，安全矩形因此收到 y=380。
 - 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。
+
+## 2026-09-01：角色寫入的逐 byte 對拍
+
+- 以 `--save-character-files` 重跑 `accept-and-save`，取得原版寫入前後的 `CHARDATA`。
+  原版只改動槽位裡的 58 個 byte。判準因此不是檔案雜湊相同（屬性是擲骰的，不可能一樣），
+  而是「原版改動的每一個 byte，remake 都要寫出相同的值，且不能寫錯或多寫」。
+- 欄位語意大部分早就在 `KOLBOOK-character-writer-summary.json`；本輪補上兩件事：
+  金冠是 **big-endian**（摘要記成 little-endian，該處為誤），以及起始武器樣板來自
+  `ITEM.LST`（61 筆 × 16 bytes）。
+- **一個被推翻的推論**：只有 BARBARIAN 一筆資料時，`ITEM.LST` 索引看起來等於武器
+  selector ＋ 3（兩個點都成立）。特地跑第二個職業（新增 `accept-and-save-ranger` 情境）
+  才發現 BR 9→5、LB 3→25 完全不是算術關係。**一筆資料能支持的推論比看起來少得多**；
+  現在只登記觀測過的職業，writer 對未觀測職業直接失敗，不寫猜出來的索引。
+- 結果：BARBARIAN 與 RANGER 各 58/58 逐 byte 相同、寫錯 0、多寫 0。
+- 建立→寫入→清單閉環：用腳本建立 `kai` 寫進槽位 14 之後重新讀出清單，14 列變 15 列。
+- 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。

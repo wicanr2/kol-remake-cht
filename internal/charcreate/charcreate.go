@@ -232,6 +232,16 @@ func (s *State) reset() {
 	s.summaryVisible = false
 }
 
+// ProfessionRecordIndex 是目前選定職業在 39 筆記錄裡的索引；寫入槽位時用的是這個值，
+// 不是群組內的序號。
+func (s *State) ProfessionRecordIndex() int {
+	ps := s.Professions()
+	if s.Profession >= len(ps) {
+		return 0
+	}
+	return ps[s.Profession].RecordIndex
+}
+
 // Roll 依職業記錄重擲全部主要屬性並重算衍生值。
 func (s *State) Roll() {
 	ps := s.Professions()

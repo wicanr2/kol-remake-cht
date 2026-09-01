@@ -1252,3 +1252,30 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
 - 對拍收據：`plan-book-menu.json` 16 對、`plan-book-roster.json` 20 對，全部通過。
 - **限制**：槽位其他欄位（種族、職業、屬性、金冠、裝備）的位移尚未反追；
   `HARBOR MASTER` 的功能未探；remake 建立的角色還不會寫回 `CHARDATA`。
+
+## RE-050：角色寫入的逐 byte 重現與武器樣板來源
+
+- 以 `--save-character-files` 重跑 `accept-and-save`，取得原版寫入前後的 `CHARDATA`。
+  原版把角色寫進槽位 14，**只改動 58 個 byte**，全部落在槽位的 0x00–0x63 之間。
+- 對照畫面上讀回的十個屬性值，槽位 `0x1d`–`0x23` 存的是**內部值**（畫面值＝
+  `floor(內部值 × 100 / 150)`），逐一吻合。
+- **金冠是 big-endian**：職業字表（dgroup+0x1CC）裡是 little-endian 的 `dc 05`＝1500，
+  寫進槽位 `0x2b` 時是 `05 DC`。`KOLBOOK-character-writer-summary.json` 記成
+  little-endian，該處為誤；big-endian 與原版讀圖片張數時的 `xchg al, ah` 一致。
+- **職業 metadata（dgroup+0x108，39×5）的第一個 byte 是兩個 selector 的 nibble**：
+  高 nibble 是副武器 selector、低 nibble 是主武器 selector（BARBARIAN `0x84` →
+  HL(8)/GS(4)；RANGER `0x39` → LB(3)/BR(9)）。其後四個 byte 依序是副武器兩個技能值、
+  主武器兩個技能值。兩筆記錄都吻合。
+- **起始武器樣板來自 `ITEM.LST`**（976 bytes ＝ 61 筆 × 16 bytes）：主武器整筆 16 bytes
+  抄到槽位 `0x30`，主武器的前 8 bytes 再抄到 `0x4a`、第 13 byte 抄到 `0x52`；
+  副武器的前 8 bytes 抄到 `0x57`、第 13 byte 抄到 `0x5f`。
+- **一個被推翻的推論**：只有一筆資料時，`ITEM.LST` 索引看起來等於 selector ＋ 3
+  （GS 4→7、HL 8→11 都成立）。跑第二個職業才發現 BR 9→5、LB 3→25，關係不是算術的；
+  在 EXE 內以「T[4]=7, T[8]=11, T[9]=5, T[3]=25」搜尋也找不到對應的位元組表。
+  **通則仍未知**，因此只登記觀測過的職業，writer 對未觀測職業直接失敗。
+- **對拍結果**：`internal/chardata` 的 writer 對 BARBARIAN 與 RANGER 各 58/58 個 byte
+  逐一相同，寫錯 0、多寫 0（`docs/verification/chardata-write/`）。兩筆是不同職業、
+  不同武器、不同擲骰結果。
+- **限制**：REGION 中繼資料的來源（`region_metadata_copy_map`）在本例中與槽位樣板相同，
+  因此無法分辨原版是否真的寫過；其餘 37 個職業的武器物品索引未觀測；
+  `ITEM.LST` 記錄內部欄位的語意未知。
