@@ -186,20 +186,27 @@ def main() -> int:
         oy = (index // columns) * CELL_PITCH + DRAW_MARGIN + yoff
         cx = (index % columns) * cell
         cy = (index // columns) * cell_h
-        bits = []
+        bits, ink_right = [], -1
         for y in range(cell_h):
             value = 0
             for x in range(cell):
                 on = grey[(oy + y) * width + ox + x] >= args.threshold
                 value = (value << 1) | (1 if on else 0)
                 if on:
+                    ink_right = max(ink_right, x)
                     o = ((cy + y) * sheet_w + cx + x) * 4
                     pixels[o:o + 4] = b"\xff\xff\xff\xff"
             bits.append(value)
+        # 漢字是全形，固定一格；ASCII 是比例字，字寬取墨跡右緣加一個間隙，
+        # 否則以半形固定字距畫會把相鄰字模切掉。
+        if ord(ch) > ASCII_MAX:
+            advance = cell
+        else:
+            advance = min(cell, max(4, ink_right + 2))
         glyphs.append({
             "codepoint": ord(ch), "character": ch,
             "sheet_column": index % columns, "sheet_row": index // columns,
-            "advance": cell // 2 if ord(ch) <= ASCII_MAX else cell,
+            "advance": advance,
             "rows_hex": "".join("%04x" % v for v in bits),
         })
 

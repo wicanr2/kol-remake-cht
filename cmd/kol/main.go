@@ -23,6 +23,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/chardata"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
+	"github.com/wicanr2/kol-remake-cht/internal/roster"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/title"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
@@ -39,9 +40,11 @@ const (
 	sceneTitle      scene = "title"
 	sceneScriptCJK  scene = "script-cjk"
 	sceneBookOpen   scene = "book-open"
+	sceneMenu       scene = "menu"
+	sceneRoster     scene = "roster"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -140,16 +143,21 @@ type game struct {
 	large   *font.Font
 	cjk     *font.Font
 	strings *i18n.Table
+	roster  *roster.Roster
 	canvas  *screen.Canvas
 	state   *charcreate.State
 	sequence *title.Sequence
 	player   *title.Player
-	book     *book.OpenPlayer
-	bookAnim *book.OpenAnimation
-	bookWait float64
+	book       *book.OpenPlayer
+	bookAnim   *book.OpenAnimation
+	bookWait   float64
+	bookFrom   string // 動畫的起始畫面
+	bookTarget string // 動畫的目標畫面
+	bookLib    *assets.Library
 
 	scene    scene
 	portrait int
+	selected int
 	frame    title.Frame
 
 	jobs  []shotJob
@@ -185,7 +193,22 @@ func (g *game) render() error {
 		return ui.NewCharacter(g.canvas.Image(), g.sprites, g.small, g.large, g.state)
 	case sceneScriptCJK:
 		return ui.NewCharacterCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.state)
+	case sceneRoster:
+		if g.strings != nil {
+			return ui.RosterCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings,
+				g.roster.Occupied())
+		}
+		return ui.Roster(g.canvas.Image(), g.sprites, g.small, g.roster.Occupied())
+	case sceneMenu:
+		if g.strings != nil {
+			return ui.CharacterOptionsCJK(g.canvas.Image(), g.sprites, g.cjk,
+				g.strings, g.selected)
+		}
+		return ui.CharacterOptions(g.canvas.Image(), g.sprites, g.small, g.selected)
 	case sceneBookOpen:
+		if err := g.ensureBookPlayer(); err != nil {
+			return err
+		}
 		g.canvas.Image().WritePixels(g.book.Image().Pix)
 		return nil
 	case sceneTitle:
@@ -210,6 +233,65 @@ func (g *game) render() error {
 		return fmt.Errorf("未知場景 %q", g.scene)
 	}
 	return nil
+}
+
+// ensureBookPlayer 在遊戲迴圈內建立翻書動畫的播放器。
+//
+// 動畫的來源是「畫好的目標頁」，因此要先把目標畫面畫進離屏畫布再讀回；這一步只能在
+// 繪圖環境就緒之後做，所以延後到第一次繪製時。
+func (g *game) ensureBookPlayer() error {
+	if g.book != nil {
+		return nil
+	}
+	start, err := g.renderPage(g.bookFrom)
+	if err != nil {
+		return err
+	}
+	source, err := g.renderPage(g.bookTarget)
+	if err != nil {
+		return err
+	}
+	player, err := book.NewOpenPlayer(g.bookAnim, start, source)
+	if err != nil {
+		return err
+	}
+	g.book = player
+	return nil
+}
+
+// renderPage 把一頁畫進離屏畫布再讀回。翻書動畫的起點與來源都是「畫好的那一頁」，
+// 而這一步只能在繪圖環境就緒之後做，所以延後到第一次繪製時。
+func (g *game) renderPage(name string) (*image.RGBA, error) {
+	aux := screen.NewCanvas()
+	switch name {
+	case "cover", "contents":
+		index := book.Cover
+		if name == "contents" {
+			index = book.Contents
+		}
+		img, err := g.sprites.Get("BOOKPICS", index)
+		if err != nil {
+			return nil, err
+		}
+		aux.DrawAt(img, 0, 0)
+	case "menu":
+		// 動畫期間沒有任何項目反白——反白是在動畫結束之後才畫上去的。
+		// 這一點由原版 accept-and-save-run1 的 frame-036、039–043 逐像素確認。
+		if err := ui.CharacterOptions(aux.Image(), g.sprites, g.small, -1); err != nil {
+			return nil, err
+		}
+	case "menu-selected":
+		if err := ui.CharacterOptions(aux.Image(), g.sprites, g.small, g.selected); err != nil {
+			return nil, err
+		}
+	case "roster":
+		if err := ui.Roster(aux.Image(), g.sprites, g.small, g.roster.Occupied()); err != nil {
+			return nil, err
+		}
+	default:
+		return nil, fmt.Errorf("未知的書頁 %q", name)
+	}
+	return aux.Snapshot(), nil
 }
 
 func (g *game) Update() error {
@@ -305,6 +387,9 @@ func main() {
 		"角色建立 typed data")
 	sceneName := flag.String("scene", string(sceneCover), "要繪製的場景")
 	portrait := flag.Int("portrait", 0, "newchar 場景使用的角色圖像圖號")
+	menuSelected := flag.Int("menu-selected", 0, "menu 場景反白的項目索引")
+	rosterPath := flag.String("roster",
+		"assets/original-derived-data/character-roster.json", "角色槽位 typed data")
 	shot := flag.String("shot", "", "單張截圖輸出路徑")
 	shotDir := flag.String("shot-dir", "", "批次截圖輸出目錄")
 	script := flag.String("script", "", "以空白分隔的操作腳本；每一步後截一張圖")
@@ -316,6 +401,8 @@ func main() {
 		"assets/original-derived-data/book-open-animation.json", "翻書動畫參數表")
 	bookShots := flag.String("book-shot-dir", "",
 		"把翻書動畫的每一步輸出到這個目錄")
+	bookTransition := flag.String("book-transition", "open",
+		"翻書動畫的段落：open 是封面翻到目錄頁，menu 是目錄頁翻到角色選項頁")
 	titleTimeline := flag.String("title-timeline", "",
 		"把一輪標題序列的時間軸寫成 JSON 後結束")
 	titleChoice := flag.String("title-choice", "rng",
@@ -385,6 +472,14 @@ func main() {
 		}
 	}
 
+	var slots *roster.Roster
+	if scene(*sceneName) == sceneRoster || (*bookShots != "" && *bookTransition == "roster") {
+		if slots, err = roster.Load(*rosterPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
+
 	data, err := chardata.Load(*dataPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -408,28 +503,30 @@ func main() {
 		state:    charcreate.New(data, &lcg{state: uint32(*seed)}),
 		scene:    scene(*sceneName),
 		portrait: *portrait,
+		selected: *menuSelected,
+		roster:   slots,
 	}
 
-	if scene(*sceneName) == sceneBookOpen {
+	if scene(*sceneName) == sceneBookOpen || *bookShots != "" {
 		anim, err := book.LoadOpenAnimation(*bookAnimPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		cover, err := rgbaFrom(lib, "BOOKPICS", book.Cover)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		contents, err := rgbaFrom(lib, "BOOKPICS", book.Contents)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
 		g.bookAnim = anim
-		if g.book, err = book.NewOpenPlayer(anim, cover, contents); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
+		g.bookLib = lib
+		switch *bookTransition {
+		case "open":
+			g.bookFrom, g.bookTarget = "cover", "contents"
+		case "menu":
+			g.bookFrom, g.bookTarget = "contents", "menu"
+		case "roster":
+			// 進入清單時，原版先把反白拿掉再開始捲動：frame-045 還有反白，
+			// frame-046 起就沒有了。
+			g.bookFrom, g.bookTarget = "menu", "roster"
+		default:
+			fmt.Fprintf(os.Stderr, "未知的 -book-transition %q\n", *bookTransition)
+			os.Exit(2)
 		}
 	}
 	if scene(*sceneName) == sceneTitle {
@@ -445,42 +542,15 @@ func main() {
 
 	switch {
 	case *bookShots != "":
-		anim, err := book.LoadOpenAnimation(*bookAnimPath)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		cover, err := rgbaFrom(lib, "BOOKPICS", book.Cover)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		contents, err := rgbaFrom(lib, "BOOKPICS", book.Contents)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		player, err := book.NewOpenPlayer(anim, cover, contents)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		if err := os.MkdirAll(*bookShots, 0o755); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		for i := 0; ; i++ {
-			path := filepath.Join(*bookShots, fmt.Sprintf("open-%03d.png", i))
-			if err := writeRGBA(path, player.Image()); err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				os.Exit(1)
+		g.scene = sceneBookOpen
+		for i := 0; i <= len(g.bookAnim.Steps); i++ {
+			job := shotJob{name: fmt.Sprintf("open-%03d", i),
+				path: filepath.Join(*bookShots, fmt.Sprintf("open-%03d.png", i))}
+			if i > 0 {
+				job.apply = func() { g.book.Step() }
 			}
-			fmt.Printf("open-%03d %s\n", i, path)
-			if !player.Step() {
-				break
-			}
+			g.jobs = append(g.jobs, job)
 		}
-		return
 	case *titleTimeline != "":
 		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
 		if err != nil {

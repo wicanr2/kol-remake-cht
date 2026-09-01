@@ -104,7 +104,24 @@ def _name_length_steps() -> list[dict]:
     return steps
 
 
+# 走到角色清單的前置：目錄頁按 5 之後，角色選項選單預設就反白 LIST CHARACTERS，
+# 因此不必先按 Down。
+LIST_PRELUDE = [
+    step("TITLE 標題序列", "space", delay=8.0),
+    step("書本封面", "space", settle=2.5),
+    step("目錄頁", "5", settle=2.5),
+]
+
 SCENARIOS: dict[str, dict] = {
+    "list-characters": {
+        "description": "從角色選項選單選 LIST CHARACTERS，擷取角色清單畫面，"
+                       "再取消回到選單；全程不建立、不刪除、不保存任何角色。",
+        "steps": list(LIST_PRELUDE) + [
+            step("角色選項選單（反白 LIST CHARACTERS）", "Return", settle=3.0),
+            step("角色清單", "Escape", settle=2.5),
+            step("角色清單取消之後", None, settle=3.0),
+        ],
+    },
     "prelude": {
         "description": "正常玩家路徑走到 New Character 名字輸入層。",
         "steps": list(PRELUDE) + [step("新角色名字層", None, settle=3.0)],

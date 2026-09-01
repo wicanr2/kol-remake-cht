@@ -44,3 +44,6 @@ Thumbs.db
 # Python 暫存
 __pycache__/
 *.pyc
+
+# oracle 執行時的模擬器 log，不是證據
+docs/verification/character-ui/*/dosbox.log

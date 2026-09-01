@@ -1,0 +1,258 @@
+{
+  "name": "book-menu-transition",
+  "description": "remake 從目錄頁翻到角色選項頁：同一張動畫參數表，來源是還沒反白的角色選項頁；動畫結束之後才把 LIST CHARACTERS 反白。對原版 accept-and-save-run1 逐張對拍。",
+  "input": {
+    "command": "tools/run_kol_headless.sh -book-shot-dir docs/verification/remake-parity/shots/book-menu -book-transition menu"
+  },
+  "note": "原版擷取的 frame-027、037、038 沒有進計畫：那三張是取樣落在整張搬移途中的畫面。",
+  "pairs": [
+    {
+      "label": "目錄頁（動畫起點）",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-000.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-026.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 4 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-004.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-028.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 6 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-006.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-029.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 8 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-008.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-030.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 10 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-010.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-031.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 12 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-012.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-032.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 14 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-014.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-033.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 16 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-016.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-034.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 18 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-018.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-035.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 20 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-020.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-036.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 27 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-027.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-039.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 29 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-029.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-040.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 31 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-031.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-041.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 33 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-033.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-042.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "翻頁第 35 步",
+      "remake": "docs/verification/remake-parity/shots/book-menu/open-035.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-043.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "角色選項頁（反白 LIST CHARACTERS）",
+      "remake": "docs/verification/remake-parity/shots/menu.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-044.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素；動畫期間游標會被捲動帶走。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "x": 24,
+          "y": 190,
+          "width": 146,
+          "height": 9
+        }
+      ]
+    }
+  ]
+}

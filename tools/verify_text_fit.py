@@ -77,6 +77,11 @@ def main() -> int:
     check("heading", "Select one", layout["RightX"], right_right)
     for item in table["labels"]:
         check("label", item["en"], layout["FieldX"], layout["ColonX"])
+    for en in ("Character options", "LIST CHARACTERS", "CREATE CHARACTER",
+               "DELETE CHARACTER", "EDIT PICTURE", "EDIT SHIELD", "HARBOR MASTER"):
+        check("menu", en, layout["MenuX"], left_right)
+    check("heading", "Character names", layout["HeadingX"], left_right)
+    check("heading", "Location", layout["RightX"], right_right)
     for item in table["races"] + table["secondary"]:
         check("value", item["en"], layout["ValueX"], left_right)
     seen = set()
@@ -96,19 +101,32 @@ def main() -> int:
     widest = max(advance[chr(c)] for c in range(0x21, 0x7F) if chr(c) in advance)
     name_width = widest * 16
     checks.append({"kind": "name", "en": "name field capacity 16",
-                   "zh": "", "x": layout["ValueX"], "width": name_width,
+                   "zh": "", "x": layout["FieldX"], "width": name_width,
                    "right_limit": left_right,
-                   "overflow": max(0, layout["ValueX"] + name_width - left_right),
+                   "overflow": max(0, layout["FieldX"] + name_width - left_right),
                    "missing_glyphs": [],
-                   "pass": layout["ValueX"] + name_width <= left_right})
+                   "pass": layout["FieldX"] + name_width <= left_right})
 
     # 最後一列的底緣要留在文字安全矩形內。
-    bottom = layout["AttrY"] + 9 * layout["AttrStep"] + font["cell"]["height"]
     limit = box["LeftY"] + box["LeftH"]
-    checks.append({"kind": "vertical", "en": "attribute rows",
-                   "zh": "", "x": 0, "width": bottom, "right_limit": limit,
-                   "overflow": max(0, bottom - limit), "missing_glyphs": [],
-                   "pass": bottom <= limit})
+    right_limit_y = box["RightY"] + box["RightH"]
+    for name, bottom, lim in (
+            ("attribute rows",
+             layout["AttrY"] + 9 * layout["AttrStep"] + font["cell"]["height"], limit),
+            ("right page list (12 items)",
+             layout["RightListY"] + 11 * layout["RightStep"] + font["cell"]["height"],
+             right_limit_y),
+            ("character options menu",
+             layout["MenuY"] + 5 * layout["MenuStep"] + font["cell"]["height"], limit),
+            ("roster (16 slots)",
+             layout["RosterY"] + 15 * layout["RosterStep"] + font["cell"]["height"],
+             limit)):
+        checks.append({"kind": "vertical", "en": name, "zh": "", "x": 0,
+                       "width": bottom, "right_limit": lim,
+                       "overflow": max(0, bottom - lim), "missing_glyphs": [],
+                       "pass": bottom <= lim})
+    bottom = 0
+
 
     failed = [c for c in checks if not c["pass"]]
     receipt = {"schema": "kol-cjk-text-fit-v1",

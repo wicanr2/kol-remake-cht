@@ -50,8 +50,15 @@ func NewCharacterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 		return false
 	}
 	rowY := func(i int) int {
-		if i < book.RowFirstAttribute {
-			return l.FieldY + i*l.FieldStep
+		switch i {
+		case book.RowName:
+			return l.NameLabelY
+		case book.RowRace:
+			return l.RaceY
+		case book.RowSecondary:
+			return l.SecondaryY
+		case book.RowClass:
+			return l.ClassY
 		}
 		return l.AttrY + (i-book.RowFirstAttribute)*l.AttrStep
 	}
@@ -88,16 +95,21 @@ func NewCharacterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 		y := rowY(i)
 		text(dst, f, l.FieldX, y, t.T(label.Text), c)
 		text(dst, f, l.ColonX, y, ":", c)
+		valueX, valueY := l.ValueX, y
+		if i == book.RowName {
+			// 名字另起一行，才容得下 16 個 ASCII 字元的最寬情形。
+			valueX, valueY = l.FieldX, l.NameValueY
+		}
 		if values[i] != "" {
-			text(dst, f, l.ValueX, y, values[i], book.ColourValue)
+			text(dst, f, valueX, valueY, values[i], book.ColourValue)
 		} else if i == book.RowClass && preview != "" {
-			text(dst, f, l.ValueX, y, preview, book.ColourPreview)
+			text(dst, f, valueX, valueY, preview, book.ColourPreview)
 		}
 	}
 
 	if st.Stage == charcreate.StageName {
 		width, _ := f.Measure(st.Name)
-		fill(dst, l.ValueX+width, rowY(book.RowName)+f.Height()-2, book.CJKCell/2, 2,
+		fill(dst, l.FieldX+width, l.NameValueY+f.Height()-2, book.CJKCell/2, 2,
 			book.ColourValue)
 	}
 

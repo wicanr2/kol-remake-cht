@@ -63,6 +63,41 @@ var NewCharacterSeparators = []Label{
 // 以下座標與顏色同樣由原版畫面機械量得（tools/read_text_from_frame.py、
 // tools/locate_asset_in_frame.py），記於 docs/re/text-layout.json 與 RE-043。
 
+// CharacterOptionsHeading 是角色選項頁的標題圖與位置。圖號由 tools/identify_frame_assets.py
+// 在原版 accept-and-save-run1/frame-044 上逐像素命中。
+var CharacterOptionsHeading = struct {
+	ImageIndex int
+	X, Y       int
+}{ImageIndex: 8, X: 32, Y: 16}
+
+// CharacterOptionsItems 是角色選項頁左半頁的選單項目。文字由
+// tools/read_text_from_frame.py 以抽出的原版字型從 frame-044 逐格讀回。
+var CharacterOptionsItems = []string{
+	"LIST CHARACTERS",
+	"CREATE CHARACTER",
+	"DELETE CHARACTER",
+	"EDIT PICTURE",
+	"EDIT SHIELD",
+	"HARBOR MASTER",
+}
+
+// CharacterOptionsList 是選單的起點與行距，與右頁清單同一組字模格規則。
+var CharacterOptionsList = struct{ X, Y, Step int }{X: 24, Y: 52, Step: 6}
+
+// RosterHeadings 是角色清單頁的兩個標題圖與位置。圖號由
+// tools/identify_frame_assets.py 在 list-characters-run1/frame-065 上逐像素命中。
+var RosterHeadings = struct {
+	NamesIndex, NamesX, NamesY          int
+	LocationIndex, LocationX, LocationY int
+}{NamesIndex: 12, NamesX: 32, NamesY: 16,
+	LocationIndex: 9, LocationX: 176, LocationY: 16}
+
+// RosterNames 與 RosterLocations 是清單兩欄的起點與行距，與書中其他清單同一套規則。
+var (
+	RosterNames     = struct{ X, Y, Step int }{X: 24, Y: 52, Step: 6}
+	RosterLocations = struct{ X, Y, Step int }{X: 176, Y: 52, Step: 6}
+)
+
 // SelectHeading 是右頁「Select one」標題圖與其位置。
 var SelectHeading = struct {
 	ImageIndex int
