@@ -13,7 +13,7 @@
 | 事件／任務 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 存讀檔 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 圖像／主題 | production 抽取器逐張重讀驗證，752 張 PNG 全部對上 visual probe 雜湊 | IDA consumer＋BIOS mode 0Dh；CHARPICS 80/80、BOOKPICS[0] 對原版執行畫面 | 80 張角色模板在 (208,106) 逐像素相同；封面僅差滑鼠游標 8×11 | 由 picture-cycle 正常玩家路徑取得對照畫面 | SPEC-002 READY；首版 EGA-only，CGA／Hercules 列後續 |
-| 在地化／字型 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
+| 在地化／字型 | 兩套原版字型各 93 字模抽出並重生 | HUMAN 五字模逐 byte 命中壓縮 payload | 空白 New Character 頁 64,000 px 只差 31 px | 由正常玩家路徑取得對照畫面 | 原版字型已關閉；繁中排版待決策 |
 | 封包 | 尚無 | 不適用 | 不適用 | 尚無 | 未開始 |
 
 ## 截圖 metadata

@@ -1,0 +1,242 @@
+{
+  "tool": "tools/identify_frame_assets.py",
+  "frames_dir": "docs/verification/title-sequence/observe-run2/frames",
+  "archives": [
+    "BACKPICS",
+    "KOLMPICS",
+    "KOLPICS",
+    "MISCPICS",
+    "BOOKPICS"
+  ],
+  "searched_small_assets": false,
+  "frame_count": 41,
+  "frames": [
+    {
+      "frame": "frame-000.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-001.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-002.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-003.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-004.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 6,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-005.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-006.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-007.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-008.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-009.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-010.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-011.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-012.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 7,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-013.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 8,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-014.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-015.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-016.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-017.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-018.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-019.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-020.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 9,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-021.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 10,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-022.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-023.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-024.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-025.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-026.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-027.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-028.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-029.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 11,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-030.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 12,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-031.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-032.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-033.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-034.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-035.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-036.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 4,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-037.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-038.png",
+      "matches": [
+        {
+          "archive": "BACKPICS",
+          "index": 5,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "frame": "frame-039.png",
+      "matches": []
+    },
+    {
+      "frame": "frame-040.png",
+      "matches": []
+    }
+  ]
+}
