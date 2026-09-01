@@ -1,0 +1,354 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "newchar-steps",
+  "description": "remake 以固定腳本重播角色建立流程（名字→種族→性別→職業→擲屬性），對原版 reroll-run1 的同狀態畫面逐張對拍。",
+  "pair_count": 9,
+  "pass_count": 9,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "進入 New Character 頁（名字層，空名字）",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-000.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-065.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止時點決定；格子位置本身仍受驗證（游標在別的格子出現就會落在允許區之外）。",
+          "rect": [
+            24,
+            63,
+            8,
+            1
+          ],
+          "differing_pixels": 0
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "名字輸入 T",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-001.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-068.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止時點決定；格子位置本身仍受驗證（游標在別的格子出現就會落在允許區之外）。",
+          "rect": [
+            32,
+            63,
+            8,
+            1
+          ],
+          "differing_pixels": 8
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "名字輸入 TE",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-002.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-071.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止時點決定；格子位置本身仍受驗證（游標在別的格子出現就會落在允許區之外）。",
+          "rect": [
+            40,
+            63,
+            8,
+            1
+          ],
+          "differing_pixels": 8
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "名字輸入 TES",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-003.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-074.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止時點決定；格子位置本身仍受驗證（游標在別的格子出現就會落在允許區之外）。",
+          "rect": [
+            48,
+            63,
+            8,
+            1
+          ],
+          "differing_pixels": 8
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "名字輸入 TEST",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-004.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "名字輸入游標閃爍相位",
+          "reason": "原版游標會閃爍，取樣落在哪一相位由畫面靜止時點決定；格子位置本身仍受驗證（游標在別的格子出現就會落在允許區之外）。",
+          "rect": [
+            56,
+            63,
+            8,
+            1
+          ],
+          "differing_pixels": 8
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "種族層",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-005.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-079.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "rect": [
+            155,
+            96,
+            21,
+            25
+          ],
+          "differing_pixels": 55
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "性別層",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-006.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-080.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "rect": [
+            155,
+            96,
+            21,
+            25
+          ],
+          "differing_pixels": 55
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "職業層",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-007.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "rect": [
+            155,
+            96,
+            21,
+            25
+          ],
+          "differing_pixels": 55
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "擲屬性層",
+      "remake": "docs/verification/remake-parity/shots/newchar-steps/step-008.png",
+      "original": "docs/verification/character-ui/reroll-run1/frames/frame-082.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶；該帶內每一個像素都等於 BOOKPICS[0]（RE-045）。remake 直接畫 BOOKPICS[2]，因此顯示素材本身的內容。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        },
+        {
+          "name": "原版滑鼠游標",
+          "reason": "DOSBox 顯示的滑鼠指標，remake 沒有這個元素。",
+          "rect": [
+            155,
+            96,
+            21,
+            25
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "屬性數值欄（亂數）",
+          "reason": "原版以 BIOS tick 播種，remake 以固定 seed 重播，同一職業的骰式相同但擲出的點數不同；標籤與冒號不在允許區內，仍逐像素驗證。",
+          "rect": [
+            112,
+            116,
+            25,
+            64
+          ],
+          "differing_pixels": 163
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

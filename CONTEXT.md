@@ -154,11 +154,25 @@
 
 ## 下一個唯一工作
 
-素材與角色建立規格已就緒，下一步進 M4 的 Go／Ebitengine 垂直切片：鎖定 Go、
-Ebitengine 與 build image，建立最小可啟動程式，再把角色建立流程接到已抽取的 PNG 上，
-並用 `tools/compare_frames.py` 對 `docs/verification/character-ui/` 的原版畫面做對拍。
-繁中文字與原版英文字模不可能逐像素相同，因此對拍的判準要先分成「版面／色盤／動畫
-序列」與「文字內容」兩層，並在實作前寫進 spec。
+角色建立的名字→種族→性別→職業→擲屬性五層已在 Go／Ebitengine 實作，並與原版
+`reroll-run1` 的同狀態畫格逐畫面對拍通過（`docs/verification/remake-parity/newchar-steps.json`，
+9 對全通過）。殘餘差異只剩四類，成因都已查證並記於 RE-045。
 
-未關閉的邊界：16 槽全滿、重名、名字欄字元集合；SPEC-004 的 PIT 方波合成器與人耳
-驗收；其餘 29 個 archive 的原版同狀態畫面收據；PCGA／HERC 轉換規則。
+接下來依序做三件事：
+
+1. 接上圖像選擇層與 CHARDATA 寫入，對 `accept-and-save-run1` 的三檔前後 SHA-256
+   收據做同狀態驗證，讓「建立隊伍」整條路徑貫通。
+2. TITLE 標題序列：先反組譯閃爍段的機制，再實作並建立逐幀時間軸的比較方式。
+3. SPEC-004 的 PIT 方波合成器：轉成 OGG，對 DX-CAPTURE WAV 比對段落結構並做人耳驗收。
+
+繁中排版採雙模式：保留原版英文字模模式供嚴格像素對拍，中文模式另用較大字格；
+尚未實作。
+
+待使用者決策：`assets/original-derived-data/character-creation.json`（39 筆職業骰式、
+內部基值與名稱表）是原版衍生的 typed data，不是 PNG。2026-09-01 的 private-repo
+例外明文只涵蓋 PNG，因此這份檔案目前留在本機並由 `.gitignore` 排除，改由
+`tools/extract_character_data.py` 從固定原版輸入重生（抽取器本身有進版控）。
+要不要把例外擴及 typed data，屬權利邊界決策。
+
+未關閉的邊界：16 槽全滿、重名、名字欄字元集合；展開跨頁貼圖殘影的貼圖矩形切法；
+其餘 29 個 archive 的原版同狀態畫面收據；PCGA／HERC 轉換規則。

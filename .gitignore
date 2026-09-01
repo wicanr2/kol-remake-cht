@@ -17,6 +17,11 @@ extracted/
 assets/original/
 assets/extracted/
 
+# 原版衍生的 typed data。2026-09-01 的 private-repo 例外**只涵蓋 PNG**，
+# 尚未涵蓋資料表，因此本目錄留在本機；由 tools/extract_character_data.py
+# 從固定原版輸入重生，抽取器本身有進版控。
+assets/original-derived-data/
+
 # 含原版 executable bytes 的本機逆向證據
 docs/re/ida-fingerprints/KOLTOWN-entry.json
 docs/re/ida-fingerprints/KOLTOWN-stage2-private.json
@@ -35,3 +40,7 @@ workplace/manual/source.local.tsv
 *.til
 .DS_Store
 Thumbs.db
+
+# Python 暫存
+__pycache__/
+*.pyc

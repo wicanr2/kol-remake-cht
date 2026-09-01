@@ -59,3 +59,51 @@ var NewCharacterSeparators = []Label{
 	{":", 104, 166, 0, 170, 170},
 	{":", 104, 172, 0, 170, 170},
 }
+
+// 以下座標與顏色同樣由原版畫面機械量得（tools/read_text_from_frame.py、
+// tools/locate_asset_in_frame.py），記於 docs/re/text-layout.json 與 RE-043。
+
+// SelectHeading 是右頁「Select one」標題圖與其位置。
+var SelectHeading = struct {
+	ImageIndex int
+	X, Y       int
+}{ImageIndex: 11, X: 176, Y: 16}
+
+// 右頁清單：起點與行距。
+var RightList = struct{ X, Y, Step int }{X: 176, Y: 52, Step: 6}
+
+// 左頁的欄位值位置。名字與職業的值另起一行，種族與性別的值和標籤同一行。
+var (
+	NameValue      = struct{ X, Y int }{24, 58}
+	RaceValue      = struct{ X, Y int }{72, 68}
+	SecondaryValue = struct{ X, Y int }{72, 84}
+	ClassValue     = struct{ X, Y int }{24, 106}
+)
+
+// 屬性數值靠右對齊於 x=112 起的三格，行距與標籤相同。
+var AttributeValue = struct{ X, Y, Step, Cells int }{112, 118, 6, 3}
+
+// 顏色語意：作用中的欄位標籤為棕色，其餘為青色；已定值為黑色；
+// 選單反白項為黑色、未選為青色；職業層在左頁的即時預覽為亮紅色。
+var (
+	ColourActive   = [3]uint8{170, 85, 0}
+	ColourInactive = [3]uint8{0, 170, 170}
+	ColourValue    = [3]uint8{0, 0, 0}
+	ColourPreview  = [3]uint8{255, 85, 85}
+)
+
+// LabelRow 是四個欄位標籤在 NewCharacterLabels 內的索引。
+const (
+	RowName = iota
+	RowRace
+	RowSecondary
+	RowClass
+)
+
+// RowFirstAttribute 是十列屬性標籤在 NewCharacterLabels 內的起始索引。擲屬性層會把
+// 這十列同時標成作用中，量測自原版 picture-cycle-run1/frame-082（1668 px 由青轉棕）。
+const RowFirstAttribute = 4
+
+// NameCursor 是名字輸入游標：原版在下一個字模格的底列畫一條 8 px 寬的黑線。
+// 由原版首次進入 New Character 頁的畫面量得（空名字時位於 x=24、y=63）。
+var NameCursor = struct{ X, Y, Width, Height int }{24, 63, 8, 1}
