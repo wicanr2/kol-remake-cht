@@ -1,0 +1,44 @@
+{
+  "schema": "kol-town-inn-sample-v1",
+  "note": "招募一名同伴之後的旅店畫面對拍樣本，內容取自原版 town-recruit-companion-run1/frame-081。新加入的隊員成為發言者（白框），原本的領隊改為亮藍框。 dialog_zh 是中文模式用的預先斷行譯文（暫譯）；中文模式不對拍。",
+  "source_frame": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+  "party": [
+    {
+      "portrait": 47,
+      "name": "Theodoric",
+      "speaker": false
+    },
+    {
+      "portrait": 43,
+      "name": "Poontang",
+      "speaker": true
+    }
+  ],
+  "portrait": {
+    "archive": "TWN7PICS",
+    "index": 12
+  },
+  "title": [
+    "Halfway House",
+    "Devin Torlock"
+  ],
+  "dialog": [
+    "\"You are hurt! You",
+    "should go to the abbey.\"",
+    "\"What can I do for you?\""
+  ],
+  "icons": [
+    5,
+    20,
+    7,
+    6,
+    8,
+    9
+  ],
+  "selected": 0,
+  "dialog_zh": [
+    "你受傷了！該去修道院",
+    "看看吧。",
+    "有什麼需要我效勞的？"
+  ]
+}

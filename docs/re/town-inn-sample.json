@@ -1,0 +1,42 @@
+{
+  "schema": "kol-town-inn-sample-v1",
+  "note": "旅店畫面的對拍樣本。內容是原版 town-recruit-companion-run1/frame-077 上實際顯示的狀態，只作 remake 對拍輸入，不是遊戲資料模型；文字由 tools/read_text_from_frame.py 以抽出的原版字型逐格讀回。 dialog_zh 是中文模式用的預先斷行譯文（暫譯）；中文模式不對拍。",
+  "source_frame": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-077.png",
+  "party": [
+    {
+      "portrait": 47,
+      "name": "Theodoric",
+      "speaker": true
+    }
+  ],
+  "portrait": {
+    "archive": "TWN7PICS",
+    "index": 12
+  },
+  "title": [
+    "Halfway House",
+    "Devin Torlock"
+  ],
+  "dialog": [
+    "He leans so close you",
+    "feel as though he may",
+    "kiss you.  Sniffing,  he",
+    "says\"Hi, Fighter!\"",
+    "\"What can I do for you?\""
+  ],
+  "icons": [
+    5,
+    20,
+    7,
+    6,
+    8,
+    9
+  ],
+  "selected": 5,
+  "dialog_zh": [
+    "他湊得很近，近到你以為",
+    "他要親上來。他嗅了嗅，",
+    "開口說：嗨，戰士！",
+    "有什麼需要我效勞的？"
+  ]
+}

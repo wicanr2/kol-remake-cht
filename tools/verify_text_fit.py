@@ -29,6 +29,8 @@ def main() -> int:
     p.add_argument("--font", required=True)
     p.add_argument("--strings", required=True)
     p.add_argument("--data", required=True)
+    p.add_argument("--town-sample", action="append", default=[],
+                   help="城鎮畫面樣本 JSON，檢查中文台詞是否放得進對話框（可重複）")
     p.add_argument("--out", required=True)
     args = p.parse_args()
 
@@ -99,6 +101,29 @@ def main() -> int:
 
     for en in ("ONLY ONE REGION IS INSTALLED.", "PRESS ANY KEY."):
         check("message", en, layout["FieldX"], left_right)
+
+    # 城鎮對話框的中文台詞：安全矩形是對話框內緣，行數不得超過框高。
+    town = layout_doc.get("town_inn")
+    for path in args.town_sample:
+        sample = json.loads(pathlib.Path(path).read_text())
+        lines = sample.get("dialog_zh", [])
+        if town and lines:
+            right = town["DialogX"] + town["DialogW"] - 1
+            for line in lines:
+                w, missing = width(line)
+                checks.append({"kind": "town-dialog", "en": path, "zh": line,
+                               "x": town["DialogTextX"], "width": w,
+                               "right_limit": right,
+                               "overflow": max(0, town["DialogTextX"] + w - right),
+                               "missing_glyphs": missing,
+                               "pass": town["DialogTextX"] + w <= right and not missing})
+            bottom = (town["DialogTextY"] + (len(lines) - 1) * town["DialogStep"]
+                      + font["cell"]["height"])
+            limit_y = town["DialogY"] + town["DialogH"] - 1
+            checks.append({"kind": "vertical", "en": f"{path} 台詞行數", "zh": "", "x": 0,
+                           "width": bottom, "right_limit": limit_y,
+                           "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
+                           "pass": bottom <= limit_y})
 
     # 刪除確認視窗是覆蓋在書頁上的獨立視窗，安全矩形就是視窗自己的內緣。
     confirm = layout_doc.get("confirm")

@@ -1,0 +1,129 @@
+{
+  "name": "town-inn",
+  "description": "remake 的旅店畫面對原版逐張對拍：六個圖示白框位置、單人隊伍與招募後的兩人隊伍。底圖、頭像格、店主肖像、標題框、對話框與圖示列都由原版畫面機械量得（RE-054）。",
+  "input": {
+    "command": "tools/run_kol_headless.sh -scene inn -shot docs/verification/remake-parity/shots/inn.png；另以 -inn-selected 0..5 與 -inn <招募後樣本> 產生其餘畫面"
+  },
+  "pairs": [
+    {
+      "label": "半途之家旅店（白框在 COMPANION）",
+      "remake": "docs/verification/remake-parity/shots/inn.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-077.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "圖示列白框第 1 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-0.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-071.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "圖示列白框第 2 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-1.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-072.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "圖示列白框第 3 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-2.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-073.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "圖示列白框第 4 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-3.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-074.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "圖示列白框第 5 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-4.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-075.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "圖示列白框第 6 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-5.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-076.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "label": "招募一名同伴之後（兩名隊員，新成員為發言者）",
+      "remake": "docs/verification/remake-parity/shots/town-inn/recruited.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "x": 150,
+          "y": 90,
+          "width": 34,
+          "height": 34
+        }
+      ]
+    }
+  ]
+}

@@ -52,8 +52,9 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `delete.json`（刪除流程含確認視窗，對 `delete-character-confirm-run1`） | 8 | 8 |
 | `delete-move.json`（刪除清單反白條移動，對 `delete-character-run1`） | 5 | 5 |
 | `harbor.json`（HARBOR MASTER 訊息頁，對 `harbor-master-enter-run1`） | 1 | 1 |
+| `town-inn.json`（旅店畫面，對 `town-icon-move-run1`／`town-recruit-companion-run1`） | 8 | 8 |
 
-九份收據的允許差異區之外都是**零像素差**。
+十份收據的允許差異區之外都是**零像素差**。
 
 | 對拍項目 | 允許差異區實際差異 | 結果 |
 |---|---|---|
@@ -158,6 +159,20 @@ BIOS tick。remake 依同一張表重播。
 `IS INSTALLED.`、空一列、`PRESS ANY KEY.`），沒有標題圖。remake 重繪後在允許差異區
 之外零像素差。多個 region 的畫面沒有量測，remake 也沒有實作那條分支。
 
+## 旅店畫面
+
+城鎮畫面不是一張烘好的素材，而是紅磚底圖之上疊了幾塊：隊員頭像格、店主肖像
+（`TWN7PICS[12]`）、標題框、對話框與六格圖示列。組成由
+`tools/decompose_town_frame.py` 拆出，分群之外殘餘 0 像素（RE-054）。
+
+| 步驟 | 原版畫格 | 允許差異區實際差異 | 結果 |
+|---|---|---|---|
+| 圖示白框第 1–6 格 | `town-icon-move-run1` frame-071…076 | 滑鼠 31 px | 通過 |
+| 單人隊伍（白框在 COMPANION） | `town-recruit-companion-run1` frame-077 | 滑鼠 31 px | 通過 |
+| 招募後的兩人隊伍 | 同上 frame-081 | 滑鼠 28 px | 通過 |
+
+兩個原版收據是不同的執行，因此不是同一張畫面對自己。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱角色建立已完成。接受圖像後寫入 CHARDATA、重名與名字欄字元集合都還沒對拍；
@@ -165,7 +180,10 @@ BIOS tick。remake 依同一張表重播。
 - 刪除流程的確認視窗按 ESC、大寫 `Y`／`N`、滑鼠按鍵與空名冊都沒有量測。
 - `EDIT PICTURE`／`EDIT SHIELD` 的點陣圖編輯器沒有實作，也沒有對拍：原版是滑鼠驅動的，
   ESC 沒有作用，現有的鍵盤 oracle 走不完（RE-052）。
+- 城鎮只對拍了旅店這一張畫面。戶外地圖、商店、修道院與圖示列其餘五個圖示的行為
+  都還沒量測，remake 也沒有實作。旅店畫面的內容目前來自對拍樣本
+  `docs/re/town-inn-sample*.json`，不是從原版資料解出來的遊戲資料模型。
 - 動畫已對拍：翻書動畫見上表，TITLE 標題序列見 `../title-sequence/`。尚未對拍的是
   戰鬥與世界地圖的動畫，那些畫面還沒實作。
-- 這九份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
+- 這十份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
   原版沒有中文畫面，因此不對拍；見 `../cjk-ui/`。

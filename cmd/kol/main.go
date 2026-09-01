@@ -26,6 +26,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
+	"github.com/wicanr2/kol-remake-cht/internal/town"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/title"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
@@ -46,9 +47,10 @@ const (
 	sceneRoster     scene = "roster"
 	sceneDelete     scene = "delete"
 	sceneHarbor     scene = "harbor"
+	sceneInn        scene = "inn"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -223,6 +225,7 @@ type game struct {
 	strings *i18n.Table
 	roster  *roster.Roster
 	remove  *roster.DeleteFlow
+	inn     *town.Inn
 	canvas  *screen.Canvas
 	state   *charcreate.State
 	sequence *title.Sequence
@@ -285,6 +288,11 @@ func (g *game) render() error {
 		}
 		return ui.DeleteList(g.canvas.Image(), g.sprites, g.small,
 			g.remove.List(), g.remove.Cursor, g.remove.Confirm)
+	case sceneInn:
+		if g.strings != nil {
+			return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.inn)
+		}
+		return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.inn)
 	case sceneHarbor:
 		if g.strings != nil {
 			return ui.HarborMasterCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings)
@@ -498,6 +506,9 @@ func main() {
 	sceneName := flag.String("scene", string(sceneCover), "要繪製的場景")
 	portrait := flag.Int("portrait", 0, "newchar 場景使用的角色圖像圖號")
 	menuSelected := flag.Int("menu-selected", 0, "menu 場景反白的項目索引")
+	innPath := flag.String("inn", "docs/re/town-inn-sample.json",
+		"旅店畫面的對拍樣本")
+	innSelected := flag.Int("inn-selected", -1, "覆寫旅店圖示列的白框位置（-1 為沿用樣本）")
 	deleteScript := flag.String("delete-script", "",
 		"delete 場景的按鍵腳本，token 為 UP／DOWN／RET／y／n，逐步輸出截圖")
 	rosterPath := flag.String("roster",
@@ -619,7 +630,7 @@ func main() {
 		raw, err := json.MarshalIndent(map[string]any{
 			"schema": "kol-cjk-layout-v1", "scale": book.CJKScale,
 			"cell": book.CJKCell, "layout": book.CJKLayout, "text_box": book.CJKTextBox,
-			"confirm": book.CJKConfirm,
+			"confirm": book.CJKConfirm, "town_inn": town.CJKInn,
 		}, "", "  ")
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -674,6 +685,21 @@ func main() {
 		}
 	}
 
+	var innState *town.Inn
+	if scene(*sceneName) == sceneInn {
+		if innState, err = town.LoadInn(*innPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if *innSelected >= 0 {
+			if *innSelected >= len(innState.Icons) {
+				fmt.Fprintf(os.Stderr, "-inn-selected %d 超出範圍\n", *innSelected)
+				os.Exit(2)
+			}
+			innState.Selected = *innSelected
+		}
+	}
+
 	data, err := chardata.Load(*dataPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -699,6 +725,7 @@ func main() {
 		portrait: *portrait,
 		selected: *menuSelected,
 		roster:   slots,
+		inn:      innState,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
