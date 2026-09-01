@@ -1,0 +1,92 @@
+{
+  "schema": "kol-town-frame-decomposition-v1",
+  "tool": "tools/decompose_town_frame.py",
+  "frame": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-077.png",
+  "background": {
+    "archive": "BOOKPICS",
+    "index": 3,
+    "differing_pixels": 24729
+  },
+  "components": [
+    {
+      "pixels": 9227,
+      "x": 102,
+      "y": 84,
+      "width": 199,
+      "height": 72
+    },
+    {
+      "pixels": 4677,
+      "x": 8,
+      "y": 64,
+      "width": 92,
+      "height": 68
+    },
+    {
+      "pixels": 3226,
+      "x": 102,
+      "y": 58,
+      "width": 199,
+      "height": 24
+    },
+    {
+      "pixels": 1749,
+      "x": 14,
+      "y": 1,
+      "width": 47,
+      "height": 52
+    },
+    {
+      "pixels": 528,
+      "x": 160,
+      "y": 170,
+      "width": 24,
+      "height": 22
+    },
+    {
+      "pixels": 512,
+      "x": 64,
+      "y": 170,
+      "width": 24,
+      "height": 22
+    },
+    {
+      "pixels": 508,
+      "x": 192,
+      "y": 170,
+      "width": 24,
+      "height": 22
+    },
+    {
+      "pixels": 483,
+      "x": 96,
+      "y": 170,
+      "width": 24,
+      "height": 22
+    },
+    {
+      "pixels": 475,
+      "x": 128,
+      "y": 170,
+      "width": 24,
+      "height": 22
+    },
+    {
+      "pixels": 466,
+      "x": 32,
+      "y": 170,
+      "width": 24,
+      "height": 22
+    },
+    {
+      "pixels": 75,
+      "x": 143,
+      "y": 95,
+      "width": 17,
+      "height": 7
+    }
+  ],
+  "differing_total": 24729,
+  "differing_inside_components": 24729,
+  "residual_outside_components": 0
+}
