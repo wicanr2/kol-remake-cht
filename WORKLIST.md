@@ -11,7 +11,7 @@
 | 玩家觀點 | 起源資料完成 | 魔旅士繁中個人心得＋《CRPG 通鑑》中文長篇評介已進 README |
 | 可選美化 | 未決策 | 不得在忠實度與操作方向確認前進入 production |
 | 圖像 theme | 已決策 | 2026-09-01：首版 EGA-only；CGA／Hercules 列後續選項 |
-| TITLE 音訊 | 已決策 | 2026-09-01：OGG 採規格近似合成，不散布原版錄音 |
+| TITLE 音訊 | 候選資產待人耳驗收 | 規格近似合成已產出；時長與原版擷取差 0.6 ms；SPEC-004 仍 DRAFT |
 | GitHub | 已建立 | private：`wicanr2/kol-remake-cht`；`main` 已推送 |
 
 ## M0：專案建立

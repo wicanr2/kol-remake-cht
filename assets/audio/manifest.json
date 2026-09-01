@@ -1,0 +1,45 @@
+{
+  "schema": "kol-audio-catalog-v1",
+  "tool": "tools/synthesize_title_thunder.py",
+  "note": "執行期只讀本目錄列出的 .ogg。所有檔案都是規格近似合成，不含原版音訊資料。",
+  "rights": {
+    "classification": "remake 自有；可公開",
+    "reason": "波形由公開的 PC Speaker／PIT channel 2 規格與已證實的演算法產生，沒有取樣或轉換任何原版音訊。原版執行檔的著作權不因此延伸到這個檔案。"
+  },
+  "cues": [
+    {
+      "id": "title-thunder",
+      "file": "title-thunder.ogg",
+      "player_trigger": "標題序列的每一次雷聲：SET 動畫每圈結束、閃電（連放兩次）、以及 FACE 段落的三次全螢幕閃光",
+      "original_function": "sub_10F75",
+      "original_ea": "0x10f75",
+      "original_call_sites": [
+        "0x1080e",
+        "0x108df",
+        "0x109db",
+        "0x10c55",
+        "0x10cb7",
+        "0x10cba",
+        "0x10ceb",
+        "0x10cee"
+      ],
+      "evidence_grade": "hardware-spec approximation",
+      "generation": {
+        "algorithm": "兩段音爆，每段 100 次 PIT channel 2 除數更新；除數為 500×段次 + rand()%10000 + 1 + 1000；方波頻率 1193182/除數",
+        "seed": 1,
+        "cue_seconds": 0.961,
+        "peak_db_target": -10.317424,
+        "duration_source": "docs/re/title-audio-oracle.json 的四段非靜音視窗平均值"
+      },
+      "encoder": "ffmpeg 5.1.9 libvorbis -q:a 5",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.961451,
+      "loop": false,
+      "volume_reference": "合成峰值對齊 DOSBox-X 擷取量測的 -10.317 dB；Vorbis 解碼後峰值 -7.5 dB，差額是有損編碼過衝",
+      "sha256": "0e95e887d2513161a4f07d85fad3c64d7fc538d3b61864256f787d98db85d362",
+      "verification": "docs/verification/audio/title-thunder.json",
+      "human_listening": "尚未執行；需使用者驗收"
+    }
+  ]
+}

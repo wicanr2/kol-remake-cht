@@ -6,7 +6,7 @@
     "main_ea": "0x10010",
     "main_end_ea": "0x10af0",
     "ida_summary": "docs/re/ida-fingerprints/TITLE-sequence-summary.json",
-    "ida_summary_sha256": "5ddca5ff1abd3067768d5be0712d271fbcd138487342ca0b4a3a9f974086449e",
+    "ida_summary_sha256": "5eb7db666414cabb8a5d44b655d4a135c935a2301204f02b980a30ca296be5b9",
     "probe": "tools/ida_probe_title_sequence.py"
   },
   "note": "標題序列在原版是 _main 裡的一段線性程式碼，不是資料表。這份 JSON 是那段程式碼的逐呼叫轉寫，每一步都標出原始呼叫位址；未反組譯確認的東西不寫進來。",

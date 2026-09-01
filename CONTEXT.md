@@ -167,7 +167,9 @@
 2. TITLE 標題序列的實際播放：時間迴圈、雷聲合成與按鍵中止。序列本身已從 `TITLE.EXE`
    的 `_main` 靜態讀出（RE-047），remake 已能重播一輪，原版兩輪觀察的每一張畫格都
    逐像素對上（`docs/verification/title-sequence/parity-run{1,2}.json`）。
-3. SPEC-004 的 PIT 方波合成器：轉成 OGG，對 DX-CAPTURE WAV 比對段落結構並做人耳驗收。
+3. SPEC-004 的人耳驗收：`assets/audio/title-thunder.ogg` 是 `sub_10F75` 的規格近似合成
+   候選，技術驗收已通過（時長與原版 DOSBox-X 擷取四段的平均值差 0.000581 秒），
+   但**需要使用者實際聆聽**才能把 SPEC-004 升 READY，在那之前不接 Ebitengine 音訊路徑。
 
 繁中排版採雙模式：保留原版英文字模模式供嚴格像素對拍，中文模式另用較大字格；
 尚未實作。

@@ -25,6 +25,9 @@ import idc
 
 EXPECTED_SHA256 = "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6"
 MAIN_EA = 0x10010
+# 音訊與計時原語不是 `_main` 的直接被呼叫者，但重建序列的時間與聲音需要它們：
+# 喇叭開關、PIT channel 2 除數、雷聲之間的忙等，以及開機期的忙等校正。
+EXTRA_EAS = (0x10F33, 0x10F48, 0x10F5D, 0x11904, 0x118D1, 0x11AAC)
 
 
 def instruction(ea: int) -> dict:
@@ -121,7 +124,10 @@ def main() -> None:
     if main_function is None or main_function.start_ea != MAIN_EA:
         raise RuntimeError("_main boundary not found")
     targets = call_targets(MAIN_EA)
-    functions = [export_function(MAIN_EA)] + [export_function(ea) for ea in targets]
+    extra = [ea for ea in EXTRA_EAS if ea not in targets]
+    functions = ([export_function(MAIN_EA)]
+                 + [export_function(ea) for ea in targets]
+                 + [export_function(ea) for ea in extra])
     script = call_script(MAIN_EA)
 
     private = {

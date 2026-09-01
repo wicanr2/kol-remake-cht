@@ -43,8 +43,28 @@ Ebitengine 音訊路徑。
 規格與成熟模擬器契約求合理的 sample duration 與播放完成閘門，並標記為
 `hardware-spec approximation`；不得宣稱逐波形或實機時鐘 parity。
 
+## 已由使用者決定的路線
+
+2026-09-01：TITLE 的可聽事件採**規格近似合成 OGG**，不散布原版錄音。
+
+## 已固定的編碼與權利契約
+
+- 編碼：Vorbis、44 100 Hz、單聲道、`ffmpeg libvorbis -q:a 5`。
+- loop：TITLE 雷聲不循環；每次觸發播放一次。
+- 音量基準：合成峰值對齊 DOSBox-X 擷取量測的 −10.317 dB。
+- 權利分類：remake 自有、可公開——波形由公開的 PC Speaker／PIT 規格與已證實的演算法
+  產生，沒有取樣或轉換任何原版音訊。
+- 目錄與逐 cue 欄位在 `assets/audio/manifest.json`，技術驗收收據在
+  `docs/verification/audio/`。
+
 ## 尚未通過的 READY gate
 
-1. 由使用者決定已證實演算法 cue 採「規格近似合成 OGG」、新作替代音效或靜音；目前不代決。
-2. 固定 OGG 編碼參數、loop 契約、權利分類與人耳抽樣方式；人耳驗收仍待執行。
-3. 證據審查後才可把本規格升為 READY。
+1. **人耳驗收尚未執行**，需使用者實際聆聽 `assets/audio/title-thunder.ogg`。技術解碼
+   通過不等於聽起來對。
+2. 證據審查後才可把本規格升為 READY；在那之前不建立 Ebitengine 執行期音訊路徑。
+
+## 目前已產出的候選資產
+
+`assets/audio/title-thunder.ogg`：`sub_10F75` 的規格近似合成，時長 0.961451 秒，與原版
+DOSBox-X 擷取四段非靜音視窗的平均值差 0.000581 秒。這是**待驗收的候選**，不是已授權的
+執行期資產。
