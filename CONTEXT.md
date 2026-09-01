@@ -164,7 +164,9 @@
 
 1. 接上接受圖像後的 CHARDATA 寫入，對 `accept-and-save-run1` 的三檔前後 SHA-256
    收據做同狀態驗證，讓「建立隊伍」整條路徑貫通。
-2. TITLE 標題序列：先反組譯閃爍段的機制，再實作並建立逐幀時間軸的比較方式。
+2. TITLE 標題序列的實際播放：時間迴圈、雷聲合成與按鍵中止。序列本身已從 `TITLE.EXE`
+   的 `_main` 靜態讀出（RE-047），remake 已能重播一輪，原版兩輪觀察的每一張畫格都
+   逐像素對上（`docs/verification/title-sequence/parity-run{1,2}.json`）。
 3. SPEC-004 的 PIT 方波合成器：轉成 OGG，對 DX-CAPTURE WAV 比對段落結構並做人耳驗收。
 
 繁中排版採雙模式：保留原版英文字模模式供嚴格像素對拍，中文模式另用較大字格；

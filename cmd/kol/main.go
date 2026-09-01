@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
@@ -19,6 +20,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/chardata"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
+	"github.com/wicanr2/kol-remake-cht/internal/title"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
 )
 
@@ -30,9 +32,10 @@ const (
 	sceneOpenSpread scene = "spread"
 	sceneNewChar    scene = "newchar"
 	sceneScript     scene = "script"
+	sceneTitle      scene = "title"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -42,11 +45,30 @@ func (r *lcg) next() uint32 {
 	return r.state
 }
 
+// Choose 供標題序列的二選一使用；原版是 rand()%n，remake 用同一個可重播來源。
+func (r *lcg) Choose(n int) int {
+	if n <= 0 {
+		return 0
+	}
+	return int(r.next()>>16) % n
+}
+
 func (r *lcg) Roll(n int) int {
 	if n <= 0 {
 		return 0
 	}
 	return int(r.next()>>16)%n + 1
+}
+
+// fixedChoice 固定取同一個選項，用來窮舉標題序列兩處亂數的每一條分支。
+// 對拍的判準是集合包含，因此兩次固定取法的聯集就涵蓋所有會出現的畫面。
+type fixedChoice int
+
+func (c fixedChoice) Choose(n int) int {
+	if int(c) >= n {
+		return n - 1
+	}
+	return int(c)
 }
 
 type spriteCache struct {
@@ -80,9 +102,11 @@ type game struct {
 	large   *font.Font
 	canvas  *screen.Canvas
 	state   *charcreate.State
+	sequence *title.Sequence
 
 	scene    scene
 	portrait int
+	frame    title.Frame
 
 	jobs  []shotJob
 	jobAt int
@@ -115,6 +139,24 @@ func (g *game) render() error {
 		g.canvas.DrawAt(portrait, book.PortraitOrigin.X, book.PortraitOrigin.Y)
 	case sceneScript:
 		return ui.NewCharacter(g.canvas.Image(), g.sprites, g.small, g.large, g.state)
+	case sceneTitle:
+		bg, err := g.sprites.Get("BACKPICS", g.frame.Back)
+		if err != nil {
+			return err
+		}
+		g.canvas.DrawAt(bg, 0, 0)
+		if g.frame.Archive == "" || g.frame.Overlay < 0 {
+			return nil
+		}
+		rect, ok := g.sequence.Rect(g.frame.Archive)
+		if !ok {
+			return fmt.Errorf("沒有 %s 的疊圖矩形", g.frame.Archive)
+		}
+		overlay, err := g.sprites.Get(g.frame.Archive, g.frame.Overlay)
+		if err != nil {
+			return err
+		}
+		g.canvas.DrawAt(overlay, rect.X, rect.Y)
 	default:
 		return fmt.Errorf("未知場景 %q", g.scene)
 	}
@@ -201,7 +243,12 @@ func main() {
 	shot := flag.String("shot", "", "單張截圖輸出路徑")
 	shotDir := flag.String("shot-dir", "", "批次截圖輸出目錄")
 	script := flag.String("script", "", "以空白分隔的操作腳本；每一步後截一張圖")
-	seed := flag.Int("seed", 1, "亂數種子，供可重播的屬性擲骰使用")
+	seed := flag.Int("seed", 1, "亂數種子，供可重播的屬性擲骰與標題序列使用")
+	titlePath := flag.String("title-sequence", "docs/re/title-sequence.json",
+		"標題序列腳本（由 RE-047 從 TITLE.EXE 的 _main 轉寫）")
+	titleShots := flag.String("title-shot-dir", "", "把標題序列一輪的每個畫面輸出到這個目錄")
+	titleChoice := flag.String("title-choice", "rng",
+		"標題序列兩處亂數的取法：rng 依 seed 重播，first／second 固定取第一或第二個選項")
 	scaleFlag := flag.Int("scale", 3, "視窗放大倍率")
 	listAssets := flag.Bool("list-assets", false, "只列出 manifest 摘要後結束")
 	flag.Parse()
@@ -236,8 +283,15 @@ func main() {
 		os.Exit(1)
 	}
 
+	sequence, err := title.Load(*titlePath)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
 	g := &game{
 		sprites:  &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
+		sequence: sequence,
 		small:    small,
 		large:    large,
 		canvas:   screen.NewCanvas(),
@@ -247,6 +301,52 @@ func main() {
 	}
 
 	switch {
+	case *titleShots != "":
+		var chooser title.Rand
+		switch *titleChoice {
+		case "rng":
+			chooser = &lcg{state: uint32(*seed)}
+		case "first":
+			chooser = fixedChoice(0)
+		case "second":
+			chooser = fixedChoice(1)
+		default:
+			fmt.Fprintf(os.Stderr, "未知的 -title-choice %q\n", *titleChoice)
+			os.Exit(2)
+		}
+		frames, err := sequence.Expand(chooser)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		g.scene = sceneTitle
+		log := make([]title.Frame, 0, len(frames))
+		for i, f := range frames {
+			frame := f
+			log = append(log, frame)
+			g.jobs = append(g.jobs, shotJob{
+				name: fmt.Sprintf("title-%03d", i),
+				path: filepath.Join(*titleShots, fmt.Sprintf("title-%03d.png", i)),
+				apply: func() { g.frame = frame },
+			})
+		}
+		g.frame = frames[0]
+		raw, err := json.MarshalIndent(map[string]any{
+			"schema": "kol-title-frames-v1", "choice": *titleChoice, "seed": *seed,
+			"sequence": *titlePath, "frames": log}, "", "  ")
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := os.MkdirAll(*titleShots, 0o755); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := os.WriteFile(filepath.Join(*titleShots, "frames.json"),
+			append(raw, '\n'), 0o644); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 	case *script != "":
 		if *shotDir == "" {
 			fmt.Fprintln(os.Stderr, "-script 需要搭配 -shot-dir")

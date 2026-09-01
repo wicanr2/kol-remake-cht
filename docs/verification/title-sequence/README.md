@@ -64,11 +64,44 @@ SET0／SET1／SET2 的四圈疊圖動畫。
 可以要求的是：資產逐像素相同、段落順序相同、tick 等待相同，以及在指定亂數序列下的
 每一幀相同。
 
+## remake 對拍結果
+
+remake 依 `docs/re/title-sequence.json` 播放一輪，把每一個送出的畫面存成 PNG：
+
+```
+tools/run_kol_headless.sh -title-shot-dir workplace/shots/title-first  -title-choice first
+tools/run_kol_headless.sh -title-shot-dir workplace/shots/title-second -title-choice second
+python3 tools/verify_title_parity.py \
+    --remake workplace/shots/title-first --remake workplace/shots/title-second \
+    --original docs/verification/title-sequence/observe-run1/frames \
+    --skip-first 4 --out docs/verification/title-sequence/parity-run1.json
+```
+
+`-title-choice first`／`second` 固定取兩處亂數的第一或第二個選項，兩次的聯集就涵蓋
+序列會出現的所有畫面（各 92 張）。判準是**集合包含**：原版擷取到的每一張，remake 都要
+能逐像素產生一模一樣的一張。
+
+| 收據 | 原版畫格 | 逐像素相同 | 更新中途 | 未解釋 | 略過 |
+|---|---:|---:|---:|---:|---:|
+| `parity-run1.json` | 40 | 33 | 3 | 0 | 4 |
+| `parity-run2.json` | 41 | 33 | 4 | 0 | 4 |
+
+- **略過的 4 張**是 `TITLE.EXE` 開始繪製之前的畫面。
+- **「更新中途」**指取樣落在整張搬移途中：畫面的一段（前綴或後綴的整數列）逐像素等於
+  remake 的某一張，另一段還沒寫完。收據記下分割列與未寫完那段與最接近畫面的像素差，
+  不對成因下結論。其中兩張（run1 的 frame-019、run2 的 frame-031）未寫完的那段差到
+  一萬多個像素，代表取樣落在兩次更新重疊的時候，這個分類對它們的說服力較弱。
+- **逐像素相同的 66 張涵蓋整段序列**：閃電、SET0／SET1／SET2 的每一張疊圖與兩種閃光、
+  `BACKPICS[7]`–`[13]` 的全螢幕畫面，以及 FACE 的六張疊圖與兩次全螢幕閃光。
+
+remake 側每一張畫面的來源記在 `remake-frames-first.json` 與 `remake-frames-second.json`，
+每一筆都帶原版送出該畫面的呼叫位址與停留的 tick 數。畫面 PNG 由上面的命令重生，不入庫。
+
 ## 尚未關閉
 
 - 雷聲的長度：`sub_10F75` 的步進間隔是以開機期校正值算出的忙等，不是 tick 數，
-  靜態讀不出實際秒數。
+  靜態讀不出實際秒數。remake 目前只標記「這一格之後放雷聲」，沒有播放。
 - 開機期的校正常式 `sub_118D1` 與 `sub_11AAC` 的作用尚未讀出。
-- 畫格時間戳是主機牆鐘、取樣間隔 0.3 秒，只能用來核對段落順序與量級，不能當原版
-  的設計時序。
-- remake 尚未實作標題序列，本目錄的 remake 側還沒有畫面。
+- 畫格時間戳是主機牆鐘、取樣間隔 0.3 秒，只能核對段落順序與量級。要做逐幀時序對拍，
+  必須換成能鎖定畫面更新時點的擷取方式。
+- remake 目前只重播畫面與 tick 等待，還沒有實際播放的時間迴圈與音效。

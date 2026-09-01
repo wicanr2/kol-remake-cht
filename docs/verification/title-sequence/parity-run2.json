@@ -1,0 +1,238 @@
+{
+  "schema": "kol-title-parity-v1",
+  "tool": "tools/verify_title_parity.py",
+  "remake_frames": 184,
+  "remake_dirs": [
+    "workplace/shots/title-first",
+    "workplace/shots/title-second"
+  ],
+  "original_frames": 41,
+  "exact": 33,
+  "partial_update_capture": 4,
+  "unmatched": 0,
+  "skipped": 4,
+  "criterion": "原版每一張擷取畫格都必須逐像素等於 remake 一輪播放裡的某一張；取樣落在整張搬移途中的畫格另記為更新中途，並量出分割列。",
+  "results": [
+    {
+      "original": "frame-000.png",
+      "status": "skipped",
+      "reason": "TITLE.EXE 開始繪製之前的畫面"
+    },
+    {
+      "original": "frame-001.png",
+      "status": "skipped",
+      "reason": "TITLE.EXE 開始繪製之前的畫面"
+    },
+    {
+      "original": "frame-002.png",
+      "status": "skipped",
+      "reason": "TITLE.EXE 開始繪製之前的畫面"
+    },
+    {
+      "original": "frame-003.png",
+      "status": "skipped",
+      "reason": "TITLE.EXE 開始繪製之前的畫面"
+    },
+    {
+      "original": "frame-004.png",
+      "status": "exact",
+      "remake": "title-first/title-000.png"
+    },
+    {
+      "original": "frame-005.png",
+      "status": "exact",
+      "remake": "title-first/title-002.png"
+    },
+    {
+      "original": "frame-006.png",
+      "status": "exact",
+      "remake": "title-first/title-004.png"
+    },
+    {
+      "original": "frame-007.png",
+      "status": "exact",
+      "remake": "title-second/title-005.png"
+    },
+    {
+      "original": "frame-008.png",
+      "status": "partial_update_capture",
+      "complete_part": "prefix",
+      "prefix_frame": "title-second/title-020.png",
+      "split_row": 152,
+      "rest_closest_remake": "title-second/title-005.png",
+      "rest_pixel_difference": 54
+    },
+    {
+      "original": "frame-009.png",
+      "status": "exact",
+      "remake": "title-first/title-003.png"
+    },
+    {
+      "original": "frame-010.png",
+      "status": "exact",
+      "remake": "title-first/title-001.png"
+    },
+    {
+      "original": "frame-011.png",
+      "status": "exact",
+      "remake": "title-first/title-005.png"
+    },
+    {
+      "original": "frame-012.png",
+      "status": "exact",
+      "remake": "title-first/title-022.png"
+    },
+    {
+      "original": "frame-013.png",
+      "status": "exact",
+      "remake": "title-first/title-023.png"
+    },
+    {
+      "original": "frame-014.png",
+      "status": "exact",
+      "remake": "title-first/title-024.png"
+    },
+    {
+      "original": "frame-015.png",
+      "status": "exact",
+      "remake": "title-first/title-025.png"
+    },
+    {
+      "original": "frame-016.png",
+      "status": "exact",
+      "remake": "title-first/title-027.png"
+    },
+    {
+      "original": "frame-017.png",
+      "status": "exact",
+      "remake": "title-second/title-028.png"
+    },
+    {
+      "original": "frame-018.png",
+      "status": "exact",
+      "remake": "title-first/title-026.png"
+    },
+    {
+      "original": "frame-019.png",
+      "status": "exact",
+      "remake": "title-first/title-028.png"
+    },
+    {
+      "original": "frame-020.png",
+      "status": "exact",
+      "remake": "title-first/title-045.png"
+    },
+    {
+      "original": "frame-021.png",
+      "status": "exact",
+      "remake": "title-first/title-046.png"
+    },
+    {
+      "original": "frame-022.png",
+      "status": "exact",
+      "remake": "title-first/title-047.png"
+    },
+    {
+      "original": "frame-023.png",
+      "status": "exact",
+      "remake": "title-first/title-048.png"
+    },
+    {
+      "original": "frame-024.png",
+      "status": "exact",
+      "remake": "title-first/title-049.png"
+    },
+    {
+      "original": "frame-025.png",
+      "status": "exact",
+      "remake": "title-first/title-050.png"
+    },
+    {
+      "original": "frame-026.png",
+      "status": "exact",
+      "remake": "title-second/title-051.png"
+    },
+    {
+      "original": "frame-027.png",
+      "status": "partial_update_capture",
+      "complete_part": "suffix",
+      "suffix_frame": "title-first/title-051.png",
+      "split_row": 51,
+      "rest_closest_remake": "title-first/title-001.png",
+      "rest_pixel_difference": 1248
+    },
+    {
+      "original": "frame-028.png",
+      "status": "exact",
+      "remake": "title-first/title-051.png"
+    },
+    {
+      "original": "frame-029.png",
+      "status": "exact",
+      "remake": "title-first/title-068.png"
+    },
+    {
+      "original": "frame-030.png",
+      "status": "exact",
+      "remake": "title-first/title-069.png"
+    },
+    {
+      "original": "frame-031.png",
+      "status": "partial_update_capture",
+      "complete_part": "prefix",
+      "prefix_frame": "title-second/title-069.png",
+      "split_row": 33,
+      "rest_closest_remake": "title-first/title-074.png",
+      "rest_pixel_difference": 16162
+    },
+    {
+      "original": "frame-032.png",
+      "status": "exact",
+      "remake": "title-first/title-070.png"
+    },
+    {
+      "original": "frame-033.png",
+      "status": "exact",
+      "remake": "title-first/title-071.png"
+    },
+    {
+      "original": "frame-034.png",
+      "status": "exact",
+      "remake": "title-first/title-072.png"
+    },
+    {
+      "original": "frame-035.png",
+      "status": "exact",
+      "remake": "title-first/title-074.png"
+    },
+    {
+      "original": "frame-036.png",
+      "status": "exact",
+      "remake": "title-first/title-076.png"
+    },
+    {
+      "original": "frame-037.png",
+      "status": "exact",
+      "remake": "title-first/title-081.png"
+    },
+    {
+      "original": "frame-038.png",
+      "status": "exact",
+      "remake": "title-first/title-082.png"
+    },
+    {
+      "original": "frame-039.png",
+      "status": "exact",
+      "remake": "title-first/title-084.png"
+    },
+    {
+      "original": "frame-040.png",
+      "status": "partial_update_capture",
+      "complete_part": "prefix",
+      "prefix_frame": "title-second/title-019.png",
+      "split_row": 172,
+      "rest_closest_remake": "title-first/title-001.png",
+      "rest_pixel_difference": 36
+    }
+  ]
+}
