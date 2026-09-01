@@ -27,7 +27,7 @@ Go 與 Ebitengine，畫面執行期只讀經可重現流程抽出的 PNG，音�
 
 ## 已確認的原版畫面
 
-以下兩張外部截圖來自魔旅士的原文，未複製進本儲存庫。它們已和固定原版
+以下兩張外部截圖來自魔旅士的原文。它們已和固定原版
 `COMBPICS.0` 的解碼結果做配準交叉驗證：左圖對應 archive 圖號 0，右圖對應圖號 1。
 這項證據確認場景身分、幾何與方向，不代表 JPEG 與解碼 PNG 逐像素相同；量化結果見
 [COMBPICS 視覺 oracle](docs/re/combpics-visual-oracle.json)。
@@ -36,7 +36,9 @@ Go 與 Ebitengine，畫面執行期只讀經可重現流程抽出的 PNG，音�
 |---|---|
 | [![《武士傳說》逃跑戰鬥畫面](https://morrisjfwong.com/blog/wp-content/uploads/2010/03/kol-flee-001a-s.jpg)](https://morrisjfwong.com/blog/knights-of-legend-%E6%AD%A6%E5%A3%AB%E5%82%B3%E8%AA%AA-dos-game/) | [![《武士傳說》競技場戰敗畫面](https://morrisjfwong.com/blog/wp-content/uploads/2010/04/war-lose-001a-s.jpg)](https://morrisjfwong.com/blog/knights-of-legend-%E6%AD%A6%E5%A3%AB%E5%82%B3%E8%AA%AA-dos-game/) |
 
-圖片著作權屬原權利人；此處只作研究來源標示與外部引用，不授予再利用或散布權。
+圖片著作權屬原權利人；此處只作研究來源標示與外部引用，不授予再利用或散布權。本專案
+另允許已驗證、可重生且有 manifest 的原版衍生 PNG 保存於目前的 private GitHub；這項
+專案例外不包含原版 raw 檔，也不授權 GitHub Release 或公開散布。
 
 ## 現況與入口
 

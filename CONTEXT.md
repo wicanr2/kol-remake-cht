@@ -6,7 +6,9 @@
 
 - 本專案是 *Knights of Legend* 的繁體中文乾淨重寫，正式 runtime 使用 Go／Ebitengine、
   PNG 圖像與 Ogg Vorbis 音訊。
-- GitHub `wicanr2/kol-remake-cht` 已建立為 private；原版與衍生素材不得提交。
+- GitHub `wicanr2/kol-remake-cht` 已建立為 private。原版 ZIP／EXE／archive／PDF 與其他 raw
+  素材不得提交；使用者已於 2026-09-01 特別允許已驗證、可重生且有 provenance manifest
+  的 PNG 衍生物提交至 `assets/original-derived-png/`。這不授權 GitHub Release 或公開散布。
 - remake 尚未開始。RE 知識庫已建立，SPEC-001 已 READY，只授權固定 KOLTOWN derivative
   作研究 oracle；任何玩法、格式或玩家路徑仍須自己的 DRAFT／READY spec。
 - `Knights-of-legend.zip` 已在唯讀容器中通過 ZIP CRC 檢查，共 76 個中央目錄項目；可見

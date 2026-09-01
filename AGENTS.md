@@ -31,8 +31,16 @@
 
 開始研究時先在唯讀容器中建立檔案清冊、大小與 SHA-256，辨識 DOS 版本、執行檔、
 資料檔、驅動程式及封裝來源。公開程式碼授權不涵蓋原版執行檔、資料、美術、地圖、
-音樂、音效、商標或其轉換產物。所有素材都要分成「可公開」、「僅本機」與「來源／
-權利未知而拒絕發布」三類；private GitHub 儲存庫也不得當作原版素材保管箱。
+音樂、音效、商標或其轉換產物。所有素材都要分成「可公開」、「private GitHub 可保存」、
+「僅本機」與「來源／權利未知而拒絕發布」四類。
+
+本專案經使用者於 2026-09-01 明確決定，允許把從固定原版輸入可重生、已通過格式與視覺
+驗證的 PNG 衍生物提交到目前的 private GitHub 儲存庫。此例外只適用 PNG，不包含原版
+ZIP、EXE、archive、PDF、地圖、盒面、原始音訊、反組譯 payload 或未驗證圖片；也不等於
+取得公開散布權。每個入庫 PNG 必須放在 `assets/original-derived-png/`，並隨附來源 entry、
+來源 SHA-256、抽取器／版本、圖號、PNG SHA-256、證據狀態與權利分類 manifest。儲存庫若
+轉為 public、建立 public fork、GitHub Release 或公開 `dist-all/.../release/`，必須先停止
+並重新做權利審查；不得把 private repo 決策自動延伸成公開授權。
 
 ## 專案起源與玩家觀點研究
 
@@ -68,8 +76,9 @@
   palette 規則、輸出 manifest 與 PNG SHA-256。
 - 用 archive count、offset、尺寸、色盤、透明色與 atlas／接觸表驗證素材；檔案存在或
   大小可整除不等於解碼正確。越界、格式不符或缺檔必須失敗即關閉。
-- 原作衍生 PNG 預設只留本機 `dist-all/<版本>/full/`；公開 `release/` 只可包含有權
-  散布的素材，或提供合法資料匯入／抽取流程。
+- 已驗證的原作衍生 PNG 可依上述專案特例提交至 private GitHub 的
+  `assets/original-derived-png/`；未驗證 PNG 仍只留本機。公開 `release/` 只可包含另有
+  散布權的素材，或提供合法資料匯入／抽取流程。
 
 ### 音樂與音效
 
@@ -142,4 +151,3 @@ README 不得累積日期 checkpoint、失敗嘗試或 commit 流水帳。歷史
   metadata、來源、雜湊與影音驗收。
 - 每次打包從乾淨輸入重建，驗證啟動、內容、manifest、SHA-256、平台／架構、存檔位置、
   素材 deny-list 與授權文件。Linux 封包不等於 Windows／macOS 真機驗收。
-

@@ -928,3 +928,13 @@
   圖片不複製進 Git，點擊會回到來源文章。
 - 沿用 `docs/re/combpics-visual-oracle.json` 的證據限制：只確認場景身分、幾何與方向，不把
   JPEG 配準結果宣稱為逐像素 RGB parity；README 同時明列圖片權利仍屬原權利人。
+
+## 2026-09-01：private GitHub PNG 特例決策
+
+- 使用者明確決定本專案可將原版延伸 PNG 放入目前 private GitHub，取代「所有衍生 PNG
+  一律不得進 Git」的舊政策。
+- 特例只涵蓋從固定輸入可重生、已通過格式／視覺驗證且有 provenance／權利 manifest 的
+  PNG，固定放在 `assets/original-derived-png/`。原版 ZIP、EXE、archive、PDF、音訊、
+  反組譯 payload 與未驗證圖片仍禁止提交。
+- private 保存不等於公開散布權；repo 改為 public、public fork、GitHub Release 與公開
+  `dist-all/.../release/` 仍維持失敗即關閉並要求重新權利審查。

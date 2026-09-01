@@ -24,8 +24,11 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 ## 輸入與權利邊界
 
 1. 輸入 ZIP SHA-256 必須是 `2b455e3c…9f46`；不符即建立新 build 身分並停止。
-2. 所有原始與解碼後像素資料只可位於本機 ignored 工作區，禁止加入 Git／GitHub Release。
-3. 受版控內容只含工具、格式契約、檔名、大小、雜湊與不含 payload 的統計。
+2. 原始 archive／bytes 只可位於本機 ignored 工作區。已驗證、可重生的 PNG 可依
+   2026-09-01 專案決策加入 private Git 的 `assets/original-derived-png/`；禁止加入
+   GitHub Release 或公開包。
+3. 除上述 PNG 特例外，受版控內容只含工具、格式契約、檔名、大小、雜湊與不含 payload
+   的統計。每個入庫 PNG 必須有 provenance／權利 manifest，缺件即拒絕提交。
 4. 工具一律在無網路、非 root、資源受限的一次性 Docker 容器內執行。
 
 ## 預定輸出契約
@@ -54,11 +57,13 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 
 ## 權利審查
 
-- 原版 archive、解碼像素與其 PNG 衍生物一律標為 `local_original_derivative`，只留本機
-  ignored 工作區或明確授權的 private 交付位置，不加入 Git、GitHub Release 或公開包。
+- 原版 archive 與中間解碼像素一律只留本機。已驗證 PNG 衍生物標為
+  `private_repo_original_derivative` 時，可加入目前 private GitHub 的
+  `assets/original-derived-png/`；未驗證 PNG 維持 `local_original_derivative`。
 - Git 可保存不含 payload 的工具、schema、來源雜湊、位址、統計與 manifest 範本。
 - 公開 `dist-all/<版本>/release/` 只能使用另行證明可散布的素材，或提供合法原版資料的
-  本機匯入流程；private GitHub 本身不會把原版素材轉成可公開授權。
+  本機匯入流程；GitHub Release 不得包含這批 PNG。private GitHub 本身不會把原版素材
+  轉成可公開授權，repo visibility 改變前必須失敗即關閉並重做權利審查。
 
 ## 已有證據
 
