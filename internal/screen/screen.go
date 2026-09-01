@@ -29,6 +29,24 @@ func NewCanvas() *Canvas {
 	return &Canvas{img: ebiten.NewImage(Width, Height)}
 }
 
+// NewCanvasScaled 建立放大 n 倍的畫布。中文模式需要更大的字模格，因此在放大後的
+// 畫布上作畫；英文嚴格對拍模式仍用原版解析度。
+func NewCanvasScaled(scale int) *Canvas {
+	if scale < 1 {
+		scale = 1
+	}
+	return &Canvas{img: ebiten.NewImage(Width*scale, Height*scale)}
+}
+
+// DrawScaled 把素材放大 n 倍後畫到指定座標，採最近鄰，不產生新的中間色。
+func (c *Canvas) DrawScaled(src *ebiten.Image, x, y, scale int) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(float64(scale), float64(scale))
+	op.GeoM.Translate(float64(x), float64(y))
+	op.Filter = ebiten.FilterNearest
+	c.img.DrawImage(src, op)
+}
+
 func (c *Canvas) Image() *ebiten.Image { return c.img }
 
 // Clear 以透明清空畫布。
@@ -44,9 +62,10 @@ func (c *Canvas) DrawAt(src *ebiten.Image, x, y int) {
 
 // Snapshot 讀回畫布像素，供對拍使用。
 func (c *Canvas) Snapshot() *image.RGBA {
-	buf := make([]byte, Width*Height*4)
+	b := c.img.Bounds()
+	buf := make([]byte, b.Dx()*b.Dy()*4)
 	c.img.ReadPixels(buf)
-	out := image.NewRGBA(image.Rect(0, 0, Width, Height))
+	out := image.NewRGBA(image.Rect(0, 0, b.Dx(), b.Dy()))
 	copy(out.Pix, buf)
 	return out
 }

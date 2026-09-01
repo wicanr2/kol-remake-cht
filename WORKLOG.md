@@ -1143,3 +1143,22 @@
 - **人耳驗收尚未執行**，需使用者聆聽；在那之前 SPEC-004 維持 DRAFT，也不接
   Ebitengine 音訊路徑。
 - 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。
+
+## 2026-09-01：繁體中文介面（雙模式）
+
+- 使用者 2026-09-01 決定的雙模式落地：英文模式維持 320×200 與原版 8×6 字模，
+  嚴格對拍不受影響（三份收據重跑後畫面逐檔相同）；中文模式改用 640×400 畫布、
+  書本美術最近鄰放大、16×18 中文字模格。兩個模式共用同一個角色建立狀態機。
+- 新增 `tools/build_cjk_font.py`：用 ffmpeg 的 drawtext 在固定格點上烘字模，再以固定
+  門檻二值化。執行期只讀烘好的 PNG，不在執行期做字型排版。
+  **踩到兩個坑**：(1) 直接用 `text=` 傳字元會被 drawtext 的參數解析與 text expansion
+  吃掉（`%`、`\`、引號），改用 `textfile=` 加 `expansion=none`；(2) 相鄰字模的側邊會
+  突出到隔壁格，量共同邊界時被算進來，把格距放大到 32 並內縮 8 px 才乾淨。
+- `internal/font` 加上非連續碼位字型的支援（逐字模位置與逐字字寬），原版英文字型
+  仍走 first_codepoint 起算的連續索引，行為不變。
+- 新增 `docs/i18n/newchar-zh-Hant.json`（狀態沿用術語表三級）、`internal/i18n`、
+  `internal/book/layout_cjk.go`（**自訂版面，不是量自原版**）與 `internal/ui` 的中文繪製。
+- 新增 `tools/verify_text_fit.py`：版面座標由 `cmd/kol -dump-cjk-layout` 匯出，用實際
+  字模表的逐字字寬檢查每個字串的右緣與缺字。98 項全過。
+- 字模表衍生自 Noto Sans CJK TC（OFL 1.1），授權全文已隨字模表入庫。
+- 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。

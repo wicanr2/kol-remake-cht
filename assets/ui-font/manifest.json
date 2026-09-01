@@ -1,0 +1,1632 @@
+{
+  "schema": "kol-font-manifest-v2",
+  "tool": "tools/build_cjk_font.py",
+  "note": "中文 UI 字模表。執行期只讀 PNG，不在執行期做字型排版。",
+  "rights": {
+    "source_family": "Noto Sans CJK TC",
+    "source_license": "SIL Open Font License 1.1",
+    "classification": "字型著作權屬原作者；散布時必須隨附授權全文",
+    "derived": "本表是指定字元在固定大小下的點陣化結果"
+  },
+  "bake": {
+    "family": "Noto Sans CJK TC",
+    "size": 15,
+    "threshold": 96,
+    "cell_pitch": 32,
+    "draw_margin": 8,
+    "vertical_offset": 0,
+    "horizontal_offset": -1
+  },
+  "fonts": [
+    {
+      "name": "zh-hant-16",
+      "file": "zh-hant-16.png",
+      "advance": 16,
+      "cell": {
+        "width": 16,
+        "height": 18
+      },
+      "sheet": {
+        "columns": 16,
+        "width": 256,
+        "height": 234
+      },
+      "glyph_count": 199,
+      "png_sha256": "682c157fa975a8a4802507d11a995e58e03d2a5572a5dcf4bdd5491a9db52e73",
+      "glyphs": [
+        {
+          "codepoint": 33,
+          "character": "!",
+          "sheet_column": 0,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "100010001000100010001000100010001000000010001000000000000000000000000000"
+        },
+        {
+          "codepoint": 34,
+          "character": "\"",
+          "sheet_column": 1,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "000036003600360036000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 35,
+          "character": "#",
+          "sheet_column": 2,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "00000900090019003f801200120012007f80120012003200000000000000000000000000"
+        },
+        {
+          "codepoint": 36,
+          "character": "$",
+          "sheet_column": 3,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "040004001e0031003000300018000e0003000100010033001e0004000400000000000000"
+        },
+        {
+          "codepoint": 37,
+          "character": "%",
+          "sheet_column": 4,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "1c202420264066c02698252c196402440244046404380000000000000000000000000000"
+        },
+        {
+          "codepoint": 38,
+          "character": "&",
+          "sheet_column": 5,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "0e001b00130012001c001c60344026c0238033c01e600000000000000000000000000000"
+        },
+        {
+          "codepoint": 39,
+          "character": "'",
+          "sheet_column": 6,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "000030003000300030000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 40,
+          "character": "(",
+          "sheet_column": 7,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "000008000800100010001000300030003000300030001000100018000800080000000000"
+        },
+        {
+          "codepoint": 41,
+          "character": ")",
+          "sheet_column": 8,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "000020002000300010001000180018001800180018001000100030002000200000000000"
+        },
+        {
+          "codepoint": 42,
+          "character": "*",
+          "sheet_column": 9,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "08002a003c001c0014000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 43,
+          "character": "+",
+          "sheet_column": 10,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "00000c000c000c007f800c000c000c000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 44,
+          "character": ",",
+          "sheet_column": 11,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "300030001000300020000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 45,
+          "character": "-",
+          "sheet_column": 12,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "3c0000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 46,
+          "character": ".",
+          "sheet_column": 13,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "000030003000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 47,
+          "character": "/",
+          "sheet_column": 14,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "0600040004000c0008000800080010001000100030002000200060004000000000000000"
+        },
+        {
+          "codepoint": 48,
+          "character": "0",
+          "sheet_column": 15,
+          "sheet_row": 0,
+          "advance": 8,
+          "rows_hex": "1e001300310021002180218021802100310013001e000000000000000000000000000000"
+        },
+        {
+          "codepoint": 49,
+          "character": "1",
+          "sheet_column": 0,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "1c001c00040004000400040004000400040004003f000000000000000000000000000000"
+        },
+        {
+          "codepoint": 50,
+          "character": "2",
+          "sheet_column": 1,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "1e003300030001000300020006000c00180030003f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 51,
+          "character": "3",
+          "sheet_column": 2,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "1e0033000300030007000e0003000100018033001e000000000000000000000000000000"
+        },
+        {
+          "codepoint": 52,
+          "character": "4",
+          "sheet_column": 3,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "060006000e001a001200320023007f800200020002000000000000000000000000000000"
+        },
+        {
+          "codepoint": 53,
+          "character": "5",
+          "sheet_column": 4,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "3f003000300030003e00030001000180010033001e000000000000000000000000000000"
+        },
+        {
+          "codepoint": 54,
+          "character": "6",
+          "sheet_column": 5,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "0f001900300020002e0033002180218031801b000e000000000000000000000000000000"
+        },
+        {
+          "codepoint": 55,
+          "character": "7",
+          "sheet_column": 6,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "3f80010003000200060004000c000c000c000c000c000000000000000000000000000000"
+        },
+        {
+          "codepoint": 56,
+          "character": "8",
+          "sheet_column": 7,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "1e003300310031001b001e0033002180218033001e000000000000000000000000000000"
+        },
+        {
+          "codepoint": 57,
+          "character": "9",
+          "sheet_column": 8,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "1e00330021002100218033801d000100030026001c000000000000000000000000000000"
+        },
+        {
+          "codepoint": 58,
+          "character": ":",
+          "sheet_column": 9,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "000030003000000000000000000030003000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 59,
+          "character": ";",
+          "sheet_column": 10,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "300030000000000000000000300030001000300020000000000000000000000000000000"
+        },
+        {
+          "codepoint": 60,
+          "character": "<",
+          "sheet_column": 11,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "018007003c0070001c000780008000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 61,
+          "character": "=",
+          "sheet_column": 12,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "7f800000000000007f800000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 62,
+          "character": ">",
+          "sheet_column": 13,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "60003c00070001800f003800200000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 63,
+          "character": "?",
+          "sheet_column": 14,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "1c0036000200020006000c00080008000800000018001800000000000000000000000000"
+        },
+        {
+          "codepoint": 64,
+          "character": "@",
+          "sheet_column": 15,
+          "sheet_row": 1,
+          "advance": 8,
+          "rows_hex": "03e006180808100431e422642644244426cc23b8300018000c2007c00000000000000000"
+        },
+        {
+          "codepoint": 65,
+          "character": "A",
+          "sheet_column": 0,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "0e000e000a001b001b00110031803f80208060c060c00000000000000000000000000000"
+        },
+        {
+          "codepoint": 66,
+          "character": "B",
+          "sheet_column": 1,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "3f00318030c0308031803f0030c03040304031c03f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 67,
+          "character": "C",
+          "sheet_column": 2,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "0f801dc010003000300020003000300030001dc00f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 68,
+          "character": "D",
+          "sheet_column": 3,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "3f00318030c03040304030603040304030c031803f000000000000000000000000000000"
+        },
+        {
+          "codepoint": 69,
+          "character": "E",
+          "sheet_column": 4,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "3f8030003000300030003f0030003000300030003f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 70,
+          "character": "F",
+          "sheet_column": 5,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "3f8030003000300030003f00300030003000300030000000000000000000000000000000"
+        },
+        {
+          "codepoint": 71,
+          "character": "G",
+          "sheet_column": 6,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "07801cc030003000300023c03040304010401cc007800000000000000000000000000000"
+        },
+        {
+          "codepoint": 72,
+          "character": "H",
+          "sheet_column": 7,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "306030603060306030603fe0306030603060306030600000000000000000000000000000"
+        },
+        {
+          "codepoint": 73,
+          "character": "I",
+          "sheet_column": 8,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "300030003000300030003000300030003000300030000000000000000000000000000000"
+        },
+        {
+          "codepoint": 74,
+          "character": "J",
+          "sheet_column": 9,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "03000300030003000300030003000300030036001c000000000000000000000000000000"
+        },
+        {
+          "codepoint": 75,
+          "character": "K",
+          "sheet_column": 10,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "30c031803300360036003f003b003180308030c030400000000000000000000000000000"
+        },
+        {
+          "codepoint": 76,
+          "character": "L",
+          "sheet_column": 11,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "30003000300030003000300030003000300030003f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 77,
+          "character": "M",
+          "sheet_column": 12,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "3030387038703c703cf034b036b033b03330333030300000000000000000000000000000"
+        },
+        {
+          "codepoint": 78,
+          "character": "N",
+          "sheet_column": 13,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "3040384038403c40364032403340314031c030c030c00000000000000000000000000000"
+        },
+        {
+          "codepoint": 79,
+          "character": "O",
+          "sheet_column": 14,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "0f801dc030603060302020203020306030601dc00f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 80,
+          "character": "P",
+          "sheet_column": 15,
+          "sheet_row": 2,
+          "advance": 8,
+          "rows_hex": "3f00318030c030c030c031803f0030003000300030000000000000000000000000000000"
+        },
+        {
+          "codepoint": 81,
+          "character": "Q",
+          "sheet_column": 0,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "0f801dc0306030603020202030203060306018c00f800300018000e00000000000000000"
+        },
+        {
+          "codepoint": 82,
+          "character": "R",
+          "sheet_column": 1,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "3f00318030c030c031803f00330033003180308030c00000000000000000000000000000"
+        },
+        {
+          "codepoint": 83,
+          "character": "S",
+          "sheet_column": 2,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "0f001980300030001c000f0003800080008039801f000000000000000000000000000000"
+        },
+        {
+          "codepoint": 84,
+          "character": "T",
+          "sheet_column": 3,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "7fc004000400040004000400040004000400040004000000000000000000000000000000"
+        },
+        {
+          "codepoint": 85,
+          "character": "U",
+          "sheet_column": 4,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "3040304030403040304030403040104010c01dc00f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 86,
+          "character": "V",
+          "sheet_column": 5,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "60c0608021803180310013001b001a000a000e000c000000000000000000000000000000"
+        },
+        {
+          "codepoint": 87,
+          "character": "W",
+          "sheet_column": 6,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "610c238c2388328832d836d8165814501c701c701c300000000000000000000000000000"
+        },
+        {
+          "codepoint": 88,
+          "character": "X",
+          "sheet_column": 7,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "2180310013001a000e000c000e001a001300318061800000000000000000000000000000"
+        },
+        {
+          "codepoint": 89,
+          "character": "Y",
+          "sheet_column": 8,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "61802100330012001e000c000c000c000c000c000c000000000000000000000000000000"
+        },
+        {
+          "codepoint": 90,
+          "character": "Z",
+          "sheet_column": 9,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "3f80018001000300060004000c001800100030003f800000000000000000000000000000"
+        },
+        {
+          "codepoint": 91,
+          "character": "[",
+          "sheet_column": 10,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "1c0030003000300030003000300030003000300030003000300030001c00000000000000"
+        },
+        {
+          "codepoint": 92,
+          "character": "\\",
+          "sheet_column": 11,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "40002000200020003000100010001800080008000c000400040004000000000000000000"
+        },
+        {
+          "codepoint": 93,
+          "character": "]",
+          "sheet_column": 12,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "700018001800180018001800180018001800180018001800180018007000000000000000"
+        },
+        {
+          "codepoint": 94,
+          "character": "^",
+          "sheet_column": 13,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "00000c000e001a0012001300310000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 95,
+          "character": "_",
+          "sheet_column": 14,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "7f8000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 96,
+          "character": "`",
+          "sheet_column": 15,
+          "sheet_row": 3,
+          "advance": 8,
+          "rows_hex": "18000c000400000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 97,
+          "character": "a",
+          "sheet_column": 0,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "1e003300010003001f003100210033001d00000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 98,
+          "character": "b",
+          "sheet_column": 1,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "10003000300030003f003980308030c030c03080318039803f0000000000000000000000"
+        },
+        {
+          "codepoint": 99,
+          "character": "c",
+          "sheet_column": 2,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "0f0019003000200020002000300019000f00000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 100,
+          "character": "d",
+          "sheet_column": 3,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "00800180018001800f801b80318021802180218031803b801e8000000000000000000000"
+        },
+        {
+          "codepoint": 101,
+          "character": "e",
+          "sheet_column": 4,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "0e001b00318021803f802000300019000f00000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 102,
+          "character": "f",
+          "sheet_column": 5,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "1c001800100030007c003000300030003000300030003000300000000000000000000000"
+        },
+        {
+          "codepoint": 103,
+          "character": "g",
+          "sheet_column": 6,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "1f8033003100310033001e00300030001f802180208031801f0000000000000000000000"
+        },
+        {
+          "codepoint": 104,
+          "character": "h",
+          "sheet_column": 7,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "100030003000300037003980318031803180318031803180318000000000000000000000"
+        },
+        {
+          "codepoint": 105,
+          "character": "i",
+          "sheet_column": 8,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "300030000000000030003000300030003000300030003000300000000000000000000000"
+        },
+        {
+          "codepoint": 106,
+          "character": "j",
+          "sheet_column": 9,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "3000300000000000300030003000300030003000300030003000300030003000e0000000"
+        },
+        {
+          "codepoint": 107,
+          "character": "k",
+          "sheet_column": 10,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "300030003000300031803300360034003e003a0033003100318000000000000000000000"
+        },
+        {
+          "codepoint": 108,
+          "character": "l",
+          "sheet_column": 11,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "000030003000300030003000300030003000300030003000180000000000000000000000"
+        },
+        {
+          "codepoint": 109,
+          "character": "m",
+          "sheet_column": 12,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "37383bd8318c318c318c318c318c318c318c000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 110,
+          "character": "n",
+          "sheet_column": 13,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "370039803180318031803180318031803180000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 111,
+          "character": "o",
+          "sheet_column": 14,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "0e001b00318020802080208031801b000e00000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 112,
+          "character": "p",
+          "sheet_column": 15,
+          "sheet_row": 4,
+          "advance": 8,
+          "rows_hex": "3f003980308030c030c03080318039803f00300030003000300000000000000000000000"
+        },
+        {
+          "codepoint": 113,
+          "character": "q",
+          "sheet_column": 0,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "0f801b80318021802180218031803b801f80018001800180018000000000000000000000"
+        },
+        {
+          "codepoint": 114,
+          "character": "r",
+          "sheet_column": 1,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "360038003000300030003000300030003000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 115,
+          "character": "s",
+          "sheet_column": 2,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "1e003200200038001c000600030026003c00000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 116,
+          "character": "t",
+          "sheet_column": 3,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "0000100010007c0030003000300030003000100018001c00000000000000000000000000"
+        },
+        {
+          "codepoint": 117,
+          "character": "u",
+          "sheet_column": 4,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "318031803180318031803180318033801d80000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 118,
+          "character": "v",
+          "sheet_column": 5,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "6180210023003300120012001e000c000c00000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 119,
+          "character": "w",
+          "sheet_column": 6,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "63182310231037b034b014a01ce01ce01860000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 120,
+          "character": "x",
+          "sheet_column": 7,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "2300320016001c000c001c00160032006300000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 121,
+          "character": "y",
+          "sheet_column": 8,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "618021003300330012001a001e000c000c000c0008001800300000000000000000000000"
+        },
+        {
+          "codepoint": 122,
+          "character": "z",
+          "sheet_column": 9,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "3f00060006000c0008001800300030007f00000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 123,
+          "character": "{",
+          "sheet_column": 10,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "0c0010001000100010001000100060001000100010001000100010000c00000000000000"
+        },
+        {
+          "codepoint": 124,
+          "character": "|",
+          "sheet_column": 11,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "000030003000300030003000300030003000300030003000300030003000300030000000"
+        },
+        {
+          "codepoint": 125,
+          "character": "}",
+          "sheet_column": 12,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "70001000100010001000100018000c001000100010001000100010007000000000000000"
+        },
+        {
+          "codepoint": 126,
+          "character": "~",
+          "sheet_column": 13,
+          "sheet_row": 5,
+          "advance": 8,
+          "rows_hex": "38002d800700000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "codepoint": 20126,
+          "character": "亞",
+          "sheet_column": 14,
+          "sheet_row": 5,
+          "advance": 16,
+          "rows_hex": "3ffe0260026002601e7c1004100410041e7c0260026002603ffe00000000000000000000"
+        },
+        {
+          "codepoint": 20154,
+          "character": "人",
+          "sheet_column": 15,
+          "sheet_row": 5,
+          "advance": 16,
+          "rows_hex": "0080008000800180018001c001c001400360063006100c18380e20020000000000000000"
+        },
+        {
+          "codepoint": 20365,
+          "character": "侍",
+          "sheet_column": 0,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "04200c200ffe182018203bfe780818081bfe18081988188818c818081838000000000000"
+        },
+        {
+          "codepoint": 20448,
+          "character": "俠",
+          "sheet_column": 1,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "04200c2008201ffe1820392c792c1bac1afa1c72187018d8198c1f061e02000000000000"
+        },
+        {
+          "codepoint": 20581,
+          "character": "健",
+          "sheet_column": 2,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "08100ffc1914111413fe3214377c1110157e151013fe1310131017c01c7e000000000000"
+        },
+        {
+          "codepoint": 20687,
+          "character": "像",
+          "sheet_column": 3,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "04800df00b301ffc1e263a267bfe18c41b6c1ef819bc1e7419961f321860000000000000"
+        },
+        {
+          "codepoint": 20808,
+          "character": "先",
+          "sheet_column": 4,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "00800c800c800ffc1880108000803ffe02200620062004220c221822303e000000000000"
+        },
+        {
+          "codepoint": 20853,
+          "character": "兵",
+          "sheet_column": 5,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "00380ff00c000c000c000ffe0c300c300c303ffe000006300c1c38062000000000000000"
+        },
+        {
+          "codepoint": 20977,
+          "character": "凱",
+          "sheet_column": 6,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "04002d7c2d6c3f4400443fc400443f4431443f440044124412c51f853986000000000000"
+        },
+        {
+          "codepoint": 21029,
+          "character": "別",
+          "sheet_column": 7,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "00003f063126312631263f26082608260fa609a61926110611063106271c000000000000"
+        },
+        {
+          "codepoint": 21067,
+          "character": "剋",
+          "sheet_column": 8,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "040404043fa404243fa421a421a421a43fa41a241a041a1c1203320263fe000000000000"
+        },
+        {
+          "codepoint": 21147,
+          "character": "力",
+          "sheet_column": 9,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "01000100010001803ffe01060106010603040204060404040c04180c3078000000000000"
+        },
+        {
+          "codepoint": 21322,
+          "character": "半",
+          "sheet_column": 10,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "0080188c0c880c9000801ffc0080008000803ffe00800080008000800080000000000000"
+        },
+        {
+          "codepoint": 21407,
+          "character": "原",
+          "sheet_column": 11,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "1ffe104010c017fc160417fc1604160417fc30403248264c2c4621c00000000000000000"
+        },
+        {
+          "codepoint": 21462,
+          "character": "取",
+          "sheet_column": 12,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "3f8011fe11461f461164112411241f2c113811183f38792c01c601020000000000000000"
+        },
+        {
+          "codepoint": 21463,
+          "character": "受",
+          "sheet_column": 13,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "007c3fe0088c088808983ffe200220020ff80410063003e003e01e3c300e000000000000"
+        },
+        {
+          "codepoint": 21484,
+          "character": "召",
+          "sheet_column": 14,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "3ffc01040304020c060c1c7830000ffc080c080c080c080c0ffc080c0000000000000000"
+        },
+        {
+          "codepoint": 21517,
+          "character": "名",
+          "sheet_column": 15,
+          "sheet_row": 6,
+          "advance": 16,
+          "rows_hex": "0300020007f00c301c20366003c0018007fc1e043a040204020403fc0204000000000000"
+        },
+        {
+          "codepoint": 21521,
+          "character": "向",
+          "sheet_column": 0,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "0180018001003ffe3006300637f636363636363637f6360630063006301c000000000000"
+        },
+        {
+          "codepoint": 22294,
+          "character": "圖",
+          "sheet_column": 1,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "3ffe200223e2263227f220822ffa27f2241225d225d2241227f23ffe2002000000000000"
+        },
+        {
+          "codepoint": 22320,
+          "character": "地",
+          "sheet_column": 2,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "0830183019b019b63dbe19f61bb61bb419b41fb439b02182018200fe0000000000000000"
+        },
+        {
+          "codepoint": 22411,
+          "character": "型",
+          "sheet_column": 3,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "00043fb6093609363ff6093619063106209c00801ffc008000803ffe0000000000000000"
+        },
+        {
+          "codepoint": 22763,
+          "character": "士",
+          "sheet_column": 4,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "008000800080008000803ffe00800080008000800080008000801ffe0000000000000000"
+        },
+        {
+          "codepoint": 22812,
+          "character": "夜",
+          "sheet_column": 5,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "008000803ffe04400c4008fe188439a43b9c2ad80870087008f80b8e0a02000000000000"
+        },
+        {
+          "codepoint": 22899,
+          "character": "女",
+          "sheet_column": 6,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "000001000100030003083ffe061804100c300c200e6003c001e007383e0e300400000000"
+        },
+        {
+          "codepoint": 23383,
+          "character": "字",
+          "sheet_column": 7,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "008000803ffe200220020ff8003000e000803ffe00800080008000800780000000000000"
+        },
+        {
+          "codepoint": 23432,
+          "character": "守",
+          "sheet_column": 8,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "008000803ffe3006202600203ffe002008200c20042006200020002001e0000000000000"
+        },
+        {
+          "codepoint": 23563,
+          "character": "尋",
+          "sheet_column": 9,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "0ff8000c3ffe0ff800003f7c0c460c46387c00103ffe0c10021000700000000000000000"
+        },
+        {
+          "codepoint": 23660,
+          "character": "屬",
+          "sheet_column": 10,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "1ffe10061ffc1358175c17fc15a417fc13fe1ff23c9623f627f4200c0000000000000000"
+        },
+        {
+          "codepoint": 23721,
+          "character": "岩",
+          "sheet_column": 11,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "0080108410841ffc000000003ffe060004000ffc1c043404040407fc0404000000000000"
+        },
+        {
+          "codepoint": 23830,
+          "character": "崖",
+          "sheet_column": 12,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "108410841ffc00001ffe1040104017fc10401ffe104037fc204020402ffe000000000000"
+        },
+        {
+          "codepoint": 24040,
+          "character": "巨",
+          "sheet_column": 13,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "3ffe1800180018001ff81808180818081ff81800180018003ffe00000000000000000000"
+        },
+        {
+          "codepoint": 24179,
+          "character": "平",
+          "sheet_column": 14,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "3ffe0080088808880c98049000803ffe0080008000800080008000800000000000000000"
+        },
+        {
+          "codepoint": 24247,
+          "character": "康",
+          "sheet_column": 15,
+          "sheet_row": 7,
+          "advance": 16,
+          "rows_hex": "008000c01ffe104017fc10441ffe104417fc1444364c33f0275c2c4623c0000000000000"
+        },
+        {
+          "codepoint": 24478,
+          "character": "從",
+          "sheet_column": 0,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "08881888318825dc0d761b221a2038200920093e092009a00ba00a700e3e000000000000"
+        },
+        {
+          "codepoint": 24501,
+          "character": "徵",
+          "sheet_column": 1,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "09081d083568657f0ff2181237f63054578c118c17ec118c11f417f21062000000000000"
+        },
+        {
+          "codepoint": 24615,
+          "character": "性",
+          "sheet_column": 2,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "082018b019b01db03dfe3b303b30183019fe18301830183018301bfe0800000000000000"
+        },
+        {
+          "codepoint": 25136,
+          "character": "戰",
+          "sheet_column": 3,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "00103bb42a963b9200163ffc24923f9624943f9c04187fd9043b046e0446000000000000"
+        },
+        {
+          "codepoint": 25353,
+          "character": "按",
+          "sheet_column": 4,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "0820083009fe3f021962086408440bff1ecc388819d80870087819ce3b02000000000000"
+        },
+        {
+          "codepoint": 25366,
+          "character": "挖",
+          "sheet_column": 5,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "182018201bfe1b5a3e5a18d81b8e1c003dfc383018601882190219fe3000000000000000"
+        },
+        {
+          "codepoint": 25463,
+          "character": "捷",
+          "sheet_column": 6,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "082018201bfe18203dfe18261bff1c2639fe1920193e19a01ba01ae0363e000000000000"
+        },
+        {
+          "codepoint": 25496,
+          "character": "掘",
+          "sheet_column": 7,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "10001bfe1b023f021bfe1b101b921f921f927afe1a101a921a921efe3002000000000000"
+        },
+        {
+          "codepoint": 25509,
+          "character": "接",
+          "sheet_column": 8,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "0820183019fe18007ccc18481bfe1c647bff188c198818f8187819ee3102000000000000"
+        },
+        {
+          "codepoint": 25799,
+          "character": "擇",
+          "sheet_column": 9,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "180019fe195a3dfe182019fe18201ffe388838c819fe18201bfe18203020000000000000"
+        },
+        {
+          "codepoint": 25842,
+          "character": "擲",
+          "sheet_column": 10,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "1200135e17fa399a1ffc15bc1e7c1fba343a13fa109a17fe119813783410000000000000"
+        },
+        {
+          "codepoint": 25876,
+          "character": "攔",
+          "sheet_column": 11,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "000013de125213de3e5213de122213fa1e223afa32fa12fa127212fa13a2322e00000000"
+        },
+        {
+          "codepoint": 25935,
+          "character": "敏",
+          "sheet_column": 12,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "103010201fa0203e3f66316415e415347f9c391835183f98013c03660642000000000000"
+        },
+        {
+          "codepoint": 25976,
+          "character": "數",
+          "sheet_column": 13,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "04101f9014b03fff15a41fa43ff424d43f9c09183f9813181e341fe63082000000000000"
+        },
+        {
+          "codepoint": 26032,
+          "character": "新",
+          "sheet_column": 14,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "0c00043e3ff0136012603fe0047e046c3fec046c154c354c25cc04cc0484000000000000"
+        },
+        {
+          "codepoint": 26041,
+          "character": "方",
+          "sheet_column": 15,
+          "sheet_row": 8,
+          "advance": 16,
+          "rows_hex": "0080008000c03ffe02000200020003fc060c060804080c080808181830f0000000000000"
+        },
+        {
+          "codepoint": 26063,
+          "character": "族",
+          "sheet_column": 0,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "084008400cfe7f801160107e1ed01290121012fe1230123c322426462d82000000000000"
+        },
+        {
+          "codepoint": 26143,
+          "character": "星",
+          "sheet_column": 1,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "1ffc180c1ffc180c1ffc088008801ffc308020800ffc00803ffe00000000000000000000"
+        },
+        {
+          "codepoint": 26234,
+          "character": "智",
+          "sheet_column": 2,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "000010001f7e244604463fc60c461b7e31002ff8080808080ff808080ff8080800000000"
+        },
+        {
+          "codepoint": 26263,
+          "character": "暗",
+          "sheet_column": 3,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "00203c3025fe248424cc24483ffe240024fe248624863cfe208600fe0084000000000000"
+        },
+        {
+          "codepoint": 26989,
+          "character": "業",
+          "sheet_column": 4,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "03640b6c0b683ffe061002201ffe00801ffc00803ffe008006b8388e0080000000000000"
+        },
+        {
+          "codepoint": 27491,
+          "character": "正",
+          "sheet_column": 5,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "3ffe00c000c000c008c008c008fc08c008c008c008c008c03ffe00000000000000000000"
+        },
+        {
+          "codepoint": 27665,
+          "character": "民",
+          "sheet_column": 6,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "1ffc100c100c100c1ffc108010801ffe10c01040106011223f36381c0000000000000000"
+        },
+        {
+          "codepoint": 28023,
+          "character": "海",
+          "sheet_column": 7,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "1180190009fe0300060021fc3124013407ff0b441b2413fe1004300c2038000000000000"
+        },
+        {
+          "codepoint": 28040,
+          "character": "消",
+          "sheet_column": 8,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "00201b260d2401ac002021fe190601e601360d060b7e1bc613063206221c000000000000"
+        },
+        {
+          "codepoint": 29246,
+          "character": "爾",
+          "sheet_column": 9,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "3ffe0c98188c3ffe108416b416b41ce4129416b416b41ce41084109c0000000000000000"
+        },
+        {
+          "codepoint": 29557,
+          "character": "獵",
+          "sheet_column": 10,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "01243b6c1b6c19363bfc2a640adc1bfc1a203bfc2a240bf40a240bfe33f2000000000000"
+        },
+        {
+          "codepoint": 29560,
+          "character": "獸",
+          "sheet_column": 11,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "3b942a9e2a9a3b9a3f9824fe3f983f9800183fd800343fa431a63fe210c2000000000000"
+        },
+        {
+          "codepoint": 29992,
+          "character": "用",
+          "sheet_column": 12,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "1ffc1884188418841ffc1884188418841ffc1084108430842084209c0000000000000000"
+        },
+        {
+          "codepoint": 30007,
+          "character": "男",
+          "sheet_column": 13,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "1ffc188c188c1ffc188c1ffc018001803ffc0104030406041c0c30780000000000000000"
+        },
+        {
+          "codepoint": 30331,
+          "character": "登",
+          "sheet_column": 14,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "00403f58037012260e180ffc30062ffa081808180ff8063002203ffe0000000000000000"
+        },
+        {
+          "codepoint": 30428,
+          "character": "盜",
+          "sheet_column": 15,
+          "sheet_row": 9,
+          "advance": 16,
+          "rows_hex": "10801d8001fe3b2602240c7818cc138620001ffc1364136413643ffe0000000000000000"
+        },
+        {
+          "codepoint": 30702,
+          "character": "矮",
+          "sheet_column": 0,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "100e11f83e3039fe2838287c08b63f02082409fe1ccc16c8327820ee0182000000000000"
+        },
+        {
+          "codepoint": 30906,
+          "character": "確",
+          "sheet_column": 1,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "00103e3019fe1172105810fe3f98379836fe369816fe16981c9810fe0080000000000000"
+        },
+        {
+          "codepoint": 31278,
+          "character": "種",
+          "sheet_column": 2,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "02063ffe283009fe08303ffe09b21dfe1fb23bfe283009fe083008300bff000000000000"
+        },
+        {
+          "codepoint": 31934,
+          "character": "精",
+          "sheet_column": 3,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "08302bfe2a302cfe0c300ffe3e0018fe1c862afe2a8668fe08860986090c000000000000"
+        },
+        {
+          "codepoint": 32773,
+          "character": "者",
+          "sheet_column": 4,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "010001041ff8011801303ffe018007000ff83c08240807f8040807f80408000000000000"
+        },
+        {
+          "codepoint": 32784,
+          "character": "耐",
+          "sheet_column": 5,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "00043fc404040c043fff2a842a842aa42ab42a942a942a842a842a84219c000000000000"
+        },
+        {
+          "codepoint": 32887,
+          "character": "職",
+          "sheet_column": 6,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "00983e9c27fc257a3d4827fe24083dea252e25ec3d2c3d2825fe05360426000000000000"
+        },
+        {
+          "codepoint": 33394,
+          "character": "色",
+          "sheet_column": 7,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "0200060007f00c6018403ffc3884188418841ffc18041800180208020ffe000000000000"
+        },
+        {
+          "codepoint": 34382,
+          "character": "虎",
+          "sheet_column": 8,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "018001fc01801ffe110611f417e0118010fc100011301330333322322c1e000000000000"
+        },
+        {
+          "codepoint": 34523,
+          "character": "蛛",
+          "sheet_column": 9,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "0810085008503efe2a902b902a102bfe3e3828780a540ed63f9221120010000000000000"
+        },
+        {
+          "codepoint": 34875,
+          "character": "蠻",
+          "sheet_column": 10,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "008013e8141639fc15ce3c1027da2bfa00801ffc10841ffc008c3ffe0002000000000000"
+        },
+        {
+          "codepoint": 34907,
+          "character": "衛",
+          "sheet_column": 11,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "090013ee21200ff0180013fe3224722453e410c417f416c417f410c4109c000000000000"
+        },
+        {
+          "codepoint": 34913,
+          "character": "衡",
+          "sheet_column": 12,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "090013ce32402e400fe01abe33e432a413e4108417f411c411641624100c000000000000"
+        },
+        {
+          "codepoint": 35211,
+          "character": "見",
+          "sheet_column": 13,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "0ff808080ff8080808080ff8080808080ff80260066004621c62303e0000000000000000"
+        },
+        {
+          "codepoint": 35215,
+          "character": "規",
+          "sheet_column": 14,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "080008fe08863efe0886088608fe3f8608860cfe0e481a4812cb308b230e000000000000"
+        },
+        {
+          "codepoint": 35282,
+          "character": "角",
+          "sheet_column": 15,
+          "sheet_row": 10,
+          "advance": 16,
+          "rows_hex": "020007e00c2008403ffc388408840ffc088408841ffc100410043004203c000000000000"
+        },
+        {
+          "codepoint": 35469,
+          "character": "認",
+          "sheet_column": 0,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "100019fe08327ee200663e6600c63f9c00203e5627d2274227463e4c2078000000000000"
+        },
+        {
+          "codepoint": 35531,
+          "character": "請",
+          "sheet_column": 1,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "083009fe08303efe00303dfe00003cfe00863cfe248624fe24863d86210c000000000000"
+        },
+        {
+          "codepoint": 36042,
+          "character": "賊",
+          "sheet_column": 2,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "00103e16221223ff3e1022d022de3ffc22cc228c3e881598363f22662046000000000000"
+        },
+        {
+          "codepoint": 36335,
+          "character": "路",
+          "sheet_column": 3,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "00203e60227c22c423ec3fb80c382c7c2fc62dfe2cc62cc63ec630fe0044000000000000"
+        },
+        {
+          "codepoint": 36523,
+          "character": "身",
+          "sheet_column": 4,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "008001800ff808180ff8081a081e0ffc08180ff83cf8019807183c183070000000000000"
+        },
+        {
+          "codepoint": 36938,
+          "character": "遊",
+          "sheet_column": 5,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "311011901ffe03203b3e0bc6134c32483a7e0a480a481ec81d98360023fe000000000000"
+        },
+        {
+          "codepoint": 36947,
+          "character": "道",
+          "sheet_column": 6,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "310810980bfe00603dfc0904110431fc3d0409fc090409fc1800360023fe000000000000"
+        },
+        {
+          "codepoint": 36956,
+          "character": "遜",
+          "sheet_column": 7,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "200417fc18f00134397819dc13b6377e395a093c097a195a1f18360023fe000000000000"
+        },
+        {
+          "codepoint": 36960,
+          "character": "遠",
+          "sheet_column": 8,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "202013fc182007fe380019fc110c210c39fc08e40b981ebc18c63e0023fe000000000000"
+        },
+        {
+          "codepoint": 36984,
+          "character": "選",
+          "sheet_column": 9,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "000033de1a5203de3a501b9e109833fe38980ffe0898198c1b06360023fe000000000000"
+        },
+        {
+          "codepoint": 37325,
+          "character": "重",
+          "sheet_column": 10,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "00181ff000803ffe00801ffc188c1ffc188c1ffc00801ffc00803ffe0000000000000000"
+        },
+        {
+          "codepoint": 37326,
+          "character": "野",
+          "sheet_column": 11,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "00003ffe258625ac3f98258c3fff041a041a3f9e041804180f983e180070000000000000"
+        },
+        {
+          "codepoint": 37327,
+          "character": "量",
+          "sheet_column": 12,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "0ff80ff808080ff83ffe00001ffc1ffc18841ffc00801ffc3ffe00000000000000000000"
+        },
+        {
+          "codepoint": 37749,
+          "character": "鍵",
+          "sheet_column": 13,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "08101bfe149222923d7f09120bfe3c9008fe2f902dfe3d901f903b60023e000000000000"
+        },
+        {
+          "codepoint": 38728,
+          "character": "靈",
+          "sheet_column": 14,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "1ffc3ffe2c9a22a20eb81ddc15541ddc00001ffc0c901aac3ffe00000000000000000000"
+        },
+        {
+          "codepoint": 39006,
+          "character": "類",
+          "sheet_column": 15,
+          "sheet_row": 11,
+          "advance": 16,
+          "rows_hex": "00002dfe0e100c7e3f421e423f7e2c42027e0d423f420c7e0e24336620c2000000000000"
+        },
+        {
+          "codepoint": 39340,
+          "character": "馬",
+          "sheet_column": 0,
+          "sheet_row": 12,
+          "advance": 16,
+          "rows_hex": "1ffc188018801ffc18801ffc188018801ffe0002169212d63246201c0000000000000000"
+        },
+        {
+          "codepoint": 39600,
+          "character": "骰",
+          "sheet_column": 1,
+          "sheet_row": 12,
+          "advance": 16,
+          "rows_hex": "3f7c33643f643b443fc621803ffe12441e64122816383a3822ee26820000000000000000"
+        },
+        {
+          "codepoint": 39636,
+          "character": "體",
+          "sheet_column": 2,
+          "sheet_row": 12,
+          "advance": 16,
+          "rows_hex": "00283efe22aa2efe2aaa3ffe23003ffe32003afe36c63efe3a4422682ffe000000000000"
+        },
+        {
+          "codepoint": 39749,
+          "character": "魅",
+          "sheet_column": 3,
+          "sheet_row": 12,
+          "advance": 16,
+          "rows_hex": "0c1008183f7e2d183f182dfe2d183f3c143e157a17da17983410240363fe000000000000"
+        },
+        {
+          "codepoint": 39764,
+          "character": "魔",
+          "sheet_column": 4,
+          "sheet_row": 12,
+          "advance": 16,
+          "rows_hex": "00c01ffe10001ffe121016b41bd617fc344437fc344427fc21ac233a2c3e000000000000"
+        },
+        {
+          "codepoint": 40670,
+          "character": "點",
+          "sheet_column": 5,
+          "sheet_row": 12,
+          "advance": 16,
+          "rows_hex": "00103f1035103f103f1f3f100c103f100c7e0c423fc200422d422afe0042000000000000"
+        },
+        {
+          "codepoint": 40736,
+          "character": "鼠",
+          "sheet_column": 6,
+          "sheet_row": 12,
+          "advance": 16,
+          "rows_hex": "02001e7c10041f7c10041ffc000010881ff810881f8810f8108c1ff61986000000000000"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,368 @@
+{
+  "schema": "kol-ui-i18n-v1",
+  "language": "zh-Hant",
+  "note": "remake 中文模式的 UI 字串。狀態沿用術語表的三級：核准／暫譯／待查；暫譯仍須由說明書其他段落或原版畫面交叉確認。專名沿用說明書作法保留拉丁拼寫。",
+  "glossary": "docs/manual/glossary.md",
+  "labels": [
+    {
+      "en": "NAME",
+      "zh": "名字",
+      "status": "核准",
+      "note": "New Character 頁欄位"
+    },
+    {
+      "en": "RACE",
+      "zh": "種族",
+      "status": "核准"
+    },
+    {
+      "en": "SEX",
+      "zh": "性別",
+      "status": "核准"
+    },
+    {
+      "en": "CLASS",
+      "zh": "職業",
+      "status": "核准"
+    },
+    {
+      "en": "STRENGTH",
+      "zh": "力量",
+      "status": "核准",
+      "note": "SPEC-005 已知屬性契約"
+    },
+    {
+      "en": "QUICKNESS",
+      "zh": "敏捷",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "SIZE",
+      "zh": "體型",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "HEALTH",
+      "zh": "健康",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "FORESIGHT",
+      "zh": "先見",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "CHARISMA",
+      "zh": "魅力",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "INTELLECT",
+      "zh": "智力",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "BALANCE",
+      "zh": "平衡",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "ENDURANCE",
+      "zh": "耐力",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "BODY PTS.",
+      "zh": "身體點數",
+      "status": "核准",
+      "note": "同上"
+    }
+  ],
+  "races": [
+    {
+      "en": "HUMAN",
+      "zh": "人類",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "ELVEN",
+      "zh": "精靈族",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "DWARVEN",
+      "zh": "矮人族",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "KELDEN",
+      "zh": "凱爾登",
+      "status": "暫譯",
+      "note": "docs/manual/glossary.md"
+    }
+  ],
+  "secondary": [
+    {
+      "en": "MALE",
+      "zh": "男性",
+      "status": "核准"
+    },
+    {
+      "en": "FEMALE",
+      "zh": "女性",
+      "status": "核准"
+    }
+  ],
+  "professions": [
+    {
+      "en": "BARBARIAN",
+      "zh": "野蠻人",
+      "status": "暫譯",
+      "note": "手冊譯法（Krag 野蠻人）"
+    },
+    {
+      "en": "RANGER",
+      "zh": "遊俠",
+      "status": "暫譯"
+    },
+    {
+      "en": "WARRION",
+      "zh": "戰士",
+      "status": "暫譯",
+      "note": "原版字串就是 WARRION，不是 WARRIOR；已逐字模確認"
+    },
+    {
+      "en": "SQUIRE",
+      "zh": "侍從",
+      "status": "暫譯",
+      "note": "手冊索引 Squires（侍從）"
+    },
+    {
+      "en": "DARKGUARD",
+      "zh": "暗衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "WATCHMAN",
+      "zh": "守夜人",
+      "status": "暫譯"
+    },
+    {
+      "en": "PLAINSMAN",
+      "zh": "平原人",
+      "status": "暫譯"
+    },
+    {
+      "en": "HUNTER",
+      "zh": "獵人",
+      "status": "暫譯"
+    },
+    {
+      "en": "REGULAR",
+      "zh": "正規兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "HIGHWAYMAN",
+      "zh": "攔路盜",
+      "status": "暫譯"
+    },
+    {
+      "en": "PIRATE",
+      "zh": "海盜",
+      "status": "暫譯",
+      "note": "手冊索引 Pirates（海盜）"
+    },
+    {
+      "en": "ROGUE",
+      "zh": "盜賊",
+      "status": "暫譯"
+    },
+    {
+      "en": "TIGRESS",
+      "zh": "虎女",
+      "status": "暫譯"
+    },
+    {
+      "en": "AMAZON",
+      "zh": "亞馬遜",
+      "status": "暫譯",
+      "note": "手冊保留 Amazons"
+    },
+    {
+      "en": "HUNTRESS",
+      "zh": "女獵人",
+      "status": "暫譯"
+    },
+    {
+      "en": "PLAINSWOMAN",
+      "zh": "平原女",
+      "status": "暫譯"
+    },
+    {
+      "en": "BREKLAND",
+      "zh": "Brekland",
+      "status": "暫譯",
+      "note": "精靈教團專名，手冊保留拉丁拼寫"
+    },
+    {
+      "en": "KLVAR",
+      "zh": "Klvar",
+      "status": "暫譯",
+      "note": "同上；手冊作 Klvar 精靈"
+    },
+    {
+      "en": "MELOD",
+      "zh": "Melod",
+      "status": "暫譯",
+      "note": "同上"
+    },
+    {
+      "en": "PYAR",
+      "zh": "Pyar",
+      "status": "暫譯",
+      "note": "同上"
+    },
+    {
+      "en": "THISM",
+      "zh": "Thism",
+      "status": "暫譯",
+      "note": "同上"
+    },
+    {
+      "en": "USIP",
+      "zh": "Usip",
+      "status": "暫譯",
+      "note": "同上"
+    },
+    {
+      "en": "TUNNELER",
+      "zh": "掘道兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "RATGUARD",
+      "zh": "鼠衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "TROLLBANE",
+      "zh": "巨魔剋星",
+      "status": "暫譯",
+      "note": "術語表 Trollsbane Inn 巨魔剋星旅店"
+    },
+    {
+      "en": "MILITIA",
+      "zh": "民兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "DIGGER",
+      "zh": "挖掘兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "SPIDER GUARD",
+      "zh": "蛛衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "ORCBANE",
+      "zh": "半獸人剋星",
+      "status": "暫譯"
+    },
+    {
+      "en": "LEVY",
+      "zh": "徵召兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "CLIFF GUARD",
+      "zh": "崖衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "ROCK RANGER",
+      "zh": "岩地遊俠",
+      "status": "暫譯"
+    },
+    {
+      "en": "FAR SEEKER",
+      "zh": "遠尋者",
+      "status": "暫譯"
+    }
+  ],
+  "ui": [
+    {
+      "en": "New character",
+      "zh": "新角色",
+      "status": "暫譯",
+      "note": "原版是 BOOKPICS[10] 圖，中文模式改畫文字"
+    },
+    {
+      "en": "Select one",
+      "zh": "請選擇",
+      "status": "暫譯",
+      "note": "原版是 BOOKPICS[11] 圖，中文模式改畫文字"
+    },
+    {
+      "en": "REROLL STATS",
+      "zh": "重新擲骰",
+      "status": "核准",
+      "note": "術語表 reroll 重新擲骰"
+    },
+    {
+      "en": "ACCEPT STATS",
+      "zh": "接受屬性",
+      "status": "暫譯"
+    },
+    {
+      "en": "USE ARROW KEYS",
+      "zh": "用方向鍵",
+      "status": "暫譯"
+    },
+    {
+      "en": "TO SELECT A",
+      "zh": "選擇角色",
+      "status": "暫譯"
+    },
+    {
+      "en": "CHARACTER",
+      "zh": "圖像",
+      "status": "暫譯",
+      "note": "術語表 figure 角色圖像"
+    },
+    {
+      "en": "PRESS RETURN",
+      "zh": "按 RETURN",
+      "status": "核准",
+      "note": "術語表 RETURN 鍵保留原鍵名"
+    },
+    {
+      "en": "TO ACCEPT",
+      "zh": "確認",
+      "status": "暫譯"
+    },
+    {
+      "en": "CANCEL",
+      "zh": "取消",
+      "status": "核准"
+    },
+    {
+      "en": "ACCEPT",
+      "zh": "確認",
+      "status": "暫譯"
+    }
+  ]
+}

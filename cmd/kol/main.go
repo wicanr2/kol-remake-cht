@@ -19,6 +19,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/charcreate"
 	"github.com/wicanr2/kol-remake-cht/internal/chardata"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
+	"github.com/wicanr2/kol-remake-cht/internal/i18n"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/title"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
@@ -33,9 +34,10 @@ const (
 	sceneNewChar    scene = "newchar"
 	sceneScript     scene = "script"
 	sceneTitle      scene = "title"
+	sceneScriptCJK  scene = "script-cjk"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -71,6 +73,14 @@ func (c fixedChoice) Choose(n int) int {
 	return int(c)
 }
 
+// canvasFor 依語言決定畫布大小：中文模式在放大後的畫布上作畫。
+func canvasFor(lang string) *screen.Canvas {
+	if lang == "en" {
+		return screen.NewCanvas()
+	}
+	return screen.NewCanvasScaled(book.CJKScale)
+}
+
 type spriteCache struct {
 	lib *assets.Library
 	m   map[string]*ebiten.Image
@@ -100,6 +110,8 @@ type game struct {
 	sprites *spriteCache
 	small   *font.Font
 	large   *font.Font
+	cjk     *font.Font
+	strings *i18n.Table
 	canvas  *screen.Canvas
 	state   *charcreate.State
 	sequence *title.Sequence
@@ -139,6 +151,8 @@ func (g *game) render() error {
 		g.canvas.DrawAt(portrait, book.PortraitOrigin.X, book.PortraitOrigin.Y)
 	case sceneScript:
 		return ui.NewCharacter(g.canvas.Image(), g.sprites, g.small, g.large, g.state)
+	case sceneScriptCJK:
+		return ui.NewCharacterCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.state)
 	case sceneTitle:
 		bg, err := g.sprites.Get("BACKPICS", g.frame.Back)
 		if err != nil {
@@ -200,7 +214,10 @@ func (g *game) Draw(dst *ebiten.Image) {
 	g.drawn = true
 }
 
-func (g *game) Layout(int, int) (int, int) { return screen.Width, screen.Height }
+func (g *game) Layout(int, int) (int, int) {
+	b := g.canvas.Image().Bounds()
+	return b.Dx(), b.Dy()
+}
 
 // applyToken 把腳本 token 套到狀態機；token 對應原版的鍵盤操作。
 func applyToken(st *charcreate.State, token string) error {
@@ -251,12 +268,34 @@ func main() {
 		"標題序列兩處亂數的取法：rng 依 seed 重播，first／second 固定取第一或第二個選項")
 	scaleFlag := flag.Int("scale", 3, "視窗放大倍率")
 	listAssets := flag.Bool("list-assets", false, "只列出 manifest 摘要後結束")
+	dumpLayout := flag.String("dump-cjk-layout", "",
+		"把中文模式的版面座標寫成 JSON 後結束，供文字安全矩形檢查使用")
+	lang := flag.String("lang", "en", "介面語言：en 走原版英文字模的嚴格對拍模式，"+
+		"zh-Hant 走中文模式（畫布放大兩倍、16 px 中文字格，不對拍）")
+	uiFontRoot := flag.String("ui-fonts", "assets/ui-font", "中文 UI 字模表目錄")
+	stringsPath := flag.String("strings", "docs/i18n/newchar-zh-Hant.json",
+		"中文 UI 字串表")
 	flag.Parse()
 
 	lib, err := assets.Load(*assetRoot)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
+	}
+	if *dumpLayout != "" {
+		raw, err := json.MarshalIndent(map[string]any{
+			"schema": "kol-cjk-layout-v1", "scale": book.CJKScale,
+			"cell": book.CJKCell, "layout": book.CJKLayout, "text_box": book.CJKTextBox,
+		}, "", "  ")
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := os.WriteFile(*dumpLayout, append(raw, '\n'), 0o644); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		return
 	}
 	if *listAssets {
 		m := lib.Manifest()
@@ -277,6 +316,21 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+	var cjk *font.Font
+	var table *i18n.Table
+	if *lang != "en" {
+		cjk, err = font.Load(*uiFontRoot, "zh-hant-16")
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		table, err = i18n.Load(*stringsPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
+
 	data, err := chardata.Load(*dataPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -294,7 +348,9 @@ func main() {
 		sequence: sequence,
 		small:    small,
 		large:    large,
-		canvas:   screen.NewCanvas(),
+		cjk:      cjk,
+		strings:  table,
+		canvas:   canvasFor(*lang),
 		state:    charcreate.New(data, &lcg{state: uint32(*seed)}),
 		scene:    scene(*sceneName),
 		portrait: *portrait,
@@ -353,6 +409,9 @@ func main() {
 			os.Exit(2)
 		}
 		g.scene = sceneScript
+		if *lang != "en" {
+			g.scene = sceneScriptCJK
+		}
 		g.jobs = append(g.jobs, shotJob{
 			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
 		for i, token := range strings.Fields(*script) {
@@ -402,7 +461,8 @@ func main() {
 		g.jobs = []shotJob{{name: *sceneName, path: *shot}}
 	}
 
-	ebiten.SetWindowSize(screen.Width**scaleFlag, screen.Height**scaleFlag)
+	bounds := g.canvas.Image().Bounds()
+	ebiten.SetWindowSize(bounds.Dx()**scaleFlag, bounds.Dy()**scaleFlag)
 	ebiten.SetWindowTitle("武士傳說")
 	if err := ebiten.RunGame(g); err != nil {
 		fmt.Fprintln(os.Stderr, err)

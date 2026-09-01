@@ -171,8 +171,9 @@
    候選，技術驗收已通過（時長與原版 DOSBox-X 擷取四段的平均值差 0.000581 秒），
    但**需要使用者實際聆聽**才能把 SPEC-004 升 READY，在那之前不接 Ebitengine 音訊路徑。
 
-繁中排版採雙模式：保留原版英文字模模式供嚴格像素對拍，中文模式另用較大字格；
-尚未實作。
+繁中雙模式已實作：英文模式維持 320×200 與原版字模，供嚴格對拍；中文模式 640×400、
+16×18 中文字模格，New Character 頁已全頁中文化（`docs/verification/cjk-ui/`）。
+字模表衍生自 Noto Sans CJK TC（OFL 1.1），散布時必須隨附授權全文。
 
 待使用者決策：`assets/original-derived-data/character-creation.json`（39 筆職業骰式、
 內部基值與名稱表）是原版衍生的 typed data，不是 PNG。2026-09-01 的 private-repo
