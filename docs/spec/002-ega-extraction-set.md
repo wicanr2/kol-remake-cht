@@ -1,6 +1,6 @@
 # SPEC-002 EGA extraction set
 
-- 狀態：`DRAFT`
+- 狀態：`READY`
 - 日期：2026-09-01
 - 母體：`docs/re/image-asset-inventory.json` 的 30 個邏輯 archive、1,022 個 payload
 - 適用範圍：固定原版 ZIP 的 EGA `PICS`；不含 PCGA／HERC、無副檔名固定記錄表或玩法資料
@@ -61,6 +61,8 @@ payload 已有足夠契約；多筆彩圖／遮罩可合成一張 runtime PNG，
 - 本表的 archive 名稱、payload 數與總和必須由 verifier 對清冊重算，禁止手工漂移。
 - 待證實來源降為 0，或由使用者明確縮小 extraction set 並接受排除，才可通過
   「每種預定輸出格式皆有已證實契約」的 READY gate。
-- 顯示 theme 仍須使用者決定；本表只證實 EGA 母體，不替使用者排除或承諾 CGA／Hercules。
-- production 抽取器必須原子化輸出、寫 manifest、重讀 PNG 並執行權利 deny-list；
-  本表本身不授權實作。
+- 顯示 theme 已由使用者於 2026-09-01 決定為首版 EGA-only；本表即首版 extraction set，
+  CGA／Hercules 若日後納入必須另立母體與 gate。
+- production 抽取器必須原子化輸出、寫 manifest、重讀 PNG 並執行權利 deny-list。
+  `tools/extract_ega_assets.py` 已滿足這些條件並產出全部 752 個 PNG 單位，逐張與
+  visual probe 紀錄的 SHA-256 相符。

@@ -1,7 +1,7 @@
 # SPEC-002：PNG 素材抽取契約
 
-- 狀態：`DRAFT`
-- 日期：2026-08-31
+- 狀態：`READY`
+- 日期：2026-09-01
 - 範圍：由固定原版輸入重生本機 PNG 衍生素材；不定義玩法
 - RE 來源：`docs/re/image-formats.md`、`docs/re/image-asset-inventory.json`、
   `docs/re/image-lzw-probe-summary.json`、`docs/re/town-index24-png-probe-summary.json`、
@@ -143,13 +143,24 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 - [x] 已預先定義全部 archive 的失敗政策、可回查命名、manifest schema 與權利審查。
 - [x] EGA 預定輸出格式皆已有已證實像素契約；26 筆非圖片明列排除，沒有 unknown。
   若 theme 決策納入 PCGA／HERC，該分支必須另行通過同一 gate。
-- [ ] 使用者確認顯示 theme 範圍：EGA-only、EGA 基準加後續 CGA／Hercules，或三者同為
-  首版必要交付；未確認前不得把建議固化成正式 extraction set。
+- [x] 使用者已於 2026-09-01 確認顯示 theme 範圍：首版 EGA-only，CGA／Hercules 列為
+  後續選項。`MAKEMODE.EXE` 的轉換像素規則若日後納入，必須另行通過同一 gate。
 - [x] 由第二條獨立證據（兩張原版文章截圖＋DOSBox-X mode／palette 契約）交叉驗證像素結果。
 
 ## 實作狀態
 
-無 production implementation。`tools/probe_image_lzw.py` 是 RE 階段一次性機械探針，
+`tools/extract_ega_assets.py` 是本 spec 的 production 抽取器，輸出
+`assets/original-derived-png/ega/`：30 個邏輯 archive、752 張 PNG，逐張重讀驗證並與
+已版控 visual probe 紀錄的 SHA-256 核對，任何一項不符即整批失敗、不留半套輸出；
+輸出以暫存目錄建置後整批替換，且輸出根目錄被限制在 `assets/original-derived-png/`。
+抽取計畫直接取自 `docs/re/*-visual-probe.json` 的逐張紀錄，manifest 記錄各 archive 的
+probe 檔與其上游 IDA 摘要雜湊。
+
+原版同狀態 parity 已建立兩項收據：抽出的 `BOOKPICS[0]` 與原版書本封面畫面除螢幕中央
+8×11 的滑鼠游標外逐像素相同；80 張 `CHARPICS` 模板與原版角色圖像選擇畫面在
+blit 座標 (208, 106) 上 80/80 逐像素相同。
+
+以下探針仍只是 RE 階段工具，不得作 runtime importer。`tools/probe_image_lzw.py` 是 RE 階段一次性機械探針，
 其批次輸出仍明示未驗證多數圖片的尺寸、像素與 palette，不能被 runtime import；
 `tools/probe_extract_comb_png.py`、`tools/probe_extract_monpics_png.py` 與
 `tools/probe_extract_perpics_png.py` 只關閉各自的窄分支，也不得作 runtime importer；

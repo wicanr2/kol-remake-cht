@@ -1,0 +1,113 @@
+{
+  "tool": "tools/diff_character_files.py",
+  "files": [
+    {
+      "file": "CHARDATA",
+      "stride": 768,
+      "bytes": 12288,
+      "sha256_before": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e",
+      "sha256_after": "6e6b259235360aedcb7b7cadcd1bed1c9e0df11fbfada1a524491da9e8c0c4cc",
+      "changed_slots": [
+        14
+      ],
+      "slots": [
+        {
+          "slot": 14,
+          "changed_bytes": 57,
+          "spans": [
+            {
+              "offset": "0x000",
+              "length": 3,
+              "before": "006275",
+              "after": "7a6564"
+            },
+            {
+              "offset": "0x004",
+              "length": 12,
+              "before": "414c415245410d313654524f",
+              "after": "000000000000000000000000"
+            },
+            {
+              "offset": "0x01c",
+              "length": 5,
+              "before": "0869616b68",
+              "after": "00815b676b"
+            },
+            {
+              "offset": "0x022",
+              "length": 2,
+              "before": "9568",
+              "after": "595a"
+            },
+            {
+              "offset": "0x02b",
+              "length": 2,
+              "before": "0bb8",
+              "after": "05dc"
+            },
+            {
+              "offset": "0x030",
+              "length": 11,
+              "before": "a63dc704e050c80030b937",
+              "after": "a3c8a1a4eef9100301904b"
+            },
+            {
+              "offset": "0x03c",
+              "length": 3,
+              "before": "139e91",
+              "after": "4f5796"
+            },
+            {
+              "offset": "0x04a",
+              "length": 9,
+              "before": "a63dc704e050c8009e",
+              "after": "a3c8a1a4eef9100357"
+            },
+            {
+              "offset": "0x057",
+              "length": 7,
+              "before": "a1069461401c14",
+              "after": "7405822c880000"
+            },
+            {
+              "offset": "0x05f",
+              "length": 1,
+              "before": "7c",
+              "after": "7e"
+            },
+            {
+              "offset": "0x061",
+              "length": 1,
+              "before": "64",
+              "after": "32"
+            },
+            {
+              "offset": "0x063",
+              "length": 1,
+              "before": "64",
+              "after": "32"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "CHARPICS",
+      "stride": 760,
+      "bytes": 12160,
+      "sha256_before": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7",
+      "sha256_after": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7",
+      "changed_slots": [],
+      "slots": []
+    },
+    {
+      "file": "SHLDPICS",
+      "stride": 760,
+      "bytes": 12160,
+      "sha256_before": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd",
+      "sha256_after": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd",
+      "changed_slots": [],
+      "slots": []
+    }
+  ]
+}

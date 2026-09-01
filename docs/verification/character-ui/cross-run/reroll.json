@@ -2,23 +2,24 @@
   "tool": "tools/compare_character_ui_runs.py",
   "scenario": "reroll",
   "run_a": {
-    "generated_utc": "2026-09-01T05:47:48Z",
+    "generated_utc": "2026-09-01T09:42:20Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "run_b": {
-    "generated_utc": "2026-09-01T06:00:19Z",
+    "generated_utc": "2026-09-01T09:54:36Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "checkpoint_count": 20,
-  "identical_count": 13,
-  "differing_count": 7,
+  "identical_count": 12,
+  "differing_count": 8,
   "checkpoints": [
     {
       "index": 0,
       "label": "TITLE 標題序列",
-      "identical": true
+      "identical": false,
+      "diff_byte_ratio": 0.139797
     },
     {
       "index": 1,
@@ -47,22 +48,22 @@
     },
     {
       "index": 6,
-      "label": "名字欄 T",
+      "label": "名字欄 t",
       "identical": true
     },
     {
       "index": 7,
-      "label": "名字欄 TE",
+      "label": "名字欄 te",
       "identical": true
     },
     {
       "index": 8,
-      "label": "名字欄 TES",
+      "label": "名字欄 tes",
       "identical": true
     },
     {
       "index": 9,
-      "label": "名字欄 TEST",
+      "label": "名字欄 test",
       "identical": false,
       "diff_byte_ratio": 0.000125
     },
@@ -85,37 +86,37 @@
       "index": 13,
       "label": "屬性頁初次擲骰（反白 REROLL STATS）",
       "identical": false,
-      "diff_byte_ratio": 0.002797
+      "diff_byte_ratio": 0.001078
     },
     {
       "index": 14,
       "label": "第一次 REROLL 之後",
       "identical": false,
-      "diff_byte_ratio": 0.002172
+      "diff_byte_ratio": 0.002031
     },
     {
       "index": 15,
       "label": "第二次 REROLL 之後",
       "identical": false,
-      "diff_byte_ratio": 0.002563
+      "diff_byte_ratio": 0.001469
     },
     {
       "index": 16,
       "label": "屬性頁取消之後",
       "identical": false,
-      "diff_byte_ratio": 0.002563
+      "diff_byte_ratio": 0.001469
     },
     {
       "index": 17,
       "label": "再取消一層",
       "identical": false,
-      "diff_byte_ratio": 0.002563
+      "diff_byte_ratio": 0.001469
     },
     {
       "index": 18,
       "label": "再取消一層之二",
       "identical": false,
-      "diff_byte_ratio": 0.002563
+      "diff_byte_ratio": 0.001469
     },
     {
       "index": 19,

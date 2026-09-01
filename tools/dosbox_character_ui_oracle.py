@@ -87,7 +87,7 @@ PRELUDE = [
     step("角色選項選單（反白 CREATE CHARACTER）", "Return", settle=2.0),
 ]
 
-NAME_LETTERS = "ABCDEFGHIJKLMNOPQ"     # 17 個，超過手冊宣稱的 16 上限
+NAME_LETTERS = "abcdefghijklmnopq"     # 17 個，超過手冊宣稱的 16 上限
 
 
 def _name_length_steps() -> list[dict]:
@@ -130,17 +130,17 @@ SCENARIOS: dict[str, dict] = {
                        "屬性→職業，最後退出建立流程且不保存。名字層在取消後會清空，"
                        "因此回到名字層要重新輸入。",
         "steps": list(PRELUDE) + [
-            step("名字層", "T", settle=1.5),
-            step("名字欄 T", "E", settle=1.2),
-            step("名字欄 TE", "S", settle=1.2),
-            step("名字欄 TES", "T", settle=1.2),
-            step("名字欄 TEST", "Return", settle=1.5),
+            step("名字層", "t", settle=1.5),
+            step("名字欄 t", "e", settle=1.2),
+            step("名字欄 te", "s", settle=1.2),
+            step("名字欄 tes", "t", settle=1.2),
+            step("名字欄 test", "Return", settle=1.5),
             step("種族層", "Escape", settle=2.5),
-            step("種族層 ESC 之後", "T", settle=1.5),
-            step("重新輸入 T", "E", settle=1.2),
-            step("重新輸入 TE", "S", settle=1.2),
-            step("重新輸入 TES", "T", settle=1.2),
-            step("重新輸入 TEST", "Return", settle=1.5),
+            step("種族層 ESC 之後", "t", settle=1.5),
+            step("重新輸入 t", "e", settle=1.2),
+            step("重新輸入 te", "s", settle=1.2),
+            step("重新輸入 tes", "t", settle=1.2),
+            step("重新輸入 test", "Return", settle=1.5),
             step("種族層（第二次）", "Return", settle=2.5),
             step("性別層", "Escape", settle=2.5),
             step("性別層 ESC 之後", "Return", settle=2.5),
@@ -155,15 +155,55 @@ SCENARIOS: dict[str, dict] = {
             step("再退一層之三", None, settle=3.0),
         ],
     },
+    "accept-and-save": {
+        "description": "完整走完建立流程：名字 zed、HUMAN、MALE、第一個職業、"
+                       "ACCEPT STATS、接受第一張圖像，量測三個角色檔的實際寫入。",
+        "steps": list(PRELUDE) + [
+            step("名字層", "z", settle=1.5),
+            step("名字欄 z", "e", settle=1.2),
+            step("名字欄 ze", "d", settle=1.2),
+            step("名字欄 zed", "Return", settle=1.5),
+            step("種族層（選 HUMAN）", "Return", settle=2.5),
+            step("性別層（選 MALE）", "Return", settle=2.5),
+            step("職業層（選第一項）", "Return", settle=3.0),
+            step("屬性頁（反白 REROLL STATS）", "Down", settle=3.0),
+            step("屬性頁（反白 ACCEPT STATS）", "Return", settle=3.0),
+            step("圖像層（selector 0）", "Return", settle=3.0),
+            step("接受圖像之後", None, settle=4.0),
+        ],
+    },
+    "picture-cycle": {
+        "description": "在圖像層驗證 selector 的循環：先向左一次檢查由 0 回繞，"
+                       "再連續向右走完整圈並回到起點；全程不接受圖像、不保存。",
+        "steps": list(PRELUDE) + [
+            step("名字層", "z", settle=1.5),
+            step("名字欄 z", "e", settle=1.2),
+            step("名字欄 ze", "d", settle=1.2),
+            step("名字欄 zed", "Return", settle=1.5),
+            step("種族層（選 HUMAN）", "Return", settle=2.5),
+            step("性別層（選 MALE）", "Return", settle=2.5),
+            step("職業層（選第一項）", "Return", settle=3.0),
+            step("屬性頁（反白 REROLL STATS）", "Down", settle=3.0),
+            step("屬性頁（反白 ACCEPT STATS）", "Return", settle=3.0),
+            step("圖像層 selector 0", "Left", settle=1.0, timeout=60.0),
+            step("向左一次之後（預期回繞到最後一張）", "Right", settle=1.0, timeout=60.0),
+        ] + [
+            step(f"向右第 {i} 次之前", "Right", settle=0.8, timeout=60.0)
+            for i in range(1, 82)
+        ] + [
+            step("走完一圈之後", "Escape", settle=2.5),
+            step("圖像層取消之後", None, settle=3.0),
+        ],
+    },
     "reroll": {
         "description": "走到屬性頁後連續兩次 REROLL STATS，比對屬性數值變化；"
                        "全程不接受屬性、不保存角色。",
         "steps": list(PRELUDE) + [
-            step("名字層", "T", settle=1.5),
-            step("名字欄 T", "E", settle=1.2),
-            step("名字欄 TE", "S", settle=1.2),
-            step("名字欄 TES", "T", settle=1.2),
-            step("名字欄 TEST", "Return", settle=1.5),
+            step("名字層", "t", settle=1.5),
+            step("名字欄 t", "e", settle=1.2),
+            step("名字欄 te", "s", settle=1.2),
+            step("名字欄 tes", "t", settle=1.2),
+            step("名字欄 test", "Return", settle=1.5),
             step("種族層（選 HUMAN）", "Return", settle=2.5),
             step("性別層（選 MALE）", "Return", settle=2.5),
             step("職業層（選第一項）", "Return", settle=3.0),
@@ -468,6 +508,12 @@ def run(args) -> int:
 
     post = character_hashes(gamedir)
     changed = [n for n in CHARACTER_FILES if pre[n]["sha256"] != post[n]["sha256"]]
+    if args.save_character_files:
+        # 執行後的角色檔含原版模板 bytes，只作本機離線比對，不得提交。
+        savedir = outdir / "character-files"
+        savedir.mkdir(parents=True, exist_ok=True)
+        for name in CHARACTER_FILES:
+            (savedir / name).write_bytes((gamedir / name).read_bytes())
     frame_index = {f["frame"]: f for f in cap.timeline if "png_sha256" in f}
 
     receipt = {
@@ -485,6 +531,7 @@ def run(args) -> int:
         "character_files_before": pre,
         "character_files_after": post,
         "character_files_changed": changed,
+        "character_files_saved": bool(args.save_character_files),
         "distinct_frames": len(cap.seen),
         "checkpoints": [
             dict(cp, file=frame_index.get(cp["frame"], {}).get("file"),
@@ -515,6 +562,8 @@ def main() -> int:
     p.add_argument("--cycles", default="fixed 3000")
     p.add_argument("--interval", type=float, default=0.3)
     p.add_argument("--post-key-delay", type=float, default=0.4)
+    p.add_argument("--save-character-files", action="store_true",
+                   help="把執行後的 CHARDATA／CHARPICS／SHLDPICS 複製到輸出目錄（僅本機比對用）")
     p.add_argument("--tolerance", type=float, default=0.002,
                    help="判定畫面靜止時允許的差異比例（閃爍游標用）")
     p.add_argument("--observe", type=float, default=0.0,

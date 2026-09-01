@@ -144,11 +144,12 @@ class X11Client:
         if keysym_name not in KEYSYMS:
             raise KeyError(f"未定義的 keysym 名稱：{keysym_name}")
         sym = KEYSYMS[keysym_name]
-        keycode = self.keycodes.get(sym)
-        shift = False
-        if keycode is None and 0x41 <= sym <= 0x5A:      # 大寫字母走 Shift + 小寫
-            keycode = self.keycodes.get(sym + 0x20)
-            shift = True
+        # 大寫字母一律走 Shift ＋ 小寫 keycode。同一個 keycode 的 keysym 清單同時含
+        # 小寫與大寫，直接查大寫 keysym 會拿到同一顆鍵而漏掉 Shift，送出的就變成小寫。
+        shift = 0x41 <= sym <= 0x5A
+        keycode = self.keycodes.get(sym + 0x20 if shift else sym)
+        if keycode is None:
+            keycode = self.keycodes.get(sym)
         if keycode is None:
             raise KeyError(f"keysym {keysym_name} 沒有對應 keycode")
         shift_code = self.keycodes.get(0xFFE1)

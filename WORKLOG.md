@@ -989,3 +989,30 @@
   `git filter-repo` 加上對 `main` 的 force push，這些動作被本工作階段的自動核准
   分類器擋下，尚未執行。待補：由使用者授權或自行執行後，再回填改寫結果與新的
   HEAD 雜湊。
+
+## 2026-09-01：角色建立 oracle 補齊、EGA production 抽取器與資產 parity
+
+- **勘誤（工具）**：XTEST 注入器對大寫字母沒有真的按 Shift。同一個 keycode 的 keysym
+  清單同時含大小寫，直接查大寫 keysym 會拿到同一顆鍵而漏掉 Shift，因此先前情境標籤
+  寫 `ABCDEF…`、實際送出的是小寫。已修正 Shift 處理，並把情境改為明寫小寫字母；
+  全部六個情境各兩輪重跑，收據以新版取代舊版。本批不對大小寫保存行為下結論。
+- 新增 `accept-and-save` 與 `picture-cycle` 兩個情境，補完 SPEC-005 缺口：圖像
+  selector 恰好循環 80 張（由 0 向左一次 = 由 0 向右 80 次，再一次回到 0）；接受圖像
+  後才寫檔，兩輪都只寫 `CHARDATA` 的 slot 14，`CHARPICS`／`SHLDPICS` 未變。
+- 六情境十二輪跨輪比對：`blank-name` 10/10、`name-length` 25/26、`escape-layers`
+  21/28、`reroll` 12/20、`accept-and-save` 12/16、`picture-cycle` 10/99 檢查點逐 byte
+  相同；差異全部落在 TITLE 循環動畫落點、名字欄游標與 BIOS tick 播種的屬性數值。
+- 新增 `tools/extract_ega_assets.py`：由固定 ZIP 產出 30 個 archive、752 張 PNG 到
+  `assets/original-derived-png/ega/`。抽取計畫取自已版控的 visual probe 逐張紀錄，
+  每張 PNG 重讀驗證並與紀錄的 SHA-256 核對，暫存目錄整批替換，輸出根目錄受限。
+- 新增對拍工具 `tools/png_io.py`、`tools/compare_frames.py`、
+  `tools/locate_asset_in_frame.py`、`tools/verify_charpics_against_capture.py`、
+  `tools/diff_character_files.py`。
+- **原版同狀態資產 parity**：80 張 CHARPICS 模板在搜出的 blit 座標 (208,106) 上，
+  兩輪擷取各 80/80 逐像素相同；BOOKPICS[0] 對書本封面畫面 64,000 像素中只有 50 個
+  不同，全部落在螢幕中央 8×11 的滑鼠游標。
+- SPEC-002（含 EGA extraction set）與 SPEC-005 經證據審查升 READY；theme 決策已納入
+  gate。SPEC-002 的 26 筆非圖片 placeholder 維持明列排除。
+- 全部執行使用有界 `docker run --rm --network none`（DOSBox 擷取 `--memory 1g --cpus 1`，
+  抽取與比對 `--memory 2g --cpus 1`）。原版 ZIP 唯讀掛載，遊戲副本建在容器 tmpfs；
+  執行後的角色檔只留本機比對，不進版控。結束檢查沒有 DOSBox／KOL 容器殘留。

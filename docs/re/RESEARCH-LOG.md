@@ -1020,9 +1020,11 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   書本封面 → 任意鍵 → 目錄頁 → `5` → Character options → 反白條下移一格 →
   `CREATE CHARACTER` → New Character 名字層。
 - **名字欄容量 16 個可見字元，輸入第 16 個字元即前進到種族層，不需 Return。**
-  連送 `ABCDEFGHIJKLMNOPQ` 時第 15 個字元顯示 `abcdefghijklmno`，第 16 個顯示
+  連送 17 個小寫字母時第 15 個字元顯示 `abcdefghijklmno`、第 16 個顯示
   `abcdefghijklmnop` 並同時開啟種族選單；第 17 個字元與其後兩次 Backspace 落在種族層
-  而無作用。此情境 26 個檢查點在兩次全新執行之間逐 byte 相同。
+  而無作用。26 個檢查點在兩次全新執行之間只有一張名字層畫面因游標相位不同
+  （0.0125%），其餘逐 byte 相同。擷取器送出的是未加 Shift 的小寫字母，畫面與
+  `CHARDATA` 中的名字也是小寫，因此不對大小寫保存行為下任何結論。
 - **空名按 Return 不前進**，畫面停在名字層，與 `sub_11820` 的「輸入 buffer 首 byte 為零
   時回到同一輸入點」一致。
 - 取消目的地：種族→名字、性別→種族、職業→性別、屬性→職業，再往上依序回到性別、
@@ -1031,12 +1033,42 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   88 → 85 → 89、體型 74 → 72 → 73、健康 75 → 75 → 74。
 - 四個情境全程未接受屬性或角色圖像，`CHARDATA`、`CHARPICS`、`SHLDPICS` 的前後
   SHA-256 均未變動。
-- 每個情境各執行兩次全新流程並以 `tools/compare_character_ui_runs.py` 比對：
-  `name-length` 26/26 檢查點逐 byte 相同；`blank-name` 8/10、`escape-layers` 22/28、
-  `reroll` 13/20。全部差異都落在三類本來就不可能相同的畫面，且差異量已量化——
-  TITLE 循環動畫落點 13.98%、名字欄閃爍游標 0.0125%、BIOS tick 播種的屬性數值
-  0.175%–0.280%。
-- **限制**：接受屬性、圖像選擇與實際保存的寫入邊界未涵蓋；16 槽全滿只有靜態控制流
-  證據。固定 ZIP 的 `CHARDATA` 十六槽都非全零，前十四槽有名字，第 15、16 槽名字為空
-  但記錄非零，槽位可用性的 UI 判準尚未確認。畫面 PNG 只留本機，未進版控。
-  SPEC-005 維持 DRAFT。
+- **角色圖像 selector 恰好循環 80 張**：由 selector 0 向左一次得到的畫面，與由 0
+  連續向右 80 次得到的畫面相同；再向右一次回到 selector 0。這在正常玩家路徑上證實
+  RE-039 由靜態控制流得到的 `0..79` 循環。
+- **接受圖像是保存點**：走完「ACCEPT STATS → 接受圖像」後畫面回到 Character options，
+  `CHARDATA` 出現變動。兩輪都只寫入 slot 14，`CHARPICS`／`SHLDPICS` 的 SHA-256 未變
+  （本批取 selector 0，其模板與該槽原有內容相同）。逐 offset 差異見
+  `docs/verification/asset-parity/chardata-write-run{1,2}.json`；差異清單是「值有變動的
+  byte」，不是 writer 覆蓋率。
+- 六個情境各執行兩次全新流程並以 `tools/compare_character_ui_runs.py` 比對：
+  `blank-name` 10/10、`name-length` 25/26、`escape-layers` 21/28、`reroll` 12/20、
+  `accept-and-save` 12/16、`picture-cycle` 10/99 檢查點逐 byte 相同。全部差異都落在三類
+  本來就不可能相同的畫面，且差異量已量化——TITLE 循環動畫落點 13.98%、名字欄閃爍
+  游標 0.0125%、BIOS tick 播種的屬性數值 0.1%–0.25%。`picture-cycle` 的多數檢查點屬
+  第三類，其角色圖像區塊另由 RE-041 的 parity 收據確認兩輪都 80/80 相同。
+- **限制**：16 槽全滿的訊息與退出行為只有靜態控制流證據。固定 ZIP 的 `CHARDATA`
+  十六槽都非全零，前十四槽有名字，第 15、16 槽名字為空但記錄非零；本批保存落在
+  slot 14，支持「以名字首 byte 判斷槽位可用」的假說，但滿槽分支本身未由 UI 證實。
+  重名處理、名字欄字元集合與大小寫保存方式仍未知。1,368 個去重畫格與收據已入
+  private repo 的 `docs/verification/character-ui/`。
+
+## RE-041：EGA production 抽取器與原版同狀態資產 parity
+
+- `tools/extract_ega_assets.py` 由固定 ZIP（SHA-256 `2b455e3c…9f46`）產出
+  `assets/original-derived-png/ega/`：30 個邏輯 archive、752 張 PNG，等於 SPEC-002
+  已證實 PNG 單位的全部。輸出先建在暫存目錄、整批驗證後才替換，輸出根目錄被限制在
+  `assets/original-derived-png/`。
+- 抽取計畫直接取自 `docs/re/*-visual-probe.json` 的逐張紀錄；每張 PNG 都重讀驗證
+  （簽章、chunk CRC、IHDR、解壓列數）並與該紀錄的 `png_sha256` 核對，任何一項不符即
+  整批失敗。manifest 記錄各 archive 的 probe 檔與其上游 IDA 摘要雜湊。
+- 組成方式分六類：direct RLE nibbles、固定 40×38 packed nibbles、彩圖＋AND-mask 配對、
+  KOLMPICS 的 rle-color／and-mask／placeholder 混合、TWN 的共享 KOLMPICS 圖號 28 遮罩、
+  KOLPICS raw-planar 與 WEATPICS 分層資料。26 筆非圖片 placeholder 明列排除。
+- **原版同狀態 parity**：80 張 `CHARPICS` 模板對原版角色圖像選擇畫面，在
+  `tools/locate_asset_in_frame.py` 搜出的 blit 座標 (208, 106) 上，兩輪擷取各 80/80
+  逐像素相同（差異 0）。`BOOKPICS[0]` 對書本封面畫面 64,000 像素中只有 50 個不同，
+  集中在 (160, 100) 起的 8×11 區塊，即原版畫的滑鼠游標。
+- **限制**：其餘 29 個 archive 目前只有「與 visual probe 紀錄雜湊相符」這層驗證，
+  沒有各自的原版同狀態畫面收據。KOLPICS 的 raw-planar 與 WEATPICS 的遮罩層是 renderer
+  資料，不是原版顯示矩形。PCGA／HERC 未納入。

@@ -1,0 +1,578 @@
+{
+  "tool": "tools/verify_charpics_against_capture.py",
+  "purpose": "抽取資產對原版執行畫面的同狀態 parity",
+  "capture_run": "picture-cycle",
+  "capture_generated_utc": "2026-09-01T09:47:37Z",
+  "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+  "blit_rectangle": {
+    "x": 208,
+    "y": 106,
+    "width": 40,
+    "height": 38
+  },
+  "template_count": 80,
+  "exact_count": 80,
+  "failure_count": 0,
+  "templates": [
+    {
+      "selector": 0,
+      "frame": "frames/frame-084.png",
+      "asset": "CHARPICS/charpics-000.png",
+      "asset_png_sha256": "8fa0908779e1553b6891c9bb2716a7de9def234e4f3e4053ef78cd0db379fbd5",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 1,
+      "frame": "frames/frame-086.png",
+      "asset": "CHARPICS/charpics-001.png",
+      "asset_png_sha256": "ba15f984364f9fd549469d6e928c4176093b3855d6878424325c43eb96892277",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 2,
+      "frame": "frames/frame-087.png",
+      "asset": "CHARPICS/charpics-002.png",
+      "asset_png_sha256": "3cbdc4abd644b8e134db82a414c0463727f2452261fc1cd61d0d90dab937251f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 3,
+      "frame": "frames/frame-088.png",
+      "asset": "CHARPICS/charpics-003.png",
+      "asset_png_sha256": "f8b35f1a24883d96f4ba688d50111acad5f257759b80aab8fce7e0c4f4967107",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 4,
+      "frame": "frames/frame-089.png",
+      "asset": "CHARPICS/charpics-004.png",
+      "asset_png_sha256": "9f0f5fb09af3ee2627978d1168366dc221de5168588726170f439ef2612bddc7",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 5,
+      "frame": "frames/frame-090.png",
+      "asset": "CHARPICS/charpics-005.png",
+      "asset_png_sha256": "17741a6ca6d94a67cd0ddedcd907571e1c04f1e8b172b754eb2fc1c8089773f1",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 6,
+      "frame": "frames/frame-091.png",
+      "asset": "CHARPICS/charpics-006.png",
+      "asset_png_sha256": "34e1b55ed707b6c3122807362970fb707ba3bcd6ff7e3bc9846f43452ed65bfc",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 7,
+      "frame": "frames/frame-092.png",
+      "asset": "CHARPICS/charpics-007.png",
+      "asset_png_sha256": "450df95d4c00a13265788a5e45102b4356a67c629725f21d0dcb038c3ad0e61c",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 8,
+      "frame": "frames/frame-093.png",
+      "asset": "CHARPICS/charpics-008.png",
+      "asset_png_sha256": "5d51569e6f8befba0421948d47ae9ee3f1d38293c29bec7456a99132655e80e0",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 9,
+      "frame": "frames/frame-094.png",
+      "asset": "CHARPICS/charpics-009.png",
+      "asset_png_sha256": "8d0f9ea25b13a21af3f804d68313477dbe2628801bdef58704687544c096d903",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 10,
+      "frame": "frames/frame-095.png",
+      "asset": "CHARPICS/charpics-010.png",
+      "asset_png_sha256": "ac1ba61f33c834770cfba535806fac982ce73b31272c87e5452db3002e240a3a",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 11,
+      "frame": "frames/frame-096.png",
+      "asset": "CHARPICS/charpics-011.png",
+      "asset_png_sha256": "ee12950ecc9168fec8e49d7f5b6a0af037557e392293f3ffe4688ca3b83d4135",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 12,
+      "frame": "frames/frame-097.png",
+      "asset": "CHARPICS/charpics-012.png",
+      "asset_png_sha256": "3cb36a11bfab079c97ced13dbf29c293b601c58ffc0b1aec8f36f002c9b7f3ef",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 13,
+      "frame": "frames/frame-098.png",
+      "asset": "CHARPICS/charpics-013.png",
+      "asset_png_sha256": "a958d7e09f862d98287c39b23698b1b93ecc256f66ff119c604b2784eb4b0ea8",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 14,
+      "frame": "frames/frame-099.png",
+      "asset": "CHARPICS/charpics-014.png",
+      "asset_png_sha256": "448f472277d8c29bcf7442a1b24f391cc51de749b1c1f0639b6d20c90eeb42c9",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 15,
+      "frame": "frames/frame-100.png",
+      "asset": "CHARPICS/charpics-015.png",
+      "asset_png_sha256": "d813ac350c3f73d84669c0a0f2c4879c0cb86058c1912108943829a6bbfa1542",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 16,
+      "frame": "frames/frame-101.png",
+      "asset": "CHARPICS/charpics-016.png",
+      "asset_png_sha256": "6abb9141a068173cf9202c5b03903337cb994f76ef6a49814cf429778ed9c83f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 17,
+      "frame": "frames/frame-102.png",
+      "asset": "CHARPICS/charpics-017.png",
+      "asset_png_sha256": "0884a568c98868f2eb8c24c6e75afc591edacdcd617588b99c35b86a6eab3d2f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 18,
+      "frame": "frames/frame-103.png",
+      "asset": "CHARPICS/charpics-018.png",
+      "asset_png_sha256": "577f49851eac5f41101a9fecc02265f6773e8cc3f3a54eb3cb7aaf90129939a9",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 19,
+      "frame": "frames/frame-104.png",
+      "asset": "CHARPICS/charpics-019.png",
+      "asset_png_sha256": "b89070391844509534cfc81c5b82e483509402a62e3b6b8218fa0a23172e1ccd",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 20,
+      "frame": "frames/frame-105.png",
+      "asset": "CHARPICS/charpics-020.png",
+      "asset_png_sha256": "8f84626af2ce7763c2e9f3eed2dac38a33c809108ed51947f6d45ed6567817f8",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 21,
+      "frame": "frames/frame-106.png",
+      "asset": "CHARPICS/charpics-021.png",
+      "asset_png_sha256": "a0ad533be2e5bed04ae1213ea386252f775244f5c16727390b58da44955e3ac6",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 22,
+      "frame": "frames/frame-107.png",
+      "asset": "CHARPICS/charpics-022.png",
+      "asset_png_sha256": "6d17994be684f28e88c0e0b01ad46e666044f1e5d13d7d858d1ea66d00e4654d",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 23,
+      "frame": "frames/frame-108.png",
+      "asset": "CHARPICS/charpics-023.png",
+      "asset_png_sha256": "40801ca99a82000f1afc06f713f8b0d2070ba3059756587bd632fd8f39e5bbd2",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 24,
+      "frame": "frames/frame-109.png",
+      "asset": "CHARPICS/charpics-024.png",
+      "asset_png_sha256": "7fae082d8f1ad18c657cc4c618ab96cb2b6a4032ee19756475acf7ba713ea4a1",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 25,
+      "frame": "frames/frame-110.png",
+      "asset": "CHARPICS/charpics-025.png",
+      "asset_png_sha256": "8a003b9b81d87907c214911f7d9296576b49f47251da700dbf435c9eae7be2db",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 26,
+      "frame": "frames/frame-111.png",
+      "asset": "CHARPICS/charpics-026.png",
+      "asset_png_sha256": "57e16a5c9b51e229712bfa568e297b24a9ecda361b3c8854988a471aabbb8cdf",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 27,
+      "frame": "frames/frame-112.png",
+      "asset": "CHARPICS/charpics-027.png",
+      "asset_png_sha256": "3eaf7a51cdd58c13347b9fc69e0da49d42bbae524c0766cd268dce84ad3d57df",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 28,
+      "frame": "frames/frame-113.png",
+      "asset": "CHARPICS/charpics-028.png",
+      "asset_png_sha256": "5b2907fb3f552260e8a68809dea01b0c2fcc0522d25fabce0642c23b2c7c7b98",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 29,
+      "frame": "frames/frame-114.png",
+      "asset": "CHARPICS/charpics-029.png",
+      "asset_png_sha256": "91eca380bb53c2de8fa2828a1972330d5ea1f48962a0195272d00f0a51b31e6b",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 30,
+      "frame": "frames/frame-115.png",
+      "asset": "CHARPICS/charpics-030.png",
+      "asset_png_sha256": "cb72285f21661e01beecaf3b429edbfe6b837b295586c58e3cf93cdcdb0d29cf",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 31,
+      "frame": "frames/frame-116.png",
+      "asset": "CHARPICS/charpics-031.png",
+      "asset_png_sha256": "7d0e7be756351420c9de4268b99cdddd9e587846d3b5434257c918181d5a362f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 32,
+      "frame": "frames/frame-117.png",
+      "asset": "CHARPICS/charpics-032.png",
+      "asset_png_sha256": "6c28dc024588aa5bf1f1a2a3965d019f652912cd27e8692beb91c9838b802124",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 33,
+      "frame": "frames/frame-118.png",
+      "asset": "CHARPICS/charpics-033.png",
+      "asset_png_sha256": "efb61aeb9659eca2aed8446f9038aa2ddfc3ea7c8611873ff24c123386baf067",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 34,
+      "frame": "frames/frame-119.png",
+      "asset": "CHARPICS/charpics-034.png",
+      "asset_png_sha256": "91a2f73aa3269f26723f0f3034fa4ba077efed59286ae0dcd3710bdeb7c3b44a",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 35,
+      "frame": "frames/frame-120.png",
+      "asset": "CHARPICS/charpics-035.png",
+      "asset_png_sha256": "954e586d5c1d44ee94e3f9eec3245f822361f97f4fd843e46789b51ab25312f9",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 36,
+      "frame": "frames/frame-121.png",
+      "asset": "CHARPICS/charpics-036.png",
+      "asset_png_sha256": "d4fc3a2b452b3793c8a8e724463e48daa4309706783df913614a83dd375d6fdc",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 37,
+      "frame": "frames/frame-122.png",
+      "asset": "CHARPICS/charpics-037.png",
+      "asset_png_sha256": "5322ef47b8b233a98446f96d0ea51641bafce017a55ee32e2779cff5c599aa21",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 38,
+      "frame": "frames/frame-123.png",
+      "asset": "CHARPICS/charpics-038.png",
+      "asset_png_sha256": "b8beeea9464e49055ae88ab8fa2dda7efd478e2ebf68a393a3aead0cfedc2b86",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 39,
+      "frame": "frames/frame-124.png",
+      "asset": "CHARPICS/charpics-039.png",
+      "asset_png_sha256": "c87acaf6b623d0209a223c5d62338e9a26f0615493247f4ea15fc593ae19ef3b",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 40,
+      "frame": "frames/frame-125.png",
+      "asset": "CHARPICS/charpics-040.png",
+      "asset_png_sha256": "b02ba38e6f8e3ff793722f94d4a7b5405bd872ec76bfe863a7a27f2279372762",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 41,
+      "frame": "frames/frame-126.png",
+      "asset": "CHARPICS/charpics-041.png",
+      "asset_png_sha256": "1c1c987e7294dbc2d8fc3bd2af06ed8d5e9f502f319452ee66e2748abb927446",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 42,
+      "frame": "frames/frame-127.png",
+      "asset": "CHARPICS/charpics-042.png",
+      "asset_png_sha256": "897ea0db90fe9444c3eccdece67f4c367ff56e02ad17b3de133edadf9ba63c74",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 43,
+      "frame": "frames/frame-128.png",
+      "asset": "CHARPICS/charpics-043.png",
+      "asset_png_sha256": "4960b783240c6ca27fee7c41537aa4d9e02f6594b1ffcde7fcc5eacfbf7f55af",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 44,
+      "frame": "frames/frame-129.png",
+      "asset": "CHARPICS/charpics-044.png",
+      "asset_png_sha256": "d83f1d9c3fffd75bbd2380724aad94f46d9f11e3b6655faadf4249b37f60cd79",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 45,
+      "frame": "frames/frame-130.png",
+      "asset": "CHARPICS/charpics-045.png",
+      "asset_png_sha256": "9ba5a08d600f9232a1095cd575605854bc08fb336e27a226b261de2ac03ace1e",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 46,
+      "frame": "frames/frame-131.png",
+      "asset": "CHARPICS/charpics-046.png",
+      "asset_png_sha256": "3c7fa9b767f6e2a19edc61b901f44b0f03c2b660e1d908a0616d286bb3521f8e",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 47,
+      "frame": "frames/frame-132.png",
+      "asset": "CHARPICS/charpics-047.png",
+      "asset_png_sha256": "71c5d42311d7c4ffa6ebf5c3dcca2ab1ef4b70c8421108b838788d026a5105b9",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 48,
+      "frame": "frames/frame-133.png",
+      "asset": "CHARPICS/charpics-048.png",
+      "asset_png_sha256": "ab73661064a0917dd4cca5367012ef485a05adbe581571427f7285c3181dc3c2",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 49,
+      "frame": "frames/frame-134.png",
+      "asset": "CHARPICS/charpics-049.png",
+      "asset_png_sha256": "2d12f14ed337524601f7e01ea19363b841feb0fbef00b809e4dc51db9ed3d282",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 50,
+      "frame": "frames/frame-135.png",
+      "asset": "CHARPICS/charpics-050.png",
+      "asset_png_sha256": "f90b0be2596b9cd180ca07c3a4eac517c50a840ed13202fefa1b97ae99235f9b",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 51,
+      "frame": "frames/frame-136.png",
+      "asset": "CHARPICS/charpics-051.png",
+      "asset_png_sha256": "da1ed073d85fd6c7a027e3ed52d5cc5ca5a315d39147296735db0e11b9d833f8",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 52,
+      "frame": "frames/frame-137.png",
+      "asset": "CHARPICS/charpics-052.png",
+      "asset_png_sha256": "ac393ccd8d0e0b97c600aedcae996cb6a4f86aacf586f462715e2a648a6a531d",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 53,
+      "frame": "frames/frame-138.png",
+      "asset": "CHARPICS/charpics-053.png",
+      "asset_png_sha256": "e2251243520d9e1f0dea812733e0722a5c33f320eba62d89695f68ca0d90a9a9",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 54,
+      "frame": "frames/frame-139.png",
+      "asset": "CHARPICS/charpics-054.png",
+      "asset_png_sha256": "92bd273aa3a59227c27af13c9b7b9ca64c19492ecb2aff72d3c394e176c408b6",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 55,
+      "frame": "frames/frame-140.png",
+      "asset": "CHARPICS/charpics-055.png",
+      "asset_png_sha256": "fe5cb6b1852876d0f61eb096ec1b103021e64c75eeaff735bbb701e10ad13d39",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 56,
+      "frame": "frames/frame-141.png",
+      "asset": "CHARPICS/charpics-056.png",
+      "asset_png_sha256": "6b2c04b485fba6352bdad7626c6c5efb9d362e3e58e4b4a0517b6893fcd843c3",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 57,
+      "frame": "frames/frame-142.png",
+      "asset": "CHARPICS/charpics-057.png",
+      "asset_png_sha256": "6ac28ccc7661126b85b63433b2b9e416028c0c026abbe2c4da3481bae140e5b1",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 58,
+      "frame": "frames/frame-143.png",
+      "asset": "CHARPICS/charpics-058.png",
+      "asset_png_sha256": "838865a079c405b1f202e3990d8560505abf410858d8979746944e8c70b18599",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 59,
+      "frame": "frames/frame-144.png",
+      "asset": "CHARPICS/charpics-059.png",
+      "asset_png_sha256": "ca2abcf801c974091cd2a45e32e0fb58e9b1097a4e5c423a4521491c79aa84f8",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 60,
+      "frame": "frames/frame-145.png",
+      "asset": "CHARPICS/charpics-060.png",
+      "asset_png_sha256": "c64571ea1df1748730bf3ccf95fbd0f718cd9110bdd3ed93f51af184a49aa9c3",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 61,
+      "frame": "frames/frame-146.png",
+      "asset": "CHARPICS/charpics-061.png",
+      "asset_png_sha256": "68408d22681bba654013566f4cd9c24fb64d89aff5b5cd3372e601215a40b48f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 62,
+      "frame": "frames/frame-147.png",
+      "asset": "CHARPICS/charpics-062.png",
+      "asset_png_sha256": "6c23f9a96c55732af5dfc57e26a50b9b0e1c135bb7b1e5795233840303d52be0",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 63,
+      "frame": "frames/frame-148.png",
+      "asset": "CHARPICS/charpics-063.png",
+      "asset_png_sha256": "cabe12f5839c72bd4b0c0962270582b8ce1a282b7dcaf2da556856782e23d503",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 64,
+      "frame": "frames/frame-149.png",
+      "asset": "CHARPICS/charpics-064.png",
+      "asset_png_sha256": "eab780ecfaae123045ec99001184b7f0663a3d0003e64c11bce8ba95d72f5e9f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 65,
+      "frame": "frames/frame-150.png",
+      "asset": "CHARPICS/charpics-065.png",
+      "asset_png_sha256": "293dc6c3c04fd4689eaad8ed834d68c6cb03307a87192dfdc096e4cafa9a985f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 66,
+      "frame": "frames/frame-151.png",
+      "asset": "CHARPICS/charpics-066.png",
+      "asset_png_sha256": "1c3360a157a396c112c526b39c4d07cddade5ba823b25f911f5ea8829f8c2b50",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 67,
+      "frame": "frames/frame-152.png",
+      "asset": "CHARPICS/charpics-067.png",
+      "asset_png_sha256": "b5055a5ab3fc068774e525643ed7928b1bec4df2a7b971c8e0749768efdc270b",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 68,
+      "frame": "frames/frame-153.png",
+      "asset": "CHARPICS/charpics-068.png",
+      "asset_png_sha256": "163be3a027ca97145bcb35043002d698f7e5b382f976b5efb9ee9e5af1373a95",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 69,
+      "frame": "frames/frame-154.png",
+      "asset": "CHARPICS/charpics-069.png",
+      "asset_png_sha256": "3ebe62a27af7ffb0e51b722028ac829366a89b7fe00ffa88fb9d57219b8951af",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 70,
+      "frame": "frames/frame-155.png",
+      "asset": "CHARPICS/charpics-070.png",
+      "asset_png_sha256": "4ca82e878760c7646982dff747035473d4a065ae4770534198008c531b099819",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 71,
+      "frame": "frames/frame-156.png",
+      "asset": "CHARPICS/charpics-071.png",
+      "asset_png_sha256": "fbf8eaa5df2f26a66ea9f8e38722562424587d7972578e6d7f8468d28a515f94",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 72,
+      "frame": "frames/frame-157.png",
+      "asset": "CHARPICS/charpics-072.png",
+      "asset_png_sha256": "04feb4e97590d574d0ff8dd579eca55ff526f1310bb5759116e478c273863ce6",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 73,
+      "frame": "frames/frame-158.png",
+      "asset": "CHARPICS/charpics-073.png",
+      "asset_png_sha256": "a8fdf3690e599074b06a0781f06c8e0b3fdb2fc78fe322d622e7c325476f194a",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 74,
+      "frame": "frames/frame-159.png",
+      "asset": "CHARPICS/charpics-074.png",
+      "asset_png_sha256": "b3cc7928ea9eff400f7232500c16b9f2991e29bcc0b5c85ea354328c40ccf469",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 75,
+      "frame": "frames/frame-160.png",
+      "asset": "CHARPICS/charpics-075.png",
+      "asset_png_sha256": "acc9799dc1db7842005d847ea7931e86510f2f5ffaf95fee25e30ec956daa12f",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 76,
+      "frame": "frames/frame-161.png",
+      "asset": "CHARPICS/charpics-076.png",
+      "asset_png_sha256": "350023f9abe117f3b8e55783a269a026659fce815729e99183c2173b380fc6a7",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 77,
+      "frame": "frames/frame-162.png",
+      "asset": "CHARPICS/charpics-077.png",
+      "asset_png_sha256": "4ee5e09c4a57a07c2e7775f14762e4cdd9f57014b95279654116a7b923861ecf",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 78,
+      "frame": "frames/frame-163.png",
+      "asset": "CHARPICS/charpics-078.png",
+      "asset_png_sha256": "a8d37c36148c377c1c7b20f1813be7c1b7ebff6534ca78c5dc0b4e6e19758f78",
+      "differing_pixels": 0
+    },
+    {
+      "selector": 79,
+      "frame": "frames/frame-085.png",
+      "asset": "CHARPICS/charpics-079.png",
+      "asset_png_sha256": "033f4ee004aed98e12a0fecbc41fed937d381ca48586325c1d85f2c695ad7f40",
+      "differing_pixels": 0
+    }
+  ]
+}

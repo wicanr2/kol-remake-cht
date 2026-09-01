@@ -11,8 +11,9 @@
   的 PNG 衍生物入庫：抽取器產生的素材 PNG 放 `assets/original-derived-png/`，模擬器
   擷取的原版執行畫面 PNG 與其收據同目錄放 `docs/verification/`。這不授權 GitHub Release
   或公開散布。
-- remake 尚未開始。RE 知識庫已建立，SPEC-001 已 READY，只授權固定 KOLTOWN derivative
-  作研究 oracle；任何玩法、格式或玩家路徑仍須自己的 DRAFT／READY spec。
+- Go／Ebitengine 實作尚未開始，但素材與規格已就緒：SPEC-001／002／003／005 為
+  READY 或 CONFORMED，752 張 EGA PNG 已可重生。SPEC-004（音訊）仍為 DRAFT。
+  其餘玩法（戰鬥、任務、城鎮、世界地圖）仍須各自的 DRAFT／READY spec。
 - `Knights-of-legend.zip` 已在唯讀容器中通過 ZIP CRC 檢查，共 76 個中央目錄項目；可見
   6 個 MZ executable、安裝批次檔、城鎮／角色／物品資料及多組 `*PICS` 圖像候選。
 - ZIP 多數遊戲檔時間為 1989，但 `KOLTOWN.EXE`、`CHARDATA`、`CHARPICS`、`SHLDPICS`、
@@ -35,10 +36,9 @@
 - 中文手冊 SPEC-003 已 CONFORMED：Poppler 22.12.0 對 79 頁玩家手冊與 5 頁參考卡建立逐頁
   雜湊清冊；82 個內容頁都有文字層，玩家手冊 76、77 經頁面 PNG 目視為空白跨頁。
   玩家手冊 79 頁與 Apple II 參考卡 5 頁已全部 reviewed；84 頁總 gate 通過。
-- 圖片 RE 已建立 SPEC-002 DRAFT：44 個實體候選歸併為 30 個邏輯 archive；TWN `.1/.2`
-  已證實是 continuation volume，總數由 960 訂正為 1,022 個 payload，全部通過 LZW 機械
-  探針。索引／分卷契約已證實，LZW 為強推論；
-  尺寸、位平面、palette、透明色與原版視覺仍未知，尚未授權 PNG production 抽取。
+- 圖片 RE：44 個實體候選歸併為 30 個邏輯 archive；TWN `.1/.2` 已證實是 continuation
+  volume，總數由 960 訂正為 1,022 個 payload，全部通過 LZW 解碼。索引／分卷契約、
+  尺寸、位平面、palette 與透明規則均已逐 archive 證實。
 - `AWD1PICS.0` 是 KOLBOOK 固定寫出的 4000-byte 工作區快照；KOLTOWN 只讀其中索引
   payload。尾端 520 bytes 已排除於圖片流，但仍是未解析工作區資料，不是 padding。
 - `CHARPICS`／`SHLDPICS`／`STEEDPIC` 已由 KOLBOOK／KOLTOWN 讀寫資料流證實為 16 筆、
@@ -80,9 +80,12 @@
   轉換器：它對 28 組 PICS archive 生成 `PCGA`／`HERC` 分卷，28 組圖數與現行清冊完全
   相符。使用者已於 2026-09-01 決定首版只做 EGA，CGA／Hercules 列為後續選項；
   MAKEMODE 的完整轉換像素規則保留為待辦 RE，不進首版交付範圍。
-- SPEC-002 的完整 EGA extraction set 已建立並由 verifier 對清冊核對：30 個邏輯 archive、
-  1,022 payload 中，996 筆來源已證實、26 筆為明確非圖片 placeholder、0 筆 unknown；
-  目前可形成 752 個已證實 PNG 單位。這只關閉 EGA 素材格式，尚未建立 production extractor。
+- SPEC-002 已 READY。完整 EGA extraction set 為 30 個邏輯 archive、1,022 payload：
+  996 筆來源已證實、26 筆非圖片 placeholder、0 筆 unknown，形成 752 個 PNG 單位。
+  `tools/extract_ega_assets.py` 已把全部 752 張 PNG 產到 `assets/original-derived-png/ega/`，
+  逐張重讀驗證並與已版控 visual probe 紀錄的 SHA-256 核對，原子化替換、輸出根目錄受限。
+  原版同狀態 parity：80 張 CHARPICS 模板在 blit 座標 (208,106) 兩輪各 80/80 逐像素相同；
+  BOOKPICS[0] 對書本封面畫面只差螢幕中央 8×11 的滑鼠游標。
 - 音訊 RE 已建立 SPEC-004 DRAFT。固定 ZIP 沒有獨立音訊檔；TITLE `sub_10F75` 已證實為
   兩段、每段 100 次隨機 PIT 除數更新的 PC Speaker cue。`TANDYPIN.EXE` 已證實是 DOS
   `AH=31h` 常駐記憶體程式，不是音訊播放器。六個 executable 的雙新建 IDA DB 直接 I/O
@@ -102,15 +105,15 @@
   交叉確認名字、種族、職業、金冠與主要武器。KOLBOOK 靜態控制流另已固定輸入 buffer
   首 byte 為零時重試、各層取消返回、選項 0 reroll、80 張肖像循環與 16 槽全滿時在 writer
   前退出。
-- 正常 DOS 玩家路徑的角色建立 UI 已有可重生收據（`docs/verification/character-ui/`）。
-  入口鏈為 `KOL.EXE` → TITLE 循環標題序列 → 任意鍵 → 書本封面 → 任意鍵 → 目錄頁 →
-  `5` → Character options → `CREATE CHARACTER`。名字欄容量為 16 個可見字元，輸入第 16
-  個字元即直接前進種族層、不需 Return；空名按 Return 不前進。取消目的地為種族→名字、
-  性別→種族、職業→性別、屬性→職業，回到名字層時欄位清空。`REROLL STATS` 重擲九個
-  顯示值。四個情境各跑兩輪，`CHARDATA`／`CHARPICS`／`SHLDPICS` 前後 SHA-256 皆未變動；
-  跨輪差異只出現在 TITLE 動畫落點、名字欄游標與屬性數值三類畫面且差異量已量化。
-  852 個去重畫格 PNG 與 manifest 已入 private repo。接受屬性、圖像選擇、實際保存與
-  16 槽全滿仍未由 UI 證實，SPEC-005 維持 DRAFT。
+- SPEC-005 已 READY。正常 DOS 玩家路徑的角色建立 UI 有六個情境、各兩輪的可重生收據
+  （`docs/verification/character-ui/`，1,368 個去重畫格）。入口鏈為 `KOL.EXE` → TITLE
+  循環標題序列 → 任意鍵 → 書本封面 → 任意鍵 → 目錄頁 → `5` → Character options →
+  `CREATE CHARACTER`。名字欄容量 16 個可見字元，輸入第 16 個字元即直接前進種族層、
+  不需 Return；空名按 Return 不前進；取消目的地為種族→名字、性別→種族、職業→性別、
+  屬性→職業，回到名字層時欄位清空；`REROLL STATS` 重擲九個顯示值；圖像 selector 恰好
+  循環 80 張；接受圖像後才寫檔，兩輪都只寫 `CHARDATA` 的 slot 14。跨輪差異只出現在
+  TITLE 動畫落點、名字欄游標與屬性數值三類畫面且差異量已量化。16 槽全滿、重名處理、
+  名字欄字元集合與大小寫保存方式仍未由 UI 證實，實作必須標為未驗證分支。
 
 ## 固定輸入
 
@@ -136,21 +139,11 @@
 
 ## 下一個唯一工作
 
-TITLE 的 SET0／SET1／SET2／FACE 四個 archive 共 24 張、BACKPICS 全 14 張，以及
-KOLTOWN ENDPICS 全七張及 KOLBOOK BOOKPICS 全 14 張，已由 IDA consumer 與 PNG 探針
-完整關閉；KOLTOWN WEATPICS 全 18 筆也已關閉為六組 64×62 天候／時段分層背景，
-AWD1PICS 全 24 筆已關閉為 24×21 任務勳章圖示。
-SHLDPICS.0 八筆已關閉為四組彩圖／AND-mask 盾牌，並與無副檔名 SHLDPICS 記錄表分流。
-HANDPICS.0 全 24 筆已關閉為六個 renderer class×兩個位置的 12 組手部彩圖／AND-mask。
-WEAPPICS.0 全 56 筆已關閉為 28 組角色武器彩圖／AND-mask，selector、尺寸與位置表均有
-IDA 9.4 安全摘要，28 張 ignored PNG 已用棋盤接觸表重驗。
-HEADPICS.0／TORPICS.0／LEGSPICS.0 共 324 筆已關閉為 162 組角色分層 sprite；共享
-selector、三部件幾何／位置表與三份 6×9 棋盤接觸表皆已驗證。
-KOLPICS.0 全 14 筆亦已完成 consumer、混合格式與八張 PNG／接觸表驗證；六筆 placeholder
-不輸出 PNG，raw-planar 的未證實幾何仍保留證據等級。
-KOLMPICS.0 全 83 筆已完成 router、格式、71 筆 active PNG／mask 與 12 筆 placeholder
-分類；24×20 動態圖示的個別可達索引仍保留證據等級。
-MONPICS／PERPICS 早期 PNG alpha 極性已依 `sub_1BD17` 勘誤為 `1-mask`，並用棋盤背景重驗。
-顯示 theme 與 TITLE OGG 呈現方向都等待使用者決定。角色 writer／reader gate 已關閉；
-可獨立前進的下一窄切片是正常 DOS UI 的名字、ESC、reroll、slot-full 與保存邊界 oracle；
-SPEC-002／004／005 READY 前不接 production runtime。
+素材與角色建立規格已就緒，下一步進 M4 的 Go／Ebitengine 垂直切片：鎖定 Go、
+Ebitengine 與 build image，建立最小可啟動程式，再把角色建立流程接到已抽取的 PNG 上，
+並用 `tools/compare_frames.py` 對 `docs/verification/character-ui/` 的原版畫面做對拍。
+繁中文字與原版英文字模不可能逐像素相同，因此對拍的判準要先分成「版面／色盤／動畫
+序列」與「文字內容」兩層，並在實作前寫進 spec。
+
+未關閉的邊界：16 槽全滿、重名、名字欄字元集合；SPEC-004 的 PIT 方波合成器與人耳
+驗收；其餘 29 個 archive 的原版同狀態畫面收據；PCGA／HERC 轉換規則。

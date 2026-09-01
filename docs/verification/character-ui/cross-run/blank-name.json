@@ -2,24 +2,23 @@
   "tool": "tools/compare_character_ui_runs.py",
   "scenario": "blank-name",
   "run_a": {
-    "generated_utc": "2026-09-01T05:43:39Z",
+    "generated_utc": "2026-09-01T09:38:31Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "run_b": {
-    "generated_utc": "2026-09-01T05:56:28Z",
+    "generated_utc": "2026-09-01T09:50:48Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "checkpoint_count": 10,
-  "identical_count": 8,
-  "differing_count": 2,
+  "identical_count": 10,
+  "differing_count": 0,
   "checkpoints": [
     {
       "index": 0,
       "label": "TITLE 標題序列",
-      "identical": false,
-      "diff_byte_ratio": 0.139797
+      "identical": true
     },
     {
       "index": 1,
@@ -44,8 +43,7 @@
     {
       "index": 5,
       "label": "空白名字欄",
-      "identical": false,
-      "diff_byte_ratio": 0.000125
+      "identical": true
     },
     {
       "index": 6,

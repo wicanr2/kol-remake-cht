@@ -1,7 +1,7 @@
 # SPEC-005：角色建立與角色儲存區
 
-狀態：**DRAFT**  
-是否授權實作：**否**
+狀態：**READY**  
+是否授權實作：**是**（僅限本規格涵蓋的角色建立流程；16 槽全滿分支仍只有靜態證據，實作必須明確標示為未驗證分支）
 
 ## 範圍
 
@@ -30,6 +30,8 @@
   屬性→職業、圖像→commit 前的職業流程；正常 DOS UI 收據另證實取消回到名字層時，
   名字與摘要欄位都會清空。滿 16 槽時不得開始修改記錄。空名不前進已由正常 DOS UI
   收據證實。
+- 圖像 selector 已由正常 DOS UI 收據證實恰好循環 80 張：由 0 向左一次等於由 0 向右
+  80 次，再向右一次回到 0。接受圖像後畫面回到角色選項，且此時才寫入角色檔。
 - 相容流程的圖像 selector 固定為 80 筆，方向鍵循環、Return 接受；typed PNG 引用與原版
   selector 的對照仍須在 READY 前固定。
 - remake runtime 只讀 typed data、PNG 與 OGG；不得在 runtime 解析 `CHARDATA`、
@@ -54,6 +56,20 @@ reader 與存檔 schema 一起審查後，才可建立 READY typed data。
 完整 writer coverage 已證實：slot 清零後，所有直接 CHARDATA 寫入都落在固定欄位或
 REGION metadata route，沒有其他職業衍生的起始技能／物品。KOLTOWN 亦已讀回名字、種族、
 職業、金冠與主要武器，足以關閉本規格的最小 reader／writer 欄位 gate；未列欄位仍不命名。
+
+## 已由正常 DOS UI 收據關閉的邊界
+
+| 行為 | 收據 |
+|---|---|
+| 名字欄容量 16 字元；輸入第 16 個字元直接前進種族層 | `character-ui/name-length-run{1,2}` |
+| 空名按 Return 停在名字層 | `character-ui/blank-name-run{1,2}` |
+| 各層 ESC 的返回目的地與名字層清空 | `character-ui/escape-layers-run{1,2}` |
+| REROLL STATS 重擲九個顯示值 | `character-ui/reroll-run{1,2}` |
+| 圖像 selector 恰好 80 張循環 | `character-ui/picture-cycle-run{1,2}` |
+| 接受圖像後才寫入，且只寫單一槽位 | `character-ui/accept-and-save-run{1,2}`、`asset-parity/chardata-write-run{1,2}` |
+
+尚未由 UI 證實：16 槽全滿的訊息與退出、重名處理、名字欄接受的字元集合與大小寫保存。
+remake 必須把這三項標為未驗證分支，不得以推測實作後宣稱 parity。
 
 ## 存檔草案限制
 

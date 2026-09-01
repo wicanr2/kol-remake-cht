@@ -2,18 +2,18 @@
   "tool": "tools/compare_character_ui_runs.py",
   "scenario": "name-length",
   "run_a": {
-    "generated_utc": "2026-09-01T05:42:08Z",
+    "generated_utc": "2026-09-01T09:37:00Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "run_b": {
-    "generated_utc": "2026-09-01T05:54:58Z",
+    "generated_utc": "2026-09-01T09:49:18Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "checkpoint_count": 26,
-  "identical_count": 26,
-  "differing_count": 0,
+  "identical_count": 25,
+  "differing_count": 1,
   "checkpoints": [
     {
       "index": 0,
@@ -43,86 +43,87 @@
     {
       "index": 5,
       "label": "名字欄內容 （空）",
-      "identical": true
+      "identical": false,
+      "diff_byte_ratio": 0.000125
     },
     {
       "index": 6,
-      "label": "名字欄內容 A",
+      "label": "名字欄內容 a",
       "identical": true
     },
     {
       "index": 7,
-      "label": "名字欄內容 AB",
+      "label": "名字欄內容 ab",
       "identical": true
     },
     {
       "index": 8,
-      "label": "名字欄內容 ABC",
+      "label": "名字欄內容 abc",
       "identical": true
     },
     {
       "index": 9,
-      "label": "名字欄內容 ABCD",
+      "label": "名字欄內容 abcd",
       "identical": true
     },
     {
       "index": 10,
-      "label": "名字欄內容 ABCDE",
+      "label": "名字欄內容 abcde",
       "identical": true
     },
     {
       "index": 11,
-      "label": "名字欄內容 ABCDEF",
+      "label": "名字欄內容 abcdef",
       "identical": true
     },
     {
       "index": 12,
-      "label": "名字欄內容 ABCDEFG",
+      "label": "名字欄內容 abcdefg",
       "identical": true
     },
     {
       "index": 13,
-      "label": "名字欄內容 ABCDEFGH",
+      "label": "名字欄內容 abcdefgh",
       "identical": true
     },
     {
       "index": 14,
-      "label": "名字欄內容 ABCDEFGHI",
+      "label": "名字欄內容 abcdefghi",
       "identical": true
     },
     {
       "index": 15,
-      "label": "名字欄內容 ABCDEFGHIJ",
+      "label": "名字欄內容 abcdefghij",
       "identical": true
     },
     {
       "index": 16,
-      "label": "名字欄內容 ABCDEFGHIJK",
+      "label": "名字欄內容 abcdefghijk",
       "identical": true
     },
     {
       "index": 17,
-      "label": "名字欄內容 ABCDEFGHIJKL",
+      "label": "名字欄內容 abcdefghijkl",
       "identical": true
     },
     {
       "index": 18,
-      "label": "名字欄內容 ABCDEFGHIJKLM",
+      "label": "名字欄內容 abcdefghijklm",
       "identical": true
     },
     {
       "index": 19,
-      "label": "名字欄內容 ABCDEFGHIJKLMN",
+      "label": "名字欄內容 abcdefghijklmn",
       "identical": true
     },
     {
       "index": 20,
-      "label": "名字欄內容 ABCDEFGHIJKLMNO",
+      "label": "名字欄內容 abcdefghijklmno",
       "identical": true
     },
     {
       "index": 21,
-      "label": "名字欄內容 ABCDEFGHIJKLMNOP",
+      "label": "名字欄內容 abcdefghijklmnop",
       "identical": true
     },
     {

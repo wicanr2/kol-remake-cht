@@ -1,0 +1,27 @@
+{
+  "size_match": true,
+  "size": [
+    320,
+    200
+  ],
+  "identical": false,
+  "pixel_total": 64000,
+  "pixel_differing": 50,
+  "pixel_diff_ratio": 0.000781,
+  "diff_bounding_box": {
+    "x": 160,
+    "y": 100,
+    "width": 8,
+    "height": 11
+  },
+  "tool": "tools/compare_frames.py",
+  "label": "BOOKPICS[0] 對原版書本封面畫面（name-length-run1 checkpoint 1）",
+  "a": {
+    "path": "/repo/assets/original-derived-png/ega/BOOKPICS/bookpics-000.png",
+    "crop": null
+  },
+  "b": {
+    "path": "/repo/docs/verification/character-ui/name-length-run1/frames/frame-010.png",
+    "crop": null
+  }
+}

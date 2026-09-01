@@ -1,0 +1,107 @@
+{
+  "tool": "tools/compare_character_ui_runs.py",
+  "scenario": "accept-and-save",
+  "run_a": {
+    "generated_utc": "2026-09-01T09:44:01Z",
+    "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+    "character_files_changed": [
+      "CHARDATA"
+    ]
+  },
+  "run_b": {
+    "generated_utc": "2026-09-01T09:56:18Z",
+    "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+    "character_files_changed": [
+      "CHARDATA"
+    ]
+  },
+  "checkpoint_count": 16,
+  "identical_count": 12,
+  "differing_count": 4,
+  "checkpoints": [
+    {
+      "index": 0,
+      "label": "TITLE 標題序列",
+      "identical": true
+    },
+    {
+      "index": 1,
+      "label": "書本封面",
+      "identical": true
+    },
+    {
+      "index": 2,
+      "label": "目錄頁",
+      "identical": true
+    },
+    {
+      "index": 3,
+      "label": "角色選項選單（反白 LIST CHARACTERS）",
+      "identical": true
+    },
+    {
+      "index": 4,
+      "label": "角色選項選單（反白 CREATE CHARACTER）",
+      "identical": true
+    },
+    {
+      "index": 5,
+      "label": "名字層",
+      "identical": false,
+      "diff_byte_ratio": 0.000125
+    },
+    {
+      "index": 6,
+      "label": "名字欄 z",
+      "identical": true
+    },
+    {
+      "index": 7,
+      "label": "名字欄 ze",
+      "identical": true
+    },
+    {
+      "index": 8,
+      "label": "名字欄 zed",
+      "identical": true
+    },
+    {
+      "index": 9,
+      "label": "種族層（選 HUMAN）",
+      "identical": true
+    },
+    {
+      "index": 10,
+      "label": "性別層（選 MALE）",
+      "identical": true
+    },
+    {
+      "index": 11,
+      "label": "職業層（選第一項）",
+      "identical": true
+    },
+    {
+      "index": 12,
+      "label": "屬性頁（反白 REROLL STATS）",
+      "identical": false,
+      "diff_byte_ratio": 0.002422
+    },
+    {
+      "index": 13,
+      "label": "屬性頁（反白 ACCEPT STATS）",
+      "identical": false,
+      "diff_byte_ratio": 0.002422
+    },
+    {
+      "index": 14,
+      "label": "圖像層（selector 0）",
+      "identical": false,
+      "diff_byte_ratio": 0.002422
+    },
+    {
+      "index": 15,
+      "label": "接受圖像之後",
+      "identical": true
+    }
+  ]
+}

@@ -2,18 +2,18 @@
   "tool": "tools/compare_character_ui_runs.py",
   "scenario": "escape-layers",
   "run_a": {
-    "generated_utc": "2026-09-01T05:52:40Z",
+    "generated_utc": "2026-09-01T09:40:35Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "run_b": {
-    "generated_utc": "2026-09-01T05:58:33Z",
+    "generated_utc": "2026-09-01T09:52:51Z",
     "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
     "character_files_changed": []
   },
   "checkpoint_count": 28,
-  "identical_count": 22,
-  "differing_count": 6,
+  "identical_count": 21,
+  "differing_count": 7,
   "checkpoints": [
     {
       "index": 0,
@@ -43,29 +43,28 @@
     {
       "index": 5,
       "label": "名字層",
-      "identical": false,
-      "diff_byte_ratio": 0.000125
+      "identical": true
     },
     {
       "index": 6,
-      "label": "名字欄 T",
+      "label": "名字欄 t",
       "identical": true
     },
     {
       "index": 7,
-      "label": "名字欄 TE",
-      "identical": true
+      "label": "名字欄 te",
+      "identical": false,
+      "diff_byte_ratio": 0.000125
     },
     {
       "index": 8,
-      "label": "名字欄 TES",
+      "label": "名字欄 tes",
       "identical": true
     },
     {
       "index": 9,
-      "label": "名字欄 TEST",
-      "identical": false,
-      "diff_byte_ratio": 0.000125
+      "label": "名字欄 test",
+      "identical": true
     },
     {
       "index": 10,
@@ -79,23 +78,24 @@
     },
     {
       "index": 12,
-      "label": "重新輸入 T",
+      "label": "重新輸入 t",
       "identical": true
     },
     {
       "index": 13,
-      "label": "重新輸入 TE",
+      "label": "重新輸入 te",
       "identical": true
     },
     {
       "index": 14,
-      "label": "重新輸入 TES",
+      "label": "重新輸入 tes",
       "identical": true
     },
     {
       "index": 15,
-      "label": "重新輸入 TEST",
-      "identical": true
+      "label": "重新輸入 test",
+      "identical": false,
+      "diff_byte_ratio": 0.000125
     },
     {
       "index": 16,
@@ -136,30 +136,31 @@
       "index": 23,
       "label": "屬性頁",
       "identical": false,
-      "diff_byte_ratio": 0.00175
+      "diff_byte_ratio": 0.001891
     },
     {
       "index": 24,
       "label": "屬性頁 ESC 之後",
       "identical": false,
-      "diff_byte_ratio": 0.00175
+      "diff_byte_ratio": 0.001891
     },
     {
       "index": 25,
       "label": "再退一層",
       "identical": false,
-      "diff_byte_ratio": 0.00175
+      "diff_byte_ratio": 0.001891
     },
     {
       "index": 26,
       "label": "再退一層之二",
       "identical": false,
-      "diff_byte_ratio": 0.00175
+      "diff_byte_ratio": 0.001891
     },
     {
       "index": 27,
       "label": "再退一層之三",
-      "identical": true
+      "identical": false,
+      "diff_byte_ratio": 0.000125
     }
   ]
 }
