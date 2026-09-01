@@ -1,0 +1,547 @@
+{
+  "schema": "kol-title-sequence-v1",
+  "source": {
+    "exe": "TITLE.EXE",
+    "exe_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+    "main_ea": "0x10010",
+    "main_end_ea": "0x10af0",
+    "ida_summary": "docs/re/ida-fingerprints/TITLE-sequence-summary.json",
+    "ida_summary_sha256": "5ddca5ff1abd3067768d5be0712d271fbcd138487342ca0b4a3a9f974086449e",
+    "probe": "tools/ida_probe_title_sequence.py"
+  },
+  "note": "標題序列在原版是 _main 裡的一段線性程式碼，不是資料表。這份 JSON 是那段程式碼的逐呼叫轉寫，每一步都標出原始呼叫位址；未反組譯確認的東西不寫進來。",
+  "timing": {
+    "unit": "BIOS tick",
+    "hz": 18.2065,
+    "mark_ea": "0x11022",
+    "wait_ea": "0x11039",
+    "rule": "sub_11022 記錄目前 int 1Ah 的 tick，sub_11039(n) 忙等到 tick >= 記錄值 + n。因此所有等待都是精確的 tick 數，可靜態讀出。"
+  },
+  "memory_flag": {
+    "global": "byte_1423A",
+    "set_ea": "0x101a4",
+    "meaning": "第八次 __dos_allocmem 成功時為 1，代表額外的全螢幕緩衝區可用",
+    "transcribed_path": 1,
+    "note": "為 0 的路徑用同一個緩衝區重載，畫面順序與等待完全相同，只是少一份常駐緩衝。"
+  },
+  "aborts_on_keypress": true,
+  "abort_target_ea": "0x10a09",
+  "primitives": {
+    "load_back": {
+      "ea": "0x10e9f",
+      "signature": "sub_10E9F(image_index, buffer)",
+      "meaning": "讀 back<mode> archive 的第 image_index 張全螢幕圖到 buffer"
+    },
+    "present": {
+      "ea": "0x11133",
+      "signature": "sub_11133(buffer, 0, 0, 40, 200)",
+      "meaning": "把整張 320×200（40 byte × 200 列）搬到顯示記憶體"
+    },
+    "draw_overlay": {
+      "ea": "0x10e04",
+      "signature": "sub_10E04(frame)",
+      "meaning": "用 word_14E40/42/46/4A 當矩形，把目前 archive 的第 frame 張畫到 word_14232 指的目的地"
+    },
+    "thunder": {
+      "ea": "0x10f75",
+      "meaning": "喇叭雷聲：兩輪，每輪 100 步，頻率為 500×輪次 + rand(10000) + 1000，步進間隔是以開機期校正值算出的忙等，不是 tick 數"
+    },
+    "lightning": {
+      "ea": "0x10c86",
+      "meaning": "呈現 BACKPICS[6] 後連放兩次雷聲"
+    },
+    "random": {
+      "ea": "0x11953",
+      "signature": "sub_11953(n)",
+      "meaning": "rand() % n + 1"
+    }
+  },
+  "overlay_rects": [
+    {
+      "archive": "SET0PICS",
+      "set_ea": "0x10b02",
+      "x": 112,
+      "y": 53,
+      "width": 88,
+      "height": 70
+    },
+    {
+      "archive": "SET1PICS",
+      "set_ea": "0x10b1d",
+      "x": 96,
+      "y": 53,
+      "width": 104,
+      "height": 84
+    },
+    {
+      "archive": "SET2PICS",
+      "set_ea": "0x10b38",
+      "x": 48,
+      "y": 53,
+      "width": 160,
+      "height": 125
+    },
+    {
+      "archive": "FACEPICS",
+      "set_ea": "0x10729",
+      "x": 104,
+      "y": 80,
+      "width": 112,
+      "height": 80
+    }
+  ],
+  "set_animation": {
+    "ea": "0x10af0",
+    "iterations": 4,
+    "iteration_end_ea": "0x10c74",
+    "steps": [
+      {
+        "ea": "0x10b62",
+        "op": "compose_overlay",
+        "frame": 0,
+        "background": 0
+      },
+      {
+        "ea": "0x10b85",
+        "op": "present_composed"
+      },
+      {
+        "ea": "0x10b8f",
+        "op": "wait_ticks",
+        "ticks": 3
+      },
+      {
+        "ea": "0x10b9c",
+        "op": "draw_overlay",
+        "frame": 1
+      },
+      {
+        "ea": "0x10ba6",
+        "op": "wait_ticks",
+        "ticks": 4
+      },
+      {
+        "ea": "0x10bb3",
+        "op": "draw_overlay",
+        "frame": 2
+      },
+      {
+        "ea": "0x10bbd",
+        "op": "wait_ticks",
+        "ticks": 4
+      },
+      {
+        "ea": "0x10bca",
+        "op": "draw_overlay",
+        "frame": 3
+      },
+      {
+        "ea": "0x10bd4",
+        "op": "wait_ticks",
+        "ticks": 2
+      },
+      {
+        "ea": "0x10be1",
+        "op": "random_choice",
+        "name": "flash",
+        "options": [
+          {
+            "frame": 4,
+            "background": 1,
+            "compose_ea": "0x10bfc",
+            "present_ea": "0x10c1c"
+          },
+          {
+            "frame": 5,
+            "background": 2,
+            "compose_ea": "0x10c2f",
+            "present_ea": "0x10c4f"
+          }
+        ]
+      },
+      {
+        "ea": "0x10c55",
+        "op": "thunder"
+      },
+      {
+        "ea": "0x10c5c",
+        "op": "wait_ticks",
+        "ticks": 5
+      }
+    ],
+    "after_ea": "0x10c7d",
+    "after": "lightning"
+  },
+  "steps": [
+    {
+      "ea": "0x1021b",
+      "op": "load_archive",
+      "archive": "SET0PICS"
+    },
+    {
+      "ea": "0x10275",
+      "op": "lightning",
+      "note": "呈現 BACKPICS[6] 後連放兩次雷聲"
+    },
+    {
+      "ea": "0x102a6",
+      "op": "set_animation",
+      "set": 0
+    },
+    {
+      "ea": "0x102dc",
+      "op": "present_back",
+      "image": 7
+    },
+    {
+      "ea": "0x102f7",
+      "op": "wait_ticks",
+      "ticks": 75
+    },
+    {
+      "ea": "0x10311",
+      "op": "present_back",
+      "image": 8
+    },
+    {
+      "ea": "0x1032c",
+      "op": "wait_ticks",
+      "ticks": 75
+    },
+    {
+      "ea": "0x103e0",
+      "op": "load_archive",
+      "archive": "SET1PICS"
+    },
+    {
+      "ea": "0x103f8",
+      "op": "set_animation",
+      "set": 1
+    },
+    {
+      "ea": "0x1042e",
+      "op": "present_back",
+      "image": 9
+    },
+    {
+      "ea": "0x10449",
+      "op": "wait_ticks",
+      "ticks": 75
+    },
+    {
+      "ea": "0x10463",
+      "op": "present_back",
+      "image": 10
+    },
+    {
+      "ea": "0x10470",
+      "op": "random_choice",
+      "name": "storm_screen",
+      "options": [
+        11,
+        13
+      ],
+      "note": "rand()%2+1；1 取 11、2 取 13。原版以 BIOS tick 播種，因此每次播放不同。"
+    },
+    {
+      "ea": "0x104a4",
+      "op": "wait_ticks",
+      "ticks": 75
+    },
+    {
+      "ea": "0x10558",
+      "op": "load_archive",
+      "archive": "SET2PICS"
+    },
+    {
+      "ea": "0x10570",
+      "op": "set_animation",
+      "set": 2
+    },
+    {
+      "ea": "0x105a6",
+      "op": "present_back",
+      "image": "storm_screen"
+    },
+    {
+      "ea": "0x105eb",
+      "op": "wait_ticks",
+      "ticks": 75
+    },
+    {
+      "ea": "0x10608",
+      "op": "present_back",
+      "image": 12
+    },
+    {
+      "ea": "0x10612",
+      "op": "wait_ticks",
+      "ticks": 75
+    },
+    {
+      "ea": "0x10723",
+      "op": "load_archive",
+      "archive": "FACEPICS"
+    },
+    {
+      "ea": "0x1074b",
+      "op": "compose_overlay",
+      "archive": "FACEPICS",
+      "frame": 0,
+      "background": 3
+    },
+    {
+      "ea": "0x1076e",
+      "op": "present_composed"
+    },
+    {
+      "ea": "0x10778",
+      "op": "wait_ticks",
+      "ticks": 10
+    },
+    {
+      "ea": "0x10785",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 1
+    },
+    {
+      "ea": "0x10785",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x1079c",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 4
+    },
+    {
+      "ea": "0x1079c",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x107b3",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 1
+    },
+    {
+      "ea": "0x107b3",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x107ca",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 5
+    },
+    {
+      "ea": "0x107ca",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x107e1",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 1
+    },
+    {
+      "ea": "0x107e1",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x10808",
+      "op": "present_back",
+      "image": 4
+    },
+    {
+      "ea": "0x1080e",
+      "op": "thunder"
+    },
+    {
+      "ea": "0x10815",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x10833",
+      "op": "compose_overlay",
+      "archive": "FACEPICS",
+      "frame": 1,
+      "background": 3
+    },
+    {
+      "ea": "0x10856",
+      "op": "present_composed"
+    },
+    {
+      "ea": "0x10860",
+      "op": "wait_ticks",
+      "ticks": 10
+    },
+    {
+      "ea": "0x1086d",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 4
+    },
+    {
+      "ea": "0x1086d",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x10884",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 1
+    },
+    {
+      "ea": "0x10884",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x1089b",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 5
+    },
+    {
+      "ea": "0x1089b",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x108b2",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 3
+    },
+    {
+      "ea": "0x108b2",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x108d9",
+      "op": "present_back",
+      "image": 5
+    },
+    {
+      "ea": "0x108df",
+      "op": "thunder"
+    },
+    {
+      "ea": "0x108e6",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x10904",
+      "op": "compose_overlay",
+      "archive": "FACEPICS",
+      "frame": 1,
+      "background": 3
+    },
+    {
+      "ea": "0x10927",
+      "op": "present_composed"
+    },
+    {
+      "ea": "0x10931",
+      "op": "wait_ticks",
+      "ticks": 10
+    },
+    {
+      "ea": "0x1093e",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 2
+    },
+    {
+      "ea": "0x1093e",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x10955",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 1
+    },
+    {
+      "ea": "0x10955",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x1096c",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 0
+    },
+    {
+      "ea": "0x1096c",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x10983",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 1
+    },
+    {
+      "ea": "0x10983",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x1099a",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 2
+    },
+    {
+      "ea": "0x1099a",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x109b1",
+      "op": "draw_overlay",
+      "archive": "FACEPICS",
+      "frame": 1
+    },
+    {
+      "ea": "0x109b1",
+      "op": "wait_ticks",
+      "ticks": 15
+    },
+    {
+      "ea": "0x109d5",
+      "op": "present_back",
+      "image": 4
+    },
+    {
+      "ea": "0x109db",
+      "op": "thunder"
+    },
+    {
+      "ea": "0x109e6",
+      "op": "present_back",
+      "image": 10
+    },
+    {
+      "ea": "0x10a06",
+      "op": "loop",
+      "note": "無條件跳回 0x101da，整段序列循環播放"
+    }
+  ]
+}

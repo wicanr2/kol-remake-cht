@@ -1,0 +1,2719 @@
+{
+  "schema": "kol-ida-title-sequence-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "TITLE.EXE",
+  "input_sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+  "address_space": "IDA linear effective address for the named loaded MZ image",
+  "main_ea": "0x10010",
+  "main_end_ea": "0x10af0",
+  "main_instruction_count": 1051,
+  "direct_callees": [
+    {
+      "original_name": "sub_10AF0",
+      "start_ea": "0x10af0",
+      "end_ea": "0x10c86",
+      "instruction_count": 142
+    },
+    {
+      "original_name": "sub_10C86",
+      "start_ea": "0x10c86",
+      "end_ea": "0x10cfa",
+      "instruction_count": 49
+    },
+    {
+      "original_name": "sub_10CFA",
+      "start_ea": "0x10cfa",
+      "end_ea": "0x10e04",
+      "instruction_count": 95
+    },
+    {
+      "original_name": "sub_10E04",
+      "start_ea": "0x10e04",
+      "end_ea": "0x10e9f",
+      "instruction_count": 52
+    },
+    {
+      "original_name": "sub_10E9F",
+      "start_ea": "0x10e9f",
+      "end_ea": "0x10f33",
+      "instruction_count": 56
+    },
+    {
+      "original_name": "sub_10F75",
+      "start_ea": "0x10f75",
+      "end_ea": "0x11022",
+      "instruction_count": 65
+    },
+    {
+      "original_name": "sub_11022",
+      "start_ea": "0x11022",
+      "end_ea": "0x11039",
+      "instruction_count": 13
+    },
+    {
+      "original_name": "sub_11039",
+      "start_ea": "0x11039",
+      "end_ea": "0x11057",
+      "instruction_count": 16
+    },
+    {
+      "original_name": "sub_11058",
+      "start_ea": "0x11058",
+      "end_ea": "0x110bd",
+      "instruction_count": 42
+    },
+    {
+      "original_name": "sub_11133",
+      "start_ea": "0x11133",
+      "end_ea": "0x11291",
+      "instruction_count": 140
+    },
+    {
+      "original_name": "sub_118D1",
+      "start_ea": "0x118d1",
+      "end_ea": "0x11904",
+      "instruction_count": 28
+    },
+    {
+      "original_name": "sub_11953",
+      "start_ea": "0x11953",
+      "end_ea": "0x11971",
+      "instruction_count": 16
+    },
+    {
+      "original_name": "sub_11C5D",
+      "start_ea": "0x11c5d",
+      "end_ea": "0x11cdd",
+      "instruction_count": 62
+    },
+    {
+      "original_name": "_printf",
+      "start_ea": "0x122ac",
+      "end_ea": "0x122e8",
+      "instruction_count": 29
+    },
+    {
+      "original_name": "_kbhit",
+      "start_ea": "0x1372c",
+      "end_ea": "0x1374d",
+      "instruction_count": 14
+    },
+    {
+      "original_name": "_getch",
+      "start_ea": "0x13752",
+      "end_ea": "0x1377a",
+      "instruction_count": 16
+    },
+    {
+      "original_name": "_sprintf",
+      "start_ea": "0x1377a",
+      "end_ea": "0x137d0",
+      "instruction_count": 39
+    },
+    {
+      "original_name": "_srand",
+      "start_ea": "0x138a2",
+      "end_ea": "0x138b3",
+      "instruction_count": 7
+    },
+    {
+      "original_name": "_execv",
+      "start_ea": "0x13e88",
+      "end_ea": "0x13e9d",
+      "instruction_count": 9
+    },
+    {
+      "original_name": "__dos_allocmem",
+      "start_ea": "0x14084",
+      "end_ea": "0x1409c",
+      "instruction_count": 18
+    },
+    {
+      "original_name": "__dos_close",
+      "start_ea": "0x1409c",
+      "end_ea": "0x140a9",
+      "instruction_count": 13
+    },
+    {
+      "original_name": "__dos_open",
+      "start_ea": "0x140ca",
+      "end_ea": "0x140e1",
+      "instruction_count": 17
+    },
+    {
+      "original_name": "__dos_freemem",
+      "start_ea": "0x14112",
+      "end_ea": "0x1411f",
+      "instruction_count": 13
+    }
+  ],
+  "call_script": [
+    {
+      "call_ea": "0x10097",
+      "target_ea": "0x11c5d",
+      "target_name": "sub_11C5D",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "di"
+        },
+        {
+          "kind": "operand",
+          "text": "si"
+        },
+        {
+          "kind": "operand",
+          "text": "bp"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x100b2",
+      "target_ea": "0x138a2",
+      "target_name": "_srand",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14E44"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x100c0",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2048,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 3160,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x100d2",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x100e0",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1468,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 1334,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x100f2",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10100",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 563,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 11360,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10112",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10120",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2048,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 1604,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10132",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10140",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2048,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 2006,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10152",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10160",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2048,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 2048,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10172",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10180",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2048,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 2050,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10196",
+      "target_ea": "0x14084",
+      "target_name": "__dos_allocmem",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2048,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 2052,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x101b0",
+      "target_ea": "0x14112",
+      "target_name": "__dos_freemem",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F2"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x101c2",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x101d4",
+      "target_ea": "0x118d1",
+      "target_name": "sub_118D1",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x101da",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10209",
+      "target_ea": "0x1377a",
+      "target_name": "_sprintf",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 730,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "cx"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1021b",
+      "target_ea": "0x11058",
+      "target_name": "sub_11058",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14830"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14832"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10229",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149C6"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10237",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F0"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10253",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10261",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 6,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F2"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1026f",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 7,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10275",
+      "target_ea": "0x10c86",
+      "target_name": "sub_10C86",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10278",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1029c",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x102a6",
+      "target_ea": "0x10af0",
+      "target_name": "sub_10AF0",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x102ac",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x102dc",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x102e2",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x102ed",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 8,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x102f7",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10311",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10317",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10322",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 9,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1032c",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1033d",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 7,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10357",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1035d",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10368",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 8,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10372",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1038c",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10392",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1039d",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x103a7",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x103ce",
+      "target_ea": "0x1377a",
+      "target_name": "_sprintf",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 740,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "cx"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x103e0",
+      "target_ea": "0x11058",
+      "target_name": "sub_11058",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14830"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14832"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x103e6",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x103f8",
+      "target_ea": "0x10af0",
+      "target_name": "sub_10AF0",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x103fe",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1042e",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10434",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1043f",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 10,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10449",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10463",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10469",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10470",
+      "target_ea": "0x11953",
+      "target_name": "sub_11953",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10489",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 11,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1049a",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 13,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x104a4",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x104b5",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 9,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x104cf",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x104d5",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x104e0",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 10,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x104ea",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10504",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1050a",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10515",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1051f",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10546",
+      "target_ea": "0x1377a",
+      "target_name": "_sprintf",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 750,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "cx"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10558",
+      "target_ea": "0x11058",
+      "target_name": "sub_11058",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14830"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14832"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1055e",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10570",
+      "target_ea": "0x10af0",
+      "target_name": "sub_10AF0",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10576",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x105a6",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x105ac",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x105b7",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 3,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x105c5",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 4,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149C6"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x105d3",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 5,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F0"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x105e1",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 12,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x105eb",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x105f1",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10608",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F4"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10612",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1061b",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10622",
+      "target_ea": "0x11953",
+      "target_name": "sub_11953",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1063b",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 11,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1064c",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 13,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10666",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10670",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10676",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10681",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 4,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149C6"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1068f",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 5,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_149F0"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1069d",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 12,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x106a7",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x106c1",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x106c7",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x106d2",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 3,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x106dc",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 75,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x106e2",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10711",
+      "target_ea": "0x1377a",
+      "target_name": "_sprintf",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 760,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "cx"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10723",
+      "target_ea": "0x11058",
+      "target_name": "sub_11058",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2008,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14830"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14832"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1074b",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10757",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1076e",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10778",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 10,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1077e",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10785",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1078f",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10795",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1079c",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 4,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107a6",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107ac",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x107b3",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107bd",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107c3",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x107ca",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 5,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107d4",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107da",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x107e1",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107eb",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x107f1",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10808",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149C6"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1080e",
+      "target_ea": "0x10f75",
+      "target_name": "sub_10F75",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10815",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1081b",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10833",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1083f",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10856",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10860",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 10,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10866",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1086d",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 4,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10877",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1087d",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10884",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1088e",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10894",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1089b",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 5,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x108a5",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x108ab",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x108b2",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 3,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x108bc",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x108c2",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x108d9",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149F0"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x108df",
+      "target_ea": "0x10f75",
+      "target_name": "sub_10F75",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x108e6",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x108ec",
+      "target_ea": "0x1372c",
+      "target_name": "_kbhit",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10904",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10910",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10927",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10931",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 10,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10937",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1093e",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10948",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1094e",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10955",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1095f",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10965",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1096c",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10976",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1097c",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10983",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x1098d",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10993",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x1099a",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 2,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x109a4",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x109aa",
+      "target_ea": "0x11022",
+      "target_name": "sub_11022",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x109b1",
+      "target_ea": "0x10e04",
+      "target_name": "sub_10E04",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 1,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x109bb",
+      "target_ea": "0x11039",
+      "target_name": "sub_11039",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 15,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x109d5",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_149C6"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x109db",
+      "target_ea": "0x10f75",
+      "target_name": "sub_10F75",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x109e6",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 10,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10a00",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10a11",
+      "target_ea": "0x10e9f",
+      "target_name": "sub_10E9F",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 10,
+          "via_register": "ax"
+        },
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10a2b",
+      "target_ea": "0x11133",
+      "target_name": "sub_11133",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_14834"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 40,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 200,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10a35",
+      "target_ea": "0x10cfa",
+      "target_name": "sub_10CFA",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10a55",
+      "target_ea": "0x13752",
+      "target_name": "_getch",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10a65",
+      "target_ea": "0x13752",
+      "target_name": "_getch",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10a84",
+      "target_ea": "0x140ca",
+      "target_name": "__dos_open",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 770,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 11362,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10aa1",
+      "target_ea": "0x122ac",
+      "target_name": "_printf",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 778,
+          "via_register": "ax"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10aa7",
+      "target_ea": "0x13752",
+      "target_name": "_getch",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10ab1",
+      "target_ea": "0x1409c",
+      "target_name": "__dos_close",
+      "arguments": [
+        {
+          "kind": "operand",
+          "text": "word_16E52"
+        }
+      ]
+    },
+    {
+      "call_ea": "0x10ad9",
+      "target_ea": "0x11c5d",
+      "target_name": "sub_11C5D",
+      "arguments": []
+    },
+    {
+      "call_ea": "0x10ae4",
+      "target_ea": "0x13e88",
+      "target_name": "_execv",
+      "arguments": [
+        {
+          "kind": "imm",
+          "value": 830,
+          "via_register": "ax"
+        },
+        {
+          "kind": "imm",
+          "value": 0,
+          "via_register": "ax"
+        }
+      ]
+    }
+  ]
+}
