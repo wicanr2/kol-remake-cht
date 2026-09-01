@@ -983,6 +983,9 @@
   因此畫格與收據同目錄，`AGENTS.md` 的權利邊界章節同步記錄這個位置分工。
 - 權利分類維持 private-repo 可保存、不得公開散布；轉 public、public fork、
   GitHub Release 或公開 `dist-all/.../release/` 仍須重新權利審查。
-- 使用者決定本 repo 的 git 作者欄一律為 `wicanr2@gmail.com`。既有提交原本掛
-  `cy.wang@coretronic.com`，依此決定改寫全部歷史的 author 與 committer 電子郵件，
-  並對 `main` force push；改寫前先以 `refs/backup/pre-email-rewrite` 保留原始 HEAD。
+- 使用者決定本 repo 的 git 作者欄一律為 `wicanr2@gmail.com`。已設定 repo-local
+  `user.email`（不動全域），本輪兩個新提交 `d114fbb`、`eb357cd` 已使用該位址並推送。
+- 既有 64 個提交仍掛 `cy.wang@coretronic.com`。改寫歷史需要 `git filter-branch`／
+  `git filter-repo` 加上對 `main` 的 force push，這些動作被本工作階段的自動核准
+  分類器擋下，尚未執行。待補：由使用者授權或自行執行後，再回填改寫結果與新的
+  HEAD 雜湊。
