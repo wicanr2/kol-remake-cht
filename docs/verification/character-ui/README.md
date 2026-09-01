@@ -31,7 +31,7 @@ tools/compare_character_ui_runs.py <第一輪目錄> <第二輪目錄> --out cro
 與 `frames/`；收據以相對路徑索引畫格。`cross-run/` 是兩輪檢查點畫面的比對結果，
 `MANIFEST.json` 記錄來源、產生工具、雜湊入口與權利分類。
 
-2,115 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
+2,713 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
 衍生自原版執行檔與資料，著作權仍屬原權利人；此決定不涵蓋 public repo、public fork、
 GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序，不是原版 archive 圖號。
 
@@ -47,6 +47,8 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 | `picture-cycle` | 99 | 10 | 無 |
 | `delete-character` | 13 | 13 | 無 |
 | `delete-character-confirm` | 15 | 15 | `CHARDATA` |
+| `edit-picture-probe`／`edit-shield-probe`／`harbor-master-probe` | 10／11／12 | 單輪 | 無 |
+| `edit-picture-enter`／`edit-shield-enter`／`harbor-master-enter` | 12／13／14 | 單輪 | 無 |
 
 兩輪之間的差異全部落在三類本來就不可能逐 byte 相同的畫面：
 
@@ -74,6 +76,12 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
   角色連續兩次 reroll，力量 88 → 85 → 89、體型 74 → 72 → 73、健康 75 → 75 → 74。
 - **角色圖像 selector 恰好循環 80 張。** 由 selector 0 向左一次得到的畫面，與由 0
   連續向右 80 次得到的畫面相同；再向右一次回到 selector 0。方向鍵瀏覽、Return 接受。
+- **書本四個功能共用同一張角色選擇清單。** `DELETE CHARACTER`、`EDIT PICTURE`、
+  `EDIT SHIELD`、`HARBOR MASTER` 進入後的第一張畫面是同一個 PNG（四份收據的 SHA-256
+  完全相同）；由清單 ESC 回到選單（反白重置），再 ESC 回到目錄頁。
+- **HARBOR MASTER 在只安裝一個 region 時是一張訊息頁**，按鍵回到角色選項。
+  `EDIT PICTURE` 與 `EDIT SHIELD` 是同一個滑鼠驅動的點陣圖編輯器，ESC 沒有作用，
+  現有的鍵盤 oracle 走不完（RE-052）。
 - **DELETE CHARACTER 用的就是角色清單頁。** 版面與 `LIST CHARACTERS` 完全相同，
   差別只有顏色語意：反白那一列黑字、其餘青字，左右兩欄同時反白；反白條起點是第 0 列，
   不繞圈。Return 叫出 (94,58) 的 132×24 確認視窗（黑框白底、右下 4 px 投影），

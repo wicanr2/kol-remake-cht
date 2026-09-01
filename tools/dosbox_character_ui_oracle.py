@@ -112,16 +112,30 @@ LIST_PRELUDE = [
     step("目錄頁", "5", settle=2.5),
 ]
 
-# 走到刪除角色清單的前置。目錄頁按 5 之後有一段約六秒的翻頁動畫；用固定等待跨過去，
+# 走到角色選項選單的前置。目錄頁按 5 之後有一段約六秒的翻頁動畫；用固定等待跨過去，
 # 避免在動畫途中誤判畫面已靜止而把後續按鍵送進動畫裡（第一次試跑就是這樣整串失步）。
-DELETE_PRELUDE = [
+# 走完停在選單，反白條在第 0 項 LIST CHARACTERS。
+MENU_PRELUDE = [
     step("TITLE 標題序列", "space", delay=8.0),
     step("書本封面", "space", delay=9.0),
     step("目錄頁", "5", delay=10.0),
-    step("角色選項選單（反白 LIST CHARACTERS）", "Down", settle=2.5),
-    step("角色選項選單（反白 CREATE CHARACTER）", "Down", settle=2.0),
-    step("角色選項選單（反白 DELETE CHARACTER）", "Return", settle=3.5),
 ]
+
+# 角色選項選單的六個項目；index 是由 LIST CHARACTERS 起算要按幾次 Down。
+MENU_ITEMS = ["LIST CHARACTERS", "CREATE CHARACTER", "DELETE CHARACTER",
+              "EDIT PICTURE", "EDIT SHIELD", "HARBOR MASTER"]
+
+
+def menu_steps(index: int) -> list[dict]:
+    """由選單第 0 項走到第 index 項並按 Return。"""
+    out = []
+    for i in range(index):
+        out.append(step(f"角色選項選單（反白 {MENU_ITEMS[i]}）", "Down", settle=2.0))
+    out.append(step(f"角色選項選單（反白 {MENU_ITEMS[index]}）", "Return", settle=3.5))
+    return out
+
+
+DELETE_PRELUDE = list(MENU_PRELUDE) + menu_steps(2)
 
 SCENARIOS: dict[str, dict] = {
     "list-characters": {
@@ -131,6 +145,66 @@ SCENARIOS: dict[str, dict] = {
             step("角色選項選單（反白 LIST CHARACTERS）", "Return", settle=3.0),
             step("角色清單", "Escape", settle=2.5),
             step("角色清單取消之後", None, settle=3.0),
+        ],
+    },
+    "edit-picture-probe": {
+        "description": "從角色選項選單進入 EDIT PICTURE，擷取進入後的畫面，"
+                       "再逐次取消退回選單。全程不修改任何角色。",
+        "steps": list(MENU_PRELUDE) + menu_steps(3) + [
+            step("EDIT PICTURE 進入後", "Escape", settle=3.0),
+            step("第一次取消之後", "Escape", settle=3.0),
+            step("第二次取消之後", None, settle=3.0),
+        ],
+    },
+    "edit-shield-probe": {
+        "description": "從角色選項選單進入 EDIT SHIELD，擷取進入後的畫面，"
+                       "再逐次取消退回選單。全程不修改任何角色。",
+        "steps": list(MENU_PRELUDE) + menu_steps(4) + [
+            step("EDIT SHIELD 進入後", "Escape", settle=3.0),
+            step("第一次取消之後", "Escape", settle=3.0),
+            step("第二次取消之後", None, settle=3.0),
+        ],
+    },
+    "harbor-master-probe": {
+        "description": "從角色選項選單進入 HARBOR MASTER，擷取進入後的畫面，"
+                       "再逐次取消退回選單。全程不修改任何角色。",
+        "steps": list(MENU_PRELUDE) + menu_steps(5) + [
+            step("HARBOR MASTER 進入後", "Escape", settle=3.0),
+            step("第一次取消之後", "Escape", settle=3.0),
+            step("第二次取消之後", None, settle=3.0),
+        ],
+    },
+    "edit-picture-enter": {
+        "description": "從角色選項選單進入 EDIT PICTURE，在角色選擇清單選第一名角色，"
+                       "擷取功能本身的畫面，再逐次取消退回；保存角色檔以檢查是否寫入。",
+        "steps": list(MENU_PRELUDE) + menu_steps(3) + [
+            step("角色選擇清單（反白第 1 名）", "Return", settle=4.0),
+            step("EDIT PICTURE 畫面", "Escape", settle=3.5),
+            step("第一次取消之後", "Escape", settle=3.0),
+            step("第二次取消之後", "Escape", settle=3.0),
+            step("第三次取消之後", None, settle=3.0),
+        ],
+    },
+    "edit-shield-enter": {
+        "description": "從角色選項選單進入 EDIT SHIELD，在角色選擇清單選第一名角色，"
+                       "擷取功能本身的畫面，再逐次取消退回；保存角色檔以檢查是否寫入。",
+        "steps": list(MENU_PRELUDE) + menu_steps(4) + [
+            step("角色選擇清單（反白第 1 名）", "Return", settle=4.0),
+            step("EDIT SHIELD 畫面", "Escape", settle=3.5),
+            step("第一次取消之後", "Escape", settle=3.0),
+            step("第二次取消之後", "Escape", settle=3.0),
+            step("第三次取消之後", None, settle=3.0),
+        ],
+    },
+    "harbor-master-enter": {
+        "description": "從角色選項選單進入 HARBOR MASTER，在角色選擇清單選第一名角色，"
+                       "擷取功能本身的畫面，再逐次取消退回；保存角色檔以檢查是否寫入。",
+        "steps": list(MENU_PRELUDE) + menu_steps(5) + [
+            step("角色選擇清單（反白第 1 名）", "Return", settle=4.0),
+            step("HARBOR MASTER 畫面", "Escape", settle=3.5),
+            step("第一次取消之後", "Escape", settle=3.0),
+            step("第二次取消之後", "Escape", settle=3.0),
+            step("第三次取消之後", None, settle=3.0),
         ],
     },
     "delete-character-probe": {

@@ -13,6 +13,10 @@ import (
 // 版面與角色清單頁相同（同樣的兩個標題圖、同樣的兩欄起點與行距），差別只在顏色語意：
 // 反白的那一列是黑字，其餘是青字，兩欄同時反白。確認視窗開著時沒有任何一列反白。
 // 三件事都由原版 delete-character-run1 的畫面逐像素量得。
+//
+// 這張清單是書本四個功能共用的角色選擇畫面：`DELETE CHARACTER`、`EDIT PICTURE`、
+// `EDIT SHIELD`、`HARBOR MASTER` 進入後的第一張畫面是同一個 PNG（四份原版收據的
+// SHA-256 完全相同），不同的只有選定角色之後走到哪裡。
 func DeleteList(dst *ebiten.Image, sprites Sprites, small *font.Font,
 	slots []roster.Slot, cursor int, confirm bool) error {
 	bg, err := sprites.Get("BOOKPICS", book.OpenSpread)
@@ -102,4 +106,10 @@ func DeleteListCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translato
 		f.Draw(dst, w.Line2X, w.Line2Y, t.T("YES/NO"), p[0], p[1], p[2])
 	}
 	return nil
+}
+
+// SelectCharacter 是四個書本功能共用的角色選擇清單，等同沒有確認視窗的刪除清單。
+func SelectCharacter(dst *ebiten.Image, sprites Sprites, small *font.Font,
+	slots []roster.Slot, cursor int) error {
+	return DeleteList(dst, sprites, small, slots, cursor, false)
 }

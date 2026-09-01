@@ -97,6 +97,9 @@ def main() -> int:
         check("list", en, layout["RightX"], right_right)
     check("actions", "CANCEL", layout["ActionsX"], right_right)
 
+    for en in ("ONLY ONE REGION IS INSTALLED.", "PRESS ANY KEY."):
+        check("message", en, layout["FieldX"], left_right)
+
     # 刪除確認視窗是覆蓋在書頁上的獨立視窗，安全矩形就是視窗自己的內緣。
     confirm = layout_doc.get("confirm")
     if confirm:

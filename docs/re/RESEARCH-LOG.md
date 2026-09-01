@@ -1314,3 +1314,29 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   （`docs/verification/chardata-delete/`）。
 - **限制**：確認視窗按 ESC 的行為沒有量測；`Y`／`N` 大寫、滑鼠按鍵與「名冊為空時進入
   刪除畫面」都未測；`EDIT PICTURE`、`EDIT SHIELD`、`HARBOR MASTER` 仍未探。
+
+## RE-052：書本剩下三項功能的入口——共用的角色選擇清單
+
+- 新增六個正常 DOS UI 情境：`edit-picture-probe`／`edit-shield-probe`／
+  `harbor-master-probe`（進入即取消）與對應的 `-enter`（選第一名角色後進入功能本身）。
+  三個 `-enter` 情境都保存了角色檔，`CHARDATA`／`CHARPICS`／`SHLDPICS` 的 SHA-256
+  全程未變。
+- **四個功能共用同一張角色選擇清單**：`DELETE CHARACTER`、`EDIT PICTURE`、
+  `EDIT SHIELD`、`HARBOR MASTER` 進入後的第一張畫面是**同一個 PNG**
+  （SHA-256 `36eba7c1…`，四份收據完全相同）——角色清單頁加一條反白條，起點第 0 列。
+  差別只在選定角色之後走到哪裡。
+- **角色選項選單的 ESC 回到目錄頁**：由清單 ESC 回到選單（反白重置為第 0 項），
+  再 ESC 回到目錄頁。三個 probe 情境都走出同一條路徑。
+- **HARBOR MASTER 在只安裝一個 region 時是一張訊息頁**：展開跨頁上三行黑字
+  `ONLY ONE REGION`(24,52)、`IS INSTALLED.`(24,58)、`PRESS ANY KEY.`(24,70)，
+  第三行前空一列，沒有標題圖。按鍵回到角色選項。多個 region 的畫面沒有量測——
+  那需要另一張角色磁碟。
+- **`EDIT PICTURE` 與 `EDIT SHIELD` 是同一個點陣圖編輯器**，只是編輯對象不同
+  （`CHARPICS` 對 `SHLDPICS`）。畫面由左側大編輯區、右上預覽與目前顏色、右側 16 色
+  色盤、底部 8 個工具圖示組成，全部畫在紅磚底上而不是書頁上。**ESC 沒有作用**——
+  連送三次畫面逐像素完全沒變，因此離開方式與工具操作都要另查參考卡，而且原版是
+  滑鼠驅動的，現有的鍵盤 oracle 走不完。
+- **對拍結果**：`plan-harbor.json` 1 對通過，允許差異只有滑鼠游標 55 px 與頁尾殘影
+  112 px。編輯器沒有實作，因此沒有對拍。
+- **限制**：編輯器的工具語意、色盤索引、寫回 `CHARPICS`／`SHLDPICS` 的時機與格式都未知；
+  要往下做需要能送滑鼠事件的 oracle。

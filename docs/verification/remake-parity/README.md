@@ -51,8 +51,9 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `book-roster.json`（角色選項頁翻到角色清單，對 `list-characters-run1`） | 20 | 20 |
 | `delete.json`（刪除流程含確認視窗，對 `delete-character-confirm-run1`） | 8 | 8 |
 | `delete-move.json`（刪除清單反白條移動，對 `delete-character-run1`） | 5 | 5 |
+| `harbor.json`（HARBOR MASTER 訊息頁，對 `harbor-master-enter-run1`） | 1 | 1 |
 
-八份收據的允許差異區之外都是**零像素差**。
+九份收據的允許差異區之外都是**零像素差**。
 
 | 對拍項目 | 允許差異區實際差異 | 結果 |
 |---|---|---|
@@ -148,12 +149,23 @@ BIOS tick。remake 依同一張表重播。
 `delete-move.json` 另外對拍反白條的向下兩列、向上一列與 Return，5 對全過。刪除本身
 只寫一個 byte，remake 的輸出與原版逐 byte 相同，見 `../chardata-delete/`。
 
+這張清單不只給刪除用：`EDIT PICTURE`、`EDIT SHIELD`、`HARBOR MASTER` 進入後的第一張
+畫面和它是同一個 PNG（RE-052），差別只在選定角色之後走到哪裡。
+
+## HARBOR MASTER
+
+這台機器只安裝一個 region，原版因此在展開跨頁上只畫三行黑字（`ONLY ONE REGION`、
+`IS INSTALLED.`、空一列、`PRESS ANY KEY.`），沒有標題圖。remake 重繪後在允許差異區
+之外零像素差。多個 region 的畫面沒有量測，remake 也沒有實作那條分支。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱角色建立已完成。接受圖像後寫入 CHARDATA、重名與名字欄字元集合都還沒對拍；
   角色清單目前讀的是原版磁碟上的 14 個既有角色，remake 自己建立的角色還不會寫回。
 - 刪除流程的確認視窗按 ESC、大寫 `Y`／`N`、滑鼠按鍵與空名冊都沒有量測。
+- `EDIT PICTURE`／`EDIT SHIELD` 的點陣圖編輯器沒有實作，也沒有對拍：原版是滑鼠驅動的，
+  ESC 沒有作用，現有的鍵盤 oracle 走不完（RE-052）。
 - 動畫已對拍：翻書動畫見上表，TITLE 標題序列見 `../title-sequence/`。尚未對拍的是
   戰鬥與世界地圖的動畫，那些畫面還沒實作。
-- 這八份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
+- 這九份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
   原版沒有中文畫面，因此不對拍；見 `../cjk-ui/`。

@@ -195,3 +195,14 @@ var ConfirmLines = []Label{
 	{"ARE YOU SURE?", 104, 64, 170, 0, 0},
 	{"YES/NO", 128, 70, 170, 0, 0},
 }
+
+// HarborMasterLines 是 HARBOR MASTER 的整頁訊息。這台機器上只安裝一個 region，
+// 原版因此只畫這三行；第三行前空一列。文字與座標由 tools/read_text_from_frame.py
+// 從 harbor-master-enter-run1/frame-090 以抽出的原版字型逐格讀回。
+//
+// 多個 region 時的畫面沒有量測過——那需要另一份原版磁碟。
+var HarborMasterLines = []Label{
+	{"ONLY ONE REGION", 24, 52, 0, 0, 0},
+	{"IS INSTALLED.", 24, 58, 0, 0, 0},
+	{"PRESS ANY KEY.", 24, 70, 0, 0, 0},
+}

@@ -1,0 +1,930 @@
+{
+  "tool": "tools/dosbox_character_ui_oracle.py",
+  "scenario": "edit-picture-enter",
+  "description": "從角色選項選單進入 EDIT PICTURE，在角色選擇清單選第一名角色，擷取功能本身的畫面，再逐次取消退回；保存角色檔以檢查是否寫入。",
+  "generated_utc": "2026-09-01T14:52:25Z",
+  "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+  "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+  "dosbox_cycles": "fixed 3000",
+  "input_method": "X11 XTEST FakeInput，畫面靜止後逐鍵送出",
+  "sample_interval_s": 0.3,
+  "stability_tolerance": 0.002,
+  "original_zip": {
+    "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "entry_count": 75
+  },
+  "character_files_before": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_after": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_changed": [],
+  "character_files_saved": true,
+  "distinct_frames": 73,
+  "checkpoints": [
+    {
+      "index": 0,
+      "label": "TITLE 標題序列",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 8.0,
+      "reached_stable": true,
+      "t": 8.74,
+      "frame": 7,
+      "file": "frames/frame-007.png",
+      "png_sha256": "0dc53525ce4cdfc3dfa775f7690068ed796d0a948a7394247f77fb9dd688b6b1"
+    },
+    {
+      "index": 1,
+      "label": "書本封面",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 9.0,
+      "reached_stable": true,
+      "t": 18.5,
+      "frame": 9,
+      "file": "frames/frame-009.png",
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "index": 2,
+      "label": "目錄頁",
+      "key": "5",
+      "settle_s": 2.0,
+      "fixed_delay_s": 10.0,
+      "reached_stable": true,
+      "t": 29.09,
+      "frame": 27,
+      "file": "frames/frame-027.png",
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "index": 3,
+      "label": "角色選項選單（反白 LIST CHARACTERS）",
+      "key": "Down",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 38.76,
+      "frame": 46,
+      "file": "frames/frame-046.png",
+      "png_sha256": "5fc828c7e5af36e86b7528938011e98fc502edfa30c4310a4cc4e9b070e93c75"
+    },
+    {
+      "index": 4,
+      "label": "角色選項選單（反白 CREATE CHARACTER）",
+      "key": "Down",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 41.42,
+      "frame": 47,
+      "file": "frames/frame-047.png",
+      "png_sha256": "7305b19b567bab4b55410bf9253dc4472b914ba438434067a879df897c1ee8d2"
+    },
+    {
+      "index": 5,
+      "label": "角色選項選單（反白 DELETE CHARACTER）",
+      "key": "Down",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 44.09,
+      "frame": 48,
+      "file": "frames/frame-048.png",
+      "png_sha256": "e97dba617fde21d23cb6762aabe2c568df17d436db734945485614cc7b775547"
+    },
+    {
+      "index": 6,
+      "label": "角色選項選單（反白 EDIT PICTURE）",
+      "key": "Return",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 48.3,
+      "frame": 49,
+      "file": "frames/frame-049.png",
+      "png_sha256": "bdf504db03cd76eaa1b1909606ea5be7040924e4f39318babb570a016790522a"
+    },
+    {
+      "index": 7,
+      "label": "角色選擇清單（反白第 1 名）",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 60.0,
+      "frame": 69,
+      "file": "frames/frame-069.png",
+      "png_sha256": "36eba7c14b304c193968f15e619fda6ada7febb53abef601b135de981b1b1bf3"
+    },
+    {
+      "index": 8,
+      "label": "EDIT PICTURE 畫面",
+      "key": "Escape",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 64.85,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "png_sha256": "dc05c8f23ac1361f6ee0d21da69498fe6d86ff5a4320687dc75e0028049b96e7"
+    },
+    {
+      "index": 9,
+      "label": "第一次取消之後",
+      "key": "Escape",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 68.4,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "png_sha256": "dc05c8f23ac1361f6ee0d21da69498fe6d86ff5a4320687dc75e0028049b96e7"
+    },
+    {
+      "index": 10,
+      "label": "第二次取消之後",
+      "key": "Escape",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 71.96,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "png_sha256": "dc05c8f23ac1361f6ee0d21da69498fe6d86ff5a4320687dc75e0028049b96e7"
+    },
+    {
+      "index": 11,
+      "label": "第三次取消之後",
+      "key": null,
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 75.51,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "png_sha256": "dc05c8f23ac1361f6ee0d21da69498fe6d86ff5a4320687dc75e0028049b96e7"
+    }
+  ],
+  "timeline": [
+    {
+      "t": 0.56,
+      "frame": 0,
+      "file": "frames/frame-000.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "e6331e1eb27d6b642d7c095769f03d4a8a9d7f15658701bffa16481954a5f38c"
+    },
+    {
+      "t": 0.92,
+      "frame": 1,
+      "file": "frames/frame-001.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "e43aab8637a5b636bad1d2e22d1039d7fd30b865707aae7db97b7965c0df889d"
+    },
+    {
+      "t": 1.24,
+      "frame": 2,
+      "file": "frames/frame-002.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8ef6bda61c7ae6ba2e411405edd87056782337a996a73a93099365cff25ceeb0"
+    },
+    {
+      "t": 5.24,
+      "frame": 3,
+      "file": "frames/frame-003.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7f1c866feed1bd64b2c093e6245ccebf7023f31d8362b8b817bad323dcd91db3"
+    },
+    {
+      "t": 5.57,
+      "frame": 4,
+      "file": "frames/frame-004.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1a120fbb455c633c96f5abe2cdbf564dbbb0a0af1b0694d0fc5e575ddf4dcbd8"
+    },
+    {
+      "t": 7.45,
+      "frame": 5,
+      "file": "frames/frame-005.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7c76e8232b7574b154256bb7b8515523284fd717ebce62de709570586228726d"
+    },
+    {
+      "t": 7.78,
+      "frame": 6,
+      "file": "frames/frame-006.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7acda7db6a21eea3a7b1137ccdcfaae20b5dff786c1497d104ba8bc376fbe3e8"
+    },
+    {
+      "t": 8.12,
+      "frame": 7,
+      "file": "frames/frame-007.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0dc53525ce4cdfc3dfa775f7690068ed796d0a948a7394247f77fb9dd688b6b1"
+    },
+    {
+      "t": 9.2,
+      "frame": 4,
+      "repeat": true
+    },
+    {
+      "t": 11.68,
+      "frame": 8,
+      "file": "frames/frame-008.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "10f6a9c59e69887c346c44ee4575b2eb7e53cbcf8610e0684df3717871f4b18c"
+    },
+    {
+      "t": 13.88,
+      "frame": 9,
+      "file": "frames/frame-009.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "t": 18.99,
+      "frame": 10,
+      "file": "frames/frame-010.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "eb0a48b21e400d4a175f1bc52ddc9a87c1a11486a9ef9b139633de7a531b9b3d"
+    },
+    {
+      "t": 19.32,
+      "frame": 11,
+      "file": "frames/frame-011.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "476fb50d3e5b955c961ac1263b8c1124af3373b256ca08d868a0bf4951de4500"
+    },
+    {
+      "t": 19.65,
+      "frame": 12,
+      "file": "frames/frame-012.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "45db5e450e5235d7c7a012ad7caa31dbe6eed59a501f91d5b3aabcf2a537362b"
+    },
+    {
+      "t": 19.98,
+      "frame": 13,
+      "file": "frames/frame-013.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "951ff1721a929d917ea0a41b6bb497e6700dd1205dfeecc2dbbdeebf8660f13c"
+    },
+    {
+      "t": 20.32,
+      "frame": 14,
+      "file": "frames/frame-014.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a0371f6d296fbc28ff2235637070078f2f90490fe23819bde57944dfc6dd6d7a"
+    },
+    {
+      "t": 20.66,
+      "frame": 15,
+      "file": "frames/frame-015.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5b80e666c67793bfbb29421482bde7ebb4723e9276579313eb3826a9e51e0fcf"
+    },
+    {
+      "t": 21.0,
+      "frame": 16,
+      "file": "frames/frame-016.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "73557b8881e71e56928ee7048ebdc35560e0e78eb6c22e621802ba6d37e335c5"
+    },
+    {
+      "t": 21.34,
+      "frame": 17,
+      "file": "frames/frame-017.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a9f440be323d49857f152eadd880876f268f4d44396fc7c2312afb4055e2ab5f"
+    },
+    {
+      "t": 21.69,
+      "frame": 18,
+      "file": "frames/frame-018.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0b9268a68e48668a1e9e30bfe05cc0805bf10cfd9e4fd810bfd99b36561772e4"
+    },
+    {
+      "t": 22.03,
+      "frame": 19,
+      "file": "frames/frame-019.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b3f891fe039d353114c647bd2d2dc14746a43c251ddbd0394a9a0d902dbfcfd2"
+    },
+    {
+      "t": 22.38,
+      "frame": 20,
+      "file": "frames/frame-020.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4a83babfd74b3268aac09d9fd5a22bfe127f270ebd3d55d5ebf155ee5c077f85"
+    },
+    {
+      "t": 22.72,
+      "frame": 21,
+      "file": "frames/frame-021.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d411b0c86139213a0d18812a7c484708151fe33eb07f08db57d08a882ee480e7"
+    },
+    {
+      "t": 23.07,
+      "frame": 22,
+      "file": "frames/frame-022.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "30f3287ef3ff4fee03741f1d80336225c95866835c345b53966046ae9e334f85"
+    },
+    {
+      "t": 23.41,
+      "frame": 23,
+      "file": "frames/frame-023.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "dc7dbf2eb2142f71e0456207eb64f83fe16bc1882035be432708b8fc94eae5f7"
+    },
+    {
+      "t": 23.76,
+      "frame": 24,
+      "file": "frames/frame-024.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f621699f7e957eb5f7b5d679362a5c728bae351046a86f84afc83591a5542eea"
+    },
+    {
+      "t": 24.1,
+      "frame": 25,
+      "file": "frames/frame-025.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "eb7fea9fd4d2cb73944e8a9740a6fa0ec347e9d1edce9aadaf1690fc1a8f3194"
+    },
+    {
+      "t": 24.44,
+      "frame": 26,
+      "file": "frames/frame-026.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8b8376167f837c20e2cc07a453ec22716a5388ffbceabf0d646e5a53ff8071ab"
+    },
+    {
+      "t": 24.78,
+      "frame": 27,
+      "file": "frames/frame-027.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "t": 30.52,
+      "frame": 28,
+      "file": "frames/frame-028.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f534861bd30906c624c9efb5c5e5fb3ca2586b12958e6ff8c68370a97eea174f"
+    },
+    {
+      "t": 30.86,
+      "frame": 29,
+      "file": "frames/frame-029.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9ef8fd00a9fea50056e98915928a0da4afe3eca176e884a94c44af98f9f686ba"
+    },
+    {
+      "t": 31.2,
+      "frame": 30,
+      "file": "frames/frame-030.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "775911e72a6e74b454aadebb3e3757d50d85d63370ff539cce251e59ae97e913"
+    },
+    {
+      "t": 31.54,
+      "frame": 31,
+      "file": "frames/frame-031.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ad5e1e99367d4f30c301abf190d9ac02bace307c4c06e040feca877f73601a9c"
+    },
+    {
+      "t": 31.88,
+      "frame": 32,
+      "file": "frames/frame-032.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bf281b8eabb4465cec25ae82d0096d4da4ba71fd36e553ecde1fff8e55697f56"
+    },
+    {
+      "t": 32.21,
+      "frame": 33,
+      "file": "frames/frame-033.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "48d8951249f4b446f01afc529e665b6b856802802ee5caa922980704da5c1774"
+    },
+    {
+      "t": 32.55,
+      "frame": 34,
+      "file": "frames/frame-034.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1fd4c31ee2e0c8c69e4240ee2cc2357dc47ae894218a618d808154bd7bd86f83"
+    },
+    {
+      "t": 32.88,
+      "frame": 35,
+      "file": "frames/frame-035.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b42c54e4b3aaaef646f77cd206c9316c15095394c39926e08a446a58c53d6800"
+    },
+    {
+      "t": 33.21,
+      "frame": 36,
+      "file": "frames/frame-036.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fd53c7449e819e44d3461d3095c41f8d24f681bc0d378fe6171ace310e73b61d"
+    },
+    {
+      "t": 33.54,
+      "frame": 37,
+      "file": "frames/frame-037.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5848c7d3af6ebe5c27fc0e53810177f3d3df3cd9eb84536b0a086f503f67f73a"
+    },
+    {
+      "t": 33.87,
+      "frame": 38,
+      "file": "frames/frame-038.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "72037feab4a412157575802762742ae6e3fa1917b345ac87ae7c6eed4e1d14dd"
+    },
+    {
+      "t": 34.21,
+      "frame": 39,
+      "file": "frames/frame-039.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0e338f0fd5680870f58e16e90afd11730e3557d5700fed104cea13cac008d277"
+    },
+    {
+      "t": 34.55,
+      "frame": 40,
+      "file": "frames/frame-040.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6b06f6413ddf33e7ed833f003cb58cc91b7d8303e09a65d380426b631b71199b"
+    },
+    {
+      "t": 34.89,
+      "frame": 41,
+      "file": "frames/frame-041.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2a825512a39e23d023d9212dcf666fd0106998016c4fe79a6aa0db02b7e048ae"
+    },
+    {
+      "t": 35.23,
+      "frame": 42,
+      "file": "frames/frame-042.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "54f530e0045240d360401d9debd574f729d0d30a06e6ecbdb78114a1061a3b49"
+    },
+    {
+      "t": 35.57,
+      "frame": 43,
+      "file": "frames/frame-043.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "455e24bd32c5905d3af37c054d8ce0e4497f079498c122aed35e07d57f79ee4a"
+    },
+    {
+      "t": 35.91,
+      "frame": 44,
+      "file": "frames/frame-044.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "73afd98d0678711b49d11a010f4874cdb992455de38e983c73d38f1ee27411a3"
+    },
+    {
+      "t": 36.26,
+      "frame": 45,
+      "file": "frames/frame-045.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "babbd51792d6f404b41051ba786dc8d68fb519bb5e0585a3410c58f835f2e67e"
+    },
+    {
+      "t": 36.6,
+      "frame": 46,
+      "file": "frames/frame-046.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5fc828c7e5af36e86b7528938011e98fc502edfa30c4310a4cc4e9b070e93c75"
+    },
+    {
+      "t": 39.26,
+      "frame": 47,
+      "file": "frames/frame-047.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7305b19b567bab4b55410bf9253dc4472b914ba438434067a879df897c1ee8d2"
+    },
+    {
+      "t": 41.93,
+      "frame": 48,
+      "file": "frames/frame-048.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e97dba617fde21d23cb6762aabe2c568df17d436db734945485614cc7b775547"
+    },
+    {
+      "t": 44.59,
+      "frame": 49,
+      "file": "frames/frame-049.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bdf504db03cd76eaa1b1909606ea5be7040924e4f39318babb570a016790522a"
+    },
+    {
+      "t": 48.8,
+      "frame": 50,
+      "file": "frames/frame-050.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fb3247d0a89e71813ab252897179e92dbeee7850af6688f4d4b37e3df1833a57"
+    },
+    {
+      "t": 49.76,
+      "frame": 51,
+      "file": "frames/frame-051.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "05efd3499dd8057f3ed059a78cadbf1a2abc53261c36357fb22a7961d76ccf27"
+    },
+    {
+      "t": 50.1,
+      "frame": 52,
+      "file": "frames/frame-052.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4ac8d5057fd1d17ceebb0af57e3ce0c9aedbd82f436ceb4a9a722c7ee208ac72"
+    },
+    {
+      "t": 50.44,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "dfafac26ecbb3a3811b20ac9b55b3b10e724695badc18430127068b65f3e510f"
+    },
+    {
+      "t": 50.79,
+      "frame": 54,
+      "file": "frames/frame-054.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d6a8e4fed2097231371d2cdbb66a8f7a05a2b89287faaa3d7b77e2acb08ddf4a"
+    },
+    {
+      "t": 51.13,
+      "frame": 55,
+      "file": "frames/frame-055.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "02bc46062e8abf0394dbaf62241a87461973b77a254d8afdbc2110d611e69109"
+    },
+    {
+      "t": 51.48,
+      "frame": 56,
+      "file": "frames/frame-056.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "27edae26006d7d313af6403b7eb2cb6dd815e1c5473abdb47a0317a9325ef2fe"
+    },
+    {
+      "t": 51.82,
+      "frame": 57,
+      "file": "frames/frame-057.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "146ed2eb06d40ac92602d3d62cd4b508b9388d8f570b515d71f6de7806877029"
+    },
+    {
+      "t": 52.17,
+      "frame": 58,
+      "file": "frames/frame-058.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6631178a15fe8904d197bd056588ab22273e2f70b3df4a54a0953c7884ebb1bb"
+    },
+    {
+      "t": 52.51,
+      "frame": 59,
+      "file": "frames/frame-059.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5d9b16bb04d877b937fa4ab7a056d4da6efc3b51e451ee6a66965fa0202bcdf3"
+    },
+    {
+      "t": 52.85,
+      "frame": 60,
+      "file": "frames/frame-060.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "647fe88aba1e63949c9baea6d23254a9e0ecbbdde7ff3fb67640fcb4aaf25720"
+    },
+    {
+      "t": 53.2,
+      "frame": 61,
+      "file": "frames/frame-061.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4b053a769d8baf36680ff54a991ab7742d5add2a894c0f2ef4a8fcf6a7350d44"
+    },
+    {
+      "t": 53.54,
+      "frame": 62,
+      "file": "frames/frame-062.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f449416e409303b310508eb80d5fc4a2adde83bcf2c222a4a892083f451cf637"
+    },
+    {
+      "t": 53.89,
+      "frame": 63,
+      "file": "frames/frame-063.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d0060a9342b68e14db46cba148d999e4a536a5b450bba7188d3173bc1f8edf39"
+    },
+    {
+      "t": 54.23,
+      "frame": 64,
+      "file": "frames/frame-064.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3016809fa7cf8a6ea16f2e1cf23dae7121faf7274d7c1ff910cf0fbbc5ddd380"
+    },
+    {
+      "t": 54.58,
+      "frame": 65,
+      "file": "frames/frame-065.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a8c7a2fd6adabda45d71db469ee702d942691ed0f44206b8691a4ce98d064a0b"
+    },
+    {
+      "t": 54.92,
+      "frame": 66,
+      "file": "frames/frame-066.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "18a269af1f29bdeaf81deff0e17380a3ec5cd92670dc234f841ea2007b35cf12"
+    },
+    {
+      "t": 55.26,
+      "frame": 67,
+      "file": "frames/frame-067.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "074e2b5839c18c5eb5085371a966cba55a32b0d74bc97c3921444b2ff4edd791"
+    },
+    {
+      "t": 55.61,
+      "frame": 68,
+      "file": "frames/frame-068.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fca2f7e3aff0b616a4262bb87725be324a12df387bff0e6762b1943baa8ec28a"
+    },
+    {
+      "t": 55.96,
+      "frame": 69,
+      "file": "frames/frame-069.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "36eba7c14b304c193968f15e619fda6ada7febb53abef601b135de981b1b1bf3"
+    },
+    {
+      "t": 60.51,
+      "frame": 70,
+      "file": "frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c77437b4ba3c0768ba23643079f5dc5840626421ff38626b351c19e3ab35697"
+    },
+    {
+      "t": 60.83,
+      "frame": 71,
+      "file": "frames/frame-071.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e1840990128ac4d8944f1817d6a55a23227ed21dd55028d02a011368c9f3d646"
+    },
+    {
+      "t": 61.15,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "dc05c8f23ac1361f6ee0d21da69498fe6d86ff5a4320687dc75e0028049b96e7"
+    }
+  ]
+}

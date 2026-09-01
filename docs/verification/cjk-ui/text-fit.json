@@ -4,7 +4,7 @@
   "layout": "workplace/cjk-layout.json",
   "font": "assets/ui-font/manifest.json",
   "strings": "docs/i18n/newchar-zh-Hant.json",
-  "checked": 113,
+  "checked": 115,
   "failed": 0,
   "criterion": "每個字元都要有字模，且字串右緣不得超出所屬的文字安全矩形",
   "failures": [],
@@ -1160,6 +1160,28 @@
       "x": 352,
       "width": 32,
       "right_limit": 624,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true
+    },
+    {
+      "kind": "message",
+      "en": "ONLY ONE REGION IS INSTALLED.",
+      "zh": "本機只安裝了一個區域。",
+      "x": 48,
+      "width": 176,
+      "right_limit": 340,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true
+    },
+    {
+      "kind": "message",
+      "en": "PRESS ANY KEY.",
+      "zh": "按任意鍵繼續。",
+      "x": 48,
+      "width": 112,
+      "right_limit": 340,
       "overflow": 0,
       "missing_glyphs": [],
       "pass": true

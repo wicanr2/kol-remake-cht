@@ -1,0 +1,47 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "harbor-master",
+  "description": "remake 的 HARBOR MASTER 訊息頁對原版 harbor-master-enter-run1 對拍。這台機器只安裝一個 region，原版因此只畫三行黑字。",
+  "pair_count": 1,
+  "pass_count": 1,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "HARBOR MASTER 訊息頁",
+      "remake": "docs/verification/remake-parity/shots/harbor.png",
+      "original": "docs/verification/character-ui/harbor-master-enter-run1/frames/frame-090.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

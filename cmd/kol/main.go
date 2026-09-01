@@ -45,9 +45,10 @@ const (
 	sceneMenu       scene = "menu"
 	sceneRoster     scene = "roster"
 	sceneDelete     scene = "delete"
+	sceneHarbor     scene = "harbor"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -284,6 +285,11 @@ func (g *game) render() error {
 		}
 		return ui.DeleteList(g.canvas.Image(), g.sprites, g.small,
 			g.remove.List(), g.remove.Cursor, g.remove.Confirm)
+	case sceneHarbor:
+		if g.strings != nil {
+			return ui.HarborMasterCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings)
+		}
+		return ui.HarborMaster(g.canvas.Image(), g.sprites, g.small)
 	case sceneMenu:
 		if g.strings != nil {
 			return ui.CharacterOptionsCJK(g.canvas.Image(), g.sprites, g.cjk,

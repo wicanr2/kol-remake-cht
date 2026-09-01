@@ -14,7 +14,8 @@
 - Go／Ebitengine 垂直切片已啟動：`cmd/kol` 以 Go 1.26.7＋Ebitengine v2.9.9 建於固定
   映像 `eob-remake-go:1.26.7-ebiten2.9.9-audio`，只讀 `assets/original-derived-png/ega/`
   的 manifest 與 PNG，畫在 320×200 原版解析度離屏畫布上，並提供截圖模式供對拍。
-  目前只畫底圖與角色圖像，玩法規則、文字與輸入尚未接上。
+  書本的六個畫面（封面、目錄頁、角色建立、角色清單、刪除、HARBOR MASTER）與兩段
+  翻頁動畫、TITLE 標題序列都已實作並對拍；城鎮、世界地圖與戰鬥尚未開始。
   SPEC-001／002／003／005 為 READY 或 CONFORMED，SPEC-004（音訊）仍為 DRAFT；
   其餘玩法（戰鬥、任務、城鎮、世界地圖）仍須各自的 DRAFT／READY spec。
 - 原版內嵌點陣字型已抽出：`BOOKDATA.0`／`KOLDATA.0` 的第一個 payload 是同一份
@@ -24,8 +25,9 @@
 - 書本文字版面已機械量得並版控於 `docs/re/text-layout.json`；原版繪字規則為
   逐字模格清成白底、但空白字元不清底。中文化的字框限制已浮現：字模格 8×6、字距 8，
   繁體中文字形放不進同一格，版面策略待決策。
-- remake 對拍收據已建立（`docs/verification/remake-parity/`）：八份收據 171 對畫面
-  全部通過（書本畫面 3、角色建立 9、圖像層 92、三段翻頁 54、刪除流程 13）。
+- remake 對拍收據已建立（`docs/verification/remake-parity/`）：九份收據 172 對畫面
+  全部通過（書本畫面 3、角色建立 9、圖像層 92、三段翻頁 54、刪除流程 13、
+  HARBOR MASTER 1）。
   書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
   畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同；空白 New Character 頁
   以原版字型與版面重繪後，64,000 個像素中只有 31 個不同且全部落在名字欄的原版殘留
@@ -121,8 +123,9 @@
   交叉確認名字、種族、職業、金冠與主要武器。KOLBOOK 靜態控制流另已固定輸入 buffer
   首 byte 為零時重試、各層取消返回、選項 0 reroll、80 張肖像循環與 16 槽全滿時在 writer
   前退出。
-- SPEC-005 已 READY。正常 DOS 玩家路徑的角色建立 UI 有六個情境、各兩輪的可重生收據
-  （`docs/verification/character-ui/`，1,368 個去重畫格）。入口鏈為 `KOL.EXE` → TITLE
+- SPEC-005 已 READY。正常 DOS 玩家路徑的角色建立與刪除 UI 有 17 個情境、27 輪的可重生
+  收據（`docs/verification/character-ui/`，2,713 個去重畫格；建立與刪除的核心情境各兩輪）。
+  入口鏈為 `KOL.EXE` → TITLE
   循環標題序列 → 任意鍵 → 書本封面 → 任意鍵 → 目錄頁 → `5` → Character options →
   `CREATE CHARACTER`。名字欄容量 16 個可見字元，輸入第 16 個字元即直接前進種族層、
   不需 Return；空名按 Return 不前進；取消目的地為種族→名字、性別→種族、職業→性別、
@@ -163,8 +166,12 @@
 
 刪除角色（DELETE CHARACTER）已閉環：畫面 13 對逐張通過（`delete.json` 8 對、
 `delete-move.json` 5 對），確認視窗的座標與兩行文字都由原版畫面機械量得，刪除本身
-只寫一個 byte，remake 的輸出與原版逐 byte 相同（`chardata-delete/`）。書中還沒探的
-只剩 `EDIT PICTURE`、`EDIT SHIELD` 與 `HARBOR MASTER`。
+只寫一個 byte，remake 的輸出與原版逐 byte 相同（`chardata-delete/`）。
+
+書本六個選單項目裡五項有收據。`HARBOR MASTER` 在只安裝一個 region 時是一張三行訊息頁，
+已實作並對拍通過；`EDIT PICTURE` 與 `EDIT SHIELD` 是同一個滑鼠驅動的點陣圖編輯器，
+ESC 沒有作用，現有的鍵盤 oracle 走不完，尚未實作（RE-052）。四個功能進入後的第一張
+畫面是同一張角色選擇清單。
 
 接下來依序做三件事：
 
