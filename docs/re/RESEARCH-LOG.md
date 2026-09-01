@@ -1340,3 +1340,32 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   112 px。編輯器沒有實作，因此沒有對拍。
 - **限制**：編輯器的工具語意、色盤索引、寫回 `CHARPICS`／`SHLDPICS` 的時機與格式都未知；
   要往下做需要能送滑鼠事件的 oracle。
+
+## RE-053：走出書本——Play the game 到旅店組隊
+
+- 新增四個正常 DOS UI 情境：`play-the-game`、`town-icon-bar`、`town-icon-move`、
+  `town-recruit-companion`。這是本專案第一次把 oracle 開出 `KOLBOOK` 之外，
+  進入 `KOLTOWN` 的城鎮畫面。三個角色檔全程未變。
+- **進入遊戲的鏈**：目錄頁按 `6`（Play the game）→ 共用的角色選擇清單（**和
+  `DELETE CHARACTER` 等四個功能是同一張畫面**，SHA-256 相同）→ 選第一名角色當領隊 →
+  載入城鎮，停在半途之家旅店（`Halfway House`，店主 `Devin Torlock`）。
+  畫面左上是隊員頭像與名字前四個字母（手冊說的「只顯示前四個字母」得到證實），
+  左側是店主肖像，中央是對話框，底部是圖示列。
+- **圖示列不吃方向鍵**：在旅店送 Right／Left 之後畫面逐像素完全沒變。改用參考卡指定的
+  `<`／`>` 才會移動白框——`>` 往右、`<` 往左，走到第 6 格再按 `>` 會**繞回第 1 格**。
+  Return 執行白框所在的圖示。旅店的六個圖示依序是 DOOR、MIRROR、EAR、MOUTH、BED、
+  COMPANION，和手冊列出的順序一致。
+- **送 `<`／`>` 需要送鍵層自己補 Shift**：US 排列上它們是逗號／句號的 Shift 位，
+  只查 keysym→keycode 會送成 `,`／`.`。`tools/x11_key_inject.py` 因此改成從
+  keyboard mapping 的奇數位置判斷哪些 keysym 需要 Shift。
+- **組隊流程**：COMPANION（第 6 格）→ 先問 `Look for characters on hard disk?`
+  （兩個圖示，白框在第一個）→ Return → 列出**該旅店裡不在隊伍中的角色**
+  （半途之家有 8 人，與 `CHARDATA` 中所在地為 `HALFWAY HO` 的 11 人扣掉領隊後一致）→
+  上下方向鍵移動反白、Return 加入。加入後隊員頭像出現在畫面頂端領隊旁邊，
+  回到旅店的一般圖示列。
+- **招募不寫磁碟**：整個組隊流程跑完，`CHARDATA`／`CHARPICS`／`SHLDPICS` 的 SHA-256
+  都沒有變。這與手冊一致——遊戲只在旅店選 `REST/SAVE/HEAL` 時才保存。
+- **DOOR 直接離開旅店**：Return 在第 1 格會走到布雷特爾的戶外地圖（日期框、城鎮徽章、
+  俯視地圖），也就是手冊印刷頁 15 描述的畫面。
+- **限制**：圖示列的其餘五個圖示、戶外地圖的移動、隊伍上限六人、發言者切換（白框頭像）
+  與 `REST/SAVE/HEAL` 的寫入都還沒量測；remake 也還沒有任何城鎮畫面。

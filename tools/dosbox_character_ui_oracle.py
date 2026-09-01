@@ -137,6 +137,16 @@ def menu_steps(index: int) -> list[dict]:
 
 DELETE_PRELUDE = list(MENU_PRELUDE) + menu_steps(2)
 
+# 由 KOL.EXE 走到城鎮（半途之家旅店）的前置：目錄頁按 6 選 Play the game，
+# 在共用的角色選擇清單選第一名角色當領隊。載入與開場對話都不會靜止，整段用固定等待。
+TOWN_PRELUDE = [
+    step("TITLE 標題序列", "space", delay=8.0),
+    step("書本封面", "space", delay=9.0),
+    step("目錄頁", "6", delay=12.0),
+    step("角色選擇清單（反白第 1 名）", "Return", delay=25.0),
+    step("旅店老闆對話（第一段）", "space", delay=15.0),
+]
+
 SCENARIOS: dict[str, dict] = {
     "list-characters": {
         "description": "從角色選項選單選 LIST CHARACTERS，擷取角色清單畫面，"
@@ -205,6 +215,65 @@ SCENARIOS: dict[str, dict] = {
             step("第一次取消之後", "Escape", settle=3.0),
             step("第二次取消之後", "Escape", settle=3.0),
             step("第三次取消之後", None, settle=3.0),
+        ],
+    },
+    "town-icon-bar": {
+        "description": "在旅店的圖示列上左右移動再按 Return，測試圖示列是否吃方向鍵。"
+                       "收據結論：方向鍵沒有作用，Return 直接執行目前白框的 DOOR。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列", "Right", settle=1.5),
+            step("向右一次", "Right", settle=1.5),
+            step("向右兩次", "Right", settle=1.5),
+            step("向右三次", "Left", settle=1.5),
+            step("向左一次", "Return", settle=3.0),
+            step("按下 Return 之後", "Escape", settle=3.0),
+            step("按 ESC 之後", None, settle=3.0),
+        ],
+    },
+    "town-icon-move": {
+        "description": "用參考卡指定的 < 與 > 在旅店圖示列上移動白框，逐格擷取六個圖示，"
+                       "最後停在 COMPANION 但不按 Return。純觀察。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格", "greater", settle=1.5),
+            step("白框第 3 格", "greater", settle=1.5),
+            step("白框第 4 格", "greater", settle=1.5),
+            step("白框第 5 格", "greater", settle=1.5),
+            step("白框第 6 格", "greater", settle=1.5),
+            step("再往右一次（測是否繞回）", "less", settle=1.5),
+            step("往左一次", None, settle=2.5),
+        ],
+    },
+    "town-recruit-companion": {
+        "description": "在旅店用 > 走到 COMPANION 圖示，從同伴清單選第一名角色加入隊伍，"
+                       "並保存角色檔以檢查招募是否寫入磁碟。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格", "greater", settle=1.5),
+            step("白框第 3 格", "greater", settle=1.5),
+            step("白框第 4 格", "greater", settle=1.5),
+            step("白框第 5 格", "greater", settle=1.5),
+            step("白框第 6 格（COMPANION）", "Return", settle=4.0),
+            step("是否搜尋硬碟角色", "Return", settle=4.0),
+            step("同伴清單（反白第 1 名）", "Down", settle=2.0),
+            step("反白第 2 名", "Up", settle=2.0),
+            step("回到第 1 名", "Return", settle=4.0),
+            step("選定第一名同伴之後", None, settle=4.0),
+        ],
+    },
+    "play-the-game": {
+        "description": "從目錄頁選 6（Play the game），在角色選擇清單選第一名角色當領隊，"
+                       "觀察遊戲實際開始之後的畫面。純觀察，不改任何角色。",
+        # 載入與開場動畫都不會靜止，因此整段用固定等待。
+        "steps": [
+            step("TITLE 標題序列", "space", delay=8.0),
+            step("書本封面", "space", delay=9.0),
+            step("目錄頁", "6", delay=12.0),
+            step("角色選擇清單（反白第 1 名）", "Return", delay=25.0),
+            step("開始遊戲之後（第一張）", "space", delay=15.0),
+            step("按鍵之後（第二張）", "space", delay=15.0),
+            step("按鍵之後（第三張）", "space", delay=15.0),
+            step("按鍵之後（第四張）", None, delay=15.0),
         ],
     },
     "delete-character-probe": {

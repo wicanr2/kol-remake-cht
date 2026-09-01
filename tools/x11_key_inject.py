@@ -29,6 +29,14 @@ KEYSYMS = {
     "Left": 0xFF51,
     "Right": 0xFF53,
     "space": 0x0020,
+    "Tab": 0xFF09,
+    # 圖示列的移動鍵。原版參考卡：「以小於號 < 與大於號 > 在圖示間移動」。
+    # 這兩個在 US 排列是逗號／句號的 Shift 位，因此送出時要一併按 Shift——
+    # 送鍵層必須自己判斷，不能只查 keysym→keycode。
+    "less": 0x003C,
+    "greater": 0x003E,
+    "comma": 0x002C,
+    "period": 0x002E,
 }
 for _c in "abcdefghijklmnopqrstuvwxyz":
     KEYSYMS[_c] = ord(_c)
@@ -53,7 +61,7 @@ class X11Client:
         self.xtest_opcode = self._query_extension("XTEST")
         if self.xtest_opcode is None:
             raise RuntimeError("X server 沒有 XTEST 擴充")
-        self.keycodes = self._keyboard_mapping()
+        self.keycodes, self.shifted = self._keyboard_mapping()
 
     # -- 底層 -------------------------------------------------------------
     def _recv_exact(self, n: int) -> bytes:
@@ -111,19 +119,27 @@ class X11Client:
         present, major = reply[8], reply[9]
         return major if present else None
 
-    def _keyboard_mapping(self) -> dict[int, int]:
+    def _keyboard_mapping(self) -> tuple[dict[int, int], set[int]]:
+        """回傳 keysym→keycode，以及「需要按 Shift 才送得出來」的 keysym 集合。
+
+        每個 keycode 的 keysym 清單是成對排列的（未按 Shift、按 Shift、下一個 group…），
+        因此奇數位置的 keysym 就是 Shift 位。少了這個判斷，`<` 會送成 `,`。
+        """
         count = self.max_keycode - self.min_keycode + 1
         req = struct.pack("<BBHBBH", 101, 0, 2, self.min_keycode, count, 0)
         reply = self._request(req, True)
         per = reply[1]
         body = reply[32:]
         table: dict[int, int] = {}
+        shifted: set[int] = set()
         for i in range(count):
             for j in range(per):
                 sym = struct.unpack_from("<I", body, (i * per + j) * 4)[0]
                 if sym and sym not in table:
                     table[sym] = self.min_keycode + i
-        return table
+                    if j % 2 == 1:
+                        shifted.add(sym)
+        return table, shifted
 
     # -- 對外 -------------------------------------------------------------
     def query_children(self) -> list[int]:
@@ -146,10 +162,10 @@ class X11Client:
         sym = KEYSYMS[keysym_name]
         # 大寫字母一律走 Shift ＋ 小寫 keycode。同一個 keycode 的 keysym 清單同時含
         # 小寫與大寫，直接查大寫 keysym 會拿到同一顆鍵而漏掉 Shift，送出的就變成小寫。
-        shift = 0x41 <= sym <= 0x5A
-        keycode = self.keycodes.get(sym + 0x20 if shift else sym)
-        if keycode is None:
-            keycode = self.keycodes.get(sym)
+        shift = 0x41 <= sym <= 0x5A or sym in self.shifted
+        keycode = self.keycodes.get(sym)
+        if keycode is None and 0x41 <= sym <= 0x5A:
+            keycode = self.keycodes.get(sym + 0x20)
         if keycode is None:
             raise KeyError(f"keysym {keysym_name} 沒有對應 keycode")
         shift_code = self.keycodes.get(0xFFE1)

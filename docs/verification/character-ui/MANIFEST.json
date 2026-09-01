@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 2713,
+  "total_frames": 3023,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -390,6 +390,21 @@
       "character_files_changed": []
     },
     {
+      "run": "play-the-game-run1",
+      "scenario": "play-the-game",
+      "description": "從目錄頁選 6（Play the game），在角色選擇清單選第一名角色當領隊，觀察遊戲實際開始之後的畫面。純觀察，不改任何角色。",
+      "receipt": "docs/verification/character-ui/play-the-game-run1/receipt.json",
+      "generated_utc": "2026-09-01T15:05:25Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 8,
+      "frame_count": 72,
+      "frame_dir": "docs/verification/character-ui/play-the-game-run1/frames",
+      "character_files_changed": [],
+      "note": "此情境走出書本進入 KOLTOWN 城鎮；畫面不再是書頁。"
+    },
+    {
       "run": "reroll-run1",
       "scenario": "reroll",
       "description": "走到屬性頁後連續兩次 REROLL STATS，比對屬性數值變化；全程不接受屬性、不保存角色。",
@@ -416,6 +431,51 @@
       "frame_count": 92,
       "frame_dir": "reroll-run2/frames",
       "character_files_changed": []
+    },
+    {
+      "run": "town-icon-bar-run1",
+      "scenario": "town-icon-bar",
+      "description": "在旅店的圖示列上左右移動再按 Return，測試圖示列是否吃方向鍵。純觀察，不投宿、不招募。",
+      "receipt": "docs/verification/character-ui/town-icon-bar-run1/receipt.json",
+      "generated_utc": "2026-09-01T15:08:20Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 12,
+      "frame_count": 79,
+      "frame_dir": "docs/verification/character-ui/town-icon-bar-run1/frames",
+      "character_files_changed": [],
+      "note": "此情境走出書本進入 KOLTOWN 城鎮；畫面不再是書頁。"
+    },
+    {
+      "run": "town-icon-move-run1",
+      "scenario": "town-icon-move",
+      "description": "用參考卡指定的 < 與 > 在旅店圖示列上移動白框，逐格擷取六個圖示，最後停在 COMPANION 但不按 Return。純觀察。",
+      "receipt": "docs/verification/character-ui/town-icon-move-run1/receipt.json",
+      "generated_utc": "2026-09-01T15:11:28Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 13,
+      "frame_count": 77,
+      "frame_dir": "docs/verification/character-ui/town-icon-move-run1/frames",
+      "character_files_changed": [],
+      "note": "此情境走出書本進入 KOLTOWN 城鎮；畫面不再是書頁。"
+    },
+    {
+      "run": "town-recruit-companion-run1",
+      "scenario": "town-recruit-companion",
+      "description": "在旅店用 > 走到 COMPANION 圖示，從同伴清單選第一名角色加入隊伍，並保存角色檔以檢查招募是否寫入磁碟。",
+      "receipt": "docs/verification/character-ui/town-recruit-companion-run1/receipt.json",
+      "generated_utc": "2026-09-01T15:16:24Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 16,
+      "frame_count": 82,
+      "frame_dir": "docs/verification/character-ui/town-recruit-companion-run1/frames",
+      "character_files_changed": [],
+      "note": "此情境走出書本進入 KOLTOWN 城鎮；畫面不再是書頁。"
     }
   ]
 }

@@ -1,8 +1,8 @@
-# 角色建立 UI 的正常 DOS 玩家路徑收據
+# 書本與城鎮的正常 DOS 玩家路徑收據
 
 更新日期：2026-09-01
 
-本目錄保存 KOLBOOK 角色建立流程在正常玩家路徑下的動態 oracle 收據。所有結論來自
+本目錄保存 KOLBOOK 書本流程與 KOLTOWN 城鎮開場在正常玩家路徑下的動態 oracle 收據。所有結論來自
 `KOL.EXE` 啟動、鍵盤操作、逐畫面擷取與三個角色檔的前後 SHA-256，不使用除錯入口、
 座標注入或測試旗標。
 
@@ -31,7 +31,7 @@ tools/compare_character_ui_runs.py <第一輪目錄> <第二輪目錄> --out cro
 與 `frames/`；收據以相對路徑索引畫格。`cross-run/` 是兩輪檢查點畫面的比對結果，
 `MANIFEST.json` 記錄來源、產生工具、雜湊入口與權利分類。
 
-2,713 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
+3,023 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
 衍生自原版執行檔與資料，著作權仍屬原權利人；此決定不涵蓋 public repo、public fork、
 GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序，不是原版 archive 圖號。
 
@@ -49,6 +49,7 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 | `delete-character-confirm` | 15 | 15 | `CHARDATA` |
 | `edit-picture-probe`／`edit-shield-probe`／`harbor-master-probe` | 10／11／12 | 單輪 | 無 |
 | `edit-picture-enter`／`edit-shield-enter`／`harbor-master-enter` | 12／13／14 | 單輪 | 無 |
+| `play-the-game`／`town-icon-bar`／`town-icon-move`／`town-recruit-companion` | 8／12／13／16 | 單輪 | 無 |
 
 兩輪之間的差異全部落在三類本來就不可能逐 byte 相同的畫面：
 
@@ -76,6 +77,12 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
   角色連續兩次 reroll，力量 88 → 85 → 89、體型 74 → 72 → 73、健康 75 → 75 → 74。
 - **角色圖像 selector 恰好循環 80 張。** 由 selector 0 向左一次得到的畫面，與由 0
   連續向右 80 次得到的畫面相同；再向右一次回到 selector 0。方向鍵瀏覽、Return 接受。
+- **走出書本的鏈已量測。** 目錄頁按 `6`（Play the game）→ 同一張角色選擇清單 →
+  選領隊 → 城鎮（半途之家旅店）。城鎮的圖示列**不吃方向鍵**，要用參考卡指定的
+  `<`／`>` 移動白框（走到最後一格會繞回第一格），Return 執行。
+- **組隊流程**：COMPANION 圖示 → 先問是否搜尋硬碟角色 → 列出該旅店裡不在隊伍中的
+  角色 → 上下方向鍵選、Return 加入；加入後頭像出現在頂端。**招募不寫磁碟**，
+  三個角色檔全程未變（RE-053）。
 - **書本四個功能共用同一張角色選擇清單。** `DELETE CHARACTER`、`EDIT PICTURE`、
   `EDIT SHIELD`、`HARBOR MASTER` 進入後的第一張畫面是同一個 PNG（四份收據的 SHA-256
   完全相同）；由清單 ESC 回到選單（反白重置），再 ESC 回到目錄頁。

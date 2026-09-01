@@ -5,9 +5,10 @@
 | 原版輸入清冊 | ZIP CRC、逐檔 SHA-256、雙容器重生 byte compare | 不適用 | 不適用 | 不適用 | 通過 |
 | KOLTOWN 解包研究映像 | header、2,281 relocations、IDA entry／337 functions | startup 前 129,312 bytes、2,281 relocations、五錨點全吻合 | 不適用 | `KOLTOWN.EXE A` 正常啟動至 entry | SPEC-001 READY |
 | 啟動／新遊戲 | Go 1.26.7＋Ebitengine v2.9.9 建置通過；資產載入拒非 PNG | 書本封面／目錄頁對原版畫面 | 172 對對拍，游標與原版自繪文字外逐像素相同 | 尚無互動；只有截圖模式 | M4 垂直切片；玩法未接 |
-| 角色建立 UI | 17 個情境、27 輪，核心情境的檢查點畫面 SHA-256 交叉比對 | KOL.EXE 正常入口；DOSBox-X 2026.06.02 固定機器設定 | 2,713 張去重畫格 PNG，含 80 張圖像 selector | 目錄頁 → Character options → Create Character → 接受屬性 → 接受圖像 → 保存 | SPEC-005 READY；16 槽全滿、重名、字元集合未涵蓋 |
+| 角色建立 UI | 21 個情境、31 輪，核心情境的檢查點畫面 SHA-256 交叉比對 | KOL.EXE 正常入口；DOSBox-X 2026.06.02 固定機器設定 | 3,023 張去重畫格 PNG，含 80 張圖像 selector | 目錄頁 → Character options → Create Character → 接受屬性 → 接受圖像 → 保存 | SPEC-005 READY；16 槽全滿、重名、字元集合未涵蓋 |
 | 書本其他功能 | 尚無 | 四個功能的角色選擇清單是同一個 PNG；HARBOR MASTER 為三行訊息頁 | HARBOR MASTER 1 對對拍通過 | 角色選項 → Harbor Master → 選角色 → 訊息頁 → 任意鍵 | 點陣圖編輯器未實作：滑鼠驅動，鍵盤 oracle 走不完 |
 | 角色刪除 | `DeleteFlow` 與 `DeleteSlot` 單元測試；刪除只寫一個 byte | 兩輪 `CHARDATA` 差分完全相同（slot 1 offset 0x000：0x50→0x00） | 13 對逐畫面對拍，允許區外零像素差 | 角色選項 → Delete Character → 選角色 → 確認視窗回答 y／n | SPEC-005 涵蓋；視窗按 ESC、大寫 Y／N、空名冊未涵蓋 |
+| 組隊上路 | 尚無 | 進入鏈、圖示列鍵位與招募流程已量測（RE-053）；招募不寫磁碟 | 城鎮畫面收據已封存，remake 尚未實作 | 目錄頁 6 → 選領隊 → 旅店 → COMPANION → 選角色 | oracle 已就緒；remake 未開始 |
 | 移動／時間 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 地圖轉換 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
 | 背包／裝備 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
@@ -21,7 +22,7 @@
 ## 截圖 metadata
 
 原版角色建立 UI 的逐畫面 PNG 已由 `tools/dosbox_character_ui_oracle.py` 產生，
-2,713 個去重畫格連同收據、跨輪比對與 provenance manifest 存於
+3,023 個去重畫格連同收據、跨輪比對與 provenance manifest 存於
 `docs/verification/character-ui/`；抽取資產對原版畫面的收據見
 `docs/verification/asset-parity/`。權利分類為 private-repo 可保存、不得公開散布。
 remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍計畫與收據同目錄。
