@@ -35,10 +35,12 @@
 「僅本機」與「來源／權利未知而拒絕發布」四類。
 
 本專案經使用者於 2026-09-01 明確決定，允許把從固定原版輸入可重生、已通過格式與視覺
-驗證的 PNG 衍生物提交到目前的 private GitHub 儲存庫。此例外只適用 PNG，不包含原版
-ZIP、EXE、archive、PDF、地圖、盒面、原始音訊、反組譯 payload 或未驗證圖片；也不等於
-取得公開散布權。每個入庫 PNG 必須放在 `assets/original-derived-png/`，並隨附來源 entry、
-來源 SHA-256、抽取器／版本、圖號、PNG SHA-256、證據狀態與權利分類 manifest。儲存庫若
+驗證的 PNG 衍生物提交到目前的 private GitHub 儲存庫，並於同日再決定原版執行畫面的
+截圖 PNG 同樣適用。此例外只適用 PNG，不包含原版 ZIP、EXE、archive、PDF、地圖、盒面、
+原始音訊、反組譯 payload 或未驗證圖片；也不等於取得公開散布權。抽取器產生的素材 PNG
+放在 `assets/original-derived-png/`；由模擬器擷取的執行畫面 PNG 與其收據同目錄放在
+`docs/verification/`，因為收據以相對路徑索引畫格。兩者都必須隨附來源 entry、
+來源 SHA-256、抽取器／版本、圖號或畫格編號、PNG SHA-256、證據狀態與權利分類 manifest。儲存庫若
 轉為 public、建立 public fork、GitHub Release 或公開 `dist-all/.../release/`，必須先停止
 並重新做權利審查；不得把 private repo 決策自動延伸成公開授權。
 

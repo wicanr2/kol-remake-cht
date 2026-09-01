@@ -23,20 +23,25 @@ tools/compare_character_ui_runs.py <第一輪目錄> <第二輪目錄> --out cro
 - 畫面由 Xvfb 的 `-fbdir` framebuffer 取樣，依 DOSBox-X 視窗實際幾何裁切，逐畫格
   去重後存成 PNG。
 
-## 畫面 PNG 的保存位置
+## 目錄結構與畫面 PNG
 
-收據記錄每個畫格的 PNG SHA-256、尺寸與時間軸；PNG 本身目前只留本機，未進版控。
-原版執行畫面的截圖是與 `assets/original-derived-png/` 不同的素材類別，2026-09-01 的
-private repo PNG 特例沒有涵蓋它，需另行權利決策後才可入庫。
+每個情境有兩個獨立執行的目錄 `<情境>-run1/`、`<情境>-run2/`，各含 `receipt.json`
+與 `frames/`；收據以相對路徑索引畫格，因此畫格與收據同目錄。`cross-run/` 是兩輪
+檢查點畫面的比對結果，`MANIFEST.json` 記錄來源、產生工具、雜湊入口與權利分類。
+
+852 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
+衍生自原版執行檔與資料，著作權仍屬原權利人；此決定不涵蓋 public repo、public fork、
+GitHub Release 或公開 `dist-all/.../release/`，改為公開前須重新權利審查。畫格編號是
+擷取順序，不是原版 archive 圖號。
 
 ## 情境與結果
 
-| 情境 | 檢查點 | 兩輪相同 | 三檔是否變動 |
-|---|---:|---:|---|
-| `name-length` | 26 | 26 | 否 |
-| `blank-name` | 10 | 8 | 否 |
-| `escape-layers` | 28 | 22 | 否 |
-| `reroll` | 20 | 13 | 否 |
+| 情境 | 檢查點 | 兩輪相同 | 去重畫格（run1／run2） | 三檔是否變動 |
+|---|---:|---:|---|---|
+| `name-length` | 26 | 26 | 120／118 | 否 |
+| `blank-name` | 10 | 8 | 108／107 | 否 |
+| `escape-layers` | 28 | 22 | 108／106 | 否 |
+| `reroll` | 20 | 13 | 93／92 | 否 |
 
 兩輪之間的差異全部落在三類本來就不可能逐 byte 相同的畫面，差異量已量化：
 

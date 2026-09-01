@@ -8,7 +8,9 @@
   PNG 圖像與 Ogg Vorbis 音訊。
 - GitHub `wicanr2/kol-remake-cht` 已建立為 private。原版 ZIP／EXE／archive／PDF 與其他 raw
   素材不得提交；使用者已於 2026-09-01 特別允許已驗證、可重生且有 provenance manifest
-  的 PNG 衍生物提交至 `assets/original-derived-png/`。這不授權 GitHub Release 或公開散布。
+  的 PNG 衍生物入庫：抽取器產生的素材 PNG 放 `assets/original-derived-png/`，模擬器
+  擷取的原版執行畫面 PNG 與其收據同目錄放 `docs/verification/`。這不授權 GitHub Release
+  或公開散布。
 - remake 尚未開始。RE 知識庫已建立，SPEC-001 已 READY，只授權固定 KOLTOWN derivative
   作研究 oracle；任何玩法、格式或玩家路徑仍須自己的 DRAFT／READY spec。
 - `Knights-of-legend.zip` 已在唯讀容器中通過 ZIP CRC 檢查，共 76 個中央目錄項目；可見
@@ -107,7 +109,8 @@
   性別→種族、職業→性別、屬性→職業，回到名字層時欄位清空。`REROLL STATS` 重擲九個
   顯示值。四個情境各跑兩輪，`CHARDATA`／`CHARPICS`／`SHLDPICS` 前後 SHA-256 皆未變動；
   跨輪差異只出現在 TITLE 動畫落點、名字欄游標與屬性數值三類畫面且差異量已量化。
-  接受屬性、圖像選擇、實際保存與 16 槽全滿仍未由 UI 證實，SPEC-005 維持 DRAFT。
+  852 個去重畫格 PNG 與 manifest 已入 private repo。接受屬性、圖像選擇、實際保存與
+  16 槽全滿仍未由 UI 證實，SPEC-005 維持 DRAFT。
 
 ## 固定輸入
 

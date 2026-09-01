@@ -974,3 +974,15 @@
 - 全部執行使用有界 `docker run --rm --network none --memory 1g --cpus 1
   --pids-limit 256`，原版 ZIP 唯讀掛載，遊戲副本建在容器 tmpfs。中止的三個探索容器
   已逐一 `docker stop`，結束檢查沒有 DOSBox 容器殘留，其他專案容器未動。
+
+## 2026-09-01：執行畫面 PNG 入庫與 git 作者欄統一
+
+- 使用者決定原版執行畫面截圖 PNG 亦可進目前的 private 儲存庫。852 個去重畫格連同
+  `receipt.json`、跨輪比對與 `MANIFEST.json` 移入
+  `docs/verification/character-ui/<情境>-run{1,2}/`；收據以相對路徑索引畫格，
+  因此畫格與收據同目錄，`AGENTS.md` 的權利邊界章節同步記錄這個位置分工。
+- 權利分類維持 private-repo 可保存、不得公開散布；轉 public、public fork、
+  GitHub Release 或公開 `dist-all/.../release/` 仍須重新權利審查。
+- 使用者決定本 repo 的 git 作者欄一律為 `wicanr2@gmail.com`。既有提交原本掛
+  `cy.wang@coretronic.com`，依此決定改寫全部歷史的 author 與 committer 電子郵件，
+  並對 `main` force push；改寫前先以 `refs/backup/pre-email-rewrite` 保留原始 HEAD。

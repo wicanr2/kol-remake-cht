@@ -143,5 +143,5 @@ theme 與音訊兩項決策已定案（EGA 首版、規格近似合成）。角�
 ESC 與 reroll 已有兩輪可重生收據，下一個唯一工作是同一擷取器的第二批情境：接受屬性、
 角色圖像選擇、實際保存的三檔差異，以及 16 槽全滿邊界。固定 ZIP 的 `CHARDATA` 十六槽
 都非全零（前十四槽有名字），因此滿槽情境不需先建滿十六名角色，但槽位可用判準要先由
-UI 確認。原版執行畫面 PNG 是否可進 private repo 尚待使用者決定，目前只留本機。
+UI 確認。原版執行畫面 PNG 已依 2026-09-01 決定入 private repo。
 SPEC-002／004／005 READY 前不接 Go／Ebitengine production runtime。

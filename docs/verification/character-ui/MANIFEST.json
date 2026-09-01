@@ -1,0 +1,123 @@
+{
+  "manifest": "docs/verification/character-ui/MANIFEST.json",
+  "asset_class": "原版執行畫面截圖（KOLBOOK 角色建立 UI）",
+  "rights": {
+    "classification": "private-repo 可保存；不得公開散布",
+    "note": "畫面內容衍生自原版執行檔與資料，著作權仍屬原權利人。使用者於 2026-09-01 決定本專案可將原版執行畫面 PNG 提交至目前的 private GitHub 儲存庫；此決定不涵蓋 public repo、public fork、GitHub Release 或公開 dist-all/.../release/，改為公開前須重新權利審查。"
+  },
+  "source": {
+    "entry": "Knights-of-legend.zip 內全部 76 個項目，於容器 tmpfs 重建為遊戲目錄",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "read_only": true
+  },
+  "producer": {
+    "tool": "tools/dosbox_character_ui_oracle.py",
+    "input_injector": "tools/x11_key_inject.py（X11 XTEST）",
+    "runner": "tools/run_character_ui_oracle.sh",
+    "comparator": "tools/compare_character_ui_runs.py",
+    "container_image": "rich2-dosbox-dbg:latest",
+    "emulator": "DOSBox-X 2026.06.02 SDL2",
+    "capture": "Xvfb -fbdir framebuffer，依 DOSBox-X 視窗幾何裁切，逐畫格去重",
+    "png_format": "8-bit truecolor，無 palette／alpha"
+  },
+  "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
+  "total_frames": 852,
+  "runs": [
+    {
+      "run": "blank-name-run1",
+      "scenario": "blank-name",
+      "receipt": "blank-name-run1/receipt.json",
+      "generated_utc": "2026-09-01T05:43:39Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 108,
+      "frame_dir": "blank-name-run1/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "blank-name-run2",
+      "scenario": "blank-name",
+      "receipt": "blank-name-run2/receipt.json",
+      "generated_utc": "2026-09-01T05:56:28Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 107,
+      "frame_dir": "blank-name-run2/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "escape-layers-run1",
+      "scenario": "escape-layers",
+      "receipt": "escape-layers-run1/receipt.json",
+      "generated_utc": "2026-09-01T05:52:40Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 108,
+      "frame_dir": "escape-layers-run1/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "escape-layers-run2",
+      "scenario": "escape-layers",
+      "receipt": "escape-layers-run2/receipt.json",
+      "generated_utc": "2026-09-01T05:58:33Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 106,
+      "frame_dir": "escape-layers-run2/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "name-length-run1",
+      "scenario": "name-length",
+      "receipt": "name-length-run1/receipt.json",
+      "generated_utc": "2026-09-01T05:42:08Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 120,
+      "frame_dir": "name-length-run1/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "name-length-run2",
+      "scenario": "name-length",
+      "receipt": "name-length-run2/receipt.json",
+      "generated_utc": "2026-09-01T05:54:58Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 118,
+      "frame_dir": "name-length-run2/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "reroll-run1",
+      "scenario": "reroll",
+      "receipt": "reroll-run1/receipt.json",
+      "generated_utc": "2026-09-01T05:47:48Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 93,
+      "frame_dir": "reroll-run1/frames",
+      "character_files_changed": []
+    },
+    {
+      "run": "reroll-run2",
+      "scenario": "reroll",
+      "receipt": "reroll-run2/receipt.json",
+      "generated_utc": "2026-09-01T06:00:19Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "frame_count": 92,
+      "frame_dir": "reroll-run2/frames",
+      "character_files_changed": []
+    }
+  ]
+}
