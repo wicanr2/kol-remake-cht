@@ -1162,3 +1162,20 @@
   字模表的逐字字寬檢查每個字串的右緣與缺字。98 項全過。
 - 字模表衍生自 Noto Sans CJK TC（OFL 1.1），授權全文已隨字模表入庫。
 - 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。
+
+## 2026-09-01：翻書動畫
+
+- `KOLBOOK.EXE` 的 `sub_114F5` 是封面翻開的動畫，表驅動：兩張參數表放在 DGROUP
+  （`+0x64` 17×2、`+0x86` 18×3），每一步把畫面上一段 byte 欄整體左移一欄，再把目錄頁的
+  一欄複製過來，只動第 10 列起的 180 列，每步等 3 個 BIOS tick。詳見 RE-048。
+- **先驗證再實作**：在寫任何 Go 之前，用 Python 照讀出來的規則跑 36 步，與原版
+  `accept-and-save-run1` 的動畫畫格比對——18 張裡 16 張逐像素完全相同，兩端只差滑鼠
+  游標，剩下一張是取樣落在兩步之間的更新中途。規則成立才動手實作。
+- 新增 `tools/ida_probe_function_script.py`（通用呼叫腳本匯出，取代再寫一支近似的探針）、
+  `tools/ida_probe_kolbook_book_animation.py`（讀參數表）與
+  `tools/extract_book_animation.py`（以位元組序列在 EXE 內唯一定位，產出 typed data）。
+- Go 端 `internal/book/animation.go` 在 CPU 端的 RGBA 緩衝上重播（原版動的是顯示記憶體），
+  `cmd/kol -scene book-open` 可實際播放、`-book-shot-dir` 逐步輸出。
+- `plan-book-open.json` 18 對全通過。參數表與角色資料同屬原版衍生 typed data，
+  一樣留在本機由抽取器重生。
+- 全部執行使用有界 `docker run --rm --network none`；結束檢查沒有容器殘留。

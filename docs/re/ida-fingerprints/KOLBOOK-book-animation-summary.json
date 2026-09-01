@@ -1,0 +1,35 @@
+{
+  "schema": "kol-ida-book-animation-summary-v1",
+  "ida_version": "9.4",
+  "input_name": "KOLBOOK.EXE",
+  "input_sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+  "address_space": "IDA linear effective address for loaded KOLBOOK MZ",
+  "animation_original_name": "sub_114F5",
+  "animation_ea": "0x114f5",
+  "animation_end_ea": "0x11635",
+  "dgroup_ea": "0x19240",
+  "delay_ticks_per_step": 3,
+  "primitives": {
+    "dispatch_by_video_mode": "0x15745",
+    "ega_step": "0x168b0",
+    "ega_scroll_left_one_byte": "0x1690a",
+    "wait_ticks": "0x14094",
+    "calibration": "0x13ffc"
+  },
+  "stages": [
+    {
+      "name": "stage_one",
+      "dgroup_offset": "0x64",
+      "stride": 2,
+      "count": 17,
+      "sha256": "f06f3fd94779cc601ef453f7e7e65bd292996875b7c19d79c1a9cad4212db825"
+    },
+    {
+      "name": "stage_two",
+      "dgroup_offset": "0x86",
+      "stride": 3,
+      "count": 18,
+      "sha256": "76e329a65c30164925b2b6ab906a385109298035ea05fd0828b62711dd2efc8e"
+    }
+  ]
+}

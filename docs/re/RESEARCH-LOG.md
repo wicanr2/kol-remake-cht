@@ -1201,3 +1201,31 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   3.80–4.08 秒與 75 tick 的 4.12 秒相差都在 0.3 秒的取樣間隔內。
 - **限制**：雷聲長度、開機期的忙等校正值（`sub_118D1`）與 `sub_11AAC` 的作用尚未讀出。
   remake 尚未實作這段序列。
+
+## RE-048：翻書動畫是表驅動的逐欄捲動
+
+- `KOLBOOK.EXE` 的 `sub_114F5`（`0x114f5`–`0x11635`）是封面翻開成目錄頁的動畫。
+  新增 `tools/ida_probe_function_script.py`（通用的呼叫腳本匯出）與
+  `tools/ida_probe_kolbook_book_animation.py`（讀出兩張參數表）。
+- 動畫由兩段迴圈驅動，參數表放在 DGROUP：
+  - 第一段 `dgroup+0x64`，17 筆、每筆 2 bytes `(a, b)`，呼叫
+    `sub_15745(a+0x14, b, a+0x14+b, 來源緩衝)`。
+  - 中間一步 `sub_15745(0x14, 0, 0x14, 來源緩衝)`。
+  - 第二段 `dgroup+0x86`，18 筆、每筆 3 bytes `(c, d, e)`，呼叫
+    `sub_15745(c+2, d, e+2, 來源緩衝)`。
+  - 每一步之後 `sub_14094(3)`，等 3 個 BIOS tick。
+- `sub_15745` 依顯示模式分派；EGA（mode 0Dh）走 `sub_168B0`。`sub_168B0(arg0, arg2,
+  arg4, buf)` 先呼叫 `sub_1690A(arg0, arg2)`，再把來源緩衝的第 `arg4` 個 byte 欄複製到
+  畫面的第 `arg0+arg2` 個 byte 欄。
+- `sub_1690A(start, span)` 把畫面上第 `start` 欄起的 `span` 個 byte 欄**整體左移一欄**：
+  設 sequencer map mask 為 `0x0F`、graphics 寫入模式 1（latched copy），逐列 `movsb`。
+- 只動第 10 列起的 180 列（偏移 `0x190 = 400 = 10×40`，計數 `0xB4 = 180`），
+  欄的單位是 EGA 的 byte column（8 像素），四個平面一起搬（寫入模式 1 用 latch）。
+- **模擬驗證**：以封面為起始畫面、目錄頁為來源，照上述規則跑 36 步，與原版
+  `accept-and-save-run1` 的動畫畫格比對——18 張裡有 16 張**逐像素完全相同**；
+  frame-008 與 frame-026 只差原版滑鼠游標（50／55 px）；frame-020 是取樣落在
+  第 25 步與第 26 步之間的更新中途（前 84 列等於第 25 步、後 116 列等於第 26 步）。
+- remake 端 `internal/book/animation.go` 依 `tools/extract_book_animation.py` 抽出的
+  typed data 重播，`plan-book-open.json` 18 對全通過。
+- **限制**：來源緩衝 `word_1A63C` 的填法尚未反追（實測內容等於目錄頁）；其他畫面之間
+  是否也用同一組表未盤點；第二段的 `e` 欄與 `c+d` 不相等的用意未讀出，只照表重播。

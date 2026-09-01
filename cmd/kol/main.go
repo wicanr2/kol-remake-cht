@@ -7,6 +7,9 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"image"
+	"image/draw"
+	"image/png"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -35,9 +38,10 @@ const (
 	sceneScript     scene = "script"
 	sceneTitle      scene = "title"
 	sceneScriptCJK  scene = "script-cjk"
+	sceneBookOpen   scene = "book-open"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -81,6 +85,30 @@ func canvasFor(lang string) *screen.Canvas {
 	return screen.NewCanvasScaled(book.CJKScale)
 }
 
+// rgbaFrom 把抽出的 PNG 解成 RGBA，供 CPU 端的動畫重播使用。
+func rgbaFrom(lib *assets.Library, archive string, index int) (*image.RGBA, error) {
+	src, _, err := lib.Decode(archive, index)
+	if err != nil {
+		return nil, err
+	}
+	out := image.NewRGBA(src.Bounds())
+	draw.Draw(out, out.Bounds(), src, src.Bounds().Min, draw.Src)
+	return out, nil
+}
+
+// writeRGBA 把畫面寫成 PNG；對拍工具讀的就是這個檔案。
+func writeRGBA(path string, img *image.RGBA) error {
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+		return err
+	}
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return png.Encode(f, img)
+}
+
 type spriteCache struct {
 	lib *assets.Library
 	m   map[string]*ebiten.Image
@@ -116,6 +144,9 @@ type game struct {
 	state   *charcreate.State
 	sequence *title.Sequence
 	player   *title.Player
+	book     *book.OpenPlayer
+	bookAnim *book.OpenAnimation
+	bookWait float64
 
 	scene    scene
 	portrait int
@@ -154,6 +185,9 @@ func (g *game) render() error {
 		return ui.NewCharacter(g.canvas.Image(), g.sprites, g.small, g.large, g.state)
 	case sceneScriptCJK:
 		return ui.NewCharacterCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.state)
+	case sceneBookOpen:
+		g.canvas.Image().WritePixels(g.book.Image().Pix)
+		return nil
 	case sceneTitle:
 		bg, err := g.sprites.Get("BACKPICS", g.frame.Back)
 		if err != nil {
@@ -200,6 +234,14 @@ func (g *game) Update() error {
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyEscape) {
 		return ebiten.Termination
+	}
+	if g.scene == sceneBookOpen && g.book != nil {
+		// 每一步固定等 delay_ticks_per_step 個 BIOS tick；Ebitengine 固定 60 TPS。
+		g.bookWait += title.TickHz / 60
+		for g.bookWait >= float64(g.bookAnim.DelayTicks) && !g.book.Done() {
+			g.bookWait -= float64(g.bookAnim.DelayTicks)
+			g.book.Step()
+		}
 	}
 	if g.scene == sceneTitle && g.player != nil {
 		// 原版的等待單位是 BIOS tick；Ebitengine 固定 60 TPS，換算後推進播放器。
@@ -270,6 +312,10 @@ func main() {
 	titlePath := flag.String("title-sequence", "docs/re/title-sequence.json",
 		"標題序列腳本（由 RE-047 從 TITLE.EXE 的 _main 轉寫）")
 	titleShots := flag.String("title-shot-dir", "", "把標題序列一輪的每個畫面輸出到這個目錄")
+	bookAnimPath := flag.String("book-animation",
+		"assets/original-derived-data/book-open-animation.json", "翻書動畫參數表")
+	bookShots := flag.String("book-shot-dir", "",
+		"把翻書動畫的每一步輸出到這個目錄")
 	titleTimeline := flag.String("title-timeline", "",
 		"把一輪標題序列的時間軸寫成 JSON 後結束")
 	titleChoice := flag.String("title-choice", "rng",
@@ -364,6 +410,28 @@ func main() {
 		portrait: *portrait,
 	}
 
+	if scene(*sceneName) == sceneBookOpen {
+		anim, err := book.LoadOpenAnimation(*bookAnimPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		cover, err := rgbaFrom(lib, "BOOKPICS", book.Cover)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		contents, err := rgbaFrom(lib, "BOOKPICS", book.Contents)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		g.bookAnim = anim
+		if g.book, err = book.NewOpenPlayer(anim, cover, contents); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
 	if scene(*sceneName) == sceneTitle {
 		// 實際播放模式：依 BIOS tick 推進，按鍵中止，與原版同一條腳本。
 		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
@@ -376,6 +444,43 @@ func main() {
 	}
 
 	switch {
+	case *bookShots != "":
+		anim, err := book.LoadOpenAnimation(*bookAnimPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		cover, err := rgbaFrom(lib, "BOOKPICS", book.Cover)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		contents, err := rgbaFrom(lib, "BOOKPICS", book.Contents)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		player, err := book.NewOpenPlayer(anim, cover, contents)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := os.MkdirAll(*bookShots, 0o755); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		for i := 0; ; i++ {
+			path := filepath.Join(*bookShots, fmt.Sprintf("open-%03d.png", i))
+			if err := writeRGBA(path, player.Image()); err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			fmt.Printf("open-%03d %s\n", i, path)
+			if !player.Step() {
+				break
+			}
+		}
+		return
 	case *titleTimeline != "":
 		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
 		if err != nil {
