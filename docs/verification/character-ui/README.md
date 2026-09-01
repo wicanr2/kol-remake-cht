@@ -31,7 +31,7 @@ tools/compare_character_ui_runs.py <第一輪目錄> <第二輪目錄> --out cro
 與 `frames/`；收據以相對路徑索引畫格。`cross-run/` 是兩輪檢查點畫面的比對結果，
 `MANIFEST.json` 記錄來源、產生工具、雜湊入口與權利分類。
 
-3,023 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
+3,117 個去重畫格 PNG 已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
 衍生自原版執行檔與資料，著作權仍屬原權利人；此決定不涵蓋 public repo、public fork、
 GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序，不是原版 archive 圖號。
 
@@ -50,6 +50,7 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 | `edit-picture-probe`／`edit-shield-probe`／`harbor-master-probe` | 10／11／12 | 單輪 | 無 |
 | `edit-picture-enter`／`edit-shield-enter`／`harbor-master-enter` | 12／13／14 | 單輪 | 無 |
 | `play-the-game`／`town-icon-bar`／`town-icon-move`／`town-recruit-companion` | 8／12／13／16 | 單輪 | 無 |
+| `town-outdoor-move` | 14 | 單輪 | 無 |
 
 兩輪之間的差異全部落在三類本來就不可能逐 byte 相同的畫面：
 

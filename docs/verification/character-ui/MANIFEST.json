@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 3023,
+  "total_frames": 3117,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -461,6 +461,21 @@
       "frame_dir": "docs/verification/character-ui/town-icon-move-run1/frames",
       "character_files_changed": [],
       "note": "此情境走出書本進入 KOLTOWN 城鎮；畫面不再是書頁。"
+    },
+    {
+      "run": "town-outdoor-move-run1",
+      "scenario": "town-outdoor-move",
+      "description": "由旅店按 DOOR 走到戶外地圖，再用方向鍵移動幾步並在圖示列上移動，用來判斷地圖視窗是不是一張固定圖。純觀察，不進任何建築。",
+      "receipt": "docs/verification/character-ui/town-outdoor-move-run1/receipt.json",
+      "generated_utc": "2026-09-01T23:11:21Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 14,
+      "frame_count": 94,
+      "frame_dir": "docs/verification/character-ui/town-outdoor-move-run1/frames",
+      "character_files_changed": [],
+      "note": "此情境走出旅店到戶外地圖並移動幾步；用來判斷地圖視窗是不是固定圖。"
     },
     {
       "run": "town-recruit-companion-run1",

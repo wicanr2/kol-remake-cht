@@ -261,6 +261,21 @@ SCENARIOS: dict[str, dict] = {
             step("選定第一名同伴之後", None, settle=4.0),
         ],
     },
+    "town-outdoor-move": {
+        "description": "由旅店按 DOOR 走到戶外地圖，再用方向鍵移動幾步並在圖示列上移動，"
+                       "用來判斷地圖視窗是不是一張固定圖。純觀察，不進任何建築。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖", "Right", settle=2.0),
+            step("往右一步", "Right", settle=2.0),
+            step("往右兩步", "Down", settle=2.0),
+            step("往下一步", "Down", settle=2.0),
+            step("往下兩步", "Up", settle=2.0),
+            step("往上一步", "greater", settle=2.0),
+            step("圖示列往右一格", "greater", settle=2.0),
+            step("圖示列往右兩格", None, settle=3.0),
+        ],
+    },
     "play-the-game": {
         "description": "從目錄頁選 6（Play the game），在角色選擇清單選第一名角色當領隊，"
                        "觀察遊戲實際開始之後的畫面。純觀察，不改任何角色。",
