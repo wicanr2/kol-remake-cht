@@ -1,0 +1,138 @@
+{
+  "schema": "kol-party-marker-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "evidence": "RE-060：sub_10000 的 0x500 位元組載入與 sub_11390 的 word_2DF48+word_2DF24 選格",
+  "status": "十個單元全部解出；單元 1 與原版畫面上的隊伍標記合成後 256/256 相同",
+  "human_inspection": "單元 0–4 是同一頂頭盔左右轉動的五個畫格，單元 5–9 是另一組標記",
+  "rights_class": "private-repo 可保存的原版衍生 PNG；不含公開散布權",
+  "source": {
+    "archive_root": "Knights-of-legend/KOLPICS",
+    "payload_index": 0,
+    "decoded_bytes": 1281,
+    "decoded_sha256": "bcf415a2b034b850ecb21dcf03328672e07a2652aab08e3a172f3f410767eae1"
+  },
+  "atlas": {
+    "file": "kolpics-markers.png",
+    "width_pixels": 16,
+    "height_pixels": 160,
+    "unit_count": 10,
+    "unit_side": 16,
+    "layout": "十個單元由上而下",
+    "png_sha256": "112c03fc64c96499989ef312749b898a3d59a96bce520cfbc2d3308f4c49ff17"
+  },
+  "units": [
+    {
+      "unit": 0,
+      "byte_offset": 0,
+      "non_zero_pixels": 111,
+      "colour_indices": [
+        0,
+        4,
+        7,
+        8,
+        12,
+        15
+      ]
+    },
+    {
+      "unit": 1,
+      "byte_offset": 128,
+      "non_zero_pixels": 107,
+      "colour_indices": [
+        0,
+        4,
+        6,
+        7,
+        8,
+        12,
+        15
+      ]
+    },
+    {
+      "unit": 2,
+      "byte_offset": 256,
+      "non_zero_pixels": 103,
+      "colour_indices": [
+        0,
+        4,
+        7,
+        8,
+        12,
+        15
+      ]
+    },
+    {
+      "unit": 3,
+      "byte_offset": 384,
+      "non_zero_pixels": 107,
+      "colour_indices": [
+        0,
+        4,
+        6,
+        7,
+        8,
+        12,
+        15
+      ]
+    },
+    {
+      "unit": 4,
+      "byte_offset": 512,
+      "non_zero_pixels": 111,
+      "colour_indices": [
+        0,
+        4,
+        7,
+        8,
+        12,
+        15
+      ]
+    },
+    {
+      "unit": 5,
+      "byte_offset": 640,
+      "non_zero_pixels": 4,
+      "colour_indices": [
+        0,
+        15
+      ]
+    },
+    {
+      "unit": 6,
+      "byte_offset": 768,
+      "non_zero_pixels": 8,
+      "colour_indices": [
+        0,
+        15
+      ]
+    },
+    {
+      "unit": 7,
+      "byte_offset": 896,
+      "non_zero_pixels": 14,
+      "colour_indices": [
+        0,
+        15
+      ]
+    },
+    {
+      "unit": 8,
+      "byte_offset": 1024,
+      "non_zero_pixels": 40,
+      "colour_indices": [
+        0,
+        15
+      ]
+    },
+    {
+      "unit": 9,
+      "byte_offset": 1152,
+      "non_zero_pixels": 52,
+      "colour_indices": [
+        0,
+        15
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "kol-town-outdoor-sample-v1",
+  "note": "戶外畫面的對拍樣本。內容是原版 town-icon-bar-run1/frame-077 上實際顯示的狀態，只作 remake 對拍輸入，不是遊戲資料模型。鏡頭座標由 tools/probe_town_map_grid.py 以 67 格磚塊指紋反解，唯一命中；日期文字由 tools/read_text_from_frame.py 以抽出的原版字型逐格讀回。date_zh 是中文模式用的譯文（暫譯）；中文模式不對拍。隊伍標記的畫格由原版畫面反解，五個畫格全部逐像素驗過。",
+  "source_frame": "docs/verification/character-ui/town-icon-bar-run1/frames/frame-077.png",
+  "town": 7,
+  "party": [
+    {
+      "portrait": 47,
+      "name": "Theodoric",
+      "speaker": false
+    }
+  ],
+  "camera": {
+    "x": 57,
+    "y": 8
+  },
+  "bounds": {
+    "minX": 0,
+    "maxX": 63,
+    "minY": 0,
+    "maxY": 63
+  },
+  "date": [
+    " Apr 1",
+    "AD  1100"
+  ],
+  "date_zh": [
+    "四月一日",
+    "西元 1100"
+  ],
+  "icons": [
+    5
+  ],
+  "selected": 0,
+  "marker": {
+    "base": 0,
+    "frame": 1
+  }
+}

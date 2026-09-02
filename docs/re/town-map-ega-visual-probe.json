@@ -1,0 +1,445 @@
+{
+  "schema": "kol-town-map-ega-visual-probe-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+  "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過",
+  "human_inspection": "TOWN7 的格子陣列印成字元圖可見建築矩形、道路與外圍空地；12×6 視窗在鏡頭 (57, 8) 與原版畫面 67/67 相同",
+  "rights_class": "private-repo 可保存的原版衍生 PNG；不含公開散布權",
+  "town_count": 8,
+  "records": [
+    {
+      "town_index": 0,
+      "archive_volumes": [
+        "TOWN0.0"
+      ],
+      "archive_payload_count": 86,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 8879,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "bfe323fe8619e156f7aad759df17846b5bd22a9280ea81d51df27b3248fb2762"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 7069,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "25e07565e05f197ca5b749fbf12e3e66d50c2b26d930c169232ba94d29921888"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 6375,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "96e47fb10bc424353fff037e99c540b8a93a1c3bf03f5fb784a48dd204049488"
+        }
+      ],
+      "map": {
+        "file": "town0-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 202,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "9b34f6295aafc089cb7d001adf383c470c1c8f2f969f48c14a9eb7c7bedbe303"
+      },
+      "tiles": {
+        "file": "town0-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 253,
+        "colour_count": 14,
+        "png_sha256": "85bb3641e3a829074b3bb5f63593514d73c1386988df55f96ffd8ce0381e7491"
+      }
+    },
+    {
+      "town_index": 1,
+      "archive_volumes": [
+        "TOWN1.0"
+      ],
+      "archive_payload_count": 21,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 7514,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "84989f21458446b63ea6ed484274e6f16bdc476f360dc35c5c4cb6db781b2635"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 8663,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "74ad2a6bfbca0419a767da39c4c626f6e56722d69eb92dc029119c195dffdcd9"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 8275,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "6219a1dcf5d015e5dbf18e6ec91c8cf6656446a21523404fc116e1ca36009118"
+        }
+      ],
+      "map": {
+        "file": "town1-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 221,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "a2e96a8921ad70c6a8254ae71fe4273033bfd60ea52efb483a2c57b03a6118f8"
+      },
+      "tiles": {
+        "file": "town1-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 239,
+        "colour_count": 13,
+        "png_sha256": "926f97e7a2e019f02d2451b2b63f93ac9900078e20ce9c649d85f27d240365c5"
+      }
+    },
+    {
+      "town_index": 2,
+      "archive_volumes": [
+        "TOWN2.0"
+      ],
+      "archive_payload_count": 21,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 8943,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "64b54746d5580dc3374cd8b6c98fe70efc65a3392220f0bd2c61ed1fe05c1a66"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 9394,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "99ab124d5bffa552ea2872e8875470a4df522a4ea3fd828e1fe0081dc2fa9f05"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 7987,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "887ce1ba11d6311d91fd128c2c5370d670d4cbed4979c059ea19fdd23911f24a"
+        }
+      ],
+      "map": {
+        "file": "town2-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 206,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "587b386b4ba90f2fa2294a6000f9446c249e454d74f213b4cf60c3e97f331667"
+      },
+      "tiles": {
+        "file": "town2-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 255,
+        "colour_count": 13,
+        "png_sha256": "89bfb849436711796d99e0429cb1540cfdebc5f6538b07946dca6a47056bd668"
+      }
+    },
+    {
+      "town_index": 3,
+      "archive_volumes": [
+        "TOWN3.0"
+      ],
+      "archive_payload_count": 21,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 8366,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "8e37804cf0e83787c748f2dea609d2b97bd2128c43162fca592e8990e888b335"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 8900,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "1b8f46fe9b7f792b72889b23690b0ab717a270b07e406627b376411a7b48e1eb"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 8239,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "e378bbc08f160495c110d4b525950097b39c679f0b6c701953ca7393d5d0a64c"
+        }
+      ],
+      "map": {
+        "file": "town3-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 204,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "3f79392d3c196cc9a54b3ba4c72c6d60b1b43d33dbdd435dec6cef0078186ed9"
+      },
+      "tiles": {
+        "file": "town3-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 248,
+        "colour_count": 13,
+        "png_sha256": "dee3ae581248c68123905d95fc56e0acf9559cc85df461a405bff4543f7e15eb"
+      }
+    },
+    {
+      "town_index": 4,
+      "archive_volumes": [
+        "TOWN4.0"
+      ],
+      "archive_payload_count": 21,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 9425,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "dba52abdb16b84f8505d5fb5339302fda0f85f4b473271c75d5b4e54830dd245"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 9225,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "0a8c4ac2205237ddec13510fbdafe2b874db9509b2931ede0159811e6c64ef03"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 8148,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "2548239ec6a8c9e59e32c16caca889a057ddbc4fff32a85899d7bbd17cfacd71"
+        }
+      ],
+      "map": {
+        "file": "town4-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 183,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "e6161200e7d4f6979df34521781abbf177b1e1afac626be7827c52859ffd3387"
+      },
+      "tiles": {
+        "file": "town4-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 255,
+        "colour_count": 12,
+        "png_sha256": "0daac8189507e6285934d9636d571b839146d04185c753cbbe3876f759dd8c16"
+      }
+    },
+    {
+      "town_index": 5,
+      "archive_volumes": [
+        "TOWN5.0"
+      ],
+      "archive_payload_count": 21,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 8597,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "222bcb3c034f8eafbbdb800813a3838a8207f2a17037fc749d616fd7ccab3347"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 7748,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "9237bd60c4860772984f4d4a024cf9bdbba4bd26eabbc2598c3fcebcc2955a5d"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 7969,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "3ce6cc22f9cdf4a41e688419ed5082478834996c98ded31be42e2a6de563a921"
+        }
+      ],
+      "map": {
+        "file": "town5-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 220,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "df7ee9dc09204f0f26d588e0a8fd4758de7527e788a4becde04e1996a56e019c"
+      },
+      "tiles": {
+        "file": "town5-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 229,
+        "colour_count": 14,
+        "png_sha256": "6067e99ec53f24881530cd99a4a08753064116b6093af309131438ac781d50c8"
+      }
+    },
+    {
+      "town_index": 6,
+      "archive_volumes": [
+        "TOWN6.0"
+      ],
+      "archive_payload_count": 21,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 9646,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "32eb6ac1966ab65de725787795f6a0bc3d479bfd665b72df784b9f9500467451"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 9097,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "a40a78f40f624ea7f4686393e9352ace86b044d66ea7f3dd92dd7cb0da97383b"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 8119,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "37135e3e45e453f91fd2e680fcd1230c15ceaa3e9ec987fce11d02019dff1532"
+        }
+      ],
+      "map": {
+        "file": "town6-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 187,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "ce3c007318c0ff31a3cc648722396cdcb4fae263f78134dc3e9fc033291c02bb"
+      },
+      "tiles": {
+        "file": "town6-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 256,
+        "colour_count": 13,
+        "png_sha256": "b6970be65df16da447426e07d4cd461b7832006cda8a15eec0adfed5260eaadc"
+      }
+    },
+    {
+      "town_index": 7,
+      "archive_volumes": [
+        "TOWN7.0",
+        "TOWN7.1"
+      ],
+      "archive_payload_count": 26,
+      "segment_payloads": [
+        {
+          "payload_index": 0,
+          "segment_offset": "0x0000",
+          "compressed_bytes": 8824,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "8e110d5e0e2555ceb5b63fab92c82b0bc03fb2505a73f73f7ed19b2ce78db726"
+        },
+        {
+          "payload_index": 1,
+          "segment_offset": "0x3000",
+          "compressed_bytes": 8918,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "252b0c1d3adeef35c7fed55a1e84f7c6d8e2d11877dfd69fb884c9fdb1c66ad5"
+        },
+        {
+          "payload_index": 2,
+          "segment_offset": "0x6000",
+          "compressed_bytes": 8166,
+          "decoded_bytes": 12289,
+          "decoded_sha256": "23fec589913aadc42448bcc67b53c21df6a57e0c975afc6c2d9a0b8969ca270c"
+        }
+      ],
+      "map": {
+        "file": "town7-map.png",
+        "width_pixels": 64,
+        "height_pixels": 64,
+        "cell_bytes": 1,
+        "index": "(X << 6) + Y",
+        "distinct_tile_ids": 238,
+        "tile_id_range": [
+          0,
+          255
+        ],
+        "png_sha256": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f"
+      },
+      "tiles": {
+        "file": "town7-tiles.png",
+        "width_pixels": 256,
+        "height_pixels": 256,
+        "tile_count": 256,
+        "tile_side": 16,
+        "atlas_columns": 16,
+        "byte_unique_tiles": 240,
+        "colour_count": 13,
+        "png_sha256": "07b10692a451d1e0a053d187033b010e2d46870d550dcfba87d52c3d70e9fef0"
+      }
+    }
+  ]
+}

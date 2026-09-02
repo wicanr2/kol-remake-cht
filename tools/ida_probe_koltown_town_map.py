@@ -95,8 +95,7 @@ PAYLOAD_LOADER = 0x1A4FE      # sub_1A4FE(name, index, seg, off, extra)：解一
 FILE_LOADER = 0x19D98         # sub_19D98(name, seg, off)：整個檔案讀進記憶體
 TILE_BUFFER_SEG = 0x30C8A     # word_30C8A：三個磚圖 payload 落在這個 segment
 # 想看清楚的函式：地圖區段載入器與用 ES 讀磚塊緩衝區的繪製路徑。
-DUMP_FUNCTIONS = (0x115D1, 0x1CAC2, 0x1D1C6, 0x10000, 0x16986, 0x19B29,
-                  0x1A4FE, 0x14DB1, 0x11390, 0x15920, 0x11302)
+DUMP_FUNCTIONS = (0x115D1, 0x1D21D, 0x1CB28, 0x11390)
 MAP_BUFFER = 0x2FBC4   # byte_2FBC4：sub_11A93 把 town%d 的 payload 直接讀進這個 DGROUP 陣列
 # sub_115D1 這個繪製迴圈用到的全域：鏡頭座標、四個夾限值與格子索引暫存。
 LOOP_GLOBALS = {
@@ -108,6 +107,10 @@ LOOP_GLOBALS = {
     "clamp_word_2DF6C": 0x2DF6C,
     "cell_index_word_3AC5A": 0x3AC5A,
     "screen_cache_2A48": 0x2A48,
+    "sprite_source_word_39824": 0x39824,
+    "sprite_base_word_2DF48": 0x2DF48,
+    "sprite_frame_word_2DF24": 0x2DF24,
+    "overlay_flags_6AE4": 0x6AE4,
 }
 SPRINTF = 0x2D3FA             # sub_2D3FA：組檔名用的 sprintf
 # 磚塊間距是 128 bytes ＝ 8 個 paragraph。real mode 常見寫法是把索引乘 8 加到 segment，

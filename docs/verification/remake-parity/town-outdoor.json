@@ -1,0 +1,556 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-outdoor",
+  "description": "remake 的城鎮戶外畫面對原版逐張對拍。地圖視窗的 12×6 格磚塊由 TOWNn.0 的格子陣列與磚塊集合畫出（RE-059），隊伍標記的黑色外框由精靈佔用位圖左右膨脹一像素算出（RE-060）。鏡頭座標、標記畫格與標記在視窗內的偏移都由 tools/solve_outdoor_camera.py 從原版畫面反解，每一張都是唯一解。 第一對取自另一輪 oracle（town-icon-bar-run1），作跨輪交叉檢查。",
+  "pair_count": 21,
+  "pass_count": 21,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "樣本狀態（另一輪 oracle：town-icon-bar-run1）",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/sample.png",
+      "original": "docs/verification/character-ui/town-icon-bar-run1/frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 63
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (57, 8)、標記畫格 1、標記偏移 (0, 0)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam57-8-f1-m00-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-069.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 55
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (57, 8)、標記畫格 3、標記偏移 (0, 0)、圖示 KOLMPICS[5]",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam57-8-f3-m00-i5.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-075.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 63
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (57, 8)、標記畫格 1、標記偏移 (0, 0)、圖示 KOLMPICS[5]",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam57-8-f1-m00-i5.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-076.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 63
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (57, 8)、標記畫格 3、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam57-8-f3-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 63
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (57, 8)、標記畫格 1、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam57-8-f1-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-078.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 63
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 8)、標記畫格 4、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-8-f4-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-079.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 8)、標記畫格 2、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-8-f2-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-080.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 8)、標記畫格 0、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-8-f0-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 8)、標記畫格 1、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-8-f1-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-082.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 8)、標記畫格 4、標記偏移 (1, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-8-f4-m11-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-083.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 8)、標記畫格 2、標記偏移 (1, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-8-f2-m11-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-084.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 8)、標記畫格 0、標記偏移 (1, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-8-f0-m11-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-085.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 2、標記偏移 (1, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f2-m11-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-086.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 0、標記偏移 (1, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f0-m11-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-087.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 4、標記偏移 (1, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f4-m11-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-088.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 2、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f2-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-089.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 0、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f0-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-090.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 4、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f4-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-091.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 1、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f1-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-092.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "鏡頭 (58, 9)、標記畫格 3、標記偏移 (0, 1)、圖示列淨空",
+      "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f3-m01-inone.png",
+      "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-093.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

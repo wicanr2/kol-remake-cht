@@ -388,6 +388,131 @@ def extract_family(family: dict, files: dict[str, bytes], repo: pathlib.Path,
     }
 
 
+def extract_town_maps(files: dict[str, bytes], repo: pathlib.Path,
+                      staging: pathlib.Path) -> list[dict]:
+    """八個城鎮的地圖格子陣列與磚塊 atlas（RE-059 的段內版面）。"""
+    from probe_extract_town_map_png import (  # 延後載入避免與本模組互相 import
+        ATLAS_COLUMNS, MAP_SIDE, TILE_COUNT, TILE_SIDE, atlas, build_segment,
+        encode_gray_png, map_image, verify_gray_png)
+
+    probe_path = repo / "docs/re/town-map-ega-visual-probe.json"
+    probe = json.loads(probe_path.read_text(encoding="utf-8"))
+    provenance = {
+        "visual_probe": probe_path.name,
+        "visual_probe_sha256": hashlib.sha256(probe_path.read_bytes()).hexdigest(),
+        "evidence": probe["evidence"],
+        "status": probe["status"],
+    }
+    out = []
+    for record in probe["records"]:
+        town = record["town_index"]
+        root = f"TOWN{town}"
+        volumes = {name.split("/")[-1]: body for name, body in files.items()
+                   if name.split("/")[-1].startswith(root + ".")}
+        _, seg, detail = build_segment(volumes, root)
+        if [d["decoded_sha256"] for d in detail] != \
+                [d["decoded_sha256"] for d in record["segment_payloads"]]:
+            raise SystemExit(f"{root} payload 解碼雜湊與 visual probe 不符")
+
+        outdir = staging / root
+        outdir.mkdir(parents=True, exist_ok=True)
+        images = []
+
+        grid = map_image(seg)
+        grid_png = encode_gray_png(grid, MAP_SIDE, MAP_SIDE)
+        verify_gray_png(grid_png, MAP_SIDE, MAP_SIDE, grid)
+        digest = hashlib.sha256(grid_png).hexdigest()
+        if digest != record["map"]["png_sha256"]:
+            raise SystemExit(f"{root} 地圖 PNG SHA-256 與 visual probe 不符")
+        (outdir / record["map"]["file"]).write_bytes(grid_png)
+        images.append({
+            "unit_index": 0, "file": f"{root}/{record['map']['file']}",
+            "width": MAP_SIDE, "height": MAP_SIDE, "has_transparency": False,
+            "png_sha256": digest, "png_format": "8-bit 灰階（colour type 0）",
+            "role": "map_cell_array", "cell_index": "(X << 6) + Y",
+            "source_payloads": [{"payload_index": 0, "role": "segment 0x0000-0x0FFF"}],
+        })
+
+        pixels = atlas(seg)
+        side = ATLAS_COLUMNS * TILE_SIDE
+        tiles_png = encode_rgba_png(pixels, bytes([1]) * len(pixels), side, side)
+        verify_png_bytes(tiles_png, side, side)
+        digest = hashlib.sha256(tiles_png).hexdigest()
+        if digest != record["tiles"]["png_sha256"]:
+            raise SystemExit(f"{root} 磚塊 atlas SHA-256 與 visual probe 不符")
+        (outdir / record["tiles"]["file"]).write_bytes(tiles_png)
+        images.append({
+            "unit_index": 1, "file": f"{root}/{record['tiles']['file']}",
+            "width": side, "height": side, "has_transparency": False,
+            "png_sha256": digest, "role": "tile_atlas",
+            "tile_count": TILE_COUNT, "tile_side": TILE_SIDE,
+            "atlas_columns": ATLAS_COLUMNS,
+            "source_payloads": [{"payload_index": i, "role": "segment tiles"}
+                                for i in (0, 1, 2)],
+        })
+
+        out.append({
+            "archive": root, "archive_root": f"Knights-of-legend/{root}",
+            "source_payload_count": record["archive_payload_count"],
+            "plan_record_count": 2, "payloads_without_plan_record": 0,
+            "png_count": len(images), "skipped_count": 0, "skipped": [],
+            "composition": "town_map", "evidence": provenance, "images": images,
+        })
+    return out
+
+
+def extract_party_markers(files: dict[str, bytes], repo: pathlib.Path,
+                          staging: pathlib.Path) -> dict:
+    """KOLPICS payload 0 的十個隊伍標記精靈（RE-060）。"""
+    from probe_extract_party_marker_png import (  # 延後載入避免互相 import
+        ARCHIVE_ROOT, PAYLOAD_INDEX, UNIT_COUNT, UNIT_SIDE, build)
+
+    probe_path = repo / "docs/re/party-marker-ega-visual-probe.json"
+    probe = json.loads(probe_path.read_text(encoding="utf-8"))
+    contract = logical_archive_contract(ARCHIVE_ROOT, files)
+    if contract is None:
+        raise SystemExit("KOLPICS archive contract 不符")
+    data = payload(files, contract["items"][PAYLOAD_INDEX])
+    if hashlib.sha256(data).hexdigest() != probe["source"]["decoded_sha256"]:
+        raise SystemExit("KOLPICS payload 0 解碼雜湊與 visual probe 不符")
+
+    pixels, _ = build(data)
+    width, height = UNIT_SIDE, UNIT_SIDE * UNIT_COUNT
+    png = encode_rgba_png(pixels, bytes([1]) * len(pixels), width, height)
+    verify_png_bytes(png, width, height)
+    digest = hashlib.sha256(png).hexdigest()
+    if digest != probe["atlas"]["png_sha256"]:
+        raise SystemExit("隊伍標記 atlas SHA-256 與 visual probe 不符")
+
+    name = "KOLPICS-MARKERS"
+    outdir = staging / name
+    outdir.mkdir(parents=True, exist_ok=True)
+    (outdir / probe["atlas"]["file"]).write_bytes(png)
+    return {
+        "archive": name,
+        "archive_root": ARCHIVE_ROOT,
+        "source_payload_count": contract["count"],
+        "plan_record_count": 1, "payloads_without_plan_record": 0,
+        "png_count": 1, "skipped_count": 0, "skipped": [],
+        "composition": "party_marker_atlas",
+        "note": "來源是 KOLPICS 的 payload 0；這個 archive 名稱是 remake 的排列，"
+                "不是原版另一個 archive。既有的 KOLPICS 抽取把同一段當 renderer 資料"
+                "排成 256×5，每 256 byte 只取前半，看不到單元 1、3、5、7、9。",
+        "evidence": {
+            "visual_probe": probe_path.name,
+            "visual_probe_sha256": hashlib.sha256(probe_path.read_bytes()).hexdigest(),
+            "evidence": probe["evidence"], "status": probe["status"],
+        },
+        "images": [{
+            "unit_index": 0, "file": f"{name}/{probe['atlas']['file']}",
+            "width": width, "height": height, "has_transparency": False,
+            "png_sha256": digest, "role": "party_marker_atlas",
+            "unit_count": UNIT_COUNT, "unit_side": UNIT_SIDE,
+            "source_payloads": [{"image_index": PAYLOAD_INDEX, "role": "party markers"}],
+        }],
+    }
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--zip", required=True)
@@ -418,6 +543,8 @@ def main() -> int:
     try:
         shared = {"kolmpics_28_mask": kolmpics_shared_mask(files)}
         archives = [extract_family(f, files, repo, staging, shared) for f in FAMILIES]
+        archives.extend(extract_town_maps(files, repo, staging))
+        archives.append(extract_party_markers(files, repo, staging))
         manifest = {
             "schema": "kol-ega-production-manifest-v2",
             "tool": "tools/extract_ega_assets.py",
@@ -430,7 +557,11 @@ def main() -> int:
                 "classification": "private-repo 可保存；不得公開散布",
                 "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。",
             },
-            "coverage_note": "涵蓋 SPEC-002 的全部 752 個已證實 PNG 單位。"
+            "coverage_note": "涵蓋 SPEC-002 的全部 752 個已證實 PNG 單位，"
+                             "外加 TOWN0–TOWN7 的地圖格子陣列與磚塊 atlas（RE-059）"
+                             "與 KOLPICS payload 0 的隊伍標記 atlas（RE-060）。"
+                             "地圖那張是資料的無損 8-bit 灰階 PNG 表示，像素值即磚塊編號，"
+                             "不是原版顯示矩形。"
                              "KOLPICS 的 raw-planar 與 WEATPICS 的遮罩層是 renderer 資料，"
                              "不是原版顯示矩形。`skipped` 是計畫內明確排除的 placeholder；"
                              "`payloads_without_plan_record` 是連紀錄都沒有的 payload"

@@ -16,28 +16,11 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 	}
 	draw(dst, bg, 0, 0)
 
-	for i, m := range in.Party {
-		s := town.PartySlot
-		x := s.X + i*s.Step
-		c := town.ColourIdle
-		if m.Speaker {
-			c = town.ColourSelected
-		}
-		// 上格放角色圖像、下格放名字，兩格共用外框：上格外框的下緣就是下格的上緣。
-		// 整塊先填黑再畫圖像與名字——角色圖像只有 40 px 寬，左右各留一欄黑底，
-		// 名牌沒有字的地方也是黑的，不是讓紅磚透出來。
-		h := s.PortraitHeight + s.PlateHeight - 1
-		shadow(dst, x, s.Y, s.Width, h)
-		fill(dst, x, s.Y, s.Width, h, town.ColourBoxFill)
-		frame(dst, x, s.Y, s.Width, s.PortraitHeight, c)
-		frame(dst, x, s.Y+s.PortraitHeight-1, s.Width, s.PlateHeight, c)
-		portrait, err := sprites.Get("CHARPICS", m.Portrait)
-		if err != nil {
-			return err
-		}
-		draw(dst, portrait, s.PortraitX+i*s.Step, s.PortraitY)
-		small.Draw(dst, s.NameX+i*s.Step, s.NameY, m.PlateName(),
-			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+	// 上格放角色圖像、下格放名字，兩格共用外框：上格外框的下緣就是下格的上緣。
+	// 整塊先填黑再畫圖像與名字——角色圖像只有 40 px 寬，左右各留一欄黑底，
+	// 名牌沒有字的地方也是黑的，不是讓紅磚透出來。
+	if err := drawPartySlots(dst, sprites, small, in.Party); err != nil {
+		return err
 	}
 
 	pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)

@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 import zipfile
 from pathlib import Path
 
@@ -154,4 +155,5 @@ def main() -> int:
     return 0
 
 
-raise SystemExit(main())
+if __name__ == "__main__":
+    sys.exit(main())

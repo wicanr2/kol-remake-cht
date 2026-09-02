@@ -48,9 +48,10 @@ const (
 	sceneDelete     scene = "delete"
 	sceneHarbor     scene = "harbor"
 	sceneInn        scene = "inn"
+	sceneOutdoor    scene = "outdoor"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -211,6 +212,31 @@ func (c *spriteCache) Get(archive string, index int) (*ebiten.Image, error) {
 	return img, nil
 }
 
+// parseIcons 解析 -outdoor-icons：`none` 是空列，其餘是逗號分隔的 KOLMPICS 圖號。
+func parseIcons(spec string) ([]int, error) {
+	if spec == "none" {
+		return nil, nil
+	}
+	var out []int
+	for _, field := range strings.Split(spec, ",") {
+		n, err := strconv.Atoi(strings.TrimSpace(field))
+		if err != nil {
+			return nil, fmt.Errorf("-outdoor-icons 的 %q 不是圖號：%w", field, err)
+		}
+		out = append(out, n)
+	}
+	return out, nil
+}
+
+// loadGrid 從資產目錄讀出某城鎮的地圖格子陣列（8-bit 灰階 PNG，像素值即磚塊編號）。
+func loadGrid(lib *assets.Library, archive string) (*town.Grid, error) {
+	src, _, err := lib.Decode(archive, 0)
+	if err != nil {
+		return nil, err
+	}
+	return town.LoadGrid(src)
+}
+
 type shotJob struct {
 	name  string
 	path  string
@@ -226,6 +252,7 @@ type game struct {
 	roster  *roster.Roster
 	remove  *roster.DeleteFlow
 	inn     *town.Inn
+	outdoor *town.Outdoor
 	canvas  *screen.Canvas
 	state   *charcreate.State
 	sequence *title.Sequence
@@ -293,6 +320,8 @@ func (g *game) render() error {
 			return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.inn)
 		}
 		return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.inn)
+	case sceneOutdoor:
+		return ui.Outdoor(g.canvas.Image(), g.sprites, g.small, g.outdoor)
 	case sceneHarbor:
 		if g.strings != nil {
 			return ui.HarborMasterCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings)
@@ -509,6 +538,12 @@ func main() {
 	innPath := flag.String("inn", "docs/re/town-inn-sample.json",
 		"旅店畫面的對拍樣本")
 	innSelected := flag.Int("inn-selected", -1, "覆寫旅店圖示列的白框位置（-1 為沿用樣本）")
+	outdoorPath := flag.String("outdoor", "docs/re/town-outdoor-sample.json",
+		"戶外畫面樣本狀態 JSON")
+	outdoorCamera := flag.String("outdoor-camera", "", "覆寫戶外鏡頭座標，格式 X,Y")
+	outdoorFrame := flag.Int("outdoor-frame", -1, "覆寫隊伍標記的動畫畫格（-1 為沿用樣本）")
+	outdoorMarker := flag.String("outdoor-marker", "", "覆寫隊伍標記在視窗內的偏移，格式 列,欄")
+	outdoorIcons := flag.String("outdoor-icons", "", "覆寫戶外圖示列，逗號分隔的 KOLMPICS 圖號；`none` 代表整列淨空")
 	deleteScript := flag.String("delete-script", "",
 		"delete 場景的按鍵腳本，token 為 UP／DOWN／RET／y／n，逐步輸出截圖")
 	rosterPath := flag.String("roster",
@@ -702,6 +737,63 @@ func main() {
 		}
 	}
 
+	var outdoorState *town.Outdoor
+	if scene(*sceneName) == sceneOutdoor {
+		if outdoorState, err = town.LoadOutdoor(*outdoorPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if *outdoorCamera != "" {
+			var cx, cy int
+			if _, err := fmt.Sscanf(*outdoorCamera, "%d,%d", &cx, &cy); err != nil {
+				fmt.Fprintf(os.Stderr, "-outdoor-camera 格式應為 X,Y：%v\n", err)
+				os.Exit(2)
+			}
+			outdoorState.Camera.X, outdoorState.Camera.Y = cx, cy
+		}
+		if *outdoorFrame >= 0 {
+			if *outdoorFrame >= town.MarkerFrames {
+				fmt.Fprintf(os.Stderr, "-outdoor-frame %d 超出範圍\n", *outdoorFrame)
+				os.Exit(2)
+			}
+			outdoorState.Marker.Frame = *outdoorFrame
+		}
+		if *outdoorMarker != "" {
+			var mr, mc int
+			if _, err := fmt.Sscanf(*outdoorMarker, "%d,%d", &mr, &mc); err != nil {
+				fmt.Fprintf(os.Stderr, "-outdoor-marker 格式應為 列,欄：%v\n", err)
+				os.Exit(2)
+			}
+			outdoorState.Marker.Row, outdoorState.Marker.Col = mr, mc
+		}
+		if *outdoorIcons != "" {
+			icons, err := parseIcons(*outdoorIcons)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(2)
+			}
+			outdoorState.Icons = icons
+			outdoorState.Selected = 0
+		}
+		grid, err := loadGrid(lib, outdoorState.Archive())
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		outdoorState.SetGrid(grid)
+		markerSrc, _, err := lib.Decode(town.MarkerArchive, 0)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		markers, err := town.LoadMarkers(markerSrc)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		outdoorState.SetMarkers(markers)
+	}
+
 	data, err := chardata.Load(*dataPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -728,6 +820,7 @@ func main() {
 		selected: *menuSelected,
 		roster:   slots,
 		inn:      innState,
+		outdoor:  outdoorState,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)

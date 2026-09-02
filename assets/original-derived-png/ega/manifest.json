@@ -12,9 +12,9 @@
     "classification": "private-repo 可保存；不得公開散布",
     "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。"
   },
-  "coverage_note": "涵蓋 SPEC-002 的全部 752 個已證實 PNG 單位。KOLPICS 的 raw-planar 與 WEATPICS 的遮罩層是 renderer 資料，不是原版顯示矩形。`skipped` 是計畫內明確排除的 placeholder；`payloads_without_plan_record` 是連紀錄都沒有的 payload（MISCPICS 的一-byte placeholder 屬此類）。",
-  "archive_count": 30,
-  "png_count": 752,
+  "coverage_note": "涵蓋 SPEC-002 的全部 752 個已證實 PNG 單位，外加 TOWN0–TOWN7 的地圖格子陣列與磚塊 atlas（RE-059）與 KOLPICS payload 0 的隊伍標記 atlas（RE-060）。地圖那張是資料的無損 8-bit 灰階 PNG 表示，像素值即磚塊編號，不是原版顯示矩形。KOLPICS 的 raw-planar 與 WEATPICS 的遮罩層是 renderer 資料，不是原版顯示矩形。`skipped` 是計畫內明確排除的 placeholder；`payloads_without_plan_record` 是連紀錄都沒有的 payload（MISCPICS 的一-byte placeholder 屬此類）。",
+  "archive_count": 39,
+  "png_count": 769,
   "archives": [
     {
       "archive": "BOOKPICS",
@@ -12259,6 +12259,539 @@
             {
               "image_index": 5,
               "role": "color"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN0",
+      "archive_root": "Knights-of-legend/TOWN0",
+      "source_payload_count": 86,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN0/town0-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "9b34f6295aafc089cb7d001adf383c470c1c8f2f969f48c14a9eb7c7bedbe303",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN0/town0-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "85bb3641e3a829074b3bb5f63593514d73c1386988df55f96ffd8ce0381e7491",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN1",
+      "archive_root": "Knights-of-legend/TOWN1",
+      "source_payload_count": 21,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN1/town1-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "a2e96a8921ad70c6a8254ae71fe4273033bfd60ea52efb483a2c57b03a6118f8",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN1/town1-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "926f97e7a2e019f02d2451b2b63f93ac9900078e20ce9c649d85f27d240365c5",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN2",
+      "archive_root": "Knights-of-legend/TOWN2",
+      "source_payload_count": 21,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN2/town2-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "587b386b4ba90f2fa2294a6000f9446c249e454d74f213b4cf60c3e97f331667",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN2/town2-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "89bfb849436711796d99e0429cb1540cfdebc5f6538b07946dca6a47056bd668",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN3",
+      "archive_root": "Knights-of-legend/TOWN3",
+      "source_payload_count": 21,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN3/town3-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "3f79392d3c196cc9a54b3ba4c72c6d60b1b43d33dbdd435dec6cef0078186ed9",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN3/town3-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "dee3ae581248c68123905d95fc56e0acf9559cc85df461a405bff4543f7e15eb",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN4",
+      "archive_root": "Knights-of-legend/TOWN4",
+      "source_payload_count": 21,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN4/town4-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "e6161200e7d4f6979df34521781abbf177b1e1afac626be7827c52859ffd3387",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN4/town4-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "0daac8189507e6285934d9636d571b839146d04185c753cbbe3876f759dd8c16",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN5",
+      "archive_root": "Knights-of-legend/TOWN5",
+      "source_payload_count": 21,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN5/town5-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "df7ee9dc09204f0f26d588e0a8fd4758de7527e788a4becde04e1996a56e019c",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN5/town5-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "6067e99ec53f24881530cd99a4a08753064116b6093af309131438ac781d50c8",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN6",
+      "archive_root": "Knights-of-legend/TOWN6",
+      "source_payload_count": 21,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN6/town6-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "ce3c007318c0ff31a3cc648722396cdcb4fae263f78134dc3e9fc033291c02bb",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN6/town6-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "b6970be65df16da447426e07d4cd461b7832006cda8a15eec0adfed5260eaadc",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "TOWN7",
+      "archive_root": "Knights-of-legend/TOWN7",
+      "source_payload_count": 26,
+      "plan_record_count": 2,
+      "payloads_without_plan_record": 0,
+      "png_count": 2,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "town_map",
+      "evidence": {
+        "visual_probe": "town-map-ega-visual-probe.json",
+        "visual_probe_sha256": "5838f835d7f65fc620a5517ef5b51b8db188484372cafc4b90b230f03de7cd4e",
+        "evidence": "RE-059：sub_115D1 的格子索引與 sub_1D1C6 的 shl ax,7 ＋ 段 +0x100",
+        "status": "八個城鎮的 payload 0/1/2 都解出 12,289 byte；版面契約逐城驗過"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "TOWN7/town7-map.png",
+          "width": 64,
+          "height": 64,
+          "has_transparency": false,
+          "png_sha256": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f",
+          "png_format": "8-bit 灰階（colour type 0）",
+          "role": "map_cell_array",
+          "cell_index": "(X << 6) + Y",
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment 0x0000-0x0FFF"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "TOWN7/town7-tiles.png",
+          "width": 256,
+          "height": 256,
+          "has_transparency": false,
+          "png_sha256": "07b10692a451d1e0a053d187033b010e2d46870d550dcfba87d52c3d70e9fef0",
+          "role": "tile_atlas",
+          "tile_count": 256,
+          "tile_side": 16,
+          "atlas_columns": 16,
+          "source_payloads": [
+            {
+              "payload_index": 0,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 1,
+              "role": "segment tiles"
+            },
+            {
+              "payload_index": 2,
+              "role": "segment tiles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "KOLPICS-MARKERS",
+      "archive_root": "Knights-of-legend/KOLPICS",
+      "source_payload_count": 14,
+      "plan_record_count": 1,
+      "payloads_without_plan_record": 0,
+      "png_count": 1,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "party_marker_atlas",
+      "note": "來源是 KOLPICS 的 payload 0；這個 archive 名稱是 remake 的排列，不是原版另一個 archive。既有的 KOLPICS 抽取把同一段當 renderer 資料排成 256×5，每 256 byte 只取前半，看不到單元 1、3、5、7、9。",
+      "evidence": {
+        "visual_probe": "party-marker-ega-visual-probe.json",
+        "visual_probe_sha256": "ae868aaa86351fd3bad262a36409c8d861e212ac21a7400334ab6404575b0071",
+        "evidence": "RE-060：sub_10000 的 0x500 位元組載入與 sub_11390 的 word_2DF48+word_2DF24 選格",
+        "status": "十個單元全部解出；單元 1 與原版畫面上的隊伍標記合成後 256/256 相同"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "KOLPICS-MARKERS/kolpics-markers.png",
+          "width": 16,
+          "height": 160,
+          "has_transparency": false,
+          "png_sha256": "112c03fc64c96499989ef312749b898a3d59a96bce520cfbc2d3308f4c49ff17",
+          "role": "party_marker_atlas",
+          "unit_count": 10,
+          "unit_side": 16,
+          "source_payloads": [
+            {
+              "image_index": 0,
+              "role": "party markers"
             }
           ]
         }
