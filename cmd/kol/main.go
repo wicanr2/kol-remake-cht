@@ -18,6 +18,7 @@ import (
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
 	"github.com/wicanr2/kol-remake-cht/internal/assets"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
@@ -50,9 +51,10 @@ const (
 	sceneInn        scene = "inn"
 	sceneOutdoor    scene = "outdoor"
 	sceneBuilding   scene = "building"
+	scenePlay       scene = "play"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -213,6 +215,37 @@ func (c *spriteCache) Get(archive string, index int) (*ebiten.Image, error) {
 	return img, nil
 }
 
+// applyPlayToken 把腳本 token 套到城鎮狀態機；token 對應原版的鍵盤操作。
+func applyPlayToken(s *town.Session, token string) error {
+	switch token {
+	case "L":
+		s.Walk(-1, 0)
+	case "R":
+		s.Walk(1, 0)
+	case "U":
+		s.Walk(0, -1)
+	case "D":
+		s.Walk(0, 1)
+	case "A":
+		s.Walk(-1, -1)
+	case "S":
+		s.Walk(1, -1)
+	case "Z":
+		s.Walk(-1, 1)
+	case "X":
+		s.Walk(1, 1)
+	case "<":
+		s.MoveCursor(-1)
+	case ">":
+		s.MoveCursor(1)
+	case "RET":
+		s.Accept()
+	default:
+		return fmt.Errorf("未知的城鎮操作 token：%q", token)
+	}
+	return nil
+}
+
 // parseIcons 解析 -outdoor-icons：`none` 是空列，其餘是逗號分隔的 KOLMPICS 圖號。
 func parseIcons(spec string) ([]int, error) {
 	if spec == "none" {
@@ -254,6 +287,9 @@ type game struct {
 	remove  *roster.DeleteFlow
 	inn     *town.Inn
 	outdoor *town.Outdoor
+	play    *town.Session
+	walkTick   int
+	markerStep int
 	canvas  *screen.Canvas
 	state   *charcreate.State
 	sequence *title.Sequence
@@ -321,6 +357,17 @@ func (g *game) render() error {
 			return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.inn)
 		}
 		return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.inn)
+	case scenePlay:
+		if g.play.Mode == town.ModeInside {
+			if g.strings != nil {
+				return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.play.Inside)
+			}
+			return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.play.Inside)
+		}
+		if g.strings != nil {
+			return ui.OutdoorCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.play.Outdoor)
+		}
+		return ui.Outdoor(g.canvas.Image(), g.sprites, g.small, g.play.Outdoor)
 	case sceneOutdoor:
 		if g.strings != nil {
 			return ui.OutdoorCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.outdoor)
@@ -457,12 +504,54 @@ func (g *game) Update() error {
 			g.book.Step()
 		}
 	}
+	if g.scene == scenePlay && g.play != nil {
+		g.updatePlay()
+	}
 	if g.scene == sceneTitle && g.player != nil {
 		// 原版的等待單位是 BIOS tick；Ebitengine 固定 60 TPS，換算後推進播放器。
 		g.player.Advance(title.TickHz / 60)
 		g.frame = g.player.Current()
 	}
 	return nil
+}
+
+// walkTicksPerFrame 是隊伍標記的動畫節拍。原版用 `word_2DF28` 當延遲計數，
+// 每三次繪製推進一格；Ebitengine 固定 60 TPS，取相近的節拍。
+const walkTicksPerFrame = 8
+
+// updatePlay 是城鎮這一段的輸入迴圈。鍵位照參考卡：方向鍵移動、
+// `<`／`>` 移動圖示列白框、Return 執行。
+func (g *game) updatePlay() {
+	g.walkTick++
+	if g.walkTick >= walkTicksPerFrame {
+		g.walkTick = 0
+		g.play.Outdoor.AdvanceMarker(&g.markerStep)
+	}
+	for _, k := range []struct {
+		key    ebiten.Key
+		dx, dy int
+	}{
+		{ebiten.KeyArrowLeft, -1, 0}, {ebiten.KeyArrowRight, 1, 0},
+		{ebiten.KeyArrowUp, 0, -1}, {ebiten.KeyArrowDown, 0, 1},
+		// 參考卡的斜走鍵。
+		{ebiten.KeyA, -1, -1}, {ebiten.KeyS, 1, -1},
+		{ebiten.KeyZ, -1, 1}, {ebiten.KeyX, 1, 1},
+	} {
+		if inpututil.IsKeyJustPressed(k.key) {
+			g.play.Walk(k.dx, k.dy)
+		}
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyComma) {
+		g.play.MoveCursor(-1)
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyPeriod) {
+		g.play.MoveCursor(1)
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
+		inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
+		inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		g.play.Accept()
+	}
 }
 
 func (g *game) Draw(dst *ebiten.Image) {
@@ -555,6 +644,9 @@ func main() {
 	buildingDoor := flag.Int("building-door", 5, "建築內部畫面的門序號")
 	buildingsPath := flag.String("town-buildings",
 		"assets/original-derived-data/town-buildings.json", "城鎮建築 typed data")
+	playScript := flag.String("play-script", "",
+		"城鎮遊玩的操作腳本，空白分隔：L R U D 是方向鍵、"+
+			"A S Z X 是斜走、< > 移動圖示白框、RET 執行")
 	outdoorAtDoor := flag.Bool("outdoor-at-door", false,
 		"強制進入門口狀態（原版是移動到門的座標時才觸發）")
 	outdoorIcons := flag.String("outdoor-icons", "", "覆寫戶外圖示列，逗號分隔的 KOLMPICS 圖號；`none` 代表整列淨空")
@@ -870,6 +962,56 @@ func main() {
 		}
 	}
 
+	var playSession *town.Session
+	if scene(*sceneName) == scenePlay {
+		state, err := town.LoadOutdoor(*outdoorPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		grid, err := loadGrid(lib, state.Archive())
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		state.SetGrid(grid)
+		markerSrc, _, err := lib.Decode(town.MarkerArchive, 0)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		markers, err := town.LoadMarkers(markerSrc)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		state.SetMarkers(markers)
+		buildings, err := town.LoadBuildings(*buildingsPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		info := buildings.Town(state.Town)
+		if info == nil {
+			fmt.Fprintf(os.Stderr, "城鎮建築資料沒有城鎮 %d\n", state.Town)
+			os.Exit(1)
+		}
+		texts, err := town.LoadText(*townTextPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		trans, err := town.LoadTranslations(*townI18nPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if *lang == "en" {
+			trans = nil
+		}
+		playSession = town.NewSession(state, info, texts, trans, state.Party)
+	}
+
 	data, err := chardata.Load(*dataPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -897,6 +1039,7 @@ func main() {
 		roster:   slots,
 		inn:      innState,
 		outdoor:  outdoorState,
+		play:     playSession,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
@@ -1032,6 +1175,37 @@ func main() {
 			append(raw, '\n'), 0o644); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
+		}
+	case *playScript != "":
+		if *shotDir == "" && *shot == "" {
+			fmt.Fprintln(os.Stderr, "-play-script 需要搭配 -shot-dir 或 -shot")
+			os.Exit(2)
+		}
+		g.scene = scenePlay
+		if *shotDir == "" {
+			for _, token := range strings.Fields(*playScript) {
+				if err := applyPlayToken(g.play, token); err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(2)
+				}
+			}
+			g.jobs = []shotJob{{name: "play", path: *shot}}
+			break
+		}
+		g.jobs = append(g.jobs, shotJob{
+			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
+		for i, token := range strings.Fields(*playScript) {
+			tok := token
+			g.jobs = append(g.jobs, shotJob{
+				name: fmt.Sprintf("step-%03d", i+1),
+				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
+				apply: func() {
+					if err := applyPlayToken(g.play, tok); err != nil {
+						fmt.Fprintln(os.Stderr, err)
+						os.Exit(2)
+					}
+				},
+			})
 		}
 	case *deleteScript != "":
 		if *shotDir == "" && *shot == "" {

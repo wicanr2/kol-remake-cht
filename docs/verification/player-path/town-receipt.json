@@ -1,0 +1,111 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-walk-and-enter",
+  "description": "城鎮的正常玩家路徑：從旅店門口走開再走回來（門口狀態）、白框移到 U-TURN 回地圖、再走回門口按 DOOR 進建築、出來之後往東南走四步再往回一步。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "script": "L R > RET L R RET RET R R D D U",
+  "step_count": 14,
+  "checkpoints": [
+    {
+      "step": 2,
+      "identical_to": "docs/verification/remake-parity/shots/town-door/inn-door.png",
+      "note": "走回門口的畫面與已對拍的門口截圖逐 byte 相同"
+    },
+    {
+      "step": 6,
+      "identical_to": "docs/verification/remake-parity/shots/town-door/inn-door.png",
+      "note": "選 U-TURN 回地圖後再走回門口，畫面與第 2 步相同"
+    },
+    {
+      "step": 7,
+      "identical_to": "docs/verification/remake-parity/shots/town-building/inn-entry.png",
+      "note": "進門的畫面與已對拍的建築內部截圖逐 byte 相同"
+    }
+  ],
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town/step-000.png",
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930"
+    },
+    {
+      "step": 1,
+      "token": "L",
+      "file": "docs/verification/player-path/town/step-001.png",
+      "sha256": "3b4dbba3a001e317ec431a613b99b6ca923457765623a415434c7f411b2f831a"
+    },
+    {
+      "step": 2,
+      "token": "R",
+      "file": "docs/verification/player-path/town/step-002.png",
+      "sha256": "888644ba16402ec524386c6db1d1270e8cbc0335005d34d2326a7a4507966997"
+    },
+    {
+      "step": 3,
+      "token": ">",
+      "file": "docs/verification/player-path/town/step-003.png",
+      "sha256": "e71043b9461b4185c7e431947e2db832d1c83f5ac01a91239f71abb97f031564"
+    },
+    {
+      "step": 4,
+      "token": "RET",
+      "file": "docs/verification/player-path/town/step-004.png",
+      "sha256": "334538d00801be49f2f50ac4a4ac46b0713e1709eda38077f9cdc11a67fd30ec"
+    },
+    {
+      "step": 5,
+      "token": "L",
+      "file": "docs/verification/player-path/town/step-005.png",
+      "sha256": "3b4dbba3a001e317ec431a613b99b6ca923457765623a415434c7f411b2f831a"
+    },
+    {
+      "step": 6,
+      "token": "R",
+      "file": "docs/verification/player-path/town/step-006.png",
+      "sha256": "888644ba16402ec524386c6db1d1270e8cbc0335005d34d2326a7a4507966997"
+    },
+    {
+      "step": 7,
+      "token": "RET",
+      "file": "docs/verification/player-path/town/step-007.png",
+      "sha256": "9fdac495e8f9c6733b4d71514047240ef8eb7253e3347ff7b049642583bbf55f"
+    },
+    {
+      "step": 8,
+      "token": "RET",
+      "file": "docs/verification/player-path/town/step-008.png",
+      "sha256": "334538d00801be49f2f50ac4a4ac46b0713e1709eda38077f9cdc11a67fd30ec"
+    },
+    {
+      "step": 9,
+      "token": "R",
+      "file": "docs/verification/player-path/town/step-009.png",
+      "sha256": "8db093057caa56e90f60a13deeb77816337adc36e4ace632b4e2fad30fe0425b"
+    },
+    {
+      "step": 10,
+      "token": "R",
+      "file": "docs/verification/player-path/town/step-010.png",
+      "sha256": "3dc5acf1ccbf1d59ceebeb3c9d94992b336b2185876a128d87f9be6019868077"
+    },
+    {
+      "step": 11,
+      "token": "D",
+      "file": "docs/verification/player-path/town/step-011.png",
+      "sha256": "49e7477247012625542bca291b58e3044721547951708a64c1cfbe6653108472"
+    },
+    {
+      "step": 12,
+      "token": "D",
+      "file": "docs/verification/player-path/town/step-012.png",
+      "sha256": "08d3a47121beb04e5669bdfdd2aefb57a5680631401cff01a68a3ffac9096a9c"
+    },
+    {
+      "step": 13,
+      "token": "U",
+      "file": "docs/verification/player-path/town/step-013.png",
+      "sha256": "a82ad55e21156e87449c6f49a95015be438edf0a4f8cf9cb64fd8e16041e2ab2"
+    }
+  ]
+}

@@ -88,6 +88,9 @@ type Outdoor struct {
 	// 站在同一格上時仍然是地圖畫面。位置本身不足以決定，要獨立記。
 	AtDoorCell bool `json:"at_door"`
 
+	// DoorCursor 是門口圖示列的白框位置（0 是 DOOR、1 是 U-TURN）。
+	DoorCursor int `json:"door_cursor"`
+
 	grid      *Grid
 	markers   *Markers
 	buildings *TownBuildings
@@ -145,7 +148,7 @@ func (o *Outdoor) SetBuildings(b *TownBuildings) { o.buildings = b }
 // DOOR 與 U-TURN 兩格，白框回到第一格。
 func (o *Outdoor) IconRow() ([]int, int) {
 	if o.AtDoor() != nil {
-		return []int{DoorIcon, UTurnIcon}, 0
+		return []int{DoorIcon, UTurnIcon}, o.DoorCursor
 	}
 	return o.Icons, o.Selected
 }
@@ -231,10 +234,46 @@ func (o *Outdoor) View() [][]int {
 	return rows
 }
 
-// Move 依方向鍵移動鏡頭。夾限與繪製時相同，走到邊界就停住。
+// Move 直接移動鏡頭（截圖與對拍用）。夾限與繪製時相同，走到邊界就停住。
 // 移動之後重新判斷門口狀態——原版的掃門迴圈就是接在移動後面。
 func (o *Outdoor) Move(dx, dy int) {
 	o.Camera.X = clamp(o.Camera.X+dx, o.Bounds.MinX, o.Bounds.MaxX)
 	o.Camera.Y = clamp(o.Camera.Y+dy, o.Bounds.MinY, o.Bounds.MaxY)
 	o.AtDoorCell = o.DoorUnderParty() != nil
+}
+
+// MarkerDeadZone 是標記在視窗內可以停留的偏移上限。隊伍先在視窗內走，
+// 偏移超出這個範圍鏡頭才跟著捲一格。
+//
+// 值是由 `town-outdoor-move-run1` 的 22 張戶外畫格反解出來的（RE-060）：
+// 鏡頭 (57,8) 偏移 (0,0) →（右）偏移 (0,1) →（右）鏡頭 (58,8) 偏移 (0,1)
+// →（下）偏移 (1,1) →（下）鏡頭 (58,9) 偏移 (1,1) →（上）偏移 (0,1)。
+// 六次移動全部符合「偏移夾在 0…1，多出來的由鏡頭吸收」。等級：強推論。
+const MarkerDeadZone = 1
+
+// Walk 依方向鍵移動隊伍。隊伍先在視窗內走，偏移超出 dead zone 鏡頭才跟上。
+// 回傳是否真的移動了——走到地圖邊界會停住。
+func (o *Outdoor) Walk(dx, dy int) bool {
+	px, py := o.PartyPosition()
+	nx := clamp(px+dx, o.Bounds.MinX, o.Bounds.MaxX)
+	ny := clamp(py+dy, o.Bounds.MinY, o.Bounds.MaxY)
+	if nx == px && ny == py {
+		return false
+	}
+	o.Camera.X, o.Marker.Col = follow(o.Camera.X, nx, o.Bounds.MinX, o.Bounds.MaxX)
+	o.Camera.Y, o.Marker.Row = follow(o.Camera.Y, ny, o.Bounds.MinY, o.Bounds.MaxY)
+	o.AtDoorCell = o.DoorUnderParty() != nil
+	return true
+}
+
+// follow 回傳跟隨之後的鏡頭座標與標記偏移。
+func follow(camera, party, lo, hi int) (int, int) {
+	offset := party - camera
+	if offset > MarkerDeadZone {
+		camera += offset - MarkerDeadZone
+	} else if offset < 0 {
+		camera += offset
+	}
+	camera = clamp(camera, lo, hi)
+	return camera, party - camera
 }
