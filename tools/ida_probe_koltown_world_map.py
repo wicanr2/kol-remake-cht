@@ -26,7 +26,7 @@ EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d
 DGROUP_EA = 0x2DED0
 
 # 完整倒出的函式：城鎮主迴圈與疑似換圖路徑。
-DUMP_FUNCTIONS = ()
+DUMP_FUNCTIONS = (0x11A93,)
 DUMP_LIMIT = 20000
 
 GLOBALS = {
@@ -185,6 +185,7 @@ def main() -> None:
         "note": "探索用輸出：城鎮主迴圈與換圖路徑的完整反組譯；尚未鎖定任何斷言。",
         "town_number_sources": town_number_sources(),
         "message_draw_calls": call_sites(0x14234, 26),
+        "text_draw_calls": call_sites(0x1A8FD, 10),
         "icon_push_calls": call_sites(0x11703, 8),
         "ffff_stores": ffff_stores(),
         "globals": {name: global_users(addr) for name, addr in GLOBALS.items()},

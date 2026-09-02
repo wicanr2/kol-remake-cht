@@ -106,6 +106,14 @@ func TestSessionEnterAndLeaveBuilding(t *testing.T) {
 		t.Fatalf("建築內圖示列是 %v", icons)
 	}
 
+	// 讀完進門敘述之後圖示列才展開；白框停在 DOOR，按 Return 才出得來。
+	s.Continue()
+	s.Continue()
+	icons, _ = s.Icons()
+	if len(icons) == 0 || icons[0] != IconSprite(IconDoor) {
+		t.Fatalf("讀完敘述之後圖示列是 %v", icons)
+	}
+
 	// 出來之後人還站在門的格子上，畫面卻是地圖。
 	s.Accept()
 	if s.Mode != ModeMap || s.Inside != nil {

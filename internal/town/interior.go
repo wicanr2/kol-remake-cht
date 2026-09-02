@@ -17,6 +17,8 @@ const (
 	IconAward     = 12
 	IconScroll    = 13
 	IconMirror    = 17
+	// IconUTurn 是取消：與門口狀態的 U-TURN 同一個圖示（KOLMPICS 18）。
+	IconUTurn = 15
 )
 
 // IconSprite 是圖示編號對應的 KOLMPICS 圖號。

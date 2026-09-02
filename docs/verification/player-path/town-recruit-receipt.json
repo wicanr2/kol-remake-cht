@@ -1,0 +1,117 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-recruit",
+  "description": "走進半途之家、讀完進門敘述，用 > 把白框移到 COMPANION 招募同伴：先回答是否搜尋硬碟，再在候選人清單上下移動反白，選定第一位加入隊伍。全程只經過 town.Session，沒有座標注入。",
+  "script": "L R RET SPACE > > > > > RET RET D U RET",
+  "step_count": 15,
+  "checkpoints": [
+    {
+      "step": 10,
+      "identical_to": "docs/verification/remake-parity/shots/town-recruit/ask.png",
+      "note": "是否搜尋硬碟，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 11,
+      "identical_to": "docs/verification/remake-parity/shots/town-recruit/list.png",
+      "note": "候選人清單，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 14,
+      "identical_to": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "note": "加入之後，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town-recruit/step-000.png",
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930"
+    },
+    {
+      "step": 1,
+      "token": "L",
+      "file": "docs/verification/player-path/town-recruit/step-001.png",
+      "sha256": "84c58fb2ed1f0757878c0fbfca44473b2b9bebd17e27213f605f404b44188763"
+    },
+    {
+      "step": 2,
+      "token": "R",
+      "file": "docs/verification/player-path/town-recruit/step-002.png",
+      "sha256": "888644ba16402ec524386c6db1d1270e8cbc0335005d34d2326a7a4507966997"
+    },
+    {
+      "step": 3,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-recruit/step-003.png",
+      "sha256": "9fdac495e8f9c6733b4d71514047240ef8eb7253e3347ff7b049642583bbf55f"
+    },
+    {
+      "step": 4,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-recruit/step-004.png",
+      "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
+    },
+    {
+      "step": 5,
+      "token": ">",
+      "file": "docs/verification/player-path/town-recruit/step-005.png",
+      "sha256": "b821e0770e07f84e4d0b0032c5ff5ecf3b4a89b850331c8f8a67ac26e472efa5"
+    },
+    {
+      "step": 6,
+      "token": ">",
+      "file": "docs/verification/player-path/town-recruit/step-006.png",
+      "sha256": "ffe3fb64887a24925b7e01b39b0012fcbb82b9ef80496721731a197cc9d1ddf6"
+    },
+    {
+      "step": 7,
+      "token": ">",
+      "file": "docs/verification/player-path/town-recruit/step-007.png",
+      "sha256": "be78eacc0c00a216badaf4992d7c6ebc3ae356899e21da5e8c7f84a28285cdf5"
+    },
+    {
+      "step": 8,
+      "token": ">",
+      "file": "docs/verification/player-path/town-recruit/step-008.png",
+      "sha256": "25e6dafb4d0fb893671e49b7daca05361c2710b6ea2b01a48c51cd6a989ee99b"
+    },
+    {
+      "step": 9,
+      "token": ">",
+      "file": "docs/verification/player-path/town-recruit/step-009.png",
+      "sha256": "670865b46cbf69673e6ce0427301ab0e89bcdada2110b15337524efbe47e572d"
+    },
+    {
+      "step": 10,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-recruit/step-010.png",
+      "sha256": "ad4c15af2be0c464483045ea95e5e302fe2563c186a23d8e6c641390b61b11d6"
+    },
+    {
+      "step": 11,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-recruit/step-011.png",
+      "sha256": "1c2e04eff7625b89536ca189c4ee03252a08faab133cfe0ccd9e904fced1e8fa"
+    },
+    {
+      "step": 12,
+      "token": "D",
+      "file": "docs/verification/player-path/town-recruit/step-012.png",
+      "sha256": "384feeb37cb4e72f5d6fff46d7f5f6cd3fbecf0dbb01e84a9a35f1b3f9d0d760"
+    },
+    {
+      "step": 13,
+      "token": "U",
+      "file": "docs/verification/player-path/town-recruit/step-013.png",
+      "sha256": "1c2e04eff7625b89536ca189c4ee03252a08faab133cfe0ccd9e904fced1e8fa"
+    },
+    {
+      "step": 14,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-recruit/step-014.png",
+      "sha256": "64fb3bf48b26993dd2ee8ceeba8ceb170aba8e36b815603794eb15d7962b6b87"
+    }
+  ]
+}

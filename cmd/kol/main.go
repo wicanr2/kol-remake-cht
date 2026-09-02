@@ -221,6 +221,17 @@ func (c *spriteCache) Get(archive string, index int) (*ebiten.Image, error) {
 
 // applyPlayToken 把腳本 token 套到城鎮狀態機；token 對應原版的鍵盤操作。
 func applyPlayToken(s *town.Session, token string) error {
+	// 招募清單開著的時候方向鍵移動反白，不是走路——原版的清單也是吃上下鍵。
+	if s.Recruiting() {
+		switch token {
+		case "U":
+			s.MoveList(-1)
+			return nil
+		case "D":
+			s.MoveList(1)
+			return nil
+		}
+	}
 	defer func() {
 		// 在城門選了 DOOR 就換到世界地圖。位置是這座城鎮該入城點在世界地圖上的座標。
 		if s.LeftTown && s.World != nil && !s.WorldEntered {
@@ -228,6 +239,16 @@ func applyPlayToken(s *town.Session, token string) error {
 			s.OnLeaveTown(s.LeftGate)
 		}
 	}()
+	if s.Recruiting() {
+		switch token {
+		case "U":
+			s.MoveList(-1)
+			return nil
+		case "D":
+			s.MoveList(1)
+			return nil
+		}
+	}
 	switch token {
 	case "L":
 		s.Walk(-1, 0)
@@ -1274,6 +1295,17 @@ func main() {
 			os.Exit(1)
 		}
 		playSession.Topics = topics
+		if rosterState, err := roster.Load(*rosterPath); err == nil {
+			for _, slot := range rosterState.Occupied() {
+				playSession.Roster = append(playSession.Roster, town.Candidate{
+					Name: slot.Name, Portrait: slot.Portrait,
+					Place: slot.Place, Town: slot.Town,
+					Female: slot.Female, Wounds: slot.Wounds})
+			}
+		} else {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 		bank, err := town.LoadUIText(*uiTextPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -1281,6 +1313,8 @@ func main() {
 		}
 		playSession.UIText = bank
 		if worldScreenState != nil {
+			playSession.TownCode = worldScreenState.Travel.Data.TownCode(
+				state.Town, state.EntryPoint)
 			playSession.World = worldScreenState
 			playSession.OnLeaveTown = func(p town.Point) {
 				enterWorld(worldScreenState, p)

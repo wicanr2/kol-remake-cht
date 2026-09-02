@@ -16,6 +16,13 @@ type Slot struct {
 	Place    string `json:"place"`
 	Town     string `json:"town"`
 	Occupied bool   `json:"occupied"`
+	// Portrait 是這一格角色頭像命中的 CHARPICS 模板圖號。存檔的頭像逐像素與
+	// 80 張模板比對，16 格全部命中；抽取器對不上就會失敗，不會靜靜留白。
+	Portrait int `json:"portrait"`
+	// Female 是角色記錄位移 0x1A；Wounds 是位移 0x1B 的傷勢，非 0 時旅店的招呼語
+	// 換成「你受傷了，該去修道院」。
+	Female bool `json:"female"`
+	Wounds int  `json:"wounds"`
 }
 
 // Location 是清單右欄顯示的字串：固定長度的所在地、一個空白、三字城鎮代碼。

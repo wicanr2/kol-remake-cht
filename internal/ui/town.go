@@ -32,7 +32,11 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 	draw(dst, pic, town.Portrait.X, town.Portrait.Y)
 
 	drawBox(dst, large, town.TitleBox, in.Title)
-	drawBox(dst, large, town.DialogBox, in.Dialog)
+	if in.List != nil {
+		drawInnList(dst, large, in.List)
+	} else {
+		drawBox(dst, large, town.DialogBox, in.Dialog)
+	}
 
 	b := town.IconBar
 	for i, index := range in.Icons {
@@ -49,6 +53,28 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		frame(dst, x, b.Y, b.Width, b.Height, c)
 	}
 	return nil
+}
+
+// drawInnList 把對話框畫成可選清單：反白那一列是白字、其餘青色，
+// 右側第 23 格畫上下兩個紅色箭頭（大字型的碼位 94／95）。原版兩個箭頭一直都在，
+// 不隨捲動位置消失（RE-072）。
+func drawInnList(dst *ebiten.Image, f *font.Font, list *town.InnList) {
+	b := town.DialogBox
+	shadow(dst, b.X, b.Y, b.Width, b.Height)
+	fill(dst, b.X, b.Y, b.Width, b.Height, town.ColourBoxEdge)
+	fill(dst, b.X+1, b.Y+1, b.Width-2, b.Height-2, town.ColourBoxFill)
+	for i, line := range list.Rows {
+		c := town.ColourListIdle
+		if i == list.Selected {
+			c = town.ColourText
+		}
+		f.Draw(dst, b.TextX, b.TextY+i*b.LineStep, line, c[0], c[1], c[2])
+	}
+	x := b.TextX + town.ListColumn*f.Advance()
+	a := town.ColourListArrow
+	f.Draw(dst, x, b.TextY, string(rune(town.ListArrowUp)), a[0], a[1], a[2])
+	f.Draw(dst, x, b.TextY+(town.ListRows-1)*b.LineStep,
+		string(rune(town.ListArrowDown)), a[0], a[1], a[2])
 }
 
 // drawBox 畫一個城鎮文字視窗：先投影、再白框黑底，最後逐行畫字。

@@ -69,6 +69,10 @@ var (
 	ColourBoxEdge  = [3]uint8{255, 255, 255}
 	ColourBoxFill  = [3]uint8{0, 0, 0}
 	ColourText     = [3]uint8{255, 255, 255}
+	// ColourListIdle 是可選清單裡沒有反白的那幾列：EGA 索引 3。
+	ColourListIdle = [3]uint8{0, 170, 170}
+	// ColourListArrow 是清單右側捲動箭頭的顏色：EGA 索引 4。
+	ColourListArrow = [3]uint8{170, 0, 0}
 	ColourShadow   = [3]uint8{0, 0, 0}
 )
 

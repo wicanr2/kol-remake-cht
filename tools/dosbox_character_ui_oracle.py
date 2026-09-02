@@ -261,6 +261,30 @@ SCENARIOS: dict[str, dict] = {
             step("選定第一名同伴之後", None, settle=4.0),
         ],
     },
+    "town-recruit-list": {
+        "description": "在旅店打開同伴清單，一路往下按到底再往上按到底，"
+                       "觀察清單超過一頁時怎麼捲、兩端會不會繞回；"
+                       "最後按第一格圖示離開。純觀察，不加入任何同伴、不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格", "greater", settle=1.5),
+            step("白框第 3 格", "greater", settle=1.5),
+            step("白框第 4 格", "greater", settle=1.5),
+            step("白框第 5 格", "greater", settle=1.5),
+            step("白框第 6 格（COMPANION）", "Return", settle=4.0),
+            step("是否搜尋硬碟角色", "Return", settle=4.0),
+        ] + [
+            step(f"往下第 {i} 名", "Down", settle=2.0) for i in range(1, 15)
+        ] + [
+            step("按到底之後", "Up", settle=2.0),
+        ] + [
+            step(f"往上第 {i} 名", "Up", settle=2.0) for i in range(2, 16)
+        ] + [
+            step("按回頂端之後", "greater", settle=2.0),
+            step("白框移到第 2 格", "Return", settle=4.0),
+            step("按下第 2 格圖示之後（觀察）", None, settle=4.0),
+        ],
+    },
     "town-enter-building": {
         "description": "由旅店按 DOOR 走到戶外地圖，先離開門口再走回來，觀察站在門口時"
                        "地圖視窗是不是換成建築物的圖；接著按 DOOR 進去，再出來走到"

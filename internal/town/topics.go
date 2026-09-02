@@ -29,6 +29,13 @@ const (
 // GreetingRecord 是招呼語後面那一句 `"What can I do for you?"` 在 KOLDATA 的記錄號。
 const GreetingRecord = 45
 
+// 發言者身上有傷時的招呼語（RE-072）。WoundedRecord 與它的下一筆組成
+// 「"You are hurt! You should go to the abbey."」；能治療的建築改用 WoundedHealRecord。
+const (
+	WoundedRecord     = 0x2B
+	WoundedHealRecord = 0x72
+)
+
 // GreetMessage 依發言者選出招呼語的訊息編號。
 func GreetMessage(m Member) int {
 	if m.Renown > 0 {

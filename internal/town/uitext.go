@@ -17,6 +17,9 @@ const (
 	BankEnd  = "ENDTXT"
 )
 
+// AskDiskRecord 是 COMPANION 的第一問：`Look for characters on@~H0Dhard disk?`。
+const AskDiskRecord = 392
+
 // 組出「我聽過某某談起這件事」用到的三筆記錄（RE-067）。
 const (
 	HeardPrefix   = 0x2F // `"I heard`
@@ -130,4 +133,18 @@ func stripKeepSpaces(text string) string {
 		}
 	}
 	return b.String()
+}
+
+// Lines 取一筆記錄並依 `@` 拆成幾行；每一行的版面標記照樣剝掉。
+// 原版的 `@` 是換行，後面常接一個 `~Hxx` 把游標移回框的左緣。
+func (t *UIText) Lines(bank string, index int) []string {
+	raw := t.raw(bank, index)
+	if raw == "" {
+		return nil
+	}
+	var out []string
+	for _, part := range strings.Split(raw, "@") {
+		out = append(out, strip(part))
+	}
+	return out
 }

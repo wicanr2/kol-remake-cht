@@ -18,6 +18,9 @@ type Member struct {
 	Spellcaster bool `json:"spellcaster"`
 	// Renown 是聲望等第 0…3。非 0 時招呼語改成訊息 26 + 等第。
 	Renown int `json:"renown"`
+	// Wounds 是角色記錄位移 0x1B 的傷勢。非 0 時招呼語整段換成 KOLDATA 的
+	// 2Bh＋2Ch「你受傷了，該去修道院」；建築本身能治療（旗標 bit6）時換成 72h。
+	Wounds int `json:"wounds"`
 }
 
 // Inn 是旅店畫面的完整狀態。
@@ -33,6 +36,9 @@ type Inn struct {
 	DialogZh []string `json:"dialog_zh"`
 	Icons    []int    `json:"icons"`
 	Selected int      `json:"selected"`
+
+	// List 非 nil 時對話框畫的是可選清單而不是台詞（招募同伴用）。
+	List *InnList `json:"-"`
 }
 
 // LoadInn 讀取旅店畫面的樣本狀態。這份 JSON 只作對拍輸入，不是遊戲資料模型。

@@ -1,6 +1,9 @@
 package town
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
 // Session 是城鎮這一段的可玩狀態機：戶外走動 → 站到門口 → 進建築 → 出來。
 // 它只描述狀態轉移，不碰繪製也不碰輸入裝置，因此可以單獨測試與重播。
@@ -50,6 +53,13 @@ type Session struct {
 	UIText    *UIText
 	Trans     *Translations
 	Party     []Member
+	// Roster 是全部角色檔的清單，招募同伴時用來挑出這間建築裡的人。
+	Roster []Candidate
+	// TownCode 是這座城鎮在世界地圖上的三字母代碼（BRT、MIN…），
+	// 與角色檔所在地欄的第二段比對。空字串代表不比對城鎮。
+	TownCode string
+	// Unimplemented 記下玩家選到但還沒實作的圖示，讓收據看得見。
+	Unimplemented []string
 
 	// Rand 是 LISTEN 挑話題槽用的亂數來源。原版是 `rand(6)`；這裡可以注入，
 	// 玩家路徑與測試才能重播。回傳 0…n-1。
@@ -62,6 +72,10 @@ type Session struct {
 	// told 記的是這一次進門裡哪些話題槽已經講過。原版是進門時清零的六個旗標。
 	told [TopicSlots]bool
 	greeted bool
+	// recruit 是招募流程的狀態；nil 代表不在招募中。
+	recruit *Recruit
+	// asking 為真時停在「是否搜尋硬碟」那一問。
+	asking bool
 	// pending 是「按空白鍵才會出現」的下一段文字。原版每段話之間都會停在
 	// `sub_144C3`——圖示列縮成一格 SPACEBAR，等玩家讀完。
 	pending []string
@@ -143,6 +157,15 @@ func (s *Session) Walk(dx, dy int) bool {
 // 原版在地圖迴圈與門口迴圈都吃這兩個鍵，條件都是圖示列非空（`word_2DF3C != 0`）。
 func (s *Session) MoveCursor(delta int) {
 	if s.Mode == ModeInside {
+		// 建築內的圖示列用同一組鍵，白框在自己的 Inside.Selected 上繞回。
+		if s.Inside == nil {
+			return
+		}
+		n := len(s.Inside.Icons)
+		if n == 0 {
+			return
+		}
+		s.Inside.Selected = ((s.Inside.Selected+delta)%n + n) % n
 		return
 	}
 	n := len(s.Outdoor.Icons)
@@ -177,8 +200,70 @@ func (s *Session) Accept() {
 		}
 		s.enter()
 	case ModeInside:
-		s.leaveDoor()
+		s.acceptInside()
 	}
+}
+
+// acceptInside 是建築內按下 Return：執行白框那一格的圖示。
+func (s *Session) acceptInside() {
+	if s.Inside == nil || len(s.Inside.Icons) == 0 {
+		return
+	}
+	id := s.Inside.Icons[s.Inside.Selected] - 3
+	switch {
+	case s.asking:
+		// 兩個答案都走同一條路：這份原版輸入只有一份角色檔，搜不搜硬碟結果相同。
+		s.openList()
+	case s.recruit != nil:
+		if id == IconUTurn || id == IconNo {
+			s.cancelRecruit()
+			return
+		}
+		s.joinSelected()
+	case id == IconDoor:
+		s.leaveDoor()
+	case id == IconSpacebar:
+		s.Continue()
+	case id == IconListen:
+		s.Listen()
+	case id == IconCompanion:
+		s.StartRecruit()
+	default:
+		s.note(iconName(id))
+	}
+}
+
+// note 記下玩家選到但還沒實作的圖示。
+func (s *Session) note(what string) {
+	for _, seen := range s.Unimplemented {
+		if seen == what {
+			return
+		}
+	}
+	s.Unimplemented = append(s.Unimplemented, what)
+}
+
+// iconName 是圖示的英文名稱，只用在 Unimplemented 的紀錄裡。
+func iconName(id int) string {
+	switch id {
+	case IconMouth:
+		return "MOUTH"
+	case IconRest:
+		return "REST/SAVE/HEAL"
+	case IconTrade:
+		return "BUY/SELL"
+	case IconTrain:
+		return "TRAIN"
+	case IconHeal:
+		return "HEAL"
+	case IconAward:
+		return "AWARD"
+	case IconScroll:
+		return "SCROLL"
+	case IconMirror:
+		return "MIRROR"
+	}
+	return "圖示 " + strconv.Itoa(id)
 }
 
 // worldGate 回傳隊伍離開城鎮之後落在世界地圖的哪一格。原版讀的是這座城鎮
@@ -272,6 +357,21 @@ func (s *Session) greeting() []string {
 			break
 		}
 	}
+	// 發言者身上有傷時，招呼語整段換成 KOLDATA 的兩筆記錄；能治療的建築
+	// （旗標 byte 0 的 bit6）換成另一筆（`sub_11A93:0x11F47`，RE-072）。
+	if speaker.Wounds != 0 {
+		var lines []string
+		if s.door != nil && s.door.IconFlags[0]&0x40 != 0 {
+			lines = s.uiLines(WoundedHealRecord)
+		} else {
+			lines = append(s.uiLines(WoundedRecord), s.uiLines(WoundedRecord+1)...)
+		}
+		lines = nonEmpty(lines)
+		if ask := s.uiRecord(GreetingRecord); ask != "" {
+			lines = append(lines, ask)
+		}
+		return lines
+	}
 	index := GreetMessage(speaker)
 	if len(s.Party) != 1 {
 		if lines := s.message(GreetPartyMessage); lines != nil {
@@ -283,6 +383,28 @@ func (s *Session) greeting() []string {
 		lines = append(lines, ask)
 	}
 	return lines
+}
+
+// nonEmpty 去掉空行。原版的記錄常以 `@` 結尾，拆完最後會多一個空字串。
+func nonEmpty(lines []string) []string {
+	out := lines[:0]
+	for _, l := range lines {
+		if l != "" {
+			out = append(out, l)
+		}
+	}
+	return out
+}
+
+// uiLines 取 UI 文字庫的一筆記錄並拆成幾行；中文模式優先用譯文（譯文自己帶斷行）。
+func (s *Session) uiLines(index int) []string {
+	if zh := s.Trans.UIRecord(index); zh != "" {
+		return strings.Split(zh, "\n")
+	}
+	if s.UIText == nil {
+		return nil
+	}
+	return s.UIText.Lines(BankUI, index)
 }
 
 // uiRecord 取 UI 文字庫的一筆記錄，中文模式優先用譯文。

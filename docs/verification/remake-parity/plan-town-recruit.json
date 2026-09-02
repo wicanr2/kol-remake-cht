@@ -1,0 +1,148 @@
+{
+  "name": "town-recruit",
+  "description": "招募同伴的三個畫面。按下 COMPANION 之後先問 `Look for characters on hard disk?`，圖示列換成大拇指朝上與朝下（KOLMPICS 10／11）；接著對話框改畫候選人清單——這間建築裡不在隊伍中的角色，白字是反白那一列、其餘青色（EGA 3），右側第 23 格畫大字型碼位 94／95 的上下箭頭（EGA 4），清單超過八列就捲動、兩端夾住不繞回。選定之後新成員成為發言者，招呼語因為他身上有傷而換成 KOLDATA 2Bh＋2Ch（角色記錄位移 0x1B 非 0）。候選人由角色檔的所在地欄比對建築名稱前十個字母取得，頭像是存檔頭像逐像素命中的 CHARPICS 模板。",
+  "input": {
+    "command": "tools/run_kol_shots.sh 規格檔（-scene play -play-script \"L R RET SPACE SPACE > > > > > RET [RET] [D] [U] [RET]\"）"
+  },
+  "pairs": [
+    {
+      "label": "是否搜尋硬碟：對話框",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/ask.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-078.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 156,
+          "y": 100,
+          "width": 20,
+          "height": 16
+        }
+      ]
+    },
+    {
+      "label": "是否搜尋硬碟：大拇指圖示列",
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/ask.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-078.png"
+    },
+    {
+      "label": "候選人清單：對話框與捲動箭頭",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/list.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-079.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 156,
+          "y": 100,
+          "width": 20,
+          "height": 16
+        }
+      ]
+    },
+    {
+      "label": "候選人清單：圖示列",
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/list.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-079.png"
+    },
+    {
+      "label": "反白往下一列",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/list-second.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-080.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 156,
+          "y": 100,
+          "width": 20,
+          "height": 16
+        }
+      ]
+    },
+    {
+      "label": "加入之後：隊員格",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 58
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png"
+    },
+    {
+      "label": "加入之後：受傷的招呼語",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 156,
+          "y": 100,
+          "width": 20,
+          "height": 16
+        }
+      ]
+    },
+    {
+      "label": "加入之後：標題框",
+      "compare": {
+        "x": 96,
+        "y": 54,
+        "width": 224,
+        "height": 28
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png"
+    },
+    {
+      "label": "加入之後：建築內圖示列",
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png"
+    }
+  ]
+}
