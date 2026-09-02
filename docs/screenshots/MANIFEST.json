@@ -6,19 +6,19 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "8594a3289e80300241014ec532b0ca03aba7062e"
+    "commit": "eae3cb8941d20dde15bf18116cdfe12cef77dca9"
   },
   "inputs": {
-    "ega_assets_manifest_sha256": "410477c5bdeb6d79ab098623ae74eca47568976e874c30c764ee7ee4a03bf3d1",
+    "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
     "fonts_manifest_sha256": "5db3baecce7a0ca28559688f08f98b7c0648765bbf82348de8c490243079f393",
-    "ui_font_manifest_sha256": "2839e8ff1530741bffda034062aa9af40ee3f1e820ae4b59f7618a0fee8bc57d"
+    "ui_font_manifest_sha256": "ef3e66ee8e1d3fa9ed68b086bfe109ca47a7b0537f081cba2b139e512f2c67ff"
   },
   "rights": {
     "classification": "private-repo 可保存；不得公開散布",
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 19,
+  "count": 22,
   "failed": 0,
   "screenshots": [
     {
@@ -157,13 +157,36 @@
       "pass": true
     },
     {
+      "file": "docs/screenshots/en-town-outdoor.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene outdoor -shot docs/screenshots/en-town-outdoor.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930",
+      "parity_twin": "docs/verification/remake-parity/shots/town-outdoor/sample.png",
+      "parity_receipt": "docs/verification/remake-parity/town-outdoor.json",
+      "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-outdoor-moved.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene outdoor -outdoor-camera 58,9 -outdoor-frame 3 -outdoor-marker 0,1 -outdoor-icons none -shot docs/screenshots/en-town-outdoor-moved.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "ec3939313dd93fc78f0e19e808df43d0d59953d5350d0d40774779ebe5d0eed5",
+      "pass": true
+    },
+    {
       "file": "docs/screenshots/zh-newchar-picture.png",
       "mode": "中文模式（不對拍）",
       "command": "cmd/kol -lang zh-Hant -scene script -script z e d RET RET RET RET DOWN RET -shot docs/screenshots/zh-newchar-picture.png",
       "width": 640,
       "height": 400,
       "distinct_colours": 12,
-      "sha256": "ffa3b9b2e5a066ce22a1a4f7943712444e77657b8923d7101ed985ed9560eff5",
+      "sha256": "20733eb890efc78cfeeff7f42983c3e31463eff143c27dd52b58a21135764ea8",
       "pass": true
     },
     {
@@ -173,7 +196,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 8,
-      "sha256": "0db59cb35ed4a0157179cc821c1c38dbe4444c2c338d67f02b58f2f32516de2a",
+      "sha256": "718d25cecab04d1d587978f3c944767fb11909d80ca2f90e8c595a567520919d",
       "pass": true
     },
     {
@@ -183,7 +206,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 7,
-      "sha256": "84aafdbb4d1bd3e0af459a712eeaebc6fbd3e8c52aa08d74366ccafc24f98434",
+      "sha256": "3b255ca6d4b9edea59dcc0e4fba9f7d5b124983c4060039d5a6c13f379aebc82",
       "pass": true
     },
     {
@@ -193,7 +216,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 8,
-      "sha256": "b8b3e5cd2da3143c3e831df2f897d1c9b6f71e7c10fc9d8638bff3aa962c924e",
+      "sha256": "390f71437637fac9caa2b31d08c73af2a3b06db011a71a20f7aa5f84fc70551e",
       "pass": true
     },
     {
@@ -203,7 +226,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 7,
-      "sha256": "6ccf16a94a6d5c1494e28e343b639655750c3791917d157757500716f2b051ae",
+      "sha256": "81dd7daf524773721d56a18c4b9b4b9a22317270e400952b9217fa7b8e69ddc8",
       "pass": true
     },
     {
@@ -213,7 +236,17 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 15,
-      "sha256": "4018c855b6b834deb08c4455537498f241bf36675d3d33ec7588a483072da8e3",
+      "sha256": "32ae655250d736b24c6346f2f709e683e934e0603f42e4b5c90859047a212f47",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-outdoor.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene outdoor -shot docs/screenshots/zh-town-outdoor.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 14,
+      "sha256": "4f820f29658cc5bd1f810215f8f35324f188ed5a7580d7ee3b52f20628b25bcd",
       "pass": true
     },
     {
@@ -223,7 +256,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 15,
-      "sha256": "fed1455031dea0b43bcda9b4071fd74a83c4b71da1124a7b7efd0b6eb8304be6",
+      "sha256": "1f978015aa6d155171a1eb247cf991f0f9098013cd5a74330fc0ea548cd2597a",
       "pass": true
     }
   ]

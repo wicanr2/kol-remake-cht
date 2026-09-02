@@ -126,6 +126,30 @@ def main() -> int:
                            "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
                            "pass": bottom <= limit_y})
 
+    # 戶外畫面的日期框：兩行中文字，安全矩形是框的內緣。
+    outdoor = layout_doc.get("town_outdoor")
+    for path in args.town_sample:
+        sample = json.loads(pathlib.Path(path).read_text())
+        lines = sample.get("date_zh", [])
+        if not (outdoor and lines):
+            continue
+        right = outdoor["DateX"] + outdoor["DateW"] - 1
+        for line in lines:
+            w, missing = width(line)
+            checks.append({"kind": "town-date", "en": path, "zh": line,
+                           "x": outdoor["DateTextX"], "width": w,
+                           "right_limit": right,
+                           "overflow": max(0, outdoor["DateTextX"] + w - right),
+                           "missing_glyphs": missing,
+                           "pass": outdoor["DateTextX"] + w <= right and not missing})
+        bottom = (outdoor["DateTextY"] + (len(lines) - 1) * outdoor["DateStep"]
+                  + font["cell"]["height"])
+        limit_y = outdoor["DateY"] + outdoor["DateH"] - 1
+        checks.append({"kind": "vertical", "en": f"{path} 日期行數", "zh": "", "x": 0,
+                       "width": bottom, "right_limit": limit_y,
+                       "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
+                       "pass": bottom <= limit_y})
+
     # 刪除確認視窗是覆蓋在書頁上的獨立視窗，安全矩形就是視窗自己的內緣。
     confirm = layout_doc.get("confirm")
     if confirm:

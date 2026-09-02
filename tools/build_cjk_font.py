@@ -190,10 +190,41 @@ def main() -> int:
                 if grey[(oy + y) * width + ox + x] >= args.threshold:
                     top, bottom = min(top, y), max(bottom, y)
                     left, right = min(left, x), max(right, x)
-    if bottom - top + 1 > cell_h or right - left + 1 > args.cell:
-        raise SystemExit(f"字模超出 {args.cell}x{cell_h}："
-                         f"高 {bottom - top + 1}、寬 {right - left + 1}")
+    # 每個字模自己的墨水邊界。全域位移讓基線一致，但個別字模若因此超出字格，
+    # 就單獨把它的水平位移夾回來——只影響那幾個字，其餘維持原樣。
+    extents = []
+    for index in range(len(chars)):
+        ox = (index % args.columns) * CELL_PITCH + DRAW_MARGIN
+        oy = (index // args.columns) * CELL_PITCH + DRAW_MARGIN
+        t, b, l, r = height, 0, width, 0
+        for y in range(-DRAW_MARGIN, CELL_PITCH - DRAW_MARGIN):
+            for x in range(-DRAW_MARGIN, CELL_PITCH - DRAW_MARGIN):
+                if grey[(oy + y) * width + ox + x] >= args.threshold:
+                    t, b = min(t, y), max(b, y)
+                    l, r = min(l, x), max(r, x)
+        extents.append((t, b, l, r) if b >= t else None)
+
+    oversize = [(chars[i], e) for i, e in enumerate(extents)
+                if e and (e[1] - e[0] + 1 > cell_h or e[3] - e[2] + 1 > args.cell)]
+    if oversize:
+        raise SystemExit(
+            f"有字模本身就超出 {args.cell}x{cell_h}，只能改小 --size 或加大字格：\n"
+            + "\n".join(f"  {c}：高 {e[1] - e[0] + 1}、寬 {e[3] - e[2] + 1}"
+                        for c, e in oversize[:8]))
+    if bottom - top + 1 > cell_h:
+        raise SystemExit(f"字模共同高度 {bottom - top + 1} 超出 {cell_h}，"
+                         f"基線位移無法逐字調整")
+
     yoff, xoff = top, left
+
+    def glyph_xoff(index: int) -> int:
+        """全域水平位移；字模因此超出字格時夾回剛好裝得下的位置。"""
+        e = extents[index]
+        if e is None:
+            return xoff
+        return min(max(xoff, e[3] - args.cell + 1), e[2])
+
+    clamped = [chars[i] for i in range(len(chars)) if glyph_xoff(i) != xoff]
 
     cell = args.cell
     columns = args.columns
@@ -202,7 +233,7 @@ def main() -> int:
     pixels = bytearray(sheet_w * sheet_h * 4)
     glyphs = []
     for index, ch in enumerate(chars):
-        ox = (index % columns) * CELL_PITCH + DRAW_MARGIN + xoff
+        ox = (index % columns) * CELL_PITCH + DRAW_MARGIN + glyph_xoff(index)
         oy = (index // columns) * CELL_PITCH + DRAW_MARGIN + yoff
         cx = (index % columns) * cell
         cy = (index // columns) * cell_h
@@ -243,7 +274,8 @@ def main() -> int:
                    "derived": "本表是指定字元在固定大小下的點陣化結果"},
         "bake": {"family": args.family, "size": args.size, "threshold": args.threshold,
                  "cell_pitch": CELL_PITCH, "draw_margin": DRAW_MARGIN,
-                 "vertical_offset": yoff, "horizontal_offset": xoff},
+                 "vertical_offset": yoff, "horizontal_offset": xoff,
+                 "horizontally_clamped_glyphs": clamped},
         "fonts": [{
             "name": args.name, "file": sheet.name,
             "advance": cell, "cell": {"width": cell, "height": cell_h},

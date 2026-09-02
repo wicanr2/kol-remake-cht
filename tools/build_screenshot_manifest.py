@@ -36,6 +36,9 @@ PARITY_TWINS = {
     "docs/screenshots/en-town-inn-party2.png":
         ("docs/verification/remake-parity/shots/town-inn/recruited.png",
          "docs/verification/remake-parity/town-inn.json"),
+    "docs/screenshots/en-town-outdoor.png":
+        ("docs/verification/remake-parity/shots/town-outdoor/sample.png",
+         "docs/verification/remake-parity/town-outdoor.json"),
     "docs/screenshots/en-book-harbor.png":
         ("docs/verification/remake-parity/shots/harbor.png",
          "docs/verification/remake-parity/harbor.json"),

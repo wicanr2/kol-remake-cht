@@ -321,6 +321,9 @@ func (g *game) render() error {
 		}
 		return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.inn)
 	case sceneOutdoor:
+		if g.strings != nil {
+			return ui.OutdoorCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.outdoor)
+		}
 		return ui.Outdoor(g.canvas.Image(), g.sprites, g.small, g.outdoor)
 	case sceneHarbor:
 		if g.strings != nil {
@@ -668,6 +671,7 @@ func main() {
 			"schema": "kol-cjk-layout-v1", "scale": book.CJKScale,
 			"cell": book.CJKCell, "layout": book.CJKLayout, "text_box": book.CJKTextBox,
 			"confirm": book.CJKConfirm, "town_inn": town.CJKInn,
+			"town_outdoor": town.CJKOutdoor,
 		}, "", "  ")
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)

@@ -74,7 +74,8 @@ tools/run_kol_headless.sh -lang zh-Hant -delete-script "DOWN RET y" \
 
 `shots/` 是名字→種族→性別→職業→擲屬性→圖像層的中文畫面，加上角色選項頁
 （`menu.png`）、角色清單頁（`roster.png`）、刪除流程（`delete/`）、HARBOR MASTER
-訊息頁（`harbor.png`）與旅店畫面（`inn.png`、`inn-recruited.png`），供版面審閱。
+訊息頁（`harbor.png`）、旅店畫面（`inn.png`、`inn-recruited.png`）與戶外地圖
+（`outdoor.png`），供版面審閱。
 刪除確認視窗在中文模式是原版視窗放大兩倍再加高，讓兩行 16×16 中文字上下各留 8 px；
 文字安全矩形就是視窗自己的內緣，一併進 `text-fit.json` 檢查。
 
@@ -82,6 +83,6 @@ tools/run_kol_headless.sh -lang zh-Hant -delete-script "DOWN RET y" \
 
 - 不宣稱中文版面與原版對拍。原版沒有中文畫面，這個模式的版面是 remake 自訂的。
 - 不宣稱譯文已定稿。多數職業名是暫譯，仍要由說明書其他段落或原版畫面交叉確認。
-- 不宣稱其他畫面已中文化。目前是 New Character 頁、角色選項頁與角色清單頁；
-  城鎮、世界、戰鬥的畫面本身都還沒實作。
+- 不宣稱其他畫面已中文化。目前是 New Character 頁、角色選項頁、角色清單頁、
+  旅店與戶外地圖；世界地圖與戰鬥的畫面本身都還沒實作。
 - 角色名字與所在地是原版資料，維持原文不譯。

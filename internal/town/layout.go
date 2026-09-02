@@ -100,3 +100,30 @@ var CJKInn = struct {
 	IconX: 64, IconY: 340, IconStep: 64, IconW: 48, IconH: 44,
 	Scale: 2,
 }
+
+// CJKOutdoor 是戶外畫面的中文模式版面，與 CJKInn 一樣是 remake 自訂的，不對拍：
+// 位置大致是英文版面的兩倍，日期框改放兩行 16 px 中文字因此加高。
+var CJKOutdoor = struct {
+	PartyX, PartyY, PartyStep, PartyWidth int
+	PortraitBoxHeight, PlateHeight        int
+	PortraitX, PortraitY, NameX, NameY    int
+	DateX, DateY, DateW, DateH            int
+	DateTextX, DateTextY, DateStep        int
+	CrestX, CrestY                        int
+	MapX, MapY, MapW, MapH                int
+	ViewX, ViewY, Tile                    int
+	IconX, IconY, IconStep, IconW, IconH  int
+	Scale                                 int
+}{
+	PartyX: 28, PartyY: 2, PartyStep: 96, PartyWidth: 86,
+	PortraitBoxHeight: 80, PlateHeight: 18,
+	PortraitX: 32, PortraitY: 4, NameX: 32, NameY: 84,
+	DateX: 28, DateY: 114, DateW: 134, DateH: 44,
+	DateTextX: 34, DateTextY: 118, DateStep: 20,
+	CrestX: 48, CrestY: 170,
+	MapX: 206, MapY: 114, MapW: 388, MapH: 196,
+	ViewX: 208, ViewY: 116, Tile: 32,
+	IconX: 64, IconY: 340, IconStep: 64, IconW: 48, IconH: 44,
+	Scale: 2,
+}
+

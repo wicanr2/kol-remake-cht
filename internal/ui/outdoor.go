@@ -123,3 +123,100 @@ func drawPartyMarker(dst *ebiten.Image, out *town.Outdoor) {
 		}
 	}
 }
+
+// OutdoorCJK 畫出中文模式的戶外畫面。版面是 remake 自訂的（`town.CJKOutdoor`），
+// 素材以最近鄰放大兩倍，日期改用中文字模。這個模式不對拍。
+func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
+	out *town.Outdoor) error {
+	l := town.CJKOutdoor
+	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
+	if err != nil {
+		return err
+	}
+	drawScaled(dst, bg, 0, 0, l.Scale)
+
+	for i, m := range out.Party {
+		x := l.PartyX + i*l.PartyStep
+		c := town.ColourIdle
+		if m.Speaker {
+			c = town.ColourSelected
+		}
+		h := l.PortraitBoxHeight + l.PlateHeight - 1
+		fill(dst, x, l.PartyY, l.PartyWidth, h, town.ColourBoxFill)
+		frame(dst, x, l.PartyY, l.PartyWidth, l.PortraitBoxHeight, c)
+		frame(dst, x, l.PartyY+l.PortraitBoxHeight-1, l.PartyWidth, l.PlateHeight, c)
+		portrait, err := sprites.Get("CHARPICS", m.Portrait)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, portrait, l.PortraitX+i*l.PartyStep, l.PortraitY, l.Scale)
+		f.Draw(dst, l.NameX+i*l.PartyStep, l.NameY, m.PlateName(),
+			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+	}
+
+	fill(dst, l.DateX, l.DateY, l.DateW, l.DateH, town.ColourBoxEdge)
+	fill(dst, l.DateX+1, l.DateY+1, l.DateW-2, l.DateH-2, town.ColourBoxFill)
+	lines := out.DateZh
+	if len(lines) == 0 {
+		lines = out.Date
+	}
+	for i, line := range lines {
+		f.Draw(dst, l.DateTextX, l.DateTextY+i*l.DateStep, t.T(line),
+			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+	}
+
+	crest, err := sprites.Get(out.CrestArchive(), town.Crest.Index)
+	if err != nil {
+		return err
+	}
+	drawScaled(dst, crest, l.CrestX, l.CrestY, l.Scale)
+
+	fill(dst, l.MapX, l.MapY, l.MapW, l.MapH, town.ColourBoxEdge)
+	atlas, err := sprites.Get(out.Archive(), town.TileAtlas.Index)
+	if err != nil {
+		return err
+	}
+	a := town.TileAtlas
+	for row, line := range out.View() {
+		for col, tile := range line {
+			sx := (tile % a.Columns) * a.Side
+			sy := (tile / a.Columns) * a.Side
+			src := atlas.SubImage(image.Rect(sx, sy, sx+a.Side, sy+a.Side)).(*ebiten.Image)
+			drawScaled(dst, src, l.ViewX+col*l.Tile, l.ViewY+row*l.Tile, l.Scale)
+		}
+	}
+	if overlay := out.MarkerOverlay(); overlay != nil {
+		row, col := out.MarkerCell()
+		x0 := l.ViewX + col*l.Tile
+		y0 := l.ViewY + row*l.Tile
+		for y := 0; y < town.MarkerSide; y++ {
+			for x := 0; x < town.MarkerSide; x++ {
+				c := overlay[y*town.MarkerSide+x]
+				if c.A == 0 {
+					continue
+				}
+				for dy := 0; dy < l.Scale; dy++ {
+					for dx := 0; dx < l.Scale; dx++ {
+						dst.Set(x0+x*l.Scale+dx, y0+y*l.Scale+dy, c)
+					}
+				}
+			}
+		}
+	}
+
+	for i, index := range out.Icons {
+		x := l.IconX + i*l.IconStep
+		icon, err := sprites.Get("KOLMPICS", index)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, icon, x, l.IconY+l.Scale, l.Scale)
+		c := town.ColourIdle
+		if i == out.Selected {
+			c = town.ColourSelected
+		}
+		frame(dst, x, l.IconY, l.IconW, l.IconH, c)
+	}
+	return nil
+}
+
