@@ -1,5 +1,7 @@
 package town
 
+import "strings"
+
 // Session 是城鎮這一段的可玩狀態機：戶外走動 → 站到門口 → 進建築 → 出來。
 // 它只描述狀態轉移，不碰繪製也不碰輸入裝置，因此可以單獨測試與重播。
 
@@ -260,12 +262,34 @@ func (s *Session) greeting() []string {
 		}
 	}
 	lines := s.message(index)
-	if s.UIText != nil {
-		if ask := s.UIText.Record(BankUI, GreetingRecord); ask != "" {
-			lines = append(lines, ask)
-		}
+	if ask := s.uiRecord(GreetingRecord); ask != "" {
+		lines = append(lines, ask)
 	}
 	return lines
+}
+
+// uiRecord 取 UI 文字庫的一筆記錄，中文模式優先用譯文。
+func (s *Session) uiRecord(index int) string {
+	if zh := s.Trans.UIRecord(index); zh != "" {
+		return zh
+	}
+	if s.UIText == nil {
+		return ""
+	}
+	return s.UIText.Record(BankUI, index)
+}
+
+// heard 組出 MOUTH 沒對上時的那一句，逐段都走譯文優先。
+func (s *Session) heard(who string, category int) string {
+	parts := []string{s.uiRecord(HeardPrefix), who,
+		s.uiRecord(HeardMiddle), s.uiRecord(HeardObject + category)}
+	var out []string
+	for _, p := range parts {
+		if p = strings.TrimSpace(p); p != "" {
+			out = append(out, p)
+		}
+	}
+	return strings.Join(out, " ")
 }
 
 // say 顯示一段話並把圖示列縮成一格 SPACEBAR；next 是按空白鍵之後才出現的下一段。
@@ -287,9 +311,16 @@ func (s *Session) setInsideIcons(ids []int) {
 	s.Cursor = 0
 }
 
-// message 取一則建築訊息的畫面文字。
+// message 取一則建築訊息的畫面文字。中文模式優先用譯文，沒有譯文就退回原文，
+// 畫面因此不會出現空白。
 func (s *Session) message(index int) []string {
-	if s.Text == nil || s.door == nil {
+	if s.door == nil {
+		return nil
+	}
+	if zh := s.Trans.Message(s.Outdoor.Town, s.door.Index, index); len(zh) > 0 {
+		return zh
+	}
+	if s.Text == nil {
 		return nil
 	}
 	b := s.Text.Building(s.Outdoor.Town, s.door.Index)
@@ -324,10 +355,8 @@ func (s *Session) Listen() bool {
 		if slot != nil && slot.Topic == 0 && !s.told[n] {
 			s.told[n] = true
 			lines := s.message(AskMessage)
-			if s.UIText != nil {
-				if lead := s.UIText.Record(BankUI, ListenLeadInBase+slot.Category); lead != "" {
-					lines = append(lines, lead)
-				}
+			if lead := s.uiRecord(ListenLeadInBase + slot.Category); lead != "" {
+				lines = append(lines, lead)
 			}
 			s.say(lines, s.message(TopicMessageBase+n))
 			return true
@@ -337,9 +366,9 @@ func (s *Session) Listen() bool {
 			break
 		}
 	}
-	if s.UIText != nil {
-		s.say(append(s.message(AskMessage), s.UIText.Record(BankUI, ListenExhaustedAsk)),
-			[]string{s.UIText.Record(BankUI, ListenExhaustedReply)})
+	if ask := s.uiRecord(ListenExhaustedAsk); ask != "" {
+		s.say(append(s.message(AskMessage), ask),
+			[]string{s.uiRecord(ListenExhaustedReply)})
 	}
 	return false
 }
@@ -365,7 +394,7 @@ func (s *Session) Ask(question string) bool {
 		}
 	}
 	if who := s.Topics.AskWho(town, key.Topic); who != "" && s.UIText != nil {
-		s.say(ask, []string{s.UIText.Heard(who, key.Category)})
+		s.say(ask, []string{s.heard(who, key.Category)})
 		return true
 	}
 	s.say(ask, s.message(UnknownMessage))

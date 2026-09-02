@@ -1,0 +1,39 @@
+{
+  "schema": "kol-town-outdoor-sample-v1",
+  "note": "布雷特爾（TOWN1）的戶外樣本，只作中文畫面示範：鏡頭放在巨魔剋星旅店的門座標 (50,42)，隊伍狀態沿用 town-outdoor-sample。這份不是對拍輸入——原版沒有這個狀態的畫格。",
+  "source_frame": "docs/verification/character-ui/town-icon-bar-run1/frames/frame-077.png",
+  "town": 1,
+  "party": [
+    {
+      "portrait": 47,
+      "name": "Theodoric",
+      "speaker": false
+    }
+  ],
+  "camera": {
+    "x": 50,
+    "y": 42
+  },
+  "bounds": {
+    "minX": 0,
+    "maxX": 63,
+    "minY": 0,
+    "maxY": 63
+  },
+  "date": [
+    " Apr 1",
+    "AD  1100"
+  ],
+  "date_zh": [
+    "四月一日",
+    "西元 1100"
+  ],
+  "icons": [
+    5
+  ],
+  "selected": 0,
+  "marker": {
+    "base": 0,
+    "frame": 1
+  }
+}

@@ -36,3 +36,5 @@ docs/screenshots/zh-town-inn-party2.png|-lang|zh-Hant|-scene|inn|-inn|docs/re/to
 docs/screenshots/zh-town-brettle-inn.png|-lang|zh-Hant|-scene|building|-building-town|1|-building-door|1|-shot|docs/screenshots/zh-town-brettle-inn.png
 docs/screenshots/zh-town-olanth-bakery.png|-lang|zh-Hant|-scene|building|-building-town|6|-building-door|11|-shot|docs/screenshots/zh-town-olanth-bakery.png
 docs/screenshots/en-town-edge.png|-scene|outdoor|-outdoor-camera|58,0|-outdoor-marker|0,1|-outdoor-frame|3|-outdoor-at-edge|-outdoor-icons|5,18|-shot|docs/screenshots/en-town-edge.png
+docs/screenshots/zh-town-listen-ask.png|-lang|zh-Hant|-scene|play|-outdoor|docs/re/town1-outdoor-sample.json|-play-script|L R RET SPACE LISTEN|-shot|docs/screenshots/zh-town-listen-ask.png
+docs/screenshots/zh-town-listen-answer.png|-lang|zh-Hant|-scene|play|-outdoor|docs/re/town1-outdoor-sample.json|-play-script|L R RET SPACE LISTEN SPACE|-shot|docs/screenshots/zh-town-listen-answer.png

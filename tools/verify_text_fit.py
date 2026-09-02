@@ -150,20 +150,27 @@ def main() -> int:
                                    "missing_glyphs": missing,
                                    "pass": x + w <= limit and not missing})
                 lines = entry.get("entry", [])
-                for line in lines:
-                    w, missing = width(line)
-                    checks.append({"kind": "town-entry", "en": label, "zh": line,
-                                   "x": inn["DialogTextX"], "width": w,
-                                   "right_limit": dialog_right,
-                                   "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
-                                   "missing_glyphs": missing,
-                                   "pass": inn["DialogTextX"] + w <= dialog_right
-                                           and not missing})
-                if lines:
-                    bottom = (inn["DialogTextY"] + (len(lines) - 1) * inn["DialogStep"]
+                # 建築內對話的譯文與進門敘述共用同一個對話框，規則相同。
+                groups = [("town-entry", label, lines)]
+                for index, msg in sorted(entry.get("messages", {}).items(),
+                                         key=lambda kv: int(kv[0])):
+                    groups.append(("town-message", f"{label} 訊息{index}", msg))
+                for kind, tag, group in groups:
+                    for line in group:
+                        w, missing = width(line)
+                        checks.append({"kind": kind, "en": tag, "zh": line,
+                                       "x": inn["DialogTextX"], "width": w,
+                                       "right_limit": dialog_right,
+                                       "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
+                                       "missing_glyphs": missing,
+                                       "pass": inn["DialogTextX"] + w <= dialog_right
+                                               and not missing})
+                    if not group:
+                        continue
+                    bottom = (inn["DialogTextY"] + (len(group) - 1) * inn["DialogStep"]
                               + font["cell"]["height"])
                     limit_y = inn["DialogY"] + inn["DialogH"] - 1
-                    checks.append({"kind": "vertical", "en": f"{label} 敘述行數",
+                    checks.append({"kind": "vertical", "en": f"{tag} 行數",
                                    "zh": "", "x": 0, "width": bottom,
                                    "right_limit": limit_y,
                                    "overflow": max(0, bottom - limit_y),

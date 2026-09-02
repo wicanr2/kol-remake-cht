@@ -6,19 +6,19 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "42137cd836ac79faabf16091b90260a2c0fa880c"
+    "commit": "372bdf46937e5457586f12341b6b8c2c7385fec9"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
     "fonts_manifest_sha256": "5db3baecce7a0ca28559688f08f98b7c0648765bbf82348de8c490243079f393",
-    "ui_font_manifest_sha256": "afeaee0806deab174196b31287e64cf9456411c7e20efee22c94d900bff86105"
+    "ui_font_manifest_sha256": "4b3dab40519e95a1d8ca4d15b1a786b045b09e8e293b7ecd4d144f684e7f6808"
   },
   "rights": {
     "classification": "private-repo 可保存；不得公開散布",
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 31,
+  "count": 33,
   "failed": 0,
   "screenshots": [
     {
@@ -322,7 +322,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 15,
-      "sha256": "3338d223fd7b758757d34d8e44a6272ea23eb9074dcd0f22510092e49fcd2298",
+      "sha256": "211328f9d5ba8ab42950cd4cec400ee192bbfa1dd05b9f2c8b300a85d77f4c6f",
       "pass": true
     },
     {
@@ -356,6 +356,26 @@
       "parity_twin": "docs/verification/remake-parity/shots/town-edge/gate.png",
       "parity_receipt": "docs/verification/remake-parity/town-edge.json",
       "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-listen-ask.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene play -outdoor docs/re/town1-outdoor-sample.json -play-script L R RET SPACE LISTEN -shot docs/screenshots/zh-town-listen-ask.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 13,
+      "sha256": "07f3a3e0f2ca07745d261353f10053c80b24f3eaca408872f64ae1b97e7b9a48",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-listen-answer.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene play -outdoor docs/re/town1-outdoor-sample.json -play-script L R RET SPACE LISTEN SPACE -shot docs/screenshots/zh-town-listen-answer.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 13,
+      "sha256": "b6d8dc37f3a56b37653d1fb3e2d9f5452af6cce748aadf2565034c3fdc6b1119",
       "pass": true
     }
   ]

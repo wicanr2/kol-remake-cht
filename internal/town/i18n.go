@@ -11,11 +11,13 @@ import (
 // 城鎮建築的譯文與斷行。原文的斷行是原版 24 欄的結果，中文模式一行只有 22 個
 // 16×18 字格，因此譯文自己帶斷行，不在執行期做斷字。
 
-// DoorTranslation 是一個門的譯文。
+// DoorTranslation 是一個門的譯文。Messages 以訊息編號為鍵，放建築內對話的譯文；
+// 進門敘述（訊息 0 與 1）合起來放在 Entry，不重複放進 Messages。
 type DoorTranslation struct {
-	Name   string   `json:"name"`
-	Person string   `json:"person"`
-	Entry  []string `json:"entry"`
+	Name     string              `json:"name"`
+	Person   string              `json:"person"`
+	Entry    []string            `json:"entry"`
+	Messages map[string][]string `json:"messages"`
 }
 
 type townTranslation struct {
@@ -28,6 +30,8 @@ type Translations struct {
 	Schema string                     `json:"schema"`
 	Status string                     `json:"status"`
 	Towns  map[string]townTranslation `json:"towns"`
+	// UI 是 KOLDATA 文字庫的譯文，以記錄號為鍵。
+	UI map[string]string `json:"ui"`
 }
 
 // LoadTranslations 讀取譯文表。找不到檔案不是錯誤——沒有譯文就顯示原文。
@@ -63,6 +67,23 @@ func (t *Translations) Door(town, door int) *DoorTranslation {
 		return nil
 	}
 	return &d
+}
+
+// Message 回傳指定城鎮、指定門、指定編號的訊息譯文；沒有就回 nil。
+func (t *Translations) Message(town, door, index int) []string {
+	d := t.Door(town, door)
+	if d == nil || d.Messages == nil {
+		return nil
+	}
+	return d.Messages[strconv.Itoa(index)]
+}
+
+// UIRecord 回傳 UI 文字庫某一筆記錄的譯文；沒有就回空字串。
+func (t *Translations) UIRecord(index int) string {
+	if t == nil || t.UI == nil {
+		return ""
+	}
+	return t.UI[strconv.Itoa(index)]
 }
 
 // TownName 回傳城鎮的譯名；沒有就回空字串。
