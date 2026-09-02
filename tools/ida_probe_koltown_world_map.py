@@ -26,8 +26,8 @@ EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d
 DGROUP_EA = 0x2DED0
 
 # 完整倒出的函式：城鎮主迴圈與疑似換圖路徑。
-DUMP_FUNCTIONS = (0x29CA3, 0x2A0C6, 0x2A39B, 0x297F2, 0x29BBB)
-DUMP_LIMIT = 6000
+DUMP_FUNCTIONS = (0x1B94F,)
+DUMP_LIMIT = 20000
 
 GLOBALS = {
     "camera_x_word_2FB50": 0x2FB50,
@@ -54,6 +54,28 @@ TOWN_FORMAT_OFFSETS = {0x168C, 0x16C8, 0x1794, 0x1808}
 def disassembly(ea: int) -> str:
     rendered = ida_lines.tag_remove(idc.generate_disasm_line(ea, 0) or "")
     return rendered.split(" ;", 1)[0].rstrip()
+
+
+def call_sites(target: int, window: int = 14) -> list[dict]:
+    """列出所有呼叫點，並附上呼叫前 window 條指令——引數是 push 上去的。"""
+    out = []
+    for ea in idautils.CodeRefsTo(target, False):
+        fn = ida_funcs.get_func(ea)
+        if fn is None:
+            continue
+        items = list(idautils.FuncItems(fn.start_ea))
+        if ea not in items:
+            continue
+        i = items.index(ea)
+        lo = max(0, i - window)
+        out.append({
+            "call_ea": f"0x{ea:x}",
+            "function": f"0x{fn.start_ea:x}",
+            "context": [{"ea": f"0x{items[j]:x}",
+                         "disassembly": disassembly(items[j])}
+                        for j in range(lo, i + 1)],
+        })
+    return out
 
 
 def function_slice(start: int, limit: int = DUMP_LIMIT) -> dict:
@@ -139,6 +161,8 @@ def main() -> None:
         "address_space": "IDA linear effective address for reconstructed unpacked MZ",
         "note": "探索用輸出：城鎮主迴圈與換圖路徑的完整反組譯；尚未鎖定任何斷言。",
         "town_number_sources": town_number_sources(),
+        "message_draw_calls": call_sites(0x14234, 26),
+        "icon_push_calls": call_sites(0x11703, 8),
         "ffff_stores": ffff_stores(),
         "globals": {name: global_users(addr) for name, addr in GLOBALS.items()},
         "dumped_functions": [function_slice(ea) for ea in DUMP_FUNCTIONS],

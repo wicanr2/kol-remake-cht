@@ -242,6 +242,10 @@ func applyPlayToken(s *town.Session, token string) error {
 		s.MoveCursor(1)
 	case "RET":
 		s.Accept()
+	case "SPACE":
+		s.Continue()
+	case "LISTEN":
+		s.Listen()
 	default:
 		return fmt.Errorf("未知的城鎮操作 token：%q", token)
 	}
@@ -707,6 +711,10 @@ func main() {
 		"assets/original-derived-data/town-text.json", "城鎮文字 typed data")
 	buildingTown := flag.Int("building-town", 7, "建築內部畫面的城鎮編號")
 	buildingDoor := flag.Int("building-door", 5, "建築內部畫面的門序號")
+	topicsPath := flag.String("town-topics",
+		"assets/original-derived-data/town-keywords.json", "城鎮話題 typed data")
+	uiTextPath := flag.String("ui-text",
+		"assets/original-derived-data/ui-text.json", "UI 文字庫 typed data")
 	buildingsPath := flag.String("town-buildings",
 		"assets/original-derived-data/town-buildings.json", "城鎮建築 typed data")
 	flowScript := flag.String("flow-script", "",
@@ -1089,6 +1097,25 @@ func main() {
 			trans = nil
 		}
 		playSession = town.NewSession(state, info, texts, trans, state.Party)
+		topics, err := town.LoadTopics(*topicsPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		playSession.Topics = topics
+		bank, err := town.LoadUIText(*uiTextPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		playSession.UIText = bank
+		// LISTEN 的挑槽在截圖與玩家路徑裡必須可重播，因此用固定序列而不是真亂數。
+		listenPick := 0
+		playSession.Rand = func(n int) int {
+			v := listenPick % n
+			listenPick++
+			return v
+		}
 	}
 
 	var flowState *flow.Flow

@@ -325,6 +325,23 @@ SCENARIOS: dict[str, dict] = {
             step("按下該格圖示之後（觀察）", None, settle=4.0),
         ],
     },
+    "town-listen": {
+        "description": "在旅店按 SPACEBAR 讓圖示列出現，再把白框移到 LISTEN 連按幾次，"
+                       "觀察開場白與傳聞；最後移回 DOOR 離開。純觀察，不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店的 SPACEBAR 圖示列", "space", settle=3.5),
+            step("圖示列（DOOR／MIRROR／LISTEN／MOUTH／REST／COMPANION）", "greater", settle=2.0),
+            step("白框到 MIRROR", "greater", settle=2.0),
+            step("白框到 LISTEN", "Return", settle=4.0),
+            step("第一次 LISTEN", "Return", settle=4.0),
+            step("第二次 LISTEN", "Return", settle=4.0),
+            step("第三次 LISTEN", "Return", settle=4.0),
+            step("第四次 LISTEN", "Return", settle=4.0),
+            step("第五次 LISTEN", "Return", settle=4.0),
+            step("第六次 LISTEN", "Return", settle=4.0),
+            step("第七次 LISTEN（應該已經講完）", None, settle=4.0),
+        ],
+    },
     "town-outdoor-move": {
         "description": "由旅店按 DOOR 走到戶外地圖，再用方向鍵移動幾步並在圖示列上移動，"
                        "用來判斷地圖視窗是不是一張固定圖。純觀察，不進任何建築。",

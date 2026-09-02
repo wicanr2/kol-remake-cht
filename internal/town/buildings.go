@@ -28,6 +28,8 @@ type Door struct {
 	Person   string `json:"person"`
 	// TextMissing 記的是原版資料本身的缺口：TOWN7 的門 21 有圖與肖像，沒有文字。
 	TextMissing bool `json:"text_missing"`
+	// IconFlags 是建築 payload 位移 0x3C／0x3D 的兩個旗標 byte，決定內部圖示列。
+	IconFlags [2]int `json:"icon_flags"`
 }
 
 // TownBuildings 是一座城鎮的門、入城點與地形通行規則。
@@ -63,6 +65,7 @@ type rawDoor struct {
 	Name        string `json:"name"`
 	Person      string `json:"person"`
 	TextMissing bool   `json:"text_missing"`
+	IconFlags   []int  `json:"icon_flags"`
 }
 
 type rawTown struct {
@@ -105,11 +108,15 @@ func LoadBuildings(path string) (*Buildings, error) {
 				return nil, fmt.Errorf("城鎮 %d 的門 %d 座標 (%d, %d) 超出地圖",
 					t.Town, d.Index, d.X, d.Y)
 			}
-			town.Doors = append(town.Doors, Door{
+			door := Door{
 				Index: d.Index, X: d.X, Y: d.Y, Picture: d.Picture,
 				Portrait: d.Portrait, Name: d.Name, Person: d.Person,
 				TextMissing: d.TextMissing,
-			})
+			}
+			if len(d.IconFlags) == 2 {
+				door.IconFlags = [2]int{d.IconFlags[0], d.IconFlags[1]}
+			}
+			town.Doors = append(town.Doors, door)
 		}
 		out.Towns = append(out.Towns, town)
 	}

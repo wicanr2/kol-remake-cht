@@ -74,6 +74,19 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 
 檢查點：第 11 步與城門提示對拍截圖、第 12 步與白框在 U-TURN 的對拍截圖，都逐 byte 相同。
 
+## `town-talk`：跟店主說話
+
+`L R RET SPACE LISTEN SPACE SPACE LISTEN SPACE`，9 步。
+
+| 步 | 動作 |
+|---|---|
+| 1–3 | 走離門口再走回來，按 DOOR 進旅店 |
+| 4 | 讀完進門敘述按空白鍵：招呼語與六格圖示列 |
+| 5–6 | 按 LISTEN，再按空白鍵看傳聞 |
+| 7–9 | 再聽一則 |
+
+檢查點：第 4、5、6 步與已對拍的三張截圖逐 byte 相同。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
@@ -84,4 +97,5 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
   規則本身沒有從程式碼讀出來。
 - 走到地圖邊界會跳出城門提示（`town-edge.json` 這條路徑），但選 DOOR 之後的野外地圖
   還沒實作——目前只把「離開了城鎮」與離開的門記下來。
-- 建築內按圖示之後的多輪對話還沒接。
+- 建築內的 LISTEN 與 MOUTH 已接上（RE-067）；MIRROR、REST／SAVE／HEAL、
+  COMPANION、買賣與訓練還沒有。

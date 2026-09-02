@@ -1,0 +1,87 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-talk",
+  "description": "城鎮的正常玩家路徑：走離旅店門口再走回來、按 DOOR 進去、讀完進門敘述按空白鍵聽招呼語、按兩次 LISTEN 聽傳聞。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。LISTEN 的挑槽用固定序列，因此可重生。",
+  "script": "L R RET SPACE LISTEN SPACE SPACE LISTEN SPACE",
+  "step_count": 10,
+  "checkpoints": [
+    {
+      "step": 4,
+      "identical_to": "docs/verification/remake-parity/shots/town-listen/greeting.png",
+      "note": "招呼語與六格圖示列，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 5,
+      "identical_to": "docs/verification/remake-parity/shots/town-listen/listen-ask.png",
+      "note": "LISTEN 的第一段，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 6,
+      "identical_to": "docs/verification/remake-parity/shots/town-listen/listen-answer.png",
+      "note": "LISTEN 的第二段，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town-talk/step-000.png",
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930"
+    },
+    {
+      "step": 1,
+      "token": "L",
+      "file": "docs/verification/player-path/town-talk/step-001.png",
+      "sha256": "84c58fb2ed1f0757878c0fbfca44473b2b9bebd17e27213f605f404b44188763"
+    },
+    {
+      "step": 2,
+      "token": "R",
+      "file": "docs/verification/player-path/town-talk/step-002.png",
+      "sha256": "888644ba16402ec524386c6db1d1270e8cbc0335005d34d2326a7a4507966997"
+    },
+    {
+      "step": 3,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-talk/step-003.png",
+      "sha256": "9fdac495e8f9c6733b4d71514047240ef8eb7253e3347ff7b049642583bbf55f"
+    },
+    {
+      "step": 4,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-talk/step-004.png",
+      "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
+    },
+    {
+      "step": 5,
+      "token": "LISTEN",
+      "file": "docs/verification/player-path/town-talk/step-005.png",
+      "sha256": "0a2aa7a7792cca5f43d04c7ad4b912d3f7283b7280fe289840fae0b9f3efeecd"
+    },
+    {
+      "step": 6,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-talk/step-006.png",
+      "sha256": "5e55c51a32f3d477ed4f114a7629f96573d6767eea4962039e5e1e75b092adc5"
+    },
+    {
+      "step": 7,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-talk/step-007.png",
+      "sha256": "f271b48c6d1daa3348bafa0834e761412a0b5df45506107f7f74d492e4daea5c"
+    },
+    {
+      "step": 8,
+      "token": "LISTEN",
+      "file": "docs/verification/player-path/town-talk/step-008.png",
+      "sha256": "c0e3421a117cf1971664bb42116a10b5575414337ec4f2f51778a91a1179ec28"
+    },
+    {
+      "step": 9,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-talk/step-009.png",
+      "sha256": "155f42fc346fac57f21b0aa95ecff78111d3ff7fdda449eca8780430e662d668"
+    }
+  ]
+}

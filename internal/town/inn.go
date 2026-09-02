@@ -12,6 +12,12 @@ type Member struct {
 	Portrait int    `json:"portrait"`
 	Name     string `json:"name"`
 	Speaker  bool   `json:"speaker"`
+	// Female 與 Spellcaster 決定店主的招呼語（RE-067）：角色記錄位移 0x1A 是性別，
+	// 0x1A0 非零代表會法術，兩者一起選出訊息 10…13。
+	Female     bool `json:"female"`
+	Spellcaster bool `json:"spellcaster"`
+	// Renown 是聲望等第 0…3。非 0 時招呼語改成訊息 26 + 等第。
+	Renown int `json:"renown"`
 }
 
 // Inn 是旅店畫面的完整狀態。

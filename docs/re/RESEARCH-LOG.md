@@ -2095,3 +2095,132 @@ if word_2DF2C > 6:
 畫在視窗第 3 列第 5 欄那一格內、偏移 `次格座標 × 2` 像素——
 由 `town-leave-run1` 的畫格量到：按一次方向鍵，點只移動兩個像素，地圖不動。
 
+## RE-067：城鎮居民的話題系統——LISTEN 與 MOUTH 怎麼挑訊息
+
+RE-064 解出了文字怎麼存，但沒解出「哪一則什麼時候出現」。這一輪從
+`sub_11A93` 的圖示分派往下追，整套機制都出來了。
+
+### 圖示分派（`已證實`）
+
+`sub_11A93` 建築內迴圈的分派表（`0x13D06` 起）與 `sub_11703` 推進圖示列的
+編號對得上。圖示畫的是 `KOLMPICS[編號 + 3]`：
+
+| 編號 | KOLMPICS | 圖 | 跳往 |
+|---:|---:|---|---|
+| 1 | 4 | 手按鍵（SPACEBAR）| — |
+| 2 | 5 | 門（DOOR）| `0x13D64` 離開 |
+| 3 | 6 | 嘴（MOUTH）| `0x1223B` 輸入問題 |
+| 4 | 7 | 耳（LISTEN）| `0x1254E` 聽傳聞 |
+| 5 | 8 | 床（REST）| `0x1264E` |
+| 6 | 9 | 人（COMPANION）| `0x12903` |
+| 0x11 | 20 | 鏡（MIRROR）| `0x13CF6` → `sub_15ABF` 角色資料 |
+
+### 六個話題槽（`已證實`）
+
+每棟建築的 payload 位移 `0x17`…`0x1C` 是六個 byte：**低 6 bit 是話題碼、
+高 2 bit 是類別**。命中第 n 槽就顯示訊息 `20 + n`（`sub_14234(580h + n*40h, 0)`）。
+
+### LISTEN
+
+```
+sub_14234(500h, 0)                     ; 訊息 18：問話的敘述
+n = sub_1B5A8(6) - 1                   ; rand(6)：隨機挑一個起點
+if (payload[17h + n] & 3Fh) != 0: 換下一格   ; 有關鍵字的槽要用 MOUTH 問
+if [1AA4h + n] != 0: 換下一格          ; 這個槽已經講過
+[1AA4h + n]++
+sub_1A8FD(9Ah + (payload[17h + n] >> 6), KOLDATA)   ; 依類別選開場白
+sub_14234(580h + n*40h, 0)             ; 訊息 20 + n
+```
+
+找不到就 `n--`（繞回 5），回到起點還沒找到就講 KOLDATA 記錄 `0x2E`／`0x5B`
+（`"Any other gossip?"`／`"Not lately."`）。**LISTEN 只講話題碼為 0 的槽**——
+掛了關鍵字的槽要玩家用 MOUTH 問到那個字才會講。`0x1258C` 是 `jz` 才往下走，
+非零就換下一格；把這個條件讀反會讓 LISTEN 講出應該要問才有的內容。
+
+`[1AA4h + n]` 這六個旗標在進門時清零（`sub_11A93:0x11AB6`）。
+KOLDATA 記錄 `0x9A`…`0x9D` 是四句開場白：
+`"What do you know?"`、`"How are things?"`、`"Any news in town?"`、
+`"What news have you of the world?"`。
+
+### MOUTH
+
+```
+sub_14234(500h, 0)                     ; 訊息 18
+sub_1B5C8(2E3Ah, 17h)                  ; 讀入最多 23 個字元
+整串轉小寫
+for var_2 = 0; var_2 < 100h; var_2 += 4:
+    sub_1B94F(0D39Eh + var_2, 1)       ; 解出一個關鍵字（最多四個字元）
+    if 輸入的任何一個詞以這個關鍵字開頭:
+        碼 = [0D39Eh + var_2 + 3]
+        for n = 5 downto 0:
+            if (payload[17h + n] & 3Fh) == (碼 & 3Fh):
+                sub_14234(580h + n*40h, 0)     ; 訊息 20 + n
+                回主迴圈
+        who = [0D39Eh + 1C0h + (碼 & 3Fh)]
+        if who != 0FFh and 城號 != 7:
+            「I heard <who> talking about <that/them/him>.」
+sub_14234(540h, 0)                     ; 訊息 19：我什麼都不知道
+```
+
+比對是**字首比對**：關鍵字最多四個字元，玩家輸入以空白分詞後逐詞比對。
+
+### `sub_1B94F` 的 mode 1（`已證實`）
+
+RE-064 讀的是 mode 0。mode 1 不一樣，差別全在 `0x1B962` 起那幾行：
+
+| | mode 0 | mode 1 |
+|---|---|---|
+| 字數 | 第 0 個 byte 整個 | 第 0 個 byte 的**高 4 bit** |
+| 位元流起點 | 第 1 個 byte 的 MSB | **第 0 個 byte 的 bit 3** |
+| 跳脫狀態 | 關 | **開**（首字大寫）|
+
+### payload 20 的版面（`已證實`）
+
+`sub_10000:0x106C9` 把 `TOWNn.0` 的 payload 20 讀進 DGROUP 位移 `0xD39E`：
+
+| 位移 | 內容 |
+|---|---|
+| `0x000 + 4i` | 64 筆關鍵字：三個 byte 的 mode 1 字串 ＋ 一個碼 byte |
+| `0x100 + 8i` | 16 個人名，同樣是 mode 1 |
+| `0x1C0 + 話題碼` | 這個話題該去問誰（人名索引，`0xFF` ＝ 沒有人知道）|
+
+七座城共 305 個關鍵字，全部是四字元以內的字首，而且**按字典序排好**：
+`aklo`、`band`、`bron`、`butl`、`dark`、`duke`、`elro`、`elve`…
+人名解出來是 `benjamin`、`elmu`、`friar huxley`、`sir celegorn` 等，
+與門的人物名對得上。
+
+### 交叉檢查
+
+101 棟建築共 **409 個非空話題槽**：每一個的話題碼都在該城的關鍵字表裡找得到，
+而且每一個都有對應的訊息 `20 + 槽號`。**零例外。**
+
+抽取器 `tools/extract_town_keywords.py` → `assets/original-derived-data/town-keywords.json`；
+三份 UI 文字庫另由 `tools/extract_ui_text.py` 抽成 `ui-text.json`
+（KOLDATA 395、BOOKDATA 73、ENDTXT 18 筆）。
+
+### 招呼語（`已證實`）
+
+讀完進門敘述按空白鍵之後（`sub_11A93:0x12017`）：
+
+```
+tier = sub_14371() / 6                 ; 聲望
+if tier > 3: tier = 3
+if tier != 0:
+    sub_14234(700h + tier*40h, 1)      ; 訊息 26 + tier → 27／28／29
+else:
+    idx = [39A52 + 1Ah] << 7           ; 角色記錄位移 0x1A ＝ 性別
+    if [39A52 + 1A0h] != 0: idx += 40h ; 會法術
+    sub_14234(300h + idx, 1)           ; 訊息 10／11／12／13
+```
+
+也就是「男 ＝ 10、男法術 ＝ 11、女 ＝ 12、女法術 ＝ 13」；聲望不為零就整個換成
+訊息 26 ＋ 等第。後面接 KOLDATA 記錄 45 的 `"What can I do for you?"`。
+隊伍不只一人時另有訊息 16（`word_2DF2A != 1`）。
+**這一刻白框也回到隊員身上**——進門那一段說話的是建築裡的人，所以隊員外框是藍的。
+
+### 對拍
+
+原版情境 `town-listen`（DOSBox-X），三對逐畫面對拍全過，允許區只有滑鼠游標：
+招呼語與六格圖示列、LISTEN 的第一段（訊息 18 ＋ 開場白）、第二段（訊息 20）。
+圖示列在 `y = 150…200` 這一段**逐 byte 相同**，六個圖示的順序與白框位置都對上。
+

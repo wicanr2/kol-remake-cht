@@ -1,0 +1,36 @@
+{
+  "name": "town-listen",
+  "description": "建築內部的招呼語與 LISTEN 對原版對拍。讀完進門敘述按空白鍵之後，原版顯示由發言者性別與會不會法術選出的招呼語（訊息 10…13，聲望非零則改成訊息 26 + 等第），後面接 KOLDATA 記錄 45 的「What can I do for you?」，同時把白框還給隊員、圖示列展開成 DOOR／MIRROR／LISTEN／MOUTH／REST／COMPANION 六格（建築 payload 位移 0x3C 的旗標決定）。LISTEN 先顯示訊息 18 與依話題槽類別選出的開場白（KOLDATA 0x9A + 類別），按空白鍵才顯示訊息 20 + 槽號。LISTEN 只講沒有掛關鍵字的槽——有關鍵字的要用 MOUTH 問到（RE-067）。remake 的挑槽用固定序列而不是亂數，因此可重生。",
+  "input": {
+    "command": "tools/run_kol_headless.sh -scene play -shot-dir … -play-script \"L R RET SPACE LISTEN SPACE SPACE LISTEN SPACE\""
+  },
+  "pairs": [
+    {
+      "label": "招呼語＋六格圖示列（訊息 10 ＋ KOLDATA 45）",
+      "remake": "docs/verification/remake-parity/shots/town-listen/greeting.png",
+      "original": "docs/verification/character-ui/town-listen-run1/frames/frame-071.png",
+      "allow": [
+        { "name": "原版滑鼠游標", "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 156, "y": 98, "width": 20, "height": 18 }
+      ]
+    },
+    {
+      "label": "LISTEN 第一段：訊息 18 ＋ 開場白「How are things?」",
+      "remake": "docs/verification/remake-parity/shots/town-listen/listen-ask.png",
+      "original": "docs/verification/character-ui/town-listen-run1/frames/frame-074.png",
+      "allow": [
+        { "name": "原版滑鼠游標", "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 156, "y": 98, "width": 20, "height": 18 }
+      ]
+    },
+    {
+      "label": "LISTEN 第二段：訊息 20（第 0 槽的傳聞）",
+      "remake": "docs/verification/remake-parity/shots/town-listen/listen-answer.png",
+      "original": "docs/verification/character-ui/town-listen-run1/frames/frame-075.png",
+      "allow": [
+        { "name": "原版滑鼠游標", "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 156, "y": 98, "width": 20, "height": 18 }
+      ]
+    }
+  ]
+}

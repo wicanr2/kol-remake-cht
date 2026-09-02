@@ -56,8 +56,9 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `town-outdoor.json`（戶外地圖與門口，對 `town-outdoor-move-run1`／`town-icon-bar-run1`／`town-enter-building-run1`） | 22 | 22 |
 | `town-building.json`（建築進門，對 `town-enter-building-run1`） | 1 | 1 |
 | `town-edge.json`（地圖邊界的城門提示，對 `town-map-edge-run1`） | 4 | 4 |
+| `town-listen.json`（招呼語與 LISTEN，對 `town-listen-run1`） | 3 | 3 |
 
-十三份收據 207 對畫面，允許差異區之外都是**零像素差**。
+十四份收據 210 對畫面，允許差異區之外都是**零像素差**。
 
 | 對拍項目 | 允許差異區實際差異 | 結果 |
 |---|---|---|
@@ -189,5 +190,5 @@ BIOS tick。remake 依同一張表重播。
 - 動畫已對拍：翻書動畫見上表，TITLE 標題序列見 `../title-sequence/`。尚未對拍的是
   戰鬥與野外地圖的動畫，那些畫面還沒實作——在城門選 DOOR 之後會走到野外地圖，
   remake 目前只把那件事記下來。
-- 這十三份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
+- 這十四份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
   原版沒有中文畫面，因此不對拍；見 `../cjk-ui/`。

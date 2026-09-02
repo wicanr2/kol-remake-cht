@@ -37,6 +37,9 @@ GRID_SIDE = 64
 # payload 3 的前 32 個 byte 是「磚塊編號 → 不可通行」的位元圖，一個 bit 一個磚塊。
 # `sub_10000:0x1082D` 查的是 `payload3[tile >> 3] & (1 << (tile & 7))`（RE-065）。
 BLOCK_BITMAP_BYTES = 32
+# 建築 payload 的位移 0x3C／0x3D 是圖示列的旗標（`byte_2FC00`／`byte_2FC01`）。
+# `sub_11A93:0x120B8` 起逐位元決定要推哪些圖示（RE-067）。
+ICON_FLAGS = 0x3C
 
 
 def blocked_tiles(table: bytes) -> list[int]:
@@ -87,6 +90,7 @@ def main() -> int:
                         "picture": 2 * i + 3, "portrait": 2 * i + 2}
                 if index < contract["count"]:
                     body = lzw_decode(parts[index])
+                    door["icon_flags"] = [body[ICON_FLAGS], body[ICON_FLAGS + 1]]
                     name, ok_name = pascal_high_bit(body, NAME_OFFSET)
                     person, ok_person = pascal_high_bit(body, PERSON_OFFSET)
                     if not (ok_name and ok_person):
@@ -124,6 +128,10 @@ def main() -> int:
             "doors": f"payload{DOOR_TABLE_PAYLOAD}[0x{DOOR_OFFSET:02X} + 2i]",
             "blocked": f"payload{DOOR_TABLE_PAYLOAD}[0x00…0x1F]：磚塊編號的不可通行位元圖，"
                        "查 `bitmap[tile >> 3] & (1 << (tile & 7))`",
+            "icon_flags": f"建築 payload[0x{ICON_FLAGS:02X}／0x{ICON_FLAGS + 1:02X}]："
+                          "圖示列旗標；bit0 或 flags[1] 的 bit2 給 LISTEN＋MOUTH、"
+                          "bit1/4/5 給買賣、bit2 給 id 11、bit3 給 REST＋COMPANION、"
+                          "bit6 給 REST",
             "picture": "TWN{n}PICS[2i+3]，192×96，畫在地圖視窗 (104,58)",
             "portrait": "TWN{n}PICS[2i+2]，88×64，畫在 (8,64)",
             "text": "TOWNn.0 payload i+4（索引 ≥ 0x14 再加 1）；名稱在 0、人物在 29，"
