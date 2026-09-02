@@ -53,7 +53,13 @@
 ## 產生方式
 
 ```
-python3 tools/build_cjk_font.py --strings docs/i18n/newchar-zh-Hant.json \
+tools/run_cjk_font_build.sh --strings docs/i18n/newchar-zh-Hant.json \
+    --extra-json docs/i18n/newchar-zh-Hant.json \
+    --extra-json docs/i18n/town-zh-Hant.json \
+    --extra-json docs/re/town1-outdoor-sample.json \
+    --extra-json docs/re/town-outdoor-sample.json \
+    --extra-json docs/re/town-inn-sample.json \
+    --extra-json docs/re/town-inn-sample-recruited.json \
     --out assets/ui-font --name zh-hant-16 --family "Noto Sans CJK TC" \
     --size 15 --cell 16 --cell-height 18
 tools/run_kol_headless.sh -dump-cjk-layout workplace/cjk-layout.json
@@ -68,9 +74,11 @@ tools/run_kol_headless.sh -lang zh-Hant -delete-script "DOWN RET y" \
 ```
 
 字模表的烘焙要用 `tools/run_cjk_font_build.sh`（有界容器＋主機字型目錄唯讀掛載）；
-新增中文字串之後要重烘，否則新字沒有字模會被畫成空白。**譯文不只住在字串表**：
-城鎮畫面的對拍樣本自帶預先斷行的中文台詞，因此烘焙要一併帶 `--extra-json`
-指向那些樣本。
+新增中文字串之後要重烘，否則新字沒有字模會被畫成空白。
+
+**上面那串 `--extra-json` 是字模表的完整輸入，少一個就會掉字**：`--strings` 只讀
+字串表的五個鍵，而中文台詞還住在譯文表與四份畫面樣本裡。重烘之後先比對新舊
+manifest 的碼位集合，確認**沒有任何字消失**，再重跑截圖與 `verify_text_fit.py`。
 
 `shots/` 是名字→種族→性別→職業→擲屬性→圖像層的中文畫面，加上角色選項頁
 （`menu.png`）、角色清單頁（`roster.png`）、刪除流程（`delete/`）、HARBOR MASTER

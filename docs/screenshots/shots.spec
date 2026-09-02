@@ -39,3 +39,6 @@ docs/screenshots/en-town-edge.png|-scene|outdoor|-outdoor-camera|58,0|-outdoor-m
 docs/screenshots/zh-town-listen-ask.png|-lang|zh-Hant|-scene|play|-outdoor|docs/re/town1-outdoor-sample.json|-play-script|L R RET SPACE LISTEN|-shot|docs/screenshots/zh-town-listen-ask.png
 docs/screenshots/zh-town-listen-answer.png|-lang|zh-Hant|-scene|play|-outdoor|docs/re/town1-outdoor-sample.json|-play-script|L R RET SPACE LISTEN SPACE|-shot|docs/screenshots/zh-town-listen-answer.png
 docs/screenshots/en-world-map.png|-scene|world|-shot|docs/screenshots/en-world-map.png
+docs/screenshots/en-world-town.png|-scene|play|-play-script|R R U U U U U U U U U RET R R R R R L|-shot|docs/screenshots/en-world-town.png
+docs/screenshots/zh-world-map.png|-lang|zh-Hant|-scene|world|-shot|docs/screenshots/zh-world-map.png
+docs/screenshots/zh-world-town.png|-lang|zh-Hant|-scene|play|-play-script|R R U U U U U U U U U RET R R R R R L|-shot|docs/screenshots/zh-world-town.png

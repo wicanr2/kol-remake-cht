@@ -448,6 +448,10 @@ func (g *game) render() error {
 		return g.renderFlow()
 	case scenePlay:
 		if g.play.LeftTown && g.worldState != nil {
+			if g.strings != nil {
+				return ui.WorldCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings,
+					g.worldParty, g.worldState, g.worldSession)
+			}
 			return ui.WorldSession(g.canvas.Image(), g.sprites, g.small,
 				g.worldParty, g.worldState, g.worldSession)
 		}
@@ -462,6 +466,10 @@ func (g *game) render() error {
 		}
 		return ui.Outdoor(g.canvas.Image(), g.sprites, g.small, g.play.Outdoor)
 	case sceneWorld:
+		if g.strings != nil {
+			return ui.WorldCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings,
+				g.worldParty, g.worldState, g.worldSession)
+		}
 		return ui.WorldSession(g.canvas.Image(), g.sprites, g.small,
 			g.worldParty, g.worldState, g.worldSession)
 	case sceneOutdoor:
@@ -939,7 +947,7 @@ func main() {
 			"schema": "kol-cjk-layout-v1", "scale": book.CJKScale,
 			"cell": book.CJKCell, "layout": book.CJKLayout, "text_box": book.CJKTextBox,
 			"confirm": book.CJKConfirm, "town_inn": town.CJKInn,
-			"town_outdoor": town.CJKOutdoor,
+			"town_outdoor": town.CJKOutdoor, "world": world.CJK,
 		}, "", "  ")
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -1165,7 +1173,7 @@ func main() {
 		worldPartyState = sample.Party
 		worldScreenState = &world.Screen{Travel: travel, Weather: weather,
 			Group: *worldWeather, Phase: *worldPhase, TimeIndex: *worldTime,
-			Date: sample.Date, Names: names}
+			Date: sample.Date, DateZh: sample.DateZh, Names: names}
 		worldSessionState = world.NewSession(worldScreenState)
 	}
 

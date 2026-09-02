@@ -200,6 +200,33 @@ def main() -> int:
                        "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
                        "pass": bottom <= limit_y})
 
+    # 野外畫面的時段／地形標籤：中文模式在框內置中，安全矩形是框的內緣。
+    world = layout_doc.get("world")
+    for path in args.town_i18n:
+        doc = json.loads(pathlib.Path(path).read_text())
+        if not world:
+            break
+        ui = doc.get("ui") or {}
+        for index in range(0xD5, 0xE2):
+            text = ui.get(str(index))
+            if not text:
+                continue
+            w, missing = width(text)
+            x = world["LabelX"] + (world["LabelW"] - w) // 2
+            limit = world["LabelX"] + world["LabelW"] - 1
+            checks.append({"kind": "world-label", "en": f"{path} 記錄 {index:#x}",
+                           "zh": text, "x": x, "width": w, "right_limit": limit,
+                           "overflow": max(0, x + w - limit),
+                           "missing_glyphs": missing,
+                           "pass": x >= world["LabelX"] + 1 and x + w <= limit
+                                   and not missing})
+        bottom = world["LabelTextY"] + world["LabelStep"] + font["cell"]["height"]
+        limit_y = world["LabelY"] + world["LabelH"] - 1
+        checks.append({"kind": "vertical", "en": f"{path} 野外標籤兩行", "zh": "",
+                       "x": 0, "width": bottom, "right_limit": limit_y,
+                       "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
+                       "pass": bottom <= limit_y})
+
     # 刪除確認視窗是覆蓋在書頁上的獨立視窗，安全矩形就是視窗自己的內緣。
     confirm = layout_doc.get("confirm")
     if confirm:

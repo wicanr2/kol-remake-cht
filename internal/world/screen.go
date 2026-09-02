@@ -41,6 +41,8 @@ type Screen struct {
 	// TimeIndex 是時段（0…4）。
 	TimeIndex int
 	Date      []string
+	// DateZh 是中文模式的日期兩行；空的時候中文模式退回英文那兩行。
+	DateZh    []string
 	Icons     []int
 	Selected  int
 	// MarkerOff 是閃爍的另一半：點暫時不畫。原版每隔幾個 tick 就切一次。
