@@ -6,12 +6,12 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "25bcabb8a0c7a7df8cf83ed84b911d248a300d4e"
+    "commit": "05d0147ee031b129b4906d7318f7eb5d0a9631fd"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
     "fonts_manifest_sha256": "5db3baecce7a0ca28559688f08f98b7c0648765bbf82348de8c490243079f393",
-    "ui_font_manifest_sha256": "35e45ed9cef1d5a7d3ffce40bee851daa75b7767c48e0c0a0b95c531694af936"
+    "ui_font_manifest_sha256": "a336429a56324c9be0c2d768e14af181b18fa34d1a6feb9bc8211a8eb134fb9c"
   },
   "rights": {
     "classification": "private-repo 可保存；不得公開散布",
