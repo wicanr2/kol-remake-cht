@@ -53,8 +53,11 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `delete-move.json`（刪除清單反白條移動，對 `delete-character-run1`） | 5 | 5 |
 | `harbor.json`（HARBOR MASTER 訊息頁，對 `harbor-master-enter-run1`） | 1 | 1 |
 | `town-inn.json`（旅店畫面，對 `town-icon-move-run1`／`town-recruit-companion-run1`） | 8 | 8 |
+| `town-outdoor.json`（戶外地圖與門口，對 `town-outdoor-move-run1`／`town-icon-bar-run1`／`town-enter-building-run1`） | 22 | 22 |
+| `town-building.json`（建築進門，對 `town-enter-building-run1`） | 1 | 1 |
+| `town-edge.json`（地圖邊界的城門提示，對 `town-map-edge-run1`） | 4 | 4 |
 
-十份收據的允許差異區之外都是**零像素差**。
+十三份收據 207 對畫面，允許差異區之外都是**零像素差**。
 
 | 對拍項目 | 允許差異區實際差異 | 結果 |
 |---|---|---|
@@ -180,10 +183,11 @@ BIOS tick。remake 依同一張表重播。
 - 刪除流程的確認視窗按 ESC、大寫 `Y`／`N`、滑鼠按鍵與空名冊都沒有量測。
 - `EDIT PICTURE`／`EDIT SHIELD` 的點陣圖編輯器沒有實作，也沒有對拍：原版是滑鼠驅動的，
   ESC 沒有作用，現有的鍵盤 oracle 走不完（RE-052）。
-- 城鎮只對拍了旅店這一張畫面。戶外地圖、商店、修道院與圖示列其餘五個圖示的行為
-  都還沒量測，remake 也沒有實作。旅店畫面的內容目前來自對拍樣本
+- 城鎮已對拍旅店、戶外地圖、門口、建築進門與地圖邊界的城門提示。商店、修道院與
+  圖示列其餘五個圖示的行為都還沒量測，remake 也沒有實作。旅店畫面的內容目前來自對拍樣本
   `docs/re/town-inn-sample*.json`，不是從原版資料解出來的遊戲資料模型。
 - 動畫已對拍：翻書動畫見上表，TITLE 標題序列見 `../title-sequence/`。尚未對拍的是
-  戰鬥與世界地圖的動畫，那些畫面還沒實作。
-- 這十份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
+  戰鬥與野外地圖的動畫，那些畫面還沒實作——在城門選 DOOR 之後會走到野外地圖，
+  remake 目前只把那件事記下來。
+- 這十三份收據都是**英文模式**（`-lang en`）的結果。中文模式的版面是 remake 自訂的，
   原版沒有中文畫面，因此不對拍；見 `../cjk-ui/`。

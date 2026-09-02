@@ -2,6 +2,7 @@ package town
 
 import (
 	"image"
+	"image/color"
 	"testing"
 )
 
@@ -17,7 +18,7 @@ func playGrid(t *testing.T) *Grid {
 
 func playSession(t *testing.T) *Session {
 	t.Helper()
-	out := &Outdoor{Town: 7}
+	out := &Outdoor{Town: 7, Icons: []int{DoorIcon}}
 	out.Camera.X, out.Camera.Y = 57, 8
 	out.Bounds.MaxX, out.Bounds.MaxY = GridSide-1, GridSide-1
 	out.SetGrid(playGrid(t))
@@ -118,7 +119,7 @@ func TestSessionEnterAndLeaveBuilding(t *testing.T) {
 	}
 }
 
-// 走到地圖邊界會停住（離開城鎮的路徑還沒實作）。
+// 走到地圖邊界隊伍停住，並跳出城門提示：地圖視窗換林地圖、圖示列剩 DOOR 與 U-TURN。
 func TestWalkStopsAtMapEdge(t *testing.T) {
 	s := playSession(t)
 	s.Outdoor.Camera.X, s.Outdoor.Camera.Y = 0, 0
@@ -126,8 +127,99 @@ func TestWalkStopsAtMapEdge(t *testing.T) {
 	if s.Walk(-1, 0) {
 		t.Fatal("已經在左邊界，不該再往左")
 	}
-	if s.Walk(0, -1) {
-		t.Fatal("已經在上邊界，不該再往上")
+	if s.Mode != ModeGate {
+		t.Fatal("撞到地圖邊界應該跳出城門提示")
+	}
+	icons, cursor := s.Icons()
+	if len(icons) != 2 || icons[0] != DoorIcon || icons[1] != UTurnIcon || cursor != 0 {
+		t.Fatalf("城門提示的圖示列是 %v／白框 %d", icons, cursor)
+	}
+	if x, _ := s.Outdoor.PartyPosition(); x != 0 {
+		t.Fatalf("被夾限的是鏡頭，隊伍不該移動，卻在 x=%d", x)
+	}
+	s.MoveCursor(1)
+	s.Accept() // U-TURN：回地圖
+	if s.Mode != ModeMap || s.Outdoor.AtEdge {
+		t.Fatal("選 U-TURN 應該回到地圖")
+	}
+	if !s.Walk(0, -1) && s.Mode != ModeGate {
+		t.Fatal("上邊界也要跳出城門提示")
+	}
+	s.Accept() // DOOR：離開城鎮
+	if !s.LeftTown {
+		t.Fatal("在城門選 DOOR 應該離開城鎮")
+	}
+	if s.LeftGate.X != 0 || s.LeftGate.Y != 0 {
+		t.Fatalf("離開的城門座標是 (%d,%d)", s.LeftGate.X, s.LeftGate.Y)
+	}
+}
+
+// 鏡頭在邊界時隊伍還能往前站一格：原版夾限的是鏡頭，隊伍位置是鏡頭加偏移。
+func TestPartyReachesOneCellPastCameraBound(t *testing.T) {
+	s := playSession(t)
+	s.Outdoor.Bounds.MaxX = 58
+	s.Outdoor.Camera.X, s.Outdoor.Camera.Y = 58, 8
+	s.Outdoor.Marker.Row, s.Outdoor.Marker.Col = 0, 0
+	if !s.Walk(1, 0) {
+		t.Fatal("偏移還是 0，第一步應該只動標記")
+	}
+	if x, _ := s.Outdoor.PartyPosition(); x != 59 {
+		t.Fatalf("隊伍應該站到 59，實際 %d", x)
+	}
+	if s.Walk(1, 0) {
+		t.Fatal("偏移已滿，第二步該被鏡頭夾限擋下")
+	}
+	if s.Mode != ModeGate {
+		t.Fatal("鏡頭被夾限就要跳出城門提示")
+	}
+}
+
+// 不可通行的磚塊擋住移動，而且連邊界判定都不做——原版是直接跳過整段移動。
+func TestBlockedTileStopsMovement(t *testing.T) {
+	s := playSession(t)
+	img := image.NewGray(image.Rect(0, 0, GridSide, GridSide))
+	img.SetGray(56, 8, color.Gray{Y: 9}) // 隊伍左邊那一格換成磚塊 9
+	g, err := LoadGrid(img)
+	if err != nil {
+		t.Fatalf("LoadGrid：%v", err)
+	}
+	s.Outdoor.SetGrid(g)
+	s.Buildings.Blocked[9] = true
+
+	if s.Walk(-1, 0) {
+		t.Fatal("左邊是不可通行的磚塊，不該走過去")
+	}
+	if x, _ := s.Outdoor.PartyPosition(); x != 57 {
+		t.Fatalf("撞牆之後隊伍應該留在 57，實際 %d", x)
+	}
+	if s.Mode != ModeMap {
+		t.Fatal("撞牆不是走到地圖邊界，不該跳出城門提示")
+	}
+	if !s.Walk(1, 0) {
+		t.Fatal("右邊沒擋，應該走得過去")
+	}
+}
+
+// 圖示列的生命週期：走離門口就清空、踩到門重建成兩格、選 U-TURN 之後只剩一格 DOOR。
+// 三個狀態都由原版 town-map-edge-run1 的畫格證實（frame-070／074／122）。
+func TestIconBarLifecycle(t *testing.T) {
+	s := playSession(t)
+	if icons, _ := s.Icons(); len(icons) != 1 || icons[0] != DoorIcon {
+		t.Fatalf("剛從建築物出來時圖示列應該只有 DOOR，實際 %v", icons)
+	}
+	s.Walk(-1, 0)
+	if icons, _ := s.Icons(); len(icons) != 0 {
+		t.Fatalf("走離門口之後圖示列該清空，實際 %v", icons)
+	}
+	s.Walk(1, 0)
+	icons, cursor := s.Icons()
+	if len(icons) != 2 || icons[0] != DoorIcon || icons[1] != UTurnIcon || cursor != 0 {
+		t.Fatalf("踩回門口的圖示列是 %v／白框 %d", icons, cursor)
+	}
+	s.MoveCursor(1)
+	s.Accept() // U-TURN
+	if icons, cursor := s.Icons(); len(icons) != 1 || icons[0] != DoorIcon || cursor != 0 {
+		t.Fatalf("選 U-TURN 之後的圖示列是 %v／白框 %d", icons, cursor)
 	}
 }
 

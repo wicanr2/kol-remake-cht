@@ -91,6 +91,11 @@ type Outdoor struct {
 	// DoorCursor 是門口圖示列的白框位置（0 是 DOOR、1 是 U-TURN）。
 	DoorCursor int `json:"door_cursor"`
 
+	// AtEdge 是「鏡頭被夾限在地圖邊界」這個狀態。原版此時把 `word_2FBC2` 設成
+	// 0FFFFh 並跑同一支門口程序，地圖視窗換成 MISCPICS 圖 0 的林地圖，
+	// 圖示列一樣是 DOOR 與 U-TURN；選 DOOR 就離開城鎮（RE-065）。
+	AtEdge bool `json:"at_edge"`
+
 	grid      *Grid
 	markers   *Markers
 	buildings *TownBuildings
@@ -144,10 +149,10 @@ func (o *Outdoor) SetMarkers(m *Markers) { o.markers = m }
 // SetBuildings 掛上該城鎮的門與建築資料。
 func (o *Outdoor) SetBuildings(b *TownBuildings) { o.buildings = b }
 
-// IconRow 回傳目前該畫的圖示列與白框位置。站在門口時原版把圖示列重建成
-// DOOR 與 U-TURN 兩格，白框回到第一格。
+// IconRow 回傳目前該畫的圖示列與白框位置。站在門口或走到地圖邊界時，
+// 原版把圖示列重建成 DOOR 與 U-TURN 兩格，白框回到第一格。
 func (o *Outdoor) IconRow() ([]int, int) {
-	if o.AtDoor() != nil {
+	if o.AtEdge || o.AtDoor() != nil {
 		return []int{DoorIcon, UTurnIcon}, o.DoorCursor
 	}
 	return o.Icons, o.Selected
@@ -251,29 +256,70 @@ func (o *Outdoor) Move(dx, dy int) {
 // 六次移動全部符合「偏移夾在 0…1，多出來的由鏡頭吸收」。等級：強推論。
 const MarkerDeadZone = 1
 
-// Walk 依方向鍵移動隊伍。隊伍先在視窗內走，偏移超出 dead zone 鏡頭才跟上。
-// 回傳是否真的移動了——走到地圖邊界會停住。
+// Walk 依方向鍵移動隊伍，順序與 `sub_10000` 相同（RE-065）：
+//
+//  1. 先查目的地格子的磚塊編號能不能走。不能走就整個動作作廢，連邊界都不判。
+//  2. 標記偏移為 0 時往負方向走的是鏡頭，否則走的是標記；往正方向反過來。
+//  3. 最後把**鏡頭**夾限在 Bounds 之內，夾到就是走到地圖邊界。
+//
+// 夾限的是鏡頭而不是隊伍，所以隊伍最遠可以站到 MaxX＋1／MaxY＋1（偏移 1 那一格）。
+// 回傳是否真的移動了；走到邊界或撞到地形都會停住。
 func (o *Outdoor) Walk(dx, dy int) bool {
-	px, py := o.PartyPosition()
-	nx := clamp(px+dx, o.Bounds.MinX, o.Bounds.MaxX)
-	ny := clamp(py+dy, o.Bounds.MinY, o.Bounds.MaxY)
-	if nx == px && ny == py {
+	if dx == 0 && dy == 0 {
 		return false
 	}
-	o.Camera.X, o.Marker.Col = follow(o.Camera.X, nx, o.Bounds.MinX, o.Bounds.MaxX)
-	o.Camera.Y, o.Marker.Row = follow(o.Camera.Y, ny, o.Bounds.MinY, o.Bounds.MaxY)
+	if !o.CanEnter(dx, dy) {
+		return false
+	}
+	o.Camera.X, o.Marker.Col = step(o.Camera.X, o.Marker.Col, dx)
+	o.Camera.Y, o.Marker.Row = step(o.Camera.Y, o.Marker.Row, dy)
+	clamped := 0
+	o.Camera.X, clamped = clampEdge(o.Camera.X, o.Bounds.MinX, o.Bounds.MaxX, clamped)
+	o.Camera.Y, clamped = clampEdge(o.Camera.Y, o.Bounds.MinY, o.Bounds.MaxY, clamped)
+	o.AtEdge = clamped > 0
+	if o.AtEdge {
+		return false
+	}
 	o.AtDoorCell = o.DoorUnderParty() != nil
 	return true
 }
 
-// follow 回傳跟隨之後的鏡頭座標與標記偏移。
-func follow(camera, party, lo, hi int) (int, int) {
-	offset := party - camera
-	if offset > MarkerDeadZone {
-		camera += offset - MarkerDeadZone
-	} else if offset < 0 {
-		camera += offset
+// CanEnter 回傳往 (dx, dy) 這一步的目的地格子能不能走進去。原版查的是畫面上那一格
+// 的磚塊編號，而畫面本身是夾限過的，所以這裡也照同一條規則取格子。
+func (o *Outdoor) CanEnter(dx, dy int) bool {
+	if o.buildings == nil || o.grid == nil {
+		return true
 	}
-	camera = clamp(camera, lo, hi)
-	return camera, party - camera
+	px, py := o.PartyPosition()
+	x := clamp(px+dx, o.Bounds.MinX, o.Bounds.MaxX)
+	y := clamp(py+dy, o.Bounds.MinY, o.Bounds.MaxY)
+	return o.buildings.Passable(o.grid.At(x, y))
 }
+
+// step 走一格：偏移在 0…MarkerDeadZone 之間先動標記，超出範圍才動鏡頭。
+func step(camera, offset, delta int) (int, int) {
+	switch {
+	case delta < 0 && offset > 0:
+		offset--
+	case delta < 0:
+		camera--
+	case delta > 0 && offset < MarkerDeadZone:
+		offset++
+	case delta > 0:
+		camera++
+	}
+	return camera, offset
+}
+
+// clampEdge 夾限鏡頭並累計夾了幾次——原版的 `word_39A4E` 就是這個計數，
+// 不為零代表走到地圖邊界，要跳出城門提示。
+func clampEdge(v, lo, hi, count int) (int, int) {
+	if v < lo {
+		return lo, count + 1
+	}
+	if v > hi {
+		return hi, count + 1
+	}
+	return v, count
+}
+

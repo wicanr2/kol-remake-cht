@@ -20,7 +20,8 @@ const (
 // Door 是一個門：地圖座標與它對應的建築素材與文字。
 type Door struct {
 	Index    int    `json:"index"`
-	X, Y     int    `json:"x_y"`
+	X        int    `json:"x"`
+	Y        int    `json:"y"`
 	Picture  int    `json:"picture"`
 	Portrait int    `json:"portrait"`
 	Name     string `json:"name"`
@@ -29,12 +30,15 @@ type Door struct {
 	TextMissing bool `json:"text_missing"`
 }
 
-// TownBuildings 是一座城鎮的門與入城點。
+// TownBuildings 是一座城鎮的門、入城點與地形通行規則。
 type TownBuildings struct {
-	Town        int      `json:"town"`
-	Archive     string   `json:"archive"`
-	EntryPoints []Point  `json:"entry_points"`
-	Doors       []Door   `json:"doors"`
+	Town        int     `json:"town"`
+	Archive     string  `json:"archive"`
+	EntryPoints []Point `json:"entry_points"`
+	Doors       []Door  `json:"doors"`
+	// Blocked 是「磚塊編號 → 不可通行」的查表。原版存成 32 byte 的位元圖
+	// （payload 3 的位移 0x00–0x1F），移動前查目的地格子的磚塊編號（RE-065）。
+	Blocked [256]bool
 }
 
 // Point 是地圖座標。
@@ -62,10 +66,11 @@ type rawDoor struct {
 }
 
 type rawTown struct {
-	Town        int       `json:"town"`
-	Archive     string    `json:"archive"`
-	EntryPoints []Point   `json:"entry_points"`
-	Doors       []rawDoor `json:"doors"`
+	Town         int       `json:"town"`
+	Archive      string    `json:"archive"`
+	EntryPoints  []Point   `json:"entry_points"`
+	Doors        []rawDoor `json:"doors"`
+	BlockedTiles []int     `json:"blocked_tiles"`
 }
 
 type rawBuildings struct {
@@ -89,6 +94,12 @@ func LoadBuildings(path string) (*Buildings, error) {
 	out := &Buildings{Schema: raw.Schema}
 	for _, t := range raw.Towns {
 		town := TownBuildings{Town: t.Town, Archive: t.Archive, EntryPoints: t.EntryPoints}
+		for _, tile := range t.BlockedTiles {
+			if tile < 0 || tile >= len(town.Blocked) {
+				return nil, fmt.Errorf("城鎮 %d 的不可通行磚塊編號 %d 超出範圍", t.Town, tile)
+			}
+			town.Blocked[tile] = true
+		}
 		for _, d := range t.Doors {
 			if d.X < 0 || d.X >= GridSide || d.Y < 0 || d.Y >= GridSide {
 				return nil, fmt.Errorf("城鎮 %d 的門 %d 座標 (%d, %d) 超出地圖",
@@ -113,6 +124,14 @@ func (b *Buildings) Town(index int) *TownBuildings {
 		}
 	}
 	return nil
+}
+
+// Passable 回傳某個磚塊編號可不可以走進去。
+func (t *TownBuildings) Passable(tile int) bool {
+	if tile < 0 || tile >= len(t.Blocked) {
+		return false
+	}
+	return !t.Blocked[tile]
 }
 
 // DoorAt 回傳位於地圖座標 (x, y) 的門；沒有就回 nil。

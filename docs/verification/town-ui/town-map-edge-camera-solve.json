@@ -1,0 +1,1377 @@
+{
+  "schema": "kol-outdoor-camera-solve-v1",
+  "town": "TOWN7",
+  "frames_dir": "docs/verification/character-ui/town-map-edge-run1/frames",
+  "frame_count": 124,
+  "outdoor_frames": 53,
+  "unsolved_frames": [
+    "frame-000.png",
+    "frame-002.png",
+    "frame-003.png"
+  ],
+  "distinct_states": [
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 0,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0
+    },
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0
+    },
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0
+    },
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 0,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 0,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 3,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 3,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 0,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 0,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 0,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 3,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 0,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 1,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 2,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    },
+    {
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 4,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1
+    }
+  ],
+  "frames": [
+    {
+      "frame": "frame-000.png",
+      "outdoor": true,
+      "camera_hits": [],
+      "icon": -1
+    },
+    {
+      "frame": "frame-001.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-002.png",
+      "outdoor": true,
+      "camera_hits": [],
+      "icon": -1
+    },
+    {
+      "frame": "frame-003.png",
+      "outdoor": true,
+      "camera_hits": [],
+      "icon": -1
+    },
+    {
+      "frame": "frame-004.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-005.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-006.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-007.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-008.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-009.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-010.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-011.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-012.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-013.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-014.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-015.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-016.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-017.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-018.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-019.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-020.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-021.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-022.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-023.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-024.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-025.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-026.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-027.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-028.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-029.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-030.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-031.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-032.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-033.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-034.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-035.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-036.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-037.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-038.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-039.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-040.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-041.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-042.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-043.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-044.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-045.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-046.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-047.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-048.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-049.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-050.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-051.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-052.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-053.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-054.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-055.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-056.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-057.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-058.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-059.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-060.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-061.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-062.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-063.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-064.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-065.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 5,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0,
+      "tile_under_marker": 101,
+      "known_cells": 68,
+      "icon": null
+    },
+    {
+      "frame": "frame-066.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-067.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-068.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-069.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-070.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 5,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0,
+      "tile_under_marker": 101,
+      "known_cells": 68,
+      "icon": 5
+    },
+    {
+      "frame": "frame-071.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 5,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0,
+      "tile_under_marker": 101,
+      "known_cells": 67,
+      "icon": 5
+    },
+    {
+      "frame": "frame-072.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 5,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0,
+      "tile_under_marker": 101,
+      "known_cells": 67,
+      "icon": 5
+    },
+    {
+      "frame": "frame-073.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 5,
+      "marker_row_offset": 0,
+      "marker_col_offset": 0,
+      "tile_under_marker": 101,
+      "known_cells": 67,
+      "icon": 5
+    },
+    {
+      "frame": "frame-074.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 104,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-075.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 104,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-076.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 104,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-077.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 104,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-078.png",
+      "outdoor": true,
+      "camera_x": 57,
+      "camera_y": 8,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 104,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-079.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 213,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-080.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 213,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-081.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 213,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-082.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 8,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 213,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-083.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 211,
+      "known_cells": 68,
+      "icon": null
+    },
+    {
+      "frame": "frame-084.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 211,
+      "known_cells": 68,
+      "icon": null
+    },
+    {
+      "frame": "frame-085.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 211,
+      "known_cells": 68,
+      "icon": null
+    },
+    {
+      "frame": "frame-086.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 211,
+      "known_cells": 68,
+      "icon": null
+    },
+    {
+      "frame": "frame-087.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 7,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 211,
+      "known_cells": 68,
+      "icon": null
+    },
+    {
+      "frame": "frame-088.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 212,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-089.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 212,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-090.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 212,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-091.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 6,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 212,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-092.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 75,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-093.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 75,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-094.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 75,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-095.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 75,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-096.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 5,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 75,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-097.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 68,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-098.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 68,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-099.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 68,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-100.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 68,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-101.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 4,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 68,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-102.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 3,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 227,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-103.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 3,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 227,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-104.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 192,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-105.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 192,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-106.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 192,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-107.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 192,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-108.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 2,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 192,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-109.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 210,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-110.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 210,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-111.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 210,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-112.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 1,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 210,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-113.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-114.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-115.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 4,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-116.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-117.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 67,
+      "icon": null
+    },
+    {
+      "frame": "frame-118.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-119.png",
+      "outdoor": false
+    },
+    {
+      "frame": "frame-120.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 1,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 68,
+      "icon": 5
+    },
+    {
+      "frame": "frame-121.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 3,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 68,
+      "icon": 5
+    },
+    {
+      "frame": "frame-122.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 2,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 68,
+      "icon": 5
+    },
+    {
+      "frame": "frame-123.png",
+      "outdoor": true,
+      "camera_x": 58,
+      "camera_y": 0,
+      "marker_unit": 0,
+      "marker_row": 2,
+      "marker_col": 6,
+      "marker_row_offset": 0,
+      "marker_col_offset": 1,
+      "tile_under_marker": 209,
+      "known_cells": 68,
+      "icon": 5
+    }
+  ]
+}

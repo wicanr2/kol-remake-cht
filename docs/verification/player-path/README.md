@@ -59,6 +59,21 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 `EDIT PICTURE`、`EDIT SHIELD` 與旅店的其餘五個圖示會被記進 `flow.Unimplemented`，
 不會默默吞掉——測試盯著這一點。
 
+## `town-edge`：走到地圖邊界
+
+`R R U U U U U U U U U > RET`，13 步。路徑由 TOWN7 的格子陣列與不可通行位元圖算出，
+與原版 oracle `town-map-edge-run1` 走的是同一串按鍵。
+
+| 步 | 動作 |
+|---|---|
+| 1–2 | 往東兩步 |
+| 3–10 | 往北八步，鏡頭一路捲到 (58,0) |
+| 11 | 再往北一步：鏡頭被夾限，跳出城門提示 |
+| 12 | 白框移到 U-TURN |
+| 13 | 回到地圖，圖示列剩一格 DOOR |
+
+檢查點：第 11 步與城門提示對拍截圖、第 12 步與白框在 U-TURN 的對拍截圖，都逐 byte 相同。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
@@ -67,5 +82,6 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
   只會記進未實作清單。
 - 不宣稱鏡頭跟隨規則已證實。dead zone 是由 22 張原版畫格反解的**強推論**，
   規則本身沒有從程式碼讀出來。
-- 走到地圖邊界目前是停住。原版會切到野外地圖，那條路徑還沒實作。
+- 走到地圖邊界會跳出城門提示（`town-edge.json` 這條路徑），但選 DOOR 之後的野外地圖
+  還沒實作——目前只把「離開了城鎮」與離開的門記下來。
 - 建築內按圖示之後的多輪對話還沒接。

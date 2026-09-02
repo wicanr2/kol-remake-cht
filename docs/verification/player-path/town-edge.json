@@ -1,0 +1,14 @@
+{
+  "name": "town-walk-to-edge",
+  "description": "城鎮的正常玩家路徑：從旅店門口往東兩步再一路往北，走到地圖上緣之後再按一次方向鍵跳出城門提示，白框移到 U-TURN 回地圖。路徑由 TOWN7 的格子陣列與不可通行位元圖算出，與原版 oracle 走的是同一串按鍵。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "script": "R R U U U U U U U U U > RET",
+  "shot_dir": "docs/verification/player-path/town-edge",
+  "size": [320, 200],
+  "receipt": "docs/verification/player-path/town-edge-receipt.json",
+  "checkpoints": [
+    { "step": 11, "identical_to": "docs/verification/remake-parity/shots/town-edge/gate.png",
+      "note": "撞到地圖邊界跳出的城門提示，與已對拍的截圖逐 byte 相同" },
+    { "step": 12, "identical_to": "docs/verification/remake-parity/shots/town-edge/gate-uturn.png",
+      "note": "白框移到 U-TURN，與已對拍的截圖逐 byte 相同" }
+  ]
+}

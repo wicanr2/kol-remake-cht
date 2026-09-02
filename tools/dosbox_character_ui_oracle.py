@@ -283,6 +283,24 @@ SCENARIOS: dict[str, dict] = {
             step("第二棟建築內部（觀察）", None, settle=3.0),
         ],
     },
+    "town-map-edge": {
+        "description": "由旅店按 DOOR 走到戶外地圖，往右兩步再一路往北走到地圖上緣，"
+                       "看鏡頭被夾限時畫面變成什麼；接著按 U-TURN 回地圖。"
+                       "路徑由 TOWN7 的格子陣列與不可通行位元圖算出，全程不進任何建築。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("再往北一步：城門提示（觀察）", "greater", settle=2.5),
+            step("白框移到 U-TURN", "Return", settle=3.5),
+            step("按 U-TURN 之後回到地圖", None, settle=3.0),
+        ],
+    },
     "town-outdoor-move": {
         "description": "由旅店按 DOOR 走到戶外地圖，再用方向鍵移動幾步並在圖示列上移動，"
                        "用來判斷地圖視窗是不是一張固定圖。純觀察，不進任何建築。",

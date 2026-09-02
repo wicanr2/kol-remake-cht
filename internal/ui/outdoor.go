@@ -85,6 +85,16 @@ func drawMapWindow(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) error 
 	shadow(dst, win.X, win.Y, win.Width, win.Height)
 	fill(dst, win.X, win.Y, win.Width, win.Height, town.ColourBoxEdge)
 
+	// 走到地圖邊界時換成林地圖：與門面圖同一個矩形，原版是 MISCPICS 的圖 0。
+	if out.AtEdge {
+		pic, err := sprites.Get(town.EdgePicture.Archive, town.EdgePicture.Index)
+		if err != nil {
+			return err
+		}
+		draw(dst, pic, town.Viewport.X, town.Viewport.Y)
+		return nil
+	}
+
 	// 站在門口時整個視窗換成該建築的 192×96 門面圖，不畫磚塊也不畫隊伍標記。
 	if door := out.AtDoor(); door != nil {
 		pic, err := sprites.Get(out.CrestArchive(), door.Picture)

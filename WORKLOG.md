@@ -1485,3 +1485,29 @@
 - 十二份對拍收據 203 對全過；`internal/town` 新增 session 與鏡頭跟隨測試。
 - 全部執行在有界 `docker run --rm --network none`；收工檢查沒有本專案容器殘留。
 
+## 2026-09-02（續）：城鎮地形擋路、地圖邊界的城門提示、圖示列生命週期
+
+- IDA 探針 `tools/ida_probe_koltown_world_map.py`（探索用，不是鎖定斷言），
+  以 `ida-pro-9.4-idapython:locked-v1` 有界 `docker run --rm --network none` 執行四輪，
+  逐步加大 `DUMP_FUNCTIONS`：`sub_10000`／`sub_15920`／`sub_29004`／`sub_29CA3`／
+  `sub_1198E`／`sub_11302`／`sub_11703`／`sub_11722`／`sub_1449C`。
+- **走錯過一次方向**：一開始想從「`word_2FBC2 = 0FFFFh` 是哪裡寫的」直接切進去，
+  但 0FFFFh 的寫入點全檔有 62 處。真正省時間的是先讀說明書第四章——它把
+  「走到城鎮地圖邊緣 → 地圖換成林地圖 → DOOR 離開／U-TURN 回城」整段流程寫清楚了，
+  再回頭讀反組譯就只剩對照。
+- 新探針 `tools/probe_town_passability.py` 解出不可通行位元圖並做兩項交叉檢查：
+  TOWN0 全零、103 個門座標全部落在可通行磚塊上。
+- `tools/extract_town_buildings.py` 加出 `blocked_bitmap`／`blocked_tiles`；
+  重生 `assets/original-derived-data/town-buildings.json`。
+- Go：`Outdoor.Walk` 改寫成與原版同順序（先查地形 → 動標記或鏡頭 → 夾限鏡頭並計數），
+  `Outdoor.AtEdge`、`town.ModeGate`、`Session.LeftTown`；圖示列改成會清空重建的堆疊。
+  `cmd/kol` 加 `-outdoor-at-edge`／`-outdoor-selected`。
+- 原版 oracle 情境 `town-map-edge`（DOSBox-X，一個容器、1 核，約 4 分鐘），
+  124 張畫格；`tools/solve_outdoor_camera.py` 反解每一張戶外畫格的鏡頭都是唯一解。
+- 對拍 `plan-town-edge.json` 4 對全過（允許區只有原版滑鼠游標）；
+  既有 `town-outdoor` 22 對、`town-building` 1 對重跑仍全過。
+- 玩家路徑新增 `town-edge.json`（13 步，兩個檢查點與對拍截圖逐 byte 相同）；
+  既有兩條路徑重生後仍 0 失敗，變動的畫格正是「走離門口後圖示列清空」那幾張——
+  與原版 `frame-074` 一致。
+- 容器狀態：全部 `--rm`，本輪沒有殘留容器；未動任何共用 image／volume。
+

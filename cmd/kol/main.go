@@ -715,6 +715,9 @@ func main() {
 	playScript := flag.String("play-script", "",
 		"城鎮遊玩的操作腳本，空白分隔：L R U D 是方向鍵、"+
 			"A S Z X 是斜走、< > 移動圖示白框、RET 執行")
+	outdoorAtEdge := flag.Bool("outdoor-at-edge", false,
+		"戶外畫面畫成走到地圖邊界的城門提示：地圖視窗換成林地圖，圖示列 DOOR 與 U-TURN")
+	outdoorSelected := flag.Int("outdoor-selected", 0, "戶外圖示列白框的位置")
 	outdoorAtDoor := flag.Bool("outdoor-at-door", false,
 		"強制進入門口狀態（原版是移動到門的座標時才觸發）")
 	outdoorIcons := flag.String("outdoor-icons", "", "覆寫戶外圖示列，逗號分隔的 KOLMPICS 圖號；`none` 代表整列淨空")
@@ -951,6 +954,10 @@ func main() {
 			outdoorState.Icons = icons
 			outdoorState.Selected = 0
 		}
+		if *outdoorSelected != 0 {
+			outdoorState.Selected = *outdoorSelected
+			outdoorState.DoorCursor = *outdoorSelected
+		}
 		grid, err := loadGrid(lib, outdoorState.Archive())
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -985,6 +992,9 @@ func main() {
 				os.Exit(2)
 			}
 			outdoorState.AtDoorCell = true
+		}
+		if *outdoorAtEdge {
+			outdoorState.AtEdge = true
 		}
 	}
 

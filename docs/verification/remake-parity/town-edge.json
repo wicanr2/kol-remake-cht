@@ -1,0 +1,114 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-edge",
+  "description": "走到城鎮地圖邊界的城門提示對原版對拍。原版夾限的是鏡頭而不是隊伍（sub_10000:0x1093D 起的四段夾限），夾到就把 word_2FBC2 設成 0FFFFh 並跑同一支門口程序 sub_1198E：地圖視窗換成 MISCPICS 圖 0 的林地圖，圖示列重建成 DOOR 與 U-TURN。選 U-TURN 走的是 sub_1449C（清空圖示列與白框、重畫地圖視窗）接一個 sub_11703(2)，所以回到地圖時只剩一格 DOOR。四個狀態的鏡頭與標記畫格都由 tools/solve_outdoor_camera.py 從原版畫面反解，每一張都是唯一解（RE-065）。",
+  "pair_count": 4,
+  "pass_count": 4,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "走到地圖上緣：鏡頭 (58,0)、隊伍 (59,0)、圖示列空",
+      "remake": "docs/verification/remake-parity/shots/town-edge/map-top.png",
+      "original": "docs/verification/character-ui/town-map-edge-run1/frames/frame-117.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 57
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "再往北一步：城門提示（林地圖＋DOOR／U-TURN，白框在 DOOR）",
+      "remake": "docs/verification/remake-parity/shots/town-edge/gate.png",
+      "original": "docs/verification/character-ui/town-map-edge-run1/frames/frame-118.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 60
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "白框移到 U-TURN",
+      "remake": "docs/verification/remake-parity/shots/town-edge/gate-uturn.png",
+      "original": "docs/verification/character-ui/town-map-edge-run1/frames/frame-119.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 60
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "選 U-TURN 回到地圖：圖示列只剩一格 DOOR",
+      "remake": "docs/verification/remake-parity/shots/town-edge/map-after-uturn.png",
+      "original": "docs/verification/character-ui/town-map-edge-run1/frames/frame-122.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 47
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

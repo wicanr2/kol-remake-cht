@@ -34,6 +34,14 @@ TOWN_COUNT = 8
 # TOWN0 是野外地圖，沒有城鎮建築；它的 payload 3 門數是 0。
 TOWN_FIRST = 1
 GRID_SIDE = 64
+# payload 3 的前 32 個 byte 是「磚塊編號 → 不可通行」的位元圖，一個 bit 一個磚塊。
+# `sub_10000:0x1082D` 查的是 `payload3[tile >> 3] & (1 << (tile & 7))`（RE-065）。
+BLOCK_BITMAP_BYTES = 32
+
+
+def blocked_tiles(table: bytes) -> list[int]:
+    return [t for t in range(BLOCK_BITMAP_BYTES * 8)
+            if table[t >> 3] & (1 << (t & 7))]
 
 
 def main() -> int:
@@ -94,6 +102,8 @@ def main() -> int:
                 "town": town, "archive": f"TWN{town}PICS",
                 "map_archive": f"TOWN{town}",
                 "door_count_byte": count,
+                "blocked_bitmap": table[:BLOCK_BITMAP_BYTES].hex(),
+                "blocked_tiles": blocked_tiles(table),
                 "table_sha256": hashlib.sha256(table).hexdigest(),
                 "entry_points": entries, "doors": doors,
             })
@@ -112,6 +122,8 @@ def main() -> int:
             "count": f"payload{DOOR_TABLE_PAYLOAD}[0x{COUNT_OFFSET:02X}]",
             "entry_points": f"payload{DOOR_TABLE_PAYLOAD}[0x{ENTRY_OFFSET:02X} + 2k]",
             "doors": f"payload{DOOR_TABLE_PAYLOAD}[0x{DOOR_OFFSET:02X} + 2i]",
+            "blocked": f"payload{DOOR_TABLE_PAYLOAD}[0x00…0x1F]：磚塊編號的不可通行位元圖，"
+                       "查 `bitmap[tile >> 3] & (1 << (tile & 7))`",
             "picture": "TWN{n}PICS[2i+3]，192×96，畫在地圖視窗 (104,58)",
             "portrait": "TWN{n}PICS[2i+2]，88×64，畫在 (8,64)",
             "text": "TOWNn.0 payload i+4（索引 ≥ 0x14 再加 1）；名稱在 0、人物在 29，"

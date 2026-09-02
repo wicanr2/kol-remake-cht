@@ -1,0 +1,106 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-walk-to-edge",
+  "description": "城鎮的正常玩家路徑：從旅店門口往東兩步再一路往北，走到地圖上緣之後再按一次方向鍵跳出城門提示，白框移到 U-TURN 回地圖。路徑由 TOWN7 的格子陣列與不可通行位元圖算出，與原版 oracle 走的是同一串按鍵。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "script": "R R U U U U U U U U U > RET",
+  "step_count": 14,
+  "checkpoints": [
+    {
+      "step": 11,
+      "identical_to": "docs/verification/remake-parity/shots/town-edge/gate.png",
+      "note": "撞到地圖邊界跳出的城門提示，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 12,
+      "identical_to": "docs/verification/remake-parity/shots/town-edge/gate-uturn.png",
+      "note": "白框移到 U-TURN，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town-edge/step-000.png",
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930"
+    },
+    {
+      "step": 1,
+      "token": "R",
+      "file": "docs/verification/player-path/town-edge/step-001.png",
+      "sha256": "2af52bcb084bcb107f2804db235ab8cb7d0085f71e7971d95b1bed4c07616aea"
+    },
+    {
+      "step": 2,
+      "token": "R",
+      "file": "docs/verification/player-path/town-edge/step-002.png",
+      "sha256": "4c4207e88540a74a8a25eaa7cb1c3490c15c381755c79a57fd660d3a585d569a"
+    },
+    {
+      "step": 3,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-003.png",
+      "sha256": "3362478b122572a5e76cb6a695eff38de6e007d842167a3e347e7c1a5088006d"
+    },
+    {
+      "step": 4,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-004.png",
+      "sha256": "44c74a7ccf95647b0720b00161d6a4cc03121dae47f35e82bf16bdfb77b510aa"
+    },
+    {
+      "step": 5,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-005.png",
+      "sha256": "b52a026e0aac8f83cba81997e874026ce43c299b170e0c818d3957a8d685c7f7"
+    },
+    {
+      "step": 6,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-006.png",
+      "sha256": "26beda32c18a35afe10c6d543843f487829663fd53928e97930b57ac10904b71"
+    },
+    {
+      "step": 7,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-007.png",
+      "sha256": "b4f740ce06c71804a422c008f1160d5b4d664eb6f33331050a026a4b3c206585"
+    },
+    {
+      "step": 8,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-008.png",
+      "sha256": "1f51fbf1044a69bf7c3045066c9e7ccf216ab5b6c0efd38f5751efa9ccc25d72"
+    },
+    {
+      "step": 9,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-009.png",
+      "sha256": "b37dfc3f95a97f25c22797615d2ba5ef075d7f0a6f3d4867f4116366b3cdad30"
+    },
+    {
+      "step": 10,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-010.png",
+      "sha256": "b979fe4e246c8c73889363740749ade5698b773026d02a00ed3463ab42e2608a"
+    },
+    {
+      "step": 11,
+      "token": "U",
+      "file": "docs/verification/player-path/town-edge/step-011.png",
+      "sha256": "6e6e3f1a6334b2dc3dd0e98bd37f272c1deef809d7e0e96fa96c3252895ceec7"
+    },
+    {
+      "step": 12,
+      "token": ">",
+      "file": "docs/verification/player-path/town-edge/step-012.png",
+      "sha256": "a19b51dc3ca96b0a3fb300b91a77d2eb519784711159671ad996b9c9a823dc7e"
+    },
+    {
+      "step": 13,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-edge/step-013.png",
+      "sha256": "499b32b79572f95f078951ba53dd0bee8006169b99b9d24f425f1a9273833ece"
+    }
+  ]
+}
