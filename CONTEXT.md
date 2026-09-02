@@ -15,7 +15,7 @@
   映像 `eob-remake-go:1.26.7-ebiten2.9.9-audio`，只讀 `assets/original-derived-png/ega/`
   的 manifest 與 PNG，畫在 320×200 原版解析度離屏畫布上，並提供截圖模式供對拍。
   書本的六個畫面（封面、目錄頁、角色建立、角色清單、刪除、HARBOR MASTER）、兩段
-  翻頁動畫、TITLE 標題序列與城鎮的旅店畫面都已實作並對拍；戶外地圖與戰鬥尚未開始。
+  翻頁動畫、TITLE 標題序列與城鎮的旅店、戶外地圖都已實作並對拍；進建築與戰鬥尚未開始。
   SPEC-001／002／003／005 為 READY 或 CONFORMED，SPEC-004（音訊）仍為 DRAFT；
   其餘玩法（戰鬥、任務、城鎮、世界地圖）仍須各自的 DRAFT／READY spec。
 - 原版內嵌點陣字型已抽出：`BOOKDATA.0`／`KOLDATA.0` 的第一個 payload 是同一份
@@ -29,9 +29,9 @@
 - remake 目前畫面的展示圖在 `docs/screenshots/`，由 `tools/run_kol_shots.sh` 依
   `shots.spec` 在鎖定容器內一次重生，`MANIFEST.json` 記下產生指令、輸入雜湊與 PNG
   SHA-256，並要求有對拍收據的畫面與那張逐 byte 相同。README 的畫面區塊引用同一批圖。
-- remake 對拍收據已建立（`docs/verification/remake-parity/`）：十份收據 180 對畫面
+- remake 對拍收據已建立（`docs/verification/remake-parity/`）：十一份收據 201 對畫面
   全部通過（書本畫面 3、角色建立 9、圖像層 92、三段翻頁 54、刪除流程 13、
-  HARBOR MASTER 1、旅店畫面 8）。
+  HARBOR MASTER 1、旅店畫面 8、戶外地圖 21）。
   書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
   畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同；空白 New Character 頁
   以原版字型與版面重繪後，64,000 個像素中只有 31 個不同且全部落在名字欄的原版殘留
@@ -104,7 +104,7 @@
   MAKEMODE 的完整轉換像素規則保留為待辦 RE，不進首版交付範圍。
 - SPEC-002 已 READY。完整 EGA extraction set 為 30 個邏輯 archive、1,022 payload：
   996 筆來源已證實、26 筆非圖片 placeholder、0 筆 unknown，形成 752 個 PNG 單位。
-  `tools/extract_ega_assets.py` 已把全部 752 張 PNG 產到 `assets/original-derived-png/ega/`，
+  `tools/extract_ega_assets.py` 已把全部 769 張 PNG 產到 `assets/original-derived-png/ega/`，
   逐張重讀驗證並與已版控 visual probe 紀錄的 SHA-256 核對，原子化替換、輸出根目錄受限。
   原版同狀態 parity：80 張 CHARPICS 模板在 blit 座標 (208,106) 兩輪各 80/80 逐像素相同；
   BOOKPICS[0] 對書本封面畫面只差螢幕中央 8×11 的滑鼠游標。
@@ -176,11 +176,17 @@
 標題框、對話框與六格圖示列組成，八對逐畫面對拍全過，允許區只有原版滑鼠游標
 （RE-054、RE-055）。中文模式一併補上。
 
-城鎮的戶外地圖已拆解但還沒實作（RE-056、RE-057）：底圖、徽章、日期框、頭像格與圖示格
-都零差異對上；地圖視窗是 12×6 格、每格 16×16 的捲動磚塊圖。磚圖已定位在 `TOWNn.0`
-城鎮資料檔（payload 0／1／2 各 96 塊，16×16 四平面 plane-major，67／72 塊逐 byte 命中）
-——這七個檔案之前不在 inventory 裡，因為清冊工具只認名字含 `PIC` 的檔案。
-還缺的是「哪一格畫哪一塊磚」的編號；解出來之前不實作，也不用「允許差異區」掩蓋未實作。
+城鎮的戶外地圖已實作並對拍（RE-056 至 RE-060）。地圖視窗是 12×6 格、每格 16×16，
+格子索引是 `(X<<6)+Y`：`TOWNn.0` 的 payload 0／1／2 解碼後接成一塊，前 4,096 byte 是
+64×64 的格子陣列（一格一 byte ＝ 磚塊編號），其後 32,768 byte 是 256 塊 16×16 四平面
+plane-major 的磚。隊伍標記的精靈在 KOLPICS payload 0（十個 128-byte 單元，城鎮用 0–4
+五個畫格來回），它四周那圈黑框是算出來的：四平面 OR 成佔用位圖、左右各膨脹一像素、
+反相當 AND 遮罩，而膨脹在 little-endian word 上做因此不跨位元組邊界。
+
+隊伍先在視窗內走、走到一定位置鏡頭才跟著捲一格，兩者分開記（`Camera` 與 `Marker.Row/Col`）。
+圖示列是看情境出現的：站在門口有 `KOLMPICS[5]`（DOOR），走開就整格淨空。
+`tools/solve_outdoor_camera.py` 從 94 張移動 oracle 反解出 22 張戶外畫格的狀態，
+每一張的鏡頭都是唯一解；21 對逐畫面對拍全過，允許區只有原版滑鼠游標。
 
 書本六個選單項目裡五項有收據。`HARBOR MASTER` 在只安裝一個 region 時是一張三行訊息頁，
 已實作並對拍通過；`EDIT PICTURE` 與 `EDIT SHIELD` 是同一個滑鼠驅動的點陣圖編輯器，
