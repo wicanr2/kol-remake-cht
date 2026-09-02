@@ -1,9 +1,9 @@
 {
   "tool": "tools/verify_remake_parity.py",
   "plan": "town-outdoor",
-  "description": "remake 的城鎮戶外畫面對原版逐張對拍。地圖視窗的 12×6 格磚塊由 TOWNn.0 的格子陣列與磚塊集合畫出（RE-059），隊伍標記的黑色外框由精靈佔用位圖左右膨脹一像素算出（RE-060）。鏡頭座標、標記畫格與標記在視窗內的偏移都由 tools/solve_outdoor_camera.py 從原版畫面反解，每一張都是唯一解。 第一對取自另一輪 oracle（town-icon-bar-run1），作跨輪交叉檢查。",
-  "pair_count": 21,
-  "pass_count": 21,
+  "description": "remake 的城鎮戶外畫面對原版逐張對拍。地圖視窗的 12×6 格磚塊由 TOWNn.0 的格子陣列與磚塊集合畫出（RE-059），隊伍標記的黑色外框由精靈佔用位圖左右膨脹一像素算出（RE-060）。鏡頭座標、標記畫格與標記在視窗內的偏移都由 tools/solve_outdoor_camera.py 從原版畫面反解，每一張都是唯一解。 第一對取自另一輪 oracle（town-icon-bar-run1），作跨輪交叉檢查。 最後一對是門口狀態，取自 town-enter-building-run1：隊伍離開門口再走回來，地圖視窗換成該建築的 192×96 門面圖。",
+  "pair_count": 22,
+  "pass_count": 22,
   "failure_count": 0,
   "pairs": [
     {
@@ -548,6 +548,32 @@
             16
           ],
           "differing_pixels": 48
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "站在半途之家門口：地圖視窗換成 TWN7PICS[13]，圖示列只剩 DOOR 與 U-TURN",
+      "remake": "docs/verification/remake-parity/shots/town-door/inn-door.png",
+      "original": "docs/verification/character-ui/town-enter-building-run1/frames/frame-071.png",
+      "size": [
+        320,
+        200
+      ],
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 55
         }
       ],
       "required_regions": []

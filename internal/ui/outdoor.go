@@ -35,8 +35,9 @@ func Outdoor(dst *ebiten.Image, sprites Sprites, small *font.Font, out *town.Out
 		return err
 	}
 
+	icons, selected := out.IconRow()
 	b := town.IconBar
-	for i, index := range out.Icons {
+	for i, index := range icons {
 		x := b.X + i*b.Step
 		icon, err := sprites.Get("KOLMPICS", index)
 		if err != nil {
@@ -44,7 +45,7 @@ func Outdoor(dst *ebiten.Image, sprites Sprites, small *font.Font, out *town.Out
 		}
 		draw(dst, icon, x, b.Y+1)
 		c := town.ColourIdle
-		if i == out.Selected {
+		if i == selected {
 			c = town.ColourSelected
 		}
 		frame(dst, x, b.Y, b.Width, b.Height, c)
@@ -83,6 +84,16 @@ func drawMapWindow(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) error 
 	win := town.MapWindow
 	shadow(dst, win.X, win.Y, win.Width, win.Height)
 	fill(dst, win.X, win.Y, win.Width, win.Height, town.ColourBoxEdge)
+
+	// 站在門口時整個視窗換成該建築的 192×96 門面圖，不畫磚塊也不畫隊伍標記。
+	if door := out.AtDoor(); door != nil {
+		pic, err := sprites.Get(out.CrestArchive(), door.Picture)
+		if err != nil {
+			return err
+		}
+		draw(dst, pic, town.Viewport.X, town.Viewport.Y)
+		return nil
+	}
 
 	atlas, err := sprites.Get(out.Archive(), town.TileAtlas.Index)
 	if err != nil {
@@ -172,6 +183,14 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	drawScaled(dst, crest, l.CrestX, l.CrestY, l.Scale)
 
 	fill(dst, l.MapX, l.MapY, l.MapW, l.MapH, town.ColourBoxEdge)
+	if door := out.AtDoor(); door != nil {
+		pic, err := sprites.Get(out.CrestArchive(), door.Picture)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, pic, l.ViewX, l.ViewY, l.Scale)
+		return drawOutdoorIconsCJK(dst, sprites, out)
+	}
 	atlas, err := sprites.Get(out.Archive(), town.TileAtlas.Index)
 	if err != nil {
 		return err
@@ -204,7 +223,14 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		}
 	}
 
-	for i, index := range out.Icons {
+	return drawOutdoorIconsCJK(dst, sprites, out)
+}
+
+// drawOutdoorIconsCJK 是中文模式的圖示列，內容與英文模式相同，只是放大兩倍。
+func drawOutdoorIconsCJK(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) error {
+	l := town.CJKOutdoor
+	icons, selected := out.IconRow()
+	for i, index := range icons {
 		x := l.IconX + i*l.IconStep
 		icon, err := sprites.Get("KOLMPICS", index)
 		if err != nil {
@@ -212,7 +238,7 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		}
 		drawScaled(dst, icon, x, l.IconY+l.Scale, l.Scale)
 		c := town.ColourIdle
-		if i == out.Selected {
+		if i == selected {
 			c = town.ColourSelected
 		}
 		frame(dst, x, l.IconY, l.IconW, l.IconH, c)

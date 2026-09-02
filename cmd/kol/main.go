@@ -546,6 +546,10 @@ func main() {
 	outdoorCamera := flag.String("outdoor-camera", "", "覆寫戶外鏡頭座標，格式 X,Y")
 	outdoorFrame := flag.Int("outdoor-frame", -1, "覆寫隊伍標記的動畫畫格（-1 為沿用樣本）")
 	outdoorMarker := flag.String("outdoor-marker", "", "覆寫隊伍標記在視窗內的偏移，格式 列,欄")
+	buildingsPath := flag.String("town-buildings",
+		"assets/original-derived-data/town-buildings.json", "城鎮建築 typed data")
+	outdoorAtDoor := flag.Bool("outdoor-at-door", false,
+		"強制進入門口狀態（原版是移動到門的座標時才觸發）")
 	outdoorIcons := flag.String("outdoor-icons", "", "覆寫戶外圖示列，逗號分隔的 KOLMPICS 圖號；`none` 代表整列淨空")
 	deleteScript := flag.String("delete-script", "",
 		"delete 場景的按鍵腳本，token 為 UP／DOWN／RET／y／n，逐步輸出截圖")
@@ -796,6 +800,24 @@ func main() {
 			os.Exit(1)
 		}
 		outdoorState.SetMarkers(markers)
+		buildings, err := town.LoadBuildings(*buildingsPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		info := buildings.Town(outdoorState.Town)
+		if info == nil {
+			fmt.Fprintf(os.Stderr, "城鎮建築資料沒有城鎮 %d\n", outdoorState.Town)
+			os.Exit(1)
+		}
+		outdoorState.SetBuildings(info)
+		if *outdoorAtDoor {
+			if outdoorState.DoorUnderParty() == nil {
+				fmt.Fprintln(os.Stderr, "-outdoor-at-door：隊伍座標上沒有門")
+				os.Exit(2)
+			}
+			outdoorState.AtDoorCell = true
+		}
 	}
 
 	data, err := chardata.Load(*dataPath)

@@ -1,6 +1,6 @@
 {
   "name": "town-outdoor",
-  "description": "remake 的城鎮戶外畫面對原版逐張對拍。地圖視窗的 12×6 格磚塊由 TOWNn.0 的格子陣列與磚塊集合畫出（RE-059），隊伍標記的黑色外框由精靈佔用位圖左右膨脹一像素算出（RE-060）。鏡頭座標、標記畫格與標記在視窗內的偏移都由 tools/solve_outdoor_camera.py 從原版畫面反解，每一張都是唯一解。 第一對取自另一輪 oracle（town-icon-bar-run1），作跨輪交叉檢查。",
+  "description": "remake 的城鎮戶外畫面對原版逐張對拍。地圖視窗的 12×6 格磚塊由 TOWNn.0 的格子陣列與磚塊集合畫出（RE-059），隊伍標記的黑色外框由精靈佔用位圖左右膨脹一像素算出（RE-060）。鏡頭座標、標記畫格與標記在視窗內的偏移都由 tools/solve_outdoor_camera.py 從原版畫面反解，每一張都是唯一解。 第一對取自另一輪 oracle（town-icon-bar-run1），作跨輪交叉檢查。 最後一對是門口狀態，取自 town-enter-building-run1：隊伍離開門口再走回來，地圖視窗換成該建築的 192×96 門面圖。",
   "input": {
     "command": "tools/run_kol_shots.sh workplace/outdoor/parity.spec（每張帶 -outdoor-camera／-outdoor-frame／-outdoor-marker／-outdoor-icons）"
   },
@@ -319,6 +319,21 @@
       "label": "鏡頭 (58, 9)、標記畫格 3、標記偏移 (0, 1)、圖示列淨空",
       "remake": "docs/verification/remake-parity/shots/town-outdoor/cam58-9-f3-m01-inone.png",
       "original": "docs/verification/character-ui/town-outdoor-move-run1/frames/frame-093.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗中央畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 20,
+          "height": 16
+        }
+      ]
+    },
+    {
+      "label": "站在半途之家門口：地圖視窗換成 TWN7PICS[13]，圖示列只剩 DOOR 與 U-TURN",
+      "remake": "docs/verification/remake-parity/shots/town-door/inn-door.png",
+      "original": "docs/verification/character-ui/town-enter-building-run1/frames/frame-071.png",
       "allow": [
         {
           "name": "原版滑鼠游標",

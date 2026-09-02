@@ -1,0 +1,1322 @@
+{
+  "schema": "kol-town-doors-v1",
+  "input_name": "Knights-of-legend.zip",
+  "input_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "evidence": "RE-061：sub_10000 的門座標掃描迴圈與 sub_1198E／sub_11302 的配對",
+  "layout": {
+    "count": "payload3[0x20]",
+    "entry_points": "payload3[0x27 + 2k]",
+    "doors": "payload3[0x47 + 2i]",
+    "picture": "TWN{n}PICS[2i+3]，192×96，畫在 (104,58)",
+    "portrait": "TWN{n}PICS[2i+2]，88×64，畫在 (8,64)",
+    "text": "TOWNn.0 payload i+4（≥0x14 再加 1）；名稱在 0、人物在 29"
+  },
+  "towns": [
+    {
+      "town": 0,
+      "archive_payload_count": 86,
+      "door_count_byte": 0,
+      "doors_read": 1,
+      "table_bytes": 1281,
+      "table_sha256": "720479bdf8792f6d43fce5e65a0c0a0d88ef08a7a3cf76b8037b3a4ae772a455",
+      "entry_points": [],
+      "doors": [
+        {
+          "door": 0,
+          "x": 0,
+          "y": 0,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "A\u001e-\u0019-7#\u0019<#2\u001e22(\u0014K(7#7--\u0019F#2\u001e<2",
+          "person": "2(-2<\u0019\u000f\u0019\u001e##-F\u001e\u0014\u001e\u0019(\u001e<P#\u0019#\u0014-#7F\u001e\u0014(\u0019(��[m};\u001c]\u001bV�_]�\u0011�bb�\u0007$*��B\b",
+          "strings_well_formed": false
+        }
+      ]
+    },
+    {
+      "town": 1,
+      "archive_payload_count": 21,
+      "door_count_byte": 15,
+      "doors_read": 16,
+      "table_bytes": 104,
+      "table_sha256": "cfdb711cd0dbf0c02637c11098e9cea1fb57c7928d0faaf857d183d13affcb84",
+      "entry_points": [
+        {
+          "index": 0,
+          "x": 59,
+          "y": 37
+        }
+      ],
+      "doors": [
+        {
+          "door": 0,
+          "x": 31,
+          "y": 10,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "The Mayors house",
+          "person": "Benjamin Figgley",
+          "strings_well_formed": true
+        },
+        {
+          "door": 1,
+          "x": 50,
+          "y": 42,
+          "picture_index": 5,
+          "portrait_index": 4,
+          "text_payload": 5,
+          "name": "Trollsbane Inn",
+          "person": "Elmu Trollhewer",
+          "strings_well_formed": true
+        },
+        {
+          "door": 2,
+          "x": 49,
+          "y": 13,
+          "picture_index": 7,
+          "portrait_index": 6,
+          "text_payload": 6,
+          "name": "Saint Paul's Abbey",
+          "person": "Friar Huxley",
+          "strings_well_formed": true
+        },
+        {
+          "door": 3,
+          "x": 14,
+          "y": 20,
+          "picture_index": 9,
+          "portrait_index": 8,
+          "text_payload": 7,
+          "name": "The Lonely Page Pub",
+          "person": "Forest Largehead",
+          "strings_well_formed": true
+        },
+        {
+          "door": 4,
+          "x": 8,
+          "y": 20,
+          "picture_index": 11,
+          "portrait_index": 10,
+          "text_payload": 8,
+          "name": "Broken Keg Inn",
+          "person": "Thadius Button",
+          "strings_well_formed": true
+        },
+        {
+          "door": 5,
+          "x": 53,
+          "y": 53,
+          "picture_index": 13,
+          "portrait_index": 12,
+          "text_payload": 9,
+          "name": "Fortress of Brettle",
+          "person": "Hvrad Myth",
+          "strings_well_formed": true
+        },
+        {
+          "door": 6,
+          "x": 28,
+          "y": 36,
+          "picture_index": 15,
+          "portrait_index": 14,
+          "text_payload": 10,
+          "name": "Farcliff",
+          "person": "The Duke's Manor",
+          "strings_well_formed": true
+        },
+        {
+          "door": 7,
+          "x": 22,
+          "y": 14,
+          "picture_index": 17,
+          "portrait_index": 16,
+          "text_payload": 11,
+          "name": "Hansard Forger",
+          "person": "Endle Luteman",
+          "strings_well_formed": true
+        },
+        {
+          "door": 8,
+          "x": 41,
+          "y": 54,
+          "picture_index": 19,
+          "portrait_index": 18,
+          "text_payload": 12,
+          "name": "Holcroft Stables",
+          "person": "Brandon Holcroft",
+          "strings_well_formed": true
+        },
+        {
+          "door": 9,
+          "x": 23,
+          "y": 52,
+          "picture_index": 21,
+          "portrait_index": 20,
+          "text_payload": 13,
+          "name": "Ludeman Armorers",
+          "person": "The Ludeman Brothers",
+          "strings_well_formed": true
+        },
+        {
+          "door": 10,
+          "x": 10,
+          "y": 53,
+          "picture_index": 23,
+          "portrait_index": 22,
+          "text_payload": 14,
+          "name": "Bowyer and Fletcher",
+          "person": "Ryan Ashley",
+          "strings_well_formed": true
+        },
+        {
+          "door": 11,
+          "x": 11,
+          "y": 41,
+          "picture_index": 25,
+          "portrait_index": 24,
+          "text_payload": 15,
+          "name": "Weaponer",
+          "person": "Johnathon Sinew",
+          "strings_well_formed": true
+        },
+        {
+          "door": 12,
+          "x": 14,
+          "y": 9,
+          "picture_index": 27,
+          "portrait_index": 26,
+          "text_payload": 16,
+          "name": "Wizard's Tower",
+          "person": "Astimiah Eckhart",
+          "strings_well_formed": true
+        },
+        {
+          "door": 13,
+          "x": 41,
+          "y": 20,
+          "picture_index": 29,
+          "portrait_index": 28,
+          "text_payload": 17,
+          "name": "A Residence",
+          "person": "Stephen of Craymore",
+          "strings_well_formed": true
+        },
+        {
+          "door": 14,
+          "x": 7,
+          "y": 26,
+          "picture_index": 31,
+          "portrait_index": 30,
+          "text_payload": 18,
+          "name": "A Residence",
+          "person": "Hegissa of Mistdwell",
+          "strings_well_formed": true
+        },
+        {
+          "door": 15,
+          "x": 47,
+          "y": 25,
+          "picture_index": 33,
+          "portrait_index": 32,
+          "text_payload": 19,
+          "name": "Residence",
+          "person": "Stephanie Punderglass",
+          "strings_well_formed": true
+        }
+      ]
+    },
+    {
+      "town": 2,
+      "archive_payload_count": 21,
+      "door_count_byte": 13,
+      "doors_read": 14,
+      "table_bytes": 104,
+      "table_sha256": "efe91a94eb1d1de39c1e0505732535aec7054129429e1e73a2ef707ae970de47",
+      "entry_points": [
+        {
+          "index": 0,
+          "x": 51,
+          "y": 4
+        }
+      ],
+      "doors": [
+        {
+          "door": 0,
+          "x": 54,
+          "y": 21,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "Ofter's Alehouse",
+          "person": "Ofter Ironhelm",
+          "strings_well_formed": true
+        },
+        {
+          "door": 1,
+          "x": 34,
+          "y": 41,
+          "picture_index": 5,
+          "portrait_index": 4,
+          "text_payload": 5,
+          "name": "Wailing Peacock Inn",
+          "person": "Montrose Bomboff",
+          "strings_well_formed": true
+        },
+        {
+          "door": 2,
+          "x": 39,
+          "y": 35,
+          "picture_index": 7,
+          "portrait_index": 6,
+          "text_payload": 6,
+          "name": "Biblik the Sage",
+          "person": "Biblik",
+          "strings_well_formed": true
+        },
+        {
+          "door": 3,
+          "x": 19,
+          "y": 31,
+          "picture_index": 9,
+          "portrait_index": 8,
+          "text_payload": 7,
+          "name": "The Towne Merchant",
+          "person": "Kolldar",
+          "strings_well_formed": true
+        },
+        {
+          "door": 4,
+          "x": 26,
+          "y": 20,
+          "picture_index": 11,
+          "portrait_index": 10,
+          "text_payload": 8,
+          "name": "Saint Vitrius Abbey",
+          "person": "Brother Maynard Sefario",
+          "strings_well_formed": true
+        },
+        {
+          "door": 5,
+          "x": 39,
+          "y": 60,
+          "picture_index": 13,
+          "portrait_index": 12,
+          "text_payload": 9,
+          "name": "A residence",
+          "person": "Tildon Stiftwitch",
+          "strings_well_formed": true
+        },
+        {
+          "door": 6,
+          "x": 37,
+          "y": 29,
+          "picture_index": 15,
+          "portrait_index": 14,
+          "text_payload": 10,
+          "name": "A residence",
+          "person": "Lola Timberlane",
+          "strings_well_formed": true
+        },
+        {
+          "door": 7,
+          "x": 26,
+          "y": 17,
+          "picture_index": 17,
+          "portrait_index": 16,
+          "text_payload": 11,
+          "name": "A residence",
+          "person": "Yommel Killandra",
+          "strings_well_formed": true
+        },
+        {
+          "door": 8,
+          "x": 50,
+          "y": 34,
+          "picture_index": 19,
+          "portrait_index": 18,
+          "text_payload": 12,
+          "name": "Training Grounds",
+          "person": "Mornag the Merciless",
+          "strings_well_formed": true
+        },
+        {
+          "door": 9,
+          "x": 23,
+          "y": 52,
+          "picture_index": 21,
+          "portrait_index": 20,
+          "text_payload": 13,
+          "name": "A Hollow Tree",
+          "person": "Sam the Hermit",
+          "strings_well_formed": true
+        },
+        {
+          "door": 10,
+          "x": 36,
+          "y": 19,
+          "picture_index": 23,
+          "portrait_index": 22,
+          "text_payload": 14,
+          "name": "The Quiet Cove Inn",
+          "person": "Yaadrigard the Red",
+          "strings_well_formed": true
+        },
+        {
+          "door": 11,
+          "x": 37,
+          "y": 42,
+          "picture_index": 25,
+          "portrait_index": 24,
+          "text_payload": 15,
+          "name": "A Residence",
+          "person": "Tulliana Daverland",
+          "strings_well_formed": true
+        },
+        {
+          "door": 12,
+          "x": 18,
+          "y": 17,
+          "picture_index": 27,
+          "portrait_index": 26,
+          "text_payload": 16,
+          "name": "A Residence",
+          "person": "Zachary Bladeshure",
+          "strings_well_formed": true
+        },
+        {
+          "door": 13,
+          "x": 16,
+          "y": 24,
+          "picture_index": 29,
+          "portrait_index": 28,
+          "text_payload": 17,
+          "name": "Ship Chandler",
+          "person": "Kimble O'Sullivan",
+          "strings_well_formed": true
+        }
+      ]
+    },
+    {
+      "town": 3,
+      "archive_payload_count": 21,
+      "door_count_byte": 11,
+      "doors_read": 12,
+      "table_bytes": 104,
+      "table_sha256": "f3548a1a0a7d963f5aeb2bde459995d13f84087aa8467f6ad7359e1add7380e1",
+      "entry_points": [
+        {
+          "index": 0,
+          "x": 15,
+          "y": 10
+        }
+      ],
+      "doors": [
+        {
+          "door": 0,
+          "x": 32,
+          "y": 39,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "Grumbling Gut Tavern",
+          "person": "Dingbar Dolmwhistle",
+          "strings_well_formed": true
+        },
+        {
+          "door": 1,
+          "x": 45,
+          "y": 11,
+          "picture_index": 5,
+          "portrait_index": 4,
+          "text_payload": 5,
+          "name": "Stiffnuckles Inn",
+          "person": "Thelma Stiffnuckles",
+          "strings_well_formed": true
+        },
+        {
+          "door": 2,
+          "x": 45,
+          "y": 20,
+          "picture_index": 7,
+          "portrait_index": 6,
+          "text_payload": 6,
+          "name": "Armorer and Smith",
+          "person": "Julian Strongoak",
+          "strings_well_formed": true
+        },
+        {
+          "door": 3,
+          "x": 40,
+          "y": 9,
+          "picture_index": 9,
+          "portrait_index": 8,
+          "text_payload": 7,
+          "name": "A Residence",
+          "person": "Milinya Wereing",
+          "strings_well_formed": true
+        },
+        {
+          "door": 4,
+          "x": 25,
+          "y": 35,
+          "picture_index": 11,
+          "portrait_index": 10,
+          "text_payload": 8,
+          "name": "Saint Hibiscus Abbey",
+          "person": "Friar Windering",
+          "strings_well_formed": true
+        },
+        {
+          "door": 5,
+          "x": 13,
+          "y": 38,
+          "picture_index": 13,
+          "portrait_index": 12,
+          "text_payload": 9,
+          "name": "A residence",
+          "person": "Sarah Van Konnegan",
+          "strings_well_formed": true
+        },
+        {
+          "door": 6,
+          "x": 46,
+          "y": 42,
+          "picture_index": 15,
+          "portrait_index": 14,
+          "text_payload": 10,
+          "name": "Fallerton Stables",
+          "person": "Ernestine Fallerton",
+          "strings_well_formed": true
+        },
+        {
+          "door": 7,
+          "x": 16,
+          "y": 46,
+          "picture_index": 17,
+          "portrait_index": 16,
+          "text_payload": 11,
+          "name": "Residence",
+          "person": "Keldinarr",
+          "strings_well_formed": true
+        },
+        {
+          "door": 8,
+          "x": 17,
+          "y": 12,
+          "picture_index": 19,
+          "portrait_index": 18,
+          "text_payload": 12,
+          "name": "The Keep",
+          "person": "Lieutenant Trimrose",
+          "strings_well_formed": true
+        },
+        {
+          "door": 9,
+          "x": 16,
+          "y": 22,
+          "picture_index": 21,
+          "portrait_index": 20,
+          "text_payload": 13,
+          "name": "The Watch House",
+          "person": "Sergeant Yardley",
+          "strings_well_formed": true
+        },
+        {
+          "door": 10,
+          "x": 17,
+          "y": 38,
+          "picture_index": 23,
+          "portrait_index": 22,
+          "text_payload": 14,
+          "name": "Miller and Granery",
+          "person": "Trabbik and Sons",
+          "strings_well_formed": true
+        },
+        {
+          "door": 11,
+          "x": 8,
+          "y": 23,
+          "picture_index": 25,
+          "portrait_index": 24,
+          "text_payload": 15,
+          "name": "The Wizards Tower",
+          "person": "Zebin Al Zored",
+          "strings_well_formed": true
+        }
+      ]
+    },
+    {
+      "town": 4,
+      "archive_payload_count": 21,
+      "door_count_byte": 11,
+      "doors_read": 12,
+      "table_bytes": 104,
+      "table_sha256": "270b41ab6f72e4ac255b58494e5acd0ef8f3527039011d4fa50e2eec9f480b5c",
+      "entry_points": [
+        {
+          "index": 0,
+          "x": 6,
+          "y": 29
+        }
+      ],
+      "doors": [
+        {
+          "door": 0,
+          "x": 26,
+          "y": 60,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "Ma's Stables",
+          "person": "Bertrand Hackney",
+          "strings_well_formed": true
+        },
+        {
+          "door": 1,
+          "x": 14,
+          "y": 9,
+          "picture_index": 5,
+          "portrait_index": 4,
+          "text_payload": 5,
+          "name": "Jeweler",
+          "person": "Varrashod the Barkis",
+          "strings_well_formed": true
+        },
+        {
+          "door": 2,
+          "x": 21,
+          "y": 11,
+          "picture_index": 7,
+          "portrait_index": 6,
+          "text_payload": 6,
+          "name": "Lonely Cherub Inn",
+          "person": "Melissa Flaxenhair",
+          "strings_well_formed": true
+        },
+        {
+          "door": 3,
+          "x": 13,
+          "y": 26,
+          "picture_index": 9,
+          "portrait_index": 8,
+          "text_payload": 7,
+          "name": "Braumeister's Haus",
+          "person": "Hans Klomperstein",
+          "strings_well_formed": true
+        },
+        {
+          "door": 4,
+          "x": 32,
+          "y": 29,
+          "picture_index": 11,
+          "portrait_index": 10,
+          "text_payload": 8,
+          "name": "Fishhouse",
+          "person": "Limberton Cavendish",
+          "strings_well_formed": true
+        },
+        {
+          "door": 5,
+          "x": 7,
+          "y": 14,
+          "picture_index": 13,
+          "portrait_index": 12,
+          "text_payload": 9,
+          "name": "Smoking House",
+          "person": "Christopher Cavendish",
+          "strings_well_formed": true
+        },
+        {
+          "door": 6,
+          "x": 38,
+          "y": 16,
+          "picture_index": 15,
+          "portrait_index": 14,
+          "text_payload": 10,
+          "name": "The Mystic Tower",
+          "person": "Vaasred the Powerful",
+          "strings_well_formed": true
+        },
+        {
+          "door": 7,
+          "x": 9,
+          "y": 8,
+          "picture_index": 17,
+          "portrait_index": 16,
+          "text_payload": 11,
+          "name": "Our Lady of Fatima",
+          "person": "Deacon Desminstre",
+          "strings_well_formed": true
+        },
+        {
+          "door": 8,
+          "x": 7,
+          "y": 19,
+          "picture_index": 19,
+          "portrait_index": 18,
+          "text_payload": 12,
+          "name": "Smithy",
+          "person": "Sterner Branderman",
+          "strings_well_formed": true
+        },
+        {
+          "door": 9,
+          "x": 12,
+          "y": 47,
+          "picture_index": 21,
+          "portrait_index": 20,
+          "text_payload": 13,
+          "name": "The River Watchhouse",
+          "person": "Orofin Glenwarden",
+          "strings_well_formed": true
+        },
+        {
+          "door": 10,
+          "x": 7,
+          "y": 28,
+          "picture_index": 23,
+          "portrait_index": 22,
+          "text_payload": 14,
+          "name": "The Boorish Widow",
+          "person": "Harbreth Tankard",
+          "strings_well_formed": true
+        },
+        {
+          "door": 11,
+          "x": 45,
+          "y": 27,
+          "picture_index": 25,
+          "portrait_index": 24,
+          "text_payload": 15,
+          "name": "Lockkeeper's House",
+          "person": "Sedfrey Banderoak",
+          "strings_well_formed": true
+        }
+      ]
+    },
+    {
+      "town": 5,
+      "archive_payload_count": 21,
+      "door_count_byte": 13,
+      "doors_read": 14,
+      "table_bytes": 104,
+      "table_sha256": "6fb2ca6c6be90e30acde1adb3c69d307893eae6101f64cfb2fbfef5a0484a70b",
+      "entry_points": [
+        {
+          "index": 0,
+          "x": 37,
+          "y": 38
+        }
+      ],
+      "doors": [
+        {
+          "door": 0,
+          "x": 15,
+          "y": 19,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "Lord of Shellernoon",
+          "person": "Norgan Shellernoon",
+          "strings_well_formed": true
+        },
+        {
+          "door": 1,
+          "x": 25,
+          "y": 15,
+          "picture_index": 5,
+          "portrait_index": 4,
+          "text_payload": 5,
+          "name": "Weapons Trainer",
+          "person": "Kelmore Stratsmoth",
+          "strings_well_formed": true
+        },
+        {
+          "door": 2,
+          "x": 20,
+          "y": 50,
+          "picture_index": 7,
+          "portrait_index": 6,
+          "text_payload": 6,
+          "name": "The Main Gatehouse",
+          "person": "Sheller Elite Guards",
+          "strings_well_formed": true
+        },
+        {
+          "door": 3,
+          "x": 36,
+          "y": 16,
+          "picture_index": 9,
+          "portrait_index": 8,
+          "text_payload": 7,
+          "name": "Stone Inn",
+          "person": "Suzy Stoutgirdles",
+          "strings_well_formed": true
+        },
+        {
+          "door": 4,
+          "x": 34,
+          "y": 28,
+          "picture_index": 11,
+          "portrait_index": 10,
+          "text_payload": 8,
+          "name": "Sordsmith Ecstrodinar",
+          "person": "Lord Robert the Fine",
+          "strings_well_formed": true
+        },
+        {
+          "door": 5,
+          "x": 36,
+          "y": 33,
+          "picture_index": 13,
+          "portrait_index": 12,
+          "text_payload": 9,
+          "name": "The Commhobb Inn",
+          "person": "Hobben Slobbenagger",
+          "strings_well_formed": true
+        },
+        {
+          "door": 6,
+          "x": 43,
+          "y": 33,
+          "picture_index": 15,
+          "portrait_index": 14,
+          "text_payload": 10,
+          "name": "Livery Stable",
+          "person": "Snifty Clangshucker",
+          "strings_well_formed": true
+        },
+        {
+          "door": 7,
+          "x": 26,
+          "y": 58,
+          "picture_index": 17,
+          "portrait_index": 16,
+          "text_payload": 11,
+          "name": "Wilbur's Mage Things",
+          "person": "Wilbur Spidfellow",
+          "strings_well_formed": true
+        },
+        {
+          "door": 8,
+          "x": 40,
+          "y": 19,
+          "picture_index": 19,
+          "portrait_index": 18,
+          "text_payload": 12,
+          "name": "Residence",
+          "person": "Chauncey Lawnwatcher",
+          "strings_well_formed": true
+        },
+        {
+          "door": 9,
+          "x": 41,
+          "y": 24,
+          "picture_index": 21,
+          "portrait_index": 20,
+          "text_payload": 13,
+          "name": "Journeys' End Stores",
+          "person": "Ignatz Kramfrupples",
+          "strings_well_formed": true
+        },
+        {
+          "door": 10,
+          "x": 41,
+          "y": 16,
+          "picture_index": 23,
+          "portrait_index": 22,
+          "text_payload": 14,
+          "name": "The Courageous Griffin",
+          "person": "Dangonaer Stonesmith",
+          "strings_well_formed": true
+        },
+        {
+          "door": 11,
+          "x": 48,
+          "y": 13,
+          "picture_index": 25,
+          "portrait_index": 24,
+          "text_payload": 15,
+          "name": "A Residence",
+          "person": "Torellen Mystanguan",
+          "strings_well_formed": true
+        },
+        {
+          "door": 12,
+          "x": 43,
+          "y": 26,
+          "picture_index": 27,
+          "portrait_index": 26,
+          "text_payload": 16,
+          "name": "Free Faith Fellowship",
+          "person": "Father Freath Fallen",
+          "strings_well_formed": true
+        },
+        {
+          "door": 13,
+          "x": 43,
+          "y": 15,
+          "picture_index": 29,
+          "portrait_index": 28,
+          "text_payload": 17,
+          "name": "Armorer Extraordinaire",
+          "person": "Big Jim Hogan",
+          "strings_well_formed": true
+        }
+      ]
+    },
+    {
+      "town": 6,
+      "archive_payload_count": 21,
+      "door_count_byte": 11,
+      "doors_read": 12,
+      "table_bytes": 104,
+      "table_sha256": "cfe2500ed75c223437afe3e59644c890a2c08463cc307e640ba720ff3dae2d9c",
+      "entry_points": [
+        {
+          "index": 0,
+          "x": 24,
+          "y": 57
+        }
+      ],
+      "doors": [
+        {
+          "door": 0,
+          "x": 21,
+          "y": 19,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "The Abbey of Olanthen",
+          "person": "Brother Charles",
+          "strings_well_formed": true
+        },
+        {
+          "door": 1,
+          "x": 37,
+          "y": 7,
+          "picture_index": 5,
+          "portrait_index": 4,
+          "text_payload": 5,
+          "name": "Handcrafted Leathers",
+          "person": "Tate Werkam",
+          "strings_well_formed": true
+        },
+        {
+          "door": 2,
+          "x": 12,
+          "y": 7,
+          "picture_index": 7,
+          "portrait_index": 6,
+          "text_payload": 6,
+          "name": "Rhun Manor",
+          "person": "Rhunholland",
+          "strings_well_formed": true
+        },
+        {
+          "door": 3,
+          "x": 18,
+          "y": 32,
+          "picture_index": 9,
+          "portrait_index": 8,
+          "text_payload": 7,
+          "name": "The Gatehouse",
+          "person": "Denswurth",
+          "strings_well_formed": true
+        },
+        {
+          "door": 4,
+          "x": 45,
+          "y": 31,
+          "picture_index": 11,
+          "portrait_index": 10,
+          "text_payload": 8,
+          "name": "Long Days Inn",
+          "person": "Gerard and Zeke",
+          "strings_well_formed": true
+        },
+        {
+          "door": 5,
+          "x": 30,
+          "y": 10,
+          "picture_index": 13,
+          "portrait_index": 12,
+          "text_payload": 9,
+          "name": "Residence",
+          "person": "Belinda Goldenhair",
+          "strings_well_formed": true
+        },
+        {
+          "door": 6,
+          "x": 9,
+          "y": 25,
+          "picture_index": 15,
+          "portrait_index": 14,
+          "text_payload": 10,
+          "name": "Bophets Steeds",
+          "person": "Bophet of Redoak",
+          "strings_well_formed": true
+        },
+        {
+          "door": 7,
+          "x": 19,
+          "y": 26,
+          "picture_index": 17,
+          "portrait_index": 16,
+          "text_payload": 11,
+          "name": "Joolie the Mysticist",
+          "person": "Joolie Jimathy",
+          "strings_well_formed": true
+        },
+        {
+          "door": 8,
+          "x": 25,
+          "y": 7,
+          "picture_index": 19,
+          "portrait_index": 18,
+          "text_payload": 12,
+          "name": "Cobbler",
+          "person": "Karg the One-Eye",
+          "strings_well_formed": true
+        },
+        {
+          "door": 9,
+          "x": 41,
+          "y": 35,
+          "picture_index": 21,
+          "portrait_index": 20,
+          "text_payload": 13,
+          "name": "The Mill",
+          "person": "Berthand the Younger",
+          "strings_well_formed": true
+        },
+        {
+          "door": 10,
+          "x": 12,
+          "y": 20,
+          "picture_index": 23,
+          "portrait_index": 22,
+          "text_payload": 14,
+          "name": "Ne'er Dry Pub",
+          "person": "Bohoik the Fierce",
+          "strings_well_formed": true
+        },
+        {
+          "door": 11,
+          "x": 30,
+          "y": 7,
+          "picture_index": 25,
+          "portrait_index": 24,
+          "text_payload": 15,
+          "name": "Isobel's Bakery",
+          "person": "Isobel Fluffenstumper",
+          "strings_well_formed": true
+        }
+      ]
+    },
+    {
+      "town": 7,
+      "archive_payload_count": 26,
+      "door_count_byte": 21,
+      "doors_read": 22,
+      "table_bytes": 116,
+      "table_sha256": "4fd45f0bfccc5137fcad2fc7b117036ea01b4cad25322f5041d3e55d6a1829af",
+      "entry_points": [
+        {
+          "index": 0,
+          "x": 30,
+          "y": 24
+        },
+        {
+          "index": 1,
+          "x": 59,
+          "y": 32
+        },
+        {
+          "index": 2,
+          "x": 51,
+          "y": 53
+        },
+        {
+          "index": 3,
+          "x": 40,
+          "y": 23
+        },
+        {
+          "index": 4,
+          "x": 29,
+          "y": 11
+        },
+        {
+          "index": 5,
+          "x": 39,
+          "y": 41
+        },
+        {
+          "index": 6,
+          "x": 17,
+          "y": 54
+        },
+        {
+          "index": 7,
+          "x": 42,
+          "y": 9
+        },
+        {
+          "index": 8,
+          "x": 14,
+          "y": 35
+        },
+        {
+          "index": 9,
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "doors": [
+        {
+          "door": 0,
+          "x": 13,
+          "y": 9,
+          "picture_index": 3,
+          "portrait_index": 2,
+          "text_payload": 4,
+          "name": "The Hobe's Main Gate",
+          "person": "Sir Celegorn",
+          "strings_well_formed": true
+        },
+        {
+          "door": 1,
+          "x": 10,
+          "y": 7,
+          "picture_index": 5,
+          "portrait_index": 4,
+          "text_payload": 5,
+          "name": "The Guardshack",
+          "person": "A Man in Irons",
+          "strings_well_formed": true
+        },
+        {
+          "door": 2,
+          "x": 8,
+          "y": 9,
+          "picture_index": 7,
+          "portrait_index": 6,
+          "text_payload": 6,
+          "name": "The Hobean Keep",
+          "person": "Lord Stiveson Bonner",
+          "strings_well_formed": true
+        },
+        {
+          "door": 3,
+          "x": 24,
+          "y": 6,
+          "picture_index": 9,
+          "portrait_index": 8,
+          "text_payload": 7,
+          "name": "Tower at Threeroads",
+          "person": "Fistan Stockhard",
+          "strings_well_formed": true
+        },
+        {
+          "door": 4,
+          "x": 44,
+          "y": 7,
+          "picture_index": 11,
+          "portrait_index": 10,
+          "text_payload": 8,
+          "name": "Klvar Tree House",
+          "person": "Tyrolliar Cellana",
+          "strings_well_formed": true
+        },
+        {
+          "door": 5,
+          "x": 57,
+          "y": 8,
+          "picture_index": 13,
+          "portrait_index": 12,
+          "text_payload": 9,
+          "name": "Halfway House",
+          "person": "Devin Torlock",
+          "strings_well_formed": true
+        },
+        {
+          "door": 6,
+          "x": 54,
+          "y": 9,
+          "picture_index": 15,
+          "portrait_index": 14,
+          "text_payload": 10,
+          "name": "Weapons Master",
+          "person": "Nigel Gulliam",
+          "strings_well_formed": true
+        },
+        {
+          "door": 7,
+          "x": 9,
+          "y": 23,
+          "picture_index": 17,
+          "portrait_index": 16,
+          "text_payload": 11,
+          "name": "Residence",
+          "person": "Pegleg Pereau",
+          "strings_well_formed": true
+        },
+        {
+          "door": 8,
+          "x": 4,
+          "y": 25,
+          "picture_index": 19,
+          "portrait_index": 18,
+          "text_payload": 12,
+          "name": "A small boathouse",
+          "person": "Scotty",
+          "strings_well_formed": true
+        },
+        {
+          "door": 9,
+          "x": 22,
+          "y": 29,
+          "picture_index": 21,
+          "portrait_index": 20,
+          "text_payload": 13,
+          "name": "Sheller Bridge",
+          "person": "Rodrigard the Tollman",
+          "strings_well_formed": true
+        },
+        {
+          "door": 10,
+          "x": 24,
+          "y": 29,
+          "picture_index": 23,
+          "portrait_index": 22,
+          "text_payload": 14,
+          "name": "On the Parapet",
+          "person": "Aurin the Stalwart",
+          "strings_well_formed": true
+        },
+        {
+          "door": 11,
+          "x": 42,
+          "y": 19,
+          "picture_index": 25,
+          "portrait_index": 24,
+          "text_payload": 15,
+          "name": "The Great Kazhad Gate",
+          "person": "Zafrid Earthworks",
+          "strings_well_formed": true
+        },
+        {
+          "door": 12,
+          "x": 38,
+          "y": 24,
+          "picture_index": 27,
+          "portrait_index": 26,
+          "text_payload": 16,
+          "name": "Kherrikvaad Smithy",
+          "person": "Dormund Sparkflinger",
+          "strings_well_formed": true
+        },
+        {
+          "door": 13,
+          "x": 38,
+          "y": 26,
+          "picture_index": 29,
+          "portrait_index": 28,
+          "text_payload": 17,
+          "name": "T'a Kalla Tavern",
+          "person": "Kathralda Potbelly",
+          "strings_well_formed": true
+        },
+        {
+          "door": 14,
+          "x": 42,
+          "y": 23,
+          "picture_index": 31,
+          "portrait_index": 30,
+          "text_payload": 18,
+          "name": "The Assembly Building",
+          "person": "Dundle of Blackhair",
+          "strings_well_formed": true
+        },
+        {
+          "door": 15,
+          "x": 54,
+          "y": 22,
+          "picture_index": 33,
+          "portrait_index": 32,
+          "text_payload": 19,
+          "name": "The Fostering",
+          "person": "Dunnigan",
+          "strings_well_formed": true
+        },
+        {
+          "door": 16,
+          "x": 61,
+          "y": 23,
+          "picture_index": 35,
+          "portrait_index": 34,
+          "text_payload": 21,
+          "name": "The Portal",
+          "person": "Morwin the Elder",
+          "strings_well_formed": true
+        },
+        {
+          "door": 17,
+          "x": 59,
+          "y": 28,
+          "picture_index": 37,
+          "portrait_index": 36,
+          "text_payload": 22,
+          "name": "The Hostel",
+          "person": "Slaine the Younger",
+          "strings_well_formed": true
+        },
+        {
+          "door": 18,
+          "x": 3,
+          "y": 34,
+          "picture_index": 39,
+          "portrait_index": 38,
+          "text_payload": 23,
+          "name": "Tinkerer",
+          "person": "Old Man Skeezers",
+          "strings_well_formed": true
+        },
+        {
+          "door": 19,
+          "x": 12,
+          "y": 35,
+          "picture_index": 41,
+          "portrait_index": 40,
+          "text_payload": 24,
+          "name": "Old Guard",
+          "person": "Terrance Bellywinger",
+          "strings_well_formed": true
+        },
+        {
+          "door": 20,
+          "x": 6,
+          "y": 46,
+          "picture_index": 43,
+          "portrait_index": 42,
+          "text_payload": 25,
+          "name": "Residence",
+          "person": "Frumpin Scalecatcher",
+          "strings_well_formed": true
+        },
+        {
+          "door": 21,
+          "x": 20,
+          "y": 36,
+          "picture_index": 45,
+          "portrait_index": 44,
+          "text_payload": 26,
+          "text_payload_missing": true
+        }
+      ]
+    }
+  ]
+}

@@ -130,3 +130,50 @@ func TestAdvanceMarkerPingPongs(t *testing.T) {
 		}
 	}
 }
+
+// 門口是狀態不是位置：原版是移動到門的座標時才觸發，
+// 剛從建築物走出來、站在同一格上時仍然是地圖畫面。
+func TestDoorStateNeedsMovement(t *testing.T) {
+	o := newOutdoor(t, 57, 8)
+	o.SetBuildings(&TownBuildings{Town: 7, Doors: []Door{
+		{Index: 5, X: 57, Y: 8, Picture: 13, Portrait: 12, Name: "Halfway House"},
+	}})
+	o.Icons = []int{DoorIcon}
+
+	if o.DoorUnderParty() == nil {
+		t.Fatal("隊伍座標上應該有門")
+	}
+	if o.AtDoor() != nil {
+		t.Fatal("還沒移動就不該是門口狀態")
+	}
+	icons, selected := o.IconRow()
+	if len(icons) != 1 || selected != 0 {
+		t.Fatalf("非門口狀態的圖示列是 %v／%d", icons, selected)
+	}
+
+	o.Move(0, 0)
+	if o.AtDoor() == nil {
+		t.Fatal("移動之後應該進入門口狀態")
+	}
+	icons, selected = o.IconRow()
+	if len(icons) != 2 || icons[0] != DoorIcon || icons[1] != UTurnIcon || selected != 0 {
+		t.Fatalf("門口狀態的圖示列是 %v／%d，應為 [DOOR U-TURN]／0", icons, selected)
+	}
+
+	o.Move(1, 0)
+	if o.AtDoor() != nil {
+		t.Fatal("走離門口之後應該回到地圖畫面")
+	}
+}
+
+func TestDoorAtLooksUpCoordinates(t *testing.T) {
+	b := &TownBuildings{Town: 7, Doors: []Door{
+		{Index: 0, X: 13, Y: 9}, {Index: 5, X: 57, Y: 8},
+	}}
+	if d := b.DoorAt(57, 8); d == nil || d.Index != 5 {
+		t.Fatalf("(57,8) 應該是門 5，取到 %v", d)
+	}
+	if b.DoorAt(57, 9) != nil {
+		t.Fatal("(57,9) 不該有門")
+	}
+}

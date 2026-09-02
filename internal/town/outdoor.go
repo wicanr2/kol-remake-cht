@@ -83,8 +83,14 @@ type Outdoor struct {
 	// 隊伍先在視窗內走，走到一定位置鏡頭才跟著捲動，所以兩者要分開記。
 	Marker struct{ Base, Frame, Row, Col int } `json:"marker"`
 
-	grid    *Grid
-	markers *Markers
+	// AtDoorCell 是「站在門口」這個狀態。原版是**移動到**門的座標時才觸發
+	// （`sub_10000` 的掃門迴圈在移動之後才跑），所以剛從建築物走出來、
+	// 站在同一格上時仍然是地圖畫面。位置本身不足以決定，要獨立記。
+	AtDoorCell bool `json:"at_door"`
+
+	grid      *Grid
+	markers   *Markers
+	buildings *TownBuildings
 }
 
 // LoadOutdoor 讀取戶外畫面的樣本狀態。這份 JSON 只作對拍輸入，不是遊戲資料模型。
@@ -131,6 +137,36 @@ func (o *Outdoor) SetGrid(g *Grid) { o.grid = g }
 
 // SetMarkers 掛上隊伍標記精靈。
 func (o *Outdoor) SetMarkers(m *Markers) { o.markers = m }
+
+// SetBuildings 掛上該城鎮的門與建築資料。
+func (o *Outdoor) SetBuildings(b *TownBuildings) { o.buildings = b }
+
+// IconRow 回傳目前該畫的圖示列與白框位置。站在門口時原版把圖示列重建成
+// DOOR 與 U-TURN 兩格，白框回到第一格。
+func (o *Outdoor) IconRow() ([]int, int) {
+	if o.AtDoor() != nil {
+		return []int{DoorIcon, UTurnIcon}, 0
+	}
+	return o.Icons, o.Selected
+}
+
+// AtDoor 回傳目前門口狀態所在的門；不在門口狀態就回 nil。
+func (o *Outdoor) AtDoor() *Door {
+	if !o.AtDoorCell || o.buildings == nil {
+		return nil
+	}
+	x, y := o.PartyPosition()
+	return o.buildings.DoorAt(x, y)
+}
+
+// DoorUnderParty 回傳隊伍座標上的門（不看狀態），移動之後用它決定要不要進門口狀態。
+func (o *Outdoor) DoorUnderParty() *Door {
+	if o.buildings == nil {
+		return nil
+	}
+	x, y := o.PartyPosition()
+	return o.buildings.DoorAt(x, y)
+}
 
 // MarkerCell 是隊伍標記目前佔的視窗格。偏移為 0 時落在 (列 2, 欄 5)，
 // 也就是鏡頭座標本身那一格。
@@ -196,7 +232,9 @@ func (o *Outdoor) View() [][]int {
 }
 
 // Move 依方向鍵移動鏡頭。夾限與繪製時相同，走到邊界就停住。
+// 移動之後重新判斷門口狀態——原版的掃門迴圈就是接在移動後面。
 func (o *Outdoor) Move(dx, dy int) {
 	o.Camera.X = clamp(o.Camera.X+dx, o.Bounds.MinX, o.Bounds.MaxX)
 	o.Camera.Y = clamp(o.Camera.Y+dy, o.Bounds.MinY, o.Bounds.MaxY)
+	o.AtDoorCell = o.DoorUnderParty() != nil
 }

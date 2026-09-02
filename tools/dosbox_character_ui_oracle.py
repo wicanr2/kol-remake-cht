@@ -261,6 +261,28 @@ SCENARIOS: dict[str, dict] = {
             step("選定第一名同伴之後", None, settle=4.0),
         ],
     },
+    "town-enter-building": {
+        "description": "由旅店按 DOOR 走到戶外地圖，先離開門口再走回來，觀察站在門口時"
+                       "地圖視窗是不是換成建築物的圖；接著按 DOOR 進去，再出來走到"
+                       "另一個門口，看第二棟建築的圖。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Left", settle=2.5),
+            step("往左一步，離開門口", "Right", settle=3.0),
+            step("走回旅店門口", None, settle=3.0),
+            step("門口狀態（觀察）", "Return", settle=3.5),
+            step("按 DOOR 進旅店", None, settle=3.0),
+            step("旅店畫面（觀察）", "Return", settle=3.5),
+            step("按 DOOR 回到戶外", "Left", settle=2.5),
+            step("往左一步", "Left", settle=2.5),
+            step("往左兩步", "Left", settle=2.5),
+            step("往左三步", "Down", settle=3.0),
+            step("往下一步（另一個門口）", None, settle=3.0),
+            step("第二個門口狀態（觀察）", "Return", settle=3.5),
+            step("進入第二棟建築", None, settle=3.0),
+            step("第二棟建築內部（觀察）", None, settle=3.0),
+        ],
+    },
     "town-outdoor-move": {
         "description": "由旅店按 DOOR 走到戶外地圖，再用方向鍵移動幾步並在圖示列上移動，"
                        "用來判斷地圖視窗是不是一張固定圖。純觀察，不進任何建築。",
