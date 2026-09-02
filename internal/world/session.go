@@ -37,13 +37,17 @@ type Session struct {
 
 	Mode   Mode
 	Cursor int
+	// Direction 是目前循的道路方向（0…7，順時針由北算起），`NoDirection` 是沒有；
+	// Excluded 是 SIGNPOST 排除掉的那個方向。原版是 `word_2FB5E` 與 `word_2FBBA`。
+	Direction int
+	Excluded  int
 	// Town 是腳下那個城鎮入口；不在入口上就是 nil。
 	Town *Town
 }
 
 // NewSession 建立一次野外旅行。起始狀態是「剛進野外」：地圖模式、空的圖示列。
 func NewSession(s *Screen) *Session {
-	sess := &Session{Screen: s}
+	sess := &Session{Screen: s, Direction: NoDirection, Excluded: NoDirection}
 	sess.Reset()
 	return sess
 }
@@ -55,6 +59,7 @@ func NewSession(s *Screen) *Session {
 func (s *Session) Reset() {
 	s.Mode = ModeMap
 	s.Town = nil
+	s.Direction, s.Excluded = NoDirection, NoDirection
 	s.setIcons(nil)
 	s.Screen.SyncTerrain()
 }
@@ -90,8 +95,16 @@ func (s *Session) setIcons(ids []int) {
 		icons[i] = id + 3
 	}
 	s.Screen.Icons = icons
+	s.Screen.Vacated = make([]bool, len(ids))
 	s.Screen.Selected = 0
 	s.Cursor = 0
+}
+
+// leaveSlot 把白框目前那一格記成「離開過」，之後它的框色是青色而不是亮藍。
+func (s *Session) leaveSlot() {
+	if s.Cursor >= 0 && s.Cursor < len(s.Screen.Vacated) {
+		s.Screen.Vacated[s.Cursor] = true
+	}
 }
 
 // Walk 走一步。站在入口提示裡時方向鍵沒有作用。
@@ -123,23 +136,41 @@ func (s *Session) MoveCursor(delta int) {
 	if n == 0 {
 		return
 	}
+	s.leaveSlot()
 	s.Cursor = ((s.Cursor+delta)%n + n) % n
 	s.Screen.Selected = s.Cursor
 }
 
-// Accept 是 Return。在入口提示裡選 DOOR 就進城、選 U-TURN 就回地圖。
+// Accept 是 Return，按下白框那一格的圖示。
+//
+//   - DOOR：進城。入口提示裡與 U-TURN 之後保留的那一格都走這條
+//     （`sub_29004:0x29799` 對 `sub_29BBB` 的 DOOR 分支是同一支 `sub_29CA3`）。
+//   - U-TURN：回地圖，圖示列只剩一格 DOOR。
+//   - ROAD／SIGNPOST：沿道路走一步。
 func (s *Session) Accept() {
-	if s.Mode != ModeTown || len(s.Screen.Icons) == 0 {
+	if len(s.Screen.Icons) == 0 || s.Cursor >= len(s.Screen.Icons) {
 		return
 	}
-	switch s.Screen.Icons[s.Cursor] {
-	case IconDoor + 3:
+	// 按下之後白框一律回到第 0 格，原本那一格改畫青色（`sub_29004:0x29765`）。
+	id := s.Screen.Icons[s.Cursor] - 3
+	if s.Mode == ModeMap {
+		s.leaveSlot()
+		s.Cursor, s.Screen.Selected = 0, 0
+	}
+	switch id {
+	case IconDoor:
 		if s.OnEnterTown != nil && s.Town != nil {
 			s.OnEnterTown(s.Town)
 		}
-	case IconUTurn + 3:
-		s.Mode = ModeMap
-		s.setIcons(s.mapIcons(true))
+	case IconUTurn:
+		if s.Mode == ModeTown {
+			s.Mode = ModeMap
+			s.setIcons(s.mapIcons(true))
+		}
+	case IconRoad:
+		s.FollowRoad(false)
+	case IconSignpost:
+		s.FollowRoad(true)
 	}
 }
 

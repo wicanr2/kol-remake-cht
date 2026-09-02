@@ -40,6 +40,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 | `town-talk` | 10 | 建築內的 SPACEBAR 圖示列、LISTEN 的傳聞與 MOUTH 的問話 |
 | `town-leave` | 13 | 在城門選 DOOR 離開城鎮，落到世界地圖 |
 | `town-round-trip` | 20 | 城鎮 → 野外走到路上 → 退回城鎮入口 → 選 DOOR 進城 |
+| `world-road` | 34 | 出城往北走上道路，連按七次 ROAD 自動循路，再按 SIGNPOST 換另一條 |
 | `full` | 26 | 從標題序列走到城鎮：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走，由 `internal/flow` 串起來 |
 
 尚未實作的功能（EDIT PICTURE／EDIT SHIELD、旅店其餘五個圖示）會被記進

@@ -49,11 +49,7 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small *font.Font,
 			return err
 		}
 		draw(dst, icon, x, b.Y+1)
-		c := town.ColourIdle
-		if i == s.Selected {
-			c = town.ColourSelected
-		}
-		frame(dst, x, b.Y, b.Width, b.Height, c)
+		frame(dst, x, b.Y, b.Width, b.Height, iconFrameColour(s, i))
 	}
 	return nil
 }
@@ -242,6 +238,18 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	return drawWorldIconsCJK(dst, sprites, s)
 }
 
+// iconFrameColour 是野外圖示列的框色：白框是目前這一格，被選過又離開的是青色，
+// 其餘是亮藍（RE-070）。
+func iconFrameColour(s *world.Screen, i int) [3]uint8 {
+	switch {
+	case i == s.Selected:
+		return town.ColourSelected
+	case i < len(s.Vacated) && s.Vacated[i]:
+		return world.ColourVacated
+	}
+	return town.ColourIdle
+}
+
 // drawWorldIconsCJK 是中文模式的圖示列，內容與英文模式相同，只是放大兩倍。
 func drawWorldIconsCJK(dst *ebiten.Image, sprites Sprites, s *world.Screen) error {
 	l := world.CJK
@@ -252,11 +260,7 @@ func drawWorldIconsCJK(dst *ebiten.Image, sprites Sprites, s *world.Screen) erro
 			return err
 		}
 		drawScaled(dst, icon, x, l.IconY+l.Scale, l.Scale)
-		c := town.ColourIdle
-		if i == s.Selected {
-			c = town.ColourSelected
-		}
-		frame(dst, x, l.IconY, l.IconW, l.IconH, c)
+		frame(dst, x, l.IconY, l.IconW, l.IconH, iconFrameColour(s, i))
 	}
 	return nil
 }

@@ -45,7 +45,13 @@ func (t *Travel) OnRoad() bool { return t.Data.OnRoad(t.Tile()) }
 func (t *Travel) TownHere() *Town { return t.Data.TownAt(t.X, t.Y) }
 
 // Walk 依方向鍵走一步。回傳是否真的動了——撞到不可通行的磚塊會原地不動。
-func (t *Travel) Walk(dx, dy int) bool {
+func (t *Travel) Walk(dx, dy int) bool { return t.walk(dx, dy, false) }
+
+// WalkRoad 是 ROAD／SIGNPOST 模擬出來的那一步。原版在那一步設 `word_37D28`，
+// 目的地不是道路磚塊就把整個動作退回（`sub_29004:0x2930C`）。
+func (t *Travel) WalkRoad(dx, dy int) bool { return t.walk(dx, dy, true) }
+
+func (t *Travel) walk(dx, dy int, roadOnly bool) bool {
 	if dx == 0 && dy == 0 {
 		return false
 	}
@@ -58,6 +64,10 @@ func (t *Travel) Walk(dx, dy int) bool {
 		return true
 	}
 	// 擋路查的也是那一格：原版讀 `viewbuf[0x29 + dx + 12*dy]`，基底同樣是第 3 列。
+	if roadOnly && !t.Data.OnRoad(t.Tile()) {
+		t.X, t.Y, t.SubX, t.SubY = x, y, sx, sy
+		return false
+	}
 	if !t.Data.Passable(t.Tile()) {
 		t.X, t.Y, t.SubX, t.SubY = x, y, sx, sy
 		return false

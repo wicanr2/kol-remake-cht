@@ -57,6 +57,19 @@ GLOBALS = {
     "terrain_code_word_3499A": 0x3499A,
 }
 
+# 要原樣倒出來的 DGROUP 區塊：(位移, 位元組數)。
+DGROUP_DUMPS = (
+    (0x12E2, 16),   # sub_29DDE 的方向鍵碼表（8 個 word）
+    (0x12F2, 16),   # 方向 → X 位移（8 個 word）
+    (0x1302, 16),   # 方向 → Y 位移（8 個 word）
+    (0x1312, 8),    # 方向 → 位元遮罩（8 個 byte）
+    (0x131A, 16),   # sub_29987 用到的相鄰表
+    (0x1326, 16),
+    (0x12B8, 16),   # sub_297F2 的地形時間成本
+    (0x12CC, 16),   # 時段門檻（5 個 word）
+    (0x2F1B4 - 0x2DED0, 16),  # word_2F1B4…2F1C0：四個方向鍵碼
+)
+
 # `town%d` 的四個 DGROUP 位移；誰載入它們就是誰在組地圖檔名。
 TOWN_FORMAT_OFFSETS = {0x168C, 0x16C8, 0x1794, 0x1808}
 
@@ -176,6 +189,9 @@ def main() -> None:
         "ffff_stores": ffff_stores(),
         "globals": {name: global_users(addr) for name, addr in GLOBALS.items()},
         "dumped_functions": [function_slice(ea) for ea in DUMP_FUNCTIONS],
+        "dgroup_dumps": {f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, n)
+                                          or b"").hex()
+                         for off, n in DGROUP_DUMPS},
         "dgroup_bit_mask_table_0x5E": (ida_bytes.get_bytes(DGROUP_EA + 0x5E, 16) or b"").hex(),
         "dgroup_town0_literals": {
             f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, 16) or b"").hex()

@@ -325,6 +325,32 @@ SCENARIOS: dict[str, dict] = {
             step("按下該格圖示之後（觀察）", None, settle=4.0),
         ],
     },
+    "world-road-follow": {
+        "description": "離開城鎮走到野外的道路上，連按 ROAD 讓隊伍自動循路，"
+                       "再按一次 SIGNPOST 換另一條路。純觀察，不進建築、不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("城門提示（白框在 DOOR）", "Return", settle=6.0),
+            step("野外地圖的第一張畫面", "Up", settle=3.0),
+        ] + [
+            step(f"野外往北第 {i} 步", "Up", settle=3.0) for i in range(2, 13)
+        ] + [
+            step("站到路上（圖示列出現 ROAD 與 SIGNPOST）", "Return", settle=3.5),
+        ] + [
+            step(f"循路第 {i} 步", "Return", settle=3.5) for i in range(1, 7)
+        ] + [
+            step("循路第 7 步", "greater", settle=2.5),
+            step("白框移到 SIGNPOST", "Return", settle=3.5),
+            step("按下 SIGNPOST 之後（觀察）", None, settle=4.0),
+        ],
+    },
     "world-enter-town": {
         "description": "離開城鎮走到野外之後，往東走五步跨進隔壁那一格，再往西一步"
                        "踏回城鎮入口那一格：畫面應換成該地點的外觀圖，圖示列剩 "

@@ -32,6 +32,9 @@ var LabelLines = [2]struct{ X, Y int }{{X: 16, Y: 144}, {X: 24, Y: 150}}
 // MarkerSide 是隊伍那個閃爍的點的邊長。
 const MarkerSide = 2
 
+// ColourVacated 是圖示列「被選過又離開」的框色：EGA 索引 3。
+var ColourVacated = [3]uint8{0, 170, 170}
+
 // Screen 是野外畫面的完整狀態。
 type Screen struct {
 	Travel  *Travel
@@ -45,6 +48,10 @@ type Screen struct {
 	DateZh    []string
 	Icons     []int
 	Selected  int
+	// Vacated 記的是「白框離開過」的格子。野外的圖示列有三種框色：白框是目前這一格，
+	// 還沒被選過的是亮藍（`sub_11722` 畫的 9），**被選過又離開的是青色**
+	// （主迴圈自己的 `sub_1B90B(舊格, 3)`，`sub_29004:0x2973B` 與 `0x29765`）。
+	Vacated []bool
 	// MarkerOff 是閃爍的另一半：點暫時不畫。原版每隔幾個 tick 就切一次。
 	MarkerOff bool
 	// Names 供應標籤的兩行文字。原版直接畫 KOLDATA 的記錄，而那些記錄**自帶空白**
