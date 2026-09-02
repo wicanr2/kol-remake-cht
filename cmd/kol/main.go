@@ -29,6 +29,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/title"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
@@ -54,9 +55,10 @@ const (
 	sceneBuilding   scene = "building"
 	scenePlay       scene = "play"
 	sceneFlow       scene = "flow"
+	sceneWorld      scene = "world"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay, sceneFlow}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay, sceneFlow, sceneWorld}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -252,6 +254,42 @@ func applyPlayToken(s *town.Session, token string) error {
 	return nil
 }
 
+// parsePair 解析 `X,Y` 形式的參數。
+func parsePair(spec string) (int, int, error) {
+	var a, b int
+	if _, err := fmt.Sscanf(spec, "%d,%d", &a, &b); err != nil {
+		return 0, 0, err
+	}
+	return a, b, nil
+}
+
+// applyWorldToken 把腳本 token 套到野外旅行狀態。
+func applyWorldToken(s *world.Screen, token string) error {
+	switch token {
+	case "L":
+		s.Travel.Walk(-1, 0)
+	case "R":
+		s.Travel.Walk(1, 0)
+	case "U":
+		s.Travel.Walk(0, -1)
+	case "D":
+		s.Travel.Walk(0, 1)
+	case "A":
+		s.Travel.Walk(-1, -1)
+	case "S":
+		s.Travel.Walk(1, -1)
+	case "Z":
+		s.Travel.Walk(-1, 1)
+	case "X":
+		s.Travel.Walk(1, 1)
+	case "TICK":
+		s.Phase++
+	default:
+		return fmt.Errorf("未知的野外操作 token：%q", token)
+	}
+	return nil
+}
+
 // parseIcons 解析 -outdoor-icons：`none` 是空列，其餘是逗號分隔的 KOLMPICS 圖號。
 func parseIcons(spec string) ([]int, error) {
 	if spec == "none" {
@@ -284,6 +322,8 @@ type shotJob struct {
 }
 
 type game struct {
+	worldState *world.Screen
+	worldParty []town.Member
 	sprites *spriteCache
 	small   *font.Font
 	large   *font.Font
@@ -386,6 +426,8 @@ func (g *game) render() error {
 			return ui.OutdoorCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.play.Outdoor)
 		}
 		return ui.Outdoor(g.canvas.Image(), g.sprites, g.small, g.play.Outdoor)
+	case sceneWorld:
+		return ui.World(g.canvas.Image(), g.sprites, g.small, g.worldParty, g.worldState)
 	case sceneOutdoor:
 		if g.strings != nil {
 			return ui.OutdoorCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.outdoor)
@@ -711,6 +753,14 @@ func main() {
 		"assets/original-derived-data/town-text.json", "城鎮文字 typed data")
 	buildingTown := flag.Int("building-town", 7, "建築內部畫面的城鎮編號")
 	buildingDoor := flag.Int("building-door", 5, "建築內部畫面的門序號")
+	worldPath := flag.String("world-map",
+		"assets/original-derived-data/world-map.json", "野外地圖 typed data")
+	worldPos := flag.String("world-pos", "", "覆寫野外世界座標，格式 X,Y")
+	worldSub := flag.String("world-sub", "", "覆寫野外次格座標，格式 次格X,次格Y")
+	worldWeather := flag.Int("world-weather", 0, "天候組 0…5")
+	worldPhase := flag.Int("world-phase", 0, "雲層旋轉過的像素數")
+	worldTime := flag.Int("world-time", 0, "時段 0…4")
+	worldScript := flag.String("world-script", "", "野外的操作腳本；每一步後截一張圖")
 	topicsPath := flag.String("town-topics",
 		"assets/original-derived-data/town-keywords.json", "城鎮話題 typed data")
 	uiTextPath := flag.String("ui-text",
@@ -924,6 +974,8 @@ func main() {
 		}
 	}
 
+	var worldScreenState *world.Screen
+	var worldPartyState []town.Member
 	var outdoorState *town.Outdoor
 	if scene(*sceneName) == sceneOutdoor {
 		if outdoorState, err = town.LoadOutdoor(*outdoorPath); err != nil {
@@ -1004,6 +1056,79 @@ func main() {
 		if *outdoorAtEdge {
 			outdoorState.AtEdge = true
 		}
+	}
+
+	if scene(*sceneName) == sceneWorld {
+		data, err := world.LoadData(*worldPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		src, _, err := lib.Decode("TOWN0", 0)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		grid, err := world.LoadGrid(src)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		sample, err := town.LoadOutdoor(*outdoorPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		px, py := 40, 23
+		if *worldPos != "" {
+			if px, py, err = parsePair(*worldPos); err != nil {
+				fmt.Fprintf(os.Stderr, "-world-pos 格式應為 X,Y：%v\n", err)
+				os.Exit(2)
+			}
+		}
+		travel := world.New(data, grid, px, py)
+		if *worldSub != "" {
+			sx, sy, err := parsePair(*worldSub)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "-world-sub 格式應為 次格X,次格Y：%v\n", err)
+				os.Exit(2)
+			}
+			travel.SubX, travel.SubY = sx, sy
+		}
+		base, overlay, mask := world.WeatherLayers(*worldWeather)
+		layers := make([]image.Image, 0, 3)
+		for _, index := range []int{base, overlay, mask} {
+			img, _, err := lib.Decode(world.WeatherArchive, index)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			layers = append(layers, img)
+		}
+		weather, err := world.NewWeather(layers[0], layers[1], layers[2])
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		bank, err := town.LoadUIText(*uiTextPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		trans, err := town.LoadTranslations(*townI18nPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		names := world.BankNamer{
+			Padded: func(index int) string { return bank.RecordPadded(town.BankUI, index) }}
+		if *lang != "en" {
+			names.Zh = trans.UIRecord
+		}
+		worldPartyState = sample.Party
+		worldScreenState = &world.Screen{Travel: travel, Weather: weather,
+			Group: *worldWeather, Phase: *worldPhase, TimeIndex: *worldTime,
+			Date: sample.Date, Names: names}
 	}
 
 	if scene(*sceneName) == sceneBuilding {
@@ -1157,6 +1282,8 @@ func main() {
 		outdoor:  outdoorState,
 		play:     playSession,
 		flow:     flowState,
+		worldState: worldScreenState,
+		worldParty: worldPartyState,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
@@ -1315,6 +1442,37 @@ func main() {
 				name: fmt.Sprintf("step-%03d", i+1),
 				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
 				apply: func() { g.flow.Key(tok) },
+			})
+		}
+	case *worldScript != "":
+		if *shotDir == "" && *shot == "" {
+			fmt.Fprintln(os.Stderr, "-world-script 需要搭配 -shot-dir 或 -shot")
+			os.Exit(2)
+		}
+		g.scene = sceneWorld
+		if *shotDir == "" {
+			for _, token := range strings.Fields(*worldScript) {
+				if err := applyWorldToken(g.worldState, token); err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(2)
+				}
+			}
+			g.jobs = []shotJob{{name: "world", path: *shot}}
+			break
+		}
+		g.jobs = append(g.jobs, shotJob{
+			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
+		for i, token := range strings.Fields(*worldScript) {
+			tok := token
+			g.jobs = append(g.jobs, shotJob{
+				name: fmt.Sprintf("step-%03d", i+1),
+				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
+				apply: func() {
+					if err := applyWorldToken(g.worldState, tok); err != nil {
+						fmt.Fprintln(os.Stderr, err)
+						os.Exit(2)
+					}
+				},
 			})
 		}
 	case *playScript != "":

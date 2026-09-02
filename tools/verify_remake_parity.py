@@ -36,9 +36,18 @@ def compare_pair(entry: dict, root: pathlib.Path) -> dict:
                 "reason": f"尺寸不同 {a.width}x{a.height} vs {b.width}x{b.height}"}
     ra, rb = a.rgb(), b.rgb()
 
+    # `compare` 把這一對限定在畫面的一塊矩形。這不是允許差異區——矩形之外的部分
+    # 這一對**不宣稱**，而且計畫必須寫明為什麼（例如那一塊還沒實作）。
+    box = entry.get("compare")
     allow = entry.get("allow", [])
     require = entry.get("require", [])
     allowed = bytearray(a.width * a.height)
+    if box:
+        for i in range(a.width * a.height):
+            x, y = i % a.width, i // a.width
+            if not (box["x"] <= x < box["x"] + box["width"]
+                    and box["y"] <= y < box["y"] + box["height"]):
+                allowed[i] = 1
     for region in allow:
         for y in range(region["y"], region["y"] + region["height"]):
             base = y * a.width
@@ -77,6 +86,7 @@ def compare_pair(entry: dict, root: pathlib.Path) -> dict:
         "remake": entry["remake"],
         "original": entry["original"],
         "size": [a.width, a.height],
+        "compare": box,
         "pass": outside == 0,
         "differing_outside_allowed": outside,
         "first_outside_pixel": first_outside,

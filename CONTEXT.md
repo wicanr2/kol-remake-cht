@@ -16,8 +16,8 @@
   的 manifest 與 PNG，畫在 320×200 原版解析度離屏畫布上，並提供截圖模式供對拍。
   書本的六個畫面（封面、目錄頁、角色建立、角色清單、刪除、HARBOR MASTER）、兩段
   翻頁動畫、TITLE 標題序列與城鎮的旅店、戶外地圖（含地形擋路、門口與地圖邊界的
-  城門提示、進建築、招呼語與 LISTEN／MOUTH 對話）都已實作並對拍；
-  野外地圖與戰鬥尚未開始。
+  城門提示、進建築、招呼語與 LISTEN／MOUTH 對話）與野外地圖畫面都已實作並對拍；
+  戰鬥尚未開始。
   SPEC-001／002／003／005 為 READY 或 CONFORMED，SPEC-004（音訊）仍為 DRAFT；
   其餘玩法（戰鬥、任務、城鎮、世界地圖）仍須各自的 DRAFT／READY spec。
 - 原版內嵌點陣字型已抽出：`BOOKDATA.0`／`KOLDATA.0` 的第一個 payload 是同一份
@@ -31,9 +31,11 @@
 - remake 目前畫面的展示圖在 `docs/screenshots/`，由 `tools/run_kol_shots.sh` 依
   `shots.spec` 在鎖定容器內一次重生，`MANIFEST.json` 記下產生指令、輸入雜湊與 PNG
   SHA-256，並要求有對拍收據的畫面與那張逐 byte 相同。README 的畫面區塊引用同一批圖。
-- remake 對拍收據已建立（`docs/verification/remake-parity/`）：十四份收據 210 對畫面
+- remake 對拍收據已建立（`docs/verification/remake-parity/`）：十五份收據 214 對畫面
   全部通過（書本畫面 3、角色建立 9、圖像層 92、三段翻頁 54、刪除流程 13、
-  HARBOR MASTER 1、旅店畫面 8、戶外地圖 22、建築進門 1、城門提示 4、建築對話 3）。
+  HARBOR MASTER 1、旅店畫面 8、戶外地圖 22、建築進門 1、城門提示 4、建築對話 3、
+  野外地圖 4）。野外那一份用 `compare` 指明每一對涵蓋的矩形，天候圖列在
+  `not_claimed`——雲層動畫還沒實作，那一塊不宣稱，也不當成允許差異區。
   書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
   畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同；空白 New Character 頁
   以原版字型與版面重繪後，64,000 個像素中只有 31 個不同且全部落在名字欄的原版殘留

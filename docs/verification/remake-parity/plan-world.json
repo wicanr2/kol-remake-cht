@@ -1,0 +1,46 @@
+{
+  "name": "world",
+  "description": "野外地圖畫面對原版對拍。畫面由 TOWN0 的格子陣列與磚圖畫出，隊伍是視窗第 3 列第 5 欄那一格內的 2×2 白點，偏移「次格座標 × 2」像素；左下的標籤框直接畫 KOLDATA 記錄 0xD5 + 時段與 0xDA + 地形碼（記錄自帶空白用來置中），地形碼由腳下磚塊的 payload3[0x100 + 磚塊] 取最低位的 1（RE-068）。這一輪**不宣稱**天候圖那一塊：原版的雲層由 sub_2A18E 每個 tick 把覆蓋層整列旋轉一個位元，緩衝區的位元組版面還沒定案，remake 目前畫的是未旋轉的合成圖。每一對用 compare 指明它涵蓋的矩形，矩形之外不算通過也不算允許差異。",
+  "input": {
+    "command": "tools/run_kol_headless.sh -scene world -shot docs/verification/remake-parity/shots/world/leave-brettle.png"
+  },
+  "not_claimed": [
+    {
+      "name": "天候圖 (16,76) 64×62",
+      "reason": "雲層動畫還沒實作：sub_2A18E 的旋轉單位與緩衝區版面尚未定案，remake 畫的是未旋轉的合成圖。"
+    }
+  ],
+  "pairs": [
+    {
+      "label": "隊員格與日期框",
+      "compare": { "x": 0, "y": 0, "width": 320, "height": 52 },
+      "remake": "docs/verification/remake-parity/shots/world/leave-brettle.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png"
+    },
+    {
+      "label": "地圖視窗與隊伍的點",
+      "compare": { "x": 96, "y": 52, "width": 224, "height": 110 },
+      "remake": "docs/verification/remake-parity/shots/world/leave-brettle.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "x": 156, "y": 98, "width": 20, "height": 18
+        }
+      ]
+    },
+    {
+      "label": "時段與地形標籤框",
+      "compare": { "x": 8, "y": 140, "width": 80, "height": 20 },
+      "remake": "docs/verification/remake-parity/shots/world/leave-brettle.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png"
+    },
+    {
+      "label": "圖示列",
+      "compare": { "x": 0, "y": 160, "width": 320, "height": 40 },
+      "remake": "docs/verification/remake-parity/shots/world/leave-brettle.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png"
+    }
+  ]
+}

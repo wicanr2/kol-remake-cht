@@ -6,7 +6,7 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "372bdf46937e5457586f12341b6b8c2c7385fec9"
+    "commit": "621b6bcbedc7c65784c7fe3467b9f7db4c4e3f90"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
@@ -18,7 +18,7 @@
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 33,
+  "count": 34,
   "failed": 0,
   "screenshots": [
     {
@@ -376,6 +376,16 @@
       "height": 400,
       "distinct_colours": 13,
       "sha256": "b6d8dc37f3a56b37653d1fb3e2d9f5452af6cce748aadf2565034c3fdc6b1119",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-world-map.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene world -shot docs/screenshots/en-world-map.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f",
       "pass": true
     }
   ]

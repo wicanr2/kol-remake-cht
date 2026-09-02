@@ -56,6 +56,26 @@ func LoadUIText(path string) (*UIText, error) {
 	return &t, nil
 }
 
+// RecordPadded 取一筆記錄但**保留前後空白**。原版有些欄位靠字串自帶的空白置中，
+// 例如野外標籤的 `"  DAWN ]"`，去掉空白就會往左移兩個字。
+func (t *UIText) RecordPadded(bank string, index int) string {
+	return stripKeepSpaces(t.raw(bank, index))
+}
+
+func (t *UIText) raw(bank string, index int) string {
+	for i := range t.Banks {
+		if t.Banks[i].Bank != bank {
+			continue
+		}
+		for _, r := range t.Banks[i].Records {
+			if r.Index == index {
+				return r.Text
+			}
+		}
+	}
+	return ""
+}
+
 // Record 取一筆記錄，並把版面標記剝掉——標記只影響原版的游標位置，不是內容。
 func (t *UIText) Record(bank string, index int) string {
 	for i := range t.Banks {
@@ -84,9 +104,14 @@ func (t *UIText) Heard(who string, category int) string {
 	return strings.Join(out, " ")
 }
 
-// strip 拿掉 `~Vxx`／`~Hxx`／`~Cxx` 座標與顏色標記，把 `@` 當空白，
-// 並丟掉 `]` 這個原版用來標示接續的記號。
+// strip 拿掉版面標記並去掉前後空白。
 func strip(text string) string {
+	return strings.TrimSpace(stripKeepSpaces(text))
+}
+
+// stripKeepSpaces 拿掉 `~Vxx`／`~Hxx`／`~Cxx` 座標與顏色標記，把 `@` 當空白，
+// 並丟掉 `]` 這個原版用來標示接續的記號；前後空白原樣保留。
+func stripKeepSpaces(text string) string {
 	var b strings.Builder
 	for i := 0; i < len(text); {
 		switch {
@@ -104,5 +129,5 @@ func strip(text string) string {
 			i++
 		}
 	}
-	return strings.TrimSpace(b.String())
+	return b.String()
 }
