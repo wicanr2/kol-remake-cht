@@ -177,3 +177,43 @@ func TestDoorAtLooksUpCoordinates(t *testing.T) {
 		t.Fatal("(57,9) 不該有門")
 	}
 }
+
+// 進門畫面由三份 typed data 組出來：門給名稱與肖像，文字給敘述，版面沿用旅店。
+func TestEnterBuildingComposesScene(t *testing.T) {
+	door := &Door{Index: 5, X: 57, Y: 8, Picture: 13, Portrait: 12,
+		Name: "Halfway House", Person: "Devin Torlock"}
+	text := &BuildingText{Door: 5, Messages: []Message{
+		{Index: 0, Display: []string{"a1", "a2", "a3", "a4"}},
+		{Index: 1, Display: []string{"b1", "b2", "b3", "b4"}},
+		{Index: 10, Display: []string{"c1", "c2", "c3", "c4"}},
+	}}
+	party := []Member{{Portrait: 47, Name: "Theodoric", Speaker: true}}
+
+	in := EnterBuilding("TWN7PICS", door, text, party)
+	if in.Portrait.Archive != "TWN7PICS" || in.Portrait.Index != 12 {
+		t.Fatalf("肖像取到 %s[%d]", in.Portrait.Archive, in.Portrait.Index)
+	}
+	if len(in.Title) != 2 || in.Title[0] != "Halfway House" || in.Title[1] != "Devin Torlock" {
+		t.Fatalf("標題框是 %v", in.Title)
+	}
+	// 進門敘述是訊息 0 與 1，剛好八行；訊息 10 是之後的對話，不該混進來。
+	want := []string{"a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"}
+	if len(in.Dialog) != len(want) {
+		t.Fatalf("敘述有 %d 行，應為 %d", len(in.Dialog), len(want))
+	}
+	for i := range want {
+		if in.Dialog[i] != want[i] {
+			t.Fatalf("第 %d 行是 %q，應為 %q", i, in.Dialog[i], want[i])
+		}
+	}
+	if len(in.Icons) != 1 || in.Icons[0] != BuildingIcon {
+		t.Fatalf("圖示列是 %v", in.Icons)
+	}
+	// 呼叫端傳進來的隊員不該被就地改掉。
+	if in.Party[0].Speaker {
+		t.Fatal("進門當下隊員不是發言者")
+	}
+	if !party[0].Speaker {
+		t.Fatal("EnterBuilding 不該改到呼叫端的資料")
+	}
+}

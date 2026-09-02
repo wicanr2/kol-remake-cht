@@ -29,9 +29,9 @@
 - remake 目前畫面的展示圖在 `docs/screenshots/`，由 `tools/run_kol_shots.sh` 依
   `shots.spec` 在鎖定容器內一次重生，`MANIFEST.json` 記下產生指令、輸入雜湊與 PNG
   SHA-256，並要求有對拍收據的畫面與那張逐 byte 相同。README 的畫面區塊引用同一批圖。
-- remake 對拍收據已建立（`docs/verification/remake-parity/`）：十一份收據 201 對畫面
+- remake 對拍收據已建立（`docs/verification/remake-parity/`）：十二份收據 203 對畫面
   全部通過（書本畫面 3、角色建立 9、圖像層 92、三段翻頁 54、刪除流程 13、
-  HARBOR MASTER 1、旅店畫面 8、戶外地圖 21）。
+  HARBOR MASTER 1、旅店畫面 8、戶外地圖 22、建築進門 1）。
   書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
   畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同；空白 New Character 頁
   以原版字型與版面重繪後，64,000 個像素中只有 31 個不同且全部落在名字欄的原版殘留
@@ -197,6 +197,11 @@ DOOR 與 U-TURN（RE-061）。門 *i* 的四份資料同一個索引推出來—
 16 byte 一格的文字格，第 0 byte 是字數、其後 15 byte 是 24 個 5-bit 字元，
 小寫預設、大寫靠一個記號。七座城 101 棟建築共 9,515 行，
 連同 `KOLDATA`／`BOOKDATA`／`ENDTXT` 三份 UI 文字庫，構成中文化的文字母體。
+
+按下 DOOR 之後的進門畫面已實作並對拍：版面沿用旅店畫面，內容完全由三份 typed data
+組出來——門座標表給建築名與人物名、`TWN{n}PICS[2i+2]` 給肖像、5-bit 文字給敘述。
+一則訊息固定四格（64 byte），訊息 0 與 1 合起來是進門的八行敘述。
+畫面規則只有兩條：句號後補兩個空白並把下一個字母轉大寫、逗號後補一個空白。
 
 書本六個選單項目裡五項有收據。`HARBOR MASTER` 在只安裝一個 region 時是一張三行訊息頁，
 已實作並對拍通過；`EDIT PICTURE` 與 `EDIT SHIELD` 是同一個滑鼠驅動的點陣圖編輯器，

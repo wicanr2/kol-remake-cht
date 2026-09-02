@@ -49,9 +49,10 @@ const (
 	sceneHarbor     scene = "harbor"
 	sceneInn        scene = "inn"
 	sceneOutdoor    scene = "outdoor"
+	sceneBuilding   scene = "building"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -315,7 +316,7 @@ func (g *game) render() error {
 		}
 		return ui.DeleteList(g.canvas.Image(), g.sprites, g.small,
 			g.remove.List(), g.remove.Cursor, g.remove.Confirm)
-	case sceneInn:
+	case sceneBuilding, sceneInn:
 		if g.strings != nil {
 			return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.inn)
 		}
@@ -546,6 +547,10 @@ func main() {
 	outdoorCamera := flag.String("outdoor-camera", "", "覆寫戶外鏡頭座標，格式 X,Y")
 	outdoorFrame := flag.Int("outdoor-frame", -1, "覆寫隊伍標記的動畫畫格（-1 為沿用樣本）")
 	outdoorMarker := flag.String("outdoor-marker", "", "覆寫隊伍標記在視窗內的偏移，格式 列,欄")
+	townTextPath := flag.String("town-text",
+		"assets/original-derived-data/town-text.json", "城鎮文字 typed data")
+	buildingTown := flag.Int("building-town", 7, "建築內部畫面的城鎮編號")
+	buildingDoor := flag.Int("building-door", 5, "建築內部畫面的門序號")
 	buildingsPath := flag.String("town-buildings",
 		"assets/original-derived-data/town-buildings.json", "城鎮建築 typed data")
 	outdoorAtDoor := flag.Bool("outdoor-at-door", false,
@@ -818,6 +823,41 @@ func main() {
 			}
 			outdoorState.AtDoorCell = true
 		}
+	}
+
+	if scene(*sceneName) == sceneBuilding {
+		buildings, err := town.LoadBuildings(*buildingsPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		info := buildings.Town(*buildingTown)
+		if info == nil {
+			fmt.Fprintf(os.Stderr, "城鎮建築資料沒有城鎮 %d\n", *buildingTown)
+			os.Exit(1)
+		}
+		var door *town.Door
+		for i := range info.Doors {
+			if info.Doors[i].Index == *buildingDoor {
+				door = &info.Doors[i]
+			}
+		}
+		if door == nil {
+			fmt.Fprintf(os.Stderr, "城鎮 %d 沒有門 %d\n", *buildingTown, *buildingDoor)
+			os.Exit(1)
+		}
+		texts, err := town.LoadText(*townTextPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		sample, err := town.LoadInn(*innPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		innState = town.EnterBuilding(fmt.Sprintf("TWN%dPICS", *buildingTown), door,
+			texts.Building(*buildingTown, *buildingDoor), sample.Party)
 	}
 
 	data, err := chardata.Load(*dataPath)

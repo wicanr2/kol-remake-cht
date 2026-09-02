@@ -18,6 +18,8 @@ docs/screenshots/en-town-inn-party2.png|-scene|inn|-inn|docs/re/town-inn-sample-
 docs/screenshots/en-town-outdoor.png|-scene|outdoor|-shot|docs/screenshots/en-town-outdoor.png
 docs/screenshots/en-town-outdoor-moved.png|-scene|outdoor|-outdoor-camera|58,9|-outdoor-frame|3|-outdoor-marker|0,1|-outdoor-icons|none|-shot|docs/screenshots/en-town-outdoor-moved.png
 docs/screenshots/en-town-door.png|-scene|outdoor|-outdoor-camera|57,8|-outdoor-frame|1|-outdoor-at-door|-shot|docs/screenshots/en-town-door.png
+docs/screenshots/en-town-building.png|-scene|building|-building-town|7|-building-door|5|-shot|docs/screenshots/en-town-building.png
+docs/screenshots/en-town-building-smithy.png|-scene|building|-building-town|7|-building-door|12|-shot|docs/screenshots/en-town-building-smithy.png
 #
 # 中文模式：640×400，書本美術以最近鄰放大，文字改用 16×18 中文字模格。這個模式不對拍。
 docs/screenshots/zh-newchar-picture.png|-lang|zh-Hant|-scene|script|-script|z e d RET RET RET RET DOWN RET|-shot|docs/screenshots/zh-newchar-picture.png

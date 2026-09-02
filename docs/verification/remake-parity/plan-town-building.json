@@ -1,0 +1,24 @@
+{
+  "name": "town-building",
+  "description": "remake 的建築內部畫面對原版對拍。畫面由三份 typed data 組出來：門座標表給建築名與人物名（RE-061）、TWN{n}PICS[2i+2] 給肖像、TOWNn.0 的 5-bit 文字給進門敘述（RE-062，訊息 0 與 1 合起來八行）。版面沿用旅店畫面。進門當下隊員不是發言者，外框是亮藍色。",
+  "input": {
+    "command": "tools/run_kol_shots.sh workplace/outdoor/building.spec（-scene building -building-town 7 -building-door 5）"
+  },
+  "pairs": [
+    {
+      "label": "半途之家：進門敘述八行",
+      "remake": "docs/verification/remake-parity/shots/town-building/inn-entry.png",
+      "original": "docs/verification/character-ui/town-enter-building-run1/frames/frame-072.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 20,
+          "height": 16
+        }
+      ]
+    }
+  ]
+}

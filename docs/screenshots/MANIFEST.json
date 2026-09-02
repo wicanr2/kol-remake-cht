@@ -6,7 +6,7 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "885a59b310855c9a0fc1edd314a726b02eb007cf"
+    "commit": "5a276650af87711d8dc7d213275079c8df2a5845"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
@@ -18,7 +18,7 @@
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 24,
+  "count": 26,
   "failed": 0,
   "screenshots": [
     {
@@ -190,6 +190,29 @@
       "parity_twin": "docs/verification/remake-parity/shots/town-door/inn-door.png",
       "parity_receipt": "docs/verification/remake-parity/town-outdoor.json",
       "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-building.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene building -building-town 7 -building-door 5 -shot docs/screenshots/en-town-building.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 12,
+      "sha256": "9fdac495e8f9c6733b4d71514047240ef8eb7253e3347ff7b049642583bbf55f",
+      "parity_twin": "docs/verification/remake-parity/shots/town-building/inn-entry.png",
+      "parity_receipt": "docs/verification/remake-parity/town-building.json",
+      "identical_to_parity_shot": true,
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-building-smithy.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene building -building-town 7 -building-door 12 -shot docs/screenshots/en-town-building-smithy.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 15,
+      "sha256": "1138fe417a56663baec1a333a02cf8befd282e5601f9ed750cc51500de7bc4bf",
       "pass": true
     },
     {
