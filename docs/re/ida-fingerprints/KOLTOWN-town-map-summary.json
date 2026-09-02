@@ -1,1347 +1,2668 @@
 {
-  "schema": "kol-ida-koltown-town-map-summary-v1",
+  "schema": "kol-ida-koltown-town-map-summary-v2",
   "ida_version": "9.4",
   "input_name": "KOLTOWN-unpacked.EXE",
   "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
   "address_space": "IDA linear effective address for reconstructed unpacked MZ",
   "dgroup_ea": "0x2ded0",
-  "note": "探索用摘要：只有字串文字、DGROUP 位移與反組譯，不含原版 bytes。完整輸出留本機。",
-  "town_strings": [
+  "note": "RE-059 的鎖定摘要：地圖繪製迴圈、磚塊 blit 與城鎮資料載入器的反組譯，外加繪製迴圈用到的全域使用點。只有反組譯與位址，不含原版 bytes。",
+  "format_strings": [
     {
-      "ea": "0x2f55c",
-      "length": 7,
-      "text": "town%d",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x168c"
-    },
-    {
-      "ea": "0x2f590",
-      "length": 8,
-      "text": "twn%d%s",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x16c0"
-    },
-    {
-      "ea": "0x2f598",
-      "length": 7,
-      "text": "town%d",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x16c8"
-    },
-    {
-      "ea": "0x2f5d6",
-      "length": 8,
-      "text": "twn%d%s",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1706"
-    },
-    {
-      "ea": "0x2f646",
-      "length": 9,
-      "text": "town%d.0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1776"
-    },
-    {
-      "ea": "0x2f650",
-      "length": 10,
-      "text": "twn%d%s.0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1780"
-    },
-    {
-      "ea": "0x2f65a",
-      "length": 10,
-      "text": "twn%d%s.1",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x178a"
-    },
-    {
-      "ea": "0x2f664",
-      "length": 7,
-      "text": "town%d",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1794"
-    },
-    {
-      "ea": "0x2f6d8",
-      "length": 7,
-      "text": "town%d",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1808"
-    },
-    {
-      "ea": "0x2f6e0",
-      "length": 8,
-      "text": "twn%d%s",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1810"
-    },
-    {
-      "ea": "0x2f714",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1844"
-    },
-    {
-      "ea": "0x2f738",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1868"
-    },
-    {
-      "ea": "0x2f73e",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x186e"
-    },
-    {
-      "ea": "0x2f754",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1884"
-    },
-    {
-      "ea": "0x2f760",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1890"
-    },
-    {
-      "ea": "0x2f766",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x1896"
-    },
-    {
-      "ea": "0x2f76c",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x189c"
-    },
-    {
-      "ea": "0x2f772",
-      "length": 6,
-      "text": "town0",
-      "data_refs_to": [],
-      "ref_functions": [],
-      "dgroup_offset": "0x18a2"
-    }
-  ],
-  "immediate_users": [
-    {
-      "ea": "0x10685",
+      "call_ea": "0x1037a",
       "function": "0x10000",
-      "immediate": "0x168c",
-      "disassembly": "mov     ax, 168Ch"
+      "load_ea": "0x10372",
+      "dgroup_offset": "0x165a",
+      "text": "kolm%s.0"
     },
     {
-      "ea": "0x1131c",
+      "call_ea": "0x10578",
+      "function": "0x10000",
+      "load_ea": "0x10570",
+      "dgroup_offset": "0x166a",
+      "text": "kol%s.0"
+    },
+    {
+      "call_ea": "0x105b5",
+      "function": "0x10000",
+      "load_ea": "0x105ad",
+      "dgroup_offset": "0x1672",
+      "text": "kol%s"
+    },
+    {
+      "call_ea": "0x1060d",
+      "function": "0x10000",
+      "load_ea": "0x10605",
+      "dgroup_offset": "0x1678",
+      "text": "misc%s.0"
+    },
+    {
+      "call_ea": "0x10654",
+      "function": "0x10000",
+      "load_ea": "0x1064c",
+      "dgroup_offset": "0x1682",
+      "text": "weat%s.0"
+    },
+    {
+      "call_ea": "0x1068d",
+      "function": "0x10000",
+      "load_ea": "0x10685",
+      "dgroup_offset": "0x168c",
+      "text": "town%d"
+    },
+    {
+      "call_ea": "0x11201",
+      "function": "0x1103f",
+      "load_ea": "0x111f9",
+      "dgroup_offset": "0x16ba",
+      "text": "kol%s"
+    },
+    {
+      "call_ea": "0x11324",
       "function": "0x11302",
-      "immediate": "0x16c0",
-      "disassembly": "mov     ax, 16C0h"
+      "load_ea": "0x1131c",
+      "dgroup_offset": "0x16c0",
+      "text": "twn%d%s"
     },
     {
-      "ea": "0x11acf",
+      "call_ea": "0x11ad7",
       "function": "0x11a93",
-      "immediate": "0x16c8",
-      "disassembly": "mov     ax, 16C8h"
+      "load_ea": "0x11acf",
+      "dgroup_offset": "0x16c8",
+      "text": "town%d"
     },
     {
-      "ea": "0x14080",
+      "call_ea": "0x126ef",
+      "function": "0x11a93",
+      "load_ea": "0x126e7",
+      "dgroup_offset": "0x16d0",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x12bd9",
+      "function": "0x11a93",
+      "load_ea": "0x12bd1",
+      "dgroup_offset": "0x16e8",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x13051",
+      "function": "0x11a93",
+      "load_ea": "0x13049",
+      "dgroup_offset": "0x16ec",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x132f1",
+      "function": "0x11a93",
+      "load_ea": "0x132e9",
+      "dgroup_offset": "0x16f0",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x134cb",
+      "function": "0x11a93",
+      "load_ea": "0x134c3",
+      "dgroup_offset": "0x16f4",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x137f6",
+      "function": "0x11a93",
+      "load_ea": "0x137ee",
+      "dgroup_offset": "0x16f8",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x14088",
       "function": "0x14047",
-      "immediate": "0x1706",
-      "disassembly": "mov     ax, 1706h"
+      "load_ea": "0x14080",
+      "dgroup_offset": "0x1706",
+      "text": "twn%d%s"
     },
     {
-      "ea": "0x1595f",
+      "call_ea": "0x14ea9",
+      "function": "0x14db1",
+      "load_ea": "0x14ea1",
+      "dgroup_offset": "0x172c",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x15967",
       "function": "0x15920",
-      "immediate": "0x1776",
-      "disassembly": "mov     ax, 1776h"
+      "load_ea": "0x1595f",
+      "dgroup_offset": "0x1776",
+      "text": "town%d.0"
     },
     {
-      "ea": "0x159aa",
+      "call_ea": "0x159b2",
       "function": "0x15920",
-      "immediate": "0x1780",
-      "disassembly": "mov     ax, 1780h"
+      "load_ea": "0x159aa",
+      "dgroup_offset": "0x1780",
+      "text": "twn%d%s.0"
     },
     {
-      "ea": "0x159eb",
+      "call_ea": "0x159f3",
       "function": "0x15920",
-      "immediate": "0x178a",
-      "disassembly": "mov     ax, 178Ah"
+      "load_ea": "0x159eb",
+      "dgroup_offset": "0x178a",
+      "text": "twn%d%s.1"
     },
     {
-      "ea": "0x15a1d",
+      "call_ea": "0x15a25",
       "function": "0x15920",
-      "immediate": "0x1794",
-      "disassembly": "mov     ax, 1794h"
+      "load_ea": "0x15a1d",
+      "dgroup_offset": "0x1794",
+      "text": "town%d"
     },
     {
-      "ea": "0x1a5a3",
+      "call_ea": "0x15dcc",
+      "function": "0x15abf",
+      "load_ea": "0x15dc4",
+      "dgroup_offset": "0x179c",
+      "text": "%3d"
+    },
+    {
+      "call_ea": "0x15e20",
+      "function": "0x15abf",
+      "load_ea": "0x15e18",
+      "dgroup_offset": "0x17a0",
+      "text": "%3d"
+    },
+    {
+      "call_ea": "0x15e5f",
+      "function": "0x15abf",
+      "load_ea": "0x15e57",
+      "dgroup_offset": "0x17a4",
+      "text": "% 9ld"
+    },
+    {
+      "call_ea": "0x15ec5",
+      "function": "0x15abf",
+      "load_ea": "0x15ebd",
+      "dgroup_offset": "0x17aa",
+      "text": "%5u"
+    },
+    {
+      "call_ea": "0x1621b",
+      "function": "0x161fc",
+      "load_ea": "0x16213",
+      "dgroup_offset": "0x17ae",
+      "text": "%3d"
+    },
+    {
+      "call_ea": "0x16604",
+      "function": "0x16239",
+      "load_ea": "0x165fc",
+      "dgroup_offset": "0x17b2",
+      "text": "%1d'%2d\""
+    },
+    {
+      "call_ea": "0x166ae",
+      "function": "0x16239",
+      "load_ea": "0x166a6",
+      "dgroup_offset": "0x17bc",
+      "text": "%3d LBS"
+    },
+    {
+      "call_ea": "0x1691d",
+      "function": "0x168f8",
+      "load_ea": "0x16915",
+      "dgroup_offset": "0x17c4",
+      "text": "awd%d%s"
+    },
+    {
+      "call_ea": "0x173c8",
+      "function": "0x17318",
+      "load_ea": "0x173c0",
+      "dgroup_offset": "0x17cc",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x17833",
+      "function": "0x17318",
+      "load_ea": "0x1782b",
+      "dgroup_offset": "0x17d0",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x18712",
+      "function": "0x18350",
+      "load_ea": "0x1870a",
+      "dgroup_offset": "0x17d4",
+      "text": "%ld"
+    },
+    {
+      "call_ea": "0x18fdd",
+      "function": "0x18f3a",
+      "load_ea": "0x18fd5",
+      "dgroup_offset": "0x17d8",
+      "text": "per%s"
+    },
+    {
+      "call_ea": "0x19137",
+      "function": "0x18f3a",
+      "load_ea": "0x1912f",
+      "dgroup_offset": "0x17de",
+      "text": "%s%s"
+    },
+    {
+      "call_ea": "0x192aa",
+      "function": "0x18f3a",
+      "load_ea": "0x192a2",
+      "dgroup_offset": "0x17e4",
+      "text": "%s%s"
+    },
+    {
+      "call_ea": "0x193ff",
+      "function": "0x18f3a",
+      "load_ea": "0x193f7",
+      "dgroup_offset": "0x17ea",
+      "text": "%s%s"
+    },
+    {
+      "call_ea": "0x1949f",
+      "function": "0x18f3a",
+      "load_ea": "0x19497",
+      "dgroup_offset": "0x17f0",
+      "text": "%s%s"
+    },
+    {
+      "call_ea": "0x19562",
+      "function": "0x18f3a",
+      "load_ea": "0x1955a",
+      "dgroup_offset": "0x17f6",
+      "text": "%s%s"
+    },
+    {
+      "call_ea": "0x19685",
+      "function": "0x18f3a",
+      "load_ea": "0x1967d",
+      "dgroup_offset": "0x17fc",
+      "text": "%s%s"
+    },
+    {
+      "call_ea": "0x1a550",
       "function": "0x1a4fe",
-      "immediate": "0x1808",
-      "disassembly": "mov     ax, 1808h"
+      "load_ea": "0x1a548",
+      "dgroup_offset": "0x1802",
+      "text": "kol%s"
     },
     {
-      "ea": "0x1a601",
+      "call_ea": "0x1a5ab",
       "function": "0x1a4fe",
-      "immediate": "0x1810",
-      "disassembly": "mov     ax, 1810h"
+      "load_ea": "0x1a5a3",
+      "dgroup_offset": "0x1808",
+      "text": "town%d"
     },
     {
-      "ea": "0x1e40e",
+      "call_ea": "0x1a609",
+      "function": "0x1a4fe",
+      "load_ea": "0x1a601",
+      "dgroup_offset": "0x1810",
+      "text": "twn%d%s"
+    },
+    {
+      "call_ea": "0x1a663",
+      "function": "0x1a4fe",
+      "load_ea": "0x1a65b",
+      "dgroup_offset": "0x1818",
+      "text": "weat%s"
+    },
+    {
+      "call_ea": "0x1a6a9",
+      "function": "0x1a4fe",
+      "load_ea": "0x1a6a1",
+      "dgroup_offset": "0x1820",
+      "text": "%s.0"
+    },
+    {
+      "call_ea": "0x1a77e",
+      "function": "0x1a4fe",
+      "load_ea": "0x1a776",
+      "dgroup_offset": "0x1826",
+      "text": "%s.%d"
+    },
+    {
+      "call_ea": "0x1b8d1",
+      "function": "0x1b8b8",
+      "load_ea": "0x1b8c9",
+      "dgroup_offset": "0x182c",
+      "text": "%u"
+    },
+    {
+      "call_ea": "0x1cc31",
+      "function": "0x1cba9",
+      "load_ea": "0x1cc29",
+      "dgroup_offset": "0x1830",
+      "text": "disk%c%d"
+    },
+    {
+      "call_ea": "0x1cc4a",
+      "function": "0x1cba9",
+      "load_ea": "0x1cc42",
+      "dgroup_offset": "0x183a",
+      "text": "chardata"
+    },
+    {
+      "call_ea": "0x1e4fa",
       "function": "0x1e3a8",
-      "immediate": "0x1844",
-      "disassembly": "mov     ax, 1844h"
+      "load_ea": "0x1e4f2",
+      "dgroup_offset": "0x184a",
+      "text": "kol%s"
     },
     {
-      "ea": "0x2903c",
-      "function": "0x29004",
-      "immediate": "0x1868",
-      "disassembly": "mov     ax, 1868h"
+      "call_ea": "0x22fa7",
+      "function": "0x22efc",
+      "load_ea": "0x22f9f",
+      "dgroup_offset": "0x1850",
+      "text": "mon%s"
     },
     {
-      "ea": "0x2905a",
-      "function": "0x29004",
-      "immediate": "0x186e",
-      "disassembly": "mov     ax, 186Eh"
-    },
-    {
-      "ea": "0x2a65b",
-      "function": "0x2a4e5",
-      "immediate": "0x1884",
-      "disassembly": "mov     ax, 1884h"
-    },
-    {
-      "ea": "0x2b045",
-      "function": "0x2aaa8",
-      "immediate": "0x1890",
-      "disassembly": "mov     ax, 1890h"
-    },
-    {
-      "ea": "0x2b18f",
-      "function": "0x2b0ff",
-      "immediate": "0x1896",
-      "disassembly": "mov     ax, 1896h"
-    },
-    {
-      "ea": "0x2b2c1",
-      "function": "0x2b0ff",
-      "immediate": "0x189c",
-      "disassembly": "mov     ax, 189Ch"
-    },
-    {
-      "ea": "0x2b3fc",
-      "function": "0x2b3d1",
-      "immediate": "0x18a2",
-      "disassembly": "mov     ax, 18A2h"
-    }
-  ],
-  "payload_loader_calls": [
-    {
-      "function": "0x10000",
-      "call_ea": "0x10333",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 0",
-        "push    ax",
-        "mov     ax, 164Ah",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x10000",
-      "call_ea": "0x10351",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 1",
-        "push    ax",
-        "mov     ax, 1652h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x10000",
-      "call_ea": "0x10545",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 0",
-        "push    ax",
-        "mov     ax, 1664h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x10000",
-      "call_ea": "0x105d4",
-      "context": [
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "mov     ax, 0",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x10000",
-      "call_ea": "0x106ab",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 3",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x10000",
-      "call_ea": "0x106c9",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 14h",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x10f9c",
-      "call_ea": "0x10fc6",
-      "context": [
-        "mov     ax, word_34A0A",
-        "add     ax, 400h",
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "push    [bp+arg_0]",
-        "push    [bp+arg_2]",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x11a93",
-      "call_ea": "0x11b10",
-      "context": [
-        "mov     ax, offset byte_2FBC4",
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "push    [bp+var_4]",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x11a93",
-      "call_ea": "0x12a68",
-      "context": [
-        "add     ax, 400h",
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "push    [bp+var_4]",
-        "mov     ax, 16E0h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x14047",
-      "call_ea": "0x140a7",
-      "context": [
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "mov     ax, 0",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x15920",
-      "call_ea": "0x15a50",
-      "context": [
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "mov     ax, 0",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x15920",
-      "call_ea": "0x15a75",
-      "context": [
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "mov     ax, 1",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x15920",
-      "call_ea": "0x15a9a",
-      "context": [
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "mov     ax, 2",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x16fa6",
-      "call_ea": "0x16fe3",
-      "context": [
-        "mov     ax, word_34A0A",
-        "add     ax, 400h",
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "push    [bp+arg_0]",
-        "push    [bp+arg_4]",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x16fa6",
-      "call_ea": "0x1706b",
-      "context": [
-        "mov     ax, word_34A0A",
-        "add     ax, 400h",
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "push    [bp+arg_2]",
-        "push    [bp+arg_4]",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x1e3a8",
-      "call_ea": "0x1e412",
-      "context": [
-        "push    dx",
-        "push    ax",
-        "mov     ax, word_3B262",
-        "add     ax, 5",
-        "push    ax",
-        "mov     ax, 1844h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x1e3a8",
-      "call_ea": "0x1e519",
-      "context": [
-        "add     ax, 400h",
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "push    word_39A4E",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
+      "call_ea": "0x28919",
       "function": "0x288d4",
-      "call_ea": "0x28937",
-      "context": [
-        "add     ax, 400h",
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "push    [bp+arg_0]",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
+      "load_ea": "0x28911",
+      "dgroup_offset": "0x1856",
+      "text": "comb%s"
     },
     {
-      "function": "0x29004",
-      "call_ea": "0x29040",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 3",
-        "push    ax",
-        "mov     ax, 1868h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x29004",
-      "call_ea": "0x2905e",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 4",
-        "push    ax",
-        "mov     ax, 186Eh",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
+      "call_ea": "0x2a05d",
       "function": "0x2a01c",
-      "call_ea": "0x2a07b",
-      "context": [
-        "add     ax, 400h",
-        "push    ax",
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "push    [bp+arg_0]",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
+      "load_ea": "0x2a055",
+      "dgroup_offset": "0x1874",
+      "text": "weat%s"
     },
     {
+      "call_ea": "0x2a149",
       "function": "0x2a0c6",
-      "call_ea": "0x2a16b",
-      "context": [
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "mov     ax, [bp+arg_0]",
-        "add     ax, 2",
-        "push    ax",
-        "mov     ax, 2D50h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
+      "load_ea": "0x2a141",
+      "dgroup_offset": "0x187c",
+      "text": "weat%s"
     },
     {
-      "function": "0x2a4e5",
-      "call_ea": "0x2a65f",
-      "context": [
-        "push    dx",
-        "push    ax",
-        "mov     ax, [bp+var_8]",
-        "add     ax, 5",
-        "push    ax",
-        "mov     ax, 1884h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
+      "call_ea": "0x2a9f4",
+      "function": "0x2a975",
+      "load_ea": "0x2a9ec",
+      "dgroup_offset": "0x188a",
+      "text": "mon%s"
     },
     {
-      "function": "0x2aaa8",
-      "call_ea": "0x2b049",
-      "context": [
-        "push    dx",
-        "push    ax",
-        "mov     ax, [bp+var_6]",
-        "add     ax, 5",
-        "push    ax",
-        "mov     ax, 1890h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
+      "call_ea": "0x2b48a",
+      "function": "0x2b454",
+      "load_ea": "0x2b482",
+      "dgroup_offset": "0x18a8",
+      "text": "comb%s"
     },
     {
-      "function": "0x2b0ff",
-      "call_ea": "0x2b193",
-      "context": [
-        "push    dx",
-        "push    ax",
-        "mov     ax, [bp+arg_0]",
-        "add     ax, 25h",
-        "push    ax",
-        "mov     ax, 1896h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x2b0ff",
-      "call_ea": "0x2b2c5",
-      "context": [
-        "push    dx",
-        "push    ax",
-        "mov     ax, [bp+var_6]",
-        "add     ax, 5",
-        "push    ax",
-        "mov     ax, 189Ch",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x2b3d1",
-      "call_ea": "0x2b400",
-      "context": [
-        "push    word_30A6C",
-        "push    word_30A6A",
-        "mov     ax, [bp+arg_0]",
-        "add     ax, 3Dh",
-        "push    ax",
-        "mov     ax, 18A2h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x2b4a7",
-      "call_ea": "0x2b4ed",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 0",
-        "push    ax",
-        "mov     ax, 18B0h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
-    },
-    {
-      "function": "0x2b4a7",
-      "call_ea": "0x2b7f0",
-      "context": [
-        "mov     dx, ds",
-        "push    dx",
-        "push    ax",
-        "mov     ax, 1",
-        "push    ax",
-        "mov     ax, 18B8h",
-        "push    ax",
-        "call    sub_1A4FE"
-      ]
+      "call_ea": "0x2b828",
+      "function": "0x2b80a",
+      "load_ea": "0x2b820",
+      "dgroup_offset": "0x18c0",
+      "text": "end%s"
     }
   ],
+  "loop_globals": {
+    "camera_x_word_2FB50": [
+      {
+        "ea": "0x103fb",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x108b5",
+        "function": "0x10000",
+        "disassembly": "sub     word_2FB50, 1"
+      },
+      {
+        "ea": "0x108de",
+        "function": "0x10000",
+        "disassembly": "add     word_2FB50, 1"
+      },
+      {
+        "ea": "0x10940",
+        "function": "0x10000",
+        "disassembly": "cmp     word_2FB50, ax"
+      },
+      {
+        "ea": "0x1094c",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x10957",
+        "function": "0x10000",
+        "disassembly": "cmp     word_2FB50, ax"
+      },
+      {
+        "ea": "0x10963",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x10a08",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x10a6d",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2FB50"
+      },
+      {
+        "ea": "0x10c18",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x10c71",
+        "function": "0x10000",
+        "disassembly": "add     ax, word_2FB50"
+      },
+      {
+        "ea": "0x10d04",
+        "function": "0x10000",
+        "disassembly": "add     word_2FB50, ax"
+      },
+      {
+        "ea": "0x11602",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2FB50"
+      },
+      {
+        "ea": "0x15089",
+        "function": "0x14db1",
+        "disassembly": "mov     ax, word_2FB50"
+      },
+      {
+        "ea": "0x29202",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_2FB50"
+      },
+      {
+        "ea": "0x29231",
+        "function": "0x29004",
+        "disassembly": "sub     word_2FB50, ax"
+      },
+      {
+        "ea": "0x2925d",
+        "function": "0x29004",
+        "disassembly": "add     word_2FB50, ax"
+      },
+      {
+        "ea": "0x292eb",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_2FB50"
+      },
+      {
+        "ea": "0x2934c",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x29377",
+        "function": "0x29004",
+        "disassembly": "cmp     word_2FB50, 0"
+      },
+      {
+        "ea": "0x29381",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB50, 0"
+      },
+      {
+        "ea": "0x29387",
+        "function": "0x29004",
+        "disassembly": "cmp     word_2FB50, 3Fh"
+      },
+      {
+        "ea": "0x29391",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB50, 3Fh"
+      },
+      {
+        "ea": "0x29416",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_2FB50"
+      },
+      {
+        "ea": "0x2945f",
+        "function": "0x29004",
+        "disassembly": "mov     cx, word_2FB50"
+      },
+      {
+        "ea": "0x294c4",
+        "function": "0x29004",
+        "disassembly": "mov     cx, word_2FB50"
+      },
+      {
+        "ea": "0x295b5",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x296ac",
+        "function": "0x29004",
+        "disassembly": "push    word_2FB50"
+      },
+      {
+        "ea": "0x29cc3",
+        "function": "0x29ca3",
+        "disassembly": "mov     word_2FB50, ax"
+      },
+      {
+        "ea": "0x29f41",
+        "function": "0x29dde",
+        "disassembly": "mov     ax, word_2FB50"
+      }
+    ],
+    "camera_y_word_2FB56": [
+      {
+        "ea": "0x1040d",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x10904",
+        "function": "0x10000",
+        "disassembly": "sub     word_2FB56, 1"
+      },
+      {
+        "ea": "0x1092d",
+        "function": "0x10000",
+        "disassembly": "add     word_2FB56, 1"
+      },
+      {
+        "ea": "0x1096e",
+        "function": "0x10000",
+        "disassembly": "cmp     word_2FB56, ax"
+      },
+      {
+        "ea": "0x1097a",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x10985",
+        "function": "0x10000",
+        "disassembly": "cmp     word_2FB56, ax"
+      },
+      {
+        "ea": "0x10991",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x10a19",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x10a77",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2FB56"
+      },
+      {
+        "ea": "0x10c27",
+        "function": "0x10000",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x10c86",
+        "function": "0x10000",
+        "disassembly": "add     ax, word_2FB56"
+      },
+      {
+        "ea": "0x10d0b",
+        "function": "0x10000",
+        "disassembly": "add     word_2FB56, ax"
+      },
+      {
+        "ea": "0x1160e",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2FB56"
+      },
+      {
+        "ea": "0x1509c",
+        "function": "0x14db1",
+        "disassembly": "mov     ax, word_2FB56"
+      },
+      {
+        "ea": "0x29208",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_2FB56"
+      },
+      {
+        "ea": "0x29289",
+        "function": "0x29004",
+        "disassembly": "sub     word_2FB56, ax"
+      },
+      {
+        "ea": "0x292b5",
+        "function": "0x29004",
+        "disassembly": "add     word_2FB56, ax"
+      },
+      {
+        "ea": "0x292f5",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_2FB56"
+      },
+      {
+        "ea": "0x29368",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x29397",
+        "function": "0x29004",
+        "disassembly": "cmp     word_2FB56, 0"
+      },
+      {
+        "ea": "0x293a1",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB56, 0"
+      },
+      {
+        "ea": "0x293a7",
+        "function": "0x29004",
+        "disassembly": "cmp     word_2FB56, 3Fh"
+      },
+      {
+        "ea": "0x293b1",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB56, 3Fh"
+      },
+      {
+        "ea": "0x2942c",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_2FB56"
+      },
+      {
+        "ea": "0x29479",
+        "function": "0x29004",
+        "disassembly": "mov     cx, word_2FB56"
+      },
+      {
+        "ea": "0x294dd",
+        "function": "0x29004",
+        "disassembly": "mov     cx, word_2FB56"
+      },
+      {
+        "ea": "0x295bb",
+        "function": "0x29004",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x296bd",
+        "function": "0x29004",
+        "disassembly": "push    word_2FB56"
+      },
+      {
+        "ea": "0x29cdd",
+        "function": "0x29ca3",
+        "disassembly": "mov     word_2FB56, ax"
+      },
+      {
+        "ea": "0x29f51",
+        "function": "0x29dde",
+        "disassembly": "mov     ax, word_2FB56"
+      }
+    ],
+    "clamp_word_2DF66": [
+      {
+        "ea": "0x104bb",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF66, ax"
+      },
+      {
+        "ea": "0x1096b",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF66"
+      },
+      {
+        "ea": "0x10977",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF66"
+      },
+      {
+        "ea": "0x109cd",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF66, ax"
+      },
+      {
+        "ea": "0x10c03",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF66, ax"
+      },
+      {
+        "ea": "0x1162b",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF66"
+      },
+      {
+        "ea": "0x11636",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF66"
+      },
+      {
+        "ea": "0x15158",
+        "function": "0x14db1",
+        "disassembly": "mov     ax, word_2DF66"
+      },
+      {
+        "ea": "0x29d2b",
+        "function": "0x29ca3",
+        "disassembly": "mov     word_2DF66, ax"
+      }
+    ],
+    "clamp_word_2DF68": [
+      {
+        "ea": "0x10499",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF68, ax"
+      },
+      {
+        "ea": "0x1093d",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF68"
+      },
+      {
+        "ea": "0x10949",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF68"
+      },
+      {
+        "ea": "0x109c4",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF68, 0"
+      },
+      {
+        "ea": "0x10bfa",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF68, 0"
+      },
+      {
+        "ea": "0x1161a",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF68"
+      },
+      {
+        "ea": "0x11625",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF68"
+      },
+      {
+        "ea": "0x1513c",
+        "function": "0x14db1",
+        "disassembly": "mov     ax, word_2DF68"
+      },
+      {
+        "ea": "0x29cf7",
+        "function": "0x29ca3",
+        "disassembly": "mov     word_2DF68, ax"
+      }
+    ],
+    "clamp_word_2DF6A": [
+      {
+        "ea": "0x104aa",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6A, ax"
+      },
+      {
+        "ea": "0x104cf",
+        "function": "0x10000",
+        "disassembly": "cmp     word_2DF6A, 0"
+      },
+      {
+        "ea": "0x104ec",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6A, ax"
+      },
+      {
+        "ea": "0x10954",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF6A"
+      },
+      {
+        "ea": "0x10960",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF6A"
+      },
+      {
+        "ea": "0x109d9",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6A, ax"
+      },
+      {
+        "ea": "0x10c0f",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6A, ax"
+      },
+      {
+        "ea": "0x1163c",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF6A"
+      },
+      {
+        "ea": "0x11647",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF6A"
+      },
+      {
+        "ea": "0x1514a",
+        "function": "0x14db1",
+        "disassembly": "mov     ax, word_2DF6A"
+      },
+      {
+        "ea": "0x29d11",
+        "function": "0x29ca3",
+        "disassembly": "mov     word_2DF6A, ax"
+      }
+    ],
+    "clamp_word_2DF6C": [
+      {
+        "ea": "0x104cc",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6C, ax"
+      },
+      {
+        "ea": "0x104d9",
+        "function": "0x10000",
+        "disassembly": "cmp     word_2DF6C, 0"
+      },
+      {
+        "ea": "0x104e3",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6C, 3Fh"
+      },
+      {
+        "ea": "0x10982",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF6C"
+      },
+      {
+        "ea": "0x1098e",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_2DF6C"
+      },
+      {
+        "ea": "0x109d0",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6C, 3Fh"
+      },
+      {
+        "ea": "0x10c06",
+        "function": "0x10000",
+        "disassembly": "mov     word_2DF6C, 3Fh"
+      },
+      {
+        "ea": "0x1164d",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF6C"
+      },
+      {
+        "ea": "0x11658",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_2DF6C"
+      },
+      {
+        "ea": "0x15166",
+        "function": "0x14db1",
+        "disassembly": "mov     ax, word_2DF6C"
+      },
+      {
+        "ea": "0x29d45",
+        "function": "0x29ca3",
+        "disassembly": "mov     word_2DF6C, ax"
+      }
+    ],
+    "cell_index_word_3AC5A": [
+      {
+        "ea": "0x1084d",
+        "function": "0x10000",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x10853",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x1085c",
+        "function": "0x10000",
+        "disassembly": "and     word_3AC5A, 7"
+      },
+      {
+        "ea": "0x10861",
+        "function": "0x10000",
+        "disassembly": "mov     bx, word_3AC5A"
+      },
+      {
+        "ea": "0x10887",
+        "function": "0x10000",
+        "disassembly": "mov     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x108ba",
+        "function": "0x10000",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x108e3",
+        "function": "0x10000",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x10909",
+        "function": "0x10000",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x10932",
+        "function": "0x10000",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x10a24",
+        "function": "0x10000",
+        "disassembly": "cmp     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x10b3d",
+        "function": "0x10000",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x10b99",
+        "function": "0x10000",
+        "disassembly": "cmp     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x10ba6",
+        "function": "0x10000",
+        "disassembly": "push    word_3AC5A"
+      },
+      {
+        "ea": "0x10bd8",
+        "function": "0x10000",
+        "disassembly": "mov     bx, word_3AC5A"
+      },
+      {
+        "ea": "0x10be3",
+        "function": "0x10000",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x10be6",
+        "function": "0x10000",
+        "disassembly": "cmp     word_3AC5A, 2"
+      },
+      {
+        "ea": "0x10d49",
+        "function": "0x10000",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x10d6e",
+        "function": "0x10000",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x11669",
+        "function": "0x115d1",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x11670",
+        "function": "0x115d1",
+        "disassembly": "mov     si, word_3AC5A"
+      },
+      {
+        "ea": "0x11679",
+        "function": "0x115d1",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x1167c",
+        "function": "0x115d1",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x116a8",
+        "function": "0x115d1",
+        "disassembly": "push    word_3AC5A"
+      },
+      {
+        "ea": "0x1eb0a",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x1eb11",
+        "function": "0x1e3a8",
+        "disassembly": "mov     si, word_3AC5A"
+      },
+      {
+        "ea": "0x1eb1a",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x1eb1d",
+        "function": "0x1e3a8",
+        "disassembly": "cmp     word_3AC5A, 0Ah"
+      },
+      {
+        "ea": "0x1f221",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x1f224",
+        "function": "0x1e3a8",
+        "disassembly": "mov     bx, word_3AC5A"
+      },
+      {
+        "ea": "0x1f334",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x1f372",
+        "function": "0x1e3a8",
+        "disassembly": "push    word_3AC5A"
+      },
+      {
+        "ea": "0x1f539",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x1f53c",
+        "function": "0x1e3a8",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x1f65b",
+        "function": "0x1e3a8",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x1fe2c",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x1fe2f",
+        "function": "0x1e3a8",
+        "disassembly": "mov     bx, word_3AC5A"
+      },
+      {
+        "ea": "0x1fe3d",
+        "function": "0x1e3a8",
+        "disassembly": "cmp     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x1feb3",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, 20h"
+      },
+      {
+        "ea": "0x1fec2",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, 30h"
+      },
+      {
+        "ea": "0x1fec8",
+        "function": "0x1e3a8",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x20c5b",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x20c61",
+        "function": "0x1e3a8",
+        "disassembly": "cmp     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x20c6a",
+        "function": "0x1e3a8",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x2104e",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x210e0",
+        "function": "0x1e3a8",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x21120",
+        "function": "0x1e3a8",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x211b9",
+        "function": "0x1e3a8",
+        "disassembly": "mov     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x21249",
+        "function": "0x1e3a8",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x21611",
+        "function": "0x1e3a8",
+        "disassembly": "cmp     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x2175b",
+        "function": "0x1e3a8",
+        "disassembly": "cmp     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x22e95",
+        "function": "0x228b7",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x22ed0",
+        "function": "0x228b7",
+        "disassembly": "push    word_3AC5A"
+      },
+      {
+        "ea": "0x291fc",
+        "function": "0x29004",
+        "disassembly": "mov     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x29235",
+        "function": "0x29004",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x29261",
+        "function": "0x29004",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x2928d",
+        "function": "0x29004",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x292b9",
+        "function": "0x29004",
+        "disassembly": "add     word_3AC5A, 1"
+      },
+      {
+        "ea": "0x292be",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x292e1",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x29335",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x293b7",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, 0"
+      },
+      {
+        "ea": "0x293d8",
+        "function": "0x29004",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x293de",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x293e7",
+        "function": "0x29004",
+        "disassembly": "and     word_3AC5A, 7"
+      },
+      {
+        "ea": "0x293ec",
+        "function": "0x29004",
+        "disassembly": "mov     bx, word_3AC5A"
+      },
+      {
+        "ea": "0x295f7",
+        "function": "0x29004",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x2961c",
+        "function": "0x29004",
+        "disassembly": "mov     ax, word_3AC5A"
+      },
+      {
+        "ea": "0x296d6",
+        "function": "0x29004",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x29732",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x2973f",
+        "function": "0x29004",
+        "disassembly": "push    word_3AC5A"
+      },
+      {
+        "ea": "0x29769",
+        "function": "0x29004",
+        "disassembly": "push    word_3AC5A"
+      },
+      {
+        "ea": "0x29775",
+        "function": "0x29004",
+        "disassembly": "mov     bx, word_3AC5A"
+      },
+      {
+        "ea": "0x29780",
+        "function": "0x29004",
+        "disassembly": "mov     word_3AC5A, ax"
+      },
+      {
+        "ea": "0x29799",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, 2"
+      },
+      {
+        "ea": "0x297ab",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, 17h"
+      },
+      {
+        "ea": "0x297c7",
+        "function": "0x29004",
+        "disassembly": "cmp     word_3AC5A, 18h"
+      }
+    ],
+    "screen_cache_2A48": []
+  },
+  "segment_layout": {
+    "map_grid": {
+      "offset": "0x0000",
+      "bytes": 4096,
+      "index": "(X << 6) + Y",
+      "cell_bytes": 1
+    },
+    "tiles": {
+      "offset": "0x1000",
+      "bytes": 32768,
+      "count": 256,
+      "tile_bytes": 128,
+      "encoding": "EGA 4-plane plane-major 16x16"
+    }
+  },
   "functions": [
     {
-      "start_ea": "0x2a0c6",
-      "original_name": "sub_2A0C6",
-      "instruction_count": 77,
+      "original_name": "sub_115D1",
+      "start_ea": "0x115d1",
+      "end_ea": "0x11703",
+      "instruction_count": 104,
       "callers": [
-        "0x290f5",
-        "0x298a1",
-        "0x29900",
-        "0x29b1f"
+        "0x10711",
+        "0x10a2e",
+        "0x10c50",
+        "0x2950d",
+        "0x2954a",
+        "0x298ec",
+        "0x2a3e4"
       ],
       "instructions": [
-        "0x2a0c6 push    bp",
-        "0x2a0c7 mov     bp, sp",
-        "0x2a0c9 sub     sp, 0",
-        "0x2a0cd push    si",
-        "0x2a0ce push    di",
-        "0x2a0cf mov     ax, [bp+arg_0]",
-        "0x2a0d2 mov     word_2DF5A, ax",
-        "0x2a0d5 mov     ax, 3",
-        "0x2a0d8 imul    [bp+arg_0]",
-        "0x2a0db mov     [bp+arg_0], ax",
-        "0x2a0de mov     ax, 0",
-        "0x2a0e1 push    ax",
-        "0x2a0e2 push    [bp+arg_0]",
-        "0x2a0e5 call    sub_2A01C",
-        "0x2a0ea add     sp, 4",
-        "0x2a0ed mov     ax, 7Ch",
-        "0x2a0f0 push    ax",
-        "0x2a0f1 mov     ax, [bp+arg_0]",
-        "0x2a0f4 add     ax, 1",
-        "0x2a0f7 push    ax",
-        "0x2a0f8 call    sub_2A01C",
-        "0x2a0fd add     sp, 4",
-        "0x2a100 cmp     [bp+arg_0], 9",
-        "0x2a104 jnz     short loc_2A109",
-        "0x2a106 jmp     loc_2A112",
-        "0x2a109 cmp     [bp+arg_0], 0Ch",
-        "0x2a10d jz      short loc_2A112",
-        "0x2a10f jmp     loc_2A128",
-        "0x2a112 mov     ax, 0F8h",
-        "0x2a115 push    ax",
-        "0x2a116 mov     ax, [bp+arg_0]",
-        "0x2a119 add     ax, 2",
-        "0x2a11c push    ax",
-        "0x2a11d call    sub_2A01C",
-        "0x2a122 add     sp, 4",
-        "0x2a125 jmp     loc_2A188",
-        "0x2a128 mov     ax, word_34A1A",
-        "0x2a12b mov     word_30A6C, ax",
-        "0x2a12e mov     word_30A6A, 0F80h",
-        "0x2a134 mov     ax, 5",
-        "0x2a137 imul    word_2DF64",
-        "0x2a13b mov     cx, 670h",
-        "0x2a13e add     cx, ax",
-        "0x2a140 push    cx",
-        "0x2a141 mov     ax, 187Ch",
-        "0x2a144 push    ax",
-        "0x2a145 mov     ax, 2D50h",
-        "0x2a148 push    ax",
-        "0x2a149 call    sub_2D3FA",
-        "0x2a14e add     sp, 6",
-        "0x2a151 mov     ax, word_34A0A",
-        "0x2a154 add     ax, 400h",
-        "0x2a157 push    ax",
-        "0x2a158 push    word_30A6C",
-        "0x2a15c push    word_30A6A",
-        "0x2a160 mov     ax, [bp+arg_0]",
-        "0x2a163 add     ax, 2",
-        "0x2a166 push    ax",
-        "0x2a167 mov     ax, 2D50h",
-        "0x2a16a push    ax",
-        "0x2a16b call    sub_1A4FE",
-        "0x2a170 add     sp, 0Ah",
-        "0x2a173 push    ds",
-        "0x2a174 mov     ax, word_34A1A",
-        "0x2a177 mov     ds, ax",
-        "0x2a179 add     ax, 117h",
-        "0x2a17c mov     es, ax",
-        "0x2a17e mov     cx, 3E0h",
-        "0x2a181 xor     si, si",
-        "0x2a183 xor     di, di",
-        "0x2a185 rep movsw",
-        "0x2a187 pop     ds",
-        "0x2a188 pop     di",
-        "0x2a189 pop     si",
-        "0x2a18a mov     sp, bp",
-        "0x2a18c pop     bp",
-        "0x2a18d retf"
+        {
+          "ea": "0x115d1",
+          "disassembly": "push    bp"
+        },
+        {
+          "ea": "0x115d2",
+          "disassembly": "mov     bp, sp"
+        },
+        {
+          "ea": "0x115d4",
+          "disassembly": "sub     sp, 0Ah"
+        },
+        {
+          "ea": "0x115d8",
+          "disassembly": "push    si"
+        },
+        {
+          "ea": "0x115d9",
+          "disassembly": "push    di"
+        },
+        {
+          "ea": "0x115da",
+          "disassembly": "mov     ax, 9Ah"
+        },
+        {
+          "ea": "0x115dd",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x115de",
+          "disassembly": "mov     ax, 128h"
+        },
+        {
+          "ea": "0x115e1",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x115e2",
+          "disassembly": "mov     ax, 3Ah"
+        },
+        {
+          "ea": "0x115e5",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x115e6",
+          "disassembly": "mov     ax, 68h"
+        },
+        {
+          "ea": "0x115e9",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x115ea",
+          "disassembly": "call    sub_1C40D"
+        },
+        {
+          "ea": "0x115ef",
+          "disassembly": "add     sp, 8"
+        },
+        {
+          "ea": "0x115f2",
+          "disassembly": "mov     [bp+var_2], 0"
+        },
+        {
+          "ea": "0x115f7",
+          "disassembly": "jmp     loc_116C5"
+        },
+        {
+          "ea": "0x115fa",
+          "disassembly": "mov     [bp+var_4], 0"
+        },
+        {
+          "ea": "0x115ff",
+          "disassembly": "jmp     loc_116B8"
+        },
+        {
+          "ea": "0x11602",
+          "disassembly": "mov     ax, word_2FB50"
+        },
+        {
+          "ea": "0x11605",
+          "disassembly": "add     ax, [bp+var_4]"
+        },
+        {
+          "ea": "0x11608",
+          "disassembly": "add     ax, 0FFFBh"
+        },
+        {
+          "ea": "0x1160b",
+          "disassembly": "mov     [bp+var_6], ax"
+        },
+        {
+          "ea": "0x1160e",
+          "disassembly": "mov     ax, word_2FB56"
+        },
+        {
+          "ea": "0x11611",
+          "disassembly": "add     ax, [bp+var_2]"
+        },
+        {
+          "ea": "0x11614",
+          "disassembly": "add     ax, 0FFFEh"
+        },
+        {
+          "ea": "0x11617",
+          "disassembly": "mov     [bp+var_8], ax"
+        },
+        {
+          "ea": "0x1161a",
+          "disassembly": "mov     ax, word_2DF68"
+        },
+        {
+          "ea": "0x1161d",
+          "disassembly": "cmp     [bp+var_6], ax"
+        },
+        {
+          "ea": "0x11620",
+          "disassembly": "jl      short loc_11625"
+        },
+        {
+          "ea": "0x11622",
+          "disassembly": "jmp     loc_1162B"
+        },
+        {
+          "ea": "0x11625",
+          "disassembly": "mov     ax, word_2DF68"
+        },
+        {
+          "ea": "0x11628",
+          "disassembly": "mov     [bp+var_6], ax"
+        },
+        {
+          "ea": "0x1162b",
+          "disassembly": "mov     ax, word_2DF66"
+        },
+        {
+          "ea": "0x1162e",
+          "disassembly": "cmp     [bp+var_8], ax"
+        },
+        {
+          "ea": "0x11631",
+          "disassembly": "jl      short loc_11636"
+        },
+        {
+          "ea": "0x11633",
+          "disassembly": "jmp     loc_1163C"
+        },
+        {
+          "ea": "0x11636",
+          "disassembly": "mov     ax, word_2DF66"
+        },
+        {
+          "ea": "0x11639",
+          "disassembly": "mov     [bp+var_8], ax"
+        },
+        {
+          "ea": "0x1163c",
+          "disassembly": "mov     ax, word_2DF6A"
+        },
+        {
+          "ea": "0x1163f",
+          "disassembly": "cmp     [bp+var_6], ax"
+        },
+        {
+          "ea": "0x11642",
+          "disassembly": "jg      short loc_11647"
+        },
+        {
+          "ea": "0x11644",
+          "disassembly": "jmp     loc_1164D"
+        },
+        {
+          "ea": "0x11647",
+          "disassembly": "mov     ax, word_2DF6A"
+        },
+        {
+          "ea": "0x1164a",
+          "disassembly": "mov     [bp+var_6], ax"
+        },
+        {
+          "ea": "0x1164d",
+          "disassembly": "mov     ax, word_2DF6C"
+        },
+        {
+          "ea": "0x11650",
+          "disassembly": "cmp     [bp+var_8], ax"
+        },
+        {
+          "ea": "0x11653",
+          "disassembly": "jg      short loc_11658"
+        },
+        {
+          "ea": "0x11655",
+          "disassembly": "jmp     loc_1165E"
+        },
+        {
+          "ea": "0x11658",
+          "disassembly": "mov     ax, word_2DF6C"
+        },
+        {
+          "ea": "0x1165b",
+          "disassembly": "mov     [bp+var_8], ax"
+        },
+        {
+          "ea": "0x1165e",
+          "disassembly": "mov     cx, 6"
+        },
+        {
+          "ea": "0x11661",
+          "disassembly": "mov     ax, [bp+var_6]"
+        },
+        {
+          "ea": "0x11664",
+          "disassembly": "shl     ax, cl"
+        },
+        {
+          "ea": "0x11666",
+          "disassembly": "add     ax, [bp+var_8]"
+        },
+        {
+          "ea": "0x11669",
+          "disassembly": "mov     word_3AC5A, ax"
+        },
+        {
+          "ea": "0x1166c",
+          "disassembly": "mov     es, word_30C8A"
+        },
+        {
+          "ea": "0x11670",
+          "disassembly": "mov     si, word_3AC5A"
+        },
+        {
+          "ea": "0x11674",
+          "disassembly": "mov     al, es:[si]"
+        },
+        {
+          "ea": "0x11677",
+          "disassembly": "xor     ah, ah"
+        },
+        {
+          "ea": "0x11679",
+          "disassembly": "mov     word_3AC5A, ax"
+        },
+        {
+          "ea": "0x1167c",
+          "disassembly": "mov     ax, word_3AC5A"
+        },
+        {
+          "ea": "0x1167f",
+          "disassembly": "mov     [bp+var_A], ax"
+        },
+        {
+          "ea": "0x11682",
+          "disassembly": "mov     ax, 0Ch"
+        },
+        {
+          "ea": "0x11685",
+          "disassembly": "imul    [bp+var_2]"
+        },
+        {
+          "ea": "0x11688",
+          "disassembly": "mov     bx, ax"
+        },
+        {
+          "ea": "0x1168a",
+          "disassembly": "add     bx, [bp+var_4]"
+        },
+        {
+          "ea": "0x1168d",
+          "disassembly": "mov     ax, [bp+var_A]"
+        },
+        {
+          "ea": "0x11690",
+          "disassembly": "mov     [bx+2A48h], al"
+        },
+        {
+          "ea": "0x11694",
+          "disassembly": "push    word_30C8A"
+        },
+        {
+          "ea": "0x11698",
+          "disassembly": "mov     ax, 280h"
+        },
+        {
+          "ea": "0x1169b",
+          "disassembly": "imul    [bp+var_2]"
+        },
+        {
+          "ea": "0x1169e",
+          "disassembly": "add     ax, 91Dh"
+        },
+        {
+          "ea": "0x116a1",
+          "disassembly": "add     ax, [bp+var_4]"
+        },
+        {
+          "ea": "0x116a4",
+          "disassembly": "add     ax, [bp+var_4]"
+        },
+        {
+          "ea": "0x116a7",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x116a8",
+          "disassembly": "push    word_3AC5A"
+        },
+        {
+          "ea": "0x116ac",
+          "disassembly": "call    sub_1CAC2"
+        },
+        {
+          "ea": "0x116b1",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x116b4",
+          "disassembly": "add     [bp+var_4], 1"
+        },
+        {
+          "ea": "0x116b8",
+          "disassembly": "cmp     [bp+var_4], 0Ch"
+        },
+        {
+          "ea": "0x116bc",
+          "disassembly": "jge     short loc_116C1"
+        },
+        {
+          "ea": "0x116be",
+          "disassembly": "jmp     loc_11602"
+        },
+        {
+          "ea": "0x116c1",
+          "disassembly": "add     [bp+var_2], 1"
+        },
+        {
+          "ea": "0x116c5",
+          "disassembly": "cmp     [bp+var_2], 6"
+        },
+        {
+          "ea": "0x116c9",
+          "disassembly": "jge     short loc_116CE"
+        },
+        {
+          "ea": "0x116cb",
+          "disassembly": "jmp     loc_115FA"
+        },
+        {
+          "ea": "0x116ce",
+          "disassembly": "mov     word_2DF60, 0"
+        },
+        {
+          "ea": "0x116d4",
+          "disassembly": "cmp     word_2DF6E, 0"
+        },
+        {
+          "ea": "0x116d9",
+          "disassembly": "jnz     short loc_116DE"
+        },
+        {
+          "ea": "0x116db",
+          "disassembly": "jmp     loc_116F2"
+        },
+        {
+          "ea": "0x116de",
+          "disassembly": "mov     ax, 0"
+        },
+        {
+          "ea": "0x116e1",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x116e2",
+          "disassembly": "push    word_3AC5C"
+        },
+        {
+          "ea": "0x116e6",
+          "disassembly": "push    word_39A50"
+        },
+        {
+          "ea": "0x116ea",
+          "disassembly": "call    sub_1C365"
+        },
+        {
+          "ea": "0x116ef",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x116f2",
+          "disassembly": "mov     word_2DF28, 0"
+        },
+        {
+          "ea": "0x116f8",
+          "disassembly": "call    sub_11390"
+        },
+        {
+          "ea": "0x116fd",
+          "disassembly": "pop     di"
+        },
+        {
+          "ea": "0x116fe",
+          "disassembly": "pop     si"
+        },
+        {
+          "ea": "0x116ff",
+          "disassembly": "mov     sp, bp"
+        },
+        {
+          "ea": "0x11701",
+          "disassembly": "pop     bp"
+        },
+        {
+          "ea": "0x11702",
+          "disassembly": "retf"
+        }
       ]
     },
     {
-      "start_ea": "0x2a01c",
-      "original_name": "sub_2A01C",
-      "instruction_count": 63,
+      "original_name": "sub_1CAC2",
+      "start_ea": "0x1cac2",
+      "end_ea": "0x1cb28",
+      "instruction_count": 36,
       "callers": [
-        "0x2a0e5",
-        "0x2a0f8",
-        "0x2a11d"
+        "0x116ac",
+        "0x1c657",
+        "0x2275e",
+        "0x2959e",
+        "0x295d0"
       ],
       "instructions": [
-        "0x2a01c push    bp",
-        "0x2a01d mov     bp, sp",
-        "0x2a01f sub     sp, 2",
-        "0x2a023 push    si",
-        "0x2a024 push    di",
-        "0x2a025 mov     ax, word_34A0A",
-        "0x2a028 add     ax, 600h",
-        "0x2a02b mov     word_30A6C, ax",
-        "0x2a02e mov     word_30A6A, 0",
-        "0x2a034 cmp     word_2DF1E, 8",
-        "0x2a039 jl      short loc_2A03E",
-        "0x2a03b jmp     loc_2A048",
-        "0x2a03e mov     ax, [bp+arg_2]",
-        "0x2a041 add     ax, word_34A1A",
-        "0x2a045 mov     word_30A6C, ax",
-        "0x2a048 mov     ax, 5",
-        "0x2a04b imul    word_2DF64",
-        "0x2a04f mov     cx, 670h",
-        "0x2a052 add     cx, ax",
-        "0x2a054 push    cx",
-        "0x2a055 mov     ax, 1874h",
-        "0x2a058 push    ax",
-        "0x2a059 mov     ax, 2D50h",
-        "0x2a05c push    ax",
-        "0x2a05d call    sub_2D3FA",
-        "0x2a062 add     sp, 6",
-        "0x2a065 mov     ax, word_34A0A",
-        "0x2a068 add     ax, 400h",
-        "0x2a06b push    ax",
-        "0x2a06c push    word_30A6C",
-        "0x2a070 push    word_30A6A",
-        "0x2a074 push    [bp+arg_0]",
-        "0x2a077 mov     ax, 2D50h",
-        "0x2a07a push    ax",
-        "0x2a07b call    sub_1A4FE",
-        "0x2a080 add     sp, 0Ah",
-        "0x2a083 cmp     word_2DF1E, 8",
-        "0x2a088 jg      short loc_2A08D",
-        "0x2a08a jmp     loc_2A0C0",
-        "0x2a08d mov     ax, word_34A0A",
-        "0x2a090 add     ax, 600h",
-        "0x2a093 mov     es, ax",
-        "0x2a095 mov     ax, es:0",
-        "0x2a099 xchg    al, ah",
-        "0x2a09b mov     [bp+var_2], ax",
-        "0x2a09e mov     ax, [bp+arg_2]",
-        "0x2a0a1 add     ax, word_34A1A",
-        "0x2a0a5 push    ax",
-        "0x2a0a6 push    [bp+var_2]",
-        "0x2a0a9 mov     ax, 2",
-        "0x2a0ac push    ax",
-        "0x2a0ad mov     ax, 1F0h",
-        "0x2a0b0 push    ax",
-        "0x2a0b1 mov     ax, word_34A0A",
-        "0x2a0b4 add     ax, 600h",
-        "0x2a0b7 push    ax",
-        "0x2a0b8 call    sub_1C907",
-        "0x2a0bd add     sp, 0Ah",
-        "0x2a0c0 pop     di",
-        "0x2a0c1 pop     si",
-        "0x2a0c2 mov     sp, bp",
-        "0x2a0c4 pop     bp",
-        "0x2a0c5 retf"
+        {
+          "ea": "0x1cac2",
+          "disassembly": "push    bp"
+        },
+        {
+          "ea": "0x1cac3",
+          "disassembly": "mov     bp, sp"
+        },
+        {
+          "ea": "0x1cac5",
+          "disassembly": "sub     sp, 0"
+        },
+        {
+          "ea": "0x1cac9",
+          "disassembly": "push    si"
+        },
+        {
+          "ea": "0x1caca",
+          "disassembly": "push    di"
+        },
+        {
+          "ea": "0x1cacb",
+          "disassembly": "cmp     word_2DF1E, 0Dh"
+        },
+        {
+          "ea": "0x1cad0",
+          "disassembly": "jz      short loc_1CAD5"
+        },
+        {
+          "ea": "0x1cad2",
+          "disassembly": "jmp     loc_1CAE9"
+        },
+        {
+          "ea": "0x1cad5",
+          "disassembly": "push    [bp+arg_4]"
+        },
+        {
+          "ea": "0x1cad8",
+          "disassembly": "push    [bp+arg_2]"
+        },
+        {
+          "ea": "0x1cadb",
+          "disassembly": "push    [bp+arg_0]"
+        },
+        {
+          "ea": "0x1cade",
+          "disassembly": "call    sub_1D1C6"
+        },
+        {
+          "ea": "0x1cae3",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x1cae6",
+          "disassembly": "jmp     loc_1CB22"
+        },
+        {
+          "ea": "0x1cae9",
+          "disassembly": "cmp     word_2DF1E, 9"
+        },
+        {
+          "ea": "0x1caee",
+          "disassembly": "jz      short loc_1CAF3"
+        },
+        {
+          "ea": "0x1caf0",
+          "disassembly": "jmp     loc_1CB07"
+        },
+        {
+          "ea": "0x1caf3",
+          "disassembly": "push    [bp+arg_4]"
+        },
+        {
+          "ea": "0x1caf6",
+          "disassembly": "push    [bp+arg_2]"
+        },
+        {
+          "ea": "0x1caf9",
+          "disassembly": "push    [bp+arg_0]"
+        },
+        {
+          "ea": "0x1cafc",
+          "disassembly": "call    sub_1D994"
+        },
+        {
+          "ea": "0x1cb01",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x1cb04",
+          "disassembly": "jmp     loc_1CB22"
+        },
+        {
+          "ea": "0x1cb07",
+          "disassembly": "cmp     word_2DF1E, 8"
+        },
+        {
+          "ea": "0x1cb0c",
+          "disassembly": "jl      short loc_1CB11"
+        },
+        {
+          "ea": "0x1cb0e",
+          "disassembly": "jmp     loc_1CB22"
+        },
+        {
+          "ea": "0x1cb11",
+          "disassembly": "push    [bp+arg_4]"
+        },
+        {
+          "ea": "0x1cb14",
+          "disassembly": "push    [bp+arg_2]"
+        },
+        {
+          "ea": "0x1cb17",
+          "disassembly": "push    [bp+arg_0]"
+        },
+        {
+          "ea": "0x1cb1a",
+          "disassembly": "call    sub_1E211"
+        },
+        {
+          "ea": "0x1cb1f",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x1cb22",
+          "disassembly": "pop     di"
+        },
+        {
+          "ea": "0x1cb23",
+          "disassembly": "pop     si"
+        },
+        {
+          "ea": "0x1cb24",
+          "disassembly": "mov     sp, bp"
+        },
+        {
+          "ea": "0x1cb26",
+          "disassembly": "pop     bp"
+        },
+        {
+          "ea": "0x1cb27",
+          "disassembly": "retf"
+        }
       ]
     },
     {
-      "start_ea": "0x1c907",
-      "original_name": "sub_1C907",
-      "instruction_count": 27,
+      "original_name": "sub_1D1C6",
+      "start_ea": "0x1d1c6",
+      "end_ea": "0x1d21d",
+      "instruction_count": 42,
       "callers": [
-        "0x1100c",
-        "0x112cf",
-        "0x14103",
-        "0x1702f",
-        "0x28984",
-        "0x2a0b8"
+        "0x1cade",
+        "0x1d2e2"
       ],
       "instructions": [
-        "0x1c907 push    bp",
-        "0x1c908 mov     bp, sp",
-        "0x1c90a sub     sp, 0",
-        "0x1c90e push    si",
-        "0x1c90f push    di",
-        "0x1c910 cmp     word_2DF1E, 9",
-        "0x1c915 jz      short loc_1C91A",
-        "0x1c917 jmp     loc_1C931",
-        "0x1c91a push    [bp+arg_8]",
-        "0x1c91d push    [bp+arg_6]",
-        "0x1c920 push    [bp+arg_4]",
-        "0x1c923 push    [bp+arg_0]",
-        "0x1c926 call    sub_1C80F",
-        "0x1c92b add     sp, 8",
-        "0x1c92e jmp     loc_1C948",
-        "0x1c931 push    [bp+arg_8]",
-        "0x1c934 push    [bp+arg_6]",
-        "0x1c937 push    [bp+arg_4]",
-        "0x1c93a push    [bp+arg_2]",
-        "0x1c93d push    [bp+arg_0]",
-        "0x1c940 call    sub_1A2BB",
-        "0x1c945 add     sp, 0Ah",
-        "0x1c948 pop     di",
-        "0x1c949 pop     si",
-        "0x1c94a mov     sp, bp",
-        "0x1c94c pop     bp",
-        "0x1c94d retf"
+        {
+          "ea": "0x1d1c6",
+          "disassembly": "push    bp"
+        },
+        {
+          "ea": "0x1d1c7",
+          "disassembly": "mov     bp, sp"
+        },
+        {
+          "ea": "0x1d1c9",
+          "disassembly": "sub     sp, 2"
+        },
+        {
+          "ea": "0x1d1cd",
+          "disassembly": "push    si"
+        },
+        {
+          "ea": "0x1d1ce",
+          "disassembly": "push    di"
+        },
+        {
+          "ea": "0x1d1cf",
+          "disassembly": "mov     ax, [bp+arg_2]"
+        },
+        {
+          "ea": "0x1d1d2",
+          "disassembly": "add     ax, 280h"
+        },
+        {
+          "ea": "0x1d1d5",
+          "disassembly": "mov     [bp+var_2], ax"
+        },
+        {
+          "ea": "0x1d1d8",
+          "disassembly": "mov     cx, 7"
+        },
+        {
+          "ea": "0x1d1db",
+          "disassembly": "mov     ax, [bp+arg_0]"
+        },
+        {
+          "ea": "0x1d1de",
+          "disassembly": "shl     ax, cl"
+        },
+        {
+          "ea": "0x1d1e0",
+          "disassembly": "mov     [bp+arg_0], ax"
+        },
+        {
+          "ea": "0x1d1e3",
+          "disassembly": "push    bp"
+        },
+        {
+          "ea": "0x1d1e4",
+          "disassembly": "mov     dx, 3C4h"
+        },
+        {
+          "ea": "0x1d1e7",
+          "disassembly": "mov     ax, 0A000h"
+        },
+        {
+          "ea": "0x1d1ea",
+          "disassembly": "mov     es, ax"
+        },
+        {
+          "ea": "0x1d1ec",
+          "disassembly": "mov     ax, 102h"
+        },
+        {
+          "ea": "0x1d1ef",
+          "disassembly": "mov     si, [bp+arg_0]"
+        },
+        {
+          "ea": "0x1d1f2",
+          "disassembly": "mov     cx, [bp+arg_4]"
+        },
+        {
+          "ea": "0x1d1f5",
+          "disassembly": "add     cx, 100h"
+        },
+        {
+          "ea": "0x1d1f9",
+          "disassembly": "mov     di, [bp+arg_2]"
+        },
+        {
+          "ea": "0x1d1fc",
+          "disassembly": "mov     bp, [bp+var_2]"
+        },
+        {
+          "ea": "0x1d1ff",
+          "disassembly": "push    ds"
+        },
+        {
+          "ea": "0x1d200",
+          "disassembly": "mov     ds, cx"
+        },
+        {
+          "ea": "0x1d202",
+          "disassembly": "mov     cx, 4"
+        },
+        {
+          "ea": "0x1d205",
+          "disassembly": "push    di"
+        },
+        {
+          "ea": "0x1d206",
+          "disassembly": "out     dx, ax; EGA: sequencer address reg"
+        },
+        {
+          "ea": "0x1d207",
+          "disassembly": "movsb"
+        },
+        {
+          "ea": "0x1d208",
+          "disassembly": "movsb"
+        },
+        {
+          "ea": "0x1d209",
+          "disassembly": "add     di, 26h"
+        },
+        {
+          "ea": "0x1d20c",
+          "disassembly": "cmp     di, bp"
+        },
+        {
+          "ea": "0x1d20e",
+          "disassembly": "jnz     short loc_1D207"
+        },
+        {
+          "ea": "0x1d210",
+          "disassembly": "shl     ah, 1"
+        },
+        {
+          "ea": "0x1d212",
+          "disassembly": "pop     di"
+        },
+        {
+          "ea": "0x1d213",
+          "disassembly": "loop    loc_1D205"
+        },
+        {
+          "ea": "0x1d215",
+          "disassembly": "pop     ds"
+        },
+        {
+          "ea": "0x1d216",
+          "disassembly": "pop     bp"
+        },
+        {
+          "ea": "0x1d217",
+          "disassembly": "pop     di"
+        },
+        {
+          "ea": "0x1d218",
+          "disassembly": "pop     si"
+        },
+        {
+          "ea": "0x1d219",
+          "disassembly": "mov     sp, bp"
+        },
+        {
+          "ea": "0x1d21b",
+          "disassembly": "pop     bp"
+        },
+        {
+          "ea": "0x1d21c",
+          "disassembly": "retf"
+        }
       ]
     },
     {
-      "start_ea": "0x1c80f",
-      "original_name": "sub_1C80F",
-      "instruction_count": 126,
+      "original_name": "sub_15920",
+      "start_ea": "0x15920",
+      "end_ea": "0x15abf",
+      "instruction_count": 140,
       "callers": [
-        "0x1c926"
+        "0x1067c",
+        "0x10d1b",
+        "0x16194",
+        "0x161ad",
+        "0x29025",
+        "0x2a95e",
+        "0x2b0dd",
+        "0x2b35a"
       ],
       "instructions": [
-        "0x1c80f push    bp",
-        "0x1c810 mov     bp, sp",
-        "0x1c812 sub     sp, 0",
-        "0x1c816 push    si",
-        "0x1c817 push    di",
-        "0x1c818 mov     di, [bp+arg_4]",
-        "0x1c81b mov     si, di",
-        "0x1c81d mov     bx, [bp+arg_2]",
-        "0x1c820 push    bp",
-        "0x1c821 push    ds",
-        "0x1c822 mov     es, [bp+arg_6]",
-        "0x1c825 mov     ds, [bp+arg_0]",
-        "0x1c828 mov     bp, di",
-        "0x1c82a xor     di, di",
-        "0x1c82c xor     dx, dx",
-        "0x1c82e cld",
-        "0x1c82f mov     ah, [bx]",
-        "0x1c831 inc     bx",
-        "0x1c832 test    ah, 80h",
-        "0x1c835 jnz     short loc_1C87F",
-        "0x1c837 inc     ah",
-        "0x1c839 or      dl, dl",
-        "0x1c83b jnz     short loc_1C84D",
-        "0x1c83d inc     dl",
-        "0x1c83f lodsb",
-        "0x1c840 mov     cl, al",
-        "0x1c842 shr     al, 1",
-        "0x1c844 shr     al, 1",
-        "0x1c846 shr     al, 1",
-        "0x1c848 shr     al, 1",
-        "0x1c84a jmp     loc_1C853",
-        "0x1c84d dec     dl",
-        "0x1c84f mov     al, cl",
-        "0x1c851 and     al, 0Fh",
-        "0x1c853 or      dh, dh",
-        "0x1c855 jz      short loc_1C862",
-        "0x1c857 dec     dh",
-        "0x1c859 or      al, ch",
-        "0x1c85b stosb",
-        "0x1c85c dec     ah",
-        "0x1c85e jz      short loc_1C877",
-        "0x1c860 and     al, 0Fh",
-        "0x1c862 mov     ch, al",
-        "0x1c864 shl     ch, 1",
-        "0x1c866 shl     ch, 1",
-        "0x1c868 shl     ch, 1",
-        "0x1c86a shl     ch, 1",
-        "0x1c86c or      al, ch",
-        "0x1c86e dec     ah",
-        "0x1c870 jz      short loc_1C87A",
-        "0x1c872 stosb",
-        "0x1c873 dec     ah",
-        "0x1c875 jnz     short loc_1C86E",
-        "0x1c877 jmp     loc_1C8F8",
-        "0x1c87a inc     dh",
-        "0x1c87c jmp     loc_1C8F8",
-        "0x1c87f sub     ah, 7Fh",
-        "0x1c882 cmp     dl, dh",
-        "0x1c884 jnz     short loc_1C8B4",
-        "0x1c886 or      dl, dl",
-        "0x1c888 jz      short loc_1C899",
-        "0x1c88a dec     dl",
-        "0x1c88c mov     al, cl",
-        "0x1c88e and     al, 0Fh",
-        "0x1c890 dec     dh",
-        "0x1c892 or      al, ch",
-        "0x1c894 stosb",
-        "0x1c895 dec     ah",
-        "0x1c897 jz      short loc_1C8F8",
-        "0x1c899 dec     ah",
-        "0x1c89b jz      short loc_1C8A5",
-        "0x1c89d movsb",
-        "0x1c89e dec     ah",
-        "0x1c8a0 jnz     short loc_1C899",
-        "0x1c8a2 jmp     loc_1C8F8",
-        "0x1c8a5 inc     dl",
-        "0x1c8a7 lodsb",
-        "0x1c8a8 mov     cl, al",
-        "0x1c8aa inc     dh",
-        "0x1c8ac mov     ch, cl",
-        "0x1c8ae and     ch, 0F0h",
-        "0x1c8b1 jmp     loc_1C8F8",
-        "0x1c8b4 or      dl, dl",
-        "0x1c8b6 jz      short loc_1C8CA",
-        "0x1c8b8 dec     dl",
-        "0x1c8ba mov     ch, cl",
-        "0x1c8bc shl     ch, 1",
-        "0x1c8be shl     ch, 1",
-        "0x1c8c0 shl     ch, 1",
-        "0x1c8c2 shl     ch, 1",
-        "0x1c8c4 inc     dh",
-        "0x1c8c6 dec     ah",
-        "0x1c8c8 jz      short loc_1C8F8",
-        "0x1c8ca lodsb",
-        "0x1c8cb mov     cl, al",
-        "0x1c8cd rol     cl, 1",
-        "0x1c8cf rol     cl, 1",
-        "0x1c8d1 rol     cl, 1",
-        "0x1c8d3 rol     cl, 1",
-        "0x1c8d5 mov     al, cl",
-        "0x1c8d7 and     al, 0Fh",
-        "0x1c8d9 or      al, ch",
-        "0x1c8db stosb",
-        "0x1c8dc dec     ah",
-        "0x1c8de jz      short loc_1C8EC",
-        "0x1c8e0 mov     ch, cl",
-        "0x1c8e2 and     ch, 0F0h",
-        "0x1c8e5 dec     ah",
-        "0x1c8e7 jnz     short loc_1C8CA",
-        "0x1c8e9 jmp     loc_1C8F8",
-        "0x1c8ec inc     dl",
-        "0x1c8ee dec     dh",
-        "0x1c8f0 shr     cl, 1",
-        "0x1c8f2 shr     cl, 1",
-        "0x1c8f4 shr     cl, 1",
-        "0x1c8f6 shr     cl, 1",
-        "0x1c8f8 cmp     bx, bp",
-        "0x1c8fa jz      short loc_1C8FF",
-        "0x1c8fc jmp     loc_1C82F",
-        "0x1c8ff pop     ds",
-        "0x1c900 pop     bp",
-        "0x1c901 pop     di",
-        "0x1c902 pop     si",
-        "0x1c903 mov     sp, bp",
-        "0x1c905 pop     bp",
-        "0x1c906 retf"
-      ]
-    },
-    {
-      "start_ea": "0x16986",
-      "original_name": "sub_16986",
-      "instruction_count": 318,
-      "callers": [
-        "0x16183"
-      ],
-      "instructions": [
-        "0x16986 push    bp",
-        "0x16987 mov     bp, sp",
-        "0x16989 sub     sp, 0Ch",
-        "0x1698d push    si",
-        "0x1698e push    di",
-        "0x1698f mov     ax, word_2DF18",
-        "0x16992 mov     [bp+var_A], ax",
-        "0x16995 mov     word_2DF18, 1",
-        "0x1699b mov     ax, 1",
-        "0x1699e push    ax",
-        "0x1699f call    sub_19CEF",
-        "0x169a4 add     sp, 2",
-        "0x169a7 mov     ax, word_30C8A",
-        "0x169aa mov     word_2DF12, ax",
-        "0x169ad mov     ax, 0",
-        "0x169b0 push    ax",
-        "0x169b1 call    sub_1103F",
-        "0x169b6 add     sp, 2",
-        "0x169b9 mov     word_39A56, 0",
-        "0x169bf cmp     word_2DF2C, 0",
-        "0x169c4 jz      short loc_169C9",
-        "0x169c6 jmp     loc_169D8",
-        "0x169c9 mov     ax, 20h",
-        "0x169cc push    ax",
-        "0x169cd call    sub_1103F",
-        "0x169d2 add     sp, 2",
-        "0x169d5 jmp     loc_169F0",
-        "0x169d8 mov     ax, 21h",
-        "0x169db push    ax",
-        "0x169dc call    sub_1103F",
-        "0x169e1 add     sp, 2",
-        "0x169e4 mov     ax, 64h",
-        "0x169e7 push    ax",
-        "0x169e8 call    sub_1103F",
-        "0x169ed add     sp, 2",
-        "0x169f0 mov     ax, 0",
-        "0x169f3 push    ax",
-        "0x169f4 call    sub_1CBA9",
-        "0x169f9 add     sp, 2",
-        "0x169fc mov     ax, 0",
-        "0x169ff push    ax",
-        "0x16a00 call    sub_18F3A",
-        "0x16a05 add     sp, 2",
-        "0x16a08 mov     word_2DF12, 0A000h",
-        "0x16a0e jmp     loc_16D02",
-        "0x16a11 mov     ax, 0C8h",
-        "0x16a14 push    ax",
-        "0x16a15 mov     ax, 28h",
-        "0x16a18 push    ax",
-        "0x16a19 mov     ax, 0",
-        "0x16a1c push    ax",
-        "0x16a1d mov     ax, 0",
-        "0x16a20 push    ax",
-        "0x16a21 push    word_30C8A",
-        "0x16a25 call    sub_19E9D",
-        "0x16a2a add     sp, 0Ah",
-        "0x16a2d mov     ax, 0",
-        "0x16a30 push    ax",
-        "0x16a31 mov     ax, 9Bh",
-        "0x16a34 push    ax",
-        "0x16a35 mov     ax, 131h",
-        "0x16a38 push    ax",
-        "0x16a39 mov     ax, 3",
-        "0x16a3c push    ax",
-        "0x16a3d mov     ax, 0FFh",
-        "0x16a40 push    ax",
-        "0x16a41 call    sub_1B779",
-        "0x16a46 add     sp, 0Ah",
-        "0x16a49 mov     ax, 3",
-        "0x16a4c push    ax",
-        "0x16a4d mov     ax, 9Ch",
-        "0x16a50 push    ax",
-        "0x16a51 mov     ax, 131h",
-        "0x16a54 push    ax",
-        "0x16a55 mov     ax, 2",
-        "0x16a58 push    ax",
-        "0x16a59 mov     ax, 0Fh",
-        "0x16a5c push    ax",
-        "0x16a5d call    sub_1B6DC",
-        "0x16a62 add     sp, 0Ah",
-        "0x16a65 mov     ax, 3",
-        "0x16a68 push    ax",
-        "0x16a69 mov     ax, 9Ch",
-        "0x16a6c push    ax",
-        "0x16a6d mov     ax, 0FEh",
-        "0x16a70 push    ax",
-        "0x16a71 mov     ax, 3",
-        "0x16a74 push    ax",
-        "0x16a75 mov     ax, 0FEh",
-        "0x16a78 push    ax",
-        "0x16a79 call    sub_1BB57",
-        "0x16a7e add     sp, 0Ah",
-        "0x16a81 mov     ax, 3",
-        "0x16a84 push    ax",
-        "0x16a85 mov     ax, 9Ch",
-        "0x16a88 push    ax",
-        "0x16a89 mov     ax, 131h",
-        "0x16a8c push    ax",
-        "0x16a8d mov     ax, 2",
-        "0x16a90 push    ax",
-        "0x16a91 mov     ax, 0Fh",
-        "0x16a94 push    ax",
-        "0x16a95 call    sub_1B7E9",
-        "0x16a9a add     sp, 0Ah",
-        "0x16a9d cmp     word_2DF1E, 0Dh",
-        "0x16aa2 jz      short loc_16AA7",
-        "0x16aa4 jmp     loc_16AF5",
-        "0x16aa7 mov     es, word_30C8A",
-        "0x16aab mov     di, 1",
-        "0x16aae mov     cx, 9Ch",
-        "0x16ab1 mov     al, es:[di]",
-        "0x16ab4 or      al, 1",
-        "0x16ab6 stosb",
-        "0x16ab7 add     di, 27h",
-        "0x16aba loop    loc_16AB1",
-        "0x16abc add     di, 780h",
-        "0x16ac0 mov     cx, 9Ch",
-        "0x16ac3 mov     al, es:[di]",
-        "0x16ac6 or      al, 1",
-        "0x16ac8 stosb",
-        "0x16ac9 add     di, 27h",
-        "0x16acc loop    loc_16AC3",
-        "0x16ace add     di, 780h",
-        "0x16ad2 mov     cx, 9Ch",
-        "0x16ad5 mov     al, es:[di]",
-        "0x16ad8 and     al, 0FEh",
-        "0x16ada stosb",
-        "0x16adb add     di, 27h",
-        "0x16ade loop    loc_16AD5",
-        "0x16ae0 add     di, 780h",
-        "0x16ae4 mov     cx, 9Ch",
-        "0x16ae7 mov     al, es:[di]",
-        "0x16aea and     al, 0FEh",
-        "0x16aec stosb",
-        "0x16aed add     di, 27h",
-        "0x16af0 loop    loc_16AE7",
-        "0x16af2 jmp     loc_16B3B",
-        "0x16af5 cmp     word_2DF1E, 9",
-        "0x16afa jz      short loc_16AFF",
-        "0x16afc jmp     loc_16B1A",
-        "0x16aff mov     es, word_30C8A",
-        "0x16b03 mov     di, 7",
-        "0x16b06 mov     cx, 9Ch",
-        "0x16b09 mov     al, es:[di]",
-        "0x16b0c and     al, 0F0h",
-        "0x16b0e or      al, 3",
-        "0x16b10 stosb",
-        "0x16b11 add     di, 9Fh",
-        "0x16b15 loop    loc_16B09",
-        "0x16b17 jmp     loc_16B3B",
-        "0x16b1a cmp     word_2DF1E, 8",
-        "0x16b1f jl      short loc_16B24",
-        "0x16b21 jmp     loc_16B3B",
-        "0x16b24 mov     es, word_30C8A",
-        "0x16b28 mov     di, 3",
-        "0x16b2b mov     cx, 9Ch",
-        "0x16b2e mov     al, es:[di]",
-        "0x16b31 and     al, 0FCh",
-        "0x16b33 or      al, 1",
-        "0x16b35 stosb",
-        "0x16b36 add     di, 4Fh",
-        "0x16b39 loop    loc_16B2E",
-        "0x16b3b call    sub_1449C",
-        "0x16b40 mov     ax, 9",
-        "0x16b43 push    ax",
-        "0x16b44 call    sub_11703",
-        "0x16b49 add     sp, 2",
-        "0x16b4c mov     ax, 0Fh",
-        "0x16b4f push    ax",
-        "0x16b50 call    sub_11703",
-        "0x16b55 add     sp, 2",
-        "0x16b58 mov     ax, 1",
-        "0x16b5b push    ax",
-        "0x16b5c call    sub_11722",
-        "0x16b61 add     sp, 2",
-        "0x16b64 push    [bp+var_6]",
-        "0x16b67 mov     ax, 9E5Ch",
-        "0x16b6a push    ax",
-        "0x16b6b mov     ax, 8Dh",
-        "0x16b6e push    ax",
-        "0x16b6f mov     ax, 11h",
-        "0x16b72 push    ax",
-        "0x16b73 mov     ax, 4",
-        "0x16b76 push    ax",
-        "0x16b77 mov     ax, 20h",
-        "0x16b7a push    ax",
-        "0x16b7b mov     ax, 3",
-        "0x16b7e push    ax",
-        "0x16b7f call    sub_196A9",
-        "0x16b84 add     sp, 0Eh",
-        "0x16b87 mov     [bp+var_6], ax",
-        "0x16b8a cmp     [bp+var_6], 0FFFFh",
-        "0x16b8e jz      short loc_16B93",
-        "0x16b90 jmp     loc_16B96",
-        "0x16b93 jmp     loc_16995",
-        "0x16b96 mov     cx, 100h",
-        "0x16b99 mov     ax, [bp+var_6]",
-        "0x16b9c sub     dx, dx",
-        "0x16b9e div     cx",
-        "0x16ba0 mov     [bp+var_8], ax",
-        "0x16ba3 cmp     word_2DF20, 0",
-        "0x16ba8 jz      short loc_16BAD",
-        "0x16baa jmp     loc_16BB6",
-        "0x16bad cmp     [bp+var_8], 0Fh",
-        "0x16bb1 jz      short loc_16BB6",
-        "0x16bb3 jmp     loc_16BBF",
-        "0x16bb6 mov     ax, [bp+var_A]",
-        "0x16bb9 mov     word_2DF18, ax",
-        "0x16bbc jmp     loc_16D05",
-        "0x16bbf and     [bp+var_6], 0FFh",
-        "0x16bc4 mov     ax, 0",
-        "0x16bc7 push    ax",
-        "0x16bc8 call    sub_1103F",
-        "0x16bcd add     sp, 2",
-        "0x16bd0 mov     ax, 0Fh",
-        "0x16bd3 push    ax",
-        "0x16bd4 mov     ax, 7Dh",
-        "0x16bd7 push    ax",
-        "0x16bd8 mov     ax, 101h",
-        "0x16bdb push    ax",
-        "0x16bdc mov     ax, 3Ah",
-        "0x16bdf push    ax",
-        "0x16be0 mov     ax, 3Eh",
-        "0x16be3 push    ax",
-        "0x16be4 call    sub_1BA9D",
-        "0x16be9 add     sp, 0Ah",
-        "0x16bec mov     word_2DF1A, 0Fh",
-        "0x16bf2 mov     ax, [bp+var_6]",
-        "0x16bf5 mov     word_39A56, ax",
-        "0x16bf8 mov     bx, word_39A52",
-        "0x16bfc mov     si, [bp+var_6]",
-        "0x16bff shl     si, 1",
-        "0x16c01 add     bx, [si+618h]",
-        "0x16c05 mov     al, [bx-4478h]",
-        "0x16c09 and     ax, 0FFh",
-        "0x16c0c cmp     ax, 0",
-        "0x16c0f jnz     short loc_16C14",
-        "0x16c11 jmp     loc_16C66",
-        "0x16c14 mov     word_2DF16, 42h",
-        "0x16c1a mov     [bp+var_C], 0",
-        "0x16c1f jmp     loc_16C43",
-        "0x16c22 mov     ax, [bp+var_C]",
-        "0x16c25 mov     bx, word_39A52",
-        "0x16c29 mov     si, [bp+var_6]",
-        "0x16c2c shl     si, 1",
-        "0x16c2e add     bx, [si+618h]",
-        "0x16c32 add     bx, ax",
-        "0x16c34 mov     al, [bx-4478h]",
-        "0x16c38 mov     bx, [bp+var_C]",
-        "0x16c3b mov     [bx-61D8h], al",
-        "0x16c3f add     [bp+var_C], 1",
-        "0x16c43 cmp     [bp+var_C], 10h",
-        "0x16c47 jge     short loc_16C4C",
-        "0x16c49 jmp     loc_16C22",
-        "0x16c4c mov     ax, 8",
-        "0x16c4f push    ax",
-        "0x16c50 call    sub_153FF",
-        "0x16c55 add     sp, 2",
-        "0x16c58 push    [bp+var_6]",
-        "0x16c5b call    sub_18857",
-        "0x16c60 add     sp, 2",
-        "0x16c63 jmp     loc_16CEC",
-        "0x16c66 mov     word_2DF14, 8",
-        "0x16c6c mov     word_2DF16, 4Ch",
-        "0x16c72 mov     ax, 9E5Ch",
-        "0x16c75 push    ax",
-        "0x16c76 mov     ax, 0CAh",
-        "0x16c79 push    ax",
-        "0x16c7a call    sub_1A8FD",
-        "0x16c7f add     sp, 4",
-        "0x16c82 mov     word_2DF14, 8",
-        "0x16c88 cmp     [bp+var_6], 0Ah",
-        "0x16c8c ja      short loc_16C91",
-        "0x16c8e jmp     loc_16CA4",
-        "0x16c91 mov     ax, 9E5Ch",
-        "0x16c94 push    ax",
-        "0x16c95 mov     ax, 0CCh",
-        "0x16c98 push    ax",
-        "0x16c99 call    sub_1A8FD",
-        "0x16c9e add     sp, 4",
-        "0x16ca1 jmp     loc_16CE7",
-        "0x16ca4 mov     ax, 9E5Ch",
-        "0x16ca7 push    ax",
-        "0x16ca8 mov     ax, 0CBh",
-        "0x16cab push    ax",
-        "0x16cac call    sub_1A8FD",
-        "0x16cb1 add     sp, 4",
-        "0x16cb4 mov     ax, [bp+var_6]",
-        "0x16cb7 mov     [bp+var_8], ax",
-        "0x16cba cmp     [bp+var_8], 0Bh",
-        "0x16cbe ja      short loc_16CC3",
-        "0x16cc0 jmp     loc_16CC8",
-        "0x16cc3 mov     [bp+var_8], 0Bh",
-        "0x16cc8 mov     ax, 9E5Ch",
-        "0x16ccb push    ax",
-        "0x16ccc mov     ax, [bp+var_8]",
-        "0x16ccf add     ax, 8Eh",
-        "0x16cd2 push    ax",
-        "0x16cd3 call    sub_1A8FD",
-        "0x16cd8 add     sp, 4",
-        "0x16cdb mov     ax, 21h",
-        "0x16cde push    ax",
-        "0x16cdf call    sub_1C2DA",
-        "0x16ce4 add     sp, 2",
-        "0x16ce7 call    sub_144C3",
-        "0x16cec mov     al, byte_2DF50",
-        "0x16cef and     ax, 0FFh",
-        "0x16cf2 cmp     ax, 0",
-        "0x16cf5 jnz     short loc_16CFA",
-        "0x16cf7 jmp     loc_16D02",
-        "0x16cfa mov     byte_2DF50, 0",
-        "0x16cff jmp     loc_16995",
-        "0x16d02 jmp     loc_16A11",
-        "0x16d05 pop     di",
-        "0x16d06 pop     si",
-        "0x16d07 mov     sp, bp",
-        "0x16d09 pop     bp",
-        "0x16d0a retf"
+        {
+          "ea": "0x15920",
+          "disassembly": "push    bp"
+        },
+        {
+          "ea": "0x15921",
+          "disassembly": "mov     bp, sp"
+        },
+        {
+          "ea": "0x15923",
+          "disassembly": "sub     sp, 0"
+        },
+        {
+          "ea": "0x15927",
+          "disassembly": "push    si"
+        },
+        {
+          "ea": "0x15928",
+          "disassembly": "push    di"
+        },
+        {
+          "ea": "0x15929",
+          "disassembly": "mov     ax, word_2DF2C"
+        },
+        {
+          "ea": "0x1592c",
+          "disassembly": "cmp     word_2DF7E, ax"
+        },
+        {
+          "ea": "0x15930",
+          "disassembly": "jnz     short loc_15935"
+        },
+        {
+          "ea": "0x15932",
+          "disassembly": "jmp     loc_15A19"
+        },
+        {
+          "ea": "0x15935",
+          "disassembly": "cmp     word_2DF2C, 7"
+        },
+        {
+          "ea": "0x1593a",
+          "disassembly": "jnz     short loc_1593F"
+        },
+        {
+          "ea": "0x1593c",
+          "disassembly": "jmp     loc_15A19"
+        },
+        {
+          "ea": "0x1593f",
+          "disassembly": "mov     ax, word_2DF2C"
+        },
+        {
+          "ea": "0x15942",
+          "disassembly": "mov     word_2DF7E, ax"
+        },
+        {
+          "ea": "0x15945",
+          "disassembly": "cmp     word_2DF76, 0"
+        },
+        {
+          "ea": "0x1594a",
+          "disassembly": "jnz     short loc_1594F"
+        },
+        {
+          "ea": "0x1594c",
+          "disassembly": "jmp     loc_15983"
+        },
+        {
+          "ea": "0x1594f",
+          "disassembly": "mov     ax, word_2DF76"
+        },
+        {
+          "ea": "0x15952",
+          "disassembly": "mov     word_30A6C, ax"
+        },
+        {
+          "ea": "0x15955",
+          "disassembly": "mov     word_30A6A, 0"
+        },
+        {
+          "ea": "0x1595b",
+          "disassembly": "push    word_2DF2C"
+        },
+        {
+          "ea": "0x1595f",
+          "disassembly": "mov     ax, 1776h"
+        },
+        {
+          "ea": "0x15962",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15963",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x15966",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15967",
+          "disassembly": "call    sub_2D3FA"
+        },
+        {
+          "ea": "0x1596c",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x1596f",
+          "disassembly": "push    word_30A6C"
+        },
+        {
+          "ea": "0x15973",
+          "disassembly": "push    word_30A6A"
+        },
+        {
+          "ea": "0x15977",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x1597a",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x1597b",
+          "disassembly": "call    sub_19D98"
+        },
+        {
+          "ea": "0x15980",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x15983",
+          "disassembly": "cmp     word_2DF78, 0"
+        },
+        {
+          "ea": "0x15988",
+          "disassembly": "jnz     short loc_1598D"
+        },
+        {
+          "ea": "0x1598a",
+          "disassembly": "jmp     loc_15A19"
+        },
+        {
+          "ea": "0x1598d",
+          "disassembly": "mov     ax, word_2DF78"
+        },
+        {
+          "ea": "0x15990",
+          "disassembly": "mov     word_30A6C, ax"
+        },
+        {
+          "ea": "0x15993",
+          "disassembly": "mov     word_30A6A, 0"
+        },
+        {
+          "ea": "0x15999",
+          "disassembly": "mov     ax, 5"
+        },
+        {
+          "ea": "0x1599c",
+          "disassembly": "imul    word_2DF64"
+        },
+        {
+          "ea": "0x159a0",
+          "disassembly": "mov     cx, 670h"
+        },
+        {
+          "ea": "0x159a3",
+          "disassembly": "add     cx, ax"
+        },
+        {
+          "ea": "0x159a5",
+          "disassembly": "push    cx"
+        },
+        {
+          "ea": "0x159a6",
+          "disassembly": "push    word_2DF2C"
+        },
+        {
+          "ea": "0x159aa",
+          "disassembly": "mov     ax, 1780h"
+        },
+        {
+          "ea": "0x159ad",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x159ae",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x159b1",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x159b2",
+          "disassembly": "call    sub_2D3FA"
+        },
+        {
+          "ea": "0x159b7",
+          "disassembly": "add     sp, 8"
+        },
+        {
+          "ea": "0x159ba",
+          "disassembly": "push    word_30A6C"
+        },
+        {
+          "ea": "0x159be",
+          "disassembly": "push    word_30A6A"
+        },
+        {
+          "ea": "0x159c2",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x159c5",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x159c6",
+          "disassembly": "call    sub_19D98"
+        },
+        {
+          "ea": "0x159cb",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x159ce",
+          "disassembly": "mov     ax, word_2DF7A"
+        },
+        {
+          "ea": "0x159d1",
+          "disassembly": "mov     word_30A6C, ax"
+        },
+        {
+          "ea": "0x159d4",
+          "disassembly": "mov     word_30A6A, 0"
+        },
+        {
+          "ea": "0x159da",
+          "disassembly": "mov     ax, 5"
+        },
+        {
+          "ea": "0x159dd",
+          "disassembly": "imul    word_2DF64"
+        },
+        {
+          "ea": "0x159e1",
+          "disassembly": "mov     cx, 670h"
+        },
+        {
+          "ea": "0x159e4",
+          "disassembly": "add     cx, ax"
+        },
+        {
+          "ea": "0x159e6",
+          "disassembly": "push    cx"
+        },
+        {
+          "ea": "0x159e7",
+          "disassembly": "push    word_2DF2C"
+        },
+        {
+          "ea": "0x159eb",
+          "disassembly": "mov     ax, 178Ah"
+        },
+        {
+          "ea": "0x159ee",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x159ef",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x159f2",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x159f3",
+          "disassembly": "call    sub_2D3FA"
+        },
+        {
+          "ea": "0x159f8",
+          "disassembly": "add     sp, 8"
+        },
+        {
+          "ea": "0x159fb",
+          "disassembly": "cmp     word_2DF1E, 8"
+        },
+        {
+          "ea": "0x15a00",
+          "disassembly": "jg      short loc_15A05"
+        },
+        {
+          "ea": "0x15a02",
+          "disassembly": "jmp     loc_15A19"
+        },
+        {
+          "ea": "0x15a05",
+          "disassembly": "push    word_30A6C"
+        },
+        {
+          "ea": "0x15a09",
+          "disassembly": "push    word_30A6A"
+        },
+        {
+          "ea": "0x15a0d",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x15a10",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a11",
+          "disassembly": "call    sub_19D98"
+        },
+        {
+          "ea": "0x15a16",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x15a19",
+          "disassembly": "push    word_2DF2C"
+        },
+        {
+          "ea": "0x15a1d",
+          "disassembly": "mov     ax, 1794h"
+        },
+        {
+          "ea": "0x15a20",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a21",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x15a24",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a25",
+          "disassembly": "call    sub_2D3FA"
+        },
+        {
+          "ea": "0x15a2a",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x15a2d",
+          "disassembly": "mov     ax, word_30C8A"
+        },
+        {
+          "ea": "0x15a30",
+          "disassembly": "mov     word_30A6C, ax"
+        },
+        {
+          "ea": "0x15a33",
+          "disassembly": "mov     word_30A6A, 0"
+        },
+        {
+          "ea": "0x15a39",
+          "disassembly": "mov     ax, word_34A0A"
+        },
+        {
+          "ea": "0x15a3c",
+          "disassembly": "add     ax, 400h"
+        },
+        {
+          "ea": "0x15a3f",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a40",
+          "disassembly": "push    word_30A6C"
+        },
+        {
+          "ea": "0x15a44",
+          "disassembly": "push    word_30A6A"
+        },
+        {
+          "ea": "0x15a48",
+          "disassembly": "mov     ax, 0"
+        },
+        {
+          "ea": "0x15a4b",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a4c",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x15a4f",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a50",
+          "disassembly": "call    sub_1A4FE"
+        },
+        {
+          "ea": "0x15a55",
+          "disassembly": "add     sp, 0Ah"
+        },
+        {
+          "ea": "0x15a58",
+          "disassembly": "mov     word_30A6A, 3000h"
+        },
+        {
+          "ea": "0x15a5e",
+          "disassembly": "mov     ax, word_34A0A"
+        },
+        {
+          "ea": "0x15a61",
+          "disassembly": "add     ax, 400h"
+        },
+        {
+          "ea": "0x15a64",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a65",
+          "disassembly": "push    word_30A6C"
+        },
+        {
+          "ea": "0x15a69",
+          "disassembly": "push    word_30A6A"
+        },
+        {
+          "ea": "0x15a6d",
+          "disassembly": "mov     ax, 1"
+        },
+        {
+          "ea": "0x15a70",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a71",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x15a74",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a75",
+          "disassembly": "call    sub_1A4FE"
+        },
+        {
+          "ea": "0x15a7a",
+          "disassembly": "add     sp, 0Ah"
+        },
+        {
+          "ea": "0x15a7d",
+          "disassembly": "mov     word_30A6A, 6000h"
+        },
+        {
+          "ea": "0x15a83",
+          "disassembly": "mov     ax, word_34A0A"
+        },
+        {
+          "ea": "0x15a86",
+          "disassembly": "add     ax, 400h"
+        },
+        {
+          "ea": "0x15a89",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a8a",
+          "disassembly": "push    word_30A6C"
+        },
+        {
+          "ea": "0x15a8e",
+          "disassembly": "push    word_30A6A"
+        },
+        {
+          "ea": "0x15a92",
+          "disassembly": "mov     ax, 2"
+        },
+        {
+          "ea": "0x15a95",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a96",
+          "disassembly": "mov     ax, 2D50h"
+        },
+        {
+          "ea": "0x15a99",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15a9a",
+          "disassembly": "call    sub_1A4FE"
+        },
+        {
+          "ea": "0x15a9f",
+          "disassembly": "add     sp, 0Ah"
+        },
+        {
+          "ea": "0x15aa2",
+          "disassembly": "mov     ax, 8000h"
+        },
+        {
+          "ea": "0x15aa5",
+          "disassembly": "mov     dx, 0"
+        },
+        {
+          "ea": "0x15aa8",
+          "disassembly": "push    dx"
+        },
+        {
+          "ea": "0x15aa9",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15aaa",
+          "disassembly": "mov     ax, word_30C8A"
+        },
+        {
+          "ea": "0x15aad",
+          "disassembly": "add     ax, 100h"
+        },
+        {
+          "ea": "0x15ab0",
+          "disassembly": "push    ax"
+        },
+        {
+          "ea": "0x15ab1",
+          "disassembly": "call    sub_19B29"
+        },
+        {
+          "ea": "0x15ab6",
+          "disassembly": "add     sp, 6"
+        },
+        {
+          "ea": "0x15ab9",
+          "disassembly": "pop     di"
+        },
+        {
+          "ea": "0x15aba",
+          "disassembly": "pop     si"
+        },
+        {
+          "ea": "0x15abb",
+          "disassembly": "mov     sp, bp"
+        },
+        {
+          "ea": "0x15abd",
+          "disassembly": "pop     bp"
+        },
+        {
+          "ea": "0x15abe",
+          "disassembly": "retf"
+        }
       ]
     }
   ],
-  "function_total": 338
+  "function_total": 337
 }

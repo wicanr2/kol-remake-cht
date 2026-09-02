@@ -95,7 +95,24 @@ PAYLOAD_LOADER = 0x1A4FE      # sub_1A4FE(name, index, seg, off, extra)：解一
 FILE_LOADER = 0x19D98         # sub_19D98(name, seg, off)：整個檔案讀進記憶體
 TILE_BUFFER_SEG = 0x30C8A     # word_30C8A：三個磚圖 payload 落在這個 segment
 # 想看清楚的函式：地圖區段載入器與用 ES 讀磚塊緩衝區的繪製路徑。
-DUMP_FUNCTIONS = (0x2A0C6, 0x2A01C, 0x1C907, 0x1C80F, 0x166CC, 0x178E0)
+DUMP_FUNCTIONS = (0x115D1, 0x1CAC2, 0x1D1C6, 0x10000, 0x16986, 0x19B29,
+                  0x1A4FE, 0x14DB1, 0x11390, 0x15920, 0x11302)
+MAP_BUFFER = 0x2FBC4   # byte_2FBC4：sub_11A93 把 town%d 的 payload 直接讀進這個 DGROUP 陣列
+# sub_115D1 這個繪製迴圈用到的全域：鏡頭座標、四個夾限值與格子索引暫存。
+LOOP_GLOBALS = {
+    "camera_x_word_2FB50": 0x2FB50,
+    "camera_y_word_2FB56": 0x2FB56,
+    "clamp_word_2DF66": 0x2DF66,
+    "clamp_word_2DF68": 0x2DF68,
+    "clamp_word_2DF6A": 0x2DF6A,
+    "clamp_word_2DF6C": 0x2DF6C,
+    "cell_index_word_3AC5A": 0x3AC5A,
+    "screen_cache_2A48": 0x2A48,
+}
+SPRINTF = 0x2D3FA             # sub_2D3FA：組檔名用的 sprintf
+# 磚塊間距是 128 bytes ＝ 8 個 paragraph。real mode 常見寫法是把索引乘 8 加到 segment，
+# 而不是乘 128 加到 offset——所以掃「乘 128」掃不到，要改掃乘 8／乘 16 的位移鏈。
+SHIFT_KINDS = {3: "x8-paragraph", 4: "x16"}
 
 
 def call_sites(target: int, window: int = 14) -> list[dict]:
@@ -129,6 +146,63 @@ def global_users(addr: int) -> list[dict]:
             "function": f"0x{fn.start_ea:x}" if fn else None,
             "disassembly": disassembly(ea),
         })
+    return out
+
+
+def format_strings() -> list[dict]:
+    """把每個 sprintf 呼叫點的格式字串立即值解析成實際文字。
+
+    先前把 `mov ax, 1874h` 的目標猜成 `twn` 那組字串，是因為只看了鄰近的字串清單。
+    這裡直接讀 DGROUP+位移的位元組，不再用猜的。
+    """
+    out = []
+    for ea in idautils.CodeRefsTo(SPRINTF, False):
+        fn = ida_funcs.get_func(ea)
+        if fn is None:
+            continue
+        items = list(idautils.FuncItems(fn.start_ea))
+        idx = items.index(ea) if ea in items else -1
+        if idx < 0:
+            continue
+        for e in items[max(0, idx - 10):idx]:
+            if idc.print_insn_mnem(e) != "mov" or idc.get_operand_type(e, 1) != idc.o_imm:
+                continue
+            value = idc.get_operand_value(e, 1)
+            if not 0x1000 <= value <= 0x8000:
+                continue
+            raw = ida_bytes.get_bytes(DGROUP_EA + value, 32) or b""
+            text = raw.split(b"\0", 1)[0]
+            if not text or any(b < 0x20 or b > 0x7E for b in text):
+                continue
+            out.append({
+                "call_ea": f"0x{ea:x}", "function": f"0x{fn.start_ea:x}",
+                "load_ea": f"0x{e:x}", "dgroup_offset": f"0x{value:x}",
+                "text": text.decode("ascii"),
+            })
+    return out
+
+
+def shift_chains() -> list[dict]:
+    """找出連續 `shl reg,1` 形成的乘 8／乘 16，以及 `mov cl,n` ＋ `shl reg,cl`。"""
+    out = []
+    for fn_ea in idautils.Functions():
+        items = list(idautils.FuncItems(fn_ea))
+        run_reg, run_len, run_start = None, 0, None
+        for ea in items:
+            mnem = idc.print_insn_mnem(ea)
+            if mnem in ("shl", "sal") and idc.get_operand_type(ea, 1) == idc.o_imm \
+                    and idc.get_operand_value(ea, 1) == 1:
+                reg = idc.print_operand(ea, 0)
+                if reg == run_reg:
+                    run_len += 1
+                else:
+                    run_reg, run_len, run_start = reg, 1, ea
+                if run_len in SHIFT_KINDS:
+                    out.append({"function": f"0x{fn_ea:x}", "ea": f"0x{run_start:x}",
+                                "register": reg, "shift": run_len,
+                                "kind": SHIFT_KINDS[run_len]})
+            else:
+                run_reg, run_len, run_start = None, 0, None
     return out
 
 
@@ -193,8 +267,14 @@ def main() -> None:
         "payload_loader_calls": call_sites(PAYLOAD_LOADER),
         "file_loader_calls": call_sites(FILE_LOADER),
         "tile_buffer_users": global_users(TILE_BUFFER_SEG),
+        "map_buffer_users": global_users(MAP_BUFFER),
+        "loop_globals": {name: global_users(addr)
+                         for name, addr in LOOP_GLOBALS.items()},
+        "tile_blit_calls": call_sites(0x1CAC2, 18),
         "tile_stride_arithmetic": tile_stride_arithmetic(),
-        "dumped_functions": [function_slice(ea, 600) for ea in DUMP_FUNCTIONS],
+        "format_strings": format_strings(),
+        "shift_chains": shift_chains(),
+        "dumped_functions": [function_slice(ea, 1400) for ea in DUMP_FUNCTIONS],
         "referencing_functions": functions,
         "function_total": len(list(idautils.Functions())),
     }
