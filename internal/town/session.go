@@ -68,6 +68,13 @@ type Session struct {
 	topic *BuildingTopics
 	door  *Door
 
+	// OnLeaveTown 在玩家於城門選 DOOR 時被呼叫一次，參數是隊伍在世界地圖上的座標。
+	// 上層用它換到野外畫面；沒有掛就只是把事情記下來。
+	OnLeaveTown func(Point)
+	// World 只是給上層判斷「有沒有野外畫面可以換過去」的旗標。
+	World        any
+	WorldEntered bool
+
 	// LeftTown 記的是玩家在地圖邊界選了 DOOR。原版此時把鏡頭夾限放回 0…63、
 	// 讀出城門在世界地圖上的座標，再載入 TOWN0 的野外地圖；野外地圖本身還沒實作，
 	// 所以這裡只把「離開了城鎮」與離開的門記下來，交給上層決定要走到哪裡。
@@ -160,8 +167,7 @@ func (s *Session) Accept() {
 			s.leaveDoor()
 			return
 		}
-		x, y := s.Outdoor.PartyPosition()
-		s.LeftGate = Point{X: x, Y: y}
+		s.LeftGate = s.worldGate()
 		s.LeftTown = true
 		s.leaveDoor()
 	case ModeDoor:
@@ -173,6 +179,17 @@ func (s *Session) Accept() {
 	case ModeInside:
 		s.leaveDoor()
 	}
+}
+
+// worldGate 回傳隊伍離開城鎮之後落在世界地圖的哪一格。原版讀的是這座城鎮
+// payload 3 位移 0x27 + 2k 的那一組座標（k ＝ `word_2DF62`），而那組座標與世界地圖
+// 城鎮記錄的 (x, y) 逐一相同——16 個入城點全部對上（RE-065／RE-066）。
+func (s *Session) worldGate() Point {
+	if s.Buildings != nil && s.Outdoor.EntryPoint < len(s.Buildings.EntryPoints) {
+		return s.Buildings.EntryPoints[s.Outdoor.EntryPoint]
+	}
+	x, y := s.Outdoor.PartyPosition()
+	return Point{X: x, Y: y}
 }
 
 // enter 進入建築：畫面由門的資料、肖像與 5-bit 文字組出來。

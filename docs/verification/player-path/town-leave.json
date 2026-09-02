@@ -1,0 +1,14 @@
+{
+  "name": "town-leave",
+  "description": "從城鎮走到地圖上緣、在城門選 DOOR 離開，落到世界地圖上。位置是這座城鎮該入城點在世界地圖的座標（TOWN7 的入城點 3 ＝ (40,23)），與 sub_29CA3 的城鎮記錄逐一相同。全程只經過 town.Session 這個狀態機。",
+  "script": "R R U U U U U U U U U RET",
+  "shot_dir": "docs/verification/player-path/town-leave",
+  "size": [320, 200],
+  "receipt": "docs/verification/player-path/town-leave-receipt.json",
+  "checkpoints": [
+    { "step": 11, "identical_to": "docs/verification/remake-parity/shots/town-edge/gate.png",
+      "note": "城門提示，與已對拍的截圖逐 byte 相同" },
+    { "step": 12, "identical_to": "docs/verification/remake-parity/shots/world/leave-brettle.png",
+      "note": "選 DOOR 之後落到世界地圖，與已對拍的野外截圖逐 byte 相同" }
+  ]
+}

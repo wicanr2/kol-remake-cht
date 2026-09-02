@@ -91,6 +91,10 @@ type Outdoor struct {
 	// DoorCursor 是門口圖示列的白框位置（0 是 DOOR、1 是 U-TURN）。
 	DoorCursor int `json:"door_cursor"`
 
+	// EntryPoint 是隊伍當初從哪一個城門進來的。原版是 `word_2DF62`，
+	// 只有霍布（TOWN7）有十個，其餘城鎮都是 0。離開城鎮時用它決定落在世界地圖的哪裡。
+	EntryPoint int `json:"entry_point"`
+
 	// AtEdge 是「鏡頭被夾限在地圖邊界」這個狀態。原版此時把 `word_2FBC2` 設成
 	// 0FFFFh 並跑同一支門口程序，地圖視窗換成 MISCPICS 圖 0 的林地圖，
 	// 圖示列一樣是 DOOR 與 U-TURN；選 DOOR 就離開城鎮（RE-065）。

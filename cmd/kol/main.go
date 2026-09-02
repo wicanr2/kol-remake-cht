@@ -221,6 +221,13 @@ func (c *spriteCache) Get(archive string, index int) (*ebiten.Image, error) {
 
 // applyPlayToken 把腳本 token 套到城鎮狀態機；token 對應原版的鍵盤操作。
 func applyPlayToken(s *town.Session, token string) error {
+	defer func() {
+		// 在城門選了 DOOR 就換到世界地圖。位置是這座城鎮該入城點在世界地圖上的座標。
+		if s.LeftTown && s.World != nil && !s.WorldEntered {
+			s.WorldEntered = true
+			s.OnLeaveTown(s.LeftGate)
+		}
+	}()
 	switch token {
 	case "L":
 		s.Walk(-1, 0)
@@ -261,6 +268,14 @@ func parsePair(spec string) (int, int, error) {
 		return 0, 0, err
 	}
 	return a, b, nil
+}
+
+// enterWorld 把隊伍放到世界地圖上的某一格。城門選 DOOR 之後就是走這一條。
+func enterWorld(s *world.Screen, p town.Point) {
+	if s == nil {
+		return
+	}
+	s.Travel = world.New(s.Travel.Data, s.Travel.Grid, p.X, p.Y)
 }
 
 // applyWorldToken 把腳本 token 套到野外旅行狀態。
@@ -416,6 +431,10 @@ func (g *game) render() error {
 	case sceneFlow:
 		return g.renderFlow()
 	case scenePlay:
+		if g.play.LeftTown && g.worldState != nil {
+			return ui.World(g.canvas.Image(), g.sprites, g.small,
+				g.worldParty, g.worldState)
+		}
 		if g.play.Mode == town.ModeInside {
 			if g.strings != nil {
 				return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.play.Inside)
@@ -1058,7 +1077,7 @@ func main() {
 		}
 	}
 
-	if scene(*sceneName) == sceneWorld {
+	if scene(*sceneName) == sceneWorld || scene(*sceneName) == scenePlay {
 		data, err := world.LoadData(*worldPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -1234,6 +1253,12 @@ func main() {
 			os.Exit(1)
 		}
 		playSession.UIText = bank
+		if worldScreenState != nil {
+			playSession.World = worldScreenState
+			playSession.OnLeaveTown = func(p town.Point) {
+				enterWorld(worldScreenState, p)
+			}
+		}
 		// LISTEN 的挑槽在截圖與玩家路徑裡必須可重播，因此用固定序列而不是真亂數。
 		listenPick := 0
 		playSession.Rand = func(n int) int {

@@ -87,6 +87,13 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 
 檢查點：第 4、5、6 步與已對拍的三張截圖逐 byte 相同。
 
+## `town-leave`：離開城鎮走到世界地圖
+
+`R R U U U U U U U U U RET`，12 步。第 11 步是城門提示，第 12 步選 DOOR 之後
+落到世界地圖 (40,23)——那是霍布入城點 3 在世界地圖上的格子。
+
+檢查點：第 11 步與城門提示截圖、第 12 步與野外地圖對拍截圖，都逐 byte 相同。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
@@ -95,7 +102,7 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
   只會記進未實作清單。
 - 不宣稱鏡頭跟隨規則已證實。dead zone 是由 22 張原版畫格反解的**強推論**，
   規則本身沒有從程式碼讀出來。
-- 走到地圖邊界會跳出城門提示（`town-edge.json` 這條路徑），但選 DOOR 之後的野外地圖
-  還沒實作——目前只把「離開了城鎮」與離開的門記下來。
+- 走到地圖邊界選 DOOR 已經接到野外地圖（`town-leave.json`）。野外的圖示列
+  （DOOR／U-TURN／ROAD／SIGNPOST）、遭遇、時間推進與雲層動畫都還沒有。
 - 建築內的 LISTEN 與 MOUTH 已接上（RE-067）；MIRROR、REST／SAVE／HEAL、
   COMPANION、買賣與訓練還沒有。
