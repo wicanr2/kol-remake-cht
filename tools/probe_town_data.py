@@ -185,6 +185,8 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--zip", default="/in/kol.zip")
     p.add_argument("--town", default="TOWN7")
+    p.add_argument("--also", action="append", default=[],
+                   help="另外一起解碼並搜尋的 archive root（可重複），例如 TWN7PICS")
     p.add_argument("--frame", default=None)
     p.add_argument("--out", required=True)
     args = p.parse_args()
@@ -208,6 +210,22 @@ def main() -> int:
                             "error": type(exc).__name__})
             data = b""
         decoded[-1]["_data"] = data
+
+    others = []
+    for root in args.also:
+        with zipfile.ZipFile(args.zip) as zf:
+            vols = read_volumes(zf, root)
+        try:
+            _, blobs2 = payloads(vols, root)
+        except SystemExit:
+            continue
+        for i, blob in enumerate(blobs2):
+            try:
+                data = lzw_decode(blob)
+            except Exception:                          # noqa: BLE001
+                data = b""
+            others.append({"archive": root, "index": i, "decoded_bytes": len(data),
+                           "_data": data})
 
     matches = []
     tiles_checked = 0
@@ -334,8 +352,50 @@ def main() -> int:
                              "expanded_bytes": len(out),
                              "sha256": hashlib.sha256(out).hexdigest()})
 
+    # 第四階段：偏移不變的差分搜尋。磚塊編號可能整體加了一個常數，
+    # 因此比對「相鄰編號的差」而不是編號本身；byte 與 word（LE／BE）都試。
+    diff_search = {"searched": False}
+    if matches:
+        by_pos = {(m["tile_y"], m["tile_x"]): m["payload"] * 96 + m["offset"] // 128
+                  for m in matches}
+        rows_full = []
+        for ty in range(MH // TILE):
+            ids = [by_pos.get((ty, tx)) for tx in range(MW // TILE)]
+            if all(v is not None for v in ids):
+                rows_full.append((ty, ids))
+        pool = [{"archive": args.town, "index": r["index"], "_data": r["_data"]}
+                for r in decoded] + others
+        hits = []
+        for ty, ids in rows_full:
+            want = [ids[i + 1] - ids[i] for i in range(len(ids) - 1)]
+            for rec in pool:
+                data = rec["_data"]
+                for unit, order in ((1, "little"), (2, "little"), (2, "big")):
+                    n = len(data) // unit
+                    if n < len(ids):
+                        continue
+                    vals = [int.from_bytes(data[i * unit:(i + 1) * unit], order)
+                            for i in range(n)]
+                    limit = 256 if unit == 1 else 65536
+                    for start in range(n - len(ids) + 1):
+                        ok = True
+                        for k, delta in enumerate(want):
+                            if (vals[start + k + 1] - vals[start + k]) % limit != delta % limit:
+                                ok = False
+                                break
+                        if ok:
+                            hits.append({"tile_row": ty, "archive": rec["archive"],
+                                         "payload": rec["index"], "unit": unit,
+                                         "byte_order": order, "start": start})
+                            break
+        diff_search = {"searched": True, "rows": [t for t, _ in rows_full],
+                       "hits": hits[:20], "hit_count": len(hits)}
+
     receipt = {
         "schema": "kol-town-data-probe-v1",
+        "tile_id_diff_search": diff_search,
+        "other_archives": [{k: v for k, v in r.items() if not k.startswith("_")}
+                           for r in others],
         "nibble_rle_expansion": expanded,
         "tile_layout_search": layout,
         "tile_pattern_search": pattern,

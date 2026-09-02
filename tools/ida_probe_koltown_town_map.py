@@ -95,7 +95,7 @@ PAYLOAD_LOADER = 0x1A4FE      # sub_1A4FE(name, index, seg, off, extra)：解一
 FILE_LOADER = 0x19D98         # sub_19D98(name, seg, off)：整個檔案讀進記憶體
 TILE_BUFFER_SEG = 0x30C8A     # word_30C8A：三個磚圖 payload 落在這個 segment
 # 想看清楚的函式：地圖區段載入器與用 ES 讀磚塊緩衝區的繪製路徑。
-DUMP_FUNCTIONS = (0x2A0C6, 0x2A01C, 0x1C907, 0x1C80F, 0x16986)
+DUMP_FUNCTIONS = (0x2A0C6, 0x2A01C, 0x1C907, 0x1C80F, 0x166CC, 0x178E0)
 
 
 def call_sites(target: int, window: int = 14) -> list[dict]:
@@ -129,6 +129,32 @@ def global_users(addr: int) -> list[dict]:
             "function": f"0x{fn.start_ea:x}" if fn else None,
             "disassembly": disassembly(ea),
         })
+    return out
+
+
+def tile_stride_arithmetic() -> list[dict]:
+    """找出「把索引乘上 128」的地方——磚塊間距是 128 bytes，繪製迴圈一定會算這個。"""
+    out = []
+    for fn_ea in idautils.Functions():
+        for ea in idautils.FuncItems(fn_ea):
+            mnem = idc.print_insn_mnem(ea)
+            if mnem not in ("shl", "sal", "imul", "mov"):
+                continue
+            text = disassembly(ea)
+            hit = None
+            if mnem in ("shl", "sal") and idc.get_operand_type(ea, 1) == idc.o_imm \
+                    and idc.get_operand_value(ea, 1) == 7:
+                hit = "shift-7"
+            elif mnem == "imul" and idc.get_operand_type(ea, 1) == idc.o_imm \
+                    and idc.get_operand_value(ea, 1) == 128:
+                hit = "imul-128"
+            elif mnem == "mov" and idc.get_operand_type(ea, 1) == idc.o_imm \
+                    and idc.get_operand_value(ea, 1) == 7 \
+                    and idc.print_operand(ea, 0) in ("cl", "cx"):
+                hit = "mov-cl-7"
+            if hit:
+                out.append({"ea": f"0x{ea:x}", "function": f"0x{fn_ea:x}",
+                            "kind": hit, "disassembly": text})
     return out
 
 
@@ -167,6 +193,7 @@ def main() -> None:
         "payload_loader_calls": call_sites(PAYLOAD_LOADER),
         "file_loader_calls": call_sites(FILE_LOADER),
         "tile_buffer_users": global_users(TILE_BUFFER_SEG),
+        "tile_stride_arithmetic": tile_stride_arithmetic(),
         "dumped_functions": [function_slice(ea, 600) for ea in DUMP_FUNCTIONS],
         "referencing_functions": functions,
         "function_total": len(list(idautils.Functions())),
