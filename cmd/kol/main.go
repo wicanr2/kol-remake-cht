@@ -547,6 +547,8 @@ func main() {
 	outdoorCamera := flag.String("outdoor-camera", "", "覆寫戶外鏡頭座標，格式 X,Y")
 	outdoorFrame := flag.Int("outdoor-frame", -1, "覆寫隊伍標記的動畫畫格（-1 為沿用樣本）")
 	outdoorMarker := flag.String("outdoor-marker", "", "覆寫隊伍標記在視窗內的偏移，格式 列,欄")
+	townI18nPath := flag.String("town-i18n", "docs/i18n/town-zh-Hant.json",
+		"城鎮建築的譯文表")
 	townTextPath := flag.String("town-text",
 		"assets/original-derived-data/town-text.json", "城鎮文字 typed data")
 	buildingTown := flag.Int("building-town", 7, "建築內部畫面的城鎮編號")
@@ -858,6 +860,14 @@ func main() {
 		}
 		innState = town.EnterBuilding(fmt.Sprintf("TWN%dPICS", *buildingTown), door,
 			texts.Building(*buildingTown, *buildingDoor), sample.Party)
+		if *lang != "en" {
+			tr, err := town.LoadTranslations(*townI18nPath)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			innState.Apply(tr.Door(*buildingTown, *buildingDoor))
+		}
 	}
 
 	data, err := chardata.Load(*dataPath)

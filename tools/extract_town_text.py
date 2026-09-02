@@ -49,8 +49,12 @@ LETTERS = "abcdefghijklmnopqrstuvwxyz"
 # `30 27` 有 1,721/1,796 次落在整格開頭且後面接字母——那是開頭引號；
 # `31` 後面幾乎只有 s／t／v／m／l（`'s`、`'t`、`'ve`、`'m`、`'ll`）。
 SHIFT = 30
-SYMBOLS = {27: "!", 28: ",", 29: ".", 31: "'"}
-ESCAPED = {27: '"', 31: "?"}
+# 跳脫後的符號是打字機的 shift 對應：`,`→`;`、`.`→`:`、`'`→`?`。
+# `30 30` 是連字號（well-dressed、low-roofed、run-down 共 49 例）。
+SYMBOLS = {27: '"', 28: ",", 29: ".", 31: "'"}
+ESCAPED = {27: '"', 28: ";", 29: ":", 30: "-", 31: "?"}
+# 連續兩個 27 在原版畫面上是 `!"`（`says"Hi, Fighter!"`、`"Welcome to Kazhad!"`）。
+QUOTE = 27
 TOWN_FIRST, TOWN_LAST = 1, 7
 
 
@@ -68,9 +72,13 @@ def render(values: list[int]) -> tuple[str, list[int]]:
     """回傳（文字, 未定的跳脫序列）。未定的照原樣留一個記號，不猜。"""
     out, unknown = [], []
     escaped = False
-    for v in values:
+    for k, v in enumerate(values):
         if v == SHIFT and not escaped:
             escaped = True
+            continue
+        if (not escaped and v == QUOTE and k + 1 < len(values)
+                and values[k + 1] == QUOTE):
+            out.append("!")
             continue
         if v == 0:
             out.append(" ")

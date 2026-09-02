@@ -31,6 +31,8 @@ def main() -> int:
     p.add_argument("--data", required=True)
     p.add_argument("--town-sample", action="append", default=[],
                    help="城鎮畫面樣本 JSON，檢查中文台詞是否放得進對話框（可重複）")
+    p.add_argument("--town-i18n", action="append", default=[],
+                   help="城鎮建築譯文表（可重複）；檢查標題框與對話框的行寬與行數")
     p.add_argument("--out", required=True)
     args = p.parse_args()
 
@@ -125,6 +127,47 @@ def main() -> int:
                            "width": bottom, "right_limit": limit_y,
                            "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
                            "pass": bottom <= limit_y})
+
+    # 城鎮建築的譯文：標題框兩行置中、對話框最多六行，安全矩形都是框的內緣。
+    inn = layout_doc.get("town_inn")
+    for path in args.town_i18n:
+        doc = json.loads(pathlib.Path(path).read_text())
+        if not inn:
+            break
+        title_right = inn["TitleX"] + inn["TitleW"] - 1
+        dialog_right = inn["DialogX"] + inn["DialogW"] - 1
+        for town, tdoc in sorted(doc.get("towns", {}).items()):
+            for door, entry in sorted(tdoc.get("doors", {}).items(),
+                                      key=lambda kv: int(kv[0])):
+                label = f"{path} 城{town} 門{door}"
+                for field, limit in (("name", title_right), ("person", title_right)):
+                    w, missing = width(entry.get(field, ""))
+                    x = inn["TitleX"] + (inn["TitleW"] - w) // 2
+                    checks.append({"kind": "town-title", "en": f"{label} {field}",
+                                   "zh": entry.get(field, ""), "x": x, "width": w,
+                                   "right_limit": limit,
+                                   "overflow": max(0, x + w - limit),
+                                   "missing_glyphs": missing,
+                                   "pass": x + w <= limit and not missing})
+                lines = entry.get("entry", [])
+                for line in lines:
+                    w, missing = width(line)
+                    checks.append({"kind": "town-entry", "en": label, "zh": line,
+                                   "x": inn["DialogTextX"], "width": w,
+                                   "right_limit": dialog_right,
+                                   "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
+                                   "missing_glyphs": missing,
+                                   "pass": inn["DialogTextX"] + w <= dialog_right
+                                           and not missing})
+                if lines:
+                    bottom = (inn["DialogTextY"] + (len(lines) - 1) * inn["DialogStep"]
+                              + font["cell"]["height"])
+                    limit_y = inn["DialogY"] + inn["DialogH"] - 1
+                    checks.append({"kind": "vertical", "en": f"{label} 敘述行數",
+                                   "zh": "", "x": 0, "width": bottom,
+                                   "right_limit": limit_y,
+                                   "overflow": max(0, bottom - limit_y),
+                                   "missing_glyphs": [], "pass": bottom <= limit_y})
 
     # 戶外畫面的日期框：兩行中文字，安全矩形是框的內緣。
     outdoor = layout_doc.get("town_outdoor")

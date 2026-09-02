@@ -6,19 +6,19 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "5a276650af87711d8dc7d213275079c8df2a5845"
+    "commit": "ac37d743a039812cb0445d52320f3ec5cb6ff42b"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
     "fonts_manifest_sha256": "5db3baecce7a0ca28559688f08f98b7c0648765bbf82348de8c490243079f393",
-    "ui_font_manifest_sha256": "ef3e66ee8e1d3fa9ed68b086bfe109ca47a7b0537f081cba2b139e512f2c67ff"
+    "ui_font_manifest_sha256": "7aa15ea983900021979520d154038f9759b548423a3446afb5859de189305afa"
   },
   "rights": {
     "classification": "private-repo 可保存；不得公開散布",
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 26,
+  "count": 28,
   "failed": 0,
   "screenshots": [
     {
@@ -293,6 +293,26 @@
       "height": 400,
       "distinct_colours": 15,
       "sha256": "cc8642ab97679557b1fd06ccac9e7e618e391668b680706434bf28751b63ef25",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-building.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene building -building-town 7 -building-door 5 -shot docs/screenshots/zh-town-building.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 12,
+      "sha256": "d1c37ea58cd79c91f789cc9612288c74e05299de0bc65c912f52038ae28752a5",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-building-smithy.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene building -building-town 7 -building-door 12 -shot docs/screenshots/zh-town-building-smithy.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 15,
+      "sha256": "9dfa6d13d0b717c60a96232838e993c7234bb43c0a7fced59ee0b0c868805149",
       "pass": true
     },
     {

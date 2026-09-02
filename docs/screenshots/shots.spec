@@ -30,4 +30,6 @@ docs/screenshots/zh-book-harbor.png|-lang|zh-Hant|-scene|harbor|-shot|docs/scree
 docs/screenshots/zh-town-inn.png|-lang|zh-Hant|-scene|inn|-shot|docs/screenshots/zh-town-inn.png
 docs/screenshots/zh-town-outdoor.png|-lang|zh-Hant|-scene|outdoor|-shot|docs/screenshots/zh-town-outdoor.png
 docs/screenshots/zh-town-door.png|-lang|zh-Hant|-scene|outdoor|-outdoor-camera|57,8|-outdoor-frame|1|-outdoor-at-door|-shot|docs/screenshots/zh-town-door.png
+docs/screenshots/zh-town-building.png|-lang|zh-Hant|-scene|building|-building-town|7|-building-door|5|-shot|docs/screenshots/zh-town-building.png
+docs/screenshots/zh-town-building-smithy.png|-lang|zh-Hant|-scene|building|-building-town|7|-building-door|12|-shot|docs/screenshots/zh-town-building-smithy.png
 docs/screenshots/zh-town-inn-party2.png|-lang|zh-Hant|-scene|inn|-inn|docs/re/town-inn-sample-recruited.json|-shot|docs/screenshots/zh-town-inn-party2.png
