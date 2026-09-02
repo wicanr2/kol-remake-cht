@@ -72,6 +72,21 @@ def immediate_users(offsets: set[int]) -> list[dict]:
     return out
 
 
+def mask_1f_users() -> list[dict]:
+    """5-bit 文字解碼的指紋：對暫存器 and 1Fh。列出所在函式與前後脈絡。"""
+    out = []
+    for fn_ea in idautils.Functions():
+        hits = []
+        for ea in idautils.FuncItems(fn_ea):
+            text = disassembly(ea)
+            if "and" in text and ("1Fh" in text or ", 31" in text):
+                hits.append({"ea": f"0x{ea:x}", "disassembly": text})
+        if hits:
+            out.append({"function": f"0x{fn_ea:x}", "name": idc.get_func_name(fn_ea),
+                        "count": len(hits), "hits": hits})
+    return out
+
+
 def function_slice(start: int, limit: int = 400) -> dict:
     fn = ida_funcs.get_func(start)
     if fn is None:
@@ -95,7 +110,7 @@ PAYLOAD_LOADER = 0x1A4FE      # sub_1A4FE(name, index, seg, off, extra)：解一
 FILE_LOADER = 0x19D98         # sub_19D98(name, seg, off)：整個檔案讀進記憶體
 TILE_BUFFER_SEG = 0x30C8A     # word_30C8A：三個磚圖 payload 落在這個 segment
 # 想看清楚的函式：地圖區段載入器與用 ES 讀磚塊緩衝區的繪製路徑。
-DUMP_FUNCTIONS = (0x11302, 0x11703, 0x11722, 0x1103F)
+DUMP_FUNCTIONS = ()
 MAP_BUFFER = 0x2FBC4   # byte_2FBC4：sub_11A93 把 town%d 的 payload 直接讀進這個 DGROUP 陣列
 # sub_115D1 這個繪製迴圈用到的全域：鏡頭座標、四個夾限值與格子索引暫存。
 LOOP_GLOBALS = {
@@ -277,6 +292,9 @@ def main() -> None:
         "loop_globals": {name: global_users(addr)
                          for name, addr in LOOP_GLOBALS.items()},
         "tile_blit_calls": call_sites(0x1CAC2, 18),
+        "mask_1f_users": mask_1f_users(),
+        "dgroup_dump": {f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, 24) or b"").hex()
+                        for off in (0x164A, 0x1652, 0x1664, 0x166A, 0x1672)},
         "tile_stride_arithmetic": tile_stride_arithmetic(),
         "format_strings": format_strings(),
         "shift_chains": shift_chains(),
