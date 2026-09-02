@@ -1,0 +1,178 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "full-chain",
+  "description": "從標題序列一路走到城鎮戶外地圖的完整遊玩路徑：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 目錄頁 6 → 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走。全程經過 flow.Flow 與各畫面自己的狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET L R RET RET R D",
+  "step_count": 26,
+  "checkpoints": [
+    {
+      "step": 21,
+      "identical_to": "docs/verification/remake-parity/shots/town-door/inn-door.png",
+      "note": "走回門口的畫面與已對拍的門口截圖逐 byte 相同"
+    },
+    {
+      "step": 22,
+      "identical_to": "docs/verification/remake-parity/shots/town-building/inn-entry.png",
+      "note": "進門的畫面與已對拍的建築內部截圖逐 byte 相同"
+    }
+  ],
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/full/step-000.png",
+      "sha256": "d8ee540e42cb0be420199c353bc02d7b0795fd99ab8f7e1f85c7f8bb041f5fa5"
+    },
+    {
+      "step": 1,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/full/step-001.png",
+      "sha256": "2f3126398d179d592f72a955d041b69aed8335dcb5383abf903c13f32451dc82"
+    },
+    {
+      "step": 2,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/full/step-002.png",
+      "sha256": "b0f827038752461f18c3b6a3877533d4ae1ee1ff39541e62d9a725d00b41f7fe"
+    },
+    {
+      "step": 3,
+      "token": "5",
+      "file": "docs/verification/player-path/full/step-003.png",
+      "sha256": "a9dd0c780916ce46e2f489e73e41f093a0982ba094e8b768cd786cc5dfeaad0c"
+    },
+    {
+      "step": 4,
+      "token": "D",
+      "file": "docs/verification/player-path/full/step-004.png",
+      "sha256": "a4070a7dcfaa694bce99c531f2ad766bcaa3142787570a36ceaf5eec0206b689"
+    },
+    {
+      "step": 5,
+      "token": "RET",
+      "file": "docs/verification/player-path/full/step-005.png",
+      "sha256": "21e2569d921c06565135d6d8de3c45a7bcebb45ff35abf1567685ff71613cb9f"
+    },
+    {
+      "step": 6,
+      "token": "ESC",
+      "file": "docs/verification/player-path/full/step-006.png",
+      "sha256": "a4070a7dcfaa694bce99c531f2ad766bcaa3142787570a36ceaf5eec0206b689"
+    },
+    {
+      "step": 7,
+      "token": "D",
+      "file": "docs/verification/player-path/full/step-007.png",
+      "sha256": "9fb3bdc1023c75db8a2305b406ca77d3b869dcdac58263b3f1efc30969b38d3a"
+    },
+    {
+      "step": 8,
+      "token": "RET",
+      "file": "docs/verification/player-path/full/step-008.png",
+      "sha256": "ea2812bbcffdb9e100f58dd9143259a7051c473a2d54535ca912c020f9ca77ef"
+    },
+    {
+      "step": 9,
+      "token": "ESC",
+      "file": "docs/verification/player-path/full/step-009.png",
+      "sha256": "9fb3bdc1023c75db8a2305b406ca77d3b869dcdac58263b3f1efc30969b38d3a"
+    },
+    {
+      "step": 10,
+      "token": "D",
+      "file": "docs/verification/player-path/full/step-010.png",
+      "sha256": "9ea3837390b1a814801bd9d1167dd23b1aa7e4c87d2d8a629c2ec221a3b97fb4"
+    },
+    {
+      "step": 11,
+      "token": "D",
+      "file": "docs/verification/player-path/full/step-011.png",
+      "sha256": "b76cd6523b5e276050027bde266bf379a580bbdb89fd323a148cd957f33bd206"
+    },
+    {
+      "step": 12,
+      "token": "D",
+      "file": "docs/verification/player-path/full/step-012.png",
+      "sha256": "ee7020eae1649e99281b010b2b7ef0fca6473f1da149a1bf2847e0d8cf07d31b"
+    },
+    {
+      "step": 13,
+      "token": "RET",
+      "file": "docs/verification/player-path/full/step-013.png",
+      "sha256": "d860f6d58dc922f3cb046db266107a1a0de484823c4b5f25c42c32030f210d76"
+    },
+    {
+      "step": 14,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/full/step-014.png",
+      "sha256": "ee7020eae1649e99281b010b2b7ef0fca6473f1da149a1bf2847e0d8cf07d31b"
+    },
+    {
+      "step": 15,
+      "token": "ESC",
+      "file": "docs/verification/player-path/full/step-015.png",
+      "sha256": "b0f827038752461f18c3b6a3877533d4ae1ee1ff39541e62d9a725d00b41f7fe"
+    },
+    {
+      "step": 16,
+      "token": "6",
+      "file": "docs/verification/player-path/full/step-016.png",
+      "sha256": "ea2812bbcffdb9e100f58dd9143259a7051c473a2d54535ca912c020f9ca77ef"
+    },
+    {
+      "step": 17,
+      "token": "RET",
+      "file": "docs/verification/player-path/full/step-017.png",
+      "sha256": "670865b46cbf69673e6ce0427301ab0e89bcdada2110b15337524efbe47e572d"
+    },
+    {
+      "step": 18,
+      "token": ">",
+      "file": "docs/verification/player-path/full/step-018.png",
+      "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
+    },
+    {
+      "step": 19,
+      "token": "RET",
+      "file": "docs/verification/player-path/full/step-019.png",
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930"
+    },
+    {
+      "step": 20,
+      "token": "L",
+      "file": "docs/verification/player-path/full/step-020.png",
+      "sha256": "3b4dbba3a001e317ec431a613b99b6ca923457765623a415434c7f411b2f831a"
+    },
+    {
+      "step": 21,
+      "token": "R",
+      "file": "docs/verification/player-path/full/step-021.png",
+      "sha256": "888644ba16402ec524386c6db1d1270e8cbc0335005d34d2326a7a4507966997"
+    },
+    {
+      "step": 22,
+      "token": "RET",
+      "file": "docs/verification/player-path/full/step-022.png",
+      "sha256": "9fdac495e8f9c6733b4d71514047240ef8eb7253e3347ff7b049642583bbf55f"
+    },
+    {
+      "step": 23,
+      "token": "RET",
+      "file": "docs/verification/player-path/full/step-023.png",
+      "sha256": "334538d00801be49f2f50ac4a4ac46b0713e1709eda38077f9cdc11a67fd30ec"
+    },
+    {
+      "step": 24,
+      "token": "R",
+      "file": "docs/verification/player-path/full/step-024.png",
+      "sha256": "8db093057caa56e90f60a13deeb77816337adc36e4ace632b4e2fad30fe0425b"
+    },
+    {
+      "step": 25,
+      "token": "D",
+      "file": "docs/verification/player-path/full/step-025.png",
+      "sha256": "34744ed261a5820bff182e71fbadcfd347a82cd965748dcd54dffa6fa4081131"
+    }
+  ]
+}

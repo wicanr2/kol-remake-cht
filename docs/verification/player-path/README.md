@@ -37,9 +37,34 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 第 7 步與 `remake-parity/shots/town-building/inn-entry.png` 逐 byte 相同。
 **可玩路徑與對拍證據因此直接連上**——玩家走出來的畫面，就是通過逐像素對拍的那批像素。
 
+## `full`：從標題序列走到城鎮
+
+`SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET L R RET RET R D`，
+26 張截圖。這條路徑由 `internal/flow` 串起來：它只決定「按了什麼鍵、畫面走到哪」，
+每個畫面自己的狀態機維持原樣。
+
+| 步 | 畫面 |
+|---|---|
+| 0–2 | 標題序列 → 書本封面 → 目錄頁 |
+| 3–5 | 目錄頁 `5` → 角色選項 → 反白條移到 CREATE → New Character 頁 |
+| 6–9 | ESC 回選項 → DELETE → 刪除清單 → ESC 回選項 |
+| 10–14 | 反白條走過 EDIT PICTURE、EDIT SHIELD、HARBOR MASTER → 訊息頁 → 回選項 |
+| 15–17 | ESC 回目錄頁 → `6` → 角色選擇清單 → 選領隊 → **旅店** |
+| 18–19 | `>` 白框繞回 DOOR → **戶外地圖** |
+| 20–23 | 走離門口 → 走回（門口狀態）→ DOOR 進建築 → 出來 |
+| 24–25 | 往東一步、往南一步 |
+
+檢查點：第 21 步與門口對拍截圖、第 22 步與建築內部對拍截圖，都逐 byte 相同。
+
+`EDIT PICTURE`、`EDIT SHIELD` 與旅店的其餘五個圖示會被記進 `flow.Unimplemented`，
+不會默默吞掉——測試盯著這一點。
+
 ## 這份收據不宣稱什麼
 
-- 不宣稱遊戲可玩到結局。目前接上的只有城鎮這一段：走動、門口、進建築。
+- 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
+  門口、進建築」這一條；世界地圖、戰鬥、任務、存讀檔都還沒有。
+- 角色選項頁的 EDIT PICTURE／EDIT SHIELD、旅店的其餘五個圖示按下去不會轉場，
+  只會記進未實作清單。
 - 不宣稱鏡頭跟隨規則已證實。dead zone 是由 22 張原版畫格反解的**強推論**，
   規則本身沒有從程式碼讀出來。
 - 走到地圖邊界目前是停住。原版會切到野外地圖，那條路徑還沒實作。

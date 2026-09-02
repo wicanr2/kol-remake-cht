@@ -213,6 +213,12 @@ DOOR 與 U-TURN（RE-061）。門 *i* 的四份資料同一個索引推出來—
 強推論。可重播的玩家路徑收據在 `docs/verification/player-path/`：14 步，
 每一步都有可見效果，其中兩步與已通過對拍的截圖逐 byte 相同。
 
+`internal/flow` 把已經各自對拍過的畫面串成一條可玩路徑：標題 → 書本封面 → 目錄頁 →
+角色選項 → 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築。它只決定
+「按了什麼鍵、畫面走到哪」，各畫面自己的狀態機維持原樣。26 步收據在
+`docs/verification/player-path/full.json`，其中兩步與已對拍的截圖逐 byte 相同；
+按下去還沒實作的功能會記進 `flow.Unimplemented`，不會默默吞掉。
+
 書本六個選單項目裡五項有收據。`HARBOR MASTER` 在只安裝一個 region 時是一張三行訊息頁，
 已實作並對拍通過；`EDIT PICTURE` 與 `EDIT SHIELD` 是同一個滑鼠驅動的點陣圖編輯器，
 ESC 沒有作用，現有的鍵盤 oracle 走不完，尚未實作（RE-052）。四個功能進入後的第一張

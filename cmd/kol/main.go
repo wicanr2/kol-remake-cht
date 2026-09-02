@@ -24,6 +24,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/charcreate"
 	"github.com/wicanr2/kol-remake-cht/internal/chardata"
+	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
@@ -52,9 +53,10 @@ const (
 	sceneOutdoor    scene = "outdoor"
 	sceneBuilding   scene = "building"
 	scenePlay       scene = "play"
+	sceneFlow       scene = "flow"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay, sceneFlow}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -288,6 +290,7 @@ type game struct {
 	inn     *town.Inn
 	outdoor *town.Outdoor
 	play    *town.Session
+	flow    *flow.Flow
 	walkTick   int
 	markerStep int
 	canvas  *screen.Canvas
@@ -309,6 +312,15 @@ type game struct {
 	jobs  []shotJob
 	jobAt int
 	drawn bool
+}
+
+// renderScene 用指定的場景跑一次既有的繪製分派，供 flow 借用。
+func (g *game) renderScene(sc scene) error {
+	saved := g.scene
+	g.scene = sc
+	err := g.render()
+	g.scene = saved
+	return err
 }
 
 func (g *game) render() error {
@@ -357,6 +369,8 @@ func (g *game) render() error {
 			return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.inn)
 		}
 		return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.inn)
+	case sceneFlow:
+		return g.renderFlow()
 	case scenePlay:
 		if g.play.Mode == town.ModeInside {
 			if g.strings != nil {
@@ -515,6 +529,57 @@ func (g *game) Update() error {
 	return nil
 }
 
+// renderFlow 依 flow 目前的畫面分派到既有的繪製函式。每一張都是已經對拍過的畫面，
+// flow 只決定現在畫哪一張。
+func (g *game) renderFlow() error {
+	dst := g.canvas.Image()
+	switch g.flow.Scene {
+	case flow.SceneTitle:
+		return g.renderScene(sceneTitle)
+	case flow.SceneCover:
+		return g.renderScene(sceneCover)
+	case flow.SceneContents:
+		return g.renderScene(sceneContents)
+	case flow.SceneMenu:
+		if g.strings != nil {
+			return ui.CharacterOptionsCJK(dst, g.sprites, g.cjk, g.strings, g.flow.MenuCursor)
+		}
+		return ui.CharacterOptions(dst, g.sprites, g.small, g.flow.MenuCursor)
+	case flow.SceneRoster:
+		return g.renderScene(sceneRoster)
+	case flow.SceneNewChar:
+		return g.renderScene(sceneNewChar)
+	case flow.SceneDelete:
+		return g.renderScene(sceneDelete)
+	case flow.SceneHarbor:
+		return g.renderScene(sceneHarbor)
+	case flow.SceneSelect:
+		if g.strings != nil {
+			return ui.DeleteListCJK(dst, g.sprites, g.cjk, g.strings,
+				g.roster.Occupied(), g.flow.SelectCursor, false)
+		}
+		return ui.SelectCharacter(dst, g.sprites, g.small,
+			g.roster.Occupied(), g.flow.SelectCursor)
+	case flow.SceneInn:
+		if g.strings != nil {
+			return ui.InnCJK(dst, g.sprites, g.cjk, g.strings, g.flow.Inn)
+		}
+		return ui.Inn(dst, g.sprites, g.small, g.large, g.flow.Inn)
+	case flow.SceneTown:
+		if g.flow.Town.Mode == town.ModeInside {
+			if g.strings != nil {
+				return ui.InnCJK(dst, g.sprites, g.cjk, g.strings, g.flow.Town.Inside)
+			}
+			return ui.Inn(dst, g.sprites, g.small, g.large, g.flow.Town.Inside)
+		}
+		if g.strings != nil {
+			return ui.OutdoorCJK(dst, g.sprites, g.cjk, g.strings, g.flow.Town.Outdoor)
+		}
+		return ui.Outdoor(dst, g.sprites, g.small, g.flow.Town.Outdoor)
+	}
+	return fmt.Errorf("未知的 flow 畫面：%s", g.flow.Scene)
+}
+
 // walkTicksPerFrame 是隊伍標記的動畫節拍。原版用 `word_2DF28` 當延遲計數，
 // 每三次繪製推進一格；Ebitengine 固定 60 TPS，取相近的節拍。
 const walkTicksPerFrame = 8
@@ -644,6 +709,9 @@ func main() {
 	buildingDoor := flag.Int("building-door", 5, "建築內部畫面的門序號")
 	buildingsPath := flag.String("town-buildings",
 		"assets/original-derived-data/town-buildings.json", "城鎮建築 typed data")
+	flowScript := flag.String("flow-script", "",
+		"整條遊玩路徑的操作腳本，空白分隔；從標題序列開始，經書本、角色選項、"+
+			"角色選擇清單、旅店走到戶外地圖")
 	playScript := flag.String("play-script", "",
 		"城鎮遊玩的操作腳本，空白分隔：L R U D 是方向鍵、"+
 			"A S Z X 是斜走、< > 移動圖示白框、RET 執行")
@@ -822,7 +890,8 @@ func main() {
 
 	var slots *roster.Roster
 	if scene(*sceneName) == sceneRoster || scene(*sceneName) == sceneDelete ||
-		*deleteScript != "" || (*bookShots != "" && *bookTransition == "roster") {
+		scene(*sceneName) == sceneFlow || *deleteScript != "" ||
+		(*bookShots != "" && *bookTransition == "roster") {
 		if slots, err = roster.Load(*rosterPath); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -963,7 +1032,7 @@ func main() {
 	}
 
 	var playSession *town.Session
-	if scene(*sceneName) == scenePlay {
+	if scene(*sceneName) == scenePlay || scene(*sceneName) == sceneFlow {
 		state, err := town.LoadOutdoor(*outdoorPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -1012,6 +1081,16 @@ func main() {
 		playSession = town.NewSession(state, info, texts, trans, state.Party)
 	}
 
+	var flowState *flow.Flow
+	if scene(*sceneName) == sceneFlow {
+		if innState == nil {
+			if innState, err = town.LoadInn(*innPath); err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+		}
+	}
+
 	data, err := chardata.Load(*dataPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -1040,6 +1119,7 @@ func main() {
 		inn:      innState,
 		outdoor:  outdoorState,
 		play:     playSession,
+		flow:     flowState,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
@@ -1175,6 +1255,30 @@ func main() {
 			append(raw, '\n'), 0o644); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
+		}
+	case *flowScript != "":
+		if *shotDir == "" && *shot == "" {
+			fmt.Fprintln(os.Stderr, "-flow-script 需要搭配 -shot-dir 或 -shot")
+			os.Exit(2)
+		}
+		g.scene = sceneFlow
+		g.flow = flow.New(g.roster, g.state, g.remove, innState, playSession)
+		if *shotDir == "" {
+			for _, token := range strings.Fields(*flowScript) {
+				g.flow.Key(token)
+			}
+			g.jobs = []shotJob{{name: "flow", path: *shot}}
+			break
+		}
+		g.jobs = append(g.jobs, shotJob{
+			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
+		for i, token := range strings.Fields(*flowScript) {
+			tok := token
+			g.jobs = append(g.jobs, shotJob{
+				name: fmt.Sprintf("step-%03d", i+1),
+				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
+				apply: func() { g.flow.Key(tok) },
+			})
 		}
 	case *playScript != "":
 		if *shotDir == "" && *shot == "" {

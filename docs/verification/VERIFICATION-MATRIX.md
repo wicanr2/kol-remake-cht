@@ -30,15 +30,22 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 
 ## 正常玩家路徑
 
-城鎮這一段已有可重播的玩家路徑收據（`player-path/`）：14 步全部經過 `town.Session`，
-每一步都有可見效果，其中兩步與已通過對拍的截圖逐 byte 相同。
-其餘畫面目前仍只有截圖模式。
+`player-path/` 有兩份可重播收據：
+
+- `town`（14 步）：城鎮內走動、門口、進建築，全部經過 `town.Session`。
+- `full`（26 步）：**從標題序列走到城鎮**——標題 → 書本封面 → 目錄頁 → 角色選項
+  （走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 戶外地圖 →
+  門口 → 進建築 → 出來 → 續走，由 `internal/flow` 串起來。
+
+兩份都要求每一步有可見效果，且指定的檢查點與已通過對拍的截圖逐 byte 相同。
+尚未實作的功能（EDIT PICTURE／EDIT SHIELD、旅店其餘五個圖示）會被記進
+`flow.Unimplemented`，不會默默吞掉。
 
 ## 發行 gate
 
 - [ ] 全庫測試與靜態分析
 - [ ] 翻譯／編碼檢查
-- [~] 無除錯捷徑的正常玩家路徑（城鎮這一段已有收據；其餘畫面未接輸入迴圈）
+- [~] 無除錯捷徑的正常玩家路徑（標題→書本→旅店→城鎮已有 26 步收據；戰鬥與存讀檔未接）
 - [ ] 可寫存檔與 pristine original 不變檢查
 - [ ] 原版／remake 同狀態截圖審查
 - [ ] 封包啟動 smoke
