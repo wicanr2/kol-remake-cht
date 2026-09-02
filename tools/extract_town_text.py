@@ -44,18 +44,29 @@ SLOT_CHARS = 24
 # 一則訊息固定 4 格 ＝ 64 byte；原版對話框一次顯示一或兩則（最多八行）。
 SLOTS_PER_MESSAGE = 4
 LETTERS = "abcdefghijklmnopqrstuvwxyz"
-# 30 是跳脫記號：接字母就轉大寫，接符號就換一套符號。
-# 依據是全七城 191,278 個字元的上下文統計（RE-062）：
-# `30 27` 有 1,721/1,796 次落在整格開頭且後面接字母——那是開頭引號；
-# `31` 後面幾乎只有 s／t／v／m／l（`'s`、`'t`、`'ve`、`'m`、`'ll`）。
-SHIFT = 30
-# 跳脫後的符號是打字機的 shift 對應：`,`→`;`、`.`→`:`、`'`→`?`。
-# `30 30` 是連字號（well-dressed、low-roofed、run-down 共 49 例）。
-SYMBOLS = {27: '"', 28: ",", 29: ".", 31: "'"}
-ESCAPED = {27: '"', 28: ";", 29: ":", 30: "-", 31: "?"}
-# 連續兩個 27 在原版畫面上是 `!"`（`says"Hi, Fighter!"`、`"Welcome to Kazhad!"`）。
-QUOTE = 27
+# TOWN0 是野外地圖，沒有城鎮建築。
 TOWN_FIRST, TOWN_LAST = 1, 7
+# 字元表由解碼器 `sub_1B94F` 直接讀出（RE-064），不是猜的：
+#
+#   1Bh 未跳脫 → `!`＋兩個空白，並打開跳脫（下一個字母轉大寫）
+#   1Bh 已跳脫 → `"`，而且**往回刪掉前面的空白**
+#   1Ch 未跳脫 → `,`＋一個空白；已跳脫 → 原始 byte 1Ch（原版字型的自訂字符）
+#   1Dh 未跳脫 → `.`＋兩個空白，並打開跳脫；已跳脫 → `:`
+#   1Eh        → 跳脫記號本身；已跳脫 → `-`
+#   1Fh 未跳脫 → `'`；已跳脫 → `?`＋兩個空白，跳脫保持開著
+#   0          → 空白
+#   1…26       → 已跳脫時 `al | 40h`（大寫），否則 `al | 60h`（小寫）
+#
+# 因此畫面上的 `Fighter!"` 是資料裡連續兩個 1Bh：第一個給 `!` 與兩個空白並打開跳脫，
+# 第二個在跳脫狀態下變成 `"` 並把那兩個空白吃回去。
+ESCAPE = 0x1E
+SPACE_AFTER = {0x1B: 2, 0x1C: 1, 0x1D: 2}
+PLAIN = {0x1B: "!", 0x1C: ",", 0x1D: ".", 0x1F: "'"}
+ESCAPED = {0x1B: '"', 0x1C: ";", 0x1D: ":", 0x1E: "-", 0x1F: "?"}
+# 未跳脫時會打開跳脫的符號（`!`、`.`），以及已跳脫時維持跳脫的符號（`?`）。
+OPENS_ESCAPE = {0x1B, 0x1D}
+KEEPS_ESCAPE = {0x1F}
+ESCAPED_SPACE_AFTER = {0x1F: 2}
 
 
 def slot_values(data: bytes, offset: int, count: int) -> list[int]:
@@ -69,53 +80,44 @@ def slot_values(data: bytes, offset: int, count: int) -> list[int]:
 
 
 def render(values: list[int]) -> tuple[str, list[int]]:
-    """回傳（文字, 未定的跳脫序列）。未定的照原樣留一個記號，不猜。"""
-    out, unknown = [], []
+    """照 `sub_1B94F` 的語意解一格文字。回傳（文字, 未定的跳脫序列）。"""
+    out: list[str] = []
+    unknown: list[int] = []
     escaped = False
-    for k, v in enumerate(values):
-        if v == SHIFT and not escaped:
+    for v in values:
+        if v == ESCAPE and not escaped:
             escaped = True
             continue
-        if (not escaped and v == QUOTE and k + 1 < len(values)
-                and values[k + 1] == QUOTE):
-            out.append("!")
-            continue
         if v == 0:
+            # 空白不會動到跳脫狀態（mode 0 時 `or bh,bh` 直接跳過 `dec ah`）。
             out.append(" ")
-        elif 1 <= v <= 26:
+            continue
+        if 1 <= v <= 26:
             ch = LETTERS[v - 1]
             out.append(ch.upper() if escaped else ch)
-        elif escaped:
-            if v in ESCAPED:
-                out.append(ESCAPED[v])
-            else:
+            escaped = False
+            continue
+        if escaped:
+            if v == 0x1B:
+                # 開頭引號會把前面補出來的空白吃回去。
+                while out and out[-1] == " ":
+                    out.pop()
+            symbol = ESCAPED.get(v)
+            if symbol is None:
                 out.append(f"<esc{v}>")
                 unknown.append(v)
-        else:
-            out.append(SYMBOLS[v])
-        escaped = False
-    return "".join(out), unknown
-
-
-def display_text(text: str) -> str:
-    """資料 → 畫面。由原版畫格 072 的八行逐格讀回比對出來的兩條規則：
-    句號後補兩個空白並把下一個字母轉大寫；逗號後補一個空白。
-    （資料裡已有的空白照留，所以「,␣」會變成「,␣␣」——與原版一致。）"""
-    out = []
-    capitalise = False
-    for ch in text:
-        if capitalise and ch.isalpha():
-            out.append(ch.upper())
-            capitalise = False
+                escaped = False
+                continue
+            out.append(symbol)
+            if v in KEEPS_ESCAPE:
+                out.extend(" " * ESCAPED_SPACE_AFTER[v])
+            else:
+                escaped = False
             continue
-        capitalise = False
-        out.append(ch)
-        if ch == ".":
-            out.append("  ")
-            capitalise = True
-        elif ch == ",":
-            out.append(" ")
-    return "".join(out).rstrip()
+        out.append(PLAIN[v])
+        out.extend(" " * SPACE_AFTER.get(v, 0))
+        escaped = v in OPENS_ESCAPE
+    return "".join(out), unknown
 
 
 def building_lines(data: bytes) -> tuple[list[dict], list[dict]]:
@@ -133,7 +135,7 @@ def building_lines(data: bytes) -> tuple[list[dict], list[dict]]:
         values = slot_values(data, offset, count)
         text, unknown = render(values)
         entry = {"slot": slot, "offset": offset, "chars": count,
-                 "text": text, "display": display_text(text)}
+                 "text": text, "display": text.rstrip()}
         if unknown:
             entry["unknown_escapes"] = unknown
         lines.append(entry)
@@ -215,12 +217,14 @@ def main() -> int:
             "slot_bytes": SLOT_BYTES, "slot_chars": SLOT_CHARS,
             "count_byte": "每格的第 0 個 byte",
             "bits_per_char": 5, "bit_order": "MSB-first",
-            "alphabet": {"0": "空白", "1-26": "a-z", "27": "!", "28": ",",
-                         "29": ".", "31": "'"},
-            "display_rule": "句號後補兩個空白並把下一個字母轉大寫；逗號後補一個空白。"
-                            "引號前後的空白還沒定案（見 RE-062）。",
-            "escape": {"code": SHIFT, "letter": "轉大寫",
-                       "27": '"（開頭引號）', "31": "?"},
+            "alphabet": {"0": "空白", "1-26": "a-z（跳脫時大寫）",
+                         "27": "!＋兩個空白", "28": ",＋一個空白",
+                         "29": ".＋兩個空白", "31": "'"},
+            "display_rule": "空白與大小寫都由解碼器 sub_1B94F 決定，"
+                            "text 欄已經是畫面上的樣子；display 只是去掉行尾空白。",
+            "escape": {"code": ESCAPE, "letter": "轉大寫",
+                       "27": '"（開頭引號，會吃掉前面的空白）', "28": "原始 byte 1Ch",
+                       "29": ":", "30": "-", "31": "?"},
         },
         "town_count": len(towns),
         "line_count": total_lines,
