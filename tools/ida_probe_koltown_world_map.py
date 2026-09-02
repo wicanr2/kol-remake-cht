@@ -26,7 +26,7 @@ EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d
 DGROUP_EA = 0x2DED0
 
 # 完整倒出的函式：城鎮主迴圈與疑似換圖路徑。
-DUMP_FUNCTIONS = (0x29987, 0x29B40, 0x2A18E, 0x2A01C)
+DUMP_FUNCTIONS = ()
 DUMP_LIMIT = 20000
 
 GLOBALS = {
@@ -45,6 +45,16 @@ GLOBALS = {
     "icon_count_word_2DF3C": 0x2DF3C,
     "icon_cursor_word_2DF3A": 0x2DF3A,
     "building_index_word_2FBC2": 0x2FBC2,
+    "road_flag_word_2FA2A": 0x2FA2A,
+    "road_mode_word_37D28": 0x37D28,
+    "world_step_word_322F6": 0x322F6,
+    "party_speed_word_2FA2C": 0x2FA2C,
+    "prompt_mode_word_2DF3E": 0x2DF3E,
+    "marker_base_word_2DF48": 0x2DF48,
+    "marker_frame_word_2DF24": 0x2DF24,
+    "marker_extra_word_2DF6E": 0x2DF6E,
+    "current_tile_byte_30941": 0x30941,
+    "terrain_code_word_3499A": 0x3499A,
 }
 
 # `town%d` 的四個 DGROUP 位移；誰載入它們就是誰在組地圖檔名。

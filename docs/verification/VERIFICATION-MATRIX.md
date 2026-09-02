@@ -30,14 +30,18 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 
 ## 正常玩家路徑
 
-`player-path/` 有兩份可重播收據：
+`player-path/` 有六份可重播收據，全部要求每一步有可見效果，且指定的檢查點與
+已通過對拍的截圖逐 byte 相同：
 
-- `town`（14 步）：城鎮內走動、門口、進建築，全部經過 `town.Session`。
-- `full`（26 步）：**從標題序列走到城鎮**——標題 → 書本封面 → 目錄頁 → 角色選項
-  （走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 戶外地圖 →
-  門口 → 進建築 → 出來 → 續走，由 `internal/flow` 串起來。
+| 路徑 | 步數 | 內容 |
+|---|---|---|
+| `town` | 14 | 城鎮內走動、門口、進建築，全部經過 `town.Session` |
+| `town-edge` | 14 | 走到地圖邊界、林地圖的城門提示、U-TURN 回地圖 |
+| `town-talk` | 10 | 建築內的 SPACEBAR 圖示列、LISTEN 的傳聞與 MOUTH 的問話 |
+| `town-leave` | 13 | 在城門選 DOOR 離開城鎮，落到世界地圖 |
+| `town-round-trip` | 20 | 城鎮 → 野外走到路上 → 退回城鎮入口 → 選 DOOR 進城 |
+| `full` | 26 | 從標題序列走到城鎮：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走，由 `internal/flow` 串起來 |
 
-兩份都要求每一步有可見效果，且指定的檢查點與已通過對拍的截圖逐 byte 相同。
 尚未實作的功能（EDIT PICTURE／EDIT SHIELD、旅店其餘五個圖示）會被記進
 `flow.Unimplemented`，不會默默吞掉。
 

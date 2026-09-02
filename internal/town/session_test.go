@@ -244,3 +244,33 @@ func TestInputIsModeScoped(t *testing.T) {
 		t.Fatal("建築內不該移動圖示白框")
 	}
 }
+
+// 從野外進城：鏡頭、夾限、入城點都換成世界地圖那筆記錄，標記偏移歸零，
+// 圖示列清空，模式回到地圖（RE-069，`sub_29CA3`）。
+func TestEnterFromWorldResetsOutdoor(t *testing.T) {
+	s := playSession(t)
+	s.Walk(1, 0) // 先動一下，讓標記偏移不是 0
+	info := &TownBuildings{Town: 3, Doors: []Door{{Index: 0, X: 9, Y: 9}}}
+	s.EnterFromWorld(TownEntry{
+		Town: 3, Camera: Point{X: 25, Y: 62},
+		MinX: 0, MaxX: GridSide - 1, MinY: 0, MaxY: GridSide - 1,
+		EntryPoint: 0,
+	}, info, playGrid(t))
+
+	o := s.Outdoor
+	if o.Town != 3 || o.Camera.X != 25 || o.Camera.Y != 62 {
+		t.Fatalf("進城後是城鎮 %d、鏡頭 (%d,%d)", o.Town, o.Camera.X, o.Camera.Y)
+	}
+	if o.Marker.Row != 0 || o.Marker.Col != 0 {
+		t.Fatalf("標記偏移是 (%d,%d)，應歸零", o.Marker.Row, o.Marker.Col)
+	}
+	if x, y := o.PartyPosition(); x != 25 || y != 62 {
+		t.Fatalf("隊伍落在 (%d,%d)，應為鏡頭那一格", x, y)
+	}
+	if s.Mode != ModeMap || len(o.Icons) != 0 || s.LeftTown {
+		t.Fatalf("進城後模式 %v、圖示 %v、LeftTown %v", s.Mode, o.Icons, s.LeftTown)
+	}
+	if s.Buildings != info || o.CrestArchive() != "TWN3PICS" {
+		t.Fatalf("建築資料或素材沒有換成城鎮 3：%s", o.CrestArchive())
+	}
+}

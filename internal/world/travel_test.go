@@ -53,24 +53,33 @@ func TestSubCellWrapsIntoWorldStep(t *testing.T) {
 	}
 }
 
-// 不可通行的磚塊擋住整個動作，次格座標也不動。
+// 地形只擋跨格的那一步：格內的次格移動照走，繞回到不可通行的格子時整個動作退回。
 func TestBlockedTileStopsTravel(t *testing.T) {
-	grid := testGrid(t, map[[2]int]int{{21, 20}: 9})
+	// 腳下那一格是鏡頭座標的下一列（Y＋1），所以擋路的河要放在 (21, 21)。
+	grid := testGrid(t, map[[2]int]int{{21, 21}: 9})
 	tr := New(testData(t), grid, 20, 20)
-	if tr.Walk(1, 0) {
-		t.Fatal("東邊是河，不該走過去")
+	for i := 0; i < 4; i++ {
+		if !tr.Walk(1, 0) {
+			t.Fatalf("第 %d 步還在格子裡，不該被地形擋住", i+1)
+		}
 	}
-	if tr.X != 20 || tr.SubX != 3 {
-		t.Fatalf("撞牆之後是 (%d, 次格 %d)", tr.X, tr.SubX)
+	if tr.X != 20 || tr.SubX != 7 {
+		t.Fatalf("往東四步之後是 (%d, 次格 %d)，應為 (20, 7)", tr.X, tr.SubX)
+	}
+	if tr.Walk(1, 0) {
+		t.Fatal("東邊是河，繞回的那一步不該走過去")
+	}
+	if tr.X != 20 || tr.SubX != 7 {
+		t.Fatalf("撞牆之後是 (%d, 次格 %d)，應該退回 (20, 7)", tr.X, tr.SubX)
 	}
 	if !tr.Walk(0, 1) {
 		t.Fatal("南邊沒擋，應該走得動")
 	}
 }
 
-// 地形、道路與城鎮入口都由腳下那一格決定。
+// 地形與道路看的是腳下那一格（Y＋1），城鎮入口看的是鏡頭座標本身。
 func TestTerrainRoadAndTown(t *testing.T) {
-	grid := testGrid(t, map[[2]int]int{{20, 21}: 5, {20, 22}: 9})
+	grid := testGrid(t, map[[2]int]int{{20, 22}: 5, {20, 23}: 9})
 	tr := New(testData(t), grid, 20, 20)
 	if got := tr.Terrain(); got != "PLAINS" {
 		t.Fatalf("腳下地形是 %q", got)

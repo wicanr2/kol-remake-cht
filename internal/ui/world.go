@@ -17,6 +17,12 @@ import (
 // 偏移「次格座標 × 2」像素。
 func World(dst *ebiten.Image, sprites Sprites, small *font.Font,
 	party []town.Member, s *world.Screen) error {
+	return WorldSession(dst, sprites, small, party, s, nil)
+}
+
+// WorldSession 同上，但多帶一個狀態機——站在城鎮入口上時地圖視窗換成外觀圖。
+func WorldSession(dst *ebiten.Image, sprites Sprites, small *font.Font,
+	party []town.Member, s *world.Screen, sess *world.Session) error {
 	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
 	if err != nil {
 		return err
@@ -28,7 +34,7 @@ func World(dst *ebiten.Image, sprites Sprites, small *font.Font,
 	}
 	drawBox(dst, small, town.DateBox, s.Date)
 
-	if err := drawWorldMap(dst, sprites, s); err != nil {
+	if err := drawWorldMap(dst, sprites, s, sess); err != nil {
 		return err
 	}
 	drawWeather(dst, s)
@@ -52,10 +58,23 @@ func World(dst *ebiten.Image, sprites Sprites, small *font.Font,
 }
 
 // drawWorldMap 畫地圖視窗：投影、白框，12×6 格磚塊，最後蓋上隊伍那個點。
-func drawWorldMap(dst *ebiten.Image, sprites Sprites, s *world.Screen) error {
+func drawWorldMap(dst *ebiten.Image, sprites Sprites, s *world.Screen,
+	sess *world.Session) error {
 	win := world.MapWindow
 	shadow(dst, win.X, win.Y, win.Width, win.Height)
 	fill(dst, win.X, win.Y, win.Width, win.Height, town.ColourBoxEdge)
+
+	// 站在城鎮入口上時整個視窗換成該地點的 192×96 外觀圖，不畫磚塊也不畫那個點。
+	if sess != nil {
+		if index := sess.TownPicture(); index >= 0 {
+			pic, err := sprites.Get(world.TownPictureArchive, index)
+			if err != nil {
+				return err
+			}
+			draw(dst, pic, world.Viewport.X, world.Viewport.Y)
+			return nil
+		}
+	}
 
 	atlas, err := sprites.Get("TOWN0", town.TileAtlas.Index)
 	if err != nil {

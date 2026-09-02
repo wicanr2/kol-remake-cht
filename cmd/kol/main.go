@@ -261,6 +261,15 @@ func applyPlayToken(s *town.Session, token string) error {
 	return nil
 }
 
+// playToken 把腳本 token 交給目前掌管畫面的那個狀態機：人在城裡就是城鎮，
+// 走出城門之後就是野外。
+func (g *game) playToken(token string) error {
+	if g.play != nil && g.play.LeftTown && g.worldSession != nil {
+		return applyWorldToken(g.worldSession, token)
+	}
+	return applyPlayToken(g.play, token)
+}
+
 // parsePair 解析 `X,Y` 形式的參數。
 func parsePair(spec string) (int, int, error) {
 	var a, b int
@@ -278,27 +287,33 @@ func enterWorld(s *world.Screen, p town.Point) {
 	s.Travel = world.New(s.Travel.Data, s.Travel.Grid, p.X, p.Y)
 }
 
-// applyWorldToken 把腳本 token 套到野外旅行狀態。
-func applyWorldToken(s *world.Screen, token string) error {
+// applyWorldToken 把腳本 token 套到野外狀態機。
+func applyWorldToken(s *world.Session, token string) error {
 	switch token {
 	case "L":
-		s.Travel.Walk(-1, 0)
+		s.Walk(-1, 0)
 	case "R":
-		s.Travel.Walk(1, 0)
+		s.Walk(1, 0)
 	case "U":
-		s.Travel.Walk(0, -1)
+		s.Walk(0, -1)
 	case "D":
-		s.Travel.Walk(0, 1)
+		s.Walk(0, 1)
 	case "A":
-		s.Travel.Walk(-1, -1)
+		s.Walk(-1, -1)
 	case "S":
-		s.Travel.Walk(1, -1)
+		s.Walk(1, -1)
 	case "Z":
-		s.Travel.Walk(-1, 1)
+		s.Walk(-1, 1)
 	case "X":
-		s.Travel.Walk(1, 1)
+		s.Walk(1, 1)
+	case "<":
+		s.MoveCursor(-1)
+	case ">":
+		s.MoveCursor(1)
+	case "RET":
+		s.Accept()
 	case "TICK":
-		s.Phase++
+		s.Screen.Phase++
 	default:
 		return fmt.Errorf("未知的野外操作 token：%q", token)
 	}
@@ -337,8 +352,9 @@ type shotJob struct {
 }
 
 type game struct {
-	worldState *world.Screen
-	worldParty []town.Member
+	worldState   *world.Screen
+	worldSession *world.Session
+	worldParty   []town.Member
 	sprites *spriteCache
 	small   *font.Font
 	large   *font.Font
@@ -432,8 +448,8 @@ func (g *game) render() error {
 		return g.renderFlow()
 	case scenePlay:
 		if g.play.LeftTown && g.worldState != nil {
-			return ui.World(g.canvas.Image(), g.sprites, g.small,
-				g.worldParty, g.worldState)
+			return ui.WorldSession(g.canvas.Image(), g.sprites, g.small,
+				g.worldParty, g.worldState, g.worldSession)
 		}
 		if g.play.Mode == town.ModeInside {
 			if g.strings != nil {
@@ -446,7 +462,8 @@ func (g *game) render() error {
 		}
 		return ui.Outdoor(g.canvas.Image(), g.sprites, g.small, g.play.Outdoor)
 	case sceneWorld:
-		return ui.World(g.canvas.Image(), g.sprites, g.small, g.worldParty, g.worldState)
+		return ui.WorldSession(g.canvas.Image(), g.sprites, g.small,
+			g.worldParty, g.worldState, g.worldSession)
 	case sceneOutdoor:
 		if g.strings != nil {
 			return ui.OutdoorCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.outdoor)
@@ -994,6 +1011,7 @@ func main() {
 	}
 
 	var worldScreenState *world.Screen
+	var worldSessionState *world.Session
 	var worldPartyState []town.Member
 	var outdoorState *town.Outdoor
 	if scene(*sceneName) == sceneOutdoor {
@@ -1148,6 +1166,7 @@ func main() {
 		worldScreenState = &world.Screen{Travel: travel, Weather: weather,
 			Group: *worldWeather, Phase: *worldPhase, TimeIndex: *worldTime,
 			Date: sample.Date, Names: names}
+		worldSessionState = world.NewSession(worldScreenState)
 	}
 
 	if scene(*sceneName) == sceneBuilding {
@@ -1257,6 +1276,27 @@ func main() {
 			playSession.World = worldScreenState
 			playSession.OnLeaveTown = func(p town.Point) {
 				enterWorld(worldScreenState, p)
+				worldSessionState.Reset()
+			}
+			// 野外選 DOOR 就回到城鎮：鏡頭、夾限、入城點都由世界地圖的記錄給
+			// （RE-069），格子陣列與建築資料則換成該城鎮那一份。
+			worldSessionState.OnEnterTown = func(rec *world.Town) {
+				info := buildings.Town(rec.Town)
+				if info == nil {
+					fmt.Fprintf(os.Stderr, "城鎮建築資料沒有城鎮 %d\n", rec.Town)
+					os.Exit(1)
+				}
+				grid, err := loadGrid(lib, fmt.Sprintf("TOWN%d", rec.Town))
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(1)
+				}
+				playSession.EnterFromWorld(town.TownEntry{
+					Town: rec.Town, Camera: town.Point{X: rec.Camera.X, Y: rec.Camera.Y},
+					MinX: rec.Bounds.MinX, MaxX: rec.Bounds.MaxX,
+					MinY: rec.Bounds.MinY, MaxY: rec.Bounds.MaxY,
+					EntryPoint: rec.EntryPoint,
+				}, info, grid)
 			}
 		}
 		// LISTEN 的挑槽在截圖與玩家路徑裡必須可重播，因此用固定序列而不是真亂數。
@@ -1307,7 +1347,8 @@ func main() {
 		outdoor:  outdoorState,
 		play:     playSession,
 		flow:     flowState,
-		worldState: worldScreenState,
+		worldState:   worldScreenState,
+		worldSession: worldSessionState,
 		worldParty: worldPartyState,
 	}
 	if slots != nil {
@@ -1477,7 +1518,7 @@ func main() {
 		g.scene = sceneWorld
 		if *shotDir == "" {
 			for _, token := range strings.Fields(*worldScript) {
-				if err := applyWorldToken(g.worldState, token); err != nil {
+				if err := applyWorldToken(g.worldSession, token); err != nil {
 					fmt.Fprintln(os.Stderr, err)
 					os.Exit(2)
 				}
@@ -1493,7 +1534,7 @@ func main() {
 				name: fmt.Sprintf("step-%03d", i+1),
 				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
 				apply: func() {
-					if err := applyWorldToken(g.worldState, tok); err != nil {
+					if err := applyWorldToken(g.worldSession, tok); err != nil {
 						fmt.Fprintln(os.Stderr, err)
 						os.Exit(2)
 					}
@@ -1508,7 +1549,7 @@ func main() {
 		g.scene = scenePlay
 		if *shotDir == "" {
 			for _, token := range strings.Fields(*playScript) {
-				if err := applyPlayToken(g.play, token); err != nil {
+				if err := g.playToken(token); err != nil {
 					fmt.Fprintln(os.Stderr, err)
 					os.Exit(2)
 				}
@@ -1524,7 +1565,7 @@ func main() {
 				name: fmt.Sprintf("step-%03d", i+1),
 				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
 				apply: func() {
-					if err := applyPlayToken(g.play, tok); err != nil {
+					if err := g.playToken(tok); err != nil {
 						fmt.Fprintln(os.Stderr, err)
 						os.Exit(2)
 					}

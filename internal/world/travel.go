@@ -1,11 +1,13 @@
 package world
 
-// 野外的移動（RE-068）。原版 `sub_29004:0x291F0` 起的順序：
+// 野外的移動（RE-068／RE-069）。原版 `sub_29004:0x291F0` 起的順序：
 //
-//  1. 先算目的地那一格：視窗的 (3+dy, 5+dx)，也就是世界座標加上 (dx, dy)。
+//  1. 先存下移動前的世界座標與次格座標。
 //  2. 次格座標往那個方向走一格；走出 0…7 就繞回，並讓世界座標走 `Step`。
 //  3. 世界座標夾限在 0…63。
-//  4. 目的地磚塊不可通行時，整個動作退回原位（`0x2958F` 那條路徑）。
+//  4. **只有世界座標真的變了**（`word_3AC5A != 0`）才檢查地形：目的地磚塊
+//     不可通行時，世界座標與次格座標一起退回移動前的值（`0x2958F`）。
+//     格內的次格移動不受地形限制——`0x293B7` 的分支直接跳過整段檢查。
 
 // Travel 是野外地圖上的一次旅行狀態。
 type Travel struct {
@@ -26,7 +28,12 @@ func New(data *Data, grid *Grid, x, y int) *Travel {
 }
 
 // Tile 是隊伍腳下那一格的磚塊編號。
-func (t *Travel) Tile() int { return t.Grid.At(t.X, t.Y) }
+//
+// 原版讀的是「畫出來的那一格」：`byte_30941` 就是視窗緩衝區的第 0x29 個 byte，
+// 也就是第 3 列第 5 欄（0x29 ＝ 3×12＋5）。繪製迴圈與城鎮共用，列偏移固定 −2，
+// 所以第 3 列畫的是 Y＋1——隊伍腳下那一格在地圖上比鏡頭座標低一列（RE-070）。
+// 地形名稱、道路旗標與地形擋路全部走這一格。
+func (t *Travel) Tile() int { return t.Grid.At(t.X, t.Y+RowBias+PartyCell.Row) }
 
 // Terrain 是腳下那一格的地形名稱。
 func (t *Travel) Terrain() string { return t.Data.TerrainName(t.Tile()) }
@@ -42,13 +49,19 @@ func (t *Travel) Walk(dx, dy int) bool {
 	if dx == 0 && dy == 0 {
 		return false
 	}
-	if !t.Data.Passable(t.Grid.At(t.X+dx, t.Y+dy)) {
-		return false
-	}
+	x, y, sx, sy := t.X, t.Y, t.SubX, t.SubY
 	t.X, t.SubX = step(t.X, t.SubX, dx, t.Step)
 	t.Y, t.SubY = step(t.Y, t.SubY, dy, t.Step)
 	t.X = clamp(t.X, 0, GridSide-1)
 	t.Y = clamp(t.Y, 0, GridSide-1)
+	if t.X == x && t.Y == y {
+		return true
+	}
+	// 擋路查的也是那一格：原版讀 `viewbuf[0x29 + dx + 12*dy]`，基底同樣是第 3 列。
+	if !t.Data.Passable(t.Tile()) {
+		t.X, t.Y, t.SubX, t.SubY = x, y, sx, sy
+		return false
+	}
 	return true
 }
 

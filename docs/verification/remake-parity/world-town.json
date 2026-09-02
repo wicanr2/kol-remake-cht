@@ -1,0 +1,174 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "world-town",
+  "description": "野外走到城鎮入口那一格的對拍。腳下那一格是鏡頭座標的下一列：原版讀的是視窗緩衝區第 0x29 個 byte（第 3 列第 5 欄），而繪製迴圈的列偏移是 −2，所以地形名稱、道路旗標與地形擋路看的都是 (X, Y+1)（RE-070）。站在路上時圖示列多出 ROAD 與 SIGNPOST；走到城鎮入口那一格時地圖視窗換成 TWN0PICS[記錄索引 + 8]，圖示列剩 DOOR 與 U-TURN，而地形標籤停在上一格——原版此時跳進 sub_29BBB，更新標籤的那一段整個被略過。這一輪不宣稱天候圖那一塊。",
+  "pair_count": 7,
+  "pass_count": 7,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "站在路上：地圖視窗與隊伍的點",
+      "remake": "docs/verification/remake-parity/shots/world/road-tile.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-255.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 52,
+        "width": 224,
+        "height": 110
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            160,
+            100,
+            18,
+            15
+          ],
+          "differing_pixels": 53
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "站在路上：時段與地形標籤框",
+      "remake": "docs/verification/remake-parity/shots/world/road-tile.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-255.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 8,
+        "y": 140,
+        "width": 80,
+        "height": 20
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "站在路上：ROAD 與 SIGNPOST 圖示列",
+      "remake": "docs/verification/remake-parity/shots/world/road-tile.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-255.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "城鎮入口提示：TWN0PICS 的外觀圖",
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 52,
+        "width": 224,
+        "height": 110
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            160,
+            100,
+            18,
+            15
+          ],
+          "differing_pixels": 76
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "城鎮入口提示：停在上一格的地形標籤",
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 8,
+        "y": 140,
+        "width": 80,
+        "height": 20
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "城鎮入口提示：DOOR 與 U-TURN 圖示列",
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "隊員格與日期框",
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 52
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    }
+  ]
+}

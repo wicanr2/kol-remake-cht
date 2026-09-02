@@ -48,6 +48,17 @@ type Screen struct {
 	// Names 供應標籤的兩行文字。原版直接畫 KOLDATA 的記錄，而那些記錄**自帶空白**
 	// 用來置中（`"  DAWN ]"`），所以不能先去空白。
 	Names Namer
+
+	// TerrainCode 是標籤上那一行地形，另外記著而不是每次重算。原版把它放在
+	// `word_3499A`，只有 `sub_297F2` 會更新；而走到城鎮入口那一步會跳去
+	// `sub_29BBB`，整段更新被略過，所以標籤留在上一格的地形（RE-070）。
+	TerrainCode int
+}
+
+// SyncTerrain 把標籤上的地形換成腳下那一格。對應 `sub_29987` 的
+// 「取磚塊 → 查 payload3[0x100 + 磚塊] → 取最低位元序」。
+func (s *Screen) SyncTerrain() {
+	s.TerrainCode = s.Travel.Data.TerrainCode(s.Travel.Tile())
 }
 
 // Namer 供應時段與地形的顯示文字。
@@ -65,7 +76,7 @@ func (s *Screen) TimeLine() string {
 }
 
 func (s *Screen) TerrainLine() string {
-	code := s.Travel.Data.TerrainCode(s.Travel.Tile())
+	code := s.TerrainCode
 	if s.Names == nil {
 		return name(TerrainNames, code)
 	}

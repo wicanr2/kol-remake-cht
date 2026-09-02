@@ -1,0 +1,71 @@
+{
+  "name": "world-town",
+  "description": "野外走到城鎮入口那一格的對拍。腳下那一格是鏡頭座標的下一列：原版讀的是視窗緩衝區第 0x29 個 byte（第 3 列第 5 欄），而繪製迴圈的列偏移是 −2，所以地形名稱、道路旗標與地形擋路看的都是 (X, Y+1)（RE-070）。站在路上時圖示列多出 ROAD 與 SIGNPOST；走到城鎮入口那一格時地圖視窗換成 TWN0PICS[記錄索引 + 8]，圖示列剩 DOOR 與 U-TURN，而地形標籤停在上一格——原版此時跳進 sub_29BBB，更新標籤的那一段整個被略過。這一輪不宣稱天候圖那一塊。",
+  "input": {
+    "command": "tools/run_kol_shots.sh 規格檔（-scene play -play-script \"R R U U U U U U U U U RET R R R R R [L]\"）"
+  },
+  "not_claimed": [
+    {
+      "name": "天候圖 (16,76) 64×62",
+      "reason": "雲層動畫還沒實作：sub_2A18E 的旋轉單位與緩衝區版面尚未定案，remake 畫的是未旋轉的合成圖。"
+    }
+  ],
+  "pairs": [
+    {
+      "label": "站在路上：地圖視窗與隊伍的點",
+      "compare": { "x": 96, "y": 52, "width": 224, "height": 110 },
+      "remake": "docs/verification/remake-parity/shots/world/road-tile.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-255.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "x": 160, "y": 100, "width": 18, "height": 15
+        }
+      ]
+    },
+    {
+      "label": "站在路上：時段與地形標籤框",
+      "compare": { "x": 8, "y": 140, "width": 80, "height": 20 },
+      "remake": "docs/verification/remake-parity/shots/world/road-tile.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-255.png"
+    },
+    {
+      "label": "站在路上：ROAD 與 SIGNPOST 圖示列",
+      "compare": { "x": 0, "y": 160, "width": 320, "height": 40 },
+      "remake": "docs/verification/remake-parity/shots/world/road-tile.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-255.png"
+    },
+    {
+      "label": "城鎮入口提示：TWN0PICS 的外觀圖",
+      "compare": { "x": 96, "y": 52, "width": 224, "height": 110 },
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "x": 160, "y": 100, "width": 18, "height": 15
+        }
+      ]
+    },
+    {
+      "label": "城鎮入口提示：停在上一格的地形標籤",
+      "compare": { "x": 8, "y": 140, "width": 80, "height": 20 },
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png"
+    },
+    {
+      "label": "城鎮入口提示：DOOR 與 U-TURN 圖示列",
+      "compare": { "x": 0, "y": 160, "width": 320, "height": 40 },
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png"
+    },
+    {
+      "label": "隊員格與日期框",
+      "compare": { "x": 0, "y": 0, "width": 320, "height": 52 },
+      "remake": "docs/verification/remake-parity/shots/world/town-prompt.png",
+      "original": "docs/verification/character-ui/world-enter-town-run1/frames/frame-337.png"
+    }
+  ]
+}

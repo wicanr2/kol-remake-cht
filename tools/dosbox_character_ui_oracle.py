@@ -325,6 +325,29 @@ SCENARIOS: dict[str, dict] = {
             step("按下該格圖示之後（觀察）", None, settle=4.0),
         ],
     },
+    "world-enter-town": {
+        "description": "離開城鎮走到野外之後，往東走五步跨進隔壁那一格，再往西一步"
+                       "踏回城鎮入口那一格：畫面應換成該地點的外觀圖，圖示列剩 "
+                       "DOOR 與 U-TURN；按 DOOR 回到城鎮。純觀察，不進建築、不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("城門提示（白框在 DOOR）", "Return", settle=6.0),
+            step("野外地圖的第一張畫面", "Right", settle=3.0),
+        ] + [
+            step(f"野外往東第 {i} 步", "Right", settle=3.0) for i in range(2, 6)
+        ] + [
+            step("往東第五步（次格繞回，世界座標往東一格）", "Left", settle=3.0),
+            step("往西一步：踏回城鎮入口那一格", "Return", settle=5.0),
+            step("按下 DOOR 之後（應回到城鎮地圖）", None, settle=4.0),
+        ],
+    },
     "town-listen": {
         "description": "在旅店按 SPACEBAR 讓圖示列出現，再把白框移到 LISTEN 連按幾次，"
                        "觀察開場白與傳聞；最後移回 DOOR 離開。純觀察，不保存。",
