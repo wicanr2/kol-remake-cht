@@ -1465,3 +1465,40 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   要讀 KOLTOWN 的地圖繪製路徑才能定案。
 - **限制**：21 個 2,049 byte payload 與 116 byte 表的用途未知；磚圖的色盤語意、
   動畫磚、以及其他六個城鎮是否共用同一格式都還沒查。
+
+## RE-058：城鎮磚圖的載入路徑，以及兩個被推翻的假設
+
+新增探索用探針 `tools/ida_probe_koltown_town_map.py`（安全摘要見
+`ida-fingerprints/KOLTOWN-town-map-summary.json`）。輸入是本機的 unpacked
+`KOLTOWN.EXE`（SHA-256 `01f6f9…d1d2`），338 個函式。
+
+- **只看 xref 會得到假零**：`town%d.0`、`twn%d%s.0`、`twn%d%s.1`、`town%d` 這些字串的
+  `DataRefsTo` 全部是空的。16-bit real mode 下程式碼是把 DGROUP 位移當**立即值**載入
+  （`mov ax, 1776h`），IDA 不會因此產生 data xref。改掃立即值之後，18 個使用點一次浮現。
+- **`sub_15920` 是城鎮資料載入器**：依目前城鎮編號（`word_2DF2C`）組出檔名，
+  用 `sub_19D98` 把 `town%d.0`／`twn%d%s.0`／`twn%d%s.1` 讀進記憶體，
+  然後用 `sub_1A4FE` 從 `town%d` 這個 archive 取出**payload 0、1、2**，
+  分別放到同一個 segment（`word_30C8A`）的位移 **0x0000、0x3000、0x6000**，
+  最後對 `word_30C8A+0x100` 呼叫 `sub_19B29`（RE-030 已證實的 raw-planar → 色盤索引轉換）。
+  - 0x3000 ＝ 12,288，正是每個磚圖 payload 的解碼長度，**三個 payload 首尾相接**。
+  - 這與 RE-057 的位元組證據互相印證：磚塊是一個 288 筆的平坦陣列，
+    第 *n* 塊在緩衝區的位移是 `n × 128`。
+- **`sub_1C80F` 是 nibble RLE**：版面是 `[0..2)` big-endian 的 N、`[2..N)` 控制位元組、
+  `[N..)` nibble 資料流；控制位元組最高位為 0 時 `(值+1)` 是重複次數，為 1 時
+  `(值−0x7f)` 是照抄的 nibble 數，輸出兩兩打包成 byte。`sub_1C907` 依 `word_2DF1E`
+  在它與 `sub_1A2BB` 之間分流。
+
+### 兩個被推翻的假設
+
+1. **「`sub_2A0C6` 載入的是 `TOWNn.0` 的地圖區段」是錯的。** 它組檔名用的是字串 0x1874／
+   0x187C，不是 `town%d`（0x1794）——讀的是 `twn` 那組 archive。它一次取 `3n`、`3n+1`，
+   在 `n` 為 9 或 12 時另取 `3n+2`。
+2. **「21 個 2,049 byte 的 `TOWN7.0` payload 是 nibble-RLE 的地圖區段」也是錯的。**
+   把 `sub_1C80F` 的版面實作出來套上去，每一個 payload 的 big-endian 表頭都指向
+   2,132–16,589，全部超出 payload 長度，一個都展不開。它們是別的東西。
+
+### 還沒解出來的
+
+地圖格子陣列住在哪個 payload、格子值怎麼對到 288 塊磚裡的一塊。下一步的錨點是
+`sub_10000` 對 `town%d` archive 取的 payload 3（116 bytes）與 payload 0x14（513 bytes），
+以及通用載入器 `sub_10F9C` 的呼叫者傳了哪些索引。

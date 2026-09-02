@@ -35,6 +35,66 @@ VIEWPORT = (104, 58, 192, 96)
 TILE = 16
 
 
+def nibble_rle(payload: bytes) -> bytes:
+    """KOLTOWN `sub_1C80F` 的 nibble RLE。
+
+    版面：`[0..2)` 是 big-endian 的 N，`[2..N)` 是控制位元組，`[N..)` 是 nibble 資料流。
+    控制位元組最高位為 0 時，`(值+1)` 是重複次數，重複的是資料流的下一個 nibble；
+    最高位為 1 時，`(值-0x7f)` 是照抄的 nibble 數。輸出把 nibble 兩兩打包成 byte，
+    高位在前。
+    """
+    if len(payload) < 4:
+        return b""
+    end = int.from_bytes(payload[0:2], "big")
+    if not 2 < end <= len(payload):
+        return b""
+    control = payload[2:end]
+    data = payload[end:]
+    out = bytearray()
+    pending = None          # 尚未輸出的高位 nibble
+    src_pos = 0
+    src_high = True         # 下一個要讀的 nibble 是不是高位
+
+    def next_nibble() -> int | None:
+        nonlocal src_pos, src_high
+        if src_pos >= len(data):
+            return None
+        byte = data[src_pos]
+        if src_high:
+            src_high = False
+            return byte >> 4
+        src_high = True
+        src_pos += 1
+        return byte & 0x0F
+
+    def emit(value: int) -> None:
+        nonlocal pending
+        if pending is None:
+            pending = value
+        else:
+            out.append((pending << 4) | value)
+            pending = None
+
+    for code in control:
+        if code & 0x80:
+            count = code - 0x7F
+            for _ in range(count):
+                n = next_nibble()
+                if n is None:
+                    return bytes(out)
+                emit(n)
+        else:
+            count = code + 1
+            n = next_nibble()
+            if n is None:
+                return bytes(out)
+            for _ in range(count):
+                emit(n)
+    if pending is not None:
+        out.append(pending << 4)
+    return bytes(out)
+
+
 def read_volumes(zf: zipfile.ZipFile, root: str) -> dict[str, bytes]:
     out = {}
     for info in zf.infolist():
@@ -217,9 +277,68 @@ def main() -> int:
         layout = {"searched": True, "rows_available": [t for t, _ in rows_found],
                   "hits": hits}
 
+    # 第三階段：不靠編號，只靠「哪幾格畫同一塊磚」的相等關係去找地圖。
+    # 如果地圖是每格一個索引（不管索引怎麼編），畫面上相同的磚在資料裡也會是相同的值。
+    pattern = {"searched": False}
+    if matches:
+        by_pos = {(m["tile_y"], m["tile_x"]): (m["payload"], m["offset"] // 128)
+                  for m in matches}
+        cols, rows_n = MW // TILE, MH // TILE
+        cells = [(ty, tx) for ty in range(rows_n) for tx in range(cols)
+                 if (ty, tx) in by_pos]
+        # 相等關係：把每一格對映成一個群組編號
+        groups: dict[tuple[int, int], int] = {}
+        for pos in cells:
+            groups.setdefault(by_pos[pos], len(groups))
+        want = {pos: groups[by_pos[pos]] for pos in cells}
+        hits = []
+        for rec in decoded:
+            data = rec["_data"]
+            if len(data) < 512:
+                continue
+            for cell_bytes in (1, 2):
+                for stride in (16, 24, 32, 40, 48, 64, 96, 128):
+                    span = stride * cell_bytes
+                    for start in range(0, len(data) - span * rows_n):
+                        seen: dict[int, tuple[int, int]] = {}
+                        ok = True
+                        for (ty, tx), g in want.items():
+                            off = start + ty * span + tx * cell_bytes
+                            v = int.from_bytes(data[off:off + cell_bytes], "little")
+                            if v in seen and seen[v] != (g, v):
+                                ok = False
+                                break
+                            prev = [k for k, val in seen.items() if val[0] == g]
+                            if prev and prev[0] != v:
+                                ok = False
+                                break
+                            seen[v] = (g, v)
+                        if ok:
+                            hits.append({"payload": rec["index"], "cell_bytes": cell_bytes,
+                                         "stride": stride, "start": start})
+                            break
+                    if hits and hits[-1]["payload"] == rec["index"]:
+                        break
+                if hits and hits[-1]["payload"] == rec["index"]:
+                    break
+        pattern = {"searched": True, "distinct_tiles": len(groups),
+                   "cells": len(cells), "hits": hits[:20], "hit_count": len(hits)}
+
+    expanded = []
+    for rec in decoded:
+        data = rec["_data"]
+        if len(data) in (2049, 513):
+            out = nibble_rle(data)
+            expanded.append({"payload": rec["index"], "payload_bytes": len(data),
+                             "control_end": int.from_bytes(data[0:2], "big"),
+                             "expanded_bytes": len(out),
+                             "sha256": hashlib.sha256(out).hexdigest()})
+
     receipt = {
         "schema": "kol-town-data-probe-v1",
+        "nibble_rle_expansion": expanded,
         "tile_layout_search": layout,
+        "tile_pattern_search": pattern,
         "tool": "tools/probe_town_data.py",
         "town": args.town,
         "volumes": {k: len(v) for k, v in sorted(volumes.items())},

@@ -1,0 +1,180 @@
+"""IDA Pro 9.4：找出 KOLTOWN 載入 `TOWNn` 城鎮資料與繪製地圖的路徑。
+
+這是**探索用**探針，不是鎖定斷言：先掃出所有含 `town` 的字串、它們的 xref，
+以及參照者所屬函式的反組譯，讓下一輪可以寫成有 EXPECTED_* 斷言的鎖定探針。
+另外掃出所有「立即值 0x80／128」與「shl cl,7」形態的位置，因為磚塊間距是 128 bytes。
+
+  idat -A -S"tools/ida_probe_koltown_town_map.py OUT.json INPUT.EXE" INPUT.EXE
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+import ida_auto
+import ida_bytes
+import ida_funcs
+import ida_lines
+import idaapi
+import idautils
+import idc
+
+EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
+# 16-bit real mode 下，程式碼是把字串的 DGROUP 位移當立即值載入（`mov ax, 1776h`），
+# IDA 不會因此產生 data xref——只看 xref 會得到「沒有人用這些字串」的假零。
+DGROUP_EA = 0x2DED0
+
+
+def disassembly(ea: int) -> str:
+    rendered = ida_lines.tag_remove(idc.generate_disasm_line(ea, 0) or "")
+    return rendered.split(" ;", 1)[0].rstrip()
+
+
+def strings_matching(needles: tuple[bytes, ...]) -> list[dict]:
+    out = []
+    for item in idautils.Strings():
+        raw = ida_bytes.get_bytes(item.ea, item.length) or b""
+        low = raw.lower()
+        if any(n in low for n in needles):
+            refs = [f"0x{x:x}" for x in idautils.DataRefsTo(item.ea)]
+            out.append({
+                "ea": f"0x{item.ea:x}",
+                "length": item.length,
+                "text": raw.rstrip(b"\0").decode("ascii", "replace"),
+                "bytes": raw.hex(),
+                "data_refs_to": refs,
+                "ref_functions": sorted({
+                    f"0x{ida_funcs.get_func(x).start_ea:x}"
+                    for x in idautils.DataRefsTo(item.ea)
+                    if ida_funcs.get_func(x) is not None}),
+            })
+    return out
+
+
+def immediate_users(offsets: set[int]) -> list[dict]:
+    """掃全部指令，找出把這些 DGROUP 位移當立即值載入的地方。"""
+    out = []
+    for fn_ea in idautils.Functions():
+        for ea in idautils.FuncItems(fn_ea):
+            for op in range(2):
+                if idc.get_operand_type(ea, op) != idc.o_imm:
+                    continue
+                value = idc.get_operand_value(ea, op)
+                if value in offsets:
+                    out.append({
+                        "ea": f"0x{ea:x}",
+                        "function": f"0x{fn_ea:x}",
+                        "immediate": f"0x{value:x}",
+                        "disassembly": disassembly(ea),
+                    })
+    return out
+
+
+def function_slice(start: int, limit: int = 400) -> dict:
+    fn = ida_funcs.get_func(start)
+    if fn is None:
+        return {"start_ea": f"0x{start:x}", "error": "no function"}
+    items = list(idautils.FuncItems(start))
+    return {
+        "original_name": idc.get_func_name(start),
+        "start_ea": f"0x{start:x}",
+        "end_ea": f"0x{fn.end_ea:x}",
+        "instruction_count": len(items),
+        "callers": [f"0x{x:x}" for x in idautils.CodeRefsTo(start, False)],
+        "instructions": [
+            {"ea": f"0x{ea:x}", "disassembly": disassembly(ea)}
+            for ea in items[:limit]
+        ],
+    }
+
+
+# 進一步的錨點：payload 載入器與磚塊緩衝區。
+PAYLOAD_LOADER = 0x1A4FE      # sub_1A4FE(name, index, seg, off, extra)：解一個 payload
+FILE_LOADER = 0x19D98         # sub_19D98(name, seg, off)：整個檔案讀進記憶體
+TILE_BUFFER_SEG = 0x30C8A     # word_30C8A：三個磚圖 payload 落在這個 segment
+# 想看清楚的函式：地圖區段載入器與用 ES 讀磚塊緩衝區的繪製路徑。
+DUMP_FUNCTIONS = (0x2A0C6, 0x2A01C, 0x1C907, 0x1C80F, 0x16986)
+
+
+def call_sites(target: int, window: int = 14) -> list[dict]:
+    """列出所有呼叫點，並附上呼叫前 window 條指令——引數是 push 上去的。"""
+    out = []
+    for ea in idautils.CodeRefsTo(target, False):
+        fn = ida_funcs.get_func(ea)
+        if fn is None:
+            continue
+        items = list(idautils.FuncItems(fn.start_ea))
+        try:
+            idx = items.index(ea)
+        except ValueError:
+            continue
+        start = max(0, idx - window)
+        out.append({
+            "call_ea": f"0x{ea:x}",
+            "function": f"0x{fn.start_ea:x}",
+            "context": [{"ea": f"0x{e:x}", "disassembly": disassembly(e)}
+                        for e in items[start:idx + 1]],
+        })
+    return out
+
+
+def global_users(addr: int) -> list[dict]:
+    out = []
+    for ea in idautils.DataRefsTo(addr):
+        fn = ida_funcs.get_func(ea)
+        out.append({
+            "ea": f"0x{ea:x}",
+            "function": f"0x{fn.start_ea:x}" if fn else None,
+            "disassembly": disassembly(ea),
+        })
+    return out
+
+
+def main() -> None:
+    if len(idc.ARGV) != 3:
+        raise RuntimeError("usage: script.py OUT.json INPUT.EXE")
+    out_path, input_path = Path(idc.ARGV[1]), Path(idc.ARGV[2])
+    digest = hashlib.sha256(input_path.read_bytes()).hexdigest()
+    if digest != EXPECTED_SHA256:
+        raise RuntimeError(f"unexpected input SHA-256: {digest}")
+    ida_auto.auto_wait()
+
+    town_strings = strings_matching((b"town", b"twn", b"region"))
+    for s in town_strings:
+        s["dgroup_offset"] = f"0x{int(s['ea'], 16) - DGROUP_EA:x}"
+    offsets = {int(s["ea"], 16) - DGROUP_EA for s in town_strings}
+    users = immediate_users(offsets)
+
+    seen = set()
+    functions = []
+    for u in users:
+        if u["function"] in seen:
+            continue
+        seen.add(u["function"])
+        functions.append(function_slice(int(u["function"], 16)))
+
+    receipt = {
+        "schema": "kol-ida-koltown-town-map-explore-v1",
+        "ida_version": idaapi.get_kernel_version(),
+        "input_name": input_path.name,
+        "input_sha256": digest,
+        "address_space": "IDA linear effective address for reconstructed unpacked MZ",
+        "note": "探索用輸出：字串、xref 與參照函式的反組譯；尚未鎖定任何斷言。",
+        "town_strings": town_strings,
+        "immediate_users": users,
+        "payload_loader_calls": call_sites(PAYLOAD_LOADER),
+        "file_loader_calls": call_sites(FILE_LOADER),
+        "tile_buffer_users": global_users(TILE_BUFFER_SEG),
+        "dumped_functions": [function_slice(ea, 600) for ea in DUMP_FUNCTIONS],
+        "referencing_functions": functions,
+        "function_total": len(list(idautils.Functions())),
+    }
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
+                        encoding="utf-8")
+    idc.qexit(0)
+
+
+main()
