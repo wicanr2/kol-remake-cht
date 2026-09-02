@@ -9,7 +9,11 @@
 | Player's Handbook | 玩家手冊 | 核准 | 文件種類 |
 | Reference Card | 參考卡 | 核准 | 文件種類 |
 | Ashtalarea | 阿什塔拉瑞亞 | 暫譯 | 玩家手冊實體頁 3；專名音譯待全書一致性審查 |
-| Brettle | 布雷特爾 | 暫譯 | 城鎮名 |
+| Brettle | 布雷特爾 | 暫譯 | 城鎮名；世界地圖記錄代碼 `BRT`，對應 `TOWN1` |
+| Htron | 赫特隆 | 暫譯 | 北方城鎮；代碼 `HTN`，對應 `TOWN2`。城鎮對話「north is Htron」與世界地圖座標 (51,4) 互證 |
+| Thimblewald | 辛博瓦德 | 暫譯 | 西方城鎮；代碼 `THM`，對應 `TOWN3`。對話「west is Thimblewald」與座標 (15,10) 互證 |
+| Poitle's Lock | 波伊特水閘 | 暫譯 | 運河閘鎮；代碼 `POT`，對應 `TOWN4`；鎮上有 Lockkeeper |
+| Olanth / Olanthen | 奧蘭斯／奧蘭森 | 暫譯 | 南方村落；代碼 `OLN`，對應 `TOWN6`（Olanthen 用於修道院名） |
 | Trollsbane Inn | 巨魔剋星旅店 | 暫譯 | 新角色起點 |
 | Human | 人類 | 核准 | 種族 |
 | Elf / Elven | 精靈／精靈族 | 核准 | 種族 |
@@ -95,7 +99,7 @@
 | TRAIN | 訓練 | 核准 | 向武器大師提升武器技能 |
 | Hvrad Myth | Hvrad Myth | 待查 | 布雷特爾武器大師；正式音譯待角色資料 consumer |
 | Astimiah Eckhart | Astimiah Eckhart | 待查 | 布雷特爾法師；正式音譯待角色資料 consumer |
-| Lonely Page Pub | Lonely Page 酒館 | 暫譯 | 布雷特爾酒館；專名待城鎮資料 consumer |
+| Lonely Page Pub | 孤頁酒館 | 暫譯 | 布雷特爾酒館；譯名已隨城鎮文字上線 |
 | Orc | Orc | 待查 | 怪物專名；正式譯名待怪物資料 consumer |
 | Health | 健康 | 核准 | 主要屬性；亦指可由修道院恢復的健康狀態 |
 | Strength | 力量 | 核准 | 主要屬性 |
@@ -107,7 +111,7 @@
 | Balance | 平衡 | 暫譯 | 次要屬性；由力量與智力推導 |
 | Endurance | 耐力 | 暫譯 | 次要屬性；由力量與健康推導 |
 | Body Points | 身體點數 | 暫譯 | 次要屬性；由健康與體型推導 |
-| Huxley / Dancing Friar | Huxley／舞僧 | 待查 | 聖保羅修道院院長；正式音譯待城鎮資料 consumer |
+| Huxley / Dancing Friar | 赫胥黎／舞僧 | 暫譯 | 聖保羅修道院院長；譯名已隨城鎮文字上線 |
 | fatigue | 疲勞 | 核准 | 戰鬥能量不足後累積的狀態 |
 | knock back | 擊退 | 核准 | 重擊使目標掉落武器並後移一格 |
 | protection | 防護 | 核准 | 盔甲表的 `Prt` |
@@ -125,18 +129,18 @@
 | Blacksteel | Blacksteel | 待查 | 〈傳說種族〉敘事者；正式譯名待角色資料 consumer |
 | Bronk | Bronk | 待查 | 六足雙頭生物；正式音譯待生物資料 consumer |
 | Dark Guard | Dark Guard | 待查 | Pildar 舊部；正式譯名待遊戲資料 consumer |
-| Shellemoon | Shellemoon | 待查 | 設防城市；正式音譯待地圖／城鎮資料 consumer |
+| Shellernoon | 謝勒農 | 暫譯 | 設防城市；代碼 `SHL`，對應 `TOWN5`。原版資料一律拼作 Shellernoon，說明書的 Shellemoon 為異拼 |
 | Drezin Wood / Drezin Ranger | Drezin Wood／Drezin Ranger | 待查 | 西部大森林及其遊俠；正式音譯待世界資料 consumer |
 | Sledge | Sledge | 待查 | 以樹木為食的巨人；正式譯名待怪物資料 consumer |
 | Duke's Highwaymen | Duke's Highwaymen | 待查 | 公爵麾下築路工班；正式譯名待世界資料 consumer |
-| Hobe / Hobean Squire | Hobe／Hobean Squire | 待查 | 岩鑿城堡及其侍從；正式音譯待世界資料 consumer |
-| Htron Pirate | Htron Pirate | 待查 | Htron 海盜文化；正式音譯待世界資料 consumer |
+| Hobe / Hobean Squire | 霍布／霍布侍從 | 暫譯 | 岩鑿城堡及其侍從；對應 `TOWN7`，世界地圖上是十個代碼 `MIN` 的入口 |
+| Htron Pirate | 赫特隆海盜 | 暫譯 | 赫特隆的海盜文化 |
 | Krag Barbarian | Krag Barbarian | 待查 | 北方岩地的野蠻戰士；正式音譯待世界資料 consumer |
 | Krell Warrion | Krell Warrion | 待查 | 北方沼澤傳聞及疑似借其名行動的人群；正式譯名待世界資料 consumer |
 | Lintle Plainsmen | Lintle Plainsmen | 待查 | 東南平原游牧民族；正式譯名待世界資料 consumer |
-| Olanthan Hunter / Huntress | Olanthan Hunter／Olanthan Huntress | 待查 | 中立村落 Olanth 的獵人；正式譯名待世界資料 consumer |
-| Poitle Rogue | Poitle Rogue | 待查 | Poitle's Lock 的盜賊文化；正式譯名待世界資料 consumer |
-| Shellernoon Watchmen | Shellernoon Watchmen | 待查 | 看守 Eyren 湖黑塔的守衛；正式譯名待世界資料 consumer |
+| Olanthan Hunter / Huntress | 奧蘭斯獵人／奧蘭斯女獵人 | 暫譯 | 中立村落奧蘭斯的獵人 |
+| Poitle Rogue | 波伊特盜賊 | 暫譯 | 波伊特水閘的盜賊文化 |
+| Shellernoon Watchmen | 謝勒農守望者 | 暫譯 | 看守 Eyren 湖黑塔的守衛 |
 | Great Oath | Great Oath | 待查 | Shellernoon Watchmen 入隊誓言；內容未知 |
 | Ghor Tigress | Ghor Tigress | 待查 | Ghor 女戰士；正式譯名待世界資料 consumer |
 | Lintle Plainswoman | Lintle Plainswoman | 待查 | Lintle 平原女性弓手；正式譯名待世界資料 consumer |

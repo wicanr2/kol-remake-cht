@@ -2025,3 +2025,73 @@ remake 對拍 `docs/verification/remake-parity/plan-town-edge.json`：四對逐�
 位移 0x1BA 取最大值（沒有就 20）當旅行速度。remake 目前把「在城門選了 DOOR」
 記成 `Session.LeftTown`，交給上層，不假裝已經走出去。
 
+## RE-066：世界地圖的城鎮記錄——七座城的位置、界限、三字母代碼與磁碟
+
+`sub_29004` 把 `TOWN0` 的 payload 3 讀進 `byte_2FBC4`（DGROUP 位移 `0x1CF4`）。
+迴圈 `0x294A8` 逐一比對 22 筆 16 byte 的記錄；座標吻合就設 `word_2FBC2 = i` 進城。
+`sub_29CA3` 把那一筆記錄拆開（`已證實`，位移直接來自反組譯）：
+
+| 記錄位移 | 寫進 | 意義 |
+|---:|---|---|
+| +0／+1 | — | 這個地點在世界地圖上的 X／Y |
+| +2 | — | 索引（城鎮 10–15、礦坑 0–9）|
+| +3／+4 | `word_2FB50`／`word_2FB56` | 進城之後的鏡頭座標 |
+| +5／+6 | `word_2DF68`／`word_2DF6A` | 城鎮地圖的 X 界限 |
+| +7／+8 | `word_2DF66`／`word_2DF6C` | 城鎮地圖的 Y 界限 |
+| +9…+11 | `byte_349AE`…`byte_349B0` | 三字母代碼 |
+| +12／+13 | — | 磁碟代號；`word_3B266 = [+13] - 30h` |
+
+結尾是：
+
+```
+word_2DF36 = word_2DF38 = 0
+word_2DF2C = word_2FBC2 + 1
+if word_2DF2C > 6:
+    word_2DF62 = word_2DF2C - 7     ; 入城點索引
+    word_2DF2C = 7
+```
+
+也就是**記錄 i 對應 `TOWN{i+1}`**，而記錄 6 之後全部落在 `TOWN7`，
+用入城點索引 0–9 區分——這正好解釋 RE-061 量到的「TOWN7 有 10 個入城點」。
+
+解出來的十六筆有資料的記錄：
+
+| 記錄 | 世界座標 | 代碼 | 城鎮地圖界限 | 對應 |
+|---:|---|---|---|---|
+| 0 | (59, 37) | `BRT` | 0–63 × 0–63 | TOWN1 |
+| 1 | (51, 4) | `HTN` | 0–63 × 0–63 | TOWN2 |
+| 2 | (15, 10) | `THM` | 0–63 × 0–63 | TOWN3 |
+| 3 | (6, 29) | `POT` | 0–63 × 0–63 | TOWN4 |
+| 4 | (37, 38) | `SHL` | 0–63 × 0–63 | TOWN5 |
+| 5 | (24, 57) | `OLN` | 0–63 × 0–63 | TOWN6 |
+| 6–15 | 十處 | `MIN` | 各 16×16 一塊 | TOWN7 的入城點 0–9 |
+
+十個礦坑把 `TOWN7` 的 64×64 地圖切成 16×16 的十六宮格中的十塊
+（記錄 6 是 0–15 × 0–15、記錄 7 是 16–31 × 0–15，依此類推）。
+說明書寫的 `Trollsbane, BRT` 就是這裡的三字母代碼。
+
+### 城名
+
+代碼配上城鎮對話裡的一手證據，六個名字全部對上：
+
+- `BRT` ＝ Brettle（TOWN1 的「Fortress of Brettle」）
+- `HTN` ＝ Htron——TOWN7 門 3 的台詞「south is Brettle, west is Thimblewald and
+  the Hobe, north is Htron」，配上世界座標 (51, 4) 在最北。
+- `THM` ＝ Thimblewald——同一句話說它在西邊，座標 (15, 10) 也在西北。
+- `POT` ＝ Poitle's Lock（TOWN4 門 3 明寫 "Poitle's Lock"，門 11 是 Lockkeeper）
+- `SHL` ＝ Shellernoon（TOWN5 門 0「Lord of Shellernoon」）。
+  **原版資料一律拼作 Shellernoon**，說明書的 `Shellemoon` 是異拼；一手資料為準。
+- `OLN` ＝ Olanth（TOWN6 門 0「The Abbey of Olanthen」）
+- `MIN` ＝ 礦坑，也就是 the Hobe（TOWN7 門 0「The Hobe's Main Gate」）
+
+### 野外地圖的其他版面
+
+同一份 payload 3 裡：位移 `0x200 + 磚塊編號` 是逐磚塊的一個 byte；
+`0x300` 起 32 byte 是野外的不可通行位元圖（查法與城鎮相同，只是基底不同）；
+`0x323`／`0x33B` 各 24 個 byte 是特殊地點的 X／Y，命中會呼叫 `sub_2B0FF(i)`。
+
+野外的移動有**次格座標**：`word_2DF36`／`word_2DF38` 在 0…7 之間繞回，
+繞回時世界座標才走 `word_322F6`（初值 1）。隊伍標記是 2×2 像素的點，
+畫在視窗第 3 列第 5 欄那一格內、偏移 `次格座標 × 2` 像素——
+由 `town-leave-run1` 的畫格量到：按一次方向鍵，點只移動兩個像素，地圖不動。
+

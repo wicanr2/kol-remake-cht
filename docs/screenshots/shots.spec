@@ -33,3 +33,6 @@ docs/screenshots/zh-town-door.png|-lang|zh-Hant|-scene|outdoor|-outdoor-camera|5
 docs/screenshots/zh-town-building.png|-lang|zh-Hant|-scene|building|-building-town|7|-building-door|5|-shot|docs/screenshots/zh-town-building.png
 docs/screenshots/zh-town-building-smithy.png|-lang|zh-Hant|-scene|building|-building-town|7|-building-door|12|-shot|docs/screenshots/zh-town-building-smithy.png
 docs/screenshots/zh-town-inn-party2.png|-lang|zh-Hant|-scene|inn|-inn|docs/re/town-inn-sample-recruited.json|-shot|docs/screenshots/zh-town-inn-party2.png
+docs/screenshots/zh-town-brettle-inn.png|-lang|zh-Hant|-scene|building|-building-town|1|-building-door|1|-shot|docs/screenshots/zh-town-brettle-inn.png
+docs/screenshots/zh-town-olanth-bakery.png|-lang|zh-Hant|-scene|building|-building-town|6|-building-door|11|-shot|docs/screenshots/zh-town-olanth-bakery.png
+docs/screenshots/en-town-edge.png|-scene|outdoor|-outdoor-camera|58,0|-outdoor-marker|0,1|-outdoor-frame|3|-outdoor-at-edge|-outdoor-icons|5,18|-shot|docs/screenshots/en-town-edge.png

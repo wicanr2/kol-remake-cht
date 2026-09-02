@@ -6,19 +6,19 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "ac37d743a039812cb0445d52320f3ec5cb6ff42b"
+    "commit": "42137cd836ac79faabf16091b90260a2c0fa880c"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
     "fonts_manifest_sha256": "5db3baecce7a0ca28559688f08f98b7c0648765bbf82348de8c490243079f393",
-    "ui_font_manifest_sha256": "7aa15ea983900021979520d154038f9759b548423a3446afb5859de189305afa"
+    "ui_font_manifest_sha256": "afeaee0806deab174196b31287e64cf9456411c7e20efee22c94d900bff86105"
   },
   "rights": {
     "classification": "private-repo 可保存；不得公開散布",
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 28,
+  "count": 31,
   "failed": 0,
   "screenshots": [
     {
@@ -222,7 +222,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 12,
-      "sha256": "20733eb890efc78cfeeff7f42983c3e31463eff143c27dd52b58a21135764ea8",
+      "sha256": "78614db6da212be8546af7709ed08528e6e1e322ad0d56c0f7b23f6e15d46e77",
       "pass": true
     },
     {
@@ -232,7 +232,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 8,
-      "sha256": "718d25cecab04d1d587978f3c944767fb11909d80ca2f90e8c595a567520919d",
+      "sha256": "396adb6718837883a8bc0b651e468c959702da6af8ba8e7dbcbaa7969784606e",
       "pass": true
     },
     {
@@ -242,7 +242,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 7,
-      "sha256": "3b255ca6d4b9edea59dcc0e4fba9f7d5b124983c4060039d5a6c13f379aebc82",
+      "sha256": "e180496c55e695636f02ca19775b24a74e274838ed3bd703a8230c46dd730a57",
       "pass": true
     },
     {
@@ -252,7 +252,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 8,
-      "sha256": "390f71437637fac9caa2b31d08c73af2a3b06db011a71a20f7aa5f84fc70551e",
+      "sha256": "70df1ce024196ad3bebcbd686ebea8adcdb1906a40ea170cb1ebe4d19d36918c",
       "pass": true
     },
     {
@@ -262,7 +262,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 7,
-      "sha256": "81dd7daf524773721d56a18c4b9b4b9a22317270e400952b9217fa7b8e69ddc8",
+      "sha256": "f65bd3510a7f840b0d78e44f32e50097c0f3a8dc28137478468117c97e8ad432",
       "pass": true
     },
     {
@@ -272,7 +272,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 15,
-      "sha256": "32ae655250d736b24c6346f2f709e683e934e0603f42e4b5c90859047a212f47",
+      "sha256": "9cbfec3e4cfa0309d2ce48830f4a92109abe02e0bb24d7216447e7fd44994077",
       "pass": true
     },
     {
@@ -282,7 +282,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 14,
-      "sha256": "4f820f29658cc5bd1f810215f8f35324f188ed5a7580d7ee3b52f20628b25bcd",
+      "sha256": "b2424b95a6cc728578dff71157c7c7d3de91842d6513d585952d1966830e66ca",
       "pass": true
     },
     {
@@ -292,7 +292,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 15,
-      "sha256": "cc8642ab97679557b1fd06ccac9e7e618e391668b680706434bf28751b63ef25",
+      "sha256": "a2fe7d9d0b1ac3d5eecbcd66e5689407c8d6d85887897b46b681996f81a423be",
       "pass": true
     },
     {
@@ -302,7 +302,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 12,
-      "sha256": "d1c37ea58cd79c91f789cc9612288c74e05299de0bc65c912f52038ae28752a5",
+      "sha256": "e4d8e3da347592d035e5f2d8a44b4f48e0b02498de661027f89096f3aa32a041",
       "pass": true
     },
     {
@@ -312,7 +312,7 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 15,
-      "sha256": "9dfa6d13d0b717c60a96232838e993c7234bb43c0a7fced59ee0b0c868805149",
+      "sha256": "e5704a3aefd3a14adafb12555532756440be6f1b0fa3526355ac2ba3be2cd926",
       "pass": true
     },
     {
@@ -322,7 +322,40 @@
       "width": 640,
       "height": 400,
       "distinct_colours": 15,
-      "sha256": "1f978015aa6d155171a1eb247cf991f0f9098013cd5a74330fc0ea548cd2597a",
+      "sha256": "3338d223fd7b758757d34d8e44a6272ea23eb9074dcd0f22510092e49fcd2298",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-brettle-inn.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene building -building-town 1 -building-door 1 -shot docs/screenshots/zh-town-brettle-inn.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 13,
+      "sha256": "34a020f9a8b09afe78a74476130654fb77e21a87654fabdc447c3c85cfac7459",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-olanth-bakery.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene building -building-town 6 -building-door 11 -shot docs/screenshots/zh-town-olanth-bakery.png",
+      "width": 640,
+      "height": 400,
+      "distinct_colours": 13,
+      "sha256": "8840922a2a9f0e8b3aab01058954e4eca3cfa52120771501cee69bcc5af23300",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-edge.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene outdoor -outdoor-camera 58,0 -outdoor-marker 0,1 -outdoor-frame 3 -outdoor-at-edge -outdoor-icons 5,18 -shot docs/screenshots/en-town-edge.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 14,
+      "sha256": "6e6e3f1a6334b2dc3dd0e98bd37f272c1deef809d7e0e96fa96c3252895ceec7",
+      "parity_twin": "docs/verification/remake-parity/shots/town-edge/gate.png",
+      "parity_receipt": "docs/verification/remake-parity/town-edge.json",
+      "identical_to_parity_shot": true,
       "pass": true
     }
   ]

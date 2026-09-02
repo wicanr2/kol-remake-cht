@@ -301,6 +301,30 @@ SCENARIOS: dict[str, dict] = {
             step("按 U-TURN 之後回到地圖", None, settle=3.0),
         ],
     },
+    "town-leave-to-wilderness": {
+        "description": "走到城鎮地圖上緣跳出城門提示之後按 DOOR 離開城鎮，"
+                       "觀察野外地圖的版面；接著在野外走幾步並按幾次圖示鍵。"
+                       "純觀察，不進任何建築、不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("城門提示（白框在 DOOR）", "Return", settle=6.0),
+            step("離開城鎮之後的第一張畫面（觀察）", "Up", settle=3.0),
+            step("往北一步", "Up", settle=3.0),
+            step("往北兩步", "Left", settle=3.0),
+            step("往西一步", "Left", settle=3.0),
+            step("往西兩步", "greater", settle=2.5),
+            step("白框往右一格", "greater", settle=2.5),
+            step("白框往右兩格", "Return", settle=4.0),
+            step("按下該格圖示之後（觀察）", None, settle=4.0),
+        ],
+    },
     "town-outdoor-move": {
         "description": "由旅店按 DOOR 走到戶外地圖，再用方向鍵移動幾步並在圖示列上移動，"
                        "用來判斷地圖視窗是不是一張固定圖。純觀察，不進任何建築。",

@@ -24,9 +24,19 @@ import subprocess
 import sys
 import zlib
 
-CELL_PITCH = 32   # 烘焙時的格距
+CELL_PITCH = 48   # 烘焙時的格距：一格要放得下「基準字＋目標字」兩個字
 DRAW_MARGIN = 8   # 每格內縮的繪製起點；鄰格字模的側邊突出才不會被量進來
 ASCII_MAX = 0x7F
+
+# drawtext 是**依照它這一次要畫的字串**的最大 ascender 對齊的，所以一個字單獨畫時，
+# 它的墨跡頂端一律落在 y —— 逗號、句號這種本來坐在基線上的字會被拉到格子最上面。
+# 解法是每一格都先畫一個基準字再畫目標字：兩個字在同一次 drawtext 裡就共用基線。
+# 基準字的墨跡頂端在每一格量一次；目標字比基準字高時整串會下移，那個位移量正好由
+# 基準字自己的墨跡頂端反映出來，因此不必假設基準字是最高的。
+# 基準字挑全形驚嘆號：advance 是一整個 em，墨跡卻只有中間兩三個像素寬，
+# 因此和目標字的墨跡不會在分界線上黏在一起。
+BASELINE_REF = "！"
+REF_SPLIT = 14    # 基準字（全形，advance ＝ 1 em）與目標字的分界 x
 
 
 def _walk(node, seen: set[str]) -> None:
@@ -59,9 +69,15 @@ def collect(strings_path: pathlib.Path,
     return sorted(seen)
 
 
-def render(chars: list[str], family: str, size: int, columns: int,
-           work: pathlib.Path) -> bytes:
-    """把每個字元烘到固定格點上。
+# 一次交給 ffmpeg 的字模列數。整張表一次烘會踩到兩個上限：單一命令列參數 128 KB
+# （`MAX_ARG_STRLEN`），以及上千個 drawtext 濾鏡各自載入字型的記憶體。分批烘再拼接，
+# 兩者都不會碰到，而且輸出仍然逐位元可重生。
+ROWS_PER_BATCH = 16
+
+
+def render_batch(chars: list[str], family: str, size: int, columns: int,
+                 work: pathlib.Path, tag: str) -> bytes:
+    """把一批字元烘到固定格點上，回傳 PNG bytes。
 
     字元經由 `textfile=` 傳給 drawtext 並關掉展開，否則 `%`、`\\`、引號這些字元會被
     drawtext 的參數解析或 text expansion 吃掉——那會安靜地烘出錯字模。
@@ -75,20 +91,43 @@ def render(chars: list[str], family: str, size: int, columns: int,
         x = (index % columns) * CELL_PITCH + DRAW_MARGIN
         y = (index // columns) * CELL_PITCH + DRAW_MARGIN
         path = text_dir / f"{ord(ch):04x}.txt"
-        path.write_text(ch, encoding="utf-8")
+        path.write_text(BASELINE_REF + ch, encoding="utf-8")
         filters.append(
             f"drawtext=font={family}:textfile={path}:expansion=none"
             f":fontsize={size}:fontcolor=white:x={x}:y={y}")
-    graph = ",".join(filters)
-    out = work / "sheet-raw.png"
+    graph_path = work / f"filtergraph-{tag}.txt"
+    graph_path.write_text(",".join(filters), encoding="utf-8")
+    out = work / f"sheet-{tag}.png"
     result = subprocess.run(
         ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
          "-f", "lavfi", "-i", f"color=c=black:s={width}x{height}:d=1",
-         "-vf", graph, "-frames:v", "1", str(out)],
+         "-filter_script:v", str(graph_path), "-frames:v", "1", str(out)],
         capture_output=True, text=True)
     if result.returncode != 0:
-        raise SystemExit("ffmpeg 烘焙失敗：" + result.stderr.strip()[:400])
+        # 取尾端不是開頭：ffmpeg 先印一整段輸入資訊，真正的錯誤在最後面。
+        raise SystemExit("ffmpeg 烘焙失敗：\n" + result.stderr.strip()[-2000:])
     return out.read_bytes()
+
+
+def render(chars: list[str], family: str, size: int, columns: int,
+           work: pathlib.Path) -> tuple[int, int, list[int]]:
+    """分批烘出整張字模表，回傳（寬, 高, 灰階像素）。"""
+    per_batch = ROWS_PER_BATCH * columns
+    width = columns * CELL_PITCH
+    grey: list[int] = []
+    for start in range(0, len(chars), per_batch):
+        batch = chars[start:start + per_batch]
+        raw = render_batch(batch, family, size, columns, work,
+                           f"{start // per_batch:03d}")
+        bw, bh, part = decode_png_gray(raw)
+        if bw != width:
+            raise SystemExit(f"批次寬度 {bw} 不是 {width}")
+        grey.extend(part)
+    rows = (len(chars) + columns - 1) // columns
+    height = rows * CELL_PITCH
+    if len(grey) != width * height:
+        raise SystemExit(f"拼接後像素數 {len(grey)} 不是 {width * height}")
+    return width, height, grey
 
 
 def decode_png_gray(raw: bytes) -> tuple[int, int, list[int]]:
@@ -175,34 +214,49 @@ def main() -> int:
                     [pathlib.Path(x) for x in args.extra_json])
     work = pathlib.Path(args.work)
     work.mkdir(parents=True, exist_ok=True)
-    raw = render(chars, args.family, args.size, args.columns, work)
-    width, height, grey = decode_png_gray(raw)
+    width, height, grey = render(chars, args.family, args.size, args.columns, work)
 
-    # 先量出所有字模的共同邊界，再用同一個位移把每個字模裁進固定字模格，
-    # 這樣基線一致，不會逐字浮動。
+    # 每一格畫的是「基準字＋目標字」。先量出基準字的墨跡頂端，那就是這一格的基線；
+    # 目標字的縱向位置一律換算成「相對基線」，逗號、句號才會坐回原來的高度。
     cell_h = args.cell_height or args.cell
-    top, bottom, left, right = height, 0, width, 0
-    for index in range(len(chars)):
+
+    def ink_box(index: int, x0: int, x1: int) -> tuple[int, int, int, int] | None:
         ox = (index % args.columns) * CELL_PITCH + DRAW_MARGIN
         oy = (index // args.columns) * CELL_PITCH + DRAW_MARGIN
+        t, b, l, r = height, -height, width, -width
         for y in range(-DRAW_MARGIN, CELL_PITCH - DRAW_MARGIN):
-            for x in range(-DRAW_MARGIN, CELL_PITCH - DRAW_MARGIN):
-                if grey[(oy + y) * width + ox + x] >= args.threshold:
-                    top, bottom = min(top, y), max(bottom, y)
-                    left, right = min(left, x), max(right, x)
-    # 每個字模自己的墨水邊界。全域位移讓基線一致，但個別字模若因此超出字格，
-    # 就單獨把它的水平位移夾回來——只影響那幾個字，其餘維持原樣。
-    extents = []
-    for index in range(len(chars)):
-        ox = (index % args.columns) * CELL_PITCH + DRAW_MARGIN
-        oy = (index // args.columns) * CELL_PITCH + DRAW_MARGIN
-        t, b, l, r = height, 0, width, 0
-        for y in range(-DRAW_MARGIN, CELL_PITCH - DRAW_MARGIN):
-            for x in range(-DRAW_MARGIN, CELL_PITCH - DRAW_MARGIN):
+            for x in range(x0, x1):
                 if grey[(oy + y) * width + ox + x] >= args.threshold:
                     t, b = min(t, y), max(b, y)
                     l, r = min(l, x), max(r, x)
-        extents.append((t, b, l, r) if b >= t else None)
+        return (t, b, l, r) if b >= t else None
+
+    ref_tops = []
+    for index in range(len(chars)):
+        ref = ink_box(index, 0, REF_SPLIT)
+        if ref is None:
+            raise SystemExit(f"第 {index} 格量不到基準字 {BASELINE_REF} 的墨跡")
+        if ref[3] >= REF_SPLIT - 1:
+            raise SystemExit(f"基準字墨跡右緣 {ref[3]} 太靠近分界 {REF_SPLIT}")
+        ref_tops.append(ref[0])
+
+    # 每個字模自己的墨跡邊界，縱向已經扣掉該格基準字的頂端，因此全部同基線。
+    extents = []
+    for index in range(len(chars)):
+        box = ink_box(index, REF_SPLIT, CELL_PITCH - DRAW_MARGIN)
+        if box is None:
+            extents.append(None)
+            continue
+        t, b, l, r = box
+        extents.append((t - ref_tops[index], b - ref_tops[index],
+                        l - REF_SPLIT, r - REF_SPLIT))
+
+    top, bottom, left, right = height, -height, width, -width
+    for e in extents:
+        if e is None:
+            continue
+        top, bottom = min(top, e[0]), max(bottom, e[1])
+        left, right = min(left, e[2]), max(right, e[3])
 
     oversize = [(chars[i], e) for i, e in enumerate(extents)
                 if e and (e[1] - e[0] + 1 > cell_h or e[3] - e[2] + 1 > args.cell)]
@@ -233,8 +287,8 @@ def main() -> int:
     pixels = bytearray(sheet_w * sheet_h * 4)
     glyphs = []
     for index, ch in enumerate(chars):
-        ox = (index % columns) * CELL_PITCH + DRAW_MARGIN + glyph_xoff(index)
-        oy = (index // columns) * CELL_PITCH + DRAW_MARGIN + yoff
+        ox = (index % columns) * CELL_PITCH + DRAW_MARGIN + REF_SPLIT + glyph_xoff(index)
+        oy = (index // columns) * CELL_PITCH + DRAW_MARGIN + ref_tops[index] + yoff
         cx = (index % columns) * cell
         cy = (index // columns) * cell_h
         bits, ink_right = [], -1
