@@ -22,6 +22,19 @@ const (
 	RoadTileB = 0x25
 )
 
+// walkBits 是磚塊擋不擋**路**的位元圖，原樣抄自 DGROUP 0x0FC8 十個 byte
+// （`sub_24E2B:0x24ED3`）。取位元的方式與 sightBits 相同。這是與擋視線
+// （0x10CE）不同的另一張表：例如磚 0 擋視線但不擋路。
+var walkBits = [10]byte{0x00, 0x10, 0x9A, 0xFF, 0xF1, 0xFF, 0x17, 0xFF, 0xD0, 0x7F}
+
+// BlocksMovement 回報一塊磚擋不擋路。
+func BlocksMovement(tile int) bool {
+	if tile < 0 || tile >= len(walkBits)*8 {
+		return true
+	}
+	return walkBits[tile/8]&(0x80>>uint(tile%8)) != 0
+}
+
 // Blocks 回報一塊磚擋不擋視線。
 func Blocks(tile int) bool {
 	if tile < 0 || tile >= len(sightBits)*8 {

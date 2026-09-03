@@ -37,7 +37,35 @@ const (
 	// MissUnarmedRecord／MissWeaponRecord 是面前沒有人時揮空那兩句。
 	MissUnarmedRecord = 0x11F
 	MissWeaponRecord  = 0x120
+	// BlockedRecord／MovedRecord 是移動走不動與走了一步那兩句（RE-085）。
+	BlockedRecord = 0x10A
+	MovedRecord   = 0x10B
 )
+
+// 戰場上走得到的範圍：兩軸都夾在 4…0x3B（`sub_26384:0x2650B`）。
+// 陣列是 64×64，但最外圈四格進不去。
+const (
+	FieldMin = 4
+	FieldMax = 0x3B
+)
+
+// 移動方式的第一個圖號；方式 = 圖號 − MoveFormBase，0x35 會落成負數再換成 5。
+const MoveFormBase = 0x3C
+
+// MountingForm 是會把 Flag1E 設起來的第一個移動方式（`0x263BD`）。
+const MountingForm = 3
+
+// StuckTile 是 Flag1E 非零時腳下踩到就走不動的磚（`0x2647D`）。
+const StuckTile = 0x0C
+
+// MoveForm 把攻擊選項欄放的移動方式圖號換成方式編號 0…5（`0x263A6`）。
+func MoveForm(style int) int {
+	form := style - MoveFormBase
+	if form < 0 {
+		return 5
+	}
+	return form
+}
 
 // CmdFlinch 是怯戰檢定沒過時被換上的指令碼（`0x2016A`）。
 const CmdFlinch = 0x0B
@@ -235,8 +263,72 @@ func (s *State) act(i int, rng Rand) ActResult {
 	case 0:
 		out.Message = NothingRecord
 		return out
+	case CmdMove, CmdDismount:
+		return s.move(i)
 	}
-	// 移動、撿、丟與背包那幾手的內容還沒解完（SPEC-010 末段），不假裝做過。
+	// 撿、丟與背包那幾手的內容還沒解完（SPEC-010 末段），不假裝做過。
 	out.Unimplemented = true
 	return out
+}
+
+// move 是移動那一手（`sub_26384`，RE-085）。一次只走一格，走不動就印記錄 0x10A。
+func (s *State) move(i int) ActResult {
+	a := &s.Actors[i]
+	out := ActResult{Actor: i, Command: a.Command, Target: -1}
+	// 方式 3…5 會把 Flag1E 設起來（`0x263BD`）。
+	if MoveForm(a.Style) > MountingForm-1 {
+		a.Flag1E = 1
+	}
+	if a.Facing < 0 || a.Facing >= len(ring0) {
+		out.Message = BlockedRecord
+		return out
+	}
+	step := ring0[a.Facing]
+	x, y := a.X+step.Row, a.Y+step.Col
+	if s.moveBlocked(i, x, y) {
+		out.Message = BlockedRecord
+		return out
+	}
+	a.X, a.Y = x, y
+	out.Message = MovedRecord
+	return out
+}
+
+// moveBlocked 是那四道判斷（RE-085）：地形、腳下、有人、界限。
+func (s *State) moveBlocked(i, x, y int) bool {
+	a := s.Actors[i]
+	// 界限：兩軸都要落在 4…0x3B。
+	if x < FieldMin || x > FieldMax || y < FieldMin || y > FieldMax {
+		return true
+	}
+	// 地形。Flag1E 非零時只有三種磚真的擋得住。
+	if s.Field != nil {
+		tile := s.Field.At(x, y)
+		if BlocksMovement(tile) {
+			if a.Flag1E == 0 {
+				return true
+			}
+			if (tile > 0x1F && tile < 0x23) || tile == 0x2E || tile > 0x37 {
+				return true
+			}
+		}
+	}
+	// 腳下：Flag1E 非零時踩到 0x0C 就走不動。
+	if a.Flag1E != 0 && s.Field != nil && s.Field.At(a.X, a.Y) == StuckTile {
+		return true
+	}
+	// 有人：沒有 Flag1E 的擋沒有 Flag1E 的，有的擋有的。
+	for j := range s.Actors {
+		if j == i {
+			continue
+		}
+		b := s.Actors[j]
+		if b.Side == SideEmpty || b.Down() || b.X != x || b.Y != y {
+			continue
+		}
+		if (a.Flag1E == 0) == (b.Flag1E == 0) {
+			return true
+		}
+	}
+	return false
 }

@@ -191,10 +191,123 @@ func TestActDispatch(t *testing.T) {
 	}
 	// 還沒實作的那幾手要被標出來，不能靜靜跳過。
 	s = newState()
-	s.Actors[0].Command = CmdMove
+	s.Actors[0].Command = CmdPickUp
 	r, _ = s.Act(&fixedRoll{values: []int{50}})
 	if !r.Unimplemented {
-		t.Fatal("移動這一手應該標成還沒實作")
+		t.Fatal("撿東西這一手應該標成還沒實作")
+	}
+}
+
+// 移動方式的圖號換算：0x3C…0x40 是 0…4，0x35 落成負數再換成 5（`0x263A6`）。
+func TestMoveForm(t *testing.T) {
+	want := map[int]int{0x3C: 0, 0x3D: 1, 0x3E: 2, 0x3F: 3, 0x40: 4, 0x35: 5}
+	for style, form := range want {
+		if got := MoveForm(style); got != form {
+			t.Errorf("圖號 %#x 應該是方式 %d，得到 %d", style, form, got)
+		}
+	}
+}
+
+// 移動一次只走一格，而且方式 3 起會把 Flag1E 設起來（RE-085）。
+func TestMoveOneStep(t *testing.T) {
+	s := &State{Actors: make([]Actor, 1)}
+	s.Actors[0] = Actor{Side: SideParty, X: 20, Y: 20, Facing: 2,
+		Threshold: 100, Command: CmdMove, Style: 0x3C}
+	s.Actors[0].SetParts()
+	s.Exec.Order = []int{0}
+	r, ok := s.Act(&fixedRoll{values: []int{50}})
+	if !ok || r.Message != MovedRecord {
+		t.Fatalf("應該走得動並印 %#x，得到 %#x", MovedRecord, r.Message)
+	}
+	// 方向 2 是右＝欄 +1。
+	if s.Actors[0].X != 20 || s.Actors[0].Y != 21 {
+		t.Fatalf("應該走到 (20, 21)，得到 (%d, %d)", s.Actors[0].X, s.Actors[0].Y)
+	}
+	if s.Actors[0].Flag1E != 0 {
+		t.Fatal("方式 0 不該把 Flag1E 設起來")
+	}
+	// 方式 3 起會設 Flag1E。
+	s.Exec.Turn = 0
+	s.Actors[0].Style = 0x3F
+	s.Act(&fixedRoll{values: []int{50}})
+	if s.Actors[0].Flag1E != 1 {
+		t.Fatalf("方式 3 應該把 Flag1E 設成 1，得到 %d", s.Actors[0].Flag1E)
+	}
+}
+
+// 界限是 4…0x3B，最外圈四格進不去（`0x2650B`）。
+func TestMoveClampedToField(t *testing.T) {
+	for _, c := range []struct {
+		x, y, facing int
+	}{
+		{FieldMin, 20, 0},  // 往上出界
+		{20, FieldMin, 6},  // 往左出界
+		{FieldMax, 20, 4},  // 往下出界
+		{20, FieldMax, 2},  // 往右出界
+	} {
+		s := &State{Actors: make([]Actor, 1)}
+		s.Actors[0] = Actor{Side: SideParty, X: c.x, Y: c.y, Facing: c.facing,
+			Threshold: 100, Command: CmdMove, Style: 0x3C}
+		s.Actors[0].SetParts()
+		s.Exec.Order = []int{0}
+		r, _ := s.Act(&fixedRoll{values: []int{50}})
+		if r.Message != BlockedRecord {
+			t.Errorf("(%d, %d) 往 %d 應該走不動，得到 %#x", c.x, c.y, c.facing, r.Message)
+		}
+		if s.Actors[0].X != c.x || s.Actors[0].Y != c.y {
+			t.Errorf("走不動卻動了：(%d, %d)", s.Actors[0].X, s.Actors[0].Y)
+		}
+	}
+}
+
+// 誰擋誰：沒有 Flag1E 的擋沒有 Flag1E 的，有的擋有的（`0x2649C` 的遮罩 8／4）。
+func TestMoveBlockedByActor(t *testing.T) {
+	build := func(mine, theirs int) *State {
+		s := &State{Actors: make([]Actor, 2)}
+		s.Actors[0] = Actor{Side: SideParty, X: 20, Y: 20, Facing: 2,
+			Threshold: 100, Command: CmdMove, Style: 0x3C, Flag1E: mine}
+		s.Actors[0].SetParts()
+		s.Actors[1] = Actor{Side: SideMonster, X: 20, Y: 21,
+			Threshold: 100, Flag1E: theirs}
+		s.Actors[1].SetParts()
+		s.Exec.Order = []int{0}
+		return s
+	}
+	// 兩邊都沒有 Flag1E：擋。
+	s := build(0, 0)
+	if r, _ := s.Act(&fixedRoll{values: []int{50}}); r.Message != BlockedRecord {
+		t.Errorf("同類應該擋住，得到 %#x", r.Message)
+	}
+	// 我沒有、對方有：不擋。注意移動方式 0x3C 不會改我的 Flag1E。
+	s = build(0, 1)
+	if r, _ := s.Act(&fixedRoll{values: []int{50}}); r.Message != MovedRecord {
+		t.Errorf("不同類不該擋，得到 %#x", r.Message)
+	}
+	// 兩邊都有：擋。用方式 0x3F 讓自己的 Flag1E 也是 1。
+	s = build(1, 1)
+	s.Actors[0].Style = 0x3F
+	if r, _ := s.Act(&fixedRoll{values: []int{50}}); r.Message != BlockedRecord {
+		t.Errorf("同類應該擋住，得到 %#x", r.Message)
+	}
+}
+
+// 擋路與擋視線是兩張不同的位元圖（RE-085）。
+func TestBlocksMovementDiffersFromSight(t *testing.T) {
+	// 磚 0 擋視線但不擋路。
+	if !Blocks(0) || BlocksMovement(0) {
+		t.Error("磚 0 應該擋視線但不擋路")
+	}
+	// 牆（0x29）兩張表都擋。
+	if !Blocks(0x29) || !BlocksMovement(0x29) {
+		t.Error("磚 0x29 兩張表都該擋")
+	}
+	// 草地（0x09）兩張表都不擋。
+	if Blocks(0x09) || BlocksMovement(0x09) {
+		t.Error("磚 0x09 兩張表都不該擋")
+	}
+	// 超出範圍一律當成擋。
+	if !BlocksMovement(-1) || !BlocksMovement(80) {
+		t.Error("超出範圍應該當成擋")
 	}
 }
 
