@@ -94,6 +94,22 @@ type questBattle struct {
 	tiles *ui.BattleTiles
 }
 
+// battleMember 把城鎮那一側的隊員換成戰鬥要用的欄位（RE-080）：戰鬥等級由
+// 四列武器的攻防原始值算出來，先攻要洞察，昏迷門檻要體型與健康。
+func battleMember(m town.Member) battle.Member {
+	out := battle.Member{Name: m.Name, Wounds: m.Wounds}
+	if m.Sheet == nil {
+		return out
+	}
+	for _, w := range m.Sheet.Weapons {
+		out.Skills = append(out.Skills, w.OffenceRaw, w.DefenceRaw)
+	}
+	out.Foresight = m.Sheet.Stats[town.StatForesight]
+	out.Size = m.Sheet.Stats[town.StatSize]
+	out.Health = m.Sheet.Stats[town.StatHealth]
+	return out
+}
+
 // nonEmptyLines 去掉記錄拆行之後的空列。
 func nonEmptyLines(lines []string) []string {
 	out := lines[:0:0]
@@ -350,11 +366,11 @@ func applyPlayToken(s *town.Session, token string) error {
 // playToken 把腳本 token 交給目前掌管畫面的那個狀態機：人在城裡就是城鎮，
 // 走出城門之後就是野外。
 func (g *game) playToken(token string) error {
-	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場；戰場的回合結構還沒實作
-	// （RE-079），所以再按一個鍵就回野外。
+	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場，順序照先攻排（RE-080）；
+	// 戰場上的指令還沒解完，所以再按一個鍵就回野外。
 	if g.quest != nil && g.quest.state != nil {
 		if g.quest.state.Stage == battle.StageEncounter {
-			g.quest.state.Continue()
+			g.quest.state.Continue(g.quest.state.Rand)
 			return nil
 		}
 		g.quest.state = nil
@@ -1003,6 +1019,8 @@ func main() {
 		"assets/original-derived-png/ega/BATTLE/battle-map-%02d.png", "戰場格子陣列")
 	questPath := flag.String("quest-sites",
 		"assets/original-derived-data/quest-sites.json", "任務地點 typed data")
+	monsterPath := flag.String("monsters",
+		"assets/original-derived-data/monsters.json", "怪物 typed data")
 	worldPos := flag.String("world-pos", "", "覆寫野外世界座標，格式 X,Y")
 	worldSub := flag.String("world-sub", "", "覆寫野外次格座標，格式 次格X,次格Y")
 	worldWeather := flag.Int("world-weather", 0, "天候組 0…5")
@@ -1597,9 +1615,15 @@ func main() {
 		// 野外畫面的隊員格畫的是實際隊伍，不是戶外樣本裡那一份。
 		worldPartyState = playSession.Party
 		// 任務地點：走進去而且隊上有人帶著那個任務，就蓋出敘述與「Will you partake?」
-		// （RE-079）。答應之後的戰鬥還沒實作，這一版只把提示做完。
+		// （RE-079）。答應之後進戰場，回合順序照 RE-080 的先攻排；
+		// 指令（攻擊、移動）還沒解完，因此這一版只到「看得到、逃得掉」。
 		if worldSessionState != nil {
 			sites, err := battle.LoadSites(*questPath)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			monsters, err := battle.LoadMonsters(*monsterPath)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
@@ -1627,7 +1651,7 @@ func main() {
 				}
 				members := make([]battle.Member, 0, len(playSession.Party))
 				for _, m := range playSession.Party {
-					members = append(members, battle.Member{Name: m.Name})
+					members = append(members, battleMember(m))
 				}
 				atlas, err := loadBattlePNG(*battleTiles)
 				if err != nil {
@@ -1647,7 +1671,8 @@ func main() {
 				// 任務地圖不重生地形，但照樣灑一次樹叢（`sub_1E3A8:0x1E5E5`）。
 				field.Scatter(&lcg{state: uint32(*seed)})
 				quest.tiles = ui.NewBattleTiles(atlas)
-				st := battle.NewQuest(site, members, field)
+				st := battle.NewQuest(site, members, monsters.At(site.Monster), field)
+				st.Rand = &lcg{state: uint32(*seed)}
 				st.Stage = battle.StageEncounter
 				quest.state = st
 				quest.lines = nonEmptyLines(bank.Lines(town.BankUI,

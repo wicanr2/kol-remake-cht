@@ -60,7 +60,7 @@ const (
 	SideEmpty
 )
 
-// Actor 是一名參戰者。欄位名對應原版記錄的位移：
+// Actor 是一名參戰者。欄位名對應原版記錄的位移（RE-080）：
 // Kind 是 +0x00（隊員填 0x13）、Side 是 +0x01、X／Y 是 +0x1F／+0x20。
 type Actor struct {
 	Kind  int
@@ -68,8 +68,24 @@ type Actor struct {
 	X, Y  int
 	Name  string
 	Level int
+	// Foresight 是 +0x0A，先攻要用；Size 是 +0x0B。
+	Foresight int
+	Size      int
+	// Threshold 是 +0x10 的昏迷門檻，Damage 是 +0x0E 的累積傷害。
+	Threshold int
+	Damage    int
+	// Head…LeftLeg 是六個部位剩下的血量，順序同命中部位（+0x11 起每兩個 byte 一組）。
+	Head, Chest, RightArm, LeftArm, RightLeg, LeftLeg int
 	// Member 是隊伍那一側對應到哪一個隊員；敵人是 −1。
 	Member int
+}
+
+// SetParts 依昏迷門檻填好六個部位的血量。
+func (a *Actor) SetParts() {
+	p := Parts(a.Threshold)
+	a.Head, a.Chest = p[0], p[1]
+	a.RightArm, a.LeftArm = p[2], p[3]
+	a.RightLeg, a.LeftLeg = p[4], p[5]
 }
 
 // PartyKind 是隊員在記錄 +0x00 填的值（`sub_1E3A8:0x1E78D`）。

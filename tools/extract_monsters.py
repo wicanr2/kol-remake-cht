@@ -12,8 +12,9 @@
 
 怪物本身是 `TOWN0` 的 payload 5…36，一筆 512 byte，第 0 個 byte 是名稱長度、
 名稱從第 1 個 byte 起（`sub_2A4E5:0x2A64D` 把它讀進 `byte_39836`，
-畫的時候 `sub_1BA60(0xB967, 長度)`）。這一輪只解出名稱與兩張遮罩；
-其餘欄位要等戰鬥解出來才有意義，因此不寫進來。
+畫的時候 `sub_1BA60(0xB967, 長度)`）。名稱之後 +0x11 起
+是六個屬性（力量、快捷、洞察、體型、健康、智力），戰鬥的先攻與昏迷門檻
+從這裡取（RE-080）。
 
   python3 tools/extract_monsters.py --out assets/original-derived-data/monsters.json
 """
@@ -37,6 +38,11 @@ TABLE_PAYLOAD, FIRST_MONSTER_PAYLOAD, MONSTER_COUNT = 4, 5, 32
 TERRAIN_MASKS, SEASON_MASKS = 0x40, 0x60
 NIGHT_OFFSET, SEASON_COUNT, TERRAIN_COUNT = 0x20, 4, 8
 NAME_LIMIT = 24
+# 怪物記錄的屬性欄位（RE-080）。名稱欄固定 16 byte，屬性從 +0x11 起：
+# `sub_2215A` 把 +0x11…+0x16 搬進參戰者記錄的 +0x08…+0x0C，
+# `sub_21AC4` 另外用 +0x15 算昏迷門檻。
+STAT_OFFSETS = {"strength": 0x11, "quickness": 0x12, "foresight": 0x13,
+                "size": 0x14, "health": 0x15, "intellect": 0x16}
 TERRAIN_NAMES = ("DESERT", "RIVER", "SWAMP", "HILL",
                  "ROAD", "FOREST", "SHORE", "PLAINS")
 SEASON_NAMES = ("WINTER", "SPRING", "SUMMER", "AUTUMN")
@@ -90,6 +96,7 @@ def main() -> int:
             "terrain": bits(terrain, TERRAIN_COUNT, TERRAIN_NAMES),
             "season_mask": season,
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
+            **{name: rec[off] for name, off in STAT_OFFSETS.items()},
             "record_sha256": hashlib.sha256(rec).hexdigest(),
         })
 

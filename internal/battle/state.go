@@ -42,6 +42,12 @@ type Member struct {
 	Name string
 	// Worn 是六個裝備欄的名稱，順序同記錄 0x101：武器、頭、軀幹、腿、盾、腰帶。
 	Worn [6]string
+	// Skills 是四列武器的攻防原始值，用來算戰鬥等級（RE-080）。
+	Skills []int
+	// Foresight／Size／Health 是先攻與昏迷門檻要用的三個屬性（角色記錄 0x21、0x1F、0x20）。
+	Foresight, Size, Health int
+	// Wounds 是開場就帶著的傷（角色記錄 0x1B）。
+	Wounds int
 }
 
 // State 是一場戰鬥。
@@ -52,12 +58,16 @@ type State struct {
 	Field  *Field
 	// Party 是隊伍那一側的顯示資料，索引同 Actors 的前六個位置。
 	Party []Member
-	// Cursor 是目前輪到誰；這一版固定指向隊伍第一名。
+	// Cursor 是目前輪到誰：Round.Order 走到的那一名的索引。
 	Cursor int
+	// Round 是回合與出手順序。
+	Round Round
+	// Rand 是先攻要用的亂數來源。
+	Rand Rand
 }
 
 // NewQuest 依任務地點的記錄擺好一場戰鬥。
-func NewQuest(site *Site, party []Member, field *Field) *State {
+func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State {
 	s := &State{Site: site, Stage: StageIntro, Field: field, Party: party}
 	s.Actors = make([]Actor, MaxActors)
 	for i := range s.Actors {
@@ -68,9 +78,13 @@ func NewQuest(site *Site, party []Member, field *Field) *State {
 		if i >= PartySlots || i >= len(site.PartyX) || i >= len(site.PartyY) {
 			break
 		}
+		m := party[i]
 		s.Actors[i] = Actor{Kind: PartyKind, Side: SideParty,
 			X: site.PartyX[i], Y: site.PartyY[i],
-			Name: party[i].Name, Member: i}
+			Name: m.Name, Member: i,
+			Level: CombatLevel(m.Skills), Foresight: m.Foresight, Size: m.Size,
+			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds}
+		s.Actors[i].SetParts()
 	}
 	for i := 0; i < site.Count && i < len(site.MonsterX) && i < len(site.MonsterY); i++ {
 		slot := PartySlots + i
@@ -79,7 +93,10 @@ func NewQuest(site *Site, party []Member, field *Field) *State {
 		}
 		s.Actors[slot] = Actor{Kind: site.Monster, Side: SideMonster,
 			X: site.MonsterX[i], Y: site.MonsterY[i],
-			Name: site.MonsterName, Level: site.Level, Member: -1}
+			Name: site.MonsterName, Level: site.Level, Member: -1,
+			Foresight: monster.Foresight, Size: monster.Size,
+			Threshold: Threshold(monster.Size, monster.Health)}
+		s.Actors[slot].SetParts()
 	}
 	return s
 }
@@ -94,10 +111,15 @@ func (s *State) Answer(yes bool) bool {
 		}
 		s.Stage = StageEncounter
 	case StageField:
-		// 回合還沒實作：答應開下一回合也只是停在原地，答否才問要不要逃。
-		if !yes {
-			s.Stage = StageFlee
+		// 答應就重排下一回合的順序；答否才問要不要逃。
+		if yes {
+			if s.Rand != nil {
+				s.BeginRound(s.Rand)
+			}
+			s.AdvanceToParty()
+			break
 		}
+		s.Stage = StageFlee
 	case StageFlee:
 		if yes {
 			s.Stage = StageDone
@@ -108,11 +130,14 @@ func (s *State) Answer(yes bool) bool {
 	return false
 }
 
-// Continue 是滿版怪物圖上按下的那一個鍵。
-func (s *State) Continue() {
-	if s.Stage == StageEncounter {
-		s.Stage = StageField
+// Continue 是滿版怪物圖上按下的那一個鍵：進戰場，並排出第一回合的順序。
+func (s *State) Continue(rng Rand) {
+	if s.Stage != StageEncounter {
+		return
 	}
+	s.Stage = StageField
+	s.BeginRound(rng)
+	s.AdvanceToParty()
 }
 
 // Leader 回傳目前顯示裝備欄的那一名隊員；沒有就回 nil。

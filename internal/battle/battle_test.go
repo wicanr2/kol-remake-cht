@@ -29,9 +29,14 @@ func TestSiteTaken(t *testing.T) {
 }
 
 // 站位直接照記錄擺：前六個位置是隊伍，其餘是敵人。
+// testMonster 是任務地點 5 的 BINDERAK：洞察 70、體型 100、健康 110。
+func testMonster() Monster {
+	return Monster{Index: 19, Name: "BINDERAK", Foresight: 70, Size: 100, Health: 110}
+}
+
 func TestNewQuestPlacement(t *testing.T) {
 	party := []Member{{Name: "Poontang"}, {Name: "Theodoric"}}
-	s := NewQuest(testSite(), party, NewField())
+	s := NewQuest(testSite(), party, testMonster(), NewField())
 	if s.Stage != StageIntro {
 		t.Fatalf("開場停在 %v", s.Stage)
 	}
@@ -54,16 +59,16 @@ func TestNewQuestPlacement(t *testing.T) {
 
 // 開場問「要不要參一腳」，答否就直接結束；答應之後走到滿版怪物圖再到戰場。
 func TestStages(t *testing.T) {
-	s := NewQuest(testSite(), []Member{{Name: "Poontang"}}, NewField())
+	s := NewQuest(testSite(), []Member{{Name: "Poontang"}}, testMonster(), NewField())
 	if !s.Answer(false) || s.Stage != StageDone {
 		t.Fatalf("答否之後停在 %v", s.Stage)
 	}
-	s = NewQuest(testSite(), []Member{{Name: "Poontang"}}, NewField())
+	s = NewQuest(testSite(), []Member{{Name: "Poontang"}}, testMonster(), NewField())
 	s.Answer(true)
 	if s.Stage != StageEncounter {
 		t.Fatalf("答應之後停在 %v", s.Stage)
 	}
-	s.Continue()
+	s.Continue(&cornerRand{})
 	if s.Stage != StageField {
 		t.Fatalf("讀完之後停在 %v", s.Stage)
 	}

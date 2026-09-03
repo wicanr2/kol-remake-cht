@@ -15,6 +15,7 @@ import json
 from pathlib import Path
 
 import ida_auto
+import ida_bytes
 import ida_funcs
 import ida_lines
 import idaapi
@@ -24,7 +25,24 @@ import idc
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 COMBAT_ENTRY = 0x1E3A8
 # 想逐條讀的函式；探針每次只倒這幾支，免得輸出爆掉。
-DUMP_FUNCTIONS = (0x22866, 0x223C0, 0x22278)
+DUMP_FUNCTIONS = (0x26AC2, 0x24FD3, 0x277F4, 0x24BB6, 0x24C35, 0x268D4, 0x26D3C)
+DGROUP_EA = 0x2DED0
+# 要原樣倒出來的 DGROUP 區塊：(位移, 位元組數)。
+DGROUP_DUMPS = (
+    (0x10CE, 16),   # 磚塊 → 擋視線／擋路的位元圖（`sub_25F8A:0x26011`）
+    (0x1312, 8),    # 位元遮罩 80 40 20 10 08 04 02 01
+    (0x00D4, 16),   # 傷害骰面數表（`sub_26D76:0x27502`）
+    (0x109C, 16),   # 拳腳可用性遮罩（`sub_26D76:0x27532`）
+    (0x110A, 128),  # 攻擊選項修正（一組 14 byte，`sub_26D76:0x2700B`）
+    (0x11B2, 128),  # 招架訊息表（一列 11 byte，`sub_26D76:0x273D1`）
+    (0x1200, 16),   # 武器攻擊式的傷害加成（`sub_26D76:0x27587`）
+    (0x0FD8, 32),   # 方向樣板：X 位移陣列的指標表
+    (0x0FE6, 32),   # 方向樣板：Y 位移陣列的指標表
+    (0x0B76, 16),   # 方向 → 視窗格（`sub_1E3A8:0x1F2E7`）
+    (0x0B60, 16),   # 一般遭遇的隊伍站位
+    (0x0B8C, 72),   # 敵人陣型 Y
+    (0x0BD4, 72),   # 敵人陣型 X
+)
 TEXT_DRAW = 0x1A8FD
 
 
@@ -128,6 +146,9 @@ def main() -> None:
         "level2": [summary(ea) for ea in level2],
         "text_records": text_records(known),
         "global_owners": owners_of,
+        "dgroup_dumps": {f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, n)
+                                          or b"").hex()
+                         for off, n in DGROUP_DUMPS},
         "entry_dump": dump,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
