@@ -62,6 +62,11 @@ const (
 // PartLost 是部位被打到廢掉的門檻：現值超過 0x7F 就算沒了。
 const PartLost = 0x80
 
+// IconOffset 是命令碼換成 KOLMPICS 圖號要加的數。原版 frame-887 的七格
+// （命令碼 7、0x21、0x29、0x24、0x15、0x27、5）逐像素命中 KOLMPICS 的
+// 10、36、44、39、24、42、8（RE-080）。
+const IconOffset = 3
+
 // weaponFormOption 是 `[0x0B42]`：武器攻擊式的圖號減 0x2A 之後查這張表。
 var weaponFormOption = [5]int{0, 1, 2, 5, 8}
 

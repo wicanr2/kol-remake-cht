@@ -112,11 +112,12 @@ func battleMember(m town.Member) battle.Member {
 	out.Nutrition = m.Sheet.Nutrition
 	// 手上那件武器（部位 9）與三件護甲、盾牌的重量：攻擊值、負重與骰子都要用。
 	if w := m.Worn[battle.WeaponSlot]; w != nil {
+		out.HasWeapon = true
 		out.Weapon = battle.Weapon{
-			Kind: w.Class, Base: w.Dice.Bonus,
+			Kind: w.Class, Base: w.Dice.Bonus, Code: dieCode(w.Record),
 			Weight: w.Encumbrance, TwoHand: w.Hands == 1,
 		}
-		out.Weapon.Count, out.Weapon.Sides = battle.DamageCode(dieCode(w.Record))
+		out.Weapon.Count, out.Weapon.Sides = battle.DamageCode(out.Weapon.Code)
 		// 手上武器的種類決定用哪一列武器技能（RE-080）。
 		for _, row := range m.Sheet.Weapons {
 			if row.Weapon == w.Class {
@@ -125,6 +126,10 @@ func battleMember(m town.Member) battle.Member {
 			}
 		}
 	}
+	// HasSecondItem 與 PackCount 還沒有 typed data 來源：前者是角色記錄 +0x190
+	// （穿戴欄的第十格，抽取器目前把部位 9 指到手上那件武器的 +0x30，沒有讀它），
+	// 後者是 0x200 起的十六筆物品欄。兩者都留成零值，所以指令列現在不會出現
+	// 0x16／0x25 與背包那一格（SPEC-010 末段）。
 	for _, pos := range battle.ArmourSlots {
 		if g := m.Worn[pos]; g != nil {
 			out.ArmourWeight += g.Encumbrance
@@ -328,6 +333,46 @@ func (c *spriteCache) Get(archive string, index int) (*ebiten.Image, error) {
 }
 
 // applyPlayToken 把腳本 token 套到城鎮狀態機；token 對應原版的鍵盤操作。
+// battleSteps 是戰場上方向鍵的位移：列是原版的 X、欄是 Y，
+// 斜走鍵沿用參考卡的 A／S／Z／X（SPEC-010）。
+var battleSteps = map[string][2]int{
+	"U": {-1, 0}, "D": {1, 0}, "L": {0, -1}, "R": {0, 1},
+	"A": {-1, -1}, "S": {-1, 1}, "Z": {1, -1}, "X": {1, 1},
+}
+
+// applyBattleToken 把腳本 token 交給戰鬥。遭遇那一張任何鍵進戰場；戰場上依
+// 規劃段停在哪一層決定方向鍵是移游標還是沒有作用，`<`／`>` 移圖示列的白框，
+// Return 是確定（SPEC-010）。整輪決定完停在「Begin next round?」，那一層沿用
+// 既有的是／否——執行段還沒實作，所以答應之後只是再排一輪規劃。
+func applyBattleToken(s *battle.State, token string) error {
+	if s.Stage == battle.StageEncounter {
+		s.Continue(s.Rand)
+		return nil
+	}
+	if s.Plan.Prompt == battle.PromptNextRound {
+		switch token {
+		case "RET", "SPACE":
+			s.Answer(true)
+		case "N":
+			s.Answer(false)
+		}
+		return nil
+	}
+	if step, ok := battleSteps[token]; ok {
+		s.MoveCursor(step[0], step[1], false)
+		return nil
+	}
+	switch token {
+	case "<":
+		s.MoveSelection(-1)
+	case ">":
+		s.MoveSelection(1)
+	case "RET", "SPACE":
+		s.Choose()
+	}
+	return nil
+}
+
 func applyPlayToken(s *town.Session, token string) error {
 	defer func() {
 		// 在城門選了 DOOR 就換到世界地圖。位置是這座城鎮該入城點在世界地圖上的座標。
@@ -407,15 +452,9 @@ func applyPlayToken(s *town.Session, token string) error {
 // playToken 把腳本 token 交給目前掌管畫面的那個狀態機：人在城裡就是城鎮，
 // 走出城門之後就是野外。
 func (g *game) playToken(token string) error {
-	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場，規劃順序照 RE-080 排；
-	// 戰場上的指令還沒解完，所以再按一個鍵就回野外。
+	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場，接著就是規劃段的指令列。
 	if g.quest != nil && g.quest.state != nil {
-		if g.quest.state.Stage == battle.StageEncounter {
-			g.quest.state.Continue(g.quest.state.Rand)
-			return nil
-		}
-		g.quest.state = nil
-		return nil
+		return applyBattleToken(g.quest.state, token)
 	}
 	if g.play != nil && g.play.LeftTown && g.worldSession != nil {
 		return applyWorldToken(g.worldSession, token)
@@ -952,6 +991,11 @@ const walkTicksPerFrame = 8
 // updatePlay 是城鎮這一段的輸入迴圈。鍵位照參考卡：方向鍵移動、
 // `<`／`>` 移動圖示列白框、Return 執行。
 func (g *game) updatePlay() {
+	// 戰鬥蓋在最上面：規劃段的指令列吃掉全部按鍵。
+	if g.quest != nil && g.quest.state != nil {
+		g.updateBattle()
+		return
+	}
 	g.walkTick++
 	if g.walkTick >= walkTicksPerFrame {
 		g.walkTick = 0
@@ -981,6 +1025,52 @@ func (g *game) updatePlay() {
 		inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
 		inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		g.play.Accept()
+	}
+}
+
+// updateBattle 是戰場的輸入迴圈（SPEC-010）。鍵位與城鎮一致：方向鍵與四個
+// 斜走鍵移游標、`<`／`>` 移圖示列白框、Return 確定。
+func (g *game) updateBattle() {
+	s := g.quest.state
+	if s.Stage == battle.StageEncounter {
+		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
+			inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
+			inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			s.Continue(s.Rand)
+		}
+		return
+	}
+	for _, k := range []struct {
+		key      ebiten.Key
+		row, col int
+	}{
+		{ebiten.KeyArrowUp, -1, 0}, {ebiten.KeyArrowDown, 1, 0},
+		{ebiten.KeyArrowLeft, 0, -1}, {ebiten.KeyArrowRight, 0, 1},
+		{ebiten.KeyA, -1, -1}, {ebiten.KeyS, -1, 1},
+		{ebiten.KeyZ, 1, -1}, {ebiten.KeyX, 1, 1},
+	} {
+		if inpututil.IsKeyJustPressed(k.key) {
+			s.MoveCursor(k.row, k.col, false)
+		}
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyComma) {
+		s.MoveSelection(-1)
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyPeriod) {
+		s.MoveSelection(1)
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
+		inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
+		inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		if s.Plan.Prompt == battle.PromptNextRound {
+			s.Answer(true)
+			return
+		}
+		s.Choose()
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyN) &&
+		s.Plan.Prompt == battle.PromptNextRound {
+		s.Answer(false)
 	}
 }
 

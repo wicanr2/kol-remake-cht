@@ -95,6 +95,19 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	cur := battle.FieldCursor
 	frame(dst, cur.X, cur.Y, cur.Width, cur.Height, town.ColourSelected)
 
+	// 選目標格時把游標那一格也框起來。
+	//
+	// **這一圈還沒對拍**：原版是拿 `sub_1C683` 把那一格的精靈重畫一次
+	// （`sub_24131:0x24603`），確切的視覺效果還沒解出來，這裡先用與白框同一個
+	// 顏色標出位置，等取到選目標格的原版畫格再改（SPEC-010 的驗證那一節）。
+	if s.Plan.Prompt == battle.PromptTarget {
+		c := s.Plan.Cursor
+		if c.Row >= 0 && c.Row < battle.ViewRows && c.Col >= 0 && c.Col < battle.ViewCols {
+			frame(dst, v.X+c.Col*battle.TileSide, v.Y+c.Row*battle.TileSide,
+				battle.TileSide, battle.TileSide, town.ColourSelected)
+		}
+	}
+
 	for _, box := range []struct{ X, Y, Width, Height int }{
 		{battle.SheetBox.X, battle.SheetBox.Y, battle.SheetBox.Width, battle.SheetBox.Height},
 		{battle.BodyBox.X, battle.BodyBox.Y, battle.BodyBox.Width, battle.BodyBox.Height},
@@ -102,6 +115,23 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 		shadow(dst, box.X, box.Y, box.Width, box.Height)
 		fill(dst, box.X, box.Y, box.Width, box.Height, town.ColourBoxEdge)
 		fill(dst, box.X+1, box.Y+1, box.Width-2, box.Height-2, town.ColourBoxFill)
+	}
+
+	// 指令圖示列。版面與城鎮同一組（RE-080：(32 + 32i, 171)、一格 24×20），
+	// KOLMPICS 的圖號是命令碼加三。
+	b := town.IconBar
+	for i, code := range s.Plan.Bar {
+		icon, err := sprites.Get("KOLMPICS", code+battle.IconOffset)
+		if err != nil {
+			return err
+		}
+		x := b.X + i*b.Step
+		draw(dst, icon, x, b.Y+1)
+		c := town.ColourIdle
+		if i == s.Plan.Selected {
+			c = town.ColourSelected
+		}
+		frame(dst, x, b.Y, b.Width, b.Height, c)
 	}
 	return nil
 }

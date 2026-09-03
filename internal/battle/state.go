@@ -78,6 +78,8 @@ type State struct {
 	Cursor int
 	// Round 是回合與出手順序。
 	Round Round
+	// Plan 是規劃段停在哪一層選單（SPEC-010）。
+	Plan Planning
 	// Rand 是排規劃順序要用的亂數來源。
 	Rand Rand
 }
@@ -151,6 +153,7 @@ func (s *State) Answer(yes bool) bool {
 				s.BeginPlanning(s.Rand)
 			}
 			s.AdvanceToParty()
+			s.BeginTurn()
 			break
 		}
 		s.Stage = StageFlee
@@ -172,6 +175,7 @@ func (s *State) Continue(rng Rand) {
 	s.Stage = StageField
 	s.BeginPlanning(rng)
 	s.AdvanceToParty()
+	s.BeginTurn()
 }
 
 // Leader 回傳目前顯示裝備欄的那一名隊員；沒有就回 nil。

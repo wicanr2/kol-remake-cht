@@ -1,9 +1,9 @@
 {
   "tool": "tools/verify_remake_parity.py",
   "plan": "world-quest",
-  "description": "任務地點的提示（RE-079）。走進 `payload3[0x323 + i]`／`[0x33B + i]` 那一格、而且隊上有人帶著那個任務時，原版把地圖視窗蓋掉，畫一個 (96,55)–(296,152) 的框（`sub_2A437`），印記錄裡那八列敘述，再問記錄 0xEA「Will you partake?」。第 5 個地點 (48,21) 的敘述與怪物（12 隻 3 級 BINDERAK）都在 payload 0x2A 裡。這一對只宣稱那個框：框外的日期、天候與地形標籤與原版不同——兩邊走到那一格的步數不一樣，時刻與天候因此不同，而天候本來就有亂數。答應之後原版把畫面換成滿版的怪物圖：(14,2)–(305,156) 是一個青色外框、黑底的框，怪物照 DGROUP+0x13B0 那十二個位置畫，上面再蓋一個黑底白框的文字框，印記錄 0xE9。那一張整頁 320×200 只差原版自己畫的滑鼠游標。",
-  "pair_count": 2,
-  "pass_count": 2,
+  "description": "任務地點的提示（RE-079）。走進 `payload3[0x323 + i]`／`[0x33B + i]` 那一格、而且隊上有人帶著那個任務時，原版把地圖視窗蓋掉，畫一個 (96,55)–(296,152) 的框（`sub_2A437`），印記錄裡那八列敘述，再問記錄 0xEA「Will you partake?」。第 5 個地點 (48,21) 的敘述與怪物（12 隻 3 級 BINDERAK）都在 payload 0x2A 裡。這一對只宣稱那個框：框外的日期、天候與地形標籤與原版不同——兩邊走到那一格的步數不一樣，時刻與天候因此不同，而天候本來就有亂數。答應之後原版把畫面換成滿版的怪物圖：(14,2)–(305,156) 是一個青色外框、黑底的框，怪物照 DGROUP+0x13B0 那十二個位置畫，上面再蓋一個黑底白框的文字框，印記錄 0xE9。那一張整頁 320×200 只差原版自己畫的滑鼠游標。再按一次空白鍵進戰場：視窗 (152,8) 起 9×9 格、一格 16×16，格子取自 `TOWN0` payload 0x3D+i 解 RLE 再轉置的 64×64 陣列，磚圖是 `KOLPICS` payload 8。任務戰場只畫得出視線通得到的格子（`sub_25D7A` 逐格走線，`sub_25F8A` 用 DGROUP 0x10CE 的位元圖判擋），看不到的畫磚塊 0x4A；參戰者疊在磚塊上（隊伍畫號碼圖、敵人共用一張），目前輪到的那一格外面再套一圈白框。進戰場之後底下那一列指令圖示由 `sub_228B7` 逐項看裝備、傷勢與腳下有什麼組出來（RE-082／SPEC-010）：Poontang 手上是 Long Spear（種類 0x9E），所以七格是 YES、武器攻擊、徒手、丟、撿、移動、休息，KOLMPICS 的圖號是命令碼加三，白框初值在第 0 格（`sub_11722:0x1178D`）。**對拍的基準是 frame-886**——frame-887 與 888 的圖示內容相同，但白框已經被 `>` 移到第 1、2 格。",
+  "pair_count": 4,
+  "pass_count": 4,
   "failure_count": 0,
   "pairs": [
     {
@@ -68,6 +68,190 @@
           "differing_pixels": 27
         }
       ],
+      "required_regions": []
+    },
+    {
+      "label": "戰場：地形、視線與參戰者",
+      "remake": "docs/verification/remake-parity/shots/world-quest/field.png",
+      "original": "docs/verification/character-ui/world-quest-run1/frames/frame-886.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 152,
+        "y": 8,
+        "width": 144,
+        "height": 144
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在戰場視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            160,
+            102,
+            9,
+            11
+          ],
+          "differing_pixels": 72
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 0 列第 2 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            184,
+            8,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 0 列第 4 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            216,
+            8,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 1 列第 1 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            168,
+            24,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 1 列第 2 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            184,
+            24,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 1 列第 3 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            200,
+            24,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 2 列第 1 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            168,
+            40,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 2 列第 3 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            200,
+            40,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 2 列第 6 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            248,
+            40,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 4 列第 6 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            248,
+            72,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 5 列第 3 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            200,
+            88,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 5 列第 5 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            232,
+            88,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        },
+        {
+          "name": "原版隨機灑的樹叢（視窗第 6 列第 7 欄）",
+          "reason": "進場時灑的樹叢是亂數（`sub_1E3A8:0x1E5E5`），兩邊亂數來源不同，位置因此不同。",
+          "rect": [
+            264,
+            104,
+            16,
+            16
+          ],
+          "differing_pixels": 83
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "戰場：主指令列七格",
+      "remake": "docs/verification/remake-parity/shots/world-quest/field.png",
+      "original": "docs/verification/character-ui/world-quest-run1/frames/frame-886.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 32,
+        "y": 170,
+        "width": 216,
+        "height": 22
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
       "required_regions": []
     }
   ]

@@ -142,7 +142,6 @@ def character_sheet(rec: bytes) -> dict:
         "rank": rec[RANK_OFFSET],
         "adventure_points": rec[ADVENTURE_OFFSET] << 8 | rec[ADVENTURE_OFFSET + 1],
         "movement_rate": rec[MOVEMENT_OFFSET],
-        "equipment": equipment(rec),
         "nutrition": rec[NUTRITION_OFFSET],
         "height_feet": feet,
         "height_inches": rest,
@@ -228,6 +227,9 @@ def main() -> int:
             "quests": list(data[base + QUEST_OFFSET:
                                 base + QUEST_OFFSET + QUEST_BYTES]),
             "sheet": character_sheet(data[base:base + SLOT_BYTES]) if name else None,
+            # 穿戴欄是角色記錄自己的欄位，不屬於 MIRROR 資料頁，所以放在槽位這一層
+            # （`internal/roster` 的 Slot.Equipment 就是照這個位置讀）。
+            "equipment": equipment(data[base:base + SLOT_BYTES]) if name else None,
         })
 
     occupied = [s["name"] for s in slots if s["occupied"]]
