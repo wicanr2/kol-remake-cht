@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 3289,
+  "total_frames": 3363,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -523,6 +523,21 @@
       "frame_dir": "docs/verification/character-ui/town-rest-two-run1/frames",
       "character_files_changed": [],
       "note": "兩人隊伍按 REST，用來確認住宿費不隨人數改變。"
+    },
+    {
+      "run": "town-mirror-run1",
+      "scenario": "town-mirror",
+      "description": "在旅店把白框移到 MIRROR 按下去，看角色資料頁的版面與它吃哪些鍵。純觀察，不修改也不保存角色。",
+      "receipt": "docs/verification/character-ui/town-mirror-run1/receipt.json",
+      "generated_utc": "2026-09-03T05:02:36Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 13,
+      "frame_count": 74,
+      "frame_dir": "docs/verification/character-ui/town-mirror-run1/frames",
+      "character_files_changed": [],
+      "note": "MIRROR 的角色資料頁；空白鍵、方向鍵都沒有反應，Return 與 Escape 都回城鎮。"
     }
   ]
 }

@@ -52,6 +52,7 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 | `play-the-game`／`town-icon-bar`／`town-icon-move`／`town-recruit-companion` | 8／12／13／16 | 單輪 | 無 |
 | `town-outdoor-move` | 14 | 單輪 | 無 |
 | `town-rest-save`／`town-rest-two` | 14／19 | 單輪 | `CHARDATA`／無 |
+| `town-mirror` | 13 | 單輪 | 無 |
 
 兩輪之間的差異全部落在三類本來就不可能逐 byte 相同的畫面：
 

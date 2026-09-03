@@ -261,6 +261,20 @@ SCENARIOS: dict[str, dict] = {
             step("選定第一名同伴之後", None, settle=4.0),
         ],
     },
+    "town-mirror": {
+        "description": "在旅店把白框移到 MIRROR 按下去，看角色資料頁的版面與"
+                       "它吃哪些鍵。純觀察，不修改也不保存角色。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格（MIRROR）", "Return", settle=4.0),
+            step("按下 MIRROR 之後", "space", settle=3.0),
+            step("按空白鍵之後", "Down", settle=3.0),
+            step("按向下之後", "Right", settle=3.0),
+            step("按向右之後", "Return", settle=3.0),
+            step("按 Return 之後", "Escape", settle=3.0),
+            step("按 Escape 之後", None, settle=4.0),
+        ],
+    },
     "town-rest-save": {
         "description": "在旅店把白框移到 REST 按下去，觀察「誰要留宿」的選單、"
                        "金幣不足會怎樣、以及選全隊之後那一問。會保存角色檔，"

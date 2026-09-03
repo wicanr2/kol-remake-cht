@@ -2631,3 +2631,122 @@ else:
 * **0x90–0x92 是三字母城鎮代碼，不是日期。** 讀出來是 `MIN`，與角色清單畫面
   右欄顯示的城鎮代碼相同；`sub_14DB1:0x15101` 寫進去的 `byte_349AE/AF/B0`
   因此是當下城鎮的代碼。原版記錄裡目前**沒有**定位到日期欄位。
+
+## RE-074：MIRROR 的角色資料頁——屬性是內部值的三分之二
+
+輸入與工具同 RE-070。新增探針 `tools/ida_probe_koltown_mirror.py`（三輪，
+分別倒出 `sub_15ABF`／`sub_16239` 與四支繪圖 helper，以及 DGROUP 的身高體重表）。
+原版收據 `docs/verification/character-ui/town-mirror-run1`。
+證據等級 `已證實`：每一個欄位都用原版存檔裡 Theodoric 的 byte 算過一次，
+與原版畫面上的數字逐項相同。
+
+### 建築內圖示的派工表
+
+`sub_11A93:0x13D06` 是一串 `cmp ax, N` 的比較鏈，`ax` 是圖示編號：
+
+| 編號 | 圖示 | 處理位址 |
+|---:|---|---|
+| 2 | DOOR | `0x12238` |
+| 3 | MOUTH | `0x1223B` |
+| 4 | LISTEN | `0x1254E` |
+| 5 | REST | `0x1264E`（RE-073） |
+| 6 | COMPANION | `0x12903` |
+| 9 | 買賣 | `0x1290B` |
+| 0Ah | 訓練 | `0x1318D` |
+| 0Bh | HEAL | `0x135EF` |
+| 0Ch | AWARD | `0x1375C` |
+| 0Dh | SCROLL | `sub_17318` |
+| 11h | MIRROR | `sub_15ABF`，回來時 `sub_152C6` 重畫城鎮 |
+
+### 八個屬性：畫面值是內部值的 100/150
+
+`sub_15ABF:0x15BCE` 起連續八次 `sub_161FC(值)`，每次都先把游標移到第 12 欄、
+往下 8 px，再用 `%3d` 印出來。前六個直接讀角色記錄，後兩個是算出來的：
+
+| 列 | 標籤（KOLDATA 記錄 73h） | 來源 |
+|---|---|---|
+| 1 | STRENGTH | `char[0x1D] × 100 / 150` |
+| 2 | QUICKNESS | `char[0x1E] × 100 / 150` |
+| 3 | HEALTH | `char[0x20] × 100 / 150` |
+| 4 | FORESIGHT | `char[0x21] × 100 / 150` |
+| 5 | CHARISMA | `char[0x22] × 100 / 150` |
+| 6 | INTELLECT | `char[0x23] × 100 / 150` |
+| 7 | BALANCE | `(char[0x23] + char[0x1D]) / 2 × 100 / 150` |
+| 8 | ENDURANCE | `(char[0x20] + char[0x1D]) / 2 × 100 / 150` |
+
+沒有出現在畫面上的 `char[0x1F]` 是體型。七個內部屬性因此是
+0x1D–0x23：力量、敏捷、體型、健康、先見、魅力、智力，與說明書
+`07-advanced-gamers.md` 的順序相同；說明書也明說「平衡是力量與智力的平均」、
+「耐力由力量與健康計算」，與上表兩條算式一致。
+
+Theodoric 的記錄是 130、100、116、102、103、94、109，套上去得
+86／66／68／68／62／72／79／77，與 `frame-073` 上的八個數字逐一相同。
+**畫面值是內部值的三分之二**——SPEC-005 說的「屬性是內部值，不是畫面值」
+在這裡有了確切的換算。
+
+### 抬頭：名字、性別、種族、職業、位階
+
+`sub_16239` 畫的那一塊：
+
+| 欄位 | 來源 | Theodoric |
+|---|---|---|
+| 名字 | 記錄位移 0 的 Pascal 字串，22 欄置中 | THEODORIC |
+| 性別 | KOLDATA 記錄 `char[0x1A] + 4`（4 男 5 女） | MALE |
+| 種族 | KOLDATA 記錄 `char[0x24]`（0…3 ＝ Human／Elven／Dwarven／Kelden） | KELDEN |
+| 職業 | `sub_14307(char[0x1C] + 6, 槽位)` 回傳的記錄，靠右對齊到第 31 欄 | CLIFF GUARD |
+| 位階（左） | KOLDATA 記錄 `0x74 + (char[0x29] / 5) × 5` | PEASANT |
+| 位階（右） | `char[0x29] % 5 != 0` 時再畫 `0x74 + char[0x29]` | SERF |
+
+身高與體重共用同一組 DGROUP 表，索引都是 `2 × char[0x1A] + char[0x24]`：
+
+```
+基準身高 = [DGROUP+0xB0 + idx]        ; 1C 10 1C 1C 1E 00 14
+呎  = (char[0x1F] - 基準身高) / 12
+吋  = (char[0x1F] - 基準身高) % 12    ; 印成 "%1d'%2d\""
+基準呎 = [DGROUP+0xBC + idx]          ; 03 03 02 03 03 00 03
+每呎磅 = [DGROUP+0xC8 + idx]          ; 41 32 4B 46 28 00 23
+體重 = (呎 - 基準呎) × 每呎磅 + 吋 × 4  ; 印成 "%3d LBS"
+```
+
+Theodoric：idx ＝ 0×2＋3 ＝ 3，體型 116，基準 28 → 88 吋 ＝ 7 呎 4 吋；
+體重 ＝ (7 − 3) × 70 + 4 × 4 ＝ 296。畫面上正是 `7' 4"` 與 `296 LBS`。
+
+### 武器熟練度：四列，名字是 5-bit 壓縮
+
+`0x15D2E` 起的迴圈跑 i ＝ 0…3，記錄位移 `0x4A + 13i`：
+
+```
+if char[0x4A + 13i] == 0: 跳過這一列
+名字 = 5-bit 解碼(char[0x4A + 13i …])
+OFF  = (char[0x53 + 13i] << 8 | char[0x54 + 13i]) / 10
+DEF  = (char[0x55 + 13i] << 8 | char[0x56 + 13i]) / 10
+```
+
+**武器名的 5-bit 版面與城鎮文字不同**：第一個 byte 的高 nibble 是字數，
+字元從第 4 個 bit 開始，每 5 個 bit 一個，1…26 對應 A…Z、0 是空白。
+`assets/original-derived-data/weapon-templates.json` 的 14 筆記錄全部解得出來：
+LONGSWORD、BATTLE AXE、LONG BOW、GREATSWORD、LT CROSSBOW、WAR HAMMER、
+SCIMITAR、HALBERD、BROADSWORD、SELF BOW、MACE、SHORT SPEAR、LONG SPEAR、ELF BOW。
+Theodoric 的第一列是 GREATSWORD、OFF 10、DEF 10（記錄裡是 100／100，除以 10），
+第二列的第一個 byte 是 0，所以畫面上只有一列。
+
+### 右下三欄與兩條長條
+
+| 欄位 | 來源 |
+|---|---|
+| GOLD CROWNS | `sub_14CCF` 讀出來的 24-bit 錢包（RE-073），`% 9ld` |
+| ADVENTURE PTS | `char[0x26] << 8 \| char[0x27]`，`%5u` |
+| MOVEMENT RATE | `char[0x1BA]`（0 時當成 20），印出字元 `0x41 + 值` |
+| 盔甲 | `char[0x1A0]` 非 0 時畫那個 Pascal 字串 |
+| 盾牌 | `char[0x1A8]` 非 0 時畫，欄位是 `0x26 - (值 >> 4)` |
+
+DAMAGE 與 NUTRITION 是兩條紅色長條，長度都是 `值 >> 3` 格（非 0 但不足一格
+算一格），矩形寬 `8 × 格數`：DAMAGE 讀傷勢 `char[0x1B]`，NUTRITION 讀 `char[0x9F]`
+——RE-073 的修道院治療正是把這兩個位移一起歸零。
+
+### 圖示列
+
+`0x1607E` 起：U-TURN（0Fh）、10h、6，再依條件加兩個——`char[0x200]` 非 0 加 12h，
+`char[0x1DD]`…`char[0x1E1]` 任一非 0 加 13h。選 U-TURN 離開回城鎮，
+其餘四個各自進另一個畫面（`sub_16986`、`sub_18D61`、`sub_166CC`、`sub_167D9`），
+本輪沒有再往下追。

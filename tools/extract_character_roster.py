@@ -50,6 +50,74 @@ FEMALE_OFFSET, WOUNDS_OFFSET = 0x1A, 0x1B
 GOLD_OFFSET, GOLD_BYTES = 0x2A, 3
 # 位移 0x2E／0x2F 是角色留宿的建築編號，來自建築 payload 的 0x3A／0x3B。
 BUILDING_OFFSET = 0x2E
+# MIRROR 角色資料頁用得到的欄位（RE-074）。位移 0x1D–0x23 是七個內部屬性，
+# 順序與說明書相同：力量、敏捷、體型、健康、先見、魅力、智力。
+STATS_OFFSET, STATS_COUNT = 0x1D, 7
+PROFESSION_OFFSET = 0x1C      # ＋6 之後查 KOLDATA；非人族與女性精靈再減 6
+RACE_OFFSET = 0x24            # 0…3 ＝ Human／Elven／Dwarven／Kelden
+RANK_OFFSET = 0x29            # KOLDATA 0x74 + (值/5)*5，餘數非 0 再畫 0x74 + 值
+ADVENTURE_OFFSET = 0x26       # 高位元組在前的 16-bit
+MOVEMENT_OFFSET = 0x1BA       # 0 當成 20，畫面上印 chr(0x41 + 值)
+NUTRITION_OFFSET = 0x9F
+ARMOUR_OFFSET, SHIELD_OFFSET = 0x1A0, 0x1A8
+WEAPON_OFFSET, WEAPON_STRIDE, WEAPON_ROWS = 0x4A, 13, 4
+WEAPON_SKILL_OFFSET = 0x53    # OFF 在 +0／+1、DEF 在 +2／+3，都是大端 16-bit 除以 10
+# 身高體重表在 KOLTOWN 的 DGROUP，索引都是 2 × 性別 + 種族（RE-074）。
+HEIGHT_BASE = (0x1C, 0x10, 0x1C, 0x1C, 0x1E, 0x00, 0x14)
+WEIGHT_BASE = (0x03, 0x03, 0x02, 0x03, 0x03, 0x00, 0x03)
+WEIGHT_PER_FOOT = (0x41, 0x32, 0x4B, 0x46, 0x28, 0x00, 0x23)
+
+
+def packed_name(raw: bytes) -> str:
+    """解 5-bit 壓縮的裝備名稱：第一個 byte 的高 nibble 是字數，
+    字元從第 4 個 bit 起每 5 個 bit 一個，1…26 對應 A…Z、0 是空白（RE-074）。"""
+    count = raw[0] >> 4
+    out = []
+    for i in range(count):
+        bit = 4 + i * 5
+        j = bit >> 3
+        word = (raw[j] << 8) | (raw[j + 1] if j + 1 < len(raw) else 0)
+        value = (word >> (11 - (bit & 7))) & 0x1F
+        out.append(chr(value | 0x40) if 1 <= value <= 26 else " ")
+    return "".join(out).rstrip()
+
+
+def character_sheet(rec: bytes) -> dict:
+    """MIRROR 那一頁要用的欄位。算式與版面見 RE-074。"""
+    gender, race = rec[FEMALE_OFFSET], rec[RACE_OFFSET]
+    index = 2 * gender + race
+    if index >= len(HEIGHT_BASE):
+        raise SystemExit(f"性別 {gender} 種族 {race} 的身高索引 {index} 超出表")
+    inches = rec[STATS_OFFSET + 2] - HEIGHT_BASE[index]
+    feet, rest = divmod(inches, 12)
+    weight = (feet - WEIGHT_BASE[index]) * WEIGHT_PER_FOOT[index] + rest * 4
+    weapons = []
+    for i in range(WEAPON_ROWS):
+        base = WEAPON_OFFSET + WEAPON_STRIDE * i
+        if rec[base] == 0:
+            continue
+        skill = WEAPON_SKILL_OFFSET + WEAPON_STRIDE * i
+        weapons.append({
+            "row": i,
+            "name": packed_name(rec[base:base + WEAPON_STRIDE]),
+            "offence": (rec[skill] << 8 | rec[skill + 1]) // 10,
+            "defence": (rec[skill + 2] << 8 | rec[skill + 3]) // 10,
+        })
+    return {
+        "stats": list(rec[STATS_OFFSET:STATS_OFFSET + STATS_COUNT]),
+        "race": race,
+        "profession": rec[PROFESSION_OFFSET],
+        "rank": rec[RANK_OFFSET],
+        "adventure_points": rec[ADVENTURE_OFFSET] << 8 | rec[ADVENTURE_OFFSET + 1],
+        "movement_rate": rec[MOVEMENT_OFFSET],
+        "nutrition": rec[NUTRITION_OFFSET],
+        "height_feet": feet,
+        "height_inches": rest,
+        "weight": weight,
+        "weapons": weapons,
+        "armour": packed_name(rec[ARMOUR_OFFSET:ARMOUR_OFFSET + 8]),
+        "shield": packed_name(rec[SHIELD_OFFSET:SHIELD_OFFSET + 8]),
+    }
 # 存檔的頭像檔：一格 760 byte，與模板庫同一種 packed-nibble 版面。
 CHARPICS_NAME = "Knights-of-legend/CHARPICS"
 PORTRAIT_BYTES = 760
@@ -124,6 +192,7 @@ def main() -> int:
                 data[base + GOLD_OFFSET:base + GOLD_OFFSET + GOLD_BYTES], "big"),
             "building": int.from_bytes(
                 data[base + BUILDING_OFFSET:base + BUILDING_OFFSET + 2], "big"),
+            "sheet": character_sheet(data[base:base + SLOT_BYTES]) if name else None,
         })
 
     occupied = [s["name"] for s in slots if s["occupied"]]
@@ -153,7 +222,11 @@ def main() -> int:
                    "gold_offset": GOLD_OFFSET, "gold_bytes": GOLD_BYTES,
                    "gold_rule": "高位元組在前的 24-bit 金幣（RE-073）",
                    "building_offset": BUILDING_OFFSET,
-                   "building_rule": "留宿建築的編號，來自建築 payload 的 0x3A／0x3B"},
+                   "building_rule": "留宿建築的編號，來自建築 payload 的 0x3A／0x3B",
+                   "stats_offset": STATS_OFFSET, "stats_count": STATS_COUNT,
+                   "stats_rule": "七個內部屬性：力量、敏捷、體型、健康、先見、魅力、智力；"
+                                 "畫面值是內部值 × 100 / 150（RE-074）",
+                   "sheet_rule": "MIRROR 角色資料頁的欄位與算式見 RE-074"},
         "location_rule": "畫面上的所在地欄是「10 byte 所在地 + 一個空白 + 3 byte 城鎮代碼」，"
                          "共 14 個字元；所在地欄不以 NUL 結尾，取固定長度。",
         "slots": slots,
