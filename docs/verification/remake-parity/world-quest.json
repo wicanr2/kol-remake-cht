@@ -1,9 +1,9 @@
 {
   "tool": "tools/verify_remake_parity.py",
   "plan": "world-quest",
-  "description": "任務地點的提示（RE-079）。走進 `payload3[0x323 + i]`／`[0x33B + i]` 那一格、而且隊上有人帶著那個任務時，原版把地圖視窗蓋掉，畫一個 (96,55)–(296,152) 的框（`sub_2A437`），印記錄裡那八列敘述，再問記錄 0xEA「Will you partake?」。第 5 個地點 (48,21) 的敘述與怪物（12 隻 3 級 BINDERAK）都在 payload 0x2A 裡。這一對只宣稱那個框：框外的日期、天候與地形標籤與原版不同——兩邊走到那一格的步數不一樣，時刻與天候因此不同，而天候本來就有亂數。",
-  "pair_count": 1,
-  "pass_count": 1,
+  "description": "任務地點的提示（RE-079）。走進 `payload3[0x323 + i]`／`[0x33B + i]` 那一格、而且隊上有人帶著那個任務時，原版把地圖視窗蓋掉，畫一個 (96,55)–(296,152) 的框（`sub_2A437`），印記錄裡那八列敘述，再問記錄 0xEA「Will you partake?」。第 5 個地點 (48,21) 的敘述與怪物（12 隻 3 級 BINDERAK）都在 payload 0x2A 裡。這一對只宣稱那個框：框外的日期、天候與地形標籤與原版不同——兩邊走到那一格的步數不一樣，時刻與天候因此不同，而天候本來就有亂數。答應之後原版把畫面換成滿版的怪物圖：(14,2)–(305,156) 是一個青色外框、黑底的框，怪物照 DGROUP+0x13B0 那十二個位置畫，上面再蓋一個黑底白框的文字框，印記錄 0xE9。那一張整頁 320×200 只差原版自己畫的滑鼠游標。",
+  "pair_count": 2,
+  "pass_count": 2,
   "failure_count": 0,
   "pairs": [
     {
@@ -34,6 +34,38 @@
             12
           ],
           "differing_pixels": 40
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "滿版怪物圖與記錄 0xE9",
+      "remake": "docs/verification/remake-parity/shots/world-quest/creatures.png",
+      "original": "docs/verification/character-ui/world-quest-run1/frames/frame-883.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面上畫游標，remake 沒有這個元素。",
+          "rect": [
+            159,
+            104,
+            12,
+            10
+          ],
+          "differing_pixels": 27
         }
       ],
       "required_regions": []

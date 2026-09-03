@@ -1,7 +1,7 @@
 {
   "name": "world-quest",
-  "description": "讀存檔開場在城 7 旅店門口（隊伍是 Poontang，她帶著第 5 個任務地點的旗標）。走到城鎮上緣出城，接著在野外往東走到 (48,21)：原版在那一格會蓋出任務敘述與「Will you partake?」，remake 走同一串按鍵也停在同一頁。中途會經過換日，CAMPING! 那一張按任何鍵收掉。全程只經過 town.Session 與 world.Session。存檔用 `tools/import_original_characters.py --names Poontang --location 7,3,57,8 --out workplace/saves/quest.json` 產生。",
-  "script": "R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R U U U U U U U U U U U U U",
+  "description": "讀存檔開場在城 7 旅店門口（隊伍是 Poontang，她帶著第 5 個任務地點的旗標）。走到城鎮上緣出城，接著在野外往東走到 (48,21)：原版在那一格會蓋出任務敘述與「Will you partake?」，remake 走同一串按鍵也停在同一頁；答應之後換成滿版的怪物圖。中途會經過換日，CAMPING! 那一張按任何鍵收掉。全程只經過 town.Session 與 world.Session。存檔用 `tools/import_original_characters.py --names Poontang --location 7,3,57,8 --out workplace/saves/quest.json` 產生。",
+  "script": "R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R U U U U U U U U U U U U U RET",
   "shot_dir": "docs/verification/player-path/world-quest",
   "size": [
     320,
@@ -13,6 +13,11 @@
       "step": 89,
       "identical_to": "docs/verification/remake-parity/shots/world-quest/intro.png",
       "note": "任務提示那一頁，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 90,
+      "identical_to": "docs/verification/remake-parity/shots/world-quest/creatures.png",
+      "note": "答應之後的滿版怪物圖，與已對拍的截圖逐 byte 相同"
     }
   ]
 }

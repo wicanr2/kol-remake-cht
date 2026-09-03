@@ -86,6 +86,23 @@ func (r *lcg) Roll(n int) int {
 	return int(r.next()>>16)%n + 1
 }
 
+// questBattle 把那一場戰鬥包起來，讓建構好的 game 與後面才設定的回呼共用同一份。
+type questBattle struct {
+	state *battle.State
+	lines []string
+}
+
+// nonEmptyLines 去掉記錄拆行之後的空列。
+func nonEmptyLines(lines []string) []string {
+	out := lines[:0:0]
+	for _, line := range lines {
+		if line != "" {
+			out = append(out, line)
+		}
+	}
+	return out
+}
+
 // partyHasQuest 回報隊上有沒有人帶著這個任務地點的任務（RE-079）。
 func partyHasQuest(party []town.Member, site *battle.Site) bool {
 	for _, m := range party {
@@ -331,6 +348,13 @@ func applyPlayToken(s *town.Session, token string) error {
 // playToken 把腳本 token 交給目前掌管畫面的那個狀態機：人在城裡就是城鎮，
 // 走出城門之後就是野外。
 func (g *game) playToken(token string) error {
+	// 戰鬥蓋在最上面：那一頁只認一個「讀完了」的鍵。
+	if g.quest != nil && g.quest.state != nil {
+		g.quest.state.Continue()
+		// 戰場與回合還沒實作（RE-079），看完怪物那一張就回野外。
+		g.quest.state = nil
+		return nil
+	}
 	if g.play != nil && g.play.LeftTown && g.worldSession != nil {
 		return applyWorldToken(g.worldSession, token)
 	}
@@ -496,6 +520,8 @@ type shotJob struct {
 type game struct {
 	worldState   *world.Screen
 	worldSession *world.Session
+	// quest 是走到任務地點之後開起來的那一場戰鬥；用指標是因為建構之後才會被填。
+	quest *questBattle
 	worldParty   []town.Member
 	sprites      *spriteCache
 	small        *font.Font
@@ -589,6 +615,10 @@ func (g *game) render() error {
 	case sceneFlow:
 		return g.renderFlow()
 	case scenePlay:
+		if g.quest != nil && g.quest.state != nil {
+			return ui.BattleEncounter(g.canvas.Image(), g.sprites, g.small,
+				g.quest.state, g.quest.lines)
+		}
 		if g.play.LeftTown && g.worldState != nil {
 			if g.strings != nil {
 				return ui.WorldCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings,
@@ -1171,6 +1201,8 @@ func main() {
 	var worldScreenState *world.Screen
 	var worldSessionState *world.Session
 	var worldPartyState []town.Member
+	// quest 是走到任務地點、答應之後開起來的那一場戰鬥。
+	quest := &questBattle{}
 	var outdoorState *town.Outdoor
 	if scene(*sceneName) == sceneOutdoor {
 		if outdoorState, err = town.LoadOutdoor(*outdoorPath); err != nil {
@@ -1555,6 +1587,23 @@ func main() {
 				}
 				return &world.QuestPrompt{Lines: site.Narrative, Ask: ask}
 			}
+			worldSessionState.OnQuestAnswer = func(yes bool) {
+				if !yes {
+					return
+				}
+				site := sites.At(worldScreenState.Travel.X, worldScreenState.Travel.Y)
+				if site == nil {
+					return
+				}
+				members := make([]battle.Member, 0, len(playSession.Party))
+				for _, m := range playSession.Party {
+					members = append(members, battle.Member{Name: m.Name})
+				}
+				quest.state = battle.NewQuest(site, members, battle.NewField())
+				quest.state.Stage = battle.StageEncounter
+				quest.lines = nonEmptyLines(bank.Lines(town.BankUI,
+					battle.QuestCreaturesRecord))
+			}
 		}
 		// 野外的時刻：隊伍最慢的那個移動率決定每步扣多少，換日補營養（RE-077）。
 		if worldScreenState != nil {
@@ -1625,6 +1674,7 @@ func main() {
 		worldState:   worldScreenState,
 		worldSession: worldSessionState,
 		worldParty:   worldPartyState,
+		quest:        quest,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)

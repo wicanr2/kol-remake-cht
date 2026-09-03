@@ -122,3 +122,45 @@ func (s *State) Leader() *Member {
 	}
 	return &s.Party[s.Cursor]
 }
+
+// 遭遇那一張滿版怪物圖的版面（`sub_2A975` 與 `sub_2B0FF:0x2B2E4`）。
+
+// ColourFieldEdge 是遭遇那一張外框的顏色：EGA 索引 3。
+var ColourFieldEdge = [3]uint8{0, 170, 170}
+
+// EncounterClear 是先清掉的那一塊。
+var EncounterClear = struct{ X, Y, Width, Height int }{X: 14, Y: 2, Width: 292, Height: 155}
+
+// EncounterBox 是文字框的黑底（`sub_1B779(3Ch, 0Ah, 0F8h, 26h, 0)`）；
+// EncounterFrame 是外面那一圈白框（`sub_1B6DC(3Dh, 9, 0F9h, 27h, 0Fh)`）。
+var (
+	EncounterBox   = struct{ X, Y, Width, Height int }{X: 60, Y: 10, Width: 189, Height: 29}
+	EncounterFrame = struct{ X, Y, Width, Height int }{X: 61, Y: 9, Width: 189, Height: 31}
+)
+
+// EncounterText 是文字的起點與行距（記錄 0xE9 自帶 `~V0B~H08`）。
+// 這一頁用的是 8×6 的小字型，行距 6。
+var EncounterText = struct{ X, Y, Step int }{X: 64, Y: 11, Step: 6}
+
+// MonsterSpots 是怪物畫在哪裡（DGROUP+0x13B0，一筆是 byte 欄與掃描列）。
+var MonsterSpots = [12][2]int{{15, 44}, {5, 44}, {25, 44}, {10, 54}, {20, 54},
+	{3, 64}, {15, 64}, {27, 64}, {10, 73}, {20, 73}, {3, 82}, {27, 82}}
+
+// MonsterArchive 是怪物圖的 archive；一隻怪物一張圖。
+const MonsterArchive = "MONPICS"
+
+// Spots 回傳這一場要畫幾隻怪物、各自畫在哪個像素座標。
+func (s *State) Spots() [][2]int {
+	n := len(s.Site.MonsterX)
+	if s.Site.Count < n {
+		n = s.Site.Count
+	}
+	if n > len(MonsterSpots) {
+		n = len(MonsterSpots)
+	}
+	out := make([][2]int, n)
+	for i := 0; i < n; i++ {
+		out[i] = [2]int{MonsterSpots[i][0] * 8, MonsterSpots[i][1]}
+	}
+	return out
+}
