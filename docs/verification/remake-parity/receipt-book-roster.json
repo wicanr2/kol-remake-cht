@@ -1,0 +1,770 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "book-roster-transition",
+  "description": "remake 從角色選項頁翻到角色清單：同一張動畫參數表；原版先把反白拿掉再開始捲動。清單內容來自 CHARDATA 的 16 個槽位。對原版 list-characters-run1 逐張對拍。",
+  "pair_count": 20,
+  "pass_count": 20,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "角色選項頁（反白 LIST CHARACTERS）",
+      "remake": "docs/verification/remake-parity/shots/menu.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-045.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "取消反白，動畫起點",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-000.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-046.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 1 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-001.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-047.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 3 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-003.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-048.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 5 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-005.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-049.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 7 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-007.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-050.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 9 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-009.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-051.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 11 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-011.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-052.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 16 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-016.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-054.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 18 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-018.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-055.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 20 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-020.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-056.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 22 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-022.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-057.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 24 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-024.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-058.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 26 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-026.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-059.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 28 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-028.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-060.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 30 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-030.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-061.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 32 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-032.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-062.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 34 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-034.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-063.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻頁第 36 步",
+      "remake": "docs/verification/remake-parity/shots/book-roster/open-036.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-064.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 0
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "角色清單",
+      "remake": "docs/verification/remake-parity/shots/roster.png",
+      "original": "docs/verification/character-ui/list-characters-run1/frames/frame-065.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

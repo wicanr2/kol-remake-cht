@@ -164,3 +164,53 @@ func (s *State) Spots() [][2]int {
 	}
 	return out
 }
+
+// 戰場那一頁的版面（RE-079）。
+
+// FieldWindow 是戰場視窗的白框（`sub_1E3A8:0x1E558` 的
+// `sub_1BA9D(97h, 7, 128h, 98h, 0Fh)`）；FieldView 是裡面 9×9 格的內容區。
+var (
+	FieldWindow = struct{ X, Y, Width, Height int }{X: 151, Y: 7, Width: 146, Height: 146}
+	FieldView   = struct{ X, Y int }{X: 152, Y: 8}
+)
+
+// SheetBox 是左上角的裝備欄框（`0x1F3D5` 的 `sub_1BA9D(10h, 2, 88h, 4Ch, 0Fh)`）；
+// BodyBox 是左下角的人形框（`0x1FB20` 的 `sub_1BA9D(8, 52h, 8Eh, 9Dh, 0Fh)`）。
+var (
+	SheetBox = struct{ X, Y, Width, Height int }{X: 16, Y: 2, Width: 121, Height: 75}
+	BodyBox  = struct{ X, Y, Width, Height int }{X: 8, Y: 82, Width: 135, Height: 76}
+)
+
+// FieldArchive 是戰場磚圖；TileAtlasColumns 是 atlas 一列幾塊。
+const (
+	FieldArchive     = "BATTLE"
+	TileAtlasColumns = 10
+)
+
+// SpriteAt 回傳站在某一格的參戰者要畫哪一塊磚；那一格沒有人就回 −1。
+// 原版是逐一比對參戰者的 +0x1F／+0x20（`sub_223C0:0x225BF`…`0x22682`）：
+// 隊伍前六名各畫自己的號碼圖，其餘畫共用的敵人圖，倒下的另有兩張。
+func (s *State) SpriteAt(x, y int) int {
+	for i := range s.Actors {
+		a := s.Actors[i]
+		if a.Side == SideEmpty || a.X != x || a.Y != y {
+			continue
+		}
+		if i >= PartySlots {
+			return SpriteMonster
+		}
+		return SpritePartyBase + i
+	}
+	return -1
+}
+
+// Camera 回傳戰場視窗的中心格：目前輪到的那一名。
+func (s *State) Camera() (int, int) {
+	if s.Cursor >= 0 && s.Cursor < len(s.Actors) {
+		a := s.Actors[s.Cursor]
+		if a.Side != SideEmpty {
+			return a.X, a.Y
+		}
+	}
+	return FieldSide / 2, FieldSide / 2
+}

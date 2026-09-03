@@ -90,6 +90,8 @@ func (r *lcg) Roll(n int) int {
 type questBattle struct {
 	state *battle.State
 	lines []string
+	// tiles 是戰場磚圖，讀檔一次之後留著。
+	tiles *ui.BattleTiles
 }
 
 // nonEmptyLines 去掉記錄拆行之後的空列。
@@ -348,10 +350,13 @@ func applyPlayToken(s *town.Session, token string) error {
 // playToken 把腳本 token 交給目前掌管畫面的那個狀態機：人在城裡就是城鎮，
 // 走出城門之後就是野外。
 func (g *game) playToken(token string) error {
-	// 戰鬥蓋在最上面：那一頁只認一個「讀完了」的鍵。
+	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場；戰場的回合結構還沒實作
+	// （RE-079），所以再按一個鍵就回野外。
 	if g.quest != nil && g.quest.state != nil {
-		g.quest.state.Continue()
-		// 戰場與回合還沒實作（RE-079），看完怪物那一張就回野外。
+		if g.quest.state.Stage == battle.StageEncounter {
+			g.quest.state.Continue()
+			return nil
+		}
 		g.quest.state = nil
 		return nil
 	}
@@ -511,6 +516,21 @@ func loadGrid(lib *assets.Library, archive string) (*town.Grid, error) {
 	return town.LoadGrid(src)
 }
 
+// loadBattlePNG 讀戰場用的 PNG。這一批是 `tools/extract_battle_tiles.py` 的輸出，
+// 有自己的 manifest，不在主 manifest 的 archive 索引裡（RE-079）。
+func loadBattlePNG(path string) (image.Image, error) {
+	body, err := os.Open(path)
+	if err != nil {
+		return nil, fmt.Errorf("讀取戰場素材：%w", err)
+	}
+	defer body.Close()
+	img, err := png.Decode(body)
+	if err != nil {
+		return nil, fmt.Errorf("解碼戰場素材 %s：%w", path, err)
+	}
+	return img, nil
+}
+
 type shotJob struct {
 	name  string
 	path  string
@@ -522,6 +542,8 @@ type game struct {
 	worldSession *world.Session
 	// quest 是走到任務地點之後開起來的那一場戰鬥；用指標是因為建構之後才會被填。
 	quest *questBattle
+	// battleAtlas 是戰場磚圖。
+	battleAtlas *ebiten.Image
 	worldParty   []town.Member
 	sprites      *spriteCache
 	small        *font.Font
@@ -616,8 +638,12 @@ func (g *game) render() error {
 		return g.renderFlow()
 	case scenePlay:
 		if g.quest != nil && g.quest.state != nil {
-			return ui.BattleEncounter(g.canvas.Image(), g.sprites, g.small,
-				g.quest.state, g.quest.lines)
+			if g.quest.state.Stage == battle.StageEncounter {
+				return ui.BattleEncounter(g.canvas.Image(), g.sprites, g.small,
+					g.quest.state, g.quest.lines)
+			}
+			return ui.BattleField(g.canvas.Image(), g.sprites, g.quest.tiles,
+				g.small, g.quest.state)
 		}
 		if g.play.LeftTown && g.worldState != nil {
 			if g.strings != nil {
@@ -971,6 +997,10 @@ func main() {
 	buildingDoor := flag.Int("building-door", 5, "建築內部畫面的門序號")
 	worldPath := flag.String("world-map",
 		"assets/original-derived-data/world-map.json", "野外地圖 typed data")
+	battleTiles := flag.String("battle-tiles",
+		"assets/original-derived-png/ega/BATTLE/battle-tiles-08.png", "戰場磚圖")
+	battleMaps := flag.String("battle-maps",
+		"assets/original-derived-png/ega/BATTLE/battle-map-%02d.png", "戰場格子陣列")
 	questPath := flag.String("quest-sites",
 		"assets/original-derived-data/quest-sites.json", "任務地點 typed data")
 	worldPos := flag.String("world-pos", "", "覆寫野外世界座標，格式 X,Y")
@@ -1599,8 +1629,27 @@ func main() {
 				for _, m := range playSession.Party {
 					members = append(members, battle.Member{Name: m.Name})
 				}
-				quest.state = battle.NewQuest(site, members, battle.NewField())
-				quest.state.Stage = battle.StageEncounter
+				atlas, err := loadBattlePNG(*battleTiles)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					return
+				}
+				mapImg, err := loadBattlePNG(fmt.Sprintf(*battleMaps, site.Index))
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					return
+				}
+				field, err := battle.LoadField(mapImg)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					return
+				}
+				// 任務地圖不重生地形，但照樣灑一次樹叢（`sub_1E3A8:0x1E5E5`）。
+				field.Scatter(&lcg{state: uint32(*seed)})
+				quest.tiles = ui.NewBattleTiles(atlas)
+				st := battle.NewQuest(site, members, field)
+				st.Stage = battle.StageEncounter
+				quest.state = st
 				quest.lines = nonEmptyLines(bank.Lines(town.BankUI,
 					battle.QuestCreaturesRecord))
 			}

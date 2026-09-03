@@ -1,0 +1,304 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "book-open-animation",
+  "description": "remake 依 RE-048 的參數表重播翻書動畫，對原版 accept-and-save-run1 的同狀態畫格逐張對拍。原版取樣間隔 0.3 秒、每一步 3 個 tick，因此原版每兩步取到一張。",
+  "pair_count": 18,
+  "pass_count": 18,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "封面（動畫起點）",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-000.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-008.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            96,
+            20,
+            20
+          ],
+          "differing_pixels": 50
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 3 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-003.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-009.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 5 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-005.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-010.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 7 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-007.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-011.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 9 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-009.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-012.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 11 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-011.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-013.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 13 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-013.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-014.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 15 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-015.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-015.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 17 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-017.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-016.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 19 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-019.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-017.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 21 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-021.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-018.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 23 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-023.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-019.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 28 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-028.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-021.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 30 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-030.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-022.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 32 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-032.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-023.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫第 34 步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-034.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-024.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "翻書動畫最後一步",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-036.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-025.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "目錄頁（動畫終點）",
+      "remake": "docs/verification/remake-parity/shots/book-open/open-036.png",
+      "original": "docs/verification/character-ui/accept-and-save-run1/frames/frame-026.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            96,
+            20,
+            20
+          ],
+          "differing_pixels": 55
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

@@ -1,0 +1,314 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "delete-character",
+  "description": "remake 的 DELETE CHARACTER 畫面對原版 delete-character-confirm-run1 逐張對拍：反白條移動、確認視窗、回答 YES 之後名冊往上補齊、回答 NO 之後回到清單。",
+  "pair_count": 8,
+  "pass_count": 8,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "刪除清單（14 人，反白第 1 名）",
+      "remake": "docs/verification/remake-parity/shots/delete/step-000.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-067.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "刪除清單（反白第 2 名）",
+      "remake": "docs/verification/remake-parity/shots/delete/step-001.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-068.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "確認視窗（清單無反白）",
+      "remake": "docs/verification/remake-parity/shots/delete/step-002.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-069.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 112
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "回答 YES：刪除後的清單（13 人，反白重置）",
+      "remake": "docs/verification/remake-parity/shots/delete/step-003.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 0
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "刪除後清單（反白第 2 名）",
+      "remake": "docs/verification/remake-parity/shots/delete/step-004.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-071.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 0
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "刪除後清單（反白第 3 名）",
+      "remake": "docs/verification/remake-parity/shots/delete/step-005.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-072.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 0
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "刪除後清單上的確認視窗",
+      "remake": "docs/verification/remake-parity/shots/delete/step-006.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-073.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 0
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "回答 NO：回到清單且反白重置",
+      "remake": "docs/verification/remake-parity/shots/delete/step-007.png",
+      "original": "docs/verification/character-ui/delete-character-confirm-run1/frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 55
+        },
+        {
+          "name": "原版頁尾殘影",
+          "reason": "原版把展開跨頁貼到前一畫面之上時，左頁底緣有一條未被覆蓋的細帶（RE-045）。",
+          "rect": [
+            24,
+            190,
+            146,
+            9
+          ],
+          "differing_pixels": 0
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

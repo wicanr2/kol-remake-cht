@@ -99,8 +99,8 @@ func (r *cornerRand) Roll(n int) int {
 // 一般遭遇的地形：逐格擲 1…4，中 1 填 TileRough，再灑 TileScatter。
 func TestGenerate(t *testing.T) {
 	f := Generate(&cornerRand{})
-	if f.At(0, 0) != TileRough || f.At(1, 0) != TileGround {
-		t.Fatalf("底色不對：%d %d", f.At(0, 0), f.At(1, 0))
+	if f.At(0, 0) != TileRough || f.At(0, 1) != TileGround {
+		t.Fatalf("底色不對：%d %d", f.At(0, 0), f.At(0, 1))
 	}
 	if f.At(FieldSide-1, FieldSide-1) != TileScatter {
 		t.Fatalf("灑點沒落在最後一格：%d", f.At(FieldSide-1, FieldSide-1))
@@ -113,12 +113,12 @@ func TestGenerate(t *testing.T) {
 // 視窗是以誰為中心的 9×9。
 func TestView(t *testing.T) {
 	f := NewField()
-	f.Tiles[41*FieldSide+14] = TileScatter
+	f.Tiles[14*FieldSide+41] = TileScatter
 	v := f.View(14, 41)
 	if len(v) != ViewRows || len(v[0]) != ViewCols {
 		t.Fatalf("視窗是 %d×%d", len(v), len(v[0]))
 	}
-	if v[ViewRows/2][ViewCols/2] != TileScatter {
-		t.Fatalf("中心那一格是 %d", v[ViewRows/2][ViewCols/2])
+	if v[ViewCentre.Row][ViewCentre.Col] != TileScatter {
+		t.Fatalf("中心那一格是 %d", v[ViewCentre.Row][ViewCentre.Col])
 	}
 }

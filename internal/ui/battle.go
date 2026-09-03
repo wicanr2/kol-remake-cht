@@ -54,3 +54,65 @@ func BattleEncounter(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	frame(dst, b.X, b.Y, b.Width, b.Height, town.ColourSelected)
 	return nil
 }
+
+// BattleField 畫戰場那一頁（RE-079）：右邊是 9×9 格的戰場視窗，
+// 左上是裝備欄、左下是人形框，底下是指令圖示列。
+//
+// tiles 是 `tools/extract_battle_tiles.py` 產生的磚圖。任務地點的戰場只畫
+// 視線通得到的格子，看不到的畫成 TileUnseen；目前輪到的那一格永遠畫得出來，
+// 外面再套一圈白框（`sub_223C0:0x2279E`）。
+func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
+	f *font.Font, s *battle.State) error {
+	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
+	if err != nil {
+		return err
+	}
+	draw(dst, bg, 0, 0)
+
+	w := battle.FieldWindow
+	shadow(dst, w.X, w.Y, w.Width, w.Height)
+	fill(dst, w.X, w.Y, w.Width, w.Height, town.ColourBoxEdge)
+	cx, cy := s.Camera()
+	sight := s.Field.Visible(cx, cy)
+	v := battle.FieldView
+	for r := 0; r < battle.ViewRows; r++ {
+		for c := 0; c < battle.ViewCols; c++ {
+			row := clampField(cx - battle.ViewCentre.Row + r)
+			col := clampField(cy - battle.ViewCentre.Col + c)
+			centre := r == battle.ViewCentre.Row && c == battle.ViewCentre.Col
+			img := tiles.Tile(battle.TileUnseen)
+			if sight[r][c] || centre {
+				tile := s.Field.At(row, col)
+				if sprite := s.SpriteAt(row, col); sprite >= 0 {
+					img = tiles.WithSprite(tile, sprite)
+				} else {
+					img = tiles.Tile(tile)
+				}
+			}
+			draw(dst, img, v.X+c*battle.TileSide, v.Y+r*battle.TileSide)
+		}
+	}
+	cur := battle.FieldCursor
+	frame(dst, cur.X, cur.Y, cur.Width, cur.Height, town.ColourSelected)
+
+	for _, box := range []struct{ X, Y, Width, Height int }{
+		{battle.SheetBox.X, battle.SheetBox.Y, battle.SheetBox.Width, battle.SheetBox.Height},
+		{battle.BodyBox.X, battle.BodyBox.Y, battle.BodyBox.Width, battle.BodyBox.Height},
+	} {
+		shadow(dst, box.X, box.Y, box.Width, box.Height)
+		fill(dst, box.X, box.Y, box.Width, box.Height, town.ColourBoxEdge)
+		fill(dst, box.X+1, box.Y+1, box.Width-2, box.Height-2, town.ColourBoxFill)
+	}
+	return nil
+}
+
+// clampField 把戰場座標夾在 0…63，與原版視窗的四道夾限相同。
+func clampField(v int) int {
+	if v < 0 {
+		return 0
+	}
+	if v > battle.FieldSide-1 {
+		return battle.FieldSide - 1
+	}
+	return v
+}

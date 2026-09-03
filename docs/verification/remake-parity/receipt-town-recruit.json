@@ -1,0 +1,238 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-recruit",
+  "description": "招募同伴的三個畫面。按下 COMPANION 之後先問 `Look for characters on hard disk?`，圖示列換成大拇指朝上與朝下（KOLMPICS 10／11）；接著對話框改畫候選人清單——這間建築裡不在隊伍中的角色，白字是反白那一列、其餘青色（EGA 3），右側第 23 格畫大字型碼位 94／95 的上下箭頭（EGA 4），清單超過八列就捲動、兩端夾住不繞回。選定之後新成員成為發言者，招呼語因為他身上有傷而換成 KOLDATA 2Bh＋2Ch（角色記錄位移 0x1B 非 0）。候選人由角色檔的所在地欄比對建築名稱前十個字母取得，頭像是存檔頭像逐像素命中的 CHARPICS 模板。",
+  "pair_count": 9,
+  "pass_count": 9,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "是否搜尋硬碟：對話框",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/ask.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-078.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 34
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "是否搜尋硬碟：大拇指圖示列",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/ask.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-078.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "候選人清單：對話框與捲動箭頭",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/list.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-079.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 36
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "候選人清單：圖示列",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/list.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-079.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "反白往下一列",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/list-second.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-080.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 36
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "加入之後：隊員格",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 58
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "加入之後：受傷的招呼語",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            100,
+            20,
+            16
+          ],
+          "differing_pixels": 28
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "加入之後：標題框",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 54,
+        "width": 224,
+        "height": 28
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "加入之後：建築內圖示列",
+      "remake": "docs/verification/remake-parity/shots/town-recruit/joined.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    }
+  ]
+}

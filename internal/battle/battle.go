@@ -15,10 +15,33 @@ import (
 const FieldSide = 64
 
 // ViewCols／ViewRows 是戰場視窗一次看幾格；TileSide 是一格的像素邊長。
+// 視窗內容區 144×144，剛好九列九欄（`sub_223C0:0x224E0` 起的兩層迴圈
+// 都以 9 為界，畫面位移是 `0x280 × 列 + 0x153 + 2 × 欄`，0x153 即 (152, 8)）。
 const (
 	ViewCols = 9
 	ViewRows = 9
 	TileSide = 16
+)
+
+// ViewCentre 是鏡頭那一格在視窗裡的列／欄：兩軸都減四（`0x224F6` 的 `+0FFFCh`）。
+var ViewCentre = struct{ Row, Col int }{Row: 4, Col: 4}
+
+// FieldCursor 是目前輪到的那一名外面那一圈白框
+// （`sub_223C0:0x2279E` 的 `sub_1B6DC(0D8h, 48h, 0E5h, 57h, 0Fh)`）。
+var FieldCursor = struct{ X, Y, Width, Height int }{X: 216, Y: 72, Width: 14, Height: 16}
+
+// 參戰者畫成哪一塊磚（`sub_223C0:0x2264D`…`0x22682`，畫的時候是
+// 「精靈編號 − 1」）。隊伍前六名各有自己的號碼圖，敵人共用一張。
+const (
+	// SpritePartyBase 是隊伍第一名的磚塊編號，之後每名加一。
+	SpritePartyBase = 0
+	// SpriteMonster 是還站著的敵人；SpriteMonsterDown 是倒下的敵人。
+	SpriteMonster     = 6
+	SpriteMonsterDown = 7
+	// SpritePartyDown 是倒下的隊員。
+	SpritePartyDown = 8
+	// SpriteObject 是地上的東西（原版畫的是一把劍）。
+	SpriteObject = 38
 )
 
 // MaxActors 是參戰者上限；PartySlots 是其中留給隊伍的位置數

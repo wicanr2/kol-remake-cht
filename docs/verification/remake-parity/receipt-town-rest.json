@@ -1,0 +1,290 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-rest",
+  "description": "客棧住宿與存檔的四個畫面（SPEC-006／RE-073）。半途之家的住宿費是建築 payload 位移 0x38／0x39 的 16-bit 欄位，讀出來是 56；價錢問句由 KOLDATA 記錄 37h、53h、數字、54h 四段組成，圖示列換成大拇指朝上與朝下。答應之後原版問 189h『存到硬碟嗎』，兩個答案都會存檔；存完角色離隊，隊伍空了問 36h『你要離開嗎』。兩人隊伍先問 35h『全隊嗎』，答應之後逐位跑同一套問答，而且每換一位就把隊員格的白框移到那一位（`sub_11A93:0x127E5` 的 `sub_13E82`）——報的價錢仍是 56，不隨人數改變。remake 的對拍一律開 `-faithful-inn-stay`；預設模式住宿不離隊。",
+  "pair_count": 11,
+  "pass_count": 11,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "住宿價錢：對話框",
+      "remake": "docs/verification/remake-parity/shots/town-rest/price.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-075.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            101,
+            12,
+            12
+          ],
+          "differing_pixels": 36
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "住宿價錢：大拇指圖示列",
+      "remake": "docs/verification/remake-parity/shots/town-rest/price.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-075.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "住宿價錢：隊員格",
+      "remake": "docs/verification/remake-parity/shots/town-rest/price.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-075.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "存到硬碟嗎：對話框",
+      "remake": "docs/verification/remake-parity/shots/town-rest/disk.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-076.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            101,
+            12,
+            12
+          ],
+          "differing_pixels": 34
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "存到硬碟嗎：大拇指圖示列",
+      "remake": "docs/verification/remake-parity/shots/town-rest/disk.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-076.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "你要離開嗎：對話框",
+      "remake": "docs/verification/remake-parity/shots/town-rest/quit.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            101,
+            12,
+            12
+          ],
+          "differing_pixels": 34
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "你要離開嗎：隊員格已空",
+      "remake": "docs/verification/remake-parity/shots/town-rest/quit.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "全隊嗎：對話框",
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-party.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-084.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            101,
+            12,
+            12
+          ],
+          "differing_pixels": 34
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "全隊嗎：兩位隊員與白框",
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-party.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-084.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "全隊之後的價錢：對話框",
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-price.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-085.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            101,
+            12,
+            12
+          ],
+          "differing_pixels": 36
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "全隊之後的價錢：白框移到第一位",
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-price.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-085.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    }
+  ]
+}

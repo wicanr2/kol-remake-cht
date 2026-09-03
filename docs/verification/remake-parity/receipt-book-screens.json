@@ -1,0 +1,91 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "book-screens-and-portraits",
+  "description": "remake 的書本封面、目錄頁與空白 New Character 頁，對原版 name-length-run1／escape-layers-run1 的同狀態畫面。80 張角色圖像畫面改由 plan-newchar-pictures.json 以完整狀態機重播對拍，文字不再列為允許差異。",
+  "pair_count": 3,
+  "pass_count": 3,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "書本封面",
+      "remake": "docs/verification/remake-parity/shots/cover.png",
+      "original": "docs/verification/character-ui/name-length-run1/frames/frame-010.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 尚未實作",
+          "rect": [
+            156,
+            96,
+            20,
+            20
+          ],
+          "differing_pixels": 50
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "目錄頁",
+      "remake": "docs/verification/remake-parity/shots/contents.png",
+      "original": "docs/verification/character-ui/name-length-run1/frames/frame-028.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 尚未實作",
+          "rect": [
+            156,
+            96,
+            20,
+            20
+          ],
+          "differing_pixels": 55
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "空白 New Character 頁",
+      "remake": "docs/verification/remake-parity/shots/newchar-blank.png",
+      "original": "docs/verification/character-ui/escape-layers-run1/frames/frame-085.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "名字欄殘留字元",
+          "reason": "原版在種族層取消後，名字欄位置殘留一個字元（本例為前次名字首字 t，字模已逐 byte 命中）；remake 尚未實作名字輸入狀態",
+          "rect": [
+            24,
+            58,
+            128,
+            6
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

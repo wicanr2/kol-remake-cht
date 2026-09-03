@@ -1,0 +1,226 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-inn",
+  "description": "remake 的旅店畫面對原版逐張對拍：六個圖示白框位置、單人隊伍與招募後的兩人隊伍。底圖、頭像格、店主肖像、標題框、對話框與圖示列都由原版畫面機械量得（RE-054）。",
+  "pair_count": 8,
+  "pass_count": 8,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "半途之家旅店（白框在 COMPANION）",
+      "remake": "docs/verification/remake-parity/shots/inn.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "圖示列白框第 1 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-0.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-071.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "圖示列白框第 2 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-1.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-072.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "圖示列白框第 3 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-2.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-073.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "圖示列白框第 4 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-3.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-074.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "圖示列白框第 5 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-4.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-075.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "圖示列白框第 6 格",
+      "remake": "docs/verification/remake-parity/shots/town-inn/icon-5.png",
+      "original": "docs/verification/character-ui/town-icon-move-run1/frames/frame-076.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 31
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "招募一名同伴之後（兩名隊員，新成員為發言者）",
+      "remake": "docs/verification/remake-parity/shots/town-inn/recruited.png",
+      "original": "docs/verification/character-ui/town-recruit-companion-run1/frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            150,
+            90,
+            34,
+            34
+          ],
+          "differing_pixels": 28
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}
