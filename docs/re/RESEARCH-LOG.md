@@ -4245,3 +4245,69 @@ while 斷點候選 < 長度:
 **這不是同狀態對拍**：`world-quest-run1` 那一輪 oracle 的按鍵序列沒有走進執行段
 （checkpoint 108…123 都在規劃與戰場之間），所以沒有原版畫格可比。要 parity 得
 另錄一輪走到執行段的 oracle。
+
+## RE-088：攻擊的訊息鏈
+
+輸入與工具同 RE-070。`sub_26D76` 印訊息那三段（`0x270A0`…`0x27620`）與
+`sub_277F4`（546 條）由探針 `tools/ida_probe_koltown_battle_commands.py` 倒出。
+文字取自 KOLDATA 0x125…0x171。
+
+### 第一句：動作與結果（`已證實`）
+
+一次攻擊會印兩句，中間各等一次鍵。第一句是「誰對誰做了什麼、結果如何」：
+
+```
+動作（依指令碼）
+  0x21 武器  → [0x12F + 攻擊選項]（whacks／chops／hacks…），再接 0x13A `|B|E at|F`
+  0x29 徒手  → [0x127 + 攻擊選項]（kicks|B leg／throws|B body／butts|B head／
+               swings|B fist），再接 0x127 ` at|F`
+  0x23 射擊  → 武器種類 > 0x7F 印 0x126「throws a boulder」，否則 0x125
+               「fires a missle」，再接 0x127
+
+結果
+  攻擊分數為負（落空）：取絕對值，> 0x1E 印 0x13B「 but misses|C completely!」、
+      > 0x0A 印 0x13C「 but misses|C.」、否則 0x13D「 but narrowly misses|C.」
+  被擋：印 0x15E「 who]」再印 [0x15F + 招架碼]（0x15F…0x168 十句）
+  命中：印 0x13E「 who cannot parry the blow!」
+```
+
+**招架碼查的是 `[0x11B2 + 11 × 目標的防禦選項 + 攻擊選項]`，訊息基底是 0x15F**
+——RE-080 原本記成「0x14F…0x158」，那一段是傷害那一句的記錄，不是招架。
+另外有一條修正：招架碼算出來是 4 而且目標的體型減行動者的體型大於 100 時，
+碼改成 2（`0x27417`）。
+
+武器攻擊的選項值域是 {1, 2, 5, 8}（0 會在執行段被歸零），所以實際只會用到
+0x130 whacks、0x131 chops、0x134 thrusts、0x137 slices 四句；0x12C…0x12F
+在資料裡是佔位的 `f`。
+
+### 第二句：傷害（`已證實`）
+
+`sub_277F4(傷害, 部位, 種類)` 先把傷害記進去（累積上限 0x7F，累積到 +0x10 就把
+頭與胸設成 0xFF 並記下「倒下」），再開一段新的訊息：
+
+```
+0x140「The]」＋ [0x141 + 種類]（blow／spell）＋ 0x143「 hits|F's]」＋ [0x144 + 部位]
+
+傷害為 0            → 0x14A「 doing little damage!」
+倒下                → 0x14B「 making|C]」，接著
+                      sub_22229 為零 → 0x14C「collapse」＋ 0x14D「 from blood loss!」
+                      怪物記錄 +0x10 > 0x7F → 0x14E「shatter into pieces!」
+                      其餘 → 0x14F「die」＋ 0x14D
+那一肢廢了（部位欄 > 0x7F）
+    部位 > 1（手腳） → 0x152「 making that limb useless!」，並把目標的指令碼清成 0；
+                      部位 > 3（腿）再把目標的 +0x03 也清成 0
+    部位 0／1（頭胸）→ 目標是敵方印 0x151「 killing it instantly!」、
+                      我方印 0x150「 making|C unconscious!」
+其餘                → 0x153「 causing a]」＋ 輕重 ＋ 0x154「 wound!」
+                      傷害 < 0x10 → 0x155 serious（並把傷害歸零）
+                      傷害 < 0x18 → 0x156 terrible
+                      其餘        → 0x157 grievous
+```
+
+腿廢掉會清 +0x03——而 +0x03 正是 RE-085 裡「移動方式第三格出不出現」的門檻。
+兩邊合起來看，+0x03 與腿的狀態相關，這是 +0x1E／+0x03 那一組旗標的另一條線索。
+
+### 還沒走完的
+
+`0x27B77` 之後是擊退與昏迷（用到 0x158「The blow stuns|F]」、0x159「The force of
+the blow knocks|F]」與 0x15A…0x15C），還沒讀。法術那一套（0x169…0x171）同樣未讀。

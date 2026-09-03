@@ -179,3 +179,86 @@ func TestWrapMessageNoSpace(t *testing.T) {
 		t.Fatalf("斷出來的字元數 %d 多過原句 %d", total, len(long))
 	}
 }
+
+// 第一句：動作加結果（RE-088）。
+func TestAttackLine(t *testing.T) {
+	// 武器攻擊、命中。
+	got := AttackLine(CmdWeapon, 2, Outcome{}, false)
+	want := []int{WeaponActionBase + 2, WeaponAtRecord, CannotParryRecord}
+	assertRecords(t, got, want)
+	// 徒手、落空很多。
+	got = AttackLine(CmdUnarmed, 1, Outcome{Miss: true, Margin: 0x20}, false)
+	want = []int{UnarmedActionBase + 1, AtTargetRecord, MissWideRecord}
+	assertRecords(t, got, want)
+	// 落空的三段門檻。
+	for _, c := range []struct {
+		margin, record int
+	}{{0x1F, MissWideRecord}, {0x0B, MissRecord}, {0x05, MissNarrowRecord}} {
+		got = AttackLine(CmdWeapon, 1, Outcome{Miss: true, Margin: c.margin}, false)
+		if got[len(got)-1] != c.record {
+			t.Errorf("落空 %d 應該印 %#x，得到 %#x", c.margin, c.record, got[len(got)-1])
+		}
+	}
+	// 被擋：近戰印 who ＋ 招架句，射擊印另一句。
+	got = AttackLine(CmdWeapon, 1, Outcome{Parried: true, Message: 3}, false)
+	assertRecords(t, got, []int{WeaponActionBase + 1, WeaponAtRecord,
+		WhoRecord, ParryBase + 3})
+	got = AttackLine(CmdMissile, 1, Outcome{Parried: true, Message: 3}, false)
+	assertRecords(t, got, []int{MissileRecord, AtTargetRecord, MissileMissRecord})
+	// 射擊的武器種類大於 0x7F 換成丟石頭。
+	got = AttackLine(CmdMissile, 1, Outcome{}, true)
+	if got[0] != BoulderRecord {
+		t.Errorf("重武器應該印 %#x，得到 %#x", BoulderRecord, got[0])
+	}
+}
+
+// 第二句：傷害（`sub_277F4`）。
+func TestDamageLine(t *testing.T) {
+	head := []int{TheBlowRecord, BlowKindBase, HitsRecord, LocationBase + 2}
+	// 傷害為 0。
+	assertRecords(t, DamageLine(Outcome{Location: 2}, 0, false),
+		append(append([]int{}, head...), LittleRecord))
+	// 三段輕重。
+	for _, c := range []struct {
+		damage, record int
+	}{{1, SeriousRecord}, {0x0F, SeriousRecord}, {0x10, TerribleRecord},
+		{0x17, TerribleRecord}, {0x18, GrievousRecord}} {
+		got := DamageLine(Outcome{Damage: c.damage, Location: 2}, 0, false)
+		if got[len(got)-2] != c.record {
+			t.Errorf("傷害 %d 應該印 %#x，得到 %#x", c.damage, c.record, got[len(got)-2])
+		}
+		if got[len(got)-1] != WoundRecord {
+			t.Errorf("結尾應該是 %#x", WoundRecord)
+		}
+	}
+	// 手腳廢了。
+	got := DamageLine(Outcome{Damage: 5, Location: 2, Limb: true}, 0, false)
+	assertRecords(t, got, append(append([]int{}, head...), LimbUselessRecord))
+	// 頭廢了：敵人是 killing it、隊員是 unconscious。
+	headHit := []int{TheBlowRecord, BlowKindBase, HitsRecord, LocationBase}
+	got = DamageLine(Outcome{Damage: 5, Location: 0, Limb: true}, 0, true)
+	assertRecords(t, got, append(append([]int{}, headHit...), KilledRecord))
+	got = DamageLine(Outcome{Damage: 5, Location: 0, Limb: true}, 0, false)
+	assertRecords(t, got, append(append([]int{}, headHit...), UnconsciousRecord))
+	// 倒下。
+	got = DamageLine(Outcome{Damage: 5, Location: 2, Down: true}, 0, false)
+	assertRecords(t, got, append(append([]int{}, head...),
+		MakingRecord, DieRecord, BloodLossRecord))
+	// 法術用 0x142。
+	got = DamageLine(Outcome{Location: 2}, 1, false)
+	if got[1] != BlowKindBase+1 {
+		t.Errorf("法術應該印 %#x，得到 %#x", BlowKindBase+1, got[1])
+	}
+}
+
+func assertRecords(t *testing.T, got, want []int) {
+	t.Helper()
+	if len(got) != len(want) {
+		t.Fatalf("記錄數 %d，應該是 %d：%#x vs %#x", len(got), len(want), got, want)
+	}
+	for i := range got {
+		if got[i] != want[i] {
+			t.Fatalf("第 %d 筆是 %#x，應該是 %#x：%#x vs %#x", i, got[i], want[i], got, want)
+		}
+	}
+}

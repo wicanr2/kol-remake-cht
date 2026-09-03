@@ -87,6 +87,9 @@ type Execution struct {
 	// Text 是現在顯示的那一句，已經展開代換碼並斷好行。battle 這一層不認得
 	// 文字庫，由呼叫端填（RE-086／RE-087）。
 	Text []string
+	// Pending 是同一手的下一句。攻擊命中時原版分兩句、各等一次鍵
+	// （`sub_26D76:0x2746A` 與 `sub_277F4:0x27B66`，RE-088）。
+	Pending []string
 }
 
 // Step 做出下一手。原版每一手印一句訊息再等玩家按一個鍵（`sub_1B100(5)`），

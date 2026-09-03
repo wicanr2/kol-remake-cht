@@ -2190,3 +2190,35 @@ RE-080 末段、SPEC-008 與 WORKLIST 都把「移動指令 0x27 的點數規則
 - 敵人那一手的 `+0x25` 從來沒被填過（AI 還沒實作），原本會落到「指令 0 → 記錄
   0x117 does nothing」——畫面上看起來像原版選了什麼都不做。改成標
   `Unimplemented`；`battleStep` 遇到沒有訊息的手直接往下走，不讓玩家停在空白畫面。
+
+## 2026-09-04（續二）：攻擊的訊息鏈
+
+- `sub_26D76` 印訊息那三段與 `sub_277F4`（546 條）讀完，寫成 RE-088 並實作
+  `AttackLine`／`DamageLine`。
+- 一次攻擊分兩句、各等一次鍵：第一句是動作加結果，第二句是傷害。
+  武器的動作句是 `[0x12F + 攻擊選項]`（實際只用得到 whacks／chops／thrusts／
+  slices 四句，因為選項值域是 {1,2,5,8}），徒手是 `[0x127 + 選項]` 四句，
+  射擊依武器種類 > 0x7F 選 boulder 或 missle。
+- 落空分三段（幅度 > 0x1E／> 0x0A／其餘）、被擋查 `[0x11B2]` 的招架碼、
+  命中印「who cannot parry the blow!」。
+- 傷害那一句：傷害 0 印 little damage；倒下印 die/collapse/shatter；手腳廢印
+  limb useless（並清掉目標的指令碼，腿廢還會清 +0x03）；頭胸廢依敵我印
+  killing it／unconscious；其餘依 0x10／0x18 兩個門檻印 serious／terrible／
+  grievous wound。
+- 實跑驗證：`workplace/specs/exec-attack.txt` 走到武器攻擊、面前沒人，
+  讀回 `Poontang whips his Long Spear through the air.`——兩行，第一行 29 個
+  字元斷在空白，與 RE-087 的斷行規則一致。
+
+### 勘誤
+
+- RE-080 把招架訊息記成「0x14F…0x158」。實際上招架碼查 `[0x11B2 + 11 × 目標防禦
+  選項 + 攻擊選項]`，**訊息基底是 0x15F**（0x15F…0x168 十句 does not attempt to
+  parry／avoids the blow by covering up…）；0x14F 那一段是傷害那一句的 die。
+  另外原版還有一條修正：招架碼是 4 而且目標體型減行動者體型大於 100 時改成 2
+  （`0x27417`）——`internal/battle/attack.go` 已補上。
+
+### 沒有做的
+
+攻擊訊息只實跑過「面前沒人」那一條。動作句與傷害那一句要讓隊員走到敵人旁邊才驗得到
+（任務地點 5 的隊員與怪物差十一格）。`0x27B77` 之後的擊退與昏迷還沒讀；倒下那一句
+的 collapse／shatter 兩個分支條件語意未定，實作一律走 die。

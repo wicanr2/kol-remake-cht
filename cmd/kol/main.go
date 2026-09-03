@@ -1074,8 +1074,14 @@ func (g *game) battleStep() {
 		return
 	}
 	s := g.quest.state
+	// 同一手的第二句：攻擊命中時原版分兩句、各等一次鍵（RE-088）。
+	if len(s.Exec.Pending) > 0 {
+		s.Exec.Text = s.Exec.Pending
+		s.Exec.Pending = nil
+		return
+	}
 	// 沒有訊息的那幾手不停下來等鍵：敵人那一手還沒實作（RE-081），
-	// 攻擊的訊息鏈也還沒解完，停在空白畫面只會讓人以為當掉了。
+	// 停在空白畫面只會讓人以為當掉了。
 	var r battle.ActResult
 	for {
 		var ok bool
@@ -1084,7 +1090,7 @@ func (g *game) battleStep() {
 			s.Exec.Text = nil
 			return
 		}
-		if r.Message != 0 {
+		if r.Message != 0 || r.Outcome != nil {
 			break
 		}
 	}
@@ -1093,7 +1099,31 @@ func (g *game) battleStep() {
 		Target: g.battleSpeaker(r.Target),
 		Lookup: g.battleRecord,
 	}
-	s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
+	if r.Outcome == nil {
+		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
+		return
+	}
+	// 攻擊那一手：第一句是動作加結果，命中的話第二句是傷害（RE-088）。
+	a := s.Actors[r.Actor]
+	heavy := a.Weapon.Kind > 0x7F
+	s.Exec.Text = battle.WrapMessage(ctx.Line(
+		g.battleRecords(battle.AttackLine(r.Command, a.Style, *r.Outcome, heavy))))
+	if r.Outcome.Miss || r.Outcome.Parried {
+		return
+	}
+	monster := r.Target >= 0 && s.Actors[r.Target].Member < 0
+	s.Exec.Pending = battle.WrapMessage(ctx.Substitute(
+		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster))))
+}
+
+// battleRecords 把一串記錄號接成一段文字。原版是逐筆送進同一個緩衝區，
+// 接起來再展開代換碼等價（RE-088）。
+func (g *game) battleRecords(records []int) string {
+	out := ""
+	for _, r := range records {
+		out += g.battleRecord(r)
+	}
+	return out
 }
 
 // updateBattle 是戰場的輸入迴圈（SPEC-010）。鍵位與城鎮一致：方向鍵與四個

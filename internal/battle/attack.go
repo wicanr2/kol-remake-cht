@@ -43,7 +43,7 @@ var styleLocation = [16]int{1, 1, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 6, 7, 0, 5}
 // diceSides 是 0x00D4：傷害碼的高位挑骰面數。
 var diceSides = [8]int{2, 3, 5, 7, 9, 11, 19, 99}
 
-// parryMessage 是 0x11B2：被擋下時印哪一句（記錄 0x14F + 值），
+// parryMessage 是 0x11B2：被擋下時印哪一句（記錄 **0x15F** + 值，RE-088），
 // 列是防禦選項、欄是攻擊選項。
 var parryMessage = [8][11]int{
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -230,7 +230,12 @@ func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 	defence := DefenceScore(*d, rng.Roll(AttackRoll))
 	if attack < defence {
 		guard := d.Guard & 7
-		return Outcome{Parried: true, Message: parryMessage[guard][style&0x0F]}
+		msg := parryMessage[guard][style&0x0F]
+		// 碼 4 而且對方壯很多時換成 2（`sub_26D76:0x27417`）。
+		if msg == 4 && d.Size-a.Size > 100 {
+			msg = 2
+		}
+		return Outcome{Parried: true, Message: msg}
 	}
 	damage := DamageRoll(*a, style, attack-defence, rng)
 	location := HitLocation(style, rng.Roll(AttackRoll))

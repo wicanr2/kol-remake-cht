@@ -37,7 +37,9 @@ DUMP_FUNCTIONS = (0x228B7, 0x24131, 0x11703, 0x11722, 0x1449C, 0x227C0, 0x22278,
                   # 每一手開頭印行動者名字的那一支；`|G` 走的也是它。
                   0x2685A, 0x2687F,
                   # 訊息框：清、送字元、收尾。
-                  0x1C1A4, 0x1C1BF, 0x1C2DA, 0x1C311, 0x1103F)
+                  0x1C1A4, 0x1C1BF, 0x1C2DA, 0x1C311, 0x1103F,
+                  # 傷害落到部位，順便決定傷害輕重那一句。
+                  0x277F4)
 # 訊息框的游標與版面放在這幾個全域裡；掃全庫找出誰設它們。
 TRACKED_GLOBALS = ("word_2DF14", "word_2DF16", "word_2DF18", "word_2FB58",
                    "word_345E0", "word_2E57C")
@@ -54,6 +56,9 @@ WINDOWS = {
     "attack_target": (0x26D76, 0x26E60),
     # EGA 的字元繪製：word_2DF14／word_2DF16 的單位在這裡定。
     "glyph_draw": (0x1DE84, 0x1DF40),
+    # 攻擊訊息：哪一句對到哪一種攻擊式。
+    "attack_messages": (0x270A0, 0x27200),
+    "attack_hit": (0x27200, 0x27620),
 }
 # 要原樣倒出來的 DGROUP 區塊：(位移, 位元組數)。
 DGROUP_DUMPS = (

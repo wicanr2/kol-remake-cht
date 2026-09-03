@@ -209,3 +209,132 @@ func itoa(v int) string {
 	}
 	return string(buf[i:])
 }
+
+// 攻擊訊息用到的 KOLDATA 記錄（RE-088）。
+const (
+	// MissileRecord／BoulderRecord 是射擊那一句，依武器種類選。
+	MissileRecord = 0x125
+	BoulderRecord = 0x126
+	// AtTargetRecord 是 ` at|F`，徒手與射擊都接它。
+	AtTargetRecord = 0x127
+	// UnarmedActionBase + 攻擊選項 是徒手的動作句（0x128…0x12B）。
+	UnarmedActionBase = 0x127
+	// WeaponActionBase + 攻擊選項 是武器的動作句（0x130…0x139）。
+	WeaponActionBase = 0x12F
+	// WeaponAtRecord 是武器動作後面那一段 `|B|E at|F`。
+	WeaponAtRecord = 0x13A
+	// 落空的三句，依落空幅度。
+	MissWideRecord   = 0x13B
+	MissRecord       = 0x13C
+	MissNarrowRecord = 0x13D
+	// CannotParryRecord 是命中時第一句的收尾。
+	CannotParryRecord = 0x13E
+	// MissileMissRecord 是射擊被擋下時那一句。
+	MissileMissRecord = 0x13F
+	// WhoRecord ＋ ParryBase + 招架碼 是被擋下那一句。
+	WhoRecord = 0x15E
+	ParryBase = 0x15F
+	// 傷害那一句。
+	TheBlowRecord   = 0x140
+	BlowKindBase    = 0x141
+	HitsRecord      = 0x143
+	LocationBase    = 0x144
+	LittleRecord    = 0x14A
+	MakingRecord    = 0x14B
+	CollapseRecord  = 0x14C
+	BloodLossRecord = 0x14D
+	ShatterRecord   = 0x14E
+	DieRecord       = 0x14F
+	UnconsciousRecord = 0x150
+	KilledRecord      = 0x151
+	LimbUselessRecord = 0x152
+	CausingRecord     = 0x153
+	WoundRecord       = 0x154
+	SeriousRecord     = 0x155
+	TerribleRecord    = 0x156
+	GrievousRecord    = 0x157
+)
+
+// 落空幅度的兩個門檻（`sub_26D76:0x2718C`／`0x271A9`）。
+const (
+	missWide   = 0x1E
+	missNormal = 0x0A
+)
+
+// 傷害輕重的兩個門檻（`sub_277F4:0x27AF0`／`0x27B2A`）。
+const (
+	woundSerious  = 0x10
+	woundTerrible = 0x18
+)
+
+// AttackLine 回傳一次攻擊第一句要印哪幾筆記錄（RE-088）：動作加結果。
+// heavy 為真表示射擊的武器種類大於 0x7F（丟石頭而不是射箭）。
+func AttackLine(command, style int, out Outcome, heavy bool) []int {
+	var records []int
+	switch command {
+	case CmdWeapon:
+		records = append(records, WeaponActionBase+style, WeaponAtRecord)
+	case CmdUnarmed:
+		records = append(records, UnarmedActionBase+style, AtTargetRecord)
+	case CmdMissile:
+		first := MissileRecord
+		if heavy {
+			first = BoulderRecord
+		}
+		records = append(records, first, AtTargetRecord)
+	}
+	switch {
+	case out.Miss:
+		switch {
+		case out.Margin > missWide:
+			records = append(records, MissWideRecord)
+		case out.Margin > missNormal:
+			records = append(records, MissRecord)
+		default:
+			records = append(records, MissNarrowRecord)
+		}
+	case out.Parried:
+		if command == CmdMissile {
+			records = append(records, MissileMissRecord)
+		} else {
+			records = append(records, WhoRecord, ParryBase+out.Message)
+		}
+	default:
+		records = append(records, CannotParryRecord)
+	}
+	return records
+}
+
+// DamageLine 回傳一次攻擊第二句要印哪幾筆記錄（`sub_277F4`，RE-088）。
+// kind 是傷害種類（0 是 blow、1 是 spell）；targetMonster 決定倒下那一句要用
+// 「killing it instantly」還是「making him unconscious」。
+func DamageLine(out Outcome, kind int, targetMonster bool) []int {
+	records := []int{TheBlowRecord, BlowKindBase + kind, HitsRecord,
+		LocationBase + out.Location}
+	switch {
+	case out.Damage == 0:
+		return append(records, LittleRecord)
+	case out.Down:
+		// 原版在這裡還會依 `sub_22229` 與怪物記錄 +0x10 分出 collapse／shatter，
+		// 那兩個條件的語意還沒定（RE-088），先一律走 die。
+		return append(records, MakingRecord, DieRecord, BloodLossRecord)
+	case out.Limb:
+		if out.Location > 1 {
+			return append(records, LimbUselessRecord)
+		}
+		if targetMonster {
+			return append(records, KilledRecord)
+		}
+		return append(records, UnconsciousRecord)
+	}
+	records = append(records, CausingRecord)
+	switch {
+	case out.Damage < woundSerious:
+		records = append(records, SeriousRecord)
+	case out.Damage < woundTerrible:
+		records = append(records, TerribleRecord)
+	default:
+		records = append(records, GrievousRecord)
+	}
+	return append(records, WoundRecord)
+}
