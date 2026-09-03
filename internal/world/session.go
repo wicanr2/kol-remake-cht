@@ -51,6 +51,14 @@ type Session struct {
 	// Camping 是換日那一張 CAMPING! 畫面：原版停在那裡等一個鍵
 	// （`sub_297F2:0x2989D`…`0x298E2`）。
 	Camping bool
+
+	// Quest 是站上任務地點時蓋在地圖上的提示；沒有就是 nil。
+	Quest *QuestPrompt
+	// OnArrive 在世界座標真的變了之後被呼叫，回傳要顯示的任務提示；
+	// 沒有東西發生就回 nil。原版的比對迴圈也在同一個位置（`sub_29004:0x29450`）。
+	OnArrive func(x, y int) *QuestPrompt
+	// OnQuestAnswer 是玩家對「Will you partake?」的回答。
+	OnQuestAnswer func(yes bool)
 }
 
 // Rand 是可注入的亂數來源；n 為骰面數，回傳 1…n。與角色建立用的是同一個介面。
@@ -140,6 +148,11 @@ func (s *Session) Walk(dx, dy int) bool {
 			return moved
 		}
 		s.Screen.SyncTerrain()
+		if s.OnArrive != nil {
+			if p := s.OnArrive(t.X, t.Y); p != nil {
+				s.SetQuest(p)
+			}
+		}
 	}
 	if moved {
 		s.advanceTime()
@@ -220,6 +233,17 @@ func (s *Session) Accept() {
 	if len(s.Screen.Icons) == 0 || s.Cursor >= len(s.Screen.Icons) {
 		return
 	}
+	// 任務提示蓋著地圖時，圖示列只有是／否，答完才回地圖。
+	if s.Quest != nil {
+		yes := s.Screen.Icons[s.Cursor]-3 == IconYes
+		if s.OnQuestAnswer != nil {
+			s.OnQuestAnswer(yes)
+		}
+		if s.Quest != nil {
+			s.ClearQuest()
+		}
+		return
+	}
 	// 按下之後白框一律回到第 0 格，原本那一格改畫青色（`sub_29004:0x29765`）。
 	id := s.Screen.Icons[s.Cursor] - 3
 	if s.Mode == ModeMap {
@@ -249,4 +273,41 @@ func (s *Session) TownPicture() int {
 		return -1
 	}
 	return s.Town.Index + TownPictureBase
+}
+
+// 任務地點的提示（RE-079）。走進 `payload3[0x323 + i]`／`[0x33B + i]` 那一格，
+// 而且隊上有人帶著這個任務時，原版會把地圖視窗蓋掉，畫一個 (96,55)–(296,152) 的框
+// （`sub_2A437`），印八列敘述，再問記錄 0xEA「Will you partake?」。
+
+// QuestBox 是那個框；QuestText 是敘述第一列的左上角，行距 8。
+var (
+	QuestBox  = Box{X: 96, Y: 55, Width: 201, Height: 98}
+	QuestText = struct{ X, Y, Step int }{X: 104, Y: 65, Step: 8}
+)
+
+// 是／否的圖示編號，與城鎮共用。
+const (
+	IconYes = 7
+	IconNo  = 8
+)
+
+// QuestPrompt 是站上任務地點時蓋在地圖上的那一頁。
+type QuestPrompt struct {
+	// Lines 是八列敘述；Ask 是最後那一句問話。
+	Lines []string
+	Ask   string
+}
+
+// SetQuest 把畫面切成任務地點的提示，圖示列換成是／否。
+func (s *Session) SetQuest(p *QuestPrompt) {
+	s.Quest = p
+	s.setIcons([]int{IconYes, IconNo})
+	s.Cursor, s.Screen.Selected = 0, 0
+}
+
+// ClearQuest 收掉提示，圖示列回到地圖的那一組。
+func (s *Session) ClearQuest() {
+	s.Quest = nil
+	s.setIcons(s.mapIcons(false))
+	s.Cursor, s.Screen.Selected = 0, 0
 }

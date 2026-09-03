@@ -22,6 +22,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
 	"github.com/wicanr2/kol-remake-cht/internal/assets"
+	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/charcreate"
 	"github.com/wicanr2/kol-remake-cht/internal/chardata"
@@ -83,6 +84,16 @@ func (r *lcg) Roll(n int) int {
 		return 0
 	}
 	return int(r.next()>>16)%n + 1
+}
+
+// partyHasQuest 回報隊上有沒有人帶著這個任務地點的任務（RE-079）。
+func partyHasQuest(party []town.Member, site *battle.Site) bool {
+	for _, m := range party {
+		if site.Taken(m.Quests) {
+			return true
+		}
+	}
+	return false
 }
 
 // partyMovement 是隊伍裡最慢的那個移動率（`sub_29004:0x290A6`…`0x290D7`）。
@@ -583,7 +594,7 @@ func (g *game) render() error {
 				return ui.WorldCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings,
 					g.worldParty, g.worldState, g.worldSession)
 			}
-			return ui.WorldSession(g.canvas.Image(), g.sprites, g.small,
+			return ui.WorldSession(g.canvas.Image(), g.sprites, g.small, g.large,
 				g.worldParty, g.worldState, g.worldSession)
 		}
 		if g.play.Mode == town.ModeInside {
@@ -601,7 +612,7 @@ func (g *game) render() error {
 			return ui.WorldCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings,
 				g.worldParty, g.worldState, g.worldSession)
 		}
-		return ui.WorldSession(g.canvas.Image(), g.sprites, g.small,
+		return ui.WorldSession(g.canvas.Image(), g.sprites, g.small, g.large,
 			g.worldParty, g.worldState, g.worldSession)
 	case sceneOutdoor:
 		if g.strings != nil {
@@ -930,6 +941,8 @@ func main() {
 	buildingDoor := flag.Int("building-door", 5, "建築內部畫面的門序號")
 	worldPath := flag.String("world-map",
 		"assets/original-derived-data/world-map.json", "野外地圖 typed data")
+	questPath := flag.String("quest-sites",
+		"assets/original-derived-data/quest-sites.json", "任務地點 typed data")
 	worldPos := flag.String("world-pos", "", "覆寫野外世界座標，格式 X,Y")
 	worldSub := flag.String("world-sub", "", "覆寫野外次格座標，格式 次格X,次格Y")
 	worldWeather := flag.Int("world-weather", 0, "天候組 0…5")
@@ -1433,7 +1446,7 @@ func main() {
 					Place: slot.Place, Town: slot.Town,
 					Female: slot.Female, Wounds: slot.Wounds,
 					Gold: slot.Gold, BuildingID: slot.Building,
-					Sheet: townSheet(slot.Sheet)})
+					Quests: slot.Quests, Sheet: townSheet(slot.Sheet)})
 			}
 			// 畫面樣本只寫隊伍有誰，錢包與所在地在角色檔裡——住宿與治療要花的
 			// 就是這一份錢（RE-073），所以照名字補齊。
@@ -1452,6 +1465,9 @@ func main() {
 					}
 					if playSession.Party[i].Sheet == nil {
 						playSession.Party[i].Sheet = c.Sheet
+					}
+					if playSession.Party[i].Quests == nil {
+						playSession.Party[i].Quests = c.Quests
 					}
 					break
 				}
@@ -1514,6 +1530,30 @@ func main() {
 			playSession.SaveGame = func() error {
 				return save.Write(*savePath,
 					buildSave(playSession, worldScreenState, *faithfulInn))
+			}
+		}
+		// 野外畫面的隊員格畫的是實際隊伍，不是戶外樣本裡那一份。
+		worldPartyState = playSession.Party
+		// 任務地點：走進去而且隊上有人帶著那個任務，就蓋出敘述與「Will you partake?」
+		// （RE-079）。答應之後的戰鬥還沒實作，這一版只把提示做完。
+		if worldSessionState != nil {
+			sites, err := battle.LoadSites(*questPath)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			worldSessionState.OnArrive = func(x, y int) *world.QuestPrompt {
+				site := sites.At(x, y)
+				if site == nil || !partyHasQuest(playSession.Party, site) {
+					return nil
+				}
+				ask := ""
+				for _, line := range bank.Lines(town.BankUI, battle.PartakeRecord) {
+					if line != "" {
+						ask = line
+					}
+				}
+				return &world.QuestPrompt{Lines: site.Narrative, Ask: ask}
 			}
 		}
 		// 野外的時刻：隊伍最慢的那個移動率決定每步扣多少，換日補營養（RE-077）。

@@ -32,6 +32,9 @@ type Member struct {
 	BuildingID int `json:"building_id,omitempty"`
 	// Sheet 是 MIRROR 那一頁要用的欄位（RE-074）；沒有就畫不出資料頁。
 	Sheet *Sheet `json:"sheet,omitempty"`
+	// Quests 是角色記錄 0x1E2 起的六個 byte：一個 byte 塞四個 2-bit 欄位，
+	// 對應 24 個任務地點（RE-079）。
+	Quests []int `json:"quests,omitempty"`
 	// Backpack 是背包裡的東西，上限六格（RE-075）。
 	Backpack []Good `json:"backpack,omitempty"`
 	// Worn 是穿在身上的東西，一個部位一格；nil 代表那個部位是空的。

@@ -41,6 +41,8 @@ type Candidate struct {
 	BuildingID int
 	// Sheet 是角色資料頁的欄位。
 	Sheet *Sheet
+	// Quests 是角色記錄 0x1E2 起的六個任務旗標 byte（RE-079）。
+	Quests []int
 }
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。

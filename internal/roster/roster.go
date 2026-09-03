@@ -27,6 +27,9 @@ type Slot struct {
 	// 記下的留宿建築編號，與建築 payload 的 0x3A／0x3B 相同（RE-073）。
 	Gold     int `json:"gold"`
 	Building int `json:"building"`
+	// Quests 是角色記錄 0x1E2 起的六個 byte：一個 byte 塞四個 2-bit 欄位，
+	// 對應 24 個任務地點（RE-079）。
+	Quests []int `json:"quests"`
 	// Sheet 是 MIRROR 角色資料頁的欄位（RE-074）。
 	Sheet *Sheet `json:"sheet"`
 }

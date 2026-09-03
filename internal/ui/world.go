@@ -16,13 +16,13 @@ import (
 // 地圖視窗與圖示列；不同的是左側換成天候圖與「時段／地形」標籤，
 // 而且隊伍是一個 2×2 像素的點，畫在視窗第 3 列第 5 欄那一格內、
 // 偏移「次格座標 × 2」像素。
-func World(dst *ebiten.Image, sprites Sprites, small *font.Font,
+func World(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	party []town.Member, s *world.Screen) error {
-	return WorldSession(dst, sprites, small, party, s, nil)
+	return WorldSession(dst, sprites, small, large, party, s, nil)
 }
 
 // WorldSession 同上，但多帶一個狀態機——站在城鎮入口上時地圖視窗換成外觀圖。
-func WorldSession(dst *ebiten.Image, sprites Sprites, small *font.Font,
+func WorldSession(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	party []town.Member, s *world.Screen, sess *world.Session) error {
 	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
 	if err != nil {
@@ -38,6 +38,9 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small *font.Font,
 	if err := drawWorldMap(dst, sprites, s, sess); err != nil {
 		return err
 	}
+	if sess != nil && sess.Quest != nil {
+		drawQuestPrompt(dst, large, sess.Quest)
+	}
 	drawWeather(dst, s)
 	drawWorldLabel(dst, small, s, camping(sess))
 
@@ -52,6 +55,25 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small *font.Font,
 		frame(dst, x, b.Y, b.Width, b.Height, iconFrameColour(s, i))
 	}
 	return nil
+}
+
+// drawQuestPrompt 畫任務地點蓋在地圖上的那一頁（RE-079）：
+// 框是 `sub_2A437` 的 (96,55)–(296,152)，敘述八列從 (104,65) 起、行距 8，
+// 最後空一列再印問句。
+func drawQuestPrompt(dst *ebiten.Image, f *font.Font, q *world.QuestPrompt) {
+	b := world.QuestBox
+	shadow(dst, b.X, b.Y, b.Width, b.Height)
+	fill(dst, b.X, b.Y, b.Width, b.Height, town.ColourBoxEdge)
+	fill(dst, b.X+1, b.Y+1, b.Width-2, b.Height-2, town.ColourBoxFill)
+	t := world.QuestText
+	for i, line := range q.Lines {
+		f.Draw(dst, t.X, t.Y+i*t.Step, line,
+			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+	}
+	if q.Ask != "" {
+		f.Draw(dst, t.X, t.Y+(len(q.Lines)+1)*t.Step, q.Ask,
+			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+	}
 }
 
 // camping 回傳是不是停在換日那一張畫面。

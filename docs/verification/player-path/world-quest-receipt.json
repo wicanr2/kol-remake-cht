@@ -1,0 +1,558 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "world-quest",
+  "description": "讀存檔開場在城 7 旅店門口（隊伍是 Poontang，她帶著第 5 個任務地點的旗標）。走到城鎮上緣出城，接著在野外往東走到 (48,21)：原版在那一格會蓋出任務敘述與「Will you partake?」，remake 走同一串按鍵也停在同一頁。中途會經過換日，CAMPING! 那一張按任何鍵收掉。全程只經過 town.Session 與 world.Session。存檔用 `tools/import_original_characters.py --names Poontang --location 7,3,57,8 --out workplace/saves/quest.json` 產生。",
+  "script": "R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R U U U U U U U U U U U U U",
+  "step_count": 90,
+  "checkpoints": [
+    {
+      "step": 89,
+      "identical_to": "docs/verification/remake-parity/shots/world-quest/intro.png",
+      "note": "任務提示那一頁，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "save": null,
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/world-quest/step-000.png",
+      "sha256": "67c54b8416e29d524448fd74c9e4e8f2f739990af3a130a6ae5da3fdb0dc1c18"
+    },
+    {
+      "step": 1,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-001.png",
+      "sha256": "698003fa8260bd38e7678b1dbf93bfa37a4553800dcef0aacf1dae2501f73fd9"
+    },
+    {
+      "step": 2,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-002.png",
+      "sha256": "0a2e10f6980300dfe8a41e0bbd885d597066fc8aced669f38cd6ca61729dc5ce"
+    },
+    {
+      "step": 3,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-003.png",
+      "sha256": "7139da43ba24c19fb687216381d8fdf62350798e1edc7a63a3d3ccde7652e5a9"
+    },
+    {
+      "step": 4,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-004.png",
+      "sha256": "c6d354d237b469e754ee87d014536afd8a63b1c58f9db1819ac940ac5e26b4ee"
+    },
+    {
+      "step": 5,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-005.png",
+      "sha256": "203b0f13231c4420b638c9538bca5caa75b2c3de9ef9adee9aef87cf81320d2c"
+    },
+    {
+      "step": 6,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-006.png",
+      "sha256": "18b14896c717a9e682d9f095f29f98d7bf3e860cda1169a39955275272ce5e9a"
+    },
+    {
+      "step": 7,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-007.png",
+      "sha256": "b5f890769f5ddc290b0a375916dd94095195d362b308944e2db1800574892fea"
+    },
+    {
+      "step": 8,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-008.png",
+      "sha256": "a5463ba99d15914619e25ba645167b1cdbd5de1270fb1b3ea3f688b3179e92f2"
+    },
+    {
+      "step": 9,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-009.png",
+      "sha256": "b3dd631d69d3e2b374be3aa478662e5e1a2c7e39a83792d64277b3bc30ffc108"
+    },
+    {
+      "step": 10,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-010.png",
+      "sha256": "097b184363fec6a781d4117326756fb01ff1ef8dd7fe9d30e436426aaf7b9d9f"
+    },
+    {
+      "step": 11,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-011.png",
+      "sha256": "1feefde26ca2ee5271dcdb4b8b2b89e64d8615d2307ad510db446963a0b3b91a"
+    },
+    {
+      "step": 12,
+      "token": "RET",
+      "file": "docs/verification/player-path/world-quest/step-012.png",
+      "sha256": "10fec4effea1a39d7eab702475a9862da996f0dc66d4647b35048407d0b39b84"
+    },
+    {
+      "step": 13,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-013.png",
+      "sha256": "9af6922ac8b286064d06facbd6d58ef44d5223b44f24c3af6359626c5c85595f"
+    },
+    {
+      "step": 14,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-014.png",
+      "sha256": "eb5f5c55a9d1ace9005a22eba28a0ddd8016e73ab6cf8f2da6441407e98ba25b"
+    },
+    {
+      "step": 15,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-015.png",
+      "sha256": "3e7771f2dd836323770e7ff2c518f20175455b779611d9360631e44ab4115e7c"
+    },
+    {
+      "step": 16,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-016.png",
+      "sha256": "465844e4a27c1367bc365720f4af45e5c45bf3bbd6f0a8d132fe9ef0096af5ac"
+    },
+    {
+      "step": 17,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-017.png",
+      "sha256": "978feb75b477780afa1681b1beb61f92e8321085dedb165964fd4281b8ad2d54"
+    },
+    {
+      "step": 18,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-018.png",
+      "sha256": "5568da2cf8695a1e4dddbef165ef14958669808ab084ccba068a730e3d9f4129"
+    },
+    {
+      "step": 19,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-019.png",
+      "sha256": "b96f3f60fb3dfd3fd494cfa27bc8935d6dd5755f56cec6dbe4fc4f3df5a72a4d"
+    },
+    {
+      "step": 20,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-020.png",
+      "sha256": "5118fd06a3b1ebba950a90ae0477778b1733a7351f6155464dced6f84bab6de4"
+    },
+    {
+      "step": 21,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-021.png",
+      "sha256": "4f6131a084b30d2eaf52aab49777a1cfe35c547b646ac82b46456bca9786d364"
+    },
+    {
+      "step": 22,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-022.png",
+      "sha256": "bc4bfcf801cfdd5ae37e51c77131096d3743c94d06d1b0f92a7d85e500c533b1"
+    },
+    {
+      "step": 23,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-023.png",
+      "sha256": "96826c9e302724d9fce14ef28c2ccf33a37fdf04c76a5efa51e38c0170cfa114"
+    },
+    {
+      "step": 24,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-024.png",
+      "sha256": "73a77273c1cc7974d77d9968df2db3c2da1f5e20382686813cd926aea69c9fb9"
+    },
+    {
+      "step": 25,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-025.png",
+      "sha256": "81896d0c944495c0aae78683dec641c9b3f1020a783cc5e8ff8a0fe54d514970"
+    },
+    {
+      "step": 26,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-026.png",
+      "sha256": "06af784d55fcac42ab087609b9ced714849eeaab4347b610b1a563f618a53b83"
+    },
+    {
+      "step": 27,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-027.png",
+      "sha256": "307089fed163e8fe74968bcd1d5ec133d8161903c2d92346275fab717db38658"
+    },
+    {
+      "step": 28,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-028.png",
+      "sha256": "31e770b63cb643983eec79ec3396b2f5557cc93bb21d346f4ecc9a1dd2e9005f"
+    },
+    {
+      "step": 29,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-029.png",
+      "sha256": "e6838e9e56d95e843009db66575135efcd304c7d61030f41ebaaf5f19eff25c5"
+    },
+    {
+      "step": 30,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-030.png",
+      "sha256": "4104518f2daa6357e2bb44e0389f846a2f7190a7e02a6bf2401f6195938f60e7"
+    },
+    {
+      "step": 31,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-031.png",
+      "sha256": "23bb53df5c32ba0abb1eefc2c0d4b71db6c2a4a9a9406c6c2d7acc89fab69a83"
+    },
+    {
+      "step": 32,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-032.png",
+      "sha256": "768a4128399b71993faba62ee1d3fcf9aa8b6d08ba9bbad6c8d458380d28211d"
+    },
+    {
+      "step": 33,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-033.png",
+      "sha256": "95cdcfbd982ff580efb3d4c23a165269bf71992e44dc78f5dec91b6bd8da539e"
+    },
+    {
+      "step": 34,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-034.png",
+      "sha256": "fc5531684f15ab10660c019f13f731d2d5f90b84d148168f764625ca3e48abd1"
+    },
+    {
+      "step": 35,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-035.png",
+      "sha256": "2057cb0bdbce45c0a852935aa3458a7f24148f8ad624e11581be00cb8c7cd650"
+    },
+    {
+      "step": 36,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-036.png",
+      "sha256": "37013fdc468c8321017248b3ab1b0f92f20c32f563c4e17df8467ef0a20dc22f"
+    },
+    {
+      "step": 37,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-037.png",
+      "sha256": "d7e1eabdb8025043e6d6102de89308d4525993a2d87c340f3048bb05db5eb00a"
+    },
+    {
+      "step": 38,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-038.png",
+      "sha256": "2896de51a453af99266a2098e0a32c13e7731296edc10b96a35d8744becc728c"
+    },
+    {
+      "step": 39,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-039.png",
+      "sha256": "5893a1344df5bf085335aa71a0da7a7fdb0363771059ffa7c7a678f2f679029b"
+    },
+    {
+      "step": 40,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-040.png",
+      "sha256": "c4320e0b9b3dab08965e51db74d4cfb04a0bfcfe25d4e5f208bc5a02b20d73e1"
+    },
+    {
+      "step": 41,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-041.png",
+      "sha256": "5ff8dec1d1a9f11487bb2a24c9a82e3c39df107447c467ff113942709dbd7f57"
+    },
+    {
+      "step": 42,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-042.png",
+      "sha256": "ac0d710224a4853c6241ee123883452d89aa0b1aa5a017b5530e94c47086aba1"
+    },
+    {
+      "step": 43,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-043.png",
+      "sha256": "2e32243712cccf22edf60d26270479b24cfc3bc4699728b511e27cb3d524cbd3"
+    },
+    {
+      "step": 44,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-044.png",
+      "sha256": "cc1aa1a50caf463157799fa2227ec6e02be3dbaedf64b3e1f2155b2d14e2863a"
+    },
+    {
+      "step": 45,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-045.png",
+      "sha256": "44b029ad958efa9f1783d3aa59dfb8fc58e19c85564c811064b154c24eed520e"
+    },
+    {
+      "step": 46,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-046.png",
+      "sha256": "307ac0320257123adabb8d2f6190ecf858331a2fa18d616785391edb2e290734"
+    },
+    {
+      "step": 47,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-047.png",
+      "sha256": "966ec09819139bb5078deb0512a81386f481abbaeae28a05ff028ef98c12af3f"
+    },
+    {
+      "step": 48,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-048.png",
+      "sha256": "dd788e61695fd808cd27929ba44cbb6c772f4bf0a405ebc5fb7fa9109abe2257"
+    },
+    {
+      "step": 49,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-049.png",
+      "sha256": "3628b7dac89572ecbde7a1e1729276bd8192e5ce079983f84d3d6d9936df3b64"
+    },
+    {
+      "step": 50,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-050.png",
+      "sha256": "cf3adcd54fb185fe147e1d33a7aa147724f47ea418867a833f43be33ce85cead"
+    },
+    {
+      "step": 51,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-051.png",
+      "sha256": "425d82793c0da03828fe75cc5f409c4d6c71c20566c45572c7355efb2f11d89f"
+    },
+    {
+      "step": 52,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-052.png",
+      "sha256": "83930f4cb4c3e057605ac6d8b60d91341e7aa715a351f82095cbf5864ecccdd3"
+    },
+    {
+      "step": 53,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-053.png",
+      "sha256": "e56f1e00f808ce064ed5e63dac37e340e76f6e8c7810f6f9ae9e3fed1fad6a0c"
+    },
+    {
+      "step": 54,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-054.png",
+      "sha256": "b7c9162c20def9480b75667d9c04150617d2417e3ab12848e5099676f61901a5"
+    },
+    {
+      "step": 55,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-055.png",
+      "sha256": "4ba929c5e0d0a2d3faf5740d0961567c6ccc4d4ccd4740bf42f2101cbeb61716"
+    },
+    {
+      "step": 56,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-056.png",
+      "sha256": "557654ffde3a3120cef20105f511e66aaa0336cb3a31f5fa112c334db43e8170"
+    },
+    {
+      "step": 57,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-057.png",
+      "sha256": "4fdf9eecaaeb82a9d2f89ec50183f8f4f9c5f26e0a249d0d481793553163eb76"
+    },
+    {
+      "step": 58,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-058.png",
+      "sha256": "e841a8f560ecdf3dcf05211cef9618e31b4424c835c81b2bed63a942da721192"
+    },
+    {
+      "step": 59,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-059.png",
+      "sha256": "3e4d3508280ee869f5453405b460fb654304edec228d362b99967f80b758bf2c"
+    },
+    {
+      "step": 60,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-060.png",
+      "sha256": "adef5a5f3bbe1e90098a4a43a3e93867014d6879dc27a33cccf7aafad32abfde"
+    },
+    {
+      "step": 61,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-061.png",
+      "sha256": "107c0a2d1c2521ca3593a6f360e86b9912c8a7be11265a2259d15abda8487720"
+    },
+    {
+      "step": 62,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-062.png",
+      "sha256": "2192d874fd7c4dfc6026ba4af5c014bd484f91a734dea1b6a9f42408d47ad524"
+    },
+    {
+      "step": 63,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-063.png",
+      "sha256": "3a8a83ed1cc2b33e18fd2b80167d36fbc72b8a9022993524fb60858242a8d7a3"
+    },
+    {
+      "step": 64,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-064.png",
+      "sha256": "082413b1677a22c002b1f2eb290b22b7d607dc2ffc61ff0b051b8f5a11748781"
+    },
+    {
+      "step": 65,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-065.png",
+      "sha256": "be490dcc848fed48b6b33270c2753b1a0cda0c2df58979a13e30d3e50c718c00"
+    },
+    {
+      "step": 66,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-066.png",
+      "sha256": "4a283b7148ac2701ae6f40066d20d675c335dc4c5cf80f83feec211a54bd7efa"
+    },
+    {
+      "step": 67,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-067.png",
+      "sha256": "6b6a3861c22927976dd722341a88201f6a5c5550253e44db75964dc6d659942d"
+    },
+    {
+      "step": 68,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-068.png",
+      "sha256": "fbf1d31ee7de0fdfef8c8aea0151cb1fc605ce2bb7668ae574deb47224312410"
+    },
+    {
+      "step": 69,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-069.png",
+      "sha256": "536b177a2c8c27c9775100dd6a503843324fbc03ce87db2a94abc027e9f6177f"
+    },
+    {
+      "step": 70,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-070.png",
+      "sha256": "81b1383f8118376b74c53033fffeadf87c4905688958825f0ac477e5b9755a40"
+    },
+    {
+      "step": 71,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-071.png",
+      "sha256": "f41a606088a63fbc625e2e98e526c68c95f87a27932ca834777094de1808ad88"
+    },
+    {
+      "step": 72,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-072.png",
+      "sha256": "d38fb147fbba32cc2fcfd9fc0040538040d0d9e53f8e682d514ce3e090add460"
+    },
+    {
+      "step": 73,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-073.png",
+      "sha256": "5182d6621a92eec9dadbbbad093d2bcf06012cdb033f2689bc0bf7890fb8de60"
+    },
+    {
+      "step": 74,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-074.png",
+      "sha256": "5a43e06c79fafa25fc261ff5de5064a1fecb25a361e07045cb2b976fff781b8e"
+    },
+    {
+      "step": 75,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-075.png",
+      "sha256": "54182cf8ca8399b928d8e32efefd6a233894d3070eef4a937212c2ac7b21d86c"
+    },
+    {
+      "step": 76,
+      "token": "R",
+      "file": "docs/verification/player-path/world-quest/step-076.png",
+      "sha256": "e51bbeb152f0109337c371bd2ce66c1e261812a9c290e37ae1f48da96ba4b594"
+    },
+    {
+      "step": 77,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-077.png",
+      "sha256": "7ccdd6d863bde3a658c077b0c27edd85242d08f751ffb5aa741213a1c8d9b25b"
+    },
+    {
+      "step": 78,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-078.png",
+      "sha256": "bf091617641eb97425f5ca593e66e1113246858c13dd110a7e7b1da69af42aa7"
+    },
+    {
+      "step": 79,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-079.png",
+      "sha256": "9ac2a716125a5c2a6e868272fcb0250ad13c96694dec7ef9e525fa033fde0f3f"
+    },
+    {
+      "step": 80,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-080.png",
+      "sha256": "7bc98053100f3298ce453ef09ab21c76fec7e516d430117915acd9525286e007"
+    },
+    {
+      "step": 81,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-081.png",
+      "sha256": "1126ee2a5e806b25cb5a80884f1966094e58b914413a3b09fdb1026703174d9b"
+    },
+    {
+      "step": 82,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-082.png",
+      "sha256": "e1b685ce9e7e223f3875f17904c112b507761b37bca29618a02257cf95ffd6b3"
+    },
+    {
+      "step": 83,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-083.png",
+      "sha256": "e36ad2d626bae5d47224edfef5ce6d0d1de74667c1fc64cdfab24ffc85db4f6d"
+    },
+    {
+      "step": 84,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-084.png",
+      "sha256": "85fcaf8f28b3916a47d592b95138f16d192b7e60ccfb5d9cb5e6715c1a3af955"
+    },
+    {
+      "step": 85,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-085.png",
+      "sha256": "0a25cd4ce6ac0664c146fe56d614fafa558c5278135311af82dee8eeafbdcc4a"
+    },
+    {
+      "step": 86,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-086.png",
+      "sha256": "370a6b390a4b411f2b4522e2e6198d99cabb708f340f92dc07f17c7b9b2d3c13"
+    },
+    {
+      "step": 87,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-087.png",
+      "sha256": "756790b7e9335bcc3c8f533eed09a677202998dc644f7b45d8be2abf6d0f4d50"
+    },
+    {
+      "step": 88,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-088.png",
+      "sha256": "698ee52828f3ab22e96e0ac5dba33e99bc65c71792fbfa0b4810b159d3c300f4"
+    },
+    {
+      "step": 89,
+      "token": "U",
+      "file": "docs/verification/player-path/world-quest/step-089.png",
+      "sha256": "81220652a6357f889196580f3cb78eaeaeea30ee9f81c6d9ce4bc7fc249d96e0"
+    }
+  ]
+}
