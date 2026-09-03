@@ -35,11 +35,18 @@ const (
 	StatScaleDen = 150
 )
 
-// WeaponRow 是武器熟練度的一列。
+// WeaponRow 是武器熟練度的一列。角色記錄裡是 0x4A + 13 × 列（RE-074）。
 type WeaponRow struct {
-	Name    string `json:"name"`
-	Offence int    `json:"offence"`
-	Defence int    `json:"defence"`
+	// Row 是這一列在角色記錄裡的編號 0…3。
+	Row  int    `json:"row"`
+	Name string `json:"name"`
+	// Weapon 是武器識別（記錄位移 +8）；訓練時用它比對練過沒有（RE-076）。
+	Weapon  int `json:"weapon"`
+	Offence int `json:"offence"`
+	Defence int `json:"defence"`
+	// OffenceRaw／DefenceRaw 是沒有除以 10 的原始值，訓練加的是這一個。
+	OffenceRaw int `json:"offence_raw"`
+	DefenceRaw int `json:"defence_raw"`
 }
 
 // Sheet 是一名角色在資料頁上要用到的全部欄位。
@@ -80,6 +87,19 @@ func (s *Sheet) Displayed() [8]int {
 		scaleStat((inl + str) / 2),
 		scaleStat((hea + str) / 2),
 	}
+}
+
+// WeaponRows 是武器列的上限。
+const WeaponRows = 4
+
+// EarnedRank 是這名角色「應得」的位階：八個攻防值加起來除以 200
+// （`sub_14371`，RE-076）。AWARD 的訓練要求記錄裡的 Rank 與它相同。
+func (s *Sheet) EarnedRank() int {
+	total := 0
+	for _, w := range s.Weapons {
+		total += w.OffenceRaw + w.DefenceRaw
+	}
+	return total / 200
 }
 
 // MovementLetter 是畫面上那個字母：`chr(0x41 + 移動率)`，移動率 0 當成 20。
@@ -182,7 +202,7 @@ func (s *Session) buildSheet(m Member) *SheetPage {
 		Height:     sh.Height(),
 		Weight:     sh.WeightText(),
 		Stats:      sh.Displayed(),
-		Weapons:    sh.Weapons,
+		Weapons:    upperWeapons(sh.Weapons),
 		Gold:       m.Gold,
 		Adventure:  sh.AdventurePoints,
 		Movement:   sh.MovementLetter(),
@@ -248,6 +268,17 @@ func (s *Session) closeSheet() {
 
 // ShowingSheet 回報現在是不是停在角色資料頁。
 func (s *Session) ShowingSheet() bool { return s.Inside != nil && s.Inside.Sheet != nil }
+
+// upperWeapons 把武器名轉大寫。資料裡存的是 `Greatsword`（5-bit 解碼器的 mode 1），
+// 資料頁整段走大寫旗標，所以畫出來是 `GREATSWORD`（RE-074／RE-075）。
+func upperWeapons(rows []WeaponRow) []WeaponRow {
+	out := make([]WeaponRow, len(rows))
+	for i, w := range rows {
+		w.Name = strings.ToUpper(w.Name)
+		out[i] = w
+	}
+	return out
+}
 
 // sheetLabels 是頁面上那些固定標籤，中文模式優先用譯文（譯文自己帶同一套座標）。
 func (s *Session) sheetLabels() []Segment {

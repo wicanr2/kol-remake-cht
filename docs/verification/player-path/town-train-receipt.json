@@ -1,0 +1,133 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-train",
+  "description": "讀存檔開場在城 1 布瑞特堡壘的門邊，走進去按 AWARD 訓練：付學費、從四門技能裡挑長劍、選攻擊、在數字欄打一個 1 再按 Return。ddduhh 的冒險點數不到 100，一級要 100 點，所以最後一句是「點數不夠」，技能與點數都不變；全程經過 town.Session。存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,53,52 --out workplace/saves/train.json` 產生。",
+  "script": "D RET SPACE > > > > RET RET SPACE RET RET 1 RET",
+  "step_count": 15,
+  "checkpoints": [
+    {
+      "step": 8,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/offer.png",
+      "note": "學費那一問，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 10,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/skills.png",
+      "note": "四門技能的清單，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 11,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/side.png",
+      "note": "攻擊還是防禦，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 12,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/count.png",
+      "note": "空的數字欄，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 13,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/digit.png",
+      "note": "數字欄回顯 1，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 14,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/nopoints.png",
+      "note": "點數不夠那一句，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "save": null,
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town-train/step-000.png",
+      "sha256": "ee4260eccca78d19475ecbd5f834b95f56f6a9c67c98a8abb2c65707dba2e211"
+    },
+    {
+      "step": 1,
+      "token": "D",
+      "file": "docs/verification/player-path/town-train/step-001.png",
+      "sha256": "065f89c727271f31c8bd8f0b06ad6ec8e1ddf1040a20c8867b3f0331503074fe"
+    },
+    {
+      "step": 2,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-train/step-002.png",
+      "sha256": "7a3936efc0af6d8e4883cd3bafd0922d91f21984f92427a9cb0716b885f28ec6"
+    },
+    {
+      "step": 3,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-train/step-003.png",
+      "sha256": "eab511bfdab5ace1601974acc4daddaba51a4c323bd23a9f4606452573d6f558"
+    },
+    {
+      "step": 4,
+      "token": ">",
+      "file": "docs/verification/player-path/town-train/step-004.png",
+      "sha256": "ca71c8e11cfdfac7886c94fc7c463f0cbdfbac2fe1ee9163af3bc7c95ac61d43"
+    },
+    {
+      "step": 5,
+      "token": ">",
+      "file": "docs/verification/player-path/town-train/step-005.png",
+      "sha256": "86851c715b4395ab7f3082164879179604d60b61fc88c066e445f50d4c480d16"
+    },
+    {
+      "step": 6,
+      "token": ">",
+      "file": "docs/verification/player-path/town-train/step-006.png",
+      "sha256": "39ed4dbc52741513f3e2d2dde18950ef00e169b468ef151d48e7efe15959ab2c"
+    },
+    {
+      "step": 7,
+      "token": ">",
+      "file": "docs/verification/player-path/town-train/step-007.png",
+      "sha256": "db1cf922d0784a516eef6ffef492c080f75534c42970fcaebcb86c061a3127d0"
+    },
+    {
+      "step": 8,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-train/step-008.png",
+      "sha256": "50563e3ea76bb4e3e86ecc36a0bca528287dda6a08b970a7f23c4eaaa4f87318"
+    },
+    {
+      "step": 9,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-train/step-009.png",
+      "sha256": "7ef4de7bc02892d99c3ccacbc3d0e64ec98d0eafe3f02d4b721f87932bffaf1c"
+    },
+    {
+      "step": 10,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-train/step-010.png",
+      "sha256": "b1665d89baf47b035265459e4385c0c2751103cb887b7f4a22aa7b1c138c6e97"
+    },
+    {
+      "step": 11,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-train/step-011.png",
+      "sha256": "211c1e6d476e9f70d6de5ddb08cac83f401393cab8e6e92cbe85db70c66571db"
+    },
+    {
+      "step": 12,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-train/step-012.png",
+      "sha256": "ce4d8ec462f9ac326320a7b6820905a8a7fac18a462cea46d0575032e81ae123"
+    },
+    {
+      "step": 13,
+      "token": "1",
+      "file": "docs/verification/player-path/town-train/step-013.png",
+      "sha256": "9f4124ba74df2a56d60ef6ea8ca4e02f8717c28584bff33b94168c3708133a33"
+    },
+    {
+      "step": 14,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-train/step-014.png",
+      "sha256": "51ebb8720841f1f52244f8b2cd9b0b79acf75272209b54e6bf3140b20d094dcc"
+    }
+  ]
+}

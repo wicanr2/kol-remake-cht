@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"strings"
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/wicanr2/kol-remake-cht/internal/font"
@@ -80,10 +81,14 @@ func drawInnList(dst *ebiten.Image, f *font.Font, list *town.InnList) {
 		}
 		f.Draw(dst, b.TextX, b.TextY+i*b.LineStep, line, c[0], c[1], c[2])
 	}
+	// 捲不動就沒有箭頭；捲得動時往下那一個畫在**最後一列**，不是固定第八列。
+	if !list.Scrolls() {
+		return
+	}
 	x := b.TextX + town.ListColumn*f.Advance()
 	a := town.ColourListArrow
 	f.Draw(dst, x, b.TextY, string(rune(town.ListArrowUp)), a[0], a[1], a[2])
-	f.Draw(dst, x, b.TextY+(town.ListRows-1)*b.LineStep,
+	f.Draw(dst, x, b.TextY+(len(list.Rows)-1)*b.LineStep,
 		string(rune(town.ListArrowDown)), a[0], a[1], a[2])
 }
 
@@ -97,9 +102,25 @@ func drawBox(dst *ebiten.Image, f *font.Font, b town.Box, lines []string) {
 		if b.Centred {
 			x += (b.Cells - len([]rune(line))) / 2 * f.Advance()
 		}
-		f.Draw(dst, x, b.TextY+i*b.LineStep, line,
+		y := b.TextY + i*b.LineStep
+		text, caret := splitCaret(line)
+		f.Draw(dst, x, y, text,
 			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+		if caret >= 0 {
+			fill(dst, x+caret*f.Advance(), y+town.CaretRow, f.Advance(), 1,
+				town.ColourText)
+		}
 	}
+}
+
+// splitCaret 把游標哨符抽掉，回傳要畫的字串與游標所在的格號（沒有就是 −1）。
+func splitCaret(line string) (string, int) {
+	at := strings.Index(line, town.TextCaret)
+	if at < 0 {
+		return line, -1
+	}
+	return line[:at] + strings.Repeat(" ", len([]rune(line[at:]))),
+		len([]rune(line[:at]))
 }
 
 // shadow 畫城鎮視窗共用的右下投影。

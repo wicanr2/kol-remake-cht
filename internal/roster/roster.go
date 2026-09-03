@@ -33,9 +33,13 @@ type Slot struct {
 
 // Weapon 是武器熟練度的一列。
 type Weapon struct {
-	Name    string `json:"name"`
-	Offence int    `json:"offence"`
-	Defence int    `json:"defence"`
+	Row        int    `json:"row"`
+	Name       string `json:"name"`
+	Weapon     int    `json:"weapon"`
+	Offence    int    `json:"offence"`
+	Defence    int    `json:"defence"`
+	OffenceRaw int    `json:"offence_raw"`
+	DefenceRaw int    `json:"defence_raw"`
 }
 
 // Sheet 是角色資料頁要用到的欄位，欄位名與抽取器的輸出相同。

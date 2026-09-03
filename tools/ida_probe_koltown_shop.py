@@ -28,7 +28,7 @@ import idc
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 DGROUP_EA = 0x2DED0
 
-DUMP_FUNCTIONS = (0x19A87,)
+DUMP_FUNCTIONS = (0x14371, 0x17318, 0x1716A)
 DUMP_LIMIT = 9000
 
 GLOBALS = {
@@ -118,7 +118,7 @@ def main() -> None:
     ida_auto.auto_wait()
 
     receipt = {
-        "schema": "kol-ida-koltown-shop-explore-v3",
+        "schema": "kol-ida-koltown-award-explore-v1",
         "ida_version": idaapi.get_kernel_version(),
         "input_name": input_path.name,
         "input_sha256": digest,
@@ -129,7 +129,7 @@ def main() -> None:
         "dumped_functions": [function_slice(ea) for ea in DUMP_FUNCTIONS],
         "dgroup_dumps": {f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, n)
                                           or b"").hex()
-                         for off, n in ((0x00E0, 80),)},
+                         for off, n in ((0x0130, 128),)},
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",

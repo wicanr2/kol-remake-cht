@@ -160,7 +160,7 @@ func (s *Session) shopView() *InnList {
 	for _, g := range sh.goods[sh.top:end] {
 		rows = append(rows, g.Name)
 	}
-	return &InnList{Rows: rows, Selected: sh.cursor - sh.top}
+	return &InnList{Rows: rows, Selected: sh.cursor - sh.top, Total: len(sh.goods)}
 }
 
 // MoveShop 是清單上的方向鍵。兩端夾住不繞回，視窗跟著捲。
@@ -492,13 +492,18 @@ func (s *Session) memberSize(i int) int {
 // priceLines 組出「開場 ＋ 要花你 N 枚金幣，有意思嗎？」，與住宿、治療同一套。
 func (s *Session) priceLines(intro, price int) []string {
 	lines := nonEmpty(s.uiLines(intro))
-	cost := strings.TrimSpace(s.uiRecord(CostPrefix))
+	// 記錄 0x53 結尾的 `]` 就是數字前面那個空白，不用自己補（RE-076）；
+	// 譯文沒有那個記號，就自己補一個。
+	cost := strings.TrimLeft(s.uiRaw(CostPrefix), " ")
+	if cost != "" && !strings.HasSuffix(cost, " ") {
+		cost += " "
+	}
 	amount := strconv.Itoa(price)
 	suffix := nonEmpty(s.uiLines(CostSuffix))
 	if s.Trans.UIRecord(CostSuffix) != "" && len(suffix) == 1 {
-		return append(lines, strings.TrimSpace(cost+" "+amount+" "+suffix[0]))
+		return append(lines, strings.TrimSpace(cost+amount+" "+suffix[0]))
 	}
-	lines = append(lines, strings.TrimSpace(cost+" "+amount))
+	lines = append(lines, strings.TrimRight(cost+amount, " "))
 	return append(lines, suffix...)
 }
 
@@ -575,11 +580,9 @@ func (s *Session) adjustNotice(n int) {
 		s.setInsideIcons([]int{IconYes, IconNo})
 		return
 	}
+	// 記錄 0x3A 結尾的 `]` 是部位名前面那個空白。
 	part := s.uiRecord(BodyPartRecord + sh.adjust[n].Position)
-	lines := nonEmpty(s.uiLines(ArmourPrefixRecord))
-	if len(lines) > 0 {
-		lines[len(lines)-1] += part
-	}
+	lines := []string{strings.TrimRight(s.uiRaw(ArmourPrefixRecord)+part, " ")}
 	lines = append(lines, nonEmpty(s.uiLines(ArmourSuffixRecord))...)
 	next := n + 1
 	s.shopSay(lines, func() { s.adjustNotice(next) })

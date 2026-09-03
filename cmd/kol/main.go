@@ -251,6 +251,20 @@ func applyPlayToken(s *town.Session, token string) error {
 			return nil
 		}
 	}
+	if s.Training() {
+		switch token {
+		case "U":
+			s.MoveTrain(-1)
+			return nil
+		case "D":
+			s.MoveTrain(1)
+			return nil
+		case "1", "2", "3", "4", "5":
+			n, _ := strconv.Atoi(token)
+			s.TrainCount(n)
+			return nil
+		}
+	}
 	switch token {
 	case "L":
 		s.Walk(-1, 0)
@@ -323,7 +337,9 @@ func townSheet(s *roster.Sheet) *town.Sheet {
 	copy(out.Stats[:], s.Stats)
 	for _, w := range s.Weapons {
 		out.Weapons = append(out.Weapons, town.WeaponRow{
-			Name: w.Name, Offence: w.Offence, Defence: w.Defence})
+			Row: w.Row, Name: w.Name, Weapon: w.Weapon,
+			Offence: w.Offence, Defence: w.Defence,
+			OffenceRaw: w.OffenceRaw, DefenceRaw: w.DefenceRaw})
 	}
 	return out
 }

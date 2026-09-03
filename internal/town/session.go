@@ -81,6 +81,8 @@ type Session struct {
 	rest *restState
 	// shop 是商店流程的狀態；nil 代表不在買賣中（RE-075）。
 	shop *shopState
+	// train 是訓練流程的狀態；nil 代表不在訓練中（RE-076）。
+	train *trainState
 	// quit 記下玩家在「你要離開嗎」那一問答了 YES。
 	quit bool
 
@@ -238,6 +240,12 @@ func (s *Session) acceptInside() {
 			return
 		}
 		s.note(sheetIconName(id))
+	case s.train != nil:
+		if id == IconSpacebar {
+			s.Continue()
+			return
+		}
+		s.trainAnswer(id)
 	case s.shop != nil:
 		if id == IconSpacebar {
 			s.Continue()
@@ -278,6 +286,8 @@ func (s *Session) acceptInside() {
 		s.StartShop()
 	case id == IconTrain:
 		s.StartTrain()
+	case id == IconAward:
+		s.StartAward()
 	default:
 		s.note(iconName(id))
 	}
@@ -382,6 +392,13 @@ func (s *Session) Continue() {
 		step()
 		return
 	}
+	// 訓練也有幾段話讀完才接下一步。
+	if s.train != nil && s.train.next != nil {
+		step := s.train.next
+		s.train.next = nil
+		step()
+		return
+	}
 	if !s.greeted {
 		s.greeted = true
 		s.Inside.Dialog = s.greeting()
@@ -480,6 +497,18 @@ func (s *Session) uiRecord(index int) string {
 		return ""
 	}
 	return s.UIText.Record(BankUI, index)
+}
+
+// uiRaw 取一筆記錄但**保留前後空白**。原版有些記錄靠自己帶的空白接在別段後面，
+// 例如訓練問句裡的 `" Skill"`（記錄 0x40）。
+func (s *Session) uiRaw(index int) string {
+	if zh := s.Trans.UIRecord(index); zh != "" {
+		return zh
+	}
+	if s.UIText == nil {
+		return ""
+	}
+	return s.UIText.RecordPadded(BankUI, index)
 }
 
 // heard 組出 MOUTH 沒對上時的那一句，逐段都走譯文優先。

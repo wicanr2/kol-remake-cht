@@ -1,0 +1,43 @@
+{
+  "name": "town-train",
+  "description": "讀存檔開場在城 1 布瑞特堡壘的門邊，走進去按 AWARD 訓練：付學費、從四門技能裡挑長劍、選攻擊、在數字欄打一個 1 再按 Return。ddduhh 的冒險點數不到 100，一級要 100 點，所以最後一句是「點數不夠」，技能與點數都不變；全程經過 town.Session。存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,53,52 --out workplace/saves/train.json` 產生。",
+  "script": "D RET SPACE > > > > RET RET SPACE RET RET 1 RET",
+  "shot_dir": "docs/verification/player-path/town-train",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/town-train-receipt.json",
+  "checkpoints": [
+    {
+      "step": 8,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/offer.png",
+      "note": "學費那一問，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 10,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/skills.png",
+      "note": "四門技能的清單，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 11,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/side.png",
+      "note": "攻擊還是防禦，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 12,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/count.png",
+      "note": "空的數字欄，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 13,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/digit.png",
+      "note": "數字欄回顯 1，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 14,
+      "identical_to": "docs/verification/remake-parity/shots/town-train/nopoints.png",
+      "note": "點數不夠那一句，與已對拍的截圖逐 byte 相同"
+    }
+  ]
+}

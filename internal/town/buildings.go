@@ -40,7 +40,12 @@ type Door struct {
 	RecordID int `json:"record_id"`
 	// Goods 是商店的商品表（RE-075）。馬廄的表版面不同，只有名字。
 	Goods []Good `json:"goods"`
+	// Skills 是訓練建築教的四門技能（RE-076）。
+	Skills []TrainSkill `json:"skills"`
 }
+
+// IsTrainer 回傳這棟建築有沒有 AWARD 的訓練（旗標 bit7）。
+func (d *Door) IsTrainer() bool { return d.IconFlags[0]&0x80 != 0 }
 
 // IsInn 回傳這棟建築是不是能住宿存檔的客棧（旗標 bit3）。
 func (d *Door) IsInn() bool { return d.IconFlags[0]&0x08 != 0 }
@@ -93,8 +98,9 @@ type rawDoor struct {
 	IconFlags   []int  `json:"icon_flags"`
 	Price       int    `json:"price"`
 	HealRate    int    `json:"heal_rate"`
-	RecordID    int    `json:"record_id"`
-	Goods       []Good `json:"goods"`
+	RecordID    int          `json:"record_id"`
+	Goods       []Good       `json:"goods"`
+	Skills      []TrainSkill `json:"skills"`
 }
 
 type rawTown struct {
@@ -142,6 +148,7 @@ func LoadBuildings(path string) (*Buildings, error) {
 				Portrait: d.Portrait, Name: d.Name, Person: d.Person,
 				TextMissing: d.TextMissing, Price: d.Price,
 				HealRate: d.HealRate, RecordID: d.RecordID, Goods: d.Goods,
+				Skills: d.Skills,
 			}
 			if len(d.IconFlags) == 2 {
 				door.IconFlags = [2]int{d.IconFlags[0], d.IconFlags[1]}

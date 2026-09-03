@@ -55,6 +55,9 @@ RECORD_ID_OFFSET = 0x3A
 GOODS_OFFSET, GOODS_STRIDE, GOODS_MAX = 0x100, 0x10, 32
 GOODS_PRICE_OFFSET = 8
 STEED_STRIDE, STEED_NAME_OFFSET, STEED_MAX = 0x80, 0x70, 4
+# 訓練建築（旗標 bit7）教的技能表：payload 0x50 起，一筆 12 byte、四筆（RE-076）。
+# 位移 +8 是武器識別，+0x0A／+0x0B 是這門課收得起的技能值上下限。
+SKILL_OFFSET, SKILL_STRIDE, SKILL_END = 0x50, 0x0C, 0x80
 # 骰面查表（DGROUP+0xD4），加一之後就是骰子的面數（RE-075）。
 DICE_SIDES = (3, 4, 6, 8, 10, 12, 20, 100)
 # 盾牌（部位 6）的防護是百分比，不是骰子。
@@ -98,6 +101,18 @@ def goods(body: bytes, flags: int) -> list[dict]:
         if base + GOODS_STRIDE > len(body) or body[base] == 0:
             break
         out.append(good(body[base:base + GOODS_STRIDE], k))
+    return out
+
+
+def skills(body: bytes) -> list[dict]:
+    """訓練建築教的四門技能（RE-076）。"""
+    out = []
+    for k, base in enumerate(range(SKILL_OFFSET, SKILL_END, SKILL_STRIDE)):
+        if base + SKILL_STRIDE > len(body) or body[base] == 0:
+            continue
+        rec = body[base:base + SKILL_STRIDE]
+        out.append({"index": k, "name": packed_name(rec), "weapon": rec[8],
+                    "min": rec[0x0A], "max": rec[0x0B], "record": rec.hex()})
     return out
 
 
@@ -195,6 +210,8 @@ def main() -> int:
                     door["record_id"] = be16(body, RECORD_ID_OFFSET)
                     if body[ICON_FLAGS] & 0x32:
                         door["goods"] = goods(body, body[ICON_FLAGS])
+                    if body[ICON_FLAGS] & 0x80:
+                        door["skills"] = skills(body)
                 else:
                     # TOWN7 的門 21 有圖與肖像，卻沒有對應的文字 payload。
                     door["text_missing"] = True
@@ -235,6 +252,9 @@ def main() -> int:
                      "bit6 的修道院只用低位元組，當每一點傷勢的價錢。",
             "record_id": f"建築 payload[0x{RECORD_ID_OFFSET:02X}／0x{RECORD_ID_OFFSET + 1:02X}]："
                          "住宿存檔時寫進角色記錄位移 0x2E／0x2F 的建築編號。",
+            "skills": f"訓練建築的技能表在 payload 0x{SKILL_OFFSET:02X} 起，一筆 "
+                      f"0x{SKILL_STRIDE:02X} byte、四筆；+8 是武器識別，"
+                      "+0x0A／+0x0B 是收得起的技能值上下限（RE-076）。",
             "goods": f"商店的商品表在 payload 0x{GOODS_OFFSET:03X} 起，一筆 "
                      f"0x{GOODS_STRIDE:02X} byte、最多 {GOODS_MAX} 筆，第一個 byte 是 0 "
                      "就結束；名稱 5-bit 壓縮，價錢是 `(rec[8] & 0x0F) << 8 | rec[9]`。"

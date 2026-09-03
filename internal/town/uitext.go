@@ -113,8 +113,8 @@ func strip(text string) string {
 	return strings.TrimSpace(stripKeepSpaces(text))
 }
 
-// stripKeepSpaces 拿掉 `~Vxx`／`~Hxx`／`~Cxx` 座標與顏色標記，把 `@` 當空白，
-// 並丟掉 `]` 這個原版用來標示接續的記號；前後空白原樣保留。
+// stripKeepSpaces 拿掉 `~Vxx`／`~Hxx`／`~Cxx` 座標與顏色標記，把 `@` 與 `]`
+// 都當成一個空白；前後空白原樣保留。
 func stripKeepSpaces(text string) string {
 	var b strings.Builder
 	for i := 0; i < len(text); {
@@ -127,6 +127,9 @@ func stripKeepSpaces(text string) string {
 			b.WriteByte(' ')
 			i++
 		case text[i] == ']':
+			// `]` 是「接著往下畫」的記號，畫面上留一個空白：原版的
+			// `How many]` ＋ `Offensive` 顯示成 `How many Offensive`（RE-076）。
+			b.WriteByte(' ')
 			i++
 		default:
 			b.WriteByte(text[i])

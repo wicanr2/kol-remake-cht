@@ -312,11 +312,11 @@ func TestAdjustCharges(t *testing.T) {
 	s.Party[0].Worn[0] = &goods[0]
 	s.Party[0].Worn[1] = &goods[1]
 	s.StartTrain()
-	if s.Inside.Dialog[0] != `"The armor on yourhead` {
+	if s.Inside.Dialog[0] != `"The armor on your head` {
 		t.Fatalf("第一句是 %q", s.Inside.Dialog)
 	}
 	s.Continue() // 讀完第一件
-	if s.Inside.Dialog[0] != `"The armor on yourtorso` {
+	if s.Inside.Dialog[0] != `"The armor on your torso` {
 		t.Fatalf("第二句是 %q", s.Inside.Dialog)
 	}
 	s.Continue() // 讀完第二件，出現總價

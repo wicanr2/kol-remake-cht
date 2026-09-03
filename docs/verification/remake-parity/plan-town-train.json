@@ -1,0 +1,135 @@
+{
+  "name": "town-train",
+  "description": "AWARD 底下的訓練（RE-076）。流程整段在 `sub_11A93`：0x13789 起先比位階（不相稱就講記錄 0x6B「Go to the Arena!」），0x137ce 問學費，0x13885 列出建築 payload 0x50 起的四門技能，選到高三位元非 0 的武器再問攻擊還是防禦，0x13b83 問要練幾點。那一問的數字欄是 `sub_1B5C8(0x2E3A, 2)`：可打兩格，只收 1…5 的一位數，打完要按 Return；`0x13bfb` 把 ASCII 減 0x30，第二格必須是 0。欄尾的游標不是字模——`sub_1B100(1)` 每 5 拍把 `sub_1CA6E` 的參數在 0x00／0xFF 之間反相，EGA 版 `sub_1D01D` 把那個 byte 直接寫進 A000:(列×0x28＋行)，也就是筆尖那一格底下一條 8 px 寬、1 px 高的橫槓。點數不夠時由 `sub_178E0:0x1822c` 講記錄 0xD0。",
+  "input": {
+    "command": "tools/run_kol_shots.sh workplace/specs/train-parity.txt（-scene play -load workplace/saves/train.json）"
+  },
+  "pairs": [
+    {
+      "label": "學費那一問（AWARD 開場）",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-train/offer.png",
+      "original": "docs/verification/character-ui/town-train-run1/frames/frame-153.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 14,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "label": "四門技能的清單",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-train/skills.png",
+      "original": "docs/verification/character-ui/town-train-run1/frames/frame-155.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 14,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "label": "攻擊還是防禦",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-train/side.png",
+      "original": "docs/verification/character-ui/town-train-run1/frames/frame-156.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 14,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "label": "要幾點技能：空的數字欄",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-train/count.png",
+      "original": "docs/verification/character-ui/town-train-run1/frames/frame-158.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 14,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "label": "數字欄回顯打進去的 1",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-train/digit.png",
+      "original": "docs/verification/character-ui/town-train-run1/frames/frame-160.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 14,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "label": "冒險點數不夠",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-train/nopoints.png",
+      "original": "docs/verification/character-ui/town-train-run1/frames/frame-161.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 14,
+          "height": 14
+        }
+      ]
+    }
+  ]
+}

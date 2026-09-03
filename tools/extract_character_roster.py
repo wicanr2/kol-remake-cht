@@ -27,6 +27,7 @@ import zipfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+from extract_town_text import render  # noqa: E402
 from png_io import read_png  # noqa: E402
 from probe_extract_comb_png import PALETTE  # noqa: E402
 from probe_extract_fixed_charpics_png import decode_record  # noqa: E402
@@ -70,16 +71,21 @@ WEIGHT_PER_FOOT = (0x41, 0x32, 0x4B, 0x46, 0x28, 0x00, 0x23)
 
 def packed_name(raw: bytes) -> str:
     """解 5-bit 壓縮的裝備名稱：第一個 byte 的高 nibble 是字數，
-    字元從第 4 個 bit 起每 5 個 bit 一個，1…26 對應 A…Z、0 是空白（RE-074）。"""
+    字元從第 4 個 bit 起每 5 個 bit 一個（RE-074）。
+
+    字元走 `sub_1B94F` 的 mode 1（RE-075）：每個字的第一個字母轉大寫，
+    所以資料裡是 `Greatsword`。角色資料頁另外整段轉大寫，那是畫面的事。"""
     count = raw[0] >> 4
-    out = []
+    values = []
     for i in range(count):
         bit = 4 + i * 5
         j = bit >> 3
         word = (raw[j] << 8) | (raw[j + 1] if j + 1 < len(raw) else 0)
-        value = (word >> (11 - (bit & 7))) & 0x1F
-        out.append(chr(value | 0x40) if 1 <= value <= 26 else " ")
-    return "".join(out).rstrip()
+        values.append((word >> (11 - (bit & 7))) & 0x1F)
+    text, unknown = render(values, capitalise=True)
+    if unknown:
+        raise SystemExit(f"名稱裡有未定的跳脫序列 {unknown}")
+    return text.rstrip()
 
 
 def character_sheet(rec: bytes) -> dict:
@@ -100,8 +106,12 @@ def character_sheet(rec: bytes) -> dict:
         weapons.append({
             "row": i,
             "name": packed_name(rec[base:base + WEAPON_STRIDE]),
+            # 位移 +8 是武器識別，訓練時用它比對這名角色有沒有練過（RE-076）。
+            "weapon": rec[base + 8],
             "offence": (rec[skill] << 8 | rec[skill + 1]) // 10,
             "defence": (rec[skill + 2] << 8 | rec[skill + 3]) // 10,
+            "offence_raw": rec[skill] << 8 | rec[skill + 1],
+            "defence_raw": rec[skill + 2] << 8 | rec[skill + 3],
         })
     return {
         "stats": list(rec[STATS_OFFSET:STATS_OFFSET + STATS_COUNT]),

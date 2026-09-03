@@ -47,7 +47,13 @@ type Candidate struct {
 type InnList struct {
 	Rows     []string
 	Selected int
+	// Total 是清單全部有幾筆。原版只有「視窗裝不下」時才畫捲動箭頭
+	// （`sub_1AAE8:0x1AB0D` 比的是列數與筆數），0 代表與 Rows 一樣多。
+	Total int
 }
+
+// Scrolls 回報這份清單捲不捲得動——捲不動就沒有箭頭。
+func (l *InnList) Scrolls() bool { return l.Total > len(l.Rows) }
 
 // Recruit 是招募的狀態：候選人、反白位置與視窗第一列。
 type Recruit struct {
@@ -66,7 +72,8 @@ func (r *Recruit) View() *InnList {
 	for _, c := range r.Candidates[r.Top:end] {
 		rows = append(rows, c.Name)
 	}
-	return &InnList{Rows: rows, Selected: r.Cursor - r.Top}
+	return &InnList{Rows: rows, Selected: r.Cursor - r.Top,
+		Total: len(r.Candidates)}
 }
 
 // Move 移動反白。兩端夾住不繞回，視窗跟著捲到反白看得見為止。
