@@ -23,6 +23,8 @@ import idc
 
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 COMBAT_ENTRY = 0x1E3A8
+# 想逐條讀的函式；探針每次只倒這幾支，免得輸出爆掉。
+DUMP_FUNCTIONS = (0x2374C,)
 TEXT_DRAW = 0x1A8FD
 
 
@@ -101,12 +103,9 @@ def main() -> None:
     known = {COMBAT_ENTRY, *level1, *level2}
 
     dump = []
-    for ea in idautils.FuncItems(0x10000):
-        text = disassembly(ea)
-        if 0x10c80 <= ea <= 0x10d60:
-            dump.append({"ea": f"0x{ea:x}", "disassembly": text})
-    for ea in idautils.FuncItems(COMBAT_ENTRY):
-        pass
+    for start in DUMP_FUNCTIONS:
+        for ea in idautils.FuncItems(start):
+            dump.append({"ea": f"0x{ea:x}", "disassembly": disassembly(ea)})
 
     receipt = {
         "schema": "kol-ida-koltown-combat-map-v1",

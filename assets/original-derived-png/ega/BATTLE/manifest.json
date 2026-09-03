@@ -1,0 +1,41 @@
+{
+  "schema": "kol-battle-tiles-v1",
+  "tool": "tools/extract_battle_tiles.py",
+  "source_zip": {
+    "name": "kol.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_archive": "Knights-of-legend/KOLPICS",
+  "evidence": "RE-079；磚塊版面同 RE-059",
+  "encoding": "一塊磚 16×16，四個平面各 32 byte，plane-major；像素值是 EGA 索引",
+  "rights": {
+    "classification": "private-repo 可保存；不得公開散布",
+    "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。"
+  },
+  "images": [
+    {
+      "file": "battle-tiles-08.png",
+      "payload_index": 8,
+      "payload_bytes": 10241,
+      "tile_count": 80,
+      "tile_side": 16,
+      "atlas_columns": 10,
+      "width": 160,
+      "height": 128,
+      "payload_sha256": "8662af8be550de35f49364fa994107a0dd51b004a20b4949a0976b2ab2c97a00",
+      "png_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b"
+    },
+    {
+      "file": "battle-tiles-12.png",
+      "payload_index": 12,
+      "payload_bytes": 10241,
+      "tile_count": 80,
+      "tile_side": 16,
+      "atlas_columns": 10,
+      "width": 160,
+      "height": 128,
+      "payload_sha256": "986de6e323cf102f26131bf09c8d19e6d6f594e1354bd24370efa550bc33e2e5",
+      "png_sha256": "6617265036b93bac7b433e1040c4dae5bb28f92990686360f38ae296206365c8"
+    }
+  ]
+}

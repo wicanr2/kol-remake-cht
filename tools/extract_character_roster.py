@@ -49,6 +49,8 @@ FEMALE_OFFSET, WOUNDS_OFFSET = 0x1A, 0x1B
 # 位移 0x2A–0x2C 是金幣，高位元組在前的 24-bit。`sub_14CCF` 讀進來、
 # `sub_14D3A` 寫回去，客棧住宿與修道院治療花的就是這個欄位（RE-073）。
 GOLD_OFFSET, GOLD_BYTES = 0x2A, 3
+# 任務旗標：六個 byte，一個 byte 塞四個 2-bit 欄位，對應 24 個任務地點（RE-079）。
+QUEST_OFFSET, QUEST_BYTES = 0x1E2, 6
 # 位移 0x2E／0x2F 是角色留宿的建築編號，來自建築 payload 的 0x3A／0x3B。
 BUILDING_OFFSET = 0x2E
 # MIRROR 角色資料頁用得到的欄位（RE-074）。位移 0x1D–0x23 是七個內部屬性，
@@ -202,6 +204,8 @@ def main() -> int:
                 data[base + GOLD_OFFSET:base + GOLD_OFFSET + GOLD_BYTES], "big"),
             "building": int.from_bytes(
                 data[base + BUILDING_OFFSET:base + BUILDING_OFFSET + 2], "big"),
+            "quests": list(data[base + QUEST_OFFSET:
+                                base + QUEST_OFFSET + QUEST_BYTES]),
             "sheet": character_sheet(data[base:base + SLOT_BYTES]) if name else None,
         })
 
