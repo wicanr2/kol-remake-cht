@@ -22,6 +22,7 @@ import zipfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from inventory_image_archives import EXPECTED_ZIP_SHA256  # noqa: E402
+from extract_town_text import render  # noqa: E402
 from probe_town_data import lzw_decode, payloads, read_volumes  # noqa: E402
 
 ALLOWED_OUTPUT_PARENT = pathlib.PurePosixPath("assets/original-derived-data")
@@ -30,6 +31,36 @@ SITE_X, SITE_Y = 0x323, 0x33B
 FIRST_MONSTER_PAYLOAD, MONSTER_COUNT = 5, 32
 # 任務旗標：一個 byte 塞四個 2-bit 欄位，除數表在 KOLTOWN 的 DGROUP+0x7C。
 QUEST_FIELD_BASE, QUEST_DIVISORS = 0x1E2, (1, 4, 16, 64)
+# 站位：記錄 +3 起 36 byte 複製到 DGROUP+0x2E0C，戰鬥再由那裡取
+# （`sub_2B0FF:0x2B204`、`sub_1E3A8:0x1E870`／`0x1E7C5`）。
+PLACEMENT_OFFSET, MONSTER_SLOTS, PARTY_SLOTS = 3, 12, 6
+# 敘述：記錄 0x80 起八列，一列 16 byte——第 0 個 byte 是字數，
+# 之後從第 8 個 bit 起每 5 個 bit 一個字（`sub_2B0FF:0x2B23F` 的 `sub_1B94F`）。
+TEXT_OFFSET, TEXT_LINES, TEXT_STRIDE, TEXT_MAX = 0x80, 8, 0x10, 24
+
+
+def line_values(data: bytes, base: int, count: int) -> list[int]:
+    out = []
+    for i in range(count):
+        bit = base * 8 + 8 + i * 5
+        j = bit >> 3
+        word = (data[j] << 8) | (data[j + 1] if j + 1 < len(data) else 0)
+        out.append((word >> (11 - (bit & 7))) & 0x1F)
+    return out
+
+
+def narrative(record: bytes) -> list[str]:
+    lines = []
+    for i in range(TEXT_LINES):
+        base = TEXT_OFFSET + i * TEXT_STRIDE
+        count = record[base]
+        if not 0 < count <= TEXT_MAX:
+            raise SystemExit(f"敘述第 {i} 列的字數不合理：{count}")
+        text, unknown = render(line_values(record, base, count))
+        if unknown:
+            raise SystemExit(f"敘述第 {i} 列有未定的跳脫序列：{unknown}")
+        lines.append(text)
+    return lines
 
 
 def monster_name(record: bytes) -> str:
@@ -74,6 +105,14 @@ def main() -> int:
             "quest_divisor": QUEST_DIVISORS[i & 3],
             "payload": SITE_PAYLOAD_BASE + i,
             "payload_sha256": hashlib.sha256(raw).hexdigest(),
+            "monster_y": list(raw[PLACEMENT_OFFSET:PLACEMENT_OFFSET + MONSTER_SLOTS]),
+            "monster_x": list(raw[PLACEMENT_OFFSET + MONSTER_SLOTS:
+                                  PLACEMENT_OFFSET + 2 * MONSTER_SLOTS]),
+            "party_y": list(raw[PLACEMENT_OFFSET + 2 * MONSTER_SLOTS:
+                                PLACEMENT_OFFSET + 2 * MONSTER_SLOTS + PARTY_SLOTS]),
+            "party_x": list(raw[PLACEMENT_OFFSET + 2 * MONSTER_SLOTS + PARTY_SLOTS:
+                                PLACEMENT_OFFSET + 2 * MONSTER_SLOTS + 2 * PARTY_SLOTS]),
+            "narrative": narrative(raw),
         })
 
     doc = {
@@ -93,6 +132,9 @@ def main() -> int:
             "coordinates": f"payload{TABLE_PAYLOAD}[0x{SITE_X:X} + i]／[0x{SITE_Y:X} + i]",
             "site_record": f"payload {SITE_PAYLOAD_BASE} + i：怪物、等級、數量",
             "quest_flag": "角色 [0x1E2 + i / 4] 除以 (1, 4, 16, 64)[i & 3] 之後低兩位是 1",
+            "placement": "記錄 +3 起 36 byte：12 敵人 Y、12 敵人 X、6 隊員 Y、6 隊員 X",
+            "narrative": "記錄 0x80 起八列，一列 16 byte：第 0 個 byte 是字數，"
+                         "之後從第 8 個 bit 起每 5 個 bit 一個字",
         },
         "sites": sites,
     }

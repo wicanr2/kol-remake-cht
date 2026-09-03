@@ -3239,6 +3239,38 @@ OF YOUR QUEST!」，再按一次空白鍵就進戰鬥。收據 `world-quest-run1
 指令圖示列在畫面底部，畫的仍是 `KOLMPICS[編號 + 3]`；出現過的編號有
 0x2A…0x2E、0x30、0x35、0x37…0x3A、0x3C…0x40，以及 7（YES）與 0x0F（U-TURN）。
 
+### 任務地點的記錄（`已證實`）
+
+`sub_2B0FF` 讀進來的 `TOWN0` payload `0x25 + i` 是 257 byte：
+
+```
++0x00        怪物編號
++0x01        等級
++0x02        數量
++0x03…0x26   36 byte 的站位：12 敵人 Y、12 敵人 X、6 隊員 Y、6 隊員 X
+             （複製到 DGROUP+0x2E0C，戰鬥從那裡取）
++0x80 起八列  一列 16 byte 的敘述：第 0 個 byte 是字數，
+             之後從第 8 個 bit 起每 5 個 bit 一個字（`sub_1B94F`）
+```
+
+第 5 個地點解出來是「12 隻 3 級 BINDERAK」，敘述是
+`From the rim of one of / the hills surrounding / the valley below, you /
+see the spidery forms of / Binderaks running about / in what once was the /
+druid's keep.  Slowly, / you approach its walls.`——與 `world-quest-run1`
+的 frame-862 逐字相同。講完之後問記錄 0xEA「Will you partake?」。
+
+### 戰場（`強推論`）
+
+戰場是 64×64 格的磚塊圖（4,096 byte 的緩衝區），視窗一次看 9×9 格、一格 16×16。
+磚圖是 `KOLPICS` 的 payload 8（帶任務時 12），80 塊磚，版面與城鎮磚塊相同。
+一般遭遇的地形是**現場亂數生成**的：每一格擲 `rand(4)`，中 1 就填 0x0D、其餘 0x09，
+再擲 100 次 `rand(6)` 加總得到一個數，照那個數把隨機格子改成 0x0A。
+任務地點走另一條路（`word_34968 = 1`），地形不重新生成。
+
+參戰者站位：一般遭遇的隊員固定在 X `33 31 33 31 33 31`、Y `30 30 32 32 34 34`；
+敵人查五組陣型表（`0x0B8C` Y、`0x0BD4` X，一組 12 格），陣型是 `rand(5) − 1`——
+西、南、東、北、東西夾擊各一組。任務地點則直接用記錄裡的站位。
+
 ### 模組範圍
 
 `sub_1E3A8` 有 4,389 條指令，直接呼叫 62 支函式，其中六支超過 500 條
