@@ -56,6 +56,14 @@ type Member struct {
 	ArmourWeight, ShieldWeight, ShieldGrade int
 	// Wounds 是開場就帶著的傷（角色記錄 0x1B）。
 	Wounds int
+	// HasWeapon 是角色記錄 +0x30 非零，也就是手上真的有武器
+	// （`sub_228B7` 幾乎每一格都先問這個）。
+	HasWeapon bool
+	// HasSecondItem 是角色記錄 +0x190 非零；PackCount 是 0x200 起每 0x10 一筆、
+	// 十六筆之中非零的筆數。兩者的語意都還沒定（SPEC-010 末段），
+	// 這裡只當指令列的條件用。
+	HasSecondItem bool
+	PackCount     int
 }
 
 // State 是一場戰鬥。

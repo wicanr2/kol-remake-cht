@@ -85,9 +85,20 @@ type Actor struct {
 	// Fatigue 是 +0x2D 的挨打累計；Parries 是這一回合已經招架幾次（+0x0F）。
 	Fatigue int
 	Parries int
-	// Style／Guard 是這一回合選的攻擊選項（+0x23）與防禦選項（+0x24）。
-	Style int
-	Guard int
+	// Style／Guard／Command 是這一回合選的攻擊選項（+0x23）、防禦選項（+0x24）
+	// 與指令碼（+0x25）。三個都由規劃段填：隊員從指令列選、敵人由 AI 填（RE-081）。
+	Style   int
+	Guard   int
+	Command int
+	// Facing 是 +0x28 的方向 0…7（上、右上、右、右下、下、左下、左、左上）。
+	Facing int
+	// Flag1D／Flag1E 是記錄 +0x1D／+0x1E。組指令列與選單都要看它們，
+	// 但語意還沒定（SPEC-010 末段）：+0x1D 在推出射擊圖示時會被設成 1，
+	// +0x1E 非零時換掉整組近戰與移動選項。
+	Flag1D int
+	Flag1E int
+	// Flag03 是記錄 +0x03，只在移動方式選單裡當門檻用；語意同樣未定。
+	Flag03 int
 	// Threshold 是 +0x10 的昏迷門檻，Damage 是 +0x0E 的累積傷害。
 	Threshold int
 	Damage    int

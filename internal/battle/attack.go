@@ -70,6 +70,9 @@ type Weapon struct {
 	Base  int
 	Count int
 	Sides int
+	// Code 是 +0x0C 的傷害碼原值。組指令列時要用它的 bit 0（`sub_228B7:0x22951`），
+	// 而 Count／Sides 只保留高位元的部分，取不回來。
+	Code int
 	// Weight 是 +0x0A 的負重。
 	Weight int
 	// TwoHand 為真時不能同時拿盾牌（+0x0D 的 bit 1）。
