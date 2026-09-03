@@ -99,6 +99,8 @@ const (
 	shopEat
 	// shopFit 是「要合身嗎」那一問。
 	shopFit
+	// shopAdjust 是 TRAIN 的甲冑調整。
+	shopAdjust
 )
 
 // shopState 是一次逛商店的狀態。
@@ -109,8 +111,10 @@ type shopState struct {
 	stage  shopStage
 	// next 是「按空白鍵讀完這一段之後」要做的事。
 	next func()
-	// member／slot／fit 是合身那一問的對象與該有的尺寸。
+	// member／slot／fit 是合身那一問的對象與該有的尺寸；
+	// 甲冑調整時 fit 是總價、adjust 是要改的那幾件。
 	member, slot, fit int
+	adjust            []adjustEntry
 }
 
 // Shopping 回報現在是不是停在商店的畫面。
@@ -209,6 +213,8 @@ func (s *Session) shopAnswer(id int) {
 		s.finishBuy(false)
 	case shopFit:
 		s.fitAnswer(id == IconYes)
+	case shopAdjust:
+		s.adjustAnswer(id == IconYes)
 	}
 }
 
@@ -494,4 +500,109 @@ func (s *Session) priceLines(intro, price int) []string {
 	}
 	lines = append(lines, strings.TrimSpace(cost+" "+amount))
 	return append(lines, suffix...)
+}
+
+// 甲冑調整（RE-075）。TRAIN 圖示由旗標 byte 1 的 bit1 與 bit3 給：
+// bit1 是把身上的甲冑改到合身，bit3 是鍛造（還沒實作）。
+
+// 甲冑調整用得到的記錄。
+const (
+	// ArmourFitsRecord 是 `"You don't need to fit!"`。
+	ArmourFitsRecord = 0x67
+	// ArmourPrefixRecord 與 ArmourSuffixRecord 夾住部位名：
+	// `"The armor on your` ＋ head／torso／legs ＋ `needs to be adjusted!"`。
+	ArmourPrefixRecord = 0x3A
+	ArmourSuffixRecord = 0x3B
+	// BodyPartRecord 是 head／torso／legs 三個小寫部位名。
+	BodyPartRecord = 0xC7
+)
+
+// adjustEntry 是一件要改的甲冑：部位與改完該有的尺寸。
+type adjustEntry struct {
+	Position int
+	Size     int
+}
+
+// StartTrain 是按下 TRAIN。
+func (s *Session) StartTrain() {
+	if s.Mode != ModeInside || s.Inside == nil || s.door == nil {
+		return
+	}
+	if s.door.IconFlags[1]&0x02 != 0 {
+		s.startAdjust()
+		return
+	}
+	// 鍛造（bit3）還沒實作。
+	s.note(iconName(IconTrain))
+}
+
+// startAdjust 掃過頭、軀幹、腿三個部位，把不合身的挑出來。
+func (s *Session) startAdjust() {
+	i := s.speakerIndex()
+	if i < 0 {
+		return
+	}
+	size := s.memberSize(i)
+	var pending []adjustEntry
+	total := 0
+	for pos := 0; pos < FitPositions; pos++ {
+		g := s.Party[i].Worn[pos]
+		if g == nil {
+			continue
+		}
+		want := FitSize(*g, size)
+		if want == g.Encumbrance {
+			continue
+		}
+		total += FitCost(*g)
+		pending = append(pending, adjustEntry{Position: pos, Size: want})
+	}
+	if total == 0 {
+		s.say(nonEmpty(s.uiLines(ArmourFitsRecord)), nil)
+		return
+	}
+	s.shop = &shopState{stage: shopAdjust, member: i, adjust: pending, fit: total}
+	s.adjustNotice(0)
+}
+
+// adjustNotice 逐件講「你某處的甲冑該調整了」，每一句都等空白鍵，
+// 講完才問總價。
+func (s *Session) adjustNotice(n int) {
+	sh := s.shop
+	if n >= len(sh.adjust) {
+		s.Inside.Dialog = s.priceLines(FitOfferRecord, sh.fit)
+		s.Inside.DialogZh = nil
+		s.setInsideIcons([]int{IconYes, IconNo})
+		return
+	}
+	part := s.uiRecord(BodyPartRecord + sh.adjust[n].Position)
+	lines := nonEmpty(s.uiLines(ArmourPrefixRecord))
+	if len(lines) > 0 {
+		lines[len(lines)-1] += part
+	}
+	lines = append(lines, nonEmpty(s.uiLines(ArmourSuffixRecord))...)
+	next := n + 1
+	s.shopSay(lines, func() { s.adjustNotice(next) })
+}
+
+// adjustAnswer 是總價那一問的回答。
+func (s *Session) adjustAnswer(yes bool) {
+	sh := s.shop
+	if !yes {
+		s.endShop()
+		return
+	}
+	i := sh.member
+	if s.Party[i].Gold < sh.fit {
+		s.shopSay(nonEmpty(s.uiLines(NotEnoughRecord)), s.endShop)
+		return
+	}
+	s.Party[i].Gold -= sh.fit
+	for _, entry := range sh.adjust {
+		if g := s.Party[i].Worn[entry.Position]; g != nil {
+			g.Encumbrance = entry.Size
+		}
+	}
+	s.syncParty()
+	s.endShop()
 }

@@ -32,10 +32,10 @@
 - remake 目前畫面的展示圖在 `docs/screenshots/`，由 `tools/run_kol_shots.sh` 依
   `shots.spec` 在鎖定容器內一次重生，`MANIFEST.json` 記下產生指令、輸入雜湊與 PNG
   SHA-256，並要求有對拍收據的畫面與那張逐 byte 相同。README 的畫面區塊引用同一批圖。
-- remake 對拍收據已建立（`docs/verification/remake-parity/`）：二十一份收據 267 對畫面
+- remake 對拍收據已建立（`docs/verification/remake-parity/`）：二十一份收據 268 對畫面
   全部通過（書本畫面 3、角色建立 9、圖像層 92、三段翻頁 54、刪除流程 13、
   HARBOR MASTER 1、旅店畫面 8、戶外地圖 22、建築進門 1、城門提示 4、建築對話 3、
-  招募同伴 9、住宿存檔 11、角色資料頁 8、商店 8、野外地圖 4、道路 10、進城 7）。野外那一份用 `compare` 指明每一對涵蓋的矩形，天候圖列在
+  招募同伴 9、住宿存檔 11、角色資料頁 8、商店 9、野外地圖 4、道路 10、進城 7）。野外那一份用 `compare` 指明每一對涵蓋的矩形，天候圖列在
   `not_claimed`——雲層動畫還沒實作，那一塊不宣稱，也不當成允許差異區。
   書本封面與目錄頁在原版滑鼠游標以外與 DOS EGA 原版逐像素相同；80 張 New Character
   畫面的角色圖像 blit 矩形 (208,106,40×38) 全部逐像素相同；空白 New Character 頁

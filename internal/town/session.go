@@ -276,6 +276,8 @@ func (s *Session) acceptInside() {
 		s.OpenSheet()
 	case id == IconTrade:
 		s.StartShop()
+	case id == IconTrain:
+		s.StartTrain()
 	default:
 		s.note(iconName(id))
 	}

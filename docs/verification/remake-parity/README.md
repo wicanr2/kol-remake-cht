@@ -60,12 +60,12 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `town-recruit.json`（招募同伴的三個畫面，對 `town-recruit-companion-run1`） | 9 | 9 |
 | `town-rest.json`（住宿、存檔與離開詢問，對 `town-rest-run1`／`town-rest-two-run1`） | 11 | 11 |
 | `town-mirror.json`（MIRROR 的角色資料頁，對 `town-mirror-run1`） | 8 | 8 |
-| `town-shop.json`（商店的清單、明細與穿上，對 `town-shop-run2`） | 8 | 8 |
+| `town-shop.json`（商店的清單、明細、穿上與甲冑調整，對 `town-shop-run2`／`town-adjust-run1`） | 9 | 9 |
 | `world.json`（野外地圖畫面，對 `town-leave-run1`） | 4 | 4 |
 | `world-road.json`（ROAD／SIGNPOST 自動循路，對 `world-road-run1`） | 10 | 10 |
 | `world-town.json`（野外走到城鎮入口與進城，對 `world-enter-town-run1`） | 7 | 7 |
 
-二十一份收據 267 對畫面，允許差異區之外都是**零像素差**。
+二十一份收據 268 對畫面，允許差異區之外都是**零像素差**。
 
 `world.json` 多了一個欄位 `compare`：每一對只涵蓋畫面上的一塊矩形。這**不是**
 允許差異區——矩形之外的部分那一對不宣稱，而計畫的 `not_claimed` 要寫明為什麼。

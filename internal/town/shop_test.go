@@ -272,3 +272,81 @@ func TestShopWithoutFitting(t *testing.T) {
 		t.Fatal("買完應該回到清單")
 	}
 }
+
+// adjustText 是甲冑調整用得到的記錄。
+func adjustText() *UIText {
+	t := fitText()
+	t.Banks[0].Records = append(t.Banks[0].Records,
+		uiRecord{Index: ArmourFitsRecord, Text: `"You don't need to fit!"`},
+		uiRecord{Index: ArmourPrefixRecord, Text: `"The armor on your]`},
+		uiRecord{Index: ArmourSuffixRecord, Text: `@~H0Dneeds to be adjusted!"`},
+		uiRecord{Index: BodyPartRecord, Text: "head"},
+		uiRecord{Index: BodyPartRecord + 1, Text: "torso"},
+		uiRecord{Index: BodyPartRecord + 2, Text: "legs"})
+	return t
+}
+
+// 身上的甲冑都合身就只講一句，不收錢也不問。
+func TestAdjustNothingToDo(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x07, 0x02}, armourerGoods())
+	s.UIText = adjustText()
+	s.Party[0].Sheet = &Sheet{Stats: [StatCount]int{0, 0, 100, 0, 0, 0, 0}}
+	cap := armourerGoods()[0]
+	s.Party[0].Worn[0] = &cap
+	s.StartTrain()
+	if s.Shopping() {
+		t.Fatal("都合身不該進問答")
+	}
+	if s.Inside.Dialog[0] != `"You don't need to fit!"` {
+		t.Fatalf("畫的是 %q", s.Inside.Dialog)
+	}
+}
+
+// 不合身就逐件講一句，講完問總價；答應之後扣錢並把尺寸改過來。
+func TestAdjustCharges(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x07, 0x02}, armourerGoods())
+	s.UIText = adjustText()
+	// 體型 150：毛皮帽該有的尺寸 9（記錄 6）、毛皮上衣該有的 81（記錄 54）。
+	s.Party[0].Sheet = &Sheet{Stats: [StatCount]int{0, 0, 150, 0, 0, 0, 0}}
+	goods := armourerGoods()
+	s.Party[0].Worn[0] = &goods[0]
+	s.Party[0].Worn[1] = &goods[1]
+	s.StartTrain()
+	if s.Inside.Dialog[0] != `"The armor on yourhead` {
+		t.Fatalf("第一句是 %q", s.Inside.Dialog)
+	}
+	s.Continue() // 讀完第一件
+	if s.Inside.Dialog[0] != `"The armor on yourtorso` {
+		t.Fatalf("第二句是 %q", s.Inside.Dialog)
+	}
+	s.Continue() // 讀完第二件，出現總價
+	// 頭 5 ＋ 軀幹 50 ＝ 55。
+	if s.Inside.Dialog[1] != "it will cost you 55" {
+		t.Fatalf("總價那一行是 %q", s.Inside.Dialog[1])
+	}
+	yes(s)
+	if s.Party[0].Gold != 3000-55 {
+		t.Fatalf("金幣是 %d", s.Party[0].Gold)
+	}
+	if s.Party[0].Worn[0].Encumbrance != 9 || s.Party[0].Worn[1].Encumbrance != 81 {
+		t.Fatalf("改完的尺寸是 %d／%d",
+			s.Party[0].Worn[0].Encumbrance, s.Party[0].Worn[1].Encumbrance)
+	}
+}
+
+// 錢不夠就講記錄 0x56，尺寸不變。
+func TestAdjustNotEnoughGold(t *testing.T) {
+	// 改一頂帽子要 5 枚，身上只有 1 枚。
+	s := shopSession(t, 1, [2]int{0x07, 0x02}, armourerGoods())
+	s.UIText = adjustText()
+	s.Party[0].Sheet = &Sheet{Stats: [StatCount]int{0, 0, 150, 0, 0, 0, 0}}
+	goods := armourerGoods()
+	s.Party[0].Worn[0] = &goods[0]
+	s.StartTrain()
+	s.Continue()
+	yes(s)
+	if s.Party[0].Gold != 1 || s.Party[0].Worn[0].Encumbrance != 6 {
+		t.Fatalf("買不起卻改了狀態：金幣 %d 尺寸 %d",
+			s.Party[0].Gold, s.Party[0].Worn[0].Encumbrance)
+	}
+}

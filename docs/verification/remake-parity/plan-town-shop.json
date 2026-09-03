@@ -1,6 +1,6 @@
 {
   "name": "town-shop",
-  "description": "商店的兩個畫面（RE-075）。商品表在建築 payload 的 0x100 起，一筆 16 byte；清單用的是招募同伴那一支同樣的元件——白字反白、其餘青色、右側紅色上下箭頭。明細面板的每一欄都由那 16 byte 算出來：類別、穿戴部位、防護的骰子範圍、負重、價錢與狀態。名稱是 5-bit 壓縮，而且是 `sub_1B94F` 的 mode 1，每個字的第一個字母轉大寫，所以畫面上是 `Fur Cap` 不是 `FUR CAP`。買完之後會調整的店會先算合身：尺寸剛好就直接穿上並說 `\"I'll put this on you.\"`，不合身才問要不要花錢改。ddduhh 的體型 105，毛皮帽該有的尺寸是 6 × 1 × 105 / 100 ＝ 6，與記錄裡的 6 相同，所以原版就是直接穿上。",
+  "description": "商店的兩個畫面（RE-075）。商品表在建築 payload 的 0x100 起，一筆 16 byte；清單用的是招募同伴那一支同樣的元件——白字反白、其餘青色、右側紅色上下箭頭。明細面板的每一欄都由那 16 byte 算出來：類別、穿戴部位、防護的骰子範圍、負重、價錢與狀態。名稱是 5-bit 壓縮，而且是 `sub_1B94F` 的 mode 1，每個字的第一個字母轉大寫，所以畫面上是 `Fur Cap` 不是 `FUR CAP`。買完之後會調整的店會先算合身：尺寸剛好就直接穿上並說 `\"I'll put this on you.\"`，不合身才問要不要花錢改。ddduhh 的體型 105，毛皮帽該有的尺寸是 6 × 1 × 105 / 100 ＝ 6，與記錄裡的 6 相同，所以原版就是直接穿上。TRAIN 在這間店是甲冑調整（旗標 byte 1 的 bit1）：身上三個部位都合身時只講 `\"You don't need to fit!\"`。",
   "input": {
     "command": "tools/run_kol_shots.sh workplace/specs/shop-parity.txt（-scene play -load workplace/saves/shop.json）"
   },
@@ -142,6 +142,27 @@
       },
       "remake": "docs/verification/remake-parity/shots/town-shop/bought.png",
       "original": "docs/verification/character-ui/town-shop-run2/frames/frame-200.png"
+    },
+    {
+      "label": "TRAIN：身上的甲冑都合身",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-shop/no-adjust.png",
+      "original": "docs/verification/character-ui/town-adjust-run1/frames/frame-202.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 100,
+          "width": 14,
+          "height": 14
+        }
+      ]
     }
   ]
 }
