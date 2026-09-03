@@ -1,6 +1,6 @@
 # 規格索引
 
-目前有七份 READY 規格、一份 CONFORMED 規格與一份不授權實作的 DRAFT 規格。READY 的
+目前有八份 READY 規格、一份 CONFORMED 規格與一份不授權實作的 DRAFT 規格。READY 的
 授權範圍逐份限定，見下表。所有原版衍生行為必須依序經過：
 
 `RE 證據 → DRAFT → 證據審查 → READY → implementation → 同狀態驗證 → CONFORMED`
@@ -19,3 +19,4 @@
 | SPEC-007 | [野外的時刻、日曆、天候與遭遇](007-wilderness-time.md) | 時刻／日曆／天候 READY；遭遇 DRAFT | 僅授權時刻、日曆、天候與紮營畫面 |
 | SPEC-008 | [戰場的畫面、視線與回合順序](008-combat-field.md) | 畫面／視線／規劃順序 READY；指令、執行順序與命中 DRAFT | 僅授權戰場繪製、視線、站位與規劃順序 |
 | SPEC-009 | [戰鬥的攻擊結算](009-combat-attack.md) | 近戰 READY；射擊、法術與敵人 AI DRAFT | 僅授權近戰攻擊的規則層，不含 UI 與 AI |
+| SPEC-010 | [戰場上的指令與選目標](010-combat-commands.md) | 指令列／選目標／子選單 READY；背包用物品與五個未定語意的圖示 DRAFT | 僅授權指令列條件、選目標游標與選項換算 |
