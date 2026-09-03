@@ -84,21 +84,30 @@ type Execution struct {
 	Turn int
 	// Log 是這一回合每一手的結果，依實際出手順序。
 	Log []ActResult
+	// Text 是現在顯示的那一句，已經展開代換碼並斷好行。battle 這一層不認得
+	// 文字庫，由呼叫端填（RE-086／RE-087）。
+	Text []string
 }
 
-// RunAll 把這一回合的執行段一次跑完，結果收進 Log。
+// Step 做出下一手。原版每一手印一句訊息再等玩家按一個鍵（`sub_1B100(5)`），
+// 所以這裡一次只走一手；回報執行段是不是還沒走完。
 //
-// 原版每一手都會印一句訊息再等玩家按鍵（`sub_1B100(5)`），那一段還沒實作，
-// 所以這裡先一次跑完——結算本身照原版做，只有「逐句顯示」沒有做（SPEC-008）。
-func (s *State) RunAll(rng Rand) []ActResult {
-	s.Exec.Log = nil
-	for {
-		r, ok := s.Act(rng)
-		if !ok {
-			return s.Exec.Log
+// 走完之後自己收尾：隊伍全倒就結束這一場，否則排下一回合的規劃。
+func (s *State) Step(rng Rand) (ActResult, bool) {
+	r, ok := s.Act(rng)
+	if !ok {
+		s.Exec.Text = nil
+		if s.PartyDown() {
+			s.Stage = StageDone
+			return r, false
 		}
-		s.Exec.Log = append(s.Exec.Log, r)
+		s.BeginPlanning(rng)
+		s.AdvanceToParty()
+		s.BeginTurn()
+		return r, false
 	}
+	s.Exec.Log = append(s.Exec.Log, r)
+	return r, true
 }
 
 // TimeCost 是一個指令的時間成本（`0x1FDDD`…`0x1FE50`）。
@@ -232,6 +241,13 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 func (s *State) act(i int, rng Rand) ActResult {
 	a := &s.Actors[i]
 	out := ActResult{Actor: i, Command: a.Command, Target: -1}
+	// 敵人那一手的 AI 還沒實作（RE-081 的三張基礎權重表沒有執行期值），
+	// 所以他們的 +0x25 從來沒被填過。標成還沒實作，不要讓畫面看起來像
+	// 「原版選了什麼都不做」。
+	if a.Side != SideParty && a.Command == 0 {
+		out.Unimplemented = true
+		return out
+	}
 	switch a.Command {
 	case CmdWeapon, CmdUnarmed:
 		// 攻擊選項為 0 就把指令歸零，什麼都不做（`0x2067C`）。

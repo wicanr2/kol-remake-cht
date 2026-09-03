@@ -23,6 +23,8 @@ const (
 	PromptGuardForm
 	// PromptNextRound 是整輪決定完的「Begin next round?」。
 	PromptNextRound
+	// PromptExecuting 是執行段：一手一句訊息，按鍵推進。
+	PromptExecuting
 )
 
 // Planning 是規劃段那一名走到哪裡。

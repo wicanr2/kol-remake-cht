@@ -16,6 +16,41 @@ const (
 	TheRecord = 0x140
 )
 
+// 訊息區的版面（`sub_1C1BF:0x1C1CE`…`0x1C25C`）。X 是 byte 欄，一欄 8 像素
+// （`sub_1DE84:0x1DE9F` 的 `shl ax, 3`）；Y 是掃描列，行高 6 是小字型的高度。
+var MessageArea = struct{ Col, Y, LineHeight int }{Col: 3, Y: 0xA8, LineHeight: 6}
+
+// MessageWidth 是斷行用的字元數上限（`0x21`）。第一行要扣掉起始欄，所以只有
+// `MessageWidth − MessageArea.Col` 個字元；第二行起原版直接加 `0x21`，兩者
+// 不對稱——照抄原版的行為（RE-087）。
+const MessageWidth = 0x21
+
+// WrapMessage 依原版的規則把一整句斷行（`sub_1C1BF`）：從行寬處往回找空白當
+// 斷點，跳過斷點上的空白，下一行再從那裡起算。整行找不到空白時原版會往回
+// 掃出緩衝區，這裡改成硬斷，不讓它讀到界外。
+func WrapMessage(text string) []string {
+	var lines []string
+	start := 0
+	limit := MessageWidth - MessageArea.Col
+	for limit < len(text) {
+		end := limit
+		for end > start && text[end] != ' ' {
+			end--
+		}
+		if end == start {
+			// 這一段裡沒有空白：原版會繼續往回掃，這裡硬斷在行寬處。
+			end = limit
+		}
+		lines = append(lines, text[start:end])
+		start = end + 1
+		for start < len(text) && text[start] == ' ' {
+			start++
+		}
+		limit = start + MessageWidth
+	}
+	return append(lines, text[start:])
+}
+
 // Speaker 是代換要用到的一名參戰者。
 type Speaker struct {
 	// Name 是名字；Monster 為真時原版會在名字前面補 `The `。
@@ -136,6 +171,11 @@ func (c MessageContext) name(s Speaker) string {
 	if c.Lookup != nil {
 		if t := c.Lookup(TheRecord); t != "" {
 			prefix = strings.ReplaceAll(t, "]", " ")
+			// 記錄本身以 `]` 收尾（`The]`），有些取法會把它 trim 掉；
+			// 名字前面一定要有一個空白。
+			if !strings.HasSuffix(prefix, " ") {
+				prefix += " "
+			}
 		}
 	}
 	return prefix + s.Name

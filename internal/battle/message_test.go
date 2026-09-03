@@ -125,3 +125,57 @@ func TestSubstituteWithoutLookup(t *testing.T) {
 		t.Fatalf("得到 %q", got)
 	}
 }
+
+// 斷行：從行寬處往回找空白，跳過斷點上的空白（`sub_1C1BF`）。
+func TestWrapMessage(t *testing.T) {
+	// 短句不斷行。
+	if got := WrapMessage("Poontang is resting!"); len(got) != 1 ||
+		got[0] != "Poontang is resting!" {
+		t.Fatalf("短句不該斷行，得到 %q", got)
+	}
+	// 第一行的上限是 0x21 − 3 ＝ 30 個字元，斷在最後一個空白。
+	line := "The BINDERAK blow hits Poontang's right arm doing little damage!"
+	got := WrapMessage(line)
+	if len(got) < 2 {
+		t.Fatalf("這一句應該斷成多行，得到 %q", got)
+	}
+	if len(got[0]) > 30 {
+		t.Fatalf("第一行 %d 個字元，超過 30：%q", len(got[0]), got[0])
+	}
+	// 每一行都不該以空白開頭或結尾——斷點上的空白會被跳過。
+	for i, l := range got {
+		if l != "" && (l[0] == ' ' || l[len(l)-1] == ' ') {
+			t.Errorf("第 %d 行的兩端不該有空白：%q", i, l)
+		}
+	}
+	// 接回去要等於原句（斷點的空白換成換行）。
+	joined := ""
+	for i, l := range got {
+		if i > 0 {
+			joined += " "
+		}
+		joined += l
+	}
+	if joined != line {
+		t.Fatalf("接回去得到 %q", joined)
+	}
+}
+
+// 整段沒有空白時硬斷，不讀到界外。
+func TestWrapMessageNoSpace(t *testing.T) {
+	long := ""
+	for i := 0; i < 80; i++ {
+		long += "x"
+	}
+	got := WrapMessage(long)
+	if len(got) < 2 {
+		t.Fatalf("八十個字元應該斷成多行，得到 %d 行", len(got))
+	}
+	total := 0
+	for _, l := range got {
+		total += len(l)
+	}
+	if total > len(long) {
+		t.Fatalf("斷出來的字元數 %d 多過原句 %d", total, len(long))
+	}
+}

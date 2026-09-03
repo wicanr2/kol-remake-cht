@@ -59,6 +59,11 @@ type Member struct {
 	// HasWeapon 是角色記錄 +0x30 非零，也就是手上真的有武器
 	// （`sub_228B7` 幾乎每一格都先問這個）。
 	HasWeapon bool
+	// Female 是角色記錄 0x1A，訊息的代名詞要用（RE-086）。
+	Female bool
+	// WeaponName 是手上那件武器的名字（`|E`）；BeltName 是 +0x190 那一格的
+	// 名字（`|I`）。
+	WeaponName, BeltName string
 	// HasSecondItem 是角色記錄 +0x190 非零；PackCount 是 0x200 起每 0x10 一筆、
 	// 十六筆之中非零的筆數。兩者的語意都還沒定（SPEC-010 末段），
 	// 這裡只當指令列的條件用。
@@ -152,15 +157,14 @@ func (s *State) Answer(yes bool) bool {
 		// YES 才進執行段、逃走圖示才問要不要逃。指令與執行段還沒實作，
 		// 這一版只留「再排一輪」與「要不要逃」兩條路。
 		if yes {
+			// 答應之後進執行段：一手一句訊息，由 Step 推進（RE-084）。
 			if s.Rand != nil {
-				// 答應之後先跑執行段，再排下一回合的規劃（RE-084）。
 				s.BeginExecution(s.Rand)
-				s.RunAll(s.Rand)
-				if s.PartyDown() {
-					s.Stage = StageDone
-					return true
-				}
-				s.BeginPlanning(s.Rand)
+				s.Exec.Log = nil
+				s.Plan.Prompt = PromptExecuting
+				s.Plan.Bar = nil
+				s.Plan.Selected = 0
+				break
 			}
 			s.AdvanceToParty()
 			s.BeginTurn()

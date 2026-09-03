@@ -35,7 +35,12 @@ DUMP_FUNCTIONS = (0x228B7, 0x24131, 0x11703, 0x11722, 0x1449C, 0x227C0, 0x22278,
                   # `|X` 的代換：戰鬥訊息的名字與代名詞都由這一支填。
                   0x265F3,
                   # 每一手開頭印行動者名字的那一支；`|G` 走的也是它。
-                  0x2685A, 0x2687F)
+                  0x2685A, 0x2687F,
+                  # 訊息框：清、送字元、收尾。
+                  0x1C1A4, 0x1C1BF, 0x1C2DA, 0x1C311, 0x1103F)
+# 訊息框的游標與版面放在這幾個全域裡；掃全庫找出誰設它們。
+TRACKED_GLOBALS = ("word_2DF14", "word_2DF16", "word_2DF18", "word_2FB58",
+                   "word_345E0", "word_2E57C")
 # 三個子選單掛在 `sub_1E3A8` 裡，用位址視窗取。
 WINDOWS = {
     # 主指令列選完之後的分派表把圖號送到這幾段。
@@ -47,6 +52,8 @@ WINDOWS = {
     "execution": (0x1FD00, 0x20900),
     # 攻擊結算的開頭：目標是怎麼找出來的。
     "attack_target": (0x26D76, 0x26E60),
+    # EGA 的字元繪製：word_2DF14／word_2DF16 的單位在這裡定。
+    "glyph_draw": (0x1DE84, 0x1DF40),
 }
 # 要原樣倒出來的 DGROUP 區塊：(位移, 位元組數)。
 DGROUP_DUMPS = (
@@ -94,6 +101,19 @@ def summary(start: int) -> dict:
     }
 
 
+def global_owners() -> dict:
+    out: dict[str, dict[str, int]] = {}
+    for start in idautils.Functions():
+        for ea in idautils.FuncItems(start):
+            text = disassembly(ea)
+            for name in TRACKED_GLOBALS:
+                if name in text:
+                    bucket = out.setdefault(name, {})
+                    key = f"0x{start:x}"
+                    bucket[key] = bucket.get(key, 0) + 1
+    return out
+
+
 def main() -> None:
     if len(idc.ARGV) != 3:
         raise RuntimeError("usage: script.py OUT.json INPUT.EXE")
@@ -116,6 +136,7 @@ def main() -> None:
         "dgroup_dumps": {f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, n)
                                           or b"").hex()
                          for off, n in DGROUP_DUMPS},
+        "global_owners": global_owners(),
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",

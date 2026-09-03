@@ -117,6 +117,24 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 		fill(dst, box.X+1, box.Y+1, box.Width-2, box.Height-2, town.ColourBoxFill)
 	}
 
+	// 執行段：訊息蓋掉圖示列那一塊（RE-087）。欄 3 是像素 24，行高 6 是小字型
+	// 的高度，起點在掃描列 0xA8。
+	if s.Plan.Prompt == battle.PromptExecuting {
+		area := battle.MessageArea
+		for i, line := range s.Exec.Text {
+			y := area.Y + i*area.LineHeight
+			// 原版每畫一個字元前先清一塊 8×8（`sub_1DE84:0x1DE98` 的
+			// `sub_1C40D`），所以只有有字的那幾格會蓋掉底下的圖示，
+			// 而且清的高度比行高多兩列。
+			for n := range line {
+				fill(dst, area.Col*8+n*f.Advance(), y, 8, 8, town.ColourBoxFill)
+			}
+			f.Draw(dst, area.Col*8, y, line,
+				town.ColourText[0], town.ColourText[1], town.ColourText[2])
+		}
+		return nil
+	}
+
 	// 指令圖示列。版面與城鎮同一組（RE-080：(32 + 32i, 171)、一格 24×20），
 	// KOLMPICS 的圖號是命令碼加三。
 	b := town.IconBar

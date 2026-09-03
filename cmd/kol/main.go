@@ -90,6 +90,8 @@ func (r *lcg) Roll(n int) int {
 type questBattle struct {
 	state *battle.State
 	lines []string
+	// bank 是 KOLDATA，執行段的訊息要照記錄號取文字（RE-086）。
+	bank *town.UIText
 	// tiles 是戰場磚圖，讀檔一次之後留著。
 	tiles *ui.BattleTiles
 }
@@ -97,7 +99,7 @@ type questBattle struct {
 // battleMember 把城鎮那一側的隊員換成戰鬥要用的欄位（RE-080）：戰鬥等級由
 // 四列武器的攻防原始值算出來，規劃順序要洞察，昏迷門檻要體型與健康。
 func battleMember(m town.Member) battle.Member {
-	out := battle.Member{Name: m.Name, Wounds: m.Wounds}
+	out := battle.Member{Name: m.Name, Wounds: m.Wounds, Female: m.Female}
 	if m.Sheet == nil {
 		return out
 	}
@@ -118,6 +120,7 @@ func battleMember(m town.Member) battle.Member {
 			Weight: w.Encumbrance, TwoHand: w.Hands == 1,
 		}
 		out.Weapon.Count, out.Weapon.Sides = battle.DamageCode(out.Weapon.Code)
+		out.WeaponName = w.Name
 		// 手上武器的種類決定用哪一列武器技能（RE-080）。
 		for _, row := range m.Sheet.Weapons {
 			if row.Weapon == w.Class {
@@ -344,7 +347,7 @@ var battleSteps = map[string][2]int{
 // 規劃段停在哪一層決定方向鍵是移游標還是沒有作用，`<`／`>` 移圖示列的白框，
 // Return 是確定（SPEC-010）。整輪決定完停在「Begin next round?」，那一層沿用
 // 既有的是／否——執行段還沒實作，所以答應之後只是再排一輪規劃。
-func applyBattleToken(s *battle.State, token string) error {
+func applyBattleToken(s *battle.State, token string, step func(*battle.State)) error {
 	if s.Stage == battle.StageEncounter {
 		s.Continue(s.Rand)
 		return nil
@@ -353,8 +356,16 @@ func applyBattleToken(s *battle.State, token string) error {
 		switch token {
 		case "RET", "SPACE":
 			s.Answer(true)
+			step(s)
 		case "N":
 			s.Answer(false)
+		}
+		return nil
+	}
+	if s.Plan.Prompt == battle.PromptExecuting {
+		switch token {
+		case "RET", "SPACE":
+			step(s)
 		}
 		return nil
 	}
@@ -454,7 +465,7 @@ func applyPlayToken(s *town.Session, token string) error {
 func (g *game) playToken(token string) error {
 	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場，接著就是規劃段的指令列。
 	if g.quest != nil && g.quest.state != nil {
-		return applyBattleToken(g.quest.state, token)
+		return applyBattleToken(g.quest.state, token, func(*battle.State) { g.battleStep() })
 	}
 	if g.play != nil && g.play.LeftTown && g.worldSession != nil {
 		return applyWorldToken(g.worldSession, token)
@@ -1028,6 +1039,63 @@ func (g *game) updatePlay() {
 	}
 }
 
+// battleSpeaker 把一名參戰者換成訊息代換要用的資料（RE-086）。
+func (g *game) battleSpeaker(i int) battle.Speaker {
+	s := g.quest.state
+	if i < 0 || i >= len(s.Actors) {
+		return battle.Speaker{}
+	}
+	a := s.Actors[i]
+	out := battle.Speaker{Name: a.Name, Monster: a.Member < 0}
+	if a.Member >= 0 && a.Member < len(s.Party) {
+		m := s.Party[a.Member]
+		out.Female = m.Female
+		out.Weapon = m.WeaponName
+		out.Belt = m.BeltName
+	}
+	return out
+}
+
+// battleRecord 取一筆 KOLDATA 訊息。
+func (g *game) battleRecord(record int) string {
+	if g.quest == nil || g.quest.bank == nil {
+		return ""
+	}
+	// 用 RecordPadded 而不是 Lines：`]` 要保留成空白（`The]` ＋ 名字），
+	// Lines 會把兩端的空白 trim 掉。`|X` 兩者都原樣留著，由 Substitute 展開。
+	return g.quest.bank.RecordPadded(town.BankUI, record)
+}
+
+// battleStep 做出執行段的下一手，並把那一句訊息展開、斷行放進畫面
+// （RE-086／RE-087）。攻擊那一手的訊息鏈還沒解完（0x140／0x141／0x143 起那一串
+// 的索引規則），所以只有結算，沒有訊息。
+func (g *game) battleStep() {
+	if g.quest == nil || g.quest.state == nil {
+		return
+	}
+	s := g.quest.state
+	// 沒有訊息的那幾手不停下來等鍵：敵人那一手還沒實作（RE-081），
+	// 攻擊的訊息鏈也還沒解完，停在空白畫面只會讓人以為當掉了。
+	var r battle.ActResult
+	for {
+		var ok bool
+		r, ok = s.Step(s.Rand)
+		if !ok {
+			s.Exec.Text = nil
+			return
+		}
+		if r.Message != 0 {
+			break
+		}
+	}
+	ctx := battle.MessageContext{
+		Actor:  g.battleSpeaker(r.Actor),
+		Target: g.battleSpeaker(r.Target),
+		Lookup: g.battleRecord,
+	}
+	s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
+}
+
 // updateBattle 是戰場的輸入迴圈（SPEC-010）。鍵位與城鎮一致：方向鍵與四個
 // 斜走鍵移游標、`<`／`>` 移圖示列白框、Return 確定。
 func (g *game) updateBattle() {
@@ -1062,11 +1130,16 @@ func (g *game) updateBattle() {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
 		inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
 		inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		if s.Plan.Prompt == battle.PromptNextRound {
+		switch s.Plan.Prompt {
+		case battle.PromptNextRound:
 			s.Answer(true)
-			return
+			g.battleStep()
+		case battle.PromptExecuting:
+			g.battleStep()
+		default:
+			s.Choose()
 		}
-		s.Choose()
+		return
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyN) &&
 		s.Plan.Prompt == battle.PromptNextRound {
@@ -1838,6 +1911,7 @@ func main() {
 				st.Rand = &lcg{state: uint32(*seed)}
 				st.Stage = battle.StageEncounter
 				quest.state = st
+				quest.bank = bank
 				quest.lines = nonEmptyLines(bank.Lines(town.BankUI,
 					battle.QuestCreaturesRecord))
 			}
