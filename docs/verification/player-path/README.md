@@ -133,13 +133,24 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 
 這一份要先跑 `town-rest` 才有存檔可讀；兩份合起來把存檔的迴圈閉起來。
 
+## `town-shop`：買一件東西
+
+`L RET SPACE > > > > RET D U RET RET`，13 步，從存檔開場站在城 1 魯德曼甲冑鋪門邊。
+走進去按 TRADE 開商品清單，上下移動反白，選第一件看明細，答應買下——
+扣掉 32 枚金幣、東西進背包。
+
+檢查點：第 8 步（清單）與第 11 步（明細）都與已對拍的截圖逐 byte 相同。
+存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,24,52`
+產生，`--location` 就是為了讓這種固定起點可以重生。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
   門口、進建築 → 野外循路 → 招募同伴 → 住宿存檔」這一條；戰鬥、任務、讀檔回到
   遊戲都還沒有。
-- 角色選項頁的 EDIT PICTURE／EDIT SHIELD，以及建築內的買賣、訓練、AWARD、SCROLL
+- 角色選項頁的 EDIT PICTURE／EDIT SHIELD，以及建築內的訓練、AWARD、SCROLL
   按下去不會轉場，只會記進未實作清單；角色資料頁上除了 U-TURN 的三個圖示同樣。
+- 商店買完之後那一段（合身與穿戴）與馬廄的商品表都還沒實作。
 - 角色資料頁只有英文模式。中文版面還沒做，中文模式按 MIRROR 只會記一筆。
 - 不宣稱鏡頭跟隨規則已證實。dead zone 是由 22 張原版畫格反解的**強推論**，
   規則本身沒有從程式碼讀出來。

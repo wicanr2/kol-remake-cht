@@ -61,6 +61,9 @@ def main() -> int:
     p.add_argument("--out", required=True)
     p.add_argument("--saved-at", default=None,
                    help="存檔時間戳；不給就用現在的 UTC 時間")
+    p.add_argument("--location", default=None,
+                   help="覆寫開場位置，格式 `城鎮,入城點,X,Y`；"
+                        "不給就用角色記錄裡留宿的那一間")
     args = p.parse_args()
 
     if len(args.names) > MAX_PARTY:
@@ -135,6 +138,13 @@ def main() -> int:
                         "entry_point": data[base + ENTRY_POINT_OFFSET],
                         "x": data[base + TOWN_X_OFFSET],
                         "y": data[base + TOWN_Y_OFFSET]}
+
+    if args.location:
+        try:
+            town, entry, x, y = (int(v) for v in args.location.split(","))
+        except ValueError:
+            raise SystemExit("--location 的格式是 `城鎮,入城點,X,Y`")
+        location = {"kind": "town", "town": town, "entry_point": entry, "x": x, "y": y}
 
     saved_at = args.saved_at or datetime.datetime.now(
         datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

@@ -139,6 +139,18 @@ DELETE_PRELUDE = list(MENU_PRELUDE) + menu_steps(2)
 
 # 由 KOL.EXE 走到城鎮（半途之家旅店）的前置：目錄頁按 6 選 Play the game，
 # 在共用的角色選擇清單選第一名角色當領隊。載入與開場對話都不會靜止，整段用固定等待。
+# 第 14 名角色 ddduhh 住在城 1 的巨魔剋星客棧，身上 3000 金幣——買賣要看得到價錢。
+SHOP_PRELUDE = [
+    step("TITLE 標題序列", "space", delay=8.0),
+    step("書本封面", "space", delay=9.0),
+    step("目錄頁", "6", delay=12.0),
+] + [
+    step(f"角色清單往下第 {i + 1} 名", "Down", settle=1.2) for i in range(13)
+] + [
+    step("選第 14 名角色", "Return", delay=25.0),
+    step("旅店老闆對話（第一段）", "space", delay=15.0),
+]
+
 TOWN_PRELUDE = [
     step("TITLE 標題序列", "space", delay=8.0),
     step("書本封面", "space", delay=9.0),
@@ -259,6 +271,69 @@ SCENARIOS: dict[str, dict] = {
             step("反白第 2 名", "Up", settle=2.0),
             step("回到第 1 名", "Return", settle=4.0),
             step("選定第一名同伴之後", None, settle=4.0),
+        ],
+    },
+    "town-shop": {
+        "description": "選第 14 名角色（ddduhh，3000 金幣，住在巨魔剋星客棧）進城 1，"
+                       "走到魯德曼甲冑鋪按 TRADE 看商品清單。純觀察，不買也不保存。",
+        "steps": list(SHOP_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.0),
+            step("走出旅店", None, settle=2.0),
+        ] + [
+            step("往甲冑鋪第 1 步", "Left", settle=1.0),
+            step("往甲冑鋪第 2 步", "Left", settle=1.0),
+            step("往甲冑鋪第 3 步", "Left", settle=1.0),
+            step("往甲冑鋪第 4 步", "Left", settle=1.0),
+            step("往甲冑鋪第 5 步", "Left", settle=1.0),
+            step("往甲冑鋪第 6 步", "Left", settle=1.0),
+            step("往甲冑鋪第 7 步", "Left", settle=1.0),
+            step("往甲冑鋪第 8 步", "Left", settle=1.0),
+            step("往甲冑鋪第 9 步", "Left", settle=1.0),
+            step("往甲冑鋪第 10 步", "Left", settle=1.0),
+            step("往甲冑鋪第 11 步", "Left", settle=1.0),
+            step("往甲冑鋪第 12 步", "Left", settle=1.0),
+            step("往甲冑鋪第 13 步", "Down", settle=1.0),
+            step("往甲冑鋪第 14 步", "Down", settle=1.0),
+            step("往甲冑鋪第 15 步", "Left", settle=1.0),
+            step("往甲冑鋪第 16 步", "Left", settle=1.0),
+            step("往甲冑鋪第 17 步", "Down", settle=1.0),
+            step("往甲冑鋪第 18 步", "Left", settle=1.0),
+            step("往甲冑鋪第 19 步", "Left", settle=1.0),
+            step("往甲冑鋪第 20 步", "Down", settle=1.0),
+            step("往甲冑鋪第 21 步", "Left", settle=1.0),
+            step("往甲冑鋪第 22 步", "Left", settle=1.0),
+            step("往甲冑鋪第 23 步", "Down", settle=1.0),
+            step("往甲冑鋪第 24 步", "Left", settle=1.0),
+            step("往甲冑鋪第 25 步", "Left", settle=1.0),
+            step("往甲冑鋪第 26 步", "Left", settle=1.0),
+            step("往甲冑鋪第 27 步", "Left", settle=1.0),
+            step("往甲冑鋪第 28 步", "Left", settle=1.0),
+            step("往甲冑鋪第 29 步", "Left", settle=1.0),
+            step("往甲冑鋪第 30 步", "Left", settle=1.0),
+            step("往甲冑鋪第 31 步", "Left", settle=1.0),
+            step("往甲冑鋪第 32 步", "Down", settle=1.0),
+            step("往甲冑鋪第 33 步", "Down", settle=1.0),
+            step("往甲冑鋪第 34 步", "Down", settle=1.0),
+            step("往甲冑鋪第 35 步", "Down", settle=1.0),
+            step("往甲冑鋪第 36 步", "Down", settle=1.0),
+            step("往甲冑鋪第 37 步", "Left", settle=1.0),
+        ] + [
+            step("站到甲冑鋪門口", "Return", settle=3.5),
+            step("進門敘述", "space", settle=2.5),
+            step("讀完敘述", "greater", settle=1.2),
+            step("白框第 2 格", "greater", settle=1.2),
+            step("白框第 3 格", "greater", settle=1.2),
+            step("白框第 4 格", "greater", settle=1.2),
+            step("白框第 5 格（TRADE）", "Return", settle=4.0),
+            step("商品清單", "Down", settle=2.0),
+            step("清單往下一列", "Up", settle=2.0),
+            step("回到第一列", "Return", settle=3.5),
+            step("商品明細與「要買嗎」", "Return", settle=4.0),
+            step("買下之後", "Escape", settle=3.0),
+            step("離開清單", "greater", settle=1.5),
+            step("白框第 2 格（MIRROR）", "Return", settle=4.0),
+            step("角色資料頁：金幣與背包", "Escape", settle=3.0),
+            step("離開資料頁", None, settle=3.0),
         ],
     },
     "town-mirror": {

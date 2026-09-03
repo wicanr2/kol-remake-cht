@@ -32,6 +32,8 @@ type Member struct {
 	BuildingID int `json:"building_id,omitempty"`
 	// Sheet 是 MIRROR 那一頁要用的欄位（RE-074）；沒有就畫不出資料頁。
 	Sheet *Sheet `json:"sheet,omitempty"`
+	// Backpack 是背包裡的東西，上限六格（RE-075）。
+	Backpack []Good `json:"backpack,omitempty"`
 }
 
 // Inn 是旅店畫面的完整狀態。
@@ -46,6 +48,8 @@ type Inn struct {
 	Sheet *SheetPage `json:"sheet,omitempty"`
 	// SheetLabels 是 KOLDATA 記錄 73h 拆出來的帶座標標籤。
 	SheetLabels []Segment `json:"sheet_labels,omitempty"`
+	// Detail 是商品明細面板：畫在對話框裡的帶座標文字（RE-075）。
+	Detail []Segment `json:"detail,omitempty"`
 	Title []string   `json:"title"`
 	Dialog   []string `json:"dialog"`
 	DialogZh []string `json:"dialog_zh"`

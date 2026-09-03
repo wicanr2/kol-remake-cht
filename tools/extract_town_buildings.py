@@ -25,6 +25,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from inventory_image_archives import EXPECTED_ZIP_SHA256  # noqa: E402
 from probe_town_data import lzw_decode, payloads, read_volumes  # noqa: E402
+from extract_town_text import render  # noqa: E402
 from probe_town_doors import (COUNT_OFFSET, DOOR_OFFSET, DOOR_TABLE_PAYLOAD,  # noqa: E402
                               ENTRY_OFFSET, NAME_OFFSET, PERSON_OFFSET,
                               pascal_high_bit, text_payload_index)
@@ -47,6 +48,85 @@ ICON_FLAGS = 0x3C
 # 角色記錄位移 0x2E／0x2F（`sub_14DB1:0x1505B`）。
 PRICE_OFFSET = 0x38
 RECORD_ID_OFFSET = 0x3A
+# 商店的商品表（RE-075）：payload 位移 0x100 起，一筆 16 byte，最多 32 筆，
+# 第一個 byte 是 0 就結束。名稱是 5-bit 壓縮（高 nibble 是字數，字元從第 4 個
+# bit 起，與武器範本同一種），價錢是 `(rec[8] & 0x0F) << 8 | rec[9]`。
+# 馬廄（旗標 bit5）的表另有版面：一筆 0x80 byte，名稱在 +0x70。
+GOODS_OFFSET, GOODS_STRIDE, GOODS_MAX = 0x100, 0x10, 32
+GOODS_PRICE_OFFSET = 8
+STEED_STRIDE, STEED_NAME_OFFSET, STEED_MAX = 0x80, 0x70, 4
+# 骰面查表（DGROUP+0xD4），加一之後就是骰子的面數（RE-075）。
+DICE_SIDES = (3, 4, 6, 8, 10, 12, 20, 100)
+# 盾牌（部位 6）的防護是百分比，不是骰子。
+SHIELD_POSITION = 6
+
+
+def packed_name(raw: bytes) -> str:
+    """5-bit 壓縮的名稱：高 nibble 是字數，字元從第 4 個 bit 起（RE-074）。
+
+    字元本身走的是 `sub_1B94F` 的規則（RE-062）：小寫是預設、跳脫記號才轉大寫，
+    所以畫面上是 `Fur Cap` 而不是 `FUR CAP`。"""
+    count = raw[0] >> 4
+    values = []
+    for i in range(count):
+        bit = 4 + i * 5
+        j = bit >> 3
+        word = (raw[j] << 8) | (raw[j + 1] if j + 1 < len(raw) else 0)
+        values.append((word >> (11 - (bit & 7))) & 0x1F)
+    text, unknown = render(values, capitalise=True)
+    if unknown:
+        raise SystemExit(f"名稱裡有未定的跳脫序列 {unknown}")
+    return text.rstrip()
+
+
+def goods(body: bytes, flags: int) -> list[dict]:
+    """商品表。馬廄與一般商店的版面不同，兩種都在這裡讀出來。"""
+    out = []
+    if flags & 0x20:
+        for k in range(STEED_MAX):
+            base = GOODS_OFFSET + STEED_STRIDE * k
+            if base + STEED_STRIDE > len(body):
+                break
+            name = packed_name(body[base + STEED_NAME_OFFSET:base + STEED_STRIDE])
+            if not name:
+                break
+            out.append({"index": k, "name": name,
+                        "record": body[base:base + STEED_STRIDE].hex()})
+        return out
+    for k in range(GOODS_MAX):
+        base = GOODS_OFFSET + GOODS_STRIDE * k
+        if base + GOODS_STRIDE > len(body) or body[base] == 0:
+            break
+        out.append(good(body[base:base + GOODS_STRIDE], k))
+    return out
+
+
+def good(rec: bytes, index: int) -> dict:
+    """一筆商品的明細欄位。位元版面與算式見 RE-075。"""
+    bonus = rec[8] >> 4
+    if bonus > 7:
+        bonus = -(bonus - 8)
+    count = rec[12] // 32 + 1
+    sides = DICE_SIDES[(rec[12] // 4) & 7]
+    position = rec[14] >> 4
+    item = {
+        "index": index,
+        "name": packed_name(rec),
+        "price": (rec[GOODS_PRICE_OFFSET] & 0x0F) << 8 | rec[GOODS_PRICE_OFFSET + 1],
+        # 類別 0 Item、1 Wield、2 Wear、3 Both；bit0 另外決定顯示傷害還是防護。
+        "kind": rec[12] & 3,
+        "damage": bool(rec[12] & 1),
+        "hands": (rec[13] & 2) >> 1,
+        "position": position,
+        "encumbrance": rec[10],
+        "condition": rec[11],
+        "dice": {"count": count, "sides": sides, "bonus": bonus,
+                 "low": max(count + bonus, 0), "high": count * sides + bonus},
+        "record": rec.hex(),
+    }
+    if position == SHIELD_POSITION:
+        item["percent"] = (rec[14] & 3) * 10 + 20
+    return item
 
 
 def be16(body: bytes, offset: int) -> int:
@@ -111,6 +191,8 @@ def main() -> int:
                     door["price"] = be16(body, PRICE_OFFSET)
                     door["heal_rate"] = body[PRICE_OFFSET + 1]
                     door["record_id"] = be16(body, RECORD_ID_OFFSET)
+                    if body[ICON_FLAGS] & 0x32:
+                        door["goods"] = goods(body, body[ICON_FLAGS])
                 else:
                     # TOWN7 的門 21 有圖與肖像，卻沒有對應的文字 payload。
                     door["text_missing"] = True
@@ -151,6 +233,11 @@ def main() -> int:
                      "bit6 的修道院只用低位元組，當每一點傷勢的價錢。",
             "record_id": f"建築 payload[0x{RECORD_ID_OFFSET:02X}／0x{RECORD_ID_OFFSET + 1:02X}]："
                          "住宿存檔時寫進角色記錄位移 0x2E／0x2F 的建築編號。",
+            "goods": f"商店的商品表在 payload 0x{GOODS_OFFSET:03X} 起，一筆 "
+                     f"0x{GOODS_STRIDE:02X} byte、最多 {GOODS_MAX} 筆，第一個 byte 是 0 "
+                     "就結束；名稱 5-bit 壓縮，價錢是 `(rec[8] & 0x0F) << 8 | rec[9]`。"
+                     f"馬廄（bit5）一筆 0x{STEED_STRIDE:02X} byte、名稱在 "
+                     f"+0x{STEED_NAME_OFFSET:02X}。",
             "picture": "TWN{n}PICS[2i+3]，192×96，畫在地圖視窗 (104,58)",
             "portrait": "TWN{n}PICS[2i+2]，88×64，畫在 (8,64)",
             "text": "TOWNn.0 payload i+4（索引 ≥ 0x14 再加 1）；名稱在 0、人物在 29，"

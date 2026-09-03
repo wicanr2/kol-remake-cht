@@ -1,0 +1,101 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-shop",
+  "description": "讀存檔開場在城 1 的魯德曼甲冑鋪門邊，走進去按 TRADE 看商品清單：上下移動反白、選第一件看明細、答應買下。買完扣掉 32 枚金幣、東西進背包，畫面回到清單。全程只經過 town.Session。存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,24,52 --out workplace/saves/shop.json` 產生。",
+  "script": "L RET SPACE > > > > RET D U RET RET",
+  "step_count": 13,
+  "checkpoints": [
+    {
+      "step": 8,
+      "identical_to": "docs/verification/remake-parity/shots/town-shop/list.png",
+      "note": "商品清單，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 11,
+      "identical_to": "docs/verification/remake-parity/shots/town-shop/detail.png",
+      "note": "商品明細，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "save": null,
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town-shop/step-000.png",
+      "sha256": "7aeab0b32f8becd3fabb973f685c74b0906bbb909bbb15045823dc09d76f01df"
+    },
+    {
+      "step": 1,
+      "token": "L",
+      "file": "docs/verification/player-path/town-shop/step-001.png",
+      "sha256": "b81367ff9b883c422c5cd3d1cf6bf88947c3da434539e3fa3f1d3d1ac26c5014"
+    },
+    {
+      "step": 2,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-shop/step-002.png",
+      "sha256": "155f968121b5dd1a5a31cb4cc708b7851e50ffc2d28454bc3f7a3162e57ce8d8"
+    },
+    {
+      "step": 3,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-shop/step-003.png",
+      "sha256": "9b731744cbbd097855bedcb6ba47879e35305bda94712d9fff03a26c7e1ef6d8"
+    },
+    {
+      "step": 4,
+      "token": ">",
+      "file": "docs/verification/player-path/town-shop/step-004.png",
+      "sha256": "324ae6d5e0b9472835ab5a9b60a171c6d10a0ddd179f146f1eb9c6d3676bce2e"
+    },
+    {
+      "step": 5,
+      "token": ">",
+      "file": "docs/verification/player-path/town-shop/step-005.png",
+      "sha256": "f8b6fa0f59cf5c1ab562283123fb2d95f4cb42703b1dad48d106add0f2876fba"
+    },
+    {
+      "step": 6,
+      "token": ">",
+      "file": "docs/verification/player-path/town-shop/step-006.png",
+      "sha256": "a9a723f9780625e651a44f89985841a574a23f7dcb90c12e8afbad82f6667bbf"
+    },
+    {
+      "step": 7,
+      "token": ">",
+      "file": "docs/verification/player-path/town-shop/step-007.png",
+      "sha256": "eeeaba0f38c973b039ce60572abddbb3ad606392486ca011f31d41f3080db857"
+    },
+    {
+      "step": 8,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-shop/step-008.png",
+      "sha256": "d7558b9c9cec7288739d475a257574394db776d64dec9879bd291714bfa4a48e"
+    },
+    {
+      "step": 9,
+      "token": "D",
+      "file": "docs/verification/player-path/town-shop/step-009.png",
+      "sha256": "71aaadb95898919c862fe7204557f1d3d20dc1d6161644e379933abdc99f93e5"
+    },
+    {
+      "step": 10,
+      "token": "U",
+      "file": "docs/verification/player-path/town-shop/step-010.png",
+      "sha256": "d7558b9c9cec7288739d475a257574394db776d64dec9879bd291714bfa4a48e"
+    },
+    {
+      "step": 11,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-shop/step-011.png",
+      "sha256": "4597fb9530a6a11d3047e44fe5e2b23fad076d987f94714a5fbca8ac20e20863"
+    },
+    {
+      "step": 12,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-shop/step-012.png",
+      "sha256": "d7558b9c9cec7288739d475a257574394db776d64dec9879bd291714bfa4a48e"
+    }
+  ]
+}

@@ -230,7 +230,7 @@ func applyPlayToken(s *town.Session, token string) error {
 			s.OnLeaveTown(s.LeftGate)
 		}
 	}()
-	// 招募清單開著的時候方向鍵移動反白，不是走路——原版的清單也是吃上下鍵。
+	// 清單開著的時候方向鍵移動反白，不是走路——原版的清單也是吃上下鍵。
 	if s.Recruiting() {
 		switch token {
 		case "U":
@@ -238,6 +238,16 @@ func applyPlayToken(s *town.Session, token string) error {
 			return nil
 		case "D":
 			s.MoveList(1)
+			return nil
+		}
+	}
+	if s.Shopping() {
+		switch token {
+		case "U":
+			s.MoveShop(-1)
+			return nil
+		case "D":
+			s.MoveShop(1)
 			return nil
 		}
 	}

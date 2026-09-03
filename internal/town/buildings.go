@@ -38,6 +38,8 @@ type Door struct {
 	// RecordID 是 payload 位移 0x3A／0x3B 的建築編號。原版住宿存檔時把它寫進
 	// 角色記錄位移 0x2E／0x2F，記下這名角色留在哪一間客棧。
 	RecordID int `json:"record_id"`
+	// Goods 是商店的商品表（RE-075）。馬廄的表版面不同，只有名字。
+	Goods []Good `json:"goods"`
 }
 
 // IsInn 回傳這棟建築是不是能住宿存檔的客棧（旗標 bit3）。
@@ -45,6 +47,15 @@ func (d *Door) IsInn() bool { return d.IconFlags[0]&0x08 != 0 }
 
 // IsAbbey 回傳這棟建築是不是能治療的修道院（旗標 bit6）。
 func (d *Door) IsAbbey() bool { return d.IconFlags[0]&0x40 != 0 }
+
+// IsShop 回傳這棟建築有沒有 TRADE：旗標 bit1／bit4／bit5 任一（RE-067）。
+func (d *Door) IsShop() bool { return d.IconFlags[0]&0x32 != 0 }
+
+// IsStable 回傳這是不是馬廄（旗標 bit5）。馬廄的商品表版面與一般商店不同。
+func (d *Door) IsStable() bool { return d.IconFlags[0]&0x20 != 0 }
+
+// IsTavern 回傳這是不是賣食物的店（旗標 bit4）。買完會問要不要當場吃掉。
+func (d *Door) IsTavern() bool { return d.IconFlags[0]&0x10 != 0 }
 
 // TownBuildings 是一座城鎮的門、入城點與地形通行規則。
 type TownBuildings struct {
@@ -83,6 +94,7 @@ type rawDoor struct {
 	Price       int    `json:"price"`
 	HealRate    int    `json:"heal_rate"`
 	RecordID    int    `json:"record_id"`
+	Goods       []Good `json:"goods"`
 }
 
 type rawTown struct {
@@ -129,7 +141,7 @@ func LoadBuildings(path string) (*Buildings, error) {
 				Index: d.Index, X: d.X, Y: d.Y, Picture: d.Picture,
 				Portrait: d.Portrait, Name: d.Name, Person: d.Person,
 				TextMissing: d.TextMissing, Price: d.Price,
-				HealRate: d.HealRate, RecordID: d.RecordID,
+				HealRate: d.HealRate, RecordID: d.RecordID, Goods: d.Goods,
 			}
 			if len(d.IconFlags) == 2 {
 				door.IconFlags = [2]int{d.IconFlags[0], d.IconFlags[1]}

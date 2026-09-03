@@ -1,0 +1,3222 @@
+{
+  "tool": "tools/dosbox_character_ui_oracle.py",
+  "scenario": "town-shop",
+  "description": "選第 14 名角色（ddduhh，3000 金幣，住在巨魔剋星客棧）進城 1，走到魯德曼甲冑鋪按 TRADE 看商品清單。純觀察，不買也不保存。",
+  "generated_utc": "2026-09-03T06:02:30Z",
+  "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+  "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+  "dosbox_cycles": "fixed 3000",
+  "input_method": "X11 XTEST FakeInput，畫面靜止後逐鍵送出",
+  "sample_interval_s": 0.3,
+  "stability_tolerance": 0.002,
+  "original_zip": {
+    "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "entry_count": 75
+  },
+  "character_files_before": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_after": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_changed": [],
+  "character_files_saved": false,
+  "distinct_frames": 201,
+  "checkpoints": [
+    {
+      "index": 0,
+      "label": "TITLE 標題序列",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 8.0,
+      "reached_stable": true,
+      "t": 8.63,
+      "frame": 7,
+      "file": "frames/frame-007.png",
+      "png_sha256": "0dc53525ce4cdfc3dfa775f7690068ed796d0a948a7394247f77fb9dd688b6b1"
+    },
+    {
+      "index": 1,
+      "label": "書本封面",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 9.0,
+      "reached_stable": true,
+      "t": 18.16,
+      "frame": 9,
+      "file": "frames/frame-009.png",
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "index": 2,
+      "label": "目錄頁",
+      "key": "6",
+      "settle_s": 2.0,
+      "fixed_delay_s": 12.0,
+      "reached_stable": true,
+      "t": 30.91,
+      "frame": 27,
+      "file": "frames/frame-027.png",
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "index": 3,
+      "label": "角色清單往下第 1 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 32.64,
+      "frame": 27,
+      "file": "frames/frame-027.png",
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "index": 4,
+      "label": "角色清單往下第 2 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 40.82,
+      "frame": 45,
+      "file": "frames/frame-045.png",
+      "png_sha256": "818e5dc3a142fef87b4f7aff72145907ed6ac466c3184fe8088abc751e2388cc"
+    },
+    {
+      "index": 5,
+      "label": "角色清單往下第 3 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 42.59,
+      "frame": 46,
+      "file": "frames/frame-046.png",
+      "png_sha256": "96a471564afe63bb795183776eac99c201a78b78142207720ac859887ff6eb7e"
+    },
+    {
+      "index": 6,
+      "label": "角色清單往下第 4 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 44.35,
+      "frame": 47,
+      "file": "frames/frame-047.png",
+      "png_sha256": "b21b37987e61d3de1ab17c8e0957821a61ab2d800363851f2782d54a49a1bfa0"
+    },
+    {
+      "index": 7,
+      "label": "角色清單往下第 5 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 46.12,
+      "frame": 48,
+      "file": "frames/frame-048.png",
+      "png_sha256": "0c57ce28bbee7584127da739ead12c254aefb3af18f26ceffde27ff5d936f2b0"
+    },
+    {
+      "index": 8,
+      "label": "角色清單往下第 6 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 47.88,
+      "frame": 49,
+      "file": "frames/frame-049.png",
+      "png_sha256": "cd3ae7e0cec58ca86021b7c80dc717adeb593b3716094f5ce31b0b63ab12fe79"
+    },
+    {
+      "index": 9,
+      "label": "角色清單往下第 7 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 49.63,
+      "frame": 50,
+      "file": "frames/frame-050.png",
+      "png_sha256": "16b488f6fd2f1e09c63144d88f9f7163dadcf120b1302c73af950d07fbda9bf9"
+    },
+    {
+      "index": 10,
+      "label": "角色清單往下第 8 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 51.37,
+      "frame": 51,
+      "file": "frames/frame-051.png",
+      "png_sha256": "de990f6b028b6a239bf6dff4bdb9b9eb6b6cc4969a012a0a5a255d7f6bed921a"
+    },
+    {
+      "index": 11,
+      "label": "角色清單往下第 9 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 53.11,
+      "frame": 52,
+      "file": "frames/frame-052.png",
+      "png_sha256": "933ae4ec6bf614f85093235d6c2c08dd164fad134a70b56c440229d08352aebe"
+    },
+    {
+      "index": 12,
+      "label": "角色清單往下第 10 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 54.85,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "png_sha256": "fb52d0c72f255dd843fb38a692cabcc8db6e2a975229ab6e843614a555192f2c"
+    },
+    {
+      "index": 13,
+      "label": "角色清單往下第 11 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 56.6,
+      "frame": 54,
+      "file": "frames/frame-054.png",
+      "png_sha256": "b4b5a0259e325ee34d3610ad893e0a52dfbd93faee86d35edb1c792b47a90b12"
+    },
+    {
+      "index": 14,
+      "label": "角色清單往下第 12 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 58.35,
+      "frame": 55,
+      "file": "frames/frame-055.png",
+      "png_sha256": "0d79d09e85e9480f33e9717c73b4b154d662fedb37186d7bee105786a0200f3b"
+    },
+    {
+      "index": 15,
+      "label": "角色清單往下第 13 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 60.11,
+      "frame": 56,
+      "file": "frames/frame-056.png",
+      "png_sha256": "799c5d6363c6fe57d6d58143921c7ba3d6eb7759e045fa7ce682f7ed0575856a"
+    },
+    {
+      "index": 16,
+      "label": "選第 14 名角色",
+      "key": "Return",
+      "settle_s": 2.0,
+      "fixed_delay_s": 25.0,
+      "reached_stable": true,
+      "t": 85.59,
+      "frame": 57,
+      "file": "frames/frame-057.png",
+      "png_sha256": "025478f3583da2ec645cc2b8670462b6469e94b56f6faa0211423c8f34f349ea"
+    },
+    {
+      "index": 17,
+      "label": "旅店老闆對話（第一段）",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 15.0,
+      "reached_stable": true,
+      "t": 101.36,
+      "frame": 82,
+      "file": "frames/frame-082.png",
+      "png_sha256": "5dc043af49d878b337dc7ed5c7ca69c249f66105fb78a56a368134510ecf8cac"
+    },
+    {
+      "index": 18,
+      "label": "旅店圖示列（白框在 DOOR）",
+      "key": "Return",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 104.94,
+      "frame": 83,
+      "file": "frames/frame-083.png",
+      "png_sha256": "c23b0e6dca994530abc41c103e8ff181e3b18485066fe5ba6f29b86829791cd6"
+    },
+    {
+      "index": 19,
+      "label": "走出旅店",
+      "key": null,
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 108.38,
+      "frame": 90,
+      "file": "frames/frame-090.png",
+      "png_sha256": "1546f884648b6d91d77476e522df9cef3fc281fd91a2ccae7918593686cf0a04"
+    },
+    {
+      "index": 20,
+      "label": "往甲冑鋪第 1 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 109.64,
+      "frame": 90,
+      "file": "frames/frame-090.png",
+      "png_sha256": "1546f884648b6d91d77476e522df9cef3fc281fd91a2ccae7918593686cf0a04"
+    },
+    {
+      "index": 21,
+      "label": "往甲冑鋪第 2 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 111.42,
+      "frame": 93,
+      "file": "frames/frame-093.png",
+      "png_sha256": "9743ed3d513c9764cee3abce590088d145f702195db5728e6b95631a47b7f195"
+    },
+    {
+      "index": 22,
+      "label": "往甲冑鋪第 3 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 113.21,
+      "frame": 94,
+      "file": "frames/frame-094.png",
+      "png_sha256": "2f388fea64b9397c9fa99b6718a36b1e9cf1fe935b3b84aa900322ac0e21ce9a"
+    },
+    {
+      "index": 23,
+      "label": "往甲冑鋪第 4 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 115.01,
+      "frame": 99,
+      "file": "frames/frame-099.png",
+      "png_sha256": "5b9a39fc60cd185d96ef6fccc64af466268756f4d9e30eb9bb0aacfc668ae0d3"
+    },
+    {
+      "index": 24,
+      "label": "往甲冑鋪第 5 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 116.8,
+      "frame": 100,
+      "file": "frames/frame-100.png",
+      "png_sha256": "c9970f3d57a7615dd42302b117a2deadcce191f5e95a6782b8eb8c50177a9ffc"
+    },
+    {
+      "index": 25,
+      "label": "往甲冑鋪第 6 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 118.56,
+      "frame": 103,
+      "file": "frames/frame-103.png",
+      "png_sha256": "85b486e8a5c40c55f59a96fea71a987bfa8eb795d41204d9383b3e0ba42ce97a"
+    },
+    {
+      "index": 26,
+      "label": "往甲冑鋪第 7 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 120.35,
+      "frame": 105,
+      "file": "frames/frame-105.png",
+      "png_sha256": "376480fd7287929c5e311093348ed6a580fedd6350a4c5dd12ae1f0765409a87"
+    },
+    {
+      "index": 27,
+      "label": "往甲冑鋪第 8 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 122.14,
+      "frame": 110,
+      "file": "frames/frame-110.png",
+      "png_sha256": "893d830e1b59fe607371435dc1949af75aa8dcf6c0e411bd2b5c5dea51b74886"
+    },
+    {
+      "index": 28,
+      "label": "往甲冑鋪第 9 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 123.93,
+      "frame": 111,
+      "file": "frames/frame-111.png",
+      "png_sha256": "9a5af50c251120dac83da3a433e79487a3ad4aeaa4fb71481b85ecf617002086"
+    },
+    {
+      "index": 29,
+      "label": "往甲冑鋪第 10 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 125.72,
+      "frame": 116,
+      "file": "frames/frame-116.png",
+      "png_sha256": "10ea040ecedaebf487e90e528cb255bed829b55697a4853f1985518d9230a682"
+    },
+    {
+      "index": 30,
+      "label": "往甲冑鋪第 11 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 127.22,
+      "frame": 118,
+      "file": "frames/frame-118.png",
+      "png_sha256": "86f7706583ae54741b7a76d5f679558f1282eb85466c61b2ed6d67c6c56d0aeb"
+    },
+    {
+      "index": 31,
+      "label": "往甲冑鋪第 12 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 129.0,
+      "frame": 120,
+      "file": "frames/frame-120.png",
+      "png_sha256": "057d5ef1cd87b680eaf97145043cd3d56475a813d094d3e70afa4fa33a6d3b12"
+    },
+    {
+      "index": 32,
+      "label": "往甲冑鋪第 13 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 130.75,
+      "frame": 123,
+      "file": "frames/frame-123.png",
+      "png_sha256": "543542d64f173ccd01a734643f3b7540a2c81a7a62c77043b842c73fe341741b"
+    },
+    {
+      "index": 33,
+      "label": "往甲冑鋪第 14 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 132.5,
+      "frame": 125,
+      "file": "frames/frame-125.png",
+      "png_sha256": "cb7a0de16087b4ef49b1cf11df8fb426265d277d043f2d541d74f7cc7370e5bc"
+    },
+    {
+      "index": 34,
+      "label": "往甲冑鋪第 15 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 134.26,
+      "frame": 127,
+      "file": "frames/frame-127.png",
+      "png_sha256": "49f21c5dfededa44895afe9d49aa0ecab7c9a627750eab93f2b997da9d925e53"
+    },
+    {
+      "index": 35,
+      "label": "往甲冑鋪第 16 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 136.04,
+      "frame": 129,
+      "file": "frames/frame-129.png",
+      "png_sha256": "9cd4acba43959e2b779c713fc1315186e58bf9c3a1edf5ef53047b97139c4a62"
+    },
+    {
+      "index": 36,
+      "label": "往甲冑鋪第 17 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 137.83,
+      "frame": 132,
+      "file": "frames/frame-132.png",
+      "png_sha256": "bcdf7188f81755bd6b6d86f74516c197c12dbf09b9327c435833901631f96550"
+    },
+    {
+      "index": 37,
+      "label": "往甲冑鋪第 18 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 139.34,
+      "frame": 135,
+      "file": "frames/frame-135.png",
+      "png_sha256": "644ce0f91bd1f163131c164f88bf813e133a7c9f120cfd9c80eda37c52e27fbf"
+    },
+    {
+      "index": 38,
+      "label": "往甲冑鋪第 19 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 141.12,
+      "frame": 137,
+      "file": "frames/frame-137.png",
+      "png_sha256": "0939a0d4a5aa661004d884aad3c878525e7ecd6edeff5ba2c22a003d1ab34f93"
+    },
+    {
+      "index": 39,
+      "label": "往甲冑鋪第 20 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 142.93,
+      "frame": 139,
+      "file": "frames/frame-139.png",
+      "png_sha256": "ac429ed728a5f357bfd239384a8c7e7e218bd7f76794d3c5cf19d64608211b44"
+    },
+    {
+      "index": 40,
+      "label": "往甲冑鋪第 21 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 144.72,
+      "frame": 142,
+      "file": "frames/frame-142.png",
+      "png_sha256": "12439ba6e037c2ce357a23b52ed6167f167d3509310ffc74d786f4567df3b8fc"
+    },
+    {
+      "index": 41,
+      "label": "往甲冑鋪第 22 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 146.54,
+      "frame": 144,
+      "file": "frames/frame-144.png",
+      "png_sha256": "8effe1dc38e937afb60fc9cebe862f54907c54677e99d90fb5ed590418dee596"
+    },
+    {
+      "index": 42,
+      "label": "往甲冑鋪第 23 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 148.32,
+      "frame": 147,
+      "file": "frames/frame-147.png",
+      "png_sha256": "e1bb321bf2d81b8a63eb0f95675edcd37f6ab2dc1a46ee9a57feb6e73b517c32"
+    },
+    {
+      "index": 43,
+      "label": "往甲冑鋪第 24 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 149.85,
+      "frame": 150,
+      "file": "frames/frame-150.png",
+      "png_sha256": "c606eb470820028561808032f071751dd8fbbff6c88447a810590800f28933cb"
+    },
+    {
+      "index": 44,
+      "label": "往甲冑鋪第 25 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 151.66,
+      "frame": 152,
+      "file": "frames/frame-152.png",
+      "png_sha256": "7b9e2a82659093c9b91f1a73ed191c19a6781f0f0f77b711f73c780cc4446136"
+    },
+    {
+      "index": 45,
+      "label": "往甲冑鋪第 26 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 153.2,
+      "frame": 157,
+      "file": "frames/frame-157.png",
+      "png_sha256": "f2d024d466bbaafa442a99ab8d7525ff9ed2015eb57f0ff1187b84c17f93ac6c"
+    },
+    {
+      "index": 46,
+      "label": "往甲冑鋪第 27 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 155.01,
+      "frame": 158,
+      "file": "frames/frame-158.png",
+      "png_sha256": "91f14071dd103b9fc65498f9c15b2d4b946da93176dbae3412f19a1b1382afc9"
+    },
+    {
+      "index": 47,
+      "label": "往甲冑鋪第 28 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 156.82,
+      "frame": 161,
+      "file": "frames/frame-161.png",
+      "png_sha256": "ad4c6c34bb54f8585fb9f93e55c591501446c41a4325062e0ed6a6e725bdd4dd"
+    },
+    {
+      "index": 48,
+      "label": "往甲冑鋪第 29 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 158.64,
+      "frame": 164,
+      "file": "frames/frame-164.png",
+      "png_sha256": "74551a547dfb9f58050e03f3f9874a812166d6bdb203a044208105e04377843d"
+    },
+    {
+      "index": 49,
+      "label": "往甲冑鋪第 30 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 160.44,
+      "frame": 169,
+      "file": "frames/frame-169.png",
+      "png_sha256": "30ede8f3bd5671c32e109150fbdc2b8cf1cf467d249c003dd6d9a1c3b6b5bf74"
+    },
+    {
+      "index": 50,
+      "label": "往甲冑鋪第 31 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 162.23,
+      "frame": 170,
+      "file": "frames/frame-170.png",
+      "png_sha256": "4168761f815d1483092c5f825fdfd38d5353859ba8b5c4e2b6209005365f5eb7"
+    },
+    {
+      "index": 51,
+      "label": "往甲冑鋪第 32 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 164.02,
+      "frame": 175,
+      "file": "frames/frame-175.png",
+      "png_sha256": "7933b39c8d35fb83b5ff95c3da4f5595fe439dd9585862f71d8937d63cde7706"
+    },
+    {
+      "index": 52,
+      "label": "往甲冑鋪第 33 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 165.81,
+      "frame": 176,
+      "file": "frames/frame-176.png",
+      "png_sha256": "554ebd5e87492a4063336902b7bd435dbb4206a2ef929c75dee7002c1f01c8a8"
+    },
+    {
+      "index": 53,
+      "label": "往甲冑鋪第 34 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 167.57,
+      "frame": 179,
+      "file": "frames/frame-179.png",
+      "png_sha256": "329fbfc166e77b50aab3e99db84c20e38ca89e6c0b7a376bc1e2bf966d3b76c0"
+    },
+    {
+      "index": 54,
+      "label": "往甲冑鋪第 35 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 169.37,
+      "frame": 181,
+      "file": "frames/frame-181.png",
+      "png_sha256": "e59699794007dd13dd6405dd9cbd1558ca85ec5aec65be4c5d922e7db305ddb5"
+    },
+    {
+      "index": 55,
+      "label": "往甲冑鋪第 36 步",
+      "key": "Down",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 171.16,
+      "frame": 184,
+      "file": "frames/frame-184.png",
+      "png_sha256": "b61763093ab7bd37b8f06d349a8bb4e0c817b9fe61306aefde7d504a800a4faf"
+    },
+    {
+      "index": 56,
+      "label": "往甲冑鋪第 37 步",
+      "key": "Left",
+      "settle_s": 1.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 172.97,
+      "frame": 186,
+      "file": "frames/frame-186.png",
+      "png_sha256": "3c5c6dff9ec538f30a91a9f99ca10a651e49f032d0cb5b41e26c997a276bd7f2"
+    },
+    {
+      "index": 57,
+      "label": "站到甲冑鋪門口",
+      "key": "Return",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 177.57,
+      "frame": 190,
+      "file": "frames/frame-190.png",
+      "png_sha256": "845c5f7210b1d6c05b492be0e3636f1acc93f5ebbf6fc3e3758a1a78c59e9c69"
+    },
+    {
+      "index": 58,
+      "label": "進門敘述",
+      "key": "space",
+      "settle_s": 2.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 181.5,
+      "frame": 191,
+      "file": "frames/frame-191.png",
+      "png_sha256": "111488040a85bc0e882ac9eb1660171410a4bdb9537487c37e2bc4e96a6adbba"
+    },
+    {
+      "index": 59,
+      "label": "讀完敘述",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 183.24,
+      "frame": 192,
+      "file": "frames/frame-192.png",
+      "png_sha256": "5edab28179ed7ec7c611754299d0a1d50931f759fb994579d3f5bc730300b96d"
+    },
+    {
+      "index": 60,
+      "label": "白框第 2 格",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 184.98,
+      "frame": 193,
+      "file": "frames/frame-193.png",
+      "png_sha256": "f708cdd5804aa1ce21c9842714bf8b0733ee8f038041f8f55b56a65e2885d4f4"
+    },
+    {
+      "index": 61,
+      "label": "白框第 3 格",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 186.72,
+      "frame": 194,
+      "file": "frames/frame-194.png",
+      "png_sha256": "7e1c3c8aabdfd677f9345fe17fb6ccdfd7de3afd213a4befab6b51b8deaf70ec"
+    },
+    {
+      "index": 62,
+      "label": "白框第 4 格",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 188.46,
+      "frame": 195,
+      "file": "frames/frame-195.png",
+      "png_sha256": "789dca595f77e7487aa3d0df0d41999dfd74c187b44eccf02c007f222120e893"
+    },
+    {
+      "index": 63,
+      "label": "白框第 5 格（TRADE）",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 193.01,
+      "frame": 196,
+      "file": "frames/frame-196.png",
+      "png_sha256": "b5a12677933fd50d341be9cefd31bd607405a29fb248d110e0321852818c0baa"
+    },
+    {
+      "index": 64,
+      "label": "商品清單",
+      "key": "Down",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 195.67,
+      "frame": 197,
+      "file": "frames/frame-197.png",
+      "png_sha256": "8fd98eeac1f8c52d6489c941d4ffbad2b22a25a3ceee1191dc245a78765c140a"
+    },
+    {
+      "index": 65,
+      "label": "清單往下一列",
+      "key": "Up",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 198.34,
+      "frame": 198,
+      "file": "frames/frame-198.png",
+      "png_sha256": "7e6c90f2cc31588c27c2f540792e7ff1e92c4000e2781fbeec5426b8505e757b"
+    },
+    {
+      "index": 66,
+      "label": "回到第一列",
+      "key": "Return",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 202.55,
+      "frame": 197,
+      "file": "frames/frame-197.png",
+      "png_sha256": "8fd98eeac1f8c52d6489c941d4ffbad2b22a25a3ceee1191dc245a78765c140a"
+    },
+    {
+      "index": 67,
+      "label": "商品明細與「要買嗎」",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 207.1,
+      "frame": 199,
+      "file": "frames/frame-199.png",
+      "png_sha256": "88e161a12c3b36dfba730c84b63373219b608ff46ee8d5c3e83fad1beb808373"
+    },
+    {
+      "index": 68,
+      "label": "買下之後",
+      "key": "Escape",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 210.69,
+      "frame": 200,
+      "file": "frames/frame-200.png",
+      "png_sha256": "ff60d63453745cc0400ea4ce2b73c8540e5b671b4b4af94f0d1201a6406a95af"
+    },
+    {
+      "index": 69,
+      "label": "離開清單",
+      "key": "greater",
+      "settle_s": 1.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 212.72,
+      "frame": 200,
+      "file": "frames/frame-200.png",
+      "png_sha256": "ff60d63453745cc0400ea4ce2b73c8540e5b671b4b4af94f0d1201a6406a95af"
+    },
+    {
+      "index": 70,
+      "label": "白框第 2 格（MIRROR）",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 217.23,
+      "frame": 200,
+      "file": "frames/frame-200.png",
+      "png_sha256": "ff60d63453745cc0400ea4ce2b73c8540e5b671b4b4af94f0d1201a6406a95af"
+    },
+    {
+      "index": 71,
+      "label": "角色資料頁：金幣與背包",
+      "key": "Escape",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 220.82,
+      "frame": 197,
+      "file": "frames/frame-197.png",
+      "png_sha256": "8fd98eeac1f8c52d6489c941d4ffbad2b22a25a3ceee1191dc245a78765c140a"
+    },
+    {
+      "index": 72,
+      "label": "離開資料頁",
+      "key": null,
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 224.39,
+      "frame": 192,
+      "file": "frames/frame-192.png",
+      "png_sha256": "5edab28179ed7ec7c611754299d0a1d50931f759fb994579d3f5bc730300b96d"
+    }
+  ],
+  "timeline": [
+    {
+      "t": 0.58,
+      "frame": 0,
+      "file": "frames/frame-000.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "e43aab8637a5b636bad1d2e22d1039d7fd30b865707aae7db97b7965c0df889d"
+    },
+    {
+      "t": 0.99,
+      "frame": 1,
+      "file": "frames/frame-001.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "e6331e1eb27d6b642d7c095769f03d4a8a9d7f15658701bffa16481954a5f38c"
+    },
+    {
+      "t": 1.31,
+      "frame": 2,
+      "file": "frames/frame-002.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8ef6bda61c7ae6ba2e411405edd87056782337a996a73a93099365cff25ceeb0"
+    },
+    {
+      "t": 5.38,
+      "frame": 3,
+      "file": "frames/frame-003.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1a120fbb455c633c96f5abe2cdbf564dbbb0a0af1b0694d0fc5e575ddf4dcbd8"
+    },
+    {
+      "t": 7.29,
+      "frame": 4,
+      "file": "frames/frame-004.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "def942b8f7dde58783c4b3200988c812343a580e186c2e811eded542a64b4203"
+    },
+    {
+      "t": 7.62,
+      "frame": 5,
+      "file": "frames/frame-005.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7acda7db6a21eea3a7b1137ccdcfaae20b5dff786c1497d104ba8bc376fbe3e8"
+    },
+    {
+      "t": 7.97,
+      "frame": 6,
+      "file": "frames/frame-006.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8c025d2a939644723a82db21443edcb4e1ce177a20fc63697e64b01e70993a18"
+    },
+    {
+      "t": 8.32,
+      "frame": 7,
+      "file": "frames/frame-007.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0dc53525ce4cdfc3dfa775f7690068ed796d0a948a7394247f77fb9dd688b6b1"
+    },
+    {
+      "t": 9.1,
+      "frame": 3,
+      "repeat": true
+    },
+    {
+      "t": 11.61,
+      "frame": 8,
+      "file": "frames/frame-008.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "10f6a9c59e69887c346c44ee4575b2eb7e53cbcf8610e0684df3717871f4b18c"
+    },
+    {
+      "t": 14.12,
+      "frame": 9,
+      "file": "frames/frame-009.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "t": 18.67,
+      "frame": 10,
+      "file": "frames/frame-010.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "eb0a48b21e400d4a175f1bc52ddc9a87c1a11486a9ef9b139633de7a531b9b3d"
+    },
+    {
+      "t": 19.01,
+      "frame": 11,
+      "file": "frames/frame-011.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "476fb50d3e5b955c961ac1263b8c1124af3373b256ca08d868a0bf4951de4500"
+    },
+    {
+      "t": 19.36,
+      "frame": 12,
+      "file": "frames/frame-012.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9dbb3bb5cd8917c9b0886c5b0e6ce4de344af43618dca440940066f2b66201ba"
+    },
+    {
+      "t": 19.71,
+      "frame": 13,
+      "file": "frames/frame-013.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "69eb3b0ab535481ddf0481e1cd5d4c17a9c259e76f51a1e0d27eb471ce75780f"
+    },
+    {
+      "t": 20.05,
+      "frame": 14,
+      "file": "frames/frame-014.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "736c48575594e5491cdd0364fa9bd454e015b3e009d4e18b5e5594e0c6478d51"
+    },
+    {
+      "t": 20.4,
+      "frame": 15,
+      "file": "frames/frame-015.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b8cdc06993b0daff7bb5ddcbe18d37d99e460d294c419504e15eebeabc09b73c"
+    },
+    {
+      "t": 20.75,
+      "frame": 16,
+      "file": "frames/frame-016.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "73557b8881e71e56928ee7048ebdc35560e0e78eb6c22e621802ba6d37e335c5"
+    },
+    {
+      "t": 21.11,
+      "frame": 17,
+      "file": "frames/frame-017.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a9f440be323d49857f152eadd880876f268f4d44396fc7c2312afb4055e2ab5f"
+    },
+    {
+      "t": 21.45,
+      "frame": 18,
+      "file": "frames/frame-018.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0b9268a68e48668a1e9e30bfe05cc0805bf10cfd9e4fd810bfd99b36561772e4"
+    },
+    {
+      "t": 21.81,
+      "frame": 19,
+      "file": "frames/frame-019.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b3f891fe039d353114c647bd2d2dc14746a43c251ddbd0394a9a0d902dbfcfd2"
+    },
+    {
+      "t": 22.16,
+      "frame": 20,
+      "file": "frames/frame-020.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3230af5151199aece913e6036b94998b42775422da867511932cb3a5138b451e"
+    },
+    {
+      "t": 22.53,
+      "frame": 21,
+      "file": "frames/frame-021.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "12acd6a1f779664ef82436882e3512ab9518b0765da8da024af8d77ba573631d"
+    },
+    {
+      "t": 22.88,
+      "frame": 22,
+      "file": "frames/frame-022.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1654f07aa7ada16f499c28de6ff3790e66f890ee832996abd2472dc75d6c53a7"
+    },
+    {
+      "t": 23.24,
+      "frame": 23,
+      "file": "frames/frame-023.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "73124b04aafc0a7d01368b6b76c3a1427dc05eddb6cc074bcc3a9a18be7f7aa4"
+    },
+    {
+      "t": 23.59,
+      "frame": 24,
+      "file": "frames/frame-024.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8cb87f293020907696833a0be8acc236ac9741d40ae472be55ee3c730af82a3d"
+    },
+    {
+      "t": 23.95,
+      "frame": 25,
+      "file": "frames/frame-025.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5f3f227d3b6e99437228e5a81789be2d1e69b04d1c3dd1bd12a22408170d7041"
+    },
+    {
+      "t": 24.3,
+      "frame": 26,
+      "file": "frames/frame-026.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7ed5c7e2a40cdafb623cc8b42d88432ba456332d1c699c83651605744e3d0d5e"
+    },
+    {
+      "t": 24.65,
+      "frame": 27,
+      "file": "frames/frame-027.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "t": 33.48,
+      "frame": 28,
+      "file": "frames/frame-028.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f534861bd30906c624c9efb5c5e5fb3ca2586b12958e6ff8c68370a97eea174f"
+    },
+    {
+      "t": 33.84,
+      "frame": 29,
+      "file": "frames/frame-029.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0a86f11d3f0e4e7b9fe4ff5db3dbe89439529288021ee04b061ce160a33d2111"
+    },
+    {
+      "t": 34.19,
+      "frame": 30,
+      "file": "frames/frame-030.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9fcd7b74d17d7260371c17891246a6bae9bc1d94e00e20c67849a4edce9636f4"
+    },
+    {
+      "t": 34.55,
+      "frame": 31,
+      "file": "frames/frame-031.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "13b6938f4b0a861c86fb7a26d17850196bf7dd97cc36f30aeefd2272faf18feb"
+    },
+    {
+      "t": 34.9,
+      "frame": 32,
+      "file": "frames/frame-032.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3a667d2f149a5258741939d16d194851302df184dbad234c5e34798264ad5729"
+    },
+    {
+      "t": 35.25,
+      "frame": 33,
+      "file": "frames/frame-033.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "573300205249c46217e1f46bf04e1d2cda9f3c765fc0d0da92bcd78d0e4a518e"
+    },
+    {
+      "t": 35.59,
+      "frame": 34,
+      "file": "frames/frame-034.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cc5363d0264896ad7e1f3aec099b17ea6ec31feaf04d039efc28e6b29d3559f7"
+    },
+    {
+      "t": 35.94,
+      "frame": 35,
+      "file": "frames/frame-035.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cae5b888f7ba1d78836cd829ec39d64265ddc6088e63d18454fe21ee51bcfdc7"
+    },
+    {
+      "t": 36.3,
+      "frame": 36,
+      "file": "frames/frame-036.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8fde28cb7efcd77bccde46522754a60a31351571fe66c160a32ebf3fdc54eebd"
+    },
+    {
+      "t": 36.66,
+      "frame": 37,
+      "file": "frames/frame-037.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5951c2275733e75de560b94e7fc4ef1331c6d0a4144d2bff9ffe60af70900681"
+    },
+    {
+      "t": 37.01,
+      "frame": 38,
+      "file": "frames/frame-038.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0bad9b1867338676c56184d593ce80eb5792d79f2c8c91924db0b6bd6cf9129b"
+    },
+    {
+      "t": 37.37,
+      "frame": 39,
+      "file": "frames/frame-039.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3be7a1ed4265b01151b8a5627ee2051a9ffe823da40aacafdc4090ffc50b6d80"
+    },
+    {
+      "t": 37.75,
+      "frame": 40,
+      "file": "frames/frame-040.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d9ffc57201d6901a687ce36d55109999884da569e84146bd89b8a98755e0c983"
+    },
+    {
+      "t": 38.11,
+      "frame": 41,
+      "file": "frames/frame-041.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bfc2a06824e67cb7e43504c8ad3368a33a382cfa1ec8dde5f2770a8569c406bc"
+    },
+    {
+      "t": 38.48,
+      "frame": 42,
+      "file": "frames/frame-042.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "88fb29237443840d2dd90409e5f2167e94915077c137b43c56373010bab76cc5"
+    },
+    {
+      "t": 38.85,
+      "frame": 43,
+      "file": "frames/frame-043.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a90205971b0455071348b6cbc4c8aadf829bd5d2b22c3fbc91b2dc77fa633818"
+    },
+    {
+      "t": 39.21,
+      "frame": 44,
+      "file": "frames/frame-044.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "90b292fcff7c3b632e69bada770b5f7c4aaf0c56733276935f26fdbbfcb95b03"
+    },
+    {
+      "t": 39.57,
+      "frame": 45,
+      "file": "frames/frame-045.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "818e5dc3a142fef87b4f7aff72145907ed6ac466c3184fe8088abc751e2388cc"
+    },
+    {
+      "t": 41.34,
+      "frame": 46,
+      "file": "frames/frame-046.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "96a471564afe63bb795183776eac99c201a78b78142207720ac859887ff6eb7e"
+    },
+    {
+      "t": 43.1,
+      "frame": 47,
+      "file": "frames/frame-047.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b21b37987e61d3de1ab17c8e0957821a61ab2d800363851f2782d54a49a1bfa0"
+    },
+    {
+      "t": 44.87,
+      "frame": 48,
+      "file": "frames/frame-048.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0c57ce28bbee7584127da739ead12c254aefb3af18f26ceffde27ff5d936f2b0"
+    },
+    {
+      "t": 46.64,
+      "frame": 49,
+      "file": "frames/frame-049.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cd3ae7e0cec58ca86021b7c80dc717adeb593b3716094f5ce31b0b63ab12fe79"
+    },
+    {
+      "t": 48.39,
+      "frame": 50,
+      "file": "frames/frame-050.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "16b488f6fd2f1e09c63144d88f9f7163dadcf120b1302c73af950d07fbda9bf9"
+    },
+    {
+      "t": 50.14,
+      "frame": 51,
+      "file": "frames/frame-051.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "de990f6b028b6a239bf6dff4bdb9b9eb6b6cc4969a012a0a5a255d7f6bed921a"
+    },
+    {
+      "t": 51.88,
+      "frame": 52,
+      "file": "frames/frame-052.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "933ae4ec6bf614f85093235d6c2c08dd164fad134a70b56c440229d08352aebe"
+    },
+    {
+      "t": 53.61,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fb52d0c72f255dd843fb38a692cabcc8db6e2a975229ab6e843614a555192f2c"
+    },
+    {
+      "t": 55.35,
+      "frame": 54,
+      "file": "frames/frame-054.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b4b5a0259e325ee34d3610ad893e0a52dfbd93faee86d35edb1c792b47a90b12"
+    },
+    {
+      "t": 57.11,
+      "frame": 55,
+      "file": "frames/frame-055.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0d79d09e85e9480f33e9717c73b4b154d662fedb37186d7bee105786a0200f3b"
+    },
+    {
+      "t": 58.86,
+      "frame": 56,
+      "file": "frames/frame-056.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "799c5d6363c6fe57d6d58143921c7ba3d6eb7759e045fa7ce682f7ed0575856a"
+    },
+    {
+      "t": 60.64,
+      "frame": 57,
+      "file": "frames/frame-057.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "025478f3583da2ec645cc2b8670462b6469e94b56f6faa0211423c8f34f349ea"
+    },
+    {
+      "t": 86.1,
+      "frame": 58,
+      "file": "frames/frame-058.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c77437b4ba3c0768ba23643079f5dc5840626421ff38626b351c19e3ab35697"
+    },
+    {
+      "t": 86.77,
+      "frame": 59,
+      "file": "frames/frame-059.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "166ef1ab3ff0f78d2d08b4713fa6a351baa4416ccf1aeecfde16b6882bcf259b"
+    },
+    {
+      "t": 87.12,
+      "frame": 60,
+      "file": "frames/frame-060.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7d955b16f3ee9a3d119163085c9c54610709c262e6f945de4e35c1c47d8ec0d5"
+    },
+    {
+      "t": 87.48,
+      "frame": 61,
+      "file": "frames/frame-061.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d328896a76d20ff51b10063d0044eba86928a008d4d428102df488cd3c37e31b"
+    },
+    {
+      "t": 87.85,
+      "frame": 62,
+      "file": "frames/frame-062.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5e83527c4219abc33b3204560b4b96d1dd6f2d29b3a896014b50d4c609182e81"
+    },
+    {
+      "t": 88.21,
+      "frame": 63,
+      "file": "frames/frame-063.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2a054c334ebbae652a650b5cc3c6fab15380a5d14e01c942308c90f7fbee67f2"
+    },
+    {
+      "t": 88.57,
+      "frame": 64,
+      "file": "frames/frame-064.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e166af9a0a45b101e5c561d37b701194803abbb9eee02c40f3e438eea2631fee"
+    },
+    {
+      "t": 88.92,
+      "frame": 65,
+      "file": "frames/frame-065.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1ea9412502bb617aced980abb4a27879b24bb447b19d27c0105f1905738db11c"
+    },
+    {
+      "t": 89.28,
+      "frame": 66,
+      "file": "frames/frame-066.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0ac5d6e226d13f5f0d31c2e6317eacfd369df2a338c7154072e040bfbe4c362f"
+    },
+    {
+      "t": 89.63,
+      "frame": 67,
+      "file": "frames/frame-067.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "62a2507ec8717da9090b9786534753611e966d3f46b00d9a36f0ba4d7c70aaea"
+    },
+    {
+      "t": 89.99,
+      "frame": 68,
+      "file": "frames/frame-068.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e7353347eef7dbdeb34e3a32d59bec1ba7bcc9967f801d1ce23b01c566f30f3c"
+    },
+    {
+      "t": 90.35,
+      "frame": 69,
+      "file": "frames/frame-069.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1ead7e053c4e2a81b75b8e431ee921929bce0a74f29e0ec71b3f57b12e0d76a5"
+    },
+    {
+      "t": 90.71,
+      "frame": 70,
+      "file": "frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8d7ef476a5048939da204746770047a92b3017b47cb005f5a4b38c3c60a41fdf"
+    },
+    {
+      "t": 91.07,
+      "frame": 71,
+      "file": "frames/frame-071.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f7a5f799c1f8eacdbccff9a3c3541846c475c4f8e672650beff530aa668e0e58"
+    },
+    {
+      "t": 91.42,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "02780f9244bcf5fd4e7212392c510de0ac55315707a049e11554db878c680741"
+    },
+    {
+      "t": 91.77,
+      "frame": 73,
+      "file": "frames/frame-073.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e93fb6085cb4220ddfb2af85d434f0f7b9a2efabea38505759264840536d1725"
+    },
+    {
+      "t": 92.14,
+      "frame": 74,
+      "file": "frames/frame-074.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0dd9f223b69a72930be55e4b6ac1e9117ce35fa84275a7172e16b8cd5d1e6b2a"
+    },
+    {
+      "t": 92.5,
+      "frame": 75,
+      "file": "frames/frame-075.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bee2b2621b95545de519ce2961ae2add6b90a7ad23848d18a20b734f3de4b9b9"
+    },
+    {
+      "t": 92.85,
+      "frame": 76,
+      "file": "frames/frame-076.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8d537991df76d7ffa21b8f790cfa9f456bf9cc75d7bc5095c647a5fa3b7e8a9e"
+    },
+    {
+      "t": 95.67,
+      "frame": 77,
+      "file": "frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e8619925e7db0d87188d0cf4a2930a7d43a4bde024434fc0a49a9f51e60a7a61"
+    },
+    {
+      "t": 95.99,
+      "frame": 78,
+      "file": "frames/frame-078.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6265f0c8a2a2247fc1832d34d30b070627e1ba315942b916ad0e82738b432580"
+    },
+    {
+      "t": 97.89,
+      "frame": 79,
+      "file": "frames/frame-079.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "94884309ebf4ade3aab216ba8fb8951c0969deef57479a1e85adf8eee4048cf2"
+    },
+    {
+      "t": 98.23,
+      "frame": 80,
+      "file": "frames/frame-080.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8593c8e1f27e99b5f9e6af1b1b7e7e7a043cc2e03b8cccaf1eda851af0f47acf"
+    },
+    {
+      "t": 98.56,
+      "frame": 81,
+      "file": "frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0a7c9db5e4bb86083ed1cf2556aed626887441b1cb99e1261a087af4e79fea67"
+    },
+    {
+      "t": 101.03,
+      "frame": 78,
+      "repeat": true
+    },
+    {
+      "t": 101.36,
+      "frame": 82,
+      "file": "frames/frame-082.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5dc043af49d878b337dc7ed5c7ca69c249f66105fb78a56a368134510ecf8cac"
+    },
+    {
+      "t": 101.84,
+      "frame": 83,
+      "file": "frames/frame-083.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c23b0e6dca994530abc41c103e8ff181e3b18485066fe5ba6f29b86829791cd6"
+    },
+    {
+      "t": 105.43,
+      "frame": 84,
+      "file": "frames/frame-084.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fc224d4a6f935afe58ae0ff69b2f5491bd478ea45301a89c01bdbb59e41b938e"
+    },
+    {
+      "t": 105.76,
+      "frame": 85,
+      "file": "frames/frame-085.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bff80ff83491b29498d59ea7832bf662cb15e09b4179c6623bc7483b76cc1167"
+    },
+    {
+      "t": 106.1,
+      "frame": 86,
+      "file": "frames/frame-086.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b245f5d52cfdd882d9a11219a290a42674ef1b0f69e9ae2a4bd60552cbd14500"
+    },
+    {
+      "t": 106.44,
+      "frame": 87,
+      "file": "frames/frame-087.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "69e939fe8f100ceb7c898c5f1172eb0e22deb2744e3929b81740f0acacf8556b"
+    },
+    {
+      "t": 106.77,
+      "frame": 88,
+      "file": "frames/frame-088.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8976cb8de561b6cfa44ed8141205976374c675fcdb814efcfcda4afe0cd5d381"
+    },
+    {
+      "t": 107.09,
+      "frame": 87,
+      "repeat": true
+    },
+    {
+      "t": 107.42,
+      "frame": 89,
+      "file": "frames/frame-089.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6dec22969d3bda7005364fae302998e8b323bd31a40b4077ac1c912a124027a1"
+    },
+    {
+      "t": 107.73,
+      "frame": 87,
+      "repeat": true
+    },
+    {
+      "t": 108.07,
+      "frame": 90,
+      "file": "frames/frame-090.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1546f884648b6d91d77476e522df9cef3fc281fd91a2ccae7918593686cf0a04"
+    },
+    {
+      "t": 108.7,
+      "frame": 86,
+      "repeat": true
+    },
+    {
+      "t": 109.32,
+      "frame": 90,
+      "repeat": true
+    },
+    {
+      "t": 110.13,
+      "frame": 91,
+      "file": "frames/frame-091.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "77dd429cdb687977570f34b2eab03d7c1a56d79a4c47d17c222dda05b76715cb"
+    },
+    {
+      "t": 110.47,
+      "frame": 92,
+      "file": "frames/frame-092.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "939902ceb73ab2bde4b687c2394532662a0d6b61ce4fda39e65739d767a5fcab"
+    },
+    {
+      "t": 111.09,
+      "frame": 91,
+      "repeat": true
+    },
+    {
+      "t": 111.42,
+      "frame": 93,
+      "file": "frames/frame-093.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9743ed3d513c9764cee3abce590088d145f702195db5728e6b95631a47b7f195"
+    },
+    {
+      "t": 111.92,
+      "frame": 94,
+      "file": "frames/frame-094.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2f388fea64b9397c9fa99b6718a36b1e9cf1fe935b3b84aa900322ac0e21ce9a"
+    },
+    {
+      "t": 112.26,
+      "frame": 95,
+      "file": "frames/frame-095.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2fa129f5ee95a6934c79916b33abbcd6d16d646233ba37445f371af63b0b21c8"
+    },
+    {
+      "t": 112.6,
+      "frame": 96,
+      "file": "frames/frame-096.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4518e05ea0de82eb7a3ea182a5c25355792493e62a66d7986206181fab3c5cfa"
+    },
+    {
+      "t": 112.91,
+      "frame": 95,
+      "repeat": true
+    },
+    {
+      "t": 113.21,
+      "frame": 94,
+      "repeat": true
+    },
+    {
+      "t": 113.71,
+      "frame": 97,
+      "file": "frames/frame-097.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b44893d5f11410fa749ee9b308c562c22fb12059a2df378b2c0ab184211cdfa1"
+    },
+    {
+      "t": 114.36,
+      "frame": 98,
+      "file": "frames/frame-098.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b5de86db97ae4710ad0157c6dbe41d18a02bb0f62974e4aa65491bcce0562405"
+    },
+    {
+      "t": 115.01,
+      "frame": 99,
+      "file": "frames/frame-099.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5b9a39fc60cd185d96ef6fccc64af466268756f4d9e30eb9bb0aacfc668ae0d3"
+    },
+    {
+      "t": 115.51,
+      "frame": 100,
+      "file": "frames/frame-100.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c9970f3d57a7615dd42302b117a2deadcce191f5e95a6782b8eb8c50177a9ffc"
+    },
+    {
+      "t": 115.85,
+      "frame": 101,
+      "file": "frames/frame-101.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f0131230bff41acd5a51d475c9a4f77b8d0bed90177b25fd581d9135bcce182d"
+    },
+    {
+      "t": 116.16,
+      "frame": 100,
+      "repeat": true
+    },
+    {
+      "t": 116.49,
+      "frame": 102,
+      "file": "frames/frame-102.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "01aefab8ccea19e501b7c1713c9cb236c628b0422a9fa8a13f91df63e3bda1e5"
+    },
+    {
+      "t": 116.8,
+      "frame": 100,
+      "repeat": true
+    },
+    {
+      "t": 117.3,
+      "frame": 103,
+      "file": "frames/frame-103.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "85b486e8a5c40c55f59a96fea71a987bfa8eb795d41204d9383b3e0ba42ce97a"
+    },
+    {
+      "t": 117.64,
+      "frame": 104,
+      "file": "frames/frame-104.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "438ae2d6c1285e70db31cbc4c69187a17afb0ca5efa575f7a4f231bdffc7aeb6"
+    },
+    {
+      "t": 118.26,
+      "frame": 103,
+      "repeat": true
+    },
+    {
+      "t": 119.06,
+      "frame": 105,
+      "file": "frames/frame-105.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "376480fd7287929c5e311093348ed6a580fedd6350a4c5dd12ae1f0765409a87"
+    },
+    {
+      "t": 119.4,
+      "frame": 106,
+      "file": "frames/frame-106.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c990be24fa0b98a88e49a9054d8959e5cb9ebc49d52357a38f97c5b0cf566632"
+    },
+    {
+      "t": 119.74,
+      "frame": 107,
+      "file": "frames/frame-107.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b747fdd963fca73ef240de759c9c0f61d29306f01864d41b0ffc5cbb6afe32a9"
+    },
+    {
+      "t": 120.04,
+      "frame": 106,
+      "repeat": true
+    },
+    {
+      "t": 120.35,
+      "frame": 105,
+      "repeat": true
+    },
+    {
+      "t": 120.85,
+      "frame": 108,
+      "file": "frames/frame-108.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "113a8b43c21d5d9e266dec0952a1d9cab9b9c32c2438a833d64f51e56efbdde8"
+    },
+    {
+      "t": 121.49,
+      "frame": 109,
+      "file": "frames/frame-109.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5540962db56a58712d71622c37b97fcef2ca79b1a1d4cb958864144b6b764664"
+    },
+    {
+      "t": 122.14,
+      "frame": 110,
+      "file": "frames/frame-110.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "893d830e1b59fe607371435dc1949af75aa8dcf6c0e411bd2b5c5dea51b74886"
+    },
+    {
+      "t": 122.64,
+      "frame": 111,
+      "file": "frames/frame-111.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9a5af50c251120dac83da3a433e79487a3ad4aeaa4fb71481b85ecf617002086"
+    },
+    {
+      "t": 122.98,
+      "frame": 112,
+      "file": "frames/frame-112.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0909eafbf370784ad8f803c0b5fff532435bf5ad12fb0c76e82639a7a56652f5"
+    },
+    {
+      "t": 123.29,
+      "frame": 111,
+      "repeat": true
+    },
+    {
+      "t": 123.63,
+      "frame": 113,
+      "file": "frames/frame-113.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f792914531d81305e3472a46cc02b277c6b085ca35ef5b1b128f5d92c7c185f1"
+    },
+    {
+      "t": 123.93,
+      "frame": 111,
+      "repeat": true
+    },
+    {
+      "t": 124.43,
+      "frame": 114,
+      "file": "frames/frame-114.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f460eb3175b8481e814edec4b8bde655b990b088e93a2bec8e6315e00c284a45"
+    },
+    {
+      "t": 124.76,
+      "frame": 115,
+      "file": "frames/frame-115.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "33f5da67fdf017f4faa4c924cdf815a27dd0c2850ceac2842b44f507441951eb"
+    },
+    {
+      "t": 125.39,
+      "frame": 114,
+      "repeat": true
+    },
+    {
+      "t": 125.72,
+      "frame": 116,
+      "file": "frames/frame-116.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "10ea040ecedaebf487e90e528cb255bed829b55697a4853f1985518d9230a682"
+    },
+    {
+      "t": 126.22,
+      "frame": 117,
+      "file": "frames/frame-117.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e2c0fac3c27c09396d903261361fc8a2a16cb3f8d669e4112388789926b4f8a2"
+    },
+    {
+      "t": 126.57,
+      "frame": 118,
+      "file": "frames/frame-118.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "86f7706583ae54741b7a76d5f679558f1282eb85466c61b2ed6d67c6c56d0aeb"
+    },
+    {
+      "t": 126.91,
+      "frame": 119,
+      "file": "frames/frame-119.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4322abe5bb009e484ec24a3dc4cbbfe925a5a4d340481a3cc4c740f4992fbdfe"
+    },
+    {
+      "t": 127.22,
+      "frame": 118,
+      "repeat": true
+    },
+    {
+      "t": 127.72,
+      "frame": 120,
+      "file": "frames/frame-120.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "057d5ef1cd87b680eaf97145043cd3d56475a813d094d3e70afa4fa33a6d3b12"
+    },
+    {
+      "t": 128.05,
+      "frame": 121,
+      "file": "frames/frame-121.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9814dc36b6ef2a9633f27b811d8a79854bd4e5f501c81d9a5691905a1143712b"
+    },
+    {
+      "t": 128.36,
+      "frame": 120,
+      "repeat": true
+    },
+    {
+      "t": 128.69,
+      "frame": 122,
+      "file": "frames/frame-122.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6fa9b56cb014a03326832eaa9307d252480d403cb618c946eb2b191f3f1971d5"
+    },
+    {
+      "t": 129.0,
+      "frame": 120,
+      "repeat": true
+    },
+    {
+      "t": 129.49,
+      "frame": 123,
+      "file": "frames/frame-123.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "543542d64f173ccd01a734643f3b7540a2c81a7a62c77043b842c73fe341741b"
+    },
+    {
+      "t": 129.83,
+      "frame": 124,
+      "file": "frames/frame-124.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "34423549005605b32041c2cca9e496ff328c98d37312a3e342a8021567eab8f0"
+    },
+    {
+      "t": 130.44,
+      "frame": 123,
+      "repeat": true
+    },
+    {
+      "t": 131.24,
+      "frame": 125,
+      "file": "frames/frame-125.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cb7a0de16087b4ef49b1cf11df8fb426265d277d043f2d541d74f7cc7370e5bc"
+    },
+    {
+      "t": 131.88,
+      "frame": 126,
+      "file": "frames/frame-126.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e7bb2b24976984031aae3882bbee864e1d95e1c1571615c7d430579c3ac666c2"
+    },
+    {
+      "t": 132.5,
+      "frame": 125,
+      "repeat": true
+    },
+    {
+      "t": 133.0,
+      "frame": 127,
+      "file": "frames/frame-127.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "49f21c5dfededa44895afe9d49aa0ecab7c9a627750eab93f2b997da9d925e53"
+    },
+    {
+      "t": 133.64,
+      "frame": 128,
+      "file": "frames/frame-128.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2488bc544ca5a8a22067b6540d391838ab84226352bafccf6e65e9aee95c186e"
+    },
+    {
+      "t": 134.26,
+      "frame": 127,
+      "repeat": true
+    },
+    {
+      "t": 134.75,
+      "frame": 129,
+      "file": "frames/frame-129.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9cd4acba43959e2b779c713fc1315186e58bf9c3a1edf5ef53047b97139c4a62"
+    },
+    {
+      "t": 135.08,
+      "frame": 130,
+      "file": "frames/frame-130.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6f5d107a3d299e5d36395ebbb4b2e4768a937fe93edff97deda35c7497048af3"
+    },
+    {
+      "t": 135.39,
+      "frame": 129,
+      "repeat": true
+    },
+    {
+      "t": 135.73,
+      "frame": 131,
+      "file": "frames/frame-131.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2ef4fc71c4aa6d09744730962c127529949766651571779724b62430cf8f98ea"
+    },
+    {
+      "t": 136.04,
+      "frame": 129,
+      "repeat": true
+    },
+    {
+      "t": 136.54,
+      "frame": 132,
+      "file": "frames/frame-132.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bcdf7188f81755bd6b6d86f74516c197c12dbf09b9327c435833901631f96550"
+    },
+    {
+      "t": 136.89,
+      "frame": 133,
+      "file": "frames/frame-133.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ee1112f672f8b97b0d5027a04954b733bef35da126ebc4e3d72aa13dce87e613"
+    },
+    {
+      "t": 137.52,
+      "frame": 132,
+      "repeat": true
+    },
+    {
+      "t": 138.34,
+      "frame": 134,
+      "file": "frames/frame-134.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5c66e8a289c21515437dac0fb2bb1ec515ade02f9694cadc885b49d0ee4a904a"
+    },
+    {
+      "t": 138.68,
+      "frame": 135,
+      "file": "frames/frame-135.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "644ce0f91bd1f163131c164f88bf813e133a7c9f120cfd9c80eda37c52e27fbf"
+    },
+    {
+      "t": 139.03,
+      "frame": 136,
+      "file": "frames/frame-136.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7aae88f9ec526045e0c6609f9a48d345aad6f78c10a76f2a37517dbeb908edf0"
+    },
+    {
+      "t": 139.34,
+      "frame": 135,
+      "repeat": true
+    },
+    {
+      "t": 139.84,
+      "frame": 137,
+      "file": "frames/frame-137.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0939a0d4a5aa661004d884aad3c878525e7ecd6edeff5ba2c22a003d1ab34f93"
+    },
+    {
+      "t": 140.18,
+      "frame": 138,
+      "file": "frames/frame-138.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "01d7488be56086b9dfd9d500f4f08015dc98374a99c5d5799c8ad5d0b6d731f7"
+    },
+    {
+      "t": 140.81,
+      "frame": 137,
+      "repeat": true
+    },
+    {
+      "t": 141.63,
+      "frame": 139,
+      "file": "frames/frame-139.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ac429ed728a5f357bfd239384a8c7e7e218bd7f76794d3c5cf19d64608211b44"
+    },
+    {
+      "t": 141.97,
+      "frame": 140,
+      "file": "frames/frame-140.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "644a6d19951bbcda2ffdb06ffd54c50b930bc97acb51d3562e74e85101917935"
+    },
+    {
+      "t": 142.31,
+      "frame": 141,
+      "file": "frames/frame-141.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "92f7b9db1203eeed99e2e5914c842c5d3c90a07e4adf9d61bd1a0796b9a76b21"
+    },
+    {
+      "t": 142.62,
+      "frame": 140,
+      "repeat": true
+    },
+    {
+      "t": 142.93,
+      "frame": 139,
+      "repeat": true
+    },
+    {
+      "t": 143.44,
+      "frame": 142,
+      "file": "frames/frame-142.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "12439ba6e037c2ce357a23b52ed6167f167d3509310ffc74d786f4567df3b8fc"
+    },
+    {
+      "t": 144.09,
+      "frame": 143,
+      "file": "frames/frame-143.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ec687fdc992fdcefebfb5223b25852cfe41cea14a9f11b2c4c15390e78df004a"
+    },
+    {
+      "t": 144.72,
+      "frame": 142,
+      "repeat": true
+    },
+    {
+      "t": 145.23,
+      "frame": 144,
+      "file": "frames/frame-144.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8effe1dc38e937afb60fc9cebe862f54907c54677e99d90fb5ed590418dee596"
+    },
+    {
+      "t": 145.57,
+      "frame": 145,
+      "file": "frames/frame-145.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a59ac5efdbf3afc8334ebf2aed0d53cf452e81046b894d2f7899935d9fca6bb8"
+    },
+    {
+      "t": 145.88,
+      "frame": 144,
+      "repeat": true
+    },
+    {
+      "t": 146.23,
+      "frame": 146,
+      "file": "frames/frame-146.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fd73a5ac073ca24abcc98562ed4910405b21cf456359c22bf63e4705833e0a53"
+    },
+    {
+      "t": 146.54,
+      "frame": 144,
+      "repeat": true
+    },
+    {
+      "t": 147.04,
+      "frame": 147,
+      "file": "frames/frame-147.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e1bb321bf2d81b8a63eb0f95675edcd37f6ab2dc1a46ee9a57feb6e73b517c32"
+    },
+    {
+      "t": 147.38,
+      "frame": 148,
+      "file": "frames/frame-148.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "acd67d1319a2456ca72b452680364fd591c8dea2f6a557ee9aaf6b72a5556bb2"
+    },
+    {
+      "t": 148.0,
+      "frame": 147,
+      "repeat": true
+    },
+    {
+      "t": 148.84,
+      "frame": 149,
+      "file": "frames/frame-149.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "adc169d51e288e6507be3912cd245a0fad20877e2e1798ea7b500f3a652a0b9c"
+    },
+    {
+      "t": 149.19,
+      "frame": 150,
+      "file": "frames/frame-150.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c606eb470820028561808032f071751dd8fbbff6c88447a810590800f28933cb"
+    },
+    {
+      "t": 149.54,
+      "frame": 151,
+      "file": "frames/frame-151.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cd265d94e5b29cae6e4080cf848ebef8008884802a4ba0dd29c979e65af2a5c8"
+    },
+    {
+      "t": 149.85,
+      "frame": 150,
+      "repeat": true
+    },
+    {
+      "t": 150.35,
+      "frame": 152,
+      "file": "frames/frame-152.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7b9e2a82659093c9b91f1a73ed191c19a6781f0f0f77b711f73c780cc4446136"
+    },
+    {
+      "t": 150.69,
+      "frame": 153,
+      "file": "frames/frame-153.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5f39896f0d74b75652ce8904bcd760e873112703d94cd5a40233dd861ae23bfb"
+    },
+    {
+      "t": 151.01,
+      "frame": 152,
+      "repeat": true
+    },
+    {
+      "t": 151.35,
+      "frame": 154,
+      "file": "frames/frame-154.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8a721d6a66ffb9ff7df8aee3846f42bb53e2ebf5b614d13c807c4cb6c68ea094"
+    },
+    {
+      "t": 151.66,
+      "frame": 152,
+      "repeat": true
+    },
+    {
+      "t": 152.17,
+      "frame": 155,
+      "file": "frames/frame-155.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0f869c5d69f31d1bc97b8ad30cd3b0b36d20a460dfa19ee9eec1df4b99eff3b2"
+    },
+    {
+      "t": 152.54,
+      "frame": 156,
+      "file": "frames/frame-156.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e7117dd8ae2262896a829128602bb818e2cdae34b1bbb3b19566d7e053862fa8"
+    },
+    {
+      "t": 152.85,
+      "frame": 155,
+      "repeat": true
+    },
+    {
+      "t": 153.2,
+      "frame": 157,
+      "file": "frames/frame-157.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f2d024d466bbaafa442a99ab8d7525ff9ed2015eb57f0ff1187b84c17f93ac6c"
+    },
+    {
+      "t": 153.7,
+      "frame": 158,
+      "file": "frames/frame-158.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "91f14071dd103b9fc65498f9c15b2d4b946da93176dbae3412f19a1b1382afc9"
+    },
+    {
+      "t": 154.04,
+      "frame": 159,
+      "file": "frames/frame-159.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e2cddf50b98d4e320a177d442349656696a0df373d2f8de7129eb4670b56daa4"
+    },
+    {
+      "t": 154.39,
+      "frame": 160,
+      "file": "frames/frame-160.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f047cabd58f33efb4c32264b5b254bc02ca40b1ac1b4b9e63358959c3f3fc8fc"
+    },
+    {
+      "t": 154.7,
+      "frame": 159,
+      "repeat": true
+    },
+    {
+      "t": 155.01,
+      "frame": 158,
+      "repeat": true
+    },
+    {
+      "t": 155.51,
+      "frame": 161,
+      "file": "frames/frame-161.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ad4c6c34bb54f8585fb9f93e55c591501446c41a4325062e0ed6a6e725bdd4dd"
+    },
+    {
+      "t": 156.16,
+      "frame": 162,
+      "file": "frames/frame-162.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "442f76e094698d86379cdeee53d6ec9be68586026e9e6ca94a567918725ade83"
+    },
+    {
+      "t": 156.51,
+      "frame": 163,
+      "file": "frames/frame-163.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4fa3a879fa286abd438713ee0a5a44177d4bf73b38e3a8ea3a22b44ba1b52249"
+    },
+    {
+      "t": 156.82,
+      "frame": 161,
+      "repeat": true
+    },
+    {
+      "t": 157.32,
+      "frame": 164,
+      "file": "frames/frame-164.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "74551a547dfb9f58050e03f3f9874a812166d6bdb203a044208105e04377843d"
+    },
+    {
+      "t": 157.67,
+      "frame": 165,
+      "file": "frames/frame-165.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "24831e799f03f5ab8f89d6d2d7a9dfecc06320f02ad36cb8a13577a181fb970e"
+    },
+    {
+      "t": 157.98,
+      "frame": 164,
+      "repeat": true
+    },
+    {
+      "t": 158.32,
+      "frame": 166,
+      "file": "frames/frame-166.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2f67205a307831ff525925034244cff5183048736dda882386a89c79f5ee5370"
+    },
+    {
+      "t": 158.64,
+      "frame": 164,
+      "repeat": true
+    },
+    {
+      "t": 159.13,
+      "frame": 167,
+      "file": "frames/frame-167.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d4f82335fdcfacee28c8ded631693c851dcb333c2b8a3c7f2046534e0395ff8f"
+    },
+    {
+      "t": 159.47,
+      "frame": 168,
+      "file": "frames/frame-168.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5a4c26adb4939837e8eeb044bdf77c169be2c9ade7d24f02ef1507f1b3523f95"
+    },
+    {
+      "t": 160.1,
+      "frame": 167,
+      "repeat": true
+    },
+    {
+      "t": 160.44,
+      "frame": 169,
+      "file": "frames/frame-169.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "30ede8f3bd5671c32e109150fbdc2b8cf1cf467d249c003dd6d9a1c3b6b5bf74"
+    },
+    {
+      "t": 160.93,
+      "frame": 170,
+      "file": "frames/frame-170.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4168761f815d1483092c5f825fdfd38d5353859ba8b5c4e2b6209005365f5eb7"
+    },
+    {
+      "t": 161.27,
+      "frame": 171,
+      "file": "frames/frame-171.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2913aeffd655a49c4d0adee2d64750b34fe0db80cc81597ac250e4dd7213133e"
+    },
+    {
+      "t": 161.6,
+      "frame": 172,
+      "file": "frames/frame-172.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "099adf5b50dd7dc02d27308780d6343e56db7d557858a58088bb82ddacd144b2"
+    },
+    {
+      "t": 161.91,
+      "frame": 171,
+      "repeat": true
+    },
+    {
+      "t": 162.23,
+      "frame": 170,
+      "repeat": true
+    },
+    {
+      "t": 162.72,
+      "frame": 173,
+      "file": "frames/frame-173.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "78cf0faf73a5d5da36738069ddfef77133400a446c1e4cbb46cb4b6fee266f6e"
+    },
+    {
+      "t": 163.37,
+      "frame": 174,
+      "file": "frames/frame-174.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "70ac0108b92cae146c3a261c5f8b78f5764c4351571eb4fe3fecb14c5205004c"
+    },
+    {
+      "t": 164.02,
+      "frame": 175,
+      "file": "frames/frame-175.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7933b39c8d35fb83b5ff95c3da4f5595fe439dd9585862f71d8937d63cde7706"
+    },
+    {
+      "t": 164.51,
+      "frame": 176,
+      "file": "frames/frame-176.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "554ebd5e87492a4063336902b7bd435dbb4206a2ef929c75dee7002c1f01c8a8"
+    },
+    {
+      "t": 164.85,
+      "frame": 177,
+      "file": "frames/frame-177.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2d087fcf6223295cdd011b31df178bcd18917a9ba17581dd18e0292377f943f4"
+    },
+    {
+      "t": 165.16,
+      "frame": 176,
+      "repeat": true
+    },
+    {
+      "t": 165.49,
+      "frame": 178,
+      "file": "frames/frame-178.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9d088e2b498b805197be516623643c76e13493ef9a3654636befd7d711e9cce0"
+    },
+    {
+      "t": 165.81,
+      "frame": 176,
+      "repeat": true
+    },
+    {
+      "t": 166.3,
+      "frame": 179,
+      "file": "frames/frame-179.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "329fbfc166e77b50aab3e99db84c20e38ca89e6c0b7a376bc1e2bf966d3b76c0"
+    },
+    {
+      "t": 166.64,
+      "frame": 180,
+      "file": "frames/frame-180.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c8f7f362b360ed347efecaebae43621a4f09ac16130ee9130186e6bf528cf3f9"
+    },
+    {
+      "t": 167.26,
+      "frame": 179,
+      "repeat": true
+    },
+    {
+      "t": 168.07,
+      "frame": 181,
+      "file": "frames/frame-181.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e59699794007dd13dd6405dd9cbd1558ca85ec5aec65be4c5d922e7db305ddb5"
+    },
+    {
+      "t": 168.41,
+      "frame": 182,
+      "file": "frames/frame-182.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2307a6f838972815ae210f8b074b5351db6c430f9371d9b5fa9c8c9ea1a7ba3c"
+    },
+    {
+      "t": 168.75,
+      "frame": 183,
+      "file": "frames/frame-183.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "92dbdb662744f303ccd5e09daffb6dee4377e74a4c169c0ba7f921aa86f05145"
+    },
+    {
+      "t": 169.06,
+      "frame": 182,
+      "repeat": true
+    },
+    {
+      "t": 169.37,
+      "frame": 181,
+      "repeat": true
+    },
+    {
+      "t": 169.88,
+      "frame": 184,
+      "file": "frames/frame-184.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b61763093ab7bd37b8f06d349a8bb4e0c817b9fe61306aefde7d504a800a4faf"
+    },
+    {
+      "t": 170.53,
+      "frame": 185,
+      "file": "frames/frame-185.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2de4049c5d371ef198676496ca6776fd0324644580832596084064fe4d7e7714"
+    },
+    {
+      "t": 171.15,
+      "frame": 184,
+      "repeat": true
+    },
+    {
+      "t": 171.65,
+      "frame": 186,
+      "file": "frames/frame-186.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c5c6dff9ec538f30a91a9f99ca10a651e49f032d0cb5b41e26c997a276bd7f2"
+    },
+    {
+      "t": 171.99,
+      "frame": 187,
+      "file": "frames/frame-187.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e7a54d5cc4565ae9e4aa5716922b89965860c90912003123e58dacd9c4ac6809"
+    },
+    {
+      "t": 172.31,
+      "frame": 186,
+      "repeat": true
+    },
+    {
+      "t": 172.65,
+      "frame": 188,
+      "file": "frames/frame-188.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "44e53e8a01708745b886c76b2da2137716acf4c655a2ef13f30da66fe607b6eb"
+    },
+    {
+      "t": 172.96,
+      "frame": 186,
+      "repeat": true
+    },
+    {
+      "t": 173.48,
+      "frame": 189,
+      "file": "frames/frame-189.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "71946f757d1b72803d44bb1acf7a83abb6b14321c9c2fe9affe6dde1efadca64"
+    },
+    {
+      "t": 173.83,
+      "frame": 190,
+      "file": "frames/frame-190.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "845c5f7210b1d6c05b492be0e3636f1acc93f5ebbf6fc3e3758a1a78c59e9c69"
+    },
+    {
+      "t": 178.69,
+      "frame": 191,
+      "file": "frames/frame-191.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "111488040a85bc0e882ac9eb1660171410a4bdb9537487c37e2bc4e96a6adbba"
+    },
+    {
+      "t": 182.0,
+      "frame": 192,
+      "file": "frames/frame-192.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5edab28179ed7ec7c611754299d0a1d50931f759fb994579d3f5bc730300b96d"
+    },
+    {
+      "t": 183.73,
+      "frame": 193,
+      "file": "frames/frame-193.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f708cdd5804aa1ce21c9842714bf8b0733ee8f038041f8f55b56a65e2885d4f4"
+    },
+    {
+      "t": 185.47,
+      "frame": 194,
+      "file": "frames/frame-194.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7e1c3c8aabdfd677f9345fe17fb6ccdfd7de3afd213a4befab6b51b8deaf70ec"
+    },
+    {
+      "t": 187.21,
+      "frame": 195,
+      "file": "frames/frame-195.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "789dca595f77e7487aa3d0df0d41999dfd74c187b44eccf02c007f222120e893"
+    },
+    {
+      "t": 188.95,
+      "frame": 196,
+      "file": "frames/frame-196.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b5a12677933fd50d341be9cefd31bd607405a29fb248d110e0321852818c0baa"
+    },
+    {
+      "t": 193.5,
+      "frame": 197,
+      "file": "frames/frame-197.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8fd98eeac1f8c52d6489c941d4ffbad2b22a25a3ceee1191dc245a78765c140a"
+    },
+    {
+      "t": 196.16,
+      "frame": 198,
+      "file": "frames/frame-198.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7e6c90f2cc31588c27c2f540792e7ff1e92c4000e2781fbeec5426b8505e757b"
+    },
+    {
+      "t": 198.81,
+      "frame": 197,
+      "repeat": true
+    },
+    {
+      "t": 203.05,
+      "frame": 199,
+      "file": "frames/frame-199.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "88e161a12c3b36dfba730c84b63373219b608ff46ee8d5c3e83fad1beb808373"
+    },
+    {
+      "t": 207.58,
+      "frame": 200,
+      "file": "frames/frame-200.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ff60d63453745cc0400ea4ce2b73c8540e5b671b4b4af94f0d1201a6406a95af"
+    },
+    {
+      "t": 217.7,
+      "frame": 197,
+      "repeat": true
+    },
+    {
+      "t": 221.29,
+      "frame": 192,
+      "repeat": true
+    }
+  ]
+}

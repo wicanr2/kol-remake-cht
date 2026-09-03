@@ -79,6 +79,8 @@ type Session struct {
 	recruit *Recruit
 	// rest 是 REST 流程的狀態；nil 代表不在住宿／治療中（SPEC-006）。
 	rest *restState
+	// shop 是商店流程的狀態；nil 代表不在買賣中（RE-075）。
+	shop *shopState
 	// quit 記下玩家在「你要離開嗎」那一問答了 YES。
 	quit bool
 
@@ -236,6 +238,12 @@ func (s *Session) acceptInside() {
 			return
 		}
 		s.note(sheetIconName(id))
+	case s.shop != nil:
+		if id == IconSpacebar {
+			s.Continue()
+			return
+		}
+		s.shopAnswer(id)
 	case s.rest != nil:
 		switch id {
 		case IconYes:
@@ -266,6 +274,8 @@ func (s *Session) acceptInside() {
 		s.StartRest()
 	case id == IconMirror:
 		s.OpenSheet()
+	case id == IconTrade:
+		s.StartShop()
 	default:
 		s.note(iconName(id))
 	}
@@ -360,6 +370,13 @@ func (s *Session) Continue() {
 	if s.rest != nil && s.rest.next != nil {
 		step := s.rest.next
 		s.rest.next = nil
+		step()
+		return
+	}
+	// 商店同理：錢不夠與背包滿了都要讀完才回清單。
+	if s.shop != nil && s.shop.next != nil {
+		step := s.shop.next
+		s.shop.next = nil
 		step()
 		return
 	}

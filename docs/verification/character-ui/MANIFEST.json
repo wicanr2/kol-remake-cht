@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 3363,
+  "total_frames": 3764,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -538,6 +538,36 @@
       "frame_dir": "docs/verification/character-ui/town-mirror-run1/frames",
       "character_files_changed": [],
       "note": "MIRROR 的角色資料頁；空白鍵、方向鍵都沒有反應，Return 與 Escape 都回城鎮。"
+    },
+    {
+      "run": "town-shop-run1",
+      "scenario": "town-shop",
+      "description": "選第 14 名角色（ddduhh，3000 金幣，住在巨魔剋星客棧）進城 1，走到魯德曼甲冑鋪按 TRADE 看商品清單。純觀察，不買也不保存。",
+      "receipt": "docs/verification/character-ui/town-shop-run1/receipt.json",
+      "generated_utc": "2026-09-03T05:53:20Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 67,
+      "frame_count": 200,
+      "frame_dir": "docs/verification/character-ui/town-shop-run1/frames",
+      "character_files_changed": [],
+      "note": "走到城 1 的魯德曼甲冑鋪按 TRADE，只看商品清單。"
+    },
+    {
+      "run": "town-shop-run2",
+      "scenario": "town-shop",
+      "description": "選第 14 名角色（ddduhh，3000 金幣，住在巨魔剋星客棧）進城 1，走到魯德曼甲冑鋪按 TRADE 看商品清單。純觀察，不買也不保存。",
+      "receipt": "docs/verification/character-ui/town-shop-run2/receipt.json",
+      "generated_utc": "2026-09-03T06:02:30Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 73,
+      "frame_count": 201,
+      "frame_dir": "docs/verification/character-ui/town-shop-run2/frames",
+      "character_files_changed": [],
+      "note": "同一條路，這一輪選第一件商品看明細並買下，再看買完的畫面。"
     }
   ]
 }

@@ -79,18 +79,25 @@ def slot_values(data: bytes, offset: int, count: int) -> list[int]:
     return out
 
 
-def render(values: list[int]) -> tuple[str, list[int]]:
-    """照 `sub_1B94F` 的語意解一格文字。回傳（文字, 未定的跳脫序列）。"""
+def render(values: list[int], capitalise: bool = False) -> tuple[str, list[int]]:
+    """照 `sub_1B94F` 的語意解一格文字。回傳（文字, 未定的跳脫序列）。
+
+    `capitalise` 對應 `sub_1B94F` 的第二個引數：對話走 0（原樣），
+    名稱走 1（每個字的第一個字母轉大寫）。原版畫面上的商品因此是
+    `Fur Cap` 而不是 `fur cap`（RE-075）。"""
     out: list[str] = []
     unknown: list[int] = []
-    escaped = False
+    escaped = capitalise
     for v in values:
         if v == ESCAPE and not escaped:
             escaped = True
             continue
         if v == 0:
-            # 空白不會動到跳脫狀態（mode 0 時 `or bh,bh` 直接跳過 `dec ah`）。
+            # 空白不會動到跳脫狀態（mode 0 時 `or bh,bh` 直接跳過 `dec ah`）；
+            # mode 1 反過來，空白之後的字母要轉大寫。
             out.append(" ")
+            if capitalise:
+                escaped = True
             continue
         if 1 <= v <= 26:
             ch = LETTERS[v - 1]

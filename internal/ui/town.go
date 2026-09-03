@@ -36,10 +36,15 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		draw(dst, pic, town.Portrait.X, town.Portrait.Y)
 
 		drawBox(dst, large, town.TitleBox, in.Title)
-		if in.List != nil {
+		switch {
+		case in.List != nil:
 			drawInnList(dst, large, in.List)
-		} else {
+		default:
 			drawBox(dst, large, town.DialogBox, in.Dialog)
+			// 商品明細畫在同一個對話框裡，座標由記錄自己帶（RE-075）。
+			for _, seg := range in.Detail {
+				cell(dst, large, seg.Col, seg.Row, seg.Text)
+			}
 		}
 	}
 
