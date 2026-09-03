@@ -27,8 +27,13 @@ func TestClockNewDay(t *testing.T) {
 			t.Fatal("走了五百步還沒換日")
 		}
 	}
-	if c.Ticks != ClockStart || c.Day != 1 || c.Month != 3 {
+	// 日期不在 Advance 裡推——紮營那一張上面印的還是前一天。
+	if c.Ticks != ClockStart || c.Day != 0 {
 		t.Fatalf("換日之後是 %+v", c)
+	}
+	c.NextDay()
+	if c.Day != 1 || c.Month != 3 {
+		t.Fatalf("收掉紮營之後是 %+v", c)
 	}
 	want := (ClockStart / c.StepCost(7, 0)) + 1
 	if steps+1 != want {
@@ -61,12 +66,12 @@ func TestClockStepCost(t *testing.T) {
 // 月底換月、年底換年；原版沒有閏年。
 func TestClockRollover(t *testing.T) {
 	c := &Clock{Day: 30, Month: 11, Year: 0}
-	c.nextDay()
+	c.NextDay()
 	if c.Day != 0 || c.Month != 0 || c.Year != 1 {
 		t.Fatalf("十二月三十一日的隔天是 %+v", c)
 	}
 	c = &Clock{Day: 27, Month: 1}
-	c.nextDay()
+	c.NextDay()
 	if c.Day != 0 || c.Month != 2 {
 		t.Fatalf("二月二十八日的隔天是 %+v", c)
 	}

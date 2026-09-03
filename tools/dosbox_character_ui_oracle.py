@@ -656,12 +656,49 @@ SCENARIOS: dict[str, dict] = {
             step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
             step("城門提示（白框在 DOOR）", "Return", settle=6.0),
         ] + [
-            step(f"野外第 {i} 步", "Right" if i % 2 else "Left", settle=1.6)
+            # 天候一旦換成有雲層動畫的那幾組，畫面就不會靜止；逾時放短，
+            # 讓每一步至多等 8 秒就送下一個鍵。
+            step(f"野外第 {i} 步", "Right" if i % 2 else "Left",
+                 settle=1.6, timeout=8.0)
             for i in range(1, 77)
         ] + [
-            step("紮營畫面（等一個鍵）", "space", settle=4.0),
-            step("收掉紮營之後", "Right", settle=3.0),
-            step("再走一步（觀察）", None, settle=3.0),
+            step("紮營畫面（等一個鍵）", "space", settle=4.0, timeout=20.0),
+            step("收掉紮營之後", "Right", settle=3.0, timeout=20.0),
+            step("再走一步（觀察）", None, settle=3.0, timeout=20.0),
+        ],
+    },
+    "world-combat": {
+        "description": "離開城鎮之後在野外原地上下走動，等時段變換擲出伏擊；"
+                       "伏擊訊息之後連按空白鍵進戰鬥，再逐鍵觀察戰鬥畫面的操作。"
+                       "純觀察，不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("城門提示（白框在 DOOR）", "Return", settle=6.0),
+        ] + [
+            step(f"野外第 {i} 步", "Right" if i % 2 else "Left",
+                 settle=1.6, timeout=8.0)
+            for i in range(1, 21)
+        ] + [
+            step(f"伏擊之後空白鍵 {i}", "space", settle=3.0, timeout=20.0)
+            for i in range(1, 4)
+        ] + [
+            step("戰鬥畫面：按 Return", "Return", settle=3.0, timeout=20.0),
+            step("再按一次 Return", "greater", settle=3.0, timeout=20.0),
+            step("白框往右一格", "greater", settle=2.5, timeout=20.0),
+            step("白框往右兩格", "Return", settle=3.0, timeout=20.0),
+            step("按下該格", "space", settle=3.0, timeout=20.0),
+            step("空白鍵之後", "Up", settle=2.5, timeout=20.0),
+            step("方向鍵上", "Right", settle=2.5, timeout=20.0),
+            step("方向鍵右", "Return", settle=3.0, timeout=20.0),
+            step("Return", "space", settle=3.0, timeout=20.0),
+            step("空白鍵", None, settle=3.0, timeout=20.0),
         ],
     },
     "world-enter-town": {

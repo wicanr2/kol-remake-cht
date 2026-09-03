@@ -191,9 +191,12 @@ func (s *Session) EndCamping() {
 		return
 	}
 	s.Camping = false
-	// 原版收掉那一張之後把天候設回第 1 組再重算（`sub_297F2:0x298FC`）。
-	s.Screen.Clock.Weather = ClearWeather
-	s.Screen.Group = ClearWeather
+	c := s.Screen.Clock
+	// 原版收掉那一張之後把天候設回第 1 組，再推日期、重畫日期框
+	// （`sub_297F2:0x298FC`…`0x2997C`）。
+	c.Weather, s.Screen.Group = ClearWeather, ClearWeather
+	c.NextDay()
+	s.Screen.Date = c.DateLines()
 }
 
 // MoveCursor 移動圖示列的白框，兩端繞回。

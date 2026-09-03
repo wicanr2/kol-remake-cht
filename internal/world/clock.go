@@ -93,6 +93,10 @@ func (c *Clock) StepCost(terrain, movement int) int {
 }
 
 // Advance 走一步。回傳是不是換日了——換日要跳出 CAMPING! 畫面。
+//
+// **日期不在這裡推。** 原版的順序是：時刻歸位、補營養、停在 CAMPING! 等鍵，
+// 收掉之後才推日期並重畫日期框（`sub_297F2:0x2993B`），所以紮營那一張上面
+// 印的還是前一天。推日期是 `NextDay`。
 func (c *Clock) Advance(terrain, movement int) bool {
 	c.Ticks -= c.StepCost(terrain, movement)
 	if c.Ticks >= 0 {
@@ -101,7 +105,6 @@ func (c *Clock) Advance(terrain, movement int) bool {
 	}
 	c.Ticks = ClockStart
 	c.Part = c.partFor(c.Ticks)
-	c.nextDay()
 	return true
 }
 
@@ -115,8 +118,8 @@ func (c *Clock) partFor(ticks int) int {
 	return DayParts - 1
 }
 
-// nextDay 把日期往前推一天（`sub_297F2:0x2993B`）。
-func (c *Clock) nextDay() {
+// NextDay 把日期往前推一天（`sub_297F2:0x2993B`）。收掉紮營那一張之後才做。
+func (c *Clock) NextDay() {
 	c.Day++
 	if c.Day != monthDays[c.Month] {
 		return
