@@ -24,7 +24,7 @@ import idc
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 COMBAT_ENTRY = 0x1E3A8
 # 想逐條讀的函式；探針每次只倒這幾支，免得輸出爆掉。
-DUMP_FUNCTIONS = (0x2A437, 0x2A975)
+DUMP_FUNCTIONS = (0x22866, 0x223C0, 0x22278)
 TEXT_DRAW = 0x1A8FD
 
 
@@ -102,6 +102,15 @@ def main() -> None:
                 level2.append(callee)
     known = {COMBAT_ENTRY, *level1, *level2}
 
+    owners_of = {}
+    for fn_ea in idautils.Functions():
+        for ea in idautils.FuncItems(fn_ea):
+            text = disassembly(ea)
+            for name in ("word_30A6A", "word_30C8A", "6712h"):
+                if name in text:
+                    owners_of.setdefault(name, {}).setdefault(f"0x{fn_ea:x}", 0)
+                    owners_of[name][f"0x{fn_ea:x}"] += 1
+
     dump = []
     for start in DUMP_FUNCTIONS:
         for ea in idautils.FuncItems(start):
@@ -118,6 +127,7 @@ def main() -> None:
         "level1": [summary(ea) for ea in level1],
         "level2": [summary(ea) for ea in level2],
         "text_records": text_records(known),
+        "global_owners": owners_of,
         "entry_dump": dump,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
