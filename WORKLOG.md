@@ -1957,3 +1957,35 @@
   `go vet`／`go test ./...` 全過。
 - 機制仍未追出：`sub_297F2` 只有一處扣時刻（`2 × ([0x12B8 + word_39A54] + word_2FA2C)`），
   而循路那一條路的兩個全域湊不出 20。常數旁邊註明了這一點，不假裝已經解出來。
+
+## 2026-09-03（續四）：git 作者信箱改寫與敵人那一手
+
+- 接手先查 git 身分：`git config user.email` 已是 `wicanr2@gmail.com`，但
+  `git log --format=%ae | sort -u` 顯示歷史裡 144 個 commit 有 64 個掛
+  `cy.wang@coretronic.com`（最後一個 2026-09-01）。經使用者授權改寫：
+  `git filter-branch --env-filter` 把 author 與 committer 都換成
+  `wicanr2@gmail.com`，改寫後 tree hash 與改寫前相同（`86b725d9`）、
+  `git diff` 為空、commit 數不變。無 tag 也無 release，不需重建。
+  `--force-with-lease` 推上去，遠端 HEAD `b4a5531`，repo 仍為 private。
+  舊 HEAD 留在本地 `backup-pre-email-rewrite`（`29d2ecd`）與 `refs/original/`。
+- 敵人那一手（`sub_2374C`，833 條）逐條讀完，寫成 RE-081。新探針
+  `tools/ida_probe_koltown_enemy_ai.py`：根函式全倒、十七支被呼叫者逐條、
+  呼叫端視窗、十二塊 DGROUP 位元組與七個環的位移陣列。
+- 決策的回傳是三個全域（`word_31122`／`word_30A78`／`word_30916`），由呼叫端寫進
+  參戰者記錄的 +0x25／+0x23／+0x24；方向自己寫。搜尋單位是以行動者為中心的
+  七個同心方環（格數 8r）。智力擲骰（`智力 × 等級 ÷ 3 > 開頭那一個 rand(100)`）
+  決定要不要做反制掃描。加權輪盤用 `權重^等級 ÷ 2^(等級−1)`，等級越高越偏向
+  高權重選項。
+- `[0x10D8]` 的九格方向表與 RE-080 由 `0x0B76` 反推的方向定義獨立吻合，
+  等於替那一份加了第二個來源。
+- 沒解出的部分寫進 RE-081 末段，不假裝完整：`byte_3496A`／`3496B`／`3496C`、
+  `[0x6AD2]`、`[0x1A9A]` 三張基礎權重表在靜態影像裡是未初始化區，全庫掃過
+  只有讀沒有具名 writer，要靠執行期取樣才能定值。
+
+### 勘誤
+
+- RE-080 末段原本把 `sub_2374C` 與「缺角色裝備欄 typed data」一起列在還沒走完的
+  清單裡。裝備 typed data 已於同日 `1ff7031` 完成，敵人 AI 見 RE-081；該段已改寫
+  成現況。
+- `WORKLIST.md` 的「下一個唯一工作」原本停在「建築內的後續對話」，而同一份的
+  checklist 早已把那一項標成完成（RE-067）。已改寫成戰場上的指令。
