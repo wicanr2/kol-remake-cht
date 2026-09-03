@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 4639,
+  "total_frames": 5546,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -628,6 +628,21 @@
       "frame_dir": "docs/verification/character-ui/world-clock-run2/frames",
       "character_files_changed": [],
       "note": "在平原上左右來回 24 步，量時段標籤在第幾步變：第 15 步由 DAWN 換成 MID MORN。"
+    },
+    {
+      "run": "world-quest-run1",
+      "scenario": "world-quest-site",
+      "description": "選第 2 名角色（Poontang，任務旗標 char[0x1E3] = 4，對應第 5 個特殊地點 (48,21)），出城之後往東八格、往北兩格走到那一格，觸發任務怪物並進戰鬥；沿途每六步插一次空白鍵推訊息。純觀察，不保存。",
+      "receipt": "docs/verification/character-ui/world-quest-run1/receipt.json",
+      "generated_utc": "2026-09-03T09:40:06Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 125,
+      "frame_count": 907,
+      "frame_dir": "docs/verification/character-ui/world-quest-run1/frames",
+      "character_files_changed": [],
+      "note": "走到第 5 個特殊地點 (48,21) 觸發任務怪物，答應之後進戰鬥；含戰鬥畫面的三個框、指令圖示列與裝備欄。"
     }
   ]
 }
