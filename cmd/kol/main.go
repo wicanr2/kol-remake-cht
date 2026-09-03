@@ -107,7 +107,48 @@ func battleMember(m town.Member) battle.Member {
 	out.Foresight = m.Sheet.Stats[town.StatForesight]
 	out.Size = m.Sheet.Stats[town.StatSize]
 	out.Health = m.Sheet.Stats[town.StatHealth]
+	out.Strength = m.Sheet.Stats[town.StatStrength]
+	out.Quickness = m.Sheet.Stats[town.StatQuickness]
+	out.Nutrition = m.Sheet.Nutrition
+	// 手上那件武器（部位 9）與三件護甲、盾牌的重量：攻擊值、負重與骰子都要用。
+	if w := m.Worn[battle.WeaponSlot]; w != nil {
+		out.Weapon = battle.Weapon{
+			Kind: w.Class, Base: w.Dice.Bonus,
+			Weight: w.Encumbrance, TwoHand: w.Hands == 1,
+		}
+		out.Weapon.Count, out.Weapon.Sides = battle.DamageCode(dieCode(w.Record))
+		// 手上武器的種類決定用哪一列武器技能（RE-080）。
+		for _, row := range m.Sheet.Weapons {
+			if row.Weapon == w.Class {
+				out.Attack, out.Parry = row.OffenceRaw, row.DefenceRaw
+				break
+			}
+		}
+	}
+	for _, pos := range battle.ArmourSlots {
+		if g := m.Worn[pos]; g != nil {
+			out.ArmourWeight += g.Encumbrance
+		}
+	}
+	if sh := m.Worn[battle.ShieldSlot]; sh != nil {
+		out.ShieldWeight = sh.Encumbrance
+		out.ShieldGrade = sh.SizeClass
+	} else {
+		out.ShieldGrade = battle.NoShield
+	}
 	return out
+}
+
+// dieCode 從物品記錄的 hex 取回 +0x0C 的傷害碼。
+func dieCode(record string) int {
+	if len(record) < 26 {
+		return 0
+	}
+	v, err := strconv.ParseUint(record[24:26], 16, 8)
+	if err != nil {
+		return 0
+	}
+	return int(v)
 }
 
 // nonEmptyLines 去掉記錄拆行之後的空列。
@@ -415,6 +456,26 @@ func townSheet(s *roster.Sheet) *town.Sheet {
 			Row: w.Row, Name: w.Name, Weapon: w.Weapon,
 			Offence: w.Offence, Defence: w.Defence,
 			OffenceRaw: w.OffenceRaw, DefenceRaw: w.DefenceRaw})
+	}
+	return out
+}
+
+// townWorn 把角色槽位裡的穿戴欄換成城鎮那一側的型別（RE-080）。
+func townWorn(items []*roster.Item) [town.WornSlots]*town.Good {
+	var out [town.WornSlots]*town.Good
+	for i, it := range items {
+		if it == nil || i >= town.WornSlots {
+			continue
+		}
+		g := town.Good{
+			Name: it.Name, Price: it.Price, Kind: it.Kind, Damage: it.Damage,
+			Hands: it.Hands, Class: it.Class, Position: it.Position,
+			Encumbrance: it.Encumbrance, Condition: it.Condition,
+			Percent: it.Percent, SizeClass: it.SizeClass, Record: it.Record,
+		}
+		g.Dice = town.Dice{Count: it.Dice.Count, Sides: it.Dice.Sides,
+			Bonus: it.Dice.Bonus, Low: it.Dice.Low, High: it.Dice.High}
+		out[i] = &g
 	}
 	return out
 }
@@ -1526,7 +1587,8 @@ func main() {
 					Place: slot.Place, Town: slot.Town,
 					Female: slot.Female, Wounds: slot.Wounds,
 					Gold: slot.Gold, BuildingID: slot.Building,
-					Quests: slot.Quests, Sheet: townSheet(slot.Sheet)})
+					Quests: slot.Quests, Sheet: townSheet(slot.Sheet),
+					Worn: townWorn(slot.Equipment)})
 			}
 			// 畫面樣本只寫隊伍有誰，錢包與所在地在角色檔裡——住宿與治療要花的
 			// 就是這一份錢（RE-073），所以照名字補齊。
@@ -1548,6 +1610,17 @@ func main() {
 					}
 					if playSession.Party[i].Quests == nil {
 						playSession.Party[i].Quests = c.Quests
+					}
+					// 身上穿的東西：存檔沒帶就照角色檔補（RE-080）。
+					empty := true
+					for _, g := range playSession.Party[i].Worn {
+						if g != nil {
+							empty = false
+							break
+						}
+					}
+					if empty {
+						playSession.Party[i].Worn = c.Worn
 					}
 					break
 				}

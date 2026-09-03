@@ -32,6 +32,33 @@ type Slot struct {
 	Quests []int `json:"quests"`
 	// Sheet 是 MIRROR 角色資料頁的欄位（RE-074）。
 	Sheet *Sheet `json:"sheet"`
+	// Equipment 是穿戴欄十格：部位 0…8 在角色記錄 0x100 + 16 × 部位，
+	// 部位 9（手上那件武器）在 0x30。空的那一格是 nil（RE-080）。
+	Equipment []*Item `json:"equipment"`
+}
+
+// Item 是穿戴欄的一格，欄位名與商店的商品記錄相同（RE-075）。
+type Item struct {
+	Name        string `json:"name"`
+	Price       int    `json:"price"`
+	Kind        int    `json:"kind"`
+	Damage      bool   `json:"damage"`
+	Hands       int    `json:"hands"`
+	// Class 是物品記錄 +0x0D 整個 byte：武器技能列與攻擊式都比對它。
+	Class       int    `json:"class"`
+	Position    int    `json:"position"`
+	Encumbrance int    `json:"encumbrance"`
+	Condition   int    `json:"condition"`
+	Percent     int    `json:"percent"`
+	SizeClass   int    `json:"size_class"`
+	Dice        struct {
+		Count int `json:"count"`
+		Sides int `json:"sides"`
+		Bonus int `json:"bonus"`
+		Low   int `json:"low"`
+		High  int `json:"high"`
+	} `json:"dice"`
+	Record string `json:"record"`
 }
 
 // Weapon 是武器熟練度的一列。

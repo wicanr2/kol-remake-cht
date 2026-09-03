@@ -66,6 +66,8 @@ type Good struct {
 	Kind        int    `json:"kind"`
 	Damage      bool   `json:"damage"`
 	Hands       int    `json:"hands"`
+	// Class 是物品記錄 +0x0D 整個 byte：戰鬥比對它挑武器技能列與攻擊式（RE-080）。
+	Class       int    `json:"class"`
 	Position    int    `json:"position"`
 	Encumbrance int    `json:"encumbrance"`
 	Condition   int    `json:"condition"`

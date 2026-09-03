@@ -68,9 +68,26 @@ type Actor struct {
 	X, Y  int
 	Name  string
 	Level int
-	// Foresight 是 +0x0A，規劃順序要用；Size 是 +0x0B。
+	// Strength／Quickness／Foresight／Size 是記錄 +0x08…+0x0B：力量已依營養折算過
+	// （`sub_2198A:0x219CF`），快捷用在防禦、洞察用在規劃順序、體型用在昏迷門檻。
+	Strength  int
+	Quickness int
 	Foresight int
 	Size      int
+	// Attack／Parry 是手上武器那一列的攻防技能（`sub_26AC2`）。
+	Attack int
+	Parry  int
+	// Weapon 是手上那件武器的數字；Encumbrance 是負重、ShieldGrade 是盾牌等級
+	// （NoShield 表示沒有盾牌）。
+	Weapon      Weapon
+	Encumbrance int
+	ShieldGrade int
+	// Fatigue 是 +0x2D 的挨打累計；Parries 是這一回合已經招架幾次（+0x0F）。
+	Fatigue int
+	Parries int
+	// Style／Guard 是這一回合選的攻擊選項（+0x23）與防禦選項（+0x24）。
+	Style int
+	Guard int
 	// Threshold 是 +0x10 的昏迷門檻，Damage 是 +0x0E 的累積傷害。
 	Threshold int
 	Damage    int
@@ -87,6 +104,16 @@ func (a *Actor) SetParts() {
 	a.RightArm, a.LeftArm = p[2], p[3]
 	a.RightLeg, a.LeftLeg = p[4], p[5]
 }
+
+// 穿戴欄的部位編號（RE-080）：手上那件武器在部位 9，三件護甲是頭、軀幹、腿，
+// 盾牌是部位 6。負重只算這幾件。
+const (
+	WeaponSlot = 9
+	ShieldSlot = 6
+)
+
+// ArmourSlots 是負重要算的三件護甲（頭、軀幹、腿）。
+var ArmourSlots = [3]int{0, 1, 2}
 
 // PartyKind 是隊員在記錄 +0x00 填的值（`sub_1E3A8:0x1E78D`）。
 const PartyKind = 0x13

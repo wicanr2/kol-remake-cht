@@ -132,6 +132,8 @@ def good(rec: bytes, index: int) -> dict:
         "kind": rec[12] & 3,
         "damage": bool(rec[12] & 1),
         "hands": (rec[13] & 2) >> 1,
+        # rec[13] 整個 byte 是武器種類：技能列與攻擊式的可用性都比對它（RE-080）。
+        "class": rec[13],
         "position": position,
         "encumbrance": rec[10],
         # rec[14] 的低 nibble 是合身三張表的索引（RE-075）。

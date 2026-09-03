@@ -19,6 +19,63 @@ type Monster struct {
 	Size      int    `json:"size"`
 	Health    int    `json:"health"`
 	Intellect int    `json:"intellect"`
+	// AttackSkill／ParrySkill 是記錄 +0x17 起的兩個大端 16-bit；戰鬥再乘等級除以 5。
+	AttackSkill int `json:"attack_skill"`
+	ParrySkill  int `json:"parry_skill"`
+	// Weapon 是手上那件武器（記錄 +0x20）；ArmourWeight 是三件護甲的重量和；
+	// Shield 是盾牌（記錄 +0x60），沒有就是 nil。
+	Weapon       *Item `json:"weapon"`
+	ArmourWeight int   `json:"armour_weight"`
+	Shield       *Item `json:"shield"`
+}
+
+// Item 是一格裝備，欄位名與商店的商品記錄相同（RE-075）。
+type Item struct {
+	Name        string `json:"name"`
+	Class       int    `json:"class"`
+	Hands       int    `json:"hands"`
+	Encumbrance int    `json:"encumbrance"`
+	SizeClass   int    `json:"size_class"`
+	Dice        struct {
+		Count int `json:"count"`
+		Sides int `json:"sides"`
+		Bonus int `json:"bonus"`
+	} `json:"dice"`
+	Record string `json:"record"`
+}
+
+// CombatWeapon 把一格裝備換成戰鬥要用的武器數字。骰面數用的是戰鬥那張表
+// （`0x00D4`），與商店顯示的那一張差一（RE-080）。
+func (i *Item) CombatWeapon() Weapon {
+	if i == nil {
+		return Weapon{}
+	}
+	w := Weapon{Kind: i.Class, Base: i.Dice.Bonus,
+		Weight: i.Encumbrance, TwoHand: i.Hands == 1}
+	w.Count, w.Sides = DamageCode(i.damageCode())
+	return w
+}
+
+// damageCode 從記錄的 hex 取回 +0x0C 的傷害碼。
+func (i *Item) damageCode() int {
+	if i == nil || len(i.Record) < 26 {
+		return 0
+	}
+	var v int
+	for _, c := range i.Record[24:26] {
+		v <<= 4
+		switch {
+		case c >= '0' && c <= '9':
+			v |= int(c - '0')
+		case c >= 'a' && c <= 'f':
+			v |= int(c-'a') + 10
+		case c >= 'A' && c <= 'F':
+			v |= int(c-'A') + 10
+		default:
+			return 0
+		}
+	}
+	return v
 }
 
 // Monsters 是抽取器產生的怪物表。

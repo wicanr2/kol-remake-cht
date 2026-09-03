@@ -30,6 +30,7 @@ import zipfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+from extract_town_buildings import good  # noqa: E402
 from inventory_image_archives import EXPECTED_ZIP_SHA256  # noqa: E402
 from probe_town_data import lzw_decode, payloads, read_volumes  # noqa: E402
 
@@ -43,6 +44,13 @@ NAME_LIMIT = 24
 # `sub_21AC4` 另外用 +0x15 算昏迷門檻。
 STAT_OFFSETS = {"strength": 0x11, "quickness": 0x12, "foresight": 0x13,
                 "size": 0x14, "health": 0x15, "intellect": 0x16}
+# 戰鬥要用的其餘欄位（RE-080）：+0x17 起是攻防技能（大端 16-bit 各一組），
+# +0x20 是手上的武器，+0x30／+0x40／+0x50 是三件護甲，+0x60 是盾牌，
+# 每一格 16 byte，版面與商店的商品記錄相同。
+SKILL_OFFSET = 0x17
+WEAPON_OFFSET = 0x20
+ARMOUR_OFFSETS = (0x30, 0x40, 0x50)
+SHIELD_OFFSET = 0x60
 TERRAIN_NAMES = ("DESERT", "RIVER", "SWAMP", "HILL",
                  "ROAD", "FOREST", "SHORE", "PLAINS")
 SEASON_NAMES = ("WINTER", "SPRING", "SUMMER", "AUTUMN")
@@ -53,6 +61,16 @@ MONTH_SEASON = (0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 0)
 def bits(mask: int, count: int, names: tuple[str, ...]) -> list[str]:
     """位元遮罩攤成名稱清單。bit 7 是第 0 項，依 DGROUP 的遮罩表往下數。"""
     return [names[i] for i in range(count) if mask & (0x80 >> i)]
+
+
+def item(record: bytes, offset: int) -> dict | None:
+    """怪物身上的一格裝備；空的回 None。"""
+    block = record[offset:offset + 16]
+    if len(block) < 16 or not any(block):
+        return None
+    out = good(block, 0)
+    out["offset"] = offset
+    return out
 
 
 def monster_name(record: bytes) -> str:
@@ -97,6 +115,12 @@ def main() -> int:
             "season_mask": season,
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
             **{name: rec[off] for name, off in STAT_OFFSETS.items()},
+            "attack_skill": rec[SKILL_OFFSET] << 8 | rec[SKILL_OFFSET + 1],
+            "parry_skill": rec[SKILL_OFFSET + 2] << 8 | rec[SKILL_OFFSET + 3],
+            "weapon": item(rec, WEAPON_OFFSET),
+            "armour_weight": sum(
+                rec[off + 10] for off in ARMOUR_OFFSETS if any(rec[off:off + 16])),
+            "shield": item(rec, SHIELD_OFFSET),
             "record_sha256": hashlib.sha256(rec).hexdigest(),
         })
 

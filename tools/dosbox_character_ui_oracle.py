@@ -620,6 +620,31 @@ SCENARIOS: dict[str, dict] = {
             step("按下 SIGNPOST 之後（觀察）", None, settle=4.0),
         ],
     },
+    "world-road-clock": {
+        "description": "走到路上之後只按 ROAD，量「循路一步扣多少時刻」："
+                       "野外先往北十二步（PLAINS，每步 2 × (8 + 20) = 56），"
+                       "站到路上再連按 ROAD 六十次，看時段標籤在第幾次翻成 MID MORN、又在第幾次翻成 NOON。"
+                       "純觀察，不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("城門提示（白框在 DOOR）", "Return", settle=6.0),
+            step("野外地圖的第一張畫面", "Up", settle=3.0),
+        ] + [
+            step(f"野外往北第 {i} 步", "Up", settle=3.0) for i in range(2, 13)
+        ] + [
+            step(f"循路第 {i} 步", "Return", settle=2.0, timeout=12.0)
+            for i in range(1, 61)
+        ] + [
+            step("觀察結束", None, settle=3.0, timeout=12.0),
+        ],
+    },
     "world-clock": {
         "description": "離開城鎮之後在野外原地左右走動：每一次方向鍵都會推進時刻，"
                        "但次格座標在同一格內來回，不會換格、不會換地形、也不會踏回"

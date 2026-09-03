@@ -43,6 +43,8 @@ type Candidate struct {
 	Sheet *Sheet
 	// Quests 是角色記錄 0x1E2 起的六個任務旗標 byte（RE-079）。
 	Quests []int
+	// Worn 是穿戴欄十格，索引同部位；空的那一格是 nil（RE-080）。
+	Worn [WornSlots]*Good
 }
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。
@@ -179,7 +181,8 @@ func (s *Session) joinSelected() {
 	}
 	s.Party = append(s.Party, Member{Name: c.Name, Portrait: c.Portrait,
 		Female: c.Female, Wounds: c.Wounds, Gold: c.Gold, Place: c.Place,
-		TownCode: c.Town, BuildingID: c.BuildingID, Sheet: c.Sheet, Speaker: true})
+		TownCode: c.Town, BuildingID: c.BuildingID, Sheet: c.Sheet,
+		Worn: c.Worn, Speaker: true})
 	s.Inside.Party = s.Party
 	s.recruit, s.asking = nil, false
 	s.Inside.List = nil

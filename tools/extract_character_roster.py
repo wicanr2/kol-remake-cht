@@ -27,6 +27,7 @@ import zipfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+from extract_town_buildings import good  # noqa: E402
 from extract_town_text import render  # noqa: E402
 from png_io import read_png  # noqa: E402
 from probe_extract_comb_png import PALETTE  # noqa: E402
@@ -51,6 +52,10 @@ FEMALE_OFFSET, WOUNDS_OFFSET = 0x1A, 0x1B
 GOLD_OFFSET, GOLD_BYTES = 0x2A, 3
 # 任務旗標：六個 byte，一個 byte 塞四個 2-bit 欄位，對應 24 個任務地點（RE-079）。
 QUEST_OFFSET, QUEST_BYTES = 0x1E2, 6
+# 穿戴欄：部位 0…8 在 0x100 + 16 × 部位，部位 9（手上那件武器）在 0x30，
+# 一格 16 byte，版面與商店的商品記錄相同（RE-075／RE-080）。
+WORN_SLOTS, WORN_STRIDE = 10, 16
+WORN_BASE, WEAPON_SLOT_OFFSET = 0x100, 0x30
 # 位移 0x2E／0x2F 是角色留宿的建築編號，來自建築 payload 的 0x3A／0x3B。
 BUILDING_OFFSET = 0x2E
 # MIRROR 角色資料頁用得到的欄位（RE-074）。位移 0x1D–0x23 是七個內部屬性，
@@ -69,6 +74,21 @@ WEAPON_SKILL_OFFSET = 0x53    # OFF 在 +0／+1、DEF 在 +2／+3，都是大端
 HEIGHT_BASE = (0x1C, 0x10, 0x1C, 0x1C, 0x1E, 0x00, 0x14)
 WEIGHT_BASE = (0x03, 0x03, 0x02, 0x03, 0x03, 0x00, 0x03)
 WEIGHT_PER_FOOT = (0x41, 0x32, 0x4B, 0x46, 0x28, 0x00, 0x23)
+
+
+def equipment(rec: bytes) -> list[dict | None]:
+    """穿戴欄十格。空的那一格是 null；其餘欄位與商店的商品記錄同名。"""
+    out = []
+    for pos in range(WORN_SLOTS):
+        base = WEAPON_SLOT_OFFSET if pos == WORN_SLOTS - 1 else WORN_BASE + WORN_STRIDE * pos
+        block = rec[base:base + WORN_STRIDE]
+        if len(block) < WORN_STRIDE or not any(block):
+            out.append(None)
+            continue
+        item = good(block, pos)
+        item["offset"] = base
+        out.append(item)
+    return out
 
 
 def packed_name(raw: bytes) -> str:
@@ -122,6 +142,7 @@ def character_sheet(rec: bytes) -> dict:
         "rank": rec[RANK_OFFSET],
         "adventure_points": rec[ADVENTURE_OFFSET] << 8 | rec[ADVENTURE_OFFSET + 1],
         "movement_rate": rec[MOVEMENT_OFFSET],
+        "equipment": equipment(rec),
         "nutrition": rec[NUTRITION_OFFSET],
         "height_feet": feet,
         "height_inches": rest,

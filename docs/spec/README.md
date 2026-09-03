@@ -18,3 +18,4 @@
 | SPEC-006 | [住宿、治療與存檔格式](006-rest-and-save.md) | READY | 僅授權 REST 三條路、remake 存檔讀寫與離線匯入 |
 | SPEC-007 | [野外的時刻、日曆、天候與遭遇](007-wilderness-time.md) | 時刻／日曆／天候 READY；遭遇 DRAFT | 僅授權時刻、日曆、天候與紮營畫面 |
 | SPEC-008 | [戰場的畫面、視線與回合順序](008-combat-field.md) | 畫面／視線／規劃順序 READY；指令、執行順序與命中 DRAFT | 僅授權戰場繪製、視線、站位與規劃順序 |
+| SPEC-009 | [戰鬥的攻擊結算](009-combat-attack.md) | 近戰 READY；射擊、法術與敵人 AI DRAFT | 僅授權近戰攻擊的規則層，不含 UI 與 AI |

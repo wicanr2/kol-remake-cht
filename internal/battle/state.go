@@ -46,6 +46,14 @@ type Member struct {
 	Skills []int
 	// Foresight／Size／Health 是規劃順序與昏迷門檻要用的三個屬性（角色記錄 0x21、0x1F、0x20）。
 	Foresight, Size, Health int
+	// Strength／Quickness 是攻擊與防禦要用的兩個屬性；Nutrition 用來折算力量。
+	Strength, Quickness, Nutrition int
+	// Weapon 是手上那件武器；Attack／Parry 是那一列的攻防技能。
+	Weapon        Weapon
+	Attack, Parry int
+	// ArmourWeight 是三件護甲的重量和；ShieldWeight／ShieldGrade 是盾牌
+	// （沒有盾牌時 ShieldGrade 是 NoShield）。
+	ArmourWeight, ShieldWeight, ShieldGrade int
 	// Wounds 是開場就帶著的傷（角色記錄 0x1B）。
 	Wounds int
 }
@@ -79,10 +87,15 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			break
 		}
 		m := party[i]
+		level := CombatLevel(m.Skills)
+		enc, _ := Encumbrance(level, m.Weapon, m.ArmourWeight, m.ShieldWeight)
 		s.Actors[i] = Actor{Kind: PartyKind, Side: SideParty,
 			X: site.PartyX[i], Y: site.PartyY[i],
 			Name: m.Name, Member: i,
-			Level: CombatLevel(m.Skills), Foresight: m.Foresight, Size: m.Size,
+			Level: level, Foresight: m.Foresight, Size: m.Size,
+			Strength: Nourished(m.Strength, m.Nutrition), Quickness: m.Quickness,
+			Attack: m.Attack, Parry: m.Parry, Weapon: m.Weapon,
+			Encumbrance: enc, ShieldGrade: m.ShieldGrade,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds}
 		s.Actors[i].SetParts()
 	}
@@ -91,10 +104,21 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		if slot >= MaxActors {
 			break
 		}
+		weapon := monster.Weapon.CombatWeapon()
+		shieldWeight, shieldGrade := 0, NoShield
+		if monster.Shield != nil {
+			shieldWeight, shieldGrade = monster.Shield.Encumbrance, monster.Shield.SizeClass
+		}
+		enc, _ := Encumbrance(site.Level, weapon, monster.ArmourWeight, shieldWeight)
 		s.Actors[slot] = Actor{Kind: site.Monster, Side: SideMonster,
 			X: site.MonsterX[i], Y: site.MonsterY[i],
 			Name: site.MonsterName, Level: site.Level, Member: -1,
 			Foresight: monster.Foresight, Size: monster.Size,
+			Strength: monster.Strength, Quickness: monster.Quickness,
+			// 敵人的技能要按等級縮放（`sub_26AC2:0x26AF6`）。
+			Attack: monster.AttackSkill * site.Level / 5,
+			Parry:  monster.ParrySkill * site.Level / 5,
+			Weapon: weapon, Encumbrance: enc, ShieldGrade: shieldGrade,
 			Threshold: Threshold(monster.Size, monster.Health)}
 		s.Actors[slot].SetParts()
 	}
