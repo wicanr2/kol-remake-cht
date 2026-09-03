@@ -100,6 +100,14 @@ def main() -> None:
                 level2.append(callee)
     known = {COMBAT_ENTRY, *level1, *level2}
 
+    dump = []
+    for ea in idautils.FuncItems(0x10000):
+        text = disassembly(ea)
+        if 0x10c80 <= ea <= 0x10d60:
+            dump.append({"ea": f"0x{ea:x}", "disassembly": text})
+    for ea in idautils.FuncItems(COMBAT_ENTRY):
+        pass
+
     receipt = {
         "schema": "kol-ida-koltown-combat-map-v1",
         "ida_version": idaapi.get_kernel_version(),
@@ -111,6 +119,7 @@ def main() -> None:
         "level1": [summary(ea) for ea in level1],
         "level2": [summary(ea) for ea in level2],
         "text_records": text_records(known),
+        "entry_dump": dump,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
