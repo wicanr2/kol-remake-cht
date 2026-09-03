@@ -415,6 +415,11 @@ func enterWorld(s *world.Screen, p town.Point) {
 
 // applyWorldToken 把腳本 token 套到野外狀態機。
 func applyWorldToken(s *world.Session, token string) error {
+	// 換日那一張停在原地等一個鍵，按什麼都一樣（`sub_297F2:0x298E2` 的 `sub_144C3`）。
+	if s.Camping && token != "TICK" {
+		s.EndCamping()
+		return nil
+	}
 	switch token {
 	case "L":
 		s.Walk(-1, 0)
@@ -1305,7 +1310,8 @@ func main() {
 		worldPartyState = sample.Party
 		worldScreenState = &world.Screen{Travel: travel, Weather: weather,
 			Group: *worldWeather, Phase: *worldPhase, TimeIndex: *worldTime,
-			Date: sample.Date, DateZh: sample.DateZh, Names: names}
+			Date: sample.Date, DateZh: sample.DateZh, Names: names,
+			CampText: bank.RecordPadded(town.BankUI, world.CampRecord)}
 		worldSessionState = world.NewSession(worldScreenState)
 	}
 

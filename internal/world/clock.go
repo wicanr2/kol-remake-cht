@@ -42,6 +42,15 @@ var terrainStep = [8]int{10, 10, 10, 20, 6, 14, 30, 8}
 // DefaultMovement 是移動率 0 時代入的值（`sub_29004:0x290C2`）。
 const DefaultMovement = 20
 
+// CampWeather 是換日那一張畫面用的天候組；ClearWeather 是收掉之後設回去的那一組。
+const (
+	CampWeather  = 5
+	ClearWeather = 1
+)
+
+// CampRecord 是換日那一張畫面的 KOLDATA 記錄：`"CAMPING!"`。
+const CampRecord = 0xE2
+
 // Clock 是野外的時刻與日曆。
 type Clock struct {
 	// Ticks 是這一天剩下的時刻，從 ClockStart 倒數。

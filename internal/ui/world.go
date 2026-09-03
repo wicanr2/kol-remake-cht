@@ -39,7 +39,7 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small *font.Font,
 		return err
 	}
 	drawWeather(dst, s)
-	drawWorldLabel(dst, small, s)
+	drawWorldLabel(dst, small, s, camping(sess))
 
 	b := town.IconBar
 	for i, index := range s.Icons {
@@ -54,6 +54,9 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small *font.Font,
 	return nil
 }
 
+// camping 回傳是不是停在換日那一張畫面。
+func camping(sess *world.Session) bool { return sess != nil && sess.Camping }
+
 // drawWorldMap 畫地圖視窗：投影、白框，12×6 格磚塊，最後蓋上隊伍那個點。
 func drawWorldMap(dst *ebiten.Image, sprites Sprites, s *world.Screen,
 	sess *world.Session) error {
@@ -62,8 +65,13 @@ func drawWorldMap(dst *ebiten.Image, sprites Sprites, s *world.Screen,
 	fill(dst, win.X, win.Y, win.Width, win.Height, town.ColourBoxEdge)
 
 	// 站在城鎮入口上時整個視窗換成該地點的 192×96 外觀圖，不畫磚塊也不畫那個點。
+	// 換日那一張也是同一個位置，畫的是腳下地形那一張（`sub_297F2:0x298D6`）。
 	if sess != nil {
-		if index := sess.TownPicture(); index >= 0 {
+		index := sess.TownPicture()
+		if sess.Camping {
+			index = s.TerrainCode
+		}
+		if index >= 0 {
 			pic, err := sprites.Get(world.TownPictureArchive, index)
 			if err != nil {
 				return err
@@ -120,12 +128,16 @@ func drawWeather(dst *ebiten.Image, s *world.Screen) {
 }
 
 // drawWorldLabel 畫「時段／地形」的標籤框。兩行的起點是原版的固定欄位。
-func drawWorldLabel(dst *ebiten.Image, f *font.Font, s *world.Screen) {
+func drawWorldLabel(dst *ebiten.Image, f *font.Font, s *world.Screen, camp bool) {
 	box := world.LabelBox
 	shadow(dst, box.X, box.Y, box.Width, box.Height)
 	fill(dst, box.X, box.Y, box.Width, box.Height, town.ColourBoxEdge)
 	fill(dst, box.X+1, box.Y+1, box.Width-2, box.Height-2, town.ColourBoxFill)
 	lines := []string{s.TimeLine(), s.TerrainLine()}
+	// 換日那一張把第一行換成 CAMPING!（`sub_297F2:0x298A9`）。
+	if camp {
+		lines[0] = s.CampText
+	}
 	for i, line := range lines {
 		pos := world.LabelLines[i]
 		f.Draw(dst, pos.X, pos.Y, line,

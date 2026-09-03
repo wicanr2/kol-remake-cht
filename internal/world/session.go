@@ -158,6 +158,8 @@ func (s *Session) advanceTime() {
 	part := c.Part
 	if c.Advance(s.Screen.TerrainCode, s.Screen.Movement) {
 		s.Camping = true
+		// 換日那一張把天候切到第 5 組（`sub_297F2:0x2989D`）。
+		s.Screen.Group = CampWeather
 		if s.OnNewDay != nil {
 			s.OnNewDay(c.Hunger())
 		}
@@ -190,8 +192,8 @@ func (s *Session) EndCamping() {
 	}
 	s.Camping = false
 	// 原版收掉那一張之後把天候設回第 1 組再重算（`sub_297F2:0x298FC`）。
-	s.Screen.Clock.Weather = 1
-	s.Screen.Group = 1
+	s.Screen.Clock.Weather = ClearWeather
+	s.Screen.Group = ClearWeather
 }
 
 // MoveCursor 移動圖示列的白框，兩端繞回。

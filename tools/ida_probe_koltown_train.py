@@ -23,7 +23,7 @@ import idc
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 TEXT_DRAW = 0x1A8FD
 CHAR_DRAW = 0x1C2DA
-WANTED_RECORDS = (0x3E, 0x3F, 0x40, 0x41, 0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0xD0)
+WANTED_RECORDS = (0xE7, 0xE8, 0xE9, 0xE3, 0xE4, 0xE5)
 DUMP_LIMIT = 4000
 
 
@@ -101,10 +101,6 @@ def main() -> None:
             ea = int(site["function"], 16)
             if ea not in owners:
                 owners.append(ea)
-
-    for extra in (0x1B5C8, 0x1CA6E, 0x1D01D):
-        if extra not in owners:
-            owners.append(extra)
 
     receipt = {
         "schema": "kol-ida-koltown-train-v1",

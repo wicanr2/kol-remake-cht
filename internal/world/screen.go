@@ -58,6 +58,9 @@ type Screen struct {
 	// 用來置中（`"  DAWN ]"`），所以不能先去空白。
 	Names Namer
 
+	// CampText 是換日那一張畫面的字（KOLDATA 記錄 0xE2「CAMPING!」）。
+	CampText string
+
 	// Clock 是野外的時刻與日曆；nil 代表這個畫面不推進時間（單張截圖用）。
 	Clock *Clock
 	// Movement 是隊伍裡最慢的那個移動率（`sub_29004:0x290EB` 的 `word_2FA2C`）。

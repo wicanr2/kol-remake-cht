@@ -641,6 +641,29 @@ SCENARIOS: dict[str, dict] = {
             step("量完（觀察）", None, settle=3.0),
         ],
     },
+    "world-camp": {
+        "description": "離開城鎮之後在野外原地左右走動到時刻用完：每步扣 56 點，"
+                       "第 76 步時刻變成負的，原版會切到 CAMPING! 那一張並等一個鍵。"
+                       "同一格內來回，不換格所以不會踩到遭遇。純觀察，不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("城門提示（白框在 DOOR）", "Return", settle=6.0),
+        ] + [
+            step(f"野外第 {i} 步", "Right" if i % 2 else "Left", settle=1.6)
+            for i in range(1, 77)
+        ] + [
+            step("紮營畫面（等一個鍵）", "space", settle=4.0),
+            step("收掉紮營之後", "Right", settle=3.0),
+            step("再走一步（觀察）", None, settle=3.0),
+        ],
+    },
     "world-enter-town": {
         "description": "離開城鎮走到野外之後，往東走五步跨進隔壁那一格，再往西一步"
                        "踏回城鎮入口那一格：畫面應換成該地點的外觀圖，圖示列剩 "

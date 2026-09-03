@@ -44,9 +44,9 @@ GLOBALS = {
 # DGROUP 表：月名（12 × 4 byte）、移動成本、每月天數、時段門檻、天候兩張、每日營養。
 DGROUP_DUMPS = ((0x063A, 48), (0x12B8, 20), (0x12C0, 12), (0x12CC, 10),
                 (0x12D6, 12), (0x131A, 12), (0x1326, 12), (0x0070, 16),
-                (0x12A0, 24), (0x1332, 32))
+                (0x12A0, 24), (0x1300, 96))
 
-DUMP_FUNCTIONS = (0x2AAA8, 0x2B0FF, 0x297F2, 0x17095, 0x2A4E5, 0x10000)
+DUMP_FUNCTIONS = (0x2A4E5, 0x2A337, 0x2B0FF)
 
 
 def disassembly(ea: int) -> str:
