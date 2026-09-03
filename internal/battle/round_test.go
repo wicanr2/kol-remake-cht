@@ -2,7 +2,7 @@ package battle
 
 import "testing"
 
-// fixedRand 讓先攻的擲骰固定，方便驗證順序。
+// fixedRand 讓規劃順序的擲骰固定，方便驗證。
 type fixedRand struct{ values []int; i int }
 
 func (r *fixedRand) Roll(n int) int {
@@ -14,34 +14,34 @@ func (r *fixedRand) Roll(n int) int {
 	return v
 }
 
-// 先攻鍵值：(等級 − 1) × 10 + 洞察，再加擲骰；隊員第二回合起先除以 2 × 回合數。
-func TestInitiativeKey(t *testing.T) {
+// 規劃鍵值：(等級 − 1) × 10 + 洞察，再加擲骰；隊員第二回合起先除以 2 × 回合數。
+func TestPlanKey(t *testing.T) {
 	a := Actor{Side: SideParty, Level: 3, Foresight: 40, Threshold: 100}
-	if got := InitiativeKey(a, 0, 7); got != 7+(3-1)*10+40 {
+	if got := PlanKey(a, 0, 7); got != 7+(3-1)*10+40 {
 		t.Fatalf("第一回合鍵值 %d", got)
 	}
-	if got := InitiativeKey(a, 1, 7); got != 7+((3-1)*10+40)/2 {
+	if got := PlanKey(a, 1, 7); got != 7+((3-1)*10+40)/2 {
 		t.Fatalf("第二回合鍵值 %d", got)
 	}
 	// 受傷會再折損：傷勢 = 50 × 傷害 ÷ 門檻，基準扣掉基準 × 傷勢 ÷ 200。
 	hurt := a
 	hurt.Damage = 50
 	base := (3-1)*10 + 40
-	if got := InitiativeKey(hurt, 0, 7); got != 7+base-base*25/200 {
+	if got := PlanKey(hurt, 0, 7); got != 7+base-base*25/200 {
 		t.Fatalf("受傷之後鍵值 %d", got)
 	}
 	// 敵人不吃回合數那一條。
 	m := Actor{Side: SideMonster, Level: 3, Foresight: 40, Threshold: 100}
-	if got := InitiativeKey(m, 2, 7); got != 7+(3-1)*10+40 {
+	if got := PlanKey(m, 2, 7); got != 7+(3-1)*10+40 {
 		t.Fatalf("敵人第三回合鍵值 %d", got)
 	}
 }
 
 // 鍵值小的先動；空位不進順序。
-func TestBeginRoundOrder(t *testing.T) {
+func TestBeginPlanningOrder(t *testing.T) {
 	s := NewQuest(testSite(), []Member{{Name: "Poontang", Size: 100, Health: 100}},
 		testMonster(), NewField())
-	s.BeginRound(&fixedRand{values: []int{50, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}})
+	s.BeginPlanning(&fixedRand{values: []int{50, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}})
 	if s.Round.Number != 1 {
 		t.Fatalf("回合數 %d", s.Round.Number)
 	}

@@ -68,7 +68,7 @@ type Actor struct {
 	X, Y  int
 	Name  string
 	Level int
-	// Foresight 是 +0x0A，先攻要用；Size 是 +0x0B。
+	// Foresight 是 +0x0A，規劃順序要用；Size 是 +0x0B。
 	Foresight int
 	Size      int
 	// Threshold 是 +0x10 的昏迷門檻，Damage 是 +0x0E 的累積傷害。

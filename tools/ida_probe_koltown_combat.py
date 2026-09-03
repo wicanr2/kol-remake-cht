@@ -25,7 +25,9 @@ import idc
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 COMBAT_ENTRY = 0x1E3A8
 # 想逐條讀的函式；探針每次只倒這幾支，免得輸出爆掉。
-DUMP_FUNCTIONS = (0x26AC2, 0x24FD3, 0x277F4, 0x24BB6, 0x24C35, 0x268D4, 0x26D3C)
+DUMP_FUNCTIONS = (0x22084,)
+# 圖示列是 `sub_11703(圖號)` 一個一個推出來的；掃全部呼叫點就能列出每一列。
+ICON_PUSH = 0x11703
 DGROUP_EA = 0x2DED0
 # 要原樣倒出來的 DGROUP 區塊：(位移, 位元組數)。
 DGROUP_DUMPS = (
@@ -42,6 +44,12 @@ DGROUP_DUMPS = (
     (0x0B60, 16),   # 一般遭遇的隊伍站位
     (0x0B8C, 72),   # 敵人陣型 Y
     (0x0BD4, 72),   # 敵人陣型 X
+    (0x10B2, 32),   # 指令 → 執行階段的時間成本（`sub_1E3A8:0x1FE33`）
+    (0x0B42, 16),   # 徒手攻擊圖示 → 選項編號（`0x1F72E`）
+    (0x120C, 16),   # 命中餘裕 → 傷害加成（`sub_26D76:0x275AD`）
+    (0x121C, 24),   # 命中部位的累積機率，一列六個（`0x27692`）
+    (0x122E, 16),   # 攻擊式 → 部位機率是哪一列（`0x2765B`）
+    (0x0FD2, 16),   # 徒手選項 → 武器欄位移（`sub_26AC2:0x26BEF`）
 )
 TEXT_DRAW = 0x1A8FD
 
@@ -134,6 +142,22 @@ def main() -> None:
         for ea in idautils.FuncItems(start):
             dump.append({"ea": f"0x{ea:x}", "disassembly": disassembly(ea)})
 
+    icon_bars = {}
+    for ea in idautils.CodeRefsTo(ICON_PUSH, False):
+        fn = ida_funcs.get_func(ea)
+        if fn is None:
+            continue
+        items = list(idautils.FuncItems(fn.start_ea))
+        i = items.index(ea)
+        icon = None
+        for j in range(i - 1, max(-1, i - 4), -1):
+            text = disassembly(items[j])
+            if text.startswith("mov     ax,") and idc.get_operand_type(items[j], 1) == idc.o_imm:
+                icon = idc.get_operand_value(items[j], 1)
+                break
+        icon_bars.setdefault(f"0x{fn.start_ea:x}", []).append(
+            {"call_ea": f"0x{ea:x}", "icon": None if icon is None else f"0x{icon:x}"})
+
     receipt = {
         "schema": "kol-ida-koltown-combat-map-v1",
         "ida_version": idaapi.get_kernel_version(),
@@ -146,6 +170,7 @@ def main() -> None:
         "level2": [summary(ea) for ea in level2],
         "text_records": text_records(known),
         "global_owners": owners_of,
+        "icon_bars": icon_bars,
         "dgroup_dumps": {f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, n)
                                           or b"").hex()
                          for off, n in DGROUP_DUMPS},

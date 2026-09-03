@@ -2,19 +2,21 @@ package battle
 
 import "sort"
 
-// 回合結構（RE-080）。一個回合先算出手順序，再照那個順序讓每一名各行動一次，
-// 走完整輪才問記錄 0x108「Begin next round?」。
+// 回合結構（RE-080／SPEC-008）。一個回合分成兩段：**規劃**時每一名依洞察排出來的
+// 順序各挑一個指令，整輪挑完問記錄 0x108「Begin next round?」；答應之後才進**執行**段，
+// 依快捷重排一次、由快的先做出來。執行段的鍵值要用到負重與指令的時間成本，
+// 那兩項還沒解完，因此這裡只做規劃段的順序。
 
-// InitiativeRoll 是先攻擲的骰面數（`sub_1B5A8(0x64)`）。
-const InitiativeRoll = 100
+// PlanRoll 是規劃順序擲的骰面數（`sub_1B5A8(0x64)`）。
+const PlanRoll = 100
 
-// LevelPoints 是升一級要的攻防值總和；LevelStep 是等級換算成先攻的權重。
+// LevelPoints 是升一級要的攻防值總和；LevelStep 是等級在規劃鍵值裡的權重。
 const (
 	LevelPoints = 1000
 	LevelStep   = 10
 )
 
-// EmptyKey 是空位的先攻鍵值：排在所有人後面（`sub_1E3A8:0x1EF7B`）。
+// EmptyKey 是空位的鍵值：排在所有人後面（`sub_1E3A8:0x1EF7B`）。
 const EmptyKey = 0x7FFF
 
 // CombatLevel 是隊員的戰鬥等級：四列武器的攻防原始值加總除以 1000 再加一
@@ -43,15 +45,15 @@ func Parts(threshold int) [6]int {
 	return out
 }
 
-// InitiativeKey 是一名參戰者這一回合的先攻鍵值（`sub_1E3A8:0x1EF84`…`0x1F028`）：
+// PlanKey 是一名參戰者這一回合的**規劃**鍵值（`sub_1E3A8:0x1EF84`…`0x1F028`）：
 //
 //	基準 = (等級 − 1) × 10 + 洞察
 //	隊員在第二回合起先除以 2 × 回合數
 //	基準 −= 基準 × 傷勢 ÷ 200，傷勢 = 50 × 累積傷害 ÷ 昏迷門檻
 //	鍵值 = 擲骰 + 基準
 //
-// roll 是 1…100 的擲骰結果。鍵值小的先動。
-func InitiativeKey(a Actor, round int, roll int) int {
+// roll 是 1…100 的擲骰結果。**鍵值小的先規劃**——洞察低的先決定、高的後決定。
+func PlanKey(a Actor, round int, roll int) int {
 	base := (a.Level-1)*LevelStep + a.Foresight
 	if a.Side == SideParty && round > 0 {
 		base /= 2 * round
@@ -71,18 +73,18 @@ func (a Actor) Injury() int {
 // Down 回報這一名退出戰鬥了沒有：頭或胸被打廢就算（`sub_22866`）。
 func (a Actor) Down() bool { return a.Head <= 0 || a.Chest <= 0 }
 
-// Round 是這一場的回合狀態。
+// Round 是這一場的回合狀態。這一版只走規劃段。
 type Round struct {
 	// Number 是已經開始過幾個回合（原版 `word_30D00`，排完序才加一）。
 	Number int
-	// Order 是這一回合的出手順序，內容是參戰者索引。
+	// Order 是這一回合的規劃順序，內容是參戰者索引。
 	Order []int
 	// Turn 是現在輪到 Order 的第幾個。
 	Turn int
 }
 
-// BeginRound 依先攻鍵值排出這一回合的順序。空位排最後。
-func (s *State) BeginRound(rng Rand) {
+// BeginPlanning 依規劃鍵值排出這一回合誰先決定。空位排最後。
+func (s *State) BeginPlanning(rng Rand) {
 	keys := make([]int, len(s.Actors))
 	order := make([]int, 0, len(s.Actors))
 	for i, a := range s.Actors {
@@ -90,7 +92,7 @@ func (s *State) BeginRound(rng Rand) {
 			keys[i] = EmptyKey
 			continue
 		}
-		keys[i] = InitiativeKey(a, s.Round.Number, rng.Roll(InitiativeRoll))
+		keys[i] = PlanKey(a, s.Round.Number, rng.Roll(PlanRoll))
 	}
 	for i, a := range s.Actors {
 		if a.Side != SideEmpty {
@@ -115,7 +117,7 @@ func (s *State) Current() int {
 	return s.Round.Order[s.Round.Turn]
 }
 
-// EndTurn 讓順序往前走一格，回報這一回合是不是走完了。
+// EndTurn 讓規劃順序往前走一格，回報這一輪是不是決定完了。
 func (s *State) EndTurn() bool {
 	s.Round.Turn++
 	s.skipDown()

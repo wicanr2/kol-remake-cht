@@ -44,7 +44,7 @@ type Member struct {
 	Worn [6]string
 	// Skills 是四列武器的攻防原始值，用來算戰鬥等級（RE-080）。
 	Skills []int
-	// Foresight／Size／Health 是先攻與昏迷門檻要用的三個屬性（角色記錄 0x21、0x1F、0x20）。
+	// Foresight／Size／Health 是規劃順序與昏迷門檻要用的三個屬性（角色記錄 0x21、0x1F、0x20）。
 	Foresight, Size, Health int
 	// Wounds 是開場就帶著的傷（角色記錄 0x1B）。
 	Wounds int
@@ -62,7 +62,7 @@ type State struct {
 	Cursor int
 	// Round 是回合與出手順序。
 	Round Round
-	// Rand 是先攻要用的亂數來源。
+	// Rand 是排規劃順序要用的亂數來源。
 	Rand Rand
 }
 
@@ -111,10 +111,12 @@ func (s *State) Answer(yes bool) bool {
 		}
 		s.Stage = StageEncounter
 	case StageField:
-		// 答應就重排下一回合的順序；答否才問要不要逃。
+		// 原版整輪規劃完問「Begin next round?」：U-TURN 是重新規劃這一回合、
+		// YES 才進執行段、逃走圖示才問要不要逃。指令與執行段還沒實作，
+		// 這一版只留「再排一輪」與「要不要逃」兩條路。
 		if yes {
 			if s.Rand != nil {
-				s.BeginRound(s.Rand)
+				s.BeginPlanning(s.Rand)
 			}
 			s.AdvanceToParty()
 			break
@@ -130,13 +132,13 @@ func (s *State) Answer(yes bool) bool {
 	return false
 }
 
-// Continue 是滿版怪物圖上按下的那一個鍵：進戰場，並排出第一回合的順序。
+// Continue 是滿版怪物圖上按下的那一個鍵：進戰場，並排出第一回合的規劃順序。
 func (s *State) Continue(rng Rand) {
 	if s.Stage != StageEncounter {
 		return
 	}
 	s.Stage = StageField
-	s.BeginRound(rng)
+	s.BeginPlanning(rng)
 	s.AdvanceToParty()
 }
 
