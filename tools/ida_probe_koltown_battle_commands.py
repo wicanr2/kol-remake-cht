@@ -27,7 +27,9 @@ EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d
 DGROUP_EA = 0x2DED0
 # 主指令列、選目標格、圖示列元件與幾支條件判斷。
 DUMP_FUNCTIONS = (0x228B7, 0x24131, 0x11703, 0x11722, 0x1449C, 0x227C0, 0x22278,
-                  0x24AF8, 0x24A02)
+                  0x24AF8, 0x24A02,
+                  # 執行段：移動那一手。
+                  0x26384)
 # 三個子選單掛在 `sub_1E3A8` 裡，用位址視窗取。
 WINDOWS = {
     # 主指令列選完之後的分派表把圖號送到這幾段。
@@ -35,6 +37,10 @@ WINDOWS = {
     "unarmed_forms": (0x1F6BA, 0x1F7D9),
     "movement_forms": (0x1F7D9, 0x1F940),
     "weapon_forms": (0x1F940, 0x1FB38),
+    # 執行段：另外排一次順序，鍵值大的先動（RE-080）。
+    "execution": (0x1FD00, 0x20900),
+    # 攻擊結算的開頭：目標是怎麼找出來的。
+    "attack_target": (0x26D76, 0x26E60),
 }
 # 要原樣倒出來的 DGROUP 區塊：(位移, 位元組數)。
 DGROUP_DUMPS = (
@@ -46,6 +52,7 @@ DGROUP_DUMPS = (
     (0x2D9E, 16),    # 地上東西的 Y（`sub_228B7:0x22C39`）
     (0x0B6C, 9),     # 3×3 格編號 → 方向，0x0B76 的反表（`sub_24131:0x24987`）
     (0x110A, 128),   # 攻擊選項修正，一組 14 byte
+    (0x10B2, 16),    # 指令的時間成本（執行段的鍵值要用）
 )
 
 

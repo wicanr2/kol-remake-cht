@@ -82,6 +82,9 @@ type Actor struct {
 	Weapon      Weapon
 	Encumbrance int
 	ShieldGrade int
+	// WeaponSpeed 是 `sub_24FD3` 算出來的 `word_37CF0`：執行段的鍵值要用它
+	// 折算指令的時間成本（RE-084）。
+	WeaponSpeed int
 	// Fatigue 是 +0x2D 的挨打累計；Parries 是這一回合已經招架幾次（+0x0F）。
 	Fatigue int
 	Parries int

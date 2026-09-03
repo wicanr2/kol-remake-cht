@@ -80,6 +80,8 @@ type State struct {
 	Round Round
 	// Plan 是規劃段停在哪一層選單（SPEC-010）。
 	Plan Planning
+	// Exec 是執行段的出手順序（RE-084）。
+	Exec Execution
 	// Rand 是排規劃順序要用的亂數來源。
 	Rand Rand
 }
@@ -98,14 +100,14 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		}
 		m := party[i]
 		level := CombatLevel(m.Skills)
-		enc, _ := Encumbrance(level, m.Weapon, m.ArmourWeight, m.ShieldWeight)
+		enc, speed := Encumbrance(level, m.Weapon, m.ArmourWeight, m.ShieldWeight)
 		s.Actors[i] = Actor{Kind: PartyKind, Side: SideParty,
 			X: site.PartyX[i], Y: site.PartyY[i],
 			Name: m.Name, Member: i,
 			Level: level, Foresight: m.Foresight, Size: m.Size,
 			Strength: Nourished(m.Strength, m.Nutrition), Quickness: m.Quickness,
 			Attack: m.Attack, Parry: m.Parry, Weapon: m.Weapon,
-			Encumbrance: enc, ShieldGrade: m.ShieldGrade,
+			Encumbrance: enc, WeaponSpeed: speed, ShieldGrade: m.ShieldGrade,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds}
 		s.Actors[i].SetParts()
 	}
@@ -119,7 +121,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		if monster.Shield != nil {
 			shieldWeight, shieldGrade = monster.Shield.Encumbrance, monster.Shield.SizeClass
 		}
-		enc, _ := Encumbrance(site.Level, weapon, monster.ArmourWeight, shieldWeight)
+		enc, speed := Encumbrance(site.Level, weapon, monster.ArmourWeight, shieldWeight)
 		s.Actors[slot] = Actor{Kind: site.Monster, Side: SideMonster,
 			X: site.MonsterX[i], Y: site.MonsterY[i],
 			Name: site.MonsterName, Level: site.Level, Member: -1,
@@ -128,7 +130,8 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			// 敵人的技能要按等級縮放（`sub_26AC2:0x26AF6`）。
 			Attack: monster.AttackSkill * site.Level / 5,
 			Parry:  monster.ParrySkill * site.Level / 5,
-			Weapon: weapon, Encumbrance: enc, ShieldGrade: shieldGrade,
+			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
+			ShieldGrade: shieldGrade,
 			Threshold: Threshold(monster.Size, monster.Health)}
 		s.Actors[slot].SetParts()
 	}
@@ -150,6 +153,13 @@ func (s *State) Answer(yes bool) bool {
 		// 這一版只留「再排一輪」與「要不要逃」兩條路。
 		if yes {
 			if s.Rand != nil {
+				// 答應之後先跑執行段，再排下一回合的規劃（RE-084）。
+				s.BeginExecution(s.Rand)
+				s.RunAll(s.Rand)
+				if s.PartyDown() {
+					s.Stage = StageDone
+					return true
+				}
 				s.BeginPlanning(s.Rand)
 			}
 			s.AdvanceToParty()
@@ -165,6 +175,17 @@ func (s *State) Answer(yes bool) bool {
 		s.Stage = StageField
 	}
 	return false
+}
+
+// PartyDown 回報隊伍是不是全倒了。
+func (s *State) PartyDown() bool {
+	for i := 0; i < PartySlots && i < len(s.Actors); i++ {
+		a := s.Actors[i]
+		if a.Side == SideParty && !a.Down() {
+			return false
+		}
+	}
+	return true
 }
 
 // Continue 是滿版怪物圖上按下的那一個鍵：進戰場，並排出第一回合的規劃順序。
