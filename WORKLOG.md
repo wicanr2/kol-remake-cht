@@ -1934,3 +1934,16 @@
   `sub_277F4` 與六張 DGROUP 表），但 remake 還不能實作：缺角色裝備欄的
   typed data（傷害碼、重量、耐久、旗標），敵人 AI 也還沒讀。
 - 探針輸出：`combat-view/fieldraw/los/blit/attack/hit/tables/tables2/bar/cmdbar/iconbars.json`。
+
+## 2026-09-03（續二）：攻擊結算、角色裝備與循路時刻的紅燈
+
+- 近戰結算的數字鏈實作完成（SPEC-009）：攻擊值、防禦值、命中判定、傷害骰、
+  命中部位與部位血量，七張 DGROUP 表原樣抄進 `internal/battle/attack.go`，
+  單元測試逐條驗算。這一份沒有同狀態收據——原版每一步都擲骰，亂數狀態不可重建。
+- 角色檔上穿的東西以前沒有讀出來（`Worn` 只有商店買的那一份）。抽取器補上穿戴欄
+  十格與怪物的技能／武器／護甲，載入時照角色檔補進去。
+- 重跑全部截圖之後發現一個**既有的紅燈**：道路那一份的「循路七步」對不上。
+  原因不是這一輪的改動，而是野外時刻上線之後沒有重生那幾張圖——remake 循路一步
+  扣 52，原版扣 18…20。兩輪原版量測都在第 9 次循路翻時段（`world-road-clock`、
+  `world-road-clock2`）。修法要先追 `sub_29004` 的 ROAD 分支，不是硬塞常數。
+- 探針另外倒出 `combat-tables2/bar/cmdbar/iconbars/skill/world-clock/clock-owners.json`。
