@@ -44,7 +44,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 | `town-rest` | 11 | 進旅店按 REST 住一晚：付掉 56 枚金幣、記下留宿的建築、寫出存檔並逐欄驗證 |
 | `town-mirror` | 10 | 進旅店按 MIRROR 打開角色資料頁，移動白框再選 U-TURN 回建築內 |
 | `town-load` | 7 | 從 `town-rest` 寫出的存檔開場，資料頁上除了金幣那一欄與沒讀檔時逐像素相同 |
-| `town-shop` | 13 | 走進甲冑鋪按 TRADE、移動反白、看明細、買下第一件，金幣與背包都變了 |
+| `town-shop` | 14 | 走進甲冑鋪按 TRADE、移動反白、看明細、買下第一件，扣錢之後直接穿上 |
 | `world-road` | 34 | 出城往北走上道路，連按七次 ROAD 自動循路，再按 SIGNPOST 換另一條 |
 | `full` | 26 | 從標題序列走到城鎮：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走，由 `internal/flow` 串起來 |
 

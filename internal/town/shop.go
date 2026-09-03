@@ -1,6 +1,9 @@
 package town
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 // 商店（RE-075）。TRADE 圖示由建築旗標的 bit1／bit4／bit5 給；bit5 是馬廄、
 // bit4 是賣食物的店。商品表在建築 payload 的 0x100 起，一筆 16 byte；
@@ -30,6 +33,11 @@ const (
 	NutritionNameRecord  = 0xB3 // Poor／Fair／Good／Great
 	ConditionNameRecord  = 0xB7 // Bad／Poor／Worn／New
 	PositionNameRecord   = 0xBB // Head…Food
+	// FitOfferRecord 是 `"If you want this fitted`。
+	FitOfferRecord = 0x33
+	// EquipRecord 是 `"I'll put this on you."`；PackedRecord 是 `"I'll pack it for you."`。
+	EquipRecord  = 0x5C
+	PackedRecord = 0x5D
 )
 
 // BackpackSlots 是背包格數：角色記錄 0xA0 起、一格 16 byte、共六格。
@@ -63,7 +71,9 @@ type Good struct {
 	Condition   int    `json:"condition"`
 	Percent     int    `json:"percent"`
 	Dice        Dice   `json:"dice"`
-	Record      string `json:"record"`
+	// SizeClass 是 rec[14] 的低 nibble：合身的三張表都用它當索引（RE-075）。
+	SizeClass int    `json:"size_class"`
+	Record    string `json:"record"`
 }
 
 // ConditionStep 是狀態名稱的檔次：超過 0x20／0x40／0x80 各加一。
@@ -87,6 +97,8 @@ const (
 	shopList shopStage = iota
 	shopConfirm
 	shopEat
+	// shopFit 是「要合身嗎」那一問。
+	shopFit
 )
 
 // shopState 是一次逛商店的狀態。
@@ -97,6 +109,8 @@ type shopState struct {
 	stage  shopStage
 	// next 是「按空白鍵讀完這一段之後」要做的事。
 	next func()
+	// member／slot／fit 是合身那一問的對象與該有的尺寸。
+	member, slot, fit int
 }
 
 // Shopping 回報現在是不是停在商店的畫面。
@@ -193,6 +207,8 @@ func (s *Session) shopAnswer(id int) {
 			return
 		}
 		s.finishBuy(false)
+	case shopFit:
+		s.fitAnswer(id == IconYes)
 	}
 }
 
@@ -252,12 +268,7 @@ func (s *Session) finishBuy(eaten bool) {
 	}
 	s.Party[i].Backpack = append(s.Party[i].Backpack, g)
 	s.syncParty()
-	// 原版買完之後還有一段：會調整的店（旗標 byte 1 的 bit1）遇到頭／軀幹／腿的
-	// 穿戴品會問「要合身嗎」，不收錢就直接幫你穿上（記錄 0x5C）。那一段還沒實作。
-	if s.door.IconFlags[1]&0x02 != 0 && g.Kind != 0 && g.Position < 3 {
-		s.note("買下之後的合身與穿戴")
-	}
-	s.showShopList()
+	s.offerFit(i, len(s.Party[i].Backpack)-1)
 }
 
 // shopSay 顯示一段話，讀完之後接著做 next。
@@ -346,3 +357,141 @@ func (g Good) Range() string {
 
 // itoa 是數字轉字串，原版用的是 `%d`。
 func itoa(v int) string { return strconv.Itoa(v) }
+
+// 合身與穿戴（RE-075）。買完之後只有「會調整的店」（旗標 byte 1 的 bit1）
+// 遇到頭／軀幹／腿的穿戴品才走這一段，其餘情形買完就結束。
+
+// WornSlots 是穿戴槽位數：部位 0…9 各一格。原版是角色記錄 0x100 + 16 × 部位，
+// 部位 9（腰帶）例外，換到 0x30 那一格。
+const WornSlots = 10
+
+// 合身要用的三張表都在 KOLTOWN 的 DGROUP（RE-075）。
+var (
+	// fitCost 是合身的價錢：[部位][rec[14] 的低 nibble]。
+	fitCost = [3][9]int{
+		{5, 5, 10, 10, 25, 25, 25, 50, 80},
+		{50, 50, 100, 100, 250, 250, 250, 500, 800},
+		{30, 30, 60, 60, 150, 150, 150, 300, 480},
+	}
+	// fitSizeFactor 是 DGROUP+0x116，用低 nibble 查。
+	fitSizeFactor = [9]int{6, 5, 8, 10, 10, 12, 15, 15, 20}
+	// fitPositionFactor 是 DGROUP+0x120，用部位查。
+	fitPositionFactor = [3]int{1, 9, 6}
+)
+
+// FitPositions 是需要合身的部位上限：0 頭、1 軀幹、2 腿。
+const FitPositions = 3
+
+// FitSize 是這件衣物穿在這名角色身上該有的尺寸。
+// `[0x116 + 低 nibble] × [0x120 + 部位] × 體型 / 100`。
+func FitSize(g Good, size int) int {
+	if g.Position >= FitPositions {
+		return 0
+	}
+	return fitSizeFactor[g.Kind4()] * fitPositionFactor[g.Position] * size / 100
+}
+
+// Kind4 是 rec[14] 的低 nibble，合身的三張表都用它當索引。
+func (g Good) Kind4() int {
+	if g.SizeClass < 0 || g.SizeClass >= len(fitSizeFactor) {
+		return 0
+	}
+	return g.SizeClass
+}
+
+// FitCost 是把這件衣物改到合身要花的錢。
+func FitCost(g Good) int {
+	if g.Position >= FitPositions {
+		return 0
+	}
+	return fitCost[g.Position][g.Kind4()]
+}
+
+// offerFit 是買完之後的合身與穿戴。只有會調整的店（旗標 byte 1 的 bit1）
+// 遇到頭／軀幹／腿的東西才走這一段；合身就直接穿上，不合身才問要不要改。
+func (s *Session) offerFit(member, slot int) {
+	g := s.Party[member].Backpack[slot]
+	if s.door.IconFlags[1]&0x02 == 0 || g.Position >= FitPositions {
+		s.showShopList()
+		return
+	}
+	want := FitSize(g, s.memberSize(member))
+	if want == g.Encumbrance {
+		// 本來就合身：直接穿上。
+		s.equip(member, slot)
+		return
+	}
+	s.shop.stage = shopFit
+	s.shop.member, s.shop.slot, s.shop.fit = member, slot, want
+	s.Inside.Detail = nil
+	s.Inside.Dialog = s.priceLines(FitOfferRecord, FitCost(g))
+	s.Inside.DialogZh = nil
+	s.setInsideIcons([]int{IconYes, IconNo})
+}
+
+// fitAnswer 是「要合身嗎」的回答。
+func (s *Session) fitAnswer(yes bool) {
+	sh := s.shop
+	member, slot := sh.member, sh.slot
+	g := s.Party[member].Backpack[slot]
+	cost := FitCost(g)
+	if !yes {
+		s.packIt()
+		return
+	}
+	if s.Party[member].Gold < cost {
+		s.shopSay(nonEmpty(s.uiLines(NotEnoughRecord)), s.packIt)
+		return
+	}
+	s.Party[member].Gold -= cost
+	s.Party[member].Backpack[slot].Encumbrance = sh.fit
+	s.syncParty()
+	s.equip(member, slot)
+}
+
+// packIt 是不改也不穿：東西留在背包裡（記錄 0x5D）。
+func (s *Session) packIt() {
+	s.Inside.Detail = nil
+	s.shopSay(nonEmpty(s.uiLines(PackedRecord)), s.showShopList)
+}
+
+// equip 把背包那一格與對應的穿戴槽對調，與原版 `sub_19A87` 相同。
+func (s *Session) equip(member, slot int) {
+	m := &s.Party[member]
+	g := m.Backpack[slot]
+	if g.Position < 0 || g.Position >= WornSlots {
+		s.showShopList()
+		return
+	}
+	worn := m.Worn[g.Position]
+	m.Backpack = append(m.Backpack[:slot], m.Backpack[slot+1:]...)
+	if worn != nil {
+		m.Backpack = append(m.Backpack, *worn)
+	}
+	item := g
+	m.Worn[g.Position] = &item
+	s.syncParty()
+	s.Inside.Detail = nil
+	s.shopSay(nonEmpty(s.uiLines(EquipRecord)), s.showShopList)
+}
+
+// memberSize 是角色的體型（角色記錄 0x1F）。沒有資料頁就當 0，合身一定不成立。
+func (s *Session) memberSize(i int) int {
+	if s.Party[i].Sheet == nil {
+		return 0
+	}
+	return s.Party[i].Sheet.Stats[StatSize]
+}
+
+// priceLines 組出「開場 ＋ 要花你 N 枚金幣，有意思嗎？」，與住宿、治療同一套。
+func (s *Session) priceLines(intro, price int) []string {
+	lines := nonEmpty(s.uiLines(intro))
+	cost := strings.TrimSpace(s.uiRecord(CostPrefix))
+	amount := strconv.Itoa(price)
+	suffix := nonEmpty(s.uiLines(CostSuffix))
+	if s.Trans.UIRecord(CostSuffix) != "" && len(suffix) == 1 {
+		return append(lines, strings.TrimSpace(cost+" "+amount+" "+suffix[0]))
+	}
+	lines = append(lines, strings.TrimSpace(cost+" "+amount))
+	return append(lines, suffix...)
+}

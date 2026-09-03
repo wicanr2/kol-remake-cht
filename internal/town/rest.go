@@ -1,10 +1,5 @@
 package town
 
-import (
-	"strconv"
-	"strings"
-)
-
 // REST 的三條路（RE-073、SPEC-006）。圖示列上的 REST 在客棧與修道院都會出現，
 // 按下去之後看建築旗標分岔：bit6 是修道院（治療），bit3 是客棧（住宿存檔）。
 
@@ -159,17 +154,7 @@ func (s *Session) stayNext() {
 // 6 行 × 22 個字格，數字與量詞放得下同一行，拆開反而讀不順——所以有譯文時
 // 併成一行，沒有譯文（嚴格對拍的英文模式）就照原版拆。
 func (s *Session) askPrice(intro int) {
-	lines := nonEmpty(s.uiLines(intro))
-	cost := strings.TrimSpace(s.uiRecord(CostPrefix))
-	amount := strconv.Itoa(s.rest.price)
-	suffix := nonEmpty(s.uiLines(CostSuffix))
-	if s.Trans.UIRecord(CostSuffix) != "" && len(suffix) == 1 {
-		lines = append(lines, strings.TrimSpace(cost+" "+amount+" "+suffix[0]))
-	} else {
-		lines = append(lines, strings.TrimSpace(cost+" "+amount))
-		lines = append(lines, suffix...)
-	}
-	s.Inside.Dialog = lines
+	s.Inside.Dialog = s.priceLines(intro, s.rest.price)
 	s.Inside.DialogZh = nil
 	s.setInsideIcons([]int{IconYes, IconNo})
 }

@@ -1,9 +1,9 @@
 {
   "schema": "kol-player-path-v1",
   "name": "town-shop",
-  "description": "讀存檔開場在城 1 的魯德曼甲冑鋪門邊，走進去按 TRADE 看商品清單：上下移動反白、選第一件看明細、答應買下。買完扣掉 32 枚金幣、東西進背包，畫面回到清單。全程只經過 town.Session。存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,24,52 --out workplace/saves/shop.json` 產生。",
-  "script": "L RET SPACE > > > > RET D U RET RET",
-  "step_count": 13,
+  "description": "讀存檔開場在城 1 的魯德曼甲冑鋪門邊，走進去按 TRADE 看商品清單：上下移動反白、選第一件看明細、答應買下。買完扣掉 32 枚金幣；毛皮帽的尺寸剛好合身，店家直接幫他穿上，讀完那一句回到清單。全程只經過 town.Session。存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,24,52 --out workplace/saves/shop.json` 產生。",
+  "script": "L RET SPACE > > > > RET D U RET RET SPACE",
+  "step_count": 14,
   "checkpoints": [
     {
       "step": 8,
@@ -14,6 +14,11 @@
       "step": 11,
       "identical_to": "docs/verification/remake-parity/shots/town-shop/detail.png",
       "note": "商品明細，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 12,
+      "identical_to": "docs/verification/remake-parity/shots/town-shop/bought.png",
+      "note": "買完直接穿上，與已對拍的截圖逐 byte 相同"
     }
   ],
   "save": null,
@@ -95,6 +100,12 @@
       "step": 12,
       "token": "RET",
       "file": "docs/verification/player-path/town-shop/step-012.png",
+      "sha256": "aea6ce3e5c2fc8abd39765ce6ea7a6de2390f1feafe233c8181c337c3a7de801"
+    },
+    {
+      "step": 13,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-shop/step-013.png",
       "sha256": "d7558b9c9cec7288739d475a257574394db776d64dec9879bd291714bfa4a48e"
     }
   ]

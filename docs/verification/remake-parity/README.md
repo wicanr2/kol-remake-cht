@@ -60,12 +60,12 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `town-recruit.json`（招募同伴的三個畫面，對 `town-recruit-companion-run1`） | 9 | 9 |
 | `town-rest.json`（住宿、存檔與離開詢問，對 `town-rest-run1`／`town-rest-two-run1`） | 11 | 11 |
 | `town-mirror.json`（MIRROR 的角色資料頁，對 `town-mirror-run1`） | 8 | 8 |
-| `town-shop.json`（商店的清單與明細，對 `town-shop-run2`） | 6 | 6 |
+| `town-shop.json`（商店的清單、明細與穿上，對 `town-shop-run2`） | 8 | 8 |
 | `world.json`（野外地圖畫面，對 `town-leave-run1`） | 4 | 4 |
 | `world-road.json`（ROAD／SIGNPOST 自動循路，對 `world-road-run1`） | 10 | 10 |
 | `world-town.json`（野外走到城鎮入口與進城，對 `world-enter-town-run1`） | 7 | 7 |
 
-二十一份收據 265 對畫面，允許差異區之外都是**零像素差**。
+二十一份收據 267 對畫面，允許差異區之外都是**零像素差**。
 
 `world.json` 多了一個欄位 `compare`：每一對只涵蓋畫面上的一塊矩形。這**不是**
 允許差異區——矩形之外的部分那一對不宣稱，而計畫的 `not_claimed` 要寫明為什麼。
@@ -239,9 +239,10 @@ remake 的這五張圖都用 `-faithful-inn-stay` 產生。預設模式住宿一
 名稱的大小寫也是照碼來的：5-bit 解碼器 `sub_1B94F` 的第二個引數是 1 時
 每個字的第一個字母轉大寫，所以是 `Fur Cap` 而不是 `FUR CAP`；對話走 0，原樣輸出。
 
-**買完之後那一段還沒實作**：會調整的店（旗標 byte 1 的 bit1）遇到頭／軀幹／腿的
-穿戴品會問「要合身嗎」，不收錢就直接幫你穿上（記錄 0x5C）。
-remake 目前買完就回清單，並把這一段記進未實作清單。
+買完之後那一段也對上了：會調整的店先算該有的尺寸
+（`[0x116+低 nibble] × [0x120+部位] × 體型 / 100`），剛好就直接穿上並說
+`"I'll put this on you."`，不合身才問要不要花錢改。ddduhh 的體型 105、
+毛皮帽該有的尺寸 6，與記錄裡的 6 相同，所以原版就是直接穿上——remake 也是。
 
 ## 這份收據不宣稱什麼
 

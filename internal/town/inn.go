@@ -34,6 +34,8 @@ type Member struct {
 	Sheet *Sheet `json:"sheet,omitempty"`
 	// Backpack 是背包裡的東西，上限六格（RE-075）。
 	Backpack []Good `json:"backpack,omitempty"`
+	// Worn 是穿在身上的東西，一個部位一格；nil 代表那個部位是空的。
+	Worn [WornSlots]*Good `json:"worn,omitempty"`
 }
 
 // Inn 是旅店畫面的完整狀態。

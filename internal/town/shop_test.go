@@ -178,3 +178,97 @@ func TestStableNotImplemented(t *testing.T) {
 		t.Fatalf("馬廄應該只記一筆未實作：%v", s.Unimplemented)
 	}
 }
+
+// fitText 是合身那一段用得到的記錄。
+func fitText() *UIText {
+	t := shopText()
+	t.Banks[0].Records = append(t.Banks[0].Records,
+		uiRecord{Index: FitOfferRecord, Text: `"If you want this fitted@`},
+		uiRecord{Index: CostPrefix, Text: "~H0Dit will cost you]"},
+		uiRecord{Index: CostSuffix, Text: `@~H0Dgold, interested?"@`},
+		uiRecord{Index: EquipRecord, Text: `"I'll put this on you."@`},
+		uiRecord{Index: PackedRecord, Text: `"I'll pack it for you."@`})
+	return t
+}
+
+// 尺寸剛好就直接穿上，不收錢也不問（原版的 `sub_157C6` 回 0）。
+func TestShopFitsAndEquips(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x07, 0x02}, armourerGoods())
+	s.UIText = fitText()
+	s.Party[0].Sheet = &Sheet{Stats: [StatCount]int{0, 0, 100, 0, 0, 0, 0}}
+	s.StartShop()
+	yes(s) // 選毛皮帽
+	yes(s) // 買
+	if s.Party[0].Gold != 3000-32 {
+		t.Fatalf("金幣是 %d", s.Party[0].Gold)
+	}
+	if s.Inside.Dialog[0] != `"I'll put this on you."` {
+		t.Fatalf("畫的是 %q", s.Inside.Dialog)
+	}
+	if s.Party[0].Worn[0] == nil || s.Party[0].Worn[0].Name != "Fur Cap" {
+		t.Fatalf("沒有穿上：%+v", s.Party[0].Worn[0])
+	}
+	if len(s.Party[0].Backpack) != 0 {
+		t.Fatalf("穿上之後背包應該是空的，卻有 %d 件", len(s.Party[0].Backpack))
+	}
+}
+
+// 尺寸不合就問要不要改：答應就付錢、改尺寸、穿上。
+func TestShopFitCharges(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x07, 0x02}, armourerGoods())
+	s.UIText = fitText()
+	// 體型 150 → 毛皮帽該有的尺寸是 6 × 1 × 150 / 100 ＝ 9，記錄裡是 6。
+	s.Party[0].Sheet = &Sheet{Stats: [StatCount]int{0, 0, 150, 0, 0, 0, 0}}
+	s.StartShop()
+	yes(s)
+	yes(s)
+	if s.Inside.Dialog[0] != `"If you want this fitted` {
+		t.Fatalf("應該問要不要合身，畫的是 %q", s.Inside.Dialog)
+	}
+	if s.Inside.Dialog[1] != "it will cost you 5" {
+		t.Fatalf("價錢那一行是 %q", s.Inside.Dialog[1])
+	}
+	yes(s)
+	if s.Party[0].Gold != 3000-32-5 {
+		t.Fatalf("金幣是 %d", s.Party[0].Gold)
+	}
+	if s.Party[0].Worn[0] == nil || s.Party[0].Worn[0].Encumbrance != 9 {
+		t.Fatalf("穿上的是 %+v", s.Party[0].Worn[0])
+	}
+}
+
+// 不改就留在背包，講記錄 0x5D。
+func TestShopFitDeclined(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x07, 0x02}, armourerGoods())
+	s.UIText = fitText()
+	s.Party[0].Sheet = &Sheet{Stats: [StatCount]int{0, 0, 150, 0, 0, 0, 0}}
+	s.StartShop()
+	yes(s)
+	yes(s)
+	no(s)
+	if s.Party[0].Worn[0] != nil {
+		t.Fatal("不該穿上")
+	}
+	if len(s.Party[0].Backpack) != 1 {
+		t.Fatalf("應該留在背包，背包有 %d 件", len(s.Party[0].Backpack))
+	}
+	if s.Inside.Dialog[0] != `"I'll pack it for you."` {
+		t.Fatalf("畫的是 %q", s.Inside.Dialog)
+	}
+}
+
+// 不會調整的店買完就結束，不問也不穿。
+func TestShopWithoutFitting(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x07, 0x00}, armourerGoods())
+	s.UIText = fitText()
+	s.Party[0].Sheet = &Sheet{Stats: [StatCount]int{0, 0, 100, 0, 0, 0, 0}}
+	s.StartShop()
+	yes(s)
+	yes(s)
+	if s.Party[0].Worn[0] != nil || len(s.Party[0].Backpack) != 1 {
+		t.Fatalf("不該穿上：穿 %+v 背包 %d", s.Party[0].Worn[0], len(s.Party[0].Backpack))
+	}
+	if s.Inside.List == nil {
+		t.Fatal("買完應該回到清單")
+	}
+}

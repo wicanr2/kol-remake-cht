@@ -119,6 +119,8 @@ def good(rec: bytes, index: int) -> dict:
         "hands": (rec[13] & 2) >> 1,
         "position": position,
         "encumbrance": rec[10],
+        # rec[14] 的低 nibble 是合身三張表的索引（RE-075）。
+        "size_class": rec[14] & 0x0F,
         "condition": rec[11],
         "dice": {"count": count, "sides": sides, "bonus": bonus,
                  "low": max(count + bonus, 0), "high": count * sides + bonus},
