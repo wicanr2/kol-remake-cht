@@ -1,0 +1,143 @@
+# SPEC-006：住宿、治療與存檔格式
+
+狀態：**READY**  
+是否授權實作：**是**（限本規格涵蓋的 REST 三條路、remake 存檔讀寫與原版角色檔匯入；
+買賣、訓練、MIRROR、戰鬥與任務不在範圍內）
+
+## 範圍
+
+本規格定義建築內 REST 圖示的三條路（客棧住宿、修道院治療、隊伍清空後的離開詢問）、
+remake 的存檔檔案格式，以及把原版 `CHARDATA` 轉成 remake 存檔的離線匯入流程。
+證據入口是 `docs/re/RESEARCH-LOG.md` 的 RE-073，以及原版收據
+`docs/verification/character-ui/town-rest-run1` 與 `town-rest-two-run1`。
+
+## 原版行為契約
+
+以下五條全部是 `已證實`（逐指令讀出，並由原版實跑確認）。
+
+1. **REST 由建築旗標分岔。** `payload[0x3C]` 的 bit6 是修道院（治療），
+   bit3 是客棧（住宿）。兩種建築的圖示列上都是同一個 REST 圖示。
+2. **修道院的價錢是「傷勢 × `payload[0x39]`」。** 傷勢為 0 時只講記錄 0x62
+   `"You look fine!"`，不收錢也不問。付款成功後傷勢與位移 0x9F 一起歸零，
+   講記錄 0x63 `"Drink and be healed!"`。七間修道院的費率是 9…12。
+3. **客棧的價錢是 `payload[0x38] << 8 | payload[0x39]`。** 0 代表免費，
+   此時只講記錄 0x38 `just grab an open room!"`。價錢是每人一晚的定價，
+   不隨隊伍人數改變（`town-rest-two-run1` 的兩人隊伍報的仍是 56）。
+4. **金幣是角色自己的錢包**，存在角色記錄位移 0x2A–0x2C 的 24-bit 大端欄位；
+   買不起時講記錄 0x56 `"Sorry, not enough gold crowns!"`，交易不成立。
+5. **住宿即存檔即離隊。** 付完錢之後原版把當下狀態寫回 `chardata` 的同名槽位
+   （欄位表見 RE-073），把角色移出隊伍，隊伍人數減一。隊伍空了就問記錄 0x36
+   `Do you wish to quit?`，回答 YES 交棒回 `kolbook.exe`。
+   隊伍人數大於 1 時，住宿前先問記錄 0x35 `Whole party?`。
+
+問句的圖示列是大拇指朝上／朝下，回傳值 0 是 YES、1 是 NO（`sub_144EF`）。
+
+## remake 的實作契約
+
+### 完全照原版的部分
+
+價錢公式、金幣欄位、傷勢歸零、買不起的分支、免費客棧的分支、`Whole party?`
+的分岔、以及每一句話對應的 KOLDATA 記錄編號與換行位置。
+
+### 唯一的偏離：住宿是否離隊
+
+使用者於 2026-09-03 決定：**住宿存檔之後角色預設留在隊伍裡**，
+並提供設定開關 `faithful_inn_stay` 切回原版行為。
+
+| `faithful_inn_stay` | 行為 |
+|---|---|
+| `false`（預設） | 收費、寫存檔；角色留在隊伍。不問「存到硬碟嗎」，也不問「你要離開嗎」。 |
+| `true` | 完全照原版：問記錄 0x189、角色離隊、隊伍空了問記錄 0x36。 |
+
+`Save character to hard disk?` 是 DOS 磁碟機的產物——原版靠它決定要不要切到 A:，
+兩個答案都會存檔。remake 沒有磁碟機的概念，所以這一問跟離隊、離開遊戲一起
+歸在同一個開關底下。
+
+**與原版對拍一律在 `faithful_inn_stay: true` 的狀態下進行。**
+這條與戰鬥的「忠實 ＋ 可關閉的加速」是同一個原則：便利功能不得改變任何結果，
+對拍時把便利功能關掉就是原版行為。
+
+### 存檔的位置與時機
+
+REST 是 remake 唯一的存檔觸發點，與原版相同。存檔是原子操作：
+先寫暫存檔再 rename；任何一步失敗就整筆不寫，並且不扣錢、不改傷勢。
+
+## 存檔檔案格式
+
+`kol-save-v1`，UTF-8 JSON，兩個空格縮排，人可讀可手改。
+
+```json
+{
+  "schema": "kol-save-v1",
+  "saved_at": "2026-09-03T12:00:00Z",
+  "origin": {"kind": "remake", "note": ""},
+  "settings": {"faithful_inn_stay": false},
+  "world": {"x": 40, "y": 21, "sub_x": 3, "sub_y": 3},
+  "location": {"kind": "town", "town": 7, "entry_point": 3, "x": 31, "y": 10},
+  "party": [
+    {"name": "Theodoric", "portrait": 47, "female": false, "wounds": 0,
+     "gold": 250, "place": "HALFWAY HO", "town_code": "MIN",
+     "building_id": 86, "renown": 0, "spellcaster": false, "speaker": true}
+  ]
+}
+```
+
+欄位契約：
+
+| 欄位 | 型別 | 來源 |
+|---|---|---|
+| `schema` | 字串 | 必須以 `kol-save-v` 開頭；版本不符即失敗，不做寬鬆讀取。 |
+| `origin.kind` | `remake` 或 `imported` | 匯入的存檔另記 `source_sha256` 與 `tool`。 |
+| `settings` | 物件 | 只放 remake 真的會遵守的開關；未知鍵原樣保留，不靜默丟掉。 |
+| `world` | 物件 | 野外座標與次格座標（RE-068／069）。世界時間還沒有規格，格式裡先不放。 |
+| `location.kind` | `town` 或 `world` | `town` 時 `town`／`entry_point`／`x`／`y` 對應角色記錄 0x97／0x13／0x99／0x9C。 |
+| `party[].gold` | 整數 0…16777215 | 角色記錄 0x2A–0x2C 的 24-bit 大端欄位。 |
+| `party[].wounds` | 整數 | 角色記錄 0x1B。 |
+| `party[].place` | 10 字元大寫 | 角色記錄 0x40–0x49；招募清單靠它比對建築。 |
+| `party[].town_code` | 3 字元 | 角色記錄 0x90–0x92 的城鎮代碼（讀出來是 `MIN`、`BRT` 這種）。 |
+| `party[].building_id` | 整數 | 角色記錄 0x2E／0x2F；住宿時寫入建築的 `record_id`。 |
+
+`building_id` 與 `place` 是同一件事的兩種寫法，資料側互相印證：原版 14 名角色中
+12 名的 `building_id` 是 86（0x56 ＝ 半途之家）、`place` 是 `HALFWAY HO`，
+另外兩名是 14（0x0E ＝ 巨魔剋星客棧）、`TROLLSBANE`，與建築 payload 的
+`record_id` 逐一相同。
+
+隊伍上限六名（與 SPEC-005 的儲存區 16 槽是不同的兩個上限）。
+超出上限、欄位缺漏、數值超界一律讀取失敗，不補預設值。
+
+## 原版角色檔匯入
+
+匯入是**離線工具**，不是 runtime 功能——runtime 只讀 typed data、PNG、OGG 與本格式
+的存檔，不解析 `CHARDATA`（沿用 SPEC-005 的契約）。
+
+- 工具：`tools/import_original_characters.py`，唯讀掛載原版輸入，輸出 `kol-save-v1`。
+- 原版檔案**只讀不寫**。remake 在任何情況下都不回寫 `CHARDATA`、`CHARPICS`、
+  `SHLDPICS`、`STEEDPIC`。
+- 只搬有證據的欄位（上表）。沒有 RE 證據的位移**不猜、不補零**：
+  工具遇到被要求輸出卻沒有證據的欄位就失敗，並在收據裡列出缺口。
+- 每次匯入輸出收據：來源檔名、SHA-256、工具版本、命令、槽位數、輸出 SHA-256。
+
+## 驗收條件
+
+1. `internal/save` 的讀寫在單元測試裡涵蓋：正常往返、schema 不符、欄位超界、
+   隊伍超過六名、寫入中途失敗不留半個檔。
+2. 城鎮 REST 的單元測試涵蓋六條分支：免費客棧、收費客棧買得起、買不起、
+   `Whole party?` 兩個答案、修道院無傷、修道院收費治療。
+3. 玩家路徑 `town-rest` 走完：進客棧 → REST → 付錢 → 存檔 → 離開 → 重載，
+   金幣與傷勢與存檔前一致。
+4. 與原版對拍（`faithful_inn_retire: true`）：價格問句、免費客棧、
+   `Whole party?`、`Save character to hard disk?` 四個畫面逐 byte 相同，
+   允許差異只有原版的滑鼠游標。
+5. 中文模式的四個畫面通過 `verify_text_fit.py` 的安全矩形檢查。
+
+## remake 自有的字串
+
+存檔寫入失敗時原版沒有對應的訊息（原版失敗就直接沒有存檔）。remake 多一句
+「存檔失敗，這一晚不算錢。」，並且**不扣錢、不改傷勢、不離隊**。
+這一句只在非對拍路徑出現。
+
+## 不在本規格內
+
+買賣、訓練、AWARD、SCROLL、MIRROR、戰鬥結算、任務進度與世界時間推進。
+存檔 schema 預留 `settings` 與頂層擴充，但**新欄位要等對應規格 READY 才加**，
+不得先寫進格式當佔位。

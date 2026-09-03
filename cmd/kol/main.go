@@ -8,14 +8,15 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"flag"
+	"fmt"
 	"image"
 	"image/draw"
 	"image/png"
-	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -28,11 +29,12 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
-	"github.com/wicanr2/kol-remake-cht/internal/town"
-	"github.com/wicanr2/kol-remake-cht/internal/world"
+	"github.com/wicanr2/kol-remake-cht/internal/save"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/title"
+	"github.com/wicanr2/kol-remake-cht/internal/town"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
 )
 
 type scene string
@@ -178,9 +180,9 @@ func runCharacterWrite(outPath, templatePath string, slot int, contractPath,
 		"character": map[string]any{"name": c.Name, "race": c.Race,
 			"secondary": c.Secondary, "profession_index": c.ProfessionIndex,
 			"primary_internal": c.Primary},
-		"contract": contract,
+		"contract":        contract,
 		"written_offsets": chardata.WrittenOffsets(),
-		"record_hex": hex.EncodeToString(record),
+		"record_hex":      hex.EncodeToString(record),
 	}
 	blob, err := json.MarshalIndent(doc, "", "  ")
 	if err != nil {
@@ -221,17 +223,6 @@ func (c *spriteCache) Get(archive string, index int) (*ebiten.Image, error) {
 
 // applyPlayToken 把腳本 token 套到城鎮狀態機；token 對應原版的鍵盤操作。
 func applyPlayToken(s *town.Session, token string) error {
-	// 招募清單開著的時候方向鍵移動反白，不是走路——原版的清單也是吃上下鍵。
-	if s.Recruiting() {
-		switch token {
-		case "U":
-			s.MoveList(-1)
-			return nil
-		case "D":
-			s.MoveList(1)
-			return nil
-		}
-	}
 	defer func() {
 		// 在城門選了 DOOR 就換到世界地圖。位置是這座城鎮該入城點在世界地圖上的座標。
 		if s.LeftTown && s.World != nil && !s.WorldEntered {
@@ -239,6 +230,7 @@ func applyPlayToken(s *town.Session, token string) error {
 			s.OnLeaveTown(s.LeftGate)
 		}
 	}()
+	// 招募清單開著的時候方向鍵移動反白，不是走路——原版的清單也是吃上下鍵。
 	if s.Recruiting() {
 		switch token {
 		case "U":
@@ -289,6 +281,39 @@ func (g *game) playToken(token string) error {
 		return applyWorldToken(g.worldSession, token)
 	}
 	return applyPlayToken(g.play, token)
+}
+
+// buildSave 把目前的遊玩狀態組成一份存檔（SPEC-006）。人在城裡就記城鎮座標，
+// 走到野外就記世界座標；兩邊都只放有 RE 證據的欄位。
+func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
+	out := save.New()
+	out.SavedAt = time.Now().UTC().Format(time.RFC3339)
+	out.Settings.FaithfulInnStay = faithful
+	if w != nil {
+		t := w.Travel
+		out.World = save.World{X: t.X, Y: t.Y, SubX: t.SubX, SubY: t.SubY}
+	}
+	if s.LeftTown {
+		out.Location = save.Location{Kind: save.LocationWorld}
+	} else {
+		x, y := s.Outdoor.PartyPosition()
+		out.Location = save.Location{Kind: save.LocationTown,
+			Town: s.Outdoor.Town, EntryPoint: s.Outdoor.EntryPoint, X: x, Y: y}
+	}
+	for _, m := range s.Party {
+		out.Party = append(out.Party, save.Member{
+			Name: m.Name, Portrait: m.Portrait, Female: m.Female,
+			Wounds: m.Wounds, Gold: m.Gold, Place: m.Place,
+			TownCode: m.TownCode, BuildingID: m.BuildingID,
+			Renown: m.Renown, Spellcaster: m.Spellcaster, Speaker: m.Speaker,
+		})
+	}
+	// 存檔裡的發言者要明確：畫面上沒有標記時發言者就是隊長，寫進去也照這個規則，
+	// 讀回來才不會變成「沒有人在說話」。
+	if i := out.Speaker(); i >= 0 && !out.Party[i].Speaker {
+		out.Party[i].Speaker = true
+	}
+	return out
 }
 
 // parsePair 解析 `X,Y` 形式的參數。
@@ -376,29 +401,29 @@ type game struct {
 	worldState   *world.Screen
 	worldSession *world.Session
 	worldParty   []town.Member
-	sprites *spriteCache
-	small   *font.Font
-	large   *font.Font
-	cjk     *font.Font
-	strings *i18n.Table
-	roster  *roster.Roster
-	remove  *roster.DeleteFlow
-	inn     *town.Inn
-	outdoor *town.Outdoor
-	play    *town.Session
-	flow    *flow.Flow
-	walkTick   int
-	markerStep int
-	canvas  *screen.Canvas
-	state   *charcreate.State
-	sequence *title.Sequence
-	player   *title.Player
-	book       *book.OpenPlayer
-	bookAnim   *book.OpenAnimation
-	bookWait   float64
-	bookFrom   string // 動畫的起始畫面
-	bookTarget string // 動畫的目標畫面
-	bookLib    *assets.Library
+	sprites      *spriteCache
+	small        *font.Font
+	large        *font.Font
+	cjk          *font.Font
+	strings      *i18n.Table
+	roster       *roster.Roster
+	remove       *roster.DeleteFlow
+	inn          *town.Inn
+	outdoor      *town.Outdoor
+	play         *town.Session
+	flow         *flow.Flow
+	walkTick     int
+	markerStep   int
+	canvas       *screen.Canvas
+	state        *charcreate.State
+	sequence     *title.Sequence
+	player       *title.Player
+	book         *book.OpenPlayer
+	bookAnim     *book.OpenAnimation
+	bookWait     float64
+	bookFrom     string // 動畫的起始畫面
+	bookTarget   string // 動畫的目標畫面
+	bookLib      *assets.Library
 
 	scene    scene
 	portrait int
@@ -895,6 +920,10 @@ func main() {
 	lang := flag.String("lang", "en", "介面語言：en 走原版英文字模的嚴格對拍模式，"+
 		"zh-Hant 走中文模式（畫布放大兩倍、16 px 中文字格，不對拍）")
 	uiFontRoot := flag.String("ui-fonts", "assets/ui-font", "中文 UI 字模表目錄")
+	savePath := flag.String("save", "", "存檔路徑；客棧住宿時寫進這個檔（SPEC-006）")
+	faithfulInn := flag.Bool("faithful-inn-stay", false,
+		"客棧住宿完全照原版：問「存到硬碟嗎」、角色離隊、隊伍空了問是否離開遊戲。"+
+			"與原版對拍時要打開")
 	stringsPath := flag.String("strings", "docs/i18n/newchar-zh-Hant.json",
 		"中文 UI 字串表")
 	flag.Parse()
@@ -948,7 +977,7 @@ func main() {
 				os.Exit(2)
 			}
 			spec = chardata.NewCharacter{Name: st.Name, Race: st.Race,
-				Secondary: st.Secondary,
+				Secondary:       st.Secondary,
 				ProfessionIndex: st.ProfessionRecordIndex()}
 			values := make([]string, 0, 7)
 			for _, v := range st.Primary {
@@ -1300,7 +1329,26 @@ func main() {
 				playSession.Roster = append(playSession.Roster, town.Candidate{
 					Name: slot.Name, Portrait: slot.Portrait,
 					Place: slot.Place, Town: slot.Town,
-					Female: slot.Female, Wounds: slot.Wounds})
+					Female: slot.Female, Wounds: slot.Wounds,
+					Gold: slot.Gold, BuildingID: slot.Building})
+			}
+			// 畫面樣本只寫隊伍有誰，錢包與所在地在角色檔裡——住宿與治療要花的
+			// 就是這一份錢（RE-073），所以照名字補齊。
+			for i := range playSession.Party {
+				for _, c := range playSession.Roster {
+					if c.Name != playSession.Party[i].Name {
+						continue
+					}
+					if playSession.Party[i].Gold == 0 {
+						playSession.Party[i].Gold = c.Gold
+					}
+					if playSession.Party[i].Place == "" {
+						playSession.Party[i].Place = c.Place
+						playSession.Party[i].TownCode = c.Town
+						playSession.Party[i].BuildingID = c.BuildingID
+					}
+					break
+				}
 			}
 		} else {
 			fmt.Fprintln(os.Stderr, err)
@@ -1341,6 +1389,15 @@ func main() {
 				}, info, grid)
 			}
 		}
+		// 住宿存檔（SPEC-006）。沒有給 -save 就不寫檔，流程其餘部分照跑——
+		// 截圖與對拍不需要真的產生存檔。
+		playSession.FaithfulInnStay = *faithfulInn
+		if *savePath != "" {
+			playSession.SaveGame = func() error {
+				return save.Write(*savePath,
+					buildSave(playSession, worldScreenState, *faithfulInn))
+			}
+		}
 		// LISTEN 的挑槽在截圖與玩家路徑裡必須可重播，因此用固定序列而不是真亂數。
 		listenPick := 0
 		playSession.Rand = func(n int) int {
@@ -1373,25 +1430,25 @@ func main() {
 	}
 
 	g := &game{
-		sprites:  &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
-		sequence: sequence,
-		small:    small,
-		large:    large,
-		cjk:      cjk,
-		strings:  table,
-		canvas:   canvasFor(*lang),
-		state:    charcreate.New(data, &lcg{state: uint32(*seed)}),
-		scene:    scene(*sceneName),
-		portrait: *portrait,
-		selected: *menuSelected,
-		roster:   slots,
-		inn:      innState,
-		outdoor:  outdoorState,
-		play:     playSession,
-		flow:     flowState,
+		sprites:      &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
+		sequence:     sequence,
+		small:        small,
+		large:        large,
+		cjk:          cjk,
+		strings:      table,
+		canvas:       canvasFor(*lang),
+		state:        charcreate.New(data, &lcg{state: uint32(*seed)}),
+		scene:        scene(*sceneName),
+		portrait:     *portrait,
+		selected:     *menuSelected,
+		roster:       slots,
+		inn:          innState,
+		outdoor:      outdoorState,
+		play:         playSession,
+		flow:         flowState,
 		worldState:   worldScreenState,
 		worldSession: worldSessionState,
-		worldParty: worldPartyState,
+		worldParty:   worldPartyState,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
@@ -1453,7 +1510,7 @@ func main() {
 			"schema": "kol-title-timeline-v1", "seed": *seed,
 			"thunder_seconds": title.ThunderSeconds, "tick_hz": title.TickHz,
 			"loop_seconds": times[len(times)-1],
-			"frames": frames, "start_seconds": times[:len(times)-1],
+			"frames":       frames, "start_seconds": times[:len(times)-1],
 		}, "", "  ")
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -1506,8 +1563,8 @@ func main() {
 			frame := f
 			log = append(log, frame)
 			g.jobs = append(g.jobs, shotJob{
-				name: fmt.Sprintf("title-%03d", i),
-				path: filepath.Join(*titleShots, fmt.Sprintf("title-%03d.png", i)),
+				name:  fmt.Sprintf("title-%03d", i),
+				path:  filepath.Join(*titleShots, fmt.Sprintf("title-%03d.png", i)),
 				apply: func() { g.frame = frame },
 			})
 		}
@@ -1547,8 +1604,8 @@ func main() {
 		for i, token := range strings.Fields(*flowScript) {
 			tok := token
 			g.jobs = append(g.jobs, shotJob{
-				name: fmt.Sprintf("step-%03d", i+1),
-				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
+				name:  fmt.Sprintf("step-%03d", i+1),
+				path:  filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
 				apply: func() { g.flow.Key(tok) },
 			})
 		}
@@ -1695,8 +1752,8 @@ func main() {
 		for i := 0; i < lib.Count("CHARPICS"); i++ {
 			index := i
 			g.jobs = append(g.jobs, shotJob{
-				name: fmt.Sprintf("newchar-%03d", i),
-				path: filepath.Join(*shotDir, fmt.Sprintf("newchar-%03d.png", i)),
+				name:  fmt.Sprintf("newchar-%03d", i),
+				path:  filepath.Join(*shotDir, fmt.Sprintf("newchar-%03d.png", i)),
 				apply: func() { g.scene, g.portrait = sceneNewChar, index },
 			})
 		}

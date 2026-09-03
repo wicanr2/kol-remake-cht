@@ -2517,3 +2517,117 @@ Moraine 與 Shyla 為 1，與 RE-067 由招呼語推出的性別一致。
 `plan-town-recruit` 九對全過：問句、清單、反白移動、加入之後的隊員格、
 標題框、招呼語與圖示列，逐 byte 相同，允許差異只有原版的滑鼠游標。
 玩家路徑 `town-recruit` 14 步。
+
+## RE-073：客棧住宿與修道院治療——價錢從哪來、存檔寫了什麼
+
+輸入與工具同 RE-070。新增探針 `tools/ida_probe_koltown_rest_save.py`，
+把 `sub_14DB1`（415 條）與 `sub_13E82`、`sub_144EF`、`sub_14D3A`、`sub_14CCF`
+完整倒出，並附每一個 `sub_1A8FD` 呼叫點畫的是哪一筆 UI 記錄。
+證據等級 `已證實`（價錢公式由 15 棟建築的資料與原版實跑一致確認，
+存檔欄位逐指令讀出）。
+
+### REST 是三條路，由建築旗標分岔
+
+圖示列上的 REST 在兩種建築都會出現（`payload[0x3C]` 的 bit3 與 bit6，
+見 RE-067）。按下去之後 `sub_11A93:0x1264E` 先看 bit6：
+
+| 旗標 | 建築 | 行為 |
+|---|---|---|
+| bit6（0x40） | 修道院 | 治療。傷勢 0 就只講記錄 0x62，不收錢。 |
+| bit3（0x08） | 客棧 | 住一晚：收錢、寫存檔、角色離隊。 |
+
+### 修道院：每一點傷勢一個價
+
+```
+wounds = party[speaker][0x1B]
+if wounds == 0: say(62h); return                 ; 0x12675
+price  = wounds * payload[0x39]                  ; 0x126A3，8-bit 乘法
+say(39h); say(53h); print(price); say(54h)       ; "If you need healing…it will cost you…gold, interested?"
+if answer != YES: return                         ; 0x12717
+if price > gold: say(56h); return                ; "Sorry, not enough gold crowns!"
+gold -= price                                    ; 0x1276E
+party[speaker][0x1B] = 0; party[speaker][0x9F] = 0
+say(63h)
+```
+
+七間修道院的 `payload[0x39]` 是 9…12，也就是每一點傷勢 9 到 12 枚金幣。
+
+### 客棧：價錢是 payload 的一個 16-bit 欄位
+
+```
+price = payload[0x38] << 8 | payload[0x39]       ; sub_14DB1:0x14E38
+say(37h)                                         ; '"If you want to stay@'
+if price == 0: say(38h)                          ; '~H0Djust grab an open room!"@'
+else:
+    say(53h); print(price); say(54h)
+    if answer != YES: return
+    if price > gold: say(56h); return
+    gold -= price
+```
+
+八座城鎮共 10 間客棧，價錢 0、56、57、60、60、65、75、120。
+半途之家（TOWN7 門 5）是 0x00 0x38 ＝ 56，與 `town-rest-run1` 畫面上的
+「it will cost you 56 gold」相同；同一次以兩人隊伍再跑一次（`town-rest-two-run1`），
+答完 `Whole party?` 之後報的仍是 56——**價錢是每人一晚的定價，不隨人數改變**。
+
+隊伍人數大於 1 時先問記錄 0x35 `Whole party?`（`0x127C3`）。
+回答 YES 就對六個槽位逐一跑住宿流程，NO 只跑目前發言的那一位。
+
+### 金幣是角色自己的錢包
+
+`sub_14CCF` 與 `sub_14D3A` 是同一個欄位的讀寫：角色記錄位移 0x2A、0x2B、0x2C
+是**高位元組在前的 24-bit 金幣**。交易前 `sub_14CCF` 把它讀進
+`word_30A6E:word_30A70`，交易後 `sub_14D3A` 寫回去。所以原版沒有共用錢包，
+花的是當下那位發言者的錢。
+
+### YES／NO 的回傳值
+
+`sub_144EF` 推兩個圖示（7 大拇指朝上、8 朝下）之後等選擇，回傳值減 7：
+**0 是 YES，1 是 NO**。價格問句、`Whole party?`、`Save character to hard disk?`
+與 `Do you wish to quit?` 共用這一支。
+
+### 住宿寫進存檔的欄位
+
+付完錢之後 `sub_14DB1` 做的是完整的存檔（`0x14F74` 起）：
+
+1. `int 21h/19h` 取得目前磁碟機。若不是 A:／B:（`var_A > 1`）就問記錄 0x189
+   `Save character to hard disk?`；回答 NO 才 `int 21h/0Eh` 切到 A:。
+2. 讀 `chardata`（16 × 0x300 byte）到緩衝區，逐槽比對前 16 個 byte 的名字，
+   找到同名的槽就覆寫；找不到就用 `byte_30C20` 為 0 的第一個空槽；
+   兩者都沒有就講記錄 0x64 並放棄。
+3. 把當下的狀態寫進角色記錄：
+
+   | 位移 | 內容 | 來源 |
+   |---|---|---|
+   | 0x2A–0x2C | 金幣（24-bit，高位在前） | `sub_14D3A` |
+   | 0x2E–0x2F | 建築編號 | `payload[0x3A]／[0x3B]` |
+   | 0x40–0x49 | 所在地（建築名前 10 字元轉大寫） | 建築名字串 |
+   | 0x13 | 入城點 | `word_2DF62` |
+   | 0x14／0x15／0x17／0x18 | 鏡頭夾限 | `word_2DF68／6A／66／6C` |
+   | 0x90–0x92 | 三字母城鎮代碼 | `byte_349AE／AF／B0` |
+   | 0x94 | 顯示模式 | `word_3B266` |
+   | 0x97 | 城鎮編號 | `word_2DF2C` |
+   | 0x99 | 城內 X | `word_2FB50 + word_2DF36` |
+   | 0x9C | 城內 Y | `word_2FB56 + word_2DF38` |
+
+4. `rep movsw` 把 0x300 byte 的角色記錄複製進緩衝區的那一槽，寫回 `chardata`；
+   接著用同一個槽號（× 0x2F8）把 `steedpic`、`charpics`、`shldpics`
+   三份 16 × 0x2F8 的圖檔一起改寫。
+5. `party[slot][0] = 0`、`word_2DF2A -= 1`——**住宿存檔會把角色移出隊伍**。
+   隊伍空了之後 `0x128AA` 問記錄 0x36 `Do you wish to quit?`，
+   回答 YES 就 `sub_2DB2A("kolbook.exe", 0)` 交棒回書本程式。
+
+這一串就是原版唯一的存檔入口：**住宿即存檔即離隊**。
+
+### 資料側的三個交叉驗證
+
+把上表拿去讀原版的 `CHARDATA` 就對得起來，而且對出兩件原本不知道的事：
+
+* **0x2E／0x2F 就是建築 payload 的 `record_id`。** 14 名角色中 12 名是 86（0x56 ＝
+  半途之家）、`place` 欄是 `HALFWAY HO`；另外兩名是 14（0x0E ＝ 巨魔剋星客棧）、
+  `TROLLSBANE`。與建築 payload 讀出來的 `record_id` 逐一相同。
+* **0x97／0x13／0x99／0x9C 是城鎮、入城點與城內座標。** Theodoric 讀出來是
+  城鎮 7、入城點 3、座標 (57, 8)——正是 TOWN7 半途之家那扇門的座標。
+* **0x90–0x92 是三字母城鎮代碼，不是日期。** 讀出來是 `MIN`，與角色清單畫面
+  右欄顯示的城鎮代碼相同；`sub_14DB1:0x15101` 寫進去的 `byte_349AE/AF/B0`
+  因此是當下城鎮的代碼。原版記錄裡目前**沒有**定位到日期欄位。

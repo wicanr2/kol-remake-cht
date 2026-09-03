@@ -261,6 +261,46 @@ SCENARIOS: dict[str, dict] = {
             step("選定第一名同伴之後", None, settle=4.0),
         ],
     },
+    "town-rest-save": {
+        "description": "在旅店把白框移到 REST 按下去，觀察「誰要留宿」的選單、"
+                       "金幣不足會怎樣、以及選全隊之後那一問。會保存角色檔，"
+                       "因此收據會記下檔案有變動——遊戲副本在容器 tmpfs，原版 ZIP 唯讀。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格", "greater", settle=1.5),
+            step("白框第 3 格", "greater", settle=1.5),
+            step("白框第 4 格", "greater", settle=1.5),
+            step("白框第 5 格（REST）", "Return", settle=4.0),
+            step("按下 REST 之後", "Return", settle=4.0),
+        ] + [
+            step(f"再按 Return 第 {i} 次", "Return", settle=3.0) for i in range(2, 6)
+        ] + [
+            step("連按之後的畫面", "Escape", settle=3.0),
+            step("按 Escape 之後", None, settle=4.0),
+        ],
+    },
+    "town-rest-two": {
+        "description": "先招募一名同伴再按 REST，看住宿費是不是按人頭算。"
+                       "只看價目那一句，不回答，直接離開。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格", "greater", settle=1.5),
+            step("白框第 3 格", "greater", settle=1.5),
+            step("白框第 4 格", "greater", settle=1.5),
+            step("白框第 5 格", "greater", settle=1.5),
+            step("白框第 6 格（COMPANION）", "Return", settle=4.0),
+            step("是否搜尋硬碟角色", "Return", settle=4.0),
+            step("同伴清單（反白第 1 名）", "Return", settle=4.0),
+            step("加入第一名同伴之後", "greater", settle=1.5),
+            step("白框第 2 格", "greater", settle=1.5),
+            step("白框第 3 格", "greater", settle=1.5),
+            step("白框第 4 格", "greater", settle=1.5),
+            step("白框第 5 格（REST）", "Return", settle=4.0),
+            step("兩人隊伍按下 REST：整隊嗎？", "Return", settle=4.0),
+            step("回答整隊之後（觀察價目）", "Escape", settle=4.0),
+            step("按 Escape 之後", None, settle=3.0),
+        ],
+    },
     "town-recruit-list": {
         "description": "在旅店打開同伴清單，一路往下按到底再往上按到底，"
                        "觀察清單超過一頁時怎麼捲、兩端會不會繞回；"

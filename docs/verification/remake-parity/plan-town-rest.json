@@ -1,0 +1,180 @@
+{
+  "name": "town-rest",
+  "description": "客棧住宿與存檔的四個畫面（SPEC-006／RE-073）。半途之家的住宿費是建築 payload 位移 0x38／0x39 的 16-bit 欄位，讀出來是 56；價錢問句由 KOLDATA 記錄 37h、53h、數字、54h 四段組成，圖示列換成大拇指朝上與朝下。答應之後原版問 189h『存到硬碟嗎』，兩個答案都會存檔；存完角色離隊，隊伍空了問 36h『你要離開嗎』。兩人隊伍先問 35h『全隊嗎』，答應之後逐位跑同一套問答，而且每換一位就把隊員格的白框移到那一位（`sub_11A93:0x127E5` 的 `sub_13E82`）——報的價錢仍是 56，不隨人數改變。remake 的對拍一律開 `-faithful-inn-stay`；預設模式住宿不離隊。",
+  "input": {
+    "command": "tools/run_kol_shots.sh workplace/specs/rest-parity.txt（-scene play -faithful-inn-stay）"
+  },
+  "pairs": [
+    {
+      "label": "住宿價錢：對話框",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/price.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-075.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 101,
+          "width": 12,
+          "height": 12
+        }
+      ]
+    },
+    {
+      "label": "住宿價錢：大拇指圖示列",
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/price.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-075.png"
+    },
+    {
+      "label": "住宿價錢：隊員格",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/price.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-075.png"
+    },
+    {
+      "label": "存到硬碟嗎：對話框",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/disk.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-076.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 101,
+          "width": 12,
+          "height": 12
+        }
+      ]
+    },
+    {
+      "label": "存到硬碟嗎：大拇指圖示列",
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/disk.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-076.png"
+    },
+    {
+      "label": "你要離開嗎：對話框",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/quit.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-077.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 101,
+          "width": 12,
+          "height": 12
+        }
+      ]
+    },
+    {
+      "label": "你要離開嗎：隊員格已空",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/quit.png",
+      "original": "docs/verification/character-ui/town-rest-run1/frames/frame-077.png"
+    },
+    {
+      "label": "全隊嗎：對話框",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-party.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-084.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 101,
+          "width": 12,
+          "height": 12
+        }
+      ]
+    },
+    {
+      "label": "全隊嗎：兩位隊員與白框",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-party.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-084.png"
+    },
+    {
+      "label": "全隊之後的價錢：對話框",
+      "compare": {
+        "x": 96,
+        "y": 80,
+        "width": 224,
+        "height": 80
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-price.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-085.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 101,
+          "width": 12,
+          "height": 12
+        }
+      ]
+    },
+    {
+      "label": "全隊之後的價錢：白框移到第一位",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 48
+      },
+      "remake": "docs/verification/remake-parity/shots/town-rest/whole-price.png",
+      "original": "docs/verification/character-ui/town-rest-two-run1/frames/frame-085.png"
+    }
+  ]
+}

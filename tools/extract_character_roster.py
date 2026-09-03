@@ -45,6 +45,11 @@ TOWN_OFFSET, TOWN_BYTES = 144, 3
 # 位移 0x1A 是性別、0x1B 是傷勢。傷勢非 0 時旅店的招呼語換成
 # 「"You are hurt! You should go to the abbey."」（KOLDATA 2Bh／2Ch，`sub_11A93:0x11F47`）。
 FEMALE_OFFSET, WOUNDS_OFFSET = 0x1A, 0x1B
+# 位移 0x2A–0x2C 是金幣，高位元組在前的 24-bit。`sub_14CCF` 讀進來、
+# `sub_14D3A` 寫回去，客棧住宿與修道院治療花的就是這個欄位（RE-073）。
+GOLD_OFFSET, GOLD_BYTES = 0x2A, 3
+# 位移 0x2E／0x2F 是角色留宿的建築編號，來自建築 payload 的 0x3A／0x3B。
+BUILDING_OFFSET = 0x2E
 # 存檔的頭像檔：一格 760 byte，與模板庫同一種 packed-nibble 版面。
 CHARPICS_NAME = "Knights-of-legend/CHARPICS"
 PORTRAIT_BYTES = 760
@@ -115,6 +120,10 @@ def main() -> int:
             "occupied": name != "", "portrait": portrait,
             "female": data[base + FEMALE_OFFSET] != 0,
             "wounds": data[base + WOUNDS_OFFSET],
+            "gold": int.from_bytes(
+                data[base + GOLD_OFFSET:base + GOLD_OFFSET + GOLD_BYTES], "big"),
+            "building": int.from_bytes(
+                data[base + BUILDING_OFFSET:base + BUILDING_OFFSET + 2], "big"),
         })
 
     occupied = [s["name"] for s in slots if s["occupied"]]
@@ -140,7 +149,11 @@ def main() -> int:
                    "name_offset": NAME_OFFSET, "place_offset": PLACE_OFFSET,
                    "place_bytes": PLACE_BYTES, "town_offset": TOWN_OFFSET,
                    "town_bytes": TOWN_BYTES,
-                   "female_offset": FEMALE_OFFSET, "wounds_offset": WOUNDS_OFFSET},
+                   "female_offset": FEMALE_OFFSET, "wounds_offset": WOUNDS_OFFSET,
+                   "gold_offset": GOLD_OFFSET, "gold_bytes": GOLD_BYTES,
+                   "gold_rule": "高位元組在前的 24-bit 金幣（RE-073）",
+                   "building_offset": BUILDING_OFFSET,
+                   "building_rule": "留宿建築的編號，來自建築 payload 的 0x3A／0x3B"},
         "location_rule": "畫面上的所在地欄是「10 byte 所在地 + 一個空白 + 3 byte 城鎮代碼」，"
                          "共 14 個字元；所在地欄不以 NUL 結尾，取固定長度。",
         "slots": slots,

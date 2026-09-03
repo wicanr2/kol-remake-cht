@@ -14,13 +14,22 @@ type Member struct {
 	Speaker  bool   `json:"speaker"`
 	// Female 與 Spellcaster 決定店主的招呼語（RE-067）：角色記錄位移 0x1A 是性別，
 	// 0x1A0 非零代表會法術，兩者一起選出訊息 10…13。
-	Female     bool `json:"female"`
+	Female      bool `json:"female"`
 	Spellcaster bool `json:"spellcaster"`
 	// Renown 是聲望等第 0…3。非 0 時招呼語改成訊息 26 + 等第。
 	Renown int `json:"renown"`
 	// Wounds 是角色記錄位移 0x1B 的傷勢。非 0 時招呼語整段換成 KOLDATA 的
 	// 2Bh＋2Ch「你受傷了，該去修道院」；建築本身能治療（旗標 bit6）時換成 72h。
 	Wounds int `json:"wounds"`
+	// Gold 是角色自己的錢包（角色記錄 0x2A–0x2C 的 24-bit 大端）。原版沒有共用
+	// 錢包，住宿與治療花的是當下發言者的錢（RE-073）。
+	Gold int `json:"gold,omitempty"`
+	// Place 是角色記錄 0x40–0x49 的所在地欄，10 個大寫字元；住宿之後會換成
+	// 這一間客棧的名字。TownCode 是三字母城鎮代碼。
+	Place    string `json:"place,omitempty"`
+	TownCode string `json:"town_code,omitempty"`
+	// BuildingID 是留宿建築的編號，來自建築 payload 的 0x3A／0x3B。
+	BuildingID int `json:"building_id,omitempty"`
 }
 
 // Inn 是旅店畫面的完整狀態。

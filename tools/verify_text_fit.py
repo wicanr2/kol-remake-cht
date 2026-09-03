@@ -176,6 +176,31 @@ def main() -> int:
                                    "overflow": max(0, bottom - limit_y),
                                    "missing_glyphs": [], "pass": bottom <= limit_y})
 
+    # KOLDATA 的譯文也畫在同一個對話框（招呼語、住宿與治療的問答）。
+    # 野外標籤那一段（0xD5–0xE1）另有自己的框，這裡跳過。
+    for path in args.town_i18n:
+        doc = json.loads(pathlib.Path(path).read_text())
+        if not inn:
+            break
+        dialog_right = inn["DialogX"] + inn["DialogW"] - 1
+        ui = doc.get("ui") or {}
+        texts = [(f"記錄 {int(k):#x}", v) for k, v in sorted(ui.items(), key=lambda kv: int(kv[0]))
+                 if not 0xD5 <= int(k) <= 0xE1]
+        # 價錢句是「前綴 ＋ 數字 ＋ 後綴」組出來的，要檢查組完的那一行。
+        # 最貴的情形是修道院的 20 點傷勢 × 12，四位數留給日後的價格上調。
+        prefix, suffix = ui.get("83"), ui.get("84")
+        if prefix and suffix:
+            texts.append(("價錢句（四位數）", f"{prefix} 9999 {suffix}"))
+        for tag, text in texts:
+            w, missing = width(text)
+            checks.append({"kind": "dialog-ui", "en": f"{path} {tag}", "zh": text,
+                           "x": inn["DialogTextX"], "width": w,
+                           "right_limit": dialog_right,
+                           "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
+                           "missing_glyphs": missing,
+                           "pass": inn["DialogTextX"] + w <= dialog_right
+                                   and not missing})
+
     # 戶外畫面的日期框：兩行中文字，安全矩形是框的內緣。
     outdoor = layout_doc.get("town_outdoor")
     for path in args.town_sample:

@@ -208,7 +208,13 @@
   清單一次八列、兩端夾住、反白到底才捲；加入之後新成員成為發言者，
   招呼語依角色記錄位移 0x1B 的傷勢換成「你受傷了」。建築內的圖示列現在吃
   `<`／`>` 與 Return，選到還沒實作的圖示會記進 `Session.Unimplemented`。
-- [ ] 建築內其餘圖示：MIRROR（角色資料）、REST／SAVE／HEAL、買賣與訓練。
+- [x] REST 已實作並對拍（RE-073／SPEC-006）：客棧住一晚的價錢是建築 payload
+  位移 0x38／0x39 的 16-bit 欄位（半途之家 56，八座城 10 間是 0…120），
+  修道院是「傷勢 × payload[0x39]」；金幣是角色自己的錢包（角色記錄 0x2A–0x2C 的
+  24-bit 大端）。付完錢寫存檔，原版還會把角色移出隊伍——那一段做成
+  `faithful_inn_stay` 開關，預設不離隊，對拍時打開。
+  對拍 `town-rest` 11 對全過，玩家路徑 `town-rest` 11 步（含存檔逐欄驗證）。
+- [ ] 建築內其餘圖示：MIRROR（角色資料）、買賣、訓練、AWARD 與 SCROLL。
 - [x] 城鎮已可實際操作：`town.Session` 三種模式（地圖／門口／建築內），方向鍵與斜走鍵
   走動、`<`／`>` 移動白框、Return 執行。鏡頭跟隨的規則「偏移夾在 0…1、多出來由鏡頭
   吸收」直接重播 oracle 序列通過（強推論）。14 步玩家路徑收據，其中兩步與已對拍截圖
@@ -242,9 +248,11 @@
   時段／地形標籤（中文兩個字要 32 px，英文版面的 67×15 放不下），地圖與圖示列
   沿用城鎮中文版面的兩倍尺寸。五個時段與八種地形的譯文已進 `docs/i18n/town-zh-Hant.json`，
   字模表重烘後 `verify_text_fit.py` 1,789 項全過。
-- [ ] 圖示列其餘五個圖示、隊伍上限六人、發言者切換與 `REST/SAVE/HEAL` 的寫入。
-- [ ] remake 自己的存檔格式：目前的 writer 是為對拍而寫的原版格式輸出；正式 schema 屬
-  共同決策，尚未決定。
+- [ ] 圖示列其餘四個圖示（MIRROR、買賣、訓練、AWARD／SCROLL）與隊伍上限六人的邊界。
+- [x] remake 自己的存檔格式已定案並實作（SPEC-006）：`kol-save-v1` 是可讀的 JSON，
+  `internal/save` 負責原子讀寫，`tools/import_original_characters.py` 從原版
+  `CHARDATA` 離線匯入。原版檔案一律唯讀，runtime 不解析原版格式。
+- [ ] 讀檔回到遊戲：存檔寫得出來也讀得回來，但「載入存檔繼續玩」這條路徑還沒接上。
 - [ ] 量測其餘畫面（城鎮、世界、戰鬥）的文字版面。
 - [x] 繁中雙模式：英文模式 320×200 走原版字模與嚴格對拍；中文模式 640×400、16×18
   中文字模格。字模由 `tools/build_cjk_font.py` 從 Noto Sans CJK TC 烘成點陣表，
@@ -297,7 +305,8 @@
 
 等使用者決策才能動的項目（不擋上面的工作）：
 
-1. remake 正式存檔 schema（SPEC-005 共同決策）。
-2. 戰鬥節奏與忠實度方向（原版繁複節奏是否保留、是否提供可選加速）。
-3. `assets/audio/title-thunder.ogg` 的人耳驗收，通過才把 SPEC-004 升 READY。
-4. 原版衍生 typed data 的權利分類（六份本機 JSON 是否比照 PNG 進 private repo）。
+1. `assets/audio/title-thunder.ogg` 的人耳驗收，通過才把 SPEC-004 升 READY。
+2. 原版衍生 typed data 的權利分類（六份本機 JSON 是否比照 PNG 進 private repo）。
+
+已於 2026-09-03 決定的三項（見 `CONTEXT.md` 的「已定案的共同決策」）：
+存檔格式、戰鬥忠實度與加速開關、客棧住宿是否離隊。

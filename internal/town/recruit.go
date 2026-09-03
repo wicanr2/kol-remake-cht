@@ -35,6 +35,10 @@ type Candidate struct {
 	Town     string
 	Female   bool
 	Wounds   int
+	// Gold 是角色自己的錢包；招募進來之後住宿與治療花的就是這一份（RE-073）。
+	Gold int
+	// BuildingID 是角色檔記下的留宿建築編號。
+	BuildingID int
 }
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。
@@ -163,7 +167,8 @@ func (s *Session) joinSelected() {
 		s.Party[i].Speaker = false
 	}
 	s.Party = append(s.Party, Member{Name: c.Name, Portrait: c.Portrait,
-		Female: c.Female, Wounds: c.Wounds, Speaker: true})
+		Female: c.Female, Wounds: c.Wounds, Gold: c.Gold, Place: c.Place,
+		TownCode: c.Town, BuildingID: c.BuildingID, Speaker: true})
 	s.Inside.Party = s.Party
 	s.recruit, s.asking = nil, false
 	s.Inside.List = nil

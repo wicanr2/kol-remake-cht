@@ -57,9 +57,13 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `town-building.json`（建築進門，對 `town-enter-building-run1`） | 1 | 1 |
 | `town-edge.json`（地圖邊界的城門提示，對 `town-map-edge-run1`） | 4 | 4 |
 | `town-listen.json`（招呼語與 LISTEN，對 `town-listen-run1`） | 3 | 3 |
+| `town-recruit.json`（招募同伴的三個畫面，對 `town-recruit-companion-run1`） | 9 | 9 |
+| `town-rest.json`（住宿、存檔與離開詢問，對 `town-rest-run1`／`town-rest-two-run1`） | 11 | 11 |
 | `world.json`（野外地圖畫面，對 `town-leave-run1`） | 4 | 4 |
+| `world-road.json`（ROAD／SIGNPOST 自動循路，對 `world-road-run1`） | 10 | 10 |
+| `world-town.json`（野外走到城鎮入口與進城，對 `world-enter-town-run1`） | 7 | 7 |
 
-十五份收據 214 對畫面，允許差異區之外都是**零像素差**。
+十九份收據 251 對畫面，允許差異區之外都是**零像素差**。
 
 `world.json` 多了一個欄位 `compare`：每一對只涵蓋畫面上的一塊矩形。這**不是**
 允許差異區——矩形之外的部分那一對不宣稱，而計畫的 `not_claimed` 要寫明為什麼。
@@ -182,6 +186,28 @@ BIOS tick。remake 依同一張表重播。
 | 招募後的兩人隊伍 | 同上 frame-081 | 滑鼠 28 px | 通過 |
 
 兩個原版收據是不同的執行，因此不是同一張畫面對自己。
+
+## 客棧住宿與存檔
+
+半途之家住一晚要 56 枚金幣。這個數字不是抄畫面來的：建築 payload 位移
+0x38／0x39 是一個高位元組在前的 16-bit 欄位，讀出來就是 56，八座城 10 間客棧
+分別是 0、56、57、60、60、65、75、120（RE-073）。
+
+| 對拍項目 | 允許差異區實際差異 | 結果 |
+|---|---|---|
+| 住宿價錢問句（三行 ＋ 大拇指圖示列） | 原版滑鼠游標 36 px | 通過 |
+| `Save character to hard disk?` | 原版滑鼠游標 34 px | 通過 |
+| `Do you wish to quit?`（隊員格已空） | 原版滑鼠游標 34 px | 通過 |
+| 兩人隊伍的 `Whole party?` | 原版滑鼠游標 34 px | 通過 |
+| 全隊住宿的第一位（白框移到隊長） | 原版滑鼠游標 36 px | 通過 |
+
+最後一對是對拍抓出來的行為：答應「全隊」之後原版每處理一位就重畫隊員格
+（`sub_11A93:0x127E5` 的 `sub_13E82`），白框因此從剛招募進來的同伴移回隊長。
+第一版 remake 沒有這一步，隊員格差了 474 個像素。
+
+remake 的這五張圖都用 `-faithful-inn-stay` 產生。預設模式住宿一樣收費、一樣寫存檔，
+但角色留在隊伍裡，也不會問「存到硬碟嗎」與「你要離開嗎」——那三件事是原版一人一檔
+的磁片設計，開關的兩端見 SPEC-006。
 
 ## 這份收據不宣稱什麼
 

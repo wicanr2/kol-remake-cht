@@ -1,6 +1,6 @@
 # 規格索引
 
-目前有四份 READY 規格、一份 CONFORMED 規格與一份不授權實作的 DRAFT 規格。READY 的
+目前有五份 READY 規格、一份 CONFORMED 規格與一份不授權實作的 DRAFT 規格。READY 的
 授權範圍逐份限定，見下表。所有原版衍生行為必須依序經過：
 
 `RE 證據 → DRAFT → 證據審查 → READY → implementation → 同狀態驗證 → CONFORMED`
@@ -15,3 +15,4 @@
 | SPEC-003 | [繁中說明書翻譯與校對契約](003-manual-translation.md) | CONFORMED | 僅授權文件翻譯，不授權玩法／runtime |
 | SPEC-004 | [OGG 音訊目錄與執行期契約](004-ogg-audio-catalog.md) | DRAFT | 否；先完成 cue 母體與產品決策 |
 | SPEC-005 | [角色建立與角色儲存區](005-character-creation.md) | READY | 僅授權本規格涵蓋的角色建立與刪除流程；16 槽全滿分支仍須標為未驗證 |
+| SPEC-006 | [住宿、治療與存檔格式](006-rest-and-save.md) | READY | 僅授權 REST 三條路、remake 存檔讀寫與離線匯入 |

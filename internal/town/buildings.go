@@ -30,7 +30,21 @@ type Door struct {
 	TextMissing bool `json:"text_missing"`
 	// IconFlags 是建築 payload 位移 0x3C／0x3D 的兩個旗標 byte，決定內部圖示列。
 	IconFlags [2]int `json:"icon_flags"`
+	// Price 是 payload 位移 0x38／0x39 的價錢（高位元組在前）。客棧用整個 16-bit
+	// 當住一晚的總價，0 代表免費；修道院只用低位元組，見 HealRate（RE-073）。
+	Price int `json:"price"`
+	// HealRate 是 payload 位移 0x39：修道院每一點傷勢的價錢。
+	HealRate int `json:"heal_rate"`
+	// RecordID 是 payload 位移 0x3A／0x3B 的建築編號。原版住宿存檔時把它寫進
+	// 角色記錄位移 0x2E／0x2F，記下這名角色留在哪一間客棧。
+	RecordID int `json:"record_id"`
 }
+
+// IsInn 回傳這棟建築是不是能住宿存檔的客棧（旗標 bit3）。
+func (d *Door) IsInn() bool { return d.IconFlags[0]&0x08 != 0 }
+
+// IsAbbey 回傳這棟建築是不是能治療的修道院（旗標 bit6）。
+func (d *Door) IsAbbey() bool { return d.IconFlags[0]&0x40 != 0 }
 
 // TownBuildings 是一座城鎮的門、入城點與地形通行規則。
 type TownBuildings struct {
@@ -66,6 +80,9 @@ type rawDoor struct {
 	Person      string `json:"person"`
 	TextMissing bool   `json:"text_missing"`
 	IconFlags   []int  `json:"icon_flags"`
+	Price       int    `json:"price"`
+	HealRate    int    `json:"heal_rate"`
+	RecordID    int    `json:"record_id"`
 }
 
 type rawTown struct {
@@ -111,7 +128,8 @@ func LoadBuildings(path string) (*Buildings, error) {
 			door := Door{
 				Index: d.Index, X: d.X, Y: d.Y, Picture: d.Picture,
 				Portrait: d.Portrait, Name: d.Name, Person: d.Person,
-				TextMissing: d.TextMissing,
+				TextMissing: d.TextMissing, Price: d.Price,
+				HealRate: d.HealRate, RecordID: d.RecordID,
 			}
 			if len(d.IconFlags) == 2 {
 				door.IconFlags = [2]int{d.IconFlags[0], d.IconFlags[1]}

@@ -70,17 +70,30 @@ type Session struct {
 	Inside *Inn // ModeInside 時的畫面狀態
 
 	// told 記的是這一次進門裡哪些話題槽已經講過。原版是進門時清零的六個旗標。
-	told [TopicSlots]bool
+	told    [TopicSlots]bool
 	greeted bool
 	// recruit 是招募流程的狀態；nil 代表不在招募中。
 	recruit *Recruit
+	// rest 是 REST 流程的狀態；nil 代表不在住宿／治療中（SPEC-006）。
+	rest *restState
+	// quit 記下玩家在「你要離開嗎」那一問答了 YES。
+	quit bool
+
+	// FaithfulInnStay 開啟時客棧住宿完全照原版：問「存到硬碟嗎」、角色離隊、
+	// 隊伍空了問是否離開遊戲。預設關閉——與原版對拍時才打開（SPEC-006）。
+	FaithfulInnStay bool
+	// SaveGame 在客棧住宿的那一刻被呼叫，把整份存檔寫出去。回傳錯誤代表存檔
+	// 失敗，此時不扣錢、不改所在地、也不離隊。沒有掛就當作存檔成功。
+	SaveGame func() error
+	// SaveError 記下最後一次存檔失敗的原因。
+	SaveError error
 	// asking 為真時停在「是否搜尋硬碟」那一問。
 	asking bool
 	// pending 是「按空白鍵才會出現」的下一段文字。原版每段話之間都會停在
 	// `sub_144C3`——圖示列縮成一格 SPACEBAR，等玩家讀完。
 	pending []string
-	topic *BuildingTopics
-	door  *Door
+	topic   *BuildingTopics
+	door    *Door
 
 	// OnLeaveTown 在玩家於城門選 DOOR 時被呼叫一次，參數是隊伍在世界地圖上的座標。
 	// 上層用它換到野外畫面；沒有掛就只是把事情記下來。
@@ -92,8 +105,8 @@ type Session struct {
 	// LeftTown 記的是玩家在地圖邊界選了 DOOR。原版此時把鏡頭夾限放回 0…63、
 	// 讀出城門在世界地圖上的座標，再載入 TOWN0 的野外地圖；野外地圖本身還沒實作，
 	// 所以這裡只把「離開了城鎮」與離開的門記下來，交給上層決定要走到哪裡。
-	LeftTown  bool
-	LeftGate  Point
+	LeftTown bool
+	LeftGate Point
 }
 
 // NewSession 建立一次城鎮遊玩。
@@ -211,6 +224,15 @@ func (s *Session) acceptInside() {
 	}
 	id := s.Inside.Icons[s.Inside.Selected] - 3
 	switch {
+	case s.rest != nil:
+		switch id {
+		case IconYes:
+			s.restAnswer(true)
+		case IconNo:
+			s.restAnswer(false)
+		case IconSpacebar:
+			s.Continue()
+		}
 	case s.asking:
 		// 兩個答案都走同一條路：這份原版輸入只有一份角色檔，搜不搜硬碟結果相同。
 		s.openList()
@@ -228,6 +250,8 @@ func (s *Session) acceptInside() {
 		s.Listen()
 	case id == IconCompanion:
 		s.StartRecruit()
+	case id == IconRest:
+		s.StartRest()
 	default:
 		s.note(iconName(id))
 	}
@@ -294,7 +318,7 @@ func (s *Session) enter() {
 	s.Inside = in
 	s.Mode = ModeInside
 	s.door = door
-	s.told = [TopicSlots]bool{}   // 原版進門時把六個「講過了」旗標清零
+	s.told = [TopicSlots]bool{} // 原版進門時把六個「講過了」旗標清零
 	s.greeted = false
 	s.pending = nil
 	s.topic = nil
@@ -316,6 +340,13 @@ func (s *Session) Continue() {
 		s.Inside.Dialog = s.pending
 		s.Inside.DialogZh = nil
 		s.pending = nil
+		return
+	}
+	// REST 的流程裡有幾段話讀完之後還要繼續（免費客棧、錢不夠、治好了）。
+	if s.rest != nil && s.rest.next != nil {
+		step := s.rest.next
+		s.rest.next = nil
+		step()
 		return
 	}
 	if !s.greeted {
@@ -361,7 +392,7 @@ func (s *Session) greeting() []string {
 	// （旗標 byte 0 的 bit6）換成另一筆（`sub_11A93:0x11F47`，RE-072）。
 	if speaker.Wounds != 0 {
 		var lines []string
-		if s.door != nil && s.door.IconFlags[0]&0x40 != 0 {
+		if s.door != nil && s.door.IsAbbey() {
 			lines = s.uiLines(WoundedHealRecord)
 		} else {
 			lines = append(s.uiLines(WoundedRecord), s.uiLines(WoundedRecord+1)...)

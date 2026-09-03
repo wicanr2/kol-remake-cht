@@ -94,15 +94,37 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 
 檢查點：第 11 步與城門提示截圖、第 12 步與野外地圖對拍截圖，都逐 byte 相同。
 
+## `town-round-trip`、`town-recruit`、`world-road`
+
+三份較長的路徑各自對應一批對拍證據：
+
+| 路徑 | 步數 | 內容 | 檢查點 |
+|---|---:|---|---|
+| `town-round-trip` | 20 | 城鎮 → 野外走到路上 → 退回入口 → 選 DOOR 進城 | 進城後的城鎮畫面 |
+| `town-recruit` | 15 | COMPANION 的兩個畫面、清單捲動、加入第一位同伴 | 問句、清單、加入後三張 |
+| `world-road` | 34 | 出城往北走上道路，連按七次 ROAD，再按 SIGNPOST 換另一條 | 循路的四個取樣點 |
+
+## `town-rest`：住一晚並存檔
+
+`L R RET SPACE > > > > RET RET`，11 步。白框走到第 5 格 REST 按下去，
+對話框問「住下要 56 枚金幣」，答應之後扣錢、把留宿的建築記進角色、寫出存檔。
+
+檢查點：第 9 步（價錢問句）與 `remake-parity/shots/town-rest/price.png` 逐 byte 相同。
+
+這份路徑另外檢查**寫出來的存檔**：驗證器把 `kol-save-v1` 讀回來逐欄比對——
+金幣 1009 − 56 ＝ 953、所在地 `HALFWAY HO`、建築編號 86、位置是城 7 入城點 3
+的 (57, 8)。存檔因此也是玩家路徑的一部分，不是另一條沒人走的支線。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
-  門口、進建築」這一條；世界地圖、戰鬥、任務、存讀檔都還沒有。
-- 角色選項頁的 EDIT PICTURE／EDIT SHIELD、旅店的其餘五個圖示按下去不會轉場，
-  只會記進未實作清單。
+  門口、進建築 → 野外循路 → 招募同伴 → 住宿存檔」這一條；戰鬥、任務、讀檔回到
+  遊戲都還沒有。
+- 角色選項頁的 EDIT PICTURE／EDIT SHIELD，以及建築內的 MIRROR、買賣、訓練、AWARD、
+  SCROLL 按下去不會轉場，只會記進未實作清單。
 - 不宣稱鏡頭跟隨規則已證實。dead zone 是由 22 張原版畫格反解的**強推論**，
   規則本身沒有從程式碼讀出來。
-- 走到地圖邊界選 DOOR 已經接到野外地圖（`town-leave.json`）。野外的圖示列
-  （DOOR／U-TURN／ROAD／SIGNPOST）、遭遇、時間推進與雲層動畫都還沒有。
-- 建築內的 LISTEN 與 MOUTH 已接上（RE-067）；MIRROR、REST／SAVE／HEAL、
-  COMPANION、買賣與訓練還沒有。
+- 野外的移動、道路與進城已經接上（`world-road.json`、`town-round-trip.json`）；
+  遭遇、時間推進與雲層動畫還沒有。
+- 存檔只寫得出來，還讀不回遊戲：`internal/save` 的讀取與匯入工具都有測試，
+  但「讀檔繼續玩」這條路徑尚未接上。

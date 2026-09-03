@@ -1,0 +1,37 @@
+{
+  "name": "town-rest",
+  "description": "走進半途之家、讀完進門敘述，用 > 把白框移到 REST 住一晚：回答價錢問句之後扣掉 56 枚金幣、把留宿的建築記進角色、寫出存檔。預設模式住宿不離隊（SPEC-006），全程只經過 town.Session，沒有座標注入也沒有測試旗標。",
+  "script": "L R RET SPACE > > > > RET RET",
+  "shot_dir": "docs/verification/player-path/town-rest",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/town-rest-receipt.json",
+  "checkpoints": [
+    {
+      "step": 9,
+      "identical_to": "docs/verification/remake-parity/shots/town-rest/price.png",
+      "note": "住宿價錢問句，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "save": {
+    "file": "workplace/saves/town-rest.json",
+    "expect": {
+      "schema": "kol-save-v1",
+      "settings.faithful_inn_stay": false,
+      "location.kind": "town",
+      "location.town": 7,
+      "location.entry_point": 3,
+      "location.x": 57,
+      "location.y": 8,
+      "party[0].name": "Theodoric",
+      "party[0].gold": 953,
+      "party[0].wounds": 0,
+      "party[0].place": "HALFWAY HO",
+      "party[0].town_code": "MIN",
+      "party[0].building_id": 86,
+      "party[0].speaker": true
+    }
+  }
+}

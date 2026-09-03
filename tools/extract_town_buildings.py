@@ -40,6 +40,17 @@ BLOCK_BITMAP_BYTES = 32
 # 建築 payload 的位移 0x3C／0x3D 是圖示列的旗標（`byte_2FC00`／`byte_2FC01`）。
 # `sub_11A93:0x120B8` 起逐位元決定要推哪些圖示（RE-067）。
 ICON_FLAGS = 0x3C
+# 位移 0x38／0x39 是價錢，0x3A／0x3B 是建築編號，兩組都是高位元組在前。
+# 客棧（旗標 bit3）住一晚的價錢是 `payload[0x38] << 8 | payload[0x39]`
+# （`sub_14DB1:0x14E38`）；修道院（bit6）治療則只用 `payload[0x39]`，
+# 每一點傷勢乘一次（`sub_11A93:0x126A3`）。住宿存檔時把 0x3A／0x3B 寫進
+# 角色記錄位移 0x2E／0x2F（`sub_14DB1:0x1505B`）。
+PRICE_OFFSET = 0x38
+RECORD_ID_OFFSET = 0x3A
+
+
+def be16(body: bytes, offset: int) -> int:
+    return body[offset] << 8 | body[offset + 1]
 
 
 def blocked_tiles(table: bytes) -> list[int]:
@@ -97,6 +108,9 @@ def main() -> int:
                         raise SystemExit(f"{root} 門 {i} 的字串不合版面")
                     door["name"] = name
                     door["person"] = person
+                    door["price"] = be16(body, PRICE_OFFSET)
+                    door["heal_rate"] = body[PRICE_OFFSET + 1]
+                    door["record_id"] = be16(body, RECORD_ID_OFFSET)
                 else:
                     # TOWN7 的門 21 有圖與肖像，卻沒有對應的文字 payload。
                     door["text_missing"] = True
@@ -132,6 +146,11 @@ def main() -> int:
                           "圖示列旗標；bit0 或 flags[1] 的 bit2 給 LISTEN＋MOUTH、"
                           "bit1/4/5 給買賣、bit2 給 id 11、bit3 給 REST＋COMPANION、"
                           "bit6 給 REST",
+            "price": f"建築 payload[0x{PRICE_OFFSET:02X}／0x{PRICE_OFFSET + 1:02X}]："
+                     "高位元組在前的價錢。bit3 的客棧是住一晚的總價（0 代表免費），"
+                     "bit6 的修道院只用低位元組，當每一點傷勢的價錢。",
+            "record_id": f"建築 payload[0x{RECORD_ID_OFFSET:02X}／0x{RECORD_ID_OFFSET + 1:02X}]："
+                         "住宿存檔時寫進角色記錄位移 0x2E／0x2F 的建築編號。",
             "picture": "TWN{n}PICS[2i+3]，192×96，畫在地圖視窗 (104,58)",
             "portrait": "TWN{n}PICS[2i+2]，88×64，畫在 (8,64)",
             "text": "TOWNn.0 payload i+4（索引 ≥ 0x14 再加 1）；名稱在 0、人物在 29，"

@@ -23,6 +23,10 @@ type Slot struct {
 	// 換成「你受傷了，該去修道院」。
 	Female bool `json:"female"`
 	Wounds int  `json:"wounds"`
+	// Gold 是角色記錄位移 0x2A–0x2C 的 24-bit 大端金幣；Building 是位移 0x2E／0x2F
+	// 記下的留宿建築編號，與建築 payload 的 0x3A／0x3B 相同（RE-073）。
+	Gold     int `json:"gold"`
+	Building int `json:"building"`
 }
 
 // Location 是清單右欄顯示的字串：固定長度的所在地、一個空白、三字城鎮代碼。

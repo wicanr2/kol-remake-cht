@@ -6,7 +6,9 @@
 
 1. 每一步的截圖存在、解得開、尺寸正確；
 2. 相鄰兩步不得完全相同（每個 token 都要有可見效果）；
-3. 指定的檢查點與已通過對拍的截圖**逐 byte 相同**——可玩路徑與對拍證據因此連上。
+3. 指定的檢查點與已通過對拍的截圖**逐 byte 相同**——可玩路徑與對拍證據因此連上；
+4. 路徑若會寫存檔（`save` 區塊），把寫出來的存檔讀回來逐欄比對——存檔的內容
+   因此也是玩家路徑的一部分，不是另一條沒人走的支線。
 
   python3 tools/verify_player_path.py --plan docs/verification/player-path/town.json
 """
@@ -26,6 +28,21 @@ from png_io import read_png  # noqa: E402
 
 def sha256(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def dig(doc, path: str):
+    """取 `party[0].gold` 這種欄位路徑；取不到就丟 KeyError／IndexError。"""
+    node = doc
+    for part in path.split("."):
+        while "[" in part:
+            name, rest = part.split("[", 1)
+            index, part = rest.split("]", 1)
+            if name:
+                node = node[name]
+            node = node[int(index)]
+        if part:
+            node = node[part]
+    return node
 
 
 def main() -> int:
@@ -68,6 +85,27 @@ def main() -> int:
         if sha256(shot) != sha256(twin):
             failures.append(f"檢查點 {check['step']} 與 {check['identical_to']} 不同")
 
+    save_check = None
+    if "save" in plan:
+        spec = plan["save"]
+        path = root / spec["file"]
+        fields = []
+        if not path.exists():
+            failures.append(f"路徑應該寫出存檔 {spec['file']}，但檔案不在")
+        else:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            for field, want in spec["expect"].items():
+                try:
+                    got = dig(doc, field)
+                except (KeyError, IndexError, TypeError):
+                    got = None
+                ok = got == want
+                fields.append({"field": field, "want": want, "got": got, "pass": ok})
+                if not ok:
+                    failures.append(f"存檔的 {field} 是 {got!r}，應為 {want!r}")
+        save_check = {"file": spec["file"], "sha256": sha256(path) if path.exists() else None,
+                      "fields": fields}
+
     receipt = {
         "schema": "kol-player-path-v1",
         "name": plan["name"],
@@ -75,6 +113,7 @@ def main() -> int:
         "script": plan["script"],
         "step_count": len(steps),
         "checkpoints": plan.get("checkpoints", []),
+        "save": save_check,
         "failures": failures,
         "steps": steps,
     }

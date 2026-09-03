@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 3117,
+  "total_frames": 3289,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -491,6 +491,38 @@
       "frame_dir": "docs/verification/character-ui/town-recruit-companion-run1/frames",
       "character_files_changed": [],
       "note": "此情境走出書本進入 KOLTOWN 城鎮；畫面不再是書頁。"
+    },
+    {
+      "run": "town-rest-run1",
+      "scenario": "town-rest-save",
+      "description": "在旅店把白框移到 REST 按下去，觀察「誰要留宿」的選單、金幣不足會怎樣、以及選全隊之後那一問。會保存角色檔，因此收據會記下檔案有變動——遊戲副本在容器 tmpfs，原版 ZIP 唯讀。",
+      "receipt": "docs/verification/character-ui/town-rest-run1/receipt.json",
+      "generated_utc": "2026-09-03T03:16:22Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 17,
+      "frame_count": 86,
+      "frame_dir": "docs/verification/character-ui/town-rest-run1/frames",
+      "character_files_changed": [
+        "CHARDATA"
+      ],
+      "note": "住宿即存檔即離隊，因此 CHARDATA 有變動；遊戲副本在容器 tmpfs，原版 ZIP 唯讀。"
+    },
+    {
+      "run": "town-rest-two-run1",
+      "scenario": "town-rest-two",
+      "description": "先招募一名同伴再按 REST，看住宿費是不是按人頭算。只看價目那一句，不回答，直接離開。",
+      "receipt": "docs/verification/character-ui/town-rest-two-run1/receipt.json",
+      "generated_utc": "2026-09-03T03:21:46Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 21,
+      "frame_count": 86,
+      "frame_dir": "docs/verification/character-ui/town-rest-two-run1/frames",
+      "character_files_changed": [],
+      "note": "兩人隊伍按 REST，用來確認住宿費不隨人數改變。"
     }
   ]
 }
