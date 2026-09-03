@@ -24,12 +24,44 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from inventory_image_archives import EXPECTED_ZIP_SHA256  # noqa: E402
 from probe_extract_comb_png import encode_rgb_png  # noqa: E402
+from probe_extract_town_map_png import encode_gray_png  # noqa: E402
 from probe_town_data import lzw_decode, payloads, read_volumes  # noqa: E402
 
 ALLOWED_OUTPUT_PARENT = pathlib.PurePosixPath("assets/original-derived-png/ega")
 TILE_SIDE, TILE_BYTES, PLANE_BYTES = 16, 128, 32
 ATLAS_COLUMNS = 10
 PAYLOADS = {8: "battle-tiles-08.png", 12: "battle-tiles-12.png"}
+# 任務地點的戰場：`TOWN0` 的 payload 0x3D + i，RLE 壓過，解出來是 64×64 的格子陣列。
+# RLE 是 `sub_2B3D1:0x2B41A`：最高位元沒設就是一格，0xFF 結束，
+# 其餘是「(值 & 0x7F) 重複下一個 byte 次」。
+#
+# 解完之後原版還做一次轉置（`sub_2B3D1:0x2B436` 的 `[bx+si]`，si 每次加 64），
+# 才放進執行期的 4,096 byte 緩衝區——繪製時讀的是 `(Y << 6) + X`
+# （`sub_223C0:0x22540`），兩次相反的擺法抵銷，所以**解出來的位元組就是
+# `(X << 6) + Y`**：第一個索引是參戰者的 X，也就是畫面上的列。
+# 輸出的 PNG 直接照這個順序擺，一列一個 X。
+MAP_PAYLOAD_BASE, MAP_COUNT, MAP_SIDE = 0x3D, 24, 64
+
+
+def rle_decode(data: bytes) -> bytes:
+    out = bytearray()
+    i = 0
+    while i < len(data):
+        value = data[i]
+        i += 1
+        if not value & 0x80:
+            out.append(value)
+            continue
+        if value == 0xFF:
+            break
+        if i >= len(data):
+            raise SystemExit("RLE 的重複次數缺了一個 byte")
+        count = data[i]
+        i += 1
+        out.extend([value & 0x7F] * count)
+    if len(out) != MAP_SIDE * MAP_SIDE:
+        raise SystemExit(f"戰場格子陣列解出 {len(out)} byte，預期 {MAP_SIDE * MAP_SIDE}")
+    return bytes(out)
 
 
 def tile_pixels(seg: bytes, base: int) -> bytes:
@@ -71,6 +103,7 @@ def main() -> int:
 
     with zipfile.ZipFile(zip_path) as zf:
         _, parts = payloads(read_volumes(zf, "KOLPICS"), "KOLPICS")
+        _, parts_town = payloads(read_volumes(zf, "TOWN0"), "TOWN0")
 
     out.mkdir(parents=True, exist_ok=True)
     images = []
@@ -88,6 +121,18 @@ def main() -> int:
             "png_sha256": hashlib.sha256(png).hexdigest(),
         })
 
+    maps = []
+    for i in range(MAP_COUNT):
+        raw = lzw_decode(parts_town[MAP_PAYLOAD_BASE + i])
+        cells = rle_decode(raw)
+        png = encode_gray_png(cells, MAP_SIDE, MAP_SIDE)
+        name = f"battle-map-{i:02d}.png"
+        (out / name).write_bytes(png)
+        maps.append({"file": name, "site": i, "payload": MAP_PAYLOAD_BASE + i,
+                     "compressed_bytes": len(raw), "side": MAP_SIDE,
+                     "cell_index": "(X << 6) + Y",
+                     "png_sha256": hashlib.sha256(png).hexdigest()})
+
     manifest = {
         "schema": "kol-battle-tiles-v1",
         "tool": "tools/extract_battle_tiles.py",
@@ -100,6 +145,9 @@ def main() -> int:
             "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。",
         },
         "images": images,
+        "maps": maps,
+        "map_encoding": "TOWN0 payload 0x3D + i，RLE 壓過；解出來是 64×64 的格子陣列，"
+                        "像素值即磚塊編號，索引 (X << 6) + Y",
     }
     (out / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

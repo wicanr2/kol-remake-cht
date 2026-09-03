@@ -37,5 +37,224 @@
       "payload_sha256": "986de6e323cf102f26131bf09c8d19e6d6f594e1354bd24370efa550bc33e2e5",
       "png_sha256": "6617265036b93bac7b433e1040c4dae5bb28f92990686360f38ae296206365c8"
     }
-  ]
+  ],
+  "maps": [
+    {
+      "file": "battle-map-00.png",
+      "site": 0,
+      "payload": 61,
+      "compressed_bytes": 1001,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "a6cca36622d2c3e46d06d3ff9b875b5394f2ddbbc08735dfce685a4730011f56"
+    },
+    {
+      "file": "battle-map-01.png",
+      "site": 1,
+      "payload": 62,
+      "compressed_bytes": 1282,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "d90d18edb74239e54a99af533e6f2ae76a2b93d14822fb830eee8a1a106a9591"
+    },
+    {
+      "file": "battle-map-02.png",
+      "site": 2,
+      "payload": 63,
+      "compressed_bytes": 741,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "f209cce06aa2a0116e2591fded3273c2542d9df935594d46bc2c4e3f894214f9"
+    },
+    {
+      "file": "battle-map-03.png",
+      "site": 3,
+      "payload": 64,
+      "compressed_bytes": 885,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "43ea2f30e0023c86649ecbf93b30eb4d69fb37e1ca77ec6a452c22387c321124"
+    },
+    {
+      "file": "battle-map-04.png",
+      "site": 4,
+      "payload": 65,
+      "compressed_bytes": 1566,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "d1f5e5e818a91c0b44e691f192a6f6b552c48892a535b848fd0844d90fb4442f"
+    },
+    {
+      "file": "battle-map-05.png",
+      "site": 5,
+      "payload": 66,
+      "compressed_bytes": 838,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "ff0e29ac62dbf494627ed8abe85b43228cfff139fb6fe1e6fc4c6d6e792d80ae"
+    },
+    {
+      "file": "battle-map-06.png",
+      "site": 6,
+      "payload": 67,
+      "compressed_bytes": 669,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "32c2802bbd7e8a32388d07cc61b26273dd50b4e671cfeba71aa6d9ac07af8685"
+    },
+    {
+      "file": "battle-map-07.png",
+      "site": 7,
+      "payload": 68,
+      "compressed_bytes": 2049,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "58ad57425f61c39c8f5dc8adfa81776c3d3eb16a34493aabd6c1118c8001932a"
+    },
+    {
+      "file": "battle-map-08.png",
+      "site": 8,
+      "payload": 69,
+      "compressed_bytes": 963,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "1ec5211f15b7b28b81ed4587c26689590ef3f5f04864f28d33c44987c019706b"
+    },
+    {
+      "file": "battle-map-09.png",
+      "site": 9,
+      "payload": 70,
+      "compressed_bytes": 825,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "007ac42da5910299c108d4b78fb87ef0b6091cbc248ffd270b7e9f570b9ced05"
+    },
+    {
+      "file": "battle-map-10.png",
+      "site": 10,
+      "payload": 71,
+      "compressed_bytes": 1095,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "f9149b0c1a801e1b0e5b48119360214bb7251e5cb19aa09e3afc0405975dd2ba"
+    },
+    {
+      "file": "battle-map-11.png",
+      "site": 11,
+      "payload": 72,
+      "compressed_bytes": 860,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "33b8606ee0bcf26d91b0edbbe3b470385d9226086b73d929f43c66eec4a9eb9b"
+    },
+    {
+      "file": "battle-map-12.png",
+      "site": 12,
+      "payload": 73,
+      "compressed_bytes": 1079,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "ef4a66a87921a86f58c98e05f93d747ab7810493fcbd65991794a00ccdccfe5d"
+    },
+    {
+      "file": "battle-map-13.png",
+      "site": 13,
+      "payload": 74,
+      "compressed_bytes": 1702,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "4a2f72498d0092d8abee8ee245c8b9a861185e125bcea360ee67ab4ca0b00a20"
+    },
+    {
+      "file": "battle-map-14.png",
+      "site": 14,
+      "payload": 75,
+      "compressed_bytes": 390,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "a0077aef96d4bc89d70b780866ebdd4f76fac9cd7d0ca291e068a33113dc8b9d"
+    },
+    {
+      "file": "battle-map-15.png",
+      "site": 15,
+      "payload": 76,
+      "compressed_bytes": 475,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "e234b8b34bc734a327a8d5adb71921fb4a443c5002a2d93e8c38ced70ef183fd"
+    },
+    {
+      "file": "battle-map-16.png",
+      "site": 16,
+      "payload": 77,
+      "compressed_bytes": 931,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "b739f0a29383522967384b8d340b8b537d5d8e1b0a6d36a1740252ed5df26fe1"
+    },
+    {
+      "file": "battle-map-17.png",
+      "site": 17,
+      "payload": 78,
+      "compressed_bytes": 1139,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "20adeedff5f098cf612783e6f12463eaff2692e747bf38c475d5eff8774026fc"
+    },
+    {
+      "file": "battle-map-18.png",
+      "site": 18,
+      "payload": 79,
+      "compressed_bytes": 1220,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "236eaf79363bbe7175a819e875a537ab212198d2b87d4cd121ffe735a4aaf992"
+    },
+    {
+      "file": "battle-map-19.png",
+      "site": 19,
+      "payload": 80,
+      "compressed_bytes": 769,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "32c41f47624c9b0357acf1537ea6314e3e7168f65489b722833b01b26fb392ba"
+    },
+    {
+      "file": "battle-map-20.png",
+      "site": 20,
+      "payload": 81,
+      "compressed_bytes": 412,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "df621c03fdb640622079a00e22ea1837ef39fde757ceb53fef8affb8d4d8f668"
+    },
+    {
+      "file": "battle-map-21.png",
+      "site": 21,
+      "payload": 82,
+      "compressed_bytes": 684,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "61fdbb5bbc72b5281bd16244f6d570c1531216edcdc0e15bbc9db423cc52c087"
+    },
+    {
+      "file": "battle-map-22.png",
+      "site": 22,
+      "payload": 83,
+      "compressed_bytes": 721,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "5bcff9a6176378be5a428856d47b0101fcb461a2eed672032b380ba45c77499b"
+    },
+    {
+      "file": "battle-map-23.png",
+      "site": 23,
+      "payload": 84,
+      "compressed_bytes": 840,
+      "side": 64,
+      "cell_index": "(X << 6) + Y",
+      "png_sha256": "af152507536b390ade25ea9afbacdc86222c96dd2b26eefcbf42ee67a1f28bf1"
+    }
+  ],
+  "map_encoding": "TOWN0 payload 0x3D + i，RLE 壓過；解出來是 64×64 的格子陣列，像素值即磚塊編號，索引 (X << 6) + Y"
 }
