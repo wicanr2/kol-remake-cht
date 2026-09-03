@@ -59,11 +59,12 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `town-listen.json`（招呼語與 LISTEN，對 `town-listen-run1`） | 3 | 3 |
 | `town-recruit.json`（招募同伴的三個畫面，對 `town-recruit-companion-run1`） | 9 | 9 |
 | `town-rest.json`（住宿、存檔與離開詢問，對 `town-rest-run1`／`town-rest-two-run1`） | 11 | 11 |
+| `town-mirror.json`（MIRROR 的角色資料頁，對 `town-mirror-run1`） | 8 | 8 |
 | `world.json`（野外地圖畫面，對 `town-leave-run1`） | 4 | 4 |
 | `world-road.json`（ROAD／SIGNPOST 自動循路，對 `world-road-run1`） | 10 | 10 |
 | `world-town.json`（野外走到城鎮入口與進城，對 `world-enter-town-run1`） | 7 | 7 |
 
-十九份收據 251 對畫面，允許差異區之外都是**零像素差**。
+二十份收據 259 對畫面，允許差異區之外都是**零像素差**。
 
 `world.json` 多了一個欄位 `compare`：每一對只涵蓋畫面上的一塊矩形。這**不是**
 允許差異區——矩形之外的部分那一對不宣稱，而計畫的 `not_claimed` 要寫明為什麼。
@@ -208,6 +209,23 @@ BIOS tick。remake 依同一張表重播。
 remake 的這五張圖都用 `-faithful-inn-stay` 產生。預設模式住宿一樣收費、一樣寫存檔，
 但角色留在隊伍裡，也不會問「存到硬碟嗎」與「你要離開嗎」——那三件事是原版一人一檔
 的磁片設計，開關的兩端見 SPEC-006。
+
+## MIRROR 的角色資料頁
+
+整頁 320×200 只有原版滑鼠游標那 37 個像素不同，其餘**逐像素相同**——五個框、
+兩條長條、抬頭六行、八個屬性、武器熟練度、金幣與冒險點數、圖示列與隊員格都在內。
+
+對拍過程中抓到兩件從反組譯讀出來、但沒有先想到的事：
+
+- **抬頭整段是大寫。** KOLDATA 記錄裡的種族與職業是 `Kelden`、`Cliff Guard`，
+  畫面上卻是全大寫；原版在畫名字之前把 `word_2DF54` 設成 1，離開頁面才歸零。
+- **繪字是不透明的，連空白都清底。** `GOLD CROWNS  :` 的冒號在第 29 欄，
+  而 `% 9ld` 的值也從第 29 欄開始——第一個字元是空白，把冒號蓋掉了。
+  原版畫面上正是只有那一行沒有冒號，另外兩行都還在。第一版 remake 用透明繪字，
+  那個冒號就留了下來，8 個像素的差異。
+
+框的右下投影與城鎮文字視窗是同一組數字（偏移 4、厚 4）：`sub_1BA9D` 畫完外框
+會呼叫 `sub_1B7E9`。少了這一步，五個框一共差 3,000 多個像素。
 
 ## 這份收據不宣稱什麼
 

@@ -30,6 +30,8 @@ type Member struct {
 	TownCode string `json:"town_code,omitempty"`
 	// BuildingID 是留宿建築的編號，來自建築 payload 的 0x3A／0x3B。
 	BuildingID int `json:"building_id,omitempty"`
+	// Sheet 是 MIRROR 那一頁要用的欄位（RE-074）；沒有就畫不出資料頁。
+	Sheet *Sheet `json:"sheet,omitempty"`
 }
 
 // Inn 是旅店畫面的完整狀態。
@@ -40,7 +42,11 @@ type Inn struct {
 		Archive string `json:"archive"`
 		Index   int    `json:"index"`
 	} `json:"portrait"`
-	Title    []string `json:"title"`
+	// Sheet 非 nil 時整個畫面換成角色資料頁（RE-074）。
+	Sheet *SheetPage `json:"sheet,omitempty"`
+	// SheetLabels 是 KOLDATA 記錄 73h 拆出來的帶座標標籤。
+	SheetLabels []Segment `json:"sheet_labels,omitempty"`
+	Title []string   `json:"title"`
 	Dialog   []string `json:"dialog"`
 	DialogZh []string `json:"dialog_zh"`
 	Icons    []int    `json:"icons"`

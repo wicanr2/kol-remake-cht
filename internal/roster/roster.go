@@ -27,6 +27,32 @@ type Slot struct {
 	// 記下的留宿建築編號，與建築 payload 的 0x3A／0x3B 相同（RE-073）。
 	Gold     int `json:"gold"`
 	Building int `json:"building"`
+	// Sheet 是 MIRROR 角色資料頁的欄位（RE-074）。
+	Sheet *Sheet `json:"sheet"`
+}
+
+// Weapon 是武器熟練度的一列。
+type Weapon struct {
+	Name    string `json:"name"`
+	Offence int    `json:"offence"`
+	Defence int    `json:"defence"`
+}
+
+// Sheet 是角色資料頁要用到的欄位，欄位名與抽取器的輸出相同。
+type Sheet struct {
+	Stats           []int    `json:"stats"`
+	Race            int      `json:"race"`
+	Profession      int      `json:"profession"`
+	Rank            int      `json:"rank"`
+	AdventurePoints int      `json:"adventure_points"`
+	MovementRate    int      `json:"movement_rate"`
+	Nutrition       int      `json:"nutrition"`
+	HeightFeet      int      `json:"height_feet"`
+	HeightInches    int      `json:"height_inches"`
+	Weight          int      `json:"weight"`
+	Weapons         []Weapon `json:"weapons"`
+	Armour          string   `json:"armour"`
+	Shield          string   `json:"shield"`
 }
 
 // Location 是清單右欄顯示的字串：固定長度的所在地、一個空白、三字城鎮代碼。

@@ -131,3 +131,73 @@ var CJKOutdoor = struct {
 	Scale: 2,
 }
 
+
+// SheetStatFirstRow 是八個屬性的第一列；每一列往下 8 px，
+// 與 KOLDATA 記錄 73h 的 ~V 座標相同。
+const SheetStatFirstRow = 58
+
+// Rect 是含端點的矩形，與原版繪圖 helper 的引數同一種寫法。
+type Rect struct{ X0, Y0, X1, Y1 int }
+
+// Width／Height 是像素寬高。
+func (r Rect) Width() int  { return r.X1 - r.X0 + 1 }
+func (r Rect) Height() int { return r.Y1 - r.Y0 + 1 }
+
+// SheetLayout 是 MIRROR 角色資料頁的版面（RE-074）。座標全部是
+// `sub_15ABF`／`sub_16239` 推給繪圖 helper 的引數，不是量出來的。
+var SheetLayout = struct {
+	Header, Stats, Weapons, Gold, Bars Rect
+	HeaderRule, WeaponRule             Rect
+	DamageBar, NutritionBar            Rect
+	NameRow, GenderRow                 int
+	RaceRow, RankRow                   int
+	HeightRow, WeightRow               int
+	LeftCol, RightCol, CentreCells     int
+	HeightCol, WeightCol               int
+	StatValueCol                       int
+	WeaponNameCol, WeaponOffCol        int
+	WeaponDefCol, WeaponFirstRow       int
+	WeaponRowStep, WeaponRows          int
+	GoldValueCol, GoldRow              int
+	AdventureCol, AdventureRow         int
+	MovementCol, MovementRow           int
+	EquipRow, ArmourCol, ShieldCol     int
+	BarCell, BarInset                  int
+}{
+	Header:     Rect{70, 4, 249, 46},
+	HeaderRule: Rect{70, 14, 248, 14},
+	Stats:      Rect{14, 56, 121, 120},
+	Weapons:    Rect{126, 52, 305, 88},
+	WeaponRule: Rect{127, 61, 304, 61},
+	Gold:       Rect{126, 93, 305, 126},
+	Bars:       Rect{38, 130, 288, 158},
+	// 兩條長條的青色底：原版先填滿再把紅色蓋上去。
+	DamageBar:    Rect{39, 138, 287, 144},
+	NutritionBar: Rect{39, 152, 287, 158},
+
+	NameRow: 7, GenderRow: 16, RaceRow: 22, RankRow: 28,
+	HeightRow: 34, WeightRow: 40,
+	// 抬頭的名字與性別在第 9 欄起的 22 格內置中，右側欄位靠齊第 31 欄。
+	LeftCol: 9, RightCol: 31, CentreCells: 22,
+	HeightCol: 18, WeightCol: 16,
+
+	StatValueCol: 12,
+
+	WeaponNameCol: 16, WeaponOffCol: 30, WeaponDefCol: 35,
+	WeaponFirstRow: 63, WeaponRowStep: 6, WeaponRows: 4,
+
+	GoldValueCol: 29, GoldRow: 95,
+	AdventureCol: 33, AdventureRow: 103,
+	MovementCol: 37, MovementRow: 111,
+	EquipRow: 119, ArmourCol: 16, ShieldCol: 38,
+
+	// 長條一格 8 px，紅色比青色底上下各縮 1 px、左緣同樣從 39 起。
+	BarCell: 8, BarInset: 1,
+}
+
+// 角色資料頁的顏色：抬頭框是白的，其餘的框與長條底是青色，長條本身是亮紅。
+var (
+	ColourSheetHeader = [3]uint8{255, 255, 255}
+	ColourSheetFrame  = [3]uint8{0, 170, 170}
+	ColourSheetBar    = [3]uint8{255, 85, 85}
+)

@@ -1,0 +1,78 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-mirror",
+  "description": "走進半途之家、讀完進門敘述，用 > 把白框移到 MIRROR 打開角色資料頁：八個屬性、武器熟練度、金幣與冒險點數、傷勢與營養長條都由角色記錄算出來；在資料頁上移動白框再選 U-TURN 回到建築內。全程只經過 town.Session。",
+  "script": "L R RET SPACE > RET > < RET",
+  "step_count": 10,
+  "checkpoints": [
+    {
+      "step": 6,
+      "identical_to": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "note": "角色資料頁，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "save": null,
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town-mirror/step-000.png",
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930"
+    },
+    {
+      "step": 1,
+      "token": "L",
+      "file": "docs/verification/player-path/town-mirror/step-001.png",
+      "sha256": "84c58fb2ed1f0757878c0fbfca44473b2b9bebd17e27213f605f404b44188763"
+    },
+    {
+      "step": 2,
+      "token": "R",
+      "file": "docs/verification/player-path/town-mirror/step-002.png",
+      "sha256": "888644ba16402ec524386c6db1d1270e8cbc0335005d34d2326a7a4507966997"
+    },
+    {
+      "step": 3,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-mirror/step-003.png",
+      "sha256": "9fdac495e8f9c6733b4d71514047240ef8eb7253e3347ff7b049642583bbf55f"
+    },
+    {
+      "step": 4,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-mirror/step-004.png",
+      "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
+    },
+    {
+      "step": 5,
+      "token": ">",
+      "file": "docs/verification/player-path/town-mirror/step-005.png",
+      "sha256": "b821e0770e07f84e4d0b0032c5ff5ecf3b4a89b850331c8f8a67ac26e472efa5"
+    },
+    {
+      "step": 6,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-mirror/step-006.png",
+      "sha256": "011a3a0c574e21bbfdccbfa5a774453e92336758d8330de597e3cab278ce0df3"
+    },
+    {
+      "step": 7,
+      "token": ">",
+      "file": "docs/verification/player-path/town-mirror/step-007.png",
+      "sha256": "7cd9b9a4330e8ae9f7f6077ce650b181fa2983492fef2072349375c4f099608f"
+    },
+    {
+      "step": 8,
+      "token": "<",
+      "file": "docs/verification/player-path/town-mirror/step-008.png",
+      "sha256": "011a3a0c574e21bbfdccbfa5a774453e92336758d8330de597e3cab278ce0df3"
+    },
+    {
+      "step": 9,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-mirror/step-009.png",
+      "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
+    }
+  ]
+}

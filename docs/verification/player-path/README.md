@@ -115,13 +115,22 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 金幣 1009 − 56 ＝ 953、所在地 `HALFWAY HO`、建築編號 86、位置是城 7 入城點 3
 的 (57, 8)。存檔因此也是玩家路徑的一部分，不是另一條沒人走的支線。
 
+## `town-mirror`：角色資料頁
+
+`L R RET SPACE > RET > < RET`，10 步。白框走到第 2 格 MIRROR 打開資料頁，
+在頁面上移動白框，再選 U-TURN 回到建築內。
+
+檢查點：第 6 步與 `remake-parity/shots/town-mirror/sheet.png` 逐 byte 相同——
+那一張整頁只和原版差原版自己畫的滑鼠游標。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
   門口、進建築 → 野外循路 → 招募同伴 → 住宿存檔」這一條；戰鬥、任務、讀檔回到
   遊戲都還沒有。
-- 角色選項頁的 EDIT PICTURE／EDIT SHIELD，以及建築內的 MIRROR、買賣、訓練、AWARD、
-  SCROLL 按下去不會轉場，只會記進未實作清單。
+- 角色選項頁的 EDIT PICTURE／EDIT SHIELD，以及建築內的買賣、訓練、AWARD、SCROLL
+  按下去不會轉場，只會記進未實作清單；角色資料頁上除了 U-TURN 的三個圖示同樣。
+- 角色資料頁只有英文模式。中文版面還沒做，中文模式按 MIRROR 只會記一筆。
 - 不宣稱鏡頭跟隨規則已證實。dead zone 是由 22 張原版畫格反解的**強推論**，
   規則本身沒有從程式碼讀出來。
 - 野外的移動、道路與進城已經接上（`world-road.json`、`town-round-trip.json`）；

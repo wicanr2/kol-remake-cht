@@ -60,6 +60,9 @@ type Session struct {
 	TownCode string
 	// Unimplemented 記下玩家選到但還沒實作的圖示，讓收據看得見。
 	Unimplemented []string
+	// CJK 為真時是中文模式。角色資料頁的中文版面還沒做，選 MIRROR 只會記一筆，
+	// 不會開出一頁排錯的畫面。
+	CJK bool
 
 	// Rand 是 LISTEN 挑話題槽用的亂數來源。原版是 `rand(6)`；這裡可以注入，
 	// 玩家路徑與測試才能重播。回傳 0…n-1。
@@ -224,6 +227,12 @@ func (s *Session) acceptInside() {
 	}
 	id := s.Inside.Icons[s.Inside.Selected] - 3
 	switch {
+	case s.ShowingSheet():
+		if id == IconUTurn {
+			s.closeSheet()
+			return
+		}
+		s.note(sheetIconName(id))
 	case s.rest != nil:
 		switch id {
 		case IconYes:
@@ -252,6 +261,8 @@ func (s *Session) acceptInside() {
 		s.StartRecruit()
 	case id == IconRest:
 		s.StartRest()
+	case id == IconMirror:
+		s.OpenSheet()
 	default:
 		s.note(iconName(id))
 	}

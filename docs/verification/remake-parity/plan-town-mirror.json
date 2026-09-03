@@ -1,0 +1,117 @@
+{
+  "name": "town-mirror",
+  "description": "MIRROR 的角色資料頁（RE-074）。五個框、兩條長條與所有數字都由角色記錄算出來：八個屬性的畫面值是內部值 × 100 / 150，平衡與耐力是兩個平均；身高體重查 DGROUP 的三張表；武器名是 5-bit 壓縮。抬頭整段轉大寫（原版的 `word_2DF54` 旗標），而且繪字是不透明的——金幣那一行的冒號被值的第一個空白蓋掉，原版畫面上正是只有那一行沒有冒號。",
+  "input": {
+    "command": "tools/run_kol_shots.sh workplace/specs/mirror-parity.txt（-scene play -play-script \"L R RET SPACE > RET\"）"
+  },
+  "pairs": [
+    {
+      "label": "整頁",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 101,
+          "width": 12,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "label": "抬頭：名字、性別、種族、職業、位階、身高體重",
+      "compare": {
+        "x": 60,
+        "y": 0,
+        "width": 200,
+        "height": 52
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png"
+    },
+    {
+      "label": "八個屬性",
+      "compare": {
+        "x": 8,
+        "y": 52,
+        "width": 120,
+        "height": 76
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png"
+    },
+    {
+      "label": "武器熟練度",
+      "compare": {
+        "x": 122,
+        "y": 48,
+        "width": 190,
+        "height": 48
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png"
+    },
+    {
+      "label": "金幣、冒險點數與移動率",
+      "compare": {
+        "x": 122,
+        "y": 90,
+        "width": 190,
+        "height": 44
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png",
+      "allow": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面上畫游標，remake 沒有這個元素。",
+          "x": 158,
+          "y": 101,
+          "width": 12,
+          "height": 14
+        }
+      ]
+    },
+    {
+      "label": "傷勢與營養長條",
+      "compare": {
+        "x": 34,
+        "y": 126,
+        "width": 262,
+        "height": 40
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png"
+    },
+    {
+      "label": "圖示列",
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png"
+    },
+    {
+      "label": "隊員格",
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 60,
+        "height": 52
+      },
+      "remake": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "original": "docs/verification/character-ui/town-mirror-run1/frames/frame-073.png"
+    }
+  ]
+}

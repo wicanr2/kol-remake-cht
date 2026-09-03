@@ -6,7 +6,7 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
-    "commit": "fe924b5b54006d589168a85375cfa781014c8da3"
+    "commit": "cf4d0103a085c4b128a4531bd26e5cda270483e0"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "9ff9e351ba8540a4b2b45d2fad63b5e8338c4f58cb8e2fe007f42e1e14cf1257",
@@ -18,7 +18,7 @@
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 37,
+  "count": 38,
   "failed": 0,
   "screenshots": [
     {
@@ -419,6 +419,19 @@
       "height": 400,
       "distinct_colours": 14,
       "sha256": "0f3cb00645131c6f9111057b2ce14c7e0d8d650673c9de95ae8f988ccebe1f1a",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-sheet.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene play -play-script L R RET SPACE > RET -shot docs/screenshots/en-town-sheet.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 15,
+      "sha256": "011a3a0c574e21bbfdccbfa5a774453e92336758d8330de597e3cab278ce0df3",
+      "parity_twin": "docs/verification/remake-parity/shots/town-mirror/sheet.png",
+      "parity_receipt": "docs/verification/remake-parity/town-mirror.json",
+      "identical_to_parity_shot": true,
       "pass": true
     }
   ]

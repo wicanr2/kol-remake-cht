@@ -23,19 +23,24 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		return err
 	}
 
-	pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
-	if err != nil {
-		return err
-	}
-	w, h := pic.Bounds().Dx(), pic.Bounds().Dy()
-	shadow(dst, town.Portrait.X, town.Portrait.Y, w, h)
-	draw(dst, pic, town.Portrait.X, town.Portrait.Y)
-
-	drawBox(dst, large, town.TitleBox, in.Title)
-	if in.List != nil {
-		drawInnList(dst, large, in.List)
+	// MIRROR 的角色資料頁蓋掉肖像、標題框與對話框那一整塊。
+	if in.Sheet != nil {
+		drawSheet(dst, small, in.SheetLabels, in.Sheet)
 	} else {
-		drawBox(dst, large, town.DialogBox, in.Dialog)
+		pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
+		if err != nil {
+			return err
+		}
+		w, h := pic.Bounds().Dx(), pic.Bounds().Dy()
+		shadow(dst, town.Portrait.X, town.Portrait.Y, w, h)
+		draw(dst, pic, town.Portrait.X, town.Portrait.Y)
+
+		drawBox(dst, large, town.TitleBox, in.Title)
+		if in.List != nil {
+			drawInnList(dst, large, in.List)
+		} else {
+			drawBox(dst, large, town.DialogBox, in.Dialog)
+		}
 	}
 
 	b := town.IconBar

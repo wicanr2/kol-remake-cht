@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -148,3 +149,67 @@ func (t *UIText) Lines(bank string, index int) []string {
 	}
 	return out
 }
+
+// Segment 是一段帶座標的文字：Col 是字格欄（× 8 就是 x），Row 是像素列。
+type Segment struct {
+	Col, Row int
+	Text     string
+}
+
+// Segments 把一筆帶 `~Vxx`／`~Hxx` 座標的記錄拆成幾段。角色資料頁的標籤
+// （KOLDATA 記錄 73h）就是這種記錄：每一段自己帶垂直座標，水平座標只在
+// 段落開頭出現一次，`@` 之後回到最後一次 `~H` 設的左緣、並往下一行（RE-074）。
+func (t *UIText) Segments(bank string, index int) []Segment {
+	return parseSegments(t.raw(bank, index))
+}
+
+// ParseSegments 讓譯文表也能用同一套座標語法。
+func ParseSegments(raw string) []Segment { return parseSegments(raw) }
+
+func parseSegments(raw string) []Segment {
+	if raw == "" {
+		return nil
+	}
+	var out []Segment
+	var buf strings.Builder
+	col, row, margin := 0, 0, 0
+	flush := func() {
+		if buf.Len() > 0 {
+			out = append(out, Segment{Col: col, Row: row, Text: buf.String()})
+			buf.Reset()
+		}
+	}
+	for i := 0; i < len(raw); {
+		switch {
+		case raw[i] == '~' && i+3 < len(raw) &&
+			(raw[i+1] == 'V' || raw[i+1] == 'H' || raw[i+1] == 'C'):
+			value, err := strconv.ParseInt(raw[i+2:i+4], 16, 32)
+			if err == nil {
+				switch raw[i+1] {
+				case 'V':
+					flush()
+					row = int(value)
+				case 'H':
+					flush()
+					col, margin = int(value), int(value)
+				}
+			}
+			i += 4
+		case raw[i] == '@':
+			flush()
+			row += LineStep
+			col = margin
+			i++
+		case raw[i] == ']':
+			i++
+		default:
+			buf.WriteByte(raw[i])
+			i++
+		}
+	}
+	flush()
+	return out
+}
+
+// LineStep 是原版文字的行距。
+const LineStep = 8

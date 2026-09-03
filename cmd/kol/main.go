@@ -283,6 +283,26 @@ func (g *game) playToken(token string) error {
 	return applyPlayToken(g.play, token)
 }
 
+// townSheet 把角色檔抽出來的資料頁欄位換成城鎮這一側的型別。
+func townSheet(s *roster.Sheet) *town.Sheet {
+	if s == nil || len(s.Stats) != town.StatCount {
+		return nil
+	}
+	out := &town.Sheet{
+		Race: s.Race, Profession: s.Profession, Rank: s.Rank,
+		AdventurePoints: s.AdventurePoints, MovementRate: s.MovementRate,
+		Nutrition: s.Nutrition, HeightFeet: s.HeightFeet,
+		HeightInches: s.HeightInches, Weight: s.Weight,
+		Armour: s.Armour, Shield: s.Shield,
+	}
+	copy(out.Stats[:], s.Stats)
+	for _, w := range s.Weapons {
+		out.Weapons = append(out.Weapons, town.WeaponRow{
+			Name: w.Name, Offence: w.Offence, Defence: w.Defence})
+	}
+	return out
+}
+
 // buildSave 把目前的遊玩狀態組成一份存檔（SPEC-006）。人在城裡就記城鎮座標，
 // 走到野外就記世界座標；兩邊都只放有 RE 證據的欄位。
 func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
@@ -1324,13 +1344,15 @@ func main() {
 			os.Exit(1)
 		}
 		playSession.Topics = topics
+		playSession.CJK = *lang != "en"
 		if rosterState, err := roster.Load(*rosterPath); err == nil {
 			for _, slot := range rosterState.Occupied() {
 				playSession.Roster = append(playSession.Roster, town.Candidate{
 					Name: slot.Name, Portrait: slot.Portrait,
 					Place: slot.Place, Town: slot.Town,
 					Female: slot.Female, Wounds: slot.Wounds,
-					Gold: slot.Gold, BuildingID: slot.Building})
+					Gold: slot.Gold, BuildingID: slot.Building,
+					Sheet: townSheet(slot.Sheet)})
 			}
 			// 畫面樣本只寫隊伍有誰，錢包與所在地在角色檔裡——住宿與治療要花的
 			// 就是這一份錢（RE-073），所以照名字補齊。
@@ -1346,6 +1368,9 @@ func main() {
 						playSession.Party[i].Place = c.Place
 						playSession.Party[i].TownCode = c.Town
 						playSession.Party[i].BuildingID = c.BuildingID
+					}
+					if playSession.Party[i].Sheet == nil {
+						playSession.Party[i].Sheet = c.Sheet
 					}
 					break
 				}

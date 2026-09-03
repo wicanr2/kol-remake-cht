@@ -39,6 +39,8 @@ type Candidate struct {
 	Gold int
 	// BuildingID 是角色檔記下的留宿建築編號。
 	BuildingID int
+	// Sheet 是角色資料頁的欄位。
+	Sheet *Sheet
 }
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。
@@ -168,7 +170,7 @@ func (s *Session) joinSelected() {
 	}
 	s.Party = append(s.Party, Member{Name: c.Name, Portrait: c.Portrait,
 		Female: c.Female, Wounds: c.Wounds, Gold: c.Gold, Place: c.Place,
-		TownCode: c.Town, BuildingID: c.BuildingID, Speaker: true})
+		TownCode: c.Town, BuildingID: c.BuildingID, Sheet: c.Sheet, Speaker: true})
 	s.Inside.Party = s.Party
 	s.recruit, s.asking = nil, false
 	s.Inside.List = nil
