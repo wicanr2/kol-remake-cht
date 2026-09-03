@@ -331,8 +331,11 @@
   傷害，各等一次鍵。招架碼的訊息基底是 **0x15F** 不是 RE-080 原本寫的 0x14F，
   另外碼為 4 而且對方體型大很多時會改成 2。實跑揮空那一條讀回
   `Poontang whips his Long Spear through the air.`（兩行，斷行正確）。
-- [ ] 攻擊訊息只實跑過「面前沒人」那一條。要驗動作句（whacks／chops…）與傷害
-  那一句，得先讓隊員走到敵人旁邊——任務地點 5 的隊員與怪物差十一格。
+- [x] 攻擊訊息的三條路都實跑過了：走進戰場、往下移動四步貼到最近那一隻
+  BINDERAK，攻擊之後讀回
+  `Poontang whacks his Long Spear at The BINDERAK who cannot parry the blow!`
+  與 `The blow hits The BINDERAK's chest killing it instantly!`。
+  **remake 現在打得死怪物**——規劃、移動、攻擊、傷害與訊息整條通了。
 - [ ] `0x27B77` 之後的擊退與昏迷（0x158／0x159／0x15A…0x15C）還沒讀；
   倒下那一句的 collapse／shatter 兩個分支條件（`sub_22229` 與怪物記錄 +0x10）
   語意未定，實作一律走 die。
@@ -399,15 +402,17 @@
 
 ## 下一個唯一工作
 
-把攻擊訊息的另外兩條路走完。整條戰鬥現在通了——規劃、執行、移動、傷害與訊息都
-接上了，實跑讀回 `Poontang is resting!` 與
-`Poontang whips his Long Spear through the air.`。但攻擊訊息只驗過「面前沒人」
-那一條；動作句（whacks／chops…）與傷害那一句還沒實跑過，因為任務地點 5 的隊員
-與怪物差十一格，要先走過去。
+錄一輪走到執行段的原版 oracle。戰鬥的核心這一輪打通了——規劃、移動、攻擊、傷害與
+訊息整條走得完，實跑打死了一隻 BINDERAK。但**執行段的畫面一張都還沒對過 parity**：
+`world-quest-run1` 那一輪 oracle 的按鍵序列停在規劃與戰場之間，沒有原版畫格可比。
 
-之後依序是：錄一輪走到執行段的原版 oracle（訊息框與攻擊訊息才對得了 parity）、
-`0x27B77` 之後的擊退與昏迷、撿與丟那兩手、攻擊式那一列（對 frame-899）與選目標格
-的畫面收據。敵人那一手維持跳過（缺三張基礎權重表的執行期值）。
+要錄的路徑就是這一輪走過的：進戰場 → 移動四步 → 攻擊 → 兩句訊息。工具是
+`tools/dosbox_character_ui_oracle.py`（`tools/run_character_ui_oracle.sh`），
+情境照 `world-quest-run1` 的寫法加一個新的。錄到之後就能把訊息框、攻擊式那一列
+與選目標格三份收據一起補上。
+
+之後依序是：`0x27B77` 之後的擊退與昏迷、撿與丟那兩手。敵人那一手維持跳過
+（缺三張基礎權重表的執行期值）。
 
 等使用者決策才能動的項目（不擋上面的工作）：
 

@@ -4307,7 +4307,30 @@ while 斷點候選 < 長度:
 腿廢掉會清 +0x03——而 +0x03 正是 RE-085 裡「移動方式第三格出不出現」的門檻。
 兩邊合起來看，+0x03 與腿的狀態相關，這是 +0x1E／+0x03 那一組旗標的另一條線索。
 
+### remake 的驗證（remake 自我一致，**不是** parity）
+
+`workplace/specs/exec-hit.txt` 從任務地點走進戰場，往下移動四步貼到最近那一隻
+BINDERAK（隊員站 (14,41)、那一隻站 (19,41)），再用武器攻擊式選項 1 打一下。
+`tools/read_text_from_frame.py` 從 (24, 168) 讀回兩句：
+
+```
+第一句  Poontang whacks his Long Spear at The BINDERAK who cannot parry the blow!
+第二句  The blow hits The BINDERAK's chest killing it instantly!
+```
+
+第一句三行、第二句兩行，斷點都落在空白上，第一行剛好 30 個字元——與 RE-087 的
+斷行規則一致。動作句 0x130（`[0x12F + 1]`）、0x13A 的 `|B|E at|F`、命中的 0x13E，
+以及第二句的 0x140／0x141／0x143／[0x144 + 1]／0x151 全部對上。
+
+句首的「The blow」與 `|F` 展開的「The BINDERAK」都是 0x140，兩個 The 是原版的
+行為，不是重複代換。
+
+**這不是同狀態對拍**：`world-quest-run1` 那一輪 oracle 沒有走進執行段，沒有原版
+畫格可比。
+
 ### 還沒走完的
 
 `0x27B77` 之後是擊退與昏迷（用到 0x158「The blow stuns|F]」、0x159「The force of
 the blow knocks|F]」與 0x15A…0x15C），還沒讀。法術那一套（0x169…0x171）同樣未讀。
+倒下那一句的 collapse／shatter 兩個分支條件（`sub_22229` 與怪物記錄 +0x10）語意
+未定，實作一律走 die；上面那一次是頭胸廢掉走 0x151，沒有經過這個分支。

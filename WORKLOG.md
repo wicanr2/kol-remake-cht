@@ -2222,3 +2222,29 @@ RE-080 末段、SPEC-008 與 WORKLIST 都把「移動指令 0x27 的點數規則
 攻擊訊息只實跑過「面前沒人」那一條。動作句與傷害那一句要讓隊員走到敵人旁邊才驗得到
 （任務地點 5 的隊員與怪物差十一格）。`0x27B77` 之後的擊退與昏迷還沒讀；倒下那一句
 的 collapse／shatter 兩個分支條件語意未定，實作一律走 die。
+
+## 2026-09-04（續三）：打死了第一隻怪物
+
+- 這一輪沒有新的反組譯，只把 RE-085…RE-088 的實作實際走一遍。
+- `workplace/specs/exec-hit.txt`：進戰場 → 往下移動四步 → 攻擊。任務地點 5 的
+  隊員站 (14,41)，最近那一隻 BINDERAK 站 (19,41)，所以四步就貼得上去
+  （先前寫成「差十一格」是看錯了怪物清單的第一筆）。
+- 讀回兩句，逐字都對：
+
+```
+Poontang whacks his Long Spear at The BINDERAK who cannot parry the blow!
+The blow hits The BINDERAK's chest killing it instantly!
+```
+
+- 這一次驗到的東西：移動四步都成功（RE-085 的四道判斷沒有誤擋）、選目標格的起點
+  跟著方向走、攻擊式選項 1 直接收尾（RE-082）、動作句 `[0x12F + 1]`、`|B`／`|E`／
+  `|F` 三個代換、命中的 0x13E、傷害那一句的 0x140／0x141／0x143／[0x144+1]／0x151，
+  以及兩句的斷行（第一行剛好 30 個字元）。
+- 句首的「The blow」與 `|F` 展開的「The BINDERAK」都來自 0x140，兩個 The 是原版
+  行為，不是重複代換。
+
+### 仍然不是 parity
+
+執行段的畫面**一張都還沒對過**。`world-quest-run1` 那一輪 oracle 的按鍵序列停在
+規劃與戰場之間，沒有原版畫格可比。要對得照這一輪走過的路徑另錄一輪
+（`tools/run_character_ui_oracle.sh`），已列為下一個唯一工作。

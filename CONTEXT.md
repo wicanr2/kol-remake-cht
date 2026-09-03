@@ -194,8 +194,14 @@ frame-886 逐像素相同（RE-083）。
 （部位、輕重三段、倒下與斷肢）。招架碼的訊息基底是 0x15F，不是 RE-080 原本寫的
 0x14F。實跑讀回 `Poontang whips his Long Spear through the air.`。
 
-只驗過「面前沒人」那一條；動作句與傷害那一句還沒實跑（隊員與怪物差十一格）。
-撿、丟與背包那三手也還沒做，`Act` 會標成 `Unimplemented`，不假裝做過。
+三條路都實跑過了：走進戰場、往下移動四步貼到最近那一隻 BINDERAK、攻擊，讀回
+`Poontang whacks his Long Spear at The BINDERAK who cannot parry the blow!`
+與 `The blow hits The BINDERAK's chest killing it instantly!`。
+**remake 現在打得死怪物**——規劃、移動、攻擊、傷害與訊息整條通了。
+
+**執行段的畫面一張都還沒對過 parity**：那一輪 oracle 停在規劃與戰場之間，
+沒有原版畫格可比，要另錄一輪。撿、丟與背包那三手也還沒做，`Act` 會標成
+`Unimplemented`，不假裝做過。
 
 敵人 AI 的規則已經完整：六條分岔（撤退、休息、射擊、貼近打、移動、繞圈）、
 以行動者為中心的七個同心方環搜尋、篩選遮罩、智力擲骰決定要不要做戰術判斷、
