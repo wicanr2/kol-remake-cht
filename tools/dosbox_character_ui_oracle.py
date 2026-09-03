@@ -620,6 +620,27 @@ SCENARIOS: dict[str, dict] = {
             step("按下 SIGNPOST 之後（觀察）", None, settle=4.0),
         ],
     },
+    "world-clock": {
+        "description": "離開城鎮之後在野外原地左右走動：每一次方向鍵都會推進時刻，"
+                       "但次格座標在同一格內來回，不會換格、不會換地形、也不會踏回"
+                       "城鎮入口。用來量「時段標籤在第幾步變」。純觀察，不保存。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "Return", settle=3.5),
+            step("戶外地圖（隊伍在旅店門口）", "Right", settle=2.5),
+            step("往右一步", "Right", settle=2.5),
+            step("往右兩步", "Up", settle=2.5),
+        ] + [
+            step(f"往北第 {i} 步", "Up", settle=2.5) for i in range(1, 8)
+        ] + [
+            step("走到地圖上緣（鏡頭已夾限）", "Up", settle=3.5),
+            step("城門提示（白框在 DOOR）", "Return", settle=6.0),
+        ] + [
+            step(f"野外第 {i} 步", "Right" if i % 2 else "Left", settle=2.0)
+            for i in range(1, 25)
+        ] + [
+            step("量完（觀察）", None, settle=3.0),
+        ],
+    },
     "world-enter-town": {
         "description": "離開城鎮走到野外之後，往東走五步跨進隔壁那一格，再往西一步"
                        "踏回城鎮入口那一格：畫面應換成該地點的外觀圖，圖示列剩 "

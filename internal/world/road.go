@@ -116,9 +116,13 @@ func (s *Session) FollowRoad(other bool) bool {
 	moved := t.WalkRoad(dx, dy)
 	if t.X != x || t.Y != y {
 		s.Sync()
-		if s.Mode != ModeTown {
-			s.Screen.SyncTerrain()
+		if s.Mode == ModeTown {
+			return moved
 		}
+		s.Screen.SyncTerrain()
+	}
+	if moved {
+		s.advanceTime()
 	}
 	return moved
 }

@@ -43,6 +43,19 @@ type Session struct {
 	Excluded  int
 	// Town 是腳下那個城鎮入口；不在入口上就是 nil。
 	Town *Town
+
+	// Rand 是天候隨機漫步用的亂數來源；nil 就不換天候。
+	Rand Rand
+	// OnNewDay 在換日時被呼叫，參數是每名隊員的營養條要加多少。
+	OnNewDay func(hunger int)
+	// Camping 是換日那一張 CAMPING! 畫面：原版停在那裡等一個鍵
+	// （`sub_297F2:0x2989D`…`0x298E2`）。
+	Camping bool
+}
+
+// Rand 是可注入的亂數來源；n 為骰面數，回傳 1…n。與角色建立用的是同一個介面。
+type Rand interface {
+	Roll(n int) int
 }
 
 // NewSession 建立一次野外旅行。起始狀態是「剛進野外」：地圖模式、空的圖示列。
@@ -121,13 +134,64 @@ func (s *Session) Walk(dx, dy int) bool {
 	moved := t.Walk(dx, dy)
 	if t.X != x || t.Y != y {
 		s.Sync()
-		// 走到城鎮入口的那一步不更新地形標籤：原版此時跳進 `sub_29BBB`，
-		// 更新標籤的 `sub_297F2` 整段被略過，標籤因此留在上一格的地形。
-		if s.Mode != ModeTown {
-			s.Screen.SyncTerrain()
+		// 走到城鎮入口的那一步不更新地形標籤，時刻也不推進：原版此時跳進
+		// `sub_29BBB`，整支 `sub_297F2` 被略過（RE-070）。
+		if s.Mode == ModeTown {
+			return moved
 		}
+		s.Screen.SyncTerrain()
+	}
+	if moved {
+		s.advanceTime()
 	}
 	return moved
+}
+
+// advanceTime 是走一步之後的時刻推進（`sub_297F2`）。格內的次格移動也算一步：
+// 原版「世界座標沒變」那一條路（`0x295C1`）同樣呼叫這一支。**被地形擋住的那一步
+// 不算**：原版走 `0x2958F` 把座標復原，之後 `jmp 0x295DD` 跳過整支 `sub_297F2`。
+func (s *Session) advanceTime() {
+	c := s.Screen.Clock
+	if c == nil {
+		return
+	}
+	part := c.Part
+	if c.Advance(s.Screen.TerrainCode, s.Screen.Movement) {
+		s.Camping = true
+		if s.OnNewDay != nil {
+			s.OnNewDay(c.Hunger())
+		}
+	}
+	if c.Part != part {
+		s.rollWeather()
+	}
+	s.Screen.TimeIndex = c.Part
+	s.Screen.Date = c.DateLines()
+}
+
+// rollWeather 是時段變換時的天候隨機漫步。原版每次都擲，擲出同一組就不重畫。
+func (s *Session) rollWeather() {
+	c := s.Screen.Clock
+	if s.Rand == nil {
+		return
+	}
+	next := c.NextWeather(s.Rand.Roll(0x80) - 1)
+	if next == c.Weather {
+		return
+	}
+	c.Weather = next
+	s.Screen.Group = next
+}
+
+// EndCamping 是 CAMPING! 畫面上按下任何一鍵。
+func (s *Session) EndCamping() {
+	if !s.Camping {
+		return
+	}
+	s.Camping = false
+	// 原版收掉那一張之後把天候設回第 1 組再重算（`sub_297F2:0x298FC`）。
+	s.Screen.Clock.Weather = 1
+	s.Screen.Group = 1
 }
 
 // MoveCursor 移動圖示列的白框，兩端繞回。

@@ -56,6 +56,7 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 | `town-shop` | 66／72 | 兩輪 | 無 |
 | `town-adjust` | 77 | 單輪 | 無 |
 | `town-train` | 56 | 單輪 | 無 |
+| `world-clock` | 67／43 | 兩輪 | 無 |
 
 兩輪之間的差異全部落在三類本來就不可能逐 byte 相同的畫面：
 

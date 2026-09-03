@@ -85,6 +85,25 @@ func (r *lcg) Roll(n int) int {
 	return int(r.next()>>16)%n + 1
 }
 
+// partyMovement 是隊伍裡最慢的那個移動率（`sub_29004:0x290A6`…`0x290D7`）。
+// 數字越大越慢，0 當成 20。沒有資料頁的隊員不算。
+func partyMovement(party []town.Member) int {
+	slowest := 0
+	for _, m := range party {
+		if m.Sheet == nil {
+			continue
+		}
+		rate := m.Sheet.MovementRate
+		if rate == 0 {
+			rate = world.DefaultMovement
+		}
+		if rate > slowest {
+			slowest = rate
+		}
+	}
+	return slowest
+}
+
 // fixedChoice 固定取同一個選項，用來窮舉標題序列兩處亂數的每一條分支。
 // 對拍的判準是集合包含，因此兩次固定取法的聯集就涵蓋所有會出現的畫面。
 type fixedChoice int
@@ -1489,6 +1508,24 @@ func main() {
 			playSession.SaveGame = func() error {
 				return save.Write(*savePath,
 					buildSave(playSession, worldScreenState, *faithfulInn))
+			}
+		}
+		// 野外的時刻：隊伍最慢的那個移動率決定每步扣多少，換日補營養（RE-077）。
+		if worldScreenState != nil {
+			worldScreenState.Clock = world.NewClock()
+			worldScreenState.Movement = partyMovement(playSession.Party)
+			worldScreenState.Date = worldScreenState.Clock.DateLines()
+			worldSessionState.Rand = &lcg{state: uint32(*seed)}
+			worldSessionState.OnNewDay = func(hunger int) {
+				for _, m := range playSession.Party {
+					if m.Sheet == nil {
+						continue
+					}
+					m.Sheet.Nutrition += hunger
+					if m.Sheet.Nutrition > 0xFF {
+						m.Sheet.Nutrition = 0xFF
+					}
+				}
 			}
 		}
 		// LISTEN 的挑槽在截圖與玩家路徑裡必須可重播，因此用固定序列而不是真亂數。

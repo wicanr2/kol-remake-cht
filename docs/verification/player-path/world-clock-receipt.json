@@ -1,0 +1,191 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "world-clock",
+  "description": "從旅店走到城鎮上緣、在城門選 DOOR 出城，接著在平原上左右來回十五步。每一步扣 2 × (平原 8 + 隊伍移動率 20) = 56 點時刻；第 15 步時刻由 3416 降到 3360，跨過 DAWN 的下限，左下標籤換成 MID MORN。全程只經過 town.Session 與 world.Session。",
+  "script": "R R U U U U U U U U U RET R L R L R L R L R L R L R L R",
+  "step_count": 28,
+  "checkpoints": [
+    {
+      "step": 26,
+      "identical_to": "docs/verification/remake-parity/shots/world-clock/step14.png",
+      "note": "第 14 步：還在 DAWN，與已對拍的截圖逐 byte 相同"
+    },
+    {
+      "step": 27,
+      "identical_to": "docs/verification/remake-parity/shots/world-clock/step15.png",
+      "note": "第 15 步：換成 MID MORN，與已對拍的截圖逐 byte 相同"
+    }
+  ],
+  "save": null,
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/world-clock/step-000.png",
+      "sha256": "750cb9ce00553cd5b66c7545bb0e0f7e865ef6c8c23b3f342b2f9a29107e8930"
+    },
+    {
+      "step": 1,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-001.png",
+      "sha256": "2af52bcb084bcb107f2804db235ab8cb7d0085f71e7971d95b1bed4c07616aea"
+    },
+    {
+      "step": 2,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-002.png",
+      "sha256": "4c4207e88540a74a8a25eaa7cb1c3490c15c381755c79a57fd660d3a585d569a"
+    },
+    {
+      "step": 3,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-003.png",
+      "sha256": "3362478b122572a5e76cb6a695eff38de6e007d842167a3e347e7c1a5088006d"
+    },
+    {
+      "step": 4,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-004.png",
+      "sha256": "44c74a7ccf95647b0720b00161d6a4cc03121dae47f35e82bf16bdfb77b510aa"
+    },
+    {
+      "step": 5,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-005.png",
+      "sha256": "b52a026e0aac8f83cba81997e874026ce43c299b170e0c818d3957a8d685c7f7"
+    },
+    {
+      "step": 6,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-006.png",
+      "sha256": "26beda32c18a35afe10c6d543843f487829663fd53928e97930b57ac10904b71"
+    },
+    {
+      "step": 7,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-007.png",
+      "sha256": "b4f740ce06c71804a422c008f1160d5b4d664eb6f33331050a026a4b3c206585"
+    },
+    {
+      "step": 8,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-008.png",
+      "sha256": "1f51fbf1044a69bf7c3045066c9e7ccf216ab5b6c0efd38f5751efa9ccc25d72"
+    },
+    {
+      "step": 9,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-009.png",
+      "sha256": "b37dfc3f95a97f25c22797615d2ba5ef075d7f0a6f3d4867f4116366b3cdad30"
+    },
+    {
+      "step": 10,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-010.png",
+      "sha256": "b979fe4e246c8c73889363740749ade5698b773026d02a00ed3463ab42e2608a"
+    },
+    {
+      "step": 11,
+      "token": "U",
+      "file": "docs/verification/player-path/world-clock/step-011.png",
+      "sha256": "6e6e3f1a6334b2dc3dd0e98bd37f272c1deef809d7e0e96fa96c3252895ceec7"
+    },
+    {
+      "step": 12,
+      "token": "RET",
+      "file": "docs/verification/player-path/world-clock/step-012.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 13,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-013.png",
+      "sha256": "752e9cbade9ebba67890f5e3b1c4d53d3783660f42a2e2feb5575d1f21134a59"
+    },
+    {
+      "step": 14,
+      "token": "L",
+      "file": "docs/verification/player-path/world-clock/step-014.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 15,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-015.png",
+      "sha256": "752e9cbade9ebba67890f5e3b1c4d53d3783660f42a2e2feb5575d1f21134a59"
+    },
+    {
+      "step": 16,
+      "token": "L",
+      "file": "docs/verification/player-path/world-clock/step-016.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 17,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-017.png",
+      "sha256": "752e9cbade9ebba67890f5e3b1c4d53d3783660f42a2e2feb5575d1f21134a59"
+    },
+    {
+      "step": 18,
+      "token": "L",
+      "file": "docs/verification/player-path/world-clock/step-018.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 19,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-019.png",
+      "sha256": "752e9cbade9ebba67890f5e3b1c4d53d3783660f42a2e2feb5575d1f21134a59"
+    },
+    {
+      "step": 20,
+      "token": "L",
+      "file": "docs/verification/player-path/world-clock/step-020.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 21,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-021.png",
+      "sha256": "752e9cbade9ebba67890f5e3b1c4d53d3783660f42a2e2feb5575d1f21134a59"
+    },
+    {
+      "step": 22,
+      "token": "L",
+      "file": "docs/verification/player-path/world-clock/step-022.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 23,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-023.png",
+      "sha256": "752e9cbade9ebba67890f5e3b1c4d53d3783660f42a2e2feb5575d1f21134a59"
+    },
+    {
+      "step": 24,
+      "token": "L",
+      "file": "docs/verification/player-path/world-clock/step-024.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 25,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-025.png",
+      "sha256": "752e9cbade9ebba67890f5e3b1c4d53d3783660f42a2e2feb5575d1f21134a59"
+    },
+    {
+      "step": 26,
+      "token": "L",
+      "file": "docs/verification/player-path/world-clock/step-026.png",
+      "sha256": "a56df77b5c9c0b40781588a4ab71f9f21035c345b7bb1b678354af3839d8048f"
+    },
+    {
+      "step": 27,
+      "token": "R",
+      "file": "docs/verification/player-path/world-clock/step-027.png",
+      "sha256": "61d466c74b923bb1ad69a99216564e84dc7412fb8ee81c6c79d2fdf78a0faba0"
+    }
+  ]
+}

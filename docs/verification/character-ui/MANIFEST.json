@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 4129,
+  "total_frames": 4639,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -598,6 +598,36 @@
       "frame_dir": "docs/verification/character-ui/town-train-run1/frames",
       "character_files_changed": [],
       "note": "走到布瑞特堡壘按 AWARD，一路問到「要幾點技能」；ddduhh 沒有冒險點數，最後被擋下來。"
+    },
+    {
+      "run": "world-clock-run1",
+      "scenario": "world-clock",
+      "description": "離開城鎮之後在野外原地上下走動：每一次方向鍵都會推進時刻，但次格座標在同一格內來回，不會換格、不會換地形、也不會踏回城鎮入口。用來量「時段標籤在第幾步變」。純觀察，不保存。",
+      "receipt": "docs/verification/character-ui/world-clock-run1/receipt.json",
+      "generated_utc": "2026-09-03T08:11:28Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 67,
+      "frame_count": 221,
+      "frame_dir": "docs/verification/character-ui/world-clock-run1/frames",
+      "character_files_changed": [],
+      "note": "上下來回走了 18 步之後踩進伏擊：frame-220 是「1 隻 2 級 BINDERAK」的遭遇畫面。"
+    },
+    {
+      "run": "world-clock-run2",
+      "scenario": "world-clock",
+      "description": "離開城鎮之後在野外原地左右走動：每一次方向鍵都會推進時刻，但次格座標在同一格內來回，不會換格、不會換地形、也不會踏回城鎮入口。用來量「時段標籤在第幾步變」。純觀察，不保存。",
+      "receipt": "docs/verification/character-ui/world-clock-run2/receipt.json",
+      "generated_utc": "2026-09-03T08:18:25Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 43,
+      "frame_count": 289,
+      "frame_dir": "docs/verification/character-ui/world-clock-run2/frames",
+      "character_files_changed": [],
+      "note": "在平原上左右來回 24 步，量時段標籤在第幾步變：第 15 步由 DAWN 換成 MID MORN。"
     }
   ]
 }

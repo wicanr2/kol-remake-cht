@@ -58,6 +58,11 @@ type Screen struct {
 	// 用來置中（`"  DAWN ]"`），所以不能先去空白。
 	Names Namer
 
+	// Clock 是野外的時刻與日曆；nil 代表這個畫面不推進時間（單張截圖用）。
+	Clock *Clock
+	// Movement 是隊伍裡最慢的那個移動率（`sub_29004:0x290EB` 的 `word_2FA2C`）。
+	Movement int
+
 	// TerrainCode 是標籤上那一行地形，另外記著而不是每次重算。原版把它放在
 	// `word_3499A`，只有 `sub_297F2` 會更新；而走到城鎮入口那一步會跳去
 	// `sub_29BBB`，整段更新被略過，所以標籤留在上一格的地形（RE-070）。
