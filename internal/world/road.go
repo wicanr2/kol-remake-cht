@@ -122,7 +122,8 @@ func (s *Session) FollowRoad(other bool) bool {
 		s.Screen.SyncTerrain()
 	}
 	if moved {
-		s.advanceTime()
+		// 循路一步扣的時刻與一般步伐不同（見 `RoadStepCost`）。
+		s.spendTime(RoadStepCost)
 	}
 	return moved
 }

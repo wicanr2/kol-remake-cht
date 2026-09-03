@@ -42,6 +42,15 @@ var terrainStep = [8]int{10, 10, 10, 20, 6, 14, 30, 8}
 // DefaultMovement 是移動率 0 時代入的值（`sub_29004:0x290C2`）。
 const DefaultMovement = 20
 
+// RoadStepCost 是循路一步扣的時刻。原版**不是**照一般步伐算的：兩輪 oracle
+// （`workplace/oracle/world-road-clock`／`world-road-clock2`）都量到「往北十二步
+// （PLAINS，每步 56）之後連按 ROAD，時段標籤在第 9 次才翻成 MID MORN」，
+// 往回推一步只扣 18…20，而一般步伐在道路上是 `2 × (6 + 20) = 52`。
+// 取 20 是因為 `2 × (10 + 0)` 是成本表上唯一自洽的組合，而且 8 步 832、
+// 9 步 852 剛好卡在門檻 3367 的兩側（差一）。**機制還沒追出來**：
+// `sub_297F2` 只有一處扣時刻，呼叫前的 `word_39A54`／`word_2FA2C` 對不上這個值。
+const RoadStepCost = 20
+
 // CampWeather 是換日那一張畫面用的天候組；ClearWeather 是收掉之後設回去的那一組。
 const (
 	CampWeather  = 5
@@ -98,7 +107,12 @@ func (c *Clock) StepCost(terrain, movement int) int {
 // 收掉之後才推日期並重畫日期框（`sub_297F2:0x2993B`），所以紮營那一張上面
 // 印的還是前一天。推日期是 `NextDay`。
 func (c *Clock) Advance(terrain, movement int) bool {
-	c.Ticks -= c.StepCost(terrain, movement)
+	return c.Spend(c.StepCost(terrain, movement))
+}
+
+// Spend 扣掉指定的時刻，回傳這一步是不是把日子推過去了。
+func (c *Clock) Spend(cost int) bool {
+	c.Ticks -= cost
 	if c.Ticks >= 0 {
 		c.Part = c.partFor(c.Ticks)
 		return false

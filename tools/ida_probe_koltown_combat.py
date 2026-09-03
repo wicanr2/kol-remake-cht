@@ -25,7 +25,7 @@ import idc
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 COMBAT_ENTRY = 0x1E3A8
 # 想逐條讀的函式；探針每次只倒這幾支，免得輸出爆掉。
-DUMP_FUNCTIONS = (0x297F2,)
+DUMP_FUNCTIONS = (0x29004, 0x2A4E5, 0x115D1, 0x29BBB)
 # 圖示列是 `sub_11703(圖號)` 一個一個推出來的；掃全部呼叫點就能列出每一列。
 ICON_PUSH = 0x11703
 DGROUP_EA = 0x2DED0

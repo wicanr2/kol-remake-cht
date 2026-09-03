@@ -163,13 +163,20 @@ func (s *Session) Walk(dx, dy int) bool {
 // advanceTime 是走一步之後的時刻推進（`sub_297F2`）。格內的次格移動也算一步：
 // 原版「世界座標沒變」那一條路（`0x295C1`）同樣呼叫這一支。**被地形擋住的那一步
 // 不算**：原版走 `0x2958F` 把座標復原，之後 `jmp 0x295DD` 跳過整支 `sub_297F2`。
-func (s *Session) advanceTime() {
+func (s *Session) advanceTime() { s.spendTime(0) }
+
+// spendTime 推進時刻。cost 為 0 表示照一般步伐算（地形與隊伍移動率），
+// 非 0 就直接扣那個數——循路走的是後者（RoadStepCost）。
+func (s *Session) spendTime(cost int) {
 	c := s.Screen.Clock
 	if c == nil {
 		return
 	}
 	part := c.Part
-	if c.Advance(s.Screen.TerrainCode, s.Screen.Movement) {
+	if cost == 0 {
+		cost = c.StepCost(s.Screen.TerrainCode, s.Screen.Movement)
+	}
+	if c.Spend(cost) {
 		s.Camping = true
 		// 換日那一張把天候切到第 5 組（`sub_297F2:0x2989D`）。
 		s.Screen.Group = CampWeather

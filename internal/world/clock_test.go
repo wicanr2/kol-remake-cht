@@ -116,3 +116,32 @@ func TestClockDateLines(t *testing.T) {
 		t.Fatalf("日期框是 %q", got)
 	}
 }
+
+// 循路一步扣的時刻與一般步伐不同：原版量到的是 RoadStepCost，
+// 一般步伐在道路上是 2 × (6 + 20) = 52。
+func TestRoadStepCost(t *testing.T) {
+	c := NewClock()
+	normal := c.StepCost(4, 20)
+	if normal != 52 {
+		t.Fatalf("道路上的一般步伐 %d", normal)
+	}
+	if RoadStepCost >= normal {
+		t.Fatalf("循路一步 %d 不該比一般步伐貴", RoadStepCost)
+	}
+	// 平原十二步之後連按 ROAD：第 8 次還在 DAWN、第 9 次翻成 MID MORN
+	// （`workplace/oracle/world-road-clock` 兩輪都量到第 9 次）。
+	c = NewClock()
+	for i := 0; i < 12; i++ {
+		c.Advance(7, 20)
+	}
+	for i := 0; i < 8; i++ {
+		c.Spend(RoadStepCost)
+	}
+	if c.Part != 0 {
+		t.Fatalf("循路第 8 步時段 %d，預期還在 DAWN", c.Part)
+	}
+	c.Spend(RoadStepCost)
+	if c.Part != 1 {
+		t.Fatalf("循路第 9 步時段 %d，預期翻成 MID MORN", c.Part)
+	}
+}

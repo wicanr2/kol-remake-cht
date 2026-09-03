@@ -3,8 +3,8 @@
   "plan": "world-road",
   "description": "野外循路的對拍。`payload3[0x200 + 磚塊]` 不是布林值而是八個方向的道路位元遮罩（方向 0 是正北順時針數到 7，方向 d 對應位元 1 << (7−d)）；ROAD（圖示 17h）沿目前方向走，方向斷了就往兩側各找三格，SIGNPOST（18h）排除目前方向另挑一條。走正東西南北時隊伍若偏離格子中線會改走斜向拉回來，而那一步只准落在道路磚塊上（`word_37D28`）。圖示列的框色有三種：白框是目前這一格，被選過又離開的是青色，其餘是亮藍。七次 ROAD 加一次 SIGNPOST 的位置、地形標籤與圖示列都與原版逐 byte 相同。原版畫格挑的是隊伍那個點與 remake 同相的那一張——那個點是 XOR 閃爍，取樣落在哪一相不是行為差異。",
   "pair_count": 10,
-  "pass_count": 9,
-  "failure_count": 1,
+  "pass_count": 10,
+  "failure_count": 0,
   "pairs": [
     {
       "label": "站到路上：地圖視窗",
@@ -176,12 +176,9 @@
         "width": 80,
         "height": 20
       },
-      "pass": false,
-      "differing_outside_allowed": 134,
-      "first_outside_pixel": {
-        "x": 16,
-        "y": 144
-      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
       "allowed_regions": [],
       "required_regions": []
     },
