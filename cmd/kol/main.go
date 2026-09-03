@@ -283,6 +283,21 @@ func (g *game) playToken(token string) error {
 	return applyPlayToken(g.play, token)
 }
 
+// savedParty 把存檔裡的隊伍換成城鎮這一側的型別。角色的靜態資料（頭像、屬性）
+// 仍然來自 typed data，存檔只帶會變的那些欄位（SPEC-006）。
+func savedParty(s *save.Save) []town.Member {
+	out := make([]town.Member, 0, len(s.Party))
+	for _, m := range s.Party {
+		out = append(out, town.Member{
+			Name: m.Name, Portrait: m.Portrait, Female: m.Female,
+			Wounds: m.Wounds, Gold: m.Gold, Place: m.Place,
+			TownCode: m.TownCode, BuildingID: m.BuildingID,
+			Renown: m.Renown, Spellcaster: m.Spellcaster, Speaker: m.Speaker,
+		})
+	}
+	return out
+}
+
 // townSheet 把角色檔抽出來的資料頁欄位換成城鎮這一側的型別。
 func townSheet(s *roster.Sheet) *town.Sheet {
 	if s == nil || len(s.Stats) != town.StatCount {
@@ -941,6 +956,8 @@ func main() {
 		"zh-Hant 走中文模式（畫布放大兩倍、16 px 中文字格，不對拍）")
 	uiFontRoot := flag.String("ui-fonts", "assets/ui-font", "中文 UI 字模表目錄")
 	savePath := flag.String("save", "", "存檔路徑；客棧住宿時寫進這個檔（SPEC-006）")
+	loadPath := flag.String("load", "", "開場先讀這份存檔：隊伍、金幣、傷勢與所在位置"+
+		"都從存檔來（SPEC-006）")
 	faithfulInn := flag.Bool("faithful-inn-stay", false,
 		"客棧住宿完全照原版：問「存到硬碟嗎」、角色離隊、隊伍空了問是否離開遊戲。"+
 			"與原版對拍時要打開")
@@ -1297,6 +1314,19 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+		// 讀檔要在載入格子陣列之前決定城鎮編號——地圖檔是逐城鎮的（SPEC-006）。
+		var loaded *save.Save
+		if *loadPath != "" {
+			if loaded, err = save.Read(*loadPath); err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			state.Party = savedParty(loaded)
+			if loaded.Location.Kind == save.LocationTown {
+				state.Town = loaded.Location.Town
+				state.EntryPoint = loaded.Location.EntryPoint
+			}
+		}
 		grid, err := loadGrid(lib, state.Archive())
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -1413,6 +1443,18 @@ func main() {
 					EntryPoint: rec.EntryPoint,
 				}, info, grid)
 			}
+		}
+		// 讀檔的落點：鏡頭夾限用該入城點的世界地圖記錄，隊伍放回存檔記的那一格。
+		if loaded != nil && loaded.Location.Kind == save.LocationTown &&
+			worldScreenState != nil {
+			if rec := worldScreenState.Travel.Data.TownEntry(
+				state.Town, state.EntryPoint); rec != nil {
+				state.Bounds.MinX, state.Bounds.MaxX = rec.Bounds.MinX, rec.Bounds.MaxX
+				state.Bounds.MinY, state.Bounds.MaxY = rec.Bounds.MinY, rec.Bounds.MaxY
+			}
+			state.PlaceParty(loaded.Location.X, loaded.Location.Y)
+			playSession.Mode = town.ModeMap
+			playSession.SetBarForMode()
 		}
 		// 住宿存檔（SPEC-006）。沒有給 -save 就不寫檔，流程其餘部分照跑——
 		// 截圖與對拍不需要真的產生存檔。

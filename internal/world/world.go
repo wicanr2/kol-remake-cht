@@ -160,6 +160,17 @@ func (d *Data) TownCode(town, entry int) string {
 	return ""
 }
 
+// TownEntry 回傳某座城鎮、某個入城點的完整記錄；查不到就回 nil。
+// 讀檔要靠它把鏡頭夾限放回進城時的那一組（SPEC-006）。
+func (d *Data) TownEntry(town, entry int) *Town {
+	for i := range d.towns {
+		if d.towns[i].Town == town && d.towns[i].EntryPoint == entry {
+			return &d.towns[i]
+		}
+	}
+	return nil
+}
+
 // TownCount 是有資料的城鎮入口數。
 func (d *Data) TownCount() int { return len(d.towns) }
 

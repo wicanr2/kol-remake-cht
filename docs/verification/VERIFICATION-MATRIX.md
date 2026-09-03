@@ -30,7 +30,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 
 ## 正常玩家路徑
 
-`player-path/` 有十份可重播收據，全部要求每一步有可見效果，且指定的檢查點與
+`player-path/` 有十一份可重播收據，全部要求每一步有可見效果，且指定的檢查點與
 已通過對拍的截圖逐 byte 相同：
 
 | 路徑 | 步數 | 內容 |
@@ -43,6 +43,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 | `town-recruit` | 15 | 進旅店、把白框移到 COMPANION、回答是否搜尋硬碟、在候選人清單上下移動並加入第一位 |
 | `town-rest` | 11 | 進旅店按 REST 住一晚：付掉 56 枚金幣、記下留宿的建築、寫出存檔並逐欄驗證 |
 | `town-mirror` | 10 | 進旅店按 MIRROR 打開角色資料頁，移動白框再選 U-TURN 回建築內 |
+| `town-load` | 7 | 從 `town-rest` 寫出的存檔開場，資料頁上除了金幣那一欄與沒讀檔時逐像素相同 |
 | `world-road` | 34 | 出城往北走上道路，連按七次 ROAD 自動循路，再按 SIGNPOST 換另一條 |
 | `full` | 26 | 從標題序列走到城鎮：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走，由 `internal/flow` 串起來 |
 
@@ -54,8 +55,8 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 - [ ] 全庫測試與靜態分析
 - [ ] 翻譯／編碼檢查
 - [~] 無除錯捷徑的正常玩家路徑（標題→書本→旅店→城鎮已有 26 步收據；戰鬥與存讀檔未接）
-- [~] 可寫存檔與 pristine original 不變檢查（remake 自有 JSON 存檔已可寫可讀，
-      `town-rest` 路徑逐欄驗證；原版 `CHARDATA` 一律唯讀，匯入是離線工具。
-      戰鬥與任務進度尚未進存檔）
+- [~] 可寫存檔與 pristine original 不變檢查（存檔的迴圈已閉合：`town-rest` 寫出
+      並逐欄驗證，`town-load` 從那一份開場、畫面只差金幣那一欄。原版 `CHARDATA`
+      一律唯讀，匯入是離線工具。戰鬥與任務進度尚未進存檔）
 - [ ] 原版／remake 同狀態截圖審查
 - [ ] 封包啟動 smoke

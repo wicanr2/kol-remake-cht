@@ -123,6 +123,16 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 檢查點：第 6 步與 `remake-parity/shots/town-mirror/sheet.png` 逐 byte 相同——
 那一張整頁只和原版差原版自己畫的滑鼠游標。
 
+## `town-load`：從存檔開場
+
+`L R RET SPACE > RET`，7 步，用 `-load` 讀 `town-rest` 寫出來的那一份存檔。
+
+檢查點用的是 `same_as_except`：第 6 步與**沒讀檔**的資料頁比對，
+金幣那一欄（第 29 欄起 9 格）之內必須不同、之外必須逐像素相同。
+收據記下的是內 36 個像素不同、外 0 個——1009 變成 953，其餘一個像素都沒動。
+
+這一份要先跑 `town-rest` 才有存檔可讀；兩份合起來把存檔的迴圈閉起來。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱遊戲可玩到結局。目前接上的是「標題 → 書本 → 角色選項 → 旅店 → 城鎮走動、
@@ -135,5 +145,5 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
   規則本身沒有從程式碼讀出來。
 - 野外的移動、道路與進城已經接上（`world-road.json`、`town-round-trip.json`）；
   遭遇、時間推進與雲層動畫還沒有。
-- 存檔只寫得出來，還讀不回遊戲：`internal/save` 的讀取與匯入工具都有測試，
-  但「讀檔繼續玩」這條路徑尚未接上。
+- 存檔的迴圈已閉合（`town-rest` 寫、`town-load` 讀），但存檔目前只帶隊伍與位置；
+  戰鬥狀態、任務進度與世界時間都還沒有東西可存。

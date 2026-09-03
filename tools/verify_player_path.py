@@ -8,7 +8,9 @@
 2. 相鄰兩步不得完全相同（每個 token 都要有可見效果）；
 3. 指定的檢查點與已通過對拍的截圖**逐 byte 相同**——可玩路徑與對拍證據因此連上；
 4. 路徑若會寫存檔（`save` 區塊），把寫出來的存檔讀回來逐欄比對——存檔的內容
-   因此也是玩家路徑的一部分，不是另一條沒人走的支線。
+   因此也是玩家路徑的一部分，不是另一條沒人走的支線；
+5. 檢查點的 `same_as_except` 用來證明「只有這一塊變了」：指定矩形之外必須逐像素
+   相同，矩形之內必須真的不同。讀檔路徑靠它證明載入的存檔確實換掉了畫面上的數字。
 
   python3 tools/verify_player_path.py --plan docs/verification/player-path/town.json
 """
@@ -78,12 +80,46 @@ def main() -> int:
 
     for check in plan.get("checkpoints", []):
         shot = root / plan["shot_dir"] / f"step-{check['step']:03d}.png"
-        twin = root / check["identical_to"]
-        if not (shot.exists() and twin.exists()):
-            failures.append(f"檢查點 {check['step']} 的檔案缺少")
-            continue
-        if sha256(shot) != sha256(twin):
-            failures.append(f"檢查點 {check['step']} 與 {check['identical_to']} 不同")
+        if "identical_to" in check:
+            twin = root / check["identical_to"]
+            if not (shot.exists() and twin.exists()):
+                failures.append(f"檢查點 {check['step']} 的檔案缺少")
+                continue
+            if sha256(shot) != sha256(twin):
+                failures.append(f"檢查點 {check['step']} 與 {check['identical_to']} 不同")
+        if "same_as_except" in check:
+            spec = check["same_as_except"]
+            twin = root / spec["file"]
+            if not (shot.exists() and twin.exists()):
+                failures.append(f"檢查點 {check['step']} 的檔案缺少")
+                continue
+            a, b = read_png(shot), read_png(twin)
+            if (a.width, a.height) != (b.width, b.height):
+                failures.append(f"檢查點 {check['step']} 與 {spec['file']} 尺寸不同")
+                continue
+            pa, pb, w = a.rgb(), b.rgb(), a.width
+            r = spec["rect"]
+            outside, inside = 0, 0
+            for y in range(a.height):
+                for x in range(w):
+                    i = (y * w + x) * 3
+                    if pa[i:i + 3] == pb[i:i + 3]:
+                        continue
+                    if (r["x"] <= x < r["x"] + r["width"]
+                            and r["y"] <= y < r["y"] + r["height"]):
+                        inside += 1
+                    else:
+                        outside += 1
+            check["differing_inside"] = inside
+            check["differing_outside"] = outside
+            if outside:
+                failures.append(
+                    f"檢查點 {check['step']} 在指定矩形之外有 {outside} 個像素與"
+                    f"{spec['file']} 不同")
+            if inside == 0:
+                failures.append(
+                    f"檢查點 {check['step']} 與 {spec['file']} 完全相同；"
+                    "指定的矩形本來應該不一樣")
 
     save_check = None
     if "save" in plan:

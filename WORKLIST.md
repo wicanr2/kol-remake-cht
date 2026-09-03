@@ -256,7 +256,9 @@
 - [x] remake 自己的存檔格式已定案並實作（SPEC-006）：`kol-save-v1` 是可讀的 JSON，
   `internal/save` 負責原子讀寫，`tools/import_original_characters.py` 從原版
   `CHARDATA` 離線匯入。原版檔案一律唯讀，runtime 不解析原版格式。
-- [ ] 讀檔回到遊戲：存檔寫得出來也讀得回來，但「載入存檔繼續玩」這條路徑還沒接上。
+- [x] 讀檔回到遊戲：`-load` 把隊伍、金幣、傷勢與位置放回去；角色的靜態資料
+  （頭像、屬性、武器）仍由 typed data 提供，存檔只帶會變的欄位。
+  玩家路徑 `town-load` 用 `same_as_except` 證明畫面只有金幣那一欄變了。
 - [ ] 量測其餘畫面（城鎮、世界、戰鬥）的文字版面。
 - [x] 繁中雙模式：英文模式 320×200 走原版字模與嚴格對拍；中文模式 640×400、16×18
   中文字模格。字模由 `tools/build_cjk_font.py` 從 Noto Sans CJK TC 烘成點陣表，

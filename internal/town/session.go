@@ -132,6 +132,9 @@ func NewSession(out *Outdoor, buildings *TownBuildings, text *Text,
 	return s
 }
 
+// SetBarForMode 依目前的位置重建圖示列。讀檔之後畫面要與走到那一格時相同。
+func (s *Session) SetBarForMode() { s.syncMode() }
+
 // syncMode 依隊伍位置決定模式。只在**吃了方向鍵之後**呼叫——原版的掃門迴圈也是
 // 接在移動後面，而且撞到地形而沒走成的那一步同樣會跑掃門迴圈。
 //

@@ -191,6 +191,19 @@ func (o *Outdoor) PartyPosition() (x, y int) {
 	return o.Camera.X + o.Marker.Col, o.Camera.Y + o.Marker.Row
 }
 
+// PlaceParty 把隊伍放到城裡的某一格：鏡頭夾在界限內，剩下的差由標記偏移吸收。
+// 讀檔用（SPEC-006）。原版的存檔只記隊伍座標與四個夾限，鏡頭是算回來的。
+func (o *Outdoor) PlaceParty(x, y int) {
+	o.Camera.X = clamp(x, o.Bounds.MinX, o.Bounds.MaxX)
+	o.Camera.Y = clamp(y, o.Bounds.MinY, o.Bounds.MaxY)
+	o.Marker.Col = clamp(x-o.Camera.X, 0, MarkerDeadZone)
+	o.Marker.Row = clamp(y-o.Camera.Y, 0, MarkerDeadZone)
+	o.AtEdge = false
+	// 站在門的格子上不等於「走到門口」：原版的掃門迴圈接在移動後面，
+	// 放置本身不觸發門口狀態（RE-065）。
+	o.AtDoorCell = false
+}
+
 // MarkerOverlay 回傳目前畫格的覆蓋層像素；沒掛標記時回傳 nil。
 func (o *Outdoor) MarkerOverlay() []color.RGBA {
 	if o.markers == nil {
