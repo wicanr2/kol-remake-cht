@@ -6079,16 +6079,21 @@ RE-107 原本把 `byte_2FBFA` 對到 payload 0x36 之後看到 90／100／110／
 
 ### 身上哪幾格會被掃（`已證實`）
 
-`var_A` 從 0x30 到 0x1A0 每 0x10 一格，但跳過 0x40…0x9F。角色記錄 0x30 是手上
-那件（RE-086）、0x100 起是穿戴欄與背包（RE-080）。跳掉的那一段是 0x40…0x9F，
-也就是四列武器技能那一塊（RE-080 的 `+0x52 + 13 × 列`），不是物品。
+`var_A` 從 0x30 起每 0x10 一格，**不到 0x1A0 為止**——`0x11CF2` 的 `jge` 是先加
+再比，所以最後一格是 0x190，一共十七格。跳過 0x40…0x9F（`0x11B8D`／`0x11B96`）。
+角色記錄 0x30 是手上那件（RE-086）、0x100 起是穿戴欄與背包（RE-080）；
+跳掉的那一段是四列武器技能（RE-080 的 `+0x52 + 13 × 列`），不是物品。
 
 ### remake 的落點
 
 `tools/extract_town_buildings.py` 多帶四個欄位：`quest_site`、`quest_final`、
 `quest_wants`／`quest_wants_bytes`、`quest_gives`／`quest_gives_bytes`。
-**規則層還沒做**——交付要先有角色身上那十六格的 typed data，
-那是城鎮那一輪的事。
+規則層是 `internal/town/quest.go`：`CarriedOffsets`（要掃的十七格）、
+`QuestFlag`／`SetQuestFlag`（四個狀態）、`TurnIn`（交付與回報）、
+`CanTakeFinal`（最終任務的門檻）。
+
+**還沒接進建築內那一層**：角色身上那十七格要先有 raw bytes 的 typed data，
+抽取器目前只給 typed 的穿戴欄（`equipment`），比對要的是逐 byte 相同。
 
 ### 還沒解的
 
