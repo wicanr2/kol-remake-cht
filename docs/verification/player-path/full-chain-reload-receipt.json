@@ -1,0 +1,459 @@
+{
+ "schema": "kol-full-path-receipt-v1",
+ "name": "full-chain-reload",
+ "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，先在半途之家開角色資料頁確認金幣是住宿後的 158，再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 flow.Flow、town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
+ "seed": 3,
+ "load": "workplace/saves/full-chain.json",
+ "token_count": 119,
+ "trace": "docs/verification/player-path/full-chain-reload/trace.json",
+ "trace_sha256": "e8f7b3be5b4ab7152f5811de4f751caf22429fa3939e5056aab00245d8f2e970",
+ "milestones": [
+  {
+   "step": 0,
+   "token": "（起始）",
+   "note": "讀檔的落點就是存檔記的那一格；放置不觸發門口狀態（SPEC-006）",
+   "scene": "flow:title",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 19,
+   "token": "RET",
+   "note": "DOOR：城鎮戶外地圖",
+   "scene": "flow:town",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 21,
+   "token": "R",
+   "note": "走離門口再走回來，門口狀態成立",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "left_town": false,
+    "mode": 1,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 22,
+   "token": "RET",
+   "note": "DOOR：進半途之家",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 25,
+   "token": "RET",
+   "note": "MIRROR：角色資料頁，金幣是住宿後的 158",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 29,
+   "token": "RET",
+   "note": "回到戶外地圖",
+   "scene": "flow:town",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 40,
+   "token": "U",
+   "note": "城門提示",
+   "scene": "flow:town",
+   "town": {
+    "at_edge": true,
+    "left_town": false,
+    "mode": 3,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   }
+  },
+  {
+   "step": 41,
+   "token": "RET",
+   "note": "出城，落到霍布入城點 3",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 3,
+    "ticks": 4200,
+    "time_index": 0,
+    "x": 40,
+    "y": 23
+   }
+  },
+  {
+   "step": 110,
+   "token": "U",
+   "note": "走到入夜換日：CAMPING!，停在原地等一個鍵（RE-077）",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "camping": true,
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 6,
+    "ticks": 4200,
+    "time_index": 0,
+    "x": 48,
+    "y": 22
+   }
+  },
+  {
+   "step": 118,
+   "token": "U",
+   "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 2,
+    "mode": 0,
+    "month": 4,
+    "quest_prompt": true,
+    "sub_x": 3,
+    "sub_y": 7,
+    "ticks": 3804,
+    "time_index": 0,
+    "x": 48,
+    "y": 21
+   }
+  },
+  {
+   "step": 119,
+   "token": "RET",
+   "note": "答應參戰：滿版的怪物圖",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 2,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 7,
+    "ticks": 3804,
+    "time_index": 0,
+    "x": 48,
+    "y": 21
+   },
+   "battle": {
+    "actors": 18,
+    "bar": null,
+    "cursor": 0,
+    "cursor_cell": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "monster": "BINDERAK",
+    "order": 0,
+    "prompt": 0,
+    "roster": [
+     {
+      "chest": 16,
+      "down": false,
+      "head": 16,
+      "i": 0,
+      "injury": 0,
+      "name": "Poontang",
+      "side": 0,
+      "x": 14,
+      "y": 41
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 1,
+      "injury": 0,
+      "name": "Moraine",
+      "side": 0,
+      "x": 12,
+      "y": 41
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 2,
+      "injury": 0,
+      "name": "Fighting Bull",
+      "side": 0,
+      "x": 11,
+      "y": 42
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 3,
+      "injury": 0,
+      "name": "Kenneth",
+      "side": 0,
+      "x": 9,
+      "y": 42
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 4,
+      "injury": 0,
+      "name": "Sharakan",
+      "side": 0,
+      "x": 8,
+      "y": 43
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 5,
+      "injury": 0,
+      "name": "Olear",
+      "side": 0,
+      "x": 7,
+      "y": 44
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 6,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 25,
+      "y": 41
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 7,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 27,
+      "y": 37
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 8,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 30,
+      "y": 42
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 9,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 35,
+      "y": 42
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 10,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 36,
+      "y": 40
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 11,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 19,
+      "y": 41
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 12,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 26,
+      "y": 32
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 13,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 29,
+      "y": 28
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 14,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 30,
+      "y": 32
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 15,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 32,
+      "y": 30
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 16,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 34,
+      "y": 30
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 17,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 36,
+      "y": 33
+     }
+    ],
+    "round": 0,
+    "selected": 0,
+    "site": 5,
+    "stage": 1,
+    "turn": 0,
+    "verdict": 0
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 25,
+   "file": "step-025.png",
+   "sha256": "8c27df12ec2dfe706f8fa9b03e9cc2a17d80c66af629cf48248f6b6c6e0c7c66",
+   "shows": "角色資料頁：GOLD CROWNS 158——`full-chain` 住宿扣掉 56 之後的數字"
+  },
+  {
+   "step": 41,
+   "file": "step-041.png",
+   "sha256": "09b0ecbdf331c0c32fe421186da32228b0e95126935fae844b9011ab18867e86",
+   "shows": "出城的落點 (40,23)"
+  },
+  {
+   "step": 110,
+   "file": "step-110.png",
+   "sha256": "707bf5eb0d2f410d84ea22bb917a3ba6efd7c090a5256a76f24bcadf1e3a6274",
+   "shows": "CAMPING!"
+  },
+  {
+   "step": 118,
+   "file": "step-118.png",
+   "sha256": "416e3e07c2a49a0e6aa830050b0444b941ad4927e6b28b37b7baffe72c99bd7d",
+   "shows": "任務敘述與 Will you partake?"
+  },
+  {
+   "step": 119,
+   "file": "step-119.png",
+   "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
+   "shows": "滿版的 BINDERAK 圖"
+  }
+ ],
+ "save": null,
+ "failures": []
+}

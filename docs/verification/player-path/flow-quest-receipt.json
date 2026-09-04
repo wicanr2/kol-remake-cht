@@ -1,0 +1,283 @@
+{
+ "schema": "kol-full-path-receipt-v1",
+ "name": "flow-quest",
+ "description": "把 `full` 的前 19 步（標題 → 書本 → 角色選項 → 角色選擇清單 → 旅店 → DOOR）接上 `world-quest` 的 90 步，證明**同一條 flow 路徑**也走得到第 5 個任務地點。檢查點與 `world-quest` 用的是同一批對拍截圖，而且逐 byte 相同——換句話說，從標題按下去和從城鎮直接開場，走到任務地點時畫的是同一批像素。存檔與種子沿用 `world-quest`（單人 Poontang、seed 3）。",
+ "seed": 3,
+ "load": "workplace/saves/quest.json",
+ "token_count": 109,
+ "trace": "docs/verification/player-path/flow-quest/trace.json",
+ "trace_sha256": "9174aa62c3b99ce1c3bce453dcd387be3c597b650b4bdd2bc59acbc03a97b5da",
+ "milestones": [
+  {
+   "step": 19,
+   "token": "RET",
+   "note": "",
+   "scene": "flow:town",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 31,
+   "token": "RET",
+   "note": "出城",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 3,
+    "ticks": 4200,
+    "time_index": 0,
+    "x": 40,
+    "y": 23
+   }
+  },
+  {
+   "step": 108,
+   "token": "U",
+   "note": "任務敘述與 Will you partake?",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 2,
+    "mode": 0,
+    "month": 4,
+    "quest_prompt": true,
+    "sub_x": 3,
+    "sub_y": 7,
+    "ticks": 3804,
+    "time_index": 0,
+    "x": 48,
+    "y": 21
+   }
+  },
+  {
+   "step": 109,
+   "token": "RET",
+   "note": "答應參戰",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 2,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 7,
+    "ticks": 3804,
+    "time_index": 0,
+    "x": 48,
+    "y": 21
+   },
+   "battle": {
+    "actors": 18,
+    "bar": null,
+    "cursor": 0,
+    "cursor_cell": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "monster": "BINDERAK",
+    "order": 0,
+    "prompt": 0,
+    "roster": [
+     {
+      "chest": 16,
+      "down": false,
+      "head": 16,
+      "i": 0,
+      "injury": 0,
+      "name": "Poontang",
+      "side": 0,
+      "x": 14,
+      "y": 41
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 6,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 25,
+      "y": 41
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 7,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 27,
+      "y": 37
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 8,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 30,
+      "y": 42
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 9,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 35,
+      "y": 42
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 10,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 36,
+      "y": 40
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 11,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 19,
+      "y": 41
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 12,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 26,
+      "y": 32
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 13,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 29,
+      "y": 28
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 14,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 30,
+      "y": 32
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 15,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 32,
+      "y": 30
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 16,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 34,
+      "y": 30
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 17,
+      "injury": 0,
+      "name": "BINDERAK",
+      "side": 1,
+      "x": 36,
+      "y": 33
+     }
+    ],
+    "round": 0,
+    "selected": 0,
+    "site": 5,
+    "stage": 1,
+    "turn": 0,
+    "verdict": 0
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 108,
+   "file": "step-108.png",
+   "sha256": "81220652a6357f889196580f3cb78eaeaeea30ee9f81c6d9ce4bc7fc249d96e0",
+   "shows": "任務提示那一頁，與已對拍的截圖逐 byte 相同",
+   "identical_to": "docs/verification/remake-parity/shots/world-quest/intro.png",
+   "identical": true
+  },
+  {
+   "step": 109,
+   "file": "step-109.png",
+   "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
+   "shows": "滿版怪物圖，與已對拍的截圖逐 byte 相同",
+   "identical_to": "docs/verification/remake-parity/shots/world-quest/creatures.png",
+   "identical": true
+  }
+ ],
+ "save": null,
+ "failures": []
+}

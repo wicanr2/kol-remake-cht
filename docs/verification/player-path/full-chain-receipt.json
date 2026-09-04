@@ -1,0 +1,746 @@
+{
+ "schema": "kol-full-path-receipt-v1",
+ "name": "full-chain",
+ "description": "一條按鍵走到底的正常玩家路徑：標題序列 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 城鎮戶外地圖 → 走到城牆邊出城 → 世界地圖 (40,23) → 往東走遇上伏擊 → 四個回合的規劃與執行打贏兩隻 ZOMBIE → 走回霍布入城點 → 進城 → 走到半途之家門口 → 進門 → REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State 四個狀態機，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**這條路徑釘住了亂數種子**：野外每次時段變換都會擲一次遭遇（SPEC-011），走到哪一格遇上什麼由種子決定；戰鬥裡的攻防與規劃順序同樣要重播。隊伍是原版名冊裡六名帶武器的角色，用 `tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,3,57,8 --out workplace/saves/party6.json` 產生。",
+ "seed": 1,
+ "load": "workplace/saves/party6.json",
+ "token_count": 567,
+ "trace": "docs/verification/player-path/full-chain/trace.json",
+ "trace_sha256": "0d02db8b99e0d9ae3f51d8d3df539eb0274206a0b6736b7e10f73fdb1d193ea0",
+ "milestones": [
+  {
+   "step": 0,
+   "token": "（起始）",
+   "note": "標題序列",
+   "scene": "flow:title",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 1,
+   "token": "SPACE",
+   "note": "書本封面",
+   "scene": "flow:cover",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 2,
+   "token": "SPACE",
+   "note": "目錄頁",
+   "scene": "flow:contents",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 5,
+   "token": "RET",
+   "note": "CREATE：建角頁",
+   "scene": "flow:newchar",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 8,
+   "token": "RET",
+   "note": "DELETE：刪除清單",
+   "scene": "flow:delete",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 13,
+   "token": "RET",
+   "note": "HARBOR MASTER",
+   "scene": "flow:harbor",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 16,
+   "token": "6",
+   "note": "角色選擇清單",
+   "scene": "flow:select",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 17,
+   "token": "RET",
+   "note": "旅店",
+   "scene": "flow:inn",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 19,
+   "token": "RET",
+   "note": "DOOR：城鎮戶外地圖，隊伍站在半途之家門口那一格",
+   "scene": "flow:town",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 30,
+   "token": "U",
+   "note": "走到地圖上緣，城門提示",
+   "scene": "flow:town",
+   "town": {
+    "at_edge": true,
+    "left_town": false,
+    "mode": 3,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   }
+  },
+  {
+   "step": 31,
+   "token": "RET",
+   "note": "選 DOOR 離開城鎮，落到霍布入城點 3 在世界地圖上的那一格",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 3,
+    "ticks": 4200,
+    "time_index": 0,
+    "x": 40,
+    "y": 23
+   }
+  },
+  {
+   "step": 45,
+   "token": "R",
+   "note": "往東走兩格被伏擊：滿版怪物圖（SPEC-011）",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 1,
+    "sub_y": 3,
+    "ticks": 3328,
+    "time_index": 1,
+    "x": 42,
+    "y": 23
+   },
+   "battle": {
+    "actors": 18,
+    "bar": null,
+    "cursor": 0,
+    "cursor_cell": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "monster": "ZOMBIE",
+    "order": 0,
+    "prompt": 0,
+    "roster": [
+     {
+      "chest": 16,
+      "down": false,
+      "head": 16,
+      "i": 0,
+      "injury": 0,
+      "name": "Poontang",
+      "side": 0,
+      "x": 33,
+      "y": 30
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 1,
+      "injury": 0,
+      "name": "Moraine",
+      "side": 0,
+      "x": 31,
+      "y": 30
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 2,
+      "injury": 0,
+      "name": "Fighting Bull",
+      "side": 0,
+      "x": 33,
+      "y": 32
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 3,
+      "injury": 0,
+      "name": "Kenneth",
+      "side": 0,
+      "x": 31,
+      "y": 32
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 4,
+      "injury": 0,
+      "name": "Sharakan",
+      "side": 0,
+      "x": 33,
+      "y": 34
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 5,
+      "injury": 0,
+      "name": "Olear",
+      "side": 0,
+      "x": 31,
+      "y": 34
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 6,
+      "injury": 0,
+      "name": "ZOMBIE",
+      "side": 1,
+      "x": 31,
+      "y": 27
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 7,
+      "injury": 0,
+      "name": "ZOMBIE",
+      "side": 1,
+      "x": 33,
+      "y": 27
+     }
+    ],
+    "round": 0,
+    "selected": 0,
+    "site": -1,
+    "stage": 1,
+    "turn": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 46,
+   "token": "SPACE",
+   "note": "進戰場，第一回合的規劃",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 1,
+    "sub_y": 3,
+    "ticks": 3328,
+    "time_index": 1,
+    "x": 42,
+    "y": 23
+   },
+   "battle": {
+    "actors": 18,
+    "bar": [
+     7,
+     33,
+     41,
+     36,
+     21,
+     39,
+     5
+    ],
+    "cursor": 1,
+    "cursor_cell": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "monster": "ZOMBIE",
+    "order": 8,
+    "prompt": 0,
+    "roster": [
+     {
+      "chest": 16,
+      "down": false,
+      "head": 16,
+      "i": 0,
+      "injury": 0,
+      "name": "Poontang",
+      "side": 0,
+      "x": 33,
+      "y": 30
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 1,
+      "injury": 0,
+      "name": "Moraine",
+      "side": 0,
+      "x": 31,
+      "y": 30
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 2,
+      "injury": 0,
+      "name": "Fighting Bull",
+      "side": 0,
+      "x": 33,
+      "y": 32
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 3,
+      "injury": 0,
+      "name": "Kenneth",
+      "side": 0,
+      "x": 31,
+      "y": 32
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 4,
+      "injury": 0,
+      "name": "Sharakan",
+      "side": 0,
+      "x": 33,
+      "y": 34
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 5,
+      "injury": 0,
+      "name": "Olear",
+      "side": 0,
+      "x": 31,
+      "y": 34
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 6,
+      "injury": 0,
+      "name": "ZOMBIE",
+      "side": 1,
+      "x": 31,
+      "y": 27
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 7,
+      "injury": 0,
+      "name": "ZOMBIE",
+      "side": 1,
+      "x": 33,
+      "y": 27
+     }
+    ],
+    "round": 1,
+    "selected": 0,
+    "site": -1,
+    "stage": 2,
+    "turn": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 421,
+   "token": "SPACE",
+   "note": "第四回合結束，兩隻 ZOMBIE 都倒下——打贏",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 1,
+    "sub_y": 3,
+    "ticks": 3328,
+    "time_index": 1,
+    "x": 42,
+    "y": 23
+   },
+   "battle": {
+    "actors": 18,
+    "bar": [
+     7,
+     15
+    ],
+    "cursor": 0,
+    "cursor_cell": [
+     3,
+     3,
+     1,
+     0
+    ],
+    "exec_text": [
+     "You have defeated The ZOMBIES!"
+    ],
+    "monster": "ZOMBIE",
+    "order": 8,
+    "prompt": 10,
+    "roster": [
+     {
+      "chest": 10,
+      "down": false,
+      "head": 16,
+      "i": 0,
+      "injury": 3,
+      "name": "Poontang",
+      "side": 0,
+      "x": 31,
+      "y": 28
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 1,
+      "injury": 0,
+      "name": "Moraine",
+      "side": 0,
+      "x": 32,
+      "y": 28
+     },
+     {
+      "chest": 14,
+      "down": false,
+      "head": 14,
+      "i": 2,
+      "injury": 0,
+      "name": "Fighting Bull",
+      "side": 0,
+      "x": 30,
+      "y": 28
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 3,
+      "injury": 0,
+      "name": "Kenneth",
+      "side": 0,
+      "x": 32,
+      "y": 29
+     },
+     {
+      "chest": 17,
+      "down": false,
+      "head": 17,
+      "i": 4,
+      "injury": 0,
+      "name": "Sharakan",
+      "side": 0,
+      "x": 29,
+      "y": 30
+     },
+     {
+      "chest": 15,
+      "down": false,
+      "head": 15,
+      "i": 5,
+      "injury": 0,
+      "name": "Olear",
+      "side": 0,
+      "x": 30,
+      "y": 30
+     },
+     {
+      "chest": 0,
+      "down": true,
+      "head": 14,
+      "i": 6,
+      "injury": 21,
+      "name": "ZOMBIE",
+      "side": 1,
+      "x": 31,
+      "y": 27
+     },
+     {
+      "chest": 0,
+      "down": true,
+      "head": 14,
+      "i": 7,
+      "injury": 10,
+      "name": "ZOMBIE",
+      "side": 1,
+      "x": 33,
+      "y": 27
+     }
+    ],
+    "round": 4,
+    "selected": 0,
+    "site": -1,
+    "stage": 5,
+    "turn": 8,
+    "verdict": 2
+   }
+  },
+  {
+   "step": 423,
+   "token": "SPACE",
+   "note": "勝負的訊息推完，回到世界地圖",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 1,
+    "sub_y": 3,
+    "ticks": 3328,
+    "time_index": 1,
+    "x": 42,
+    "y": 23
+   }
+  },
+  {
+   "step": 434,
+   "token": "RET",
+   "note": "走回入城點選 DOOR，回到霍布城內，鏡頭 (56,2)",
+   "scene": "flow:town",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 2
+   }
+  },
+  {
+   "step": 558,
+   "token": "A",
+   "note": "走回半途之家門口",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "left_town": false,
+    "mode": 1,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 559,
+   "token": "RET",
+   "note": "DOOR：進門，店主的敘述",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 567,
+   "token": "RET",
+   "note": "答應 56 枚金幣住一晚，存檔寫出",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 0,
+   "file": "step-000.png",
+   "sha256": "d8ee540e42cb0be420199c353bc02d7b0795fd99ab8f7e1f85c7f8bb041f5fa5",
+   "shows": "標題序列的第一畫格"
+  },
+  {
+   "step": 19,
+   "file": "step-019.png",
+   "sha256": "dda1ae370909466e2d2004459b1c075e93ac54c891540634214088cbb5340bc5",
+   "shows": "城鎮戶外地圖，六名隊員的頭像列"
+  },
+  {
+   "step": 31,
+   "file": "step-031.png",
+   "sha256": "09b0ecbdf331c0c32fe421186da32228b0e95126935fae844b9011ab18867e86",
+   "shows": "世界地圖 (40,23)：出城的落點"
+  },
+  {
+   "step": 45,
+   "file": "step-045.png",
+   "sha256": "3dbcd2e2944eadaac0b4d227c7c4d1cd2a9f8ef5a23c51dbedb4ae754113d7bc",
+   "shows": "伏擊：滿版的 ZOMBIE 圖"
+  },
+  {
+   "step": 46,
+   "file": "step-046.png",
+   "sha256": "79fa65b16c0d0f22b64e994ce64b6dc848f5e8a4b09e42330410e1aa8d657b44",
+   "shows": "戰場與第一回合的指令列"
+  },
+  {
+   "step": 421,
+   "file": "step-421.png",
+   "sha256": "6ddd28f2846d307df9c5e67c016f6b26eccfcee6ed37353c5120c036f5093f30",
+   "shows": "You have defeated The ZOMBIES!"
+  },
+  {
+   "step": 434,
+   "file": "step-434.png",
+   "sha256": "a80b735accb1772c06d9eb1a93de9b9d223544195e5bb942934e084db028a423",
+   "shows": "回到霍布城內"
+  },
+  {
+   "step": 558,
+   "file": "step-558.png",
+   "sha256": "b31196eaf79cd40cff3bb6fe821edbd681014f1ee1d40966b7a7494e3c2636c4",
+   "shows": "半途之家門口，圖示列剩 DOOR／U-TURN"
+  },
+  {
+   "step": 566,
+   "file": "step-566.png",
+   "sha256": "a37fef1a5c212017826674a18e396b4abf101752a97127e4d4d2b5ca77decb0b",
+   "shows": "住一晚要 56 枚金幣的問句"
+  },
+  {
+   "step": 567,
+   "file": "step-567.png",
+   "sha256": "27b6be126f926eb978a08ad8b6fe98b565e57e98cf883e2a8c442d33ba99e092",
+   "shows": "答應之後：扣錢、記下留宿的建築、寫出存檔"
+  }
+ ],
+ "save": {
+  "file": "workplace/saves/full-chain.json",
+  "sha256": "2d17454af77b37197d1f2b0275ec8a9aefe827d6ab3c91e451d188cd674ceb0c",
+  "fields": {
+   "schema": "kol-save-v1",
+   "location.kind": "town",
+   "location.town": 7,
+   "location.entry_point": 3,
+   "location.x": 57,
+   "location.y": 8,
+   "party[0].name": "Poontang",
+   "party[0].gold": 158,
+   "party[0].wounds": 1,
+   "party[0].place": "HALFWAY HO",
+   "party[0].town_code": "MIN",
+   "party[0].building_id": 86,
+   "party[0].quests[1]": 4,
+   "party[5].name": "Olear",
+   "party[5].gold": 1777
+  }
+ },
+ "failures": []
+}

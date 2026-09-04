@@ -1,0 +1,152 @@
+{
+ "name": "full-chain-ending",
+ "kind": "observation",
+ "description": "從標題按下去，走進霍布的集會所把最後一件任務交出去，看完結局那七段。交出去那一刻角色記錄的「已回報數」從 0x16 加成 0x17，結局的觸發條件成立（RE-106／RE-107），畫面直接換成結局——七張圖與七段敘事都與 `-scene ending` 那一組收據**逐 byte 相同**。全程只按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過**：接任務那一側（`sub_14564`）還沒實作，玩家在遊戲裡沒有辦法把已回報數累積到 22 件，所以用工具把存檔改成「已回報 22 件、最後一件已完成、東西就在身上」。",
+ "seed": 1,
+ "load": "workplace/observe/final-quest.json",
+ "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE",
+ "shot_dir": "docs/verification/player-path/full-chain-ending",
+ "trace": "docs/verification/player-path/full-chain-ending/trace.json",
+ "size": [
+  320,
+  200
+ ],
+ "receipt": "docs/verification/player-path/full-chain-ending-receipt.json",
+ "substituted_inputs": [
+  {
+   "flag": "-load",
+   "path": "workplace/observe/final-quest.json",
+   "change": "Poontang 的已回報數設成 0x16、最終任務（第 4 個地點）的旗標設成「已完成」、身上第一格放進集會所要的 Shackles 那十六個 byte。其餘欄位、其他隊員都不動。",
+   "generated_by": "tools/make_final_quest_save.py",
+   "base": "tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,6,42,24"
+  }
+ ],
+ "not_claimed": [
+  {
+   "name": "可以從新遊戲一路玩到結局",
+   "reason": "接任務那一側（`sub_14564`）還沒實作，已回報數只能靠存檔給。這一組證明的是「回報到第 23 件那一刻結局會出來」，不是「玩得到那一刻」。"
+  },
+  {
+   "name": "結局的畫面與原版一致",
+   "reason": "原版沒有取到結局的畫格。七張圖的位置與尺寸由 RE-106 的四個全域算出，與 `-scene ending` 那一組收據相同——這裡只證明遊玩路徑走到的是同一批像素。"
+  }
+ ],
+ "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖來自已通過權利審查的原作衍生 PNG。",
+ "milestones": [
+  {
+   "step": 19,
+   "scene": "flow:town",
+   "town": {
+    "x": 42,
+    "y": 24,
+    "mode": 0
+   },
+   "note": "DOOR：城鎮戶外地圖，隊伍站在集會所南邊那一格"
+  },
+  {
+   "step": 20,
+   "town": {
+    "x": 42,
+    "y": 23,
+    "mode": 1
+   },
+   "note": "往北一步，站到集會所門口"
+  },
+  {
+   "step": 21,
+   "scene": "ending",
+   "town": {
+    "turned_in": 1,
+    "mode": 2
+   },
+   "note": "進門那一步就把 Shackles 交出去，已回報數 22 → 23，結局第一段"
+  },
+  {
+   "step": 22,
+   "ending": {
+    "panel": 1
+   }
+  },
+  {
+   "step": 23,
+   "ending": {
+    "panel": 2
+   }
+  },
+  {
+   "step": 24,
+   "ending": {
+    "panel": 3
+   }
+  },
+  {
+   "step": 25,
+   "ending": {
+    "panel": 4
+   }
+  },
+  {
+   "step": 26,
+   "ending": {
+    "panel": 5
+   }
+  },
+  {
+   "step": 27,
+   "ending": {
+    "panel": 6
+   }
+  },
+  {
+   "step": 28,
+   "ending": {
+    "panel": 7
+   },
+   "note": "七段播完"
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 21,
+   "file": "step-021.png",
+   "identical_to": "docs/verification/ending/panel-0.png",
+   "shows": "結局第 1 段，與 `-scene ending` 的收據逐 byte 相同"
+  },
+  {
+   "step": 22,
+   "file": "step-022.png",
+   "identical_to": "docs/verification/ending/panel-1.png",
+   "shows": "結局第 2 段，與 `-scene ending` 的收據逐 byte 相同"
+  },
+  {
+   "step": 23,
+   "file": "step-023.png",
+   "identical_to": "docs/verification/ending/panel-2.png",
+   "shows": "結局第 3 段，與 `-scene ending` 的收據逐 byte 相同"
+  },
+  {
+   "step": 24,
+   "file": "step-024.png",
+   "identical_to": "docs/verification/ending/panel-3.png",
+   "shows": "結局第 4 段，與 `-scene ending` 的收據逐 byte 相同"
+  },
+  {
+   "step": 25,
+   "file": "step-025.png",
+   "identical_to": "docs/verification/ending/panel-4.png",
+   "shows": "結局第 5 段，與 `-scene ending` 的收據逐 byte 相同"
+  },
+  {
+   "step": 26,
+   "file": "step-026.png",
+   "identical_to": "docs/verification/ending/panel-5.png",
+   "shows": "結局第 6 段，與 `-scene ending` 的收據逐 byte 相同"
+  },
+  {
+   "step": 27,
+   "file": "step-027.png",
+   "identical_to": "docs/verification/ending/panel-6.png",
+   "shows": "結局第 7 段，與 `-scene ending` 的收據逐 byte 相同"
+  }
+ ]
+}

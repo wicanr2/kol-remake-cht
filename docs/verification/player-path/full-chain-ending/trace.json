@@ -1,0 +1,3181 @@
+{
+  "schema": "kol-play-trace-v1",
+  "steps": [
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-000",
+      "scene": "flow:title",
+      "step": 0,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-001",
+      "scene": "flow:cover",
+      "step": 1,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-002",
+      "scene": "flow:contents",
+      "step": 2,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-003",
+      "scene": "flow:menu",
+      "step": 3,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-004",
+      "scene": "flow:menu",
+      "step": 4,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-005",
+      "scene": "flow:newchar",
+      "step": 5,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-006",
+      "scene": "flow:menu",
+      "step": 6,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-007",
+      "scene": "flow:menu",
+      "step": 7,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-008",
+      "scene": "flow:delete",
+      "step": 8,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-009",
+      "scene": "flow:menu",
+      "step": 9,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-010",
+      "scene": "flow:menu",
+      "step": 10,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-011",
+      "scene": "flow:menu",
+      "step": 11,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-012",
+      "scene": "flow:menu",
+      "step": 12,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-013",
+      "scene": "flow:harbor",
+      "step": 13,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-014",
+      "scene": "flow:menu",
+      "step": 14,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-015",
+      "scene": "flow:contents",
+      "step": 15,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-016",
+      "scene": "flow:select",
+      "step": 16,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-017",
+      "scene": "flow:inn",
+      "step": 17,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-018",
+      "scene": "flow:inn",
+      "step": 18,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-019",
+      "scene": "flow:town",
+      "step": 19,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-020",
+      "scene": "flow:town",
+      "step": 20,
+      "town": {
+        "at_door": true,
+        "left_town": false,
+        "mode": 1,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 22,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 0
+      },
+      "name": "step-021",
+      "scene": "ending",
+      "step": 21,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 1
+      },
+      "name": "step-022",
+      "scene": "ending",
+      "step": 22,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 2
+      },
+      "name": "step-023",
+      "scene": "ending",
+      "step": 23,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 3
+      },
+      "name": "step-024",
+      "scene": "ending",
+      "step": 24,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 4
+      },
+      "name": "step-025",
+      "scene": "ending",
+      "step": 25,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 5
+      },
+      "name": "step-026",
+      "scene": "ending",
+      "step": 26,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 6
+      },
+      "name": "step-027",
+      "scene": "ending",
+      "step": 27,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "panel": 7
+      },
+      "name": "step-028",
+      "scene": "ending",
+      "step": 28,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 14,
+          "name": "The Assembly Building",
+          "quest_final": true,
+          "quest_site": 4,
+          "quest_wants": "Shackles"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          {
+            "carried": 1,
+            "gold": 214,
+            "name": "Poontang",
+            "quests": [
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 23,
+            "wounds": 1
+          },
+          {
+            "carried": 13,
+            "gold": 2149,
+            "name": "Moraine",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 14,
+            "gold": 442,
+            "name": "Fighting Bull",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 12,
+            "gold": 815,
+            "name": "Kenneth",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 10,
+            "gold": 1943,
+            "name": "Sharakan",
+            "quests": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          },
+          {
+            "carried": 11,
+            "gold": 1777,
+            "name": "Olear",
+            "quests": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reported": 0,
+            "wounds": 0
+          }
+        ],
+        "town": 7,
+        "turned_in": 1,
+        "x": 42,
+        "y": 23
+      }
+    }
+  ]
+}
