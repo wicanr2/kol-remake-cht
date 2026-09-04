@@ -32,6 +32,9 @@ type Slot struct {
 	Quests []int `json:"quests"`
 	// Sheet 是 MIRROR 角色資料頁的欄位（RE-074）。
 	Sheet *Sheet `json:"sheet"`
+	// Spells 是角色記錄 0x200 起、每 16 byte 一筆、共十六筆的法術（RE-100）。
+	// 版面與商品記錄相同，所以型別共用；空的那一格是 nil。
+	Spells []*Item `json:"spells"`
 	// Equipment 是穿戴欄十格：部位 0…8 在角色記錄 0x100 + 16 × 部位，
 	// 部位 9（手上那件武器）在 0x30。空的那一格是 nil（RE-080）。
 	Equipment []*Item `json:"equipment"`
@@ -51,6 +54,13 @@ type Item struct {
 	Condition   int    `json:"condition"`
 	Percent     int    `json:"percent"`
 	SizeClass   int    `json:"size_class"`
+	// Effect／TurnCode／PowerCode／Guards 只有法術那十六格會填（RE-100）：
+	// 效果編號、持續回合的骰式、強度的骰式（bit 7 是「要不要選目標格」），
+	// 以及擋招要比的四格護符。
+	Effect    int   `json:"effect,omitempty"`
+	TurnCode  int   `json:"turn_code,omitempty"`
+	PowerCode int   `json:"power_code,omitempty"`
+	Guards    []int `json:"guards,omitempty"`
 	Dice        struct {
 		Count int `json:"count"`
 		Sides int `json:"sides"`

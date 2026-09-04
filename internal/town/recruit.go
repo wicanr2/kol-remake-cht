@@ -45,6 +45,8 @@ type Candidate struct {
 	Quests []int
 	// Worn 是穿戴欄十格，索引同部位；空的那一格是 nil（RE-080）。
 	Worn [WornSlots]*Good
+	// Spells 是角色記錄 0x200 起那十六筆法術裡非空的幾筆（RE-100）。
+	Spells []Spell
 }
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。
@@ -182,7 +184,7 @@ func (s *Session) joinSelected() {
 	s.Party = append(s.Party, Member{Name: c.Name, Portrait: c.Portrait,
 		Female: c.Female, Wounds: c.Wounds, Gold: c.Gold, Place: c.Place,
 		TownCode: c.Town, BuildingID: c.BuildingID, Sheet: c.Sheet,
-		Worn: c.Worn, Speaker: true})
+		Worn: c.Worn, Spells: c.Spells, Speaker: true})
 	s.Inside.Party = s.Party
 	s.recruit, s.asking = nil, false
 	s.Inside.List = nil

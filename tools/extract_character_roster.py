@@ -68,6 +68,9 @@ ADVENTURE_OFFSET = 0x26       # 高位元組在前的 16-bit
 MOVEMENT_OFFSET = 0x1BA       # 0 當成 20，畫面上印 chr(0x41 + 值)
 NUTRITION_OFFSET = 0x9F
 ARMOUR_OFFSET, SHIELD_OFFSET = 0x1A0, 0x1A8
+# 法術：角色記錄 0x200 起、每 16 byte 一筆、共十六筆（RE-100）。版面與商品記錄
+# 相同，所以名字與骰式都用同一支解。
+SPELL_OFFSET, SPELL_STRIDE, SPELL_COUNT = 0x200, 16, 16
 WEAPON_OFFSET, WEAPON_STRIDE, WEAPON_ROWS = 0x4A, 13, 4
 WEAPON_SKILL_OFFSET = 0x53    # OFF 在 +0／+1、DEF 在 +2／+3，都是大端 16-bit 除以 10
 # 身高體重表在 KOLTOWN 的 DGROUP，索引都是 2 × 性別 + 種族（RE-074）。
@@ -87,6 +90,30 @@ def equipment(rec: bytes) -> list[dict | None]:
             continue
         item = good(block, pos)
         item["offset"] = base
+        out.append(item)
+    return out
+
+
+def spells(rec: bytes) -> list[dict | None]:
+    """法術十六格（RE-100）。空的那一格是 null。
+
+    程式只讀四處：+0x08…+0x0B 的四格護符、+0x0C 的效果、+0x0D 的持續回合骰式、
+    +0x0E 的強度骰式（bit 7 是「要不要先選目標格」）。其餘欄位與商品記錄同名，
+    照樣解出來當交叉檢查。"""
+    out = []
+    for i in range(SPELL_COUNT):
+        base = SPELL_OFFSET + SPELL_STRIDE * i
+        block = rec[base:base + SPELL_STRIDE]
+        if len(block) < SPELL_STRIDE or not any(block):
+            out.append(None)
+            continue
+        item = good(block, i)
+        item["offset"] = base
+        item["effect"] = block[0x0C]
+        item["turn_code"] = block[0x0D]
+        item["power_code"] = block[0x0E]
+        item["needs_target"] = bool(block[0x0E] & 0x80)
+        item["guards"] = list(block[0x08:0x0C])
         out.append(item)
     return out
 
@@ -230,6 +257,8 @@ def main() -> int:
             # 穿戴欄是角色記錄自己的欄位，不屬於 MIRROR 資料頁，所以放在槽位這一層
             # （`internal/roster` 的 Slot.Equipment 就是照這個位置讀）。
             "equipment": equipment(data[base:base + SLOT_BYTES]) if name else None,
+            # 法術同樣是角色記錄自己的欄位（RE-100）。
+            "spells": spells(data[base:base + SLOT_BYTES]) if name else None,
         })
 
     occupied = [s["name"] for s in slots if s["occupied"]]

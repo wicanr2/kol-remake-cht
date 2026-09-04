@@ -134,6 +134,13 @@ func battleMember(m town.Member) battle.Member {
 			}
 		}
 	}
+	// 法術（角色記錄 0x200 起那十六筆，RE-100）：施法要用，指令列上那一格也看它。
+	for _, sp := range m.Spells {
+		out.Spells = append(out.Spells, battle.Spell{Name: sp.Name,
+			Effect: sp.Effect, TurnCode: sp.TurnCode, PowerCode: sp.PowerCode,
+			Guards: spellGuards(sp.Guards)})
+	}
+	out.PackCount = len(out.Spells)
 	// 背包六格（角色記錄 0xA0 起，RE-075）：戰利品優先往這裡放。
 	for i, g := range m.Backpack {
 		if i >= battle.BackpackSlots {
@@ -141,10 +148,9 @@ func battleMember(m town.Member) battle.Member {
 		}
 		out.Pack[i] = g.Name
 	}
-	// HasSecondItem 與 PackCount 還沒有 typed data 來源：前者是角色記錄 +0x190
-	// （穿戴欄的第十格，抽取器目前把部位 9 指到手上那件武器的 +0x30，沒有讀它），
-	// 後者是 0x200 起的十六筆物品欄。兩者都留成零值，所以指令列現在不會出現
-	// 0x16／0x25 與背包那一格（SPEC-010 末段）。
+	// HasSecondItem 還沒有 typed data 來源：它是角色記錄 +0x190（穿戴欄的第十格，
+	// 抽取器目前把部位 9 指到手上那件武器的 +0x30，沒有讀它），所以指令列現在
+	// 不會出現 0x16／0x25（SPEC-010 末段）。
 	for _, pos := range battle.ArmourSlots {
 		if g := m.Worn[pos]; g != nil {
 			out.ArmourWeight += g.Encumbrance
@@ -550,6 +556,29 @@ func townSheet(s *roster.Sheet) *town.Sheet {
 			Row: w.Row, Name: w.Name, Weapon: w.Weapon,
 			Offence: w.Offence, Defence: w.Defence,
 			OffenceRaw: w.OffenceRaw, DefenceRaw: w.DefenceRaw})
+	}
+	return out
+}
+
+// spellGuards 把擋招那四格湊成固定長度的陣列；缺的補零。
+func spellGuards(g []int) [4]int {
+	var out [4]int
+	for i := 0; i < len(g) && i < len(out); i++ {
+		out[i] = g[i]
+	}
+	return out
+}
+
+// townSpells 把角色槽位裡那十六格法術換成城鎮那一側的型別（RE-100）。
+// 空的格子不收進來，所以清單的長度就是「會幾個法術」。
+func townSpells(items []*roster.Item) []town.Spell {
+	var out []town.Spell
+	for _, it := range items {
+		if it == nil {
+			continue
+		}
+		out = append(out, town.Spell{Name: it.Name, Effect: it.Effect,
+			TurnCode: it.TurnCode, PowerCode: it.PowerCode, Guards: it.Guards})
 	}
 	return out
 }
@@ -2015,7 +2044,8 @@ func main() {
 					Female: slot.Female, Wounds: slot.Wounds,
 					Gold: slot.Gold, BuildingID: slot.Building,
 					Quests: slot.Quests, Sheet: townSheet(slot.Sheet),
-					Worn: townWorn(slot.Equipment)})
+					Worn: townWorn(slot.Equipment),
+					Spells: townSpells(slot.Spells)})
 			}
 			// 畫面樣本只寫隊伍有誰，錢包與所在地在角色檔裡——住宿與治療要花的
 			// 就是這一份錢（RE-073），所以照名字補齊。

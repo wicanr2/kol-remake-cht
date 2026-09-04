@@ -39,6 +39,8 @@ type Member struct {
 	Backpack []Good `json:"backpack,omitempty"`
 	// Worn 是穿在身上的東西，一個部位一格；nil 代表那個部位是空的。
 	Worn [WornSlots]*Good `json:"worn,omitempty"`
+	// Spells 是角色記錄 0x200 起那十六筆法術（RE-100）；空的那一格不收進來。
+	Spells []Spell `json:"spells,omitempty"`
 }
 
 // Inn 是旅店畫面的完整狀態。
@@ -104,4 +106,16 @@ func (m Member) PlateName() string {
 		r = r[:PartySlot.NameChars]
 	}
 	return string(r)
+}
+
+// Spell 是一筆法術（角色記錄 0x200 起、每 16 byte 一筆，RE-100）。城鎮這一側只
+// 保存與轉交，規則在 `internal/battle`。
+type Spell struct {
+	Name string `json:"name"`
+	// Effect 是效果編號；TurnCode／PowerCode 是持續回合與強度的骰式
+	//（PowerCode 的 bit 7 是「要不要先選目標格」）；Guards 是擋招要比的四格。
+	Effect    int   `json:"effect"`
+	TurnCode  int   `json:"turn_code"`
+	PowerCode int   `json:"power_code"`
+	Guards    []int `json:"guards,omitempty"`
 }
