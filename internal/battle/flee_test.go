@@ -113,3 +113,30 @@ func TestOfferFleeAfterRound(t *testing.T) {
 		t.Fatalf("逃走應該結束這一場，得到 %v", s.Verdict)
 	}
 }
+
+// 逃走那一句：單人隊伍用單數那一筆（`0x215C9`）。
+func TestFleeRecords(t *testing.T) {
+	one := FleeRecords(1)
+	if len(one) != 2 || one[0] != FleeForRecord || one[1] != OneLifeRecord {
+		t.Fatalf("單人應該是 %#x + %#x，得到 %v", FleeForRecord, OneLifeRecord, one)
+	}
+	many := FleeRecords(3)
+	if many[1] != ManyLivesRecord {
+		t.Fatalf("多人應該用 %#x，得到 %#x", ManyLivesRecord, many[1])
+	}
+}
+
+// 答應逃走之後回到執行段那一層，訊息清空——呼叫端拿它當「那一句還沒印」的判準。
+func TestFleeReturnsToExecuting(t *testing.T) {
+	s := fleeState()
+	s.Actors[0].X, s.Actors[1].X = FieldMin, FieldMin
+	s.Exec.Text = []string{"上一句"}
+	s.OfferFlee()
+	s.Flee()
+	if s.Plan.Prompt != PromptExecuting {
+		t.Fatalf("應該回到執行段那一層，得到 %d", s.Plan.Prompt)
+	}
+	if len(s.Exec.Text) != 0 {
+		t.Fatalf("訊息應該清空，得到 %v", s.Exec.Text)
+	}
+}

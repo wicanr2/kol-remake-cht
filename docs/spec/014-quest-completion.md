@@ -91,7 +91,21 @@ remake 用 `State.QuestItem` 承接，空字串表示這一場沒有那樣的東
 0xFF 時印記錄 **0x17B** ＋ **0x17C**／**0x17D**（單複數看隊伍人數）。
 **兩個計數怎麼變成 0xFF 還沒找到寫入點**，所以 remake 用自己的 `VerdictFled`。
 
-## 6. remake 的落點
+## 6. 實跑收據
+
+`docs/verification/battle-flee/`：問句與收尾兩張畫格，走的是「全隊都到邊上」
+那一條（`State.QuestItem` 這一次是空的，因為 `[0xB926]` 還沒解）。
+
+那一次實跑補上兩處畫面層的缺口：逃走那一問原本沒有畫在執行段的卷軸上
+（`Plan.Prompt` 是新的一層，UI 沒接），答應之後也沒有印「You flee for your
+life!」就直接回野外。兩個都是單元測試看不到的——規則層回傳值正確，
+畫面上什麼都沒有。
+
+**替代輸入的坑**：第一次跑的時候換了站位，畫面卻與沒換的逐 byte 相同。原因是
+那個 seed 在野外那七十步先觸發了伏擊，走到的是隨機遭遇——站位用固定表
+（RE-098），地點自帶的座標根本沒被讀。換 seed 才走得到任務地點。
+
+## 7. remake 的落點
 
 `victory.go` 的 `QuestTaken`／`MarkQuestDone`／`markQuestDone`，
 `flee.go` 的 `OnFieldEdge`／`FleeOffer`／`OfferFlee`／`Flee`，

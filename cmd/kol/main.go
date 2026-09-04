@@ -1261,6 +1261,12 @@ func (g *game) battleStep() {
 	// 這一場已經結束、勝負的兩句也印完了，就停在最後一句上，不要再往下走——
 	// 再呼叫一次 Step 會把勝負訊息重新排一遍，變成按不完的迴圈。
 	if s.Stage == battle.StageDone {
+		// 逃走那一句（RE-103）：`Flee()` 把訊息清空，所以第一次進來先印
+		// 「You flee for your life!」，按一次鍵才真的離開戰場。
+		if s.Verdict == battle.VerdictFled && len(s.Exec.Text) == 0 {
+			s.Exec.Text = g.battleVerdictLines()
+			return
+		}
 		// 打贏的話還有一張戰利品清單（RE-096）。地上什麼都沒有就跳過。
 		if s.Verdict == battle.VerdictWon && s.BeginSpoils() {
 			s.Stage = battle.StageSpoils
@@ -1398,6 +1404,10 @@ func (g *game) battleVerdictLines() []string {
 		before, after := battle.DefeatRecords(enemies)
 		line := g.battleRecords(before) + name + lost + g.battleRecords(after)
 		return battle.WrapMessage(ctx.Substitute(line))
+	case battle.VerdictFled:
+		// 「You flee for your life!」——單複數看隊伍人數（RE-103）。
+		return battle.WrapMessage(ctx.Substitute(
+			g.battleRecords(battle.FleeRecords(s.PartyCount()))))
 	}
 	return nil
 }

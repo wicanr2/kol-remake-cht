@@ -2,8 +2,8 @@
 """產生戰後結算的觀察用替代輸入。
 
 第 5 個任務地點原本是十二隻 3 級 BINDERAK，單人隊伍打不贏，也就看不到打贏之後的
-獎勵與戰利品畫面。這支工具從正式的 typed data 產生兩份替代檔：地點改成一隻怪、
-怪物本身壓到一擊就倒。
+獎勵與戰利品畫面。這支工具從正式的 typed data 產生三份替代檔：地點改成一隻怪、
+同一個地點再把隊伍挪到戰場邊上（看逃走那一問，RE-103），以及怪物本身壓到一擊就倒。
 
 產物只給觀察用，**不是原版資料，不得當作對拍來源**；輸出寫進 `workplace/observe/`，
 那個目錄不進版控。收據見 `docs/verification/battle-spoils/receipt.json`。
@@ -40,6 +40,22 @@ def one_enemy(sites: dict) -> dict:
     return out
 
 
+def party_on_edge(sites: dict) -> dict:
+    """隊伍改站在戰場可走區的最外圈，好看得到逃走那一問（RE-103）。
+
+    原版的逃走判定要「有人站到 4 或 0x3B」才問，而正常玩法要從中央走二十幾格
+    才到得了邊上，一回合走一格。站位換掉之後第一個回合結束就問得出來。
+    """
+    out = one_enemy(sites)
+    for s in out["sites"]:
+        if s["index"] != SITE_INDEX:
+            continue
+        s["party_x"] = [4] + s["party_x"][1:]
+    out["note_observation_only"] = (
+        f"{NOTE}第 {SITE_INDEX} 個地點改成一隻 1 級怪，隊伍第一格站到戰場上緣。")
+    return out
+
+
 def weak_monster(monsters: dict) -> dict:
     out = copy.deepcopy(monsters)
     for m in out["monsters"]:
@@ -61,6 +77,7 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, data in (
         ("quest-sites-one-enemy.json", one_enemy(json.loads(SITES_IN.read_text()))),
+        ("quest-sites-edge.json", party_on_edge(json.loads(SITES_IN.read_text()))),
         ("monsters-weak.json", weak_monster(json.loads(MONSTERS_IN.read_text()))),
     ):
         path = OUT_DIR / name

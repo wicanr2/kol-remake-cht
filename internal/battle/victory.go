@@ -33,6 +33,16 @@ const (
 	GainedLevelRecord  = 0x17E // "you have gained a level!"
 )
 
+// FleeRecords 是逃走之後那一句（`0x215B9`…`0x215EE`）：0x17B 接 0x17C 或 0x17D，
+// 單複數看隊伍人數（`word_2DF2A`）。
+func FleeRecords(party int) []int {
+	tail := ManyLivesRecord
+	if party == 1 {
+		tail = OneLifeRecord
+	}
+	return []int{FleeForRecord, tail}
+}
+
 // GoldDice 是金冠骰面表（DGROUP `0x00D4`）。怪物記錄 +0x0F 的低三位選面數，
 // 高 nibble 的低三位是骰數——每一隻怪擲「骰數 ＋ 1」次。
 var GoldDice = [8]int{2, 3, 5, 7, 9, 11, 19, 99}

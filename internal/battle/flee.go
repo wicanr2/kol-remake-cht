@@ -80,5 +80,9 @@ func (s *State) Flee() int {
 	}
 	s.Verdict = VerdictFled
 	s.Stage = StageDone
+	// 回到執行段那一層：逃走那一句與打贏、打輸一樣印在卷軸上，按一次鍵才走。
+	// 訊息清空是給呼叫端當「那一句還沒印」的判準。
+	s.Plan.Prompt = PromptExecuting
+	s.Exec.Text = nil
 	return s.QuestDone
 }
