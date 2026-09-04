@@ -485,9 +485,11 @@ func (g *game) playToken(token string) error {
 }
 
 // startArenaFight 把競技場談完的那一場開起來（RE-108）：一隻、等級是上場那一名的
-// 實得位階加一、種類與陣型各擲一次。**戰場的地形還沒解**——原版在這裡把
-// `word_34968` 設成 1（走任務地點那一條，地形是載入的而不是逐格擲的），
-// 但載的是哪一份沒讀出來，所以這一版沿用隨機遭遇的逐格擲。
+// 實得位階加一、陣型與種類各擲一次。站位不擲也不查表——競技場走的是
+// `sub_1E3A8` 對 `word_345DE >= 0` 的那一條（RE-098），只有上場那一名參戰。
+// **戰場的地形還沒解**——原版在這裡把 `word_34968` 設成 1（走任務地點那一條，
+// 地形是載入的而不是逐格擲的），但載的是哪一份沒讀出來，所以這一版沿用隨機遭遇
+// 的逐格擲。
 func (g *game) startArenaFight() {
 	f := g.play.PendingFight()
 	if f == nil || g.quest == nil || g.arena == nil {
@@ -495,18 +497,17 @@ func (g *game) startArenaFight() {
 	}
 	g.play.ClearPendingFight()
 	rng := g.arena.rand
-	a := &battle.Ambush{
-		Monster: rng.Roll(battle.ArenaMonsterKinds) - 1,
-		Level:   f.Level,
-		Count:   1,
-		Group:   rng.Roll(battle.AmbushGroups) - 1,
-	}
+	// 擲的順序照原版（`0x2AFF9` 先陣型、`0x2B012` 才是種類）。陣型這一場用不到
+	// ——站位是固定的——但那一次擲骰要擲，否則之後的亂數序列會偏掉。
+	rng.Roll(battle.AmbushGroups)
+	kind := rng.Roll(battle.ArenaMonsterKinds) - 1
 	members := make([]battle.Member, 0, len(g.play.Party))
 	for _, m := range g.play.Party {
 		members = append(members, battleMember(m))
 	}
-	mon := g.arena.monsters.At(a.Monster)
-	st := battle.NewAmbush(a, mon, members, battle.Generate(g.arena.field))
+	mon := g.arena.monsters.At(kind)
+	st := battle.NewArena(f.Member, kind, f.Level, mon, members,
+		battle.Generate(g.arena.field))
 	if st == nil {
 		return
 	}
@@ -1030,8 +1031,12 @@ func actorLines(actors []battle.Actor) []string {
 			continue
 		}
 		side := "party"
-		if a.Side != battle.SideParty {
+		switch a.Side {
+		case battle.SideMonster:
 			side = "foe"
+		case battle.SideEmpty:
+			// 競技場那一場沒上場的人：記錄 `+0x01` 是 2，站在觀眾席不參戰。
+			side = "watch"
 		}
 		state := ""
 		if a.Down() {

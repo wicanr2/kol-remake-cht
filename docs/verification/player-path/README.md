@@ -39,7 +39,7 @@ python3 tools/verify_full_path.py   --plan docs/verification/player-path/full-ch
 | `flow-quest` | 109 | 同一條 flow 路徑走到任務地點，兩張與已對拍的截圖逐 byte 相同 |
 | `quest-take` | 34 | 走進一戶人家，按 MOUTH 打字問話，接下一個任務 |
 | `quest-list` | 29 | 資料頁按第 19 個圖示，看回報過的任務排成八欄三列 |
-| `arena` | 2153 | 走到世界地圖 (55,13) 的競技場，選人、進賭場下兩注、打完升一階並結算賭金 |
+| `arena` | 1950 | 走到世界地圖 (55,13) 的競技場，選人、進賭場下兩注、打完升一階並結算賭金 |
 | `full-chain-ending` | 1012 | 出城 → 打贏一場伏擊 → 最終任務的地點 → 打完 → 結局七段 |
 
 ### `full-chain`：從標題走到存檔
@@ -103,13 +103,15 @@ CAMPING!，踏上任務地點時蓋出敘述與「Will you partake?」，答應�
 
 多人隊伍答應之後先換到賭場（`A Gambling Booth／The Bet Taker`）：沒上場的人可以押
 那一位會贏還是會輸，金額讀兩位數（上限 99），押他會輸寫負值再多講一句
-「Good friends, eh?」；答否才開打。這一條路上押了兩注——Moraine 押 25 賭他會贏、
-Fighting Bull 押 10 賭他會輸。
+「Good friends, eh?」；答否才開打。這一條路上押了兩注——Poontang 押 25 賭
+Moraine 會贏、Fighting Bull 押 10 賭她會輸。
 
-對手一隻，等級是上場那一名的實得位階加一。打贏印「you have gained a level!」，
-帳面位階加一——**一次只加一級**，所以帳面追上實得要打好幾場；賭金接在升階那一句
-後面結算，最後一頁是三行：升階、`Moraine wins a bet!`、`Fighting Bull loses a bet!`
-（RE-108／RE-103）。路上還打贏了兩場伏擊。
+**場上只有上場那一名**：其餘五名排到觀眾席、記錄 `+0x01` 設成 2 不參戰，上場那一名
+與唯一那隻對手各站一格固定的（RE-098 的第三條分支）。對手一隻，等級是上場那一名的
+實得位階加一。第九回合打贏，印「you have gained a level!」，帳面位階加一——**一次
+只加一級**，所以帳面追上實得要打好幾場；賭金接在升階那一句後面結算，最後一頁是
+三行：升階、`Poontang wins a bet!`、`Fighting Bull loses a bet!`，錢包 214 → 239 與
+442 → 432（RE-108／RE-103）。路上還打贏了兩場伏擊。
 
 **這一組換過輸入**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），
 照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。
