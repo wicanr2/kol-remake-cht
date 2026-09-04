@@ -32,6 +32,15 @@ var (
 // （欄 1…0x26、列 0xA4…0xC4），換算成像素是 (8, 164) 起 296×32（RE-089）。
 var MessageBox = struct{ X, Y, Width, Height int }{X: 8, Y: 0xA4, Width: 296, Height: 32}
 
+// MessageScroll 是執行段鋪在訊息區的那張卷軸：MISCPICS 的圖 1，296×32，
+// 尺寸與 MessageBox 一模一樣，白紙面配黃色的捲邊與軸心。拿
+// world-quest-execute-run1 的 frame-966 逐像素比對，9,472 個像素中 8,986 個
+// 相同（94.9%），差的都是寫在紙面上的字（RE-090）。
+var MessageScroll = struct {
+	Archive string
+	Index   int
+}{Archive: "MISCPICS", Index: 1}
+
 // MessageWidth 是斷行用的字元數上限（`0x21`）。第一行要扣掉起始欄，所以只有
 // `MessageWidth − MessageArea.Col` 個字元；第二行起原版直接加 `0x21`，兩者
 // 不對稱——照抄原版的行為（RE-087）。

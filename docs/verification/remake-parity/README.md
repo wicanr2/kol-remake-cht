@@ -67,8 +67,9 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `world-quest.json`（任務地點的敘述、問句、滿版怪物圖、戰場與主指令列，對 `world-quest-run1`） | 4 | 4 |
 | `world-road.json`（ROAD／SIGNPOST 自動循路，對 `world-road-run1`） | 10 | 10 |
 | `world-town.json`（野外走到城鎮入口與進城，對 `world-enter-town-run1`） | 7 | 7 |
+| `battle-exec.json`（執行段訊息區的卷軸底圖，對 `world-quest-execute-run1`） | 1 | 1 |
 
-二十四份收據 282 對畫面，允許差異區之外都是**零像素差**。
+二十五份收據 283 對畫面，允許差異區之外都是**零像素差**。
 
 `world.json` 多了一個欄位 `compare`：每一對只涵蓋畫面上的一塊矩形。這**不是**
 允許差異區——矩形之外的部分那一對不宣稱，而計畫的 `not_claimed` 要寫明為什麼。

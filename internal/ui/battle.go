@@ -119,16 +119,17 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 		fill(dst, box.X+1, box.Y+1, box.Width-2, box.Height-2, town.ColourBoxFill)
 	}
 
-	// 執行段：訊息蓋掉圖示列那一塊（RE-087）。欄 3 是像素 24，行高 6 是小字型
-	// 的高度，起點在掃描列 0xA8。
-	// 執行段：整條訊息區換掉，圖示列與底圖都不見了（RE-089）。
-	//
-	// **底圖還沒認出來**：原版那一條的主色是白（5,488 個像素）加上一片亮黃的
-	// 圖案（2,900 個），不是 KOLMPICS 圖 2——那一張是紅底，形狀也只對得上六成。
-	// 這裡先鋪成白底，讓主色一致；黃色那一塊是已知差異。
+	// 執行段：整條訊息區換成一張卷軸，圖示列被蓋掉（RE-089、RE-090）。底圖是
+	// MISCPICS 的圖 1，296×32，白紙面配黃色的捲邊與軸心；文字寫在紙面上，
+	// 欄 3（像素 24）、掃描列 0xA8 起、行高 6（RE-087）。
 	if s.Plan.Prompt == battle.PromptExecuting {
 		box := battle.MessageBox
-		fill(dst, box.X, box.Y, box.Width, box.Height, battle.MessageBack)
+		scroll, err := sprites.Get(battle.MessageScroll.Archive,
+			battle.MessageScroll.Index)
+		if err != nil {
+			return err
+		}
+		draw(dst, scroll, box.X, box.Y)
 		area := battle.MessageArea
 		for i, line := range s.Exec.Text {
 			y := area.Y + i*area.LineHeight
