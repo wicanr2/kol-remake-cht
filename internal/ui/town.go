@@ -27,6 +27,12 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 	// MIRROR 的角色資料頁蓋掉肖像、標題框與對話框那一整塊。
 	if in.Sheet != nil {
 		drawSheet(dst, small, in.SheetLabels, in.Sheet)
+		// 任務一覽再蓋一層徽章（RE-111）。
+		if in.QuestList != nil {
+			if err := drawQuestBadges(dst, sprites, in.QuestList); err != nil {
+				return err
+			}
+		}
 	} else {
 		pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
 		if err != nil {
@@ -136,6 +142,20 @@ func frame(dst *ebiten.Image, x, y, w, h int, c [3]uint8) {
 	fill(dst, x, y+h-1, w, 1, c)
 	fill(dst, x, y, 1, h, c)
 	fill(dst, x+w-1, y, 1, h, c)
+}
+
+// drawQuestBadges 把回報過的任務畫在角色資料頁上：一格是 AWDnPICS 的一張
+// 24×21 圖，外框比圖大一圈，顏色是原版的 0x0A（`sub_1BA9D` 的最後一個參數）。
+func drawQuestBadges(dst *ebiten.Image, sprites Sprites, list *town.QuestList) error {
+	for _, b := range list.Badges {
+		frame(dst, b.FrameX, b.FrameY, b.FrameW, b.FrameH, town.ColourQuestBadge)
+		pic, err := sprites.Get(list.Archive, b.Site)
+		if err != nil {
+			return err
+		}
+		draw(dst, pic, b.X, b.Y)
+	}
+	return nil
 }
 
 // InnCJK 是旅店畫面的中文模式。素材與版面按兩倍放大，文字改用中文字格；

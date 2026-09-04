@@ -91,6 +91,8 @@ type Session struct {
 	quest *questOffer
 	// mouth 是 MOUTH 打字中的問句；nil 代表沒在打字（RE-067）。
 	mouth *mouthState
+	// questList 是任務一覽翻到第幾組；nil 代表沒開（RE-111）。
+	questList *questListState
 	// quit 記下玩家在「你要離開嗎」那一問答了 YES。
 	quit bool
 
@@ -242,12 +244,18 @@ func (s *Session) acceptInside() {
 	}
 	id := s.Inside.Icons[s.Inside.Selected] - 3
 	switch {
+	case s.ShowingQuestList():
+		// 一組一頁，任何鍵翻下一組（原版是 `sub_144C3` 的 SPACEBAR）。
+		s.NextQuestPage()
 	case s.ShowingSheet():
-		if id == IconUTurn {
+		switch id {
+		case IconUTurn:
 			s.closeSheet()
-			return
+		case IconSheetNotes:
+			s.OpenQuestList()
+		default:
+			s.note(sheetIconName(id))
 		}
-		s.note(sheetIconName(id))
 	case s.train != nil:
 		if id == IconSpacebar {
 			s.Continue()
@@ -382,6 +390,7 @@ func (s *Session) enter() {
 	}
 	s.quest = nil
 	s.mouth = nil
+	s.questList = nil
 	s.TookQuest = nil
 	s.turnInQuests(door)
 }

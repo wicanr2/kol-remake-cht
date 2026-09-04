@@ -1,0 +1,134 @@
+{
+ "schema": "kol-full-path-receipt-v1",
+ "name": "quest-list",
+ "description": "角色資料頁上按第 19 個圖示打開任務一覽（RE-111）：二十四個任務排成八欄三列，`編號 % 8` 決定欄、`編號 / 8` 決定列，**只列回報過的**，一格是 AWDnPICS 的一張 24×21 圖加一個 0x0A 的外框。一組一頁，按一個鍵翻下一組，翻完回資料頁。那一格圖示本身也是條件出現的——原版看角色記錄 `0x1DD`…`0x1E1` 有沒有東西，一件都沒回報過就不會有這一格。**輸入被換過**：原版名冊裡的角色都是全新的，一件任務都沒回報過，所以用工具把存檔改成「回報過第 4 個任務、已回報數 5」。",
+ "seed": 1,
+ "load": "workplace/observe/quest-list.json",
+ "token_count": 29,
+ "trace": "docs/verification/player-path/quest-list/trace.json",
+ "trace_sha256": "52d5d7478d60370862459ddf53fefc0790ef80627aefed8f383da382fcfe7335",
+ "milestones": [
+  {
+   "step": 21,
+   "token": "RET",
+   "note": "進門",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 24,
+   "token": "RET",
+   "note": "MIRROR：角色資料頁",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 28,
+   "token": "RET",
+   "note": "第 19 個圖示：任務一覽蓋在資料頁上",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 29,
+   "token": "SPACE",
+   "note": "翻完一組，回資料頁",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 24,
+   "file": "step-024.png",
+   "sha256": "331a37b4e7e7e674c55ff588afb2d8f72285a56fae39ff53c02c0ea3f3d8da18",
+   "shows": "角色資料頁，圖示列多了任務一覽那一格"
+  },
+  {
+   "step": 28,
+   "file": "step-028.png",
+   "sha256": "053a6c816b983712677e832c9914c36086721b36cd9f770ca699bd945fdcaa06",
+   "shows": "任務一覽：回報過的第 4 個任務畫在第 5 欄第 1 列"
+  },
+  {
+   "step": 29,
+   "file": "step-029.png",
+   "sha256": "ee44b92ef93ada50a66350d90ae68f7e116b7c41f49ee5ce44f8b21a58bb332a",
+   "shows": "翻完回到資料頁"
+  }
+ ],
+ "save": null,
+ "failures": [],
+ "substituted_inputs": [
+  {
+   "flag": "-load",
+   "path": "workplace/observe/quest-list.json",
+   "change": "Poontang 的第 4 個任務旗標設成「回報過」、已回報數設成 5。其餘欄位、其他隊員都不動。",
+   "generated_by": "tools/make_final_quest_save.py --flag 3 --reports 5",
+   "base": "workplace/saves/quest-take.json"
+  }
+ ],
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到這一頁的畫格。格子的座標與框的顏色由 RE-111 逐指令讀出，但底下那一頁（`sub_16239` 畫的版面）與原版的疊法沒有對拍。"
+  }
+ ],
+ "rights": "remake 自己畫的畫面；徽章圖來自已通過權利審查的原作衍生 PNG（AWD1PICS）。"
+}

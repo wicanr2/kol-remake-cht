@@ -74,6 +74,8 @@ type Inn struct {
 	Title []string   `json:"title"`
 	Dialog   []string `json:"dialog"`
 	DialogZh []string `json:"dialog_zh"`
+	// QuestList 是蓋在角色資料頁上的任務一覽；nil 代表沒開（RE-111）。
+	QuestList *QuestList `json:"quest_list,omitempty"`
 	Icons    []int    `json:"icons"`
 	Selected int      `json:"selected"`
 

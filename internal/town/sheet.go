@@ -222,13 +222,27 @@ func (s *Session) buildSheet(m Member) *SheetPage {
 // 因此只有前三個會畫出來（`sub_15ABF:0x1607E`）。
 func sheetIcons(m Member) []int {
 	icons := []int{IconUTurn, IconSheetItems, IconCompanion}
-	if m.Sheet != nil && m.Sheet.HasItems {
+	// 法術那一格看角色記錄 `0x200` 有沒有東西，任務一覽那一格看 `0x1DD`…`0x1E1`
+	// 有沒有東西（`sub_15ABF:0x1607E`）——remake 這一側就是會不會法術與
+	// 已回報的任務數。`Sheet.HasItems`／`HasNotes` 是舊的旗標欄位，
+	// typed data 沒有來源，所以由 Member 自己的兩塊資料算。
+	if len(m.Spells) > 0 || (m.Sheet != nil && m.Sheet.HasItems) {
 		icons = append(icons, IconSheetSpells)
 	}
-	if m.Sheet != nil && m.Sheet.HasNotes {
+	if hasReports(m.Progress) || (m.Sheet != nil && m.Sheet.HasNotes) {
 		icons = append(icons, IconSheetNotes)
 	}
 	return icons
+}
+
+// hasReports 回報那五格「已回報的任務數」有沒有東西。
+func hasReports(progress []int) bool {
+	for _, n := range progress {
+		if n != 0 {
+			return true
+		}
+	}
+	return false
 }
 
 // OpenSheet 是按下 MIRROR：畫面換成發言者的角色資料頁。
@@ -261,6 +275,7 @@ func (s *Session) closeSheet() {
 	}
 	s.Inside.Sheet = nil
 	s.Inside.SheetLabels = nil
+	s.Inside.QuestList = nil
 	s.Inside.Dialog = s.greeting()
 	s.Inside.DialogZh = nil
 	s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))

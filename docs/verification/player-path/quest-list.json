@@ -1,0 +1,78 @@
+{
+ "name": "quest-list",
+ "kind": "observation",
+ "description": "角色資料頁上按第 19 個圖示打開任務一覽（RE-111）：二十四個任務排成八欄三列，`編號 % 8` 決定欄、`編號 / 8` 決定列，**只列回報過的**，一格是 AWDnPICS 的一張 24×21 圖加一個 0x0A 的外框。一組一頁，按一個鍵翻下一組，翻完回資料頁。那一格圖示本身也是條件出現的——原版看角色記錄 `0x1DD`…`0x1E1` 有沒有東西，一件都沒回報過就不會有這一格。**輸入被換過**：原版名冊裡的角色都是全新的，一件任務都沒回報過，所以用工具把存檔改成「回報過第 4 個任務、已回報數 5」。",
+ "seed": 1,
+ "load": "workplace/observe/quest-list.json",
+ "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U RET SPACE > RET > > > RET SPACE",
+ "shot_dir": "docs/verification/player-path/quest-list",
+ "trace": "docs/verification/player-path/quest-list/trace.json",
+ "size": [
+  320,
+  200
+ ],
+ "receipt": "docs/verification/player-path/quest-list-receipt.json",
+ "substituted_inputs": [
+  {
+   "flag": "-load",
+   "path": "workplace/observe/quest-list.json",
+   "change": "Poontang 的第 4 個任務旗標設成「回報過」、已回報數設成 5。其餘欄位、其他隊員都不動。",
+   "generated_by": "tools/make_final_quest_save.py --flag 3 --reports 5",
+   "base": "workplace/saves/quest-take.json"
+  }
+ ],
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到這一頁的畫格。格子的座標與框的顏色由 RE-111 逐指令讀出，但底下那一頁（`sub_16239` 畫的版面）與原版的疊法沒有對拍。"
+  }
+ ],
+ "rights": "remake 自己畫的畫面；徽章圖來自已通過權利審查的原作衍生 PNG（AWD1PICS）。",
+ "milestones": [
+  {
+   "step": 21,
+   "town": {
+    "mode": 2
+   },
+   "note": "進門"
+  },
+  {
+   "step": 24,
+   "town": {
+    "mode": 2
+   },
+   "note": "MIRROR：角色資料頁"
+  },
+  {
+   "step": 28,
+   "town": {
+    "mode": 2
+   },
+   "note": "第 19 個圖示：任務一覽蓋在資料頁上"
+  },
+  {
+   "step": 29,
+   "town": {
+    "mode": 2
+   },
+   "note": "翻完一組，回資料頁"
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 24,
+   "file": "step-024.png",
+   "shows": "角色資料頁，圖示列多了任務一覽那一格"
+  },
+  {
+   "step": 28,
+   "file": "step-028.png",
+   "shows": "任務一覽：回報過的第 4 個任務畫在第 5 欄第 1 列"
+  },
+  {
+   "step": 29,
+   "file": "step-029.png",
+   "shows": "翻完回到資料頁"
+  }
+ ]
+}

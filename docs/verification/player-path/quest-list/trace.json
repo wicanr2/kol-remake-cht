@@ -1,0 +1,566 @@
+{
+  "schema": "kol-play-trace-v1",
+  "steps": [
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-000",
+      "scene": "flow:title",
+      "step": 0,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "party": [
+          "Poontang gold=214 wounds=1 reported=5 quests=0,3,0,0,0,0 carried=1",
+          "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+          "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+        ],
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-001",
+      "scene": "flow:cover",
+      "step": 1,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-002",
+      "scene": "flow:contents",
+      "step": 2,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-003",
+      "scene": "flow:menu",
+      "step": 3,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-004",
+      "scene": "flow:menu",
+      "step": 4,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-005",
+      "scene": "flow:newchar",
+      "step": 5,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-006",
+      "scene": "flow:menu",
+      "step": 6,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-007",
+      "scene": "flow:menu",
+      "step": 7,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-008",
+      "scene": "flow:delete",
+      "step": 8,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-009",
+      "scene": "flow:menu",
+      "step": 9,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-010",
+      "scene": "flow:menu",
+      "step": 10,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-011",
+      "scene": "flow:menu",
+      "step": 11,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-012",
+      "scene": "flow:menu",
+      "step": 12,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-013",
+      "scene": "flow:harbor",
+      "step": 13,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-014",
+      "scene": "flow:menu",
+      "step": 14,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-015",
+      "scene": "flow:contents",
+      "step": 15,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-016",
+      "scene": "flow:select",
+      "step": 16,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-017",
+      "scene": "flow:inn",
+      "step": 17,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-018",
+      "scene": "flow:inn",
+      "step": 18,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-019",
+      "scene": "flow:town",
+      "step": 19,
+      "town": {
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-020",
+      "scene": "flow:town",
+      "step": 20,
+      "town": {
+        "at_door": true,
+        "left_town": false,
+        "mode": 1,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-021",
+      "scene": "flow:town",
+      "step": 21,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-022",
+      "scene": "flow:town",
+      "step": 22,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-023",
+      "scene": "flow:town",
+      "step": 23,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-024",
+      "scene": "flow:town",
+      "step": 24,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-025",
+      "scene": "flow:town",
+      "step": 25,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-026",
+      "scene": "flow:town",
+      "step": 26,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-027",
+      "scene": "flow:town",
+      "step": 27,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-028",
+      "scene": "flow:town",
+      "step": 28,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    },
+    {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-029",
+      "scene": "flow:town",
+      "step": 29,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 7,
+          "name": "Residence",
+          "quest_final": false,
+          "quest_site": 6,
+          "quest_wants": "Ship Wheel"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 9,
+        "y": 23
+      }
+    }
+  ]
+}

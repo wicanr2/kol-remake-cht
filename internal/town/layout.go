@@ -73,6 +73,9 @@ var (
 	ColourListIdle = [3]uint8{0, 170, 170}
 	// ColourListArrow 是清單右側捲動箭頭的顏色：EGA 索引 4。
 	ColourListArrow = [3]uint8{170, 0, 0}
+	// ColourQuestBadge 是任務一覽那一格的外框：EGA 索引 0x0A
+	//（`sub_168F8` 傳給 `sub_1BA9D` 的最後一個參數，RE-111）。
+	ColourQuestBadge = [3]uint8{85, 255, 85}
 	ColourShadow   = [3]uint8{0, 0, 0}
 )
 
