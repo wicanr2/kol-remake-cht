@@ -1088,6 +1088,31 @@ func (g *game) updatePlay() {
 	}
 }
 
+// ambushLines 是遭遇那一句：`YOU HAVE BEEN AMBUSHED BY n, LEVEL m NAMES!`
+// （`0x2A886`，RE-097）。名字的複數與打贏那一句同一套。
+func ambushLines(bank *town.UIText, trans *town.Translations, a *battle.Ambush,
+	name string, english bool) []string {
+	countRec, levelRec := battle.AmbushLines()
+	// 記錄 0xE7 自己帶一個 `@`（換行），所以取 Segment 而不是剝掉版面碼的 UIRaw：
+	// 原版印出來是「YOU HAVE BEEN AMBUSHED」「BY n, LEVEL m NAMES!」兩行。
+	segs := town.UISegments(bank, trans, town.BankUI, countRec)
+	out := make([]string, 0, len(segs))
+	for i, seg := range segs {
+		if i < len(segs)-1 {
+			out = append(out, seg.Text)
+			continue
+		}
+		last := seg.Text + strconv.Itoa(a.Count) +
+			town.UIRaw(bank, trans, town.BankUI, levelRec) +
+			strconv.Itoa(a.Level) + " " + name
+		if english {
+			last += battle.PluralSuffix(name, a.Count)
+		}
+		out = append(out, last+"!")
+	}
+	return nonEmptyLines(out)
+}
+
 // battleTakeSpoil 在戰利品清單按下確認：領走一件。背包塞不下的時候原版會說一句
 // （記錄 0x183），把它排進訊息區。
 func (g *game) battleTakeSpoil() {
@@ -1157,7 +1182,12 @@ func (g *game) battleStep() {
 		// 打贏的話還有一張戰利品清單（RE-096）。地上什麼都沒有就跳過。
 		if s.Verdict == battle.VerdictWon && s.BeginSpoils() {
 			s.Stage = battle.StageSpoils
+			return
 		}
+		// 勝負那兩句與戰利品都處理完了，這一場真的結束——放開畫面回野外，
+		// 玩家才能繼續走。**打輸之後原版怎麼處置還沒解**（RE-091 只讀到那一句
+		// 訊息），這一版兩種結果都回野外。
+		g.quest.state = nil
 		return
 	}
 	// 沒有訊息的那幾手不停下來等鍵：敵人那一手還沒實作（RE-081），
@@ -2117,6 +2147,61 @@ func main() {
 				quest.english = *lang == "en"
 				quest.lines = nonEmptyLines(bank.Lines(town.BankUI,
 					battle.QuestCreaturesRecord))
+			}
+			// 野外的隨機遭遇：時段一變就擲一次（SPEC-011）。走進某一格不會擲，
+			// 所以一天最多四次。
+			worldSessionState.OnTimePart = func() {
+				if quest.state != nil || worldScreenState == nil {
+					return
+				}
+				c := worldScreenState.Clock
+				if c == nil || worldSessionState.Rand == nil {
+					return
+				}
+				rng := worldSessionState.Rand
+				ranks := make([]int, 0, len(playSession.Party))
+				for _, m := range playSession.Party {
+					if m.Sheet != nil {
+						ranks = append(ranks, m.Sheet.EarnedRank())
+					}
+				}
+				party := len(playSession.Party)
+				rank := battle.PartyRank(ranks, party)
+				season := battle.MonthSeason[c.Month%len(battle.MonthSeason)]
+				night := worldScreenState.Group == battle.NightWeather
+				a := monsters.RollAmbush(worldScreenState.TerrainCode, season,
+					night, rank, rng)
+				// 任務怪那一條（編號 0xFF）走的是另一套問句與清傷，還沒做
+				// （SPEC-011 第 9 節）；擲到就當作沒遇到。
+				if a == nil || a.Monster == battle.AmbushQuest {
+					return
+				}
+				a.RollForce(rank, party, rng)
+				// 有坐騎才問要不要騎走；這一版還沒有那個問句，先照「答否」走
+				// （SPEC-011 第 5 節列為已解但未接 UI）。
+				atlas, err := loadBattlePNG(*battleTiles)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					return
+				}
+				members := make([]battle.Member, 0, len(playSession.Party))
+				for _, m := range playSession.Party {
+					members = append(members, battleMember(m))
+				}
+				mon := monsters.At(a.Monster)
+				st := battle.NewAmbush(a, mon, members,
+					battle.Generate(&lcg{state: uint32(*seed)}))
+				if st == nil {
+					return
+				}
+				st.Rand = &lcg{state: uint32(*seed)}
+				st.SpoilItems = spoilItems
+				quest.tiles = ui.NewBattleTiles(atlas)
+				quest.state = st
+				quest.bank = bank
+				quest.trans = trans
+				quest.english = *lang == "en"
+				quest.lines = ambushLines(bank, trans, a, mon.Name, *lang == "en")
 			}
 		}
 		// 野外的時刻：隊伍最慢的那個移動率決定每步扣多少，換日補營養（RE-077）。

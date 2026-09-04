@@ -238,6 +238,10 @@ func parseSegments(raw string) []Segment {
 			col = margin
 			i++
 		case raw[i] == ']':
+			// `]` 是「接著往下畫」的記號，原版把它換成一個空白再印
+			// （`sub_1A8FD:0x1A990`）——不是丟掉。記錄 0xE7 的
+			// `…AMBUSHED@BY]` 少了它會印成 `BY2`（RE-097）。
+			buf.WriteByte(' ')
 			i++
 		default:
 			buf.WriteByte(raw[i])

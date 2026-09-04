@@ -40,9 +40,9 @@ const (
 	LevelBandDivisor = 0x14
 )
 
-// AmbushMaps 是戰場地圖的張數（`0x2A819` 的 `rand(5) − 1`）。任務地點那一條是
-// `rand(3) − 1`（`0x1E3E7`），兩者不同。
-const AmbushMaps = 5
+// AmbushPickGroups 是站位組的擲法（`0x2A819` 的 `rand(5) − 1`）：只選得到 0…4。
+// 任務地點那一條是 `rand(3) − 1`（`0x1E3E7`）。
+const AmbushPickGroups = 5
 
 // 遭遇會用到的 KOLDATA 記錄。
 const (
@@ -64,8 +64,9 @@ type Ambush struct {
 	Picture int
 	// Level／Count 是敵人的等級與隻數；任務怪那一條不擲，兩個都是 0。
 	Level, Count int
-	// Map 是戰場地圖編號 0…4。
-	Map int
+	// Group 是敵人站位組的索引 0…4（`word_37CF6`，RE-098）。地形本身不是載入的，
+	// 是逐格擲出來的（`Generate`）。
+	Group int
 }
 
 // TerrainBit／SeasonBit 是遮罩的位元（DGROUP `0x1312`／`0x1316`）：
@@ -150,7 +151,7 @@ func (a *Ambush) RollForce(rank, party int, rng Rand) {
 		}
 	}
 	a.Count = n + 1
-	a.Map = rng.Roll(AmbushMaps) - 1
+	a.Group = rng.Roll(AmbushPickGroups) - 1
 }
 
 // CanRideAway 是「問不問要不要騎走」（`0x2A67B`）：隊伍最慢的移動率等於
@@ -218,4 +219,38 @@ func AmbushEnemyPlace(group, i int) (x, y int) {
 		return 0, 0
 	}
 	return AmbushEnemyX[group][i], AmbushEnemyY[group][i]
+}
+
+// NewAmbush 從一次遭遇的擲點結果開一場戰鬥（RE-078／RE-097／RE-098）。
+//
+// 與任務地點的差別只在兩件事：站位不是從 payload 複製過來的（隊員永遠站同六格、
+// 敵人依 `a.Group` 選一組），地形也不是載入的（呼叫端要傳 `Generate` 產生的那一張，
+// 見 `sub_1E3A8:0x1E58A` 的分支）。其餘的參戰者換算與任務戰鬥共用同一支。
+func NewAmbush(a *Ambush, monster Monster, party []Member, field *Field) *State {
+	if a == nil {
+		return nil
+	}
+	// 合成一份 Site 餵給共用的建構：索引 −1 表示這一場不是任務地點。
+	site := &Site{Index: -1, Monster: a.Monster, MonsterName: monster.Name,
+		Level: a.Level, Count: a.Count}
+	for n := 0; n < PartySlots; n++ {
+		x, y := AmbushPartyPlace(n)
+		site.PartyX = append(site.PartyX, x)
+		site.PartyY = append(site.PartyY, y)
+	}
+	for i := 0; i < a.Count && i < AmbushSlots; i++ {
+		x, y := AmbushEnemyPlace(a.Group, i)
+		site.MonsterX = append(site.MonsterX, x)
+		site.MonsterY = append(site.MonsterY, y)
+	}
+	s := NewQuest(site, party, monster, field)
+	s.Stage = StageEncounter
+	return s
+}
+
+// AmbushLines 是「YOU HAVE BEEN AMBUSHED BY n, LEVEL m NAMES!」那一句要用的記錄與
+// 數字（`0x2A886`…`0x2A932`）。名字與複數由呼叫端插在後面——與打贏那一句同一套
+// 後綴規則（`PluralSuffix`）。
+func AmbushLines() (countRecord, levelRecord int) {
+	return AmbushedRecord, AmbushLevelRec
 }

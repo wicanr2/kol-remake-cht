@@ -5153,3 +5153,59 @@ word_34968 != 0 → 走 0x1E696，先把 0xB956 那 16 byte 複製進 0x9D20（�
 `sub_1A4FE(0x2D50, word_39A4E, …)` 載入那一筆，再 `sub_19B29(word_30C8A + 0x100,
 0x8000)` 解一次。記錄號是**固定的**，不隨地點變——這與「24 張地圖對應 24 個任務
 地點」（`battle-tiles` 的 manifest）對不上，還要再讀。沒有地形圖就開不了戰場。
+
+## RE-099：戰場的地形是擲出來的，不是載入的
+
+輸入與工具同 RE-070。探針 `tools/ida_probe_koltown_after_battle.py` 的
+`0x1E41A`…`0x1EA10`，以及 `tools/ida_probe_koltown_ambush.py` 的檔名表。
+
+### 先記一次差點犯的錯
+
+追隨機遭遇的最後一塊時，我一度要下「戰場地形圖的來源還沒解」的結論。**`Generate`
+早就寫在 `internal/battle/field.go` 裡**，註解連位址（`0x1E594`…`0x1E5E2`）都標好了。
+`rulebook/00` 那條「要說解不出來之前先 grep 自己的 `docs/` 與程式碼」在這裡又成立
+一次——這一次是自己幾天前寫的程式碼。
+
+### `word_39A4E` 是磚圖的 payload，不是地圖（`已證實`）
+
+`0x1E4C0`：`word_39A4E = 8`，`word_345DE != 0xFFFF`（訓練戰）時改成 `0x0C`；
+接著 `sub_2D3FA(0x2D50, 0x184A, 0x670 + 5 × word_2DF64)` 把檔名組出來、
+`sub_1A4FE` 載入那一筆。
+
+檔名表（DGROUP `0x1840` 起）解出來是：
+
+```
+0x1844  "town0"
+0x184A  "kol%s"
+0x1850  "mon%s"
+0x1856  "comb%s"
+0x185E  "item.lst"
+```
+
+`%s` 由 `0x0670` 的副檔名表填：`"pics"`／`"pcga"`／`"herc"`，每個 5 byte，
+由顯示模式 `word_2DF64` 選。所以 EGA 下組出來的是 **KOLPICS**，記錄 8 就是
+`battle-tiles-08.png` 那張磚圖（訓練戰的 12 是 `battle-tiles-12.png`）——
+抽取器早就把兩張都抽出來了。
+
+### 地形逐格擲（`已證實`）
+
+`0x1E58A` 的分支：`word_34968 == 0`（隨機遭遇）才走 `0x1E594`：
+
+```
+for i = 0 … 0x0FFF:                  ; 64 × 64
+    [地圖 + i] = rand(4) == 1 ? 0x0D : 0x09
+```
+
+任務地點跳過這一段（地形從 `TOWN0` 的 payload 61…84 載入，就是 24 張
+`battle-map-NN.png`），但**兩條路都會走**接下來的灑點（`0x1E5E5`）：
+
+```
+數量 = Σ 100 次 rand(6)              ; 平均 350
+```
+
+remake 的 `battle.Generate` 與 `Field.Scatter` 就是這兩段。
+
+### 這一塊補完之後
+
+隨機遭遇的四個必要條件——擲點規則（RE-078／RE-097）、站位（RE-098）、地形
+（本條）與磚圖——全部齊了，`battle.NewAmbush` 因此開得起一場戰鬥。

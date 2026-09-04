@@ -83,7 +83,7 @@ func TestRollAmbushTakesTheQuestBranch(t *testing.T) {
 func TestRollForce(t *testing.T) {
 	a := &Ambush{Monster: 7}
 	// 級距擲 1 → 1/20 = 0 → 修正 −2；位階 5 → 等級 3。
-	// 隻數先擲 3（>= CountCap[0][0] = 2，重擲）、再擲 1 → 0，顯示 1。地圖擲 4 → 3。
+	// 隻數先擲 3（>= CountCap[0][0] = 2，重擲）、再擲 1 → 0，顯示 1。站位組擲 4 → 3。
 	a.RollForce(5, 1, &fixedRand{values: []int{1, 3, 1, 4}})
 	if a.Level != 3 {
 		t.Fatalf("等級 %d，期望 3", a.Level)
@@ -91,8 +91,8 @@ func TestRollForce(t *testing.T) {
 	if a.Count != 1 {
 		t.Fatalf("隻數 %d，期望 1", a.Count)
 	}
-	if a.Map != 3 {
-		t.Fatalf("地圖 %d，期望 3", a.Map)
+	if a.Group != 3 {
+		t.Fatalf("站位組 %d，期望 3", a.Group)
 	}
 	// 等級不會低於 1。
 	b := &Ambush{Monster: 7}
@@ -193,5 +193,51 @@ func TestAmbushGroupsDoNotOverlapParty(t *testing.T) {
 				t.Fatalf("第 %d 組第 %d 隻站到隊員那一格 (%d,%d)", g, i, x, y)
 			}
 		}
+	}
+}
+
+// 開一場遭遇：隊員與敵人各就各位，地形是擲出來的，階段停在那張怪物圖。
+func TestNewAmbush(t *testing.T) {
+	a := &Ambush{Monster: 7, Level: 3, Count: 2, Group: 0}
+	mon := Monster{Index: 7, Name: "RUFFIAN", Size: 100, Health: 100,
+		AttackSkill: 230, ParrySkill: 100}
+	party := []Member{{Name: "POONTANG"}, {Name: "DDDUHH"}}
+	s := NewAmbush(a, mon, party, Generate(&fixedRand{values: []int{1, 2}}))
+	if s == nil {
+		t.Fatal("該開得起來")
+	}
+	if s.Stage != StageEncounter {
+		t.Fatalf("階段是 %d，期望 StageEncounter", s.Stage)
+	}
+	if s.MonsterLevel != 3 {
+		t.Fatalf("怪物等級 %d，期望 3", s.MonsterLevel)
+	}
+	// 兩名隊員站在固定的頭兩格。
+	x, y := AmbushPartyPlace(0)
+	if s.Actors[0].X != x || s.Actors[0].Y != y {
+		t.Fatalf("第 0 名隊員站在 (%d,%d)，期望 (%d,%d)",
+			s.Actors[0].X, s.Actors[0].Y, x, y)
+	}
+	// 兩隻敵人站在第 0 組的頭兩格。
+	for i := 0; i < 2; i++ {
+		x, y := AmbushEnemyPlace(0, i)
+		got := s.Actors[PartySlots+i]
+		if got.Side != SideMonster || got.X != x || got.Y != y {
+			t.Fatalf("第 %d 隻站在 (%d,%d)，期望 (%d,%d)", i, got.X, got.Y, x, y)
+		}
+		if got.Name != "RUFFIAN" {
+			t.Fatalf("第 %d 隻叫 %q", i, got.Name)
+		}
+	}
+	// 第三格以後是空的。
+	if s.Actors[PartySlots+2].Side != SideEmpty {
+		t.Fatal("只有兩隻敵人，第三格該是空的")
+	}
+	if s.EnemyCount() != 2 || s.PartyCount() != 2 {
+		t.Fatalf("兩邊人數是 %d 與 %d", s.EnemyCount(), s.PartyCount())
+	}
+	// 敵人的技能折算過等級，戰後結算用的原值另外留著。
+	if s.Actors[PartySlots].BaseAttack != 230 {
+		t.Fatalf("原始攻擊技能是 %d", s.Actors[PartySlots].BaseAttack)
 	}
 }
