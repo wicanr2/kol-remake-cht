@@ -1,6 +1,8 @@
 package ui
 
 import (
+	"strings"
+
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
@@ -119,24 +121,31 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 
 	// 執行段：訊息蓋掉圖示列那一塊（RE-087）。欄 3 是像素 24，行高 6 是小字型
 	// 的高度，起點在掃描列 0xA8。
+	// 執行段：整條訊息區換掉，圖示列與底圖都不見了（RE-089）。
+	//
+	// **底圖還沒認出來**：原版那一條的主色是白（5,488 個像素）加上一片亮黃的
+	// 圖案（2,900 個），不是 KOLMPICS 圖 2——那一張是紅底，形狀也只對得上六成。
+	// 這裡先鋪成白底，讓主色一致；黃色那一塊是已知差異。
 	if s.Plan.Prompt == battle.PromptExecuting {
+		box := battle.MessageBox
+		fill(dst, box.X, box.Y, box.Width, box.Height, battle.MessageBack)
 		area := battle.MessageArea
 		for i, line := range s.Exec.Text {
 			y := area.Y + i*area.LineHeight
-			// 原版每畫一個字元前先清一塊 8×8（`sub_1DE84:0x1DE98` 的
-			// `sub_1C40D`），所以只有有字的那幾格會蓋掉底下的圖示，
-			// 而且清的高度比行高多兩列。
-			for n := range line {
-				fill(dst, area.Col*8+n*f.Advance(), y, 8, 8, town.ColourBoxFill)
-			}
-			f.Draw(dst, area.Col*8, y, line,
-				town.ColourText[0], town.ColourText[1], town.ColourText[2])
+			// 原版把訊息整段轉成大寫（KOLDATA 裡是小寫的 `moves!`，
+			// 畫面上是 `MOVES!`）——與角色資料頁同一種處理（RE-074）。
+			f.Draw(dst, area.Col*8, y, strings.ToUpper(line),
+				battle.MessageInk[0], battle.MessageInk[1], battle.MessageInk[2])
 		}
 		return nil
 	}
 
-	// 指令圖示列。版面與城鎮同一組（RE-080：(32 + 32i, 171)、一格 24×20），
-	// KOLMPICS 的圖號是命令碼加三。
+	return drawBattleIcons(dst, sprites, s)
+}
+
+// drawBattleIcons 畫指令圖示列。版面與城鎮同一組（RE-080：(32 + 32i, 171)、
+// 一格 24×20），KOLMPICS 的圖號是命令碼加三。
+func drawBattleIcons(dst *ebiten.Image, sprites Sprites, s *battle.State) error {
 	b := town.IconBar
 	for i, code := range s.Plan.Bar {
 		icon, err := sprites.Get("KOLMPICS", code+battle.IconOffset)

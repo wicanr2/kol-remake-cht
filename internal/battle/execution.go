@@ -194,6 +194,9 @@ type ActResult struct {
 	Message int
 	// Unimplemented 為真表示這一手 remake 還沒做出來，不是原版沒有動作。
 	Unimplemented bool
+	// Redraw 為真表示這一句之後原版會重畫戰場再等一次鍵
+	// （`sub_26384:0x265D5`，移動成功才有）。
+	Redraw bool
 }
 
 // FacingTarget 回傳面前那一格站著誰（`sub_26D76:0x26DA5` 的
@@ -310,6 +313,8 @@ func (s *State) move(i int) ActResult {
 	}
 	a.X, a.Y = x, y
 	out.Message = MovedRecord
+	// 走成功之後原版印完訊息等一次鍵、重畫戰場、再等一次（`0x265C9`／`0x265E1`）。
+	out.Redraw = true
 	return out
 }
 

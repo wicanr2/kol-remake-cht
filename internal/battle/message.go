@@ -20,6 +20,18 @@ const (
 // （`sub_1DE84:0x1DE9F` 的 `shl ax, 3`）；Y 是掃描列，行高 6 是小字型的高度。
 var MessageArea = struct{ Col, Y, LineHeight int }{Col: 3, Y: 0xA8, LineHeight: 6}
 
+// MessageInk／MessageBack 是訊息區的字色與底色：**白底黑字**，
+// 由 `docs/verification/character-ui/world-quest-execute-run1` 的 frame-966
+// 量得（有字的格子被清成白底，沒字的格子保留底下的圖示列）。
+var (
+	MessageInk  = [3]uint8{0, 0, 0}
+	MessageBack = [3]uint8{255, 255, 255}
+)
+
+// MessageBox 是執行段訊息那一整條的範圍：`sub_1103F(0x23)` 設的剪裁區
+// （欄 1…0x26、列 0xA4…0xC4），換算成像素是 (8, 164) 起 296×32（RE-089）。
+var MessageBox = struct{ X, Y, Width, Height int }{X: 8, Y: 0xA4, Width: 296, Height: 32}
+
 // MessageWidth 是斷行用的字元數上限（`0x21`）。第一行要扣掉起始欄，所以只有
 // `MessageWidth − MessageArea.Col` 個字元；第二行起原版直接加 `0x21`，兩者
 // 不對稱——照抄原版的行為（RE-087）。

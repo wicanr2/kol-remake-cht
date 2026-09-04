@@ -1172,6 +1172,43 @@ SCENARIOS: dict[str, dict] = {
 }
 
 
+# world-quest-execute 的前綴就是 world-quest-site 走到戰場那一段：一路走到第 5 個
+# 任務地點、答應「Will you partake?」、按過滿版怪物圖進戰場。取到「戰鬥第 4 鍵」為止。
+_quest_steps = SCENARIOS["world-quest-site"]["steps"]
+SCENARIOS_QUEST_PREFIX = _quest_steps[:[s["label"] for s in _quest_steps]
+                                      .index("戰鬥第 4 鍵（space）") + 1]
+
+# 執行段的訊息畫面。進戰場之後只做一件事：讓 Poontang 選休息、答應
+# 「Begin next round?」，再一路按鍵推完整個執行段的訊息。
+#
+# 為什麼不照 remake 的路徑走：原版的敵人**會動**（`sub_2374C` 的 AI），
+# 每一手都印一句再等鍵，而 remake 的敵人那一手還沒實作（RE-081）。兩邊的
+# 按鍵數與訊息內容因此對不起來。這一份要的是**訊息框的版面**——文字起點、
+# 行高、斷行與逐格清底（RE-087）——那幾項與誰動的無關。
+SCENARIOS["world-quest-execute"] = {
+    "description": "同 world-quest-site 走到第 5 個任務地點並進戰場，接著讓"
+                   "Poontang 選最後一格（休息）、答應「Begin next round?」，"
+                   "再連按二十次空白鍵推完執行段的訊息。取的是訊息框的版面，"
+                   "不是逐手的內容——原版敵人會動而 remake 還沒實作。純觀察，不保存。",
+    "steps": SCENARIOS_QUEST_PREFIX + [
+        step("指令列往右第 1 格", "greater", settle=2.0, timeout=15.0),
+        step("指令列往右第 2 格", "greater", settle=2.0, timeout=15.0),
+        step("指令列往右第 3 格", "greater", settle=2.0, timeout=15.0),
+        step("指令列往右第 4 格", "greater", settle=2.0, timeout=15.0),
+        step("指令列往右第 5 格", "greater", settle=2.0, timeout=15.0),
+        step("指令列往右第 6 格（休息）", "greater", settle=2.0, timeout=15.0),
+        step("選休息", "Return", settle=2.5, timeout=15.0),
+        step("Begin next round? 答應", "Return", settle=2.5, timeout=15.0),
+    ] + [
+        step(f"推執行段訊息第 {i} 次", "space", settle=2.0, timeout=15.0)
+        for i in range(1, 21)
+    ] + [
+        step("觀察結束", None, settle=3.0, timeout=15.0),
+    ],
+}
+
+
+
 def sha256_file(path: pathlib.Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as fh:

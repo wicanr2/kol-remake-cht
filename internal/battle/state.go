@@ -161,9 +161,9 @@ func (s *State) Answer(yes bool) bool {
 			if s.Rand != nil {
 				s.BeginExecution(s.Rand)
 				s.Exec.Log = nil
+				// 圖示列留著不清：原版進執行段之後沒有重畫那一列，
+				// 訊息是逐格蓋在它上面的（RE-089）。
 				s.Plan.Prompt = PromptExecuting
-				s.Plan.Bar = nil
-				s.Plan.Selected = 0
 				break
 			}
 			s.AdvanceToParty()

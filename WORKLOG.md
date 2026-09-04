@@ -2276,3 +2276,37 @@ README 的現況段還寫著「訓練、戰鬥與任務都還沒實作」。訓�
 `rulebook/85` 要求授權出現在四個地方，目前只有兩個（repo `LICENSE`、README）。
 另外兩個是「每一個發行包裡」與「發行根目錄」——`dist-all/` 還沒建立，
 打包腳本要記得複製，已列進 WORKLIST 的 M6。
+
+## 2026-09-04：執行段的原版畫面與訊息框 parity
+
+### 做了什麼
+
+錄了新的原版 oracle 情境 `world-quest-execute`（`tools/dosbox_character_ui_oracle.py`，
+969 個畫格，10m36s）。前綴沿用 `world-quest-site` 走到第 5 個任務地點進戰場，
+接著在指令列上往右按到最後一格、按 Return、答應「Begin next round?」，
+再連按二十次空白鍵推完執行段的訊息。收據與畫格在
+`docs/verification/character-ui/world-quest-execute-run1/`，已登進 MANIFEST
+（43 個 run、6,515 個畫格）。
+
+用 `tools/read_text_from_frame.py` 以原版字模逐格比對，從畫格讀回兩句原文：
+frame-966/967 的 `THE RUFFIAN MOVES!` 與 frame-968 的 `POONTANG DOES NOTHING.`。
+量到五件事寫成 RE-089，remake 四項照著修：整段轉大寫、白底黑字、訊息區整條鋪成
+白底、移動成功等兩次鍵。
+
+### 兩個沒收掉的差異
+
+- **訊息區那張底圖沒認出來**。原版 (8,164) 起 296×32 是白 5,488 + 亮黃 2,900 +
+  黑 864；remake 鋪純白是白 9,108 + 黑 364。主色一致，黃色那一片圖案不明——
+  不是 KOLMPICS 圖 2（那張是紅底，各自取主色當背景比形狀也只對得上
+  5,843/9,472）。
+- **敵人的名字對不上**。畫面上動的叫 RUFFIAN（怪物 15），任務地點 5 的記錄寫的是
+  BINDERAK（怪物 19）。`|F`／`|G` 印的是 `sub_1A8FD(0, 0xB967)`，還沒追出誰寫那個
+  緩衝區。remake 目前用任務記錄裡的名字。
+
+兩項都寫進 SPEC-008 的已知差異與 WORKLIST，不當成做完。
+
+### 為什麼沒有逐手對拍
+
+原版的敵人會動（`sub_2374C` 的 AI），remake 的敵人那一手還沒實作（缺三張基礎權重表
+的執行期值），兩邊的按鍵數與訊息內容對不起來。這一輪要的是**訊息框的版面**，
+那與誰動的無關；逐手的內容要等敵人 AI 做出來才有得比。

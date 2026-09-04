@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 5546,
+  "total_frames": 6515,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -643,6 +643,21 @@
       "frame_dir": "docs/verification/character-ui/world-quest-run1/frames",
       "character_files_changed": [],
       "note": "走到第 5 個特殊地點 (48,21) 觸發任務怪物，答應之後進戰鬥；含戰鬥畫面的三個框、指令圖示列與裝備欄。"
+    },
+    {
+      "run": "world-quest-execute-run1",
+      "scenario": "world-quest-execute",
+      "description": "沿用 world-quest-site 走到第 5 個任務地點並進戰場，接著在指令列上往右按到最後一格、按 Return、答應「Begin next round?」，再連按二十次空白鍵推完執行段的訊息。純觀察，不保存。",
+      "receipt": "docs/verification/character-ui/world-quest-execute-run1/receipt.json",
+      "generated_utc": "2026-09-04T01:24:30Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 137,
+      "frame_count": 969,
+      "frame_dir": "docs/verification/character-ui/world-quest-execute-run1/frames",
+      "character_files_changed": [],
+      "note": "取的是執行段訊息框的版面（RE-089）：訊息區整條 (8,164) 296×32 換成白底加一片亮黃的圖案、文字白底黑字、整段轉大寫、起點 (24,168) 行高 6、移動成功要按兩次鍵。frame-963/965 還是紅磚底，frame-966 起換掉。"
     }
   ]
 }

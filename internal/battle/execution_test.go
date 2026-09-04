@@ -329,3 +329,29 @@ func TestActSkipsDown(t *testing.T) {
 		t.Fatal("後面沒有人了，應該回 false")
 	}
 }
+
+// 移動成功之後原版要按兩次鍵：印完訊息等一次、重畫戰場再等一次（`0x265C9`／
+// `0x265E1`）。走不動只有一次。
+func TestMoveRedraw(t *testing.T) {
+	build := func(facing int) *State {
+		s := &State{Actors: make([]Actor, 1)}
+		s.Actors[0] = Actor{Side: SideParty, X: 20, Y: 20, Facing: facing,
+			Threshold: 100, Command: CmdMove, Style: 0x3C}
+		s.Actors[0].SetParts()
+		s.Exec.Order = []int{0}
+		return s
+	}
+	s := build(2)
+	r, _ := s.Act(&fixedRoll{values: []int{50}})
+	if r.Message != MovedRecord || !r.Redraw {
+		t.Fatalf("走成功應該要重畫再等一次，得到 %#x redraw=%v", r.Message, r.Redraw)
+	}
+	// 走到界外：只印一句，不重畫。
+	s = build(0)
+	s.Actors[0].X = FieldMin
+	s.Exec.Turn = 0
+	r, _ = s.Act(&fixedRoll{values: []int{50}})
+	if r.Message != BlockedRecord || r.Redraw {
+		t.Fatalf("走不動不該重畫，得到 %#x redraw=%v", r.Message, r.Redraw)
+	}
+}

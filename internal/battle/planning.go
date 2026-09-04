@@ -253,8 +253,10 @@ func (s *State) commit(i, command, style, guard int) bool {
 		}
 		done = true
 	}
+	// 整輪決定完印記錄 0x108，圖示列換成 YES 與 U-TURN（RE-080；一般遭遇還會多
+	// 一格逃走，任務戰鬥沒有）。這一列在執行段不會被重畫，訊息就蓋在它上面。
 	s.Plan.Prompt = PromptNextRound
-	s.Plan.Bar = nil
+	s.Plan.Bar = []int{CmdYes, CmdCancel}
 	s.Plan.Selected = 0
 	return true
 }

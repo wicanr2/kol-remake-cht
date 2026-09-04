@@ -1101,6 +1101,10 @@ func (g *game) battleStep() {
 	}
 	if r.Outcome == nil {
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
+		// 移動成功那一句原版要按兩次：印完等一次、重畫戰場再等一次（RE-085）。
+		if r.Redraw {
+			s.Exec.Pending = s.Exec.Text
+		}
 		return
 	}
 	// 攻擊那一手：第一句是動作加結果，命中的話第二句是傷害（RE-088）。
