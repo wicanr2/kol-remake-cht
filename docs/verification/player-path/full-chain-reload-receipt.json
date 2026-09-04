@@ -6,7 +6,7 @@
  "load": "workplace/saves/full-chain.json",
  "token_count": 119,
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
- "trace_sha256": "e8f7b3be5b4ab7152f5811de4f751caf22429fa3939e5056aab00245d8f2e970",
+ "trace_sha256": "d378f26b95fbd0ecc86351118502daae13a3de7ad76bf6b1bdc1e9232db38dae",
  "milestones": [
   {
    "step": 0,
@@ -16,6 +16,14 @@
    "town": {
     "left_town": false,
     "mode": 0,
+    "party": [
+     "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
     "town": 7,
     "x": 57,
     "y": 8
@@ -55,6 +63,10 @@
    "scene": "flow:town",
    "town": {
     "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": false,
     "mode": 2,
     "town": 7,
@@ -69,6 +81,10 @@
    "scene": "flow:town",
    "town": {
     "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": false,
     "mode": 2,
     "town": 7,
@@ -82,6 +98,10 @@
    "note": "回到戶外地圖",
    "scene": "flow:town",
    "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": false,
     "mode": 0,
     "town": 7,
@@ -96,6 +116,10 @@
    "scene": "flow:town",
    "town": {
     "at_edge": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": false,
     "mode": 3,
     "town": 7,
@@ -109,6 +133,10 @@
    "note": "出城，落到霍布入城點 3",
    "scene": "flow:town",
    "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": true,
     "mode": 0,
     "town": 7,
@@ -133,6 +161,10 @@
    "note": "走到入夜換日：CAMPING!，停在原地等一個鍵（RE-077）",
    "scene": "flow:town",
    "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": true,
     "mode": 0,
     "town": 7,
@@ -158,6 +190,10 @@
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）",
    "scene": "flow:town",
    "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": true,
     "mode": 0,
     "town": 7,
@@ -183,6 +219,10 @@
    "note": "答應參戰：滿版的怪物圖",
    "scene": "flow:town",
    "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": true,
     "mode": 0,
     "town": 7,
@@ -214,204 +254,24 @@
     "order": 0,
     "prompt": 0,
     "roster": [
-     {
-      "chest": 16,
-      "down": false,
-      "head": 16,
-      "i": 0,
-      "injury": 0,
-      "name": "Poontang",
-      "side": 0,
-      "x": 14,
-      "y": 41
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 1,
-      "injury": 0,
-      "name": "Moraine",
-      "side": 0,
-      "x": 12,
-      "y": 41
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 2,
-      "injury": 0,
-      "name": "Fighting Bull",
-      "side": 0,
-      "x": 11,
-      "y": 42
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 3,
-      "injury": 0,
-      "name": "Kenneth",
-      "side": 0,
-      "x": 9,
-      "y": 42
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 4,
-      "injury": 0,
-      "name": "Sharakan",
-      "side": 0,
-      "x": 8,
-      "y": 43
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 5,
-      "injury": 0,
-      "name": "Olear",
-      "side": 0,
-      "x": 7,
-      "y": 44
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 6,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 25,
-      "y": 41
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 7,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 27,
-      "y": 37
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 8,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 30,
-      "y": 42
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 9,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 35,
-      "y": 42
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 10,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 36,
-      "y": 40
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 11,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 19,
-      "y": 41
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 12,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 26,
-      "y": 32
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 13,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 29,
-      "y": 28
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 14,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 30,
-      "y": 32
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 15,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 32,
-      "y": 30
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 16,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 34,
-      "y": 30
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 17,
-      "injury": 0,
-      "name": "BINDERAK",
-      "side": 1,
-      "x": 36,
-      "y": 33
-     }
+     "0 Poontang party 14,41 head=16 chest=16",
+     "1 Moraine party 12,41 head=15 chest=15",
+     "2 Fighting Bull party 11,42 head=14 chest=14",
+     "3 Kenneth party 9,42 head=17 chest=17",
+     "4 Sharakan party 8,43 head=17 chest=17",
+     "5 Olear party 7,44 head=15 chest=15",
+     "6 BINDERAK foe 25,41 head=15 chest=15",
+     "7 BINDERAK foe 27,37 head=15 chest=15",
+     "8 BINDERAK foe 30,42 head=15 chest=15",
+     "9 BINDERAK foe 35,42 head=15 chest=15",
+     "10 BINDERAK foe 36,40 head=15 chest=15",
+     "11 BINDERAK foe 19,41 head=15 chest=15",
+     "12 BINDERAK foe 26,32 head=15 chest=15",
+     "13 BINDERAK foe 29,28 head=15 chest=15",
+     "14 BINDERAK foe 30,32 head=15 chest=15",
+     "15 BINDERAK foe 32,30 head=15 chest=15",
+     "16 BINDERAK foe 34,30 head=15 chest=15",
+     "17 BINDERAK foe 36,33 head=15 chest=15"
     ],
     "round": 0,
     "selected": 0,

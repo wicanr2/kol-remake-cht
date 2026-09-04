@@ -6,7 +6,7 @@
  "load": "workplace/saves/party6.json",
  "token_count": 567,
  "trace": "docs/verification/player-path/full-chain/trace.json",
- "trace_sha256": "0d02db8b99e0d9ae3f51d8d3df539eb0274206a0b6736b7e10f73fdb1d193ea0",
+ "trace_sha256": "7f7db28f8eda8c1e7da65a3d7dc4092e1d6031c01de03fcfae933859de29d1b2",
  "milestones": [
   {
    "step": 0,
@@ -16,6 +16,14 @@
    "town": {
     "left_town": false,
     "mode": 0,
+    "party": [
+     "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
     "town": 7,
     "x": 57,
     "y": 8
@@ -200,94 +208,14 @@
     "order": 0,
     "prompt": 0,
     "roster": [
-     {
-      "chest": 16,
-      "down": false,
-      "head": 16,
-      "i": 0,
-      "injury": 0,
-      "name": "Poontang",
-      "side": 0,
-      "x": 33,
-      "y": 30
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 1,
-      "injury": 0,
-      "name": "Moraine",
-      "side": 0,
-      "x": 31,
-      "y": 30
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 2,
-      "injury": 0,
-      "name": "Fighting Bull",
-      "side": 0,
-      "x": 33,
-      "y": 32
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 3,
-      "injury": 0,
-      "name": "Kenneth",
-      "side": 0,
-      "x": 31,
-      "y": 32
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 4,
-      "injury": 0,
-      "name": "Sharakan",
-      "side": 0,
-      "x": 33,
-      "y": 34
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 5,
-      "injury": 0,
-      "name": "Olear",
-      "side": 0,
-      "x": 31,
-      "y": 34
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 6,
-      "injury": 0,
-      "name": "ZOMBIE",
-      "side": 1,
-      "x": 31,
-      "y": 27
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 7,
-      "injury": 0,
-      "name": "ZOMBIE",
-      "side": 1,
-      "x": 33,
-      "y": 27
-     }
+     "0 Poontang party 33,30 head=16 chest=16",
+     "1 Moraine party 31,30 head=15 chest=15",
+     "2 Fighting Bull party 33,32 head=14 chest=14",
+     "3 Kenneth party 31,32 head=17 chest=17",
+     "4 Sharakan party 33,34 head=17 chest=17",
+     "5 Olear party 31,34 head=15 chest=15",
+     "6 ZOMBIE foe 31,27 head=14 chest=14",
+     "7 ZOMBIE foe 33,27 head=14 chest=14"
     ],
     "round": 0,
     "selected": 0,
@@ -341,96 +269,6 @@
     "monster": "ZOMBIE",
     "order": 8,
     "prompt": 0,
-    "roster": [
-     {
-      "chest": 16,
-      "down": false,
-      "head": 16,
-      "i": 0,
-      "injury": 0,
-      "name": "Poontang",
-      "side": 0,
-      "x": 33,
-      "y": 30
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 1,
-      "injury": 0,
-      "name": "Moraine",
-      "side": 0,
-      "x": 31,
-      "y": 30
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 2,
-      "injury": 0,
-      "name": "Fighting Bull",
-      "side": 0,
-      "x": 33,
-      "y": 32
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 3,
-      "injury": 0,
-      "name": "Kenneth",
-      "side": 0,
-      "x": 31,
-      "y": 32
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 4,
-      "injury": 0,
-      "name": "Sharakan",
-      "side": 0,
-      "x": 33,
-      "y": 34
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 5,
-      "injury": 0,
-      "name": "Olear",
-      "side": 0,
-      "x": 31,
-      "y": 34
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 6,
-      "injury": 0,
-      "name": "ZOMBIE",
-      "side": 1,
-      "x": 31,
-      "y": 27
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 7,
-      "injury": 0,
-      "name": "ZOMBIE",
-      "side": 1,
-      "x": 33,
-      "y": 27
-     }
-    ],
     "round": 1,
     "selected": 0,
     "site": -1,
@@ -481,96 +319,6 @@
     "monster": "ZOMBIE",
     "order": 8,
     "prompt": 10,
-    "roster": [
-     {
-      "chest": 10,
-      "down": false,
-      "head": 16,
-      "i": 0,
-      "injury": 3,
-      "name": "Poontang",
-      "side": 0,
-      "x": 31,
-      "y": 28
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 1,
-      "injury": 0,
-      "name": "Moraine",
-      "side": 0,
-      "x": 32,
-      "y": 28
-     },
-     {
-      "chest": 14,
-      "down": false,
-      "head": 14,
-      "i": 2,
-      "injury": 0,
-      "name": "Fighting Bull",
-      "side": 0,
-      "x": 30,
-      "y": 28
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 3,
-      "injury": 0,
-      "name": "Kenneth",
-      "side": 0,
-      "x": 32,
-      "y": 29
-     },
-     {
-      "chest": 17,
-      "down": false,
-      "head": 17,
-      "i": 4,
-      "injury": 0,
-      "name": "Sharakan",
-      "side": 0,
-      "x": 29,
-      "y": 30
-     },
-     {
-      "chest": 15,
-      "down": false,
-      "head": 15,
-      "i": 5,
-      "injury": 0,
-      "name": "Olear",
-      "side": 0,
-      "x": 30,
-      "y": 30
-     },
-     {
-      "chest": 0,
-      "down": true,
-      "head": 14,
-      "i": 6,
-      "injury": 21,
-      "name": "ZOMBIE",
-      "side": 1,
-      "x": 31,
-      "y": 27
-     },
-     {
-      "chest": 0,
-      "down": true,
-      "head": 14,
-      "i": 7,
-      "injury": 10,
-      "name": "ZOMBIE",
-      "side": 1,
-      "x": 33,
-      "y": 27
-     }
-    ],
     "round": 4,
     "selected": 0,
     "site": -1,
@@ -637,6 +385,10 @@
    "scene": "flow:town",
    "town": {
     "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": false,
     "mode": 2,
     "town": 7,
@@ -651,8 +403,20 @@
    "scene": "flow:town",
    "town": {
     "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
     "left_town": false,
     "mode": 2,
+    "party": [
+     "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
     "town": 7,
     "x": 57,
     "y": 8
@@ -723,7 +487,7 @@
  ],
  "save": {
   "file": "workplace/saves/full-chain.json",
-  "sha256": "2d17454af77b37197d1f2b0275ec8a9aefe827d6ab3c91e451d188cd674ceb0c",
+  "sha256": "40c51c3369580d57c1a5ecc3a462dadb339dcfd223bc659fd671fa91af6fb9b2",
   "fields": {
    "schema": "kol-save-v1",
    "location.kind": "town",

@@ -796,6 +796,9 @@ type game struct {
 	// 截圖只證明畫面長什麼樣，軌跡才證明這一步走的是哪一個狀態機。
 	tracePath string
 	traceRows []map[string]any
+	// lastParty／lastRoster 是上一步寫進軌跡的摘要，用來省掉沒有變化的那幾行。
+	lastParty  []string
+	lastRoster []string
 }
 
 // snapshot 記下這一步之後遊戲停在哪。欄位只取「能證明走到哪一層」的那幾個：
@@ -823,28 +826,12 @@ func (g *game) snapshot() map[string]any {
 		if len(g.play.TurnedIn) > 0 {
 			town["turned_in"] = len(g.play.TurnedIn)
 		}
-		var party []any
-		for _, m := range g.play.Party {
-			row := map[string]any{"name": m.Name, "gold": m.Gold, "wounds": m.Wounds}
-			if len(m.Progress) > 0 {
-				row["reported"] = m.Progress[0]
-			}
-			if len(m.Quests) > 0 {
-				row["quests"] = m.Quests
-			}
-			carried := 0
-			for _, item := range m.Carried {
-				for _, b := range item {
-					if b != 0 {
-						carried++
-						break
-					}
-				}
-			}
-			row["carried"] = carried
-			party = append(party, row)
+		// 隊伍與戰場的摘要壓成一行一名的字串，而且只在與上一步不同時才寫。
+		// 上千步的路徑逐步展開成物件會把軌跡撐到兩百萬 byte，其中九成是重複的。
+		if party := partyLines(g.play.Party); !sameLines(party, g.lastParty) {
+			town["party"] = party
+			g.lastParty = party
 		}
-		town["party"] = party
 		if d := g.play.Door(); d != nil {
 			door := map[string]any{"index": d.Index, "name": d.Name}
 			if q := d.Quest(); q != nil {
@@ -888,17 +875,10 @@ func (g *game) snapshot() map[string]any {
 		}
 		b["cursor_cell"] = []int{st.Plan.Cursor.Row, st.Plan.Cursor.Col,
 			st.Plan.Cursor.Mode, st.Plan.Cursor.Icon}
-		var actors []any
-		for i := range st.Actors {
-			a := &st.Actors[i]
-			if a.Name == "" {
-				continue
-			}
-			actors = append(actors, map[string]any{"i": i, "name": a.Name,
-				"side": int(a.Side), "x": a.X, "y": a.Y, "down": a.Down(),
-				"head": a.Head, "chest": a.Chest, "injury": a.Injury()})
+		if roster := actorLines(st.Actors); !sameLines(roster, g.lastRoster) {
+			b["roster"] = roster
+			g.lastRoster = roster
 		}
-		b["roster"] = actors
 		if st.Site != nil {
 			b["site"] = st.Site.Index
 			b["monster"] = st.Site.MonsterName
@@ -909,6 +889,69 @@ func (g *game) snapshot() map[string]any {
 		row["ending"] = map[string]any{"panel": g.ending.Panel}
 	}
 	return row
+}
+
+// partyLines 把隊伍壓成一名一行：名字、金幣、傷勢、已回報數、任務旗標、
+// 身上帶著幾件東西。
+func partyLines(party []town.Member) []string {
+	out := make([]string, 0, len(party))
+	for _, m := range party {
+		reported := 0
+		if len(m.Progress) > 0 {
+			reported = m.Progress[0]
+		}
+		carried := 0
+		for _, item := range m.Carried {
+			for _, b := range item {
+				if b != 0 {
+					carried++
+					break
+				}
+			}
+		}
+		flags := make([]string, 0, len(m.Quests))
+		for _, q := range m.Quests {
+			flags = append(flags, strconv.Itoa(q))
+		}
+		out = append(out, fmt.Sprintf("%s gold=%d wounds=%d reported=%d quests=%s carried=%d",
+			m.Name, m.Gold, m.Wounds, reported, strings.Join(flags, ","), carried))
+	}
+	return out
+}
+
+// actorLines 把戰場上的參戰者壓成一名一行：索引、名字、哪一邊、座標與頭胸的現值。
+func actorLines(actors []battle.Actor) []string {
+	var out []string
+	for i := range actors {
+		a := &actors[i]
+		if a.Name == "" {
+			continue
+		}
+		side := "party"
+		if a.Side != battle.SideParty {
+			side = "foe"
+		}
+		state := ""
+		if a.Down() {
+			state = " down"
+		}
+		out = append(out, fmt.Sprintf("%d %s %s %d,%d head=%d chest=%d%s",
+			i, a.Name, side, a.X, a.Y, a.Head, a.Chest, state))
+	}
+	return out
+}
+
+// sameLines 比兩份摘要一不一樣。
+func sameLines(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
 }
 
 // writeTrace 把整條軌跡寫出去。沒有指定 -trace 就什麼都不做。

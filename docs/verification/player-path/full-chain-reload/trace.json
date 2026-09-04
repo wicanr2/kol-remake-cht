@@ -11,6 +11,14 @@
       "town": {
         "left_town": false,
         "mode": 0,
+        "party": [
+          "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+          "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+          "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+        ],
         "town": 7,
         "x": 57,
         "y": 8
@@ -341,6 +349,10 @@
       "step": 22,
       "town": {
         "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 2,
         "town": 7,
@@ -357,6 +369,10 @@
       "step": 23,
       "town": {
         "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 2,
         "town": 7,
@@ -373,6 +389,10 @@
       "step": 24,
       "town": {
         "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 2,
         "town": 7,
@@ -389,6 +409,10 @@
       "step": 25,
       "town": {
         "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 2,
         "town": 7,
@@ -405,6 +429,10 @@
       "step": 26,
       "town": {
         "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 2,
         "town": 7,
@@ -421,6 +449,10 @@
       "step": 27,
       "town": {
         "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 2,
         "town": 7,
@@ -437,6 +469,10 @@
       "step": 28,
       "town": {
         "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 2,
         "town": 7,
@@ -452,6 +488,10 @@
       "scene": "flow:town",
       "step": 29,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -467,6 +507,10 @@
       "scene": "flow:town",
       "step": 30,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -482,6 +526,10 @@
       "scene": "flow:town",
       "step": 31,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -497,6 +545,10 @@
       "scene": "flow:town",
       "step": 32,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -512,6 +564,10 @@
       "scene": "flow:town",
       "step": 33,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -527,6 +583,10 @@
       "scene": "flow:town",
       "step": 34,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -542,6 +602,10 @@
       "scene": "flow:town",
       "step": 35,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -557,6 +621,10 @@
       "scene": "flow:town",
       "step": 36,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -572,6 +640,10 @@
       "scene": "flow:town",
       "step": 37,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -587,6 +659,10 @@
       "scene": "flow:town",
       "step": 38,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -602,6 +678,10 @@
       "scene": "flow:town",
       "step": 39,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 0,
         "town": 7,
@@ -618,6 +698,10 @@
       "step": 40,
       "town": {
         "at_edge": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": false,
         "mode": 3,
         "town": 7,
@@ -633,6 +717,10 @@
       "scene": "flow:town",
       "step": 41,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -659,6 +747,10 @@
       "scene": "flow:town",
       "step": 42,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -685,6 +777,10 @@
       "scene": "flow:town",
       "step": 43,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -711,6 +807,10 @@
       "scene": "flow:town",
       "step": 44,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -737,6 +837,10 @@
       "scene": "flow:town",
       "step": 45,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -763,6 +867,10 @@
       "scene": "flow:town",
       "step": 46,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -789,6 +897,10 @@
       "scene": "flow:town",
       "step": 47,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -815,6 +927,10 @@
       "scene": "flow:town",
       "step": 48,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -841,6 +957,10 @@
       "scene": "flow:town",
       "step": 49,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -867,6 +987,10 @@
       "scene": "flow:town",
       "step": 50,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -893,6 +1017,10 @@
       "scene": "flow:town",
       "step": 51,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -919,6 +1047,10 @@
       "scene": "flow:town",
       "step": 52,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -945,6 +1077,10 @@
       "scene": "flow:town",
       "step": 53,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -971,6 +1107,10 @@
       "scene": "flow:town",
       "step": 54,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -997,6 +1137,10 @@
       "scene": "flow:town",
       "step": 55,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1023,6 +1167,10 @@
       "scene": "flow:town",
       "step": 56,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1049,6 +1197,10 @@
       "scene": "flow:town",
       "step": 57,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1075,6 +1227,10 @@
       "scene": "flow:town",
       "step": 58,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1101,6 +1257,10 @@
       "scene": "flow:town",
       "step": 59,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1127,6 +1287,10 @@
       "scene": "flow:town",
       "step": 60,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1153,6 +1317,10 @@
       "scene": "flow:town",
       "step": 61,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1179,6 +1347,10 @@
       "scene": "flow:town",
       "step": 62,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1205,6 +1377,10 @@
       "scene": "flow:town",
       "step": 63,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1231,6 +1407,10 @@
       "scene": "flow:town",
       "step": 64,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1257,6 +1437,10 @@
       "scene": "flow:town",
       "step": 65,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1283,6 +1467,10 @@
       "scene": "flow:town",
       "step": 66,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1309,6 +1497,10 @@
       "scene": "flow:town",
       "step": 67,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1335,6 +1527,10 @@
       "scene": "flow:town",
       "step": 68,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1361,6 +1557,10 @@
       "scene": "flow:town",
       "step": 69,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1387,6 +1587,10 @@
       "scene": "flow:town",
       "step": 70,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1413,6 +1617,10 @@
       "scene": "flow:town",
       "step": 71,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1439,6 +1647,10 @@
       "scene": "flow:town",
       "step": 72,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1465,6 +1677,10 @@
       "scene": "flow:town",
       "step": 73,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1491,6 +1707,10 @@
       "scene": "flow:town",
       "step": 74,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1517,6 +1737,10 @@
       "scene": "flow:town",
       "step": 75,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1543,6 +1767,10 @@
       "scene": "flow:town",
       "step": 76,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1569,6 +1797,10 @@
       "scene": "flow:town",
       "step": 77,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1595,6 +1827,10 @@
       "scene": "flow:town",
       "step": 78,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1621,6 +1857,10 @@
       "scene": "flow:town",
       "step": 79,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1647,6 +1887,10 @@
       "scene": "flow:town",
       "step": 80,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1673,6 +1917,10 @@
       "scene": "flow:town",
       "step": 81,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1699,6 +1947,10 @@
       "scene": "flow:town",
       "step": 82,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1725,6 +1977,10 @@
       "scene": "flow:town",
       "step": 83,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1751,6 +2007,10 @@
       "scene": "flow:town",
       "step": 84,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1777,6 +2037,10 @@
       "scene": "flow:town",
       "step": 85,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1803,6 +2067,10 @@
       "scene": "flow:town",
       "step": 86,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1829,6 +2097,10 @@
       "scene": "flow:town",
       "step": 87,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1855,6 +2127,10 @@
       "scene": "flow:town",
       "step": 88,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1881,6 +2157,10 @@
       "scene": "flow:town",
       "step": 89,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1907,6 +2187,10 @@
       "scene": "flow:town",
       "step": 90,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1933,6 +2217,10 @@
       "scene": "flow:town",
       "step": 91,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1959,6 +2247,10 @@
       "scene": "flow:town",
       "step": 92,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -1985,6 +2277,10 @@
       "scene": "flow:town",
       "step": 93,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2011,6 +2307,10 @@
       "scene": "flow:town",
       "step": 94,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2037,6 +2337,10 @@
       "scene": "flow:town",
       "step": 95,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2063,6 +2367,10 @@
       "scene": "flow:town",
       "step": 96,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2089,6 +2397,10 @@
       "scene": "flow:town",
       "step": 97,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2115,6 +2427,10 @@
       "scene": "flow:town",
       "step": 98,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2141,6 +2457,10 @@
       "scene": "flow:town",
       "step": 99,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2167,6 +2487,10 @@
       "scene": "flow:town",
       "step": 100,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2193,6 +2517,10 @@
       "scene": "flow:town",
       "step": 101,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2219,6 +2547,10 @@
       "scene": "flow:town",
       "step": 102,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2245,6 +2577,10 @@
       "scene": "flow:town",
       "step": 103,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2271,6 +2607,10 @@
       "scene": "flow:town",
       "step": 104,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2297,6 +2637,10 @@
       "scene": "flow:town",
       "step": 105,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2323,6 +2667,10 @@
       "scene": "flow:town",
       "step": 106,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2349,6 +2697,10 @@
       "scene": "flow:town",
       "step": 107,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2375,6 +2727,10 @@
       "scene": "flow:town",
       "step": 108,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2401,6 +2757,10 @@
       "scene": "flow:town",
       "step": 109,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2427,6 +2787,10 @@
       "scene": "flow:town",
       "step": 110,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2454,6 +2818,10 @@
       "scene": "flow:town",
       "step": 111,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2480,6 +2848,10 @@
       "scene": "flow:town",
       "step": 112,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2506,6 +2878,10 @@
       "scene": "flow:town",
       "step": 113,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2532,6 +2908,10 @@
       "scene": "flow:town",
       "step": 114,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2558,6 +2938,10 @@
       "scene": "flow:town",
       "step": 115,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2584,6 +2968,10 @@
       "scene": "flow:town",
       "step": 116,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2610,6 +2998,10 @@
       "scene": "flow:town",
       "step": 117,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2636,6 +3028,10 @@
       "scene": "flow:town",
       "step": 118,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
@@ -2670,204 +3066,24 @@
         "order": 0,
         "prompt": 0,
         "roster": [
-          {
-            "chest": 16,
-            "down": false,
-            "head": 16,
-            "i": 0,
-            "injury": 0,
-            "name": "Poontang",
-            "side": 0,
-            "x": 14,
-            "y": 41
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 1,
-            "injury": 0,
-            "name": "Moraine",
-            "side": 0,
-            "x": 12,
-            "y": 41
-          },
-          {
-            "chest": 14,
-            "down": false,
-            "head": 14,
-            "i": 2,
-            "injury": 0,
-            "name": "Fighting Bull",
-            "side": 0,
-            "x": 11,
-            "y": 42
-          },
-          {
-            "chest": 17,
-            "down": false,
-            "head": 17,
-            "i": 3,
-            "injury": 0,
-            "name": "Kenneth",
-            "side": 0,
-            "x": 9,
-            "y": 42
-          },
-          {
-            "chest": 17,
-            "down": false,
-            "head": 17,
-            "i": 4,
-            "injury": 0,
-            "name": "Sharakan",
-            "side": 0,
-            "x": 8,
-            "y": 43
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 5,
-            "injury": 0,
-            "name": "Olear",
-            "side": 0,
-            "x": 7,
-            "y": 44
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 6,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 25,
-            "y": 41
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 7,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 27,
-            "y": 37
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 8,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 30,
-            "y": 42
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 9,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 35,
-            "y": 42
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 10,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 36,
-            "y": 40
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 11,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 19,
-            "y": 41
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 12,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 26,
-            "y": 32
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 13,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 29,
-            "y": 28
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 14,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 30,
-            "y": 32
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 15,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 32,
-            "y": 30
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 16,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 34,
-            "y": 30
-          },
-          {
-            "chest": 15,
-            "down": false,
-            "head": 15,
-            "i": 17,
-            "injury": 0,
-            "name": "BINDERAK",
-            "side": 1,
-            "x": 36,
-            "y": 33
-          }
+          "0 Poontang party 14,41 head=16 chest=16",
+          "1 Moraine party 12,41 head=15 chest=15",
+          "2 Fighting Bull party 11,42 head=14 chest=14",
+          "3 Kenneth party 9,42 head=17 chest=17",
+          "4 Sharakan party 8,43 head=17 chest=17",
+          "5 Olear party 7,44 head=15 chest=15",
+          "6 BINDERAK foe 25,41 head=15 chest=15",
+          "7 BINDERAK foe 27,37 head=15 chest=15",
+          "8 BINDERAK foe 30,42 head=15 chest=15",
+          "9 BINDERAK foe 35,42 head=15 chest=15",
+          "10 BINDERAK foe 36,40 head=15 chest=15",
+          "11 BINDERAK foe 19,41 head=15 chest=15",
+          "12 BINDERAK foe 26,32 head=15 chest=15",
+          "13 BINDERAK foe 29,28 head=15 chest=15",
+          "14 BINDERAK foe 30,32 head=15 chest=15",
+          "15 BINDERAK foe 32,30 head=15 chest=15",
+          "16 BINDERAK foe 34,30 head=15 chest=15",
+          "17 BINDERAK foe 36,33 head=15 chest=15"
         ],
         "round": 0,
         "selected": 0,
@@ -2883,6 +3099,10 @@
       "scene": "flow:town",
       "step": 119,
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
         "left_town": true,
         "mode": 0,
         "town": 7,
