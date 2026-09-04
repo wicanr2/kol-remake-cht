@@ -1295,7 +1295,7 @@ func (g *game) battleStep() {
 			s.Exec.Text = g.battleVerdictLines()
 			return
 		}
-		if r.Message != 0 || r.Outcome != nil {
+		if r.Message != 0 || r.Outcome != nil || len(r.Records) > 0 {
 			break
 		}
 	}
