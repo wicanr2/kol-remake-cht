@@ -74,9 +74,13 @@ type Actor struct {
 	Quickness int
 	Foresight int
 	Size      int
-	// Attack／Parry 是手上武器那一列的攻防技能（`sub_26AC2`）。
+	// Attack／Parry 是手上武器那一列的攻防技能（`sub_26AC2`），敵人已折算過等級。
 	Attack int
 	Parry  int
+	// BaseAttack／BaseParry 是怪物記錄 +0x17／+0x19 的原值，GoldRoll 是 +0x0F 的
+	// 骰式。三個都只有戰後結算用得到，而結算讀的是記錄本身、不是折算後的技能
+	// （RE-096）。隊員那一側留 0。
+	BaseAttack, BaseParry, GoldRoll int
 	// Weapon 是手上那件武器的數字；Encumbrance 是負重、ShieldGrade 是盾牌等級
 	// （NoShield 表示沒有盾牌）。
 	Weapon      Weapon

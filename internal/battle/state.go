@@ -15,6 +15,8 @@ const (
 	StageField
 	// StageFlee 是回答否之後問「Do you want to flee?」。
 	StageFlee
+	// StageSpoils 是打贏之後那張戰利品清單（RE-096）。
+	StageSpoils
 	// StageDone 是這一場結束，該回野外了。
 	StageDone
 )
@@ -69,6 +71,9 @@ type Member struct {
 	// 這裡只當指令列的條件用。
 	HasSecondItem bool
 	PackCount     int
+	// Pack 是背包六格的名字（角色記錄 0xA0 起，一格 16 byte，RE-075）。
+	// 空字串是空格。戰利品優先往這裡放。
+	Pack [BackpackSlots]string
 }
 
 // State 是一場戰鬥。
@@ -92,9 +97,16 @@ type State struct {
 	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
 	// 所以這裡是一份不是一組。
 	Monster Monster
-	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠（RE-091）。
+	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠、Adventure 是每個人
+	// 分到的冒險點數（RE-091／RE-096）。
 	Verdict Verdict
-	Gold    int
+	Gold      int
+	Adventure int
+	// SpoilItems 是 `ITEM.LST` 的物品表，打贏之後擲掉落物要用（RE-096）。
+	// 沒載入就不會掉東西。
+	SpoilItems []SpoilItem
+	// Spoil 是戰利品畫面的游標與清單。
+	Spoil SpoilScreen
 	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，
 	// 打贏之後掉落的東西也放這裡（RE-091 的 `sub_289EE(0)`，還沒做）。
 	Ground [GroundSlots]GroundItem
@@ -145,6 +157,9 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			// 敵人的技能要按等級縮放（`sub_26AC2:0x26AF6`）。
 			Attack: monster.AttackSkill * site.Level / 5,
 			Parry:  monster.ParrySkill * site.Level / 5,
+			// 戰後結算讀的是記錄裡的原值，另外留一份（RE-096）。
+			BaseAttack: monster.AttackSkill, BaseParry: monster.ParrySkill,
+			GoldRoll: monster.Gold.Raw,
 			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
 			ShieldGrade: shieldGrade,
 			Threshold: Threshold(monster.Size, monster.Health)}

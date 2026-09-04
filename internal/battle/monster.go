@@ -20,10 +20,12 @@ type Monster struct {
 	Health    int    `json:"health"`
 	Intellect int    `json:"intellect"`
 	// AttackSkill／ParrySkill 是記錄 +0x17 起的兩個大端 16-bit；戰鬥再乘等級除以 5。
+	// 戰後的冒險點數用的是這裡的原值，不折算等級（RE-096）。
 	AttackSkill int `json:"attack_skill"`
 	ParrySkill  int `json:"parry_skill"`
-	// Gold 是打贏之後這一隻怪會掉多少金冠的骰式（記錄 +0x0F，RE-091）：
-	// 高 nibble 的低三位是骰數，低三位查骰面表。每一隻擲「骰數 ＋ 1」次。
+	// Gold 是打贏之後掉多少金冠的骰式（記錄 +0x0F，RE-091／RE-096）：
+	// 高 nibble 的低三位是骰數，低三位查骰面表，擲「骰數 ＋ 1」次。
+	// 原版只讀第一隻怪的骰式，同場其他怪的這一格沒有讀。
 	Gold struct {
 		Raw   int `json:"raw"`
 		Rolls int `json:"rolls"`

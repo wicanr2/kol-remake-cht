@@ -1,0 +1,60 @@
+{
+  "schema": "kol-battle-spoils-observation-v1",
+  "name": "battle-spoils",
+  "kind": "observation",
+  "description": "打贏一場之後的獎勵與戰利品畫面（RE-096）。冒險點數、金冠、「Items Found:」清單與領取都走正常玩家路徑的按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過**：第 5 個任務地點原本是十二隻 3 級 BINDERAK，單人隊伍打不贏，所以改用兩份觀察用替代檔（見 substituted_inputs）把它換成一隻壓弱的怪。因此這一組**不是對原版的 parity 宣稱**，只證明 remake 這條路徑走得通、數字算得出來、畫面畫得出來。",
+  "not_claimed": [
+    {
+      "name": "與原版的畫面一致",
+      "reason": "原版沒有取到對應的畫格；戰利品框的內部版面（清單起始列、游標的樣子）在 RE-096 標為未解，程式碼註解也標了未對拍。"
+    },
+    {
+      "name": "數字與原版一致",
+      "reason": "怪物的攻防技能被壓到 1，冒險點數因此是 1。算式本身由 RE-096 逐指令讀出，但這一次跑的輸入不是原版資料。"
+    }
+  ],
+  "substituted_inputs": [
+    {
+      "flag": "-quest-sites",
+      "path": "workplace/observe/quest-sites-one-enemy.json",
+      "change": "第 5 個地點改成一隻 1 級怪，緊貼隊伍。座標、任務旗標與敘述不動。",
+      "generated_by": "tools/make_observation_inputs.py"
+    },
+    {
+      "flag": "-monsters",
+      "path": "workplace/observe/monsters-weak.json",
+      "change": "BINDERAK 的體力、體型、力量與攻防技能壓到 1。金冠骰式（+0x0F）不動。",
+      "generated_by": "tools/make_observation_inputs.py"
+    }
+  ],
+  "command": "tools/run_python_tool.sh tools/make_observation_inputs.py；再以 -scene play -seed 141421 -load workplace/saves/quest.json -quest-sites workplace/observe/quest-sites-one-enemy.json -monsters workplace/observe/monsters-weak.json 跑走到任務地點、答應參戰、二十二輪「攻擊」的按鍵腳本，逐步截圖取第 104…107 步。",
+  "seed": 141421,
+  "seed_note": "掉落是 19% 的機率（`rand(100) < 20`）。**不要用連續整數當種子掃**——LCG 走固定步數之後狀態對種子是線性的，連續種子會讓那一擲落在相關的值上：1…84 連續八十四個種子一次都沒中，換成散開的大數第十二個就中了。",
+  "size": [
+    320,
+    200
+  ],
+  "frames": [
+    {
+      "file": "victory.png",
+      "step": 104,
+      "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）",
+      "sha256": "651bbc4d0a5df72bd6bc2930c023e713e2d8c093e2b22f19eac0b4f63d2d921d"
+    },
+    {
+      "file": "reward.png",
+      "step": 105,
+      "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 43 GOLD CROWNS!——單人隊伍不印 Each player，改逐一印在籍角色的名字（0x212F4）。步 107（領完之後）與這一張逐 byte 相同，所以沒有另存。",
+      "sha256": "c73c8d1acdd331ddafb59ac0f4cc6b07f37a80168d1bb1abce3ea05acfb5708e"
+    },
+    {
+      "file": "items-found.png",
+      "step": 106,
+      "shows": "戰利品清單：框在 (4,7) 125×146，標題 ITEMS FOUND: 由記錄自帶的 ~H02~V09 定位，清單一行 CLOTH PANTS，白框標示游標。",
+      "sha256": "ae1c97e64e326cc780028ebd49ddcd4b22c8315bb424e566d7f0761757808883"
+    }
+  ],
+  "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+  "substituted_inputs_tool": "tools/make_observation_inputs.py",
+  "script": "workplace/specs/spoil-list.txt（`workplace/` 不進版控，命令見下）"
+}

@@ -44,9 +44,9 @@ func TestVerdictLostWinsTheTie(t *testing.T) {
 	}
 }
 
-// 金冠：每一隻怪擲「骰數 ＋ 1」次，總額除以隊伍人數。
+// 金冠：擲「骰數 ＋ 1」次、重複 waves 輪，總額除以隊伍人數。
 func TestGoldReward(t *testing.T) {
-	// 骰數 2 → 每隻三次；三隻 ＝ 九次；每次最大 99 ＝ 891；四個人分 ＝ 222。
+	// 骰數 2 → 一輪三次；三輪 ＝ 九次；每次最大 99 ＝ 891；四個人分 ＝ 222。
 	if got := GoldReward(2, 99, 3, 4, maxRand{}); got != 891/4 {
 		t.Fatalf("每人金冠 %d，期望 %d", got, 891/4)
 	}
@@ -57,6 +57,59 @@ func TestGoldReward(t *testing.T) {
 	// 沒有人分不會除以零。
 	if got := GoldReward(2, 99, 3, 0, maxRand{}); got != 0 {
 		t.Fatalf("隊伍人數 0 應該回 0，得到 %d", got)
+	}
+}
+
+// 骰式的拆法：高 nibble 的低三位是骰數、低三位查骰面表（RE-091）。
+func TestGoldRoll(t *testing.T) {
+	for _, c := range []struct{ raw, rolls, sides int }{
+		{0x08, 0, 2},  // SKELETON
+		{0x37, 3, 99}, // 高 nibble 3、低三位 7
+		{0xF1, 7, 3},  // 高 nibble 只取低三位
+	} {
+		rolls, sides := GoldRoll(c.raw)
+		if rolls != c.rolls || sides != c.sides {
+			t.Fatalf("+0x0F = %#02x 拆成 %d 顆 %d 面，期望 %d 顆 %d 面",
+				c.raw, rolls, sides, c.rolls, c.sides)
+		}
+	}
+}
+
+// 冒險點數：每一個參戰敵人的攻防技能加總，先除 2 再除隊伍人數。用的是記錄裡的
+// 原值，而且不看敵人死了沒（RE-096）。
+func TestAdventureReward(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty}, {Side: SideParty},
+		// 死掉的這一隻照樣算進去。
+		{Side: SideMonster, BaseAttack: 230, BaseParry: 100, Attack: 46, Parry: 20},
+		{Side: SideMonster, BaseAttack: 170, BaseParry: 60},
+	}}
+	// (330 + 230) / 2 / 2 = 140。
+	if got := s.AdventureReward(); got != 140 {
+		t.Fatalf("每人冒險點數 %d，期望 140", got)
+	}
+	// 折算過等級的 Attack／Parry 不該被用到。
+	if got := (&State{Actors: []Actor{{Side: SideParty},
+		{Side: SideMonster, Attack: 46, Parry: 20}}}).AdventureReward(); got != 0 {
+		t.Fatalf("沒有原值時應該是 0，得到 %d", got)
+	}
+	// 沒有人分不會除以零。
+	if got := (&State{Actors: []Actor{
+		{Side: SideMonster, BaseAttack: 10}}}).AdventureReward(); got != 0 {
+		t.Fatalf("隊伍人數 0 應該回 0，得到 %d", got)
+	}
+}
+
+// 金冠的骰式只讀場上第一隻敵人的，後面那幾隻不影響金額（RE-096）。
+func TestGoldAwardUsesFirstEnemyOnly(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty},
+		{Side: SideMonster, GoldRoll: 0x17}, // 1 顆 99 面
+		{Side: SideMonster, GoldRoll: 0x70}, // 這一隻的骰式不該被讀到
+	}}
+	// 一輪、兩次、每次 99 → 198，一個人分。
+	if got := s.GoldAward(maxRand{}); got != 198 {
+		t.Fatalf("每人金冠 %d，期望 198", got)
 	}
 }
 
@@ -92,19 +145,21 @@ func TestDefeatRecords(t *testing.T) {
 	}
 }
 
-// 獎勵那一句：單人不印 `Each player`。冒險點數那一句還沒解出算式，不放進來。
+// 獎勵那幾句：單人不印 `Each player`，兩個 `|N` 拆在前後兩段。
 func TestRewardRecords(t *testing.T) {
-	if got := RewardRecords(1); len(got) != 1 || got[0] != GoldRecord {
-		t.Fatalf("單人只該印金冠那一句，得到 %v", got)
+	before, after := RewardRecords(1)
+	if len(before) != 1 || before[0] != AdventureRecord {
+		t.Fatalf("單人前半只該有冒險點數那一句，得到 %v", before)
 	}
-	got := RewardRecords(4)
-	if len(got) != 2 || got[0] != EachPlayerRecord || got[1] != GoldRecord {
-		t.Fatalf("多人要先印 Each player，得到 %v", got)
+	if len(after) != 1 || after[0] != GoldRecord {
+		t.Fatalf("後半該是金冠那一句，得到 %v", after)
 	}
-	for _, r := range got {
-		if r == AdventureRecord {
-			t.Fatal("冒險點數的算式還沒解出來，不該印那一句")
-		}
+	before, after = RewardRecords(4)
+	if len(before) != 2 || before[0] != EachPlayerRecord || before[1] != AdventureRecord {
+		t.Fatalf("多人要先印 Each player 再印冒險點數，得到 %v", before)
+	}
+	if len(after) != 1 || after[0] != GoldRecord {
+		t.Fatalf("後半該是金冠那一句，得到 %v", after)
 	}
 }
 
@@ -114,9 +169,10 @@ func TestStepFinishesTheBattle(t *testing.T) {
 	newState := func(enemyHead int) *State {
 		s := &State{Actors: []Actor{
 			{Side: SideParty, Head: 10, Chest: 10, Threshold: 100},
-			{Side: SideMonster, Head: enemyHead, Chest: 10, Threshold: 100},
+			// GoldRoll 0x27 拆成 2 顆 99 面；攻防技能餵冒險點數。
+			{Side: SideMonster, Head: enemyHead, Chest: 10, Threshold: 100,
+				GoldRoll: 0x27, BaseAttack: 230, BaseParry: 100},
 		}}
-		s.Monster.Gold.Rolls, s.Monster.Gold.Sides = 2, 99
 		// 執行段已經走完：Turn 停在 Order 的尾端。
 		s.Exec.Order, s.Exec.Turn = []int{0, 1}, 2
 		return s
@@ -133,9 +189,13 @@ func TestStepFinishesTheBattle(t *testing.T) {
 	if won.Verdict != VerdictWon {
 		t.Fatalf("Verdict 是 %d，期望 VerdictWon", won.Verdict)
 	}
-	// 一隻怪、擲三次滿分 99、一個人分 → 297。
+	// 一輪、擲三次滿分 99、一個人分 → 297。
 	if won.Gold != 297 {
 		t.Fatalf("每人金冠 %d，期望 297", won.Gold)
+	}
+	// (230 + 100) / 2 / 1 = 165。
+	if won.Adventure != 165 {
+		t.Fatalf("每人冒險點數 %d，期望 165", won.Adventure)
 	}
 
 	// 敵人還站著 → 排下一回合，不結束。

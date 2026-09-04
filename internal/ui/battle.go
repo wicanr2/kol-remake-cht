@@ -174,3 +174,40 @@ func clampField(v int) int {
 	}
 	return v
 }
+
+// BattleSpoils 是打贏之後那張戰利品清單（RE-096）。清單疊在戰場畫面上，
+// 原版沒有把底下重畫掉。
+//
+// title 是標題那一筆記錄拆好的幾段：那一筆自己帶著 `~H02~V09` 兩個座標，
+// 所以不能走會剝掉版面碼的 UIRaw（見 `town.UISegments`）。
+func BattleSpoils(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
+	f *font.Font, s *battle.State, title []town.Segment) error {
+	if err := BattleField(dst, sprites, tiles, f, s); err != nil {
+		return err
+	}
+	b := battle.SpoilBox
+	shadow(dst, b.X, b.Y, b.Width, b.Height)
+	fill(dst, b.X, b.Y, b.Width, b.Height, town.ColourBoxEdge)
+	fill(dst, b.X+1, b.Y+1, b.Width-2, b.Height-2, town.ColourBoxFill)
+
+	ink := town.ColourText
+	for _, seg := range title {
+		f.Draw(dst, seg.Col*8, seg.Row, strings.ToUpper(seg.Text),
+			ink[0], ink[1], ink[2])
+	}
+
+	l := battle.SpoilList
+	for i, line := range s.SpoilLines() {
+		y := l.Row + i*l.LineStep
+		if i == s.Spoil.Cursor {
+			// **游標的樣子還沒對拍**：原版那一支選單怎麼標示選中項還沒解出來，
+			// 先用與指令列白框同一個顏色框起來。
+			frame(dst, l.Col*8-2, y-1, b.Width-(l.Col*8-2-b.X)-4, l.LineStep,
+				town.ColourSelected)
+		}
+		f.Draw(dst, l.Col*8, y, strings.ToUpper(line), ink[0], ink[1], ink[2])
+	}
+	// 背包塞不下、手上那件被換下來的那一句（記錄 0x183）由訊息區顯示，
+	// 這裡不重複。
+	return nil
+}

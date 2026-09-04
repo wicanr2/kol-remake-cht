@@ -72,16 +72,23 @@ func (s *State) RoundVerdict() Verdict {
 	}
 }
 
+// GoldWaves 是金冠的外層輪數（`word_3B26A`）。戰鬥初始化把它設成 1
+// （`0x1E3CC`），所以野外戰鬥永遠只擲一輪；城鎮那三支會設成別的值，語意待查。
+const GoldWaves = 1
+
 // GoldReward 是打贏之後每個人分到的金冠（`0x21360`…`0x21413`）。
 //
-// 每一隻怪擲「骰數 ＋ 1」次面數 `sides` 的骰，全部累加起來再除以隊伍人數；
+// 擲「骰數 ＋ 1」次面數 `sides` 的骰、重複 `waves` 輪，全部累加起來再除以隊伍人數；
 // 每人不到 2 枚就一枚都不給。回傳的是**每人**的金額，不是總額。
-func GoldReward(rolls, sides, count, party int, rng Rand) int {
+//
+// 骰式來自**第一隻怪**的記錄 +0x0F，同場其他怪的那一格原版沒有讀，所以敵人多寡
+// 不影響金額（RE-096）。
+func GoldReward(rolls, sides, waves, party int, rng Rand) int {
 	if party <= 0 || sides <= 0 {
 		return 0
 	}
 	total := 0
-	for i := 0; i < count; i++ {
+	for i := 0; i < waves; i++ {
 		for r := 0; r <= rolls; r++ {
 			total += rng.Roll(sides)
 		}
@@ -91,6 +98,41 @@ func GoldReward(rolls, sides, count, party int, rng Rand) int {
 		return 0
 	}
 	return each
+}
+
+// GoldRoll 把怪物記錄 +0x0F 拆成骰數與骰面（RE-091）。
+func GoldRoll(raw int) (rolls, sides int) {
+	return (raw / 16) & 7, GoldDice[raw&7]
+}
+
+// AdventureReward 是打贏之後每個人分到的冒險點數（`0x21270`…`0x212CF`）。
+//
+// 把每一個參戰敵人的攻擊技能與招架技能加起來，先除 2 再除隊伍人數。兩件事值得記住：
+// **不看敵人死了沒**，站上場就算；用的是怪物記錄裡的原值，不是折算過等級的
+// `Attack`／`Parry`。
+func (s *State) AdventureReward() int {
+	party := s.PartyCount()
+	if party <= 0 {
+		return 0
+	}
+	total := 0
+	for i := range s.Actors {
+		if s.Actors[i].Side == SideMonster {
+			total += s.Actors[i].BaseAttack + s.Actors[i].BaseParry
+		}
+	}
+	return total / 2 / party
+}
+
+// GoldAward 是打贏之後每個人分到的金冠。骰式取自場上第一隻敵人。
+func (s *State) GoldAward(rng Rand) int {
+	for i := range s.Actors {
+		if s.Actors[i].Side == SideMonster {
+			rolls, sides := GoldRoll(s.Actors[i].GoldRoll)
+			return GoldReward(rolls, sides, GoldWaves, s.PartyCount(), rng)
+		}
+	}
+	return 0
 }
 
 // PluralSuffix 是**打贏**那一句補在名字後面的英文複數（`0x211F5`）：名字以 `S`
@@ -140,16 +182,19 @@ func DefeatRecords(enemies int) (before, after []int) {
 	return before, []int{SingularHasRecord, DefeatedYouRecord}
 }
 
-// RewardRecords 是打贏之後報獎勵那一句（`0x212D2`、`0x2148D`）。隊伍人數大於 1
-// 才印 `Each player]`，單人跳過。
+// RewardRecords 是打贏之後報獎勵那幾句（`0x212D2`…`0x21495`），拆成前後兩段。
 //
-// **只有金冠。**冒險點數那一句（記錄 0x176）的數字要 `sub_26C5F(0x17)` 才算得出來，
-// 那一支還沒解讀（RE-091），寧可不報也不報錯的數。
-func RewardRecords(party int) []int {
+// 隊伍人數大於 1 才印 `Each player]`；等於 1 時原版改逐一印那一位的名字，名字不是
+// 記錄，所以由呼叫端插在 `before` 的前面。
+//
+// 拆兩段是因為兩句各有一個 `|N`，而它們讀的是同一個變數（`word_30D02`）——原版在
+// 每一句印出去之前各設一次值。呼叫端要先用冒險點數展開 `before`、再用金冠展開
+// `after`，一次展開整串會讓兩個數字變成同一個。
+func RewardRecords(party int) (before, after []int) {
 	if party > 1 {
-		return []int{EachPlayerRecord, GoldRecord}
+		return []int{EachPlayerRecord, AdventureRecord}, []int{GoldRecord}
 	}
-	return []int{GoldRecord}
+	return []int{AdventureRecord}, []int{GoldRecord}
 }
 
 // EnemyCount 是這一場放了幾隻敵人；PartyCount 是隊伍有幾個人。獎勵的兩個除數

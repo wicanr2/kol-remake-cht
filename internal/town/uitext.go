@@ -75,6 +75,21 @@ func UIRaw(bank *UIText, tr *Translations, bankName string, index int) string {
 	return bank.RecordPadded(bankName, index)
 }
 
+// UISegments 取一筆記錄並**保留版面碼**，拆成幾段帶座標的文字；中文模式優先用譯文。
+//
+// 與 UIRaw 的差別只在這裡：UIRaw 是給「串接成一句話」用的，版面碼對它沒有意義所以
+// 剝掉；帶框的清單標題（`~H02~V09Items Found:`）反過來，座標就是那一筆記錄的內容，
+// 剝掉之後整段會畫到畫面左上角去。
+func UISegments(bank *UIText, tr *Translations, bankName string, index int) []Segment {
+	if zh := tr.UIBank().Record(bankName, index); zh != "" {
+		return ParseSegments(zh)
+	}
+	if bank == nil {
+		return nil
+	}
+	return bank.Segments(bankName, index)
+}
+
 // RecordPadded 取一筆記錄但**保留前後空白**。原版有些欄位靠字串自帶的空白置中，
 // 例如野外標籤的 `"  DAWN ]"`，去掉空白就會往左移兩個字。
 func (t *UIText) RecordPadded(bank string, index int) string {

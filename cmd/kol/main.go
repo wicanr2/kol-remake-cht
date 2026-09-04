@@ -133,6 +133,13 @@ func battleMember(m town.Member) battle.Member {
 			}
 		}
 	}
+	// 背包六格（角色記錄 0xA0 起，RE-075）：戰利品優先往這裡放。
+	for i, g := range m.Backpack {
+		if i >= battle.BackpackSlots {
+			break
+		}
+		out.Pack[i] = g.Name
+	}
 	// HasSecondItem 與 PackCount 還沒有 typed data 來源：前者是角色記錄 +0x190
 	// （穿戴欄的第十格，抽取器目前把部位 9 指到手上那件武器的 +0x30，沒有讀它），
 	// 後者是 0x200 起的十六筆物品欄。兩者都留成零值，所以指令列現在不會出現
@@ -369,6 +376,23 @@ func loadTranslations(townPath, uiPath string) (*town.Translations, error) {
 func applyBattleToken(s *battle.State, token string, step func(*battle.State)) error {
 	if s.Stage == battle.StageEncounter {
 		s.Continue(s.Rand)
+		return nil
+	}
+	if s.Stage == battle.StageSpoils {
+		switch token {
+		case "U":
+			s.SpoilMove(-1)
+		case "D":
+			s.SpoilMove(1)
+		case "RET", "SPACE":
+			if _, _, done := s.SpoilConfirm(); done {
+				s.Stage = battle.StageDone
+			}
+		case "N":
+			if s.SpoilCancel() {
+				s.Stage = battle.StageDone
+			}
+		}
 		return nil
 	}
 	if s.Plan.Prompt == battle.PromptNextRound {
@@ -788,6 +812,12 @@ func (g *game) render() error {
 				return ui.BattleEncounter(g.canvas.Image(), g.sprites, g.small,
 					g.quest.state, g.quest.lines)
 			}
+			if g.quest.state.Stage == battle.StageSpoils {
+				return ui.BattleSpoils(g.canvas.Image(), g.sprites, g.quest.tiles,
+					g.small, g.quest.state,
+					town.UISegments(g.quest.bank, g.quest.trans, town.BankUI,
+						g.quest.state.SpoilTitle()))
+			}
 			return ui.BattleField(g.canvas.Image(), g.sprites, g.quest.tiles,
 				g.small, g.quest.state)
 		}
@@ -1058,6 +1088,21 @@ func (g *game) updatePlay() {
 	}
 }
 
+// battleTakeSpoil 在戰利品清單按下確認：領走一件。背包塞不下的時候原版會說一句
+// （記錄 0x183），把它排進訊息區。
+func (g *game) battleTakeSpoil() {
+	s := g.quest.state
+	_, _, done := s.SpoilConfirm()
+	if s.Spoil.Say != 0 {
+		ctx := battle.MessageContext{Lookup: g.battleRecord}
+		s.Exec.Text = battle.WrapMessage(
+			ctx.Substitute(g.battleRecords([]int{s.Spoil.Say})))
+	}
+	if done {
+		s.Stage = battle.StageDone
+	}
+}
+
 // battleSpeaker 把一名參戰者換成訊息代換要用的資料（RE-086）。
 func (g *game) battleSpeaker(i int) battle.Speaker {
 	s := g.quest.state
@@ -1109,6 +1154,10 @@ func (g *game) battleStep() {
 	// 這一場已經結束、勝負的兩句也印完了，就停在最後一句上，不要再往下走——
 	// 再呼叫一次 Step 會把勝負訊息重新排一遍，變成按不完的迴圈。
 	if s.Stage == battle.StageDone {
+		// 打贏的話還有一張戰利品清單（RE-096）。地上什麼都沒有就跳過。
+		if s.Verdict == battle.VerdictWon && s.BeginSpoils() {
+			s.Stage = battle.StageSpoils
+		}
 		return
 	}
 	// 沒有訊息的那幾手不停下來等鍵：敵人那一手還沒實作（RE-081），
@@ -1184,9 +1233,21 @@ func (g *game) battleVerdictLines() []string {
 		// `|F` 展開要有目標；原版是把 word_3237E 指到第一個敵人（`0x211D5`）。
 		ctx.Target = g.battleSpeaker(battle.PartySlots)
 		first := ctx.Substitute(g.battleRecords(battle.VictoryRecords())) + won + "!"
+		// 兩個 `|N` 各讀一次，所以分兩段展開：前半是冒險點數、後半是金冠。
+		before, after := battle.RewardRecords(s.PartyCount())
+		ctx.Number = s.Adventure
+		reward := ""
+		// 隊伍只有一個人的時候原版不印 `Each player`，改逐一印在籍角色的名字
+		// （`0x212F4`）。名字不是記錄，所以插在前面。
+		if s.PartyCount() == 1 {
+			for i := range s.Party {
+				reward += s.Party[i].Name + " "
+			}
+		}
+		reward += ctx.Substitute(g.battleRecords(before))
 		ctx.Number = s.Gold
-		s.Exec.Pending = [][]string{battle.WrapMessage(
-			ctx.Substitute(g.battleRecords(battle.RewardRecords(s.PartyCount()))))}
+		reward += ctx.Substitute(g.battleRecords(after))
+		s.Exec.Pending = [][]string{battle.WrapMessage(reward)}
 		return battle.WrapMessage(first)
 	case battle.VerdictLost:
 		before, after := battle.DefeatRecords(enemies)
@@ -1215,6 +1276,26 @@ func (g *game) updateBattle() {
 			inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
 			inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			s.Continue(s.Rand)
+		}
+		return
+	}
+	if s.Stage == battle.StageSpoils {
+		if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
+			s.SpoilMove(-1)
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
+			s.SpoilMove(1)
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
+			inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
+			inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			g.battleTakeSpoil()
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyN) ||
+			inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+			if s.SpoilCancel() {
+				s.Stage = battle.StageDone
+			}
 		}
 		return
 	}
@@ -1357,6 +1438,8 @@ func main() {
 		"assets/original-derived-data/quest-sites.json", "任務地點 typed data")
 	monsterPath := flag.String("monsters",
 		"assets/original-derived-data/monsters.json", "怪物 typed data")
+	battleItemsPath := flag.String("battle-items",
+		"assets/original-derived-data/items.json", "戰後掉落物品表 typed data")
 	worldPos := flag.String("world-pos", "", "覆寫野外世界座標，格式 X,Y")
 	worldSub := flag.String("world-sub", "", "覆寫野外次格座標，格式 次格X,次格Y")
 	worldWeather := flag.Int("world-weather", 0, "天候組 0…5")
@@ -1976,6 +2059,11 @@ func main() {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
 			}
+			spoilItems, err := battle.LoadSpoilItems(*battleItemsPath)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
 			worldSessionState.OnArrive = func(x, y int) *world.QuestPrompt {
 				site := sites.At(x, y)
 				if site == nil || !partyHasQuest(playSession.Party, site) {
@@ -2021,6 +2109,7 @@ func main() {
 				quest.tiles = ui.NewBattleTiles(atlas)
 				st := battle.NewQuest(site, members, monsters.At(site.Monster), field)
 				st.Rand = &lcg{state: uint32(*seed)}
+				st.SpoilItems = spoilItems
 				st.Stage = battle.StageEncounter
 				quest.state = st
 				quest.bank = bank

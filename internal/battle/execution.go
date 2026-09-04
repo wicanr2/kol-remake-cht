@@ -115,8 +115,10 @@ func (s *State) Step(rng Rand) (ActResult, bool) {
 			s.Verdict = v
 			s.Stage = StageDone
 			if v == VerdictWon {
-				s.Gold = GoldReward(s.Monster.Gold.Rolls, s.Monster.Gold.Sides,
-					s.EnemyCount(), s.PartyCount(), rng)
+				// 順序照原版：冒險點數先算（不擲骰），金冠、掉落物後算（RE-096）。
+				s.Adventure = s.AdventureReward()
+				s.Gold = s.GoldAward(rng)
+				s.DropSpoils(s.SpoilItems, rng)
 			}
 			return r, false
 		}
