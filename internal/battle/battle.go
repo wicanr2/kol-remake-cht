@@ -63,10 +63,13 @@ const (
 // Actor 是一名參戰者。欄位名對應原版記錄的位移（RE-080）：
 // Kind 是 +0x00（隊員填 0x13）、Side 是 +0x01、X／Y 是 +0x1F／+0x20。
 type Actor struct {
-	Kind  int
-	Side  Side
-	X, Y  int
-	Name  string
+	Kind int
+	Side Side
+	X, Y int
+	Name string
+	// Level 是參戰者記錄 +0x02 的等級：隊員是四列武器攻防值加總 ÷ 1000 ＋ 1，
+	// 敵人是怪物等級 ÷ 5 ＋ 1（上限 5，`0x1EE12`）。規劃鍵值與敵人 AI 的權重都用
+	// 這一格。**怪物本身的等級在 `State.MonsterLevel`**，那是另一個尺度（RE-097）。
 	Level int
 	// Strength／Quickness／Foresight／Size 是記錄 +0x08…+0x0B：力量已依營養折算過
 	// （`sub_2198A:0x219CF`），快捷用在防禦、洞察用在規劃順序、體型用在昏迷門檻。

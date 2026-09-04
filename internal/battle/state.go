@@ -102,6 +102,10 @@ type State struct {
 	Verdict Verdict
 	Gold      int
 	Adventure int
+	// MonsterLevel 是這一場敵人的等級（`word_3B26A`）：訊息上的「LEVEL n」、
+	// 技能折算與金冠的輪數都用它，而參戰者記錄那一格的等級是它 ÷ 5 ＋ 1
+	// （上限 5，`0x1EE12`）——**兩個不同的尺度**（RE-097）。
+	MonsterLevel int
 	// SpoilItems 是 `ITEM.LST` 的物品表，打贏之後擲掉落物要用（RE-096）。
 	// 沒載入就不會掉東西。
 	SpoilItems []SpoilItem
@@ -151,7 +155,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		enc, speed := Encumbrance(site.Level, weapon, monster.ArmourWeight, shieldWeight)
 		s.Actors[slot] = Actor{Kind: site.Monster, Side: SideMonster,
 			X: site.MonsterX[i], Y: site.MonsterY[i],
-			Name: site.MonsterName, Level: site.Level, Member: -1,
+			Name: site.MonsterName, Level: MonsterCombatLevel(site.Level), Member: -1,
 			Foresight: monster.Foresight, Size: monster.Size,
 			Strength: monster.Strength, Quickness: monster.Quickness,
 			// 敵人的技能要按等級縮放（`sub_26AC2:0x26AF6`）。
@@ -165,7 +169,19 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			Threshold: Threshold(monster.Size, monster.Health)}
 		s.Actors[slot].SetParts()
 	}
+	s.MonsterLevel = site.Level
 	return s
+}
+
+// MonsterCombatLevel 把怪物等級換成參戰者記錄那一格的等級（`0x1EE12`）：
+// 除以 5 再加一，超過 5 就是 5。規劃順序與敵人 AI 的權重用的是這一個尺度，
+// 不是原始等級（RE-097）。
+func MonsterCombatLevel(level int) int {
+	n := level/5 + 1
+	if n > 5 {
+		return 5
+	}
+	return n
 }
 
 // Answer 是圖示列上的是／否。回傳這一場是不是結束了。

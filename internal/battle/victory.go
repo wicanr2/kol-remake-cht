@@ -72,14 +72,14 @@ func (s *State) RoundVerdict() Verdict {
 	}
 }
 
-// GoldWaves 是金冠的外層輪數（`word_3B26A`）。戰鬥初始化把它設成 1
-// （`0x1E3CC`），所以野外戰鬥永遠只擲一輪；城鎮那三支會設成別的值，語意待查。
-const GoldWaves = 1
-
 // GoldReward 是打贏之後每個人分到的金冠（`0x21360`…`0x21413`）。
 //
 // 擲「骰數 ＋ 1」次面數 `sides` 的骰、重複 `waves` 輪，全部累加起來再除以隊伍人數；
 // 每人不到 2 枚就一枚都不給。回傳的是**每人**的金額，不是總額。
+//
+// `waves` 是 `word_3B26A`，也就是**敵人的等級**：隨機遭遇在進戰鬥前把等級寫進去
+//（`sub_2A4E5:0x2A7D1`），任務地點同理，而 `sub_1E3A8(0)` 會跳過那一整段預設值
+//（`0x1E3B1` 的閘門），所以那個 1 落不到玩家身上（RE-097）。等級越高金冠越多。
 //
 // 骰式來自**第一隻怪**的記錄 +0x0F，同場其他怪的那一格原版沒有讀，所以敵人多寡
 // 不影響金額（RE-096）。
@@ -124,12 +124,13 @@ func (s *State) AdventureReward() int {
 	return total / 2 / party
 }
 
-// GoldAward 是打贏之後每個人分到的金冠。骰式取自場上第一隻敵人。
+// GoldAward 是打贏之後每個人分到的金冠。骰式取自場上第一隻敵人，輪數是這一場的
+// 怪物等級（`word_3B26A`）——不是參戰者記錄那一格折算過的等級。
 func (s *State) GoldAward(rng Rand) int {
 	for i := range s.Actors {
 		if s.Actors[i].Side == SideMonster {
 			rolls, sides := GoldRoll(s.Actors[i].GoldRoll)
-			return GoldReward(rolls, sides, GoldWaves, s.PartyCount(), rng)
+			return GoldReward(rolls, sides, s.MonsterLevel, s.PartyCount(), rng)
 		}
 	}
 	return 0

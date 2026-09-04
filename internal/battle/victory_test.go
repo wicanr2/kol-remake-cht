@@ -100,9 +100,9 @@ func TestAdventureReward(t *testing.T) {
 	}
 }
 
-// 金冠的骰式只讀場上第一隻敵人的，後面那幾隻不影響金額（RE-096）。
+// 金冠的骰式與等級只讀場上第一隻敵人的，後面那幾隻不影響金額（RE-096）。
 func TestGoldAwardUsesFirstEnemyOnly(t *testing.T) {
-	s := &State{Actors: []Actor{
+	s := &State{MonsterLevel: 1, Actors: []Actor{
 		{Side: SideParty},
 		{Side: SideMonster, GoldRoll: 0x17}, // 1 顆 99 面
 		{Side: SideMonster, GoldRoll: 0x70}, // 這一隻的骰式不該被讀到
@@ -110,6 +110,19 @@ func TestGoldAwardUsesFirstEnemyOnly(t *testing.T) {
 	// 一輪、兩次、每次 99 → 198，一個人分。
 	if got := s.GoldAward(maxRand{}); got != 198 {
 		t.Fatalf("每人金冠 %d，期望 198", got)
+	}
+}
+
+// 輪數是這一場的怪物等級，不是參戰者記錄折算過的那一格（RE-097）。
+func TestGoldAwardScalesWithLevel(t *testing.T) {
+	s := &State{MonsterLevel: 3, Actors: []Actor{
+		{Side: SideParty},
+		// 折算過的等級是 1，用它算會少掉兩輪。
+		{Side: SideMonster, GoldRoll: 0x17, Level: MonsterCombatLevel(3)},
+	}}
+	// 三輪、每輪兩次、每次 99 → 594。
+	if got := s.GoldAward(maxRand{}); got != 594 {
+		t.Fatalf("每人金冠 %d，期望 594", got)
 	}
 }
 
@@ -167,9 +180,9 @@ func TestRewardRecords(t *testing.T) {
 // 沒分勝負才排下一回合。這一支測的是收尾本身，攻擊結算另有測試。
 func TestStepFinishesTheBattle(t *testing.T) {
 	newState := func(enemyHead int) *State {
-		s := &State{Actors: []Actor{
+		s := &State{MonsterLevel: 1, Actors: []Actor{
 			{Side: SideParty, Head: 10, Chest: 10, Threshold: 100},
-			// GoldRoll 0x27 拆成 2 顆 99 面；攻防技能餵冒險點數。
+			// GoldRoll 0x27 拆成 2 顆 99 面，1 級是一輪；攻防技能餵冒險點數。
 			{Side: SideMonster, Head: enemyHead, Chest: 10, Threshold: 100,
 				GoldRoll: 0x27, BaseAttack: 230, BaseParry: 100},
 		}}
@@ -231,6 +244,17 @@ func TestDefeatSuffixDiffersFromVictory(t *testing.T) {
 		}
 		if got := DefeatSuffix(c.name, c.count); got != c.lost {
 			t.Fatalf("%q 打輸的後綴是 %q，期望 %q", c.name, got, c.lost)
+		}
+	}
+}
+
+// 兩種等級是不同的尺度：怪物等級 12 在參戰者記錄那一格是 3，上限 5（RE-097）。
+func TestMonsterCombatLevel(t *testing.T) {
+	for _, c := range []struct{ level, want int }{
+		{1, 1}, {4, 1}, {5, 2}, {12, 3}, {20, 5}, {50, 5},
+	} {
+		if got := MonsterCombatLevel(c.level); got != c.want {
+			t.Fatalf("怪物等級 %d 折算成 %d，期望 %d", c.level, got, c.want)
 		}
 	}
 }
