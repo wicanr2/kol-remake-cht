@@ -24,25 +24,25 @@
       "file": "which-spell.png",
       "step": 130,
       "shows": "WHICH SPELL? ＋ VARTWELYRMI——清單蓋在裝備欄那個框上，標題由記錄 0x104 自帶的 ~H03~V07 定位。",
-      "sha256": "f44145eacd75da4ebd744d0b59dcb4ad4474ce1f21fa08198ffe0444ca9faf6d"
+      "sha256": "98002bd413c8064e24c10d17b181bffb050787beb12b47b53cf485bee1f55a16"
     },
     {
       "file": "select-affect.png",
       "step": 131,
       "shows": "SELECT AFFECT ＋ POSITIVE／NEGATIVE（記錄 0x105 與 0x106／0x107）。",
-      "sha256": "0c94b1232c3809207a771efff6be1aa5279f360557b931a9c6cc9496168ef126"
+      "sha256": "77dac120e7fa99fa2942224870a85bef64888f3eaf1076b5e48f1b582cb4e327"
     },
     {
       "file": "casts.png",
-      "step": 137,
+      "step": 135,
       "shows": "WARDER CASTS VARTWELYRMI AT WARDER.——`|S` 展開成法術名字。目標是自己，因為腳本沒有移動選目標格的游標。",
-      "sha256": "013662aaa8d2ca04cd39922a9706dda2fa97aea9aabd38f2bc9ccbf6477a63d9"
+      "sha256": "48b944e1b662d007138c77dda20f160bb97d5cbeb9bea4475f5b7380c1a042be"
     },
     {
       "file": "effect.png",
-      "step": 138,
+      "step": 136,
       "shows": "THE SPELL HAS A MILDLY NEGATIVE EFFECT.——強度形容詞由 min(強度 ÷ 8, 3) 選，方向由 +0x27 決定；中間那個空白是程式印的，不在任何一筆記錄裡。",
-      "sha256": "1bb37f8c97909c587c237a8ec312ade70e1e3ad4c53aebb3d2031608f7fdf830"
+      "sha256": "fcd904e0381d0b940e7cd6f49953535a4678a017f3d39b53997ae7ad0dfd5ece"
     }
   ],
   "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
