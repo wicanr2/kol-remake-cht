@@ -40,6 +40,57 @@ func TestRoundTrip(t *testing.T) {
 	}
 }
 
+// 任務旗標與已回報數要跟著存檔往返。少了這兩欄，接了任務、打完任務、
+// 回報過的進度在重載之後就沒了。
+func TestQuestProgressRoundTrip(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "slot1.json")
+	in := sample()
+	in.Party[0].Quests = []int{0x03, 0x00, 0x0C, 0x00, 0x00, 0x00}
+	in.Party[0].Progress = []int{5, 0, 0, 0, 0}
+	in.Party[0].Carried = []string{"89a0235b0b300000000a000000000000"}
+	if err := Write(path, in); err != nil {
+		t.Fatalf("寫入失敗：%v", err)
+	}
+	got, err := Read(path)
+	if err != nil {
+		t.Fatalf("讀取失敗：%v", err)
+	}
+	if len(got.Party[0].Quests) != 6 || got.Party[0].Quests[2] != 0x0C {
+		t.Fatalf("任務旗標讀成 %v", got.Party[0].Quests)
+	}
+	if len(got.Party[0].Progress) != 5 || got.Party[0].Progress[0] != 5 {
+		t.Fatalf("已回報數讀成 %v", got.Party[0].Progress)
+	}
+	if len(got.Party[0].Carried) != 1 ||
+		got.Party[0].Carried[0] != "89a0235b0b300000000a000000000000" {
+		t.Fatalf("身上帶的東西讀成 %v", got.Party[0].Carried)
+	}
+}
+
+// 沒有這兩欄的舊存檔照樣讀得開，欄位留空交給角色檔補。
+func TestQuestProgressOptional(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "slot1.json")
+	if err := Write(path, sample()); err != nil {
+		t.Fatalf("寫入失敗：%v", err)
+	}
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("讀檔失敗：%v", err)
+	}
+	if strings.Contains(string(raw), "quests") {
+		t.Fatal("沒有任務旗標時不該寫出 quests 欄")
+	}
+	got, err := Read(path)
+	if err != nil {
+		t.Fatalf("讀取失敗：%v", err)
+	}
+	if got.Party[0].Quests != nil || got.Party[0].Progress != nil ||
+		got.Party[0].Carried != nil {
+		t.Fatalf("空的欄位讀成 %v／%v／%v", got.Party[0].Quests,
+			got.Party[0].Progress, got.Party[0].Carried)
+	}
+}
+
 // 不認得的設定鍵要原樣留著，不能靜默丟掉。
 func TestUnknownSettingsSurvive(t *testing.T) {
 	path := filepath.Join(t.TempDir(), "slot1.json")

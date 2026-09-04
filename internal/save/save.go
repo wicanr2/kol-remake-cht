@@ -122,6 +122,15 @@ type Member struct {
 	Renown      int  `json:"renown"`
 	Spellcaster bool `json:"spellcaster"`
 	Speaker     bool `json:"speaker"`
+	// Quests 是角色記錄 0x1E2 起那六個 byte（一個 byte 四個 2-bit 欄位，RE-101）；
+	// Progress 是 0x1DD 起那五格已回報的任務數（RE-107）。兩者都會在遊玩中改變，
+	// 不寫進存檔的話接了任務、打完任務、回報過的進度重載之後就沒了。
+	Quests   []int `json:"quests,omitempty"`
+	Progress []int `json:"progress,omitempty"`
+	// Carried 是角色記錄裡那十七格「身上帶著的東西」（RE-109），一格 16 個 byte
+	// 的物品記錄，這裡存 hex。交任務物品要逐 byte 比，所以存的是原始位元組而不是
+	// 名字；交出去那一格會被換掉，因此它也是會變的欄位。
+	Carried []string `json:"carried,omitempty"`
 }
 
 // Save 是一份存檔。
