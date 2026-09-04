@@ -25,10 +25,14 @@ fi
 rm -rf "$OUT"
 mkdir -p "$OUT"/{full,release,promo}
 
-# 1. 建置。Ebitengine 要 CGO，所以只在容器原生的 linux/amd64 建；
-#    Windows 與 macOS 要另外的工具鏈，還沒做（README 的發行段有寫）。
+# 1. 建置。linux/amd64 在容器裡原生建（Ebitengine 在 Linux 要 CGO）；
+#    windows/amd64 交叉編得出來——**Ebitengine 在 Windows 不用 CGO**，走的是
+#    syscall。macOS 要 Cocoa，得另外的工具鏈（osxcross），還沒做。
 "$REPO_ROOT/tools/go_docker.sh" build -trimpath -o /src/dist-all/"$VERSION"/full/kol ./cmd/kol
-cp "$OUT/full/kol" "$OUT/release/kol"
+KOL_GO_ENV="GOOS=windows GOARCH=amd64 CGO_ENABLED=0" \
+  "$REPO_ROOT/tools/go_docker.sh" build -trimpath \
+  -o /src/dist-all/"$VERSION"/full/kol.exe ./cmd/kol
+cp "$OUT/full/kol" "$OUT/full/kol.exe" "$OUT/release/"
 
 # 2. 兩邊都帶的文件。
 for dir in full release; do

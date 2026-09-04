@@ -54,7 +54,9 @@ def main() -> int:
             "version": args.version,
             "bundle": bundle,
             "rights": RIGHTS[bundle],
-            "platform": "linux/amd64（Ebitengine 要 CGO，只在鎖定容器裡原生建置）",
+            "platform": ["linux/amd64（容器裡原生建置，Ebitengine 在 Linux 要 CGO）",
+                         "windows/amd64（交叉編譯，Ebitengine 在 Windows 走 syscall "
+                         "不用 CGO；**沒有真機驗收**）"],
             "save_location": "遊戲以 `-save` 指定；預設寫在工作目錄，不碰使用者家目錄",
             "file_count": len(files),
             "files": files,

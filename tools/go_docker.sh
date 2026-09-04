@@ -18,7 +18,7 @@ exec timeout "${KOL_GO_TIMEOUT:-900}" docker run --rm \
   --memory 3g --cpus "$CPUS" --pids-limit 512 \
   --log-opt max-size=10m --log-opt max-file=3 \
   -u "$(id -u):$(id -g)" \
-  -e HOME=/tmp \
+  -e HOME=/tmp -e "KOL_GO_ENV=${KOL_GO_ENV:-}" \
   -v "$REPO_ROOT:/src" -w /src \
   --tmpfs "/tmp:exec,uid=$(id -u),gid=$(id -g),size=1g" \
   "$IMAGE" \
@@ -28,5 +28,7 @@ exec timeout "${KOL_GO_TIMEOUT:-900}" docker run --rm \
     cp -a /go/pkg/mod /tmp/mod
     export GOMODCACHE=/tmp/mod GOCACHE=/tmp/gocache GOPATH=/tmp/gopath
     export GOFLAGS=-mod=mod GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local
+    # KOL_GO_ENV 讓呼叫端加交叉編譯用的環境變數（例如 GOOS=windows）。
+    if [ -n "${KOL_GO_ENV:-}" ]; then export ${KOL_GO_ENV}; fi
     go "$@"
   ' bash "$@"

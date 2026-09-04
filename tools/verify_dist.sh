@@ -26,7 +26,14 @@ if find "$REPO_ROOT/$DIST/release" \( -name '*.png' -o -name '*.ogg' -o -name '*
   echo "release 裡有不該散布的檔案" >&2; exit 3
 fi
 
-# 啟動驗收：拿包裡的執行檔畫一張封面，畫得出來才算啟動成功。
+# Windows 那一份只驗得到「是不是 PE 執行檔」——真機驗收要另外做。
+for bundle in full release; do
+  exe="$REPO_ROOT/$DIST/$bundle/kol.exe"
+  [ -f "$exe" ] || { echo "$bundle 少了 kol.exe" >&2; exit 2; }
+  head -c 2 "$exe" | grep -q '^MZ' || { echo "$bundle 的 kol.exe 不是 PE" >&2; exit 3; }
+done
+
+# 啟動驗收：拿包裡的 Linux 執行檔畫一張封面，畫得出來才算啟動成功。
 exec timeout "${KOL_GO_TIMEOUT:-900}" docker run --rm \
   --network none \
   --memory 3g --cpus "${KOL_GO_CPUS:-2}" --pids-limit 512 \
