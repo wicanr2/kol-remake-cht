@@ -6092,8 +6092,15 @@ RE-107 原本把 `byte_2FBFA` 對到 payload 0x36 之後看到 90／100／110／
 `QuestFlag`／`SetQuestFlag`（四個狀態）、`TurnIn`（交付與回報）、
 `CanTakeFinal`（最終任務的門檻）。
 
-**還沒接進建築內那一層**：角色身上那十七格要先有 raw bytes 的 typed data，
-抽取器目前只給 typed 的穿戴欄（`equipment`），比對要的是逐 byte 相同。
+`tools/extract_character_roster.py` 多帶 `carried`：那十七格原樣的十六 byte，
+比對要逐 byte 相同，typed 的 `equipment` 丟掉了原始位元組所以不夠用。
+
+**交叉驗證**：拿 23 件任務物品的位元組去比原版十四名角色身上那十七格，
+**一件都沒有中**。這是合理的——那是全新存檔，任務都還沒做。負面結果先做過
+正對照才敢採信：同一批位元組用建築那一套 5-bit 名稱解碼器解得出
+`Long Spear`、`Barbut Helm`、`Platemail`、`Greatsword`，位移是對的。
+
+**還沒接進建築內那一層**：`town.Session` 進門那一步要先接上這份 `carried`。
 
 ### 還沒解的
 

@@ -55,6 +55,10 @@ QUEST_OFFSET, QUEST_BYTES = 0x1E2, 6
 # 結局的判準：`[0x1DD + 群組]` 等於 0x17 就播（`sub_2B0FF:0x2B38F`，RE-106）。
 # 那一格是誰寫的還沒解，先原樣帶出來。
 PROGRESS_OFFSET, PROGRESS_BYTES = 0x1DD, 5
+# 交任務物品時要逐 byte 比對的那十七格（`sub_11A93:0x11B85`…`0x11CF7`，RE-109）：
+# 0x30 起每 0x10 一格、不到 0x1A0 為止，跳過 0x40…0x9F 那一段武器技能。
+CARRIED_FIRST, CARRIED_LAST, CARRIED_STRIDE = 0x30, 0x190, 0x10
+CARRIED_SKIP_LO, CARRIED_SKIP_HI = 0x40, 0x9F
 # 穿戴欄：部位 0…8 在 0x100 + 16 × 部位，部位 9（手上那件武器）在 0x30，
 # 一格 16 byte，版面與商店的商品記錄相同（RE-075／RE-080）。
 WORN_SLOTS, WORN_STRIDE = 10, 16
@@ -94,6 +98,20 @@ def equipment(rec: bytes) -> list[dict | None]:
         item = good(block, pos)
         item["offset"] = base
         out.append(item)
+    return out
+
+
+def carried(rec: bytes) -> list[dict]:
+    """交任務物品時會被掃到的那十七格，原樣帶出來（RE-109）。
+
+    比對是逐 byte 相同，所以 typed 的穿戴欄不夠用——那一份丟掉了原始位元組。"""
+    out = []
+    off = CARRIED_FIRST
+    while off <= CARRIED_LAST:
+        if not CARRIED_SKIP_LO <= off <= CARRIED_SKIP_HI:
+            out.append({"offset": off,
+                        "bytes": rec[off:off + CARRIED_STRIDE].hex()})
+        off += CARRIED_STRIDE
     return out
 
 
@@ -264,6 +282,8 @@ def main() -> int:
             "equipment": equipment(data[base:base + SLOT_BYTES]) if name else None,
             # 法術同樣是角色記錄自己的欄位（RE-100）。
             "spells": spells(data[base:base + SLOT_BYTES]) if name else None,
+            # 交任務物品要逐 byte 比，所以那十七格原樣帶出來（RE-109）。
+            "carried": carried(data[base:base + SLOT_BYTES]) if name else None,
         })
 
     occupied = [s["name"] for s in slots if s["occupied"]]
