@@ -107,6 +107,10 @@ type State struct {
 	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
 	// 所以這裡是一份不是一組。
 	Monster Monster
+	// QuestItem 是這一個任務要的那件東西的名字（原版存在 `[0xB926]` 那十六個
+	// byte，RE-103）。帶著它逃出戰場就算完成，不必把怪物打完。空字串表示這一場
+	// 沒有那樣的東西。
+	QuestItem string
 	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠、Adventure 是每個人
 	// 分到的冒險點數（RE-091／RE-096）。
 	Verdict Verdict
