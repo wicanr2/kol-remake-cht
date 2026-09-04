@@ -842,6 +842,14 @@ func (g *game) render() error {
 				return ui.BattleEncounter(g.canvas.Image(), g.sprites, g.small,
 					g.quest.state, g.quest.lines)
 			}
+			if p := g.quest.state.Plan.Prompt; p == battle.PromptSpell ||
+				p == battle.PromptAffect {
+				return ui.BattleSpellList(g.canvas.Image(), g.sprites,
+					g.quest.tiles, g.small, g.quest.state,
+					town.UISegments(g.quest.bank, g.quest.trans, town.BankUI,
+						g.quest.state.SpellListTitle()),
+					g.battleSpellRows())
+			}
 			if g.quest.state.Stage == battle.StageSpoils {
 				return ui.BattleSpoils(g.canvas.Image(), g.sprites, g.quest.tiles,
 					g.small, g.quest.state,
@@ -1141,6 +1149,20 @@ func ambushLines(bank *town.UIText, trans *town.Translations, a *battle.Ambush,
 		out = append(out, last+"!")
 	}
 	return nonEmptyLines(out)
+}
+
+// battleSpellRows 是法術那兩張清單要顯示的幾列。正負那一張的文字是 KOLDATA 記錄，
+// 規則層只留位置不碰文字（RE-100）。
+func (g *game) battleSpellRows() []string {
+	s := g.quest.state
+	if s.Plan.Prompt != battle.PromptAffect {
+		return s.Plan.List
+	}
+	out := make([]string, 0, len(battle.AffectRecords()))
+	for _, rec := range battle.AffectRecords() {
+		out = append(out, g.battleRecord(rec))
+	}
+	return out
 }
 
 // battleWoreOffLines 是這一回合法術剛好失效的那幾句（記錄 0x173，RE-100）：
@@ -2078,6 +2100,10 @@ func main() {
 					}
 					if empty {
 						playSession.Party[i].Worn = c.Worn
+					}
+					// 法術同理：存檔沒帶就照角色檔補（RE-100）。
+					if playSession.Party[i].Spells == nil {
+						playSession.Party[i].Spells = c.Spells
 					}
 					break
 				}

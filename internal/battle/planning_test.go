@@ -185,15 +185,17 @@ func TestPlanningDirectCommands(t *testing.T) {
 	}
 }
 
-// 還沒實作的圖示按下去會被記下來，不默默吞掉。
+// 還沒實作的圖示按下去會被記下來，不默默吞掉。投擲（0x22）是目前唯一的一格。
 func TestPlanningUnimplemented(t *testing.T) {
-	s := planningState(Member{PackCount: 2})
-	selectIcon(t, s, CmdCast)
+	s := planningState(Member{HasWeapon: true,
+		Weapon: Weapon{Kind: 0x20, Code: 1}})
+	s.Plan.Bar = []int{CmdYes, CmdThrow}
+	s.Plan.Selected = 1
 	if s.Choose() {
 		t.Fatal("還沒實作的圖示不該結束這一輪")
 	}
-	if len(s.Plan.Unimplemented) != 1 || s.Plan.Unimplemented[0] != CmdCast {
-		t.Fatalf("應該記下 %#x，得到 %#x", CmdCast, s.Plan.Unimplemented)
+	if len(s.Plan.Unimplemented) != 1 || s.Plan.Unimplemented[0] != CmdThrow {
+		t.Fatalf("應該記下 %#x，得到 %#x", CmdThrow, s.Plan.Unimplemented)
 	}
 	if s.Plan.Prompt != PromptCommand {
 		t.Fatalf("應該留在主指令列，得到 %d", s.Plan.Prompt)

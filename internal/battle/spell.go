@@ -291,3 +291,87 @@ func SpellEffectLine(power int, negative bool) (before, after []int) {
 
 // Member 取一名參戰者對應的隊員資料；不是隊員就回 nil。訊息那一層要用它取法術名。
 func (s *State) Member(i int) *Member { return s.member(i) }
+
+// 選法術那兩張清單的標題（KOLDATA）。
+const (
+	WhichSpellRecord   = 0x104 // "~V07~H03Which Spell?"
+	SelectAffectRecord = 0x105 // "~V07~H03Select Affect"
+)
+
+// SpellListBox 是那兩張清單的框（`0x1F3C1` 的 `sub_1BA9D(10h, 2, 88h, 4Ch, 0Fh)`）
+// ——與裝備欄同一個框，清單直接蓋在上面。
+var SpellListBox = SheetBox
+
+// SpellListRows 是清單第一行的位置與行距。
+//
+// **還沒對拍**：標題那兩個座標是記錄自己帶的（`~H03~V07`），清單則是
+// `sub_1AAE8(3, 4, 11h, …)` 的前三個參數，那一支的參數語意還沒解出來
+//（戰利品那張清單也卡在同一件事）。先接在標題下面一行。
+var SpellListRows = struct{ Col, Row, LineStep, Visible int }{
+	Col: 3, Row: 0x0F, LineStep: 8, Visible: 7,
+}
+
+// SpellListTitle 是目前這一張清單的標題記錄。
+func (s *State) SpellListTitle() int {
+	if s.Plan.Prompt == PromptAffect {
+		return SelectAffectRecord
+	}
+	return WhichSpellRecord
+}
+
+// SpellNames 是「Which Spell?」那張清單的內容：那一名帶著的法術名字，順序同
+// 角色記錄裡的欄位（`0x1F411`）。不是隊員或沒有法術就回 nil。
+func (s *State) SpellNames(i int) []string {
+	m := s.member(i)
+	if m == nil {
+		return nil
+	}
+	out := make([]string, 0, len(m.Spells))
+	for _, sp := range m.Spells {
+		out = append(out, sp.Name)
+	}
+	return out
+}
+
+// AffectRecords 是「Select Affect」那兩項的記錄（`0x1F5E5`）：先 Positive、
+// 後 Negative，選中的索引就寫進參戰者記錄 +0x27。
+func AffectRecords() []int { return []int{PositiveRecord, NegativeRecord} }
+
+// beginSpellList 進「Which Spell?」那張清單（`0x1F3C1`）。
+func (s *State) beginSpellList(i int) {
+	s.Plan.Prompt = PromptSpell
+	s.Plan.List = s.SpellNames(i)
+	s.Plan.ListPick = 0
+	s.Plan.Bar = nil
+}
+
+// chooseSpell 選好法術之後接著問正負（`0x1F553`）。清單的文字由呼叫端填——
+// 那兩項是 KOLDATA 記錄，規則層不碰文字。
+func (s *State) chooseSpell(i int) bool {
+	if s.Plan.ListPick < 0 || s.Plan.ListPick >= len(s.Plan.List) {
+		return false
+	}
+	s.Actors[i].SpellPick = s.Plan.ListPick
+	s.Plan.Prompt = PromptAffect
+	s.Plan.List = []string{"", ""}
+	s.Plan.ListPick = 0
+	return false
+}
+
+// chooseAffect 選好正負之後去選目標格（`0x1F639`）。
+//
+// 用哪一種游標由法術自己決定：`+0x0E` 的 bit 7 沒設就是相鄰、設了就是遠距
+//（`0x1F677` 的 `mode = 記錄[+0x0E] ÷ 0x80 + 1`）。
+func (s *State) chooseAffect(i int) bool {
+	s.Actors[i].Negative = s.Plan.ListPick != 0
+	mode := CursorAdjacent
+	if m := s.member(i); m != nil {
+		pick := s.Actors[i].SpellPick
+		if pick >= 0 && pick < len(m.Spells) && m.Spells[pick].NeedsTarget() {
+			mode = CursorRanged
+		}
+	}
+	s.Plan.List, s.Plan.ListPick = nil, 0
+	s.beginTarget(i, mode, PromptCommand)
+	return false
+}

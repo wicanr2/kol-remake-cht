@@ -276,3 +276,57 @@ func TestBeginPlanningRunsTheSpellCountdown(t *testing.T) {
 		t.Fatalf("不該再有失效，得到 %v", s.WoreOff)
 	}
 }
+
+// 規劃段選施法：先出法術清單，選完問正負，再去選目標格（RE-100）。
+func TestPlanningSpellFlow(t *testing.T) {
+	sp := Spell{Name: "Vartwelyrmi", Effect: 5, TurnCode: 0, PowerCode: 0x8A}
+	s := &State{Party: []Member{{Name: "WARDER", Spells: []Spell{sp}, PackCount: 1}}}
+	s.Actors = []Actor{
+		{Side: SideParty, Member: 0, Head: 10, Chest: 10, Threshold: 100, X: 30, Y: 30},
+		{Side: SideMonster, Member: -1, Head: 10, Chest: 10, Threshold: 100, X: 31, Y: 30},
+	}
+	s.Field = NewField()
+	s.Exec.Order, s.Exec.Turn = []int{0}, 0
+	s.Round.Order, s.Round.Turn = []int{0}, 0
+	s.Plan.Bar = []int{CmdYes, CmdCast}
+	s.Plan.Selected = 1
+
+	if s.Choose() {
+		t.Fatal("選施法不該結束這一輪")
+	}
+	if s.Plan.Prompt != PromptSpell {
+		t.Fatalf("該進法術清單，得到 %d", s.Plan.Prompt)
+	}
+	if len(s.Plan.List) != 1 || s.Plan.List[0] != "Vartwelyrmi" {
+		t.Fatalf("清單是 %v", s.Plan.List)
+	}
+
+	// 選中第 0 個法術，接著問正負。
+	s.Choose()
+	if s.Plan.Prompt != PromptAffect {
+		t.Fatalf("該進正負那一張，得到 %d", s.Plan.Prompt)
+	}
+	if s.Actors[0].SpellPick != 0 {
+		t.Fatalf("選中的法術是 %d", s.Actors[0].SpellPick)
+	}
+	if len(AffectRecords()) != 2 || AffectRecords()[0] != PositiveRecord {
+		t.Fatalf("正負那兩項的記錄是 %v", AffectRecords())
+	}
+
+	// 游標移到第二項（Negative）再確認，然後去選目標格。
+	s.MoveSelection(1)
+	if s.Plan.ListPick != 1 {
+		t.Fatalf("游標是 %d，期望 1", s.Plan.ListPick)
+	}
+	s.Choose()
+	if !s.Actors[0].Negative {
+		t.Fatal("選了第二項該是負面")
+	}
+	if s.Plan.Prompt != PromptTarget {
+		t.Fatalf("該進選目標格，得到 %d", s.Plan.Prompt)
+	}
+	// 這個法術的 bit 7 有設，用的是遠距游標。
+	if !sp.NeedsTarget() {
+		t.Fatal("這一個法術該要選目標格")
+	}
+}

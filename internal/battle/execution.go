@@ -342,9 +342,9 @@ func (s *State) act(i int, rng Rand) ActResult {
 
 // cast 是施法那一手（`sub_2818D`，RE-100）。
 //
-// 目標由法術自己決定：`+0x0E` 的 bit 7 沒設就打施法者面對的那一格，設了就打規劃段
-// 選好的目標——**選目標格那一段還沒接上規劃**，所以這一版兩種都走面對的方向，
-// 差別記在 SPEC-012。
+// 目標由法術自己決定：`+0x0E` 的 bit 7 沒設就打施法者面對的那一格（`sub_24BB6`），
+// 設了就打規劃段選好的那一格——`sub_24C35` 讀的是 `[0x1A74]`／`[0x1B36]`，
+// 也就是 remake 的 `Plan.Memo`。
 //
 // 效果 6（指定部位）在原版要玩家挑一個部位，需要在執行段中間插一次互動；
 // remake 目前沒有那個機制，所以照原版「要選目標格的法術」那一條走隨機部位
@@ -352,15 +352,22 @@ func (s *State) act(i int, rng Rand) ActResult {
 func (s *State) cast(i int, rng Rand) ActResult {
 	a := &s.Actors[i]
 	out := ActResult{Actor: i, Command: a.Command, Target: -1}
+	m := s.member(i)
+	var spell Spell
+	if m != nil && a.SpellPick >= 0 && a.SpellPick < len(m.Spells) {
+		spell = m.Spells[a.SpellPick]
+	}
 	target := s.FacingTarget(i)
+	if spell.NeedsTarget() {
+		c := s.memo(i)
+		target = s.actorAt(c.Row, c.Col)
+	}
 	if target < 0 {
 		out.Message = NothingThereRecord
 		return out
 	}
 	area := -1
-	m := s.member(i)
-	if m != nil && a.SpellPick >= 0 && a.SpellPick < len(m.Spells) &&
-		m.Spells[a.SpellPick].Effect == SpellEffectArea {
+	if spell.Effect == SpellEffectArea {
 		area = rng.Roll(6) - 1
 	}
 	res := s.Cast(i, target, area, rng)

@@ -21,6 +21,11 @@ const (
 	PromptUnarmedForm
 	PromptMoveForm
 	PromptGuardForm
+	// PromptSpell 是「Which Spell?」那張法術清單；PromptAffect 是接著問的
+	// 「Select Affect」（Positive／Negative）。兩張都是**文字清單**，不是圖示列
+	// （`0x1F3C1`、`0x1F572`，RE-100）。
+	PromptSpell
+	PromptAffect
 	// PromptNextRound 是整輪決定完的「Begin next round?」。
 	PromptNextRound
 	// PromptExecuting 是執行段：一手一句訊息，按鍵推進。
@@ -45,6 +50,10 @@ type Planning struct {
 	GroundTile int
 	// Memo 是每一名上次記住的射擊目標（`[0x1A74 + 2i]`／`[0x1B36 + 2i]`）。
 	Memo map[int]Cell
+	// List 是文字清單那兩張（PromptSpell／PromptAffect）要顯示的內容；
+	// ListPick 是游標。法術那一張放名字、正負那一張放兩筆記錄展開的文字。
+	List     []string
+	ListPick int
 	// Unimplemented 記下按了但還沒實作的圖示，照 town.Session 的做法不默默吞掉。
 	Unimplemented []int
 }
@@ -68,6 +77,15 @@ func (s *State) BeginTurn() {
 // MoveSelection 移動圖示列的白框：末格繞回，與城鎮同一條規則。
 // 選目標格時 `,`／`.` 移的是同一個白框（`sub_24131:0x24771`）。
 func (s *State) MoveSelection(step int) {
+	// 文字清單那兩張走自己的游標（RE-100）。
+	if s.Plan.Prompt == PromptSpell || s.Plan.Prompt == PromptAffect {
+		n := len(s.Plan.List)
+		if n == 0 {
+			return
+		}
+		s.Plan.ListPick = ((s.Plan.ListPick+step)%n + n) % n
+		return
+	}
 	n := len(s.Plan.Bar)
 	if n == 0 {
 		return
@@ -103,6 +121,10 @@ func (s *State) Choose() bool {
 		return s.chooseMoveForm(i)
 	case PromptGuardForm:
 		return s.chooseGuardForm(i)
+	case PromptSpell:
+		return s.chooseSpell(i)
+	case PromptAffect:
+		return s.chooseAffect(i)
 	}
 	return false
 }
@@ -123,6 +145,10 @@ func (s *State) chooseCommand(i int) bool {
 	case CmdMove, CmdDismount:
 		s.Plan.Command = icon
 		s.beginTarget(i, CursorAdjacent, PromptMoveForm)
+	case CmdCast:
+		// 施法：先選法術，再選正負，最後才選目標格（`0x1F3C1`，RE-100）。
+		s.Plan.Command = icon
+		s.beginSpellList(i)
 	case CmdMissile:
 		s.Plan.Command = icon
 		s.Plan.Guard = 0
@@ -133,8 +159,8 @@ func (s *State) chooseCommand(i int) bool {
 	case CmdRest, CmdDrop, CmdSwitchAlt1, CmdSwitch, CmdSwitchAlt2, CmdPickUp:
 		// `0x1F3B2`：兩個選項都設 0，直接收尾。真正的動作在執行段。
 		return s.commit(i, icon, 0, 0)
-	case CmdCast, CmdThrow:
-		// 施法要兩層清單、投擲的後續也還沒讀；記下來不動（RE-093：0x0D 是施法）。
+	case CmdThrow:
+		// 投擲的後續還沒讀；記下來不動。
 		s.Plan.Unimplemented = append(s.Plan.Unimplemented, icon)
 	}
 	return false

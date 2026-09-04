@@ -211,3 +211,39 @@ func BattleSpoils(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	// 這裡不重複。
 	return nil
 }
+
+// BattleSpellList 是規劃段選法術那兩張清單（RE-100）：「Which Spell?」與
+// 「Select Affect」。框與裝備欄同一個，清單直接蓋在上面。
+//
+// title 是標題那一筆記錄拆好的幾段（它自己帶 `~H03~V07`）；rows 是清單的內容。
+func BattleSpellList(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
+	f *font.Font, s *battle.State, title []town.Segment, rows []string) error {
+	if err := BattleField(dst, sprites, tiles, f, s); err != nil {
+		return err
+	}
+	b := battle.SpellListBox
+	shadow(dst, b.X, b.Y, b.Width, b.Height)
+	fill(dst, b.X, b.Y, b.Width, b.Height, town.ColourBoxEdge)
+	fill(dst, b.X+1, b.Y+1, b.Width-2, b.Height-2, town.ColourBoxFill)
+
+	ink := town.ColourText
+	for _, seg := range title {
+		f.Draw(dst, seg.Col*8, seg.Row, strings.ToUpper(seg.Text),
+			ink[0], ink[1], ink[2])
+	}
+	l := battle.SpellListRows
+	for i, row := range rows {
+		if i >= l.Visible {
+			break
+		}
+		y := l.Row + i*l.LineStep
+		if i == s.Plan.ListPick {
+			// **游標的樣子還沒對拍**，與戰利品那張清單同一個狀況：先用與指令列
+			// 白框同一個顏色框起來。
+			frame(dst, l.Col*8-2, y-1, b.Width-(l.Col*8-2-b.X)-4, l.LineStep,
+				town.ColourSelected)
+		}
+		f.Draw(dst, l.Col*8, y, strings.ToUpper(row), ink[0], ink[1], ink[2])
+	}
+	return nil
+}

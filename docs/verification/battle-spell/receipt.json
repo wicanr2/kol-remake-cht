@@ -1,0 +1,49 @@
+{
+  "schema": "kol-battle-spell-observation-v1",
+  "name": "battle-spell",
+  "kind": "observation",
+  "description": "施法整條路徑（SPEC-012）。Warder 從城 7 出城往東走九十步被伏擊，第一回合先把手上的射擊武器丟掉——**原版有武器就不放出施法那一格**（`0x22A82`）——第二回合指令列上才出現施法，接著走「Which Spell?」→「Select Affect」→ 選目標格，執行段印出施法與效果兩句。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
+  "not_claimed": [
+    {
+      "name": "與原版的畫面一致",
+      "reason": "原版沒有取到對應的畫格。兩張清單的內部版面（第一行的位置與游標的樣子）在 SPEC-012 標為未對拍，與戰利品那張清單卡在同一件事（`sub_1AAE8` 的參數語意）。"
+    },
+    {
+      "name": "法術真的改了什麼",
+      "reason": "Warder 唯一的法術 Vartwelyrmi 是效果 5（疲勞），而那一條鏈還沒進戰鬥的規則層，所以這一次只有訊息、沒有數值變化（SPEC-012 第 5 節）。"
+    }
+  ],
+  "command": "tools/run_kol_shots.sh 規格檔（-scene play -seed 141421 -load workplace/saves/warder.json，存檔由 tools/import_original_characters.py --names Warder 產生）",
+  "seed": 141421,
+  "size": [
+    320,
+    200
+  ],
+  "frames": [
+    {
+      "file": "which-spell.png",
+      "step": 130,
+      "shows": "WHICH SPELL? ＋ VARTWELYRMI——清單蓋在裝備欄那個框上，標題由記錄 0x104 自帶的 ~H03~V07 定位。",
+      "sha256": "f44145eacd75da4ebd744d0b59dcb4ad4474ce1f21fa08198ffe0444ca9faf6d"
+    },
+    {
+      "file": "select-affect.png",
+      "step": 131,
+      "shows": "SELECT AFFECT ＋ POSITIVE／NEGATIVE（記錄 0x105 與 0x106／0x107）。",
+      "sha256": "0c94b1232c3809207a771efff6be1aa5279f360557b931a9c6cc9496168ef126"
+    },
+    {
+      "file": "casts.png",
+      "step": 137,
+      "shows": "WARDER CASTS VARTWELYRMI AT WARDER.——`|S` 展開成法術名字。目標是自己，因為腳本沒有移動選目標格的游標。",
+      "sha256": "013662aaa8d2ca04cd39922a9706dda2fa97aea9aabd38f2bc9ccbf6477a63d9"
+    },
+    {
+      "file": "effect.png",
+      "step": 138,
+      "shows": "THE SPELL HAS A MILDLY NEGATIVE EFFECT.——強度形容詞由 min(強度 ÷ 8, 3) 選，方向由 +0x27 決定；中間那個空白是程式印的，不在任何一筆記錄裡。",
+      "sha256": "1bb37f8c97909c587c237a8ec312ade70e1e3ad4c53aebb3d2031608f7fdf830"
+    }
+  ],
+  "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
+}
