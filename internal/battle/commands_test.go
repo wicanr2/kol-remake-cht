@@ -78,12 +78,12 @@ func TestCommandBarPackNeedsEmptyHand(t *testing.T) {
 	a := &Actor{Threshold: 100}
 	a.SetParts()
 	got := CommandBar(a, &Member{PackCount: 3}, CommandEnv{})
-	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdPack, CmdMove, CmdRest})
+	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdCast, CmdMove, CmdRest})
 	// 手上有武器就不掃背包，即使背包裡有東西。
 	m := &Member{HasWeapon: true, PackCount: 3, Weapon: Weapon{Kind: 0x20, Code: 1}}
 	got = CommandBar(a, m, CommandEnv{})
 	for _, icon := range got {
-		if icon == CmdPack {
+		if icon == CmdCast {
 			t.Fatal("手上有武器時不該出現背包那一格")
 		}
 	}

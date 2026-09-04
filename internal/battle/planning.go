@@ -133,7 +133,7 @@ func (s *State) chooseCommand(i int) bool {
 	case CmdRest, CmdPickUp, CmdItem16, CmdDrop, CmdItem25, CmdGround:
 		// `0x1F3B2`：兩個選項都設 0，直接收尾。真正的動作在執行段。
 		return s.commit(i, icon, 0, 0)
-	case CmdPack, CmdThrow:
+	case CmdCast, CmdThrow:
 		// 背包要兩層清單、投擲的後續也還沒讀；記下來不動。
 		s.Plan.Unimplemented = append(s.Plan.Unimplemented, icon)
 	}

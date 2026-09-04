@@ -11,8 +11,9 @@ const (
 	CmdYes = 0x07
 	// CmdCancel 是 U-TURN。
 	CmdCancel = 0x0F
-	// CmdPack 是背包清單那一格（`0x1F3C1`）。
-	CmdPack = 0x0D
+	// CmdCast 是施法（`0x208ED` 對它呼叫 `sub_2818D`，RE-093）。原本從指令列的
+	// 圖號推成「背包清單」，推錯了。
+	CmdCast = 0x0D
 	// CmdPickUp／CmdDrop／CmdItem16／CmdItem25／CmdGround 的動作語意還沒對上。
 	CmdPickUp = 0x15
 	CmdItem16 = 0x16
@@ -157,7 +158,7 @@ func appendItemCommands(bar []int, a *Actor, m *Member, env CommandEnv) []int {
 	// 沒有武器時才看背包裡有沒有東西（`0x22A82`）。
 	if !m.HasWeapon {
 		if m.PackCount > 0 {
-			bar = append(bar, CmdPack)
+			bar = append(bar, CmdCast)
 		}
 	}
 	// 有武器、或沒武器但 +0x190 非零，才進這一段（`0x22ABD`）。

@@ -254,9 +254,8 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 func (s *State) act(i int, rng Rand) ActResult {
 	a := &s.Actors[i]
 	out := ActResult{Actor: i, Command: a.Command, Target: -1}
-	// 敵人那一手的 AI 還沒實作（RE-081 的三張基礎權重表沒有執行期值），
-	// 所以他們的 +0x25 從來沒被填過。標成還沒實作，不要讓畫面看起來像
-	// 「原版選了什麼都不做」。
+	// 規劃段應該已經替敵人填好指令了（RE-081／RE-092）。真的空著就標成還沒實作，
+	// 不要讓畫面看起來像「原版選了什麼都不做」——那是 AI 沒接上時的舊症狀。
 	if a.Side != SideParty && a.Command == 0 {
 		out.Unimplemented = true
 		return out
@@ -295,7 +294,9 @@ func (s *State) act(i int, rng Rand) ActResult {
 	case CmdMove, CmdDismount:
 		return s.move(i)
 	}
-	// 撿、丟與背包那幾手的內容還沒解完（SPEC-010 末段），不假裝做過。
+	// 剩下的幾個指令碼。**撿（0x15）與丟（0x24）不會走到這裡**——執行段的分派只認
+	// 十個指令碼，那兩個不在其中，它們是規劃段的即時動作（RE-093）。真的落到這裡
+	// 表示規劃段漏接了，標成還沒實作，不假裝做過。
 	out.Unimplemented = true
 	return out
 }

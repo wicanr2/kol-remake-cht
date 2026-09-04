@@ -188,12 +188,12 @@ func TestPlanningDirectCommands(t *testing.T) {
 // 還沒實作的圖示按下去會被記下來，不默默吞掉。
 func TestPlanningUnimplemented(t *testing.T) {
 	s := planningState(Member{PackCount: 2})
-	selectIcon(t, s, CmdPack)
+	selectIcon(t, s, CmdCast)
 	if s.Choose() {
 		t.Fatal("還沒實作的圖示不該結束這一輪")
 	}
-	if len(s.Plan.Unimplemented) != 1 || s.Plan.Unimplemented[0] != CmdPack {
-		t.Fatalf("應該記下 %#x，得到 %#x", CmdPack, s.Plan.Unimplemented)
+	if len(s.Plan.Unimplemented) != 1 || s.Plan.Unimplemented[0] != CmdCast {
+		t.Fatalf("應該記下 %#x，得到 %#x", CmdCast, s.Plan.Unimplemented)
 	}
 	if s.Plan.Prompt != PromptCommand {
 		t.Fatalf("應該留在主指令列，得到 %d", s.Plan.Prompt)
