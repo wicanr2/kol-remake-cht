@@ -47,6 +47,13 @@ ICON_FLAGS = 0x3C
 # 每一點傷勢乘一次（`sub_11A93:0x126A3`）。住宿存檔時把 0x3A／0x3B 寫進
 # 角色記錄位移 0x2E／0x2F（`sub_14DB1:0x1505B`）。
 PRICE_OFFSET = 0x38
+# 收任務物品那一段（RE-109）：`icon_flags[1]` 的 bit 2 開啟時，位移 0x36 的低七位
+# 是任務地點編號、bit 7 表示那是**最終任務**（`byte_2FBFA`，RE-107）；
+# 0x2E0 起十六 byte 是要收的那件物品、0x2F0 起是換給你的那件（全零表示不給）。
+QUEST_OFFSET = 0x36
+QUEST_WANT_OFFSET, QUEST_GIVE_OFFSET, QUEST_ITEM_BYTES = 0x2E0, 0x2F0, 0x10
+# `icon_flags` 第二個 byte 的 bit 2（`sub_11A93:0x11B5A` 的 `byte_2FC01 & 4`）。
+QUEST_FLAG = 4
 RECORD_ID_OFFSET = 0x3A
 # 商店的商品表（RE-075）：payload 位移 0x100 起，一筆 16 byte，最多 32 筆，
 # 第一個 byte 是 0 就結束。名稱是 5-bit 壓縮（高 nibble 是字數，字元從第 4 個
@@ -210,6 +217,19 @@ def main() -> int:
                     door["price"] = be16(body, PRICE_OFFSET)
                     door["heal_rate"] = body[PRICE_OFFSET + 1]
                     door["record_id"] = be16(body, RECORD_ID_OFFSET)
+                    if body[ICON_FLAGS + 1] & QUEST_FLAG:
+                        quest = body[QUEST_OFFSET]
+                        want = bytes(body[QUEST_WANT_OFFSET:
+                                          QUEST_WANT_OFFSET + QUEST_ITEM_BYTES])
+                        give = bytes(body[QUEST_GIVE_OFFSET:
+                                          QUEST_GIVE_OFFSET + QUEST_ITEM_BYTES])
+                        door["quest_site"] = quest & 0x7F
+                        door["quest_final"] = quest >= 0x80
+                        door["quest_wants"] = packed_name(want)
+                        door["quest_wants_bytes"] = want.hex()
+                        if any(give):
+                            door["quest_gives"] = packed_name(give)
+                            door["quest_gives_bytes"] = give.hex()
                     if body[ICON_FLAGS] & 0x32:
                         door["goods"] = goods(body, body[ICON_FLAGS])
                     if body[ICON_FLAGS] & 0x80:
@@ -249,6 +269,11 @@ def main() -> int:
                           "圖示列旗標；bit0 或 flags[1] 的 bit2 給 LISTEN＋MOUTH、"
                           "bit1/4/5 給買賣、bit2 給 id 11、bit3 給 REST＋COMPANION、"
                           "bit6 給 REST",
+            "quest": f"`icon_flags[1] & {QUEST_FLAG}` 開啟時，"
+                     f"payload[0x{QUEST_OFFSET:02X}] 的低七位是任務地點編號、"
+                     f"bit 7 是最終任務；0x{QUEST_WANT_OFFSET:03X} 起十六 byte 是"
+                     f"要收的物品、0x{QUEST_GIVE_OFFSET:03X} 起是換給你的那件"
+                     "（RE-107／RE-109）。",
             "price": f"建築 payload[0x{PRICE_OFFSET:02X}／0x{PRICE_OFFSET + 1:02X}]："
                      "高位元組在前的價錢。bit3 的客棧是住一晚的總價（0 代表免費），"
                      "bit6 的修道院只用低位元組，當每一點傷勢的價錢。",
