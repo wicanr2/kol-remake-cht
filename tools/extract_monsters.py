@@ -47,6 +47,10 @@ STAT_OFFSETS = {"strength": 0x11, "quickness": 0x12, "foresight": 0x13,
 # 戰鬥要用的其餘欄位（RE-080）：+0x17 起是攻防技能（大端 16-bit 各一組），
 # +0x20 是手上的武器，+0x30／+0x40／+0x50 是三件護甲，+0x60 是盾牌，
 # 每一格 16 byte，版面與商店的商品記錄相同。
+# +0x0F 是金冠的骰式（RE-091）：高 nibble 取低三位是骰數，低三位查 GOLD_DICE
+# 得骰面。打贏之後每一隻怪擲「骰數 ＋ 1」次，總額除以隊伍人數。
+GOLD_OFFSET = 0x0F
+GOLD_DICE = (2, 3, 5, 7, 9, 11, 19, 99)
 SKILL_OFFSET = 0x17
 WEAPON_OFFSET = 0x20
 ARMOUR_OFFSETS = (0x30, 0x40, 0x50)
@@ -115,6 +119,11 @@ def main() -> int:
             "season_mask": season,
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
             **{name: rec[off] for name, off in STAT_OFFSETS.items()},
+            "gold": {
+                "raw": rec[GOLD_OFFSET],
+                "rolls": (rec[GOLD_OFFSET] // 16) & 7,
+                "sides": GOLD_DICE[rec[GOLD_OFFSET] & 7],
+            },
             "attack_skill": rec[SKILL_OFFSET] << 8 | rec[SKILL_OFFSET + 1],
             "parry_skill": rec[SKILL_OFFSET + 2] << 8 | rec[SKILL_OFFSET + 3],
             "weapon": item(rec, WEAPON_OFFSET),

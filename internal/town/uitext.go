@@ -60,6 +60,21 @@ func LoadUIText(path string) (*UIText, error) {
 	return &t, nil
 }
 
+// UIRaw 取某個文字庫的一筆記錄並**保留前後空白**，中文模式優先用譯文。
+// 原文與譯文用同一套語法，所以走同一套版面碼處理。
+//
+// 戰鬥的訊息是靠記錄號串接的碎片（RE-088），少了自帶的空白就會黏在一起，
+// 所以這裡不能用 Record——那一支會把兩端的空白 trim 掉。
+func UIRaw(bank *UIText, tr *Translations, bankName string, index int) string {
+	if zh := tr.UIBank().Record(bankName, index); zh != "" {
+		return stripKeepSpaces(zh)
+	}
+	if bank == nil {
+		return ""
+	}
+	return bank.RecordPadded(bankName, index)
+}
+
 // RecordPadded 取一筆記錄但**保留前後空白**。原版有些欄位靠字串自帶的空白置中，
 // 例如野外標籤的 `"  DAWN ]"`，去掉空白就會往左移兩個字。
 func (t *UIText) RecordPadded(bank string, index int) string {

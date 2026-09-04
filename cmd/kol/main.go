@@ -92,6 +92,10 @@ type questBattle struct {
 	lines []string
 	// bank 是 KOLDATA，執行段的訊息要照記錄號取文字（RE-086）。
 	bank *town.UIText
+	// trans 是譯文表；中文模式的戰鬥訊息從這裡取，取不到才退回原文。
+	trans *town.Translations
+	// english 為真時才補英文複數；中文的譯文自己處理掉了複數（RE-091）。
+	english bool
 	// tiles 是戰場磚圖，讀檔一次之後留著。
 	tiles *ui.BattleTiles
 }
@@ -1076,9 +1080,9 @@ func (g *game) battleRecord(record int) string {
 	if g.quest == nil || g.quest.bank == nil {
 		return ""
 	}
-	// 用 RecordPadded 而不是 Lines：`]` 要保留成空白（`The]` ＋ 名字），
-	// Lines 會把兩端的空白 trim 掉。`|X` 兩者都原樣留著，由 Substitute 展開。
-	return g.quest.bank.RecordPadded(town.BankUI, record)
+	// 用 UIRaw 而不是 Lines：`]` 要保留成空白（`The]` ＋ 名字），Lines 會把兩端的
+	// 空白 trim 掉。`|X` 兩者都原樣留著，由 Substitute 展開。中文模式優先用譯文。
+	return town.UIRaw(g.quest.bank, g.quest.trans, town.BankUI, record)
 }
 
 // battleStep 做出執行段的下一手，並把那一句訊息展開、斷行放進畫面
@@ -1095,6 +1099,11 @@ func (g *game) battleStep() {
 		s.Exec.Pending = nil
 		return
 	}
+	// 這一場已經結束、勝負的兩句也印完了，就停在最後一句上，不要再往下走——
+	// 再呼叫一次 Step 會把勝負訊息重新排一遍，變成按不完的迴圈。
+	if s.Stage == battle.StageDone {
+		return
+	}
 	// 沒有訊息的那幾手不停下來等鍵：敵人那一手還沒實作（RE-081），
 	// 停在空白畫面只會讓人以為當掉了。
 	var r battle.ActResult
@@ -1102,7 +1111,7 @@ func (g *game) battleStep() {
 		var ok bool
 		r, ok = s.Step(s.Rand)
 		if !ok {
-			s.Exec.Text = nil
+			s.Exec.Text = g.battleVerdictLines()
 			return
 		}
 		if r.Message != 0 || r.Outcome != nil {
@@ -1133,6 +1142,37 @@ func (g *game) battleStep() {
 	monster := r.Target >= 0 && s.Actors[r.Target].Member < 0
 	s.Exec.Pending = battle.WrapMessage(ctx.Substitute(
 		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster))))
+}
+
+// battleVerdictLines 是這一場結束時要印的那幾句（RE-091）。沒分勝負就回 nil，
+// 執行段照常排下一回合。
+//
+// 打贏分兩句、各等一次鍵：第一句報戰果，第二句報金冠。**冒險點數沒有報**——
+// 那一句的數字要 `sub_26C5F(0x17)` 才算得出來，那一支還沒解讀，寧可不報。
+func (g *game) battleVerdictLines() []string {
+	s := g.quest.state
+	enemies := s.EnemyCount()
+	name := s.Monster.Name
+	suffix := ""
+	if g.quest.english {
+		suffix = battle.PluralSuffix(name, enemies)
+	}
+	ctx := battle.MessageContext{Lookup: g.battleRecord}
+	switch s.Verdict {
+	case battle.VerdictWon:
+		// `|F` 展開要有目標；原版是把 word_3237E 指到第一個敵人（`0x211D5`）。
+		ctx.Target = g.battleSpeaker(battle.PartySlots)
+		first := ctx.Substitute(g.battleRecords(battle.VictoryRecords())) + suffix + "!"
+		ctx.Number = s.Gold
+		s.Exec.Pending = battle.WrapMessage(
+			ctx.Substitute(g.battleRecords(battle.RewardRecords(s.PartyCount()))))
+		return battle.WrapMessage(first)
+	case battle.VerdictLost:
+		before, after := battle.DefeatRecords(enemies)
+		line := g.battleRecords(before) + name + suffix + g.battleRecords(after)
+		return battle.WrapMessage(ctx.Substitute(line))
+	}
+	return nil
 }
 
 // battleRecords 把一串記錄號接成一段文字。原版是逐筆送進同一個緩衝區，
@@ -1963,6 +2003,8 @@ func main() {
 				st.Stage = battle.StageEncounter
 				quest.state = st
 				quest.bank = bank
+				quest.trans = trans
+				quest.english = *lang == "en"
 				quest.lines = nonEmptyLines(bank.Lines(town.BankUI,
 					battle.QuestCreaturesRecord))
 			}

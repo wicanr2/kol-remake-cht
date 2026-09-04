@@ -79,6 +79,7 @@ func NewUITranslations(koldata map[string]string) *UITranslations {
 }
 
 // Record 回傳某個文字庫某一筆記錄的譯文；沒有就回空字串。
+// 接收端可以是 nil——沒有譯文表就等於整份沒翻，由呼叫端退回原文。
 func (t *UITranslations) Record(bank string, index int) string {
 	if t == nil || t.Banks == nil {
 		return ""
@@ -136,6 +137,15 @@ func (t *Translations) UIRecord(index int) string {
 		return ""
 	}
 	return t.UI.Record(BankUI, index)
+}
+
+// UIBank 回傳這份譯文表的 UI 文字庫譯文；t 是 nil 時回 nil，
+// 讓呼叫端不必逐處判斷有沒有譯文。
+func (t *Translations) UIBank() *UITranslations {
+	if t == nil {
+		return nil
+	}
+	return t.UI
 }
 
 // TownName 回傳城鎮的譯名；沒有就回空字串。

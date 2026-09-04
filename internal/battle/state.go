@@ -89,11 +89,18 @@ type State struct {
 	Exec Execution
 	// Rand 是排規劃順序要用的亂數來源。
 	Rand Rand
+	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
+	// 所以這裡是一份不是一組。
+	Monster Monster
+	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠（RE-091）。
+	Verdict Verdict
+	Gold    int
 }
 
 // NewQuest 依任務地點的記錄擺好一場戰鬥。
 func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State {
-	s := &State{Site: site, Stage: StageIntro, Field: field, Party: party}
+	s := &State{Site: site, Stage: StageIntro, Field: field, Party: party,
+		Monster: monster}
 	s.Actors = make([]Actor, MaxActors)
 	for i := range s.Actors {
 		s.Actors[i].Side = SideEmpty

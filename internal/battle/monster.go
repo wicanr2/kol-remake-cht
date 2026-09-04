@@ -22,6 +22,13 @@ type Monster struct {
 	// AttackSkill／ParrySkill 是記錄 +0x17 起的兩個大端 16-bit；戰鬥再乘等級除以 5。
 	AttackSkill int `json:"attack_skill"`
 	ParrySkill  int `json:"parry_skill"`
+	// Gold 是打贏之後這一隻怪會掉多少金冠的骰式（記錄 +0x0F，RE-091）：
+	// 高 nibble 的低三位是骰數，低三位查骰面表。每一隻擲「骰數 ＋ 1」次。
+	Gold struct {
+		Raw   int `json:"raw"`
+		Rolls int `json:"rolls"`
+		Sides int `json:"sides"`
+	} `json:"gold"`
 	// Weapon 是手上那件武器（記錄 +0x20）；ArmourWeight 是三件護甲的重量和；
 	// Shield 是盾牌（記錄 +0x60），沒有就是 nil。
 	Weapon       *Item `json:"weapon"`

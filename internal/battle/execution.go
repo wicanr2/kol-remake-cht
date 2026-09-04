@@ -95,13 +95,20 @@ type Execution struct {
 // Step 做出下一手。原版每一手印一句訊息再等玩家按一個鍵（`sub_1B100(5)`），
 // 所以這裡一次只走一手；回報執行段是不是還沒走完。
 //
-// 走完之後自己收尾：隊伍全倒就結束這一場，否則排下一回合的規劃。
+// 走完之後自己收尾：數兩邊倒下的人，依 RE-091 的四個條件決定這一場的去向，
+// 沒分勝負才排下一回合的規劃。
 func (s *State) Step(rng Rand) (ActResult, bool) {
 	r, ok := s.Act(rng)
 	if !ok {
 		s.Exec.Text = nil
-		if s.PartyDown() {
+		switch v := s.RoundVerdict(); v {
+		case VerdictLost, VerdictWon:
+			s.Verdict = v
 			s.Stage = StageDone
+			if v == VerdictWon {
+				s.Gold = GoldReward(s.Monster.Gold.Rolls, s.Monster.Gold.Sides,
+					s.EnemyCount(), s.PartyCount(), rng)
+			}
 			return r, false
 		}
 		s.BeginPlanning(rng)
