@@ -38,6 +38,17 @@ type Slot struct {
 	// Equipment 是穿戴欄十格：部位 0…8 在角色記錄 0x100 + 16 × 部位，
 	// 部位 9（手上那件武器）在 0x30。空的那一格是 nil（RE-080）。
 	Equipment []*Item `json:"equipment"`
+	// Progress 是角色記錄 0x1DD 起那五格「已回報的任務數」（RE-107）。
+	Progress []int `json:"progress"`
+	// Carried 是交任務物品時要逐 byte 比的那十七格（RE-109）。typed 的
+	// Equipment 丟掉了原始位元組，比對用不上。
+	Carried []CarriedSlot `json:"carried"`
+}
+
+// CarriedSlot 是身上一格的原始十六 byte。Offset 是它在角色記錄裡的位移。
+type CarriedSlot struct {
+	Offset int    `json:"offset"`
+	Bytes  string `json:"bytes"`
 }
 
 // Item 是穿戴欄的一格，欄位名與商店的商品記錄相同（RE-075）。

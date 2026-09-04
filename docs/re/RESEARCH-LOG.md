@@ -6100,7 +6100,10 @@ RE-107 原本把 `byte_2FBFA` 對到 payload 0x36 之後看到 90／100／110／
 正對照才敢採信：同一批位元組用建築那一套 5-bit 名稱解碼器解得出
 `Long Spear`、`Barbut Helm`、`Platemail`、`Greatsword`，位移是對的。
 
-**還沒接進建築內那一層**：`town.Session` 進門那一步要先接上這份 `carried`。
+接線做完了：`roster.Slot` 多帶 `Progress` 與 `Carried`，`town.Candidate` 與
+`town.Member` 跟著帶，`Session.enter` 進門時呼叫 `turnInQuests`，結果放進
+`Session.TurnedIn`。**原版交付時不印任何訊息**，所以 remake 也不印，
+只把結果記下來讓上層決定要不要說。
 
 ### 還沒解的
 

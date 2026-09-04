@@ -1398,6 +1398,23 @@ func (g *game) battleStep() {
 	}
 }
 
+// townCarried 把角色檔裡身上那十七格的十六進位換成位元組，順序照抽取器給的
+// 位移由小到大——`town.CarriedOffsets` 是同一個順序（RE-109）。
+func townCarried(slots []roster.CarriedSlot) [][]byte {
+	if len(slots) == 0 {
+		return nil
+	}
+	out := make([][]byte, 0, len(slots))
+	for _, s := range slots {
+		raw, err := hex.DecodeString(s.Bytes)
+		if err != nil || len(raw) != town.CarriedStride {
+			raw = make([]byte, town.CarriedStride)
+		}
+		out = append(out, raw)
+	}
+	return out
+}
+
 // battleVerdictLines 是這一場結束時要印的那幾句（RE-091）。沒分勝負就回 nil，
 // 執行段照常排下一回合。
 //
@@ -2146,7 +2163,10 @@ func main() {
 					Gold: slot.Gold, BuildingID: slot.Building,
 					Quests: slot.Quests, Sheet: townSheet(slot.Sheet),
 					Worn: townWorn(slot.Equipment),
-					Spells: townSpells(slot.Spells)})
+					Spells: townSpells(slot.Spells),
+					// 任務交付要逐 byte 比，所以帶原始位元組（RE-109）。
+					Progress: slot.Progress,
+					Carried:  townCarried(slot.Carried)})
 			}
 			// 畫面樣本只寫隊伍有誰，錢包與所在地在角色檔裡——住宿與治療要花的
 			// 就是這一份錢（RE-073），所以照名字補齊。

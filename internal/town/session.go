@@ -60,6 +60,8 @@ type Session struct {
 	TownCode string
 	// Unimplemented 記下玩家選到但還沒實作的圖示，讓收據看得見。
 	Unimplemented []string
+	// TurnedIn 是這一次進門交出去的任務物品（RE-109）；沒有就是 nil。
+	TurnedIn []QuestTurnIn
 	// CJK 為真時是中文模式。角色資料頁的中文版面還沒做，選 MIRROR 只會記一筆，
 	// 不會開出一頁排錯的畫面。
 	CJK bool
@@ -361,6 +363,42 @@ func (s *Session) enter() {
 	if s.Topics != nil {
 		s.topic = s.Topics.Building(town, door.Index)
 	}
+	s.turnInQuests(door)
+}
+
+// turnInQuests 是進門時的任務交付（`sub_11A93:0x11B5A`，RE-109）：這一棟收任務
+// 物品的話，逐一看六名角色身上有沒有那件東西，有就換掉、旗標標成回報過、
+// 已回報數加一。**原版沒有為此印任何訊息**，所以這裡也不印，只把結果記下來
+// 讓上層決定要不要說。
+func (s *Session) turnInQuests(door *Door) {
+	s.TurnedIn = nil
+	q := door.Quest()
+	if q == nil {
+		return
+	}
+	for i := range s.Party {
+		slot, reported := s.Party[i].TurnInQuest(q)
+		if slot < 0 {
+			continue
+		}
+		s.TurnedIn = append(s.TurnedIn, QuestTurnIn{
+			Member: i, Slot: slot, Site: q.Site, Reported: reported,
+			Gave: q.Wants != nil, Name: door.QuestWants, Got: door.QuestGives})
+	}
+}
+
+// QuestTurnIn 是一次交付的結果。
+type QuestTurnIn struct {
+	// Member 是隊伍裡的第幾名；Slot 是身上的第幾格（索引與 CarriedOffsets 對齊）。
+	Member, Slot int
+	// Site 是這一棟收的任務編號；Reported 為真表示那名角色的旗標本來是「完成」，
+	// 所以這一次真的記進了「已回報數」。
+	Site     int
+	Reported bool
+	// Gave 恆為真（有交出東西才會有這一筆）；Name 是交出去的那件、Got 是換回來的。
+	Gave bool
+	Name string
+	Got  string
 }
 
 // Continue 是建築內按 SPACEBAR。有等著的下一段就先顯示它；沒有了才把圖示列

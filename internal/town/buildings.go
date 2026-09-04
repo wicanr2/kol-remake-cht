@@ -1,6 +1,7 @@
 package town
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -42,6 +43,35 @@ type Door struct {
 	Goods []Good `json:"goods"`
 	// Skills 是訓練建築教的四門技能（RE-076）。
 	Skills []TrainSkill `json:"skills"`
+	// 收任務物品那一組（RE-109）。`icon_flags[1]` 的 bit 2 開啟才有；
+	// QuestWantsBytes 是要收的那件物品十六 byte 的十六進位，
+	// QuestGivesBytes 是換給你的那件（沒有就是空字串）。
+	QuestSite       int    `json:"quest_site"`
+	QuestFinal      bool   `json:"quest_final"`
+	QuestWants      string `json:"quest_wants"`
+	QuestWantsBytes string `json:"quest_wants_bytes"`
+	QuestGives      string `json:"quest_gives"`
+	QuestGivesBytes string `json:"quest_gives_bytes"`
+}
+
+// QuestFlagBit 是 `icon_flags[1]` 裡「收任務物品」那一位（`sub_11A93:0x11B5A`）。
+const QuestFlagBit = 4
+
+// Quest 把一扇門的任務欄位換成規則層要的形狀；這一棟不收任務物品就回 nil。
+func (d *Door) Quest() *QuestBuilding {
+	if d.IconFlags[1]&QuestFlagBit == 0 || d.QuestWantsBytes == "" {
+		return nil
+	}
+	wants, err := hex.DecodeString(d.QuestWantsBytes)
+	if err != nil || len(wants) != CarriedStride {
+		return nil
+	}
+	out := &QuestBuilding{Site: d.QuestSite, Final: d.QuestFinal, Wants: wants}
+	if gives, err := hex.DecodeString(d.QuestGivesBytes); err == nil &&
+		len(gives) == CarriedStride {
+		out.Gives = gives
+	}
+	return out
 }
 
 // IsTrainer 回傳這棟建築有沒有 AWARD 的訓練（旗標 bit7）。

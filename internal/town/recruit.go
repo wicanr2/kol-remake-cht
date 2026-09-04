@@ -47,6 +47,10 @@ type Candidate struct {
 	Worn [WornSlots]*Good
 	// Spells 是角色記錄 0x200 起那十六筆法術裡非空的幾筆（RE-100）。
 	Spells []Spell
+	// Progress 是「已回報的任務數」那五格；Carried 是交任務物品要逐 byte 比的
+	// 那十七格（RE-107／RE-109）。
+	Progress []int
+	Carried  [][]byte
 }
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。
@@ -184,7 +188,8 @@ func (s *Session) joinSelected() {
 	s.Party = append(s.Party, Member{Name: c.Name, Portrait: c.Portrait,
 		Female: c.Female, Wounds: c.Wounds, Gold: c.Gold, Place: c.Place,
 		TownCode: c.Town, BuildingID: c.BuildingID, Sheet: c.Sheet,
-		Worn: c.Worn, Spells: c.Spells, Speaker: true})
+		Worn: c.Worn, Spells: c.Spells, Quests: c.Quests,
+		Progress: c.Progress, Carried: c.Carried, Speaker: true})
 	s.Inside.Party = s.Party
 	s.recruit, s.asking = nil, false
 	s.Inside.List = nil

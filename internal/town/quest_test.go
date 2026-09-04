@@ -139,3 +139,60 @@ func TestCanTakeFinal(t *testing.T) {
 		t.Fatal("群組界外不該開放")
 	}
 }
+
+// 進門時的交付：這一棟收的那件在誰身上就換誰的，旗標與已回報數跟著動。
+func TestSessionTurnInOnEnter(t *testing.T) {
+	want := []byte("SWORD-----------")
+	give := []byte("CLOAK-----------")
+	door := &Door{IconFlags: [2]int{0, QuestFlagBit}, QuestSite: 3,
+		QuestWants: "Truth Sword", QuestWantsBytes: hexOf(want),
+		QuestGives: "Flying Cloak", QuestGivesBytes: hexOf(give)}
+	if door.Quest() == nil {
+		t.Fatal("這一棟應該收任務物品")
+	}
+	// 沒有那一位就不算收任務物品。
+	plain := &Door{QuestWantsBytes: hexOf(want)}
+	if plain.Quest() != nil {
+		t.Fatal("旗標沒開就不該收")
+	}
+
+	s := &Session{Party: []Member{
+		{Name: "甲", Quests: make([]int, QuestFlagBytes), Progress: make([]int, 5),
+			Carried: carriedFixture(nil, -1)},
+		{Name: "乙", Quests: make([]int, QuestFlagBytes), Progress: make([]int, 5),
+			Carried: carriedFixture(want, 2)},
+	}}
+	SetQuestFlag(s.Party[1].Quests, 3, QuestDone)
+	s.turnInQuests(door)
+
+	if len(s.TurnedIn) != 1 {
+		t.Fatalf("應該只有一名交得出來，得到 %d", len(s.TurnedIn))
+	}
+	got := s.TurnedIn[0]
+	if got.Member != 1 || got.Slot != 2 || !got.Reported || got.Site != 3 {
+		t.Fatalf("交付結果不對：%+v", got)
+	}
+	if string(s.Party[1].Carried[2]) != string(give) {
+		t.Fatalf("那一格應該換成 %q", give)
+	}
+	if QuestFlag(s.Party[1].Quests, 3) != QuestReported {
+		t.Fatal("旗標應該變成回報過")
+	}
+	if s.Party[1].Progress[0] != 1 {
+		t.Fatalf("已回報數應該是 1，得到 %d", s.Party[1].Progress[0])
+	}
+	// 不收任務物品的建築什麼都不做。
+	s.turnInQuests(plain)
+	if s.TurnedIn != nil {
+		t.Fatal("不收任務物品的建築不該有交付紀錄")
+	}
+}
+
+func hexOf(b []byte) string {
+	const digits = "0123456789abcdef"
+	out := make([]byte, 0, len(b)*2)
+	for _, v := range b {
+		out = append(out, digits[v>>4], digits[v&0x0F])
+	}
+	return string(out)
+}

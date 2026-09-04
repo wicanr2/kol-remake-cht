@@ -41,6 +41,20 @@ type Member struct {
 	Worn [WornSlots]*Good `json:"worn,omitempty"`
 	// Spells 是角色記錄 0x200 起那十六筆法術（RE-100）；空的那一格不收進來。
 	Spells []Spell `json:"spells,omitempty"`
+	// Progress 是角色記錄 0x1DD 起那五格「已回報的任務數」（RE-107）。
+	Progress []int `json:"progress,omitempty"`
+	// Carried 是交任務物品時要逐 byte 比的那十七格，索引與 CarriedOffsets 對齊
+	// （RE-109）。typed 的 Worn／Backpack 丟掉了原始位元組，比對用不上。
+	Carried [][]byte `json:"carried,omitempty"`
+}
+
+// TurnInQuest 是這一名走進一棟收任務物品的建築時發生的事（RE-109）。
+// 回傳交出去的是第幾格（沒有就是 −1）與有沒有記進「已回報數」。
+func (m *Member) TurnInQuest(b *QuestBuilding) (slot int, reported bool) {
+	if b == nil {
+		return -1, false
+	}
+	return TurnIn(m.Carried, m.Quests, m.Progress, 0, *b)
 }
 
 // Inn 是旅店畫面的完整狀態。
