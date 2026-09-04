@@ -22,7 +22,9 @@ import idc
 
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 # 五個使用點各看前 0xA0、後 0x60 個 byte。
-USES = (0x11CC8, 0x145DC, 0x160CD, 0x167F6, 0x2B392)
+USES = (0x11CC8, 0x145DC, 0x160CD, 0x167F6, 0x2B392,
+        # `byte_2FBFA` 的另外兩個讀取點：接任務的入口與建築資訊。
+        0x1456D, 0x17328)
 BEFORE, AFTER = 0xA0, 0x60
 
 

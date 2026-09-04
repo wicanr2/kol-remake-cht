@@ -50,6 +50,13 @@ RAW_VALUES = {
     # 任務旗標的群組（`0x28F73`、`0x2B396`）。
     "word_2DF70": 0x2DF70,
 }
+# 這幾個要連 DGROUP 位移一起找（`mov cx, 位移` 之後拿 bx 當基底）。
+TARGETS_WITH_OFFSET = {
+    # 建築的任務編號與價錢那三格（RE-073／RE-107）。要知道它們是從 payload
+    # 的哪一格載入的，才敢把位移寫進抽取器。
+    "byte_2FBFA": 0x2FBFA,
+    "byte_2FBFC": 0x2FBFC,
+}
 
 
 def disassembly(ea: int) -> str:
@@ -75,8 +82,13 @@ def main() -> None:
 
     for name, v in RAW_VALUES.items():
         wanted[v] = name
+    for name, ea in TARGETS_WITH_OFFSET.items():
+        for delta in range(SPAN):
+            wanted[ea + delta] = name
+            wanted[ea + delta - DGROUP_EA] = name
 
-    hits = {name: [] for name in list(TARGETS) + list(RAW_VALUES)}
+    hits = {name: [] for name in
+            list(TARGETS) + list(RAW_VALUES) + list(TARGETS_WITH_OFFSET)}
     scanned = 0
     for func_ea in idautils.Functions():
         f = ida_funcs.get_func(func_ea)
@@ -112,6 +124,8 @@ def main() -> None:
         "functions_scanned": scanned,
         "targets": {k: f"0x{v:x}" for k, v in TARGETS.items()},
         "raw_values": {k: f"0x{v:x}" for k, v in RAW_VALUES.items()},
+        "targets_with_offset": {k: f"0x{v:x}"
+                                for k, v in TARGETS_WITH_OFFSET.items()},
         "hits": hits,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
