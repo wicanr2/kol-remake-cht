@@ -21,7 +21,7 @@
 | 訓練 | `Train` 的位階閘門與技能表 | 四門技能在建築 payload `0x50` 起（RE-076） | 訓練 6 對 | `town-train` 15 步 | 已對拍。**加技能與鍛造兩條路原版存檔走不到，只有靜態證據** |
 | 世界地圖、時刻與道路 | `internal/world` 的格子、次格、道路遮罩 | 城鎮記錄 16 組座標全部相同（RE-069）；循路一步扣 20 個時刻 | 野外 4 ＋ 時刻 4 ＋ 循路 10 ＋ 進城 7 對 | `world-road` 34 步、`world-clock` 28 步、`town-leave` 13 步、`town-round-trip` 20 步 | 已對拍。**雲層動畫列在 `not_claimed`**。隨機遭遇已實作（SPEC-011）：野外那兩條路徑因此**釘住亂數種子**，被伏擊就走不到終點——原版量測也一樣 |
 | 任務與戰鬥 | `internal/battle` 十九個測試檔 | 規劃、指令列、選目標、執行順序、移動、近戰結算、訊息鏈、敵人 AI、擊退、勝負、戰後結算、施法、射擊、任務旗標與逃走逐條反組譯（RE-079…104） | 任務與戰場 4 ＋ 執行段訊息 1 對 | `world-quest` 91 步；戰後結算 `battle-spoils/`、施法 `battle-spell/`、射擊 `battle-missile/`、逃走 `battle-flee/`（皆為觀察，非對拍） | SPEC-008／009／010 的已解出部分與 SPEC-012／013／014 READY。一場**雙向**打得完，戰後的冒險點數、金冠與戰利品清單都實跑過；敵人在近距離會射擊。**敵人的撤退與反制掃描、投擲、逃走之後掉東西未實作**；戰利品框的內部版面未對拍 |
-| 結局 | `internal/ending` 一個測試檔 | `sub_2B4A7` 逐段抄出圖號、記錄與矩形；四個版面全域換算出來的七組寬高與 RE-017 從像素數反推的完全吻合（RE-106） | 無 | `docs/verification/ending/` 七張（觀察，非對拍）、`player-path/full-chain-ending` 28 步 | SPEC-015 READY。**已接進玩家路徑**：交出最後一件任務那一刻已回報數 22→23，畫面直接換成結局，七張與 `-scene ending` 的收據逐 byte 相同。接任務那一側（`sub_14564`）還沒實作，所以那條路徑的存檔是工具造的 |
+| 結局 | `internal/ending` 一個測試檔 | `sub_2B4A7` 逐段抄出圖號、記錄與矩形；四個版面全域換算出來的七組寬高與 RE-017 從像素數反推的完全吻合（RE-106） | 無 | `docs/verification/ending/` 七張（觀察，非對拍）、`player-path/full-chain-ending` 1012 步 | SPEC-015 READY。**已接進玩家路徑**：任務戰鬥打完那一刻先看「這一場真的標到完成」再檢查已回報數等於 0x17，成立就播結局，七張與 `-scene ending` 的收據逐 byte 相同。要在遊戲裡累積到 23 件仍然不現實，所以那條路徑的存檔是工具造的 |
 | 圖像／主題 | production 抽取器逐張重讀，769 張 PNG 全部對上 visual probe 雜湊 | IDA consumer ＋ BIOS mode 0Dh | 80 張角色模板在 (208,106) 逐像素相同 | 由 `picture-cycle` 正常路徑取得對照 | SPEC-002 READY；首版 EGA-only |
 | 在地化／字型 | 兩套原版字型各 93 字模抽出並重生 | HUMAN 五字模逐 byte 命中壓縮 payload | 空白 New Character 頁 64,000 px 只差 31 px | 由正常路徑取得對照 | 中文字模表 **2,434 字**、缺字 0；安全矩形 **6,685 項**全過；UI 文字庫 **486 筆**譯文全過 `verify_ui_translation.py` |
 | 音訊 | 尚無 | 六個 executable 的 I/O 母體已窮舉；TITLE 的 WAV oracle 已取得 | 不適用 | 尚無 | **SPEC-004 仍 DRAFT，遊戲裡一個音都沒有**。卡在人耳驗收 |
@@ -38,7 +38,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 
 ## 正常玩家路徑
 
-`player-path/` 有十九份可重播收據。短路徑逐步存圖，要求每一步有可見效果、指定的
+`player-path/` 有二十份可重播收據。短路徑逐步存圖，要求每一步有可見效果、指定的
 檢查點與已通過對拍的截圖逐 byte 相同；四條走到底的長路徑改存狀態軌跡加檢查點截圖
 （`verify_full_path.py`），軌跡是遊戲自己報的狀態，不是從畫面猜的：
 
@@ -62,7 +62,8 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 | `full-chain` | 567 | 標題 → … → 出城 → 野外遇伏 → 四個回合打贏 → 回城 → 住一晚並存檔 |
 | `full-chain-reload` | 119 | 讀那份存檔 → 資料頁的金幣是住宿後的 158 → 出城 → 任務地點 → 參戰 |
 | `flow-quest` | 109 | 同一條 flow 路徑走到任務地點，兩張與已對拍的截圖逐 byte 相同 |
-| `full-chain-ending` | 28 | 交出最後一件任務 → 已回報數 22→23 → 結局七段（觀察，存檔是工具造的） |
+| `quest-take` | 25 | 用 MOUTH 問到關鍵字接下一個任務（沒有換過任何輸入） |
+| `full-chain-ending` | 1012 | 出城 → 打贏一場伏擊 → 最終任務的地點打完 → 結局七段（觀察，存檔與怪物是換過的） |
 
 尚未實作的功能會被記進 `flow.Unimplemented` 或 `battle.ActResult.Unimplemented`，
 不會默默吞掉。
