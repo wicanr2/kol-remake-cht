@@ -82,7 +82,10 @@ var cellFacing = [9]int{7, 0, 1, 6, 8, 2, 5, 4, 3}
 // NoFacing 是 cellFacing 的中心格：不是任何一個方向。
 const NoFacing = 8
 
-// Cell 是戰場上的一格；Row 是原版的 X（畫面的列）、Col 是 Y（畫面的欄）。
+// Cell 是戰場上的一格；Row 是畫面的列、Col 是畫面的欄。
+//
+// **與原版的軸是對調的**：原版參戰者記錄的 +0x1F 是欄、+0x20 是列（RE-095）。
+// remake 從抽取到繪製一致地轉置，所以畫面正確；讀原版的位移表時要記得換過來。
 type Cell struct{ Row, Col int }
 
 // CommandEnv 是組指令列要用到、但不在 Actor 或 Member 身上的三件事。

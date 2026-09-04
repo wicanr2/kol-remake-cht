@@ -1099,10 +1099,11 @@ func (g *game) battleStep() {
 		return
 	}
 	s := g.quest.state
-	// 同一手的第二句：攻擊命中時原版分兩句、各等一次鍵（RE-088）。
+	// 同一手還沒印完的下一句：攻擊命中分兩句，擊退成立還會再多一到兩句，
+	// 各等一次鍵（RE-088／RE-095）。
 	if len(s.Exec.Pending) > 0 {
-		s.Exec.Text = s.Exec.Pending
-		s.Exec.Pending = nil
+		s.Exec.Text = s.Exec.Pending[0]
+		s.Exec.Pending = s.Exec.Pending[1:]
 		return
 	}
 	// 這一場已經結束、勝負的兩句也印完了，就停在最後一句上，不要再往下走——
@@ -1141,7 +1142,7 @@ func (g *game) battleStep() {
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
 		// 移動成功那一句原版要按兩次：印完等一次、重畫戰場再等一次（RE-085）。
 		if r.Redraw {
-			s.Exec.Pending = s.Exec.Text
+			s.Exec.Pending = [][]string{s.Exec.Text}
 		}
 		return
 	}
@@ -1154,8 +1155,13 @@ func (g *game) battleStep() {
 		return
 	}
 	monster := r.Target >= 0 && s.Actors[r.Target].Member < 0
-	s.Exec.Pending = battle.WrapMessage(ctx.Substitute(
-		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster))))
+	s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
+		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster))))}
+	// 擊退或打暈那一句接在傷害之後（RE-095）。`|F` 指的還是被打的那一位。
+	if len(r.Knock) > 0 {
+		s.Exec.Pending = append(s.Exec.Pending, battle.WrapMessage(
+			ctx.Substitute(g.battleRecords(r.Knock))))
+	}
 }
 
 // battleVerdictLines 是這一場結束時要印的那幾句（RE-091）。沒分勝負就回 nil，
@@ -1179,8 +1185,8 @@ func (g *game) battleVerdictLines() []string {
 		ctx.Target = g.battleSpeaker(battle.PartySlots)
 		first := ctx.Substitute(g.battleRecords(battle.VictoryRecords())) + won + "!"
 		ctx.Number = s.Gold
-		s.Exec.Pending = battle.WrapMessage(
-			ctx.Substitute(g.battleRecords(battle.RewardRecords(s.PartyCount()))))
+		s.Exec.Pending = [][]string{battle.WrapMessage(
+			ctx.Substitute(g.battleRecords(battle.RewardRecords(s.PartyCount()))))}
 		return battle.WrapMessage(first)
 	case battle.VerdictLost:
 		before, after := battle.DefeatRecords(enemies)

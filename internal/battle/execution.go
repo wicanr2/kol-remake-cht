@@ -70,8 +70,16 @@ func MoveForm(style int) int {
 // CmdFlinch 是怯戰檢定沒過時被換上的指令碼（`0x2016A`）。
 const CmdFlinch = 0x0B
 
-// ring0 是環 0 的九個位移（RE-081）：八個方向照方向編號排，第 9 項是 (0, 0)，
-// 也就是自己站的那一格。Row 是原版的 X、Col 是 Y。
+// ring0 是環 0 的九個位移（RE-081），第 9 項是 (0, 0)——自己站的那一格。
+//
+// **座標軸與原版是對調的，別「修正」它**（RE-095）：原版參戰者記錄的 +0x1F 是
+// 欄、+0x20 是列，而 remake 的 `Actor.X` 是列（畫到畫面的垂直方向）、`Y` 是欄。
+// 抄環位移表時把原版的 X 欄放進了 `Row`、Y 欄放進 `Col`，剛好與座標軸的對調抵消，
+// 所以 **`ring0` 的索引在 remake 這邊等於方向編號**（0 是上、2 是右…）。
+//
+// 在原版那邊兩者是不同的：環索引 0 是「左」、方向編號 0 是「上」，中間差一個
+// `i = (6 − d) mod 8` 的映射。戰場格子陣列也一樣是轉置過的（RE-080），
+// 整條鏈一致，畫面因此正確——四對戰場對拍是它的證據。
 var ring0 = [9]Cell{
 	{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {0, 0},
 }
@@ -87,9 +95,10 @@ type Execution struct {
 	// Text 是現在顯示的那一句，已經展開代換碼並斷好行。battle 這一層不認得
 	// 文字庫，由呼叫端填（RE-086／RE-087）。
 	Text []string
-	// Pending 是同一手的下一句。攻擊命中時原版分兩句、各等一次鍵
-	// （`sub_26D76:0x2746A` 與 `sub_277F4:0x27B66`，RE-088）。
-	Pending []string
+	// Pending 是同一手還沒印完的幾句，一句等一次鍵。攻擊命中時原版分兩句
+	// （`sub_26D76:0x2746A` 與 `sub_277F4:0x27B66`，RE-088），擊退成立還會再多
+	// 一到兩句（RE-095），所以這裡是一個佇列而不是單獨一段。
+	Pending [][]string
 }
 
 // Step 做出下一手。原版每一手印一句訊息再等玩家按一個鍵（`sub_1B100(5)`），
@@ -204,6 +213,8 @@ type ActResult struct {
 	// Item 是這一手牽涉的物品名字。丟與撿都要它——原版印訊息時東西還在手上或
 	// 還在地上，remake 這邊做完才印，名字得另外帶出來（RE-094）。
 	Item string
+	// Knock 是擊退或打暈要接著印的幾個記錄（RE-095）；沒有就是 nil。
+	Knock []int
 	// Redraw 為真表示這一句之後原版會重畫戰場再等一次鍵
 	// （`sub_26384:0x265D5`，移動成功才有）。
 	Redraw bool
@@ -282,6 +293,10 @@ func (s *State) act(i int, rng Rand) ActResult {
 		outcome := Resolve(a, &s.Actors[target], a.Style, rng)
 		out.Target = target
 		out.Outcome = &outcome
+		// 命中就再判一次擊退（`0x27B77`）。落空或被擋下不判。
+		if !outcome.Miss && !outcome.Parried {
+			out.Knock = s.Knockback(i, target, rng)
+		}
 		return out
 	case CmdRest:
 		out.Message = RestingRecord

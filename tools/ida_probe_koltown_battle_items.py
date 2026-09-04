@@ -30,10 +30,13 @@ import idc
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 DGROUP_EA = 0x2DED0
 # 執行段的分派表。
-DISPATCH = (0x20150, 0x20660)
+DISPATCH = (0x27B60, 0x27E20)
 # `0x9D20` 是戰場上的物品格（`|H` 讀的那張表，RE-086／RE-091）。
 ITEM_TABLE = 0x9D20
-DUMP_BLOCKS = ((ITEM_TABLE, 0x40),)
+DUMP_BLOCKS = ((ITEM_TABLE, 0x40),
+               # 擊退用的三張表（RE-095）：相對位置 → 三個候選方向，
+               # 以及方向 → X／Y 位移。
+               (0x123A, 0x20), (0x0C1C, 0x14), (0x0C2C, 0x14))
 
 
 def disassembly(ea: int) -> str:
