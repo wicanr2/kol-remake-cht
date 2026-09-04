@@ -1,0 +1,66 @@
+{
+  "schema": "kol-ending-observation-v1",
+  "name": "ending",
+  "kind": "observation",
+  "description": "結局的七段（SPEC-015）。每一段一張 ENDPICS 加兩到三筆 ENDTXT，按一次鍵推一段。這一組是用 `-scene ending` 直接播的，**沒有走完整條玩家路徑**——觸發條件（角色記錄 `[0x1DD]` 等於 0x17）在原版的十四名角色身上全是 0，正常玩法要把任務做到最後才會成立。",
+  "not_claimed": [
+    {
+      "name": "與原版的畫面一致",
+      "reason": "原版沒有取到對應的畫格。圖的矩形由 `sub_2B4A7` 的四個全域抄出來，換算的寬高與 RE-017 從像素數反推的七組尺寸吻合，但字擺在哪一列沒有原版畫面可比。"
+    },
+    {
+      "name": "觸發條件走得通",
+      "reason": "`[0x1DD]` 那一格是誰寫的還沒解（RE-106），所以這一組是直接播結局，不是打到最後打出來的。"
+    }
+  ],
+  "command": "tools/run_kol_shots.sh 規格檔（-scene ending -shot-dir …）。每一段截一張，共七張。",
+  "size": [
+    320,
+    200
+  ],
+  "rights": "remake 自己畫的畫面；ENDPICS 的七張圖是已通過權利審查的原作衍生 PNG。",
+  "frames": [
+    {
+      "file": "panel-0.png",
+      "step": 0,
+      "shows": "第一段：最後一個敵人倒下，門後傳來機械的聲響。圖畫在 (8,13)、168×122，敘事從記錄 0 接到記錄 1——**兩筆要接成一整段再拆座標**，第二筆開頭那幾個字接在第一筆的最後位置。",
+      "sha256": "b7acdd5a6760776372b689b7b23b267cbd9ce9229edf5c38d9873eae3b29e86a"
+    },
+    {
+      "file": "panel-1.png",
+      "step": 1,
+      "shows": "第二段：隧道往下延伸，記錄 2 接 3。",
+      "sha256": "4a9cffedfc275f97bfa63f9a7753c2ac93f1fe5c30e27463e525186a39178a92"
+    },
+    {
+      "file": "panel-2.png",
+      "step": 2,
+      "shows": "第三段：最寬的一張（296×93），記錄 4 接 5。",
+      "sha256": "20a8e69dfb9625c1fb2d97e624744e7f9da37a0c7931bf4bea78717eb2fe0d27"
+    },
+    {
+      "file": "panel-3.png",
+      "step": 3,
+      "shows": "第四段：三筆記錄（6、7、8）接成一段。",
+      "sha256": "283d96b9f253ed7377b571e305e6534d7c98f0d4b48385bceb1dfd06fb44fa32"
+    },
+    {
+      "file": "panel-4.png",
+      "step": 4,
+      "shows": "第五段：記錄 9 接 0x0A。",
+      "sha256": "19fb742d992bd96377473336ffe84032d606d72288781db2dc77e4bbc7db675f"
+    },
+    {
+      "file": "panel-5.png",
+      "step": 5,
+      "shows": "第六段：三筆記錄（0x0B…0x0D），矩形的左欄是 0，貼著畫面左緣。",
+      "sha256": "03c502a7b1e131819fb706d617a7840b0f4145a1dd3dcf94b7688b21566bfc04"
+    },
+    {
+      "file": "panel-6.png",
+      "step": 6,
+      "shows": "第七段：結尾，三筆記錄（0x0E…0x10）。最後一句是「contemplating the end of one saga, and the beginning of another...」。",
+      "sha256": "75c5cf062f7f03bee08a51d8ff175ef9640edb842af7d815bbac51428ca53485"
+    }
+  ]
+}

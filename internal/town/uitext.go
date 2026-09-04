@@ -90,6 +90,30 @@ func UISegments(bank *UIText, tr *Translations, bankName string, index int) []Se
 	return bank.Segments(bankName, index)
 }
 
+// Raw 取一筆記錄的原文，**版面碼原樣保留**。要把連續幾筆接成一段再解析座標時
+// 得用它——原版是逐筆送進同一個緩衝區的（RE-088），第二筆開頭那幾個字接在第一筆
+// 的最後位置，不是新的一段。
+func (t *UIText) Raw(bank string, index int) string { return t.raw(bank, index) }
+
+// JoinedSegments 把幾筆記錄接成一整段再拆座標。tr 不是 nil 而且那一筆有譯文時
+// 用譯文，否則用原文——兩邊接在一起也不會壞，因為座標碼是同一套。
+func JoinedSegments(bank *UIText, tr *Translations, bankName string,
+	indexes []int) []Segment {
+	joined := ""
+	for _, i := range indexes {
+		if tr != nil {
+			if zh := tr.UIBank().Record(bankName, i); zh != "" {
+				joined += zh
+				continue
+			}
+		}
+		if bank != nil {
+			joined += bank.Raw(bankName, i)
+		}
+	}
+	return parseSegments(joined)
+}
+
 // RecordPadded 取一筆記錄但**保留前後空白**。原版有些欄位靠字串自帶的空白置中，
 // 例如野外標籤的 `"  DAWN ]"`，去掉空白就會往左移兩個字。
 func (t *UIText) RecordPadded(bank string, index int) string {

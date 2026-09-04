@@ -52,6 +52,9 @@ FEMALE_OFFSET, WOUNDS_OFFSET = 0x1A, 0x1B
 GOLD_OFFSET, GOLD_BYTES = 0x2A, 3
 # 任務旗標：六個 byte，一個 byte 塞四個 2-bit 欄位，對應 24 個任務地點（RE-079）。
 QUEST_OFFSET, QUEST_BYTES = 0x1E2, 6
+# 結局的判準：`[0x1DD + 群組]` 等於 0x17 就播（`sub_2B0FF:0x2B38F`，RE-106）。
+# 那一格是誰寫的還沒解，先原樣帶出來。
+PROGRESS_OFFSET, PROGRESS_BYTES = 0x1DD, 5
 # 穿戴欄：部位 0…8 在 0x100 + 16 × 部位，部位 9（手上那件武器）在 0x30，
 # 一格 16 byte，版面與商店的商品記錄相同（RE-075／RE-080）。
 WORN_SLOTS, WORN_STRIDE = 10, 16
@@ -253,6 +256,8 @@ def main() -> int:
                 data[base + BUILDING_OFFSET:base + BUILDING_OFFSET + 2], "big"),
             "quests": list(data[base + QUEST_OFFSET:
                                 base + QUEST_OFFSET + QUEST_BYTES]),
+            "progress": list(data[base + PROGRESS_OFFSET:
+                                  base + PROGRESS_OFFSET + PROGRESS_BYTES]),
             "sheet": character_sheet(data[base:base + SLOT_BYTES]) if name else None,
             # 穿戴欄是角色記錄自己的欄位，不屬於 MIRROR 資料頁，所以放在槽位這一層
             # （`internal/roster` 的 Slot.Equipment 就是照這個位置讀）。

@@ -25,6 +25,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/charcreate"
+	"github.com/wicanr2/kol-remake-cht/internal/ending"
 	"github.com/wicanr2/kol-remake-cht/internal/chardata"
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
@@ -59,9 +60,10 @@ const (
 	scenePlay       scene = "play"
 	sceneFlow       scene = "flow"
 	sceneWorld      scene = "world"
+	sceneEnding     scene = "ending"
 )
 
-var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay, sceneFlow, sceneWorld}
+var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay, sceneFlow, sceneWorld, sceneEnding}
 
 // lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
 type lcg struct{ state uint32 }
@@ -783,6 +785,11 @@ type game struct {
 	bookTarget   string // 動畫的目標畫面
 	bookLib      *assets.Library
 
+	// ending 是結局播到第幾段（RE-106）；endBank／endTrans 是敘事的文字庫與譯文。
+	ending    *ending.State
+	endBank   *town.UIText
+	endTrans  *town.Translations
+
 	scene    scene
 	portrait int
 	selected int
@@ -920,6 +927,25 @@ func (g *game) render() error {
 		}
 		g.canvas.Image().WritePixels(g.book.Image().Pix)
 		return nil
+	case sceneEnding:
+		// 結局：一段一張圖加兩三筆敘事，按一次鍵推一段（RE-106）。
+		var segs []town.Segment
+		if p := g.ending.Current(); p != nil {
+			// 一段的兩三筆要**接成一整段再拆座標**：第二筆開頭那幾個字接在第一筆
+			// 的最後位置，分開解析會把它當成新的一段畫到左上角（RE-106）。
+			// 英文模式不查譯文——小字型畫不出中文。
+			tr := g.endTrans
+			if g.cjk == nil {
+				tr = nil
+			}
+			segs = town.JoinedSegments(g.endBank, tr, ending.Bank, p.Records)
+		}
+		// 英文模式沒有 CJK 字型，敘事用小字型畫。
+		f := g.small
+		if g.cjk != nil {
+			f = g.cjk
+		}
+		return ui.Ending(g.canvas.Image(), g.sprites, f, g.ending, segs)
 	case sceneTitle:
 		bg, err := g.sprites.Get("BACKPICS", g.frame.Back)
 		if err != nil {
@@ -1036,6 +1062,14 @@ func (g *game) Update() error {
 	}
 	if g.scene == scenePlay && g.play != nil {
 		g.updatePlay()
+	}
+	if g.scene == sceneEnding && g.ending != nil {
+		// 每一段等一個鍵（原版 `sub_1B100(0)`，RE-106）。
+		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
+			inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
+			inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			g.ending.Advance()
+		}
 	}
 	if g.scene == sceneTitle && g.player != nil {
 		// 原版的等待單位是 BIOS tick；Ebitengine 固定 60 TPS，換算後推進播放器。
@@ -2393,7 +2427,25 @@ func main() {
 		os.Exit(1)
 	}
 
+	// 結局場景要自己載文字庫與譯文——它不經過城鎮那一條路（RE-106）。
+	var endBank *town.UIText
+	var endTrans *town.Translations
+	if scene(*sceneName) == sceneEnding {
+		var err error
+		if endBank, err = town.LoadUIText(*uiTextPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if endTrans, err = loadTranslations(*townI18nPath, *uiI18nPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
+
 	g := &game{
+		ending:       &ending.State{},
+		endBank:      endBank,
+		endTrans:     endTrans,
 		sprites:      &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
 		sequence:     sequence,
 		small:        small,
@@ -2603,6 +2655,15 @@ func main() {
 						os.Exit(2)
 					}
 				},
+			})
+		}
+	case scene(*sceneName) == sceneEnding && *shotDir != "":
+		// 結局是七段直線，每段等一個鍵（RE-106）：一段截一張。
+		for i := range ending.Panels {
+			g.jobs = append(g.jobs, shotJob{
+				name: fmt.Sprintf("panel-%d", i),
+				path: filepath.Join(*shotDir, fmt.Sprintf("panel-%d.png", i)),
+				apply: func() { g.ending.Advance() },
 			})
 		}
 	case *playScript != "":
