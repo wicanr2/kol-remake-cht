@@ -79,5 +79,5 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
       身上帶的東西都進存檔；戰鬥中途的狀態與世界時間還沒有。
       原版 `CHARDATA` 一律唯讀，匯入是離線工具）
 - [~] 原版／remake 同狀態截圖審查（283 對通過；音訊與未實作的部分沒有可審的畫面）
-- [~] 封包啟動 smoke（`dist-all/0.1.0/` 的 linux/amd64 與 windows/amd64 已由
+- [~] 封包啟動 smoke（`dist-all/0.1.1/` 的 linux/amd64 與 windows/amd64 已由
       `tools/verify_dist.sh` 驗過 manifest、授權與啟動；macOS 與 Windows 真機未驗）

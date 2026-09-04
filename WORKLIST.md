@@ -38,7 +38,7 @@
 | 任務與結局 | 8 | 85% | 任務觸發與怪物來源已解（RE-090）；完成的標記已解並實作（RE-101），帶著東西逃掉也算完成（RE-103）；**交付、回報與結局在正常路徑上實跑通過**（RE-106／107／109，`full-chain-ending`）：走進集會所交出最後一件，已回報數 22→23，七段結局與 `-scene ending` 的收據逐 byte 相同 | 接任務那一側（`sub_14564`）還沒做、任務一覽畫面（`sub_167D9`）、`[0xB926]` 那件東西是誰填的 |
 | 音訊 | 3 | 10% | 母體已普查，TITLE 的 WAV oracle 已取得 | SPEC-004 還是 DRAFT，一個音都還沒進遊戲 |
 | 繁體中文化 | 5 | 80% | 城鎮 1,938 則對話 ＋ 三個 UI 文字庫 486 筆全翻完，安全矩形 6,685 項全過、缺字 0；**ENDTXT 的譯文已接上結局畫面** | BOOKDATA 的譯文還沒接上書本；UI 譯文的框內版面還沒驗證 |
-| 發行打包 | 2 | 65% | `tools/build_dist.sh` 建出 `dist-all/0.1.0/` 三個包（linux/amd64 ＋ windows/amd64），`verify_dist.sh` 驗過 manifest、授權文件、release 的素材 deny-list 與**啟動** | Windows 沒有真機驗收；macOS 要 osxcross；推廣片還沒做 |
+| 發行打包 | 2 | 65% | `tools/build_dist.sh` 建出 `dist-all/0.1.1/` 三個包（linux/amd64 ＋ windows/amd64），`verify_dist.sh` 驗過 manifest、授權文件、release 的素材 deny-list 與**啟動** | Windows 沒有真機驗收；macOS 要 osxcross；推廣片還沒做 |
 
 加權總和 `3×0.95 + 10×0.85 + 18×0.90 + 9×0.95 + 25×0.90 + 7×0.60 + 10×0.75 +
 8×0.85 + 3×0.10 + 5×0.80 + 2×0.65 = 82.90`。
@@ -467,7 +467,7 @@ Windows 與 macOS 的封包要另外的工具鏈，推廣片還沒做；競技�
 - [ ] 完成最長繁中內容的視覺回歸、正常路徑截圖與輸入測試。
 - [ ] 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣。
 - [~] 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}`。
-  `tools/build_dist.sh` 已建出 `dist-all/0.1.0/` 的 linux/amd64 與 windows/amd64；
+  `tools/build_dist.sh` 已建出 `dist-all/0.1.1/` 的 linux/amd64 與 windows/amd64；
   macOS 要 osxcross，`promo/` 還沒有影片。
 - [~] 驗證每包啟動、manifest、SHA-256、授權、素材 deny-list、存檔位置與平台／架構。
   `tools/verify_dist.sh` 驗過 manifest、授權文件、release 的素材 deny-list 與啟動。
