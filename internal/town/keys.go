@@ -45,6 +45,22 @@ func (s *Session) Key(token string) bool {
 			s.OnLeaveTown(s.LeftGate)
 		}
 	}()
+	// 賭場的金額是打字，跟 MOUTH 一樣先攔下來。
+	if s.BettingAmount() {
+		switch token {
+		case "RET":
+			s.SubmitBet()
+			return true
+		case "BS":
+			s.BackspaceBet()
+			return true
+		}
+		if r := []rune(token); len(r) == 1 {
+			s.TypeBet(r[0])
+			return true
+		}
+		return false
+	}
 	switch {
 	case s.InArena():
 		switch token {

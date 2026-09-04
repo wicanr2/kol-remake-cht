@@ -251,16 +251,39 @@ func (s *Session) acceptInside() {
 	case s.arena != nil:
 		switch id {
 		case IconYes:
-			if s.arena.stage == arenaChoosing {
+			switch s.arena.stage {
+			case arenaChoosing:
 				s.ArenaChoose()
+			case arenaBetAsk:
+				s.pendingFight = s.BetAnswer(true)
+			case arenaBetWho:
+				s.BetChoose()
+			case arenaBetSide:
+				s.BetSide(true)
+			default:
+				s.pendingFight = s.ArenaAnswer(true)
+			}
+		case IconNo:
+			switch s.arena.stage {
+			case arenaBetAsk:
+				s.pendingFight = s.BetAnswer(false)
+			case arenaBetSide:
+				s.BetSide(false)
+			default:
+				s.pendingFight = s.ArenaAnswer(false)
+			}
+		case IconUTurn:
+			if s.arena.stage == arenaBetWho {
+				s.askBet()
 				return
 			}
-			s.pendingFight = s.ArenaAnswer(true)
-		case IconNo:
-			s.pendingFight = s.ArenaAnswer(false)
-		case IconUTurn:
 			s.LeaveArena()
 		case IconSpacebar:
+			// 賭場那幾句讀完要回去問「要不要下注」。
+			if s.arena.stage == arenaBetAsk && s.pending == nil {
+				s.askBet()
+				return
+			}
 			s.Continue()
 		}
 	case s.ShowingQuestList():
@@ -455,10 +478,20 @@ type QuestTurnIn struct {
 // Continue 是建築內按 SPACEBAR。有等著的下一段就先顯示它；沒有了才把圖示列
 // 換回這棟建築真正的那一列。
 func (s *Session) Continue() {
-	if s.Mode != ModeInside || s.Inside == nil || s.door == nil {
+	// 競技場不在建築裡，沒有 door——它的那幾句一樣要按鍵推進，所以 door 的檢查
+	// 放在它後面。
+	if s.Mode != ModeInside || s.Inside == nil {
 		return
 	}
 	if len(s.Inside.Icons) != 1 || s.Inside.Icons[0] != IconSprite(IconSpacebar) {
+		return
+	}
+	// 賭場那幾句讀完就回去問「要不要下注」（RE-108）。
+	if s.arena != nil && s.arena.stage == arenaBetAsk {
+		s.askBet()
+		return
+	}
+	if s.door == nil {
 		return
 	}
 	if s.pending != nil {

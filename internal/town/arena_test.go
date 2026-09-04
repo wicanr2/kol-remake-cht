@@ -79,9 +79,96 @@ func TestArenaChoose(t *testing.T) {
 	if s.Inside.List != nil {
 		t.Fatal("選到夠格的就該換成確認那一問")
 	}
-	fight := s.ArenaAnswer(true)
+	// 多人隊伍答應之後先換到賭場，答「不下注」才開打。
+	if s.ArenaAnswer(true) != nil {
+		t.Fatal("多人隊伍要先進賭場")
+	}
+	s.Continue()
+	fight := s.BetAnswer(false)
 	if fight == nil || fight.Member != 1 {
 		t.Fatalf("上場的是 %+v", fight)
+	}
+}
+
+// 下注：押他會贏是正值、押他會輸是負值；押到上場那一位或押第二次都會被擋。
+func TestArenaBetting(t *testing.T) {
+	s := &Session{Party: []Member{
+		arenaMember("上場", 0, 300),
+		arenaMember("押注", 3, 600),
+	}, Trans: &Translations{}, UIText: &UIText{}, Outdoor: &Outdoor{}}
+	s.Party[1].Gold = 50
+	s.EnterArena(&Inn{})
+	s.ArenaChoose() // 選第 0 名上場
+	s.ArenaAnswer(true)
+	s.Continue()
+	s.askBet()
+
+	// 押上場那一位會被擋。
+	s.BetAnswer(true)
+	s.Inside.List.Selected = 0
+	s.BetChoose()
+	if s.arena.stage != arenaBetAsk {
+		t.Fatal("押到上場那一位應該回去重問")
+	}
+
+	// 押另一位：金額 25，押他會贏。
+	s.askBet()
+	s.BetAnswer(true)
+	s.Inside.List.Selected = 1
+	s.BetChoose()
+	if !s.BettingAmount() {
+		t.Fatal("應該在打金額")
+	}
+	s.TypeBet('2')
+	s.TypeBet('5')
+	s.TypeBet('9') // 只收兩位
+	s.SubmitBet()
+	s.BetSide(true)
+	if got := s.ArenaBets()[1]; got != 25 {
+		t.Fatalf("押的是 %d", got)
+	}
+
+	// 同一位押第二次會被擋。
+	s.BetAnswer(true)
+	s.Inside.List.Selected = 1
+	s.BetChoose()
+	if s.arena.stage != arenaBetAsk {
+		t.Fatal("押第二次應該回去重問")
+	}
+}
+
+// 押他會輸是負值；金額超過錢包會被擋。
+func TestArenaBetSideAndPurse(t *testing.T) {
+	s := &Session{Party: []Member{
+		arenaMember("上場", 0, 300),
+		arenaMember("押注", 3, 600),
+	}, Trans: &Translations{}, UIText: &UIText{}, Outdoor: &Outdoor{}}
+	s.Party[1].Gold = 10
+	s.EnterArena(&Inn{})
+	s.ArenaChoose()
+	s.ArenaAnswer(true)
+	s.Continue()
+	s.askBet()
+	s.BetAnswer(true)
+	s.Inside.List.Selected = 1
+	s.BetChoose()
+	// 超過錢包。
+	s.TypeBet('9')
+	s.TypeBet('9')
+	s.SubmitBet()
+	if s.arena.stage != arenaBetAsk || s.ArenaBets()[1] != 0 {
+		t.Fatal("錢不夠不該押得成")
+	}
+	// 押他會輸。
+	s.askBet()
+	s.BetAnswer(true)
+	s.Inside.List.Selected = 1
+	s.BetChoose()
+	s.TypeBet('5')
+	s.SubmitBet()
+	s.BetSide(false)
+	if got := s.ArenaBets()[1]; got != -5 {
+		t.Fatalf("押他會輸應該是負值，得到 %d", got)
 	}
 }
 
@@ -96,5 +183,34 @@ func TestArenaWinAddsOneRank(t *testing.T) {
 	s.ArenaWin(0)
 	if s.Party[0].Sheet.Rank != 2 {
 		t.Fatalf("再打一場升成 %d", s.Party[0].Sheet.Rank)
+	}
+}
+
+// 戰後結算：打贏時押他會贏的人拿錢，打輸時整排先取負，押他會輸的人反而拿錢。
+func TestSettleBets(t *testing.T) {
+	newSession := func() *Session {
+		s := &Session{Party: []Member{
+			arenaMember("上場", 0, 300),
+			arenaMember("押贏", 3, 600),
+			arenaMember("押輸", 3, 600),
+		}, Trans: &Translations{}, UIText: &UIText{}, Outdoor: &Outdoor{}}
+		s.Party[1].Gold, s.Party[2].Gold = 100, 100
+		return s
+	}
+	bets := []int{0, 20, -30}
+
+	won := newSession()
+	lines := won.SettleBets(bets, true)
+	if won.Party[1].Gold != 120 || won.Party[2].Gold != 70 {
+		t.Fatalf("打贏之後的錢包是 %d／%d", won.Party[1].Gold, won.Party[2].Gold)
+	}
+	if len(lines) != 2 {
+		t.Fatalf("應該印兩句，得到 %d", len(lines))
+	}
+
+	lost := newSession()
+	lost.SettleBets(bets, false)
+	if lost.Party[1].Gold != 80 || lost.Party[2].Gold != 130 {
+		t.Fatalf("打輸之後的錢包是 %d／%d", lost.Party[1].Gold, lost.Party[2].Gold)
 	}
 }

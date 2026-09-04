@@ -523,6 +523,7 @@ func (g *game) startArenaFight() {
 	g.quest.lines = nonEmptyLines(g.arena.bank.Lines(town.BankUI,
 		battle.QuestCreaturesRecord))
 	g.arenaFighter = f.Member
+	g.arenaBets = f.Bets
 	g.play.LeaveArena()
 }
 
@@ -872,6 +873,8 @@ type game struct {
 	// 這一場不是競技場打的）。
 	arena        *arenaDeps
 	arenaFighter int
+	// arenaBets 是那一場的賭注，索引同隊伍。
+	arenaBets []int
 }
 
 // arenaDeps 是競技場開一場戰鬥要用到的東西，建構時湊齊。
@@ -1659,16 +1662,20 @@ func (g *game) battleStep() {
 			s.Stage = battle.StageSpoils
 			return
 		}
-		// 競技場那一場打贏就升一階（`0x21611`，RE-108）。一次只加一級。
+		// 競技場那一場的收尾（`0x21607`，RE-103／RE-108）：打贏升一階（一次一級），
+		// 接著結算賭金——輸掉那一場時整排先取負。
 		if g.arenaFighter >= 0 {
-			if s.Verdict == battle.VerdictWon {
-				if lines := g.play.ArenaWin(g.arenaFighter); len(lines) > 0 {
-					s.Exec.Text = lines
-					g.arenaFighter = -1
-					return
-				}
+			won := s.Verdict == battle.VerdictWon
+			var lines []string
+			if won {
+				lines = g.play.ArenaWin(g.arenaFighter)
 			}
-			g.arenaFighter = -1
+			lines = append(lines, g.play.SettleBets(g.arenaBets, won)...)
+			g.arenaFighter, g.arenaBets = -1, nil
+			if len(lines) > 0 {
+				s.Exec.Text = lines
+				return
+			}
 		}
 		// 這一場標到了任務完成，而且有人的已回報數正好是 0x17，就接結局
 		// （RE-106）。檢查在放開畫面之前，順序與原版相同。
