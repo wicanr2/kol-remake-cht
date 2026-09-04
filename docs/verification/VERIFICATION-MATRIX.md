@@ -38,7 +38,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 
 ## 正常玩家路徑
 
-`player-path/` 有二十一份可重播收據。短路徑逐步存圖，要求每一步有可見效果、指定的
+`player-path/` 有二十二份可重播收據。短路徑逐步存圖，要求每一步有可見效果、指定的
 檢查點與已通過對拍的截圖逐 byte 相同；四條走到底的長路徑改存狀態軌跡加檢查點截圖
 （`verify_full_path.py`），軌跡是遊戲自己報的狀態，不是從畫面猜的：
 
@@ -64,6 +64,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 | `flow-quest` | 109 | 同一條 flow 路徑走到任務地點，兩張與已對拍的截圖逐 byte 相同 |
 | `quest-take` | 34 | 按 MOUTH 打字問話，接下一個任務（沒有換過任何輸入） |
 | `quest-list` | 29 | 資料頁的任務一覽：回報過的任務排成八欄三列（觀察，存檔是換過的） |
+| `arena` | 2133 | 競技場：選人、打完、升一階（觀察，存檔是換過的） |
 | `full-chain-ending` | 1012 | 出城 → 打贏一場伏擊 → 最終任務的地點打完 → 結局七段（觀察，存檔與怪物是換過的） |
 
 尚未實作的功能會被記進 `flow.Unimplemented` 或 `battle.ActResult.Unimplemented`，
