@@ -451,76 +451,7 @@ func applyBattleToken(s *battle.State, token string, step func(*battle.State)) e
 }
 
 func applyPlayToken(s *town.Session, token string) error {
-	defer func() {
-		// 在城門選了 DOOR 就換到世界地圖。位置是這座城鎮該入城點在世界地圖上的座標。
-		if s.LeftTown && s.World != nil && !s.WorldEntered {
-			s.WorldEntered = true
-			s.OnLeaveTown(s.LeftGate)
-		}
-	}()
-	// 清單開著的時候方向鍵移動反白，不是走路——原版的清單也是吃上下鍵。
-	if s.Recruiting() {
-		switch token {
-		case "U":
-			s.MoveList(-1)
-			return nil
-		case "D":
-			s.MoveList(1)
-			return nil
-		}
-	}
-	if s.Shopping() {
-		switch token {
-		case "U":
-			s.MoveShop(-1)
-			return nil
-		case "D":
-			s.MoveShop(1)
-			return nil
-		}
-	}
-	if s.Training() {
-		switch token {
-		case "U":
-			s.MoveTrain(-1)
-			return nil
-		case "D":
-			s.MoveTrain(1)
-			return nil
-		case "1", "2", "3", "4", "5":
-			n, _ := strconv.Atoi(token)
-			s.TrainCount(n)
-			return nil
-		}
-	}
-	switch token {
-	case "L":
-		s.Walk(-1, 0)
-	case "R":
-		s.Walk(1, 0)
-	case "U":
-		s.Walk(0, -1)
-	case "D":
-		s.Walk(0, 1)
-	case "A":
-		s.Walk(-1, -1)
-	case "S":
-		s.Walk(1, -1)
-	case "Z":
-		s.Walk(-1, 1)
-	case "X":
-		s.Walk(1, 1)
-	case "<":
-		s.MoveCursor(-1)
-	case ">":
-		s.MoveCursor(1)
-	case "RET":
-		s.Accept()
-	case "SPACE":
-		s.Continue()
-	case "LISTEN":
-		s.Listen()
-	default:
+	if !s.Key(token) {
 		return fmt.Errorf("未知的城鎮操作 token：%q", token)
 	}
 	return nil
@@ -529,6 +460,11 @@ func applyPlayToken(s *town.Session, token string) error {
 // playToken 把腳本 token 交給目前掌管畫面的那個狀態機：人在城裡就是城鎮，
 // 走出城門之後就是野外。
 func (g *game) playToken(token string) error {
+	// 結局蓋在最上面：回報滿 0x17 件之後按鍵是翻結局的段落，不是走路（RE-106）。
+	if g.endingReached() {
+		g.ending.Advance()
+		return nil
+	}
 	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場，接著就是規劃段的指令列。
 	if g.quest != nil && g.quest.state != nil {
 		return applyBattleToken(g.quest.state, token, func(*battle.State) { g.battleStep() })
@@ -549,7 +485,38 @@ func savedParty(s *save.Save) []town.Member {
 			Wounds: m.Wounds, Gold: m.Gold, Place: m.Place,
 			TownCode: m.TownCode, BuildingID: m.BuildingID,
 			Renown: m.Renown, Spellcaster: m.Spellcaster, Speaker: m.Speaker,
+			Quests: append([]int(nil), m.Quests...),
+			Progress: append([]int(nil), m.Progress...),
+			Carried: decodeCarried(m.Carried),
 		})
+	}
+	return out
+}
+
+// decodeCarried 把存檔裡那十七格 hex 換回位元組；長度不對的一格當成空的。
+func decodeCarried(rows []string) [][]byte {
+	if len(rows) == 0 {
+		return nil
+	}
+	out := make([][]byte, 0, len(rows))
+	for _, row := range rows {
+		raw, err := hex.DecodeString(row)
+		if err != nil || len(raw) != town.CarriedStride {
+			raw = make([]byte, town.CarriedStride)
+		}
+		out = append(out, raw)
+	}
+	return out
+}
+
+// encodeCarried 是 decodeCarried 的反向。
+func encodeCarried(rows [][]byte) []string {
+	if len(rows) == 0 {
+		return nil
+	}
+	out := make([]string, 0, len(rows))
+	for _, row := range rows {
+		out = append(out, hex.EncodeToString(row))
 	}
 	return out
 }
@@ -642,6 +609,9 @@ func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
 			Wounds: m.Wounds, Gold: m.Gold, Place: m.Place,
 			TownCode: m.TownCode, BuildingID: m.BuildingID,
 			Renown: m.Renown, Spellcaster: m.Spellcaster, Speaker: m.Speaker,
+			Quests: append([]int(nil), m.Quests...),
+			Progress: append([]int(nil), m.Progress...),
+			Carried: encodeCarried(m.Carried),
 		})
 	}
 	// 存檔裡的發言者要明確：畫面上沒有標記時發言者就是隊長，寫進去也照這個規則，
@@ -650,6 +620,26 @@ func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
 		out.Party[i].Speaker = true
 	}
 	return out
+}
+
+// parseSteps 解析 `-shot-steps` 的步號清單。空字串回 nil，代表每一步都截。
+func parseSteps(spec string) (map[int]bool, error) {
+	if strings.TrimSpace(spec) == "" {
+		return nil, nil
+	}
+	out := map[int]bool{}
+	for _, part := range strings.Split(spec, ",") {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+		n, err := strconv.Atoi(part)
+		if err != nil {
+			return nil, fmt.Errorf("-shot-steps 的 %q 不是步號：%w", part, err)
+		}
+		out[n] = true
+	}
+	return out, nil
 }
 
 // parsePair 解析 `X,Y` 形式的參數。
@@ -751,6 +741,9 @@ type shotJob struct {
 	name  string
 	path  string
 	apply func()
+	// skip 為真時這一步不寫 PNG，只跑 apply 並記一筆軌跡。長路徑不需要
+	// 每一步都留一張圖，留下的是檢查點那幾張。
+	skip bool
 }
 
 type game struct {
@@ -798,6 +791,144 @@ type game struct {
 	jobs  []shotJob
 	jobAt int
 	drawn bool
+
+	// tracePath 是狀態軌跡的輸出檔；每截一張圖就記一筆目前站在哪一層、位置與階段。
+	// 截圖只證明畫面長什麼樣，軌跡才證明這一步走的是哪一個狀態機。
+	tracePath string
+	traceRows []map[string]any
+}
+
+// snapshot 記下這一步之後遊戲停在哪。欄位只取「能證明走到哪一層」的那幾個：
+// 場景、城鎮座標、世界座標與時刻、戰鬥階段、結局段號。
+func (g *game) snapshot() map[string]any {
+	row := map[string]any{}
+	switch {
+	case g.endingReached():
+		row["scene"] = string(sceneEnding)
+	case g.scene == sceneFlow && g.flow != nil:
+		row["scene"] = "flow:" + string(g.flow.Scene)
+	default:
+		row["scene"] = string(g.scene)
+	}
+	if g.play != nil {
+		x, y := g.play.Outdoor.PartyPosition()
+		town := map[string]any{"mode": int(g.play.Mode), "x": x, "y": y,
+			"town": g.play.Outdoor.Town, "left_town": g.play.LeftTown}
+		if g.play.Outdoor.AtDoorCell {
+			town["at_door"] = true
+		}
+		if g.play.Outdoor.AtEdge {
+			town["at_edge"] = true
+		}
+		if len(g.play.TurnedIn) > 0 {
+			town["turned_in"] = len(g.play.TurnedIn)
+		}
+		var party []any
+		for _, m := range g.play.Party {
+			row := map[string]any{"name": m.Name, "gold": m.Gold, "wounds": m.Wounds}
+			if len(m.Progress) > 0 {
+				row["reported"] = m.Progress[0]
+			}
+			if len(m.Quests) > 0 {
+				row["quests"] = m.Quests
+			}
+			carried := 0
+			for _, item := range m.Carried {
+				for _, b := range item {
+					if b != 0 {
+						carried++
+						break
+					}
+				}
+			}
+			row["carried"] = carried
+			party = append(party, row)
+		}
+		town["party"] = party
+		if d := g.play.Door(); d != nil {
+			door := map[string]any{"index": d.Index, "name": d.Name}
+			if q := d.Quest(); q != nil {
+				door["quest_site"] = q.Site
+				door["quest_final"] = q.Final
+				door["quest_wants"] = d.QuestWants
+			}
+			town["door"] = door
+		}
+		row["town"] = town
+	}
+	if g.worldState != nil && g.play != nil && g.play.LeftTown {
+		t := g.worldState.Travel
+		w := map[string]any{"x": t.X, "y": t.Y, "sub_x": t.SubX, "sub_y": t.SubY,
+			"time_index": g.worldState.TimeIndex}
+		if c := g.worldState.Clock; c != nil {
+			w["day"] = c.Day + 1
+			w["month"] = c.Month + 1
+			w["ticks"] = c.Ticks
+		}
+		if g.worldSession != nil {
+			w["mode"] = int(g.worldSession.Mode)
+			if g.worldSession.Camping {
+				w["camping"] = true
+			}
+			if g.worldSession.Quest != nil {
+				w["quest_prompt"] = true
+			}
+		}
+		row["world"] = w
+	}
+	if g.quest != nil && g.quest.state != nil {
+		st := g.quest.state
+		b := map[string]any{"stage": int(st.Stage), "round": st.Round.Number,
+			"prompt": int(st.Plan.Prompt), "verdict": int(st.Verdict),
+			"turn": st.Round.Turn, "order": len(st.Round.Order),
+			"cursor": st.Cursor, "bar": st.Plan.Bar, "selected": st.Plan.Selected,
+			"actors": len(st.Actors)}
+		if len(st.Exec.Text) > 0 {
+			b["exec_text"] = st.Exec.Text
+		}
+		b["cursor_cell"] = []int{st.Plan.Cursor.Row, st.Plan.Cursor.Col,
+			st.Plan.Cursor.Mode, st.Plan.Cursor.Icon}
+		var actors []any
+		for i := range st.Actors {
+			a := &st.Actors[i]
+			if a.Name == "" {
+				continue
+			}
+			actors = append(actors, map[string]any{"i": i, "name": a.Name,
+				"side": int(a.Side), "x": a.X, "y": a.Y, "down": a.Down(),
+				"head": a.Head, "chest": a.Chest, "injury": a.Injury()})
+		}
+		b["roster"] = actors
+		if st.Site != nil {
+			b["site"] = st.Site.Index
+			b["monster"] = st.Site.MonsterName
+		}
+		row["battle"] = b
+	}
+	if g.ending != nil {
+		row["ending"] = map[string]any{"panel": g.ending.Panel}
+	}
+	return row
+}
+
+// writeTrace 把整條軌跡寫出去。沒有指定 -trace 就什麼都不做。
+func (g *game) writeTrace() {
+	if g.tracePath == "" {
+		return
+	}
+	if err := os.MkdirAll(filepath.Dir(g.tracePath), 0o755); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return
+	}
+	raw, err := json.MarshalIndent(map[string]any{
+		"schema": "kol-play-trace-v1", "steps": g.traceRows}, "", "  ")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return
+	}
+	if err := os.WriteFile(g.tracePath, append(raw, '\n'), 0o644); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
 }
 
 // renderScene 用指定的場景跑一次既有的繪製分派，供 flow 借用。
@@ -858,6 +989,10 @@ func (g *game) render() error {
 	case sceneFlow:
 		return g.renderFlow()
 	case scenePlay:
+		// 最後一件任務回報掉之後畫的是結局（RE-106）。
+		if g.endingReached() {
+			return g.renderScene(sceneEnding)
+		}
 		if g.quest != nil && g.quest.state != nil {
 			if g.quest.state.Stage == battle.StageEncounter {
 				return ui.BattleEncounter(g.canvas.Image(), g.sprites, g.small,
@@ -1035,12 +1170,21 @@ func (g *game) Update() error {
 			return nil
 		}
 		job := g.jobs[g.jobAt]
-		if err := g.canvas.WritePNG(job.path); err != nil {
-			return err
+		if !job.skip {
+			if err := g.canvas.WritePNG(job.path); err != nil {
+				return err
+			}
+			fmt.Printf("%s %s\n", job.name, job.path)
 		}
-		fmt.Printf("%s %s\n", job.name, job.path)
+		if g.tracePath != "" {
+			row := g.snapshot()
+			row["step"] = g.jobAt
+			row["name"] = job.name
+			g.traceRows = append(g.traceRows, row)
+		}
 		g.jobAt++
 		if g.jobAt >= len(g.jobs) {
+			g.writeTrace()
 			return ebiten.Termination
 		}
 		if apply := g.jobs[g.jobAt].apply; apply != nil {
@@ -1077,6 +1221,28 @@ func (g *game) Update() error {
 		g.frame = g.player.Current()
 	}
 	return nil
+}
+
+// endingReached 回報隊上有沒有人把最後一件任務回報掉了（RE-106）。原版在交出
+// 任務物品那一步之後就檢查 `[bx+1DDh] == 0x17`，成立就播結局。
+func (g *game) endingReached() bool {
+	if g.play == nil || g.endBank == nil {
+		return false
+	}
+	party := make([][]int, 0, len(g.play.Party))
+	for _, m := range g.play.Party {
+		party = append(party, m.Progress)
+	}
+	return ending.AnyTriggered(party, 0)
+}
+
+// leftTown 回報這一次遊玩已經走出城門了——野外與戰鬥都算。flow 走到城鎮那一層
+// 之後就靠它把畫面與按鍵交給 `scenePlay` 那一條，整條路徑才貫得通。
+func (g *game) leftTown() bool {
+	if g.quest != nil && g.quest.state != nil {
+		return true
+	}
+	return g.play != nil && g.play.LeftTown
 }
 
 // renderFlow 依 flow 目前的畫面分派到既有的繪製函式。每一張都是已經對拍過的畫面，
@@ -1116,6 +1282,15 @@ func (g *game) renderFlow() error {
 		}
 		return ui.Inn(dst, g.sprites, g.small, g.large, g.flow.Inn)
 	case flow.SceneTown:
+		// 最後一件任務回報掉之後畫的是結局，不是城鎮（RE-106）。
+		if g.endingReached() {
+			return g.renderScene(sceneEnding)
+		}
+		// 走出城門之後就不是城鎮那一層了：野外與戰鬥借 `scenePlay` 的繪製，
+		// 那幾張都已經對拍過（RE-066…RE-079）。
+		if g.leftTown() {
+			return g.renderScene(scenePlay)
+		}
 		if g.flow.Town.Mode == town.ModeInside {
 			if g.strings != nil {
 				return ui.InnCJK(dst, g.sprites, g.cjk, g.strings, g.flow.Town.Inside)
@@ -1737,6 +1912,10 @@ func main() {
 	faithfulInn := flag.Bool("faithful-inn-stay", false,
 		"客棧住宿完全照原版：問「存到硬碟嗎」、角色離隊、隊伍空了問是否離開遊戲。"+
 			"與原版對拍時要打開")
+	tracePath := flag.String("trace", "",
+		"把每一步的狀態軌跡寫成 JSON：場景、城鎮／世界座標、戰鬥階段與結局段號")
+	shotSteps := flag.String("shot-steps", "",
+		"只在這幾步截圖（逗號分隔的步號）；長路徑用它留檢查點，其餘只記軌跡")
 	stringsPath := flag.String("strings", "docs/i18n/newchar-zh-Hant.json",
 		"中文 UI 字串表")
 	flag.Parse()
@@ -1968,7 +2147,10 @@ func main() {
 		}
 	}
 
-	if scene(*sceneName) == sceneWorld || scene(*sceneName) == scenePlay {
+	// 野外那一整套（地圖資料、天候、時刻、任務地點）也是 flow 走完城鎮之後要用的：
+	// 城門選 DOOR 之後接手畫面的就是它，少建起來 flow 就只會停在城牆邊。
+	if scene(*sceneName) == sceneWorld || scene(*sceneName) == scenePlay ||
+		scene(*sceneName) == sceneFlow {
 		data, err := world.LoadData(*worldPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -2188,6 +2370,14 @@ func main() {
 					}
 					if playSession.Party[i].Quests == nil {
 						playSession.Party[i].Quests = c.Quests
+					}
+					// 已回報的任務數同理：存檔帶了就用存檔的，
+					// 沒帶才照角色檔補（RE-107）。
+					if playSession.Party[i].Progress == nil {
+						playSession.Party[i].Progress = c.Progress
+					}
+					if playSession.Party[i].Carried == nil {
+						playSession.Party[i].Carried = c.Carried
 					}
 					// 身上穿的東西：存檔沒帶就照角色檔補（RE-080）。
 					empty := true
@@ -2448,9 +2638,11 @@ func main() {
 	}
 
 	// 結局場景要自己載文字庫與譯文——它不經過城鎮那一條路（RE-106）。
+	// 遊玩那兩條也要載：回報滿 0x17 件任務的那一刻要直接接上結局。
 	var endBank *town.UIText
 	var endTrans *town.Translations
-	if scene(*sceneName) == sceneEnding {
+	if scene(*sceneName) == sceneEnding || scene(*sceneName) == sceneFlow ||
+		scene(*sceneName) == scenePlay {
 		var err error
 		if endBank, err = town.LoadUIText(*uiTextPath); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -2486,6 +2678,7 @@ func main() {
 		worldSession: worldSessionState,
 		worldParty:   worldPartyState,
 		quest:        quest,
+		tracePath:    *tracePath,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
@@ -2631,19 +2824,44 @@ func main() {
 		g.flow = flow.New(g.roster, g.state, g.remove, innState, playSession)
 		if *shotDir == "" {
 			for _, token := range strings.Fields(*flowScript) {
+				if g.leftTown() || g.endingReached() {
+					if err := g.playToken(token); err != nil {
+						fmt.Fprintln(os.Stderr, err)
+						os.Exit(2)
+					}
+					continue
+				}
 				g.flow.Key(token)
 			}
 			g.jobs = []shotJob{{name: "flow", path: *shot}}
 			break
 		}
+		keep, err := parseSteps(*shotSteps)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(2)
+		}
 		g.jobs = append(g.jobs, shotJob{
-			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
+			name: "step-000", path: filepath.Join(*shotDir, "step-000.png"),
+			skip: keep != nil && !keep[0]})
 		for i, token := range strings.Fields(*flowScript) {
 			tok := token
 			g.jobs = append(g.jobs, shotJob{
-				name:  fmt.Sprintf("step-%03d", i+1),
-				path:  filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
-				apply: func() { g.flow.Key(tok) },
+				name: fmt.Sprintf("step-%03d", i+1),
+				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
+				skip: keep != nil && !keep[i+1],
+				apply: func() {
+					// 走出城門之後 flow 不再管事，token 交給遊玩那一條
+					// （野外、戰鬥與結局）。
+					if g.leftTown() || g.endingReached() {
+						if err := g.playToken(tok); err != nil {
+							fmt.Fprintln(os.Stderr, err)
+							os.Exit(2)
+						}
+						return
+					}
+					g.flow.Key(tok)
+				},
 			})
 		}
 	case *worldScript != "":
