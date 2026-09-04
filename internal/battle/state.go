@@ -184,6 +184,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			// 戰後結算讀的是記錄裡的原值，另外留一份（RE-096）。
 			BaseAttack: monster.AttackSkill, BaseParry: monster.ParrySkill,
 			GoldRoll: monster.Gold.Raw,
+			FleeAt:   monster.FleeAt, FleeRecover: monster.FleeRecover,
 			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
 			ShieldGrade: shieldGrade,
 			Threshold: Threshold(monster.Size, monster.Health)}

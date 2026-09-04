@@ -27,6 +27,11 @@ type Monster struct {
 	// 戰後的冒險點數用的是這裡的原值，不折算等級（RE-096）。
 	AttackSkill int `json:"attack_skill"`
 	ParrySkill  int `json:"parry_skill"`
+	// FleeAt／FleeRecover 是 AI 的兩個撤退門檻（記錄 +0x0D／+0x0E，RE-092）：
+	// 傷勢達到 FleeAt 就考慮撤退，撤退中降到 FleeRecover 以下就回到正常判斷。
+	// 不死系與元素系是 100／0——傷勢到不了 100，所以那幾隻永遠不撤退。
+	FleeAt      int `json:"flee_at"`
+	FleeRecover int `json:"flee_recover"`
 	// Gold 是打贏之後掉多少金冠的骰式（記錄 +0x0F，RE-091／RE-096）：
 	// 高 nibble 的低三位是骰數，低三位查骰面表，擲「骰數 ＋ 1」次。
 	// 原版只讀第一隻怪的骰式，同場其他怪的這一格沒有讀。

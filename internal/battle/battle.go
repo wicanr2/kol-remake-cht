@@ -92,9 +92,20 @@ type Actor struct {
 	// WeaponSpeed 是 `sub_24FD3` 算出來的 `word_37CF0`：執行段的鍵值要用它
 	// 折算指令的時間成本（RE-084）。
 	WeaponSpeed int
-	// Fatigue 是 +0x2D 的挨打累計；Parries 是這一回合已經招架幾次（+0x0F）。
+	// Fatigue 是 +0x2D：**從上一次輪到自己之後**挨的傷（`sub_26D76:0x2762E` 累加），
+	// 攻擊分數會扣掉它的 20 倍。Parries 是已經招架幾次（+0x0F），愈多擋得愈差。
+	// 兩個都在一手執行完的收尾清掉（`sub_1E3A8:0x20E64`）。
 	Fatigue int
 	Parries int
+	// LastHurt 是 +0x2A：上一手的 Fatigue，由那個收尾搬過來。敵人 AI 拿它判
+	// 「已經在撤退、而且這一手還在挨打」（RE-092）。
+	LastHurt int
+	// Retreating 是 +0x29：撤退狀態。傷勢達到 FleeAt 又沒有人貼著就設起來，
+	// 降到 FleeRecover 以下就清掉。
+	Retreating bool
+	// FleeAt／FleeRecover 是怪物記錄的兩個撤退門檻（+0x0D／+0x0E）。隊員那一側
+	// 留 0——原版的撤退判斷只跑在敵人身上。
+	FleeAt, FleeRecover int
 	// Intellect 是記錄 +0x0C。目前只有法術的效果 4 會動它（RE-100）。
 	Intellect int
 	// SpellPick 是選中的法術（+0x26，0…15）；Negative 是這一手要傷害還是治療

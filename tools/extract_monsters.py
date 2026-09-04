@@ -38,8 +38,15 @@ ALLOWED_OUTPUT_PARENT = pathlib.PurePosixPath("assets/original-derived-data")
 TABLE_PAYLOAD, FIRST_MONSTER_PAYLOAD, MONSTER_COUNT = 4, 5, 32
 TERRAIN_MASKS, SEASON_MASKS = 0x40, 0x60
 NIGHT_OFFSET, SEASON_COUNT, TERRAIN_COUNT = 0x20, 4, 8
-NAME_LIMIT = 24
-# 怪物記錄的屬性欄位（RE-080）。名稱欄固定 16 byte，屬性從 +0x11 起：
+# 名稱欄是 +0x00…+0x0C：長度一個 byte 加最多 12 個字元（最長的是 CLIFF TROLL）。
+NAME_LIMIT = 12
+# +0x0D／+0x0E 是 AI 的兩個撤退門檻（RE-092）：傷勢達到 +0x0D 就考慮撤退，
+# 撤退中降到 +0x0E 以下就回到正常判斷。傷勢是 `50 × 累積傷害 ÷ 昏迷門檻`。
+# 名字之後、+0x0F 之前那兩格就是它們——SKELETON、GOLEM、ZOMBIE 這些不死系是
+# `100 / 0`，也就是永遠不撤退。
+FLEE_AT_OFFSET, FLEE_RECOVER_OFFSET = 0x0D, 0x0E
+# 怪物記錄的屬性欄位（RE-080）。名稱欄是 +0x00…+0x0C（長度 ＋ 最多 12 個字元），
+# 屬性從 +0x11 起：
 # `sub_2215A` 把 +0x11…+0x16 搬進參戰者記錄的 +0x08…+0x0C，
 # `sub_21AC4` 另外用 +0x15 算昏迷門檻。
 STAT_OFFSETS = {"strength": 0x11, "quickness": 0x12, "foresight": 0x13,
@@ -119,6 +126,8 @@ def main() -> int:
             "season_mask": season,
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
             **{name: rec[off] for name, off in STAT_OFFSETS.items()},
+            "flee_at": rec[FLEE_AT_OFFSET],
+            "flee_recover": rec[FLEE_RECOVER_OFFSET],
             "gold": {
                 "raw": rec[GOLD_OFFSET],
                 "rolls": (rec[GOLD_OFFSET] // 16) & 7,
