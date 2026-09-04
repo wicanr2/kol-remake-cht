@@ -85,6 +85,14 @@ type Round struct {
 
 // BeginPlanning 依規劃鍵值排出這一回合誰先決定。空位排最後。
 func (s *State) BeginPlanning(rng Rand) {
+	// 排順序之前先跑一次法術倒數（`sub_1E3A8:0x20F01`）：過期的把屬性重算回原值，
+	// 因為規劃鍵值要用洞察，而洞察本身可能正被法術改著。
+	s.WoreOff = s.WoreOff[:0]
+	for i := range s.Actors {
+		if s.WearsOff(i) {
+			s.WoreOff = append(s.WoreOff, i)
+		}
+	}
 	keys := make([]int, len(s.Actors))
 	order := make([]int, 0, len(s.Actors))
 	for i, a := range s.Actors {

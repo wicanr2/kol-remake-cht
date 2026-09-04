@@ -95,6 +95,17 @@ type Actor struct {
 	// Fatigue 是 +0x2D 的挨打累計；Parries 是這一回合已經招架幾次（+0x0F）。
 	Fatigue int
 	Parries int
+	// Intellect 是記錄 +0x0C。目前只有法術的效果 4 會動它（RE-100）。
+	Intellect int
+	// SpellPick 是選中的法術（+0x26，0…15）；Negative 是這一手要傷害還是治療
+	// （+0x27，RE-100）；SpellTurns 是身上的法術還剩幾回合（+0x30），
+	// 倒數到 0 就把屬性重算回原值並印記錄 0x173。
+	SpellPick  int
+	Negative   bool
+	SpellTurns int
+	// Ward 是擋法術的那一格：敵人取怪物記錄 +0x1D、隊員取角色記錄 +0x28
+	// （`sub_22229` 決定看哪一份，RE-100）。
+	Ward int
 	// Style／Guard／Command 是這一回合選的攻擊選項（+0x23）、防禦選項（+0x24）
 	// 與指令碼（+0x25）。三個都由規劃段填：隊員從指令列選、敵人由 AI 填（RE-081）。
 	Style   int

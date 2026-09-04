@@ -217,6 +217,9 @@ type ActResult struct {
 	Item string
 	// Knock 是擊退或打暈要接著印的幾個記錄（RE-095）；沒有就是 nil。
 	Knock []int
+	// Cast 是施法打中之後的結果（RE-100）；沒施法或沒生效就是 nil。
+	// 訊息要用它接「The spell has a … effect.」那一句。
+	Cast *CastResult
 	// Redraw 為真表示這一句之後原版會重畫戰場再等一次鍵
 	// （`sub_26384:0x265D5`，移動成功才有）。
 	Redraw bool
@@ -327,11 +330,50 @@ func (s *State) act(i int, rng Rand) ActResult {
 	case CmdSwitch, CmdSwitchAlt1, CmdSwitchAlt2:
 		out.Message = s.SwitchItem(i)
 		return out
+	case CmdCast:
+		return s.cast(i, rng)
 	}
 	// 剩下的幾個指令碼。**撿（0x15）與丟（0x24）不會走到這裡**——執行段的分派只認
 	// 十個指令碼，那兩個不在其中，它們是規劃段的即時動作（RE-093）。真的落到這裡
 	// 表示規劃段漏接了，標成還沒實作，不假裝做過。
 	out.Unimplemented = true
+	return out
+}
+
+// cast 是施法那一手（`sub_2818D`，RE-100）。
+//
+// 目標由法術自己決定：`+0x0E` 的 bit 7 沒設就打施法者面對的那一格，設了就打規劃段
+// 選好的目標——**選目標格那一段還沒接上規劃**，所以這一版兩種都走面對的方向，
+// 差別記在 SPEC-012。
+//
+// 效果 6（指定部位）在原版要玩家挑一個部位，需要在執行段中間插一次互動；
+// remake 目前沒有那個機制，所以照原版「要選目標格的法術」那一條走隨機部位
+// （`0x2846F` 的 `rand(6) − 1`）。
+func (s *State) cast(i int, rng Rand) ActResult {
+	a := &s.Actors[i]
+	out := ActResult{Actor: i, Command: a.Command, Target: -1}
+	target := s.FacingTarget(i)
+	if target < 0 {
+		out.Message = NothingThereRecord
+		return out
+	}
+	area := -1
+	m := s.member(i)
+	if m != nil && a.SpellPick >= 0 && a.SpellPick < len(m.Spells) &&
+		m.Spells[a.SpellPick].Effect == SpellEffectArea {
+		area = rng.Roll(6) - 1
+	}
+	res := s.Cast(i, target, area, rng)
+	out.Target = target
+	switch res.Verdict {
+	case SpellNothingThere:
+		out.Message = NothingThereRecord
+	case SpellNoEffect:
+		out.Message = NoEffectRecord
+	default:
+		out.Message = CastsAtRecord
+		out.Cast = &res
+	}
 	return out
 }
 

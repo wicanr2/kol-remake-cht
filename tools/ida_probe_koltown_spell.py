@@ -29,9 +29,17 @@ import idc
 
 EXPECTED_SHA256 = "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
 DGROUP_EA = 0x2DED0
-FUNCS = (0x2818D,)
+FUNCS = (0x2818D, 0x265F3, 0x277F4,
+         # 施法用到的判斷與收尾：目標是隊員還是敵人、腿治好之後、找目標格兩支、
+         # 法術失效那一輪的兩支。
+         0x22229, 0x21D94, 0x24BB6, 0x24C35, 0x25D0F, 0x223C0)
 # 回合開始時印 0x173（法術失效）的那一段。
 WINDOWS = ((0x20F00, 0x20FA0),)
+# 想倒的 DGROUP 區塊（位移、長度）。
+DUMP_BLOCKS = (
+    (0x12A4, 8),   # 效果 1…8 → 參戰者記錄的欄位偏移
+    (0x00D4, 8),   # 骰面表（2 3 5 7 9 11 19 99），當驗證用
+)
 
 
 def disassembly(ea: int) -> str:
@@ -88,6 +96,8 @@ def main() -> None:
             "listing": [line(i) for i in idautils.FuncItems(ea)],
         } for ea in FUNCS if ida_funcs.get_func(ea) is not None},
         "windows": {f"0x{a:x}-0x{b:x}": window(a, b) for a, b in WINDOWS},
+        "blocks": {f"0x{off:04x}": (ida_bytes.get_bytes(DGROUP_EA + off, n) or b"").hex()
+                   for off, n in DUMP_BLOCKS},
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",

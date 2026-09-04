@@ -66,11 +66,18 @@ type Member struct {
 	// WeaponName 是手上那件武器的名字（`|E`）；BeltName 是 +0x190 那一格的
 	// 名字（`|I`）。
 	WeaponName, BeltName string
-	// HasSecondItem 是角色記錄 +0x190 非零；PackCount 是 0x200 起每 0x10 一筆、
-	// 十六筆之中非零的筆數。兩者的語意都還沒定（SPEC-010 末段），
-	// 這裡只當指令列的條件用。
+	// HasSecondItem 是角色記錄 +0x190 非零，語意還沒定（SPEC-010 末段）。
+	// PackCount 是 `Spells` 裡非空的筆數——**那十六筆是法術**（RE-100），
+	// 指令列因此在「有法術」時才放出施法那一格。
 	HasSecondItem bool
 	PackCount     int
+	// Intellect 是角色的智力（資料頁的 StatIntellect）。法術的效果 4 會動它。
+	Intellect int
+	// Spells 是角色記錄 0x200 起、每 16 byte 一筆、共十六筆的法術（RE-100）。
+	// `PackCount` 數的就是這一份裡非空的筆數。
+	Spells []Spell
+	// Ward 是角色記錄 +0x28，擋法術要用（RE-100）。
+	Ward int
 	// Pack 是背包六格的名字（角色記錄 0xA0 起，一格 16 byte，RE-075）。
 	// 空字串是空格。戰利品優先往這裡放。
 	Pack [BackpackSlots]string
@@ -111,6 +118,9 @@ type State struct {
 	SpoilItems []SpoilItem
 	// Spoil 是戰利品畫面的游標與清單。
 	Spoil SpoilScreen
+	// WoreOff 是這一回合法術剛好失效的參戰者（RE-100）：每一位要印一次
+	// 記錄 0x173。由 BeginPlanning 重填。
+	WoreOff []int
 	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，
 	// 打贏之後掉落的東西也放這裡（RE-091 的 `sub_289EE(0)`，還沒做）。
 	Ground [GroundSlots]GroundItem

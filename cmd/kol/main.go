@@ -116,6 +116,7 @@ func battleMember(m town.Member) battle.Member {
 	out.Strength = m.Sheet.Stats[town.StatStrength]
 	out.Quickness = m.Sheet.Stats[town.StatQuickness]
 	out.Nutrition = m.Sheet.Nutrition
+	out.Intellect = m.Sheet.Stats[town.StatIntellect]
 	// 手上那件武器（部位 9）與三件護甲、盾牌的重量：攻擊值、負重與骰子都要用。
 	if w := m.Worn[battle.WeaponSlot]; w != nil {
 		out.HasWeapon = true
@@ -1113,6 +1114,22 @@ func ambushLines(bank *town.UIText, trans *town.Translations, a *battle.Ambush,
 	return nonEmptyLines(out)
 }
 
+// battleWoreOffLines 是這一回合法術剛好失效的那幾句（記錄 0x173，RE-100）：
+// 一位一句，各等一次鍵。
+func (g *game) battleWoreOffLines() [][]string {
+	s := g.quest.state
+	if len(s.WoreOff) == 0 {
+		return nil
+	}
+	out := make([][]string, 0, len(s.WoreOff))
+	for _, i := range s.WoreOff {
+		ctx := battle.MessageContext{Actor: g.battleSpeaker(i), Lookup: g.battleRecord}
+		out = append(out,
+			battle.WrapMessage(ctx.Line(g.battleRecord(battle.WearsOffRecord))))
+	}
+	return out
+}
+
 // battleTakeSpoil 在戰利品清單按下確認：領走一件。背包塞不下的時候原版會說一句
 // （記錄 0x183），把它排進訊息區。
 func (g *game) battleTakeSpoil() {
@@ -1197,6 +1214,13 @@ func (g *game) battleStep() {
 		var ok bool
 		r, ok = s.Step(s.Rand)
 		if !ok {
+			// 新回合開始前，身上的法術先倒數一次；剛好過期的各印一句
+			// （記錄 0x173，RE-100）。
+			if lines := g.battleWoreOffLines(); len(lines) > 0 {
+				s.WoreOff = nil
+				s.Exec.Text, s.Exec.Pending = lines[0], lines[1:]
+				return
+			}
 			s.Exec.Text = g.battleVerdictLines()
 			return
 		}
@@ -1216,6 +1240,21 @@ func (g *game) battleStep() {
 		if r.Command == battle.CmdDrop {
 			ctx.Actor.Weapon = r.Item
 		}
+	}
+	// 施法那一手：`|S` 是法術的名字，生效之後再接一句「The spell has a … effect.」
+	// （RE-100）。
+	if r.Cast != nil {
+		if m := s.Member(r.Actor); m != nil && r.Actor >= 0 {
+			if a := s.Actors[r.Actor]; a.SpellPick >= 0 && a.SpellPick < len(m.Spells) {
+				ctx.Scratch = m.Spells[a.SpellPick].Name
+			}
+		}
+		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
+		before, after := battle.SpellEffectLine(r.Cast.Power,
+			s.Actors[r.Actor].Negative)
+		s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
+			g.battleRecords(before) + " " + g.battleRecords(after)))}
+		return
 	}
 	if r.Outcome == nil {
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
