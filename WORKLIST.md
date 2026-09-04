@@ -15,6 +15,7 @@
 | 圖像 theme | 已決策 | 2026-09-01：首版 EGA-only；CGA／Hercules 列後續選項 |
 | TITLE 音訊 | 候選資產待人耳驗收 | 規格近似合成已產出；時長與原版擷取差 0.6 ms；SPEC-004 仍 DRAFT |
 | GitHub | 已建立 | private：`wicanr2/kol-remake-cht`；`main` 已推送 |
+| 授權 | 已定案 | 2026-09-04：RRSAL-1.0，`LICENSE` 與 README 授權段已建立；發行包要帶條款那一項還沒做 |
 
 ## M0：專案建立
 
@@ -91,6 +92,12 @@
 - [ ] 建立測試，保證 remake runtime 只會讀 PNG 與 OGG，禁止讀原版 archive／EXE。
 - [ ] 分離本機、private-repo PNG 與可公開輸出；GitHub Release／公開 release deny-list
   預設失敗即關閉，並檢查 repo visibility 未被改成 public。
+- [x] 授權條款：RRSAL-1.0（`LICENSE` 整份 ＋ README 授權段）。灰色地帶依本 repo
+  實際內容逐項寫明（原版衍生 PNG、原版執行畫面截圖、譯文裡的原版英文字串、
+  中文說明書譯文、由原版量測的位址與數值表），第三方是 Noto Sans CJK TC（OFL 1.1）
+  與 Ebitengine。
+- [ ] 打包時把 `LICENSE` 複製進每一個發行包與 `dist-all/<版本>/` 的根目錄——
+  拿到 tar.gz 的人看不到儲存庫，包裡沒有條款就等於沒被授權（`rulebook/85`）。
 
 完成條件：從固定雜湊原版可重生 PNG／OGG；runtime 格式守門全綠；權利分類齊全。
 

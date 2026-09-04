@@ -2248,3 +2248,31 @@ The blow hits The BINDERAK's chest killing it instantly!
 執行段的畫面**一張都還沒對過**。`world-quest-run1` 那一輪 oracle 的按鍵序列停在
 規劃與戰場之間，沒有原版畫格可比。要對得照這一輪走過的路徑另錄一輪
 （`tools/run_character_ui_oracle.sh`），已列為下一個唯一工作。
+
+## 2026-09-04（續四）：授權條款
+
+- 本專案先前**沒有 `LICENSE` 檔**，README 也沒有授權段——等於未授權。已依
+  `rulebook/85` 的定案（2026-08-28 裁定、2026-09-03 定名）建立 RRSAL-1.0。
+- `LICENSE` 由 `~/.claude/knowledge-base/retro/rrsal-1.0.md` 的範本整份複製，
+  只換占位符；條款本文十三條一字未改（改字就是新版號）。中英雙語 327 行。
+- 灰色地帶（第 2 條）照本 repo 實際有什麼逐項寫：`assets/original-derived-png/`
+  的重生 PNG、`docs/verification/` 的原版執行畫面截圖與收據、`docs/i18n/` 裡作為
+  對照保留的原版英文字串、`docs/manual/` 的中文說明書譯文，以及 `docs/re/`／
+  `docs/spec/` 中由原版量測得出的位址、偏移、座標與數值表。
+- 第三方：Noto Sans CJK TC（SIL OFL 1.1，中文點陣字模由它烘製）與 Ebitengine
+  及其相依套件。
+- 原權利人寫成「Origin Systems 及其權利繼受人」。Origin 1992 年被 Electronic Arts
+  併購，但這一款的權利現況沒有查證，所以不點名 EA。
+- README 加了「授權、致謝與聲明」段，明寫**這不是開源授權**（source-available）、
+  非商業免費、實況與平台分潤明示允許、商業要洽談，以及授權範圍不含原版素材。
+
+### 順帶更正
+
+README 的現況段還寫著「訓練、戰鬥與任務都還沒實作」。訓練在 RE-076 就做完了，
+戰鬥這幾輪也已經走得完一輪並打得死怪物。已改寫成現況。
+
+### 還沒做
+
+`rulebook/85` 要求授權出現在四個地方，目前只有兩個（repo `LICENSE`、README）。
+另外兩個是「每一個發行包裡」與「發行根目錄」——`dist-all/` 還沒建立，
+打包腳本要記得複製，已列進 WORKLIST 的 M6。
