@@ -20,6 +20,16 @@ if [ ! -x "$REPO_ROOT/$BIN" ]; then
   echo "找不到 $BIN，先跑 tools/go_docker.sh build -o $BIN ./cmd/kol" >&2
   exit 2
 fi
+# 執行檔比原始碼舊就拒絕跑。這一支的用途是「同一條腳本跑很多次」，而探索期間
+# **改了 Go 卻忘記重編**的結果不是錯誤訊息，是一整批看起來正常、其實跑的是舊行為
+# 的輸出——真正發現時已經照它下了好幾個結論。
+STALE="$(find "$REPO_ROOT/cmd" "$REPO_ROOT/internal" -name '*.go' \
+  -newer "$REPO_ROOT/$BIN" -print -quit 2>/dev/null || true)"
+if [ -n "$STALE" ]; then
+  echo "$BIN 比原始碼舊（$STALE 在它之後改過），先重編：" >&2
+  echo "  tools/go_docker.sh build -o $BIN ./cmd/kol" >&2
+  exit 2
+fi
 SPECS="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 
 exec timeout "${KOL_GO_TIMEOUT:-1800}" docker run --rm \

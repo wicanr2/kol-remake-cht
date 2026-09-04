@@ -1,49 +1,49 @@
 {
-  "schema": "kol-battle-missile-observation-v1",
-  "name": "battle-missile",
-  "kind": "observation",
-  "description": "射擊整條路徑（SPEC-013）。Warder 從城 7 出城往東走九十步被伏擊，第一回合就選指令列上的射擊那一格、把游標往右下移一格當目標，執行段依序印出敵人射中 Warder 與 Warder 射進樹裡。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
-  "not_claimed": [
-    {
-      "name": "與原版的畫面一致",
-      "reason": "原版沒有取到對應的畫格。這一組只證明 remake 這條路徑走得通、彈道停得下來、訊息接得起來。"
-    },
-    {
-      "name": "射中敵人那一條",
-      "reason": "這一次的目標格是空地，線上先撞到樹。射中的結算由 enemy-fires／blow-hits 兩張涵蓋——敵我兩側走的是同一支 `ResolveMissile`。"
-    }
-  ],
-  "command": "tools/run_kol_shots.sh 規格檔（-scene play -seed 141421 -load workplace/saves/warder.json，存檔由 tools/import_original_characters.py --names Warder 產生）。腳本是 102 步的前段（R R U×9 RET R×70 U×13 RET SPACE，與 battle-spell 同一段）接「> RET X RET RET」再按十二次空白鍵。",
-  "seed": 141421,
-  "size": [
-    320,
-    200
-  ],
-  "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
-  "frames": [
-    {
-      "file": "aim.png",
-      "step": 105,
-      "shows": "選好目標格：指令列換成 YES 與 U-TURN，白框是 mode 2 的游標（`[0x1A74]`／`[0x1B36]`，RE-081），這一次往右下移了一格。",
-      "sha256": "a93d5180620618b684934086c1eaabb0c10ed24049f17735c4cc1fecf6aa03b4"
-    },
-    {
-      "file": "enemy-fires.png",
-      "step": 109,
-      "shows": "THE BINDERAK FIRES A MISSLE AT WARDER WHO CANNOT PARRY THE BLOW!——敵人 AI 的射擊分支（RE-104）：它在環 1／2 上看得見就射，而且不必先花一回合上弦。",
-      "sha256": "e20af4a226f5752ed64b88fb9a75be5c12ee598daa06cfeae5466edb6fa91e55"
-    },
-    {
-      "file": "blow-hits.png",
-      "step": 110,
-      "shows": "THE BLOW HITS WARDER'S RIGHT ARM CAUSING A SERIOUS WOUND!——射中之後的傷害那一句，與近戰共用同一條鏈（RE-088）。",
-      "sha256": "99651a369f0dc87a5567b5e7abd266504ffb6520502588f05aa76542c7113380"
-    },
-    {
-      "file": "into-tree.png",
-      "step": 111,
-      "shows": "WARDER FIRES A MISSLE INTO A TREE!——彈道撞在樹上停下（記錄 0x121 ＋ 0x122，`word_30A74 == 1`）。命中值扣掉 0x23 之後不夠，就停在那一格。",
-      "sha256": "0d7db491fefe3f1cf68b253e9c7aab7492b76ef2792896e05a9ca475ae26c16b"
-    }
-  ]
+ "schema": "kol-battle-missile-observation-v1",
+ "name": "battle-missile",
+ "kind": "observation",
+ "description": "射擊整條路徑（SPEC-013）。Warder 從城 7 出城往東走九十步被伏擊，第一回合就選指令列上的射擊那一格、把游標往右下移一格當目標，執行段依序印出敵人射中 Warder 與 Warder 射進樹裡。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到對應的畫格。這一組只證明 remake 這條路徑走得通、彈道停得下來、訊息接得起來。"
+  },
+  {
+   "name": "射中敵人那一條",
+   "reason": "這一次的目標格是空地，線上先撞到樹。射中的結算由 enemy-fires／blow-hits 兩張涵蓋——敵我兩側走的是同一支 `ResolveMissile`。"
+  }
+ ],
+ "command": "tools/run_kol_shots.sh docs/verification/battle-missile/replay.spec（換過的輸入先用 tools/make_observation_inputs.py 與 tools/import_original_characters.py 重生）",
+ "seed": 141421,
+ "size": [
+  320,
+  200
+ ],
+ "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+ "frames": [
+  {
+   "file": "aim.png",
+   "step": 100,
+   "shows": "選好目標格：指令列換成 YES 與 U-TURN，白框是 mode 2 的游標（`[0x1A74]`／`[0x1B36]`，RE-081），這一次往右下移了一格。",
+   "sha256": "a93d5180620618b684934086c1eaabb0c10ed24049f17735c4cc1fecf6aa03b4"
+  },
+  {
+   "file": "enemy-fires.png",
+   "step": 104,
+   "shows": "THE BINDERAK FIRES A MISSLE AT WARDER WHO CANNOT PARRY THE BLOW!——敵人 AI 的射擊分支（RE-104）：它在環 1／2 上看得見就射，而且不必先花一回合上弦。",
+   "sha256": "e20af4a226f5752ed64b88fb9a75be5c12ee598daa06cfeae5466edb6fa91e55"
+  },
+  {
+   "file": "blow-hits.png",
+   "step": 105,
+   "shows": "THE BLOW HITS WARDER'S RIGHT ARM CAUSING A SERIOUS WOUND!——射中之後的傷害那一句，與近戰共用同一條鏈（RE-088）。",
+   "sha256": "99651a369f0dc87a5567b5e7abd266504ffb6520502588f05aa76542c7113380"
+  },
+  {
+   "file": "into-tree.png",
+   "step": 106,
+   "shows": "WARDER FIRES A MISSLE INTO A TREE!——彈道撞在樹上停下（記錄 0x121 ＋ 0x122，`word_30A74 == 1`）。命中值扣掉 0x23 之後不夠，就停在那一格。",
+   "sha256": "0d7db491fefe3f1cf68b253e9c7aab7492b76ef2792896e05a9ca475ae26c16b"
+  }
+ ]
 }

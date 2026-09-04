@@ -89,9 +89,11 @@ func TestEnemyMoveFormZeroesSprintWhenLegsAreFine(t *testing.T) {
 func TestAdvanceToPartyPlansTheEnemy(t *testing.T) {
 	s := &State{Rand: &fixedRand{values: []int{2, 3, 5, 7}}, Actors: []Actor{
 		{Side: SideParty, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
-			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2},
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
 		{Side: SideMonster, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100,
-			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2},
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
 	}}
 	// 敵人先動：順序裡把它排在前面。
 	s.Round.Order = []int{1, 0}
@@ -113,7 +115,8 @@ func TestPlanEnemyTargetsTheAdjacentMember(t *testing.T) {
 	s := &State{Actors: []Actor{
 		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
 		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
-			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2},
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
 	}}
 	// Roll 一律回 2：找目標的起點固定，1/3 那一擲回 2 所以不會放棄攻擊。
 	d := s.PlanEnemy(1, &fixedRand{values: []int{2}})
@@ -136,7 +139,8 @@ func TestPlanEnemyTargetsTheAdjacentMember(t *testing.T) {
 func TestPlanEnemyMovesWhenNobodyIsAround(t *testing.T) {
 	s := &State{Actors: []Actor{
 		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
-			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2},
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
 	}}
 	d := s.PlanEnemy(0, &fixedRand{values: []int{2}})
 	if d.Command != CmdMove {
@@ -154,7 +158,8 @@ func TestEnemyClosesInThenAttacks(t *testing.T) {
 		Actors: []Actor{
 			{Side: SideParty, X: 10, Y: 10, Head: 10, Chest: 10, Threshold: 100},
 			{Side: SideMonster, X: 15, Y: 10, Head: 10, Chest: 10, Threshold: 100,
-				RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2},
+				RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
 		}}
 	// Roll 一律回 2：找目標的起點固定，而且 1/3 那一擲不會中，敵人每回合都往前走。
 	rng := &fixedRand{values: []int{2}}
@@ -190,7 +195,8 @@ func TestPlanEnemyShootsFromRange(t *testing.T) {
 			{Side: SideParty, X: 10, Y: 10, Head: 10, Chest: 10, Threshold: 100},
 			{Side: SideMonster, Kind: 3, X: 10, Y: 12, Head: 10, Chest: 10,
 				Threshold: 100, RightArm: 10, LeftArm: 10,
-				RightLeg: 10, LeftLeg: 10, Level: 2},
+				RightLeg: 10, LeftLeg: 10, Level: 2,
+				FleeAt: 65, FleeRecover: 35},
 		}}
 	}
 	s := newState()

@@ -297,7 +297,11 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		if a.Side == SideEmpty || a.Down() {
 			continue
 		}
-		return s.act(i, rng), true
+		out := s.act(i, rng)
+		// 一手做完的收尾（`sub_1E3A8:0x20E64`）：這一手挨的傷搬進 +0x2A，
+		// 挨傷計數與招架次數歸零——兩格都是「這一手」的計數，不是整場的。
+		a.LastHurt, a.Fatigue, a.Parries = a.Fatigue, 0, 0
+		return out, true
 	}
 	return ActResult{}, false
 }

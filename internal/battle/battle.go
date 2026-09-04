@@ -98,7 +98,7 @@ type Actor struct {
 	Fatigue int
 	Parries int
 	// LastHurt 是 +0x2A：上一手的 Fatigue，由那個收尾搬過來。敵人 AI 拿它判
-	// 「已經在撤退、而且這一手還在挨打」（RE-092）。
+	// 「已經在撤退、而且這一手還在挨打」（RE-081）。
 	LastHurt int
 	// Retreating 是 +0x29：撤退狀態。傷勢達到 FleeAt 又沒有人貼著就設起來，
 	// 降到 FleeRecover 以下就清掉。

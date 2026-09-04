@@ -27,7 +27,7 @@ type Monster struct {
 	// 戰後的冒險點數用的是這裡的原值，不折算等級（RE-096）。
 	AttackSkill int `json:"attack_skill"`
 	ParrySkill  int `json:"parry_skill"`
-	// FleeAt／FleeRecover 是 AI 的兩個撤退門檻（記錄 +0x0D／+0x0E，RE-092）：
+	// FleeAt／FleeRecover 是 AI 的兩個撤退門檻（記錄 +0x0D／+0x0E，RE-081）：
 	// 傷勢達到 FleeAt 就考慮撤退，撤退中降到 FleeRecover 以下就回到正常判斷。
 	// 不死系與元素系是 100／0——傷勢到不了 100，所以那幾隻永遠不撤退。
 	FleeAt      int `json:"flee_at"`

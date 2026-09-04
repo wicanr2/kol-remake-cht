@@ -3,7 +3,7 @@
 
 `.i64` 沒有把 DGROUP 全部倒成有內容的 `db`，但初始化資料本來就在執行檔裡——
 只要知道 DGROUP 在檔案裡的起點就讀得到。起點用一張**已知內容**的表定位：任務旗標
-的除數表（DGROUP `0x7C` = `01 04 10 40`，RE-105）在檔內只出現一次。
+的除數表（DGROUP `0x7C` = `01 04 10 40`，RE-110）在檔內只出現一次。
 
 定位之後先跑正對照：隨機遭遇那六組敵人站位（`0x0BD4` 欄／`0x0B8C` 列，各 72 byte）
 必須與 `internal/battle/ambush.go` 裡那份表逐 byte 相同。對不上就不要相信後面讀到
@@ -19,7 +19,7 @@ import argparse
 import pathlib
 import sys
 
-# 定位用的錨：DGROUP 位移 → 內容。
+# 定位用的錨：DGROUP 位移 → 內容（任務旗標的除數表，RE-110）。
 ANCHOR_OFFSET = 0x7C
 ANCHOR_BYTES = bytes([0x01, 0x04, 0x10, 0x40])
 

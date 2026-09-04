@@ -40,7 +40,7 @@ TERRAIN_MASKS, SEASON_MASKS = 0x40, 0x60
 NIGHT_OFFSET, SEASON_COUNT, TERRAIN_COUNT = 0x20, 4, 8
 # 名稱欄是 +0x00…+0x0C：長度一個 byte 加最多 12 個字元（最長的是 CLIFF TROLL）。
 NAME_LIMIT = 12
-# +0x0D／+0x0E 是 AI 的兩個撤退門檻（RE-092）：傷勢達到 +0x0D 就考慮撤退，
+# +0x0D／+0x0E 是 AI 的兩個撤退門檻（RE-081）：傷勢達到 +0x0D 就考慮撤退，
 # 撤退中降到 +0x0E 以下就回到正常判斷。傷勢是 `50 × 累積傷害 ÷ 昏迷門檻`。
 # 名字之後、+0x0F 之前那兩格就是它們——SKELETON、GOLEM、ZOMBIE 這些不死系是
 # `100 / 0`，也就是永遠不撤退。

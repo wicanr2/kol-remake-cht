@@ -4,7 +4,7 @@
  "description": "從標題按下去，出城走到世界地圖 (55,13) 的競技場，選 Moraine 上場、進賭場下兩注、打完升一階並結算賭金（RE-108）。那一格與城鎮入口走同一個版面：DOOR 進場、U-TURN 留在野外。進去先看誰夠格——帳面位階與實得位階不同、而且帳面還沒到 24 才算；隊伍多人就印「Which one wishs to fight?」讓玩家選，選好再問「Are you sure you wish to enter?」。多人隊伍答應之後先換到賭場：「A Gambling Booth／The Bet Taker」，金額讀兩位數（上限 99），押他會贏寫正值、押他會輸寫負值再多講一句「Good friends, eh?」，答否才開打。**場上只有上場那一名**：其餘五名排到觀眾席、記錄 `+0x01` 設成 2 不參戰，上場那一名與唯一那隻對手各站一格固定的（RE-098 的第三條分支）。對手一隻，等級是上場那一名的實得位階加一。打贏印「you have gained a level!」，帳面位階加一——**一次只加一級**，所以帳面追上實得要打好幾場；賭金接在升階後面結算，押中的加進那一名的錢包。路上還打贏了兩場伏擊。**輸入被換過**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。",
  "seed": 1,
  "load": "workplace/observe/arena-ready.json",
- "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET X X X X X X X X X X X X X SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > RET U U L L R R RET > > RET > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > RET U U L L R R RET > > RET > > > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE X X X X X X X X X X X X X X X X R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R L R R R R R R R R R R R R R SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L RET > RET > RET U U L L D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L D D RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L D D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L D R R RET > RET > RET U U L L D D R RET > > RET > > RET U U L L D D RET > > RET > > > RET > > > > > RET U U L L D D R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE R R R R R R R R R R R R R R R R R R R R R R R RET D RET RET SPACE RET RET 2 5 RET RET RET D D RET 1 0 RET > RET SPACE > RET SPACE > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE",
+ "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET X X X X X X X X X X X X X SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L R R RET > RET > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L RET > RET > > RET U U L L R R RET > > RET > > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET > RET U U L L R R RET > > RET > RET U U L L D RET > > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D D R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > RET U U L L R R RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R R RET > RET > RET U U L L D D R R RET > > RET > RET U U L L R RET > > RET > > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE X X X X X X X X X X X X X X X X R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R L R R R R R R R R R R R R R SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L RET > RET > RET U U L L D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > RET U U L L D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > RET U U L L D D RET > > RET > RET U U L L D RET > > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > RET U U L L R RET > > RET > > > > RET U U L L D D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R R RET > RET > RET U U L L D D R RET > > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L D D R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L RET > RET > RET U U L L D RET > > RET > RET U U L L D D R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE R R R R R R R R R R R R R R R R R R R R R R R RET D RET RET SPACE RET RET 2 5 RET RET RET D D RET 1 0 RET > RET SPACE > RET SPACE > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE SPACE RET SPACE SPACE",
  "shot_dir": "docs/verification/player-path/arena",
  "trace": "docs/verification/player-path/arena/trace.json",
  "size": [
@@ -65,15 +65,31 @@
    "note": "出城"
   },
   {
-   "step": 763,
+   "step": 77,
+   "battle": {
+    "stage": 1,
+    "site": -1
+   },
+   "note": "路上第一場伏擊"
+  },
+  {
+   "step": 899,
    "battle": {
     "stage": 5,
     "verdict": 2
    },
-   "note": "路上打贏第一場伏擊"
+   "note": "打贏第一場"
   },
   {
-   "step": 1736,
+   "step": 967,
+   "battle": {
+    "stage": 1,
+    "site": -1
+   },
+   "note": "第二場伏擊"
+  },
+  {
+   "step": 2255,
    "battle": {
     "stage": 5,
     "verdict": 2
@@ -81,7 +97,7 @@
    "note": "打贏第二場"
   },
   {
-   "step": 1761,
+   "step": 2280,
    "world": {
     "x": 55,
     "y": 13,
@@ -90,63 +106,63 @@
    "note": "走到競技場那一格：圖示列剩 DOOR／U-TURN"
   },
   {
-   "step": 1762,
+   "step": 2281,
    "town": {
     "mode": 2
    },
    "note": "DOOR：「Which one wishs to fight?」"
   },
   {
-   "step": 1764,
+   "step": 2283,
    "town": {
     "mode": 2
    },
    "note": "反白移到 Moraine 再確定：「Are you sure you wish to enter?」"
   },
   {
-   "step": 1765,
+   "step": 2284,
    "town": {
     "mode": 2
    },
    "note": "答應：換到賭場，「You follow him down a tunnel…」"
   },
   {
-   "step": 1766,
+   "step": 2285,
    "town": {
     "mode": 2
    },
    "note": "「Do any of you wish to bet?」"
   },
   {
-   "step": 1767,
+   "step": 2286,
    "town": {
     "mode": 2
    },
    "note": "答是：哪一位要押的清單（選到上場那一位會被擋）"
   },
   {
-   "step": 1768,
+   "step": 2287,
    "town": {
     "mode": 2
    },
    "note": "選 Poontang：「How much?」讀兩位數"
   },
   {
-   "step": 1771,
+   "step": 2290,
    "town": {
     "mode": 2
    },
    "note": "送出 25：「Betting on your friend?」"
   },
   {
-   "step": 1781,
+   "step": 2300,
    "town": {
     "mode": 2
    },
-   "note": "第二注押 Fighting Bull 的 10 賭他會輸：「Good friends, eh?」"
+   "note": "第二注押 Fighting Bull 的 10 賭她會輸：「Good friends, eh?」"
   },
   {
-   "step": 1784,
+   "step": 2303,
    "battle": {
     "stage": 1,
     "site": -1
@@ -154,7 +170,7 @@
    "note": "答否：開打，一隻，等級是實得位階加一；場上只有 Moraine 一名參戰"
   },
   {
-   "step": 1947,
+   "step": 2484,
    "battle": {
     "stage": 5,
     "verdict": 2,
@@ -163,10 +179,10 @@
      "GIANT!"
     ]
    },
-   "note": "第九回合打贏"
+   "note": "第十回合打贏"
   },
   {
-   "step": 1949,
+   "step": 2488,
    "battle": {
     "stage": 5,
     "verdict": 2,
@@ -191,58 +207,58 @@
  ],
  "checkpoints": [
   {
-   "step": 1761,
-   "file": "step-1761.png",
+   "step": 2280,
+   "file": "step-2280.png",
    "shows": "競技場那一格的圖示列"
   },
   {
-   "step": 1762,
-   "file": "step-1762.png",
+   "step": 2281,
+   "file": "step-2281.png",
    "shows": "The Arena／The Tester 與「誰要上場」的清單"
   },
   {
-   "step": 1764,
-   "file": "step-1764.png",
+   "step": 2283,
+   "file": "step-2283.png",
    "shows": "\"Are you sure you wish to enter?\""
   },
   {
-   "step": 1765,
-   "file": "step-1765.png",
+   "step": 2284,
+   "file": "step-2284.png",
    "shows": "賭場：A Gambling Booth／The Bet Taker 與那段敘述"
   },
   {
-   "step": 1766,
-   "file": "step-1766.png",
+   "step": 2285,
+   "file": "step-2285.png",
    "shows": "\"Do any of you wish to bet?\""
   },
   {
-   "step": 1767,
-   "file": "step-1767.png",
-   "shows": "哪一位要押：上場那一位也列在裡面，選到他會被擋"
+   "step": 2286,
+   "file": "step-2286.png",
+   "shows": "哪一位要押：上場那一位也列在裡面，選到她會被擋"
   },
   {
-   "step": 1768,
-   "file": "step-1768.png",
+   "step": 2287,
+   "file": "step-2287.png",
    "shows": "\"How much?\" 與打到一半的金額"
   },
   {
-   "step": 1771,
-   "file": "step-1771.png",
+   "step": 2290,
+   "file": "step-2290.png",
    "shows": "\"Betting on your friend?\""
   },
   {
-   "step": 1781,
-   "file": "step-1781.png",
-   "shows": "押他會輸那一句：\"Good friends, eh?\""
+   "step": 2300,
+   "file": "step-2300.png",
+   "shows": "押她會輸那一句：\"Good friends, eh?\""
   },
   {
-   "step": 1784,
-   "file": "step-1784.png",
+   "step": 2303,
+   "file": "step-2303.png",
    "shows": "開打：滿版的對手圖"
   },
   {
-   "step": 1949,
-   "file": "step-1949.png",
+   "step": 2488,
+   "file": "step-2488.png",
    "shows": "\"YOU HAVE GAINED A LEVEL!\" 與兩行賭金結算"
   }
  ]

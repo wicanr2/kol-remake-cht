@@ -1,37 +1,37 @@
 {
-  "schema": "kol-battle-ambush-observation-v1",
-  "name": "battle-ambush",
-  "kind": "observation",
-  "description": "野外的隨機遭遇（SPEC-011）。從城 7 出城往東走九十步，第 66 步時段變換那一下被伏擊：兩隻 1 級 BINDERAK。訊息、站位與地形都走正常玩家路徑，沒有座標注入也沒有測試旗標，輸入也沒有換過——與 `battle-spoils` 那一組不同。",
-  "not_claimed": [
-    {
-      "name": "與原版的畫面一致",
-      "reason": "原版沒有取到對應的畫格。遭遇圖那一張 remake 目前重用任務戰鬥的滿版怪物圖；原版是 sub_2A975 的框加逐隻小圖（SPEC-011 第 8 節列為不授權）。"
-    },
-    {
-      "name": "遇到的是哪一隻、幾隻、幾級",
-      "reason": "那是機率，換一顆種子就不同。這一組只證明擲點、站位、地形與訊息都接得起來。"
-    }
-  ],
-  "command": "tools/run_kol_shots.sh 規格檔（-scene play -seed 141421 -load workplace/saves/quest.json -play-script 'R R U×9 RET R×90'）",
-  "seed": 141421,
-  "size": [
-    320,
-    200
-  ],
-  "frames": [
-    {
-      "file": "ambushed.png",
-      "step": 66,
-      "shows": "YOU HAVE BEEN AMBUSHED / BY 2, LEVEL 1 BINDERAKS!——記錄 0xE7 自帶的`@` 換行與 `]` 空白都照原版（`sub_1A8FD:0x1A990`），複數後綴與打贏那一句同一套。",
-      "sha256": "1bb55225e4279e27d26e8a5fa7dc23ac455b99ef05f55cb9a847fe0b1d08a82c"
-    },
-    {
-      "file": "field.png",
-      "step": 67,
-      "shows": "戰場：地形是逐格擲出來的（RE-099），樹叢另外灑一次；隊員站在固定的六格、敵人依站位組排在另一側（RE-098）。",
-      "sha256": "484d6b0160ef5f1c62d3173d1e5464830c37834216827cf79a75bc2e9392763a"
-    }
-  ],
-  "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
+ "schema": "kol-battle-ambush-observation-v1",
+ "name": "battle-ambush",
+ "kind": "observation",
+ "description": "野外的隨機遭遇（SPEC-011）。從城 7 出城往東走九十步，第 66 步時段變換那一下被伏擊：兩隻 1 級 BINDERAK。訊息、站位與地形都走正常玩家路徑，沒有座標注入也沒有測試旗標，輸入也沒有換過——與 `battle-spoils` 那一組不同。",
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到對應的畫格。遭遇圖那一張 remake 目前重用任務戰鬥的滿版怪物圖；原版是 sub_2A975 的框加逐隻小圖（SPEC-011 第 8 節列為不授權）。"
+  },
+  {
+   "name": "遇到的是哪一隻、幾隻、幾級",
+   "reason": "那是機率，換一顆種子就不同。這一組只證明擲點、站位、地形與訊息都接得起來。"
+  }
+ ],
+ "command": "tools/run_kol_shots.sh docs/verification/battle-ambush/replay.spec（存檔先用 tools/import_original_characters.py 重生）",
+ "seed": 141421,
+ "size": [
+  320,
+  200
+ ],
+ "frames": [
+  {
+   "file": "ambushed.png",
+   "step": 66,
+   "shows": "YOU HAVE BEEN AMBUSHED / BY 2, LEVEL 1 BINDERAKS!——記錄 0xE7 自帶的`@` 換行與 `]` 空白都照原版（`sub_1A8FD:0x1A990`），複數後綴與打贏那一句同一套。",
+   "sha256": "1bb55225e4279e27d26e8a5fa7dc23ac455b99ef05f55cb9a847fe0b1d08a82c"
+  },
+  {
+   "file": "field.png",
+   "step": 67,
+   "shows": "戰場：地形是逐格擲出來的（RE-099），樹叢另外灑一次；隊員站在固定的六格、敵人依站位組排在另一側（RE-098）。",
+   "sha256": "484d6b0160ef5f1c62d3173d1e5464830c37834216827cf79a75bc2e9392763a"
+  }
+ ],
+ "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
 }

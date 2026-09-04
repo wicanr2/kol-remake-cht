@@ -1,60 +1,60 @@
 {
-  "schema": "kol-battle-spoils-observation-v1",
-  "name": "battle-spoils",
-  "kind": "observation",
-  "description": "打贏一場之後的獎勵與戰利品畫面（RE-096）。冒險點數、金冠、「Items Found:」清單與領取都走正常玩家路徑的按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過**：第 5 個任務地點原本是十二隻 3 級 BINDERAK，單人隊伍打不贏，所以改用兩份觀察用替代檔（見 substituted_inputs）把它換成一隻壓弱的怪。因此這一組**不是對原版的 parity 宣稱**，只證明 remake 這條路徑走得通、數字算得出來、畫面畫得出來。",
-  "not_claimed": [
-    {
-      "name": "與原版的畫面一致",
-      "reason": "原版沒有取到對應的畫格；戰利品框的內部版面（清單起始列、游標的樣子）在 RE-096 標為未解，程式碼註解也標了未對拍。"
-    },
-    {
-      "name": "數字與原版一致",
-      "reason": "怪物的攻防技能被壓到 1，冒險點數因此是 1。算式本身由 RE-096 逐指令讀出，但這一次跑的輸入不是原版資料。"
-    }
-  ],
-  "substituted_inputs": [
-    {
-      "flag": "-quest-sites",
-      "path": "workplace/observe/quest-sites-one-enemy.json",
-      "change": "第 5 個地點改成一隻 1 級怪，緊貼隊伍。座標、任務旗標與敘述不動。",
-      "generated_by": "tools/make_observation_inputs.py"
-    },
-    {
-      "flag": "-monsters",
-      "path": "workplace/observe/monsters-weak.json",
-      "change": "BINDERAK 的體力、體型、力量與攻防技能壓到 1。金冠骰式（+0x0F）不動。",
-      "generated_by": "tools/make_observation_inputs.py"
-    }
-  ],
-  "command": "tools/run_python_tool.sh tools/make_observation_inputs.py；再以 -scene play -seed 39 -load workplace/saves/quest.json -quest-sites workplace/observe/quest-sites-one-enemy.json -monsters workplace/observe/monsters-weak.json 跑「走到任務地點、答應參戰、八輪攻擊」的按鍵腳本，逐步截圖取第 104…106 步。腳本是 91 步的前段（R R U×9 RET R×70 U×13 RET SPACE）接八次「> > > > > RET D RET > RET RET RET SPACE×6」。",
-  "seed": 39,
-  "seed_note": "掉落是 19% 的機率（`rand(100) < 20`），所以要掃種子。**掃的結果跟著腳本走**：二十二輪的長腳本用 1…84 連續種子一次都沒中，換散開的大數第十二個就中（LCG 走固定步數之後狀態對種子是線性的）；八輪的短腳本用 1…40 連續種子，20 與 39 兩個都中。換句話說「連續種子一定錯過」不是通則，改了腳本就要重掃。",
-  "size": [
-    320,
-    200
-  ],
-  "frames": [
-    {
-      "file": "victory.png",
-      "step": 104,
-      "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）",
-      "sha256": "d5126f98b2cd3d3245b095bc94da8ef5fb02d329fe00b9fc74453c1aa7cab7c8"
-    },
-    {
-      "file": "reward.png",
-      "step": 105,
-      "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 127 GOLD CROWNS!——單人隊伍不印 Each player，改逐句接（RE-096）。",
-      "sha256": "ca7cceec0347ade497d2e101199f3164f7cfc3ad54e8bdeaaf17403eee18ce32"
-    },
-    {
-      "file": "items-found.png",
-      "step": 106,
-      "shows": "戰利品清單：框在 (4,7) 125×146，標題 ITEMS FOUND: 由記錄自帶的 ~H02~V09 定位，清單一行 PLATEMAIL，白框標示游標那一列。",
-      "sha256": "4a9e71b6cf347fde3e1fee0e0ab33efb9d3e6180f4047a7ab101ce2ad643c1e3"
-    }
-  ],
-  "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
-  "substituted_inputs_tool": "tools/make_observation_inputs.py",
-  "script": "腳本見 command（`workplace/` 不進版控）"
+ "schema": "kol-battle-spoils-observation-v1",
+ "name": "battle-spoils",
+ "kind": "observation",
+ "description": "打贏一場之後的獎勵與戰利品畫面（RE-096）。冒險點數、金冠、「Items Found:」清單與領取都走正常玩家路徑的按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過**：第 5 個任務地點原本是十二隻 3 級 BINDERAK，單人隊伍打不贏，所以改用兩份觀察用替代檔（見 substituted_inputs）把它換成一隻壓弱的怪。因此這一組**不是對原版的 parity 宣稱**，只證明 remake 這條路徑走得通、數字算得出來、畫面畫得出來。",
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到對應的畫格；戰利品框的內部版面（清單起始列、游標的樣子）在 RE-096 標為未解，程式碼註解也標了未對拍。"
+  },
+  {
+   "name": "數字與原版一致",
+   "reason": "怪物的攻防技能被壓到 1，冒險點數因此是 1。算式本身由 RE-096 逐指令讀出，但這一次跑的輸入不是原版資料。"
+  }
+ ],
+ "substituted_inputs": [
+  {
+   "flag": "-quest-sites",
+   "path": "workplace/observe/quest-sites-one-enemy.json",
+   "change": "第 5 個地點改成一隻 1 級怪，緊貼隊伍。座標、任務旗標與敘述不動。",
+   "generated_by": "tools/make_observation_inputs.py"
+  },
+  {
+   "flag": "-monsters",
+   "path": "workplace/observe/monsters-weak.json",
+   "change": "BINDERAK 的體力、體型、力量與攻防技能壓到 1。金冠骰式（+0x0F）不動。",
+   "generated_by": "tools/make_observation_inputs.py"
+  }
+ ],
+ "command": "tools/run_kol_shots.sh docs/verification/battle-spoils/replay.spec（換過的輸入先用 tools/make_observation_inputs.py 與 tools/import_original_characters.py 重生）",
+ "seed": 39,
+ "seed_note": "掉落是 19% 的機率（`rand(100) < 20`），所以要掃種子。**掃的結果跟著腳本走**：二十二輪的長腳本用 1…84 連續種子一次都沒中，換散開的大數第十二個就中（LCG 走固定步數之後狀態對種子是線性的）；八輪的短腳本用 1…40 連續種子，20 與 39 兩個都中。換句話說「連續種子一定錯過」不是通則，改了腳本就要重掃。",
+ "size": [
+  320,
+  200
+ ],
+ "frames": [
+  {
+   "file": "victory.png",
+   "step": 104,
+   "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）",
+   "sha256": "d5126f98b2cd3d3245b095bc94da8ef5fb02d329fe00b9fc74453c1aa7cab7c8"
+  },
+  {
+   "file": "reward.png",
+   "step": 105,
+   "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 127 GOLD CROWNS!——單人隊伍不印 Each player，改逐句接（RE-096）。",
+   "sha256": "ca7cceec0347ade497d2e101199f3164f7cfc3ad54e8bdeaaf17403eee18ce32"
+  },
+  {
+   "file": "items-found.png",
+   "step": 106,
+   "shows": "戰利品清單：框在 (4,7) 125×146，標題 ITEMS FOUND: 由記錄自帶的 ~H02~V09 定位，清單一行 PLATEMAIL，白框標示游標那一列。",
+   "sha256": "4a9e71b6cf347fde3e1fee0e0ab33efb9d3e6180f4047a7ab101ce2ad643c1e3"
+  }
+ ],
+ "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+ "substituted_inputs_tool": "tools/make_observation_inputs.py",
+ "script": "腳本見 command（`workplace/` 不進版控）"
 }

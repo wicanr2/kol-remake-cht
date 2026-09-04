@@ -1,47 +1,47 @@
 {
-  "schema": "kol-battle-flee-observation-v1",
-  "name": "battle-flee",
-  "kind": "observation",
-  "description": "戰鬥中逃走那一問（SPEC-014）。Poontang 走到第 5 個任務地點、答應參戰，第一回合選休息，回合結束時因為站在戰場最外圈而被問「要逃嗎」，答 y 就離開戰場回到野外。**但輸入被換過**：那個地點的隊伍站位原本在戰場中央，正常玩法要一回合走一格、走二十幾格才到得了邊上，所以用替代檔把第一格挪到上緣。除此之外全程正常玩家路徑，沒有 direct-entry 也沒有測試旗標。",
-  "not_claimed": [
-    {
-      "name": "與原版的畫面一致",
-      "reason": "原版沒有取到對應的畫格。這一組只證明 remake 這條路徑走得通、問句與收尾的訊息接得起來。"
-    },
-    {
-      "name": "帶著任務物品逃掉會記完成",
-      "reason": "`[0xB926]` 那十六個 byte 是誰填的還沒解（RE-103），所以 `State.QuestItem` 這一次是空的，走的是「全隊都到邊上」那一條。標記本身由 victory_test 的單元測試覆蓋。"
-    }
-  ],
-  "substituted_inputs": [
-    {
-      "flag": "-quest-sites",
-      "path": "workplace/observe/quest-sites-edge.json",
-      "change": "第 5 個地點改成一隻 1 級怪，隊伍第一格的座標挪到 4（戰場上緣）。其餘座標、任務旗標與敘述不動。",
-      "generated_by": "tools/make_observation_inputs.py"
-    }
-  ],
-  "substituted_inputs_tool": "tools/make_observation_inputs.py",
-  "command": "tools/run_python_tool.sh tools/make_observation_inputs.py；再以 -scene play -seed 3 -load workplace/saves/quest.json -quest-sites workplace/observe/quest-sites-edge.json 跑「走到任務地點、答應參戰、選休息、答應開下一回合、推六次訊息、按 y」的按鍵腳本，逐步截圖。腳本是 91 步的前段（R R U×9 RET R×70 U×13 RET SPACE）接「< RET RET SPACE×6 Y SPACE×6」。",
-  "seed": 3,
-  "seed_note": "seed 決定野外那七十步會不會先被伏擊。seed 39 會，走到的是隨機遭遇，站位是固定表（RE-098）而不是地點自帶的，替代檔就完全沒有作用——第一次跑的時候換了站位畫面卻逐 byte 相同，就是這個原因。seed 3 不會。",
-  "size": [
-    320,
-    200
-  ],
-  "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
-  "frames": [
-    {
-      "file": "ask.png",
-      "step": 97,
-      "shows": "DO YOU WANT TO FLEE?（記錄 0x109）——執行段走完、還沒分勝負，而且全隊都站到了戰場可走區的最外圈，才問得出這一句（`0x21045`）。戰場右側那一排石頭就是走不出去的邊界。",
-      "sha256": "a82c2e543e1a2243a4afe78d7f6608e0ce380582f59bbd34f7a99969c3588b1a"
-    },
-    {
-      "file": "fled.png",
-      "step": 101,
-      "shows": "YOU FLEE FOR YOUR LIFE!（記錄 0x17B ＋ 0x17C）——單人隊伍用單數那一筆，`word_2DF2A` 決定（`0x215C9`）。按一次鍵才真的離開戰場。",
-      "sha256": "20835f45d620213e33ba378a5ac9ea79e14d82105e3b5b2a41e483a67e263350"
-    }
-  ]
+ "schema": "kol-battle-flee-observation-v1",
+ "name": "battle-flee",
+ "kind": "observation",
+ "description": "戰鬥中逃走那一問（SPEC-014）。Poontang 走到第 5 個任務地點、答應參戰，第一回合選休息，回合結束時因為站在戰場最外圈而被問「要逃嗎」，答 y 就離開戰場回到野外。**但輸入被換過**：那個地點的隊伍站位原本在戰場中央，正常玩法要一回合走一格、走二十幾格才到得了邊上，所以用替代檔把第一格挪到上緣。除此之外全程正常玩家路徑，沒有 direct-entry 也沒有測試旗標。",
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到對應的畫格。這一組只證明 remake 這條路徑走得通、問句與收尾的訊息接得起來。"
+  },
+  {
+   "name": "帶著任務物品逃掉會記完成",
+   "reason": "`[0xB926]` 那十六個 byte 是誰填的還沒解（RE-103），所以 `State.QuestItem` 這一次是空的，走的是「全隊都到邊上」那一條。標記本身由 victory_test 的單元測試覆蓋。"
+  }
+ ],
+ "substituted_inputs": [
+  {
+   "flag": "-quest-sites",
+   "path": "workplace/observe/quest-sites-edge.json",
+   "change": "第 5 個地點改成一隻 1 級怪，隊伍第一格的座標挪到 4（戰場上緣）。其餘座標、任務旗標與敘述不動。",
+   "generated_by": "tools/make_observation_inputs.py"
+  }
+ ],
+ "substituted_inputs_tool": "tools/make_observation_inputs.py",
+ "command": "tools/run_kol_shots.sh docs/verification/battle-flee/replay.spec（換過的輸入先用 tools/make_observation_inputs.py 與 tools/import_original_characters.py 重生）",
+ "seed": 3,
+ "seed_note": "seed 決定野外那七十步會不會先被伏擊。seed 39 會，走到的是隨機遭遇，站位是固定表（RE-098）而不是地點自帶的，替代檔就完全沒有作用——第一次跑的時候換了站位畫面卻逐 byte 相同，就是這個原因。seed 3 不會。",
+ "size": [
+  320,
+  200
+ ],
+ "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+ "frames": [
+  {
+   "file": "ask.png",
+   "step": 97,
+   "shows": "DO YOU WANT TO FLEE?（記錄 0x109）——執行段走完、還沒分勝負，而且全隊都站到了戰場可走區的最外圈，才問得出這一句（`0x21045`）。戰場右側那一排石頭就是走不出去的邊界。",
+   "sha256": "a82c2e543e1a2243a4afe78d7f6608e0ce380582f59bbd34f7a99969c3588b1a"
+  },
+  {
+   "file": "fled.png",
+   "step": 101,
+   "shows": "YOU FLEE FOR YOUR LIFE!（記錄 0x17B ＋ 0x17C）——單人隊伍用單數那一筆，`word_2DF2A` 決定（`0x215C9`）。按一次鍵才真的離開戰場。",
+   "sha256": "20835f45d620213e33ba378a5ac9ea79e14d82105e3b5b2a41e483a67e263350"
+  }
+ ]
 }

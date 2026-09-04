@@ -15,6 +15,11 @@ python3 tools/verify_player_path.py --plan docs/verification/player-path/town.js
 python3 tools/verify_full_path.py   --plan docs/verification/player-path/full-chain.json
 ```
 
+長路徑那幾份**從 plan 就能一鍵重生**：`tools/replay_player_path.py <名字>`（或 `--all`）
+把腳本、種子、要讀的存檔與換過的資料檔組成規格檔跑一遍，再驗一次。
+plan 因此要帶齊重跑所需的每一個旗標——`full-chain-ending` 的 `-quest-sites`
+一度只寫在散文裡，改了戰鬥數值之後重跑打的是原版那十二隻 CYCLOPS，怎麼跑都跑不完。
+
 `verify_player_path.py` 檢查三件事：
 
 1. 每一步的截圖存在、解得開、尺寸正確；
@@ -39,8 +44,8 @@ python3 tools/verify_full_path.py   --plan docs/verification/player-path/full-ch
 | `flow-quest` | 109 | 同一條 flow 路徑走到任務地點，兩張與已對拍的截圖逐 byte 相同 |
 | `quest-take` | 34 | 走進一戶人家，按 MOUTH 打字問話，接下一個任務 |
 | `quest-list` | 29 | 資料頁按第 19 個圖示，看回報過的任務排成八欄三列 |
-| `arena` | 1950 | 走到世界地圖 (55,13) 的競技場，選人、進賭場下兩注、打完升一階並結算賭金 |
-| `full-chain-ending` | 1012 | 出城 → 打贏一場伏擊 → 最終任務的地點 → 打完 → 結局七段 |
+| `arena` | 2489 | 走到世界地圖 (55,13) 的競技場，選人、進賭場下兩注、打完升一階並結算賭金 |
+| `full-chain-ending` | 1147 | 出城 → 打贏一場伏擊 → 最終任務的地點 → 打完 → 結局七段 |
 
 ### `full-chain`：從標題走到存檔
 
@@ -112,6 +117,9 @@ Moraine 會贏、Fighting Bull 押 10 賭她會輸。
 只加一級**，所以帳面追上實得要打好幾場；賭金接在升階那一句後面結算，最後一頁是
 三行：升階、`Poontang wins a bet!`、`Fighting Bull loses a bet!`，錢包 214 → 239 與
 442 → 432（RE-108／RE-103）。路上還打贏了兩場伏擊。
+
+路上那兩場伏擊佔掉整條路徑的九成——第二場一個人打了 1,288 步。敵人傷得夠重會撤退
+（RE-081），追著逃跑的怪補刀本來就是原版的節奏。
 
 **這一組換過輸入**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），
 照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。

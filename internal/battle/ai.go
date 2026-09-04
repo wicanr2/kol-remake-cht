@@ -163,10 +163,11 @@ func EnemyMoveForm(level, ring int, legsOK bool, hurt int, rng Rand) int {
 // 目標而且起點隨機、貼上去就攻擊、有 1/3 機率放棄攻擊改移動、攻擊式與部位走原版
 // 的加權輪盤、移動方式走三式的權重。
 //
+// 撤退那一段也照原版做了（`0x237F5`…`0x238C1`，RE-081）。
+//
 // **還沒做的**，都需要語意還沒解出來的旗標（RE-081 的「還沒走完的」那一節）：
-// 撤退狀態（+0x29／+0x2A）、反制掃描 `sub_253E7`、側翼 `sub_25653` 與沒有武器時
-// 的指令 0x26。這些情形目前一律落到「攻擊或移動」。射擊那一條已經照原版做了
-// （RE-104）。
+// 反制掃描 `sub_253E7`、側翼 `sub_25653` 與沒有武器時的指令 0x26。這些情形目前
+// 一律落到「攻擊或移動」。射擊那一條已經照原版做了（RE-104）。
 
 // EnemyShootRing 是肯射擊的最遠環號。原版比的是 `word_349B2 < 4`（`0x23EBB`），
 // 而那個計數從 1 起算相鄰的那一圈（`0x23DDE`）——remake 的環號從 0 起算同一圈，
@@ -207,6 +208,12 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 	// 兩隻手臂都廢就只能移動（`0x237E9`）。
 	if a.RightArm <= 0 && a.LeftArm <= 0 {
 		return s.enemyMove(i, -1, -1, rng)
+	}
+
+	// 撤退（`0x237F5`…`0x238C1`）。傷勢是 `50 × 累積傷害 ÷ 昏迷門檻`，
+	// 兩個門檻來自怪物記錄的 +0x0D／+0x0E——不死系是 100／0，永遠走不進來。
+	if d, ok := s.enemyRetreat(i, rng); ok {
+		return d
 	}
 
 	// 環 0：貼著的隊員直接打。種類非零的怪物有 1/3 機率放棄攻擊改成移動
@@ -258,6 +265,50 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return s.enemyMove(i, t, ring, rng)
 	}
 	return s.enemyMove(i, -1, -1, rng)
+}
+
+// enemyRetreat 是傷得太重那一段（`0x237F5`…`0x238C1`）。第二個回傳值為 false
+// 表示這一手不走撤退，交回主幹繼續判。
+//
+//	已在撤退而且傷勢降到 FleeRecover 以下 → 清掉旗標，回正常判斷
+//	已在撤退，或傷勢達到 FleeAt →
+//	    八個方向有隊員貼著 → 往外逃（隨機挑一個站得下的方向）
+//	    八個方向都沒人 →
+//	        還沒進入撤退狀態，或上一手沒挨打 → 原地喘息，並記下撤退狀態
+//	        已在撤退而且上一手挨了打 → 繼續逃
+func (s *State) enemyRetreat(i int, rng Rand) (EnemyDecision, bool) {
+	a := &s.Actors[i]
+	hurt := a.Injury()
+	if a.Retreating && hurt < a.FleeRecover {
+		a.Retreating = false
+		return EnemyDecision{}, false
+	}
+	if !a.Retreating && hurt < a.FleeAt {
+		return EnemyDecision{}, false
+	}
+	if s.adjacentParty(i) {
+		return s.enemyMove(i, -1, -1, rng), true
+	}
+	if !a.Retreating || a.LastHurt == 0 {
+		a.Retreating = true
+		d := EnemyDecision{Command: CmdRest, Target: -1, Ring: -1, Facing: a.Facing}
+		s.applyEnemy(i, d)
+		return d, true
+	}
+	return s.enemyMove(i, -1, -1, rng), true
+}
+
+// adjacentParty 回報八個相鄰格有沒有站著的隊員（`sub_24BB6(0, 方向, 0x19)`）。
+// 撤退那一段是按方向編號順序掃的，不像找目標那樣從隨機的一格起跳。
+func (s *State) adjacentParty(i int) bool {
+	a := s.Actors[i]
+	for _, c := range RingCells(0) {
+		if t := s.actorAt(a.X+c.Row, a.Y+c.Col); t >= 0 &&
+			s.Actors[t].Side == SideParty && !s.Actors[t].Down() {
+			return true
+		}
+	}
+	return false
 }
 
 // enemyShoot 組出射擊那一手（`0x23F15`…`0x23F53`）：把目標那一格記進 Memo、
