@@ -214,3 +214,69 @@ func (s *State) countSide(side Side) int {
 	}
 	return n
 }
+
+// 任務旗標（角色記錄 `0x1E2` 起，一個 byte 塞四個 2-bit 欄位，RE-079／RE-101）。
+const (
+	// QuestFlagTaken 是「接了這個任務」、QuestFlagDone 是「完成了」。
+	QuestFlagTaken = 1
+	QuestFlagDone  = 2
+	// QuestFlagBytes 是一組旗標有幾個 byte（24 個地點 ÷ 4）。
+	QuestFlagBytes = 6
+)
+
+// QuestDivisors 是任務編號的低兩位對應的除數（DGROUP `0x007C`）：那一個 byte 裡
+// 第 n 個 2-bit 欄位要先除以它再取低兩位。
+var QuestDivisors = [4]int{1, 4, 16, 64}
+
+// QuestTaken 是「這名角色接了第 site 個任務嗎」（`sub_2B0FF:0x2B108`）。
+func QuestTaken(flags []int, site int) bool {
+	v, div, ok := questField(flags, site)
+	return ok && (v/div)&3 == QuestFlagTaken
+}
+
+// MarkQuestDone 把一名角色的任務旗標標成「完成」（`sub_28F5D`）。回傳有沒有真的
+// 改到——已經是完成的不再動。
+//
+// **沒接這個任務的人也會被標**：原版只跳過「已經是 2」的，值為 0 的照樣寫成 2
+//（`0x28FB9` 只比 bit 1）。一起打完的整隊都算數，「接了」那一位元只是進得了任務
+// 地點的條件（`sub_2B0FF:0x2B108`）。
+//
+// **只有任務戰鬥會做這件事**：原版看 `word_34968`，隨機遭遇把它設成 0
+// （`sub_2A4E5:0x2A82B`）、任務地點設 1（`sub_2B0FF:0x2B1AD`）。remake 用
+// `Site.Index >= 0` 表示同一件事。
+func MarkQuestDone(flags []int, site int) bool {
+	v, div, ok := questField(flags, site)
+	if !ok || (v/div)&QuestFlagDone == QuestFlagDone {
+		return false
+	}
+	// 原版是「先 and 掉那一位、再 or 上它的兩倍」（`0x28FCD`）——等於把 2-bit
+	// 欄位從 1 換成 2。
+	flags[site/4] = (v &^ div) | (div * 2)
+	return true
+}
+
+func questField(flags []int, site int) (value, divisor int, ok bool) {
+	if site < 0 || site >= QuestFlagBytes*4 {
+		return 0, 0, false
+	}
+	i := site / 4
+	if i >= len(flags) {
+		return 0, 0, false
+	}
+	return flags[i], QuestDivisors[site&3], true
+}
+
+// markQuestDone 把隊伍裡的每個人都標成完成（`sub_28F5D`），回傳有幾個人被標到
+//（已經完成的不算）。隨機遭遇（`Site.Index` 為負）什麼都不做。
+func (s *State) markQuestDone() int {
+	if s.Site == nil || s.Site.Index < 0 {
+		return 0
+	}
+	n := 0
+	for i := range s.Party {
+		if MarkQuestDone(s.Party[i].Quests, s.Site.Index) {
+			n++
+		}
+	}
+	return n
+}

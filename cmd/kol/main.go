@@ -134,6 +134,9 @@ func battleMember(m town.Member) battle.Member {
 			}
 		}
 	}
+	// 任務旗標（角色記錄 0x1E2 起那六個 byte）：打贏任務戰鬥要原地標成完成
+	// （RE-101）。這裡共用同一個 slice，改動因此會回到城鎮那一側的隊員身上。
+	out.Quests = m.Quests
 	// 法術（角色記錄 0x200 起那十六筆，RE-100）：施法要用，指令列上那一格也看它。
 	for _, sp := range m.Spells {
 		out.Spells = append(out.Spells, battle.Spell{Name: sp.Name,

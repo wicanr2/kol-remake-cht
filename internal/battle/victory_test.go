@@ -258,3 +258,99 @@ func TestMonsterCombatLevel(t *testing.T) {
 		}
 	}
 }
+
+// 任務旗標：一個 byte 塞四個 2-bit 欄位，1 是接了、2 是完成（RE-101）。
+func TestQuestFlags(t *testing.T) {
+	// 第 5 個任務在 byte 1 的第 1 個欄位（除數 4）。
+	flags := []int{0, QuestFlagTaken * 4, 0, 0, 0, 0}
+	if !QuestTaken(flags, 5) {
+		t.Fatal("第 5 個任務該是接了的")
+	}
+	if QuestTaken(flags, 4) {
+		t.Fatal("第 4 個任務沒接")
+	}
+	if !MarkQuestDone(flags, 5) {
+		t.Fatal("該標成完成")
+	}
+	if got := (flags[1] / 4) & 3; got != QuestFlagDone {
+		t.Fatalf("第 5 個任務的旗標是 %d，期望 %d", got, QuestFlagDone)
+	}
+	// 同一個 byte 的其他欄位不受影響。
+	if flags[1]&3 != 0 || (flags[1]/16)&3 != 0 || (flags[1]/64)&3 != 0 {
+		t.Fatalf("動到同一個 byte 的別的欄位：%#02x", flags[1])
+	}
+	// 已經完成的不再動。
+	if MarkQuestDone(flags, 5) {
+		t.Fatal("已經完成的不該再改一次")
+	}
+	// 越界不會 panic。
+	if MarkQuestDone(flags, 99) || MarkQuestDone(nil, 0) {
+		t.Fatal("越界該回 false")
+	}
+	// 四個除數各對一個欄位。
+	for site, div := range QuestDivisors {
+		f := []int{QuestFlagTaken * div, 0, 0, 0, 0, 0}
+		if !QuestTaken(f, site) {
+			t.Fatalf("第 %d 個欄位的除數是 %d，讀不出來", site, div)
+		}
+	}
+}
+
+// 打贏任務戰鬥就把接了那個任務的隊員標成完成；隨機遭遇不動旗標（RE-101）。
+func TestStepMarksTheQuestDone(t *testing.T) {
+	newState := func(siteIndex int) *State {
+		s := &State{MonsterLevel: 1,
+			Site: &Site{Index: siteIndex},
+			Party: []Member{
+				{Name: "A", Quests: []int{QuestFlagTaken, 0, 0, 0, 0, 0}},
+				{Name: "B", Quests: []int{0, 0, 0, 0, 0, 0}},
+			},
+			Actors: []Actor{
+				{Side: SideParty, Member: 0, Head: 10, Chest: 10, Threshold: 100},
+				{Side: SideParty, Member: 1, Head: 10, Chest: 10, Threshold: 100},
+				{Side: SideMonster, Head: 0, Chest: 10, Threshold: 100, GoldRoll: 0x27},
+			}}
+		s.Exec.Order, s.Exec.Turn = []int{0, 1, 2}, 3
+		return s
+	}
+	// 第 0 個任務地點：整隊都標成完成——原版只跳過「已經是 2」的那幾格，
+	// 沒接的照樣寫（RE-101）。
+	won := newState(0)
+	won.Step(maxRand{})
+	if won.QuestDone != 2 {
+		t.Fatalf("標到 %d 個人，期望 2", won.QuestDone)
+	}
+	for i := range won.Party {
+		if got := won.Party[i].Quests[0] & 3; got != QuestFlagDone {
+			t.Fatalf("第 %d 位的旗標是 %d，期望完成", i, got)
+		}
+	}
+	// 再打一次同一個地點就不會再標。
+	won.QuestDone = won.markQuestDone()
+	if won.QuestDone != 0 {
+		t.Fatalf("已經完成的不該再標，得到 %d", won.QuestDone)
+	}
+	// 隨機遭遇（Site.Index 為負）什麼都不標。
+	ambush := newState(-1)
+	ambush.Step(maxRand{})
+	if ambush.QuestDone != 0 {
+		t.Fatalf("隨機遭遇不該標任務，標到 %d 個", ambush.QuestDone)
+	}
+	if ambush.Party[0].Quests[0] != QuestFlagTaken {
+		t.Fatal("隨機遭遇不該動旗標")
+	}
+}
+
+// 沒接任務的角色也會被標成完成——原版只比「已經是 2」那一位元（RE-101）。
+func TestMarkQuestDoneAlsoMarksThoseWhoDidNotTakeIt(t *testing.T) {
+	flags := []int{0, 0, 0, 0, 0, 0}
+	if QuestTaken(flags, 3) {
+		t.Fatal("這一格根本沒接")
+	}
+	if !MarkQuestDone(flags, 3) {
+		t.Fatal("沒接的也該被標")
+	}
+	if got := (flags[0] / QuestDivisors[3]) & 3; got != QuestFlagDone {
+		t.Fatalf("旗標是 %d，期望完成", got)
+	}
+}

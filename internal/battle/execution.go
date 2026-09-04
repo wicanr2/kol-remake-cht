@@ -115,6 +115,10 @@ func (s *State) Step(rng Rand) (ActResult, bool) {
 			s.Verdict = v
 			s.Stage = StageDone
 			if v == VerdictWon {
+				// 打贏的第一件事是把任務標成完成（`0x211CB` 的 sub_28F5D，
+				// RE-101）。隨機遭遇不做——原版看 word_34968，remake 看
+				// Site.Index。
+				s.QuestDone = s.markQuestDone()
 				// 順序照原版：冒險點數先算（不擲骰），金冠、掉落物後算（RE-096）。
 				s.Adventure = s.AdventureReward()
 				s.Gold = s.GoldAward(rng)

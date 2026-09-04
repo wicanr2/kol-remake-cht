@@ -31,6 +31,7 @@ RANGES = (
     (0x2BAE, 0x2BBE, "戰場物品的 X"),
     (0x2D9E, 0x2DAE, "戰場物品的 Y"),
     (0x322E, 0x3252, "法術效果 5 改的那個全域：一名參戰者兩個 byte（RE-100）"),
+    (0x01E2, 0x01E9, "角色記錄的任務旗標：六個 byte，一個 byte 塞四個 2-bit（RE-079）"),
 )
 MAX_OPERANDS = 3
 

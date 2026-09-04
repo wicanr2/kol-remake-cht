@@ -73,6 +73,9 @@ type Member struct {
 	PackCount     int
 	// Intellect 是角色的智力（資料頁的 StatIntellect）。法術的效果 4 會動它。
 	Intellect int
+	// Quests 是角色記錄 0x1E2 起那六個 byte 的任務旗標（RE-079／RE-101）。
+	// 打贏任務戰鬥時原地改成「完成」。
+	Quests []int
 	// Spells 是角色記錄 0x200 起、每 16 byte 一筆、共十六筆的法術（RE-100）。
 	// `PackCount` 數的就是這一份裡非空的筆數。
 	Spells []Spell
@@ -121,6 +124,8 @@ type State struct {
 	// WoreOff 是這一回合法術剛好失效的參戰者（RE-100）：每一位要印一次
 	// 記錄 0x173。由 BeginPlanning 重填。
 	WoreOff []int
+	// QuestDone 是打贏那一刻有幾名隊員的任務旗標被標成完成（RE-101）。
+	QuestDone int
 	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，
 	// 打贏之後掉落的東西也放這裡（RE-091 的 `sub_289EE(0)`，還沒做）。
 	Ground [GroundSlots]GroundItem
