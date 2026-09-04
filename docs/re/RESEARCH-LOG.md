@@ -3292,8 +3292,10 @@ druid's keep.  Slowly, / you approach its walls.`——與 `world-quest-run1`
 怪物記錄    TOWN0 payload 5 + 怪物編號（RE-078）
 ```
 
-回合的開頭問記錄 0x108「Begin next round?」，回答否再問 0x109「Do you want to flee?」；
-等鍵一律走 `sub_1B100(5)`，而且會直接比對字母鍵（`y`／`Y`／`n`／`N`）。
+規劃整輪做完問記錄 0x108「Begin next round?」；0x109「Do you want to flee?」
+不接在它後面，而是**執行段走完、還沒分勝負時**由 `0x21045` 那一段的條件決定
+要不要問（RE-103 訂正了本段最初的順序）。等鍵一律走 `sub_1B100(5)`，
+而且會直接比對字母鍵（`y`／`Y`／`n`／`N`）。
 指令碼放在 `word_31122`，訊息用 `|A`…`|S` 這類代換碼組出來。**玩法尚未解出。**
 
 ## RE-080：戰場的畫面、視線與回合結構
@@ -5674,7 +5676,14 @@ word_39A4E = byte_3AC7D
 
 ### remake 的落點
 
-`internal/battle/flee.go` 的 `OnFieldEdge`／`FleeOffer`／`Flee`，`State.QuestItem`
-是 `[0xB926]` 那件東西的名字。**問句的 UI 與掉東西還沒做**：前者要在回合之間插
-一次 y／n 互動，後者要先有裝備欄十二格的 typed data。升級照上面的結論歸到競技場
+`internal/battle/flee.go` 的 `OnFieldEdge`／`FleeOffer`／`Flee`／`OfferFlee`，
+`State.QuestItem` 是 `[0xB926]` 那件東西的名字。問句接在 `Step` 走完之後：
+`PromptFlee` ＋ `StageFlee`，只認 `y`／`n` 兩個鍵，別的鍵不動——與原版
+`0x21158`…`0x21190` 相同。
+
+**掉東西還沒做**，要先有裝備欄十二格的 typed data。升級照上面的結論歸到競技場
 那一側，不放在戰鬥模組。
+
+順帶訂正 RE-079：那裡把 0x109 寫成接在 0x108「Begin next round?」答否之後，
+實際上兩者無關。remake 的「Begin next round?」答否因此改成重排這一輪
+——U-TURN 那一格的原版行為還沒對上位址。

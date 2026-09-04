@@ -87,3 +87,29 @@ func TestFleeAmbushIgnoresQuestItem(t *testing.T) {
 		t.Fatalf("隨機遭遇不看任務物品，得到 %+v", o)
 	}
 }
+
+// 執行段走完、還沒分勝負又站到邊上，就停在逃走那一問；不逃就排下一回合。
+func TestOfferFleeAfterRound(t *testing.T) {
+	s := fleeState()
+	s.Rand = &fixedRoll{values: []int{50}}
+	s.Stage = StageField
+	if s.OfferFlee() {
+		t.Fatal("站在中央不該問")
+	}
+	s.Actors[0].X, s.Actors[1].X = FieldMin, FieldMin
+	if !s.OfferFlee() {
+		t.Fatal("全隊到邊上應該問")
+	}
+	if s.Stage != StageFlee || s.Plan.Prompt != PromptFlee {
+		t.Fatalf("應該停在逃走那一問，得到 %v／%v", s.Stage, s.Plan.Prompt)
+	}
+	// 答否回戰場，繼續打。
+	if s.Answer(false) || s.Stage != StageField {
+		t.Fatalf("不逃應該回戰場，得到 %v", s.Stage)
+	}
+	// 答應就走。
+	s.OfferFlee()
+	if !s.Answer(true) || s.Verdict != VerdictFled {
+		t.Fatalf("逃走應該結束這一場，得到 %v", s.Verdict)
+	}
+}

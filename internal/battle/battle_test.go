@@ -72,17 +72,23 @@ func TestStages(t *testing.T) {
 	if s.Stage != StageField {
 		t.Fatalf("讀完之後停在 %v", s.Stage)
 	}
-	s.Answer(false)
-	if s.Stage != StageFlee {
-		t.Fatalf("不開下一回合之後停在 %v", s.Stage)
-	}
+	// 「Begin next round?」答否是重排這一輪，**不會**問要不要逃——
+	// 逃走那一問由執行段走完之後的 OfferFlee 決定（RE-103）。
 	s.Answer(false)
 	if s.Stage != StageField {
-		t.Fatalf("不逃之後停在 %v", s.Stage)
+		t.Fatalf("不開下一回合之後停在 %v", s.Stage)
 	}
-	s.Answer(false)
-	if !s.Answer(true) || s.Stage != StageDone {
-		t.Fatalf("逃走之後停在 %v", s.Stage)
+	// 站到戰場邊上才問得出來，答應就走。
+	for i := range s.Actors {
+		if s.Actors[i].Side == SideParty {
+			s.Actors[i].X = FieldMin
+		}
+	}
+	if !s.OfferFlee() || s.Stage != StageFlee {
+		t.Fatalf("站到邊上應該問要不要逃，停在 %v", s.Stage)
+	}
+	if !s.Answer(true) || s.Stage != StageDone || s.Verdict != VerdictFled {
+		t.Fatalf("逃走之後停在 %v／%v", s.Stage, s.Verdict)
 	}
 }
 

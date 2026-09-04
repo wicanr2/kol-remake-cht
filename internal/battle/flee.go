@@ -56,6 +56,22 @@ func (s *State) FleeOffer() FleeOffer {
 	return out
 }
 
+// FleeAskRecord 是問句那一筆（`0x21135`）。
+const FleeAskRecord = 0x109
+
+// OfferFlee 在符合條件時把規劃段停在逃走那一問，回報有沒有停下來
+// （`0x21116`…`0x21146`）。
+func (s *State) OfferFlee() bool {
+	if !s.FleeOffer().Ask {
+		return false
+	}
+	s.Stage = StageFlee
+	s.Plan.Prompt = PromptFlee
+	s.Plan.Bar = nil
+	s.Plan.Selected = 0
+	return true
+}
+
 // Flee 是玩家答應逃走那一下（`0x2116C`…`0x2117B`）。帶著任務要的東西的話
 // 任務就標成完成——**不必把怪物打完**（RE-101）。回傳標到幾個人。
 func (s *State) Flee() int {

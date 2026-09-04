@@ -415,6 +415,17 @@ func applyBattleToken(s *battle.State, token string, step func(*battle.State)) e
 		}
 		return nil
 	}
+	if s.Plan.Prompt == battle.PromptFlee {
+		// 原版直接比字母鍵（`0x21158`…`0x21190`），別的鍵重問。
+		switch token {
+		case "Y":
+			s.Answer(true)
+			step(s)
+		case "N":
+			s.Answer(false)
+		}
+		return nil
+	}
 	if s.Plan.Prompt == battle.PromptExecuting {
 		switch token {
 		case "RET", "SPACE":
@@ -1275,6 +1286,12 @@ func (g *game) battleStep() {
 				s.Exec.Text, s.Exec.Pending = lines[0], lines[1:]
 				return
 			}
+			// 還沒分勝負但站到了戰場邊上：問「要逃嗎」（記錄 0x109，RE-103）。
+			if s.Plan.Prompt == battle.PromptFlee {
+				s.Exec.Text = battle.WrapMessage(
+					g.battleRecord(battle.FleeAskRecord))
+				return
+			}
 			s.Exec.Text = g.battleVerdictLines()
 			return
 		}
@@ -1455,14 +1472,24 @@ func (g *game) updateBattle() {
 			g.battleStep()
 		case battle.PromptExecuting:
 			g.battleStep()
+		case battle.PromptFlee:
+			// 只認 y／n，這兩個鍵在這一問沒有作用。
 		default:
 			s.Choose()
 		}
 		return
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyN) &&
-		s.Plan.Prompt == battle.PromptNextRound {
-		s.Answer(false)
+	if inpututil.IsKeyJustPressed(ebiten.KeyN) {
+		switch s.Plan.Prompt {
+		case battle.PromptNextRound, battle.PromptFlee:
+			s.Answer(false)
+		}
+	}
+	// 逃走那一問只認 y／n（`0x21158`），Return 與空白鍵都不算數。
+	if inpututil.IsKeyJustPressed(ebiten.KeyY) &&
+		s.Plan.Prompt == battle.PromptFlee {
+		s.Answer(true)
+		g.battleStep()
 	}
 }
 

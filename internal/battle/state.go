@@ -13,7 +13,8 @@ const (
 	StageEncounter
 	// StageField 是戰場畫面，問「Begin next round?」。
 	StageField
-	// StageFlee 是回答否之後問「Do you want to flee?」。
+	// StageFlee 是「Do you want to flee?」那一問。進得來的只有一條路：執行段走完、
+	// 還沒分勝負、而且有人站到戰場邊上（`0x21045`，RE-103）。
 	StageFlee
 	// StageSpoils 是打贏之後那張戰利品清單（RE-096）。
 	StageSpoils
@@ -213,9 +214,9 @@ func (s *State) Answer(yes bool) bool {
 		}
 		s.Stage = StageEncounter
 	case StageField:
-		// 原版整輪規劃完問「Begin next round?」：U-TURN 是重新規劃這一回合、
-		// YES 才進執行段、逃走圖示才問要不要逃。指令與執行段還沒實作，
-		// 這一版只留「再排一輪」與「要不要逃」兩條路。
+		// 整輪規劃完問「Begin next round?」：YES 進執行段。U-TURN 那一格的原版
+		// 行為還沒對上位址，這裡取「重排這一輪」——逃走**不接在這裡**，
+		// 它由執行段走完之後的 `OfferFlee` 決定（RE-103 訂正了 RE-079 的順序）。
 		if yes {
 			// 答應之後進執行段：一手一句訊息，由 Step 推進（RE-084）。
 			if s.Rand != nil {
@@ -230,13 +231,23 @@ func (s *State) Answer(yes bool) bool {
 			s.BeginTurn()
 			break
 		}
-		s.Stage = StageFlee
+		if s.Rand != nil {
+			s.BeginPlanning(s.Rand)
+		}
+		s.AdvanceToParty()
+		s.BeginTurn()
 	case StageFlee:
 		if yes {
-			s.Stage = StageDone
+			s.Flee()
 			return true
 		}
+		// 不逃就排下一回合，回戰場（`0x21195` 的 n 走回 `0x2119B`）。
 		s.Stage = StageField
+		if s.Rand != nil {
+			s.BeginPlanning(s.Rand)
+		}
+		s.AdvanceToParty()
+		s.BeginTurn()
 	}
 	return false
 }

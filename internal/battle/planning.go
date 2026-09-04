@@ -28,6 +28,9 @@ const (
 	PromptAffect
 	// PromptNextRound 是整輪決定完的「Begin next round?」。
 	PromptNextRound
+	// PromptFlee 是執行段走完、還沒分勝負又符合條件時問的
+	//「Do you want to flee?」（RE-103）。
+	PromptFlee
 	// PromptExecuting 是執行段：一手一句訊息，按鍵推進。
 	PromptExecuting
 )

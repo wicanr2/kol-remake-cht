@@ -147,6 +147,11 @@ func (s *State) Step(rng Rand) (ActResult, bool) {
 			}
 			return r, false
 		}
+		// 沒分勝負：先看要不要問「要逃嗎」（`0x21045`，RE-103），
+		// 答完才排下一回合。
+		if s.OfferFlee() {
+			return r, false
+		}
 		s.BeginPlanning(rng)
 		s.AdvanceToParty()
 		s.BeginTurn()
