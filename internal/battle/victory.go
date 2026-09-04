@@ -93,18 +93,35 @@ func GoldReward(rolls, sides, count, party int, rng Rand) int {
 	return each
 }
 
-// PluralSuffix 是敵人數大於 1 時補在名字後面的英文複數。名字以 `S` 結尾補 `ES`，
-// 否則補 `S`（`0x211F5`；打輸那一條的 `0x2150D` 是同一套）。
+// PluralSuffix 是**打贏**那一句補在名字後面的英文複數（`0x211F5`）：名字以 `S`
+// 結尾補 `ES`、否則補 `S`，最後再接一個 `!`。
 //
 // 中文沒有這個變化，譯文把三個記錄都處理掉了，所以只有英文模式會用到。
 func PluralSuffix(name string, count int) string {
 	if count <= 1 || name == "" {
 		return ""
 	}
-	if c := name[len(name)-1]; c == 'S' || c == 's' {
+	if endsWithS(name) {
 		return "ES"
 	}
 	return "S"
+}
+
+// DefeatSuffix 是**打輸**那一句的複數（`0x2150D`）。它和打贏那一句不一樣：接在
+// 後面的記錄 0x178 是 `s have`，本身已經帶了 s，所以名字結尾是 `S` 時只補一個 `E`
+// （湊成 `…ES have`），不是 `S` 就什麼都不補（`…S have`）。
+//
+// 兩句用同一套後綴會印出 `THE BINDERAKSS HAVE DEFEATED YOU!`——實跑抓到的。
+func DefeatSuffix(name string, count int) string {
+	if count <= 1 || name == "" || !endsWithS(name) {
+		return ""
+	}
+	return "E"
+}
+
+func endsWithS(name string) bool {
+	c := name[len(name)-1]
+	return c == 'S' || c == 's'
 }
 
 // VictoryRecords 是打贏那一句的記錄（`0x211DB`）。記錄 0x174 本身帶 `|F`，

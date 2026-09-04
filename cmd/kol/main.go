@@ -1071,6 +1071,12 @@ func (g *game) battleSpeaker(i int) battle.Speaker {
 		out.Female = m.Female
 		out.Weapon = m.WeaponName
 		out.Belt = m.BeltName
+		return out
+	}
+	// 敵人手上那件武器的名字在怪物記錄 +0x20（RE-080）。少了它 `|E` 會展開成空，
+	// 訊息變成 `THE BINDERAK CUTS HIS  AT POONTANG`——實跑抓到的。
+	if s.Monster.Weapon != nil {
+		out.Weapon = s.Monster.Weapon.Name
 	}
 	return out
 }
@@ -1153,23 +1159,24 @@ func (g *game) battleVerdictLines() []string {
 	s := g.quest.state
 	enemies := s.EnemyCount()
 	name := s.Monster.Name
-	suffix := ""
+	won, lost := "", ""
 	if g.quest.english {
-		suffix = battle.PluralSuffix(name, enemies)
+		won = battle.PluralSuffix(name, enemies)
+		lost = battle.DefeatSuffix(name, enemies)
 	}
 	ctx := battle.MessageContext{Lookup: g.battleRecord}
 	switch s.Verdict {
 	case battle.VerdictWon:
 		// `|F` 展開要有目標；原版是把 word_3237E 指到第一個敵人（`0x211D5`）。
 		ctx.Target = g.battleSpeaker(battle.PartySlots)
-		first := ctx.Substitute(g.battleRecords(battle.VictoryRecords())) + suffix + "!"
+		first := ctx.Substitute(g.battleRecords(battle.VictoryRecords())) + won + "!"
 		ctx.Number = s.Gold
 		s.Exec.Pending = battle.WrapMessage(
 			ctx.Substitute(g.battleRecords(battle.RewardRecords(s.PartyCount()))))
 		return battle.WrapMessage(first)
 	case battle.VerdictLost:
 		before, after := battle.DefeatRecords(enemies)
-		line := g.battleRecords(before) + name + suffix + g.battleRecords(after)
+		line := g.battleRecords(before) + name + lost + g.battleRecords(after)
 		return battle.WrapMessage(ctx.Substitute(line))
 	}
 	return nil

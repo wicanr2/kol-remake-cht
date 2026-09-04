@@ -133,6 +133,11 @@ func (s *State) AdvanceToParty() {
 		if s.Actors[i].Side == SideParty {
 			break
 		}
+		// 輪到敵人就讓 AI 決定那一手（RE-081／RE-092）。原版是規劃段呼叫
+		// `sub_2374C`，把指令碼與兩個選項寫進參戰者記錄，執行段照樣做出來。
+		if s.Actors[i].Side == SideMonster && !s.Actors[i].Down() && s.Rand != nil {
+			s.PlanEnemy(i, s.Rand)
+		}
 		s.Round.Turn++
 		s.skipDown()
 	}

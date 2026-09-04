@@ -64,7 +64,9 @@ def read_cell(frame, rgb, font, x: int, y: int) -> tuple[str, tuple | None]:
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--frame", required=True)
+    p.add_argument("--frame", help="單一畫格；與 --frames 擇一")
+    p.add_argument("--frames", help="一批畫格的 glob，例如 'shots/step-*.png'；"
+                                    "輸出改成每一張一行的摘要")
     p.add_argument("--fonts", default="assets/original-derived-png/fonts")
     p.add_argument("--font", default="book-small")
     p.add_argument("--x", type=int, required=True)
@@ -76,9 +78,36 @@ def main() -> int:
     args = p.parse_args()
 
     font = load_font(pathlib.Path(args.fonts), args.font)
+    advance = font["entry"]["advance"]
+
+    # 一批畫格：讀完只印每一張的內容，方便掃一整輪戰鬥的訊息。
+    if args.frames:
+        import glob
+        out = []
+        for path in sorted(glob.glob(args.frames)):
+            frame = read_png(path)
+            rgb = frame.rgb()
+            rows = []
+            for r in range(args.rows):
+                y = args.y + r * args.row_step
+                text = "".join(read_cell(frame, rgb, font, args.x + c * advance, y)[0]
+                               for c in range(args.cells)).rstrip()
+                if text:
+                    rows.append(text)
+            out.append({"frame": pathlib.Path(path).name, "lines": rows})
+        body = json.dumps({"tool": "tools/read_text_from_frame.py",
+                           "frames": len(out), "results": out},
+                          ensure_ascii=False, indent=1) + "\n"
+        if args.out:
+            pathlib.Path(args.out).write_text(body, encoding="utf-8")
+        else:
+            print(body, end="")
+        return 0
+
+    if not args.frame:
+        p.error("要嘛給 --frame，要嘛給 --frames")
     frame = read_png(args.frame)
     rgb = frame.rgb()
-    advance = font["entry"]["advance"]
 
     lines = []
     for r in range(args.rows):

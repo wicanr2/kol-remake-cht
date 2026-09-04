@@ -2518,3 +2518,68 @@ SPEC-008 的已知差異與 WORKLIST，不當成做完。
 **敵人那一手。**一場戰鬥打得完了，但敵人不會動手——那一手會被標成
 `Unimplemented` 跳過，所以目前只有玩家單方面打、永遠不會輸。決策樹 RE-081 已解，
 缺的三張基礎權重表在靜態影像裡是未初始化區，得用 DOSBox-X 在戰鬥中斷點取樣。
+
+## 2026-09-04（續六）：敵人會動手了
+
+### 先更正一個自己下錯的結論
+
+RE-081 當初說三張基礎權重表「要執行期取樣才定得了值」，還加了一句「不是再多讀幾支
+函式能補上的」。**使用者的直覺是對的**：BSS 的內容只有兩種來源——程式碼寫進去，
+或從檔案載入——兩條都掃得到。
+
+`sub_1E3A8` 的 `0x1EC49` 起由 `byte_399D6` 選兩條路：非零時從怪物的載入緩衝取，
+為零時從 DGROUP `0x1092`／`0x10A6`／`0x10AE` 三張**靜態**表複製。而 `byte_399D6`
+落在 BSS 且全庫沒有任何 writer，C runtime 清零之後恆為 0。寫成 RE-092。
+
+> 規則：**找不到 writer 時，先確認搜的是「具名參照」還是「位址」。**
+> 帶基底暫存器的寫入（`mov [bx+6A9Ah], al`）不會出現在具名符號的 xref 裡，
+> 要對位址做範圍掃描才看得到。
+
+### 實作
+
+- `internal/battle/rings.go`：七個同心方環。半徑是**環號 ＋ 1**，起點 `(−R, 0)`
+  沿邊順時針、格數 8R。位移用公式產生，`rings_test.go` 拿原版那七張表的 224 對
+  逐項驗過——抄 224 個數字抄錯一個很難發現。
+- `internal/battle/ai.go`：加權輪盤 `sub_25A3A`、攻擊式 `sub_2578F`、部位
+  `sub_2590F`、移動三式，以及決策主幹 `PlanEnemy`。
+- `round.go` 的 `AdvanceToParty` 輪到敵人時呼叫 `PlanEnemy`，不再直接跳過。
+
+**中途修正一個實作錯誤**：第一版從環 0 一路掃到環 6，找到就攻擊，結果距離 5 格也
+在「攻擊」。回去讀碼才發現 `0x23C1A` 把環號設成 **0**——**環 0 貼著才打**，
+環 0 沒人才往外掃環 1…6，而那一條找到目標之後是**朝它走一步**（`0x2401E` 跳回
+移動），不是攻擊。是測試先抓到的。
+
+### 實跑抓到兩個真 bug
+
+跑十六個回合的腳本，敵人一路走過來把 Poontang 打倒：
+
+```
+THE BINDERAK CUTS HIS SPINEY MACE AT POONTANG WHO CANNOT PARRY THE BLOW!
+THE BLOW HITS POONTANG'S CHEST CAUSING A SERIOUS WOUND!
+THE BINDERAK STABS HIS SPINEY MACE AT POONTANG WHO CANNOT PARRY THE BLOW!
+THE BLOW HITS POONTANG'S CHEST MAKING HIM UNCONSCIOUS!
+THE BINDERAKS HAVE DEFEATED YOU!
+```
+
+第一版印出來的是 `CUTS HIS  AT POONTANG` 與 `THE BINDERAKSS HAVE`：
+
+1. **怪物的武器名沒帶進訊息**。`battleSpeaker` 只填隊員的 `WeaponName`，敵人的
+   `|E` 因此展開成空。怪物記錄 +0x20 的武器名早就抽出來了，接上就好。
+2. **打輸那一句的複數多一個 S**。打贏那一句是「名字 ＋ S／ES ＋ `!`」，打輸那一句
+   接的記錄 0x178 是 `s have`——**本身已經帶了 s**，所以原版只在名字結尾是 S 時
+   補一個 `E`。兩句用同一套後綴就會變成 `BINDERAKSS`。分成
+   `PluralSuffix` 與 `DefeatSuffix` 兩支，各自有測試。
+
+**這兩個都是單元測試結構上抓不到的**：規則層自己不組句，組句在 `cmd/kol`，而
+訊息對不對只有把畫面上的字讀回來才知道。
+
+### 沒做的
+
+敵人 AI 只做了主幹。撤退狀態、反制掃描 `sub_253E7`、側翼 `sub_25653`、射擊那一條
+與沒有武器時的指令 0x26 都還沒做——它們都要參戰者記錄裡幾個旗標的語意
+（+0x05／+0x1D／+0x1E／+0x29／+0x2A／+0x2B），而那幾個旗標是別支寫的。
+寫進 SPEC-008 第 8 節的「不授權實作的範圍」。
+
+打贏的畫面還是沒實跑到（要把整場八隻怪打完），但**打輸實跑到了**。
+
+自評 56 → 59。

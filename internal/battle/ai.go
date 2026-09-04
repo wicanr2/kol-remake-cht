@@ -1,0 +1,323 @@
+package battle
+
+// 敵人那一手的抽樣器（RE-081／RE-092）。攻擊式與命中部位共用同一個加權輪盤
+// `sub_25A3A`；三張基礎權重表由 RE-092 從 DGROUP 的靜態表解出來。
+
+// AttackStyleBase 是武器攻擊式的基礎權重（DGROUP `0x1092`，10 筆）。
+var AttackStyleBase = [10]int{6, 6, 5, 4, 6, 4, 4, 6, 6, 5}
+
+// LocationWeights 是命中部位的基礎權重（DGROUP `0x10A6`，7 筆）：
+// 頭、胸、右臂、左臂、右腿、左腿，最後一筆是第七個索引。
+var LocationWeights = [7]int{1, 3, 4, 4, 4, 4, 2}
+
+// MoveBase 是移動三式的基礎權重（DGROUP `0x10AE`）：步行、奔跑、衝刺。
+// 比例約 1 : 2 : 6——原版的敵人偏好衝過來。
+var MoveBase = [3]int{12, 24, 72}
+
+// ContextWeights 是情境權重矩陣（DGROUP `0x0FF4`，16 列 × 10）。抽攻擊式時列號是
+// 對手的防禦選項，抽部位時列號換成攻擊式。
+var ContextWeights = [16][10]int{
+	{8, 8, 8, 6, 8, 7, 7, 8, 9, 11},
+	{4, 4, 3, 2, 4, 2, 2, 4, 4, 6},
+	{7, 7, 6, 5, 7, 6, 6, 7, 8, 11},
+	{4, 3, 3, 7, 9, 7, 3, 3, 4, 9},
+	{2, 5, 5, 1, 6, 5, 3, 9, 10, 9},
+	{6, 6, 6, 1, 3, 3, 4, 6, 8, 8},
+	{10, 9, 3, 4, 6, 1, 4, 5, 2, 7},
+	{6, 6, 6, 6, 6, 6, 6, 6, 6, 10},
+	{1, 2, 3, 3, 4, 4, 3, 1, 3, 5},
+	{7, 3, 1, 2, 1, 3, 5, 3, 3, 2},
+	{2, 1, 3, 5, 4, 3, 5, 3, 1, 4},
+	{3, 9, 8, 4, 4, 1, 3, 2, 3, 5},
+	{3, 2, 1, 4, 2, 4, 6, 8, 3, 1},
+	{4, 6, 6, 4, 4, 3, 1, 3, 5, 2},
+	{3, 3, 2, 1, 2, 4, 1, 2, 7, 2},
+	{2, 4, 6, 6, 6, 6, 3, 0, 6, 6},
+}
+
+// StyleMask 是攻擊式要的武器位元（DGROUP `0x109C`，10 筆）。與怪物記錄 +0x2D
+// 有交集的那一式權重乘 2，沒有乘 1。
+var StyleMask = [10]int{16, 16, 16, 8, 8, 8, 4, 4, 4, 2}
+
+// levelDivisor 是 `w^等級` 的除數（DGROUP `0x10C6`）＝ 2^(等級−1)。
+var levelDivisor = [8]int{1, 1, 2, 4, 8, 16, 32, 64}
+
+// WeightedPick 是 `sub_25A3A`：權重抽樣，回傳選中的索引。
+//
+// 兩段權重——`context` 是情境權重、`base` 是基礎權重：
+//
+//	w = context[i]^等級 ÷ 2^(等級−1)      ; 等級越高越偏向權重高的選項
+//	acc[i] = w × base[i]
+//	正規化成總和 255，再擲 rand(256) − 1 逐項扣，扣成負的就選中
+//
+// 正規化那一步原版分兩條路避免 32-bit 溢位：總和超過 16 bit 就先把總和除以 255、
+// 每一項直接除；否則每一項先乘 255 再除總和（`0x25BBF`…`0x25C92`）。兩條路的
+// 語意相同，這裡照抄，因為溢位與否會影響取整的結果。
+func WeightedPick(base, context []int, level int, rng Rand) int {
+	n := len(base)
+	if n == 0 || len(context) < n {
+		return 0
+	}
+	if level < 0 {
+		level = 0
+	}
+	if level >= len(levelDivisor) {
+		level = len(levelDivisor) - 1
+	}
+	acc := make([]int64, n)
+	for i := 0; i < n; i++ {
+		w := int64(1)
+		for k := 0; k < level; k++ {
+			w *= int64(context[i])
+		}
+		w /= int64(levelDivisor[level])
+		acc[i] = w * int64(base[i])
+	}
+	var total int64
+	for _, v := range acc {
+		total += v
+	}
+	if total == 0 {
+		total = 1
+	}
+	wide := total > 0xFFFF
+	if wide {
+		total /= 255
+		if total == 0 {
+			total = 1
+		}
+	}
+	for i := range acc {
+		if !wide {
+			acc[i] *= 255
+		}
+		acc[i] /= total
+	}
+	r := int64(rng.Roll(256) - 1)
+	for i := range acc {
+		r -= acc[i]
+		if r < 0 {
+			return i
+		}
+	}
+	return 0
+}
+
+// EnemyStyle 是 `sub_2578F`：抽武器攻擊式。情境權重的列號是對手的防禦選項，
+// 再乘上「這一式能不能用」——`StyleMask[i]` 與怪物的武器位元有交集算 2、沒有算 1。
+func EnemyStyle(level, guard, weaponBits int, rng Rand) int {
+	if guard < 0 || guard >= len(ContextWeights) {
+		guard = 0
+	}
+	base := make([]int, len(AttackStyleBase))
+	ctx := make([]int, len(AttackStyleBase))
+	for i := range base {
+		base[i] = AttackStyleBase[i]
+		ctx[i] = ContextWeights[guard][i]
+		if StyleMask[i]&weaponBits != 0 {
+			ctx[i] *= 2
+		}
+	}
+	return WeightedPick(base, ctx, level, rng)
+}
+
+// EnemyLocation 是 `sub_2590F`：抽命中部位。情境權重同一張矩陣，但列號換成攻擊式。
+//
+// **少了一個修正**：原版對索引 < 2 或 == 6 的三項另外乘 `word_2F940 ÷ word_30D06`
+// （負重與行動餘力的比），那兩個全域的語意還沒解（RE-081），所以這裡不套。
+func EnemyLocation(level, style int, rng Rand) int {
+	if style < 0 || style >= len(ContextWeights) {
+		style = 0
+	}
+	base := make([]int, len(LocationWeights))
+	ctx := make([]int, len(LocationWeights))
+	for i := range base {
+		base[i] = LocationWeights[i]
+		ctx[i] = ContextWeights[style][i]
+	}
+	return WeightedPick(base, ctx, level, rng)
+}
+
+// EnemyMoveForm 是移動三式的抽樣（`0x239D7` 之後）：步行 0、奔跑 1、衝刺 2。
+// 三個基礎權重照狀況打折之後正規化，這裡只做腿還在不在那一條——其餘幾條要
+// `word_30D06`／`word_2F940` 的語意才做得了。
+func EnemyMoveForm(level, ring int, legsOK bool, hurt int, rng Rand) int {
+	w := [3]int{MoveBase[0], MoveBase[1], MoveBase[2]}
+	switch {
+	case legsOK && ring < RingCount:
+		// 兩腿都還在而且不是最外圈：衝刺這一項歸零（`0x23A3B`）。
+		w[2] = 0
+	case ring < 2:
+		w[2] /= 2
+	}
+	if hurt > 49 {
+		w[2] /= 2
+	}
+	base := []int{w[0], w[1], w[2]}
+	return WeightedPick(base, base, level, rng)
+}
+
+// 敵人那一手的決策（RE-081 的主幹）。
+//
+// **這是簡化版，不是整棵樹。**已經照原版做的：兩臂都廢就移動、同心環由內往外找
+// 目標而且起點隨機、貼上去就攻擊、有 1/3 機率放棄攻擊改移動、攻擊式與部位走原版
+// 的加權輪盤、移動方式走三式的權重。
+//
+// **還沒做的**，都需要語意還沒解出來的旗標（RE-081 的「還沒走完的」那一節）：
+// 撤退狀態（+0x29／+0x2A）、反制掃描 `sub_253E7`、側翼 `sub_25653`、射擊那一條
+// （指令 0x23）與沒有武器時的指令 0x26。這些情形目前一律落到「攻擊或移動」。
+
+// EnemyDecision 是敵人這一回合要做什麼。
+type EnemyDecision struct {
+	Command int
+	Style   int
+	Guard   int
+	Facing  int
+	// Target 是選中的目標索引，沒有目標時是 -1；Ring 是在第幾環找到的。
+	Target int
+	Ring   int
+}
+
+// PlanEnemy 決定第 i 名敵人這一回合的一手，並寫進它的參戰者記錄。
+//
+// 原版把結果放進三個全域再由呼叫端寫回（`0x1F104`），remake 直接寫——兩邊的可觀察
+// 行為相同，中間那三個全域沒有別的讀者。
+//
+// 主幹（`0x23C1A`…`0x24030`）：
+//
+//	環 0（八個相鄰格）找隊員 → 找到就攻擊，但有 1/3 機率改成移動
+//	環 0 沒人 → 往外掃環 1…6
+//	    看得見、環號 < 4、有武器又有右臂 → 射擊（還沒實作，改成靠近）
+//	    否則 → 朝目標走一步
+//	七環都沒人 → 隨機挑一個站得下的方向移動
+func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
+	if i < 0 || i >= len(s.Actors) {
+		return EnemyDecision{Target: -1}
+	}
+	a := &s.Actors[i]
+	d := EnemyDecision{Target: -1, Ring: -1, Facing: a.Facing}
+
+	// 兩隻手臂都廢就只能移動（`0x237E9`）。
+	if a.RightArm <= 0 && a.LeftArm <= 0 {
+		return s.enemyMove(i, -1, -1, rng)
+	}
+
+	// 環 0：貼著的隊員直接打。種類非零的怪物有 1/3 機率放棄攻擊改成移動
+	// （`0x23CA7`），所以敵人不會每回合都撲上來。
+	if t := s.findInRing(i, 0, rng); t >= 0 {
+		if rng.Roll(3) == 1 {
+			return s.enemyMove(i, t, 0, rng)
+		}
+		d.Command = CmdWeapon
+		d.Target = t
+		d.Ring = 0
+		d.Facing = s.stepToward(i, t)
+		// 攻擊選項是 `sub_2578F()` 的結果加二；超過 10 就退回 1（`0x23CEE`）。
+		style := EnemyStyle(a.Level, s.Actors[t].Guard, a.Weapon.Kind, rng) + 2
+		if style > 0x0A {
+			style = 1
+		}
+		d.Style = style
+		if style == 1 {
+			d.Guard = 2
+		}
+		s.applyEnemy(i, d)
+		return d
+	}
+
+	// 環 1…6：找得到就朝它走一步。射擊那一條（指令 0x23）還沒實作——原版在
+	// 看得見、環號 < 4、有武器又有右臂時會射，這裡一律靠近。
+	for ring := 1; ring < RingCount; ring++ {
+		if t := s.findInRing(i, ring, rng); t >= 0 {
+			return s.enemyMove(i, t, ring, rng)
+		}
+	}
+	return s.enemyMove(i, -1, -1, rng)
+}
+
+// enemyMove 組出移動那一手：方向朝目標（沒有目標就隨機挑一個站得下的），
+// 移動方式走三式的加權輪盤（`0x239D7`）。
+func (s *State) enemyMove(i, target, ring int, rng Rand) EnemyDecision {
+	a := &s.Actors[i]
+	d := EnemyDecision{Command: CmdMove, Target: target, Ring: ring}
+	d.Facing = s.stepToward(i, target)
+	legsOK := a.RightLeg > 0 && a.LeftLeg > 0
+	form := EnemyMoveForm(a.Level, max(ring, 0), legsOK, a.Injury(), rng)
+	d.Style = IconMoveWalk + form
+	if form == 0 {
+		d.Guard = 2
+	}
+	s.applyEnemy(i, d)
+	return d
+}
+
+func (s *State) applyEnemy(i int, d EnemyDecision) {
+	a := &s.Actors[i]
+	a.Command, a.Style, a.Guard = d.Command, d.Style, d.Guard
+	if d.Facing >= 0 {
+		a.Facing = d.Facing
+	}
+}
+
+// findInRing 在指定的環上找一名還站著的隊員，回傳索引；找不到回 -1。
+//
+// 起點是隨機的（`sub_2531C` 第一次傳 0xFFFF 時從 `rand(格數 − 1) − 1` 起跳），
+// 所以同樣的戰況不會總是選同一個目標。
+func (s *State) findInRing(i, ring int, rng Rand) int {
+	a := s.Actors[i]
+	cells := RingCells(ring)
+	if len(cells) == 0 {
+		return -1
+	}
+	start := rng.Roll(len(cells)) - 1
+	for n := 0; n < len(cells); n++ {
+		c := cells[(start+n)%len(cells)]
+		if t := s.actorAt(a.X+c.Row, a.Y+c.Col); t >= 0 &&
+			s.Actors[t].Side == SideParty && !s.Actors[t].Down() {
+			return t
+		}
+	}
+	return -1
+}
+
+// actorAt 回傳站在那一格上的參戰者索引；沒有人就回 -1。
+func (s *State) actorAt(x, y int) int {
+	for i := range s.Actors {
+		a := s.Actors[i]
+		if a.Side != SideEmpty && a.X == x && a.Y == y {
+			return i
+		}
+	}
+	return -1
+}
+
+// stepToward 是「往目標走一步」的方向。原版先用 `sub_25D7A(1)` 沿視線走一步再查
+// `[0x10D8]` 把相對格差換成方向（RE-081）；這裡直接取符號，兩者在相鄰與正對角的
+// 情形相同，斜向偏移大時可能差一格。目標是 -1 就隨機挑一個站得下的方向。
+func (s *State) stepToward(i, target int) int {
+	a := s.Actors[i]
+	if target < 0 {
+		for f := 0; f < 8; f++ {
+			c := RingCells(0)[f]
+			if !s.moveBlocked(i, a.X+c.Row, a.Y+c.Col) {
+				return f
+			}
+		}
+		return a.Facing
+	}
+	t := s.Actors[target]
+	dx, dy := sign(t.X-a.X), sign(t.Y-a.Y)
+	for f, c := range RingCells(0) {
+		if c.Row == dx && c.Col == dy {
+			return f
+		}
+	}
+	return a.Facing
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}

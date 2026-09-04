@@ -153,3 +153,24 @@ func TestStepFinishesTheBattle(t *testing.T) {
 		t.Fatalf("沒打贏不該有金冠，得到 %d", going.Gold)
 	}
 }
+
+// 打輸那一句的複數和打贏不一樣：記錄 0x178（`s have`）本身帶 s，名字結尾是 S
+// 時只補 E，否則什麼都不補。兩句用同一套會印出 `BINDERAKSS HAVE`。
+func TestDefeatSuffixDiffersFromVictory(t *testing.T) {
+	for _, c := range []struct {
+		name       string
+		count      int
+		won, lost  string
+	}{
+		{"BINDERAK", 12, "S", ""},
+		{"MUCK THINGS", 2, "ES", "E"},
+		{"RUFFIAN", 1, "", ""},
+	} {
+		if got := PluralSuffix(c.name, c.count); got != c.won {
+			t.Fatalf("%q 打贏的後綴是 %q，期望 %q", c.name, got, c.won)
+		}
+		if got := DefeatSuffix(c.name, c.count); got != c.lost {
+			t.Fatalf("%q 打輸的後綴是 %q，期望 %q", c.name, got, c.lost)
+		}
+	}
+}
