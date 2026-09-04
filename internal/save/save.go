@@ -134,6 +134,9 @@ type Member struct {
 	// Rank 是角色記錄 `+0x29` 的帳面位階（RE-074）。競技場打贏會加一（RE-108），
 	// 所以它也是會變的。用指標是因為 0 是合法值——沒帶這一欄才照角色檔補。
 	Rank *int `json:"rank,omitempty"`
+	// AdventurePoints 是角色記錄的冒險點數（RE-096）：打贏一場加一份、訓練花掉
+	// 一份（RE-076），所以它也是會變的。同樣用指標，0 是合法值。
+	AdventurePoints *int `json:"adventure_points,omitempty"`
 }
 
 // Save 是一份存檔。

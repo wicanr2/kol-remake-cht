@@ -59,6 +59,8 @@ func NewArena(fighter, kind, level int, monster Monster, party []Member,
 	if s == nil {
 		return nil
 	}
+	// 這一場打完要替 fighter 升階，而且戰後獎勵整段不發（RE-096 的閘門）。
+	s.RankFight = true
 	for n := range party {
 		if n >= PartySlots || n == fighter {
 			continue

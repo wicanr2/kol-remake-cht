@@ -117,6 +117,10 @@ type State struct {
 	Verdict Verdict
 	Gold      int
 	Adventure int
+	// RankFight 為真表示這一場打完要替某一名升階（原版 `word_345DE != 0xFFFF`：
+	// 競技場與訓練戰）。那種戰鬥**整段戰後獎勵都跳過**（`0x2124E` 的閘門，
+	// RE-096）——不發冒險點數也不發金冠，改走升階那一條。誰升階由呼叫端記著。
+	RankFight bool
 	// MonsterLevel 是這一場敵人的等級（`word_3B26A`）：訊息上的「LEVEL n」、
 	// 技能折算與金冠的輪數都用它，而參戰者記錄那一格的等級是它 ÷ 5 ＋ 1
 	// （上限 5，`0x1EE12`）——**兩個不同的尺度**（RE-097）。

@@ -466,7 +466,7 @@
  ],
  "save": {
   "file": "workplace/saves/full-chain.json",
-  "sha256": "0f4c40ffaace0edd94fa849bb08dfabded73836fb192d8397041ae2262664aaf",
+  "sha256": "60302a4dbd0fbf045a4445f14c5e017c850b58f98868e42223c825adcc7af138",
   "fields": {
    "schema": "kol-save-v1",
    "location.kind": "town",
@@ -482,7 +482,10 @@
    "party[0].building_id": 86,
    "party[0].quests[1]": 4,
    "party[5].name": "Olear",
-   "party[5].gold": 1777
+   "party[5].gold": 1777,
+   "party[0].adventure_points": 2376,
+   "party[5].adventure_points": 2876,
+   "party[0].rank": 1
   }
  },
  "failures": []

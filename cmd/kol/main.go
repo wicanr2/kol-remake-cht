@@ -101,6 +101,9 @@ type questBattle struct {
 	english bool
 	// tiles 是戰場磚圖，讀檔一次之後留著。
 	tiles *ui.BattleTiles
+	// awarded 記這一場的冒險點數與金冠發過了沒有——收尾那一段每按一次鍵都會
+	// 走一遍，發放只能有一次。
+	awarded bool
 }
 
 // battleMember 把城鎮那一側的隊員換成戰鬥要用的欄位（RE-080）：戰鬥等級由
@@ -484,6 +487,23 @@ func (g *game) playToken(token string) error {
 	return applyPlayToken(g.play, token)
 }
 
+// awardBattle 把打贏那一場的冒險點數與金冠寫回隊伍（`0x2141C`，RE-096）：
+// 對隊伍那六格裡有人的每一名各加一份——兩個數字本來就是「每人分到多少」。
+// 競技場與訓練戰整段跳過（`s.RankFight`），一場只發一次。
+func (g *game) awardBattle() {
+	s := g.quest.state
+	if g.quest.awarded || s.Verdict != battle.VerdictWon || s.RankFight {
+		return
+	}
+	g.quest.awarded = true
+	for i := range g.play.Party {
+		g.play.Party[i].Gold += s.Gold
+		if sh := g.play.Party[i].Sheet; sh != nil {
+			sh.AdventurePoints += s.Adventure
+		}
+	}
+}
+
 // startArenaFight 把競技場談完的那一場開起來（RE-108）：一隻、等級是上場那一名的
 // 實得位階加一、陣型與種類各擲一次。站位不擲也不查表——競技場走的是
 // `sub_1E3A8` 對 `word_345DE >= 0` 的那一條（RE-098），只有上場那一名參戰。
@@ -666,6 +686,7 @@ func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
 			Progress: append([]int(nil), m.Progress...),
 			Carried: encodeCarried(m.Carried),
 			Rank:    savedRank(m),
+			AdventurePoints: savedPoints(m),
 		})
 	}
 	// 存檔裡的發言者要明確：畫面上沒有標記時發言者就是隊長，寫進去也照這個規則，
@@ -703,6 +724,15 @@ func savedRank(m town.Member) *int {
 	}
 	rank := m.Sheet.Rank
 	return &rank
+}
+
+// savedPoints 同上，取的是冒險點數。
+func savedPoints(m town.Member) *int {
+	if m.Sheet == nil {
+		return nil
+	}
+	points := m.Sheet.AdventurePoints
+	return &points
 }
 
 // parsePair 解析 `X,Y` 形式的參數。
@@ -1656,6 +1686,7 @@ func (g *game) battleStep() {
 	// 這一場已經結束、勝負的兩句也印完了，就停在最後一句上，不要再往下走——
 	// 再呼叫一次 Step 會把勝負訊息重新排一遍，變成按不完的迴圈。
 	if s.Stage == battle.StageDone {
+		g.awardBattle()
 		// 逃走那一句（RE-103）：`Flee()` 把訊息清空，所以第一次進來先印
 		// 「You flee for your life!」，按一次鍵才真的離開戰場。
 		if s.Verdict == battle.VerdictFled && len(s.Exec.Text) == 0 {
@@ -1814,6 +1845,11 @@ func (g *game) battleVerdictLines() []string {
 		// `|F` 展開要有目標；原版是把 word_3237E 指到第一個敵人（`0x211D5`）。
 		ctx.Target = g.battleSpeaker(battle.PartySlots)
 		first := ctx.Substitute(g.battleRecords(battle.VictoryRecords())) + won + "!"
+		// 競技場與訓練戰整段獎勵都跳過（`0x2124E`，RE-096），所以那一句不印，
+		// 接著的是升階與賭金結算。
+		if s.RankFight {
+			return battle.WrapMessage(first)
+		}
 		// 兩個 `|N` 各讀一次，所以分兩段展開：前半是冒險點數、後半是金冠。
 		before, after := battle.RewardRecords(s.PartyCount())
 		ctx.Number = s.Adventure
@@ -2578,15 +2614,22 @@ func main() {
 					if playSession.Party[i].Quests == nil {
 						playSession.Party[i].Quests = c.Quests
 					}
-					// 帳面位階存檔帶了就以存檔為準：競技場打贏會加一（RE-108），
-					// 角色檔那一份是遊玩之前的值。
+					// 帳面位階與冒險點數存檔帶了就以存檔為準：前者競技場打贏會
+					// 加一（RE-108），後者打贏一場加一份、訓練花掉一份
+					// （RE-096／RE-076）。角色檔那兩份是遊玩之前的值。
 					if loaded != nil && i < len(loaded.Party) &&
-						loaded.Party[i].Rank != nil &&
-						playSession.Party[i].Sheet != nil {
+						playSession.Party[i].Sheet != nil &&
+						(loaded.Party[i].Rank != nil ||
+							loaded.Party[i].AdventurePoints != nil) {
 						// 複製一份再改：資料頁那份是與名冊共用的指標，
-						// 直接改會連招募清單上的位階一起動到。
+						// 直接改會連招募清單上的數字一起動到。
 						sheet := *playSession.Party[i].Sheet
-						sheet.Rank = *loaded.Party[i].Rank
+						if loaded.Party[i].Rank != nil {
+							sheet.Rank = *loaded.Party[i].Rank
+						}
+						if loaded.Party[i].AdventurePoints != nil {
+							sheet.AdventurePoints = *loaded.Party[i].AdventurePoints
+						}
 						playSession.Party[i].Sheet = &sheet
 					}
 					// 已回報的任務數同理：存檔帶了就用存檔的，

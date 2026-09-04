@@ -3,8 +3,13 @@ package battle
 import "testing"
 
 func arenaParty() []Member {
-	return []Member{{Name: "POONTANG"}, {Name: "MORAINE"}, {Name: "FIGHTING BULL"},
-		{Name: "KENNETH"}, {Name: "SHARAKAN"}, {Name: "OLEAR"}}
+	// 體型與健康要給，不然昏迷門檻是 0、六個部位全是 0，一開場就算倒下。
+	out := make([]Member, 0, 6)
+	for _, name := range []string{"POONTANG", "MORAINE", "FIGHTING BULL",
+		"KENNETH", "SHARAKAN", "OLEAR"} {
+		out = append(out, Member{Name: name, Size: 100, Health: 100})
+	}
+	return out
 }
 
 // 競技場那一場：只有上場那一名參戰，站固定格；那一隻敵人也站固定格。
@@ -95,5 +100,32 @@ func TestNewArenaSoloParty(t *testing.T) {
 		if s.Actors[n].Side != SideEmpty || s.Actors[n].Name != "" {
 			t.Fatalf("第 %d 格該是空的，得到 %+v", n, s.Actors[n])
 		}
+	}
+}
+
+// 競技場那一場**整段戰後獎勵都跳過**（`0x2124E` 的閘門，RE-096）：不發冒險點數、
+// 不發金冠、也不掉戰利品。一般戰鬥那一條另有 TestStepFinishesTheBattle。
+func TestArenaSkipsBattleReward(t *testing.T) {
+	mon := Monster{Index: 3, Name: "HILL GIANT", Size: 100, Health: 100,
+		AttackSkill: 230, ParrySkill: 100}
+	mon.Gold.Raw = 0x27
+	s := NewArena(0, 3, 4, mon, arenaParty(), Generate(&fixedRand{values: []int{1, 2}}))
+	if s == nil {
+		t.Fatal("該開得起來")
+	}
+	if !s.RankFight {
+		t.Fatal("競技場那一場該標成升階戰")
+	}
+	// 敵人倒下，執行段也走完了。
+	s.Actors[PartySlots].Head = 0
+	s.Exec.Order, s.Exec.Turn = []int{0, PartySlots}, 2
+	if _, ok := s.Step(maxRand{}); ok {
+		t.Fatal("執行段已經走完")
+	}
+	if s.Verdict != VerdictWon {
+		t.Fatalf("Verdict 是 %d，期望 VerdictWon", s.Verdict)
+	}
+	if s.Gold != 0 || s.Adventure != 0 {
+		t.Fatalf("升階戰不該發獎勵，得到金冠 %d、冒險點數 %d", s.Gold, s.Adventure)
 	}
 }

@@ -6,7 +6,7 @@
  "load": "workplace/observe/arena-ready.json",
  "token_count": 2489,
  "trace": "docs/verification/player-path/arena/trace.json",
- "trace_sha256": "c7880263f058fa2bddabecfee21088cfd61b93dbd1afdefb008469fb378ad774",
+ "trace_sha256": "efabb519247bae8c4975fd438a6e6aec5e397170997e45ce244a01ce6607f365",
  "milestones": [
   {
    "step": 64,
@@ -529,20 +529,20 @@
    }
   },
   {
-   "step": 2488,
+   "step": 2485,
    "token": "SPACE",
-   "note": "升階那一句接著賭金結算：押中的 Poontang 214 → 239、押錯的 Fighting Bull 442 → 432",
+   "note": "升階那一句**直接接在打贏後面**——競技場整段戰後獎勵都跳過（`0x2124E` 的閘門，RE-096），接著就是賭金結算。錢包上看得到三件事疊起來：路上兩場伏擊的金冠每人 ＋12、押中的 Poontang 再 ＋25、押錯的 Fighting Bull −10",
    "scene": "flow:town",
    "town": {
     "left_town": true,
     "mode": 0,
     "party": [
-     "Poontang gold=239 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
-     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
-     "Fighting Bull gold=432 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
-     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
-     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
-     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+     "Poontang gold=251 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2161 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=444 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=827 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1955 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1789 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
     ],
     "town": 7,
     "x": 56,
@@ -638,8 +638,8 @@
    "shows": "開打：滿版的對手圖"
   },
   {
-   "step": 2488,
-   "file": "step-2488.png",
+   "step": 2485,
+   "file": "step-2485.png",
    "sha256": "190cdb058f56344dcc24d490e4745439bdf5a9dcfdfafe170a4b30fd35d178cc",
    "shows": "\"YOU HAVE GAINED A LEVEL!\" 與兩行賭金結算"
   }
@@ -675,10 +675,6 @@
   {
    "name": "錢包取自哪一份",
    "reason": "金額上限比的是 `sub_14CCF` 取的錢包，那一支取的是角色自己的還是隊伍共用的還沒解（RE-108 的「還沒解的」），這一版用角色自己的。"
-  },
-  {
-   "name": "打贏那一頁報的冒險點數與金冠有入帳",
-   "reason": "第 1,948 步印出「receives 175 adventure points, and 313 gold crowns!」，但這一版還沒把那兩個數字寫回角色——`AdventureReward()`／`GoldAward()` 只用來組訊息。錢包上看得到的變化只有賭金。這是戰後結算共用的缺口，不是競技場獨有。"
   },
   {
    "name": "畫面與原版一致",

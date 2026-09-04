@@ -140,10 +140,14 @@ func (s *State) Step(rng Rand) (ActResult, bool) {
 				// RE-101）。隨機遭遇不做——原版看 word_34968，remake 看
 				// Site.Index。
 				s.QuestDone = s.markQuestDone()
-				// 順序照原版：冒險點數先算（不擲骰），金冠、掉落物後算（RE-096）。
-				s.Adventure = s.AdventureReward()
-				s.Gold = s.GoldAward(rng)
-				s.DropSpoils(s.SpoilItems, rng)
+				// 獎勵整段只在一般戰鬥發（`0x2124E` 比 `word_345DE == 0xFFFF`，
+				// RE-096）：競技場與訓練戰跳過，改走升階那一條。
+				// 順序照原版：冒險點數先算（不擲骰），金冠、掉落物後算。
+				if !s.RankFight {
+					s.Adventure = s.AdventureReward()
+					s.Gold = s.GoldAward(rng)
+					s.DropSpoils(s.SpoilItems, rng)
+				}
 			}
 			return r, false
 		}
