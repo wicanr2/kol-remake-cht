@@ -189,12 +189,13 @@ func TestActDispatch(t *testing.T) {
 		t.Fatalf("怯戰應該印 %#x 並把防禦選項設 2，得到 %#x／%d",
 			FlinchRecord, r.Message, s.Actors[0].Guard)
 	}
-	// 還沒實作的那幾手要被標出來，不能靜靜跳過。
+	// 還沒實作的那幾手要被標出來，不能靜靜跳過。撿、丟與切換這一輪做完了
+	// （RE-094），剩下的是投擲那一格。
 	s = newState()
-	s.Actors[0].Command = CmdPickUp
+	s.Actors[0].Command = CmdThrow
 	r, _ = s.Act(&fixedRoll{values: []int{50}})
 	if !r.Unimplemented {
-		t.Fatal("撿東西這一手應該標成還沒實作")
+		t.Fatal("投擲這一手應該標成還沒實作")
 	}
 }
 

@@ -171,7 +171,7 @@ func TestPlanningZeroOptionsBecomeRest(t *testing.T) {
 
 // 直接收尾的那幾格：兩個選項都 0，指令碼就是圖號本身（`0x1F3B2`）。
 func TestPlanningDirectCommands(t *testing.T) {
-	for _, icon := range []int{CmdRest, CmdPickUp} {
+	for _, icon := range []int{CmdRest, CmdDrop} {
 		s := planningState(Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}})
 		selectIcon(t, s, icon)
 		if !s.Choose() {

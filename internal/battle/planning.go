@@ -130,11 +130,11 @@ func (s *State) chooseCommand(i int) bool {
 	case CmdMount:
 		// `0x1F914`：指令碼直接寫死，選項 0 與 2。
 		return s.commit(i, CmdMount, 0, 2)
-	case CmdRest, CmdPickUp, CmdItem16, CmdDrop, CmdItem25, CmdGround:
+	case CmdRest, CmdDrop, CmdSwitchAlt1, CmdSwitch, CmdSwitchAlt2, CmdPickUp:
 		// `0x1F3B2`：兩個選項都設 0，直接收尾。真正的動作在執行段。
 		return s.commit(i, icon, 0, 0)
 	case CmdCast, CmdThrow:
-		// 背包要兩層清單、投擲的後續也還沒讀；記下來不動。
+		// 施法要兩層清單、投擲的後續也還沒讀；記下來不動（RE-093：0x0D 是施法）。
 		s.Plan.Unimplemented = append(s.Plan.Unimplemented, icon)
 	}
 	return false

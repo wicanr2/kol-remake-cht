@@ -95,6 +95,9 @@ type State struct {
 	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠（RE-091）。
 	Verdict Verdict
 	Gold    int
+	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，
+	// 打贏之後掉落的東西也放這裡（RE-091 的 `sub_289EE(0)`，還沒做）。
+	Ground [GroundSlots]GroundItem
 }
 
 // NewQuest 依任務地點的記錄擺好一場戰鬥。

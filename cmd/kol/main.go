@@ -1129,6 +1129,14 @@ func (g *game) battleStep() {
 		Target: g.battleSpeaker(r.Target),
 		Lookup: g.battleRecord,
 	}
+	// 丟與撿的訊息在動作**做完之後**才展開，東西已經不在原處了，所以名字由
+	// ActResult 帶出來（RE-094）：`|E` 是丟掉的那件、`|H` 是撿到的那件。
+	if r.Item != "" {
+		ctx.Item = r.Item
+		if r.Command == battle.CmdDrop {
+			ctx.Actor.Weapon = r.Item
+		}
+	}
 	if r.Outcome == nil {
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
 		// 移動成功那一句原版要按兩次：印完等一次、重畫戰場再等一次（RE-085）。

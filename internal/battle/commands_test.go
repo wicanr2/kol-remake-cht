@@ -13,6 +13,8 @@ func TestCommandBarBareHanded(t *testing.T) {
 }
 
 // 原版 frame-887 的主指令列是 7、0x21、0x29、0x24、0x15、0x27、5
+// ——也就是 YES、武器攻擊、徒手、**切換**、**丟**、移動、休息（RE-094 更正了
+// 0x24 與 0x15 的語意，值沒變）。
 // （RE-080 逐像素對過 KOLMPICS 的 10、36、44、39、24、42、8）。
 //
 // 這裡的武器數字是**從那一列反推出來的最小條件**（傷害碼 bit 0 為 1、種類高三位元
@@ -23,7 +25,7 @@ func TestCommandBarProducesOriginalFrameLayout(t *testing.T) {
 	a.SetParts()
 	m := &Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}}
 	got := CommandBar(a, m, CommandEnv{})
-	want := []int{CmdYes, CmdWeapon, CmdUnarmed, CmdDrop, CmdPickUp, CmdMove, CmdRest}
+	want := []int{CmdYes, CmdWeapon, CmdUnarmed, CmdSwitch, CmdDrop, CmdMove, CmdRest}
 	assertBar(t, got, want)
 }
 
@@ -41,7 +43,7 @@ func TestCommandBarTwoHandNeedsBothArms(t *testing.T) {
 	a.LeftArm = 30
 	m := &Member{HasWeapon: true, Weapon: Weapon{Kind: 0x22, Code: 1}}
 	got := CommandBar(a, m, CommandEnv{})
-	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdDrop, CmdPickUp, CmdMove, CmdRest})
+	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdSwitch, CmdDrop, CmdMove, CmdRest})
 }
 
 // 種類 6、0x0A、0x0B 直接給射擊，並把 +0x1D 設起來（`0x229B0`、`0x229F5`）。
@@ -51,7 +53,7 @@ func TestCommandBarMissileKinds(t *testing.T) {
 		a.SetParts()
 		m := &Member{HasWeapon: true, Weapon: Weapon{Kind: kind, Code: 1}}
 		got := CommandBar(a, m, CommandEnv{})
-		want := []int{CmdYes, CmdMissile, CmdUnarmed, CmdPickUp, CmdMove, CmdRest}
+		want := []int{CmdYes, CmdMissile, CmdUnarmed, CmdDrop, CmdMove, CmdRest}
 		assertBar(t, got, want)
 		if a.Flag1D != 1 {
 			t.Fatalf("種類 %#x 推出射擊之後 Flag1D 應該是 1，得到 %d", kind, a.Flag1D)
@@ -96,13 +98,13 @@ func TestCommandBarGroundNeedsSameCell(t *testing.T) {
 	m := &Member{}
 	env := CommandEnv{Ground: []Cell{{Row: 12, Col: 35}}}
 	for _, icon := range CommandBar(a, m, env) {
-		if icon == CmdGround {
+		if icon == CmdPickUp {
 			t.Fatal("不同格不該出現地上那一格")
 		}
 	}
 	env.Ground = append(env.Ground, Cell{Row: 12, Col: 34})
 	got := CommandBar(a, m, env)
-	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdGround, CmdMove, CmdRest})
+	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdPickUp, CmdMove, CmdRest})
 }
 
 // Flag1E 非零時換掉整組近戰與移動（`0x22C5E`）。
@@ -111,10 +113,10 @@ func TestCommandBarFlag1E(t *testing.T) {
 	a.SetParts()
 	m := &Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}}
 	got := CommandBar(a, m, CommandEnv{Standable: true})
-	assertBar(t, got, []int{CmdYes, CmdDrop, CmdPickUp, CmdMount, CmdDismount, CmdRest})
+	assertBar(t, got, []int{CmdYes, CmdSwitch, CmdDrop, CmdMount, CmdDismount, CmdRest})
 	// 腳下站不了、或有別人同格，就只剩下 0x3F。
 	got = CommandBar(a, m, CommandEnv{Standable: true, Occupied: true})
-	assertBar(t, got, []int{CmdYes, CmdDrop, CmdPickUp, CmdDismount, CmdRest})
+	assertBar(t, got, []int{CmdYes, CmdSwitch, CmdDrop, CmdDismount, CmdRest})
 }
 
 // 兩條腿都廢就沒有移動那一格（`0x22CCC`）。

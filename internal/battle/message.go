@@ -12,6 +12,12 @@ const (
 	PossessiveBase = 0x110
 	// ObjectiveBase + 性別 是受格：男 him、女 her。
 	ObjectiveBase = 0x10E
+	// 丟、撿與切換那三手的訊息（RE-094）。
+	CannotDropRecord = 0x10C // "cannot drop|B|E!"
+	DropsRecord      = 0x10D // "drops|B|E!"
+	FoundItemRecord  = 0x111 // "You have found a|H.  Do you want to pick it up?"
+	MustDropRecord   = 0x112 // "|G, you must drop or belt your|E to pick this up!"
+	PutsInBeltRecord = 0x114 // "puts|B|I in|B belt"
 	// TheRecord 是敵人名字前面那個 `The]`。
 	TheRecord = 0x140
 )

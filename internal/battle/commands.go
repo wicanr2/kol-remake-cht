@@ -14,12 +14,14 @@ const (
 	// CmdCast 是施法（`0x208ED` 對它呼叫 `sub_2818D`，RE-093）。原本從指令列的
 	// 圖號推成「背包清單」，推錯了。
 	CmdCast = 0x0D
-	// CmdPickUp／CmdDrop／CmdItem16／CmdItem25／CmdGround 的動作語意還沒對上。
-	CmdPickUp = 0x15
-	CmdItem16 = 0x16
-	CmdDrop   = 0x24
-	CmdItem25 = 0x25
-	CmdGround = 0x26
+	// 丟、撿與切換（RE-094）。三個原本都從指令列的圖號推，推錯了：0x15 是丟、
+	// 0x26 是撿、0x24／0x25／0x16 是把手上的武器與腰帶那件對調。
+	CmdDrop = 0x15
+	// CmdSwitch 是切換；0x25 與 0x16 走同一條路。
+	CmdSwitch     = 0x24
+	CmdSwitchAlt1 = 0x16
+	CmdSwitchAlt2 = 0x25
+	CmdPickUp     = 0x26
 	// CmdThrow 是投擲那一格（傷害碼 bit 0 為 1、種類低段時出現）。
 	CmdThrow = 0x22
 	// CmdMissile 是射擊。
@@ -168,22 +170,22 @@ func appendItemCommands(bar []int, a *Actor, m *Member, env CommandEnv) []int {
 			switch {
 			case m.HasWeapon && m.HasSecondItem:
 				if m.Weapon.Kind&0xE0 != 0 {
-					bar = append(bar, CmdItem25)
+					bar = append(bar, CmdSwitchAlt2)
 				}
 			case m.HasSecondItem:
-				bar = append(bar, CmdItem16)
+				bar = append(bar, CmdSwitchAlt1)
 			case m.Weapon.Kind&0xE0 != 0:
-				bar = append(bar, CmdDrop)
+				bar = append(bar, CmdSwitch)
 			}
 		}
 		if m.HasWeapon {
-			bar = append(bar, CmdPickUp)
+			bar = append(bar, CmdDrop)
 		}
 	}
 	if a.Flag1E == 0 {
 		for _, g := range env.Ground {
 			if g.Row == a.X && g.Col == a.Y {
-				bar = append(bar, CmdGround)
+				bar = append(bar, CmdPickUp)
 				break
 			}
 		}

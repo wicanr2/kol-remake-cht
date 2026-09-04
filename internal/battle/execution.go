@@ -201,6 +201,9 @@ type ActResult struct {
 	Message int
 	// Unimplemented 為真表示這一手 remake 還沒做出來，不是原版沒有動作。
 	Unimplemented bool
+	// Item 是這一手牽涉的物品名字。丟與撿都要它——原版印訊息時東西還在手上或
+	// 還在地上，remake 這邊做完才印，名字得另外帶出來（RE-094）。
+	Item string
 	// Redraw 為真表示這一句之後原版會重畫戰場再等一次鍵
 	// （`sub_26384:0x265D5`，移動成功才有）。
 	Redraw bool
@@ -293,6 +296,20 @@ func (s *State) act(i int, rng Rand) ActResult {
 		return out
 	case CmdMove, CmdDismount:
 		return s.move(i)
+	case CmdDrop:
+		out.Message, out.Item = s.DropItem(i)
+		return out
+	case CmdPickUp:
+		msg, _, name := s.PickUpItem(i)
+		if msg == 0 {
+			// 腳下沒東西：原版這一手就這樣過去，不印任何訊息。
+			return out
+		}
+		out.Message, out.Item = msg, name
+		return out
+	case CmdSwitch, CmdSwitchAlt1, CmdSwitchAlt2:
+		out.Message = s.SwitchItem(i)
+		return out
 	}
 	// 剩下的幾個指令碼。**撿（0x15）與丟（0x24）不會走到這裡**——執行段的分派只認
 	// 十個指令碼，那兩個不在其中，它們是規劃段的即時動作（RE-093）。真的落到這裡
