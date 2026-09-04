@@ -42,6 +42,14 @@ TARGETS = {
 }
 # 附近幾個 byte 也算命中，`mov [bx+2], al` 這種寫法會落在後面。
 SPAN = 4
+# RAW_VALUES 是「直接找這個 operand 值」的目標，給角色記錄裡的位移用——
+# 那種存取寫成 `mov al, [bx+1DDh]`，位址是基底暫存器加位移，沒有絕對位址可比。
+RAW_VALUES = {
+    # 結局的判準那一格（`sub_2B0FF:0x2B392`，RE-106）。
+    "char_0x1DD": 0x1DD,
+    # 任務旗標的群組（`0x28F73`、`0x2B396`）。
+    "word_2DF70": 0x2DF70,
+}
 
 
 def disassembly(ea: int) -> str:
@@ -65,7 +73,10 @@ def main() -> None:
             wanted[ea + delta] = name
             wanted[ea + delta - DGROUP_EA] = name
 
-    hits = {name: [] for name in TARGETS}
+    for name, v in RAW_VALUES.items():
+        wanted[v] = name
+
+    hits = {name: [] for name in list(TARGETS) + list(RAW_VALUES)}
     scanned = 0
     for func_ea in idautils.Functions():
         f = ida_funcs.get_func(func_ea)
@@ -100,6 +111,7 @@ def main() -> None:
         "note": "探索用輸出：幾個全域的 operand 值掃描；尚未鎖定任何斷言。",
         "functions_scanned": scanned,
         "targets": {k: f"0x{v:x}" for k, v in TARGETS.items()},
+        "raw_values": {k: f"0x{v:x}" for k, v in RAW_VALUES.items()},
         "hits": hits,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)

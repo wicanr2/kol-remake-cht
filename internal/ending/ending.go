@@ -17,8 +17,9 @@ const (
 	// TriggerOffset 是角色記錄裡決定結局的那一格（`0x2B392` 的 `bx + 1DDh`）。
 	// 它在任務旗標區（0x1E2）前面五個 byte，群組偏移與旗標共用 `word_2DF70`。
 	TriggerOffset = 0x1DD
-	// TriggerValue 是那一格要等於的值（`0x2B3A1`）。**為什麼是 0x17 還沒解**：
-	// 任務地點編號是 0…23，「完成到最後一個」是合理的猜測但沒有對到寫入點。
+	// TriggerValue 是那一格要等於的值（`0x2B3A1`）。那一格是**已回報的任務數**，
+	// 回報一次加一（`sub_11A93:0x11CD0`，RE-107）；最終任務要回報滿 0x17 個才
+	// 接得到（`sub_14564:0x145E7`），所以打完它時那一格正好是 0x17。
 	TriggerValue = 0x17
 )
 
@@ -57,7 +58,8 @@ var Panels = []Panel{
 	{Picture: 6, Records: []int{14, 15, 16}, Box: Rect{16, 45, 39, 143}},
 }
 
-// Triggered 回報一名角色的 progress 那幾格有沒有達成結局條件。
+// Triggered 回報一名角色的 progress 那幾格有沒有達成結局條件。progress 是角色
+// 記錄 `[0x1DD]` 起那幾格，每一格是那一組任務**已回報**的數量（RE-107）。
 // group 是 `word_2DF70`，remake 目前固定 0（同任務旗標，RE-101）。
 func Triggered(progress []int, group int) bool {
 	if group < 0 || group >= len(progress) {
