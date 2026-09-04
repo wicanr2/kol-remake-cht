@@ -27,9 +27,9 @@
       "generated_by": "tools/make_observation_inputs.py"
     }
   ],
-  "command": "tools/run_python_tool.sh tools/make_observation_inputs.py；再以 -scene play -seed 141421 -load workplace/saves/quest.json -quest-sites workplace/observe/quest-sites-one-enemy.json -monsters workplace/observe/monsters-weak.json 跑走到任務地點、答應參戰、二十二輪「攻擊」的按鍵腳本，逐步截圖取第 104…107 步。",
-  "seed": 141421,
-  "seed_note": "掉落是 19% 的機率（`rand(100) < 20`）。**不要用連續整數當種子掃**——LCG 走固定步數之後狀態對種子是線性的，連續種子會讓那一擲落在相關的值上：1…84 連續八十四個種子一次都沒中，換成散開的大數第十二個就中了。",
+  "command": "tools/run_python_tool.sh tools/make_observation_inputs.py；再以 -scene play -seed 39 -load workplace/saves/quest.json -quest-sites workplace/observe/quest-sites-one-enemy.json -monsters workplace/observe/monsters-weak.json 跑「走到任務地點、答應參戰、八輪攻擊」的按鍵腳本，逐步截圖取第 104…106 步。腳本是 91 步的前段（R R U×9 RET R×70 U×13 RET SPACE）接八次「> > > > > RET D RET > RET RET RET SPACE×6」。",
+  "seed": 39,
+  "seed_note": "掉落是 19% 的機率（`rand(100) < 20`），所以要掃種子。**掃的結果跟著腳本走**：二十二輪的長腳本用 1…84 連續種子一次都沒中，換散開的大數第十二個就中（LCG 走固定步數之後狀態對種子是線性的）；八輪的短腳本用 1…40 連續種子，20 與 39 兩個都中。換句話說「連續種子一定錯過」不是通則，改了腳本就要重掃。",
   "size": [
     320,
     200
@@ -39,22 +39,22 @@
       "file": "victory.png",
       "step": 104,
       "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）",
-      "sha256": "651bbc4d0a5df72bd6bc2930c023e713e2d8c093e2b22f19eac0b4f63d2d921d"
+      "sha256": "d5126f98b2cd3d3245b095bc94da8ef5fb02d329fe00b9fc74453c1aa7cab7c8"
     },
     {
       "file": "reward.png",
       "step": 105,
-      "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 43 GOLD CROWNS!——單人隊伍不印 Each player，改逐一印在籍角色的名字（0x212F4）。步 107（領完之後）與這一張逐 byte 相同，所以沒有另存。",
-      "sha256": "c73c8d1acdd331ddafb59ac0f4cc6b07f37a80168d1bb1abce3ea05acfb5708e"
+      "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 127 GOLD CROWNS!——單人隊伍不印 Each player，改逐句接（RE-096）。",
+      "sha256": "ca7cceec0347ade497d2e101199f3164f7cfc3ad54e8bdeaaf17403eee18ce32"
     },
     {
       "file": "items-found.png",
       "step": 106,
-      "shows": "戰利品清單：框在 (4,7) 125×146，標題 ITEMS FOUND: 由記錄自帶的 ~H02~V09 定位，清單一行 CLOTH PANTS，白框標示游標。",
-      "sha256": "ae1c97e64e326cc780028ebd49ddcd4b22c8315bb424e566d7f0761757808883"
+      "shows": "戰利品清單：框在 (4,7) 125×146，標題 ITEMS FOUND: 由記錄自帶的 ~H02~V09 定位，清單一行 PLATEMAIL，白框標示游標那一列。",
+      "sha256": "4a9e71b6cf347fde3e1fee0e0ab33efb9d3e6180f4047a7ab101ce2ad643c1e3"
     }
   ],
   "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
   "substituted_inputs_tool": "tools/make_observation_inputs.py",
-  "script": "workplace/specs/spoil-list.txt（`workplace/` 不進版控，命令見下）"
+  "script": "腳本見 command（`workplace/` 不進版控）"
 }
