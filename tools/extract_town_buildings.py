@@ -47,10 +47,6 @@ ICON_FLAGS = 0x3C
 # 每一點傷勢乘一次（`sub_11A93:0x126A3`）。住宿存檔時把 0x3A／0x3B 寫進
 # 角色記錄位移 0x2E／0x2F（`sub_14DB1:0x1505B`）。
 PRICE_OFFSET = 0x38
-# 位移 0x36 是這棟建築對應的任務地點編號（`byte_2FBFA`，RE-107）：
-# 低七位是編號 0…23，bit 7 表示那是**最終任務**——要已回報滿 0x17 個才開放
-# （`sub_14564:0x145E7`）。回報在建築內主迴圈 `sub_11A93:0x11C33`。
-QUEST_OFFSET = 0x36
 RECORD_ID_OFFSET = 0x3A
 # 商店的商品表（RE-075）：payload 位移 0x100 起，一筆 16 byte，最多 32 筆，
 # 第一個 byte 是 0 就結束。名稱是 5-bit 壓縮（高 nibble 是字數，字元從第 4 個
@@ -214,9 +210,6 @@ def main() -> int:
                     door["price"] = be16(body, PRICE_OFFSET)
                     door["heal_rate"] = body[PRICE_OFFSET + 1]
                     door["record_id"] = be16(body, RECORD_ID_OFFSET)
-                    quest = body[QUEST_OFFSET]
-                    door["quest_site"] = quest & 0x7F
-                    door["quest_final"] = quest >= 0x80
                     if body[ICON_FLAGS] & 0x32:
                         door["goods"] = goods(body, body[ICON_FLAGS])
                     if body[ICON_FLAGS] & 0x80:
