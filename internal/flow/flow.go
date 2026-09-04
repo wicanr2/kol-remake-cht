@@ -228,34 +228,10 @@ func (f *Flow) innKey(token string) bool {
 	return true
 }
 
+// townKey 把 token 交給城鎮那一層。鍵位由 `town.Session.Key` 統一定義——
+// flow 只負責轉發，不再自己維護一份 switch。
 func (f *Flow) townKey(token string) bool {
-	switch token {
-	case "L":
-		return f.Town.Walk(-1, 0)
-	case "R":
-		return f.Town.Walk(1, 0)
-	case "U":
-		return f.Town.Walk(0, -1)
-	case "D":
-		return f.Town.Walk(0, 1)
-	case "A":
-		return f.Town.Walk(-1, -1)
-	case "S":
-		return f.Town.Walk(1, -1)
-	case "Z":
-		return f.Town.Walk(-1, 1)
-	case "X":
-		return f.Town.Walk(1, 1)
-	case "<":
-		f.Town.MoveCursor(-1)
-	case ">":
-		f.Town.MoveCursor(1)
-	case "RET":
-		f.Town.Accept()
-	default:
-		return false
-	}
-	return true
+	return f.Town.Key(token)
 }
 
 func (f *Flow) note(what string) {

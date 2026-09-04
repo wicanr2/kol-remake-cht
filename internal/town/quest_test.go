@@ -1,6 +1,10 @@
 package town
 
-import "testing"
+import (
+	"os"
+	"path/filepath"
+	"testing"
+)
 
 // 身上要掃的那幾格：0x30 起、0x1A0 止，跳過 0x40…0x9F（`0x11B8D`）。
 func TestCarriedOffsets(t *testing.T) {
@@ -195,4 +199,41 @@ func hexOf(b []byte) string {
 		out = append(out, digits[v>>4], digits[v&0x0F])
 	}
 	return string(out)
+}
+
+// 抽取器輸出的任務欄位要一路帶到 Door。這一條擋的是實際踩過的坑：
+// `LoadBuildings` 建 Door 時漏抄那六個欄位，結果 typed data 有、規則層也對，
+// 但玩家走進收任務的建築什麼都不會發生——單元測試全綠，遊戲裡從來沒生效過。
+func TestLoadBuildingsKeepsQuestFields(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "buildings.json")
+	body := `{"schema":"kol-town-buildings-data-v1","towns":[{"town":7,
+      "archive":"TOWN7","doors":[{"index":14,"x":42,"y":23,"icon_flags":[1,4],
+      "name":"The Assembly Building","quest_site":4,"quest_final":true,
+      "quest_wants":"Shackles",
+      "quest_wants_bytes":"89a0235b0b300000000a000000000000",
+      "quest_gives":"Black Ingot",
+      "quest_gives_bytes":"b130235812e3be8403e828ff54769420"}]}]}`
+	if err := os.WriteFile(path, []byte(body), 0o644); err != nil {
+		t.Fatalf("寫入失敗：%v", err)
+	}
+	loaded, err := LoadBuildings(path)
+	if err != nil {
+		t.Fatalf("讀取失敗：%v", err)
+	}
+	door := loaded.Town(7).DoorAt(42, 23)
+	if door == nil {
+		t.Fatal("找不到那扇門")
+	}
+	q := door.Quest()
+	if q == nil {
+		t.Fatal("這一棟應該收任務物品——載入器把 quest 欄位丟掉了")
+	}
+	if q.Site != 4 || !q.Final || len(q.Wants) != CarriedStride ||
+		len(q.Gives) != CarriedStride {
+		t.Fatalf("任務欄位讀成 %+v", q)
+	}
+	if door.QuestWants != "Shackles" {
+		t.Fatalf("要的東西讀成 %q", door.QuestWants)
+	}
 }

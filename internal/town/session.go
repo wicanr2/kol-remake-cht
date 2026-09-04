@@ -387,6 +387,9 @@ func (s *Session) turnInQuests(door *Door) {
 	}
 }
 
+// Door 是現在進的這一棟；不在建築內就是 nil。
+func (s *Session) Door() *Door { return s.door }
+
 // QuestTurnIn 是一次交付的結果。
 type QuestTurnIn struct {
 	// Member 是隊伍裡的第幾名；Slot 是身上的第幾格（索引與 CarriedOffsets 對齊）。

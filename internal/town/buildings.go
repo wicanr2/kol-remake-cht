@@ -131,6 +131,14 @@ type rawDoor struct {
 	RecordID    int          `json:"record_id"`
 	Goods       []Good       `json:"goods"`
 	Skills      []TrainSkill `json:"skills"`
+	// 收任務物品那一組（RE-109）。抽取器一直有輸出，載入器原本沒接，
+	// 結果是進了收任務的建築也交不出東西。
+	QuestSite       int    `json:"quest_site"`
+	QuestFinal      bool   `json:"quest_final"`
+	QuestWants      string `json:"quest_wants"`
+	QuestWantsBytes string `json:"quest_wants_bytes"`
+	QuestGives      string `json:"quest_gives"`
+	QuestGivesBytes string `json:"quest_gives_bytes"`
 }
 
 type rawTown struct {
@@ -179,6 +187,9 @@ func LoadBuildings(path string) (*Buildings, error) {
 				TextMissing: d.TextMissing, Price: d.Price,
 				HealRate: d.HealRate, RecordID: d.RecordID, Goods: d.Goods,
 				Skills: d.Skills,
+				QuestSite: d.QuestSite, QuestFinal: d.QuestFinal,
+				QuestWants: d.QuestWants, QuestWantsBytes: d.QuestWantsBytes,
+				QuestGives: d.QuestGives, QuestGivesBytes: d.QuestGivesBytes,
 			}
 			if len(d.IconFlags) == 2 {
 				door.IconFlags = [2]int{d.IconFlags[0], d.IconFlags[1]}
