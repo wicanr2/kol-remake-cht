@@ -1,6 +1,10 @@
 # 交接
 
-- 日期：2026-08-31
+> **這份是 2026-08-31 那一輪的交接快照**，「已完成並驗證」那一段留著當歷史。
+> 目前狀態、有效決策與下一步以 [`CONTEXT.md`](CONTEXT.md) 與
+> [`WORKLIST.md`](WORKLIST.md) 為準。
+
+- 日期：2026-08-31（最後一次核對：2026-09-05）
 - 儲存庫：`wicanr2/kol-remake-cht`（private）
 - HEAD：以 `git rev-parse HEAD` 為準
 - 分支：`main`
@@ -44,14 +48,15 @@
 
 ## 尚待處理
 
-| 優先 | 類型 | 工作 | 下一個精確動作 | 阻塞 |
-|---|---|---|---|---|
-| 1 | product decision | theme 範圍 | 使用者選 EGA-only、CGA／Hercules 後續，或三者首版必備 | 等待使用者 |
-| 2 | asset RE | SPEC-002 READY 證據 | 追下一個 EGA PICS consumer 圖號 | 多數像素契約未知 |
+兩列都已結案：theme 範圍於 2026-09-01 定為首版 EGA-only（CGA／Hercules 列後續選項），
+SPEC-002 於同期升 READY。現行的待辦見 `WORKLIST.md` 的「下一個唯一工作」。
 
 ## 執行中程序與暫存物
 
-無。每輪結束仍須重新檢查本專案 Docker 容器。
+無。工作樹沒有 root-owned 檔案；一次性容器全部 `--rm`。
+`workplace/` 與 `dist-all/` 不進版控：前者是探索與觀察用的中間產物，
+後者是交付包（現行 `dist-all/0.1.1/`）。每輪結束仍須重新檢查本專案 Docker 容器，
+**只清理自己建立的**——這台機器同時放著其他專案的 image 與容器。
 
 ## 不要重複
 
