@@ -1310,6 +1310,11 @@ func (g *game) battleStep() {
 			g.battleRecords(before) + " " + g.battleRecords(after)))}
 		return
 	}
+	if len(r.Records) > 0 {
+		// 一句要接兩筆記錄的（射擊撞在樹上或牆上，RE-102）。
+		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecords(r.Records)))
+		return
+	}
 	if r.Outcome == nil {
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
 		// 移動成功那一句原版要按兩次：印完等一次、重畫戰場再等一次（RE-085）。

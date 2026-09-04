@@ -151,12 +151,38 @@ func ModifierRow(style int, rng Rand) int {
 }
 
 // DefenceScore 是對手的防禦分數。防禦選項為 0 表示不招架，分數直接是 0
-// （`sub_26D76:0x27204`）。
+// （`sub_26D76:0x27204`）；算出來是負的也當 0（`0x27454`）。
 func DefenceScore(d Actor, roll int) int {
 	if d.Guard == 0 {
 		return 0
 	}
-	return d.DefenceValue()/10 + roll
+	return clampDefence(d.DefenceValue()/10 + roll)
+}
+
+// MissileDefenceValue 是被射中時防禦分數的骰前部分（`sub_26D76:0x271E3`）：
+// 招架與招架次數都不算，換成快捷的一半，其餘折算與盾牌照舊。射擊那一條在
+// `0x271FE` 直接跳到 `0x2728C`，連「防禦選項為 0」的檢查都跳過了。
+func (a Actor) MissileDefenceValue() int {
+	v := a.Quickness / 2
+	v -= v*a.Injury()/200 + a.Damage*10 + a.Encumbrance
+	if a.ShieldGrade != NoShield {
+		v += 100*a.ShieldGrade + 200
+	}
+	return v
+}
+
+// MissileDefenceScore 是被射中時的防禦分數。
+func MissileDefenceScore(d Actor, roll int) int {
+	return clampDefence(d.MissileDefenceValue()/10 + roll)
+}
+
+// clampDefence 是 `0x27382` 的那一條：防禦分數是負的就當 0 再比，
+// 所以命中餘裕不會因為對手的分數很負而灌水。
+func clampDefence(v int) int {
+	if v < 0 {
+		return 0
+	}
+	return v
 }
 
 // HitLocation 依攻擊選項挑一列累積機率，再用 1…100 的擲骰選部位
@@ -236,6 +262,35 @@ func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 			msg = 2
 		}
 		return Outcome{Parried: true, Message: msg}
+	}
+	damage := DamageRoll(*a, style, attack-defence, rng)
+	location := HitLocation(style, rng.Roll(AttackRoll))
+	out := Outcome{Damage: damage, Location: location}
+	out.Down, out.Limb = d.Take(damage, location)
+	return out
+}
+
+// ResolveMissile 是射中之後的結算（`sub_26D76` 的 0x23 那一條，RE-102）。
+// attack 是彈道扣完剩下的命中值——沿路的樹與人已經先扣過了。
+//
+// stray 為真表示這一發是被擋在半路的人接下的（`word_30A74 == 2`）：原版那時把
+// 兩邊的分數都換成 `rand(100)`（`0x27153`），彈道算出來的命中值不算數。
+//
+// 射擊不會被招架：分數不夠時原版印的是「but misses completely!」而不是招架句，
+// 所以這裡照樣回 Parried，訊息由 `AttackLine` 依指令碼分（RE-088）。
+func ResolveMissile(a *Actor, d *Actor, style, attack int, stray bool, rng Rand) Outcome {
+	defence := 0
+	if stray {
+		attack = rng.Roll(AttackRoll)
+		defence = clampDefence(rng.Roll(AttackRoll))
+	} else {
+		if attack < 0 {
+			return Outcome{Miss: true, Margin: -attack}
+		}
+		defence = MissileDefenceScore(*d, rng.Roll(AttackRoll))
+	}
+	if attack < defence {
+		return Outcome{Parried: true}
 	}
 	damage := DamageRoll(*a, style, attack-defence, rng)
 	location := HitLocation(style, rng.Roll(AttackRoll))

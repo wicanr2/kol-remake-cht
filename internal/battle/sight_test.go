@@ -29,7 +29,7 @@ func siteFiveField() *Field {
 // 原版 `world-quest-run1` 的 frame-886：視窗最下面兩列只看得到隊伍那一欄，
 // 左右都被 (16, 39)…(16, 43) 那一排石板擋住。
 func TestVisibleMatchesOriginalFrame(t *testing.T) {
-	sight := siteFiveField().Visible(14, 41)
+	sight := siteFiveField().Visible(14, 41, false)
 	for row := 0; row < ViewRows; row++ {
 		for col := 0; col < ViewCols; col++ {
 			want := true
@@ -69,5 +69,38 @@ func TestSeesOverFromRoad(t *testing.T) {
 	}
 	if seesOver(41, RoadTileA, 1) {
 		t.Error("只有第一步能看過去")
+	}
+}
+
+// 騎著的人（記錄 +0x1E 非零）看得過牆與碎石那一段：同一張地形，
+// 原本被 (16, 39)…(16, 43) 那排石板擋掉的下面兩列會露出來
+// （`sub_25F8A:0x2606C`，RE-102）。
+func TestVisibleMountedSeesOverWalls(t *testing.T) {
+	f := siteFiveField()
+	on, off := f.Visible(14, 41, true), f.Visible(14, 41, false)
+	gained := 0
+	for row := 0; row < ViewRows; row++ {
+		for col := 0; col < ViewCols; col++ {
+			if on[row][col] && !off[row][col] {
+				gained++
+			}
+			if !on[row][col] && off[row][col] {
+				t.Fatalf("騎著不該少看到 (%d,%d)", row, col)
+			}
+		}
+	}
+	if gained == 0 {
+		t.Fatal("騎著應該多看到幾格")
+	}
+	// 石板（0x24 是路面、0x29 是牆）本身還是擋在那裡，只是穿得過去；
+	// 例外只對 0x23…0x2D 這一段成立，別的擋路磚照擋。
+	if seesOver(0x09, MountedSight, 3) {
+		t.Fatal("草地不在例外那一段")
+	}
+	if !seesOver(0x29, MountedSight, 3) {
+		t.Fatal("騎著應該看得過牆")
+	}
+	if seesOver(0x29, TileGround, 3) {
+		t.Fatal("沒騎又不是第一步就不該穿得過")
 	}
 }

@@ -75,7 +75,12 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	shadow(dst, w.X, w.Y, w.Width, w.Height)
 	fill(dst, w.X, w.Y, w.Width, w.Height, town.ColourBoxEdge)
 	cx, cy := s.Camera()
-	sight := s.Field.Visible(cx, cy)
+	// 騎著的人看得過牆（參戰者記錄 +0x1E，RE-102）。
+	mounted := false
+	if s.Cursor >= 0 && s.Cursor < len(s.Actors) {
+		mounted = s.Actors[s.Cursor].Flag1E != 0
+	}
+	sight := s.Field.Visible(cx, cy, mounted)
 	v := battle.FieldView
 	for r := 0; r < battle.ViewRows; r++ {
 		for c := 0; c < battle.ViewCols; c++ {

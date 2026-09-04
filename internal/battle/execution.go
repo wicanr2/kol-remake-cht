@@ -40,7 +40,28 @@ const (
 	// BlockedRecord／MovedRecord 是移動走不動與走了一步那兩句（RE-085）。
 	BlockedRecord = 0x10A
 	MovedRecord   = 0x10B
+	// 射擊那一手的四句（RE-102）。MissileIntoRecord 後面要接 TreeRecord 或
+	// WallRecord；MissileNothingRecord 是射過去空無一物。
+	MissileIntoRecord    = 0x121
+	TreeRecord           = 0x122
+	WallRecord           = 0x123
+	MissileNothingRecord = 0x124
+	// ReloadRecord 是這一回合用來裝填那一句（`0x20803`，RE-093）。
+	ReloadRecord = 0x15D
 )
+
+// NoReloadKinds 是不用裝填的三種武器種類（`0x207AF`…`0x207C8`）。
+var NoReloadKinds = [3]int{6, 10, 11}
+
+// NeedsReload 回報這一種武器射之前要不要先裝填。
+func NeedsReload(kind int) bool {
+	for _, k := range NoReloadKinds {
+		if kind == k {
+			return false
+		}
+	}
+	return true
+}
 
 // 戰場上走得到的範圍：兩軸都夾在 4…0x3B（`sub_26384:0x2650B`）。
 // 陣列是 64×64，但最外圈四格進不去。
@@ -227,6 +248,9 @@ type ActResult struct {
 	// Redraw 為真表示這一句之後原版會重畫戰場再等一次鍵
 	// （`sub_26384:0x265D5`，移動成功才有）。
 	Redraw bool
+	// Records 是這一手要印的幾筆記錄，給一句話要接兩筆的情形用（射擊撞在樹上
+	// 或牆上，RE-102）。有 Records 就不看 Message。
+	Records []int
 }
 
 // FacingTarget 回傳面前那一格站著誰（`sub_26D76:0x26DA5` 的
@@ -336,6 +360,8 @@ func (s *State) act(i int, rng Rand) ActResult {
 		return out
 	case CmdCast:
 		return s.cast(i, rng)
+	case CmdMissile:
+		return s.shoot(i, rng)
 	}
 	// 剩下的幾個指令碼。**撿（0x15）與丟（0x24）不會走到這裡**——執行段的分派只認
 	// 十個指令碼，那兩個不在其中，它們是規劃段的即時動作（RE-093）。真的落到這裡
@@ -450,4 +476,73 @@ func (s *State) moveBlocked(i, x, y int) bool {
 		}
 	}
 	return false
+}
+
+// shoot 是射擊那一手（指令碼 0x23，`sub_26D76(0)`，RE-102）。
+//
+// 沒裝填的武器第一回合只能裝填，這一手就沒了（`0x207CD`，RE-093）；射出去之後
+// 那一格又清回沒裝填（`0x20860`）。
+//
+// 目標是規劃段記住的那一格（`Plan.Memo`），中間拉一條線：撞在樹或牆上就印
+// 「fires a missle into a …」，被半路的人接下就打那個人，一路到底就打停下來
+// 那一格上的人，那一格空著印「fires a missle but nothing is there!」。
+func (s *State) shoot(i int, rng Rand) ActResult {
+	a := &s.Actors[i]
+	out := ActResult{Actor: i, Command: a.Command, Target: -1}
+	reload := NeedsReload(a.Weapon.Kind)
+	if reload && a.Flag1D == 0 {
+		a.Flag1D = 1
+		a.Command = 0
+		out.Command = 0
+		out.Message = ReloadRecord
+		return out
+	}
+	if reload {
+		a.Flag1D = 0
+	}
+	c := s.memo(i)
+	shot := s.Shoot(i, c.Row, c.Col, a.AttackValue()/10+rng.Roll(AttackRoll))
+	if shot.Stopped && shot.Block != MissileActor {
+		out.Records = []int{MissileIntoRecord, TreeRecord}
+		if shot.Block == MissileWall {
+			out.Records[1] = WallRecord
+		}
+		return out
+	}
+	target := shot.Target
+	if target < 0 {
+		// 停下來那一格先找敵方（`sub_24C35(1, …)`），沒有再找任何一名
+		// （`sub_24C35(0, …)`）——**兩次都只看敵方陣營那一格**，射的人是誰不影響。
+		target = s.enemyAt(shot.X, shot.Y)
+		if target < 0 {
+			target = s.actorAt(shot.X, shot.Y)
+		}
+	}
+	if target < 0 || target == i || s.Actors[target].Down() {
+		out.Message = MissileNothingRecord
+		return out
+	}
+	out.Target = target
+	outcome := ResolveMissile(a, &s.Actors[target], a.Style,
+		shot.Score, shot.Block == MissileActor, rng)
+	out.Outcome = &outcome
+	if !outcome.Miss && !outcome.Parried {
+		out.Knock = s.Knockback(i, target, rng)
+	}
+	return out
+}
+
+// enemyAt 是 `sub_24C35(1, x, y)`：那一格上的敵方參戰者，沒有就回 -1。
+// 旗標的 bit 0 表示「我方那一邊跳過」，所以問的人是誰不影響結果。
+func (s *State) enemyAt(x, y int) int {
+	for i := range s.Actors {
+		a := s.Actors[i]
+		if a.Side == SideEmpty || a.Side == SideParty || a.Down() {
+			continue
+		}
+		if a.X == x && a.Y == y {
+			return i
+		}
+	}
+	return -1
 }

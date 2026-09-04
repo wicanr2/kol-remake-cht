@@ -12,14 +12,18 @@ const TileUnseen = 0x4A
 // （`sub_25F8A:0x26001`…`0x2601D`）。位元有設就是擋。
 var sightBits = [10]byte{0xFF, 0x80, 0x01, 0xFF, 0xF1, 0xFF, 0x17, 0xF9, 0x76, 0x7F}
 
-// 0x23…0x2D 這一段（牆與碎石）另有例外：站在 RoadTileA／RoadTileB 上時，
-// 視線的第一步穿得過去（`sub_25F8A:0x2602C`…`0x26095`）。
+// 0x23…0x2D 這一段（牆與碎石）另有兩條例外，都在 `sub_25F8A:0x2602C`…`0x26095`：
+// 騎著的人（記錄 +0x1E 非零）整條線都穿得過去，或者站在 RoadTileA／RoadTileB 上
+// 時視線的第一步穿得過去。
 const (
 	seeOverLow  = 0x23
 	seeOverHigh = 0x2E
 	// RoadTileA／RoadTileB 是那兩塊「站上去就看得過去」的磚。
 	RoadTileA = 0x24
 	RoadTileB = 0x25
+	// MountedSight 不是磚塊，是「騎著」這件事在 seesOver 裡的代號——原版那一條
+	// 走的是參戰者記錄 +0x1E，不看腳下（`sub_25F8A:0x2606C`）。
+	MountedSight = -1
 )
 
 // walkBits 是磚塊擋不擋**路**的位元圖，原樣抄自 DGROUP 0x0FC8 十個 byte
@@ -56,9 +60,14 @@ const (
 // Visible 算出以 (x, y) 為中心的視窗可見度。原版對 81 格逐格拉一條線
 // （`sub_223C0:0x22436` 兩層迴圈呼叫 `sub_25D7A(3)`）：線上的格子依序標記，
 // 標到擋住的那一格就停，後面的格子維持「還沒看到」。
-func (f *Field) Visible(x, y int) Sight {
+//
+// mounted 是看的人記錄 +0x1E 非零，也就是騎著——那時牆與碎石整段都看得過去。
+func (f *Field) Visible(x, y int, mounted bool) Sight {
 	var state [ViewRows * ViewCols]int
 	foot := f.At(clampCell(x), clampCell(y))
+	if mounted {
+		foot = MountedSight
+	}
 	for row := 0; row < ViewRows; row++ {
 		for col := 0; col < ViewCols; col++ {
 			f.ray(x, y,
@@ -73,8 +82,10 @@ func (f *Field) Visible(x, y int) Sight {
 	return out
 }
 
-// ray 是 `sub_25D7A` 的走線：主軸每步走一格，誤差項滿了副軸才走一格。
-func (f *Field) ray(ox, oy, tx, ty, foot int, state *[ViewRows * ViewCols]int) {
+// walkLine 是 `sub_25D7A` 的走線：主軸每步走一格，誤差項滿了副軸才走一格。
+// step 拿到第幾步與走到的格，回 false 就停。**起點那一格不會送進 step**，
+// 原版也是先走一步才判（`0x25E19` 在迴圈開頭就位移）。
+func walkLine(ox, oy, tx, ty int, step func(k, r, c int) bool) {
 	dRow, dCol := tx-ox, ty-oy
 	aRow, aCol := abs(dRow), abs(dCol)
 	steps, rowMajor := aCol, false
@@ -105,9 +116,19 @@ func (f *Field) ray(ox, oy, tx, ty, foot int, state *[ViewRows * ViewCols]int) {
 		} else {
 			c += sign(dCol)
 		}
+		if !step(k, r, c) {
+			return
+		}
+	}
+}
+
+// ray 是視線那一種走法（`sub_25D7A(3)`）：線上的格子依序標記，
+// 標到擋住的那一格就停。
+func (f *Field) ray(ox, oy, tx, ty, foot int, state *[ViewRows * ViewCols]int) {
+	walkLine(ox, oy, tx, ty, func(k, r, c int) bool {
 		idx := (r-ox+ViewCentre.Row)*ViewCols + (c - oy + ViewCentre.Col)
 		if idx < 0 || idx >= len(state) {
-			return
+			return false
 		}
 		if state[idx] == sightUnknown {
 			state[idx] = sightSeen
@@ -116,16 +137,20 @@ func (f *Field) ray(ox, oy, tx, ty, foot int, state *[ViewRows * ViewCols]int) {
 				state[idx] = sightBlocked
 			}
 		}
-		if state[idx] == sightBlocked {
-			return
-		}
-	}
+		return state[idx] != sightBlocked
+	})
 }
 
-// seesOver 是牆與碎石那一段的例外：只有視線的第一步、而且站在路面上才穿得過去。
+// seesOver 是牆與碎石那一段的例外。騎著的人（foot 為 MountedSight）不受步數與
+// 腳下磚塊限制；其餘只有視線的第一步、而且站在路面上才穿得過去。
 func seesOver(tile, foot, step int) bool {
-	return tile >= seeOverLow && tile < seeOverHigh && step == 0 &&
-		(foot == RoadTileA || foot == RoadTileB)
+	if tile < seeOverLow || tile >= seeOverHigh {
+		return false
+	}
+	if foot == MountedSight {
+		return true
+	}
+	return step == 0 && (foot == RoadTileA || foot == RoadTileB)
 }
 
 func clampCell(v int) int {
