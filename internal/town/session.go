@@ -62,6 +62,8 @@ type Session struct {
 	Unimplemented []string
 	// TurnedIn 是這一次進門交出去的任務物品（RE-109）；沒有就是 nil。
 	TurnedIn []QuestTurnIn
+	// TookQuest 是這一次接下的任務（RE-110）；沒接就是 nil。
+	TookQuest *TakenQuest
 	// CJK 為真時是中文模式。角色資料頁的中文版面還沒做，選 MIRROR 只會記一筆，
 	// 不會開出一頁排錯的畫面。
 	CJK bool
@@ -85,6 +87,8 @@ type Session struct {
 	shop *shopState
 	// train 是訓練流程的狀態；nil 代表不在訓練中（RE-076）。
 	train *trainState
+	// quest 是接任務流程的狀態；nil 代表不在接任務中（RE-110）。
+	quest *questOffer
 	// quit 記下玩家在「你要離開嗎」那一問答了 YES。
 	quit bool
 
@@ -266,6 +270,15 @@ func (s *Session) acceptInside() {
 	case s.asking:
 		// 兩個答案都走同一條路：這份原版輸入只有一份角色檔，搜不搜硬碟結果相同。
 		s.openList()
+	case s.quest != nil:
+		switch id {
+		case IconYes:
+			s.questAnswer(true)
+		case IconNo:
+			s.questAnswer(false)
+		case IconSpacebar:
+			s.nextQuestPage()
+		}
 	case s.recruit != nil:
 		if id == IconUTurn || id == IconNo {
 			s.cancelRecruit()
@@ -363,6 +376,8 @@ func (s *Session) enter() {
 	if s.Topics != nil {
 		s.topic = s.Topics.Building(town, door.Index)
 	}
+	s.quest = nil
+	s.TookQuest = nil
 	s.turnInQuests(door)
 }
 
@@ -417,6 +432,11 @@ func (s *Session) Continue() {
 		s.Inside.Dialog = s.pending
 		s.Inside.DialogZh = nil
 		s.pending = nil
+		return
+	}
+	// 接任務的敘述有兩頁，讀完才問「Will you do this?」（RE-110）。
+	if s.quest != nil {
+		s.nextQuestPage()
 		return
 	}
 	// REST 的流程裡有幾段話讀完之後還要繼續（免費客棧、錢不夠、治好了）。
@@ -666,6 +686,11 @@ func (s *Session) Ask(question string) bool {
 	if s.topic != nil {
 		if slot := s.topic.SlotFor(key.Topic); slot >= 0 {
 			s.told[slot] = true
+			// 第 5 槽在收任務物品的建築裡是接任務那一條（RE-110）；
+			// 接不了就照常放這一槽的回應。
+			if slot == QuestSlot && s.offerQuest() {
+				return true
+			}
 			s.say(ask, s.message(TopicMessageBase+slot))
 			return true
 		}

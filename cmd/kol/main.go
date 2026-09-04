@@ -799,6 +799,9 @@ type game struct {
 	// lastParty／lastRoster 是上一步寫進軌跡的摘要，用來省掉沒有變化的那幾行。
 	lastParty  []string
 	lastRoster []string
+
+	// endingArmed 是「該播結局了」。任務戰鬥打完那一刻才可能設起來（RE-106）。
+	endingArmed bool
 }
 
 // snapshot 記下這一步之後遊戲停在哪。欄位只取「能證明走到哪一層」的那幾個：
@@ -825,6 +828,10 @@ func (g *game) snapshot() map[string]any {
 		}
 		if len(g.play.TurnedIn) > 0 {
 			town["turned_in"] = len(g.play.TurnedIn)
+		}
+		if q := g.play.TookQuest; q != nil {
+			town["took_quest"] = map[string]any{"member": q.Member,
+				"site": q.Site, "final": q.Final}
 		}
 		// 隊伍與戰場的摘要壓成一行一名的字串，而且只在與上一步不同時才寫。
 		// 上千步的路徑逐步展開成物件會把軌跡撐到兩百萬 byte，其中九成是重複的。
@@ -869,7 +876,7 @@ func (g *game) snapshot() map[string]any {
 			"prompt": int(st.Plan.Prompt), "verdict": int(st.Verdict),
 			"turn": st.Round.Turn, "order": len(st.Round.Order),
 			"cursor": st.Cursor, "bar": st.Plan.Bar, "selected": st.Plan.Selected,
-			"actors": len(st.Actors)}
+			"actors": len(st.Actors), "quest_done": st.QuestDone}
 		if len(st.Exec.Text) > 0 {
 			b["exec_text"] = st.Exec.Text
 		}
@@ -886,7 +893,8 @@ func (g *game) snapshot() map[string]any {
 		row["battle"] = b
 	}
 	if g.ending != nil {
-		row["ending"] = map[string]any{"panel": g.ending.Panel}
+		row["ending"] = map[string]any{"panel": g.ending.Panel,
+			"armed": g.endingArmed}
 	}
 	return row
 }
@@ -1266,17 +1274,24 @@ func (g *game) Update() error {
 	return nil
 }
 
-// endingReached 回報隊上有沒有人把最後一件任務回報掉了（RE-106）。原版在交出
-// 任務物品那一步之後就檢查 `[bx+1DDh] == 0x17`，成立就播結局。
-func (g *game) endingReached() bool {
-	if g.play == nil || g.endBank == nil {
-		return false
+// endingReached 回報要不要播結局。**觸發點是任務戰鬥打完那一刻**（RE-106）：
+// 原版在 `sub_2B0FF` 的尾端先看 `word_34968`——那是「這一場真的把任務標成完成了」
+// 的旗標（`sub_28F5D` 設的，RE-101）——成立才逐名檢查 `[0x1DD] == 0x17`。
+// 交任務物品那一步不檢查，走在路上也不檢查。
+func (g *game) endingReached() bool { return g.endingArmed }
+
+// armEnding 是戰鬥收尾時的那一次檢查。標到任務完成才看，沒標到就不看。
+func (g *game) armEnding(s *battle.State) {
+	if g.play == nil || g.endBank == nil || s == nil || s.QuestDone == 0 {
+		return
 	}
 	party := make([][]int, 0, len(g.play.Party))
 	for _, m := range g.play.Party {
 		party = append(party, m.Progress)
 	}
-	return ending.AnyTriggered(party, 0)
+	if ending.AnyTriggered(party, 0) {
+		g.endingArmed = true
+	}
 }
 
 // leftTown 回報這一次遊玩已經走出城門了——野外與戰鬥都算。flow 走到城鎮那一層
@@ -1524,6 +1539,9 @@ func (g *game) battleStep() {
 			s.Stage = battle.StageSpoils
 			return
 		}
+		// 這一場標到了任務完成，而且有人的已回報數正好是 0x17，就接結局
+		// （RE-106）。檢查在放開畫面之前，順序與原版相同。
+		g.armEnding(s)
 		// 勝負那兩句與戰利品都處理完了，這一場真的結束——放開畫面回野外，
 		// 玩家才能繼續走。**打輸之後原版怎麼處置還沒解**（RE-091 只讀到那一句
 		// 訊息），這一版兩種結果都回野外。

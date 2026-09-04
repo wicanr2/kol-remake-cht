@@ -42,6 +42,10 @@ def main() -> int:
     p.add_argument("--out", required=True)
     p.add_argument("--buildings", default="assets/original-derived-data/town-buildings.json")
     p.add_argument("--member", type=int, default=0, help="要改哪一名隊員（索引）")
+    p.add_argument("--flag", type=int, default=QUEST_DONE,
+                   help="最終任務的旗標：0 沒接、1 接了、2 完成、3 回報過")
+    p.add_argument("--reports", type=int, default=REPORTS_BEFORE,
+                   help="已回報的任務數；0x17（23）是結局的判準")
     args = p.parse_args()
 
     doc = json.loads(pathlib.Path(args.src).read_text(encoding="utf-8"))
@@ -64,13 +68,13 @@ def main() -> int:
     index, div = quest_byte(FINAL_SITE)
     # 把最終任務那一欄設成「已完成」，其餘欄不動。
     field = (flags[index] // div) % 4
-    flags[index] += (QUEST_DONE - field) * div
+    flags[index] += (args.flag - field) * div
     m["quests"] = flags
 
     progress = list(m.get("progress") or [0] * 5)
     while len(progress) < 5:
         progress.append(0)
-    progress[0] = REPORTS_BEFORE
+    progress[0] = args.reports
     m["progress"] = progress
 
     carried = list(m.get("carried") or [])

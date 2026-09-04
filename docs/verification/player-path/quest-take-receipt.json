@@ -1,0 +1,191 @@
+{
+ "schema": "kol-full-path-receipt-v1",
+ "name": "quest-take",
+ "description": "從標題按下去，走進霍布城西的一戶人家，用 MOUTH 問到那一戶的關鍵字就接下一個任務（RE-110）。接任務的入口是建築內問話的**第 5 槽**，而且要這一棟的 `icon_flags[1] & 4`——與收任務物品同一位，同一棟給也收。敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。",
+ "seed": 1,
+ "load": "workplace/saves/quest-take.json",
+ "token_count": 25,
+ "trace": "docs/verification/player-path/quest-take/trace.json",
+ "trace_sha256": "dfdfc6118b7b9a1d1558faae3bd5ddc3401cfd7fac31dbfc47af802813aeaa5b",
+ "milestones": [
+  {
+   "step": 19,
+   "token": "RET",
+   "note": "DOOR：城鎮戶外地圖（入城點 4 那一區）",
+   "scene": "flow:town",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "town": 7,
+    "x": 9,
+    "y": 24
+   }
+  },
+  {
+   "step": 20,
+   "token": "U",
+   "note": "往北一步，站到那一戶門口",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "left_town": false,
+    "mode": 1,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 21,
+   "token": "RET",
+   "note": "DOOR：進門，主人的敘述",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 22,
+   "token": "ASK:nobj",
+   "note": "MOUTH 問 `nobj`：任務敘述第一頁",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 23,
+   "token": "SPACE",
+   "note": "第二頁",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 24,
+   "token": "SPACE",
+   "note": "「Will you do this?」，圖示列是 YES／NO",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 25,
+   "token": "RET",
+   "note": "答應：「Very well. Be off!」，第 6 個任務的旗標從 0 變成 1",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "party": [
+     "Poontang gold=214 wounds=1 reported=0 quests=0,20,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
+    "took_quest": {
+     "final": false,
+     "member": 0,
+     "site": 6
+    },
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 21,
+   "file": "step-021.png",
+   "sha256": "b55cca3fa3130c4ed8b6c7606df2d69ab5eb94daff22e5c7a4c0458fc2d54ac8",
+   "shows": "進門的敘述"
+  },
+  {
+   "step": 22,
+   "file": "step-022.png",
+   "sha256": "800f911c1b7080f0ce7284affb8b0796614259c845e5716b93b13fe29a5fe3f4",
+   "shows": "任務敘述第一頁（八行）"
+  },
+  {
+   "step": 23,
+   "file": "step-023.png",
+   "sha256": "663b56c08fef87e98f2e82ea8df1253776d0fef7ecb40790078b6f6203b3b4ba",
+   "shows": "第二頁"
+  },
+  {
+   "step": 24,
+   "file": "step-024.png",
+   "sha256": "d7ed2fbdc5a34e8c52aa884bab03caf22b4e5ca41209f638da8d242c886902be",
+   "shows": "\"Will you do this?\"（記錄 0x42）"
+  },
+  {
+   "step": 25,
+   "file": "step-025.png",
+   "sha256": "675c593d2c488f73cee56d8fdb92ca80a55d6be225dee85e0f0b1cf5382b6797",
+   "shows": "\"Very well. Be off!\"（記錄 0x43）"
+  }
+ ],
+ "save": null,
+ "failures": []
+}

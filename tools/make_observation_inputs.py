@@ -21,6 +21,8 @@ SITES_IN = Path("assets/original-derived-data/quest-sites.json")
 MONSTERS_IN = Path("assets/original-derived-data/monsters.json")
 OUT_DIR = Path("workplace/observe")
 SITE_INDEX = 5
+# 最終任務那一個地點（RE-107：編號 0…23，最後一個是最終任務）。
+FINAL_SITE_INDEX = 4
 MONSTER_NAME = "BINDERAK"
 NOTE = "觀察用替代輸入，不是原版資料，不得當作對拍來源。"
 
@@ -56,6 +58,27 @@ def party_on_edge(sites: dict) -> dict:
     return out
 
 
+def final_one_enemy(sites: dict) -> dict:
+    """最終任務（第 4 個地點）改成一隻 1 級怪，好看得到打完之後的結局（RE-106）。
+
+    原版那裡是十二隻 10 級 CYCLOPS，六人隊打不贏；這一份只是把它壓短，
+    座標、任務旗標與敘述都不動。
+    """
+    out = copy.deepcopy(sites)
+    for s in out["sites"]:
+        if s["index"] != FINAL_SITE_INDEX:
+            continue
+        s["count"] = 1
+        s["level"] = 1
+        # 緊貼隊伍第一格：那個地點的隊伍站在 (10,14)，怪原本在三十格外，
+        # 一回合走一格要走幾十回合才碰得到。
+        s["monster_x"] = [s["party_x"][0] - 2]
+        s["monster_y"] = [s["party_y"][0]]
+    out["note_observation_only"] = (
+        f"{NOTE}第 {FINAL_SITE_INDEX} 個地點（最終任務）改成一隻 1 級怪、緊貼隊伍。")
+    return out
+
+
 def weak_monster(monsters: dict) -> dict:
     out = copy.deepcopy(monsters)
     for m in out["monsters"]:
@@ -78,6 +101,7 @@ def main() -> None:
     for name, data in (
         ("quest-sites-one-enemy.json", one_enemy(json.loads(SITES_IN.read_text()))),
         ("quest-sites-edge.json", party_on_edge(json.loads(SITES_IN.read_text()))),
+        ("quest-sites-final.json", final_one_enemy(json.loads(SITES_IN.read_text()))),
         ("monsters-weak.json", weak_monster(json.loads(MONSTERS_IN.read_text()))),
     ):
         path = OUT_DIR / name

@@ -1,5 +1,7 @@
 package town
 
+import "strings"
+
 // 城鎮這一層的鍵位。原本這段散在 `cmd/kol` 與 `internal/flow` 兩處，
 // 兩邊各自維護一份 switch——結果是 flow 那一份少了空白鍵，走 flow 進建築之後
 // 敘述翻不了頁，看起來像卡住。鍵位屬於城鎮自己的狀態機，放在這裡只有一份。
@@ -71,6 +73,11 @@ func (s *Session) Key(token string) bool {
 	case "LISTEN":
 		s.Listen()
 	default:
+		// `ASK:<字>` 是 MOUTH：把玩家打的那句話送進關鍵字比對。原版是在畫面上
+		// 打字，remake 的輸入框還沒做，腳本先用這個形式送同一件事。
+		if q, ok := strings.CutPrefix(token, "ASK:"); ok {
+			return s.Ask(q)
+		}
 		return false
 	}
 	return true
