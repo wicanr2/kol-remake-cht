@@ -13,7 +13,7 @@
 | 角色寫入與刪除 | `DeleteFlow`／`DeleteSlot`；writer 逐 byte | 改動的 58 個 byte 兩個職業各 58/58 相同；刪除只寫一個 byte | 刪除流程 13 對 | 角色選項 → 刪除 → 確認 | SPEC-005 涵蓋；ESC、大寫 Y／N、空名冊未涵蓋 |
 | 書本其他功能 | 尚無 | 四個功能共用同一張角色選擇清單；HARBOR MASTER 為三行訊息頁 | HARBOR MASTER 1 對 | 角色選項 → Harbor Master | `EDIT PICTURE`／`EDIT SHIELD` **未實作**：原版滑鼠驅動，鍵盤 oracle 走不完 |
 | 城鎮移動、門口與邊界 | `Grid`／`Outdoor`／`Markers`／`Session` | 94 張移動 oracle 中 22 張畫格的鏡頭全部唯一解 | 戶外 22 ＋ 城門提示 4 對 | `town` 14 步、`town-edge` 14 步 | 已對拍 |
-| 建築內部與對話 | `EnterBuilding`、`Topics` | 進門敘述八行逐格讀回與 5-bit 解碼逐字相同；409 個話題槽交叉檢查零例外 | 進門 1 ＋ 對話 3 對 | `town-talk` 10 步 | 已對拍。**訊息 10 起的後續對話觸發條件仍未解** |
+| 建築內部與對話 | `EnterBuilding`、`Topics`、`mouthState` | 進門敘述八行逐格讀回與 5-bit 解碼逐字相同；409 個話題槽交叉檢查零例外；MOUTH 讀入 23 個字元、轉小寫、字首比對（RE-067） | 進門 1 ＋ 對話 3 對 | `town-talk` 10 步、`quest-take` 34 步 | 已對拍。**MOUTH 輸入框的版面未對拍**（游標樣子與座標未讀）；訊息 10 起的後續對話觸發條件仍未解 |
 | 招募同伴 | `Inn` 的清單捲動與名牌 | 候選人由角色檔所在地欄比對建築名稱（RE-072） | 旅店 8 ＋ 招募 9 對 | `town-recruit` 15 步 | 已對拍 |
 | 住宿、治療與存讀檔 | `internal/save` 原子讀寫；`Rest` 三條路 | 價錢取自建築 payload `0x38`／`0x39`（RE-073） | 住宿 11 對 | `town-rest` 11 步（含存檔逐欄驗證）、`town-load` 7 步、`full-chain` ＋ `full-chain-reload` | SPEC-006 READY。任務旗標、已回報數與身上帶的東西已進存檔（RE-101／107／109）。**戰鬥中途的狀態與世界時間仍未進存檔** |
 | 角色資料頁 | `Sheet` 的量尺與 5-bit 武器名 | 屬性是內部值 × 100 / 150；身高體重查三張 DGROUP 表（RE-074） | 鏡子 8 對 | `town-mirror` 10 步 | 已對拍。**物品、換人、法術三個圖示未實作** |
@@ -62,7 +62,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 | `full-chain` | 567 | 標題 → … → 出城 → 野外遇伏 → 四個回合打贏 → 回城 → 住一晚並存檔 |
 | `full-chain-reload` | 119 | 讀那份存檔 → 資料頁的金幣是住宿後的 158 → 出城 → 任務地點 → 參戰 |
 | `flow-quest` | 109 | 同一條 flow 路徑走到任務地點，兩張與已對拍的截圖逐 byte 相同 |
-| `quest-take` | 25 | 用 MOUTH 問到關鍵字接下一個任務（沒有換過任何輸入） |
+| `quest-take` | 34 | 按 MOUTH 打字問話，接下一個任務（沒有換過任何輸入） |
 | `full-chain-ending` | 1012 | 出城 → 打贏一場伏擊 → 最終任務的地點打完 → 結局七段（觀察，存檔與怪物是換過的） |
 
 尚未實作的功能會被記進 `flow.Unimplemented` 或 `battle.ActResult.Unimplemented`，
