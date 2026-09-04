@@ -3,7 +3,7 @@
  "description": "一條按鍵走到底的正常玩家路徑：標題序列 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 城鎮戶外地圖 → 走到城牆邊出城 → 世界地圖 (40,23) → 往東走遇上伏擊 → 四個回合的規劃與執行打贏兩隻 ZOMBIE → 走回霍布入城點 → 進城 → 走到半途之家門口 → 進門 → REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State 四個狀態機，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**這條路徑釘住了亂數種子**：野外每次時段變換都會擲一次遭遇（SPEC-011），走到哪一格遇上什麼由種子決定；戰鬥裡的攻防與規劃順序同樣要重播。隊伍是原版名冊裡六名帶武器的角色，用 `tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,3,57,8 --out workplace/saves/party6.json` 產生。",
  "seed": 1,
  "load": "workplace/saves/party6.json",
- "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET R R U U U U U U U U U RET R R R R R R R R R R R R R R SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET > RET U U L L D D RET > > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE L L L L L L L L L L RET D D Z X L D Z X L D Z X L D X L X D L R Z L Z U Z L D L X D L X D R X D R S X D L X D R X R R S X U D R S X D R S X D R S X D R S X D L X D R X D R S X D L X D R X R R S U D S R U S R U A S U A S L R U A S R U A S R U A S R U A S R U A S U U U A A RET SPACE > > > > RET RET RET",
+ "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET R R U U U U U U U U U RET R R R R R R R R R R R R R R SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L D D R RET > RET > RET U U L L D D RET > > RET > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L D D R R RET > RET > RET U U L L D RET > > RET > > > > RET U U L L D D R RET > RET > RET U U L L D D R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE L L L L L L L L L L RET D D Z X L D Z X L D Z X L D X L X D L R Z L Z U Z L D L X D L X D R X D R S X D L X D R X R R S X U D R S X D R S X D R S X D R S X D L X D R X D R S X D L X D R X R R S U D S R U S R U A S U A S L R U A S R U A S R U A S R U A S R U A S U U U A A RET SPACE > > > > RET RET RET",
  "shot_dir": "docs/verification/player-path/full-chain",
  "trace": "docs/verification/player-path/full-chain/trace.json",
  "size": [
@@ -104,16 +104,16 @@
    "note": "進戰場，第一回合的規劃"
   },
   {
-   "step": 421,
+   "step": 618,
    "battle": {
     "stage": 5,
     "verdict": 2,
-    "round": 4
+    "round": 6
    },
-   "note": "第四回合結束，兩隻 ZOMBIE 都倒下——打贏"
+   "note": "第六回合結束，兩隻 ZOMBIE 都倒下——打贏"
   },
   {
-   "step": 423,
+   "step": 620,
    "world": {
     "x": 42,
     "y": 23
@@ -121,7 +121,7 @@
    "note": "勝負的訊息推完，回到世界地圖"
   },
   {
-   "step": 434,
+   "step": 631,
    "town": {
     "x": 56,
     "y": 2,
@@ -131,7 +131,7 @@
    "note": "走回入城點選 DOOR，回到霍布城內，鏡頭 (56,2)"
   },
   {
-   "step": 558,
+   "step": 755,
    "town": {
     "x": 57,
     "y": 8,
@@ -140,14 +140,14 @@
    "note": "走回半途之家門口"
   },
   {
-   "step": 559,
+   "step": 756,
    "town": {
     "mode": 2
    },
    "note": "DOOR：進門，店主的敘述"
   },
   {
-   "step": 567,
+   "step": 764,
    "town": {
     "mode": 2
    },
@@ -181,28 +181,28 @@
    "shows": "戰場與第一回合的指令列"
   },
   {
-   "step": 421,
-   "file": "step-421.png",
+   "step": 618,
+   "file": "step-618.png",
    "shows": "You have defeated The ZOMBIES!"
   },
   {
-   "step": 434,
-   "file": "step-434.png",
+   "step": 631,
+   "file": "step-631.png",
    "shows": "回到霍布城內"
   },
   {
-   "step": 558,
-   "file": "step-558.png",
+   "step": 755,
+   "file": "step-755.png",
    "shows": "半途之家門口，圖示列剩 DOOR／U-TURN"
   },
   {
-   "step": 566,
-   "file": "step-566.png",
+   "step": 763,
+   "file": "step-763.png",
    "shows": "住一晚要 56 枚金幣的問句"
   },
   {
-   "step": 567,
-   "file": "step-567.png",
+   "step": 764,
+   "file": "step-764.png",
    "shows": "答應之後：扣錢、記下留宿的建築、寫出存檔"
   }
  ],

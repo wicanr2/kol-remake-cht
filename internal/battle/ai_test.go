@@ -235,3 +235,48 @@ func TestPlanEnemyShootsFromRange(t *testing.T) {
 		t.Fatalf("右臂廢了應該改成移動，得到 %#x", d.Command)
 	}
 }
+
+// 貼近打那一手的三個選項（`0x23CD6`…`0x23D8B`）：攻擊式退回 1 時招架姿態是 2；
+// 否則用**進來時**的攻擊選項當列號抽命中部位，填進去的是「部位 ＋1」。
+func TestEnemyStrikeFillsGuardFromLocation(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
+	}}
+	// 擲什麼都回 1：攻擊式是 sub_2578F 的第一項加二，不會退回 1，
+	// 所以會走到抽部位那一條。
+	var d EnemyDecision
+	s.enemyStrike(&d, 1, 0, EnemyNearStyle, &fixedRand{values: []int{1}})
+	if d.Style == 0 && d.Guard != 1 {
+		t.Fatalf("部位超過 6 時該是攻擊選項 0、防禦選項 1，得到 %d／%d", d.Style, d.Guard)
+	}
+	if d.Style != 0 && (d.Guard < 0 || d.Guard > 6) {
+		t.Fatalf("防禦選項 %d 不在 0…6", d.Guard)
+	}
+	// 進來時沒有攻擊選項：擲一次決定 0 或 2（`0x23D2F`）。
+	var zero EnemyDecision
+	s.enemyStrike(&zero, 1, 0, 0, &fixedRand{values: []int{1}})
+	if zero.Style != 1 && zero.Guard != 0 && zero.Guard != 2 {
+		t.Fatalf("prev 為 0 時防禦選項該是 0 或 2，得到 %d", zero.Guard)
+	}
+}
+
+// 貼著的敵人現在會填招架姿態，不再一律留 0——原版那一格是「命中部位 ＋1」，
+// 而它在被攻擊時就是防禦選項。
+func TestPlanEnemyFillsGuardWhenAdjacent(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
+	}}
+	d := s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdWeapon {
+		t.Fatalf("貼著隊員應該攻擊，得到 %#x", d.Command)
+	}
+	if s.Actors[1].Guard != d.Guard {
+		t.Fatalf("防禦選項該寫回記錄，得到 %d／%d", s.Actors[1].Guard, d.Guard)
+	}
+}

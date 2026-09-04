@@ -226,15 +226,7 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		d.Target = t
 		d.Ring = 0
 		d.Facing = s.stepToward(i, t)
-		// 攻擊選項是 `sub_2578F()` 的結果加二；超過 10 就退回 1（`0x23CEE`）。
-		style := EnemyStyle(a.Level, s.Actors[t].Guard, a.Weapon.Kind, rng) + 2
-		if style > 0x0A {
-			style = 1
-		}
-		d.Style = style
-		if style == 1 {
-			d.Guard = 2
-		}
+		s.enemyStrike(&d, i, t, EnemyNearStyle, rng)
 		s.applyEnemy(i, d)
 		return d
 	}
@@ -265,6 +257,54 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return s.enemyMove(i, t, ring, rng)
 	}
 	return s.enemyMove(i, -1, -1, rng)
+}
+
+// EnemyNearStyle／EnemyNearGuard 是環 0 找到目標時先填進去的攻擊選項與防禦選項
+// （`0x23C81`）。攻擊式抽完會蓋掉前者，而**前者的舊值就是抽命中部位的列號**。
+const (
+	EnemyNearStyle = 0x0B
+	EnemyNearGuard = 7
+)
+
+// enemyStrike 填貼近打那一手的攻擊選項與防禦選項（`0x23CD6`…`0x23D8B`）。
+//
+// `prev` 是進來時的攻擊選項：環 0 那條是 `EnemyNearStyle`，反制掃描那條是從對手
+// 抄來的（還沒實作）。**`+0x24` 這一格兩種用途**——填進去的是「命中部位 ＋1」，
+// 而同一格在這一名被攻擊時就是它的招架姿態（RE-081／RE-105）。
+//
+// **與原版的一個差別**：原版在移動段繞完八個方向都站不下時會把 `word_34A08` 加一，
+// 之後攻擊式就固定是 1；這一版沒有那條重試路徑，所以攻擊式一律抽。
+func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
+	a := &s.Actors[i]
+	d.Guard = EnemyNearGuard
+	// 攻擊選項是 `sub_2578F()` 的結果加二；超過 10 就退回 1（`0x23CEE`）。
+	style := EnemyStyle(a.Level, s.Actors[target].Guard, a.Weapon.Kind, rng) + 2
+	if style > 0x0A {
+		style = 1
+	}
+	d.Style = style
+	switch {
+	case style == 1:
+		d.Guard = 2
+	case prev == 0:
+		// 進來時沒有攻擊選項就擲一次決定招架姿態（`0x23D2F`）。
+		if rng.Roll(2) == 1 {
+			d.Guard = 0
+		} else {
+			d.Guard = 2
+		}
+	default:
+		// 列號是**進來時**那個值，不是剛抽出來的攻擊式（`0x23D58`）。
+		loc := EnemyLocation(a.Level, prev, rng)
+		switch {
+		case loc == 0:
+			d.Guard = 0
+		case loc+1 > 6:
+			d.Style, d.Guard = 0, 1
+		default:
+			d.Guard = loc + 1
+		}
+	}
 }
 
 // enemyRetreat 是傷得太重那一段（`0x237F5`…`0x238C1`）。第二個回傳值為 false
