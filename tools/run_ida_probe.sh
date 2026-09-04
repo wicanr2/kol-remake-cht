@@ -4,6 +4,12 @@
 #   tools/run_ida_probe.sh tools/ida_probe_koltown_world_map.py workplace/.../out.json
 #
 # 只有輸出的 JSON 才是證據；`idat` 的離開碼不能當判準（見 kb retro/ida-pro-9.4）。
+#
+# ⚠ **對同一個 `.i64` 連續開關會把資料庫弄壞**（`Database initialization failed
+# with error 4`，2026-09-04 踩到一次，重跑十幾次探針之後）。所以一支探針要**一次問完**
+# 所有想看的位址：把視窗、函式與全域都列進常數，不要改一個參數重跑一次。
+# 壞掉的處置：把 `.i64` 改名留證，`idat -A -B <EXE>` 重建，再拿一支已經跑過的探針
+# 比對輸出逐條相同才繼續。
 # `HOME` 必須是 image 裡那個帶 `.idapro` 的家目錄，否則 IDAPython 與授權都起不來，
 # 而 `idat` 只會在 `-L` 指定的 log 裡講，標準輸出是空的。
 set -euo pipefail

@@ -165,3 +165,57 @@ func RideAway(monster, pace int, rng Rand) bool {
 	}
 	return rng.Roll(100) > RideAwayPerPace*pace
 }
+
+// AmbushGroups 是隨機遭遇的站位組數。`word_37CF6 = rand(5) − 1` 只會選到 0…4，
+// 表裡卻有六組——第六組沒有使用者，先照實記下來。
+const AmbushGroups = 6
+
+// AmbushSlots 是一組站位放得下幾隻敵人。
+const AmbushSlots = 12
+
+// 隨機遭遇的站位（`sub_1E3A8:0x1E8C6`…`0x1EA08`）。任務地點是從 payload 複製 36
+// byte 到 `0x2E0C` 再讀（RE-090），隨機遭遇走的是另一條：隊員永遠站同六格，敵人
+// 依 `word_37CF6` 選一組。`word_34968` 是這兩條路的開關（`0x1E68C`）：任務地點設 1、
+// 隨機遭遇設 0。
+//
+// X 是原版寫進參戰者記錄 `+0x1F` 的那一格（欄）、Y 是 `+0x20`（列），與
+// `quest-sites.json` 的 `party_x`／`monster_x` 同一套（RE-095）。
+var (
+	// AmbushPartyX／AmbushPartyY 是六名隊員的固定站位（DGROUP `0x0B66`／`0x0B60`）。
+	AmbushPartyX = [6]int{33, 31, 33, 31, 33, 31}
+	AmbushPartyY = [6]int{30, 30, 32, 32, 34, 34}
+	// AmbushEnemyX／AmbushEnemyY 是六組敵人站位（DGROUP `0x0BD4`／`0x0B8C`），
+	// 每組 12 格。隊員站在欄 31…33、列 30…34；每一組都把敵人放在另一側。
+	AmbushEnemyX = [AmbushGroups][AmbushSlots]int{
+		{28, 28, 28, 28, 27, 27, 27, 26, 26, 26, 26, 26},
+		{31, 33, 29, 35, 32, 30, 34, 28, 36, 31, 33, 32},
+		{36, 36, 36, 36, 37, 37, 37, 38, 38, 38, 38, 38},
+		{31, 33, 29, 35, 32, 30, 34, 28, 36, 31, 33, 32},
+		{28, 36, 27, 37, 27, 37, 28, 36, 28, 36, 27, 37},
+		{32, 32, 30, 30, 34, 34, 29, 29, 35, 35, 32, 32},
+	}
+	AmbushEnemyY = [AmbushGroups][AmbushSlots]int{
+		{32, 30, 34, 28, 31, 29, 33, 30, 32, 28, 34, 31},
+		{37, 37, 37, 37, 38, 38, 38, 36, 36, 39, 39, 39},
+		{32, 30, 34, 28, 31, 29, 33, 30, 32, 28, 34, 31},
+		{27, 27, 27, 27, 26, 26, 26, 28, 28, 25, 25, 25},
+		{32, 32, 30, 30, 34, 34, 29, 29, 35, 35, 32, 32},
+		{27, 37, 26, 38, 26, 38, 27, 37, 27, 37, 26, 38},
+	}
+)
+
+// AmbushPartyPlace 是第 n 名隊員的站位。超出六個就回 (0, 0)。
+func AmbushPartyPlace(n int) (x, y int) {
+	if n < 0 || n >= len(AmbushPartyX) {
+		return 0, 0
+	}
+	return AmbushPartyX[n], AmbushPartyY[n]
+}
+
+// AmbushEnemyPlace 是第 group 組裡第 i 隻敵人的站位。超出範圍就回 (0, 0)。
+func AmbushEnemyPlace(group, i int) (x, y int) {
+	if group < 0 || group >= AmbushGroups || i < 0 || i >= AmbushSlots {
+		return 0, 0
+	}
+	return AmbushEnemyX[group][i], AmbushEnemyY[group][i]
+}

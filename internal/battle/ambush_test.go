@@ -149,3 +149,49 @@ func TestRideAway(t *testing.T) {
 		t.Fatal("擲 60 不該脫身")
 	}
 }
+
+// 站位：隊員永遠站同六格，敵人依組別換一整排；兩邊分得開。
+func TestAmbushPlacement(t *testing.T) {
+	x, y := AmbushPartyPlace(0)
+	if x != 33 || y != 30 {
+		t.Fatalf("第 0 名隊員站在 (%d,%d)，期望 (33,30)", x, y)
+	}
+	// 六名隊員都落在欄 31…33、列 30…34 那一小塊。
+	for n := 0; n < 6; n++ {
+		x, y := AmbushPartyPlace(n)
+		if x < 31 || x > 33 || y < 30 || y > 34 {
+			t.Fatalf("第 %d 名隊員站在 (%d,%d)，跑出隊伍那一塊", n, x, y)
+		}
+	}
+	// 第 0 組把敵人排在隊員的另一側（欄 26…28）。
+	for i := 0; i < AmbushSlots; i++ {
+		x, _ := AmbushEnemyPlace(0, i)
+		if x < 26 || x > 28 {
+			t.Fatalf("第 0 組第 %d 隻站在欄 %d，該在 26…28", i, x)
+		}
+	}
+	// 越界回 (0,0)，不會 panic。
+	if x, y := AmbushEnemyPlace(9, 0); x != 0 || y != 0 {
+		t.Fatalf("越界該回 (0,0)，得到 (%d,%d)", x, y)
+	}
+	if x, y := AmbushPartyPlace(-1); x != 0 || y != 0 {
+		t.Fatalf("越界該回 (0,0)，得到 (%d,%d)", x, y)
+	}
+}
+
+// 五組都用得到（`rand(5) − 1`），而且每一組的敵人都不會站到隊員那六格上。
+func TestAmbushGroupsDoNotOverlapParty(t *testing.T) {
+	taken := map[[2]int]bool{}
+	for n := 0; n < 6; n++ {
+		x, y := AmbushPartyPlace(n)
+		taken[[2]int{x, y}] = true
+	}
+	for g := 0; g < 5; g++ {
+		for i := 0; i < AmbushSlots; i++ {
+			x, y := AmbushEnemyPlace(g, i)
+			if taken[[2]int{x, y}] {
+				t.Fatalf("第 %d 組第 %d 隻站到隊員那一格 (%d,%d)", g, i, x, y)
+			}
+		}
+	}
+}
