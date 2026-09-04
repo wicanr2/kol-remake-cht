@@ -365,7 +365,9 @@ func (s *State) act(i int, rng Rand) ActResult {
 		return out
 	case CmdCast:
 		return s.cast(i, rng)
-	case CmdMissile:
+	case CmdMissile, CmdLoad:
+		// 兩個指令碼走同一支，與原版一樣（`0x20785` 兩條都跳 `0x20799`）：
+		// 該裝填的自己會變成裝填那一手（RE-105）。
 		return s.shoot(i, rng)
 	}
 	// 剩下的幾個指令碼。**撿（0x15）與丟（0x24）不會走到這裡**——執行段的分派只認
@@ -483,10 +485,12 @@ func (s *State) moveBlocked(i, x, y int) bool {
 	return false
 }
 
-// shoot 是射擊那一手（指令碼 0x23，`sub_26D76(0)`，RE-102）。
+// shoot 是射擊那一手（指令碼 0x22 與 0x23，`0x20799` ＋ `sub_26D76(0)`，
+// RE-102／RE-105）。
 //
 // 沒裝填的武器第一回合只能裝填，這一手就沒了（`0x207CD`，RE-093）；射出去之後
-// 那一格又清回沒裝填（`0x20860`）。
+// 那一格又清回沒裝填（`0x20860`）。指令列上那兩格就是這兩個階段：0x22 是還沒
+// 上弦、0x23 是可以射（RE-083 的條件表）。
 //
 // 目標是規劃段記住的那一格（`Plan.Memo`），中間拉一條線：撞在樹或牆上就印
 // 「fires a missle into a …」，被半路的人接下就打那個人，一路到底就打停下來

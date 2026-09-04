@@ -189,13 +189,21 @@ func TestActDispatch(t *testing.T) {
 		t.Fatalf("怯戰應該印 %#x 並把防禦選項設 2，得到 %#x／%d",
 			FlinchRecord, r.Message, s.Actors[0].Guard)
 	}
-	// 還沒實作的那幾手要被標出來，不能靜靜跳過。撿、丟與切換這一輪做完了
-	// （RE-094），剩下的是投擲那一格。
+	// 還沒實作的那幾手要被標出來，不能靜靜跳過。撿、丟、切換、施法與射擊都做完了，
+	// 剩下騎乘那一格（0x28，`sub_227C0` 還沒讀）。
 	s = newState()
-	s.Actors[0].Command = CmdThrow
+	s.Actors[0].Command = CmdMount
 	r, _ = s.Act(&fixedRoll{values: []int{50}})
 	if !r.Unimplemented {
-		t.Fatal("投擲這一手應該標成還沒實作")
+		t.Fatal("騎乘這一手應該標成還沒實作")
+	}
+	// 0x22 是「還沒上弦」：走射擊那一支，第一手變成裝填（RE-105）。
+	s = newState()
+	s.Actors[0].Command = CmdLoad
+	s.Actors[0].Weapon.Kind = 0x12
+	r, _ = s.Act(&fixedRoll{values: []int{50}})
+	if r.Unimplemented || r.Message != ReloadRecord {
+		t.Fatalf("0x22 應該變成裝填並印 %#x，得到 %#x", ReloadRecord, r.Message)
 	}
 }
 

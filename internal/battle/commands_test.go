@@ -66,7 +66,7 @@ func TestCommandBarThrowThenMissile(t *testing.T) {
 	a := &Actor{Threshold: 100}
 	a.SetParts()
 	m := &Member{HasWeapon: true, Weapon: Weapon{Kind: 4, Code: 1}}
-	if got := CommandBar(a, m, CommandEnv{}); got[1] != CmdThrow {
+	if got := CommandBar(a, m, CommandEnv{}); got[1] != CmdLoad {
 		t.Fatalf("第一次應該是投擲，得到 %#x", got[1])
 	}
 	a.Flag1D = 1

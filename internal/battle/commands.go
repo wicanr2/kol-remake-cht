@@ -22,8 +22,11 @@ const (
 	CmdSwitchAlt1 = 0x16
 	CmdSwitchAlt2 = 0x25
 	CmdPickUp     = 0x26
-	// CmdThrow 是投擲那一格（傷害碼 bit 0 為 1、種類低段時出現）。
-	CmdThrow = 0x22
+	// CmdLoad 是**還沒上弦的射擊武器**那一格（RE-105）。它的出現條件正是
+	// 「種類不是 6／0x0A／0x0B 而且 +0x1D 為零」，選下去在執行段 `0x20799`
+	// 一定變成裝填，這一回合就沒了；下一回合 +0x1D 非零，同一格換成 CmdMissile。
+	// **不是投擲**——`sub_26D76` 裡沒有一處比 0x22，它根本走不到那裡。
+	CmdLoad = 0x22
 	// CmdMissile 是射擊。
 	CmdMissile = 0x23
 	// CmdWeapon 是武器攻擊；CmdUnarmed 是徒手。
@@ -144,7 +147,7 @@ func appendWeaponCommands(bar []int, a *Actor, m *Member) []int {
 						bar = append(bar, CmdMissile)
 						a.Flag1D = 1
 					} else {
-						bar = append(bar, CmdThrow)
+						bar = append(bar, CmdLoad)
 					}
 				}
 			} else if a.Flag1E == 0 {

@@ -162,8 +162,14 @@ func (s *State) chooseCommand(i int) bool {
 	case CmdRest, CmdDrop, CmdSwitchAlt1, CmdSwitch, CmdSwitchAlt2, CmdPickUp:
 		// `0x1F3B2`：兩個選項都設 0，直接收尾。真正的動作在執行段。
 		return s.commit(i, icon, 0, 0)
-	case CmdThrow:
-		// 投擲的後續還沒讀；記下來不動。
+	case CmdLoad:
+		// 分派表（`0x1FA02`）沒有列 0x22，所以它落 default 直接走收尾
+		// `0x1FA6D`，指令碼寫的是 `sub_228B7:0x22D44` 存下來的圖號（RE-105）。
+		// 兩個選項原版沿用上一次的殘留值，這裡取 0——裝填那一手不看它們。
+		return s.commit(i, icon, 0, 0)
+	default:
+		// 分派表認不得的圖號。原版一樣落 default 收尾，但那時寫進 +0x25 的是
+		// 什麼還沒逐格核對過，所以 remake 記下來不動，不假裝做過。
 		s.Plan.Unimplemented = append(s.Plan.Unimplemented, icon)
 	}
 	return false
