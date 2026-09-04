@@ -18,6 +18,10 @@ type Monster struct {
 	Foresight int    `json:"foresight"`
 	Size      int    `json:"size"`
 	Health    int    `json:"health"`
+	// TerrainMask／SeasonMask 是這一隻出沒的地形與季節遮罩（`TOWN0` payload 4 的
+	// `0x40`／`0x60`，RE-078）：bit 7 是地形 0、bit 3 是冬。
+	TerrainMask int `json:"terrain_mask"`
+	SeasonMask  int `json:"season_mask"`
 	Intellect int    `json:"intellect"`
 	// AttackSkill／ParrySkill 是記錄 +0x17 起的兩個大端 16-bit；戰鬥再乘等級除以 5。
 	// 戰後的冒險點數用的是這裡的原值，不折算等級（RE-096）。
@@ -87,10 +91,38 @@ func (i *Item) damageCode() int {
 	return v
 }
 
+// MonsterCount 是怪物的種數（`TOWN0` 的 payload 5…36）。挑怪物是 `rand(0x20) − 1`。
+const MonsterCount = 32
+
+// SeasonChance 是一個季節的遭遇機率：白天與夜裡各八個地形。值要**除以 2** 才是
+// 百分比（`0x2A541`）。
+type SeasonChance struct {
+	Season string `json:"season"`
+	Day    []int  `json:"day"`
+	Night  []int  `json:"night"`
+}
+
 // Monsters 是抽取器產生的怪物表。
 type Monsters struct {
-	Schema string    `json:"schema"`
-	List   []Monster `json:"monsters"`
+	Schema string         `json:"schema"`
+	List   []Monster      `json:"monsters"`
+	Chance []SeasonChance `json:"encounter_chance"`
+}
+
+// EncounterChance 取某個季節、地形、時段的機率原值（還沒除以 2）。
+// 表缺了就回 0，也就是不會遇到。
+func (m *Monsters) EncounterChance(season, terrain int, night bool) int {
+	if m == nil || season < 0 || season >= len(m.Chance) {
+		return 0
+	}
+	row := m.Chance[season].Day
+	if night {
+		row = m.Chance[season].Night
+	}
+	if terrain < 0 || terrain >= len(row) {
+		return 0
+	}
+	return row[terrain]
 }
 
 // LoadMonsters 讀取怪物數值表。

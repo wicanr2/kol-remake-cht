@@ -132,3 +132,41 @@ func TestTerrainLabelStaysOnTownStep(t *testing.T) {
 		t.Fatalf("標籤是 %q", got)
 	}
 }
+
+// stepRand 讓天候那一擲固定，方便驗時段變換的回呼。
+type stepRand struct{}
+
+func (stepRand) Roll(int) int { return 1 }
+
+// 時段變了才擲野外遭遇：同一個時段裡走幾步都不會擲（`sub_29A3E`，RE-078）。
+func TestOnTimePartFiresOnlyWhenThePartChanges(t *testing.T) {
+	data := testData(t)
+	c := NewClock()
+	s := &Screen{Travel: New(data, testGrid(t, nil), 20, 20),
+		Clock: c, TerrainCode: 7, Movement: 20}
+	sess := NewSession(s)
+	sess.Rand = stepRand{}
+	calls := 0
+	sess.OnTimePart = func() { calls++ }
+
+	// 停在同一個時段裡：時刻扣掉一點點，時段不動。
+	part := c.Part
+	sess.spendTime(1)
+	if c.Part != part {
+		t.Fatalf("扣一個時刻不該換時段，得到 %d", c.Part)
+	}
+	if calls != 0 {
+		t.Fatalf("時段沒變不該擲遭遇，卻擲了 %d 次", calls)
+	}
+
+	// 一次扣到下一個時段。
+	for i := 0; i < 40 && c.Part == part; i++ {
+		sess.spendTime(100)
+	}
+	if c.Part == part {
+		t.Fatal("扣了那麼多時刻應該換時段了")
+	}
+	if calls != 1 {
+		t.Fatalf("換一次時段該擲一次，卻擲了 %d 次", calls)
+	}
+}

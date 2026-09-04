@@ -59,6 +59,9 @@ type Session struct {
 	OnArrive func(x, y int) *QuestPrompt
 	// OnQuestAnswer 是玩家對「Will you partake?」的回答。
 	OnQuestAnswer func(yes bool)
+	// OnTimePart 在時段變換、天候重擲完之後被呼叫（`sub_29A3E`）。原版就是在這裡
+	// 擲一次野外遭遇；走進某一格不會擲，所以一天最多四次（RE-078）。
+	OnTimePart func()
 }
 
 // Rand 是可注入的亂數來源；n 為骰面數，回傳 1…n。與角色建立用的是同一個介面。
@@ -184,11 +187,17 @@ func (s *Session) spendTime(cost int) {
 			s.OnNewDay(c.Hunger())
 		}
 	}
-	if c.Part != part {
+	changed := c.Part != part
+	if changed {
 		s.rollWeather()
 	}
 	s.Screen.TimeIndex = c.Part
 	s.Screen.Date = c.DateLines()
+	// 時段變了才擲一次野外遭遇（`sub_29987:0x29A3E`，接在天候之後）。走進某一格
+	// 不會擲，所以一天最多四次（RE-078）。
+	if changed && s.OnTimePart != nil {
+		s.OnTimePart()
+	}
 }
 
 // rollWeather 是時段變換時的天候隨機漫步。原版每次都擲，擲出同一組就不重畫。
