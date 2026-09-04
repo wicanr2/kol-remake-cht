@@ -1,63 +1,74 @@
 # 驗證矩陣
 
+每一列的「結果」以 **code 與收據**為準，不以工作清單的勾選為準。沒有收據的一律
+寫「尚無」，不寫「應該可以」。
+
 | 子系統 | 單元／真實資料測試 | 原版 oracle | 視覺 oracle | 玩家路徑 | 結果 |
 |---|---|---|---|---|---|
 | 原版輸入清冊 | ZIP CRC、逐檔 SHA-256、雙容器重生 byte compare | 不適用 | 不適用 | 不適用 | 通過 |
-| KOLTOWN 解包研究映像 | header、2,281 relocations、IDA entry／337 functions | startup 前 129,312 bytes、2,281 relocations、五錨點全吻合 | 不適用 | `KOLTOWN.EXE A` 正常啟動至 entry | SPEC-001 READY |
-| 啟動／新遊戲 | Go 1.26.7＋Ebitengine v2.9.9 建置通過；資產載入拒非 PNG | 書本封面／目錄頁對原版畫面 | 180 對對拍，游標與原版自繪文字外逐像素相同 | 尚無互動；只有截圖模式 | M4 垂直切片；玩法未接 |
-| 角色建立 UI | 22 個情境、32 輪，核心情境的檢查點畫面 SHA-256 交叉比對 | KOL.EXE 正常入口；DOSBox-X 2026.06.02 固定機器設定 | 3,117 張去重畫格 PNG，含 80 張圖像 selector | 目錄頁 → Character options → Create Character → 接受屬性 → 接受圖像 → 保存 | SPEC-005 READY；16 槽全滿、重名、字元集合未涵蓋 |
-| 書本其他功能 | 尚無 | 四個功能的角色選擇清單是同一個 PNG；HARBOR MASTER 為三行訊息頁 | HARBOR MASTER 1 對對拍通過 | 角色選項 → Harbor Master → 選角色 → 訊息頁 → 任意鍵 | 點陣圖編輯器未實作：滑鼠驅動，鍵盤 oracle 走不完 |
-| 角色刪除 | `DeleteFlow` 與 `DeleteSlot` 單元測試；刪除只寫一個 byte | 兩輪 `CHARDATA` 差分完全相同（slot 1 offset 0x000：0x50→0x00） | 13 對逐畫面對拍，允許區外零像素差 | 角色選項 → Delete Character → 選角色 → 確認視窗回答 y／n | SPEC-005 涵蓋；視窗按 ESC、大寫 Y／N、空名冊未涵蓋 |
-| 組隊上路 | `town.Inn` 的圖示繞回與名牌單元測試 | 進入鏈、圖示列鍵位與招募流程已量測（RE-053）；招募不寫磁碟 | 旅店畫面 8 對逐畫面對拍，允許區外零像素差 | 目錄頁 6 → 選領隊 → 旅店 → COMPANION → 選角色 | 旅店畫面已對拍；戶外地圖與其餘圖示未開始 |
-| 移動／時間 | `Grid`／`Outdoor`／`Markers`／`Session` 單元測試；鏡頭跟隨直接重播 oracle 序列 | 94 張移動 oracle 中 22 張戶外畫格的鏡頭全部唯一解；門口狀態由 town-enter-building 畫格證實 | 22 對逐畫面對拍，允許區外零像素差 | **14 步可重播玩家路徑**：走動 → 門口 → U-TURN → 進建築 → 出來 → 續走 | 地圖、標記、門口與進門都已對拍；離開城鎮與建築內多輪對話未實作 |
-| 建築內部 | `EnterBuilding` 組合單元測試 | 原版畫格 072 的八行逐格讀回，與 5-bit 解碼結果逐字相同 | 1 對逐畫面對拍，允許區外零像素差 | 門口 → DOOR → 進門敘述 | 畫面完全由 typed data 組出；後續對話的觸發條件未解 |
-| 地圖轉換 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
-| 背包／裝備 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
-| 戰鬥／AI／獎勵 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
-| 事件／任務 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
-| 存讀檔 | 尚無 | 尚無 | 尚無 | 尚無 | 未開始 |
-| 圖像／主題 | production 抽取器逐張重讀驗證，769 張 PNG 全部對上 visual probe 雜湊 | IDA consumer＋BIOS mode 0Dh；CHARPICS 80/80、BOOKPICS[0] 對原版執行畫面 | 80 張角色模板在 (208,106) 逐像素相同；封面僅差滑鼠游標 8×11 | 由 picture-cycle 正常玩家路徑取得對照畫面 | SPEC-002 READY；首版 EGA-only，CGA／Hercules 列後續 |
-| 在地化／字型 | 兩套原版字型各 93 字模抽出並重生；中文字模表 344 字，文字安全矩形 122 項全過 | HUMAN 五字模逐 byte 命中壓縮 payload | 空白 New Character 頁 64,000 px 只差 31 px | 由正常玩家路徑取得對照畫面 | 原版字型已關閉；繁中採雙模式，書本五頁與旅店畫面已中文化 |
-| 封包 | 尚無 | 不適用 | 不適用 | 尚無 | 未開始 |
+| KOLTOWN 解包研究映像 | header、2,281 relocations、IDA entry／337 functions | startup 前 129,312 bytes、五錨點全吻合 | 不適用 | `KOLTOWN.EXE A` 正常啟動至 entry | SPEC-001 READY |
+| 標題序列 | `internal/title` 的腳本重播測試 | `TITLE.EXE` 的 `_main` 靜態腳本（RE-047） | 兩輪觀察的每一張畫格逐像素對上 | 標題 → 按鍵中止 | 已對拍；雷聲未接（見音訊列） |
+| 書本畫面與翻頁 | `internal/book`、`internal/flow` | `KOLBOOK.EXE` `sub_114F5` 的表驅動捲動（RE-048） | 書本 3 ＋ 翻頁 54 對 | `full` 路徑前段 | 已對拍 |
+| 角色建立 UI | 22 個情境、32 輪，檢查點畫面 SHA-256 交叉比對 | `KOL.EXE` 正常入口；DOSBox-X 2026.06.02 固定設定 | 建立 9 ＋ 圖像層 92 對 | 目錄頁 → 建立 → 接受屬性 → 接受圖像 → 保存 | SPEC-005 READY；16 槽全滿、重名、字元集合未涵蓋 |
+| 角色寫入與刪除 | `DeleteFlow`／`DeleteSlot`；writer 逐 byte | 改動的 58 個 byte 兩個職業各 58/58 相同；刪除只寫一個 byte | 刪除流程 13 對 | 角色選項 → 刪除 → 確認 | SPEC-005 涵蓋；ESC、大寫 Y／N、空名冊未涵蓋 |
+| 書本其他功能 | 尚無 | 四個功能共用同一張角色選擇清單；HARBOR MASTER 為三行訊息頁 | HARBOR MASTER 1 對 | 角色選項 → Harbor Master | `EDIT PICTURE`／`EDIT SHIELD` **未實作**：原版滑鼠驅動，鍵盤 oracle 走不完 |
+| 城鎮移動、門口與邊界 | `Grid`／`Outdoor`／`Markers`／`Session` | 94 張移動 oracle 中 22 張畫格的鏡頭全部唯一解 | 戶外 22 ＋ 城門提示 4 對 | `town` 14 步、`town-edge` 14 步 | 已對拍 |
+| 建築內部與對話 | `EnterBuilding`、`Topics` | 進門敘述八行逐格讀回與 5-bit 解碼逐字相同；409 個話題槽交叉檢查零例外 | 進門 1 ＋ 對話 3 對 | `town-talk` 10 步 | 已對拍。**訊息 10 起的後續對話觸發條件仍未解** |
+| 招募同伴 | `Inn` 的清單捲動與名牌 | 候選人由角色檔所在地欄比對建築名稱（RE-072） | 旅店 8 ＋ 招募 9 對 | `town-recruit` 15 步 | 已對拍 |
+| 住宿、治療與存讀檔 | `internal/save` 原子讀寫；`Rest` 三條路 | 價錢取自建築 payload `0x38`／`0x39`（RE-073） | 住宿 11 對 | `town-rest` 11 步（含存檔逐欄驗證）、`town-load` 7 步 | SPEC-006 READY。**戰鬥與任務進度尚未進存檔** |
+| 角色資料頁 | `Sheet` 的量尺與 5-bit 武器名 | 屬性是內部值 × 100 / 150；身高體重查三張 DGROUP 表（RE-074） | 鏡子 8 對 | `town-mirror` 10 步 | 已對拍。**物品、換人、法術三個圖示未實作** |
+| 商店、背包與穿戴 | `Shop` 的商品表與合身判定 | 商品表在建築 payload `0x100` 起，一筆 16 byte（RE-075） | 商店 9 對 | `town-shop` 14 步 | 已對拍。**馬廄的商品表（一筆 0x80 byte）未實作** |
+| 訓練 | `Train` 的位階閘門與技能表 | 四門技能在建築 payload `0x50` 起（RE-076） | 訓練 6 對 | `town-train` 15 步 | 已對拍。**加技能與鍛造兩條路原版存檔走不到，只有靜態證據** |
+| 世界地圖、時刻與道路 | `internal/world` 的格子、次格、道路遮罩 | 城鎮記錄 16 組座標全部相同（RE-069）；循路一步扣 20 個時刻 | 野外 4 ＋ 時刻 4 ＋ 循路 10 ＋ 進城 7 對 | `world-road` 34 步、`world-clock` 28 步、`town-leave` 13 步、`town-round-trip` 20 步 | 已對拍。**雲層動畫列在 `not_claimed`**；**隨機遭遇規則已解（RE-078）但未實作** |
+| 任務與戰鬥 | `internal/battle` 九個測試檔 | 規劃、指令列、選目標、執行順序、移動、近戰結算、訊息鏈逐條反組譯（RE-079…090） | 任務與戰場 4 ＋ 執行段訊息 1 對 | `world-quest` 91 步 | SPEC-008／009／010 的已解出部分 READY。**打贏沒有判定**；敵人那一手、撿丟背包、擊退昏迷、經驗與戰利品都未實作 |
+| 圖像／主題 | production 抽取器逐張重讀，769 張 PNG 全部對上 visual probe 雜湊 | IDA consumer ＋ BIOS mode 0Dh | 80 張角色模板在 (208,106) 逐像素相同 | 由 `picture-cycle` 正常路徑取得對照 | SPEC-002 READY；首版 EGA-only |
+| 在地化／字型 | 兩套原版字型各 93 字模抽出並重生 | HUMAN 五字模逐 byte 命中壓縮 payload | 空白 New Character 頁 64,000 px 只差 31 px | 由正常路徑取得對照 | 中文字模表 **2,434 字**、缺字 0；安全矩形 **6,685 項**全過；UI 文字庫 **486 筆**譯文全過 `verify_ui_translation.py` |
+| 音訊 | 尚無 | 六個 executable 的 I/O 母體已窮舉；TITLE 的 WAV oracle 已取得 | 不適用 | 尚無 | **SPEC-004 仍 DRAFT，遊戲裡一個音都沒有**。卡在人耳驗收 |
+| 封包 | 尚無 | 不適用 | 不適用 | 尚無 | 未開始；`dist-all/` 還不存在 |
 
 ## 截圖 metadata
 
-原版角色建立 UI 的逐畫面 PNG 已由 `tools/dosbox_character_ui_oracle.py` 產生，
-3,117 個去重畫格連同收據、跨輪比對與 provenance manifest 存於
+原版執行畫面的逐畫面 PNG 由 `tools/dosbox_character_ui_oracle.py` 產生，
+43 個 run、6,515 個去重畫格連同收據、跨輪比對與 provenance manifest 存於
 `docs/verification/character-ui/`；抽取資產對原版畫面的收據見
 `docs/verification/asset-parity/`。權利分類為 private-repo 可保存、不得公開散布。
-remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍計畫與收據同目錄。
+remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍計畫與收據同目錄
+（二十五份收據 283 對，允許差異區之外零像素差）。
 
 ## 正常玩家路徑
 
-`player-path/` 有十二份可重播收據，全部要求每一步有可見效果，且指定的檢查點與
+`player-path/` 有十五份可重播收據，全部要求每一步有可見效果，且指定的檢查點與
 已通過對拍的截圖逐 byte 相同：
 
 | 路徑 | 步數 | 內容 |
-|---|---|---|
-| `town` | 14 | 城鎮內走動、門口、進建築，全部經過 `town.Session` |
-| `town-edge` | 14 | 走到地圖邊界、林地圖的城門提示、U-TURN 回地圖 |
-| `town-talk` | 10 | 建築內的 SPACEBAR 圖示列、LISTEN 的傳聞與 MOUTH 的問話 |
+|---|---:|---|
+| `town` | 14 | 城鎮內走動、門口、進建築 |
+| `town-edge` | 14 | 地圖邊界的林地圖與城門提示、U-TURN 回地圖 |
+| `town-talk` | 10 | 建築內的圖示列、LISTEN 的傳聞與 MOUTH 的問話 |
 | `town-leave` | 13 | 在城門選 DOOR 離開城鎮，落到世界地圖 |
-| `town-round-trip` | 20 | 城鎮 → 野外走到路上 → 退回城鎮入口 → 選 DOOR 進城 |
-| `town-recruit` | 15 | 進旅店、把白框移到 COMPANION、回答是否搜尋硬碟、在候選人清單上下移動並加入第一位 |
-| `town-rest` | 11 | 進旅店按 REST 住一晚：付掉 56 枚金幣、記下留宿的建築、寫出存檔並逐欄驗證 |
-| `town-mirror` | 10 | 進旅店按 MIRROR 打開角色資料頁，移動白框再選 U-TURN 回建築內 |
-| `town-load` | 7 | 從 `town-rest` 寫出的存檔開場，資料頁上除了金幣那一欄與沒讀檔時逐像素相同 |
-| `town-shop` | 14 | 走進甲冑鋪按 TRADE、移動反白、看明細、買下第一件，扣錢之後直接穿上 |
-| `world-road` | 34 | 出城往北走上道路，連按七次 ROAD 自動循路，再按 SIGNPOST 換另一條 |
-| `full` | 26 | 從標題序列走到城鎮：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走，由 `internal/flow` 串起來 |
+| `town-round-trip` | 20 | 城鎮 → 野外 → 退回入口 → 進城 |
+| `town-recruit` | 15 | COMPANION 招募：搜尋硬碟的問句、候選人清單、加入 |
+| `town-rest` | 11 | REST 住一晚：付 56 枚金冠、寫出存檔並逐欄驗證 |
+| `town-mirror` | 10 | MIRROR 的角色資料頁與 U-TURN |
+| `town-load` | 7 | 從 `town-rest` 的存檔開場，只有金幣那一欄不同 |
+| `town-shop` | 14 | TRADE：反白、明細、買下、扣錢、穿上 |
+| `town-train` | 15 | AWARD 訓練的位階閘門與技能選擇 |
+| `world-road` | 34 | 出城上道路、ROAD 自動循路、SIGNPOST 換向 |
+| `world-clock` | 28 | 野外的時刻推進與換日 |
+| `world-quest` | 91 | 走到任務地點、遭遇畫面、進戰場、規劃與執行 |
+| `full` | 26 | 標題 → 書本 → 角色選項 → 旅店 → 城鎮 → 建築，由 `internal/flow` 串起來 |
 
-尚未實作的功能（EDIT PICTURE／EDIT SHIELD、旅店其餘三個圖示、資料頁上的三個圖示）會被記進
-`flow.Unimplemented`，不會默默吞掉。
+尚未實作的功能會被記進 `flow.Unimplemented` 或 `battle.ActResult.Unimplemented`，
+不會默默吞掉。
 
 ## 發行 gate
 
 - [ ] 全庫測試與靜態分析
-- [ ] 翻譯／編碼檢查
-- [~] 無除錯捷徑的正常玩家路徑（標題→書本→旅店→城鎮已有 26 步收據；戰鬥與存讀檔未接）
-- [~] 可寫存檔與 pristine original 不變檢查（存檔的迴圈已閉合：`town-rest` 寫出
-      並逐欄驗證，`town-load` 從那一份開場、畫面只差金幣那一欄。原版 `CHARDATA`
-      一律唯讀，匯入是離線工具。戰鬥與任務進度尚未進存檔）
-- [ ] 原版／remake 同狀態截圖審查
-- [ ] 封包啟動 smoke
+- [~] 翻譯／編碼檢查（城鎮 1,938 則與 UI 文字庫 486 筆已翻完並有檢查器；
+      BOOKDATA 與 ENDTXT 的譯文還沒接上畫面）
+- [~] 無除錯捷徑的正常玩家路徑（標題 → 書本 → 城鎮 → 野外 → 任務 → 戰鬥已有收據；
+      **一場戰鬥還打不完**——打贏沒有判定）
+- [~] 可寫存檔與 pristine original 不變檢查（存檔迴圈已閉合；戰鬥與任務進度尚未進存檔。
+      原版 `CHARDATA` 一律唯讀，匯入是離線工具）
+- [~] 原版／remake 同狀態截圖審查（283 對通過；音訊、結局與法術等未實作的部分沒有可審的畫面）
+- [ ] 封包啟動 smoke（`dist-all/` 還不存在）

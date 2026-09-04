@@ -28,22 +28,54 @@
 
 ## 索引
 
-| 主題 | 文件 | 目前狀態 |
+### 主題文件
+
+先看主題文件，那是整理過的機制與導覽；要逐條證據、推論等級與勘誤才進 RESEARCH-LOG。
+
+| 主題 | 文件 | 涵蓋 |
 |---|---|---|
 | 固定輸入與衍生映像 | [builds.md](builds.md) | KOLTOWN packed／unpacked 已固定 |
-| 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked 已建立 |
+| 位址空間與搬移映射 | [address-spaces.md](address-spaces.md) | stage 1／stage 2／unpacked |
 | Packer／compiler／runtime | [toolchain.md](toolchain.md) | KOLTOWN 為 Microsoft EXEPACK 已證實；精確工具版本未知 |
-| 全部研究時間線 | [RESEARCH-LOG.md](RESEARCH-LOG.md) | RE-001 至 RE-039 |
-| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | COMBPICS、KOLPICS、KOLMPICS、TWN 全包、TITLE SET／FACE／BACK、ENDPICS、BOOKPICS、WEATPICS、AWD1PICS、SHLDPICS、HANDPICS、WEAPPICS、HEADPICS／TORPICS／LEGSPICS、MONPICS、PERPICS、MISCPICS 與固定記錄表已分類 |
-| 音訊 cue 母體 | [audio-inventory.json](audio-inventory.json) | 六個 executable 直接 I/O 母體已關閉；只有 TITLE PC Speaker cue |
-| TITLE 音訊 oracle | [title-audio-oracle.json](title-audio-oracle.json) | DOSBox-X 正常流程非靜音擷取已證實；人耳驗收待辦 |
-| 角色建立 | [character-creation.md](character-creation.md) | 起始 writer／reader 與靜態 UI 返回邊界已關閉；正常 UI oracle／產品決策待辦 |
-| IDA／runtime 安全摘要 | `ida-fingerprints/*.json` | build、startup 與逐 byte oracle 摘要；含 bytes 的 `*-private.json` ignored |
+| 圖片容器與壓縮 | [image-formats.md](image-formats.md) | 30 個邏輯 archive、1,022 個 payload 全數有 disposition |
+| 文字與字型 | [text-and-fonts.md](text-and-fonts.md) | 字模、三個 UI 文字庫、城鎮的 5-bit 打包、代換碼、中文雙模式 |
+| 角色建立 | [character-creation.md](character-creation.md) | 屬性 RNG、職業表、起始裝備、writer coverage、UI 邊界 |
+| 戰鬥 | [combat.md](combat.md) | 各階段的函式與 RE 對照、六個容易踩的地方、還沒解的六項 |
+| 音訊 | [audio.md](audio.md) | 整份原版只有一個音效；母體怎麼窮舉、remake 為什麼用合成而不是錄音 |
+| 城鎮與世界 | [town-and-world.md](town-and-world.md) | `TOWNn.0` 的 payload 版面、地圖、門、建築內對話、世界地圖、道路、遭遇 |
 
-## 下一個知識缺口
+### 機器可讀輸出
 
-SPEC-002、004、005 仍為 DRAFT。圖片 theme 範圍等待使用者決定；音訊直接 I/O 母體與
-正常流程機械擷取已關閉，下一步是人耳驗收及 TITLE cue 的 OGG 處理決策。這些規格未達
-READY 前不得接進 runtime。角色建立已固定手冊狀態機、原版 slot stride、完整起始 writer
-coverage、最小 reader 與靜態 UI 返回／滿槽邊界；下一窄切片是從 `KOL.EXE` 正常入口完成
-名字、ESC、reroll、slot-full 與保存邊界 oracle。
+| 內容 | 檔案 |
+|---|---|
+| 全部研究時間線（RE-001…RE-090） | [RESEARCH-LOG.md](RESEARCH-LOG.md) |
+| 音訊 cue 母體 | [audio-inventory.json](audio-inventory.json) |
+| TITLE 音訊 oracle | [title-audio-oracle.json](title-audio-oracle.json) |
+| 書本文字版面 | [text-layout.json](text-layout.json) |
+| 城鎮的門與地圖 | [town-doors.json](town-doors.json)、[town-map-grid.json](town-map-grid.json) |
+| IDA／runtime 安全摘要 | `ida-fingerprints/*.json`（含 bytes 的 `*-private.json` ignored） |
+| 各 archive 的視覺探針 | `*-ega-visual-probe.json` |
+
+## 還沒有主題文件的區塊
+
+這幾塊的證據都在 RESEARCH-LOG，但還沒整理成主題文件：
+
+- **角色記錄的欄位版面**（RE-034…RE-051、RE-074、RE-075）：768-byte 的
+  `CHARDATA` 記錄裡哪一格是什麼。
+
+## 目前的知識缺口
+
+按「會不會擋住玩家路徑」排：
+
+1. **打贏一場戰鬥之後會發生什麼**——經驗值、戰利品、升級。連一條 RE 都還沒有，
+   而它擋住整條玩家路徑（見 [combat.md](combat.md)）。
+2. **法術系統**——角色記錄 `0x1A0` 是「會不會法術」的旗標，戰鬥有 MAGIC 指令，
+   訊息鏈有 `casts|S at|F.`，但系統本身沒碰過。
+3. **任務的回報與完成、結局的觸發**——`ENDPICS`／`ENDTXT` 已經抽出來也翻好了，
+   但什麼時候播還沒讀。
+4. **音訊的人耳驗收**——SPEC-004 卡在這一關，過了才接得上 Ebitengine
+   （見 [audio.md](audio.md)）。
+5. **`EDIT PICTURE`／`EDIT SHIELD`**——原版是滑鼠驅動，現有的鍵盤 oracle 走不完，
+   要先讓 oracle 能送滑鼠事件。
+
+規格狀態見 [../spec/README.md](../spec/README.md)；未達 `READY` 不得實作。
