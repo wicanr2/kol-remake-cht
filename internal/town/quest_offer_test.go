@@ -128,3 +128,43 @@ func TestOfferFinalQuestThreshold(t *testing.T) {
 		t.Fatal("回報滿 0x17 件就該給")
 	}
 }
+
+// MOUTH：按下去先放問話的敘述，接著一個一個收字，Return 送出（RE-067）。
+func TestMouthTyping(t *testing.T) {
+	s := &Session{
+		Party:  []Member{{Name: "甲", Speaker: true, Quests: make([]int, QuestFlagBytes), Progress: make([]int, 5)}},
+		Inside: &Inn{}, door: questDoor(), Trans: &Translations{},
+		UIText: &UIText{}, Mode: ModeInside, Outdoor: &Outdoor{Town: 0},
+	}
+	s.Text = &Text{Towns: []townText{{Town: 0, Buildings: []BuildingText{*questText()}}}}
+	s.StartAsk()
+	if !s.Asking() {
+		t.Fatal("按下 MOUTH 之後應該在打字")
+	}
+	for _, r := range "segg" {
+		s.TypeAsk(r)
+	}
+	s.BackspaceAsk()
+	s.TypeAsk('g')
+	if s.AskInput() != "segg" {
+		t.Fatalf("打進去的是 %q", s.AskInput())
+	}
+	// 對話框最後一行是打到一半的字加游標。
+	if last := s.Inside.Dialog[len(s.Inside.Dialog)-1]; last != "segg_" {
+		t.Fatalf("輸入行是 %q", last)
+	}
+	// 超過 23 個字元就不再收。
+	for i := 0; i < 40; i++ {
+		s.TypeAsk('x')
+	}
+	if len(s.AskInput()) != MouthMaxChars {
+		t.Fatalf("上限是 %d，收到 %d", MouthMaxChars, len(s.AskInput()))
+	}
+	s.mouth.buf = []rune("")
+	if s.SubmitAsk() {
+		t.Fatal("空的問句不該送出")
+	}
+	if s.Asking() {
+		t.Fatal("送出之後就不在打字了")
+	}
+}

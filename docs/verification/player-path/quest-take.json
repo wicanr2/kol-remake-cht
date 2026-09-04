@@ -1,9 +1,9 @@
 {
  "name": "quest-take",
- "description": "從標題按下去，走進霍布城西的一戶人家，用 MOUTH 問到那一戶的關鍵字就接下一個任務（RE-110）。接任務的入口是建築內問話的**第 5 槽**，而且要這一棟的 `icon_flags[1] & 4`——與收任務物品同一位，同一棟給也收。敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。",
+ "description": "從標題按下去，走進霍布城西的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。",
  "seed": 1,
  "load": "workplace/saves/quest-take.json",
- "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U RET ASK:nobj SPACE SPACE RET",
+ "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U RET SPACE > > > RET n o b j RET SPACE SPACE RET",
  "shot_dir": "docs/verification/player-path/quest-take",
  "trace": "docs/verification/player-path/quest-take/trace.json",
  "size": [
@@ -11,6 +11,12 @@
   200
  ],
  "receipt": "docs/verification/player-path/quest-take-receipt.json",
+ "not_claimed": [
+  {
+   "name": "打字那一格的版面與原版一致",
+   "reason": "`sub_1B5C8` 的游標樣子與座標還沒讀，這一版把打到一半的字接在敘述後面並用底線當游標。已證實的只有「最多 23 個字元」與「整串轉小寫」。"
+  }
+ ],
  "milestones": [
   {
    "step": 19,
@@ -43,24 +49,45 @@
    "town": {
     "mode": 2
    },
-   "note": "MOUTH 問 `nobj`：任務敘述第一頁"
+   "note": "讀完敘述，圖示列出來"
   },
   {
-   "step": 23,
+   "step": 26,
+   "town": {
+    "mode": 2
+   },
+   "note": "白框走到 MOUTH 按下去：問話的敘述與輸入框"
+  },
+  {
+   "step": 30,
+   "town": {
+    "mode": 2
+   },
+   "note": "打完 `nobj` 四個字元"
+  },
+  {
+   "step": 31,
+   "town": {
+    "mode": 2
+   },
+   "note": "Return 送出：任務敘述第一頁"
+  },
+  {
+   "step": 32,
    "town": {
     "mode": 2
    },
    "note": "第二頁"
   },
   {
-   "step": 24,
+   "step": 33,
    "town": {
     "mode": 2
    },
    "note": "「Will you do this?」，圖示列是 YES／NO"
   },
   {
-   "step": 25,
+   "step": 34,
    "town": {
     "mode": 2,
     "took_quest": {
@@ -79,23 +106,33 @@
    "shows": "進門的敘述"
   },
   {
-   "step": 22,
-   "file": "step-022.png",
+   "step": 26,
+   "file": "step-026.png",
+   "shows": "MOUTH：問話的敘述與空的輸入框"
+  },
+  {
+   "step": 30,
+   "file": "step-030.png",
+   "shows": "打完 `nobj`，游標在字尾"
+  },
+  {
+   "step": 31,
+   "file": "step-031.png",
    "shows": "任務敘述第一頁（八行）"
   },
   {
-   "step": 23,
-   "file": "step-023.png",
+   "step": 32,
+   "file": "step-032.png",
    "shows": "第二頁"
   },
   {
-   "step": 24,
-   "file": "step-024.png",
+   "step": 33,
+   "file": "step-033.png",
    "shows": "\"Will you do this?\"（記錄 0x42）"
   },
   {
-   "step": 25,
-   "file": "step-025.png",
+   "step": 34,
+   "file": "step-034.png",
    "shows": "\"Very well. Be off!\"（記錄 0x43）"
   }
  ]

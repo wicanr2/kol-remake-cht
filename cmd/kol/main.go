@@ -1380,6 +1380,20 @@ func (g *game) updatePlay() {
 		g.walkTick = 0
 		g.play.Outdoor.AdvanceMarker(&g.markerStep)
 	}
+	// MOUTH 打字中：鍵盤是輸入框，方向鍵與圖示列都先讓開（RE-067）。
+	if g.play.Asking() {
+		for _, r := range ebiten.AppendInputChars(nil) {
+			g.play.TypeAsk(r)
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyBackspace) {
+			g.play.BackspaceAsk()
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
+			inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) {
+			g.play.SubmitAsk()
+		}
+		return
+	}
 	for _, k := range []struct {
 		key    ebiten.Key
 		dx, dy int

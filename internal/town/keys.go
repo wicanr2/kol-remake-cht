@@ -16,6 +16,26 @@ var walkKeys = map[string][2]int{
 //
 // 清單開著的時候上下鍵移動反白而不是走路——原版的招募、商店與訓練清單都吃上下鍵。
 func (s *Session) Key(token string) bool {
+	// 打問句的時候鍵盤是輸入框：單一字元進緩衝區、`BS` 退格、`RET` 送出。
+	// 其餘的鍵在原版的讀入迴圈裡也不做事。
+	if s.Asking() {
+		switch token {
+		case "RET":
+			s.SubmitAsk()
+			return true
+		case "BS":
+			s.BackspaceAsk()
+			return true
+		case "SPACE":
+			s.TypeAsk(' ')
+			return true
+		}
+		if r := []rune(token); len(r) == 1 {
+			s.TypeAsk(r[0])
+			return true
+		}
+		return false
+	}
 	// 在城門選了 DOOR 就換到世界地圖。放在這裡而不是呼叫端：`LeftTown` 是這個
 	// 狀態機自己翻的旗標，誰送鍵進來都要走同一條路——原本掛在 `cmd/kol` 那一份
 	// 包裝上，走 flow 進來的鍵就繞過了它，落到世界地圖的哪一格只是碰巧對。

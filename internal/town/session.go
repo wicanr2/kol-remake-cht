@@ -89,6 +89,8 @@ type Session struct {
 	train *trainState
 	// quest 是接任務流程的狀態；nil 代表不在接任務中（RE-110）。
 	quest *questOffer
+	// mouth 是 MOUTH 打字中的問句；nil 代表沒在打字（RE-067）。
+	mouth *mouthState
 	// quit 記下玩家在「你要離開嗎」那一問答了 YES。
 	quit bool
 
@@ -291,6 +293,8 @@ func (s *Session) acceptInside() {
 		s.Continue()
 	case id == IconListen:
 		s.Listen()
+	case id == IconMouth:
+		s.StartAsk()
 	case id == IconCompanion:
 		s.StartRecruit()
 	case id == IconRest:
@@ -377,6 +381,7 @@ func (s *Session) enter() {
 		s.topic = s.Topics.Building(town, door.Index)
 	}
 	s.quest = nil
+	s.mouth = nil
 	s.TookQuest = nil
 	s.turnInQuests(door)
 }
@@ -677,10 +682,9 @@ func (s *Session) Ask(question string) bool {
 		return false
 	}
 	town := s.Outdoor.Town
-	ask := s.message(AskMessage)
 	key, ok := s.Topics.Lookup(town, question)
 	if !ok {
-		s.say(ask, s.message(UnknownMessage))
+		s.say(s.message(UnknownMessage), nil)
 		return true
 	}
 	if s.topic != nil {
@@ -691,15 +695,15 @@ func (s *Session) Ask(question string) bool {
 			if slot == QuestSlot && s.offerQuest() {
 				return true
 			}
-			s.say(ask, s.message(TopicMessageBase+slot))
+			s.say(s.message(TopicMessageBase+slot), nil)
 			return true
 		}
 	}
 	if who := s.Topics.AskWho(town, key.Topic); who != "" && s.UIText != nil {
-		s.say(ask, []string{s.heard(who, key.Category)})
+		s.say([]string{s.heard(who, key.Category)}, nil)
 		return true
 	}
-	s.say(ask, s.message(UnknownMessage))
+	s.say(s.message(UnknownMessage), nil)
 	return true
 }
 
