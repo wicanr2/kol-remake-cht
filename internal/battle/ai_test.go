@@ -181,3 +181,51 @@ func TestEnemyClosesInThenAttacks(t *testing.T) {
 		t.Fatalf("攻擊時距離還有 (%d,%d)", dx, dy)
 	}
 }
+
+// 環 1…3 上看得見的目標會被射（`0x23F15`，RE-104）：指令碼換成 0x23、
+// 目標那一格記進 Memo、+0x1D 直接設 1。
+func TestPlanEnemyShootsFromRange(t *testing.T) {
+	newState := func() *State {
+		return &State{Field: NewField(), Actors: []Actor{
+			{Side: SideParty, X: 10, Y: 10, Head: 10, Chest: 10, Threshold: 100},
+			{Side: SideMonster, Kind: 3, X: 10, Y: 12, Head: 10, Chest: 10,
+				Threshold: 100, RightArm: 10, LeftArm: 10,
+				RightLeg: 10, LeftLeg: 10, Level: 2},
+		}}
+	}
+	s := newState()
+	d := s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdMissile {
+		t.Fatalf("環 2 看得見應該射擊，得到 %#x", d.Command)
+	}
+	if d.Target != 0 || d.Ring != 1 {
+		t.Fatalf("目標／環號是 %d／%d，期望 0／1", d.Target, d.Ring)
+	}
+	if got := s.Plan.Memo[1]; got.Row != 10 || got.Col != 10 {
+		t.Fatalf("目標那一格應該記進 Memo，得到 %+v", got)
+	}
+	if s.Actors[1].Flag1D != 1 {
+		t.Fatal("敵人不必先裝填，+0x1D 直接設 1")
+	}
+	// 中間隔一面牆就射不到，改成靠近。
+	s = newState()
+	s.Field.Tiles[10*FieldSide+11] = 0x29
+	d = s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdMove {
+		t.Fatalf("被牆擋住應該改成移動，得到 %#x", d.Command)
+	}
+	// 環 3 起只能靠近。
+	s = newState()
+	s.Actors[1].Y = 14
+	d = s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdMove || d.Ring != 3 {
+		t.Fatalf("環 3 應該靠近，得到 %#x／%d", d.Command, d.Ring)
+	}
+	// 右臂廢了也射不出去。
+	s = newState()
+	s.Actors[1].RightArm = 0
+	d = s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdMove {
+		t.Fatalf("右臂廢了應該改成移動，得到 %#x", d.Command)
+	}
+}

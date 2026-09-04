@@ -164,8 +164,14 @@ func EnemyMoveForm(level, ring int, legsOK bool, hurt int, rng Rand) int {
 // 的加權輪盤、移動方式走三式的權重。
 //
 // **還沒做的**，都需要語意還沒解出來的旗標（RE-081 的「還沒走完的」那一節）：
-// 撤退狀態（+0x29／+0x2A）、反制掃描 `sub_253E7`、側翼 `sub_25653`、射擊那一條
-// （指令 0x23）與沒有武器時的指令 0x26。這些情形目前一律落到「攻擊或移動」。
+// 撤退狀態（+0x29／+0x2A）、反制掃描 `sub_253E7`、側翼 `sub_25653` 與沒有武器時
+// 的指令 0x26。這些情形目前一律落到「攻擊或移動」。射擊那一條已經照原版做了
+// （RE-104）。
+
+// EnemyShootRing 是肯射擊的最遠環號。原版比的是 `word_349B2 < 4`（`0x23EBB`），
+// 而那個計數從 1 起算相鄰的那一圈（`0x23DDE`）——remake 的環號從 0 起算同一圈，
+// 所以門檻少一。環 0 在前面就被貼身攻擊接走了，實際會射的是環 1 與環 2。
+const EnemyShootRing = 3
 
 // EnemyDecision 是敵人這一回合要做什麼。
 type EnemyDecision struct {
@@ -187,7 +193,8 @@ type EnemyDecision struct {
 //
 //	環 0（八個相鄰格）找隊員 → 找到就攻擊，但有 1/3 機率改成移動
 //	環 0 沒人 → 往外掃環 1…6
-//	    看得見、環號 < 4、有武器又有右臂 → 射擊（還沒實作，改成靠近）
+//	    線通不到就換一個目標（`0x23EAB` 的 `sub_25D0F`）
+//	    環號 < 4、種類非零又有右臂 → 射擊（`0x23F15`，RE-104）
 //	    否則 → 朝目標走一步
 //	七環都沒人 → 隨機挑一個站得下的方向移動
 func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
@@ -225,14 +232,48 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return d
 	}
 
-	// 環 1…6：找得到就朝它走一步。射擊那一條（指令 0x23）還沒實作——原版在
-	// 看得見、環號 < 4、有武器又有右臂時會射，這裡一律靠近。
+	// 環 1…6：找得到就先看線通不通，通得到才考慮射擊，否則靠近。
+	foot := TileGround
+	if s.Field != nil {
+		foot = s.Field.At(a.X, a.Y)
+	}
+	if a.Flag1E != 0 {
+		foot = MountedSight
+	}
 	for ring := 1; ring < RingCount; ring++ {
-		if t := s.findInRing(i, ring, rng); t >= 0 {
-			return s.enemyMove(i, t, ring, rng)
+		t := s.findInRing(i, ring, rng)
+		if t < 0 {
+			continue
 		}
+		// 線通不到就跳過。**原版是回頭在同一環繼續找下一個**
+		// （`0x23EB8` 跳回 `0x23DEC`），這裡換下一環——`findInRing` 一次只回
+		// 一名，兩者只在同一環有多名目標而近的那名被擋住時不同。
+		if s.Field != nil &&
+			!s.Field.LineOfSight(a.X, a.Y, s.Actors[t].X, s.Actors[t].Y, foot) {
+			continue
+		}
+		if ring < EnemyShootRing && a.Kind != 0 && a.RightArm > 0 {
+			return s.enemyShoot(i, t, ring)
+		}
+		return s.enemyMove(i, t, ring, rng)
 	}
 	return s.enemyMove(i, -1, -1, rng)
+}
+
+// enemyShoot 組出射擊那一手（`0x23F15`…`0x23F53`）：把目標那一格記進 Memo、
+// 指令碼設 0x23、攻擊選項 0，並且**直接把 +0x1D 設成 1**——敵人不必先花一回合
+// 裝填，原版就是這樣寫的。
+func (s *State) enemyShoot(i, target, ring int) EnemyDecision {
+	a := &s.Actors[i]
+	d := EnemyDecision{Command: CmdMissile, Target: target, Ring: ring,
+		Facing: s.stepToward(i, target)}
+	a.Flag1D = 1
+	if s.Plan.Memo == nil {
+		s.Plan.Memo = map[int]Cell{}
+	}
+	s.Plan.Memo[i] = Cell{Row: s.Actors[target].X, Col: s.Actors[target].Y}
+	s.applyEnemy(i, d)
+	return d
 }
 
 // enemyMove 組出移動那一手：方向朝目標（沒有目標就隨機挑一個站得下的），

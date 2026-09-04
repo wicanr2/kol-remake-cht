@@ -179,3 +179,26 @@ func sign(v int) int {
 	}
 	return 0
 }
+
+// LineOfSight 回報從 (ox, oy) 到 (tx, ty) 這條線通不通得過去
+// （`sub_25D0F` ＋ `sub_25D7A(2)`，RE-102）。mode 2 只看地形：不比樹、不看人、
+// 也不畫東西，遇到擋視線的磚就停。
+//
+// **原版那一支回 0 才是通得到**（`0x20F38` 拿 `jz` 接著畫戰場），這裡把回傳值
+// 翻正過來，免得在 remake 這一側每個呼叫點都要記得反過來讀。起點與終點是同一格
+// 時原版回 0，也就是「通」。
+func (f *Field) LineOfSight(ox, oy, tx, ty, foot int) bool {
+	if ox == tx && oy == ty {
+		return true
+	}
+	clear := true
+	walkLine(ox, oy, tx, ty, func(k, r, c int) bool {
+		tile := f.At(r, c)
+		if Blocks(tile) && !seesOver(tile, foot, k) {
+			clear = false
+			return false
+		}
+		return true
+	})
+	return clear
+}

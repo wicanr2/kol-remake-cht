@@ -104,3 +104,28 @@ func TestVisibleMountedSeesOverWalls(t *testing.T) {
 		t.Fatal("沒騎又不是第一步就不該穿得過")
 	}
 }
+
+// 純地形的視線（`sub_25D7A(2)`）：不比樹、不看人，遇到擋視線的磚就斷。
+func TestLineOfSight(t *testing.T) {
+	f := NewField()
+	if !f.LineOfSight(10, 10, 10, 17, TileGround) {
+		t.Fatal("整片底色應該通")
+	}
+	if !f.LineOfSight(10, 10, 10, 10, TileGround) {
+		t.Fatal("同一格算通")
+	}
+	f.Tiles[10*FieldSide+13] = 0x29
+	if f.LineOfSight(10, 10, 10, 17, TileGround) {
+		t.Fatal("牆應該擋住")
+	}
+	// 樹不擋視線（位元圖裡 0x0A 那一位沒設），但擋彈道。
+	f.Tiles[10*FieldSide+13] = TreeTile
+	if !f.LineOfSight(10, 10, 10, 17, TileGround) {
+		t.Fatal("樹不該擋視線")
+	}
+	// 騎著的人看得過牆。
+	f.Tiles[10*FieldSide+13] = 0x29
+	if !f.LineOfSight(10, 10, 10, 17, MountedSight) {
+		t.Fatal("騎著應該看得過牆")
+	}
+}
