@@ -5,6 +5,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/hex"
 	"encoding/json"
 	"flag"
@@ -469,10 +470,60 @@ func (g *game) playToken(token string) error {
 	if g.quest != nil && g.quest.state != nil {
 		return applyBattleToken(g.quest.state, token, func(*battle.State) { g.battleStep() })
 	}
+	// 競技場的對話走城鎮那一層的鍵位（RE-108）；談完就開那一場。
+	if g.play != nil && g.play.InArena() {
+		if err := applyPlayToken(g.play, token); err != nil {
+			return err
+		}
+		g.startArenaFight()
+		return nil
+	}
 	if g.play != nil && g.play.LeftTown && g.worldSession != nil {
 		return applyWorldToken(g.worldSession, token)
 	}
 	return applyPlayToken(g.play, token)
+}
+
+// startArenaFight 把競技場談完的那一場開起來（RE-108）：一隻、等級是上場那一名的
+// 實得位階加一、種類與陣型各擲一次。**戰場的地形還沒解**——原版在這裡把
+// `word_34968` 設成 1（走任務地點那一條，地形是載入的而不是逐格擲的），
+// 但載的是哪一份沒讀出來，所以這一版沿用隨機遭遇的逐格擲。
+func (g *game) startArenaFight() {
+	f := g.play.PendingFight()
+	if f == nil || g.quest == nil || g.arena == nil {
+		return
+	}
+	g.play.ClearPendingFight()
+	rng := g.arena.rand
+	a := &battle.Ambush{
+		Monster: rng.Roll(battle.ArenaMonsterKinds) - 1,
+		Level:   f.Level,
+		Count:   1,
+		Group:   rng.Roll(battle.AmbushGroups) - 1,
+	}
+	members := make([]battle.Member, 0, len(g.play.Party))
+	for _, m := range g.play.Party {
+		members = append(members, battleMember(m))
+	}
+	mon := g.arena.monsters.At(a.Monster)
+	st := battle.NewAmbush(a, mon, members, battle.Generate(g.arena.field))
+	if st == nil {
+		return
+	}
+	st.Rand = g.arena.rand
+	st.SpoilItems = g.arena.spoils
+	g.quest.tiles = g.arena.tiles
+	g.quest.state = st
+	g.quest.bank = g.arena.bank
+	g.quest.trans = g.arena.trans
+	g.quest.english = g.arena.english
+	// 遭遇那一張的文字：原版在這裡把 `word_34968` 設成 1，走的是任務地點那一條，
+	// 所以用同一句（記錄 0xE9）。**這一句本身沒有從程式碼讀出來**（RE-108 沒有
+	// 讀到競技場的遭遇訊息），是照那個旗標推的。
+	g.quest.lines = nonEmptyLines(g.arena.bank.Lines(town.BankUI,
+		battle.QuestCreaturesRecord))
+	g.arenaFighter = f.Member
+	g.play.LeaveArena()
 }
 
 // savedParty 把存檔裡的隊伍換成城鎮這一側的型別。角色的靜態資料（頭像、屬性）
@@ -612,6 +663,7 @@ func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
 			Quests: append([]int(nil), m.Quests...),
 			Progress: append([]int(nil), m.Progress...),
 			Carried: encodeCarried(m.Carried),
+			Rank:    savedRank(m),
 		})
 	}
 	// 存檔裡的發言者要明確：畫面上沒有標記時發言者就是隊長，寫進去也照這個規則，
@@ -640,6 +692,15 @@ func parseSteps(spec string) (map[int]bool, error) {
 		out[n] = true
 	}
 	return out, nil
+}
+
+// savedRank 取那一名的帳面位階；沒有資料頁就不寫這一欄。
+func savedRank(m town.Member) *int {
+	if m.Sheet == nil {
+		return nil
+	}
+	rank := m.Sheet.Rank
+	return &rank
 }
 
 // parsePair 解析 `X,Y` 形式的參數。
@@ -796,12 +857,33 @@ type game struct {
 	// 截圖只證明畫面長什麼樣，軌跡才證明這一步走的是哪一個狀態機。
 	tracePath string
 	traceRows []map[string]any
-	// lastParty／lastRoster 是上一步寫進軌跡的摘要，用來省掉沒有變化的那幾行。
-	lastParty  []string
-	lastRoster []string
+	// lastParty 是上一步寫進軌跡的隊伍摘要，用來省掉沒有變化的那幾行；
+	// lastStage 是上一步的戰鬥階段，只有它變了才記一次戰場。
+	lastParty []string
+	lastStage int
+	// traceDetail 打開時軌跡多記指令列、游標與逐步的戰場——產生腳本用，
+	// 收據不需要。
+	traceDetail bool
 
 	// endingArmed 是「該播結局了」。任務戰鬥打完那一刻才可能設起來（RE-106）。
 	endingArmed bool
+
+	// arena 是競技場開一場要用的東西；arenaFighter 是上場的那一名（−1 表示
+	// 這一場不是競技場打的）。
+	arena        *arenaDeps
+	arenaFighter int
+}
+
+// arenaDeps 是競技場開一場戰鬥要用到的東西，建構時湊齊。
+type arenaDeps struct {
+	monsters *battle.Monsters
+	spoils   []battle.SpoilItem
+	tiles    *ui.BattleTiles
+	bank     *town.UIText
+	trans    *town.Translations
+	rand     *lcg
+	field    *lcg
+	english  bool
 }
 
 // snapshot 記下這一步之後遊戲停在哪。欄位只取「能證明走到哪一層」的那幾個：
@@ -874,17 +956,26 @@ func (g *game) snapshot() map[string]any {
 		st := g.quest.state
 		b := map[string]any{"stage": int(st.Stage), "round": st.Round.Number,
 			"prompt": int(st.Plan.Prompt), "verdict": int(st.Verdict),
-			"turn": st.Round.Turn, "order": len(st.Round.Order),
-			"cursor": st.Cursor, "bar": st.Plan.Bar, "selected": st.Plan.Selected,
-			"actors": len(st.Actors), "quest_done": st.QuestDone}
+			"turn": st.Round.Turn, "quest_done": st.QuestDone}
 		if len(st.Exec.Text) > 0 {
 			b["exec_text"] = st.Exec.Text
 		}
-		b["cursor_cell"] = []int{st.Plan.Cursor.Row, st.Plan.Cursor.Col,
-			st.Plan.Cursor.Mode, st.Plan.Cursor.Icon}
-		if roster := actorLines(st.Actors); !sameLines(roster, g.lastRoster) {
-			b["roster"] = roster
-			g.lastRoster = roster
+		// 指令列、游標與參戰者只有產生腳本的時候要看；收據裡逐步記會把軌跡
+		// 撐大好幾倍，`-trace-detail` 才寫。
+		if g.traceDetail {
+			b["order"] = len(st.Round.Order)
+			b["cursor"] = st.Cursor
+			b["bar"] = st.Plan.Bar
+			b["selected"] = st.Plan.Selected
+			b["actors"] = len(st.Actors)
+			b["cursor_cell"] = []int{st.Plan.Cursor.Row, st.Plan.Cursor.Col,
+				st.Plan.Cursor.Mode, st.Plan.Cursor.Icon}
+		}
+		// 戰場上的位置與傷勢每一步都在動，逐步記會把軌跡撐大好幾倍而且沒有人讀。
+		// 只在**階段改變**時記一次：進戰場、分勝負、收尾各留一份。
+		if g.traceDetail || int(st.Stage) != g.lastStage {
+			g.lastStage = int(st.Stage)
+			b["roster"] = actorLines(st.Actors)
 		}
 		if st.Site != nil {
 			b["site"] = st.Site.Index
@@ -971,13 +1062,24 @@ func (g *game) writeTrace() {
 		fmt.Fprintln(os.Stderr, err)
 		return
 	}
-	raw, err := json.MarshalIndent(map[string]any{
-		"schema": "kol-play-trace-v1", "steps": g.traceRows}, "", "  ")
-	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		return
+	// 一步一行：整份縮排會把上千步的軌跡撐大三倍，而一行一步照樣讀得下去。
+	var out bytes.Buffer
+	out.WriteString("{\n \"schema\": \"kol-play-trace-v1\",\n \"steps\": [\n")
+	for i, row := range g.traceRows {
+		line, err := json.Marshal(row)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			return
+		}
+		out.WriteString("  ")
+		out.Write(line)
+		if i < len(g.traceRows)-1 {
+			out.WriteString(",")
+		}
+		out.WriteString("\n")
 	}
-	if err := os.WriteFile(g.tracePath, append(raw, '\n'), 0o644); err != nil {
+	out.WriteString(" ]\n}\n")
+	if err := os.WriteFile(g.tracePath, out.Bytes(), 0o644); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	}
 }
@@ -1043,6 +1145,10 @@ func (g *game) render() error {
 		// 最後一件任務回報掉之後畫的是結局（RE-106）。
 		if g.endingReached() {
 			return g.renderScene(sceneEnding)
+		}
+		// 競技場的對話蓋在野外上面（RE-108）。
+		if g.play != nil && g.play.InArena() {
+			return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.play.Inside)
 		}
 		if g.quest != nil && g.quest.state != nil {
 			if g.quest.state.Stage == battle.StageEncounter {
@@ -1553,6 +1659,17 @@ func (g *game) battleStep() {
 			s.Stage = battle.StageSpoils
 			return
 		}
+		// 競技場那一場打贏就升一階（`0x21611`，RE-108）。一次只加一級。
+		if g.arenaFighter >= 0 {
+			if s.Verdict == battle.VerdictWon {
+				if lines := g.play.ArenaWin(g.arenaFighter); len(lines) > 0 {
+					s.Exec.Text = lines
+					g.arenaFighter = -1
+					return
+				}
+			}
+			g.arenaFighter = -1
+		}
 		// 這一場標到了任務完成，而且有人的已回報數正好是 0x17，就接結局
 		// （RE-106）。檢查在放開畫面之前，順序與原版相同。
 		g.armEnding(s)
@@ -1989,6 +2106,8 @@ func main() {
 			"與原版對拍時要打開")
 	tracePath := flag.String("trace", "",
 		"把每一步的狀態軌跡寫成 JSON：場景、城鎮／世界座標、戰鬥階段與結局段號")
+	traceDetail := flag.Bool("trace-detail", false,
+		"軌跡多記指令列、游標與逐步的戰場；產生腳本用，收據不需要")
 	shotSteps := flag.String("shot-steps", "",
 		"只在這幾步截圖（逗號分隔的步號）；長路徑用它留檢查點，其餘只記軌跡")
 	stringsPath := flag.String("strings", "docs/i18n/newchar-zh-Hant.json",
@@ -2344,6 +2463,7 @@ func main() {
 	}
 
 	var playSession *town.Session
+	var arenaDep *arenaDeps
 	if scene(*sceneName) == scenePlay || scene(*sceneName) == sceneFlow {
 		state, err := town.LoadOutdoor(*outdoorPath)
 		if err != nil {
@@ -2445,6 +2565,17 @@ func main() {
 					}
 					if playSession.Party[i].Quests == nil {
 						playSession.Party[i].Quests = c.Quests
+					}
+					// 帳面位階存檔帶了就以存檔為準：競技場打贏會加一（RE-108），
+					// 角色檔那一份是遊玩之前的值。
+					if loaded != nil && i < len(loaded.Party) &&
+						loaded.Party[i].Rank != nil &&
+						playSession.Party[i].Sheet != nil {
+						// 複製一份再改：資料頁那份是與名冊共用的指標，
+						// 直接改會連招募清單上的位階一起動到。
+						sheet := *playSession.Party[i].Sheet
+						sheet.Rank = *loaded.Party[i].Rank
+						playSession.Party[i].Sheet = &sheet
 					}
 					// 已回報的任務數同理：存檔帶了就用存檔的，
 					// 沒帶才照角色檔補（RE-107）。
@@ -2607,6 +2738,19 @@ func main() {
 				quest.lines = nonEmptyLines(bank.Lines(town.BankUI,
 					battle.QuestCreaturesRecord))
 			}
+			// 競技場（RE-108）：走到世界地圖 (55,13) 選 DOOR 就進去。
+			// 畫面借建築那一套，但沒有肖像——`sub_2B454` 畫的是什麼還沒解。
+			if atlas, err := loadBattlePNG(*battleTiles); err == nil {
+				arenaDep = &arenaDeps{monsters: monsters, spoils: spoilItems,
+					tiles: ui.NewBattleTiles(atlas), bank: bank, trans: trans,
+					rand:  &lcg{state: uint32(*seed)},
+					field: &lcg{state: uint32(*seed)},
+					english: *lang == "en"}
+			}
+			worldSessionState.OnEnterArena = func() {
+				in := &town.Inn{Party: playSession.Party}
+				playSession.EnterArena(in)
+			}
 			// 野外的隨機遭遇：時段一變就擲一次（SPEC-011）。走進某一格不會擲，
 			// 所以一天最多四次。
 			worldSessionState.OnTimePart = func() {
@@ -2754,6 +2898,9 @@ func main() {
 		worldParty:   worldPartyState,
 		quest:        quest,
 		tracePath:    *tracePath,
+		traceDetail:  *traceDetail,
+		arena:        arenaDep,
+		arenaFighter: -1,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)

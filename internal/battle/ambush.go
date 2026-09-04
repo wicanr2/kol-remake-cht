@@ -174,6 +174,10 @@ const AmbushGroups = 6
 // AmbushSlots 是一組站位放得下幾隻敵人。
 const AmbushSlots = 12
 
+// ArenaMonsterKinds 是競技場擲對手種類的骰面（`0x2B012` 的 `sub_1B5A8(0x10)`
+// 接 `add ax, 0FFFFh`，所以種類是 0…15，RE-108）。
+const ArenaMonsterKinds = 16
+
 // 隨機遭遇的站位（`sub_1E3A8:0x1E8C6`…`0x1EA08`）。任務地點是從 payload 複製 36
 // byte 到 `0x2E0C` 再讀（RE-090），隨機遭遇走的是另一條：隊員永遠站同六格，敵人
 // 依 `word_37CF6` 選一組。`word_34968` 是這兩條路的開關（`0x1E68C`）：任務地點設 1、

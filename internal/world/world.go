@@ -72,6 +72,9 @@ type Data struct {
 	Road    []int  `json:"road_by_tile"`
 	Blocked []int  `json:"blocked_tiles"`
 	Towns   []rawTown `json:"towns"`
+	// Arena 是競技場那一格（`sub_29004:0x29416` 比的 `payload3[0x320]`／`[0x321]`，
+	// RE-077／RE-108）。走到那裡跳出 DOOR／U-TURN，選 DOOR 就進場。
+	Arena struct{ X, Y int } `json:"arena"`
 
 	blocked [256]bool
 	towns   []Town
@@ -141,6 +144,9 @@ func (d *Data) OnRoad(tile int) bool {
 }
 
 // TownAt 回傳世界座標上的城鎮入口；沒有就回 nil。
+// ArenaAt 回報 (x, y) 是不是競技場那一格。
+func (d *Data) ArenaAt(x, y int) bool { return d.Arena.X == x && d.Arena.Y == y }
+
 func (d *Data) TownAt(x, y int) *Town {
 	for i := range d.towns {
 		if d.towns[i].X == x && d.towns[i].Y == y {

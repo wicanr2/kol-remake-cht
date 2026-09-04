@@ -12,6 +12,8 @@ const (
 	ModeMap Mode = iota
 	// ModeTown 是站在城鎮入口上：換成外觀圖，圖示列剩 DOOR 與 U-TURN。
 	ModeTown
+	// ModeArena 是站在競技場那一格上（RE-108）。圖示列與城鎮入口相同。
+	ModeArena
 )
 
 // 野外會用到的圖示編號（畫面上畫的是 KOLMPICS[編號 + 3]）。
@@ -34,6 +36,8 @@ type Session struct {
 	Screen *Screen
 	// OnEnterTown 在玩家於城鎮入口選 DOOR 時被呼叫，參數是那一筆記錄。
 	OnEnterTown func(*Town)
+	// OnEnterArena 在玩家於競技場那一格選 DOOR 時被呼叫（RE-108）。
+	OnEnterArena func()
 
 	Mode   Mode
 	Cursor int
@@ -93,6 +97,13 @@ func (s *Session) Sync() {
 	s.Town = s.Screen.Travel.TownHere()
 	if s.Town != nil {
 		s.Mode = ModeTown
+		s.setIcons([]int{IconDoor, IconUTurn})
+		return
+	}
+	// 競技場那一格與城鎮入口走同一個版面：DOOR 進場、U-TURN 留在野外
+	// （`sub_29004:0x29416`，RE-108）。
+	if t := s.Screen.Travel; t.Data.ArenaAt(t.X, t.Y) {
+		s.Mode = ModeArena
 		s.setIcons([]int{IconDoor, IconUTurn})
 		return
 	}
@@ -268,11 +279,17 @@ func (s *Session) Accept() {
 	}
 	switch id {
 	case IconDoor:
+		if s.Mode == ModeArena {
+			if s.OnEnterArena != nil {
+				s.OnEnterArena()
+			}
+			return
+		}
 		if s.OnEnterTown != nil && s.Town != nil {
 			s.OnEnterTown(s.Town)
 		}
 	case IconUTurn:
-		if s.Mode == ModeTown {
+		if s.Mode == ModeTown || s.Mode == ModeArena {
 			s.Mode = ModeMap
 			s.setIcons(s.mapIcons(true))
 		}

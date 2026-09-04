@@ -6,7 +6,7 @@
  "load": "workplace/saves/full-chain.json",
  "token_count": 119,
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
- "trace_sha256": "d378f26b95fbd0ecc86351118502daae13a3de7ad76bf6b1bdc1e9232db38dae",
+ "trace_sha256": "3bdaeceef6274356cb0de26faca2216801b4172c2b219f7a78022a1d66f19e73",
  "milestones": [
   {
    "step": 0,
@@ -241,18 +241,9 @@
     "y": 21
    },
    "battle": {
-    "actors": 18,
-    "bar": null,
-    "cursor": 0,
-    "cursor_cell": [
-     0,
-     0,
-     0,
-     0
-    ],
     "monster": "BINDERAK",
-    "order": 0,
     "prompt": 0,
+    "quest_done": 0,
     "roster": [
      "0 Poontang party 14,41 head=16 chest=16",
      "1 Moraine party 12,41 head=15 chest=15",
@@ -274,7 +265,6 @@
      "17 BINDERAK foe 36,33 head=15 chest=15"
     ],
     "round": 0,
-    "selected": 0,
     "site": 5,
     "stage": 1,
     "turn": 0,

@@ -131,6 +131,9 @@ type Member struct {
 	// 的物品記錄，這裡存 hex。交任務物品要逐 byte 比，所以存的是原始位元組而不是
 	// 名字；交出去那一格會被換掉，因此它也是會變的欄位。
 	Carried []string `json:"carried,omitempty"`
+	// Rank 是角色記錄 `+0x29` 的帳面位階（RE-074）。競技場打贏會加一（RE-108），
+	// 所以它也是會變的。用指標是因為 0 是合法值——沒帶這一欄才照角色檔補。
+	Rank *int `json:"rank,omitempty"`
 }
 
 // Save 是一份存檔。

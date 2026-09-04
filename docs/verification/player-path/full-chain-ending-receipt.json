@@ -6,7 +6,7 @@
  "load": "workplace/observe/final-battle.json",
  "token_count": 1012,
  "trace": "docs/verification/player-path/full-chain-ending/trace.json",
- "trace_sha256": "23170284b9870b4724bf4eb8b76593d157ab9eddd7de1f996b6e1a19389d5bd5",
+ "trace_sha256": "e3f1a043feabda389ea42c9b65fef5e6415783c60729f5df3f75d58712f9eb5e",
  "milestones": [
   {
    "step": 19,
@@ -83,17 +83,7 @@
     "y": 9
    },
    "battle": {
-    "actors": 18,
-    "bar": null,
-    "cursor": 0,
-    "cursor_cell": [
-     0,
-     0,
-     0,
-     0
-    ],
     "monster": "BINDERAK",
-    "order": 0,
     "prompt": 0,
     "quest_done": 0,
     "roster": [
@@ -108,7 +98,6 @@
      "8 BINDERAK foe 28,34 head=15 chest=15"
     ],
     "round": 0,
-    "selected": 0,
     "site": -1,
     "stage": 1,
     "turn": 0,
@@ -139,28 +128,25 @@
     "y": 9
    },
    "battle": {
-    "actors": 18,
-    "bar": [
-     7,
-     15
-    ],
-    "cursor": 0,
-    "cursor_cell": [
-     3,
-     4,
-     1,
-     0
-    ],
     "exec_text": [
      "You have defeated The",
      "BINDERAKS!"
     ],
     "monster": "BINDERAK",
-    "order": 9,
     "prompt": 10,
     "quest_done": 0,
+    "roster": [
+     "0 Poontang party 26,32 head=16 chest=16",
+     "1 Moraine party 30,31 head=15 chest=15",
+     "2 Fighting Bull party 30,32 head=14 chest=14",
+     "3 Kenneth party 27,33 head=17 chest=7",
+     "4 Sharakan party 27,31 head=17 chest=17",
+     "5 Olear party 29,33 head=4 chest=0 down",
+     "6 BINDERAK foe 28,33 head=15 chest=0 down",
+     "7 BINDERAK foe 28,30 head=15 chest=0 down",
+     "8 BINDERAK foe 28,34 head=15 chest=0 down"
+    ],
     "round": 7,
-    "selected": 0,
     "site": -1,
     "stage": 5,
     "turn": 9,
@@ -216,17 +202,7 @@
     "y": 9
    },
    "battle": {
-    "actors": 18,
-    "bar": null,
-    "cursor": 0,
-    "cursor_cell": [
-     0,
-     0,
-     0,
-     0
-    ],
     "monster": "CYCLOPS",
-    "order": 0,
     "prompt": 0,
     "quest_done": 0,
     "roster": [
@@ -239,7 +215,6 @@
      "6 CYCLOPS foe 8,14 head=25 chest=25"
     ],
     "round": 0,
-    "selected": 0,
     "site": 4,
     "stage": 1,
     "turn": 0,
@@ -278,27 +253,22 @@
     "y": 9
    },
    "battle": {
-    "actors": 18,
-    "bar": [
-     7,
-     15
-    ],
-    "cursor": 0,
-    "cursor_cell": [
-     4,
-     5,
-     1,
-     0
-    ],
     "exec_text": [
      "You have defeated The CYCLOPS!"
     ],
     "monster": "CYCLOPS",
-    "order": 7,
     "prompt": 10,
     "quest_done": 6,
+    "roster": [
+     "0 Poontang party 9,13 head=16 chest=16",
+     "1 Moraine party 8,13 head=15 chest=15",
+     "2 Fighting Bull party 7,13 head=14 chest=14",
+     "3 Kenneth party 8,12 head=17 chest=17",
+     "4 Sharakan party 6,13 head=17 chest=17",
+     "5 Olear party 7,12 head=15 chest=15",
+     "6 CYCLOPS foe 8,14 head=25 chest=0 down"
+    ],
     "round": 2,
-    "selected": 0,
     "site": 4,
     "stage": 5,
     "turn": 7,

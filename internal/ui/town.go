@@ -34,13 +34,16 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 			}
 		}
 	} else {
-		pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
-		if err != nil {
-			return err
+		// 競技場沒有肖像可畫（`sub_2B454` 畫的是什麼還沒解），Archive 空著就跳過。
+		if in.Portrait.Archive != "" {
+			pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
+			if err != nil {
+				return err
+			}
+			w, h := pic.Bounds().Dx(), pic.Bounds().Dy()
+			shadow(dst, town.Portrait.X, town.Portrait.Y, w, h)
+			draw(dst, pic, town.Portrait.X, town.Portrait.Y)
 		}
-		w, h := pic.Bounds().Dx(), pic.Bounds().Dy()
-		shadow(dst, town.Portrait.X, town.Portrait.Y, w, h)
-		draw(dst, pic, town.Portrait.X, town.Portrait.Y)
 
 		drawBox(dst, large, town.TitleBox, in.Title)
 		switch {

@@ -93,6 +93,10 @@ type Session struct {
 	mouth *mouthState
 	// questList 是任務一覽翻到第幾組；nil 代表沒開（RE-111）。
 	questList *questListState
+	// arena 是競技場的對話；nil 代表不在競技場（RE-108）。
+	arena *arenaState
+	// pendingFight 是談完之後等著上層開打的那一場。
+	pendingFight *ArenaFight
 	// quit 記下玩家在「你要離開嗎」那一問答了 YES。
 	quit bool
 
@@ -244,6 +248,21 @@ func (s *Session) acceptInside() {
 	}
 	id := s.Inside.Icons[s.Inside.Selected] - 3
 	switch {
+	case s.arena != nil:
+		switch id {
+		case IconYes:
+			if s.arena.stage == arenaChoosing {
+				s.ArenaChoose()
+				return
+			}
+			s.pendingFight = s.ArenaAnswer(true)
+		case IconNo:
+			s.pendingFight = s.ArenaAnswer(false)
+		case IconUTurn:
+			s.LeaveArena()
+		case IconSpacebar:
+			s.Continue()
+		}
 	case s.ShowingQuestList():
 		// 一組一頁，任何鍵翻下一組（原版是 `sub_144C3` 的 SPACEBAR）。
 		s.NextQuestPage()

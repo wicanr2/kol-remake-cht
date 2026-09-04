@@ -6,7 +6,7 @@
  "load": "workplace/saves/quest.json",
  "token_count": 109,
  "trace": "docs/verification/player-path/flow-quest/trace.json",
- "trace_sha256": "316e88138ced98a136f1fa7deb046883a86a13a214c490f5e6b81a64c5a4e27a",
+ "trace_sha256": "6edecc4d5e6c6546132ae3aebb39361a424bb8d7d425e12f00d128a508309670",
  "milestones": [
   {
    "step": 19,
@@ -94,18 +94,9 @@
     "y": 21
    },
    "battle": {
-    "actors": 18,
-    "bar": null,
-    "cursor": 0,
-    "cursor_cell": [
-     0,
-     0,
-     0,
-     0
-    ],
     "monster": "BINDERAK",
-    "order": 0,
     "prompt": 0,
+    "quest_done": 0,
     "roster": [
      "0 Poontang party 14,41 head=16 chest=16",
      "6 BINDERAK foe 25,41 head=15 chest=15",
@@ -122,7 +113,6 @@
      "17 BINDERAK foe 36,33 head=15 chest=15"
     ],
     "round": 0,
-    "selected": 0,
     "site": 5,
     "stage": 1,
     "turn": 0,

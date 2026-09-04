@@ -46,6 +46,15 @@ func (s *Session) Key(token string) bool {
 		}
 	}()
 	switch {
+	case s.InArena():
+		switch token {
+		case "U":
+			s.MoveArenaList(-1)
+			return true
+		case "D":
+			s.MoveArenaList(1)
+			return true
+		}
 	case s.Recruiting():
 		switch token {
 		case "U":

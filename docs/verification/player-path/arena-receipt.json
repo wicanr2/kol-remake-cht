@@ -1,0 +1,396 @@
+{
+ "schema": "kol-full-path-receipt-v1",
+ "name": "arena",
+ "description": "從標題按下去，出城走到世界地圖 (55,13) 的競技場，選誰上場、確定要打、打完升一階（RE-108）。那一格與城鎮入口走同一個版面：DOOR 進場、U-TURN 留在野外。進去先看誰夠格——帳面位階與實得位階不同、而且帳面還沒到 24 才算；隊伍多人就印「Which one wishs to fight?」讓玩家選，選好再問「Are you sure you wish to enter?」。對手一隻，等級是上場那一名的實得位階加一。打贏印「you have gained a level!」，帳面位階加一——**一次只加一級**，所以帳面追上實得要打好幾場。路上還打贏了兩場伏擊。**輸入被換過**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。",
+ "seed": 1,
+ "load": "workplace/observe/arena-ready.json",
+ "token_count": 2133,
+ "trace": "docs/verification/player-path/arena/trace.json",
+ "trace_sha256": "ce8e18078e4169c6f526be95f54a6082b95bce47a101b120d04a5243b298e040",
+ "milestones": [
+  {
+   "step": 64,
+   "token": "RET",
+   "note": "出城",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 3,
+    "ticks": 4200,
+    "time_index": 0,
+    "x": 42,
+    "y": 9
+   }
+  },
+  {
+   "step": 763,
+   "token": "SPACE",
+   "note": "路上打贏第一場伏擊",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 1,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 0,
+    "ticks": 3316,
+    "time_index": 1,
+    "x": 44,
+    "y": 11
+   },
+   "battle": {
+    "exec_text": [
+     "You have defeated The",
+     "BINDERAKS!"
+    ],
+    "monster": "BINDERAK",
+    "prompt": 10,
+    "quest_done": 0,
+    "roster": [
+     "0 Poontang party 26,32 head=16 chest=16",
+     "1 Moraine party 30,31 head=15 chest=15",
+     "2 Fighting Bull party 30,32 head=14 chest=14",
+     "3 Kenneth party 27,33 head=17 chest=7",
+     "4 Sharakan party 27,31 head=17 chest=17",
+     "5 Olear party 29,33 head=4 chest=0 down",
+     "6 BINDERAK foe 28,33 head=15 chest=0 down",
+     "7 BINDERAK foe 28,30 head=15 chest=0 down",
+     "8 BINDERAK foe 28,34 head=15 chest=0 down"
+    ],
+    "round": 7,
+    "site": -1,
+    "stage": 5,
+    "turn": 9,
+    "verdict": 2
+   }
+  },
+  {
+   "step": 1736,
+   "token": "SPACE",
+   "note": "打贏第二場",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 2,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 1,
+    "sub_y": 0,
+    "ticks": 3316,
+    "time_index": 1,
+    "x": 52,
+    "y": 13
+   },
+   "battle": {
+    "exec_text": [
+     "You have defeated The",
+     "GREMLINS!"
+    ],
+    "monster": "GREMLIN",
+    "prompt": 10,
+    "quest_done": 0,
+    "roster": [
+     "0 Poontang party 33,26 head=16 chest=13",
+     "1 Moraine party 32,25 head=15 chest=15",
+     "2 Fighting Bull party 31,25 head=14 chest=8",
+     "3 Kenneth party 34,27 head=17 chest=17",
+     "4 Sharakan party 30,28 head=12 chest=17",
+     "5 Olear party 34,28 head=15 chest=15",
+     "6 GREMLIN foe 30,27 head=10 chest=0 down",
+     "7 GREMLIN foe 34,26 head=0 chest=10 down",
+     "8 GREMLIN foe 29,27 head=10 chest=0 down",
+     "9 GREMLIN foe 36,28 head=10 chest=0 down"
+    ],
+    "round": 9,
+    "site": -1,
+    "stage": 5,
+    "turn": 10,
+    "verdict": 2
+   }
+  },
+  {
+   "step": 1761,
+   "token": "R",
+   "note": "走到競技場那一格：圖示列剩 DOOR／U-TURN",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 2,
+    "mode": 2,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 0,
+    "ticks": 1860,
+    "time_index": 2,
+    "x": 55,
+    "y": 13
+   }
+  },
+  {
+   "step": 1762,
+   "token": "RET",
+   "note": "DOOR：「Which one wishs to fight?」",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 2,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 2,
+    "mode": 2,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 0,
+    "ticks": 1860,
+    "time_index": 2,
+    "x": 55,
+    "y": 13
+   }
+  },
+  {
+   "step": 1763,
+   "token": "RET",
+   "note": "選好：「Are you sure you wish to enter?」",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 2,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 2,
+    "mode": 2,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 0,
+    "ticks": 1860,
+    "time_index": 2,
+    "x": 55,
+    "y": 13
+   }
+  },
+  {
+   "step": 1764,
+   "token": "RET",
+   "note": "開打：一隻，等級是實得位階加一",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 2,
+    "mode": 2,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 0,
+    "ticks": 1860,
+    "time_index": 2,
+    "x": 55,
+    "y": 13
+   },
+   "battle": {
+    "monster": "HILL GIANT",
+    "prompt": 0,
+    "quest_done": 0,
+    "roster": [
+     "0 Poontang party 33,30 head=16 chest=16",
+     "1 Moraine party 31,30 head=15 chest=15",
+     "2 Fighting Bull party 33,32 head=14 chest=14",
+     "3 Kenneth party 31,32 head=17 chest=17",
+     "4 Sharakan party 33,34 head=17 chest=17",
+     "5 Olear party 31,34 head=15 chest=15",
+     "6 HILL GIANT foe 36,32 head=33 chest=33"
+    ],
+    "round": 0,
+    "site": -1,
+    "stage": 1,
+    "turn": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 2130,
+   "token": "SPACE",
+   "note": "打贏",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 2,
+    "mode": 2,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 0,
+    "ticks": 1860,
+    "time_index": 2,
+    "x": 55,
+    "y": 13
+   },
+   "battle": {
+    "exec_text": [
+     "You have defeated The HILL",
+     "GIANT!"
+    ],
+    "monster": "HILL GIANT",
+    "prompt": 10,
+    "quest_done": 0,
+    "roster": [
+     "0 Poontang party 35,31 head=16 chest=16",
+     "1 Moraine party 35,30 head=15 chest=15",
+     "2 Fighting Bull party 34,31 head=14 chest=0 down",
+     "3 Kenneth party 33,29 head=17 chest=17",
+     "4 Sharakan party 35,32 head=17 chest=17",
+     "5 Olear party 35,33 head=15 chest=15",
+     "6 HILL GIANT foe 36,32 head=33 chest=0 down"
+    ],
+    "round": 4,
+    "site": -1,
+    "stage": 5,
+    "turn": 7,
+    "verdict": 2
+   }
+  },
+  {
+   "step": 2132,
+   "token": "SPACE",
+   "note": "you have gained a level!",
+   "scene": "flow:town",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 56,
+    "y": 16
+   },
+   "world": {
+    "day": 2,
+    "mode": 2,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 0,
+    "ticks": 1860,
+    "time_index": 2,
+    "x": 55,
+    "y": 13
+   },
+   "battle": {
+    "exec_text": [
+     "you have gained a level!"
+    ],
+    "monster": "HILL GIANT",
+    "prompt": 10,
+    "quest_done": 0,
+    "round": 4,
+    "site": -1,
+    "stage": 5,
+    "turn": 7,
+    "verdict": 2
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 1761,
+   "file": "step-1761.png",
+   "sha256": "1440f6a775c604e1f3b86cb5068ad812c314074bb5382cfc21710421ada10a37",
+   "shows": "競技場那一格的圖示列"
+  },
+  {
+   "step": 1762,
+   "file": "step-1762.png",
+   "sha256": "15b34091774b6f7057fa9f9c42b5fd6cb353ebec6839b195fde913762145b8f8",
+   "shows": "The Arena／The Tester 與「誰要上場」的清單"
+  },
+  {
+   "step": 1763,
+   "file": "step-1763.png",
+   "sha256": "57be93e98ca817e44d343c3184c0e4639edf73674f546be0f4fc95de9cca3cdd",
+   "shows": "\"Are you sure you wish to enter?\""
+  },
+  {
+   "step": 1764,
+   "file": "step-1764.png",
+   "sha256": "b3918a5b3818a3d9c9f3deca880a8f42c5a45299021a23fb3f8444a75134b491",
+   "shows": "開打：滿版的對手圖"
+  },
+  {
+   "step": 2132,
+   "file": "step-2132.png",
+   "sha256": "58814afac8e4e77e6f3bc51b56d362d3f2b4d566597aa80540962edffb381f63",
+   "shows": "\"YOU HAVE GAINED A LEVEL!\""
+  }
+ ],
+ "save": null,
+ "failures": [],
+ "substituted_inputs": [
+  {
+   "flag": "-load",
+   "path": "workplace/observe/arena-ready.json",
+   "change": "Poontang 與 Moraine 的帳面位階降到 0（實得是 3 與 4），其餘欄位、其他隊員都不動。",
+   "generated_by": "tools/make_arena_save.py --members 0 1 --rank 0",
+   "base": "tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,7,56,24"
+  }
+ ],
+ "not_claimed": [
+  {
+   "name": "競技場那一場的遭遇訊息與原版一致",
+   "reason": "原版在開打前把 `word_34968` 設成 1（走任務地點那一條），所以這一版用同一句（記錄 0xE9）；**那一句本身沒有從程式碼讀出來**。"
+  },
+  {
+   "name": "戰場的地形與原版一致",
+   "reason": "`word_34968 = 1` 表示地形是載入的而不是逐格擲的，但載的是哪一份沒讀出來（RE-108 的「還沒解的」），這一版沿用隨機遭遇的逐格擲。"
+  },
+  {
+   "name": "下注",
+   "reason": "RE-108 讀完了規則（記錄 0xEC…0xF8、兩位數金額、負值＝賭他會輸），還沒實作。"
+  },
+  {
+   "name": "畫面與原版一致",
+   "reason": "原版沒有取到競技場的畫格。標題與那幾句都是 KOLDATA 的記錄，肖像那一格空著——`sub_2B454` 畫的是什麼還沒解。"
+  }
+ ],
+ "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
+}

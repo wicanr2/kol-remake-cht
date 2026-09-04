@@ -6,6 +6,7 @@
   0x100 + 磚塊編號   地形位元；最低的那個 1 的位序就是地形碼，全為 0 時是 7
   0x200 + 磚塊編號   道路旗標（`word_2FA2A`；非零時圖示列多出 ROAD／SIGNPOST）
   0x300 + 磚塊/8     不可通行位元圖（查法與城鎮相同，只是基底不同）
+  0x320／0x321       競技場那一格的 X／Y（`sub_29004:0x29416` 比的就是這兩個）
   0x323 + i          24 個特殊地點的 X（0x33B + i 是 Y）
   0x393 + 16i        22 筆城鎮記錄（見 RE-066 的欄位表）
 
@@ -34,6 +35,8 @@ ALLOWED_OUTPUT_PARENT = pathlib.PurePosixPath("assets/original-derived-data")
 MAP_PAYLOAD, TABLE_PAYLOAD = 0, 3
 TERRAIN_TABLE, ROAD_TABLE, BLOCK_BITMAP = 0x100, 0x200, 0x300
 SPECIAL_X, SPECIAL_Y, SPECIAL_COUNT = 0x323, 0x33B, 24
+# 競技場（RE-077／RE-108）：走到這一格就進 `sub_2AAA8`。
+ARENA_X, ARENA_Y = 0x320, 0x321
 TOWN_RECORDS, TOWN_RECORD_BYTES, TOWN_RECORD_COUNT = 0x393, 16, 22
 TILE_COUNT, GRID_SIDE = 256, 64
 NO_ONE = 0xFF
@@ -98,6 +101,7 @@ def main() -> int:
             "entry_point": 0 if i < 6 else i - 6,
         })
 
+    arena = {"x": table[ARENA_X], "y": table[ARENA_Y]}
     special = [{"index": i, "x": table[SPECIAL_X + i], "y": table[SPECIAL_Y + i]}
                for i in range(SPECIAL_COUNT)]
 
@@ -119,6 +123,7 @@ def main() -> int:
             "road": f"payload{TABLE_PAYLOAD}[0x{ROAD_TABLE:X} + 磚塊編號]：道路旗標",
             "blocked": f"payload{TABLE_PAYLOAD}[0x{BLOCK_BITMAP:X}…]：不可通行位元圖",
             "towns": f"payload{TABLE_PAYLOAD}[0x{TOWN_RECORDS:X} + 16i]：城鎮記錄",
+            "arena": f"payload{TABLE_PAYLOAD}[0x{ARENA_X:X}／0x{ARENA_Y:X}]",
             "special": f"payload{TABLE_PAYLOAD}[0x{SPECIAL_X:X}／0x{SPECIAL_Y:X} + i]",
         },
         "names": {
@@ -135,6 +140,7 @@ def main() -> int:
         "terrain_by_tile": terrain,
         "road_by_tile": road,
         "towns": towns,
+        "arena": arena,
         "special_locations": special,
     }
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,145 @@
+{
+ "name": "arena",
+ "kind": "observation",
+ "description": "從標題按下去，出城走到世界地圖 (55,13) 的競技場，選誰上場、確定要打、打完升一階（RE-108）。那一格與城鎮入口走同一個版面：DOOR 進場、U-TURN 留在野外。進去先看誰夠格——帳面位階與實得位階不同、而且帳面還沒到 24 才算；隊伍多人就印「Which one wishs to fight?」讓玩家選，選好再問「Are you sure you wish to enter?」。對手一隻，等級是上場那一名的實得位階加一。打贏印「you have gained a level!」，帳面位階加一——**一次只加一級**，所以帳面追上實得要打好幾場。路上還打贏了兩場伏擊。**輸入被換過**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。",
+ "seed": 1,
+ "load": "workplace/observe/arena-ready.json",
+ "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET X X X X X X X X X X X X X SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > RET U U L L R R RET > > RET > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > RET U U L L R R RET > > RET > > > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE X X X X X X X X X X X X X X X X R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R L R R R R R R R R R R R R R SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L RET > RET > RET U U L L D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L D D RET > RET > RET U U L L D D RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D RET > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L D D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L D R R RET > RET > RET U U L L D D R RET > > RET > > RET U U L L D D RET > > RET > > > RET > > > > > RET U U L L D D R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE R R R R R R R R R R R R R R R R R R R R R R R RET RET RET SPACE > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D R R RET > RET > > > > > RET U U L L D D RET > RET > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET > > > > > RET U U L L D D R R RET > RET > > > > RET U U L L D D R RET > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L D D R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L D D R RET > RET > RET U U L L D D R RET > > RET > > > > RET U U L L D D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE",
+ "shot_dir": "docs/verification/player-path/arena",
+ "trace": "docs/verification/player-path/arena/trace.json",
+ "size": [
+  320,
+  200
+ ],
+ "receipt": "docs/verification/player-path/arena-receipt.json",
+ "substituted_inputs": [
+  {
+   "flag": "-load",
+   "path": "workplace/observe/arena-ready.json",
+   "change": "Poontang 與 Moraine 的帳面位階降到 0（實得是 3 與 4），其餘欄位、其他隊員都不動。",
+   "generated_by": "tools/make_arena_save.py --members 0 1 --rank 0",
+   "base": "tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,7,56,24"
+  }
+ ],
+ "not_claimed": [
+  {
+   "name": "競技場那一場的遭遇訊息與原版一致",
+   "reason": "原版在開打前把 `word_34968` 設成 1（走任務地點那一條），所以這一版用同一句（記錄 0xE9）；**那一句本身沒有從程式碼讀出來**。"
+  },
+  {
+   "name": "戰場的地形與原版一致",
+   "reason": "`word_34968 = 1` 表示地形是載入的而不是逐格擲的，但載的是哪一份沒讀出來（RE-108 的「還沒解的」），這一版沿用隨機遭遇的逐格擲。"
+  },
+  {
+   "name": "下注",
+   "reason": "RE-108 讀完了規則（記錄 0xEC…0xF8、兩位數金額、負值＝賭他會輸），還沒實作。"
+  },
+  {
+   "name": "畫面與原版一致",
+   "reason": "原版沒有取到競技場的畫格。標題與那幾句都是 KOLDATA 的記錄，肖像那一格空著——`sub_2B454` 畫的是什麼還沒解。"
+  }
+ ],
+ "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+ "milestones": [
+  {
+   "step": 64,
+   "town": {
+    "left_town": true
+   },
+   "world": {
+    "x": 42,
+    "y": 9
+   },
+   "note": "出城"
+  },
+  {
+   "step": 763,
+   "battle": {
+    "stage": 5,
+    "verdict": 2
+   },
+   "note": "路上打贏第一場伏擊"
+  },
+  {
+   "step": 1736,
+   "battle": {
+    "stage": 5,
+    "verdict": 2
+   },
+   "note": "打贏第二場"
+  },
+  {
+   "step": 1761,
+   "world": {
+    "x": 55,
+    "y": 13,
+    "mode": 2
+   },
+   "note": "走到競技場那一格：圖示列剩 DOOR／U-TURN"
+  },
+  {
+   "step": 1762,
+   "town": {
+    "mode": 2
+   },
+   "note": "DOOR：「Which one wishs to fight?」"
+  },
+  {
+   "step": 1763,
+   "town": {
+    "mode": 2
+   },
+   "note": "選好：「Are you sure you wish to enter?」"
+  },
+  {
+   "step": 1764,
+   "battle": {
+    "stage": 1,
+    "site": -1
+   },
+   "note": "開打：一隻，等級是實得位階加一"
+  },
+  {
+   "step": 2130,
+   "battle": {
+    "stage": 5,
+    "verdict": 2
+   },
+   "note": "打贏"
+  },
+  {
+   "step": 2132,
+   "battle": {
+    "stage": 5
+   },
+   "note": "you have gained a level!"
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 1761,
+   "file": "step-1761.png",
+   "shows": "競技場那一格的圖示列"
+  },
+  {
+   "step": 1762,
+   "file": "step-1762.png",
+   "shows": "The Arena／The Tester 與「誰要上場」的清單"
+  },
+  {
+   "step": 1763,
+   "file": "step-1763.png",
+   "shows": "\"Are you sure you wish to enter?\""
+  },
+  {
+   "step": 1764,
+   "file": "step-1764.png",
+   "shows": "開打：滿版的對手圖"
+  },
+  {
+   "step": 2132,
+   "file": "step-2132.png",
+   "shows": "\"YOU HAVE GAINED A LEVEL!\""
+  }
+ ]
+}
