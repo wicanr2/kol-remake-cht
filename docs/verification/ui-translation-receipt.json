@@ -1,0 +1,12 @@
+{
+ "tool": "tools/verify_ui_translation.py",
+ "table": "docs/i18n/ui-zh-Hant.json",
+ "source_banks": {
+  "KOLDATA": "1562c381a0ebd8fe982fd2923c33ec300448fb4fc0468cb5d953cd91e9d8a5c2",
+  "BOOKDATA": "0378dedd8b41e7dc07a4e154fe38a662ae53bb30e02c924fce3745a4f1d36b41",
+  "ENDTXT": "c31f188e20420c1b7ee8c48f95b5fba4c65852e063ddd5f7eec29bf8c2fa4fc8"
+ },
+ "checked": 486,
+ "intentionally_empty": 2,
+ "failures": []
+}

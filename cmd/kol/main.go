@@ -347,6 +347,21 @@ var battleSteps = map[string][2]int{
 // 規劃段停在哪一層決定方向鍵是移游標還是沒有作用，`<`／`>` 移圖示列的白框，
 // Return 是確定（SPEC-010）。整輪決定完停在「Begin next round?」，那一層沿用
 // 既有的是／否——執行段還沒實作，所以答應之後只是再排一輪規劃。
+// loadTranslations 一次載入城鎮譯文與 UI 文字庫譯文。兩份分開存檔——城鎮譯文以
+// 「城／門／欄位」索引，UI 譯文以文字庫的記錄號索引，混在一起會讓兩邊都難查。
+func loadTranslations(townPath, uiPath string) (*town.Translations, error) {
+	trans, err := town.LoadTranslations(townPath)
+	if err != nil {
+		return nil, err
+	}
+	ui, err := town.LoadUITranslations(uiPath)
+	if err != nil {
+		return nil, err
+	}
+	trans.UI = ui
+	return trans, nil
+}
+
 func applyBattleToken(s *battle.State, token string, step func(*battle.State)) error {
 	if s.Stage == battle.StageEncounter {
 		s.Continue(s.Rand)
@@ -1263,6 +1278,8 @@ func main() {
 	outdoorCamera := flag.String("outdoor-camera", "", "覆寫戶外鏡頭座標，格式 X,Y")
 	outdoorFrame := flag.Int("outdoor-frame", -1, "覆寫隊伍標記的動畫畫格（-1 為沿用樣本）")
 	outdoorMarker := flag.String("outdoor-marker", "", "覆寫隊伍標記在視窗內的偏移，格式 列,欄")
+	uiI18nPath := flag.String("ui-i18n", "docs/i18n/ui-zh-Hant.json",
+		"UI 文字庫（KOLDATA／BOOKDATA／ENDTXT）的繁體中文譯文")
 	townI18nPath := flag.String("town-i18n", "docs/i18n/town-zh-Hant.json",
 		"城鎮建築的譯文表")
 	townTextPath := flag.String("town-text",
@@ -1648,7 +1665,7 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		trans, err := town.LoadTranslations(*townI18nPath)
+		trans, err := loadTranslations(*townI18nPath, *uiI18nPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -1700,7 +1717,7 @@ func main() {
 		innState = town.EnterBuilding(fmt.Sprintf("TWN%dPICS", *buildingTown), door,
 			texts.Building(*buildingTown, *buildingDoor), sample.Party)
 		if *lang != "en" {
-			tr, err := town.LoadTranslations(*townI18nPath)
+			tr, err := loadTranslations(*townI18nPath, *uiI18nPath)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
@@ -1761,7 +1778,7 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		trans, err := town.LoadTranslations(*townI18nPath)
+		trans, err := loadTranslations(*townI18nPath, *uiI18nPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)

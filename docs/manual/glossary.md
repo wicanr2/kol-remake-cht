@@ -100,7 +100,7 @@
 | Hvrad Myth | Hvrad Myth | 待查 | 布雷特爾武器大師；正式音譯待角色資料 consumer |
 | Astimiah Eckhart | Astimiah Eckhart | 待查 | 布雷特爾法師；正式音譯待角色資料 consumer |
 | Lonely Page Pub | 孤頁酒館 | 暫譯 | 布雷特爾酒館；譯名已隨城鎮文字上線 |
-| Orc | Orc | 待查 | 怪物專名；正式譯名待怪物資料 consumer |
+| Orc | 獸人 | 暫譯 | 怪物；`Orcbane` 因此譯成「獸人剋星」 |
 | Health | 健康 | 核准 | 主要屬性；亦指可由修道院恢復的健康狀態 |
 | Strength | 力量 | 核准 | 主要屬性 |
 | Quickness | 敏捷 | 核准 | 主要屬性；影響行動先後 |
@@ -132,27 +132,37 @@
 | Shellernoon | 謝勒農 | 暫譯 | 設防城市；代碼 `SHL`，對應 `TOWN5`。原版資料一律拼作 Shellernoon，說明書的 Shellemoon 為異拼 |
 | Drezin Wood / Drezin Ranger | Drezin Wood／Drezin Ranger | 待查 | 西部大森林及其遊俠；正式音譯待世界資料 consumer |
 | Sledge | Sledge | 待查 | 以樹木為食的巨人；正式譯名待怪物資料 consumer |
-| Duke's Highwaymen | Duke's Highwaymen | 待查 | 公爵麾下築路工班；正式譯名待世界資料 consumer |
+| Duke's Highwaymen | 築路工 | 暫譯 | 人類職業（KOLDATA 記錄 15）；依手冊「公爵麾下築路工班」意譯，不是攔路強盜 |
 | Hobe / Hobean Squire | 霍布／霍布侍從 | 暫譯 | 岩鑿城堡及其侍從；對應 `TOWN7`，世界地圖上是十個代碼 `MIN` 的入口 |
 | Htron Pirate | 赫特隆海盜 | 暫譯 | 赫特隆的海盜文化 |
 | Krag Barbarian | Krag Barbarian | 待查 | 北方岩地的野蠻戰士；正式音譯待世界資料 consumer |
-| Krell Warrion | Krell Warrion | 待查 | 北方沼澤傳聞及疑似借其名行動的人群；正式譯名待世界資料 consumer |
+| Krell Warrion | 戰士 | 暫譯 | 人類職業（KOLDATA 記錄 8，原版拼作 `Warrion`）；遊戲 UI 用意譯，專名一致性待審 |
 | Lintle Plainsmen | Lintle Plainsmen | 待查 | 東南平原游牧民族；正式譯名待世界資料 consumer |
 | Olanthan Hunter / Huntress | 奧蘭斯獵人／奧蘭斯女獵人 | 暫譯 | 中立村落奧蘭斯的獵人 |
 | Poitle Rogue | 波伊特盜賊 | 暫譯 | 波伊特水閘的盜賊文化 |
 | Shellernoon Watchmen | 謝勒農守望者 | 暫譯 | 看守 Eyren 湖黑塔的守衛 |
 | Great Oath | Great Oath | 待查 | Shellernoon Watchmen 入隊誓言；內容未知 |
-| Ghor Tigress | Ghor Tigress | 待查 | Ghor 女戰士；正式譯名待世界資料 consumer |
-| Lintle Plainswoman | Lintle Plainswoman | 待查 | Lintle 平原女性弓手；正式譯名待世界資料 consumer |
-| Tegal Amazon | Tegal Amazon | 待查 | Tegal 森林女性部族；正式譯名待世界資料 consumer |
-| Ghor Digger / Mytrone Tunneler | Ghor Digger／Mytrone Tunneler | 待查 | 矮人採礦職業；正式譯名待職業資料 consumer |
-| Ghor Spiderguard / Mytrone Ratguard | Ghor Spiderguard／Mytrone Ratguard | 待查 | 矮人地下守衛職業；正式譯名待職業資料 consumer |
-| Ghor Trollbane / Mytrone Orcbane | Ghor Trollbane／Mytrone Orcbane | 待查 | 矮人地表冒險職業；正式譯名待職業資料 consumer |
-| Ghor Militia / Mytrone Levie | Ghor Militia／Mytrone Levie | 待查 | 矮人世襲戰士階級；原文作 `Levie`，正式譯名待職業資料 consumer |
-| Cliff Guard / Rock Ranger / Far Seeker | Cliff Guard／Rock Ranger／Far Seeker | 待查 | 凱爾登三個已知階級；正式譯名待職業資料 consumer |
+| Ghor Tigress | 虎女 | 暫譯 | Ghor 女戰士（KOLDATA 記錄 18） |
+| Lintle Plainswoman | 平原女 | 暫譯 | Lintle 平原女性弓手（KOLDATA 記錄 21） |
+| Tegal Amazon | 亞馬遜 | 暫譯 | Tegal 森林女性部族（KOLDATA 記錄 19） |
+| Ghor Digger / Mytrone Tunneler | 挖掘者／掘道者 | 暫譯 | 矮人採礦職業（KOLDATA 記錄 32／28） |
+| Ghor Spiderguard / Mytrone Ratguard | 蛛衛／鼠衛 | 暫譯 | 矮人地下守衛職業（KOLDATA 記錄 33／29） |
+| Ghor Trollbane / Mytrone Orcbane | 巨魔剋星／獸人剋星 | 暫譯 | 矮人地表冒險職業（KOLDATA 記錄 30／34） |
+| Ghor Militia / Mytrone Levie | 民兵／徵召兵 | 暫譯 | 矮人世襲戰士階級（KOLDATA 記錄 31／35，原版拼作 `Levy`） |
+| Cliff Guard / Rock Ranger / Far Seeker | 崖衛／岩地遊俠／遠望者 | 暫譯 | 凱爾登三個階級（KOLDATA 記錄 36…38） |
 | Klakar / Kelkret | Klakar／Kelkret | 待查 | 凱爾登交配季／儀式；正式譯名待世界資料 consumer |
 | Allaranethel | Allaranethel（美麗土地） | 待查 | 精靈對 Lintle 平原的稱呼 |
-| Brek / Klvar / Melod | Brek／Klvar／Melod | 待查 | 精靈部族；正式譯名待種族資料 consumer |
-| Pyar / Thism / Usip | Pyar／Thism／Usip | 待查 | 精靈部族；正式譯名待種族資料 consumer |
+| Brek / Klvar / Melod | 布雷克蘭／克爾瓦／梅洛德 | 暫譯 | 精靈部族（KOLDATA 記錄 22…24，原版第一個拼作 `Brekland`） |
+| Pyar / Thism / Usip | 皮亞爾／席斯姆／烏西普 | 暫譯 | 精靈部族（KOLDATA 記錄 25…27） |
 | Anfël / Kafarifël / ëavorfël | Anfël／Kafarifël／ëavorfël | 核准 | 一般精靈語／領主祕語／魔法語；保留手冊附加符號 |
 | ëna / Tree | ëna／樹 | 核准 | 精靈語十五個根詞的原書術語 |
+| Harbor Master | 港務長 | 暫譯 | 主選單項目；只安裝一個 region 時是一張三行訊息頁（RE-052） |
+| Dundle | 丹德爾 | 暫譯 | 交付石門鑰匙的人；結局敘事 ENDTXT 記錄 1、14 |
+| Pildar | 皮爾達 | 暫譯 | 發動黑暗戰爭者；結局敘事 ENDTXT 記錄 6、10、11、14 |
+| Seggallion | 塞加利昂 | 暫譯 | 被囚於地底的騎士，結局的關鍵人物；ENDTXT 記錄 7…15 |
+| Duke Fuquan | 富匡公爵 | 暫譯 | 結局要通報的對象；ENDTXT 記錄 10 |
+| Peasant / Serf / Laborer / Freedman / Tradesman | 農民／農奴／工人／自由民／商人 | 暫譯 | 社會階級第 1…5 級（KOLDATA 記錄 116…120） |
+| Common / Appretince / Journeyman / Master / Courtier | 平民／學徒／工匠／師傅／廷臣 | 暫譯 | 社會階級第 6…10 級（KOLDATA 記錄 121…125，原版第二個拼作 `APPRETINCE`） |
+| Gentle / Wanderer / Adventurer / Hero / Armiger | 仕紳／流浪者／冒險者／英雄／扈從 | 暫譯 | 社會階級第 11…15 級（KOLDATA 記錄 126…130） |
+| Squire / Novice / Initiate / Adept / Candidate | 侍從／新手／入門者／熟練者／候選人 | 暫譯 | 社會階級第 16…20 級（KOLDATA 記錄 131…135） |
+| Knight / Errant / Commander / Marshall / Baronet | 騎士／遊俠騎士／指揮官／元帥／男爵 | 暫譯 | 社會階級第 21…25 級（KOLDATA 記錄 136…140） |

@@ -268,11 +268,11 @@ func TestAbbeyHealNotEnoughGold(t *testing.T) {
 // 中文模式的價錢句併成一行：中文的框放得下，拆開反而讀不順。
 func TestPriceLineJoinsInChinese(t *testing.T) {
 	s := innSession(t, 56, Member{Name: "Theodoric", Gold: 1009, Speaker: true})
-	s.Trans = &Translations{UI: map[string]string{
+	s.Trans = &Translations{UI: NewUITranslations(map[string]string{
 		"55": "「你要住下的話，",
 		"83": "要付",
 		"84": "枚金幣，願意嗎？」",
-	}}
+	})}
 	s.StartRest()
 	want := []string{"「你要住下的話，", "要付 56 枚金幣，願意嗎？」"}
 	if len(s.Inside.Dialog) != len(want) {

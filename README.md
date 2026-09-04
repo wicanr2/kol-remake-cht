@@ -74,7 +74,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG，音樂與音效使
 - 中文說明書：[docs/manual/README.md](docs/manual/README.md)
 - 目前畫面：[docs/screenshots/README.md](docs/screenshots/README.md)
 
-截至 2026-09-04，**自評 52 / 100**（算法與逐系統的完成度依據見
+截至 2026-09-04，**自評 54 / 100**（算法與逐系統的完成度依據見
 [WORKLIST 的自評分數](WORKLIST.md#自評分數)；分數不是進度百分比，剩下的 48 分裡
 有 18 分連一條 RE 都還沒有）：
 
@@ -87,7 +87,10 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG，音樂與音效使
   滑鼠游標與已查證成因的殘影。收據見 [remake 對拍](docs/verification/remake-parity/README.md)。
 - 繁體中文介面採雙模式：英文模式維持原版解析度供嚴格對拍，中文模式放大兩倍以容納
   16×18 中文字模格。書本五個畫面、旅店、戶外與野外地圖已中文化，
-  七座城 101 棟建築的 1,938 則對話全部翻完，文字安全矩形檢查 6,725 項全過。
+  七座城 101 棟建築的 1,938 則對話全部翻完；KOLDATA／BOOKDATA／ENDTXT 三個 UI
+  文字庫的 486 筆記錄也全部翻完（戰鬥訊息、書本 UI 與結局敘事），字模表 2,434 字、
+  缺字 0，文字安全矩形檢查 6,685 項全過。BOOKDATA 與 ENDTXT 的譯文已備妥但還沒
+  接上畫面。
 - 六個 executable 的音訊 I/O 母體已普查；只有 TITLE 使用 PC Speaker，正常流程 WAV
   oracle 已取得。SPEC-004 仍為 DRAFT，OGG 的人耳驗收尚未完成，因此還沒接上音訊路徑。
 - 城鎮可實際遊玩：走動、門口、進建築、招呼語與 LISTEN／MOUTH 對話、招募同伴、

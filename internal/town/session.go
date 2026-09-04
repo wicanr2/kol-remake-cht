@@ -477,10 +477,14 @@ func nonEmpty(lines []string) []string {
 	return out
 }
 
-// uiLines 取 UI 文字庫的一筆記錄並拆成幾行；中文模式優先用譯文（譯文自己帶斷行）。
+// uiLines 取 UI 文字庫的一筆記錄並拆成幾行；中文模式優先用譯文。
+//
+// 譯文與原文用**同一套語法**（`@` 換行、`~Vxx`／`~Hxx` 定位），所以走同一套處理。
+// 中文比英文短，譯文常把原版的兩行併成一行，`@` 因此可以比原文少（
+// `tools/verify_ui_translation.py` 的判準）。
 func (s *Session) uiLines(index int) []string {
 	if zh := s.Trans.UIRecord(index); zh != "" {
-		return strings.Split(zh, "\n")
+		return splitUILines(zh)
 	}
 	if s.UIText == nil {
 		return nil
@@ -488,10 +492,10 @@ func (s *Session) uiLines(index int) []string {
 	return s.UIText.Lines(BankUI, index)
 }
 
-// uiRecord 取 UI 文字庫的一筆記錄，中文模式優先用譯文。
+// uiRecord 取 UI 文字庫的一筆記錄，中文模式優先用譯文。版面標記照樣剝掉。
 func (s *Session) uiRecord(index int) string {
 	if zh := s.Trans.UIRecord(index); zh != "" {
-		return zh
+		return strip(zh)
 	}
 	if s.UIText == nil {
 		return ""
@@ -503,7 +507,7 @@ func (s *Session) uiRecord(index int) string {
 // 例如訓練問句裡的 `" Skill"`（記錄 0x40）。
 func (s *Session) uiRaw(index int) string {
 	if zh := s.Trans.UIRecord(index); zh != "" {
-		return zh
+		return stripKeepSpaces(zh)
 	}
 	if s.UIText == nil {
 		return ""

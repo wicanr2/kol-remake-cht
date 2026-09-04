@@ -139,10 +139,8 @@ func stripKeepSpaces(text string) string {
 	return b.String()
 }
 
-// Lines 取一筆記錄並依 `@` 拆成幾行；每一行的版面標記照樣剝掉。
-// 原版的 `@` 是換行，後面常接一個 `~Hxx` 把游標移回框的左緣。
-func (t *UIText) Lines(bank string, index int) []string {
-	raw := t.raw(bank, index)
+// splitUILines 把一筆記錄依 `@` 拆成幾行並剝掉版面標記。原文與譯文共用。
+func splitUILines(raw string) []string {
 	if raw == "" {
 		return nil
 	}
@@ -151,6 +149,12 @@ func (t *UIText) Lines(bank string, index int) []string {
 		out = append(out, strip(part))
 	}
 	return out
+}
+
+// Lines 取一筆記錄並依 `@` 拆成幾行；每一行的版面標記照樣剝掉。
+// 原版的 `@` 是換行，後面常接一個 `~Hxx` 把游標移回框的左緣。
+func (t *UIText) Lines(bank string, index int) []string {
+	return splitUILines(t.raw(bank, index))
 }
 
 // Segment 是一段帶座標的文字：Col 是字格欄（× 8 就是 x），Row 是像素列。

@@ -30,8 +30,60 @@ type Translations struct {
 	Schema string                     `json:"schema"`
 	Status string                     `json:"status"`
 	Towns  map[string]townTranslation `json:"towns"`
-	// UI 是 KOLDATA 文字庫的譯文，以記錄號為鍵。
-	UI map[string]string `json:"ui"`
+	// UI 是三個 UI 文字庫的譯文，由 LoadUITranslations 另外載入
+	// （`docs/i18n/ui-zh-Hant.json`），不放在城鎮譯文檔裡。
+	UI *UITranslations
+}
+
+// UITranslations 是 KOLDATA／BOOKDATA／ENDTXT 三個文字庫的譯文，以 bank 名與
+// 記錄號為鍵。記錄號是原版的識別，譯文改了字也對得回原文。
+type UITranslations struct {
+	Schema string `json:"schema"`
+	Banks  map[string]map[string]uiRow `json:"banks"`
+}
+
+// uiRow 是一筆記錄的原文與譯文。原文一起存著，好在原文變動時看得出譯文過期了
+// （`tools/verify_ui_translation.py` 會比對）。
+type uiRow struct {
+	En   string `json:"en"`
+	Zh   string `json:"zh"`
+	Note string `json:"note"`
+}
+
+// LoadUITranslations 讀取 UI 文字庫的譯文表。找不到檔案不是錯誤——沒有譯文就顯示原文。
+func LoadUITranslations(path string) (*UITranslations, error) {
+	body, err := os.ReadFile(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return &UITranslations{}, nil
+		}
+		return nil, fmt.Errorf("讀取 UI 譯文失敗：%w", err)
+	}
+	var t UITranslations
+	if err := json.Unmarshal(body, &t); err != nil {
+		return nil, fmt.Errorf("解析 UI 譯文失敗：%w", err)
+	}
+	if !strings.HasPrefix(t.Schema, "kol-ui-text-i18n-") {
+		return nil, fmt.Errorf("非預期的 UI 譯文 schema：%s", t.Schema)
+	}
+	return &t, nil
+}
+
+// NewUITranslations 由「記錄號 → 譯文」的對照建一份 KOLDATA 譯文表，給測試用。
+func NewUITranslations(koldata map[string]string) *UITranslations {
+	t := &UITranslations{Banks: map[string]map[string]uiRow{BankUI: {}}}
+	for index, zh := range koldata {
+		t.Banks[BankUI][index] = uiRow{Zh: zh}
+	}
+	return t
+}
+
+// Record 回傳某個文字庫某一筆記錄的譯文；沒有就回空字串。
+func (t *UITranslations) Record(bank string, index int) string {
+	if t == nil || t.Banks == nil {
+		return ""
+	}
+	return t.Banks[bank][strconv.Itoa(index)].Zh
 }
 
 // LoadTranslations 讀取譯文表。找不到檔案不是錯誤——沒有譯文就顯示原文。
@@ -78,12 +130,12 @@ func (t *Translations) Message(town, door, index int) []string {
 	return d.Messages[strconv.Itoa(index)]
 }
 
-// UIRecord 回傳 UI 文字庫某一筆記錄的譯文；沒有就回空字串。
+// UIRecord 回傳 KOLDATA 某一筆記錄的譯文；沒有就回空字串。
 func (t *Translations) UIRecord(index int) string {
-	if t == nil || t.UI == nil {
+	if t == nil {
 		return ""
 	}
-	return t.UI[strconv.Itoa(index)]
+	return t.UI.Record(BankUI, index)
 }
 
 // TownName 回傳城鎮的譯名；沒有就回空字串。
