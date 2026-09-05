@@ -7439,11 +7439,39 @@ var_10 = 0                                  ; 欄位游標
 ```
 
 **十三個欄位**（0…0x0C 繞圈），所以「Modify a spell」是讓玩家改法術的參數，
-不是只看看而已。記錄 0x4A「`~V5A~H06Record changes in Spellbook?`」與
-0x4B／0x4C「`"That one is unknown to the Order of the@`」都在這一支裡，
-`0x4D` 那一筆的標籤（`CLASS`／`SUBCLASS`／`STAT`／`RANGE`／`DUR`／`DMG`／
-`Adventure Point Cost`／`Gold Crown Cost`）就是那些欄位。整段還沒逐條讀完，
-remake 按下去只記一筆。
+不是只看看而已。
+
+### 這一頁的骨架（`已證實`）
+
+```
+掃 0x200 起十六格：非空的就把 5-bit 名字解到 0x2D50、抄進 0x2E3A 那個清單緩衝
+                   （每筆以 0x0D 結尾），槽號記進 [0x9E28 + n]
+圖示列 sub_11703(7)、sub_11703(0x0F)、sub_11722(1)
+選 = sub_1AAE8(1, 0x0D, 0x56, min(筆數, 8), 筆數, 0x2E3A, 0x18)   ; RE-115 那一支
+選 >> 8 == 0x0F → 離開
+否則：把那一筆十六個 byte 抄進 0x9E28 當工作副本，欄位游標 var_10 = 0
+迴圈：
+    sub_1874E()                 ; 畫底：sub_1103F(0x1D)（KOLPICS 第 1 張整頁）、
+                                ;       標籤記錄 0x4D、六條分隔線、圖示列 7 與 0x0F
+    sub_18350(var_10)           ; 名字置中在 y=0x29；十三欄的顏色寫在 [0x9E38 + i]，
+                                ;       游標那一欄是 3、其餘 0x0F
+    鍵 = sub_1B100(4)
+    0x4800／0x4B00（上、左）→ var_10 − 1，−1 繞到 0x0C
+    0x4D00／0x5000（右、下）→ var_10 + 1，0x0D 繞回 0
+    0xFF（滑鼠）            → 依游標位置直接跳到那一欄
+    `<` `>` `,` `.`         → 圖示列的游標在兩格之間切（`word_2DF3A ^= 1`）
+    0x0D                    → 游標在 0x0F 就離開，否則編輯目前這一欄
+```
+
+標籤記錄 `0x4D` 是
+`~V36~H0BCLASS~H17SUBCLASS~V68~H07STAT~H12RANGE DUR  DMG~V82~H07Adventure Point Cost..@Gold Crown Cost.......`
+——所以畫面分三帶：y=0x36 的 CLASS／SUBCLASS、y=0x68 的 STAT／RANGE／DUR／DMG、
+y=0x82 的兩個成本。記錄 0x4A「`Record changes in Spellbook?`」與 0x4B／0x4C
+「`"That one is unknown to the Order of the@`」也都在這一支裡。
+
+**還沒讀完**：十三個欄位分別對到記錄裡的哪一格、各自的合法值與編輯方式
+（`sub_18350` 後半那 300 行與 `sub_178E0` 從 `0x17C50` 起的分派），以及
+DGROUP `0x44B6` 那張表。remake 按下去仍然只記一筆。
 
 ## RE-122：疲勞的上限與效果 7／8 打的那兩個全域
 
