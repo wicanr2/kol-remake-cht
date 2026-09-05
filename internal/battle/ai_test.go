@@ -154,7 +154,10 @@ func TestPlanEnemyMovesWhenNobodyIsAround(t *testing.T) {
 // 離得遠的敵人會一回合走一格靠過來，貼上之後改成攻擊。
 // 這一支把規劃與移動串起來跑，驗的是「AI 決定的方向真的把它帶到隊員旁邊」。
 func TestEnemyClosesInThenAttacks(t *testing.T) {
-	s := &State{Field: &Field{Tiles: make([]int, FieldSide*FieldSide)},
+	// 地形要用 `NewField()`：磚 0 雖然走得過去，卻**擋視線**（`sightBits[0]` 是
+	// 0xFF），全 0 的戰場上敵人看不見目標，走的會是「沒有目標」那一條——那樣這一支
+	// 驗的就不是它以為在驗的東西了。
+	s := &State{Field: NewField(),
 		Actors: []Actor{
 			{Side: SideParty, X: 10, Y: 10, Head: 10, Chest: 10, Threshold: 100},
 			{Side: SideMonster, X: 15, Y: 10, Head: 10, Chest: 10, Threshold: 100,

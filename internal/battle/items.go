@@ -12,6 +12,10 @@ type GroundItem struct {
 	// Name 是物品的名字，空字串代表這一格是空的（原版看記錄的第一個 byte）。
 	Name string
 	X, Y int
+	// Weapon 是這一件的武器數字。**掉在地上的時候就要帶著**：原版那十六格存的是
+	// 整筆 16 byte 的物品記錄，傷害骰、負重與種類本來就在裡面（RE-113），撿起來
+	// 的人直接拿它去打。只留名字的話撿到什麼都只能照舊數字算。
+	Weapon Weapon
 }
 
 // DropItem 是丟那一手（指令碼 `0x15`，`0x20189`）：把手上那件放到自己腳下。
@@ -36,7 +40,7 @@ func (s *State) DropItem(i int) (int, string) {
 		return CannotDropRecord, ""
 	}
 	name := m.WeaponName
-	s.Ground[slot] = GroundItem{Name: name, X: a.X, Y: a.Y}
+	s.Ground[slot] = GroundItem{Name: name, X: a.X, Y: a.Y, Weapon: a.Weapon}
 	m.HasWeapon = false
 	m.WeaponName = ""
 	m.Worn[0] = ""
@@ -74,6 +78,11 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 		return MustDropRecord, m.WeaponName
 	}
 	g := s.Ground[slot]
+	if i >= 0 && i < len(s.Actors) {
+		// 撿到的那一件就是這一手之後要用的武器：數字跟著換，不然打出來的傷害
+		// 還是原本手上那件的（原版是整筆 16 byte 搬進 +0x20／+0x30）。
+		s.Actors[i].Weapon = g.Weapon
+	}
 	if m != nil {
 		m.HasWeapon = true
 		m.WeaponName = g.Name
@@ -82,9 +91,6 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 		// 敵人撿的那一件放進怪物記錄手上那一格（`word_39A4E = 0x20`，
 		// `sub_1E3A8:0x203E0`），同時把 +0x2B 清成 0。手上不再空著，AI 那一條
 		// 「沒有武器就去撿」下一回合就不成立了（RE-116）。
-		//
-		// **武器的數字沒有跟著換**：地上那一格只留名字，要換算成傷害骰得先把
-		// ITEM.LST 那一筆接起來——撿到的東西這一版還是照原本的空手數字打。
 		s.Actors[i].Unarmed = false
 		s.Actors[i].PickedUp = 0
 	}

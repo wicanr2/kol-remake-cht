@@ -32,9 +32,12 @@ const BackpackSlots = 6
 
 // SpoilItem 是 `ITEM.LST` 裡的一筆。名字空的就是那個空位。
 type SpoilItem struct {
-	Index int    `json:"index"`
-	Name  string `json:"name"`
-	Empty bool   `json:"empty"`
+	Index int  `json:"index"`
+	Empty bool `json:"empty"`
+	// Item 帶著名字與裝備欄位，與怪物身上那幾格同一個型別——掉在地上的東西被
+	// 撿起來要換算成傷害骰就靠它（`CombatWeapon`）。`ITEM.LST` 的 JSON 是平的，
+	// 所以這裡內嵌而不是另開一層。
+	Item
 }
 
 // DropSpoils 擲出這一場掉了什麼，放進地面那十六格，回傳新占用的格號。
@@ -66,7 +69,7 @@ func (s *State) DropSpoils(items []SpoilItem, rng Rand) []int {
 		if it.Empty || it.Name == "" {
 			continue
 		}
-		s.Ground[slot] = GroundItem{Name: it.Name}
+		s.Ground[slot] = GroundItem{Name: it.Name, Weapon: it.CombatWeapon()}
 		got = append(got, slot)
 	}
 	return got
@@ -126,7 +129,8 @@ func (s *State) TakeSpoil(slot, actor int) (string, int) {
 	if m == nil {
 		return "", 0
 	}
-	name := s.Ground[slot].Name
+	g := s.Ground[slot]
+	name := g.Name
 	for n := range m.Pack {
 		if m.Pack[n] == "" {
 			m.Pack[n] = name
@@ -139,7 +143,12 @@ func (s *State) TakeSpoil(slot, actor int) (string, int) {
 	if m.HasWeapon {
 		record = EmptyHandsRecord
 	}
-	s.Ground[slot] = GroundItem{Name: m.WeaponName}
+	if a := actor; a >= 0 && a < len(s.Actors) {
+		s.Ground[slot] = GroundItem{Name: m.WeaponName, Weapon: s.Actors[a].Weapon}
+		s.Actors[a].Weapon = g.Weapon
+	} else {
+		s.Ground[slot] = GroundItem{Name: m.WeaponName}
+	}
 	m.HasWeapon, m.WeaponName, m.Worn[0] = true, name, name
 	return name, record
 }

@@ -259,3 +259,45 @@ func TestPickUpCallsQuestItemOnce(t *testing.T) {
 		t.Fatal("同一場只喊一次")
 	}
 }
+
+// 撿起來的那一件要帶著自己的傷害骰，不是沿用原本手上那件（RE-116 的補完）。
+func TestPickUpCarriesTheWeaponNumbers(t *testing.T) {
+	broadsword := Weapon{Kind: 0x58, Base: 2, Count: 1, Sides: 10, Weight: 60}
+	s := &State{Actors: []Actor{
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			Member: -1, Unarmed: true},
+	}}
+	s.Ground[0] = GroundItem{Name: "BROADSWORD", X: 4, Y: 4, Weapon: broadsword}
+	if _, name := s.TakeItem(0, 0); name != "BROADSWORD" {
+		t.Fatalf("撿到的是 %q", name)
+	}
+	if s.Actors[0].Weapon != broadsword {
+		t.Fatalf("武器數字沒換過來：%+v", s.Actors[0].Weapon)
+	}
+}
+
+// 丟出去的那一件也要把數字留在地上，撿回來才拿得回同一把。
+func TestDropThenPickUpKeepsTheSameWeapon(t *testing.T) {
+	dagger := Weapon{Kind: 0x58, Base: 1, Count: 1, Sides: 3, Weight: 10}
+	s := &State{
+		Party: []Member{{Name: "POONTANG", HasWeapon: true, WeaponName: "DAGGER"}},
+		Actors: []Actor{
+			{Side: SideParty, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+				Member: 0, Weapon: dagger},
+		}}
+	if record, name := s.DropItem(0); record != DropsRecord || name != "DAGGER" {
+		t.Fatalf("丟的結果是 %#x／%q", record, name)
+	}
+	if s.Ground[0].Weapon != dagger {
+		t.Fatalf("地上那一格沒留住數字：%+v", s.Ground[0].Weapon)
+	}
+	if s.Actors[0].Weapon != (Weapon{}) {
+		t.Fatal("丟掉之後手上不該還有數字")
+	}
+	if _, name := s.TakeItem(0, 0); name != "DAGGER" {
+		t.Fatalf("撿回來的是 %q", name)
+	}
+	if s.Actors[0].Weapon != dagger {
+		t.Fatalf("撿回來的數字不對：%+v", s.Actors[0].Weapon)
+	}
+}

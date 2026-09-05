@@ -18,9 +18,9 @@ func spoilState() *State {
 }
 
 var spoilTable = []SpoilItem{
-	{Index: 0, Name: "", Empty: true},
-	{Index: 1, Name: "Dagger"},
-	{Index: 2, Name: "Shortsword"},
+	{Index: 0, Empty: true},
+	{Index: 1, Item: Item{Name: "Dagger"}},
+	{Index: 2, Item: Item{Name: "Shortsword"}},
 }
 
 // 第一擲不到門檻就整段跳過，一件都不掉。
