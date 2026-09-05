@@ -1,0 +1,1064 @@
+{
+  "tool": "tools/dosbox_character_ui_oracle.py",
+  "scenario": "town-mouth",
+  "description": "在旅店按 SPACEBAR 讓圖示列出現，白框移到 MOUTH 按 Return 開問話輸入框，逐鍵打進一個關鍵字並退格一次，觀察輸入框的起點、字往右長的方式與筆尖那條橫槓；最後按 Return 送出。純觀察，不保存。",
+  "generated_utc": "2026-09-05T02:46:28Z",
+  "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+  "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+  "dosbox_cycles": "fixed 3000",
+  "input_method": "X11 XTEST FakeInput，畫面靜止後逐鍵送出",
+  "sample_interval_s": 0.3,
+  "stability_tolerance": 0.002,
+  "original_zip": {
+    "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "entry_count": 75
+  },
+  "character_files_before": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_after": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_changed": [],
+  "character_files_saved": false,
+  "distinct_frames": 68,
+  "checkpoints": [
+    {
+      "index": 0,
+      "label": "TITLE 標題序列",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 8.0,
+      "reached_stable": true,
+      "t": 8.79,
+      "frame": 6,
+      "file": "frames/frame-006.png",
+      "png_sha256": "562b641d17618e58d4e53b1e5c81483ab7d498ae4ef119f8991cb9d9d3c4660f"
+    },
+    {
+      "index": 1,
+      "label": "書本封面",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 9.0,
+      "reached_stable": true,
+      "t": 18.33,
+      "frame": 8,
+      "file": "frames/frame-008.png",
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "index": 2,
+      "label": "目錄頁",
+      "key": "6",
+      "settle_s": 2.0,
+      "fixed_delay_s": 12.0,
+      "reached_stable": true,
+      "t": 30.96,
+      "frame": 20,
+      "file": "frames/frame-020.png",
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "index": 3,
+      "label": "角色選擇清單（反白第 1 名）",
+      "key": "Return",
+      "settle_s": 2.0,
+      "fixed_delay_s": 25.0,
+      "reached_stable": true,
+      "t": 56.56,
+      "frame": 34,
+      "file": "frames/frame-034.png",
+      "png_sha256": "36eba7c14b304c193968f15e619fda6ada7febb53abef601b135de981b1b1bf3"
+    },
+    {
+      "index": 4,
+      "label": "旅店老闆對話（第一段）",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 15.0,
+      "reached_stable": true,
+      "t": 72.42,
+      "frame": 52,
+      "file": "frames/frame-052.png",
+      "png_sha256": "09771772e63ee12bdc643ff5f73cfa54e8b29f3e3f1b2cfa0640a00eb6548988"
+    },
+    {
+      "index": 5,
+      "label": "旅店的 SPACEBAR 圖示列",
+      "key": "space",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 76.88,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "png_sha256": "7d551800516e5914f0951e375f1c83ce29ebba4c235e6a94f3dad1ad56c6000c"
+    },
+    {
+      "index": 6,
+      "label": "圖示列（白框在 DOOR）",
+      "key": "greater",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 79.64,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "png_sha256": "7d551800516e5914f0951e375f1c83ce29ebba4c235e6a94f3dad1ad56c6000c"
+    },
+    {
+      "index": 7,
+      "label": "白框到 MIRROR",
+      "key": "greater",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 82.24,
+      "frame": 54,
+      "file": "frames/frame-054.png",
+      "png_sha256": "63c732e677778d59d81ae3cd55f93fad428c6384664c257b66057f02e5aafa03"
+    },
+    {
+      "index": 8,
+      "label": "白框到 LISTEN",
+      "key": "greater",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 85.08,
+      "frame": 55,
+      "file": "frames/frame-055.png",
+      "png_sha256": "83f0816efed93d890aeece8c987c4a2223e0d19d945d782ad92993424fecea4a"
+    },
+    {
+      "index": 9,
+      "label": "白框到 MOUTH（開問話輸入框）",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 89.67,
+      "frame": 56,
+      "file": "frames/frame-056.png",
+      "png_sha256": "5674422e2d1e8d0b61951b2e95f8c55f4fb34468fa6ec883acfbb5fc31caf42c"
+    },
+    {
+      "index": 10,
+      "label": "問話輸入框（還沒打字）",
+      "key": "e",
+      "settle_s": 1.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 91.8,
+      "frame": 58,
+      "file": "frames/frame-058.png",
+      "png_sha256": "6840db59e3ec5e07935187550baef7c06212ac9c9295d55a9d989f81b568afd2"
+    },
+    {
+      "index": 11,
+      "label": "打了 e",
+      "key": "l",
+      "settle_s": 1.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 93.91,
+      "frame": 59,
+      "file": "frames/frame-059.png",
+      "png_sha256": "91db4e3e7a9263e69741555ffde9ce97eda88b92b5e75ecc29b4522398b2d6ec"
+    },
+    {
+      "index": 12,
+      "label": "打了 el",
+      "key": "v",
+      "settle_s": 1.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 96.07,
+      "frame": 62,
+      "file": "frames/frame-062.png",
+      "png_sha256": "842370841bc352722d64a2e85186527e6543d4f10b1c97ecc7b97fdc928e7914"
+    },
+    {
+      "index": 13,
+      "label": "打了 elv",
+      "key": "e",
+      "settle_s": 1.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 98.18,
+      "frame": 63,
+      "file": "frames/frame-063.png",
+      "png_sha256": "cdca775561f0c63b80408c42be46c3c2ccb6de8a20dc82f9ec65b1370ba17045"
+    },
+    {
+      "index": 14,
+      "label": "打了 elve",
+      "key": "BackSpace",
+      "settle_s": 1.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 100.3,
+      "frame": 65,
+      "file": "frames/frame-065.png",
+      "png_sha256": "6842536ffe507a078eb34880f8830815416293c236a648d08a45b1bbf38b2809"
+    },
+    {
+      "index": 15,
+      "label": "退格之後（elv）",
+      "key": "e",
+      "settle_s": 1.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 102.36,
+      "frame": 63,
+      "file": "frames/frame-063.png",
+      "png_sha256": "cdca775561f0c63b80408c42be46c3c2ccb6de8a20dc82f9ec65b1370ba17045"
+    },
+    {
+      "index": 16,
+      "label": "補回 elve",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 106.95,
+      "frame": 65,
+      "file": "frames/frame-065.png",
+      "png_sha256": "6842536ffe507a078eb34880f8830815416293c236a648d08a45b1bbf38b2809"
+    },
+    {
+      "index": 17,
+      "label": "送出之後",
+      "key": "space",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 110.63,
+      "frame": 67,
+      "file": "frames/frame-067.png",
+      "png_sha256": "940a2dd4758c7e60b2530ca2204e7947b1de4190937d49c6382da6da06e4983c"
+    },
+    {
+      "index": 18,
+      "label": "讀完",
+      "key": null,
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 114.26,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "png_sha256": "7d551800516e5914f0951e375f1c83ce29ebba4c235e6a94f3dad1ad56c6000c"
+    }
+  ],
+  "timeline": [
+    {
+      "t": 0.6,
+      "frame": 0,
+      "file": "frames/frame-000.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "5b1b5400f295a27198b7e865daddd36fcb79901a394f90ff77af07d6e9e5102a"
+    },
+    {
+      "t": 0.99,
+      "frame": 1,
+      "file": "frames/frame-001.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "e6331e1eb27d6b642d7c095769f03d4a8a9d7f15658701bffa16481954a5f38c"
+    },
+    {
+      "t": 1.68,
+      "frame": 2,
+      "file": "frames/frame-002.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8ef6bda61c7ae6ba2e411405edd87056782337a996a73a93099365cff25ceeb0"
+    },
+    {
+      "t": 5.82,
+      "frame": 3,
+      "file": "frames/frame-003.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1a120fbb455c633c96f5abe2cdbf564dbbb0a0af1b0694d0fc5e575ddf4dcbd8"
+    },
+    {
+      "t": 7.75,
+      "frame": 4,
+      "file": "frames/frame-004.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "def942b8f7dde58783c4b3200988c812343a580e186c2e811eded542a64b4203"
+    },
+    {
+      "t": 8.09,
+      "frame": 5,
+      "file": "frames/frame-005.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7acda7db6a21eea3a7b1137ccdcfaae20b5dff786c1497d104ba8bc376fbe3e8"
+    },
+    {
+      "t": 8.47,
+      "frame": 6,
+      "file": "frames/frame-006.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "562b641d17618e58d4e53b1e5c81483ab7d498ae4ef119f8991cb9d9d3c4660f"
+    },
+    {
+      "t": 9.27,
+      "frame": 3,
+      "repeat": true
+    },
+    {
+      "t": 12.21,
+      "frame": 7,
+      "file": "frames/frame-007.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "10f6a9c59e69887c346c44ee4575b2eb7e53cbcf8610e0684df3717871f4b18c"
+    },
+    {
+      "t": 14.45,
+      "frame": 8,
+      "file": "frames/frame-008.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "t": 18.91,
+      "frame": 9,
+      "file": "frames/frame-009.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bef6cc52890895cf3c6468a3496e88ae0da8d14ecf363811cdf5ed90fe77b75f"
+    },
+    {
+      "t": 19.35,
+      "frame": 10,
+      "file": "frames/frame-010.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "476fb50d3e5b955c961ac1263b8c1124af3373b256ca08d868a0bf4951de4500"
+    },
+    {
+      "t": 19.99,
+      "frame": 11,
+      "file": "frames/frame-011.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "36e83b1860f42f1688e7d077b140cadc67aaaa77a7426f7c435c18e569d3b6b4"
+    },
+    {
+      "t": 20.45,
+      "frame": 12,
+      "file": "frames/frame-012.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "736c48575594e5491cdd0364fa9bd454e015b3e009d4e18b5e5594e0c6478d51"
+    },
+    {
+      "t": 20.96,
+      "frame": 13,
+      "file": "frames/frame-013.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a0c8f40adfbca063d89d65328cb42925b6c9f70ba0d9bf0797c2042766e22042"
+    },
+    {
+      "t": 21.54,
+      "frame": 14,
+      "file": "frames/frame-014.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a9f440be323d49857f152eadd880876f268f4d44396fc7c2312afb4055e2ab5f"
+    },
+    {
+      "t": 22.32,
+      "frame": 15,
+      "file": "frames/frame-015.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b3f891fe039d353114c647bd2d2dc14746a43c251ddbd0394a9a0d902dbfcfd2"
+    },
+    {
+      "t": 22.8,
+      "frame": 16,
+      "file": "frames/frame-016.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d411b0c86139213a0d18812a7c484708151fe33eb07f08db57d08a882ee480e7"
+    },
+    {
+      "t": 23.28,
+      "frame": 17,
+      "file": "frames/frame-017.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1654f07aa7ada16f499c28de6ff3790e66f890ee832996abd2472dc75d6c53a7"
+    },
+    {
+      "t": 23.78,
+      "frame": 18,
+      "file": "frames/frame-018.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f621699f7e957eb5f7b5d679362a5c728bae351046a86f84afc83591a5542eea"
+    },
+    {
+      "t": 24.34,
+      "frame": 19,
+      "file": "frames/frame-019.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5f3f227d3b6e99437228e5a81789be2d1e69b04d1c3dd1bd12a22408170d7041"
+    },
+    {
+      "t": 24.81,
+      "frame": 20,
+      "file": "frames/frame-020.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "t": 33.7,
+      "frame": 21,
+      "file": "frames/frame-021.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f534861bd30906c624c9efb5c5e5fb3ca2586b12958e6ff8c68370a97eea174f"
+    },
+    {
+      "t": 34.23,
+      "frame": 22,
+      "file": "frames/frame-022.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1326cf8011f3f8783467f7006054f24a80e06eddd85e9d23daacf63acde13d46"
+    },
+    {
+      "t": 34.78,
+      "frame": 23,
+      "file": "frames/frame-023.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "13b6938f4b0a861c86fb7a26d17850196bf7dd97cc36f30aeefd2272faf18feb"
+    },
+    {
+      "t": 35.4,
+      "frame": 24,
+      "file": "frames/frame-024.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2792073a118b785068b466f4e7fc91b8a47de74fe43ebd797616bb215aad9ab6"
+    },
+    {
+      "t": 35.9,
+      "frame": 25,
+      "file": "frames/frame-025.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b6d14adf4ee188e4b26f66d751e69780f672fb415b444cf5dd047fa0a1765ddd"
+    },
+    {
+      "t": 36.44,
+      "frame": 26,
+      "file": "frames/frame-026.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b380e4d4b18b725295b86ff6282bdf9cb9ad87fc9cc85545b6d01c6455be9ad4"
+    },
+    {
+      "t": 36.92,
+      "frame": 27,
+      "file": "frames/frame-027.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5951c2275733e75de560b94e7fc4ef1331c6d0a4144d2bff9ffe60af70900681"
+    },
+    {
+      "t": 37.36,
+      "frame": 28,
+      "file": "frames/frame-028.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e8119820474d7d3faa2bdd31438b82569f073707753b494150723ffbebb1bd7d"
+    },
+    {
+      "t": 37.79,
+      "frame": 29,
+      "file": "frames/frame-029.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c54e06d9b32a41f5e642cd103b29c5a3e38e5abf0c481a2929039a4d6b98721"
+    },
+    {
+      "t": 38.31,
+      "frame": 30,
+      "file": "frames/frame-030.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bfc2a06824e67cb7e43504c8ad3368a33a382cfa1ec8dde5f2770a8569c406bc"
+    },
+    {
+      "t": 38.76,
+      "frame": 31,
+      "file": "frames/frame-031.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e6e0520454b39d547511d421c443edc63c83b041582e661b52fb67de20e536ba"
+    },
+    {
+      "t": 39.24,
+      "frame": 32,
+      "file": "frames/frame-032.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "11293cf7f1efe4270658771ca8b367c08ae5de6c766f0f782b6bfec23d41aa09"
+    },
+    {
+      "t": 39.87,
+      "frame": 33,
+      "file": "frames/frame-033.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fca2f7e3aff0b616a4262bb87725be324a12df387bff0e6762b1943baa8ec28a"
+    },
+    {
+      "t": 40.36,
+      "frame": 34,
+      "file": "frames/frame-034.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "36eba7c14b304c193968f15e619fda6ada7febb53abef601b135de981b1b1bf3"
+    },
+    {
+      "t": 57.19,
+      "frame": 35,
+      "file": "frames/frame-035.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c77437b4ba3c0768ba23643079f5dc5840626421ff38626b351c19e3ab35697"
+    },
+    {
+      "t": 58.08,
+      "frame": 36,
+      "file": "frames/frame-036.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "13786cb665d038426481a94f4aae504c10d79d5f82d28911ea56355479cd274d"
+    },
+    {
+      "t": 58.64,
+      "frame": 37,
+      "file": "frames/frame-037.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d328896a76d20ff51b10063d0044eba86928a008d4d428102df488cd3c37e31b"
+    },
+    {
+      "t": 59.16,
+      "frame": 38,
+      "file": "frames/frame-038.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "430964c7137558d6abae2134925a21361574a74db85a714c8e72e4bc1a5660ce"
+    },
+    {
+      "t": 59.82,
+      "frame": 39,
+      "file": "frames/frame-039.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e166af9a0a45b101e5c561d37b701194803abbb9eee02c40f3e438eea2631fee"
+    },
+    {
+      "t": 60.41,
+      "frame": 40,
+      "file": "frames/frame-040.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0ac5d6e226d13f5f0d31c2e6317eacfd369df2a338c7154072e040bfbe4c362f"
+    },
+    {
+      "t": 60.93,
+      "frame": 41,
+      "file": "frames/frame-041.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "62a2507ec8717da9090b9786534753611e966d3f46b00d9a36f0ba4d7c70aaea"
+    },
+    {
+      "t": 61.4,
+      "frame": 42,
+      "file": "frames/frame-042.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1df2c896d4122e51466c56f791e227051bea4bde08fc73dd4c61e08e59b420ae"
+    },
+    {
+      "t": 61.93,
+      "frame": 43,
+      "file": "frames/frame-043.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8d7ef476a5048939da204746770047a92b3017b47cb005f5a4b38c3c60a41fdf"
+    },
+    {
+      "t": 62.4,
+      "frame": 44,
+      "file": "frames/frame-044.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f927216614323901b3381180b2b24543f472d88decb47de266003fcce952e999"
+    },
+    {
+      "t": 62.92,
+      "frame": 45,
+      "file": "frames/frame-045.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e93fb6085cb4220ddfb2af85d434f0f7b9a2efabea38505759264840536d1725"
+    },
+    {
+      "t": 63.37,
+      "frame": 46,
+      "file": "frames/frame-046.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cd9ab5504b5b2e1948f5bd281645bdd1b58c3a1ffcaafc9d2bea8240d213b126"
+    },
+    {
+      "t": 63.83,
+      "frame": 47,
+      "file": "frames/frame-047.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3551608fa2f0c4418edcd03d38ebb3e5f2f42136b12699532edbe76bbf5edc3d"
+    },
+    {
+      "t": 64.29,
+      "frame": 48,
+      "file": "frames/frame-048.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8d537991df76d7ffa21b8f790cfa9f456bf9cc75d7bc5095c647a5fa3b7e8a9e"
+    },
+    {
+      "t": 67.04,
+      "frame": 49,
+      "file": "frames/frame-049.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6265f0c8a2a2247fc1832d34d30b070627e1ba315942b916ad0e82738b432580"
+    },
+    {
+      "t": 69.13,
+      "frame": 50,
+      "file": "frames/frame-050.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1ab6256e598948687d2ae572989f5dba181310689f997f1fe2263bc2cd946afc"
+    },
+    {
+      "t": 69.54,
+      "frame": 51,
+      "file": "frames/frame-051.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "df1c5576702d8c6591c9dced8fcbc8510909e5cc633ce0352c333ce1294b57fb"
+    },
+    {
+      "t": 72.42,
+      "frame": 52,
+      "file": "frames/frame-052.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "09771772e63ee12bdc643ff5f73cfa54e8b29f3e3f1b2cfa0640a00eb6548988"
+    },
+    {
+      "t": 73.2,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7d551800516e5914f0951e375f1c83ce29ebba4c235e6a94f3dad1ad56c6000c"
+    },
+    {
+      "t": 80.21,
+      "frame": 54,
+      "file": "frames/frame-054.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "63c732e677778d59d81ae3cd55f93fad428c6384664c257b66057f02e5aafa03"
+    },
+    {
+      "t": 82.8,
+      "frame": 55,
+      "file": "frames/frame-055.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "83f0816efed93d890aeece8c987c4a2223e0d19d945d782ad92993424fecea4a"
+    },
+    {
+      "t": 85.59,
+      "frame": 56,
+      "file": "frames/frame-056.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5674422e2d1e8d0b61951b2e95f8c55f4fb34468fa6ec883acfbb5fc31caf42c"
+    },
+    {
+      "t": 90.19,
+      "frame": 57,
+      "file": "frames/frame-057.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b68ffeab2087d277e26ec209782bb7d4d6ae280110bf1dccef6febf47b2b887f"
+    },
+    {
+      "t": 90.53,
+      "frame": 58,
+      "file": "frames/frame-058.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6840db59e3ec5e07935187550baef7c06212ac9c9295d55a9d989f81b568afd2"
+    },
+    {
+      "t": 90.85,
+      "frame": 57,
+      "repeat": true
+    },
+    {
+      "t": 91.49,
+      "frame": 58,
+      "repeat": true
+    },
+    {
+      "t": 92.31,
+      "frame": 59,
+      "file": "frames/frame-059.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "91db4e3e7a9263e69741555ffde9ce97eda88b92b5e75ecc29b4522398b2d6ec"
+    },
+    {
+      "t": 92.65,
+      "frame": 60,
+      "file": "frames/frame-060.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0e76aaf3fb8cfa0f8704c429c6a86c699a9fbb935b0efafa253e70185ea795d7"
+    },
+    {
+      "t": 92.97,
+      "frame": 59,
+      "repeat": true
+    },
+    {
+      "t": 93.6,
+      "frame": 60,
+      "repeat": true
+    },
+    {
+      "t": 93.91,
+      "frame": 59,
+      "repeat": true
+    },
+    {
+      "t": 94.42,
+      "frame": 61,
+      "file": "frames/frame-061.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c2dda878feae3a5c6bb8127fa416988dea3cbf427e451b6a73af2fb50b8385d3"
+    },
+    {
+      "t": 95.44,
+      "frame": 62,
+      "file": "frames/frame-062.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "842370841bc352722d64a2e85186527e6543d4f10b1c97ecc7b97fdc928e7914"
+    },
+    {
+      "t": 96.57,
+      "frame": 63,
+      "file": "frames/frame-063.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cdca775561f0c63b80408c42be46c3c2ccb6de8a20dc82f9ec65b1370ba17045"
+    },
+    {
+      "t": 97.55,
+      "frame": 64,
+      "file": "frames/frame-064.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "38ffe5c83630c3b91ff6ccd425975ccfef17c5358a62d230c337bd8c403b3738"
+    },
+    {
+      "t": 98.18,
+      "frame": 63,
+      "repeat": true
+    },
+    {
+      "t": 98.69,
+      "frame": 65,
+      "file": "frames/frame-065.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6842536ffe507a078eb34880f8830815416293c236a648d08a45b1bbf38b2809"
+    },
+    {
+      "t": 99.67,
+      "frame": 66,
+      "file": "frames/frame-066.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d88715254435d6f18ec6e04a631624e701fbff9c69d21e258aa5d50075cd84f1"
+    },
+    {
+      "t": 100.3,
+      "frame": 65,
+      "repeat": true
+    },
+    {
+      "t": 100.78,
+      "frame": 63,
+      "repeat": true
+    },
+    {
+      "t": 101.09,
+      "frame": 64,
+      "repeat": true
+    },
+    {
+      "t": 101.41,
+      "frame": 63,
+      "repeat": true
+    },
+    {
+      "t": 102.04,
+      "frame": 64,
+      "repeat": true
+    },
+    {
+      "t": 102.36,
+      "frame": 63,
+      "repeat": true
+    },
+    {
+      "t": 102.83,
+      "frame": 65,
+      "repeat": true
+    },
+    {
+      "t": 103.78,
+      "frame": 66,
+      "repeat": true
+    },
+    {
+      "t": 104.42,
+      "frame": 65,
+      "repeat": true
+    },
+    {
+      "t": 104.73,
+      "frame": 66,
+      "repeat": true
+    },
+    {
+      "t": 105.36,
+      "frame": 65,
+      "repeat": true
+    },
+    {
+      "t": 106.0,
+      "frame": 66,
+      "repeat": true
+    },
+    {
+      "t": 106.63,
+      "frame": 65,
+      "repeat": true
+    },
+    {
+      "t": 107.46,
+      "frame": 67,
+      "file": "frames/frame-067.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "940a2dd4758c7e60b2530ca2204e7947b1de4190937d49c6382da6da06e4983c"
+    },
+    {
+      "t": 111.11,
+      "frame": 53,
+      "repeat": true
+    }
+  ]
+}

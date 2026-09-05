@@ -1,7 +1,7 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "quest-take",
- "description": "從標題按下去，走進霍布城西的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。",
+ "description": "從標題按下去，走進霍布城西的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。打字那一格的版面另有對拍（`docs/verification/remake-parity/plan-town-mouth.json`）：文字欄從第 13 欄起、一格 8 px，筆尖底下那條 8×1 的橫槓與原版逐像素相同。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。",
  "seed": 1,
  "load": "workplace/saves/quest-take.json",
  "token_count": 34,
@@ -227,13 +227,13 @@
   {
    "step": 26,
    "file": "step-026.png",
-   "sha256": "2cf025c7b33b0a30aab1b6491dcedb3524e67d87032faae15e11c7d96ad6ce7e",
+   "sha256": "3b3b47de67dc9c9604ed1bc32bcfcaeb3c1ef7a1bb00686d39789eefb97df8ec",
    "shows": "MOUTH：問話的敘述與空的輸入框"
   },
   {
    "step": 30,
    "file": "step-030.png",
-   "sha256": "d77e41281fa3c2ef63bc3700013e9b3ba30fb92bb576c7694651680d791e09cd",
+   "sha256": "7a7dd13e818790512e69f36fafb472cd5252e5734c02be395f15878205772058",
    "shows": "打完 `nobj`，游標在字尾"
   },
   {
@@ -262,11 +262,5 @@
   }
  ],
  "save": null,
- "failures": [],
- "not_claimed": [
-  {
-   "name": "打字那一格的版面與原版一致",
-   "reason": "`sub_1B5C8` 的游標樣子與座標還沒讀，這一版把打到一半的字接在敘述後面並用底線當游標。已證實的只有「最多 23 個字元」與「整串轉小寫」。"
-  }
- ]
+ "failures": []
 }

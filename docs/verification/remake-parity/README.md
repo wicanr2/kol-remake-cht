@@ -62,6 +62,7 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `town-mirror.json`（MIRROR 的角色資料頁，對 `town-mirror-run1`） | 8 | 8 |
 | `town-shop.json`（商店的清單、明細、穿上與甲冑調整，對 `town-shop-run2`／`town-adjust-run1`） | 9 | 9 |
 | `town-train.json`（AWARD 訓練的六個畫面，對 `town-train-run1`） | 6 | 6 |
+| `town-mouth.json`（MOUTH 打字那一格的版面，對 `town-mouth-run1`） | 2 | 2 |
 | `world.json`（野外地圖畫面，對 `town-leave-run1`） | 4 | 4 |
 | `world-clock.json`（野外時刻推進的兩個取樣點，對 `world-clock-run2`） | 4 | 4 |
 | `world-quest.json`（任務地點的敘述、問句、滿版怪物圖、戰場與主指令列，對 `world-quest-run1`） | 4 | 4 |
@@ -69,7 +70,7 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `world-town.json`（野外走到城鎮入口與進城，對 `world-enter-town-run1`） | 7 | 7 |
 | `battle-exec.json`（執行段訊息區的卷軸底圖，對 `world-quest-execute-run1`） | 1 | 1 |
 
-二十五份收據 283 對畫面，允許差異區之外都是**零像素差**。
+二十六份收據 285 對畫面，允許差異區之外都是**零像素差**。
 
 `world.json` 多了一個欄位 `compare`：每一對只涵蓋畫面上的一塊矩形。這**不是**
 允許差異區——矩形之外的部分那一對不宣稱，而計畫的 `not_claimed` 要寫明為什麼。
@@ -81,6 +82,7 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | 書本封面 | 原版滑鼠游標 50 px | 通過 |
 | 目錄頁 | 原版滑鼠游標 55 px | 通過 |
 | 空白 New Character 頁 | 名字欄殘留字元 31 px | 通過 |
+| MOUTH 的文字欄（空的／打了兩個字元） | 原版滑鼠游標 41 px | 通過 |
 
 - 書本封面與目錄頁在游標以外**完全相同**：這兩個畫面在原版是整張烘好的 BOOKPICS
   素材，remake 直接畫同一張抽取 PNG。

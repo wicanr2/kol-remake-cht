@@ -1,0 +1,42 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "battle-exec",
+  "description": "執行段的訊息區對原版對拍（RE-089、RE-090）。原版一進執行段就把 (8,164) 起 296×32 那一整條換掉：底圖是 MISCPICS 的圖 1，一張白紙面配黃色捲邊與軸心的卷軸，指令圖示列與紅磚底都不見了；文字從 (24,168) 起、行高 6、整段轉成大寫、白底黑字（RE-087、RE-089）。這一對只宣稱**那一條的底圖**——文字那一行不算，因為兩邊行動的不是同一個人：原版那一輪是路上被埋伏的 RUFFIAN 在動（frame-966 的 `THE RUFFIAN MOVES!`），remake 走的是任務戰鬥、動的是 Poontang（`POONTANG MOVES!`）。訊息區以外的畫面也不宣稱：戰場的地形與參戰者位置本來就不同。",
+  "pair_count": 1,
+  "pass_count": 1,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "訊息區的卷軸底圖",
+      "remake": "docs/verification/remake-parity/shots/battle-exec/message-scroll.png",
+      "original": "docs/verification/character-ui/world-quest-execute-run1/frames/frame-966.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 8,
+        "y": 164,
+        "width": 296,
+        "height": 32
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "訊息那一行文字",
+          "reason": "原版寫的是 `THE RUFFIAN MOVES!`，remake 寫的是 `POONTANG MOVES!`——動的不是同一個人。這一列的字模與底色仍由 RE-087／RE-089 的量測釘住，只是內容不同。",
+          "rect": [
+            24,
+            168,
+            144,
+            6
+          ],
+          "differing_pixels": 419
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

@@ -56,6 +56,7 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 | `town-shop` | 66／72 | 兩輪 | 無 |
 | `town-adjust` | 77 | 單輪 | 無 |
 | `town-train` | 56 | 單輪 | 無 |
+| `town-mouth` | 19 | 單輪 | 無 |
 | `world-clock` | 67／43 | 兩輪 | 無 |
 | `world-quest-site` | 125 | 單輪 | 無 |
 
@@ -107,6 +108,12 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
 - **接受圖像是保存點。** 走完「ACCEPT STATS → 接受圖像」之後畫面回到 Character
   options，`CHARDATA` 出現變動；本批兩輪都只寫入 slot 14，`CHARPICS` 與 `SHLDPICS`
   的 SHA-256 未變。逐 offset 差異見 `../asset-parity/chardata-write-run{1,2}.json`。
+- **MOUTH 的文字欄從第 13 欄起，一格 8 px，筆尖底下有一條 8×1 的橫槓。**
+  字模在 y = 120…124、橫槓在 y = 125；橫槓每 5 個 timer tick 反相一次，因此同一條
+  腳本跑出來的畫格會落在不同相位（058／062 亮，059／063／065 暗）。退格完全可逆：
+  「打了 elve」→ 退格 →「補回 elve」三張的 SHA-256 兩兩相同。按下 MOUTH 之後
+  **底下那排圖示與白框原樣留著**（056 → 058 的差異外接矩形只有 `(104, 86, 191, 40)`），
+  鍵盤整段交給文字欄（RE-114）。
 - 其餘四個情境全程沒有接受屬性或角色圖像，三個角色檔的前後 SHA-256 皆未變動。
 
 ## 尚未涵蓋

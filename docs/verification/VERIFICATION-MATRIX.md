@@ -13,7 +13,7 @@
 | 角色寫入與刪除 | `DeleteFlow`／`DeleteSlot`；writer 逐 byte | 改動的 58 個 byte 兩個職業各 58/58 相同；刪除只寫一個 byte | 刪除流程 13 對 | 角色選項 → 刪除 → 確認 | SPEC-005 涵蓋；ESC、大寫 Y／N、空名冊未涵蓋 |
 | 書本其他功能 | 尚無 | 四個功能共用同一張角色選擇清單；HARBOR MASTER 為三行訊息頁 | HARBOR MASTER 1 對 | 角色選項 → Harbor Master | `EDIT PICTURE`／`EDIT SHIELD` **未實作**：原版滑鼠驅動，鍵盤 oracle 走不完 |
 | 城鎮移動、門口與邊界 | `Grid`／`Outdoor`／`Markers`／`Session` | 94 張移動 oracle 中 22 張畫格的鏡頭全部唯一解 | 戶外 22 ＋ 城門提示 4 對 | `town` 14 步、`town-edge` 14 步 | 已對拍 |
-| 建築內部與對話 | `EnterBuilding`、`Topics`、`mouthState` | 進門敘述八行逐格讀回與 5-bit 解碼逐字相同；409 個話題槽交叉檢查零例外；MOUTH 讀入 23 個字元、轉小寫、字首比對（RE-067） | 進門 1 ＋ 對話 3 對 | `town-talk` 10 步、`quest-take` 34 步 | 已對拍。**MOUTH 輸入框的版面未對拍**（游標樣子與座標未讀）；訊息 10 起的後續對話觸發條件仍未解 |
+| 建築內部與對話 | `EnterBuilding`、`Topics`、`mouthState` | 進門敘述八行逐格讀回與 5-bit 解碼逐字相同；409 個話題槽交叉檢查零例外；MOUTH 讀入 23 個字元、轉小寫、字首比對（RE-067） | 進門 1 ＋ 對話 3 ＋ 打字那一格 2 對 | `town-talk` 10 步、`quest-take` 34 步 | 已對拍，**打字那一格的版面也對拍過**（RE-114：第 13 欄起、一格 8 px、筆尖底下 8×1 的橫槓每 0.27 秒翻一次，圖示列不收；收據 `town-mouth-run1`）；訊息 10 起的後續對話觸發條件仍未解 |
 | 招募同伴 | `Inn` 的清單捲動與名牌 | 候選人由角色檔所在地欄比對建築名稱（RE-072） | 旅店 8 ＋ 招募 9 對 | `town-recruit` 15 步 | 已對拍 |
 | 住宿、治療與存讀檔 | `internal/save` 原子讀寫；`Rest` 三條路 | 價錢取自建築 payload `0x38`／`0x39`（RE-073） | 住宿 11 對 | `town-rest` 11 步（含存檔逐欄驗證）、`town-load` 7 步、`full-chain` ＋ `full-chain-reload` | SPEC-006 READY。任務旗標、已回報數與身上帶的東西已進存檔（RE-101／107／109）。**戰鬥中途的狀態與世界時間仍未進存檔** |
 | 角色資料頁 | `Sheet` 的量尺與 5-bit 武器名 | 屬性是內部值 × 100 / 150；身高體重查三張 DGROUP 表（RE-074）；圖示分派比的碼與去向逐條讀出（RE-111） | 鏡子 8 對 | `town-mirror` 10 步、`quest-list` 29 步 | 已對拍。任務一覽（第 19 個圖示）已實作；**物品、換人、法術三個圖示未實作** |
@@ -34,7 +34,7 @@
 `docs/verification/character-ui/`；抽取資產對原版畫面的收據見
 `docs/verification/asset-parity/`。權利分類為 private-repo 可保存、不得公開散布。
 remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍計畫與收據同目錄
-（二十五份收據 283 對，允許差異區之外零像素差）。
+（二十六份收據 285 對，允許差異區之外零像素差）。
 
 ## 正常玩家路徑
 
@@ -81,6 +81,6 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 - [~] 可寫存檔與 pristine original 不變檢查（存檔迴圈已閉合，任務旗標、已回報數與
       身上帶的東西都進存檔；戰鬥中途的狀態與世界時間還沒有。
       原版 `CHARDATA` 一律唯讀，匯入是離線工具）
-- [~] 原版／remake 同狀態截圖審查（283 對通過；音訊與未實作的部分沒有可審的畫面）
+- [~] 原版／remake 同狀態截圖審查（285 對通過；音訊與未實作的部分沒有可審的畫面）
 - [~] 封包啟動 smoke（`dist-all/0.1.1/` 的 linux/amd64 與 windows/amd64 已由
       `tools/verify_dist.sh` 驗過 manifest、授權與啟動；macOS 與 Windows 真機未驗）

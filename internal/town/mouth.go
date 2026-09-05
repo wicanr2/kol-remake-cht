@@ -16,13 +16,15 @@ type mouthState struct {
 	buf    []rune
 }
 
-// StartAsk 是按下 MOUTH：放問話的敘述，開始收字。
+// StartAsk 是按下 MOUTH：放問話的敘述，開始收字。**圖示列不收掉**——原版按下
+// MOUTH 之後底下那一排與白框原樣留著（收據 `town-mouth-run1`：frame-056 與
+// frame-058 的差異只在對話框那 40 列），鍵盤則整段交給 `sub_1B5C8`，所以圖示
+// 看得到但按不動。
 func (s *Session) StartAsk() {
 	if s.Mode != ModeInside || s.Inside == nil {
 		return
 	}
 	s.mouth = &mouthState{prompt: s.message(AskMessage)}
-	s.setInsideIcons(nil)
 	s.refreshMouth()
 }
 
@@ -69,14 +71,16 @@ func (s *Session) SubmitAsk() bool {
 	return s.Ask(question)
 }
 
-// refreshMouth 把敘述與打到一半的字一起放進對話框。游標畫成底線——
-// **原版游標的樣子還沒對拍**，只確定讀入的上限是 23 個字元。
+// refreshMouth 把敘述與打到一半的字一起放進對話框。筆尖那格的游標與訓練、賭場
+// 兩處文字欄共用同一支原版函式（`sub_1B5C8`），所以畫的是同一條橫槓，不是底線
+// 字模——見 TextCaret 的說明與 RE-114（版面與原版逐像素對過，
+// `plan-town-mouth.json`）。
 func (s *Session) refreshMouth() {
 	if s.mouth == nil || s.Inside == nil {
 		return
 	}
 	lines := append([]string(nil), s.mouth.prompt...)
-	lines = append(lines, string(s.mouth.buf)+"_")
+	lines = append(lines, string(s.mouth.buf)+TextCaret)
 	s.Inside.Dialog = lines
 	s.Inside.DialogZh = nil
 }

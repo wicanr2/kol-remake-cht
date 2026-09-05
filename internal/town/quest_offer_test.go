@@ -137,9 +137,15 @@ func TestMouthTyping(t *testing.T) {
 		UIText: &UIText{}, Mode: ModeInside, Outdoor: &Outdoor{Town: 0},
 	}
 	s.Text = &Text{Towns: []townText{{Town: 0, Buildings: []BuildingText{*questText()}}}}
+	// 原版按下 MOUTH 之後圖示列與白框原樣留著（RE-114），所以打字期間不收。
+	s.Inside.Icons = []int{1, 2, 3, 4}
+	s.Cursor = 3
 	s.StartAsk()
 	if !s.Asking() {
 		t.Fatal("按下 MOUTH 之後應該在打字")
+	}
+	if len(s.Inside.Icons) != 4 || s.Cursor != 3 {
+		t.Fatalf("圖示列不該收掉：%d 格、白框在 %d", len(s.Inside.Icons), s.Cursor)
 	}
 	for _, r := range "segg" {
 		s.TypeAsk(r)
@@ -149,8 +155,8 @@ func TestMouthTyping(t *testing.T) {
 	if s.AskInput() != "segg" {
 		t.Fatalf("打進去的是 %q", s.AskInput())
 	}
-	// 對話框最後一行是打到一半的字加游標。
-	if last := s.Inside.Dialog[len(s.Inside.Dialog)-1]; last != "segg_" {
+	// 對話框最後一行是打到一半的字加游標（與訓練、賭場同一個哨符）。
+	if last := s.Inside.Dialog[len(s.Inside.Dialog)-1]; last != "segg"+TextCaret {
 		t.Fatalf("輸入行是 %q", last)
 	}
 	// 超過 23 個字元就不再收。

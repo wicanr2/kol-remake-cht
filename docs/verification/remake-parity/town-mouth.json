@@ -1,0 +1,64 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-mouth",
+  "description": "MOUTH 打字問話那一格的版面對原版對拍。按下 MOUTH 之後原版放訊息 18 的敘述，接著 `sub_1B5C8(0x2E3A, 0x17)` 在第 13 欄開一格文字欄讀最多 23 個字元：字模一格 8 px 往右長，筆尖那一格底下有一條 8 px 寬、1 px 高的橫槓，由 `sub_1B100(1)` 每 5 個 timer tick 在 0x00／0xFF 之間反相（`sub_1CA6E` → EGA 的 `sub_1D01D`，位址 `A000:((列 + 5 + 2 × word_2DF18) × 0x28 + 行)`）。圖示列與白框在打字期間原樣留著（frame-056 與 frame-058 的差異只有對話框那 40 列），鍵盤整段交給文字欄。remake 的橫槓不閃，因此只與游標亮的那些畫格對拍；游標滅的畫格（frame-059／063／065）差的正好是那 8 個像素。",
+  "pair_count": 2,
+  "pass_count": 2,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "按下 MOUTH：訊息 18 的敘述與空的文字欄（游標在第 0 格）",
+      "remake": "docs/verification/remake-parity/shots/town-mouth/ask-empty.png",
+      "original": "docs/verification/character-ui/town-mouth-run1/frames/frame-058.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            98,
+            20,
+            18
+          ],
+          "differing_pixels": 41
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "打了兩個字元（游標移到第 2 格）",
+      "remake": "docs/verification/remake-parity/shots/town-mouth/ask-typed.png",
+      "original": "docs/verification/character-ui/town-mouth-run1/frames/frame-062.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": null,
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在對話框上畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            98,
+            20,
+            18
+          ],
+          "differing_pixels": 41
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

@@ -380,10 +380,12 @@ func (s *Session) BetSide(win bool) {
 	s.say(nonEmpty(s.uiLines(ArenaBetGoodRecord)), nil)
 }
 
-// refreshBet 把「多少錢」那一問與打到一半的數字放進對話框。
+// refreshBet 把「多少錢」那一問與打到一半的數字放進對話框。金額那格與 MOUTH、
+// 訓練共用原版的 `sub_1B5C8`（呼叫點 `0x1353E`），所以筆尖那格畫的是同一條橫槓
+// （見 TextCaret）——原版沒有取到競技場的畫格，這一條是從共用同一支函式推出來的。
 func (s *Session) refreshBet() {
 	lines := nonEmpty(s.uiLines(ArenaBetHowMuchRecord))
-	lines = append(lines, string(s.arena.digits)+"_")
+	lines = append(lines, string(s.arena.digits)+TextCaret)
 	s.Inside.Dialog = lines
 	s.Inside.DialogZh = nil
 	s.setInsideIcons(nil)

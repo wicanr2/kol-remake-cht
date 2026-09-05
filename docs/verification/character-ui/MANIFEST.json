@@ -21,7 +21,7 @@
     "png_format": "8-bit truecolor，無 palette／alpha"
   },
   "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
-  "total_frames": 6515,
+  "total_frames": 6583,
   "runs": [
     {
       "run": "accept-and-save-ranger-run1",
@@ -658,6 +658,21 @@
       "frame_dir": "docs/verification/character-ui/world-quest-execute-run1/frames",
       "character_files_changed": [],
       "note": "取的是執行段訊息框的版面（RE-089）：訊息區整條 (8,164) 296×32 換成白底加一片亮黃的圖案、文字白底黑字、整段轉大寫、起點 (24,168) 行高 6、移動成功要按兩次鍵。frame-963/965 還是紅磚底，frame-966 起換掉。"
+    },
+    {
+      "run": "town-mouth-run1",
+      "scenario": "town-mouth",
+      "description": "在旅店按 SPACEBAR 讓圖示列出現，白框移到 MOUTH 按 Return 開問話輸入框，逐鍵打進一個關鍵字並退格一次，觀察輸入框的起點、字往右長的方式與筆尖那條橫槓；最後按 Return 送出。純觀察，不保存。",
+      "receipt": "docs/verification/character-ui/town-mouth-run1/receipt.json",
+      "generated_utc": "2026-09-05T02:46:28Z",
+      "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+      "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+      "dosbox_cycles": "fixed 3000",
+      "checkpoint_count": 19,
+      "frame_count": 68,
+      "frame_dir": "docs/verification/character-ui/town-mouth-run1/frames",
+      "character_files_changed": [],
+      "note": "MOUTH 的文字欄版面對拍用（docs/verification/remake-parity/plan-town-mouth.json）：frame-058／062 是游標亮的畫格，059／063／065 是滅的。"
     }
   ]
 }
