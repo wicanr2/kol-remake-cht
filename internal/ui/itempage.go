@@ -1,6 +1,8 @@
 package ui
 
 import (
+	"fmt"
+
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/wicanr2/kol-remake-cht/internal/font"
@@ -12,7 +14,8 @@ import (
 //
 // 清單那十七列落在分隔線右邊的窄欄裡（字格欄 32 ＝ x 256），寬度剛好六個字元。
 // 沒有反白的列是青色（EGA 索引 3）、選中的是白色（0x0F）。
-func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage) {
+func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage,
+	party []town.Member) {
 	l := town.ItemPageLayout
 
 	// 原版這一頁是整頁重畫（`sub_1103F(0)` 之後才 `sub_18F3A(0)` 畫立繪），
@@ -34,8 +37,8 @@ func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage) {
 		cellIn(dst, f, l.ListCol, l.ListRow+i*l.ListStep, row, colour)
 	}
 
-	// 明細與空格那幾句都畫在左邊那一框裡。
-	if p.Detail == nil && len(p.Message) == 0 {
+	// 明細、空格那幾句與動作做完那一句都畫在左邊那一框裡。
+	if p.Detail == nil && len(p.Message) == 0 && len(p.Note) == 0 {
 		return
 	}
 	// 明細框是 `sub_1BA9D` 畫的：填黑加一圈白，**沒有投影**（那是 `sub_1B7E9`，
@@ -52,6 +55,19 @@ func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage) {
 	dr := l.Detail.Y0 + 2
 	sc := (town.DialogBox.TextX) / f.Advance()
 	sr := town.DialogBox.TextY
+	// 動作做完那一句蓋在明細上面（原版是整頁重畫再印，效果相同）。
+	if len(p.Note) > 0 {
+		for i, line := range p.Note {
+			cell(dst, f, dc, dr+i*town.LineStep, line)
+		}
+		if p.Giving {
+			for i, m := range party {
+				cell(dst, f, dc, dr+(i+2)*town.LineStep,
+					fmt.Sprintf("%d %s", i+1, m.Name))
+			}
+		}
+		return
+	}
 	if p.Detail != nil {
 		for _, seg := range p.Detail {
 			cell(dst, f, seg.Col-sc+dc, seg.Row-sr+dr, seg.Text)

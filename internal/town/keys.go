@@ -62,6 +62,19 @@ func (s *Session) Key(token string) bool {
 		return false
 	}
 	switch {
+	case s.ShowingItemPage():
+		// 物品那一頁：上下選格，數字鍵在問「給誰」的時候選人（RE-127）。
+		switch token {
+		case "U":
+			s.MoveItemSelection(-1)
+			return true
+		case "D":
+			s.MoveItemSelection(1)
+			return true
+		case "1", "2", "3", "4", "5", "6":
+			s.Digit(int(token[0] - '1'))
+			return true
+		}
 	case s.InArena():
 		switch token {
 		case "U":

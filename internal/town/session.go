@@ -302,8 +302,20 @@ func (s *Session) acceptInside() {
 		// 那一頁只剩 U-TURN，按下去回資料頁（`sub_166CC:0x167bb`）。
 		s.closeSpellList()
 	case s.ShowingItemPage():
-		// 那一頁只剩 U-TURN，按下去回資料頁（`sub_16986` 比的是回傳值的高位元組）。
-		s.closeItemPage()
+		p := s.Inside.ItemPage
+		switch {
+		case p.Giving:
+			// 等玩家按數字選人；U-TURN 取消。
+			if id == IconUTurn {
+				s.closeItemAction()
+			}
+		case p.Acting:
+			s.ItemAction(id)
+		case id == IconItemUse:
+			s.AcceptItemSlot()
+		case id == IconUTurn:
+			s.closeItemPage()
+		}
 	case s.ShowingSheet():
 		switch id {
 		case IconUTurn:
