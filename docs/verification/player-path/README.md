@@ -276,6 +276,22 @@ CYCLOPS，六人隊打不贏，所以壓成一隻 1 級。收據裡列了換過�
 存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,24,52`
 產生，`--location` 就是為了讓這種固定起點可以重生。
 
+## `town-stable`：買一匹坐騎
+
+`U RET SPACE > > > > RET D RET RET SPACE > RET > RET`，17 步，從存檔開場站在城 1
+Holcroft Stables 門邊。進門按 TRADE 開四匹的清單（永遠四筆、沒有捲動箭頭），
+選輕型戰馬看明細——圖在 (112, 86)、名字在右邊、問句在下面——答應買下扣掉
+400 枚金幣，店家講「Take these reins」。離開商店開 MIRROR：資料頁右上角多一塊
+坐騎，名牌只印四個字元（`LGT`），移動率從用走的 `U`（20）換成 `E`（4）。
+
+檢查點只有描述，**沒有 identical_to**：五間馬廄都不在城 7，而原版 oracle 目前
+只走得到城 7 的半途之家，所以這一頁還沒有原版對拍截圖。版面數字全部來自
+RE-120 的反組譯（`sub_1452D` 把游標設回 (0x0D, 0x56)，之後三段都從那裡推）。
+
+存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json
+--out workplace/saves/stable.json --gold 3000` 產生：原版名冊的角色都住城 7，
+錢也不夠買最便宜那一匹。
+
 ## 這份收據不宣稱什麼
 
 - 不宣稱可以從新遊戲一路玩到結局。接任務與回報各自走得通（`quest-take`、

@@ -1,0 +1,131 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "town-stable",
+  "description": "讀存檔開場在城 1 的 Holcroft Stables 門邊，走進去按 TRADE 看四匹坐騎：選輕型戰馬看明細（圖、名字與「要花你 400 金幣」），答應買下扣掉 400，店家講「Take these reins」；離開商店開 MIRROR，資料頁右上角多一塊坐騎（圖與只印四個字元的名牌 `LGT`），移動率從用走的 `U`（20）換成那一匹的 `E`（4）。全程只經過 town.Session。存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json --out workplace/saves/stable.json --gold 3000` 產生（RE-119／RE-120）。",
+  "script": "U RET SPACE > > > > RET D RET RET SPACE > RET > RET",
+  "step_count": 17,
+  "checkpoints": [
+    {
+      "step": 8,
+      "note": "四匹的清單：永遠四筆、沒有捲動箭頭（RE-119）"
+    },
+    {
+      "step": 10,
+      "note": "明細那一頁：圖在 (112, 86)、名字在欄 0x14 列 0x66、問句從列 0x7E 起（RE-120）"
+    },
+    {
+      "step": 11,
+      "note": "答應之後「Take these reins」，錢包從 3000 變 2600"
+    },
+    {
+      "step": 16,
+      "note": "資料頁右上角的坐騎：圖在 (264, 2)、名牌只印四個字元、移動率 E"
+    }
+  ],
+  "save": null,
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/town-stable/step-000.png",
+      "sha256": "fe8cbae7c35bab8915beeab5ab20bdf8a5028c9b97c4e62af12592c545c3886d"
+    },
+    {
+      "step": 1,
+      "token": "U",
+      "file": "docs/verification/player-path/town-stable/step-001.png",
+      "sha256": "c34c83ee88a7ccacb77cbca3cdfa57223715bb9039b6889063e44da917812731"
+    },
+    {
+      "step": 2,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-stable/step-002.png",
+      "sha256": "712ad33d076dcb3954466ab75b24dda92a597be0fd41a37f67ebe08956080a5a"
+    },
+    {
+      "step": 3,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-stable/step-003.png",
+      "sha256": "8895e9228445cc5d192bbcbfe50d019204b3cf348725248c387fd4d8d31621ec"
+    },
+    {
+      "step": 4,
+      "token": ">",
+      "file": "docs/verification/player-path/town-stable/step-004.png",
+      "sha256": "92a53ab6b3e734c4aa569bfaea594c829a9c60e8f1ba72370a91e17acf34777c"
+    },
+    {
+      "step": 5,
+      "token": ">",
+      "file": "docs/verification/player-path/town-stable/step-005.png",
+      "sha256": "26b27551b87ba44230f6c2186f5fde9a00907688445c9e91f3103ae4dd05cf81"
+    },
+    {
+      "step": 6,
+      "token": ">",
+      "file": "docs/verification/player-path/town-stable/step-006.png",
+      "sha256": "070f01a64f7ec7c6f86072b2262a6ffb22f7991d2591ab25eea2be7800d920fd"
+    },
+    {
+      "step": 7,
+      "token": ">",
+      "file": "docs/verification/player-path/town-stable/step-007.png",
+      "sha256": "7793ac9078efca9f1e306dd89a00473853c9efb4792952047b19274895995c83"
+    },
+    {
+      "step": 8,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-stable/step-008.png",
+      "sha256": "adde1ad35ed089b3172af3c2af2cef0411713c052bb104da52002d87e02eafbe"
+    },
+    {
+      "step": 9,
+      "token": "D",
+      "file": "docs/verification/player-path/town-stable/step-009.png",
+      "sha256": "4838bd9cc77c691afe1e6035f4987c51fd0dec4c338d7455953650bce1febe4b"
+    },
+    {
+      "step": 10,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-stable/step-010.png",
+      "sha256": "e13fa3faaa001b13694d8e540e28430f60188879b618e639e44ca8375387d7a5"
+    },
+    {
+      "step": 11,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-stable/step-011.png",
+      "sha256": "80c773fb69c6099247a2bacc4bb5f87649c7463a66eb6186b70bc1c049f00d1b"
+    },
+    {
+      "step": 12,
+      "token": "SPACE",
+      "file": "docs/verification/player-path/town-stable/step-012.png",
+      "sha256": "4838bd9cc77c691afe1e6035f4987c51fd0dec4c338d7455953650bce1febe4b"
+    },
+    {
+      "step": 13,
+      "token": ">",
+      "file": "docs/verification/player-path/town-stable/step-013.png",
+      "sha256": "47762064e00b10688ae32f5c3e9dab907848df9b23baa6889119faa5c8438c38"
+    },
+    {
+      "step": 14,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-stable/step-014.png",
+      "sha256": "8895e9228445cc5d192bbcbfe50d019204b3cf348725248c387fd4d8d31621ec"
+    },
+    {
+      "step": 15,
+      "token": ">",
+      "file": "docs/verification/player-path/town-stable/step-015.png",
+      "sha256": "92a53ab6b3e734c4aa569bfaea594c829a9c60e8f1ba72370a91e17acf34777c"
+    },
+    {
+      "step": 16,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-stable/step-016.png",
+      "sha256": "23b096e6c7cbbf14d59e46b88386cd0ac3a7177fe13c7bb89525cd24ad1ffcd9"
+    }
+  ]
+}

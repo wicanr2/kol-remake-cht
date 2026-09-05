@@ -64,8 +64,12 @@ GOODS_PRICE_OFFSET = 8
 # 馬廄那一筆裡另有兩欄（RE-119）：第 0 個 byte 是 STEEDPIC 的圖號
 # （`sub_11A93:0x12A47` 把它傳給 `sub_1A4FE`），`+0x78`／`+0x79` 是大端的價錢
 # （`0x12B1C`…`0x12B3E` 組成 32 位元之後才扣折扣）。
+# `+0x7A` 是移動率：買下之後 `+0x70`…`+0x7F` 整段抄進角色記錄 `+0x1B0`
+# （`0x12CC9`），而算隊伍腳程的 `sub_29004:0x290A6` 讀的正是角色 `+0x1BA`
+# ＝ 坐騎那一段的第 10 個 byte。數字越大越慢，0 代入 20（用走的）。
 STEED_STRIDE, STEED_NAME_OFFSET, STEED_MAX = 0x80, 0x70, 4
 STEED_PRICE_OFFSET = 0x78
+STEED_MOVEMENT_OFFSET = 0x7A
 # 訓練建築（旗標 bit7）教的技能表：payload 0x50 起，一筆 12 byte、四筆（RE-076）。
 # 位移 +8 是武器識別，+0x0A／+0x0B 是這門課收得起的技能值上下限。
 SKILL_OFFSET, SKILL_STRIDE, SKILL_END = 0x50, 0x0C, 0x80
@@ -108,6 +112,7 @@ def goods(body: bytes, flags: int) -> list[dict]:
                         "picture": body[base],
                         "price": body[base + STEED_PRICE_OFFSET] << 8
                                  | body[base + STEED_PRICE_OFFSET + 1],
+                        "movement": body[base + STEED_MOVEMENT_OFFSET],
                         "record": body[base:base + STEED_STRIDE].hex()})
         return out
     for k in range(GOODS_MAX):
@@ -294,7 +299,8 @@ def main() -> int:
                      "就結束；名稱 5-bit 壓縮，價錢是 `(rec[8] & 0x0F) << 8 | rec[9]`。"
                      f"馬廄（bit5）一筆 0x{STEED_STRIDE:02X} byte、名稱在 "
                      f"+0x{STEED_NAME_OFFSET:02X}、圖號在第 0 個 byte、"
-                     f"價錢在 +0x{STEED_PRICE_OFFSET:02X} 起兩個 byte（大端）。",
+                     f"價錢在 +0x{STEED_PRICE_OFFSET:02X} 起兩個 byte（大端）、"
+                     f"移動率在 +0x{STEED_MOVEMENT_OFFSET:02X}。",
             "picture": "TWN{n}PICS[2i+3]，192×96，畫在地圖視窗 (104,58)",
             "portrait": "TWN{n}PICS[2i+2]，88×64，畫在 (8,64)",
             "text": "TOWNn.0 payload i+4（索引 ≥ 0x14 再加 1）；名稱在 0、人物在 29，"

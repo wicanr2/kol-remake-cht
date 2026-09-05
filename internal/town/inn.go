@@ -39,6 +39,10 @@ type Member struct {
 	Backpack []Good `json:"backpack,omitempty"`
 	// Worn 是穿在身上的東西，一個部位一格；nil 代表那個部位是空的。
 	Worn [WornSlots]*Good `json:"worn,omitempty"`
+	// Steed 是身上那一匹坐騎：角色記錄 `+0x1B0` 起十六個 byte，內容抄自馬廄那一筆的
+	// `+0x70`…`+0x7F`（名稱在前、價錢在 +8／+9，RE-119）。nil 代表沒有坐騎——
+	// 原版名冊十六槽那十六個 byte 全是零，所以馬廄是唯一的入口。
+	Steed *Good `json:"steed,omitempty"`
 	// Spells 是角色記錄 0x200 起那十六筆法術（RE-100）；空的那一格不收進來。
 	Spells []Spell `json:"spells,omitempty"`
 	// Progress 是角色記錄 0x1DD 起那五格「已回報的任務數」（RE-107）。
@@ -71,6 +75,11 @@ type Inn struct {
 	SheetLabels []Segment `json:"sheet_labels,omitempty"`
 	// Detail 是商品明細面板：畫在對話框裡的帶座標文字（RE-075）。
 	Detail []Segment `json:"detail,omitempty"`
+	// Steed 非 nil 時對話框裡多一匹馬：馬廄的明細頁（RE-120）。
+	Steed *SteedPic `json:"steed,omitempty"`
+	// DialogRow 非 0 時對話框的文字改從這一列起。馬廄那一頁的問句在第 0x7E 列，
+	// 不是對話框預設的 0x56（RE-120）。
+	DialogRow int `json:"dialog_row,omitempty"`
 	Title []string   `json:"title"`
 	Dialog   []string `json:"dialog"`
 	DialogZh []string `json:"dialog_zh"`
@@ -81,6 +90,13 @@ type Inn struct {
 
 	// List 非 nil 時對話框畫的是可選清單而不是台詞（招募同伴用）。
 	List *InnList `json:"-"`
+}
+
+// SteedPic 是一張坐騎圖：`STEEDS` 的第 Picture 張，40×38（RE-120）。
+// Name 是那一匹的名字，馬廄明細頁印在圖的右邊、角色資料頁印在圖的下面。
+type SteedPic struct {
+	Picture int    `json:"picture"`
+	Name    string `json:"name,omitempty"`
 }
 
 // LoadInn 讀取旅店畫面的樣本狀態。這份 JSON 只作對拍輸入，不是遊戲資料模型。

@@ -12,8 +12,8 @@ import (
 // drawSheet 畫 MIRROR 的角色資料頁（RE-074）。畫的順序與原版相同：
 // 先五個框與兩條青色長條，再把標籤那一筆記錄按 `~V`／`~H` 座標放上去，
 // 最後才是各欄的數值——長條上的紅色也在標籤之前，因為原版是先畫框再畫字。
-func drawSheet(dst *ebiten.Image, f *font.Font, labels []town.Segment,
-	p *town.SheetPage) {
+func drawSheet(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	labels []town.Segment, p *town.SheetPage) error {
 	l := town.SheetLayout
 
 	box(dst, l.Header, town.ColourSheetHeader)
@@ -71,6 +71,33 @@ func drawSheet(dst *ebiten.Image, f *font.Font, labels []town.Segment,
 	if p.Shield != "" {
 		cell(dst, f, l.ShieldCol-len([]rune(p.Shield)), l.EquipRow, p.Shield)
 	}
+	// 有坐騎才有右上角那一塊（RE-120）。
+	if p.Steed != nil {
+		return drawSheetSteed(dst, sprites, f, p.Steed)
+	}
+	return nil
+}
+
+// drawSheetSteed 畫資料頁右上角那一匹：先清黑，再放 40×38 的圖，
+// 上下兩個白框共用一道投影，名字印在下面那格（RE-120）。
+func drawSheetSteed(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	s *town.SteedPic) error {
+	l := town.SheetSteed
+	pic, err := sprites.Get("STEEDS", s.Picture)
+	if err != nil {
+		return err
+	}
+	fill(dst, l.Fill.X0, l.Fill.Y0, l.Fill.Width(), l.Fill.Height(),
+		town.ColourBoxFill)
+	draw(dst, pic, l.X, l.Y)
+	frame(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
+		town.ColourBoxEdge)
+	frame(dst, l.Plate.X0, l.Plate.Y0, l.Plate.Width(), l.Plate.Height(),
+		town.ColourBoxEdge)
+	shadow(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(),
+		l.Plate.Y1-l.Frame.Y0+1)
+	cell(dst, f, l.NameCol, l.NameRow, s.Name)
+	return nil
 }
 
 // box 畫一個框：原版 `sub_1BA9D` 先把內部填黑、再畫外框，最後補右下投影

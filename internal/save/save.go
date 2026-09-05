@@ -137,6 +137,19 @@ type Member struct {
 	// AdventurePoints 是角色記錄的冒險點數（RE-096）：打贏一場加一份、訓練花掉
 	// 一份（RE-076），所以它也是會變的。同樣用指標，0 是合法值。
 	AdventurePoints *int `json:"adventure_points,omitempty"`
+	// Steed 是身上那一匹坐騎（RE-119）：原版買下之後抄進角色記錄 `+0x1B0`，
+	// 沒買過就是空的。存檔帶著它，重載才知道以舊換新要折抵多少。
+	Steed *Steed `json:"steed,omitempty"`
+}
+
+// Steed 是一匹坐騎。欄位對應馬廄那一筆記錄裡讀得出來的那幾欄（RE-119）：
+// 圖號、名字、標價與移動率。移動率要帶著，重載之後隊伍腳程才不會退回用走的。
+type Steed struct {
+	Index    int    `json:"index"`
+	Name     string `json:"name"`
+	Price    int    `json:"price"`
+	Picture  int    `json:"picture"`
+	Movement int    `json:"movement,omitempty"`
 }
 
 // Save 是一份存檔。

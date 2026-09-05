@@ -579,9 +579,28 @@ func savedParty(s *save.Save) []town.Member {
 			Quests: append([]int(nil), m.Quests...),
 			Progress: append([]int(nil), m.Progress...),
 			Carried: decodeCarried(m.Carried),
+			Steed:   townSteed(m.Steed),
 		})
 	}
 	return out
+}
+
+// townSteed／savedSteed 換算坐騎那一欄。城鎮那一側用的是商品記錄，存檔只留
+// 讀得出來的那三欄（RE-119）。
+func townSteed(s *save.Steed) *town.Good {
+	if s == nil {
+		return nil
+	}
+	return &town.Good{Index: s.Index, Name: s.Name, Price: s.Price,
+		Picture: s.Picture, Movement: s.Movement}
+}
+
+func savedSteed(g *town.Good) *save.Steed {
+	if g == nil {
+		return nil
+	}
+	return &save.Steed{Index: g.Index, Name: g.Name, Price: g.Price,
+		Picture: g.Picture, Movement: g.Movement}
 }
 
 // decodeCarried 把存檔裡那十七格 hex 換回位元組；長度不對的一格當成空的。
@@ -703,6 +722,7 @@ func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
 			Quests: append([]int(nil), m.Quests...),
 			Progress: append([]int(nil), m.Progress...),
 			Carried: encodeCarried(m.Carried),
+			Steed:   savedSteed(m.Steed),
 			Rank:    savedRank(m),
 			AdventurePoints: savedPoints(m),
 		})
@@ -2671,7 +2691,8 @@ func main() {
 					if loaded != nil && i < len(loaded.Party) &&
 						playSession.Party[i].Sheet != nil &&
 						(loaded.Party[i].Rank != nil ||
-							loaded.Party[i].AdventurePoints != nil) {
+							loaded.Party[i].AdventurePoints != nil ||
+							loaded.Party[i].Steed != nil) {
 						// 複製一份再改：資料頁那份是與名冊共用的指標，
 						// 直接改會連招募清單上的數字一起動到。
 						sheet := *playSession.Party[i].Sheet
@@ -2680,6 +2701,11 @@ func main() {
 						}
 						if loaded.Party[i].AdventurePoints != nil {
 							sheet.AdventurePoints = *loaded.Party[i].AdventurePoints
+						}
+						// 買來的坐騎帶著移動率（角色記錄 +0x1BA 落在坐騎那
+						// 十六個 byte 裡，RE-119）；沒帶就維持角色檔的值。
+						if st := loaded.Party[i].Steed; st != nil {
+							sheet.MovementRate = st.Movement
 						}
 						playSession.Party[i].Sheet = &sheet
 					}

@@ -221,3 +221,39 @@ func TestSpeakerFallsBackToLeader(t *testing.T) {
 		t.Fatalf("隊伍空的時候應該回 -1，回的是 %d", s.Speaker())
 	}
 }
+
+// 買下的坐騎要跟著存檔往返；沒買過就不寫這一欄。
+func TestSteedRoundTrip(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "slot1.json")
+	in := sample()
+	in.Party[0].Steed = &Steed{Index: 2, Name: "Med Warhorse",
+		Price: 800, Picture: 2}
+	if err := Write(path, in); err != nil {
+		t.Fatalf("寫入失敗：%v", err)
+	}
+	got, err := Read(path)
+	if err != nil {
+		t.Fatalf("讀取失敗：%v", err)
+	}
+	if got.Party[0].Steed == nil || got.Party[0].Steed.Price != 800 ||
+		got.Party[0].Steed.Name != "Med Warhorse" {
+		t.Fatalf("坐騎讀成 %+v", got.Party[0].Steed)
+	}
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("讀檔失敗：%v", err)
+	}
+	if !strings.Contains(string(raw), `"steed"`) {
+		t.Fatal("存檔裡沒有 steed 欄")
+	}
+	out := sample()
+	if err := Write(path, out); err != nil {
+		t.Fatalf("寫入失敗：%v", err)
+	}
+	if raw, err = os.ReadFile(path); err != nil {
+		t.Fatalf("讀檔失敗：%v", err)
+	}
+	if strings.Contains(string(raw), "steed") {
+		t.Fatal("沒買過坐騎不該寫出 steed 欄")
+	}
+}

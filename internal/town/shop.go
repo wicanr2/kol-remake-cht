@@ -35,6 +35,11 @@ const (
 	PositionNameRecord   = 0xBB // Head…Food
 	// FitOfferRecord 是 `"If you want this fitted`。
 	FitOfferRecord = 0x33
+	// 馬廄那三句（RE-119）：明細那一頁的 `"If you want this steed`，
+	// 以及交出舊坐騎的 `"Give me your reins."` 與交付的 `"Take these reins."`。
+	SteedOfferRecord = 0xCD
+	GiveReinsRecord  = 0x65
+	TakeReinsRecord  = 0x66
 	// EquipRecord 是 `"I'll put this on you."`；PackedRecord 是 `"I'll pack it for you."`。
 	EquipRecord  = 0x5C
 	PackedRecord = 0x5D
@@ -76,6 +81,12 @@ type Good struct {
 	// SizeClass 是 rec[14] 的低 nibble：合身的三張表都用它當索引（RE-075）。
 	SizeClass int    `json:"size_class"`
 	Record    string `json:"record"`
+	// Picture 只有馬廄那四匹有：記錄第 0 個 byte，是 `STEEDPIC` 的圖號（RE-119）。
+	Picture int `json:"picture,omitempty"`
+	// Movement 也只有那四匹有：記錄 `+0x7A`。買下之後整段 `+0x70`…`+0x7F` 抄進
+	// 角色記錄 `+0x1B0`，而算隊伍腳程的 `sub_29004:0x290A6` 讀的就是 `+0x1BA`
+	// ＝ 這一格。數字越大越慢：輕型戰馬 4、中型 6、重型 8、駄馬 10，用走的是 20。
+	Movement int `json:"movement,omitempty"`
 }
 
 // ConditionStep 是狀態名稱的檔次：超過 0x20／0x40／0x80 各加一。
@@ -127,11 +138,6 @@ func (s *Session) StartShop() {
 	if s.Mode != ModeInside || s.Inside == nil || s.door == nil {
 		return
 	}
-	if s.door.IsStable() {
-		// 馬廄的商品表是另一種版面，還沒實作。
-		s.note("馬廄")
-		return
-	}
 	if len(s.door.Goods) == 0 {
 		s.note(iconName(IconTrade))
 		return
@@ -147,6 +153,7 @@ func (s *Session) showShopList() {
 	s.Inside.Dialog = nil
 	s.Inside.DialogZh = nil
 	s.Inside.Detail = nil
+	s.clearSteedPic()
 	s.Inside.List = s.shopView()
 	s.setInsideIcons([]int{IconYes, IconUTurn})
 }
@@ -221,14 +228,43 @@ func (s *Session) shopAnswer(id int) {
 }
 
 // showGood 把對話框換成商品明細與「要買嗎」。
+//
+// 馬廄那一頁不一樣（RE-119）：沒有明細欄位，問句是記錄 0xCD ＋ 0x53 ＋ 價錢 ＋ 0x54
+// （與住宿、治療、訓練同一套），而價錢先扣掉身上那一匹的一半。
 func (s *Session) showGood() {
 	s.shop.stage = shopConfirm
 	g := s.shop.goods[s.shop.cursor]
 	s.Inside.List = nil
-	s.Inside.Dialog = nonEmpty(s.uiLines(AskBuyRecord))
 	s.Inside.DialogZh = nil
+	if s.door.IsStable() {
+		s.Inside.Detail = nil
+		s.Inside.Steed = &SteedPic{Picture: g.Picture, Name: g.Name}
+		s.Inside.DialogRow = StablePic.AskRow
+		s.Inside.Dialog = s.priceLines(SteedOfferRecord, s.steedPrice(g))
+		s.setInsideIcons([]int{IconYes, IconNo})
+		return
+	}
+	s.Inside.Dialog = nonEmpty(s.uiLines(AskBuyRecord))
 	s.Inside.Detail = s.goodDetail(g)
 	s.setInsideIcons([]int{IconYes, IconNo})
+}
+
+// SteedFloor 是折抵之後一毛不剩時收的價（`0x12B79` 的 0x32）。
+const SteedFloor = 50
+
+// steedPrice 是這一匹對發言者的實收價（`0x12B1C`…`0x12B94`，RE-119）：
+// 標價減掉身上那一匹價錢的一半，**減完不大於 0 才收 50**——原版的判準是
+// 差額本身，不是「不足 50」，所以差額 1…49 照收差額。四匹的價錢是 200 起
+// 的倍增數列，這兩種寫法在原版資料上結果一樣，但公式要照原版。
+func (s *Session) steedPrice(g Good) int {
+	price := g.Price
+	if i := s.speakerIndex(); i >= 0 && s.Party[i].Steed != nil {
+		price -= s.Party[i].Steed.Price / 2
+	}
+	if price <= 0 {
+		return SteedFloor
+	}
+	return price
 }
 
 // buy 是答應要買：先看錢夠不夠。
@@ -237,6 +273,10 @@ func (s *Session) buy() {
 	i := s.speakerIndex()
 	if i < 0 {
 		s.endShop()
+		return
+	}
+	if s.door.IsStable() {
+		s.buySteed(i, g)
 		return
 	}
 	if s.Party[i].Gold < g.Price {
@@ -255,6 +295,40 @@ func (s *Session) buy() {
 		return
 	}
 	s.finishBuy(false)
+}
+
+// buySteed 是馬廄那一條（`0x12C11`…`0x12CF2`，RE-119）：錢不夠就照商店那一句退回
+// 清單；錢夠就扣錢，身上本來有一匹先講記錄 0x65（交出韁繩），再講 0x66 交付新的，
+// 最後把那一匹記進角色。
+//
+// **這一版沒有搬圖**：原版還會把 `STEEDPIC` 那張圖抄進角色圖像區（一槽 0x2F8
+// byte），而 remake 的坐騎圖是照 `Picture` 現查的，不必先搬。
+//
+// 抄進去的十六個 byte 裡有一格是移動率（`+0x1BA`），隊伍腳程與「要不要騎走」
+// 那一問都看它（RE-112／RE-119），所以買下的同時要改資料頁上的那個數字。
+func (s *Session) buySteed(i int, g Good) {
+	price := s.steedPrice(g)
+	if s.Party[i].Gold < price {
+		s.Inside.Detail = nil
+		s.shopSay(nonEmpty(s.uiLines(NotEnoughRecord)), s.showShopList)
+		return
+	}
+	s.Party[i].Gold -= price
+	lines := nonEmpty(s.uiLines(TakeReinsRecord))
+	if s.Party[i].Steed != nil {
+		lines = append(nonEmpty(s.uiLines(GiveReinsRecord)), lines...)
+	}
+	steed := g
+	s.Party[i].Steed = &steed
+	// 資料頁那一份與招募清單共用指標，複製一份再改移動率。
+	if sheet := s.Party[i].Sheet; sheet != nil {
+		copied := *sheet
+		copied.MovementRate = g.Movement
+		s.Party[i].Sheet = &copied
+	}
+	s.syncParty()
+	s.Inside.Detail = nil
+	s.shopSay(lines, s.showShopList)
 }
 
 // finishBuy 把東西放進背包；當場吃掉就不佔格子。背包滿了要講記錄 0xA2。
@@ -279,8 +353,18 @@ func (s *Session) finishBuy(eaten bool) {
 	s.offerFit(i, len(s.Party[i].Backpack)-1)
 }
 
+// clearSteedPic 把馬廄那一頁的坐騎圖與挪下去的問句位置收回來。
+func (s *Session) clearSteedPic() {
+	if s.Inside == nil {
+		return
+	}
+	s.Inside.Steed = nil
+	s.Inside.DialogRow = 0
+}
+
 // shopSay 顯示一段話，讀完之後接著做 next。
 func (s *Session) shopSay(lines []string, next func()) {
+	s.clearSteedPic()
 	s.say(lines, nil)
 	if s.shop != nil {
 		s.shop.next = next
@@ -295,6 +379,7 @@ func (s *Session) endShop() {
 	}
 	s.Inside.List = nil
 	s.Inside.Detail = nil
+	s.clearSteedPic()
 	s.Inside.Dialog = s.greeting()
 	s.Inside.DialogZh = nil
 	s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))

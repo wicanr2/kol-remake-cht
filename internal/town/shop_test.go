@@ -170,12 +170,12 @@ func TestShopListScrolls(t *testing.T) {
 	}
 }
 
-// 馬廄的商品表版面不同，還沒實作——按下去只記一筆。
-func TestStableNotImplemented(t *testing.T) {
+// 商品表是空的就開不起清單——按下去只記一筆。
+func TestEmptyShopNotesUnimplemented(t *testing.T) {
 	s := shopSession(t, 3000, [2]int{0x21, 0x00}, nil)
 	s.StartShop()
 	if s.Shopping() || len(s.Unimplemented) != 1 {
-		t.Fatalf("馬廄應該只記一筆未實作：%v", s.Unimplemented)
+		t.Fatalf("空商品表應該只記一筆未實作：%v", s.Unimplemented)
 	}
 }
 
@@ -348,5 +348,108 @@ func TestAdjustNotEnoughGold(t *testing.T) {
 	if s.Party[0].Gold != 1 || s.Party[0].Worn[0].Encumbrance != 6 {
 		t.Fatalf("買不起卻改了狀態：金幣 %d 尺寸 %d",
 			s.Party[0].Gold, s.Party[0].Worn[0].Encumbrance)
+	}
+}
+
+// stableGoods 是原版五間馬廄共用的那四匹（RE-119）。
+func stableGoods() []Good {
+	return []Good{
+		{Index: 0, Name: "Draft Horse", Price: 200, Picture: 0, Movement: 10},
+		{Index: 1, Name: "Lgt Warhorse", Price: 400, Picture: 1, Movement: 4},
+		{Index: 2, Name: "Med Warhorse", Price: 800, Picture: 2, Movement: 6},
+		{Index: 3, Name: "Hvy Warhorse", Price: 1600, Picture: 3, Movement: 8},
+	}
+}
+
+// 馬廄（旗標 bit5）開得起清單，選一匹之後問的是價錢那一句，不是商品明細。
+func TestStableBuysASteed(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x20, 0x00}, stableGoods())
+	s.StartShop()
+	if !s.Shopping() {
+		t.Fatal("按下 TRADE 應該進馬廄")
+	}
+	if s.Inside.List == nil || s.Inside.List.Rows[0] != "Draft Horse" {
+		t.Fatalf("清單是 %+v", s.Inside.List)
+	}
+	// 選第二匹（400）：明細那一格空著，問句帶著價錢。
+	s.MoveShop(1)
+	yes(s)
+	if s.Inside.Detail != nil {
+		t.Fatal("馬廄那一頁沒有商品明細")
+	}
+	if got := s.Inside.Dialog; len(got) == 0 {
+		t.Fatal("問句是空的")
+	}
+	// 答應：扣掉 400，坐騎記到發言者身上。
+	yes(s)
+	if s.Party[0].Gold != 2600 {
+		t.Fatalf("錢包是 %d，應為 2600", s.Party[0].Gold)
+	}
+	if s.Party[0].Steed == nil || s.Party[0].Steed.Name != "Lgt Warhorse" {
+		t.Fatalf("坐騎是 %+v", s.Party[0].Steed)
+	}
+}
+
+// 買下之後資料頁的移動率換成那一匹的（角色記錄 +0x1BA 落在坐騎那十六個 byte
+// 裡）；名冊上那一份不能跟著動。
+func TestStableSetsMovementRate(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x20, 0x00}, stableGoods())
+	shared := theodoric()
+	s.Party[0].Sheet = shared
+	s.StartShop()
+	s.MoveShop(1)
+	yes(s)
+	yes(s)
+	if s.Party[0].Sheet.MovementRate != 4 {
+		t.Fatalf("移動率是 %d，輕型戰馬應為 4", s.Party[0].Sheet.MovementRate)
+	}
+	if shared.MovementRate != 0 {
+		t.Fatalf("名冊那一份被改成 %d", shared.MovementRate)
+	}
+}
+
+// 身上已經有一匹就以舊換新：折抵舊的一半，折完不剩才收 50（`0x12B79`）。
+func TestStableTradesInTheOldSteed(t *testing.T) {
+	s := shopSession(t, 3000, [2]int{0x20, 0x00}, stableGoods())
+	old := stableGoods()[3] // Hvy Warhorse，1600
+	s.Party[0].Steed = &old
+	// Draft Horse 標價 200，折抵 800 → 剩負的，收 50。
+	if got := s.steedPrice(stableGoods()[0]); got != SteedFloor {
+		t.Fatalf("折抵之後是 %d，應為 %d", got, SteedFloor)
+	}
+	// Hvy Warhorse 標價 1600，折抵 800 → 800。
+	if got := s.steedPrice(stableGoods()[3]); got != 800 {
+		t.Fatalf("折抵之後是 %d，應為 800", got)
+	}
+	// 差額落在 1…49 時照收差額，不是收 50（原版比的是差額大不大於 0）。
+	cheap := Good{Index: 9, Name: "Nag", Price: 180}
+	s.Party[0].Steed = &Good{Index: 9, Name: "Nag", Price: 300}
+	if got := s.steedPrice(cheap); got != 30 {
+		t.Fatalf("差額 30 收成 %d", got)
+	}
+	s.Party[0].Steed = &old
+	s.StartShop()
+	s.MoveShop(3)
+	yes(s)
+	yes(s)
+	if s.Party[0].Gold != 2200 {
+		t.Fatalf("錢包是 %d，應為 3000 − 800 ＝ 2200", s.Party[0].Gold)
+	}
+	if s.Party[0].Steed == nil || s.Party[0].Steed.Name != "Hvy Warhorse" {
+		t.Fatalf("坐騎是 %+v", s.Party[0].Steed)
+	}
+}
+
+// 錢不夠就退回清單，坐騎不變。
+func TestStableRefusesWhenBroke(t *testing.T) {
+	s := shopSession(t, 100, [2]int{0x20, 0x00}, stableGoods())
+	s.StartShop()
+	yes(s)
+	yes(s)
+	if s.Party[0].Gold != 100 {
+		t.Fatalf("錢不夠不該扣錢，剩 %d", s.Party[0].Gold)
+	}
+	if s.Party[0].Steed != nil {
+		t.Fatalf("錢不夠不該給坐騎：%+v", s.Party[0].Steed)
 	}
 }

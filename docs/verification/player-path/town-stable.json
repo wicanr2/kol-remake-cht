@@ -1,0 +1,29 @@
+{
+ "name": "town-stable",
+ "description": "讀存檔開場在城 1 的 Holcroft Stables 門邊，走進去按 TRADE 看四匹坐騎：選輕型戰馬看明細（圖、名字與「要花你 400 金幣」），答應買下扣掉 400，店家講「Take these reins」；離開商店開 MIRROR，資料頁右上角多一塊坐騎（圖與只印四個字元的名牌 `LGT`），移動率從用走的 `U`（20）換成那一匹的 `E`（4）。全程只經過 town.Session。存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json --out workplace/saves/stable.json --gold 3000` 產生（RE-119／RE-120）。",
+ "script": "U RET SPACE > > > > RET D RET RET SPACE > RET > RET",
+ "shot_dir": "docs/verification/player-path/town-stable",
+ "size": [
+  320,
+  200
+ ],
+ "receipt": "docs/verification/player-path/town-stable-receipt.json",
+ "checkpoints": [
+  {
+   "step": 8,
+   "note": "四匹的清單：永遠四筆、沒有捲動箭頭（RE-119）"
+  },
+  {
+   "step": 10,
+   "note": "明細那一頁：圖在 (112, 86)、名字在欄 0x14 列 0x66、問句從列 0x7E 起（RE-120）"
+  },
+  {
+   "step": 11,
+   "note": "答應之後「Take these reins」，錢包從 3000 變 2600"
+  },
+  {
+   "step": 16,
+   "note": "資料頁右上角的坐騎：圖在 (264, 2)、名牌只印四個字元、移動率 E"
+  }
+ ]
+}

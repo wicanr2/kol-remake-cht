@@ -50,6 +50,46 @@ var (
 	DialogBox = Box{X: 102, Y: 84, Width: 195, Height: 68, TextX: 104, TextY: 86, LineStep: 8, Cells: 24}
 )
 
+// StablePic 是馬廄明細頁那一塊（RE-120）。進這一頁先呼叫 `sub_1452D`，它把對話框
+// 內部清成黑並把游標設回 (0x0D, 0x56)，之後三段都從那裡推：
+//
+//	圖   `sub_1C53D(段, 0x0E, 0x56, 0)`      → (0x0E × 8, 0x56) = (112, 86)
+//	名字 游標 +(7, 0x10)                     → 欄 0x14、列 0x66
+//	問句 游標欄設回 0x0D、列再 +0x18         → 欄 0x0D、列 0x7E
+var StablePic = struct {
+	X, Y                     int
+	NameCol, NameRow         int
+	AskRow                   int
+}{
+	X: 112, Y: 86,
+	NameCol: 0x14, NameRow: 0x66,
+	AskRow: 0x7E,
+}
+
+// SheetSteed 是角色資料頁右上角那一塊坐騎（`sub_16239:0x16275`…`0x1633b`，RE-120）：
+//
+//	sub_1B779(0x106, 2, 0x131, 0x2F, 0)     ; 先把 (262,2)–(305,47) 清成黑
+//	sub_1C53D(ds, 0x21, 2, 坐騎圖槽)         ; 圖畫在 (0x21 × 8, 2) = (264, 2)
+//	sub_1B6DC(0x105, 1, 0x132, 0x28, 0x0F)  ; 圖的白框 (261,1)–(306,40)
+//	sub_1B6DC(0x105, 0x28, 0x132, 0x30, 0x0F) ; 名牌白框 (261,40)–(306,48)
+//	sub_1B7E9(0x105, 1, 0x132, 0x30)        ; 兩格共用的投影
+//	word_2DF16 = 0x2A、word_2DF14 = 0x22    ; 名字印在 (272, 42)
+//
+// 名字**只印四個字元**：`0x1634c` 的迴圈界限寫死在 4，遇到 0 就提早停
+// （`Lgt Warhorse` 因此變成 `LGT`），這樣才塞得進 46 px 寬的名牌。
+var SheetSteed = struct {
+	Fill, Frame, Plate Rect
+	X, Y               int
+	NameCol, NameRow   int
+	NameChars          int
+}{
+	Fill:  Rect{262, 2, 305, 47},
+	Frame: Rect{261, 1, 306, 40},
+	Plate: Rect{261, 40, 306, 48},
+	X:     264, Y: 2,
+	NameCol: 0x22, NameRow: 0x2A, NameChars: 4,
+}
+
 // IconBar 是畫面底部的圖示列。框內 22×20 是圖示的第 1..22 欄——整張 24×20 圖示畫在
 // (X+Step*i, Y+1)，外框再蓋掉左右各一欄。
 var IconBar = struct{ X, Y, Step, Width, Height, Slots int }{

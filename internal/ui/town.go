@@ -26,7 +26,9 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 
 	// MIRROR 的角色資料頁蓋掉肖像、標題框與對話框那一整塊。
 	if in.Sheet != nil {
-		drawSheet(dst, small, in.SheetLabels, in.Sheet)
+		if err := drawSheet(dst, sprites, small, in.SheetLabels, in.Sheet); err != nil {
+			return err
+		}
 		// 任務一覽再蓋一層徽章（RE-111）。
 		if in.QuestList != nil {
 			if err := drawQuestBadges(dst, sprites, in.QuestList); err != nil {
@@ -50,7 +52,17 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		case in.List != nil:
 			drawInnList(dst, large, in.List)
 		default:
-			drawBox(dst, large, town.DialogBox, in.Dialog)
+			b := town.DialogBox
+			if in.DialogRow != 0 {
+				b.TextY = in.DialogRow
+			}
+			drawBox(dst, large, b, in.Dialog)
+			// 馬廄那一頁在同一個框裡多一匹馬與牠的名字（RE-120）。
+			if in.Steed != nil {
+				if err := drawSteed(dst, sprites, large, in.Steed); err != nil {
+					return err
+				}
+			}
 			// 商品明細畫在同一個對話框裡，座標由記錄自己帶（RE-075）。
 			for _, seg := range in.Detail {
 				cell(dst, large, seg.Col, seg.Row, seg.Text)
@@ -72,6 +84,18 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		}
 		frame(dst, x, b.Y, b.Width, b.Height, c)
 	}
+	return nil
+}
+
+// drawSteed 畫馬廄明細頁那一匹：圖在 (112, 86)，名字在圖的右邊（RE-120）。
+func drawSteed(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	s *town.SteedPic) error {
+	pic, err := sprites.Get("STEEDS", s.Picture)
+	if err != nil {
+		return err
+	}
+	draw(dst, pic, town.StablePic.X, town.StablePic.Y)
+	cell(dst, f, town.StablePic.NameCol, town.StablePic.NameRow, s.Name)
 	return nil
 }
 

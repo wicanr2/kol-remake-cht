@@ -151,6 +151,9 @@ type SheetPage struct {
 	DamageCells    int  `json:"damage_cells"`
 	NutritionCells int  `json:"nutrition_cells"`
 	Portrait   int      `json:"portrait"`
+	// Steed 非 nil 時右上角多一塊坐騎（RE-120）：原版看角色記錄 `+0x1B0` 是不是
+	// 零，非零才畫圖與名牌（`sub_16239:0x1625e`）。
+	Steed *SteedPic `json:"steed,omitempty"`
 }
 
 // KOLDATA 上與角色資料頁有關的記錄。
@@ -212,10 +215,23 @@ func (s *Session) buildSheet(m Member) *SheetPage {
 		NutritionCells: BarCells(sh.Nutrition),
 		Portrait:   m.Portrait,
 	}
+	if m.Steed != nil {
+		page.Steed = &SteedPic{Picture: m.Steed.Picture,
+			Name: steedPlateName(m.Steed.Name)}
+	}
 	if sh.Rank%5 != 0 {
 		page.RankRight = strings.ToUpper(s.uiRecord(RankRecord + sh.Rank))
 	}
 	return page
+}
+
+// steedPlateName 是資料頁名牌上那一格：大寫、只留前四個字元（RE-120）。
+func steedPlateName(name string) string {
+	up := []rune(strings.ToUpper(name))
+	if len(up) > SheetSteed.NameChars {
+		up = up[:SheetSteed.NameChars]
+	}
+	return strings.TrimRight(string(up), " ")
 }
 
 // sheetIcons 是資料頁的圖示列。後兩個要有東西才出現，本輪的原版存檔全部是空的，
