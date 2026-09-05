@@ -8158,7 +8158,26 @@ sub_10000+536:
 所以法術的「種族」「屬性」「骰式」這些名稱**不在 KOLDATA 裡，而在 MAGIC.0**
 ——這個檔案先前從來沒有被解過，remake 也沒有讀它。
 
+### 每一段的實際內容（`已證實`）
+
+`tools/extract_magic.py` 抽出來、`tools/verify_magic_dictionary.py` 對過答案：
+
+- **CLASS**（九筆）：None／Human／Elven／Dwarven／Kelden／Elemental／Giant／
+  Legendary／Undead。
+- **SUBCLASS**：**依 CLASS 分組**——Human…Kelden 那四組是清一色的 `All`，
+  Elemental 是 Golem／Sylph／Djinn／Salamandar，Giant 是 Goblin…Mist Giant 十二隻，
+  Legendary 是 Minotaur…Walbar 八隻，Undead 是 Gremlin／Ghoul／Zombie／Skeleton。
+  **二十八個名字裡二十七個一字不差地出現在 `monsters.json` 的三十二隻裡**，
+  唯一的例外是原版自己的拼字不一致：`MAGIC.0` 寫 `Salamandar`、`TOWN0` 的怪物表
+  寫 `SALAMANDER`。所以 CLASS／SUBCLASS 是「這個法術對哪一類、哪一種怪物有效」。
+- **STAT**（九筆）：None／Strength／Quickness／Foresight／Intellect／Fatigue／
+  Body／Off. Skill／Def. Skill。
+- **骰式**（四十八筆）：`1-3`、`2-6`…`8-24`、`1-4`…`8-32`、`1-6`…每八筆一組。
+- **成本**：索引就是那一格的整個 byte（高 nibble ＝ CLASS、低 nibble ＝ SUBCLASS）。
+  對 Golem（0x51）要 100 點冒險點數 ＋ 50 金冠，對 Salamandar（0x54）要 400 ＋ 200
+  ——**越強的怪物，讓法術對它有效就越貴**。
+
 ### 還沒做的
 
-抽取器與 typed data、法術編輯器那一頁的實作。`0x200` 段（欄位 0x0B／0x0C 寫回時
-用的值表）與 `0x120`…`0x150` 的內容也還沒逐筆對。
+Go 端讀進來、法術編輯器那一頁的實作。`0x200` 段（欄位 0x0B／0x0C 寫回時用的值表）
+與 `0x120`…`0x150` 的內容也還沒逐筆對。
