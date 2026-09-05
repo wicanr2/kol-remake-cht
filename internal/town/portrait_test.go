@@ -1,6 +1,12 @@
 package town
 
-import "testing"
+import (
+	"path/filepath"
+	"sort"
+	"testing"
+
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
+)
 
 // rec 造一格身上的原始十六 byte：種類、class 與外觀號放在原版的位置。
 func rec(kind, class, style int) []byte {
@@ -77,5 +83,25 @@ func TestFigureEmptySlotsAreNegative(t *testing.T) {
 	}
 	if f.Weapon != nil || f.Shield != nil || f.Spare != nil {
 		t.Fatalf("空的那幾格應該是 nil：%+v", f)
+	}
+}
+
+// 物品那一頁的清單就是身上那十七格，只是順序不同（RE-127）。
+func TestItemSlotsAreTheCarriedSlots(t *testing.T) {
+	l, err := portrait.Load(filepath.Join("..", "..", "assets",
+		"original-derived-data", "portrait-layout.json"))
+	if err != nil {
+		t.Skip("沒有 portrait-layout.json，跳過")
+	}
+	want := CarriedOffsets()
+	got := append([]int(nil), l.ItemSlots...)
+	sort.Ints(got)
+	if len(got) != len(want) {
+		t.Fatalf("清單有 %d 項，身上有 %d 格", len(got), len(want))
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("第 %d 格是 0x%x，身上那一組是 0x%x", i, got[i], want[i])
+		}
 	}
 }

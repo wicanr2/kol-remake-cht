@@ -45,7 +45,13 @@ type Layout struct {
 	// PartyX 是第 n 個畫的人往右挪幾個 byte 欄。
 	PartyLayer []int `json:"party_layer"`
 	PartyX     []int `json:"party_x"`
+	// ItemSlots 是物品那一頁的清單項 → 角色記錄位移（RE-127）：穿戴欄十格、
+	// 手上那件、背包六格，順序就是清單上的順序。
+	ItemSlots []int `json:"item_slots"`
 }
+
+// ItemSlotCount 是物品那一頁的清單有幾項。
+const ItemSlotCount = 17
 
 // Load 讀一份版面表。欄位少一塊就直接失敗——立繪少一層不會有錯誤訊息，
 // 只會靜靜地畫錯，所以寧可開不起來。
@@ -97,6 +103,17 @@ func (l *Layout) check() error {
 	if len(l.PartyLayer) != builds || len(l.PartyX) != builds {
 		return fmt.Errorf("隊伍頁那兩張表是 %d／%d 筆，應該都是 %d",
 			len(l.PartyLayer), len(l.PartyX), builds)
+	}
+	if len(l.ItemSlots) != ItemSlotCount {
+		return fmt.Errorf("物品頁的清單有 %d 項，應該是 %d",
+			len(l.ItemSlots), ItemSlotCount)
+	}
+	seen := make(map[int]bool, len(l.ItemSlots))
+	for _, off := range l.ItemSlots {
+		if seen[off] {
+			return fmt.Errorf("物品頁的清單有重複的位移 0x%x", off)
+		}
+		seen[off] = true
 	}
 	return nil
 }

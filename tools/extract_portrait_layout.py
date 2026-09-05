@@ -40,6 +40,8 @@ WEAPONS = 28        # WEAPPICS 的組數
 SHIELDS = 4         # SHLDPICS 的組數
 HANDS = 12          # HANDPICS 的組數
 WEAPON_KINDS = 8    # `+0x3D` 除以 0x20 得到的武器種類
+# 物品那一頁的清單有十七項：穿戴欄十格 ＋ 手上那件 ＋ 背包六格（RE-127）。
+ITEM_SLOTS = 17
 
 TABLES = {
     "body": 0x168,          # 3 byte × 6：x1、y1、x2（y2 固定 0x9A）
@@ -53,14 +55,15 @@ TABLES = {
     "hand_pos": 0x5DA,      # 2 byte × 12
     "weapon_base": 0x5F2,   # byte × 8：武器種類 → WEAPPICS 的起始 payload 索引
     "names": 0x5FA,         # 5 byte × 6：head、tor、legs、weap、shld、hand
+    "item_slots": 0x618,    # word × 17：物品那一頁的清單項 → 角色記錄位移（RE-127）
     "party_layer": 0x66A,   # byte × 6：隊伍頁由後往前畫的層次
     "mode": 0x670,          # 5 byte × 3：pics（EGA）、pcga、herc
     "party_x": 0x680,       # word × 6：隊伍頁第 n 個畫的人往右挪多少
 }
-# 表分成幾串。第一串 0x168…0x618 是立繪自己的版面，一路首尾相接；中間隔著兩張
-# 與立繪無關的表（0x618 的十六個 word 與 0x636 的十二個月份名），0x66A 起才是隊伍頁
+# 表分成幾串。第一串 0x168…0x63A 首尾相接：立繪的版面接六個圖庫名，再接物品那一頁
+# 的清單位移表；之後是十二個月份名（0x63A…0x66A，與這裡無關），0x66A 起才是隊伍頁
 # 那三張——其中 0x67F 是一個填充 byte，把後面那張 word 表推到偶數位址。
-RUNS = ((0x168, 0x618), (0x66A, 0x67F), (0x680, 0x68C))
+RUNS = ((0x168, 0x63A), (0x66A, 0x67F), (0x680, 0x68C))
 
 
 def cstr(raw: bytes) -> str:
@@ -101,6 +104,7 @@ def main() -> int:
         "hand_pos": 2 * HANDS,
         "weapon_base": WEAPON_KINDS,
         "names": 5 * 6,
+        "item_slots": 2 * ITEM_SLOTS,
         "party_layer": BUILDS,
         "mode": 5 * 3,
         "party_x": 2 * BUILDS,
@@ -152,6 +156,7 @@ def main() -> int:
              for i in range(HANDS)]
 
     party_x = dg(TABLES["party_x"], 2 * BUILDS)
+    item_slots = dg(TABLES["item_slots"], 2 * ITEM_SLOTS)
     doc = {
         "schema": "kol-portrait-layout-v1",
         "source": exe.name,
@@ -166,6 +171,8 @@ def main() -> int:
         "shields": shields,
         "hands": hands,
         "weapon_base": list(dg(TABLES["weapon_base"], WEAPON_KINDS)),
+        "item_slots": [int.from_bytes(item_slots[2 * i:2 * i + 2], "little")
+                       for i in range(ITEM_SLOTS)],
         "party_layer": list(dg(TABLES["party_layer"], BUILDS)),
         "party_x": [int.from_bytes(party_x[2 * i:2 * i + 2], "little", signed=True)
                     for i in range(BUILDS)],
