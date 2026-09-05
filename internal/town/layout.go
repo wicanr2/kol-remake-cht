@@ -272,3 +272,17 @@ var ItemPageLayout = struct {
 // PartyPageFrame 是隊伍立繪那一頁的外框（`sub_18D61` 收尾的
 // `sub_1B6DC(0x0E, 2, 0x131, 0x9C, 3)`，RE-126）。比物品頁那一圈往左一個像素。
 var PartyPageFrame = Rect{14, 2, 305, 156}
+
+// SheetPageBack 是資料頁那兩頁（物品、隊伍立繪）的背景（`sub_1103F`，RE-127）。
+// 在城裡是 KOLPICS 第 5 張（上半）加第 13 張（下半），兩張各 288 px 寬；
+// 在城外換成第 4 張整張（288×155）。`word_2DF2C` 是那個開關，語意還沒解，
+// 而這兩頁只在建築內開得到，所以 remake 走「在城裡」那一條。
+var SheetPageBack = struct {
+	Archive            string
+	TopIndex, LowIndex int
+	OutdoorIndex       int
+	X, TopY, LowY      int
+}{
+	Archive: "KOLPICS", TopIndex: 5, LowIndex: 13, OutdoorIndex: 4,
+	X: 16, TopY: 3, LowY: 0x50,
+}

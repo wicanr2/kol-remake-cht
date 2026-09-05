@@ -20,15 +20,14 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 	party []town.Member) error {
 	l := town.ItemPageLayout
 
-	// 原版這一頁的背景是另外載的一張圖（`sub_1103F(0x20)`／`(0x21)`），畫面上是
-	// 一間木屋的內裝——**那張圖是哪個 archive 的第幾張還沒認出來**（RE-127），
-	// 所以這裡先整塊清成黑。原版畫面收據在 `workplace/observe/sheet-items2`。
+	// 畫的順序照原版：整頁清掉 → 背景 → 立繪 → 右邊那條窄欄清成黑 → 框與分隔線
+	// → 清單（`sub_1103F(0)`、`(0x21)`／`(0x64)`、`sub_18F3A(0)`、`sub_1B779`、
+	// `sub_1B6DC`、`sub_1BB57`、`sub_196A9`）。
 	fill(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
 		town.ColourBoxFill)
-	frame(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
-		town.ColourSheetFrame)
-	fill(dst, l.Divider.X0, l.Divider.Y0,
-		l.Divider.Width(), l.Divider.Height(), town.ColourSheetFrame)
+	if err := drawSheetPageBack(dst, sprites); err != nil {
+		return err
+	}
 
 	// 左邊那個人：一層一層貼上去，順序就是原版畫的順序（RE-126）。
 	// X 與寬的單位是 byte 欄，所以乘八才是像素。
@@ -39,6 +38,13 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 		}
 		draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
 	}
+
+	fill(dst, l.RightPane.X0, l.RightPane.Y0,
+		l.RightPane.Width(), l.RightPane.Height(), town.ColourBoxFill)
+	frame(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
+		town.ColourSheetFrame)
+	fill(dst, l.Divider.X0, l.Divider.Y0,
+		l.Divider.Width(), l.Divider.Height(), town.ColourSheetFrame)
 
 	for i, row := range p.Rows {
 		colour := town.ColourListIdle
@@ -138,6 +144,9 @@ func cellIn(dst *ebiten.Image, f *font.Font, col, row int, s string, c [3]uint8)
 func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece) error {
 	r := town.PartyPageFrame
 	fill(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourBoxFill)
+	if err := drawSheetPageBack(dst, sprites); err != nil {
+		return err
+	}
 	frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetFrame)
 	for _, piece := range pieces {
 		pic, err := sprites.Get(piece.Archive, piece.Index)
@@ -145,6 +154,20 @@ func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece) 
 			return err
 		}
 		draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
+	}
+	return nil
+}
+
+// drawSheetPageBack 畫資料頁那兩頁的背景（`sub_1103F(0x21)` 與 `(0x64)`，RE-127）：
+// 一間木屋的內裝，上下兩張各貼一次。
+func drawSheetPageBack(dst *ebiten.Image, sprites Sprites) error {
+	b := town.SheetPageBack
+	for _, c := range [2]struct{ index, y int }{{b.TopIndex, b.TopY}, {b.LowIndex, b.LowY}} {
+		pic, err := sprites.Get(b.Archive, c.index)
+		if err != nil {
+			return err
+		}
+		draw(dst, pic, b.X, c.y)
 	}
 	return nil
 }
