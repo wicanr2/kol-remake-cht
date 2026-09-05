@@ -137,9 +137,36 @@ type Member struct {
 	// AdventurePoints 是角色記錄的冒險點數（RE-096）：打贏一場加一份、訓練花掉
 	// 一份（RE-076），所以它也是會變的。同樣用指標，0 是合法值。
 	AdventurePoints *int `json:"adventure_points,omitempty"`
+	// Spells 是角色會的法術（RE-100）。SCROLL 那一格買得到（RE-121），
+	// 所以它會在遊玩中改變，不寫進存檔的話買來的法術重載之後就沒了。
+	Spells []Spell `json:"spells,omitempty"`
+	// Order 是所屬教派與入會信物（RE-121）：角色記錄 `+0x1A0` 那十六個 byte
+	// 與 `+0x170` 那一格，同樣是入會之後才有的。
+	Order *Order `json:"order,omitempty"`
 	// Steed 是身上那一匹坐騎（RE-119）：原版買下之後抄進角色記錄 `+0x1B0`，
 	// 沒買過就是空的。存檔帶著它，重載才知道以舊換新要折抵多少。
 	Steed *Steed `json:"steed,omitempty"`
+}
+
+// Spell 是一筆法術。欄位只放規則層用得到的那幾個（SPEC-012）：效果編號、
+// 持續回合與強度的骰式，以及擋招要比的四格。
+type Spell struct {
+	Name      string `json:"name"`
+	Effect    int    `json:"effect"`
+	TurnCode  int    `json:"turn_code"`
+	PowerCode int    `json:"power_code"`
+	Guards    []int  `json:"guards,omitempty"`
+}
+
+// Order 是所屬教派（RE-121）。Record 帶著原始十六個 byte，因為原版判斷
+// 「是不是這個教派的人」是逐 byte 比前八個。
+type Order struct {
+	Name        string `json:"name"`
+	Title       string `json:"title"`
+	Intellect   int    `json:"intellect,omitempty"`
+	Record      string `json:"record,omitempty"`
+	Token       string `json:"token,omitempty"`
+	TokenRecord string `json:"token_record,omitempty"`
 }
 
 // Steed 是一匹坐騎。欄位對應馬廄那一筆記錄裡讀得出來的那幾欄（RE-119）：

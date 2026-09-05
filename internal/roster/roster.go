@@ -106,8 +106,10 @@ type Sheet struct {
 	HeightInches    int      `json:"height_inches"`
 	Weight          int      `json:"weight"`
 	Weapons         []Weapon `json:"weapons"`
-	Armour          string   `json:"armour"`
-	Shield          string   `json:"shield"`
+	// Order 與 Title 是角色記錄 0x1A0／0x1A8 那兩個八 byte 的 5-bit 名字：
+	// 所屬教派與頭銜，由 SCROLL 那一格入會時寫進去（RE-121）。
+	Order           string   `json:"order"`
+	Title           string   `json:"title"`
 }
 
 // Location 是清單右欄顯示的字串：固定長度的所在地、一個空白、三字城鎮代碼。

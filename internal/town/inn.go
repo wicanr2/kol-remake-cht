@@ -39,6 +39,10 @@ type Member struct {
 	Backpack []Good `json:"backpack,omitempty"`
 	// Worn 是穿在身上的東西，一個部位一格；nil 代表那個部位是空的。
 	Worn [WornSlots]*Good `json:"worn,omitempty"`
+	// Order 是所屬教派：角色記錄 `+0x1A0` 那十六個 byte，由 SCROLL 那一格
+	// 入會時寫進去（RE-121）。Token 是入會信物，優先放在 `+0x170`。
+	Order *Order `json:"order,omitempty"`
+	Token *Good  `json:"token,omitempty"`
 	// Steed 是身上那一匹坐騎：角色記錄 `+0x1B0` 起十六個 byte，內容抄自馬廄那一筆的
 	// `+0x70`…`+0x7F`（名稱在前、價錢在 +8／+9，RE-119）。nil 代表沒有坐騎——
 	// 原版名冊十六槽那十六個 byte 全是零，所以馬廄是唯一的入口。

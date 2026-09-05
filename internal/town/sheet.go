@@ -62,8 +62,8 @@ type Sheet struct {
 	HeightInches    int            `json:"height_inches"`
 	Weight          int            `json:"weight"`
 	Weapons         []WeaponRow    `json:"weapons"`
-	Armour          string         `json:"armour"`
-	Shield          string         `json:"shield"`
+	Order           string         `json:"order"`
+	Title           string         `json:"title"`
 	// HasItems／HasNotes 決定圖示列要不要多那兩格：原版看 `char[0x200]`
 	// 與 `char[0x1DD]`…`char[0x1E1]` 有沒有東西。
 	HasItems bool `json:"has_items"`
@@ -146,8 +146,8 @@ type SheetPage struct {
 	Gold       int      `json:"gold"`
 	Adventure  int      `json:"adventure"`
 	Movement   string   `json:"movement"`
-	Armour     string   `json:"armour"`
-	Shield     string   `json:"shield"`
+	Order      string   `json:"order"`
+	Title      string   `json:"title"`
 	DamageCells    int  `json:"damage_cells"`
 	NutritionCells int  `json:"nutrition_cells"`
 	Portrait   int      `json:"portrait"`
@@ -209,8 +209,8 @@ func (s *Session) buildSheet(m Member) *SheetPage {
 		Gold:       m.Gold,
 		Adventure:  sh.AdventurePoints,
 		Movement:   sh.MovementLetter(),
-		Armour:     sh.Armour,
-		Shield:     sh.Shield,
+		Order:      sh.Order,
+		Title:      sh.Title,
 		DamageCells:    BarCells(m.Wounds),
 		NutritionCells: BarCells(sh.Nutrition),
 		Portrait:   m.Portrait,

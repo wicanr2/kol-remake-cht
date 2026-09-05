@@ -1,0 +1,33 @@
+{
+ "name": "town-scroll",
+ "description": "讀存檔開場在城 7 The Hostel 門邊，走進去按 SCROLL：先問要不要加入「Blue Gem Order」（入會費 450，智力門檻 90），答應之後扣錢、教派與頭銜寫進角色；選單只有一列「Learn a spell」，因為這名角色還沒學過法術。進去挑第二筆 Tyatwelon（330 金幣）買下，回清單；離開之後開 MIRROR，資料頁最下面那一列印的是「Blue Gem  Illusionist」，圖示列也多出法術那一格。全程只經過 town.Session。存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json --out workplace/saves/hostel.json --gold 2000 --town 7 --x 59 --y 28 --entry 7` 產生（RE-121）。",
+ "script": "U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > RET",
+ "shot_dir": "docs/verification/player-path/town-scroll",
+ "size": [
+  320,
+  200
+ ],
+ "receipt": "docs/verification/player-path/town-scroll-receipt.json",
+ "checkpoints": [
+  {
+   "step": 8,
+   "note": "入會的問句：三筆記錄夾住教派名，再接價錢那一套句型（0x44／0x45／0x46 ＋ 0x53 ＋ 0x54）"
+  },
+  {
+   "step": 9,
+   "note": "答應之後扣掉 450，講記錄 0x48「You are now a member of」＋ 教派名"
+  },
+  {
+   "step": 11,
+   "note": "八筆法術的清單，版面與商店的商品清單相同"
+  },
+  {
+   "step": 13,
+   "note": "問價：記錄 0x49 ＋ 0x53 ＋ 330 ＋ 0x54"
+  },
+  {
+   "step": 18,
+   "note": "資料頁最下面那一列是教派與頭銜，圖示列多出法術那一格"
+  }
+ ]
+}

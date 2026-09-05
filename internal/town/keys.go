@@ -89,6 +89,15 @@ func (s *Session) Key(token string) bool {
 			s.MoveShop(1)
 			return true
 		}
+	case s.Scrolling():
+		switch token {
+		case "U":
+			s.MoveScroll(-1)
+			return true
+		case "D":
+			s.MoveScroll(1)
+			return true
+		}
 	case s.Training():
 		switch token {
 		case "U":

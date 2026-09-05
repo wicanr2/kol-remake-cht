@@ -65,11 +65,11 @@ func drawSheet(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	cell(dst, f, l.GoldValueCol, l.GoldRow, fmt.Sprintf("% 9d", p.Gold))
 	cell(dst, f, l.AdventureCol, l.AdventureRow, fmt.Sprintf("%5d", p.Adventure))
 	cell(dst, f, l.MovementCol, l.MovementRow, p.Movement)
-	if p.Armour != "" {
-		cell(dst, f, l.ArmourCol, l.EquipRow, p.Armour)
+	if p.Order != "" {
+		cell(dst, f, l.OrderCol, l.EquipRow, p.Order)
 	}
-	if p.Shield != "" {
-		cell(dst, f, l.ShieldCol-len([]rune(p.Shield)), l.EquipRow, p.Shield)
+	if p.Title != "" {
+		cell(dst, f, l.TitleCol-len([]rune(p.Title)), l.EquipRow, p.Title)
 	}
 	// 有坐騎才有右上角那一塊（RE-120）。
 	if p.Steed != nil {

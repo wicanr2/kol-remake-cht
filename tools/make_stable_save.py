@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""把一份存檔改成「站在馬廄門口、身上有錢」的觀察輸入。
+"""把一份存檔改成「站在某扇門口、身上有錢」的觀察輸入。
 
-八座城裡有五間馬廄（RE-119），一間都不在城 7——而原版名冊的角色都住在城 7 的
-半途之家，錢也不夠買最便宜那一匹（200 金幣）。這支工具把開場位置換到城 1 的
-Holcroft Stables 門口，並把發言者的錢包補到指定金額，好讓「進門 → TRADE →
-挑一匹 → 付錢 → 資料頁看得到牠」那一條走得完。
+原版名冊的角色都住在城 7 的半途之家，錢包只有兩三百枚金幣——走不到別座城的
+馬廄（RE-119），也付不起入會費與法術（RE-121）。這支工具把開場位置換到指定的
+門口並把發言者的錢包補到指定金額，好讓那幾條路徑走得完。
+
+預設是城 1 的 Holcroft Stables（門 8，在 41, 54）。城 7 的 The Hostel 是
+`--town 7 --x 59 --y 28`。
 
 改的是存檔本身，不是遊戲：產出的檔案仍是 `kol-save-v1`，遊戲照常讀。
 
@@ -29,11 +31,17 @@ def main() -> int:
     p.add_argument("--in", dest="src", required=True)
     p.add_argument("--out", required=True)
     p.add_argument("--gold", type=int, default=3000, help="發言者的錢包")
+    p.add_argument("--town", type=int, default=TOWN, help="城鎮編號")
+    p.add_argument("--x", type=int, default=DOOR_X, help="門的 X")
+    p.add_argument("--y", type=int, default=DOOR_Y, help="門的 Y")
+    p.add_argument("--entry", type=int, default=0,
+                   help="入城點編號；鏡頭的夾限用它，選錯玩家會被推回可視範圍")
     args = p.parse_args()
 
     doc = json.loads(pathlib.Path(args.src).read_text(encoding="utf-8"))
-    doc["location"] = {"kind": "town", "town": TOWN, "entry_point": 0,
-                       "x": DOOR_X, "y": DOOR_Y + 1}
+    doc["location"] = {"kind": "town", "town": args.town,
+                       "entry_point": args.entry,
+                       "x": args.x, "y": args.y + 1}
     for member in doc["party"]:
         if member.get("speaker"):
             member["gold"] = args.gold
@@ -47,7 +55,7 @@ def main() -> int:
     print(json.dumps({
         "source": args.src,
         "source_sha256": hashlib.sha256(pathlib.Path(args.src).read_bytes()).hexdigest(),
-        "town": TOWN, "x": DOOR_X, "y": DOOR_Y + 1, "gold": args.gold,
+        "town": args.town, "x": args.x, "y": args.y + 1, "gold": args.gold,
         "out": args.out,
         "out_sha256": hashlib.sha256(out.read_bytes()).hexdigest(),
     }, ensure_ascii=False))

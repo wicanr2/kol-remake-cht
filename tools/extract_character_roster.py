@@ -74,7 +74,12 @@ RANK_OFFSET = 0x29            # KOLDATA 0x74 + (值/5)*5，餘數非 0 再畫 0x
 ADVENTURE_OFFSET = 0x26       # 高位元組在前的 16-bit
 MOVEMENT_OFFSET = 0x1BA       # 0 當成 20，畫面上印 chr(0x41 + 值)
 NUTRITION_OFFSET = 0x9F
-ARMOUR_OFFSET, SHIELD_OFFSET = 0x1A0, 0x1A8
+# 0x1A0 與 0x1A8 是**所屬教派與頭銜**，各八個 byte 的 5-bit 打包名，不是護具
+# （RE-121 更正 RE-074）：SCROLL 那一格入會時把建築 payload `0x50` 那十六個 byte
+# 整段抄進 0x1A0，而那十六個 byte 解出來是「White Pearl」＋「Magician」這種
+# 「教派 ＋ 頭銜」的配對。原版名冊十六槽這兩欄全是零，所以兩種解讀在畫面上
+# 都看不出差別。
+ORDER_OFFSET, TITLE_OFFSET = 0x1A0, 0x1A8
 # 法術：角色記錄 0x200 起、每 16 byte 一筆、共十六筆（RE-100）。版面與商品記錄
 # 相同，所以名字與骰式都用同一支解。
 SPELL_OFFSET, SPELL_STRIDE, SPELL_COUNT = 0x200, 16, 16
@@ -195,8 +200,8 @@ def character_sheet(rec: bytes) -> dict:
         "height_inches": rest,
         "weight": weight,
         "weapons": weapons,
-        "armour": packed_name(rec[ARMOUR_OFFSET:ARMOUR_OFFSET + 8]),
-        "shield": packed_name(rec[SHIELD_OFFSET:SHIELD_OFFSET + 8]),
+        "order": packed_name(rec[ORDER_OFFSET:ORDER_OFFSET + 8]),
+        "title": packed_name(rec[TITLE_OFFSET:TITLE_OFFSET + 8]),
     }
 # 存檔的頭像檔：一格 760 byte，與模板庫同一種 packed-nibble 版面。
 CHARPICS_NAME = "Knights-of-legend/CHARPICS"

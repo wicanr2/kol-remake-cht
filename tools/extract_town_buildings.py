@@ -70,6 +70,21 @@ GOODS_PRICE_OFFSET = 8
 STEED_STRIDE, STEED_NAME_OFFSET, STEED_MAX = 0x80, 0x70, 4
 STEED_PRICE_OFFSET = 0x78
 STEED_MOVEMENT_OFFSET = 0x7A
+# SCROLL（`icon_flags[1]` 的 bit0）那一格賣的法術（RE-121）：payload 0x100 起，
+# 一筆 0x10 byte、**固定八筆**（`0x1772d` 的清單可見列與總筆數都寫死 8），
+# 價錢是 `+0x0F × 10`。欄位與角色記錄裡那十六格法術同一種版面（RE-100）：
+# `+0x08`…`+0x0B` 是擋招要比的四格、`+0x0C` 效果、`+0x0D` 持續回合、`+0x0E` 強度。
+SCROLL_FLAG = 0x01
+SPELL_OFFSET, SPELL_STRIDE, SPELL_MAX = 0x100, 0x10, 8
+SPELL_PRICE_OFFSET, SPELL_PRICE_STEP = 0x0F, 10
+SPELL_EFFECT_OFFSET, SPELL_TURN_OFFSET, SPELL_POWER_OFFSET = 0x0C, 0x0D, 0x0E
+SPELL_GUARD_OFFSET, SPELL_GUARD_COUNT = 0x08, 4
+# 教派本身：`+0x50` 那十六個 byte 抄進角色 `+0x1A0`，`sub_1429C` 只比前八個；
+# `+0x2F0` 十六個 byte 是入會信物（放進背包的一件東西）；`+0x36` 是智力門檻，
+# 入會費就是建築的價錢（`+0x38`／`+0x39`）。
+ORDER_OFFSET, ORDER_BYTES, ORDER_MATCH_BYTES = 0x50, 0x10, 8
+ORDER_TOKEN_OFFSET = 0x2F0
+ORDER_INTELLECT_OFFSET = 0x36
 # 訓練建築（旗標 bit7）教的技能表：payload 0x50 起，一筆 12 byte、四筆（RE-076）。
 # 位移 +8 是武器識別，+0x0A／+0x0B 是這門課收得起的技能值上下限。
 SKILL_OFFSET, SKILL_STRIDE, SKILL_END = 0x50, 0x0C, 0x80
@@ -120,6 +135,39 @@ def goods(body: bytes, flags: int) -> list[dict]:
         if base + GOODS_STRIDE > len(body) or body[base] == 0:
             break
         out.append(good(body[base:base + GOODS_STRIDE], k))
+    return out
+
+
+def order(body: bytes) -> dict:
+    """教派那一筆（RE-121）。名字用 5-bit mode 1 打包在記錄裡，信物是一件物品。"""
+    rec = bytes(body[ORDER_OFFSET:ORDER_OFFSET + ORDER_BYTES])
+    token = bytes(body[ORDER_TOKEN_OFFSET:ORDER_TOKEN_OFFSET + ORDER_BYTES])
+    return {"name": packed_name(rec[:ORDER_MATCH_BYTES]),
+            "title": packed_name(rec[ORDER_MATCH_BYTES:]),
+            "intellect": body[ORDER_INTELLECT_OFFSET],
+            "record": rec.hex(),
+            "token": packed_name(token),
+            "token_record": token.hex()}
+
+
+def spells_for_sale(body: bytes) -> list[dict]:
+    """SCROLL 賣的八筆法術（RE-121）。全零那幾筆不收。"""
+    out = []
+    for k in range(SPELL_MAX):
+        base = SPELL_OFFSET + SPELL_STRIDE * k
+        rec = bytes(body[base:base + SPELL_STRIDE])
+        if not any(rec):
+            continue
+        out.append({
+            "index": k,
+            "name": packed_name(rec),
+            "price": rec[SPELL_PRICE_OFFSET] * SPELL_PRICE_STEP,
+            "effect": rec[SPELL_EFFECT_OFFSET],
+            "turn_code": rec[SPELL_TURN_OFFSET],
+            "power_code": rec[SPELL_POWER_OFFSET],
+            "guards": list(rec[SPELL_GUARD_OFFSET:
+                               SPELL_GUARD_OFFSET + SPELL_GUARD_COUNT]),
+            "record": rec.hex()})
     return out
 
 
@@ -242,6 +290,9 @@ def main() -> int:
                         if any(give):
                             door["quest_gives"] = packed_name(give)
                             door["quest_gives_bytes"] = give.hex()
+                    if body[ICON_FLAGS + 1] & SCROLL_FLAG:
+                        door["order"] = order(body)
+                        door["spells"] = spells_for_sale(body)
                     if body[ICON_FLAGS] & 0x32:
                         door["goods"] = goods(body, body[ICON_FLAGS])
                     if body[ICON_FLAGS] & 0x80:

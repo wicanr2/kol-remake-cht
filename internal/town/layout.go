@@ -204,7 +204,8 @@ var SheetLayout = struct {
 	GoldValueCol, GoldRow              int
 	AdventureCol, AdventureRow         int
 	MovementCol, MovementRow           int
-	EquipRow, ArmourCol, ShieldCol     int
+	// EquipRow 那一列印的是所屬教派與頭銜（RE-121 更正 RE-074 的「盔甲／盾牌」）。
+	EquipRow, OrderCol, TitleCol       int
 	BarCell, BarInset                  int
 }{
 	Header:     Rect{70, 4, 249, 46},
@@ -232,7 +233,7 @@ var SheetLayout = struct {
 	GoldValueCol: 29, GoldRow: 95,
 	AdventureCol: 33, AdventureRow: 103,
 	MovementCol: 37, MovementRow: 111,
-	EquipRow: 119, ArmourCol: 16, ShieldCol: 38,
+	EquipRow: 119, OrderCol: 16, TitleCol: 38,
 
 	// 長條一格 8 px，紅色比青色底上下各縮 1 px、左緣同樣從 39 起。
 	BarCell: 8, BarInset: 1,

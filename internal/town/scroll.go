@@ -1,0 +1,364 @@
+package town
+
+import "strings"
+
+// SCROLL（建築內圖示 0x0D，`sub_17318`，RE-121）做兩件事：加入這一棟代表的教派，
+// 以及跟它買法術。原版的順序是
+//
+//	智力 < 門檻            → 直接跳到買法術（入不了會，照樣賣）
+//	已經有教派             → 跳過入會，進選單
+//	否則                   → 問要不要入會，答應就扣錢、寫進角色
+//	選單                   → 第 0 列「Learn a spell」、第 1 列「Modify a spell」
+//
+// 第 1 列（`sub_178E0`，法術書）還沒解，remake 按下去只記一筆。
+
+// Order 是一個教派：建築 payload `0x50` 那十六個 byte，入會時整段抄進角色
+// 記錄 `+0x1A0`。前八個 byte 是教派名、後八個是頭銜，兩個都是 5-bit 打包名，
+// 而 `sub_1429C` 判斷「是不是這個教派的人」只比前八個。
+type Order struct {
+	Name string `json:"name"`
+	// Title 是記錄後八個 byte 解出來的頭銜（Magician／Illusionist／Mystic…），
+	// 入會之後與教派名一起印在角色資料頁那一列。
+	Title string `json:"title"`
+	// Intellect 是入會的智力門檻（payload `0x36`，`sub_17318:0x17321`）。
+	Intellect int `json:"intellect"`
+	// Record 是那十六個 byte 的十六進位；Title 從它的後半解出來。
+	Record string `json:"record"`
+	// Token 是入會信物（payload `0x2F0`）：一件十六 byte 的物品，
+	// 優先放進角色 `+0x170`，那一格有東西才進背包。
+	Token       string `json:"token"`
+	TokenRecord string `json:"token_record"`
+}
+
+// SpellOffer 是 SCROLL 賣的一筆法術：建築 payload `0x100` 起，一筆 16 byte、
+// 固定八筆，價錢是 `+0x0F` 的十倍。其餘欄位與角色記錄裡那十六格法術同版面。
+type SpellOffer struct {
+	Index     int    `json:"index"`
+	Name      string `json:"name"`
+	Price     int    `json:"price"`
+	Effect    int    `json:"effect"`
+	TurnCode  int    `json:"turn_code"`
+	PowerCode int    `json:"power_code"`
+	Guards    []int  `json:"guards,omitempty"`
+	Record    string `json:"record"`
+}
+
+// SCROLL 用得到的 KOLDATA 記錄。
+const (
+	// JoinOfferRecord…JoinOrderRecord 三筆夾住教派名：
+	// `"If you want to join@` ＋ `~H0Dthe]` ＋ 名字 ＋ ` Order]`。
+	JoinOfferRecord = 0x44
+	JoinTheRecord   = 0x45
+	JoinOrderRecord = 0x46
+	// MemberRecord 是 `"You are now a member of@`，後面接教派名與 `!"`。
+	MemberRecord = 0x48
+	// SpellOfferRecord 是 `"If you want this spell@`。
+	SpellOfferRecord = 0x49
+	// LearnSpellRecord／ModifySpellRecord 是選單那兩列。
+	LearnSpellRecord  = 0x4E
+	ModifySpellRecord = 0x4F
+	// SpellbookFullRecord 是 `"You've learned enough!"`。
+	SpellbookFullRecord = 0x6D
+)
+
+// SpellSlots 是角色記錄 `0x200`…`0x2FF` 那十六格法術（RE-100）。
+const SpellSlots = 16
+
+// scrollStage 是 SCROLL 流程停在哪一步。
+type scrollStage int
+
+const (
+	scrollJoinAsk scrollStage = iota
+	scrollMenu
+	scrollList
+	scrollConfirm
+)
+
+type scrollState struct {
+	stage       scrollStage
+	top, cursor int
+	// menu 是選單那一到兩列；rows 等於 1 時只有「Learn a spell」。
+	rows int
+	next func()
+}
+
+// Scrolling 回報現在是不是停在 SCROLL 的畫面。
+func (s *Session) Scrolling() bool { return s.scroll != nil }
+
+// StartScroll 是按下 SCROLL。
+func (s *Session) StartScroll() {
+	if s.Mode != ModeInside || s.Inside == nil || s.door == nil {
+		return
+	}
+	if s.door.Order == nil || len(s.door.Spells) == 0 {
+		s.note(iconName(IconScroll))
+		return
+	}
+	i := s.speakerIndex()
+	if i < 0 {
+		return
+	}
+	s.scroll = &scrollState{}
+	switch {
+	case s.intellect(i) < s.door.Order.Intellect:
+		// 入不了會，但照樣賣法術（`0x17321` 直接跳到 `0x17677`）。
+		s.showSpellList()
+	case s.Party[i].Order != nil:
+		s.showScrollMenu()
+	default:
+		s.askJoin()
+	}
+}
+
+// intellect 是這名隊員的內部智力值（角色記錄 `+0x23`）。
+func (s *Session) intellect(i int) int {
+	if i < 0 || i >= len(s.Party) || s.Party[i].Sheet == nil {
+		return 0
+	}
+	return s.Party[i].Sheet.Stats[StatIntellect]
+}
+
+// askJoin 問要不要入會：三筆記錄夾住教派名，再接價錢那一套句型。
+func (s *Session) askJoin() {
+	s.scroll.stage = scrollJoinAsk
+	lines := nonEmpty(s.uiLines(JoinOfferRecord))
+	lines = append(lines, joinLine(s.uiRaw(JoinTheRecord), s.door.Order.Name,
+		s.uiRaw(JoinOrderRecord)))
+	lines = append(lines, s.priceLines(0, s.door.Price)[1:]...)
+	s.Inside.List = nil
+	s.Inside.Detail = nil
+	s.Inside.Dialog = lines
+	s.Inside.DialogZh = nil
+	s.setInsideIcons([]int{IconYes, IconNo})
+}
+
+// joinLine 把「the」、教派名與「Order」接成一行。兩筆記錄各自帶著前後空白，
+// 中間補一個就接得起來。
+func joinLine(the, name, order string) string {
+	return strings.TrimSpace(the) + " " + name + strings.TrimRight(order, " ")
+}
+
+// showScrollMenu 是選單：有法術才畫第二列（`0x1755d` 掃 `0x200`…`0x300`）。
+func (s *Session) showScrollMenu() {
+	s.scroll.stage = scrollMenu
+	s.scroll.rows = 1
+	i := s.speakerIndex()
+	if i >= 0 && len(s.Party[i].Spells) > 0 {
+		s.scroll.rows = 2
+	}
+	s.scroll.cursor, s.scroll.top = 0, 0
+	rows := []string{s.uiRecord(LearnSpellRecord)}
+	if s.scroll.rows == 2 {
+		rows = append(rows, s.uiRecord(ModifySpellRecord))
+	}
+	s.Inside.Dialog = nil
+	s.Inside.DialogZh = nil
+	s.Inside.Detail = nil
+	s.Inside.List = &InnList{Rows: rows, Selected: 0, Total: len(rows)}
+	s.setInsideIcons([]int{IconYes, IconUTurn})
+}
+
+// showSpellList 是八筆法術的清單，版面與商店的商品清單相同。
+func (s *Session) showSpellList() {
+	s.scroll.stage = scrollList
+	s.scroll.cursor, s.scroll.top = 0, 0
+	s.Inside.Dialog = nil
+	s.Inside.DialogZh = nil
+	s.Inside.Detail = nil
+	s.Inside.List = s.spellView()
+	s.setInsideIcons([]int{IconYes, IconUTurn})
+}
+
+func (s *Session) spellView() *InnList {
+	sc := s.scroll
+	offers := s.door.Spells
+	end := sc.top + ListRows
+	if end > len(offers) {
+		end = len(offers)
+	}
+	rows := make([]string, 0, end-sc.top)
+	for _, o := range offers[sc.top:end] {
+		rows = append(rows, o.Name)
+	}
+	return &InnList{Rows: rows, Selected: sc.cursor - sc.top, Total: len(offers)}
+}
+
+// MoveScroll 是 SCROLL 兩張清單上的方向鍵。
+func (s *Session) MoveScroll(delta int) {
+	sc := s.scroll
+	if sc == nil {
+		return
+	}
+	var total int
+	switch sc.stage {
+	case scrollMenu:
+		total = sc.rows
+	case scrollList:
+		total = len(s.door.Spells)
+	default:
+		return
+	}
+	if total == 0 {
+		return
+	}
+	sc.cursor += delta
+	if sc.cursor < 0 {
+		sc.cursor = 0
+	}
+	if sc.cursor >= total {
+		sc.cursor = total - 1
+	}
+	if sc.cursor < sc.top {
+		sc.top = sc.cursor
+	}
+	if sc.cursor >= sc.top+ListRows {
+		sc.top = sc.cursor - ListRows + 1
+	}
+	if sc.stage == scrollList {
+		s.Inside.List = s.spellView()
+		return
+	}
+	s.Inside.List.Selected = sc.cursor
+}
+
+// scrollAnswer 是 SCROLL 流程裡對圖示的回應。
+func (s *Session) scrollAnswer(id int) {
+	sc := s.scroll
+	if sc == nil {
+		return
+	}
+	switch sc.stage {
+	case scrollJoinAsk:
+		if id != IconYes {
+			s.endScroll()
+			return
+		}
+		s.join()
+	case scrollMenu:
+		if id == IconUTurn {
+			s.endScroll()
+			return
+		}
+		if sc.cursor == 1 {
+			// 法術書那一頁（`sub_178E0`）還沒解。
+			s.note(s.uiRecord(ModifySpellRecord))
+			s.endScroll()
+			return
+		}
+		s.showSpellList()
+	case scrollList:
+		if id == IconUTurn {
+			s.endScroll()
+			return
+		}
+		s.offerSpell()
+	case scrollConfirm:
+		if id != IconYes {
+			s.endScroll()
+			return
+		}
+		s.buySpell()
+	}
+}
+
+// join 是答應入會（`0x173fd`…`0x17553`）：錢不夠就講一句走人；夠就扣錢、
+// 把教派那十六個 byte 記進角色，信物放進 `+0x170` 或背包。
+func (s *Session) join() {
+	i := s.speakerIndex()
+	if i < 0 {
+		s.endScroll()
+		return
+	}
+	if s.Party[i].Gold < s.door.Price {
+		s.scrollSay(nonEmpty(s.uiLines(NotEnoughRecord)), s.endScroll)
+		return
+	}
+	if s.Party[i].Token != nil && len(s.Party[i].Backpack) >= BackpackSlots {
+		s.scrollSay(nonEmpty(s.uiLines(BackpackFullRecord)), s.endScroll)
+		return
+	}
+	s.Party[i].Gold -= s.door.Price
+	order := *s.door.Order
+	token := Good{Name: order.Token, Record: order.TokenRecord}
+	if s.Party[i].Token == nil {
+		s.Party[i].Token = &token
+	} else {
+		s.Party[i].Backpack = append(s.Party[i].Backpack, token)
+	}
+	s.Party[i].Order = &order
+	if sheet := s.Party[i].Sheet; sheet != nil {
+		copied := *sheet
+		copied.Order = order.Name
+		copied.Title = order.Title
+		s.Party[i].Sheet = &copied
+	}
+	s.syncParty()
+	lines := nonEmpty(s.uiLines(MemberRecord))
+	lines = append(lines, order.Name+"!")
+	s.scrollSay(lines, s.showScrollMenu)
+}
+
+// offerSpell 是選中一筆法術：先看法術槽滿了沒，再問價錢。
+func (s *Session) offerSpell() {
+	i := s.speakerIndex()
+	if i < 0 {
+		s.endScroll()
+		return
+	}
+	if len(s.Party[i].Spells) >= SpellSlots {
+		s.scrollSay(nonEmpty(s.uiLines(SpellbookFullRecord)), s.endScroll)
+		return
+	}
+	s.scroll.stage = scrollConfirm
+	offer := s.door.Spells[s.scroll.cursor]
+	s.Inside.List = nil
+	s.Inside.DialogZh = nil
+	s.Inside.Detail = nil
+	s.Inside.Dialog = s.priceLines(SpellOfferRecord, offer.Price)
+	s.setInsideIcons([]int{IconYes, IconNo})
+}
+
+// buySpell 是答應買下（`0x17870`…`0x178d5`）：錢不夠講一句，夠就扣錢並把那一筆
+// 十六 byte 抄進角色的空法術槽。
+func (s *Session) buySpell() {
+	i := s.speakerIndex()
+	if i < 0 {
+		s.endScroll()
+		return
+	}
+	offer := s.door.Spells[s.scroll.cursor]
+	if s.Party[i].Gold < offer.Price {
+		s.scrollSay(nonEmpty(s.uiLines(NotEnoughRecord)), s.endScroll)
+		return
+	}
+	s.Party[i].Gold -= offer.Price
+	s.Party[i].Spells = append(s.Party[i].Spells, Spell{
+		Name: offer.Name, Effect: offer.Effect, TurnCode: offer.TurnCode,
+		PowerCode: offer.PowerCode,
+		Guards:    append([]int(nil), offer.Guards...),
+	})
+	s.syncParty()
+	s.showSpellList()
+}
+
+// scrollSay 顯示一段話，讀完之後接著做 next。
+func (s *Session) scrollSay(lines []string, next func()) {
+	s.Inside.Detail = nil
+	s.say(lines, nil)
+	if s.scroll != nil {
+		s.scroll.next = next
+	}
+}
+
+// endScroll 收掉 SCROLL 的畫面，回到建築的招呼語。
+func (s *Session) endScroll() {
+	s.scroll = nil
+	if s.Inside == nil || s.door == nil {
+		return
+	}
+	s.Inside.List = nil
+	s.Inside.Detail = nil
+	s.Inside.Dialog = s.greeting()
+	s.Inside.DialogZh = nil
+	s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))
+}

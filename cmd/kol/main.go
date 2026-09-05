@@ -580,9 +580,55 @@ func savedParty(s *save.Save) []town.Member {
 			Progress: append([]int(nil), m.Progress...),
 			Carried: decodeCarried(m.Carried),
 			Steed:   townSteed(m.Steed),
+			Spells:  townSavedSpells(m.Spells),
+			Order:   townOrder(m.Order),
 		})
 	}
 	return out
+}
+
+// townSavedSpells／savedSpells 換算法術那一欄。存檔只帶規則層用得到的欄位。
+func townSavedSpells(rows []save.Spell) []town.Spell {
+	if len(rows) == 0 {
+		return nil
+	}
+	out := make([]town.Spell, 0, len(rows))
+	for _, r := range rows {
+		out = append(out, town.Spell{Name: r.Name, Effect: r.Effect,
+			TurnCode: r.TurnCode, PowerCode: r.PowerCode,
+			Guards: append([]int(nil), r.Guards...)})
+	}
+	return out
+}
+
+func savedSpells(rows []town.Spell) []save.Spell {
+	if len(rows) == 0 {
+		return nil
+	}
+	out := make([]save.Spell, 0, len(rows))
+	for _, r := range rows {
+		out = append(out, save.Spell{Name: r.Name, Effect: r.Effect,
+			TurnCode: r.TurnCode, PowerCode: r.PowerCode,
+			Guards: append([]int(nil), r.Guards...)})
+	}
+	return out
+}
+
+// townOrder／savedOrder 換算所屬教派那一欄（RE-121）。
+func townOrder(o *save.Order) *town.Order {
+	if o == nil {
+		return nil
+	}
+	return &town.Order{Name: o.Name, Title: o.Title, Intellect: o.Intellect,
+		Record: o.Record, Token: o.Token, TokenRecord: o.TokenRecord}
+}
+
+func savedOrder(o *town.Order) *save.Order {
+	if o == nil {
+		return nil
+	}
+	return &save.Order{Name: o.Name, Title: o.Title, Intellect: o.Intellect,
+		Record: o.Record, Token: o.Token, TokenRecord: o.TokenRecord}
 }
 
 // townSteed／savedSteed 換算坐騎那一欄。城鎮那一側用的是商品記錄，存檔只留
@@ -641,7 +687,7 @@ func townSheet(s *roster.Sheet) *town.Sheet {
 		AdventurePoints: s.AdventurePoints, MovementRate: s.MovementRate,
 		Nutrition: s.Nutrition, HeightFeet: s.HeightFeet,
 		HeightInches: s.HeightInches, Weight: s.Weight,
-		Armour: s.Armour, Shield: s.Shield,
+		Order: s.Order, Title: s.Title,
 	}
 	copy(out.Stats[:], s.Stats)
 	for _, w := range s.Weapons {
@@ -723,6 +769,8 @@ func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
 			Progress: append([]int(nil), m.Progress...),
 			Carried: encodeCarried(m.Carried),
 			Steed:   savedSteed(m.Steed),
+			Spells:  savedSpells(m.Spells),
+			Order:   savedOrder(m.Order),
 			Rank:    savedRank(m),
 			AdventurePoints: savedPoints(m),
 		})
@@ -2692,7 +2740,8 @@ func main() {
 						playSession.Party[i].Sheet != nil &&
 						(loaded.Party[i].Rank != nil ||
 							loaded.Party[i].AdventurePoints != nil ||
-							loaded.Party[i].Steed != nil) {
+							loaded.Party[i].Steed != nil ||
+							loaded.Party[i].Order != nil) {
 						// 複製一份再改：資料頁那份是與名冊共用的指標，
 						// 直接改會連招募清單上的數字一起動到。
 						sheet := *playSession.Party[i].Sheet
@@ -2706,6 +2755,10 @@ func main() {
 						// 十六個 byte 裡，RE-119）；沒帶就維持角色檔的值。
 						if st := loaded.Party[i].Steed; st != nil {
 							sheet.MovementRate = st.Movement
+						}
+						// 入會之後資料頁那一列印的是教派與頭銜（RE-121）。
+						if o := loaded.Party[i].Order; o != nil {
+							sheet.Order, sheet.Title = o.Name, o.Title
 						}
 						playSession.Party[i].Sheet = &sheet
 					}

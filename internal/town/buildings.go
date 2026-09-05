@@ -43,6 +43,10 @@ type Door struct {
 	Goods []Good `json:"goods"`
 	// Skills 是訓練建築教的四門技能（RE-076）。
 	Skills []TrainSkill `json:"skills"`
+	// Order 與 Spells 是 SCROLL 那一格（`icon_flags[1]` 的 bit0，RE-121）：
+	// 前者是這一棟代表的教派與入會條件，後者是它賣的八筆法術。
+	Order  *Order       `json:"order,omitempty"`
+	Spells []SpellOffer `json:"spells,omitempty"`
 	// 收任務物品那一組（RE-109）。`icon_flags[1]` 的 bit 2 開啟才有；
 	// QuestWantsBytes 是要收的那件物品十六 byte 的十六進位，
 	// QuestGivesBytes 是換給你的那件（沒有就是空字串）。
@@ -89,6 +93,9 @@ func (d *Door) IsShop() bool { return d.IconFlags[0]&0x32 != 0 }
 // IsStable 回傳這是不是馬廄（旗標 bit5）。馬廄的商品表版面與一般商店不同。
 func (d *Door) IsStable() bool { return d.IconFlags[0]&0x20 != 0 }
 
+// IsScroll 回傳這一棟有沒有 SCROLL 那一格（旗標 byte 1 的 bit0）：入會與買法術。
+func (d *Door) IsScroll() bool { return d.IconFlags[1]&0x01 != 0 }
+
 // IsTavern 回傳這是不是賣食物的店（旗標 bit4）。買完會問要不要當場吃掉。
 func (d *Door) IsTavern() bool { return d.IconFlags[0]&0x10 != 0 }
 
@@ -131,6 +138,8 @@ type rawDoor struct {
 	RecordID    int          `json:"record_id"`
 	Goods       []Good       `json:"goods"`
 	Skills      []TrainSkill `json:"skills"`
+	Order       *Order       `json:"order"`
+	Spells      []SpellOffer `json:"spells"`
 	// 收任務物品那一組（RE-109）。抽取器一直有輸出，載入器原本沒接，
 	// 結果是進了收任務的建築也交不出東西。
 	QuestSite       int    `json:"quest_site"`
@@ -186,7 +195,7 @@ func LoadBuildings(path string) (*Buildings, error) {
 				Portrait: d.Portrait, Name: d.Name, Person: d.Person,
 				TextMissing: d.TextMissing, Price: d.Price,
 				HealRate: d.HealRate, RecordID: d.RecordID, Goods: d.Goods,
-				Skills: d.Skills,
+				Skills: d.Skills, Order: d.Order, Spells: d.Spells,
 				QuestSite: d.QuestSite, QuestFinal: d.QuestFinal,
 				QuestWants: d.QuestWants, QuestWantsBytes: d.QuestWantsBytes,
 				QuestGives: d.QuestGives, QuestGivesBytes: d.QuestGivesBytes,

@@ -87,6 +87,8 @@ type Session struct {
 	shop *shopState
 	// train 是訓練流程的狀態；nil 代表不在訓練中（RE-076）。
 	train *trainState
+	// scroll 是 SCROLL 那一格的流程（入會與買法術，RE-121）。
+	scroll *scrollState
 	// quest 是接任務流程的狀態；nil 代表不在接任務中（RE-110）。
 	quest *questOffer
 	// mouth 是 MOUTH 打字中的問句；nil 代表沒在打字（RE-067）。
@@ -310,6 +312,12 @@ func (s *Session) acceptInside() {
 			return
 		}
 		s.shopAnswer(id)
+	case s.scroll != nil:
+		if id == IconSpacebar {
+			s.Continue()
+			return
+		}
+		s.scrollAnswer(id)
 	case s.rest != nil:
 		switch id {
 		case IconYes:
@@ -355,6 +363,8 @@ func (s *Session) acceptInside() {
 		s.StartShop()
 	case id == IconTrain:
 		s.StartTrain()
+	case id == IconScroll:
+		s.StartScroll()
 	case id == IconAward:
 		s.StartAward()
 	default:
@@ -516,6 +526,13 @@ func (s *Session) Continue() {
 	if s.shop != nil && s.shop.next != nil {
 		step := s.shop.next
 		s.shop.next = nil
+		step()
+		return
+	}
+	// SCROLL 同理：錢不夠、背包滿了、法術學滿了與入會成功都要讀完才接下一步。
+	if s.scroll != nil && s.scroll.next != nil {
+		step := s.scroll.next
+		s.scroll.next = nil
 		step()
 		return
 	}
