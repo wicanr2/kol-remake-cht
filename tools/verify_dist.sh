@@ -16,7 +16,11 @@ for bundle in full release promo; do
   [ -f "$REPO_ROOT/$DIST/$bundle/manifest.json" ] || {
     echo "$bundle 少了 manifest.json" >&2; exit 2; }
 done
-for bundle in full release; do
+# 三個包與版本目錄的根都要有條款：拿到 tar.gz 的人看不到儲存庫，
+# 包裡沒有條款就等於沒被授權（`rulebook/85`）。
+[ -f "$REPO_ROOT/$DIST/LICENSE" ] || {
+  echo "版本目錄的根少了 LICENSE" >&2; exit 2; }
+for bundle in full release promo; do
   [ -f "$REPO_ROOT/$DIST/$bundle/LICENSE" ] || {
     echo "$bundle 少了 LICENSE" >&2; exit 2; }
 done

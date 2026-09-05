@@ -34,7 +34,9 @@ KOL_GO_ENV="GOOS=windows GOARCH=amd64 CGO_ENABLED=0" \
   -o /src/dist-all/"$VERSION"/full/kol.exe ./cmd/kol
 cp "$OUT/full/kol" "$OUT/full/kol.exe" "$OUT/release/"
 
-# 2. 兩邊都帶的文件。
+# 2. 兩邊都帶的文件。條款另外放一份在版本目錄的根，因為拿到 tar.gz 的人看不到
+#    儲存庫——包裡沒有條款就等於沒被授權（`rulebook/85`）。
+cp "$REPO_ROOT/LICENSE" "$OUT/" "$OUT/promo/"
 for dir in full release; do
   cp "$REPO_ROOT/LICENSE" "$OUT/$dir/"
   cp "$REPO_ROOT/README.md" "$OUT/$dir/"
