@@ -31,7 +31,7 @@ tools/compare_character_ui_runs.py <第一輪目錄> <第二輪目錄> --out cro
 與 `frames/`；收據以相對路徑索引畫格。`cross-run/` 是兩輪檢查點畫面的比對結果，
 `MANIFEST.json` 記錄來源、產生工具、雜湊入口與權利分類。
 
-6,893 個去重畫格 PNG（45 個 run）已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
+7,047 個去重畫格 PNG（47 個 run）已依使用者 2026-09-01 的決定提交至此 private 儲存庫。畫面內容
 衍生自原版執行檔與資料，著作權仍屬原權利人；此決定不涵蓋 public repo、public fork、
 GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序，不是原版 archive 圖號。
 

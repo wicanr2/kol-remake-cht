@@ -21,7 +21,7 @@
   "png_format": "8-bit truecolor，無 palette／alpha"
  },
  "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
- "total_frames": 6893,
+ "total_frames": 7047,
  "runs": [
   {
    "run": "accept-and-save-ranger-run1",
@@ -689,6 +689,38 @@
    },
    "distinct_frames": 310,
    "receipt": "docs/verification/character-ui/town-spell-edit-run1/receipt.json"
+  },
+  {
+   "run": "town-sheet-items-run1",
+   "scenario": "town-sheet-items",
+   "description": "在旅店開角色資料頁，把白框移到物品那一格按下去，看十七列清單的版面、上下移動、選中之後的明細與動作圖示列，最後回資料頁。純觀察，不修改也不保存角色（RE-127）。",
+   "generated_utc": "2026-09-05T16:39:13Z",
+   "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+   "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+   "dosbox_cycles": "fixed 3000",
+   "input_method": "X11 XTEST FakeInput，畫面靜止後逐鍵送出",
+   "original_zip": {
+    "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "entry_count": 75
+   },
+   "distinct_frames": 79,
+   "receipt": "docs/verification/character-ui/town-sheet-items-run1/receipt.json"
+  },
+  {
+   "run": "town-sheet-party-run1",
+   "scenario": "town-sheet-party",
+   "description": "在旅店開角色資料頁，把白框移到換人那一格按下去，看隊伍立繪那一頁怎麼排。純觀察（RE-126）。",
+   "generated_utc": "2026-09-05T16:44:34Z",
+   "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+   "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+   "dosbox_cycles": "fixed 3000",
+   "input_method": "X11 XTEST FakeInput，畫面靜止後逐鍵送出",
+   "original_zip": {
+    "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "entry_count": 75
+   },
+   "distinct_frames": 75,
+   "receipt": "docs/verification/character-ui/town-sheet-party-run1/receipt.json"
   }
  ]
 }
