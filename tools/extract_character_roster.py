@@ -127,10 +127,9 @@ def carried(rec: bytes) -> list[dict]:
 def spells(rec: bytes) -> list[dict | None]:
     """法術十六格（RE-100）。空的那一格是 null。
 
-    戰鬥只讀四處：+0x08…+0x0B 的四格護符、+0x0C 的效果、+0x0D 的持續回合骰式、
-    +0x0E 的強度骰式（bit 7 是「要不要先選目標格」）。**法術編輯器還讀 +0x07 的
-    高 nibble**——那是第五個目標類別，只有類、沒有種（RE-128）。其餘欄位與商品記錄
-    同名，照樣解出來當交叉檢查。"""
+    程式只讀四處：+0x08…+0x0B 的四格護符、+0x0C 的效果、+0x0D 的持續回合骰式、
+    +0x0E 的強度骰式（bit 7 是「要不要先選目標格」）。其餘欄位與商品記錄同名，
+    照樣解出來當交叉檢查。"""
     out = []
     for i in range(SPELL_COUNT):
         base = SPELL_OFFSET + SPELL_STRIDE * i
@@ -145,8 +144,6 @@ def spells(rec: bytes) -> list[dict | None]:
         item["power_code"] = block[0x0E]
         item["needs_target"] = bool(block[0x0E] & 0x80)
         item["guards"] = list(block[0x08:0x0C])
-        # 第五個目標類別（`+0x07` 的高 nibble）：法術編輯器的第 0 欄（RE-128）。
-        item["guard5"] = block[0x07] >> 4
         out.append(item)
     return out
 

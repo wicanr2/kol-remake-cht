@@ -75,10 +75,7 @@ type Item struct {
 	TurnCode  int   `json:"turn_code,omitempty"`
 	PowerCode int   `json:"power_code,omitempty"`
 	Guards    []int `json:"guards,omitempty"`
-	// Guard5 是第五個目標類別（`+0x07` 的高 nibble），只有類、沒有種——
-	// 法術編輯器的第 0 欄（RE-128）。
-	Guard5 int `json:"guard5,omitempty"`
-	Dice   struct {
+	Dice      struct {
 		Count int `json:"count"`
 		Sides int `json:"sides"`
 		Bonus int `json:"bonus"`

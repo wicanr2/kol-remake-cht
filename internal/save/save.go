@@ -156,9 +156,6 @@ type Spell struct {
 	TurnCode  int    `json:"turn_code"`
 	PowerCode int    `json:"power_code"`
 	Guards    []int  `json:"guards,omitempty"`
-	// Guard5 是第五個目標類別（`+0x07` 的高 nibble）：法術編輯器的第 0 欄
-	// （RE-128）。改過法術之後要跟著存，不然重載就退回角色檔那一份。
-	Guard5 int `json:"guard5,omitempty"`
 }
 
 // Order 是所屬教派（RE-121）。Record 帶著原始十六個 byte，因為原版判斷

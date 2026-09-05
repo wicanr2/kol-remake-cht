@@ -597,7 +597,7 @@ func townSavedSpells(rows []save.Spell) []town.Spell {
 	out := make([]town.Spell, 0, len(rows))
 	for _, r := range rows {
 		out = append(out, town.Spell{Name: r.Name, Effect: r.Effect,
-			TurnCode: r.TurnCode, PowerCode: r.PowerCode, Guard5: r.Guard5,
+			TurnCode: r.TurnCode, PowerCode: r.PowerCode,
 			Guards: append([]int(nil), r.Guards...)})
 	}
 	return out
@@ -610,7 +610,7 @@ func savedSpells(rows []town.Spell) []save.Spell {
 	out := make([]save.Spell, 0, len(rows))
 	for _, r := range rows {
 		out = append(out, save.Spell{Name: r.Name, Effect: r.Effect,
-			TurnCode: r.TurnCode, PowerCode: r.PowerCode, Guard5: r.Guard5,
+			TurnCode: r.TurnCode, PowerCode: r.PowerCode,
 			Guards: append([]int(nil), r.Guards...)})
 	}
 	return out
@@ -718,7 +718,7 @@ func townSpells(items []*roster.Item) []town.Spell {
 		if it == nil {
 			continue
 		}
-		out = append(out, town.Spell{Name: it.Name, Effect: it.Effect, Guard5: it.Guard5,
+		out = append(out, town.Spell{Name: it.Name, Effect: it.Effect,
 			TurnCode: it.TurnCode, PowerCode: it.PowerCode, Guards: it.Guards})
 	}
 	return out
