@@ -63,7 +63,7 @@ type setAnimation struct {
 
 type Sequence struct {
 	Schema       string       `json:"schema"`
-	OverlayRects []Rect   `json:"overlay_rects"`
+	OverlayRects []Rect       `json:"overlay_rects"`
 	SetAnimation setAnimation `json:"set_animation"`
 	Steps        []Op         `json:"steps"`
 }

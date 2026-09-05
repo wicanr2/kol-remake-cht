@@ -83,16 +83,16 @@ type Inn struct {
 	Steed *SteedPic `json:"steed,omitempty"`
 	// DialogRow 非 0 時對話框的文字改從這一列起。馬廄那一頁的問句在第 0x7E 列，
 	// 不是對話框預設的 0x56（RE-120）。
-	DialogRow int `json:"dialog_row,omitempty"`
-	Title []string   `json:"title"`
-	Dialog   []string `json:"dialog"`
-	DialogZh []string `json:"dialog_zh"`
+	DialogRow int      `json:"dialog_row,omitempty"`
+	Title     []string `json:"title"`
+	Dialog    []string `json:"dialog"`
+	DialogZh  []string `json:"dialog_zh"`
 	// QuestList 是蓋在角色資料頁上的任務一覽；nil 代表沒開（RE-111）。
 	QuestList *QuestList `json:"quest_list,omitempty"`
 	// SpellList 是蓋在同一頁上的法術一覽（RE-123）。
 	SpellList *SpellPage `json:"spell_list,omitempty"`
-	Icons    []int    `json:"icons"`
-	Selected int      `json:"selected"`
+	Icons     []int      `json:"icons"`
+	Selected  int        `json:"selected"`
 
 	// List 非 nil 時對話框畫的是可選清單而不是台詞（招募同伴用）。
 	List *InnList `json:"-"`

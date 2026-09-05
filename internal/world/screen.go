@@ -45,9 +45,9 @@ type Screen struct {
 	TimeIndex int
 	Date      []string
 	// DateZh 是中文模式的日期兩行；空的時候中文模式退回英文那兩行。
-	DateZh    []string
-	Icons     []int
-	Selected  int
+	DateZh   []string
+	Icons    []int
+	Selected int
 	// Vacated 記的是「白框離開過」的格子。野外的圖示列有三種框色：白框是目前這一格，
 	// 還沒被選過的是亮藍（`sub_11722` 畫的 9），**被選過又離開的是青色**
 	// （主迴圈自己的 `sub_1B90B(舊格, 3)`，`sub_29004:0x2973B` 與 `0x29765`）。

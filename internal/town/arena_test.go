@@ -10,8 +10,8 @@ func arenaMember(name string, rank, offence int) Member {
 // 帳面位階與實得一樣就不用升；到 24 也不用再打（RE-108）。
 func TestArenaCandidates(t *testing.T) {
 	party := []Member{
-		arenaMember("追得上", 0, 300),        // 實得 3、帳面 0 → 合格
-		arenaMember("已經齊了", 3, 300),      // 實得 3、帳面 3 → 不用
+		arenaMember("追得上", 0, 300),             // 實得 3、帳面 0 → 合格
+		arenaMember("已經齊了", 3, 300),            // 實得 3、帳面 3 → 不用
 		arenaMember("到頂了", ArenaMaxRank, 9000), // 帳面 24 → 不用
 	}
 	got := ArenaCandidates(party)

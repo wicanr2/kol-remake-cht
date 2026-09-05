@@ -12,14 +12,14 @@ import (
 )
 
 type Data struct {
-	Schema            string             `json:"schema"`
-	DiceSides         []int              `json:"dice_sides"`
-	PrimaryAttributes []string           `json:"primary_attributes"`
-	DerivedAttributes []Derived          `json:"derived_attributes"`
-	DisplayScale      DisplayScale       `json:"display_scale"`
-	Races             []Race             `json:"races"`
-	Secondary         []Named            `json:"secondary"`
-	ProfessionGroups  []ProfessionGroup  `json:"profession_groups"`
+	Schema            string            `json:"schema"`
+	DiceSides         []int             `json:"dice_sides"`
+	PrimaryAttributes []string          `json:"primary_attributes"`
+	DerivedAttributes []Derived         `json:"derived_attributes"`
+	DisplayScale      DisplayScale      `json:"display_scale"`
+	Races             []Race            `json:"races"`
+	Secondary         []Named           `json:"secondary"`
+	ProfessionGroups  []ProfessionGroup `json:"profession_groups"`
 }
 
 type Derived struct {

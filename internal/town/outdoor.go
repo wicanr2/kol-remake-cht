@@ -67,15 +67,15 @@ var TileAtlas = struct{ Index, Columns, Side int }{Index: 1, Columns: 16, Side: 
 
 // Outdoor 是戶外畫面的完整狀態。
 type Outdoor struct {
-	Schema  string   `json:"schema"`
-	Town    int      `json:"town"`
-	Party   []Member `json:"party"`
-	Camera  struct{ X, Y int } `json:"camera"`
-	Bounds  struct{ MinX, MaxX, MinY, MaxY int } `json:"bounds"`
-	Date    []string `json:"date"`
-	DateZh  []string `json:"date_zh"`
-	Icons    []int `json:"icons"`
-	Selected int    `json:"selected"`
+	Schema   string                               `json:"schema"`
+	Town     int                                  `json:"town"`
+	Party    []Member                             `json:"party"`
+	Camera   struct{ X, Y int }                   `json:"camera"`
+	Bounds   struct{ MinX, MaxX, MinY, MaxY int } `json:"bounds"`
+	Date     []string                             `json:"date"`
+	DateZh   []string                             `json:"date_zh"`
+	Icons    []int                                `json:"icons"`
+	Selected int                                  `json:"selected"`
 
 	// Marker 是隊伍標記：Base 對應 word_2DF48（城鎮戶外畫面是 0），
 	// Frame 對應 word_2DF24 的動畫畫格，在 0…4 之間來回，
@@ -339,4 +339,3 @@ func clampEdge(v, lo, hi, count int) (int, int) {
 	}
 	return v, count
 }
-

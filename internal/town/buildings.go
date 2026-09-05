@@ -124,17 +124,17 @@ type Buildings struct {
 
 // rawDoor 對應 JSON 的欄位名；Door 自己的 X/Y 是拆開的兩個欄位。
 type rawDoor struct {
-	Index       int    `json:"index"`
-	X           int    `json:"x"`
-	Y           int    `json:"y"`
-	Picture     int    `json:"picture"`
-	Portrait    int    `json:"portrait"`
-	Name        string `json:"name"`
-	Person      string `json:"person"`
-	TextMissing bool   `json:"text_missing"`
-	IconFlags   []int  `json:"icon_flags"`
-	Price       int    `json:"price"`
-	HealRate    int    `json:"heal_rate"`
+	Index       int          `json:"index"`
+	X           int          `json:"x"`
+	Y           int          `json:"y"`
+	Picture     int          `json:"picture"`
+	Portrait    int          `json:"portrait"`
+	Name        string       `json:"name"`
+	Person      string       `json:"person"`
+	TextMissing bool         `json:"text_missing"`
+	IconFlags   []int        `json:"icon_flags"`
+	Price       int          `json:"price"`
+	HealRate    int          `json:"heal_rate"`
 	RecordID    int          `json:"record_id"`
 	Goods       []Good       `json:"goods"`
 	Skills      []TrainSkill `json:"skills"`

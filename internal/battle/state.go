@@ -120,7 +120,7 @@ type State struct {
 	QuestItem string
 	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠、Adventure 是每個人
 	// 分到的冒險點數（RE-091／RE-096）。
-	Verdict Verdict
+	Verdict   Verdict
 	Gold      int
 	Adventure int
 	// RankFight 為真表示這一場打完要替某一名升階（原版 `word_345DE != 0xFFFF`：

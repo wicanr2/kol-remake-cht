@@ -162,7 +162,7 @@ func TestEnemyClosesInThenAttacks(t *testing.T) {
 			{Side: SideParty, X: 10, Y: 10, Head: 10, Chest: 10, Threshold: 100},
 			{Side: SideMonster, X: 15, Y: 10, Head: 10, Chest: 10, Threshold: 100,
 				RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
-			FleeAt: 65, FleeRecover: 35},
+				FleeAt: 65, FleeRecover: 35},
 		}}
 	// Roll 一律回 2：找目標的起點固定，而且 1/3 那一擲不會中，敵人每回合都往前走。
 	rng := &fixedRand{values: []int{2}}

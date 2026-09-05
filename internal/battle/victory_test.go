@@ -231,9 +231,9 @@ func TestStepFinishesTheBattle(t *testing.T) {
 // 時只補 E，否則什麼都不補。兩句用同一套會印出 `BINDERAKSS HAVE`。
 func TestDefeatSuffixDiffersFromVictory(t *testing.T) {
 	for _, c := range []struct {
-		name       string
-		count      int
-		won, lost  string
+		name      string
+		count     int
+		won, lost string
 	}{
 		{"BINDERAK", 12, "S", ""},
 		{"MUCK THINGS", 2, "ES", "E"},

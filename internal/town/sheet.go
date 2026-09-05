@@ -12,7 +12,7 @@ import (
 // SheetIcons 是角色資料頁底下的圖示編號。原版固定推 U-TURN、16 與 6，
 // 另外兩個看角色記錄有沒有東西（`sub_15ABF:0x1607E`）。
 const (
-	IconSheetItems = 16
+	IconSheetItems  = 16
 	IconSheetSpells = 18
 	IconSheetNotes  = 19
 )
@@ -133,24 +133,24 @@ func BarCells(v int) int {
 
 // SheetPage 是畫面上要畫的東西，已經把記錄號換成字串。
 type SheetPage struct {
-	Name       string   `json:"name"`
-	Gender     string   `json:"gender"`
-	Race       string   `json:"race"`
-	Profession string   `json:"profession"`
-	RankLeft   string   `json:"rank_left"`
-	RankRight  string   `json:"rank_right"`
-	Height     string   `json:"height"`
-	Weight     string   `json:"weight"`
-	Stats      [8]int   `json:"stats"`
-	Weapons    []WeaponRow `json:"weapons"`
-	Gold       int      `json:"gold"`
-	Adventure  int      `json:"adventure"`
-	Movement   string   `json:"movement"`
-	Order      string   `json:"order"`
-	Title      string   `json:"title"`
-	DamageCells    int  `json:"damage_cells"`
-	NutritionCells int  `json:"nutrition_cells"`
-	Portrait   int      `json:"portrait"`
+	Name           string      `json:"name"`
+	Gender         string      `json:"gender"`
+	Race           string      `json:"race"`
+	Profession     string      `json:"profession"`
+	RankLeft       string      `json:"rank_left"`
+	RankRight      string      `json:"rank_right"`
+	Height         string      `json:"height"`
+	Weight         string      `json:"weight"`
+	Stats          [8]int      `json:"stats"`
+	Weapons        []WeaponRow `json:"weapons"`
+	Gold           int         `json:"gold"`
+	Adventure      int         `json:"adventure"`
+	Movement       string      `json:"movement"`
+	Order          string      `json:"order"`
+	Title          string      `json:"title"`
+	DamageCells    int         `json:"damage_cells"`
+	NutritionCells int         `json:"nutrition_cells"`
+	Portrait       int         `json:"portrait"`
 	// Steed 非 nil 時右上角多一塊坐騎（RE-120）：原版看角色記錄 `+0x1B0` 是不是
 	// 零，非零才畫圖與名牌（`sub_16239:0x1625e`）。
 	Steed *SteedPic `json:"steed,omitempty"`
@@ -195,25 +195,25 @@ func (s *Session) buildSheet(m Member) *SheetPage {
 		gender = 1
 	}
 	page := &SheetPage{
-		Name:       strings.ToUpper(m.Name),
+		Name: strings.ToUpper(m.Name),
 		// 抬頭整段是大寫：原版在畫名字之前把 `word_2DF54` 設成 1，
 		// 之後那幾筆記錄都照這個旗標轉大寫，離開頁面才歸零（`sub_15ABF:0x1616E`）。
-		Gender:     strings.ToUpper(s.uiRecord(GenderRecord + gender)),
-		Race:       strings.ToUpper(s.uiRecord(RaceRecord + sh.Race)),
-		Profession: strings.ToUpper(s.uiRecord(professionRecord(sh.Profession, sh.Race, gender))),
-		RankLeft:   strings.ToUpper(s.uiRecord(RankRecord + sh.Rank/5*5)),
-		Height:     sh.Height(),
-		Weight:     sh.WeightText(),
-		Stats:      sh.Displayed(),
-		Weapons:    upperWeapons(sh.Weapons),
-		Gold:       m.Gold,
-		Adventure:  sh.AdventurePoints,
-		Movement:   sh.MovementLetter(),
-		Order:      sh.Order,
-		Title:      sh.Title,
+		Gender:         strings.ToUpper(s.uiRecord(GenderRecord + gender)),
+		Race:           strings.ToUpper(s.uiRecord(RaceRecord + sh.Race)),
+		Profession:     strings.ToUpper(s.uiRecord(professionRecord(sh.Profession, sh.Race, gender))),
+		RankLeft:       strings.ToUpper(s.uiRecord(RankRecord + sh.Rank/5*5)),
+		Height:         sh.Height(),
+		Weight:         sh.WeightText(),
+		Stats:          sh.Displayed(),
+		Weapons:        upperWeapons(sh.Weapons),
+		Gold:           m.Gold,
+		Adventure:      sh.AdventurePoints,
+		Movement:       sh.MovementLetter(),
+		Order:          sh.Order,
+		Title:          sh.Title,
 		DamageCells:    BarCells(m.Wounds),
 		NutritionCells: BarCells(sh.Nutrition),
-		Portrait:   m.Portrait,
+		Portrait:       m.Portrait,
 	}
 	if m.Steed != nil {
 		page.Steed = &SteedPic{Picture: m.Steed.Picture,

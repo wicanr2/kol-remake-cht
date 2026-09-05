@@ -23,9 +23,9 @@ const AskDiskRecord = 392
 
 // 組出「我聽過某某談起這件事」用到的三筆記錄（RE-067）。
 const (
-	HeardPrefix   = 0x2F // `"I heard`
-	HeardMiddle   = 0x30 // `talking about`
-	HeardObject   = 0x9E // that／them／him，加上話題槽的類別
+	HeardPrefix = 0x2F // `"I heard`
+	HeardMiddle = 0x30 // `talking about`
+	HeardObject = 0x9E // that／them／him，加上話題槽的類別
 )
 
 type uiRecord struct {

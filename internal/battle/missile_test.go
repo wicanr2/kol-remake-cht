@@ -7,7 +7,7 @@ func shootState() *State {
 	s := &State{Field: NewField(), Actors: make([]Actor, 2)}
 	s.Actors[0] = Actor{Side: SideParty, X: 10, Y: 10, Facing: 2,
 		Threshold: 100, Quickness: 50, Strength: 90, Level: 3, Attack: 400,
-		Weapon: Weapon{Kind: 6, Base: 3, Count: 1, Sides: 5},
+		Weapon:      Weapon{Kind: 6, Base: 3, Count: 1, Sides: 5},
 		ShieldGrade: NoShield}
 	s.Actors[0].SetParts()
 	s.Actors[1] = Actor{Side: SideMonster, X: 10, Y: 17, Threshold: 100,

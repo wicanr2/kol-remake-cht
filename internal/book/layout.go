@@ -168,8 +168,8 @@ var PortraitName = struct{ X, Y int }{208, 146}
 // （`^` 與 `_`），畫法與書頁文字相同：先把字模格清成白底再畫黑墨。這也是大字型第一個
 // 被指認的畫面用途。
 var PortraitArrows = struct {
-	X, Up, Down        int
-	UpRune, DownRune   rune
+	X, Up, Down      int
+	UpRune, DownRune rune
 }{X: 264, Up: 105, Down: 144, UpRune: '^', DownRune: '_'}
 
 // NameCursor 是名字輸入游標：原版在下一個字模格的底列畫一條 8 px 寬的黑線。

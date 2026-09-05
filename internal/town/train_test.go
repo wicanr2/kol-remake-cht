@@ -92,9 +92,9 @@ func TestAwardChargesTuition(t *testing.T) {
 func TestAwardLearnsNewSkill(t *testing.T) {
 	s := trainSession(t, 3000)
 	s.StartAward()
-	yes(s)      // 付學費
+	yes(s)       // 付學費
 	s.Continue() // 讀完「要練哪一門」
-	yes(s)      // 選長劍（武器 92，高三位元非 0 → 要問攻擊還是防禦）
+	yes(s)       // 選長劍（武器 92，高三位元非 0 → 要問攻擊還是防禦）
 	if s.Inside.List == nil || s.Inside.List.Rows[0] != "Offensive" {
 		t.Fatalf("應該問攻擊還是防禦：%+v", s.Inside.List)
 	}

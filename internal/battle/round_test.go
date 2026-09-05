@@ -3,7 +3,10 @@ package battle
 import "testing"
 
 // fixedRand 讓規劃順序的擲骰固定，方便驗證。
-type fixedRand struct{ values []int; i int }
+type fixedRand struct {
+	values []int
+	i      int
+}
 
 func (r *fixedRand) Roll(n int) int {
 	if len(r.values) == 0 {

@@ -6,20 +6,20 @@ package world
 
 // CJK 是中文模式的版面。座標都是 640×400 畫布上的像素。
 var CJK = struct {
-	PartyX, PartyY, PartyStep, PartyWidth int
-	PortraitBoxHeight, PlateHeight        int
-	PortraitX, PortraitY, NameX, NameY    int
-	DateX, DateY, DateW, DateH            int
-	DateTextX, DateTextY, DateStep        int
+	PartyX, PartyY, PartyStep, PartyWidth  int
+	PortraitBoxHeight, PlateHeight         int
+	PortraitX, PortraitY, NameX, NameY     int
+	DateX, DateY, DateW, DateH             int
+	DateTextX, DateTextY, DateStep         int
 	WeatherX, WeatherY, WeatherW, WeatherH int
-	WeatherPicX, WeatherPicY              int
-	LabelX, LabelY, LabelW, LabelH        int
-	LabelTextY, LabelStep                 int
-	MapX, MapY, MapW, MapH                int
-	ViewX, ViewY, Tile                    int
-	MarkerSide                            int
-	IconX, IconY, IconStep, IconW, IconH  int
-	Scale                                 int
+	WeatherPicX, WeatherPicY               int
+	LabelX, LabelY, LabelW, LabelH         int
+	LabelTextY, LabelStep                  int
+	MapX, MapY, MapW, MapH                 int
+	ViewX, ViewY, Tile                     int
+	MarkerSide                             int
+	IconX, IconY, IconStep, IconW, IconH   int
+	Scale                                  int
 }{
 	PartyX: 28, PartyY: 2, PartyStep: 96, PartyWidth: 86,
 	PortraitBoxHeight: 80, PlateHeight: 18,
@@ -33,6 +33,6 @@ var CJK = struct {
 	MapX: 206, MapY: 114, MapW: 388, MapH: 196,
 	ViewX: 208, ViewY: 116, Tile: 32,
 	MarkerSide: 4,
-	IconX: 64, IconY: 348, IconStep: 64, IconW: 48, IconH: 44,
+	IconX:      64, IconY: 348, IconStep: 64, IconW: 48, IconH: 44,
 	Scale: 2,
 }

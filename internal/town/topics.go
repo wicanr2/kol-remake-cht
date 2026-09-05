@@ -19,11 +19,11 @@ const TopicSlots = 6
 // 招呼語的訊息編號（RE-067）：`sub_11A93:0x12017` 起。
 // 聲望等第為 0 時是「訊息 10 ＋ 性別×2 ＋ 會不會法術」，否則是訊息 26 ＋ 等第。
 const (
-	GreetMessageBase   = 10
-	GreetRenownBase    = 26
-	GreetPartyMessage  = 16
-	GreetFarewell      = 17
-	MaxRenown          = 3
+	GreetMessageBase  = 10
+	GreetRenownBase   = 26
+	GreetPartyMessage = 16
+	GreetFarewell     = 17
+	MaxRenown         = 3
 )
 
 // GreetingRecord 是招呼語後面那一句 `"What can I do for you?"` 在 KOLDATA 的記錄號。

@@ -65,19 +65,19 @@ type Dice struct {
 
 // Good 是一件商品，也是背包裡的一格——商店賣的與背包裝的是同一種記錄。
 type Good struct {
-	Index       int    `json:"index"`
-	Name        string `json:"name"`
-	Price       int    `json:"price"`
-	Kind        int    `json:"kind"`
-	Damage      bool   `json:"damage"`
-	Hands       int    `json:"hands"`
+	Index  int    `json:"index"`
+	Name   string `json:"name"`
+	Price  int    `json:"price"`
+	Kind   int    `json:"kind"`
+	Damage bool   `json:"damage"`
+	Hands  int    `json:"hands"`
 	// Class 是物品記錄 +0x0D 整個 byte：戰鬥比對它挑武器技能列與攻擊式（RE-080）。
-	Class       int    `json:"class"`
-	Position    int    `json:"position"`
-	Encumbrance int    `json:"encumbrance"`
-	Condition   int    `json:"condition"`
-	Percent     int    `json:"percent"`
-	Dice        Dice   `json:"dice"`
+	Class       int  `json:"class"`
+	Position    int  `json:"position"`
+	Encumbrance int  `json:"encumbrance"`
+	Condition   int  `json:"condition"`
+	Percent     int  `json:"percent"`
+	Dice        Dice `json:"dice"`
 	// SizeClass 是 rec[14] 的低 nibble：合身的三張表都用它當索引（RE-075）。
 	SizeClass int    `json:"size_class"`
 	Record    string `json:"record"`

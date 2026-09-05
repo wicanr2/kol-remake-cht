@@ -26,8 +26,8 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/charcreate"
-	"github.com/wicanr2/kol-remake-cht/internal/ending"
 	"github.com/wicanr2/kol-remake-cht/internal/chardata"
+	"github.com/wicanr2/kol-remake-cht/internal/ending"
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
@@ -576,12 +576,12 @@ func savedParty(s *save.Save) []town.Member {
 			Wounds: m.Wounds, Gold: m.Gold, Place: m.Place,
 			TownCode: m.TownCode, BuildingID: m.BuildingID,
 			Renown: m.Renown, Spellcaster: m.Spellcaster, Speaker: m.Speaker,
-			Quests: append([]int(nil), m.Quests...),
+			Quests:   append([]int(nil), m.Quests...),
 			Progress: append([]int(nil), m.Progress...),
-			Carried: decodeCarried(m.Carried),
-			Steed:   townSteed(m.Steed),
-			Spells:  townSavedSpells(m.Spells),
-			Order:   townOrder(m.Order),
+			Carried:  decodeCarried(m.Carried),
+			Steed:    townSteed(m.Steed),
+			Spells:   townSavedSpells(m.Spells),
+			Order:    townOrder(m.Order),
 		})
 	}
 	return out
@@ -765,13 +765,13 @@ func buildSave(s *town.Session, w *world.Screen, faithful bool) *save.Save {
 			Wounds: m.Wounds, Gold: m.Gold, Place: m.Place,
 			TownCode: m.TownCode, BuildingID: m.BuildingID,
 			Renown: m.Renown, Spellcaster: m.Spellcaster, Speaker: m.Speaker,
-			Quests: append([]int(nil), m.Quests...),
-			Progress: append([]int(nil), m.Progress...),
-			Carried: encodeCarried(m.Carried),
-			Steed:   savedSteed(m.Steed),
-			Spells:  savedSpells(m.Spells),
-			Order:   savedOrder(m.Order),
-			Rank:    savedRank(m),
+			Quests:          append([]int(nil), m.Quests...),
+			Progress:        append([]int(nil), m.Progress...),
+			Carried:         encodeCarried(m.Carried),
+			Steed:           savedSteed(m.Steed),
+			Spells:          savedSpells(m.Spells),
+			Order:           savedOrder(m.Order),
+			Rank:            savedRank(m),
 			AdventurePoints: savedPoints(m),
 		})
 	}
@@ -937,35 +937,35 @@ type game struct {
 	quest *questBattle
 	// battleAtlas 是戰場磚圖。
 	battleAtlas *ebiten.Image
-	worldParty   []town.Member
-	sprites      *spriteCache
-	small        *font.Font
-	large        *font.Font
-	cjk          *font.Font
-	strings      *i18n.Table
-	roster       *roster.Roster
-	remove       *roster.DeleteFlow
-	inn          *town.Inn
-	outdoor      *town.Outdoor
-	play         *town.Session
-	flow         *flow.Flow
-	walkTick     int
-	markerStep   int
-	canvas       *screen.Canvas
-	state        *charcreate.State
-	sequence     *title.Sequence
-	player       *title.Player
-	book         *book.OpenPlayer
-	bookAnim     *book.OpenAnimation
-	bookWait     float64
-	bookFrom     string // 動畫的起始畫面
-	bookTarget   string // 動畫的目標畫面
-	bookLib      *assets.Library
+	worldParty  []town.Member
+	sprites     *spriteCache
+	small       *font.Font
+	large       *font.Font
+	cjk         *font.Font
+	strings     *i18n.Table
+	roster      *roster.Roster
+	remove      *roster.DeleteFlow
+	inn         *town.Inn
+	outdoor     *town.Outdoor
+	play        *town.Session
+	flow        *flow.Flow
+	walkTick    int
+	markerStep  int
+	canvas      *screen.Canvas
+	state       *charcreate.State
+	sequence    *title.Sequence
+	player      *title.Player
+	book        *book.OpenPlayer
+	bookAnim    *book.OpenAnimation
+	bookWait    float64
+	bookFrom    string // 動畫的起始畫面
+	bookTarget  string // 動畫的目標畫面
+	bookLib     *assets.Library
 
 	// ending 是結局播到第幾段（RE-106）；endBank／endTrans 是敘事的文字庫與譯文。
-	ending    *ending.State
-	endBank   *town.UIText
-	endTrans  *town.Translations
+	ending   *ending.State
+	endBank  *town.UIText
+	endTrans *town.Translations
 
 	scene    scene
 	portrait int
@@ -2712,7 +2712,7 @@ func main() {
 					Female: slot.Female, Wounds: slot.Wounds,
 					Gold: slot.Gold, BuildingID: slot.Building,
 					Quests: slot.Quests, Sheet: townSheet(slot.Sheet),
-					Worn: townWorn(slot.Equipment),
+					Worn:   townWorn(slot.Equipment),
 					Spells: townSpells(slot.Spells),
 					// 任務交付要逐 byte 比，所以帶原始位元組（RE-109）。
 					Progress: slot.Progress,
@@ -3002,8 +3002,8 @@ func main() {
 			if atlas, err := loadBattlePNG(*battleTiles); err == nil {
 				arenaDep = &arenaDeps{monsters: monsters, spoils: spoilItems,
 					tiles: ui.NewBattleTiles(atlas), bank: bank, trans: trans,
-					rand:  &lcg{state: uint32(*seed)},
-					field: &lcg{state: uint32(*seed)},
+					rand:    &lcg{state: uint32(*seed)},
+					field:   &lcg{state: uint32(*seed)},
 					english: *lang == "en"}
 			}
 			worldSessionState.OnEnterArena = func() {
@@ -3373,8 +3373,8 @@ func main() {
 		// 結局是七段直線，每段等一個鍵（RE-106）：一段截一張。
 		for i := range ending.Panels {
 			g.jobs = append(g.jobs, shotJob{
-				name: fmt.Sprintf("panel-%d", i),
-				path: filepath.Join(*shotDir, fmt.Sprintf("panel-%d.png", i)),
+				name:  fmt.Sprintf("panel-%d", i),
+				path:  filepath.Join(*shotDir, fmt.Sprintf("panel-%d.png", i)),
 				apply: func() { g.ending.Advance() },
 			})
 		}

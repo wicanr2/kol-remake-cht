@@ -57,9 +57,9 @@ var (
 //	名字 游標 +(7, 0x10)                     → 欄 0x14、列 0x66
 //	問句 游標欄設回 0x0D、列再 +0x18         → 欄 0x0D、列 0x7E
 var StablePic = struct {
-	X, Y                     int
-	NameCol, NameRow         int
-	AskRow                   int
+	X, Y             int
+	NameCol, NameRow int
+	AskRow           int
 }{
 	X: 112, Y: 86,
 	NameCol: 0x14, NameRow: 0x66,
@@ -116,24 +116,24 @@ var (
 	// ColourQuestBadge 是任務一覽那一格的外框：EGA 索引 0x0A
 	//（`sub_168F8` 傳給 `sub_1BA9D` 的最後一個參數，RE-111）。
 	ColourQuestBadge = [3]uint8{85, 255, 85}
-	ColourShadow   = [3]uint8{0, 0, 0}
+	ColourShadow     = [3]uint8{0, 0, 0}
 )
 
 // CJKInn 是旅店畫面的中文模式版面（放大後的像素）。與其他中文版面一樣，這一份是
 // remake 自訂的，不對拍：位置是英文版面的兩倍，只有文字改用 16×18 的中文字格，
 // 因此行距與框內留白要重排。
 var CJKInn = struct {
-	PartyX, PartyY, PartyStep, PartyWidth       int
-	PortraitBoxHeight, PlateHeight              int
-	PortraitX, PortraitY, NameX, NameY          int
-	PicX, PicY                                  int
-	TitleX, TitleY, TitleW, TitleH              int
-	TitleTextY, TitleStep                       int
-	DialogX, DialogY, DialogW, DialogH          int
-	DialogTextX, DialogTextY, DialogStep        int
-	DialogCells                                 int
-	IconX, IconY, IconStep, IconW, IconH        int
-	Scale                                       int
+	PartyX, PartyY, PartyStep, PartyWidth int
+	PortraitBoxHeight, PlateHeight        int
+	PortraitX, PortraitY, NameX, NameY    int
+	PicX, PicY                            int
+	TitleX, TitleY, TitleW, TitleH        int
+	TitleTextY, TitleStep                 int
+	DialogX, DialogY, DialogW, DialogH    int
+	DialogTextX, DialogTextY, DialogStep  int
+	DialogCells                           int
+	IconX, IconY, IconStep, IconW, IconH  int
+	Scale                                 int
 }{
 	PartyX: 28, PartyY: 2, PartyStep: 96, PartyWidth: 86,
 	PortraitBoxHeight: 80, PlateHeight: 18,
@@ -144,7 +144,7 @@ var CJKInn = struct {
 	DialogX: 204, DialogY: 168, DialogW: 390, DialogH: 136,
 	DialogTextX: 210, DialogTextY: 172, DialogStep: 22,
 	DialogCells: 12,
-	IconX: 64, IconY: 340, IconStep: 64, IconW: 48, IconH: 44,
+	IconX:       64, IconY: 340, IconStep: 64, IconW: 48, IconH: 44,
 	Scale: 2,
 }
 
@@ -173,7 +173,6 @@ var CJKOutdoor = struct {
 	IconX: 64, IconY: 340, IconStep: 64, IconW: 48, IconH: 44,
 	Scale: 2,
 }
-
 
 // SheetStatFirstRow 是八個屬性的第一列；每一列往下 8 px，
 // 與 KOLDATA 記錄 73h 的 ~V 座標相同。
@@ -205,8 +204,8 @@ var SheetLayout = struct {
 	AdventureCol, AdventureRow         int
 	MovementCol, MovementRow           int
 	// EquipRow 那一列印的是所屬教派與頭銜（RE-121 更正 RE-074 的「盔甲／盾牌」）。
-	EquipRow, OrderCol, TitleCol       int
-	BarCell, BarInset                  int
+	EquipRow, OrderCol, TitleCol int
+	BarCell, BarInset            int
 }{
 	Header:     Rect{70, 4, 249, 46},
 	HeaderRule: Rect{70, 14, 248, 14},

@@ -246,7 +246,7 @@ func (s *State) castStat(target, effect, power, turns int, negative bool) {
 // 倒數到 0 就把屬性重算回原值——原版的做法是重新呼叫 `sub_2198A`（隊員）或
 // `sub_2215A`（敵人）把角色／怪物記錄的數值整批搬回參戰者記錄，所以法術的加成
 // 不必個別記帳，過期就整個重來。回傳這一位的效果是不是剛好在這一回合結束
-//（要印記錄 0x173）。
+// （要印記錄 0x173）。
 func (s *State) WearsOff(i int) bool {
 	if i < 0 || i >= len(s.Actors) {
 		return false
@@ -280,7 +280,7 @@ func (s *State) restoreStats(i int) {
 }
 
 // SpellEffectLine 是「The spell has a <強度> <方向> effect.」那一句
-//（`0x287E4`…`0x2885E`），拆成前後兩段。
+// （`0x287E4`…`0x2885E`），拆成前後兩段。
 //
 // **中間要插一個空白**：原版在強度與方向之間另外印一次 `sub_1C2DA(' ')`，
 // 那個空白不在任何一筆記錄裡，接起來會變成 `mildlyPositive`。
@@ -306,7 +306,7 @@ var SpellListBox = SheetBox
 //
 // **還沒對拍**：標題那兩個座標是記錄自己帶的（`~H03~V07`），清單則是
 // `sub_1AAE8(3, 4, 11h, …)` 的前三個參數，那一支的參數語意還沒解出來
-//（戰利品那張清單也卡在同一件事）。先接在標題下面一行。
+// （戰利品那張清單也卡在同一件事）。先接在標題下面一行。
 var SpellListRows = struct{ Col, Row, LineStep, Visible int }{
 	Col: 3, Row: 0x0F, LineStep: 8, Visible: 7,
 }
@@ -361,7 +361,7 @@ func (s *State) chooseSpell(i int) bool {
 // chooseAffect 選好正負之後去選目標格（`0x1F639`）。
 //
 // 用哪一種游標由法術自己決定：`+0x0E` 的 bit 7 沒設就是相鄰、設了就是遠距
-//（`0x1F677` 的 `mode = 記錄[+0x0E] ÷ 0x80 + 1`）。
+// （`0x1F677` 的 `mode = 記錄[+0x0E] ÷ 0x80 + 1`）。
 func (s *State) chooseAffect(i int) bool {
 	s.Actors[i].Negative = s.Plan.ListPick != 0
 	mode := CursorAdjacent

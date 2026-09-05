@@ -43,13 +43,13 @@ const (
 
 // Town 是世界地圖上的一個城鎮入口。
 type Town struct {
-	Record     int    `json:"record"`
-	X, Y       int    `json:"-"`
-	Index      int    `json:"index"`
-	Code       string `json:"code"`
-	Disk       string `json:"disk"`
-	Town       int    `json:"town"`
-	EntryPoint int    `json:"entry_point"`
+	Record     int                `json:"record"`
+	X, Y       int                `json:"-"`
+	Index      int                `json:"index"`
+	Code       string             `json:"code"`
+	Disk       string             `json:"disk"`
+	Town       int                `json:"town"`
+	EntryPoint int                `json:"entry_point"`
 	Camera     struct{ X, Y int } `json:"camera"`
 	Bounds     struct {
 		MinX int `json:"min_x"`
@@ -67,10 +67,10 @@ type rawTown struct {
 
 // Data 是野外地圖的數值表。
 type Data struct {
-	Schema  string `json:"schema"`
-	Terrain []int  `json:"terrain_by_tile"`
-	Road    []int  `json:"road_by_tile"`
-	Blocked []int  `json:"blocked_tiles"`
+	Schema  string    `json:"schema"`
+	Terrain []int     `json:"terrain_by_tile"`
+	Road    []int     `json:"road_by_tile"`
+	Blocked []int     `json:"blocked_tiles"`
 	Towns   []rawTown `json:"towns"`
 	// Arena 是競技場那一格（`sub_29004:0x29416` 比的 `payload3[0x320]`／`[0x321]`，
 	// RE-077／RE-108）。走到那裡跳出 DOOR／U-TURN，選 DOOR 就進場。

@@ -76,7 +76,7 @@ type trainState struct {
 	row   int
 	side  int
 	count int
-	next func()
+	next  func()
 }
 
 // Training 回報現在是不是停在訓練的畫面。

@@ -22,7 +22,7 @@ type Monster struct {
 	// `0x40`／`0x60`，RE-078）：bit 7 是地形 0、bit 3 是冬。
 	TerrainMask int `json:"terrain_mask"`
 	SeasonMask  int `json:"season_mask"`
-	Intellect int    `json:"intellect"`
+	Intellect   int `json:"intellect"`
 	// AttackSkill／ParrySkill 是記錄 +0x17 起的兩個大端 16-bit；戰鬥再乘等級除以 5。
 	// 戰後的冒險點數用的是這裡的原值，不折算等級（RE-096）。
 	AttackSkill int `json:"attack_skill"`

@@ -19,7 +19,7 @@ const (
 	StageProfession
 	StageStats
 	StagePicture
-	StageDone     // 已接受圖像，等待寫入
+	StageDone      // 已接受圖像，等待寫入
 	StageAbandoned // 於名字層取消，流程結束
 )
 
@@ -39,13 +39,13 @@ type State struct {
 	data *chardata.Data
 	rng  Rand
 
-	Stage     Stage
-	Name      string
-	Race      int
-	Secondary int
+	Stage      Stage
+	Name       string
+	Race       int
+	Secondary  int
 	Profession int // 目前種族／secondary 群組內的索引
-	Cursor    int  // 目前這一層清單的反白位置
-	Portrait  int
+	Cursor     int // 目前這一層清單的反白位置
+	Portrait   int
 
 	Primary [7]int // 內部值，未套顯示量尺
 	Derived [3]int

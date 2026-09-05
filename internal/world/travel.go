@@ -24,7 +24,7 @@ type Travel struct {
 // New 建立一次野外旅行。次格座標的起點與原版相同，都是 (3, 3)。
 func New(data *Data, grid *Grid, x, y int) *Travel {
 	return &Travel{Data: data, Grid: grid, X: x, Y: y,
-		SubX: SubCells / 2 - 1, SubY: SubCells / 2 - 1, Step: 1}
+		SubX: SubCells/2 - 1, SubY: SubCells/2 - 1, Step: 1}
 }
 
 // Tile 是隊伍腳下那一格的磚塊編號。

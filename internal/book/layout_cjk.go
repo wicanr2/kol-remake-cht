@@ -14,25 +14,25 @@ const CJKCell = 16
 
 // CJKLayout 是中文 New Character 頁的座標表（單位是放大後的像素）。
 var CJKLayout = struct {
-	HeadingX, HeadingY       int
-	FieldX                   int
-	NameLabelY, NameValueY   int
-	RaceY, SecondaryY, ClassY int
-	AttrY, AttrStep          int
-	ColonX, ValueX           int
-	NameCursorY              int
-	RightX, RightHeadingY    int
-	RightListY, RightStep    int
+	HeadingX, HeadingY             int
+	FieldX                         int
+	NameLabelY, NameValueY         int
+	RaceY, SecondaryY, ClassY      int
+	AttrY, AttrStep                int
+	ColonX, ValueX                 int
+	NameCursorY                    int
+	RightX, RightHeadingY          int
+	RightListY, RightStep          int
 	PortraitFrameX, PortraitFrameY int
 	PortraitFrameW, PortraitFrameH int
-	PortraitDivider          int
-	PortraitX, PortraitY     int
-	PortraitNameX, PortraitNameY int
-	ActionsX, ActionsY       int
-	InstructionsY            int
-	MenuX, MenuY, MenuStep   int
+	PortraitDivider                int
+	PortraitX, PortraitY           int
+	PortraitNameX, PortraitNameY   int
+	ActionsX, ActionsY             int
+	InstructionsY                  int
+	MenuX, MenuY, MenuStep         int
 	RosterNamesX, RosterLocationsX int
-	RosterY, RosterStep      int
+	RosterY, RosterStep            int
 }{
 	HeadingX: 48, HeadingY: 32,
 	FieldX: 48,
@@ -43,16 +43,16 @@ var CJKLayout = struct {
 	AttrY: 190, AttrStep: 19,
 	ColonX: 128, ValueX: 144,
 	NameCursorY: 108,
-	RightX: 352, RightHeadingY: 32,
+	RightX:      352, RightHeadingY: 32,
 	RightListY: 104, RightStep: 22,
 	PortraitFrameX: 412, PortraitFrameY: 210,
 	PortraitFrameW: 86, PortraitFrameH: 96,
 	PortraitDivider: 288,
-	PortraitX: 416, PortraitY: 212,
+	PortraitX:       416, PortraitY: 212,
 	PortraitNameX: 416, PortraitNameY: 292,
 	ActionsX: 352, ActionsY: 356,
 	InstructionsY: 104,
-	MenuX: 48, MenuY: 104, MenuStep: 24,
+	MenuX:         48, MenuY: 104, MenuStep: 24,
 	RosterNamesX: 48, RosterLocationsX: 352, RosterY: 92, RosterStep: 18,
 }
 
@@ -71,9 +71,9 @@ var CJKTextBox = struct {
 // 讓兩行 16×16 中文字上下各留 8 px；投影厚度與偏移同樣是原版的兩倍。
 // 這一份和其他中文版面一樣是 remake 自訂的，不對拍。
 var CJKConfirm = struct {
-	X, Y, Width, Height             int
-	ShadowOffset, ShadowThickness   int
-	Line1X, Line1Y, Line2X, Line2Y  int
+	X, Y, Width, Height            int
+	ShadowOffset, ShadowThickness  int
+	Line1X, Line1Y, Line2X, Line2Y int
 }{
 	X: 188, Y: 116, Width: 264, Height: 56,
 	ShadowOffset: 8, ShadowThickness: 8,

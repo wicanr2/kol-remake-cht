@@ -1,8 +1,8 @@
 package ui
 
 import (
-	"strings"
 	"github.com/hajimehoshi/ebiten/v2"
+	"strings"
 
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/town"

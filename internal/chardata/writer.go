@@ -19,13 +19,13 @@ const NameBytes = 16
 
 // StartingContract 是一個職業的起始金冠與武器技能，出自已證實的 IDA 摘要。
 type StartingContract struct {
-	RecordIndex            int    `json:"record_index"`
-	MenuName               string `json:"menu_name"`
-	GoldCrowns             int    `json:"gold_crowns"`
-	PrimaryWeapon          string `json:"primary_weapon"`
-	PrimarySkillPair       []int  `json:"primary_skill_pair_internal"`
-	SecondaryWeapon        string `json:"secondary_weapon"`
-	SecondarySkillPair     []int  `json:"secondary_skill_pair_internal"`
+	RecordIndex        int    `json:"record_index"`
+	MenuName           string `json:"menu_name"`
+	GoldCrowns         int    `json:"gold_crowns"`
+	PrimaryWeapon      string `json:"primary_weapon"`
+	PrimarySkillPair   []int  `json:"primary_skill_pair_internal"`
+	SecondaryWeapon    string `json:"secondary_weapon"`
+	SecondarySkillPair []int  `json:"secondary_skill_pair_internal"`
 }
 
 type writerSummary struct {
@@ -128,11 +128,11 @@ func (t *WeaponTemplates) Record(index int) ([]byte, error) {
 
 // NewCharacter 是要寫進槽位的角色。屬性是內部值，不是畫面值。
 type NewCharacter struct {
-	Name           string
-	Race           int
-	Secondary      int
+	Name            string
+	Race            int
+	Secondary       int
 	ProfessionIndex int
-	Primary        [7]int
+	Primary         [7]int
 }
 
 // 已證實的槽位欄位位移，出自 docs/re/ida-fingerprints/KOLBOOK-character-writer-summary.json。
@@ -152,14 +152,14 @@ const (
 	offConstantThree = 0x7f
 
 	// 起始武器樣板：主武器整筆 16 bytes，另外主／副武器各再抄一次前 8 bytes 與第 13 byte。
-	offPrimaryTemplate     = 0x30
-	offPrimaryPrefix       = 0x4a
-	offPrimaryByte13       = 0x52
-	offSecondaryPrefix     = 0x57
-	offSecondaryByte13     = 0x5f
-	weaponTemplateBytes    = 16
-	weaponPrefixBytes      = 8
-	weaponByte13Index      = 13
+	offPrimaryTemplate  = 0x30
+	offPrimaryPrefix    = 0x4a
+	offPrimaryByte13    = 0x52
+	offSecondaryPrefix  = 0x57
+	offSecondaryByte13  = 0x5f
+	weaponTemplateBytes = 16
+	weaponPrefixBytes   = 8
+	weaponByte13Index   = 13
 )
 
 // WriteRecord 把角色寫進槽位樣板，回傳新的 768-byte 記錄。

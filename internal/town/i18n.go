@@ -38,7 +38,7 @@ type Translations struct {
 // UITranslations 是 KOLDATA／BOOKDATA／ENDTXT 三個文字庫的譯文，以 bank 名與
 // 記錄號為鍵。記錄號是原版的識別，譯文改了字也對得回原文。
 type UITranslations struct {
-	Schema string `json:"schema"`
+	Schema string                      `json:"schema"`
 	Banks  map[string]map[string]uiRow `json:"banks"`
 }
 

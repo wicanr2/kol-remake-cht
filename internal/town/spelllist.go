@@ -28,10 +28,10 @@ const (
 
 // SpellCell 是一格：框的矩形與名字的字格座標都算好了。
 type SpellCell struct {
-	Name                   string
-	FrameX, FrameY         int
-	FrameW, FrameH         int
-	TextCol, TextRow       int
+	Name             string
+	FrameX, FrameY   int
+	FrameW, FrameH   int
+	TextCol, TextRow int
 }
 
 // SpellPage 是蓋在資料頁上的法術一覽。

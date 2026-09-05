@@ -43,18 +43,18 @@ type entry struct {
 // glyphEntry 是非連續碼位字型（例如中文 UI 字模表）的逐字模位置與字寬。
 // 原版抽出的英文字型沒有這一段，改用 first_codepoint 起算的連續索引。
 type glyphEntry struct {
-	Codepoint    int `json:"codepoint"`
-	SheetColumn  int `json:"sheet_column"`
-	SheetRow     int `json:"sheet_row"`
-	Advance      int `json:"advance"`
+	Codepoint   int `json:"codepoint"`
+	SheetColumn int `json:"sheet_column"`
+	SheetRow    int `json:"sheet_row"`
+	Advance     int `json:"advance"`
 }
 
 // Font 是一套已載入的原版點陣字型。
 type Font struct {
-	meta    entry
-	sheet   *ebiten.Image
-	glyphs  map[rune]*ebiten.Image
-	mapped  map[rune]glyphEntry
+	meta   entry
+	sheet  *ebiten.Image
+	glyphs map[rune]*ebiten.Image
+	mapped map[rune]glyphEntry
 }
 
 // Load 讀取字型目錄下的指定字型。

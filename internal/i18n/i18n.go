@@ -87,7 +87,7 @@ func (t *Table) Entries() map[string]Entry { return t.entries }
 
 // uiBanks 是 `docs/i18n/ui-zh-Hant.json` 的版面：三個文字庫，記錄號當鍵。
 type uiBanks struct {
-	Schema string                                  `json:"schema"`
+	Schema string `json:"schema"`
 	Banks  map[string]map[string]struct {
 		En string `json:"en"`
 		Zh string `json:"zh"`

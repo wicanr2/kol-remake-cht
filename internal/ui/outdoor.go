@@ -255,4 +255,3 @@ func drawOutdoorIconsCJK(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) 
 	}
 	return nil
 }
-

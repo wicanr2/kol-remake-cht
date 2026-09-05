@@ -31,9 +31,9 @@ type QuestBadge struct {
 	// Site 是任務編號，也是圖號。
 	Site int
 	// X／Y 是圖的左上角；FrameX／FrameY／FrameW／FrameH 是外框。
-	X, Y                       int
-	FrameX, FrameY             int
-	FrameW, FrameH             int
+	X, Y           int
+	FrameX, FrameY int
+	FrameW, FrameH int
 }
 
 // QuestList 是一頁任務一覽。

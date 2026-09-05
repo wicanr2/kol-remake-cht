@@ -19,7 +19,7 @@ const (
 	MustDropRecord   = 0x112 // "|G, you must drop or belt your|E to pick this up!"
 	// QuestItemRecord 是撿到任務要的那一件時多喊的一句（`0x204B9`，RE-113）：
 	// "|G, this is the quest item!  Run for the exit!"。一場只喊一次。
-	QuestItemRecord = 0x113
+	QuestItemRecord  = 0x113
 	PutsInBeltRecord = 0x114 // "puts|B|I in|B belt"
 	// TheRecord 是敵人名字前面那個 `The]`。
 	TheRecord = 0x140
@@ -265,16 +265,16 @@ const (
 	WhoRecord = 0x15E
 	ParryBase = 0x15F
 	// 傷害那一句。
-	TheBlowRecord   = 0x140
-	BlowKindBase    = 0x141
-	HitsRecord      = 0x143
-	LocationBase    = 0x144
-	LittleRecord    = 0x14A
-	MakingRecord    = 0x14B
-	CollapseRecord  = 0x14C
-	BloodLossRecord = 0x14D
-	ShatterRecord   = 0x14E
-	DieRecord       = 0x14F
+	TheBlowRecord     = 0x140
+	BlowKindBase      = 0x141
+	HitsRecord        = 0x143
+	LocationBase      = 0x144
+	LittleRecord      = 0x14A
+	MakingRecord      = 0x14B
+	CollapseRecord    = 0x14C
+	BloodLossRecord   = 0x14D
+	ShatterRecord     = 0x14E
+	DieRecord         = 0x14F
 	UnconsciousRecord = 0x150
 	KilledRecord      = 0x151
 	LimbUselessRecord = 0x152

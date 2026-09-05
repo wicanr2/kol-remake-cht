@@ -53,18 +53,18 @@ type CarriedSlot struct {
 
 // Item 是穿戴欄的一格，欄位名與商店的商品記錄相同（RE-075）。
 type Item struct {
-	Name        string `json:"name"`
-	Price       int    `json:"price"`
-	Kind        int    `json:"kind"`
-	Damage      bool   `json:"damage"`
-	Hands       int    `json:"hands"`
+	Name   string `json:"name"`
+	Price  int    `json:"price"`
+	Kind   int    `json:"kind"`
+	Damage bool   `json:"damage"`
+	Hands  int    `json:"hands"`
 	// Class 是物品記錄 +0x0D 整個 byte：武器技能列與攻擊式都比對它。
-	Class       int    `json:"class"`
-	Position    int    `json:"position"`
-	Encumbrance int    `json:"encumbrance"`
-	Condition   int    `json:"condition"`
-	Percent     int    `json:"percent"`
-	SizeClass   int    `json:"size_class"`
+	Class       int `json:"class"`
+	Position    int `json:"position"`
+	Encumbrance int `json:"encumbrance"`
+	Condition   int `json:"condition"`
+	Percent     int `json:"percent"`
+	SizeClass   int `json:"size_class"`
 	// Effect／TurnCode／PowerCode／Guards 只有法術那十六格會填（RE-100）：
 	// 效果編號、持續回合的骰式、強度的骰式（bit 7 是「要不要選目標格」），
 	// 以及擋招要比的四格護符。
@@ -72,7 +72,7 @@ type Item struct {
 	TurnCode  int   `json:"turn_code,omitempty"`
 	PowerCode int   `json:"power_code,omitempty"`
 	Guards    []int `json:"guards,omitempty"`
-	Dice        struct {
+	Dice      struct {
 		Count int `json:"count"`
 		Sides int `json:"sides"`
 		Bonus int `json:"bonus"`
@@ -108,8 +108,8 @@ type Sheet struct {
 	Weapons         []Weapon `json:"weapons"`
 	// Order 與 Title 是角色記錄 0x1A0／0x1A8 那兩個八 byte 的 5-bit 名字：
 	// 所屬教派與頭銜，由 SCROLL 那一格入會時寫進去（RE-121）。
-	Order           string   `json:"order"`
-	Title           string   `json:"title"`
+	Order string `json:"order"`
+	Title string `json:"title"`
 }
 
 // Location 是清單右欄顯示的字串：固定長度的所在地、一個空白、三字城鎮代碼。

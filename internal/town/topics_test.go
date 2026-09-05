@@ -16,9 +16,9 @@ func topicSession(t *testing.T) *Session {
 		Names:  []string{"elmu", "benjamin"},
 		AskWho: map[string]int{"12": 1},
 		Buildings: []BuildingTopics{{Door: 5, Slots: []TopicSlot{
-			{Slot: 0, Raw: 0x40, Category: 1},          // 沒有關鍵字：LISTEN 的傳聞
-			{Slot: 1, Raw: 8, Topic: 8},                // elve：要用 MOUTH 問
-			{Slot: 2, Raw: 3, Topic: 3},                // bron：要用 MOUTH 問
+			{Slot: 0, Raw: 0x40, Category: 1}, // 沒有關鍵字：LISTEN 的傳聞
+			{Slot: 1, Raw: 8, Topic: 8},       // elve：要用 MOUTH 問
+			{Slot: 2, Raw: 3, Topic: 3},       // bron：要用 MOUTH 問
 			{Slot: 3, Raw: 0x40, Category: 1},
 			{Slot: 4, Raw: 8, Topic: 8},
 			{Slot: 5, Raw: 0x40, Category: 1},

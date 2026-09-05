@@ -114,7 +114,7 @@ func (s *State) SpoilTakers() []int {
 }
 
 // TakeSpoil 把一格戰利品交給一位隊員，回傳那件東西的名字與要印的訊息記錄
-//（沒有話要說就是 0）。
+// （沒有話要說就是 0）。
 //
 // 原版的順序（`0x28E5A`…`0x28F4C`）：先找背包六格的第一個空格；六格都滿了就改用
 // 手上那一格。放法是**十六個 byte 交換**，不是搬移——所以背包滿的時候，手上原本
@@ -288,7 +288,7 @@ func (s *State) spoilList() []int {
 // SpoilCancel 取消目前這一關，回傳整個畫面是不是結束了。
 //
 // 物品那一關取消就結束（`0x28C9C`）；隊員那一關取消只是退回物品清單
-//（`0x28E47` 同樣跳回 `0x28B1E`）。
+// （`0x28E47` 同樣跳回 `0x28B1E`）。
 func (s *State) SpoilCancel() bool {
 	if s.Spoil.Phase == SpoilPickTaker {
 		return !s.BeginSpoils()
