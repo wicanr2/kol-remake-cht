@@ -23,8 +23,9 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	// 畫的順序照原版：整頁清掉 → 背景 → 立繪 → 右邊那條窄欄清成黑 → 框與分隔線
 	// → 清單（`sub_1103F(0)`、`(0x21)`／`(0x64)`、`sub_18F3A(0)`、`sub_1B779`、
 	// `sub_1B6DC`、`sub_1BB57`、`sub_196A9`）。
-	fill(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
-		town.ColourBoxFill)
+	if err := drawSheetPageFull(dst, sprites); err != nil {
+		return err
+	}
 	if err := drawSheetPageBack(dst, sprites); err != nil {
 		return err
 	}
@@ -45,6 +46,9 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 		town.ColourSheetFrame)
 	fill(dst, l.Divider.X0, l.Divider.Y0,
 		l.Divider.Width(), l.Divider.Height(), town.ColourSheetFrame)
+	// 框畫完投一次影（`sub_1B7E9(0x0F, 2, 0x131, 0x9C, 3)`）：右邊與下面各一條
+	// 四像素寬的黑帶。
+	shadow(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height())
 
 	for i, row := range p.Rows {
 		colour := town.ColourListIdle
@@ -61,6 +65,9 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 			town.ColourBoxFill)
 		frame(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1,
 			town.ColourSheetHeader)
+		// `sub_1BA9D` 是三件事的複合：填內部（`sub_1B779`）、畫框（`sub_1B6DC`）、
+		// **再投影**（`sub_1B7E9`）。用它畫的每一個框都自帶那一圈四像素的黑帶。
+		shadow(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1)
 		col := m.X/small.Advance() + 1
 		row := m.Y + town.MarkTextTop
 		cell(dst, small, col, row, m.Slot)
@@ -144,11 +151,15 @@ func cellIn(dst *ebiten.Image, f *font.Font, col, row int, s string, c [3]uint8)
 // 再把六個人由後往前貼上去。
 func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece) error {
 	r := town.PartyPageFrame
-	fill(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourBoxFill)
+	if err := drawSheetPageFull(dst, sprites); err != nil {
+		return err
+	}
 	if err := drawSheetPageBack(dst, sprites); err != nil {
 		return err
 	}
 	frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetFrame)
+	// 同物品那一頁：框之後投一次影（`sub_18F21`）。
+	shadow(dst, r.X0, r.Y0, r.Width(), r.Height())
 	for _, piece := range pieces {
 		pic, err := sprites.Get(piece.Archive, piece.Index)
 		if err != nil {
@@ -156,6 +167,17 @@ func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece) 
 		}
 		draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
 	}
+	return nil
+}
+
+// drawSheetPageFull 畫這兩頁最先蓋上去的那一張整頁圖（`sub_1103F(0)`）。它蓋掉
+// 整個旅店畫面，連頂端的隊員格都不留。
+func drawSheetPageFull(dst *ebiten.Image, sprites Sprites) error {
+	pic, err := sprites.Get(town.Background.Archive, town.Background.Index)
+	if err != nil {
+		return err
+	}
+	draw(dst, pic, 0, 0)
 	return nil
 }
 

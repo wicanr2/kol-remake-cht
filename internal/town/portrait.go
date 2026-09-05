@@ -124,7 +124,9 @@ func (s *Session) OpenPartyPage() {
 		return
 	}
 	s.Inside.PartyPage = pieces
-	s.setInsideIcons([]int{IconUTurn})
+	// 這一頁不是選單，是「看完按一個鍵」——`sub_18D61` 收尾就是 `sub_144C3`，
+	// 圖示列因此縮成一格 SPACEBAR（RE-128 對拍時更正 RE-126）。
+	s.setInsideIcons([]int{IconSpacebar})
 }
 
 // ShowingPartyPage 回報現在是不是停在隊伍立繪那一頁。

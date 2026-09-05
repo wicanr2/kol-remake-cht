@@ -1,0 +1,30 @@
+{
+ "name": "town-sheet-party",
+ "description": "資料頁上隊伍立繪那一頁（`sub_18D61`，RE-126）。原版與 remake 走同一條路：旅店 → MIRROR → 資料頁圖示列往右兩格 → Return。這一頁蓋掉整個旅店畫面：先 `sub_1103F(0)` 貼一張整頁圖（連頂端的隊員格都不留），再貼木屋內裝的上下兩張，然後由後往前畫整隊的立繪，最後畫外框並**投影**（`sub_1B6DC` ＋ `sub_1B7E9`：右邊與下面各一條四像素寬的黑帶）。圖示列縮成一格 SPACEBAR——這一頁不是選單，`sub_18D61` 收尾就是 `sub_144C3`。隊伍只有一名時立繪置中。",
+ "input": {
+  "original": "tools/run_character_ui_oracle.sh docs/verification/character-ui/town-sheet-party-run1 --scenario town-sheet-party",
+  "remake": "tools/run_kol_shots.sh workplace/specs/party-parity.txt（-scene play -play-script \"L R RET SPACE > RET > > RET\"）"
+ },
+ "pairs": [
+  {
+   "label": "隊伍立繪：整頁",
+   "compare": {"x": 0, "y": 0, "width": 320, "height": 200},
+   "remake": "docs/verification/remake-parity/shots/town-sheet-party/party.png",
+   "original": "docs/verification/character-ui/town-sheet-party-run1/frames/frame-073.png",
+   "allow": [
+    {
+     "name": "原版滑鼠游標",
+     "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+     "x": 158, "y": 100, "width": 14, "height": 14
+    }
+   ]
+  },
+  {
+   "label": "立繪與外框（不含游標那一塊）",
+   "compare": {"x": 0, "y": 0, "width": 320, "height": 100},
+   "remake": "docs/verification/remake-parity/shots/town-sheet-party/party.png",
+   "original": "docs/verification/character-ui/town-sheet-party-run1/frames/frame-073.png",
+   "allow": []
+  }
+ ]
+}
