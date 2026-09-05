@@ -260,10 +260,10 @@ func TestMoveClampedToField(t *testing.T) {
 	for _, c := range []struct {
 		x, y, facing int
 	}{
-		{FieldMin, 20, 0},  // 往上出界
-		{20, FieldMin, 6},  // 往左出界
-		{FieldMax, 20, 4},  // 往下出界
-		{20, FieldMax, 2},  // 往右出界
+		{FieldMin, 20, 0}, // 往上出界
+		{20, FieldMin, 6}, // 往左出界
+		{FieldMax, 20, 4}, // 往下出界
+		{20, FieldMax, 2}, // 往右出界
 	} {
 		s := &State{Actors: make([]Actor, 1)}
 		s.Actors[0] = Actor{Side: SideParty, X: c.x, Y: c.y, Facing: c.facing,
@@ -373,5 +373,55 @@ func TestMoveRedraw(t *testing.T) {
 	r, _ = s.Act(&fixedRoll{values: []int{50}})
 	if r.Message != BlockedRecord || r.Redraw {
 		t.Fatalf("走不動不該重畫，得到 %#x redraw=%v", r.Message, r.Redraw)
+	}
+}
+
+// seenState 是一支隊員加一隻怪物的空戰場，用來驗訊息的可見性過濾。
+func seenState() *State {
+	s := &State{Actors: make([]Actor, PartySlots+1), Field: NewField()}
+	s.Actors[0] = Actor{Side: SideParty, X: 10, Y: 10, Threshold: 100}
+	s.Actors[0].SetParts()
+	for i := 1; i < PartySlots; i++ {
+		s.Actors[i].Side = SideEmpty
+	}
+	s.Actors[PartySlots] = Actor{Side: SideMonster, X: 14, Y: 10, Threshold: 100,
+		Facing: 0}
+	s.Actors[PartySlots].SetParts()
+	return s
+}
+
+// 看不到的怪物動作不印訊息（`sub_2625A`，RE-124）。
+func TestMessageSeenFiltersDistantMonsters(t *testing.T) {
+	s := seenState()
+	if !s.messageSeen(PartySlots) {
+		t.Fatal("四格外的怪物應該看得到")
+	}
+	// 拉到七格外就看不到了。
+	s.Actors[PartySlots].X = 17
+	if s.messageSeen(PartySlots) {
+		t.Fatal("七格外的怪物不該印訊息")
+	}
+	// 隊員那一側一律印，不管站多遠。
+	s.Actors[0].X = 60
+	if !s.messageSeen(0) {
+		t.Fatal("隊員的動作一律印")
+	}
+}
+
+// 看不到的怪物走一步也不印，連重畫都不做。
+func TestMoveIsSilentWhenUnseen(t *testing.T) {
+	s := seenState()
+	m := &s.Actors[PartySlots]
+	m.X, m.Y = 30, 30
+	m.Command = CmdMove
+	r := s.move(PartySlots)
+	if r.Message != 0 || r.Redraw {
+		t.Fatalf("看不到的移動不該有訊息或重畫：%+v", r)
+	}
+	// 走到隊員旁邊就印了。
+	m.X, m.Y = 12, 10
+	r = s.move(PartySlots)
+	if r.Message != MovedRecord {
+		t.Fatalf("看得到的移動應該印 %#x，得到 %#x", MovedRecord, r.Message)
 	}
 }

@@ -111,6 +111,10 @@ type Actor struct {
 	// Retreating 是 +0x29：撤退狀態。傷勢達到 FleeAt 又沒有人貼著就設起來，
 	// 降到 FleeRecover 以下就清掉。
 	Retreating bool
+	// Stuck 是 `word_34A08`：這一次規劃裡「八個方向都走不了」的次數（RE-117）。
+	// 非零時貼近打那一段不再抽攻擊式，固定用第 1 式。`PlanEnemy` 開頭歸零，
+	// 所以它不跨回合。
+	Stuck int
 	// FleeAt／FleeRecover 是怪物記錄的兩個撤退門檻（+0x0D／+0x0E）。隊員那一側
 	// 留 0——原版的撤退判斷只跑在敵人身上。
 	FleeAt, FleeRecover int

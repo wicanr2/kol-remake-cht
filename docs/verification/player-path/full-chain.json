@@ -1,232 +1,241 @@
 {
-  "name": "full-chain",
-  "description": "一條按鍵走到底的正常玩家路徑：標題序列 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 城鎮戶外地圖 → 走到城牆邊出城 → 世界地圖 (40,23) → 往東走遇上伏擊 → 八個回合的規劃與執行打贏兩隻 ZOMBIE → 走回霍布入城點 → 進城 → 走到半途之家門口 → 進門 → REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State 四個狀態機，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**這條路徑釘住了亂數種子**：野外每次時段變換都會擲一次遭遇（SPEC-011），走到哪一格遇上什麼由種子決定；戰鬥裡的攻防與規劃順序同樣要重播。隊伍是原版名冊裡六名帶武器的角色，用 `tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,3,57,8 --out workplace/saves/party6.json` 產生。",
-  "seed": 1,
-  "load": "workplace/saves/party6.json",
-  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET R R U U U U U U U U U RET R R R R R R R R R R R R R R SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > RET U U L L D D RET > > RET > > > > RET U U L L D RET > RET > > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET > RET U U L L D D RET > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D R RET > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > RET U U L L RET > RET > RET U U L L D D R RET > > RET > RET U U L L D D RET > > RET > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L D R R RET > RET > > > > > RET U U L L D D R RET > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE L L L L L L L L L L RET D D Z X L D Z X L D Z X L D X L X D L R Z L Z U Z L D L X D L X D R X D R S X D L X D R X R R S X U D R S X D R S X D R S X D R S X D L X D R X D R S X D L X D R X R R S U D S R U S R U A S U A S L R U A S R U A S R U A S R U A S R U A S U U U A A RET SPACE > > > > RET RET RET",
-  "shot_dir": "docs/verification/player-path/full-chain",
-  "trace": "docs/verification/player-path/full-chain/trace.json",
-  "size": [
-    320,
-    200
-  ],
-  "receipt": "docs/verification/player-path/full-chain-receipt.json",
-  "milestones": [
-    {
-      "step": 0,
-      "scene": "flow:title",
-      "note": "標題序列"
-    },
-    {
-      "step": 1,
-      "scene": "flow:cover",
-      "note": "書本封面"
-    },
-    {
-      "step": 2,
-      "scene": "flow:contents",
-      "note": "目錄頁"
-    },
-    {
-      "step": 5,
-      "scene": "flow:newchar",
-      "note": "CREATE：建角頁"
-    },
-    {
-      "step": 8,
-      "scene": "flow:delete",
-      "note": "DELETE：刪除清單"
-    },
-    {
-      "step": 13,
-      "scene": "flow:harbor",
-      "note": "HARBOR MASTER"
-    },
-    {
-      "step": 16,
-      "scene": "flow:select",
-      "note": "角色選擇清單"
-    },
-    {
-      "step": 17,
-      "scene": "flow:inn",
-      "note": "旅店"
-    },
-    {
-      "step": 19,
-      "scene": "flow:town",
-      "town": {
-        "x": 57,
-        "y": 8,
-        "mode": 0,
-        "left_town": false
-      },
-      "note": "DOOR：城鎮戶外地圖，隊伍站在半途之家門口那一格"
-    },
-    {
-      "step": 30,
-      "town": {
-        "x": 59,
-        "y": 0,
-        "mode": 3
-      },
-      "note": "走到地圖上緣，城門提示"
-    },
-    {
-      "step": 31,
-      "town": {
-        "left_town": true
-      },
-      "world": {
-        "x": 40,
-        "y": 23
-      },
-      "note": "選 DOOR 離開城鎮，落到霍布入城點 3 在世界地圖上的那一格"
-    },
-    {
-      "step": 45,
-      "world": {
-        "x": 42,
-        "y": 23
-      },
-      "battle": {
-        "stage": 1,
-        "site": -1
-      },
-      "note": "往東走兩格被伏擊：滿版怪物圖（SPEC-011）"
-    },
-    {
-      "step": 46,
-      "battle": {
-        "stage": 2,
-        "round": 1
-      },
-      "note": "進戰場，第一回合的規劃"
-    },
-    {
-      "step": 792,
-      "battle": {
-        "stage": 5,
-        "verdict": 2,
-        "round": 8
-      },
-      "note": "第八回合結束，兩隻 ZOMBIE 都倒下——打贏"
-    },
-    {
-      "step": 794,
-      "world": {
-        "x": 42,
-        "y": 23
-      },
-      "note": "勝負的訊息推完，回到世界地圖"
-    },
-    {
-      "step": 805,
-      "town": {
-        "x": 56,
-        "y": 2,
-        "mode": 0,
-        "left_town": false
-      },
-      "note": "走回入城點選 DOOR，回到霍布城內，鏡頭 (56,2)"
-    },
-    {
-      "step": 929,
-      "town": {
-        "x": 57,
-        "y": 8,
-        "mode": 1
-      },
-      "note": "走回半途之家門口"
-    },
-    {
-      "step": 930,
-      "town": {
-        "mode": 2
-      },
-      "note": "DOOR：進門，店主的敘述"
-    },
-    {
-      "step": 938,
-      "town": {
-        "mode": 2
-      },
-      "note": "答應 56 枚金幣住一晚，存檔寫出"
-    }
-  ],
-  "checkpoints": [
-    {
-      "step": 0,
-      "file": "step-000.png",
-      "shows": "標題序列的第一畫格"
-    },
-    {
-      "step": 19,
-      "file": "step-019.png",
-      "shows": "城鎮戶外地圖，六名隊員的頭像列"
-    },
-    {
-      "step": 31,
-      "file": "step-031.png",
-      "shows": "世界地圖 (40,23)：出城的落點"
-    },
-    {
-      "step": 45,
-      "file": "step-045.png",
-      "shows": "伏擊：滿版的 ZOMBIE 圖"
-    },
-    {
-      "step": 46,
-      "file": "step-046.png",
-      "shows": "戰場與第一回合的指令列"
-    },
-    {
-      "step": 792,
-      "file": "step-792.png",
-      "shows": "You have defeated The ZOMBIES!"
-    },
-    {
-      "step": 805,
-      "file": "step-805.png",
-      "shows": "回到霍布城內"
-    },
-    {
-      "step": 929,
-      "file": "step-929.png",
-      "shows": "半途之家門口，圖示列剩 DOOR／U-TURN"
-    },
-    {
-      "step": 937,
-      "file": "step-937.png",
-      "shows": "住一晚要 56 枚金幣的問句"
-    },
-    {
-      "step": 938,
-      "file": "step-938.png",
-      "shows": "答應之後：扣錢、記下留宿的建築、寫出存檔"
-    }
-  ],
-  "save": {
-    "file": "workplace/saves/full-chain.json",
-    "expect": {
-      "schema": "kol-save-v1",
-      "location.kind": "town",
-      "location.town": 7,
-      "location.entry_point": 3,
-      "location.x": 57,
-      "location.y": 8,
-      "party[0].name": "Poontang",
-      "party[0].gold": 158,
-      "party[0].wounds": 1,
-      "party[0].place": "HALFWAY HO",
-      "party[0].town_code": "MIN",
-      "party[0].building_id": 86,
-      "party[0].quests[1]": 4,
-      "party[5].name": "Olear",
-      "party[5].gold": 1777,
-      "party[0].adventure_points": 2376,
-      "party[5].adventure_points": 2876,
-      "party[0].rank": 1
-    }
+ "name": "full-chain",
+ "description": "一條按鍵走到底的正常玩家路徑：標題序列 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 城鎮戶外地圖 → 走到城牆邊出城 → 世界地圖 (40,23) → 往東走遇上伏擊 → 八個回合的規劃與執行打贏兩隻 ZOMBIE → 走回霍布入城點 → 進城 → 走到半途之家門口 → 進門 → REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State 四個狀態機，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**這條路徑釘住了亂數種子**：野外每次時段變換都會擲一次遭遇（SPEC-011），走到哪一格遇上什麼由種子決定；戰鬥裡的攻防與規劃順序同樣要重播。隊伍是原版名冊裡六名帶武器的角色，用 `tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,3,57,8 --out workplace/saves/party6.json` 產生。",
+ "seed": 1,
+ "load": "workplace/saves/party6.json",
+ "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET R R U U U U U U U U U RET R R R R R R R R R R R R R R SPACE > > > > > RET U U L L D RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > RET U U L L D D RET > > RET > > > > RET U U L L D RET > RET > > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET > RET U U L L D D RET > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D RET > RET > > > > RET U U L L D D R RET > RET > > > > > RET U U L L D D R RET > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET > > > > RET U U L L RET > RET > RET U U L L D D R RET > > RET > RET U U L L D D RET > > RET > RET U U L L D RET > > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L D R R RET > RET > > > > > RET U U L L D D R RET > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE L L L L L L L L L L RET D D Z X L D Z X L D Z X L D X L X D L R Z L Z U Z L D L X D L X D R X D R S X D L X D R X R R S X U D R S X D R S X D R S X D R S X D L X D R X D R S X D L X D R X R R S U D S R U S R U A S U A S L R U A S R U A S R U A S R U A S R U A S U U U A A RET SPACE > > > > RET RET RET",
+ "shot_dir": "docs/verification/player-path/full-chain",
+ "trace": "docs/verification/player-path/full-chain/trace.json",
+ "size": [
+  320,
+  200
+ ],
+ "receipt": "docs/verification/player-path/full-chain-receipt.json",
+ "milestones": [
+  {
+   "step": 0,
+   "scene": "flow:title",
+   "note": "標題序列"
+  },
+  {
+   "step": 1,
+   "scene": "flow:cover",
+   "note": "書本封面"
+  },
+  {
+   "step": 2,
+   "scene": "flow:contents",
+   "note": "目錄頁"
+  },
+  {
+   "step": 5,
+   "scene": "flow:newchar",
+   "note": "CREATE：建角頁"
+  },
+  {
+   "step": 8,
+   "scene": "flow:delete",
+   "note": "DELETE：刪除清單"
+  },
+  {
+   "step": 13,
+   "scene": "flow:harbor",
+   "note": "HARBOR MASTER"
+  },
+  {
+   "step": 16,
+   "scene": "flow:select",
+   "note": "角色選擇清單"
+  },
+  {
+   "step": 17,
+   "scene": "flow:inn",
+   "note": "旅店"
+  },
+  {
+   "step": 19,
+   "scene": "flow:town",
+   "town": {
+    "x": 57,
+    "y": 8,
+    "mode": 0,
+    "left_town": false
+   },
+   "note": "DOOR：城鎮戶外地圖，隊伍站在半途之家門口那一格"
+  },
+  {
+   "step": 30,
+   "town": {
+    "x": 59,
+    "y": 0,
+    "mode": 3
+   },
+   "note": "走到地圖上緣，城門提示"
+  },
+  {
+   "step": 31,
+   "town": {
+    "left_town": true
+   },
+   "world": {
+    "x": 40,
+    "y": 23
+   },
+   "note": "選 DOOR 離開城鎮，落到霍布入城點 3 在世界地圖上的那一格"
+  },
+  {
+   "step": 45,
+   "world": {
+    "x": 42,
+    "y": 23
+   },
+   "battle": {
+    "stage": 1,
+    "site": -1
+   },
+   "note": "往東走兩格被伏擊：滿版怪物圖（SPEC-011）"
+  },
+  {
+   "step": 46,
+   "battle": {
+    "stage": 2,
+    "round": 1
+   },
+   "note": "進戰場，第一回合的規劃"
+  },
+  {
+   "step": 811,
+   "battle": {
+    "stage": 5,
+    "verdict": 2,
+    "round": 8
+   },
+   "note": "第八回合結束，兩隻 ZOMBIE 都倒下——打贏"
+  },
+  {
+   "step": 813,
+   "world": {
+    "x": 42,
+    "y": 23
+   },
+   "note": "勝負的訊息推完，回到世界地圖",
+   "battle": null
+  },
+  {
+   "step": 824,
+   "town": {
+    "x": 56,
+    "y": 2,
+    "mode": 0,
+    "left_town": false
+   },
+   "note": "走回入城點選 DOOR，回到霍布城內，鏡頭 (56,2)"
+  },
+  {
+   "step": 948,
+   "town": {
+    "x": 57,
+    "y": 8,
+    "mode": 1
+   },
+   "note": "走回半途之家門口"
+  },
+  {
+   "step": 949,
+   "town": {
+    "mode": 2
+   },
+   "note": "DOOR：進門，店主的敘述"
+  },
+  {
+   "step": 957,
+   "town": {
+    "mode": 2,
+    "party": [
+     "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ]
+   },
+   "note": "答應 56 枚金幣住一晚，存檔寫出"
   }
+ ],
+ "checkpoints": [
+  {
+   "step": 0,
+   "file": "step-000.png",
+   "shows": "標題序列的第一畫格"
+  },
+  {
+   "step": 19,
+   "file": "step-019.png",
+   "shows": "城鎮戶外地圖，六名隊員的頭像列"
+  },
+  {
+   "step": 31,
+   "file": "step-031.png",
+   "shows": "世界地圖 (40,23)：出城的落點"
+  },
+  {
+   "step": 45,
+   "file": "step-045.png",
+   "shows": "伏擊：滿版的 ZOMBIE 圖"
+  },
+  {
+   "step": 46,
+   "file": "step-046.png",
+   "shows": "戰場與第一回合的指令列"
+  },
+  {
+   "step": 811,
+   "file": "step-811.png",
+   "shows": "You have defeated The ZOMBIES!"
+  },
+  {
+   "step": 824,
+   "file": "step-824.png",
+   "shows": "回到霍布城內"
+  },
+  {
+   "step": 948,
+   "file": "step-948.png",
+   "shows": "半途之家門口，圖示列剩 DOOR／U-TURN"
+  },
+  {
+   "step": 956,
+   "file": "step-956.png",
+   "shows": "住一晚要 56 枚金幣的問句"
+  },
+  {
+   "step": 957,
+   "file": "step-957.png",
+   "shows": "答應之後：扣錢、記下留宿的建築、寫出存檔"
+  }
+ ],
+ "save": {
+  "file": "workplace/saves/full-chain.json",
+  "expect": {
+   "schema": "kol-save-v1",
+   "location.kind": "town",
+   "location.town": 7,
+   "location.entry_point": 3,
+   "location.x": 57,
+   "location.y": 8,
+   "party[0].name": "Poontang",
+   "party[0].gold": 158,
+   "party[0].wounds": 1,
+   "party[0].place": "HALFWAY HO",
+   "party[0].town_code": "MIN",
+   "party[0].building_id": 86,
+   "party[0].quests[1]": 4,
+   "party[5].name": "Olear",
+   "party[5].gold": 1777,
+   "party[0].adventure_points": 2376,
+   "party[5].adventure_points": 2876,
+   "party[0].rank": 1
+  }
+ }
 }

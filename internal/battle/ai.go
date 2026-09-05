@@ -209,7 +209,6 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return EnemyDecision{Target: -1}
 	}
 	a := &s.Actors[i]
-	d := EnemyDecision{Target: -1, Ring: -1, Facing: a.Facing}
 
 	// 兩隻手臂都廢就只能移動（`0x237E9`）。
 	if a.RightArm <= 0 && a.LeftArm <= 0 {
@@ -221,6 +220,16 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 	if d, ok := s.enemyRetreat(i, rng); ok {
 		return d
 	}
+	// `word_34A08` 是一次規劃之內的計數（`sub_2374C` 開頭歸零，RE-117）。
+	a.Stuck = 0
+	return s.planTactics(i, rng)
+}
+
+// planTactics 是決策樹從「手上有沒有武器」那個分岔起的整段（`0x23BC2`…`0x24030`）。
+// 抽出來是因為繞不出去的第三條退路會**回到這裡重跑**（RE-117）。
+func (s *State) planTactics(i int, rng Rand) EnemyDecision {
+	a := &s.Actors[i]
+	d := EnemyDecision{Target: -1, Ring: -1, Facing: a.Facing}
 
 	// 手上那一格空著（`0x23BC2`，RE-116）：先看參戰者記錄 +0x2B，非零就清掉改成
 	// 移動，否則出指令碼 0x26 去撿地上的東西，攻擊選項 0、防禦選項 2。
@@ -264,7 +273,7 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		d.Command = CmdWeapon
 		d.Target = t
 		d.Ring = 0
-		d.Facing = s.stepToward(i, t)
+		d.Facing = s.facingToward(i, t)
 		s.enemyStrike(&d, i, t, EnemyNearStyle, rng)
 		s.applyEnemy(i, d)
 		return d
@@ -489,9 +498,14 @@ func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
 	a := &s.Actors[i]
 	d.Guard = EnemyNearGuard
 	// 攻擊選項是 `sub_2578F()` 的結果加二；超過 10 就退回 1（`0x23CEE`）。
-	style := EnemyStyle(a.Level, s.Actors[target].Guard, a.Weapon.Kind, rng) + 2
-	if style > 0x0A {
-		style = 1
+	// **這一次規劃裡被困住過就不抽了**，固定第 1 式（`0x23CD6` 先比 `word_34A08`，
+	// RE-117）。
+	style := 1
+	if a.Stuck == 0 {
+		style = EnemyStyle(a.Level, s.Actors[target].Guard, a.Weapon.Kind, rng) + 2
+		if style > 0x0A {
+			style = 1
+		}
 	}
 	d.Style = style
 	switch {
@@ -516,6 +530,42 @@ func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
 			d.Guard = loc + 1
 		}
 	}
+}
+
+// EnemyStuckRetries 是「八個方向都走不了」時重跑決策樹的上限。**原版沒有上限**
+// ——它靠那 1/3 的擲骰跳出去（期望三次，`0x2396E`）；remake 加一道保險，
+// 到頂就出指令碼 0（執行段印記錄 0x117「does nothing.」）。
+const EnemyStuckRetries = 8
+
+// enemyStuck 是繞不出去的三條退路（`0x2396E`…`0x23994`，RE-117）：
+//
+//	傷勢還沒到撤退門檻 → 原地揮武器（貼近打那一段，式固定第 1 式）
+//	否則 rand(3) == 1  → 回撤退段
+//	否則               → `word_34A08` 加一，重跑決策樹
+func (s *State) enemyStuck(i int, rng Rand) EnemyDecision {
+	a := &s.Actors[i]
+	if a.Injury() < a.FleeAt {
+		// 原地揮武器。目標是自己面前那一格，沒有實際目標時就打空氣——
+		// 原版跳的是 `0x23CD6`，也就是貼近打那一段的開頭。
+		d := EnemyDecision{Command: CmdWeapon, Target: -1, Ring: 0,
+			Facing: a.Facing}
+		s.enemyStrike(&d, i, i, EnemyNearStyle, rng)
+		s.applyEnemy(i, d)
+		return d
+	}
+	if rng.Roll(3) == 1 {
+		a.Retreating = true
+		d := EnemyDecision{Command: CmdRest, Target: -1, Ring: -1, Facing: a.Facing}
+		s.applyEnemy(i, d)
+		return d
+	}
+	a.Stuck++
+	if a.Stuck > EnemyStuckRetries {
+		d := EnemyDecision{Command: 0, Target: -1, Ring: -1, Facing: a.Facing}
+		s.applyEnemy(i, d)
+		return d
+	}
+	return s.planTactics(i, rng)
 }
 
 // enemyRetreat 是傷得太重那一段（`0x237F5`…`0x238C1`）。第二個回傳值為 false
@@ -568,7 +618,7 @@ func (s *State) adjacentParty(i int) bool {
 func (s *State) enemyShoot(i, target, ring int) EnemyDecision {
 	a := &s.Actors[i]
 	d := EnemyDecision{Command: CmdMissile, Target: target, Ring: ring,
-		Facing: s.stepToward(i, target)}
+		Facing: s.facingToward(i, target)}
 	a.Flag1D = 1
 	if s.Plan.Memo == nil {
 		s.Plan.Memo = map[int]Cell{}
@@ -582,8 +632,13 @@ func (s *State) enemyShoot(i, target, ring int) EnemyDecision {
 // 移動方式走三式的加權輪盤（`0x239D7`）。
 func (s *State) enemyMove(i, target, ring int, rng Rand) EnemyDecision {
 	a := &s.Actors[i]
+	facing := s.stepToward(i, target, rng)
+	if facing < 0 {
+		// 八個方向都站不下：走那三條退路（RE-117）。
+		return s.enemyStuck(i, rng)
+	}
 	d := EnemyDecision{Command: CmdMove, Target: target, Ring: ring}
-	d.Facing = s.stepToward(i, target)
+	d.Facing = facing
 	legsOK := a.RightLeg > 0 && a.LeftLeg > 0
 	form := EnemyMoveForm(a.Level, max(ring, 0), legsOK, a.Injury(), rng)
 	d.Style = IconMoveWalk + form
@@ -634,18 +689,13 @@ func (s *State) actorAt(x, y int) int {
 	return -1
 }
 
-// stepToward 是「往目標走一步」的方向。原版先用 `sub_25D7A(1)` 沿視線走一步再查
-// `[0x10D8]` 把相對格差換成方向（RE-081）；這裡直接取符號，兩者在相鄰與正對角的
-// 情形相同，斜向偏移大時可能差一格。目標是 -1 就隨機挑一個站得下的方向。
-func (s *State) stepToward(i, target int) int {
+// facingToward 只算「朝哪一格」，不看那一格走不走得過去——攻擊與射擊要的是朝向，
+// 不是一步走得到的位置。原版先用 `sub_25D7A(1)` 沿視線走一步再查 `[0x10D8]` 把
+// 相對格差換成方向（RE-081）；這裡直接取符號，兩者在相鄰與正對角的情形相同，
+// 斜向偏移大時可能差一格。
+func (s *State) facingToward(i, target int) int {
 	a := s.Actors[i]
 	if target < 0 {
-		for f := 0; f < 8; f++ {
-			c := RingCells(0)[f]
-			if !s.moveBlocked(i, a.X+c.Row, a.Y+c.Col) {
-				return f
-			}
-		}
 		return a.Facing
 	}
 	t := s.Actors[target]
@@ -656,6 +706,45 @@ func (s *State) stepToward(i, target int) int {
 		}
 	}
 	return a.Facing
+}
+
+// stepToward 是移動段挑方向那一段（`0x23F56`…`0x240B9` 與 `0x238E8`…`0x2394F`，
+// RE-117）：有目標就先試往目標那一步，不通再試左右各一格；三個都不通、或者根本
+// 沒有目標，就從**隨機**方向起繞八格。八格都站不下回 -1。
+func (s *State) stepToward(i, target int, rng Rand) int {
+	a := s.Actors[i]
+	if target >= 0 {
+		// 有目標（`0x23F56`…`0x240B9`）：先試往目標那一步，不通再試左右各一格。
+		t := s.Actors[target]
+		dx, dy := sign(t.X-a.X), sign(t.Y-a.Y)
+		base := -1
+		for f, c := range RingCells(0) {
+			if c.Row == dx && c.Col == dy {
+				base = f
+				break
+			}
+		}
+		if base >= 0 {
+			for _, f := range [3]int{base, (base + 7) % 8, (base + 1) % 8} {
+				c := RingCells(0)[f]
+				if !s.moveBlocked(i, a.X+c.Row, a.Y+c.Col) {
+					return f
+				}
+			}
+		}
+	}
+	// 沒有目標，或者那三個方向都不通（`0x240B9` 退回這一條）：從**隨機方向**起
+	// 繞一圈（`0x238E8` 的 `rand(8) − 1`）。八格都站不下就回 -1，由呼叫端走
+	// 三條退路。
+	start := rng.Roll(8) - 1
+	for k := 0; k < 8; k++ {
+		f := (start + k) % 8
+		c := RingCells(0)[f]
+		if !s.moveBlocked(i, a.X+c.Row, a.Y+c.Col) {
+			return f
+		}
+	}
+	return -1
 }
 
 func max(a, b int) int {

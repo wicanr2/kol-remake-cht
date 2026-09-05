@@ -32,8 +32,8 @@ const (
 	// NothingRecord 是指令被歸零之後那一句。
 	NothingRecord = 0x117
 	// FlinchRecord 是怯戰那一句；RestingRecord 是「is resting!」。
-	FlinchRecord   = 0x118
-	RestingRecord  = 0x119
+	FlinchRecord  = 0x118
+	RestingRecord = 0x119
 	// MissUnarmedRecord／MissWeaponRecord 是面前沒有人時揮空那兩句。
 	MissUnarmedRecord = 0x11F
 	MissWeaponRecord  = 0x120
@@ -361,7 +361,10 @@ func (s *State) act(i int, rng Rand) ActResult {
 		}
 		return out
 	case CmdRest:
-		out.Message = RestingRecord
+		// 看得到才印（`sub_2625A`，RE-124）。
+		if s.messageSeen(i) {
+			out.Message = RestingRecord
+		}
 		return out
 	case CmdLand:
 		// 下馬（`0x2070f`…`0x20774`，RE-124）：那一格上還有別人就印記錄 0x11A
@@ -472,21 +475,68 @@ func (s *State) move(i int) ActResult {
 	if MoveForm(a.Style) > MountingForm-1 {
 		a.Flag1E = 1
 	}
+	// 三句都要先問「有沒有人看得到」（`sub_2625A`，RE-124）：看不到就整段跳過，
+	// 連走成功之後那次重畫都不做。
+	seen := s.messageSeen(i)
 	if a.Facing < 0 || a.Facing >= len(ring0) {
-		out.Message = BlockedRecord
+		if seen {
+			out.Message = BlockedRecord
+		}
 		return out
 	}
 	step := ring0[a.Facing]
 	x, y := a.X+step.Row, a.Y+step.Col
 	if s.moveBlocked(i, x, y) {
-		out.Message = BlockedRecord
+		if seen {
+			out.Message = BlockedRecord
+		}
 		return out
 	}
 	a.X, a.Y = x, y
+	if !seen {
+		return out
+	}
 	out.Message = MovedRecord
 	// 走成功之後原版印完訊息等一次鍵、重畫戰場、再等一次（`0x265C9`／`0x265E1`）。
 	out.Redraw = true
 	return out
+}
+
+// MessageRange 是「有沒有人看得到」的方框半徑（`sub_2625A:0x2631f` 比的是 ±6）。
+const MessageRange = 6
+
+// messageSeen 回報這一手要不要印訊息（`sub_2625A`，RE-124）。
+//
+// 陣營不是怪物的一律印；怪物那一側要有隊員在 ±6 格內、而且那名隊員看得到它
+// 才印——玩家看不到的地方發生了什麼，畫面上不會多出一句。
+func (s *State) messageSeen(i int) bool {
+	if i < 0 || i >= len(s.Actors) {
+		return true
+	}
+	a := s.Actors[i]
+	if a.Side != SideMonster {
+		return true
+	}
+	for j := 0; j < PartySlots && j < len(s.Actors); j++ {
+		p := s.Actors[j]
+		if p.Side == SideEmpty {
+			continue
+		}
+		if abs(a.X-p.X) > MessageRange || abs(a.Y-p.Y) > MessageRange {
+			continue
+		}
+		if s.Field == nil {
+			return true
+		}
+		foot := s.Field.At(p.X, p.Y)
+		if p.Flag1E != 0 {
+			foot = MountedSight
+		}
+		if s.Field.LineOfSight(p.X, p.Y, a.X, a.Y, foot) {
+			return true
+		}
+	}
+	return false
 }
 
 // sharesCell 回報這一格上還有沒有別人站著（`sub_227C0`，RE-124）：
