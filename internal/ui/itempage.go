@@ -14,8 +14,8 @@ import (
 //
 // 清單那十七列落在分隔線右邊的窄欄裡（字格欄 32 ＝ x 256），寬度剛好六個字元。
 // 沒有反白的列是青色（EGA 索引 3）、選中的是白色（0x0F）。
-func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage,
-	party []town.Member) {
+func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.ItemPage,
+	party []town.Member) error {
 	l := town.ItemPageLayout
 
 	// 原版這一頁是整頁重畫（`sub_1103F(0)` 之後才 `sub_18F3A(0)` 畫立繪），
@@ -29,6 +29,16 @@ func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage,
 	fill(dst, l.Divider.X0, l.Divider.Y0,
 		l.Divider.Width(), l.Divider.Height(), town.ColourSheetFrame)
 
+	// 左邊那個人：一層一層貼上去，順序就是原版畫的順序（RE-126）。
+	// X 與寬的單位是 byte 欄，所以乘八才是像素。
+	for _, piece := range p.Figure {
+		pic, err := sprites.Get(piece.Archive, piece.Index)
+		if err != nil {
+			return err
+		}
+		draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
+	}
+
 	for i, row := range p.Rows {
 		colour := town.ColourListIdle
 		if i == p.Selected {
@@ -39,7 +49,7 @@ func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage,
 
 	// 明細、空格那幾句與動作做完那一句都畫在左邊那一框裡。
 	if p.Detail == nil && len(p.Message) == 0 && len(p.Note) == 0 {
-		return
+		return nil
 	}
 	// 明細框是 `sub_1BA9D` 畫的：填黑加一圈白，**沒有投影**（那是 `sub_1B7E9`，
 	// 這一頁沒有呼叫它）。它的右緣壓在清單左緣上，原版也是這樣。
@@ -66,18 +76,23 @@ func drawItemPage(dst *ebiten.Image, f *font.Font, p *town.ItemPage,
 					fmt.Sprintf("%d %s", i+1, m.Name))
 			}
 		}
-		return
+		return nil
 	}
 	if p.Detail != nil {
 		for _, seg := range p.Detail {
 			cell(dst, f, seg.Col-sc+dc, seg.Row-sr+dr, seg.Text)
 		}
-		return
+		return nil
 	}
 	for i, line := range p.Message {
 		cell(dst, f, dc, dr+i*town.LineStep, line)
 	}
+	return nil
 }
+
+// PixelsPerByte 是 EGA 平面模式一個 byte 橫跨幾個像素。立繪的版面表用 byte 欄
+// 當水平單位（RE-126）。
+const PixelsPerByte = 8
 
 // cellIn 與 cell 相同，但可以指定顏色——清單靠它區分反白與沒反白的列。
 func cellIn(dst *ebiten.Image, f *font.Font, col, row int, s string, c [3]uint8) {

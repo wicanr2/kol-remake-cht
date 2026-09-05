@@ -129,13 +129,14 @@ func TestEmptySlotMessage(t *testing.T) {
 	s.Party[i].InHand = nil
 	s.Party[i].Backpack = nil
 	openItems(s)
+	use(s)
 
 	worn := s.Inside.ItemPage.Message
 	if len(worn) < 2 || worn[len(worn)-1] != "Head" {
 		t.Fatalf("身上那一格的訊息是 %v", worn)
 	}
 	s.Inside.ItemPage.Selected = ItemSlotCount - 1
-	s.MoveItemSelection(0)
+	use(s)
 	pocket := s.Inside.ItemPage.Message
 	if len(pocket) < 2 || pocket[len(pocket)-1] != "in your pocket!" {
 		t.Fatalf("背包那一格的訊息是 %v", pocket)
@@ -154,7 +155,7 @@ func TestBeltAndWeaponAreDifferentRows(t *testing.T) {
 		want string
 	}{{WornSlots - 1, "Belt"}, {WornSlots, "Weapon"}} {
 		s.Inside.ItemPage.Selected = c.row
-		s.MoveItemSelection(0)
+		use(s)
 		got := s.Inside.ItemPage.Message
 		if len(got) == 0 || got[len(got)-1] != c.want {
 			t.Fatalf("第 %d 列印的是 %v，期望 %s", c.row, got, c.want)
@@ -169,6 +170,7 @@ func TestFilledSlotShowsDetail(t *testing.T) {
 	s.Party[i].Worn[0] = &Good{Name: "Barbut Helm", Price: 250, Kind: 2,
 		Position: 0, Encumbrance: 23, SizeClass: 8, Condition: 255}
 	openItems(s)
+	use(s)
 	if s.Inside.ItemPage.Detail == nil {
 		t.Fatal("有東西的那一格應該有明細")
 	}
@@ -204,7 +206,6 @@ func TestTakeItemIntoHand(t *testing.T) {
 	s.Party[i].Backpack = []Good{{Name: "Long Spear", Kind: 1, Class: 158, Position: 9}}
 	openItems(s)
 	s.Inside.ItemPage.Selected = WornSlots + 1 // 第一個口袋
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemTake)
 	if s.Party[i].InHand == nil || s.Party[i].InHand.Name != "Long Spear" {
@@ -222,7 +223,6 @@ func TestBeltItemFromHand(t *testing.T) {
 	s.Party[i].InHand = &Good{Name: "Greatsword", Kind: 3, Class: 87, Position: 9}
 	openItems(s)
 	s.Inside.ItemPage.Selected = WornSlots
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemBelt)
 	if s.Party[i].InHand != nil {
@@ -243,7 +243,6 @@ func TestWearItemChecksFit(t *testing.T) {
 	s.Party[i].Backpack = []Good{helm}
 	openItems(s)
 	s.Inside.ItemPage.Selected = WornSlots + 1
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemWear)
 	if s.Party[i].Worn[0] == nil {
@@ -256,7 +255,6 @@ func TestWearItemChecksFit(t *testing.T) {
 	s.Party[i].Worn[0] = nil
 	s.Party[i].Backpack = []Good{small}
 	s.Inside.ItemPage.Selected = WornSlots + 1
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemWear)
 	if s.Party[i].Worn[0] != nil {
@@ -275,7 +273,6 @@ func TestStowItem(t *testing.T) {
 	s.Party[i].Worn[0] = &Good{Name: "Barbut Helm", Kind: 2, Position: 0}
 	openItems(s)
 	s.Inside.ItemPage.Selected = 0
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemStow)
 	if s.Party[i].Worn[0] != nil || len(s.Party[i].Backpack) != 1 {
@@ -285,7 +282,6 @@ func TestStowItem(t *testing.T) {
 	s.Party[i].Worn[1] = &Good{Name: "Platemail T", Kind: 2, Position: 1}
 	s.Party[i].Backpack = make([]Good, BackpackSlots)
 	s.Inside.ItemPage.Selected = 1
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemStow)
 	if s.Party[i].Worn[1] == nil {
@@ -304,7 +300,6 @@ func TestDropItem(t *testing.T) {
 	s.Party[i].Worn[0] = &Good{Name: "Barbut Helm", Kind: 2, Position: 0}
 	openItems(s)
 	s.Inside.ItemPage.Selected = 0
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemDrop)
 	if s.Party[i].Worn[0] != nil {
@@ -325,7 +320,6 @@ func TestGiveItem(t *testing.T) {
 	s.Party[i].Worn[0] = &Good{Name: "Barbut Helm", Kind: 2, Position: 0}
 	openItems(s)
 	s.Inside.ItemPage.Selected = 0
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemGive)
 	if !s.Inside.ItemPage.Giving {
@@ -353,7 +347,6 @@ func TestEatItem(t *testing.T) {
 		Condition: 25}}
 	openItems(s)
 	s.Inside.ItemPage.Selected = WornSlots + 1
-	s.MoveItemSelection(0)
 	use(s)
 	act(s, IconItemEat)
 	if s.Party[i].Sheet.Nutrition != 15 {

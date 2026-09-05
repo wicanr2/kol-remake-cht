@@ -31,6 +31,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
+	portraitdata "github.com/wicanr2/kol-remake-cht/internal/portrait"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
 	"github.com/wicanr2/kol-remake-cht/internal/save"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
@@ -2211,6 +2212,8 @@ func main() {
 		"assets/original-derived-data/ui-text.json", "UI 文字庫 typed data")
 	buildingsPath := flag.String("town-buildings",
 		"assets/original-derived-data/town-buildings.json", "城鎮建築 typed data")
+	portraitPath := flag.String("portrait-layout",
+		"assets/original-derived-data/portrait-layout.json", "立繪版面 typed data")
 	flowScript := flag.String("flow-script", "",
 		"整條遊玩路徑的操作腳本，空白分隔；從標題序列開始，經書本、角色選項、"+
 			"角色選擇清單、旅店走到戶外地圖")
@@ -2818,6 +2821,10 @@ func main() {
 			os.Exit(1)
 		}
 		playSession.UIText = bank
+		// 立繪的版面表：讀不到就只是資料頁那兩頁畫不出人，其他照常（RE-126）。
+		if layout, err := portraitdata.Load(*portraitPath); err == nil {
+			playSession.Portraits = layout
+		}
 		if worldScreenState != nil {
 			playSession.TownCode = worldScreenState.Travel.Data.TownCode(
 				state.Town, state.EntryPoint)

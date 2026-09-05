@@ -1,6 +1,10 @@
 package town
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
+)
 
 // 物品那一頁（`sub_16986`，RE-127）。清單十七列，每一列對應角色記錄裡的一格。
 const (
@@ -57,6 +61,8 @@ type ItemPage struct {
 	Giving bool `json:"giving,omitempty"`
 	// Note 是動作做完之後那一句（丟掉了、給出去了、穿不下…）。
 	Note []string `json:"note,omitempty"`
+	// Figure 是左邊那個人要貼的幾張圖（`sub_18F3A(0)`，RE-126）。
+	Figure []portrait.Piece `json:"figure,omitempty"`
 }
 
 // 動作用得到的幾筆訊息（RE-127）。
@@ -111,7 +117,7 @@ func (s *Session) OpenItemPage() {
 		return
 	}
 	s.Inside.ItemPage = &ItemPage{Rows: rows}
-	s.showItemSlot()
+	s.refreshItemFigure()
 	// 清單層的圖示列是那一格加 U-TURN（`sub_16986` 的 `sub_11703(9)`／`(0x0F)`）。
 	s.setInsideIcons([]int{IconItemUse, IconUTurn})
 }
@@ -147,26 +153,9 @@ func (s *Session) MoveItemSelection(delta int) {
 		return
 	}
 	p.Selected = ((p.Selected+delta)%n + n) % n
-	s.showItemSlot()
-}
-
-// showItemSlot 把選中那一格的明細或空格訊息備好。原版是按下 Enter 才顯示，
-// remake 一移動就更新——同一份資料，少一次按鍵。
-func (s *Session) showItemSlot() {
-	p := s.Inside.ItemPage
-	i := s.speakerIndex()
-	if i < 0 {
-		return
-	}
-	g := s.Party[i].itemAt(p.Selected)
-	if g != nil {
-		p.Detail = s.goodDetail(*g)
-		p.Message = nil
-		s.Inside.Detail = p.Detail
-		return
-	}
-	p.Detail = nil
-	p.Message = s.emptySlotLines(p.Selected)
+	// 清單層只有立繪與清單：明細框要按下那一格才彈出來（原版是 `sub_196A9`
+	// 回來之後才 `sub_1BA9D`），所以移動時把框裡那幾行清掉。
+	p.Detail, p.Message, p.Note = nil, nil, nil
 	s.Inside.Detail = nil
 }
 
@@ -267,18 +256,25 @@ func (s *Session) AcceptItemSlot() {
 	g := s.Party[i].itemAt(p.Selected)
 	if g == nil {
 		// 空的那一格只印那幾句，沒有動作可做。
+		p.Detail, p.Note = nil, nil
+		p.Message = s.emptySlotLines(p.Selected)
+		s.Inside.Detail = nil
 		return
 	}
+	p.Detail = s.goodDetail(*g)
+	p.Message, p.Note = nil, nil
+	s.Inside.Detail = p.Detail
 	p.Acting = true
 	s.setInsideIcons(itemIcons(*g, p.Selected, len(s.Party)))
 }
 
-// closeItemAction 回到清單層。
+// closeItemAction 回到清單層：框裡那幾行收掉，圖示列換回那兩格。
 func (s *Session) closeItemAction() {
 	p := s.Inside.ItemPage
 	p.Acting = false
 	p.Giving = false
-	s.showItemSlot()
+	p.Detail, p.Message, p.Note = nil, nil, nil
+	s.Inside.Detail = nil
 	s.setInsideIcons([]int{IconItemUse, IconUTurn})
 }
 
@@ -430,6 +426,7 @@ func (s *Session) afterItemAction() {
 	note := p.Note
 	s.closeItemAction()
 	p.Note = note
+	s.refreshItemFigure()
 	s.syncParty()
 }
 
@@ -438,4 +435,17 @@ func (s *Session) Digit(n int) {
 	if s.ShowingItemPage() && s.Inside.ItemPage.Giving {
 		s.GiveItem(n)
 	}
+}
+
+// refreshItemFigure 重算左邊那個人。裝備一動立繪就跟著變——原版是整頁重畫，
+// 這裡只重算那一串貼圖計畫。
+func (s *Session) refreshItemFigure() {
+	if !s.ShowingItemPage() || s.Portraits == nil {
+		return
+	}
+	i := s.speakerIndex()
+	if i < 0 {
+		return
+	}
+	s.Inside.ItemPage.Figure = s.Portraits.Compose(s.Party[i].Figure(), 0)
 }

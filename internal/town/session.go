@@ -1,6 +1,7 @@
 package town
 
 import (
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
 	"strconv"
 	"strings"
 )
@@ -75,6 +76,8 @@ type Session struct {
 	Mode   Mode
 	Cursor int  // 門口圖示列的白框位置
 	Inside *Inn // ModeInside 時的畫面狀態
+	// Portraits 是立繪的合成版面（RE-126）。沒有它就畫不出資料頁那兩頁的人。
+	Portraits *portrait.Layout
 
 	// told 記的是這一次進門裡哪些話題槽已經講過。原版是進門時清零的六個旗標。
 	told    [TopicSlots]bool
