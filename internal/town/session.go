@@ -291,12 +291,17 @@ func (s *Session) acceptInside() {
 	case s.ShowingQuestList():
 		// 一組一頁，任何鍵翻下一組（原版是 `sub_144C3` 的 SPACEBAR）。
 		s.NextQuestPage()
+	case s.ShowingSpellList():
+		// 那一頁只剩 U-TURN，按下去回資料頁（`sub_166CC:0x167bb`）。
+		s.closeSpellList()
 	case s.ShowingSheet():
 		switch id {
 		case IconUTurn:
 			s.closeSheet()
 		case IconSheetNotes:
 			s.OpenQuestList()
+		case IconSheetSpells:
+			s.OpenSpellList()
 		default:
 			s.note(sheetIconName(id))
 		}

@@ -1,9 +1,9 @@
 {
   "schema": "kol-player-path-v1",
   "name": "town-scroll",
-  "description": "讀存檔開場在城 7 The Hostel 門邊，走進去按 SCROLL：先問要不要加入「Blue Gem Order」（入會費 450，智力門檻 90），答應之後扣錢、教派與頭銜寫進角色；選單只有一列「Learn a spell」，因為這名角色還沒學過法術。進去挑第二筆 Tyatwelon（330 金幣）買下，回清單；離開之後開 MIRROR，資料頁最下面那一列印的是「Blue Gem  Illusionist」，圖示列也多出法術那一格。全程只經過 town.Session。存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json --out workplace/saves/hostel.json --gold 2000 --town 7 --x 59 --y 28 --entry 7` 產生（RE-121）。",
-  "script": "U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > RET",
-  "step_count": 19,
+  "description": "讀存檔開場在城 7 The Hostel 門邊，走進去按 SCROLL：先問要不要加入「Blue Gem Order」（入會費 450，智力門檻 90），答應之後扣錢、教派與頭銜寫進角色；選單只有一列「Learn a spell」，因為這名角色還沒學過法術。進去挑第二筆 Tyatwelon（330 金幣）買下，回清單；離開之後開 MIRROR，資料頁最下面那一列印的是「Blue Gem  Illusionist」，圖示列也多出法術那一格；按下那一格開法術一覽，剛買的 Tyatwelon 出現在左上那一格。全程只經過 town.Session。存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json --out workplace/saves/hostel.json --gold 2000 --town 7 --x 59 --y 28 --entry 7` 產生（RE-121）。",
+  "script": "U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > RET > > > RET",
+  "step_count": 23,
   "checkpoints": [
     {
       "step": 8,
@@ -24,6 +24,10 @@
     {
       "step": 18,
       "note": "資料頁最下面那一列是教派與頭銜，圖示列多出法術那一格"
+    },
+    {
+      "step": 22,
+      "note": "法術一覽：兩欄各八格，剛買的那一筆在左上（框 (14,58)–(112,66)，字在第 2 欄第 60 列）"
     }
   ],
   "save": null,
@@ -142,6 +146,30 @@
       "token": "RET",
       "file": "docs/verification/player-path/town-scroll/step-018.png",
       "sha256": "f916a5ca82a17e15b1d9f32c4d69b5ee3b89b45cd522a318f18ca44727b8875d"
+    },
+    {
+      "step": 19,
+      "token": ">",
+      "file": "docs/verification/player-path/town-scroll/step-019.png",
+      "sha256": "0fe0ea18a405a849feb2c488aa3c0c26e7597568289d01e6040134ee1f4c5ff0"
+    },
+    {
+      "step": 20,
+      "token": ">",
+      "file": "docs/verification/player-path/town-scroll/step-020.png",
+      "sha256": "6111705f9df95b2c20c57f4abb4f04291b8fe6ee6875dd3833361f97e43edd9c"
+    },
+    {
+      "step": 21,
+      "token": ">",
+      "file": "docs/verification/player-path/town-scroll/step-021.png",
+      "sha256": "8e2f0f4a659d55b10c8956e20327c9ebd74bbfaee9ede0d526cc2512fb5c69ca"
+    },
+    {
+      "step": 22,
+      "token": "RET",
+      "file": "docs/verification/player-path/town-scroll/step-022.png",
+      "sha256": "5a1f12ff7a2e2bf6c8e3cd0dd7cbffe32ce86ee59653c6cbf0df58597a3f3ba0"
     }
   ]
 }

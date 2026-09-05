@@ -89,6 +89,8 @@ type Inn struct {
 	DialogZh []string `json:"dialog_zh"`
 	// QuestList 是蓋在角色資料頁上的任務一覽；nil 代表沒開（RE-111）。
 	QuestList *QuestList `json:"quest_list,omitempty"`
+	// SpellList 是蓋在同一頁上的法術一覽（RE-123）。
+	SpellList *SpellPage `json:"spell_list,omitempty"`
 	Icons    []int    `json:"icons"`
 	Selected int      `json:"selected"`
 

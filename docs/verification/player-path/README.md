@@ -294,12 +294,13 @@ RE-120 的反組譯（`sub_1452D` 把游標設回 (0x0D, 0x56)，之後三段都
 
 ## `town-scroll`：加入教派、買一筆法術
 
-`U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > RET`，19 步，從存檔開場
+`U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > RET > > > RET`，23 步，從存檔開場
 站在城 7 The Hostel 門邊。按 SCROLL 先問要不要加入「Blue Gem Order」——入會費
 450、智力門檻 90；答應之後扣錢，教派與頭銜寫進角色。選單只有一列
 「Learn a spell」，因為這名角色還沒學過法術。進去挑第二筆 Tyatwelon（330）買下，
 回清單。離開之後開 MIRROR：資料頁最下面那一列是「Blue Gem  Illusionist」，
-圖示列也多出法術那一格。
+圖示列也多出法術那一格——按下去開法術一覽（兩欄各八格），剛買的 Tyatwelon
+在左上那一格。
 
 檢查點只有描述，**沒有 identical_to**：原版收據裡沒有人入過會，這一頁還沒有
 對拍截圖。版面與流程數字全部來自 RE-121 的反組譯。

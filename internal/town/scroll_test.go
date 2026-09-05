@@ -171,3 +171,69 @@ func TestScrollMenuHasSpellbookRow(t *testing.T) {
 		t.Fatalf("法術書那一頁應該記一筆未實作：%v", s.Unimplemented)
 	}
 }
+
+// 資料頁上的法術一覽：兩欄各八格，空的一格之後全部不畫（RE-123）。
+func TestSpellCellsStopAtTheFirstGap(t *testing.T) {
+	cells := SpellCells([]Spell{{Name: "Tyanalon"}, {Name: ""}, {Name: "Kelnalon"}})
+	if len(cells) != 1 || cells[0].Name != "Tyanalon" {
+		t.Fatalf("排出來是 %+v", cells)
+	}
+}
+
+// 一格的版面直接照原版的算式：左欄第 0 格的框是 (14, 58)–(112, 66)，
+// 字在第 2 欄、第 60 列；右欄往右 0xC0。
+func TestSpellCellLayout(t *testing.T) {
+	got := SpellCellAt(0, "X")
+	if got.FrameX != 14 || got.FrameY != 58 || got.FrameW != 99 || got.FrameH != 9 {
+		t.Fatalf("左上那一格是 %+v", got)
+	}
+	if got.TextCol != 2 || got.TextRow != 60 {
+		t.Fatalf("文字座標是 %d／%d", got.TextCol, got.TextRow)
+	}
+	right := SpellCellAt(8, "X")
+	if right.FrameX != 14+0xC0 || right.FrameY != 58 {
+		t.Fatalf("右欄第一格是 %+v", right)
+	}
+	low := SpellCellAt(7, "X")
+	if low.FrameY != 58+7*13 || low.TextRow != 60+7*13 {
+		t.Fatalf("左欄最後一格是 %+v", low)
+	}
+}
+
+// 資料頁上按下法術那一格會開一覽，再按 U-TURN 回資料頁。
+func TestSheetSpellListOpensAndCloses(t *testing.T) {
+	s := scrollSession(t, 1000, 109)
+	s.Party[0].Spells = []Spell{{Name: "Tyanalon"}, {Name: "Kelnalon"}}
+	s.OpenSheet()
+	if !s.ShowingSheet() {
+		t.Fatal("MIRROR 應該開得出資料頁")
+	}
+	icons, _ := s.Icons()
+	want := IconSprite(IconSheetSpells)
+	at := -1
+	for i, id := range icons {
+		if id == want {
+			at = i
+		}
+	}
+	if at < 0 {
+		t.Fatalf("資料頁的圖示列少了法術那一格：%v", icons)
+	}
+	s.Inside.Selected = at
+	s.Accept()
+	if !s.ShowingSpellList() {
+		t.Fatal("按下法術那一格應該開一覽")
+	}
+	if len(s.Inside.SpellList.Cells) != 2 {
+		t.Fatalf("一覽是 %+v", s.Inside.SpellList)
+	}
+	icons, _ = s.Icons()
+	if len(icons) != 1 || icons[0] != IconSprite(IconUTurn) {
+		t.Fatalf("一覽的圖示列是 %v", icons)
+	}
+	s.Inside.Selected = 0
+	s.Accept()
+	if s.ShowingSpellList() || !s.ShowingSheet() {
+		t.Fatal("U-TURN 應該回資料頁")
+	}
+}

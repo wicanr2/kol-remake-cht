@@ -35,6 +35,10 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 				return err
 			}
 		}
+		// 法術一覽是同一頁上的兩欄各八格（RE-123）。
+		if in.SpellList != nil {
+			drawSpellCells(dst, small, in.SpellList)
+		}
 	} else {
 		// 競技場沒有肖像可畫（`sub_2B454` 畫的是什麼還沒解），Archive 空著就跳過。
 		if in.Portrait.Archive != "" {
@@ -85,6 +89,15 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		frame(dst, x, b.Y, b.Width, b.Height, c)
 	}
 	return nil
+}
+
+// drawSpellCells 畫資料頁上的法術一覽：一格一個白框，框裡印名字（RE-123）。
+func drawSpellCells(dst *ebiten.Image, f *font.Font, p *town.SpellPage) {
+	for _, c := range p.Cells {
+		fill(dst, c.FrameX, c.FrameY, c.FrameW, c.FrameH, town.ColourBoxFill)
+		frame(dst, c.FrameX, c.FrameY, c.FrameW, c.FrameH, town.ColourBoxEdge)
+		cell(dst, f, c.TextCol, c.TextRow, c.Name)
+	}
 }
 
 // drawSteed 畫馬廄明細頁那一匹：圖在 (112, 86)，名字在圖的右邊（RE-120）。
