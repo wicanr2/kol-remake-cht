@@ -2394,6 +2394,12 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+		// 書本畫面的標籤走 BOOKDATA 那一份譯文：那份文字庫逐筆翻過
+		// 也驗過，`-strings` 只留 remake 自己加的字串。
+		if _, err := table.LoadBank(*uiI18nPath, town.BankBook); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 	}
 
 	var slots *roster.Roster

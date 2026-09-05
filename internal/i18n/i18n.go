@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"regexp"
+	"strings"
 )
 
 type Entry struct {
@@ -82,3 +84,69 @@ func (t *Table) Missing(all []string) []string {
 
 // Entries 回傳全部條目，供狀態統計使用。
 func (t *Table) Entries() map[string]Entry { return t.entries }
+
+// uiBanks 是 `docs/i18n/ui-zh-Hant.json` 的版面：三個文字庫，記錄號當鍵。
+type uiBanks struct {
+	Schema string                                  `json:"schema"`
+	Banks  map[string]map[string]struct {
+		En string `json:"en"`
+		Zh string `json:"zh"`
+	} `json:"banks"`
+}
+
+// markup 把 `~Vxx`／`~Hxx`／`~Cxx` 這類定位碼剝掉。原版用它們在畫面上跳位置，
+// remake 的書本自己排版，比對與顯示都不需要（RE-063）。
+var markup = regexp.MustCompile(`~[VHCvhc][0-9A-Fa-f]{2}`)
+
+// LoadBank 把一份 UI 文字庫的譯文疊到現有的表上：以**英文段**當鍵。
+//
+// 書本畫面的標籤是從原版畫面量測出來的（RE-043），文字庫則是逐筆翻好的
+// （486 筆全過），兩邊本來是各自為政的兩份譯文——`NAME` 在一邊是「名字」、
+// 在另一邊是「姓名」。這一支把文字庫那一份接上來：剝掉定位碼、按 `@` 切段、
+// 去掉尾端的冒號與空白，英文段就是書本標籤的那個字串。
+//
+// **中英段數不同的記錄整筆跳過**：對不上就寧可漏譯，不猜哪一段配哪一段。
+func (t *Table) LoadBank(path, bank string) (int, error) {
+	if t == nil {
+		return 0, fmt.Errorf("字串表是空的")
+	}
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		return 0, fmt.Errorf("讀取 UI 文字庫譯文失敗：%w", err)
+	}
+	var doc uiBanks
+	if err := json.Unmarshal(raw, &doc); err != nil {
+		return 0, fmt.Errorf("解析 UI 文字庫譯文失敗：%w", err)
+	}
+	records, ok := doc.Banks[bank]
+	if !ok {
+		return 0, fmt.Errorf("譯文裡沒有文字庫 %s", bank)
+	}
+	added := 0
+	for _, rec := range records {
+		en := strings.Split(markup.ReplaceAllString(rec.En, ""), "@")
+		zh := strings.Split(markup.ReplaceAllString(rec.Zh, ""), "@")
+		if rec.Zh == "" || len(en) != len(zh) {
+			continue
+		}
+		for i := range en {
+			key := strings.TrimRight(strings.TrimSpace(en[i]), ": ")
+			key = strings.TrimSpace(key)
+			value := strings.TrimSpace(zh[i])
+			if key == "" || value == "" {
+				continue
+			}
+			// 譯文那一段同樣要去掉尾端的冒號，再把補齊寬度用的全形空白收掉——
+			// 原版英文靠半形空白把冒號對齊，譯文照做，而 remake 的書本是把
+			// 標籤與冒號各自定位的，那些空白不能跟著印出去。
+			value = strings.TrimSpace(strings.TrimRight(value, "：:"))
+			if value == "" {
+				continue
+			}
+			t.entries[key] = Entry{En: key, Zh: value, Status: "核准",
+				Note: bank + " 文字庫"}
+			added++
+		}
+	}
+	return added, nil
+}

@@ -29,19 +29,35 @@
 
 ## 翻譯來源與狀態
 
-字串表在 `docs/i18n/newchar-zh-Hant.json`，狀態沿用術語表的三級：核准／暫譯／待查。
-種族、屬性、`reroll` 等詞取自 `docs/manual/glossary.md` 與 SPEC-005 已固定的屬性契約；
-職業名多為暫譯，精靈教團專名沿用說明書作法保留拉丁拼寫。查不到譯文的字串會原樣顯示
-英文，不猜。
+書本畫面的標籤走 **`docs/i18n/ui-zh-Hant.json` 的 BOOKDATA 那一份**：那是三份 UI
+文字庫 486 筆逐筆翻過也驗過的譯文，`internal/i18n` 的 `LoadBank` 把它疊到
+`docs/i18n/newchar-zh-Hant.json` 上——剝掉 `~Vxx`／`~Hxx` 定位碼、按 `@` 切段、
+去掉尾端的冒號與補齊寬度的空白，英文段就是書本標籤那個字串。中英段數對不上的
+記錄整筆跳過，不猜哪一段配哪一段。
+
+`newchar-zh-Hant.json` 留下的是 remake 自己加的字串（`New character`、`Select one`、
+`CANCEL`／`ACCEPT` 這些原版沒有的）。查不到譯文的字串會原樣顯示英文，不猜。
+
+兩份譯文本來各自為政，接起來之後有 21 個詞改用文字庫那一份，其中
+`NAME` 從「名字」變「姓名」、`MALE`／`FEMALE` 從「男性／女性」變「男／女」、
+精靈教團專名從拉丁拼寫變成中譯。`HIGHWAYMAN` 原本在文字庫裡誤譯成「築路工」
+（把 highway 當成道路工程），已改成「攔路盜」。
+
+狀態沿用術語表的三級：核准／暫譯／待查。職業名多為暫譯。
 
 ## 文字安全矩形檢查
 
-`text-fit.json`：122 項，0 項失敗。
+`text-fit.json`：6,952 項，0 項失敗。
 
 檢查用實際字模表的逐字字寬計算每個字串的寬度，逐條要求：
 
 - 每個字元在字模表裡都有字模（缺字會被畫成空白，那是漏字，不是排版問題）。
 - 字串畫在指定起點時右緣不超出所屬的文字安全矩形。
+- **KOLDATA 譯文畫在城鎮對話框裡的每一行**都不超出框的內緣。只驗寬度不驗行數：
+  一筆記錄不一定是「一次畫出來的一段」——部位名那一筆（0x8D）是十六個詞的名稱表，
+  程式一次只取一行。索引 ≥ 0x100 的戰鬥訊息、含 `~Vxx` 自己跳位置的記錄
+  （例如資料頁的標籤表 0x73）與野外標籤那一段（0xD5–0xE1，另有自己的框）
+  排除在外。
 - 名字欄 16 個字元的最寬情形仍在左頁框內（因此中文模式把名字另起一行畫在整頁寬度上，
   和原版英文版面一樣）。
 - 十列屬性、右頁最長的 12 項清單、六項角色選項選單、16 槽角色清單的最後一列底緣，
@@ -65,12 +81,25 @@ tools/run_cjk_font_build.sh --strings docs/i18n/newchar-zh-Hant.json \
 tools/run_kol_headless.sh -dump-cjk-layout workplace/cjk-layout.json
 python3 tools/verify_text_fit.py --layout workplace/cjk-layout.json \
     --font assets/ui-font/manifest.json --strings docs/i18n/newchar-zh-Hant.json \
+    --bank-strings docs/i18n/ui-zh-Hant.json --ui-i18n docs/i18n/ui-zh-Hant.json \
     --data assets/original-derived-data/character-creation.json \
+    --town-i18n docs/i18n/town-zh-Hant.json \
+    --town-sample docs/re/town-outdoor-sample.json \
+    --town-sample docs/re/town1-outdoor-sample.json \
+    --town-sample docs/re/town-inn-sample.json \
+    --town-sample docs/re/town-inn-sample-recruited.json \
     --out docs/verification/cjk-ui/text-fit.json
 tools/run_kol_headless.sh -lang zh-Hant \
     -script "z e d RET RET RET RET DOWN RET" -shot-dir docs/verification/cjk-ui/shots
 tools/run_kol_headless.sh -lang zh-Hant -delete-script "DOWN RET y" \
     -shot-dir docs/verification/cjk-ui/shots/delete
+for s in menu roster harbor inn outdoor; do
+  tools/run_kol_headless.sh -lang zh-Hant -scene $s \
+      -shot docs/verification/cjk-ui/shots/$s.png
+done
+tools/run_kol_headless.sh -lang zh-Hant -scene inn \
+    -inn docs/re/town-inn-sample-recruited.json \
+    -shot docs/verification/cjk-ui/shots/inn-recruited.png
 ```
 
 字模表的烘焙要用 `tools/run_cjk_font_build.sh`（有界容器＋主機字型目錄唯讀掛載）；

@@ -19,8 +19,34 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import pathlib
 import sys
+
+
+MARKUP = re.compile(r"~[VHCvhc][0-9A-Fa-f]{2}")
+
+
+def bank_labels(path: pathlib.Path, bank: str) -> dict[str, str]:
+    """把一份 UI 文字庫的譯文攤成「英文段 → 中文段」，規則與 runtime 相同。
+
+    剝掉 `~Vxx`／`~Hxx`／`~Cxx` 定位碼、按 `@` 切段、去掉尾端的冒號與補齊寬度的
+    空白。中英段數不同的記錄整筆跳過——對不上就不猜哪一段配哪一段
+    （`internal/i18n` 的 `LoadBank` 是同一套判斷）。
+    """
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    out: dict[str, str] = {}
+    for rec in doc["banks"][bank].values():
+        en = MARKUP.sub("", rec.get("en") or "").split("@")
+        zh = MARKUP.sub("", rec.get("zh") or "").split("@")
+        if not rec.get("zh") or len(en) != len(zh):
+            continue
+        for a, b in zip(en, zh):
+            key = a.strip().rstrip(": ").strip()
+            value = b.strip().rstrip("：:").strip()
+            if key and value:
+                out[key] = value
+    return out
 
 
 def main() -> int:
@@ -28,6 +54,13 @@ def main() -> int:
     p.add_argument("--layout", required=True)
     p.add_argument("--font", required=True)
     p.add_argument("--strings", required=True)
+    p.add_argument("--bank-strings",
+                   help="UI 文字庫的譯文（`docs/i18n/ui-zh-Hant.json`）；"
+                        "書本標籤走這一份，與 runtime 的合併規則相同")
+    p.add_argument("--bank", default="BOOKDATA", help="要疊上來的文字庫名稱")
+    p.add_argument("--ui-i18n",
+                   help="UI 文字庫的譯文；KOLDATA 那一份畫在城鎮對話框與野外標籤框裡，"
+                        "一併做安全矩形檢查")
     p.add_argument("--data", required=True)
     p.add_argument("--town-sample", action="append", default=[],
                    help="城鎮畫面樣本 JSON，檢查中文台詞是否放得進對話框（可重複）")
@@ -48,6 +81,8 @@ def main() -> int:
     for key in ("labels", "races", "secondary", "professions", "ui"):
         for item in table.get(key, []):
             zh[item["en"]] = item["zh"]
+    if args.bank_strings:
+        zh.update(bank_labels(pathlib.Path(args.bank_strings), args.bank))
 
     def width(text: str) -> tuple[int, list[str]]:
         total, missing = 0, []
@@ -200,6 +235,41 @@ def main() -> int:
                            "missing_glyphs": missing,
                            "pass": inn["DialogTextX"] + w <= dialog_right
                                    and not missing})
+
+    # KOLDATA 的譯文（`docs/i18n/ui-zh-Hant.json`）畫在城鎮對話框裡：招呼語、
+    # 住宿與治療的問答、商店那幾句。原文用 `@` 換行，這裡按 `@` 拆行逐行量寬度。
+    #
+    # **只驗寬度，不驗行數**：一筆記錄不一定是「一次畫出來的一段」——部位名那一筆
+    # （0x8D）是十六個詞的名稱表，程式一次只取一行。哪一筆會一次畫幾行，要等每一筆
+    # 都接上畫面才知道。
+    #
+    # 三種記錄排除在外：**索引 ≥ 0x100** 是戰鬥那一段（畫在戰鬥的訊息框，
+    # 中文版面還沒定）、**含 `~Vxx` 的**自己跳到畫面別處（例如資料頁的標籤表 0x73）、
+    # 以及野外標籤那一段（0xD5–0xE1，另有自己的框，下面單獨檢查）。
+    ui_records = {}
+    if args.ui_i18n:
+        doc = json.loads(pathlib.Path(args.ui_i18n).read_text())
+        ui_records = {int(k): (v.get("zh") or "")
+                      for k, v in doc["banks"]["KOLDATA"].items()}
+    if inn and ui_records:
+        dialog_right = inn["DialogX"] + inn["DialogW"] - 1
+        for index in sorted(ui_records):
+            text = ui_records[index]
+            if index >= 0x100 or 0xD5 <= index <= 0xE1 or not text:
+                continue
+            if re.search(r"~[Vv][0-9A-Fa-f]{2}", text):
+                continue
+            lines = [ln for ln in MARKUP.sub("", text).split("@") if ln.strip()]
+            for line in lines:
+                w, missing = width(line)
+                checks.append({"kind": "dialog-ui",
+                               "en": f"{args.ui_i18n} 記錄 {index:#x}", "zh": line,
+                               "x": inn["DialogTextX"], "width": w,
+                               "right_limit": dialog_right,
+                               "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
+                               "missing_glyphs": missing,
+                               "pass": inn["DialogTextX"] + w <= dialog_right
+                                       and not missing})
 
     # 戶外畫面的日期框：兩行中文字，安全矩形是框的內緣。
     outdoor = layout_doc.get("town_outdoor")

@@ -7406,12 +7406,29 @@ word_30A6E:word_30A70 = [+0x2A] << 16 | [+0x2B] << 8 | [+0x2C]
 `tools/extract_character_roster.py` 與 `town.Sheet` 的欄位名跟著改成
 `order`／`title`。
 
-### 還沒讀的
+### 選單第 1 列是法術編輯器（`部分`）
 
-`sub_178E0`（824 條）是選單第 1 列的法術書：它掃角色的十六格法術做成清單、
-把槽號記進 `[0x9E28 + n]`，之後做什麼還沒讀。記錄 0x4A
-「`~V5A~H06Record changes in Spellbook?`」沒有出現在 `sub_17318` 裡，
-應該就在那一支。
+`sub_178E0`（824 條）掃角色的十六格法術做成清單、把槽號記進 `[0x9E28 + n]`，
+用同一支清單元件選一筆（`0x179e8`：一次最多八列、總筆數 n），選中之後把那
+十六個 byte 抄進 `0x9E28` 當工作副本，接著進一個**欄位編輯迴圈**：
+
+```
+var_10 = 0                                  ; 欄位游標
+迴圈：
+    sub_1874E()                             ; 畫編輯畫面
+    sub_18350(var_10)                       ; 畫游標停的那一欄
+    sub_1B100(4) 等鍵
+    0x4800／0x4B00（上、左）→ var_10 − 1，繞到 0x0C
+    0x4D00／0x5000（右、下）→ var_10 + 1，繞回 0
+    …
+```
+
+**十三個欄位**（0…0x0C 繞圈），所以「Modify a spell」是讓玩家改法術的參數，
+不是只看看而已。記錄 0x4A「`~V5A~H06Record changes in Spellbook?`」與
+0x4B／0x4C「`"That one is unknown to the Order of the@`」都在這一支裡，
+`0x4D` 那一筆的標籤（`CLASS`／`SUBCLASS`／`STAT`／`RANGE`／`DUR`／`DMG`／
+`Adventure Point Cost`／`Gold Crown Cost`）就是那些欄位。整段還沒逐條讀完，
+remake 按下去只記一筆。
 
 ## RE-122：疲勞的上限與效果 7／8 打的那兩個全域
 
