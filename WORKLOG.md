@@ -3449,4 +3449,20 @@ up?`）停下來等 y／n（`0x20354` 的 `sub_1B100(5)`），敵人才直接撿
 指令列多出撿那一格、執行段停在問句上，答是換回帶武器那一組、答否東西留在地上。
 兩行規格檔跑同一段路的兩種回答。
 
+### 任務要的那一件東西是什麼，解出來了
+
+那十六個 byte 的來源既然是任務地點 payload 的 `+0x29`，就直接讀得出來——二十四個
+地點各一件：Gavel Of Oak、Village Flag、White Quill、Truth Sword、Shackles、
+Kelder Crown、Ship Wheel、Coat Of Arms、Flask Of Oil、Silk Cloak、Stone Mallet、
+Blue Vial、Serpent Wand、Gold Chalice、Pirate Hat、Hidden Staff、Parth Flask、
+Ruby Choker、Pirate Chest、Statuette、Gold Bracer、Teddy Bear、Shade Ring、
+Sheller Ward。`quest-sites.json` 多一個 `quest_item` 欄，`NewQuest` 拿它填
+`State.QuestItem`——RE-103 那條「帶著它站到邊上就算完成」這才真的比得出東西。
+
+**還缺的是它一開場放在戰場哪一格。**站位表就在它前面（`+3` 起 12＋12＋6＋6 到
+`+0x27` 為止），所以 `+0x27`／`+0x28` 是緊接著的兩個 byte，二十四個地點的值都落在
+5…56（可走區是 4…0x3B），`sub_2B0FF:0x2B1F0` 又把它們抄進兩個全域，其中一個在
+競技場那一支被設成 `0x80`——與戰場物品那張 X 表的「不在場」哨兵相同。看起來就是
+座標，但**讀那兩個全域的地方還沒找到**，所以資料裡先原樣留成 `hint_bytes`，不放。
+
 自評 87.51 → 87.76（戰鬥 96% → 97%）。

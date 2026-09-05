@@ -21,6 +21,7 @@ import zipfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+from extract_town_buildings import packed_name  # noqa: E402
 from inventory_image_archives import EXPECTED_ZIP_SHA256  # noqa: E402
 from extract_town_text import render  # noqa: E402
 from probe_town_data import lzw_decode, payloads, read_volumes  # noqa: E402
@@ -37,6 +38,15 @@ PLACEMENT_OFFSET, MONSTER_SLOTS, PARTY_SLOTS = 3, 12, 6
 # 敘述：記錄 0x80 起八列，一列 16 byte——第 0 個 byte 是字數，
 # 之後從第 8 個 bit 起每 5 個 bit 一個字（`sub_2B0FF:0x2B23F` 的 `sub_1B94F`）。
 TEXT_OFFSET, TEXT_LINES, TEXT_STRIDE, TEXT_MAX = 0x80, 8, 0x10, 24
+# 任務要的那一件東西：記錄 +0x29 起十六個 byte，版面與商店的商品記錄相同（RE-113）。
+# `sub_2B0FF:0x2B1C4` 把它複製到 DGROUP `0xB956`，戰鬥中 `sub_2886C` 拿它跟角色
+# 手上那件逐 byte 比——帶著它逃出戰場就算任務完成（RE-103）。
+QUEST_ITEM_OFFSET, QUEST_ITEM_BYTES = 0x29, 0x10
+# 緊接在站位表後面的兩個 byte。`sub_2B0FF:0x2B1F0` 在 `byte_39826` 非零時把它們
+# 抄進 `byte_30C6E`／`byte_30A7E`，而後者在別處會被設成 `0x80`——與戰場物品那張
+# X 表的「不在場」哨兵相同（`0x1E569`）。**兩個全域被誰讀還沒解**，所以這一版
+# 只把它們原樣留在資料裡，不當成座標用。
+QUEST_ITEM_HINT_OFFSET = 0x27
 
 
 def line_values(data: bytes, base: int, count: int) -> list[int]:
@@ -113,6 +123,14 @@ def main() -> int:
             "party_x": list(raw[PLACEMENT_OFFSET + 2 * MONSTER_SLOTS + PARTY_SLOTS:
                                 PLACEMENT_OFFSET + 2 * MONSTER_SLOTS + 2 * PARTY_SLOTS]),
             "narrative": narrative(raw),
+            "quest_item": {
+                "name": packed_name(raw[QUEST_ITEM_OFFSET:
+                                        QUEST_ITEM_OFFSET + QUEST_ITEM_BYTES]),
+                "record": raw[QUEST_ITEM_OFFSET:
+                              QUEST_ITEM_OFFSET + QUEST_ITEM_BYTES].hex(),
+                "hint_bytes": list(raw[QUEST_ITEM_HINT_OFFSET:
+                                       QUEST_ITEM_HINT_OFFSET + 2]),
+            },
         })
 
     doc = {

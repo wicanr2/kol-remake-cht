@@ -1,5 +1,7 @@
 package battle
 
+import "strings"
+
 // 一場戰鬥的狀態機。這一版只做到「進得去、看得到、逃得掉」：
 // 回合結構、移動與命中結算還沒解出來（RE-079），因此不在這裡。
 
@@ -112,8 +114,9 @@ type State struct {
 	// byte，來自任務 payload 的 `+0x29`，RE-113）。帶著它逃出戰場就算完成，
 	// 不必把怪物打完。空字串表示這一場沒有那樣的東西。
 	//
-	// **還沒有人設它**：原版開打時會把那一件放到地上第 0 格（`0x1E68C`），
-	// 這一版還沒做，所以任務戰鬥走的是「全隊都到邊上」那一條（RE-113）。
+	// 任務地點那一條由 `NewQuest` 從 `Site.QuestItem` 填。**原版還會把那一件放到
+	// 地上第 0 格**（`0x1E68C`），這一版沒做——那一格的座標由誰填還沒解，
+	// 所以在遊戲裡只有「本來就帶著它」的角色算數（RE-113）。
 	QuestItem string
 	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠、Adventure 是每個人
 	// 分到的冒險點數（RE-091／RE-096）。
@@ -162,6 +165,10 @@ type PickUpAsk struct {
 func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State {
 	s := &State{Site: site, Stage: StageIntro, Field: field, Party: party,
 		Monster: monster}
+	// 任務地點才有那一件東西（`sub_2886C` 先看 `word_34968`，RE-113）。
+	if site.Index >= 0 {
+		s.QuestItem = strings.ToUpper(site.QuestItem.Name)
+	}
 	s.Actors = make([]Actor, MaxActors)
 	for i := range s.Actors {
 		s.Actors[i].Side = SideEmpty

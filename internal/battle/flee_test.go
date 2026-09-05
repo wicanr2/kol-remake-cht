@@ -140,3 +140,25 @@ func TestFleeReturnsToExecuting(t *testing.T) {
 		t.Fatalf("訊息應該清空，得到 %v", s.Exec.Text)
 	}
 }
+
+// 任務地點那一場會從地點記錄填上「任務要的那一件」（RE-113）；隨機遭遇不填。
+func TestNewQuestTakesQuestItemName(t *testing.T) {
+	site := &Site{Index: 3, Count: 0,
+		QuestItem: QuestItem{Name: "Truth Sword"},
+		PartyX:    []int{20}, PartyY: []int{20}}
+	s := NewQuest(site, []Member{{Name: "POONTANG", Size: 100, Health: 100}},
+		Monster{}, Generate(&fixedRand{values: []int{1}}))
+	if s == nil {
+		t.Fatal("該開得起來")
+	}
+	if s.QuestItem != "TRUTH SWORD" {
+		t.Fatalf("任務物品是 %q，期望 TRUTH SWORD（畫面上整段大寫）", s.QuestItem)
+	}
+	// 隨機遭遇（Site.Index < 0）不填——原版 `sub_2886C` 先看 `word_34968`。
+	site.Index = -1
+	s = NewQuest(site, []Member{{Name: "POONTANG", Size: 100, Health: 100}},
+		Monster{}, Generate(&fixedRand{values: []int{1}}))
+	if s.QuestItem != "" {
+		t.Fatalf("隨機遭遇不該有任務物品，得到 %q", s.QuestItem)
+	}
+}

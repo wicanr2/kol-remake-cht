@@ -179,6 +179,18 @@ type Site struct {
 	PartyX      []int    `json:"party_x"`
 	PartyY      []int    `json:"party_y"`
 	Narrative   []string `json:"narrative"`
+	// QuestItem 是這個任務要的那一件東西（記錄 +0x29 起十六個 byte，RE-113）。
+	// 帶著它逃出戰場就算完成，不必把怪物打完（RE-103）。
+	QuestItem QuestItem `json:"quest_item"`
+}
+
+// QuestItem 是任務要的那一件東西。`HintBytes` 是緊接在站位表後面的兩個 byte——
+// 看起來像那一件東西在戰場上的座標（值域與可走區相同），但**被誰讀還沒解**，
+// 所以原樣留著不當座標用（RE-113）。
+type QuestItem struct {
+	Name      string `json:"name"`
+	Record    string `json:"record"`
+	HintBytes []int  `json:"hint_bytes"`
 }
 
 // Sites 是抽取器產生的任務地點表。

@@ -6610,7 +6610,33 @@ sub_2886C(位移):
 **「呼叫端要填的欄位沒有人填」這一類洞，型別系統與單元測試都擋不住**，
 只有把整條路走一遍才看得見。
 
+### 那一件東西是什麼（`已證實`）
+
+任務地點 payload 的 `+0x29` 起十六個 byte 就是那一件東西的記錄，版面與商店的商品
+相同（RE-075）。二十四個地點各解出一個名字：
+
+| 地點 | 東西 | 地點 | 東西 | 地點 | 東西 |
+|---:|---|---:|---|---:|---|
+| 0 | Gavel Of Oak | 8 | Flask Of Oil | 16 | Parth Flask |
+| 1 | Village Flag | 9 | Silk Cloak | 17 | Ruby Choker |
+| 2 | White Quill | 10 | Stone Mallet | 18 | Pirate Chest |
+| 3 | Truth Sword | 11 | Blue Vial | 19 | Statuette |
+| 4 | Shackles | 12 | Serpent Wand | 20 | Gold Bracer |
+| 5 | Kelder Crown | 13 | Gold Chalice | 21 | Teddy Bear |
+| 6 | Ship Wheel | 14 | Pirate Hat | 22 | Shade Ring |
+| 7 | Coat Of Arms | 15 | Hidden Staff | 23 | Sheller Ward |
+
+`tools/extract_quest_sites.py` 因此多一個 `quest_item` 欄，`NewQuest` 拿它填
+`State.QuestItem`——任務戰鬥裡「帶著它站到邊上」那一條（RE-103）這才真的比得出東西。
+
+站位表就在它前面（`+3` 起 12＋12＋6＋6 = 到 `+0x27` 為止），所以 **`+0x27`／`+0x28`
+是緊接著的兩個 byte**。二十四個地點的值都落在 5…56，正好是戰場可走區
+（4…0x3B）的範圍；`sub_2B0FF:0x2B1F0` 在 `byte_39826` 非零時把它們抄進
+`byte_30C6E`／`byte_30A7E`，而後者在競技場那一支被設成 `0x80`——**與戰場物品那張
+X 表的「不在場」哨兵相同**（`0x1E569`）。看起來就是那一件東西在戰場上的座標，
+但那兩個全域**被誰讀還沒解**，所以資料裡原樣留成 `hint_bytes`，不當座標用。
+
 ### 還沒解的
 
-`sub_22229`（決定搬到 `+0x20` 還是 `+0x30`）的判準、地上那一格座標表的第 0 筆
-由誰填，以及任務物品從 `quest-sites` payload 的 `+0x29` 讀出來之後怎麼放到戰場上。
+`sub_22229`（決定搬到 `+0x20` 還是 `+0x30`）的判準、`byte_30C6E`／`byte_30A7E`
+被誰讀（也就是任務物品放在戰場哪一格），以及 `byte_39826` 由誰設成非零。
