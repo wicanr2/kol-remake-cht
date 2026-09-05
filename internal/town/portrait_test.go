@@ -55,7 +55,7 @@ func TestFigureFromCarried(t *testing.T) {
 			m.Carried[i] = rec(2, 0, 0x18)
 		case PortraitLegsSlot:
 			m.Carried[i] = rec(2, 0, 0x28)
-		case PortraitSpareSlot:
+		case PortraitBeltSlot:
 			m.Carried[i] = rec(1, 87, 0x91)
 		}
 	}
@@ -70,8 +70,8 @@ func TestFigureFromCarried(t *testing.T) {
 	if f.Weapon != nil {
 		t.Fatalf("手上應該空著：%+v", f.Weapon)
 	}
-	if f.Spare == nil || f.Spare.Class != 87 || f.Spare.Style != 1 {
-		t.Fatalf("背著那一件沒讀到：%+v", f.Spare)
+	if f.Belt == nil || f.Belt.Class != 87 || f.Belt.Style != 1 {
+		t.Fatalf("腰帶那一格沒讀到：%+v", f.Belt)
 	}
 }
 
@@ -81,7 +81,7 @@ func TestFigureEmptySlotsAreNegative(t *testing.T) {
 	if f.Styles != [3]int{-1, -1, -1} {
 		t.Fatalf("空的穿戴欄應該是 -1，得到 %v", f.Styles)
 	}
-	if f.Weapon != nil || f.Shield != nil || f.Spare != nil {
+	if f.Weapon != nil || f.Shield != nil || f.Belt != nil {
 		t.Fatalf("空的那幾格應該是 nil：%+v", f)
 	}
 }

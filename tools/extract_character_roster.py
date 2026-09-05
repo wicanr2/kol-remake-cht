@@ -62,13 +62,15 @@ CARRIED_SKIP_LO, CARRIED_SKIP_HI = 0x40, 0x9F
 # 穿戴欄：部位 0…8 在 0x100 + 16 × 部位，第十格是**手上那件**（0x30），一格
 # 16 byte，版面與商店的商品記錄相同（RE-075／RE-080）。
 #
-# `0x190`（部位 9 在 0x100 那一串裡的那一格）是**另外一格**：原版名冊十六槽裡只有
-# Theodoric 與 Jax 用它，兩人手上都空著，而那一格放的是 Greatsword 與 Battle Axe
-# ——「背著、沒拿在手上」的那一件，畫立繪時 `sub_18F3A` 單獨讀它（RE-126）。
-# 這裡另外帶成 `spare_weapon`，不動 `equipment` 十格的形狀：戰鬥、商店與負重
-# 都綁在「手上那件」，而「買來的武器放哪一格」還沒有證據。
+# `0x190` 是**腰帶那一格**：物品頁的清單（KOLDATA 記錄 0x8D）把十七格逐一命名為
+# HEAD／TORSO／LEGS／BODY／HANDS／FEET／SHIELD／NECK／RING／BELT／WEAPON ＋ 六個
+# POCKET，而位移表（DGROUP 0x618）把 BELT 對到 0x190、WEAPON 對到 0x30（RE-127）。
+# 原版名冊十六槽裡只有 Theodoric 與 Jax 的腰帶那一格有東西，兩人手上都空著，
+# 放的是 Greatsword 與 Battle Axe——腰間佩著的那一把，畫立繪時 `sub_18F3A`
+# 單獨讀它（RE-126）。這裡另外帶成 `belt`，不動 `equipment` 十格的形狀：
+# 戰鬥、商店與負重都綁在「手上那件」，而**買來的武器放進哪一格**還沒有證據。
 WORN_SLOTS, WORN_STRIDE = 10, 16
-WORN_BASE, WEAPON_SLOT_OFFSET, SPARE_WEAPON_OFFSET = 0x100, 0x30, 0x190
+WORN_BASE, WEAPON_SLOT_OFFSET, BELT_OFFSET = 0x100, 0x30, 0x190
 # 位移 0x2E／0x2F 是角色留宿的建築編號，來自建築 payload 的 0x3A／0x3B。
 BUILDING_OFFSET = 0x2E
 # MIRROR 角色資料頁用得到的欄位（RE-074）。位移 0x1D–0x23 是七個內部屬性，
@@ -294,9 +296,9 @@ def main() -> int:
             # 穿戴欄是角色記錄自己的欄位，不屬於 MIRROR 資料頁，所以放在槽位這一層
             # （`internal/roster` 的 Slot.Equipment 就是照這個位置讀）。
             "equipment": equipment(data[base:base + SLOT_BYTES]) if name else None,
-            # 背著沒拿在手上的那一件（0x190）：立繪最左邊那一層畫的就是它（RE-126）。
-            "spare_weapon": (worn_slot(data[base:base + SLOT_BYTES], WORN_SLOTS - 1,
-                                       SPARE_WEAPON_OFFSET) if name else None),
+            # 腰帶那一格（0x190）：立繪最左邊那一層畫的就是它（RE-126／RE-127）。
+            "belt": (worn_slot(data[base:base + SLOT_BYTES], WORN_SLOTS - 1,
+                               BELT_OFFSET) if name else None),
             # 法術同樣是角色記錄自己的欄位（RE-100）。
             "spells": spells(data[base:base + SLOT_BYTES]) if name else None,
             # 交任務物品要逐 byte 比，所以那十七格原樣帶出來（RE-109）。

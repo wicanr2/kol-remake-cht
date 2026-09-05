@@ -2,14 +2,14 @@ package town
 
 import "github.com/wicanr2/kol-remake-cht/internal/portrait"
 
-// 立繪要看的那幾格在角色記錄裡的位移（RE-126）。三層護甲是穿戴欄的前三格，
-// 盾在部位 6，手上那件在 0x30，背著沒拿的那一件在 0x190。
+// 立繪要看的那幾格在角色記錄裡的位移（RE-126／RE-127）。物品頁把十七格逐一命名，
+// 前三格是 HEAD／TORSO／LEGS，部位 6 是 SHIELD，0x190 是 BELT，0x30 是 WEAPON。
 const (
 	PortraitHeadSlot  = 0x100
 	PortraitTorsoSlot = 0x110
 	PortraitLegsSlot  = 0x120
 	PortraitShieldPos = 6
-	PortraitSpareSlot = 0x190
+	PortraitBeltSlot  = 0x190
 )
 
 // portraitLayerSlots 依 portrait 的層編號（0 頭、1 身、2 腿）排。
@@ -87,8 +87,8 @@ func (m Member) Figure() portrait.Figure {
 	// 手上那件在穿戴欄的第十格（`WeaponSlot`），與 0x30 是同一格。
 	f.Weapon = m.item(WornSlots-1, CarriedFirst)
 	f.Shield = m.item(PortraitShieldPos, PortraitHeadSlot+PortraitShieldPos*0x10)
-	// 背著那一件只有原始位元組這一條路：typed 的穿戴欄沒有它。
-	f.Spare = carriedItem(m.carriedAt(PortraitSpareSlot))
+	// 腰帶那一格只有原始位元組這一條路：typed 的穿戴欄沒有它。
+	f.Belt = carriedItem(m.carriedAt(PortraitBeltSlot))
 	return f
 }
 

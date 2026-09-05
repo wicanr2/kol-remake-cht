@@ -50,9 +50,9 @@ type Figure struct {
 	// Weapon 是手上那件（角色記錄 `+0x30`）；Shield 是穿戴欄部位 6（`+0x160`）。
 	Weapon *Item
 	Shield *Item
-	// Spare 是背著、沒拿在手上的那一件（`+0x190`）。原版會為它多畫一層，
+	// Belt 是腰帶那一格（`+0x190`，物品頁上叫 BELT）。原版會為它多畫一層，
 	// 但組出來的檔名在原版資料裡不存在，所以這裡只記著、不畫（RE-126）。
-	Spare *Item
+	Belt *Item
 }
 
 // Build 是體型組合：性別 × 4 ＋ 種族。原版資料下只有 0…5——女性只有種族 0 與 1。
