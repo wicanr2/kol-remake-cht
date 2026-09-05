@@ -150,7 +150,7 @@ func (s *State) chooseCommand(i int) bool {
 	case CmdUnarmed:
 		s.Plan.Command = icon
 		s.beginTarget(i, CursorAdjacent, PromptUnarmedForm)
-	case CmdMove, CmdDismount:
+	case CmdMove, CmdMountedMove:
 		s.Plan.Command = icon
 		s.beginTarget(i, CursorAdjacent, PromptMoveForm)
 	case CmdCast:
@@ -161,9 +161,9 @@ func (s *State) chooseCommand(i int) bool {
 		s.Plan.Command = icon
 		s.Plan.Guard = 0
 		s.beginTarget(i, CursorRanged, PromptCommand)
-	case CmdMount:
+	case CmdLand:
 		// `0x1F914`：指令碼直接寫死，選項 0 與 2。
-		return s.commit(i, CmdMount, 0, 2)
+		return s.commit(i, CmdLand, 0, 2)
 	case CmdRest, CmdDrop, CmdSwitchAlt1, CmdSwitch, CmdSwitchAlt2, CmdPickUp:
 		// `0x1F3B2`：兩個選項都設 0，直接收尾。真正的動作在執行段。
 		return s.commit(i, icon, 0, 0)

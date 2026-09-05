@@ -113,10 +113,10 @@ func TestCommandBarFlag1E(t *testing.T) {
 	a.SetParts()
 	m := &Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}}
 	got := CommandBar(a, m, CommandEnv{Standable: true})
-	assertBar(t, got, []int{CmdYes, CmdSwitch, CmdDrop, CmdMount, CmdDismount, CmdRest})
-	// 腳下站不了、或有別人同格，就只剩下 0x3F。
+	assertBar(t, got, []int{CmdYes, CmdSwitch, CmdDrop, CmdLand, CmdMountedMove, CmdRest})
+	// 腳下站不了、或有別人同格，就下不了馬，只剩騎著移動那一格。
 	got = CommandBar(a, m, CommandEnv{Standable: true, Occupied: true})
-	assertBar(t, got, []int{CmdYes, CmdSwitch, CmdDrop, CmdDismount, CmdRest})
+	assertBar(t, got, []int{CmdYes, CmdSwitch, CmdDrop, CmdMountedMove, CmdRest})
 }
 
 // 兩條腿都廢就沒有移動那一格（`0x22CCC`）。

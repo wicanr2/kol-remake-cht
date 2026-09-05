@@ -40,6 +40,10 @@ const (
 	// BlockedRecord／MovedRecord 是移動走不動與走了一步那兩句（RE-085）。
 	BlockedRecord = 0x10A
 	MovedRecord   = 0x10B
+	// BlockedByRecord 是下馬時那一格還有別人：`is blocked!`。
+	// LandsRecord 是下來了：`lands!`。
+	BlockedByRecord = 0x11A
+	LandsRecord     = 0x11B
 	// 射擊那一手的四句（RE-102）。MissileIntoRecord 後面要接 TreeRecord 或
 	// WallRecord；MissileNothingRecord 是射過去空無一物。
 	MissileIntoRecord    = 0x121
@@ -359,6 +363,21 @@ func (s *State) act(i int, rng Rand) ActResult {
 	case CmdRest:
 		out.Message = RestingRecord
 		return out
+	case CmdLand:
+		// 下馬（`0x2070f`…`0x20774`，RE-124）：那一格上還有別人就印記錄 0x11A
+		// 走人，沒人才把 +0x1E 清掉並印「lands!」。
+		//
+		// 原版同時把記錄 `+0x25` 也清成 0；remake 沒有那一格（它在哪裡被讀還沒解），
+		// 所以這裡只清 Flag1E。
+		if s.sharesCell(i) {
+			out.Message = BlockedByRecord
+			return out
+		}
+		a.Flag1E = 0
+		out.Message = LandsRecord
+		// 原版接 `sub_1C1BF` 重畫戰場再等一次鍵。
+		out.Redraw = true
+		return out
 	case CmdFlinch:
 		// 怯戰：防禦選項改成 2 再印那一句（`0x2062B`）。
 		a.Guard = 2
@@ -367,7 +386,7 @@ func (s *State) act(i int, rng Rand) ActResult {
 	case 0:
 		out.Message = NothingRecord
 		return out
-	case CmdMove, CmdDismount:
+	case CmdMove, CmdMountedMove:
 		return s.move(i)
 	case CmdDrop:
 		out.Message, out.Item = s.DropItem(i)
@@ -468,6 +487,25 @@ func (s *State) move(i int) ActResult {
 	// 走成功之後原版印完訊息等一次鍵、重畫戰場、再等一次（`0x265C9`／`0x265E1`）。
 	out.Redraw = true
 	return out
+}
+
+// sharesCell 回報這一格上還有沒有別人站著（`sub_227C0`，RE-124）：
+// 比的是座標，退出戰場的那些不算。指令列的 `CommandEnv.Occupied` 走同一套。
+func (s *State) sharesCell(i int) bool {
+	if i < 0 || i >= len(s.Actors) {
+		return false
+	}
+	a := s.Actors[i]
+	for n := range s.Actors {
+		if n == i {
+			continue
+		}
+		o := s.Actors[n]
+		if o.Side != SideEmpty && !o.Down() && o.X == a.X && o.Y == a.Y {
+			return true
+		}
+	}
+	return false
 }
 
 // moveBlocked 是那四道判斷（RE-085）：地形、腳下、有人、界限。

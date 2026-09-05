@@ -189,13 +189,24 @@ func TestActDispatch(t *testing.T) {
 		t.Fatalf("怯戰應該印 %#x 並把防禦選項設 2，得到 %#x／%d",
 			FlinchRecord, r.Message, s.Actors[0].Guard)
 	}
-	// 還沒實作的那幾手要被標出來，不能靜靜跳過。撿、丟、切換、施法與射擊都做完了，
-	// 剩下騎乘那一格（0x28，`sub_227C0` 還沒讀）。
+	// 下馬（0x28）：那一格沒別人就清掉 Flag1E 並印「lands!」（RE-124）。
 	s = newState()
-	s.Actors[0].Command = CmdMount
+	s.Actors[0].Flag1E = 1
+	s.Actors[0].Command = CmdLand
 	r, _ = s.Act(&fixedRoll{values: []int{50}})
-	if !r.Unimplemented {
-		t.Fatal("騎乘這一手應該標成還沒實作")
+	if r.Message != LandsRecord || s.Actors[0].Flag1E != 0 {
+		t.Fatalf("下馬應該印 %#x 並清掉 Flag1E，得到 %#x／%d",
+			LandsRecord, r.Message, s.Actors[0].Flag1E)
+	}
+	// 同一格上還有別人就下不來，印記錄 0x11A。
+	s = newState()
+	s.Actors[0].Flag1E = 1
+	s.Actors[0].Command = CmdLand
+	s.Actors[1].Side = SideMonster
+	s.Actors[1].X, s.Actors[1].Y = s.Actors[0].X, s.Actors[0].Y
+	r, _ = s.Act(&fixedRoll{values: []int{50}})
+	if r.Message != BlockedByRecord || s.Actors[0].Flag1E != 1 {
+		t.Fatalf("有人擋著就下不來，得到 %#x／%d", r.Message, s.Actors[0].Flag1E)
 	}
 	// 0x22 是「還沒上弦」：走射擊那一支，第一手變成裝填（RE-105）。
 	s = newState()
