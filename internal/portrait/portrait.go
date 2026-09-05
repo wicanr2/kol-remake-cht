@@ -16,6 +16,13 @@ const (
 	LayerCount = 3
 )
 
+// BeltCol 與 BeltBaseline 是腰帶那一層的落點：x 是第 2 個 byte 欄
+// （`word_3499E = 2`），下緣是第 153 列（`word_349A0 = 0x99 −` 高）。
+const (
+	BeltCol      = 2
+	BeltBaseline = 0x99
+)
+
 // 圖庫名。原版是把這幾個字接上模式後綴（EGA 是 `pics`）組出檔名。
 const (
 	ArchiveBody   = "PERPICS"
@@ -50,8 +57,8 @@ type Figure struct {
 	// Weapon 是手上那件（角色記錄 `+0x30`）；Shield 是穿戴欄部位 6（`+0x160`）。
 	Weapon *Item
 	Shield *Item
-	// Belt 是腰帶那一格（`+0x190`，物品頁上叫 BELT）。原版會為它多畫一層，
-	// 但組出來的檔名在原版資料裡不存在，所以這裡只記著、不畫（RE-126）。
+	// Belt 是腰帶那一格（`+0x190`，物品頁上叫 BELT）。原版為它多畫一層，
+	// 橫放在畫面左下角——見 Compose 最後那一段（RE-128 更正 RE-126）。
 	Belt *Item
 }
 
@@ -121,6 +128,17 @@ func (l *Layout) Compose(f Figure, dx int) []Piece {
 			c := l.Weapons[v][i]
 			out = append(out, Piece{Archive: ArchiveWeapon, Index: i,
 				X: c.X + dx, Y: c.Y, W: c.W, H: c.H})
+		}
+	}
+	// 腰帶那一格另外橫放在畫面左下角（`0x19585`…`0x1969B`）：圖庫與手上那件相同，
+	// 但位置不查 `weapon_pos`——x 固定在第 2 個 byte 欄，下緣固定在 BeltBaseline。
+	// **只有 dx 是 0 的時候才畫**（`0x19585` 的 `cmp arg_0, 0`），所以隊伍那一頁
+	// 六個人都看不到它，只有物品頁看得到。
+	if dx == 0 && f.Belt != nil {
+		if i, ok := l.WeaponIndex(*f.Belt); ok && len(l.Weapons) > 0 {
+			c := l.Weapons[0][i]
+			out = append(out, Piece{Archive: ArchiveWeapon, Index: i,
+				X: BeltCol, Y: BeltBaseline - c.H, W: c.W, H: c.H})
 		}
 	}
 	// 手：一律畫一隻，雙手武器再畫第二隻。

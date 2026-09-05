@@ -65,6 +65,7 @@ remake 以 Go 1.26.7 ＋ Ebitengine v2.9.9 建置於固定映像
 | `town-mouth.json`（MOUTH 打字那一格的版面，對 `town-mouth-run1`） | 2 | 2 |
 | `receipt-town-spell-edit.json`（法術編輯器那一整頁，對 `town-spell-edit-run1`） | 2 | 2 |
 | `receipt-town-sheet-party.json`（資料頁上的隊伍立繪，對 `town-sheet-party-run1`） | 2 | 2 |
+| `receipt-town-sheet-items.json`（資料頁上的物品那一頁，對 `town-sheet-items-run1`） | 3 | 3 |
 | `world.json`（野外地圖畫面，對 `town-leave-run1`） | 4 | 4 |
 | `world-clock.json`（野外時刻推進的兩個取樣點，對 `world-clock-run2`） | 4 | 4 |
 | `world-quest.json`（任務地點的敘述、問句、滿版怪物圖、戰場與主指令列，對 `world-quest-run1`） | 4 | 4 |

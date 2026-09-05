@@ -1,0 +1,105 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-sheet-items",
+  "description": "資料頁上物品那一頁（`sub_16986`，RE-127／128）。原版與 remake 走同一條路：旅店 → MIRROR → 資料頁圖示列往右一格 → Return → 清單往下一列（TORSO，身上是 Platemail T）。這一頁蓋掉整個旅店畫面：`sub_1103F(0)` 貼整頁圖、兩張木屋內裝、七層立繪、把分隔線右邊那一條清成黑、畫外框與分隔線再投影，然後是十七列清單與左上那個小框。三件由這張畫面驗到的事：`sub_1BA9D` 畫的每個框都自帶四像素的投影（小框那一圈）、清單那十七列的字是大字型不是小字型、**腰帶那一格另外橫放在畫面左下角**——Theodoric 的 `+0x190` 是 Greatsword，原版把它畫在腳邊（`0x19585`…`0x1969B`，只有 dx 是 0 時才畫，所以隊伍那一頁看不到）。",
+  "pair_count": 3,
+  "pass_count": 3,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "物品頁：整頁",
+      "remake": "docs/verification/remake-parity/shots/town-sheet-items/items.png",
+      "original": "docs/verification/character-ui/town-sheet-items-run1/frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            14,
+            14
+          ],
+          "differing_pixels": 51
+        },
+        {
+          "name": "外框左緣第 7 列的一個灰點",
+          "reason": "原版在 (15, 7) 這一格畫的是木屋背景的灰而不是外框的青，整條左緣只有這一格如此。來源還沒解，先明列出來而不是當作沒看見。",
+          "rect": [
+            15,
+            7,
+            1,
+            1
+          ],
+          "differing_pixels": 1
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "立繪、小框與腳邊那把武器",
+      "remake": "docs/verification/remake-parity/shots/town-sheet-items/items.png",
+      "original": "docs/verification/character-ui/town-sheet-items-run1/frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 160,
+        "height": 160
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "外框左緣第 7 列的一個灰點",
+          "reason": "同上。",
+          "rect": [
+            15,
+            7,
+            1,
+            1
+          ],
+          "differing_pixels": 1
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "十七列清單",
+      "remake": "docs/verification/remake-parity/shots/town-sheet-items/items.png",
+      "original": "docs/verification/character-ui/town-sheet-items-run1/frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 255,
+        "y": 3,
+        "width": 51,
+        "height": 153
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    }
+  ]
+}
