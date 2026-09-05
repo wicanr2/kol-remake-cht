@@ -114,9 +114,9 @@ type State struct {
 	// byte，來自任務 payload 的 `+0x29`，RE-113）。帶著它逃出戰場就算完成，
 	// 不必把怪物打完。空字串表示這一場沒有那樣的東西。
 	//
-	// 任務地點那一條由 `NewQuest` 從 `Site.QuestItem` 填。**原版還會把那一件放到
-	// 地上第 0 格**（`0x1E68C`），這一版沒做——那一格的座標由誰填還沒解，
-	// 所以在遊戲裡只有「本來就帶著它」的角色算數（RE-113）。
+	// 任務地點那一條由 `NewQuest` 從 `Site.QuestItem` 填，同時把那一件放到地上
+	// 第 0 格——座標是記錄的 `+0x27`（列）與 `+0x28`（欄），由
+	// `sub_2B0FF:0x2B1F0` 抄進戰場物品第 0 件的那兩張表（RE-128 那一輪解出）。
 	QuestItem string
 	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠、Adventure 是每個人
 	// 分到的冒險點數（RE-091／RE-096）。
@@ -168,6 +168,12 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 	// 任務地點才有那一件東西（`sub_2886C` 先看 `word_34968`，RE-113）。
 	if site.Index >= 0 {
 		s.QuestItem = strings.ToUpper(site.QuestItem.Name)
+		// 那一件就擺在戰場上（`sub_2B0FF:0x2B1F0`）：走到那一格才撿得到，
+		// 帶著它逃出戰場就算完成。名字非空才放——原版看的是記錄的第 0 格。
+		if q := site.QuestItem; q.Name != "" {
+			s.Ground[0] = GroundItem{Name: strings.ToUpper(q.Name),
+				X: q.Spot.X, Y: q.Spot.Y, Weapon: q.Item.CombatWeapon()}
+		}
 	}
 	s.Actors = make([]Actor, MaxActors)
 	for i := range s.Actors {

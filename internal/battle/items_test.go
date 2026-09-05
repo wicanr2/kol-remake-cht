@@ -301,3 +301,29 @@ func TestDropThenPickUpKeepsTheSameWeapon(t *testing.T) {
 		t.Fatalf("撿回來的數字不對：%+v", s.Actors[0].Weapon)
 	}
 }
+
+// 任務地點開打時那一件東西就擺在戰場上，座標來自記錄的 +0x27／+0x28（RE-113／128）。
+func TestQuestItemStartsOnTheGround(t *testing.T) {
+	site := &Site{Index: 3, Count: 0}
+	site.QuestItem.Name = "Truth Sword"
+	site.QuestItem.Spot = Spot{X: 6, Y: 38}
+	site.QuestItem.Item.Class = 87
+	site.QuestItem.Item.Encumbrance = 75
+	s := NewQuest(site, nil, Monster{}, &Field{})
+	if s == nil {
+		t.Fatal("擺不出戰場")
+	}
+	g := s.Ground[0]
+	if g.Name != "TRUTH SWORD" || g.X != 6 || g.Y != 38 {
+		t.Fatalf("第 0 格是 %+v", g)
+	}
+	// 撿起來要拿它去打，所以武器數字要跟著。
+	if g.Weapon.Weight != 75 || g.Weapon.Kind != 87 {
+		t.Fatalf("武器數字是 %+v", g.Weapon)
+	}
+	// 沒有任務物品的場地不放（`site.Index` 是 −1 那一種）。
+	empty := &Site{Index: -1}
+	if e := NewQuest(empty, nil, Monster{}, &Field{}); e.Ground[0].Name != "" {
+		t.Fatalf("不該放：%+v", e.Ground[0])
+	}
+}

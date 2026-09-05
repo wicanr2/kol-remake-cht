@@ -196,13 +196,24 @@ type Site struct {
 	QuestItem QuestItem `json:"quest_item"`
 }
 
-// QuestItem 是任務要的那一件東西。`HintBytes` 是緊接在站位表後面的兩個 byte——
-// 看起來像那一件東西在戰場上的座標（值域與可走區相同），但**被誰讀還沒解**，
-// 所以原樣留著不當座標用（RE-113）。
+// QuestItem 是任務要的那一件東西，以及它擺在戰場哪一格。
+//
+// `Spot` 來自記錄的 `+0x27`（列）與 `+0x28`（欄）：`sub_2B0FF:0x2B1F0` 在任務物品
+// 那十六個 byte 的第 0 格非零時，把它們抄進 `byte_30C6E`／`byte_30A7E`——那兩個是
+// **戰場物品第 0 件的列與欄**，各自是一張陣列的第 0 格（`0x2D9E + i`／`0x2BAE + i`）。
+// 讀的地方是 `sub_223C0:0x226C5` 起那一段：掃全部物品，欄與列都對上行動者站的
+// 那一格才撿得到（RE-128 那一輪解出，更正 RE-113 的「被誰讀還沒解」）。
 type QuestItem struct {
-	Name      string `json:"name"`
-	Record    string `json:"record"`
-	HintBytes []int  `json:"hint_bytes"`
+	// Item 帶著名字、種類與傷害骰——撿起來的人要拿它去打，只留名字的話那幾個
+	// 數字全都沒有。記錄的版面與商店的商品相同（RE-113）。
+	Item
+	Spot Spot `json:"spot"`
+}
+
+// Spot 是戰場上的一格。戰場是 64 × 64，二十四個地點的值全部落在範圍內。
+type Spot struct {
+	X int `json:"x"`
+	Y int `json:"y"`
 }
 
 // Sites 是抽取器產生的任務地點表。

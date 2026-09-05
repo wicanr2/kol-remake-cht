@@ -21,7 +21,7 @@ import zipfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
-from extract_town_buildings import packed_name  # noqa: E402
+from extract_town_buildings import good, packed_name  # noqa: E402
 from inventory_image_archives import EXPECTED_ZIP_SHA256  # noqa: E402
 from extract_town_text import render  # noqa: E402
 from probe_town_data import lzw_decode, payloads, read_volumes  # noqa: E402
@@ -42,11 +42,27 @@ TEXT_OFFSET, TEXT_LINES, TEXT_STRIDE, TEXT_MAX = 0x80, 8, 0x10, 24
 # `sub_2B0FF:0x2B1C4` 把它複製到 DGROUP `0xB956`，戰鬥中 `sub_2886C` 拿它跟角色
 # 手上那件逐 byte 比——帶著它逃出戰場就算任務完成（RE-103）。
 QUEST_ITEM_OFFSET, QUEST_ITEM_BYTES = 0x29, 0x10
-# 緊接在站位表後面的兩個 byte。`sub_2B0FF:0x2B1F0` 在 `byte_39826` 非零時把它們
-# 抄進 `byte_30C6E`／`byte_30A7E`，而後者在別處會被設成 `0x80`——與戰場物品那張
-# X 表的「不在場」哨兵相同（`0x1E569`）。**兩個全域被誰讀還沒解**，所以這一版
-# 只把它們原樣留在資料裡，不當成座標用。
-QUEST_ITEM_HINT_OFFSET = 0x27
+# 任務物品放在戰場哪一格：`+0x27` 是列、`+0x28` 是欄。`sub_2B0FF:0x2B1F0` 在
+# `byte_39826`（＝任務物品那十六個 byte 的第 0 格）非零時，把這兩個 byte 抄進
+# `byte_30C6E`／`byte_30A7E`——而那兩個是**戰場物品第 0 件的列與欄**，各自是一張
+# 陣列的第 0 格（`0x2D9E + i`／`0x2BAE + i`）。讀的地方是 `sub_223C0:0x226C5`
+# 起那一段：掃全部物品，欄與列都對上行動者站的那一格，才把地圖磚換成 `0x27`
+#（RE-128 那一輪解出，更正 RE-113 的「只有寫沒有讀」）。戰場是 64 × 64，
+# 二十四個地點的值全部落在 0…63。
+QUEST_ITEM_SPOT_OFFSET = 0x27
+
+
+def quest_item(raw: bytes) -> dict:
+    """任務要的那一件東西：十六個 byte 的物品記錄加它擺在戰場哪一格。
+
+    記錄的版面與商店的商品相同（RE-113），所以直接走 `good`——撿起來的人要拿它
+    去打，只留名字的話傷害骰、負重與種類全都沒有。"""
+    rec = bytes(raw[QUEST_ITEM_OFFSET:QUEST_ITEM_OFFSET + QUEST_ITEM_BYTES])
+    item = good(rec, 0)
+    item.pop("index", None)
+    item["spot"] = {"y": raw[QUEST_ITEM_SPOT_OFFSET],
+                    "x": raw[QUEST_ITEM_SPOT_OFFSET + 1]}
+    return item
 
 
 def line_values(data: bytes, base: int, count: int) -> list[int]:
@@ -123,14 +139,7 @@ def main() -> int:
             "party_x": list(raw[PLACEMENT_OFFSET + 2 * MONSTER_SLOTS + PARTY_SLOTS:
                                 PLACEMENT_OFFSET + 2 * MONSTER_SLOTS + 2 * PARTY_SLOTS]),
             "narrative": narrative(raw),
-            "quest_item": {
-                "name": packed_name(raw[QUEST_ITEM_OFFSET:
-                                        QUEST_ITEM_OFFSET + QUEST_ITEM_BYTES]),
-                "record": raw[QUEST_ITEM_OFFSET:
-                              QUEST_ITEM_OFFSET + QUEST_ITEM_BYTES].hex(),
-                "hint_bytes": list(raw[QUEST_ITEM_HINT_OFFSET:
-                                       QUEST_ITEM_HINT_OFFSET + 2]),
-            },
+            "quest_item": quest_item(raw),
         })
 
     doc = {

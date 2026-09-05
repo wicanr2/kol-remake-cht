@@ -144,7 +144,7 @@ func TestFleeReturnsToExecuting(t *testing.T) {
 // 任務地點那一場會從地點記錄填上「任務要的那一件」（RE-113）；隨機遭遇不填。
 func TestNewQuestTakesQuestItemName(t *testing.T) {
 	site := &Site{Index: 3, Count: 0,
-		QuestItem: QuestItem{Name: "Truth Sword"},
+		QuestItem: QuestItem{Item: Item{Name: "Truth Sword"}},
 		PartyX:    []int{20}, PartyY: []int{20}}
 	s := NewQuest(site, []Member{{Name: "POONTANG", Size: 100, Health: 100}},
 		Monster{}, Generate(&fixedRand{values: []int{1}}))
