@@ -39,6 +39,10 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		if in.SpellList != nil {
 			drawSpellCells(dst, small, in.SpellList)
 		}
+		// 物品那一頁把整塊換成十七列的清單（RE-127）。
+		if in.ItemPage != nil {
+			drawItemPage(dst, small, in.ItemPage)
+		}
 	} else {
 		// 競技場沒有肖像可畫（`sub_2B454` 畫的是什麼還沒解），Archive 空著就跳過。
 		if in.Portrait.Archive != "" {

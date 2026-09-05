@@ -184,6 +184,13 @@ func (s *Session) setBar(icons []int) {
 
 // Walk 依方向鍵移動隊伍。只有在戶外地圖模式才有作用。
 func (s *Session) Walk(dx, dy int) bool {
+	// 物品那一頁把上下鍵吃掉當成移動清單（`sub_196A9` 的 0x4800／0x5000）。
+	if s.ShowingItemPage() {
+		if dy != 0 {
+			s.MoveItemSelection(dy)
+		}
+		return true
+	}
 	if s.Mode != ModeMap {
 		return false
 	}

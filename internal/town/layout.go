@@ -244,3 +244,27 @@ var (
 	ColourSheetFrame  = [3]uint8{0, 170, 170}
 	ColourSheetBar    = [3]uint8{255, 85, 85}
 )
+
+// ItemPageLayout 是資料頁上物品那一頁的版面（`sub_16986`，RE-127）。
+// 座標是 320×200 畫布上的像素，全部來自反組譯裡的常數。
+var ItemPageLayout = struct {
+	// Frame 是整頁那一圈（`sub_1B6DC(0x0F, 2, 0x131, 0x9C, 3)`）。
+	Frame Rect
+	// Divider 是把畫面切成左右的那一條直線（`sub_1BB57(0xFE, 3, 0xFE, 0x9C, 3)`）。
+	Divider Rect
+	// RightPane 是直線右邊那一條先清成黑的窄欄
+	// （`sub_1B779(0xFF, 3, 0x131, 0x9B, 0)`）。
+	RightPane Rect
+	// Detail 是選中那一格的明細框（`sub_1BA9D(0x3E, 0x3A, 0x101, 0x7D, 0x0F)`）。
+	Detail Rect
+	// 清單畫在字格欄 32（＝ x 256）、第 4 列，列高 9（`sub_196A9` 的參數）。
+	// 那一欄正好落在分隔線右邊的窄欄裡，寬度剛好六個字元——`SHIELD`、`WEAPON`、
+	// `POCKET` 都是六個字。
+	ListCol, ListRow, ListStep int
+}{
+	Frame:     Rect{15, 2, 305, 156},
+	Divider:   Rect{254, 3, 254, 156},
+	RightPane: Rect{255, 3, 305, 155},
+	Detail:    Rect{62, 58, 257, 125},
+	ListCol:   32, ListRow: 4, ListStep: 9,
+}
