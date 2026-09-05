@@ -163,11 +163,12 @@ func EnemyMoveForm(level, ring int, legsOK bool, hurt int, rng Rand) int {
 // 目標而且起點隨機、貼上去就攻擊、有 1/3 機率放棄攻擊改移動、攻擊式與部位走原版
 // 的加權輪盤、移動方式走三式的權重。
 //
-// 撤退那一段也照原版做了（`0x237F5`…`0x238C1`，RE-081）。
+// 撤退（`0x237F5`…`0x238C1`）、反制掃描（`sub_253E7`）與側翼（`sub_25653`）
+// 也都照原版做了。
 //
-// **還沒做的**，都需要語意還沒解出來的旗標（RE-081 的「還沒走完的」那一節）：
-// 反制掃描 `sub_253E7`、側翼 `sub_25653` 與沒有武器時的指令 0x26。這些情形目前
-// 一律落到「攻擊或移動」。射擊那一條已經照原版做了（RE-104）。
+// **還沒做的**：沒有武器時的指令 0x26，以及移動段繞完八個方向都站不下時的重試
+// （`word_34A08`）。反制掃描的篩選遮罩 0x10 要的 `+0x05` 還沒解出來，而這一版
+// 沒有任何地方設它，所以那個條件恆真（RE-081）。
 
 // EnemyShootRing 是肯射擊的最遠環號。原版比的是 `word_349B2 < 4`（`0x23EBB`），
 // 而那個計數從 1 起算相鄰的那一圈（`0x23DDE`）——remake 的環號從 0 起算同一圈，
@@ -216,6 +217,23 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return d
 	}
 
+	// 反制掃描（`0x23C1A`）：智力擲骰過關才跑。有結論就直接走攻擊那一段，
+	// 不再往外環找目標——抄來的攻擊選項會變成抽命中部位的列號。
+	if EnemyIntellectCheck(a.Intellect, a.Level, rng.Roll(100)) {
+		if prev, t, ok := s.counterScan(i, rng); ok {
+			if rng.Roll(3) == 1 {
+				return s.enemyMove(i, t, 0, rng)
+			}
+			d.Command = CmdWeapon
+			d.Target = t
+			d.Ring = 0
+			d.Facing = a.Facing
+			s.enemyStrike(&d, i, t, prev, rng)
+			s.applyEnemy(i, d)
+			return d
+		}
+	}
+
 	// 環 0：貼著的隊員直接打。種類非零的怪物有 1/3 機率放棄攻擊改成移動
 	// （`0x23CA7`），所以敵人不會每回合都撲上來。
 	if t := s.findInRing(i, 0, rng); t >= 0 {
@@ -257,6 +275,178 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return s.enemyMove(i, t, ring, rng)
 	}
 	return s.enemyMove(i, -1, -1, rng)
+}
+
+// EnemyIntellectCheck 是 `sub_252CB`：`值 × 等級 ÷ 3 > 門檻`。反制掃描前用它擲一次
+// （門檻是 `rand(100)`，`0x23C1A`）——等級越高、智力越高越容易過，這是原版把
+// 「聰明的怪物」做出來的方式。
+func EnemyIntellectCheck(value, level, roll int) bool {
+	return value*level/3 > roll
+}
+
+// planned 回報那一名這一回合規劃過了沒有（記錄 `+0x22`）。原版在規劃段開始時把
+// 每一名清 0、決定完一手設 1（`0x1F03D`／`0x1FAC4`）；這一版用規劃順序的位置判斷
+// ——排在目前這一手之前的就是已經決定過的。
+func (s *State) planned(i int) bool {
+	for n, idx := range s.Round.Order {
+		if idx == i {
+			return n < s.Round.Turn
+		}
+	}
+	return false
+}
+
+// counterScan 是 `sub_253E7`：繞著自己那一環，對每個找到的隊員算一個優先度，
+// 取最高的那一組攻防選項抄過來。回傳的 style 會變成 `enemyStrike` 的 `prev`，
+// 也就是抽命中部位的列號。
+//
+//	4  對方還沒規劃 → 0x0B；對方指令是武器攻擊而且擲中就改抄它的
+//	5  對方已規劃、要用武器攻擊、而且方向對著我 → 抄對方的 +0x23
+//	3  同上但不是武器攻擊（徒手）→ 0x0B
+//
+// 「已規劃」那兩列**接著一定會落到共同出口再算一次**（`0x2553C`）：對方要移動給
+// 1、有防禦選項給 2、其餘給 4，攻擊選項一律 0，而且算出來的分數 `>=` 目前最高分
+// 才覆蓋。所以 5 永遠留得住（共同出口最高只到 4），3 只在共同出口算出 1 或 2
+// 時留得住。最高優先度是 1 才繞側面。
+//
+// **抄來的防禦選項留不到最後**：接下來一定走貼近打那三個選項（`0x23D08`）而那裡
+// 無條件重設 `word_30916`，所以這一支只回攻擊選項那一格。
+//
+// 「方向對著我」的判準是 `對方的 +0x28 XOR 我看到他的方向 == 4`——方向編號差 4
+// 就是正對面。每找到一個有結論的目標就把自己的方向轉過去（`0x2562A`）。
+func (s *State) counterScan(i int, rng Rand) (style, target int, ok bool) {
+	a := &s.Actors[i]
+	cells := RingCells(0)
+	best, bestStyle, last := 0, 0, -1
+	// 起點隨機，與 `sub_2531C` 第一次傳 0xFFFF 時的行為相同。
+	start := rng.Roll(len(cells)) - 1
+	for k := 0; k < len(cells); k++ {
+		n := (start + k) % len(cells)
+		c := cells[n]
+		t := s.actorAt(a.X+c.Row, a.Y+c.Col)
+		if t < 0 || s.Actors[t].Side != SideParty || s.Actors[t].Down() {
+			continue
+		}
+		d := &s.Actors[t]
+		pri := 0
+		if !s.planned(t) {
+			// 還沒規劃（`0x255A6`）。
+			if best < 4 {
+				best, bestStyle, pri = 4, EnemyNearStyle, 4
+				if d.Command == CmdWeapon && rng.Roll(2) == 1 {
+					bestStyle = d.Style
+				}
+			}
+		} else {
+			if d.Command == CmdWeapon || d.Command == CmdUnarmed {
+				if d.Facing^n == 4 {
+					if d.Command == CmdWeapon {
+						best, bestStyle = 5, d.Style
+					}
+					if best < 3 {
+						best, bestStyle = 3, EnemyNearStyle
+					}
+				}
+			}
+			// 這幾條每一次都會重算優先度（`0x2553C` 是共同出口），
+			// 所以上面設的 5 或 3 只有在這裡算出來的比不過時才留得住。
+			switch {
+			case d.Command == CmdMove:
+				pri = 1
+			case d.Guard != 0:
+				pri = 2
+			default:
+				pri = 4
+			}
+			if pri >= best {
+				bestStyle, best = 0, pri
+			}
+		}
+		if pri != 0 {
+			last = t
+			a.Facing = n
+		}
+	}
+	if best == 0 || last < 0 {
+		return 0, -1, false
+	}
+	// 優先度 1（對方要移動）才繞側面（`0x25435`）。
+	if best == 1 {
+		s.flank(i, last)
+	}
+	return bestStyle, last, true
+}
+
+// flank 是 `sub_25653`：從自己現在的方向出發，依方向編號的奇偶決定要掃幾格
+// （奇數走 2 格、掃到第 5 格；偶數走 1 格、掃到第 6 格），找出「自己站在對方的
+// 哪一側」再把方向偏過去，繞到目標側面。對方沒有攻擊選項就不繞。
+//
+// **只改方向，不改位置**——移動是之後執行段的事。原版把偏移後的方向夾在
+// `> 8` 而不是 `> 7`，所以偏出 8 時它會落在界外；這一版照樣算，越界就放棄。
+func (s *State) flank(i, target int) {
+	a := &s.Actors[i]
+	d := &s.Actors[target]
+	if d.Style == 0 {
+		return
+	}
+	face, mine := d.Facing, a.Facing
+	span, limit := 1, 6
+	if mine&1 != 0 {
+		span, limit = 2, 5
+	}
+	for k := span; ; {
+		k++
+		v := k + mine
+		if v > 7 {
+			v -= 8
+		}
+		if v == face {
+			if k == 4 {
+				return
+			}
+			if k < 4 {
+				face -= span
+				if face < 0 {
+					face += 8
+				}
+			} else {
+				face += span
+				if face > 8 {
+					face -= 8
+				}
+			}
+			if s.flankBlocked(i, face) {
+				return
+			}
+			a.Facing = face
+			return
+		}
+		if k == limit {
+			return
+		}
+	}
+}
+
+// flankBlocked 判側翼要轉過去的那一格：磚塊擋不擋路（`sub_24E2B`），以及那一格
+// 有沒有**自己人**（`sub_24BB6(0, 方向, 0x1A)` 的遮罩 0x02 是「+0x01 非零」，
+// 對敵人來說就是同類）。方向落在 0…7 之外一律當成擋住。
+func (s *State) flankBlocked(i, dir int) bool {
+	cells := RingCells(0)
+	if dir < 0 || dir >= len(cells) {
+		return true
+	}
+	a := s.Actors[i]
+	x, y := a.X+cells[dir].Row, a.Y+cells[dir].Col
+	if x < FieldMin || x > FieldMax || y < FieldMin || y > FieldMax {
+		return true
+	}
+	if s.Field != nil && BlocksMovement(s.Field.At(x, y)) {
+		return true
+	}
+	if t := s.actorAt(x, y); t >= 0 && s.Actors[t].Side == SideMonster {
+		return true
+	}
+	return false
 }
 
 // EnemyNearStyle／EnemyNearGuard 是環 0 找到目標時先填進去的攻擊選項與防禦選項

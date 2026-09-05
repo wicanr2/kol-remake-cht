@@ -1,12 +1,12 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "full-chain",
- "description": "一條按鍵走到底的正常玩家路徑：標題序列 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 城鎮戶外地圖 → 走到城牆邊出城 → 世界地圖 (40,23) → 往東走遇上伏擊 → 四個回合的規劃與執行打贏兩隻 ZOMBIE → 走回霍布入城點 → 進城 → 走到半途之家門口 → 進門 → REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State 四個狀態機，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**這條路徑釘住了亂數種子**：野外每次時段變換都會擲一次遭遇（SPEC-011），走到哪一格遇上什麼由種子決定；戰鬥裡的攻防與規劃順序同樣要重播。隊伍是原版名冊裡六名帶武器的角色，用 `tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,3,57,8 --out workplace/saves/party6.json` 產生。",
+ "description": "一條按鍵走到底的正常玩家路徑：標題序列 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 角色選擇清單 → 旅店 → DOOR → 城鎮戶外地圖 → 走到城牆邊出城 → 世界地圖 (40,23) → 往東走遇上伏擊 → 八個回合的規劃與執行打贏兩隻 ZOMBIE → 走回霍布入城點 → 進城 → 走到半途之家門口 → 進門 → REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State 四個狀態機，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**這條路徑釘住了亂數種子**：野外每次時段變換都會擲一次遭遇（SPEC-011），走到哪一格遇上什麼由種子決定；戰鬥裡的攻防與規劃順序同樣要重播。隊伍是原版名冊裡六名帶武器的角色，用 `tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,3,57,8 --out workplace/saves/party6.json` 產生。",
  "seed": 1,
  "load": "workplace/saves/party6.json",
- "token_count": 764,
+ "token_count": 938,
  "trace": "docs/verification/player-path/full-chain/trace.json",
- "trace_sha256": "b99727df8bf0e2c9dd3919859d1e4f6a4b3318da5aa1cdf477097c8d5cd0e0e3",
+ "trace_sha256": "a32d7d49791191d89bd92a22d023239103b32c69d8f14b840a2237fb355a5e4c",
  "milestones": [
   {
    "step": 0,
@@ -260,9 +260,9 @@
    }
   },
   {
-   "step": 618,
+   "step": 792,
    "token": "SPACE",
-   "note": "第六回合結束，兩隻 ZOMBIE 都倒下——打贏",
+   "note": "第八回合結束，兩隻 ZOMBIE 都倒下——打贏",
    "scene": "flow:town",
    "town": {
     "left_town": true,
@@ -290,16 +290,16 @@
     "prompt": 10,
     "quest_done": 0,
     "roster": [
-     "0 Poontang party 32,27 head=16 chest=16",
-     "1 Moraine party 32,28 head=15 chest=15",
-     "2 Fighting Bull party 32,29 head=14 chest=14",
+     "0 Poontang party 32,27 head=16 chest=10",
+     "1 Moraine party 32,28 head=15 chest=9",
+     "2 Fighting Bull party 32,26 head=14 chest=14",
      "3 Kenneth party 33,28 head=17 chest=17",
-     "4 Sharakan party 31,30 head=17 chest=17",
+     "4 Sharakan party 30,29 head=17 chest=17",
      "5 Olear party 31,29 head=15 chest=15",
-     "6 ZOMBIE foe 31,27 head=14 chest=0 down",
-     "7 ZOMBIE foe 33,27 head=4 chest=0 down"
+     "6 ZOMBIE foe 31,27 head=0 chest=14 down",
+     "7 ZOMBIE foe 33,27 head=14 chest=0 down"
     ],
-    "round": 6,
+    "round": 8,
     "site": -1,
     "stage": 5,
     "turn": 8,
@@ -307,7 +307,7 @@
    }
   },
   {
-   "step": 620,
+   "step": 794,
    "token": "SPACE",
    "note": "勝負的訊息推完，回到世界地圖",
    "scene": "flow:town",
@@ -331,7 +331,7 @@
    }
   },
   {
-   "step": 631,
+   "step": 805,
    "token": "RET",
    "note": "走回入城點選 DOOR，回到霍布城內，鏡頭 (56,2)",
    "scene": "flow:town",
@@ -344,7 +344,7 @@
    }
   },
   {
-   "step": 755,
+   "step": 929,
    "token": "A",
    "note": "走回半途之家門口",
    "scene": "flow:town",
@@ -358,7 +358,7 @@
    }
   },
   {
-   "step": 756,
+   "step": 930,
    "token": "RET",
    "note": "DOOR：進門，店主的敘述",
    "scene": "flow:town",
@@ -376,7 +376,7 @@
    }
   },
   {
-   "step": 764,
+   "step": 938,
    "token": "RET",
    "note": "答應 56 枚金幣住一晚，存檔寫出",
    "scene": "flow:town",
@@ -434,39 +434,39 @@
    "shows": "戰場與第一回合的指令列"
   },
   {
-   "step": 618,
-   "file": "step-618.png",
-   "sha256": "04b622417409734893ee8879d8c8ba8b8d9ccc747f6980d4947f6092c99765b5",
+   "step": 792,
+   "file": "step-792.png",
+   "sha256": "87ddf4629caa58967da6e0ced3986bd84cf3788896c9a13f090c487f14ccf633",
    "shows": "You have defeated The ZOMBIES!"
   },
   {
-   "step": 631,
-   "file": "step-631.png",
+   "step": 805,
+   "file": "step-805.png",
    "sha256": "a80b735accb1772c06d9eb1a93de9b9d223544195e5bb942934e084db028a423",
    "shows": "回到霍布城內"
   },
   {
-   "step": 755,
-   "file": "step-755.png",
+   "step": 929,
+   "file": "step-929.png",
    "sha256": "b31196eaf79cd40cff3bb6fe821edbd681014f1ee1d40966b7a7494e3c2636c4",
    "shows": "半途之家門口，圖示列剩 DOOR／U-TURN"
   },
   {
-   "step": 763,
-   "file": "step-763.png",
+   "step": 937,
+   "file": "step-937.png",
    "sha256": "a37fef1a5c212017826674a18e396b4abf101752a97127e4d4d2b5ca77decb0b",
    "shows": "住一晚要 56 枚金幣的問句"
   },
   {
-   "step": 764,
-   "file": "step-764.png",
+   "step": 938,
+   "file": "step-938.png",
    "sha256": "27b6be126f926eb978a08ad8b6fe98b565e57e98cf883e2a8c442d33ba99e092",
    "shows": "答應之後：扣錢、記下留宿的建築、寫出存檔"
   }
  ],
  "save": {
   "file": "workplace/saves/full-chain.json",
-  "sha256": "ce0cff2e1b822b22710b0541de908a348d80abe93456192b770e3d1aaeea90b4",
+  "sha256": "e64810a0ce43f1cc7b48741f6d7bf7d90a235da1c03718cd066ec0859acfa24f",
   "fields": {
    "schema": "kol-save-v1",
    "location.kind": "town",

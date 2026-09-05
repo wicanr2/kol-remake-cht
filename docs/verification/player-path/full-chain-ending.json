@@ -1,205 +1,205 @@
 {
- "name": "full-chain-ending",
- "kind": "observation",
- "description": "從標題按下去，走出霍布的另一個城門，在最終任務的地點打完那一場，看完結局那七段。**結局的觸發點是任務戰鬥打完那一刻**（RE-106）：原版在 `sub_2B0FF` 的尾端先看`word_34968`——那是「這一場真的把任務標成完成了」的旗標（`sub_28F5D` 設的，RE-101）——成立才逐名檢查已回報數等於 0x17。七張圖與七段敘事都與 `-scene ending` 那一組收據**逐 byte 相同**。全程只按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過兩處**：存檔要「已回報 23 件、最終任務已接」，而接任務那一側（`sub_14564`）雖然做完了（RE-110），要在遊戲裡真的回報 23 件仍然不現實；最終任務原本是十二隻 10 級 CYCLOPS，六人隊打不贏，所以壓成一隻 1 級。",
- "seed": 1,
- "load": "workplace/observe/final-battle.json",
- "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET R R R R R R R R R R R R R SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L R R RET > RET > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L RET > RET > > RET U U L L R R RET > > RET > > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L D RET > > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET > RET U U L L R R RET > > RET > > > > > RET U U L L R RET > RET > RET U U L L D RET > > RET > > > > > RET U U L L R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R RET > > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L D D R R RET > > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D R R RET > > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L D R R RET > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > RET U U L L D R R RET > > RET > RET U U L L D D RET > > RET > RET U U L L R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > > > RET U U L L RET > RET > RET U U L L D R R RET > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R RET SPACE > > > > > RET U U L L R R RET > RET > > > > RET U U L L D R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D R R RET > RET > RET U U L L R R RET > > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE",
- "shot_dir": "docs/verification/player-path/full-chain-ending",
- "trace": "docs/verification/player-path/full-chain-ending/trace.json",
- "size": [
-  320,
-  200
- ],
- "receipt": "docs/verification/player-path/full-chain-ending-receipt.json",
- "substituted_inputs": [
-  {
-   "flag": "-load",
-   "path": "workplace/observe/final-battle.json",
-   "change": "已回報 22 件、最後一件已完成、要交的東西就在身上。",
-   "generated_by": "tools/make_final_quest_save.py",
-   "base": "tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,7,56,24"
-  },
-  {
-   "flag": "-quest-sites",
-   "path": "workplace/observe/quest-sites-final.json",
-   "change": "最終任務地點的敵人從十二隻 10 級 CYCLOPS 壓成一隻 1 級——六人隊打不贏原版那一場。戰鬥的規則本身沒有換，換的是輸入。",
-   "generated_by": "tools/make_observation_inputs.py",
-   "base": "assets/original-derived-data/quest-sites.json"
-  }
- ],
- "not_claimed": [
-  {
-   "name": "可以從新遊戲一路玩到結局",
-   "reason": "要回報滿 23 件任務才接得到最終任務（RE-107），存檔因此是工具造的。這一組證明的是「打完最終任務那一刻結局會出來」。"
-  },
-  {
-   "name": "最終任務的難度",
-   "reason": "原版那裡是十二隻 10 級 CYCLOPS，這一次是一隻 1 級。戰鬥的規則本身沒有換，換的是輸入。"
-  },
-  {
-   "name": "結局的畫面與原版一致",
-   "reason": "原版沒有取到結局的畫格。七張圖的位置與尺寸由 RE-106 的四個全域算出。"
-  }
- ],
- "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖來自已通過權利審查的原作衍生 PNG。",
- "milestones": [
-  {
-   "step": 19,
-   "scene": "flow:town",
-   "town": {
-    "x": 56,
-    "y": 24,
-    "mode": 0
-   },
-   "note": "DOOR：城鎮戶外地圖（入城點 7 那一區）"
-  },
-  {
-   "step": 63,
-   "town": {
-    "x": 56,
-    "y": 16,
-    "mode": 3
-   },
-   "note": "走到地圖上緣，城門提示"
-  },
-  {
-   "step": 64,
-   "town": {
-    "left_town": true
-   },
-   "world": {
-    "x": 42,
-    "y": 9
-   },
-   "note": "出城"
-  },
-  {
-   "step": 77,
-   "world": {
-    "x": 44,
-    "y": 9
-   },
-   "battle": {
-    "stage": 1,
-    "site": -1
-   },
-   "note": "路上被伏擊（SPEC-011）"
-  },
-  {
-   "step": 934,
-   "battle": {
-    "stage": 5,
-    "verdict": 2
-   },
-   "note": "打贏那一場遭遇"
-  },
-  {
-   "step": 968,
-   "world": {
-    "x": 48,
-    "y": 9,
-    "quest_prompt": true
-   },
-   "note": "踏上第 4 個任務地點：最終任務的敘述與「Will you partake?」"
-  },
-  {
-   "step": 969,
-   "battle": {
-    "stage": 1,
-    "site": 4
-   },
-   "note": "答應參戰"
-  },
-  {
-   "step": 1174,
-   "battle": {
-    "stage": 5,
-    "verdict": 2,
-    "quest_done": 6
-   },
-   "note": "打贏：六名的任務旗標都標成完成（RE-101）"
-  },
-  {
-   "step": 1176,
-   "scene": "ending",
-   "ending": {
-    "armed": true,
-    "panel": 0
-   },
-   "note": "戰鬥收尾時檢查已回報數等於 0x17，成立就播結局（RE-106）"
-  },
-  {
-   "step": 1182,
-   "ending": {
-    "panel": 6
-   },
-   "note": "第七段"
-  }
- ],
- "checkpoints": [
-  {
-   "step": 64,
-   "file": "step-064.png",
-   "shows": "出城的落點 (42,9)"
-  },
-  {
-   "step": 77,
-   "file": "step-077.png",
-   "shows": "路上的伏擊"
-  },
-  {
-   "step": 968,
-   "file": "step-968.png",
-   "shows": "最終任務的敘述與 Will you partake?"
-  },
-  {
-   "step": 1174,
-   "file": "step-1174.png",
-   "shows": "打贏最終任務"
-  },
-  {
-   "step": 1176,
-   "file": "step-1176.png",
-   "identical_to": "docs/verification/ending/panel-0.png",
-   "shows": "結局第 1 段，與 `-scene ending` 的收據逐 byte 相同"
-  },
-  {
-   "step": 1177,
-   "file": "step-1177.png",
-   "identical_to": "docs/verification/ending/panel-1.png",
-   "shows": "結局第 2 段，與 `-scene ending` 的收據逐 byte 相同"
-  },
-  {
-   "step": 1178,
-   "file": "step-1178.png",
-   "identical_to": "docs/verification/ending/panel-2.png",
-   "shows": "結局第 3 段，與 `-scene ending` 的收據逐 byte 相同"
-  },
-  {
-   "step": 1179,
-   "file": "step-1179.png",
-   "identical_to": "docs/verification/ending/panel-3.png",
-   "shows": "結局第 4 段，與 `-scene ending` 的收據逐 byte 相同"
-  },
-  {
-   "step": 1180,
-   "file": "step-1180.png",
-   "identical_to": "docs/verification/ending/panel-4.png",
-   "shows": "結局第 5 段，與 `-scene ending` 的收據逐 byte 相同"
-  },
-  {
-   "step": 1181,
-   "file": "step-1181.png",
-   "identical_to": "docs/verification/ending/panel-5.png",
-   "shows": "結局第 6 段，與 `-scene ending` 的收據逐 byte 相同"
-  },
-  {
-   "step": 1182,
-   "file": "step-1182.png",
-   "identical_to": "docs/verification/ending/panel-6.png",
-   "shows": "結局第 7 段，與 `-scene ending` 的收據逐 byte 相同"
-  }
- ],
- "quest_sites": "workplace/observe/quest-sites-final.json"
+  "name": "full-chain-ending",
+  "kind": "observation",
+  "description": "從標題按下去，走出霍布的另一個城門，在最終任務的地點打完那一場，看完結局那七段。**結局的觸發點是任務戰鬥打完那一刻**（RE-106）：原版在 `sub_2B0FF` 的尾端先看`word_34968`——那是「這一場真的把任務標成完成了」的旗標（`sub_28F5D` 設的，RE-101）——成立才逐名檢查已回報數等於 0x17。七張圖與七段敘事都與 `-scene ending` 那一組收據**逐 byte 相同**。全程只按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過兩處**：存檔要「已回報 23 件、最終任務已接」，而接任務那一側（`sub_14564`）雖然做完了（RE-110），要在遊戲裡真的回報 23 件仍然不現實；最終任務原本是十二隻 10 級 CYCLOPS，六人隊打不贏，所以壓成一隻 1 級。",
+  "seed": 1,
+  "load": "workplace/observe/final-battle.json",
+  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET R R R R R R R R R R R R R SPACE > > > > > RET U U L L RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET > > > > > RET U U L L D R R RET > RET > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET > > > > RET U U L L D RET > RET > RET U U L L D RET > > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > RET U U L L RET > > RET > RET U U L L R R RET > > RET > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET > RET U U L L RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > RET U U L L R RET > > RET > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE RET RET RET RET RET RET SPACE R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R RET SPACE > > > > > RET U U L L R R RET > RET > > > > RET U U L L D R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > RET U U L L R R RET > > RET > > > > > RET U U L L R R RET > RET > RET U U L L D D R R RET > > RET > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > > RET U U L L R RET > RET > > > > > RET U U L L D D R R RET > RET > RET U U L L D R R RET > > RET > > > > > RET U U L L D D R RET > RET > RET U U L L D D R R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE",
+  "shot_dir": "docs/verification/player-path/full-chain-ending",
+  "trace": "docs/verification/player-path/full-chain-ending/trace.json",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/full-chain-ending-receipt.json",
+  "substituted_inputs": [
+    {
+      "flag": "-load",
+      "path": "workplace/observe/final-battle.json",
+      "change": "已回報 22 件、最後一件已完成、要交的東西就在身上。",
+      "generated_by": "tools/make_final_quest_save.py",
+      "base": "tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,7,56,24"
+    },
+    {
+      "flag": "-quest-sites",
+      "path": "workplace/observe/quest-sites-final.json",
+      "change": "最終任務地點的敵人從十二隻 10 級 CYCLOPS 壓成一隻 1 級——六人隊打不贏原版那一場。戰鬥的規則本身沒有換，換的是輸入。",
+      "generated_by": "tools/make_observation_inputs.py",
+      "base": "assets/original-derived-data/quest-sites.json"
+    }
+  ],
+  "not_claimed": [
+    {
+      "name": "可以從新遊戲一路玩到結局",
+      "reason": "要回報滿 23 件任務才接得到最終任務（RE-107），存檔因此是工具造的。這一組證明的是「打完最終任務那一刻結局會出來」。"
+    },
+    {
+      "name": "最終任務的難度",
+      "reason": "原版那裡是十二隻 10 級 CYCLOPS，這一次是一隻 1 級。戰鬥的規則本身沒有換，換的是輸入。"
+    },
+    {
+      "name": "結局的畫面與原版一致",
+      "reason": "原版沒有取到結局的畫格。七張圖的位置與尺寸由 RE-106 的四個全域算出。"
+    }
+  ],
+  "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖來自已通過權利審查的原作衍生 PNG。",
+  "milestones": [
+    {
+      "step": 19,
+      "scene": "flow:town",
+      "town": {
+        "x": 56,
+        "y": 24,
+        "mode": 0
+      },
+      "note": "DOOR：城鎮戶外地圖（入城點 7 那一區）"
+    },
+    {
+      "step": 63,
+      "town": {
+        "x": 56,
+        "y": 16,
+        "mode": 3
+      },
+      "note": "走到地圖上緣，城門提示"
+    },
+    {
+      "step": 64,
+      "town": {
+        "left_town": true
+      },
+      "world": {
+        "x": 42,
+        "y": 9
+      },
+      "note": "出城"
+    },
+    {
+      "step": 77,
+      "world": {
+        "x": 44,
+        "y": 9
+      },
+      "battle": {
+        "stage": 1,
+        "site": -1
+      },
+      "note": "路上被伏擊（SPEC-011）"
+    },
+    {
+      "step": 650,
+      "battle": {
+        "stage": 5,
+        "verdict": 2
+      },
+      "note": "打贏那一場遭遇"
+    },
+    {
+      "step": 691,
+      "world": {
+        "x": 48,
+        "y": 9,
+        "quest_prompt": true
+      },
+      "note": "踏上第 4 個任務地點：最終任務的敘述與「Will you partake?」"
+    },
+    {
+      "step": 692,
+      "battle": {
+        "stage": 1,
+        "site": 4
+      },
+      "note": "答應參戰"
+    },
+    {
+      "step": 995,
+      "battle": {
+        "stage": 5,
+        "verdict": 2,
+        "quest_done": 6
+      },
+      "note": "打贏：六名的任務旗標都標成完成（RE-101）"
+    },
+    {
+      "step": 997,
+      "scene": "ending",
+      "ending": {
+        "armed": true,
+        "panel": 0
+      },
+      "note": "戰鬥收尾時檢查已回報數等於 0x17，成立就播結局（RE-106）"
+    },
+    {
+      "step": 1003,
+      "ending": {
+        "panel": 6
+      },
+      "note": "第七段"
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": 64,
+      "file": "step-064.png",
+      "shows": "出城的落點 (42,9)"
+    },
+    {
+      "step": 77,
+      "file": "step-077.png",
+      "shows": "路上的伏擊"
+    },
+    {
+      "step": 691,
+      "file": "step-691.png",
+      "shows": "最終任務的敘述與 Will you partake?"
+    },
+    {
+      "step": 995,
+      "file": "step-995.png",
+      "shows": "打贏最終任務"
+    },
+    {
+      "step": 997,
+      "file": "step-997.png",
+      "identical_to": "docs/verification/ending/panel-0.png",
+      "shows": "結局第 1 段，與 `-scene ending` 的收據逐 byte 相同"
+    },
+    {
+      "step": 998,
+      "file": "step-998.png",
+      "identical_to": "docs/verification/ending/panel-1.png",
+      "shows": "結局第 2 段，與 `-scene ending` 的收據逐 byte 相同"
+    },
+    {
+      "step": 999,
+      "file": "step-999.png",
+      "identical_to": "docs/verification/ending/panel-2.png",
+      "shows": "結局第 3 段，與 `-scene ending` 的收據逐 byte 相同"
+    },
+    {
+      "step": 1000,
+      "file": "step-1000.png",
+      "identical_to": "docs/verification/ending/panel-3.png",
+      "shows": "結局第 4 段，與 `-scene ending` 的收據逐 byte 相同"
+    },
+    {
+      "step": 1001,
+      "file": "step-1001.png",
+      "identical_to": "docs/verification/ending/panel-4.png",
+      "shows": "結局第 5 段，與 `-scene ending` 的收據逐 byte 相同"
+    },
+    {
+      "step": 1002,
+      "file": "step-1002.png",
+      "identical_to": "docs/verification/ending/panel-5.png",
+      "shows": "結局第 6 段，與 `-scene ending` 的收據逐 byte 相同"
+    },
+    {
+      "step": 1003,
+      "file": "step-1003.png",
+      "identical_to": "docs/verification/ending/panel-6.png",
+      "shows": "結局第 7 段，與 `-scene ending` 的收據逐 byte 相同"
+    }
+  ],
+  "quest_sites": "workplace/observe/quest-sites-final.json"
 }

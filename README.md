@@ -85,9 +85,9 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG，音樂與音效使
 - 中文說明書：[docs/manual/README.md](docs/manual/README.md)
 - 目前畫面：[docs/screenshots/README.md](docs/screenshots/README.md)
 
-截至 2026-09-04，**自評 62 / 100**（算法與逐系統的完成度依據見
-[WORKLIST 的自評分數](WORKLIST.md#自評分數)；分數不是進度百分比，剩下的 48 分裡
-有 18 分連一條 RE 都還沒有）：
+截至 2026-09-05，**自評 87 / 100**（算法與逐系統的完成度依據見
+[WORKLIST 的自評分數](WORKLIST.md#自評分數)；分數不是進度百分比，剩下的 13 分裡
+音訊一個音都還沒進遊戲）：
 
 - 79 頁玩家手冊與 5 頁參考卡已完成繁體中文 Markdown 校對，SPEC-003 為 CONFORMED。
 - EGA 圖片清冊共 1,022 個 payload；996 筆已證實為可抽取來源、26 筆為非圖片，形成

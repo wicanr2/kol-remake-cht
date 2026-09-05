@@ -280,3 +280,112 @@ func TestPlanEnemyFillsGuardWhenAdjacent(t *testing.T) {
 		t.Fatalf("防禦選項該寫回記錄，得到 %d／%d", s.Actors[1].Guard, d.Guard)
 	}
 }
+
+// 智力擲骰：`值 × 等級 ÷ 3 > 門檻`（`sub_252CB`）。
+func TestEnemyIntellectCheck(t *testing.T) {
+	// 智力 60、等級 2 → 40，門檻 39 過、40 不過。
+	if !EnemyIntellectCheck(60, 2, 39) {
+		t.Fatal("40 > 39 該過")
+	}
+	if EnemyIntellectCheck(60, 2, 40) {
+		t.Fatal("40 > 40 不成立")
+	}
+}
+
+// 反制掃描抄對手的攻擊選項：對方已規劃、要用武器攻擊、而且方向正對著我，
+// 優先度 5（`0x254D5`）。
+func TestCounterScanCopiesFacingAttacker(t *testing.T) {
+	s := &State{Actors: []Actor{
+		// 隊員站在敵人的右邊那一格（環 0 的第 2 個方向），方向 6 正對回來。
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdWeapon, Style: 7, Guard: 3, Facing: 6},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35, Intellect: 90},
+	}}
+	// 兩名都已經規劃過：Turn 停在尾端。
+	s.Round.Order, s.Round.Turn = []int{0, 1}, 2
+	prev, target, ok := s.counterScan(1, &fixedRand{values: []int{1}})
+	if !ok {
+		t.Fatal("環 0 有隊員，該有結論")
+	}
+	if target != 0 {
+		t.Fatalf("目標是 %d，期望 0", target)
+	}
+	if prev != 7 {
+		t.Fatalf("該抄對方的攻擊選項 7，得到 %d", prev)
+	}
+	if s.Actors[1].Facing != 2 {
+		t.Fatalf("方向該轉向目標（環 0 的第 2 格），得到 %d", s.Actors[1].Facing)
+	}
+}
+
+// 對方還沒規劃：優先度 4，用 0x0B／7（`0x255AF`）。
+func TestCounterScanUnplannedTarget(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35, Intellect: 90},
+	}}
+	// 隊員排在敵人後面，還沒輪到它規劃。
+	s.Round.Order, s.Round.Turn = []int{1, 0}, 1
+	prev, target, ok := s.counterScan(1, &fixedRand{values: []int{1}})
+	if !ok || target != 0 {
+		t.Fatalf("該挑到第 0 名，得到 ok=%v target=%d", ok, target)
+	}
+	if prev != EnemyNearStyle {
+		t.Fatalf("還沒規劃的對手該用 0x0B，得到 %#x", prev)
+	}
+}
+
+// 場上沒有貼著的隊員就沒有結論，交回主幹繼續往外環找。
+func TestCounterScanFindsNothing(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 20, Y: 20, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35, Intellect: 90},
+	}}
+	s.Round.Order, s.Round.Turn = []int{0, 1}, 2
+	if _, _, ok := s.counterScan(1, &fixedRand{values: []int{1}}); ok {
+		t.Fatal("環 0 沒有人，不該有結論")
+	}
+}
+
+// 側翼：對方要移動時繞到它的側面（`sub_25653`）。對方沒有攻擊選項就不繞。
+//
+// 自己的方向 0 是偶數 → 步幅 1、掃到第 6 格。從 0 往上數到第 3 格時碰上對方的
+// 方向 3，`k == 3 < 4`，所以把對方的方向減一個步幅得到 2；環 0 的第 2 格
+// （0,+1）站的是那名隊員、不是自己人，繞得過去。
+func TestFlankNeedsTargetStyle(t *testing.T) {
+	s := &State{Field: NewField(), Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdMove, Facing: 3},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2, Facing: 0},
+	}}
+	s.flank(1, 0)
+	if s.Actors[1].Facing != 0 {
+		t.Fatalf("對方沒有攻擊選項就不該繞，方向變成 %d", s.Actors[1].Facing)
+	}
+	s.Actors[0].Style = 5
+	s.flank(1, 0)
+	if s.Actors[1].Facing != 2 {
+		t.Fatalf("該繞到第 2 格那一側，方向是 %d", s.Actors[1].Facing)
+	}
+}
+
+// 正對面（`k == 4`）放棄，不改方向（`0x256DF`）。
+func TestFlankGivesUpWhenHeadOn(t *testing.T) {
+	s := &State{Field: NewField(), Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdMove, Style: 5, Facing: 4},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2, Facing: 0},
+	}}
+	s.flank(1, 0)
+	if s.Actors[1].Facing != 0 {
+		t.Fatalf("正對面該放棄，方向變成 %d", s.Actors[1].Facing)
+	}
+}
