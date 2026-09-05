@@ -36,8 +36,11 @@ type Slot struct {
 	// 版面與商品記錄相同，所以型別共用；空的那一格是 nil。
 	Spells []*Item `json:"spells"`
 	// Equipment 是穿戴欄十格：部位 0…8 在角色記錄 0x100 + 16 × 部位，
-	// 部位 9（手上那件武器）在 0x30。空的那一格是 nil（RE-080）。
+	// 第十格是手上那件（0x30）。空的那一格是 nil（RE-080）。
 	Equipment []*Item `json:"equipment"`
+	// SpareWeapon 是背著、沒拿在手上的那一件（角色記錄 0x190）：立繪最左邊
+	// 那一層畫的就是它，原版名冊裡只有兩名角色有（RE-126）。
+	SpareWeapon *Item `json:"spare_weapon"`
 	// Progress 是角色記錄 0x1DD 起那五格「已回報的任務數」（RE-107）。
 	Progress []int `json:"progress"`
 	// Carried 是交任務物品時要逐 byte 比的那十七格（RE-109）。typed 的

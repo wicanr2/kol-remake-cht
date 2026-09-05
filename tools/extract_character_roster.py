@@ -59,10 +59,16 @@ PROGRESS_OFFSET, PROGRESS_BYTES = 0x1DD, 5
 # 0x30 起每 0x10 一格、不到 0x1A0 為止，跳過 0x40…0x9F 那一段武器技能。
 CARRIED_FIRST, CARRIED_LAST, CARRIED_STRIDE = 0x30, 0x190, 0x10
 CARRIED_SKIP_LO, CARRIED_SKIP_HI = 0x40, 0x9F
-# 穿戴欄：部位 0…8 在 0x100 + 16 × 部位，部位 9（手上那件武器）在 0x30，
-# 一格 16 byte，版面與商店的商品記錄相同（RE-075／RE-080）。
+# 穿戴欄：部位 0…8 在 0x100 + 16 × 部位，第十格是**手上那件**（0x30），一格
+# 16 byte，版面與商店的商品記錄相同（RE-075／RE-080）。
+#
+# `0x190`（部位 9 在 0x100 那一串裡的那一格）是**另外一格**：原版名冊十六槽裡只有
+# Theodoric 與 Jax 用它，兩人手上都空著，而那一格放的是 Greatsword 與 Battle Axe
+# ——「背著、沒拿在手上」的那一件，畫立繪時 `sub_18F3A` 單獨讀它（RE-126）。
+# 這裡另外帶成 `spare_weapon`，不動 `equipment` 十格的形狀：戰鬥、商店與負重
+# 都綁在「手上那件」，而「買來的武器放哪一格」還沒有證據。
 WORN_SLOTS, WORN_STRIDE = 10, 16
-WORN_BASE, WEAPON_SLOT_OFFSET = 0x100, 0x30
+WORN_BASE, WEAPON_SLOT_OFFSET, SPARE_WEAPON_OFFSET = 0x100, 0x30, 0x190
 # 位移 0x2E／0x2F 是角色留宿的建築編號，來自建築 payload 的 0x3A／0x3B。
 BUILDING_OFFSET = 0x2E
 # MIRROR 角色資料頁用得到的欄位（RE-074）。位移 0x1D–0x23 是七個內部屬性，
@@ -91,19 +97,22 @@ WEIGHT_BASE = (0x03, 0x03, 0x02, 0x03, 0x03, 0x00, 0x03)
 WEIGHT_PER_FOOT = (0x41, 0x32, 0x4B, 0x46, 0x28, 0x00, 0x23)
 
 
+def worn_slot(rec: bytes, pos: int, base: int) -> dict | None:
+    """一格穿戴欄。空的是 None；其餘欄位與商店的商品記錄同名。"""
+    block = rec[base:base + WORN_STRIDE]
+    if len(block) < WORN_STRIDE or not any(block):
+        return None
+    item = good(block, pos)
+    item["offset"] = base
+    return item
+
+
 def equipment(rec: bytes) -> list[dict | None]:
-    """穿戴欄十格。空的那一格是 null；其餘欄位與商店的商品記錄同名。"""
-    out = []
-    for pos in range(WORN_SLOTS):
-        base = WEAPON_SLOT_OFFSET if pos == WORN_SLOTS - 1 else WORN_BASE + WORN_STRIDE * pos
-        block = rec[base:base + WORN_STRIDE]
-        if len(block) < WORN_STRIDE or not any(block):
-            out.append(None)
-            continue
-        item = good(block, pos)
-        item["offset"] = base
-        out.append(item)
-    return out
+    """穿戴欄十格：部位 0…8 在 0x100 那一串，第十格是手上那件（0x30）。"""
+    return [worn_slot(rec, pos,
+                      WEAPON_SLOT_OFFSET if pos == WORN_SLOTS - 1
+                      else WORN_BASE + WORN_STRIDE * pos)
+            for pos in range(WORN_SLOTS)]
 
 
 def carried(rec: bytes) -> list[dict]:
@@ -285,6 +294,9 @@ def main() -> int:
             # 穿戴欄是角色記錄自己的欄位，不屬於 MIRROR 資料頁，所以放在槽位這一層
             # （`internal/roster` 的 Slot.Equipment 就是照這個位置讀）。
             "equipment": equipment(data[base:base + SLOT_BYTES]) if name else None,
+            # 背著沒拿在手上的那一件（0x190）：立繪最左邊那一層畫的就是它（RE-126）。
+            "spare_weapon": (worn_slot(data[base:base + SLOT_BYTES], WORN_SLOTS - 1,
+                                       SPARE_WEAPON_OFFSET) if name else None),
             # 法術同樣是角色記錄自己的欄位（RE-100）。
             "spells": spells(data[base:base + SLOT_BYTES]) if name else None,
             # 交任務物品要逐 byte 比，所以那十七格原樣帶出來（RE-109）。
