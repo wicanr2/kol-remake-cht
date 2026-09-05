@@ -78,6 +78,15 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 		m.HasWeapon = true
 		m.WeaponName = g.Name
 		m.Worn[0] = g.Name
+	} else if i >= 0 && i < len(s.Actors) {
+		// 敵人撿的那一件放進怪物記錄手上那一格（`word_39A4E = 0x20`，
+		// `sub_1E3A8:0x203E0`），同時把 +0x2B 清成 0。手上不再空著，AI 那一條
+		// 「沒有武器就去撿」下一回合就不成立了（RE-116）。
+		//
+		// **武器的數字沒有跟著換**：地上那一格只留名字，要換算成傷害骰得先把
+		// ITEM.LST 那一筆接起來——撿到的東西這一版還是照原本的空手數字打。
+		s.Actors[i].Unarmed = false
+		s.Actors[i].PickedUp = 0
 	}
 	s.Ground[slot] = GroundItem{}
 	return FoundItemRecord, g.Name

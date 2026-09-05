@@ -215,7 +215,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			GoldRoll: monster.Gold.Raw,
 			FleeAt:   monster.FleeAt, FleeRecover: monster.FleeRecover,
 			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
-			ShieldGrade: shieldGrade,
+			ShieldGrade: shieldGrade, Unarmed: monster.Weapon == nil,
 			Threshold: Threshold(monster.Size, monster.Health)}
 		s.Actors[slot].SetParts()
 	}

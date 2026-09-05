@@ -389,3 +389,66 @@ func TestFlankGivesUpWhenHeadOn(t *testing.T) {
 		t.Fatalf("正對面該放棄，方向變成 %d", s.Actors[1].Facing)
 	}
 }
+
+// 手上空著的怪物先去撿地上的東西，不打人（`0x23BC2`，RE-116）。
+func TestPlanEnemyPicksUpWhenUnarmed(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35, Unarmed: true},
+	}}
+	d := s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdPickUp {
+		t.Fatalf("空手應該去撿，得到 %#x", d.Command)
+	}
+	// 攻擊選項 0、防禦選項 2（`0x23C05`）。
+	if d.Style != 0 || d.Guard != 2 {
+		t.Fatalf("兩個選項是 %d／%d，期望 0／2", d.Style, d.Guard)
+	}
+	if s.Actors[1].Command != CmdPickUp || s.Actors[1].Guard != 2 {
+		t.Fatal("決定沒有寫回參戰者記錄")
+	}
+}
+
+// +0x2B 非零那一條改成移動，並把旗標清掉。原版沒有地方把它設起來，
+// 所以這一條在遊戲裡走不到——測試直接把旗標塞進去，釘住這一段的形狀。
+func TestPlanEnemyUnarmedWithPickedUpFlagMoves(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35, Unarmed: true, PickedUp: 1},
+	}}
+	d := s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdMove {
+		t.Fatalf("+0x2B 非零應該改成移動，得到 %#x", d.Command)
+	}
+	if s.Actors[1].PickedUp != 0 {
+		t.Fatalf("旗標應該被清掉，還是 %d", s.Actors[1].PickedUp)
+	}
+}
+
+// 撿到手上之後就不再空手，下一回合會正常打人。
+func TestEnemyPickUpFillsTheHand(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35, Unarmed: true},
+	}}
+	s.Ground[0] = GroundItem{Name: "BROADSWORD", X: 4, Y: 4}
+	if record, name := s.TakeItem(1, 0); record != FoundItemRecord || name != "BROADSWORD" {
+		t.Fatalf("撿的結果是 %#x／%q", record, name)
+	}
+	if s.Actors[1].Unarmed {
+		t.Fatal("撿到之後手上不該還空著")
+	}
+	if s.Ground[0].Name != "" {
+		t.Fatalf("地上那一格應該清空，還有 %q", s.Ground[0].Name)
+	}
+	d := s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdWeapon {
+		t.Fatalf("有武器之後應該打人，得到 %#x", d.Command)
+	}
+}

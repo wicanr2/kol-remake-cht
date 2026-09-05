@@ -31,6 +31,19 @@ def sha256(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def save_digest(doc: dict) -> str:
+    """存檔內容的雜湊，**不含 `saved_at`**。
+
+    存檔裡的 `saved_at` 是寫出來那一刻的時間，所以整份檔案的 SHA-256 每跑一次
+    就換一個——記進收據等於每次重跑都製造一行沒有意義的差異，而且那一欄根本
+    驗不了任何東西（重生不出同一個值）。改成把時間戳拿掉再算，收據才重生得出來。
+    """
+    stable = {k: v for k, v in doc.items() if k != "saved_at"}
+    body = json.dumps(stable, ensure_ascii=False, sort_keys=True,
+                      separators=(",", ":"))
+    return hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+
 def dig(doc, path: str):
     node = doc
     for part in path.split("."):
@@ -128,7 +141,8 @@ def main() -> int:
             failures.append(f"缺少存檔 {path}")
         else:
             doc = json.loads(path.read_text(encoding="utf-8"))
-            saved = {"file": plan["save"]["file"], "sha256": sha256(path), "fields": {}}
+            saved = {"file": plan["save"]["file"],
+                     "sha256_without_saved_at": save_digest(doc), "fields": {}}
             for key, want in plan["save"]["expect"].items():
                 try:
                     got = dig(doc, key)

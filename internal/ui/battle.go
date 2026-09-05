@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"image"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -219,6 +220,39 @@ func BattleSpoils(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	}
 	// 背包塞不下、手上那件被換下來的那一句（記錄 0x183）由訊息區顯示，
 	// 這裡不重複。
+
+	// 圖示列換成兩格：原版開清單之前先 `sub_1449C()` 把整條清掉，再放 YES 與
+	// U-TURN 並把白框擺在第 0 格（RE-115）。
+	return drawSpoilIcons(dst, sprites, s)
+}
+
+// drawSpoilIcons 把戰場底下那一條換成戰利品畫面的兩格圖示。
+//
+// 清掉的範圍是 `sub_1103F(2)` 的 (1, 0xA4)–(0x26, 0xC4)，也就是 x = 8…304、
+// y = 164…196——**與執行段那張卷軸是同一塊**（`MessageBox` 是 (8, 0xA4) 296×32），
+// 所以報完獎勵的那幾句在清單出現的同時就被蓋掉了。
+func drawSpoilIcons(dst *ebiten.Image, sprites Sprites, s *battle.State) error {
+	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
+	if err != nil {
+		return err
+	}
+	m := battle.MessageBox
+	strip := image.Rect(m.X, m.Y, m.X+m.Width, m.Y+m.Height)
+	draw(dst, bg.SubImage(strip).(*ebiten.Image), m.X, m.Y)
+	b := town.IconBar
+	for i, code := range battle.SpoilIcons {
+		icon, err := sprites.Get("KOLMPICS", town.IconSprite(code))
+		if err != nil {
+			return err
+		}
+		x := b.X + i*b.Step
+		draw(dst, icon, x, b.Y+1)
+		c := town.ColourIdle
+		if i == s.Spoil.Icon {
+			c = town.ColourSelected
+		}
+		frame(dst, x, b.Y, b.Width, b.Height, c)
+	}
 	return nil
 }
 

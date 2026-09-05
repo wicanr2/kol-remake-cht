@@ -13,7 +13,6 @@
   ],
   "save": {
     "file": "workplace/saves/town-rest.json",
-    "sha256": "1ce1469f60126724d9047bd3998dce7af310c4fbf2becd4f5e9aa217d0f3a1b2",
     "fields": [
       {
         "field": "schema",
@@ -99,7 +98,8 @@
         "got": true,
         "pass": true
       }
-    ]
+    ],
+    "sha256_without_saved_at": "ef7628b5127985d60644d11edeca245fa3cee29a40b6675267c372734aa0a76b"
   },
   "failures": [],
   "steps": [

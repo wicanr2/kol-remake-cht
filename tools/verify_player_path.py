@@ -32,6 +32,18 @@ def sha256(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def save_digest(doc: dict) -> str:
+    """存檔內容的雜湊，**不含 `saved_at`**（同 `verify_full_path.py`）。
+
+    整份檔案的 SHA-256 每跑一次就換一個，因為 `saved_at` 是寫出來那一刻的時間；
+    記進收據等於每次重跑都多一行沒有意義的差異，而那一欄也重生不出來。
+    """
+    stable = {k: v for k, v in doc.items() if k != "saved_at"}
+    body = json.dumps(stable, ensure_ascii=False, sort_keys=True,
+                      separators=(",", ":"))
+    return hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+
 def dig(doc, path: str):
     """取 `party[0].gold` 這種欄位路徑；取不到就丟 KeyError／IndexError。"""
     node = doc
@@ -139,8 +151,9 @@ def main() -> int:
                 fields.append({"field": field, "want": want, "got": got, "pass": ok})
                 if not ok:
                     failures.append(f"存檔的 {field} 是 {got!r}，應為 {want!r}")
-        save_check = {"file": spec["file"], "sha256": sha256(path) if path.exists() else None,
-                      "fields": fields}
+        save_check = {"file": spec["file"], "fields": fields,
+                      "sha256_without_saved_at":
+                          save_digest(doc) if path.exists() else None}
 
     receipt = {
         "schema": "kol-player-path-v1",

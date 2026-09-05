@@ -400,11 +400,17 @@ func applyBattleToken(s *battle.State, token string, step func(*battle.State)) e
 			s.SpoilMove(-1)
 		case "D":
 			s.SpoilMove(1)
+		case "<":
+			s.SpoilIconMove(-1)
+		case ">":
+			s.SpoilIconMove(1)
 		case "RET", "SPACE":
-			if _, _, done := s.SpoilConfirm(); done {
+			// 白框停在 U-TURN 就是取消，與原版的回傳值判讀相同（RE-115）。
+			if _, _, done := s.SpoilAccept(); done {
 				s.Stage = battle.StageDone
 			}
-		case "N":
+		case "N", "ESC":
+			// 原版另外看 `word_2DF20`（ESC），與圖示無關。
 			if s.SpoilCancel() {
 				s.Stage = battle.StageDone
 			}
@@ -1644,11 +1650,11 @@ func (g *game) battleWoreOffLines() [][]string {
 	return out
 }
 
-// battleTakeSpoil 在戰利品清單按下確認：領走一件。背包塞不下的時候原版會說一句
-// （記錄 0x183），把它排進訊息區。
+// battleTakeSpoil 在戰利品清單按下確認：白框停在 U-TURN 就取消，否則領走一件。
+// 背包塞不下的時候原版會說一句（記錄 0x183），把它排進訊息區。
 func (g *game) battleTakeSpoil() {
 	s := g.quest.state
-	_, _, done := s.SpoilConfirm()
+	_, _, done := s.SpoilAccept()
 	if s.Spoil.Say != 0 {
 		ctx := battle.MessageContext{Lookup: g.battleRecord}
 		s.Exec.Text = battle.WrapMessage(
@@ -1936,6 +1942,13 @@ func (g *game) updateBattle() {
 		}
 		if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
 			s.SpoilMove(1)
+		}
+		// `,`／`.`（不按 Shift 的 `<`／`>`）移圖示列的白框，與城鎮同一組鍵。
+		if inpututil.IsKeyJustPressed(ebiten.KeyComma) {
+			s.SpoilIconMove(-1)
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyPeriod) {
+			s.SpoilIconMove(1)
 		}
 		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
 			inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||

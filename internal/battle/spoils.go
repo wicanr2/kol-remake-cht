@@ -195,10 +195,21 @@ const (
 	SpoilPickTaker
 )
 
+// SpoilIcons 是清單底下那條圖示列：原版在開清單之前先 `sub_1449C()` 把整條清空，
+// 再 `sub_11703(7)`、`sub_11703(0x0F)` 加兩格，`sub_11722(1)` 畫出來並把白框放在
+// 第 0 格（`0x28C21`／`0x28DCC`，RE-115）。編號與 `town.IconYes`／`town.IconUTurn`
+// 相同——商店的「要不要買」用的也是這兩格。battle 不認得 town 的型別，所以這裡
+// 自己寫一份。
+var SpoilIcons = []int{7, 15}
+
+// SpoilIconUTurn 是 SpoilIcons 裡取消那一格的位置。
+const SpoilIconUTurn = 1
+
 // SpoilScreen 是戰利品畫面的狀態。
 //
-// 原版把兩張清單都交給同一支選單（`sub_1AAE8`），回傳值的低 4 bit 是選了第幾項、
-// 高 byte 是狀態；狀態 0x0F 是取消。remake 把游標與兩張清單留在這裡。
+// 原版把兩張清單都交給同一支選單（`sub_1AAE8`），回傳值的低 byte 是絕對列號、
+// 高 byte 是白框那一格的圖示編號；圖示 0x0F（U-TURN）與 ESC 都是取消（RE-115）。
+// remake 把游標、白框與兩張清單留在這裡。
 type SpoilScreen struct {
 	Phase SpoilPhase
 	// Slots 是物品清單（地面格號）；Takers 是隊員清單（參戰者索引）。
@@ -206,6 +217,8 @@ type SpoilScreen struct {
 	Takers []int
 	// Cursor 是目前這張清單的游標。
 	Cursor int
+	// Icon 是圖示列白框停在第幾格，索引進 SpoilIcons。
+	Icon int
 	// Slot 是在第一關選好的那一格。
 	Slot int
 	// Say 是領完之後要說的那一句（只有背包塞不下時才有，記錄 0x183）。
@@ -238,6 +251,22 @@ func (s *State) SpoilMove(d int) {
 	if s.Spoil.Cursor >= n {
 		s.Spoil.Cursor = n - 1
 	}
+}
+
+// SpoilIconMove 移圖示列的白框。原版是 `,`／`<` 與 `.`／`>`，兩端繞圈
+// （`sub_1AAE8:0x1AF59`，RE-115）。
+func (s *State) SpoilIconMove(d int) {
+	n := len(SpoilIcons)
+	s.Spoil.Icon = ((s.Spoil.Icon+d)%n + n) % n
+}
+
+// SpoilAccept 按下 Return：白框停在 U-TURN 就是取消，否則領走反白那一列。
+// 回傳與 SpoilConfirm 相同的三個值。
+func (s *State) SpoilAccept() (name string, record int, done bool) {
+	if s.Spoil.Icon == SpoilIconUTurn {
+		return "", 0, s.SpoilCancel()
+	}
+	return s.SpoilConfirm()
 }
 
 func (s *State) spoilList() []int {

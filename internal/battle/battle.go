@@ -89,6 +89,14 @@ type Actor struct {
 	Weapon      Weapon
 	Encumbrance int
 	ShieldGrade int
+	// Unarmed 是「手上那一格空著」：怪物記錄 +0x20 那筆 16 byte 的物品記錄第一個
+	// byte 是 0（`0x23BC2`，RE-116）。敵人 AI 拿它決定要不要先去撿一件（RE-116）。
+	// 隊員那一側由 `Member.HasWeapon` 表示，這一格只給敵人用。
+	Unarmed bool
+	// PickedUp 是參戰者記錄 +0x2B：撿到手上那一格之後由執行段清成 0
+	// （`sub_1E3A8:0x203E0`）。原版沒有任何地方把它設成非零，所以「沒有武器就
+	// 改成移動」那一條分支走不到——照樣實作，理由記在 RE-116。
+	PickedUp int
 	// WeaponSpeed 是 `sub_24FD3` 算出來的 `word_37CF0`：執行段的鍵值要用它
 	// 折算指令的時間成本（RE-084）。
 	WeaponSpeed int

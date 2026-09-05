@@ -240,3 +240,35 @@ func TestSpoilMoveClamps(t *testing.T) {
 		t.Fatalf("往下越界後游標是 %d，期望 1", s.Spoil.Cursor)
 	}
 }
+
+// 圖示列那兩格：白框在 YES 就領走、移到 U-TURN 再按 Return 等於取消（RE-115）。
+func TestSpoilIconDecidesAccept(t *testing.T) {
+	s := spoilState()
+	s.Ground[0] = GroundItem{Name: "PLATEMAIL"}
+	if !s.BeginSpoils() {
+		t.Fatal("有一件東西，應該進得了戰利品畫面")
+	}
+	if s.Spoil.Icon != 0 {
+		t.Fatalf("白框應該從第 0 格開始，是 %d", s.Spoil.Icon)
+	}
+	// 兩格之間繞圈。
+	s.SpoilIconMove(1)
+	if s.Spoil.Icon != SpoilIconUTurn {
+		t.Fatalf("往右一格應該到 U-TURN，是 %d", s.Spoil.Icon)
+	}
+	s.SpoilIconMove(1)
+	if s.Spoil.Icon != 0 {
+		t.Fatalf("再往右應該繞回第 0 格，是 %d", s.Spoil.Icon)
+	}
+	s.SpoilIconMove(-1)
+	if s.Spoil.Icon != SpoilIconUTurn {
+		t.Fatalf("往左一格應該繞到 U-TURN，是 %d", s.Spoil.Icon)
+	}
+	// 停在 U-TURN 按下去就是取消：東西還在地上。
+	if _, _, done := s.SpoilAccept(); !done {
+		t.Fatal("物品那一關取消應該直接結束")
+	}
+	if s.Ground[0].Name != "PLATEMAIL" {
+		t.Fatalf("取消不該把東西領走，地上剩 %q", s.Ground[0].Name)
+	}
+}

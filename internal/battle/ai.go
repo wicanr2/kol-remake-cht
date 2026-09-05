@@ -217,6 +217,22 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return d
 	}
 
+	// 手上那一格空著（`0x23BC2`，RE-116）：先看參戰者記錄 +0x2B，非零就清掉改成
+	// 移動，否則出指令碼 0x26 去撿地上的東西，攻擊選項 0、防禦選項 2。
+	// **原版沒有任何地方把 +0x2B 設成非零**（兩個寫入點都寫 0），所以移動那一條
+	// 走不到；照著實作是為了讓這一段與原版逐條對得起來。
+	if a.Unarmed {
+		if a.PickedUp != 0 {
+			a.PickedUp = 0
+			return s.enemyMove(i, -1, -1, rng)
+		}
+		d.Command = CmdPickUp
+		d.Style = 0
+		d.Guard = 2
+		s.applyEnemy(i, d)
+		return d
+	}
+
 	// 反制掃描（`0x23C1A`）：智力擲骰過關才跑。有結論就直接走攻擊那一段，
 	// 不再往外環找目標——抄來的攻擊選項會變成抽命中部位的列號。
 	if EnemyIntellectCheck(a.Intellect, a.Level, rng.Roll(100)) {
