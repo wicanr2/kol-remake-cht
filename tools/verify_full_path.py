@@ -65,6 +65,13 @@ def subset(want, got, where: str, failures: list[str]) -> None:
             failures.append(f"{where}：期望物件，實際 {got!r}")
             return
         for key, value in want.items():
+            # 寫 null 表示「這一步沒有這一段」——例如打完退出戰場之後就沒有
+            # `battle`。欄位不存在或是 null 都算過；用「有沒有這一段」當條件，
+            # 比拿沒在變的座標去區分戰場內外可靠。
+            if value is None:
+                if got.get(key) is not None:
+                    failures.append(f"{where}.{key}：期望這一步沒有這一段，實際還在")
+                continue
             if key not in got:
                 failures.append(f"{where}.{key}：軌跡裡沒有這個欄位")
                 continue

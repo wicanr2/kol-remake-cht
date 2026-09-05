@@ -34,17 +34,27 @@ CMD_YES, CMD_WEAPON, CMD_UNARMED, CMD_MOVE, CMD_REST = 0x07, 0x21, 0x29, 0x27, 0
 ICON_MOVE_WALK = 0x3C
 
 
+# KOL_BIN 有值就直接呼叫那個執行檔（`tools/run_driver.sh` 會在容器裡設好它與
+# DISPLAY）。沒有的話照舊每一輪開一個容器——那是主要成本：一輪要花三秒開容器，
+# 而一場戰鬥要跑上百輪。
+KOL_BIN = os.environ.get('KOL_BIN', '')
+
+
 def run(tokens, seed, save):
-    spec = SPEC / 'spec.txt'
-    args = [str(SPEC / 'last.png'), '-scene', 'flow', '-seed', str(seed),
-            '-load', save, '-trace-detail']
+    args = ['-scene', 'flow', '-seed', str(seed), '-load', save, '-trace-detail']
     if SITES:
         args += ['-quest-sites', SITES]
-    spec.write_text('|'.join(args + ['-flow-script', ' '.join(tokens),
-        '-shot', str(SPEC / 'last.png'), '-trace', str(SPEC / 'last.json')]) + '\n',
-        encoding='utf-8')
-    subprocess.run(['tools/run_kol_shots_fast.sh', str(spec)], check=True,
-                   stdout=subprocess.DEVNULL)
+    args += ['-flow-script', ' '.join(tokens),
+             '-shot', str(SPEC / 'last.png'), '-trace', str(SPEC / 'last.json')]
+    if KOL_BIN:
+        subprocess.run([KOL_BIN] + args, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    else:
+        spec = SPEC / 'spec.txt'
+        spec.write_text('|'.join([str(SPEC / 'last.png')] + args) + '\n',
+                        encoding='utf-8')
+        subprocess.run(['tools/run_kol_shots_fast.sh', str(spec)], check=True,
+                       stdout=subprocess.DEVNULL)
     return json.loads((SPEC / 'last.json').read_text(encoding='utf-8'))['steps'][-1]
 
 
@@ -77,6 +87,18 @@ def pick(bar, code):
 
 DIRS = {(-1, 0): 'L', (1, 0): 'R', (0, -1): 'U', (0, 1): 'D',
         (-1, -1): 'A', (1, -1): 'S', (-1, 1): 'Z', (1, 1): 'X'}
+
+
+# 一次補幾個 SPACE。從 1 開始，成功就加倍，補過頭再減半——上限給 8，
+# 因為執行段一句一個鍵，一次跳太多會把後面的階段也按過去。
+PRESS_MAX = 8
+
+
+def press(memo):
+    n = memo.get('batch', 1)
+    memo['last_batch'] = n
+    memo['batch'] = min(n * 2, PRESS_MAX)
+    return ['SPACE'] * n
 
 
 def plan_step(here, target, blocked, bounds):
@@ -187,8 +209,19 @@ def main():
         try:
             row = run(tokens, seed, save)
         except subprocess.CalledProcessError:
+            # 「一句一個鍵」那幾段是一次補一批的。補過頭時多出來的 SPACE 會漏到
+            # 戰鬥之外，而野外的 token 表沒有 SPACE，整條腳本就失敗——退回那一批
+            # 再減半重試。減到 1 還是不行才真的停。
+            n = memo.get('last_batch', 0)
+            if n > 1:
+                tokens = tokens[:-n]
+                memo['batch'] = max(1, n // 2)
+                memo['last_batch'] = 0
+                print(f'那一批 {n} 個鍵補過頭了，改用 {memo["batch"]} 個重試')
+                continue
             print('這一串跑不動，退回上一批 token')
             break
+        memo['last_batch'] = 0
         b = row.get('battle')
         if b is None:
             if row.get('world') is None:
@@ -207,7 +240,7 @@ def main():
         if stage == 5:
             # 勝負那兩句、獎勵與戰利品清單都要按鍵推完，才真的離開戰場。
             print('這一場的去向', b['verdict'])
-            tokens.append('SPACE')
+            tokens += press(memo)
             continue
         if stage == 1:
             tokens.append('SPACE')
@@ -219,9 +252,9 @@ def main():
             tokens.append('N')
             continue
         if prompt == 10:
-            # 執行段一句一個鍵。多按的會漏到戰鬥之外（回到野外的 SPACE 沒有意義，
-            # 程式會當成未知 token），所以一次只補一個再看。
-            tokens.append('SPACE')
+            # 執行段一句一個鍵。一次補一批再看——一場戰鬥的執行段有上百句，
+            # 一次補一個的話光是這一段就要跑上百輪。
+            tokens += press(memo)
             continue
         if prompt == 8:
             # Begin next round?
