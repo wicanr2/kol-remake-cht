@@ -5,6 +5,10 @@
 `sub_10000` 用 `sub_1A4FE("magic", 0, ds:byte_32386)` 把它載進 DGROUP+0x44B6，
 `sub_18350` 再拿記錄裡的半位元組去查。
 
+欄位 0 是法術**名稱**（`sub_1B5C8` 收 12 個字、`sub_1C0F6` 打包成 8 個 byte 的
+5-bit 名），不查這個檔案；欄位 1…4／5…8 是四格護符的高／低 nibble，9 是屬性，
+0x0A 是 `+0x0E` 的 bit7，0x0B／0x0C 是兩個骰式。
+
 檔案結構：一個 payload，用 `TOWN0` 那一套 LZW 解開得到 4,097 個 byte，分成
 0x100 一段的區塊。每一段的頭 16 個 byte 是字串位址的低半、接著 16 個是高半，
 之後才是字串本身；位址換算是 **`低 + (高 − 8) × 256`**（高位那 8 是載入時的
@@ -54,6 +58,18 @@ COST_TABLES = (
 # `+0x0C` 那一格自己的兩種成本。
 STAT_COST = (("adventure", 0x120, 0x130), ("gold", 0x140, 0x150))
 COST_ENTRIES = 0x100
+# 骰式選單挑第 n 項時真正寫進記錄的值（`0x18109`：`[0x200 + n]`）。記錄那一格
+# 只換中間六個位元，bit0 與 bit7 留著——`+0x0E` 的 bit7 是「要不要先選目標」。
+DICE_CODE = 0x200
+DICE_ENTRIES = 0x30
+# 骰式的成本（`sub_18296`）：骰數與骰面分開算，兩張表各八筆、都是單一 byte。
+# 索引是從記錄那一格拆出來的 `(值 & 0x70) >> 4` 與 `(值 & 0x0E) >> 1`。
+DICE_COST = (("count_adventure", 0x240), ("count_gold", 0x248),
+             ("sides_adventure", 0x250), ("sides_gold", 0x258))
+DICE_COST_ENTRIES = 8
+# 欄位 0x0A（`+0x0E` 的 bit7）沒有自己的表：兩種選擇一律是 100 × 值 ＋ 100，
+# 冒險點數與金冠同額（`0x1864B`…`0x18666`）。
+TARGET_FLAG_COST_STEP = 100
 
 
 def text_at(data: bytes, lo: int, hi: int) -> str | None:
@@ -121,6 +137,10 @@ def main() -> int:
                    for name, lo, hi in COST_TABLES}
     doc["stat_cost"] = {name: costs(data, lo, hi, ENTRIES)
                         for name, lo, hi in STAT_COST}
+    doc["dice_code"] = list(data[DICE_CODE:DICE_CODE + DICE_ENTRIES])
+    doc["dice_cost"] = {name: list(data[base:base + DICE_COST_ENTRIES])
+                        for name, base in DICE_COST}
+    doc["target_flag_cost_step"] = TARGET_FLAG_COST_STEP
 
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)

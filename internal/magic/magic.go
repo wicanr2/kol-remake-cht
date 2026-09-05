@@ -35,7 +35,24 @@ type Dictionary struct {
 		Adventure []int `json:"adventure"`
 		Gold      []int `json:"gold"`
 	} `json:"stat_cost"`
+	// DiceCode 是骰式選單第 n 項真正寫進記錄的值（`0x18109`）。挑第 n 項時原版
+	// 只換記錄那一格的中間六個位元，所以這裡存的就是那六個位元的位置。
+	DiceCode []int `json:"dice_code"`
+	// DiceCost 是骰式的成本：骰數與骰面分開查、兩邊相加（`sub_18296`）。
+	DiceCost struct {
+		CountAdventure []int `json:"count_adventure"`
+		CountGold      []int `json:"count_gold"`
+		SidesAdventure []int `json:"sides_adventure"`
+		SidesGold      []int `json:"sides_gold"`
+	} `json:"dice_cost"`
+	// TargetFlagCostStep 是「要不要先選目標」那一欄的級距：兩種選擇分別是
+	// 一倍與兩倍，冒險點數與金冠同額（`0x1864B`）。
+	TargetFlagCostStep int `json:"target_flag_cost_step"`
 }
+
+// TurnDiceOptions 是持續回合那一欄的選項數（`0x17E76`）：只到骰面 1-6 那一組。
+// 強度那一欄看得到全部四十八項（`0x17E8E`）。
+const TurnDiceOptions = 0x18
 
 // Load 讀一份字典。欄位少一塊就直接失敗——法術的選單少一項不會有錯誤訊息，
 // 只會靜靜地少一個選擇。
@@ -75,7 +92,57 @@ func (d *Dictionary) check() error {
 			return fmt.Errorf("成本表有 %d 筆，應該是 256", len(c))
 		}
 	}
+	if len(d.DiceCode) != len(d.Dice) {
+		return fmt.Errorf("骰式有 %d 個名字卻有 %d 個值", len(d.Dice), len(d.DiceCode))
+	}
+	if d.TargetFlagCostStep <= 0 {
+		return fmt.Errorf("目標旗標的級距是 %d", d.TargetFlagCostStep)
+	}
 	return nil
+}
+
+// DiceValue 是骰式選單第 n 項要寫進記錄的值。
+func (d *Dictionary) DiceValue(n int) int {
+	if n < 0 || n >= len(d.DiceCode) {
+		return 0
+	}
+	return d.DiceCode[n]
+}
+
+// DiceIndex 是「記錄裡這一格現在停在選單第幾項」。原版畫面不做這個反查——
+// 它直接把值拆成骰數與骰面印出來（`sub_18296`）——但 remake 的選單要有游標。
+// 找不到就回 0；那一格的中間六個位元本來就只有這四十八種組合。
+func (d *Dictionary) DiceIndex(value int) int {
+	for i, code := range d.DiceCode {
+		if code == value&0x7E {
+			return i
+		}
+	}
+	return 0
+}
+
+// DiceCostOf 是一個骰式那一格的兩種成本（`sub_18296`）：骰數與骰面各查一張表
+// 再相加，兩者都是單一 byte。
+func (d *Dictionary) DiceCostOf(value int) (adventure, gold int) {
+	sides, count := (value&0x0E)>>1, (value&0x70)>>4
+	return costAt(d.DiceCost.CountAdventure, count) + costAt(d.DiceCost.SidesAdventure, sides),
+		costAt(d.DiceCost.CountGold, count) + costAt(d.DiceCost.SidesGold, sides)
+}
+
+// TargetFlagCost 是「要不要先選目標」那一欄的成本：`100 × 值 + 100`，兩種資源同額。
+func (d *Dictionary) TargetFlagCost(on bool) (adventure, gold int) {
+	n := d.TargetFlagCostStep
+	if on {
+		n *= 2
+	}
+	return n, n
+}
+
+func costAt(table []int, n int) int {
+	if n < 0 || n >= len(table) {
+		return 0
+	}
+	return table[n]
 }
 
 // ClassName 是第 n 類的名字；超出範圍回空字串，畫面上就是那一格空著。
