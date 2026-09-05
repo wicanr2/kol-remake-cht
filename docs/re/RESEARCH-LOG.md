@@ -6537,10 +6537,38 @@ DGROUP `0xB966`（RE-078 已經記了名稱在 `0xB967`），所以 `0xB966 + 0x
 等的是 `sub_144EF`／`sub_144C3`，答完之前收不進任何輸入，所以 `Session.Walk`
 現在也在 `Prompt != nil` 時直接回 false。
 
+### 那六段敘述的來源（`已證實`，RE-128 那一輪解出）
+
+DGROUP `0x2350` 在 BSS，而且**整份反組譯零個參照點**——xref 與 operand 兩種問法
+都是零。零不是答案：換一個過濾器掃 `sub_1A4FE`（archive 載入器）的每一個呼叫點，
+就看到 `sub_29004:0x2905E` 把 **`TOWN0` 的 payload 4** 載進 `byte_301A0`
+（＝ DGROUP `0x22D0`），而 `0x2350` 正是它的 `+0x80`。
+
+版面是六段 × 四行 × 16 byte，**每行的第 0 個 byte 是要解幾個 5-bit 值**，其餘
+15 個 byte 是那些值。這是 5-bit 名稱的第二種用法：建築與商品那一種
+（`packed_name`）是「高 nibble 是字數、字元從第 4 個 bit 起」，最多 15 個字；
+這一種整個 byte 都是字數，一行最多 24 個。不照字數截斷，句尾就會拖出一串垃圾
+字母——六段全部如此，而且看起來像「解對了只是有雜訊」。
+
+六段解出來是成對的三組：遠處的煙與香味／走近看到誦經的僧侶、戰場與倒下的人／
+披斗篷的療者走過來微笑、馬蹄聲與塵土／Brettle 騎兵隊呼嘯而過。原版先印偶數段
+再問要不要騎走，沒騎走才印奇數段——第三組（第 4 段）只印敘述、不問
+（`0x2A72B`），因為騎兵只是路過。
+
+答應治療之後逐格掃六名角色，那一格有人就把傷勢（`+0x1B`）與飢餓（`+0x9F`）
+設成零（`0x2A759`…`0x2A794`）。
+
+### remake 的落點（治療那一條）
+
+`tools/extract_wilderness_scenes.py` → `assets/original-derived-data/wilderness-scenes.json`；
+`battle.LoadWildernessScenes`、`battle.AmbushHealer`／`HealerChance`／
+`HealerNoAskScene`、`town.HealParty`、`world.PromptHealing`。實跑收據
+`docs/verification/player-path/world-healer`：種子 23、full-chain 那六名角色
+（平均位階 2），野外第 14 步擲到這一條，答應之後全隊傷勢歸零。
+
 ### 還沒解的
 
-DGROUP `0x2350` 那六段敘述從哪裡載入、角色記錄 `+0x9F`，以及治療那一條的整段
-（記錄 0xE6 的問答與清傷還沒接 UI）。
+那六段敘述的繁體中文譯文還沒做——它們不在既有那三個文字庫裡。
 
 ## RE-113：撿那一手的問句與兩條分支
 

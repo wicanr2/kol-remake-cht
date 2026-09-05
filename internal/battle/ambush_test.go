@@ -54,9 +54,9 @@ func TestRollAmbushFiltersByMasks(t *testing.T) {
 	if a.Monster != 7 {
 		t.Fatalf("遇到第 %d 隻，期望 7", a.Monster)
 	}
-	// 圖是 (rand(3) − 1) × 2。
-	if a.Picture != 2 {
-		t.Fatalf("圖號 %d，期望 2", a.Picture)
+	// 敘述索引是 (rand(3) − 1) × 2，所以是 0、2 或 4。
+	if a.Scene != 2 {
+		t.Fatalf("敘述索引 %d，期望 2", a.Scene)
 	}
 	// 還沒擲數量與等級。
 	if a.Level != 0 || a.Count != 0 {
@@ -64,18 +64,22 @@ func TestRollAmbushFiltersByMasks(t *testing.T) {
 	}
 }
 
-// 平均位階夠低時會走任務怪那一條，不擲怪物編號。
-func TestRollAmbushTakesTheQuestBranch(t *testing.T) {
+// 平均位階夠低時會走治療那一條，不擲怪物編號。
+func TestRollAmbushTakesTheHealerBranch(t *testing.T) {
 	m := ambushMonsters()
-	// 門檻過（1）、任務怪那一擲 20 < QuestChance[2] = 21、圖擲 1。
+	// 門檻過（1）、治療那一擲 20 < HealerChance[2] = 21、敘述索引擲 1。
 	a := m.RollAmbush(4, 1, false, 3, &fixedRand{values: []int{1, 20, 1}})
-	if a == nil || a.Monster != AmbushQuest {
-		t.Fatalf("該走任務怪那一條，得到 %+v", a)
+	if a == nil || a.Monster != AmbushHealer {
+		t.Fatalf("該走治療那一條，得到 %+v", a)
+	}
+	// 敘述索引是 0、2 或 4：偶數段是遠景，走近之後印它的下一段。
+	if a.Scene%2 != 0 || a.Scene > HealerNoAskScene {
+		t.Fatalf("敘述索引是 %d", a.Scene)
 	}
 	// 位階 11 以上不走那一條。
 	if a := m.RollAmbush(4, 1, false, 11, &fixedRand{values: []int{1, 1}}); a != nil &&
-		a.Monster == AmbushQuest {
-		t.Fatal("位階 11 不該走任務怪那一條")
+		a.Monster == AmbushHealer {
+		t.Fatal("位階 11 不該走治療那一條")
 	}
 }
 
@@ -101,7 +105,7 @@ func TestRollForce(t *testing.T) {
 		t.Fatalf("等級 %d，期望 1", b.Level)
 	}
 	// 任務怪那一條不擲。
-	q := &Ambush{Monster: AmbushQuest}
+	q := &Ambush{Monster: AmbushHealer}
 	q.RollForce(5, 4, &fixedRand{values: []int{1}})
 	if q.Level != 0 || q.Count != 0 {
 		t.Fatalf("任務怪那一條不該擲數量與等級，得到 %+v", q)
@@ -138,7 +142,7 @@ func TestRideAway(t *testing.T) {
 	if !CanRideAway(12) {
 		t.Fatal("有坐騎就該問")
 	}
-	if !RideAway(AmbushQuest, 12, &fixedRand{values: []int{1}}) {
+	if !RideAway(AmbushHealer, 12, &fixedRand{values: []int{1}}) {
 		t.Fatal("任務怪那一條一定跑得掉")
 	}
 	// 移動率 12 → 門檻 60；擲 61 脫身、擲 60 沒跑掉。

@@ -3,9 +3,15 @@ package battle
 // 野外的隨機遭遇（RE-078／RE-097）。原版在**時段變換之後**擲一次
 // （`sub_29987:0x29A3E`），一天最多四次；走進某一格不會擲。
 
-// AmbushQuest 是「任務怪物那一條」的怪物編號（原版用 `0xFF`）。走到這一條的時候
-// 原版不擲數量與等級，改印記錄 0xE6 問一句，答應之後把六名角色的傷清掉。
-const AmbushQuest = 0xFF
+// AmbushHealer 是「治療那一條」的怪物編號（原版用 `0xFF`）。走到這一條的時候原版
+// 不擲數量與等級：先印一段遠景敘述、問要不要騎走，沒騎走就印走近之後那一段，
+// 再用記錄 0xE6 問「Will you be healed?」，答應之後把六名角色的傷勢與飢餓清掉
+// （`0x2A719`…`0x2A794`，RE-112）。**第 4 段那一組是路過的騎兵，只等一個鍵、
+// 不問**（`0x2A72B`）。
+const AmbushHealer = 0xFF
+
+// HealerNoAskScene 是那一組只印敘述不問的：第 4 段（Brettle Regulars 騎過去）。
+const HealerNoAskScene = 4
 
 // AmbushTries 是挑怪物的重試次數（`0x2A5A9` 的 `0x1F`）。試滿都沒有一隻同時符合
 // 地形與季節，就當作沒有遭遇。
@@ -17,9 +23,9 @@ var MonthSeason = [12]int{0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 0}
 // NightWeather 是「夜裡」那一組天候（RE-078）：機率表要改讀 `0x20` 那一半。
 const NightWeather = 5
 
-// QuestChance 是平均位階 1…10 走任務怪那一條的機率（DGROUP `0x133E`）。
-// 位階 11 以上不走那一條。
-var QuestChance = [10]int{21, 21, 21, 16, 16, 16, 11, 11, 11, 11}
+// HealerChance 是平均位階 1…10 走治療那一條的機率（DGROUP `0x133E`）。
+// 位階 11 以上不走那一條——原版就是讓弱隊多一條活路。
+var HealerChance = [10]int{21, 21, 21, 16, 16, 16, 11, 11, 11, 11}
 
 // LevelAdjust 是級距 0…4 對平均位階的修正（DGROUP `0x1348`，五個 word）。
 var LevelAdjust = [5]int{-2, -1, 0, 1, 2}
@@ -49,7 +55,7 @@ const (
 	RideAwayRecord  = 0xE3 // "Attempt to ride away?"
 	RodeAwayRecord  = 0xE4 // 脫身
 	StoodGroundRec  = 0xE5 // 沒跑掉
-	QuestAskRecord  = 0xE6 // 任務怪那一條的問句
+	HealAskRecord   = 0xE6 // "Will you be healed?"
 	AmbushedRecord  = 0xE7 // "YOU HAVE BEEN AMBUSHED@BY]"
 	AmbushLevelRec  = 0xE8 // ", LEVEL]"
 	NoMountPace     = 20   // `word_2FA2C` 等於 20 表示有人沒坐騎，跑不掉
@@ -58,10 +64,13 @@ const (
 
 // Ambush 是一次遭遇的擲點結果。
 type Ambush struct {
-	// Monster 是怪物編號 0…31，或 AmbushQuest。
+	// Monster 是怪物編號 0…31，或 AmbushHealer。
 	Monster int
-	// Picture 是那一隻要畫哪一張（`(rand(3) − 1) × 2`，所以是 0、2 或 4）。
-	Picture int
+	// Scene 是 `(rand(3) − 1) × 2`，所以是 0、2 或 4。治療那一條（`AmbushHealer`）
+	// 拿它當**敘述索引**：先印第 Scene 段（遠景），騎走那一問過了再印第 Scene+1
+	// 段（走近之後看到的）。一般怪物用不到它——`sub_2A46E` 只有在編號是 0xFF 時
+	// 才看第二個引數（`0x2A482`，RE-128 更正 RE-112 的「那一隻要畫哪一張」）。
+	Scene int
 	// Level／Count 是敵人的等級與隻數；任務怪那一條不擲，兩個都是 0。
 	Level, Count int
 	// Group 是敵人站位組的索引 0…4（`word_37CF6`，RE-098）。地形本身不是載入的，
@@ -91,7 +100,7 @@ func PartyRank(ranks []int, party int) int {
 
 // RollAmbush 擲出「有沒有遇到、遇到誰」（`0x2A4EE`…`0x2A678`）。
 //
-// 沒遇到就回 nil。回傳的 Ambush 只填了 Monster 與 Picture——數量與等級要等玩家決定
+// 沒遇到就回 nil。回傳的 Ambush 只填了 Monster 與 Scene——數量與等級要等玩家決定
 // 不騎走之後才擲（原版就是這個順序，見 RollForce）。
 //
 // `terrain` 是地形 0…7、`season` 是季節 0…3（0 是冬）、`night` 是天候第 5 組、
@@ -101,8 +110,8 @@ func (m *Monsters) RollAmbush(terrain, season int, night bool, rank int, rng Ran
 		return nil
 	}
 	monster := -1
-	if rank < 11 && rank >= 1 && rng.Roll(100) < QuestChance[rank-1] {
-		monster = AmbushQuest
+	if rank < 11 && rank >= 1 && rng.Roll(100) < HealerChance[rank-1] {
+		monster = AmbushHealer
 	} else {
 		for try := AmbushTries; try >= 0; try-- {
 			n := rng.Roll(MonsterCount) - 1
@@ -120,7 +129,7 @@ func (m *Monsters) RollAmbush(terrain, season int, night bool, rank int, rng Ran
 			return nil
 		}
 	}
-	return &Ambush{Monster: monster, Picture: (rng.Roll(3) - 1) * 2}
+	return &Ambush{Monster: monster, Scene: (rng.Roll(3) - 1) * 2}
 }
 
 // RollForce 擲出敵人的等級、隻數與戰場地圖（`0x2A79F`…`0x2A828`）。
@@ -128,7 +137,7 @@ func (m *Monsters) RollAmbush(terrain, season int, night bool, rank int, rng Ran
 // 級距先擲一次，等級是平均位階加上級距的修正（不到 1 就當 1）；隻數重擲到**小於**
 // 上限為止，畫面上顯示的是它加一。任務怪那一條不走這裡。
 func (a *Ambush) RollForce(rank, party int, rng Rand) {
-	if a == nil || a.Monster == AmbushQuest {
+	if a == nil || a.Monster == AmbushHealer {
 		return
 	}
 	band := rng.Roll(LevelBandSides) / LevelBandDivisor
@@ -161,7 +170,7 @@ func CanRideAway(pace int) bool { return pace != NoMountPace }
 // RideAway 是騎走的成功判定（`0x2A6B5`）：任務怪那一條一定跑得掉，否則
 // `rand(100) > 5 × 隊伍移動率`——移動率越小（坐騎越快）越容易脫身。
 func RideAway(monster, pace int, rng Rand) bool {
-	if monster == AmbushQuest {
+	if monster == AmbushHealer {
 		return true
 	}
 	return rng.Roll(100) > RideAwayPerPace*pace

@@ -200,6 +200,18 @@ func nonEmptyLines(lines []string) []string {
 	return out
 }
 
+// lastLine 是一筆記錄拆行之後最後那一行非空的字。問句記錄前面常常是空列
+// （`0xE3` 開頭那個 `@` 就是敘述與問句之間的空白），要的是後面那一句。
+func lastLine(lines []string) string {
+	out := ""
+	for _, line := range lines {
+		if line != "" {
+			out = line
+		}
+	}
+	return out
+}
+
 // partyHasQuest 回報隊上有沒有人帶著這個任務地點的任務（RE-079）。
 func partyHasQuest(party []town.Member, site *battle.Site) bool {
 	for _, m := range party {
@@ -1115,6 +1127,8 @@ func (g *game) snapshot() map[string]any {
 					w["ride_prompt"] = true
 				case world.PromptNotice:
 					w["notice"] = true
+				case world.PromptHealing:
+					w["heal_prompt"] = true
 				}
 			}
 		}
@@ -2242,6 +2256,9 @@ func main() {
 		"assets/original-derived-data/portrait-layout.json", "立繪版面 typed data")
 	magicPath := flag.String("magic-dictionary",
 		"assets/original-derived-data/magic.json", "法術參數字典 typed data")
+	scenesPath := flag.String("wilderness-scenes",
+		"assets/original-derived-data/wilderness-scenes.json",
+		"野外治療那一條的六段敘述 typed data")
 	flowScript := flag.String("flow-script", "",
 		"整條遊玩路徑的操作腳本，空白分隔；從標題序列開始，經書本、角色選項、"+
 			"角色選擇清單、旅店走到戶外地圖")
@@ -2948,6 +2965,9 @@ func main() {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
 			}
+			// 治療那一條的六段敘述（RE-112）。讀不到就只是擲到那一條時當作
+			// 沒遇到，其他遭遇照跑。
+			healScenes, _ := battle.LoadWildernessScenes(*scenesPath)
 			worldSessionState.OnArrive = func(x, y int) *world.Prompt {
 				site := sites.At(x, y)
 				if site == nil || !partyHasQuest(playSession.Party, site) {
@@ -2966,6 +2986,9 @@ func main() {
 			// `rideNext` 記著訊息那一頁收掉之後要不要接著開打。
 			var ride *battle.Ambush
 			var rideNext bool
+			// 治療那一條（怪物編號 0xFF）：`heal` 是那一次遭遇，走完騎走那一問
+			// 之後接著印走近的敘述再問要不要治療。它不會開打。
+			var heal *battle.Ambush
 			startAmbush := func(a *battle.Ambush) {
 				ranks := make([]int, 0, len(playSession.Party))
 				for _, m := range playSession.Party {
@@ -3006,23 +3029,56 @@ func main() {
 					Kind:  world.PromptNotice,
 					Lines: nonEmptyLines(bank.Lines(town.BankUI, record))})
 			}
+			// healScene 是治療那一條走近之後那一頁（`0x2A719`）：印第
+			// `Scene + 1` 段，第 4 段那一組只等一個鍵，其餘接記錄 0xE6 的問句。
+			healScene := func(a *battle.Ambush) {
+				lines := healScenes.Scene(a.Scene + 1)
+				if a.Scene == battle.HealerNoAskScene {
+					heal = nil
+					worldSessionState.SetPrompt(&world.Prompt{
+						Kind: world.PromptNotice, Lines: lines})
+					return
+				}
+				worldSessionState.SetPrompt(&world.Prompt{
+					Kind: world.PromptHealing, Lines: lines,
+					Ask: lastLine(bank.Lines(town.BankUI, battle.HealAskRecord))})
+			}
 			worldSessionState.OnPromptAnswer = func(yes bool) {
+				// 治療那一條：走近那一頁答應就清全隊的傷勢與飢餓，答不答應
+				// 都不會開打（`0x2A759`…`0x2A794`）。
+				if heal != nil && ride == nil {
+					a := heal
+					heal = nil
+					if yes {
+						town.HealParty(playSession.Party)
+					}
+					_ = a
+					return
+				}
 				// 遭遇那一頁：問要不要騎走，或是騎走結果那一句收掉了。
 				if ride != nil {
 					a := ride
 					if rideNext {
 						ride, rideNext = nil, false
+						if heal != nil {
+							healScene(a)
+							return
+						}
 						startAmbush(a)
 						return
 					}
 					if !yes {
 						ride = nil
+						if heal != nil {
+							healScene(a)
+							return
+						}
 						startAmbush(a)
 						return
 					}
 					if battle.RideAway(a.Monster, worldScreenState.Movement,
 						worldSessionState.Rand) {
-						ride = nil
+						ride, heal = nil, nil
 						notice(battle.RodeAwayRecord)
 						return
 					}
@@ -3106,9 +3162,27 @@ func main() {
 				night := worldScreenState.Group == battle.NightWeather
 				a := monsters.RollAmbush(worldScreenState.TerrainCode, season,
 					night, rank, rng)
-				// 任務怪那一條（編號 0xFF）走的是另一套問句與清傷，還沒做
-				// （SPEC-011 第 9 節）；擲到就當作沒遇到。
-				if a == nil || a.Monster == battle.AmbushQuest {
+				if a == nil {
+					return
+				}
+				// 治療那一條（編號 0xFF）：先印遠景那一段，接下來與一般遭遇
+				// 共用騎走那一問；沒騎走就印走近那一段再問要不要治療。
+				// 敘述讀不到就當作沒遇到——空白的一頁比沒有那一頁還糟。
+				if a.Monster == battle.AmbushHealer {
+					if healScenes == nil || len(healScenes.Scene(a.Scene)) == 0 {
+						return
+					}
+					heal = a
+					if !battle.CanRideAway(worldScreenState.Movement) {
+						healScene(a)
+						return
+					}
+					ride, rideNext = a, false
+					worldSessionState.SetPrompt(&world.Prompt{
+						Kind:  world.PromptRideAway,
+						Lines: healScenes.Scene(a.Scene),
+						Ask: lastLine(bank.Lines(town.BankUI,
+							battle.RideAwayRecord))})
 					return
 				}
 				// 全隊都有坐騎才問要不要騎走（`0x2A667`）：那一頁印那一隻記錄
@@ -3116,17 +3190,11 @@ func main() {
 				// 跳過，連那四行都看不到——原版就是這樣。
 				if battle.CanRideAway(worldScreenState.Movement) {
 					ride, rideNext = a, false
-					ask := ""
-					for _, line := range bank.Lines(town.BankUI,
-						battle.RideAwayRecord) {
-						if line != "" {
-							ask = line
-						}
-					}
 					worldSessionState.SetPrompt(&world.Prompt{
 						Kind:  world.PromptRideAway,
 						Lines: monsters.At(a.Monster).Encounter,
-						Ask:   ask})
+						Ask: lastLine(bank.Lines(town.BankUI,
+							battle.RideAwayRecord))})
 					return
 				}
 				startAmbush(a)

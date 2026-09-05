@@ -344,8 +344,12 @@ const (
 	// （RE-112）。全隊都有坐騎才問得出來。
 	PromptRideAway
 	// PromptNotice 只有訊息，按一個鍵就收掉（`sub_144C3`）：騎走成功或失敗
-	// 的那一句。
+	// 的那一句，以及治療那一條裡路過的騎兵那一段。
 	PromptNotice
+	// PromptHealing 是治療那一條走近之後的敘述加記錄 0xE6
+	// 「Will you be healed?」（`0x2A73C`，RE-112）。答應之後把全隊的傷勢與
+	// 飢餓清掉。
+	PromptHealing
 )
 
 // Prompt 是蓋在地圖上的那一頁。
