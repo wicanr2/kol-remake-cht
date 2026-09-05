@@ -16,8 +16,8 @@ import (
 //
 // 清單那十七列落在分隔線右邊的窄欄裡（字格欄 32 ＝ x 256），寬度剛好六個字元。
 // 沒有反白的列是青色（EGA 索引 3）、選中的是白色（0x0F）。
-func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.ItemPage,
-	party []town.Member) error {
+func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
+	p *town.ItemPage, party []town.Member) error {
 	l := town.ItemPageLayout
 
 	// 畫的順序照原版：整頁清掉 → 背景 → 立繪 → 右邊那條窄欄清成黑 → 框與分隔線
@@ -51,7 +51,7 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 		if i == p.Selected {
 			colour = town.ColourText
 		}
-		cellIn(dst, f, l.ListCol, l.ListRow+i*l.ListStep, row, colour)
+		cellIn(dst, large, l.ListCol, l.ListRow+i*l.ListStep, row, colour)
 	}
 
 	// 清單移動時左上角那個小框（`sub_16D0B`）：三行——部位名稱加冒號、那件東西的
@@ -61,15 +61,15 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 			town.ColourBoxFill)
 		frame(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1,
 			town.ColourSheetHeader)
-		col := m.X/f.Advance() + 1
+		col := m.X/small.Advance() + 1
 		row := m.Y + town.MarkTextTop
-		cell(dst, f, col, row, m.Slot)
+		cell(dst, small, col, row, m.Slot)
 		if m.Name != "" {
-			cell(dst, f, col, row+town.MarkLineStep, m.Name)
+			cell(dst, small, col, row+town.MarkLineStep, m.Name)
 			third := row + 2*town.MarkLineStep
-			cell(dst, f, col, third, m.Dice)
+			cell(dst, small, col, third, m.Dice)
 			if m.Skill != "" {
-				cell(dst, f, col+8, third, m.Skill)
+				cell(dst, small, col+8, third, m.Skill)
 			}
 			w := col + town.MarkWeightCol - 1
 			if m.Weight < 100 {
@@ -78,7 +78,7 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 			if m.Weight < 10 {
 				w++
 			}
-			cell(dst, f, w, third, fmt.Sprintf("%d", m.Weight))
+			cell(dst, small, w, third, fmt.Sprintf("%d", m.Weight))
 		}
 	}
 
@@ -96,6 +96,7 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 	// 別的位置——`sub_153FF` 的模式 8 自己怎麼擺還沒讀。這裡照兩個框「內縮兩個
 	// 像素」的同一個慣例平移過去（商店的框在 (102,84)、文字從 (104,86) 起），
 	// 等模式 8 讀出來再換成它自己的座標。證據等級：強推論。
+	f := small
 	dc := (l.Detail.X0 + 2) / f.Advance()
 	dr := l.Detail.Y0 + 2
 	sc := (town.DialogBox.TextX) / f.Advance()

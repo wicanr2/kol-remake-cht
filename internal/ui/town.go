@@ -51,7 +51,7 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 			}
 		}
 		if in.ItemPage != nil {
-			if err := drawItemPage(dst, sprites, small, in.ItemPage, in.Party); err != nil {
+			if err := drawItemPage(dst, sprites, small, large, in.ItemPage, in.Party); err != nil {
 				return err
 			}
 		}
