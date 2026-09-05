@@ -42,8 +42,13 @@ HANDS = 12          # HANDPICS 的組數
 WEAPON_KINDS = 8    # `+0x3D` 除以 0x20 得到的武器種類
 # 物品那一頁的清單有十七項：穿戴欄十格 ＋ 手上那件 ＋ 背包六格（RE-127）。
 ITEM_SLOTS = 17
+# 種族數：小框那張表一個種族一列。
+RACES = 4
 
 TABLES = {
+    # 物品那一頁的小框畫在哪一列：一個種族十七筆，指向那個部位在立繪上的高度
+    # （`sub_16D0B`，RE-127）。
+    "slot_marks": 0x124,
     "body": 0x168,          # 3 byte × 6：x1、y1、x2（y2 固定 0x9A）
     "layer_size": 0x17A,    # 6 byte × 54：三層各 (寬, 高)
     "layer_pos": 0x2BE,     # 6 byte × 54：三層各 (x, y)
@@ -63,7 +68,7 @@ TABLES = {
 # 表分成幾串。第一串 0x168…0x63A 首尾相接：立繪的版面接六個圖庫名，再接物品那一頁
 # 的清單位移表；之後是十二個月份名（0x63A…0x66A，與這裡無關），0x66A 起才是隊伍頁
 # 那三張——其中 0x67F 是一個填充 byte，把後面那張 word 表推到偶數位址。
-RUNS = ((0x168, 0x63A), (0x66A, 0x67F), (0x680, 0x68C))
+RUNS = ((0x124, 0x63A), (0x66A, 0x67F), (0x680, 0x68C))
 
 
 def cstr(raw: bytes) -> str:
@@ -93,6 +98,7 @@ def main() -> int:
     # 先驗一次：這一串表要首尾相接，而且模式後綴要真的是那三個字。
     order = sorted(TABLES.items(), key=lambda kv: kv[1])
     spans = {
+        "slot_marks": ITEM_SLOTS * RACES,
         "body": 3 * BUILDS,
         "layer_size": 6 * BUILDS * STYLES,
         "layer_pos": 6 * BUILDS * STYLES,
@@ -157,6 +163,7 @@ def main() -> int:
 
     party_x = dg(TABLES["party_x"], 2 * BUILDS)
     item_slots = dg(TABLES["item_slots"], 2 * ITEM_SLOTS)
+    marks = dg(TABLES["slot_marks"], ITEM_SLOTS * RACES)
     doc = {
         "schema": "kol-portrait-layout-v1",
         "source": exe.name,
@@ -173,6 +180,8 @@ def main() -> int:
         "weapon_base": list(dg(TABLES["weapon_base"], WEAPON_KINDS)),
         "item_slots": [int.from_bytes(item_slots[2 * i:2 * i + 2], "little")
                        for i in range(ITEM_SLOTS)],
+        "slot_marks": [list(marks[r * ITEM_SLOTS:(r + 1) * ITEM_SLOTS])
+                       for r in range(RACES)],
         "party_layer": list(dg(TABLES["party_layer"], BUILDS)),
         "party_x": [int.from_bytes(party_x[2 * i:2 * i + 2], "little", signed=True)
                     for i in range(BUILDS)],

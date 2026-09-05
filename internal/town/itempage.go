@@ -1,6 +1,7 @@
 package town
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/wicanr2/kol-remake-cht/internal/portrait"
@@ -63,6 +64,8 @@ type ItemPage struct {
 	Note []string `json:"note,omitempty"`
 	// Figure 是左邊那個人要貼的幾張圖（`sub_18F3A(0)`，RE-126）。
 	Figure []portrait.Piece `json:"figure,omitempty"`
+	// Mark 是清單移動時左上角那個小框（`sub_16D0B`，RE-127）。
+	Mark *ItemMark `json:"mark,omitempty"`
 }
 
 // 動作用得到的幾筆訊息（RE-127）。
@@ -118,6 +121,7 @@ func (s *Session) OpenItemPage() {
 	}
 	s.Inside.ItemPage = &ItemPage{Rows: rows}
 	s.refreshItemFigure()
+	s.refreshItemMark()
 	// 清單層的圖示列是那一格加 U-TURN（`sub_16986` 的 `sub_11703(9)`／`(0x0F)`）。
 	s.setInsideIcons([]int{IconItemUse, IconUTurn})
 }
@@ -153,10 +157,11 @@ func (s *Session) MoveItemSelection(delta int) {
 		return
 	}
 	p.Selected = ((p.Selected+delta)%n + n) % n
-	// 清單層只有立繪與清單：明細框要按下那一格才彈出來（原版是 `sub_196A9`
-	// 回來之後才 `sub_1BA9D`），所以移動時把框裡那幾行清掉。
+	// 清單層只有立繪、清單與左上角那個小框：明細框要按下那一格才彈出來
+	// （原版是 `sub_196A9` 回來之後才 `sub_1BA9D`）。
 	p.Detail, p.Message, p.Note = nil, nil, nil
 	s.Inside.Detail = nil
+	s.refreshItemMark()
 }
 
 // emptySlotLines 是那一格空著時的三句（`0x18C66`…`0x18CE7`）：
@@ -261,7 +266,9 @@ func (s *Session) AcceptItemSlot() {
 		s.Inside.Detail = nil
 		return
 	}
-	p.Detail = s.goodDetail(*g)
+	// 資料頁那一整頁走大寫旗標（`word_2DF54`，RE-074），明細跟著轉大寫——
+	// 原版畫面收據的 frame-079 印的是 `TYP:WEAR  POS:TRSO`。
+	p.Detail = upperSegments(s.goodDetail(*g))
 	p.Message, p.Note = nil, nil
 	s.Inside.Detail = p.Detail
 	p.Acting = true
@@ -275,6 +282,7 @@ func (s *Session) closeItemAction() {
 	p.Giving = false
 	p.Detail, p.Message, p.Note = nil, nil, nil
 	s.Inside.Detail = nil
+	s.refreshItemMark()
 	s.setInsideIcons([]int{IconItemUse, IconUTurn})
 }
 
@@ -448,4 +456,90 @@ func (s *Session) refreshItemFigure() {
 		return
 	}
 	s.Inside.ItemPage.Figure = s.Portraits.Compose(s.Party[i].Figure(), 0)
+}
+
+// 左上角那個小框（`sub_16D0B`，RE-127）。框寬 0x63、高 0x15；一般畫在 x = 6，
+// WEAPON 那一列往右挪到 x = 0x6E。
+const (
+	MarkX      = 6
+	MarkWeapon = 0x6E
+	MarkWidth  = 0x63
+	MarkHeight = 0x15
+	// 三行的行距：第一行在框頂 ＋2，之後每行 ＋6。
+	MarkTextTop  = 2
+	MarkLineStep = 6
+	// 重量印在第 10 欄起（相對框的左緣），位數少就往右挪，等於靠右對齊。
+	MarkWeightCol = 0x0A
+	// ShieldRow 是唯一不印骰式的那一列（`sub_16D0B` 比的是 `arg_2 != 6`）。
+	ShieldRow = 6
+)
+
+// ItemMark 是清單移動時左上角那個小框的內容。
+type ItemMark struct {
+	X, Y int    `json:"-"`
+	Slot string `json:"slot"`
+	Name string `json:"name,omitempty"`
+	// Dice 是骰式（SHIELD 那一列不印）；Skill 是 WEAPON 那一列多印的技能列號。
+	Dice   string `json:"dice,omitempty"`
+	Skill  string `json:"skill,omitempty"`
+	Weight int    `json:"weight,omitempty"`
+}
+
+// refreshItemMark 重算左上角那個小框。位置來自版面表裡「那個部位在立繪上的高度」。
+func (s *Session) refreshItemMark() {
+	if !s.ShowingItemPage() {
+		return
+	}
+	p := s.Inside.ItemPage
+	i := s.speakerIndex()
+	if i < 0 || s.Portraits == nil {
+		p.Mark = nil
+		return
+	}
+	m := s.Party[i]
+	race := 0
+	if m.Sheet != nil {
+		race = m.Sheet.Race
+	}
+	if race < 0 || race >= len(s.Portraits.SlotMarks) {
+		p.Mark = nil
+		return
+	}
+	x := MarkX
+	if p.Selected == WornSlots {
+		x = MarkWeapon
+	}
+	name := p.Selected
+	if name > SlotNameLast {
+		name = SlotNameLast
+	}
+	mark := &ItemMark{X: x, Y: s.Portraits.SlotMarks[race][p.Selected],
+		Slot: strings.ToUpper(s.uiRecord(SlotNameRecord+name)) + ":"}
+	if g := m.itemAt(p.Selected); g != nil {
+		mark.Name = strings.ToUpper(g.Name)
+		mark.Weight = g.Encumbrance
+		if p.Selected != ShieldRow {
+			mark.Dice = fmt.Sprintf("%d-%d", g.Dice.Low, g.Dice.High)
+		}
+		// 手上那件多印一個「用哪一列武器技能」的號碼（`0x16F0E` 的迴圈）。
+		if p.Selected == WornSlots && m.Sheet != nil {
+			for n, row := range m.Sheet.Weapons {
+				if row.Weapon == g.Class {
+					mark.Skill = fmt.Sprintf("%d", n+1)
+					break
+				}
+			}
+		}
+	}
+	p.Mark = mark
+}
+
+// upperSegments 把明細那幾段轉大寫。
+func upperSegments(segs []Segment) []Segment {
+	out := make([]Segment, len(segs))
+	for i, s := range segs {
+		s.Text = strings.ToUpper(s.Text)
+		out[i] = s
+	}
+	return out
 }

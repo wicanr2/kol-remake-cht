@@ -48,6 +48,9 @@ type Layout struct {
 	// ItemSlots 是物品那一頁的清單項 → 角色記錄位移（RE-127）：穿戴欄十格、
 	// 手上那件、背包六格，順序就是清單上的順序。
 	ItemSlots []int `json:"item_slots"`
+	// SlotMarks 是物品那一頁左上角那個小框畫在第幾列：一個種族十七筆，
+	// 指向那個部位在立繪上的高度（`sub_16D0B`，RE-127）。
+	SlotMarks [][]int `json:"slot_marks"`
 }
 
 // ItemSlotCount 是物品那一頁的清單有幾項。
@@ -107,6 +110,15 @@ func (l *Layout) check() error {
 	if len(l.ItemSlots) != ItemSlotCount {
 		return fmt.Errorf("物品頁的清單有 %d 項，應該是 %d",
 			len(l.ItemSlots), ItemSlotCount)
+	}
+	if len(l.SlotMarks) == 0 {
+		return fmt.Errorf("沒有小框那張表")
+	}
+	for r, row := range l.SlotMarks {
+		if len(row) != ItemSlotCount {
+			return fmt.Errorf("小框第 %d 個種族有 %d 筆，應該是 %d",
+				r, len(row), ItemSlotCount)
+		}
 	}
 	seen := make(map[int]bool, len(l.ItemSlots))
 	for _, off := range l.ItemSlots {

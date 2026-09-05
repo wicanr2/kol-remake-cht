@@ -466,6 +466,40 @@ SCENARIOS: dict[str, dict] = {
             step("按 Escape 之後", None, settle=4.0),
         ],
     },
+    "town-sheet-items": {
+        "description": "在旅店開角色資料頁，把白框移到物品那一格按下去，看十七列"
+                       "清單的版面、上下移動、選中之後的明細與動作圖示列，"
+                       "最後回資料頁。純觀察，不修改也不保存角色（RE-127）。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格（MIRROR）", "Return", settle=4.0),
+            step("角色資料頁", "greater", settle=2.0),
+            step("白框移到物品那一格", "Return", settle=4.0),
+            step("物品頁：十七列清單", "Down", settle=2.0),
+            step("清單往下一列（TORSO，身上有東西）", "Return", settle=3.0),
+            step("選中之後：明細與動作圖示列", "greater", settle=2.0),
+            step("動作白框往右一格", "greater", settle=2.0),
+            step("動作白框再往右一格", "Escape", settle=3.0),
+            step("按 Escape 之後", "Down", settle=2.0),
+            step("回到清單再往下", "Down", settle=2.0),
+            step("清單移到空的那一格", "Return", settle=3.0),
+            step("空格那一句", "Escape", settle=3.0),
+            step("按 Escape 之後", None, settle=4.0),
+        ],
+    },
+    "town-sheet-party": {
+        "description": "在旅店開角色資料頁，把白框移到換人那一格按下去，看隊伍立繪"
+                       "那一頁怎麼排。純觀察（RE-126）。",
+        "steps": list(TOWN_PRELUDE) + [
+            step("旅店圖示列（白框在 DOOR）", "greater", settle=1.5),
+            step("白框第 2 格（MIRROR）", "Return", settle=4.0),
+            step("角色資料頁", "greater", settle=2.0),
+            step("白框移到物品那一格", "greater", settle=2.0),
+            step("白框移到換人那一格", "Return", settle=4.0),
+            step("隊伍立繪那一頁", "space", settle=3.0),
+            step("按空白鍵之後", None, settle=4.0),
+        ],
+    },
     "town-rest-save": {
         "description": "在旅店把白框移到 REST 按下去，觀察「誰要留宿」的選單、"
                        "金幣不足會怎樣、以及選全隊之後那一問。會保存角色檔，"

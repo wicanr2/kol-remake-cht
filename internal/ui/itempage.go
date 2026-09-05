@@ -20,10 +20,9 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 	party []town.Member) error {
 	l := town.ItemPageLayout
 
-	// 原版這一頁是整頁重畫（`sub_1103F(0)` 之後才 `sub_18F3A(0)` 畫立繪），
-	// 不是蓋在角色資料頁上，所以框裡先整塊清成黑。**立繪那一層還沒接**——
-	// 合成規則已經有了（`internal/portrait`，RE-126），少的是那一頁的背景與外框
-	// 沒有原版畫面可以對，所以左半邊目前是空的。
+	// 原版這一頁的背景是另外載的一張圖（`sub_1103F(0x20)`／`(0x21)`），畫面上是
+	// 一間木屋的內裝——**那張圖是哪個 archive 的第幾張還沒認出來**（RE-127），
+	// 所以這裡先整塊清成黑。原版畫面收據在 `workplace/observe/sheet-items2`。
 	fill(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
 		town.ColourBoxFill)
 	frame(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
@@ -47,6 +46,34 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, f *font.Font, p *town.Item
 			colour = town.ColourText
 		}
 		cellIn(dst, f, l.ListCol, l.ListRow+i*l.ListStep, row, colour)
+	}
+
+	// 清單移動時左上角那個小框（`sub_16D0B`）：三行——部位名稱加冒號、那件東西的
+	// 名字、骰式與重量。重量靠右，位數少就往右挪。
+	if m := p.Mark; m != nil {
+		fill(dst, m.X+1, m.Y+1, town.MarkWidth-1, town.MarkHeight-1,
+			town.ColourBoxFill)
+		frame(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1,
+			town.ColourSheetHeader)
+		col := m.X/f.Advance() + 1
+		row := m.Y + town.MarkTextTop
+		cell(dst, f, col, row, m.Slot)
+		if m.Name != "" {
+			cell(dst, f, col, row+town.MarkLineStep, m.Name)
+			third := row + 2*town.MarkLineStep
+			cell(dst, f, col, third, m.Dice)
+			if m.Skill != "" {
+				cell(dst, f, col+8, third, m.Skill)
+			}
+			w := col + town.MarkWeightCol - 1
+			if m.Weight < 100 {
+				w++
+			}
+			if m.Weight < 10 {
+				w++
+			}
+			cell(dst, f, w, third, fmt.Sprintf("%d", m.Weight))
+		}
 	}
 
 	// 明細、空格那幾句與動作做完那一句都畫在左邊那一框裡。

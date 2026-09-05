@@ -26,18 +26,22 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 
 	// MIRROR 的角色資料頁蓋掉肖像、標題框與對話框那一整塊。
 	if in.Sheet != nil {
-		if err := drawSheet(dst, sprites, small, in.SheetLabels, in.Sheet); err != nil {
-			return err
-		}
-		// 任務一覽再蓋一層徽章（RE-111）。
-		if in.QuestList != nil {
-			if err := drawQuestBadges(dst, sprites, in.QuestList); err != nil {
+		// 物品與隊伍那兩頁是**換頁**，不是蓋在資料頁上（RE-126／RE-127）：
+		// 原版按下去之後整頁重畫，資料頁的屬性與武器框都不見了。
+		if in.ItemPage == nil && len(in.PartyPage) == 0 {
+			if err := drawSheet(dst, sprites, small, in.SheetLabels, in.Sheet); err != nil {
 				return err
 			}
-		}
-		// 法術一覽是同一頁上的兩欄各八格（RE-123）。
-		if in.SpellList != nil {
-			drawSpellCells(dst, small, in.SpellList)
+			// 任務一覽再蓋一層徽章（RE-111）。
+			if in.QuestList != nil {
+				if err := drawQuestBadges(dst, sprites, in.QuestList); err != nil {
+					return err
+				}
+			}
+			// 法術一覽是同一頁上的兩欄各八格（RE-123）。
+			if in.SpellList != nil {
+				drawSpellCells(dst, small, in.SpellList)
+			}
 		}
 		// 物品那一頁把整塊換成十七列的清單（RE-127）。
 		// 隊伍立繪那一頁蓋掉整塊（RE-126）。
