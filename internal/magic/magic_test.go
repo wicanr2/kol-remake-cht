@@ -62,13 +62,14 @@ func TestTargetCost(t *testing.T) {
 	if class != 5 || sub != 1 {
 		t.Fatalf("0x51 拆成 %d／%d", class, sub)
 	}
+	// 這是唯一兩種資源不同額的一張表：金冠是冒險點數的兩倍。
 	ap, gc := d.TargetCost(0x51) // Elemental／Golem
-	if ap != 100 || gc != 50 {
-		t.Fatalf("Golem 的成本是 %d／%d", ap, gc)
+	if ap != 50 || gc != 100 {
+		t.Fatalf("Golem 的成本是 %d 冒險點數／%d 金冠", ap, gc)
 	}
 	ap, gc = d.TargetCost(0x54) // Elemental／Salamandar
-	if ap != 400 || gc != 200 {
-		t.Fatalf("Salamandar 的成本是 %d／%d", ap, gc)
+	if ap != 200 || gc != 400 {
+		t.Fatalf("Salamandar 的成本是 %d 冒險點數／%d 金冠", ap, gc)
 	}
 	// 沒有目標就不用錢。
 	if ap, gc := d.TargetCost(0); ap != 0 || gc != 0 {

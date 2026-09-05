@@ -161,9 +161,12 @@ type Spell struct {
 // Order 是所屬教派（RE-121）。Record 帶著原始十六個 byte，因為原版判斷
 // 「是不是這個教派的人」是逐 byte 比前八個。
 type Order struct {
-	Name        string `json:"name"`
-	Title       string `json:"title"`
-	Intellect   int    `json:"intellect,omitempty"`
+	Name      string `json:"name"`
+	Title     string `json:"title"`
+	Intellect int    `json:"intellect,omitempty"`
+	// Allow 是這個教派准法術對哪幾類生效（RE-128）。入會時整段抄下來，
+	// 之後不必再回頭問建築資料。
+	Allow       []int  `json:"allow,omitempty"`
 	Record      string `json:"record,omitempty"`
 	Token       string `json:"token,omitempty"`
 	TokenRecord string `json:"token_record,omitempty"`

@@ -83,6 +83,12 @@ SPELL_GUARD_OFFSET, SPELL_GUARD_COUNT = 0x08, 4
 # `+0x2F0` 十六個 byte 是入會信物（放進背包的一件東西）；`+0x36` 是智力門檻，
 # 入會費就是建築的價錢（`+0x38`／`+0x39`）。
 ORDER_OFFSET, ORDER_BYTES, ORDER_MATCH_BYTES = 0x50, 0x10, 8
+# 教派准這個法術對哪幾類生效：接在教派記錄後面的 `+0x60`，一類一個 byte，
+# 非零就是准（`sub_178E0:0x17FB1` 查 `[0x1CF4 + 0x60 + 選項]`，而 `0x1CF4` 就是
+# 建築 payload 的緩衝——同一支在 `0x17684` 用 `[0x1CF4 + 0x100]` 讀賣的法術）。
+# 九類的順序與 `MAGIC.0` 的 CLASS 相同：None／Human／Elven／Dwarven／Kelden／
+# Elemental／Giant／Legendary／Undead（RE-128）。
+ORDER_ALLOW_OFFSET, ORDER_ALLOW_COUNT = 0x60, 9
 ORDER_TOKEN_OFFSET = 0x2F0
 ORDER_INTELLECT_OFFSET = 0x36
 # 訓練建築（旗標 bit7）教的技能表：payload 0x50 起，一筆 12 byte、四筆（RE-076）。
@@ -139,13 +145,22 @@ def goods(body: bytes, flags: int) -> list[dict]:
 
 
 def order(body: bytes) -> dict:
-    """教派那一筆（RE-121）。名字用 5-bit mode 1 打包在記錄裡，信物是一件物品。"""
+    """教派那一筆（RE-121）。名字用 5-bit mode 1 打包在記錄裡，信物是一件物品。
+
+    `allow` 是這個教派准法術對哪幾類生效（RE-128），法術編輯器的四個 CLASS 欄位
+    只讓玩家選這幾類（外加「無」）。"""
     rec = bytes(body[ORDER_OFFSET:ORDER_OFFSET + ORDER_BYTES])
     token = bytes(body[ORDER_TOKEN_OFFSET:ORDER_TOKEN_OFFSET + ORDER_BYTES])
+    allow = [i for i in range(ORDER_ALLOW_COUNT)
+             if body[ORDER_ALLOW_OFFSET + i]]
     return {"name": packed_name(rec[:ORDER_MATCH_BYTES]),
             "title": packed_name(rec[ORDER_MATCH_BYTES:]),
             "intellect": body[ORDER_INTELLECT_OFFSET],
             "record": rec.hex(),
+            "allow": allow,
+            "allow_record": bytes(
+                body[ORDER_ALLOW_OFFSET:
+                     ORDER_ALLOW_OFFSET + ORDER_ALLOW_COUNT]).hex(),
             "token": packed_name(token),
             "token_record": token.hex()}
 

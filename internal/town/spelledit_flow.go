@@ -186,10 +186,25 @@ func (s *Session) chooseSpellOption() {
 }
 
 // orderAllows 是「這個教派准不准這一類」。原版查 `[0x1CF4 + 0x60 + 選項]`，
-// 那一格非零就放行，而選 None（第 0 項）一律放行（`0x17FB1`…`0x17FCC`）。
-// `byte_2FBC4` 是 `sub_1A4FE` 載進來的一筆記錄，版面還沒解——在解出來以前
-// remake 一律放行，這樣少的是限制而不是選項。
-func (s *Session) orderAllows(choice int) bool { return true }
+// 那一格非零就放行；選 None（第 0 項）一律放行（`0x17FB1`…`0x17FCC`）。
+// `0x1CF4` 是建築 payload 的緩衝——同一支在 `0x17684` 用 `[0x1CF4 + 0x100]`
+// 讀這一棟賣的法術，所以那張允許表就在教派記錄後面。
+//
+// 查的是**這一棟**的教派，不是角色身上那一個：走進別家的塔就照別家的規矩。
+func (s *Session) orderAllows(choice int) bool {
+	if choice == 0 {
+		return true
+	}
+	if s.door == nil || s.door.Order == nil {
+		return true
+	}
+	for _, allowed := range s.door.Order.Allow {
+		if allowed == choice {
+			return true
+		}
+	}
+	return false
+}
 
 // spellDenied 是不准的那一句：`"That one is unknown to@` ＋ `the Order of the@`
 // ＋ 教派名。
@@ -256,11 +271,9 @@ func (s *Session) askRecordChanges() {
 	s.setInsideIcons([]int{IconYes, IconNo})
 }
 
-// commitSpell 是答應存檔：先比冒險點數、再比金冠，兩關都過才扣款並寫回。
-//
-// **兩句不足的訊息在原版是接反的**（`0x1818A` 與 `0x181F0`）：冒險點數不夠時
-// 印的是 `"Sorry, not enough gold crowns!"`（記錄 0x56），金冠不夠時印的是
-// `"Sorry, not enough Adventure Points!"`（記錄 0xD0）。這裡照原樣接。
+// commitSpell 是答應存檔：先比金冠、再比冒險點數，兩關都過才扣款並寫回
+// （`0x1816C`…`0x1825D`）。訊息與扣的資源是對得上的——對調的只有畫面上
+// 那兩行標籤，見 `SpellEditPage`。
 func (s *Session) commitSpell() {
 	i := s.speakerIndex()
 	if i < 0 {
@@ -270,11 +283,11 @@ func (s *Session) commitSpell() {
 	e := s.scroll.edit
 	ap, gc := SpellCost(s.Magic, e.draft)
 	sheet := s.Party[i].Sheet
-	if sheet == nil || sheet.AdventurePoints < ap {
+	if s.Party[i].Gold < gc {
 		s.scrollSay(nonEmpty(s.uiLines(NotEnoughRecord)), s.endScroll)
 		return
 	}
-	if s.Party[i].Gold < gc {
+	if sheet == nil || sheet.AdventurePoints < ap {
 		s.scrollSay(nonEmpty(s.uiLines(NoPointsRecord)), s.endScroll)
 		return
 	}

@@ -46,13 +46,14 @@ func TestSpellFieldsOfOriginalRecord(t *testing.T) {
 	}
 }
 
-// 造價：四格護符 ＋ 屬性 ＋ 目標旗標 ＋ 強度那一欄；持續那一欄不算。
+// 造價：四格護符 ＋ 屬性 ＋ 射程 ＋ 強度那一欄；持續那一欄不算。四格那張表是
+// 唯一兩種資源不同額的——Legendary／Blom 是 400 金冠但只要 200 冒險點數。
 func TestSpellCostOfOriginalRecord(t *testing.T) {
 	d := spellDictionary(t)
 	ap, gc := SpellCost(d, vartwelyrmi())
-	// 400＋90＋200＋140 與 200＋90＋200＋140。
-	if ap != 830 || gc != 630 {
-		t.Fatalf("造價是 %d／%d，應該是 830／630", ap, gc)
+	// 金冠 400＋90＋200＋140，冒險點數 200＋90＋200＋140。
+	if gc != 830 || ap != 630 {
+		t.Fatalf("造價是 %d 冒險點數／%d 金冠，應該是 630／830", ap, gc)
 	}
 }
 
@@ -151,8 +152,8 @@ func TestSpellEditorFullPath(t *testing.T) {
 	if page == nil || page.Picture != SpellEditPicture {
 		t.Fatalf("編輯頁是 %+v", page)
 	}
-	if page.Adventure != 830 || page.Gold != 630 {
-		t.Fatalf("造價畫成 %d／%d", page.Adventure, page.Gold)
+	if page.Gold != 830 || page.Adventure != 630 {
+		t.Fatalf("造價畫成 %d 冒險點數／%d 金冠", page.Adventure, page.Gold)
 	}
 	if page.Fields[SpellFieldName].Text != "Vartwelyrmi" ||
 		page.Fields[SpellFieldStat].Text != "Fatigue" {
@@ -251,5 +252,45 @@ func TestSpellNameTyping(t *testing.T) {
 	yes(s)
 	if got := s.Inside.SpellEdit.Fields[SpellFieldName].Text; got != "Vartwelyrmxy" {
 		t.Fatalf("名字變成 %q", got)
+	}
+}
+
+// 教派只准法術對它那幾類生效：Blue Gem 是矮人與凱爾登，選別的就講一句話、
+// 那一欄不動（`0x17FB1`，RE-128）。
+func TestOrderLimitsTheClassColumn(t *testing.T) {
+	d := spellDictionary(t)
+	s := scrollSession(t, 1000, 109)
+	s.Magic = d
+	order := hostelOrder()
+	order.Allow = []int{3, 4} // Dwarven／Kelden
+	s.Party[0].Order = order
+	s.Buildings.Doors[0].Order = order
+	s.door = &s.Buildings.Doors[0]
+	s.Party[0].Spells = []Spell{vartwelyrmi()}
+
+	s.StartScroll()
+	s.MoveScroll(1)
+	yes(s)
+	yes(s)
+	s.MoveScroll(1) // 第 1 欄：第一格護符的類
+	yes(s)          // 開選單
+	for s.scroll.edit.cursor > 3 {
+		s.MoveScroll(-1)
+	}
+	yes(s) // 選 Dwarven：准
+	if got := s.Inside.SpellEdit.Fields[SpellFieldClassFirst].Text; got != "Dwarven" {
+		t.Fatalf("准的那一類沒寫進去：%q", got)
+	}
+	yes(s)
+	for s.scroll.edit.cursor < 8 {
+		s.MoveScroll(1)
+	}
+	yes(s) // 選 Undead：不准
+	if len(s.Inside.Dialog) == 0 {
+		t.Fatalf("不准的那一類應該講一句話：%v", s.Inside.Dialog)
+	}
+	s.Continue()
+	if got := s.Inside.SpellEdit.Fields[SpellFieldClassFirst].Text; got != "Dwarven" {
+		t.Fatalf("不准的那一類卻寫進去了：%q", got)
 	}
 }

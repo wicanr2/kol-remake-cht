@@ -132,9 +132,9 @@ func TestScrollBuysASpell(t *testing.T) {
 	if s.Party[0].Spells[0].Effect != 5 || s.Party[0].Spells[0].PowerCode != 10 {
 		t.Fatalf("法術的欄位是 %+v", s.Party[0].Spells[0])
 	}
-	// 買完回清單，還可以再買一筆。
-	if s.Inside.List == nil || s.Inside.List.Rows[0] != "Tyanalon" {
-		t.Fatalf("買完應該回清單：%+v", s.Inside.List)
+	// 買完直接回建築的招呼語（`0x178DA` 是 retf），要再買一筆得重按 SCROLL。
+	if s.Scrolling() || s.Inside.List != nil {
+		t.Fatalf("買完應該離開 SCROLL：%+v", s.Inside.List)
 	}
 }
 

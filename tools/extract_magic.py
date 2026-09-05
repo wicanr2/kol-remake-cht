@@ -51,12 +51,17 @@ NAME_TABLES = (
 # 欄位 5…8 的選項按高 nibble 分成十六組，每組十六筆。
 SUBCLASS_LO, SUBCLASS_HI, SUBCLASS_GROUPS = 0x400, 0x500, 16
 # 兩種成本：索引是那一格的整個 byte（0…255）。
+#
+# **哪一張是哪一種由結算那一段決定，不是由畫面上的標籤**：`0x600`／`0x700` 加總的
+# 那個值拿去跟 `sub_14CCF` 讀出來的金幣比（`0x18173`），`0x800`／`0x900` 那個跟
+# `sub_14427(0x27)`——角色記錄 `+0x26` 的 16-bit 大端，也就是冒險點數——比
+# （`0x181E5`）。原版畫面把這兩行的標籤印反了，見 RE-128。
 COST_TABLES = (
-    ("adventure", 0x600, 0x700),
-    ("gold", 0x800, 0x900),
+    ("gold", 0x600, 0x700),
+    ("adventure", 0x800, 0x900),
 )
-# `+0x0C` 那一格自己的兩種成本。
-STAT_COST = (("adventure", 0x120, 0x130), ("gold", 0x140, 0x150))
+# `+0x0C` 那一格自己的兩種成本。兩張表數值相同，所以只有命名分得出來。
+STAT_COST = (("gold", 0x120, 0x130), ("adventure", 0x140, 0x150))
 COST_ENTRIES = 0x100
 # 骰式選單挑第 n 項時真正寫進記錄的值（`0x18109`：`[0x200 + n]`）。記錄那一格
 # 只換中間六個位元，bit0 與 bit7 留著——`+0x0E` 的 bit7 是「要不要先選目標」。
@@ -64,8 +69,8 @@ DICE_CODE = 0x200
 DICE_ENTRIES = 0x30
 # 骰式的成本（`sub_18296`）：骰數與骰面分開算，兩張表各八筆、都是單一 byte。
 # 索引是從記錄那一格拆出來的 `(值 & 0x70) >> 4` 與 `(值 & 0x0E) >> 1`。
-DICE_COST = (("count_adventure", 0x240), ("count_gold", 0x248),
-             ("sides_adventure", 0x250), ("sides_gold", 0x258))
+DICE_COST = (("count_gold", 0x240), ("count_adventure", 0x248),
+             ("sides_gold", 0x250), ("sides_adventure", 0x258))
 DICE_COST_ENTRIES = 8
 # 欄位 0x0A（`+0x0E` 的 bit7）沒有自己的表：兩種選擇一律是 100 × 值 ＋ 100，
 # 冒險點數與金冠同額（`0x1864B`…`0x18666`）。

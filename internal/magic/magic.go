@@ -26,6 +26,7 @@ type Dictionary struct {
 	Stat []string `json:"stat"`
 	Dice []string `json:"dice"`
 	// Cost 的索引是那一格的整個 byte（高 nibble ＝ Class、低 nibble ＝ Subclass）。
+	// 這是唯一兩種資源不同額的一張表：對 Golem 是 100 金冠 ＋ 50 冒險點數。
 	Cost struct {
 		Adventure []int `json:"adventure"`
 		Gold      []int `json:"gold"`

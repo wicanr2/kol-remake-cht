@@ -23,6 +23,10 @@ type Order struct {
 	Title string `json:"title"`
 	// Intellect 是入會的智力門檻（payload `0x36`，`sub_17318:0x17321`）。
 	Intellect int `json:"intellect"`
+	// Allow 是這個教派准法術對哪幾類生效（payload `0x60` 起一類一個 byte，
+	// `sub_178E0:0x17FB1`，RE-128）。六個教派剛好把八類分完：White Pearl 是
+	// 人類與精靈、Blue Gem 是矮人與凱爾登、其餘四個各一類。
+	Allow []int `json:"allow,omitempty"`
 	// Record 是那十六個 byte 的十六進位；Title 從它的後半解出來。
 	Record string `json:"record"`
 	// Token 是入會信物（payload `0x2F0`）：一件十六 byte 的物品，
@@ -371,8 +375,8 @@ func (s *Session) offerSpell() {
 	s.setInsideIcons([]int{IconYes, IconNo})
 }
 
-// buySpell 是答應買下（`0x17870`…`0x178d5`）：錢不夠講一句，夠就扣錢並把那一筆
-// 十六 byte 抄進角色的空法術槽。
+// buySpell 是答應買下（`0x17870`…`0x178D5`）：錢不夠講一句，夠就扣錢並把那一筆
+// 十六 byte 從建築 payload 抄進角色的空法術槽。
 func (s *Session) buySpell() {
 	i := s.speakerIndex()
 	if i < 0 {
@@ -391,7 +395,9 @@ func (s *Session) buySpell() {
 		Guards:    append([]int(nil), offer.Guards...),
 	})
 	s.syncParty()
-	s.showSpellList()
+	// 抄完那十六個 byte 之後 `sub_17318` 就 `retf`（`0x178DA`）——買完直接回到
+	// 建築的招呼語，不回清單。要再買一筆得重按 SCROLL。
+	s.endScroll()
 }
 
 // scrollSay 顯示一段話，讀完之後接著做 next。

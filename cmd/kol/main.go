@@ -623,6 +623,7 @@ func townOrder(o *save.Order) *town.Order {
 		return nil
 	}
 	return &town.Order{Name: o.Name, Title: o.Title, Intellect: o.Intellect,
+		Allow:  append([]int(nil), o.Allow...),
 		Record: o.Record, Token: o.Token, TokenRecord: o.TokenRecord}
 }
 
@@ -631,6 +632,7 @@ func savedOrder(o *town.Order) *save.Order {
 		return nil
 	}
 	return &save.Order{Name: o.Name, Title: o.Title, Intellect: o.Intellect,
+		Allow:  append([]int(nil), o.Allow...),
 		Record: o.Record, Token: o.Token, TokenRecord: o.TokenRecord}
 }
 
@@ -1022,6 +1024,13 @@ type arenaDeps struct {
 	english  bool
 }
 
+// 軌跡裡要取的那兩欄。`snapshot` 裡的區域變數叫 `town`，會把套件名遮起來，
+// 所以先在這裡取出來。
+var (
+	spellNameField = town.SpellFieldName
+	spellStatField = town.SpellFieldStat
+)
+
 // snapshot 記下這一步之後遊戲停在哪。欄位只取「能證明走到哪一層」的那幾個：
 // 場景、城鎮座標、世界座標與時刻、戰鬥階段、結局段號。
 func (g *game) snapshot() map[string]any {
@@ -1056,6 +1065,22 @@ func (g *game) snapshot() map[string]any {
 		if party := partyLines(g.play.Party); !sameLines(party, g.lastParty) {
 			town["party"] = party
 			g.lastParty = party
+		}
+		// 法術編輯器停在哪一欄、造價算到多少（RE-128）。長路徑不會經過這一頁，
+		// 所以只在開著的時候多這一塊。
+		if in := g.play.Inside; in != nil && in.SpellEdit != nil {
+			e := in.SpellEdit
+			edit := map[string]any{"cursor": e.Cursor,
+				"adventure": e.Adventure, "gold": e.Gold,
+				"name": e.Fields[spellNameField].Text,
+				"stat": e.Fields[spellStatField].Text}
+			if e.Menu != nil {
+				edit["menu"] = e.Menu.Total
+			}
+			if e.Typing != nil {
+				edit["typing"] = *e.Typing
+			}
+			town["spell_edit"] = edit
 		}
 		if d := g.play.Door(); d != nil {
 			door := map[string]any{"index": d.Index, "name": d.Name}
@@ -2290,6 +2315,8 @@ func main() {
 		"把每一步的狀態軌跡寫成 JSON：場景、城鎮／世界座標、戰鬥階段與結局段號")
 	traceDetail := flag.Bool("trace-detail", false,
 		"軌跡多記指令列、游標與逐步的戰場；產生腳本用，收據不需要")
+	routeTo := flag.String("route-to", "",
+		"印出從開場位置走到某一格的方向鍵序列（`x,y`）就離開；產生對拍腳本用")
 	shotSteps := flag.String("shot-steps", "",
 		"只在這幾步截圖（逗號分隔的步號）；長路徑用它留檢查點，其餘只記軌跡")
 	stringsPath := flag.String("strings", "docs/i18n/newchar-zh-Hant.json",
@@ -2872,6 +2899,24 @@ func main() {
 			state.PlaceParty(loaded.Location.X, loaded.Location.Y)
 			playSession.Mode = town.ModeMap
 			playSession.SetBarForMode()
+		}
+		// 產生腳本用：印出走到某一格要按哪幾個方向鍵就離開。對拍的走路段因此
+		// 由地圖算出來，不必人工試。
+		if *routeTo != "" {
+			var tx, ty int
+			if _, err := fmt.Sscanf(*routeTo, "%d,%d", &tx, &ty); err != nil {
+				fmt.Fprintf(os.Stderr, "-route-to 要寫成 x,y：%v\n", err)
+				os.Exit(2)
+			}
+			path := state.RouteTo(tx, ty)
+			if path == nil {
+				fmt.Fprintf(os.Stderr, "從 (%d,%d) 走不到 (%d,%d)\n",
+					state.Camera.X+state.Marker.Col,
+					state.Camera.Y+state.Marker.Row, tx, ty)
+				os.Exit(1)
+			}
+			fmt.Println(strings.Join(path, " "))
+			return
 		}
 		// 住宿存檔（SPEC-006）。沒有給 -save 就不寫檔，流程其餘部分照跑——
 		// 截圖與對拍不需要真的產生存檔。

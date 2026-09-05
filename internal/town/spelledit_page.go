@@ -56,7 +56,10 @@ type SpellEditPage struct {
 	Fields []SpellFieldCell `json:"fields"`
 	// Cursor 是游標停在第幾欄。
 	Cursor int `json:"cursor"`
-	// Adventure／Gold 是算出來的兩種造價，畫在最後兩列。
+	// Adventure／Gold 是算出來的兩種造價。**畫面上那兩行的標籤是反的**：
+	// 原版在 `Adventure Point Cost..` 那一行印的是金冠（`0x18702`），
+	// 在 `Gold Crown Cost.......` 那一行印的是冒險點數（`0x18736`），
+	// 而扣款與「不夠」那兩句都照真正的資源走。remake 照原樣畫。
 	Adventure int `json:"adventure"`
 	Gold      int `json:"gold"`
 	// Menu 非 nil 時某一欄的選單開著，蓋在這一頁上。
@@ -164,11 +167,12 @@ func (s *Session) spellCellText(sp Spell, field int) string {
 	return SpellFieldText(s.Magic, sp, field)
 }
 
-// spellCostLines 是最後兩列的數字，給收據看的。
+// spellCostLines 是最後兩列的數字，給收據看的。上面那一行印的是金冠、
+// 下面那一行印的是冒險點數——標籤與內容對調是原版自己的接法。
 func (s *Session) spellCostLines(page *SpellEditPage) []Segment {
 	return []Segment{
-		{Col: spellCostCol, Row: spellCostRow, Text: fmt.Sprint(page.Adventure)},
-		{Col: spellCostCol, Row: spellGoldRow, Text: fmt.Sprint(page.Gold)},
+		{Col: spellCostCol, Row: spellCostRow, Text: fmt.Sprint(page.Gold)},
+		{Col: spellCostCol, Row: spellGoldRow, Text: fmt.Sprint(page.Adventure)},
 	}
 }
 
