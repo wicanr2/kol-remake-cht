@@ -1,6 +1,7 @@
 package town
 
 import (
+	"github.com/wicanr2/kol-remake-cht/internal/magic"
 	"github.com/wicanr2/kol-remake-cht/internal/portrait"
 	"strconv"
 	"strings"
@@ -78,6 +79,9 @@ type Session struct {
 	Inside *Inn // ModeInside 時的畫面狀態
 	// Portraits 是立繪的合成版面（RE-126）。沒有它就畫不出資料頁那兩頁的人。
 	Portraits *portrait.Layout
+	// Magic 是法術的參數字典（RE-128）。沒有它法術編輯器的每一欄都是空的，
+	// 造價也算不出來，所以 SCROLL 選單的第二列不會出現。
+	Magic *magic.Dictionary
 
 	// told 記的是這一次進門裡哪些話題槽已經講過。原版是進門時清零的六個旗標。
 	told    [TopicSlots]bool

@@ -2,6 +2,7 @@ package town
 
 import (
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/wicanr2/kol-remake-cht/internal/magic"
@@ -125,5 +126,130 @@ func TestSubclassMenuFollowsItsClass(t *testing.T) {
 		if got[i] != want[i] {
 			t.Fatalf("第 %d 種是 %q，應該是 %q", i, got[i], want[i])
 		}
+	}
+}
+
+// 走完整條路：SCROLL 選單第 1 列 → 挑一筆 → 改一欄 → 離開 → 答應存檔 →
+// 扣冒險點數與金冠、寫回那一格。
+func TestSpellEditorFullPath(t *testing.T) {
+	d := spellDictionary(t)
+	s := scrollSession(t, 1000, 109)
+	s.Magic = d
+	s.Party[0].Order = hostelOrder()
+	s.Party[0].Spells = []Spell{vartwelyrmi()}
+	s.Party[0].Sheet.AdventurePoints = 5000
+	gold := s.Party[0].Gold
+
+	s.StartScroll()
+	s.MoveScroll(1)
+	yes(s) // 第 1 列：改法術
+	yes(s) // 挑第一筆
+	if !s.SpellEditing() {
+		t.Fatalf("沒進編輯頁：%+v", s.Inside.List)
+	}
+	page := s.Inside.SpellEdit
+	if page == nil || page.Picture != SpellEditPicture {
+		t.Fatalf("編輯頁是 %+v", page)
+	}
+	if page.Adventure != 830 || page.Gold != 630 {
+		t.Fatalf("造價畫成 %d／%d", page.Adventure, page.Gold)
+	}
+	if page.Fields[SpellFieldName].Text != "Vartwelyrmi" ||
+		page.Fields[SpellFieldStat].Text != "Fatigue" {
+		t.Fatalf("欄位畫成 %+v", page.Fields)
+	}
+	// 游標在第 0 欄，只有那一欄是亮的。
+	if page.Fields[0].Color != SpellCursorColor ||
+		page.Fields[1].Color != SpellFieldColor {
+		t.Fatalf("游標的顏色是 %d／%d", page.Fields[0].Color, page.Fields[1].Color)
+	}
+
+	// 走到 STAT 那一欄，換成 Strength。
+	for i := 0; i < SpellFieldStat; i++ {
+		s.MoveScroll(1)
+	}
+	yes(s) // 開選單
+	if s.Inside.SpellEdit.Menu == nil {
+		t.Fatalf("選單沒開")
+	}
+	for s.scroll.edit.cursor > 1 {
+		s.MoveScroll(-1)
+	}
+	yes(s) // 選定
+	if got := s.Inside.SpellEdit.Fields[SpellFieldStat].Text; got != "Strength" {
+		t.Fatalf("屬性換成 %q", got)
+	}
+	want := s.Inside.SpellEdit.Adventure
+	wantGold := s.Inside.SpellEdit.Gold
+
+	// 離開 → 答應存檔。
+	no(s)
+	if s.Inside.SpellEdit != nil || len(s.Inside.Dialog) == 0 {
+		t.Fatalf("沒問存不存：%+v", s.Inside.Dialog)
+	}
+	yes(s)
+	if s.Scrolling() {
+		t.Fatalf("存完應該收掉 SCROLL")
+	}
+	if got := s.Party[0].Spells[0].Effect; got != 1 {
+		t.Fatalf("寫回去的屬性是 %d", got)
+	}
+	if got := s.Party[0].Sheet.AdventurePoints; got != 5000-want {
+		t.Fatalf("冒險點數剩 %d，應該是 %d", got, 5000-want)
+	}
+	if got := s.Party[0].Gold; got != gold-wantGold {
+		t.Fatalf("金冠剩 %d，應該是 %d", got, gold-wantGold)
+	}
+}
+
+// 冒險點數不夠就不寫回，而且原版在這裡印的是金冠那一句（`0x1818A`）。
+func TestSpellEditorRefusesWithoutPoints(t *testing.T) {
+	d := spellDictionary(t)
+	s := scrollSession(t, 1000, 109)
+	s.Magic = d
+	s.Party[0].Order = hostelOrder()
+	s.Party[0].Spells = []Spell{vartwelyrmi()}
+	s.Party[0].Sheet.AdventurePoints = 10
+
+	s.StartScroll()
+	s.MoveScroll(1)
+	yes(s)
+	yes(s)
+	no(s)
+	yes(s)
+	if s.Party[0].Sheet.AdventurePoints != 10 {
+		t.Fatalf("點數不夠卻扣了：%d", s.Party[0].Sheet.AdventurePoints)
+	}
+	if len(s.Inside.Dialog) == 0 ||
+		!strings.Contains(s.Inside.Dialog[0], "not enough") {
+		t.Fatalf("講的是 %v", s.Inside.Dialog)
+	}
+}
+
+// 名稱那一欄是文字輸入，不是選單；收滿 12 個字就不再收。
+func TestSpellNameTyping(t *testing.T) {
+	d := spellDictionary(t)
+	s := scrollSession(t, 1000, 109)
+	s.Magic = d
+	s.Party[0].Order = hostelOrder()
+	s.Party[0].Spells = []Spell{vartwelyrmi()}
+	s.StartScroll()
+	s.MoveScroll(1)
+	yes(s)
+	yes(s)
+	yes(s) // 第 0 欄：開輸入
+	if s.Inside.SpellEdit.Typing == nil {
+		t.Fatalf("沒進輸入")
+	}
+	s.BackspaceSpellName()
+	for _, r := range "xyzabc" {
+		s.TypeSpellName(r)
+	}
+	if got := *s.Inside.SpellEdit.Typing; got != "Vartwelyrmxyzabc"[:SpellNameMax] {
+		t.Fatalf("打成 %q", got)
+	}
+	yes(s)
+	if got := s.Inside.SpellEdit.Fields[SpellFieldName].Text; got != "Vartwelyrmxy" {
+		t.Fatalf("名字變成 %q", got)
 	}
 }

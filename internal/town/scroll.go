@@ -10,7 +10,8 @@ import "strings"
 //	否則                   → 問要不要入會，答應就扣錢、寫進角色
 //	選單                   → 第 0 列「Learn a spell」、第 1 列「Modify a spell」
 //
-// 第 1 列（`sub_178E0`，法術書）還沒解，remake 按下去只記一筆。
+// 第 1 列是法術編輯器（`sub_178E0`，RE-128）：挑一筆法術，改它的十三個欄位，
+// 離開時按算出來的造價扣冒險點數與金冠。
 
 // Order 是一個教派：建築 payload `0x50` 那十六個 byte，入會時整段抄進角色
 // 記錄 `+0x1A0`。前八個 byte 是教派名、後八個是頭銜，兩個都是 5-bit 打包名，
@@ -72,6 +73,9 @@ const (
 	scrollMenu
 	scrollList
 	scrollConfirm
+	// scrollEditPick 是「改哪一筆」的清單、scrollEdit 是編輯頁本身（RE-128）。
+	scrollEditPick
+	scrollEdit
 )
 
 type scrollState struct {
@@ -80,6 +84,8 @@ type scrollState struct {
 	// menu 是選單那一到兩列；rows 等於 1 時只有「Learn a spell」。
 	rows int
 	next func()
+	// edit 是法術編輯器的狀態；nil 代表不在編輯（RE-128）。
+	edit *spellEditState
 }
 
 // Scrolling 回報現在是不是停在 SCROLL 的畫面。
@@ -195,6 +201,11 @@ func (s *Session) MoveScroll(delta int) {
 		total = sc.rows
 	case scrollList:
 		total = len(s.door.Spells)
+	case scrollEditPick:
+		total = len(s.ownSpells())
+	case scrollEdit:
+		s.MoveSpellField(delta)
+		return
 	default:
 		return
 	}
@@ -214,8 +225,12 @@ func (s *Session) MoveScroll(delta int) {
 	if sc.cursor >= sc.top+ListRows {
 		sc.top = sc.cursor - ListRows + 1
 	}
-	if sc.stage == scrollList {
+	switch sc.stage {
+	case scrollList:
 		s.Inside.List = s.spellView()
+		return
+	case scrollEditPick:
+		s.Inside.List = s.ownSpellView()
 		return
 	}
 	s.Inside.List.Selected = sc.cursor
@@ -240,9 +255,7 @@ func (s *Session) scrollAnswer(id int) {
 			return
 		}
 		if sc.cursor == 1 {
-			// 法術書那一頁（`sub_178E0`）還沒解。
-			s.note(s.uiRecord(ModifySpellRecord))
-			s.endScroll()
+			s.showSpellPicker()
 			return
 		}
 		s.showSpellList()
@@ -258,6 +271,46 @@ func (s *Session) scrollAnswer(id int) {
 			return
 		}
 		s.buySpell()
+	case scrollEditPick:
+		if id == IconUTurn {
+			s.endScroll()
+			return
+		}
+		s.startSpellEdit(sc.cursor)
+	case scrollEdit:
+		s.spellEditAnswer(id)
+	}
+}
+
+// spellEditAnswer 是編輯頁上對圖示的回應。停在哪一層決定 YES 的意思：
+// 名稱輸入收下字串、欄位選單選定一項、否則就是離開去結帳。
+func (s *Session) spellEditAnswer(id int) {
+	e := s.scroll.edit
+	switch {
+	case e.saving:
+		if id != IconYes {
+			s.endScroll()
+			return
+		}
+		s.commitSpell()
+	case e.typing != nil:
+		if id != IconYes {
+			e.typing = nil
+			s.refreshSpellEdit()
+			return
+		}
+		s.commitSpellName()
+	case e.options != nil:
+		if id != IconYes {
+			e.options, e.top, e.cursor = nil, 0, 0
+			s.refreshSpellEdit()
+			return
+		}
+		s.chooseSpellOption()
+	case id == IconYes:
+		s.openSpellField()
+	default:
+		s.askRecordChanges()
 	}
 }
 
@@ -356,6 +409,7 @@ func (s *Session) endScroll() {
 	if s.Inside == nil || s.door == nil {
 		return
 	}
+	s.Inside.SpellEdit = nil
 	s.Inside.List = nil
 	s.Inside.Detail = nil
 	s.Inside.Dialog = s.greeting()

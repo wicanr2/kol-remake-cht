@@ -31,6 +31,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
+	magicdata "github.com/wicanr2/kol-remake-cht/internal/magic"
 	portraitdata "github.com/wicanr2/kol-remake-cht/internal/portrait"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
 	"github.com/wicanr2/kol-remake-cht/internal/save"
@@ -2214,6 +2215,8 @@ func main() {
 		"assets/original-derived-data/town-buildings.json", "城鎮建築 typed data")
 	portraitPath := flag.String("portrait-layout",
 		"assets/original-derived-data/portrait-layout.json", "立繪版面 typed data")
+	magicPath := flag.String("magic-dictionary",
+		"assets/original-derived-data/magic.json", "法術參數字典 typed data")
 	flowScript := flag.String("flow-script", "",
 		"整條遊玩路徑的操作腳本，空白分隔；從標題序列開始，經書本、角色選項、"+
 			"角色選擇清單、旅店走到戶外地圖")
@@ -2824,6 +2827,10 @@ func main() {
 		// 立繪的版面表：讀不到就只是資料頁那兩頁畫不出人，其他照常（RE-126）。
 		if layout, err := portraitdata.Load(*portraitPath); err == nil {
 			playSession.Portraits = layout
+		}
+		// 法術的參數字典：讀不到就只是法術編輯器那一頁每一欄都空著（RE-128）。
+		if dict, err := magicdata.Load(*magicPath); err == nil {
+			playSession.Magic = dict
 		}
 		if worldScreenState != nil {
 			playSession.TownCode = worldScreenState.Travel.Data.TownCode(

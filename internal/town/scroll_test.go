@@ -40,7 +40,17 @@ func scrollText() *UIText {
 		uiRecord{Index: ModifySpellRecord, Text: "Modify a spell"},
 		uiRecord{Index: SpellbookFullRecord, Text: `"You've learned enough!"`},
 		uiRecord{Index: CostPrefix, Text: "~H0Dit will cost you]"},
-		uiRecord{Index: CostSuffix, Text: `@~H0Dgold, interested?"@`})
+		uiRecord{Index: CostSuffix, Text: `@~H0Dgold, interested?"@`},
+		// 法術編輯器那一頁（RE-128）。
+		uiRecord{Index: SpellSaveRecord, Text: "~V5A~H06Record changes in Spellbook?"},
+		uiRecord{Index: SpellDeniedRecord, Text: `"That one is unknown to@`},
+		uiRecord{Index: SpellDeniedOrderRecord, Text: "the Order of the@"},
+		uiRecord{Index: SpellTitleRecord, Text: "~V36~H0BCLASS~H17SUBCLASS~V68~H07STAT" +
+			"~H12RANGE DUR  DMG~V82~H07Adventure Point Cost..@Gold Crown Cost......."},
+		uiRecord{Index: SpellRangeRecord, Text: "Short"},
+		uiRecord{Index: SpellRangeRecord + 1, Text: "Long"},
+		uiRecord{Index: SpellNoDurationRecord, Text: "----"},
+		uiRecord{Index: NoPointsRecord, Text: `"Sorry, not enough@~H0DAdventure Points!"`})
 	return t
 }
 
@@ -156,7 +166,7 @@ func TestScrollSpellbookFull(t *testing.T) {
 	}
 }
 
-// 已經有法術的角色，選單才有第二列；那一列還沒實作，按下去只記一筆。
+// 已經有法術的角色，選單才有第二列；那一列進法術編輯器，先列出身上有哪幾筆。
 func TestScrollMenuHasSpellbookRow(t *testing.T) {
 	s := scrollSession(t, 1000, 109)
 	s.Party[0].Order = hostelOrder()
@@ -167,8 +177,9 @@ func TestScrollMenuHasSpellbookRow(t *testing.T) {
 	}
 	s.MoveScroll(1)
 	yes(s)
-	if len(s.Unimplemented) != 1 {
-		t.Fatalf("法術書那一頁應該記一筆未實作：%v", s.Unimplemented)
+	if s.Inside.List == nil || len(s.Inside.List.Rows) != 1 ||
+		s.Inside.List.Rows[0] != "Tyanalon" {
+		t.Fatalf("法術清單是 %+v", s.Inside.List)
 	}
 }
 

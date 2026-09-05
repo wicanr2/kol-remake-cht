@@ -98,6 +98,8 @@ type Inn struct {
 	SpellList *SpellPage `json:"spell_list,omitempty"`
 	// ItemPage 是蓋在同一頁上的物品清單（RE-127）。
 	ItemPage *ItemPage `json:"item_page,omitempty"`
+	// SpellEdit 是法術編輯器那一頁；nil 代表沒開（RE-128）。
+	SpellEdit *SpellEditPage `json:"spell_edit,omitempty"`
 	// PartyPage 是隊伍立繪那一頁要貼的圖，順序就是畫的順序（`sub_18D61`，RE-126）。
 	PartyPage []portrait.Piece `json:"party_page,omitempty"`
 	Icons     []int            `json:"icons"`
