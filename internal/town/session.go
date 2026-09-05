@@ -294,10 +294,15 @@ func (s *Session) acceptInside() {
 	case s.ShowingSpellList():
 		// 那一頁只剩 U-TURN，按下去回資料頁（`sub_166CC:0x167bb`）。
 		s.closeSpellList()
+	case s.ShowingItemPage():
+		// 那一頁只剩 U-TURN，按下去回資料頁（`sub_16986` 比的是回傳值的高位元組）。
+		s.closeItemPage()
 	case s.ShowingSheet():
 		switch id {
 		case IconUTurn:
 			s.closeSheet()
+		case IconSheetItems:
+			s.OpenItemPage()
 		case IconSheetNotes:
 			s.OpenQuestList()
 		case IconSheetSpells:

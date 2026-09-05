@@ -292,6 +292,7 @@ func (s *Session) closeSheet() {
 	s.Inside.Sheet = nil
 	s.Inside.SheetLabels = nil
 	s.Inside.QuestList = nil
+	s.Inside.ItemPage = nil
 	s.Inside.Dialog = s.greeting()
 	s.Inside.DialogZh = nil
 	s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))

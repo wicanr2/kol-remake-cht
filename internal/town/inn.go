@@ -95,8 +95,10 @@ type Inn struct {
 	QuestList *QuestList `json:"quest_list,omitempty"`
 	// SpellList 是蓋在同一頁上的法術一覽（RE-123）。
 	SpellList *SpellPage `json:"spell_list,omitempty"`
-	Icons     []int      `json:"icons"`
-	Selected  int        `json:"selected"`
+	// ItemPage 是蓋在同一頁上的物品清單（RE-127）。
+	ItemPage *ItemPage `json:"item_page,omitempty"`
+	Icons    []int     `json:"icons"`
+	Selected int       `json:"selected"`
 
 	// List 非 nil 時對話框畫的是可選清單而不是台詞（招募同伴用）。
 	List *InnList `json:"-"`
