@@ -13,8 +13,8 @@
     "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。"
   },
   "coverage_note": "涵蓋 SPEC-002 的全部 752 個已證實 PNG 單位，外加 TOWN0–TOWN7 的地圖格子陣列與磚塊 atlas（RE-059）與 KOLPICS payload 0 的隊伍標記 atlas（RE-060）。地圖那張是資料的無損 8-bit 灰階 PNG 表示，像素值即磚塊編號，不是原版顯示矩形。KOLPICS 的 raw-planar 與 WEATPICS 的遮罩層是 renderer 資料，不是原版顯示矩形。`skipped` 是計畫內明確排除的 placeholder；`payloads_without_plan_record` 是連紀錄都沒有的 payload（MISCPICS 的一-byte placeholder 屬此類）。",
-  "archive_count": 39,
-  "png_count": 769,
+  "archive_count": 40,
+  "png_count": 773,
   "archives": [
     {
       "archive": "BOOKPICS",
@@ -2264,6 +2264,82 @@
           "source_payloads": [
             {
               "image_index": 79,
+              "role": "color"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "STEEDS",
+      "archive_root": "Knights-of-legend/STEEDS",
+      "source_payload_count": 4,
+      "plan_record_count": 4,
+      "payloads_without_plan_record": 0,
+      "png_count": 4,
+      "skipped_count": 0,
+      "skipped": [],
+      "composition": "direct_packed",
+      "evidence": {
+        "probe_file": "steeds-ega-visual-probe.json",
+        "probe_sha256": "1f8e2ab408a94758712cdf864ee08e4617a9547561aca13f4cc17ad6296c6bdb",
+        "probe_schema": "kol-steeds-ega-visual-probe-v1",
+        "ida_summary_name": "steed.json",
+        "ida_summary_sha256": "0963bdde4a5bdd5002de1c1e19edd58486f6c6c9e8b3a07db5052a2cf7588e69"
+      },
+      "images": [
+        {
+          "unit_index": 0,
+          "file": "STEEDS/steeds-000.png",
+          "width": 40,
+          "height": 38,
+          "has_transparency": false,
+          "png_sha256": "4503042572e3bcd0b4db454cda91f693e68ea81ebbdf7ed06d9eee41ca353424",
+          "source_payloads": [
+            {
+              "image_index": 0,
+              "role": "color"
+            }
+          ]
+        },
+        {
+          "unit_index": 1,
+          "file": "STEEDS/steeds-001.png",
+          "width": 40,
+          "height": 38,
+          "has_transparency": false,
+          "png_sha256": "ca6ecade170e62aa97a5510b959f48f2afaf6e19d68a16b562bce04e760f7fb3",
+          "source_payloads": [
+            {
+              "image_index": 1,
+              "role": "color"
+            }
+          ]
+        },
+        {
+          "unit_index": 2,
+          "file": "STEEDS/steeds-002.png",
+          "width": 40,
+          "height": 38,
+          "has_transparency": false,
+          "png_sha256": "9c3a88290f0145f35139e35164f8e18bf77c8a04b348d837ecd9caacaee11110",
+          "source_payloads": [
+            {
+              "image_index": 2,
+              "role": "color"
+            }
+          ]
+        },
+        {
+          "unit_index": 3,
+          "file": "STEEDS/steeds-003.png",
+          "width": 40,
+          "height": 38,
+          "has_transparency": false,
+          "png_sha256": "de29008e5b10fa666ac546298d16ea5aa22777bb00c7c9155e18b352dee1264e",
+          "source_payloads": [
+            {
+              "image_index": 3,
               "role": "color"
             }
           ]

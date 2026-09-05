@@ -71,6 +71,10 @@ FAMILIES: list[dict] = [
     # 固定 40×38 packed nibbles，每筆末 1 byte 不進像素
     direct("CHARPICS", 80, "charpics-archive-ega-visual-probe.json",
            packed=True, width=40, height=38, record_bytes=760, trailing=1),
+    # 馬廄賣的四匹（RE-120）。版面與 CHARPICS.0 相同，來源是 STEEDS.0——
+    # `STEEDPIC` 是玩家角色自己那一張的 16 槽表，不是這一份。
+    direct("STEEDS", 4, "steeds-ega-visual-probe.json",
+           packed=True, width=40, height=38, record_bytes=760, trailing=1),
     # 彩圖＋AND-mask 配對
     mask_pair("MONPICS", 64, "monpics-ega-visual-probe.json", "monster_index"),
     mask_pair("PERPICS", 12, "perpics-ega-visual-probe.json", "portrait_index"),
@@ -573,6 +577,20 @@ def main() -> int:
         (staging / "manifest.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
         if out.exists():
+            # 這個根目錄還住著別支抽取器的產物（`extract_battle_tiles.py` 的
+            # `BATTLE/`）。原子替換是整個目錄換掉，所以先把不在本次計畫裡的
+            # 子目錄搬進 staging——否則跑一次這支就把別人的 PNG 全刪了。
+            keep = {a["archive"] for a in archives}
+            for entry in sorted(out.iterdir()):
+                if entry.name in keep or entry.name == "manifest.json":
+                    continue
+                dest = staging / entry.name
+                if dest.exists():
+                    continue
+                if entry.is_dir():
+                    shutil.copytree(entry, dest)
+                else:
+                    shutil.copy2(entry, dest)
             shutil.rmtree(out)
         os.replace(staging, out)
     finally:
