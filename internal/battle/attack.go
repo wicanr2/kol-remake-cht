@@ -103,9 +103,27 @@ func Encumbrance(level int, w Weapon, armour, shield int) (enc, speed int) {
 	return factor * total / 100, speed
 }
 
+// SkillPenaltyScale 是罰值折算成技能的倍率：`sub_26CD5` 扣的是那一格的十倍。
+const SkillPenaltyScale = 10
+
+// OffenceSkill／DefenceSkill 是這一刻真正算數的攻防技能：手上武器那一列的值
+// 扣掉法術效果 7、8 累積的罰值乘十，下限 0（`sub_26AC2` → `sub_26CD5`）。
+// 原版每次要用都重算一遍，所以罰值不改記錄裡的技能本身。
+func (a Actor) OffenceSkill() int { return skillAfterPenalty(a.Attack, a.SkillPenaltyOff) }
+
+// DefenceSkill 同上，對應防禦那一格。
+func (a Actor) DefenceSkill() int { return skillAfterPenalty(a.Parry, a.SkillPenaltyDef) }
+
+func skillAfterPenalty(skill, penalty int) int {
+	if v := skill - penalty*SkillPenaltyScale; v > 0 {
+		return v
+	}
+	return 0
+}
+
 // AttackValue 是攻擊分數的骰前部分（`sub_26D76:0x26E08`…`0x26E7E`）。
 func (a Actor) AttackValue() int {
-	v := a.Strength + a.Attack
+	v := a.Strength + a.OffenceSkill()
 	v -= v*a.Injury()/200 + a.Damage*10 + a.Fatigue*20
 	return v - a.Encumbrance
 }
@@ -117,7 +135,7 @@ func (a Actor) DefenceValue() int {
 	if parries < 1 {
 		parries = 1
 	}
-	v := a.Parry/parries + a.Quickness
+	v := a.DefenceSkill()/parries + a.Quickness
 	v -= v*a.Injury()/200 + a.Damage*10 + a.Encumbrance
 	if a.ShieldGrade != NoShield {
 		v += 100*a.ShieldGrade + 200

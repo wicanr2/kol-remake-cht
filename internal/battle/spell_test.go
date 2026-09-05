@@ -145,24 +145,92 @@ func TestCastStatEffect(t *testing.T) {
 	}
 }
 
-// 效果 4 動的是智力，效果 7／8 那兩格語意未解，什麼都不該動。
+// 效果 4 動的是智力；效果 7／8 動的是攻防技能的罰值，四個屬性都不該動。
 func TestCastStatFields(t *testing.T) {
 	s := castState(Spell{Effect: 4, TurnCode: 0x02, PowerCode: 0x02})
 	s.Cast(0, 1, -1, maxRand{})
 	if s.Actors[1].Intellect != 103 {
 		t.Fatalf("智力變成 %d，期望 103", s.Actors[1].Intellect)
 	}
-	for _, effect := range []int{7, 8} {
-		s := castState(Spell{Effect: effect, TurnCode: 0x02, PowerCode: 0x02})
+	for _, c := range []struct {
+		effect int
+		field  func(Actor) int
+	}{
+		{7, func(a Actor) int { return a.SkillPenaltyOff }},
+		{8, func(a Actor) int { return a.SkillPenaltyDef }},
+	} {
+		s := castState(Spell{Effect: c.effect, TurnCode: 0x02, PowerCode: 0x02})
 		before := s.Actors[1]
 		if got := s.Cast(0, 1, -1, maxRand{}); got.Verdict != SpellHits {
-			t.Fatalf("效果 %d 該算打中，得到 %+v", effect, got)
+			t.Fatalf("效果 %d 該算打中，得到 %+v", c.effect, got)
 		}
 		a := s.Actors[1]
 		if a.Strength != before.Strength || a.Quickness != before.Quickness ||
 			a.Foresight != before.Foresight || a.Intellect != before.Intellect {
-			t.Fatalf("效果 %d 的欄位還沒解，不該動任何屬性", effect)
+			t.Fatalf("效果 %d 動的是罰值，不該碰四個屬性", c.effect)
 		}
+		if got := c.field(a); got != 3 {
+			t.Fatalf("效果 %d 的罰值是 %d，期望 3", c.effect, got)
+		}
+	}
+}
+
+// 罰值折算成技能：一點抵十，扣到 0 為止，而且過期不還。
+func TestSkillPenalty(t *testing.T) {
+	a := Actor{Attack: 230, Parry: 100}
+	if a.OffenceSkill() != 230 || a.DefenceSkill() != 100 {
+		t.Fatalf("沒有罰值時該是原值，得到 %d／%d",
+			a.OffenceSkill(), a.DefenceSkill())
+	}
+	a.SkillPenaltyOff, a.SkillPenaltyDef = 3, 3
+	if a.OffenceSkill() != 200 {
+		t.Fatalf("攻擊技能是 %d，期望 230 − 30", a.OffenceSkill())
+	}
+	if a.DefenceSkill() != 70 {
+		t.Fatalf("防禦技能是 %d，期望 100 − 30", a.DefenceSkill())
+	}
+	// 扣過頭夾在 0，不會變成負的。
+	a.SkillPenaltyDef = 99
+	if a.DefenceSkill() != 0 {
+		t.Fatalf("防禦技能是 %d，期望夾在 0", a.DefenceSkill())
+	}
+	// 攻擊分數跟著少：`sub_26D76:0x26E1C` 加的是折算後的那一個。
+	b := Actor{Strength: 100, Attack: 230, Threshold: 100}
+	b.SetParts()
+	c := b
+	c.SkillPenaltyOff = 3
+	if b.AttackValue()-c.AttackValue() != 30 {
+		t.Fatalf("攻擊值只差 %d，期望 30", b.AttackValue()-c.AttackValue())
+	}
+}
+
+// 原版沒有為罰值那兩格把正負反過來：正面的法術反而把對方的技能扣掉
+// （`0x2878E` 對六個欄位一視同仁），負面的法術是把罰值減回來。
+func TestCastSkillPenaltyDirection(t *testing.T) {
+	// 正面：罰值往上加 → 技能被扣。
+	s := castState(Spell{Effect: 7, TurnCode: 0x02, PowerCode: 0x02})
+	s.Actors[1].Attack = 230
+	s.Cast(0, 1, -1, maxRand{})
+	if s.Actors[1].OffenceSkill() != 200 {
+		t.Fatalf("正面之後攻擊技能是 %d，期望 200", s.Actors[1].OffenceSkill())
+	}
+	// 負面：往下減，罰值本來是 0 就什麼都不會發生。
+	s = castState(Spell{Effect: 7, TurnCode: 0x02, PowerCode: 0x02})
+	s.Actors[0].Negative = true
+	s.Actors[1].Attack = 230
+	s.Cast(0, 1, -1, maxRand{})
+	if s.Actors[1].SkillPenaltyOff != 0 {
+		t.Fatalf("罰值是 %d，期望仍然夾在 0", s.Actors[1].SkillPenaltyOff)
+	}
+	// 罰值不隨法術過期還回來：`sub_2198A`／`sub_2215A` 只寫 +0x07…+0x0C。
+	s = castState(Spell{Effect: 7, TurnCode: 0x02, PowerCode: 0x02})
+	s.Actors[1].Attack = 230
+	s.Cast(0, 1, -1, maxRand{})
+	for i := 0; i < 8 && s.Actors[1].SpellTurns > 0; i++ {
+		s.WearsOff(1)
+	}
+	if s.Actors[1].SkillPenaltyOff != 3 {
+		t.Fatalf("過期之後罰值變成 %d，期望還是 3", s.Actors[1].SkillPenaltyOff)
 	}
 }
 

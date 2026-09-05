@@ -75,9 +75,16 @@ func rollDice(code int, rng Rand) int {
 // 第 5、6 項用不到——那兩個效果在前面就被自己的分支接走了。
 var SpellEffectField = [8]int{0x08, 0x09, 0x0A, 0x0C, 0x2C, 0x2C, 0x2E, 0x2F}
 
+// 攻防技能罰值那兩格；`SpellEffectField` 的第 7、8 項就是它們。
+const (
+	SpellFieldSkillOff = 0x2E
+	SpellFieldSkillDef = 0x2F
+)
+
 // 兩個有自己分支的效果編號。
 const (
-	// SpellEffectStat 之外的兩個特例：5 改一個還沒解出語意的全域，
+	// SpellEffectStat 之外的兩個特例：5 動的是疲勞累計（`[0x322E + 2i]`，
+	// 分母是力量 ＋ 健康，RE-129；那一整條鏈還沒接進規則層），
 	// 6 是「指定部位治療或傷害」。
 	SpellEffectGlobal = 5
 	SpellEffectArea   = 6
@@ -210,8 +217,12 @@ func (s *State) castArea(target, area, power int, negative bool) {
 
 // castStat 是效果 1…4、7、8：把某一個屬性加減強度，並掛上倒數（`0x28704`）。
 //
-// 效果 7、8 動的是參戰者記錄 `+0x2E`／`+0x2F`，那兩格的語意還沒解（RE-100），
-// 所以這一版對它們什麼都不做——寧可不動，也不要動錯一格。
+// 效果 7、8 動的是參戰者記錄 `+0x2E`／`+0x2F`，也就是攻防技能的**罰值**
+// （`Off. Skill`／`Def. Skill`，RE-129）。原版這一段對六個欄位一視同仁：
+// 正面加、負面減，夾在 0…0xFF——**沒有為罰值那兩格把正負反過來**（效果 5 的
+// 疲勞就有反，見 `0x286AB`）。所以照原版跑出來的結果是：正面的法術把罰值加上去
+// ＝把對方的技能扣掉強度的十倍，負面的法術反而是把罰值減回來（罰值本來就是 0
+// 的話什麼都不會發生）。這一版照抄，不代它修。
 func (s *State) castStat(target, effect, power, turns int, negative bool) {
 	t := &s.Actors[target]
 	var p *int
@@ -224,6 +235,10 @@ func (s *State) castStat(target, effect, power, turns int, negative bool) {
 		p = &t.Foresight
 	case 0x0C:
 		p = &t.Intellect
+	case SpellFieldSkillOff:
+		p = &t.SkillPenaltyOff
+	case SpellFieldSkillDef:
+		p = &t.SkillPenaltyDef
 	default:
 		return
 	}

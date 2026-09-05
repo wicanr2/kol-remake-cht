@@ -129,6 +129,13 @@ type Actor struct {
 	// Ward 是擋法術的那一格：敵人取怪物記錄 +0x1D、隊員取角色記錄 +0x28
 	// （`sub_22229` 決定看哪一份，RE-100）。
 	Ward int
+	// SkillPenaltyOff／SkillPenaltyDef 是記錄 +0x2E／+0x2F：法術效果 7、8
+	// （`Off. Skill`／`Def. Skill`）寫的那兩格。攻防技能每次要用都由 `sub_26AC2`
+	// 從原始記錄重算一遍，最後 `sub_26CD5` 把這兩格的**十倍**扣掉、夾在 0 以上，
+	// 所以它們是罰值而不是技能本身（RE-128）。法術過期時把屬性搬回來的那兩支
+	// （`sub_2198A`／`sub_2215A`）只寫 +0x07…+0x0C，碰不到這裡——**罰值不會隨
+	// 法術過期還回來**，一整場都算數。
+	SkillPenaltyOff, SkillPenaltyDef int
 	// Style／Guard／Command 是這一回合選的攻擊選項（+0x23）、防禦選項（+0x24）
 	// 與指令碼（+0x25）。三個都由規劃段填：隊員從指令列選、敵人由 AI 填（RE-081）。
 	Style   int
