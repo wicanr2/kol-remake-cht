@@ -24,7 +24,8 @@ func TestFigureFromWorn(t *testing.T) {
 	m.Worn[1] = &Good{SizeClass: 4}
 	m.Worn[2] = &Good{SizeClass: 5}
 	m.Worn[PortraitShieldPos] = &Good{SizeClass: 2}
-	m.Worn[WornSlots-1] = &Good{Class: 87, SizeClass: 1, Kind: 1, Hands: 1}
+	m.Worn[WornSlots-1] = &Good{Class: 87, SizeClass: 1, Kind: 1} // 腰帶
+	m.InHand = &Good{Class: 87, SizeClass: 1, Kind: 1, Hands: 1}  // 手上那件
 
 	f := m.Figure()
 	if f.Gender != 1 || f.Race != 1 || f.Build() != 5 {
@@ -38,6 +39,9 @@ func TestFigureFromWorn(t *testing.T) {
 	}
 	if f.Weapon == nil || !f.Weapon.TwoHand || f.Weapon.Class != 87 {
 		t.Fatalf("手上那件沒讀到：%+v", f.Weapon)
+	}
+	if f.Belt == nil || f.Belt.TwoHand {
+		t.Fatalf("腰帶那一格沒讀到，或讀成手上那件：%+v", f.Belt)
 	}
 }
 

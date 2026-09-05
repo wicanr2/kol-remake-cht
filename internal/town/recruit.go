@@ -43,8 +43,10 @@ type Candidate struct {
 	Sheet *Sheet
 	// Quests 是角色記錄 0x1E2 起的六個任務旗標 byte（RE-079）。
 	Quests []int
-	// Worn 是穿戴欄十格，索引同部位；空的那一格是 nil（RE-080）。
+	// Worn 是穿戴欄十格，索引同部位（第十格是腰帶）；空的那一格是 nil（RE-080）。
 	Worn [WornSlots]*Good
+	// InHand 是手上那件（角色記錄 0x30），不屬於穿戴欄（RE-127）。
+	InHand *Good
 	// Spells 是角色記錄 0x200 起那十六筆法術裡非空的幾筆（RE-100）。
 	Spells []Spell
 	// Progress 是「已回報的任務數」那五格；Carried 是交任務物品要逐 byte 比的
@@ -188,7 +190,7 @@ func (s *Session) joinSelected() {
 	s.Party = append(s.Party, Member{Name: c.Name, Portrait: c.Portrait,
 		Female: c.Female, Wounds: c.Wounds, Gold: c.Gold, Place: c.Place,
 		TownCode: c.Town, BuildingID: c.BuildingID, Sheet: c.Sheet,
-		Worn: c.Worn, Spells: c.Spells, Quests: c.Quests,
+		Worn: c.Worn, InHand: c.InHand, Spells: c.Spells, Quests: c.Quests,
 		Progress: c.Progress, Carried: c.Carried, Speaker: true})
 	s.Inside.Party = s.Party
 	s.recruit, s.asking = nil, false

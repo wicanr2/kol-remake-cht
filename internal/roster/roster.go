@@ -35,12 +35,12 @@ type Slot struct {
 	// Spells 是角色記錄 0x200 起、每 16 byte 一筆、共十六筆的法術（RE-100）。
 	// 版面與商品記錄相同，所以型別共用；空的那一格是 nil。
 	Spells []*Item `json:"spells"`
-	// Equipment 是穿戴欄十格：部位 0…8 在角色記錄 0x100 + 16 × 部位，
-	// 第十格是手上那件（0x30）。空的那一格是 nil（RE-080）。
+	// Equipment 是穿戴欄十格：部位 0…9 在角色記錄 0x100 + 16 × 部位，
+	// 第十格（0x190）是腰帶。空的那一格是 nil（RE-080／RE-127）。
 	Equipment []*Item `json:"equipment"`
-	// Belt 是腰帶那一格（角色記錄 0x190）：立繪最左邊那一層畫的就是它，
-	// 原版名冊裡只有兩名角色有，放的都是武器（RE-126／RE-127）。
-	Belt *Item `json:"belt"`
+	// InHand 是手上那件（角色記錄 0x30），**不屬於穿戴欄**：戰鬥的攻擊值、
+	// 負重與立繪的武器那一層讀的都是它（RE-127）。
+	InHand *Item `json:"in_hand"`
 	// Progress 是角色記錄 0x1DD 起那五格「已回報的任務數」（RE-107）。
 	Progress []int `json:"progress"`
 	// Carried 是交任務物品時要逐 byte 比的那十七格（RE-109）。typed 的

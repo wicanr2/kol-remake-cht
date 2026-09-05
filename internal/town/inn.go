@@ -38,7 +38,11 @@ type Member struct {
 	// Backpack 是背包裡的東西，上限六格（RE-075）。
 	Backpack []Good `json:"backpack,omitempty"`
 	// Worn 是穿在身上的東西，一個部位一格；nil 代表那個部位是空的。
+	// 第十格（索引 9）是腰帶，**不是手上那件**（RE-127）。
 	Worn [WornSlots]*Good `json:"worn,omitempty"`
+	// InHand 是手上那件（角色記錄 0x30）：戰鬥的攻擊值、負重與立繪的武器那一層
+	// 讀的都是它。物品那一頁的「拿到手上」把東西搬進這一格（RE-127）。
+	InHand *Good `json:"in_hand,omitempty"`
 	// Order 是所屬教派：角色記錄 `+0x1A0` 那十六個 byte，由 SCROLL 那一格
 	// 入會時寫進去（RE-121）。Token 是入會信物，優先放在 `+0x170`。
 	Order *Order `json:"order,omitempty"`

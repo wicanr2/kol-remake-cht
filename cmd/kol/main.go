@@ -123,8 +123,9 @@ func battleMember(m town.Member) battle.Member {
 	out.Quickness = m.Sheet.Stats[town.StatQuickness]
 	out.Nutrition = m.Sheet.Nutrition
 	out.Intellect = m.Sheet.Stats[town.StatIntellect]
-	// 手上那件武器（部位 9）與三件護甲、盾牌的重量：攻擊值、負重與骰子都要用。
-	if w := m.Worn[battle.WeaponSlot]; w != nil {
+	// 手上那件武器（角色記錄 0x30，不在穿戴欄裡）與三件護甲、盾牌的重量：
+	// 攻擊值、負重與骰子都要用。
+	if w := m.InHand; w != nil {
 		out.HasWeapon = true
 		out.Weapon = battle.Weapon{
 			Kind: w.Class, Base: w.Dice.Bonus, Code: dieCode(w.Record),
@@ -157,9 +158,9 @@ func battleMember(m town.Member) battle.Member {
 		}
 		out.Pack[i] = g.Name
 	}
-	// HasSecondItem 還沒有 typed data 來源：它是角色記錄 +0x190（穿戴欄的第十格，
-	// 抽取器目前把部位 9 指到手上那件武器的 +0x30，沒有讀它），所以指令列現在
-	// 不會出現 0x16／0x25（SPEC-010 末段）。
+	// HasSecondItem 還沒接：它看的是角色記錄 +0x190（穿戴欄的第十格，也就是腰帶，
+	// RE-127 已經讀出來了），接上去會改變指令列（0x16／0x25，SPEC-010 末段），
+	// 要連同物品那一頁的搬移動作一起做。
 	for _, pos := range battle.ArmourSlots {
 		if g := m.Worn[pos]; g != nil {
 			out.ArmourWeight += g.Encumbrance
@@ -722,22 +723,30 @@ func townSpells(items []*roster.Item) []town.Spell {
 	return out
 }
 
-// townWorn 把角色槽位裡的穿戴欄換成城鎮那一側的型別（RE-080）。
+// townGood 把角色槽位裡的一件東西換成城鎮那一側的型別（RE-080）。
+func townGood(it *roster.Item) *town.Good {
+	if it == nil {
+		return nil
+	}
+	g := town.Good{
+		Name: it.Name, Price: it.Price, Kind: it.Kind, Damage: it.Damage,
+		Hands: it.Hands, Class: it.Class, Position: it.Position,
+		Encumbrance: it.Encumbrance, Condition: it.Condition,
+		Percent: it.Percent, SizeClass: it.SizeClass, Record: it.Record,
+	}
+	g.Dice = town.Dice{Count: it.Dice.Count, Sides: it.Dice.Sides,
+		Bonus: it.Dice.Bonus, Low: it.Dice.Low, High: it.Dice.High}
+	return &g
+}
+
+// townWorn 把穿戴欄十格換過來。第十格是腰帶，手上那件另外走 townGood（RE-127）。
 func townWorn(items []*roster.Item) [town.WornSlots]*town.Good {
 	var out [town.WornSlots]*town.Good
 	for i, it := range items {
-		if it == nil || i >= town.WornSlots {
-			continue
+		if i >= town.WornSlots {
+			break
 		}
-		g := town.Good{
-			Name: it.Name, Price: it.Price, Kind: it.Kind, Damage: it.Damage,
-			Hands: it.Hands, Class: it.Class, Position: it.Position,
-			Encumbrance: it.Encumbrance, Condition: it.Condition,
-			Percent: it.Percent, SizeClass: it.SizeClass, Record: it.Record,
-		}
-		g.Dice = town.Dice{Count: it.Dice.Count, Sides: it.Dice.Sides,
-			Bonus: it.Dice.Bonus, Low: it.Dice.Low, High: it.Dice.High}
-		out[i] = &g
+		out[i] = townGood(it)
 	}
 	return out
 }
@@ -2713,6 +2722,7 @@ func main() {
 					Gold: slot.Gold, BuildingID: slot.Building,
 					Quests: slot.Quests, Sheet: townSheet(slot.Sheet),
 					Worn:   townWorn(slot.Equipment),
+					InHand: townGood(slot.InHand),
 					Spells: townSpells(slot.Spells),
 					// 任務交付要逐 byte 比，所以帶原始位元組（RE-109）。
 					Progress: slot.Progress,
@@ -2786,6 +2796,10 @@ func main() {
 					}
 					if empty {
 						playSession.Party[i].Worn = c.Worn
+					}
+					// 手上那件不在穿戴欄裡（RE-127），要另外補。
+					if playSession.Party[i].InHand == nil {
+						playSession.Party[i].InHand = c.InHand
 					}
 					// 法術同理：存檔沒帶就照角色檔補（RE-100）。
 					if playSession.Party[i].Spells == nil {

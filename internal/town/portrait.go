@@ -84,11 +84,14 @@ func (m Member) Figure() portrait.Figure {
 			f.Styles[layer] = it.Style
 		}
 	}
-	// 手上那件在穿戴欄的第十格（`WeaponSlot`），與 0x30 是同一格。
-	f.Weapon = m.item(WornSlots-1, CarriedFirst)
+	// 手上那件不在穿戴欄裡（RE-127）。
+	if it := goodItem(m.InHand); it != nil {
+		f.Weapon = it
+	} else {
+		f.Weapon = carriedItem(m.carriedAt(CarriedFirst))
+	}
 	f.Shield = m.item(PortraitShieldPos, PortraitHeadSlot+PortraitShieldPos*0x10)
-	// 腰帶那一格只有原始位元組這一條路：typed 的穿戴欄沒有它。
-	f.Belt = carriedItem(m.carriedAt(PortraitBeltSlot))
+	f.Belt = m.item(WornSlots-1, PortraitBeltSlot)
 	return f
 }
 
