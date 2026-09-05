@@ -5,6 +5,8 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
+
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
@@ -102,4 +104,20 @@ func cellIn(dst *ebiten.Image, f *font.Font, col, row int, s string, c [3]uint8)
 	x := col * f.Advance()
 	fill(dst, x, row, len([]rune(s))*f.Advance(), f.Height(), town.ColourBoxFill)
 	f.Draw(dst, x, row, s, c[0], c[1], c[2])
+}
+
+// drawPartyPage 畫隊伍立繪那一頁（`sub_18D61`，RE-126）：整頁清成黑、畫一圈框，
+// 再把六個人由後往前貼上去。
+func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece) error {
+	r := town.PartyPageFrame
+	fill(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourBoxFill)
+	frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetFrame)
+	for _, piece := range pieces {
+		pic, err := sprites.Get(piece.Archive, piece.Index)
+		if err != nil {
+			return err
+		}
+		draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
+	}
+	return nil
 }

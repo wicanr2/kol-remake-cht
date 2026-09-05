@@ -3,6 +3,7 @@ package town
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
 	"os"
 	"strings"
 )
@@ -97,8 +98,10 @@ type Inn struct {
 	SpellList *SpellPage `json:"spell_list,omitempty"`
 	// ItemPage 是蓋在同一頁上的物品清單（RE-127）。
 	ItemPage *ItemPage `json:"item_page,omitempty"`
-	Icons    []int     `json:"icons"`
-	Selected int       `json:"selected"`
+	// PartyPage 是隊伍立繪那一頁要貼的圖，順序就是畫的順序（`sub_18D61`，RE-126）。
+	PartyPage []portrait.Piece `json:"party_page,omitempty"`
+	Icons     []int            `json:"icons"`
+	Selected  int              `json:"selected"`
 
 	// List 非 nil 時對話框畫的是可選清單而不是台詞（招募同伴用）。
 	List *InnList `json:"-"`

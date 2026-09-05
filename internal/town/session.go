@@ -304,6 +304,9 @@ func (s *Session) acceptInside() {
 	case s.ShowingSpellList():
 		// 那一頁只剩 U-TURN，按下去回資料頁（`sub_166CC:0x167bb`）。
 		s.closeSpellList()
+	case s.ShowingPartyPage():
+		// 那一頁只等一個鍵（`sub_18D61` 收尾的 `sub_144C3`）。
+		s.closePartyPage()
 	case s.ShowingItemPage():
 		p := s.Inside.ItemPage
 		switch {
@@ -325,6 +328,8 @@ func (s *Session) acceptInside() {
 			s.closeSheet()
 		case IconSheetItems:
 			s.OpenItemPage()
+		case IconCompanion:
+			s.OpenPartyPage()
 		case IconSheetNotes:
 			s.OpenQuestList()
 		case IconSheetSpells:

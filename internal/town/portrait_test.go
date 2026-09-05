@@ -109,3 +109,41 @@ func TestItemSlotsAreTheCarriedSlots(t *testing.T) {
 		}
 	}
 }
+
+// 隊伍立繪那一頁：層次大的先畫，人多就有多份貼圖，按一個鍵回資料頁。
+func TestOpenPartyPage(t *testing.T) {
+	s := itemSession(t)
+	l, err := portrait.Load(filepath.Join("..", "..", "assets",
+		"original-derived-data", "portrait-layout.json"))
+	if err != nil {
+		t.Skip("沒有 portrait-layout.json，跳過")
+	}
+	s.Portraits = l
+	s.Party = append(s.Party, Member{Name: "Poontang", Female: true,
+		Sheet: &Sheet{Race: 1}})
+	s.Inside.Party = s.Party
+
+	s.Inside.Selected = 2 // 資料頁圖示列的第三格是換人
+	s.Accept()
+	if !s.ShowingPartyPage() {
+		t.Fatalf("沒開起來；未實作紀錄：%v", s.Unimplemented)
+	}
+	// 兩個人至少各有體型與一隻手。
+	if len(s.Inside.PartyPage) < 4 {
+		t.Fatalf("只貼了 %d 張", len(s.Inside.PartyPage))
+	}
+	// 第一張是層次大的那一位：Theodoric 是男性種族 3（層次 6），
+	// Poontang 是女性種族 1（體型組合 5，層次 4），所以先畫前者。
+	if s.Inside.PartyPage[0].Archive != portrait.ArchiveBody ||
+		s.Inside.PartyPage[0].Index != 3 {
+		t.Fatalf("第一張是 %+v", s.Inside.PartyPage[0])
+	}
+	s.Inside.Selected = 0
+	s.Accept()
+	if s.ShowingPartyPage() {
+		t.Fatal("按一個鍵應該回資料頁")
+	}
+	if !s.ShowingSheet() {
+		t.Fatal("應該回到角色資料頁")
+	}
+}

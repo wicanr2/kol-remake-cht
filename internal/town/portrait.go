@@ -112,3 +112,36 @@ func (s *Session) PartyFigures(l *portrait.Layout) []portrait.Piece {
 	}
 	return out
 }
+
+// OpenPartyPage 是資料頁上按下換人那一格：整頁換成隊伍的立繪（`sub_18D61`）。
+func (s *Session) OpenPartyPage() {
+	if s.Inside == nil || s.Inside.Sheet == nil {
+		return
+	}
+	pieces := s.PartyFigures(s.Portraits)
+	if len(pieces) == 0 {
+		s.note(sheetIconName(IconCompanion))
+		return
+	}
+	s.Inside.PartyPage = pieces
+	s.setInsideIcons([]int{IconUTurn})
+}
+
+// ShowingPartyPage 回報現在是不是停在隊伍立繪那一頁。
+func (s *Session) ShowingPartyPage() bool {
+	return s.Inside != nil && len(s.Inside.PartyPage) > 0
+}
+
+// closePartyPage 回角色資料頁。原版那一頁只等一個鍵（`sub_144C3`）。
+func (s *Session) closePartyPage() {
+	if s.Inside == nil {
+		return
+	}
+	s.Inside.PartyPage = nil
+	i := s.speakerIndex()
+	if i < 0 {
+		s.closeSheet()
+		return
+	}
+	s.setInsideIcons(sheetIcons(s.Party[i]))
+}

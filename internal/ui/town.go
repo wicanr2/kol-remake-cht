@@ -40,6 +40,12 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 			drawSpellCells(dst, small, in.SpellList)
 		}
 		// 物品那一頁把整塊換成十七列的清單（RE-127）。
+		// 隊伍立繪那一頁蓋掉整塊（RE-126）。
+		if len(in.PartyPage) > 0 {
+			if err := drawPartyPage(dst, sprites, in.PartyPage); err != nil {
+				return err
+			}
+		}
 		if in.ItemPage != nil {
 			if err := drawItemPage(dst, sprites, small, in.ItemPage, in.Party); err != nil {
 				return err

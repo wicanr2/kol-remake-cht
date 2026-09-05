@@ -268,3 +268,7 @@ var ItemPageLayout = struct {
 	Detail:    Rect{62, 58, 257, 125},
 	ListCol:   32, ListRow: 4, ListStep: 9,
 }
+
+// PartyPageFrame 是隊伍立繪那一頁的外框（`sub_18D61` 收尾的
+// `sub_1B6DC(0x0E, 2, 0x131, 0x9C, 3)`，RE-126）。比物品頁那一圈往左一個像素。
+var PartyPageFrame = Rect{14, 2, 305, 156}
