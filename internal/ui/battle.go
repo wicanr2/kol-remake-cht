@@ -205,16 +205,17 @@ func BattleSpoils(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 			ink[0], ink[1], ink[2])
 	}
 
+	// 選中那一列是換文字顏色，不是框起來：原版的清單元件用 `sub_1B033` 把整列
+	// 重畫一次，選中傳顏色 0x0F、其餘傳 3（RE-115）。與招募、商店那兩張清單同一
+	// 套語意——它們本來就走同一支 `sub_1AAE8`。
 	l := battle.SpoilList
 	for i, line := range s.SpoilLines() {
 		y := l.Row + i*l.LineStep
+		c := town.ColourListIdle
 		if i == s.Spoil.Cursor {
-			// **游標的樣子還沒對拍**：原版那一支選單怎麼標示選中項還沒解出來，
-			// 先用與指令列白框同一個顏色框起來。
-			frame(dst, l.Col*8-2, y-1, b.Width-(l.Col*8-2-b.X)-4, l.LineStep,
-				town.ColourSelected)
+			c = town.ColourText
 		}
-		f.Draw(dst, l.Col*8, y, strings.ToUpper(line), ink[0], ink[1], ink[2])
+		f.Draw(dst, l.Col*8, y, strings.ToUpper(line), c[0], c[1], c[2])
 	}
 	// 背包塞不下、手上那件被換下來的那一句（記錄 0x183）由訊息區顯示，
 	// 這裡不重複。

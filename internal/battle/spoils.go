@@ -174,12 +174,16 @@ func LoadSpoilItems(path string) ([]SpoilItem, error) {
 // 那一支收的是左上與右下兩點，寬高各要加一——與 SheetBox／BodyBox 同一套算法。
 var SpoilBox = struct{ X, Y, Width, Height int }{X: 4, Y: 7, Width: 125, Height: 146}
 
-// SpoilList 是清單第一行的位置與行距。
+// SpoilList 是清單第一行的位置與行距，來自 `sub_1AAE8(1, 1, 13h, n, n, 2E3Ah, 0Dh)`
+// 的第二與第三個參數（RE-115）：行 1（x = 8）、列 0x13。行距是那一支自己算的
+// `6 + 2 × word_2DF18`，而戰利品畫面進來先把 `word_2DF18` 設成 1（大字），所以是 8。
 //
-// **這一組還沒對拍。**標題那兩個座標是記錄自己帶的（`~H02~V09`），清單則是
-// `sub_1AAE8(1, 1, 13h, …)` 的前三個參數，那一支的參數語意還沒解出來，所以先接在
-// 標題下面一行、對齊同一欄。取到原版畫格再改。
-var SpoilList = struct{ Col, Row, LineStep int }{Col: 2, Row: 0x11, LineStep: 8}
+// 第七個參數的 13 欄只用來擺捲動箭頭，而這張清單的可見列數等於總筆數（最多十六件，
+// 十六列 × 8 放得進框裡），所以**永遠不捲動、不畫箭頭**，寬度在這裡沒有作用。
+//
+// **還沒對拍**：原版收據裡沒有戰利品畫面（要打贏一場而且擲中兩成的掉落），
+// 這一組是靜態讀出來的。
+var SpoilList = struct{ Col, Row, LineStep int }{Col: 1, Row: 0x13, LineStep: 8}
 
 // SpoilPhase 是戰利品畫面停在哪一關。
 type SpoilPhase int
