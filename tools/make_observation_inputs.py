@@ -19,12 +19,16 @@ from pathlib import Path
 
 SITES_IN = Path("assets/original-derived-data/quest-sites.json")
 MONSTERS_IN = Path("assets/original-derived-data/monsters.json")
+ROSTER_IN = Path("assets/original-derived-data/character-roster.json")
 OUT_DIR = Path("workplace/observe")
 SITE_INDEX = 5
 # 最終任務那一個地點（RE-107：編號 0…23，最後一個是最終任務）。
 FINAL_SITE_INDEX = 4
 MONSTER_NAME = "BINDERAK"
 NOTE = "觀察用替代輸入，不是原版資料，不得當作對拍來源。"
+# 全隊都有坐騎時的移動率。原版的坐騎會把這一格填成非零值，
+# 而 20 是「用走的」（RE-077）。
+MOUNTED_RATE = 12
 
 
 def one_enemy(sites: dict) -> dict:
@@ -96,6 +100,25 @@ def weak_monster(monsters: dict) -> dict:
     return out
 
 
+def mounted_roster(roster: dict) -> dict:
+    """全隊都有坐騎的名冊，用來看「要不要騎走」那一問（RE-112）。
+
+    原版問這一句的條件是隊伍最慢的移動率不等於 20（`word_2FA2C != 20`）——
+    移動率 0 代入的就是 20，也就是「有人用走的」。名冊裡的角色移動率全是 0，
+    而馬廄的商品表還沒解出來，遊戲裡買不到坐騎，所以這一問在正常路徑上到不了。
+    這一份把移動率改成 12，其餘欄位一個都不動。
+    """
+    out = copy.deepcopy(roster)
+    for slot in out["slots"]:
+        sheet = slot.get("sheet")
+        if sheet is None:
+            continue
+        sheet["movement_rate"] = MOUNTED_RATE
+    out["note_observation_only"] = (
+        f"{NOTE}全部角色的移動率改成 {MOUNTED_RATE}（原本是 0，也就是用走的）。")
+    return out
+
+
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, data in (
@@ -103,6 +126,7 @@ def main() -> None:
         ("quest-sites-edge.json", party_on_edge(json.loads(SITES_IN.read_text()))),
         ("quest-sites-final.json", final_one_enemy(json.loads(SITES_IN.read_text()))),
         ("monsters-weak.json", weak_monster(json.loads(MONSTERS_IN.read_text()))),
+        ("roster-mounted.json", mounted_roster(json.loads(ROSTER_IN.read_text()))),
     ):
         path = OUT_DIR / name
         path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n",

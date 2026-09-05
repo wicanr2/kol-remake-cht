@@ -170,3 +170,71 @@ func TestOnTimePartFiresOnlyWhenThePartChanges(t *testing.T) {
 		t.Fatalf("換一次時段該擲一次，卻擲了 %d 次", calls)
 	}
 }
+
+// 遭遇那一頁：問句用是／否，答完由呼叫端決定下一步；只等一個鍵那一頁換成
+// 空白鍵那一格，按下去就收掉（RE-112）。
+func TestRideAwayPromptIcons(t *testing.T) {
+	data := testData(t)
+	s := &Screen{Travel: New(data, testGrid(t, nil), 20, 20)}
+	sess := NewSession(s)
+	sess.SetPrompt(&Prompt{Kind: PromptRideAway,
+		Lines: []string{"An extremely pungent"}, Ask: "Attempt to ride away?"})
+	want := []int{IconYes + 3, IconNo + 3}
+	if len(s.Icons) != 2 || s.Icons[0] != want[0] || s.Icons[1] != want[1] {
+		t.Fatalf("圖示列是 %v，應為 %v", s.Icons, want)
+	}
+	answers := []bool{}
+	sess.OnPromptAnswer = func(yes bool) { answers = append(answers, yes) }
+	sess.Accept()
+	if len(answers) != 1 || !answers[0] {
+		t.Fatalf("白框停在 YES，該答是，得到 %v", answers)
+	}
+	if sess.Prompt != nil {
+		t.Fatal("答完該收掉那一頁")
+	}
+}
+
+// 回呼在答完之後換上下一頁時，那一頁不該被跟著收掉。
+func TestPromptAnswerCanChainNextPage(t *testing.T) {
+	data := testData(t)
+	s := &Screen{Travel: New(data, testGrid(t, nil), 20, 20)}
+	sess := NewSession(s)
+	sess.SetPrompt(&Prompt{Kind: PromptRideAway, Ask: "Attempt to ride away?"})
+	sess.OnPromptAnswer = func(yes bool) {
+		if yes {
+			sess.SetPrompt(&Prompt{Kind: PromptNotice,
+				Lines: []string{"You cannot ride away."}})
+		}
+	}
+	sess.Accept()
+	if sess.Prompt == nil || sess.Prompt.Kind != PromptNotice {
+		t.Fatalf("接上來那一頁不見了：%+v", sess.Prompt)
+	}
+	if len(s.Icons) != 1 || s.Icons[0] != IconSpacebar+3 {
+		t.Fatalf("圖示列是 %v，應為只有空白鍵那一格", s.Icons)
+	}
+	// 只等一個鍵：按下去收掉，並且回呼收到 false。
+	got := []bool{}
+	sess.OnPromptAnswer = func(yes bool) { got = append(got, yes) }
+	sess.Accept()
+	if sess.Prompt != nil {
+		t.Fatalf("那一頁該收掉了：%+v", sess.Prompt)
+	}
+	if len(got) != 1 || got[0] {
+		t.Fatalf("收掉時該傳 false，得到 %v", got)
+	}
+}
+
+// 那一頁蓋著地圖時方向鍵沒有作用（原版等的是 `sub_144EF`）。
+func TestPromptBlocksWalking(t *testing.T) {
+	data := testData(t)
+	s := &Screen{Travel: New(data, testGrid(t, nil), 20, 20)}
+	sess := NewSession(s)
+	sess.SetPrompt(&Prompt{Kind: PromptRideAway, Ask: "Attempt to ride away?"})
+	if sess.Walk(1, 0) {
+		t.Fatal("那一頁蓋著地圖時不該走得動")
+	}
+	if s.Travel.X != 20 || s.Travel.Y != 20 {
+		t.Fatalf("座標動到 (%d,%d)", s.Travel.X, s.Travel.Y)
+	}
+}

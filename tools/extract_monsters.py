@@ -31,6 +31,7 @@ import zipfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from extract_town_buildings import good  # noqa: E402
+from extract_town_text import render, slot_values  # noqa: E402
 from inventory_image_archives import EXPECTED_ZIP_SHA256  # noqa: E402
 from probe_town_data import lzw_decode, payloads, read_volumes  # noqa: E402
 
@@ -58,6 +59,11 @@ STAT_OFFSETS = {"strength": 0x11, "quickness": 0x12, "foresight": 0x13,
 # 得骰面。打贏之後每一隻怪擲「骰數 ＋ 1」次，總額除以隊伍人數。
 GOLD_OFFSET = 0x0F
 GOLD_DICE = (2, 3, 5, 7, 9, 11, 19, 99)
+# 記錄末端那四格是**遇到這一隻時的敘述**（RE-112）：與城鎮對話同一種文字格
+# （一格 16 byte，第一個 byte 是字數，字元每 5 個 bit 一個），走 `sub_1B94F`
+# 的 mode 0（不逐字轉大寫）。原版在問「要不要騎走」之前把這四行印在
+# (104,65) 起、行距 8 的那個框裡（`sub_2A46E`）。
+ENCOUNTER_OFFSET, ENCOUNTER_SLOTS = 0x1C0, 4
 SKILL_OFFSET = 0x17
 WEAPON_OFFSET = 0x20
 ARMOUR_OFFSETS = (0x30, 0x40, 0x50)
@@ -81,6 +87,21 @@ def item(record: bytes, offset: int) -> dict | None:
         return None
     out = good(block, 0)
     out["offset"] = offset
+    return out
+
+
+def encounter_lines(record: bytes) -> list[str]:
+    """記錄末端那四格的敘述（RE-112）。字數超出一格上限就是模型錯了，直接失敗。"""
+    out = []
+    for k in range(ENCOUNTER_SLOTS):
+        offset = ENCOUNTER_OFFSET + k * 16
+        count = record[offset]
+        if count > 24:
+            raise SystemExit(f"敘述第 {k} 格的字數 {count} 超出 24")
+        text, unknown = render(slot_values(record, offset, count))
+        if unknown:
+            raise SystemExit(f"敘述第 {k} 格有未定的跳脫序列 {unknown}")
+        out.append(text.rstrip())
     return out
 
 
@@ -126,6 +147,7 @@ def main() -> int:
             "season_mask": season,
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
             **{name: rec[off] for name, off in STAT_OFFSETS.items()},
+            "encounter": encounter_lines(rec),
             "flee_at": rec[FLEE_AT_OFFSET],
             "flee_recover": rec[FLEE_RECOVER_OFFSET],
             "gold": {
@@ -159,18 +181,22 @@ def main() -> int:
                            "table_payload": TABLE_PAYLOAD,
                            "monster_payloads": [FIRST_MONSTER_PAYLOAD,
                                                 FIRST_MONSTER_PAYLOAD + MONSTER_COUNT - 1]},
-        "evidence": "RE-078",
+        "evidence": "RE-078／RE-112",
         "rights": {
             "classification": "private-repo 可保存；不得公開散布",
-            "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。",
+            "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。"
+                    "`encounter` 那四行是原版的敘述文字，與城鎮對話同一類。",
         },
         "layout": {
             "chance": "payload4[季節 × 8 + 地形]；夜裡（天候第 5 組）再加 0x20；"
                       "程式除以 2 之後才當百分比",
             "terrain_mask": f"payload4[0x{TERRAIN_MASKS:X} + 怪物]",
             "season_mask": f"payload4[0x{SEASON_MASKS:X} + 怪物]",
-            "monster_record": "payload 5 + 怪物：第 0 byte 是名稱長度，名稱接在後面；"
-                              "其餘欄位要等戰鬥解出來才寫",
+            "monster_record": "payload 5 + 怪物，一筆 512 byte：第 0 byte 是名稱長度，"
+                              "名稱接在後面；屬性從 +0x11 起（RE-080）",
+            "encounter": f"記錄 +0x{ENCOUNTER_OFFSET:X} 起 {ENCOUNTER_SLOTS} 格文字，"
+                         "一格 16 byte（字數 ＋ 每 5 個 bit 一個字元），"
+                         "遇到這一隻時印在騎走那一頁上（RE-112）",
         },
         "names": {"terrain": list(TERRAIN_NAMES), "season": list(SEASON_NAMES),
                   "month_season": list(MONTH_SEASON)},

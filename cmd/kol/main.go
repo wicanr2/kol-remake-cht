@@ -759,6 +759,11 @@ func applyWorldToken(s *world.Session, token string) error {
 		s.EndCamping()
 		return nil
 	}
+	// 騎走成功／失敗那一句同樣只等一個鍵（`0x2A6EF` 與 `0x2A70A` 的 `sub_144C3`）。
+	if s.Prompt != nil && s.Prompt.Kind == world.PromptNotice && token != "TICK" {
+		s.DismissNotice()
+		return nil
+	}
 	switch token {
 	case "L":
 		s.Walk(-1, 0)
@@ -980,8 +985,15 @@ func (g *game) snapshot() map[string]any {
 			if g.worldSession.Camping {
 				w["camping"] = true
 			}
-			if g.worldSession.Quest != nil {
-				w["quest_prompt"] = true
+			if p := g.worldSession.Prompt; p != nil {
+				switch p.Kind {
+				case world.PromptQuest:
+					w["quest_prompt"] = true
+				case world.PromptRideAway:
+					w["ride_prompt"] = true
+				case world.PromptNotice:
+					w["notice"] = true
+				}
 			}
 		}
 		row["world"] = w
@@ -2739,7 +2751,7 @@ func main() {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
 			}
-			worldSessionState.OnArrive = func(x, y int) *world.QuestPrompt {
+			worldSessionState.OnArrive = func(x, y int) *world.Prompt {
 				site := sites.At(x, y)
 				if site == nil || !partyHasQuest(playSession.Party, site) {
 					return nil
@@ -2750,9 +2762,77 @@ func main() {
 						ask = line
 					}
 				}
-				return &world.QuestPrompt{Lines: site.Narrative, Ask: ask}
+				return &world.Prompt{Kind: world.PromptQuest,
+					Lines: site.Narrative, Ask: ask}
 			}
-			worldSessionState.OnQuestAnswer = func(yes bool) {
+			// 騎走那一段的狀態（RE-112）：`ride` 是還沒開打的那一次遭遇，
+			// `rideNext` 記著訊息那一頁收掉之後要不要接著開打。
+			var ride *battle.Ambush
+			var rideNext bool
+			startAmbush := func(a *battle.Ambush) {
+				ranks := make([]int, 0, len(playSession.Party))
+				for _, m := range playSession.Party {
+					if m.Sheet != nil {
+						ranks = append(ranks, m.Sheet.EarnedRank())
+					}
+				}
+				party := len(playSession.Party)
+				a.RollForce(battle.PartyRank(ranks, party), party,
+					worldSessionState.Rand)
+				atlas, err := loadBattlePNG(*battleTiles)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					return
+				}
+				members := make([]battle.Member, 0, len(playSession.Party))
+				for _, m := range playSession.Party {
+					members = append(members, battleMember(m))
+				}
+				mon := monsters.At(a.Monster)
+				st := battle.NewAmbush(a, mon, members,
+					battle.Generate(&lcg{state: uint32(*seed)}))
+				if st == nil {
+					return
+				}
+				st.Rand = &lcg{state: uint32(*seed)}
+				st.SpoilItems = spoilItems
+				quest.tiles = ui.NewBattleTiles(atlas)
+				quest.state = st
+				quest.bank = bank
+				quest.trans = trans
+				quest.english = *lang == "en"
+				quest.lines = ambushLines(bank, trans, a, mon.Name, *lang == "en")
+			}
+			// notice 是只等一個鍵那一頁（`sub_144C3`）：騎走成功或失敗的那一句。
+			notice := func(record int) {
+				worldSessionState.SetPrompt(&world.Prompt{
+					Kind:  world.PromptNotice,
+					Lines: nonEmptyLines(bank.Lines(town.BankUI, record))})
+			}
+			worldSessionState.OnPromptAnswer = func(yes bool) {
+				// 遭遇那一頁：問要不要騎走，或是騎走結果那一句收掉了。
+				if ride != nil {
+					a := ride
+					if rideNext {
+						ride, rideNext = nil, false
+						startAmbush(a)
+						return
+					}
+					if !yes {
+						ride = nil
+						startAmbush(a)
+						return
+					}
+					if battle.RideAway(a.Monster, worldScreenState.Movement,
+						worldSessionState.Rand) {
+						ride = nil
+						notice(battle.RodeAwayRecord)
+						return
+					}
+					rideNext = true
+					notice(battle.StoodGroundRec)
+					return
+				}
 				if !yes {
 					return
 				}
@@ -2834,32 +2914,25 @@ func main() {
 				if a == nil || a.Monster == battle.AmbushQuest {
 					return
 				}
-				a.RollForce(rank, party, rng)
-				// 有坐騎才問要不要騎走；這一版還沒有那個問句，先照「答否」走
-				// （SPEC-011 第 5 節列為已解但未接 UI）。
-				atlas, err := loadBattlePNG(*battleTiles)
-				if err != nil {
-					fmt.Fprintln(os.Stderr, err)
+				// 全隊都有坐騎才問要不要騎走（`0x2A667`）：那一頁印那一隻記錄
+				// 末端的四行敘述（RE-112）加記錄 0xE3 的問句。有人用走的就整段
+				// 跳過，連那四行都看不到——原版就是這樣。
+				if battle.CanRideAway(worldScreenState.Movement) {
+					ride, rideNext = a, false
+					ask := ""
+					for _, line := range bank.Lines(town.BankUI,
+						battle.RideAwayRecord) {
+						if line != "" {
+							ask = line
+						}
+					}
+					worldSessionState.SetPrompt(&world.Prompt{
+						Kind:  world.PromptRideAway,
+						Lines: monsters.At(a.Monster).Encounter,
+						Ask:   ask})
 					return
 				}
-				members := make([]battle.Member, 0, len(playSession.Party))
-				for _, m := range playSession.Party {
-					members = append(members, battleMember(m))
-				}
-				mon := monsters.At(a.Monster)
-				st := battle.NewAmbush(a, mon, members,
-					battle.Generate(&lcg{state: uint32(*seed)}))
-				if st == nil {
-					return
-				}
-				st.Rand = &lcg{state: uint32(*seed)}
-				st.SpoilItems = spoilItems
-				quest.tiles = ui.NewBattleTiles(atlas)
-				quest.state = st
-				quest.bank = bank
-				quest.trans = trans
-				quest.english = *lang == "en"
-				quest.lines = ambushLines(bank, trans, a, mon.Name, *lang == "en")
+				startAmbush(a)
 			}
 		}
 		// 野外的時刻：隊伍最慢的那個移動率決定每步扣多少，換日補營養（RE-077）。

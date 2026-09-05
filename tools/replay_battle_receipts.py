@@ -35,9 +35,11 @@ def replay(name: str) -> bool:
     if not spec.exists():
         print(f"{name}：沒有 replay.spec，無法重跑")
         return False
-    line = [l for l in spec.read_text(encoding="utf-8").splitlines()
-            if l.strip() and not l.startswith("#")][0]
-    out_dir = pathlib.Path(line.split("|", 1)[0]).parent
+    lines = [l for l in spec.read_text(encoding="utf-8").splitlines()
+             if l.strip() and not l.startswith("#")]
+    # 一份規格檔可以有好幾行（同一段路的不同分支），畫格用 `spec_line` 指定
+    # 自己是哪一行跑出來的；沒寫就是第 0 行。
+    out_dirs = [pathlib.Path(l.split("|", 1)[0]).parent for l in lines]
     try:
         subprocess.run(["tools/run_kol_shots.sh", str(spec)], check=True,
                        stdout=subprocess.DEVNULL)
@@ -46,7 +48,7 @@ def replay(name: str) -> bool:
         return False
     ok = True
     for frame in receipt["frames"]:
-        got = out_dir / f"step-{frame['step']:03d}.png"
+        got = out_dirs[frame.get("spec_line", 0)] / f"step-{frame['step']:03d}.png"
         if not got.exists():
             print(f"失敗：{name} 第 {frame['step']} 步沒有截到圖")
             ok = False

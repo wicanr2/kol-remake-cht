@@ -38,8 +38,8 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	if err := drawWorldMap(dst, sprites, s, sess); err != nil {
 		return err
 	}
-	if sess != nil && sess.Quest != nil {
-		drawQuestPrompt(dst, large, sess.Quest)
+	if sess != nil && sess.Prompt != nil {
+		drawPrompt(dst, large, sess.Prompt)
 	}
 	drawWeather(dst, s)
 	drawWorldLabel(dst, small, s, camping(sess))
@@ -57,15 +57,15 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	return nil
 }
 
-// drawQuestPrompt 畫任務地點蓋在地圖上的那一頁（RE-079）：
-// 框是 `sub_2A437` 的 (96,55)–(296,152)，敘述八列從 (104,65) 起、行距 8，
-// 最後空一列再印問句。
-func drawQuestPrompt(dst *ebiten.Image, f *font.Font, q *world.QuestPrompt) {
-	b := world.QuestBox
+// drawPrompt 畫蓋在地圖上的那一頁（RE-079／RE-112）：框是 `sub_2A437` 的
+// (96,55)–(296,152)，敘述從 (104,65) 起、行距 8，最後空一列再印問句
+// （記錄 0xE1 與 0xE3 開頭都自帶一個 `@`）。任務地點是八列，遭遇是四列。
+func drawPrompt(dst *ebiten.Image, f *font.Font, q *world.Prompt) {
+	b := world.PromptBox
 	shadow(dst, b.X, b.Y, b.Width, b.Height)
 	fill(dst, b.X, b.Y, b.Width, b.Height, town.ColourBoxEdge)
 	fill(dst, b.X+1, b.Y+1, b.Width-2, b.Height-2, town.ColourBoxFill)
-	t := world.QuestText
+	t := world.PromptText
 	for i, line := range q.Lines {
 		f.Draw(dst, t.X, t.Y+i*t.Step, line,
 			town.ColourText[0], town.ColourText[1], town.ColourText[2])

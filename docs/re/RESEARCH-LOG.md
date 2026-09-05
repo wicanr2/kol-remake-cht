@@ -5131,23 +5131,28 @@ RE-078 是靠讀碼推出來的（`強推論`），實作之前逐條再對一�
 remake 的 `GoldReward` 因此改吃 `Actor.Level`。先前實跑量到的 25 與 43 枚是 1 級怪，
 一輪，數字不受影響。
 
-### 騎走與任務怪那兩條岔路（`已證實`）
+### 騎走與那另一條岔路（`已證實`）
 
 ```
-var_6 = (rand(3) − 1) × 2                    ; 0、2、4：那一隻的圖要畫哪一張
+var_6 = (rand(3) − 1) × 2                    ; 0、2、4：要印哪一段敘述
 if word_2FA2C != 20:                          ; 20 表示有人沒坐騎，直接開打
-    畫那一隻，印記錄 0xE3「Attempt to ride away?」
+    sub_2A46E(怪物, var_6)                    ; 框 ＋ 四行敘述（RE-112）
+    印記錄 0xE3「Attempt to ride away?」
     答否 → 往下打
-    答是 → 怪物是任務怪（0xFF）或 rand(100) > 5 × 移動率 就脫身（0xE4），
+    答是 → 怪物是 0xFF 或 rand(100) > 5 × 移動率 就脫身（0xE4），
            否則失敗（0xE5）
-if 怪物 == 0xFF:                              ; 任務怪那一條
-    畫圖（var_6 + 1）；var_6 == 4 就直接結束
-    否則印 0xE6，答應之後把六名角色的 [+0x1B] 與 [+0x9F] 清零
+if 怪物 == 0xFF:                              ; 治療的遭遇，不是任務怪
+    sub_2A46E(0xFF, var_6 + 1)；var_6 == 4 就直接結束
+    否則印 0xE6「Will you be healed?」，答應之後把六名角色的
+    [+0x1B] 與 [+0x9F] 清零
     return
 ```
 
-角色記錄 `+0x1B` 是開場帶的傷（RE-080 用它填 `Wounds`），`+0x9F` 未定。清零的
-時機與語意還沒解。
+角色記錄 `+0x1B` 是開場帶的傷（RE-080 用它填 `Wounds`），`+0x9F` 未定。
+
+> **這一段當初把 `sub_2A46E`／`sub_2A437` 標成「畫那一隻與收掉」，把 0xFF 那一條
+> 叫成「任務怪」。兩個都錯**：前者畫的是框與四行敘述，後者的記錄 0xE6 是
+> 「Will you be healed?」——那是**治療的遭遇**。逐條的碼與更正見 RE-112。
 
 ### 開打前設好的其他全域
 
@@ -5165,9 +5170,9 @@ word_345DE = 0xFFFF          ; 走獎勵那一條（RE-096）
 
 ### 還沒解的
 
-`sub_2A975`（開打前對怪物編號做的事）、`sub_2A46E`／`sub_2A437`（畫那一隻與收掉）、
-角色記錄 `+0x9F`，以及戰場地形圖的來源（`word_37CF6` 已由 RE-098 確定是站位組的
-索引，不是地圖編號）。
+`sub_2A975`（開打前對怪物編號做的事）、角色記錄 `+0x9F`，以及戰場地形圖的來源
+（`word_37CF6` 已由 RE-098 確定是站位組的索引，不是地圖編號）。
+`sub_2A46E`／`sub_2A437` 已由 RE-112 解出。
 
 ## RE-098：戰場站位有兩條路，隨機遭遇走的是固定表
 
@@ -6440,3 +6445,96 @@ RE-107 只讀到門檻那幾行（旗標要是 0、最終任務另外要求已�
 
 `sub_16239`（405 條）畫的版面——它是資料頁那一層的繪製，三個地方都呼叫
 （`0x15ADD`、`0x166D5`、`0x1681C`），一覽畫面是先畫它再蓋徽章。
+
+## RE-112：遭遇的四行敘述與騎走那一問
+
+輸入與工具同 RE-070。這一輪讀的是既有的整份反組譯
+`workplace/analysis/koltown/KOLTOWN-unpacked.EXE.asm`（`sub_2A437`、`sub_2A46E`、
+`sub_2A4E5:0x2A667`…`0x2A70F`、`sub_1B94F`），另外用 `tools/read_dgroup_table.py`
+確認兩個位址落在 BSS。
+
+### `sub_2A437` 畫的是任務地點那個框（`已證實`）
+
+```
+sub_1BA9D(60h, 37h, 128h, 98h, 0Fh)   ; (96,55)–(296,152)
+word_2DF14 = 0Dh                      ; 文字游標欄 13 → x = 104
+word_2DF16 = 41h                      ;           列 65 → y = 65
+```
+
+**與任務地點那一頁是同一個框**（RE-079 的 `QuestBox`／`PromptBox`），行距 8 也相同。
+`sub_2A4E5` 在三個地方呼叫它：印四行敘述之前、答完騎走之後（清掉重印結果那一句），
+以及 `sub_2B0FF` 印戰利品清單之前。
+
+### `sub_2A46E` 印的是四行敘述，不是怪物圖（`已證實`）
+
+```
+sub_2A46E(arg_0 = 怪物編號, arg_2 = 敘述索引)
+    sub_2A437()
+    base = 0BB26h
+    if arg_0 == 0FFh: base = 2350h + (arg_2 << 6)
+    for i = 0; i < 40h; i += 10h:
+        sub_1B94F(base + i, 0)        ; 5-bit 打包文字 → 緩衝區 0x2D50
+        word_2DF14 = 0Dh
+        sub_1A8FD(0, 2D50h)
+        word_2DF16 += 8
+```
+
+一格 16 byte、四格共 64 byte，走的是**城鎮對話那一種文字格**（`sub_1B94F` 的
+mode 0，RE-064）：第一個 byte 是字數，字元從下一個 byte 起每 5 個 bit 一個。
+
+`0xBB26` 就是**怪物記錄的 +0x1C0**：一筆記錄 512 byte，`sub_2A4E5:0x2A64D` 把它讀進
+DGROUP `0xB966`（RE-078 已經記了名稱在 `0xB967`），所以 `0xB966 + 0x1C0 = 0xBB26`
+正是記錄末端那 64 byte。
+
+解出來是**遇到這一隻時印的四行敘述**。三十二隻全部解得出通順的英文，例如：
+
+| 怪物 | 敘述 |
+|---|---|
+| MINOTAUR | `An extremely pungent / smell assaults your / nose.  Suddenly, you / hear a strange noise.` |
+| SKELETON | `You approach the scene / of an ancient battle. / Bodies of the fallen / lie rotting in the sun.` |
+| BINDERAK | `You notice the spiders / are awfully large in / this area.  Suddenly, a / form bolts towards you.` |
+
+`tools/extract_monsters.py` 因此多一個 `encounter` 欄；正對照是**其餘每一個欄位
+逐 byte 不變**，只多這一欄。
+
+### 只有問得出「要不要騎走」時才看得到（`已證實`）
+
+`0x2A667` 的閘門是 `word_2FA2C == 20` 就整段跳過——20 是「有人用走的」
+（移動率 0 代入的值，RE-077）。**有人沒坐騎的隊伍連那四行敘述都看不到**，
+畫面直接跳到滿版怪物圖。原版名冊裡的角色移動率全是 0，所以正常玩法目前到不了
+這一頁（買坐騎的馬廄商品表還沒解）。
+
+問句與兩個結果都是 KOLDATA 記錄：
+
+| 記錄 | 文字 |
+|---|---|
+| 0xE3 | `@~H0DAttempt to ride away?`（開頭的 `@` 就是敘述與問句之間那一列空白）|
+| 0xE4 | `~H0DRiding skillfully, you@leave the unknown@behind!` |
+| 0xE5 | `You cannot ride away.` |
+
+兩個結果都接 `sub_144C3`（等一個鍵），失敗那一句按完才真的開打。擲的是
+`rand(100) > 5 × word_2FA2C`（`0x2A6BF`）。
+
+### 0xFF 那一條是治療，不是任務怪（`已證實`）
+
+記錄 0xE6 是 **`~H0DWill you be healed?`**。低位階隊伍才擲得到這一條
+（`sub_2A337` 回的平均位階 < 0x0B，而且 `rand(100) < [0x133E + 位階 − 1]`），
+答應之後把六名角色的 `+0x1B`（開場帶的傷）與 `+0x9F` 清零。敘述走的是同一支
+`sub_2A46E`，但基底換成 `0x2350 + (敘述索引 << 6)`，索引用的是 `var_6 + 1`
+（1、3、5）；`var_6 == 4` 那一次只印敘述、不問。
+
+### remake 的落點
+
+`internal/world` 的 `Prompt`（三種 `PromptKind`：任務地點、騎走、只等一個鍵）、
+`Session.SetPrompt`／`DismissNotice`，`internal/battle` 的 `Monster.Encounter`，
+`cmd/kol` 的 `OnTimePart`／`OnPromptAnswer`。實跑收據
+`docs/verification/battle-rideaway/`（觀察：名冊的移動率是換過的）。
+
+同一輪順手修掉一個一直都在的差異：**那一頁蓋著地圖時方向鍵還走得動**。原版那兩處
+等的是 `sub_144EF`／`sub_144C3`，答完之前收不進任何輸入，所以 `Session.Walk`
+現在也在 `Prompt != nil` 時直接回 false。
+
+### 還沒解的
+
+DGROUP `0x2350` 那六段敘述從哪裡載入、角色記錄 `+0x9F`，以及治療那一條的整段
+（記錄 0xE6 的問答與清傷還沒接 UI）。

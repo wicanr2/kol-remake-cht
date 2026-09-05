@@ -56,13 +56,14 @@ type Session struct {
 	// （`sub_297F2:0x2989D`…`0x298E2`）。
 	Camping bool
 
-	// Quest 是站上任務地點時蓋在地圖上的提示；沒有就是 nil。
-	Quest *QuestPrompt
+	// Prompt 是蓋在地圖上的那一頁（任務地點的敘述、遭遇時的敘述、或只等一個鍵的
+	// 訊息）；沒有就是 nil。
+	Prompt *Prompt
 	// OnArrive 在世界座標真的變了之後被呼叫，回傳要顯示的任務提示；
 	// 沒有東西發生就回 nil。原版的比對迴圈也在同一個位置（`sub_29004:0x29450`）。
-	OnArrive func(x, y int) *QuestPrompt
-	// OnQuestAnswer 是玩家對「Will you partake?」的回答。
-	OnQuestAnswer func(yes bool)
+	OnArrive func(x, y int) *Prompt
+	// OnPromptAnswer 是玩家對那一頁的回答。只等一個鍵的那一種收掉時傳 false。
+	OnPromptAnswer func(yes bool)
 	// OnTimePart 在時段變換、天候重擲完之後被呼叫（`sub_29A3E`）。原版就是在這裡
 	// 擲一次野外遭遇；走進某一格不會擲，所以一天最多四次（RE-078）。
 	OnTimePart func()
@@ -142,13 +143,14 @@ func (s *Session) leaveSlot() {
 	}
 }
 
-// Walk 走一步。站在入口提示裡時方向鍵沒有作用。
+// Walk 走一步。站在入口提示裡、或有一頁蓋在地圖上時，方向鍵都沒有作用——
+// 原版那兩處等的是 `sub_144EF`／`sub_144C3`，答完之前什麼都收不進去。
 //
 // 比對城鎮入口的迴圈只在**世界座標真的變了**的時候跑（`sub_29004:0x293B7`
 // 那個分支把整段跳過去）。格內的次格移動不重跑，否則站在入口那一格上時
 // 每走一次次格都會再彈一次提示。
 func (s *Session) Walk(dx, dy int) bool {
-	if s.Mode != ModeMap {
+	if s.Mode != ModeMap || s.Prompt != nil {
 		return false
 	}
 	t := s.Screen.Travel
@@ -164,7 +166,7 @@ func (s *Session) Walk(dx, dy int) bool {
 		s.Screen.SyncTerrain()
 		if s.OnArrive != nil {
 			if p := s.OnArrive(t.X, t.Y); p != nil {
-				s.SetQuest(p)
+				s.SetPrompt(p)
 			}
 		}
 	}
@@ -260,14 +262,20 @@ func (s *Session) Accept() {
 	if len(s.Screen.Icons) == 0 || s.Cursor >= len(s.Screen.Icons) {
 		return
 	}
-	// 任務提示蓋著地圖時，圖示列只有是／否，答完才回地圖。
-	if s.Quest != nil {
-		yes := s.Screen.Icons[s.Cursor]-3 == IconYes
-		if s.OnQuestAnswer != nil {
-			s.OnQuestAnswer(yes)
+	// 那一頁蓋著地圖時，圖示列只有是／否（或只等一個鍵），答完才回地圖。
+	if s.Prompt != nil {
+		if s.Prompt.Kind == PromptNotice {
+			s.DismissNotice()
+			return
 		}
-		if s.Quest != nil {
-			s.ClearQuest()
+		yes := s.Screen.Icons[s.Cursor]-3 == IconYes
+		// 回呼可能直接換上下一頁（騎走失敗那一句），那時候不要把它收掉。
+		page := s.Prompt
+		if s.OnPromptAnswer != nil {
+			s.OnPromptAnswer(yes)
+		}
+		if s.Prompt == page {
+			s.ClearPrompt()
 		}
 		return
 	}
@@ -312,35 +320,69 @@ func (s *Session) TownPicture() int {
 // 而且隊上有人帶著這個任務時，原版會把地圖視窗蓋掉，畫一個 (96,55)–(296,152) 的框
 // （`sub_2A437`），印八列敘述，再問記錄 0xEA「Will you partake?」。
 
-// QuestBox 是那個框；QuestText 是敘述第一列的左上角，行距 8。
+// PromptBox 是那個框；PromptText 是敘述第一列的左上角，行距 8。
 var (
-	QuestBox  = Box{X: 96, Y: 55, Width: 201, Height: 98}
-	QuestText = struct{ X, Y, Step int }{X: 104, Y: 65, Step: 8}
+	PromptBox  = Box{X: 96, Y: 55, Width: 201, Height: 98}
+	PromptText = struct{ X, Y, Step int }{X: 104, Y: 65, Step: 8}
 )
 
-// 是／否的圖示編號，與城鎮共用。
+// 是／否與「按空白鍵」的圖示編號，與城鎮共用。
 const (
-	IconYes = 7
-	IconNo  = 8
+	IconSpacebar = 1
+	IconYes      = 7
+	IconNo       = 8
 )
 
-// QuestPrompt 是站上任務地點時蓋在地圖上的那一頁。
-type QuestPrompt struct {
-	// Lines 是八列敘述；Ask 是最後那一句問話。
+// PromptKind 說明蓋在地圖上的那一頁是哪一種。三種都畫在同一個框裡
+// （`sub_2A437` 的 (96,55)–(296,152)），差別在圖示列與按下去之後做什麼。
+type PromptKind int
+
+const (
+	// PromptQuest 是站上任務地點的敘述加「Will you partake?」（RE-090）。
+	PromptQuest PromptKind = iota
+	// PromptRideAway 是遭遇時那一隻的四行敘述加「Attempt to ride away?」
+	// （RE-112）。全隊都有坐騎才問得出來。
+	PromptRideAway
+	// PromptNotice 只有訊息，按一個鍵就收掉（`sub_144C3`）：騎走成功或失敗
+	// 的那一句。
+	PromptNotice
+)
+
+// Prompt 是蓋在地圖上的那一頁。
+type Prompt struct {
+	Kind PromptKind
+	// Lines 是敘述；Ask 是最後那一句問話（PromptNotice 沒有）。
 	Lines []string
 	Ask   string
 }
 
-// SetQuest 把畫面切成任務地點的提示，圖示列換成是／否。
-func (s *Session) SetQuest(p *QuestPrompt) {
-	s.Quest = p
-	s.setIcons([]int{IconYes, IconNo})
+// SetPrompt 把畫面切成那一頁：問句換成是／否，只等一個鍵的換成空白鍵那一格。
+func (s *Session) SetPrompt(p *Prompt) {
+	s.Prompt = p
+	if p != nil && p.Kind == PromptNotice {
+		s.setIcons([]int{IconSpacebar})
+	} else {
+		s.setIcons([]int{IconYes, IconNo})
+	}
 	s.Cursor, s.Screen.Selected = 0, 0
 }
 
-// ClearQuest 收掉提示，圖示列回到地圖的那一組。
-func (s *Session) ClearQuest() {
-	s.Quest = nil
+// DismissNotice 是只等一個鍵那一頁上按下任何一鍵（`sub_144C3`）。
+// 收掉之後呼叫 OnPromptAnswer(false)——回答本身沒有意義，但接下來要做的事
+// （例如騎走失敗之後開打）掛在同一個回呼上。
+func (s *Session) DismissNotice() {
+	if s.Prompt == nil || s.Prompt.Kind != PromptNotice {
+		return
+	}
+	s.ClearPrompt()
+	if s.OnPromptAnswer != nil {
+		s.OnPromptAnswer(false)
+	}
+}
+
+// ClearPrompt 收掉提示，圖示列回到地圖的那一組。
+func (s *Session) ClearPrompt() {
+	s.Prompt = nil
 	s.setIcons(s.mapIcons(false))
 	s.Cursor, s.Screen.Selected = 0, 0
 }

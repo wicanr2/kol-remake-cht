@@ -45,6 +45,10 @@ type Monster struct {
 	Weapon       *Item `json:"weapon"`
 	ArmourWeight int   `json:"armour_weight"`
 	Shield       *Item `json:"shield"`
+	// Encounter 是遇到這一隻時印的四行敘述（記錄 +0x1C0 起那四格，RE-112）。
+	// 原版只在**問要不要騎走那一頁**印它——全隊都有坐騎才問得出那一句，
+	// 有人用走的就整段跳過，那四行也就看不到（`sub_2A4E5:0x2A667`）。
+	Encounter []string `json:"encounter"`
 }
 
 // Item 是一格裝備，欄位名與商店的商品記錄相同（RE-075）。

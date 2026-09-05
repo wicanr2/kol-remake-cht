@@ -1,0 +1,69 @@
+{
+  "schema": "kol-battle-rideaway-observation-v1",
+  "name": "battle-rideaway",
+  "kind": "observation",
+  "description": "遭遇時「要不要騎走」那一頁（RE-112）。全隊都有坐騎才問得出這一句（`word_2FA2C != 20`，`sub_2A4E5:0x2A667`）：先在任務地點那個框裡印**那一隻記錄末端的四行敘述**，空一列再印記錄 0xE3「Attempt to ride away?」。答否就往下打；答是就擲 `rand(100) > 5 × 隊伍移動率`，成功印記錄 0xE4 回野外、失敗印記錄 0xE5 再開打，兩句都只等一個鍵（`sub_144C3`）。**但輸入被換過**：名冊裡的角色移動率全是 0（用走的），而馬廄的商品表還沒解出來，遊戲裡買不到坐騎，所以這一問在正常路徑上到不了。",
+  "not_claimed": [
+    {
+      "name": "與原版的畫面一致",
+      "reason": "原版沒有取到對應的畫格。框與文字位置沿用任務地點那一頁（`sub_2A437` 的 (96,55)–(296,152)、(104,65) 起行距 8），那一組同樣沒有對拍。"
+    },
+    {
+      "name": "正常玩法走得到這一問",
+      "reason": "要全隊都有坐騎才問得出來，而買坐騎的馬廄商品表還沒解（WORKLIST）。這一組把名冊的移動率改成 12。"
+    },
+    {
+      "name": "怪物編號 0xFF 那一條",
+      "reason": "低位階隊伍有機會遇到的另一種遭遇（記錄 0xE6「Will you be healed?」）走的是另一個敘述緩衝區（DGROUP 0x2350），來源還沒解，這一版擲到就當作沒遇到。"
+    }
+  ],
+  "command": "tools/run_kol_shots.sh docs/verification/battle-rideaway/replay.spec（換過的名冊先用 tools/make_observation_inputs.py 重生）",
+  "substituted_inputs": [
+    {
+      "flag": "-roster",
+      "path": "workplace/observe/roster-mounted.json",
+      "change": "全部角色的移動率從 0 改成 12，其餘欄位不動。",
+      "generated_by": "tools/make_observation_inputs.py",
+      "base": "assets/original-derived-data/character-roster.json"
+    }
+  ],
+  "seed": [
+    141421,
+    1
+  ],
+  "size": [
+    320,
+    200
+  ],
+  "frames": [
+    {
+      "file": "ask.png",
+      "spec_line": 0,
+      "step": 88,
+      "shows": "那一隻記錄末端的四行敘述（BINDERAK：`You notice the spiders are awfully large in this area.  Suddenly, a form bolts towards you.`）＋空一列＋ATTEMPT TO RIDE AWAY?，圖示列換成是／否。",
+      "sha256": "c19957d77358695a4df2db60bc32182c08364a5621eaafcc15833d88c696f237"
+    },
+    {
+      "file": "stood-ground.png",
+      "spec_line": 0,
+      "step": 89,
+      "shows": "答是但沒跑掉：記錄 0xE5「You cannot ride away.」，圖示列剩空白鍵那一格。",
+      "sha256": "42e0ae497802619348ca0928852376f7b3daa8a0cbf0a05a3dfd5aabf364253f"
+    },
+    {
+      "file": "ambushed.png",
+      "spec_line": 0,
+      "step": 90,
+      "shows": "按一個鍵之後才真的開打：滿版的 BINDERAK 圖與 YOU HAVE BEEN AMBUSHED BY 1, LEVEL 4 BINDERAK!",
+      "sha256": "37eb05204970fb3d95fbed59ac4f64b85556d58575d958e876739efd39344105"
+    },
+    {
+      "file": "rode-away.png",
+      "spec_line": 1,
+      "step": 33,
+      "shows": "另一顆種子下同一問答是就跑掉了：記錄 0xE4「Riding skillfully, you leave the unknown behind!」，按一個鍵就回野外，不進戰場。",
+      "sha256": "6fc9e91bb46351c99d69c71f223c681db934a5c97c9c57f8e6eccbd541596042"
+    }
+  ],
+  "rights": "remake 自己畫的畫面；字模與圖來自已通過權利審查的原作衍生 PNG。"
+}
