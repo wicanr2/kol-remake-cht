@@ -91,7 +91,7 @@ func (s *Session) refreshSpellEdit() {
 	s.Inside.List = nil
 	page := s.spellEditPage()
 	s.Inside.SpellEdit = page
-	s.Inside.Detail = s.spellCostLines(page)
+	s.Inside.Detail = page.Costs
 	if page.Menu != nil {
 		s.setInsideIcons([]int{IconYes, IconUTurn})
 		return

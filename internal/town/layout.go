@@ -241,6 +241,11 @@ var SheetLayout = struct {
 // 角色資料頁的顏色：抬頭框是白的，其餘的框與長條底是青色，長條本身是亮紅。
 var (
 	ColourSheetHeader = [3]uint8{255, 255, 255}
+	// 法術編輯器那一頁的三種顏色（RE-128）。原版存的是 EGA 索引 0x0F 與 3，
+	// 但這一頁的底圖換過調色盤——量原版畫面得到的是黑與亮紅。
+	ColourSpellField  = [3]uint8{0, 0, 0}
+	ColourSpellCursor = [3]uint8{255, 85, 85}
+	ColourSpellRule   = [3]uint8{0, 0, 0}
 	ColourSheetFrame  = [3]uint8{0, 170, 170}
 	ColourSheetBar    = [3]uint8{255, 85, 85}
 )

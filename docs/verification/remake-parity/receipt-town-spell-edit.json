@@ -1,0 +1,85 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-spell-edit",
+  "description": "法術編輯器那一頁（`sub_178E0` ＋ `sub_18350`，RE-128）。SCROLL 選單第 2 列「Modify a spell」挑一筆法術之後的整頁畫面：底圖是 KOLPICS 那張整頁圖（`sub_1103F(0x1D)` 與 `sub_1103F(0)` 走同一條分支），標題與兩行造價的座標寫在 KOLDATA 記錄 0x4D 裡，六條分隔線來自 `sub_1874E`，十三個欄位的字與顏色來自 `sub_18350`。原版與 remake 走的是同一條玩家路徑：選名冊第 14 名（ddduhh，3000 金幣、智力 105），走過布瑞托到巫師塔，加入 White Pearl Order（500），買下第一筆法術 Daynalon（340），再按一次 SCROLL 進編輯器。畫面上驗到的三件事：欄位 0 是**法術名稱**而且置中（游標停在上面，所以是紅字）、Body 這個屬性不吃持續回合所以 DUR 那一欄印 `----`、兩行造價都是 340——巫師塔那一棟能選的類（Human／Elven）在成本表上都是零，所以這一張分不出兩行的標籤是不是印反了，那一項由 `0x18173` 與 `0x181E5` 的比較對象證實。",
+  "pair_count": 2,
+  "pass_count": 2,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "法術編輯器：整頁",
+      "remake": "docs/verification/remake-parity/shots/town-spell-edit/editor.png",
+      "original": "docs/verification/character-ui/town-spell-edit-run1/frames/frame-305.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            14,
+            14
+          ],
+          "differing_pixels": 39
+        },
+        {
+          "name": "底圖第 145 列的網點",
+          "reason": "抽出來的 KOLPICS 底圖在這一列有交錯網點，原版執行時那一列是純白。差異只有這一列、只有網點的其中一相，與這一頁畫的東西無關——是底圖抽取待查的一項。",
+          "rect": [
+            55,
+            145,
+            210,
+            1
+          ],
+          "differing_pixels": 50
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "十三個欄位與兩行造價",
+      "remake": "docs/verification/remake-parity/shots/town-spell-edit/editor.png",
+      "original": "docs/verification/character-ui/town-spell-edit-run1/frames/frame-305.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 40,
+        "y": 36,
+        "width": 240,
+        "height": 108
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "同上。",
+          "rect": [
+            158,
+            100,
+            14,
+            14
+          ],
+          "differing_pixels": 39
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

@@ -24,6 +24,14 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		return err
 	}
 
+	// 法術編輯器蓋掉整個畫面，連隊員格都不留；底下那排圖示照畫（RE-128）。
+	if in.SpellEdit != nil {
+		if err := drawSpellEdit(dst, sprites, large, in.SpellEdit); err != nil {
+			return err
+		}
+		return drawIconBar(dst, sprites, in)
+	}
+
 	// MIRROR 的角色資料頁蓋掉肖像、標題框與對話框那一整塊。
 	if in.Sheet != nil {
 		// 物品與隊伍那兩頁是**換頁**，不是蓋在資料頁上（RE-126／RE-127）：
@@ -90,6 +98,11 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		}
 	}
 
+	return drawIconBar(dst, sprites, in)
+}
+
+// drawIconBar 畫底下那排圖示，白框標出選中的那一格。
+func drawIconBar(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 	b := town.IconBar
 	for i, index := range in.Icons {
 		x := b.X + i*b.Step

@@ -4,8 +4,9 @@ import "fmt"
 
 // 法術編輯器那一頁的版面（`sub_18350` 邊算邊畫，RE-128）。x 是 byte 欄、y 是像素。
 const (
-	// SpellEditPicture 是背景圖（`sub_1874E`：`sub_1103F(0x1D)`）。
-	SpellEditPicture = 0x1D
+	// SpellEditPicture 是背景圖。`sub_1874E` 呼叫的是 `sub_1103F(0x1D)`，而
+	// `0x1D` 與 `0` 走同一條分支——整張 320×200 的底圖（`0x11048`）。
+	SpellEditPicture = 1
 	// SpellTitleRecord 是標題那一筆，自己帶座標：CLASS／SUBCLASS／STAT／
 	// RANGE DUR DMG 與兩行造價。
 	SpellTitleRecord = 0x4D
@@ -19,6 +20,9 @@ const (
 	// SpellNoDurationRecord 是 `----`：屬性不吃持續時那一欄印的東西。
 	SpellNoDurationRecord = 0x52
 )
+
+// SpellEditArchive 是那張底圖的來源。
+const SpellEditArchive = "KOLPICS"
 
 // 十三個欄位畫在哪。名字那一欄是置中的，所以只記那一列的 y。
 const (
@@ -62,6 +66,8 @@ type SpellEditPage struct {
 	// 而扣款與「不夠」那兩句都照真正的資源走。remake 照原樣畫。
 	Adventure int `json:"adventure"`
 	Gold      int `json:"gold"`
+	// Costs 是最後兩列的數字。
+	Costs []Segment `json:"costs,omitempty"`
 	// Menu 非 nil 時某一欄的選單開著，蓋在這一頁上。
 	Menu *InnList `json:"menu,omitempty"`
 	// Typing 非 nil 時停在名稱輸入；內容是目前打了什麼。
@@ -124,8 +130,10 @@ func (s *Session) spellEditPage() *SpellEditPage {
 		cell := SpellFieldCell{Col: col, Row: row, Color: SpellFieldColor,
 			Text: s.spellCellText(e.draft, field)}
 		if field == SpellFieldName {
-			// 名字置中：原版把 12 欄減掉字數再折半（`0x183C7`）。
-			cell.Col = (spellNameCols-len([]rune(cell.Text)))/2 + spellNameLeft
+			// 名字置中（`0x183A3`…`0x183D6`）。原版數長度的迴圈是「先取再進位」，
+			// 讀到結尾那個 0 時計數已經加過了，所以拿去折半的是**字數加一**。
+			n := len([]rune(cell.Text)) + 1
+			cell.Col = (spellNameCols-n)/2 + spellNameLeft
 		}
 		if field == e.field {
 			cell.Color = SpellCursorColor
@@ -133,6 +141,7 @@ func (s *Session) spellEditPage() *SpellEditPage {
 		page.Fields[field] = cell
 	}
 	page.Adventure, page.Gold = SpellCost(s.Magic, e.draft)
+	page.Costs = spellCostLines(page)
 	page.Menu = e.menuView()
 	page.Typing = e.typing
 	return page
@@ -167,9 +176,9 @@ func (s *Session) spellCellText(sp Spell, field int) string {
 	return SpellFieldText(s.Magic, sp, field)
 }
 
-// spellCostLines 是最後兩列的數字，給收據看的。上面那一行印的是金冠、
-// 下面那一行印的是冒險點數——標籤與內容對調是原版自己的接法。
-func (s *Session) spellCostLines(page *SpellEditPage) []Segment {
+// spellCostLines 是最後兩列的數字。上面那一行印的是金冠、下面那一行印的是
+// 冒險點數——標籤與內容對調是原版自己的接法。
+func spellCostLines(page *SpellEditPage) []Segment {
 	return []Segment{
 		{Col: spellCostCol, Row: spellCostRow, Text: fmt.Sprint(page.Gold)},
 		{Col: spellCostCol, Row: spellGoldRow, Text: fmt.Sprint(page.Adventure)},
