@@ -260,6 +260,11 @@ type ActResult struct {
 	// Records 是這一手要印的幾筆記錄，給一句話要接兩筆的情形用（射擊撞在樹上
 	// 或牆上，RE-102）。有 Records 就不看 Message。
 	Records []int
+	// Plain 為真表示這一句**前面不加動作者的名字**。撿那三句是這樣：問句
+	// （0x111）自己就是一句完整的話，而 0x112／0x113 開頭就是 `|G`，加了會變成
+	// 兩次名字。原版對它們另外起一段訊息（`sub_1C1A4`，`0x20354`／`0x20417`／
+	// `0x204B9`），不接在動作者的名字後面（RE-113）。
+	Plain bool
 }
 
 // FacingTarget 回傳面前那一格站著誰（`sub_26D76:0x26DA5` 的
@@ -293,6 +298,13 @@ func (s *State) FacingTarget(i int) int {
 // Act 做出下一手，回報做完了沒有。第二個回傳值為 false 表示這一回合的執行段
 // 已經走完。
 func (s *State) Act(rng Rand) (ActResult, bool) {
+	// 「要不要撿」那一問答完之後還有一句要印（RE-113）：先把它交出去再取下一手，
+	// 順序才與原版一樣（問句、回答、結果三句接在同一手後面）。
+	if s.resume != nil {
+		out := *s.resume
+		s.resume = nil
+		return out, true
+	}
 	for s.Exec.Turn < len(s.Exec.Order) {
 		i := s.Exec.Order[s.Exec.Turn]
 		s.Exec.Turn++
@@ -361,12 +373,16 @@ func (s *State) act(i int, rng Rand) ActResult {
 		out.Message, out.Item = s.DropItem(i)
 		return out
 	case CmdPickUp:
-		msg, _, name := s.PickUpItem(i)
-		if msg == 0 {
+		slot := s.GroundUnder(i, 0)
+		if slot < 0 {
 			// 腳下沒東西：原版這一手就這樣過去，不印任何訊息。
 			return out
 		}
-		out.Message, out.Item = msg, name
+		// 隊員要先問「要不要撿」，敵人直接撿（`0x20332` 比參戰者記錄 +0x01）。
+		if a.Side == SideParty {
+			return s.askPickUp(i, slot)
+		}
+		out.Message, out.Item = s.TakeItem(i, slot)
 		return out
 	case CmdSwitch, CmdSwitchAlt1, CmdSwitchAlt2:
 		out.Message = s.SwitchItem(i)

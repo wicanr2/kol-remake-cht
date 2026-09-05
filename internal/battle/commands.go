@@ -328,3 +328,35 @@ func CellFacing(cell int) int {
 	}
 	return cellFacing[cell]
 }
+
+// CommandEnv 填出組指令列要用的三件事（`sub_228B7` 讀的那幾個外部狀態）。
+//
+// **這一支原本沒有人呼叫**，`Plan.Env` 一直是零值，所以撿那一格從來沒出現過
+// ——地上明明有東西也選不到（RE-113 實跑才看得出來）。
+func (s *State) CommandEnv(i int) CommandEnv {
+	if i < 0 || i >= len(s.Actors) {
+		return CommandEnv{}
+	}
+	a := s.Actors[i]
+	out := CommandEnv{Standable: true}
+	for _, g := range s.Ground {
+		if g.Name != "" {
+			out.Ground = append(out.Ground, Cell{Row: g.X, Col: g.Y})
+		}
+	}
+	if s.Field != nil {
+		out.Standable = !BlocksMovement(s.Field.At(a.X, a.Y))
+	}
+	// 腳下那一格有沒有別人：騎乘那一格要的是「有人可以騎」（`sub_227C0`）。
+	for n := range s.Actors {
+		if n == i {
+			continue
+		}
+		o := s.Actors[n]
+		if o.Side != SideEmpty && !o.Down() && o.X == a.X && o.Y == a.Y {
+			out.Occupied = true
+			break
+		}
+	}
+	return out
+}

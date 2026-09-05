@@ -432,6 +432,18 @@ func applyBattleToken(s *battle.State, token string, step func(*battle.State)) e
 		}
 		return nil
 	}
+	// 撿那一問同樣只認 y／n（`0x2036E` 的 `sub_1B100(5)`，RE-113）。
+	if s.Plan.Prompt == battle.PromptPickUp {
+		switch token {
+		case "Y":
+			s.AnswerPickUp(true)
+			step(s)
+		case "N":
+			s.AnswerPickUp(false)
+			step(s)
+		}
+		return nil
+	}
 	if s.Plan.Prompt == battle.PromptExecuting {
 		switch token {
 		case "RET", "SPACE":
@@ -1794,6 +1806,12 @@ func (g *game) battleStep() {
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecords(r.Records)))
 		return
 	}
+	// 撿那三句前面不加名字：問句自己就是一句完整的話，0x112／0x113 開頭就是
+	// `|G`（RE-113）。
+	if r.Plain {
+		s.Exec.Text = battle.WrapMessage(ctx.Substitute(g.battleRecord(r.Message)))
+		return
+	}
 	if r.Outcome == nil {
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
 		// 移動成功那一句原版要按兩次：印完等一次、重畫戰場再等一次（RE-085）。
@@ -1960,8 +1978,8 @@ func (g *game) updateBattle() {
 			g.battleStep()
 		case battle.PromptExecuting:
 			g.battleStep()
-		case battle.PromptFlee:
-			// 只認 y／n，這兩個鍵在這一問沒有作用。
+		case battle.PromptFlee, battle.PromptPickUp:
+			// 只認 y／n，這兩個鍵在這兩問沒有作用。
 		default:
 			s.Choose()
 		}
@@ -1971,13 +1989,21 @@ func (g *game) updateBattle() {
 		switch s.Plan.Prompt {
 		case battle.PromptNextRound, battle.PromptFlee:
 			s.Answer(false)
+		case battle.PromptPickUp:
+			s.AnswerPickUp(false)
+			g.battleStep()
 		}
 	}
-	// 逃走那一問只認 y／n（`0x21158`），Return 與空白鍵都不算數。
-	if inpututil.IsKeyJustPressed(ebiten.KeyY) &&
-		s.Plan.Prompt == battle.PromptFlee {
-		s.Answer(true)
-		g.battleStep()
+	// 逃走與撿那兩問只認 y／n（`0x21158`／`0x2036E`），Return 與空白鍵都不算數。
+	if inpututil.IsKeyJustPressed(ebiten.KeyY) {
+		switch s.Plan.Prompt {
+		case battle.PromptFlee:
+			s.Answer(true)
+			g.battleStep()
+		case battle.PromptPickUp:
+			s.AnswerPickUp(true)
+			g.battleStep()
+		}
 	}
 }
 

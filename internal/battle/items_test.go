@@ -14,6 +14,16 @@ func itemState() *State {
 	return s
 }
 
+// pickUpState 是一名空手的隊員站在一件東西上，指令是撿。
+func pickUpState() *State {
+	s := &State{Party: []Member{{Name: "POONTANG"}},
+		Plan: Planning{Prompt: PromptExecuting}}
+	s.Actors = []Actor{{Side: SideParty, Member: 0, X: 30, Y: 30,
+		Head: 10, Chest: 10, Threshold: 100, Command: CmdPickUp}}
+	s.Ground[0] = GroundItem{Name: "DAGGER", X: 30, Y: 30}
+	return s
+}
+
 // 丟：東西掉在自己腳下那一格，手上變空。
 func TestDropItemLandsUnderfoot(t *testing.T) {
 	s := itemState()
@@ -128,5 +138,124 @@ func TestActHandlesTheThreeItemCommands(t *testing.T) {
 		if r.Unimplemented {
 			t.Fatalf("%#x 不該被標成還沒實作", cmd)
 		}
+	}
+}
+
+// 撿那一手對隊員會先問（記錄 0x111），答是才撿走（RE-113）。
+func TestPickUpAsksPartyMember(t *testing.T) {
+	s := pickUpState()
+	s.Exec.Order, s.Exec.Turn = []int{0}, 0
+	r, ok := s.Step(maxRand{})
+	if !ok {
+		t.Fatal("該有一手")
+	}
+	if r.Message != FoundItemRecord || r.Item != "DAGGER" {
+		t.Fatalf("問句該是 0x111 ＋ 東西的名字，得到 %#x／%q", r.Message, r.Item)
+	}
+	if s.Plan.Prompt != PromptPickUp || s.PickUp == nil {
+		t.Fatalf("該停在撿那一問，Prompt %d PickUp %+v", s.Plan.Prompt, s.PickUp)
+	}
+	if s.Ground[0].Name == "" {
+		t.Fatal("還沒答應之前東西還在地上")
+	}
+	// **撿成功本身不印任何一句**：問句已經把「找到什麼」講完了（`0x204E4`）。
+	if s.AnswerPickUp(true) {
+		t.Fatal("撿成功不該再多印一句")
+	}
+	if s.Ground[0].Name != "" {
+		t.Fatal("答應了東西該離開地面")
+	}
+	if s.Plan.Prompt != PromptExecuting || s.PickUp != nil {
+		t.Fatal("那一問該收掉")
+	}
+	if m := s.Member(0); m == nil || m.WeaponName != "DAGGER" {
+		t.Fatalf("手上該是 DAGGER，得到 %+v", m)
+	}
+}
+
+// 答否就跳過這一格；腳下沒有別的東西，這一手就結束。
+func TestPickUpDeclineEndsTheHand(t *testing.T) {
+	s := pickUpState()
+	s.Exec.Order, s.Exec.Turn = []int{0}, 0
+	if _, ok := s.Step(maxRand{}); !ok {
+		t.Fatal("該有一手")
+	}
+	if s.AnswerPickUp(false) {
+		t.Fatal("腳下只有一件，答否之後不該再有話說")
+	}
+	if s.PickUp != nil || s.Plan.Prompt == PromptPickUp {
+		t.Fatal("那一問該收掉")
+	}
+	if s.Ground[0].Name != "DAGGER" {
+		t.Fatal("答否東西該留在地上")
+	}
+}
+
+// 腳下有兩件時答否會問下一件（`0x20501` 回到同一個迴圈）。
+func TestPickUpDeclineAsksNextItem(t *testing.T) {
+	s := pickUpState()
+	s.Ground[1] = GroundItem{Name: "SHIELD", X: 30, Y: 30}
+	s.Exec.Order, s.Exec.Turn = []int{0}, 0
+	if _, ok := s.Step(maxRand{}); !ok {
+		t.Fatal("該有一手")
+	}
+	if !s.AnswerPickUp(false) {
+		t.Fatal("還有一件，該再問一次")
+	}
+	r, ok := s.Step(maxRand{})
+	if !ok || r.Item != "SHIELD" {
+		t.Fatalf("第二問該是 SHIELD，得到 %q（ok=%v）", r.Item, ok)
+	}
+	if s.PickUp == nil || s.Ground[1].Name == "" {
+		t.Fatal("第二問還沒答，東西還在地上")
+	}
+}
+
+// 敵人不問，直接撿（`0x20332` 比參戰者記錄 +0x01）。
+func TestPickUpEnemyDoesNotAsk(t *testing.T) {
+	s := pickUpState()
+	s.Actors[0].Side = SideMonster
+	s.Party = nil
+	s.Exec.Order, s.Exec.Turn = []int{0}, 0
+	r, ok := s.Step(maxRand{})
+	if !ok || r.Message != FoundItemRecord {
+		t.Fatalf("敵人該直接撿，得到 %#x（ok=%v）", r.Message, ok)
+	}
+	if s.Plan.Prompt == PromptPickUp || s.PickUp != nil {
+		t.Fatal("敵人不該被問")
+	}
+	if s.Ground[0].Name != "" {
+		t.Fatal("東西該離開地面")
+	}
+}
+
+// 撿到任務要的那一件會多喊一句（記錄 0x113），一場只喊一次。
+func TestPickUpCallsQuestItemOnce(t *testing.T) {
+	s := pickUpState()
+	s.Site = &Site{Index: 3}
+	s.QuestItem = "DAGGER"
+	s.Exec.Order, s.Exec.Turn = []int{0}, 0
+	if _, ok := s.Step(maxRand{}); !ok {
+		t.Fatal("該有一手")
+	}
+	if !s.AnswerPickUp(true) {
+		t.Fatal("撿到任務物品該多喊一句")
+	}
+	r, _ := s.Step(maxRand{})
+	if r.Message != QuestItemRecord || !r.Plain {
+		t.Fatalf("該是記錄 0x113 且不加名字，得到 %#x／Plain=%v", r.Message, r.Plain)
+	}
+	// 再撿一次同一件：旗標已經立起來，不再喊。
+	if m := s.Member(0); m != nil {
+		m.HasWeapon = false
+		m.WeaponName = ""
+	}
+	s.Ground[0] = GroundItem{Name: "DAGGER", X: 30, Y: 30}
+	s.Exec.Order, s.Exec.Turn = []int{0}, 0
+	if _, ok := s.Step(maxRand{}); !ok {
+		t.Fatal("該再有一手")
+	}
+	if s.AnswerPickUp(true) {
+		t.Fatal("同一場只喊一次")
 	}
 }

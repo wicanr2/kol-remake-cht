@@ -108,9 +108,12 @@ type State struct {
 	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
 	// 所以這裡是一份不是一組。
 	Monster Monster
-	// QuestItem 是這一個任務要的那件東西的名字（原版存在 `[0xB926]` 那十六個
-	// byte，RE-103）。帶著它逃出戰場就算完成，不必把怪物打完。空字串表示這一場
-	// 沒有那樣的東西。
+	// QuestItem 是這一個任務要的那件東西的名字（原版存在 `0xB956` 那十六個
+	// byte，來自任務 payload 的 `+0x29`，RE-113）。帶著它逃出戰場就算完成，
+	// 不必把怪物打完。空字串表示這一場沒有那樣的東西。
+	//
+	// **還沒有人設它**：原版開打時會把那一件放到地上第 0 格（`0x1E68C`），
+	// 這一版還沒做，所以任務戰鬥走的是「全隊都到邊上」那一條（RE-113）。
 	QuestItem string
 	// Verdict 是這一場的結果；打贏時 Gold 是每個人分到的金冠、Adventure 是每個人
 	// 分到的冒險點數（RE-091／RE-096）。
@@ -138,6 +141,21 @@ type State struct {
 	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，
 	// 打贏之後掉落的東西也放這裡（RE-091 的 `sub_289EE(0)`，還沒做）。
 	Ground [GroundSlots]GroundItem
+	// PickUp 是撿那一手停在「要不要撿」那一問時的狀態（RE-113）；沒問就是 nil。
+	PickUp *PickUpAsk
+	// resume 是那一問答完之後還要印的一句。執行段下一次取手時先把它交出去，
+	// 順序才與原版一樣（問句、回答、結果三句接在同一手後面）。
+	resume *ActResult
+	// questCalled 是「任務物品」那一句喊過了沒有（原版 `word_32382`，`0x2049B`）。
+	// 一場只喊一次。
+	questCalled bool
+}
+
+// PickUpAsk 是「要不要撿」那一問問的是誰、哪一格（`0x20332`…`0x203B5`）。
+type PickUpAsk struct {
+	// Actor 是正在撿的那一名；Slot 是地上第幾格。
+	Actor int
+	Slot  int
 }
 
 // NewQuest 依任務地點的記錄擺好一場戰鬥。

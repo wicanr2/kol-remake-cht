@@ -17,6 +17,9 @@ const (
 	DropsRecord      = 0x10D // "drops|B|E!"
 	FoundItemRecord  = 0x111 // "You have found a|H.  Do you want to pick it up?"
 	MustDropRecord   = 0x112 // "|G, you must drop or belt your|E to pick this up!"
+	// QuestItemRecord 是撿到任務要的那一件時多喊的一句（`0x204B9`，RE-113）：
+	// "|G, this is the quest item!  Run for the exit!"。一場只喊一次。
+	QuestItemRecord = 0x113
 	PutsInBeltRecord = 0x114 // "puts|B|I in|B belt"
 	// TheRecord 是敵人名字前面那個 `The]`。
 	TheRecord = 0x140

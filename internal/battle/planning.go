@@ -33,6 +33,10 @@ const (
 	PromptFlee
 	// PromptExecuting 是執行段：一手一句訊息，按鍵推進。
 	PromptExecuting
+	// PromptPickUp 是撿那一手在執行段中間問的「Do you want to pick it up?」
+	// （記錄 0x111 的後半，`0x20354`，RE-113）。只有隊員會被問，敵人直接撿。
+	// **這一問只認 y／n**，與逃走那一問同一支讀鍵（`sub_1B100(5)`）。
+	PromptPickUp
 )
 
 // Planning 是規劃段那一名走到哪裡。
@@ -72,6 +76,7 @@ func (s *State) BeginTurn() {
 		return
 	}
 	s.Plan.Prompt = PromptCommand
+	s.Plan.Env = s.CommandEnv(i)
 	s.Plan.Bar = CommandBar(&s.Actors[i], m, s.Plan.Env)
 	s.Plan.Selected = 0
 	s.Plan.Command, s.Plan.Style, s.Plan.Guard = 0, 0, 0

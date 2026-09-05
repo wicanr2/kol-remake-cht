@@ -127,9 +127,11 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	// 執行段：整條訊息區換成一張卷軸，圖示列被蓋掉（RE-089、RE-090）。底圖是
 	// MISCPICS 的圖 1，296×32，白紙面配黃色的捲邊與軸心；文字寫在紙面上，
 	// 欄 3（像素 24）、掃描列 0xA8 起、行高 6（RE-087）。
-	// 逃走那一問（RE-103）走同一條路：原版問句也是印在執行段那張卷軸上，
-	// 沒有另外開框。
-	if s.Plan.Prompt == battle.PromptExecuting || s.Plan.Prompt == battle.PromptFlee {
+	// 逃走那一問（RE-103）與撿那一問（RE-113）走同一條路：原版問句也是印在
+	// 執行段那張卷軸上，沒有另外開框。
+	if s.Plan.Prompt == battle.PromptExecuting ||
+		s.Plan.Prompt == battle.PromptFlee ||
+		s.Plan.Prompt == battle.PromptPickUp {
 		box := battle.MessageBox
 		scroll, err := sprites.Get(battle.MessageScroll.Archive,
 			battle.MessageScroll.Index)

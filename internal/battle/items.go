@@ -44,35 +44,74 @@ func (s *State) DropItem(i int) (int, string) {
 	return DropsRecord, name
 }
 
-// PickUpItem 是撿那一手（指令碼 `0x26`，`0x202CC`）：撿自己腳下那一格的東西。
+// GroundUnder 找第 from 格之後、腳下那一格上的第一件東西（`0x202DE`…`0x20315`）。
 //
-// **只撿得到腳下那一格**——原版 X 與 Y 都要對上。回傳訊息記錄與撿到的格號；
-// 沒東西可撿就回 (0, -1)。
-//
-// **與原版的一個差異**：原版對隊員會先印記錄 0x111 問「要不要撿」再等鍵，
-// 敵人才直接撿。remake 這一版一律直接撿——那個問句要在執行段中間插一次互動，
-// 目前的執行段還沒有那個機制。
-func (s *State) PickUpItem(i int) (int, int, string) {
-	a := &s.Actors[i]
-	m := s.member(i)
-	for n := range s.Ground {
-		g := s.Ground[n]
-		if g.Name == "" || g.X != a.X || g.Y != a.Y {
-			continue
-		}
-		if m != nil && m.HasWeapon {
-			// 手上已經有東西，原版要先丟或收進腰帶（記錄 0x112）。
-			return MustDropRecord, -1, m.WeaponName
-		}
-		if m != nil {
-			m.HasWeapon = true
-			m.WeaponName = g.Name
-			m.Worn[0] = g.Name
-		}
-		s.Ground[n] = GroundItem{}
-		return FoundItemRecord, n, g.Name
+// **只撿得到腳下那一格**——原版 X 與 Y 都要對上。沒有就回 −1。
+func (s *State) GroundUnder(i, from int) int {
+	if i < 0 || i >= len(s.Actors) || from < 0 {
+		return -1
 	}
-	return 0, -1, ""
+	a := &s.Actors[i]
+	for n := from; n < len(s.Ground); n++ {
+		g := s.Ground[n]
+		if g.Name != "" && g.X == a.X && g.Y == a.Y {
+			return n
+		}
+	}
+	return -1
+}
+
+// TakeItem 把地上第 slot 格那件東西撿起來（`0x203CC`…`0x204E4`）。
+//
+// 回傳訊息記錄與那件東西的名字。手上已經有東西就撿不起來，只印記錄 0x112
+// （`0x20417`）——**那一手就到這裡為止**，不會再掃下一格。
+func (s *State) TakeItem(i, slot int) (int, string) {
+	if slot < 0 || slot >= len(s.Ground) || s.Ground[slot].Name == "" {
+		return 0, ""
+	}
+	m := s.member(i)
+	if m != nil && m.HasWeapon {
+		return MustDropRecord, m.WeaponName
+	}
+	g := s.Ground[slot]
+	if m != nil {
+		m.HasWeapon = true
+		m.WeaponName = g.Name
+		m.Worn[0] = g.Name
+	}
+	s.Ground[slot] = GroundItem{}
+	return FoundItemRecord, g.Name
+}
+
+// QuestItemCall 回報撿起來那一件要不要接記錄 0x113
+// （`|G, this is the quest item!  Run for the exit!`，`0x2049B`…`0x204B9`）。
+//
+// 三個條件：這一場是任務戰鬥（原版看 `word_34968`，remake 看 `Site.Index`）、
+// 撿到的正是任務要的那一件（`sub_2886C`），而且**這一場還沒喊過**
+// （`word_32382`）。喊過就把旗標立起來，一場只喊一次。
+func (s *State) QuestItemCall(name string) bool {
+	if s.questCalled || name == "" || name != s.QuestItem {
+		return false
+	}
+	if s.Site == nil || s.Site.Index < 0 {
+		return false
+	}
+	s.questCalled = true
+	return true
+}
+
+// PickUpItem 是撿那一手的完整動作，給不必問的那一側（敵人）與測試用。
+// 回傳訊息記錄、撿到的格號與名字；腳下沒東西就回 (0, −1, "")。
+func (s *State) PickUpItem(i int) (int, int, string) {
+	slot := s.GroundUnder(i, 0)
+	if slot < 0 {
+		return 0, -1, ""
+	}
+	msg, item := s.TakeItem(i, slot)
+	if msg == MustDropRecord {
+		return msg, -1, item
+	}
+	return msg, slot, item
 }
 
 // SwitchItem 是切換那一手（指令碼 `0x24`／`0x25`／`0x16`，`0x2050E`）：
@@ -90,4 +129,61 @@ func (s *State) SwitchItem(i int) int {
 		s.Actors[i].Weapon = Weapon{}
 	}
 	return PutsInBeltRecord
+}
+
+// askPickUp 把執行段停在「要不要撿」那一問上（`0x20354`，RE-113）。
+// 訊息是記錄 0x111 —— 它自己就帶著「You have found a|H.」與問句兩半，
+// 所以名字要跟著出去，`|H` 展開的時候東西還在地上。
+func (s *State) askPickUp(i, slot int) ActResult {
+	s.PickUp = &PickUpAsk{Actor: i, Slot: slot}
+	s.Plan.Prompt = PromptPickUp
+	return ActResult{Actor: i, Command: CmdPickUp, Target: -1, Plain: true,
+		Message: FoundItemRecord, Item: s.Ground[slot].Name}
+}
+
+// AnswerPickUp 是那一問的回答（`0x2036E`…`0x203B5`）。
+//
+//   - 答是 → 撿起來，接著印撿到那一句（或手上已經有東西的 0x112）。
+//   - 答否 → 這一格跳過，**繼續掃下一格**（`0x20501` 回到同一個迴圈），
+//     沒有下一格這一手就結束。
+//
+// 回傳「有沒有話要說」；有的話留給執行段下一次取手時交出去。
+func (s *State) AnswerPickUp(yes bool) bool {
+	ask := s.PickUp
+	if ask == nil {
+		return false
+	}
+	if !yes {
+		if next := s.GroundUnder(ask.Actor, ask.Slot+1); next >= 0 {
+			ask.Slot = next
+			s.resume = &ActResult{Actor: ask.Actor, Command: CmdPickUp,
+				Target: -1, Plain: true, Message: FoundItemRecord,
+				Item: s.Ground[next].Name}
+			return true
+		}
+		s.PickUp = nil
+		s.Plan.Prompt = PromptExecuting
+		return false
+	}
+	i, slot := ask.Actor, ask.Slot
+	name := s.Ground[slot].Name
+	s.PickUp = nil
+	s.Plan.Prompt = PromptExecuting
+	msg, item := s.TakeItem(i, slot)
+	out := ActResult{Actor: i, Command: CmdPickUp, Target: -1, Plain: true,
+		Item: item}
+	switch {
+	case msg == MustDropRecord:
+		// 手上已經有東西：只印 0x112，那一手到這裡為止（`0x20417`）。
+		out.Message = msg
+	case s.QuestItemCall(name):
+		// 撿到的正是任務要的那一件就喊一句（記錄 0x113），一場只喊一次。
+		out.Message = QuestItemRecord
+	default:
+		// **撿成功本身不印任何一句**——問句 0x111 已經把「找到什麼」講完了
+		// （`0x204E4` 直接收尾）。
+		return false
+	}
+	s.resume = &out
+	return true
 }
