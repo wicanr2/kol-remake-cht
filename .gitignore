@@ -47,3 +47,7 @@ __pycache__/
 
 # oracle 執行時的模擬器 log，不是證據
 docs/verification/character-ui/*/dosbox.log
+
+# Go workspace：只在容器裡成立（dosgolem 唯讀掛在 /dosgolem）
+go.work
+go.work.sum

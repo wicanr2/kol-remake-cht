@@ -8690,3 +8690,72 @@ remake 因此加了 `Actor.UnarmedWeapon[6]` 與 `AttackWeapon(式)`：命中折
 傷害骰與額度的速度項都改從它取。**怪物那一側沒接**——同一張表加 `+0x30` 落在
 `0x30`／`0x80`／`0x90`／`0x70`／`0x40`，其中三個在怪物記錄的已知版面之外
 （武器 `+0x20`、護甲 `+0x30`／`+0x40`／`+0x50`、盾牌 `+0x60`），還沒查那幾格是什麼。
+
+## RE-132：原版的亂數，以及拿 dosgolem 當 oracle 的第一步
+
+輸入同 RE-070（`KOLTOWN-unpacked.EXE`，SHA-256
+`01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2`）。新探針
+`tools/ida_probe_koltown_rand.py`（`workplace/analysis/koltown/rand-private.json`）。
+證據等級 `已證實`。
+
+### 為什麼要解這個
+
+remake 的對拍一直卡在同一件事：**每改一次戰鬥數字，長路徑收據的固定按鍵序列就
+作廢**，要用 driver 重生戰鬥段，一輪數小時。根本原因是兩邊的亂數沒有對應關係——
+只能把某一次的結果凍成截圖，不能問「原版在同一個種子下會擲出什麼」。
+
+### 原版那一支（`已證實`）
+
+```
+srand(n)   sub_2D526:  word_2F4D0 = n;  word_2F4D2 = 0        ; 種子是 32 位元，高 word 歸零
+rand()     sub_2D538:  種子 = 種子 × 0x000343FD + 0x00269EC3
+                       回 (種子 >> 16) & 0x7FFF
+rand(n)    sub_1B5A8:  rand() % n + 1                          ; 回 1…n
+```
+
+`0x000343FD` ＝ 214013、`0x00269EC3` ＝ 2531011——就是 Microsoft C 那一支
+`rand()`。32 位元乘法走 `sub_2DE8C`（長整數乘法 helper），高位 word 遮 `0x7Fh`
+就是那個 `& 0x7FFF`。
+
+播種只有一處：`_main:0x10010` 的 `int 1Ah` 取 BIOS tick，低 word 存進
+`word_349AC`，`0x1013C` 推給 `srand`。tick 的低 word 落在 0…65535，
+**與 remake 的 `-seed` 同一個空間**。全庫掃 `word_2F4D[02]` 只有 `sub_2D526`
+與 `sub_2D538` 兩支碰它，沒有第三個寫入點。
+
+### remake 之前用的是別的常數
+
+`cmd/kol` 的 `lcg` 是 `1664525 / 1013904223`（Numerical Recipes 那一組），
+而且取的是 `state >> 16` 沒有遮 15 位元。**兩邊的序列從來沒有對過。**
+已改成 `internal/rng`，逐條照抄上面那三支。
+
+### dosgolem：原版跑得起來
+
+[dosgolem](https://github.com/wicanr2/dosgolem) 是無頭、決定性、可以 import 的
+DOS 執行器。接法照它 README：`go.work` 接本機副本，`tools/go_docker.sh` 偵測到
+旁邊有一份就唯讀掛在 `/dosgolem`，對拍測試放在 `-tags oracle` 之下。
+
+| 量到的 | 值 |
+|---|---|
+| `KOLTOWN.EXE`（原版，自解壓）| 16,105 道指令之後跳進垃圾——解壓那一段沒跑對 |
+| `KOLTOWN-unpacked.EXE` | **跑得動**：開了 13 個資料檔，`Unimplemented()` 是空的 |
+| 位址映射 | `IDA()` 對 entry／`_main`／`rand`／`srand` 四處的 bytes 逐條相同 |
+| `OnCall` | `_main` 1 次、`srand` 1 次（正對照過了）|
+| `rand` | 2.6 億道指令、送了 12 批鍵，**一次都沒抽** |
+
+最後一列是這一輪的停點：原版載完資料就停在等輸入，視訊模式還是 03h（沒切進
+EGA），送空白與 Enter 推不動。**「原版沒有抽」與「hook 沒掛上」長得一模一樣**，
+所以先做了正對照——`_main` 與 `srand` 都觸發得到，問題不在 hook。
+
+要往下走得先讓原版真的進到會抽亂數的地方，那是 dosgolem 第四層（`apps/kol/`）
+要寫的東西，還沒做。
+
+### 兩件回報給 dosgolem 的事
+
+1. **DOS 的 8.3 截斷沒做。** 原版開 `steedpics`（9 個字元），真檔名是
+   `STEEDPIC`；真 DOS 會截成前 8 個字元。現在會回「找不到檔」，而程式接著跑進
+   沒有映射的記憶體。本輪先在本機的遊戲目錄放一份別名繞過。
+2. **`At(IDA(x))` 與 `OnCall(IDA(x))` 的比法不一致。** 前者比 `(Seg, Off)`
+   結構相等，後者比線性位址；而 `IDA()` 會把位址正規化成 `offset 0…15`。
+   KOL 是 far call 的大模式，每一支常式的 CS 是它自己那一段，所以
+   `At(IDA(x))` 永遠不成立——**而且不會報錯，只會跑滿上限**。
+   本輪自己寫了線性版的 `At`（`internal/oracle/at.go`）。

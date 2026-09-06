@@ -33,6 +33,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
 	magicdata "github.com/wicanr2/kol-remake-cht/internal/magic"
 	portraitdata "github.com/wicanr2/kol-remake-cht/internal/portrait"
+	"github.com/wicanr2/kol-remake-cht/internal/rng"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
 	"github.com/wicanr2/kol-remake-cht/internal/save"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
@@ -68,28 +69,11 @@ const (
 
 var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay, sceneFlow, sceneWorld, sceneEnding}
 
-// lcg 是可重播的亂數來源。原版以 BIOS tick 播種，remake 用固定 seed 才能重播。
-type lcg struct{ state uint32 }
+// lcg 是可重播的亂數來源，內容就是原版那一支（`internal/rng`，RE-132）：
+// 同一個種子在 remake 與原版會擲出同一串數，`-seed N` 等於原版的 `srand(N)`。
+type lcg = rng.LCG
 
-func (r *lcg) next() uint32 {
-	r.state = r.state*1664525 + 1013904223
-	return r.state
-}
-
-// Choose 供標題序列的二選一使用；原版是 rand()%n，remake 用同一個可重播來源。
-func (r *lcg) Choose(n int) int {
-	if n <= 0 {
-		return 0
-	}
-	return int(r.next()>>16) % n
-}
-
-func (r *lcg) Roll(n int) int {
-	if n <= 0 {
-		return 0
-	}
-	return int(r.next()>>16)%n + 1
-}
+func newRand(seed int) *lcg { return rng.New(seed) }
 
 // questBattle 把那一場戰鬥包起來，讓建構好的 game 與後面才設定的回呼共用同一份。
 type questBattle struct {
@@ -2447,7 +2431,7 @@ func main() {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
 			}
-			st := charcreate.New(createData, &lcg{state: uint32(*seed)})
+			st := charcreate.New(createData, newRand(*seed))
 			for _, token := range strings.Fields(*writeScript) {
 				if err := applyToken(st, token); err != nil {
 					fmt.Fprintln(os.Stderr, err)
@@ -3080,11 +3064,11 @@ func main() {
 				}
 				mon := monsters.At(a.Monster)
 				st := battle.NewAmbush(a, mon, members,
-					battle.Generate(&lcg{state: uint32(*seed)}))
+					battle.Generate(newRand(*seed)))
 				if st == nil {
 					return
 				}
-				st.Rand = &lcg{state: uint32(*seed)}
+				st.Rand = newRand(*seed)
 				st.SpoilItems = spoilItems
 				quest.tiles = ui.NewBattleTiles(atlas)
 				quest.state = st
@@ -3183,10 +3167,10 @@ func main() {
 					return
 				}
 				// 任務地圖不重生地形，但照樣灑一次樹叢（`sub_1E3A8:0x1E5E5`）。
-				field.Scatter(&lcg{state: uint32(*seed)})
+				field.Scatter(newRand(*seed))
 				quest.tiles = ui.NewBattleTiles(atlas)
 				st := battle.NewQuest(site, members, monsters.At(site.Monster), field)
-				st.Rand = &lcg{state: uint32(*seed)}
+				st.Rand = newRand(*seed)
 				st.SpoilItems = spoilItems
 				st.Stage = battle.StageEncounter
 				quest.state = st
@@ -3201,8 +3185,8 @@ func main() {
 			if atlas, err := loadBattlePNG(*battleTiles); err == nil {
 				arenaDep = &arenaDeps{monsters: monsters, spoils: spoilItems,
 					tiles: ui.NewBattleTiles(atlas), bank: bank, trans: trans,
-					rand:    &lcg{state: uint32(*seed)},
-					field:   &lcg{state: uint32(*seed)},
+					rand:    newRand(*seed),
+					field:   newRand(*seed),
 					english: *lang == "en"}
 			}
 			worldSessionState.OnEnterArena = func() {
@@ -3275,7 +3259,7 @@ func main() {
 			worldScreenState.Clock = world.NewClock()
 			worldScreenState.Movement = partyMovement(playSession.Party)
 			worldScreenState.Date = worldScreenState.Clock.DateLines()
-			worldSessionState.Rand = &lcg{state: uint32(*seed)}
+			worldSessionState.Rand = newRand(*seed)
 			worldSessionState.OnNewDay = func(hunger int) {
 				for _, m := range playSession.Party {
 					if m.Sheet == nil {
@@ -3347,7 +3331,7 @@ func main() {
 		cjk:          cjk,
 		strings:      table,
 		canvas:       canvasFor(*lang),
-		state:        charcreate.New(data, &lcg{state: uint32(*seed)}),
+		state:        charcreate.New(data, newRand(*seed)),
 		scene:        scene(*sceneName),
 		portrait:     *portrait,
 		selected:     *menuSelected,
@@ -3393,7 +3377,7 @@ func main() {
 	}
 	if scene(*sceneName) == sceneTitle {
 		// 實際播放模式：依 BIOS tick 推進，按鍵中止，與原版同一條腳本。
-		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
+		frames, err := sequence.Expand(newRand(*seed))
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -3414,7 +3398,7 @@ func main() {
 			g.jobs = append(g.jobs, job)
 		}
 	case *titleTimeline != "":
-		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
+		frames, err := sequence.Expand(newRand(*seed))
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -3442,7 +3426,7 @@ func main() {
 			fmt.Fprintln(os.Stderr, "-title-frame 需要搭配 -shot")
 			os.Exit(2)
 		}
-		frames, err := sequence.Expand(&lcg{state: uint32(*seed)})
+		frames, err := sequence.Expand(newRand(*seed))
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -3458,7 +3442,7 @@ func main() {
 		var chooser title.Rand
 		switch *titleChoice {
 		case "rng":
-			chooser = &lcg{state: uint32(*seed)}
+			chooser = newRand(*seed)
 		case "first":
 			chooser = fixedChoice(0)
 		case "second":
