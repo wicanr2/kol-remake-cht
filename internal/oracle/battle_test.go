@@ -8,6 +8,7 @@ import (
 	"github.com/wicanr2/dosgolem/oracle"
 
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
 )
 
 // 原版戰鬥規則的位址（KOLTOWN-unpacked.EXE，IDA 線性；RE-129／RE-130）。
@@ -955,6 +956,77 @@ func TestAmbushOutcomeMatchesOriginal(t *testing.T) {
 			}
 			t.Logf("怪物 %d、等級 %d、%d 隻、站位組 %d", got.monster, got.level,
 				got.count, got.group)
+		})
+	}
+}
+
+// 天候的隨機漫步：設好狀態之後兩邊算出同一組（RE-077）。
+//
+// 天候在 `word_2DF5A`（IDA `0x2DF5A`，DGROUP+0x8A），只有**時段變換**時才擲
+// （`sub_29987:0x29A83`）。時段是「第一個滿足 `時刻 >= 下限`」的那一段，
+// 目前時段記在 `word_2DF42`——把它設成與時刻算出來的不一樣，變換就成立。
+//
+//	roll = rand(0x80) − 1                       ; 0…127
+//	上限 = 表[月] & 7、下限 = 表[月] / 8 & 7      ; DGROUP+0x1326
+//	roll < 表2[月]（DGROUP+0x131A）: 沒到上限就 +1
+//	否則 roll < 100:                沒到下限就 −1
+//	表[月] > 0x7F 且天候 == 3:       再 +1        ; 冬天才有的第 4 組
+//
+// RE-077 原本把這一段標成 `強推論`（式子逐指令讀出，沒有實跑）。
+func TestWeatherMatchesOriginal(t *testing.T) {
+	o := townMap(t)
+	o.SyncDGroupFromDS()
+	const (
+		stepEnter   = 0x29987
+		paceAddr    = 0x2FA2C
+		noMount     = 20
+		clockAddr   = 0x2DF40
+		partAddr    = 0x2DF42
+		monthAddr   = 0x2FBB4
+		weatherAddr = 0x2DF5A
+	)
+	o.WriteU16(o.IDA(paceAddr), noMount)
+
+	for _, c := range []struct {
+		name    string
+		month   int    // 0 是一月
+		weather int    // 進去的天候
+		roll    uint32 // rand(0x80) 的回傳，程式自己減一
+	}{
+		{"四月、晴、小骰：往壞一格", 3, 1, 1},
+		{"四月、已到上限：不動", 3, 3, 1},
+		{"四月、中骰：往好一格", 3, 2, 50},
+		{"四月、已到下限：不動", 3, 0, 50},
+		{"四月、大骰：完全不動", 3, 2, 120},
+		{"一月、小骰推到第 3 段：再多一段（下雪）", 0, 2, 1},
+		{"一月、已到下限 1：不動", 0, 1, 50},
+		{"八月、上限 1、小骰", 7, 0, 1},
+		{"八月、門檻 15，骰 20 往好", 7, 1, 20},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			o.WriteU16(o.IDA(monthAddr), uint16(c.month))
+			o.WriteU16(o.IDA(weatherAddr), uint16(c.weather))
+			o.WriteU16(o.IDA(clockAddr), 2000)
+			o.WriteU16(o.IDA(partAddr), 0) // 與時刻算出來的 2 不同 → 一定變換
+			o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 {
+				if p.Arg(0) == 0x80 {
+					return c.roll
+				}
+				return 99 // 其餘一律大值：不遭遇
+			})
+			if _, err := o.CallBudget(50_000_000, o.IDA(stepEnter)); err != nil {
+				t.Logf("沒有返回（算完之後接著畫畫面）")
+			}
+			o.Stub(o.IDA(rollEnter), nil)
+
+			got := int(o.Word(o.IDA(weatherAddr)))
+			clock := world.Clock{Month: c.month, Weather: c.weather}
+			want := clock.NextWeather(int(c.roll) - 1)
+			if got != want {
+				t.Fatalf("天候 %d 擲 %d：原版走到 %d，remake 走到 %d",
+					c.weather, c.roll, got, want)
+			}
+			t.Logf("%d → %d", c.weather, got)
 		})
 	}
 }
