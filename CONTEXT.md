@@ -219,6 +219,15 @@
 
 ## 下一個唯一工作
 
+**用點擊序列把原版推進戰鬥**（2026-09-06 起）。原版現在跑得到可互動的遊戲畫面：
+`KOL.EXE` 是主程式，設好視訊模式 `0Dh` 之後用 `int 21h AH=4Bh AL=03h`（載入
+overlay）把 `TITLE.EXE`／`KOLBOOK.EXE`／`KOLTOWN.EXE` 搬進自己配好的記憶體再
+far call 進去——**不是 EXEC 子程式**。城鎮載入 35 個檔之後停在 `sub_1B100` 輪詢
+`int 33h` 等玩家操作，在對話框上點一下文字就推進到下一段，底部長出六個圖示的
+指令列。`Click` 要帶 `NoCursorWait()` 與 `Frame((*Oracle).Tandy16)`。
+證據在 `docs/re/RESEARCH-LOG.md` 最後一節；dosgolem 那一側的三個修正
+（記憶體服務的界線、載入 overlay、handle 號碼重用）在 `kol-force-call` 分支。
+
 **選部位那一問的實跑收據**：互動已經做了（使用者 2026-09-06 決定回到原版），
 但十六名原版角色裡只有 Warder 有法術、而且走不到這一問，所以要先在 SCROLL 買一筆
 效果 6 且不用選目標格的（The Hostel 第一筆 Tyanalon 340）。路徑摸到一半——

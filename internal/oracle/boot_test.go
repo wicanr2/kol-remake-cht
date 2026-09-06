@@ -3,6 +3,9 @@
 package oracle
 
 import (
+	"crypto/sha256"
+	"fmt"
+	"encoding/hex"
 	"image"
 	"image/color"
 	"image/png"
@@ -569,49 +572,6 @@ func TestDumpTownScreenPNG(t *testing.T) {
 	t.Logf("寫出 %s", out)
 }
 
-// 探測：載入完成之後程式停在哪一個迴圈。
-//
-// 模式 09 走到 `TOWN7.0` 之後停在 IDA `0x1A1D9` 跑不完。那一段是
-//
-//	mov cx, [2528] ／ mov dx, [252A] ／ add cx, ax ／ mov es, dx
-//	mov ax, es:[bx] ／ mov [bp-14], ax ／ … ／ cmp word [bp-14], -1 ／ jz 出去
-//
-// ——**跟著一條鏈結串列走到 -1**。指標無效的話就永遠走不到終點。
-func TestProbeTownLoopPointer(t *testing.T) {
-	o := prepare(t)
-	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
-	if err := o.Run(40_000_000); err != nil {
-		t.Logf("停了：%v", err)
-	}
-	off := o.Word(o.DS(0x2528))
-	seg := o.Word(o.DS(0x252A))
-	t.Logf("那個 far 指標 ds:2528 ＝ %04X:%04X（IDA %#x）", seg, off, dgroupBase+0x2528)
-	if seg == 0 {
-		t.Log("段是 0——又是一個沒被設好的指標")
-		return
-	}
-	t.Logf("它指向的前 32 個 byte：%x", o.Bytes(oracle.Addr{Seg: seg, Off: off}, 32))
-	t.Logf("暫存器：%s", o.Regs())
-
-	// 指標有效、鏈的終止值（-1）也在——那這個迴圈可能只是**慢**，不是卡住。
-	// 判準是位置會不會離開那一段：跑久一點再看。
-	for i := 1; i <= 5; i++ {
-		if err := o.Run(40_000_000); err != nil {
-			t.Logf("第 %d 段停了：%v", i, err)
-			break
-		}
-		nz := 0
-		for _, v := range o.Tandy16() {
-			if v != 0 {
-				nz++
-			}
-		}
-		polls, _ := o.MouseActivity()
-		t.Logf("再跑 4000 萬道（累計 %d）：停在 IDA %#x、畫面非零 %d、滑鼠輪詢 %d、開了 %d 個檔",
-			o.Steps(), o.ToIDA(o.IP()), nz, polls, len(o.Opened()))
-	}
-}
-
 // 探測：那條鏈是不是繞成了環。
 //
 // 迴圈的終止條件是「讀到 -1」。指標有效、終止值也在，卻走不完——最可能的解釋是
@@ -647,125 +607,6 @@ func TestProbeChainIsCircular(t *testing.T) {
 	}
 }
 
-// 探測：誰把那張表的 `0x0F40` 寫成 `0x07A0`（自環）。
-//
-// 載入完成之後程式停在「跟著鏈結串列走到 -1」的迴圈裡，而節點永遠是 `0x07A0`
-// ——那張表在 `2EFF:0F40`（＝ `0x07A0 × 2`）存著 `0x07A0`，指向自己。
-//
-// 表在**配置來的記憶體**裡，`WatchWrites` 收的是 DGROUP 偏移涵蓋不到，所以用
-// `WatchLinear`。判準是寫入那一刻的 `CS:IP`：拿它換回 IDA 位址就知道是哪一支。
-func TestProbeWhoWritesSelfLoop(t *testing.T) {
-	o := prepare(t) // 要對好 DGROUP，`ds:2528` 才讀得對
-	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
-	// 跑到那個 far 指標被填好的那一刻再掛監看——太早掛會收到配置器自己的清零，
-	// 太晚掛就錯過寫入了。條件比固定步數可靠。
-	err := o.RunUntil(oracle.NewCond("表的指標被填好", func(p *oracle.Oracle) bool {
-		return p.Word(p.DS(0x252A)) != 0
-	}), oracle.Budget(60_000_000))
-	if err != nil {
-		t.Skipf("表一直沒被配置出來：%v", err)
-	}
-	t.Logf("第 %d 道指令時指標被填好", o.Steps())
-	seg := o.Word(o.DS(0x252A))
-	off := o.Word(o.DS(0x2528))
-	t.Logf("表在 %04X:%04X，`+0x0F40` 目前是 %04X",
-		seg, off, o.Word(oracle.Addr{Seg: seg, Off: off + 0x0F40}))
-	if seg == 0 {
-		t.Skip("表還沒被配置出來")
-	}
-	base := uint32(seg)*16 + uint32(off) + 0x0F40
-	log := o.WatchLinear(base, base+2)
-	defer o.StopWatchingWrites()
-
-	if err := o.Run(30_000_000); err != nil {
-		t.Logf("再跑停了：%v", err)
-	}
-	t.Logf("那兩個 byte 被寫了 %d 次", len(*log))
-	for _, w := range *log {
-		t.Logf("  第 %d 道：低位＋%d，%02X→%02X，寫的人在 IDA %#x",
-			w.Step, w.Off, w.Old, w.New, o.ToIDA(w.IP))
-	}
-	t.Logf("最後那一格是 %04X（0x07A0 就是自環）",
-		o.Word(oracle.Addr{Seg: seg, Off: off + 0x0F40}))
-}
-
-// 探測：LZW 解壓器拿到的輸入。
-//
-// `sub_1A04E` 是一支 LZW 解壓器——初始化把前 256 項的前綴設成 `-1`、後綴設成自己，
-// 起始碼長 9 bit、下一個字典項從 `0x101` 開始。**字典初始化是對的**，所以節點自環
-// 只可能是**輸入資料錯了**：碼亂跳就會產生指向自己的項。
-//
-// 參數：arg0 是輸入段、arg1 是輸入位移、arg2／arg3 是輸出、arg4 是長度。
-// LZW 資料的**第一個碼一定是字面值**（< 0x100），9 bit 讀出來就看得出來。
-func TestProbeLZWInput(t *testing.T) {
-	o := load(t)
-	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
-	type call struct {
-		args [5]uint16
-		head []byte
-		step uint64
-	}
-	var calls []call
-	o.OnCall(o.IDA(0x1A04E), func(p *oracle.Oracle) {
-		var c call
-		for i := 0; i < 5; i++ {
-			c.args[i] = p.Arg(i)
-		}
-		c.head = p.Bytes(oracle.Addr{Seg: c.args[0], Off: c.args[1]}, 16)
-		c.step = p.Steps()
-		calls = append(calls, c)
-	})
-	if err := o.Run(40_000_000); err != nil {
-		t.Logf("停了：%v", err)
-	}
-	t.Logf("解壓器被呼叫 %d 次", len(calls))
-	for i, c := range calls {
-		if i >= 8 {
-			t.Logf("…還有 %d 次", len(calls)-i)
-			break
-		}
-		// 第一個 9 bit 的碼：高位在前（`sub_1A26B` 從高位取）。
-		first := (int(c.head[0])<<1 | int(c.head[1])>>7) & 0x1FF
-		t.Logf("第 %d 次（步數 %d）：輸入 %04X:%04X、輸出 %04X:%04X、長度 %d",
-			i, c.step, c.args[0], c.args[1], c.args[3], c.args[2], c.args[4])
-		t.Logf("    前 16 個 byte：%x；第一個 9-bit 碼 %#x%s",
-			c.head, first,
-			map[bool]string{true: "", false: "  ← **超過 0xFF，不是字面值**"}[first < 0x100])
-	}
-}
-
-// 探測：誰把 `TOWN7.0` 的檔頭寫進解壓器的輸入緩衝區。
-//
-// 第六次解壓拿到的是 `TOWN7.0` 的**位置 0**（比對過檔案，逐 byte 相同）——那是
-// 26 個 entry 的 offset 表，不是壓縮資料。所以程式漏了「seek 到 entry 再讀」那一步，
-// 或者傳給解壓器的指標指到了檔頭那一份。
-//
-// `seek`（`AH=42h`）的實作看過是對的，所以問這個緩衝區：誰寫的、寫了幾次。
-func TestProbeLZWInputBuffer(t *testing.T) {
-	o := load(t)
-	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
-	// **從頭掛**：檔頭是很早就寫進去的，跑到第六次解壓前才掛已經錯過了。
-	const buf = 0x32FF*16 + 0
-	log := o.WatchLinear(buf, buf+2)
-	defer o.StopWatchingWrites()
-	if err := o.Run(2_500_000); err != nil {
-		t.Logf("停了：%v", err)
-	}
-	t.Logf("緩衝區前四個 byte 被寫了 %d 次", len(*log))
-	// **最後那幾筆才是答案**：緩衝區被重複使用，先寫進去的都被蓋掉了。
-	from := 0
-	if len(*log) > 12 {
-		from = len(*log) - 12
-		t.Logf("（前面 %d 筆略過）", from)
-	}
-	for _, w := range (*log)[from:] {
-		t.Logf("  第 %d 道：+%d %02X→%02X，寫的人在 IDA %#x",
-			w.Step, w.Off, w.Old, w.New, o.ToIDA(w.IP))
-	}
-	t.Logf("現在緩衝區前 16 個 byte：%x",
-		o.Bytes(oracle.Addr{Seg: 0x32FF, Off: 0}, 16))
-}
-
 // 探測：第六次解壓之前，程式對 `TOWN7.0` 做了什麼 seek 與 read。
 //
 // 讀進來的資料**逐 byte 等於檔案的位置 0**（比對過），也就是 26 個 entry 的
@@ -796,48 +637,14 @@ func TestProbeTownFileOps(t *testing.T) {
 	}
 }
 
-// 探測：解壓器的輸入位移是誰算的。
-//
-// `TOWN7.0` 的檔頭（前 300 byte）是 offset 表：`1a 00` 之後接的是 16 位元位移，
-// **前四格都是 0**（entry 不存在），第五格起才是 `066e`／`0893`。程式取到 0，
-// 表示它算出來的 entry 編號 < 4。
-//
-// 編號多半來自 KOLTOWN 自己的狀態，而它是主程式 EXEC 起來的子程式。這一條先問
-// 「是哪個呼叫端」，再讀那一帶的碼。
-func TestProbeLZWCaller(t *testing.T) {
-	o := load(t)
-	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
-	type call struct {
-		caller uint32
-		off    uint16
-		step   uint64
-	}
-	var calls []call
-	o.OnCall(o.IDA(0x1A04E), func(p *oracle.Oracle) {
-		calls = append(calls, call{
-			caller: p.ToIDA(p.Caller()), off: p.Arg(1), step: p.Steps()})
-	})
-	if err := o.Run(40_000_000); err != nil {
-		t.Logf("停了：%v", err)
-	}
-	for i, c := range calls {
-		t.Logf("第 %d 次（步數 %d）：呼叫端 IDA %#x、輸入位移 %#x",
-			i, c.step, c.caller, c.off)
-	}
-	for _, ea := range []uint32{0x1A4D6, 0x1A858} {
-		t.Logf("呼叫端 IDA %#x 往前 0x40 個 byte：%x",
-			ea, o.Bytes(o.IDA(ea-0x40), 0x44))
-	}
-}
-
 // 探測：從主程式 `KOL.EXE` 開始跑。
 //
 // 遊戲目錄裡有 `KOL.EXE`（11,971 byte 的未壓縮 MS C 程式）、**`MAKEMODE.EXE`**
 // （名字就是「設模式」）、`TANDYPIN.EXE`、`TITLE.EXE`、`KOLBOOK.EXE`、`KOLTOWN.EXE`。
 //
-// KOLTOWN 少了前置狀態就會用垃圾繼續跑（視訊模式那一條已經證實），而前置是誰設的
-// ——從主程式跑起來就知道。dosgolem 有 EXEC（`docs/spec/007`），整條鏈跑得起來的話
-// 就不必再手動補狀態。
+// `KOL.EXE` 是主程式：設好視訊模式，再用 `int 21h AH=4Bh AL=03h`（載入 overlay）
+// 把 `TITLE.EXE`／`KOLBOOK.EXE`／`KOLTOWN.EXE` 搬進自己配好的記憶體、far call
+// 進入點。**不是 EXEC 子程式**——直接載 KOLTOWN 少的就是主程式設好的那些前置。
 func TestProbeMainExecutable(t *testing.T) {
 	const main = rootPath + "/KOL.EXE"
 	if _, err := os.Stat(main); err != nil {
@@ -928,4 +735,210 @@ func TestProbeBootChain(t *testing.T) {
 	}
 	t.Logf("送完鍵：停在 %s、視訊模式 %#02x、開過 %v",
 		o.IP(), o.VideoMode(), o.Opened())
+}
+
+// 探測：記憶體配置器把哪些段配出去。
+//
+// 卡住那一段是「把所有記憶體配光」的慣用法（`48h` 要 1 段 →`4Ah` 撐到最大 →
+// 把上一塊的段寫進這塊的開頭串成鏈）。它寫壞了自己的碼，表示 `48h` 回的段
+// **落在映像裡**。
+func TestProbeMemOps(t *testing.T) {
+	main := chainRoot + "/KOL.EXE"
+	if _, err := os.Stat(main); err != nil {
+		t.Skipf("沒有 %s：%v", main, err)
+	}
+	o, err := oracle.Load(main, chainRoot)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(o.Close)
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	ops := o.MemOps()
+	t.Logf("共 %d 筆記憶體服務", len(ops))
+	for i, op := range ops {
+		if i >= 24 {
+			t.Logf("…還有 %d 筆", len(ops)-i)
+			break
+		}
+		t.Logf("  第 %d 道 %-8s 段=%04X 要=%04X 得=%04X 可用=%04X free=%04X 失敗=%v",
+			op.Step, op.Kind, op.Block, op.Want, op.Got, op.Avail, op.FreeSeg, op.Failed)
+	}
+}
+
+// 探測：片頭在播，接下來呢。overlay 通了之後 `TITLE.EXE` 會一路讀 `BACKPICS.0`，
+// 所以看「開過哪些檔」的變化就知道階段有沒有推進。
+func TestProbeTitleProgress(t *testing.T) {
+	main := chainRoot + "/KOL.EXE"
+	if _, err := os.Stat(main); err != nil {
+		t.Skipf("沒有 %s：%v", main, err)
+	}
+	o, err := oracle.Load(main, chainRoot)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(o.Close)
+	seen := 0
+	for round := 0; round < 8; round++ {
+		err := o.Run(50_000_000)
+		files := o.Opened()
+		nonzero := 0
+		for _, v := range o.Indexed() {
+			if v != 0 {
+				nonzero++
+			}
+		}
+		t.Logf("第 %d 輪：停在 %s、模式 %02Xh、A0000 非零 %d、開過 %d 個檔",
+			round, o.IP(), o.VideoMode(), nonzero, len(files))
+		if len(files) > seen {
+			t.Logf("    新開：%v", files[seen:])
+			seen = len(files)
+		}
+		if err != nil {
+			t.Logf("    停了：%v", err)
+			break
+		}
+	}
+}
+
+// 探測：城鎮那條線的記憶體配置。前綴表落在 `2EFF:0000`，而 `CHARDATA` 也讀進
+// `2EFF0`——同一塊被用了兩次。誰配的、配了幾次。
+func TestProbeTownMemOps(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(3_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	ops := o.MemOps()
+	t.Logf("共 %d 筆記憶體服務", len(ops))
+	for i, op := range ops {
+		if i >= 30 {
+			t.Logf("…還有 %d 筆", len(ops)-i)
+			break
+		}
+		t.Logf("  第 %d 道 %-8s 段=%04X 要=%04X 得=%04X 可用=%04X free=%04X 失敗=%v",
+			op.Step, op.Kind, op.Block, op.Want, op.Got, op.Avail, op.FreeSeg, op.Failed)
+	}
+}
+
+// 探測：`TOWN7.0` 前後完整的檔案軌跡（含開、關與失敗的呼叫）。
+func TestProbeTownFullTrace(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(3_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	ops := o.FileOps()
+	t.Logf("共 %d 次檔案操作", len(ops))
+	for _, op := range ops {
+		mark := ""
+		if op.Failed {
+			mark = "  ← 失敗"
+		}
+		t.Logf("  第 %8d 道 %-5s %-12s handle %2d whence %d 位移 %6d 要 %5d 得 %5d%s",
+			op.Step, op.Kind, op.Name, op.Handle, op.Whence, op.Offset, op.Want, op.Got, mark)
+	}
+}
+
+// 探測：城鎮載完之後怎麼推進。原版停在 `sub_1B100` 輪詢 `int 33h`，
+// 畫面是建築物內的對話框。逐個鍵與幾個點擊位置試，看哪一個讓畫面動。
+func TestProbeTownAdvance(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(200_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	hash := func() string {
+		sum := sha256.Sum256(o.Tandy16())
+		return hex.EncodeToString(sum[:8])
+	}
+	base := hash()
+	t.Logf("基準畫面 %s、停在 IDA %#x、開了 %d 個檔", base, o.ToIDA(o.IP()), len(o.Opened()))
+
+	for _, k := range []struct{ name, send string }{
+		{"Enter", "\r"}, {"Esc", "\x1b"}, {"空白", " "},
+		{"L", "L"}, {"T", "T"}, {"X", "X"}, {"Q", "Q"},
+	} {
+		o.ClearInput()
+		o.Type(k.send)
+		if err := o.Run(20_000_000); err != nil {
+			t.Logf("  鍵 %-4s：停了 %v", k.name, err)
+			break
+		}
+		if h := hash(); h != base {
+			t.Logf("  鍵 %-4s：畫面變了 %s → %s、開了 %d 個檔", k.name, base, h, len(o.Opened()))
+			base = h
+		} else {
+			t.Logf("  鍵 %-4s：沒反應", k.name)
+		}
+	}
+
+	for _, p := range []struct {
+		name string
+		x, y int
+	}{
+		{"文字框", 200, 110}, {"頭像", 40, 100}, {"隊員圖示", 20, 20},
+		{"下方空白", 160, 190}, {"畫面中央", 160, 100},
+	} {
+		if err := o.Click(p.x, p.y, oracle.NoCursorWait(),
+			oracle.Frame((*oracle.Oracle).Tandy16)); err != nil {
+			t.Logf("  點 %-8s (%3d,%3d)：%v", p.name, p.x, p.y, err)
+			continue
+		}
+		h := hash()
+		t.Logf("  點 %-8s (%3d,%3d)：畫面 %s%s、開了 %d 個檔", p.name, p.x, p.y, h,
+			map[bool]string{true: "（變了）", false: "（沒變）"}[h != base], len(o.Opened()))
+		base = h
+	}
+}
+
+// savePNG 把目前的 Tandy 畫面存成 PNG（探測用）。
+func savePNG(t *testing.T, o *oracle.Oracle, path string) {
+	t.Helper()
+	shot := o.Tandy16()
+	img := image.NewRGBA(image.Rect(0, 0, 320, 200))
+	for y := 0; y < 200; y++ {
+		for x := 0; x < 320; x++ {
+			c := cgaPalette[shot[y*320+x]&0x0F]
+			img.Set(x, y, color.RGBA{c[0], c[1], c[2], 0xFF})
+		}
+	}
+	f, err := os.Create(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer f.Close()
+	if err := png.Encode(f, img); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("寫出 %s", path)
+}
+
+// 探測：在城鎮畫面上點幾個位置，各存一張圖，人眼判斷哪一個推得動。
+func TestDumpTownClicks(t *testing.T) {
+	dir := os.Getenv("KOL_ORACLE_DUMP")
+	if dir == "" {
+		t.Skip("沒設 KOL_ORACLE_DUMP")
+	}
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(200_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	savePNG(t, o, dir+"/00-base.png")
+	for i, p := range []struct {
+		name string
+		x, y int
+	}{
+		{"文字框", 200, 110}, {"頭像", 40, 100}, {"隊員圖示", 20, 20},
+		{"下方空白", 160, 190}, {"右下角", 300, 190}, {"左下手形", 20, 190},
+	} {
+		err := o.Click(p.x, p.y, oracle.NoCursorWait(), oracle.Frame((*oracle.Oracle).Tandy16))
+		savePNG(t, o, fmt.Sprintf("%s/%02d-%s.png", dir, i+1, p.name))
+		t.Logf("  點 %s (%d,%d)：%v、IDA %#x", p.name, p.x, p.y, err, o.ToIDA(o.IP()))
+	}
 }
