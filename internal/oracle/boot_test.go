@@ -404,3 +404,91 @@ func TestProbeOtherBootModes(t *testing.T) {
 			mode, o.Word(o.IDA(0x2FB54)), o.ToIDA(o.IP()), len(o.Opened()), polls)
 	}
 }
+
+// 畫面到底畫了沒——CGA 模式 4 的視訊記憶體在 `B8000`，掃描線交錯。
+//
+// `Indexed()` 讀的是 mode 13h 的 `A0000`，所以 CGA 程式在它底下永遠是全黑。
+// 這一條用 `CGA4()` 問真正的那一塊：畫面有東西，才談得上「該點哪裡」。
+func TestBootDrawsSomething(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 4)
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	shot := o.CGA4()
+	hist := map[uint8]int{}
+	for _, v := range shot {
+		hist[v]++
+	}
+	t.Logf("CGA 畫面色號分布：%v（共 %d 個像素）", hist, len(shot))
+	if hist[0] == len(shot) {
+		t.Fatal("整張畫面都是色號 0——`B8000` 那一塊什麼都沒有")
+	}
+	// 粗略看一下輪廓：每 8 列取一列，每 4 欄取一格。
+	for y := 0; y < 200; y += 8 {
+		line := make([]byte, 0, 80)
+		for x := 0; x < 320; x += 4 {
+			line = append(line, " .:#"[shot[y*320+x]])
+		}
+		t.Logf("%3d |%s|", y, line)
+	}
+}
+
+// 掃描：哪一種啟動模式讓原版走得最遠。
+//
+// `_main` 認的模式清單是從反組譯讀出來的（4／9／7），但那只是我解碼到的部分。
+// 與其猜，不如把 `0040:0049` 的每一個值都試一遍——判準有四個，**一起看才準**：
+// 視訊段被設了沒、向量表完好沒、開了幾個檔、畫面畫了幾個像素。
+//
+// 只看其中一個會誤判：模式 4 設了視訊段卻只開 4 個檔，模式 9 開了 19 個檔卻沒設
+// 視訊段。**走得遠**與**走得對**是兩件事。
+func TestProbeAllBootModes(t *testing.T) {
+	for mode := 0; mode <= 0x13; mode++ {
+		o := load(t)
+		o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, uint8(mode))
+		if err := o.Run(20_000_000); err != nil {
+			t.Logf("模式 %02X 停了：%v", mode, err)
+		}
+		nz := 0
+		for _, v := range o.CGA4() {
+			if v != 0 {
+				nz++
+			}
+		}
+		vec := o.Word(oracle.Addr{Seg: 0, Off: 0x22})
+		t.Logf("模式 %02X：視訊段 %04X、向量 int08 %04X%s、開 %2d 個檔、"+
+			"CGA 非零 %5d、停在 IDA %#x",
+			mode, o.Word(o.IDA(0x2FB54)), vec,
+			map[bool]string{true: "", false: "（壞了）"}[vec == 0x0080],
+			len(o.Opened()), nz, o.ToIDA(o.IP()))
+	}
+}
+
+// 模式 09 與 0D 是唯二走得完載入的（19 個檔），其餘五個檔就 `AH=4Ch` 離開。
+// 這一條分辨它們：09 是 Tandy（視訊記憶體 B800），0D 是 EGA 320×200（A0000）。
+//
+// **KOL 是 EGA 遊戲**（`assets/original-derived-png/ega/`），所以 0D 才是那一條。
+// 判準是兩塊記憶體一起看——只讀一塊會把「畫在另一塊」誤判成「沒畫」。
+func TestProbeTandyVsEGA(t *testing.T) {
+	for _, mode := range []uint8{9, 0x0D} {
+		o := load(t)
+		o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, mode)
+		if err := o.Run(40_000_000); err != nil {
+			t.Logf("模式 %02X 停了：%v", mode, err)
+		}
+		count := func(b []uint8) int {
+			n := 0
+			for _, v := range b {
+				if v != 0 {
+					n++
+				}
+			}
+			return n
+		}
+		polls, pressed := o.MouseActivity()
+		t.Logf("模式 %02X：B8000 非零 %d、A0000 非零 %d、滑鼠輪詢 %d（按著 %d）、"+
+			"停在 IDA %#x、開了 %v",
+			mode, count(o.CGA4()), count(o.Indexed()), polls, pressed,
+			o.ToIDA(o.IP()), o.Opened())
+	}
+}
