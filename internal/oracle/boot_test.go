@@ -611,3 +611,38 @@ func TestProbeTownLoopPointer(t *testing.T) {
 			o.Steps(), o.ToIDA(o.IP()), nz, polls, len(o.Opened()))
 	}
 }
+
+// 探測：那條鏈是不是繞成了環。
+//
+// 迴圈的終止條件是「讀到 -1」。指標有效、終止值也在，卻走不完——最可能的解釋是
+// **鏈結繞回去了**。判準是取樣 `[bp-14]`（目前走到的節點）：值週期性重複就是環。
+func TestProbeChainIsCircular(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	seen := map[uint16]int{}
+	var order []uint16
+	for i := 0; i < 400; i++ {
+		r := o.Regs()
+		node := o.Word(oracle.Addr{Seg: r.SS, Off: r.BP - 0x14})
+		idx := o.Word(oracle.Addr{Seg: r.SS, Off: r.BP - 0x1C})
+		if seen[node] == 0 && len(order) < 24 {
+			order = append(order, node)
+		}
+		seen[node]++
+		if i == 0 || i == 399 {
+			t.Logf("取樣 %d：節點 %04X、索引 %04X", i, node, idx)
+		}
+		if err := o.Run(5_000); err != nil {
+			t.Logf("往前走停了：%v", err)
+			break
+		}
+	}
+	t.Logf("四百次取樣看到 %d 個不同的節點值", len(seen))
+	t.Logf("前幾個：%04X", order)
+	if len(seen) < 400 {
+		t.Log("節點值重複——這條鏈繞成了環，永遠走不到 -1")
+	}
+}
