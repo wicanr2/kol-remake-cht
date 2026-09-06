@@ -413,3 +413,189 @@ func TestMonsterSkillOverflowBoundary(t *testing.T) {
 		t.Logf("技能 %d × 等級 %d ÷ 5：兩邊都是 %d", c.skill, c.level, got)
 	}
 }
+
+// 負重與武器速度本身（`sub_24FD3`，RE-080）。
+const (
+	// weightOut／speedOut 是它寫的兩格（`word_30C88`／`word_37CF0`）。
+	weightOut = encumbrance
+	speedOut  = weaponSpeed
+	// shieldGradeOut 是盾牌等級（`word_34A0C`）。
+	shieldGradeOut = 0x34A0C
+	// 怪物記錄裡的物品格：武器 +0x20、三件護甲 +0x30／+0x40／+0x50、盾牌 +0x60，
+	// 一格 16 byte，重量在格內 +0x0A（`tools/extract_monsters.py`）。
+	itemWeight  = 0x0A
+	monWeapon   = 0x20
+	monShield   = 0x60
+	actorLevel  = 0x02 // 參戰者記錄的等級
+)
+
+var monArmour = [3]uint16{0x30, 0x40, 0x50}
+
+// 探測：`sub_24FD3` 實際讀的是哪一筆記錄的哪幾格。
+//
+// 它**不吃參數**（RESEARCH-LOG 記的就是 `sub_24FD3()`），用的是「當前行動者」的
+// 全域——所以照怪物那一側設好資料再傳 slot 進去，原版一律回 0。
+//
+// 逐格探測：把候選記錄的第 k 個 byte 設成 0xFF，看武器速度變不變。這個手法在
+// 敵我旗標那一次一次就問到了答案（五十次呼叫定位到 `+0x01`），比讀反組譯快。
+func TestProbeEncumbranceInputs(t *testing.T) {
+	o := prepare(t)
+	for _, region := range []struct {
+		name string
+		base uint16
+		size uint16
+	}{
+		{"參戰者 0 的記錄", uint16(actorBase), uint16(actorStride)},
+		{"角色記錄 0（ds:BB88 起 0x180）", 0xBB88, 0x180},
+		{"角色記錄 0 的穿戴欄（+0x100 起 0xC0）", 0xBB88 + 0x100, 0xC0},
+	} {
+		var hits []string
+		for k := uint16(0); k < region.size; k++ {
+			old := o.Byte(o.DS(region.base + k))
+			o.WriteU8(o.DS(region.base+k), 0xFF)
+			o.WriteU16(o.IDA(speedOut), 0)
+			o.WriteU16(o.IDA(weightOut), 0)
+			if _, err := o.Call(o.IDA(weightFn)); err != nil {
+				t.Fatalf("%s 第 %#x 格：%v", region.name, k, err)
+			}
+			sp := o.Word(o.IDA(speedOut))
+			en := o.Word(o.IDA(weightOut))
+			if sp != 0 || en != 0 {
+				hits = append(hits, fmtHit(k, sp, en))
+			}
+			o.WriteU8(o.DS(region.base+k), old)
+		}
+		t.Logf("%s：%d 格影響輸出 %v", region.name, len(hits), hits)
+	}
+}
+
+func fmtHit(k, sp, en uint16) string {
+	return "+0x" + hex4(k) + "(速度" + dec(sp) + "/負重" + dec(en) + ")"
+}
+
+func hex4(v uint16) string {
+	const d = "0123456789ABCDEF"
+	return string([]byte{d[(v>>8)&0xF], d[(v>>4)&0xF], d[v&0xF]})
+}
+
+func dec(v uint16) string {
+	if v == 0 {
+		return "0"
+	}
+	var b []byte
+	for v > 0 {
+		b = append([]byte{byte('0' + v%10)}, b...)
+		v /= 10
+	}
+	return string(b)
+}
+
+// 負重 ＝ 係數 × (武器重量÷2 ＋ 三件護甲 ＋ 盾牌) ÷ 100，速度 ＝ 武器重量 × 係數 ÷ 100。
+//
+// 係數是 `70 − (等級−1) × 5`。這一支是上一輪抓到缺口的那一支——原版每次算一手的
+// 花費都重跑它，所以戰鬥中換武器兩個數字會立刻變。這一條把公式本身釘在原版上。
+//
+// 輸入的位置是**逐格探出來的**（`TestProbeEncumbranceInputs`）：它不吃參數，用的是
+// 當前行動者（參戰者 0）與它的本體記錄 `ds:BB88`；手上武器在 `+0x30`（重量 `+0x3A`），
+// 三件護甲的重量在 `+0x10A`／`+0x11A`／`+0x12A`，等級在參戰者記錄 `+0x02`。
+func TestEncumbranceMatchesOriginal(t *testing.T) {
+	o := prepare(t)
+	const (
+		slot     = 0
+		charBase = 0xBB88 // 角色記錄 0
+		charWeapon = 0x3A // 手上武器的重量
+		charShield = 0x160
+	)
+	charArmour := [3]uint16{0x10A, 0x11A, 0x12A}
+	rec := uint16(actorBase + actorStride*slot)
+	o.WriteU8(o.DS(rec+sideFlag), 0) // 隊員
+	// 沒有盾牌：那一格的第一個 byte 是 0（同 `extract_monsters.py` 的判準）。
+	for k := uint16(0); k < 16; k++ {
+		o.WriteU8(o.DS(charBase+charShield+k), 0)
+	}
+
+	for _, c := range []struct {
+		level, weapon int
+		armour        [3]int
+	}{
+		{1, 40, [3]int{10, 20, 10}},
+		{1, 0, [3]int{0, 0, 0}},
+		{3, 40, [3]int{10, 20, 10}},
+		{5, 100, [3]int{30, 40, 30}},
+		{10, 12, [3]int{1, 2, 3}},
+		{2, 255, [3]int{0, 0, 0}},
+		{7, 33, [3]int{5, 5, 5}},
+		{1, 100, [3]int{90, 90, 87}}, // 實際資料的上限：武器 100、護甲加總 267
+	} {
+		o.WriteU8(o.DS(rec+actorLevel), uint8(c.level))
+		o.WriteU8(o.DS(charBase+charWeapon), uint8(c.weapon))
+		for k, w := range c.armour {
+			o.WriteU8(o.DS(charBase+charArmour[k]), uint8(w))
+		}
+		o.WriteU16(o.IDA(weightOut), 0xDEAD)
+		o.WriteU16(o.IDA(speedOut), 0xDEAD)
+
+		if _, err := o.Call(o.IDA(weightFn)); err != nil {
+			t.Fatalf("等級 %d／武器 %d：%v", c.level, c.weapon, err)
+		}
+		gotEnc := int(int16(o.Word(o.IDA(weightOut))))
+		gotSpeed := int(int16(o.Word(o.IDA(speedOut))))
+		if uint16(gotEnc) == 0xDEAD || uint16(gotSpeed) == 0xDEAD {
+			t.Fatalf("等級 %d／武器 %d：兩格沒被寫", c.level, c.weapon)
+		}
+		armour := c.armour[0] + c.armour[1] + c.armour[2]
+		wantEnc, wantSpeed := battle.Encumbrance(
+			c.level, battle.Weapon{Weight: c.weapon}, armour, 0)
+		if gotEnc != wantEnc || gotSpeed != wantSpeed {
+			t.Errorf("等級 %d／武器 %d／護甲 %v：原版 (負重 %d, 速度 %d)，remake (%d, %d)",
+				c.level, c.weapon, c.armour, gotEnc, gotSpeed, wantEnc, wantSpeed)
+		}
+	}
+}
+
+
+// 溢位邊界：原版那一步是**有號** 16 位元乘法。
+//
+// `係數 × 總重` 超過 32767 就變負數，負重跟著變負。等級 1 的係數是 70，所以門檻是
+// 總重 468。**實際資料到不了**——怪物護甲重量最大 267、武器負重最大 100（折半算 50），
+// 加起來 317。但這個邊界**比技能那一格近得多**（那一格要 6554 × 10），所以記下來。
+func TestEncumbranceOverflowBoundary(t *testing.T) {
+	o := prepare(t)
+	const (
+		slot       = 0
+		charBase   = 0xBB88
+		charWeapon = 0x3A
+		charShield = 0x160
+	)
+	charArmour := [3]uint16{0x10A, 0x11A, 0x12A}
+	rec := uint16(actorBase + actorStride*slot)
+	o.WriteU8(o.DS(rec+sideFlag), 0)
+	o.WriteU8(o.DS(rec+actorLevel), 1) // 係數 70
+	for k := uint16(0); k < 16; k++ {
+		o.WriteU8(o.DS(charBase+charShield+k), 0)
+	}
+	o.WriteU8(o.DS(charBase+charWeapon), 0)
+
+	for _, armour := range [][3]int{
+		{90, 90, 87},    // 實際資料的上限：總重 267
+		{156, 156, 156}, // 總重 468，剛好不溢位
+		{157, 156, 156}, // 總重 469，剛好溢位
+		{255, 255, 255}, // 遠超過
+	} {
+		for k, w := range armour {
+			o.WriteU8(o.DS(charBase+charArmour[k]), uint8(w))
+		}
+		if _, err := o.Call(o.IDA(weightFn)); err != nil {
+			t.Fatalf("護甲 %v：%v", armour, err)
+		}
+		got := int(int16(o.Word(o.IDA(weightOut))))
+		total := armour[0] + armour[1] + armour[2]
+		want, _ := battle.Encumbrance(1, battle.Weapon{}, total, 0)
+		if got != want {
+			t.Logf("護甲加總 %d：原版 %d，直接算 %d（有號 16 位元溢位）",
+				total, got, want)
+			continue
+		}
+		t.Logf("護甲加總 %d：兩邊都是 %d", total, got)
+	}
+}
