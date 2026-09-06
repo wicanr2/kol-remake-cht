@@ -1353,3 +1353,96 @@ func TestDefenceScoreMatchesOriginal(t *testing.T) {
 		})
 	}
 }
+
+// 傷害鏈：設好狀態之後兩邊算出同一個數（`sub_26D76:0x274D6`…`0x27645`）。
+//
+// 輸入全是全域：`word_30A76` 傷害碼（`÷32+1` 是骰數、`(÷4)&7` 挑骰面）、
+// `sub_26D3C` 的回傳是基礎傷害、`word_31122` 指令碼。落點是**防禦者記錄的
+// `+0x2D`**（remake 的 `Actor.Hurt`），而且是 `add`，所以先清 0。
+//
+// ⚠ **命中之後原版先印訊息再 `sub_1B100` 等玩家點滑鼠**，傷害在那之後才算。
+// 不釘住那一支，擲骰序列只有攻防那兩次——看起來像「命中了但傷害是 0」。
+func TestDamageMatchesOriginal(t *testing.T) {
+	const (
+		resolveEA   = 0x26D76
+		currentSlot = 0x9E5A
+		defenderEA  = 0x3237E
+		codeEA      = 0x31122
+		dmgCodeEA   = 0x30A76
+		baseFn      = 0x26D3C
+		fatigueOut  = 0x2FB4A
+		encumbOut   = 0x30C88
+		shieldOut   = 0x34A0C
+		atkScoreEA  = 0x2FB46
+		defScoreEA  = 0x2F942
+		fatigueFn   = 0x23683
+		encumbFn    = 0x24FD3
+		skillFn     = 0x26AC2
+		durabFn     = 0x22084
+		waitFn      = 0x1B100
+		hurtOff     = 0x2D
+	)
+	for _, c := range []struct {
+		name    string
+		dmgCode int
+		base    int
+		roll    uint32
+	}{
+		{"1 骰 2 面、基礎 0", 0, 0, 1},
+		{"1 骰 2 面、基礎 5", 0, 5, 1},
+		{"2 骰 2 面", 32, 0, 1},
+		{"1 骰 3 面", 4, 0, 1},
+		{"1 骰 5 面、骰值 3", 8, 2, 3},
+		{"3 骰 7 面、基礎 4", 64 + 12, 4, 2},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			o := townMap(t)
+			o.SyncDGroupFromDS()
+			o.WriteU16(o.DS(currentSlot), 0)
+			o.WriteU16(o.IDA(defenderEA), 1)
+			atk := uint16(actorBase)
+			def := uint16(actorBase) + uint16(actorStride)
+			o.WriteU8(o.DS(atk+0x01), 0)
+			o.WriteU16(o.DS(atk+0x02), 1)
+			o.WriteU8(o.DS(atk+0x08), 70) // 力量 70 → 加成 0
+			o.WriteU8(o.DS(def+0x01), 1)
+			o.WriteU16(o.DS(def+0x02), 1)
+			o.WriteU8(o.DS(def+0x24), 1)
+			o.WriteU8(o.DS(def+0x09), 10)
+			o.WriteU8(o.DS(def+0x0F), 0)
+			o.WriteU8(o.DS(def+hurtOff), 0)
+			o.WriteU16(o.IDA(codeEA), 0) // 指令碼 0：沒有 styleDamage 那一項
+			o.WriteU16(o.IDA(dmgCodeEA), uint16(c.dmgCode))
+			o.WriteU16(o.IDA(fatigueOut), 0)
+			o.WriteU16(o.IDA(encumbOut), 0)
+			o.WriteU16(o.IDA(shieldOut), 0x80)
+			for _, fn := range []uint32{fatigueFn, encumbFn, skillFn, durabFn, waitFn} {
+				o.StubValue(o.IDA(fn), 0)
+			}
+			o.StubValue(o.IDA(baseFn), uint32(c.base))
+			o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 { return c.roll })
+			_, _ = o.CallBudget(20_000_000, o.IDA(resolveEA), 0)
+			for _, fn := range []uint32{fatigueFn, encumbFn, skillFn, durabFn, baseFn, waitFn, uint32(rollEnter)} {
+				o.Stub(o.IDA(fn), nil)
+			}
+			margin := int(int16(o.Word(o.IDA(atkScoreEA)))) - int(int16(o.Word(o.IDA(defScoreEA))))
+			got := int(o.Byte(o.DS(def + hurtOff)))
+
+			count, sides := battle.DamageCode(c.dmgCode)
+			a := battle.Actor{
+				Strength: 70, Fatigue: 0, Stamina: 50,
+				Weapon: battle.Weapon{Base: c.base, Count: count, Sides: sides},
+			}
+			r := &recordingRand{values: []int{
+				int(c.roll), int(c.roll), int(c.roll), int(c.roll), int(c.roll),
+			}}
+			want := battle.DamageRoll(a, 0, margin, r)
+			if got != want {
+				t.Fatalf("原版 %d，remake %d（傷害碼 %d ＝ %d 骰 %d 面、基礎 %d、骰值 %d、餘裕 %d）",
+					got, want, c.dmgCode, count, sides, c.base, c.roll, margin)
+			}
+			t.Logf("兩邊都是 %d（%d 骰 %d 面、基礎 %d、餘裕 %d）",
+				got, count, sides, c.base, margin)
+		})
+	}
+}
