@@ -749,3 +749,48 @@ func TestPartySkillRowFollowsWeaponClass(t *testing.T) {
 	t.Logf("種類不在四列裡時：攻 %d、防 %d",
 		o.Word(o.IDA(offSkill)), o.Word(o.IDA(defSkill)))
 }
+
+// 探測：`sub_22084`（扣裝備耐久）的參數與效果。
+//
+// RESEARCH-LOG 只記了「傷害超過上限就扣裝備耐久，扣光了那件裝備整個清成 0」，
+// 沒記參數與扣多少。讀它的機器碼比再開一次 IDA 便宜——同一個 `.i64` 連續開關
+// 會把資料庫弄壞，這一輪已經開過兩次。
+func TestProbeDurabilityRoutine(t *testing.T) {
+	o := prepare(t)
+	t.Logf("`sub_22084` 起 0x60 個 byte：%x", o.Bytes(o.IDA(0x22084), 0x60))
+
+	// 解出來的骨架：arg0 是物品格的位移（相對 `[ds:BB78]` 指的記錄），
+	// 扣量是 `(記錄[+0x0F] & 0x20) × arg1`，耐久在 `+0x0B`，扣到負數整格清 0。
+	// 用實驗確認比繼續解碼可靠。
+	const (
+		charBase = 0xBB88
+		recPtr   = 0xBB78 // 指向當前記錄的指標
+		slotOff  = 0x30   // 手上武器那一格
+		durab    = 0x0B
+		flags    = 0x0F
+	)
+	o.WriteU16(o.DS(recPtr), charBase)
+	for _, c := range []struct {
+		durability, flag, arg int
+	}{
+		{200, 0x20, 1}, // bit5 設：扣 32
+		{200, 0x20, 2}, // 扣 64
+		{200, 0x00, 5}, // bit5 沒設：不扣
+		{40, 0x20, 1},  // 扣到負數
+		{32, 0x20, 1},  // 剛好扣到 0
+		{20, 0x20, 1},  // 扣成負的——整格應該被清掉
+		{200, 0x20, 7}, // 一次扣爆
+	} {
+		o.WriteU8(o.DS(charBase+slotOff), 1) // 這一格有東西
+		o.WriteU8(o.DS(charBase+slotOff+durab), uint8(c.durability))
+		o.WriteU8(o.DS(charBase+slotOff+flags), uint8(c.flag))
+		if _, err := o.Call(o.IDA(0x22084), slotOff, uint16(c.arg)); err != nil {
+			t.Fatalf("耐久 %d／旗標 %#02x／arg %d：%v",
+				c.durability, c.flag, c.arg, err)
+		}
+		t.Logf("耐久 %3d、旗標 %#02x、arg %d → 耐久 %3d、第一個 byte %d",
+			c.durability, c.flag, c.arg,
+			o.Byte(o.DS(charBase+slotOff+durab)),
+			o.Byte(o.DS(charBase+slotOff)))
+	}
+}
