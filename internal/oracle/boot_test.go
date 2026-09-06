@@ -246,3 +246,161 @@ func TestProbeWhoClearsTimerVector(t *testing.T) {
 	// 而那從指令本身看不出來。
 	t.Logf("暫存器：%s", o.Regs())
 }
+
+// 探測：`ES` 是在哪裡被設成 0 的。
+//
+// 覆寫向量表的那個迴圈用 `ES:BX` 寫，而當下 `ES = 0000`。程式初始的 `ES` 是 PSP
+// 段（非 0），所以**第一次變成 0 的那一刻**就是可疑點。原版在真 DOS 上跑得起來，
+// 所以那個 0 多半是某個服務回的——量出位置才知道是哪一支。
+func TestProbeWhereESGoesZero(t *testing.T) {
+	o := load(t)
+	for i := 0; i < 6; i++ {
+		err := o.RunUntil(oracle.NewCond("ES 變成 0", func(p *oracle.Oracle) bool {
+			return p.Regs().ES == 0
+		}), oracle.Budget(40_000_000))
+		if err != nil {
+			t.Logf("第 %d 次：四千萬道指令內 ES 沒有變成 0：%v", i, err)
+			return
+		}
+		t.Logf("第 %d 次：步數 %d，在 %s（IDA %#x），%s",
+			i, o.Steps(), o.IP(), o.ToIDA(o.IP()), o.Regs())
+		t.Logf("    接下來的 bytes：%x", o.Bytes(o.IP(), 12))
+		// 走過這一段再找下一次，否則條件立刻又成立。
+		if err := o.Run(200); err != nil {
+			t.Logf("往前走停了：%v", err)
+			return
+		}
+	}
+}
+
+// 探測：覆寫向量表的那個迴圈長什麼樣。
+//
+// `ES = 0` 本身是正常的——`_main` 在第 306 道用 `es:[0449]` 讀 BIOS 資料區的視訊
+// 模式，之後就沒再改。問題是 `0x1DC59` 那個迴圈**用了沒設好的 `ES`**。
+// 前面那幾十個 byte 會說它是從哪裡拿到段的。
+func TestProbeDerailLoopBytes(t *testing.T) {
+	o := load(t)
+	for _, c := range []struct {
+		name string
+		ea   uint32
+		n    int
+	}{
+		{"覆寫迴圈往前 0x40", 0x1DC20, 0x50},
+		{"讀 far 指標那一段", 0x1A1C0, 0x30},
+	} {
+		t.Logf("%s（IDA %#x）：%x", c.name, c.ea, o.Bytes(o.IDA(c.ea), c.n))
+	}
+}
+
+// 探測：誰設了 `ds:1C84`——覆寫向量表那個迴圈的目標段。
+//
+// 那個迴圈是 `mov es, [ds:1C84]` ／ `rep movsw`：目標段從一個全域來，而那個全域
+// 是 0。**誰把它設成 0（或者從來沒設過）才是根因。**
+func TestProbeWhoSetsDestSegment(t *testing.T) {
+	o := prepare(t) // 要先對好 DGROUP，`WatchWrites` 收的是 DGROUP 偏移
+	log := o.WatchWrites(0x1C84, 0x1C86)
+	before := o.Word(o.DS(0x1C84))
+	t.Logf("`_main` 進入時 ds:1C84 ＝ %04X（IDA %#x）", before, dgroupBase+0x1C84)
+
+	if err := o.Run(2_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	t.Logf("跑了 %d 道之後 ds:1C84 ＝ %04X，寫入 %d 次",
+		o.Steps(), o.Word(o.DS(0x1C84)), len(*log))
+	for i, w := range *log {
+		if i >= 20 {
+			t.Logf("…還有 %d 筆", len(*log)-i)
+			break
+		}
+		t.Logf("  第 %d 道：ds:%04X %02X→%02X，寫的人在 %s（IDA %#x）",
+			w.Step, w.Off, w.Old, w.New, w.IP, o.ToIDA(w.IP))
+	}
+}
+
+// 探測：BIOS 資料區的視訊模式那一格。
+//
+// `word_2FB54` 是**視訊記憶體的段**，`_main` 只有兩個寫入點：彩色寫 `0B800h`、
+// 單色寫 `0B000h`。執行期量到它從頭到尾是 0——兩條分支都沒走到。
+//
+// 而 `_main` 在第 306 道就 `mov al, es:[0449]`（`ES = 0`），讀的是 BIOS 資料區的
+// `0040:0049`：**目前視訊模式**。那一格若是 0，顯示卡偵測就判不出彩色或單色。
+func TestProbeBDAVideoMode(t *testing.T) {
+	o := load(t)
+	bda := func() uint8 { return o.Bytes(oracle.Addr{Seg: 0x40, Off: 0x49}, 1)[0] }
+	t.Logf("冷啟動時 0040:0049 ＝ %#02x（`VideoMode()` 回 %#02x）", bda(), o.VideoMode())
+	if err := o.Run(2_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	t.Logf("跑了 %d 道之後 0040:0049 ＝ %#02x（`VideoMode()` 回 %#02x）",
+		o.Steps(), bda(), o.VideoMode())
+	t.Logf("視訊記憶體段 `word_2FB54` ＝ %04X（期望 B800 或 B000）",
+		o.Word(o.IDA(0x2FB54)))
+}
+
+// 探測：`_main` 開頭的顯示卡偵測走了哪一條。
+func TestProbeVideoDetect(t *testing.T) {
+	o := load(t)
+	hits := map[uint32]int{}
+	for _, ea := range []uint32{0x10036, 0x1004D, 0x100BB, 0x10410} {
+		ea := ea
+		o.OnCall(o.IDA(ea), func(*oracle.Oracle) { hits[ea]++ })
+	}
+	if err := o.Run(2_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	for _, ea := range []uint32{0x10036, 0x1004D, 0x100BB, 0x10410} {
+		t.Logf("IDA %#x 觸發 %d 次", ea, hits[ea])
+	}
+	t.Logf("`_main` 0x10036 起 0x60 個 byte：%x", o.Bytes(o.IDA(0x10036), 0x60))
+	t.Logf("`_main` 0x10096 起 0x40 個 byte：%x", o.Bytes(o.IDA(0x10096), 0x40))
+}
+
+// `_main` 只認三種啟動模式：4（CGA 320×200）、9（Tandy）、7（單色）。
+//
+// dosgolem 冷啟動把 BDA 的 `0040:0049` 填成 3（彩色 80×25 文字，DOS 的預設），
+// 三條分支都不中，於是視訊記憶體段 `word_2FB54` 從沒被設，後面每一支繪製常式
+// 都拿 `ES = 0` 去寫——中斷向量表就是這樣被 `rep movsw` 蓋掉的。
+//
+// **KOLTOWN 不是從 DOS 提示字元直接跑的**：它是主程式設好圖形模式之後 EXEC 起來
+// 的子程式。補上那個前置狀態，程式就走得下去了。
+//
+// 模式 4 是 KOL 的那一個（CGA 320×200，視訊記憶體在 B800）。
+func TestBootWithGraphicsModeSet(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 4)
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	seg := o.Word(o.IDA(0x2FB54))
+	if seg != 0xB800 {
+		t.Fatalf("視訊記憶體段是 %04X，期望 B800", seg)
+	}
+	// 向量表沒被蓋掉——dosgolem 開機時把它們全指到 StubSeg（0x0080）。
+	if v := o.Word(oracle.Addr{Seg: 0, Off: 0x22}); v != 0x0080 {
+		t.Fatalf("int 08h 的向量變成 %04X——向量表又被寫壞了", v)
+	}
+	polls, pressed := o.MouseActivity()
+	t.Logf("跑了 %d 道，停在 %s（IDA %#x），開了 %d 個檔",
+		o.Steps(), o.IP(), o.ToIDA(o.IP()), len(o.Opened()))
+	t.Logf("滑鼠輪詢 %d 次（按著 %d 次）——**這一次是真的在等玩家點**", polls, pressed)
+	if polls < 1000 {
+		t.Fatalf("滑鼠只輪詢 %d 次——它沒有停在等輸入的地方", polls)
+	}
+}
+
+// 另外兩種啟動模式走得到多遠：探索用，不下斷言。
+//
+// 模式 9（Tandy）很特別——它**沒有**設視訊段，卻開了最多檔案。那條分支值得再看，
+// 但不是現在要走的路：KOL 的圖形是 CGA 320×200。
+func TestProbeOtherBootModes(t *testing.T) {
+	for _, mode := range []uint8{9, 7} {
+		o := load(t)
+		o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, mode)
+		if err := o.Run(40_000_000); err != nil {
+			t.Logf("模式 %d 停了：%v", mode, err)
+		}
+		polls, _ := o.MouseActivity()
+		t.Logf("模式 %d：視訊段 %04X、停在 IDA %#x、開了 %d 個檔、滑鼠輪詢 %d",
+			mode, o.Word(o.IDA(0x2FB54)), o.ToIDA(o.IP()), len(o.Opened()), polls)
+	}
+}
