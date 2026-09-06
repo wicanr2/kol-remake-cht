@@ -46,7 +46,7 @@ func TestIDAMappingMatchesProbeBytes(t *testing.T) {
 // 走得到 `_main` 嗎——走不到的話上面那個映射就算對，`At()` 也沒有意義。
 func TestReachesMain(t *testing.T) {
 	o := load(t)
-	if err := o.RunUntil(At(o, 0x10000), oracle.Budget(50_000_000)); err != nil {
+	if err := o.RunUntil(oracle.At(o.IDA(0x10000)), oracle.Budget(50_000_000)); err != nil {
 		t.Fatalf("跑不到 _main：%v", err)
 	}
 	t.Logf("第 %d 道指令走到 _main", o.Steps())

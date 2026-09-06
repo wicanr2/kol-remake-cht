@@ -8,33 +8,28 @@ import (
 	"github.com/wicanr2/dosgolem/oracle"
 )
 
-// 原版載完資料就停在等輸入，一次亂數都還沒抽。這一條找出「要送幾個鍵才會開始抽」
-// ——`rand` 的第一個呼叫端是誰，決定了對拍要從哪裡接。
-func TestFindFirstDraw(t *testing.T) {
+// 原版在開機到等輸入這一段**一次亂數都不抽**。
+//
+// 這是 `rand_test.go` 為什麼改成直接呼叫的理由，記在這裡當事實：載入資料、
+// 畫標題、進到等鍵盤那一刻，`rand` 與 `rand(n)` 的呼叫次數都是 0。所以
+// 「掛上 hook 抽到 0 次」在這一段是正確結果，不是 hook 沒掛上——後者由
+// `TestOnCallFires` 用 `_main` 與 `srand` 排除。
+//
+// 想知道**遊戲什麼時候才抽**，要能驅動到戰鬥或世界地圖；那需要一份完整的
+// 操作腳本，不在這一條的範圍內。
+func TestBootDrawsNothing(t *testing.T) {
 	o := load(t)
-	var draws int
-	callers := map[string]int{}
-	o.OnCall(o.IDA(randEnter), func(p *oracle.Oracle) {
-		draws++
-		callers[p.Caller().String()]++
-	})
+	var rands, rolls int
+	o.OnCall(o.IDA(randEnter), func(*oracle.Oracle) { rands++ })
+	o.OnCall(o.IDA(rollEnter), func(*oracle.Oracle) { rolls++ })
 
-	// 先跑到它開始等輸入。
 	if err := o.Run(20_000_000); err != nil {
 		t.Logf("開機階段停了：%v", err)
 	}
-	t.Logf("開機跑完 %d 道，抽了 %d 次，停在 %s", o.Steps(), draws, o.IP())
-
-	// 一批一批送鍵，看第幾批開始抽。空白與 Enter 是原版每一頁的推進鍵。
-	for round := 0; round < 12 && draws == 0; round++ {
-		o.Type(" \r")
-		if err := o.Run(20_000_000); err != nil {
-			t.Logf("第 %d 批之後停了：%v", round, err)
-			break
-		}
-	}
-	t.Logf("送鍵之後總共 %d 道、抽了 %d 次；呼叫端 %v", o.Steps(), draws, callers)
-	if draws == 0 {
-		t.Skip("送了鍵還是沒抽——要更長的操作腳本才走得到會抽亂數的地方")
+	t.Logf("開機跑完 %d 道，停在 %s；rand %d 次、rand(n) %d 次",
+		o.Steps(), o.IP(), rands, rolls)
+	if rands != 0 || rolls != 0 {
+		t.Fatalf("開機階段抽了亂數（rand %d、rand(n) %d）——"+
+			"那表示對拍可以從自然流程接，這一條的前提要重寫", rands, rolls)
 	}
 }

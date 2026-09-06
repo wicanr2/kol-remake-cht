@@ -42,7 +42,13 @@ func (r *LCG) Next() int {
 }
 
 // Roll 是原版的 `sub_1B5A8(n)`：`rand() % n + 1`，回 1…n。
-// n 不是正的就回 0 且**不動種子**——原版走不到那一條（呼叫端都是常數）。
+//
+// n 不是正的就回 0 且**不動種子**。這一格是**故意與原版不同**：原版沒有這道
+// 保護，`rand(0)` 直接除以零，整個行程帶著 MS C 的 `R6003 integer divide by 0`
+// 離開（實跑量到，`internal/oracle` 的 `TestRollOfZeroCrashesOriginal`）。
+//
+// 所以回 0 不是在對齊原版，是在讓 remake 不要跟著崩。**收到 n≤0 就表示上游算錯了**
+// ——原版走得到的路徑上，這個引數不可能是 0，否則玩家在原版就會看到當機。
 func (r *LCG) Roll(n int) int {
 	if n <= 0 {
 		return 0
@@ -50,7 +56,11 @@ func (r *LCG) Roll(n int) int {
 	return r.Next()%n + 1
 }
 
-// Choose 是 `rand() % n`，回 0…n−1。標題序列的二選一用它。
+// Choose 是 `rand() % n`，回 0…n−1。
+//
+// ⚠ **原版沒有這一支。** 它是 remake 自己要的 0-based 版本，標題序列的二選一用它。
+// 拿它去實作原版的規則之前，要先確認那一處原版走的是哪一層——原版只有裸 `rand()`
+// 與 `rand(n)`，兩者都不是這個。
 func (r *LCG) Choose(n int) int {
 	if n <= 0 {
 		return 0

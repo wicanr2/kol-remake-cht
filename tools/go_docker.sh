@@ -15,7 +15,7 @@ CPUS="${KOL_GO_CPUS:-2}"
 
 # dosgolem 是對拍用的無頭 DOS 執行器。旁邊有一份就唯讀掛進去，`go.work` 才接得起來
 # （`DOSGOLEM=` 可以指到別的路徑；沒有就整段跳過，`-tags oracle` 之外的建置不受影響）。
-DOSGOLEM="${DOSGOLEM:-$HOME/cht/dosgolem}"
+DOSGOLEM="${DOSGOLEM:-$HOME/cht/dosgolem-kolrand}"
 GOLEM_MOUNT=()
 if [ -f "$DOSGOLEM/go.mod" ]; then
   GOLEM_MOUNT=(-v "$DOSGOLEM:/dosgolem:ro")
