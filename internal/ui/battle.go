@@ -132,7 +132,8 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	// 執行段那張卷軸上，沒有另外開框。
 	if s.Plan.Prompt == battle.PromptExecuting ||
 		s.Plan.Prompt == battle.PromptFlee ||
-		s.Plan.Prompt == battle.PromptPickUp {
+		s.Plan.Prompt == battle.PromptPickUp ||
+		s.Plan.Prompt == battle.PromptArea {
 		box := battle.MessageBox
 		scroll, err := sprites.Get(battle.MessageScroll.Archive,
 			battle.MessageScroll.Index)

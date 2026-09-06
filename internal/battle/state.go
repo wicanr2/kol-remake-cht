@@ -107,6 +107,8 @@ type State struct {
 	Exec Execution
 	// Rand 是排規劃順序要用的亂數來源。
 	Rand Rand
+	// Area 是效果 6 的法術停在「挑一個部位」那一層時的狀態（RE-100）。
+	Area *AreaQuestion
 	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
 	// 所以這裡是一份不是一組。
 	Monster Monster

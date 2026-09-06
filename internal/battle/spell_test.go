@@ -443,3 +443,66 @@ func TestRestRecoversFatigue(t *testing.T) {
 		t.Fatalf("挨過打該走額度那一條，疲勞是 %d，期望 62", got)
 	}
 }
+
+// 效果 6 分兩條：要選目標格的擲隨機部位，不用選的停下來問玩家。
+func TestCastAreaAsksWhenNoTargetCell(t *testing.T) {
+	// PowerCode 0x02（bit 7 沒設）→ 不用選目標格 → 要問。
+	s := castState(Spell{Effect: SpellEffectArea, TurnCode: 0x02, PowerCode: 0x02})
+	s.Actors[0].Negative = true
+	s.Actors[0].Command = CmdCast
+	s.Actors[0].Facing = 0
+	// ring0[0] 是 {−1, 0}：面前那一格在自己上方一列。
+	s.Actors[0].X, s.Actors[0].Y = 5, 5
+	s.Actors[1].X, s.Actors[1].Y = 4, 5
+	s.Exec.Order = []int{0}
+	out, ok := s.Act(maxRand{})
+	if !ok {
+		t.Fatal("該做出一手")
+	}
+	if out.Cast == nil || !out.Cast.NeedsArea {
+		t.Fatalf("該停下來問部位，得到 %+v", out.Cast)
+	}
+	if s.Plan.Prompt != PromptArea {
+		t.Fatalf("提示層是 %d，期望 PromptArea", s.Plan.Prompt)
+	}
+	// 骰已經擲完：強度是 3（1 顆 3 面擲滿）。
+	if out.Cast.Power != 3 {
+		t.Fatalf("強度 %d，期望 3", out.Cast.Power)
+	}
+	// 這時候還沒有人受傷。
+	before := s.Actors[1].RightArm
+	// 超出範圍的鍵不算數，也不離開那一層。
+	if _, _, ok := s.AnswerArea(9); ok || s.Plan.Prompt != PromptArea {
+		t.Fatal("超出範圍的部位不該收")
+	}
+	res, caster, ok := s.AnswerArea(2) // 右臂
+	if !ok || caster != 0 || res.Area != 2 {
+		t.Fatalf("回答之後是 %+v／施法者 %d", res, caster)
+	}
+	if s.Plan.Prompt != PromptArea && s.Actors[1].RightArm != before-3 {
+		t.Fatalf("右臂剩 %d，期望 %d", s.Actors[1].RightArm, before-3)
+	}
+}
+
+// 要選目標格的那一種不問，直接擲。
+func TestCastAreaRollsWhenTargetCellIsPicked(t *testing.T) {
+	s := castState(Spell{Effect: SpellEffectArea, TurnCode: 0x02, PowerCode: 0x8E})
+	got := s.Cast(0, 1, 3, maxRand{})
+	if got.NeedsArea {
+		t.Fatal("要選目標格的法術不該問部位")
+	}
+	if got.Area != 3 {
+		t.Fatalf("部位 %d，期望 3", got.Area)
+	}
+}
+
+// 問句那三筆記錄：正面是 heal、負面是 hurt。
+func TestAreaPromptRecords(t *testing.T) {
+	if got := AreaPrompt(true); got[0] != SelectAreaRecord ||
+		got[1] != HurtRecord || got[2] != AreaListRecord {
+		t.Fatalf("負面那三筆是 %v", got)
+	}
+	if got := AreaPrompt(false); got[1] != HealRecord {
+		t.Fatalf("正面該是 heal，得到 %#x", got[1])
+	}
+}

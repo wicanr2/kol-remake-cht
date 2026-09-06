@@ -108,6 +108,18 @@ type CastResult struct {
 	Turns, Power int
 	// Area 是效果 6 選中的部位 0…5，其餘效果是 −1。
 	Area int
+	// NeedsArea 為真表示骰已經擲完、效果還沒套，正等玩家挑一個部位。
+	NeedsArea bool
+}
+
+// AreaPrompt 是問部位那一句要用的三筆記錄（`0x2845E`…`0x284F1`）：
+// 「Select an area to」＋ hurt／heal ＋ 部位清單。
+func AreaPrompt(negative bool) []int {
+	verb := HealRecord
+	if negative {
+		verb = HurtRecord
+	}
+	return []int{SelectAreaRecord, verb, AreaListRecord}
 }
 
 // SpellBlocked 是「目標擋不擋得住」（`0x28284`…`0x2835C`）。
@@ -150,8 +162,13 @@ func DirectionWord(negative bool) int {
 	return PositiveRecord
 }
 
+// AreaAsk 是傳給 `Cast` 的哨兵：效果 6 而且不用選目標格時，先把持續與強度擲出來，
+// **停在這裡等玩家挑部位**，不套效果。擲骰要在問之前——原版的順序是
+// `0x283B2`（持續）、`0x28420`（強度）、`0x2845E`（問），順序換了整串亂數就不同。
+const AreaAsk = -2
+
 // Cast 是施法那一手（`sub_2818D`）。target 是目標的參戰者索引、area 是效果 6 要打
-// 哪一個部位（0…5，其他效果傳 −1）。
+// 哪一個部位（0…5，其他效果傳 −1，`AreaAsk` 表示要問）。
 //
 // 擲骰的順序照原版：**先擲持續回合、再擲強度**（`0x283B2` 與 `0x28420`），
 // 兩者共用同一顆亂數，對調會讓整串結果不同。
@@ -177,6 +194,9 @@ func (s *State) Cast(caster, target, area int, rng Rand) CastResult {
 	res.Turns = sp.Turns(rng)
 	res.Power = sp.Power(rng)
 	switch {
+	case sp.Effect == SpellEffectArea && area == AreaAsk:
+		// 停在問部位那一層：效果留到 `AnswerArea` 才套。
+		res.NeedsArea = true
 	case sp.Effect == SpellEffectArea:
 		res.Area = area
 		s.castArea(target, area, res.Power, a.Negative)

@@ -404,7 +404,8 @@ func loadTranslations(townPath, uiPath string) (*town.Translations, error) {
 	return trans, nil
 }
 
-func applyBattleToken(s *battle.State, token string, step func(*battle.State)) error {
+func (g *game) applyBattleToken(s *battle.State, token string,
+	step func(*battle.State)) error {
 	if s.Stage == battle.StageEncounter {
 		s.Continue(s.Rand)
 		return nil
@@ -465,6 +466,15 @@ func applyBattleToken(s *battle.State, token string, step func(*battle.State)) e
 		}
 		return nil
 	}
+	// 挑部位那一問只認 1…6（`0x284D8` 的 `sub_1B100(6)`，RE-100）。
+	if s.Plan.Prompt == battle.PromptArea {
+		if len(token) == 1 && token[0] >= '1' && token[0] <= '6' {
+			if res, caster, ok := s.AnswerArea(int(token[0] - '1')); ok {
+				g.battleAreaLine(s, res, caster)
+			}
+		}
+		return nil
+	}
 	if s.Plan.Prompt == battle.PromptExecuting {
 		switch token {
 		case "RET", "SPACE":
@@ -504,7 +514,8 @@ func (g *game) playToken(token string) error {
 	}
 	// 戰鬥蓋在最上面。遭遇那一張按一個鍵進戰場，接著就是規劃段的指令列。
 	if g.quest != nil && g.quest.state != nil {
-		return applyBattleToken(g.quest.state, token, func(*battle.State) { g.battleStep() })
+		return g.applyBattleToken(g.quest.state, token,
+			func(*battle.State) { g.battleStep() })
 	}
 	// 競技場的對話走城鎮那一層的鍵位（RE-108）；談完就開那一場。
 	if g.play != nil && g.play.InArena() {
@@ -1819,6 +1830,16 @@ func (g *game) battleRecord(record int) string {
 // battleStep 做出執行段的下一手，並把那一句訊息展開、斷行放進畫面
 // （RE-086／RE-087）。攻擊那一手的訊息鏈還沒解完（0x140／0x141／0x143 起那一串
 // 的索引規則），所以只有結算，沒有訊息。
+// battleAreaLine 是挑完部位之後那一句效果（`0x287E4`，RE-100）。問句本身已經印過，
+// 這裡直接換成效果那一句。
+func (g *game) battleAreaLine(s *battle.State, res battle.CastResult, caster int) {
+	ctx := battle.MessageContext{Lookup: g.battleRecord}
+	negative := caster >= 0 && caster < len(s.Actors) && s.Actors[caster].Negative
+	before, after := battle.SpellEffectLine(res.Power, negative)
+	s.Exec.Text = battle.WrapMessage(ctx.Substitute(
+		g.battleRecords(before) + " " + g.battleRecords(after)))
+}
+
 func (g *game) battleStep() {
 	if g.quest == nil || g.quest.state == nil {
 		return
@@ -1933,6 +1954,13 @@ func (g *game) battleStep() {
 			}
 		}
 		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecord(r.Message)))
+		// 效果 6 而且不用選目標格：接的不是效果那一句，是「挑一個部位」那一問
+		// （記錄 0x184 ＋ hurt／heal ＋ 0x16C，RE-100）。答完才輪到效果那一句。
+		if r.Cast.NeedsArea {
+			s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
+				g.battleRecords(battle.AreaPrompt(s.Actors[r.Actor].Negative))))}
+			return
+		}
 		before, after := battle.SpellEffectLine(r.Cast.Power,
 			s.Actors[r.Actor].Negative)
 		s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
@@ -2123,8 +2151,8 @@ func (g *game) updateBattle() {
 			g.battleStep()
 		case battle.PromptExecuting:
 			g.battleStep()
-		case battle.PromptFlee, battle.PromptPickUp:
-			// 只認 y／n，這兩個鍵在這兩問沒有作用。
+		case battle.PromptFlee, battle.PromptPickUp, battle.PromptArea:
+			// 逃走與撿只認 y／n，挑部位只認 1…6，這兩個鍵在這三問沒有作用。
 		default:
 			s.Choose()
 		}
@@ -2137,6 +2165,18 @@ func (g *game) updateBattle() {
 		case battle.PromptPickUp:
 			s.AnswerPickUp(false)
 			g.battleStep()
+		}
+	}
+	// 挑部位那一問只認 1…6（`0x284D8` 的 `sub_1B100(6)`）。
+	if s.Plan.Prompt == battle.PromptArea {
+		for k := 0; k < 6; k++ {
+			if !inpututil.IsKeyJustPressed(ebiten.Key1 + ebiten.Key(k)) {
+				continue
+			}
+			if res, caster, ok := s.AnswerArea(k); ok {
+				g.battleAreaLine(s, res, caster)
+			}
+			break
 		}
 	}
 	// 逃走與撿那兩問只認 y／n（`0x21158`／`0x2036E`），Return 與空白鍵都不算數。

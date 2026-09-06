@@ -442,9 +442,9 @@ func (s *State) act(i int, rng Rand) ActResult {
 // 設了就打規劃段選好的那一格——`sub_24C35` 讀的是 `[0x1A74]`／`[0x1B36]`，
 // 也就是 remake 的 `Plan.Memo`。
 //
-// 效果 6（指定部位）在原版要玩家挑一個部位，需要在執行段中間插一次互動；
-// remake 目前沒有那個機制，所以照原版「要選目標格的法術」那一條走隨機部位
-// （`0x2846F` 的 `rand(6) − 1`）。
+// 效果 6（指定部位）分兩條（`0x2845E`）：**要選目標格**的法術直接擲
+// `rand(6) − 1`；不用選的那一種在執行段中間問玩家（記錄 0x184 ＋ 0x186／0x185 ＋
+// 0x16C，只認 1…6）。骰要在問**之前**擲完，順序才與原版相同。
 func (s *State) cast(i int, rng Rand) ActResult {
 	a := &s.Actors[i]
 	out := ActResult{Actor: i, Command: a.Command, Target: -1}
@@ -464,7 +464,11 @@ func (s *State) cast(i int, rng Rand) ActResult {
 	}
 	area := -1
 	if spell.Effect == SpellEffectArea {
-		area = rng.Roll(6) - 1
+		if spell.NeedsTarget() {
+			area = rng.Roll(6) - 1
+		} else {
+			area = AreaAsk
+		}
 	}
 	res := s.Cast(i, target, area, rng)
 	out.Target = target
@@ -476,8 +480,35 @@ func (s *State) cast(i int, rng Rand) ActResult {
 	default:
 		out.Message = CastsAtRecord
 		out.Cast = &res
+		if res.NeedsArea {
+			s.Area = &AreaQuestion{Caster: i, Target: target,
+				Power: res.Power, Negative: s.Actors[i].Negative}
+			s.Plan.Prompt = PromptArea
+		}
 	}
 	return out
+}
+
+// AreaQuestion 是停在「挑一個部位」那一層的狀態（`0x2845E`）。骰已經擲完，
+// 效果等玩家按下 1…6 才套。
+type AreaQuestion struct {
+	Caster, Target int
+	Power          int
+	Negative       bool
+}
+
+// AnswerArea 是那一問的回答（`0x284F1`…`0x2851C`）：套上效果，回傳「效果那一句」
+// 要用的結果與施法者。area 是 0…5；超出範圍不動作、也不離開那一層。
+func (s *State) AnswerArea(area int) (CastResult, int, bool) {
+	ask := s.Area
+	if ask == nil || area < 0 || area > 5 {
+		return CastResult{}, -1, false
+	}
+	s.Area = nil
+	s.Plan.Prompt = PromptExecuting
+	s.castArea(ask.Target, area, ask.Power, ask.Negative)
+	return CastResult{Verdict: SpellHits, Power: ask.Power, Area: area},
+		ask.Caster, true
 }
 
 // move 是移動那一手（`sub_26384`，RE-085）。一次只走一格，走不動就印記錄 0x10A。

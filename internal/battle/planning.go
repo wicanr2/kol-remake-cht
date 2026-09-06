@@ -37,6 +37,10 @@ const (
 	// （記錄 0x111 的後半，`0x20354`，RE-113）。只有隊員會被問，敵人直接撿。
 	// **這一問只認 y／n**，與逃走那一問同一支讀鍵（`sub_1B100(5)`）。
 	PromptPickUp
+	// PromptArea 是效果 6 的法術在執行段中間問的「Select an area to hurt／heal」
+	// （記錄 0x184 ＋ 0x186／0x185 ＋ 0x16C，`0x2845E`，RE-100）。**只認 1…6**。
+	// 要選目標格的法術不問，直接擲 `rand(6) − 1`。
+	PromptArea
 )
 
 // Planning 是規劃段那一名走到哪裡。

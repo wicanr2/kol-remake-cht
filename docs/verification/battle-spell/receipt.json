@@ -10,7 +10,7 @@
     },
     {
       "name": "法術真的改了什麼",
-      "reason": "Warder 唯一的法術 Vartwelyrmi 是效果 5（疲勞），而那一條鏈還沒進戰鬥的規則層，所以這一次只有訊息、沒有數值變化（SPEC-012 第 5 節）。"
+      "reason": "Warder 唯一的法術 Vartwelyrmi 是效果 5（疲勞）。疲勞那一條鏈已經接上了（RE-130／RE-131），但這一份收據的畫格是接上之前錄的，畫面上看不出數值差別——效果 5 只動疲勞那一格，它不畫在畫面上。**選部位那一次互動也走不到**：那要效果 6 而且不用選目標格的法術，十六名原版角色都沒有（SPEC-012 第 8 節）。"
     }
   ],
   "command": "tools/run_kol_shots.sh docs/verification/battle-spell/replay.spec（存檔先用 tools/import_original_characters.py --names Warder 重生）",
