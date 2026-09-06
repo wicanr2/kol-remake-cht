@@ -595,7 +595,12 @@ IDA 探針已經跑過（`tools/ida_probe_koltown_attack_resolve.py`），23 個
 `sub_26AC2`／`sub_23683`／`sub_24FD3` 三支釘住，中間值保持寫進去的，
 驗的就只剩 `sub_26D76` 自己那段。
 
-還沒對的：防禦分數（`0x27229`…`0x272FB`）、命中判定、傷害骰與命中部位。
+**防禦分數也對完了**（`TestDefenceScoreMatchesOriginal`，七組）。順帶定下三個
+全域：`word_3237E` 防禦者索引、`word_2F942` 防禦分數、`word_2FB46` 攻擊分數，
+以及命中判定 `word_2FB46 >= word_2F942`。`+0x24` 是防禦選項（Guard），
+remake 的 `Resolve` 原本就對。
+
+還沒對的：傷害骰與命中部位。
 
 對過之後才動收據，先重生等於可能做兩次。
 

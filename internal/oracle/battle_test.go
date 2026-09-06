@@ -1256,3 +1256,100 @@ func TestAttackScoreMatchesOriginal(t *testing.T) {
 		})
 	}
 }
+
+// 防禦分數的骰前算式：設好狀態之後兩邊算出同一個數（`sub_26D76:0x27204`…）。
+//
+// **防禦者索引在 `word_3237E`（`ds:44AE`）**——先前改防禦者的記錄毫無反應，
+// 就是因為那一格是 0，「對手」指到攻擊者自己。原版那一段：
+//
+//	記錄[+0x24] == 0 → word_2F942 = 0，整段跳過   ; 防禦者沒有擺出防禦
+//	記錄[+0x0F] += 1                               ; ★ 招架次數先加一
+//	sub_26AC2(防禦者)                              ; 武器防禦技能 → word_32380
+//	word_3237C = word_32380 ÷ 記錄[+0x0F] + 記錄[+0x09]
+//	sub_23683(防禦者)                              ; 疲勞比例 → word_2FB4A
+//	var_A = word_3237C × word_2FB4A ÷ 200
+//	word_37D2A ← word_3237E                        ; 暫時把「當前」換成防禦者
+//
+// ⚠ **招架次數是先加再除。** remake 的 `DefenceValue` 用的是傳進來的 `Parries`
+// （小於 1 就當 1），所以原版的「這一次也算進去」要由呼叫端反映——這一支順便
+// 把兩種語意都試出來。
+func TestDefenceScoreMatchesOriginal(t *testing.T) {
+	const (
+		resolveEA   = 0x26D76
+		currentSlot = 0x9E5A // word_37D2A：攻擊者
+		defenderEA  = 0x3237E // word_3237E：防禦者索引
+		// word_3237C 是中間值（防禦值）；**防禦分數是 `word_2F942`**
+		// （`0x2737F`），下一行就是命中判定：`word_2FB46 >= word_2F942`。
+		scoreOut    = 0x2F942
+		fatigueOut  = 0x2FB4A
+		encumbOut   = 0x30C88
+		defSkillOut = 0x32380 // word_32380：武器防禦技能
+		shieldOut   = 0x34A0C // word_34A0C：盾牌等級
+		fatigueFn   = 0x23683
+		encumbFn    = 0x24FD3
+		skillFn     = 0x26AC2
+		roll        = 50
+	)
+	for _, c := range []struct {
+		name                                       string
+		skill, quick, parries, ratio, damage, enc  int
+	}{
+		{"沒擋過", 60, 40, 0, 0, 0, 0},
+		{"擋過一次", 60, 40, 1, 0, 0, 0},
+		{"擋過三次", 60, 40, 3, 0, 0, 0},
+		{"帶疲勞比例", 60, 40, 0, 40, 0, 0},
+		{"帶累積傷害", 60, 40, 0, 0, 3, 0},
+		{"帶負重", 60, 40, 0, 0, 0, 25},
+		{"四項一起", 120, 55, 2, 60, 4, 30},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			o := townMap(t)
+			o.SyncDGroupFromDS()
+			o.WriteU16(o.DS(currentSlot), 0) // 攻擊者 ＝ 參戰者 0
+			o.WriteU16(o.IDA(defenderEA), 1) // 防禦者 ＝ 參戰者 1
+			atk := uint16(actorBase)
+			def := uint16(actorBase) + uint16(actorStride)
+			o.WriteU8(o.DS(atk+0x01), 0)
+			o.WriteU16(o.DS(atk+0x02), 1)
+			o.WriteU8(o.DS(def+0x01), 1)
+			o.WriteU16(o.DS(def+0x02), 1)
+			o.WriteU8(o.DS(def+0x24), 1) // 非 0，否則整段跳過
+			o.WriteU8(o.DS(def+0x09), uint8(c.quick))
+			o.WriteU8(o.DS(def+0x0E), uint8(c.damage))
+			o.WriteU8(o.DS(def+0x0F), uint8(c.parries))
+			o.WriteU16(o.IDA(defSkillOut), uint16(c.skill))
+			o.WriteU16(o.IDA(fatigueOut), uint16(c.ratio))
+			o.WriteU16(o.IDA(encumbOut), uint16(c.enc))
+			// ⚠ 沒有盾牌是 **`>= 0x80`**（`0x272E6` 的 `cmp … 80h / jl`）。
+			// 寫 0xFFFF 反而會被當成有號的 −1 而落進「有盾牌」那一條，
+			// 加上 `100 × (−1) + 200`。
+			o.WriteU16(o.IDA(shieldOut), 0x80)
+			o.StubValue(o.IDA(fatigueFn), 0)
+			o.StubValue(o.IDA(encumbFn), 0)
+			o.StubValue(o.IDA(skillFn), 0)
+			o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 { return roll })
+			_, _ = o.CallBudget(20_000_000, o.IDA(resolveEA), 0)
+			o.Stub(o.IDA(rollEnter), nil)
+			for _, fn := range []uint32{fatigueFn, encumbFn, skillFn} {
+				o.Stub(o.IDA(fn), nil)
+			}
+			got := int(int16(o.Word(o.IDA(scoreOut))))
+			t.Logf("原版 %d（招架次數進去是 %d，出來是 %d）",
+				got, c.parries, o.Byte(o.DS(def+0x0F)))
+
+			// remake：原版先把招架次數加一再除，所以傳進去的要是「加一之後」。
+			a := battle.Actor{
+				Parry: c.skill, Quickness: c.quick, Parries: c.parries + 1,
+				Damage: c.damage, Encumbrance: c.enc,
+				Fatigue: c.ratio, Stamina: 50,
+				ShieldGrade: battle.NoShield,
+			}
+			want := a.DefenceValue()/10 + roll
+			if got != want {
+				t.Fatalf("原版 %d，remake %d（技能 %d 敏捷 %d 招架 %d 比例 %d 傷害 %d 負重 %d）",
+					got, want, c.skill, c.quick, c.parries, c.ratio, c.damage, c.enc)
+			}
+			t.Logf("兩邊都是 %d", got)
+		})
+	}
+}
