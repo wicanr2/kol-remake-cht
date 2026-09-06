@@ -560,6 +560,29 @@ remake 的亂數換成原版那一支之後（RE-132），舊收據記的是**�
 
 **沒有一項指向 bug。** 三種形狀都是同一串亂數往後推的下游效應。
 
+### 重生卡在哪（2026-09-07 實測）
+
+前置條件已經滿足（遭遇、天候、攻擊結算的完整鏈都對過了），流程也跑得動，
+但 `arena` 重生出來的收據**還是紅的**，錯誤與重生前一模一樣
+（`未知的野外操作 token："SPACE"`）。
+
+`regen_long_path.py` 依**舊軌跡**把路徑切成「非戰鬥段照抄、戰鬥段用 driver 重打」。
+`arena` 切成 7 段之後：第 1 場與第 3 場 driver 產出 **0 個 token**
+（`workplace/tmp/regen/arena-1-out.txt` 與輸入同大小），只有第 2 場打出 632 個，
+舊的 2973 個 token 變成 821 個。
+
+**照抄那一段才是問題**。競技場是走到 (55, 13) 觸發的固定地點（RE-077），
+路線本身是確定的；但**路上多出一場隨機遭遇**，第 77 步時隊伍不在競技場而在戰鬥中，
+於是後面照抄的野外 token 全部對不上。切段依舊軌跡，遭遇的步數一變就錯位。
+
+`tools/drive_battle_script.py` 吃 `[世界目標 X,Y]`，可以自己走到某一格；
+`regen_long_path.py` 沒有用那個參數。**下一步就是讓非戰鬥段也重生**——
+用世界目標走到觸發點，路上遇敵就打完，而不是照抄舊 token。
+
+⚠ 重生會直接改 `docs/verification/player-path/*.json`。跑之前先看 `git status`，
+跑壞了 `git checkout -- docs/verification/player-path/` 還原；`regen_long_path.py`
+本身也要求軌跡是舊的，被 `replay_player_path.py` 覆寫過就得先還原再跑。
+
 重生要注意的：**換個種子救不了**。天候也吃亂數（`internal/world/session.go:222`），
 而 `flow-quest` 這類收據要求檢查點與 `world-quest` 的對拍截圖逐 byte 相同——
 換種子會換天候，那批對拍截圖得跟著重生。流程是
