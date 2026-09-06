@@ -546,7 +546,8 @@ func TestDumpTownScreenPNG(t *testing.T) {
 	}
 	o := load(t)
 	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
-	if err := o.Run(40_000_000); err != nil {
+	// 畫面在前兩億道指令內還會長：24,480 → 49,198 個非零像素之後才穩定。
+	if err := o.Run(200_000_000); err != nil {
 		t.Logf("停了：%v", err)
 	}
 	shot := o.Tandy16()
@@ -566,4 +567,47 @@ func TestDumpTownScreenPNG(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Logf("寫出 %s", out)
+}
+
+// 探測：載入完成之後程式停在哪一個迴圈。
+//
+// 模式 09 走到 `TOWN7.0` 之後停在 IDA `0x1A1D9` 跑不完。那一段是
+//
+//	mov cx, [2528] ／ mov dx, [252A] ／ add cx, ax ／ mov es, dx
+//	mov ax, es:[bx] ／ mov [bp-14], ax ／ … ／ cmp word [bp-14], -1 ／ jz 出去
+//
+// ——**跟著一條鏈結串列走到 -1**。指標無效的話就永遠走不到終點。
+func TestProbeTownLoopPointer(t *testing.T) {
+	o := prepare(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	off := o.Word(o.DS(0x2528))
+	seg := o.Word(o.DS(0x252A))
+	t.Logf("那個 far 指標 ds:2528 ＝ %04X:%04X（IDA %#x）", seg, off, dgroupBase+0x2528)
+	if seg == 0 {
+		t.Log("段是 0——又是一個沒被設好的指標")
+		return
+	}
+	t.Logf("它指向的前 32 個 byte：%x", o.Bytes(oracle.Addr{Seg: seg, Off: off}, 32))
+	t.Logf("暫存器：%s", o.Regs())
+
+	// 指標有效、鏈的終止值（-1）也在——那這個迴圈可能只是**慢**，不是卡住。
+	// 判準是位置會不會離開那一段：跑久一點再看。
+	for i := 1; i <= 5; i++ {
+		if err := o.Run(40_000_000); err != nil {
+			t.Logf("第 %d 段停了：%v", i, err)
+			break
+		}
+		nz := 0
+		for _, v := range o.Tandy16() {
+			if v != 0 {
+				nz++
+			}
+		}
+		polls, _ := o.MouseActivity()
+		t.Logf("再跑 4000 萬道（累計 %d）：停在 IDA %#x、畫面非零 %d、滑鼠輪詢 %d、開了 %d 個檔",
+			o.Steps(), o.ToIDA(o.IP()), nz, polls, len(o.Opened()))
+	}
 }
