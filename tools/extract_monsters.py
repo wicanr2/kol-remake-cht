@@ -50,9 +50,12 @@ FLEE_AT_OFFSET, FLEE_RECOVER_OFFSET = 0x0D, 0x0E
 # +0x10 的 bit 7 是「碎掉」：力竭倒下那一刻，這一位為零印 0x11D
 #（`dies from blood loss!`），非零印 0x11E（`shatters into pieces!`）——
 # `sub_1E3A8:0x20DBD`（RE-131）。三十二隻裡只有 SKELETON 是 0x80。
-# 低位另有東西（CYCLOPS、CLIFF TROLL、SLEDGE、MIST GRUB 是 0x01），語意未解，
-# 所以整格一起留著。
-FLAGS_OFFSET, FLAG_SHATTERS = 0x10, 0x80
+# bit 0 是「令人生畏」：`sub_2215A:0x22172` 把整格餵給 `sub_22376(值, 0, 1)`
+#（＝取 bit 0）寫進 `word_3AC58`，執行段 `0x200AA` 拿它當閘門——隊員這一手是
+# 攻擊、射擊、施法、撿東西或徒手時要過一次意志檢定，沒過就換成怯戰
+#（指令碼 0x0B，印 0x118 `is frozen in terror!`，RE-135）。三十二隻裡只有
+# CYCLOPS、CLIFF TROLL、SLEDGE、MIST GRUB 是 0x01。整格另外留著。
+FLAGS_OFFSET, FLAG_SHATTERS, FLAG_FEARSOME = 0x10, 0x80, 0x01
 # 怪物記錄的屬性欄位（RE-080）。名稱欄是 +0x00…+0x0C（長度 ＋ 最多 12 個字元），
 # 屬性從 +0x11 起：
 # `sub_2215A` 把 +0x11…+0x16 搬進參戰者記錄的 +0x08…+0x0C，
@@ -167,6 +170,7 @@ def main() -> int:
                      for k in range(WORN_SLOTS)],
             "flags": rec[FLAGS_OFFSET],
             "shatters": bool(rec[FLAGS_OFFSET] & FLAG_SHATTERS),
+            "fearsome": bool(rec[FLAGS_OFFSET] & FLAG_FEARSOME),
             "flee_at": rec[FLEE_AT_OFFSET],
             "flee_recover": rec[FLEE_RECOVER_OFFSET],
             "gold": {

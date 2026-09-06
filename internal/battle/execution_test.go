@@ -426,3 +426,83 @@ func TestMoveIsSilentWhenUnseen(t *testing.T) {
 		t.Fatalf("看得到的移動應該印 %#x，得到 %#x", MovedRecord, r.Message)
 	}
 }
+
+// 怯戰檢定（RE-135）：令人生畏的怪物在場時，隊員每要出手一次就得過一次意志檢定。
+func TestFlinchCheck(t *testing.T) {
+	// 門檻 ＝ ((力量 ＋ 智力) ÷ 2 × 等級) ÷ 3，兩次都是整數除。
+	if got := FlinchThreshold(90, 30, 3); got != 60 {
+		t.Errorf("門檻應該是 60，得到 %d", got)
+	}
+	if got := FlinchThreshold(0, 0, 5); got != 0 {
+		t.Errorf("屬性全零門檻應該是 0，得到 %d", got)
+	}
+
+	newState := func(fearsome bool) *State {
+		s := &State{Actors: make([]Actor, 2)}
+		s.Monster.Fearsome = fearsome
+		s.Actors[0] = Actor{Side: SideParty, X: 10, Y: 10, Facing: 2,
+			Threshold: 100, Strength: 90, Intellect: 30, Level: 3,
+			Command: CmdWeapon, Style: 1,
+			Attack: 400, Weapon: Weapon{Base: 3, Count: 1, Sides: 5}}
+		s.Actors[0].SetParts()
+		s.Actors[1] = Actor{Side: SideMonster, X: 10, Y: 11, Threshold: 100}
+		s.Actors[1].SetParts()
+		s.Exec.Order = []int{0}
+		return s
+	}
+
+	// 擲到門檻以上：換成怯戰。
+	s := newState(true)
+	r, _ := s.Act(&fixedRoll{values: []int{60}})
+	if r.Message != FlinchRecord || s.Actors[0].Guard != 2 {
+		t.Errorf("擲 60 對門檻 60 應該怯戰，得到 %#x", r.Message)
+	}
+	// 差一點：照原本那一手打下去。
+	s = newState(true)
+	r, _ = s.Act(&fixedRoll{values: []int{59, 1, 5, 50}})
+	if r.Message == FlinchRecord {
+		t.Errorf("擲 59 對門檻 60 不該怯戰")
+	}
+	// 怪物不令人生畏：一次都不判，骰也不該被抽走。
+	s = newState(false)
+	rng := &fixedRoll{values: []int{0, 1, 5, 50}}
+	r, _ = s.Act(rng)
+	if r.Message == FlinchRecord {
+		t.Errorf("不令人生畏的怪物不該讓人怯戰")
+	}
+	if rng.i == 0 {
+		t.Errorf("這一手還是要正常結算")
+	}
+	// 免疫那一格（記錄 +0x06）非零：跳過。
+	s = newState(true)
+	s.Actors[0].Flag06 = 1
+	r, _ = s.Act(&fixedRoll{values: []int{99, 1, 5, 50}})
+	if r.Message == FlinchRecord {
+		t.Errorf("+0x06 非零應該免疫")
+	}
+	// 怪物自己不會怯戰。
+	s = newState(true)
+	s.Actors[0].Side = SideMonster
+	r, _ = s.Act(&fixedRoll{values: []int{99, 1, 5, 50}})
+	if r.Message == FlinchRecord {
+		t.Errorf("怪物不該怯戰")
+	}
+	// 不在名單裡的指令不判：移動、休息、下馬都不判。
+	for _, cmd := range []int{CmdMove, CmdRest, CmdLand} {
+		s = newState(true)
+		s.Actors[0].Command = cmd
+		r, _ = s.Act(&fixedRoll{values: []int{99}})
+		if r.Message == FlinchRecord {
+			t.Errorf("指令 %#x 不該判怯戰", cmd)
+		}
+	}
+	// 名單裡的五個指令都判。
+	for _, cmd := range FlinchCommands {
+		s = newState(true)
+		s.Actors[0].Command = cmd
+		r, _ = s.Act(&fixedRoll{values: []int{99}})
+		if r.Message != FlinchRecord {
+			t.Errorf("指令 %#x 應該判怯戰，得到 %#x", cmd, r.Message)
+		}
+	}
+}

@@ -95,6 +95,54 @@ func MoveForm(style int) int {
 // CmdFlinch 是怯戰檢定沒過時被換上的指令碼（`0x2016A`）。
 const CmdFlinch = 0x0B
 
+// FlinchCommands 是會被怯戰蓋掉的五個指令碼（`0x20047`…`0x200A5`）。只有這幾種
+// 「主動出手」才判；移動、休息、下馬、丟東西那些不判。
+//
+// 原版那一串比較把 `0x26` 寫了兩次，是同一個值——這裡只留一份。
+var FlinchCommands = [5]int{CmdWeapon, CmdMissile, CmdCast, CmdPickUp, CmdUnarmed}
+
+// FlinchThreshold 是怯戰的意志門檻（`0x200F6`…`0x2015A`）：
+//
+//	((力量 ＋ 智力) ÷ 2 × 等級) ÷ 3
+//
+// 兩次除法都是無號整數除。擲 100 擲到**大於或等於**門檻就怯戰，所以門檻愈高愈
+// 撐得住。門檻超過 100 的人擲不出來，等於免疫。
+func FlinchThreshold(strength, intellect, level int) int {
+	return (strength + intellect) / 2 * level / 3
+}
+
+// checkFlinch 在做出這一手之前判要不要換成怯戰（`0x200AA`…`0x2016A`，RE-135）。
+//
+// 閘門有四道，缺一不判：場上的怪物令人生畏（怪物記錄 +0x10 的 bit 0）、這一名是
+// 隊員（記錄 +0x01 為 0，怪物不會怯戰）、這一手在 FlinchCommands 裡、而且沒有
+// 免疫（記錄 +0x06 為 0）。
+//
+// 原版的閘門讀的是全域 `word_3AC58`，那一格由 `sub_2215A` 在替某一隻怪物填參戰者
+// 記錄時寫入——也就是**最後一隻被設定的怪物**的那一位。一場戰鬥只放同一種怪物
+//（RE-090），所以這裡直接讀 `State.Monster`。
+func (s *State) checkFlinch(i int, rng Rand) {
+	if !s.Monster.Fearsome {
+		return
+	}
+	a := &s.Actors[i]
+	if a.Side != SideParty || a.Flag06 != 0 {
+		return
+	}
+	armed := false
+	for _, c := range FlinchCommands {
+		if a.Command == c {
+			armed = true
+			break
+		}
+	}
+	if !armed {
+		return
+	}
+	if rng.Roll(100) >= FlinchThreshold(a.Strength, a.Intellect, a.Level) {
+		a.Command = CmdFlinch
+	}
+}
+
 // ring0 是環 0 的九個位移（RE-081），第 9 項是 (0, 0)——自己站的那一格。
 //
 // **座標軸與原版是對調的，別「修正」它**（RE-095）：原版參戰者記錄的 +0x1F 是
@@ -326,6 +374,8 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		if a.Side == SideEmpty || a.Down() {
 			continue
 		}
+		// 令人生畏的怪物在場時，隊員出手前先過一次意志檢定（RE-135）。
+		s.checkFlinch(i, rng)
 		out := s.act(i, rng)
 		// 疲勞的收尾（`0x20AE0` 與 `0x20D40`）：休息的人回復三成，其餘的人把這一手
 		// 花剩的時間額度除以十扣進疲勞——額度為負就是往上加。要在清掉 Hurt

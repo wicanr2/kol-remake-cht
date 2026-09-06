@@ -1523,3 +1523,190 @@ func TestTakeDamageMatchesOriginal(t *testing.T) {
 		})
 	}
 }
+
+// 探測：怪物記錄 `+0x10` 的 bit0 是什麼。
+//
+// bit7 是「碎成一地」那一句（RE-131），bit0 只有 CYCLOPS／CLIFF TROLL／SLEDGE／
+// MIST GRUB 四隻有，語意一直沒解。全庫掃「讀某個暫存器 `+10h`」只有七處，
+// 其中 `0x22172` 在 `sub_2215A` 裡把整個 byte 餵給
+// `sub_22376(值, 0, 1)`——依 RE-118 已解的公式 `(值 >> 0) & 1`，**那就是 bit0**。
+//
+// `sub_2215A` 在圖示列那一份 dump 裡（75 道指令，呼叫端 `0x20F30`／`0x22132`），
+// 但那份只有摘要沒有反組譯。所以改用實跑：設好 `word_39A48` 指的記錄，
+
+// 怪物本體記錄搬進參戰者記錄：`sub_2215A`。
+//
+// 這是 MIST GRUB 那一位的落點。全庫掃「讀某個暫存器 `+10h`」只有七處，其中
+// `0x22172` 把整個旗標 byte 餵給 `sub_22376(值, 0, 1)`；`sub_22376` 的原文是
+// `(值 >> (高位元 + 1 − 位元數)) & ~(0xFFFF << 位元數)`，代入就是 `值 & 1`。
+//
+// 前置的 `sub_22296` 把記錄指標算出來：`word_39A48 = 0xCD92 + ((索引 − 6) << 7)`，
+// 也就是**怪物本體記錄一筆 128 bytes、從參戰者索引 6 起算**（0..5 是隊伍）。
+// 這一點很重要：外面先寫好 `word_39A48` 是沒用的，進門第一件事就把它重算掉。
+func TestMonsterTemplateCopyMatchesOriginal(t *testing.T) {
+	const (
+		initFn   = 0x2215A
+		bodyBase = 0xCD92 // 怪物本體記錄表
+		bodySize = 128
+		flagOut  = 0x3AC58 // word_3AC58：這一場怪物的 bit0
+		partBase = 0x6712  // 參戰者記錄表
+		partSize = 50
+		slot     = 6 // 第一個怪物槽
+	)
+	body := uint16(bodyBase + (slot-6)*bodySize)
+	part := uint16(partBase + slot*partSize)
+
+	for _, tc := range []struct {
+		name string
+		flag uint8
+		want uint16
+	}{
+		{"沒有那一位", 0x00, 0},
+		{"MIST GRUB 那一位", 0x01, 1},
+		{"碎成一地那一位", 0x80, 0},
+		{"兩位都有", 0x81, 1},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			o := townMap(t)
+			o.SyncDGroupFromDS()
+			// 記錄裡放可辨識的值，才看得出哪一格搬到哪一格。
+			o.WriteU8(o.DS(body+0x10), tc.flag)
+			fields := [5]struct {
+				src uint16
+				val uint8
+			}{{0x11, 0x21}, {0x12, 0x22}, {0x13, 0x23}, {0x14, 0x24}, {0x16, 0x26}}
+			for _, f := range fields {
+				o.WriteU8(o.DS(body+f.src), f.val)
+			}
+			o.WriteU8(o.DS(body+0x15), 0xEE) // 這一格原版沒搬，拿來當反證
+			for off := uint16(0x08); off <= 0x0C; off++ {
+				o.WriteU8(o.DS(part+off), 0)
+			}
+
+			if _, err := o.CallBudget(400_000, o.IDA(initFn), slot); err != nil {
+				t.Logf("呼叫沒等到返回（結果已經寫進全域）：%v", err)
+			}
+			if got := o.Word(o.IDA(flagOut)); got != tc.want {
+				t.Errorf("word_3AC58：原版 %d，規則 %d（旗標 %#02x）", got, tc.want, tc.flag)
+			}
+			for k, f := range fields {
+				dst := uint16(0x08 + k)
+				if got := o.Byte(o.DS(part + dst)); got != f.val {
+					t.Errorf("參戰者 +%#x：原版 %#02x，應為記錄 +%#x 的 %#02x", dst, got, f.src, f.val)
+				}
+			}
+		})
+	}
+}
+
+// 雲層動畫 `sub_2A18E`：呼叫一次，雲層點陣就整列右捲一個像素。
+//
+// 呼叫端只有 `0x11593`（在 `sub_11390` 裡）：天候 `word_2DF5A` 是 3 或 4 時走另一條
+// （三張圖輪播，幀號在 `word_2DF5C`），其餘天候才捲雲，捲完把 `word_34A1A + 0x117`
+// 段貼上畫面。
+//
+// 版面全部相對於 `word_34A1A` 這個段：
+//
+//	base:0x0000  地形底圖
+//	base:0x07C0  雲層
+//	base:0x0F80  遮罩（31 列 × 16 bytes，四個區塊共用）
+//	base:0x1170  合成結果（= base + 0x117 段的 0 offset）
+//
+// EGA（`word_2DF1E == 0x0D`）雲層與遮罩都是 1bpp，一起當成 155 列 × 16 bytes 右旋
+// 1 位元；Tandy（`== 0x09`）雲層是 4bpp，31 列 × 64 bytes 右旋 1 個 nibble（＝1 像素），
+// 遮罩另外 31 列 × 16 bytes 右旋 1 位元。
+func TestCloudScrollMatchesOriginal(t *testing.T) {
+	const (
+		cloudFn = 0x2A18E
+		videoEA = 0x2DF1E
+		bufEA   = 0x34A1A
+	)
+	// rotRow 把一列右旋 bits 個位元（列首是最高位）。
+	rotRow := func(row []byte, bits uint) []byte {
+		out := make([]byte, len(row))
+		n := len(row)
+		for i := range row {
+			prev := row[(i-1+n)%n]
+			out[i] = row[i]>>bits | prev<<(8-bits)
+		}
+		return out
+	}
+	fill := func(o *oracle.Oracle, seg, off uint16, n int) []byte {
+		src := make([]byte, n)
+		x := uint32(0x1234)
+		for i := range src {
+			x = x*1103515245 + 12345
+			src[i] = uint8(x >> 16)
+			o.WriteU8(oracle.Addr{Seg: seg, Off: off + uint16(i)}, src[i])
+		}
+		return src
+	}
+	check := func(t *testing.T, o *oracle.Oracle, seg, off uint16, src []byte, rowLen int, bits uint, label string) {
+		t.Helper()
+		bad := 0
+		for r := 0; r*rowLen < len(src); r++ {
+			want := rotRow(src[r*rowLen:(r+1)*rowLen], bits)
+			got := o.Bytes(oracle.Addr{Seg: seg, Off: off + uint16(r*rowLen)}, rowLen)
+			for i := range want {
+				if want[i] != got[i] {
+					if bad < 4 {
+						t.Errorf("%s 第 %d 列第 %d 格：原版 %#02x，右旋 %d 位元應為 %#02x",
+							label, r, i, got[i], bits, want[i])
+					}
+					bad++
+					break
+				}
+			}
+		}
+		if bad > 4 {
+			t.Errorf("%s：共 %d 列不符", label, bad)
+		}
+	}
+
+	for _, tc := range []struct {
+		name  string
+		mode  uint16
+		cloud struct {
+			rowLen, rows int
+			bits         uint
+		}
+	}{
+		{name: "EGA", mode: 0x0D, cloud: struct {
+			rowLen, rows int
+			bits         uint
+		}{16, 155, 1}},
+		{name: "Tandy", mode: 0x09, cloud: struct {
+			rowLen, rows int
+			bits         uint
+		}{64, 31, 4}},
+		{name: "CGA", mode: 0x04, cloud: struct {
+			rowLen, rows int
+			bits         uint
+		}{32, 31, 2}},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			o := townMap(t)
+			o.SyncDGroupFromDS()
+			buf := o.Word(o.IDA(bufEA))
+			if buf == 0 {
+				t.Skipf("word_34A1A 還沒配置（值 %#04x），這個狀態下量不到雲層", buf)
+			}
+			o.WriteU16(o.IDA(videoEA), tc.mode)
+
+			n := tc.cloud.rowLen * tc.cloud.rows
+			src := fill(o, buf, 0x7C0, n)
+			var mask []byte
+			if tc.name != "EGA" {
+				// EGA 的遮罩接在雲層後面，同一個迴圈就掃完了；另外兩條要單獨填。
+				mask = fill(o, buf, 0xF80, 31*16)
+			}
+			if _, err := o.CallBudget(2_000_000, o.IDA(cloudFn)); err != nil {
+				t.Logf("呼叫沒等到返回：%v", err)
+			}
+			check(t, o, buf, 0x7C0, src, tc.cloud.rowLen, tc.cloud.bits, "雲層")
+			if mask != nil {
+				check(t, o, buf, 0xF80, mask, 16, 1, "遮罩")
+			}
+		})
+	}
+}

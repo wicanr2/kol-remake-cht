@@ -35,9 +35,13 @@ type Monster struct {
 	FleeRecover int `json:"flee_recover"`
 	// Shatters 是記錄 +0x10 的 bit 7：力竭倒下那一刻印哪一句
 	// （`shatters into pieces!` 而不是 `dies from blood loss!`，RE-131）。
-	// 三十二隻裡只有 SKELETON 是這一種。Flags 整格留著，低位的語意還沒解。
+	// 三十二隻裡只有 SKELETON 是這一種。Flags 整格留著。
 	Flags    int  `json:"flags"`
 	Shatters bool `json:"shatters"`
+	// Fearsome 是記錄 +0x10 的 bit 0：這一種怪物在場時，隊員每要出手一次就得過
+	// 一次意志檢定，沒過那一手變成怯戰（RE-135）。CYCLOPS、CLIFF TROLL、SLEDGE
+	// 與 MIST GRUB 四隻是這一種。
+	Fearsome bool `json:"fearsome"`
 	// Gold 是打贏之後掉多少金冠的骰式（記錄 +0x0F，RE-091／RE-096）：
 	// 高 nibble 的低三位是骰數，低三位查骰面表，擲「骰數 ＋ 1」次。
 	// 原版只讀第一隻怪的骰式，同場其他怪的這一格沒有讀。

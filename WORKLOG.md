@@ -4412,3 +4412,25 @@ remake 的 `Actor.Take` 註解本來就寫著那個位址，先前繞了一圈�
 走到 (55,13) 那一段還跑滿了 400 輪的上限。
 
 工具的改動留著（方向對、driver 真的會走了），收據還原——**不留下比原來更糟的收據**。
+
+## 2026-09-07 怪物旗標 bit 0 與雲層動畫
+
+- **`sub_2A18E` 的版面用 dosgolem 實跑驗過**（RE-136）。反組譯讀出三條視訊路徑，
+  再在城鎮地圖狀態下改 `word_2DF1E`、往 `word_34A1A:0x7C0`／`:0xF80` 填偽亂數、
+  呼叫一次、回讀比對「整列環繞右旋」：EGA 155 列 × 1 位元、Tandy 雲層 31 列 ×
+  1 個 nibble ＋ 遮罩 31 列 × 1 位元、CGA 雲層 31 列 × 2 位元 ＋ 遮罩同上，
+  逐格相同。`TestCloudScrollMatchesOriginal`。
+- **怪物記錄 `+0x10` 的 bit 0 解出來了**（RE-135）：令人生畏。落點是 `sub_2215A`
+  寫的 `word_3AC58`，執行段 `0x200AA` 拿它當閘門，沒過檢定就把指令碼換成
+  `0x0B`（怯戰）。remake 補上 `checkFlinch`，`tools/extract_monsters.py` 多抽一個
+  `fearsome`。`TestMonsterTemplateCopyMatchesOriginal` ＋ `TestFlinchCheck`。
+- **失敗分類：查詢回空是自己的探針錯了。** 第一版拿 dosgolem 做雙輸入差分，先寫
+  `word_39A48` 再呼叫 `sub_2215A`，量到「整個 DGROUP 零差異」。真因是
+  `sub_2215A` 進門第一件事就呼叫 `sub_22296` 把 `word_39A48` 重算掉——
+  設好的指標根本沒留下。**連 `word_2FB4E` 都沒變就該察覺碼沒跑到那一行**，
+  而不是去懷疑狀態。改讀反組譯之後三分鐘就解掉。
+- 順手清掉一條過期標記：WORKLIST 還寫著「倒下那一句的 collapse／shatter 兩個
+  分支條件仍未定」，那在 RE-131 就解完並實作了。
+- 容器：`tools/run_ida_probe.sh` 一次（`--rm`）、`tools/go_docker.sh` 數次
+  （`--rm`）、`tools/run_python_tool.sh` 一次（`--rm`）。沒有殘留 container，
+  沒有動別的專案資源。
