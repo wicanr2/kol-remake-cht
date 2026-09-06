@@ -89,6 +89,9 @@ type Actor struct {
 	Weapon      Weapon
 	Encumbrance int
 	ShieldGrade int
+	// UnarmedWeapon 是徒手各式拿的那一格穿戴品（`UnarmedSlots`）。原版徒手攻擊
+	// 的傷害骰、種類與重量都從那一格來，不是手上那件（`sub_26AC2:0x26BDA`）。
+	UnarmedWeapon [6]Weapon
 	// Unarmed 是「手上那一格空著」：怪物記錄 +0x20 那筆 16 byte 的物品記錄第一個
 	// byte 是 0（`0x23BC2`，RE-116）。敵人 AI 拿它決定要不要先去撿一件（RE-116）。
 	// 隊員那一側由 `Member.HasWeapon` 表示，這一格只給敵人用。

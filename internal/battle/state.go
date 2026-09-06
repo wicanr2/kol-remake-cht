@@ -56,6 +56,8 @@ type Member struct {
 	// Weapon 是手上那件武器；Attack／Parry 是那一列的攻防技能。
 	Weapon        Weapon
 	Attack, Parry int
+	// UnarmedWeapon 是徒手各式拿的那一格穿戴品（`UnarmedSlots`）。
+	UnarmedWeapon [6]Weapon
 	// ArmourWeight 是三件護甲的重量和；ShieldWeight／ShieldGrade 是盾牌
 	// （沒有盾牌時 ShieldGrade 是 NoShield）。
 	ArmourWeight, ShieldWeight, ShieldGrade int
@@ -198,6 +200,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			Level: level, Foresight: m.Foresight, Size: m.Size,
 			Strength: strength, Quickness: m.Quickness,
 			Attack: m.Attack, Parry: m.Parry, Weapon: m.Weapon,
+			UnarmedWeapon: m.UnarmedWeapon,
 			Encumbrance: enc, WeaponSpeed: speed, ShieldGrade: m.ShieldGrade,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds,
 			Stamina: strength + m.Health}

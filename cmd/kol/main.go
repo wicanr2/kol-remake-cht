@@ -168,6 +168,22 @@ func battleMember(m town.Member) battle.Member {
 			out.ArmourWeight += g.Encumbrance
 		}
 	}
+	// 徒手四式各拿一格穿戴品當武器（`UnarmedSlots`，RE-131）：踢用 FEET、
+	// 盾擊用 SHIELD、頭槌用 HEAD、拳用 HANDS。那一格空著就是空的武器，
+	// 傷害只剩力量加成——與原版讀到一筆全零的記錄一樣。
+	for style, pos := range battle.UnarmedSlots {
+		if pos >= len(m.Worn) {
+			continue
+		}
+		g := m.Worn[pos]
+		if g == nil {
+			continue
+		}
+		w := battle.Weapon{Kind: g.Class, Base: g.Dice.Bonus, Code: dieCode(g.Record),
+			Weight: g.Encumbrance, TwoHand: g.Hands == 1}
+		w.Count, w.Sides = battle.DamageCode(w.Code)
+		out.UnarmedWeapon[style] = w
+	}
 	if sh := m.Worn[battle.ShieldSlot]; sh != nil {
 		out.ShieldWeight = sh.Encumbrance
 		out.ShieldGrade = sh.SizeClass

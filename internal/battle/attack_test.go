@@ -215,3 +215,45 @@ func TestTake(t *testing.T) {
 		t.Fatal("倒下之後 Down 要回真")
 	}
 }
+
+// 徒手拿的是穿戴品，不是手上那件（RE-131）。
+func TestUnarmedUsesWornItem(t *testing.T) {
+	// UnarmedSlots 是 {0, 5, 6, 0, 4, 1}：式 1 是 FEET、式 2 是 SHIELD、
+	// 式 3 是 HEAD、式 4 是 HANDS。
+	if UnarmedSlots[1] != 5 || UnarmedSlots[2] != 6 ||
+		UnarmedSlots[3] != 0 || UnarmedSlots[4] != 4 {
+		t.Fatalf("徒手四式的槽是 %v", UnarmedSlots)
+	}
+	a := Actor{Command: CmdWeapon, Weapon: Weapon{Kind: 60, Count: 2, Sides: 5}}
+	a.UnarmedWeapon[3] = Weapon{Kind: 4, Count: 1, Sides: 3}
+	// 武器攻擊拿手上那件。
+	if got := a.AttackWeapon(3); got.Kind != 60 {
+		t.Fatalf("武器攻擊拿到 %#x", got.Kind)
+	}
+	// 徒手拿那一格穿戴品。
+	a.Command = CmdUnarmed
+	if got := a.AttackWeapon(3); got.Kind != 4 || got.Sides != 3 {
+		t.Fatalf("徒手拿到 %+v", got)
+	}
+	// 那一格空著就是空武器——不會退回手上那件。
+	if got := a.AttackWeapon(2); got.Kind != 0 || got.Count != 0 {
+		t.Fatalf("空格該回空武器，得到 %+v", got)
+	}
+	// 出界也不會 panic。
+	if got := a.AttackWeapon(99); got.Kind != 0 {
+		t.Fatalf("出界該回空武器，得到 %+v", got)
+	}
+}
+
+// 傷害骰跟著換：同一名角色，徒手與武器擲出來的上限不同。
+func TestDamageRollUsesUnarmedWeapon(t *testing.T) {
+	a := testAttacker()
+	a.Command = CmdUnarmed
+	a.UnarmedWeapon[3] = Weapon{Kind: 4, Base: 1, Count: 1, Sides: 3}
+	rng := &seqRand{values: []int{3, 3}}
+	// 力量加成 = (120 − 70) ÷ 8 = 6，再乘 (70 − 0) ÷ 100 = 4；
+	// 基礎 1 ＋ 骰 3 ＋ 加成 4 ＝ 8，上限是 1×3 + 1 + 1 = 5，所以夾成 5。
+	if got := DamageRoll(a, 3, 0, rng); got != 5 {
+		t.Fatalf("徒手傷害 %d，期望夾在 5", got)
+	}
+}

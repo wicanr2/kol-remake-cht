@@ -79,6 +79,29 @@ type Weapon struct {
 	TwoHand bool
 }
 
+// UnarmedSlots 是徒手各式拿哪一格穿戴品當「武器」：`sub_26AC2:0x26BDA` 用攻擊選項
+// 去查 `[0x0FD2]`（`00 50 60 00 40 10`）再加 `0x100`，而穿戴欄十格就是從 `0x100`
+// 起、一格 `0x10`（RE-127）。所以除以 16 得到的槽號是：
+//
+//	式 1 → 5 FEET（踢）、式 2 → 6 SHIELD（盾擊）、式 3 → 0 HEAD（頭槌）、
+//	式 4 → 4 HANDS（拳）
+//
+// 式 0 在執行段就被歸零（`0x2067C`），式 5 用不到；兩個都指回 HEAD 與 TORSO。
+// 十格的順序是 HEAD／TORSO／LEGS／BODY／HANDS／FEET／SHIELD／NECK／RING／BELT。
+var UnarmedSlots = [6]int{0, 5, 6, 0, 4, 1}
+
+// AttackWeapon 是這一手真正用到的那件東西：徒手拿的是對應那一格穿戴品，
+// 其餘拿手上那件（`sub_26AC2` 依指令碼挑 `var_4`）。**傷害骰、種類與重量都從它來**。
+func (a Actor) AttackWeapon(style int) Weapon {
+	if a.Command != CmdUnarmed {
+		return a.Weapon
+	}
+	if style < 0 || style >= len(a.UnarmedWeapon) {
+		return Weapon{}
+	}
+	return a.UnarmedWeapon[style]
+}
+
 // DamageCode 把物品記錄 +0x0C 的傷害碼換成骰數與骰面（`sub_26D76:0x274D6`）。
 func DamageCode(code int) (count, sides int) {
 	return code/32 + 1, diceSides[(code/4)&7]
@@ -152,7 +175,7 @@ func AttackScore(a Actor, style, guard, row, roll int) int {
 		score += optionModifier[row][guard]
 	}
 	if score >= 0 && style > 1 {
-		if mask := styleWeaponMask[(style-2)&0x0F]; a.Weapon.Kind&mask == 0 {
+		if mask := styleWeaponMask[(style-2)&0x0F]; a.AttackWeapon(style).Kind&mask == 0 {
 			score /= 2
 		}
 	}
@@ -221,7 +244,7 @@ func HitLocation(style, roll int) int {
 // DamageRoll 擲這一擊的傷害（`sub_26D76:0x274D6`…`0x275B4`）。
 // margin 是攻擊分數減防禦分數。回傳值已夾在 0 與武器上限之間。
 func DamageRoll(a Actor, style, margin int, rng Rand) int {
-	w := a.Weapon
+	w := a.AttackWeapon(style)
 	bonus := (a.Strength - 70) / 8
 	bonus = (70 - a.FatigueRatio()) * bonus / 100
 	total := w.Base

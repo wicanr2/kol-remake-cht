@@ -116,16 +116,13 @@ func castLookup(table []int, i int) int {
 	return table[i]
 }
 
-// spendTime 是這一手花掉之後剩下的額度（`0x20B27`…`0x20D1E`）。
-//
-// 負重那一項的第一個乘數（`sub_251B0` 的 `var_2`）用武器速度。原版在
-// 「`+0x22` 非零而且這一手是徒手」時改成從本體記錄取一格，但 `+0x22` 的語意還沒解，
-// 所以那一條沒實作——它只影響徒手那一手的額度。
+// spendTime 是這一手花掉之後剩下的額度（`0x20B27`…`0x20D1E`）。這裡走的是
+// 「已經規劃過」那一條，所以徒手用穿戴品的負重當速度項。
 func (s *State) spendTime(i int) int {
 	a := &s.Actors[i]
 	left := a.TimeAllowance()
 	left -= a.Hurt * hurtTimeCost
-	left -= commandTimeIndex(*a)*a.WeaponSpeed + encumbranceMultiplier(*a)*a.Encumbrance
+	left -= actionCostPlanned(*a, commandTimeIndex(*a), encumbranceMultiplier(*a))
 	if a.Command == CmdCast {
 		if m := s.member(i); m != nil &&
 			a.SpellPick >= 0 && a.SpellPick < len(m.Spells) {
@@ -146,14 +143,24 @@ const (
 	ExhaustedShattersRecord = 0x11E // shatters into pieces!
 )
 
-// ActionCost 是 `sub_251B0(a, b)`：`a × 武器速度 + b × 負重`。敵人 AI 拿它跟這一手
-// 的額度比，決定攻擊式與命中部位的權重要偏多少。
+// ActionCost 是 `sub_251B0(a, b)`：`a × 速度 + b × 負重`。敵人 AI 拿它跟這一手的
+// 額度比，決定攻擊式與命中部位的權重要偏多少。
 //
-// 原版在「`+0x22` 非零（這一回合規劃過了）而且這一手是徒手」時，速度那一項改成
-// 從角色記錄取徒手那一式的物品記錄第 0x0A 格。remake 的 typed data 沒有那四筆
-// 徒手記錄，所以這一條沒實作——缺口記在 SPEC-008。
+// 速度那一項平常是武器速度（`word_37CF0`）；「這一回合規劃過了（`+0x22` 非零）
+// 而且這一手是徒手」時改成那一式穿戴品的**負重原值**（`[0x0FD2 + 式] + 0x100 +
+// 0x0A`），不經等級折算。規劃段還沒把 `+0x22` 設起來，所以敵人 AI 那兩處走的是
+// 武器速度那一條——只有一手收尾時才會走徒手那一條（RE-131）。
 func ActionCost(a Actor, timeIndex, weightIndex int) int {
 	return timeIndex*a.WeaponSpeed + weightIndex*a.Encumbrance
+}
+
+// actionCostPlanned 是同一支在「已經規劃過」時的樣子：徒手改用穿戴品的負重。
+func actionCostPlanned(a Actor, timeIndex, weightIndex int) int {
+	speed := a.WeaponSpeed
+	if a.Command == CmdUnarmed {
+		speed = a.AttackWeapon(a.Style).Weight
+	}
+	return timeIndex*speed + weightIndex*a.Encumbrance
 }
 
 // ClampEffort 是 `sub_2526C`：把「額度 ÷ 花費」夾進 1/3…1，回傳夾過的分子與分母。
