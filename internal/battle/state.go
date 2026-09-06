@@ -49,6 +49,10 @@ type Member struct {
 	Worn [6]string
 	// Skills 是四列武器的攻防原始值，用來算戰鬥等級（RE-080）。
 	Skills []int
+	// WeaponRows 是角色記錄 `+0x52` 起那四筆：每一類武器的攻防技能。
+	// **手上換一件別類的武器就換一列**（`sub_26AC2` 每次取用都重查），
+	// 所以要整份帶著，不能只留選中的那一組。
+	WeaponRows []WeaponSkillRow
 	// Foresight／Size／Health 是規劃順序與昏迷門檻要用的三個屬性（角色記錄 0x21、0x1F、0x20）。
 	Foresight, Size, Health int
 	// Strength／Quickness 是攻擊與防禦要用的兩個屬性；Nutrition 用來折算力量。
@@ -203,7 +207,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			UnarmedWeapon: m.UnarmedWeapon,
 			Encumbrance: enc, WeaponSpeed: speed, ShieldGrade: m.ShieldGrade,
 			LoadLevel: level, ArmourWeight: m.ArmourWeight,
-			ShieldWeight: m.ShieldWeight,
+			ShieldWeight: m.ShieldWeight, WeaponRows: m.WeaponRows,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds,
 			Stamina: strength + m.Health}
 		s.Actors[i].SetParts()

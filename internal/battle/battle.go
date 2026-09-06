@@ -89,6 +89,10 @@ type Actor struct {
 	Weapon      Weapon
 	Encumbrance int
 	ShieldGrade int
+	// WeaponRows 是四列武器技能（隊員專用）。換武器要重選那一列，
+	// 所以整份帶著（`ReloadSkills`）。怪物那一側的技能在本體記錄 `+0x17`，
+	// 與手上那件無關。
+	WeaponRows []WeaponSkillRow
 	// LoadLevel、ArmourWeight、ShieldWeight 是重算負重與武器速度要用的三個輸入
 	// （`ReloadGear`）。**LoadLevel 不是 `Level`**：隊員這一格是技能推出來的戰鬥
 	// 等級，怪物是遭遇等級，而 `Level` 那一格對怪物另外除以 5 再加一。

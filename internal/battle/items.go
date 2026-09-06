@@ -46,6 +46,7 @@ func (s *State) DropItem(i int) (int, string) {
 	m.Worn[0] = ""
 	a.Weapon = Weapon{}
 	a.ReloadGear()
+	a.ReloadSkills()
 	return DropsRecord, name
 }
 
@@ -84,6 +85,7 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 		// 還是原本手上那件的（原版是整筆 16 byte 搬進 +0x20／+0x30）。
 		s.Actors[i].Weapon = g.Weapon
 		s.Actors[i].ReloadGear()
+		s.Actors[i].ReloadSkills()
 	}
 	if m != nil {
 		m.HasWeapon = true
@@ -146,6 +148,7 @@ func (s *State) SwitchItem(i int) int {
 		s.Actors[i].Weapon = Weapon{}
 	}
 	s.Actors[i].ReloadGear()
+	s.Actors[i].ReloadSkills()
 	return PutsInBeltRecord
 }
 

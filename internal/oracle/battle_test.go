@@ -676,3 +676,76 @@ func TestProbeShieldConditions(t *testing.T) {
 	}
 	t.Logf("武器格裡把哪一格設成 0xFF 會讓盾牌等級變掉：%v", twoHanded)
 }
+
+// 隊員的攻防技能是**依手上武器的種類**選一列（`sub_26AC2`，RE-080）。
+//
+// 角色記錄 `+0x52` 起四筆、一筆 13 byte：每筆開頭是類別，`+0x01` 起兩組大端
+// 16-bit 是攻防。比對的是手上武器的種類 byte（`+0x3D`，也就是武器格 `+0x30`
+// 的 `+0x0D`）。
+//
+// **remake 在建戰鬥時選一次就不再換**（`cmd/kol` 的 `battleMember`），所以撿起
+// 不同種類的武器之後技能還是舊那一列。這一條先問原版：選列的規則是什麼、
+// 種類不在四列裡時算多少。
+func TestPartySkillRowFollowsWeaponClass(t *testing.T) {
+	o := prepare(t)
+	const (
+		slot      = 0
+		charBase  = 0xBB88
+		charKind  = 0x3D // 手上武器的種類 byte
+		rowBase   = 0x52
+		rowStride = 13
+	)
+	rec := uint16(actorBase + actorStride*slot)
+	o.WriteU8(o.DS(rec+sideFlag), 0) // 隊員
+	o.WriteU8(o.DS(rec+plannedFlag), 0)
+	o.WriteU8(o.DS(rec+penaltyOff), 0)
+	o.WriteU8(o.DS(rec+penaltyDef), 0)
+	o.WriteU16(o.IDA(bodyPtr), charBase)
+
+	// 四列：類別 1／2／4／8，攻防各給不一樣的值好認。
+	rows := []struct{ class, off, def int }{
+		{1, 111, 211}, {2, 122, 222}, {4, 144, 244}, {8, 188, 288},
+	}
+	for k, r := range rows {
+		at := uint16(charBase + rowBase + rowStride*k)
+		o.WriteU8(o.DS(at), uint8(r.class))
+		o.WriteU8(o.DS(at+1), uint8(r.off>>8))
+		o.WriteU8(o.DS(at+2), uint8(r.off))
+		o.WriteU8(o.DS(at+3), uint8(r.def>>8))
+		o.WriteU8(o.DS(at+4), uint8(r.def))
+	}
+
+	for _, c := range []struct {
+		kind     string
+		class    int
+		off, def int
+	}{
+		{"第 0 列", 1, 111, 211},
+		{"第 1 列", 2, 122, 222},
+		{"第 2 列", 4, 144, 244},
+		{"第 3 列", 8, 188, 288},
+	} {
+		o.WriteU8(o.DS(charBase+charKind), uint8(c.class))
+		o.WriteU16(o.IDA(offSkill), 0xDEAD)
+		o.WriteU16(o.IDA(defSkill), 0xDEAD)
+		if _, err := o.Call(o.IDA(skillFn), slot); err != nil {
+			t.Fatalf("%s：%v", c.kind, err)
+		}
+		gotOff := int(o.Word(o.IDA(offSkill)))
+		gotDef := int(o.Word(o.IDA(defSkill)))
+		if gotOff != c.off || gotDef != c.def {
+			t.Errorf("種類 %d（%s）：原版 (攻 %d, 防 %d)，那一列是 (%d, %d)",
+				c.class, c.kind, gotOff, gotDef, c.off, c.def)
+		}
+	}
+
+	// 種類不在四列裡：問原版算多少，不預設答案。
+	o.WriteU8(o.DS(charBase+charKind), 0x40)
+	o.WriteU16(o.IDA(offSkill), 0xDEAD)
+	o.WriteU16(o.IDA(defSkill), 0xDEAD)
+	if _, err := o.Call(o.IDA(skillFn), slot); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("種類不在四列裡時：攻 %d、防 %d",
+		o.Word(o.IDA(offSkill)), o.Word(o.IDA(defSkill)))
+}

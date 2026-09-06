@@ -101,6 +101,9 @@ func battleMember(m town.Member) battle.Member {
 	}
 	for _, w := range m.Sheet.Weapons {
 		out.Skills = append(out.Skills, w.OffenceRaw, w.DefenceRaw)
+		// 整份帶著：手上換一件別類的武器就換一列（`sub_26AC2` 每次取用都重查）。
+		out.WeaponRows = append(out.WeaponRows, battle.WeaponSkillRow{
+			Class: w.Weapon, Offence: w.OffenceRaw, Defence: w.DefenceRaw})
 	}
 	out.Foresight = m.Sheet.Stats[town.StatForesight]
 	out.Size = m.Sheet.Stats[town.StatSize]

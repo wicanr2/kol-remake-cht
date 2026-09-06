@@ -399,3 +399,30 @@ func (a *Actor) Take(damage, location int) (down, limb bool) {
 	a.Hurt += damage
 	return down, limb
 }
+
+// WeaponSkillRow 是角色記錄 `+0x52` 起四筆裡的一列：那一類武器的攻防技能
+// （`sub_26AC2` 隊員分支，RE-080）。Class 比對的是手上武器的種類 byte
+// （`+0x3D`，也就是武器格 `+0x30` 的 `+0x0D`）。
+type WeaponSkillRow struct{ Class, Offence, Defence int }
+
+// ReloadSkills 依現在手上那件武器重選攻防技能那一列。
+//
+// 原版**每次要用技能都重查**（`sub_26AC2`）：隊員拿手上武器的種類去角色記錄
+// `+0x52` 起四筆裡找，找到哪一列就用哪一列，**找不到就是 0**（實跑量到，
+// `internal/oracle` 的 `TestPartySkillRowFollowsWeaponClass`）。所以戰鬥中撿起
+// 不同種類的武器，技能會跟著換。
+//
+// remake 之前在建戰鬥時選一次就不再換（`cmd/kol` 的 `battleMember`）。
+// 怪物那一側不吃這一條——它的技能在本體記錄 `+0x17`，與手上那件無關。
+func (a *Actor) ReloadSkills() {
+	if a.Side != SideParty || len(a.WeaponRows) == 0 {
+		return
+	}
+	for _, r := range a.WeaponRows {
+		if r.Class == a.Weapon.Kind {
+			a.Attack, a.Parry = r.Offence, r.Defence
+			return
+		}
+	}
+	a.Attack, a.Parry = 0, 0
+}

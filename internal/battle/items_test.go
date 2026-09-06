@@ -382,3 +382,46 @@ func TestDropReloadsGear(t *testing.T) {
 			a.Encumbrance, a.WeaponSpeed, wantEnc, wantSpeed)
 	}
 }
+
+// 撿起不同種類的武器之後，攻防技能要換成那一列。
+//
+// 原版每次要用技能都重查（`sub_26AC2`）：拿手上武器的種類去角色記錄 `+0x52` 起
+// 四筆裡找，**找不到就是 0**（實跑量到，`internal/oracle` 的
+// `TestPartySkillRowFollowsWeaponClass`）。remake 之前在建戰鬥時選一次就不再換。
+func TestPickUpReloadsWeaponSkills(t *testing.T) {
+	s := pickUpState()
+	a := &s.Actors[0]
+	a.WeaponRows = []WeaponSkillRow{
+		{Class: 1, Offence: 111, Defence: 211},
+		{Class: 2, Offence: 122, Defence: 222},
+	}
+	a.Weapon = Weapon{Kind: 1}
+	a.ReloadSkills()
+	if a.Attack != 111 || a.Parry != 211 {
+		t.Fatalf("種類 1：技能 (%d, %d)，期望 (111, 211)", a.Attack, a.Parry)
+	}
+
+	s.Ground[0].Weapon = Weapon{Kind: 2, Weight: 20}
+	if rec, slot, _ := s.PickUpItem(0); rec == MustDropRecord || slot < 0 {
+		t.Fatalf("撿不起來：記錄 %d、格 %d", rec, slot)
+	}
+	if a.Attack != 122 || a.Parry != 222 {
+		t.Errorf("撿了種類 2 的武器之後技能是 (%d, %d)，期望 (122, 222)",
+			a.Attack, a.Parry)
+	}
+
+	// 種類不在四列裡：原版算 0，remake 要跟上。
+	a.Weapon = Weapon{Kind: 0x40}
+	a.ReloadSkills()
+	if a.Attack != 0 || a.Parry != 0 {
+		t.Errorf("種類不在四列裡時技能是 (%d, %d)，期望 (0, 0)", a.Attack, a.Parry)
+	}
+
+	// 怪物那一側不吃這一條——技能在本體記錄，與手上那件無關。
+	m := Actor{Side: SideMonster, Attack: 99, Parry: 88,
+		WeaponRows: a.WeaponRows, Weapon: Weapon{Kind: 1}}
+	m.ReloadSkills()
+	if m.Attack != 99 || m.Parry != 88 {
+		t.Errorf("怪物的技能被換掉了：(%d, %d)，期望 (99, 88)", m.Attack, m.Parry)
+	}
+}
