@@ -4461,9 +4461,20 @@ remake 的 `Actor.Take` 註解本來就寫著那個位址，先前繞了一圈�
   被砍掉的是 docker **client**，容器還活著。結果同一個 `/out` 有兩個容器在寫。
   長容器一開始就要 `run_in_background`。收尾時停掉了自己那個孤兒容器
   （`docker kill`，只動自己建立的）。
+- **第三個坑，最難查的那個**：`otool -l | grep -q LC_CODE_SIGNATURE` 在
+  `set -o pipefail` 底下會偶發失敗。`grep -q` 找到就結束，上游的 `otool` 收到
+  SIGPIPE 回 141，`pipefail` 把整條管線判成失敗——**簽章明明在，驗收照樣噴錯**。
+  機器閒的時候 `otool` 早就寫完不會踩到，load 79 那一次打包就死在這裡。
+  單獨跑 `verify_macos.sh` 反而過，因為那時機器沒那麼忙。
+  凡是「拿一段可能很長的輸出去 `grep -q`」都要先整份收下來再比。
 - **權利審查**寫成 `docs/RELEASE-RIGHTS-REVIEW.md`：`release/` 可以公開、
   `full/` 不可以，說明書譯文要不要進包待使用者決定；**Release 沒有發**——
   那是對外、不可逆的動作，要使用者明確同意。
+- **`dist-all/0.2.0/` 建好並驗過**：`full` 848 個檔、`release` 229 個、`promo` 8 個。
+  `verify_dist.sh 0.2.0` 全過——三個包的 manifest 與條款、`release` 的素材
+  deny-list、Windows 的 PE 檔頭、macOS 的四道靜態驗收、Linux 的啟動（封面與
+  結局都畫得出來）。執行檔：linux 12.7 MB、windows 12.0 MB、macOS universal
+  23.4 MB。
 - 容器：`docker build` 兩次（第一次的 image 疊錯方向，用同一個 tag 重建，
   舊層變成 dangling；**沒有 prune、沒有 rmi**，要不要清由使用者決定）、
   `build_macos.sh`／`verify_macos.sh`／`make_promo.sh`／`build_dist.sh` 各數次，
