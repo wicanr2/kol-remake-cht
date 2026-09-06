@@ -1104,3 +1104,63 @@ func TestProbeAttackResolveResult(t *testing.T) {
 	}
 	t.Logf("兩組共 %d 個 word 不同", changed)
 }
+
+// 探測：那兩個結果各是什麼，以及**對手還沒進到算式裡**。
+//
+// `ds:1C76` 只跟攻擊者的 `+0x08` 走（加 50 → 加 5，也就是 ÷10），
+// `ds:44AC` 只跟攻擊者的 `+0x09` 走（加 50 → 加 50，不除）。兩個都是
+// **攻擊者這一側**的數字。
+//
+// 對手那一側目前一格都沒進來：改防禦者的 `+0x08`／`+0x09` 沒有反應，
+// 把整筆參戰者 1 或 2 的記錄塗成 0xFF 也一樣——**目標不在參戰者記錄裡**。
+// `+0x23`／`+0x25` 都沒反應，`+0x24` 會讓兩個值一起變（`ds:44AC` 成了有號的
+// −219），但那比較像是它換了查表的選項，不是指定目標。
+//
+// 下一步要開一支 IDA 探針把 `sub_26D76` 一次問完：它讀哪些全域、指令碼怎麼分派。
+// 實跑到這裡已經問不出來了。
+func TestProbeAttackScoreMeaning(t *testing.T) {
+	const (
+		resolveEA   = 0x26D76
+		currentSlot = 0x9E5A
+		targetField = 0x24
+		scoreA      = 0x2FB46 // ds:1C76
+		scoreB      = 0x3237C // ds:44AC
+	)
+	run := func(t *testing.T, atkBase, atkGuard, defBase, defGuard uint8) (int16, int16) {
+		t.Helper()
+		o := townMap(t)
+		o.SyncDGroupFromDS()
+		o.WriteU16(o.DS(currentSlot), 0)
+		for i := uint16(0); i < 2; i++ {
+			o.WriteU16(o.DS(uint16(actorStamina)+2*i), 30)
+			rec := uint16(actorBase) + uint16(actorStride)*i
+			o.WriteU16(o.DS(rec+0x02), 1)
+			o.WriteU8(o.DS(rec+0x01), uint8(i))
+			o.WriteU8(o.DS(rec+0x0F), 1)
+		}
+		atk := uint16(actorBase)
+		def := uint16(actorBase) + uint16(actorStride)
+		o.WriteU8(o.DS(atk+0x08), atkBase)
+		o.WriteU8(o.DS(atk+0x09), atkGuard)
+		o.WriteU8(o.DS(def+0x08), defBase)
+		o.WriteU8(o.DS(def+0x09), defGuard)
+		o.WriteU8(o.DS(atk+targetField), 1) // 目標 ＝ 參戰者 1
+		o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 { return 50 })
+		_, _ = o.CallBudget(20_000_000, o.IDA(resolveEA), 0)
+		o.Stub(o.IDA(rollEnter), nil)
+		return int16(o.Word(o.IDA(scoreA))), int16(o.Word(o.IDA(scoreB)))
+	}
+	for _, c := range []struct {
+		name                               string
+		atkBase, atkGuard, defBase, defGuard uint8
+	}{
+		{"基準", 70, 40, 70, 40},
+		{"攻擊者 +0x08 加 50", 120, 40, 70, 40},
+		{"攻擊者 +0x09 加 50", 70, 90, 70, 40},
+		{"防禦者 +0x08 加 50", 70, 40, 120, 40},
+		{"防禦者 +0x09 加 50", 70, 40, 70, 90},
+	} {
+		a, b := run(t, c.atkBase, c.atkGuard, c.defBase, c.defGuard)
+		t.Logf("%-20s → ds:1C76=%d、ds:44AC=%d", c.name, a, b)
+	}
+}
