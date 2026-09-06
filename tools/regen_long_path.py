@@ -44,8 +44,13 @@ def segments(trace: list[dict]) -> list[tuple[bool, int, int]]:
     return [(a, b, c) for a, b, c in out]
 
 
-def drive(name: str, plan: dict, prefix: list[str], seq: int) -> list[str]:
-    """跑一段戰鬥。前綴要含到「進戰場」那一個 token。"""
+def drive(name: str, plan: dict, prefix: list[str], seq: int,
+          target: tuple[int, int] | None = None) -> list[str]:
+    """跑一段。前綴要含到「進戰場」那一個 token（戰鬥段）或「踏進野外」那一下。
+
+    `target` 是野外的目標格。給了就讓 driver 自己走過去——**路上遇敵它會打完**，
+    這正是照抄舊 token 做不到的事（見下面 `regen` 的說明）。
+    """
     WORK.mkdir(parents=True, exist_ok=True)
     pre = WORK / f"{name}-{seq}-pre.txt"
     out = WORK / f"{name}-{seq}-out.txt"
@@ -56,6 +61,8 @@ def drive(name: str, plan: dict, prefix: list[str], seq: int) -> list[str]:
         env["KOL_QUEST_SITES"] = plan["quest_sites"]
     cmd = ["tools/run_driver.sh", str(plan.get("seed", 1)), plan["load"],
            str(pre), str(out), str(DRIVE_LIMIT)]
+    if target is not None:
+        cmd.append(f"{target[0]},{target[1]}")
     print("   driver:", " ".join(cmd))
     subprocess.run(cmd, check=True, env=env)
     return out.read_text(encoding="utf-8").split()
@@ -73,7 +80,7 @@ def regen(name: str) -> None:
     seq = 0
     for k, (inb, a, b) in enumerate(segs):
         if not inb:
-            # 非戰鬥段照抄。step a…b 由 token[a−1 … b−1] 產生。
+            # 非戰鬥段。step a…b 由 token[a−1 … b−1] 產生。
             #
             # **開頭那一個 token 不抄**（第一段除外）：它是把上一場戰鬥推出去的
             # 那一下，而 driver 已經自己按到「回野外／回城裡」才停。再按一次會落在
@@ -82,9 +89,35 @@ def regen(name: str) -> None:
             # 結尾那一個要抄：它是按下去進下一個戰場的那一下，正好給下一段當前綴。
             lo = a if k else 0
             hi = b + 1 if k + 1 < len(segs) else b
-            chunk = old[lo:hi]
+            # ⚠ **野外那一截不能照抄。** 遭遇是隨機的，改了亂數之後路上會多出
+            # 或少掉一場——照抄的話隊伍在第 N 步已經在戰鬥中，而腳本還在按野外的
+            # 鍵，於是死在「未知的野外操作 token："SPACE"」。所以只照抄到踏進野外
+            # 那一步，剩下的交給 driver 用世界目標走（`world_step` 會朝目標格走，
+            # 路上遇敵就打完，CAMPING 與任務提示也各按一個鍵）。
+            enter = None
+            for st in trace[a:b + 1]:
+                if st.get("world"):
+                    enter = st["step"]
+                    break
+            if enter is None or enter >= hi:
+                chunk = old[lo:hi]
+                tokens += chunk
+                print(f"   照抄非戰鬥段 步 {a}…{b}（{len(chunk)} 個 token）")
+                continue
+            chunk = old[lo:enter]
             tokens += chunk
-            print(f"   照抄非戰鬥段 步 {a}…{b}（{len(chunk)} 個 token）")
+            here = trace[b].get("world")
+            print(f"   照抄到踏進野外 步 {a}…{enter}（{len(chunk)} 個 token）")
+            if here is None:
+                tokens += old[enter:hi]
+                continue
+            seq += 1
+            before = len(tokens)
+            tokens = drive(name, plan, tokens, seq, target=(here["x"], here["y"]))
+            print(f"   走到 ({here['x']}, {here['y']})：{len(tokens) - before} 個 token")
+            # 結尾那一下（進戰場）照舊補上，給下一段當前綴。
+            if hi > b:
+                tokens.append(old[b])
             continue
         seq += 1
         before = len(tokens)
