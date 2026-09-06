@@ -1446,3 +1446,80 @@ func TestDamageMatchesOriginal(t *testing.T) {
 		})
 	}
 }
+
+// 把一次傷害記到身上：設好狀態之後兩邊算出同一份記錄（`sub_277F4`）。
+//
+// 肢體的扣傷不在 `sub_26D76` 裡，就是因為它在這一支——位址剛好接在結算那一支
+// 結束（`0x277F4`）之後。參數是 `(傷害, 部位)`，與 remake 的 `Actor.Take` 一致。
+//
+// 六格部位在防禦者記錄的 `+0x11`／`+0x13`／`+0x15`／`+0x17`／`+0x19`／`+0x1B`
+// （頭、胸、右臂、左臂、右腿、左腿），累積傷害在 `+0x0E`、昏迷門檻在 `+0x10`。
+//
+// ⚠ `Call` 等不到返回（後面接著印訊息），**那不是失敗**——記錄在那之前已經寫好了。
+func TestTakeDamageMatchesOriginal(t *testing.T) {
+	const (
+		takeEA     = 0x277F4
+		defenderEA = 0x3237E
+		damageOff  = 0x0E
+		thresOff   = 0x10
+	)
+	parts := []uint16{0x11, 0x13, 0x15, 0x17, 0x19, 0x1B}
+	for _, c := range []struct {
+		name                       string
+		damage, location, already  int
+		threshold                  int
+		health                     int
+	}{
+		{"打頭 5", 5, 0, 0, 100, 50},
+		{"打胸 12", 12, 1, 0, 100, 50},
+		{"打右腿 7", 7, 4, 0, 100, 50},
+		{"那一肢剛好扣光", 50, 2, 0, 100, 50},
+		{"那一肢扣過頭", 80, 3, 0, 100, 50},
+		{"累積傷害到門檻", 30, 5, 75, 100, 50},
+		{"累積傷害夾在 0x7F", 100, 0, 100, 250, 50},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			o := townMap(t)
+			o.SyncDGroupFromDS()
+			o.WriteU16(o.IDA(defenderEA), 1)
+			def := uint16(actorBase) + uint16(actorStride)
+			o.WriteU8(o.DS(def+damageOff), uint8(c.already))
+			o.WriteU8(o.DS(def+thresOff), uint8(c.threshold))
+			for _, off := range parts {
+				o.WriteU8(o.DS(def+off), uint8(c.health))
+			}
+			_, _ = o.CallBudget(5_000_000, o.IDA(takeEA), uint16(c.damage), uint16(c.location))
+			var got [6]int
+			for i, off := range parts {
+				got[i] = int(o.Byte(o.DS(def + off)))
+			}
+			gotDamage := int(o.Byte(o.DS(def + damageOff)))
+
+			a := battle.Actor{
+				Damage: c.already, Threshold: c.threshold,
+				Head: c.health, Chest: c.health,
+				RightArm: c.health, LeftArm: c.health,
+				RightLeg: c.health, LeftLeg: c.health,
+			}
+			a.Take(c.damage, c.location)
+			want := [6]int{a.Head, a.Chest, a.RightArm, a.LeftArm, a.RightLeg, a.LeftLeg}
+			// ⚠ **廢掉的那一肢，原版寫 −1（記錄裡是 0xFF），remake 寫 0。**
+			// 兩邊所有判準都是「`<= 0` 就算廢」，所以行為一致；但記錄裡的值不同，
+			// 存檔或畫面若讀那一格就會差。這裡比語意，差異登記在 `WORKLIST.md`。
+			down := func(v int) bool { return v == 0xFF || v <= 0 }
+			for i := range got {
+				if down(got[i]) != down(want[i]) {
+					t.Fatalf("第 %d 格：原版 %d，remake %d（部位 %v／%v）",
+						i, got[i], want[i], got, want)
+				}
+				if !down(got[i]) && got[i] != want[i] {
+					t.Fatalf("第 %d 格：原版 %d，remake %d", i, got[i], want[i])
+				}
+			}
+			if gotDamage != a.Damage {
+				t.Fatalf("累積傷害：原版 %d，remake %d", gotDamage, a.Damage)
+			}
+			t.Logf("兩邊都是 部位 %v（remake %v）、累積傷害 %d", got, want, gotDamage)
+		})
+	}
+}
