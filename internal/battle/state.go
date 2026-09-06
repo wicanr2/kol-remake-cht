@@ -202,6 +202,8 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			Attack: m.Attack, Parry: m.Parry, Weapon: m.Weapon,
 			UnarmedWeapon: m.UnarmedWeapon,
 			Encumbrance: enc, WeaponSpeed: speed, ShieldGrade: m.ShieldGrade,
+			LoadLevel: level, ArmourWeight: m.ArmourWeight,
+			ShieldWeight: m.ShieldWeight,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds,
 			Stamina: strength + m.Health}
 		s.Actors[i].SetParts()
@@ -230,7 +232,9 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			GoldRoll: monster.Gold.Raw,
 			FleeAt:   monster.FleeAt, FleeRecover: monster.FleeRecover,
 			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
-			ShieldGrade: shieldGrade, Unarmed: monster.Weapon == nil,
+			LoadLevel: site.Level, ArmourWeight: monster.ArmourWeight,
+			ShieldWeight: shieldWeight,
+			ShieldGrade:  shieldGrade, Unarmed: monster.Weapon == nil,
 			Threshold: Threshold(monster.Size, monster.Health),
 			Stamina:   monster.Strength + monster.Health,
 			Shatters:  monster.Shatters,

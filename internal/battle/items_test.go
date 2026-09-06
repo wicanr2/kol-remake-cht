@@ -327,3 +327,58 @@ func TestQuestItemStartsOnTheGround(t *testing.T) {
 		t.Fatalf("不該放：%+v", e.Ground[0])
 	}
 }
+
+// 撿起一件武器之後，負重與武器速度要跟著變。
+//
+// 原版每次算一手的花費都重跑 `sub_24FD3`（`sub_251B0` 開頭就呼叫它，
+// `internal/oracle` 的 `TestActionCostMatchesOriginal` 實跑量到），所以戰鬥中
+// 換武器兩個數字會立刻反映。remake 之前只換 `Weapon`，兩格停在開場算的那一次
+// ——花費 → 疲勞 → 撤退判斷整條鏈都跟著偏。
+func TestPickUpReloadsGear(t *testing.T) {
+	s := pickUpState()
+	a := &s.Actors[0]
+	a.LoadLevel, a.ArmourWeight, a.ShieldWeight = 3, 20, 10
+	a.ReloadGear()
+	bareEnc, bareSpeed := a.Encumbrance, a.WeaponSpeed
+
+	s.Ground[0].Weapon = Weapon{Weight: 60}
+	if rec, slot, _ := s.PickUpItem(0); rec == MustDropRecord || slot < 0 {
+		t.Fatalf("撿不起來：記錄 %d、格 %d", rec, slot)
+	}
+	if a.WeaponSpeed <= bareSpeed {
+		t.Errorf("撿了重武器之後速度是 %d，撿之前 %d——沒有重算",
+			a.WeaponSpeed, bareSpeed)
+	}
+	if a.Encumbrance <= bareEnc {
+		t.Errorf("撿了重武器之後負重是 %d，撿之前 %d——沒有重算",
+			a.Encumbrance, bareEnc)
+	}
+	wantEnc, wantSpeed := Encumbrance(3, Weapon{Weight: 60}, 20, 10)
+	if a.Encumbrance != wantEnc || a.WeaponSpeed != wantSpeed {
+		t.Errorf("撿完是 (負重 %d, 速度 %d)，直接算是 (%d, %d)",
+			a.Encumbrance, a.WeaponSpeed, wantEnc, wantSpeed)
+	}
+}
+
+// 丟掉手上那件之後同樣要回到徒手的數字。
+func TestDropReloadsGear(t *testing.T) {
+	s := itemState()
+	a := &s.Actors[0]
+	a.LoadLevel, a.ArmourWeight, a.ShieldWeight = 3, 20, 10
+	a.Weapon = Weapon{Weight: 60}
+	a.ReloadGear()
+	armedEnc, armedSpeed := a.Encumbrance, a.WeaponSpeed
+
+	if rec, _ := s.DropItem(0); rec == CannotDropRecord {
+		t.Fatal("丟不掉")
+	}
+	if a.WeaponSpeed >= armedSpeed || a.Encumbrance >= armedEnc {
+		t.Errorf("丟掉之後還是 (負重 %d, 速度 %d)，丟之前 (%d, %d)",
+			a.Encumbrance, a.WeaponSpeed, armedEnc, armedSpeed)
+	}
+	wantEnc, wantSpeed := Encumbrance(3, Weapon{}, 20, 10)
+	if a.Encumbrance != wantEnc || a.WeaponSpeed != wantSpeed {
+		t.Errorf("丟完是 (負重 %d, 速度 %d)，直接算是 (%d, %d)",
+			a.Encumbrance, a.WeaponSpeed, wantEnc, wantSpeed)
+	}
+}

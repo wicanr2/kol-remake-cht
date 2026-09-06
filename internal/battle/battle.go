@@ -89,6 +89,12 @@ type Actor struct {
 	Weapon      Weapon
 	Encumbrance int
 	ShieldGrade int
+	// LoadLevel、ArmourWeight、ShieldWeight 是重算負重與武器速度要用的三個輸入
+	// （`ReloadGear`）。**LoadLevel 不是 `Level`**：隊員這一格是技能推出來的戰鬥
+	// 等級，怪物是遭遇等級，而 `Level` 那一格對怪物另外除以 5 再加一。
+	LoadLevel    int
+	ArmourWeight int
+	ShieldWeight int
 	// UnarmedWeapon 是徒手各式拿的那一格穿戴品（`UnarmedSlots`）。原版徒手攻擊
 	// 的傷害骰、種類與重量都從那一格來，不是手上那件（`sub_26AC2:0x26BDA`）。
 	UnarmedWeapon [6]Weapon

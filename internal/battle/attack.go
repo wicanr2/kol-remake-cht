@@ -126,6 +126,18 @@ func Encumbrance(level int, w Weapon, armour, shield int) (enc, speed int) {
 	return factor * total / 100, speed
 }
 
+// ReloadGear 依現在手上那件武器重算負重與武器速度。
+//
+// **原版每次算一手的花費都重跑一遍**：`sub_251B0` 開頭就呼叫 `sub_24FD3`
+// （實跑量到，`internal/oracle` 的 `TestActionCostMatchesOriginal`——不擋掉它，
+// 寫進去的速度與負重會被空白記錄算出來的 0 蓋掉）。所以戰鬥中撿起、丟下或
+// 換走手上那件武器，兩個數字都要立刻跟著變：花費 → 疲勞 → 撤退判斷是一條鏈，
+// 而攻擊分數與執行鍵值也各自減去負重。
+func (a *Actor) ReloadGear() {
+	a.Encumbrance, a.WeaponSpeed = Encumbrance(
+		a.LoadLevel, a.Weapon, a.ArmourWeight, a.ShieldWeight)
+}
+
 // SkillPenaltyScale 是罰值折算成技能的倍率：`sub_26CD5` 扣的是那一格的十倍。
 const SkillPenaltyScale = 10
 

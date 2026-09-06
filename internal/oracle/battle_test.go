@@ -206,3 +206,64 @@ func TestStubbedDiceReachInnerCalls(t *testing.T) {
 		t.Fatal("取消 stub 之後種子沒有前進——常式還被攔著")
 	}
 }
+
+// 一手的花費（RE-131）。
+const (
+	// actionCostFn 是 `sub_251B0(a, b)`：`word_2F940 = a × 武器速度 + b × 負重`。
+	actionCostFn = 0x251B0
+	// costOut 是它寫的那一格（`word_2F940`，與夾擠那支的 effortCost 同一格）。
+	costOut = effortCost
+	// weaponSpeed／encumbrance 是它讀的兩格（`word_37CF0`／`word_30C88`）。
+	weaponSpeed = 0x37CF0
+	encumbrance = 0x30C88
+	// plannedFlag 是參戰者記錄的 `+0x22`（這一回合規劃過了，RE-081）。
+	// 非零而且這一手徒手時，速度那一項改從穿戴品取——這一條測基本路徑，
+	// 所以**十八筆全部清零**，不必知道它讀的是哪一個行動者。
+	plannedFlag = 0x22
+	actorSlots  = 18
+	// weightFn 是 `sub_24FD3()`：從穿戴品重新算出速度與負重那兩格。
+	// 要餵指定的速度與負重就得把它擋掉——不然它會用空白的記錄把兩格算成 0。
+	weightFn = 0x24FD3
+)
+
+// 花費 ＝ 時間項 × 武器速度 ＋ 重量項 × 負重：原版與 remake 算出同一個數。
+//
+// 這是疲勞鏈的入口——每一手把「額度減花費」除以十扣進疲勞，而疲勞驅動整套撤退
+// 判斷。算錯不會當機，只會讓戰鬥的長度悄悄偏掉。
+func TestActionCostMatchesOriginal(t *testing.T) {
+	o := prepare(t)
+	for i := 0; i < actorSlots; i++ {
+		o.WriteU8(o.DS(uint16(actorBase+actorStride*i+plannedFlag)), 0)
+	}
+	// `sub_251B0` 自己會先叫 `sub_24FD3` 從穿戴品重算速度與負重，把寫進去的值
+	// 蓋掉——沒有裝備的空白記錄算出來是 0，於是每一組都回 0。**擋掉它**，
+	// 這一條才問得到「給定速度與負重時，花費是怎麼算的」。
+	//
+	// 這正是 stub 的第二個用途：不只釘死骰值，也用來**切斷上游的依賴**，
+	// 讓一支常式變回純函式。
+	o.StubValue(o.IDA(weightFn), 0)
+	for _, c := range []struct{ speed, enc, timeIdx, weightIdx int }{
+		{10, 5, 2, 1}, {10, 5, 0, 0}, {10, 5, 15, 1}, {10, 5, 6, 2},
+		{1, 1, 1, 1}, {30, 0, 4, 2}, {0, 30, 4, 2}, {7, 13, 3, 6},
+		{100, 100, 15, 2}, {12, 9, 2, 3},
+	} {
+		o.WriteU16(o.IDA(weaponSpeed), uint16(c.speed))
+		o.WriteU16(o.IDA(encumbrance), uint16(c.enc))
+		o.WriteU16(o.IDA(costOut), 0xDEAD)
+
+		if _, err := o.Call(o.IDA(actionCostFn), uint16(c.timeIdx), uint16(c.weightIdx)); err != nil {
+			t.Fatalf("速度 %d／負重 %d、(%d, %d)：%v",
+				c.speed, c.enc, c.timeIdx, c.weightIdx, err)
+		}
+		got := int(int16(o.Word(o.IDA(costOut))))
+		if got == 0xDEAD-0x10000 || got == 0xDEAD {
+			t.Fatalf("速度 %d／負重 %d、(%d, %d)：`word_2F940` 沒被寫",
+				c.speed, c.enc, c.timeIdx, c.weightIdx)
+		}
+		a := battle.Actor{WeaponSpeed: c.speed, Encumbrance: c.enc}
+		if want := battle.ActionCost(a, c.timeIdx, c.weightIdx); got != want {
+			t.Errorf("速度 %d／負重 %d、(%d, %d)：原版 %d，remake %d",
+				c.speed, c.enc, c.timeIdx, c.weightIdx, got, want)
+		}
+	}
+}
