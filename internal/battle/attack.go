@@ -163,6 +163,28 @@ func (a Actor) AttackValue() int {
 	return v - a.Encumbrance
 }
 
+// EffectiveShieldGrade 是這一刻真正算數的盾牌等級。
+//
+// 原版**每次算負重都重新判斷**（`sub_24FD3`）：盾牌要在、**兩隻手臂都還在**、
+// 而且**手上那件不是雙手武器**，防禦值才加得到它。三個條件都是實跑量到的
+// （`internal/oracle` 的 `TestProbeShieldConditions`：把參戰者記錄 `+0x15`／`+0x17`
+// 或武器格 `+0x0D` 改掉，`word_34A0C` 就跟著變）。
+//
+// remake 之前把盾牌等級當成建戰鬥時定下的常數——手臂被打斷、或換上雙手武器之後，
+// 防禦值裡的 `100 × 等級 + 200` 都還在加。
+func (a Actor) EffectiveShieldGrade() int {
+	if a.ShieldGrade == NoShield {
+		return NoShield
+	}
+	if a.RightArm <= 0 || a.LeftArm <= 0 {
+		return NoShield
+	}
+	if a.Weapon.TwoHand {
+		return NoShield
+	}
+	return a.ShieldGrade
+}
+
 // DefenceValue 是防禦分數的骰前部分（`sub_26D76:0x27229`…`0x272FB`）。
 // 招架次數是這一回合已經擋過幾次，愈多擋得愈差；至少算一次。
 func (a Actor) DefenceValue() int {
@@ -172,8 +194,8 @@ func (a Actor) DefenceValue() int {
 	}
 	v := a.DefenceSkill()/parries + a.Quickness
 	v -= v*a.FatigueRatio()/200 + a.Damage*10 + a.Encumbrance
-	if a.ShieldGrade != NoShield {
-		v += 100*a.ShieldGrade + 200
+	if g := a.EffectiveShieldGrade(); g != NoShield {
+		v += 100*g + 200
 	}
 	return v
 }
@@ -218,8 +240,8 @@ func DefenceScore(d Actor, roll int) int {
 func (a Actor) MissileDefenceValue() int {
 	v := a.Quickness / 2
 	v -= v*a.FatigueRatio()/200 + a.Damage*10 + a.Encumbrance
-	if a.ShieldGrade != NoShield {
-		v += 100*a.ShieldGrade + 200
+	if g := a.EffectiveShieldGrade(); g != NoShield {
+		v += 100*g + 200
 	}
 	return v
 }

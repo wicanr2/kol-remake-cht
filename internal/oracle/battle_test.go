@@ -599,3 +599,80 @@ func TestEncumbranceOverflowBoundary(t *testing.T) {
 		t.Logf("護甲加總 %d：兩邊都是 %d", total, got)
 	}
 }
+
+// 探測：什麼情況下盾牌不算數。
+//
+// `sub_24FD3` 的盾牌那一段有條件：**盾牌存在、兩隻手臂都還在、而且武器不是雙手**
+// （RE-080）。remake 的 `ShieldGrade` 是建戰鬥時就定下的常數，**沒有**這些條件
+// ——所以手臂被打斷之後 remake 的盾牌還在算，原版可能不算。
+//
+// 先確認原版真的讀得到盾牌，再逐格找出「哪一格廢掉就沒有盾牌」。
+func TestProbeShieldConditions(t *testing.T) {
+	o := prepare(t)
+	const (
+		slot       = 0
+		charBase   = 0xBB88
+		charWeapon = 0x30
+		charShield = 0x160
+		itemKind   = 0x0E // 種類 byte，盾牌等級取它的低四位
+	)
+	rec := uint16(actorBase + actorStride*slot)
+	reset := func() {
+		o.WriteU8(o.DS(rec+sideFlag), 0)
+		o.WriteU8(o.DS(rec+actorLevel), 1)
+		// 部位欄位 `+0x11 + 2×部位` 全部設成健康（小於 0x80）。
+		for k := uint16(0x11); k < 0x1D; k++ {
+			o.WriteU8(o.DS(rec+k), 1)
+		}
+		// 盾牌：第一個 byte 非 0 表示有這件東西，等級取 `+0x0E` 的低四位。
+		o.WriteU8(o.DS(charBase+charShield), 1)
+		o.WriteU8(o.DS(charBase+charShield+itemKind), 3)
+		o.WriteU8(o.DS(charBase+charShield+itemWeight), 20)
+		// 手上一件普通武器。
+		o.WriteU8(o.DS(charBase+charWeapon), 1)
+		o.WriteU8(o.DS(charBase+charWeapon+itemWeight), 40)
+	}
+	reset()
+	o.WriteU16(o.IDA(shieldGradeOut), 0xDEAD)
+	if _, err := o.Call(o.IDA(weightFn)); err != nil {
+		t.Fatal(err)
+	}
+	base := o.Word(o.IDA(shieldGradeOut))
+	t.Logf("有盾牌、四肢健全時 `word_34A0C` ＝ %04X", base)
+	if base == 0xDEAD {
+		t.Fatal("那一格沒被寫——盾牌那一段沒走到")
+	}
+	if base == 0 {
+		t.Skip("盾牌等級是 0——這一組輸入還沒讓它算出東西，條件要再找")
+	}
+
+	var breaks []string
+	for k := uint16(0); k < uint16(actorStride); k++ {
+		reset()
+		o.WriteU8(o.DS(rec+k), 0xFF)
+		o.WriteU16(o.IDA(shieldGradeOut), 0)
+		if _, err := o.Call(o.IDA(weightFn)); err != nil {
+			t.Fatalf("第 %#x 格：%v", k, err)
+		}
+		if o.Word(o.IDA(shieldGradeOut)) != base {
+			breaks = append(breaks, "+0x"+hex4(k))
+		}
+	}
+	t.Logf("參戰者記錄裡把哪一格設成 0xFF 會讓盾牌等級變掉：%v", breaks)
+
+	// 另一個條件是「武器不是雙手」。逐格問武器格（16 byte）：哪一格改了會讓
+	// 盾牌不算——那一格就是「雙手」的旗標所在。
+	var twoHanded []string
+	for k := uint16(0); k < 16; k++ {
+		reset()
+		o.WriteU8(o.DS(charBase+charWeapon+k), 0xFF)
+		o.WriteU16(o.IDA(shieldGradeOut), 0)
+		if _, err := o.Call(o.IDA(weightFn)); err != nil {
+			t.Fatalf("武器格第 %#x 格：%v", k, err)
+		}
+		if o.Word(o.IDA(shieldGradeOut)) != base {
+			twoHanded = append(twoHanded, "+0x"+hex4(k))
+		}
+	}
+	t.Logf("武器格裡把哪一格設成 0xFF 會讓盾牌等級變掉：%v", twoHanded)
+}

@@ -257,3 +257,36 @@ func TestDamageRollUsesUnarmedWeapon(t *testing.T) {
 		t.Fatalf("徒手傷害 %d，期望夾在 5", got)
 	}
 }
+
+// 盾牌只在「兩隻手臂都還在、手上不是雙手武器」時算數。
+//
+// 原版每次算負重都重新判斷（`sub_24FD3`），實跑量到的三個條件見
+// `internal/oracle` 的 `TestProbeShieldConditions`。remake 之前把盾牌等級當成
+// 建戰鬥時定下的常數，手臂被打斷或換上雙手武器之後還在加 `100 × 等級 + 200`。
+func TestShieldNeedsBothArmsAndOneHandedWeapon(t *testing.T) {
+	base := Actor{ShieldGrade: 3, Quickness: 60, Parries: 1,
+		RightArm: 10, LeftArm: 10, Weapon: Weapon{Weight: 40}}
+	full := base.DefenceValue()
+
+	for _, c := range []struct {
+		name string
+		a    Actor
+	}{
+		{"右臂廢了", func() Actor { a := base; a.RightArm = 0; return a }()},
+		{"左臂廢了", func() Actor { a := base; a.LeftArm = 0; return a }()},
+		{"雙手武器", func() Actor { a := base; a.Weapon.TwoHand = true; return a }()},
+	} {
+		if got := c.a.DefenceValue(); got >= full {
+			t.Errorf("%s：防禦值 %d，四肢健全時 %d——盾牌還在算", c.name, got, full)
+		}
+		if g := c.a.EffectiveShieldGrade(); g != NoShield {
+			t.Errorf("%s：盾牌等級回 %d，期望 NoShield", c.name, g)
+		}
+	}
+	// 射擊那一條也吃同一個判斷。
+	noArm := base
+	noArm.RightArm = 0
+	if noArm.MissileDefenceValue() >= base.MissileDefenceValue() {
+		t.Error("被射中時右臂廢了，盾牌還在算")
+	}
+}
