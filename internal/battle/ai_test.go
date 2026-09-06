@@ -40,8 +40,9 @@ func TestWeightedPickAllZero(t *testing.T) {
 // 攻擊式：武器位元對得上的那一式情境權重加倍。
 func TestEnemyStyleDoublesUsableForms(t *testing.T) {
 	// StyleMask[0] 是 16；武器位元帶 16 的話第 0 式權重加倍。
-	with := EnemyStyle(1, 0, 16, &fixedRand{values: []int{1}})
-	without := EnemyStyle(1, 0, 0, &fixedRand{values: []int{1}})
+	a := Actor{Level: 1, Stamina: 200, Threshold: 100}
+	with := EnemyStyle(a, 0, 16, &fixedRand{values: []int{1}})
+	without := EnemyStyle(a, 0, 0, &fixedRand{values: []int{1}})
 	if with < 0 || with >= len(AttackStyleBase) {
 		t.Fatalf("攻擊式 %d 出界", with)
 	}
@@ -54,7 +55,8 @@ func TestEnemyStyleDoublesUsableForms(t *testing.T) {
 func TestEnemyLocationInRange(t *testing.T) {
 	for level := 0; level < 8; level++ {
 		for style := 0; style < 10; style++ {
-			got := EnemyLocation(level, style, &fixedRand{values: []int{level*7 + style + 1}})
+			a := Actor{Level: level, Stamina: 200, Threshold: 100}
+			got := EnemyLocation(a, style, &fixedRand{values: []int{level*7 + style + 1}})
 			if got < 0 || got >= len(LocationWeights) {
 				t.Fatalf("等級 %d 攻擊式 %d 抽到 %d，出界", level, style, got)
 			}

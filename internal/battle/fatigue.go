@@ -146,6 +146,30 @@ const (
 	ExhaustedShattersRecord = 0x11E // shatters into pieces!
 )
 
+// ActionCost 是 `sub_251B0(a, b)`：`a × 武器速度 + b × 負重`。敵人 AI 拿它跟這一手
+// 的額度比，決定攻擊式與命中部位的權重要偏多少。
+//
+// 原版在「`+0x22` 非零（這一回合規劃過了）而且這一手是徒手」時，速度那一項改成
+// 從角色記錄取徒手那一式的物品記錄第 0x0A 格。remake 的 typed data 沒有那四筆
+// 徒手記錄，所以這一條沒實作——缺口記在 SPEC-008。
+func ActionCost(a Actor, timeIndex, weightIndex int) int {
+	return timeIndex*a.WeaponSpeed + weightIndex*a.Encumbrance
+}
+
+// ClampEffort 是 `sub_2526C`：把「額度 ÷ 花費」夾進 1/3…1，回傳夾過的分子與分母。
+// 額度是負的、或者比花費還大，就直接當 1；花費超過額度三倍就當 1/3。
+func ClampEffort(allow, cost int) (int, int) {
+	switch {
+	case allow < 0:
+		return 1, 3
+	case allow > cost:
+		return 1, 1
+	case cost > 3*allow:
+		return 1, 3
+	}
+	return allow, cost
+}
+
 // EndTurnFatigue 是一手收尾的疲勞更新（`0x20AE0` 與 `0x20D40`）。回傳力竭那一句的
 // 記錄編號，沒力竭就回 0。
 //

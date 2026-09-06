@@ -105,7 +105,10 @@ func WeightedPick(base, context []int, level int, rng Rand) int {
 
 // EnemyStyle 是 `sub_2578F`：抽武器攻擊式。情境權重的列號是對手的防禦選項，
 // 再乘上「這一式能不能用」——`StyleMask[i]` 與怪物的武器位元有交集算 2、沒有算 1。
-func EnemyStyle(level, guard, weaponBits int, rng Rand) int {
+//
+// 最後一項（索引 9）另外乘「額度 ÷ 花費」，花費是 `sub_251B0(15, 1)`
+// （`0x2589E`，RE-131）。比值夾在 1/3…1，所以那一項只會被壓低。
+func EnemyStyle(a Actor, guard, weaponBits int, rng Rand) int {
 	if guard < 0 || guard >= len(ContextWeights) {
 		guard = 0
 	}
@@ -118,14 +121,22 @@ func EnemyStyle(level, guard, weaponBits int, rng Rand) int {
 			ctx[i] *= 2
 		}
 	}
-	return WeightedPick(base, ctx, level, rng)
+	num, den := ClampEffort(a.TimeAllowance(), ActionCost(a, StyleEffortTime, 1))
+	if last := len(ctx) - 1; last >= 0 && den != 0 {
+		ctx[last] = ctx[last] * num / den
+	}
+	return WeightedPick(base, ctx, a.Level, rng)
 }
 
 // EnemyLocation 是 `sub_2590F`：抽命中部位。情境權重同一張矩陣，但列號換成攻擊式。
 //
-// **少了一個修正**：原版對索引 < 2 或 == 6 的三項另外乘 `word_2F940 ÷ word_30D06`
-// （負重與行動餘力的比），那兩個全域的語意還沒解（RE-081），所以這裡不套。
-func EnemyLocation(level, style int, rng Rand) int {
+// 索引 < 2 與 == 6 那三項另外乘「花費 ÷ 額度」，花費是
+// `sub_251B0([0x10B2 + 攻擊選項], 2)`（`0x25994`，RE-131）。比值夾在 1…3，
+// 所以動作越貴、額度越少，這三個部位越被偏向。
+//
+// **額度用的是這一手完整的那一份**（`0x2596C` 先把 `word_30D06` 設回
+// `word_2FBB6`），不是花剩的。
+func EnemyLocation(a Actor, style int, rng Rand) int {
 	if style < 0 || style >= len(ContextWeights) {
 		style = 0
 	}
@@ -135,8 +146,23 @@ func EnemyLocation(level, style int, rng Rand) int {
 		base[i] = LocationWeights[i]
 		ctx[i] = ContextWeights[style][i]
 	}
-	return WeightedPick(base, ctx, level, rng)
+	cost := ActionCost(a, commandTime[style&(len(commandTime)-1)], 2)
+	num, den := ClampEffort(a.TimeAllowance(), cost)
+	if num != 0 {
+		for _, i := range LocationEffortSlots {
+			if i < len(ctx) {
+				ctx[i] = ctx[i] * den / num
+			}
+		}
+	}
+	return WeightedPick(base, ctx, a.Level, rng)
 }
+
+// StyleEffortTime 是 `sub_2578F` 傳給 `sub_251B0` 的第一個引數（`0x2589A`）。
+const StyleEffortTime = 0x0F
+
+// LocationEffortSlots 是要套那個比例的三個部位索引（`0x259A9`：`< 2` 或 `== 6`）。
+var LocationEffortSlots = [3]int{0, 1, 6}
 
 // EnemyMoveForm 是移動三式的抽樣（`0x239D7` 之後）：步行 0、奔跑 1、衝刺 2。
 // 三個基礎權重照狀況打折之後正規化，這裡只做腿還在不在那一條——其餘幾條要
@@ -502,7 +528,7 @@ func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
 	// RE-117）。
 	style := 1
 	if a.Stuck == 0 {
-		style = EnemyStyle(a.Level, s.Actors[target].Guard, a.Weapon.Kind, rng) + 2
+		style = EnemyStyle(*a, s.Actors[target].Guard, a.Weapon.Kind, rng) + 2
 		if style > 0x0A {
 			style = 1
 		}
@@ -520,7 +546,7 @@ func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
 		}
 	default:
 		// 列號是**進來時**那個值，不是剛抽出來的攻擊式（`0x23D58`）。
-		loc := EnemyLocation(a.Level, prev, rng)
+		loc := EnemyLocation(*a, prev, rng)
 		switch {
 		case loc == 0:
 			d.Guard = 0

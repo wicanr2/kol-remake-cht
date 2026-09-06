@@ -96,3 +96,46 @@ func TestCastTime(t *testing.T) {
 		t.Fatalf("99 面的成本 %d", got)
 	}
 }
+
+// 花費與夾限：`sub_251B0` 是兩個乘積相加，`sub_2526C` 把比例夾進 1/3…1。
+func TestActionCostAndClampEffort(t *testing.T) {
+	a := Actor{WeaponSpeed: 20, Encumbrance: 50}
+	if got := ActionCost(a, 15, 1); got != 15*20+50 {
+		t.Fatalf("花費 %d，期望 350", got)
+	}
+	// 額度比花費大 → 直接當 1。
+	if n, d := ClampEffort(1000, 350); n != 1 || d != 1 {
+		t.Fatalf("夾成 %d/%d，期望 1/1", n, d)
+	}
+	// 花費超過額度三倍 → 1/3。
+	if n, d := ClampEffort(100, 350); n != 1 || d != 3 {
+		t.Fatalf("夾成 %d/%d，期望 1/3", n, d)
+	}
+	// 額度是負的也是 1/3。
+	if n, d := ClampEffort(-40, 350); n != 1 || d != 3 {
+		t.Fatalf("夾成 %d/%d，期望 1/3", n, d)
+	}
+	// 落在區間內就原樣回。
+	if n, d := ClampEffort(200, 350); n != 200 || d != 350 {
+		t.Fatalf("夾成 %d/%d，期望 200/350", n, d)
+	}
+}
+
+// 動作越貴、額度越少，命中部位越偏向索引 0、1、6 那三項。
+func TestEnemyLocationFavoursSlotsWhenSlow(t *testing.T) {
+	fast := Actor{Level: 3, Stamina: 400, Threshold: 200}
+	slow := Actor{Level: 3, Stamina: 20, Threshold: 10,
+		WeaponSpeed: 40, Encumbrance: 200}
+	hit := func(a Actor) [7]int {
+		var n [7]int
+		for r := 1; r <= 256; r++ {
+			n[EnemyLocation(a, 2, &fixedRand{values: []int{r}})]++
+		}
+		return n
+	}
+	f, s := hit(fast), hit(slow)
+	favoured := func(n [7]int) int { return n[0] + n[1] + n[6] }
+	if favoured(s) <= favoured(f) {
+		t.Fatalf("慢的那一邊該更偏向那三項：%v vs %v", s, f)
+	}
+}
