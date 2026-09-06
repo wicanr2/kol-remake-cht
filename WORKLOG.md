@@ -4210,3 +4210,18 @@ KOLTOWN 自己的狀態——**它是主程式 EXEC 起來的子程式**，而 d
 路上修了 dosgolem 的一個監看漏洞：**`WriteBytes` 不觸發 `onWrite`**，所以檔案讀取、
 映像載入這類批次寫入在監看下是隱形的——看起來像「沒有人寫過」，實際上整塊被蓋掉了。
 那個漏洞害我一度以為緩衝區沒被寫。
+
+### 主程式證實了「前置狀態」那個假說
+
+遊戲目錄裡有 `KOL.EXE`、**`MAKEMODE.EXE`**、`TANDYPIN.EXE`、`TITLE.EXE`、
+`KOLBOOK.EXE`、`KOLTOWN.EXE`，**五支都不是壓縮的**。
+
+從 `KOL.EXE` 跑起來，它做的第一件事就是把**視訊模式設成 `0Dh`**（EGA 320×200），
+然後 EXEC `TITLE.EXE`——這證實了 KOLTOWN 那一條：模式是主程式設的。
+
+補了 dosgolem 三個 `int 21h` 服務（`AH=08h`／`AH=0Bh`／`AH=43h`），補之前 `KOL.EXE`
+連 `TITLE.EXE` 都走不到。
+
+**還沒解**：樁掉 `TITLE.EXE` 之後鏈仍停在 `KOL.EXE` 自己的小迴圈裡，不再 EXEC 下一支，
+送鍵沒有反應，而 `int 19h AH=4A` 被呼叫兩萬多次——跑進資料區當程式碼執行的樣子。
+啟動鏈用的目錄是 `workplace/oracle/game-chain/`（硬連結原檔，只換跑不動的那幾支）。

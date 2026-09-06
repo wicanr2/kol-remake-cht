@@ -795,3 +795,137 @@ func TestProbeTownFileOps(t *testing.T) {
 		}
 	}
 }
+
+// 探測：解壓器的輸入位移是誰算的。
+//
+// `TOWN7.0` 的檔頭（前 300 byte）是 offset 表：`1a 00` 之後接的是 16 位元位移，
+// **前四格都是 0**（entry 不存在），第五格起才是 `066e`／`0893`。程式取到 0，
+// 表示它算出來的 entry 編號 < 4。
+//
+// 編號多半來自 KOLTOWN 自己的狀態，而它是主程式 EXEC 起來的子程式。這一條先問
+// 「是哪個呼叫端」，再讀那一帶的碼。
+func TestProbeLZWCaller(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	type call struct {
+		caller uint32
+		off    uint16
+		step   uint64
+	}
+	var calls []call
+	o.OnCall(o.IDA(0x1A04E), func(p *oracle.Oracle) {
+		calls = append(calls, call{
+			caller: p.ToIDA(p.Caller()), off: p.Arg(1), step: p.Steps()})
+	})
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	for i, c := range calls {
+		t.Logf("第 %d 次（步數 %d）：呼叫端 IDA %#x、輸入位移 %#x",
+			i, c.step, c.caller, c.off)
+	}
+	for _, ea := range []uint32{0x1A4D6, 0x1A858} {
+		t.Logf("呼叫端 IDA %#x 往前 0x40 個 byte：%x",
+			ea, o.Bytes(o.IDA(ea-0x40), 0x44))
+	}
+}
+
+// 探測：從主程式 `KOL.EXE` 開始跑。
+//
+// 遊戲目錄裡有 `KOL.EXE`（11,971 byte 的未壓縮 MS C 程式）、**`MAKEMODE.EXE`**
+// （名字就是「設模式」）、`TANDYPIN.EXE`、`TITLE.EXE`、`KOLBOOK.EXE`、`KOLTOWN.EXE`。
+//
+// KOLTOWN 少了前置狀態就會用垃圾繼續跑（視訊模式那一條已經證實），而前置是誰設的
+// ——從主程式跑起來就知道。dosgolem 有 EXEC（`docs/spec/007`），整條鏈跑得起來的話
+// 就不必再手動補狀態。
+func TestProbeMainExecutable(t *testing.T) {
+	const main = rootPath + "/KOL.EXE"
+	if _, err := os.Stat(main); err != nil {
+		t.Skipf("沒有 %s：%v", main, err)
+	}
+	o, err := oracle.Load(main, rootPath)
+	if err != nil {
+		t.Fatalf("載入主程式：%v", err)
+	}
+	t.Cleanup(o.Close)
+
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	t.Logf("跑了 %d 道，停在 %s", o.Steps(), o.IP())
+	t.Logf("視訊模式 %#02x、BDA 0040:0049 ＝ %#02x",
+		o.VideoMode(), o.Bytes(oracle.Addr{Seg: 0x40, Off: 0x49}, 1)[0])
+	t.Logf("開過的檔：%v", o.Opened())
+	t.Logf("開不起來的：%v", o.Missing())
+	if c := o.Console(); c != "" {
+		t.Logf("主控台：%q", c)
+	}
+	if u := o.Unimplemented(); len(u) > 0 {
+		t.Logf("沒實作的服務：%v", u)
+	}
+	for _, op := range o.FileOps() {
+		t.Logf("  %s %s 從 %d 要 %d 得 %d", op.Kind, op.Name, op.Offset, op.Want, op.Got)
+	}
+}
+
+// chainRoot 是啟動鏈用的遊戲目錄：與 `rootPath` 同一批檔（硬連結），只有還跑不動
+// 的那幾支換成「立刻結束」的樁。
+//
+// **目的是讓 KOLTOWN 拿到正確的前置狀態**，不是重現標題動畫。`KOL.EXE` 會把視訊
+// 模式設成 0Dh 再一支一支 EXEC 下去；中間哪一支跑飛，後面就都拿不到狀態。
+// 樁掉跑不動的那幾支，鏈才走得到 KOLTOWN。
+const chainRoot = "../../workplace/oracle/game-chain"
+
+// 探測：樁掉 TITLE 之後，啟動鏈走到哪。
+func TestProbeBootChain(t *testing.T) {
+	main := chainRoot + "/KOL.EXE"
+	if _, err := os.Stat(main); err != nil {
+		t.Skipf("沒有 %s（跑 `tools/` 那支建目錄的腳本）：%v", main, err)
+	}
+	o, err := oracle.Load(main, chainRoot)
+	if err != nil {
+		t.Fatalf("載入主程式：%v", err)
+	}
+	t.Cleanup(o.Close)
+	if err := o.Run(60_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	t.Logf("跑了 %d 道，停在 %s；視訊模式 %#02x",
+		o.Steps(), o.IP(), o.VideoMode())
+	t.Logf("開過的檔：%v", o.Opened())
+	t.Logf("開不起來的：%v", o.Missing())
+	nz := 0
+	for _, v := range o.Indexed() {
+		if v != 0 {
+			nz++
+		}
+	}
+	t.Logf("A0000 非零 %d、B8000 非零 %d", nz, func() int {
+		n := 0
+		for _, v := range o.Tandy16() {
+			if v != 0 {
+				n++
+			}
+		}
+		return n
+	}())
+	if c := o.Console(); c != "" {
+		t.Logf("主控台：%q", c)
+	}
+
+	// 卡在 KOL.EXE 自己的碼裡而沒有繼續 EXEC——多半在等按鍵。逐批送，
+	// 看 `Opened` 有沒有長出下一支執行檔。
+	for round := 0; round < 8; round++ {
+		before := len(o.Opened())
+		o.Type(" \r")
+		if err := o.Run(20_000_000); err != nil {
+			t.Logf("第 %d 批之後停了：%v", round, err)
+			break
+		}
+		if len(o.Opened()) != before {
+			t.Logf("第 %d 批之後開過的檔變成：%v", round, o.Opened())
+		}
+	}
+	t.Logf("送完鍵：停在 %s、視訊模式 %#02x、開過 %v",
+		o.IP(), o.VideoMode(), o.Opened())
+}
