@@ -2,14 +2,15 @@ package battle
 
 import "testing"
 
-// retreatState 造一隻傷得很重的敵人與一名隊員，兩者的距離由呼叫端擺。
-// 傷勢是 `50 × Damage ÷ Threshold`，所以 Damage 140／Threshold 100 是 70。
-func retreatState(px, py int, damage int) *State {
+// retreatState 造一隻累得很慘的敵人與一名隊員，兩者的距離由呼叫端擺。
+// 撤退門檻比的是**疲勞比例** `50 × Fatigue ÷ Stamina`（RE-130），
+// 所以疲勞 140／耐力 100 是 70。
+func retreatState(px, py int, fatigue int) *State {
 	return &State{Actors: []Actor{
 		{Side: SideParty, X: px, Y: py, Head: 10, Chest: 10, Threshold: 100},
 		{Side: SideMonster, X: 10, Y: 10, Head: 10, Chest: 10, Threshold: 100,
 			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
-			FleeAt: 65, FleeRecover: 35, Damage: damage},
+			FleeAt: 65, FleeRecover: 35, Stamina: 100, Fatigue: fatigue},
 	}}
 }
 
@@ -90,7 +91,7 @@ func TestUndeadNeverRetreats(t *testing.T) {
 func TestActClearsPerTurnCounters(t *testing.T) {
 	s := &State{Actors: []Actor{
 		{Side: SideParty, X: 5, Y: 5, Head: 10, Chest: 10, Threshold: 100,
-			Command: CmdRest, Fatigue: 9, Parries: 3},
+			Command: CmdRest, Hurt: 9, Parries: 3},
 	}}
 	s.Exec.Order = []int{0}
 	if _, ok := s.Act(&fixedRand{values: []int{1}}); !ok {
@@ -100,7 +101,7 @@ func TestActClearsPerTurnCounters(t *testing.T) {
 	if a.LastHurt != 9 {
 		t.Fatalf("這一手挨的傷該搬進 LastHurt，得到 %d", a.LastHurt)
 	}
-	if a.Fatigue != 0 || a.Parries != 0 {
-		t.Fatalf("兩個計數該歸零，得到 %d／%d", a.Fatigue, a.Parries)
+	if a.Hurt != 0 || a.Parries != 0 {
+		t.Fatalf("兩個計數該歸零，得到 %d／%d", a.Hurt, a.Parries)
 	}
 }

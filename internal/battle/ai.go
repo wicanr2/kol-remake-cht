@@ -544,7 +544,7 @@ const EnemyStuckRetries = 8
 //	否則               → `word_34A08` 加一，重跑決策樹
 func (s *State) enemyStuck(i int, rng Rand) EnemyDecision {
 	a := &s.Actors[i]
-	if a.Injury() < a.FleeAt {
+	if a.FatigueRatio() < a.FleeAt {
 		// 原地揮武器。目標是自己面前那一格，沒有實際目標時就打空氣——
 		// 原版跳的是 `0x23CD6`，也就是貼近打那一段的開頭。
 		d := EnemyDecision{Command: CmdWeapon, Target: -1, Ring: 0,
@@ -579,7 +579,7 @@ func (s *State) enemyStuck(i int, rng Rand) EnemyDecision {
 //	        已在撤退而且上一手挨了打 → 繼續逃
 func (s *State) enemyRetreat(i int, rng Rand) (EnemyDecision, bool) {
 	a := &s.Actors[i]
-	hurt := a.Injury()
+	hurt := a.FatigueRatio()
 	if a.Retreating && hurt < a.FleeRecover {
 		a.Retreating = false
 		return EnemyDecision{}, false
@@ -640,7 +640,7 @@ func (s *State) enemyMove(i, target, ring int, rng Rand) EnemyDecision {
 	d := EnemyDecision{Command: CmdMove, Target: target, Ring: ring}
 	d.Facing = facing
 	legsOK := a.RightLeg > 0 && a.LeftLeg > 0
-	form := EnemyMoveForm(a.Level, max(ring, 0), legsOK, a.Injury(), rng)
+	form := EnemyMoveForm(a.Level, max(ring, 0), legsOK, a.FatigueRatio(), rng)
 	d.Style = IconMoveWalk + form
 	if form == 0 {
 		d.Guard = 2

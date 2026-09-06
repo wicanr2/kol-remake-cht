@@ -267,16 +267,34 @@ func TestCastAreaEffect(t *testing.T) {
 	}
 }
 
-// 效果 5 改的那個全域還沒解，這一版什麼都不做但仍算打中。
-func TestCastGlobalEffectDoesNothingYet(t *testing.T) {
-	s := castState(Spell{Effect: SpellEffectGlobal, TurnCode: 0x02, PowerCode: 0x02})
-	before := s.Actors[1]
+// 效果 5 動的是疲勞，而且正負是反過來的：負面加、正面減。
+func TestCastFatigueEffect(t *testing.T) {
+	// 強度 1 顆 3 面，maxRand 擲滿 → 3；加的是兩倍。
+	s := castState(Spell{Effect: SpellEffectFatigue, TurnCode: 0x02, PowerCode: 0x02})
+	s.Actors[0].Negative = true
+	s.Actors[1].Stamina = 200
 	got := s.Cast(0, 1, -1, maxRand{})
 	if got.Verdict != SpellHits {
 		t.Fatalf("該算打中，得到 %+v", got)
 	}
-	if s.Actors[1] != before {
-		t.Fatal("效果 5 的語意還沒解，不該改任何東西")
+	if s.Actors[1].Fatigue != 6 {
+		t.Fatalf("疲勞是 %d，期望 6", s.Actors[1].Fatigue)
+	}
+	// 比例 = 50 × 6 ÷ 200 = 1。
+	if r := s.Actors[1].FatigueRatio(); r != 1 {
+		t.Fatalf("疲勞比例是 %d，期望 1", r)
+	}
+	// 這一條不掛倒數——它走自己的分支，不碰 +0x30。
+	if s.Actors[1].SpellTurns != 0 {
+		t.Fatalf("效果 5 不該掛倒數，得到 %d", s.Actors[1].SpellTurns)
+	}
+
+	// 正面往下減，而且原版的下限是死碼，所以減得到負數。
+	s = castState(Spell{Effect: SpellEffectFatigue, TurnCode: 0x02, PowerCode: 0x02})
+	s.Actors[1].Stamina = 200
+	s.Cast(0, 1, -1, maxRand{})
+	if s.Actors[1].Fatigue != -6 {
+		t.Fatalf("疲勞是 %d，期望 −6（原版下限那一段是死碼）", s.Actors[1].Fatigue)
 	}
 }
 
@@ -396,5 +414,30 @@ func TestPlanningSpellFlow(t *testing.T) {
 	// 這個法術的 bit 7 有設，用的是遠距游標。
 	if !sp.NeedsTarget() {
 		t.Fatal("這一個法術該要選目標格")
+	}
+}
+
+// 休息一手把疲勞減成七成，而且這一手挨過打就不算（`0x20AE0`）。
+func TestRestRecoversFatigue(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 5, Y: 5, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdRest, Stamina: 200, Fatigue: 100},
+	}}
+	s.Exec.Order = []int{0}
+	if _, ok := s.Act(&fixedRand{values: []int{1}}); !ok {
+		t.Fatal("該做出一手")
+	}
+	if got := s.Actors[0].Fatigue; got != 70 {
+		t.Fatalf("疲勞是 %d，期望 70", got)
+	}
+	// 這一手挨過打就不回復。
+	s = &State{Actors: []Actor{
+		{Side: SideParty, X: 5, Y: 5, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdRest, Stamina: 200, Fatigue: 100, Hurt: 3},
+	}}
+	s.Exec.Order = []int{0}
+	s.Act(&fixedRand{values: []int{1}})
+	if got := s.Actors[0].Fatigue; got != 100 {
+		t.Fatalf("挨過打不該回復，疲勞是 %d", got)
 	}
 }

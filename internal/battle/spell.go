@@ -83,11 +83,10 @@ const (
 
 // 兩個有自己分支的效果編號。
 const (
-	// SpellEffectStat 之外的兩個特例：5 動的是疲勞累計（`[0x322E + 2i]`，
-	// 分母是力量 ＋ 健康，RE-129；那一整條鏈還沒接進規則層），
-	// 6 是「指定部位治療或傷害」。
-	SpellEffectGlobal = 5
-	SpellEffectArea   = 6
+	// SpellEffectStat 之外的兩個特例：5 動的是疲勞（`[0x322E + 2i]`，
+	// `MAGIC.0` 屬性表的 `Fatigue`），6 是「指定部位治療或傷害」（`Body`）。
+	SpellEffectFatigue = 5
+	SpellEffectArea    = 6
 )
 
 // SpellVerdict 是一次施法的去向。
@@ -181,12 +180,28 @@ func (s *State) Cast(caster, target, area int, rng Rand) CastResult {
 	case sp.Effect == SpellEffectArea:
 		res.Area = area
 		s.castArea(target, area, res.Power, a.Negative)
-	case sp.Effect == SpellEffectGlobal:
-		// 效果 5 改的那個全域（`[0x322E]`）語意還沒解（RE-100），先不動任何東西。
+	case sp.Effect == SpellEffectFatigue:
+		s.castFatigue(target, res.Power, a.Negative)
 	case sp.Effect >= 1 && sp.Effect <= len(SpellEffectField):
 		s.castStat(target, sp.Effect, res.Power, res.Turns, a.Negative)
 	}
 	return res
+}
+
+// castFatigue 是效果 5：疲勞加減「強度 × 2」（`0x286AB`）。這一個效果的正負**是反
+// 過來的**——負面往上加、正面往下減，因為疲勞越高越糟（對照 `castStat`：那一段
+// 對六個欄位一視同仁，沒有反過來，RE-130）。
+//
+// 原版下限那一段是死碼：`cmp` 比的是位址常數 `322Eh` 而不是那一格的值，`jb` 永遠
+// 不成立，所以**疲勞減得到負數**。照抄——比例跟著變成負的，攻防因此小幅變好。
+// 這一條也不掛倒數：效果 5 走的是自己的分支，不碰 `+0x30`。
+func (s *State) castFatigue(target, power int, negative bool) {
+	t := &s.Actors[target]
+	if negative {
+		t.Fatigue += power * 2
+		return
+	}
+	t.Fatigue -= power * 2
 }
 
 // castArea 是效果 6：治療或傷害指定的部位（`0x2859E`…`0x2869A`）。

@@ -124,7 +124,7 @@ func skillAfterPenalty(skill, penalty int) int {
 // AttackValue 是攻擊分數的骰前部分（`sub_26D76:0x26E08`…`0x26E7E`）。
 func (a Actor) AttackValue() int {
 	v := a.Strength + a.OffenceSkill()
-	v -= v*a.Injury()/200 + a.Damage*10 + a.Fatigue*20
+	v -= v*a.FatigueRatio()/200 + a.Damage*10 + a.Hurt*20
 	return v - a.Encumbrance
 }
 
@@ -136,7 +136,7 @@ func (a Actor) DefenceValue() int {
 		parries = 1
 	}
 	v := a.DefenceSkill()/parries + a.Quickness
-	v -= v*a.Injury()/200 + a.Damage*10 + a.Encumbrance
+	v -= v*a.FatigueRatio()/200 + a.Damage*10 + a.Encumbrance
 	if a.ShieldGrade != NoShield {
 		v += 100*a.ShieldGrade + 200
 	}
@@ -182,7 +182,7 @@ func DefenceScore(d Actor, roll int) int {
 // `0x271FE` 直接跳到 `0x2728C`，連「防禦選項為 0」的檢查都跳過了。
 func (a Actor) MissileDefenceValue() int {
 	v := a.Quickness / 2
-	v -= v*a.Injury()/200 + a.Damage*10 + a.Encumbrance
+	v -= v*a.FatigueRatio()/200 + a.Damage*10 + a.Encumbrance
 	if a.ShieldGrade != NoShield {
 		v += 100*a.ShieldGrade + 200
 	}
@@ -223,7 +223,7 @@ func HitLocation(style, roll int) int {
 func DamageRoll(a Actor, style, margin int, rng Rand) int {
 	w := a.Weapon
 	bonus := (a.Strength - 70) / 8
-	bonus = (70 - a.Injury()) * bonus / 100
+	bonus = (70 - a.FatigueRatio()) * bonus / 100
 	total := w.Base
 	for i := 0; i < w.Count; i++ {
 		total += rng.Roll(w.Sides)
@@ -339,6 +339,6 @@ func (a *Actor) Take(damage, location int) (down, limb bool) {
 			}
 		}
 	}
-	a.Fatigue += damage
+	a.Hurt += damage
 	return down, limb
 }

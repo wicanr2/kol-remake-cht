@@ -26,12 +26,18 @@ func TestPlanKey(t *testing.T) {
 	if got := PlanKey(a, 1, 7); got != 7+((3-1)*10+40)/2 {
 		t.Fatalf("第二回合鍵值 %d", got)
 	}
-	// 受傷會再折損：傷勢 = 50 × 傷害 ÷ 門檻，基準扣掉基準 × 傷勢 ÷ 200。
+	// 疲勞會再折損：比例 = 50 × 疲勞 ÷ 耐力，基準扣掉基準 × 比例 ÷ 200。
+	// 累積傷害在這一條式子裡不出現（RE-130）。
+	tired := a
+	tired.Stamina, tired.Fatigue = 200, 100
+	base := (3-1)*10 + 40
+	if got := PlanKey(tired, 0, 7); got != 7+base-base*25/200 {
+		t.Fatalf("疲勞之後鍵值 %d", got)
+	}
 	hurt := a
 	hurt.Damage = 50
-	base := (3-1)*10 + 40
-	if got := PlanKey(hurt, 0, 7); got != 7+base-base*25/200 {
-		t.Fatalf("受傷之後鍵值 %d", got)
+	if got := PlanKey(hurt, 0, 7); got != 7+base {
+		t.Fatalf("累積傷害不該動規劃鍵值，得到 %d", got)
 	}
 	// 敵人不吃回合數那一條。
 	m := Actor{Side: SideMonster, Level: 3, Foresight: 40, Threshold: 100}

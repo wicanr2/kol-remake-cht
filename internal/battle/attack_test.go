@@ -75,9 +75,16 @@ func TestAttackAndDefenceValue(t *testing.T) {
 	if got := a.AttackValue(); got != 370 {
 		t.Fatalf("攻擊值 %d", got)
 	}
-	a.Damage = 50 // 傷勢 = 50 × 50 ÷ 100 = 25
-	if got := a.AttackValue(); got != 420-420*25/200-50*10-50 {
+	// 累積傷害只扣線性的那一項（× 10）——原版沒有「傷得越重乘法惩罰」那一條，
+	// 乘法項吃的是疲勞（RE-130）。
+	a.Damage = 50
+	if got := a.AttackValue(); got != 420-50*10-50 {
 		t.Fatalf("受傷後的攻擊值 %d", got)
+	}
+	// 疲勞才會打折：耐力 200、疲勞 100 → 比例 25。
+	a.Stamina, a.Fatigue = 200, 100
+	if got := a.AttackValue(); got != 420-420*25/200-50*10-50 {
+		t.Fatalf("疲勞之後的攻擊值 %d", got)
 	}
 	d := testDefender()
 	d.Encumbrance = 20
@@ -175,7 +182,7 @@ func TestResolve(t *testing.T) {
 	if out.Location != 1 {
 		t.Fatalf("部位 %d", out.Location)
 	}
-	if d.Damage != out.Damage || d.Fatigue != out.Damage {
+	if d.Damage != out.Damage || d.Hurt != out.Damage {
 		t.Fatalf("傷害沒記上去：%+v", d)
 	}
 	if d.Parries != 1 {

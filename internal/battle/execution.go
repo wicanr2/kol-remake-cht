@@ -201,7 +201,7 @@ func TimeCost(command, style int) int {
 // 原版在移動且攻擊選項為 0 時也算了一次除以 2，但結果沒有寫回，所以那一條
 // 實際上不生效（RE-084）；這裡照原版的行為，不實作那一條。
 func ExecKey(a Actor, roll int) int {
-	key := a.Quickness - a.Quickness*a.Injury()/200
+	key := a.Quickness - a.Quickness*a.FatigueRatio()/200
 	key -= a.Encumbrance / 10
 	key -= (a.WeaponSpeed / 2) * TimeCost(a.Command, a.Style) / 10
 	key += roll
@@ -299,6 +299,12 @@ func (s *State) FacingTarget(i int) int {
 	return -1
 }
 
+// 休息回復的比例：`疲勞 × 7 ÷ 10`（`0x20B08`…`0x20B1B`）。
+const (
+	RestRecoveryNum = 7
+	RestRecoveryDen = 10
+)
+
 // Act 做出下一手，回報做完了沒有。第二個回傳值為 false 表示這一回合的執行段
 // 已經走完。
 func (s *State) Act(rng Rand) (ActResult, bool) {
@@ -318,9 +324,18 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 			continue
 		}
 		out := s.act(i, rng)
+		// 休息回復（`sub_1E3A8:0x20AE0`）：這一手沒挨打（`+0x2D` 為零）而且選的是
+		// 休息，疲勞就剩七成。要在清掉 Hurt **之前**判，順序同原版。
+		//
+		// 原版接著還有每一手的疲勞衰減（`0x20D40`：`−= word_30D06 ÷ 10`），
+		// 但 `word_30D06` 是這一手的時間額度、而且是**花剩的**那個值，
+		// remake 沒有時間額度這個系統，所以那一項沒接（RE-130，缺口記在 SPEC-012）。
+		if a.Hurt == 0 && a.Command == CmdRest {
+			a.Fatigue = a.Fatigue * RestRecoveryNum / RestRecoveryDen
+		}
 		// 一手做完的收尾（`sub_1E3A8:0x20E64`）：這一手挨的傷搬進 +0x2A，
 		// 挨傷計數與招架次數歸零——兩格都是「這一手」的計數，不是整場的。
-		a.LastHurt, a.Fatigue, a.Parries = a.Fatigue, 0, 0
+		a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0
 		return out, true
 	}
 	return ActResult{}, false

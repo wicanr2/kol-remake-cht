@@ -100,11 +100,21 @@ type Actor struct {
 	// WeaponSpeed 是 `sub_24FD3` 算出來的 `word_37CF0`：執行段的鍵值要用它
 	// 折算指令的時間成本（RE-084）。
 	WeaponSpeed int
-	// Fatigue 是 +0x2D：**從上一次輪到自己之後**挨的傷（`sub_26D76:0x2762E` 累加），
+	// Hurt 是 +0x2D：**從上一次輪到自己之後**挨的傷（`sub_26D76:0x2762E` 累加），
 	// 攻擊分數會扣掉它的 20 倍。Parries 是已經招架幾次（+0x0F），愈多擋得愈差。
 	// 兩個都在一手執行完的收尾清掉（`sub_1E3A8:0x20E64`）。
-	Fatigue int
+	//
+	// **它不是疲勞**——疲勞是另一格（`Fatigue`），兩者無關（RE-130）。
+	Hurt    int
 	Parries int
+	// Fatigue 是 `[0x322E + 2i]`：`MAGIC.0` 屬性表第 5 項的疲勞。開打歸零，
+	// 只有法術效果 5 會加，休息減三成。Stamina 是 `[0x1C50 + 2i]`＝力量 ＋ 健康，
+	// 折算成比例時當分母（`sub_23683`，RE-129／RE-130）。
+	//
+	// **和累積傷害是兩個獨立的累計**：傷害落到身上那一支寫的是 `+0x0E`
+	// （`Damage`），全庫沒有任何地方把傷害加進疲勞。
+	Fatigue int
+	Stamina int
 	// LastHurt 是 +0x2A：上一手的 Fatigue，由那個收尾搬過來。敵人 AI 拿它判
 	// 「已經在撤退、而且這一手還在挨打」（RE-081）。
 	LastHurt int

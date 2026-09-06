@@ -187,14 +187,18 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		m := party[i]
 		level := CombatLevel(m.Skills)
 		enc, speed := Encumbrance(level, m.Weapon, m.ArmourWeight, m.ShieldWeight)
+		// 力量先折算飢餓再拿去算耐力——原版是先 `sub_2198A` 寫好 `+0x08`，
+		// 緊接著 `sub_21AC4` 才讀它填 `[0x1C50 + 2i]`（RE-129）。
+		strength := Nourished(m.Strength, m.Nutrition)
 		s.Actors[i] = Actor{Kind: PartyKind, Side: SideParty,
 			X: site.PartyX[i], Y: site.PartyY[i],
 			Name: m.Name, Member: i,
 			Level: level, Foresight: m.Foresight, Size: m.Size,
-			Strength: Nourished(m.Strength, m.Nutrition), Quickness: m.Quickness,
+			Strength: strength, Quickness: m.Quickness,
 			Attack: m.Attack, Parry: m.Parry, Weapon: m.Weapon,
 			Encumbrance: enc, WeaponSpeed: speed, ShieldGrade: m.ShieldGrade,
-			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds}
+			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds,
+			Stamina: strength + m.Health}
 		s.Actors[i].SetParts()
 	}
 	for i := 0; i < site.Count && i < len(site.MonsterX) && i < len(site.MonsterY); i++ {
@@ -222,7 +226,8 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			FleeAt:   monster.FleeAt, FleeRecover: monster.FleeRecover,
 			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
 			ShieldGrade: shieldGrade, Unarmed: monster.Weapon == nil,
-			Threshold: Threshold(monster.Size, monster.Health)}
+			Threshold: Threshold(monster.Size, monster.Health),
+			Stamina:   monster.Strength + monster.Health}
 		s.Actors[slot].SetParts()
 	}
 	s.MonsterLevel = site.Level

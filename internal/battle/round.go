@@ -58,16 +58,21 @@ func PlanKey(a Actor, round int, roll int) int {
 	if a.Side == SideParty && round > 0 {
 		base /= 2 * round
 	}
-	base -= base * a.Injury() / 200
+	base -= base * a.FatigueRatio() / 200
 	return roll + base
 }
 
-// Injury 是傷勢比例：50 × 累積傷害 ÷ 昏迷門檻（`sub_23683`）。
-func (a Actor) Injury() int {
-	if a.Threshold <= 0 {
+// FatigueRatio 是疲勞比例：`50 × 疲勞 ÷ (力量 ＋ 健康)`（`sub_23683`）。
+// 規劃鍵值、攻防分數、力量加成與敵人 AI 的撤退門檻都拿它折算。
+//
+// 分子是 `[0x322E + 2i]`、分母是 `[0x1C50 + 2i]`，**不是累積傷害與昏迷門檻**
+// （RE-130 更正）：累積傷害另有自己的線性項（各處的 `Damage × 10`）。
+// 沒有人施效果 5 的法術時疲勞是 0，這一項就整個消失。
+func (a Actor) FatigueRatio() int {
+	if a.Stamina <= 0 {
 		return 0
 	}
-	return 50 * a.Damage / a.Threshold
+	return 50 * a.Fatigue / a.Stamina
 }
 
 // Down 回報這一名退出戰鬥了沒有：頭或胸被打廢就算（`sub_22866`）。
