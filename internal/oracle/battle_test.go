@@ -267,3 +267,149 @@ func TestActionCostMatchesOriginal(t *testing.T) {
 		}
 	}
 }
+
+// 誰是敵人（`sub_22229(i)`）。
+const sideFn = 0x22229
+
+// remake 假設「參戰者 0…5 是隊員、6…17 是敵人」（`PartySlots = 6`）。這一條先問
+// 原版判準在哪：十八筆空白記錄全部回 0，所以**不是**靠索引分的。
+//
+// 定位法是逐格探測：把記錄的第 k 個 byte 設成非零，看回傳值變不變。50 次呼叫，
+// 比開 IDA 便宜得多，而且答案是原版自己在執行期給的。
+func TestSideFlagIsARecordField(t *testing.T) {
+	o := prepare(t)
+	const slot = 0
+	rec := uint16(actorBase + actorStride*slot)
+
+	base, err := o.Call(o.IDA(sideFn), slot)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if base != 0 {
+		t.Fatalf("空白記錄回 %d，期望 0", base)
+	}
+	var hits []int
+	for k := 0; k < actorStride; k++ {
+		o.WriteU8(o.DS(rec+uint16(k)), 1)
+		v, err := o.Call(o.IDA(sideFn), slot)
+		if err != nil {
+			t.Fatalf("第 %d 格：%v", k, err)
+		}
+		if v != 0 {
+			hits = append(hits, k)
+		}
+		o.WriteU8(o.DS(rec+uint16(k)), 0)
+	}
+	t.Logf("把記錄的第 k 個 byte 設 1 之後 `sub_22229` 回非零的 k：%v", hits)
+	if len(hits) == 0 {
+		t.Skip("五十格都不影響——判準在記錄之外（另一個全域或索引以外的東西）")
+	}
+}
+
+// 敵人的攻防技能（`sub_26AC2`，RE-080／RE-129）。
+const (
+	// skillFn 是 `sub_26AC2(i)`：算出「這一刻」的攻防技能放進兩個全域。
+	skillFn = 0x26AC2
+	// bodyPtr 是 `word_39A48`：指向本體記錄的 near 指標（`ds:` 偏移）。
+	bodyPtr = 0x39A48
+	// monsterBase／monsterStride 是怪物記錄陣列（`ds:CD92`，一筆 128 byte）。
+	monsterBase, monsterStride = 0xCD92, 128
+	// monsterSkill 是怪物記錄裡攻防技能那兩組大端 16-bit。
+	monsterSkill = 0x17
+	// encounterLevel 是 `word_3B26A`：這一場遭遇的等級。
+	encounterLevel = 0x3B26A
+	// sideFlag 是參戰者記錄的 `+0x01`：非零＝敵人（實跑逐格探出來的，
+	// `TestSideFlagIsARecordField`）。
+	sideFlag = 0x01
+)
+
+// 敵人的技能要按等級縮放：`技能 × 等級 ÷ 5`。
+//
+// remake 在建戰鬥時就折算好（`state.go` 的 `monster.AttackSkill * site.Level / 5`），
+// 這一條把那個折算釘在原版上。**整數除法的截斷位置是重點**——先乘後除與先除後乘
+// 差得出來，而差出來的那一兩點會一路走進命中判定。
+func TestMonsterSkillScalesByLevel(t *testing.T) {
+	o := prepare(t)
+	const slot = 6 // 第一個敵人格
+	rec := uint16(actorBase + actorStride*slot)
+	body := uint16(monsterBase + monsterStride*(slot-6))
+
+	o.WriteU8(o.DS(rec+sideFlag), 1)     // 這一格是敵人
+	o.WriteU8(o.DS(rec+plannedFlag), 0)  // 不要走徒手那條分支
+	o.WriteU8(o.DS(rec+penaltyOff), 0)   // 罰值另有測試
+	o.WriteU8(o.DS(rec+penaltyDef), 0)
+	o.WriteU16(o.IDA(bodyPtr), body)
+
+	for _, c := range []struct{ atk, par, level int }{
+		{100, 80, 5}, {100, 80, 1}, {100, 80, 3}, {100, 80, 10},
+		{1234, 999, 5}, {1234, 999, 2}, {7, 3, 4}, {0, 0, 5},
+		{65000, 60000, 1}, {33, 44, 7},
+	} {
+		// 攻防技能各一組大端 16-bit。
+		o.WriteU8(o.DS(body+monsterSkill), uint8(c.atk>>8))
+		o.WriteU8(o.DS(body+monsterSkill+1), uint8(c.atk))
+		o.WriteU8(o.DS(body+monsterSkill+2), uint8(c.par>>8))
+		o.WriteU8(o.DS(body+monsterSkill+3), uint8(c.par))
+		o.WriteU16(o.IDA(encounterLevel), uint16(c.level))
+		o.WriteU16(o.IDA(offSkill), 0xDEAD)
+		o.WriteU16(o.IDA(defSkill), 0xDEAD)
+
+		if _, err := o.Call(o.IDA(skillFn), uint16(slot)); err != nil {
+			t.Fatalf("攻 %d／防 %d／等級 %d：%v", c.atk, c.par, c.level, err)
+		}
+		gotAtk := int(o.Word(o.IDA(offSkill)))
+		gotPar := int(o.Word(o.IDA(defSkill)))
+		if gotAtk == 0xDEAD || gotPar == 0xDEAD {
+			t.Fatalf("攻 %d／防 %d／等級 %d：兩格沒被寫——走的可能不是敵人那條分支",
+				c.atk, c.par, c.level)
+		}
+		if want := c.atk * c.level / 5; gotAtk != want {
+			t.Errorf("攻擊技能 %d × 等級 %d ÷ 5：原版 %d，remake 算 %d",
+				c.atk, c.level, gotAtk, want)
+		}
+		if want := c.par * c.level / 5; gotPar != want {
+			t.Errorf("防禦技能 %d × 等級 %d ÷ 5：原版 %d，remake 算 %d",
+				c.par, c.level, gotPar, want)
+		}
+	}
+}
+
+// 溢位：原版那一步是 16 位元乘法，remake 的 `int` 不會環繞。
+//
+// **實際資料到不了那裡**——`monsters.json` 的攻擊技能最大 300，乘上等級上限 10
+// 是 3000，離 65535 很遠。這一條把那個邊界量出來當紀錄，而不是留著不知道：
+// 對得上就是兩邊在整個 16 位元範圍內都一致，對不上就寫明差異從哪一點開始。
+func TestMonsterSkillOverflowBoundary(t *testing.T) {
+	o := prepare(t)
+	const slot = 6
+	rec := uint16(actorBase + actorStride*slot)
+	body := uint16(monsterBase + monsterStride*(slot-6))
+	o.WriteU8(o.DS(rec+sideFlag), 1)
+	o.WriteU8(o.DS(rec+plannedFlag), 0)
+	o.WriteU8(o.DS(rec+penaltyOff), 0)
+	o.WriteU8(o.DS(rec+penaltyDef), 0)
+	o.WriteU16(o.IDA(bodyPtr), body)
+
+	for _, c := range []struct{ skill, level int }{
+		{300, 10},   // 實際資料的上限
+		{6553, 10},  // 剛好不溢位
+		{6554, 10},  // 剛好溢位
+		{20000, 10}, // 遠超過
+	} {
+		o.WriteU8(o.DS(body+monsterSkill), uint8(c.skill>>8))
+		o.WriteU8(o.DS(body+monsterSkill+1), uint8(c.skill))
+		o.WriteU16(o.IDA(encounterLevel), uint16(c.level))
+		if _, err := o.Call(o.IDA(skillFn), uint16(slot)); err != nil {
+			t.Fatalf("技能 %d × 等級 %d：%v", c.skill, c.level, err)
+		}
+		got := int(o.Word(o.IDA(offSkill)))
+		plain := c.skill * c.level / 5
+		if got != plain {
+			t.Logf("技能 %d × 等級 %d ÷ 5：原版 %d，直接算 %d"+
+				"（16 位元環繞；實際資料最大 300×10＝3000，到不了這裡）",
+				c.skill, c.level, got, plain)
+			continue
+		}
+		t.Logf("技能 %d × 等級 %d ÷ 5：兩邊都是 %d", c.skill, c.level, got)
+	}
+}
