@@ -39,14 +39,14 @@
 | 任務與結局 | 8 | 97% | 任務觸發與怪物來源已解（RE-090）；完成的標記已解並實作（RE-101），帶著東西逃掉也算完成（RE-103）；**接任務、交付、回報與結局都在正常路徑上實跑通過**（RE-106／107／109／110）：`quest-take` 按 MOUTH 打字問到關鍵字就接下任務（沒換過任何輸入），`quest-list` 在資料頁上列出回報過的，`full-chain-ending` 打完最終任務那一刻播出七段結局，與 `-scene ending` 的收據逐 byte 相同 | 一覽底下那一頁（`sub_16239`）沒有對拍 |
 | 音訊 | 3 | 10% | 母體已普查，TITLE 的 WAV oracle 已取得 | SPEC-004 還是 DRAFT，一個音都還沒進遊戲 |
 | 繁體中文化 | 5 | 88% | 城鎮 1,938 則對話 ＋ 三個 UI 文字庫 486 筆全翻完，安全矩形 6,952 項全過、缺字 0；**ENDTXT 接上結局畫面、BOOKDATA 接上書本**（`LoadBank` 把文字庫疊到 remake 自己的字串表上），KOLDATA 畫在對話框裡的每一行也逐行量過 | 戰鬥那一段（索引 ≥ 0x100）的中文版面還沒定；每一筆記錄一次畫幾行要等接上畫面才驗得了 |
-| 發行打包 | 2 | 70% | `tools/build_dist.sh` 從乾淨工作樹建出 `dist-all/0.1.2/` 三個包（linux/amd64 ＋ windows/amd64），`verify_dist.sh` 驗過 manifest、授權文件、release 的素材 deny-list 與**啟動**；版本號暫定，待使用者決定 | Windows 沒有真機驗收；macOS 要 osxcross；推廣片還沒做 |
+| 發行打包 | 2 | 85% | `tools/build_dist.sh` 從乾淨工作樹建出 `dist-all/0.2.0/` 三個包，**三個平台都在裡面**（linux/amd64、windows/amd64、macOS universal）；`verify_dist.sh` 驗過 manifest、授權文件、release 的素材 deny-list、macOS 的四道靜態驗收與**啟動**；**推廣片做好了**（59 秒，`promo/kol-promo.mp4`）；權利審查寫在 `docs/RELEASE-RIGHTS-REVIEW.md` | Windows 與 macOS 都沒有真機驗收；`0.2.0` 仍是暫定號；GitHub Release 要使用者點頭才發 |
 
 加權總和 `3×0.95 + 10×0.85 + 18×0.99 + 9×0.98 + 25×0.99 + 7×0.92 + 10×0.97 +
-8×0.97 + 3×0.10 + 5×0.88 + 2×0.70 = 92.74`。
+8×0.97 + 3×0.10 + 5×0.88 + 2×0.85 = 93.04`。
 
 **這個分數不是進度百分比。**已完成的那 88 分裡，做的是基礎設施最重的部分
 （抽取器、對拍框架、字模、存檔、UI 分層）；剩下的 12 分裡，**音訊一個音都還沒進遊戲**（要人耳驗收才升得了 SPEC-004），
-Windows 與 macOS 的封包要另外的工具鏈，推廣片還沒做。
+Windows 與 macOS 的封包編得出來但沒有真機驗收。
 
 **這一輪把任務那一整條與競技場補完了**：接任務（RE-110）、MOUTH 的打字問話
 （RE-067）、任務一覽（RE-111）與競技場（RE-108，含賭場下注）各有實跑收據，
@@ -520,13 +520,20 @@ Windows 與 macOS 的封包要另外的工具鏈，推廣片還沒做。
 - [ ] 完成最長繁中內容的視覺回歸、正常路徑截圖與輸入測試。
 - [ ] 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣。
 - [~] 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}`。
-  `tools/build_dist.sh` 已從乾淨工作樹建出 `dist-all/0.1.2/` 的 linux/amd64 與
-  windows/amd64（full 844 個檔案、release 199 個），`verify_dist.sh` 通過。
-  **`0.1.2` 是暫定的 patch 遞增，版本號仍待使用者決定**——產物可重生，
-  換號碼重跑一次就好。macOS 要 osxcross，`promo/` 還沒有影片。
+  `tools/build_dist.sh` 從乾淨工作樹建出 `dist-all/0.2.0/`，**三個平台**：
+  linux/amd64 原生、windows/amd64 交叉編（Ebitengine 在 Windows 不用 CGO）、
+  macOS universal（`tools/build_macos.sh`，osxcross ＋ CGO，arm64 與 x86_64
+  各編一次再 lipo）。`promo/` 有 59 秒的推廣片與 `sources.json`。
+  **`0.2.0` 是暫定號，版本號仍待使用者決定**——產物可重生，換號碼重跑一次就好。
 - [~] 驗證每包啟動、manifest、SHA-256、授權、素材 deny-list、存檔位置與平台／架構。
-  `tools/verify_dist.sh` 驗過 manifest、授權文件、release 的素材 deny-list 與啟動。
+  `tools/verify_dist.sh` 驗過 manifest、授權文件、release 的素材 deny-list、
+  Windows 的 PE 檔頭、macOS 的四道靜態驗收與 Linux 的啟動。
 - [ ] 真機驗收 Windows／macOS；Linux 容器 smoke 不冒充真機結果。
+  **macOS 的 bundle 沒有簽章**（`_CodeSignature` 在 Linux 上做不出來），
+  首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。
+- [ ] 發 GitHub Release。權利審查已經做完（`docs/RELEASE-RIGHTS-REVIEW.md`），
+  結論是 `release/` 可以公開、`full/` 不可以；**還缺兩件**：說明書譯文要不要進
+  `release/`，以及使用者對「建立第一個 Release」這個對外動作的明確同意。
 
 完成條件：交付包、證據、權利分類與已知限制一致；本專案 Docker 容器已清理。
 

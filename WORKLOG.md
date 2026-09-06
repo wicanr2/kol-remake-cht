@@ -4434,3 +4434,37 @@ remake 的 `Actor.Take` 註解本來就寫著那個位址，先前繞了一圈�
 - 容器：`tools/run_ida_probe.sh` 一次（`--rm`）、`tools/go_docker.sh` 數次
   （`--rm`）、`tools/run_python_tool.sh` 一次（`--rm`）。沒有殘留 container，
   沒有動別的專案資源。
+
+## 2026-09-07 三平台交付與推廣片
+
+- **macOS 這一支腳補上了。** `docker/Dockerfile.osxcross-go` ＋
+  `tools/build_macos.sh` ＋ `tools/verify_macos.sh`。兩弧各編一次再 lipo，
+  靜態驗收四道全過（雙弧、arm64 的 `LC_CODE_SIGNATURE`、`minos 11.0`、
+  動態相依只落在 `/usr/lib/` 與 `/System/Library/`）。
+- **失敗分類：image 疊錯方向。** 第一版把 osxcross `COPY --from` 疊到本專案那個
+  Go image（Debian 12）上，`osxcross-conf` 一跑就報 `GLIBC_2.38 not found` 與
+  `GLIBCXX_3.4.32 not found`——crazymax 那份是在較新的 Debian 上建的。
+  改成 Ubuntu 24.04 起底、把 Go 工具鏈與 module cache 搬過去；版本仍然鎖住，
+  `GOPROXY=off` 也照樣成立。
+- **推廣片做好了**：59 秒、1280×720、`mean_volume -27.8 dB`／`max_volume -7.8 dB`。
+  分鏡與版面在 `docs/promo/compose.sh`，設計 token 在 `docs/promo/theme.sh`
+  （theme「赤石與燭火」，色票是從實機截圖的色彩直方圖取的）。
+- **兩個 ffmpeg 的坑**（都實際踩到）：
+  1. `apad,atrim=0:<秒>` 會讓整支跑不完——`apad` 無長度就是無限產生，而 `atrim`
+     只丟掉超過的畫格、**不會讓上游 EOF**。輸出檔停在 48 byte、CPU 一直燒。
+     改 `apad=whole_dur=` 不卡了，但音軌只有 8.2 秒（它管「補到多長」不管
+     「輸出多長」，前面的 `adelay` 已經把時間軸推掉）。**能用的是第三路
+     `anullsrc` 拿 `-t` 定長再 `amix`。**
+  2. `volumedetect` 印在 **info** 等級，`-v error` 會把量測值一起吃掉——
+     收據裡的響度量到空字串。
+- **另一個坑不是 ffmpeg 的**：長 `docker run` 被 harness 在 120 秒轉背景時，
+  被砍掉的是 docker **client**，容器還活著。結果同一個 `/out` 有兩個容器在寫。
+  長容器一開始就要 `run_in_background`。收尾時停掉了自己那個孤兒容器
+  （`docker kill`，只動自己建立的）。
+- **權利審查**寫成 `docs/RELEASE-RIGHTS-REVIEW.md`：`release/` 可以公開、
+  `full/` 不可以，說明書譯文要不要進包待使用者決定；**Release 沒有發**——
+  那是對外、不可逆的動作，要使用者明確同意。
+- 容器：`docker build` 兩次（第一次的 image 疊錯方向，用同一個 tag 重建，
+  舊層變成 dangling；**沒有 prune、沒有 rmi**，要不要清由使用者決定）、
+  `build_macos.sh`／`verify_macos.sh`／`make_promo.sh`／`build_dist.sh` 各數次，
+  全部 `--rm`。沒有動別的專案的資源。

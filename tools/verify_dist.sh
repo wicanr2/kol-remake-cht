@@ -34,7 +34,8 @@ fi
 for bundle in full release; do
   exe="$REPO_ROOT/$DIST/$bundle/kol.exe"
   [ -f "$exe" ] || { echo "$bundle 少了 kol.exe" >&2; exit 2; }
-  head -c 2 "$exe" | grep -q '^MZ' || { echo "$bundle 的 kol.exe 不是 PE" >&2; exit 3; }
+  # 同樣避開 `… | grep -q`（見 verify_macos.sh 的註解）。
+  [ "$(head -c 2 "$exe")" = MZ ] || { echo "$bundle 的 kol.exe 不是 PE" >&2; exit 3; }
 done
 
 # macOS 那一份走 `verify_macos.sh` 的四道（雙弧、arm64 的 ad-hoc 簽章、最低系統

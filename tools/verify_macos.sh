@@ -39,12 +39,20 @@ exec timeout 300 docker run --rm --network none \
     done
     for a in arm64 x86_64; do
       $T-lipo -thin $a "$B" -output /tmp/$a
+      # ⚠ 先整份收下來再比，**不要 `otool | grep -q`**：`grep -q` 找到就結束，
+      # 上游的 otool 收到 SIGPIPE 回 141，`pipefail` 把整條管線判成失敗——
+      # 於是「簽章明明在」也會噴錯。機器閒的時候 otool 早就寫完不會踩到，
+      # 一忙就必中，是最難查的那種偶發。
+      load=$($T-otool -l /tmp/$a)
       if [ "$a" = arm64 ]; then
-        $T-otool -l /tmp/$a | grep -q LC_CODE_SIGNATURE \
-          || { echo "arm64 沒有 LC_CODE_SIGNATURE（使用者會看到 Killed: 9）" >&2; exit 1; }
+        case "$load" in
+          *LC_CODE_SIGNATURE*) ;;
+          *) echo "arm64 沒有 LC_CODE_SIGNATURE（使用者會看到 Killed: 9）" >&2; exit 1 ;;
+        esac
       fi
-      echo "-- $a $( $T-otool -l /tmp/$a | grep -m1 minos || echo "（沒有 minos）" )"
-      bad=$($T-otool -L /tmp/$a | tail -n +2 | awk "{print \$1}" \
+      echo "-- $a $(printf "%s\n" "$load" | grep -m1 minos || echo "（沒有 minos）")"
+      libs=$($T-otool -L /tmp/$a)
+      bad=$(printf "%s\n" "$libs" | tail -n +2 | awk "{print \$1}" \
             | grep -vE "^(/usr/lib/|/System/Library/)" || true)
       if [ -n "$bad" ]; then
         echo "$a 連到系統目錄以外的動態庫：" >&2; echo "$bad" >&2; exit 1
