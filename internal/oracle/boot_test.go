@@ -492,3 +492,32 @@ func TestProbeTandyVsEGA(t *testing.T) {
 			o.ToIDA(o.IP()), o.Opened())
 	}
 }
+
+// 原版載入完成之後畫的是什麼。
+//
+// Tandy 模式 09h：四個 bit 一個像素、一列 160 bytes、**四段交錯**。解錯段數的話
+// 畫面會變成四張交疊的梳子——看起來像雜訊，不像「解錯了」，所以下面同時印出
+// 色號分布與輪廓：**分布集中在少數幾個色號**才是真的畫面，均勻散開就是解錯了。
+func TestTownScreenDecodes(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	shot := o.Tandy16()
+	hist := map[uint8]int{}
+	for _, v := range shot {
+		hist[v]++
+	}
+	t.Logf("色號分布：%v", hist)
+	if len(hist) == 1 {
+		t.Fatal("整張畫面同一個色號——什麼都沒畫")
+	}
+	for y := 0; y < 200; y += 5 {
+		line := make([]byte, 0, 80)
+		for x := 0; x < 320; x += 4 {
+			line = append(line, " .:-=+*#%@$&XW#M"[shot[y*320+x]])
+		}
+		t.Logf("%3d |%s|", y, line)
+	}
+}
