@@ -566,10 +566,26 @@ remake 的亂數換成原版那一支之後（RE-132），舊收據記的是**�
 `regen_long_path.py` → `replay_player_path.py` → `remap_receipt_steps.py` →
 再 `replay_player_path.py` 驗證 → 刪過期截圖。
 
-**要等的前置**：dosgolem 第四層（`apps/kol/`）能驅動原版走到戰鬥，解出原版真正
-在哪裡抽、抽幾次。現在對拍證實的是 `rand()` 與 `rand(n)` 的**實作**逐次相同
-（RE-132），**呼叫時機沒有驗過**——remake 每步抽的次數若與原版不同，重生出來的
-基準還是要再做一次。先重生等於可能做兩次。
+**要等的前置（做掉一半）**：原版現在跑得動，而「呼叫時機」的第一支對拍過了——
+**野外遭遇的四條走法逐條相同**（`internal/oracle` 的
+`TestAmbushDrawSequenceMatchesOriginal`）：
+
+| 走法 | 擲點序列 |
+|---|---|
+| 沒有遭遇 | `[100]` |
+| 治療者 | `[100, 100, 3]` |
+| 挑中怪物 | `[100, 100, 32, 3]` |
+| 一隻都不符合 | `[100, 100, 32×32]` |
+
+`RollForce`（等級、隻數、站位組）接著也對過了：把 `word_2FA2C` 設成 20
+（隊裡有人沒坐騎，跳過「Attempt to ride away?」那一問）之後整條鏈是
+`[100, 100, 32, 3, 99, 12, 5]`，兩邊逐條相同
+（`TestAmbushForceDrawsMatchOriginal`）。
+
+順帶量到**城鎮地圖上每走一步抽 0 次骰**。
+
+還沒對的：天候（`internal/world/session.go:222`）與戰鬥內的每一次擲點。
+那兩處都對過之後才動收據——先重生等於可能做兩次。
 
 ## 下一個唯一工作
 

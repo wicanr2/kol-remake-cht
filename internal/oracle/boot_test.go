@@ -10,6 +10,7 @@ import (
 	"image/color"
 	"image/png"
 	"os"
+	"sort"
 	"testing"
 
 	"github.com/wicanr2/dosgolem/oracle"
@@ -940,5 +941,191 @@ func TestDumpTownClicks(t *testing.T) {
 		err := o.Click(p.x, p.y, oracle.NoCursorWait(), oracle.Frame((*oracle.Oracle).Tandy16))
 		savePNG(t, o, fmt.Sprintf("%s/%02d-%s.png", dir, i+1, p.name))
 		t.Logf("  點 %s (%d,%d)：%v、IDA %#x", p.name, p.x, p.y, err, o.ToIDA(o.IP()))
+	}
+}
+
+// 探測：建築物內那六個圖示各做什麼。點一個、存一張圖、再點文字框回到對話。
+func TestDumpTownIcons(t *testing.T) {
+	dir := os.Getenv("KOL_ORACLE_DUMP")
+	if dir == "" {
+		t.Skip("沒設 KOL_ORACLE_DUMP")
+	}
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(200_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	click := func(x, y int) error {
+		return o.Click(x, y, oracle.NoCursorWait(), oracle.Frame((*oracle.Oracle).Tandy16))
+	}
+	// 先點文字框讓指令列長出來。
+	if err := click(200, 110); err != nil {
+		t.Fatalf("點文字框：%v", err)
+	}
+	savePNG(t, o, dir+"/icons-00-bar.png")
+	for i := 0; i < 6; i++ {
+		x := 47 + i*29
+		err := click(x, 186)
+		savePNG(t, o, fmt.Sprintf("%s/icons-%02d-x%d.png", dir, i+1, x))
+		t.Logf("  點圖示 %d（x=%d）：%v、IDA %#x、開了 %d 個檔",
+			i, x, err, o.ToIDA(o.IP()), len(o.Opened()))
+	}
+}
+
+// townMap 把原版推到城鎮地圖：等載入完成 → 點文字框叫出指令列 → 點最右邊那個
+// 圖示（離開建築）。
+func townMap(t *testing.T) *oracle.Oracle {
+	t.Helper()
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(200_000_000); err != nil {
+		t.Fatalf("載入城鎮：%v", err)
+	}
+	click := func(x, y int) {
+		t.Helper()
+		if err := o.Click(x, y, oracle.NoCursorWait(),
+			oracle.Frame((*oracle.Oracle).Tandy16)); err != nil {
+			t.Fatalf("點 (%d,%d)：%v", x, y, err)
+		}
+	}
+	click(200, 110) // 文字框：叫出指令列
+	click(47, 186)  // 最左邊那個圖示（U-TURN）：離開建築
+	return o
+}
+
+// 探測：城鎮地圖上怎麼移動。角色在地圖中央偏上，逐一試鍵盤與鄰格點擊。
+func TestDumpTownMove(t *testing.T) {
+	dir := os.Getenv("KOL_ORACLE_DUMP")
+	if dir == "" {
+		t.Skip("沒設 KOL_ORACLE_DUMP")
+	}
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	o := townMap(t)
+	savePNG(t, o, dir+"/move-00-map.png")
+	hash := func() string {
+		sum := sha256.Sum256(o.Tandy16())
+		return hex.EncodeToString(sum[:8])
+	}
+	base := hash()
+	t.Logf("地圖基準 %s", base)
+
+	// 鍵盤：方向鍵是「00 ＋ 掃描碼」，數字鍵盤是 ASCII。
+	for _, k := range []struct{ name, send string }{
+		{"↑掃描", "\x00\x48"}, {"↓掃描", "\x00\x50"},
+		{"←掃描", "\x00\x4B"}, {"→掃描", "\x00\x4D"},
+		{"8", "8"}, {"2", "2"}, {"4", "4"}, {"6", "6"},
+	} {
+		o.ClearInput()
+		o.Type(k.send)
+		if err := o.Run(10_000_000); err != nil {
+			t.Logf("  鍵 %s：停了 %v", k.name, err)
+			break
+		}
+		h := hash()
+		t.Logf("  鍵 %-6s：%s%s", k.name, h,
+			map[bool]string{true: "（變了）", false: ""}[h != base])
+		base = h
+	}
+
+	// 滑鼠：角色在 (195,95) 附近，試四個鄰格與遠一點的位置。
+	for i, p := range []struct {
+		name string
+		x, y int
+	}{
+		{"右一格", 211, 95}, {"左一格", 179, 95},
+		{"上一格", 195, 79}, {"下一格", 195, 111},
+		{"右邊界", 295, 95}, {"下邊界", 195, 150},
+	} {
+		err := o.Click(p.x, p.y, oracle.NoCursorWait(), oracle.Frame((*oracle.Oracle).Tandy16))
+		savePNG(t, o, fmt.Sprintf("%s/move-%02d-%s.png", dir, i+1, p.name))
+		h := hash()
+		t.Logf("  點 %-6s (%3d,%3d)：%v %s", p.name, p.x, p.y, err, h)
+		base = h
+	}
+}
+
+// 探測：**原版每走一步抽幾次骰**。
+//
+// 這是 `rand_test.go` 那句「這裡不驗呼叫時機」留下的洞：對拍證實的是 `rand()`
+// 與 `rand(n)` 的實作逐次相同，誰在什麼時候抽、抽幾次一直沒驗過。收據基準
+// 要重生就得先知道這件事——remake 每步抽的次數若與原版不同，重生出來的基準
+// 還是要再做一次。
+//
+// ⚠ **先做正對照。**「一次都沒抽」與「攔截器根本沒掛上」長得一模一樣
+// （`~/diagnosis-notes/docs/02-query-returned-empty/`）。
+func TestProbeRandPerStep(t *testing.T) {
+	o := townMap(t)
+	type draw struct {
+		caller uint32
+		n      uint16
+		roll   bool
+	}
+	var draws []draw
+	o.OnCall(o.IDA(rollEnter), func(p *oracle.Oracle) {
+		draws = append(draws, draw{caller: p.ToIDA(p.Caller()), n: p.Arg(0), roll: true})
+	})
+	o.OnCall(o.IDA(randEnter), func(p *oracle.Oracle) {
+		draws = append(draws, draw{caller: p.ToIDA(p.Caller())})
+	})
+
+	// 正對照：直接呼叫一次，攔截器沒掛上的話這裡就會是 0。
+	if _, err := o.Call(o.IDA(rollEnter), 6); err != nil {
+		t.Fatalf("正對照呼叫 rand(6)：%v", err)
+	}
+	if len(draws) == 0 {
+		t.Fatal("正對照：直接呼叫 rand(6) 也沒被攔到——攔截器沒掛上，後面的 0 不算數")
+	}
+	t.Logf("正對照過了：直接呼叫記到 %d 次", len(draws))
+
+	report := func(label string, from int) {
+		t.Logf("%s 抽了 %d 次：", label, len(draws)-from)
+		counts := map[string]int{}
+		for _, d := range draws[from:] {
+			kind := "rand()"
+			if d.roll {
+				kind = fmt.Sprintf("rand(%d)", d.n)
+			}
+			counts[fmt.Sprintf("%s ← IDA %#x", kind, d.caller)]++
+		}
+		keys := make([]string, 0, len(counts))
+		for k := range counts {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		for _, k := range keys {
+			t.Logf("    %-34s ×%d", k, counts[k])
+		}
+	}
+
+	// 往同一個方向走到出城。城鎮不擲骰，野外才有遭遇判定——換場景會讀新的檔，
+	// 那是最可靠的路標。
+	seen := len(o.Opened())
+	for i := 1; i <= 40; i++ {
+		before := len(draws)
+		err := o.Click(295, 95, oracle.NoCursorWait(),
+			oracle.Frame((*oracle.Oracle).Tandy16))
+		files := ""
+		if len(o.Opened()) > seen {
+			files = fmt.Sprintf("　新開 %v", o.Opened()[seen:])
+			seen = len(o.Opened())
+		}
+		if err != nil {
+			t.Logf("第 %2d 步：畫面沒變（撞牆或不能走）%s", i, files)
+			continue
+		}
+		if n := len(draws) - before; n > 0 || files != "" {
+			report(fmt.Sprintf("第 %2d 步%s", i, files), before)
+		}
+	}
+	t.Logf("走完 40 步共抽 %d 次；開了 %d 個檔", len(draws), len(o.Opened()))
+	if dir := os.Getenv("KOL_ORACLE_DUMP"); dir != "" {
+		if err := os.MkdirAll(dir, 0o755); err == nil {
+			savePNG(t, o, dir+"/walk-40.png")
+		}
 	}
 }

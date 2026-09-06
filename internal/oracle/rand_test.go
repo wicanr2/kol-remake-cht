@@ -24,6 +24,8 @@ const (
 	// randEnter 是 `rand()`；rollEnter 是包在外面的 `rand(n)`（`sub_1B5A8`）。
 	randEnter = 0x2D538
 	rollEnter = 0x1B5A8
+	// ambushEnter 是野外的隨機遭遇（`sub_2A4E5`，RE-078）。
+	ambushEnter = 0x2A4E5
 )
 
 // 原版檔案由玩家自備，只留在本機。沒有就整支跳過——不假裝驗過。

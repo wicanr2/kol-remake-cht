@@ -553,7 +553,6 @@ func TestEncumbranceMatchesOriginal(t *testing.T) {
 	}
 }
 
-
 // 溢位邊界：原版那一步是**有號** 16 位元乘法。
 //
 // `係數 × 總重` 超過 32767 就變負數，負重跟著變負。等級 1 的係數是 70，所以門檻是
@@ -793,4 +792,240 @@ func TestProbeDurabilityRoutine(t *testing.T) {
 			o.Byte(o.DS(charBase+slotOff+durab)),
 			o.Byte(o.DS(charBase+slotOff)))
 	}
+}
+
+// recordingRand 依序吐出給定的骰值，並記下每一次的 `n`。
+//
+// 對拍的是**擲點的參數序列**：誰在什麼時候抽、抽的上限是多少。骰值本身由呼叫端
+// 決定，好把兩邊逼進同一條分支。
+type recordingRand struct {
+	values []int
+	ns     []int
+	i      int
+}
+
+func (r *recordingRand) Roll(n int) int {
+	r.ns = append(r.ns, n)
+	v := 0
+	if r.i < len(r.values) {
+		v = r.values[r.i]
+	}
+	r.i++
+	return v
+}
+
+// ambushFixture 造一份怪物表：`hit` 指定哪一隻符合當下的地形與季節，
+// 傳 -1 表示一隻都不符合。
+func ambushFixture(hit int) *battle.Monsters {
+	m := &battle.Monsters{Chance: []battle.SeasonChance{{
+		Season: "WINTER",
+		Day:    []int{60, 60, 60, 60, 60, 60, 60, 60},
+		Night:  []int{60, 60, 60, 60, 60, 60, 60, 60},
+	}}}
+	m.List = make([]battle.Monster, battle.MonsterCount)
+	for i := range m.List {
+		m.List[i] = battle.Monster{Index: i, Name: "NOBODY"}
+	}
+	if hit >= 0 && hit < battle.MonsterCount {
+		m.List[hit].TerrainMask = battle.TerrainBit(0)
+		m.List[hit].SeasonMask = battle.SeasonBit(0)
+	}
+	return m
+}
+
+// 野外遭遇的擲點序列：原版與 remake 逐條相同（RE-078 的「呼叫時機」）。
+//
+// # 為什麼要驗這個
+//
+// RE-132 對拍的是 `rand()` 與 `rand(n)` 的**實作**逐次相同，`rand_test.go` 那句
+// 「這裡不驗呼叫時機」留下的洞就是這一支要補的：誰在什麼時候抽、抽幾次。
+// 收據基準要重生就得先知道——remake 每步抽的次數若與原版不同，重生出來的基準
+// 還是要再做一次。
+//
+// # 原版那一側怎麼問
+//
+// `sub_2A4E5` 在**資料載入之後**才走得進遭遇那一條（`_main` 剛進來時 `payload3`
+// 還是空的，機率算出來一律 0，`rand(100) >= 0` 恆真）。所以先讓原版把城鎮載完，
+// 再依呼叫端釘死骰值把它逼進每一條分支：
+//
+//	0x2a554  rand(100)  遭遇機率，`>=` 就結束
+//	0x2a584  rand(100)  治療者門檻，`<` 就走治療者（不挑怪物）
+//	0x2a5ba  rand(0x20) 挑怪物，最多 32 次
+//	0x2a670  rand(3)    場景，兩條路都擲
+//
+// 走進遭遇那一條之後原版會畫訊息、問「Attempt to ride away?」然後等輸入，
+// 所以 `Call` 等不到返回——**那不是失敗**，該抽的在那之前已經抽完了。
+func TestAmbushDrawSequenceMatchesOriginal(t *testing.T) {
+	o := townMap(t)
+	o.SyncDGroupFromDS()
+	const (
+		chanceEA = 0x2a554
+		healerEA = 0x2a584
+		pickEA   = 0x2a5ba
+	)
+
+	// 原版：依呼叫端給骰值，記下每一次的上限。
+	original := func(chance, healer uint32, pick func(int) uint32) []int {
+		t.Helper()
+		var ns []int
+		tries := 0
+		o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 {
+			ea := p.ToIDA(p.Caller())
+			ns = append(ns, int(p.Arg(0)))
+			switch ea {
+			case chanceEA:
+				return chance
+			case healerEA:
+				return healer
+			case pickEA:
+				tries++
+				return pick(tries)
+			}
+			return 1
+		})
+		// 跑不完是預期內的（畫面與等待輸入），序列已經記下來了。
+		_, _ = o.CallBudget(50_000_000, o.IDA(ambushEnter))
+		o.Stub(o.IDA(rollEnter), nil)
+		return ns
+	}
+
+	// remake：同樣的骰值，記下同樣的上限序列。
+	remake := func(m *battle.Monsters, values []int) []int {
+		r := &recordingRand{values: values}
+		m.RollAmbush(0, 0, false, 3, r)
+		return r.ns
+	}
+
+	rep := func(v int, n int) []int {
+		out := make([]int, n)
+		for i := range out {
+			out[i] = v
+		}
+		return out
+	}
+
+	for _, c := range []struct {
+		name string
+		// 原版那一側
+		chance, healer uint32
+		pick           func(int) uint32
+		// remake 那一側
+		monsters *battle.Monsters
+		values   []int
+	}{
+		{
+			name: "沒有遭遇：只擲機率那一次",
+			// 機率是 `payload3` 算出來的，實測落在 4…50；99 一定不遇到。
+			chance: 99, healer: 0, pick: func(int) uint32 { return 1 },
+			monsters: ambushFixture(0),
+			values:   []int{99},
+		},
+		{
+			name:   "治療者：機率、門檻、場景",
+			chance: 0, healer: 0, pick: func(int) uint32 { return 1 },
+			// remake 的 HealerChance[2] 是 21，擲 0 走治療者。
+			monsters: ambushFixture(0),
+			values:   []int{0, 0, 1},
+		},
+		{
+			name:   "挑中怪物：機率、門檻、挑一次、場景",
+			chance: 0, healer: 99, pick: func(int) uint32 { return 1 },
+			monsters: ambushFixture(0), // 編號 0 符合，`rand(32)` 回 1 → 1−1＝0
+			values:   append([]int{0, 99, 1}, 1),
+		},
+		{
+			// 擲 2 → 編號 1，在當下的地形與季節不符合（編號 0 反而符合，
+			// 所以上一項擲 1 一次就中）。原版因此把 32 次重試跑滿。
+			name:   "一隻都不符合：機率、門檻、挑滿 32 次",
+			chance: 0, healer: 99, pick: func(int) uint32 { return 2 },
+			monsters: ambushFixture(-1),
+			values:   append([]int{0, 99}, rep(2, 32)...),
+		},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			got := original(c.chance, c.healer, c.pick)
+			want := remake(c.monsters, c.values)
+			if len(got) != len(want) {
+				t.Fatalf("原版抽 %d 次 %v，remake 抽 %d 次 %v",
+					len(got), got, len(want), want)
+			}
+			for i := range got {
+				if got[i] != want[i] {
+					t.Fatalf("第 %d 次：原版 rand(%d)，remake rand(%d)\n原版 %v\nremake %v",
+						i, got[i], want[i], got, want)
+				}
+			}
+			t.Logf("逐條相同（%d 次）：%v", len(got), got)
+		})
+	}
+}
+
+// 遭遇之後那一段（等級、隻數、站位組）的擲點序列：原版與 remake 逐條相同。
+//
+// # 怎麼讓原版跑完
+//
+// `sub_2A4E5` 走進遭遇之後會問「Attempt to ride away?」並等滑鼠——`Call` 因此
+// 停在 `sub_1B100` 的輪詢裡永遠不返回。但那一問是有條件的：
+//
+//	if word_2FA2C != 20:   ; 20 表示隊裡有人沒坐騎，直接開打
+//	    印框與四行敘述、問騎走…
+//
+// 把 `word_2FA2C` 設成 20 就整段跳過，一路跑到 `RollForce` 那三擲
+// （擲完之後原版接著畫戰場，又會停在 `sub_1B100` 等滑鼠——序列已經抽完了）。
+// **這是「改記憶體設好輸入」的標準用法**，不是繞過原版的邏輯——原版自己就有
+// 這條路，而且是隊伍沒坐騎時的正常情形。
+func TestAmbushForceDrawsMatchOriginal(t *testing.T) {
+	o := townMap(t)
+	o.SyncDGroupFromDS()
+	const (
+		chanceEA = 0x2a554
+		healerEA = 0x2a584
+		pickEA   = 0x2a5ba
+		paceAddr = 0x2FA2C // word_2FA2C：隊伍最慢的移動率，20 ＝ 有人沒坐騎
+		noMount  = 20
+	)
+	o.WriteU16(o.IDA(paceAddr), noMount)
+
+	var ns []int
+	o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 {
+		ea := p.ToIDA(p.Caller())
+		ns = append(ns, int(p.Arg(0)))
+		switch ea {
+		case chanceEA:
+			return 0 // 一定遭遇
+		case healerEA:
+			return 99 // 不走治療者
+		case pickEA:
+			return 1 // 編號 0，在當下的地形與季節符合
+		}
+		return 1
+	})
+	// ⚠ 跑不完仍是預期內的：擲完三擲之後原版接著畫戰場、又停在 `sub_1B100`
+	// 等滑鼠。**該抽的在那之前已經抽完了**，序列才是這一支要比的東西。
+	if _, err := o.CallBudget(50_000_000, o.IDA(ambushEnter)); err != nil {
+		t.Logf("沒有返回（擲完之後接著進戰鬥畫面）：%v", err)
+	}
+	o.Stub(o.IDA(rollEnter), nil)
+
+	// remake：同樣的骰值走同一條路。
+	r := &recordingRand{values: []int{0, 99, 1, 1, 1, 1, 1}}
+	m := ambushFixture(0)
+	a := m.RollAmbush(0, 0, false, 3, r)
+	if a == nil {
+		t.Fatal("remake 這一組沒有遭遇，走的不是同一條路")
+	}
+	a.RollForce(3, 1, r)
+
+	if len(ns) != len(r.ns) {
+		t.Fatalf("原版抽 %d 次 %v，remake 抽 %d 次 %v", len(ns), ns, len(r.ns), r.ns)
+	}
+	for i := range ns {
+		if ns[i] != r.ns[i] {
+			t.Fatalf("第 %d 次：原版 rand(%d)，remake rand(%d)\n原版 %v\nremake %v",
+				i, ns[i], r.ns[i], ns, r.ns)
+		}
+	}
+	t.Logf("逐條相同（%d 次）：%v", len(ns), ns)
+	t.Logf("remake 這一組：怪物 %d、場景 %d、等級 %d、%d 隻、站位組 %d",
+		a.Monster, a.Scene, a.Level, a.Count, a.Group)
 }
