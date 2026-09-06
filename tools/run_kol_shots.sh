@@ -36,6 +36,9 @@ exec timeout "${KOL_GO_TIMEOUT:-1800}" docker run --rm \
     cp -a /go/pkg/mod /tmp/mod
     export GOMODCACHE=/tmp/mod GOCACHE=/tmp/gocache GOPATH=/tmp/gopath
     export GOFLAGS=-mod=mod GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local
+    # 這個容器沒有掛 dosgolem，`go.work` 的 `use /dosgolem` 會指到不存在的路徑；
+    # 而且 workspace 模式不接受 `-mod=mod`。這裡不需要 oracle，直接關掉。
+    export GOWORK=off
     export LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe
     go build -o /tmp/kol ./cmd/kol
     Xvfb :92 -screen 0 1280x800x24 -nolisten tcp >/tmp/xvfb.log 2>&1 &

@@ -8690,3 +8690,94 @@ remake 因此加了 `Actor.UnarmedWeapon[6]` 與 `AttackWeapon(式)`：命中折
 傷害骰與額度的速度項都改從它取。**怪物那一側沒接**——同一張表加 `+0x30` 落在
 `0x30`／`0x80`／`0x90`／`0x70`／`0x40`，其中三個在怪物記錄的已知版面之外
 （武器 `+0x20`、護甲 `+0x30`／`+0x40`／`+0x50`、盾牌 `+0x60`），還沒查那幾格是什麼。
+
+## RE-132：原版的亂數，以及拿 dosgolem 當 oracle 的第一步
+
+輸入同 RE-070（`KOLTOWN-unpacked.EXE`，SHA-256
+`01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2`）。新探針
+`tools/ida_probe_koltown_rand.py`（`workplace/analysis/koltown/rand-private.json`）。
+證據等級 `已證實`。
+
+### 為什麼要解這個
+
+remake 的對拍一直卡在同一件事：**每改一次戰鬥數字，長路徑收據的固定按鍵序列就
+作廢**，要用 driver 重生戰鬥段，一輪數小時。根本原因是兩邊的亂數沒有對應關係——
+只能把某一次的結果凍成截圖，不能問「原版在同一個種子下會擲出什麼」。
+
+### 原版那一支（`已證實`）
+
+```
+srand(n)   sub_2D526:  word_2F4D0 = n;  word_2F4D2 = 0        ; 種子是 32 位元，高 word 歸零
+rand()     sub_2D538:  種子 = 種子 × 0x000343FD + 0x00269EC3
+                       回 (種子 >> 16) & 0x7FFF
+rand(n)    sub_1B5A8:  rand() % n + 1                          ; 回 1…n
+```
+
+`0x000343FD` ＝ 214013、`0x00269EC3` ＝ 2531011——就是 Microsoft C 那一支
+`rand()`。32 位元乘法走 `sub_2DE8C`（長整數乘法 helper），高位 word 遮 `0x7Fh`
+就是那個 `& 0x7FFF`。
+
+播種只有一處：`_main:0x10010` 的 `int 1Ah` 取 BIOS tick，低 word 存進
+`word_349AC`，`0x1013C` 推給 `srand`。tick 的低 word 落在 0…65535，
+**與 remake 的 `-seed` 同一個空間**。全庫掃 `word_2F4D[02]` 只有 `sub_2D526`
+與 `sub_2D538` 兩支碰它，沒有第三個寫入點。
+
+### remake 之前用的是別的常數
+
+`cmd/kol` 的 `lcg` 是 `1664525 / 1013904223`（Numerical Recipes 那一組），
+而且取的是 `state >> 16` 沒有遮 15 位元。**兩邊的序列從來沒有對過。**
+已改成 `internal/rng`，逐條照抄上面那三支。
+
+### dosgolem：原版跑得起來
+
+[dosgolem](https://github.com/wicanr2/dosgolem) 是無頭、決定性、可以 import 的
+DOS 執行器。接法照它 README：`go.work` 接本機副本，`tools/go_docker.sh` 偵測到
+旁邊有一份就唯讀掛在 `/dosgolem`，對拍測試放在 `-tags oracle` 之下。
+
+| 量到的 | 值 |
+|---|---|
+| `KOLTOWN.EXE`（原版，自解壓）| 16,105 道指令之後跳進垃圾——解壓那一段沒跑對 |
+| `KOLTOWN-unpacked.EXE` | **跑得動**：開了 13 個資料檔，`Unimplemented()` 是空的 |
+| 位址映射 | `IDA()` 對 entry／`_main`／`rand`／`srand` 四處的 bytes 逐條相同 |
+| `OnCall` | `_main` 1 次、`srand` 1 次（正對照過了）|
+| 開機到等輸入這一段 | `rand` 與 `rand(n)` 都是 **0 次**——這是事實，不是 hook 沒掛上 |
+
+最後一列先做了正對照才敢下結論：`_main` 與 `srand` 都觸發得到，所以「抽 0 次」
+是原版真的沒抽（`internal/oracle` 的 `TestOnCallFires`、`TestBootDrawsNothing`）。
+
+### 對拍的接法：強制呼叫，不等遊戲自己抽（`已證實`）
+
+等遊戲走到會抽亂數的地方，得先解出開機、選單、建隊、進戰鬥每一步的按鍵序列。
+實測跑滿 2.6 億道指令、送 12 批鍵仍然是 0 次；而**中間任何一步錯了，看到的都是
+「一次都沒抽」**，與「原版根本不抽」長得一模一樣。
+
+改用 dosgolem 新加的 `Call`：壓好種子，直接把原版的 `rand()` 當函式庫呼叫。
+走的是同一段機器碼、同一份全域種子，所以驗到的就是原版的實作。
+
+| 對拍項目 | 結果 |
+|---|---|
+| `_main` 進入時的種子 | `1`（MS C runtime 的初值）——同時證明映射、DS 與種子位址都對 |
+| `rand()` | 6 個種子 × 500 抽，逐次相同；收尾的 32 位元種子也相同 |
+| `rand(n)` | n ∈ {2,3,4,6,8,10,12,20,100,1000} 各 40 次，逐次相同 |
+| 花費 | **0.02 秒**（原本的路子跑 4 億道指令還抽不到） |
+
+**這一層驗的是常式的實作，不是呼叫時機。** 誰在什麼時候抽、抽幾次，仍然只能靠
+實際跑過遊戲確認——那是 dosgolem 第四層（`apps/kol/`）的事，還沒做。
+
+### `rand(0)` 在原版會當機（`已證實`）
+
+原版沒有除零保護：`rand(0)` 直接吃 `run-time error R6003 - integer divide by 0`，
+行程帶著回傳碼 255 離開（`TestRollOfZeroCrashesOriginal`）。
+
+`rng.Roll(0)` 回 0 因此是**故意的不一致**——讓 remake 不要跟著崩，不是在對齊原版。
+反過來說：**remake 只要有一條路徑真的傳了 0 進去，那條路徑在原版就走不到**，
+因為玩家在原版會看到當機。收到 0 是上游算錯的信號，不是安全的預設值。
+
+### 回報給 dosgolem 的事
+
+`At()` 的比法與 `DS()` 的 DGROUP 基底已在 dosgolem 的 `kol-force-call` 分支
+連同 `Call` 一起修掉（`ce78896`）。還沒解的是：
+
+**DOS 的 8.3 截斷沒做。** 原版開 `steedpics`（9 個字元），真檔名是 `STEEDPIC`；
+真 DOS 會截成前 8 個字元。現在會回「找不到檔」，而程式接著跑進沒有映射的記憶體。
+本輪先在本機的遊戲目錄放一份別名繞過。

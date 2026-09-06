@@ -50,3 +50,7 @@ docs/verification/character-ui/*/dosbox.log
 
 # Claude Code 的工作區中繼目錄（worktree、session 暫存），不進版控
 .claude/
+
+# Go workspace：只在容器裡成立（dosgolem 唯讀掛在 /dosgolem）
+go.work
+go.work.sum
