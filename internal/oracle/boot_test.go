@@ -3,6 +3,10 @@
 package oracle
 
 import (
+	"image"
+	"image/color"
+	"image/png"
+	"os"
 	"testing"
 
 	"github.com/wicanr2/dosgolem/oracle"
@@ -520,4 +524,46 @@ func TestTownScreenDecodes(t *testing.T) {
 		}
 		t.Logf("%3d |%s|", y, line)
 	}
+}
+
+// cgaPalette 是 CGA／EGA／Tandy 共用的十六色盤。
+var cgaPalette = [16][3]uint8{
+	{0x00, 0x00, 0x00}, {0x00, 0x00, 0xAA}, {0x00, 0xAA, 0x00}, {0x00, 0xAA, 0xAA},
+	{0xAA, 0x00, 0x00}, {0xAA, 0x00, 0xAA}, {0xAA, 0x55, 0x00}, {0xAA, 0xAA, 0xAA},
+	{0x55, 0x55, 0x55}, {0x55, 0x55, 0xFF}, {0x55, 0xFF, 0x55}, {0x55, 0xFF, 0xFF},
+	{0xFF, 0x55, 0x55}, {0xFF, 0x55, 0xFF}, {0xFF, 0xFF, 0x55}, {0xFF, 0xFF, 0xFF},
+}
+
+// 把原版的畫面存成 PNG 給人眼看。
+//
+// **ASCII 輪廓與色號分布都證明不了解碼參數對**——段數記錯時讀的是同一批 bytes，
+// 統計幾乎不變，變的是像素的位置。只有人眼看得出「這是一張圖」還是「四張交疊的
+// 梳子」。輸出留在 `workplace/`（本機，不進版控）。
+func TestDumpTownScreenPNG(t *testing.T) {
+	out := os.Getenv("KOL_ORACLE_SHOT")
+	if out == "" {
+		t.Skip("設 KOL_ORACLE_SHOT=<輸出路徑> 才存圖")
+	}
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	shot := o.Tandy16()
+	img := image.NewRGBA(image.Rect(0, 0, 320, 200))
+	for y := 0; y < 200; y++ {
+		for x := 0; x < 320; x++ {
+			c := cgaPalette[shot[y*320+x]&0x0F]
+			img.Set(x, y, color.RGBA{c[0], c[1], c[2], 0xFF})
+		}
+	}
+	f, err := os.Create(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer f.Close()
+	if err := png.Encode(f, img); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("寫出 %s", out)
 }
