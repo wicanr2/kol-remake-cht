@@ -646,3 +646,45 @@ func TestProbeChainIsCircular(t *testing.T) {
 		t.Log("節點值重複——這條鏈繞成了環，永遠走不到 -1")
 	}
 }
+
+// 探測：誰把那張表的 `0x0F40` 寫成 `0x07A0`（自環）。
+//
+// 載入完成之後程式停在「跟著鏈結串列走到 -1」的迴圈裡，而節點永遠是 `0x07A0`
+// ——那張表在 `2EFF:0F40`（＝ `0x07A0 × 2`）存著 `0x07A0`，指向自己。
+//
+// 表在**配置來的記憶體**裡，`WatchWrites` 收的是 DGROUP 偏移涵蓋不到，所以用
+// `WatchLinear`。判準是寫入那一刻的 `CS:IP`：拿它換回 IDA 位址就知道是哪一支。
+func TestProbeWhoWritesSelfLoop(t *testing.T) {
+	o := prepare(t) // 要對好 DGROUP，`ds:2528` 才讀得對
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	// 跑到那個 far 指標被填好的那一刻再掛監看——太早掛會收到配置器自己的清零，
+	// 太晚掛就錯過寫入了。條件比固定步數可靠。
+	err := o.RunUntil(oracle.NewCond("表的指標被填好", func(p *oracle.Oracle) bool {
+		return p.Word(p.DS(0x252A)) != 0
+	}), oracle.Budget(60_000_000))
+	if err != nil {
+		t.Skipf("表一直沒被配置出來：%v", err)
+	}
+	t.Logf("第 %d 道指令時指標被填好", o.Steps())
+	seg := o.Word(o.DS(0x252A))
+	off := o.Word(o.DS(0x2528))
+	t.Logf("表在 %04X:%04X，`+0x0F40` 目前是 %04X",
+		seg, off, o.Word(oracle.Addr{Seg: seg, Off: off + 0x0F40}))
+	if seg == 0 {
+		t.Skip("表還沒被配置出來")
+	}
+	base := uint32(seg)*16 + uint32(off) + 0x0F40
+	log := o.WatchLinear(base, base+2)
+	defer o.StopWatchingWrites()
+
+	if err := o.Run(30_000_000); err != nil {
+		t.Logf("再跑停了：%v", err)
+	}
+	t.Logf("那兩個 byte 被寫了 %d 次", len(*log))
+	for _, w := range *log {
+		t.Logf("  第 %d 道：低位＋%d，%02X→%02X，寫的人在 IDA %#x",
+			w.Step, w.Off, w.Old, w.New, o.ToIDA(w.IP))
+	}
+	t.Logf("最後那一格是 %04X（0x07A0 就是自環）",
+		o.Word(oracle.Addr{Seg: seg, Off: off + 0x0F40}))
+}
