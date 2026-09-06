@@ -227,7 +227,8 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
 			ShieldGrade: shieldGrade, Unarmed: monster.Weapon == nil,
 			Threshold: Threshold(monster.Size, monster.Health),
-			Stamina:   monster.Strength + monster.Health}
+			Stamina:   monster.Strength + monster.Health,
+			Shatters:  monster.Shatters}
 		s.Actors[slot].SetParts()
 	}
 	s.MonsterLevel = site.Level

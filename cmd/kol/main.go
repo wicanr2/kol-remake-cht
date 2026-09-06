@@ -1893,7 +1893,8 @@ func (g *game) battleStep() {
 			s.Exec.Text = g.battleVerdictLines()
 			return
 		}
-		if r.Message != 0 || r.Outcome != nil || len(r.Records) > 0 {
+		if r.Message != 0 || r.Outcome != nil || len(r.Records) > 0 ||
+			r.Exhausted != 0 {
 			break
 		}
 	}
@@ -1902,6 +1903,19 @@ func (g *game) battleStep() {
 		Target: g.battleSpeaker(r.Target),
 		Lookup: g.battleRecord,
 	}
+	// 力竭那一句接在這一手的訊息後面（`0x20D9A`，RE-131）：原版是這一手做完、
+	// 疲勞算完才另起一段。這裡用 defer 是因為下面每一種訊息各自 return。
+	defer func() {
+		if r.Exhausted == 0 {
+			return
+		}
+		line := battle.WrapMessage(ctx.Line(g.battleRecord(r.Exhausted)))
+		if s.Exec.Text == nil {
+			s.Exec.Text = line
+			return
+		}
+		s.Exec.Pending = append(s.Exec.Pending, line)
+	}()
 	// 丟與撿的訊息在動作**做完之後**才展開，東西已經不在原處了，所以名字由
 	// ActResult 帶出來（RE-094）：`|E` 是丟掉的那件、`|H` 是撿到的那件。
 	if r.Item != "" {

@@ -269,6 +269,9 @@ type ActResult struct {
 	// 兩次名字。原版對它們另外起一段訊息（`sub_1C1A4`，`0x20354`／`0x20417`／
 	// `0x204B9`），不接在動作者的名字後面（RE-113）。
 	Plain bool
+	// Exhausted 是力竭那一句的記錄編號（0 表示沒力竭）。比例到 100 的人當場倒下，
+	// 原版在那時另起一句並重畫戰場（`0x20D9A`…`0x20E52`，RE-131）。
+	Exhausted int
 }
 
 // FacingTarget 回傳面前那一格站著誰（`sub_26D76:0x26DA5` 的
@@ -324,15 +327,10 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 			continue
 		}
 		out := s.act(i, rng)
-		// 休息回復（`sub_1E3A8:0x20AE0`）：這一手沒挨打（`+0x2D` 為零）而且選的是
-		// 休息，疲勞就剩七成。要在清掉 Hurt **之前**判，順序同原版。
-		//
-		// 原版接著還有每一手的疲勞衰減（`0x20D40`：`−= word_30D06 ÷ 10`），
-		// 但 `word_30D06` 是這一手的時間額度、而且是**花剩的**那個值，
-		// remake 沒有時間額度這個系統，所以那一項沒接（RE-130，缺口記在 SPEC-012）。
-		if a.Hurt == 0 && a.Command == CmdRest {
-			a.Fatigue = a.Fatigue * RestRecoveryNum / RestRecoveryDen
-		}
+		// 疲勞的收尾（`0x20AE0` 與 `0x20D40`）：休息的人回復三成，其餘的人把這一手
+		// 花剩的時間額度除以十扣進疲勞——額度為負就是往上加。要在清掉 Hurt
+		// **之前**做，休息那一條與挨傷那一項都要讀它。力竭的人當場倒下。
+		out.Exhausted = s.EndTurnFatigue(i)
 		// 一手做完的收尾（`sub_1E3A8:0x20E64`）：這一手挨的傷搬進 +0x2A，
 		// 挨傷計數與招架次數歸零——兩格都是「這一手」的計數，不是整場的。
 		a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0

@@ -276,6 +276,21 @@ def main():
         if prompt == 4:
             tokens += ['>', 'RET']
             continue
+        if prompt == 1:
+            # 停在選目標格那一層：上一批 token 在挑目標的中途用完了（指令列在兩批
+            # 之間換過內容就會這樣——有人倒下，格數就變了）。`to_cell` 開頭那四下
+            # 是把游標推到左上角，所以這一段是**絕對**的，重下一次就收斂。
+            roster = {a['i']: a for a in b['roster']}
+            me = roster.get(b['cursor'])
+            foes = [a for a in b['roster'] if a['side'] == 1 and not a['down']]
+            if me is None or not foes:
+                print('選目標格那一層收不回來', b['cursor'], b['bar'])
+                break
+            foes.sort(key=lambda f: max(abs(f['x'] - me['x']), abs(f['y'] - me['y'])))
+            foe = foes[0]
+            tokens += to_cell((foe['x'] > me['x']) - (foe['x'] < me['x']),
+                              (foe['y'] > me['y']) - (foe['y'] < me['y'])) + ['RET']
+            continue
         if prompt != 0:
             print('停在沒預期的一層', prompt, b['bar'])
             break

@@ -28,10 +28,16 @@ type Monster struct {
 	AttackSkill int `json:"attack_skill"`
 	ParrySkill  int `json:"parry_skill"`
 	// FleeAt／FleeRecover 是 AI 的兩個撤退門檻（記錄 +0x0D／+0x0E，RE-081）：
-	// 傷勢達到 FleeAt 就考慮撤退，撤退中降到 FleeRecover 以下就回到正常判斷。
-	// 不死系與元素系是 100／0——傷勢到不了 100，所以那幾隻永遠不撤退。
+	// **疲勞比例**達到 FleeAt 就考慮撤退，撤退中降到 FleeRecover 以下就回到正常
+	// 判斷（RE-130 更正，當初讀成傷勢比例）。不死系與元素系是 100／0——比例到
+	// 100 的那一刻人已經力竭倒下了（RE-131），所以那幾隻永遠不撤退。
 	FleeAt      int `json:"flee_at"`
 	FleeRecover int `json:"flee_recover"`
+	// Shatters 是記錄 +0x10 的 bit 7：力竭倒下那一刻印哪一句
+	// （`shatters into pieces!` 而不是 `dies from blood loss!`，RE-131）。
+	// 三十二隻裡只有 SKELETON 是這一種。Flags 整格留著，低位的語意還沒解。
+	Flags    int  `json:"flags"`
+	Shatters bool `json:"shatters"`
 	// Gold 是打贏之後掉多少金冠的骰式（記錄 +0x0F，RE-091／RE-096）：
 	// 高 nibble 的低三位是骰數，低三位查骰面表，擲「骰數 ＋ 1」次。
 	// 原版只讀第一隻怪的骰式，同場其他怪的這一格沒有讀。

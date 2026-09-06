@@ -41,11 +41,18 @@ TERRAIN_MASKS, SEASON_MASKS = 0x40, 0x60
 NIGHT_OFFSET, SEASON_COUNT, TERRAIN_COUNT = 0x20, 4, 8
 # 名稱欄是 +0x00…+0x0C：長度一個 byte 加最多 12 個字元（最長的是 CLIFF TROLL）。
 NAME_LIMIT = 12
-# +0x0D／+0x0E 是 AI 的兩個撤退門檻（RE-081）：傷勢達到 +0x0D 就考慮撤退，
-# 撤退中降到 +0x0E 以下就回到正常判斷。傷勢是 `50 × 累積傷害 ÷ 昏迷門檻`。
-# 名字之後、+0x0F 之前那兩格就是它們——SKELETON、GOLEM、ZOMBIE 這些不死系是
-# `100 / 0`，也就是永遠不撤退。
+# +0x0D／+0x0E 是 AI 的兩個撤退門檻（RE-081）：**疲勞比例**達到 +0x0D 就考慮撤退，
+# 撤退中降到 +0x0E 以下就回到正常判斷。比例是 `50 × 疲勞 ÷ (力量 ＋ 健康)`
+#（RE-130 更正，當初讀成傷勢比例）。名字之後、+0x0F 之前那兩格就是它們——
+# SKELETON、GOLEM、ZOMBIE 這些不死系是 `100 / 0`，也就是永遠不撤退：比例到 100
+# 的那一刻人已經力竭倒下了（RE-131）。
 FLEE_AT_OFFSET, FLEE_RECOVER_OFFSET = 0x0D, 0x0E
+# +0x10 的 bit 7 是「碎掉」：力竭倒下那一刻，這一位為零印 0x11D
+#（`dies from blood loss!`），非零印 0x11E（`shatters into pieces!`）——
+# `sub_1E3A8:0x20DBD`（RE-131）。三十二隻裡只有 SKELETON 是 0x80。
+# 低位另有東西（CYCLOPS、CLIFF TROLL、SLEDGE、MIST GRUB 是 0x01），語意未解，
+# 所以整格一起留著。
+FLAGS_OFFSET, FLAG_SHATTERS = 0x10, 0x80
 # 怪物記錄的屬性欄位（RE-080）。名稱欄是 +0x00…+0x0C（長度 ＋ 最多 12 個字元），
 # 屬性從 +0x11 起：
 # `sub_2215A` 把 +0x11…+0x16 搬進參戰者記錄的 +0x08…+0x0C，
@@ -148,6 +155,8 @@ def main() -> int:
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
             **{name: rec[off] for name, off in STAT_OFFSETS.items()},
             "encounter": encounter_lines(rec),
+            "flags": rec[FLAGS_OFFSET],
+            "shatters": bool(rec[FLAGS_OFFSET] & FLAG_SHATTERS),
             "flee_at": rec[FLEE_AT_OFFSET],
             "flee_recover": rec[FLEE_RECOVER_OFFSET],
             "gold": {

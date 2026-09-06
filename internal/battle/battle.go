@@ -115,6 +115,9 @@ type Actor struct {
 	// （`Damage`），全庫沒有任何地方把傷害加進疲勞。
 	Fatigue int
 	Stamina int
+	// Shatters 是怪物記錄 +0x10 的 bit 7：力竭倒下時印「碎成一地」而不是
+	// 「失血而死」（RE-131）。隊員那一側用不到。
+	Shatters bool
 	// LastHurt 是 +0x2A：上一手的 Fatigue，由那個收尾搬過來。敵人 AI 拿它判
 	// 「已經在撤退、而且這一手還在挨打」（RE-081）。
 	LastHurt int

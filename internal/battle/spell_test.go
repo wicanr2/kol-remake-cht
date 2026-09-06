@@ -430,14 +430,16 @@ func TestRestRecoversFatigue(t *testing.T) {
 	if got := s.Actors[0].Fatigue; got != 70 {
 		t.Fatalf("疲勞是 %d，期望 70", got)
 	}
-	// 這一手挨過打就不回復。
+	// 這一手挨過打就走另一條：算時間額度再扣。
+	// 額度 ＝ 200 ＋ 100 − 100 − 0 ＋ (100 − 0) × 2 ＝ 400，挨的傷扣 3 × 5 ＝ 15，
+	// 休息的指令成本是 0，所以剩 385；疲勞 −= 38。
 	s = &State{Actors: []Actor{
 		{Side: SideParty, X: 5, Y: 5, Head: 10, Chest: 10, Threshold: 100,
 			Command: CmdRest, Stamina: 200, Fatigue: 100, Hurt: 3},
 	}}
 	s.Exec.Order = []int{0}
 	s.Act(&fixedRand{values: []int{1}})
-	if got := s.Actors[0].Fatigue; got != 100 {
-		t.Fatalf("挨過打不該回復，疲勞是 %d", got)
+	if got := s.Actors[0].Fatigue; got != 62 {
+		t.Fatalf("挨過打該走額度那一條，疲勞是 %d，期望 62", got)
 	}
 }
