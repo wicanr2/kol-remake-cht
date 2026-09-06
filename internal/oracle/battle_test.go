@@ -1030,3 +1030,77 @@ func TestWeatherMatchesOriginal(t *testing.T) {
 		})
 	}
 }
+
+// 攻擊結算（`sub_26D76`）的入口與出口。
+//
+// # 入口
+//
+// 開頭的碼（從記憶體讀出來解的）：
+//
+//	b8 32 00      mov ax, 50            ; actorStride
+//	f7 2e 5a 9e   imul word [ds:9E5A]   ; ★ 當前行動者索引
+//	b9 12 67      mov cx, 0x6712        ; actorBase
+//	8a 47 28      mov al, [bx+0x28]
+//	83 7e 06 00   cmp word [bp+6], 0    ; ★ arg0：0 走攻擊那一條
+//
+// 當前行動者索引在 `ds:9E5A`（`× 50 + 0x6712` 就是參戰者記錄）。**`arg0 == 0`
+// 才走攻擊**——`arg0 != 0` 只跑 11.7 萬道就返回，一支子常式都沒呼叫。
+//
+// 最小狀態：兩名參戰者的「力量 ＋ 健康」（`ds:1C50 + 2i`）不能是 0，
+// 否則 `sub_23683` 直接 `R6003 integer divide by 0` 讓原版離開；再加等級
+// （`+0x02`）、敵我旗標（`+0x01`）與這一回合的招架次數（`+0x0F`，防禦值的除數）。
+//
+// 跟遭遇那一支一樣，算完之後接著畫訊息，所以 `Call` 等不到返回——**那不是失敗**。
+//
+// # 出口
+//
+// 單跑一次的差分有七百多個 word，絕大多數是畫面緩衝（`ds:1AAA` 起那一大片）。
+// **兩組只差一個輸入的執行，差異就只剩結果**：基礎攻擊 70 → 120（加 50）之後
+// 只有三個 word 不同，其中 `ds:671A` 是輸入本身（參戰者記錄 `+0x08`），
+// 另外兩個各加 5——正是 RE-133 那條「攻擊值 ÷ 10」。
+func TestProbeAttackResolveResult(t *testing.T) {
+	const (
+		resolveEA   = 0x26D76
+		currentSlot = 0x9E5A
+		dgBase      = 0x2DED0
+		span        = 0x8000
+	)
+	snapshot := func(t *testing.T, attack uint8) []byte {
+		t.Helper()
+		o := townMap(t)
+		o.SyncDGroupFromDS()
+		o.WriteU16(o.DS(currentSlot), 0)
+		for i := uint16(0); i < 2; i++ {
+			o.WriteU16(o.DS(uint16(actorStamina)+2*i), 30)
+			rec := uint16(actorBase) + uint16(actorStride)*i
+			o.WriteU16(o.DS(rec+0x02), 1)          // 等級
+			o.WriteU8(o.DS(rec+0x01), uint8(i))    // 敵我旗標
+			o.WriteU8(o.DS(rec+0x08), 70)          // 基礎攻擊
+			o.WriteU8(o.DS(rec+0x09), 40)          // 基礎防禦
+			o.WriteU8(o.DS(rec+0x0F), 1)           // 這一回合招架過幾次
+		}
+		// 只有攻擊者的基礎攻擊不同。
+		o.WriteU8(o.DS(uint16(actorBase)+0x08), attack)
+		o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 { return 50 })
+		_, _ = o.CallBudget(20_000_000, o.IDA(resolveEA), 0)
+		o.Stub(o.IDA(rollEnter), nil)
+		return append([]byte(nil), o.Bytes(o.IDA(dgBase), span)...)
+	}
+	lo := snapshot(t, 70)
+	hi := snapshot(t, 120)
+
+	changed := 0
+	for i := 0; i+1 < span; i += 2 {
+		a := uint16(lo[i]) | uint16(lo[i+1])<<8
+		b := uint16(hi[i]) | uint16(hi[i+1])<<8
+		if a == b {
+			continue
+		}
+		changed++
+		if changed <= 40 {
+			t.Logf("  ds:%04X（IDA %#x）：攻擊 70 → %04X、攻擊 120 → %04X",
+				i, dgBase+i, a, b)
+		}
+	}
+	t.Logf("兩組共 %d 個 word 不同", changed)
+}
