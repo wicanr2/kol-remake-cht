@@ -37,6 +37,18 @@ for bundle in full release; do
   head -c 2 "$exe" | grep -q '^MZ' || { echo "$bundle 的 kol.exe 不是 PE" >&2; exit 3; }
 done
 
+# macOS 那一份走 `verify_macos.sh` 的四道（雙弧、arm64 的 ad-hoc 簽章、最低系統
+# 版本、動態相依只落在系統目錄）。同樣**不是真機驗收**。
+for bundle in full release; do
+  mac="$DIST/$bundle/kol-macos"
+  [ -f "$REPO_ROOT/$mac" ] || { echo "$bundle 少了 kol-macos" >&2; exit 2; }
+  "$REPO_ROOT/tools/verify_macos.sh" "$mac" >/dev/null     || { echo "$bundle 的 kol-macos 沒過靜態驗收" >&2; exit 3; }
+done
+
+# promo 要有片子與它的來源說明。
+[ -s "$REPO_ROOT/$DIST/promo/kol-promo.mp4" ] || { echo "promo 少了影片" >&2; exit 2; }
+[ -s "$REPO_ROOT/$DIST/promo/sources.json" ] || { echo "promo 少了 sources.json" >&2; exit 2; }
+
 # 啟動驗收：拿包裡的 Linux 執行檔畫一張封面，畫得出來才算啟動成功。
 exec timeout "${KOL_GO_TIMEOUT:-900}" docker run --rm \
   --network none \

@@ -1,0 +1,28 @@
+# Go／Ebitengine ＋ osxcross：在 Linux 上編出 macOS 版的 `cmd/kol`。
+#
+#   docker build --network=default -f docker/Dockerfile.osxcross-go \
+#     -t kol-osxcross-go:<日期> .
+#
+# Ebitengine 的 macOS 後端要 Cocoa／Metal，所以 `CGO_ENABLED=1`，`CC` 要指到
+# osxcross 的 clang wrapper。
+#
+# **底層不能用本專案那個 Go image**：`crazymax/osxcross:15.5-debian` 裡的執行檔要
+# glibc 2.38 與 GLIBCXX 3.4.32，而那個 image 是 Debian 12（glibc 2.36），
+# `osxcross-conf` 一跑就報 `version GLIBC_2.38 not found`。所以改成以 Ubuntu 24.04
+# 起底，再把鎖定的 Go 工具鏈與 module cache 整份搬過來——版本仍然是鎖住的那一份，
+# 而且 `GOPROXY=off` 也照樣成立。
+#
+# SDK 的授權只允許在 Apple 硬體上使用：**這個 image 只留本機，不上傳、不散布。**
+FROM eob-remake-go:1.26.7-ebiten2.9.9-audio AS gobase
+FROM crazymax/osxcross:15.5-debian AS osxcross
+
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      clang lld llvm libxml2 zlib1g liblzma5 libssl3 file ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=osxcross /osxcross /osxcross
+# 少這一行 `ld64` 起不來，clang 只會轉述成「找不到指令」。
+RUN echo /osxcross/lib > /etc/ld.so.conf.d/osxcross.conf && ldconfig
+COPY --from=gobase /usr/local/go /usr/local/go
+COPY --from=gobase /go/pkg/mod /go/pkg/mod
+ENV PATH="/osxcross/bin:/usr/local/go/bin:${PATH}"

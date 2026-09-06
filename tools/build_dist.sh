@@ -25,14 +25,21 @@ fi
 rm -rf "$OUT"
 mkdir -p "$OUT"/{full,release,promo}
 
-# 1. 建置。linux/amd64 在容器裡原生建（Ebitengine 在 Linux 要 CGO）；
-#    windows/amd64 交叉編得出來——**Ebitengine 在 Windows 不用 CGO**，走的是
-#    syscall。macOS 要 Cocoa，得另外的工具鏈（osxcross），還沒做。
+# 1. 建置三個平台。
+#    linux/amd64   在容器裡原生建（Ebitengine 在 Linux 要 CGO）。
+#    windows/amd64 交叉編得出來——**Ebitengine 在 Windows 不用 CGO**，走的是 syscall。
+#    darwin        要 Cocoa／Metal，所以要 CGO ＋ osxcross 的 clang；那一段在
+#                  `tools/build_macos.sh`，產出的是 arm64 ＋ x86_64 的 universal。
+#
+#    ⚠ **Linux 容器裡只驗得了結構**：`verify_macos.sh` 的四道與 Windows 的檔頭
+#    都不是真機驗收。三個平台裡只有 linux/amd64 這一份真的跑得起來。
 "$REPO_ROOT/tools/go_docker.sh" build -trimpath -o /src/dist-all/"$VERSION"/full/kol ./cmd/kol
 KOL_GO_ENV="GOOS=windows GOARCH=amd64 CGO_ENABLED=0" \
   "$REPO_ROOT/tools/go_docker.sh" build -trimpath \
   -o /src/dist-all/"$VERSION"/full/kol.exe ./cmd/kol
-cp "$OUT/full/kol" "$OUT/full/kol.exe" "$OUT/release/"
+"$REPO_ROOT/tools/build_macos.sh" "dist-all/$VERSION/full/kol-macos"
+"$REPO_ROOT/tools/verify_macos.sh" "dist-all/$VERSION/full/kol-macos"
+cp "$OUT/full/kol" "$OUT/full/kol.exe" "$OUT/full/kol-macos" "$OUT/release/"
 
 # 2. 兩邊都帶的文件。條款另外放一份在版本目錄的根，因為拿到 tar.gz 的人看不到
 #    儲存庫——包裡沒有條款就等於沒被授權（`rulebook/85`）。
@@ -72,11 +79,8 @@ printf '%s\n' \
   "不得上傳、不得散布、不得放進 GitHub Release。" \
   > "$OUT/full/DO-NOT-DISTRIBUTE.txt"
 
-# 6. promo 的骨架。
-printf '%s\n' \
-  "推廣素材放這裡：影片、截圖、metadata、來源與影音驗收。" \
-  "目前是空的——推廣片還沒做（見 WORKLIST 的 M6）。" \
-  > "$OUT/promo/README.txt"
+# 6. promo：推廣片與它的來源、metadata 與影音驗收。
+"$REPO_ROOT/tools/make_promo.sh" "$OUT/promo"
 
 # 7. deny-list：release 裡不得有任何原版衍生位元組。
 if find "$OUT/release" \( -name '*.png' -o -name '*.ogg' -o -name '*.EXE' \
