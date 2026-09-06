@@ -47,3 +47,6 @@ __pycache__/
 
 # oracle 執行時的模擬器 log，不是證據
 docs/verification/character-ui/*/dosbox.log
+
+# Claude Code 的工作區中繼目錄（worktree、session 暫存），不進版控
+.claude/

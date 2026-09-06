@@ -75,6 +75,13 @@ SKILL_OFFSET = 0x17
 WEAPON_OFFSET = 0x20
 ARMOUR_OFFSETS = (0x30, 0x40, 0x50)
 SHIELD_OFFSET = 0x60
+# 怪物記錄的 `+0x30` 起就是**穿戴欄**，一格 16 byte，順序與角色記錄的十格相同
+#（HEAD／TORSO／LEGS／BODY／HANDS／FEET／SHIELD…，RE-127／RE-131）：
+# `sub_26AC2` 對怪物的射擊那一條取 `+0x70`（HANDS，弓與投石就放在那裡），
+# 徒手那一條取 `[0x0FD2 + 攻擊選項] + 0x30`，也就是 0x80 FEET（踢）、0x90 SHIELD
+#（盾擊）、0x30 HEAD（頭槌）、0x70 HANDS（拳）——與隊員那一側同一張表、同一個意思。
+# 八個位移解出來全部是像樣的物品名，這就是這一段版面讀對了的證據。
+WORN_BASE, WORN_STRIDE, WORN_SLOTS = 0x30, 0x10, 7
 TERRAIN_NAMES = ("DESERT", "RIVER", "SWAMP", "HILL",
                  "ROAD", "FOREST", "SHORE", "PLAINS")
 SEASON_NAMES = ("WINTER", "SPRING", "SUMMER", "AUTUMN")
@@ -155,6 +162,9 @@ def main() -> int:
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
             **{name: rec[off] for name, off in STAT_OFFSETS.items()},
             "encounter": encounter_lines(rec),
+            "worn": [good(rec[WORN_BASE + WORN_STRIDE * k:
+                            WORN_BASE + WORN_STRIDE * (k + 1)], k)
+                     for k in range(WORN_SLOTS)],
             "flags": rec[FLAGS_OFFSET],
             "shatters": bool(rec[FLAGS_OFFSET] & FLAG_SHATTERS),
             "flee_at": rec[FLEE_AT_OFFSET],

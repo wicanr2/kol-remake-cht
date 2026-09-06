@@ -233,11 +233,26 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			ShieldGrade: shieldGrade, Unarmed: monster.Weapon == nil,
 			Threshold: Threshold(monster.Size, monster.Health),
 			Stamina:   monster.Strength + monster.Health,
-			Shatters:  monster.Shatters}
+			Shatters:  monster.Shatters,
+			// 徒手四式拿的是穿戴欄那四格（`UnarmedSlots`）——怪物的穿戴欄從
+			// 記錄 `+0x30` 起，與隊員那一側同一張表、同一個意思（RE-131）。
+			UnarmedWeapon: unarmedFrom(monster.Worn)}
 		s.Actors[slot].SetParts()
 	}
 	s.MonsterLevel = site.Level
 	return s
+}
+
+// unarmedFrom 把一份穿戴欄換成徒手四式各自的那一件（`UnarmedSlots`）。
+// 那一格空著就留空的武器——原版讀到的也是一筆全零的記錄。
+func unarmedFrom(worn []*Item) [len(UnarmedSlots)]Weapon {
+	var out [len(UnarmedSlots)]Weapon
+	for style, pos := range UnarmedSlots {
+		if pos < len(worn) && worn[pos] != nil {
+			out[style] = worn[pos].CombatWeapon()
+		}
+	}
+	return out
 }
 
 // MonsterCombatLevel 把怪物等級換成參戰者記錄那一格的等級（`0x1EE12`）：
