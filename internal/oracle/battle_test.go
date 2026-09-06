@@ -1164,3 +1164,95 @@ func TestProbeAttackScoreMeaning(t *testing.T) {
 		t.Logf("%-20s → ds:1C76=%d、ds:44AC=%d", c.name, a, b)
 	}
 }
+
+// 攻擊分數的骰前算式：設好狀態之後兩邊算出同一個數（RE-133 的 `sub_26D76`）。
+//
+// 原版那一段（`0x26E08`…`0x26EA0`，反組譯逐條讀出來的）：
+//
+//	sub_26AC2(當前行動者)                          ; 武器攻防技能 → word_34A12
+//	sub_23683(當前行動者)                          ; 疲勞比例 → word_2FB4A
+//	word_3237C = 記錄[+0x08] + word_34A12          ; 力量 ＋ 武器攻擊技能
+//	var_10 = 記錄[+0x2D] × 20                       ; 這一輪挨的傷
+//	var_12 = 記錄[+0x0E] × 10                       ; 累積傷害
+//	word_3237C −= word_3237C × word_2FB4A ÷ 200 + var_12 + var_10
+//	sub_24FD3()                                     ; 負重 → word_30C88
+//	word_3237C −= word_30C88
+//	word_3237C = word_3237C ÷ 10 + rand(100)        ; ★ 攻擊分數
+//
+// **三支子常式都要釘住**（`Stub` 讓它們不執行），技能、疲勞比例與負重就保持
+// 我們寫進去的值——這樣驗的是 `sub_26D76` 自己那段算式，不是那三支（它們在
+// RE-133 已經各自對過）。
+//
+// ⚠ 漏掉 `sub_26AC2` 的症狀很好認：`word_34A12` 被重算成 0，於是**每一組的差
+// 都剛好等於「技能 ÷ 10」**——看起來像 remake 多加了一項，實際上是原版那一側
+// 的技能被吃掉了。
+func TestAttackScoreMatchesOriginal(t *testing.T) {
+	const (
+		resolveEA   = 0x26D76
+		currentSlot = 0x9E5A // word_37D2A
+		attackOut   = 0x3237C // word_3237C：攻擊值 → 攻擊分數
+		fatigueOut  = 0x2FB4A // word_2FB4A：疲勞比例
+		encumbOut   = 0x30C88 // word_30C88：負重
+		skillOut    = 0x34A12 // word_34A12：武器攻擊技能
+		fatigueFn   = 0x23683
+		encumbFn    = 0x24FD3
+		skillFn     = 0x26AC2
+		roll        = 50
+	)
+	for _, c := range []struct {
+		name                                     string
+		strength, skill, ratio, damage, hurt, enc int
+	}{
+		{"乾淨的一擊", 70, 30, 0, 0, 0, 0},
+		{"帶疲勞比例", 70, 30, 40, 0, 0, 0},
+		{"帶累積傷害", 70, 30, 0, 3, 0, 0},
+		{"帶這一輪的傷", 70, 30, 0, 0, 2, 0},
+		{"帶負重", 70, 30, 0, 0, 0, 25},
+		{"四項一起", 90, 45, 60, 4, 3, 30},
+		{"高技能", 120, 200, 20, 1, 1, 10},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			o := townMap(t)
+			o.SyncDGroupFromDS()
+			o.WriteU16(o.DS(currentSlot), 0)
+			rec := uint16(actorBase)
+			o.WriteU8(o.DS(rec+0x08), uint8(c.strength))
+			o.WriteU8(o.DS(rec+0x0E), uint8(c.damage))
+			o.WriteU8(o.DS(rec+0x2D), uint8(c.hurt))
+			o.WriteU8(o.DS(rec+0x01), 0) // 隊員
+			o.WriteU16(o.DS(rec+0x02), 1)
+			o.WriteU8(o.DS(rec+0x0F), 1)
+			o.WriteU16(o.IDA(skillOut), uint16(c.skill))
+			o.WriteU16(o.IDA(fatigueOut), uint16(c.ratio))
+			o.WriteU16(o.IDA(encumbOut), uint16(c.enc))
+			// 釘住那兩支，讓疲勞比例與負重保持上面寫進去的值。
+			o.StubValue(o.IDA(fatigueFn), 0)
+			o.StubValue(o.IDA(encumbFn), 0)
+			o.StubValue(o.IDA(skillFn), 0)
+			o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 { return roll })
+			_, _ = o.CallBudget(20_000_000, o.IDA(resolveEA), 0)
+			o.Stub(o.IDA(rollEnter), nil)
+			o.Stub(o.IDA(fatigueFn), nil)
+			o.Stub(o.IDA(encumbFn), nil)
+			o.Stub(o.IDA(skillFn), nil)
+			got := int(int16(o.Word(o.IDA(attackOut))))
+
+			// remake：同一組輸入。`SkillPenaltyOff` 設 0，`OffenceSkill()` 就是
+			// `Attack` 本身；`Fatigue`／`Stamina` 湊出同一個疲勞比例。
+			a := battle.Actor{
+				Strength: c.strength, Attack: c.skill,
+				Damage: c.damage, Hurt: c.hurt, Encumbrance: c.enc,
+				Fatigue: c.ratio, Stamina: 50, // 50 × ratio ÷ 50 ＝ ratio
+			}
+			if a.FatigueRatio() != c.ratio {
+				t.Fatalf("remake 的疲勞比例是 %d，要湊成 %d", a.FatigueRatio(), c.ratio)
+			}
+			want := a.AttackValue()/10 + roll
+			if got != want {
+				t.Fatalf("原版 %d，remake %d（力量 %d 技能 %d 比例 %d 傷害 %d 這輪 %d 負重 %d）",
+					got, want, c.strength, c.skill, c.ratio, c.damage, c.hurt, c.enc)
+			}
+			t.Logf("兩邊都是 %d", got)
+		})
+	}
+}
