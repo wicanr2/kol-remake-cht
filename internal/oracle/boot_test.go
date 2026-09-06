@@ -688,3 +688,110 @@ func TestProbeWhoWritesSelfLoop(t *testing.T) {
 	t.Logf("最後那一格是 %04X（0x07A0 就是自環）",
 		o.Word(oracle.Addr{Seg: seg, Off: off + 0x0F40}))
 }
+
+// 探測：LZW 解壓器拿到的輸入。
+//
+// `sub_1A04E` 是一支 LZW 解壓器——初始化把前 256 項的前綴設成 `-1`、後綴設成自己，
+// 起始碼長 9 bit、下一個字典項從 `0x101` 開始。**字典初始化是對的**，所以節點自環
+// 只可能是**輸入資料錯了**：碼亂跳就會產生指向自己的項。
+//
+// 參數：arg0 是輸入段、arg1 是輸入位移、arg2／arg3 是輸出、arg4 是長度。
+// LZW 資料的**第一個碼一定是字面值**（< 0x100），9 bit 讀出來就看得出來。
+func TestProbeLZWInput(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	type call struct {
+		args [5]uint16
+		head []byte
+		step uint64
+	}
+	var calls []call
+	o.OnCall(o.IDA(0x1A04E), func(p *oracle.Oracle) {
+		var c call
+		for i := 0; i < 5; i++ {
+			c.args[i] = p.Arg(i)
+		}
+		c.head = p.Bytes(oracle.Addr{Seg: c.args[0], Off: c.args[1]}, 16)
+		c.step = p.Steps()
+		calls = append(calls, c)
+	})
+	if err := o.Run(40_000_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	t.Logf("解壓器被呼叫 %d 次", len(calls))
+	for i, c := range calls {
+		if i >= 8 {
+			t.Logf("…還有 %d 次", len(calls)-i)
+			break
+		}
+		// 第一個 9 bit 的碼：高位在前（`sub_1A26B` 從高位取）。
+		first := (int(c.head[0])<<1 | int(c.head[1])>>7) & 0x1FF
+		t.Logf("第 %d 次（步數 %d）：輸入 %04X:%04X、輸出 %04X:%04X、長度 %d",
+			i, c.step, c.args[0], c.args[1], c.args[3], c.args[2], c.args[4])
+		t.Logf("    前 16 個 byte：%x；第一個 9-bit 碼 %#x%s",
+			c.head, first,
+			map[bool]string{true: "", false: "  ← **超過 0xFF，不是字面值**"}[first < 0x100])
+	}
+}
+
+// 探測：誰把 `TOWN7.0` 的檔頭寫進解壓器的輸入緩衝區。
+//
+// 第六次解壓拿到的是 `TOWN7.0` 的**位置 0**（比對過檔案，逐 byte 相同）——那是
+// 26 個 entry 的 offset 表，不是壓縮資料。所以程式漏了「seek 到 entry 再讀」那一步，
+// 或者傳給解壓器的指標指到了檔頭那一份。
+//
+// `seek`（`AH=42h`）的實作看過是對的，所以問這個緩衝區：誰寫的、寫了幾次。
+func TestProbeLZWInputBuffer(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	// **從頭掛**：檔頭是很早就寫進去的，跑到第六次解壓前才掛已經錯過了。
+	const buf = 0x32FF*16 + 0
+	log := o.WatchLinear(buf, buf+2)
+	defer o.StopWatchingWrites()
+	if err := o.Run(2_500_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	t.Logf("緩衝區前四個 byte 被寫了 %d 次", len(*log))
+	// **最後那幾筆才是答案**：緩衝區被重複使用，先寫進去的都被蓋掉了。
+	from := 0
+	if len(*log) > 12 {
+		from = len(*log) - 12
+		t.Logf("（前面 %d 筆略過）", from)
+	}
+	for _, w := range (*log)[from:] {
+		t.Logf("  第 %d 道：+%d %02X→%02X，寫的人在 IDA %#x",
+			w.Step, w.Off, w.Old, w.New, o.ToIDA(w.IP))
+	}
+	t.Logf("現在緩衝區前 16 個 byte：%x",
+		o.Bytes(oracle.Addr{Seg: 0x32FF, Off: 0}, 16))
+}
+
+// 探測：第六次解壓之前，程式對 `TOWN7.0` 做了什麼 seek 與 read。
+//
+// 讀進來的資料**逐 byte 等於檔案的位置 0**（比對過），也就是 26 個 entry 的
+// offset 表，不是壓縮資料。`seek` 的實作看過是對的，所以問參數本身：
+// 程式到底 seek 到哪、讀了多少。
+func TestProbeTownFileOps(t *testing.T) {
+	o := load(t)
+	o.WriteU8(oracle.Addr{Seg: 0x40, Off: 0x49}, 9)
+	if err := o.Run(2_500_000); err != nil {
+		t.Logf("停了：%v", err)
+	}
+	ops := o.FileOps()
+	t.Logf("共 %d 次檔案操作", len(ops))
+	from := 0
+	if len(ops) > 24 {
+		from = len(ops) - 24
+		t.Logf("（前面 %d 次略過）", from)
+	}
+	for _, op := range ops[from:] {
+		switch op.Kind {
+		case "seek":
+			t.Logf("  第 %8d 道  seek %-12s handle %d  whence %d  位移 %d → %d",
+				op.Step, op.Name, op.Handle, op.Whence, op.Offset, op.Got)
+		default:
+			t.Logf("  第 %8d 道  read %-12s handle %d  從 %d 要 %d 得 %d → %05X",
+				op.Step, op.Name, op.Handle, op.Offset, op.Want, op.Got, op.Into)
+		}
+	}
+}
