@@ -65,6 +65,10 @@ const (
 	sceneFlow       scene = "flow"
 	sceneWorld      scene = "world"
 	sceneEnding     scene = "ending"
+	// sceneGame 是互動遊玩：一開視窗就從標題序列開始，鍵盤與滑鼠直接玩。
+	// 它走的是 `flow` 那條路徑，只是 token 來自輸入裝置而不是腳本，所以與
+	// `docs/verification/player-path/` 那幾份收據經過同一組狀態機。
+	sceneGame scene = "game"
 )
 
 var scenes = []scene{sceneCover, sceneContents, sceneOpenSpread, sceneNewChar, sceneScript, sceneTitle, sceneScriptCJK, sceneBookOpen, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneInn, sceneOutdoor, sceneBuilding, scenePlay, sceneFlow, sceneWorld, sceneEnding}
@@ -1006,6 +1010,12 @@ type game struct {
 	endBank  *town.UIText
 	endTrans *town.Translations
 
+	// interactive 打開時 Update 讀鍵盤與滑鼠，而不是逐步跑 jobs 截圖。
+	// logInput 把收到的 token 印出來——輸入沒反應時要看得到是「沒收到鍵」
+	// 還是「收到了但狀態機不理它」，這兩者的修法完全不同。
+	interactive bool
+	logInput    bool
+
 	scene    scene
 	portrait int
 	selected int
@@ -1550,6 +1560,11 @@ func (g *game) Update() error {
 		g.drawn = false
 		return nil
 	}
+	if g.interactive {
+		return g.updateInteractive()
+	}
+	// 截圖模式沒有離開流程，Escape 直接關掉。互動遊玩的 Escape 是「回上一頁」，
+	// 所以那條路走上面那一支。
 	if ebiten.IsKeyPressed(ebiten.KeyEscape) {
 		return ebiten.Termination
 	}
@@ -1672,6 +1687,55 @@ func (g *game) renderFlow() error {
 // walkTicksPerFrame 是隊伍標記的動畫節拍。原版用 `word_2DF28` 當延遲計數，
 // 每三次繪製推進一格；Ebitengine 固定 60 TPS，取相近的節拍。
 const walkTicksPerFrame = 8
+
+// updateInteractive 是互動遊玩的那一幀：讀鍵盤與滑鼠，把 token 交給目前
+// 掌管畫面的狀態機。
+//
+// **分派與 `-flow-script` 那條完全相同**——人在城裡就是 `flow.Key`，走出城門
+// 之後交給 `playToken`（野外、戰鬥與結局）。收據跑的是同一段程式碼，所以互動
+// 遊玩不是另一條沒被驗過的路徑。
+func (g *game) updateInteractive() error {
+	if g.flow == nil {
+		return ebiten.Termination
+	}
+	// 沒有離開流程可走的時候要有一條退路：Ctrl+Q。原版的離開是在旅店把人解散，
+	// 那條還沒接完。
+	if (ebiten.IsKeyPressed(ebiten.KeyControlLeft) ||
+		ebiten.IsKeyPressed(ebiten.KeyControlRight)) &&
+		inpututil.IsKeyJustPressed(ebiten.KeyQ) {
+		return ebiten.Termination
+	}
+	// 標題序列自己會播，按任何鍵才離開（RE-047）。
+	if g.flow.Scene == flow.SceneTitle && g.player != nil {
+		g.player.Advance(title.TickHz / 60)
+		g.frame = g.player.Current()
+	}
+	// 隊伍標記的走路動畫。腳本模式逐步截圖不需要它自己動，互動模式要。
+	if g.flow.Scene == flow.SceneTown && g.play != nil && !g.leftTown() &&
+		g.play.Mode != town.ModeInside {
+		g.walkTick++
+		if g.walkTick >= walkTicksPerFrame {
+			g.walkTick = 0
+			g.play.Outdoor.AdvanceMarker(&g.markerStep)
+		}
+	}
+	targets := g.flowTargets()
+	tokens := append(keyboardTokens(), mouseTokens(targets, "RET")...)
+	if g.logInput && len(tokens) > 0 {
+		mx, my := ebiten.CursorPosition()
+		fmt.Fprintf(os.Stderr, "input scene=%s cursor=%d 游標=(%d,%d) 可點=%d token=%v\n",
+			g.flow.Scene, g.flow.MenuCursor, mx, my, len(targets), tokens)
+	}
+	for _, tok := range tokens {
+		if g.leftTown() || g.endingReached() {
+			// 這一層認不得的鍵在原版也不做事；玩家亂按不該中斷遊戲。
+			_ = g.playToken(tok)
+			continue
+		}
+		g.flow.Key(tok)
+	}
+	return nil
+}
 
 // updatePlay 是城鎮這一段的輸入迴圈。鍵位照參考卡：方向鍵移動、
 // `<`／`>` 移動圖示列白框、Return 執行。
@@ -2261,12 +2325,55 @@ func applyDeleteToken(f *roster.DeleteFlow, token string) error {
 	return nil
 }
 
+// useResourceDir 讓程式在自己旁邊找資源。
+//
+// 全部的資源旗標都是相對路徑（`assets/…`、`docs/…`），從儲存庫根目錄跑沒問題，
+// 但發行包不是這樣被打開的：AppImage 掛在暫時目錄、macOS 的 .app 由 Finder
+// 啟動時工作目錄是 `/`、Windows 的捷徑也可能指到別處。工作目錄找得到資源就
+// 不動，找不到才換到執行檔旁邊，所以既有的對拍與截圖流程完全不受影響。
+func useResourceDir(marker string) {
+	if _, err := os.Stat(marker); err == nil {
+		return
+	}
+	exe, err := os.Executable()
+	if err != nil {
+		return
+	}
+	if exe, err = filepath.EvalSymlinks(exe); err != nil {
+		return
+	}
+	dir := filepath.Dir(exe)
+	// macOS 的 .app 把執行檔放在 Contents/MacOS，資源放在 Contents/Resources。
+	for _, cand := range []string{dir, filepath.Join(dir, "..", "Resources")} {
+		if _, err := os.Stat(filepath.Join(cand, marker)); err == nil {
+			_ = os.Chdir(cand)
+			return
+		}
+	}
+}
+
+// defaultSavePath 是互動遊玩的存檔位置：使用者的設定目錄底下。
+// Linux 是 ~/.config、macOS 是 ~/Library/Application Support、Windows 是 %AppData%，
+// 三個平台都由 os.UserConfigDir 決定，不自己拼路徑。
+func defaultSavePath() (string, error) {
+	dir, err := os.UserConfigDir()
+	if err != nil {
+		return "", err
+	}
+	dir = filepath.Join(dir, "kol-remake-cht")
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		return "", err
+	}
+	return filepath.Join(dir, "save.dat"), nil
+}
+
 func main() {
 	assetRoot := flag.String("assets", "assets/original-derived-png/ega", "抽取資產根目錄")
 	fontRoot := flag.String("fonts", "assets/original-derived-png/fonts", "字型資產目錄")
 	dataPath := flag.String("data", "assets/original-derived-data/character-creation.json",
 		"角色建立 typed data")
-	sceneName := flag.String("scene", string(sceneCover), "要繪製的場景")
+	sceneName := flag.String("scene", string(sceneGame),
+		"要繪製的場景；預設 game 是互動遊玩，其餘場景名是對拍與截圖用的單張畫面")
 	portrait := flag.Int("portrait", 0, "newchar 場景使用的角色圖像圖號")
 	menuSelected := flag.Int("menu-selected", 0, "menu 場景反白的項目索引")
 	innPath := flag.String("inn", "docs/re/town-inn-sample.json",
@@ -2395,7 +2502,51 @@ func main() {
 		"只在這幾步截圖（逗號分隔的步號）；長路徑用它留檢查點，其餘只記軌跡")
 	stringsPath := flag.String("strings", "docs/i18n/newchar-zh-Hant.json",
 		"中文 UI 字串表")
+	logInput := flag.Bool("log-input", false,
+		"互動遊玩時把每個輸入 token 與當時的畫面印到 stderr，供輸入驗收判讀")
 	flag.Parse()
+
+	// 發行包被雙擊時工作目錄不是程式所在地，先把它擺正再解析任何相對路徑。
+	useResourceDir(*assetRoot)
+
+	// `-scene game` 是互動遊玩。它借 `flow` 那條路徑的全部初始化，差別只在 token
+	// 來自鍵盤與滑鼠而不是腳本，所以這裡改寫成 flow，另外記一個旗標給 Update。
+	interactive := scene(*sceneName) == sceneGame
+	if interactive {
+		*sceneName = string(sceneFlow)
+		// 這是繁體中文重製版，玩的時候預設就走中文模式；`-lang en` 切回原版
+		// 字模的英文版面。對拍腳本一律明寫 `-scene`，不會走到這裡。
+		langSet := false
+		flag.Visit(func(f *flag.Flag) {
+			if f.Name == "lang" {
+				langSet = true
+			}
+		})
+		if !langSet {
+			*lang = "zh-Hant"
+		}
+		// 中文模式的畫布是 640×400，預設三倍就是 1920×1200——放不進 1080p 螢幕。
+		// 沒指定倍率時依畫布大小挑一個放得下的。
+		scaleSet := false
+		flag.Visit(func(f *flag.Flag) {
+			if f.Name == "scale" {
+				scaleSet = true
+			}
+		})
+		if !scaleSet && *lang != "en" {
+			*scaleFlag = 2
+		}
+		// 存檔要寫在使用者自己的資料目錄。互動模式沒有這一段的話住宿存檔會靜默
+		// 跳過（`-save` 空字串就不寫），而 AppImage 的工作目錄是唯讀掛載點，
+		// 寫回程式旁邊也不行。
+		if *savePath == "" {
+			if p, err := defaultSavePath(); err == nil {
+				*savePath = p
+			} else {
+				fmt.Fprintln(os.Stderr, "找不到可寫的存檔目錄，這一輪的住宿不會存檔：", err)
+			}
+		}
+	}
 
 	lib, err := assets.Load(*assetRoot)
 	if err != nil {
@@ -3351,6 +3502,8 @@ func main() {
 		traceDetail:  *traceDetail,
 		arena:        arenaDep,
 		arenaFighter: -1,
+		interactive:  interactive,
+		logInput:     *logInput,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
@@ -3390,6 +3543,10 @@ func main() {
 	}
 
 	switch {
+	case interactive:
+		// 互動遊玩不排 jobs：畫面停在目前這一張，由 Update 讀輸入推進。
+		g.scene = sceneFlow
+		g.flow = flow.New(g.roster, g.state, g.remove, innState, playSession)
 	case *bookShots != "":
 		g.scene = sceneBookOpen
 		for i := 0; i <= len(g.bookAnim.Steps); i++ {

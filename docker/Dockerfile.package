@@ -1,0 +1,13 @@
+# 打包用的映像：在鎖定的 Go／Ebitengine 映像上補齊封裝工具。
+#
+#   docker build -f docker/Dockerfile.package -t kol-package:20260907 .
+#
+# 為什麼要多一層：appimagetool 需要 `file` 才肯動（缺了只會說
+# "file command is missing but required"），而鎖定的建置映像沒有它。
+# 共用映像不改，另外疊一層是本專案自己的（見 `rules/30` 的共用資源邊界）。
+FROM eob-remake-go:1.26.7-ebiten2.9.9-audio
+
+USER root
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends file zip unzip \
+ && rm -rf /var/lib/apt/lists/*
