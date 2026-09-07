@@ -140,6 +140,40 @@ exec timeout "${KOL_GO_TIMEOUT:-600}" docker run --rm \
 
     kill $KOL_PID 2>/dev/null || true
     wait $KOL_PID 2>/dev/null || true
+
+    # 互動遊玩是 `-scene` 的新預設值，而截圖與腳本流程有些呼叫不寫 `-scene`
+    # ——它們靠的就是那個預設值。`cmd/kol` 的 batchFlags 把那些旗標排除在互動
+    # 之外；少了它，不帶 `-scene` 的 `-shot-dir` 會開起視窗等人按鍵，一張圖也
+    # 產不出來（實測：逾時、產出 0 張）。
+    #
+    # 兩種都驗：`-title-frame` 走 switch 之前就設好的 jobs，判準是**與版控中的
+    # 展示圖逐 byte 相同**；`-shot-dir` 走 switch 裡的分支，那才是會被互動分支
+    # 搶先的那一種。
+    if [ -f /src/docs/screenshots/en-title-knight.png ]; then
+      echo "== 批次流程沒有被互動模式吃掉"
+      if timeout 90 $KOL_CMD -shot-dir /tmp/batchdir >/dev/null 2>&1 &&
+         [ "$(ls /tmp/batchdir 2>/dev/null | wc -l)" -gt 0 ]; then
+        echo "  ✓ -shot-dir（不帶 -scene）產出 $(ls /tmp/batchdir | wc -l) 張"
+      else
+        echo "  ✗ -shot-dir（不帶 -scene）產不出圖——互動模式把它吃掉了"; fail=1
+      fi
+      for pair in "66:en-title-knight" "89:en-title"; do
+        frame="${pair%%:*}"; ref="${pair##*:}"
+        if timeout 90 $KOL_CMD -title-frame "$frame" -shot "/tmp/$ref.png" >/dev/null 2>&1; then
+          got="$(sha256sum "/tmp/$ref.png" | cut -d" " -f1)"
+          want="$(sha256sum "/src/docs/screenshots/$ref.png" | cut -d" " -f1)"
+          if [ "$got" = "$want" ]; then
+            echo "  ✓ -title-frame $frame（不帶 -scene）與 $ref.png 逐 byte 相同"
+          else
+            echo "  ✗ -title-frame $frame 產出的圖與 $ref.png 不同"; fail=1
+          fi
+        else
+          echo "  ✗ -title-frame $frame（不帶 -scene）產不出圖——互動模式把它吃掉了"
+          fail=1
+        fi
+      done
+    fi
+
     if [ $fail -ne 0 ]; then
       echo "-- 收到的 token --"; grep "^input " /tmp/kol.log || true
       echo "互動驗收未通過"; exit 4

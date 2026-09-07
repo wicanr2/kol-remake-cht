@@ -2325,6 +2325,17 @@ func applyDeleteToken(f *roster.DeleteFlow, token string) error {
 	return nil
 }
 
+// batchFlags 是「產出檔案然後結束」的那些旗標。設了其中任何一個就不是互動遊玩。
+var batchFlags = map[string]bool{
+	"shot": true, "shot-dir": true, "shot-steps": true,
+	"script": true, "flow-script": true, "play-script": true,
+	"world-script": true, "delete-script": true, "chardata-script": true,
+	"title-shot-dir": true, "book-shot-dir": true, "title-timeline": true,
+	"title-frame": true, "list-assets": true, "dump-cjk-layout": true,
+	"chardata-write": true, "chardata-delete-slot": true, "chardata-out": true,
+	"route-to": true, "trace": true,
+}
+
 // useResourceDir 讓程式在自己旁邊找資源。
 //
 // 全部的資源旗標都是相對路徑（`assets/…`、`docs/…`），從儲存庫根目錄跑沒問題，
@@ -2511,7 +2522,23 @@ func main() {
 
 	// `-scene game` 是互動遊玩。它借 `flow` 那條路徑的全部初始化，差別只在 token
 	// 來自鍵盤與滑鼠而不是腳本，所以這裡改寫成 flow，另外記一個旗標給 Update。
+	//
+	// 但**帶了產檔旗標就不是互動遊玩**。那些流程（截圖、腳本、傾印）本來就靠
+	// `-scene` 的預設值，預設值從封面改成互動之後要把它們留在封面上，否則
+	// `docs/screenshots/shots.spec` 裡不寫 `-scene` 的那幾行會開起視窗等人按鍵，
+	// 一張圖也產不出來。列旗標名而不是列條件，是因為新增一個產檔旗標時漏掉
+	// 這裡的代價是「批次流程靜靜地卡住」，很難查。
 	interactive := scene(*sceneName) == sceneGame
+	if interactive {
+		flag.Visit(func(f *flag.Flag) {
+			if batchFlags[f.Name] {
+				interactive = false
+			}
+		})
+	}
+	if !interactive && scene(*sceneName) == sceneGame {
+		*sceneName = string(sceneCover)
+	}
 	if interactive {
 		*sceneName = string(sceneFlow)
 		// 這是繁體中文重製版，玩的時候預設就走中文模式；`-lang en` 切回原版

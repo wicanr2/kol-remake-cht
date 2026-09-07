@@ -4507,7 +4507,13 @@ AppImage、Windows 與 macOS 各出獨立的 zip。
      誤判成無效。改成輪詢等畫面變。**當時是靠 `-log-input` 把收到的 token 印出來
      才定位的**——`token=[D D RET]` 後面接 `scene=delete cursor=2`，程式那一側
      從頭到尾都是對的。
-  3. `appimagetool` 兩次靜默失敗：缺 `file` 指令、以及在 `--network none` 下要去
+  3. **改預設值會波及所有靠那個預設值的呼叫。**`-scene` 從封面改成互動遊玩之後，
+     不寫 `-scene` 的批次呼叫會落進互動分支——`-shot-dir` 實測逾時、產出 0 張。
+     `cmd/kol` 的 `batchFlags` 把產檔旗標排除在互動之外。但**哪些會被吃掉不能用
+     旗標名推**：`-title-frame` 在 switch 之前就設好 `g.jobs`，而 `Update` 先看
+     jobs 再看互動旗標，所以它從頭到尾都不受影響。我一開始把它判成「真回歸」
+     並據此停掉了一輪建置，實測才發現不是。`verify_interactive.sh` 現在兩種都驗。
+  4. `appimagetool` 兩次靜默失敗：缺 `file` 指令、以及在 `--network none` 下要去
      GitHub 抓 runtime。**第一次沒看到原因是我自己把它的 stderr 重導到
      `/dev/null`**；拿掉重導向就直接印出來了。
 - **三個平台各自獨立**：`tools/package_dist.sh` 產 `dist-all/<版本>/packages/`
