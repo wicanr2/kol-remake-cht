@@ -4479,3 +4479,65 @@ remake 的 `Actor.Take` 註解本來就寫著那個位址，先前繞了一圈�
   舊層變成 dangling；**沒有 prune、沒有 rmi**，要不要清由使用者決定）、
   `build_macos.sh`／`verify_macos.sh`／`make_promo.sh`／`build_dist.sh` 各數次，
   全部 `--rm`。沒有動別的專案的資源。
+
+## 2026-09-07：開起來就能玩，三平台各自獨立封裝
+
+使用者回報 0.2.0「打開後滑鼠鍵盤都沒作用，不能遊玩」，並要求 Linux 出
+AppImage、Windows 與 macOS 各出獨立的 zip。
+
+- **成因**：`kol` 不帶旗標時進的是 `-scene cover`，一張靜態封面——`Update` 對那個
+  場景沒有任何輸入分支，只有 Escape 會關窗。滑鼠更直接：`MouseButton`、
+  `CursorPosition` 在整個儲存庫 grep 不到任何一處。
+- **範圍比一個 bug 大**：從標題到旅店那一整條（`flow`）只有腳本驅動，`g.flow`
+  只在 `-flow-script` 那一支建立。二十六份對拍收據與五條 player-path 收據
+  **全部是餵 token 逐步截圖**，沒有一次是人在鍵盤前走完的。先前自評 90 分裡
+  「發行打包 85%」沒有把這個缺口算進去，而它是「可玩」的前提。
+- **修法**：`-scene game`（新的預設值）借 `flow` 那條路徑的全部初始化，token
+  改由鍵盤與滑鼠來。分派與 `-flow-script` 完全相同，所以互動遊玩經過的是
+  收據驗過的同一組狀態機。
+- **滑鼠翻成既有 token**，不是新增 API：點選單第三列送出 `D D RET`。可點區域
+  取自各畫面既有的版面常數，沒有另外量一份。右鍵是 Escape，滾輪是上下。
+- **兩個踩到的坑**：
+  1. `ebiten.CursorPosition()` 回的是 **logical 座標**（文件明寫
+     "this considers the scale of the screen"），我多除了一次視窗倍率，
+     點擊全落在版面上方。**測試一開始「通過」了**——因為判準是「畫面有變」，
+     而點歪會落到 fallback 的 Return，畫面照樣變。改成「滑鼠點第 N 列必須與
+     鍵盤走到第 N 列產生同一張畫面」才抓出來。**寬鬆的判準比沒有判準更危險。**
+  2. 驗收腳本用固定 `sleep` 截圖，在合成事件生效前就截到舊畫面，把「按鍵有效」
+     誤判成無效。改成輪詢等畫面變。**當時是靠 `-log-input` 把收到的 token 印出來
+     才定位的**——`token=[D D RET]` 後面接 `scene=delete cursor=2`，程式那一側
+     從頭到尾都是對的。
+  3. `appimagetool` 兩次靜默失敗：缺 `file` 指令、以及在 `--network none` 下要去
+     GitHub 抓 runtime。**第一次沒看到原因是我自己把它的 stderr 重導到
+     `/dev/null`**；拿掉重導向就直接印出來了。
+- **三個平台各自獨立**：`tools/package_dist.sh` 產 `dist-all/<版本>/packages/`
+  六個檔（full／release × AppImage／Windows zip／macOS zip）。先前 `build_dist.sh`
+  產的是目錄，三支不同作業系統的執行檔混在同一層，而且沒有任何壓縮步驟——
+  腳本註解裡寫的 tar.gz 並不存在。
+- **macOS 做成 `.app` bundle**：裸執行檔在 Finder 雙擊會開終端機，而且 `.app`
+  由 Finder 啟動時工作目錄是 `/`。加了 `useResourceDir`：工作目錄找得到資源就
+  不動，找不到才換到執行檔旁邊（含 `.app` 的 `../Resources`），所以既有的對拍與
+  截圖流程完全不受影響。
+- **驗收**：`tools/verify_interactive.sh` 在 Xvfb 裡送鍵與滑鼠、截圖比雜湊，
+  一路驗到選角、進旅店、滑鼠點 DOOR 出門、在城鎮裡走一步；它吃自訂啟動命令，
+  所以**同一套驗收直接跑在 AppImage 上**，畫面雜湊與從儲存庫跑的逐一相同。
+  `tools/verify_packages.py` 驗六個發行檔的結構，並做過負對照：注入
+  「AppImage 沒有執行位元」「`.app` 執行檔沒有執行位元」「release 混進 PNG」
+  三個缺陷，三個都被抓到、退出碼 1。
+- **容器**：`docker build -f docker/Dockerfile.package`（在鎖定建置映像上補
+  `file`／`zip`，因為 appimagetool 缺 `file` 就不動）一次；`go_docker.sh`、
+  `build_dist.sh`、`package_dist.sh`、`verify_dist.sh`、`verify_interactive.sh`
+  各數次，全部 `--rm`。沒有 prune、沒有 rmi、沒有動別的專案的資源。
+  `workplace/tools/` 放了 appimagetool（`a6d71e2b…d13a0`，build 295）與
+  AppImage runtime（`db3bdec3…f3e4`），兩者都只留本機、不進版控。
+- **`dist-all/0.2.1/` 建好並驗過**：`verify_dist.sh 0.2.1` 全過，六個發行檔
+  驗收全過，AppImage 的互動驗收全過。**Windows 與 macOS 仍然沒有真機驗收。**
+
+### 這一輪沒做、但看見的缺口
+
+- 開場旅店（`flow.SceneInn`）只有 DOOR 接得動。MIRROR、LISTEN、TALK、REST、
+  COMPANION 按下去會走 `f.note` 記一筆「未實作」然後畫面不動，玩家看起來就是
+  沒反應。城鎮裡的建築內部走的是 `town.Session`，功能是齊的——缺的只有開場那一格。
+- 戰鬥與野外還沒有可點區域，那兩層滑鼠只有「點一下等於 Return」與滾輪。
+- `-load` 沒有預設值，存了檔要自己帶路徑讀回來。要不要「有存檔就自動接續」
+  是操作方式的決定，等使用者定。

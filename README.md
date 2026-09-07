@@ -21,6 +21,43 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG，音樂與音效使
 玩法必須依序通過
 「RE 證據 → DRAFT spec → 證據審查 → READY spec」才會進入正式實作。
 
+## 開始遊玩
+
+發行檔在 `dist-all/<版本>/packages/`，三個平台各自獨立：
+
+| 平台 | 檔案 | 開啟方式 |
+|---|---|---|
+| Linux | `kol-<版本>-full-linux-x86_64.AppImage` | `chmod +x` 之後直接執行 |
+| Windows | `kol-<版本>-full-windows-amd64.zip` | 解開後雙擊 `kol.exe` |
+| macOS | `kol-<版本>-full-macos-universal.zip` | 解開後開啟「武士傳說.app」 |
+
+`full` 帶素材、開箱即玩，依權利邊界只留本機；`release` 不含任何原作衍生位元組，
+玩家用自己的原版磁片跑包裡的抽取器產生素材。
+
+操作照原版參考卡：
+
+| 鍵 | 作用 |
+|---|---|
+| 方向鍵 | 移動 |
+| `A` `S` `Z` `X` | 斜走 |
+| `,` `.` | 移動畫面下方圖示列的白框 |
+| Enter | 執行 |
+| Esc | 回上一頁 |
+| Ctrl+Q | 離開 |
+
+滑鼠可以直接點選單、清單與圖示列，右鍵等於 Esc，滾輪上下移動游標。點某一列
+送出的是與鍵盤相同的按鍵序列，所以兩種操作走的是同一條路徑，也是二十六份對拍
+收據驗過的那一條。
+
+介面預設繁體中文；`-lang en` 切成與原版逐畫面對拍的英文版面。住宿存檔寫在使用者
+設定目錄（Linux `~/.config/kol-remake-cht/`、macOS
+`~/Library/Application Support/kol-remake-cht/`、Windows `%AppData%\kol-remake-cht\`），
+用 `-load <路徑>` 讀回來。
+
+macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設定 → 隱私權與安全性」
+按「仍要打開」，或先執行 `xattr -dr com.apple.quarantine`。Windows 與 macOS
+都還沒有真機驗收。
+
 ## 目前畫面
 
 完整畫廊與產生流程見 [docs/screenshots/](docs/screenshots/README.md)。左欄是**英文

@@ -46,6 +46,19 @@ for bundle in full release; do
   "$REPO_ROOT/tools/verify_macos.sh" "$mac" >/dev/null     || { echo "$bundle 的 kol-macos 沒過靜態驗收" >&2; exit 3; }
 done
 
+# 三個平台各自獨立的發行檔。玩家拿到的是這幾個，所以驗收要驗它們，
+# 不只是驗 build 目錄。
+PKG="$REPO_ROOT/$DIST/packages"
+[ -d "$PKG" ] || { echo "少了 packages/，先跑 tools/package_dist.sh" >&2; exit 2; }
+for bundle in full release; do
+  for f in "kol-$VERSION-$bundle-linux-x86_64.AppImage" \
+           "kol-$VERSION-$bundle-windows-amd64.zip" \
+           "kol-$VERSION-$bundle-macos-universal.zip"; do
+    [ -s "$PKG/$f" ] || { echo "少了 $f" >&2; exit 2; }
+  done
+done
+"$REPO_ROOT/tools/verify_packages.py" "$REPO_ROOT/$DIST" "$VERSION" || exit 3
+
 # promo 要有片子與它的來源說明。
 [ -s "$REPO_ROOT/$DIST/promo/kol-promo.mp4" ] || { echo "promo 少了影片" >&2; exit 2; }
 [ -s "$REPO_ROOT/$DIST/promo/sources.json" ] || { echo "promo 少了 sources.json" >&2; exit 2; }

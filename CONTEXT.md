@@ -72,6 +72,26 @@
   任務旗標、已回報數與身上帶的東西已經進存檔，重載之後進度還在。
   SPEC-001／002／003／005／006／007／008／009／010／011／012／013／014／015 為 READY
   或 CONFORMED（008、009、010 只有已解出的段落 READY），SPEC-004（音訊）仍為 DRAFT。
+- **開起來就能玩**：`kol` 不帶旗標進的是互動遊玩（`-scene game`，新的預設值），
+  從標題序列開始，鍵盤與滑鼠直接走到書本、建角、選角、旅店、城鎮、野外與戰鬥。
+  它借的是 `flow` 那條路徑的全部初始化，分派與 `-flow-script` 完全相同——人在
+  城裡是 `flow.Key`，走出城門交給 `playToken`——所以互動遊玩經過的是二十六份
+  對拍收據驗過的同一組狀態機，不是另一條平行的輸入處理。
+  滑鼠翻成既有的鍵盤 token（點選單第三列送出 `D D RET`），可點區域取自各畫面
+  既有的版面常數；右鍵是 Escape，滾輪是上下。介面預設繁體中文，`-lang en`
+  切回原版字模的英文對拍版面。住宿存檔預設寫到 `os.UserConfigDir` 底下。
+  驗收是 `tools/verify_interactive.sh`：Xvfb 裡送鍵與滑鼠、截圖比雜湊，判準是
+  **滑鼠點第 N 列必須與鍵盤走到第 N 列產生同一張畫面**，一路驗到選角、進旅店、
+  滑鼠點 DOOR 出門、在城鎮裡走一步。
+  尚未接上的是開場旅店那一格的其餘五個圖示（MIRROR／LISTEN／TALK／REST／
+  COMPANION，城鎮裡的建築內部功能是齊的），以及戰鬥與野外的可點區域。
+- **三個平台各自獨立封裝**：`tools/package_dist.sh` 產 `dist-all/<版本>/packages/`
+  六個發行檔——`full`／`release` 各有 Linux 的 AppImage、Windows 的 zip 與
+  含 `武士傳說.app` 的 macOS zip。`.app` 由 Finder 啟動時工作目錄是 `/`、
+  AppImage 掛在暫時目錄，所以程式在工作目錄找不到資源時會換到執行檔旁邊
+  （含 `.app` 的 `../Resources`）。`tools/verify_packages.py` 驗六個檔的結構
+  （執行位元、`.app` 的 Info.plist、full 要有素材、release 不得有原作衍生位元組），
+  並已做過注入缺陷的負對照。`0.2.1` 全部通過，**Windows 與 macOS 仍然沒有真機驗收**。
 - 原版內嵌點陣字型已抽出：`BOOKDATA.0`／`KOLDATA.0` 的第一個 payload 是同一份
   1,303-byte 區塊（SHA-256 `819e4f82…d318`），前 744 bytes 是 93 個 8×8 字模、
   `0x2e8` 起是 93 個 8×6 字模，都由 ASCII 32 起算涵蓋 32–124。
