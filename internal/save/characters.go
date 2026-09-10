@@ -8,7 +8,8 @@ import (
 	"reflect"
 )
 
-// Characters 是 SPEC-023 已審查的保存核心；尚未取代正式 v1 入口。
+// Characters 是 SPEC-023 的保存核心，**正式遊戲用的就是它**（`CompleteSchema`，
+// 也就是 v2）；v1 刻意保留為匯入入口，見 `save.go` 的 `Schema`。
 // 槽位不壓縮，隊伍只引用槽位，避免兩份角色資料互相覆蓋。
 type Characters struct {
 	Characters [16]*Character `json:"characters"`

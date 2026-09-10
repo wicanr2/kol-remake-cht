@@ -895,36 +895,6 @@
       }
     },
     {
-      "id": "save-v1-entry-replacement",
-      "layer": "gap",
-      "title": "SPEC-023 的保存核心還沒取代正式 v1 入口",
-      "body": "`internal/save/characters.go` 已審查，但正式入口仍是 v1。兩套並存期間，改一邊沒改另一邊的風險一直在。",
-      "acceptance": "v1 入口由 SPEC-023 的核心取代，或明示為什麼要並存。",
-      "verify": {
-        "kind": "present",
-        "paths": [
-          "internal/save/characters.go"
-        ],
-        "pattern": "尚未取代正式 v1 入口",
-        "note": "characters.go 的自承。"
-      }
-    },
-    {
-      "id": "glossary-terms-pending",
-      "layer": "gap",
-      "title": "術語表還有待查的詞",
-      "body": "字串表與術語表同一套狀態：核准／暫譯／待查。還有詞停在暫譯或待查。",
-      "acceptance": "術語表沒有待查項，暫譯各自定案。",
-      "verify": {
-        "kind": "present",
-        "paths": [
-          "internal/i18n/i18n.go"
-        ],
-        "pattern": "術語還在",
-        "note": "i18n.go 的檔頭說明；術語定案後會改寫。"
-      }
-    },
-    {
       "id": "planning-25-not-verified",
       "layer": "verification",
       "title": "規劃段寫進 +0x25 的值沒逐格核對",
@@ -1149,6 +1119,23 @@
       },
       "status": "done",
       "resolved": "2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。"
+    },
+    {
+      "id": "save-v1-entry-replacement",
+      "layer": "gap",
+      "title": "SPEC-023 的保存核心已是正式入口",
+      "body": "`save.Characters` 是 SPEC-023 的保存核心。",
+      "acceptance": "v1 入口由 SPEC-023 的核心取代，或明示為什麼要並存。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "internal/save/save.go"
+        ],
+        "pattern": "正式遊戲使用 CompleteSchema",
+        "note": "已完成，當回歸訊號：這句契約被改掉時條目會重新開口。"
+      },
+      "status": "done",
+      "resolved": "2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。"
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",
@@ -1380,6 +1367,11 @@
     {
       "file": "REMAKE-PLAN.md",
       "why": "早期的整體規劃表，記的是當時各系統的盤點狀態與尚未決策的項目；現行狀態看 CONTEXT.md 與 items。"
+    },
+    {
+      "file": "internal/i18n/i18n.go",
+      "match": "術語還在",
+      "why": "設計理由：翻譯不寫死在程式裡，因為術語表有核准／暫譯／待查三種狀態。術語本身的待辦由 terminology-and-safe-rects 追，不在這裡重複登記。"
     }
   ]
 }

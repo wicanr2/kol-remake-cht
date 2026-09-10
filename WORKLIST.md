@@ -144,16 +144,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：輸入框做出來，正常 GUI 打得了字並問得到關鍵字。
   核實：`internal/town/keys.go` 找得到 `remake 的輸入框還沒做` 就是還沒完
 
-- **save-v1-entry-replacement** — SPEC-023 的保存核心還沒取代正式 v1 入口
-  `internal/save/characters.go` 已審查，但正式入口仍是 v1。兩套並存期間，改一邊沒改另一邊的風險一直在。
-  完成條件：v1 入口由 SPEC-023 的核心取代，或明示為什麼要並存。
-  核實：`internal/save/characters.go` 找得到 `尚未取代正式 v1 入口` 就是還沒完
-
-- **glossary-terms-pending** — 術語表還有待查的詞
-  字串表與術語表同一套狀態：核准／暫譯／待查。還有詞停在暫譯或待查。
-  完成條件：術語表沒有待查項，暫譯各自定案。
-  核實：`internal/i18n/i18n.go` 找得到 `術語還在` 就是還沒完
-
 - **spell-target-figure** — 施法時目標的人形還沒畫
   `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
@@ -443,6 +433,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **extraction-docker-image** — 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 Dockerfile：2026-09-10 核實：既有共用映像 eob-remake-go:1.26.7-ebiten2.9.9-audio 已由 tools/go_docker.sh 與 tools/run_python_tool.sh 使用（只讀不改）；缺件的兩個已建 docker/Dockerfile.osxcross-go 與 docker/Dockerfile.package。
 - **wilderness-cloud-animation** — 野外的雲層動畫：2026-09-10 核實：已接進畫面。`internal/world/weather.go:69` 的 Composite 做旋轉，`internal/ui/world.go:45` 的 drawWeather 畫進世界畫面（144／217 兩處呼叫 CompositeGroup(s.Group, s.Phase)），`cmd/kol/main.go:937` 遞增 Phase。G02 那一條已記為做完（SPEC-026 六組天候、128 像素捲雲與正式節拍，正常出城 GUI 只在天空區改變），只有這一條沒回頭改。雨雪的正常 GUI 與原版同相位另見 weather-animation-and-speed。
 - **monster-unarmed-weapon-source** — 怪物徒手那幾手改成照原版：拿手上那件：2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。
+- **save-v1-entry-replacement** — SPEC-023 的保存核心已是正式入口：2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。
 
 <!-- worklist:end -->
 
