@@ -190,9 +190,20 @@ func TestNormalBookEntry(t *testing.T) {
 					if err != nil {
 						t.Fatal(err)
 					}
-					// 2,000 萬指令時翻頁尚未完成；先讓既有動畫完整推進再送下一鍵。
-					if err = o.Run(80_000_000); err != nil {
+					// **不要拿固定指令數當「這一鍵處理完了」**：這一步要跑多久由翻頁動畫
+					// 與城鎮載入決定，不是常數。2026-09-11 量到固定 80M 的後果——最後
+					// 那個 Space 一直留在待讀（已讀=5／待讀=1），店主招呼沒發生，畫面
+					// 停在建築外觀，後面的招募點擊因此落空。改成等鍵真的被讀走。
+					if err = o.Run(20_000_000); err != nil {
 						t.Fatal(err)
+					}
+					for n := 0; o.KeysPending() > 0 && n < 20; n++ {
+						if err = o.Run(20_000_000); err != nil {
+							t.Fatal(err)
+						}
+					}
+					if o.KeysPending() > 0 {
+						t.Fatalf("第 %d 步的 %q 送出後 4 億指令仍未被讀走", i, key)
 					}
 					t.Logf("書本步驟=%d 介面=%s 按鍵=%q 已讀=%d 待讀=%d IP=%s 主控台=%q 已開=%v 缺檔=%v", i, channel, key, o.KeysConsumed(), o.KeysPending(), o.IP(), o.Console(), o.Opened(), o.Missing())
 					captureBook(t, o, fmt.Sprintf("book-action-%d.png", i))
@@ -244,14 +255,13 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 	} else {
 		t.Log("送鍵前遊戲一次都沒讀過滑鼠——這個畫面可能只收鍵盤")
 	}
-	// 觀察模式：這個畫面收不收滑鼠、要按什麼才進得了旅店，先看清楚再送固定序列。
-	// 2026-09-10 量到的事實：進場後滑鼠輪詢數停在 426,415，點擊期間**一次都沒有
-	// 增加**——依 dosgolem `docs/spec/012` 的三分法，那是「按住的期間遊戲沒讀
-	// 滑鼠」，不是座標不對。畫面停在 Halfway House 的建築外觀，還沒進門。
+	// 觀察模式：拿來看一個沒走通的畫面收不收滑鼠、要按什麼才進得去。
+	//
+	// 判讀滑鼠輪詢數之前先確認**畫面本身到位了**：輪詢數不增加只說明「遊戲此刻
+	// 沒在讀滑鼠」，而遊戲還在處理上一鍵時本來就不讀。先確定前一鍵已經被讀走
+	// （`KeysPending()==0`），再用 dosgolem `docs/spec/012` 的三分法談座標。
 	if os.Getenv("KOL_BOOK_PROBE_ENTRY") == "1" {
 		before := len(o.MousePollSteps())
-		// 已知的兩步：`Down` 叫出圖示列（輪詢從 +43 跳到 +305,850），`Return` 進門
-		// （Trollsbane Inn 的敘述頁）。後面繼續觀察怎麼走到招募。
 		for i, key := range []string{"Down", "Return", "Space", "Right", "Return", "Space", "Return", "Down"} {
 			if err := o.SendKeys(key); err != nil {
 				t.Fatalf("送 %q：%v", key, err)
@@ -269,15 +279,13 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 		return
 	}
 
-	// 進旅店的三步。少了它們，後面那一下點擊會落在**建築外觀**上——圖示列還沒
-	// 出現，遊戲在那個畫面根本不讀滑鼠（2026-09-10 量到：點擊前後滑鼠輪詢數都是
-	// 426,415，一次都沒增加）。座標本身沒有問題：`town.IconBar` 是 X=32、Step=32，
-	// 第 6 格 COMPANION 的中心正好是 (204, 181)，也就是下面點的那個位置。
+	// 書本那四步跑完，畫面就停在店主招呼、六個圖示（DOOR／MIRROR／LISTEN／TALK／
+	// REST／COMPANION）都在，第一下直接點 COMPANION 招募。`town.IconBar` 是
+	// X=32、Step=32，第 6 格的中心是 (204, 181)。
 	//
-	//	Down   叫出圖示列（輪詢從 +43 跳到 +305,850）
-	//	Return 進門，出現旅店敘述頁
-	//	Space  店主招呼，六個圖示（DOOR／MIRROR／LISTEN／TALK／REST／COMPANION）出現
-	for i, key := range []string{"Down", "Return", "Space",
+	// 這串鍵綁 Halfway House。**換一座城就要重數**——別把某一座城量到的補救步驟
+	// 加進這裡，那會讓本來走得通的路徑多按幾下而走偏。
+	for i, key := range []string{
 		"recruit-click", "Return", "Return", "Return", "Return", "Space"} {
 		var err error
 		if key == "recruit-click" {
@@ -337,9 +345,13 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 		}
 		captureBook(t, o, "next-day-start.png")
 
-		// 露營之後方向鍵無效（九十步走動 0 步）。畫面看起來完全正常，所以要問的是
-		// 「按什麼才回得到可移動狀態」。做法與進門那一次相同：每送一個候選鍵，
-		// 就跟一個 `Right` 測方向鍵有沒有生效——**畫面指紋變了才算走出去**。
+		// 觀察模式：露營之後如果方向鍵沒反應，用它找「按什麼才回得到可移動狀態」。
+		// 每送一個候選鍵就跟一個 `Right` 測方向鍵有沒有生效——**畫面指紋變了才算
+		// 走出去**。
+		//
+		// 判「不能動」之前先排除兩件事：隊伍是不是真的出了城（沒出城時方向鍵一樣
+		// 走不動），以及畫面是不是停在等確認的訊息（伏擊訊息就是這種畫面，那時候
+		// 方向鍵本來就無效，不是卡住）。
 		if os.Getenv("KOL_BOOK_PROBE_CAMP") == "1" {
 			probe := []string{"Right", "Space", "Right", "Return", "Right",
 				"Escape", "Right", "Down", "Right", "Up", "Right"}
@@ -709,12 +721,28 @@ func probeNormalPlanning(t *testing.T, o *oracle.Oracle) {
 
 	// 送鍵的順序刻意保守：先看單獨一個 Return 會不會就決定一個指令，
 	// 再看方向鍵與 `<`／`>` 有沒有搬動選擇。每一步都留畫面。
-	for i, key := range []string{"Return", "Right", "Return", "period", "Return", "Return"} {
-		if err := o.SendKeys(key); err != nil {
+	for i, key := range []string{"Return", "Right", "Return", ".", "Return", "Return"} {
+		// `.`／`,` 這種字元鍵沒有具名掃描碼，要走 TypeKeys；SendKeys 只認具名鍵。
+		var err error
+		if len([]rune(key)) == 1 {
+			err = o.TypeKeys(key)
+		} else {
+			err = o.SendKeys(key)
+		}
+		if err != nil {
 			t.Fatalf("送 %q：%v", key, err)
 		}
 		if err := o.Run(20_000_000); err != nil {
 			t.Fatalf("跑 %q：%v", key, err)
+		}
+		// 同書本那一段：等鍵真的被讀走，不要拿指令數當「處理完了」。
+		for n := 0; o.KeysPending() > 0 && n < 20; n++ {
+			if err := o.Run(20_000_000); err != nil {
+				t.Fatalf("跑 %q：%v", key, err)
+			}
+		}
+		if o.KeysPending() > 0 {
+			t.Fatalf("規劃第 %d 步的 %q 送出後 4 億指令仍未被讀走", i, key)
 		}
 		name := fmt.Sprintf("plan-%02d.png", i)
 		captureBook(t, o, name)
@@ -754,9 +782,8 @@ func screenDigest(o *oracle.Oracle) string {
 }
 
 // walker 依序試四個方向走。**撞牆的時候畫面不會變**，而一直按同一個鍵不等於
-// 一直在走——2026-09-10 量到：次日那一百步裡 `next-day-start`、`-009`、`-099`
-// 三張畫面的雜湊完全相同，角色壓根沒動，於是世界時間不走、遭遇也就不擲，
-// 症狀卻是「走了一百步都沒遇敵」，看起來像機率問題。
+// 一直在走：角色沒動，世界時間就不走，遭遇也不擲，症狀卻長得像「機率不好」。
+// 所以走完要看的是**真的走動了幾步**，不是送了幾個鍵。
 type walker struct {
 	dirs []string
 	at   int

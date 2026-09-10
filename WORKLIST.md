@@ -163,7 +163,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：要人判——常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。
 
 - **battle-normal-seed-alignment** — 原版戰鬥同狀態：規劃與攻擊結算比較
-  兩名隊員與 SLEDGE 共 60 個初始欄位通過（docs/verification/battle-party-state-20260908.md）。**地形已接進受控情境**（4096 格逐格傳遞，站位與地形用同一座標系，兩份獨立原版資料交叉驗證；轉置寫反實測會讓 1,818／4,096 格報錯）——見 battle-terrain-snapshot-load-20260910.md。**怪物裝備能力也比完了**（2026-09-10）：128 byte 就是完整一筆，護甲三件、盾牌、技能、旗標、撤退門檻與金冠骰式全在裡面，三方比對 20 項通過——見 monster-equipment-20260910.md。剩下的是規劃與攻擊結算，那需要原版在規劃入口**之後**的狀態快照；現有三份都停在規劃入口。
+  兩名隊員與 SLEDGE 共 60 個初始欄位通過（battle-party-state-20260908.md）。**地形已接進受控情境**（4096 格逐格傳遞，兩份獨立原版資料交叉驗證）——battle-terrain-snapshot-load-20260910.md。**怪物裝備能力也比完了**：128 byte 就是完整一筆，三方比對 20 項通過——monster-equipment-20260910.md。**規劃入口之後的狀態拿到了**（2026-09-11）：正常路徑修復後六步逐鍵的 +0x22／+0x23／+0x25 都在 workplace/battle-planning-20260911/battle-planning.json，同一場與 9/8 兩份收據逐位元組相同——normal-path-planning-entry-20260911.md。剩下的是把那組按鍵與 remake 的規劃序列對齊，再送結算命令。
   完成條件：同一 seed、同一初始狀態下，remake 與原版的規劃順序、命令與結算逐項一致。
   核實：要人判——規劃與結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真——兩個方向都是錯的（2026-09-10 試過一次）。規劃／結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。
 
@@ -226,6 +226,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   分派表認不得的圖號落 default 收尾時，原版寫進 `+0x25` 的是什麼還沒逐格核對過，所以 remake 記下來不動、不假裝做過。
   完成條件：逐格核對過，或確認 remake 目前的做法與原版等價。
   核實：`internal/battle/planning.go` 找得到 `還沒逐格核對過` 就是還沒完
+
+- **planning-current-slot-semantics** — 規劃逐鍵時 DS:0x9E5A 的語意未定案
+  2026-09-11 的六步逐鍵觀察裡，DS:0x9E5A 讀到 1→0→0→5→5→0→1。跳到 5 的那兩步同時也是 +0x22 立起來的那兩步，兩者的關係還沒解。remake 目前不依賴這個位址，觀察資料在 workplace/battle-planning-20260911/battle-planning.json。
+  完成條件：查明 DS:0x9E5A 在規劃期間代表什麼，或確認 remake 不需要它。
+  核實：`docs/verification/normal-path-planning-entry-20260911.md` 找得到 `還沒定案` 就是還沒完
 
 
 ### 素材抽取與音訊
