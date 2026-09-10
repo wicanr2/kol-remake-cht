@@ -14,8 +14,10 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 
 目前狀態與現行交接見 `CONTEXT.md` 頂部。接下來依序處理：
 
-1. 接入 `workplace/battle-terrain-normal-fixed-20260908/battle-terrain.json` 的正常原版地形快照。
-2. 完成同狀態指令／結算及正常戰後保存鏈；現有 60 欄與地形區段對拍不代替整場。
+1. ~~接入正常原版地形快照~~ — 2026-09-10 完成，見
+   [收據](docs/verification/battle-terrain-snapshot-load-20260910.md)。
+2. 接 `battle-state-records.json` 的完整屬性，再做同狀態指令／結算及正常戰後保存鏈；
+   現有 60 欄與地形區段對拍不代替整場。
 3. 將最新怪物與地形修正重建為新版本機 AppImage，驗證後再更新正式交付入口。
 
 涉及未決設計的分支等待使用者確認，不自行視為同意。
@@ -125,10 +127,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：一整場戰鬥從進場到結算、保存都與原版同狀態，走的是正常玩家路徑。
   核實：要人判——常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。
 
-- **battle-normal-seed-alignment** — 原版戰鬥同狀態：對齊地形、完整屬性與結算比較
-  正常路徑已到 SLEDGE 規劃畫面；角色／站位、目前角色、鏡頭與標記已在受控情境對齊，兩側共同 seed=1（docs/verification/battle-actor-alignment-20260908.md）。下一步補地形、完整屬性及結算比較。
-  完成條件：同一 seed、同一初始狀態下，remake 與原版的命令與結算逐項一致。
-  核實：要人判——對拍進度是收據，不是程式狀態。下一份收據落地時改成 absent 綁它的路徑。
+- **battle-normal-seed-alignment** — 原版戰鬥同狀態：完整屬性與結算比較
+  正常路徑已到 SLEDGE 規劃畫面；角色／站位、目前角色、鏡頭與標記已在受控情境對齊，兩側共同 seed=1（docs/verification/battle-actor-alignment-20260908.md）。**地形那一段已完成**（2026-09-10）：`internal/oracle/terrain.go` 把正常遭遇的 4096 格快照接進 remake，索引由原版的 `Y*64+X` 轉成 remake 的 `X*64+Y`，配轉置負對照與五種前提檢查；磚塊組成回推的粗糙格 1,017 與生成規則期望的 1,024 差 0.24 個標準差，見 docs/verification/battle-terrain-snapshot-load-20260910.md。剩下的是 `battle-state-records.json` 的兩名隊員與 SLEDGE 完整屬性，以及指令與結算比較。
+  完成條件：同一 seed、同一初始狀態下，remake 與原版的完整屬性、命令與結算逐項一致。
+  核實：要人判——地形那一段已經有 `internal/oracle/terrain.go`；屬性與結算還沒有可綁的東西。接上時同一個套件會多一支讀 `battle-state-records.json` 的載入器，到時改成 absent 綁它的函式名——現在就綁等於綁一個還不存在的猜想。
 
 - **inn-farewell-diff-review** — 審查原版離店告別訊息與確認流程
   SPEC-024 與告別確認已實作，dosgolem 單人／多人正常離店與繁中 GUI 已抽驗，但不是全城逐店文字驗收。要補與 remake 直接離店的玩家可見差異。

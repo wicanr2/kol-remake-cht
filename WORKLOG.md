@@ -5574,3 +5574,36 @@ commit 共四個）。推送前確認 repo 仍是 PRIVATE、作者信箱全部�
 240 個檔案裡沒有原版 ZIP／EXE／PDF／地圖；唯一的 PNG
 （`assets/original-derived-png/ega/BATTLE/battle-map-24.png`）依專案例外進 private
 repo，manifest 有登記、SHA-256 相符、權利分類齊全。
+
+## 2026-09-10（三）：正常路徑地形快照接進 remake
+
+WORKLIST 第 1 項。`workplace/battle-terrain-normal-fixed-20260908/battle-terrain.json`
+是原版在正常遭遇裡實際產生的那 4096 格；先前只有產生它的那一支（
+`tools/oracle/book_startup_test.go`），沒有任何程式讀它。
+
+**它只能被載入，不能被重算。** 地形生成當下的亂數狀態沒有留在快照裡：
+`alignment_seed: 1` 是規劃入口對齊之後設下的值，`seed_before_alignment`
+（1323149826）是地形已經生成完畢之後的值，兩者都反推不回生成前的狀態。用途是
+給後續的指令與結算對拍一個共同起點。
+
+索引是這一步唯一會出錯的地方，而且**寫反不會報錯**：原版存 `Y*64+X`（繪製直接
+吃的 `ES:SI`），remake 存 `Tiles[X*64+Y]`，兩邊的 X／Y 語意相同（X 是畫面上的列、
+Y 是欄），差的只有哪一軸乘 64。寫反的話 4096 個 byte 照樣填滿、磚塊編號照樣合法，
+整張圖只是沿對角線翻過去。判準因此要能分辨那個差別：合成地形用 `x*2+y*3`（
+不對稱——拿 `x+y` 來驗，翻過來每一格都一樣，測試照樣全綠而什麼都沒證明），
+再加一支負對照把同一張圖翻過來、確認判準真的抓得到。另有五種前提檢查（schema
+換版本、索引契約改了、寬高不是 64、byte 數不足、`record_hex` 不是十六進位）。
+
+**一個與索引無關的佐證**：磚塊組成是底色 2,848、粗糙 941、灑落 307。生成規則是
+逐格擲 1…4、中 1 填粗糙，期望 1,024——帳面少了 83，因為灑落那一段會蓋掉一部分
+粗糙格。把蓋掉的加回來得 1,017，與期望差 **0.24 個標準差**（σ ≈ 27.7）。沿對角線
+翻過來時每一種磚塊的格數一個都不會變，所以這一條驗的是另一件事：這張圖確實出自
+SPEC-008 那條規則，不是別處來的資料或解錯的 payload。
+
+程式落點 `internal/oracle/terrain.go`（不帶 `oracle` build tag，只讀 JSON，不需要
+原版執行檔）與 `terrain_test.go`。runtime 沒有動，正式遊戲路徑不讀 `workplace/`。
+容器內 `go test ./cmd/... ./internal/...` 全綠（GUI 兩包另起 Xvfb），新增的兩個檔案
+`gofmt` 乾淨。收據 `docs/verification/battle-terrain-snapshot-load-20260910.md`。
+
+`battle-normal-seed-alignment` 條目改寫成「完整屬性與結算比較」，verify 維持
+`manual`：屬性與結算還沒有可綁的東西，現在綁等於綁一個還不存在的猜想。

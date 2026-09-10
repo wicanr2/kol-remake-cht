@@ -117,12 +117,12 @@
     {
       "id": "battle-normal-seed-alignment",
       "layer": "verification",
-      "title": "原版戰鬥同狀態：對齊地形、完整屬性與結算比較",
-      "body": "正常路徑已到 SLEDGE 規劃畫面；角色／站位、目前角色、鏡頭與標記已在受控情境對齊，兩側共同 seed=1（docs/verification/battle-actor-alignment-20260908.md）。下一步補地形、完整屬性及結算比較。",
-      "acceptance": "同一 seed、同一初始狀態下，remake 與原版的命令與結算逐項一致。",
+      "title": "原版戰鬥同狀態：完整屬性與結算比較",
+      "body": "正常路徑已到 SLEDGE 規劃畫面；角色／站位、目前角色、鏡頭與標記已在受控情境對齊，兩側共同 seed=1（docs/verification/battle-actor-alignment-20260908.md）。**地形那一段已完成**（2026-09-10）：`internal/oracle/terrain.go` 把正常遭遇的 4096 格快照接進 remake，索引由原版的 `Y*64+X` 轉成 remake 的 `X*64+Y`，配轉置負對照與五種前提檢查；磚塊組成回推的粗糙格 1,017 與生成規則期望的 1,024 差 0.24 個標準差，見 docs/verification/battle-terrain-snapshot-load-20260910.md。剩下的是 `battle-state-records.json` 的兩名隊員與 SLEDGE 完整屬性，以及指令與結算比較。",
+      "acceptance": "同一 seed、同一初始狀態下，remake 與原版的完整屬性、命令與結算逐項一致。",
       "verify": {
         "kind": "manual",
-        "note": "對拍進度是收據，不是程式狀態。下一份收據落地時改成 absent 綁它的路徑。"
+        "note": "地形那一段已經有 `internal/oracle/terrain.go`；屬性與結算還沒有可綁的東西。接上時同一個套件會多一支讀 `battle-state-records.json` 的載入器，到時改成 absent 綁它的函式名——現在就綁等於綁一個還不存在的猜想。"
       }
     },
     {
