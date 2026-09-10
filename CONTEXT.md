@@ -6,13 +6,16 @@
 
 已依使用者指示恢復。自評 **75／100**，不是完成百分比或原版一致率。
 
-- **未完成項的權威是 `docs/worklist.json`**，不再是 `WORKLIST.md` 的 checkbox。
-  每一條掛一個 `verify`，核實用
-  `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的那一節由
-  `render` 產生。目前 **49 條未完成**（35 條沒有機器訊號、標 `manual`）與
-  5 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+<!-- worklist:stats:begin 由 tools/worklist.py render 產生，不要手改 -->
+- **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
+  核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
+  那一節與這幾行數字都由 `render` 產生。
+- 目前 **49 條未完成**（35 條沒有機器訊號、標 `manual`），
+  另有 5 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`manual` 35、`present` 11、`absent` 2、`required_in_all` 1。
+<!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
-  （base 為 `origin/main`，`5f9a9a1`）。舊的 `kol-force-call` 已刪除——它的 commit
+  （base 為 `origin/main`，`5f9a9a1`，已推送到 `origin/kol-oracle`）。舊的 `kol-force-call` 已刪除——它的 commit
   全在 `origin/main` 裡，工作樹上的 12 個未提交檔案已移植過來。KOL 靠的三份規格在
   dosgolem 的號碼是 **194**（EGA BIOS 預設色盤）、**195**（DOS 直接讀鍵）、
   **196**（BIOS 讀鍵橋接）。

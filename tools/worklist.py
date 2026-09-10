@@ -29,6 +29,10 @@ WORKLIST_MD = ROOT / "WORKLIST.md"
 BEGIN = "<!-- worklist:begin 由 tools/worklist.py render 產生，不要手改 -->"
 END = "<!-- worklist:end -->"
 
+CONTEXT_MD = ROOT / "CONTEXT.md"
+STATS_BEGIN = "<!-- worklist:stats:begin 由 tools/worklist.py render 產生，不要手改 -->"
+STATS_END = "<!-- worklist:stats:end -->"
+
 # 掃得動的副檔名。二進位與素材不看。
 SCAN_SUFFIXES = {".go", ".py", ".sh", ".md", ".json", ".txt", ".work", ".mod"}
 
@@ -214,7 +218,17 @@ def cmd_verify(_args) -> int:
         print("★ 下列已完成項的訊號不見了，可能被改回去了：")
         for ident, why in regressed:
             print(f"  - {ident}：{why}")
-    return 1 if (stale or regressed) else 0
+
+    desync = out_of_sync(data)
+    if desync:
+        print()
+        print("★ 下列產生出來的內容跟 docs/worklist.json 不同步，跑一次 render：")
+        for d_ in desync:
+            print(f"  - {d_}")
+    else:
+        print()
+        print("WORKLIST.md 與 CONTEXT.md 的產生區塊都與 JSON 同步。")
+    return 1 if (stale or regressed or desync) else 0
 
 
 def render_markdown(data: dict) -> str:
@@ -271,6 +285,63 @@ def render_markdown(data: dict) -> str:
     return "\n".join(lines)
 
 
+def stats(data: dict) -> dict:
+    """把清單的數字算出來。
+
+    這些數字手寫過一次就會過期——`CONTEXT.md` 的「45 條未完成」在五條 `- [~]`
+    併進來之後就不對了，而沒有任何東西會發現。算出來的數字不會。
+    """
+    items = data["items"]
+    done = [i for i in items if i.get("status") == "done"]
+    open_ = [i for i in items if i.get("status") != "done"]
+    manual = [i for i in open_ if i["verify"]["kind"] == "manual"]
+    kinds = {}
+    for i in open_:
+        kinds[i["verify"]["kind"]] = kinds.get(i["verify"]["kind"], 0) + 1
+    return {"total": len(items), "open": len(open_), "done": len(done),
+            "manual": len(manual), "kinds": kinds}
+
+
+def render_stats(data: dict) -> str:
+    st = stats(data)
+    kinds = "、".join(f"`{k}` {n}" for k, n in sorted(st["kinds"].items(), key=lambda x: -x[1]))
+    return "\n".join([
+        STATS_BEGIN,
+        f'- **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。',
+        f'  核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的',
+        f'  那一節與這幾行數字都由 `render` 產生。',
+        f'- 目前 **{st["open"]} 條未完成**（{st["manual"]} 條沒有機器訊號、標 `manual`），',
+        f'  另有 {st["done"]} 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。',
+        f'  未完成項的 verify 種類：{kinds}。',
+        STATS_END,
+    ])
+
+
+def out_of_sync(data: dict) -> list:
+    """回報哪些產生出來的區塊與 `docs/worklist.json` 不同步。
+
+    光是「數字由 script 產生」還不夠：改了 JSON 卻忘記跑 `render`，檔案裡留下的
+    仍然是舊數字，而且看起來一樣理直氣壯。所以 `verify` 每次順便比一次。
+    """
+    stale = []
+    md = WORKLIST_MD.read_text(encoding="utf-8")
+    if BEGIN in md and END in md:
+        current = BEGIN + md.split(BEGIN, 1)[1].split(END, 1)[0] + END
+        if current.strip() != render_markdown(data).strip():
+            stale.append("WORKLIST.md 的未完成項一節")
+    else:
+        stale.append("WORKLIST.md 沒有 worklist:begin 標記")
+
+    ctx = CONTEXT_MD.read_text(encoding="utf-8")
+    if STATS_BEGIN in ctx and STATS_END in ctx:
+        current = STATS_BEGIN + ctx.split(STATS_BEGIN, 1)[1].split(STATS_END, 1)[0] + STATS_END
+        if current.strip() != render_stats(data).strip():
+            stale.append("CONTEXT.md 的統計區塊")
+    else:
+        stale.append("CONTEXT.md 沒有 worklist:stats 標記")
+    return stale
+
+
 def cmd_render(args) -> int:
     data = load()
     problems = check_schema(data)
@@ -294,6 +365,16 @@ def cmd_render(args) -> int:
         text = text.rstrip("\n") + "\n\n" + block + "\n"
     WORKLIST_MD.write_text(text, encoding="utf-8")
     print(f"已回寫 {WORKLIST_MD.relative_to(ROOT)}")
+
+    # CONTEXT.md 的那幾個數字同一份來源；手寫過一次就會過期。
+    ctx = CONTEXT_MD.read_text(encoding="utf-8")
+    if STATS_BEGIN in ctx and STATS_END in ctx:
+        head, rest = ctx.split(STATS_BEGIN, 1)
+        _, tail = rest.split(STATS_END, 1)
+        CONTEXT_MD.write_text(head + render_stats(data) + tail, encoding="utf-8")
+        print(f"已回寫 {CONTEXT_MD.relative_to(ROOT)} 的統計區塊")
+    else:
+        print(f"⚠ {CONTEXT_MD.relative_to(ROOT)} 沒有 worklist:stats 標記，數字沒同步")
     return 0
 
 
@@ -375,6 +456,24 @@ def cmd_selftest(_args) -> int:
 
         shutil.rmtree(sandbox, ignore_errors=True)
 
+    # --- 統計數字要跟著資料走，不是寫死 -----------------------------------
+    probe = {"layers": {"a": "A"}, "items": [
+        {"id": "x", "layer": "a", "title": "t", "body": "b", "acceptance": "a",
+         "verify": {"kind": "manual", "note": "n"}},
+        {"id": "y", "layer": "a", "title": "t", "body": "b", "acceptance": "a",
+         "status": "done", "verify": {"kind": "manual", "note": "n"}},
+    ]}
+    st = stats(probe)
+    if (st["total"], st["open"], st["done"], st["manual"]) != (2, 1, 1, 1):
+        failures.append(f"stats：算錯了 {st}")
+    block = render_stats(probe)
+    if "1 條未完成" not in block or "1 條已核實完成" not in block:
+        failures.append("render_stats：數字沒有進到輸出")
+    probe["items"].append({"id": "z", "layer": "a", "title": "t", "body": "b",
+                           "acceptance": "a", "verify": {"kind": "manual", "note": "n"}})
+    if "2 條未完成" not in render_stats(probe):
+        failures.append("render_stats：加一條之後數字沒有跟著動——那就是寫死的")
+
     # --- schema 檢查自己也要有反例 ---------------------------------------
     bad = {"layers": {"a": "A"}, "items": [{"id": "x", "layer": "b", "verify": {"kind": "nope"}}]}
     if not check_schema(bad):
@@ -383,6 +482,16 @@ def cmd_selftest(_args) -> int:
     real = load()
     if check_schema(real):
         failures.append("check_schema：docs/worklist.json 自己沒過")
+
+    # 同步檢查：現況要是同步的；資料改一條之後必須報不同步。
+    if out_of_sync(real):
+        failures.append("out_of_sync：現在應該是同步的")
+    moved = json.loads(json.dumps(real))
+    moved["items"].append({"id": "selftest-probe", "layer": next(iter(moved["layers"])),
+                           "title": "只在記憶體裡", "body": "b", "acceptance": "a",
+                           "verify": {"kind": "manual", "note": "n"}})
+    if not out_of_sync(moved):
+        failures.append("out_of_sync：資料多一條之後竟然還說同步——那它沒有真的在比")
 
     if failures:
         print("正反對照失敗：")
