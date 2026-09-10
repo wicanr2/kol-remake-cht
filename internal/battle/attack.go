@@ -90,10 +90,19 @@ type Weapon struct {
 // 十格的順序是 HEAD／TORSO／LEGS／BODY／HANDS／FEET／SHIELD／NECK／RING／BELT。
 var UnarmedSlots = [6]int{0, 5, 6, 0, 4, 1}
 
-// AttackWeapon 是這一手真正用到的那件東西：徒手拿的是對應那一格穿戴品，
-// 其餘拿手上那件（`sub_26AC2` 依指令碼挑 `var_4`）。**傷害骰、種類與重量都從它來**。
+// AttackWeapon 是這一手真正用到的那件東西（`sub_26AC2` 依指令碼挑 `var_4`）。
+// **傷害骰、種類與重量都從它來**。
+//
+// 兩側不一樣，而且只有隊員那一側會挑穿戴品：
+//
+//   - 隊員徒手拿對應那一格穿戴品（`UnarmedSlots`，RE-131）：踢用 FEET、盾擊用
+//     SHIELD、頭槌用 HEAD、拳用 HANDS。位址是角色記錄 `+0x100 + [0x0FD2 + 選項]`。
+//   - **怪物徒手仍然拿手上那件**——四式的 `var_4` 一律指向本體記錄 `+0x20`，
+//     把那一格整格清零（真正的赤手空拳）也不改變。2026-09-10 以讀取監看證實，
+//     同一份探針對隊員跑正對照，四式各自落在四個不同的槽，所以這不是探針沒
+//     走進徒手分支（`docs/re/20260910-monster-unarmed-slots.md`）。
 func (a Actor) AttackWeapon(style int) Weapon {
-	if a.Command != CmdUnarmed {
+	if a.Command != CmdUnarmed || a.Side == SideMonster {
 		return a.Weapon
 	}
 	if style < 0 || style >= len(a.UnarmedWeapon) {

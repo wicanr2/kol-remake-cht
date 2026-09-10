@@ -114,12 +114,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
-- **monster-unarmed-weapon-source** — 怪物徒手那幾手：remake 拿穿戴品，原版拿武器
-  2026-09-10 以讀取監看證實（docs/re/20260910-monster-unarmed-slots.md）：原版 `sub_26AC2` 對怪物的徒手四式，`var_4` 一律指向本體記錄 +0x20（武器），把武器那一格整格清零也不改變；同一套設定對隊員跑正對照，四式各自落在 +0x100 起的四個穿戴槽，與 RE-131 逐項相符——所以怪物那一側是真的沒有「徒手取穿戴品」這個機制。而 remake 的 `NewQuest` 目前填 `UnarmedWeapon: unarmedFrom(monster.Worn)`，等於讓怪物的徒手四式各拿一件穿戴品去算傷害骰。這是玩家看得見的差異。`monsters.json` 的七格穿戴欄本身沒錯——護甲三件與盾牌照常使用，不成立的只有「怪物徒手時會去取那幾格」這個推論。
-  卡在：會改變戰鬥數值，依專案規則要使用者決定怎麼處置
-  完成條件：處置方式定案並實作，怪物徒手那幾手的傷害骰與原版一致或有明示的差異理由。
-  核實：`internal/battle/state.go` 找得到 `UnarmedWeapon: unarmedFrom\(monster\.Worn\)` 就是還沒完
-
 
 ### 接了但沒驗過
 
@@ -313,6 +307,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **party-limit-six-boundary** — 隊伍上限六人的邊界：2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。
 - **extraction-docker-image** — 先辨識既有專用 Docker image；缺件才建立有鎖版來源的 Dockerfile：2026-09-10 核實：既有共用映像 eob-remake-go:1.26.7-ebiten2.9.9-audio 已由 tools/go_docker.sh 與 tools/run_python_tool.sh 使用（只讀不改）；缺件的兩個已建 docker/Dockerfile.osxcross-go 與 docker/Dockerfile.package。
 - **wilderness-cloud-animation** — 野外的雲層動畫：2026-09-10 核實：已接進畫面。`internal/world/weather.go:69` 的 Composite 做旋轉，`internal/ui/world.go:45` 的 drawWeather 畫進世界畫面（144／217 兩處呼叫 CompositeGroup(s.Group, s.Phase)），`cmd/kol/main.go:937` 遞增 Phase。G02 那一條已記為做完（SPEC-026 六組天候、128 像素捲雲與正式節拍，正常出城 GUI 只在天空區改變），只有這一條沒回頭改。雨雪的正常 GUI 與原版同相位另見 weather-animation-and-speed。
+- **monster-unarmed-weapon-source** — 怪物徒手那幾手改成照原版：拿手上那件：2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。
 
 <!-- worklist:end -->
 

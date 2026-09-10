@@ -2,23 +2,31 @@ package battle
 
 import "testing"
 
-// 怪物的徒手四式也拿穿戴欄那四格（RE-131）。
-func TestMonsterUnarmedFromWorn(t *testing.T) {
-	worn := make([]*Item, 7)
-	worn[0] = &Item{Name: "Conical Helm", Class: 4, Encumbrance: 9}
-	worn[4] = &Item{Name: "Self Bow", Class: 0x12, Encumbrance: 20}
-	worn[5] = &Item{Name: "Short Spear", Class: 8, Encumbrance: 30}
-	got := unarmedFrom(worn)
-	// 式 3 是頭槌 → 槽 0；式 4 是拳 → 槽 4；式 1 是踢 → 槽 5。
-	if got[3].Kind != 4 || got[4].Kind != 0x12 || got[1].Kind != 8 {
-		t.Fatalf("四式拿到 %+v", got)
+// 怪物徒手仍然拿手上那件，不挑穿戴品。
+//
+// 這一支取代了早先的 `TestMonsterUnarmedFromWorn`——那一支釘的是「怪物的徒手
+// 四式也拿穿戴欄那四格」，2026-09-10 的讀取監看推翻了它：四式的 `var_4` 一律
+// 指向本體記錄 `+0x20`（`docs/re/20260910-monster-unarmed-slots.md`）。
+func TestMonsterUnarmedUsesHeldWeapon(t *testing.T) {
+	club := Weapon{Kind: 60, Count: 2, Sides: 5}
+	a := Actor{Side: SideMonster, Command: CmdUnarmed, Weapon: club}
+	// 就算穿戴品那幾格有東西，四式也不看它們。
+	a.UnarmedWeapon[1] = Weapon{Kind: 8, Count: 1, Sides: 3}
+	a.UnarmedWeapon[3] = Weapon{Kind: 4, Count: 1, Sides: 3}
+	for style := 0; style < len(a.UnarmedWeapon); style++ {
+		if got := a.AttackWeapon(style); got != club {
+			t.Fatalf("怪物第 %d 式拿到 %+v，該是手上那件 %+v", style, got, club)
+		}
 	}
-	// 式 2 是盾擊 → 槽 6，這一份沒有，留空。
-	if got[2].Kind != 0 {
-		t.Fatalf("空格該留空，得到 %+v", got[2])
+	// 反面：同一份設定換成隊員，就會挑穿戴品——判準確實分得出兩側。
+	a.Side = SideParty
+	if got := a.AttackWeapon(3); got.Kind != 4 {
+		t.Fatalf("隊員第 3 式該拿穿戴品，得到 %+v", got)
 	}
-	// 短的切片不會越界。
-	if out := unarmedFrom(nil); out[3].Kind != 0 {
-		t.Fatalf("空的穿戴欄該回全空，得到 %+v", out)
+	// 空手的怪物（本體記錄 `+0x20` 全零）拿到的就是空武器，不會退回穿戴品。
+	b := Actor{Side: SideMonster, Command: CmdUnarmed}
+	b.UnarmedWeapon[3] = Weapon{Kind: 4, Count: 1, Sides: 3}
+	if got := b.AttackWeapon(3); got.Kind != 0 || got.Count != 0 {
+		t.Fatalf("空手怪物該拿到空武器，得到 %+v", got)
 	}
 }

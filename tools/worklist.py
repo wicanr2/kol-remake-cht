@@ -160,6 +160,12 @@ def check_schema(data: dict) -> list:
                 problems.append(f"{ident}：json_len 要有 path、field 與 max")
         elif kind == "manual" and not v.get("note"):
             problems.append(f"{ident}：manual 要在 note 寫明將來接上時該綁什麼")
+        # 已完成項跑的是回歸檢查（訊號還在＝仍然完成），而 `present` 的語意是
+        # 「找得到＝仍未完成」——兩者剛好相反，用上去每一輪都會誤報回歸。
+        if item.get("status") == "done" and kind == "present":
+            problems.append(
+                f"{ident}：已完成項不能用 present（語意相反，會每輪誤報回歸）；"
+                "改用 absent 或 required_in_all，讓「東西還在」等於「仍然完成」")
     return problems
 
 
@@ -478,6 +484,17 @@ def cmd_selftest(_args) -> int:
     bad = {"layers": {"a": "A"}, "items": [{"id": "x", "layer": "b", "verify": {"kind": "nope"}}]}
     if not check_schema(bad):
         failures.append("check_schema：壞掉的 schema 竟然通過")
+
+    # done ＋ present 的語意是反的，schema 要擋下來。
+    flipped = {"layers": {"a": "A"}, "items": [{
+        "id": "x", "layer": "a", "title": "t", "body": "b", "acceptance": "a",
+        "status": "done",
+        "verify": {"kind": "present", "paths": ["x"], "pattern": "y"}}]}
+    if not any("語意相反" in m for m in check_schema(flipped)):
+        failures.append("check_schema：已完成項用 present 竟然過了")
+    flipped["items"][0]["verify"]["kind"] = "absent"
+    if check_schema(flipped):
+        failures.append("check_schema：已完成項用 absent 應該要過")
 
     real = load()
     if check_schema(real):

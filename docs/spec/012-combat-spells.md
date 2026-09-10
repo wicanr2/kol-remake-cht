@@ -146,12 +146,14 @@ The Hostel 賣的第一筆 Tyanalon（340）、Kelnalon（340）就是，巫師�
 `hostel6.json`（六人隊、2000 金幣、城 7 入城點 7）走到區域上緣 (59,16) 就出得了城，
 種子 11 在野外第 14 步遇到 GHOUL——**缺的是把戰鬥那一段的按鍵序列編出來**。
 
-## 8b. 徒手武器範圍訂正
+## 8b. 徒手武器範圍
 
-2026-09-08 撤銷早期對怪物徒手武器的排除：SPEC-008 後續 RE-131 已關閉怪物
-穿戴欄 `+0x30` 與隊員穿戴欄的對應。兩側由 `UnarmedSlots`／`AttackWeapon` 選
-FEET／SHIELD／HEAD／HANDS，傷害骰與速度項讀對應物品；不是只完成隊員一側。
-這項訂正不把尚未完成的選部位正常 GUI 收據算成通過。
+**隊員**徒手由 `UnarmedSlots`／`AttackWeapon` 選 FEET／SHIELD／HEAD／HANDS，傷害骰
+與速度項讀對應那一件穿戴品（RE-131）。**怪物不在此列**：四式一律用本體記錄 `+0x20`
+的武器，見 SPEC-008 對應段落與
+[那幾格根本沒被讀](../re/20260910-monster-unarmed-slots.md)。
+
+本節不把尚未完成的選部位正常 GUI 收據算成通過。
 
 已經做完的：法術從角色記錄抽出來一路接到 `battle.Member`，指令列在「有法術而且手上
 空著」時放出那一格，規劃段走「Which Spell?」→「Select Affect」→ 選目標格三步，

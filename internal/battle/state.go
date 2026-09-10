@@ -106,10 +106,10 @@ type Member struct {
 // State 是一場戰鬥。
 type State struct {
 	rangedPending bool
-	Site   *Site
-	Stage  Stage
-	Actors []Actor
-	Field  *Field
+	Site          *Site
+	Stage         Stage
+	Actors        []Actor
+	Field         *Field
 	// Party 是隊伍那一側的顯示資料，索引同 Actors 的前六個位置。
 	Party []Member
 	// Cursor 是目前輪到誰：Round.Order 走到的那一名的索引。
@@ -252,10 +252,11 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			ShieldGrade:  shieldGrade, Unarmed: monster.Weapon == nil,
 			Threshold: Threshold(monster.Size, monster.Health),
 			Stamina:   monster.Strength + monster.Health,
-			Shatters:  monster.Shatters,
-			// 徒手四式拿的是穿戴欄那四格（`UnarmedSlots`）——怪物的穿戴欄從
-			// 記錄 `+0x30` 起，與隊員那一側同一張表、同一個意思（RE-131）。
-			UnarmedWeapon: unarmedFrom(monster.Worn)}
+			Shatters:  monster.Shatters}
+		// 怪物那一側**沒有**徒手取穿戴品這個機制，所以 `UnarmedWeapon` 留空：
+		// 四式的 `var_4` 一律指向本體記錄 `+0x20`（武器），把那一格整格清零也
+		// 不改變（`docs/re/20260910-monster-unarmed-slots.md`）。取用端在
+		// `Actor.AttackWeapon`。
 		s.Actors[slot].SetParts()
 	}
 	for i := PartySlots; i < len(s.Actors); i++ {
@@ -265,18 +266,6 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 	}
 	s.MonsterLevel = site.Level
 	return s
-}
-
-// unarmedFrom 把一份穿戴欄換成徒手四式各自的那一件（`UnarmedSlots`）。
-// 那一格空著就留空的武器——原版讀到的也是一筆全零的記錄。
-func unarmedFrom(worn []*Item) [len(UnarmedSlots)]Weapon {
-	var out [len(UnarmedSlots)]Weapon
-	for style, pos := range UnarmedSlots {
-		if pos < len(worn) && worn[pos] != nil {
-			out[style] = worn[pos].CombatWeapon()
-		}
-	}
-	return out
 }
 
 // MonsterCombatLevel 把怪物等級換成參戰者記錄那一格的等級（`0x1EE12`）：
