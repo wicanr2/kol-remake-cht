@@ -123,12 +123,12 @@
     {
       "id": "battle-normal-seed-alignment",
       "layer": "verification",
-      "title": "原版戰鬥同狀態：規劃與攻擊結算比較",
-      "body": "兩名隊員與 SLEDGE 共 60 個初始欄位通過（battle-party-state-20260908.md）。**地形已接進受控情境**（4096 格逐格傳遞，兩份獨立原版資料交叉驗證）——battle-terrain-snapshot-load-20260910.md。**怪物裝備能力也比完了**：128 byte 就是完整一筆，三方比對 20 項通過——monster-equipment-20260910.md。**規劃入口之後的狀態拿到了**（2026-09-11）：正常路徑修復後六步逐鍵的 +0x22／+0x23／+0x25 都在 workplace/battle-planning-20260911/battle-planning.json，同一場與 9/8 兩份收據逐位元組相同——normal-path-planning-entry-20260911.md。剩下的是把那組按鍵與 remake 的規劃序列對齊，再送結算命令。",
-      "acceptance": "同一 seed、同一初始狀態下，remake 與原版的規劃順序、命令與結算逐項一致。",
+      "title": "原版戰鬥同狀態：攻擊結算比較",
+      "body": "兩名隊員與 SLEDGE 共 60 個初始欄位、4096 格地形、SLEDGE 本體記錄 20 項都通過。**規劃段也比完了**（2026-09-11）：主指令列 5 格、第 1 格 0x29，走同一組位置之後三個決策值 Command=0x29／Style=1／Guard=2 與原版逐項相同，正反對照過——planning-parity-20260911.md，跑法 tools/run_original_parity_tests.sh。剩下的是**攻擊結算**：原版要在規劃寫回之後繼續跑到結算，remake 走同一組輸入比傷害與狀態。",
+      "acceptance": "同一 seed、同一初始狀態下，remake 與原版的攻擊結算逐項一致。",
       "verify": {
         "kind": "manual",
-        "note": "規劃與結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真——兩個方向都是錯的（2026-09-10 試過一次）。規劃／結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。"
+        "note": "結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真。規劃那一半已由 TestOriginalNormalPlanning 蓋住；結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。"
       }
     },
     {
@@ -1168,6 +1168,21 @@
         ],
         "pattern": "還沒定案",
         "note": "收據的自承，定案時會改寫。"
+      }
+    },
+    {
+      "id": "planning-other-commands-unwalked",
+      "layer": "verification",
+      "title": "規劃段只走過徒手那一條",
+      "body": "2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。",
+      "acceptance": "其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/verification/planning-parity-20260911.md"
+        ],
+        "pattern": "沒有逐格走過",
+        "note": "收據的自承，走完時會改寫。"
       }
     }
   ],

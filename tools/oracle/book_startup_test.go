@@ -693,35 +693,164 @@ func probeNormalPlanning(t *testing.T, o *oracle.Oracle) {
 		commandOff  = 0x25
 		currentSlot = 0x9E5A
 	)
-	type snap struct {
-		Step    int    `json:"step"`
-		Key     string `json:"key"`
-		Current int    `json:"current_actor"`
-		Planned int    `json:"planned_flag"`
-		Option  int    `json:"attack_option"`
-		Command int    `json:"command_code"`
-		IP      string `json:"ip"`
-		Frame   string `json:"frame,omitempty"`
+	// 決策四欄依 SPEC-010：+0x22 決定完成、+0x23 攻擊選項、+0x24 防禦選項、
+	// +0x25 指令碼（圖號）；方向 +0x28 由選目標格自己寫。
+	const defenceOff = 0x24
+	const facingOff = 0x28
+	// 掃**全部**參戰槽，不要拿 DS:0x9E5A 當索引。那個值在規劃期間會跳
+	// （2026-09-11 量到 1→0→0→5→5→0→1），語意還沒定案；拿它索引到的可能是
+	// 別人的記錄，於是「誰的旗標立起來了」會看成另一個人的。
+	const slotCount = 18
+	type actorSnap struct {
+		Slot    int `json:"slot"`
+		Planned int `json:"planned_flag"`
+		Option  int `json:"attack_option"`
+		Defence int `json:"defence_option"`
+		Command int `json:"command_code"`
+		Facing  int `json:"facing"`
 	}
-	read := func(step int, key string) snap {
-		cur := int(o.Word(o.DS(currentSlot)))
-		rec := uint16(actorBase + actorStride*cur)
-		return snap{Step: step, Key: key, Current: cur,
+	type snap struct {
+		Step    int         `json:"step"`
+		Key     string      `json:"key"`
+		Current int         `json:"current_actor_word"`
+		Actors  []actorSnap `json:"actors"`
+		IP      string      `json:"ip"`
+		Frame   string      `json:"frame,omitempty"`
+		// Changed 是這一步相對上一步「畫面哪一塊變了」的外接矩形。白框搬一格
+		// 只會動兩小塊，用它就量得出圖示列的格距，不必解 PNG。
+		Changed string `json:"changed_box,omitempty"`
+		// Icons 是圖示列上有內容的格數，Frame 是白框停在第幾格——兩個合起來說明
+		// 「現在在哪一層選單、選到哪」。
+		Icons     int `json:"icon_slots"`
+		FrameSlot int `json:"framed_slot"`
+	}
+	// iconBar 量圖示列：起點 X=32、格距 32、Y 170..191（2026-09-11 由白框逐格
+	// 移動的差異矩形量得）。回傳有內容的格數與白框停在第幾格（-1 表示沒找到）。
+	// 有了這兩個數，log 就看得出「現在在哪一層選單、白框在哪」，不必每步開圖。
+	const (
+		barX0, barStep = 32, 32
+		barY0, barY1   = 170, 191
+		barSlots       = 8
+	)
+	iconBar := func() (int, int) {
+		w, _, rgb := o.ScreenRGB()
+		at := func(x, y int) (uint8, uint8, uint8) {
+			i := (y*w + x) * 3
+			if i+2 >= len(rgb) {
+				return 0, 0, 0
+			}
+			return rgb[i], rgb[i+1], rgb[i+2]
+		}
+		filled, frame, bestWhite := 0, -1, 0
+		for g := 0; g < barSlots; g++ {
+			x0 := barX0 + g*barStep
+			colours := map[uint32]bool{}
+			white := 0
+			for y := barY0; y <= barY1; y++ {
+				for x := x0; x < x0+barStep; x++ {
+					r, gg, b := at(x, y)
+					colours[uint32(r)<<16|uint32(gg)<<8|uint32(b)] = true
+					if r > 200 && gg > 200 && b > 200 {
+						white++
+					}
+				}
+			}
+			// 空格只有圖示列的底色；有圖示的格子顏色種類明顯更多。
+			if len(colours) > 3 {
+				filled = g + 1
+			}
+			// 白框是整格外圍一圈亮白。取白像素**最多**的那一格，不要取第一個超過
+			// 門檻的——圖案本身也可能有大片白（主指令列第一格就是），那會讓白框
+			// 看起來永遠停在第 0 格。
+			if white > 60 && white > bestWhite {
+				bestWhite, frame = white, g
+			}
+		}
+		return filled, frame
+	}
+
+	// screenBox 回傳兩張畫面差異的外接矩形。
+	prevRGB := func() (int, int, []uint8) { w, h, rgb := o.ScreenRGB(); return w, h, rgb }
+	lastW, lastH, last := prevRGB()
+	_ = lastH
+	changedBox := func() string {
+		w, h, cur := prevRGB()
+		defer func() { lastW, lastH, last = w, h, cur }()
+		if w != lastW || len(cur) != len(last) {
+			return "（畫面尺寸變了）"
+		}
+		minX, minY, maxX, maxY := w, h, -1, -1
+		for i := 0; i+2 < len(cur) && i+2 < len(last); i += 3 {
+			if cur[i] == last[i] && cur[i+1] == last[i+1] && cur[i+2] == last[i+2] {
+				continue
+			}
+			px, py := (i/3)%w, (i/3)/w
+			if px < minX {
+				minX = px
+			}
+			if px > maxX {
+				maxX = px
+			}
+			if py < minY {
+				minY = py
+			}
+			if py > maxY {
+				maxY = py
+			}
+		}
+		if maxX < 0 {
+			return "畫面沒變"
+		}
+		return fmt.Sprintf("X %d..%d Y %d..%d", minX, maxX, minY, maxY)
+	}
+	readActor := func(slot int) actorSnap {
+		rec := uint16(actorBase + actorStride*slot)
+		return actorSnap{Slot: slot,
 			Planned: int(o.Byte(o.DS(rec + plannedOff))),
 			Option:  int(o.Byte(o.DS(rec + optionOff))),
+			Defence: int(o.Byte(o.DS(rec + defenceOff))),
 			Command: int(o.Byte(o.DS(rec + commandOff))),
-			IP:      o.IP().String()}
+			Facing:  int(o.Byte(o.DS(rec + facingOff)))}
+	}
+	read := func(step int, key string) snap {
+		icons, framed := iconBar()
+		st := snap{Step: step, Key: key, Icons: icons, FrameSlot: framed,
+			Current: int(o.Word(o.DS(currentSlot))), IP: o.IP().String()}
+		for slot := 0; slot < slotCount; slot++ {
+			st.Actors = append(st.Actors, readActor(slot))
+		}
+		return st
+	}
+	// 只把參戰者那幾槽印出來，其餘留在 JSON 裡。
+	brief := func(st snap) string {
+		var b strings.Builder
+		for _, a := range st.Actors {
+			if a.Planned == 0 && a.Option == 0 && a.Defence == 0 && a.Command == 0 {
+				continue
+			}
+			fmt.Fprintf(&b, " [槽%d +22=%d +23=%d +24=%d +25=%#02x 面向%d]",
+				a.Slot, a.Planned, a.Option, a.Defence, a.Command, a.Facing)
+		}
+		if b.Len() == 0 {
+			return " （沒有任何一槽的決策欄非零）"
+		}
+		return b.String()
 	}
 
 	var out []snap
 	first := read(-1, "(進場後，未送鍵)")
 	out = append(out, first)
-	t.Logf("規劃入口：目前第 %d 名，+0x22=%d +0x23=%d +0x25=%#02x",
-		first.Current, first.Planned, first.Option, first.Command)
+	t.Logf("規劃入口：圖示列%d格 白框在第%d格 DS:9E5A=%d%s",
+		first.Icons, first.FrameSlot, first.Current, brief(first))
 
-	// 送鍵的順序刻意保守：先看單獨一個 Return 會不會就決定一個指令，
-	// 再看方向鍵與 `<`／`>` 有沒有搬動選擇。每一步都留畫面。
-	for i, key := range []string{"Return", "Right", "Return", ".", "Return", "Return"} {
+	// 序列可從 `KOL_BOOK_PLAN_KEYS` 給（逗號分隔），觀察時不必改程式重編。
+	// 預設那組刻意保守：先看單獨一個 Return 會不會就決定一個指令，再看方向鍵與
+	// `<`／`>` 有沒有搬動選擇。每一步都留畫面。
+	seq := []string{"Return", "Right", "Return", ".", "Return", "Return"}
+	if raw := os.Getenv("KOL_BOOK_PLAN_KEYS"); raw != "" {
+		seq = strings.Split(raw, ",")
+	}
+	for i, key := range seq {
 		// `.`／`,` 這種字元鍵沒有具名掃描碼，要走 TypeKeys；SendKeys 只認具名鍵。
 		var err error
 		if len([]rune(key)) == 1 {
@@ -748,15 +877,16 @@ func probeNormalPlanning(t *testing.T, o *oracle.Oracle) {
 		captureBook(t, o, name)
 		st := read(i, key)
 		st.Frame = name
+		st.Changed = changedBox()
 		out = append(out, st)
-		t.Logf("規劃 step=%d key=%-8s 目前第 %d 名 +0x22=%d +0x23=%d +0x25=%#02x IP=%s",
-			i, key, st.Current, st.Planned, st.Option, st.Command, st.IP)
+		t.Logf("規劃 step=%d key=%-8s 圖示列%d格 白框在第%d格 DS:9E5A=%d IP=%s%s",
+			i, key, st.Icons, st.FrameSlot, st.Current, st.IP, brief(st))
 	}
 
 	data := map[string]any{
 		"schema": "kol-battle-planning-probe-v1", "source": "dosgolem-normal-player-path",
 		"alignment_seed": 1,
-		"evidence":       "SPEC-010 的 +0x22／+0x23／+0x25；DS 相對位址",
+		"evidence":       "SPEC-010 的 +0x22／+0x23／+0x24／+0x25／+0x28；DS 相對位址；逐槽全掃",
 		"actor_ds_base":  actorBase, "actor_stride": actorStride,
 		"dgroup_segment": o.DGroupSeg(),
 		"steps":          out,

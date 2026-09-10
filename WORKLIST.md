@@ -162,10 +162,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：一整場戰鬥從進場到結算、保存都與原版同狀態，走的是正常玩家路徑。
   核實：要人判——常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。
 
-- **battle-normal-seed-alignment** — 原版戰鬥同狀態：規劃與攻擊結算比較
-  兩名隊員與 SLEDGE 共 60 個初始欄位通過（battle-party-state-20260908.md）。**地形已接進受控情境**（4096 格逐格傳遞，兩份獨立原版資料交叉驗證）——battle-terrain-snapshot-load-20260910.md。**怪物裝備能力也比完了**：128 byte 就是完整一筆，三方比對 20 項通過——monster-equipment-20260910.md。**規劃入口之後的狀態拿到了**（2026-09-11）：正常路徑修復後六步逐鍵的 +0x22／+0x23／+0x25 都在 workplace/battle-planning-20260911/battle-planning.json，同一場與 9/8 兩份收據逐位元組相同——normal-path-planning-entry-20260911.md。剩下的是把那組按鍵與 remake 的規劃序列對齊，再送結算命令。
-  完成條件：同一 seed、同一初始狀態下，remake 與原版的規劃順序、命令與結算逐項一致。
-  核實：要人判——規劃與結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真——兩個方向都是錯的（2026-09-10 試過一次）。規劃／結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。
+- **battle-normal-seed-alignment** — 原版戰鬥同狀態：攻擊結算比較
+  兩名隊員與 SLEDGE 共 60 個初始欄位、4096 格地形、SLEDGE 本體記錄 20 項都通過。**規劃段也比完了**（2026-09-11）：主指令列 5 格、第 1 格 0x29，走同一組位置之後三個決策值 Command=0x29／Style=1／Guard=2 與原版逐項相同，正反對照過——planning-parity-20260911.md，跑法 tools/run_original_parity_tests.sh。剩下的是**攻擊結算**：原版要在規劃寫回之後繼續跑到結算，remake 走同一組輸入比傷害與狀態。
+  完成條件：同一 seed、同一初始狀態下，remake 與原版的攻擊結算逐項一致。
+  核實：要人判——結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真。規劃那一半已由 TestOriginalNormalPlanning 蓋住；結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。
 
 - **inn-farewell-diff-review** — 審查原版離店告別訊息與確認流程
   SPEC-024 與告別確認已實作，dosgolem 單人／多人正常離店與繁中 GUI 已抽驗，但不是全城逐店文字驗收。要補與 remake 直接離店的玩家可見差異。
@@ -231,6 +231,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   2026-09-11 的六步逐鍵觀察裡，DS:0x9E5A 讀到 1→0→0→5→5→0→1。跳到 5 的那兩步同時也是 +0x22 立起來的那兩步，兩者的關係還沒解。remake 目前不依賴這個位址，觀察資料在 workplace/battle-planning-20260911/battle-planning.json。
   完成條件：查明 DS:0x9E5A 在規劃期間代表什麼，或確認 remake 不需要它。
   核實：`docs/verification/normal-path-planning-entry-20260911.md` 找得到 `還沒定案` 就是還沒完
+
+- **planning-other-commands-unwalked** — 規劃段只走過徒手那一條
+  2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。
+  完成條件：其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。
+  核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
 
 
 ### 素材抽取與音訊

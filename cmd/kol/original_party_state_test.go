@@ -107,5 +107,5 @@ func TestOriginalNormalPartyState(t *testing.T) {
 		}
 	}
 	t.Logf("兩名隊員與 SLEDGE 共比較 %d 個初始欄位。地形見 TestOriginalNormalBattleTerrain、"+
-		"怪物裝備能力見 TestOriginalNormalMonsterEquipment；規劃與攻擊結算仍未涵蓋", checks)
+		"怪物裝備能力見 TestOriginalNormalMonsterEquipment；規劃見 TestOriginalNormalPlanning；攻擊結算仍未涵蓋", checks)
 }
