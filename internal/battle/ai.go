@@ -509,12 +509,9 @@ const (
 
 // enemyStrike 填貼近打那一手的攻擊選項與防禦選項（`0x23CD6`…`0x23D8B`）。
 //
-// `prev` 是進來時的攻擊選項：環 0 那條是 `EnemyNearStyle`，反制掃描那條是從對手
-// 抄來的（還沒實作）。**`+0x24` 這一格兩種用途**——填進去的是「命中部位 ＋1」，
-// 而同一格在這一名被攻擊時就是它的招架姿態（RE-081／RE-105）。
-//
-// **與原版的一個差別**：原版在移動段繞完八個方向都站不下時會把 `word_34A08` 加一，
-// 之後攻擊式就固定是 1；這一版沒有那條重試路徑，所以攻擊式一律抽。
+// `prev` 是進來時的攻擊選項：環 0 那條是 `EnemyNearStyle`，反制掃描那條是
+// `counterScan` 從對手抄來的那一格。**`+0x24` 這一格兩種用途**——填進去的是
+// 「命中部位 ＋1」，而同一格在這一名被攻擊時就是它的招架姿態（RE-081／RE-105）。
 func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
 	a := &s.Actors[i]
 	d.Guard = EnemyNearGuard

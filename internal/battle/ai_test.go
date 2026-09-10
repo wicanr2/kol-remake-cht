@@ -463,3 +463,58 @@ func TestEnemyPickUpFillsTheHand(t *testing.T) {
 		t.Fatalf("有武器之後應該打人，得到 %#x", d.Command)
 	}
 }
+
+// 這一次規劃裡被困住過（`word_34A08` 非零）就不抽攻擊式，固定第 1 式
+// （`0x23CD6` 先比 `word_34A08`，RE-117）。
+func TestEnemyStrikeFixesStyleAfterBeingStuck(t *testing.T) {
+	newState := func() *State {
+		return &State{Actors: []Actor{
+			{Side: SideParty, X: 4, Y: 5, Head: 10, Chest: 10, Threshold: 100},
+			{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+				RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+				FleeAt: 65, FleeRecover: 35},
+		}}
+	}
+	// 困住過：第 1 式，而且 style == 1 那一條收尾把防禦選項定成 2。
+	stuck := newState()
+	stuck.Actors[1].Stuck = 1
+	var d EnemyDecision
+	stuck.enemyStrike(&d, 1, 0, EnemyNearStyle, &fixedRand{values: []int{3}})
+	if d.Style != 1 {
+		t.Fatalf("被困住過該固定第 1 式，得到 %d", d.Style)
+	}
+	if d.Guard != 2 {
+		t.Fatalf("第 1 式的防禦選項該是 2，得到 %d", d.Guard)
+	}
+	// 反面對照：沒被困住過就要真的去抽——同樣的骰子給出不一樣的攻擊式，
+	// 否則上面那個 1 證明不了是 Stuck 造成的。
+	fresh := newState()
+	var free EnemyDecision
+	fresh.enemyStrike(&free, 1, 0, EnemyNearStyle, &fixedRand{values: []int{3}})
+	if free.Style == 1 {
+		t.Fatal("沒被困住過時攻擊式仍是 1，這個測試分不出 Stuck 有沒有作用")
+	}
+}
+
+// 繞不出去的第三條退路：`word_34A08` 加一之後重跑決策樹（`0x23994`，RE-117）。
+func TestEnemyStuckCountsUpAndRetries(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 0, Y: 0, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 4, Y: 4, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 2,
+			FleeAt: 65, FleeRecover: 35},
+	}}
+	// 傷勢還沒到撤退門檻走第一條（原地揮武器），所以先把它推過門檻。
+	// 比例是 `50 × 疲勞 ÷ 耐力`，要 >= FleeAt 65 就得讓疲勞是耐力的 1.3 倍。
+	// 再加上 rand(3) != 1 排掉第二條，才走得到第三條。
+	s.Actors[1].Fatigue, s.Actors[1].Stamina = 130, 100
+	if got := s.Actors[1].FatigueRatio(); got < s.Actors[1].FleeAt {
+		t.Fatalf("這組數值的疲勞比例是 %d，還沒到門檻 %d——測試會走第一條退路",
+			got, s.Actors[1].FleeAt)
+	}
+	before := s.Actors[1].Stuck
+	s.enemyStuck(1, &fixedRand{values: []int{2}})
+	if s.Actors[1].Stuck <= before {
+		t.Fatalf("第三條退路該把 Stuck 加上去，%d → %d", before, s.Actors[1].Stuck)
+	}
+}

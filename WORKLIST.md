@@ -129,11 +129,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：接上並重生那兩條長路徑的收據。
   核實：`internal/battle/ai.go` 找得到 `\*\*解出來了但還沒接上\*\*` 就是還沒完
 
-- **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑
-  兩個已知差異：反制掃描那條的攻擊選項原版是從對手抄來的（remake 還沒實作）；原版在移動段繞完八個方向都站不下時會把 `word_34A08` 加一、之後攻擊式固定是 1，這一版沒有那條重試路徑所以攻擊式一律抽。
-  完成條件：兩條都接上，或明示為刻意差異。
-  核實：`internal/battle/ai.go` 找得到 `抄來的（還沒實作）` 就是還沒完
-
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西
   `sub_289EE(0)`（RE-091）還沒做。戰利品清單本身已完成，缺的是這一段掉落。
   完成條件：掉落接上，正常路徑撿得到並有收據。
@@ -226,11 +221,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   分派表認不得的圖號落 default 收尾時，原版寫進 `+0x25` 的是什麼還沒逐格核對過，所以 remake 記下來不動、不假裝做過。
   完成條件：逐格核對過，或確認 remake 目前的做法與原版等價。
   核實：`internal/battle/planning.go` 找得到 `還沒逐格核對過` 就是還沒完
-
-- **planning-current-slot-semantics** — 規劃逐鍵時 DS:0x9E5A 的語意未定案
-  2026-09-11 的六步逐鍵觀察裡，DS:0x9E5A 讀到 1→0→0→5→5→0→1。跳到 5 的那兩步同時也是 +0x22 立起來的那兩步，兩者的關係還沒解。remake 目前不依賴這個位址，觀察資料在 workplace/battle-planning-20260911/battle-planning.json。
-  完成條件：查明 DS:0x9E5A 在規劃期間代表什麼，或確認 remake 不需要它。
-  核實：`docs/verification/normal-path-planning-entry-20260911.md` 找得到 `還沒定案` 就是還沒完
 
 - **planning-other-commands-unwalked** — 規劃段只走過徒手那一條
   2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。
@@ -437,6 +427,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 本輪核實為已完成（原本掛在未完成清單上）
 
+- **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
 - **sheet-items-and-party-portrait** — 角色資料頁的物品（sub_16986）與隊伍立繪（sub_18D61）兩個圖示：2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。
 - **party-limit-six-boundary** — 隊伍上限六人的邊界：2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。
@@ -445,6 +436,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **monster-unarmed-weapon-source** — 怪物徒手那幾手改成照原版：拿手上那件：2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。
 - **save-v1-entry-replacement** — SPEC-023 的保存核心已是正式入口：2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。
 - **region-dat-provenance** — `region1.dat`…`region4.dat` 缺檔的來由：2026-09-11 核實：那五筆是擴充地區，由地區磁片經原版內建的 REGION INSTALLER 裝入，Origin 未曾發行擴充。執行時觀測（開檔序列、模板位址與 KOLBOOK.EXE 靜態偏移逐項對位、原版自己的訊息文字）見 docs/re/20260911-region-installer.md；探針在 tools/oracle/book_startup_test.go 的 KOL_BOOK_REGION_PROBE 模式。
+- **planning-current-slot-semantics** — 規劃逐鍵時 DS:0x9E5A 的語意：2026-09-11 定案：它是走訪參戰者的**索引游標**（IDA `word_37D2A`），規劃、執行與訊息三段各自的迴圈都會設它，不是「輪到誰行動」的權威狀態。寫入監看抓到五個寫入點，其中 0x1F073 正是 SPEC-020 步驟一的收尾。remake 不需要它——輪到誰由 Round.Order 與 Cursor 表達。見 docs/re/20260911-actor-index-cursor.md。
 
 <!-- worklist:end -->
 

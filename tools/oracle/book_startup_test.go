@@ -837,6 +837,39 @@ func probeNormalPlanning(t *testing.T, o *oracle.Oracle) {
 		return b.String()
 	}
 
+	// 誰寫 DS:0x9E5A（IDA 的 `word_37D2A`）。RESEARCH-LOG 有它的讀取端——訊息的
+	// `|G` 與資訊框都讀它、`<6` 走 `0xBB88 + 0x300×i` 取角色記錄——但「誰設它」
+	// 一直沒追。靜態 xref 只涵蓋直接參考，間接寫入看不見，所以用寫入監看。
+	// 誰寫 DS:0x9E5A（IDA 的 `word_37D2A`）。RESEARCH-LOG 有它的讀取端——訊息的
+	// `|G` 與資訊框都讀它、`<6` 走 `0xBB88 + 0x300×i` 取角色記錄——但「誰設它」
+	// 一直沒追。靜態 xref 只涵蓋直接參考，間接寫入看不見，所以用寫入監看。
+	//
+	// **一次只裝得下一個監看**（`machine.WatchWrites` 只有一組 lo／hi／fn，
+	// 後裝的會把先裝的換掉）。所以用一個涵蓋兩者的區間，在回呼裡分類：
+	// 參戰記錄區當正對照——它在規劃寫回時一定會動，沒有紀錄就是監看沒生效。
+	writes := o.WatchWrites(actorBase, 0x9F00)
+	defer func() {
+		o.StopWatchingWrites()
+		var target []oracle.MemWrite
+		control := 0
+		for _, w := range *writes {
+			switch {
+			case w.Off == currentSlot || w.Off == currentSlot+1:
+				target = append(target, w)
+			case w.Off >= actorBase && w.Off < actorBase+actorStride*slotCount:
+				control++
+			}
+		}
+		t.Logf("正對照：參戰記錄區被寫 %d 次（監看區間共 %d 次）", control, len(*writes))
+		seen := map[string]bool{}
+		for _, w := range target {
+			t.Logf("  寫 %04X：%d → %d，IP=%s，第 %d 道指令",
+				w.Off, w.Old, w.New, w.IP, w.Step)
+			seen[w.IP.String()] = true
+		}
+		t.Logf("DS:%04X 被寫 %d 次，來自 %d 個位置", currentSlot, len(target), len(seen))
+	}()
+
 	var out []snap
 	first := read(-1, "(進場後，未送鍵)")
 	out = append(out, first)

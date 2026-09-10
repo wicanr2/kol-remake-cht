@@ -712,16 +712,19 @@
       "id": "counterscan-style-and-retry",
       "layer": "gap",
       "title": "反制掃描的攻擊選項來源，與移動繞不出去的重試路徑",
-      "body": "兩個已知差異：反制掃描那條的攻擊選項原版是從對手抄來的（remake 還沒實作）；原版在移動段繞完八個方向都站不下時會把 `word_34A08` 加一、之後攻擊式固定是 1，這一版沒有那條重試路徑所以攻擊式一律抽。",
+      "body": "兩條已知差異：反制掃描的攻擊選項要從對手抄；移動段繞完八個方向都站不下時原版把 `word_34A08` 加一、之後攻擊式固定第 1 式。",
       "acceptance": "兩條都接上，或明示為刻意差異。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/battle/ai.go"
+          "internal/battle/ai.go",
+          "internal/battle/ai_test.go"
         ],
-        "pattern": "抄來的（還沒實作）",
-        "note": "ai.go 的自承，接上時會改寫。"
-      }
+        "pattern": "a\\.Stuck",
+        "note": "已完成，當回歸訊號：實作與測試都要在，少一邊就開口。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。"
     },
     {
       "id": "actor-record-05-ability",
@@ -1158,17 +1161,20 @@
     {
       "id": "planning-current-slot-semantics",
       "layer": "verification",
-      "title": "規劃逐鍵時 DS:0x9E5A 的語意未定案",
-      "body": "2026-09-11 的六步逐鍵觀察裡，DS:0x9E5A 讀到 1→0→0→5→5→0→1。跳到 5 的那兩步同時也是 +0x22 立起來的那兩步，兩者的關係還沒解。remake 目前不依賴這個位址，觀察資料在 workplace/battle-planning-20260911/battle-planning.json。",
+      "title": "規劃逐鍵時 DS:0x9E5A 的語意",
+      "body": "2026-09-11 的六步逐鍵觀察裡，DS:0x9E5A 讀到 1→0→0→5→5→0→1，語意未定案。",
       "acceptance": "查明 DS:0x9E5A 在規劃期間代表什麼，或確認 remake 不需要它。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/verification/normal-path-planning-entry-20260911.md"
+          "docs/re/20260911-actor-index-cursor.md",
+          "docs/verification/planning-parity-20260911.md"
         ],
-        "pattern": "還沒定案",
-        "note": "收據的自承，定案時會改寫。"
-      }
+        "pattern": "word_37D2A|0x9E5A",
+        "note": "已完成，當回歸訊號：定案紀錄與那支不依賴它的對拍收據都要在。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 定案：它是走訪參戰者的**索引游標**（IDA `word_37D2A`），規劃、執行與訊息三段各自的迴圈都會設它，不是「輪到誰行動」的權威狀態。寫入監看抓到五個寫入點，其中 0x1F073 正是 SPEC-020 步驟一的收尾。remake 不需要它——輪到誰由 Round.Order 與 Cursor 表達。見 docs/re/20260911-actor-index-cursor.md。"
     },
     {
       "id": "planning-other-commands-unwalked",
