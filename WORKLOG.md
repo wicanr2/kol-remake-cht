@@ -5880,3 +5880,34 @@ SPEC-029 接線順序審查。另把 `spec008`／`spec011` 兩條合併成 `spec
   `terminology-and-safe-rects` 在追。重複的條目移除，那一句改成 `acknowledged`。
 
 74 條未完成、7 條已核實完成、1,283 行 0 孤兒。十六個套件全綠。
+
+## 2026-09-10（十一）：怪物裝備能力比完了——資料本來就夠
+
+繼續第 2 項。原本這一塊卡在收據那句「怪物記錄目前只擷取 0x80 byte，不能當成全部
+穿戴欄已完整保存」，於是它一直被當成「要先擴充擷取範圍」。**那句話有一半不成立**：
+`0x80` 就是完整的一筆（`0xCD92 + (index-6)*0x80`，RE-080／SPEC-017，
+`TestMonsterTemplateCopyMatchesOriginal` 也用 `bodySize = 128`），護甲三件、盾牌、
+技能、旗標、撤退門檻與金冠骰式全在裡面。真正裝不下的只有母表 `worn` 的第 5、6 槽，
+而那兩格原版在戰鬥中根本不讀。資料本來就夠，缺的只是沒有比。
+
+`TestOriginalNormalMonsterEquipment` 做三方比對：戰鬥期記錄的 bytes ↔
+`monsters.json`（母表抽取器讀對了沒）↔ remake 的 `Actor`（適配器接對了沒）。
+SLEDGE 共 20 項通過，穿戴欄前五槽實得 3 件。收據
+`docs/verification/monster-equipment-20260910.md`。
+
+### 判準踩了一次坑
+
+第一版拿 `m.Worn[slot] != nil` 判斷有沒有東西，SLEDGE 的第 3、4 槽（原版是空的）
+被判成不符。**`monsters.json` 的兩個欄位對「空」的約定不一樣**：`shield` 走
+`item()`，全零回 `null`；`worn` 要保持七格對位，全零那幾格解出來是一個每個欄位都是
+零的**物件**。判準改成看記錄本身是不是整片零。順帶確認 remake 沒踩同一個坑——
+`cloneArmour` 只取前三格，SLEDGE 那三格都有實料。
+
+### verify 綁測試檔：兩個方向都錯
+
+把條目改綁對拍測試收尾那句自承，`verify` 當場報「★ 可能已完成」。**verify 不掃
+測試檔**，所以 `present` 會回「找不到＝可能已完成」每輪誤報，`absent` 則永遠為真。
+兩個方向都不對，改回 `manual` 並在 note 寫明；規劃／結算的載入器接上時
+`internal/oracle` 會出現產品碼落點，到時再綁。
+
+74 條未完成、7 條已核實完成、1,288 行 0 孤兒。十六個套件全綠。

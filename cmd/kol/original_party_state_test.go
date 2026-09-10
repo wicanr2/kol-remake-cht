@@ -106,5 +106,6 @@ func TestOriginalNormalPartyState(t *testing.T) {
 			t.Fatal("缺少耐力／疲勞原版記錄")
 		}
 	}
-	t.Logf("兩名隊員與 SLEDGE 共比較 %d 個初始欄位；未涵蓋完整裝備能力、地形、規劃與攻擊結算", checks)
+	t.Logf("兩名隊員與 SLEDGE 共比較 %d 個初始欄位。地形見 TestOriginalNormalBattleTerrain、"+
+		"怪物裝備能力見 TestOriginalNormalMonsterEquipment；規劃與攻擊結算仍未涵蓋", checks)
 }
