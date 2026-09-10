@@ -235,7 +235,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼
   說明書譯文已完成（84 頁全部 reviewed），但規則 spec 沒有連回頁碼。說明書未涵蓋的邊界行為不得自行推定。
   完成條件：每份規則 spec 的公開規則段落都指得回說明書頁碼。
-  核實：`docs/spec/005-character-creation.md`、`docs/spec/008-combat-field.md`、`docs/spec/010-combat-commands.md`、`docs/spec/012-combat-spells.md`、`docs/spec/014-quest-completion.md` 找不到 `docs/manual/` 就是還沒完
+  核實：`docs/spec/005-character-creation.md`、`docs/spec/008-combat-field.md`、`docs/spec/010-combat-commands.md`、`docs/spec/012-combat-spells.md`、`docs/spec/014-quest-completion.md` **每一個**都要有 `docs/manual/`，少一個就是還沒完
 
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG
   internal/assets/assets.go 的檔頭已寫明「runtime 只讀這個目錄下的 manifest.json 與 PNG」，但沒有測試釘住它。禁止讀原版 archive／EXE 目前只靠約定。

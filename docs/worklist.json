@@ -261,7 +261,7 @@
       "body": "說明書譯文已完成（84 頁全部 reviewed），但規則 spec 沒有連回頁碼。說明書未涵蓋的邊界行為不得自行推定。",
       "acceptance": "每份規則 spec 的公開規則段落都指得回說明書頁碼。",
       "verify": {
-        "kind": "absent",
+        "kind": "required_in_all",
         "paths": [
           "docs/spec/005-character-creation.md",
           "docs/spec/008-combat-field.md",
@@ -270,7 +270,7 @@
           "docs/spec/014-quest-completion.md"
         ],
         "pattern": "docs/manual/",
-        "note": "只列規則 spec，不列 003（那是說明書翻譯規格本身，它當然連得回去，掃進來會讓這一條假閉嘴）。"
+        "note": "條目要求每一份規則 spec 都連得回去，所以不能用 `absent`——那是 OR，做完其中一份就會把整條判成完成。不列 003（那是說明書翻譯規格本身）。"
       }
     },
     {
@@ -626,12 +626,13 @@
       "acceptance": "每個發行包與 dist-all 根目錄都有 LICENSE。",
       "resolved": "2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。",
       "verify": {
-        "kind": "absent",
+        "kind": "required_in_all",
         "paths": [
-          "tools/build_dist.sh"
+          "tools/build_dist.sh",
+          "tools/package_dist.sh"
         ],
-        "pattern": "cp .*LICENSE",
-        "note": "已完成，留著當回歸訊號：這一行被刪掉時條目會重新開口。"
+        "pattern": "LICENSE",
+        "note": "已完成，當回歸訊號：建置與打包兩支都要帶 LICENSE，少一支就開口。"
       }
     },
     {
@@ -643,12 +644,13 @@
       "acceptance": "兩頁都畫得出來並對拍。",
       "resolved": "2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。",
       "verify": {
-        "kind": "absent",
+        "kind": "required_in_all",
         "paths": [
-          "internal/town"
+          "internal/town/itempage.go",
+          "internal/town/portrait.go"
         ],
-        "pattern": "func \\(s \\*Session\\) OpenItemPage\\(",
-        "note": "已完成，留著當回歸訊號。"
+        "pattern": "func \\(s \\*Session\\) Open(Item|Party)Page\\(",
+        "note": "已完成，當回歸訊號：兩頁各在一個檔案，單獨刪掉其中一頁也要開口。"
       }
     },
     {
@@ -660,12 +662,14 @@
       "acceptance": "招募、進門與保存三處都擋得住第七人。",
       "resolved": "2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。",
       "verify": {
-        "kind": "absent",
+        "kind": "required_in_all",
         "paths": [
-          "internal/town/interior.go"
+          "internal/town/recruit.go",
+          "internal/town/interior.go",
+          "internal/save/characters.go"
         ],
-        "pattern": "MaxParty = 6",
-        "note": "已完成，留著當回歸訊號。"
+        "pattern": "MaxParty",
+        "note": "已完成，當回歸訊號：招募、進門與保存三處都要把關，少一處就開口。"
       }
     },
     {
@@ -699,7 +703,7 @@
           "internal/ui/world.go"
         ],
         "pattern": "CompositeGroup\\(s\\.Group, s\\.Phase\\)",
-        "note": "已完成，留著當回歸訊號：這個呼叫被拿掉時條目會重新開口。"
+        "note": "已完成，當回歸訊號，綁的是「畫進畫面」那一環（`drawWeather` 走 CompositeGroup）。`cmd/kol/main.go` 的 Phase 遞增沒綁——pattern 不同，一條 verify 綁不了兩種。"
       }
     }
   ]

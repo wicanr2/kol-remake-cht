@@ -9,7 +9,8 @@
 - **未完成項的權威是 `docs/worklist.json`**，不再是 `WORKLIST.md` 的 checkbox。
   每一條掛一個 `verify`，核實用
   `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的那一節由
-  `render` 產生。目前 45 條未完成，其中 34 條沒有機器訊號、標 `manual`。
+  `render` 產生。目前 **49 條未完成**（35 條沒有機器訊號、標 `manual`）與
+  5 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
   （base 為 `origin/main`，`5f9a9a1`）。舊的 `kol-force-call` 已刪除——它的 commit
   全在 `origin/main` 裡，工作樹上的 12 個未提交檔案已移植過來。KOL 靠的三份規格在

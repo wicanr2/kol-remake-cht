@@ -10,6 +10,10 @@ markdown 的 `- [ ]` 會長出過期斷言：東西做好了而沒有人回頭�
 寫成資料的一部分，讓機器每一輪都問。
 
 `verify` 為真＝**這一條仍然未完成**；為假就是東西做好了而條目沒改，命令回非零。
+
+`present`／`absent` 的 `paths` 是 **OR**：任一個檔案命中就算命中。條目如果要求
+「每一個都要有」（例如每份規格都要連回說明書頁碼），用 `required_in_all`——
+OR 會讓「做完其中一份」就把整條判成完成。
 """
 
 import argparse
@@ -92,6 +96,22 @@ def still_open(item: dict, root: Path = ROOT):
         n = len(payload)
         return n <= v["max"], f'{v["path"]} 的 {v["field"]} 有 {n} 項（門檻 {v["max"]}）'
 
+    if kind == "required_in_all":
+        # pattern 必須出現在**每一個** path。少一個就是還沒做完，並指出是哪一個。
+        missing = []
+        for target in v["paths"]:
+            f = root / target
+            if not f.exists():
+                missing.append(f"{target}（不存在）")
+                continue
+            if not re.search(v["pattern"], f.read_text(encoding="utf-8", errors="ignore")):
+                missing.append(target)
+        if missing:
+            head = "、".join(missing[:3])
+            more = f" 等 {len(missing)} 個" if len(missing) > 3 else ""
+            return True, f"還缺 {head}{more}"
+        return False, f'{len(v["paths"])} 個都有了'
+
     where = find_hit(root, v)
     if kind == "present":
         if where:
@@ -126,9 +146,9 @@ def check_schema(data: dict) -> list:
             problems.append(f'{ident}：layer「{item.get("layer")}」不在 layers 表裡')
         v = item.get("verify", {})
         kind = v.get("kind")
-        if kind not in {"present", "absent", "json_len", "manual"}:
+        if kind not in {"present", "absent", "json_len", "manual", "required_in_all"}:
             problems.append(f"{ident}：verify.kind = {kind}")
-        elif kind in {"present", "absent"}:
+        elif kind in {"present", "absent", "required_in_all"}:
             if not v.get("paths") or not v.get("pattern"):
                 problems.append(f"{ident}：{kind} 要有 paths 與 pattern")
         elif kind == "json_len":
@@ -148,7 +168,7 @@ def cmd_verify(_args) -> int:
             print(f"  ✗ {p}")
         return 2
 
-    stale, manual = [], []
+    stale, manual, regressed = [], [], []
     print(f'{"id":<34} {"狀態":<14} 依據')
     print("-" * 100)
     for item in data["items"]:
@@ -162,18 +182,39 @@ def cmd_verify(_args) -> int:
         if item["verify"]["kind"] == "manual":
             manual.append(item["id"])
 
+    # 已完成的也要跑，判讀相反：訊號還在＝仍然完成，訊號不見＝回歸了。
+    # 跳過它們等於在 note 裡寫「留著當回歸訊號」卻沒有任何機制在看——
+    # 那比沒有 verify 更糟，它給人「有在看」的假象。
     done = [i for i in data["items"] if i.get("status") == "done"]
+    if done:
+        print()
+        print("已核實完成（跑的是回歸檢查：訊號還在＝仍然完成）")
+        print("-" * 100)
+        for item in done:
+            if item["verify"]["kind"] == "manual":
+                print(f'{item["id"]:<34} {"要人判":<14} 完成後沒有訊號可綁')
+                continue
+            gone, why = still_open(item)
+            mark = "★ 可能回歸" if gone else "仍然完成"
+            print(f'{item["id"]:<34} {mark:<14} {why}')
+            if gone:
+                regressed.append((item["id"], why))
+
     total = len(data["items"]) - len(done)
     print()
-    print(f"未完成 {total} 條；本檔另記 {len(done)} 條已核實完成（不再核實）。")
+    print(f"未完成 {total} 條；已核實完成 {len(done)} 條（都跑過回歸檢查）。")
     print(f"其中 {len(manual)} 條沒有機器訊號，要人判：{'、'.join(manual) if manual else '無'}")
     if stale:
         print()
         print("★ 下列條目的訊號不見了，回去看它是不是做完了：")
         for ident, why in stale:
             print(f"  - {ident}：{why}")
-        return 1
-    return 0
+    if regressed:
+        print()
+        print("★ 下列已完成項的訊號不見了，可能被改回去了：")
+        for ident, why in regressed:
+            print(f"  - {ident}：{why}")
+    return 1 if (stale or regressed) else 0
 
 
 def render_markdown(data: dict) -> str:
@@ -209,6 +250,9 @@ def render_markdown(data: dict) -> str:
                 lines.append(f'  核實：要人判——{v["note"]}')
             elif v["kind"] == "json_len":
                 lines.append(f'  核實：`{v["path"]}` 的 `{v["field"]}` ≤ {v["max"]} 就是還沒完')
+            elif v["kind"] == "required_in_all":
+                where = "、".join(f"`{p}`" for p in v["paths"])
+                lines.append(f'  核實：{where} **每一個**都要有 `{v["pattern"]}`，少一個就是還沒完')
             else:
                 where = "、".join(f"`{p}`" for p in v["paths"])
                 verb = "找得到" if v["kind"] == "present" else "找不到"
@@ -306,6 +350,28 @@ def cmd_selftest(_args) -> int:
 
         # --- manual 一律回仍未完成 ---------------------------------------
         expect("manual", still_open({"verify": {"kind": "manual", "note": "x"}}, sandbox)[0], True)
+
+        # --- required_in_all：OR 會讓「做完一份」誤判成整條完成 -----------
+        a = sandbox / "internal/a.md"
+        b = sandbox / "internal/b.md"
+        a.write_text("有連結 docs/manual/x\n", encoding="utf-8")
+        b.write_text("沒有\n", encoding="utf-8")
+        v = {"kind": "required_in_all", "paths": ["internal/a.md", "internal/b.md"],
+             "pattern": "docs/manual/"}
+        expect("required_in_all／只做了一份", still_open({"verify": v}, sandbox)[0], True)
+        # 同一組檔案用 absent 會誤判成完成——這正是要避免的
+        v_or = {"kind": "absent", "paths": ["internal"], "pattern": "docs/manual/"}
+        expect("absent／OR 的誤判（對照組）", still_open({"verify": v_or}, sandbox)[0], False)
+        b.write_text("也有 docs/manual/y\n", encoding="utf-8")
+        expect("required_in_all／兩份都做了", still_open({"verify": v}, sandbox)[0], False)
+        a.unlink(); b.unlink()
+
+        # --- 已完成項的回歸檢查：東西還在＝仍然完成，被拿掉＝要開口 -------
+        code.write_text("func Wanted() {}\n", encoding="utf-8")
+        done_v = {"kind": "absent", "paths": ["internal"], "pattern": r"func Wanted\("}
+        expect("done／東西還在", still_open({"verify": done_v}, sandbox)[0], False)
+        code.write_text("package thing\n", encoding="utf-8")
+        expect("done／東西被拿掉", still_open({"verify": done_v}, sandbox)[0], True)
 
         shutil.rmtree(sandbox, ignore_errors=True)
 
