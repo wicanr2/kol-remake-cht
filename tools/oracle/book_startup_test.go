@@ -145,7 +145,9 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 	// 滑鼠」，不是座標不對。畫面停在 Halfway House 的建築外觀，還沒進門。
 	if os.Getenv("KOL_BOOK_PROBE_ENTRY") == "1" {
 		before := len(o.MousePollSteps())
-		for i, key := range []string{"Return", "Space", "Up", "Return", "Down", "Return"} {
+		// 已知的兩步：`Down` 叫出圖示列（輪詢從 +43 跳到 +305,850），`Return` 進門
+		// （Trollsbane Inn 的敘述頁）。後面繼續觀察怎麼走到招募。
+		for i, key := range []string{"Down", "Return", "Space", "Right", "Return", "Space", "Return", "Down"} {
 			if err := o.SendKeys(key); err != nil {
 				t.Fatalf("送 %q：%v", key, err)
 			}
@@ -162,7 +164,16 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 		return
 	}
 
-	for i, key := range []string{"recruit-click", "Return", "Return", "Return", "Return", "Space"} {
+	// 進旅店的三步。少了它們，後面那一下點擊會落在**建築外觀**上——圖示列還沒
+	// 出現，遊戲在那個畫面根本不讀滑鼠（2026-09-10 量到：點擊前後滑鼠輪詢數都是
+	// 426,415，一次都沒增加）。座標本身沒有問題：`town.IconBar` 是 X=32、Step=32，
+	// 第 6 格 COMPANION 的中心正好是 (204, 181)，也就是下面點的那個位置。
+	//
+	//	Down   叫出圖示列（輪詢從 +43 跳到 +305,850）
+	//	Return 進門，出現旅店敘述頁
+	//	Space  店主招呼，六個圖示（DOOR／MIRROR／LISTEN／TALK／REST／COMPANION）出現
+	for i, key := range []string{"Down", "Return", "Space",
+		"recruit-click", "Return", "Return", "Return", "Return", "Space"} {
 		var err error
 		if key == "recruit-click" {
 			err = o.Click(202, 182, oracle.NoCursorWait(), oracle.Frame(func(o *oracle.Oracle) []uint8 {
@@ -186,6 +197,11 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 	if os.Getenv("KOL_BOOK_WALK") != "1" {
 		return
 	}
+	// ⚠ **下面這串方向鍵是綁城鎮的**：它是照 Halfway House 的地圖數出來的。
+	// 換一個起始角色就換一座城，同一串鍵走不出去——2026-09-10 用
+	// `KOL_BOOK_SELECT_DOWN=12`（Mula，在 Trollsbane）跑，一百步之後
+	// `fight-entry.png` 還是城鎮外觀，`exportNormalBattleState` 因此以
+	// 「參戰上限不一致：count=0 limit=1」失敗。那不是遭遇沒觸發，是**根本沒出城**。
 	keys := []string{"Right", "Right"}
 	for n := 0; n < 9; n++ {
 		keys = append(keys, "Up")
