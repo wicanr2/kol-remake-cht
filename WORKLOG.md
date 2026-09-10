@@ -5607,3 +5607,41 @@ SPEC-008 那條規則，不是別處來的資料或解錯的 payload。
 
 `battle-normal-seed-alignment` 條目改寫成「完整屬性與結算比較」，verify 維持
 `manual`：屬性與結算還沒有可綁的東西，現在綁等於綁一個還不存在的猜想。
+
+## 2026-09-10（四）：地形接進受控情境，站位與地形交叉驗證
+
+WORKLIST 第 2 項的前半。`TestOriginalNormalPartyState` 建戰鬥時給 `NewQuest` 的
+地形是 `nil`——60 個初始欄位都對得上，但那一場打在一片空白上。
+
+先確認兩份快照是同一場：`battle-state-records-20260908/` 與
+`battle-terrain-normal-fixed-20260908/` 的 `battle-state-records.json` 與
+`battle-alignment.json` 逐欄比對**完全相同**。dosgolem 兩次獨立執行到達同一個
+狀態，決定性成立，後者（含地形）因此可以當統一的共同起點。第三份
+`battle-terrain-normal-20260908/` 沒有 `battle-terrain.json`——那次匯出沿用暫存
+指標被資料檢查擋下來，目錄留著但沒有地形。
+
+`TestOriginalNormalBattleTerrain`（`cmd/kol/original_battle_terrain_test.go`）三項
+判準：4096 格逐格傳遞、在場的是 slot 0／1／6 而其餘 15 槽 remake 都判為空、
+站位與地形同一座標系。
+
+第三項是這一輪真正的收穫：站位取自 `battle-alignment.json` 的參戰記錄 +31／+32，
+地形取自 `battle-terrain.json`，**兩份各自獨立的原版資料**。原版繪製時的索引是
+`SI = Y*64 + X`，所以「`Field.At(a.X, a.Y)` 等於 `record_hex[a.Y*64 + a.X]`」一旦
+成立，就同時釘住了地形的轉置方向、`Actor.X／Y` 的語意，以及兩者用的是同一個
+座標系。三名在場參戰者都不在對角線上，判準因此分得出轉置；測試會在全部落在
+`x == y` 時直接失敗，不讓一組碰巧無效的座標默默通過。
+
+第二項踩過一次坑：第一版拿原版記錄的 +1（陣營）當「有沒有人」用，結果 14 個槽
+被當成參戰者，而數字看起來還很合理。沒用到的隊員槽 7…17 在原版記憶體裡整條是零，
+陣營因此讀成 0＝隊伍——**那是殘留值不是語意**。
+
+負對照實跑一次：把 `terrain.go` 的轉置改成 `f.Tiles[y*64+x]` 之後，交叉驗證報
+**1,818／4,096 格對不上**，合成地形那兩支也一起 FAIL；改回來後十六個套件全綠。
+那個 1,818 只有 44%——翻過來有 56% 的格子碰巧一樣，因為底色佔了七成。這正是
+合成地形那一支要用不對稱 `x*2 + y*3` 的理由：拿真實地形驗轉置，一半以上的格子
+幫不上忙。
+
+收據補在 `docs/verification/battle-terrain-snapshot-load-20260910.md`。
+`battle-normal-seed-alignment` 的 verify 維持 `manual`：一度想綁
+`TestOriginalNormalPartyState` 收尾那句自承，但它在測試檔裡而 verify 不掃測試檔，
+綁了會永遠回「還沒出現」——那種條目看起來盡責，其實一次都沒真的看過。

@@ -86,8 +86,56 @@ runtime 沒有動：載入器在 `internal/oracle`，正式遊戲路徑不讀 `w
 容器內 `go test ./cmd/... ./internal/...` 全綠（`cmd/kol` 與 `internal/ui`
 需要 X11，另起 Xvfb 跑過）。`gofmt` 對本輪新增的兩個檔案乾淨。
 
+## 接進受控情境
+
+`TestOriginalNormalPartyState` 建戰鬥時給 `NewQuest` 的地形是 `nil`——60 個初始
+欄位都對得上，但那一場打在一片空白上。`TestOriginalNormalBattleTerrain`
+（`cmd/kol/original_battle_terrain_test.go`）補上這一塊，並且順便驗到一件更根本的事。
+
+**兩份快照是同一場。** `battle-state-records-20260908/` 與
+`battle-terrain-normal-fixed-20260908/` 的 `battle-state-records.json` 與
+`battle-alignment.json` 逐欄比對**完全相同**——dosgolem 兩次獨立執行到達同一個
+狀態，決定性成立，後者（含地形）因此可以當統一的共同起點。第三份
+`battle-terrain-normal-20260908/` 沒有 `battle-terrain.json`：那一次匯出沿用暫存
+指標，被資料檢查擋下來了。
+
+三項判準：
+
+1. **地形整張傳進去**：4096 格逐格比對 `s.Field.At(x, y)` 與快照。
+2. **誰在場上**：在場的正好是 slot 0、1、6，其餘 15 個槽 remake 都判為
+   `SideEmpty`。這一項要小心——**不能拿原版記錄的 `+1`（陣營）當「有沒有人」用**：
+   沒用到的隊員槽 7…17 在原版記憶體裡整條是零，陣營因此讀成 0＝隊伍。那是殘留值
+   不是語意。第一版判準就是這樣把 14 個槽當成參戰者，數字看起來還很合理。
+3. **站位與地形同一座標系**：站位取自 `battle-alignment.json` 的參戰記錄
+   `+31`／`+32`，地形取自 `battle-terrain.json`——**兩份各自獨立的原版資料**。
+   原版繪製時的索引是 `SI = Y*64 + X`，所以「`Field.At(a.X, a.Y)` 等於
+   `record_hex[a.Y*64 + a.X]`」一旦成立，就同時釘住了地形的轉置方向、`Actor.X／Y`
+   的語意，以及兩者用的是同一個座標系。
+
+三名在場參戰者都不在對角線上（Olear 33/30、Theodoric 31/30、SLEDGE 31/37），
+所以這個判準真的分得出轉置——測試會在全部落在 `x == y` 時直接失敗，不讓一組
+碰巧無效的座標默默通過。
+
+## 負對照：實際把轉置寫反跑一次
+
+把 `terrain.go` 的 `f.Tiles[x*64+y]` 改成 `f.Tiles[y*64+x]` 之後重跑：
+
+| 判準 | 反應 |
+|---|---|
+| `TestOriginalNormalBattleTerrain` | FAIL，**1,818／4,096 格對不上** |
+| `TestTerrainSnapshotIndexTransposition` | FAIL |
+| `TestTerrainSnapshotTransposedIsDetected` | FAIL |
+
+那個 1,818 值得看一眼：翻過來只有 **44%** 的格子報錯，其餘 56% 碰巧一樣——因為
+底色佔了七成，隨便兩格拿來比都很可能相同。**這就是為什麼合成地形那一支要用
+不對稱的 `x*2 + y*3`**：拿真實地形驗轉置，一半以上的格子幫不上忙；要是再挑到
+對稱的判準，測試會全綠而什麼都沒證明。
+
+改回來之後 `go test ./cmd/... ./internal/...` 十六個套件全綠。
+
 ## 還沒做
 
-- 完整屬性對拍：`battle-state-records.json` 的兩名隊員與 SLEDGE 記錄還沒接。
-- 指令與結算比較：這一份只是共同起點。
+- 完整裝備能力：`battle-state-records.json` 的怪物記錄目前只擷取 0x80 byte，
+  不能當成全部穿戴欄已完整保存。
+- 規劃、指令與攻擊結算比較：這一份只是共同起點。
 - 正常 GUI：`fight-entry.png` 還沒與 remake 的畫面比對。

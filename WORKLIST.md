@@ -128,9 +128,9 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：要人判——常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。
 
 - **battle-normal-seed-alignment** — 原版戰鬥同狀態：完整屬性與結算比較
-  正常路徑已到 SLEDGE 規劃畫面；角色／站位、目前角色、鏡頭與標記已在受控情境對齊，兩側共同 seed=1（docs/verification/battle-actor-alignment-20260908.md）。**地形那一段已完成**（2026-09-10）：`internal/oracle/terrain.go` 把正常遭遇的 4096 格快照接進 remake，索引由原版的 `Y*64+X` 轉成 remake 的 `X*64+Y`，配轉置負對照與五種前提檢查；磚塊組成回推的粗糙格 1,017 與生成規則期望的 1,024 差 0.24 個標準差，見 docs/verification/battle-terrain-snapshot-load-20260910.md。剩下的是 `battle-state-records.json` 的兩名隊員與 SLEDGE 完整屬性，以及指令與結算比較。
+  正常路徑已到 SLEDGE 規劃畫面；兩名隊員與 SLEDGE 共 60 個初始欄位通過（docs/verification/battle-party-state-20260908.md）。**地形已接進受控情境**（2026-09-10）：4096 格逐格傳進 NewQuest、在場的三個槽與另外 15 個空槽都對得上，站位與地形用同一個座標系——站位取自參戰記錄 +31／+32，地形取自另一份快照，兩份獨立的原版資料交叉驗證；把轉置寫反實測會讓 1,818／4,096 格報錯（只有 44%，因為底色佔七成，所以合成地形那一支才要用不對稱的圖）。另驗到兩份快照的角色狀態逐欄完全相同——dosgolem 兩次獨立執行到達同一狀態。見 docs/verification/battle-terrain-snapshot-load-20260910.md。剩下的是完整裝備能力（怪物記錄目前只擷取 0x80 byte）、規劃、指令與攻擊結算比較。
   完成條件：同一 seed、同一初始狀態下，remake 與原版的完整屬性、命令與結算逐項一致。
-  核實：要人判——地形那一段已經有 `internal/oracle/terrain.go`；屬性與結算還沒有可綁的東西。接上時同一個套件會多一支讀 `battle-state-records.json` 的載入器，到時改成 absent 綁它的函式名——現在就綁等於綁一個還不存在的猜想。
+  核實：要人判——地形那一段已完成（internal/oracle/terrain.go ＋ cmd/kol 的交叉驗證），剩下的裝備、規劃與結算還沒有可綁的產品碼。不要綁 TestOriginalNormalPartyState 收尾那句「未涵蓋…地形、規劃與攻擊結算」：它在測試檔裡，而 verify 不掃測試檔，綁了會永遠回「還沒出現」——那種條目看起來很盡責，其實一次都沒有真的看過。接完之後 internal/oracle 會多一支讀 battle-state-records.json 的載入器，到時綁它。
 
 - **inn-farewell-diff-review** — 審查原版離店告別訊息與確認流程
   SPEC-024 與告別確認已實作，dosgolem 單人／多人正常離店與繁中 GUI 已抽驗，但不是全城逐店文字驗收。要補與 remake 直接離店的玩家可見差異。
