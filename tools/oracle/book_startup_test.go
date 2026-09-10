@@ -131,6 +131,37 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 	o.WriteU16(o.DS(0x1600), 1)
 	o.WriteU16(o.DS(0x1602), 0)
 	t.Logf("原版測試 seed=1，設定點=旅店招呼後，DGROUP=%04X；尚未宣稱與 remake 戰鬥同狀態", o.DGroupSeg())
+	// 送鍵之前先留一張。點擊落空時「座標不對」與「那個位置本來就沒東西」在
+	// 畫面上一模一樣（`oracle/input.go` 的 Button 註解），有這張才分得開。
+	captureBook(t, o, "battle-path-before.png")
+	if steps := o.MousePollSteps(); len(steps) > 0 {
+		t.Logf("送鍵前遊戲已輪詢滑鼠 %d 次，最後一次在第 %d 道指令", len(steps), steps[len(steps)-1])
+	} else {
+		t.Log("送鍵前遊戲一次都沒讀過滑鼠——這個畫面可能只收鍵盤")
+	}
+	// 觀察模式：這個畫面收不收滑鼠、要按什麼才進得了旅店，先看清楚再送固定序列。
+	// 2026-09-10 量到的事實：進場後滑鼠輪詢數停在 426,415，點擊期間**一次都沒有
+	// 增加**——依 dosgolem `docs/spec/012` 的三分法，那是「按住的期間遊戲沒讀
+	// 滑鼠」，不是座標不對。畫面停在 Halfway House 的建築外觀，還沒進門。
+	if os.Getenv("KOL_BOOK_PROBE_ENTRY") == "1" {
+		before := len(o.MousePollSteps())
+		for i, key := range []string{"Return", "Space", "Up", "Return", "Down", "Return"} {
+			if err := o.SendKeys(key); err != nil {
+				t.Fatalf("送 %q：%v", key, err)
+			}
+			if err := o.Run(20_000_000); err != nil {
+				t.Fatalf("跑 %q：%v", key, err)
+			}
+			captureBook(t, o, fmt.Sprintf("entry-%02d-%s.png", i, key))
+			now := len(o.MousePollSteps())
+			t.Logf("進門探測 step=%d key=%-7s IP=%s 滑鼠輪詢 +%d（累計 %d）",
+				i, key, o.IP(), now-before, now)
+			before = now
+		}
+		t.Log("進門探測結束；只是觀察，不宣稱任何一步是正確的進門方式")
+		return
+	}
+
 	for i, key := range []string{"recruit-click", "Return", "Return", "Return", "Return", "Space"} {
 		var err error
 		if key == "recruit-click" {
@@ -205,6 +236,9 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			captureBook(t, o, "fight-entry.png")
 			exportNormalBattleState(t, o)
 			t.Log("已確認伏擊訊息；只擷取戰鬥入口，不送戰鬥結算命令")
+			if os.Getenv("KOL_BOOK_PLAN") == "1" {
+				probeNormalPlanning(t, o)
+			}
 		}
 	}
 }
@@ -306,11 +340,11 @@ func exportNormalBattleState(t *testing.T, o *oracle.Oracle) {
 		"source": "dosgolem-normal-player-path", "dgroup_segment": o.DGroupSeg(),
 		"input": "KOLTOWN-unpacked.EXE", "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
 		"address_space": "執行期 DGROUP 相對位移；不是 IDA 線性位址",
-		"evidence": "RE-080、RE-129；記錄基址及耐力／疲勞欄位已證實；原始記錄未解 byte 不附推測語意",
-		"characters": characters, "monsters": monsters, "counters": counters,
+		"evidence":      "RE-080、RE-129；記錄基址及耐力／疲勞欄位已證實；原始記錄未解 byte 不附推測語意",
+		"characters":    characters, "monsters": monsters, "counters": counters,
 		"alignment_seed": 1, "monster_level_ds_offset": 0xD39A,
 		"monster_level": o.Word(o.DS(0xD39A)),
-		"limitations": []string{"原版正常入口唯讀記錄，尚未與 remake 完整狀態比較", "不包含地形或完整規劃狀態"}}
+		"limitations":   []string{"原版正常入口唯讀記錄，尚未與 remake 完整狀態比較", "不包含地形或完整規劃狀態"}}
 	body, err = json.MarshalIndent(records, "", "  ")
 	if err != nil {
 		t.Fatal(err)
@@ -333,7 +367,7 @@ func exportNormalBattleState(t *testing.T, o *oracle.Oracle) {
 	terrain := map[string]any{
 		"schema": "kol-battle-terrain-receipt-v1", "source": "dosgolem-normal-player-path",
 		"input": "KOLTOWN-unpacked.EXE", "input_sha256": records["input_sha256"],
-		"address_space": "執行期段位址；指標欄位為 DGROUP 相對位移",
+		"address_space":  "執行期段位址；指標欄位為 DGROUP 相對位移",
 		"dgroup_segment": o.DGroupSeg(), "pointer_segment_ds": 0x2DBA, "offset_contract": "繪製直接使用 ES:SI，SI 為 Y*64+X，無額外基底位移",
 		"buffer_segment": fieldSeg, "buffer_offset": fieldOff,
 		"width": 64, "height": 64, "index": "Y*64+X", "record_hex": hex.EncodeToString(rawField),
@@ -342,8 +376,12 @@ func exportNormalBattleState(t *testing.T, o *oracle.Oracle) {
 		"limitations": []string{"正常原版地形快照；不是完整戰鬥結算驗收"},
 	}
 	body, err = json.MarshalIndent(terrain, "", "  ")
-	if err != nil { t.Fatal(err) }
-	if err = os.WriteFile(filepath.Join(dir, "battle-terrain.json"), append(body, '\n'), 0600); err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(filepath.Join(dir, "battle-terrain.json"), append(body, '\n'), 0600); err != nil {
+		t.Fatal(err)
+	}
 }
 
 func captureBook(t *testing.T, o *oracle.Oracle, name string) {
@@ -371,4 +409,92 @@ func captureBook(t *testing.T, o *oracle.Oracle, name string) {
 	if err = f.Close(); err != nil {
 		t.Error(err)
 	}
+}
+
+// probeNormalPlanning 在規劃入口逐鍵觀察原版把什麼寫回參戰記錄。
+//
+// 規劃段每一名挑一個指令，寫回的是三格（SPEC-010）：`+0x22` 決定完成、
+// `+0x23` 攻擊選項、`+0x25` 指令碼。整輪挑完停在記錄 0x108「Begin next round?」。
+//
+// 這一支**不預設按鍵序列會走到哪**——原版的圖示列停在哪一格、哪些鍵有作用都還沒
+// 逐項確認過，所以先逐鍵記錄「按下去之後那三格變成什麼」，把畫面也存下來。
+// 有了這份觀察才談得上比對；先寫死一組鍵再宣稱對拍，等於拿猜的輸入去比。
+func probeNormalPlanning(t *testing.T, o *oracle.Oracle) {
+	t.Helper()
+	dir := os.Getenv("KOL_ORACLE_CAPTURE")
+	if dir == "" {
+		t.Fatal("規劃探測需要 KOL_ORACLE_CAPTURE")
+	}
+	const (
+		actorBase   = 0x6712
+		actorStride = 50
+		plannedOff  = 0x22
+		optionOff   = 0x23
+		commandOff  = 0x25
+		currentSlot = 0x9E5A
+	)
+	type snap struct {
+		Step    int    `json:"step"`
+		Key     string `json:"key"`
+		Current int    `json:"current_actor"`
+		Planned int    `json:"planned_flag"`
+		Option  int    `json:"attack_option"`
+		Command int    `json:"command_code"`
+		IP      string `json:"ip"`
+		Frame   string `json:"frame,omitempty"`
+	}
+	read := func(step int, key string) snap {
+		cur := int(o.Word(o.DS(currentSlot)))
+		rec := uint16(actorBase + actorStride*cur)
+		return snap{Step: step, Key: key, Current: cur,
+			Planned: int(o.Byte(o.DS(rec + plannedOff))),
+			Option:  int(o.Byte(o.DS(rec + optionOff))),
+			Command: int(o.Byte(o.DS(rec + commandOff))),
+			IP:      o.IP().String()}
+	}
+
+	var out []snap
+	first := read(-1, "(進場後，未送鍵)")
+	out = append(out, first)
+	t.Logf("規劃入口：目前第 %d 名，+0x22=%d +0x23=%d +0x25=%#02x",
+		first.Current, first.Planned, first.Option, first.Command)
+
+	// 送鍵的順序刻意保守：先看單獨一個 Return 會不會就決定一個指令，
+	// 再看方向鍵與 `<`／`>` 有沒有搬動選擇。每一步都留畫面。
+	for i, key := range []string{"Return", "Right", "Return", "period", "Return", "Return"} {
+		if err := o.SendKeys(key); err != nil {
+			t.Fatalf("送 %q：%v", key, err)
+		}
+		if err := o.Run(20_000_000); err != nil {
+			t.Fatalf("跑 %q：%v", key, err)
+		}
+		name := fmt.Sprintf("plan-%02d.png", i)
+		captureBook(t, o, name)
+		st := read(i, key)
+		st.Frame = name
+		out = append(out, st)
+		t.Logf("規劃 step=%d key=%-8s 目前第 %d 名 +0x22=%d +0x23=%d +0x25=%#02x IP=%s",
+			i, key, st.Current, st.Planned, st.Option, st.Command, st.IP)
+	}
+
+	data := map[string]any{
+		"schema": "kol-battle-planning-probe-v1", "source": "dosgolem-normal-player-path",
+		"alignment_seed": 1,
+		"evidence":       "SPEC-010 的 +0x22／+0x23／+0x25；DS 相對位址",
+		"actor_ds_base":  actorBase, "actor_stride": actorStride,
+		"dgroup_segment": o.DGroupSeg(),
+		"steps":          out,
+		"limitations": []string{
+			"這是逐鍵觀察，不是對拍：按鍵序列本身還沒與 remake 對齊，" +
+				"也還沒宣稱任何一步的結果與 remake 相同",
+		},
+	}
+	body, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(filepath.Join(dir, "battle-planning.json"), append(body, '\n'), 0600); err != nil {
+		t.Fatal(err)
+	}
+	t.Log("規劃逐鍵觀察已匯出；尚未宣稱與 remake 規劃同狀態")
 }
