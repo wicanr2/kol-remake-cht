@@ -114,6 +114,12 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
+- **monster-unarmed-weapon-source** — 怪物徒手那幾手：remake 拿穿戴品，原版拿武器
+  2026-09-10 以讀取監看證實（docs/re/20260910-monster-unarmed-slots.md）：原版 `sub_26AC2` 對怪物的徒手四式，`var_4` 一律指向本體記錄 +0x20（武器），把武器那一格整格清零也不改變；同一套設定對隊員跑正對照，四式各自落在 +0x100 起的四個穿戴槽，與 RE-131 逐項相符——所以怪物那一側是真的沒有「徒手取穿戴品」這個機制。而 remake 的 `NewQuest` 目前填 `UnarmedWeapon: unarmedFrom(monster.Worn)`，等於讓怪物的徒手四式各拿一件穿戴品去算傷害骰。這是玩家看得見的差異。`monsters.json` 的七格穿戴欄本身沒錯——護甲三件與盾牌照常使用，不成立的只有「怪物徒手時會去取那幾格」這個推論。
+  卡在：會改變戰鬥數值，依專案規則要使用者決定怎麼處置
+  完成條件：處置方式定案並實作，怪物徒手那幾手的傷害骰與原版一致或有明示的差異理由。
+  核實：`internal/battle/state.go` 找得到 `UnarmedWeapon: unarmedFrom\(monster\.Worn\)` 就是還沒完
+
 
 ### 接了但沒驗過
 
