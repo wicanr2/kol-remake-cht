@@ -406,7 +406,7 @@ var battleSteps = map[string][2]int{
 // applyBattleToken 把腳本 token 交給戰鬥。遭遇那一張任何鍵進戰場；戰場上依
 // 規劃段停在哪一層決定方向鍵是移游標還是沒有作用，`<`／`>` 移圖示列的白框，
 // Return 是確定（SPEC-010）。整輪決定完停在「Begin next round?」，那一層沿用
-// 既有的是／否——執行段還沒實作，所以答應之後只是再排一輪規劃。
+// 既有的是／否；答應之後由呼叫端給的回呼推進執行段。
 // loadTranslations 一次載入城鎮譯文與 UI 文字庫譯文。兩份分開存檔——城鎮譯文以
 // 「城／門／欄位」索引，UI 譯文以文字庫的記錄號索引，混在一起會讓兩邊都難查。
 func loadTranslations(townPath, uiPath string) (*town.Translations, error) {
@@ -3303,8 +3303,8 @@ func main() {
 		// 野外畫面的隊員格畫的是實際隊伍，不是戶外樣本裡那一份。
 		worldPartyState = playSession.Party
 		// 任務地點：走進去而且隊上有人帶著那個任務，就蓋出敘述與「Will you partake?」
-		// （RE-079）。答應之後進戰場，規劃順序照 RE-080 排；
-		// 指令（攻擊、移動）還沒解完，因此這一版只到「看得到、逃得掉」。
+		// （RE-079）。答應之後進戰場，規劃順序照 RE-080 排，指令與結算走
+		// SPEC-008／010 的既有實作。
 		if worldSessionState != nil {
 			sites, err := battle.LoadSites(*questPath)
 			if err != nil {

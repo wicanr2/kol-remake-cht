@@ -32,8 +32,13 @@
       "body": "固定地圖已依 SPEC-025 接線，4096 格 dosgolem 解碼比較與地圖隔離回歸通過；繁中空肖像繪圖錯誤已修，受控資格存檔可經正式按鍵選人、不下注及進場（docs/verification/arena-dialog-fix-20260908.md）。剩正常取得資格與完整垂直鏈；原版特殊肖像仍未知。make_arena_save.py 只產生受控輸入，不能代替正常取得資格。",
       "acceptance": "玩家從正常路徑取得資格、下注、打完單挑並結算，全程不靠受控存檔。",
       "verify": {
-        "kind": "manual",
-        "note": "現在沒有訊號可綁。正常取得資格接上時會多一支從城鎮走進競技場的流程函式，到時改成 absent 綁那個函式名。"
+        "kind": "present",
+        "paths": [
+          "cmd/kol/main.go",
+          "internal/ui/town.go"
+        ],
+        "pattern": "sub_2B454",
+        "note": "競技場肖像的自承在兩處（主迴圈與 UI）；`sub_2B454` 畫的是什麼解出來時會一起消失。正常取得資格那一段沒有可綁的產品碼，靠這一條一起追。"
       }
     },
     {
@@ -414,8 +419,12 @@
       "body": "選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解。",
       "acceptance": "兩塊都有逐畫面對拍收據。",
       "verify": {
-        "kind": "manual",
-        "note": "sub_1C683 的效果沒解出來之前綁不了程式訊號。解出來會多一支重畫該格的函式，到時改綁它。"
+        "kind": "present",
+        "paths": [
+          "internal/ui/battle.go"
+        ],
+        "pattern": "確切的視覺效果還沒解出來",
+        "note": "選目標格游標的自承在 ui/battle.go；`sub_1C683` 的效果解出來時會消失。攻擊式那一列（frame-899）沒有可綁的產品碼，靠這一條一起追。"
       }
     },
     {
@@ -570,8 +579,8 @@
         "paths": [
           "internal/town/shop.go"
         ],
-        "pattern": "鍛造（bit3）還沒實作",
-        "note": "shop.go 的自承註解，兩處（599／628）。接上時會消失。"
+        "pattern": "鍛造（bit3）還沒實作|bit3 是鍛造（還沒實作）",
+        "note": "shop.go 的兩處自承（旗標說明與實作分支），接上時會一起消失。"
       }
     },
     {
@@ -615,6 +624,216 @@
         ],
         "pattern": "sha256",
         "note": "正反對照過：同一個 pattern 在 tools/write_dist_manifest.py 命中兩次（它產雜湊），在兩支驗收腳本都是零——缺口是真的，不是 pattern 太窄。"
+      }
+    },
+    {
+      "id": "world-battle-click-regions",
+      "layer": "gap",
+      "title": "野外與戰鬥兩層的滑鼠可點區域",
+      "body": "書本、城鎮兩層已有可點區域並驗過（點第 N 列＝鍵盤走到第 N 列同一張畫面）。走出城門之後的野外與戰鬥還沒做，那兩層只吃「點一下等於 Return」與滾輪。",
+      "acceptance": "野外與戰鬥的可點區域接上，並比照既有判準驗過。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/input.go"
+        ],
+        "pattern": "那兩層的可點區域還沒做",
+        "note": "input.go 的自承，接上時會消失。"
+      }
+    },
+    {
+      "id": "inn-disband-exit",
+      "layer": "gap",
+      "title": "正式的離開遊戲：在旅店把人解散",
+      "body": "原版的離開是回旅店把隊伍解散。remake 目前只有 Ctrl+Q 這條退路。",
+      "acceptance": "正常玩家路徑走得到解散離開，並有收據。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/main.go"
+        ],
+        "pattern": "那條還沒接完",
+        "note": "main.go 的退路註解，接上時會改寫。"
+      }
+    },
+    {
+      "id": "attack-message-chain-index",
+      "layer": "spec",
+      "title": "攻擊那一手的訊息鏈索引規則",
+      "body": "0x140／0x141／0x143／0x144 起那一串的索引規則還沒解完（RE-086／RE-087）。SPEC-008 的未解清單也列著同一項。",
+      "acceptance": "索引規則解出並接上，攻擊訊息與原版一致。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/main.go"
+        ],
+        "pattern": "攻擊那一手的訊息鏈還沒解完",
+        "note": "main.go 的自承，解出時會改寫。"
+      }
+    },
+    {
+      "id": "sub-26c5f-damage-line",
+      "layer": "spec",
+      "title": "那一句的數字要 sub_26C5F(0x17) 才算得出來",
+      "body": "該常式還沒解讀，所以那一句寧可不報也不報錯的數字。",
+      "acceptance": "sub_26C5F 解出，那一句的數字報得出來。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/main.go"
+        ],
+        "pattern": "那一支還沒解讀，寧可不報",
+        "note": "main.go 的自承，解出時會改寫。"
+      }
+    },
+    {
+      "id": "enemy-move-direction-unhooked",
+      "layer": "gap",
+      "title": "敵人移動段的方向規則：解出來了但還沒接上",
+      "body": "RE-117 已解：方向要先試往目標那一步、再試左右各一格，沒有目標時從隨機方向起繞八格，八格都站不下另有三條退路。**沒接的理由寫在程式裡**——接上去會改變戰況，`arena` 與 `full-chain-ending` 那兩條長路徑的固定按鍵序列得整條重生（各有兩到三場戰鬥，中間還夾著城鎮互動），所以留待專門的一輪。",
+      "acceptance": "接上並重生那兩條長路徑的收據。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/ai.go"
+        ],
+        "pattern": "\\*\\*解出來了但還沒接上\\*\\*",
+        "note": "ai.go 的自承，接上時會改寫。"
+      }
+    },
+    {
+      "id": "counterscan-style-and-retry",
+      "layer": "gap",
+      "title": "反制掃描的攻擊選項來源，與移動繞不出去的重試路徑",
+      "body": "兩個已知差異：反制掃描那條的攻擊選項原版是從對手抄來的（remake 還沒實作）；原版在移動段繞完八個方向都站不下時會把 `word_34A08` 加一、之後攻擊式固定是 1，這一版沒有那條重試路徑所以攻擊式一律抽。",
+      "acceptance": "兩條都接上，或明示為刻意差異。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/ai.go"
+        ],
+        "pattern": "抄來的（還沒實作）",
+        "note": "ai.go 的自承，接上時會改寫。"
+      }
+    },
+    {
+      "id": "actor-record-05-ability",
+      "layer": "spec",
+      "title": "參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力",
+      "body": "`sub_21FCD` 依裝備賦予的四格之三各自是什麼還沒解（RE-081）。賦予 +0x05 的那條路（哪一件裝備、哪一個位元）也還沒解，所以 remake 這一格一律是 0，等於沒有人免疫。SPEC-008 的未解清單列著同一項。",
+      "acceptance": "那條路解出並接上，或確認原版在現行內容下也恆為 0。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/battle.go"
+        ],
+        "pattern": "依裝備賦予的四格之三|哪一件裝備、哪一個位元",
+        "note": "battle.go 的兩處自承，解出時會一起改寫。"
+      }
+    },
+    {
+      "id": "move-unlock-tile-reason",
+      "layer": "spec",
+      "title": "磚塊 0x0C 為什麼解鎖後三個移動方式",
+      "body": "`MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。",
+      "acceptance": "理由解出並寫進 SPEC-010。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/commands.go"
+        ],
+        "pattern": "為什麼是這一塊還沒解出來",
+        "note": "commands.go 的自承，解出時會改寫。"
+      }
+    },
+    {
+      "id": "actor-record-25-reader",
+      "layer": "spec",
+      "title": "參戰者記錄 +0x25 在哪裡被讀",
+      "body": "原版下馬時同時把 `+0x25` 清成 0，但那一格在哪裡被讀還沒解，所以 remake 沒有那一格。SPEC-010 末段記著同一項。",
+      "acceptance": "讀取端找出來，並判斷 remake 需不需要那一格。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/execution.go"
+        ],
+        "pattern": "它在哪裡被讀還沒解",
+        "note": "execution.go 的自承，解出時會改寫。"
+      }
+    },
+    {
+      "id": "sub-1aae8-params",
+      "layer": "spec",
+      "title": "sub_1AAE8 的參數語意",
+      "body": "`sub_1AAE8(3, 4, 11h, …)` 的前三個參數語意還沒解出來。SPEC-008 的未解清單列著同一項（選單協定）。",
+      "acceptance": "參數語意解出並寫進規格。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/spell.go"
+        ],
+        "pattern": "那一支的參數語意還沒解出來",
+        "note": "spell.go 的自承，解出時會改寫。"
+      }
+    },
+    {
+      "id": "victory-drop-sub-289ee",
+      "layer": "gap",
+      "title": "打贏之後掉落的東西",
+      "body": "`sub_289EE(0)`（RE-091）還沒做。戰利品清單本身已完成，缺的是這一段掉落。",
+      "acceptance": "掉落接上，正常路徑撿得到並有收據。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/state.go"
+        ],
+        "pattern": "sub_289EE\\(0\\)`，還沒做",
+        "note": "state.go 的自承，接上時會消失。"
+      }
+    },
+    {
+      "id": "town-typing-input-box",
+      "layer": "gap",
+      "title": "城鎮打字問話的輸入框",
+      "body": "MOUTH 的打字問話功能本身已解並驗過（RE-067／RE-114），但 remake 沒有輸入框，腳本用替代形式送同一件事。正常玩家在 GUI 上打不了字。",
+      "acceptance": "輸入框做出來，正常 GUI 打得了字並問得到關鍵字。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/town/keys.go"
+        ],
+        "pattern": "remake 的輸入框還沒做",
+        "note": "keys.go 的自承，做出來時會消失。"
+      }
+    },
+    {
+      "id": "word-2df2c-outdoor-switch",
+      "layer": "spec",
+      "title": "word_2DF2C：城外換整張底圖的那個開關",
+      "body": "在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。",
+      "acceptance": "開關語意解出並寫進規格。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/town/layout.go"
+        ],
+        "pattern": "是那個開關，語意還沒解",
+        "note": "layout.go 的自承，解出時會改寫。"
+      }
+    },
+    {
+      "id": "spec008-unsolved-list",
+      "layer": "spec",
+      "title": "SPEC-008 的未解清單（沒有產品碼自承的那幾項）",
+      "body": "SPEC-008 末尾那一節列的七項裡，有四項已經各自有條目（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8` 的選單協定、`+0x25` 的讀取端）。剩下三項在產品碼裡沒有留下自承，所以 `scan` 掃不到，靠這一條追：敵人 AI 那三張基礎權重表的**執行期值**、`sub_1B94F`（把物品格展開成名字）、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關（`word_3AC58` 與參戰者記錄 +0x06 的語意）、`sub_2625A` 的語意。",
+      "acceptance": "SPEC-008 末尾那一節清空，或剩下的每一項各有條目。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/008-combat-field.md"
+        ],
+        "pattern": "## 還沒解出來的",
+        "note": "綁 SPEC-008 那一節的標題：整節清掉時這一條會開口。這是唯一一條綁規格文件而不是產品碼的——那幾項沒有程式落點可綁，硬綁一個猜想中的識別字會永遠為真。"
       }
     },
     {
@@ -722,6 +941,69 @@
       },
       "status": "done",
       "resolved": "2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。"
+    }
+  ],
+  "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",
+  "acknowledged": [
+    {
+      "file": "internal/battle/execution.go",
+      "match": "Unimplemented 為真表示這一手",
+      "why": "欄位語意說明：這一格記的是「remake 沒做出來」，不是原版沒有動作。缺口本身由對應的 items 條目追。"
+    },
+    {
+      "file": "internal/battle/execution.go",
+      "match": "真的空著就標成還沒實作",
+      "why": "容錯路徑：規劃段沒填指令時標記出來而不假裝做過，是防呆不是待辦。"
+    },
+    {
+      "file": "internal/battle/execution.go",
+      "match": "表示規劃段漏接了",
+      "why": "同上，容錯路徑。"
+    },
+    {
+      "file": "internal/battle/planning.go",
+      "match": "Unimplemented 記下按了但還沒實作的圖示",
+      "why": "欄位語意說明，照 town.Session 的做法不默默吞掉。"
+    },
+    {
+      "file": "internal/flow/flow.go",
+      "match": "Unimplemented 記下玩家選到但還沒實作的功能",
+      "why": "欄位語意說明。"
+    },
+    {
+      "file": "internal/town/session.go",
+      "match": "Unimplemented 記下玩家選到但還沒實作的圖示",
+      "why": "欄位語意說明。"
+    },
+    {
+      "file": "internal/town/session.go",
+      "match": "note 記下玩家選到但還沒實作的圖示",
+      "why": "函式用途說明。"
+    },
+    {
+      "file": "internal/town/sheet.go",
+      "match": "sheetIconName 是資料頁上那幾個還沒實作的圖示名稱",
+      "why": "函式用途說明；那幾個圖示本身由 g01-cjk-sheet-pages 追。"
+    },
+    {
+      "file": "internal/battle/knockback.go",
+      "match": "這一回合還沒做的那一手取消掉",
+      "why": "遊戲規則的敘述——擊退會取消那一名這回合尚未執行的動作。不是 remake 的缺口。"
+    },
+    {
+      "file": "internal/battle/knockback.go",
+      "match": "取消這一回合還沒做的那一手",
+      "why": "同上，遊戲規則。"
+    },
+    {
+      "file": "internal/battle/battle.go",
+      "match": "更正 RE-113 的",
+      "why": "記的是一個**已經解出來**的更正，句中的「還沒解」是被更正的舊說法。"
+    },
+    {
+      "file": "cmd/kol/main.go",
+      "match": "沒有訊息的那幾手不停下來等鍵",
+      "why": "容錯行為：遇到 remake 還沒做出來的那一手時不要停在空白畫面。缺口本身另有條目。"
     }
   ]
 }

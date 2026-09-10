@@ -169,6 +169,92 @@ def check_schema(data: dict) -> list:
     return problems
 
 
+# 產品碼裡「這件事還沒做」的自承說法。掃出來的每一行都要有人認領：
+# 不是某個條目的 verify 綁著它，就是在 `acknowledged` 裡寫明為什麼它不是待辦。
+ADMISSION = re.compile(r"還沒解|還沒實作|還沒接|還沒做|還沒查|尚未實作|沒有實作|TODO")
+
+# 掃描範圍。只看產品碼——測試檔提到還沒接的東西是正常的。
+SCAN_ROOTS = ("cmd", "internal")
+
+
+def scan_admissions(root: Path = ROOT) -> list:
+    """回產品碼裡所有自承還沒做的行：`(相對路徑, 行號, 內容)`。"""
+    found = []
+    for target in SCAN_ROOTS:
+        base = root / target
+        if not base.is_dir():
+            continue
+        for f in sorted(base.rglob("*.go")):
+            if is_test_file(f):
+                continue
+            for n, line in enumerate(f.read_text(encoding="utf-8", errors="ignore").split("\n"), 1):
+                if ADMISSION.search(line):
+                    found.append((str(f.relative_to(root)), n, line.strip()))
+    return found
+
+
+def claimed_by(data: dict, path: str, line: str, root: Path = ROOT) -> str | None:
+    """這一行有沒有被某個條目的 verify 綁著？回那個條目的 id。
+
+    判定要**精確到這一行**：只看 `paths` 涵不涵蓋這個檔案是不夠的——一個綁
+    `internal/` 的條目會把整棵樹都認領走，於是這支掃描永遠是乾淨的而什麼都沒看。
+    """
+    for item in data["items"]:
+        v = item["verify"]
+        if v["kind"] not in {"present", "absent", "required_in_all"}:
+            continue
+        covered = False
+        for target in v["paths"]:
+            if path == target or path.startswith(target.rstrip("/") + "/"):
+                covered = True
+                break
+        if not covered:
+            continue
+        if re.search(v["pattern"], line):
+            return item["id"]
+    return None
+
+
+def acknowledged_by(data: dict, path: str, line: str) -> str | None:
+    """這一行有沒有在 `acknowledged` 裡被寫明「不是待辦」？回那條的理由。"""
+    for ack in data.get("acknowledged", []):
+        if ack["file"] != path:
+            continue
+        if re.search(ack["match"], line):
+            return ack["why"]
+    return None
+
+
+def orphan_admissions(data: dict, root: Path = ROOT) -> list:
+    """回「沒有人認領」的自承行。"""
+    out = []
+    for path, n, line in scan_admissions(root):
+        if claimed_by(data, path, line, root) or acknowledged_by(data, path, line):
+            continue
+        out.append((path, n, line))
+    return out
+
+
+def cmd_scan(_args) -> int:
+    data = load()
+    rows = scan_admissions()
+    orphans = orphan_admissions(data)
+    claimed = len(rows) - len(orphans)
+    print(f"產品碼裡的自承共 {len(rows)} 行；{claimed} 行有人認領，{len(orphans)} 行沒有。")
+    if orphans:
+        print()
+        print("★ 下列自承沒有條目綁著，也沒有寫明為什麼不是待辦：")
+        for path, n, line in orphans:
+            print(f"  {path}:{n}")
+            print(f"      {line[:110]}")
+        print()
+        print("處置：替它開一條 `items`（verify 綁這一行），")
+        print("或在 `acknowledged` 寫明它為什麼不是待辦。")
+        return 1
+    print("每一行自承都有人認領。")
+    return 0
+
+
 def cmd_verify(_args) -> int:
     data = load()
     problems = check_schema(data)
@@ -225,6 +311,15 @@ def cmd_verify(_args) -> int:
         for ident, why in regressed:
             print(f"  - {ident}：{why}")
 
+    orphans = orphan_admissions(data)
+    if orphans:
+        print()
+        print(f"★ 產品碼裡有 {len(orphans)} 行自承沒有條目認領（跑 scan 看細節）：")
+        for path, n, line in orphans[:5]:
+            print(f"  - {path}:{n}　{line[:70]}")
+        if len(orphans) > 5:
+            print(f"  …另外 {len(orphans)-5} 行")
+
     desync = out_of_sync(data)
     if desync:
         print()
@@ -234,7 +329,7 @@ def cmd_verify(_args) -> int:
     else:
         print()
         print("WORKLIST.md 與 CONTEXT.md 的產生區塊都與 JSON 同步。")
-    return 1 if (stale or regressed or desync) else 0
+    return 1 if (stale or regressed or desync or orphans) else 0
 
 
 def render_markdown(data: dict) -> str:
@@ -480,6 +575,33 @@ def cmd_selftest(_args) -> int:
     if "2 條未完成" not in render_stats(probe):
         failures.append("render_stats：加一條之後數字沒有跟著動——那就是寫死的")
 
+    # --- scan：孤兒要被抓到，認領之後要閉嘴 -------------------------------
+    with tempfile.TemporaryDirectory() as tmp:
+        box = Path(tmp)
+        (box / "internal").mkdir()
+        (box / "internal" / "x.go").write_text("// 這一段還沒實作\n", encoding="utf-8")
+        (box / "internal" / "x_test.go").write_text("// 測試裡的還沒實作不算\n", encoding="utf-8")
+        rows = scan_admissions(box)
+        if len(rows) != 1:
+            failures.append(f"scan_admissions：掃到 {len(rows)} 行，應該只有產品碼那一行")
+        empty = {"layers": {}, "items": [], "acknowledged": []}
+        if len(orphan_admissions(empty, box)) != 1:
+            failures.append("orphan_admissions：沒有人認領時應該回報一行")
+        claimed = {"layers": {}, "acknowledged": [], "items": [{
+            "id": "c", "layer": "a", "title": "t", "body": "b", "acceptance": "a",
+            "verify": {"kind": "present", "paths": ["internal/x.go"], "pattern": "還沒實作"}}]}
+        if orphan_admissions(claimed, box):
+            failures.append("orphan_admissions：條目綁著了還說沒人認領")
+        # 綁到別的檔案不算認領——不然一條就能把整棵樹認領走。
+        wrong = json.loads(json.dumps(claimed))
+        wrong["items"][0]["verify"]["paths"] = ["internal/other.go"]
+        if not orphan_admissions(wrong, box):
+            failures.append("orphan_admissions：綁到別的檔案竟然也算認領")
+        acked = {"layers": {}, "items": [], "acknowledged": [
+            {"file": "internal/x.go", "match": "還沒實作", "why": "說明用"}]}
+        if orphan_admissions(acked, box):
+            failures.append("orphan_admissions：acknowledged 之後不該再報")
+
     # --- schema 檢查自己也要有反例 ---------------------------------------
     bad = {"layers": {"a": "A"}, "items": [{"id": "x", "layer": "b", "verify": {"kind": "nope"}}]}
     if not check_schema(bad):
@@ -526,6 +648,7 @@ def main() -> int:
     r = sub.add_parser("render", help="產生 WORKLIST.md 的未完成項一節")
     r.add_argument("--stdout", action="store_true", help="只印出來，不回寫")
     r.set_defaults(func=cmd_render)
+    sub.add_parser("scan", help="掃產品碼的自承，列出沒有條目認領的").set_defaults(func=cmd_scan)
     sub.add_parser("selftest", help="機制的正反對照").set_defaults(func=cmd_selftest)
     args = ap.parse_args()
     return args.func(args)
