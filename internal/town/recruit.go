@@ -29,6 +29,8 @@ const (
 
 // Candidate 是一名可招募的角色。Place 與 Town 是角色檔裡的所在地欄位。
 type Candidate struct {
+	ID       string
+	Full     *Member
 	Name     string
 	Portrait int
 	Place    string
@@ -46,13 +48,120 @@ type Candidate struct {
 	// Worn 是穿戴欄十格，索引同部位（第十格是腰帶）；空的那一格是 nil（RE-080）。
 	Worn [WornSlots]*Good
 	// InHand 是手上那件（角色記錄 0x30），不屬於穿戴欄（RE-127）。
-	InHand *Good
+	InHand   *Good
+	Backpack []Good
 	// Spells 是角色記錄 0x200 起那十六筆法術裡非空的幾筆（RE-100）。
 	Spells []Spell
 	// Progress 是「已回報的任務數」那五格；Carried 是交任務物品要逐 byte 比的
 	// 那十七格（RE-107／RE-109）。
 	Progress []int
 	Carried  [][]byte
+}
+
+// SelectLeader 以名冊中的角色開始隊伍；不沿用畫面樣本中的預設隊員。
+// 名稱定位沿用 SPEC-006 現行契約，穩定身分的保存契約另行修訂。
+func (s *Session) SelectLeader(name string) bool {
+	for _, c := range s.Roster {
+		if c.Name != name {
+			continue
+		}
+		m := c.member()
+		s.Party = []Member{m}
+		s.syncParty()
+		return true
+	}
+	return false
+}
+
+// StartLeader 還原角色所在旅店，再交給正常城鎮流程（SPEC-016）。
+// 跨城時由上層提供唯讀載入器；所在地無法對應時保持原狀。
+func (s *Session) StartLeader(name string) bool {
+	if s.Outdoor == nil || s.Buildings == nil {
+		return false
+	}
+	for _, c := range s.Roster {
+		if c.Name != name || c.Town == "" {
+			continue
+		}
+		if c.Town != s.TownCode {
+			if s.LoadStartingTown == nil {
+				return false
+			}
+			entry, buildings, grid, err := s.LoadStartingTown(c.Town)
+			if err != nil || entry.Code != c.Town || buildings == nil || grid == nil {
+				return false
+			}
+			// 先在副本驗證建築與位置，失敗時保留玩家原本的隊伍及城鎮。
+			trial, outdoor := *s, *s.Outdoor
+			trial.Outdoor = &outdoor
+			trial.EnterFromWorld(entry, buildings, grid)
+			if !trial.StartLeader(name) {
+				return false
+			}
+			*s.Outdoor = outdoor
+			trial.Outdoor = s.Outdoor
+			*s = trial
+			return true
+		}
+		for i := range s.Buildings.Doors {
+			door := &s.Buildings.Doors[i]
+			if door.RecordID != c.BuildingID || placeKey(door.Name) != c.Place {
+				continue
+			}
+			position := *s.Outdoor
+			position.PlaceParty(door.X, door.Y)
+			if x, y := position.PartyPosition(); x != door.X || y != door.Y {
+				return false
+			}
+			s.Party = []Member{c.member()}
+			s.Outdoor.PlaceParty(door.X, door.Y)
+			s.Outdoor.AtEdge = false
+			s.Outdoor.AtDoorCell = true
+			s.syncParty()
+			s.enter()
+			return true
+		}
+	}
+	return false
+}
+
+// member 建立遊玩中的獨立副本；修改隊員不能暗中改寫尚未保存的名冊。
+func (c Candidate) member() Member {
+	if c.Full != nil {
+		m := CloneMember(*c.Full)
+		m.Speaker = true
+		return m
+	}
+	m := Member{Name: c.Name, Portrait: c.Portrait, Female: c.Female,
+		Wounds: c.Wounds, Gold: c.Gold, Place: c.Place, TownCode: c.Town,
+		BuildingID: c.BuildingID, Worn: c.Worn, InHand: c.InHand,
+		Backpack: append([]Good(nil), c.Backpack...),
+		Spells:   append([]Spell(nil), c.Spells...),
+		Quests:   append([]int(nil), c.Quests...), Progress: append([]int(nil), c.Progress...),
+		Speaker: true}
+	if c.Sheet != nil {
+		sheet := *c.Sheet
+		sheet.Weapons = append([]WeaponRow(nil), c.Sheet.Weapons...)
+		m.Sheet = &sheet
+	}
+	for _, record := range c.Carried {
+		m.Carried = append(m.Carried, append([]byte(nil), record...))
+	}
+	if c.InHand != nil {
+		item := *c.InHand
+		m.InHand = &item
+	}
+	for i, worn := range c.Worn {
+		if worn != nil {
+			item := *worn
+			m.Worn[i] = &item
+		}
+	}
+	for i := range m.Spells {
+		m.Spells[i].Guards = append([]int(nil), c.Spells[i].Guards...)
+	}
+	m.ID = c.ID
+	return m
 }
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。
@@ -187,12 +296,8 @@ func (s *Session) joinSelected() {
 	for i := range s.Party {
 		s.Party[i].Speaker = false
 	}
-	s.Party = append(s.Party, Member{Name: c.Name, Portrait: c.Portrait,
-		Female: c.Female, Wounds: c.Wounds, Gold: c.Gold, Place: c.Place,
-		TownCode: c.Town, BuildingID: c.BuildingID, Sheet: c.Sheet,
-		Worn: c.Worn, InHand: c.InHand, Spells: c.Spells, Quests: c.Quests,
-		Progress: c.Progress, Carried: c.Carried, Speaker: true})
-	s.Inside.Party = s.Party
+	s.Party = append(s.Party, c.member())
+	s.syncParty()
 	s.recruit, s.asking = nil, false
 	s.Inside.List = nil
 	s.greeted = true

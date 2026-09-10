@@ -24,6 +24,8 @@ func fleeState() *State {
 	s := &State{Field: NewField(), Actors: make([]Actor, 3),
 		Site: &Site{Index: 0}, QuestItem: "CROWN",
 		Party: []Member{{WeaponName: "SWORD"}, {WeaponName: "CROWN"}}}
+	s.Site.QuestItem.Record = "01000000000000000000000000000000"
+	s.Party[1].HandItem = &Item{Name: "CROWN", Record: s.Site.QuestItem.Record}
 	s.Actors[0] = Actor{Side: SideParty, Member: 0, X: 30, Y: 30, Threshold: 100}
 	s.Actors[1] = Actor{Side: SideParty, Member: 1, X: 30, Y: 30, Threshold: 100}
 	s.Actors[2] = Actor{Side: SideMonster, X: 20, Y: 20, Threshold: 100}
@@ -73,6 +75,7 @@ func TestFleeWithoutQuestItem(t *testing.T) {
 	}
 	// 這一次沒有人帶著東西：任務不標。
 	s.Party[1].WeaponName = "SWORD"
+	s.Party[1].HandItem = nil
 	if n := s.Flee(); n != 0 {
 		t.Fatalf("沒帶東西不該標完成，得到 %d", n)
 	}

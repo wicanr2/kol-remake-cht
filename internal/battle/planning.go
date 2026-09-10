@@ -46,6 +46,10 @@ const (
 // Planning 是規劃段那一名走到哪裡。
 type Planning struct {
 	Prompt Prompt
+	// BodyActor 為左下框被檢視的 actor 索引加一；零為空框，與行動者分開。
+	BodyActor int
+	// EquipmentPanel 為左上裝備模式；新隊員規劃重設，取消子選單保留。
+	EquipmentPanel bool
 	// Bar 是目前那一列的圖號；Selected 是白框停在第幾格。
 	Bar      []int
 	Selected int
@@ -80,6 +84,7 @@ func (s *State) BeginTurn() {
 		return
 	}
 	s.Plan.Prompt = PromptCommand
+	s.Plan.BodyActor = i + 1
 	s.Plan.Env = s.CommandEnv(i)
 	s.Plan.Bar = CommandBar(&s.Actors[i], m, s.Plan.Env)
 	s.Plan.Selected = 0
@@ -114,6 +119,9 @@ func (s *State) MoveCursor(dRow, dCol int, mouse bool) {
 		return
 	}
 	s.Plan.Cursor.Move(dRow, dCol, mouse)
+	if dRow != 0 || dCol != 0 {
+		s.inspectBodyTarget()
+	}
 }
 
 // Choose 是按下 Return。回報這一輪的規劃是不是結束了。
@@ -196,6 +204,7 @@ func (s *State) beginTarget(i, mode int, after Prompt) {
 	s.Plan.Bar = []int{CmdYes, CmdCancel}
 	s.Plan.Selected = 0
 	s.Plan.Cursor.Icon = 0
+	s.inspectBodyTarget()
 }
 
 // chooseTarget 是選目標格按下 Return（`0x248F5`）。

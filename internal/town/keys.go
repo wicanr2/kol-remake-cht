@@ -16,6 +16,13 @@ var walkKeys = map[string][2]int{
 //
 // 清單開著的時候上下鍵移動反白而不是走路——原版的招募、商店與訓練清單都吃上下鍵。
 func (s *Session) Key(token string) bool {
+	if s.leaving {
+		if token == "SPACE" || token == "RET" {
+			s.Continue()
+			return true
+		}
+		return false
+	}
 	// 打問句的時候鍵盤是輸入框：單一字元進緩衝區、`BS` 退格、`RET` 送出。
 	// 其餘的鍵在原版的讀入迴圈裡也不做事。
 	if s.Asking() {

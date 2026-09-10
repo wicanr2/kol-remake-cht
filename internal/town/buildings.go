@@ -56,6 +56,7 @@ type Door struct {
 	QuestWantsBytes string `json:"quest_wants_bytes"`
 	QuestGives      string `json:"quest_gives"`
 	QuestGivesBytes string `json:"quest_gives_bytes"`
+	QuestGivesItem  *Good  `json:"quest_gives_item,omitempty"`
 }
 
 // QuestFlagBit 是 `icon_flags[1]` 裡「收任務物品」那一位（`sub_11A93:0x11B5A`）。
@@ -70,7 +71,7 @@ func (d *Door) Quest() *QuestBuilding {
 	if err != nil || len(wants) != CarriedStride {
 		return nil
 	}
-	out := &QuestBuilding{Site: d.QuestSite, Final: d.QuestFinal, Wants: wants}
+	out := &QuestBuilding{Site: d.QuestSite, Final: d.QuestFinal, Wants: wants, GivesItem: d.QuestGivesItem}
 	if gives, err := hex.DecodeString(d.QuestGivesBytes); err == nil &&
 		len(gives) == CarriedStride {
 		out.Gives = gives
@@ -148,6 +149,7 @@ type rawDoor struct {
 	QuestWantsBytes string `json:"quest_wants_bytes"`
 	QuestGives      string `json:"quest_gives"`
 	QuestGivesBytes string `json:"quest_gives_bytes"`
+	QuestGivesItem  *Good  `json:"quest_gives_item,omitempty"`
 }
 
 type rawTown struct {
@@ -199,6 +201,7 @@ func LoadBuildings(path string) (*Buildings, error) {
 				QuestSite: d.QuestSite, QuestFinal: d.QuestFinal,
 				QuestWants: d.QuestWants, QuestWantsBytes: d.QuestWantsBytes,
 				QuestGives: d.QuestGives, QuestGivesBytes: d.QuestGivesBytes,
+				QuestGivesItem: d.QuestGivesItem,
 			}
 			if len(d.IconFlags) == 2 {
 				door.IconFlags = [2]int{d.IconFlags[0], d.IconFlags[1]}

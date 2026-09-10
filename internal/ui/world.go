@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"strings"
@@ -140,7 +141,10 @@ func drawWeather(dst *ebiten.Image, s *world.Screen) {
 	if s.Weather == nil {
 		return
 	}
-	pixels := s.Weather.Composite(s.Phase)
+	pixels := s.Weather.CompositeGroup(s.Group, s.Phase)
+	if len(pixels) != world.WeatherWidth*world.WeatherHeight {
+		return
+	}
 	p := world.WeatherPicture
 	for y := 0; y < world.WeatherHeight; y++ {
 		for x := 0; x < world.WeatherWidth; x++ {
@@ -210,7 +214,10 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 
 	fill(dst, l.WeatherX, l.WeatherY, l.WeatherW, l.WeatherH, town.ColourBoxEdge)
 	if s.Weather != nil {
-		pixels := s.Weather.Composite(s.Phase)
+		pixels := s.Weather.CompositeGroup(s.Group, s.Phase)
+		if len(pixels) != world.WeatherWidth*world.WeatherHeight {
+			return fmt.Errorf("無效天候組 %d", s.Group)
+		}
 		for y := 0; y < world.WeatherHeight; y++ {
 			for x := 0; x < world.WeatherWidth; x++ {
 				c := pixels[y*world.WeatherWidth+x]

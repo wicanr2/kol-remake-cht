@@ -29,8 +29,7 @@ var (
 // NewArena 擺好競技場那一場：一隻對手、只有 fighter 那一名參戰。
 //
 // `kind` 是對手的種類編號、`level` 是對手等級（上場那一名的實得位階加一）。
-// 地形與隨機遭遇一樣由呼叫端傳進來——`word_34968 = 1` 表示原版在這裡載入的是
-// 別的東西，載的是哪一份還沒讀出來（RE-108）。
+// 地形由呼叫端依 SPEC-025 載入 TOWN0 payload 85，再套用共同樹叢散布。
 func NewArena(fighter, kind, level int, monster Monster, party []Member,
 	field *Field) *State {
 	if fighter < 0 || fighter >= len(party) {

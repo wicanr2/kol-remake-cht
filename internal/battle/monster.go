@@ -11,6 +11,9 @@ import (
 
 // Monster 是一種怪物，欄位名與 `tools/extract_monsters.py` 的輸出相同。
 type Monster struct {
+	// SPEC-029：初始化射擊資格，原版怪物記錄 +0x1E／+0x1F。
+	RangedChance int `json:"ranged_chance"`
+	RangedCode int `json:"ranged_code"`
 	Index     int    `json:"index"`
 	Name      string `json:"name"`
 	Strength  int    `json:"strength"`
@@ -67,6 +70,12 @@ type Monster struct {
 
 // Item 是一格裝備，欄位名與商店的商品記錄相同（RE-075）。
 type Item struct {
+	Price       int    `json:"price"`
+	Kind        int    `json:"kind"`
+	Damage      bool   `json:"damage"`
+	Position    int    `json:"position"`
+	Condition   int    `json:"condition"`
+	Percent     int    `json:"percent"`
 	Name        string `json:"name"`
 	Class       int    `json:"class"`
 	Hands       int    `json:"hands"`
@@ -76,6 +85,8 @@ type Item struct {
 		Count int `json:"count"`
 		Sides int `json:"sides"`
 		Bonus int `json:"bonus"`
+		Low   int `json:"low"`
+		High  int `json:"high"`
 	} `json:"dice"`
 	Record string `json:"record"`
 }
@@ -160,6 +171,15 @@ func LoadMonsters(path string) (*Monsters, error) {
 	}
 	if m.Schema != "kol-monster-data-v1" {
 		return nil, fmt.Errorf("怪物資料 schema 不符：%q", m.Schema)
+	}
+	var fields struct { List []map[string]json.RawMessage `json:"monsters"` }
+	if err := json.Unmarshal(body, &fields); err != nil { return nil, err }
+	for i, mon := range m.List {
+		if len(fields.List[i]["ranged_chance"]) == 0 || len(fields.List[i]["ranged_code"]) == 0 ||
+			string(fields.List[i]["ranged_chance"]) == "null" || string(fields.List[i]["ranged_code"]) == "null" ||
+			mon.RangedChance < 0 || mon.RangedChance > 255 || mon.RangedCode < 0 || mon.RangedCode > 255 {
+			return nil, fmt.Errorf("怪物 %d 缺少合法遠程初始化欄位，請重新抽取資料", mon.Index)
+		}
 	}
 	return &m, nil
 }

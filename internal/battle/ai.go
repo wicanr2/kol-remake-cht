@@ -202,9 +202,9 @@ func EnemyMoveForm(level, ring int, legsOK bool, hurt int, rng Rand) int {
 // （各有兩到三場戰鬥，中間還夾著城鎮互動），所以留待專門的一輪處理。
 
 // EnemyShootRing 是肯射擊的最遠環號。原版比的是 `word_349B2 < 4`（`0x23EBB`），
-// 而那個計數從 1 起算相鄰的那一圈（`0x23DDE`）——remake 的環號從 0 起算同一圈，
-// 所以門檻少一。環 0 在前面就被貼身攻擊接走了，實際會射的是環 1 與環 2。
-const EnemyShootRing = 3
+// 原版與 remake 的環號相同：0x23C1A 先設零搜尋鄰圈，0x23DDE 才從外圈 1 起。
+// 環 0 在前面被貼身攻擊接走，實際會射的是環 1、2、3（SPEC-013 訂正）。
+const EnemyShootRing = 4
 
 // EnemyDecision 是敵人這一回合要做什麼。
 type EnemyDecision struct {
@@ -314,15 +314,10 @@ func (s *State) planTactics(i int, rng Rand) EnemyDecision {
 		foot = MountedSight
 	}
 	for ring := 1; ring < RingCount; ring++ {
-		t := s.findInRing(i, ring, rng)
+		t := s.findInRingMatching(i, ring, rng, func(target int) bool {
+			return s.Field == nil || s.Field.LineOfSight(a.X, a.Y, s.Actors[target].X, s.Actors[target].Y, foot)
+		})
 		if t < 0 {
-			continue
-		}
-		// 線通不到就跳過。**原版是回頭在同一環繼續找下一個**
-		// （`0x23EB8` 跳回 `0x23DEC`），這裡換下一環——`findInRing` 一次只回
-		// 一名，兩者只在同一環有多名目標而近的那名被擋住時不同。
-		if s.Field != nil &&
-			!s.Field.LineOfSight(a.X, a.Y, s.Actors[t].X, s.Actors[t].Y, foot) {
 			continue
 		}
 		if ring < EnemyShootRing && a.Kind != 0 && a.RightArm > 0 {
@@ -375,7 +370,7 @@ func (s *State) counterScan(i int, rng Rand) (style, target int, ok bool) {
 	cells := RingCells(0)
 	best, bestStyle, last := 0, 0, -1
 	// 起點隨機，與 `sub_2531C` 第一次傳 0xFFFF 時的行為相同。
-	start := rng.Roll(len(cells)) - 1
+	start := rng.Roll(len(cells)-1) - 1
 	for k := 0; k < len(cells); k++ {
 		n := (start + k) % len(cells)
 		c := cells[n]
@@ -688,16 +683,21 @@ func (s *State) applyEnemy(i int, d EnemyDecision) {
 // 起點是隨機的（`sub_2531C` 第一次傳 0xFFFF 時從 `rand(格數 − 1) − 1` 起跳），
 // 所以同樣的戰況不會總是選同一個目標。
 func (s *State) findInRing(i, ring int, rng Rand) int {
+	return s.findInRingMatching(i, ring, rng, nil)
+}
+
+// 被擋住時延續同一圈與起點，不重擲（SPEC-013；原版 0x23EB8→0x23DEC）。
+func (s *State) findInRingMatching(i, ring int, rng Rand, accept func(int) bool) int {
 	a := s.Actors[i]
 	cells := RingCells(ring)
 	if len(cells) == 0 {
 		return -1
 	}
-	start := rng.Roll(len(cells)) - 1
+	start := rng.Roll(len(cells)-1) - 1
 	for n := 0; n < len(cells); n++ {
 		c := cells[(start+n)%len(cells)]
 		if t := s.actorAt(a.X+c.Row, a.Y+c.Col); t >= 0 &&
-			s.Actors[t].Side == SideParty && !s.Actors[t].Down() {
+			s.Actors[t].Side == SideParty && !s.Actors[t].Down() && (accept == nil || accept(t)) {
 			return t
 		}
 	}

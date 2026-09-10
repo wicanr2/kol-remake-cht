@@ -14,6 +14,7 @@ import argparse
 import hashlib
 import json
 import pathlib
+import re
 
 # 三個包各自的權利分類，寫進 manifest 免得日後靠記憶。
 RIGHTS = {
@@ -35,7 +36,11 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--dist", required=True)
     p.add_argument("--version", required=True)
+    p.add_argument("--platform", action="append", required=True,
+                   choices=("linux/amd64", "windows/amd64", "darwin/amd64", "darwin/arm64"))
     args = p.parse_args()
+    if not re.fullmatch(r"v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}", args.version):
+        p.error("版號必須使用 v.<主版>.<次版>.<修訂版>-YYYYMMDD")
 
     root = pathlib.Path(args.dist)
     for bundle in ("full", "release", "promo"):
@@ -44,7 +49,7 @@ def main() -> int:
             continue
         files = []
         for path in sorted(base.rglob("*")):
-            if not path.is_file() or path.name == "manifest.json":
+            if not path.is_file() or path == base / "manifest.json":
                 continue
             files.append({"path": str(path.relative_to(base)),
                           "bytes": path.stat().st_size,
@@ -54,10 +59,9 @@ def main() -> int:
             "version": args.version,
             "bundle": bundle,
             "rights": RIGHTS[bundle],
-            "platform": ["linux/amd64（容器裡原生建置，Ebitengine 在 Linux 要 CGO）",
-                         "windows/amd64（交叉編譯，Ebitengine 在 Windows 走 syscall "
-                         "不用 CGO；**沒有真機驗收**）"],
-            "save_location": "遊戲以 `-save` 指定；預設寫在工作目錄，不碰使用者家目錄",
+            "platform": args.platform,
+            "validation": "清單僅記錄檔案與目標平台；啟動、存讀檔及真機驗收須另附收據。",
+            "save_location": "互動模式預設使用作業系統的使用者設定目錄下 kol-remake-cht/save.dat；可用 -save 指定。",
             "file_count": len(files),
             "files": files,
         }

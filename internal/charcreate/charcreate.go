@@ -61,6 +61,11 @@ func New(data *chardata.Data, rng Rand) *State {
 	return &State{data: data, rng: rng, Stage: StageName, summaryVisible: true}
 }
 
+// Restart 開始新的建角流程，保留資料與亂數來源。
+func (s *State) Restart() {
+	*s = *New(s.data, s.rng)
+}
+
 // Professions 是目前種族／secondary 對應的職業清單。
 func (s *State) Professions() []chardata.Profession {
 	return s.data.Professions(s.Race, s.Secondary)

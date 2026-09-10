@@ -11,6 +11,7 @@ import (
 )
 
 type Slot struct {
+	ID       string `json:"id,omitempty"`
 	Slot     int    `json:"slot"`
 	Name     string `json:"name"`
 	Place    string `json:"place"`
@@ -40,7 +41,8 @@ type Slot struct {
 	Equipment []*Item `json:"equipment"`
 	// InHand 是手上那件（角色記錄 0x30），**不屬於穿戴欄**：戰鬥的攻擊值、
 	// 負重與立繪的武器那一層讀的都是它（RE-127）。
-	InHand *Item `json:"in_hand"`
+	InHand   *Item   `json:"in_hand"`
+	Backpack []*Item `json:"backpack"`
 	// Progress 是角色記錄 0x1DD 起那五格「已回報的任務數」（RE-107）。
 	Progress []int `json:"progress"`
 	// Carried 是交任務物品時要逐 byte 比的那十七格（RE-109）。typed 的
@@ -98,6 +100,7 @@ type Weapon struct {
 
 // Sheet 是角色資料頁要用到的欄位，欄位名與抽取器的輸出相同。
 type Sheet struct {
+	Ward            int      `json:"ward"`
 	Stats           []int    `json:"stats"`
 	Race            int      `json:"race"`
 	Profession      int      `json:"profession"`

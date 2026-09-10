@@ -44,7 +44,8 @@ const (
 
 // Flow 是一次遊玩。各畫面的狀態由呼叫端建好後交進來。
 type Flow struct {
-	Scene Scene
+	CommitCreate func(*charcreate.State) error
+	Scene        Scene
 
 	Roster *roster.Roster
 	Create *charcreate.State
@@ -128,7 +129,11 @@ func (f *Flow) menu(token string) bool {
 		case MenuList:
 			f.Scene = SceneRoster
 		case MenuCreate:
-			f.Create.Cancel()
+			if f.Roster.Full() {
+				f.note("名冊已滿，最多十六名角色")
+				return false
+			}
+			f.Create.Restart()
 			f.Scene = SceneNewChar
 		case MenuDelete:
 			f.Scene = SceneDelete
@@ -146,9 +151,25 @@ func (f *Flow) menu(token string) bool {
 }
 
 func (f *Flow) newchar(token string) bool {
+	if f.Create.Stage == charcreate.StageName {
+		if len(token) == 1 {
+			f.Create.TypeRune(rune(token[0]))
+			return true
+		}
+		if token == "SPACE" {
+			f.Create.TypeRune(' ')
+			return true
+		}
+	}
+	if f.Create.Stage == charcreate.StageDone && token != "RET" {
+		return false
+	}
 	switch token {
 	case "ESC":
-		f.Scene = SceneMenu
+		f.Create.Cancel()
+		if f.Create.Stage == charcreate.StageAbandoned {
+			f.Scene = SceneMenu
+		}
 		return true
 	case "RET":
 		f.Create.Accept()
@@ -164,6 +185,13 @@ func (f *Flow) newchar(token string) bool {
 		if len(token) == 1 {
 			f.Create.TypeRune(rune(token[0]))
 		}
+	}
+	if f.Create.Stage == charcreate.StageDone && f.CommitCreate != nil {
+		if err := f.CommitCreate(f.Create); err != nil {
+			f.note("角色保存失敗：" + err.Error())
+			return false
+		}
+		f.Scene = SceneMenu
 	}
 	return true
 }
@@ -202,7 +230,13 @@ func (f *Flow) selectLeader(token string) bool {
 			f.SelectCursor++
 		}
 	case "RET":
-		f.Scene = SceneInn
+		if len(slots) == 0 || f.SelectCursor >= len(slots) ||
+			!f.Town.StartLeader(slots[f.SelectCursor].Name) {
+			f.note("選角：角色所在地尚未載入或資料不一致")
+			return false
+		}
+		f.Inn = f.Town.Inside
+		f.Scene = SceneTown
 	default:
 		return false
 	}
@@ -210,28 +244,19 @@ func (f *Flow) selectLeader(token string) bool {
 }
 
 func (f *Flow) innKey(token string) bool {
-	switch token {
-	case "<":
-		f.Inn.MoveIcon(-1)
-	case ">":
-		f.Inn.MoveIcon(1)
-	case "RET":
-		if f.Inn.Icons[f.Inn.Selected] == town.DoorIcon {
-			f.Scene = SceneTown
-			return true
-		}
-		f.note("旅店圖示 " + town.InnIconNames[f.Inn.Selected])
-		return false
-	default:
-		return false
-	}
-	return true
+	f.Scene = SceneTown
+	return f.townKey(token)
 }
 
 // townKey 把 token 交給城鎮那一層。鍵位由 `town.Session.Key` 統一定義——
 // flow 只負責轉發，不再自己維護一份 switch。
 func (f *Flow) townKey(token string) bool {
-	return f.Town.Key(token)
+	changed := f.Town.Key(token)
+	if f.Town.ConsumeQuit() {
+		f.Scene = SceneContents
+		return true
+	}
+	return changed
 }
 
 func (f *Flow) note(what string) {

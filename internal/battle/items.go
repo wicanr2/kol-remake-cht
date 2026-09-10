@@ -16,6 +16,7 @@ type GroundItem struct {
 	// 整筆 16 byte 的物品記錄，傷害骰、負重與種類本來就在裡面（RE-113），撿起來
 	// 的人直接拿它去打。只留名字的話撿到什麼都只能照舊數字算。
 	Weapon Weapon
+	Item   *Item
 }
 
 // DropItem 是丟那一手（指令碼 `0x15`，`0x20189`）：把手上那件放到自己腳下。
@@ -40,9 +41,11 @@ func (s *State) DropItem(i int) (int, string) {
 		return CannotDropRecord, ""
 	}
 	name := m.WeaponName
-	s.Ground[slot] = GroundItem{Name: name, X: a.X, Y: a.Y, Weapon: a.Weapon}
+	s.Ground[slot] = GroundItem{Name: name, X: a.X, Y: a.Y, Weapon: a.Weapon, Item: m.HandItem}
+	m.HandItem = nil
 	m.HasWeapon = false
 	m.WeaponName = ""
+	m.Weapon = Weapon{}
 	m.Worn[0] = ""
 	a.Weapon = Weapon{}
 	a.ReloadGear()
@@ -88,6 +91,8 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 		s.Actors[i].ReloadSkills()
 	}
 	if m != nil {
+		m.HandItem = g.Item
+		m.Weapon = g.Weapon
 		m.HasWeapon = true
 		m.WeaponName = g.Name
 		m.Worn[0] = g.Name
@@ -108,8 +113,8 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 // 三個條件：這一場是任務戰鬥（原版看 `word_34968`，remake 看 `Site.Index`）、
 // 撿到的正是任務要的那一件（`sub_2886C`），而且**這一場還沒喊過**
 // （`word_32382`）。喊過就把旗標立起來，一場只喊一次。
-func (s *State) QuestItemCall(name string) bool {
-	if s.questCalled || name == "" || name != s.QuestItem {
+func (s *State) QuestItemCall(item *Item) bool {
+	if s.questCalled || !s.matchesQuestItem(item) {
 		return false
 	}
 	if s.Site == nil || s.Site.Index < 0 {
@@ -142,11 +147,11 @@ func (s *State) SwitchItem(i int) int {
 		return 0
 	}
 	m.WeaponName, m.BeltName = m.BeltName, m.WeaponName
+	m.HandItem, m.BeltItem = m.BeltItem, m.HandItem
 	m.HasWeapon, m.HasSecondItem = m.HasSecondItem, m.HasWeapon
 	m.Worn[0], m.Worn[5] = m.Worn[5], m.Worn[0]
-	if !m.HasWeapon {
-		s.Actors[i].Weapon = Weapon{}
-	}
+	s.Actors[i].Weapon, m.BeltWeapon = m.BeltWeapon, s.Actors[i].Weapon
+	m.Weapon = s.Actors[i].Weapon
 	s.Actors[i].ReloadGear()
 	s.Actors[i].ReloadSkills()
 	return PutsInBeltRecord
@@ -187,7 +192,7 @@ func (s *State) AnswerPickUp(yes bool) bool {
 		return false
 	}
 	i, slot := ask.Actor, ask.Slot
-	name := s.Ground[slot].Name
+	questItem := s.Ground[slot].Item
 	s.PickUp = nil
 	s.Plan.Prompt = PromptExecuting
 	msg, item := s.TakeItem(i, slot)
@@ -197,7 +202,7 @@ func (s *State) AnswerPickUp(yes bool) bool {
 	case msg == MustDropRecord:
 		// 手上已經有東西：只印 0x112，那一手到這裡為止（`0x20417`）。
 		out.Message = msg
-	case s.QuestItemCall(name):
+	case s.QuestItemCall(questItem):
 		// 撿到的正是任務要的那一件就喊一句（記錄 0x113），一場只喊一次。
 		out.Message = QuestItemRecord
 	default:

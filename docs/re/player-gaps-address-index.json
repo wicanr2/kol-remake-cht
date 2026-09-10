@@ -1,0 +1,59 @@
+{
+  "schema": "kol-player-gaps-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x288a0": {
+      "semantic": "將物品記錄目前 byte 與 DS:[BX-46AAh] 比較；目標基址為 DS:0xB956，不是 0xB926。",
+      "confidence": "已證實",
+      "evidence": "SPEC-014 第 4 節；IDA sub_2886C 0x2888D..0x288BD；TestQuestItemRecordOriginal 258 組逐位元差異與任務旗標比較。"
+    },
+    "0x288b0": {
+      "semantic": "逐 byte 比較直到 16 bytes 全部相同，不以零字元終止，不只比較顯示名稱。",
+      "confidence": "已證實",
+      "evidence": "SPEC-014 第 4 節；原始 cmp [bp+var_2],10h；TestQuestItemRecordOriginal 包含嵌入零與全部 128 個單位元差異。"
+    },
+    "0x21889": {
+      "semantic": "共同出口只回寫陣營 byte 為零的隊員；非參戰觀眾與敵方跳過。",
+      "confidence": "已證實",
+      "evidence": "SPEC-027；IDA 0x21883..0x21897 原始比較與分支；TestBattleExitWoundsOriginal 三種陣營共 4608 組比較。"
+    },
+    "0x218c5": {
+      "semantic": "以 16-bit 減法計算戰中傷勢減角色舊傷勢，清 DX 後無號除二。",
+      "confidence": "已證實",
+      "evidence": "SPEC-027；IDA 0x218A2..0x218CE 資料流；TestBattleExitWoundsOriginal 六個原值邊界與所有戰中 byte 值。"
+    },
+    "0x218d8": {
+      "semantic": "將折半差值的 AL 加回角色記錄 +0x1B，保留 byte 回繞，不直接保存戰中傷勢。",
+      "confidence": "已證實",
+      "evidence": "SPEC-027；原始 add [bx+1Bh],al；oracle-implementation/battle-exit.log 直接核對正式 PostBattleWounds 計算。"
+    },
+    "0x13d6f": {
+      "semantic": "比較隊員數與一；單人跳過告別等待。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20260908-building-goodbye.md；原始 cmp word_2DF2A,1 與 recruit/rest 加減交叉參照；oracle-single 與 oracle-party 正常入口收據。"
+    },
+    "0x2b0c9": {
+      "semantic": "競技場以引數 0x18 呼叫固定戰場地圖載入，保留 sub_2B3D1 原名。",
+      "confidence": "已證實",
+      "evidence": "docs/spec/025-arena-field.md；0x2B0C5 推入 0x18，sub_2B3D1 加 0x3D；TestArenaMapOriginal 的 4096 格比較。"
+    },
+    "0x2a185": {
+      "semantic": "將底圖 0x3E0 words 複製到結果緩衝區；DS 為 word_34A1A，ES 為其加 0x117。",
+      "confidence": "已證實",
+      "evidence": "docs/spec/026-weather-animation.md；sub_2A0C6:0x2A173…0x2A185 的原始資料流，輸出 workplace/player-gaps-20260908/player-gaps-private.json。"
+    },
+    "0x2a1b6": {
+      "semantic": "EGA 雲層與遮罩以 16 bytes 即 128 像素為循環列；不可依 PNG 外形推為 64。",
+      "confidence": "已證實",
+      "evidence": "RE-136 TestCloudScrollMatchesOriginal；docs/spec/026-weather-animation.md；sub_2A18E 原始 rcr/lodsb/stosb 迴圈。"
+    },
+    "0x2a1f5": {
+      "semantic": "每平面合成上方 31 列後跳過 0xF8 bytes；下方 31 列保留初始化底圖。",
+      "confidence": "已證實",
+      "evidence": "docs/spec/026-weather-animation.md；0x2A1D9 設定 31 列、0x2A1DB 每列四 words、此處 add di,0F8h；平面總長 496 bytes。"
+    }
+  }
+}

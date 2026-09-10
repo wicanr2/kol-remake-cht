@@ -68,10 +68,12 @@ func LoadField(img image.Image) (*Field, error) {
 func Generate(rng Rand) *Field {
 	f := &Field{Tiles: make([]int, FieldSide*FieldSide)}
 	for i := range f.Tiles {
+		// 原版依 Y*64+X 擲骰；正式資料按 X*64+Y 儲存（SPEC-008 索引增補）。
+		at := (i%FieldSide)*FieldSide + i/FieldSide
 		if rng.Roll(RoughOdds) == 1 {
-			f.Tiles[i] = TileRough
+			f.Tiles[at] = TileRough
 		} else {
-			f.Tiles[i] = TileGround
+			f.Tiles[at] = TileGround
 		}
 	}
 	f.Scatter(rng)
@@ -93,6 +95,7 @@ func (f *Field) Scatter(rng Rand) {
 	}
 	for i := 0; i < total; i++ {
 		at := rng.Roll(len(f.Tiles)) - 1
+		at = (at%FieldSide)*FieldSide + at/FieldSide
 		if f.Tiles[at] == TileGround || f.Tiles[at] == TileRough {
 			f.Tiles[at] = TileScatter
 		}

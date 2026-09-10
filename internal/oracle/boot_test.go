@@ -4,8 +4,8 @@ package oracle
 
 import (
 	"crypto/sha256"
-	"fmt"
 	"encoding/hex"
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
@@ -252,7 +252,7 @@ func TestProbeWhoClearsTimerVector(t *testing.T) {
 	t.Logf("此時開過的檔：%v", o.Opened())
 	// 段暫存器才是答案：搬移或清空迴圈寫錯地方時，錯的通常是 `ES`／`DS`，
 	// 而那從指令本身看不出來。
-	t.Logf("暫存器：%s", o.Regs())
+	t.Logf("暫存器：%+v", o.Regs())
 }
 
 // 探測：`ES` 是在哪裡被設成 0 的。
@@ -270,7 +270,7 @@ func TestProbeWhereESGoesZero(t *testing.T) {
 			t.Logf("第 %d 次：四千萬道指令內 ES 沒有變成 0：%v", i, err)
 			return
 		}
-		t.Logf("第 %d 次：步數 %d，在 %s（IDA %#x），%s",
+		t.Logf("第 %d 次：步數 %d，在 %s（IDA %#x），%+v",
 			i, o.Steps(), o.IP(), o.ToIDA(o.IP()), o.Regs())
 		t.Logf("    接下來的 bytes：%x", o.Bytes(o.IP(), 12))
 		// 走過這一段再找下一次，否則條件立刻又成立。
@@ -627,14 +627,7 @@ func TestProbeTownFileOps(t *testing.T) {
 		t.Logf("（前面 %d 次略過）", from)
 	}
 	for _, op := range ops[from:] {
-		switch op.Kind {
-		case "seek":
-			t.Logf("  第 %8d 道  seek %-12s handle %d  whence %d  位移 %d → %d",
-				op.Step, op.Name, op.Handle, op.Whence, op.Offset, op.Got)
-		default:
-			t.Logf("  第 %8d 道  read %-12s handle %d  從 %d 要 %d 得 %d → %05X",
-				op.Step, op.Name, op.Handle, op.Offset, op.Want, op.Got, op.Into)
-		}
+		logFileOp(t, op)
 	}
 }
 
@@ -672,7 +665,7 @@ func TestProbeMainExecutable(t *testing.T) {
 		t.Logf("沒實作的服務：%v", u)
 	}
 	for _, op := range o.FileOps() {
-		t.Logf("  %s %s 從 %d 要 %d 得 %d", op.Kind, op.Name, op.Offset, op.Want, op.Got)
+		logFileOp(t, op)
 	}
 }
 
@@ -763,8 +756,8 @@ func TestProbeMemOps(t *testing.T) {
 			t.Logf("…還有 %d 筆", len(ops)-i)
 			break
 		}
-		t.Logf("  第 %d 道 %-8s 段=%04X 要=%04X 得=%04X 可用=%04X free=%04X 失敗=%v",
-			op.Step, op.Kind, op.Block, op.Want, op.Got, op.Avail, op.FreeSeg, op.Failed)
+		t.Logf("記憶體軌跡：步數=%d AH=%02X 輸入BX=%04X 輸入ES=%04X 結果AX=%04X 成功=%v",
+			op.Step, op.Fn, op.BX, op.ES, op.AX, op.OK)
 	}
 }
 
@@ -818,8 +811,8 @@ func TestProbeTownMemOps(t *testing.T) {
 			t.Logf("…還有 %d 筆", len(ops)-i)
 			break
 		}
-		t.Logf("  第 %d 道 %-8s 段=%04X 要=%04X 得=%04X 可用=%04X free=%04X 失敗=%v",
-			op.Step, op.Kind, op.Block, op.Want, op.Got, op.Avail, op.FreeSeg, op.Failed)
+		t.Logf("記憶體軌跡：步數=%d AH=%02X 輸入BX=%04X 輸入ES=%04X 結果AX=%04X 成功=%v",
+			op.Step, op.Fn, op.BX, op.ES, op.AX, op.OK)
 	}
 }
 
@@ -833,12 +826,7 @@ func TestProbeTownFullTrace(t *testing.T) {
 	ops := o.FileOps()
 	t.Logf("共 %d 次檔案操作", len(ops))
 	for _, op := range ops {
-		mark := ""
-		if op.Failed {
-			mark = "  ← 失敗"
-		}
-		t.Logf("  第 %8d 道 %-5s %-12s handle %2d whence %d 位移 %6d 要 %5d 得 %5d%s",
-			op.Step, op.Kind, op.Name, op.Handle, op.Whence, op.Offset, op.Want, op.Got, mark)
+		logFileOp(t, op)
 	}
 }
 
@@ -1128,4 +1116,11 @@ func TestProbeRandPerStep(t *testing.T) {
 			savePNG(t, o, dir+"/walk-40.png")
 		}
 	}
+}
+
+// 新版欄位按原義輸出：Arg 是要求量，Pos 是定位結果或讀取起點。
+func logFileOp(t *testing.T, op oracle.FileOp) {
+	t.Helper()
+	t.Logf("檔案軌跡：步數=%d 操作=%s AH=%02X 檔名=%q handle=%d whence=%d 要求=%d 位置=%d 實際長度=%d 失敗=%v",
+		op.Step, op.Op, op.Fn, op.Name, op.Handle, op.Whence, op.Arg, op.Pos, op.Len, op.Failed)
 }

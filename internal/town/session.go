@@ -122,12 +122,16 @@ type Session struct {
 	// pending 是「按空白鍵才會出現」的下一段文字。原版每段話之間都會停在
 	// `sub_144C3`——圖示列縮成一格 SPACEBAR，等玩家讀完。
 	pending []string
+	// leaving 等待 SPEC-024 多人隊伍的建築告別確認，不屬於存檔資料。
+	leaving bool
 	topic   *BuildingTopics
 	door    *Door
 
 	// OnLeaveTown 在玩家於城門選 DOOR 時被呼叫一次，參數是隊伍在世界地圖上的座標。
 	// 上層用它換到野外畫面；沒有掛就只是把事情記下來。
 	OnLeaveTown func(Point)
+	// LoadStartingTown 依角色所在地載入已驗證的城鎮資料，不自行改變遊玩狀態。
+	LoadStartingTown func(code string) (TownEntry, *TownBuildings, *Grid, error)
 	// World 只是給上層判斷「有沒有野外畫面可以換過去」的旗標。
 	World        any
 	WorldEntered bool
@@ -537,6 +541,10 @@ func (s *Session) Continue() {
 	if len(s.Inside.Icons) != 1 || s.Inside.Icons[0] != IconSprite(IconSpacebar) {
 		return
 	}
+	if s.leaving {
+		s.finishLeaveDoor()
+		return
+	}
 	// 賭場那幾句讀完就回去問「要不要下注」（RE-108）。
 	if s.arena != nil && s.arena.stage == arenaBetAsk {
 		s.askBet()
@@ -829,6 +837,29 @@ func (s *Session) Ask(question string) bool {
 // leaveDoor 從門口或建築內回到地圖。原版的掃門迴圈接在移動後面，
 // 所以走出來時人還站在門的格子上，畫面卻是地圖——門口狀態要一併清掉。
 func (s *Session) leaveDoor() {
+	if s.leaving {
+		return
+	}
+	// 原版 word_2DF2A 是隊員數：一人跳過告別；多人讀建築訊息 17。
+	// 門口與城門取消不走建築告別。
+	if s.Mode == ModeInside && s.Inside != nil && len(s.Party) > 1 {
+		if lines := s.message(17); len(lines) > 0 {
+			s.leaving = true
+			// 原版清掉目前發言者再重畫隊伍；只改畫面快照，不改角色保存的發言者。
+			s.Inside.Party = append([]Member(nil), s.Inside.Party...)
+			for i := range s.Inside.Party {
+				s.Inside.Party[i].Speaker = false
+			}
+			s.say(lines, nil)
+			return
+		}
+	}
+	s.finishLeaveDoor()
+}
+
+func (s *Session) finishLeaveDoor() {
+	s.leaving = false
+	s.pending = nil
 	s.Inside = nil
 	s.Outdoor.AtDoorCell = false
 	s.Outdoor.AtEdge = false

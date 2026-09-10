@@ -177,6 +177,20 @@ func (d *Data) TownEntry(town, entry int) *Town {
 	return nil
 }
 
+// TownByCode 依角色所在地代碼找入城記錄；未知或重複代碼不猜入口。
+func (d *Data) TownByCode(code string) *Town {
+	var found *Town
+	for i := range d.towns {
+		if d.towns[i].Code == code {
+			if found != nil || code == "" {
+				return nil
+			}
+			found = &d.towns[i]
+		}
+	}
+	return found
+}
+
 // TownCount 是有資料的城鎮入口數。
 func (d *Data) TownCount() int { return len(d.towns) }
 

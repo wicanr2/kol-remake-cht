@@ -14,8 +14,10 @@ import (
 	"strings"
 )
 
-// Schema 是目前的存檔格式版本。讀取時只接受同一個大版本，不做寬鬆讀取。
+// Schema 是 v1 相容格式；正式遊戲使用 CompleteSchema，v1 保留為匯入入口。
 const Schema = "kol-save-v1"
+
+const CompleteSchema = "kol-save-v2"
 
 // SchemaPrefix 是版本檢查用的字首。
 const SchemaPrefix = "kol-save-v"
@@ -54,15 +56,23 @@ func (s *Settings) UnmarshalJSON(raw []byte) error {
 	if err := json.Unmarshal(raw, &all); err != nil {
 		return err
 	}
+	if all == nil {
+		return fmt.Errorf("設定必須是物件")
+	}
+	var next Settings
 	if v, ok := all[settingFaithfulInnStay]; ok {
-		if err := json.Unmarshal(v, &s.FaithfulInnStay); err != nil {
+		if strings.TrimSpace(string(v)) == "null" {
+			return fmt.Errorf("設定 %s 不是布林值", settingFaithfulInnStay)
+		}
+		if err := json.Unmarshal(v, &next.FaithfulInnStay); err != nil {
 			return fmt.Errorf("設定 %s 不是布林值：%w", settingFaithfulInnStay, err)
 		}
 		delete(all, settingFaithfulInnStay)
 	}
 	if len(all) > 0 {
-		s.Extra = all
+		next.Extra = all
 	}
+	*s = next
 	return nil
 }
 
@@ -184,13 +194,15 @@ type Steed struct {
 
 // Save 是一份存檔。
 type Save struct {
-	Schema   string   `json:"schema"`
-	SavedAt  string   `json:"saved_at"`
-	Origin   Origin   `json:"origin"`
-	Settings Settings `json:"settings"`
-	World    World    `json:"world"`
-	Location Location `json:"location"`
-	Party    []Member `json:"party"`
+	Schema     string      `json:"schema"`
+	SavedAt    string      `json:"saved_at"`
+	Origin     Origin      `json:"origin"`
+	Settings   Settings    `json:"settings"`
+	World      World       `json:"world"`
+	Location   Location    `json:"location"`
+	Party      []Member    `json:"party"`
+	Characters *Characters `json:"-"`
+	Clock      *Clock      `json:"clock,omitempty"`
 }
 
 // New 建立一份空的存檔骨架。
@@ -204,8 +216,16 @@ func (s *Save) Validate() error {
 	if !strings.HasPrefix(s.Schema, SchemaPrefix) {
 		return fmt.Errorf("非預期的存檔 schema：%q", s.Schema)
 	}
-	if s.Schema != Schema {
+	if s.Schema != Schema && s.Schema != CompleteSchema {
 		return fmt.Errorf("存檔版本 %q 不是這一版的 %q", s.Schema, Schema)
+	}
+	if s.Schema == CompleteSchema {
+		if err := s.Characters.Validate(); err != nil {
+			return err
+		}
+		if err := s.Clock.Validate(); err != nil {
+			return err
+		}
 	}
 	switch s.Origin.Kind {
 	case "remake", "imported":
@@ -258,14 +278,14 @@ func Read(path string) (*Save, error) {
 	if err != nil {
 		return nil, fmt.Errorf("讀取存檔失敗：%w", err)
 	}
-	var out Save
-	if err := json.Unmarshal(body, &out); err != nil {
+	out, err := decodeSave(body)
+	if err != nil {
 		return nil, fmt.Errorf("解析存檔失敗：%w", err)
 	}
 	if err := out.Validate(); err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return out, nil
 }
 
 // Write 原子寫入：先寫同目錄的暫存檔再 rename。中途失敗不會留下半個存檔，

@@ -71,6 +71,13 @@ func (s *Session) Resting() bool { return s.rest != nil }
 // QuitAsked 回報玩家在「你要離開嗎」那一問答了 YES。上層用它收掉城鎮畫面。
 func (s *Session) QuitAsked() bool { return s.quit }
 
+// ConsumeQuit 讓外層只處理一次返回書本的請求。
+func (s *Session) ConsumeQuit() bool {
+	quit := s.quit
+	s.quit = false
+	return quit
+}
+
 // StartRest 是按下 REST。
 func (s *Session) StartRest() {
 	if s.Mode != ModeInside || s.Inside == nil || s.door == nil {
@@ -222,6 +229,9 @@ func (s *Session) commitHeal() {
 	}
 	s.Party[i].Gold -= s.rest.price
 	s.Party[i].Wounds = 0
+	if s.Party[i].Sheet != nil {
+		s.Party[i].Sheet.Nutrition = 0
+	}
 	s.syncParty()
 	s.restSay(nonEmpty(s.uiLines(HealedRecord)), s.endRest)
 }
@@ -233,21 +243,25 @@ func (s *Session) commitStay() {
 		s.stayNext()
 		return
 	}
-	before := s.Party[i]
+	beforeParty := append([]Member(nil), s.Party...)
+	beforeRoster := append([]Candidate(nil), s.Roster...)
 	s.Party[i].Gold -= s.rest.price
 	s.Party[i].Place = placeKey(s.door.Name)
 	s.Party[i].BuildingID = s.door.RecordID
 	if s.TownCode != "" {
 		s.Party[i].TownCode = s.TownCode
 	}
-	if s.SaveGame != nil {
-		if err := s.SaveGame(); err != nil {
-			s.Party[i] = before
-			s.syncParty()
-			s.SaveError = err
-			s.restSay([]string{SaveFailedZh}, s.endRest)
-			return
+	updated := CandidateFromMember(s.Party[i])
+	found := false
+	for j := range s.Roster {
+		if s.Roster[j].Name == updated.Name {
+			s.Roster[j] = updated
+			found = true
+			break
 		}
+	}
+	if !found {
+		s.Roster = append(s.Roster, updated)
 	}
 	if s.FaithfulInnStay {
 		// 原版住宿即存檔即離隊（`sub_14DB1:0x15287`）。
@@ -262,6 +276,16 @@ func (s *Session) commitStay() {
 			}
 		}
 	}
+	if s.SaveGame != nil {
+		if err := s.SaveGame(); err != nil {
+			s.Party, s.Roster = beforeParty, beforeRoster
+			s.syncParty()
+			s.SaveError = err
+			s.restSay([]string{SaveFailedZh}, s.endRest)
+			return
+		}
+	}
+	s.SaveError = nil
 	s.syncParty()
 	s.stayNext()
 }
@@ -320,6 +344,9 @@ func (s *Session) setSpeaker(i int) {
 
 // syncParty 把隊伍的異動同步到畫面狀態。
 func (s *Session) syncParty() {
+	if s.Outdoor != nil {
+		s.Outdoor.Party = s.Party
+	}
 	if s.Inside != nil {
 		s.Inside.Party = s.Party
 	}

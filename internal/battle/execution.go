@@ -119,7 +119,7 @@ func FlinchThreshold(strength, intellect, level int) int {
 //
 // 原版的閘門讀的是全域 `word_3AC58`，那一格由 `sub_2215A` 在替某一隻怪物填參戰者
 // 記錄時寫入——也就是**最後一隻被設定的怪物**的那一位。一場戰鬥只放同一種怪物
-//（RE-090），所以這裡直接讀 `State.Monster`。
+// （RE-090），所以這裡直接讀 `State.Monster`。
 func (s *State) checkFlinch(i int, rng Rand) {
 	if !s.Monster.Fearsome {
 		return
@@ -715,6 +715,7 @@ func (s *State) shoot(i int, rng Rand) ActResult {
 	if reload {
 		a.Flag1D = 0
 	}
+	defer a.ConsumeAmmunition()
 	c := s.memo(i)
 	shot := s.Shoot(i, c.Row, c.Col, a.AttackValue()/10+rng.Roll(AttackRoll))
 	if shot.Stopped && shot.Block != MissileActor {
@@ -745,6 +746,22 @@ func (s *State) shoot(i int, rng Rand) ActResult {
 		out.Knock = s.Knockback(i, target, rng)
 	}
 	return out
+}
+
+// ConsumeAmmunition 是隊員射擊完成的共同收尾（SPEC-022）；裝填不可呼叫。
+func (a *Actor) ConsumeAmmunition() {
+	if a.Side != SideParty {
+		return
+	}
+	if NeedsReload(a.Weapon.Kind) {
+		a.Flag1D = 0
+		a.Command = CmdLoad
+	}
+	a.Kind--
+	if a.Kind < 0 {
+		a.Kind = 0xFF
+		a.Command = 0
+	}
 }
 
 // enemyAt 是 `sub_24C35(1, x, y)`：那一格上的敵方參戰者，沒有就回 -1。

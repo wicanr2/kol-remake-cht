@@ -1,0 +1,706 @@
+{
+  "schema": "kol-worklist/1",
+  "updated": "2026-09-10",
+  "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
+  "layers": {
+    "gap": "玩家會撞到的功能缺口",
+    "verification": "接了但沒驗過",
+    "asset": "素材抽取與音訊",
+    "spec": "規格與文件",
+    "release": "交付與發行"
+  },
+  "items": [
+    {
+      "id": "g01-cjk-sheet-pages",
+      "layer": "gap",
+      "title": "G01：繁中資料頁與 MIRROR／物品／隊伍／法術／任務入口",
+      "body": "資料頁的中文版面沒做，選 MIRROR 只會記一筆 Unimplemented。規格與正常 GUI 都缺。與 a07-a08-cjk-and-inn 綁同一個訊號——那一條是同一件事在 A 系列稽核裡的編號。",
+      "acceptance": "中文模式下資料頁可開、五個入口可用，功能結果與英文／規格一致。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/town/session.go"
+        ],
+        "pattern": "角色資料頁的中文版面還沒做",
+        "note": "session.go 的自承註解；接上時這一句會消失。"
+      }
+    },
+    {
+      "id": "g03-arena-vertical-chain",
+      "layer": "verification",
+      "title": "G03：競技場正常取得資格與完整垂直鏈",
+      "body": "固定地圖已依 SPEC-025 接線，4096 格 dosgolem 解碼比較與地圖隔離回歸通過；繁中空肖像繪圖錯誤已修，受控資格存檔可經正式按鍵選人、不下注及進場（docs/verification/arena-dialog-fix-20260908.md）。剩正常取得資格與完整垂直鏈；原版特殊肖像仍未知。make_arena_save.py 只產生受控輸入，不能代替正常取得資格。",
+      "acceptance": "玩家從正常路徑取得資格、下注、打完單挑並結算，全程不靠受控存檔。",
+      "verify": {
+        "kind": "manual",
+        "note": "現在沒有訊號可綁。正常取得資格接上時會多一支從城鎮走進競技場的流程函式，到時改成 absent 綁那個函式名。"
+      }
+    },
+    {
+      "id": "g05-picture-shield-editor-spec",
+      "layer": "gap",
+      "title": "G05：圖像／盾牌編輯另立規格",
+      "body": "EDIT PICTURE／EDIT SHIELD 未列入 SPEC-005 已完成的建角範圍，要另立規格。原版是滑鼠驅動的點陣圖編輯器、ESC 無作用，現有鍵盤 oracle 走不完。",
+      "acceptance": "規格立起來並經證據審查升 READY。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/flow/flow.go"
+        ],
+        "pattern": "EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作",
+        "note": "flow.go 的自承註解。與 picture-shield-bitmap-editor 綁同一句——規格與實作是同一條路上的兩段。"
+      }
+    },
+    {
+      "id": "g06-audio-listening-gate",
+      "layer": "asset",
+      "title": "G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放",
+      "body": "SPEC-004 仍是 DRAFT、標「是否授權實作：否」。人耳驗收是升 READY 的閘門，不能跳過。",
+      "acceptance": "人耳驗收完成、SPEC-004 升 READY，正式播放路徑接上。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/004-ogg-audio-catalog.md"
+        ],
+        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
+        "note": "SPEC-004 的狀態行。pit-square-wave-synth 與 ogg-conversion-pipeline 綁同一個訊號——那兩條都以 004 升 READY 為前提。"
+      }
+    },
+    {
+      "id": "g07-battle-speed-options",
+      "layer": "gap",
+      "title": "G07：三個加速選項的詳細規格、控制與保存",
+      "body": "SPEC-028 草案已核對現有接口與完成條件，狀態仍是 DRAFT，明寫「不授權先加空開關」。無訊息自動略過不等於未接敵快轉；細節與可見原型待確認。",
+      "acceptance": "SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/028-optional-battle-speed.md"
+        ],
+        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
+        "note": "SPEC-028 的狀態行。weather-animation-and-speed 綁同一個訊號。"
+      }
+    },
+    {
+      "id": "v01-full-battle-parity",
+      "layer": "verification",
+      "title": "V01：完整戰鬥同狀態結算、武器／護甲與保存的正常垂直鏈",
+      "body": "地形亂數位置轉置已依 SPEC-008 修正（三組固定種子、兩條路徑 24,576 格與亂數終態一致）；SPEC-029 修好敵人 Kind 與遠程初始化（768＋2304 組通過，加 SLEDGE 後合計 60 個初始欄位）；SPEC-027 修好戰後傷勢折算與敗北回寫（4608 組、五條結算至 v2 重載）；任務物品名稱誤認已修（258 組）；任務回報獎勵的母表共用指標已修。以上都是常式比較，正常整場仍未驗。",
+      "acceptance": "一整場戰鬥從進場到結算、保存都與原版同狀態，走的是正常玩家路徑。",
+      "verify": {
+        "kind": "manual",
+        "note": "常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。"
+      }
+    },
+    {
+      "id": "v02-appimage-platform-acceptance",
+      "layer": "release",
+      "title": "V02：主機 FUSE、其他平台與推廣交付的驗收",
+      "body": "Linux AppImage v.0.2.2-20260908 已重建：封包內版號、849 筆必要素材與文件、98 次正常建角／保存操作通過；另完成 XDG_CONFIG_HOME 與 HOME/.config 兩組各 95 次不指定 -save 的保存／重載（docs/verification/appimage-v.0.2.2-20260908.md）。主機 FUSE、其他平台與推廣交付仍待驗。",
+      "acceptance": "三平台各自驗收通過，推廣交付有影音驗收收據。",
+      "verify": {
+        "kind": "manual",
+        "note": "跨平台驗收沒有本機訊號。與 windows-macos-real-machine 相鄰但不同：那一條是真機，這一條含 FUSE 與推廣。"
+      }
+    },
+    {
+      "id": "d01-spec-stale-clauses",
+      "layer": "spec",
+      "title": "D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款",
+      "body": "已訂正 SPEC-005 的保存／滿槽範圍、SPEC-012 的效果 7／8 與怪物徒手排除、SPEC-015 的結局觸發及保存；008 的疲勞／時間／逃走順序、010 的物品與施法、011 的治療、014 的物品來源與升階已部分訂正；013 的環索引、同環續查與「原版亂數不可固定」舊限制已訂正。剩餘未知與差異仍續查。",
+      "acceptance": "七份規格裡沒有已被推翻的禁作條款，舊證據索引保留。",
+      "verify": {
+        "kind": "manual",
+        "note": "「還有沒有過期條款」要逐句讀才知道，硬綁 pattern 會誤判。與 spec-backfill-stale-clauses 是同一件事的兩次登記。"
+      }
+    },
+    {
+      "id": "battle-normal-seed-alignment",
+      "layer": "verification",
+      "title": "原版戰鬥同狀態：對齊地形、完整屬性與結算比較",
+      "body": "正常路徑已到 SLEDGE 規劃畫面；角色／站位、目前角色、鏡頭與標記已在受控情境對齊，兩側共同 seed=1（docs/verification/battle-actor-alignment-20260908.md）。下一步補地形、完整屬性及結算比較。",
+      "acceptance": "同一 seed、同一初始狀態下，remake 與原版的命令與結算逐項一致。",
+      "verify": {
+        "kind": "manual",
+        "note": "對拍進度是收據，不是程式狀態。下一份收據落地時改成 absent 綁它的路徑。"
+      }
+    },
+    {
+      "id": "inn-farewell-diff-review",
+      "layer": "verification",
+      "title": "審查原版離店告別訊息與確認流程",
+      "body": "SPEC-024 與告別確認已實作，dosgolem 單人／多人正常離店與繁中 GUI 已抽驗，但不是全城逐店文字驗收。要補與 remake 直接離店的玩家可見差異。",
+      "acceptance": "列出所有可見差異並各自處置，或證明沒有差異。",
+      "verify": {
+        "kind": "manual",
+        "note": "差異審查的產物是文件不是程式。審查報告落地時改成 absent 綁它。"
+      }
+    },
+    {
+      "id": "dosgolem-gui-ai-acceptance",
+      "layer": "verification",
+      "title": "補新版正常 GUI 與玩家可見 AI 行為驗收",
+      "body": "最新工作樹已重跑 Olear 正常射擊 150 個輸入、確認彈藥 20→19，dosgolem Olear 旅店入口亦通過（docs/verification/fixed-seed-player-path-20260908.md）。完整 AI／原版戰鬥仍待驗。",
+      "acceptance": "玩家看得到的 AI 行為（撤退、反制掃描、側翼、撿武器）在正常 GUI 下與原版一致。",
+      "verify": {
+        "kind": "manual",
+        "note": "AI 行為要實跑才看得見。整場 AI 對拍收據落地時改綁它。"
+      }
+    },
+    {
+      "id": "appimage-parity-continuation",
+      "layer": "verification",
+      "title": "旅店、戰鬥與存讀檔的 AppImage 同狀態對拍",
+      "body": "要等 remake 未完成的接線修好才能往下做。工具鏈側已可用：dosgolem 正常 KOL.EXE 入口經 DOS Enter 進 KOLBOOK，已走到 Halfway House。",
+      "acceptance": "AppImage 與原版在旅店、戰鬥、存讀檔三段同狀態一致。",
+      "verify": {
+        "kind": "manual",
+        "note": "卡在上游接線。對拍收據落地時改綁它。"
+      }
+    },
+    {
+      "id": "a01-a02-identity-and-save",
+      "layer": "gap",
+      "title": "A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊",
+      "body": "第一批修復已接建角入口／表單／取消與同城選隊顯示；SPEC-023 已接完整存檔與名冊保存。整條垂直鏈的驗收仍未做。",
+      "acceptance": "新建兩名角色，各自能入隊，離開重載仍可選；刪除與滿槽也驗證。",
+      "verify": {
+        "kind": "manual",
+        "note": "垂直鏈驗收沒有單一程式訊號。A 系列稽核測試轉成回歸測試後，改成 json_len 綁回歸測試清單的項數。"
+      }
+    },
+    {
+      "id": "a03-a04-writeback-and-contract",
+      "layer": "gap",
+      "title": "A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約",
+      "body": "勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。跨戰鬥／城鎮／存檔的逐欄一致仍未驗。",
+      "acceptance": "跨戰鬥／城鎮／存檔逐欄一致。",
+      "verify": {
+        "kind": "manual",
+        "note": "同 a01-a02：逐欄一致要跑過才知道。"
+      }
+    },
+    {
+      "id": "a05-a06-a09-belt-ward-nutrition",
+      "layer": "gap",
+      "title": "A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition",
+      "body": "三個缺陷已在第一批修復處理，診斷測試尚未轉為回歸測試。",
+      "acceptance": "對應診斷測試轉為回歸測試並通過，再補正常玩家路徑抽測。",
+      "verify": {
+        "kind": "manual",
+        "note": "完成物是測試檔，而 verify 不掃測試檔（測試會提到還沒接的東西）。正常玩家路徑抽測收據落地時改綁它。"
+      }
+    },
+    {
+      "id": "a07-a08-cjk-and-inn",
+      "layer": "gap",
+      "title": "A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出",
+      "body": "開場旅店已依 SPEC-016 接入正式 Session 並補繁中候選人清單，跨城選角已通；招募候選人滑鼠列選擇已接。中文資料頁與戰鬥中文版面仍未做——與 g01-cjk-sheet-pages 是同一件事，只是編號不同。",
+      "acceptance": "中文正常流程可操作、可讀，功能結果與英文／規格一致。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/town/session.go"
+        ],
+        "pattern": "角色資料頁的中文版面還沒做",
+        "note": "與 g01-cjk-sheet-pages 綁同一句。兩條同時閉嘴才是真的做完。"
+      }
+    },
+    {
+      "id": "a10-battle-info-panel",
+      "layer": "verification",
+      "title": "A10：戰鬥左側完整資訊內容的原版同狀態",
+      "body": "人形／傷勢／疲勞（SPEC-018）、左上裝備／肖像與模式切換（SPEC-019）、左下命令／招式（SPEC-021）、彈藥數字（SPEC-022）都已接線；3,168 組命令參數、144 組遮罩、十二組直條與九組敵人智力檢定由 dosgolem 通過，正常 GUI 已畫出人形、兩張戰場畫格縮放比較零差異。完整裝備與攻擊後傷勢對拍仍待完成。",
+      "acceptance": "正常戰鬥能辨識目前角色、裝備與傷勢，破損後顯示同步；不能以空框截圖通過代替。",
+      "verify": {
+        "kind": "manual",
+        "note": "面板已接線，缺的是攻擊後的同狀態對拍。那份收據落地時改綁它。"
+      }
+    },
+    {
+      "id": "armour-durability-ai-review",
+      "layer": "spec",
+      "title": "護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE",
+      "body": "耐久子常式九組邊界已重驗；護甲分支映射、骰數與耐久呼叫由 IDA 確認；加值 256 種輸入通過；SPEC-017 升 READY 並接近戰／射擊；84 組記錄、部位與骰值比較通過；破損與 Condition／Record／Carried 已接勝利與撤退回寫。攻擊結算／破損顯示、完整保存、武器超上限與四個其他磨損呼叫仍待驗收。",
+      "acceptance": "四個磨損呼叫各自有證據，破損顯示與保存驗過，競技場地形的窄 RE 完成。",
+      "verify": {
+        "kind": "manual",
+        "note": "「四個其他磨損呼叫」要逐支查。接上時會多出四個呼叫點，到時改成 json_len 綁磨損呼叫清單。"
+      }
+    },
+    {
+      "id": "spec-backfill-stale-clauses",
+      "layer": "spec",
+      "title": "回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況",
+      "body": "與 d01-spec-stale-clauses 是同一件事的兩次登記（一次在現行缺口表、一次在修復項表）。原則：不把「已有程式」自動升成 READY／CONFORMED。",
+      "acceptance": "六份規格的現況與歷史訂正鏈都在，沒有已被推翻的禁作條款。",
+      "verify": {
+        "kind": "manual",
+        "note": "同 d01。這兩條應該一起收掉。"
+      }
+    },
+    {
+      "id": "weather-animation-and-speed",
+      "layer": "gap",
+      "title": "接正式天候動畫及既定加速選項",
+      "body": "SPEC-026 已接六組天候、128 像素捲雲與正式節拍，dosgolem 四組完整合成與六組分派通過，正常出城 GUI 只在天空區改變；雨雪的正常 GUI 與原版正常野外同相位仍未宣稱。加速選項的部分與 g07-battle-speed-options 同源。",
+      "acceptance": "雨雪在正常 GUI 下與原版同相位；加速選項依 SPEC-028 READY 後接上。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/028-optional-battle-speed.md"
+        ],
+        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
+        "note": "只綁得到加速那一半；天候同相位沒有訊號。SPEC-028 升 READY 之後這一條會閉嘴，但天候那一半要另外看——到時拆成兩條。"
+      }
+    },
+    {
+      "id": "spec-manual-page-links",
+      "layer": "spec",
+      "title": "讓規則 spec 連回說明書頁碼",
+      "body": "說明書譯文已完成（84 頁全部 reviewed），但規則 spec 沒有連回頁碼。說明書未涵蓋的邊界行為不得自行推定。",
+      "acceptance": "每份規則 spec 的公開規則段落都指得回說明書頁碼。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "docs/spec/005-character-creation.md",
+          "docs/spec/008-combat-field.md",
+          "docs/spec/010-combat-commands.md",
+          "docs/spec/012-combat-spells.md",
+          "docs/spec/014-quest-completion.md"
+        ],
+        "pattern": "docs/manual/",
+        "note": "只列規則 spec，不列 003（那是說明書翻譯規格本身，它當然連得回去，掃進來會讓這一條假閉嘴）。"
+      }
+    },
+    {
+      "id": "asset-inventory-format-spec",
+      "layer": "asset",
+      "title": "唯讀輸入的資產 inventory 與格式規格",
+      "body": "COMBPICS、TWN0..7PICS 243 筆、MONPICS、PERPICS、MISCPICS、TITLE 五組、ENDPICS、BOOKPICS、KOLMPICS 83 筆、WEATPICS 18 筆、AWD1PICS 24 張、SHLDPICS 四組、HANDPICS 12 組、WEAPPICS 28 組、HEADPICS／TORPICS／LEGSPICS 各 54 組、CHARPICS.0 80 張、KOLPICS 14 筆與三個固定記錄表的 40×38 4-bit EGA 契約已證實；TWN 七筆圖號 1 placeholder 已排除。其餘 archive 與 PCGA／HERC 像素格式尚未完成。",
+      "acceptance": "所有 archive 與三種像素格式都有格式規格。",
+      "verify": {
+        "kind": "manual",
+        "note": "PCGA／HERC 還沒開始，沒有可綁的識別字。抽取器支援它們時會多出對應的解碼函式，到時改成 absent 綁那個名字。"
+      }
+    },
+    {
+      "id": "atlas-and-contact-tables",
+      "layer": "asset",
+      "title": "生成 atlas／接觸表並逐批人工檢查",
+      "body": "769 張 PNG 已抽出並有 manifest。2026-09-10 核實：十九支 tools/probe_extract_*.py 與 extract_battle_tiles.py／extract_ega_assets.py 已經會產 atlas 與接觸表（戰場磚塊 10×8、AWD1PICS 8×3、charpics 等），但 assets/ 底下沒有留存的正式產物——那些是拋棄式探針輸出。缺的是把它們定為正式產物，並逐批人工檢查。",
+      "acceptance": "atlas 與接觸表成為版控中的正式產物，尺寸、色盤、透明色、裁切與動畫序列逐批人工檢查過。",
+      "verify": {
+        "kind": "manual",
+        "note": "綁不住：atlas 這個字在十九支探針工具與 manifest 的 coverage_note 裡都有，綁它會判成已完成（2026-09-10 第一版就是這樣誤判的）。正式產物進版控時，改成 absent 綁 assets/ 底下那個檔的實際路徑。"
+      }
+    },
+    {
+      "id": "pit-square-wave-synth",
+      "layer": "asset",
+      "title": "實作 PIT 方波合成器並完成人耳驗收",
+      "body": "TITLE 的 WAV oracle 已由 DX-CAPTURE 取得（四段活動窗、codec、時長、峰值與 SHA-256 固定）；合成方向已決策為規格近似合成，不散布原版錄音。合成輸出與 DX-CAPTURE WAV 的段落結構比對後才可升 SPEC-004。",
+      "acceptance": "合成器實作完成，段落結構比對通過，人耳驗收過。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/004-ogg-audio-catalog.md"
+        ],
+        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
+        "note": "與 g06 綁同一個訊號：SPEC-004 升 READY 是三條音訊工作的共同閘門。"
+      }
+    },
+    {
+      "id": "ogg-conversion-pipeline",
+      "layer": "asset",
+      "title": "SPEC-004 升 READY 後建立 OGG 轉換管線",
+      "body": "要驗 codec、時長、非靜音、峰值、loop 接點與人耳聆聽。轉成 OGG 不改變原版素材的著作權。",
+      "acceptance": "管線可重跑，每批 OGG 有來源、參數與 SHA-256 收據。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/004-ogg-audio-catalog.md"
+        ],
+        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
+        "note": "與 g06、pit-square-wave-synth 綁同一個訊號。004 升 READY 之後三條一起開口，要一起重看。"
+      }
+    },
+    {
+      "id": "runtime-format-guard-test",
+      "layer": "spec",
+      "title": "建立測試，保證 runtime 只會讀 PNG 與 OGG",
+      "body": "internal/assets/assets.go 的檔頭已寫明「runtime 只讀這個目錄下的 manifest.json 與 PNG」，但沒有測試釘住它。禁止讀原版 archive／EXE 目前只靠約定。",
+      "acceptance": "測試會在 runtime 讀到非 PNG／OGG 時失敗。",
+      "verify": {
+        "kind": "manual",
+        "note": "完成物是測試檔，而 verify 不掃測試檔——掃了會被別的測試裡提到的字串騙過去。這一條要人看 go test 清單裡有沒有那支守門測試。"
+      }
+    },
+    {
+      "id": "release-asset-separation",
+      "layer": "release",
+      "title": "分離本機、private-repo PNG 與可公開輸出",
+      "body": "GitHub Release／公開 release 的 deny-list 要預設失敗即關閉，並檢查 repo visibility 沒有被改成 public。權利審查已寫在 docs/RELEASE-RIGHTS-REVIEW.md。",
+      "acceptance": "deny-list 預設失敗即關閉，visibility 檢查納入發行流程。",
+      "verify": {
+        "kind": "manual",
+        "note": "verify_dist.sh 已驗 release 的素材 deny-list，缺的是 visibility 檢查。那一步接上時會多一個 gh api 呼叫，到時改成 absent 綁它。"
+      }
+    },
+    {
+      "id": "roster-full-ui-oracle",
+      "layer": "verification",
+      "title": "補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle",
+      "body": "SPEC-005 已經證據審查升 READY，但 16 槽全滿只有靜態證據，沒有正常 UI oracle。",
+      "acceptance": "三種情境各有正常 DOS UI 的畫格與輸入序列收據。",
+      "verify": {
+        "kind": "manual",
+        "note": "oracle 收據是檔案不是程式。那三份收據落地時改成 absent 綁它們的路徑。"
+      }
+    },
+    {
+      "id": "package-boundaries-and-injection",
+      "layer": "spec",
+      "title": "定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案",
+      "body": "internal/ 已分成 21 個套件，四處已有 Rand interface（title、world、charcreate、battle），存檔 schema 已到 v2。缺的是把邊界與固定 timestep 寫成文件契約——現在只在程式裡成立，沒有一份說得出「哪一層不准依賴哪一層」。",
+      "acceptance": "有一份文件說明分層契約與固定 timestep，並且違反時測得出來。",
+      "verify": {
+        "kind": "manual",
+        "note": "程式面已大致成立，缺的是文件與守門。硬綁 timestep 這種猜想中的識別字會永遠為真——那種條目看起來盡責，其實一次都沒真的看過。"
+      }
+    },
+    {
+      "id": "minimal-player-chain",
+      "layer": "verification",
+      "title": "選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔",
+      "body": "full-chain 等五條走到底的收據已經涵蓋這條鏈（docs/verification/player-path/），但這一條當初的用意是「先挑一條窄的走通」，而實際做法是直接走完整條。條目留著沒動。",
+      "acceptance": "確認 player-path 的收據已滿足這一條，然後收掉。",
+      "verify": {
+        "kind": "manual",
+        "note": "這一條很可能已經被 player-path 收據滿足了，要人看一眼再決定收掉或改寫。"
+      }
+    },
+    {
+      "id": "picture-shield-bitmap-editor",
+      "layer": "gap",
+      "title": "EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器",
+      "body": "原版是滑鼠驅動、ESC 無作用，現有鍵盤 oracle 走不完；要往下做得先讓 oracle 能送滑鼠事件。這是 g05-picture-shield-editor-spec 的實作段。",
+      "acceptance": "oracle 能送滑鼠事件，編輯器接上並對拍。",
+      "blocked_by": "oracle 還不能送滑鼠事件",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/flow/flow.go"
+        ],
+        "pattern": "EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作",
+        "note": "與 g05 綁同一句自承註解。"
+      }
+    },
+    {
+      "id": "building-followup-dialogue",
+      "layer": "gap",
+      "title": "建築內的後續對話（訊息 10 起）",
+      "body": "訊息 10…13 的選法已知（聲望等第為 0 時是「訊息 10 ＋ 性別×2 ＋ 會不會法術」，否則訊息 26 ＋ 等第），但觸發條件還沒讀出來。",
+      "acceptance": "觸發條件解出並接上，正常路徑能看到後續對話。",
+      "verify": {
+        "kind": "manual",
+        "note": "topics.go 已有訊息 10 的選法但沒有觸發條件。接上時會多一支判斷觸發的函式，到時改成 absent 綁它。"
+      }
+    },
+    {
+      "id": "attack-row-and-target-cursor",
+      "layer": "verification",
+      "title": "攻擊式那一列（frame-899）與選目標格畫面的對拍",
+      "body": "選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解。",
+      "acceptance": "兩塊都有逐畫面對拍收據。",
+      "verify": {
+        "kind": "manual",
+        "note": "sub_1C683 的效果沒解出來之前綁不了程式訊號。解出來會多一支重畫該格的函式，到時改綁它。"
+      }
+    },
+    {
+      "id": "text-layout-remaining-screens",
+      "layer": "gap",
+      "title": "量測城鎮、世界、戰鬥畫面的文字版面",
+      "body": "書本的文字版面已機械量得並對拍；其餘三種畫面還沒量。戰鬥那一段（索引 ≥ 0x100）的中文版面因此定不下來。",
+      "acceptance": "三種畫面的文字版面都量過，每個 CJK 欄位有安全矩形。",
+      "verify": {
+        "kind": "manual",
+        "note": "版面量測的產物是 JSON 與收據。三份版面表落地時改成 json_len 綁它們的項數。"
+      }
+    },
+    {
+      "id": "cjk-remaining-screens",
+      "layer": "gap",
+      "title": "城鎮、世界、戰鬥畫面的中文化與職業名暫譯的交叉確認",
+      "body": "城鎮 1,938 則對話與三個 UI 文字庫 486 筆已翻完、缺字 0；戰鬥那一段（索引 ≥ 0x100）的中文版面還沒定。職業名仍是暫譯。",
+      "acceptance": "三種畫面的中文都上得去且不溢出，職業名譯法定案。",
+      "blocked_by": "要先有 text-layout-remaining-screens 的版面",
+      "verify": {
+        "kind": "manual",
+        "note": "卡在版面。版面定了之後這一條會變成可綁的（安全矩形檢查器的項數）。"
+      }
+    },
+    {
+      "id": "title-thunder-audio-hookup",
+      "layer": "asset",
+      "title": "標題序列的雷聲播放接上 Ebitengine 音訊路徑",
+      "body": "assets/audio/title-thunder.ogg 已產出，title.go 也已標記哪一格之後放雷聲（Thunder 欄位），但 runtime 完全沒有引入 Ebitengine 的音訊套件——一個音都還沒進遊戲。",
+      "acceptance": "正常啟動時聽得到雷聲，且與畫面同步。",
+      "blocked_by": "SPEC-004 仍是 DRAFT",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "cmd",
+          "internal"
+        ],
+        "pattern": "ebiten/v2/audio",
+        "note": "接上音訊一定會 import 這個套件，改名的機率是零。這是全部條目裡最穩的一個訊號。"
+      }
+    },
+    {
+      "id": "cross-platform-build-smoke",
+      "layer": "release",
+      "title": "Linux／Windows／macOS 可重現編譯與最小啟動 smoke",
+      "body": "build_dist.sh 已建出三平台（linux/amd64 原生、windows/amd64 交叉編、macOS universal 經 osxcross ＋ lipo），verify_dist.sh 驗過 manifest、授權、deny-list、Windows PE 檔頭、macOS 四道靜態驗收與 Linux 啟動。編譯這一半已經成立；缺的是 Windows 與 macOS 的最小啟動 smoke——Linux 容器裡只驗得了結構。",
+      "acceptance": "三平台各有一次真的把程式跑起來的 smoke。",
+      "verify": {
+        "kind": "manual",
+        "note": "Windows／macOS 的啟動要在那些平台上跑，本機沒有訊號。與 windows-macos-real-machine 相接：那一條是完整驗收，這一條只要求最小啟動。"
+      }
+    },
+    {
+      "id": "spec-ready-before-implement",
+      "layer": "spec",
+      "title": "每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED",
+      "body": "這是流程規則不是一次性工作。目前 docs/spec/ 底下只有 004 與 028 兩份還是 DRAFT，其餘已升 READY 或部分 READY。",
+      "acceptance": "沒有未達 READY 的規格被實作進 production path。",
+      "verify": {
+        "kind": "manual",
+        "note": "流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。"
+      }
+    },
+    {
+      "id": "terminology-and-safe-rects",
+      "layer": "gap",
+      "title": "統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy",
+      "body": "術語表已建（docs/manual/glossary.md），文字安全矩形 6,952 項已全過檢查器，5,109 個字串無可見缺字。缺的是遊戲與說明書共用同一份已核准術語，以及每個欄位明確的 overflow policy（換行還是截斷）。",
+      "acceptance": "術語表是唯一來源，遊戲字串引用它；每個 CJK 欄位有 overflow policy。",
+      "verify": {
+        "kind": "manual",
+        "note": "檢查器管的是「會不會超出矩形」，不管「超出了要怎麼辦」。policy 寫進資料時改成 json_len 綁它。"
+      }
+    },
+    {
+      "id": "longest-cjk-visual-regression",
+      "layer": "verification",
+      "title": "最長繁中內容的視覺回歸、正常路徑截圖與輸入測試",
+      "body": "安全矩形檢查器是靜態的，沒有跑過最長字串的視覺回歸。",
+      "acceptance": "最長字串在正常路徑上截圖比對過。",
+      "verify": {
+        "kind": "manual",
+        "note": "視覺回歸的產物是收據。那份收據落地時改綁它。"
+      }
+    },
+    {
+      "id": "parity-sampling-registry",
+      "layer": "verification",
+      "title": "預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣",
+      "body": "CLAUDE.md 要求先分開「可啟動」「可玩」「近似完成」「嚴格 parity」並預先登記每階段 gate，不得做到一半才選容易通過的標準。目前沒有這份登記。",
+      "acceptance": "四個階段各自的抽樣母體、硬失敗條件與平台矩陣寫成資料。",
+      "verify": {
+        "kind": "manual",
+        "note": "這一份本身就該是 JSON。寫出來之後改成 json_len 綁它的階段數。"
+      }
+    },
+    {
+      "id": "windows-macos-real-machine",
+      "layer": "release",
+      "title": "Windows／macOS 真機驗收",
+      "body": "Linux 容器 smoke 不冒充真機結果。macOS 的 bundle 沒有簽章（_CodeSignature 在 Linux 上做不出來），首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。",
+      "acceptance": "兩個平台各在真機上啟動並走一次正常路徑。",
+      "verify": {
+        "kind": "manual",
+        "note": "真機驗收在本機沒有訊號，永遠是 manual。"
+      }
+    },
+    {
+      "id": "github-release",
+      "layer": "release",
+      "title": "發 GitHub Release",
+      "body": "權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。",
+      "acceptance": "兩件都決定，Release 發出去。",
+      "blocked_by": "等使用者決定",
+      "verify": {
+        "kind": "manual",
+        "note": "對外動作要使用者點頭，不該由 verify 判。"
+      }
+    },
+    {
+      "id": "v01-remaining-battle-chain",
+      "layer": "verification",
+      "title": "V01 剩餘：完整裝備、地形、指令及攻擊結算、正常 GUI 戰後保存鏈",
+      "body": "與 v01-full-battle-parity 是同一件事的兩次登記（一次在現行缺口表、一次在最新驗證補充）。",
+      "acceptance": "同 v01-full-battle-parity。",
+      "verify": {
+        "kind": "manual",
+        "note": "同 v01-full-battle-parity。這兩條應該一起收掉，或合成一條。"
+      }
+    },
+    {
+      "id": "appimage-rebuild-latest-fixes",
+      "layer": "release",
+      "title": "把最新怪物初始化與面板修正重建到新的本機 AppImage",
+      "body": "現行包尚未包含 SPEC-029 的怪物遠程初始化與後續面板修正。",
+      "acceptance": "新包重建、驗收通過，正式交付入口指向它。",
+      "verify": {
+        "kind": "manual",
+        "note": "「包裡有沒有那個修正」要拆包比對。重建收據落地時改綁它。"
+      }
+    },
+    {
+      "id": "train-forge-entry-condition",
+      "layer": "gap",
+      "title": "TRAIN 的鍛造（旗標 byte 1 的 bit3）",
+      "body": "流程已解完（RE-125：選背包一格、比 `+0x0F` 的 bit5、按那件東西自己的標價收錢、打字取名、寫回角色），但入口條件對不上原版資料——商品表裡唯一的 Copper Ingot 那一位是零，有那一位的六筆全是布褲與皮頭套。先不實作。",
+      "blocked_by": "「`+0x0F` 的 bit5 是什麼」還沒有證據",
+      "acceptance": "bit5 的語意有證據，入口條件對得上原版資料，鍛造接上並對拍。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/town/shop.go"
+        ],
+        "pattern": "鍛造（bit3）還沒實作",
+        "note": "shop.go 的自承註解，兩處（599／628）。接上時會消失。"
+      }
+    },
+    {
+      "id": "save-across-battle-and-clock",
+      "layer": "gap",
+      "title": "存檔跨事件與戰鬥階段恢復：戰鬥中途狀態與世界時間",
+      "body": "任務旗標、已回報數與身上帶的東西已進存檔，並由 `full-chain` ＋ `full-chain-reload` 驗過往返。戰鬥中途的狀態與世界時間還沒進存檔——存檔格式裡連日期欄位都還沒有。",
+      "acceptance": "戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/save/save.go"
+        ],
+        "pattern": "世界時間還沒有規格",
+        "note": "save.go:94 的自承註解。世界時間的規格定下來、欄位加進格式時這一句會消失。"
+      }
+    },
+    {
+      "id": "dist-rebuild-version-number",
+      "layer": "release",
+      "title": "由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號",
+      "body": "`tools/build_dist.sh` 已能從乾淨工作樹建出三個平台（linux/amd64 原生、windows/amd64 交叉編、macOS universal 經 osxcross ＋ lipo），`promo/` 有 59 秒推廣片與 `sources.json`。缺的只有版本號：目前用的是暫定號，產物可重生，換號碼重跑一次就好。",
+      "blocked_by": "版本號要使用者決定",
+      "acceptance": "版本號定案，用它重建一次並驗收。",
+      "verify": {
+        "kind": "manual",
+        "note": "版本號是決策不是程式狀態。`build_dist.sh` 把版本當參數收，綁不到也不該綁。"
+      }
+    },
+    {
+      "id": "dist-package-sha256-verification",
+      "layer": "release",
+      "title": "發行包的 SHA-256 驗收",
+      "body": "`tools/verify_dist.sh` 驗過 manifest 存在、授權文件、release 的素材 deny-list、Windows PE 檔頭、macOS 四道靜態驗收與 Linux 啟動；`verify_packages.py` 另驗六個發行檔的結構並做過注入缺陷的負對照。存檔位置由 AppImage 那一輪的兩組各 95 次驗過。**但兩支驗收腳本都沒有比對 SHA-256**——manifest 裡有雜湊，沒有人回頭驗它對不對。平台／架構的真機部分見 `windows-macos-real-machine` 與 `cross-platform-build-smoke`。",
+      "acceptance": "驗收腳本會重算每個檔案的 SHA-256 並與 manifest 比對，不符即失敗。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "tools/verify_dist.sh",
+          "tools/verify_packages.py"
+        ],
+        "pattern": "sha256",
+        "note": "正反對照過：同一個 pattern 在 tools/write_dist_manifest.py 命中兩次（它產雜湊），在兩支驗收腳本都是零——缺口是真的，不是 pattern 太窄。"
+      }
+    },
+    {
+      "id": "license-into-packages",
+      "layer": "release",
+      "status": "done",
+      "title": "打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄",
+      "body": "拿到 tar.gz 的人看不到儲存庫，包裡沒有條款就等於沒被授權（rulebook/85）。",
+      "acceptance": "每個發行包與 dist-all 根目錄都有 LICENSE。",
+      "resolved": "2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "tools/build_dist.sh"
+        ],
+        "pattern": "cp .*LICENSE",
+        "note": "已完成，留著當回歸訊號：這一行被刪掉時條目會重新開口。"
+      }
+    },
+    {
+      "id": "sheet-items-and-party-portrait",
+      "layer": "gap",
+      "status": "done",
+      "title": "角色資料頁的物品（sub_16986）與隊伍立繪（sub_18D61）兩個圖示",
+      "body": "兩頁都從 sub_18F3A 畫立繪開始，要先解那一支怎麼疊 HEADPICS／TORPICS／LEGSPICS（RE-123）。",
+      "acceptance": "兩頁都畫得出來並對拍。",
+      "resolved": "2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "internal/town"
+        ],
+        "pattern": "func \\(s \\*Session\\) OpenItemPage\\(",
+        "note": "已完成，留著當回歸訊號。"
+      }
+    },
+    {
+      "id": "party-limit-six-boundary",
+      "layer": "gap",
+      "status": "done",
+      "title": "隊伍上限六人的邊界",
+      "body": "說明書：一次最多帶六名冒險者。",
+      "acceptance": "招募、進門與保存三處都擋得住第七人。",
+      "resolved": "2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "internal/town/interior.go"
+        ],
+        "pattern": "MaxParty = 6",
+        "note": "已完成，留著當回歸訊號。"
+      }
+    },
+    {
+      "id": "extraction-docker-image",
+      "layer": "asset",
+      "status": "done",
+      "title": "先辨識既有專用 Docker image；缺件才建立有鎖版來源的 Dockerfile",
+      "body": "專案規則要求分析、解包、轉檔與驗證都在容器內進行。",
+      "acceptance": "抽取與驗證都有鎖版容器可用。",
+      "resolved": "2026-09-10 核實：既有共用映像 eob-remake-go:1.26.7-ebiten2.9.9-audio 已由 tools/go_docker.sh 與 tools/run_python_tool.sh 使用（只讀不改）；缺件的兩個已建 docker/Dockerfile.osxcross-go 與 docker/Dockerfile.package。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "tools/run_python_tool.sh"
+        ],
+        "pattern": "eob-remake-go:",
+        "note": "已完成，留著當回歸訊號：包裝腳本不再指向鎖版映像時會重新開口。"
+      }
+    },
+    {
+      "id": "wilderness-cloud-animation",
+      "layer": "gap",
+      "status": "done",
+      "title": "野外的雲層動畫",
+      "body": "`sub_2A18E` 的版面與旋轉單位已定案並實跑驗過（RE-136）：雲層在 `word_34A1A:0x7C0`、遮罩在 `:0xF80`、合成結果在 `:0x1170`；EGA 每列右旋 1 位元、Tandy 右旋 1 個 nibble、CGA 右旋 2 位元，都是整列環繞，一次呼叫就是向右捲一個像素。",
+      "acceptance": "雲層在 remake 的野外畫面上會動。",
+      "resolved": "2026-09-10 核實：已接進畫面。`internal/world/weather.go:69` 的 Composite 做旋轉，`internal/ui/world.go:45` 的 drawWeather 畫進世界畫面（144／217 兩處呼叫 CompositeGroup(s.Group, s.Phase)），`cmd/kol/main.go:937` 遞增 Phase。G02 那一條已記為做完（SPEC-026 六組天候、128 像素捲雲與正式節拍，正常出城 GUI 只在天空區改變），只有這一條沒回頭改。雨雪的正常 GUI 與原版同相位另見 weather-animation-and-speed。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "internal/ui/world.go"
+        ],
+        "pattern": "CompositeGroup\\(s\\.Group, s\\.Phase\\)",
+        "note": "已完成，留著當回歸訊號：這個呼叫被拿掉時條目會重新開口。"
+      }
+    }
+  ]
+}

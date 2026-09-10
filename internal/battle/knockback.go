@@ -92,6 +92,7 @@ func (s *State) Knockback(attacker, target int, rng Rand) []int {
 	if m := s.member(target); m != nil {
 		m.HasWeapon = false
 		m.WeaponName = ""
+		m.Weapon = Weapon{}
 		m.Worn[0] = ""
 	}
 	s.Actors[target].Weapon = Weapon{}

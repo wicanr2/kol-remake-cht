@@ -61,7 +61,8 @@ const (
 )
 
 // Actor 是一名參戰者。欄位名對應原版記錄的位移（RE-080）：
-// Kind 是 +0x00（隊員填 0x13）、Side 是 +0x01、X／Y 是 +0x1F／+0x20。
+// Kind 是 +0x00：隊員為剩餘發數減一（0xFF 耗盡，初始 0x13），敵人為 SPEC-029 的遠程能力值。
+// Side 是 +0x01、X／Y 是 +0x1F／+0x20（SPEC-022）。
 type Actor struct {
 	Kind int
 	Side Side
@@ -98,6 +99,8 @@ type Actor struct {
 	// 等級，怪物是遭遇等級，而 `Level` 那一格對怪物另外除以 5 再加一。
 	LoadLevel    int
 	ArmourWeight int
+	// Armour 保留頭、軀幹、腿三格可變物品，不能共用怪物母表。
+	Armour       [3]*Item
 	ShieldWeight int
 	// UnarmedWeapon 是徒手各式拿的那一格穿戴品（`UnarmedSlots`）。原版徒手攻擊
 	// 的傷害骰、種類與重量都從那一格來，不是手上那件（`sub_26AC2:0x26BDA`）。

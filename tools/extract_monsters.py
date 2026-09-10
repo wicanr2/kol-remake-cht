@@ -172,6 +172,8 @@ def main() -> int:
             "shatters": bool(rec[FLAGS_OFFSET] & FLAG_SHATTERS),
             "fearsome": bool(rec[FLAGS_OFFSET] & FLAG_FEARSOME),
             "flee_at": rec[FLEE_AT_OFFSET],
+            "ranged_chance": rec[0x1E],
+            "ranged_code": rec[0x1F],
             "flee_recover": rec[FLEE_RECOVER_OFFSET],
             "gold": {
                 "raw": rec[GOLD_OFFSET],

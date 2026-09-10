@@ -51,9 +51,12 @@ var digitKeys = [10][2]ebiten.Key{
 
 // keyboardTokens 回傳這一幀按下的鍵。只認「剛按下」，不認持續按住——原版的
 // 讀入迴圈也是一次一個鍵，按住不會連走。
-func keyboardTokens() []string {
+func keyboardTokens(typingName ...bool) []string {
 	var out []string
 	for _, k := range keyTokens {
+		if len(typingName) > 0 && typingName[0] && (k.key == ebiten.KeyArrowUp || k.key == ebiten.KeyArrowDown || k.key == ebiten.KeyArrowLeft || k.key == ebiten.KeyArrowRight) {
+			continue
+		}
 		if inpututil.IsKeyJustPressed(k.key) {
 			out = append(out, k.token)
 		}
@@ -129,12 +132,45 @@ func (g *game) flowTargets() []input.Target {
 			return nil
 		}
 		if g.flow.Town.Mode == town.ModeInside {
-			return iconTargets(len(g.flow.Town.Inside.Icons), g.flow.Town.Inside.Selected, cjk)
+			in := g.flow.Town.Inside
+			targets := iconTargets(len(in.Icons), in.Selected, cjk)
+			if g.flow.Town.Recruiting() && in.List != nil {
+				targets = append(targets, recruitTargets(in, cjk)...)
+			}
+			return targets
 		}
 		icons, selected := g.flow.Town.Outdoor.IconRow()
 		return iconTargets(len(icons), selected, cjk)
 	}
 	return nil
+}
+
+// recruitTargets 的每列都送出正常移動及確認，包含清單已捲動的情形。
+func recruitTargets(in *town.Inn, cjk bool) []input.Target {
+	if in == nil || in.List == nil {
+		return nil
+	}
+	b := town.DialogBox
+	x, y, w, step := b.TextX, b.TextY, b.Width-12, b.LineStep
+	if cjk {
+		l := town.CJKInn
+		x, y, w, step = l.DialogTextX, l.DialogTextY, l.DialogW-32, 16
+	}
+	var targets []input.Target
+	for i := range in.List.Rows {
+		if i >= town.ListRows {
+			break
+		}
+		row := input.Row(x, y, w, step, i, in.List.Selected, "U", "D")
+		// 游標可能停在取消圖示，點列仍應確認所點的角色。
+		row.Tokens = row.Tokens[:len(row.Tokens)-1]
+		for n := 0; n < in.Selected; n++ {
+			row.Tokens = append(row.Tokens, "<")
+		}
+		row.Tokens = append(row.Tokens, "RET")
+		targets = append(targets, row)
+	}
+	return targets
 }
 
 // iconTargets 是畫面底部那一列圖示的可點區域。旅店、建築內與戶外共用同一組

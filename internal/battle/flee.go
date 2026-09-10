@@ -34,7 +34,6 @@ type FleeOffer struct {
 func (s *State) FleeOffer() FleeOffer {
 	var out FleeOffer
 	party := 0
-	quest := s.Site != nil && s.Site.Index >= 0 && s.QuestItem != ""
 	for i := range s.Actors {
 		a := s.Actors[i]
 		if a.Side != SideParty {
@@ -46,10 +45,8 @@ func (s *State) FleeOffer() FleeOffer {
 			continue
 		}
 		out.Edge++
-		if quest {
-			if m := s.member(i); m != nil && m.WeaponName == s.QuestItem {
-				out.Carrying++
-			}
+		if m := s.member(i); m != nil && s.matchesQuestItem(m.HandItem) {
+			out.Carrying++
 		}
 	}
 	out.Ask = out.Carrying > 0 || (party > 0 && out.Edge == party)

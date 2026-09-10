@@ -10,6 +10,7 @@ import (
 
 // Member 是隊伍中的一名角色。Portrait 是 CHARPICS 圖號；Speaker 為真時外框是白色。
 type Member struct {
+	ID       string `json:"id,omitempty"`
 	Portrait int    `json:"portrait"`
 	Name     string `json:"name"`
 	Speaker  bool   `json:"speaker"`
@@ -67,7 +68,39 @@ func (m *Member) TurnInQuest(b *QuestBuilding) (slot int, reported bool) {
 	if b == nil {
 		return -1, false
 	}
-	return TurnIn(m.Carried, m.Quests, m.Progress, 0, *b)
+	hasTyped := m.InHand != nil || len(m.Backpack) > 0
+	for _, item := range m.Worn {
+		hasTyped = hasTyped || item != nil
+	}
+	slot, reported = TurnIn(m.Carried, m.Quests, m.Progress, 0, *b)
+	if slot >= 0 {
+		// 原版複製獎勵的 16 bytes 到各角色，不共用建築母表物品。
+		var reward *Good
+		if b.GivesItem != nil {
+			copy := *b.GivesItem
+			reward = &copy
+		}
+		// 原版是同一格交換；typed 裝備也必須同步，否則下一場戰鬥會把舊物品帶回。
+		switch {
+		case slot == 0:
+			m.InHand = reward
+		case slot <= BackpackSlots:
+			i := slot - 1
+			if i < len(m.Backpack) {
+				if reward != nil {
+					m.Backpack[i] = *reward
+				} else {
+					m.Backpack = append(m.Backpack[:i], m.Backpack[i+1:]...)
+				}
+			}
+		case slot-1-BackpackSlots < WornSlots:
+			m.Worn[slot-1-BackpackSlots] = reward
+		}
+		if hasTyped {
+			m.SyncCarried()
+		}
+	}
+	return slot, reported
 }
 
 // Inn 是旅店畫面的完整狀態。

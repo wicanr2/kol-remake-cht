@@ -173,8 +173,8 @@ func TestDamageRoll(t *testing.T) {
 func TestResolve(t *testing.T) {
 	a, d := testAttacker(), testDefender()
 	a.Encumbrance, d.Encumbrance = 50, 20
-	// 擲骰順序：攻擊、防禦、傷害骰 ×2、部位
-	rng := &seqRand{values: []int{90, 1, 1, 1, 20}}
+	// 擲骰順序：攻擊、防禦、傷害骰 ×2、部位、空槽護甲骰。
+	rng := &seqRand{values: []int{90, 1, 1, 1, 20, 2}}
 	out := Resolve(&a, &d, 0, rng)
 	if out.Miss || out.Parried {
 		t.Fatalf("應該打中：%+v", out)
@@ -182,7 +182,7 @@ func TestResolve(t *testing.T) {
 	if out.Location != 1 {
 		t.Fatalf("部位 %d", out.Location)
 	}
-	if d.Damage != out.Damage || d.Hurt != out.Damage {
+	if out.Damage != 14 || d.Damage != 14 || d.Hurt != 16 || rng.i != 6 {
 		t.Fatalf("傷害沒記上去：%+v", d)
 	}
 	if d.Parries != 1 {

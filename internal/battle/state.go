@@ -45,6 +45,8 @@ const (
 // Member 是隊伍那一側要用到的欄位；battle 不認得 town 的型別，由呼叫端填。
 type Member struct {
 	Name string
+	// Portrait 是角色存檔縮圖已匹配的 CHARPICS 索引（SPEC-019）。
+	Portrait int
 	// Worn 是六個裝備欄的名稱，順序同記錄 0x101：武器、頭、軀幹、腿、盾、腰帶。
 	Worn [6]string
 	// Skills 是四列武器的攻防原始值，用來算戰鬥等級（RE-080）。
@@ -58,13 +60,16 @@ type Member struct {
 	// Strength／Quickness 是攻擊與防禦要用的兩個屬性；Nutrition 用來折算力量。
 	Strength, Quickness, Nutrition int
 	// Weapon 是手上那件武器；Attack／Parry 是那一列的攻防技能。
-	Weapon        Weapon
+	Weapon Weapon
+	// BeltWeapon 與腰帶名稱一起交換，保留原版整筆物品搬移的語意（RE-094）。
+	BeltWeapon    Weapon
 	Attack, Parry int
 	// UnarmedWeapon 是徒手各式拿的那一格穿戴品（`UnarmedSlots`）。
 	UnarmedWeapon [6]Weapon
 	// ArmourWeight 是三件護甲的重量和；ShieldWeight／ShieldGrade 是盾牌
 	// （沒有盾牌時 ShieldGrade 是 NoShield）。
 	ArmourWeight, ShieldWeight, ShieldGrade int
+	Armour                                  [3]*Item
 	// Wounds 是開場就帶著的傷（角色記錄 0x1B）。
 	Wounds int
 	// HasWeapon 是角色記錄 +0x30 非零，也就是手上真的有武器
@@ -93,10 +98,14 @@ type Member struct {
 	// Pack 是背包六格的名字（角色記錄 0xA0 起，一格 16 byte，RE-075）。
 	// 空字串是空格。戰利品優先往這裡放。
 	Pack [BackpackSlots]string
+	// 完整物品資料隨名稱一起搬移，供戰後回寫（RE-094／096）。
+	HandItem, BeltItem *Item
+	PackItems          [BackpackSlots]*Item
 }
 
 // State 是一場戰鬥。
 type State struct {
+	rangedPending bool
 	Site   *Site
 	Stage  Stage
 	Actors []Actor
@@ -171,7 +180,7 @@ type PickUpAsk struct {
 
 // NewQuest 依任務地點的記錄擺好一場戰鬥。
 func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State {
-	s := &State{Site: site, Stage: StageIntro, Field: field, Party: party,
+	s := &State{rangedPending: true, Site: site, Stage: StageIntro, Field: field, Party: party,
 		Monster: monster}
 	// 任務地點才有那一件東西（`sub_2886C` 先看 `word_34968`，RE-113）。
 	if site.Index >= 0 {
@@ -180,7 +189,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		// 帶著它逃出戰場就算完成。名字非空才放——原版看的是記錄的第 0 格。
 		if q := site.QuestItem; q.Name != "" {
 			s.Ground[0] = GroundItem{Name: strings.ToUpper(q.Name),
-				X: q.Spot.X, Y: q.Spot.Y, Weapon: q.Item.CombatWeapon()}
+				X: q.Spot.X, Y: q.Spot.Y, Weapon: q.Item.CombatWeapon(), Item: &q.Item}
 		}
 	}
 	s.Actors = make([]Actor, MaxActors)
@@ -202,11 +211,12 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			X: site.PartyX[i], Y: site.PartyY[i],
 			Name: m.Name, Member: i,
 			Level: level, Foresight: m.Foresight, Size: m.Size,
-			Strength: strength, Quickness: m.Quickness,
+			Strength: strength, Quickness: m.Quickness, Intellect: m.Intellect,
 			Attack: m.Attack, Parry: m.Parry, Weapon: m.Weapon,
 			UnarmedWeapon: m.UnarmedWeapon,
-			Encumbrance: enc, WeaponSpeed: speed, ShieldGrade: m.ShieldGrade,
+			Encumbrance:   enc, WeaponSpeed: speed, ShieldGrade: m.ShieldGrade,
 			LoadLevel: level, ArmourWeight: m.ArmourWeight,
+			Armour:       cloneArmour(m.Armour[:]),
 			ShieldWeight: m.ShieldWeight, WeaponRows: m.WeaponRows,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds,
 			Stamina: strength + m.Health}
@@ -223,7 +233,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			shieldWeight, shieldGrade = monster.Shield.Encumbrance, monster.Shield.SizeClass
 		}
 		enc, speed := Encumbrance(site.Level, weapon, monster.ArmourWeight, shieldWeight)
-		s.Actors[slot] = Actor{Kind: site.Monster, Side: SideMonster,
+		s.Actors[slot] = Actor{Side: SideMonster,
 			X: site.MonsterX[i], Y: site.MonsterY[i],
 			Name: site.MonsterName, Level: MonsterCombatLevel(site.Level), Member: -1,
 			Foresight: monster.Foresight, Size: monster.Size,
@@ -237,6 +247,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			FleeAt:   monster.FleeAt, FleeRecover: monster.FleeRecover,
 			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
 			LoadLevel: site.Level, ArmourWeight: monster.ArmourWeight,
+			Armour:       cloneArmour(monster.Worn),
 			ShieldWeight: shieldWeight,
 			ShieldGrade:  shieldGrade, Unarmed: monster.Weapon == nil,
 			Threshold: Threshold(monster.Size, monster.Health),
@@ -246,6 +257,11 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			// 記錄 `+0x30` 起，與隊員那一側同一張表、同一個意思（RE-131）。
 			UnarmedWeapon: unarmedFrom(monster.Worn)}
 		s.Actors[slot].SetParts()
+	}
+	for i := PartySlots; i < len(s.Actors); i++ {
+		if s.Actors[i].Side == SideMonster {
+			s.Actors[i].Intellect = monster.Intellect
+		}
 	}
 	s.MonsterLevel = site.Level
 	return s

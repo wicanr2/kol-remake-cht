@@ -1,0 +1,19 @@
+{
+  "schema": "kol-address-semantics-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x2223f": {"semantic": "參戰者 50-byte 記錄 +1 為零時選隊員記錄，非零時選敵方記錄；不是只由索引判斷", "confidence": "已證實", "evidence": "sub_22229:0x22232..0x2226C 的讀取、比較及分支；TestEquipmentRecordPointerOriginal"},
+    "0x2228c": {"semantic": "將 DS 相對 0xBB88 加參戰者索引乘 0x300 寫入 DS:0xBB78 記錄指標", "confidence": "已證實", "evidence": "sub_22278:0x22281..0x2228C，IMUL、ADD、MOV；TestEquipmentRecordPointerOriginal"},
+    "0x222b5": {"semantic": "將 DS 相對 0xCD92 加（參戰者索引減六）乘 0x80 寫入 DS:0xBB78 記錄指標", "confidence": "已證實", "evidence": "sub_22296:0x2229F..0x222B5，ADD FFFAh、SHL 7、ADD、MOV；TestEquipmentRecordPointerOriginal"},
+    "0x26d48": {"semantic": "加值大小取原始值的位元 4 至 6，再除以 16；位元 7 決定負號", "confidence": "已證實", "evidence": "sub_26D3C:0x26D45..0x26D6A 的 AND、IDIV、NEG；TestSignedItemBonusOriginal"},
+    "0x276bd": {"semantic": "sub_22229 回傳值為零走 +0x100 映射，非零走 +0x30 映射；此索引不推定兩分支的角色類型", "confidence": "已證實", "evidence": "0x276B1..0x276E7 的 CALL、CMP、JNZ、JMP"},
+    "0x2771d": {"semantic": "零回傳分支的部位 0 至 5 對應偏移 0x100、0x110、0x110、0x110、0x120、0x120", "confidence": "已證實", "evidence": "0x276E7..0x2771D 的移位、比較與跳躍"},
+    "0x27741": {"semantic": "物品 +0x0C 除以 32 後作迴圈包含上限，總擲骰次數為商加一", "confidence": "已證實", "evidence": "0x27722..0x27741 及 0x27781..0x277A3"},
+    "0x27752": {"semantic": "骰面數查 DS:0x00D4 表，索引為物品 +0x0C 除以 4 的商 AND 7", "confidence": "已證實", "evidence": "0x27744..0x27759；DS 位移與本索引的 IDA linear 位址不同"},
+    "0x277d4": {"semantic": "減傷不足時，以原傷害減減傷後的餘額及物品槽偏移呼叫耐久子常式", "confidence": "已證實", "evidence": "0x277A6..0x277D9 的比較、減法及參數堆疊"},
+    "0x277e6": {"semantic": "攻擊常式直接呼叫 sub_277F4，三個堆疊參數依序為剩餘傷害、命中部位、零", "confidence": "已證實", "evidence": "0x277DC..0x277EB，CALL bytes 9a54943a1e；直接交叉參照"}
+  }
+}

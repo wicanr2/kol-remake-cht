@@ -6,6 +6,7 @@ package town
 
 // TownEntry 是世界地圖城鎮記錄裡跟進城有關的欄位。
 type TownEntry struct {
+	Code                   string
 	Town                   int
 	Camera                 Point
 	MinX, MaxX, MinY, MaxY int
@@ -17,6 +18,7 @@ type TownEntry struct {
 func (s *Session) EnterFromWorld(e TownEntry, info *TownBuildings, grid *Grid) {
 	o := s.Outdoor
 	o.Town = e.Town
+	s.TownCode = e.Code
 	o.Camera.X, o.Camera.Y = e.Camera.X, e.Camera.Y
 	o.Bounds.MinX, o.Bounds.MaxX = e.MinX, e.MaxX
 	o.Bounds.MinY, o.Bounds.MaxY = e.MinY, e.MaxY
@@ -35,6 +37,7 @@ func (s *Session) EnterFromWorld(e TownEntry, info *TownBuildings, grid *Grid) {
 	s.Cursor = 0
 	s.Inside = nil
 	s.pending = nil
+	s.leaving = false
 	s.told = [TopicSlots]bool{}
 	s.greeted = false
 	s.LeftTown = false

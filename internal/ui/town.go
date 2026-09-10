@@ -257,11 +257,14 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 			town.ColourText[0], town.ColourText[1], town.ColourText[2])
 	}
 
-	pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
-	if err != nil {
-		return err
+	// 競技場尚無已證實的店主肖像，與英文介面一致略過空素材。
+	if in.Portrait.Archive != "" {
+		pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, pic, l.PicX, l.PicY, l.Scale)
 	}
-	drawScaled(dst, pic, l.PicX, l.PicY, l.Scale)
 
 	fill(dst, l.TitleX, l.TitleY, l.TitleW, l.TitleH, town.ColourBoxEdge)
 	fill(dst, l.TitleX+1, l.TitleY+1, l.TitleW-2, l.TitleH-2, town.ColourBoxFill)
@@ -277,6 +280,34 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	lines := in.DialogZh
 	if len(lines) == 0 {
 		lines = in.Dialog
+	}
+	if in.List != nil {
+		// 八列沿用原版清單視窗；16 px 行距可完整放入既有 136 px 對話框。
+		for i, line := range in.List.Rows {
+			if i >= town.ListRows {
+				break
+			}
+			c := town.ColourListIdle
+			if i == in.List.Selected {
+				c = town.ColourText
+			}
+			text := []rune(line)
+			for len(text) > 0 {
+				w, _ := f.Measure(string(text))
+				if w <= l.DialogW-32 {
+					break
+				}
+				text = text[:len(text)-1]
+			}
+			f.Draw(dst, l.DialogTextX, l.DialogTextY+i*16, string(text), c[0], c[1], c[2])
+		}
+		if in.List.Scrolls() {
+			a := town.ColourListArrow
+			x := l.DialogX + l.DialogW - 20
+			f.Draw(dst, x, l.DialogTextY, "^", a[0], a[1], a[2])
+			f.Draw(dst, x, l.DialogTextY+7*16, "v", a[0], a[1], a[2])
+		}
+		lines = nil
 	}
 	for i, line := range lines {
 		f.Draw(dst, l.DialogTextX, l.DialogTextY+i*l.DialogStep, line,

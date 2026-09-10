@@ -318,7 +318,7 @@ type Outcome struct {
 }
 
 // Resolve 打一次近戰。style 是攻擊選項，rng 依序擲：攻擊、（選項為 1 時的列）、
-// 防禦、傷害骰、部位。攻擊者與被攻擊者的狀態都會被更新。
+// 防禦、傷害骰、部位、護甲骰。攻擊者與被攻擊者的狀態都會被更新。
 func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 	row := ModifierRow(style, rng)
 	attack := AttackScore(*a, style, d.Guard, row, rng.Roll(AttackRoll))
@@ -340,8 +340,11 @@ func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 	}
 	damage := DamageRoll(*a, style, attack-defence, rng)
 	location := HitLocation(style, rng.Roll(AttackRoll))
+	rawDamage := damage
+	damage = d.AbsorbArmour(damage, location, rng)
 	out := Outcome{Damage: damage, Location: location}
 	out.Down, out.Limb = d.Take(damage, location)
+	d.Hurt += rawDamage - damage
 	return out
 }
 
@@ -369,8 +372,11 @@ func ResolveMissile(a *Actor, d *Actor, style, attack int, stray bool, rng Rand)
 	}
 	damage := DamageRoll(*a, style, attack-defence, rng)
 	location := HitLocation(style, rng.Roll(AttackRoll))
+	rawDamage := damage
+	damage = d.AbsorbArmour(damage, location, rng)
 	out := Outcome{Damage: damage, Location: location}
 	out.Down, out.Limb = d.Take(damage, location)
+	d.Hurt += rawDamage - damage
 	return out
 }
 

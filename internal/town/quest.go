@@ -59,8 +59,9 @@ type QuestBuilding struct {
 	Site  int
 	Final bool
 	// Wants 是要收的那件物品十六 byte；Gives 是換給你的那件，空的話不給。
-	Wants []byte
-	Gives []byte
+	Wants     []byte
+	Gives     []byte
+	GivesItem *Good
 }
 
 // QuestFlag 取一名角色第 site 個任務的旗標。

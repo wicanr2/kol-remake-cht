@@ -200,6 +200,8 @@ def character_sheet(rec: bytes) -> dict:
         "adventure_points": rec[ADVENTURE_OFFSET] << 8 | rec[ADVENTURE_OFFSET + 1],
         "movement_rate": rec[MOVEMENT_OFFSET],
         "nutrition": rec[NUTRITION_OFFSET],
+        # RE-100／SPEC-012：角色記錄 +0x28 的法術目標類別。
+        "ward": rec[0x28],
         "height_feet": feet,
         "height_inches": rest,
         "weight": weight,
@@ -289,6 +291,8 @@ def main() -> int:
             # 穿戴欄是角色記錄自己的欄位，不屬於 MIRROR 資料頁，所以放在槽位這一層
             # （`internal/roster` 的 Slot.Equipment 就是照這個位置讀）。
             "equipment": equipment(data[base:base + SLOT_BYTES]) if name else None,
+            "backpack": ([worn_slot(data[base:base + SLOT_BYTES], i, 0xA0 + 16 * i)
+                          for i in range(6)] if name else None),
             # 手上那件（0x30）：戰鬥、負重與立繪的武器那一層讀的都是它（RE-127）。
             "in_hand": (worn_slot(data[base:base + SLOT_BYTES], WORN_SLOTS,
                                   IN_HAND_OFFSET) if name else None),

@@ -46,7 +46,7 @@ func TestPlanKey(t *testing.T) {
 	}
 }
 
-// 鍵值小的先動；空位不進順序。
+// 鍵值小的先動；有效範圍內的空隊員槽排最後，仍會消耗檢視門檻。
 func TestBeginPlanningOrder(t *testing.T) {
 	s := NewQuest(testSite(), []Member{{Name: "Poontang", Size: 100, Health: 100}},
 		testMonster(), NewField())
@@ -54,15 +54,16 @@ func TestBeginPlanningOrder(t *testing.T) {
 	if s.Round.Number != 1 {
 		t.Fatalf("回合數 %d", s.Round.Number)
 	}
-	if len(s.Round.Order) != 1+testSite().Count {
+	if len(s.Round.Order) != PartySlots+testSite().Count {
 		t.Fatalf("順序長度 %d", len(s.Round.Order))
 	}
-	prev := -1 << 30
+	emptySeen := false
 	for _, i := range s.Round.Order {
 		if s.Actors[i].Side == SideEmpty {
-			t.Fatalf("空位進了順序：%d", i)
+			emptySeen = true
+		} else if emptySeen {
+			t.Fatal("空槽沒有排在有效人物之後")
 		}
-		_ = prev
 	}
 	// 走完一輪之後 EndTurn 要回報結束。
 	for range s.Round.Order {

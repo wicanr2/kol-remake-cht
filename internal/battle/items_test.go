@@ -234,6 +234,8 @@ func TestPickUpCallsQuestItemOnce(t *testing.T) {
 	s := pickUpState()
 	s.Site = &Site{Index: 3}
 	s.QuestItem = "DAGGER"
+	s.Site.QuestItem.Record = "01000000000000000000000000000000"
+	s.Ground[0].Item = &Item{Name: "DAGGER", Record: s.Site.QuestItem.Record}
 	s.Exec.Order, s.Exec.Turn = []int{0}, 0
 	if _, ok := s.Step(maxRand{}); !ok {
 		t.Fatal("該有一手")
@@ -250,7 +252,7 @@ func TestPickUpCallsQuestItemOnce(t *testing.T) {
 		m.HasWeapon = false
 		m.WeaponName = ""
 	}
-	s.Ground[0] = GroundItem{Name: "DAGGER", X: 30, Y: 30}
+	s.Ground[0] = GroundItem{Name: "DAGGER", X: 30, Y: 30, Item: &Item{Name: "DAGGER", Record: "01000000000000000000000000000000"}}
 	s.Exec.Order, s.Exec.Turn = []int{0}, 0
 	if _, ok := s.Step(maxRand{}); !ok {
 		t.Fatal("該再有一手")

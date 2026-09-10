@@ -51,6 +51,7 @@ type WeaponRow struct {
 
 // Sheet 是一名角色在資料頁上要用到的全部欄位。
 type Sheet struct {
+	Ward            int            `json:"ward"`
 	Stats           [StatCount]int `json:"stats"`
 	Race            int            `json:"race"`
 	Profession      int            `json:"profession"`

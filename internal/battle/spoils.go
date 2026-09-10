@@ -65,11 +65,16 @@ func (s *State) DropSpoils(items []SpoilItem, rng Rand) []int {
 		}
 		it := items[(rng.Roll(ItemTableCount)-1)%len(items)]
 		// 狀況那一格照樣擲，即使抽中的是空位——原版沒有為此分支。
-		rng.Roll(255)
+		condition := rng.Roll(255)
 		if it.Empty || it.Name == "" {
 			continue
 		}
-		s.Ground[slot] = GroundItem{Name: it.Name, Weapon: it.CombatWeapon()}
+		item := it.Item
+		item.Condition = condition
+		if len(item.Record) == 32 {
+			item.Record = item.Record[:22] + fmt.Sprintf("%02x", condition) + item.Record[24:]
+		}
+		s.Ground[slot] = GroundItem{Name: it.Name, Weapon: item.CombatWeapon(), Item: &item}
 		got = append(got, slot)
 	}
 	return got
@@ -134,6 +139,7 @@ func (s *State) TakeSpoil(slot, actor int) (string, int) {
 	for n := range m.Pack {
 		if m.Pack[n] == "" {
 			m.Pack[n] = name
+			m.PackItems[n] = g.Item
 			s.Ground[slot] = GroundItem{}
 			return name, 0
 		}
@@ -144,12 +150,14 @@ func (s *State) TakeSpoil(slot, actor int) (string, int) {
 		record = EmptyHandsRecord
 	}
 	if a := actor; a >= 0 && a < len(s.Actors) {
-		s.Ground[slot] = GroundItem{Name: m.WeaponName, Weapon: s.Actors[a].Weapon}
+		s.Ground[slot] = GroundItem{Name: m.WeaponName, Weapon: s.Actors[a].Weapon, Item: m.HandItem}
 		s.Actors[a].Weapon = g.Weapon
 	} else {
-		s.Ground[slot] = GroundItem{Name: m.WeaponName}
+		s.Ground[slot] = GroundItem{Name: m.WeaponName, Item: m.HandItem}
 	}
 	m.HasWeapon, m.WeaponName, m.Worn[0] = true, name, name
+	m.HandItem = g.Item
+	m.Weapon = g.Weapon
 	return name, record
 }
 

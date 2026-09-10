@@ -225,12 +225,18 @@ func TestPlanEnemyShootsFromRange(t *testing.T) {
 	if d.Command != CmdMove {
 		t.Fatalf("被牆擋住應該改成移動，得到 %#x", d.Command)
 	}
-	// 環 3 起只能靠近。
+	// 環 3 仍能射擊，環 4 起才靠近（SPEC-013 原版環表訂正）。
 	s = newState()
 	s.Actors[1].Y = 14
 	d = s.PlanEnemy(1, &fixedRand{values: []int{2}})
-	if d.Command != CmdMove || d.Ring != 3 {
-		t.Fatalf("環 3 應該靠近，得到 %#x／%d", d.Command, d.Ring)
+	if d.Command != CmdMissile || d.Ring != 3 {
+		t.Fatalf("環 3 應該射擊，得到 %#x／%d", d.Command, d.Ring)
+	}
+	s = newState()
+	s.Actors[1].Y = 15
+	d = s.PlanEnemy(1, &fixedRand{values: []int{2}})
+	if d.Command != CmdMove || d.Ring != 4 {
+		t.Fatalf("環 4 應該靠近，得到 %#x／%d", d.Command, d.Ring)
 	}
 	// 右臂廢了也射不出去。
 	s = newState()

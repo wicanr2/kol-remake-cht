@@ -110,8 +110,9 @@ func (r *cornerRand) Roll(n int) int {
 // 一般遭遇的地形：逐格擲 1…4，中 1 填 TileRough，再灑 TileScatter。
 func TestGenerate(t *testing.T) {
 	f := Generate(&cornerRand{})
-	if f.At(0, 0) != TileRough || f.At(0, 1) != TileGround {
-		t.Fatalf("底色不對：%d %d", f.At(0, 0), f.At(0, 1))
+	// 原版先走 X 軸；一整列 64 次為偶數，下一個 Y 仍從粗地開始。
+	if f.At(0, 0) != TileRough || f.At(1, 0) != TileGround || f.At(0, 1) != TileRough {
+		t.Fatalf("底色不對：%d %d %d", f.At(0, 0), f.At(1, 0), f.At(0, 1))
 	}
 	if f.At(FieldSide-1, FieldSide-1) != TileScatter {
 		t.Fatalf("灑點沒落在最後一格：%d", f.At(FieldSide-1, FieldSide-1))

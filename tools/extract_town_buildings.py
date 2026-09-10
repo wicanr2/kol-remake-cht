@@ -305,6 +305,7 @@ def main() -> int:
                         if any(give):
                             door["quest_gives"] = packed_name(give)
                             door["quest_gives_bytes"] = give.hex()
+                            door["quest_gives_item"] = good(give, 0)
                     if body[ICON_FLAGS + 1] & SCROLL_FLAG:
                         door["order"] = order(body)
                         door["spells"] = spells_for_sale(body)

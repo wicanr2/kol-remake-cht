@@ -65,7 +65,7 @@ func BattleEncounter(dst *ebiten.Image, sprites Sprites, f *font.Font,
 // 視線通得到的格子，看不到的畫成 TileUnseen；目前輪到的那一格永遠畫得出來，
 // 外面再套一圈白框（`sub_223C0:0x2279E`）。
 func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
-	f *font.Font, s *battle.State) error {
+	f *font.Font, s *battle.State, body *BattleBody, sheet *BattleSheet) error {
 	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
 	if err != nil {
 		return err
@@ -123,6 +123,16 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 		shadow(dst, box.X, box.Y, box.Width, box.Height)
 		fill(dst, box.X, box.Y, box.Width, box.Height, town.ColourBoxEdge)
 		fill(dst, box.X+1, box.Y+1, box.Width-2, box.Height-2, town.ColourBoxFill)
+	}
+
+	if err := body.Draw(dst, sprites, s); err != nil {
+		return err
+	}
+	if err := sheet.Draw(dst, sprites, f, s); err != nil {
+		return err
+	}
+	if err := drawBattleCommandPanel(dst, sprites, f, s); err != nil {
+		return err
 	}
 
 	// 執行段：整條訊息區換成一張卷軸，圖示列被蓋掉（RE-089、RE-090）。底圖是
@@ -192,8 +202,8 @@ func clampField(v int) int {
 // title 是標題那一筆記錄拆好的幾段：那一筆自己帶著 `~H02~V09` 兩個座標，
 // 所以不能走會剝掉版面碼的 UIRaw（見 `town.UISegments`）。
 func BattleSpoils(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
-	f *font.Font, s *battle.State, title []town.Segment) error {
-	if err := BattleField(dst, sprites, tiles, f, s); err != nil {
+	f *font.Font, s *battle.State, title []town.Segment, body *BattleBody, sheet *BattleSheet) error {
+	if err := BattleField(dst, sprites, tiles, f, s, body, sheet); err != nil {
 		return err
 	}
 	b := battle.SpoilBox
@@ -262,8 +272,8 @@ func drawSpoilIcons(dst *ebiten.Image, sprites Sprites, s *battle.State) error {
 //
 // title 是標題那一筆記錄拆好的幾段（它自己帶 `~H03~V07`）；rows 是清單的內容。
 func BattleSpellList(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
-	f *font.Font, s *battle.State, title []town.Segment, rows []string) error {
-	if err := BattleField(dst, sprites, tiles, f, s); err != nil {
+	f *font.Font, s *battle.State, title []town.Segment, rows []string, body *BattleBody, sheet *BattleSheet) error {
+	if err := BattleField(dst, sprites, tiles, f, s, body, sheet); err != nil {
 		return err
 	}
 	b := battle.SpellListBox

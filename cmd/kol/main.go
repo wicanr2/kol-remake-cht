@@ -99,7 +99,7 @@ type questBattle struct {
 // battleMember 把城鎮那一側的隊員換成戰鬥要用的欄位（RE-080）：戰鬥等級由
 // 四列武器的攻防原始值算出來，規劃順序要洞察，昏迷門檻要體型與健康。
 func battleMember(m town.Member) battle.Member {
-	out := battle.Member{Name: m.Name, Wounds: m.Wounds, Female: m.Female}
+	out := battle.Member{Name: m.Name, Wounds: m.Wounds, Female: m.Female, Portrait: m.Portrait}
 	if m.Sheet == nil {
 		return out
 	}
@@ -116,9 +116,11 @@ func battleMember(m town.Member) battle.Member {
 	out.Quickness = m.Sheet.Stats[town.StatQuickness]
 	out.Nutrition = m.Sheet.Nutrition
 	out.Intellect = m.Sheet.Stats[town.StatIntellect]
+	out.Ward = m.Sheet.Ward
 	// 手上那件武器（角色記錄 0x30，不在穿戴欄裡）與三件護甲、盾牌的重量：
 	// 攻擊值、負重與骰子都要用。
 	if w := m.InHand; w != nil {
+		out.HandItem = battleItem(w)
 		out.HasWeapon = true
 		out.Weapon = battle.Weapon{
 			Kind: w.Class, Base: w.Dice.Bonus, Code: dieCode(w.Record),
@@ -150,12 +152,20 @@ func battleMember(m town.Member) battle.Member {
 			break
 		}
 		out.Pack[i] = g.Name
+		out.PackItems[i] = battleItem(&g)
 	}
-	// HasSecondItem 還沒接：它看的是角色記錄 +0x190（穿戴欄的第十格，也就是腰帶，
-	// RE-127 已經讀出來了），接上去會改變指令列（0x16／0x25，SPEC-010 末段），
-	// 要連同物品那一頁的搬移動作一起做。
+	// 腰帶是角色記錄 +0x190；交換時必須連同武器數值一起搬移（RE-094／127）。
+	if w := m.Worn[9]; w != nil {
+		out.BeltItem = battleItem(w)
+		out.HasSecondItem, out.BeltName = true, w.Name
+		out.BeltWeapon = battle.Weapon{Kind: w.Class, Base: w.Dice.Bonus,
+			Code: dieCode(w.Record), Weight: w.Encumbrance, TwoHand: w.Hands == 1}
+		out.BeltWeapon.Count, out.BeltWeapon.Sides = battle.DamageCode(out.BeltWeapon.Code)
+		out.Worn[5] = w.Name
+	}
 	for _, pos := range battle.ArmourSlots {
 		if g := m.Worn[pos]; g != nil {
+			out.Armour[pos] = battleItem(g)
 			out.ArmourWeight += g.Encumbrance
 		}
 	}
@@ -176,6 +186,7 @@ func battleMember(m town.Member) battle.Member {
 		out.UnarmedWeapon[style] = w
 	}
 	if sh := m.Worn[battle.ShieldSlot]; sh != nil {
+		out.Worn[4] = sh.Name
 		out.ShieldWeight = sh.Encumbrance
 		out.ShieldGrade = sh.SizeClass
 	} else {
@@ -499,7 +510,11 @@ func (g *game) applyBattleToken(s *battle.State, token string,
 	case ">":
 		s.MoveSelection(1)
 	case "RET", "SPACE":
-		s.Choose()
+		if token == "SPACE" && (s.Plan.Prompt == battle.PromptCommand || s.Plan.Prompt == battle.PromptTarget) {
+			s.ToggleEquipmentPanel()
+		} else {
+			s.Choose()
+		}
 	}
 	return nil
 }
@@ -558,9 +573,7 @@ func (g *game) awardBattle() {
 // startArenaFight 把競技場談完的那一場開起來（RE-108）：一隻、等級是上場那一名的
 // 實得位階加一、陣型與種類各擲一次。站位不擲也不查表——競技場走的是
 // `sub_1E3A8` 對 `word_345DE >= 0` 的那一條（RE-098），只有上場那一名參戰。
-// **戰場的地形還沒解**——原版在這裡把 `word_34968` 設成 1（走任務地點那一條，
-// 地形是載入的而不是逐格擲的），但載的是哪一份沒讀出來，所以這一版沿用隨機遭遇
-// 的逐格擲。
+// 地形依 SPEC-025 載入第 24 號戰場圖，再走共同的樹叢散布。
 func (g *game) startArenaFight() {
 	f := g.play.PendingFight()
 	if f == nil || g.quest == nil || g.arena == nil {
@@ -577,8 +590,9 @@ func (g *game) startArenaFight() {
 		members = append(members, battleMember(m))
 	}
 	mon := g.arena.monsters.At(kind)
-	st := battle.NewArena(f.Member, kind, f.Level, mon, members,
-		battle.Generate(g.arena.field))
+	field := &battle.Field{Tiles: append([]int(nil), g.arena.mapField.Tiles...)}
+	field.Scatter(g.arena.field)
+	st := battle.NewArena(f.Member, kind, f.Level, mon, members, field)
 	if st == nil {
 		return
 	}
@@ -602,6 +616,9 @@ func (g *game) startArenaFight() {
 // savedParty 把存檔裡的隊伍換成城鎮這一側的型別。角色的靜態資料（頭像、屬性）
 // 仍然來自 typed data，存檔只帶會變的那些欄位（SPEC-006）。
 func savedParty(s *save.Save) []town.Member {
+	if s.Characters != nil {
+		return completeParty(s)
+	}
 	out := make([]town.Member, 0, len(s.Party))
 	for _, m := range s.Party {
 		out = append(out, town.Member{
@@ -720,7 +737,7 @@ func townSheet(s *roster.Sheet) *town.Sheet {
 	out := &town.Sheet{
 		Race: s.Race, Profession: s.Profession, Rank: s.Rank,
 		AdventurePoints: s.AdventurePoints, MovementRate: s.MovementRate,
-		Nutrition: s.Nutrition, HeightFeet: s.HeightFeet,
+		Nutrition: s.Nutrition, Ward: s.Ward, HeightFeet: s.HeightFeet,
 		HeightInches: s.HeightInches, Weight: s.Weight,
 		Order: s.Order, Title: s.Title,
 	}
@@ -974,6 +991,7 @@ type shotJob struct {
 }
 
 type game struct {
+	notice       []string
 	worldState   *world.Screen
 	worldSession *world.Session
 	// quest 是走到任務地點之後開起來的那一場戰鬥；用指標是因為建構之後才會被填。
@@ -1028,7 +1046,11 @@ type game struct {
 	// tracePath 是狀態軌跡的輸出檔；每截一張圖就記一筆目前站在哪一層、位置與階段。
 	// 截圖只證明畫面長什麼樣，軌跡才證明這一步走的是哪一個狀態機。
 	tracePath string
-	traceRows []map[string]any
+	// battleCanvas 保留原版戰場解析度，再配合目前畫布縮放。
+	battleCanvas *ebiten.Image
+	battleBody   ui.BattleBody
+	battleSheet  ui.BattleSheet
+	traceRows    []map[string]any
 	// lastParty 是上一步寫進軌跡的隊伍摘要，用來省掉沒有變化的那幾行；
 	// lastStage 是上一步的戰鬥階段，只有它變了才記一次戰場。
 	lastParty []string
@@ -1050,6 +1072,7 @@ type game struct {
 
 // arenaDeps 是競技場開一場戰鬥要用到的東西，建構時湊齊。
 type arenaDeps struct {
+	mapField *battle.Field
 	monsters *battle.Monsters
 	spoils   []battle.SpoilItem
 	tiles    *ui.BattleTiles
@@ -1304,6 +1327,9 @@ func (g *game) renderScene(sc scene) error {
 }
 
 func (g *game) render() error {
+	if g.play != nil {
+		g.worldParty = g.play.Party
+	}
 	g.canvas.Clear()
 	switch g.scene {
 	case sceneCover, sceneContents, sceneOpenSpread:
@@ -1358,29 +1384,13 @@ func (g *game) render() error {
 		}
 		// 競技場的對話蓋在野外上面（RE-108）。
 		if g.play != nil && g.play.InArena() {
+			if g.strings != nil {
+				return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.play.Inside)
+			}
 			return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.play.Inside)
 		}
 		if g.quest != nil && g.quest.state != nil {
-			if g.quest.state.Stage == battle.StageEncounter {
-				return ui.BattleEncounter(g.canvas.Image(), g.sprites, g.small,
-					g.quest.state, g.quest.lines)
-			}
-			if p := g.quest.state.Plan.Prompt; p == battle.PromptSpell ||
-				p == battle.PromptAffect {
-				return ui.BattleSpellList(g.canvas.Image(), g.sprites,
-					g.quest.tiles, g.small, g.quest.state,
-					town.UISegments(g.quest.bank, g.quest.trans, town.BankUI,
-						g.quest.state.SpellListTitle()),
-					g.battleSpellRows())
-			}
-			if g.quest.state.Stage == battle.StageSpoils {
-				return ui.BattleSpoils(g.canvas.Image(), g.sprites, g.quest.tiles,
-					g.small, g.quest.state,
-					town.UISegments(g.quest.bank, g.quest.trans, town.BankUI,
-						g.quest.state.SpoilTitle()))
-			}
-			return ui.BattleField(g.canvas.Image(), g.sprites, g.quest.tiles,
-				g.small, g.quest.state)
+			return g.renderBattle()
 		}
 		if g.play.LeftTown && g.worldState != nil {
 			if g.strings != nil {
@@ -1643,7 +1653,10 @@ func (g *game) renderFlow() error {
 	case flow.SceneRoster:
 		return g.renderScene(sceneRoster)
 	case flow.SceneNewChar:
-		return g.renderScene(sceneNewChar)
+		if g.strings != nil {
+			return ui.NewCharacterCJK(dst, g.sprites, g.cjk, g.strings, g.flow.Create)
+		}
+		return ui.NewCharacter(dst, g.sprites, g.small, g.large, g.flow.Create)
 	case flow.SceneDelete:
 		return g.renderScene(sceneDelete)
 	case flow.SceneHarbor:
@@ -1711,6 +1724,11 @@ func (g *game) updateInteractive() error {
 		g.frame = g.player.Current()
 	}
 	// 隊伍標記的走路動畫。腳本模式逐步截圖不需要它自己動，互動模式要。
+	if g.flow.Scene == flow.SceneTown && g.leftTown() && !g.endingReached() &&
+		g.play != nil && !g.play.InArena() &&
+		(g.quest == nil || g.quest.state == nil) && g.worldSession != nil {
+		g.worldSession.Screen.AdvanceWeather(title.TickHz / 60)
+	}
 	if g.flow.Scene == flow.SceneTown && g.play != nil && !g.leftTown() &&
 		g.play.Mode != town.ModeInside {
 		g.walkTick++
@@ -1720,7 +1738,17 @@ func (g *game) updateInteractive() error {
 		}
 	}
 	targets := g.flowTargets()
-	tokens := append(keyboardTokens(), mouseTokens(targets, "RET")...)
+	typingName := g.flow.Scene == flow.SceneNewChar && g.flow.Create.Stage == charcreate.StageName
+	tokens := append(keyboardTokens(typingName), mouseTokens(targets, "RET")...)
+	if len(g.notice) > 0 {
+		if len(tokens) > 0 {
+			g.notice = nil
+			if g.logInput {
+				fmt.Fprintln(os.Stderr, "input scene=notice token=ack")
+			}
+		}
+		return nil
+	}
 	if g.logInput && len(tokens) > 0 {
 		mx, my := ebiten.CursorPosition()
 		fmt.Fprintf(os.Stderr, "input scene=%s cursor=%d 游標=(%d,%d) 可點=%d token=%v\n",
@@ -1732,7 +1760,11 @@ func (g *game) updateInteractive() error {
 			_ = g.playToken(tok)
 			continue
 		}
+		full := g.flow.Scene == flow.SceneMenu && g.flow.MenuCursor == flow.MenuCreate && g.roster.Full() && tok == "RET"
 		g.flow.Key(tok)
+		if full {
+			g.notice = g.saveNotice("full")
+		}
 	}
 	return nil
 }
@@ -1952,9 +1984,10 @@ func (g *game) battleStep() {
 		// 這一場標到了任務完成，而且有人的已回報數正好是 0x17，就接結局
 		// （RE-106）。檢查在放開畫面之前，順序與原版相同。
 		g.armEnding(s)
+		g.writeBattleParty(s)
 		// 勝負那兩句與戰利品都處理完了，這一場真的結束——放開畫面回野外，
-		// 玩家才能繼續走。**打輸之後原版怎麼處置還沒解**（RE-091 只讀到那一句
-		// 訊息），這一版兩種結果都回野外。
+		// 玩家才能繼續走。傷勢與既有裝備修改已依 SPEC-027 回寫；
+		// 敗北的額外掉落及完整原版返回路徑仍待驗證。
 		g.quest.state = nil
 		return
 	}
@@ -2209,6 +2242,11 @@ func (g *game) updateBattle() {
 	if inpututil.IsKeyJustPressed(ebiten.KeyPeriod) {
 		s.MoveSelection(1)
 	}
+	if inpututil.IsKeyJustPressed(ebiten.KeySpace) &&
+		(s.Plan.Prompt == battle.PromptCommand || s.Plan.Prompt == battle.PromptTarget) {
+		s.ToggleEquipmentPanel()
+		return
+	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
 		inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) ||
 		inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -2267,6 +2305,9 @@ func (g *game) Draw(dst *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.Filter = ebiten.FilterNearest
 	dst.DrawImage(g.canvas.Image(), op)
+	if len(g.notice) > 0 {
+		g.drawNotice(dst)
+	}
 	g.drawn = true
 }
 
@@ -2378,7 +2419,11 @@ func defaultSavePath() (string, error) {
 	return filepath.Join(dir, "save.dat"), nil
 }
 
+// buildVersion 由正式封包的連結參數注入；開發建置不冒充正式版本。
+var buildVersion = "development"
+
 func main() {
+	showVersion := flag.Bool("version", false, "顯示程式版本後結束")
 	assetRoot := flag.String("assets", "assets/original-derived-png/ega", "抽取資產根目錄")
 	fontRoot := flag.String("fonts", "assets/original-derived-png/fonts", "字型資產目錄")
 	dataPath := flag.String("data", "assets/original-derived-data/character-creation.json",
@@ -2498,6 +2543,7 @@ func main() {
 		"zh-Hant 走中文模式（畫布放大兩倍、16 px 中文字格，不對拍）")
 	uiFontRoot := flag.String("ui-fonts", "assets/ui-font", "中文 UI 字模表目錄")
 	savePath := flag.String("save", "", "存檔路徑；客棧住宿時寫進這個檔（SPEC-006）")
+	creationPath := flag.String("creation-start", "assets/original-derived-data/creation-start.json", "建角起始 typed 資料")
 	loadPath := flag.String("load", "", "開場先讀這份存檔：隊伍、金幣、傷勢與所在位置"+
 		"都從存檔來（SPEC-006）")
 	faithfulInn := flag.Bool("faithful-inn-stay", false,
@@ -2516,6 +2562,10 @@ func main() {
 	logInput := flag.Bool("log-input", false,
 		"互動遊玩時把每個輸入 token 與當時的畫面印到 stderr，供輸入驗收判讀")
 	flag.Parse()
+	if *showVersion {
+		fmt.Println(buildVersion)
+		return
+	}
 
 	// 發行包被雙擊時工作目錄不是程式所在地，先把它擺正再解析任何相對路徑。
 	useResourceDir(*assetRoot)
@@ -2570,7 +2620,8 @@ func main() {
 			if p, err := defaultSavePath(); err == nil {
 				*savePath = p
 			} else {
-				fmt.Fprintln(os.Stderr, "找不到可寫的存檔目錄，這一輪的住宿不會存檔：", err)
+				fmt.Fprintln(os.Stderr, "找不到可寫的存檔目錄，無法開始可保存的遊戲：", err)
+				os.Exit(1)
 			}
 		}
 	}
@@ -2848,17 +2899,10 @@ func main() {
 			}
 			travel.SubX, travel.SubY = sx, sy
 		}
-		base, overlay, mask := world.WeatherLayers(*worldWeather)
-		layers := make([]image.Image, 0, 3)
-		for _, index := range []int{base, overlay, mask} {
+		weather, err := world.LoadWeatherGroups(func(index int) (image.Image, error) {
 			img, _, err := lib.Decode(world.WeatherArchive, index)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				os.Exit(1)
-			}
-			layers = append(layers, img)
-		}
-		weather, err := world.NewWeather(layers[0], layers[1], layers[2])
+			return img, err
+		})
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -2930,6 +2974,7 @@ func main() {
 	}
 
 	var playSession *town.Session
+	importedLegacy := false
 	var arenaDep *arenaDeps
 	if scene(*sceneName) == scenePlay || scene(*sceneName) == sceneFlow {
 		state, err := town.LoadOutdoor(*outdoorPath)
@@ -2945,6 +2990,30 @@ func main() {
 				os.Exit(1)
 			}
 			state.Party = savedParty(loaded)
+			if loaded.Schema == save.Schema {
+				importedLegacy = true
+				fmt.Fprintln(os.Stderr, "正在匯入 v1：舊格式未保存的能力、裝備變更與世界時間無法還原，缺項使用原始名冊與起始時間。原始 v1 檔案保留。")
+				if *savePath == "" {
+					*savePath = *loadPath + ".v2.json"
+				}
+				a, _ := filepath.Abs(*savePath)
+				b, _ := filepath.Abs(*loadPath)
+				sameFile := false
+				if src, e := os.Stat(*loadPath); e == nil {
+					if dst, e := os.Stat(*savePath); e == nil {
+						sameFile = os.SameFile(src, dst)
+					}
+				}
+				if a == b || sameFile {
+					*savePath = *loadPath + ".v2.json"
+				}
+				if src, e := os.Stat(*loadPath); e == nil {
+					if dst, e := os.Stat(*savePath); e == nil && os.SameFile(src, dst) {
+						fmt.Fprintln(os.Stderr, "v2 目的地指向原始 v1，拒絕覆寫")
+						os.Exit(1)
+					}
+				}
+			}
 			if loaded.Location.Kind == save.LocationTown {
 				state.Town = loaded.Location.Town
 				state.EntryPoint = loaded.Location.EntryPoint
@@ -2999,6 +3068,9 @@ func main() {
 		playSession.Topics = topics
 		playSession.CJK = *lang != "en"
 		if rosterState, err := roster.Load(*rosterPath); err == nil {
+			if slots == nil {
+				slots = rosterState
+			}
 			for _, slot := range rosterState.Occupied() {
 				playSession.Roster = append(playSession.Roster, town.Candidate{
 					Name: slot.Name, Portrait: slot.Portrait,
@@ -3006,21 +3078,31 @@ func main() {
 					Female: slot.Female, Wounds: slot.Wounds,
 					Gold: slot.Gold, BuildingID: slot.Building,
 					Quests: slot.Quests, Sheet: townSheet(slot.Sheet),
-					Worn:   townWorn(slot.Equipment),
-					InHand: townGood(slot.InHand),
-					Spells: townSpells(slot.Spells),
+					Worn:     townWorn(slot.Equipment),
+					InHand:   townGood(slot.InHand),
+					Backpack: townBackpack(slot.Backpack),
+					Spells:   townSpells(slot.Spells),
 					// 任務交付要逐 byte 比，所以帶原始位元組（RE-109）。
 					Progress: slot.Progress,
 					Carried:  townCarried(slot.Carried)})
 			}
+			if loaded != nil && loaded.Characters != nil {
+				if err := restoreRoster(loaded, slots, playSession); err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(1)
+				}
+			}
 			// 畫面樣本只寫隊伍有誰，錢包與所在地在角色檔裡——住宿與治療要花的
 			// 就是這一份錢（RE-073），所以照名字補齊。
 			for i := range playSession.Party {
+				if loaded != nil && loaded.Characters != nil {
+					continue
+				}
 				for _, c := range playSession.Roster {
 					if c.Name != playSession.Party[i].Name {
 						continue
 					}
-					if playSession.Party[i].Gold == 0 {
+					if loaded == nil && playSession.Party[i].Gold == 0 {
 						playSession.Party[i].Gold = c.Gold
 					}
 					if playSession.Party[i].Place == "" {
@@ -3086,6 +3168,9 @@ func main() {
 					if playSession.Party[i].InHand == nil {
 						playSession.Party[i].InHand = c.InHand
 					}
+					if playSession.Party[i].Backpack == nil {
+						playSession.Party[i].Backpack = append([]town.Good(nil), c.Backpack...)
+					}
 					// 法術同理：存檔沒帶就照角色檔補（RE-100）。
 					if playSession.Party[i].Spells == nil {
 						playSession.Party[i].Spells = c.Spells
@@ -3112,6 +3197,22 @@ func main() {
 			playSession.Magic = dict
 		}
 		if worldScreenState != nil {
+			playSession.LoadStartingTown = func(code string) (town.TownEntry, *town.TownBuildings, *town.Grid, error) {
+				rec := worldScreenState.Travel.Data.TownByCode(code)
+				if rec == nil {
+					return town.TownEntry{}, nil, nil, fmt.Errorf("找不到唯一城鎮代碼：%s", code)
+				}
+				info := buildings.Town(rec.Town)
+				if info == nil {
+					return town.TownEntry{}, nil, nil, fmt.Errorf("缺少城鎮建築：%d", rec.Town)
+				}
+				grid, err := loadGrid(lib, fmt.Sprintf("TOWN%d", rec.Town))
+				return town.TownEntry{Code: rec.Code, Town: rec.Town,
+					Camera: town.Point{X: rec.Camera.X, Y: rec.Camera.Y},
+					MinX:   rec.Bounds.MinX, MaxX: rec.Bounds.MaxX,
+					MinY: rec.Bounds.MinY, MaxY: rec.Bounds.MaxY,
+					EntryPoint: rec.EntryPoint}, info, grid, err
+			}
 			playSession.TownCode = worldScreenState.Travel.Data.TownCode(
 				state.Town, state.EntryPoint)
 			playSession.World = worldScreenState
@@ -3133,6 +3234,7 @@ func main() {
 					os.Exit(1)
 				}
 				playSession.EnterFromWorld(town.TownEntry{
+					Code: rec.Code,
 					Town: rec.Town, Camera: town.Point{X: rec.Camera.X, Y: rec.Camera.Y},
 					MinX: rec.Bounds.MinX, MaxX: rec.Bounds.MaxX,
 					MinY: rec.Bounds.MinY, MaxY: rec.Bounds.MaxY,
@@ -3172,11 +3274,30 @@ func main() {
 		}
 		// 住宿存檔（SPEC-006）。沒有給 -save 就不寫檔，流程其餘部分照跑——
 		// 截圖與對拍不需要真的產生存檔。
+		if loaded != nil {
+			requestedFaithful := *faithfulInn
+			*faithfulInn = loaded.Settings.FaithfulInnStay
+			flag.Visit(func(f *flag.Flag) {
+				if f.Name == "faithful-inn-stay" {
+					*faithfulInn = requestedFaithful
+				}
+			})
+		}
 		playSession.FaithfulInnStay = *faithfulInn
 		if *savePath != "" {
 			playSession.SaveGame = func() error {
-				return save.Write(*savePath,
-					buildSave(playSession, worldScreenState, *faithfulInn))
+				snapshot, err := buildCompleteSave(playSession, worldScreenState, slots, *faithfulInn)
+				if err != nil {
+					return err
+				}
+				if loaded != nil {
+					snapshot.Settings.Extra = loaded.Settings.Extra
+					snapshot.Origin = loaded.Origin
+					if loaded.Schema == save.Schema {
+						snapshot.Origin = save.Origin{Kind: "imported", Tool: "kol-v1-to-v2", Note: "由 v1 匯入；舊格式未保存的變更無法還原，缺項以原始名冊與起始時間補齊。"}
+					}
+				}
+				return save.Write(*savePath, snapshot)
 			}
 		}
 		// 野外畫面的隊員格畫的是實際隊伍，不是戶外樣本裡那一份。
@@ -3364,8 +3485,19 @@ func main() {
 			// 競技場（RE-108）：走到世界地圖 (55,13) 選 DOOR 就進去。
 			// 畫面借建築那一套，但沒有肖像——`sub_2B454` 畫的是什麼還沒解。
 			if atlas, err := loadBattlePNG(*battleTiles); err == nil {
+				arenaImage, err := loadBattlePNG(fmt.Sprintf(*battleMaps, 24))
+				if err != nil {
+					fmt.Fprintln(os.Stderr, "競技場地圖載入失敗：", err)
+					os.Exit(1)
+				}
+				arenaField, err := battle.LoadField(arenaImage)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					os.Exit(1)
+				}
 				arenaDep = &arenaDeps{monsters: monsters, spoils: spoilItems,
-					tiles: ui.NewBattleTiles(atlas), bank: bank, trans: trans,
+					mapField: arenaField,
+					tiles:    ui.NewBattleTiles(atlas), bank: bank, trans: trans,
 					rand:    newRand(*seed),
 					field:   newRand(*seed),
 					english: *lang == "en"}
@@ -3438,6 +3570,12 @@ func main() {
 		// 野外的時刻：隊伍最慢的那個移動率決定每步扣多少，換日補營養（RE-077）。
 		if worldScreenState != nil {
 			worldScreenState.Clock = world.NewClock()
+			if loaded != nil {
+				restoreWorld(loaded, worldScreenState, playSession)
+				if playSession.LeftTown {
+					worldSessionState.Sync()
+				}
+			}
 			worldScreenState.Movement = partyMovement(playSession.Party)
 			worldScreenState.Date = worldScreenState.Clock.DateLines()
 			worldSessionState.Rand = newRand(*seed)
@@ -3452,6 +3590,13 @@ func main() {
 					}
 				}
 			}
+		}
+		if loaded != nil && loaded.Schema == save.Schema && playSession.SaveGame != nil {
+			if err := playSession.SaveGame(); err != nil {
+				fmt.Fprintln(os.Stderr, "v1 匯入失敗：", err)
+				os.Exit(1)
+			}
+			fmt.Fprintln(os.Stderr, "v2 匯入完成：", *savePath)
 		}
 		// LISTEN 的挑槽在截圖與玩家路徑裡必須可重播，因此用固定序列而不是真亂數。
 		listenPick := 0
@@ -3535,6 +3680,64 @@ func main() {
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
 	}
+	if importedLegacy {
+		g.notice = g.saveNotice("import")
+	}
+	var creationData *creationStart
+	if playSession != nil && slots != nil {
+		if *loadPath == "" && scene(*sceneName) == sceneFlow {
+			playSession.Party = nil
+			playSession.Outdoor.Party = nil
+			g.worldParty = nil
+		}
+		creationData, err = loadCreationStart(*creationPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		g.remove.Commit = func() (err error) {
+			defer func() {
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					g.notice = g.saveNotice("delete")
+				}
+			}()
+			present := map[string]bool{}
+			for _, slot := range slots.Occupied() {
+				present[slot.Name] = true
+			}
+			for _, m := range playSession.Party {
+				if !present[m.Name] {
+					return fmt.Errorf("角色仍在隊伍中，請先住宿離隊")
+				}
+			}
+			if playSession.SaveGame != nil {
+				if err := playSession.SaveGame(); err != nil {
+					return err
+				}
+			}
+			var kept []town.Candidate
+			for _, c := range playSession.Roster {
+				if present[c.Name] {
+					kept = append(kept, c)
+				}
+			}
+			playSession.Roster = kept
+			return nil
+		}
+	}
+	attachCreation := func(f *flow.Flow) {
+		if creationData != nil {
+			f.CommitCreate = func(c *charcreate.State) error {
+				err := commitCreated(c, creationData, slots, playSession)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					g.notice = g.saveNotice("create")
+				}
+				return err
+			}
+		}
+	}
 
 	if scene(*sceneName) == sceneBookOpen || *bookShots != "" {
 		anim, err := book.LoadOpenAnimation(*bookAnimPath)
@@ -3574,6 +3777,13 @@ func main() {
 		// 互動遊玩不排 jobs：畫面停在目前這一張，由 Update 讀輸入推進。
 		g.scene = sceneFlow
 		g.flow = flow.New(g.roster, g.state, g.remove, innState, playSession)
+		attachCreation(g.flow)
+		if *loadPath != "" {
+			g.flow.Scene = flow.SceneTown
+			if len(playSession.Party) == 0 {
+				g.flow.Scene = flow.SceneMenu
+			}
+		}
 	case *bookShots != "":
 		g.scene = sceneBookOpen
 		for i := 0; i <= len(g.bookAnim.Steps); i++ {
@@ -3678,6 +3888,7 @@ func main() {
 		}
 		g.scene = sceneFlow
 		g.flow = flow.New(g.roster, g.state, g.remove, innState, playSession)
+		attachCreation(g.flow)
 		if *shotDir == "" {
 			for _, token := range strings.Fields(*flowScript) {
 				if g.leftTown() || g.endingReached() {

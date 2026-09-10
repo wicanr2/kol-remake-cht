@@ -13,6 +13,11 @@
 # 每次都從乾淨輸入重建：先刪掉那個版本的目錄再建，免得留下上一次的殘骸。
 set -euo pipefail
 
+# 本機 Linux 驗收包：由呼叫端提供隔離容器與唯讀 /src、可寫 /out。
+if [ "${1:-}" = "--local-linux-in-container" ]; then
+  exec python3 /src/tools/build_local_appimage.py --version "${2:?缺版本}" --output /out
+fi
+
 VERSION="${1:?用法：build_dist.sh <版本>}"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT="$REPO_ROOT/dist-all/$VERSION"
@@ -93,6 +98,8 @@ fi
 
 # 8. manifest：每個包逐檔 SHA-256。
 "$REPO_ROOT/tools/run_python_tool.sh" tools/write_dist_manifest.py \
-  --dist "dist-all/$VERSION" --version "$VERSION"
+  --dist "dist-all/$VERSION" --version "$VERSION" \
+  --platform linux/amd64 --platform windows/amd64 \
+  --platform darwin/amd64 --platform darwin/arm64
 
 echo "$OUT"

@@ -537,9 +537,10 @@ func (s *Session) fitAnswer(yes bool) {
 		return
 	}
 	s.Party[member].Gold -= cost
-	s.Party[member].Backpack[slot].Encumbrance = sh.fit
+	s.Party[member].Backpack[slot].setEncumbrance(sh.fit)
 	s.syncParty()
 	s.equip(member, slot)
+	s.Party[member].SyncCarried()
 }
 
 // packIt 是不改也不穿：東西留在背包裡（記錄 0x5D）。
@@ -690,9 +691,10 @@ func (s *Session) adjustAnswer(yes bool) {
 	s.Party[i].Gold -= sh.fit
 	for _, entry := range sh.adjust {
 		if g := s.Party[i].Worn[entry.Position]; g != nil {
-			g.Encumbrance = entry.Size
+			g.setEncumbrance(entry.Size)
 		}
 	}
+	s.Party[i].SyncCarried()
 	s.syncParty()
 	s.endShop()
 }

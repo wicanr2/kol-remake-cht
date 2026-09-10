@@ -86,10 +86,18 @@ type Round struct {
 	Order []int
 	// Turn 是現在輪到 Order 的第幾個。
 	Turn int
+	// InspectionRoll 是目前規劃位置的檢視門檻；位置進入時擲一次，取消不重設。
+	InspectionRoll     int
+	inspectionPosition int
+	inspectionRand     Rand
 }
 
 // BeginPlanning 依規劃鍵值排出這一回合誰先決定。空位排最後。
 func (s *State) BeginPlanning(rng Rand) {
+	s.InitializeMonsterRanged(rng)
+	s.Round.inspectionRand = rng
+	s.Round.inspectionPosition = 0
+	s.Round.InspectionRoll = 0
 	// 排順序之前先跑一次法術倒數（`sub_1E3A8:0x20F01`）：過期的把屬性重算回原值，
 	// 因為規劃鍵值要用洞察，而洞察本身可能正被法術改著。
 	s.WoreOff = s.WoreOff[:0]
@@ -107,10 +115,12 @@ func (s *State) BeginPlanning(rng Rand) {
 		}
 		keys[i] = PlanKey(a, s.Round.Number, rng.Roll(PlanRoll))
 	}
-	for i, a := range s.Actors {
-		if a.Side != SideEmpty {
-			order = append(order, i)
-		}
+	limit := len(s.Actors)
+	if s.Site != nil && PartySlots+s.Site.Count < limit {
+		limit = PartySlots + s.Site.Count
+	}
+	for i := 0; i < limit; i++ {
+		order = append(order, i)
 	}
 	// 原版是氣泡排序，相同鍵值維持原本的先後（`sub_2616C`）。
 	sort.SliceStable(order, func(x, y int) bool {
@@ -137,10 +147,10 @@ func (s *State) EndTurn() bool {
 	return s.Round.Turn >= len(s.Round.Order)
 }
 
-// AdvanceToParty 把順序推到下一名還站著的隊員。敵人那一手要由 `sub_2374C`
-// 的 AI 決定做什麼，那一段還沒解出來（RE-080 末段列為待解），因此這一版
-// 直接跳過敵人的手——這是**已知的差異**，不是原版行為。
+// AdvanceToParty 處理途中敵人的 AI，推進至下一名還能行動的隊員。
 func (s *State) AdvanceToParty() {
+	s.Plan.EquipmentPanel = false
+	s.skipDown()
 	for s.Round.Turn < len(s.Round.Order) {
 		i := s.Round.Order[s.Round.Turn]
 		if s.Actors[i].Side == SideParty {
@@ -163,10 +173,21 @@ func (s *State) AdvanceToParty() {
 // skipDown 跳過倒下或空掉的位置（`sub_1E3A8:0x1F085` 的 `sub_22866` 檢查）。
 func (s *State) skipDown() {
 	for s.Round.Turn < len(s.Round.Order) {
-		a := s.Actors[s.Round.Order[s.Round.Turn]]
+		if s.Round.inspectionPosition != s.Round.Turn+1 {
+			rng := s.Round.inspectionRand
+			if rng == nil {
+				rng = s.Rand
+			}
+			if rng != nil {
+				s.Round.InspectionRoll = rng.Roll(100)
+			}
+			s.Round.inspectionPosition = s.Round.Turn + 1
+		}
+		a := &s.Actors[s.Round.Order[s.Round.Turn]]
 		if a.Side != SideEmpty && !a.Down() {
 			return
 		}
+		a.Style, a.Guard = 0, 0
 		s.Round.Turn++
 	}
 }

@@ -3,13 +3,19 @@
 狀態：**READY**  
 是否授權實作：**是**（僅限本規格涵蓋的角色建立流程；16 槽全滿分支仍只有靜態證據，實作必須明確標示為未驗證分支）
 
+2026-09-08 現況訂正：上句的「未驗證」限原版滿槽行為；重製版的 16 槽全滿、
+刪除及重用已由 [完整保存整合](../verification/complete-save-integration-20260908.md)
+正常 GUI 驗證。身分、v2 schema、v1 匯入與建角原子回填由
+[SPEC-023](023-complete-save.md) 補充並優先適用；下方早期 schema 待定不再阻止已審查保存。
+圖像／盾牌編輯器仍未涵蓋，不將它們算入已完成建角。
+
 ## 範圍
 
 本規格定義 remake 的角色建立狀態機與角色儲存區邊界。它不包含旅店招募、隊伍排序、戰鬥
 屬性計算、角色圖像編輯器或原版磁碟交換；角色刪除屬於儲存區邊界，含在本規格內。證據入口為
 `docs/re/character-creation.md`。
 
-## DRAFT 狀態機
+## 建角狀態機
 
 `角色選項 → 名字 → 種族 → 性別 → 職業 → 反覆擲屬性 → 接受屬性 → 選圖像 → 原子保存`
 
@@ -78,11 +84,12 @@ REGION metadata route，沒有其他職業衍生的起始技能／物品。KOLTO
 刪除確認視窗按 ESC 與空名冊進入刪除畫面。
 remake 必須把這三項標為未驗證分支，不得以推測實作後宣稱 parity。
 
-## 存檔草案限制
+## 保存契約與早期草案訂正
 
 正式 schema 必須有穩定角色 ID，不能用顯示名稱或 slot index 作永久身分。原版 768-byte
-record 只作 oracle／匯入研究；remake 不承諾 binary compatibility。schema、migration、
-Unicode 名字規則與角色圖像引用尚未完成共同決策，本 DRAFT 不固定欄位格式。
+record 只作 oracle／匯入研究；remake 不承諾 binary compatibility。
+schema、migration 與既有圖像引用以 SPEC-023 READY 為準，已接正式 v2 與 v1 匯入。
+此訂正不擴張 Unicode 名字政策，也不核准尚未有保存契約的圖像／盾牌編輯器。
 
 ## READY gate
 

@@ -14,6 +14,8 @@ package roster
 //
 // 確認視窗按 ESC 的行為沒有量測過，因此這裡不實作。
 type DeleteFlow struct {
+	Commit  func() error
+	Error   error
 	roster  *Roster
 	Cursor  int
 	Confirm bool
@@ -56,8 +58,20 @@ func (f *DeleteFlow) Answer(yes bool) {
 	if !f.Confirm {
 		return
 	}
-	if yes && f.roster.DeleteOccupied(f.Cursor) {
-		f.Deleted++
+	if yes {
+		before := append([]Slot(nil), f.roster.Slots...)
+		if f.roster.DeleteOccupied(f.Cursor) {
+			if f.Commit != nil {
+				f.Error = f.Commit()
+			} else {
+				f.Error = nil
+			}
+			if f.Error != nil {
+				f.roster.Slots = before
+			} else {
+				f.Deleted++
+			}
+		}
 	}
 	f.Confirm = false
 	f.Cursor = 0

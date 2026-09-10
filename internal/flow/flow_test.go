@@ -23,9 +23,11 @@ func testFlow(t *testing.T) *Flow {
 	}
 	out.SetGrid(grid)
 	buildings := &town.TownBuildings{Town: 7, Doors: []town.Door{
-		{Index: 5, X: 57, Y: 8, Picture: 13, Portrait: 12, Name: "Halfway House"},
+		{Index: 5, X: 57, Y: 8, Picture: 13, Portrait: 12, Name: "Halfway House", RecordID: 86, IconFlags: [2]int{9, 0}},
 	}}
 	session := town.NewSession(out, buildings, nil, nil, nil)
+	session.TownCode = "MIN"
+	session.Roster = []town.Candidate{{Name: "Theodoric", Town: "MIN", Place: "HALFWAY HO", BuildingID: 86}}
 
 	inn := &town.Inn{Icons: []int{town.DoorIcon, 20, 7, 6, 8, 9}, Selected: 5}
 	return New(slots, nil, roster.NewDeleteFlow(slots), inn, session)
@@ -41,8 +43,8 @@ func TestFullChainReachesTown(t *testing.T) {
 		{"SPACE", SceneCover},
 		{"SPACE", SceneContents},
 		{"6", SceneSelect},
-		{"RET", SceneInn},
-		{">", SceneInn},
+		{"RET", SceneTown},
+		{"SPACE", SceneTown},
 		{"RET", SceneTown},
 	}
 	for i, step := range steps {
@@ -56,24 +58,36 @@ func TestFullChainReachesTown(t *testing.T) {
 	}
 }
 
-// 旅店的圖示列只有 DOOR 會轉場；其餘記到 Unimplemented，不會默默吞掉。
-func TestInnOnlyDoorTransitions(t *testing.T) {
+// 開場旅店必須接到正式招募流程，不能停在只支援 DOOR 的樣本。
+func TestStartingInnRecruitsThroughSession(t *testing.T) {
 	f := testFlow(t)
+	f.Town.Roster = append(f.Town.Roster, town.Candidate{Name: "SECOND", Town: "MIN", Place: "HALFWAY HO", BuildingID: 86})
 	f.Key("SPACE")
 	f.Key("SPACE")
 	f.Key("6")
 	f.Key("RET")
-	if f.Inn.Selected != 5 {
-		t.Fatalf("旅店白框在 %d", f.Inn.Selected)
+	f.Key("SPACE")
+	// DOOR 向左繞到 COMPANION，確認搜尋後選第一名候選人。
+	for _, key := range []string{"<", "RET", "RET", "RET"} {
+		f.Key(key)
 	}
-	if f.Key("RET") {
-		t.Fatal("COMPANION 還沒實作，不該轉場")
+	if f.Scene != SceneTown || f.Town.Mode != town.ModeInside || len(f.Town.Party) != 2 || f.Town.Party[1].Name != "SECOND" {
+		t.Fatalf("招募未接通：%s %+v", f.Scene, f.Town.Party)
 	}
-	if len(f.Unimplemented) != 1 {
-		t.Fatalf("未實作清單是 %v", f.Unimplemented)
+	if len(f.Unimplemented) != 0 || len(f.Town.Outdoor.Party) != 2 {
+		t.Fatalf("招募後狀態不同步：%v", f.Unimplemented)
 	}
-	if f.Scene != SceneInn {
-		t.Fatalf("留在旅店，取到 %s", f.Scene)
+}
+
+func TestStartingInnRejectsWrongLocationWithoutChangingParty(t *testing.T) {
+	f := testFlow(t)
+	f.Town.Roster[0].Town = "BRT"
+	f.Town.Party = []town.Member{{Name: "EXISTING"}}
+	for _, key := range []string{"SPACE", "SPACE", "6", "RET"} {
+		f.Key(key)
+	}
+	if f.Scene != SceneSelect || f.Town.Party[0].Name != "EXISTING" || f.Town.Inside != nil {
+		t.Fatal("所在地不一致仍改變隊伍或進入旅店")
 	}
 }
 

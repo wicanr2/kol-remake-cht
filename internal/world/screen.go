@@ -40,7 +40,10 @@ type Screen struct {
 	Travel  *Travel
 	Weather *Weather
 	// Group 是天候組（0…5）；Phase 是雲層旋轉過的像素數。
-	Group, Phase int
+	Group, Phase   int
+	weatherTicks   float64
+	weatherGroup   int
+	weatherStarted bool
 	// TimeIndex 是時段（0…4）。
 	TimeIndex int
 	Date      []string
