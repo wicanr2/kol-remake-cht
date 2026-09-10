@@ -195,7 +195,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **attack-row-and-target-cursor** — 攻擊式那一列（frame-899）與選目標格畫面的對拍
   選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解。
   完成條件：兩塊都有逐畫面對拍收據。
-  核實：`internal/ui/battle.go` 找得到 `確切的視覺效果還沒解出來` 就是還沒完
+  核實：`internal/ui/battle.go`、`docs/spec/010-combat-commands.md` 找得到 `確切的視覺效果還沒解出來` 就是還沒完
 
 - **longest-cjk-visual-regression** — 最長繁中內容的視覺回歸、正常路徑截圖與輸入測試
   安全矩形檢查器是靜態的，沒有跑過最長字串的視覺回歸。
@@ -218,7 +218,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **g06-audio-listening-gate** — G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放
   SPEC-004 仍是 DRAFT、標「是否授權實作：否」。人耳驗收是升 READY 的閘門，不能跳過。
   完成條件：人耳驗收完成、SPEC-004 升 READY，正式播放路徑接上。
-  核實：`docs/spec/004-ogg-audio-catalog.md` 找得到 `狀態：\*\*DRAFT\*\*` 就是還沒完
+  核實：`docs/spec/004-ogg-audio-catalog.md`、`README.md` 找得到 `狀態：\*\*DRAFT\*\*|還沒接上音訊路徑` 就是還沒完
 
 - **asset-inventory-format-spec** — 唯讀輸入的資產 inventory 與格式規格
   COMBPICS、TWN0..7PICS 243 筆、MONPICS、PERPICS、MISCPICS、TITLE 五組、ENDPICS、BOOKPICS、KOLMPICS 83 筆、WEATPICS 18 筆、AWD1PICS 24 張、SHLDPICS 四組、HANDPICS 12 組、WEAPPICS 28 組、HEADPICS／TORPICS／LEGSPICS 各 54 組、CHARPICS.0 80 張、KOLPICS 14 筆與三個固定記錄表的 40×38 4-bit EGA 契約已證實；TWN 七筆圖號 1 placeholder 已排除。其餘 archive 與 PCGA／HERC 像素格式尚未完成。
@@ -287,7 +287,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **attack-message-chain-index** — 攻擊那一手的訊息鏈索引規則
   0x140／0x141／0x143／0x144 起那一串的索引規則還沒解完（RE-086／RE-087）。SPEC-008 的未解清單也列著同一項。
   完成條件：索引規則解出並接上，攻擊訊息與原版一致。
-  核實：`cmd/kol/main.go` 找得到 `攻擊那一手的訊息鏈還沒解完` 就是還沒完
+  核實：`cmd/kol/main.go`、`docs/spec/008-combat-field.md` 找得到 `攻擊那一手的訊息鏈還沒解完|攻擊的訊息鏈也還沒解完` 就是還沒完
 
 - **sub-26c5f-damage-line** — 那一句的數字要 sub_26C5F(0x17) 才算得出來
   該常式還沒解讀，所以那一句寧可不報也不報錯的數字。
@@ -297,7 +297,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力
   `sub_21FCD` 依裝備賦予的四格之三各自是什麼還沒解（RE-081）。賦予 +0x05 的那條路（哪一件裝備、哪一個位元）也還沒解，所以 remake 這一格一律是 0，等於沒有人免疫。SPEC-008 的未解清單列著同一項。
   完成條件：那條路解出並接上，或確認原版在現行內容下也恆為 0。
-  核實：`internal/battle/battle.go` 找得到 `依裝備賦予的四格之三|哪一件裝備、哪一個位元` 就是還沒完
+  核實：`internal/battle/battle.go`、`docs/spec/008-combat-field.md` 找得到 `依裝備賦予的四格之三|哪一件裝備、哪一個位元|遮罩 0x10 要的` 就是還沒完
 
 - **move-unlock-tile-reason** — 磚塊 0x0C 為什麼解鎖後三個移動方式
   `MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。
@@ -307,7 +307,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **actor-record-25-reader** — 參戰者記錄 +0x25 在哪裡被讀
   原版下馬時同時把 `+0x25` 清成 0，但那一格在哪裡被讀還沒解，所以 remake 沒有那一格。SPEC-010 末段記著同一項。
   完成條件：讀取端找出來，並判斷 remake 需不需要那一格。
-  核實：`internal/battle/execution.go` 找得到 `它在哪裡被讀還沒解` 就是還沒完
+  核實：`internal/battle/execution.go`、`docs/spec/010-combat-commands.md` 找得到 `它在哪裡被讀還沒解|`\+0x25` 在哪裡被讀還沒解` 就是還沒完
 
 - **sub-1aae8-params** — sub_1AAE8 的參數語意
   `sub_1AAE8(3, 4, 11h, …)` 的前三個參數語意還沒解出來。SPEC-008 的未解清單列著同一項（選單協定）。
@@ -323,6 +323,16 @@ tools/run_python_tool.sh tools/worklist.py verify
   SPEC-008 末尾那一節列的七項裡，有四項已經各自有條目（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8` 的選單協定、`+0x25` 的讀取端）。剩下三項在產品碼裡沒有留下自承，所以 `scan` 掃不到，靠這一條追：敵人 AI 那三張基礎權重表的**執行期值**、`sub_1B94F`（把物品格展開成名字）、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關（`word_3AC58` 與參戰者記錄 +0x06 的語意）、`sub_2625A` 的語意。
   完成條件：SPEC-008 末尾那一節清空，或剩下的每一項各有條目。
   核實：`docs/spec/008-combat-field.md` 找得到 `## 還沒解出來的` 就是還沒完
+
+- **spec011-unsolved-list** — SPEC-011 的未解清單
+  野外伏擊那一份規格末尾「還沒解的」一節：`sub_2A39B`（遭遇成立之後緊接著的那一支）、`word_2FA2A` 那一條分支等。與 SPEC-008 的未解清單同性質，在產品碼裡沒有留下自承，靠這一條追。
+  完成條件：SPEC-011 末尾那一節清空，或剩下的每一項各有條目。
+  核實：`docs/spec/011-wilderness-ambush.md` 找得到 `## 10. 還沒解的` 就是還沒完
+
+- **quest-item-0xb926** — 任務物品的 `[0xB926]`
+  SPEC-014 記著這一格還沒解，所以那一條收據裡 `State.QuestItem` 是空的。任務物品本身的記錄與拾取已完成（RE-113／128），缺的是這一格的來源。
+  完成條件：`[0xB926]` 解出，那一條的 QuestItem 不再是空的。
+  核實：`docs/spec/014-quest-completion.md` 找得到 ``\[0xB926\]` 還沒解` 就是還沒完
 
 
 ### 交付與發行
@@ -345,7 +355,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **windows-macos-real-machine** — Windows／macOS 真機驗收
   Linux 容器 smoke 不冒充真機結果。macOS 的 bundle 沒有簽章（_CodeSignature 在 Linux 上做不出來），首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。
   完成條件：兩個平台各在真機上啟動並走一次正常路徑。
-  核實：要人判——真機驗收在本機沒有訊號，永遠是 manual。
+  核實：`tools/verify_dist.sh` 找得到 `macOS 要真機` 就是還沒完
 
 - **github-release** — 發 GitHub Release
   權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。

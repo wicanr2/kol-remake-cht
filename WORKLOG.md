@@ -5763,3 +5763,53 @@ verify 綁 `state.go` 的那一行，等使用者決定。`monsters.json` 的七
 識別字會永遠為真。
 
 清單從 49 條長到 63 條未完成（33 條 `manual`）加 6 條已核實完成。十六個套件全綠。
+
+## 2026-09-10（八）：掃描範圍擴到工具與文件，再抓出七個過期斷言
+
+依使用者「再掃描一次程式碼 & markdown 確保沒有遺漏」。`scan` 的範圍從
+`cmd`／`internal` 的 `.go` 擴到 `tools` 的 `.py`／`.sh`，加上 `docs/` 與根目錄的全部
+markdown——**掃得寬一點沒關係**：掃到的每一行不是有條目綁著，就是要在 `acknowledged`
+寫明為什麼不是待辦，所以「為什麼不看某一類」也會留在資料裡，而不是藏在程式的範圍
+設定裡。`tools/worklist.py` 自己不掃，它的內容就是那組 pattern 的定義與測試用的假資料。
+
+範圍一擴，行數從 33 跳到 261。
+
+### 又抓到七個過期斷言
+
+上一輪在產品碼註解裡抓到六個，這一輪在工具與規格裡再抓七個：
+
+| 位置 | 原本寫的 | 現況 |
+|---|---|---|
+| `tools/make_final_quest_save.py` | 「接任務那一側（`sub_14564`）**還沒實作**，所以沒有辦法用正常路徑累積」 | RE-110 已解並接上（`quest_offer.go`，收據 `quest-take`）；這支工具存在的理由改成**時間**——跑滿 23 件任務太久 |
+| `tools/ida_probe_koltown_steed.py` | 「圖本身還沒接上」 | RE-120 已解，資料頁的 `SteedPic` 與 `STEEDS` 素材都在 |
+| `tools/make_observation_inputs.py` | 「馬廄的商品表還沒解出來，遊戲裡買不到坐騎」 | 馬廄買賣由 RE-119／120／121 解出並接上；換名冊只是省掉買四匹的步驟 |
+| `tools/ida_probe_koltown_quest_take.py` | 「還沒解的是整段接取」 | 同第一列，已解 |
+| `tools/ida_probe_koltown_healing.py` | 「那六段敘述從哪裡載入還沒解」 | RE-128 那一輪解出（RESEARCH-LOG 標 `已證實`） |
+| `tools/ida_probe_koltown_mount_drop.py` | 「執行段還沒接」 | RE-124 解出，`CmdLand` 已實作 |
+| `docs/spec/011-wilderness-ambush.md` | 「買坐騎的馬廄商品表還沒解」 | 同第三列 |
+
+探針檔的改法是保留當時的問法再指向結論——那是研究過程的紀錄，刪掉反而看不出
+為什麼要問；但「還沒解」這種現在式的斷言要改成過去式，否則它會一直宣稱一件
+已經不成立的事。
+
+### 認領方式
+
+`acknowledged` 的 `file` 現在支援三種寫法：整檔（省略 `match`）、目錄前綴（結尾加
+`/`）、萬用字元（`tools/ida_probe_*.py`）。`selftest` 為三種各補了正反對照——
+包含「綁到別的目錄不算認領」與「不符的萬用字元不算認領」，不然一條就能把整棵樹
+認領走。
+
+整批認領的是那些**記當時狀態**的來源：`WORKLOG.md`（逐輪流水帳）、`WORKLIST.md`
+（render 產生＋已完成的歷史）、`CONTEXT.md`（現況摘要，數字由 render 產生）、
+`docs/re/`（研究筆記，解出後由後續段落更正而不刪除）、`docs/verification/`（收據，
+記產出當下驗到哪）、`docs/screenshots/`、`docs/manual/`、`tools/ida_probe_*.py`。
+
+### 條目
+
+新增兩條：`spec011-unsolved-list`（SPEC-011 末尾的未解清單，與 SPEC-008 那條同性質）、
+`quest-item-0xb926`。另有六條既有條目擴大 `paths`，讓它們同時認領規格與 README 裡
+講同一件事的那幾行——`windows-macos-real-machine` 綁 `verify_dist.sh` 的自承、
+`actor-record-05-ability` 加 SPEC-008 的反制掃描條件、`g06-audio-listening-gate` 加
+README 的現況句等。
+
+65 條未完成（32 條 `manual`）、6 條已核實完成、261 行自承 0 孤兒。十六個套件全綠。

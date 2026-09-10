@@ -17,6 +17,7 @@ OR 會讓「做完其中一份」就把整條判成完成。
 """
 
 import argparse
+import fnmatch
 import json
 import re
 import sys
@@ -173,23 +174,38 @@ def check_schema(data: dict) -> list:
 # 不是某個條目的 verify 綁著它，就是在 `acknowledged` 裡寫明為什麼它不是待辦。
 ADMISSION = re.compile(r"還沒解|還沒實作|還沒接|還沒做|還沒查|尚未實作|沒有實作|TODO")
 
-# 掃描範圍。只看產品碼——測試檔提到還沒接的東西是正常的。
-SCAN_ROOTS = ("cmd", "internal")
+# 掃描範圍：程式碼（產品碼與工具）與文件。測試檔不掃——它們提到還沒接的東西是
+# 正常的。掃得寬一點沒關係：掃到的每一行不是有條目綁著，就是要在 `acknowledged`
+# 寫明為什麼不是待辦，所以「為什麼不看某一類」也會留在資料裡，而不是藏在這支
+# 程式的範圍設定裡。
+SCAN_CODE = (("cmd", ".go"), ("internal", ".go"), ("tools", ".py"), ("tools", ".sh"))
+SCAN_DOCS = ("docs",)
+
+# 這一支自己不掃：它的內容就是那組 pattern 的定義與測試用的假資料。
+SELF = "tools/worklist.py"
 
 
 def scan_admissions(root: Path = ROOT) -> list:
-    """回產品碼裡所有自承還沒做的行：`(相對路徑, 行號, 內容)`。"""
+    """回所有自承還沒做的行：`(相對路徑, 行號, 內容)`。"""
     found = []
-    for target in SCAN_ROOTS:
-        base = root / target
-        if not base.is_dir():
+    targets = []
+    for base, suffix in SCAN_CODE:
+        d = root / base
+        if d.is_dir():
+            targets += [f for f in sorted(d.rglob("*" + suffix)) if not is_test_file(f)]
+    for base in SCAN_DOCS:
+        d = root / base
+        if d.is_dir():
+            targets += sorted(d.rglob("*.md"))
+    targets += sorted(root.glob("*.md"))
+
+    for f in targets:
+        rel = str(f.relative_to(root))
+        if rel == SELF:
             continue
-        for f in sorted(base.rglob("*.go")):
-            if is_test_file(f):
-                continue
-            for n, line in enumerate(f.read_text(encoding="utf-8", errors="ignore").split("\n"), 1):
-                if ADMISSION.search(line):
-                    found.append((str(f.relative_to(root)), n, line.strip()))
+        for n, line in enumerate(f.read_text(encoding="utf-8", errors="ignore").split("\n"), 1):
+            if ADMISSION.search(line):
+                found.append((rel, n, line.strip()))
     return found
 
 
@@ -216,10 +232,23 @@ def claimed_by(data: dict, path: str, line: str, root: Path = ROOT) -> str | Non
 
 
 def acknowledged_by(data: dict, path: str, line: str) -> str | None:
-    """這一行有沒有在 `acknowledged` 裡被寫明「不是待辦」？回那條的理由。"""
+    """這一行有沒有在 `acknowledged` 裡被寫明「不是待辦」？回那條的理由。
+
+    `file` 以 `/` 結尾就是整個目錄，否則是單一檔案。省略 `match` 代表整檔認領——
+    用在流水帳與研究筆記那種「記的是當時狀態、不是現在的缺口」的檔案上。
+    """
     for ack in data.get("acknowledged", []):
-        if ack["file"] != path:
+        target = ack["file"]
+        if target.endswith("/"):
+            if not path.startswith(target):
+                continue
+        elif "*" in target or "?" in target:
+            if not fnmatch.fnmatch(path, target):
+                continue
+        elif target != path:
             continue
+        if "match" not in ack:
+            return ack["why"]
         if re.search(ack["match"], line):
             return ack["why"]
     return None
@@ -240,7 +269,7 @@ def cmd_scan(_args) -> int:
     rows = scan_admissions()
     orphans = orphan_admissions(data)
     claimed = len(rows) - len(orphans)
-    print(f"產品碼裡的自承共 {len(rows)} 行；{claimed} 行有人認領，{len(orphans)} 行沒有。")
+    print(f"程式碼與文件裡的自承共 {len(rows)} 行；{claimed} 行有人認領，{len(orphans)} 行沒有。")
     if orphans:
         print()
         print("★ 下列自承沒有條目綁著，也沒有寫明為什麼不是待辦：")
@@ -314,7 +343,7 @@ def cmd_verify(_args) -> int:
     orphans = orphan_admissions(data)
     if orphans:
         print()
-        print(f"★ 產品碼裡有 {len(orphans)} 行自承沒有條目認領（跑 scan 看細節）：")
+        print(f"★ 有 {len(orphans)} 行自承沒有條目認領（跑 scan 看細節）：")
         for path, n, line in orphans[:5]:
             print(f"  - {path}:{n}　{line[:70]}")
         if len(orphans) > 5:
@@ -601,6 +630,23 @@ def cmd_selftest(_args) -> int:
             {"file": "internal/x.go", "match": "還沒實作", "why": "說明用"}]}
         if orphan_admissions(acked, box):
             failures.append("orphan_admissions：acknowledged 之後不該再報")
+        # 整檔認領（省略 match）、目錄前綴、萬用字元三種寫法都要成立。
+        for name, ack in (
+            ("整檔", {"file": "internal/x.go", "why": "整檔"}),
+            ("目錄", {"file": "internal/", "why": "整個目錄"}),
+            ("萬用字元", {"file": "internal/x*.go", "why": "一批檔案"}),
+        ):
+            probe = {"layers": {}, "items": [], "acknowledged": [ack]}
+            if orphan_admissions(probe, box):
+                failures.append(f"acknowledged／{name}：這種寫法沒有生效")
+        # 反面：不相干的目錄與不相符的萬用字元都不該認領走。
+        for name, ack in (
+            ("別的目錄", {"file": "cmd/", "why": "x"}),
+            ("不符的萬用字元", {"file": "internal/z*.go", "why": "x"}),
+        ):
+            probe = {"layers": {}, "items": [], "acknowledged": [ack]}
+            if not orphan_admissions(probe, box):
+                failures.append(f"acknowledged／{name}：不該認領卻認領了")
 
     # --- schema 檢查自己也要有反例 ---------------------------------------
     bad = {"layers": {"a": "A"}, "items": [{"id": "x", "layer": "b", "verify": {"kind": "nope"}}]}

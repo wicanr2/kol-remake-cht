@@ -65,10 +65,11 @@
       "verify": {
         "kind": "present",
         "paths": [
-          "docs/spec/004-ogg-audio-catalog.md"
+          "docs/spec/004-ogg-audio-catalog.md",
+          "README.md"
         ],
-        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
-        "note": "SPEC-004 的狀態行。pit-square-wave-synth 與 ogg-conversion-pipeline 綁同一個訊號——那兩條都以 004 升 READY 為前提。"
+        "pattern": "狀態：\\*\\*DRAFT\\*\\*|還沒接上音訊路徑",
+        "note": "SPEC-004 的狀態行加 README 的現況句；升 READY 並接上時兩處會一起改。"
       }
     },
     {
@@ -421,10 +422,11 @@
       "verify": {
         "kind": "present",
         "paths": [
-          "internal/ui/battle.go"
+          "internal/ui/battle.go",
+          "docs/spec/010-combat-commands.md"
         ],
         "pattern": "確切的視覺效果還沒解出來",
-        "note": "選目標格游標的自承在 ui/battle.go；`sub_1C683` 的效果解出來時會消失。攻擊式那一列（frame-899）沒有可綁的產品碼，靠這一條一起追。"
+        "note": "同一句話在程式與 SPEC-010 各有一處；`sub_1C683` 的效果解出時會一起消失。"
       }
     },
     {
@@ -529,8 +531,12 @@
       "body": "Linux 容器 smoke 不冒充真機結果。macOS 的 bundle 沒有簽章（_CodeSignature 在 Linux 上做不出來），首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。",
       "acceptance": "兩個平台各在真機上啟動並走一次正常路徑。",
       "verify": {
-        "kind": "manual",
-        "note": "真機驗收在本機沒有訊號，永遠是 manual。"
+        "kind": "present",
+        "paths": [
+          "tools/verify_dist.sh"
+        ],
+        "pattern": "macOS 要真機",
+        "note": "驗收腳本自己寫明這一段還沒做；真機驗收接上時會改寫。"
       }
     },
     {
@@ -665,10 +671,11 @@
       "verify": {
         "kind": "present",
         "paths": [
-          "cmd/kol/main.go"
+          "cmd/kol/main.go",
+          "docs/spec/008-combat-field.md"
         ],
-        "pattern": "攻擊那一手的訊息鏈還沒解完",
-        "note": "main.go 的自承，解出時會改寫。"
+        "pattern": "攻擊那一手的訊息鏈還沒解完|攻擊的訊息鏈也還沒解完",
+        "note": "程式與 SPEC-008 各一處；解出時會一起改寫。"
       }
     },
     {
@@ -725,10 +732,11 @@
       "verify": {
         "kind": "present",
         "paths": [
-          "internal/battle/battle.go"
+          "internal/battle/battle.go",
+          "docs/spec/008-combat-field.md"
         ],
-        "pattern": "依裝備賦予的四格之三|哪一件裝備、哪一個位元",
-        "note": "battle.go 的兩處自承，解出時會一起改寫。"
+        "pattern": "依裝備賦予的四格之三|哪一件裝備、哪一個位元|遮罩 0x10 要的",
+        "note": "程式兩處自承加 SPEC-008 的反制掃描條件；解出時會一起改寫。"
       }
     },
     {
@@ -755,10 +763,11 @@
       "verify": {
         "kind": "present",
         "paths": [
-          "internal/battle/execution.go"
+          "internal/battle/execution.go",
+          "docs/spec/010-combat-commands.md"
         ],
-        "pattern": "它在哪裡被讀還沒解",
-        "note": "execution.go 的自承，解出時會改寫。"
+        "pattern": "它在哪裡被讀還沒解|`\\+0x25` 在哪裡被讀還沒解",
+        "note": "程式與 SPEC-010 末段各一處。"
       }
     },
     {
@@ -834,6 +843,36 @@
         ],
         "pattern": "## 還沒解出來的",
         "note": "綁 SPEC-008 那一節的標題：整節清掉時這一條會開口。這是唯一一條綁規格文件而不是產品碼的——那幾項沒有程式落點可綁，硬綁一個猜想中的識別字會永遠為真。"
+      }
+    },
+    {
+      "id": "spec011-unsolved-list",
+      "layer": "spec",
+      "title": "SPEC-011 的未解清單",
+      "body": "野外伏擊那一份規格末尾「還沒解的」一節：`sub_2A39B`（遭遇成立之後緊接著的那一支）、`word_2FA2A` 那一條分支等。與 SPEC-008 的未解清單同性質，在產品碼裡沒有留下自承，靠這一條追。",
+      "acceptance": "SPEC-011 末尾那一節清空，或剩下的每一項各有條目。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/011-wilderness-ambush.md"
+        ],
+        "pattern": "## 10. 還沒解的",
+        "note": "綁那一節的標題：整節清掉時會開口。"
+      }
+    },
+    {
+      "id": "quest-item-0xb926",
+      "layer": "spec",
+      "title": "任務物品的 `[0xB926]`",
+      "body": "SPEC-014 記著這一格還沒解，所以那一條收據裡 `State.QuestItem` 是空的。任務物品本身的記錄與拾取已完成（RE-113／128），缺的是這一格的來源。",
+      "acceptance": "`[0xB926]` 解出，那一條的 QuestItem 不再是空的。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/014-quest-completion.md"
+        ],
+        "pattern": "`\\[0xB926\\]` 還沒解",
+        "note": "SPEC-014 的自承；解出時會改寫。"
       }
     },
     {
@@ -946,6 +985,38 @@
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",
   "acknowledged": [
     {
+      "file": "WORKLOG.md",
+      "why": "逐輪流水帳。每一則記的是**那一輪**的狀態，後來做完了也不回頭改——那正是它的用途。現況看 items。"
+    },
+    {
+      "file": "WORKLIST.md",
+      "why": "未完成項那一節由 render 產生（內容就是 items 的 body），其餘是已完成的歷史條目。狀態的權威是 docs/worklist.json。"
+    },
+    {
+      "file": "CONTEXT.md",
+      "why": "現況摘要，未完成的部分指向 items；統計數字由 render 產生。"
+    },
+    {
+      "file": "docs/re/RESEARCH-LOG.md",
+      "why": "研究筆記，逐輪追加。裡面的「還沒解／還沒查」是**當輪的問題記錄**，解出來之後由後續段落更正而不是刪除——保留形成過程是它的價值。真正要做的事由 items 與各 spec 的未解清單追。"
+    },
+    {
+      "file": "docs/verification/",
+      "why": "驗收收據。每一份記的是**產出當下**驗到哪、還沒驗什麼，事後不改——改了就不是收據了。"
+    },
+    {
+      "file": "docs/re/",
+      "why": "RE 紀錄，與 RESEARCH-LOG 同性質：記某一輪查到什麼、當時還沒查什麼。被推翻時由新紀錄更正並在舊處留指標。"
+    },
+    {
+      "file": "docs/screenshots/",
+      "why": "截圖清冊與說明，記的是擷取當下的涵蓋範圍。"
+    },
+    {
+      "file": "docs/manual/",
+      "why": "說明書譯文與逐頁對照表，記的是原文與翻譯狀態，不是 remake 的缺口。"
+    },
+    {
       "file": "internal/battle/execution.go",
       "match": "Unimplemented 為真表示這一手",
       "why": "欄位語意說明：這一格記的是「remake 沒做出來」，不是原版沒有動作。缺口本身由對應的 items 條目追。"
@@ -1004,6 +1075,39 @@
       "file": "cmd/kol/main.go",
       "match": "沒有訊息的那幾手不停下來等鍵",
       "why": "容錯行為：遇到 remake 還沒做出來的那一手時不要停在空白畫面。缺口本身另有條目。"
+    },
+    {
+      "file": "tools/ida_probe_*.py",
+      "why": "一次性 IDA 探針。每一支的檔頭記的是**那一輪要查什麼**，結論寫進 docs/re/；問題解出後保留原問法以回查形成過程，與 RESEARCH-LOG 同性質。真正的待辦由 items 與各 spec 的未解清單追。"
+    },
+    {
+      "file": "tools/dosbox_character_ui_oracle.py",
+      "why": "原版觀察腳本的說明：它記的是「原版敵人會動而 remake 那一手還沒做出來，所以只比畫面不比逐手內容」。缺口本身另有條目。"
+    },
+    {
+      "file": "tools/extract_character_roster.py",
+      "match": "那一格是誰寫的還沒解",
+      "why": "抽取器把未解的欄位原樣帶出來而不附推測語意——這是刻意的做法，不是缺口。"
+    },
+    {
+      "file": "tools/verify_remake_parity.py",
+      "match": "例如那一塊還沒實作",
+      "why": "對拍計畫的欄位說明：不宣稱的那一對要寫明理由，舉例而已。"
+    },
+    {
+      "file": "docs/spec/009-combat-attack.md",
+      "match": "這一回合還沒做的那一手",
+      "why": "遊戲規則的敘述——擊退會取消那一名這回合尚未執行的動作。"
+    },
+    {
+      "file": "docs/spec/010-combat-commands.md",
+      "match": "不能再以早期 `Unimplemented` 記錄推定",
+      "why": "訂正說明：提醒不要拿舊的 Unimplemented 記錄當成現在還沒做。"
+    },
+    {
+      "file": "docs/spec/README.md",
+      "match": "它們現在沒有證據或沒有實作",
+      "why": "規格索引對「保留原定位」的說明，指向稽核報告。"
     }
   ]
 }
