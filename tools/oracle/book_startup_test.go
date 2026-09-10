@@ -64,6 +64,15 @@ func TestNormalBookEntry(t *testing.T) {
 							}
 						}
 						t.Logf("正常角色清單向下移動 %d 次", down)
+						// 清單要畫完，接下來那個 Enter 才有作用。**不要靠 down 的次數
+						// 湊時間**：2026-09-10 量到 `down=2` 時左頁還停在 ORIGIN 封面，
+						// Enter 送進去沒有反應，整條路徑因此停在 KOLBOOK
+						//（IP 0110:40D7，而畫完的那一條是 0110:40BF）；`down=12`
+						// 之所以會過，只是因為十二次各跑 5M 指令、剛好給了六倍的時間。
+						// 症狀是「選這個角色進不了遊戲」，看起來完全像角色的問題。
+						if err = o.Run(60_000_000); err != nil {
+							t.Fatalf("等角色清單畫完：%v", err)
+						}
 						captureBook(t, o, "book-selection.png")
 					}
 					channel := "BIOS"
@@ -231,6 +240,12 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			t.Fatal(err)
 		}
 		captureBook(t, o, "next-day-start.png")
+		// 走到遇敵為止，**不要走固定步數**。遭遇是機率性的（SPEC-011），
+		// 固定一百步走完之後 `DS:2D9C`（敵人數）可能還是 0，而症狀是
+		// 「參戰上限不一致：count=0」——看起來像擷取壞了，其實是根本沒打起來。
+		// 每一步問一次那個字組，非零就停，並記下走到第幾步。
+		const enemyCount = 0x2D9C
+		encounterAt := -1
 		for i := 0; i < 100; i++ {
 			if err := o.SendKeys("Right"); err != nil {
 				t.Fatal(err)
@@ -238,9 +253,19 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			if err := o.Run(2_000_000); err != nil {
 				t.Fatal(err)
 			}
+			if n := int(o.Word(o.DS(enemyCount))); n > 0 {
+				encounterAt = i
+				captureBook(t, o, fmt.Sprintf("next-day-%03d.png", i))
+				t.Logf("第 %d 步遇敵：敵人數 %d", i, n)
+				break
+			}
 			if i%10 == 9 {
 				captureBook(t, o, fmt.Sprintf("next-day-%03d.png", i))
 			}
+		}
+		if encounterAt < 0 {
+			t.Log("次日一百步走完都沒有遇敵——固定 seed 下這一條路徑不會打起來，" +
+				"後面的戰鬥擷取不會有內容")
 		}
 		if os.Getenv("KOL_BOOK_ENTER_FIGHT") == "1" {
 			if err := o.SendKeys("Space"); err != nil {
