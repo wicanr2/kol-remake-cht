@@ -124,7 +124,8 @@
 - writer 清空 768-byte slot 後寫入欄位；選定肖像與初始盾牌各以 760 bytes 寫入同 slot 的
   `CHARPICS`／`SHLDPICS`，最後依序保存 `0x3000`、`0x2f80`、`0x2f80` bytes。這證實
   原版順序，不證實跨三檔案的 atomicity 或 rollback。
-- `region%d.dat` 最多載入五筆、每筆 48 bytes；固定 ZIP 只有 `REGION0.DAT`。固定來源與
+- `region%d.dat` 最多載入五筆、每筆 48 bytes；固定 ZIP 只有 `REGION0.DAT`——其餘四筆是
+  原版未曾發行的擴充地區（見 [地區擴充片](20260911-region-installer.md)）。固定來源與
   CHARDATA 目的 offset 的路由已收入安全摘要，但欄位語意保持未知。
 - 最終兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 分別為
   最新 `2884a1ae…c129`／`6c00db3a…fdb6`。

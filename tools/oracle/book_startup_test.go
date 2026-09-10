@@ -3,6 +3,7 @@
 package oracle
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -13,12 +14,24 @@ import (
 	"image/png"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"testing"
 )
 
 // 等原版片頭推進；以 DOS 主控台 Enter 回應等待，不跳入口或修改記憶體。
+// regionOpens 記下每一次開檔的檔名與呼叫當下的 IP。
+//
+// `region%d.dat` 這個格式字串只在 `KOLBOOK.EXE` 裡（三處：檔案偏移 0x09a02、
+// 0x09a48、0x09b30），`KOLTOWN.EXE` 一個都沒有——去開那幾個檔的是**書本**，
+// 不是城鎮。這一支要回答的是「`%d` 跑到幾、找不到之後怎麼辦」。
+type regionOpens struct {
+	Name string `json:"name"`
+	IP   string `json:"ip"`
+	Step uint64 `json:"step"`
+}
+
 func TestNormalBookEntry(t *testing.T) {
 	root := os.Getenv("KOL_ORACLE_ROOT")
 	if root == "" {
@@ -38,6 +51,88 @@ func TestNormalBookEntry(t *testing.T) {
 	}
 	defer o.Close()
 	defer captureBook(t, o, "book-final.png")
+	var opens []regionOpens
+	if os.Getenv("KOL_BOOK_REGION_PROBE") == "1" {
+		scanned := false
+		o.OnFileOpen(func(name string) {
+			opens = append(opens, regionOpens{Name: name, IP: o.IP().String(), Step: o.Steps()})
+			// 一定要在開檔的當下掃。之後 KOLTOWN.EXE 會取代 KOLBOOK.EXE 佔住同一個段，
+			// 兩支又共用同一份 CRT、偏移一樣，事後看記憶體會對到錯的 EXE。
+			if scanned || !strings.Contains(strings.ToLower(name), "region") {
+				return
+			}
+			scanned = true
+			dumped := false
+			// 只比 byte，不要先 ToLower：記憶體裡的非 UTF-8 byte 經 ToLower 會被換成
+			// RuneError，長度跟著變，算出來的索引就對不上原始 buffer 了。
+			for seg := uint16(0); seg < 0xA000; seg += 0x1000 {
+				mem := o.Bytes(oracle.Addr{Seg: seg, Off: 0}, 0x10000-16)
+				for at := 0; at+6 <= len(mem); at++ {
+					if !bytes.EqualFold(mem[at:at+6], []byte("region")) {
+						continue
+					}
+					end := at + 40
+					if end > len(mem) {
+						end = len(mem)
+					}
+					shown := make([]byte, 0, end-at)
+					for _, b := range mem[at:end] {
+						if b < 32 || b > 126 {
+							b = '.'
+						}
+						shown = append(shown, b)
+					}
+					t.Logf("模板/檔名 %04x:%04x  %q", seg, at, string(shown))
+					if seg == 0x1000 && !dumped {
+						dumped = true
+						blob := o.Bytes(oracle.Addr{Seg: seg, Off: 0x4400}, 0x0800)
+						if out := os.Getenv("KOL_ORACLE_CAPTURE"); out != "" {
+							_ = os.WriteFile(filepath.Join(out, "region-installer-text.bin"), blob, 0o644)
+						}
+						txt := make([]byte, 0, len(blob))
+						for _, b := range blob {
+							if b < 32 || b > 126 {
+								b = '.'
+							}
+							txt = append(txt, b)
+						}
+						for i := 0; i < len(txt); i += 72 {
+							e := i + 72
+							if e > len(txt) {
+								e = len(txt)
+							}
+							t.Logf("安裝器文字 +%04x %s", 0x4400+i, string(txt[i:e]))
+						}
+					}
+				}
+			}
+		})
+		defer func() {
+			seen := map[string]bool{}
+			for _, r := range opens {
+				if !strings.Contains(strings.ToLower(r.Name), "region") {
+					continue
+				}
+				t.Logf("開檔 %-14s IP=%s 第 %d 道指令", r.Name, r.IP, r.Step)
+				seen[strings.ToLower(r.Name)] = true
+			}
+			t.Logf("region 相關開檔共 %d 種：%v；缺檔清單 %v", len(seen), keysOf(seen), o.Missing())
+			for _, a := range o.MissingAccesses() {
+				if !strings.Contains(strings.ToLower(a.Name), "region") {
+					continue
+				}
+				t.Logf("缺檔 %-14s 呼叫點 %04x:%04x DS=%04x DX=%04x", a.Name, a.CS, a.IP, a.DS, a.DX)
+				// BP 鏈在 CRT 的 open() 裡會斷（那層沒建 frame），下面幾筆只作線索不作證據；
+				// 模板與檔名的實際位址由上面 OnFileOpen 當下的掃描給出。
+				for i, f := range a.Callers {
+					if f.CS == 0 && f.IP == 0 {
+						break
+					}
+					t.Logf("    caller[%d] %04x:%04x code=% x args=%v", i, f.CS, f.IP, f.Code, f.Args)
+				}
+			}
+		}()
+	}
 	for i := 0; i < 20; i++ {
 		if i >= 4 {
 			o.Type("\r")
@@ -696,4 +791,14 @@ func tailOf(xs []string, n int) []string {
 		return xs
 	}
 	return xs[len(xs)-n:]
+}
+
+// keysOf 把集合攤成排序過的清單。
+func keysOf(m map[string]bool) []string {
+	out := make([]string, 0, len(m))
+	for k := range m {
+		out = append(out, k)
+	}
+	sort.Strings(out)
+	return out
 }

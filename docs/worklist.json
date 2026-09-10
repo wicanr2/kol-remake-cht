@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-09-10",
+  "updated": "2026-09-11",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -1136,6 +1136,24 @@
       },
       "status": "done",
       "resolved": "2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。"
+    },
+    {
+      "id": "region-dat-provenance",
+      "layer": "spec",
+      "status": "done",
+      "title": "`region1.dat`…`region4.dat` 缺檔的來由",
+      "body": "原版啟動時會依序試開 region0…region4，只有 region0 存在。要確認這是原版行為還是我方素材不全。",
+      "acceptance": "機制寫清楚並附一手證據；缺檔不再被當成待補的素材。",
+      "resolved": "2026-09-11 核實：那五筆是擴充地區，由地區磁片經原版內建的 REGION INSTALLER 裝入，Origin 未曾發行擴充。執行時觀測（開檔序列、模板位址與 KOLBOOK.EXE 靜態偏移逐項對位、原版自己的訊息文字）見 docs/re/20260911-region-installer.md；探針在 tools/oracle/book_startup_test.go 的 KOL_BOOK_REGION_PROBE 模式。",
+      "verify": {
+        "kind": "required_in_all",
+        "paths": [
+          "docs/re/20260911-region-installer.md",
+          "tools/oracle/book_startup_test.go"
+        ],
+        "pattern": "REGION INSTALLER|KOL_BOOK_REGION_PROBE",
+        "note": "已完成，當回歸訊號：結論文件與可重跑的探針都要在，少一邊就開口。"
+      }
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

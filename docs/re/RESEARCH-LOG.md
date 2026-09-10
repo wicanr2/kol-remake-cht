@@ -963,8 +963,11 @@ bit 1 保留背景／透明，PNG 使用 `alpha=1-mask`。
   項目 4 則提供 760-byte 初始盾牌模板。
 - 三份工作區依序保存為 `chardata` 0x3000 bytes、`charpics` 0x2f80 bytes、`shldpics`
   0x2f80 bytes。這只證實呼叫順序，不宣稱原版具跨檔案 transaction 或 rollback。
-- `region%d.dat` 每筆 48 bytes、最多五筆；固定 ZIP 只有 REGION0。固定 source→record
-  offset 路由已收入安全摘要，所有 region 欄位語意仍標未知。
+- `region%d.dat` 每筆 48 bytes、最多五筆；固定 ZIP 只有 REGION0。這五筆是**擴充地區**，
+  由另外發行的地區磁片透過原版內建的 REGION INSTALLER 裝入；Origin 沒有發行過擴充，
+  所以 `region1`…`region4` 開不到是原版的正常狀態。機制、位元組對位與原版訊息文字見
+  [地區擴充片](20260911-region-installer.md)。固定 source→record offset 路由已收入
+  安全摘要，所有 region 欄位語意仍標未知。
 - 最終兩個全新 IDA DB 的 safe／private JSON 逐 byte 相同，SHA-256 為
   `39beef72…b178`／`099e0d2b…9f73`；archive safe／private 為
   `ae711e3b…2176`／`f42fbbf1…97bc`。完整函式、operand 掃描及 `.i64` 不進版控。

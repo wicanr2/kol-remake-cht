@@ -11,7 +11,7 @@
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
 - 目前 **74 條未完成**（32 條沒有機器訊號、標 `manual`），
-  另有 7 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  另有 8 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
   未完成項的 verify 種類：`present` 39、`manual` 32、`absent` 2、`required_in_all` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**

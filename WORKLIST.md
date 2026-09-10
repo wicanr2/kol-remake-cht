@@ -434,6 +434,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **wilderness-cloud-animation** — 野外的雲層動畫：2026-09-10 核實：已接進畫面。`internal/world/weather.go:69` 的 Composite 做旋轉，`internal/ui/world.go:45` 的 drawWeather 畫進世界畫面（144／217 兩處呼叫 CompositeGroup(s.Group, s.Phase)），`cmd/kol/main.go:937` 遞增 Phase。G02 那一條已記為做完（SPEC-026 六組天候、128 像素捲雲與正式節拍，正常出城 GUI 只在天空區改變），只有這一條沒回頭改。雨雪的正常 GUI 與原版同相位另見 weather-animation-and-speed。
 - **monster-unarmed-weapon-source** — 怪物徒手那幾手改成照原版：拿手上那件：2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。
 - **save-v1-entry-replacement** — SPEC-023 的保存核心已是正式入口：2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。
+- **region-dat-provenance** — `region1.dat`…`region4.dat` 缺檔的來由：2026-09-11 核實：那五筆是擴充地區，由地區磁片經原版內建的 REGION INSTALLER 裝入，Origin 未曾發行擴充。執行時觀測（開檔序列、模板位址與 KOLBOOK.EXE 靜態偏移逐項對位、原版自己的訊息文字）見 docs/re/20260911-region-installer.md；探針在 tools/oracle/book_startup_test.go 的 KOL_BOOK_REGION_PROBE 模式。
 
 <!-- worklist:end -->
 
