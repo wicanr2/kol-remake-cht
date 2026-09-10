@@ -5531,10 +5531,46 @@ kol 這邊的 `worktree-dosgolem-rng-parity` 已 merge 進 main、工作樹乾�
 即 spec 194 在新 base 上仍生效。收據 `manifest.json` 記 `dosgolem_head=5f9a9a1`、
 484 筆輸入、`source_changed_during_run=false`。
 
-容器全部 `--rm`，兩個工作樹的 root-owned 自檢皆為空。kol 這邊的異動未提交。
+容器全部 `--rm`，兩個工作樹的 root-owned 自檢皆為空。kol 這邊的提交見下一則。
 
 ### 勘誤
 
 本檔 2026-09-08 那一則寫的「規格 187 已建立 READY 契約」指的是 dosgolem 當時的
 187；移植到 main 之後那三份是 194（色盤）、195（直接讀鍵）、196（讀鍵橋接）。
 `docs/verification/dosgolem-palette-fix-20260908.md` 的路徑已改成 194 並註明原編號。
+
+## 2026-09-10（續）：`- [~]` 也併進 JSON，kol 提交並推送
+
+依使用者「worklist 都有放到 json + verify，確保 commit + push」補完剩下的部分。
+
+`WORKLIST.md` 另外五條 `- [~]`（部分完成）也併進 `docs/worklist.json`。它們是
+最容易被漏掉的一種：不是「還沒做」也不是「做完了」，於是兩邊的統計都不算它。
+其中兩條核實後是已完成——**野外雲層動畫**（`internal/ui/world.go:45` 的
+`drawWeather` 已在畫，144／217 兩處呼叫 `CompositeGroup(s.Group, s.Phase)`，
+`cmd/kol/main.go:937` 遞增 Phase；G02 那一條早已記為做完，只有這一條沒回頭改），
+以及先前已記的四條。另外三條掛上訊號：
+
+- `train-forge-entry-condition`：綁 `internal/town/shop.go` 的「鍛造（bit3）
+  還沒實作」，兩處自承註解。
+- `save-across-battle-and-clock`：綁 `internal/save/save.go:94` 的「世界時間
+  還沒有規格」。
+- `dist-package-sha256-verification`：綁 `tools/verify_dist.sh` 與
+  `verify_packages.py` 都沒有 `sha256`。**這是這一輪唯一新發現的缺口**——
+  manifest 裡有雜湊，但兩支驗收腳本從來沒有回頭比對過它。正反對照：同一個
+  pattern 在 `tools/write_dist_manifest.py` 命中兩次（它產雜湊），在兩支驗收
+  腳本都是零。
+- `dist-rebuild-version-number`：版本號是決策，標 `manual`。
+
+`WORKLIST.md` 現在沒有任何 `- [ ]` 或 `- [~]`，只剩 149 條 `- [x]` 的歷史與
+49 行指標。JSON 共 54 條：49 條未完成（35 條 `manual`）、5 條已核實完成。
+
+建置與測試在容器內通過。`./...` 會被 `workplace/spec-source-audit-20260907`
+的兩個同名 package 擋下來（那個目錄是 gitignore 的稽核暫存），改跑
+`./cmd/... ./internal/...`；`cmd/kol` 與 `internal/ui` 需要 X11，照
+`run_kol_headless.sh` 的模式起 Xvfb 後兩包都通過。
+
+提交 `e118596`，推送到 `wicanr2/kol-remake-cht` 的 `main`（連同先前三個未推送的
+commit 共四個）。推送前確認 repo 仍是 PRIVATE、作者信箱全部是 `wicanr2@gmail.com`、
+240 個檔案裡沒有原版 ZIP／EXE／PDF／地圖；唯一的 PNG
+（`assets/original-derived-png/ega/BATTLE/battle-map-24.png`）依專案例外進 private
+repo，manifest 有登記、SHA-256 相符、權利分類齊全。
