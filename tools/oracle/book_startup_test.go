@@ -3,6 +3,7 @@
 package oracle
 
 import (
+	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -240,18 +241,77 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			t.Fatal(err)
 		}
 		captureBook(t, o, "next-day-start.png")
+
+		// 掃 seed：在同一次執行裡試很多顆，不要一顆跑一次整條路徑。
+		//
+		// `seed=1` 是**為了避免遭遇**挑的（SPEC-011：野外那兩條收據「選一顆不會在
+		// 半路被攔下的種子」），而規劃與結算的對拍要的剛好相反。走到這裡先存一份
+		// 狀態，之後每一顆 seed 都從同一個點重來——差別只有那兩個字組。
+		if os.Getenv("KOL_BOOK_SEED_SCAN") == "1" {
+			const enemyCount = 0x2D9C
+			base := o.Save()
+			type hit struct {
+				Seed int `json:"seed"`
+				Step int `json:"step"`
+				N    int `json:"enemy_count"`
+			}
+			var hits []hit
+			scanned := 0
+			// **一個時段要走六十到七十五步**（`internal/world/clock.go`：一步約 56 個
+			// 時間單位、門檻在 3360…4200 之間），而遭遇是每次時段變換才擲一次。
+			// 先前掃 40 顆 × 40 步、12 顆 × 25 步都是 0，不是這些 seed 不好，是
+			// **每一顆都還沒走到第一次擲點**。所以寧可少掃幾顆、每顆走遠一點。
+			for seed := 1; seed <= 3; seed++ {
+				o.Restore(base)
+				o.WriteU16(o.DS(0x1600), uint16(seed))
+				o.WriteU16(o.DS(0x1602), 0)
+				scanned++
+				w := newWalker(o)
+				walked := 0
+				for i := 0; i < 90; i++ {
+					if w.step(t, o) {
+						walked++
+					}
+					if n := int(o.Word(o.DS(enemyCount))); n > 0 {
+						hits = append(hits, hit{seed, i, n})
+						t.Logf("seed=%-3d 第 %2d 步遇敵，敵人數 %d（真的走動 %d 步）",
+							seed, i, n, walked)
+						break
+					}
+				}
+				if len(hits) == 0 || hits[len(hits)-1].Seed != seed {
+					t.Logf("seed=%-3d 九十步沒遇敵（真的走動 %d 步）", seed, walked)
+				}
+			}
+			t.Logf("掃了 %d 顆 seed，%d 顆在 90 步內遇敵", scanned, len(hits))
+			body, err := json.MarshalIndent(map[string]any{
+				"schema": "kol-ambush-seed-scan-v1", "source": "dosgolem-normal-player-path",
+				"note":           "在同一份出城後的狀態上逐顆 seed 重來，每顆最多走 40 步",
+				"steps_per_seed": 90, "scanned": scanned, "hits": hits,
+			}, "", "  ")
+			if err != nil {
+				t.Fatal(err)
+			}
+			if dir := os.Getenv("KOL_ORACLE_CAPTURE"); dir != "" {
+				if err = os.WriteFile(filepath.Join(dir, "ambush-seed-scan.json"), append(body, '\n'), 0600); err != nil {
+					t.Fatal(err)
+				}
+			}
+			o.Restore(base)
+			return
+		}
+
 		// 走到遇敵為止，**不要走固定步數**。遭遇是機率性的（SPEC-011），
 		// 固定一百步走完之後 `DS:2D9C`（敵人數）可能還是 0，而症狀是
 		// 「參戰上限不一致：count=0」——看起來像擷取壞了，其實是根本沒打起來。
 		// 每一步問一次那個字組，非零就停，並記下走到第幾步。
 		const enemyCount = 0x2D9C
 		encounterAt := -1
+		w := newWalker(o)
+		moved := 0
 		for i := 0; i < 100; i++ {
-			if err := o.SendKeys("Right"); err != nil {
-				t.Fatal(err)
-			}
-			if err := o.Run(2_000_000); err != nil {
-				t.Fatal(err)
+			if w.step(t, o) {
+				moved++
 			}
 			if n := int(o.Word(o.DS(enemyCount))); n > 0 {
 				encounterAt = i
@@ -264,6 +324,7 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			}
 		}
 		if encounterAt < 0 {
+			t.Logf("次日一百步走完都沒有遇敵（其中真的走動了 %d 步）", moved)
 			t.Log("次日一百步走完都沒有遇敵——固定 seed 下這一條路徑不會打起來，" +
 				"後面的戰鬥擷取不會有內容")
 		}
@@ -538,4 +599,42 @@ func probeNormalPlanning(t *testing.T, o *oracle.Oracle) {
 		t.Fatal(err)
 	}
 	t.Log("規劃逐鍵觀察已匯出；尚未宣稱與 remake 規劃同狀態")
+}
+
+// screenDigest 是目前畫面的指紋，用來判斷「這一步到底有沒有走出去」。
+func screenDigest(o *oracle.Oracle) string {
+	sum := sha256.Sum256(o.Tandy16())
+	return hex.EncodeToString(sum[:8])
+}
+
+// walker 依序試四個方向走。**撞牆的時候畫面不會變**，而一直按同一個鍵不等於
+// 一直在走——2026-09-10 量到：次日那一百步裡 `next-day-start`、`-009`、`-099`
+// 三張畫面的雜湊完全相同，角色壓根沒動，於是世界時間不走、遭遇也就不擲，
+// 症狀卻是「走了一百步都沒遇敵」，看起來像機率問題。
+type walker struct {
+	dirs []string
+	at   int
+	last string
+}
+
+func newWalker(o *oracle.Oracle) *walker {
+	return &walker{dirs: []string{"Right", "Down", "Left", "Up"}, last: screenDigest(o)}
+}
+
+// step 走一步，回傳畫面有沒有變。沒變就換下一個方向，下一次呼叫改走那一邊。
+func (w *walker) step(t *testing.T, o *oracle.Oracle) bool {
+	t.Helper()
+	if err := o.SendKeys(w.dirs[w.at]); err != nil {
+		t.Fatalf("送 %q：%v", w.dirs[w.at], err)
+	}
+	if err := o.Run(2_000_000); err != nil {
+		t.Fatalf("走 %q：%v", w.dirs[w.at], err)
+	}
+	now := screenDigest(o)
+	moved := now != w.last
+	w.last = now
+	if !moved {
+		w.at = (w.at + 1) % len(w.dirs)
+	}
+	return moved
 }
