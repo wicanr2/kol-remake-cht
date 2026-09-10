@@ -19,10 +19,10 @@
 // `tools/go_docker.sh` 偵測到 `$DOSGOLEM`（預設 `~/cht/dosgolem-kolrand`）底下有
 // `go.mod` 就把它唯讀掛在 `/dosgolem`。
 //
-// ⚠ **要 dosgolem 的 `kol-force-call` 分支**（`ce78896`…`633fd66`）。四件事都還沒
-// 進 dosgolem 主線：`Call`、`Stub`（接主線會編不過）、線性版的 `At()`（**編得過但
-// 永遠不成立**，只會安靜地跑滿指令上限）、FAT 的 8.3 截斷（原版開 `steedpics` 會
-// 失敗，而它不檢查開檔結果，會一路跑進沒有映射的記憶體）。
+// 對拍用的是 dosgolem 的 `kol-oracle` 分支（base 為 `main`）。`Call`、`Stub`、
+// 線性版的 `At()` 與 FAT 的 8.3 截斷這四件事**都已經在 main 裡**；`kol-oracle`
+// 另外帶著 KOL 專用的三份規格：194（EGA BIOS 預設色盤）、195（DOS 直接讀鍵）、
+// 196（BIOS 讀鍵橋接）。
 //
 // # 對拍一條規則的三步
 //

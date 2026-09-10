@@ -83,8 +83,8 @@
         "paths": [
           "docs/spec/028-optional-battle-speed.md"
         ],
-        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
-        "note": "SPEC-028 的狀態行。weather-animation-and-speed 綁同一個訊號。"
+        "pattern": "狀態：\\*\\*DRAFT\\*\\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接",
+        "note": "SPEC-028 的狀態行加它列的三個未決項（未接敵的定義、停止條件、設定保存）；升 READY 並接上時會一起改。"
       }
     },
     {
@@ -831,36 +831,6 @@
       }
     },
     {
-      "id": "spec008-unsolved-list",
-      "layer": "spec",
-      "title": "SPEC-008 的未解清單（沒有產品碼自承的那幾項）",
-      "body": "SPEC-008 末尾那一節列的七項裡，有四項已經各自有條目（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8` 的選單協定、`+0x25` 的讀取端）。剩下三項在產品碼裡沒有留下自承，所以 `scan` 掃不到，靠這一條追：敵人 AI 那三張基礎權重表的**執行期值**、`sub_1B94F`（把物品格展開成名字）、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關（`word_3AC58` 與參戰者記錄 +0x06 的語意）、`sub_2625A` 的語意。",
-      "acceptance": "SPEC-008 末尾那一節清空，或剩下的每一項各有條目。",
-      "verify": {
-        "kind": "present",
-        "paths": [
-          "docs/spec/008-combat-field.md"
-        ],
-        "pattern": "## 還沒解出來的",
-        "note": "綁 SPEC-008 那一節的標題：整節清掉時這一條會開口。這是唯一一條綁規格文件而不是產品碼的——那幾項沒有程式落點可綁，硬綁一個猜想中的識別字會永遠為真。"
-      }
-    },
-    {
-      "id": "spec011-unsolved-list",
-      "layer": "spec",
-      "title": "SPEC-011 的未解清單",
-      "body": "野外伏擊那一份規格末尾「還沒解的」一節：`sub_2A39B`（遭遇成立之後緊接著的那一支）、`word_2FA2A` 那一條分支等。與 SPEC-008 的未解清單同性質，在產品碼裡沒有留下自承，靠這一條追。",
-      "acceptance": "SPEC-011 末尾那一節清空，或剩下的每一項各有條目。",
-      "verify": {
-        "kind": "present",
-        "paths": [
-          "docs/spec/011-wilderness-ambush.md"
-        ],
-        "pattern": "## 10. 還沒解的",
-        "note": "綁那一節的標題：整節清掉時會開口。"
-      }
-    },
-    {
       "id": "quest-item-0xb926",
       "layer": "spec",
       "title": "任務物品的 `[0xB926]`",
@@ -873,6 +843,205 @@
         ],
         "pattern": "`\\[0xB926\\]` 還沒解",
         "note": "SPEC-014 的自承；解出時會改寫。"
+      }
+    },
+    {
+      "id": "ui-details-unverified",
+      "layer": "verification",
+      "title": "五處 UI 細節還沒對拍",
+      "body": "程式裡自承「還沒對拍」的幾處：法術清單的標題座標與版面（`spell.go`）、戰利品畫面（`spoils.go`，要打贏一場而且擲中兩成的掉落才看得到）、選目標格的那一圈與游標樣子（`ui/battle.go` 兩處）、物品頁 `sub_153FF` 模式 8 的擺法（`ui/itempage.go`）。都是畫得出來但沒有與原版逐畫面比過。",
+      "acceptance": "五處各有一份逐畫面對拍收據。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/spell.go",
+          "internal/battle/spoils.go",
+          "internal/ui/battle.go",
+          "internal/ui/itempage.go",
+          "docs/spec/010-combat-commands.md"
+        ],
+        "pattern": "還沒對拍|還沒讀|的畫面還沒對",
+        "note": "五處程式加 SPEC-010 兩處，共用「還沒對拍」這一類說法；對完會一起消失。"
+      }
+    },
+    {
+      "id": "world-clock-threshold-mechanism",
+      "layer": "spec",
+      "title": "世界時刻門檻的機制沒追出來",
+      "body": "9 步 852 剛好卡在門檻 3367 的兩側（差一），機制還沒追出來，目前靠量到的值。差一的邊界最容易在別的路徑上露餡。",
+      "acceptance": "機制追出來並寫進規格，門檻不再是量出來的常數。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/world/clock.go"
+        ],
+        "pattern": "機制還沒追出來",
+        "note": "clock.go 的自承。"
+      }
+    },
+    {
+      "id": "chardata-writer-untraced-fields",
+      "layer": "spec",
+      "title": "角色寫回：幾個位移的來源沒反追",
+      "body": "那些位移目前保留樣板原值——寫進猜出來的 bytes 比留白更糟。要反追出來源才能確定它們在正常遊玩中會不會變。",
+      "acceptance": "來源反追出來，或確認那些位移在正常路徑上恆為樣板值。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/chardata/writer.go"
+        ],
+        "pattern": "來源尚未反追",
+        "note": "writer.go 的自承。"
+      }
+    },
+    {
+      "id": "save-v1-entry-replacement",
+      "layer": "gap",
+      "title": "SPEC-023 的保存核心還沒取代正式 v1 入口",
+      "body": "`internal/save/characters.go` 已審查，但正式入口仍是 v1。兩套並存期間，改一邊沒改另一邊的風險一直在。",
+      "acceptance": "v1 入口由 SPEC-023 的核心取代，或明示為什麼要並存。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/save/characters.go"
+        ],
+        "pattern": "尚未取代正式 v1 入口",
+        "note": "characters.go 的自承。"
+      }
+    },
+    {
+      "id": "glossary-terms-pending",
+      "layer": "gap",
+      "title": "術語表還有待查的詞",
+      "body": "字串表與術語表同一套狀態：核准／暫譯／待查。還有詞停在暫譯或待查。",
+      "acceptance": "術語表沒有待查項，暫譯各自定案。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/i18n/i18n.go"
+        ],
+        "pattern": "術語還在",
+        "note": "i18n.go 的檔頭說明；術語定案後會改寫。"
+      }
+    },
+    {
+      "id": "planning-25-not-verified",
+      "layer": "verification",
+      "title": "規劃段寫進 +0x25 的值沒逐格核對",
+      "body": "分派表認不得的圖號落 default 收尾時，原版寫進 `+0x25` 的是什麼還沒逐格核對過，所以 remake 記下來不動、不假裝做過。",
+      "acceptance": "逐格核對過，或確認 remake 目前的做法與原版等價。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/planning.go"
+        ],
+        "pattern": "還沒逐格核對過",
+        "note": "planning.go 的自承。"
+      }
+    },
+    {
+      "id": "koldata-action-messages",
+      "layer": "spec",
+      "title": "幾個動作敘述還沒對上 KOLDATA",
+      "body": "SPEC-010 末段列了哪幾個指令的動作敘述還沒對上 KOLDATA 的記錄。",
+      "acceptance": "那幾個對上，或確認 KOLDATA 裡沒有對應的句子。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/commands.go"
+        ],
+        "pattern": "還沒對上 KOLDATA",
+        "note": "commands.go 的自承，指向 SPEC-010 末段。"
+      }
+    },
+    {
+      "id": "reshuffle-behavior-address",
+      "layer": "spec",
+      "title": "重排這一輪的行為沒對上位址",
+      "body": "那一段的行為還沒對上原版位址，remake 取「重排這一輪」；逃走不接在這裡。",
+      "acceptance": "位址對上，行為確認。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "internal/battle/state.go"
+        ],
+        "pattern": "行為還沒對上位址",
+        "note": "state.go 的自承。"
+      }
+    },
+    {
+      "id": "spec-unsolved-sections",
+      "layer": "spec",
+      "title": "各規格末尾的未解章節",
+      "body": "五份規格各自留了一節未解項，內容在產品碼裡多半沒有落點（沒有程式落點就沒有自承可綁），靠這一條追。目前有：`002-ega-extraction-set` 的「尚未關閉的來源」、`004-ogg-audio-catalog` 的「尚未通過的 READY gate」、`008-combat-field` 的「還沒解出來的（不得實作）」（敵人 AI 三張權重表的執行期值、`sub_1B94F`、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關、`sub_2625A` 的語意）、`010-combat-commands` 的「還沒關閉的」、`011-wilderness-ambush` 的「還沒解的」（`sub_2A39B`、`word_2FA2A` 那一條分支）。其中已經各自有條目的四項（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8`、`+0x25` 讀取端）不重複列。",
+      "acceptance": "五份的未解章節各自清空，或剩下的每一項有自己的條目。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec"
+        ],
+        "pattern": "^#{2,3} .*(還沒|尚未).*(關閉|解|通過|gate)",
+        "note": "綁的是章節標題本身，所以新開一節未解項會自動被這一條認領，全部清空時才會開口。要看是哪幾份跑 `grep -rn '^#\\{2,3\\} .*\\(還沒\\|尚未\\)' docs/spec/`。"
+      }
+    },
+    {
+      "id": "spell-target-figure",
+      "layer": "gap",
+      "title": "施法時目標的人形還沒畫",
+      "body": "`sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。",
+      "acceptance": "圖庫與幾何升到已證實，人形畫出來並對拍。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/012-combat-spells.md"
+        ],
+        "pattern": "目標的人形還沒畫",
+        "note": "SPEC-012 的自承。"
+      }
+    },
+    {
+      "id": "actor-record-2c",
+      "layer": "spec",
+      "title": "參戰者記錄 +0x2C 仍未解",
+      "body": "`SpellEffectField` 的第 5、6 項指到它，但那兩個效果的來源還沒解出來。",
+      "acceptance": "+0x2C 的語意解出，兩個效果接上或確認無作用。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/012-combat-spells.md"
+        ],
+        "pattern": "`\\+0x2C` 仍未解",
+        "note": "SPEC-012 的自承。"
+      }
+    },
+    {
+      "id": "quest-count-ff-writer",
+      "layer": "spec",
+      "title": "兩個計數怎麼變成 0xFF 還沒找到寫入點",
+      "body": "所以 remake 用自己的 `VerdictFled` 判定。找不到寫入點就無法確認那個判定與原版等價。",
+      "acceptance": "寫入點找出來，或確認 remake 的判定等價。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/014-quest-completion.md"
+        ],
+        "pattern": "還沒找到寫入點",
+        "note": "SPEC-014 的自承。"
+      }
+    },
+    {
+      "id": "spec029-wiring-review",
+      "layer": "spec",
+      "title": "SPEC-029 的接線順序與取圖來源審查",
+      "body": "怪物遠程初始化的規則已實作並通過原版比較，但顯示取圖來源與「正式建構到第一輪」的接線順序還沒審查完，所以規格仍是 DRAFT。",
+      "acceptance": "審查完成，SPEC-029 升 READY。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/029-monster-ranged-initialization.md"
+        ],
+        "pattern": "仍待審查|接線順序審查",
+        "note": "SPEC-029 的自承；審查完成時會改寫。"
       }
     },
     {
@@ -985,6 +1154,100 @@
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",
   "acknowledged": [
     {
+      "file": "*",
+      "match": "還沒看到|還沒算到|還沒分勝負|還沒輪到|還沒印|還沒走完|還沒講過|還沒住宿|還沒選|還沒開打|還沒講完",
+      "why": "遊戲術語：視線的可見度、勝負判定、回合輪次、訊息佇列這些**狀態**的說法，不是 remake 的缺口。"
+    },
+    {
+      "file": "*",
+      "match": "尚未 CONFORMED|尚不授權|不自動升|尚未全數審查|未達 READY",
+      "why": "規格生命週期的用語（DRAFT → READY → CONFORMED）。哪一份該往前走由 spec-ready-before-implement 這條追，不是逐句的待辦。"
+    },
+    {
+      "file": "*",
+      "match": "仍待驗|仍未完成|待驗證|尚未宣稱|不宣稱|還沒有實跑收據|還沒實跑到|尚未由 UI 證實|尚未接入|尚未把各張|尚未關閉|未驗主機|未完成全遊戲",
+      "why": "驗收範圍的聲明——寫明「這一項還沒驗到」正是收據與規格該做的事。對應的缺口由 items 追（V01／V02／A10 那幾條）。"
+    },
+    {
+      "file": "*",
+      "match": "還沒規劃|還沒進入|還沒上弦|還沒裝填|還沒扣|還沒套|還沒喊過|還沒除以|還沒到.{0,6}門檻|還沒列進來",
+      "why": "遊戲狀態的說法：某一名這回合規劃了沒、弩上弦了沒、額度扣了沒、效果套了沒。這些是**規則本身**要表達的狀態，不是 remake 的缺口。"
+    },
+    {
+      "file": "*",
+      "match": "尚未改變|尚未接受|資料尚未|尚未儲存",
+      "why": "玩家看得到的訊息或錯誤字串（保存失敗、肖像沒選）——那是功能的一部分，不是待辦。"
+    },
+    {
+      "file": "*",
+      "match": "還沒有規格|還沒定|語意還沒",
+      "why": "指向 RE 未解項的說法。逐項的追蹤在 items 與各 spec 的未解清單；這裡不重複登記同一件事。"
+    },
+    {
+      "file": "*",
+      "match": "還沒押|還沒被選過|還沒跨|還沒打過|尚未選定|尚未保存|還沒選過",
+      "why": "遊戲狀態的說法：下注了沒、那一格選過沒、時刻跨過門檻沒。規則本身要表達的狀態。"
+    },
+    {
+      "file": "*",
+      "match": "尚未證實",
+      "why": "抽取器的前提檢查：證據不足時直接 SystemExit 而不是照著猜想跑下去。那是刻意的守門，不是待辦。"
+    },
+    {
+      "file": "tools/build_local_appimage.py",
+      "why": "打包腳本：「尚未交付」是它刻意產生的標記檔名，用來標示那個目錄還不是正式交付。"
+    },
+    {
+      "file": "tools/make_arena_save.py",
+      "why": "工具說明：講的是原版名冊裡的角色「還沒打過任何一場」這個初始狀態。"
+    },
+    {
+      "file": "internal/flow/flow.go",
+      "match": "角色所在地尚未載入",
+      "why": "玩家看得到的錯誤訊息。"
+    },
+    {
+      "file": "internal/town/sheet.go",
+      "match": "中文版面未實作",
+      "why": "玩家選到時記一筆的訊息；缺口本身由 g01-cjk-sheet-pages 追。"
+    },
+    {
+      "file": "internal/battle/fatigue.go",
+      "match": "規劃段還沒把",
+      "why": "機制說明：敵人 AI 那兩處在規劃旗標設起來之前走的是哪一條。"
+    },
+    {
+      "file": "internal/battle/execution.go",
+      "match": "0x22 是還沒",
+      "why": "指令列兩格的語意說明（上弦與未上弦）。"
+    },
+    {
+      "file": "internal/battle/commands.go",
+      "match": "還沒上弦的射擊武器",
+      "why": "指令碼的語意說明。"
+    },
+    {
+      "file": "internal/battle/state.go",
+      "match": "未解的部分集中在",
+      "why": "指向 SPEC-008 未解清單的指標；那一節由 spec008-unsolved-list 追。"
+    },
+    {
+      "file": "CLAUDE.md",
+      "why": "專案規則與契約，裡面的「未完成／不得」是規則條文不是待辦。"
+    },
+    {
+      "file": "AGENTS.md",
+      "why": "同 CLAUDE.md，作業規則。"
+    },
+    {
+      "file": "README.md",
+      "why": "對外說明與現況摘要；未完成的部分指向 WORKLIST 與 items。"
+    },
+    {
+      "file": "docs/spec/README.md",
+      "why": "規格索引：每一列的狀態摘要指向各 spec 與 items，不是獨立的待辦清單。"
+    },
+    {
       "file": "WORKLOG.md",
       "why": "逐輪流水帳。每一則記的是**那一輪**的狀態，後來做完了也不回頭改——那正是它的用途。現況看 items。"
     },
@@ -1015,6 +1278,14 @@
     {
       "file": "docs/manual/",
       "why": "說明書譯文與逐頁對照表，記的是原文與翻譯狀態，不是 remake 的缺口。"
+    },
+    {
+      "file": "tools/ida_probe_*.py",
+      "why": "一次性 IDA 探針。每一支的檔頭記的是**那一輪要查什麼**，結論寫進 docs/re/；問題解出後保留原問法以回查形成過程。真正的待辦由 items 與各 spec 的未解清單追。"
+    },
+    {
+      "file": "tools/dosbox_character_ui_oracle.py",
+      "why": "原版觀察腳本的說明：它記的是「原版敵人會動而 remake 那一手還沒做出來，所以只比畫面不比逐手內容」。缺口本身另有條目。"
     },
     {
       "file": "internal/battle/execution.go",
@@ -1058,13 +1329,8 @@
     },
     {
       "file": "internal/battle/knockback.go",
-      "match": "這一回合還沒做的那一手取消掉",
-      "why": "遊戲規則的敘述——擊退會取消那一名這回合尚未執行的動作。不是 remake 的缺口。"
-    },
-    {
-      "file": "internal/battle/knockback.go",
-      "match": "取消這一回合還沒做的那一手",
-      "why": "同上，遊戲規則。"
+      "match": "還沒做的那一手",
+      "why": "遊戲規則的敘述——擊退會取消那一名這回合尚未執行的動作。"
     },
     {
       "file": "internal/battle/battle.go",
@@ -1075,14 +1341,6 @@
       "file": "cmd/kol/main.go",
       "match": "沒有訊息的那幾手不停下來等鍵",
       "why": "容錯行為：遇到 remake 還沒做出來的那一手時不要停在空白畫面。缺口本身另有條目。"
-    },
-    {
-      "file": "tools/ida_probe_*.py",
-      "why": "一次性 IDA 探針。每一支的檔頭記的是**那一輪要查什麼**，結論寫進 docs/re/；問題解出後保留原問法以回查形成過程，與 RESEARCH-LOG 同性質。真正的待辦由 items 與各 spec 的未解清單追。"
-    },
-    {
-      "file": "tools/dosbox_character_ui_oracle.py",
-      "why": "原版觀察腳本的說明：它記的是「原版敵人會動而 remake 那一手還沒做出來，所以只比畫面不比逐手內容」。缺口本身另有條目。"
     },
     {
       "file": "tools/extract_character_roster.py",
@@ -1096,7 +1354,7 @@
     },
     {
       "file": "docs/spec/009-combat-attack.md",
-      "match": "這一回合還沒做的那一手",
+      "match": "還沒做的那一手",
       "why": "遊戲規則的敘述——擊退會取消那一名這回合尚未執行的動作。"
     },
     {
@@ -1105,9 +1363,23 @@
       "why": "訂正說明：提醒不要拿舊的 Unimplemented 記錄當成現在還沒做。"
     },
     {
-      "file": "docs/spec/README.md",
-      "match": "它們現在沒有證據或沒有實作",
-      "why": "規格索引對「保留原定位」的說明，指向稽核報告。"
+      "file": "*",
+      "match": "未驗證分支|不得以推測|不得稱作|不可被 runtime|不得靠 OCR|未知或尚未支援|未驗證資料代替|未驗證 PNG|未解析尾區|尚未支援|記為未解釋|尚未輸出|尚未視覺驗證|尚未完成初譯|尚未反追的欄位|還沒開始畫",
+      "why": "規格條文與工具的欄位說明：講的是「這一類東西要怎麼標記、不准怎麼用」，是規則本身而不是待辦。"
+    },
+    {
+      "file": "*",
+      "match": "未驗證多數圖片|保守未解析|人耳驗收尚未執行|待驗收的候選|上句的「未驗證」|尚未有保存契約|尚未排除間接寫入|尚未驗收分支|未完成前不標為|尚未完成的選部位|路徑本身沒有未解|還沒對上」|不能被 runtime import",
+      "why": "規格對授權範圍與證據等級的條文：哪一段還沒驗、哪一種資料不准進 runtime、訂正時限定了什麼。都是規則本身；對應的缺口由 items 追。"
+    },
+    {
+      "file": "*",
+      "match": "不升 CONFORMED|未升 CONFORMED|仍未 CONFORMED|不在此猜改|未驗像素字寬|未驗正常戰鬥|不要求未受控",
+      "why": "規格的 CONFORMED 條件：寫明「還沒驗到什麼就不往前升」正是規格生命週期該做的事。對應的驗收缺口由 items 追。"
+    },
+    {
+      "file": "REMAKE-PLAN.md",
+      "why": "早期的整體規劃表，記的是當時各系統的盤點狀態與尚未決策的項目；現行狀態看 CONTEXT.md 與 items。"
     }
   ]
 }

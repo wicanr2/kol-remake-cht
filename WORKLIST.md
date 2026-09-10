@@ -49,7 +49,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **g07-battle-speed-options** — G07：三個加速選項的詳細規格、控制與保存
   SPEC-028 草案已核對現有接口與完成條件，狀態仍是 DRAFT，明寫「不授權先加空開關」。無訊息自動略過不等於未接敵快轉；細節與可見原型待確認。
   完成條件：SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。
-  核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*` 就是還沒完
+  核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接` 就是還沒完
 
 - **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊
   第一批修復已接建角入口／表單／取消與同城選隊顯示；SPEC-023 已接完整存檔與名冊保存。整條垂直鏈的驗收仍未做。
@@ -144,6 +144,21 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：輸入框做出來，正常 GUI 打得了字並問得到關鍵字。
   核實：`internal/town/keys.go` 找得到 `remake 的輸入框還沒做` 就是還沒完
 
+- **save-v1-entry-replacement** — SPEC-023 的保存核心還沒取代正式 v1 入口
+  `internal/save/characters.go` 已審查，但正式入口仍是 v1。兩套並存期間，改一邊沒改另一邊的風險一直在。
+  完成條件：v1 入口由 SPEC-023 的核心取代，或明示為什麼要並存。
+  核實：`internal/save/characters.go` 找得到 `尚未取代正式 v1 入口` 就是還沒完
+
+- **glossary-terms-pending** — 術語表還有待查的詞
+  字串表與術語表同一套狀態：核准／暫譯／待查。還有詞停在暫譯或待查。
+  完成條件：術語表沒有待查項，暫譯各自定案。
+  核實：`internal/i18n/i18n.go` 找得到 `術語還在` 就是還沒完
+
+- **spell-target-figure** — 施法時目標的人形還沒畫
+  `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
+  完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
+  核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
+
 
 ### 接了但沒驗過
 
@@ -211,6 +226,16 @@ tools/run_python_tool.sh tools/worklist.py verify
   與 v01-full-battle-parity 是同一件事的兩次登記（一次在現行缺口表、一次在最新驗證補充）。
   完成條件：同 v01-full-battle-parity。
   核實：要人判——同 v01-full-battle-parity。這兩條應該一起收掉，或合成一條。
+
+- **ui-details-unverified** — 五處 UI 細節還沒對拍
+  程式裡自承「還沒對拍」的幾處：法術清單的標題座標與版面（`spell.go`）、戰利品畫面（`spoils.go`，要打贏一場而且擲中兩成的掉落才看得到）、選目標格的那一圈與游標樣子（`ui/battle.go` 兩處）、物品頁 `sub_153FF` 模式 8 的擺法（`ui/itempage.go`）。都是畫得出來但沒有與原版逐畫面比過。
+  完成條件：五處各有一份逐畫面對拍收據。
+  核實：`internal/battle/spell.go`、`internal/battle/spoils.go`、`internal/ui/battle.go`、`internal/ui/itempage.go`、`docs/spec/010-combat-commands.md` 找得到 `還沒對拍|還沒讀|的畫面還沒對` 就是還沒完
+
+- **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對
+  分派表認不得的圖號落 default 收尾時，原版寫進 `+0x25` 的是什麼還沒逐格核對過，所以 remake 記下來不動、不假裝做過。
+  完成條件：逐格核對過，或確認 remake 目前的做法與原版等價。
+  核實：`internal/battle/planning.go` 找得到 `還沒逐格核對過` 就是還沒完
 
 
 ### 素材抽取與音訊
@@ -319,20 +344,50 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：開關語意解出並寫進規格。
   核實：`internal/town/layout.go` 找得到 `是那個開關，語意還沒解` 就是還沒完
 
-- **spec008-unsolved-list** — SPEC-008 的未解清單（沒有產品碼自承的那幾項）
-  SPEC-008 末尾那一節列的七項裡，有四項已經各自有條目（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8` 的選單協定、`+0x25` 的讀取端）。剩下三項在產品碼裡沒有留下自承，所以 `scan` 掃不到，靠這一條追：敵人 AI 那三張基礎權重表的**執行期值**、`sub_1B94F`（把物品格展開成名字）、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關（`word_3AC58` 與參戰者記錄 +0x06 的語意）、`sub_2625A` 的語意。
-  完成條件：SPEC-008 末尾那一節清空，或剩下的每一項各有條目。
-  核實：`docs/spec/008-combat-field.md` 找得到 `## 還沒解出來的` 就是還沒完
-
-- **spec011-unsolved-list** — SPEC-011 的未解清單
-  野外伏擊那一份規格末尾「還沒解的」一節：`sub_2A39B`（遭遇成立之後緊接著的那一支）、`word_2FA2A` 那一條分支等。與 SPEC-008 的未解清單同性質，在產品碼裡沒有留下自承，靠這一條追。
-  完成條件：SPEC-011 末尾那一節清空，或剩下的每一項各有條目。
-  核實：`docs/spec/011-wilderness-ambush.md` 找得到 `## 10. 還沒解的` 就是還沒完
-
 - **quest-item-0xb926** — 任務物品的 `[0xB926]`
   SPEC-014 記著這一格還沒解，所以那一條收據裡 `State.QuestItem` 是空的。任務物品本身的記錄與拾取已完成（RE-113／128），缺的是這一格的來源。
   完成條件：`[0xB926]` 解出，那一條的 QuestItem 不再是空的。
   核實：`docs/spec/014-quest-completion.md` 找得到 ``\[0xB926\]` 還沒解` 就是還沒完
+
+- **world-clock-threshold-mechanism** — 世界時刻門檻的機制沒追出來
+  9 步 852 剛好卡在門檻 3367 的兩側（差一），機制還沒追出來，目前靠量到的值。差一的邊界最容易在別的路徑上露餡。
+  完成條件：機制追出來並寫進規格，門檻不再是量出來的常數。
+  核實：`internal/world/clock.go` 找得到 `機制還沒追出來` 就是還沒完
+
+- **chardata-writer-untraced-fields** — 角色寫回：幾個位移的來源沒反追
+  那些位移目前保留樣板原值——寫進猜出來的 bytes 比留白更糟。要反追出來源才能確定它們在正常遊玩中會不會變。
+  完成條件：來源反追出來，或確認那些位移在正常路徑上恆為樣板值。
+  核實：`internal/chardata/writer.go` 找得到 `來源尚未反追` 就是還沒完
+
+- **koldata-action-messages** — 幾個動作敘述還沒對上 KOLDATA
+  SPEC-010 末段列了哪幾個指令的動作敘述還沒對上 KOLDATA 的記錄。
+  完成條件：那幾個對上，或確認 KOLDATA 裡沒有對應的句子。
+  核實：`internal/battle/commands.go` 找得到 `還沒對上 KOLDATA` 就是還沒完
+
+- **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址
+  那一段的行為還沒對上原版位址，remake 取「重排這一輪」；逃走不接在這裡。
+  完成條件：位址對上，行為確認。
+  核實：`internal/battle/state.go` 找得到 `行為還沒對上位址` 就是還沒完
+
+- **spec-unsolved-sections** — 各規格末尾的未解章節
+  五份規格各自留了一節未解項，內容在產品碼裡多半沒有落點（沒有程式落點就沒有自承可綁），靠這一條追。目前有：`002-ega-extraction-set` 的「尚未關閉的來源」、`004-ogg-audio-catalog` 的「尚未通過的 READY gate」、`008-combat-field` 的「還沒解出來的（不得實作）」（敵人 AI 三張權重表的執行期值、`sub_1B94F`、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關、`sub_2625A` 的語意）、`010-combat-commands` 的「還沒關閉的」、`011-wilderness-ambush` 的「還沒解的」（`sub_2A39B`、`word_2FA2A` 那一條分支）。其中已經各自有條目的四項（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8`、`+0x25` 讀取端）不重複列。
+  完成條件：五份的未解章節各自清空，或剩下的每一項有自己的條目。
+  核實：`docs/spec` 找得到 `^#{2,3} .*(還沒|尚未).*(關閉|解|通過|gate)` 就是還沒完
+
+- **actor-record-2c** — 參戰者記錄 +0x2C 仍未解
+  `SpellEffectField` 的第 5、6 項指到它，但那兩個效果的來源還沒解出來。
+  完成條件：+0x2C 的語意解出，兩個效果接上或確認無作用。
+  核實：`docs/spec/012-combat-spells.md` 找得到 ``\+0x2C` 仍未解` 就是還沒完
+
+- **quest-count-ff-writer** — 兩個計數怎麼變成 0xFF 還沒找到寫入點
+  所以 remake 用自己的 `VerdictFled` 判定。找不到寫入點就無法確認那個判定與原版等價。
+  完成條件：寫入點找出來，或確認 remake 的判定等價。
+  核實：`docs/spec/014-quest-completion.md` 找得到 `還沒找到寫入點` 就是還沒完
+
+- **spec029-wiring-review** — SPEC-029 的接線順序與取圖來源審查
+  怪物遠程初始化的規則已實作並通過原版比較，但顯示取圖來源與「正式建構到第一輪」的接線順序還沒審查完，所以規格仍是 DRAFT。
+  完成條件：審查完成，SPEC-029 升 READY。
+  核實：`docs/spec/029-monster-ranged-initialization.md` 找得到 `仍待審查|接線順序審查` 就是還沒完
 
 
 ### 交付與發行

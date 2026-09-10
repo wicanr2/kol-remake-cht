@@ -67,8 +67,14 @@ def iter_files(root: Path, targets):
 
 
 def find_hit(root: Path, verify: dict):
-    """回 pattern 命中的第一個檔案（相對路徑），沒有就回 None。"""
-    expr = re.compile(verify["pattern"])
+    """回 pattern 命中的第一個檔案（相對路徑），沒有就回 None。
+
+    **`re.MULTILINE` 是必要的**：`scan` 是逐行比對，`^` 在那裡是「行首」；這一支
+    讀的是整個檔案，不加旗標的話同一個 `^` 會變成「檔案開頭」，於是綁章節標題那
+    種 pattern 在 `scan` 認領得到、在這裡卻永遠找不到——**同一個 pattern 兩種語意**，
+    而且兩邊都不會報錯。
+    """
+    expr = re.compile(verify["pattern"], re.MULTILINE)
     for f in iter_files(root, verify["paths"]):
         try:
             text = f.read_text(encoding="utf-8", errors="ignore")
@@ -109,7 +115,7 @@ def still_open(item: dict, root: Path = ROOT):
             if not f.exists():
                 missing.append(f"{target}（不存在）")
                 continue
-            if not re.search(v["pattern"], f.read_text(encoding="utf-8", errors="ignore")):
+            if not re.search(v["pattern"], f.read_text(encoding="utf-8", errors="ignore"), re.MULTILINE):
                 missing.append(target)
         if missing:
             head = "、".join(missing[:3])
@@ -172,7 +178,12 @@ def check_schema(data: dict) -> list:
 
 # 產品碼裡「這件事還沒做」的自承說法。掃出來的每一行都要有人認領：
 # 不是某個條目的 verify 綁著它，就是在 `acknowledged` 裡寫明為什麼它不是待辦。
-ADMISSION = re.compile(r"還沒解|還沒實作|還沒接|還沒做|還沒查|尚未實作|沒有實作|TODO")
+# 這組字要寬。窄的 pattern 掃得再廣也沒有用——2026-09-10 量過一次：只抓
+# 「還沒解／還沒實作／…」時，未認領的來源裡命中 47 行，換成這一組是 242 行，
+# 中間那 195 行不是不存在，是**過濾器有洞**。寬了會抓到不是待辦的句子，
+# 那正是 `acknowledged` 存在的理由：寧可多寫幾條理由，也不要靜靜漏掉。
+ADMISSION = re.compile(
+    r"還沒|尚未|仍待|待驗|待查|待確認|待決定|未完成|未實作|未接|未驗|未解|TODO|FIXME|XXX|HACK")
 
 # 掃描範圍：程式碼（產品碼與工具）與文件。測試檔不掃——它們提到還沒接的東西是
 # 正常的。掃得寬一點沒關係：掃到的每一行不是有條目綁著，就是要在 `acknowledged`
@@ -603,6 +614,18 @@ def cmd_selftest(_args) -> int:
                            "acceptance": "a", "verify": {"kind": "manual", "note": "n"}})
     if "2 條未完成" not in render_stats(probe):
         failures.append("render_stats：加一條之後數字沒有跟著動——那就是寫死的")
+
+    # --- `^` 在 scan（逐行）與 verify（整檔）要是同一個意思 ---------------
+    with tempfile.TemporaryDirectory() as tmp:
+        box = Path(tmp)
+        (box / "docs").mkdir()
+        (box / "docs" / "s.md").write_text("開頭一行\n## 尚未關閉的來源\n內容\n", encoding="utf-8")
+        v = {"kind": "present", "paths": ["docs"], "pattern": "^## .*尚未"}
+        if not find_hit(box, v):
+            failures.append("find_hit：`^` 應該是行首（少了 re.MULTILINE 就只匹配檔案開頭）")
+        item = {"verify": v}
+        if not still_open(item, box)[0]:
+            failures.append("still_open：綁章節標題的 present 應該回仍未完成")
 
     # --- scan：孤兒要被抓到，認領之後要閉嘴 -------------------------------
     with tempfile.TemporaryDirectory() as tmp:
