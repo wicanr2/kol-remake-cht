@@ -242,6 +242,57 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 		}
 		captureBook(t, o, "next-day-start.png")
 
+		// 露營之後方向鍵無效（九十步走動 0 步）。畫面看起來完全正常，所以要問的是
+		// 「按什麼才回得到可移動狀態」。做法與進門那一次相同：每送一個候選鍵，
+		// 就跟一個 `Right` 測方向鍵有沒有生效——**畫面指紋變了才算走出去**。
+		if os.Getenv("KOL_BOOK_PROBE_CAMP") == "1" {
+			probe := []string{"Right", "Space", "Right", "Return", "Right",
+				"Escape", "Right", "Down", "Right", "Up", "Right"}
+			prev := screenDigest(o)
+			polls := len(o.MousePollSteps())
+			t.Logf("露營後起點：指紋 %s，累計輪詢 %d", prev, polls)
+			// 先什麼都不按，只讓它跑。輪詢每步只 +8（城鎮等待時是 +300,000），
+			// 表示遊戲**不在等按鍵**——那形狀和「角色清單還沒畫完」一樣。
+			for r := 0; r < 4; r++ {
+				if err := o.Run(60_000_000); err != nil {
+					t.Fatalf("空跑第 %d 段：%v", r, err)
+				}
+				now := screenDigest(o)
+				np := len(o.MousePollSteps())
+				t.Logf("露營後空跑 %d×60M：指紋 %s（%s）輪詢 +%d IP=%s", r+1, now,
+					map[bool]string{true: "變了", false: "沒變"}[now != prev], np-polls, o.IP())
+				if now != prev {
+					captureBook(t, o, fmt.Sprintf("camp-idle-%d.png", r))
+				}
+				prev, polls = now, np
+			}
+			for i, key := range probe {
+				if err := o.SendKeys(key); err != nil {
+					t.Fatalf("送 %q：%v", key, err)
+				}
+				if err := o.Run(4_000_000); err != nil {
+					t.Fatalf("跑 %q：%v", key, err)
+				}
+				now := screenDigest(o)
+				np := len(o.MousePollSteps())
+				changed := "－"
+				if now != prev {
+					changed = "★ 變了"
+					captureBook(t, o, fmt.Sprintf("camp-%02d-%s.png", i, key))
+				}
+				t.Logf("露營探測 step=%2d key=%-7s %s 指紋 %s 輪詢 +%d IP=%s",
+					i, key, changed, now, np-polls, o.IP())
+				prev, polls = now, np
+			}
+			// 畫面不動、按鍵無效、輪詢極低、IP 在五個位元組間打轉——那是**死迴圈**
+			// 的形狀，不是「在等玩家」。所以問 dosgolem：原版有沒有要到它沒給的東西。
+			t.Logf("露營後未實作呼叫：%v", o.Unimplemented())
+			t.Logf("露營後缺檔：%v", o.Missing())
+			t.Logf("露營後已開檔尾段：%v", tailOf(o.Opened(), 6))
+			t.Log("露營探測結束；只是觀察，不宣稱哪一個鍵是正確的解鎖方式")
+			return
+		}
+
 		// 掃 seed：在同一次執行裡試很多顆，不要一顆跑一次整條路徑。
 		//
 		// `seed=1` 是**為了避免遭遇**挑的（SPEC-011：野外那兩條收據「選一顆不會在
@@ -637,4 +688,12 @@ func (w *walker) step(t *testing.T, o *oracle.Oracle) bool {
 		w.at = (w.at + 1) % len(w.dirs)
 	}
 	return moved
+}
+
+// tailOf 回切片的最後 n 個元素，用來看「最近開了哪幾個檔」。
+func tailOf(xs []string, n int) []string {
+	if len(xs) <= n {
+		return xs
+	}
+	return xs[len(xs)-n:]
 }
