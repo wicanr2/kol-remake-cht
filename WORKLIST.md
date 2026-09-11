@@ -103,21 +103,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：術語表是唯一來源，遊戲字串引用它；每個 CJK 欄位有 overflow policy。
   核實：要人判——檢查器管的是「會不會超出矩形」，不管「超出了要怎麼辦」。policy 寫進資料時改成 json_len 綁它。
 
-- **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）
-  流程已解完（RE-125：選背包一格、比 `+0x0F` 的 bit5、按那件東西自己的標價收錢、打字取名、寫回角色），但入口條件對不上原版資料——商品表裡唯一的 Copper Ingot 那一位是零，有那一位的六筆全是布褲與皮頭套。先不實作。
-  卡在：「`+0x0F` 的 bit5 是什麼」還沒有證據
-  完成條件：bit5 的語意有證據，入口條件對得上原版資料，鍛造接上並對拍。
-  核實：`internal/town/shop.go` 找得到 `鍛造（bit3）還沒實作|bit3 是鍛造（還沒實作）` 就是還沒完
-
 - **save-across-battle-and-clock** — 存檔跨事件與戰鬥階段恢復：戰鬥中途狀態與世界時間
   任務旗標、已回報數與身上帶的東西已進存檔，並由 `full-chain` ＋ `full-chain-reload` 驗過往返。戰鬥中途的狀態與世界時間還沒進存檔——存檔格式裡連日期欄位都還沒有。
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
-
-- **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散
-  原版的離開是回旅店把隊伍解散。remake 目前只有 Ctrl+Q 這條退路。
-  完成條件：正常玩家路徑走得到解散離開，並有收據。
-  核實：`cmd/kol/main.go` 找得到 `那條還沒接完` 就是還沒完
 
 - **enemy-move-direction-unhooked** — 敵人移動段的方向規則：解出來了但還沒接上
   RE-117 已解：方向要先試往目標那一步、再試左右各一格，沒有目標時從隨機方向起繞八格，八格都站不下另有三條退路。**沒接的理由寫在程式裡**——接上去會改變戰況，`arena` 與 `full-chain-ending` 那兩條長路徑的固定按鍵序列得整條重生（各有兩到三場戰鬥，中間還夾著城鎮互動），所以留待專門的一輪。
@@ -422,7 +411,9 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 本輪核實為已完成（原本掛在未完成清單上）
 
+- **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
+- **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。

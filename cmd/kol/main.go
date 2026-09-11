@@ -1711,8 +1711,11 @@ func (g *game) updateInteractive() error {
 	if g.flow == nil {
 		return ebiten.Termination
 	}
-	// 沒有離開流程可走的時候要有一條退路：Ctrl+Q。原版的離開是在旅店把人解散，
-	// 那條還沒接完。
+	// Ctrl+Q 是**額外**的退路，不是唯一的。原版的離開是在旅店住宿——住宿即存檔
+	// 即離隊，隊伍空了問記錄 0x36「Do you wish to quit?」，答 YES 交棒回書本
+	// （RE-073）；remake 那一條接的是回目錄頁，收據見
+	// `internal/flow` 的 `TestInnDisbandReturnsToContents`。
+	// 留著 Ctrl+Q 是因為人不一定停在旅店裡，而視窗總得關得掉。
 	if (ebiten.IsKeyPressed(ebiten.KeyControlLeft) ||
 		ebiten.IsKeyPressed(ebiten.KeyControlRight)) &&
 		inpututil.IsKeyJustPressed(ebiten.KeyQ) {

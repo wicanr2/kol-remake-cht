@@ -596,7 +596,13 @@ func (s *Session) priceLines(intro, price int) []string {
 }
 
 // 甲冑調整（RE-075）。TRAIN 圖示由旗標 byte 1 的 bit1 與 bit3 給：
-// bit1 是把身上的甲冑改到合身，bit3 是鍛造（還沒實作）。
+// bit1 是把身上的甲冑改到合身，bit3 是鍛造。
+//
+// **鍛造刻意不做**（RE-134）：入口判準是物品記錄 +0x0F 的 bit5，而三個母體逐筆
+// 掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）那一位是零，有那一位的
+// 全是 Cloth Pants 與 Leather Hood——**原版玩家走不到這一條**。說明書寫的是設計
+// 意圖，資料沒跟上。照抄流程容易，但做出來是一條走不到的路，而入口條件錯了會讓
+// 錯的東西變成武器。
 
 // 甲冑調整用得到的記錄。
 const (
@@ -625,7 +631,7 @@ func (s *Session) StartTrain() {
 		s.startAdjust()
 		return
 	}
-	// 鍛造（bit3）還沒實作。
+	// 鍛造那一條原版走不到（見上面），只記一筆。
 	s.note(iconName(IconTrain))
 }
 

@@ -576,18 +576,21 @@
     {
       "id": "train-forge-entry-condition",
       "layer": "gap",
-      "title": "TRAIN 的鍛造（旗標 byte 1 的 bit3）",
+      "title": "TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做",
       "body": "流程已解完（RE-125：選背包一格、比 `+0x0F` 的 bit5、按那件東西自己的標價收錢、打字取名、寫回角色），但入口條件對不上原版資料——商品表裡唯一的 Copper Ingot 那一位是零，有那一位的六筆全是布褲與皮頭套。先不實作。",
       "blocked_by": "「`+0x0F` 的 bit5 是什麼」還沒有證據",
       "acceptance": "bit5 的語意有證據，入口條件對得上原版資料，鍛造接上並對拍。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
+          "docs/re/RESEARCH-LOG.md",
           "internal/town/shop.go"
         ],
-        "pattern": "鍛造（bit3）還沒實作|bit3 是鍛造（還沒實作）",
-        "note": "shop.go 的兩處自承（旗標說明與實作分支），接上時會一起消失。"
-      }
+        "pattern": "鍛造",
+        "note": "已決定不做，當回歸訊號：RE-134 的結論與 shop.go 的分岔都要在。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。"
     },
     {
       "id": "save-across-battle-and-clock",
@@ -657,13 +660,16 @@
       "body": "原版的離開是回旅店把隊伍解散。remake 目前只有 Ctrl+Q 這條退路。",
       "acceptance": "正常玩家路徑走得到解散離開，並有收據。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "cmd/kol/main.go"
+          "internal/flow/flow.go",
+          "internal/flow/flow_test.go"
         ],
-        "pattern": "那條還沒接完",
-        "note": "main.go 的退路註解，接上時會改寫。"
-      }
+        "pattern": "ConsumeQuit|InnDisband",
+        "note": "已完成，當回歸訊號：銜接與測試都要在。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A(\"kolbook.exe\", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。"
     },
     {
       "id": "attack-message-chain-index",

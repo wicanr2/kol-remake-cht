@@ -2,6 +2,8 @@ package flow
 
 import (
 	"image"
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
@@ -135,4 +137,77 @@ func TestSelectNeedsCharacters(t *testing.T) {
 	if f.Scene != SceneContents {
 		t.Fatalf("應該留在目錄頁，取到 %s", f.Scene)
 	}
+}
+
+// 正式的離開遊戲：住宿存檔會把角色移出隊伍（原版「住宿即存檔即離隊」，
+// RE-073 的 `sub_14DB1:0x15287`），隊伍空了問記錄 0x36「Do you wish to quit?」，
+// 答 YES 之後原版 `sub_2DB2A("kolbook.exe", 0)` 交棒回書本程式——這一側是回目錄頁。
+//
+// town 那一層已經測到「答 YES 會記下要離開」（`TestInnStayQuitsWhenPartyEmpties`），
+// 這一支補的是 flow 收到之後的銜接。
+func TestInnDisbandReturnsToContents(t *testing.T) {
+	f := testFlow(t)
+	f.Scene = SceneTown
+	f.Town.FaithfulInnStay = true
+	f.Town.SaveGame = func() error { return nil }
+	f.Town.Party = []town.Member{{Name: "Theodoric", Gold: 1009, Speaker: true}}
+	f.Town.UIText = restUIText(t)
+	// testFlow 的那扇門是半途之家；旗標要是客棧（byte 0 的 bit3）才有 REST。
+	f.Town.Buildings.Doors[0].IconFlags = [2]int{0x09, 0x00}
+	f.Town.Buildings.Doors[0].Price = 56
+	f.Town.Walk(-1, 0)
+	f.Town.Walk(1, 0)
+	f.Town.Accept()   // 進門
+	f.Town.Continue() // 讀完敘述，圖示列展開
+	f.Town.Inside.Party = f.Town.Party
+	f.Town.StartRest()
+	if !f.Town.Resting() {
+		t.Fatal("客棧按 REST 應該進住宿流程")
+	}
+	// 價錢 → 硬碟問句 → 存檔離隊 →「要離開嗎」。前兩問都在 town 那一層，
+	// 這裡照樣走一遍才到得了銜接點。
+	for i := 0; i < 2; i++ {
+		f.Town.Inside.Selected = 0
+		f.Town.Accept()
+	}
+	if len(f.Town.Party) != 0 {
+		t.Fatalf("住完應該離隊，隊伍還有 %d 人", len(f.Town.Party))
+	}
+	if f.Town.Inside.Dialog[0] != "Do you wish to quit?" {
+		t.Fatalf("隊伍空了應該問是否離開，畫的是 %q", f.Town.Inside.Dialog[0])
+	}
+	// 最後那一下走 flow.Key，銜接才算數。
+	f.Town.Inside.Selected = 0
+	f.Key("RET")
+	if f.Scene != SceneContents {
+		t.Fatalf("答 YES 應該交棒回書本目錄，停在 %s", f.Scene)
+	}
+	// 反面對照：quit 只能取走一次，不該讓之後每一下按鍵都往目錄頁跳。
+	f.Scene = SceneTown
+	f.Key("RET")
+	if f.Scene == SceneContents {
+		t.Fatal("quit 已經取走過，第二次不該再轉場")
+	}
+}
+
+// restUIText 是住宿那一段用得到的最小文字庫。`uiBank`／`uiRecord` 沒有匯出，
+// 所以走 `LoadUIText` 從一份暫存 JSON 進來，記錄號與 town 那一側的常數相同。
+func restUIText(t *testing.T) *town.UIText {
+	t.Helper()
+	const body = `{"schema":"kol-ui-text-data-v1","banks":[{"bank":"KOLDATA","records":[
+		{"index":45,"text":"\"What can I do for you?\""},
+		{"index":54,"text":"Do you wish to quit?"},
+		{"index":55,"text":"\"If you want to stay@"},
+		{"index":83,"text":"~H0Dit will cost you]"},
+		{"index":84,"text":"@~H0Dgold, interested?\"@"},
+		{"index":393,"text":"Save character to hard@disk?"}]}]}`
+	path := filepath.Join(t.TempDir(), "ui-text.json")
+	if err := os.WriteFile(path, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	text, err := town.LoadUIText(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return text
 }
