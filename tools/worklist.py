@@ -519,6 +519,67 @@ def cmd_render(args) -> int:
     return 0
 
 
+# 正常玩家路徑的段落，取自 AGENTS.md 的完成定義：
+# 啟動 → 建立隊伍 → 城鎮／世界探索 → 戰鬥規劃與結算 → 任務 → 存檔 → 離開 → 重載 → 結局。
+# 每一段列出「哪幾份收據蓋到它」；收據在 docs/verification/player-path/。
+PLAYER_CHAIN = [
+    ("啟動", ["full", "full-chain"]),
+    ("建立隊伍", ["full-chain", "town-recruit"]),
+    ("城鎮探索", ["town", "town-talk", "town-shop", "town-train", "town-scroll",
+                  "town-stable", "town-mirror", "town-edge"]),
+    ("世界探索", ["town-leave", "town-round-trip", "world-road", "world-clock",
+                  "world-healer"]),
+    ("戰鬥規劃與結算", ["full-chain-ending", "arena"]),
+    ("任務", ["quest-take", "quest-list", "world-quest", "flow-quest"]),
+    ("存檔", ["town-rest", "full-chain"]),
+    ("離開與重載", ["town-load", "full-chain-reload"]),
+    ("結局", ["full-chain-ending"]),
+]
+
+
+def cmd_status(_args) -> int:
+    """盤點：分層未完成數、正常玩家路徑的收據涵蓋、階段 gate 有沒有登記。
+
+    **不輸出百分比。** 完成度要有百分比，得先登記「可啟動／可玩／近似完成／
+    嚴格 parity」四個階段各自的 gate（AGENTS.md 的要求）；那份登記還沒做，
+    未完成項 `parity-sampling-registry` 就是它。沒有 gate 而報一個數字，
+    等於做到一半才挑一個過得了的標準。
+    """
+    data = load()
+    items = data["items"]
+    todo = [i for i in items if i.get("status") != "done"]
+    done = [i for i in items if i.get("status") == "done"]
+
+    print(f"未完成 {len(todo)} 條，已核實完成 {len(done)} 條\n")
+    print("分層")
+    for key, desc in data["layers"].items():
+        n = sum(1 for i in todo if i["layer"] == key)
+        print(f"  {key:<14}{n:>3}   {desc}")
+
+    plans = {p.stem for p in (ROOT / "docs/verification/player-path").glob("*.json")
+             if not p.stem.endswith("-receipt")}
+    print("\n正常玩家路徑（收據在 docs/verification/player-path/）")
+    missing_any = False
+    for stage, names in PLAYER_CHAIN:
+        have = [n for n in names if n in plans]
+        lack = [n for n in names if n not in plans]
+        if lack:
+            missing_any = True
+        mark = "有" if have else "缺"
+        print(f"  {stage:<16}{mark}  {'、'.join(have) if have else '沒有任何一份收據'}"
+              + (f"（清單裡少了 {'、'.join(lack)}）" if lack else ""))
+
+    gates = ROOT / "docs/gates.json"
+    print("\n階段 gate")
+    if gates.exists():
+        print(f"  已登記：{gates}")
+    else:
+        print("  **沒有登記**。四個階段（可啟動／可玩／近似完成／嚴格 parity）各自的")
+        print("  通過條件還沒定，所以這一支不報完成百分比——見未完成項")
+        print("  `parity-sampling-registry`。")
+    return 1 if missing_any else 0
+
+
 def cmd_selftest(_args) -> int:
     """正反對照：只驗「它印出仍未完成」證明不了機制有在看。
 
@@ -719,6 +780,7 @@ def main() -> int:
     r.set_defaults(func=cmd_render)
     sub.add_parser("scan", help="掃產品碼的自承，列出沒有條目認領的").set_defaults(func=cmd_scan)
     sub.add_parser("selftest", help="機制的正反對照").set_defaults(func=cmd_selftest)
+    sub.add_parser("status", help="盤點：分層、玩家路徑涵蓋、階段 gate").set_defaults(func=cmd_status)
     args = ap.parse_args()
     return args.func(args)
 
