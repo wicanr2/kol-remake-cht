@@ -18,7 +18,14 @@ type BattleBody struct {
 	valid  bool
 }
 
+// Draw 以原版解析度畫。
 func (b *BattleBody) Draw(dst *ebiten.Image, sprites Sprites, s *battle.State) error {
+	return b.DrawScaled(dst, sprites, s, 1)
+}
+
+// DrawScaled 是同一塊人形，位置與尺寸乘上倍率。中文模式的畫布是原版的
+// `book.CJKScale` 倍，人形本身是圖不是字，所以只要等比放大。
+func (b *BattleBody) DrawScaled(dst *ebiten.Image, sprites Sprites, s *battle.State, scale int) error {
 	data, show := s.BodyPanel()
 	if !show {
 		return nil
@@ -54,10 +61,14 @@ func (b *BattleBody) Draw(dst *ebiten.Image, sprites Sprites, s *battle.State) e
 		b.image.WritePixels(b.pixels)
 		b.key, b.valid = data, true
 	}
-	draw(dst, b.image, bodyX, bodyY)
+	if scale == 1 {
+		draw(dst, b.image, bodyX, bodyY)
+	} else {
+		drawScaled(dst, b.image, bodyX*scale, bodyY*scale, scale)
+	}
 	// 原版兩個矩形包含端點；後畫的藍色蓋住共同分界列。
-	fill(dst, 132, 84, 7, boundary-84+1, [3]uint8{255, 85, 85})
-	fill(dst, 132, boundary, 7, 157-boundary, [3]uint8{0, 0, 170})
+	fill(dst, 132*scale, 84*scale, 7*scale, (boundary-84+1)*scale, [3]uint8{255, 85, 85})
+	fill(dst, 132*scale, boundary*scale, 7*scale, (157-boundary)*scale, [3]uint8{0, 0, 170})
 	return nil
 }
 

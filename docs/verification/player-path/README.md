@@ -20,6 +20,16 @@ python3 tools/verify_full_path.py   --plan docs/verification/player-path/full-ch
 plan 因此要帶齊重跑所需的每一個旗標——`full-chain-ending` 的 `-quest-sites`
 一度只寫在散文裡，改了戰鬥數值之後重跑打的是原版那十二隻 CYCLOPS，怎麼跑都跑不完。
 
+> ⚠ **2026-09-11：從標題走起的那幾條收據過期了。** `e118596` 把選角之後的
+> `SceneInn` 改成 `SceneTown`（開場旅店接進正式 `town.Session`），畫面節奏因此變了
+> 而按鍵沒有重生——`flow-quest` 的 109 步在英文模式重跑之後停在城鎮戶外，收據裡
+> 那一步是遭遇畫面，trace 的第一個分歧就在第 17 步。受影響的是 `full`、
+> `full-chain`、`full-chain-reload`、`full-chain-ending`、`flow-quest`、`arena`。
+>
+> 底下那兩支驗證**不重跑**，比的是收據目錄裡那幾張圖與軌跡自不自洽，所以程式改了
+> 它們照樣通過。要抓這種回歸得重跑再比，而 `replay_player_path.py` 會寫回這個目錄，
+> 不能當檢查用。見未完成項 `player-path-receipts-stale` 與 `path-verify-does-not-replay`。
+
 **改了戰鬥數值之後戰鬥那一段的按鍵就作廢了**（打幾個回合、每一手的訊息都不同）。
 `tools/drive_battle_script.py` 用來重生它：跑一次腳本 → 讀軌跡的最後一筆 →
 依規劃段停在哪一層決定下一批 token → 再跑，產出的仍是一串固定按鍵。走路與城裡

@@ -11,6 +11,20 @@ import (
 func (g *game) renderBattle() error {
 	dst := g.canvas.Image()
 	w, h := dst.Bounds().Dx(), dst.Bounds().Dy()
+	// 中文模式的戰場那一頁自己畫在放大後的畫布上，文字才會是中文字模；其餘幾頁
+	// （遭遇、戰利品、法術清單）還沒有中文版面，仍走「原版解析度畫完再整張放大」
+	// 那一條，字是原版字模放大的。
+	if g.strings != nil && g.quest != nil && g.quest.state != nil {
+		s := g.quest.state
+		switch {
+		case s.Stage == battle.StageEncounter:
+			return ui.BattleEncounterCJK(dst, g.sprites, g.cjk, s, g.quest.lines)
+		case s.Stage != battle.StageSpoils &&
+			s.Plan.Prompt != battle.PromptSpell && s.Plan.Prompt != battle.PromptAffect:
+			return ui.BattleFieldCJK(dst, g.sprites, g.quest.tiles, g.cjk, g.strings,
+				s, &g.battleBody)
+		}
+	}
 	if w != 320 || h != 200 {
 		if g.battleCanvas == nil {
 			g.battleCanvas = ebiten.NewImage(320, 200)

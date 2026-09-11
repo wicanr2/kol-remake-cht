@@ -1251,6 +1251,51 @@
         "kind": "manual",
         "note": "沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。"
       }
+    },
+    {
+      "id": "player-path-receipts-stale",
+      "layer": "verification",
+      "title": "從標題走起的長路徑收據過期了",
+      "body": "`e118596` 把選角之後的 `SceneInn` 改成 `SceneTown`（開場旅店依 SPEC-016 接入正式 town.Session），畫面的節奏因此變了，而那幾條從標題走起的按鍵序列沒有重生。2026-09-11 量到：`flow-quest` 的 109 步在**英文模式重跑**之後停在城鎮戶外，收據裡那一步是遭遇畫面；trace 的第一個分歧就在第 17 步（收據 `flow:inn`、重跑 `flow:town`）。中文模式與英文重跑**全程相同**，所以不是中文的問題。受影響的是所有從標題起跑的 plan：full、full-chain、full-chain-reload、full-chain-ending、flow-quest、arena。\\n\\n`verify_full_path.py` 抓不到——它驗的是收據目錄裡的截圖與軌跡自不自洽，不重跑，所以程式變了它照樣通過。",
+      "acceptance": "受影響的 plan 重生按鍵與收據並通過；或說明為何某一條刻意保留舊版。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/verification/player-path/README.md"
+        ],
+        "pattern": "收據過期",
+        "note": "README 的自承，重生完會改寫。"
+      }
+    },
+    {
+      "id": "path-verify-does-not-replay",
+      "layer": "verification",
+      "title": "路徑驗證只看收據自洽，不重跑",
+      "body": "`verify_full_path.py` 比的是 plan、軌跡與收據目錄裡那幾張截圖，全部來自同一次產生，所以程式改了它照樣通過——2026-09-11 的 `flow-quest` 就是這樣：驗證 failures 為空，而英文模式重跑停在完全不同的畫面。`replay_player_path.py` 會重跑，但它寫回 `docs/verification/`，不能拿來當檢查。",
+      "acceptance": "有一條能在不覆寫收據的前提下重跑並比對的路徑，或說明為何不做。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/verification/player-path/README.md"
+        ],
+        "pattern": "不重跑",
+        "note": "README 的自承。"
+      }
+    },
+    {
+      "id": "cjk-battle-remaining-pages",
+      "layer": "gap",
+      "title": "戰鬥的戰利品與法術清單兩頁還沒中文版面",
+      "body": "戰場那一頁與遭遇那一頁已經做了（2026-09-11）：同一份版面乘上 `book.CJKScale`，三倍之後訊息區的行高 6 變成 18 剛好是字模格高，四行都放得下。戰利品與法術清單兩頁仍走「原版解析度畫完再整張放大」，字是原版字模放大的。",
+      "acceptance": "兩頁的中文版面畫出來並有截圖。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/battle_render.go"
+        ],
+        "pattern": "還沒有中文版面",
+        "note": "battle_render.go 的自承，補完時會改寫。"
+      }
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

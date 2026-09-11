@@ -25,9 +25,8 @@ func (p *BattleSheet) Draw(dst *ebiten.Image, sprites Sprites, f *font.Font, s *
 		text(24, 7, d.Name)
 	}
 	if d.Equipment {
-		labels := [6]string{"W:", "H:", "T:", "L:", "S:", "B:"}
 		for i := 0; i < d.Count; i++ {
-			text(24, 24+6*i, labels[i])
+			text(24, 24+6*i, battle.EquipmentLabels[i])
 			text(40, 24+6*i, d.Rows[i])
 		}
 		if d.AmmunitionLabel != "" {

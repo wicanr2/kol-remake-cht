@@ -7,6 +7,10 @@ func (s *State) ToggleEquipmentPanel() {
 	}
 }
 
+// EquipmentLabels 是裝備欄那六列的標籤（原版是 `W: H: T: L: S: B:`，依序是
+// 武器、頭、軀幹、腿、盾、身體）。中文模式拿它去查譯文。
+var EquipmentLabels = [6]string{"W:", "H:", "T:", "L:", "S:", "B:"}
+
 type EquipmentPanelData struct {
 	Name               string
 	Monster, Equipment bool

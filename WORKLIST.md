@@ -123,6 +123,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：法術、任務兩頁與坐騎的中文版面畫出來並有截圖。
   核實：`docs/spec/030-cjk-character-sheet.md` 找得到 `不在這一版` 就是還沒完
 
+- **cjk-battle-remaining-pages** — 戰鬥的戰利品與法術清單兩頁還沒中文版面
+  戰場那一頁與遭遇那一頁已經做了（2026-09-11）：同一份版面乘上 `book.CJKScale`，三倍之後訊息區的行高 6 變成 18 剛好是字模格高，四行都放得下。戰利品與法術清單兩頁仍走「原版解析度畫完再整張放大」，字是原版字模放大的。
+  完成條件：兩頁的中文版面畫出來並有截圖。
+  核實：`cmd/kol/battle_render.go` 找得到 `還沒有中文版面` 就是還沒完
+
 
 ### 接了但沒驗過
 
@@ -210,6 +215,16 @@ tools/run_python_tool.sh tools/worklist.py verify
   跑一次 tools/run_kol_shots.sh 之後，沒有被改動影響的英文截圖也會出現位元差異（尺寸與內容相同）。MANIFEST 的判準之一是「有對應對拍收據的畫面必須與那張逐 byte 相同」，所以那些圖重生之後會被判 failed，得手動還原。來源還沒查——可能是 PNG 編碼、Ebitengine 的算繪，或 llvmpipe。
   完成條件：查明來源並讓重生是決定性的，或說明為何無法並改判準。
   核實：要人判——沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。
+
+- **player-path-receipts-stale** — 從標題走起的長路徑收據過期了
+  `e118596` 把選角之後的 `SceneInn` 改成 `SceneTown`（開場旅店依 SPEC-016 接入正式 town.Session），畫面的節奏因此變了，而那幾條從標題走起的按鍵序列沒有重生。2026-09-11 量到：`flow-quest` 的 109 步在**英文模式重跑**之後停在城鎮戶外，收據裡那一步是遭遇畫面；trace 的第一個分歧就在第 17 步（收據 `flow:inn`、重跑 `flow:town`）。中文模式與英文重跑**全程相同**，所以不是中文的問題。受影響的是所有從標題起跑的 plan：full、full-chain、full-chain-reload、full-chain-ending、flow-quest、arena。\n\n`verify_full_path.py` 抓不到——它驗的是收據目錄裡的截圖與軌跡自不自洽，不重跑，所以程式變了它照樣通過。
+  完成條件：受影響的 plan 重生按鍵與收據並通過；或說明為何某一條刻意保留舊版。
+  核實：`docs/verification/player-path/README.md` 找得到 `收據過期` 就是還沒完
+
+- **path-verify-does-not-replay** — 路徑驗證只看收據自洽，不重跑
+  `verify_full_path.py` 比的是 plan、軌跡與收據目錄裡那幾張截圖，全部來自同一次產生，所以程式改了它照樣通過——2026-09-11 的 `flow-quest` 就是這樣：驗證 failures 為空，而英文模式重跑停在完全不同的畫面。`replay_player_path.py` 會重跑，但它寫回 `docs/verification/`，不能拿來當檢查。
+  完成條件：有一條能在不覆寫收據的前提下重跑並比對的路徑，或說明為何不做。
+  核實：`docs/verification/player-path/README.md` 找得到 `不重跑` 就是還沒完
 
 
 ### 素材抽取與音訊
