@@ -146,7 +146,7 @@ func drawPartyMarker(dst *ebiten.Image, out *town.Outdoor) {
 }
 
 // OutdoorCJK 畫出中文模式的戶外畫面。版面是 remake 自訂的（`town.CJKOutdoor`），
-// 素材以最近鄰放大兩倍，日期改用中文字模。這個模式不對拍。
+// 素材以最近鄰放大三倍，日期改用中文字模。這個模式不對拍。
 func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	out *town.Outdoor) error {
 	l := town.CJKOutdoor
@@ -236,7 +236,7 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	return drawOutdoorIconsCJK(dst, sprites, out)
 }
 
-// drawOutdoorIconsCJK 是中文模式的圖示列，內容與英文模式相同，只是放大兩倍。
+// drawOutdoorIconsCJK 是中文模式的圖示列，內容與英文模式相同，只是放大三倍。
 func drawOutdoorIconsCJK(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) error {
 	l := town.CJKOutdoor
 	icons, selected := out.IconRow()

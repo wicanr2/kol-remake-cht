@@ -59,7 +59,7 @@ PARITY_TWINS = {
          "docs/verification/remake-parity/harbor.json"),
 }
 
-EXPECTED_SIZE = {"en": (320, 200), "zh": (640, 400)}
+EXPECTED_SIZE = {"en": (320, 200), "zh": (960, 600)}
 
 
 def sha256(path: pathlib.Path) -> str:
@@ -142,7 +142,7 @@ def main() -> int:
         "runner": "tools/run_kol_shots.sh",
         "producer": {
             "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
-            "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／640×400 離屏畫布",
+            "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／960×600 離屏畫布",
             "commit": commit,
         },
         "inputs": {

@@ -135,21 +135,21 @@ var CJKInn = struct {
 	IconX, IconY, IconStep, IconW, IconH  int
 	Scale                                 int
 }{
-	PartyX: 28, PartyY: 2, PartyStep: 96, PartyWidth: 86,
-	PortraitBoxHeight: 80, PlateHeight: 18,
-	PortraitX: 32, PortraitY: 4, NameX: 32, NameY: 84,
-	PicX: 16, PicY: 128,
-	TitleX: 204, TitleY: 116, TitleW: 390, TitleH: 40,
-	TitleTextY: 117, TitleStep: 19,
-	DialogX: 204, DialogY: 168, DialogW: 390, DialogH: 136,
-	DialogTextX: 210, DialogTextY: 172, DialogStep: 22,
-	DialogCells: 12,
-	IconX:       64, IconY: 340, IconStep: 64, IconW: 48, IconH: 44,
-	Scale: 2,
+	PartyX: 42, PartyY: 3, PartyStep: 144, PartyWidth: 129,
+	PortraitBoxHeight: 120, PlateHeight: 27,
+	PortraitX: 48, PortraitY: 6, NameX: 48, NameY: 126,
+	PicX: 24, PicY: 192,
+	TitleX: 306, TitleY: 174, TitleW: 585, TitleH: 60,
+	TitleTextY: 175, TitleStep: 24,
+	DialogX: 306, DialogY: 252, DialogW: 585, DialogH: 204,
+	DialogTextX: 315, DialogTextY: 258, DialogStep: 24,
+	DialogCells: 24,
+	IconX:       96, IconY: 510, IconStep: 96, IconW: 72, IconH: 66,
+	Scale: 3,
 }
 
 // CJKOutdoor 是戶外畫面的中文模式版面，與 CJKInn 一樣是 remake 自訂的，不對拍：
-// 位置大致是英文版面的兩倍，日期框改放兩行 16 px 中文字因此加高。
+// 位置是英文版面的三倍（`book.CJKScale`），行距照原版等比推得。
 var CJKOutdoor = struct {
 	PartyX, PartyY, PartyStep, PartyWidth int
 	PortraitBoxHeight, PlateHeight        int
@@ -162,20 +162,28 @@ var CJKOutdoor = struct {
 	IconX, IconY, IconStep, IconW, IconH  int
 	Scale                                 int
 }{
-	PartyX: 28, PartyY: 2, PartyStep: 96, PartyWidth: 86,
-	PortraitBoxHeight: 80, PlateHeight: 18,
-	PortraitX: 32, PortraitY: 4, NameX: 32, NameY: 84,
-	DateX: 28, DateY: 114, DateW: 134, DateH: 44,
-	DateTextX: 34, DateTextY: 118, DateStep: 20,
-	CrestX: 48, CrestY: 170,
-	MapX: 206, MapY: 114, MapW: 388, MapH: 196,
-	ViewX: 208, ViewY: 116, Tile: 32,
-	IconX: 64, IconY: 340, IconStep: 64, IconW: 48, IconH: 44,
-	Scale: 2,
+	PartyX: 42, PartyY: 3, PartyStep: 144, PartyWidth: 129,
+	PortraitBoxHeight: 120, PlateHeight: 27,
+	PortraitX: 48, PortraitY: 6, NameX: 48, NameY: 126,
+	DateX: 42, DateY: 171, DateW: 201, DateH: 66,
+	DateTextX: 51, DateTextY: 177, DateStep: 24,
+	CrestX: 72, CrestY: 255,
+	MapX: 309, MapY: 171, MapW: 582, MapH: 294,
+	ViewX: 312, ViewY: 174, Tile: 48,
+	IconX: 96, IconY: 510, IconStep: 96, IconW: 72, IconH: 66,
+	Scale: 3,
 }
 
 // SheetStatFirstRow 是八個屬性的第一列；每一列往下 8 px，
 // 與 KOLDATA 記錄 73h 的 ~V 座標相同。
+// CellWidth 是原版一個字格的寬度。英文字模就是這個寬；中文模式把座標乘上
+// `book.CJKScale` 之後，一格變成 24 px 而中文字寬 16，字在格子裡靠左。
+const CellWidth = 8
+
+// SheetWeaponHeaderRow 是武器框那一列表頭（`WEAPON SKILL  OFF  DEF`）的列號，
+// 取自記錄 0x73 的 `~V36`。
+const SheetWeaponHeaderRow = 0x36
+
 const SheetStatFirstRow = 58
 
 // Rect 是含端點的矩形，與原版繪圖 helper 的引數同一種寫法。
@@ -236,62 +244,6 @@ var SheetLayout = struct {
 
 	// 長條一格 8 px，紅色比青色底上下各縮 1 px、左緣同樣從 39 起。
 	BarCell: 8, BarInset: 1,
-}
-
-// CJKSheet 是中文模式的角色資料頁版面（SPEC-030）。**不是 SheetLayout 等比放大**
-// ——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每一個框都差一點，
-// 所以垂直重排過。水平不用：CJK 字模格寬 16 正好是原版 8 的兩倍，ASCII 在這份
-// 字模表裡也是全形，欄號可以照搬。
-//
-// 這一頁不對拍，原版沒有中文畫面。
-var CJKSheet = struct {
-	Header, Stats, Weapons, Gold, Bars Rect
-	DamageBar, NutritionBar            Rect
-	// 抬頭併成四列（SPEC-030）：名字／性別·種族·職業／位階／身高·體重。
-	NameRow, IdentityRow, RankRow, BodyRow int
-	// 抬頭那三欄的起點，用來把性別·種族·職業與身高·體重分開。
-	HeaderCols [3]int
-	LineStep   int
-	// 屬性：標籤靠左、值靠右。
-	StatFirstRow, StatLabelCol, StatValueCol int
-	// 武器：表頭在 HeaderRow，橫線在 RuleRow，資料列從 WeaponFirstRow 起。
-	HeaderRow, RuleRow, WeaponFirstRow           int
-	WeaponNameCol, WeaponOffCol, WeaponDefCol    int
-	WeaponRows                                   int
-	GoldRow, AdventureRow, MovementRow, EquipRow int
-	LabelCol, ValueCol                           int
-	OrderCol, TitleCol                           int
-	// 兩條長條的標籤放在**同一列的左側**，不另佔一列——圖示列從 y=340 起，
-	// 垂直預算只到 338，標籤各佔一列就放不下了。
-	BarLabelCol, BarRows [2]int
-	BarCell, BarInset    int
-}{
-	Header:  Rect{140, 8, 498, 94},
-	Stats:   Rect{28, 102, 242, 266},
-	Weapons: Rect{252, 102, 610, 210},
-	Gold:    Rect{252, 214, 610, 295},
-	Bars:    Rect{76, 299, 576, 337},
-	// 條從標籤右緣起，高度小於字高——這一列還要擺標籤。
-	DamageBar:    Rect{236, 305, 570, 317},
-	NutritionBar: Rect{236, 324, 570, 336},
-
-	NameRow: 12, IdentityRow: 31, RankRow: 50, BodyRow: 69,
-	HeaderCols: [3]int{9, 16, 24},
-	LineStep:   19,
-
-	StatFirstRow: 106, StatLabelCol: 2, StatValueCol: 12,
-
-	HeaderRow: 106, RuleRow: 126, WeaponFirstRow: 130,
-	WeaponNameCol: 16, WeaponOffCol: 30, WeaponDefCol: 35,
-	WeaponRows: 4,
-
-	GoldRow: 218, AdventureRow: 237, MovementRow: 256, EquipRow: 275,
-	LabelCol: 16, ValueCol: 29,
-	OrderCol: 16, TitleCol: 38,
-
-	BarLabelCol: [2]int{5, 5}, BarRows: [2]int{303, 322},
-	// 長條一格的寬度照畫布放大一倍；紅色上下各縮 2 px。
-	BarCell: 16, BarInset: 2,
 }
 
 // 角色資料頁的顏色：抬頭框是白的，其餘的框與長條底是青色，長條本身是亮紅。

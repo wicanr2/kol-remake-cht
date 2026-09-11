@@ -17,7 +17,7 @@ import "image"
 // Target 是畫面上一個可以點的區域。點中就送出 Tokens——那是既有的鍵盤 token，
 // 所以呼叫端不必為滑鼠準備第二套狀態轉移。
 //
-// Rect 用的是畫布座標（英文模式 320×200、中文模式 640×400）。Ebitengine 的
+// Rect 用的是畫布座標（英文模式 320×200、中文模式 960×600）。Ebitengine 的
 // `CursorPosition` 回傳的已經是這個座標空間（logical position，已考慮視窗縮放），
 // 所以兩邊直接比對，不需要再換算倍率。
 type Target struct {

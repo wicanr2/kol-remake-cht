@@ -19,7 +19,7 @@ type Translator interface {
 
 // NewCharacterCJK 以中文模式畫出 New Character 頁。
 //
-// 這個模式**不對拍**：原版沒有中文畫面，版面是 remake 自訂的。畫布放大到原版的兩倍，
+// 這個模式**不對拍**：原版沒有中文畫面，版面是 remake 自訂的。畫布放大到原版的三倍，
 // 書本美術以最近鄰放大，文字改用 16 px 的中文字模格。英文嚴格對拍模式仍走
 // NewCharacter，兩者共用同一個狀態機。
 func NewCharacterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,

@@ -2543,7 +2543,7 @@ func main() {
 	dumpLayout := flag.String("dump-cjk-layout", "",
 		"把中文模式的版面座標寫成 JSON 後結束，供文字安全矩形檢查使用")
 	lang := flag.String("lang", "en", "介面語言：en 走原版英文字模的嚴格對拍模式，"+
-		"zh-Hant 走中文模式（畫布放大兩倍、16 px 中文字格，不對拍）")
+		"zh-Hant 走中文模式（畫布放大三倍、16×18 中文字格，不對拍）")
 	uiFontRoot := flag.String("ui-fonts", "assets/ui-font", "中文 UI 字模表目錄")
 	savePath := flag.String("save", "", "存檔路徑；客棧住宿時寫進這個檔（SPEC-006）")
 	creationPath := flag.String("creation-start", "assets/original-derived-data/creation-start.json", "建角起始 typed 資料")
@@ -2605,8 +2605,9 @@ func main() {
 		if !langSet {
 			*lang = "zh-Hant"
 		}
-		// 中文模式的畫布是 640×400，預設三倍就是 1920×1200——放不進 1080p 螢幕。
-		// 沒指定倍率時依畫布大小挑一個放得下的。
+		// 中文模式的畫布是 960×600（`book.CJKScale` 取 3 才放得下 18 px 的字模格），
+		// 預設三倍就是 2880×1800——放不進一般螢幕。沒指定倍率時挑一個放得下的：
+		// 960×600 再乘一倍就是 1920×1200，所以中文模式預設不再放大。
 		scaleSet := false
 		flag.Visit(func(f *flag.Flag) {
 			if f.Name == "scale" {
@@ -2614,7 +2615,7 @@ func main() {
 			}
 		})
 		if !scaleSet && *lang != "en" {
-			*scaleFlag = 2
+			*scaleFlag = 1
 		}
 		// 存檔要寫在使用者自己的資料目錄。互動模式沒有這一段的話住宿存檔會靜默
 		// 跳過（`-save` 空字串就不寫），而 AppImage 的工作目錄是唯讀掛載點，

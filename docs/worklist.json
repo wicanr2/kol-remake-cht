@@ -23,11 +23,11 @@
           "internal/ui/sheet_cjk_test.go",
           "docs/spec/030-cjk-character-sheet.md"
         ],
-        "pattern": "CJKSheet|SPEC-030",
-        "note": "已完成，當回歸訊號：實作、版面測試與規格都要在。"
+        "pattern": "CJKScale|SPEC-030",
+        "note": "已完成，當回歸訊號：實作、倍率測試與規格都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 接上：中文模式的角色資料頁走 SPEC-030 的版面。**不是等比放大**——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每個框都差一點，所以垂直重排、抬頭從六列併成四列；水平不用改（CJK 字模格寬 16 正好是原版 8 的兩倍，欄號照搬）。標籤直接取記錄 0x73 那十四段的譯文（docs/i18n/ui-zh-Hant.json 早就翻好了），不另外查表。畫面在 docs/screenshots/zh-town-sheet.png，版面測試在 internal/ui/sheet_cjk_test.go（框在畫布內、不重疊、每一列加字高留在框內、clip 截到安全寬度、抬頭三欄放得下最長的種族／職業名），TestMirrorOpensInCJK 另外確認兩邊是同一份 SheetPage。"
+      "resolved": "2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。"
     },
     {
       "id": "g03-arena-vertical-chain",
@@ -214,11 +214,11 @@
           "internal/ui/sheet_cjk_test.go",
           "docs/spec/030-cjk-character-sheet.md"
         ],
-        "pattern": "CJKSheet|SPEC-030",
-        "note": "已完成，當回歸訊號：實作、版面測試與規格都要在。"
+        "pattern": "CJKScale|SPEC-030",
+        "note": "已完成，當回歸訊號：實作、倍率測試與規格都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 接上：中文模式的角色資料頁走 SPEC-030 的版面。**不是等比放大**——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每個框都差一點，所以垂直重排、抬頭從六列併成四列；水平不用改（CJK 字模格寬 16 正好是原版 8 的兩倍，欄號照搬）。標籤直接取記錄 0x73 那十四段的譯文（docs/i18n/ui-zh-Hant.json 早就翻好了），不另外查表。畫面在 docs/screenshots/zh-town-sheet.png，版面測試在 internal/ui/sheet_cjk_test.go（框在畫布內、不重疊、每一列加字高留在框內、clip 截到安全寬度、抬頭三欄放得下最長的種族／職業名），TestMirrorOpensInCJK 另外確認兩邊是同一份 SheetPage。"
+      "resolved": "2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。"
     },
     {
       "id": "a10-battle-info-panel",
@@ -1230,7 +1230,7 @@
       "id": "cjk-sheet-subpages",
       "layer": "gap",
       "title": "資料頁那五個入口與坐騎的中文版面",
-      "body": "SPEC-030 只做了資料頁本身。物品、隊伍、法術、任務、換人那五個入口各自是**換頁**而不是蓋上去（RE-126／RE-127），版面要分別算；坐騎那一塊（RE-120）也還沒有中文版面。中文模式進到那幾頁目前會落回英文版面或空白。",
+      "body": "SPEC-030 只做了資料頁本身。物品、隊伍、法術、任務、換人那五個入口各自是**換頁**而不是蓋上去（RE-126／RE-127），坐騎那一塊（RE-120）也還沒有中文版面。三倍畫布之後這幾頁的座標應該也能直接照抄，但還沒逐頁確認過畫面。",
       "acceptance": "五個入口與坐騎的中文版面各自算好、畫出來並有截圖。",
       "verify": {
         "kind": "present",
@@ -1239,6 +1239,17 @@
         ],
         "pattern": "不在這一版",
         "note": "SPEC-030 的自承，補完時會改寫。"
+      }
+    },
+    {
+      "id": "screenshot-png-nondeterminism",
+      "layer": "verification",
+      "title": "重生截圖會讓無關的英文圖出現 diff",
+      "body": "跑一次 tools/run_kol_shots.sh 之後，沒有被改動影響的英文截圖也會出現位元差異（尺寸與內容相同）。MANIFEST 的判準之一是「有對應對拍收據的畫面必須與那張逐 byte 相同」，所以那些圖重生之後會被判 failed，得手動還原。來源還沒查——可能是 PNG 編碼、Ebitengine 的算繪，或 llvmpipe。",
+      "acceptance": "查明來源並讓重生是決定性的，或說明為何無法並改判準。",
+      "verify": {
+        "kind": "manual",
+        "note": "沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。"
       }
     }
   ],

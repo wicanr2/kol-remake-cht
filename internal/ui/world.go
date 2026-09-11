@@ -172,7 +172,7 @@ func drawWorldLabel(dst *ebiten.Image, f *font.Font, s *world.Screen, camp bool)
 }
 
 // WorldCJK 畫出中文模式的野外畫面。版面是 remake 自訂的（`world.CJK`），
-// 素材以最近鄰放大兩倍，日期與標籤改用中文字模並在框內置中。這個模式不對拍。
+// 素材以最近鄰放大三倍，日期與標籤改用中文字模並在框內置中。這個模式不對拍。
 func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	party []town.Member, s *world.Screen, sess *world.Session) error {
 	l := world.CJK
@@ -291,7 +291,7 @@ func iconFrameColour(s *world.Screen, i int) [3]uint8 {
 	return town.ColourIdle
 }
 
-// drawWorldIconsCJK 是中文模式的圖示列，內容與英文模式相同，只是放大兩倍。
+// drawWorldIconsCJK 是中文模式的圖示列，內容與英文模式相同，只是放大三倍。
 func drawWorldIconsCJK(dst *ebiten.Image, sprites Sprites, s *world.Screen) error {
 	l := world.CJK
 	for i, index := range s.Icons {

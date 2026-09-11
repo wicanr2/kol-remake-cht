@@ -119,7 +119,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：`cmd/kol/input.go` 找得到 `故意不列` 就是還沒完
 
 - **cjk-sheet-subpages** — 資料頁那五個入口與坐騎的中文版面
-  SPEC-030 只做了資料頁本身。物品、隊伍、法術、任務、換人那五個入口各自是**換頁**而不是蓋上去（RE-126／RE-127），版面要分別算；坐騎那一塊（RE-120）也還沒有中文版面。中文模式進到那幾頁目前會落回英文版面或空白。
+  SPEC-030 只做了資料頁本身。物品、隊伍、法術、任務、換人那五個入口各自是**換頁**而不是蓋上去（RE-126／RE-127），坐騎那一塊（RE-120）也還沒有中文版面。三倍畫布之後這幾頁的座標應該也能直接照抄，但還沒逐頁確認過畫面。
   完成條件：五個入口與坐騎的中文版面各自算好、畫出來並有截圖。
   核實：`docs/spec/030-cjk-character-sheet.md` 找得到 `不在這一版` 就是還沒完
 
@@ -205,6 +205,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。
   完成條件：其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。
   核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
+
+- **screenshot-png-nondeterminism** — 重生截圖會讓無關的英文圖出現 diff
+  跑一次 tools/run_kol_shots.sh 之後，沒有被改動影響的英文截圖也會出現位元差異（尺寸與內容相同）。MANIFEST 的判準之一是「有對應對拍收據的畫面必須與那張逐 byte 相同」，所以那些圖重生之後會被判 failed，得手動還原。來源還沒查——可能是 PNG 編碼、Ebitengine 的算繪，或 llvmpipe。
+  完成條件：查明來源並讓重生是決定性的，或說明為何無法並改判準。
+  核實：要人判——沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。
 
 
 ### 素材抽取與音訊
@@ -406,8 +411,8 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 本輪核實為已完成（原本掛在未完成清單上）
 
-- **g01-cjk-sheet-pages** — G01：繁中資料頁與 MIRROR／物品／隊伍／法術／任務入口：2026-09-11 接上：中文模式的角色資料頁走 SPEC-030 的版面。**不是等比放大**——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每個框都差一點，所以垂直重排、抬頭從六列併成四列；水平不用改（CJK 字模格寬 16 正好是原版 8 的兩倍，欄號照搬）。標籤直接取記錄 0x73 那十四段的譯文（docs/i18n/ui-zh-Hant.json 早就翻好了），不另外查表。畫面在 docs/screenshots/zh-town-sheet.png，版面測試在 internal/ui/sheet_cjk_test.go（框在畫布內、不重疊、每一列加字高留在框內、clip 截到安全寬度、抬頭三欄放得下最長的種族／職業名），TestMirrorOpensInCJK 另外確認兩邊是同一份 SheetPage。
-- **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁走 SPEC-030 的版面。**不是等比放大**——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每個框都差一點，所以垂直重排、抬頭從六列併成四列；水平不用改（CJK 字模格寬 16 正好是原版 8 的兩倍，欄號照搬）。標籤直接取記錄 0x73 那十四段的譯文（docs/i18n/ui-zh-Hant.json 早就翻好了），不另外查表。畫面在 docs/screenshots/zh-town-sheet.png，版面測試在 internal/ui/sheet_cjk_test.go（框在畫布內、不重疊、每一列加字高留在框內、clip 截到安全寬度、抬頭三欄放得下最長的種族／職業名），TestMirrorOpensInCJK 另外確認兩邊是同一份 SheetPage。
+- **g01-cjk-sheet-pages** — G01：繁中資料頁與 MIRROR／物品／隊伍／法術／任務入口：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
+- **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
@@ -1024,7 +1029,7 @@ Windows 與 macOS 的封包編得出來但沒有真機驗收。
   玩家路徑 `town-load` 用 `same_as_except` 證明畫面只有金幣那一欄變了。
 > 未完成項 `text-layout-remaining-screens`：量測城鎮、世界、戰鬥畫面的文字版面。
 > 內容與核實方式見本檔「未完成項」一節（權威是 `docs/worklist.json`）。
-- [x] 繁中雙模式：英文模式 320×200 走原版字模與嚴格對拍；中文模式 640×400、16×18
+- [x] 繁中雙模式：英文模式 320×200 走原版字模與嚴格對拍；中文模式 960×600、16×18
   中文字模格。字模由 `tools/build_cjk_font.py` 從 Noto Sans CJK TC 烘成點陣表，
   執行期只讀 PNG。New Character 頁全頁中文化；文字安全矩形檢查目前 125 項全過。
 - [x] 玩家可見的展示截圖：`docs/screenshots/` 22 張由 `shots.spec` 重生，有 manifest

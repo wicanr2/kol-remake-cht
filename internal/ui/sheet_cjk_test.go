@@ -4,6 +4,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
@@ -11,56 +12,47 @@ import (
 // 中文字模格高：版面的每一列都要放得下它（SPEC-030）。
 const cjkSheetGlyphHeight = 18
 
-// 五個框要在畫布內、彼此不重疊。中文版面是重排出來的，這一支擋的是「算錯一個數字」。
-func TestCJKSheetBoxesFitTheCanvas(t *testing.T) {
-	const canvasW, canvasH = 640, 400
-	l := town.CJKSheet
-	boxes := []struct {
-		name string
-		r    town.Rect
+// 三倍畫布下原版版面照抄就放得下，這是 `book.CJKScale` 取 3 的理由。
+// 這一支同時是那個理由的反面對照：兩倍放不下。
+func TestCJKScaleFitsTheGlyphHeight(t *testing.T) {
+	l := town.SheetLayout
+	blocks := []struct {
+		name              string
+		box               town.Rect
+		first, step, rows int
 	}{
-		{"抬頭", l.Header}, {"屬性", l.Stats}, {"武器", l.Weapons},
-		{"金幣", l.Gold}, {"長條", l.Bars},
+		{"抬頭", l.Header, l.NameRow, 6, 6},
+		{"屬性", l.Stats, town.SheetStatFirstRow, town.LineStep, 8},
+		{"武器", l.Weapons, l.WeaponFirstRow, l.WeaponRowStep, l.WeaponRows},
+		{"金幣", l.Gold, l.GoldRow, 8, 4},
 	}
-	for _, b := range boxes {
-		if b.r.X0 < 0 || b.r.Y0 < 0 || b.r.X1 >= canvasW || b.r.Y1 >= canvasH {
-			t.Errorf("%s框 %v 超出 %d×%d 畫布", b.name, b.r, canvasW, canvasH)
-		}
-	}
-	for i := range boxes {
-		for j := i + 1; j < len(boxes); j++ {
-			a, b := boxes[i].r, boxes[j].r
-			if a.X0 <= b.X1 && b.X0 <= a.X1 && a.Y0 <= b.Y1 && b.Y0 <= a.Y1 {
-				t.Errorf("%s框與%s框重疊：%v／%v", boxes[i].name, boxes[j].name, a, b)
+	fits := func(scale int) []string {
+		var bad []string
+		for _, b := range blocks {
+			h := (b.box.Y1 - b.box.Y0 + 1) * scale
+			bottom := (b.first-b.box.Y0+(b.rows-1)*b.step)*scale + cjkSheetGlyphHeight
+			if bottom > h {
+				bad = append(bad, b.name)
 			}
 		}
+		return bad
+	}
+	if bad := fits(book.CJKScale); len(bad) > 0 {
+		t.Errorf("倍率 %d 放不下：%v", book.CJKScale, bad)
+	}
+	// 反面對照：倍率不夠時這個判準要能開口，否則它證明不了什麼。
+	if bad := fits(2); len(bad) == 0 {
+		t.Error("兩倍畫布也放得下的話，三倍就不是必要的——這個測試分不出差別")
 	}
 }
 
-// 每一個區塊的最後一列加上字高要留在框內——等比放大放不下正是這一頁重排的理由，
-// 所以這一條是版面的核心判準。
-func TestCJKSheetRowsStayInsideTheirBoxes(t *testing.T) {
-	l := town.CJKSheet
-	last := func(first, step, rows int) int { return first + (rows-1)*step + cjkSheetGlyphHeight }
-	for _, c := range []struct {
-		name   string
-		bottom int
-		box    town.Rect
-	}{
-		{"抬頭四列", l.BodyRow + cjkSheetGlyphHeight, l.Header},
-		{"屬性八列", last(l.StatFirstRow, l.LineStep, 8), l.Stats},
-		{"武器四列", last(l.WeaponFirstRow, l.LineStep, l.WeaponRows), l.Weapons},
-		{"金幣四列", l.EquipRow + cjkSheetGlyphHeight, l.Gold},
-	} {
-		if c.bottom > c.box.Y1 {
-			t.Errorf("%s排到 %d，框底只有 %d", c.name, c.bottom, c.box.Y1)
-		}
-	}
-	// 反面對照：等比放大（英文座標 ×2）真的放不下，這個測試分得出來。
-	eng := town.SheetLayout
-	if doubled := (eng.Header.Y1 - eng.Header.Y0 + 1) * 2; doubled >= 6*l.LineStep {
-		t.Fatalf("英文抬頭框 ×2 是 %d，六列要 %d——這個測試的前提不成立了",
-			doubled, 6*l.LineStep)
+// 原版最小行距乘上倍率要不小於字高，這是「三倍」這個數字的來源。
+func TestCJKScaleCoversTheSmallestLineStep(t *testing.T) {
+	l := town.SheetLayout
+	smallest := l.WeaponRowStep // 資料頁最小的行距
+	if got := smallest * book.CJKScale; got < cjkSheetGlyphHeight {
+		t.Fatalf("原版最小行距 %d × %d = %d，放不下 %d px 的字",
+			smallest, book.CJKScale, got, cjkSheetGlyphHeight)
 	}
 }
 
@@ -79,24 +71,22 @@ func TestClipRespectsSafeWidth(t *testing.T) {
 	if got == long {
 		t.Fatal("超寬的字串沒有被截")
 	}
-	// 放得下的不動。
-	short := "力量"
-	if clip(f, short, safe) != short {
+	if short := "力量"; clip(f, short, safe) != short {
 		t.Fatalf("放得下的字串被截了：%q", clip(f, short, safe))
 	}
 }
 
-// 抬頭那三欄各佔三分之一，最長的種族／職業名要放得進去。
-func TestCJKSheetHeaderColumnsHoldLongestNames(t *testing.T) {
+// 屬性標籤那一欄放得下最長的中文標籤。
+func TestCJKSheetStatLabelsFit(t *testing.T) {
 	f, err := font.Load("../../assets/ui-font", "zh-hant-16")
 	if err != nil {
 		t.Skipf("沒有中文字模表：%v", err)
 	}
-	l := town.CJKSheet
-	third := (l.Header.Width() - 2*f.Advance()) / 3
-	for _, s := range []string{"半身人", "劍術大師", "巨魔剋星", "見習騎士"} {
-		if w, _ := f.Measure(s); w > third {
-			t.Errorf("%q 要 %d px，抬頭一欄只有 %d", s, w, third)
+	safe := (town.SheetLayout.StatValueCol - 2) * town.CellWidth * book.CJKScale
+	for _, s := range []string{"力量：", "敏捷：", "健康：", "先見：",
+		"魅力：", "智力：", "平衡：", "耐力："} {
+		if w, _ := f.Measure(s); w > safe {
+			t.Errorf("%q 要 %d px，屬性標籤欄只有 %d", s, w, safe)
 		}
 	}
 }

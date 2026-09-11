@@ -10,9 +10,9 @@
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **70 條未完成**（32 條沒有機器訊號、標 `manual`），
+- 目前 **71 條未完成**（33 條沒有機器訊號、標 `manual`），
   另有 16 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`present` 35、`manual` 32、`absent` 2、`required_in_all` 1。
+  未完成項的 verify 種類：`present` 35、`manual` 33、`absent` 2、`required_in_all` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
   （base 為 `origin/main`，`5f9a9a1`，已推送到 `origin/kol-oracle`）。舊的 `kol-force-call` 已刪除——它的 commit
@@ -341,8 +341,9 @@ dosgolem 六項具名規則對照通過。保存格式 v1／v2 決定待回覆�
   `tools/extract_fonts.py` 產出 `assets/original-derived-png/fonts/`。書本內文用小字型。
 - 書本文字版面已機械量得並版控於 `docs/re/text-layout.json`；原版繪字規則為
   逐字模格清成白底、但空白字元不清底。原版字模格是 8×6、字距 8，繁體中文字形放不進
-  同一格，因此採雙模式：英文模式維持 320×200 與原版字模供嚴格對拍，中文模式 640×400、
-  16×18 中文字格。城鎮的文字則用 8×8 大字型，不是書頁的小字型。
+  同一格，因此採雙模式：英文模式維持 320×200 與原版字模供嚴格對拍，中文模式 960×600、
+  16×18 中文字格——**倍率三是算出來的**：原版最小行距 6 px，`6 × 3` 剛好等於
+  字模格高 18，兩倍只給得起 12 放不下（SPEC-030）。城鎮的文字則用 8×8 大字型，不是書頁的小字型。
 - remake 目前畫面的展示圖在 `docs/screenshots/`，由 `tools/run_kol_shots.sh` 依
   `shots.spec` 在鎖定容器內一次重生，`MANIFEST.json` 記下產生指令、輸入雜湊與 PNG
   SHA-256，並要求有對拍收據的畫面與那張逐 byte 相同。README 的畫面區塊引用同一批圖。
