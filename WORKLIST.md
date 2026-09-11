@@ -216,15 +216,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：查明來源並讓重生是決定性的，或說明為何無法並改判準。
   核實：要人判——沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。
 
-- **player-path-receipts-stale** — 從標題走起的長路徑收據過期了
-  `e118596` 把選角之後的 `SceneInn` 改成 `SceneTown`（開場旅店依 SPEC-016 接入正式 town.Session），畫面的節奏因此變了，而那幾條從標題走起的按鍵序列沒有重生。2026-09-11 量到：`flow-quest` 的 109 步在**英文模式重跑**之後停在城鎮戶外，收據裡那一步是遭遇畫面；trace 的第一個分歧就在第 17 步（收據 `flow:inn`、重跑 `flow:town`）。中文模式與英文重跑**全程相同**，所以不是中文的問題。受影響的是所有從標題起跑的 plan：full、full-chain、full-chain-reload、full-chain-ending、flow-quest、arena。\n\n`verify_full_path.py` 抓不到——它驗的是收據目錄裡的截圖與軌跡自不自洽，不重跑，所以程式變了它照樣通過。
-  完成條件：受影響的 plan 重生按鍵與收據並通過；或說明為何某一條刻意保留舊版。
+- **player-path-receipts-stale** — 正常玩家路徑的收據對不上現在的程式
+  2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑：**5 條一致**（town-edge、town-mirror、town-recruit、town-rest、town-talk），**10 條對不上**，**2 條跑不動**。長路徑那幾條（有 trace 的）還沒跑，一條要十幾二十分鐘。\n\n對不上的分兩類：\n1. **plan 缺重跑所需的旗標**（6 條）：town-load、town-scroll、town-shop、town-stable、town-train、world-quest 的描述都寫「讀存檔開場」，而 plan 沒有 `load` 欄位——重跑時載不到那份存檔，隊伍與位置都不對。`full` 要走 flow 而 plan 沒有 `scene` 欄位。\n2. **旅店流程改過**（其餘）：`e118596` 把選角之後的 `SceneInn` 改成 `SceneTown`（開場旅店接進正式 town.Session），進門少了一步，之後的按鍵整串偏掉。`town` 的第 8 步收據還在戶外、重跑已經在旅店裡；`flow-quest` 的 109 步收據是遭遇畫面、重跑停在城鎮戶外。**英文與中文模式重跑全程相同**，不是中文化造成的。
+  完成條件：plan 補齊旗標、受影響的收據重生並通過 check_player_paths.py；或說明為何某一條刻意保留舊版。
   核實：`docs/verification/player-path/README.md` 找得到 `收據過期` 就是還沒完
-
-- **path-verify-does-not-replay** — 路徑驗證只看收據自洽，不重跑
-  `verify_full_path.py` 比的是 plan、軌跡與收據目錄裡那幾張截圖，全部來自同一次產生，所以程式改了它照樣通過——2026-09-11 的 `flow-quest` 就是這樣：驗證 failures 為空，而英文模式重跑停在完全不同的畫面。`replay_player_path.py` 會重跑，但它寫回 `docs/verification/`，不能拿來當檢查。
-  完成條件：有一條能在不覆寫收據的前提下重跑並比對的路徑，或說明為何不做。
-  核實：`docs/verification/player-path/README.md` 找得到 `不重跑` 就是還沒完
 
 
 ### 素材抽取與音訊
@@ -442,6 +437,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **save-v1-entry-replacement** — SPEC-023 的保存核心已是正式入口：2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。
 - **region-dat-provenance** — `region1.dat`…`region4.dat` 缺檔的來由：2026-09-11 核實：那五筆是擴充地區，由地區磁片經原版內建的 REGION INSTALLER 裝入，Origin 未曾發行擴充。執行時觀測（開檔序列、模板位址與 KOLBOOK.EXE 靜態偏移逐項對位、原版自己的訊息文字）見 docs/re/20260911-region-installer.md；探針在 tools/oracle/book_startup_test.go 的 KOL_BOOK_REGION_PROBE 模式。
 - **planning-current-slot-semantics** — 規劃逐鍵時 DS:0x9E5A 的語意：2026-09-11 定案：它是走訪參戰者的**索引游標**（IDA `word_37D2A`），規劃、執行與訊息三段各自的迴圈都會設它，不是「輪到誰行動」的權威狀態。寫入監看抓到五個寫入點，其中 0x1F073 正是 SPEC-020 步驟一的收尾。remake 不需要它——輪到誰由 Round.Order 與 Cursor 表達。見 docs/re/20260911-actor-index-cursor.md。
+- **path-verify-does-not-replay** — 路徑驗證只看收據自洽，不重跑：2026-09-11 做了 `tools/check_player_paths.py`：重跑到 workplace/replay-check/ 再與收據逐 byte 比，不覆寫。第一次跑就抓到 10 條對不上。`verify_full_path.py` 保留原用途（驗收據自洽），兩支分工不同。
 
 <!-- worklist:end -->
 

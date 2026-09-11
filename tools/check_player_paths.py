@@ -30,7 +30,9 @@ OUT = pathlib.Path("workplace/replay-check")
 
 def spec_line(plan: dict, shot_dir: pathlib.Path) -> str:
     """組一行規格檔。除了輸出目錄，其餘旗標與 replay_player_path.py 相同。"""
-    scene = "flow" if "trace" in plan else "play"
+    # plan 帶齊重跑所需的旗標才重得出來（README 的教訓）。`scene` 是其中一個：
+    # `full` 沒有 trace 卻要走 flow（腳本從標題開始），光看 trace 猜會猜錯。
+    scene = plan.get("scene") or ("flow" if "trace" in plan else "play")
     args = [f"{shot_dir}/step-000.png", "-scene", scene]
     if plan.get("seed") is not None:
         args += ["-seed", str(plan["seed"])]
