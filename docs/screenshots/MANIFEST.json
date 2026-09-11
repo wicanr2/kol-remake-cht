@@ -6,7 +6,7 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／960×600 離屏畫布",
-    "commit": "7fc65c998e0b94130ce29a32225d9395fffa2258"
+    "commit": "6266943225bcf8847b2dfa6f27f0497fa4e4a47f"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
@@ -18,7 +18,7 @@
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 39,
+  "count": 42,
   "failed": 0,
   "screenshots": [
     {
@@ -442,6 +442,36 @@
       "height": 600,
       "distinct_colours": 15,
       "sha256": "259a769d88738dc52767705f0b581f68202deb33979490905c70bd2716a52d3f",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-book-contents.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene contents -shot docs/screenshots/zh-book-contents.png",
+      "width": 960,
+      "height": 600,
+      "distinct_colours": 11,
+      "sha256": "60fcb8812e82f28dfdfe3081ea13c1d57846185b2aedd2a05eeacfbae9033438",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-newchar-stats.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene script -script t e s t RET RET RET RET -shot docs/screenshots/zh-newchar-stats.png",
+      "width": 960,
+      "height": 600,
+      "distinct_colours": 9,
+      "sha256": "cbd263c8456b920ed6f6d9459ac6fcdc1eb21cedfd362655a9e54a9d06dc579b",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-book-cover.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene cover -shot docs/screenshots/zh-book-cover.png",
+      "width": 960,
+      "height": 600,
+      "distinct_colours": 8,
+      "sha256": "4ed83efbbaebf44c9f1934e3549aad8333dcac1c43a8b2fc87e8813824cbc72c",
       "pass": true
     }
   ]

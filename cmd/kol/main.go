@@ -1326,6 +1326,20 @@ func (g *game) renderScene(sc scene) error {
 	return err
 }
 
+// drawPage 畫一張整頁美術。中文模式的畫布是原版的 `book.CJKScale` 倍，所以美術要
+// 以最近鄰放大同樣的倍率，座標也跟著乘——否則只會畫在左上角那一塊原版大小的區域。
+//
+// 這幾張（封面、目錄頁、攤開的書頁、角色立繪）是**純美術**，沒有文字要換，所以
+// 沒有各自的 CJK 版本；其餘畫面都有自己的 `…CJK` 繪製函式，那些自己處理倍率。
+func (g *game) drawPage(img *ebiten.Image, x, y int) {
+	if g.strings == nil {
+		g.canvas.DrawAt(img, x, y)
+		return
+	}
+	s := book.CJKScale
+	g.canvas.DrawScaled(img, x*s, y*s, s)
+}
+
 func (g *game) render() error {
 	if g.play != nil {
 		g.worldParty = g.play.Party
@@ -1341,18 +1355,18 @@ func (g *game) render() error {
 		if err != nil {
 			return err
 		}
-		g.canvas.DrawAt(img, 0, 0)
+		g.drawPage(img, 0, 0)
 	case sceneNewChar:
 		bg, err := g.sprites.Get("BOOKPICS", book.OpenSpread)
 		if err != nil {
 			return err
 		}
-		g.canvas.DrawAt(bg, 0, 0)
+		g.drawPage(bg, 0, 0)
 		portrait, err := g.sprites.Get("CHARPICS", g.portrait)
 		if err != nil {
 			return err
 		}
-		g.canvas.DrawAt(portrait, book.PortraitOrigin.X, book.PortraitOrigin.Y)
+		g.drawPage(portrait, book.PortraitOrigin.X, book.PortraitOrigin.Y)
 	case sceneScript:
 		return ui.NewCharacter(g.canvas.Image(), g.sprites, g.small, g.large, g.state)
 	case sceneScriptCJK:

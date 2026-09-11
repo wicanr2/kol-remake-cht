@@ -63,7 +63,7 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 ## 目前畫面
 
-完整畫廊與產生流程見 [docs/screenshots/](docs/screenshots/README.md)。左欄是**英文
+完整畫廊見 **[docs/screenshots/GALLERY.md](docs/screenshots/GALLERY.md)**（42 張，英文與中文並排）；產生流程與驗證判準見 [docs/screenshots/README.md](docs/screenshots/README.md)。左欄是**英文
 模式**（320×200、原版字模，逐畫面對拍用）；右欄是**繁體中文模式**（960×600、16×18
 中文字模格，不對拍）。
 
