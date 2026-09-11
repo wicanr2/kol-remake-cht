@@ -6155,3 +6155,20 @@ frame-270 推翻了 remake 的版面：
 - 物品頁選中之後的畫面與原版不同（原版只剩明細框與木紋底），新條目 `item-detail-page-parity`。
 - worklist 訊號 `counterscan-style-and-retry` 的正則 `a\.Stuck` 對不上測試寫法，放寬為 `\.Stuck\b`。
 - 容器全用 `--rm`；專案內無 root-owned 檔案。
+
+## 2026-09-11：worklist 鏡像到 GitHub issue
+
+使用者決定：JSON 為準、issue 是鏡像；91 條全放（已完成 17 條建成 closed）；label 用
+分層五個＋manual＋worklist。
+
+- `tools/worklist.py issues`（容器）產生每一張的標題、內文、label、開關；`--adopt` 把
+  建好的編號寫回條目的 `issue`。schema 擋非正整數與兩條共用一個編號；selftest 加了
+  內文記號、開關、manual label 與編號寫回的正反對照。已完成項的內文寫「回歸檢查」，
+  不沿用「……就是還沒完」那句（對已關閉的 issue 會讀反）。
+- `tools/sync_worklist_issues.sh`（主機，只呼叫 `gh`）：建 label、開 issue、對齊既有
+  issue 的標題／內文／受管 label／開關。每建一張先記進 `created.tsv`，斷在半路重跑
+  不會重開。
+- 結果：#1…#91，開 74、關 17。重跑一次「新開 0 張、更新 0 處」；正對照：手改 #91 的
+  標題並加 `bug`，同步後標題蓋回、`bug` 保留（不在受管的那組 label 裡），測試用的
+  `bug` 已拿掉。
+- 順手修正：`player-path-receipts-stale` 內文有 9 處字面上的 `\n`，換回真正的換行。

@@ -4,6 +4,10 @@
     tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實
     tools/run_python_tool.sh tools/worklist.py render    # 回寫 WORKLIST.md
     tools/run_python_tool.sh tools/worklist.py selftest  # 機制的正反對照
+    tools/sync_worklist_issues.sh                        # 鏡像到 GitHub issue
+
+GitHub issue 是**鏡像**：每一條一張，內文、label 與開關狀態都由這份 JSON 決定，
+在 GitHub 上改的東西不會回流，下一次同步會蓋回去。issue 編號記在條目的 `issue`。
 
 markdown 的 `- [ ]` 會長出過期斷言：東西做好了而沒有人回頭改那一條，於是清單上
 留著一句自信的「還沒接」，被拿去當「還剩多少」的依據。這裡把「這條還成立嗎」
@@ -144,6 +148,7 @@ def check_schema(data: dict) -> list:
     """schema 自己也要被看著：欄位缺了、id 撞號、kind 寫錯都要當場失敗。"""
     problems = []
     seen = set()
+    issues_seen = {}
     layers = set(data.get("layers", {}))
     for item in data["items"]:
         ident = item.get("id", "(無 id)")
@@ -153,6 +158,14 @@ def check_schema(data: dict) -> list:
         if ident in seen:
             problems.append(f"{ident}：id 重複")
         seen.add(ident)
+        if "issue" in item:
+            n = item["issue"]
+            if not isinstance(n, int) or isinstance(n, bool) or n <= 0:
+                problems.append(f"{ident}：issue 要是正整數，得到 {n!r}")
+            elif n in issues_seen:
+                problems.append(f"{ident}：issue #{n} 已經掛在 {issues_seen[n]}")
+            else:
+                issues_seen[n] = ident
         if item.get("layer") not in layers:
             problems.append(f'{ident}：layer「{item.get("layer")}」不在 layers 表裡')
         v = item.get("verify", {})
@@ -372,6 +385,31 @@ def cmd_verify(_args) -> int:
     return 1 if (stale or regressed or desync or orphans) else 0
 
 
+def verify_line(v: dict) -> str:
+    """把 verify 寫成一句人讀得懂的話。WORKLIST.md 與 issue 內文共用。"""
+    if v["kind"] == "manual":
+        return f'要人判——{v["note"]}'
+    if v["kind"] == "json_len":
+        return f'`{v["path"]}` 的 `{v["field"]}` ≤ {v["max"]} 就是還沒完'
+    where = "、".join(f"`{p}`" for p in v["paths"])
+    if v["kind"] == "required_in_all":
+        return f'{where} **每一個**都要有 `{v["pattern"]}`，少一個就是還沒完'
+    verb = "找得到" if v["kind"] == "present" else "找不到"
+    return f'{where} {verb} `{v["pattern"]}` 就是還沒完'
+
+
+def regression_line(v: dict) -> str:
+    """已完成項的 verify 反過來讀：訊號還在＝仍然完成（見 `check_schema`）。"""
+    if v["kind"] == "manual":
+        return f'要人判——{v["note"]}'
+    if v["kind"] == "json_len":
+        return f'`{v["path"]}` 的 `{v["field"]}` 要多於 {v["max"]}'
+    where = "、".join(f"`{p}`" for p in v["paths"])
+    if v["kind"] == "required_in_all":
+        return f'{where} **每一個**都要有 `{v["pattern"]}`，少一個就是可能被改回去了'
+    return f'{where} 要找得到 `{v["pattern"]}`，找不到就是可能被改回去了'
+
+
 def render_markdown(data: dict) -> str:
     lines = [
         BEGIN,
@@ -386,6 +424,10 @@ def render_markdown(data: dict) -> str:
         "tools/run_python_tool.sh tools/worklist.py verify",
         "```",
         "",
+        "每一條在 GitHub 上有一張對應的 issue（條目後面的 `#編號`），由",
+        "`tools/sync_worklist_issues.sh` 從這份 JSON 鏡像過去；在 GitHub 上改內文或",
+        "開關不會回流，下一次同步會蓋回來。",
+        "",
     ]
     for key, label in data["layers"].items():
         items = [i for i in data["items"] if i["layer"] == key and i.get("status") != "done"]
@@ -394,24 +436,14 @@ def render_markdown(data: dict) -> str:
         lines.append(f"### {label}")
         lines.append("")
         for item in items:
-            lines.append(f'- **{item["id"]}** — {item["title"]}')
+            ref = f'（#{item["issue"]}）' if item.get("issue") else ""
+            lines.append(f'- **{item["id"]}**{ref} — {item["title"]}')
             for para in item["body"].split("\n"):
                 lines.append(f"  {para}" if para else "")
             if item.get("blocked_by"):
                 lines.append(f'  卡在：{item["blocked_by"]}')
             lines.append(f'  完成條件：{item["acceptance"]}')
-            v = item["verify"]
-            if v["kind"] == "manual":
-                lines.append(f'  核實：要人判——{v["note"]}')
-            elif v["kind"] == "json_len":
-                lines.append(f'  核實：`{v["path"]}` 的 `{v["field"]}` ≤ {v["max"]} 就是還沒完')
-            elif v["kind"] == "required_in_all":
-                where = "、".join(f"`{p}`" for p in v["paths"])
-                lines.append(f'  核實：{where} **每一個**都要有 `{v["pattern"]}`，少一個就是還沒完')
-            else:
-                where = "、".join(f"`{p}`" for p in v["paths"])
-                verb = "找得到" if v["kind"] == "present" else "找不到"
-                lines.append(f'  核實：{where} {verb} `{v["pattern"]}` 就是還沒完')
+            lines.append(f'  核實：{verify_line(item["verify"])}')
             lines.append("")
         lines.append("")
 
@@ -516,6 +548,122 @@ def cmd_render(args) -> int:
         print(f"已回寫 {CONTEXT_MD.relative_to(ROOT)} 的統計區塊")
     else:
         print(f"⚠ {CONTEXT_MD.relative_to(ROOT)} 沒有 worklist:stats 標記，數字沒同步")
+    return 0
+
+
+# GitHub issue 鏡像。label 由這裡決定：分層一個、沒有機器訊號的加 manual、
+# 每一張都掛 worklist（同步工具只動這一組 label，其他人手加的不碰）。
+ISSUE_MARKER = "<!-- worklist-id: {} -->"
+ISSUE_LABEL_ALL = "worklist"
+ISSUE_LABEL_MANUAL = "manual"
+
+
+def issue_labels(item: dict) -> list:
+    labels = [ISSUE_LABEL_ALL, item["layer"]]
+    if item["verify"]["kind"] == "manual":
+        labels.append(ISSUE_LABEL_MANUAL)
+    return labels
+
+
+def issue_body(data: dict, item: dict) -> str:
+    """一條的 issue 內文。開頭講明權威在哪，結尾藏一個 id 記號給人與工具對照。"""
+    layer = data["layers"][item["layer"]]
+    lines = [
+        f'> 鏡像自 `docs/worklist.json` 的 **`{item["id"]}`**，由 '
+        "`tools/sync_worklist_issues.sh` 產生。**權威在那份 JSON**：這裡的內文、"
+        "label 與開關狀態在下一次同步時會被蓋回去；要改請改 JSON。留言討論不受影響。",
+        "",
+        f"**分層**：{layer}（`{item['layer']}`）",
+        "",
+        item["body"],
+        "",
+    ]
+    if item.get("blocked_by"):
+        lines += [f'**卡在**：{item["blocked_by"]}', ""]
+    lines += ["### 完成條件", "", item["acceptance"], ""]
+    if item.get("status") == "done":
+        lines += ["### 已完成", "", item.get("resolved", "已完成"), "",
+                  "### 回歸檢查", "", regression_line(item["verify"]), ""]
+    else:
+        lines += ["### 核實", "", verify_line(item["verify"]), ""]
+    lines += ["```", "tools/run_python_tool.sh tools/worklist.py verify", "```", ""]
+    lines.append(ISSUE_MARKER.format(item["id"]))
+    return "\n".join(lines)
+
+
+def issue_plan(data: dict) -> list:
+    return [{
+        "id": item["id"],
+        "number": item.get("issue"),
+        "title": item["title"],
+        "body": issue_body(data, item),
+        "labels": issue_labels(item),
+        "state": "closed" if item.get("status") == "done" else "open",
+    } for item in data["items"]]
+
+
+def issue_label_defs(data: dict) -> list:
+    """同步工具要確保存在的 label：分層照 `layers` 表，另加兩個。"""
+    colours = {"gap": "d93f0b", "verification": "fbca04", "asset": "0e8a16",
+               "spec": "1d76db", "release": "5319e7"}
+    defs = [{"name": k, "description": v, "color": colours.get(k, "c5def5")}
+            for k, v in data["layers"].items()]
+    defs.append({"name": ISSUE_LABEL_MANUAL, "color": "bfd4f2",
+                 "description": "沒有機器訊號，要人判"})
+    defs.append({"name": ISSUE_LABEL_ALL, "color": "ededed",
+                 "description": "鏡像自 docs/worklist.json，改 JSON 不要改這裡"})
+    return defs
+
+
+def adopt_issues(data: dict, pairs: list) -> list:
+    """把 `(id, 編號)` 寫進條目。回報問題；有問題就一條都不寫。"""
+    by_id = {i["id"]: i for i in data["items"]}
+    problems = []
+    for ident, number in pairs:
+        item = by_id.get(ident)
+        if item is None:
+            problems.append(f"{ident}：沒有這個條目")
+        elif item.get("issue") not in (None, number):
+            problems.append(f"{ident}：已經掛 #{item['issue']}，不能改成 #{number}")
+    if problems:
+        return problems
+    for ident, number in pairs:
+        by_id[ident]["issue"] = number
+    return check_schema(data)
+
+
+def cmd_issues(args) -> int:
+    data = load()
+    problems = check_schema(data)
+    if problems:
+        print("schema 有問題，先修好：")
+        for p in problems:
+            print(f"  ✗ {p}")
+        return 2
+    if args.adopt:
+        pairs = []
+        for line in Path(args.adopt).read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                ident, number = line.split("\t")
+                pairs.append((ident, int(number)))
+        problems = adopt_issues(data, pairs)
+        if problems:
+            print("編號寫不回去：")
+            for p in problems:
+                print(f"  ✗ {p}")
+            return 2
+        DATA_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                             encoding="utf-8")
+        print(f"已把 {len(pairs)} 個 issue 編號寫回 {DATA_PATH.relative_to(ROOT)}")
+        return 0
+    out = {"repo_labels": issue_label_defs(data), "issues": issue_plan(data)}
+    text = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
+    if args.out:
+        Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.out).write_text(text, encoding="utf-8")
+        print(f"已寫 {args.out}：{len(out['issues'])} 條")
+    else:
+        print(text)
     return 0
 
 
@@ -762,6 +910,28 @@ def cmd_selftest(_args) -> int:
     if not out_of_sync(moved):
         failures.append("out_of_sync：資料多一條之後竟然還說同步——那它沒有真的在比")
 
+    # issue 鏡像：內文要帶 id 記號、已完成的要關、manual 要掛 label；
+    # 編號寫回時不准改掉已經掛好的那一個、也不准兩條共用一個編號。
+    plan = {p["id"]: p for p in issue_plan(real)}
+    for item in real["items"]:
+        p = plan[item["id"]]
+        if ISSUE_MARKER.format(item["id"]) not in p["body"]:
+            failures.append(f"issue_plan：{item['id']} 的內文沒有 id 記號")
+        if (p["state"] == "closed") != (item.get("status") == "done"):
+            failures.append(f"issue_plan：{item['id']} 的開關狀態不對")
+        if (ISSUE_LABEL_MANUAL in p["labels"]) != (item["verify"]["kind"] == "manual"):
+            failures.append(f"issue_plan：{item['id']} 的 manual label 不對")
+    probe = json.loads(json.dumps(real))
+    for item in probe["items"]:
+        item.pop("issue", None)
+    first, second = probe["items"][0]["id"], probe["items"][1]["id"]
+    if adopt_issues(probe, [(first, 9001)]):
+        failures.append("adopt_issues：寫一個全新的編號竟然失敗")
+    if not adopt_issues(probe, [(first, 9002)]):
+        failures.append("adopt_issues：已經掛 #9001 的條目竟然可以改成 #9002")
+    if not adopt_issues(probe, [(second, 9001)]):
+        failures.append("adopt_issues：兩條共用 #9001 竟然過了")
+
     if failures:
         print("正反對照失敗：")
         for f in failures:
@@ -781,6 +951,10 @@ def main() -> int:
     sub.add_parser("scan", help="掃產品碼的自承，列出沒有條目認領的").set_defaults(func=cmd_scan)
     sub.add_parser("selftest", help="機制的正反對照").set_defaults(func=cmd_selftest)
     sub.add_parser("status", help="盤點：分層、玩家路徑涵蓋、階段 gate").set_defaults(func=cmd_status)
+    i = sub.add_parser("issues", help="產生 GitHub issue 鏡像的內容，或把建好的編號寫回")
+    i.add_argument("--out", help="寫到這個檔案（預設印出來）")
+    i.add_argument("--adopt", help="TSV：每行「id<Tab>編號」，寫回 docs/worklist.json")
+    i.set_defaults(func=cmd_issues)
     args = ap.parse_args()
     return args.func(args)
 

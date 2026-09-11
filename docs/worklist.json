@@ -27,7 +27,8 @@
         "note": "已完成，當回歸訊號：實作、倍率測試與規格都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。"
+      "resolved": "2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。",
+      "issue": 1
     },
     {
       "id": "g03-arena-vertical-chain",
@@ -43,7 +44,8 @@
         ],
         "pattern": "sub_2B454",
         "note": "競技場肖像的自承在兩處（主迴圈與 UI）；`sub_2B454` 畫的是什麼解出來時會一起消失。正常取得資格那一段沒有可綁的產品碼，靠這一條一起追。"
-      }
+      },
+      "issue": 2
     },
     {
       "id": "g05-picture-shield-editor-spec",
@@ -58,7 +60,8 @@
         ],
         "pattern": "EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作",
         "note": "flow.go 的自承註解。與 picture-shield-bitmap-editor 綁同一句——規格與實作是同一條路上的兩段。"
-      }
+      },
+      "issue": 3
     },
     {
       "id": "g06-audio-listening-gate",
@@ -74,7 +77,8 @@
         ],
         "pattern": "狀態：\\*\\*DRAFT\\*\\*|還沒接上音訊路徑",
         "note": "SPEC-004 的狀態行加 README 的現況句；升 READY 並接上時兩處會一起改。"
-      }
+      },
+      "issue": 4
     },
     {
       "id": "g07-battle-speed-options",
@@ -89,7 +93,8 @@
         ],
         "pattern": "狀態：\\*\\*DRAFT\\*\\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接",
         "note": "SPEC-028 的狀態行加它列的三個未決項（未接敵的定義、停止條件、設定保存）；升 READY 並接上時會一起改。"
-      }
+      },
+      "issue": 5
     },
     {
       "id": "v01-full-battle-parity",
@@ -100,7 +105,8 @@
       "verify": {
         "kind": "manual",
         "note": "常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。"
-      }
+      },
+      "issue": 6
     },
     {
       "id": "v02-appimage-platform-acceptance",
@@ -111,7 +117,8 @@
       "verify": {
         "kind": "manual",
         "note": "跨平台驗收沒有本機訊號。與 windows-macos-real-machine 相鄰但不同：那一條是真機，這一條含 FUSE 與推廣。"
-      }
+      },
+      "issue": 7
     },
     {
       "id": "d01-spec-stale-clauses",
@@ -122,7 +129,8 @@
       "verify": {
         "kind": "manual",
         "note": "「還有沒有過期條款」要逐句讀才知道，硬綁 pattern 會誤判。與 spec-backfill-stale-clauses 是同一件事的兩次登記。"
-      }
+      },
+      "issue": 8
     },
     {
       "id": "battle-normal-seed-alignment",
@@ -133,7 +141,8 @@
       "verify": {
         "kind": "manual",
         "note": "結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真。規劃那一半已由 TestOriginalNormalPlanning 蓋住；結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。"
-      }
+      },
+      "issue": 9
     },
     {
       "id": "inn-farewell-diff-review",
@@ -144,7 +153,8 @@
       "verify": {
         "kind": "manual",
         "note": "差異審查的產物是文件不是程式。審查報告落地時改成 absent 綁它。"
-      }
+      },
+      "issue": 10
     },
     {
       "id": "dosgolem-gui-ai-acceptance",
@@ -155,7 +165,8 @@
       "verify": {
         "kind": "manual",
         "note": "AI 行為要實跑才看得見。整場 AI 對拍收據落地時改綁它。"
-      }
+      },
+      "issue": 11
     },
     {
       "id": "appimage-parity-continuation",
@@ -166,7 +177,8 @@
       "verify": {
         "kind": "manual",
         "note": "卡在上游接線。對拍收據落地時改綁它。"
-      }
+      },
+      "issue": 12
     },
     {
       "id": "a01-a02-identity-and-save",
@@ -177,7 +189,8 @@
       "verify": {
         "kind": "manual",
         "note": "垂直鏈驗收沒有單一程式訊號。A 系列稽核測試轉成回歸測試後，改成 json_len 綁回歸測試清單的項數。"
-      }
+      },
+      "issue": 13
     },
     {
       "id": "a03-a04-writeback-and-contract",
@@ -188,7 +201,8 @@
       "verify": {
         "kind": "manual",
         "note": "同 a01-a02：逐欄一致要跑過才知道。"
-      }
+      },
+      "issue": 14
     },
     {
       "id": "a05-a06-a09-belt-ward-nutrition",
@@ -199,7 +213,8 @@
       "verify": {
         "kind": "manual",
         "note": "完成物是測試檔，而 verify 不掃測試檔（測試會提到還沒接的東西）。正常玩家路徑抽測收據落地時改綁它。"
-      }
+      },
+      "issue": 15
     },
     {
       "id": "a07-a08-cjk-and-inn",
@@ -218,7 +233,8 @@
         "note": "已完成，當回歸訊號：實作、倍率測試與規格都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。"
+      "resolved": "2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。",
+      "issue": 16
     },
     {
       "id": "a10-battle-info-panel",
@@ -229,7 +245,8 @@
       "verify": {
         "kind": "manual",
         "note": "面板已接線，缺的是攻擊後的同狀態對拍。那份收據落地時改綁它。"
-      }
+      },
+      "issue": 17
     },
     {
       "id": "armour-durability-ai-review",
@@ -240,7 +257,8 @@
       "verify": {
         "kind": "manual",
         "note": "「四個其他磨損呼叫」要逐支查。接上時會多出四個呼叫點，到時改成 json_len 綁磨損呼叫清單。"
-      }
+      },
+      "issue": 18
     },
     {
       "id": "spec-backfill-stale-clauses",
@@ -251,7 +269,8 @@
       "verify": {
         "kind": "manual",
         "note": "同 d01。這兩條應該一起收掉。"
-      }
+      },
+      "issue": 19
     },
     {
       "id": "weather-animation-and-speed",
@@ -266,7 +285,8 @@
         ],
         "pattern": "狀態：\\*\\*DRAFT\\*\\*",
         "note": "只綁得到加速那一半；天候同相位沒有訊號。SPEC-028 升 READY 之後這一條會閉嘴，但天候那一半要另外看——到時拆成兩條。"
-      }
+      },
+      "issue": 20
     },
     {
       "id": "spec-manual-page-links",
@@ -285,7 +305,8 @@
         ],
         "pattern": "docs/manual/",
         "note": "條目要求每一份規則 spec 都連得回去，所以不能用 `absent`——那是 OR，做完其中一份就會把整條判成完成。不列 003（那是說明書翻譯規格本身）。"
-      }
+      },
+      "issue": 21
     },
     {
       "id": "asset-inventory-format-spec",
@@ -296,7 +317,8 @@
       "verify": {
         "kind": "manual",
         "note": "PCGA／HERC 還沒開始，沒有可綁的識別字。抽取器支援它們時會多出對應的解碼函式，到時改成 absent 綁那個名字。"
-      }
+      },
+      "issue": 22
     },
     {
       "id": "atlas-and-contact-tables",
@@ -307,7 +329,8 @@
       "verify": {
         "kind": "manual",
         "note": "綁不住：atlas 這個字在十九支探針工具與 manifest 的 coverage_note 裡都有，綁它會判成已完成（2026-09-10 第一版就是這樣誤判的）。正式產物進版控時，改成 absent 綁 assets/ 底下那個檔的實際路徑。"
-      }
+      },
+      "issue": 23
     },
     {
       "id": "pit-square-wave-synth",
@@ -322,7 +345,8 @@
         ],
         "pattern": "狀態：\\*\\*DRAFT\\*\\*",
         "note": "與 g06 綁同一個訊號：SPEC-004 升 READY 是三條音訊工作的共同閘門。"
-      }
+      },
+      "issue": 24
     },
     {
       "id": "ogg-conversion-pipeline",
@@ -337,7 +361,8 @@
         ],
         "pattern": "狀態：\\*\\*DRAFT\\*\\*",
         "note": "與 g06、pit-square-wave-synth 綁同一個訊號。004 升 READY 之後三條一起開口，要一起重看。"
-      }
+      },
+      "issue": 25
     },
     {
       "id": "runtime-format-guard-test",
@@ -348,7 +373,8 @@
       "verify": {
         "kind": "manual",
         "note": "完成物是測試檔，而 verify 不掃測試檔——掃了會被別的測試裡提到的字串騙過去。這一條要人看 go test 清單裡有沒有那支守門測試。"
-      }
+      },
+      "issue": 26
     },
     {
       "id": "release-asset-separation",
@@ -359,7 +385,8 @@
       "verify": {
         "kind": "manual",
         "note": "verify_dist.sh 已驗 release 的素材 deny-list，缺的是 visibility 檢查。那一步接上時會多一個 gh api 呼叫，到時改成 absent 綁它。"
-      }
+      },
+      "issue": 27
     },
     {
       "id": "roster-full-ui-oracle",
@@ -370,7 +397,8 @@
       "verify": {
         "kind": "manual",
         "note": "oracle 收據是檔案不是程式。那三份收據落地時改成 absent 綁它們的路徑。"
-      }
+      },
+      "issue": 28
     },
     {
       "id": "package-boundaries-and-injection",
@@ -381,7 +409,8 @@
       "verify": {
         "kind": "manual",
         "note": "程式面已大致成立，缺的是文件與守門。硬綁 timestep 這種猜想中的識別字會永遠為真——那種條目看起來盡責，其實一次都沒真的看過。"
-      }
+      },
+      "issue": 29
     },
     {
       "id": "minimal-player-chain",
@@ -392,7 +421,8 @@
       "verify": {
         "kind": "manual",
         "note": "這一條很可能已經被 player-path 收據滿足了，要人看一眼再決定收掉或改寫。"
-      }
+      },
+      "issue": 30
     },
     {
       "id": "picture-shield-bitmap-editor",
@@ -408,7 +438,8 @@
         ],
         "pattern": "EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作",
         "note": "與 g05 綁同一句自承註解。"
-      }
+      },
+      "issue": 31
     },
     {
       "id": "building-followup-dialogue",
@@ -419,7 +450,8 @@
       "verify": {
         "kind": "manual",
         "note": "topics.go 已有訊息 10 的選法但沒有觸發條件。接上時會多一支判斷觸發的函式，到時改成 absent 綁它。"
-      }
+      },
+      "issue": 32
     },
     {
       "id": "attack-row-and-target-cursor",
@@ -435,7 +467,8 @@
         ],
         "pattern": "確切的視覺效果還沒解出來",
         "note": "同一句話在程式與 SPEC-010 各有一處；`sub_1C683` 的效果解出時會一起消失。"
-      }
+      },
+      "issue": 33
     },
     {
       "id": "text-layout-remaining-screens",
@@ -446,7 +479,8 @@
       "verify": {
         "kind": "manual",
         "note": "版面量測的產物是 JSON 與收據。三份版面表落地時改成 json_len 綁它們的項數。"
-      }
+      },
+      "issue": 34
     },
     {
       "id": "cjk-remaining-screens",
@@ -458,7 +492,8 @@
       "verify": {
         "kind": "manual",
         "note": "卡在版面。版面定了之後這一條會變成可綁的（安全矩形檢查器的項數）。"
-      }
+      },
+      "issue": 35
     },
     {
       "id": "title-thunder-audio-hookup",
@@ -475,7 +510,8 @@
         ],
         "pattern": "ebiten/v2/audio",
         "note": "接上音訊一定會 import 這個套件，改名的機率是零。這是全部條目裡最穩的一個訊號。"
-      }
+      },
+      "issue": 36
     },
     {
       "id": "cross-platform-build-smoke",
@@ -486,7 +522,8 @@
       "verify": {
         "kind": "manual",
         "note": "Windows／macOS 的啟動要在那些平台上跑，本機沒有訊號。與 windows-macos-real-machine 相接：那一條是完整驗收，這一條只要求最小啟動。"
-      }
+      },
+      "issue": 37
     },
     {
       "id": "spec-ready-before-implement",
@@ -497,7 +534,8 @@
       "verify": {
         "kind": "manual",
         "note": "流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。"
-      }
+      },
+      "issue": 38
     },
     {
       "id": "terminology-and-safe-rects",
@@ -508,7 +546,8 @@
       "verify": {
         "kind": "manual",
         "note": "檢查器管的是「會不會超出矩形」，不管「超出了要怎麼辦」。policy 寫進資料時改成 json_len 綁它。"
-      }
+      },
+      "issue": 39
     },
     {
       "id": "longest-cjk-visual-regression",
@@ -519,7 +558,8 @@
       "verify": {
         "kind": "manual",
         "note": "視覺回歸的產物是收據。那份收據落地時改綁它。"
-      }
+      },
+      "issue": 40
     },
     {
       "id": "parity-sampling-registry",
@@ -530,7 +570,8 @@
       "verify": {
         "kind": "manual",
         "note": "這一份本身就該是 JSON。寫出來之後改成 json_len 綁它的階段數。"
-      }
+      },
+      "issue": 41
     },
     {
       "id": "windows-macos-real-machine",
@@ -545,7 +586,8 @@
         ],
         "pattern": "macOS 要真機",
         "note": "驗收腳本自己寫明這一段還沒做；真機驗收接上時會改寫。"
-      }
+      },
+      "issue": 42
     },
     {
       "id": "github-release",
@@ -557,7 +599,8 @@
       "verify": {
         "kind": "manual",
         "note": "對外動作要使用者點頭，不該由 verify 判。"
-      }
+      },
+      "issue": 43
     },
     {
       "id": "v01-remaining-battle-chain",
@@ -568,7 +611,8 @@
       "verify": {
         "kind": "manual",
         "note": "同 v01-full-battle-parity。這兩條應該一起收掉，或合成一條。"
-      }
+      },
+      "issue": 44
     },
     {
       "id": "appimage-rebuild-latest-fixes",
@@ -579,7 +623,8 @@
       "verify": {
         "kind": "manual",
         "note": "「包裡有沒有那個修正」要拆包比對。重建收據落地時改綁它。"
-      }
+      },
+      "issue": 45
     },
     {
       "id": "train-forge-entry-condition",
@@ -598,7 +643,8 @@
         "note": "已決定不做，當回歸訊號：RE-134 的結論與 shop.go 的分岔都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。"
+      "resolved": "2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。",
+      "issue": 46
     },
     {
       "id": "save-across-battle-and-clock",
@@ -613,7 +659,8 @@
         ],
         "pattern": "世界時間還沒有規格",
         "note": "save.go:94 的自承註解。世界時間的規格定下來、欄位加進格式時這一句會消失。"
-      }
+      },
+      "issue": 47
     },
     {
       "id": "dist-rebuild-version-number",
@@ -625,7 +672,8 @@
       "verify": {
         "kind": "manual",
         "note": "版本號是決策不是程式狀態。`build_dist.sh` 把版本當參數收，綁不到也不該綁。"
-      }
+      },
+      "issue": 48
     },
     {
       "id": "dist-package-sha256-verification",
@@ -641,7 +689,8 @@
         ],
         "pattern": "sha256",
         "note": "正反對照過：同一個 pattern 在 tools/write_dist_manifest.py 命中兩次（它產雜湊），在兩支驗收腳本都是零——缺口是真的，不是 pattern 太窄。"
-      }
+      },
+      "issue": 49
     },
     {
       "id": "world-battle-click-regions",
@@ -659,7 +708,8 @@
         "note": "已完成，當回歸訊號：實作與驗收測試都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。"
+      "resolved": "2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。",
+      "issue": 50
     },
     {
       "id": "inn-disband-exit",
@@ -677,7 +727,8 @@
         "note": "已完成，當回歸訊號：銜接與測試都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A(\"kolbook.exe\", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。"
+      "resolved": "2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A(\"kolbook.exe\", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。",
+      "issue": 51
     },
     {
       "id": "attack-message-chain-index",
@@ -693,7 +744,8 @@
         ],
         "pattern": "攻擊那一手的訊息鏈還沒解完|攻擊的訊息鏈也還沒解完",
         "note": "程式與 SPEC-008 各一處；解出時會一起改寫。"
-      }
+      },
+      "issue": 52
     },
     {
       "id": "sub-26c5f-damage-line",
@@ -708,7 +760,8 @@
         ],
         "pattern": "那一支還沒解讀，寧可不報",
         "note": "main.go 的自承，解出時會改寫。"
-      }
+      },
+      "issue": 53
     },
     {
       "id": "enemy-move-direction-unhooked",
@@ -723,7 +776,8 @@
         ],
         "pattern": "\\*\\*解出來了但還沒接上\\*\\*",
         "note": "ai.go 的自承，接上時會改寫。"
-      }
+      },
+      "issue": 54
     },
     {
       "id": "counterscan-style-and-retry",
@@ -741,7 +795,8 @@
         "note": "已完成，當回歸訊號：實作與測試都要在，少一邊就開口。"
       },
       "status": "done",
-      "resolved": "2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。"
+      "resolved": "2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。",
+      "issue": 55
     },
     {
       "id": "actor-record-05-ability",
@@ -757,7 +812,8 @@
         ],
         "pattern": "依裝備賦予的四格之三|哪一件裝備、哪一個位元|遮罩 0x10 要的",
         "note": "程式兩處自承加 SPEC-008 的反制掃描條件；解出時會一起改寫。"
-      }
+      },
+      "issue": 56
     },
     {
       "id": "move-unlock-tile-reason",
@@ -772,7 +828,8 @@
         ],
         "pattern": "為什麼是這一塊還沒解出來",
         "note": "commands.go 的自承，解出時會改寫。"
-      }
+      },
+      "issue": 57
     },
     {
       "id": "actor-record-25-reader",
@@ -788,7 +845,8 @@
         ],
         "pattern": "它在哪裡被讀還沒解|`\\+0x25` 在哪裡被讀還沒解",
         "note": "程式與 SPEC-010 末段各一處。"
-      }
+      },
+      "issue": 58
     },
     {
       "id": "sub-1aae8-params",
@@ -803,7 +861,8 @@
         ],
         "pattern": "那一支的參數語意還沒解出來",
         "note": "spell.go 的自承，解出時會改寫。"
-      }
+      },
+      "issue": 59
     },
     {
       "id": "victory-drop-sub-289ee",
@@ -821,7 +880,8 @@
         "note": "已完成，當回歸訊號：實作與打贏那一段的呼叫都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。"
+      "resolved": "2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。",
+      "issue": 60
     },
     {
       "id": "town-typing-input-box",
@@ -836,7 +896,8 @@
         ],
         "pattern": "remake 的輸入框還沒做",
         "note": "keys.go 的自承，做出來時會消失。"
-      }
+      },
+      "issue": 61
     },
     {
       "id": "word-2df2c-outdoor-switch",
@@ -851,7 +912,8 @@
         ],
         "pattern": "是那個開關，語意還沒解",
         "note": "layout.go 的自承，解出時會改寫。"
-      }
+      },
+      "issue": 62
     },
     {
       "id": "quest-item-0xb926",
@@ -866,7 +928,8 @@
         ],
         "pattern": "`\\[0xB926\\]` 還沒解",
         "note": "SPEC-014 的自承；解出時會改寫。"
-      }
+      },
+      "issue": 63
     },
     {
       "id": "ui-details-unverified",
@@ -885,7 +948,8 @@
         ],
         "pattern": "還沒對拍|還沒讀|的畫面還沒對",
         "note": "五處程式加 SPEC-010 兩處，共用「還沒對拍」這一類說法；對完會一起消失。"
-      }
+      },
+      "issue": 64
     },
     {
       "id": "world-clock-threshold-mechanism",
@@ -900,7 +964,8 @@
         ],
         "pattern": "機制還沒追出來",
         "note": "clock.go 的自承。"
-      }
+      },
+      "issue": 65
     },
     {
       "id": "chardata-writer-untraced-fields",
@@ -915,7 +980,8 @@
         ],
         "pattern": "來源尚未反追",
         "note": "writer.go 的自承。"
-      }
+      },
+      "issue": 66
     },
     {
       "id": "planning-25-not-verified",
@@ -930,7 +996,8 @@
         ],
         "pattern": "還沒逐格核對過",
         "note": "planning.go 的自承。"
-      }
+      },
+      "issue": 67
     },
     {
       "id": "koldata-action-messages",
@@ -945,7 +1012,8 @@
         ],
         "pattern": "還沒對上 KOLDATA",
         "note": "commands.go 的自承，指向 SPEC-010 末段。"
-      }
+      },
+      "issue": 68
     },
     {
       "id": "reshuffle-behavior-address",
@@ -960,7 +1028,8 @@
         ],
         "pattern": "行為還沒對上位址",
         "note": "state.go 的自承。"
-      }
+      },
+      "issue": 69
     },
     {
       "id": "spec-unsolved-sections",
@@ -975,7 +1044,8 @@
         ],
         "pattern": "^#{2,3} .*(還沒|尚未).*(關閉|解|通過|gate)",
         "note": "綁的是章節標題本身，所以新開一節未解項會自動被這一條認領，全部清空時才會開口。要看是哪幾份跑 `grep -rn '^#\\{2,3\\} .*\\(還沒\\|尚未\\)' docs/spec/`。"
-      }
+      },
+      "issue": 70
     },
     {
       "id": "spell-target-figure",
@@ -990,7 +1060,8 @@
         ],
         "pattern": "目標的人形還沒畫",
         "note": "SPEC-012 的自承。"
-      }
+      },
+      "issue": 71
     },
     {
       "id": "actor-record-2c",
@@ -1005,7 +1076,8 @@
         ],
         "pattern": "`\\+0x2C` 仍未解",
         "note": "SPEC-012 的自承。"
-      }
+      },
+      "issue": 72
     },
     {
       "id": "quest-count-ff-writer",
@@ -1020,7 +1092,8 @@
         ],
         "pattern": "還沒找到寫入點",
         "note": "SPEC-014 的自承。"
-      }
+      },
+      "issue": 73
     },
     {
       "id": "spec029-wiring-review",
@@ -1035,7 +1108,8 @@
         ],
         "pattern": "仍待審查|接線順序審查",
         "note": "SPEC-029 的自承；審查完成時會改寫。"
-      }
+      },
+      "issue": 74
     },
     {
       "id": "license-into-packages",
@@ -1053,7 +1127,8 @@
         ],
         "pattern": "LICENSE",
         "note": "已完成，當回歸訊號：建置與打包兩支都要帶 LICENSE，少一支就開口。"
-      }
+      },
+      "issue": 75
     },
     {
       "id": "sheet-items-and-party-portrait",
@@ -1071,7 +1146,8 @@
         ],
         "pattern": "func \\(s \\*Session\\) Open(Item|Party)Page\\(",
         "note": "已完成，當回歸訊號：兩頁各在一個檔案，單獨刪掉其中一頁也要開口。"
-      }
+      },
+      "issue": 76
     },
     {
       "id": "party-limit-six-boundary",
@@ -1090,7 +1166,8 @@
         ],
         "pattern": "MaxParty",
         "note": "已完成，當回歸訊號：招募、進門與保存三處都要把關，少一處就開口。"
-      }
+      },
+      "issue": 77
     },
     {
       "id": "extraction-docker-image",
@@ -1107,7 +1184,8 @@
         ],
         "pattern": "eob-remake-go:",
         "note": "已完成，留著當回歸訊號：包裝腳本不再指向鎖版映像時會重新開口。"
-      }
+      },
+      "issue": 78
     },
     {
       "id": "wilderness-cloud-animation",
@@ -1124,7 +1202,8 @@
         ],
         "pattern": "CompositeGroup\\(s\\.Group, s\\.Phase\\)",
         "note": "已完成，當回歸訊號，綁的是「畫進畫面」那一環（`drawWeather` 走 CompositeGroup）。`cmd/kol/main.go` 的 Phase 遞增沒綁——pattern 不同，一條 verify 綁不了兩種。"
-      }
+      },
+      "issue": 79
     },
     {
       "id": "monster-unarmed-weapon-source",
@@ -1141,7 +1220,8 @@
         "note": "已完成，當回歸訊號：AttackWeapon 的陣營分流被拿掉時條目會重新開口。"
       },
       "status": "done",
-      "resolved": "2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。"
+      "resolved": "2026-09-10 依使用者決定照原版實作：`Actor.AttackWeapon` 在 `Side == SideMonster` 時一律回手上那件，`NewQuest` 不再填怪物的 UnarmedWeapon，`unarmedFrom` 連同它唯一的使用者一起移除。`TestMonsterUnarmedFromWorn` 釘的是被推翻的行為，改寫成`TestMonsterUnarmedUsesHeldWeapon`（含隊員反面對照與空手怪物邊界）。SPEC-008 與 SPEC-012 的「兩側都接上了」「不是只完成隊員一側」兩處錯誤斷言已改寫成現況。",
+      "issue": 80
     },
     {
       "id": "save-v1-entry-replacement",
@@ -1158,7 +1238,8 @@
         "note": "已完成，當回歸訊號：這句契約被改掉時條目會重新開口。"
       },
       "status": "done",
-      "resolved": "2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。"
+      "resolved": "2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。",
+      "issue": 81
     },
     {
       "id": "region-dat-provenance",
@@ -1176,7 +1257,8 @@
         ],
         "pattern": "REGION INSTALLER|KOL_BOOK_REGION_PROBE",
         "note": "已完成，當回歸訊號：結論文件與可重跑的探針都要在，少一邊就開口。"
-      }
+      },
+      "issue": 82
     },
     {
       "id": "planning-current-slot-semantics",
@@ -1194,7 +1276,8 @@
         "note": "已完成，當回歸訊號：定案紀錄與那支不依賴它的對拍收據都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 定案：它是走訪參戰者的**索引游標**（IDA `word_37D2A`），規劃、執行與訊息三段各自的迴圈都會設它，不是「輪到誰行動」的權威狀態。寫入監看抓到五個寫入點，其中 0x1F073 正是 SPEC-020 步驟一的收尾。remake 不需要它——輪到誰由 Round.Order 與 Cursor 表達。見 docs/re/20260911-actor-index-cursor.md。"
+      "resolved": "2026-09-11 定案：它是走訪參戰者的**索引游標**（IDA `word_37D2A`），規劃、執行與訊息三段各自的迴圈都會設它，不是「輪到誰行動」的權威狀態。寫入監看抓到五個寫入點，其中 0x1F073 正是 SPEC-020 步驟一的收尾。remake 不需要它——輪到誰由 Round.Order 與 Cursor 表達。見 docs/re/20260911-actor-index-cursor.md。",
+      "issue": 83
     },
     {
       "id": "planning-other-commands-unwalked",
@@ -1209,7 +1292,8 @@
         ],
         "pattern": "沒有逐格走過",
         "note": "收據的自承，走完時會改寫。"
-      }
+      },
+      "issue": 84
     },
     {
       "id": "battle-target-cursor-click",
@@ -1224,7 +1308,8 @@
         ],
         "pattern": "故意不列",
         "note": "input.go 的自承，接上時會改寫。"
-      }
+      },
+      "issue": 85
     },
     {
       "id": "cjk-sheet-subpages",
@@ -1239,7 +1324,8 @@
         ],
         "pattern": "不在這一版",
         "note": "SPEC-030 的自承，補完時會改寫。"
-      }
+      },
+      "issue": 86
     },
     {
       "id": "screenshot-png-nondeterminism",
@@ -1250,13 +1336,14 @@
       "verify": {
         "kind": "manual",
         "note": "沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。"
-      }
+      },
+      "issue": 87
     },
     {
       "id": "player-path-receipts-stale",
       "layer": "verification",
       "title": "正常玩家路徑的收據對不上現在的程式",
-      "body": "2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑。**plan 先補齊了**：六條的描述寫「讀存檔開場」而沒有 `load` 欄位、`full` 沒有 `scene` 欄位，都補上了；補完之後 town-shop、town-stable、town-train、town-load 四條直接變一致——那幾條本來就沒問題，是重跑條件不完整。\\n\\n現況：**9 條一致**（town、town-edge、town-mirror、town-recruit、town-rest、town-talk 之外再加那四條中的三條；town 與 town-leave 等仍待確認）、**其餘對不上**，第一個差異步：`full` 21、`world-quest` 12、`town-scroll` 14、`town` 8、`town-leave` 12、`world-clock` 12、`world-road` 12、`town-round-trip` 需再看。\\n\\n對不上的是**行為變了**，不是 plan 的問題：\\n- 經過選角那幾條（full、town、flow-quest…）是 `e118596` 把 SceneInn 改成 SceneTown 造成的，進門少一步、之後整串偏掉。\\n- `town-scroll` 第 14 步收據是法術清單、重跑回到店主招呼語，而它是 `-load` 開場不經過選角——SCROLL 那條流程自己變過。\\n- `world-quest` 第 12 步起不同，同樣是 `-load` 開場。\\n\\n**英文與中文模式重跑全程相同**，與中文化無關。長路徑那幾條（有 trace 的）還沒跑，一條十幾二十分鐘。\n\n**town-scroll 已處理**（2026-09-11）：現在的行為是對的——RE-128 讀到買完就在 `0x178DA` `retf` 回招呼語，原版 oracle 的畫格也是如此；收據（09-05）早於那次更正。腳本改成買完接 `> RET`，順帶把法術一覽照原版改正（RE-137）後重生，21 步全過。town-stable 第 16 步因資料頁繪製順序照原版改正（武器框頂邊蓋過坐騎投影，41 點）重生。quest-list 從書本選單起步，重跑卡在名冊頁，屬於經過選角那一類。",
+      "body": "2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑。**plan 先補齊了**：六條的描述寫「讀存檔開場」而沒有 `load` 欄位、`full` 沒有 `scene` 欄位，都補上了；補完之後 town-shop、town-stable、town-train、town-load 四條直接變一致——那幾條本來就沒問題，是重跑條件不完整。\n\n現況：**9 條一致**（town、town-edge、town-mirror、town-recruit、town-rest、town-talk 之外再加那四條中的三條；town 與 town-leave 等仍待確認）、**其餘對不上**，第一個差異步：`full` 21、`world-quest` 12、`town` 8、`town-leave` 12、`world-clock` 12、`world-road` 12、`town-round-trip` 需再看。\n\n對不上的是**行為變了**，不是 plan 的問題：\n- 經過選角那幾條（full、town、flow-quest…）是 `e118596` 把 SceneInn 改成 SceneTown 造成的，進門少一步、之後整串偏掉。\n- `world-quest` 第 12 步起不同，是 `-load` 開場、不經過選角，要另外查。\n\n**英文與中文模式重跑全程相同**，與中文化無關。長路徑那幾條（有 trace 的）還沒跑，一條十幾二十分鐘。\n\n**town-scroll 已處理**（2026-09-11）：現在的行為是對的——RE-128 讀到買完就在 `0x178DA` `retf` 回招呼語，原版 oracle 的畫格也是如此；收據（09-05）早於那次更正。腳本改成買完接 `> RET`，順帶把法術一覽照原版改正（RE-137）後重生，21 步全過。town-stable 第 16 步因資料頁繪製順序照原版改正（武器框頂邊蓋過坐騎投影，41 點）重生。quest-list 從書本選單起步，重跑卡在名冊頁，屬於經過選角那一類。",
       "acceptance": "逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。",
       "verify": {
         "kind": "present",
@@ -1265,7 +1352,8 @@
         ],
         "pattern": "收據過期",
         "note": "README 的自承，重生完會改寫。"
-      }
+      },
+      "issue": 88
     },
     {
       "id": "path-verify-does-not-replay",
@@ -1283,7 +1371,8 @@
         "note": "已完成，當回歸訊號：工具與 README 的說明都要在。"
       },
       "status": "done",
-      "resolved": "2026-09-11 做了 `tools/check_player_paths.py`：重跑到 workplace/replay-check/ 再與收據逐 byte 比，不覆寫。第一次跑就抓到 10 條對不上。`verify_full_path.py` 保留原用途（驗收據自洽），兩支分工不同。"
+      "resolved": "2026-09-11 做了 `tools/check_player_paths.py`：重跑到 workplace/replay-check/ 再與收據逐 byte 比，不覆寫。第一次跑就抓到 10 條對不上。`verify_full_path.py` 保留原用途（驗收據自洽），兩支分工不同。",
+      "issue": 89
     },
     {
       "id": "cjk-battle-remaining-pages",
@@ -1298,7 +1387,8 @@
         ],
         "pattern": "還沒有中文版面",
         "note": "battle_render.go 的自承，補完時會改寫。"
-      }
+      },
+      "issue": 90
     },
     {
       "id": "item-detail-page-parity",
@@ -1314,7 +1404,8 @@
         "pattern": "沒有投影",
         "note": "那段與反組譯不符的註解，修正時會改寫。"
       },
-      "status": "open"
+      "status": "open",
+      "issue": 91
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

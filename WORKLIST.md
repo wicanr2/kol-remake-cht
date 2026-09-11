@@ -34,101 +34,105 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 tools/run_python_tool.sh tools/worklist.py verify
 ```
 
+每一條在 GitHub 上有一張對應的 issue（條目後面的 `#編號`），由
+`tools/sync_worklist_issues.sh` 從這份 JSON 鏡像過去；在 GitHub 上改內文或
+開關不會回流，下一次同步會蓋回來。
+
 ### 玩家會撞到的功能缺口
 
-- **g05-picture-shield-editor-spec** — G05：圖像／盾牌編輯另立規格
+- **g05-picture-shield-editor-spec**（#3） — G05：圖像／盾牌編輯另立規格
   EDIT PICTURE／EDIT SHIELD 未列入 SPEC-005 已完成的建角範圍，要另立規格。原版是滑鼠驅動的點陣圖編輯器、ESC 無作用，現有鍵盤 oracle 走不完。
   完成條件：規格立起來並經證據審查升 READY。
   核實：`internal/flow/flow.go` 找得到 `EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作` 就是還沒完
 
-- **g07-battle-speed-options** — G07：三個加速選項的詳細規格、控制與保存
+- **g07-battle-speed-options**（#5） — G07：三個加速選項的詳細規格、控制與保存
   SPEC-028 草案已核對現有接口與完成條件，狀態仍是 DRAFT，明寫「不授權先加空開關」。無訊息自動略過不等於未接敵快轉；細節與可見原型待確認。
   完成條件：SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。
   核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接` 就是還沒完
 
-- **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊
+- **a01-a02-identity-and-save**（#13） — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊
   第一批修復已接建角入口／表單／取消與同城選隊顯示；SPEC-023 已接完整存檔與名冊保存。整條垂直鏈的驗收仍未做。
   完成條件：新建兩名角色，各自能入隊，離開重載仍可選；刪除與滿槽也驗證。
   核實：要人判——垂直鏈驗收沒有單一程式訊號。A 系列稽核測試轉成回歸測試後，改成 json_len 綁回歸測試清單的項數。
 
-- **a03-a04-writeback-and-contract** — A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約
+- **a03-a04-writeback-and-contract**（#14） — A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約
   勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。跨戰鬥／城鎮／存檔的逐欄一致仍未驗。
   完成條件：跨戰鬥／城鎮／存檔逐欄一致。
   核實：要人判——同 a01-a02：逐欄一致要跑過才知道。
 
-- **a05-a06-a09-belt-ward-nutrition** — A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition
+- **a05-a06-a09-belt-ward-nutrition**（#15） — A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition
   三個缺陷已在第一批修復處理，診斷測試尚未轉為回歸測試。
   完成條件：對應診斷測試轉為回歸測試並通過，再補正常玩家路徑抽測。
   核實：要人判——完成物是測試檔，而 verify 不掃測試檔（測試會提到還沒接的東西）。正常玩家路徑抽測收據落地時改綁它。
 
-- **weather-animation-and-speed** — 接正式天候動畫及既定加速選項
+- **weather-animation-and-speed**（#20） — 接正式天候動畫及既定加速選項
   SPEC-026 已接六組天候、128 像素捲雲與正式節拍，dosgolem 四組完整合成與六組分派通過，正常出城 GUI 只在天空區改變；雨雪的正常 GUI 與原版正常野外同相位仍未宣稱。加速選項的部分與 g07-battle-speed-options 同源。
   完成條件：雨雪在正常 GUI 下與原版同相位；加速選項依 SPEC-028 READY 後接上。
   核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*` 就是還沒完
 
-- **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器
+- **picture-shield-bitmap-editor**（#31） — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器
   原版是滑鼠驅動、ESC 無作用，現有鍵盤 oracle 走不完；要往下做得先讓 oracle 能送滑鼠事件。這是 g05-picture-shield-editor-spec 的實作段。
   卡在：oracle 還不能送滑鼠事件
   完成條件：oracle 能送滑鼠事件，編輯器接上並對拍。
   核實：`internal/flow/flow.go` 找得到 `EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作` 就是還沒完
 
-- **building-followup-dialogue** — 建築內的後續對話（訊息 10 起）
+- **building-followup-dialogue**（#32） — 建築內的後續對話（訊息 10 起）
   訊息 10…13 的選法已知（聲望等第為 0 時是「訊息 10 ＋ 性別×2 ＋ 會不會法術」，否則訊息 26 ＋ 等第），但觸發條件還沒讀出來。
   完成條件：觸發條件解出並接上，正常路徑能看到後續對話。
   核實：要人判——topics.go 已有訊息 10 的選法但沒有觸發條件。接上時會多一支判斷觸發的函式，到時改成 absent 綁它。
 
-- **text-layout-remaining-screens** — 量測城鎮、世界、戰鬥畫面的文字版面
+- **text-layout-remaining-screens**（#34） — 量測城鎮、世界、戰鬥畫面的文字版面
   書本的文字版面已機械量得並對拍；其餘三種畫面還沒量。戰鬥那一段（索引 ≥ 0x100）的中文版面因此定不下來。
   完成條件：三種畫面的文字版面都量過，每個 CJK 欄位有安全矩形。
   核實：要人判——版面量測的產物是 JSON 與收據。三份版面表落地時改成 json_len 綁它們的項數。
 
-- **cjk-remaining-screens** — 城鎮、世界、戰鬥畫面的中文化與職業名暫譯的交叉確認
+- **cjk-remaining-screens**（#35） — 城鎮、世界、戰鬥畫面的中文化與職業名暫譯的交叉確認
   城鎮 1,938 則對話與三個 UI 文字庫 486 筆已翻完、缺字 0；戰鬥那一段（索引 ≥ 0x100）的中文版面還沒定。職業名仍是暫譯。
   卡在：要先有 text-layout-remaining-screens 的版面
   完成條件：三種畫面的中文都上得去且不溢出，職業名譯法定案。
   核實：要人判——卡在版面。版面定了之後這一條會變成可綁的（安全矩形檢查器的項數）。
 
-- **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy
+- **terminology-and-safe-rects**（#39） — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy
   術語表已建（docs/manual/glossary.md），文字安全矩形 6,952 項已全過檢查器，5,109 個字串無可見缺字。缺的是遊戲與說明書共用同一份已核准術語，以及每個欄位明確的 overflow policy（換行還是截斷）。
   完成條件：術語表是唯一來源，遊戲字串引用它；每個 CJK 欄位有 overflow policy。
   核實：要人判——檢查器管的是「會不會超出矩形」，不管「超出了要怎麼辦」。policy 寫進資料時改成 json_len 綁它。
 
-- **save-across-battle-and-clock** — 存檔跨事件與戰鬥階段恢復：戰鬥中途狀態與世界時間
+- **save-across-battle-and-clock**（#47） — 存檔跨事件與戰鬥階段恢復：戰鬥中途狀態與世界時間
   任務旗標、已回報數與身上帶的東西已進存檔，並由 `full-chain` ＋ `full-chain-reload` 驗過往返。戰鬥中途的狀態與世界時間還沒進存檔——存檔格式裡連日期欄位都還沒有。
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
-- **enemy-move-direction-unhooked** — 敵人移動段的方向規則：解出來了但還沒接上
+- **enemy-move-direction-unhooked**（#54） — 敵人移動段的方向規則：解出來了但還沒接上
   RE-117 已解：方向要先試往目標那一步、再試左右各一格，沒有目標時從隨機方向起繞八格，八格都站不下另有三條退路。**沒接的理由寫在程式裡**——接上去會改變戰況，`arena` 與 `full-chain-ending` 那兩條長路徑的固定按鍵序列得整條重生（各有兩到三場戰鬥，中間還夾著城鎮互動），所以留待專門的一輪。
   完成條件：接上並重生那兩條長路徑的收據。
   核實：`internal/battle/ai.go` 找得到 `\*\*解出來了但還沒接上\*\*` 就是還沒完
 
-- **town-typing-input-box** — 城鎮打字問話的輸入框
+- **town-typing-input-box**（#61） — 城鎮打字問話的輸入框
   MOUTH 的打字問話功能本身已解並驗過（RE-067／RE-114），但 remake 沒有輸入框，腳本用替代形式送同一件事。正常玩家在 GUI 上打不了字。
   完成條件：輸入框做出來，正常 GUI 打得了字並問得到關鍵字。
   核實：`internal/town/keys.go` 找得到 `remake 的輸入框還沒做` 就是還沒完
 
-- **spell-target-figure** — 施法時目標的人形還沒畫
+- **spell-target-figure**（#71） — 施法時目標的人形還沒畫
   `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
   核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
 
-- **battle-target-cursor-click** — 選目標格那一層的滑鼠指格
+- **battle-target-cursor-click**（#85） — 選目標格那一層的滑鼠指格
   規劃段選目標格時原版收的是滑鼠座標直接指格（SPEC-010 §3：X 0x130…0x250、Y 8…0x98 之內直接指到那一格），語意與圖示列的「搬白框幾步」不同，所以 2026-09-11 那一輪的可點區域刻意跳過這一層。要接就得接真正的座標指格，還要處理 mode 1／mode 2 各自的夾限規則。
   完成條件：座標指格接上，兩種 mode 的夾限都照 SPEC-010，並有收據。
   核實：`cmd/kol/input.go` 找得到 `故意不列` 就是還沒完
 
-- **cjk-sheet-subpages** — 資料頁的坐騎與頂端隊員格的中文版面
+- **cjk-sheet-subpages**（#86） — 資料頁的坐騎與頂端隊員格的中文版面
   物品、隊伍立繪、法術一覽與任務一覽四頁已經做了（2026-09-11）：與英文版共用同一份版面，每個座標乘上 book.CJKScale。法術與任務兩頁照原版只重畫 `sub_16239` 那一層（RE-137），實跑截圖確認過。剩坐騎那一塊（RE-120）與頂端的隊員格（`sub_13EEE`）——英文版有、中文模式整塊沒畫。
   完成條件：坐騎那一塊與頂端隊員格的中文版面畫出來並有截圖。
   核實：`docs/spec/030-cjk-character-sheet.md` 找得到 `不在這一版` 就是還沒完
 
-- **cjk-battle-remaining-pages** — 戰鬥的戰利品與法術清單兩頁還沒中文版面
+- **cjk-battle-remaining-pages**（#90） — 戰鬥的戰利品與法術清單兩頁還沒中文版面
   戰場那一頁與遭遇那一頁已經做了（2026-09-11）：同一份版面乘上 `book.CJKScale`，三倍之後訊息區的行高 6 變成 18 剛好是字模格高，四行都放得下。戰利品與法術清單兩頁仍走「原版解析度畫完再整張放大」，字是原版字模放大的。
   完成條件：兩頁的中文版面畫出來並有截圖。
   核實：`cmd/kol/battle_render.go` 找得到 `還沒有中文版面` 就是還沒完
 
-- **item-detail-page-parity** — 物品頁選中之後的明細畫面與原版不同
+- **item-detail-page-parity**（#91） — 物品頁選中之後的明細畫面與原版不同
   原版 `town-sheet-items-run1/frames/frame-072.png`：選中一件東西之後，立繪與十七列清單都不見了，只剩木紋底圖與明細框 (62,58)–(257,125)，框右下有 `sub_1BA9D` 自帶的四像素投影。remake 保留立繪與清單，也沒畫投影——`internal/ui/itempage.go` 那段註解寫「沒有投影」與反組譯不符（`0x1BAF1` 一定呼叫 `sub_1B7E9`）。既有的物品頁對拍只比到選中之前那一格（frame-070）。見 RE-137 末段。
   完成條件：讀出選中之後那一段重畫了什麼，改正 remake 之後與 frame-072 整頁逐點對拍，允許區外零差異。
   核實：`internal/ui/itempage.go` 找得到 `沒有投影` 就是還沒完
@@ -136,93 +140,101 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 接了但沒驗過
 
-- **g03-arena-vertical-chain** — G03：競技場正常取得資格與完整垂直鏈
+- **g03-arena-vertical-chain**（#2） — G03：競技場正常取得資格與完整垂直鏈
   固定地圖已依 SPEC-025 接線，4096 格 dosgolem 解碼比較與地圖隔離回歸通過；繁中空肖像繪圖錯誤已修，受控資格存檔可經正式按鍵選人、不下注及進場（docs/verification/arena-dialog-fix-20260908.md）。剩正常取得資格與完整垂直鏈；原版特殊肖像仍未知。make_arena_save.py 只產生受控輸入，不能代替正常取得資格。
   完成條件：玩家從正常路徑取得資格、下注、打完單挑並結算，全程不靠受控存檔。
   核實：`cmd/kol/main.go`、`internal/ui/town.go` 找得到 `sub_2B454` 就是還沒完
 
-- **v01-full-battle-parity** — V01：完整戰鬥同狀態結算、武器／護甲與保存的正常垂直鏈
+- **v01-full-battle-parity**（#6） — V01：完整戰鬥同狀態結算、武器／護甲與保存的正常垂直鏈
   地形亂數位置轉置已依 SPEC-008 修正（三組固定種子、兩條路徑 24,576 格與亂數終態一致）；SPEC-029 修好敵人 Kind 與遠程初始化（768＋2304 組通過，加 SLEDGE 後合計 60 個初始欄位）；SPEC-027 修好戰後傷勢折算與敗北回寫（4608 組、五條結算至 v2 重載）；任務物品名稱誤認已修（258 組）；任務回報獎勵的母表共用指標已修。以上都是常式比較，正常整場仍未驗。
   完成條件：一整場戰鬥從進場到結算、保存都與原版同狀態，走的是正常玩家路徑。
   核實：要人判——常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。
 
-- **battle-normal-seed-alignment** — 原版戰鬥同狀態：攻擊結算比較
+- **battle-normal-seed-alignment**（#9） — 原版戰鬥同狀態：攻擊結算比較
   兩名隊員與 SLEDGE 共 60 個初始欄位、4096 格地形、SLEDGE 本體記錄 20 項都通過。**規劃段也比完了**（2026-09-11）：主指令列 5 格、第 1 格 0x29，走同一組位置之後三個決策值 Command=0x29／Style=1／Guard=2 與原版逐項相同，正反對照過——planning-parity-20260911.md，跑法 tools/run_original_parity_tests.sh。剩下的是**攻擊結算**：原版要在規劃寫回之後繼續跑到結算，remake 走同一組輸入比傷害與狀態。
   完成條件：同一 seed、同一初始狀態下，remake 與原版的攻擊結算逐項一致。
   核實：要人判——結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真。規劃那一半已由 TestOriginalNormalPlanning 蓋住；結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。
 
-- **inn-farewell-diff-review** — 審查原版離店告別訊息與確認流程
+- **inn-farewell-diff-review**（#10） — 審查原版離店告別訊息與確認流程
   SPEC-024 與告別確認已實作，dosgolem 單人／多人正常離店與繁中 GUI 已抽驗，但不是全城逐店文字驗收。要補與 remake 直接離店的玩家可見差異。
   完成條件：列出所有可見差異並各自處置，或證明沒有差異。
   核實：要人判——差異審查的產物是文件不是程式。審查報告落地時改成 absent 綁它。
 
-- **dosgolem-gui-ai-acceptance** — 補新版正常 GUI 與玩家可見 AI 行為驗收
+- **dosgolem-gui-ai-acceptance**（#11） — 補新版正常 GUI 與玩家可見 AI 行為驗收
   最新工作樹已重跑 Olear 正常射擊 150 個輸入、確認彈藥 20→19，dosgolem Olear 旅店入口亦通過（docs/verification/fixed-seed-player-path-20260908.md）。完整 AI／原版戰鬥仍待驗。
   完成條件：玩家看得到的 AI 行為（撤退、反制掃描、側翼、撿武器）在正常 GUI 下與原版一致。
   核實：要人判——AI 行為要實跑才看得見。整場 AI 對拍收據落地時改綁它。
 
-- **appimage-parity-continuation** — 旅店、戰鬥與存讀檔的 AppImage 同狀態對拍
+- **appimage-parity-continuation**（#12） — 旅店、戰鬥與存讀檔的 AppImage 同狀態對拍
   要等 remake 未完成的接線修好才能往下做。工具鏈側已可用：dosgolem 正常 KOL.EXE 入口經 DOS Enter 進 KOLBOOK，已走到 Halfway House。
   完成條件：AppImage 與原版在旅店、戰鬥、存讀檔三段同狀態一致。
   核實：要人判——卡在上游接線。對拍收據落地時改綁它。
 
-- **a10-battle-info-panel** — A10：戰鬥左側完整資訊內容的原版同狀態
+- **a10-battle-info-panel**（#17） — A10：戰鬥左側完整資訊內容的原版同狀態
   人形／傷勢／疲勞（SPEC-018）、左上裝備／肖像與模式切換（SPEC-019）、左下命令／招式（SPEC-021）、彈藥數字（SPEC-022）都已接線；3,168 組命令參數、144 組遮罩、十二組直條與九組敵人智力檢定由 dosgolem 通過，正常 GUI 已畫出人形、兩張戰場畫格縮放比較零差異。完整裝備與攻擊後傷勢對拍仍待完成。
   完成條件：正常戰鬥能辨識目前角色、裝備與傷勢，破損後顯示同步；不能以空框截圖通過代替。
   核實：要人判——面板已接線，缺的是攻擊後的同狀態對拍。那份收據落地時改綁它。
 
-- **roster-full-ui-oracle** — 補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle
+- **roster-full-ui-oracle**（#28） — 補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle
   SPEC-005 已經證據審查升 READY，但 16 槽全滿只有靜態證據，沒有正常 UI oracle。
   完成條件：三種情境各有正常 DOS UI 的畫格與輸入序列收據。
   核實：要人判——oracle 收據是檔案不是程式。那三份收據落地時改成 absent 綁它們的路徑。
 
-- **minimal-player-chain** — 選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔
+- **minimal-player-chain**（#30） — 選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔
   full-chain 等五條走到底的收據已經涵蓋這條鏈（docs/verification/player-path/），但這一條當初的用意是「先挑一條窄的走通」，而實際做法是直接走完整條。條目留著沒動。
   完成條件：確認 player-path 的收據已滿足這一條，然後收掉。
   核實：要人判——這一條很可能已經被 player-path 收據滿足了，要人看一眼再決定收掉或改寫。
 
-- **attack-row-and-target-cursor** — 攻擊式那一列（frame-899）與選目標格畫面的對拍
+- **attack-row-and-target-cursor**（#33） — 攻擊式那一列（frame-899）與選目標格畫面的對拍
   選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解。
   完成條件：兩塊都有逐畫面對拍收據。
   核實：`internal/ui/battle.go`、`docs/spec/010-combat-commands.md` 找得到 `確切的視覺效果還沒解出來` 就是還沒完
 
-- **longest-cjk-visual-regression** — 最長繁中內容的視覺回歸、正常路徑截圖與輸入測試
+- **longest-cjk-visual-regression**（#40） — 最長繁中內容的視覺回歸、正常路徑截圖與輸入測試
   安全矩形檢查器是靜態的，沒有跑過最長字串的視覺回歸。
   完成條件：最長字串在正常路徑上截圖比對過。
   核實：要人判——視覺回歸的產物是收據。那份收據落地時改綁它。
 
-- **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣
+- **parity-sampling-registry**（#41） — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣
   CLAUDE.md 要求先分開「可啟動」「可玩」「近似完成」「嚴格 parity」並預先登記每階段 gate，不得做到一半才選容易通過的標準。目前沒有這份登記。
   完成條件：四個階段各自的抽樣母體、硬失敗條件與平台矩陣寫成資料。
   核實：要人判——這一份本身就該是 JSON。寫出來之後改成 json_len 綁它的階段數。
 
-- **v01-remaining-battle-chain** — V01 剩餘：完整裝備、地形、指令及攻擊結算、正常 GUI 戰後保存鏈
+- **v01-remaining-battle-chain**（#44） — V01 剩餘：完整裝備、地形、指令及攻擊結算、正常 GUI 戰後保存鏈
   與 v01-full-battle-parity 是同一件事的兩次登記（一次在現行缺口表、一次在最新驗證補充）。
   完成條件：同 v01-full-battle-parity。
   核實：要人判——同 v01-full-battle-parity。這兩條應該一起收掉，或合成一條。
 
-- **ui-details-unverified** — 五處 UI 細節還沒對拍
+- **ui-details-unverified**（#64） — 五處 UI 細節還沒對拍
   程式裡自承「還沒對拍」的幾處：法術清單的標題座標與版面（`spell.go`）、戰利品畫面（`spoils.go`，要打贏一場而且擲中兩成的掉落才看得到）、選目標格的那一圈與游標樣子（`ui/battle.go` 兩處）、物品頁 `sub_153FF` 模式 8 的擺法（`ui/itempage.go`）。都是畫得出來但沒有與原版逐畫面比過。
   完成條件：五處各有一份逐畫面對拍收據。
   核實：`internal/battle/spell.go`、`internal/battle/spoils.go`、`internal/ui/battle.go`、`internal/ui/itempage.go`、`docs/spec/010-combat-commands.md` 找得到 `還沒對拍|還沒讀|的畫面還沒對` 就是還沒完
 
-- **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對
+- **planning-25-not-verified**（#67） — 規劃段寫進 +0x25 的值沒逐格核對
   分派表認不得的圖號落 default 收尾時，原版寫進 `+0x25` 的是什麼還沒逐格核對過，所以 remake 記下來不動、不假裝做過。
   完成條件：逐格核對過，或確認 remake 目前的做法與原版等價。
   核實：`internal/battle/planning.go` 找得到 `還沒逐格核對過` 就是還沒完
 
-- **planning-other-commands-unwalked** — 規劃段只走過徒手那一條
+- **planning-other-commands-unwalked**（#84） — 規劃段只走過徒手那一條
   2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。
   完成條件：其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。
   核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
 
-- **screenshot-png-nondeterminism** — 重生截圖會讓無關的英文圖出現 diff
+- **screenshot-png-nondeterminism**（#87） — 重生截圖會讓無關的英文圖出現 diff
   跑一次 tools/run_kol_shots.sh 之後，沒有被改動影響的英文截圖也會出現位元差異（尺寸與內容相同）。MANIFEST 的判準之一是「有對應對拍收據的畫面必須與那張逐 byte 相同」，所以那些圖重生之後會被判 failed，得手動還原。來源還沒查——可能是 PNG 編碼、Ebitengine 的算繪，或 llvmpipe。
   完成條件：查明來源並讓重生是決定性的，或說明為何無法並改判準。
   核實：要人判——沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。
 
-- **player-path-receipts-stale** — 正常玩家路徑的收據對不上現在的程式
-  2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑。**plan 先補齊了**：六條的描述寫「讀存檔開場」而沒有 `load` 欄位、`full` 沒有 `scene` 欄位，都補上了；補完之後 town-shop、town-stable、town-train、town-load 四條直接變一致——那幾條本來就沒問題，是重跑條件不完整。\n\n現況：**9 條一致**（town、town-edge、town-mirror、town-recruit、town-rest、town-talk 之外再加那四條中的三條；town 與 town-leave 等仍待確認）、**其餘對不上**，第一個差異步：`full` 21、`world-quest` 12、`town-scroll` 14、`town` 8、`town-leave` 12、`world-clock` 12、`world-road` 12、`town-round-trip` 需再看。\n\n對不上的是**行為變了**，不是 plan 的問題：\n- 經過選角那幾條（full、town、flow-quest…）是 `e118596` 把 SceneInn 改成 SceneTown 造成的，進門少一步、之後整串偏掉。\n- `town-scroll` 第 14 步收據是法術清單、重跑回到店主招呼語，而它是 `-load` 開場不經過選角——SCROLL 那條流程自己變過。\n- `world-quest` 第 12 步起不同，同樣是 `-load` 開場。\n\n**英文與中文模式重跑全程相同**，與中文化無關。長路徑那幾條（有 trace 的）還沒跑，一條十幾二十分鐘。
+- **player-path-receipts-stale**（#88） — 正常玩家路徑的收據對不上現在的程式
+  2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑。**plan 先補齊了**：六條的描述寫「讀存檔開場」而沒有 `load` 欄位、`full` 沒有 `scene` 欄位，都補上了；補完之後 town-shop、town-stable、town-train、town-load 四條直接變一致——那幾條本來就沒問題，是重跑條件不完整。
+
+  現況：**9 條一致**（town、town-edge、town-mirror、town-recruit、town-rest、town-talk 之外再加那四條中的三條；town 與 town-leave 等仍待確認）、**其餘對不上**，第一個差異步：`full` 21、`world-quest` 12、`town` 8、`town-leave` 12、`world-clock` 12、`world-road` 12、`town-round-trip` 需再看。
+
+  對不上的是**行為變了**，不是 plan 的問題：
+  - 經過選角那幾條（full、town、flow-quest…）是 `e118596` 把 SceneInn 改成 SceneTown 造成的，進門少一步、之後整串偏掉。
+  - `world-quest` 第 12 步起不同，是 `-load` 開場、不經過選角，要另外查。
+
+  **英文與中文模式重跑全程相同**，與中文化無關。長路徑那幾條（有 trace 的）還沒跑，一條十幾二十分鐘。
 
   **town-scroll 已處理**（2026-09-11）：現在的行為是對的——RE-128 讀到買完就在 `0x178DA` `retf` 回招呼語，原版 oracle 的畫格也是如此；收據（09-05）早於那次更正。腳本改成買完接 `> RET`，順帶把法術一覽照原版改正（RE-137）後重生，21 步全過。town-stable 第 16 步因資料頁繪製順序照原版改正（武器框頂邊蓋過坐騎投影，41 點）重生。quest-list 從書本選單起步，重跑卡在名冊頁，屬於經過選角那一類。
   完成條件：逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。
@@ -231,32 +243,32 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 素材抽取與音訊
 
-- **g06-audio-listening-gate** — G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放
+- **g06-audio-listening-gate**（#4） — G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放
   SPEC-004 仍是 DRAFT、標「是否授權實作：否」。人耳驗收是升 READY 的閘門，不能跳過。
   完成條件：人耳驗收完成、SPEC-004 升 READY，正式播放路徑接上。
   核實：`docs/spec/004-ogg-audio-catalog.md`、`README.md` 找得到 `狀態：\*\*DRAFT\*\*|還沒接上音訊路徑` 就是還沒完
 
-- **asset-inventory-format-spec** — 唯讀輸入的資產 inventory 與格式規格
+- **asset-inventory-format-spec**（#22） — 唯讀輸入的資產 inventory 與格式規格
   COMBPICS、TWN0..7PICS 243 筆、MONPICS、PERPICS、MISCPICS、TITLE 五組、ENDPICS、BOOKPICS、KOLMPICS 83 筆、WEATPICS 18 筆、AWD1PICS 24 張、SHLDPICS 四組、HANDPICS 12 組、WEAPPICS 28 組、HEADPICS／TORPICS／LEGSPICS 各 54 組、CHARPICS.0 80 張、KOLPICS 14 筆與三個固定記錄表的 40×38 4-bit EGA 契約已證實；TWN 七筆圖號 1 placeholder 已排除。其餘 archive 與 PCGA／HERC 像素格式尚未完成。
   完成條件：所有 archive 與三種像素格式都有格式規格。
   核實：要人判——PCGA／HERC 還沒開始，沒有可綁的識別字。抽取器支援它們時會多出對應的解碼函式，到時改成 absent 綁那個名字。
 
-- **atlas-and-contact-tables** — 生成 atlas／接觸表並逐批人工檢查
+- **atlas-and-contact-tables**（#23） — 生成 atlas／接觸表並逐批人工檢查
   769 張 PNG 已抽出並有 manifest。2026-09-10 核實：十九支 tools/probe_extract_*.py 與 extract_battle_tiles.py／extract_ega_assets.py 已經會產 atlas 與接觸表（戰場磚塊 10×8、AWD1PICS 8×3、charpics 等），但 assets/ 底下沒有留存的正式產物——那些是拋棄式探針輸出。缺的是把它們定為正式產物，並逐批人工檢查。
   完成條件：atlas 與接觸表成為版控中的正式產物，尺寸、色盤、透明色、裁切與動畫序列逐批人工檢查過。
   核實：要人判——綁不住：atlas 這個字在十九支探針工具與 manifest 的 coverage_note 裡都有，綁它會判成已完成（2026-09-10 第一版就是這樣誤判的）。正式產物進版控時，改成 absent 綁 assets/ 底下那個檔的實際路徑。
 
-- **pit-square-wave-synth** — 實作 PIT 方波合成器並完成人耳驗收
+- **pit-square-wave-synth**（#24） — 實作 PIT 方波合成器並完成人耳驗收
   TITLE 的 WAV oracle 已由 DX-CAPTURE 取得（四段活動窗、codec、時長、峰值與 SHA-256 固定）；合成方向已決策為規格近似合成，不散布原版錄音。合成輸出與 DX-CAPTURE WAV 的段落結構比對後才可升 SPEC-004。
   完成條件：合成器實作完成，段落結構比對通過，人耳驗收過。
   核實：`docs/spec/004-ogg-audio-catalog.md` 找得到 `狀態：\*\*DRAFT\*\*` 就是還沒完
 
-- **ogg-conversion-pipeline** — SPEC-004 升 READY 後建立 OGG 轉換管線
+- **ogg-conversion-pipeline**（#25） — SPEC-004 升 READY 後建立 OGG 轉換管線
   要驗 codec、時長、非靜音、峰值、loop 接點與人耳聆聽。轉成 OGG 不改變原版素材的著作權。
   完成條件：管線可重跑，每批 OGG 有來源、參數與 SHA-256 收據。
   核實：`docs/spec/004-ogg-audio-catalog.md` 找得到 `狀態：\*\*DRAFT\*\*` 就是還沒完
 
-- **title-thunder-audio-hookup** — 標題序列的雷聲播放接上 Ebitengine 音訊路徑
+- **title-thunder-audio-hookup**（#36） — 標題序列的雷聲播放接上 Ebitengine 音訊路徑
   assets/audio/title-thunder.ogg 已產出，title.go 也已標記哪一格之後放雷聲（Thunder 欄位），但 runtime 完全沒有引入 Ebitengine 的音訊套件——一個音都還沒進遊戲。
   卡在：SPEC-004 仍是 DRAFT
   完成條件：正常啟動時聽得到雷聲，且與畫面同步。
@@ -265,117 +277,117 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 規格與文件
 
-- **d01-spec-stale-clauses** — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款
+- **d01-spec-stale-clauses**（#8） — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款
   已訂正 SPEC-005 的保存／滿槽範圍、SPEC-012 的效果 7／8 與怪物徒手排除、SPEC-015 的結局觸發及保存；008 的疲勞／時間／逃走順序、010 的物品與施法、011 的治療、014 的物品來源與升階已部分訂正；013 的環索引、同環續查與「原版亂數不可固定」舊限制已訂正。剩餘未知與差異仍續查。
   完成條件：七份規格裡沒有已被推翻的禁作條款，舊證據索引保留。
   核實：要人判——「還有沒有過期條款」要逐句讀才知道，硬綁 pattern 會誤判。與 spec-backfill-stale-clauses 是同一件事的兩次登記。
 
-- **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE
+- **armour-durability-ai-review**（#18） — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE
   耐久子常式九組邊界已重驗；護甲分支映射、骰數與耐久呼叫由 IDA 確認；加值 256 種輸入通過；SPEC-017 升 READY 並接近戰／射擊；84 組記錄、部位與骰值比較通過；破損與 Condition／Record／Carried 已接勝利與撤退回寫。攻擊結算／破損顯示、完整保存、武器超上限與四個其他磨損呼叫仍待驗收。
   完成條件：四個磨損呼叫各自有證據，破損顯示與保存驗過，競技場地形的窄 RE 完成。
   核實：要人判——「四個其他磨損呼叫」要逐支查。接上時會多出四個呼叫點，到時改成 json_len 綁磨損呼叫清單。
 
-- **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況
+- **spec-backfill-stale-clauses**（#19） — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況
   與 d01-spec-stale-clauses 是同一件事的兩次登記（一次在現行缺口表、一次在修復項表）。原則：不把「已有程式」自動升成 READY／CONFORMED。
   完成條件：六份規格的現況與歷史訂正鏈都在，沒有已被推翻的禁作條款。
   核實：要人判——同 d01。這兩條應該一起收掉。
 
-- **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼
+- **spec-manual-page-links**（#21） — 讓規則 spec 連回說明書頁碼
   說明書譯文已完成（84 頁全部 reviewed），但規則 spec 沒有連回頁碼。說明書未涵蓋的邊界行為不得自行推定。
   完成條件：每份規則 spec 的公開規則段落都指得回說明書頁碼。
   核實：`docs/spec/005-character-creation.md`、`docs/spec/008-combat-field.md`、`docs/spec/010-combat-commands.md`、`docs/spec/012-combat-spells.md`、`docs/spec/014-quest-completion.md` **每一個**都要有 `docs/manual/`，少一個就是還沒完
 
-- **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG
+- **runtime-format-guard-test**（#26） — 建立測試，保證 runtime 只會讀 PNG 與 OGG
   internal/assets/assets.go 的檔頭已寫明「runtime 只讀這個目錄下的 manifest.json 與 PNG」，但沒有測試釘住它。禁止讀原版 archive／EXE 目前只靠約定。
   完成條件：測試會在 runtime 讀到非 PNG／OGG 時失敗。
   核實：要人判——完成物是測試檔，而 verify 不掃測試檔——掃了會被別的測試裡提到的字串騙過去。這一條要人看 go test 清單裡有沒有那支守門測試。
 
-- **package-boundaries-and-injection** — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案
+- **package-boundaries-and-injection**（#29） — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案
   internal/ 已分成 21 個套件，四處已有 Rand interface（title、world、charcreate、battle），存檔 schema 已到 v2。缺的是把邊界與固定 timestep 寫成文件契約——現在只在程式裡成立，沒有一份說得出「哪一層不准依賴哪一層」。
   完成條件：有一份文件說明分層契約與固定 timestep，並且違反時測得出來。
   核實：要人判——程式面已大致成立，缺的是文件與守門。硬綁 timestep 這種猜想中的識別字會永遠為真——那種條目看起來盡責，其實一次都沒真的看過。
 
-- **spec-ready-before-implement** — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED
+- **spec-ready-before-implement**（#38） — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED
   這是流程規則不是一次性工作。目前 docs/spec/ 底下只有 004 與 028 兩份還是 DRAFT，其餘已升 READY 或部分 READY。
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **attack-message-chain-index** — 攻擊那一手的訊息鏈索引規則
+- **attack-message-chain-index**（#52） — 攻擊那一手的訊息鏈索引規則
   0x140／0x141／0x143／0x144 起那一串的索引規則還沒解完（RE-086／RE-087）。SPEC-008 的未解清單也列著同一項。
   完成條件：索引規則解出並接上，攻擊訊息與原版一致。
   核實：`cmd/kol/main.go`、`docs/spec/008-combat-field.md` 找得到 `攻擊那一手的訊息鏈還沒解完|攻擊的訊息鏈也還沒解完` 就是還沒完
 
-- **sub-26c5f-damage-line** — 那一句的數字要 sub_26C5F(0x17) 才算得出來
+- **sub-26c5f-damage-line**（#53） — 那一句的數字要 sub_26C5F(0x17) 才算得出來
   該常式還沒解讀，所以那一句寧可不報也不報錯的數字。
   完成條件：sub_26C5F 解出，那一句的數字報得出來。
   核實：`cmd/kol/main.go` 找得到 `那一支還沒解讀，寧可不報` 就是還沒完
 
-- **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力
+- **actor-record-05-ability**（#56） — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力
   `sub_21FCD` 依裝備賦予的四格之三各自是什麼還沒解（RE-081）。賦予 +0x05 的那條路（哪一件裝備、哪一個位元）也還沒解，所以 remake 這一格一律是 0，等於沒有人免疫。SPEC-008 的未解清單列著同一項。
   完成條件：那條路解出並接上，或確認原版在現行內容下也恆為 0。
   核實：`internal/battle/battle.go`、`docs/spec/008-combat-field.md` 找得到 `依裝備賦予的四格之三|哪一件裝備、哪一個位元|遮罩 0x10 要的` 就是還沒完
 
-- **move-unlock-tile-reason** — 磚塊 0x0C 為什麼解鎖後三個移動方式
+- **move-unlock-tile-reason**（#57） — 磚塊 0x0C 為什麼解鎖後三個移動方式
   `MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。
   完成條件：理由解出並寫進 SPEC-010。
   核實：`internal/battle/commands.go` 找得到 `為什麼是這一塊還沒解出來` 就是還沒完
 
-- **actor-record-25-reader** — 參戰者記錄 +0x25 在哪裡被讀
+- **actor-record-25-reader**（#58） — 參戰者記錄 +0x25 在哪裡被讀
   原版下馬時同時把 `+0x25` 清成 0，但那一格在哪裡被讀還沒解，所以 remake 沒有那一格。SPEC-010 末段記著同一項。
   完成條件：讀取端找出來，並判斷 remake 需不需要那一格。
   核實：`internal/battle/execution.go`、`docs/spec/010-combat-commands.md` 找得到 `它在哪裡被讀還沒解|`\+0x25` 在哪裡被讀還沒解` 就是還沒完
 
-- **sub-1aae8-params** — sub_1AAE8 的參數語意
+- **sub-1aae8-params**（#59） — sub_1AAE8 的參數語意
   `sub_1AAE8(3, 4, 11h, …)` 的前三個參數語意還沒解出來。SPEC-008 的未解清單列著同一項（選單協定）。
   完成條件：參數語意解出並寫進規格。
   核實：`internal/battle/spell.go` 找得到 `那一支的參數語意還沒解出來` 就是還沒完
 
-- **word-2df2c-outdoor-switch** — word_2DF2C：城外換整張底圖的那個開關
+- **word-2df2c-outdoor-switch**（#62） — word_2DF2C：城外換整張底圖的那個開關
   在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。
   完成條件：開關語意解出並寫進規格。
   核實：`internal/town/layout.go` 找得到 `是那個開關，語意還沒解` 就是還沒完
 
-- **quest-item-0xb926** — 任務物品的 `[0xB926]`
+- **quest-item-0xb926**（#63） — 任務物品的 `[0xB926]`
   SPEC-014 記著這一格還沒解，所以那一條收據裡 `State.QuestItem` 是空的。任務物品本身的記錄與拾取已完成（RE-113／128），缺的是這一格的來源。
   完成條件：`[0xB926]` 解出，那一條的 QuestItem 不再是空的。
   核實：`docs/spec/014-quest-completion.md` 找得到 ``\[0xB926\]` 還沒解` 就是還沒完
 
-- **world-clock-threshold-mechanism** — 世界時刻門檻的機制沒追出來
+- **world-clock-threshold-mechanism**（#65） — 世界時刻門檻的機制沒追出來
   9 步 852 剛好卡在門檻 3367 的兩側（差一），機制還沒追出來，目前靠量到的值。差一的邊界最容易在別的路徑上露餡。
   完成條件：機制追出來並寫進規格，門檻不再是量出來的常數。
   核實：`internal/world/clock.go` 找得到 `機制還沒追出來` 就是還沒完
 
-- **chardata-writer-untraced-fields** — 角色寫回：幾個位移的來源沒反追
+- **chardata-writer-untraced-fields**（#66） — 角色寫回：幾個位移的來源沒反追
   那些位移目前保留樣板原值——寫進猜出來的 bytes 比留白更糟。要反追出來源才能確定它們在正常遊玩中會不會變。
   完成條件：來源反追出來，或確認那些位移在正常路徑上恆為樣板值。
   核實：`internal/chardata/writer.go` 找得到 `來源尚未反追` 就是還沒完
 
-- **koldata-action-messages** — 幾個動作敘述還沒對上 KOLDATA
+- **koldata-action-messages**（#68） — 幾個動作敘述還沒對上 KOLDATA
   SPEC-010 末段列了哪幾個指令的動作敘述還沒對上 KOLDATA 的記錄。
   完成條件：那幾個對上，或確認 KOLDATA 裡沒有對應的句子。
   核實：`internal/battle/commands.go` 找得到 `還沒對上 KOLDATA` 就是還沒完
 
-- **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址
+- **reshuffle-behavior-address**（#69） — 重排這一輪的行為沒對上位址
   那一段的行為還沒對上原版位址，remake 取「重排這一輪」；逃走不接在這裡。
   完成條件：位址對上，行為確認。
   核實：`internal/battle/state.go` 找得到 `行為還沒對上位址` 就是還沒完
 
-- **spec-unsolved-sections** — 各規格末尾的未解章節
+- **spec-unsolved-sections**（#70） — 各規格末尾的未解章節
   五份規格各自留了一節未解項，內容在產品碼裡多半沒有落點（沒有程式落點就沒有自承可綁），靠這一條追。目前有：`002-ega-extraction-set` 的「尚未關閉的來源」、`004-ogg-audio-catalog` 的「尚未通過的 READY gate」、`008-combat-field` 的「還沒解出來的（不得實作）」（敵人 AI 三張權重表的執行期值、`sub_1B94F`、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關、`sub_2625A` 的語意）、`010-combat-commands` 的「還沒關閉的」、`011-wilderness-ambush` 的「還沒解的」（`sub_2A39B`、`word_2FA2A` 那一條分支）。其中已經各自有條目的四項（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8`、`+0x25` 讀取端）不重複列。
   完成條件：五份的未解章節各自清空，或剩下的每一項有自己的條目。
   核實：`docs/spec` 找得到 `^#{2,3} .*(還沒|尚未).*(關閉|解|通過|gate)` 就是還沒完
 
-- **actor-record-2c** — 參戰者記錄 +0x2C 仍未解
+- **actor-record-2c**（#72） — 參戰者記錄 +0x2C 仍未解
   `SpellEffectField` 的第 5、6 項指到它，但那兩個效果的來源還沒解出來。
   完成條件：+0x2C 的語意解出，兩個效果接上或確認無作用。
   核實：`docs/spec/012-combat-spells.md` 找得到 ``\+0x2C` 仍未解` 就是還沒完
 
-- **quest-count-ff-writer** — 兩個計數怎麼變成 0xFF 還沒找到寫入點
+- **quest-count-ff-writer**（#73） — 兩個計數怎麼變成 0xFF 還沒找到寫入點
   所以 remake 用自己的 `VerdictFled` 判定。找不到寫入點就無法確認那個判定與原版等價。
   完成條件：寫入點找出來，或確認 remake 的判定等價。
   核實：`docs/spec/014-quest-completion.md` 找得到 `還沒找到寫入點` 就是還沒完
 
-- **spec029-wiring-review** — SPEC-029 的接線順序與取圖來源審查
+- **spec029-wiring-review**（#74） — SPEC-029 的接線順序與取圖來源審查
   怪物遠程初始化的規則已實作並通過原版比較，但顯示取圖來源與「正式建構到第一輪」的接線順序還沒審查完，所以規格仍是 DRAFT。
   完成條件：審查完成，SPEC-029 升 READY。
   核實：`docs/spec/029-monster-ranged-initialization.md` 找得到 `仍待審查|接線順序審查` 就是還沒完
@@ -383,44 +395,44 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 交付與發行
 
-- **v02-appimage-platform-acceptance** — V02：主機 FUSE、其他平台與推廣交付的驗收
+- **v02-appimage-platform-acceptance**（#7） — V02：主機 FUSE、其他平台與推廣交付的驗收
   Linux AppImage v.0.2.2-20260908 已重建：封包內版號、849 筆必要素材與文件、98 次正常建角／保存操作通過；另完成 XDG_CONFIG_HOME 與 HOME/.config 兩組各 95 次不指定 -save 的保存／重載（docs/verification/appimage-v.0.2.2-20260908.md）。主機 FUSE、其他平台與推廣交付仍待驗。
   完成條件：三平台各自驗收通過，推廣交付有影音驗收收據。
   核實：要人判——跨平台驗收沒有本機訊號。與 windows-macos-real-machine 相鄰但不同：那一條是真機，這一條含 FUSE 與推廣。
 
-- **release-asset-separation** — 分離本機、private-repo PNG 與可公開輸出
+- **release-asset-separation**（#27） — 分離本機、private-repo PNG 與可公開輸出
   GitHub Release／公開 release 的 deny-list 要預設失敗即關閉，並檢查 repo visibility 沒有被改成 public。權利審查已寫在 docs/RELEASE-RIGHTS-REVIEW.md。
   完成條件：deny-list 預設失敗即關閉，visibility 檢查納入發行流程。
   核實：要人判——verify_dist.sh 已驗 release 的素材 deny-list，缺的是 visibility 檢查。那一步接上時會多一個 gh api 呼叫，到時改成 absent 綁它。
 
-- **cross-platform-build-smoke** — Linux／Windows／macOS 可重現編譯與最小啟動 smoke
+- **cross-platform-build-smoke**（#37） — Linux／Windows／macOS 可重現編譯與最小啟動 smoke
   build_dist.sh 已建出三平台（linux/amd64 原生、windows/amd64 交叉編、macOS universal 經 osxcross ＋ lipo），verify_dist.sh 驗過 manifest、授權、deny-list、Windows PE 檔頭、macOS 四道靜態驗收與 Linux 啟動。編譯這一半已經成立；缺的是 Windows 與 macOS 的最小啟動 smoke——Linux 容器裡只驗得了結構。
   完成條件：三平台各有一次真的把程式跑起來的 smoke。
   核實：要人判——Windows／macOS 的啟動要在那些平台上跑，本機沒有訊號。與 windows-macos-real-machine 相接：那一條是完整驗收，這一條只要求最小啟動。
 
-- **windows-macos-real-machine** — Windows／macOS 真機驗收
+- **windows-macos-real-machine**（#42） — Windows／macOS 真機驗收
   Linux 容器 smoke 不冒充真機結果。macOS 的 bundle 沒有簽章（_CodeSignature 在 Linux 上做不出來），首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。
   完成條件：兩個平台各在真機上啟動並走一次正常路徑。
   核實：`tools/verify_dist.sh` 找得到 `macOS 要真機` 就是還沒完
 
-- **github-release** — 發 GitHub Release
+- **github-release**（#43） — 發 GitHub Release
   權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。
   卡在：等使用者決定
   完成條件：兩件都決定，Release 發出去。
   核實：要人判——對外動作要使用者點頭，不該由 verify 判。
 
-- **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage
+- **appimage-rebuild-latest-fixes**（#45） — 把最新怪物初始化與面板修正重建到新的本機 AppImage
   現行包尚未包含 SPEC-029 的怪物遠程初始化與後續面板修正。
   完成條件：新包重建、驗收通過，正式交付入口指向它。
   核實：要人判——「包裡有沒有那個修正」要拆包比對。重建收據落地時改綁它。
 
-- **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號
+- **dist-rebuild-version-number**（#48） — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號
   `tools/build_dist.sh` 已能從乾淨工作樹建出三個平台（linux/amd64 原生、windows/amd64 交叉編、macOS universal 經 osxcross ＋ lipo），`promo/` 有 59 秒推廣片與 `sources.json`。缺的只有版本號：目前用的是暫定號，產物可重生，換號碼重跑一次就好。
   卡在：版本號要使用者決定
   完成條件：版本號定案，用它重建一次並驗收。
   核實：要人判——版本號是決策不是程式狀態。`build_dist.sh` 把版本當參數收，綁不到也不該綁。
 
-- **dist-package-sha256-verification** — 發行包的 SHA-256 驗收
+- **dist-package-sha256-verification**（#49） — 發行包的 SHA-256 驗收
   `tools/verify_dist.sh` 驗過 manifest 存在、授權文件、release 的素材 deny-list、Windows PE 檔頭、macOS 四道靜態驗收與 Linux 啟動；`verify_packages.py` 另驗六個發行檔的結構並做過注入缺陷的負對照。存檔位置由 AppImage 那一輪的兩組各 95 次驗過。**但兩支驗收腳本都沒有比對 SHA-256**——manifest 裡有雜湊，沒有人回頭驗它對不對。平台／架構的真機部分見 `windows-macos-real-machine` 與 `cross-platform-build-smoke`。
   完成條件：驗收腳本會重算每個檔案的 SHA-256 並與 manifest 比對，不符即失敗。
   核實：`tools/verify_dist.sh`、`tools/verify_packages.py` 找不到 `sha256` 就是還沒完
