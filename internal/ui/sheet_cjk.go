@@ -28,19 +28,18 @@ import (
 //
 // 這一頁不對拍，原版沒有中文畫面。
 func drawSheetCJK(dst *ebiten.Image, f *font.Font, labels []town.Segment, p *town.SheetPage) {
+	drawSheetHeaderCJK(dst, f, p)
+	drawSheetBodyCJK(dst, f, labels, p)
+}
+
+// drawSheetHeaderCJK 是 `sub_16239` 那一層（抬頭框、橫線、抬頭六列），與英文版的
+// `drawSheetHeader` 同一個分界：法術一覽與任務一覽只重畫這一層。
+func drawSheetHeaderCJK(dst *ebiten.Image, f *font.Font, p *town.SheetPage) {
 	l := town.SheetLayout
 	s := book.CJKScale
 
 	boxAt(dst, scaleRect(l.Header, s), town.ColourSheetHeader)
 	rule(dst, scaleRect(l.HeaderRule, s), town.ColourSheetHeader)
-	boxAt(dst, scaleRect(l.Stats, s), town.ColourSheetFrame)
-	boxAt(dst, scaleRect(l.Weapons, s), town.ColourSheetFrame)
-	rule(dst, scaleRect(l.WeaponRule, s), town.ColourSheetFrame)
-	boxAt(dst, scaleRect(l.Gold, s), town.ColourSheetFrame)
-	boxAt(dst, scaleRect(l.Bars, s), town.ColourSheetFrame)
-
-	barCJK(dst, scaleRect(l.DamageBar, s), p.DamageCells, l.BarCell*s, l.BarInset*s)
-	barCJK(dst, scaleRect(l.NutritionBar, s), p.NutritionCells, l.BarCell*s, l.BarInset*s)
 
 	// 抬頭六列照原版排。中文字比原版字窄，置中與靠右都用實際量到的寬度算。
 	head := scaleRect(l.Header, s)
@@ -54,6 +53,21 @@ func drawSheetCJK(dst *ebiten.Image, f *font.Font, labels []town.Segment, p *tow
 	}
 	cellCJK(dst, f, s, l.HeightCol, l.HeightRow, p.Height)
 	cellCJK(dst, f, s, l.WeightCol, l.WeightRow, p.Weight)
+}
+
+// drawSheetBodyCJK 是屬性以下那一層（`sub_15ABF` 自己畫的四個框與各欄）。
+func drawSheetBodyCJK(dst *ebiten.Image, f *font.Font, labels []town.Segment, p *town.SheetPage) {
+	l := town.SheetLayout
+	s := book.CJKScale
+
+	boxAt(dst, scaleRect(l.Stats, s), town.ColourSheetFrame)
+	boxAt(dst, scaleRect(l.Weapons, s), town.ColourSheetFrame)
+	rule(dst, scaleRect(l.WeaponRule, s), town.ColourSheetFrame)
+	boxAt(dst, scaleRect(l.Gold, s), town.ColourSheetFrame)
+	boxAt(dst, scaleRect(l.Bars, s), town.ColourSheetFrame)
+
+	barCJK(dst, scaleRect(l.DamageBar, s), p.DamageCells, l.BarCell*s, l.BarInset*s)
+	barCJK(dst, scaleRect(l.NutritionBar, s), p.NutritionCells, l.BarCell*s, l.BarInset*s)
 
 	// 八個屬性：標籤靠左、值在原版那一欄。
 	statSafe := (l.StatValueCol - 2) * town.CellWidth * s
@@ -109,6 +123,37 @@ func drawSheetCJK(dst *ebiten.Image, f *font.Font, labels []town.Segment, p *tow
 		seg := labelSeg(labels, sheetLabelBars+i)
 		cellCJKAt(dst, f, seg.Col*town.CellWidth*s, seg.Row*s, label(labels, sheetLabelBars+i))
 	}
+}
+
+// drawSpellCellsCJK 是法術一覽的中文模式：同一份 `SpellPage`，框的四個邊乘上倍率，
+// 名字從原版那一格的字格座標起印。法術名是玩家在編輯器裡取的名字（5-bit 字串），
+// 不在譯文表裡，與武器名一樣照原文印，截在框的右緣之內。
+func drawSpellCellsCJK(dst *ebiten.Image, f *font.Font, p *town.SpellPage) {
+	s := book.CJKScale
+	for _, c := range p.Cells {
+		r := scaleRect(town.Rect{X0: c.FrameX, Y0: c.FrameY,
+			X1: c.FrameX + c.FrameW - 1, Y1: c.FrameY + c.FrameH - 1}, s)
+		boxAt(dst, r, town.ColourBoxEdge)
+		x := c.TextCol * town.CellWidth * s
+		cellCJKAt(dst, f, x, c.TextRow*s, clip(f, c.Name, r.X1-x))
+	}
+}
+
+// drawQuestBadgesCJK 是任務一覽的中文模式：框與 24×21 的徽章都乘上倍率。
+// 徽章是圖，沒有字要換。
+func drawQuestBadgesCJK(dst *ebiten.Image, sprites Sprites, list *town.QuestList) error {
+	s := book.CJKScale
+	for _, b := range list.Badges {
+		r := scaleRect(town.Rect{X0: b.FrameX, Y0: b.FrameY,
+			X1: b.FrameX + b.FrameW - 1, Y1: b.FrameY + b.FrameH - 1}, s)
+		frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourQuestBadge)
+		pic, err := sprites.Get(list.Archive, b.Site)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, pic, b.X*s, b.Y*s, s)
+	}
+	return nil
 }
 
 // scaleRect 把英文版面的矩形放大到中文畫布。

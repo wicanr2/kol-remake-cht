@@ -21,7 +21,7 @@
   "png_format": "8-bit truecolor，無 palette／alpha"
  },
  "evidence_state": "已證實：每個畫格的 PNG SHA-256、尺寸與時間軸記於各 run 的 receipt.json；跨輪比對見 cross-run/。畫格編號是擷取順序，不是原版 archive 圖號。",
- "total_frames": 7047,
+ "total_frames": 7319,
  "runs": [
   {
    "run": "accept-and-save-ranger-run1",
@@ -721,6 +721,22 @@
    },
    "distinct_frames": 75,
    "receipt": "docs/verification/character-ui/town-sheet-party-run1/receipt.json"
+  },
+  {
+   "run": "town-spell-list-run1",
+   "scenario": "town-spell-list",
+   "description": "同 town-spell-edit 走到巫師塔、加入 White Pearl Order、買下Daynalon（340）；買完回到招呼語之後把白框移到 MIRROR 開資料頁，再把白框移到法術那一格按下去，看法術一覽蓋在資料頁上的樣子。純觀察，不保存角色（RE-123）。",
+   "generated_utc": "2026-09-11T12:53:46Z",
+   "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+   "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+   "dosbox_cycles": "fixed 3000",
+   "input_method": "X11 XTEST FakeInput，畫面靜止後逐鍵送出",
+   "original_zip": {
+    "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "entry_count": 75
+   },
+   "distinct_frames": 272,
+   "receipt": "docs/verification/character-ui/town-spell-list-run1/receipt.json"
   }
  ]
 }

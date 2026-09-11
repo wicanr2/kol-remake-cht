@@ -1,8 +1,10 @@
 package town
 
-// 資料頁上的法術一覽（`sub_166CC`，RE-123）。原版先重畫整頁（`sub_16239`），
-// 再把角色記錄 `0x200` 起那十六格排成兩欄各八列：每一格畫一個白框，框裡印
-// 5-bit 解出來的法術名。**遇到空的一格就整個停下來**——原版把兩層迴圈的計數
+import "strings"
+
+// 資料頁上的法術一覽（`sub_166CC`，RE-123）。原版先重畫抬頭那一層（`sub_16239`：
+// 背景、隊員格、坐騎、抬頭框——屬性以下那幾框不畫），再把角色記錄 `0x200` 起
+// 那十六格排成兩欄各八列：每一格畫一個白框，框裡印 5-bit 解出來的法術名。**遇到空的一格就整個停下來**——原版把兩層迴圈的計數
 // 都推到界限（`0x16797`），不是跳過那一格繼續掃。圖示列縮成只有 U-TURN。
 
 // 一格的版面（`0x16723`…`0x16791`）：
@@ -66,7 +68,9 @@ func SpellCells(spells []Spell) []SpellCell {
 		if spells[i].Name == "" {
 			break
 		}
-		out = append(out, SpellCellAt(i, spells[i].Name))
+		// 法術一覽畫在 `sub_16239` 之後，那一支在 `0x163FB` 把大寫旗標
+		// `word_2DF54` 設成 1，所以名字印成大寫（原版畫面是 `DAYNALON`）。
+		out = append(out, SpellCellAt(i, strings.ToUpper(spells[i].Name)))
 	}
 	return out
 }

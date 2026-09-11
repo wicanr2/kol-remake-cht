@@ -1,9 +1,9 @@
 {
   "schema": "kol-player-path-v1",
   "name": "town-scroll",
-  "description": "讀存檔開場在城 7 The Hostel 門邊，走進去按 SCROLL：先問要不要加入「Blue Gem Order」（入會費 450，智力門檻 90），答應之後扣錢、教派與頭銜寫進角色；選單只有一列「Learn a spell」，因為這名角色還沒學過法術。進去挑第二筆 Tyatwelon（330 金幣）買下，回清單；離開之後開 MIRROR，資料頁最下面那一列印的是「Blue Gem  Illusionist」，圖示列也多出法術那一格；按下那一格開法術一覽，剛買的 Tyatwelon 出現在左上那一格。全程只經過 town.Session。存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json --out workplace/saves/hostel.json --gold 2000 --town 7 --x 59 --y 28 --entry 7` 產生（RE-121）。",
-  "script": "U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > RET > > > RET",
-  "step_count": 23,
+  "description": "讀存檔開場在城 7 The Hostel 門邊，走進去按 SCROLL：先問要不要加入「Blue Gem Order」（入會費 450，智力門檻 90），答應之後扣錢、教派與頭銜寫進角色；選單只有一列「Learn a spell」，因為這名角色還沒學過法術。進去挑第二筆 Tyatwelon（330 金幣）買下——買完直接回到建築的招呼語（`sub_17318` 在 `0x178DA` 就 `retf`，RE-128），要再買得重按 SCROLL；白框回到 DOOR，往右一格開 MIRROR，資料頁最下面那一列印的是「BLUE GEM  ILLUSIONIST」（資料頁的大寫旗標），圖示列也多出法術那一格；按下那一格開法術一覽：只重畫抬頭那一層（`sub_16239`），剛買的 TYATWELON 在左上那一格，格子右下有投影。全程只經過 town.Session。存檔用 `tools/make_stable_save.py --in workplace/saves/quest.json --out workplace/saves/hostel.json --gold 2000 --town 7 --x 59 --y 28 --entry 7` 產生（RE-121）。",
+  "script": "U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > > > RET",
+  "step_count": 21,
   "checkpoints": [
     {
       "step": 8,
@@ -22,12 +22,16 @@
       "note": "問價：記錄 0x49 ＋ 0x53 ＋ 330 ＋ 0x54"
     },
     {
-      "step": 18,
-      "note": "資料頁最下面那一列是教派與頭銜，圖示列多出法術那一格"
+      "step": 14,
+      "note": "買完直接回到招呼語（RE-128 `0x178DA`），不回清單"
     },
     {
-      "step": 22,
-      "note": "法術一覽：兩欄各八格，剛買的那一筆在左上（框 (14,58)–(112,66)，字在第 2 欄第 60 列）"
+      "step": 16,
+      "note": "資料頁最下面那一列是教派與頭銜（大寫），圖示列多出法術那一格"
+    },
+    {
+      "step": 20,
+      "note": "法術一覽：只剩抬頭那一層與兩欄各八格，剛買的那一筆在左上（框 (14,58)–(112,66) 帶四像素投影，字在第 2 欄第 60 列，大寫）。版面與原版同狀態畫面逐像素相同，見 remake-parity/receipt-town-spell-list.json"
     }
   ],
   "save": null,
@@ -121,55 +125,43 @@
       "step": 14,
       "token": "RET",
       "file": "docs/verification/player-path/town-scroll/step-014.png",
-      "sha256": "eeb38ea4e8acc79b9fedbcc9173afe03b388e28923800629712496fce82bc9bd"
+      "sha256": "031b0b3867dd6cf07ae45e3cdba2c5f2ea0e2666ef1698597beaf88daaac6253"
     },
     {
       "step": 15,
       "token": ">",
       "file": "docs/verification/player-path/town-scroll/step-015.png",
-      "sha256": "c21b9c122c9b2094800a1f33c3a9259461e70a44f44aa7936d525cbe420baaa3"
+      "sha256": "b16dabe03303c5fa652d704757617ee228eb629e231e967b8a36c18107591b11"
     },
     {
       "step": 16,
       "token": "RET",
       "file": "docs/verification/player-path/town-scroll/step-016.png",
-      "sha256": "031b0b3867dd6cf07ae45e3cdba2c5f2ea0e2666ef1698597beaf88daaac6253"
+      "sha256": "9056d4e8149e9a4f828132484b90ddbfd759d2a9c5f26b98b4985806f90bc13d"
     },
     {
       "step": 17,
       "token": ">",
       "file": "docs/verification/player-path/town-scroll/step-017.png",
-      "sha256": "b16dabe03303c5fa652d704757617ee228eb629e231e967b8a36c18107591b11"
+      "sha256": "2dcbc9b97b83adca27b899aac04681a612e50b948daf6cef8202e325e4158928"
     },
     {
       "step": 18,
-      "token": "RET",
+      "token": ">",
       "file": "docs/verification/player-path/town-scroll/step-018.png",
-      "sha256": "f916a5ca82a17e15b1d9f32c4d69b5ee3b89b45cd522a318f18ca44727b8875d"
+      "sha256": "eda4676b7c0bcb982214ec43dcdbcf6855507e952bf3abb279e4475b8dba43c1"
     },
     {
       "step": 19,
       "token": ">",
       "file": "docs/verification/player-path/town-scroll/step-019.png",
-      "sha256": "0fe0ea18a405a849feb2c488aa3c0c26e7597568289d01e6040134ee1f4c5ff0"
+      "sha256": "18dec33206c90072f084174b60933361b2bd087c410737a6df67966d1d6cd94e"
     },
     {
       "step": 20,
-      "token": ">",
-      "file": "docs/verification/player-path/town-scroll/step-020.png",
-      "sha256": "6111705f9df95b2c20c57f4abb4f04291b8fe6ee6875dd3833361f97e43edd9c"
-    },
-    {
-      "step": 21,
-      "token": ">",
-      "file": "docs/verification/player-path/town-scroll/step-021.png",
-      "sha256": "8e2f0f4a659d55b10c8956e20327c9ebd74bbfaee9ede0d526cc2512fb5c69ca"
-    },
-    {
-      "step": 22,
       "token": "RET",
-      "file": "docs/verification/player-path/town-scroll/step-022.png",
-      "sha256": "5a1f12ff7a2e2bf6c8e3cd0dd7cbffe32ce86ee59653c6cbf0df58597a3f3ba0"
+      "file": "docs/verification/player-path/town-scroll/step-020.png",
+      "sha256": "fae2ce7461561e4b843df9bb580e744c12493d370cbe38da6731f2621df6b9ce"
     }
   ]
 }

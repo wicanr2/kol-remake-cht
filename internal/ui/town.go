@@ -36,19 +36,26 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 	if in.Sheet != nil {
 		// 物品與隊伍那兩頁是**換頁**，不是蓋在資料頁上（RE-126／RE-127）：
 		// 原版按下去之後整頁重畫，資料頁的屬性與武器框都不見了。
-		if in.ItemPage == nil && len(in.PartyPage) == 0 {
-			if err := drawSheet(dst, sprites, small, in.SheetLabels, in.Sheet); err != nil {
+		switch {
+		case in.ItemPage != nil || len(in.PartyPage) > 0:
+			// 換頁，底下各自畫。
+		case in.QuestList != nil || in.SpellList != nil:
+			// 任務一覽與法術一覽都先呼叫 `sub_16239`，只重畫抬頭那一層，
+			// 再蓋上徽章（RE-111）或兩欄各八格（RE-123）。
+			if err := drawSheetHeader(dst, sprites, small, in.Sheet); err != nil {
 				return err
 			}
-			// 任務一覽再蓋一層徽章（RE-111）。
 			if in.QuestList != nil {
 				if err := drawQuestBadges(dst, sprites, in.QuestList); err != nil {
 					return err
 				}
 			}
-			// 法術一覽是同一頁上的兩欄各八格（RE-123）。
 			if in.SpellList != nil {
 				drawSpellCells(dst, small, in.SpellList)
+			}
+		default:
+			if err := drawSheet(dst, sprites, small, in.SheetLabels, in.Sheet); err != nil {
+				return err
 			}
 		}
 		// 物品那一頁把整塊換成十七列的清單（RE-127）。
@@ -121,10 +128,13 @@ func drawIconBar(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 }
 
 // drawSpellCells 畫資料頁上的法術一覽：一格一個白框，框裡印名字（RE-123）。
+// 每一格都是 `sub_1BA9D` 畫的，那一支收尾一定呼叫 `sub_1B7E9`，所以格子右下
+// 自帶四像素的黑色投影（`0x1BAF1`）。
 func drawSpellCells(dst *ebiten.Image, f *font.Font, p *town.SpellPage) {
 	for _, c := range p.Cells {
 		fill(dst, c.FrameX, c.FrameY, c.FrameW, c.FrameH, town.ColourBoxFill)
 		frame(dst, c.FrameX, c.FrameY, c.FrameW, c.FrameH, town.ColourBoxEdge)
+		shadow(dst, c.FrameX, c.FrameY, c.FrameW, c.FrameH)
 		cell(dst, f, c.TextCol, c.TextRow, c.Name)
 	}
 }
@@ -249,6 +259,17 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		case len(in.PartyPage) > 0:
 			if err := drawPartyPageCJK(dst, sprites, in.PartyPage); err != nil {
 				return err
+			}
+		case in.QuestList != nil || in.SpellList != nil:
+			// 與英文版同一個分界：這兩頁只重畫 `sub_16239` 那一層。
+			drawSheetHeaderCJK(dst, f, in.Sheet)
+			if in.QuestList != nil {
+				if err := drawQuestBadgesCJK(dst, sprites, in.QuestList); err != nil {
+					return err
+				}
+			}
+			if in.SpellList != nil {
+				drawSpellCellsCJK(dst, f, in.SpellList)
 			}
 		default:
 			drawSheetCJK(dst, f, in.SheetLabels, in.Sheet)

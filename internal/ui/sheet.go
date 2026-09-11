@@ -9,16 +9,56 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
 
-// drawSheet 畫 MIRROR 的角色資料頁（RE-074）。畫的順序與原版相同：
-// 先五個框與兩條青色長條，再把標籤那一筆記錄按 `~V`／`~H` 座標放上去，
-// 最後才是各欄的數值——長條上的紅色也在標籤之前，因為原版是先畫框再畫字。
+// drawSheet 畫 MIRROR 的角色資料頁（RE-074）。原版 `sub_15ABF` 一開頭先呼叫
+// `sub_16239`（`0x15ADD`）畫抬頭那一層，再畫屬性以下的框、標籤與數值，所以這裡
+// 也分兩層、同一個順序。
 func drawSheet(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	labels []town.Segment, p *town.SheetPage) error {
-	l := town.SheetLayout
+	if err := drawSheetHeader(dst, sprites, f, p); err != nil {
+		return err
+	}
+	drawSheetBody(dst, f, labels, p)
+	return nil
+}
 
+// drawSheetHeader 是 `sub_16239` 那一層：有坐騎時右上角那一塊、抬頭的白框與
+// 橫線、抬頭六列。法術一覽（`0x166D5`）與任務一覽（`0x1681C`）也只重畫這一層
+// ——原版那兩頁只看得到抬頭，屬性、武器與金幣那幾框都不在（RE-123 的對拍）。
+//
+// 背景整頁圖與頂端的隊員格（`sub_1103F(0)`、`sub_13EEE`）由呼叫端先畫好。
+func drawSheetHeader(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	p *town.SheetPage) error {
+	l := town.SheetLayout
+	// 有坐騎才有右上角那一塊（RE-120）。原版在抬頭框之前畫它（`0x16275`…）。
+	if p.Steed != nil {
+		if err := drawSheetSteed(dst, sprites, f, p.Steed); err != nil {
+			return err
+		}
+	}
 	box(dst, l.Header, town.ColourSheetHeader)
 	fill(dst, l.HeaderRule.X0, l.HeaderRule.Y0,
 		l.HeaderRule.Width(), l.HeaderRule.Height(), town.ColourSheetHeader)
+
+	// 抬頭：名字與性別置中，種族與位階靠左、職業與副位階靠右。
+	centred(dst, f, l.NameRow, p.Name)
+	centred(dst, f, l.GenderRow, p.Gender)
+	cell(dst, f, l.LeftCol, l.RaceRow, p.Race)
+	right(dst, f, l.RaceRow, p.Profession)
+	cell(dst, f, l.LeftCol, l.RankRow, p.RankLeft)
+	if p.RankRight != "" {
+		right(dst, f, l.RankRow, p.RankRight)
+	}
+	cell(dst, f, l.HeightCol, l.HeightRow, p.Height)
+	cell(dst, f, l.WeightCol, l.WeightRow, p.Weight)
+	return nil
+}
+
+// drawSheetBody 是 `sub_15ABF` 自己畫的那一層：先四個框與兩條青色長條，再把標籤
+// 那一筆記錄按 `~V`／`~H` 座標放上去，最後才是各欄的數值——長條上的紅色也在
+// 標籤之前，因為原版是先畫框再畫字。
+func drawSheetBody(dst *ebiten.Image, f *font.Font, labels []town.Segment,
+	p *town.SheetPage) {
+	l := town.SheetLayout
 	box(dst, l.Stats, town.ColourSheetFrame)
 	box(dst, l.Weapons, town.ColourSheetFrame)
 	fill(dst, l.WeaponRule.X0, l.WeaponRule.Y0,
@@ -32,18 +72,6 @@ func drawSheet(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	for _, seg := range labels {
 		cell(dst, f, seg.Col, seg.Row, seg.Text)
 	}
-
-	// 抬頭：名字與性別置中，種族與位階靠左、職業與副位階靠右。
-	centred(dst, f, l.NameRow, p.Name)
-	centred(dst, f, l.GenderRow, p.Gender)
-	cell(dst, f, l.LeftCol, l.RaceRow, p.Race)
-	right(dst, f, l.RaceRow, p.Profession)
-	cell(dst, f, l.LeftCol, l.RankRow, p.RankLeft)
-	if p.RankRight != "" {
-		right(dst, f, l.RankRow, p.RankRight)
-	}
-	cell(dst, f, l.HeightCol, l.HeightRow, p.Height)
-	cell(dst, f, l.WeightCol, l.WeightRow, p.Weight)
 
 	// 八個屬性：與標籤同一列，值靠第 12 欄，格式 %3d。
 	for i, v := range p.Stats {
@@ -71,11 +99,6 @@ func drawSheet(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	if p.Title != "" {
 		cell(dst, f, l.TitleCol-len([]rune(p.Title)), l.EquipRow, p.Title)
 	}
-	// 有坐騎才有右上角那一塊（RE-120）。
-	if p.Steed != nil {
-		return drawSheetSteed(dst, sprites, f, p.Steed)
-	}
-	return nil
 }
 
 // drawSheetSteed 畫資料頁右上角那一匹：先清黑，再放 40×38 的圖，

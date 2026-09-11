@@ -1,0 +1,94 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "town-spell-list",
+  "description": "資料頁上的法術一覽（`sub_166CC`，RE-123）。原版與 remake 走同一條玩家路徑：選名冊第 14 名（ddduhh），走過布瑞托到巫師塔，加入 White Pearl Order（500）、買下 Daynalon（340）；買完回到招呼語之後把白框移到 MIRROR 開資料頁，再按資料頁圖示列第 4 格（法術）。畫面上驗到三件事：這一頁只重畫 `sub_16239` 那一層（背景、隊員格、抬頭框），屬性、武器、金幣與兩條長條那幾框都不在；每一格是 `sub_1BA9D` 畫的，右下自帶四像素投影（`sub_1B7E9`）；名字走資料頁的大寫旗標（`0x163FB` 的 `word_2DF54`），印成 `DAYNALON`。 同一條路徑也驗了資料頁本身（按下法術那一格之前）：第 119 列的教派與頭銜同樣在大寫旗標底下，印成 `WHITE PEARL`／頭銜大寫。",
+  "pair_count": 3,
+  "pass_count": 3,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "法術一覽：整頁",
+      "remake": "docs/verification/remake-parity/shots/town-spell-list/spell-list.png",
+      "original": "docs/verification/character-ui/town-spell-list-run1/frames/frame-270.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            14,
+            14
+          ],
+          "differing_pixels": 70
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "第一格：框、投影與名字",
+      "remake": "docs/verification/remake-parity/shots/town-spell-list/spell-list.png",
+      "original": "docs/verification/character-ui/town-spell-list-run1/frames/frame-270.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 10,
+        "y": 54,
+        "width": 112,
+        "height": 20
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "資料頁：教派與頭銜那一列在內",
+      "remake": "docs/verification/remake-parity/shots/town-spell-list/sheet.png",
+      "original": "docs/verification/character-ui/town-spell-list-run1/frames/frame-266.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "同上。",
+          "rect": [
+            158,
+            100,
+            14,
+            14
+          ],
+          "differing_pixels": 37
+        }
+      ],
+      "required_regions": []
+    }
+  ]
+}

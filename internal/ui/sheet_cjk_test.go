@@ -90,3 +90,26 @@ func TestCJKSheetStatLabelsFit(t *testing.T) {
 		}
 	}
 }
+
+// 法術一覽的十六格：原版框高 9、字從框頂往下 2 列起印，三倍之後字模放得進框裡
+// （上下都留出框線那一像素）。兩倍時框高只有 18，放不下——反面對照。
+func TestCJKSpellCellsFitTheGlyph(t *testing.T) {
+	fits := func(scale int) bool {
+		for slot := 0; slot < town.SpellCellCols*town.SpellCellRows; slot++ {
+			c := town.SpellCellAt(slot, "X")
+			top := c.FrameY * scale
+			bottom := (c.FrameY+c.FrameH)*scale - 1
+			y := c.TextRow * scale
+			if y <= top || y+cjkSheetGlyphHeight > bottom {
+				return false
+			}
+		}
+		return true
+	}
+	if !fits(book.CJKScale) {
+		t.Fatalf("倍率 %d 下法術名放不進框裡", book.CJKScale)
+	}
+	if fits(2) {
+		t.Fatal("兩倍也放得下的話，這個測試分不出差別")
+	}
+}

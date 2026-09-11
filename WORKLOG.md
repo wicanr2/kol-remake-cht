@@ -6119,3 +6119,39 @@ Escape／Down／Up，每個後面跟一個 Right 測方向鍵有沒有生效）�
 `tools/oracle/book_startup_test.go` 的探測工具都留著，它們與這條路徑無關也用得上：
 `walker`（畫面指紋判斷有沒有真的走出去）、`screenDigest`、露營逐鍵探測、seed 掃描
 （`Save`／`Restore` 在同一次執行裡逐顆重來）、未實作／缺檔查詢。
+
+## 2026-09-11：town-scroll 收據與法術一覽
+
+### town-scroll：程式對、收據過期
+
+第 14 步起對不上：收據（09-05）買完回法術清單、重跑回招呼語。RE-128（09-06）讀到
+`sub_17318` 在 `0x178DA` 就 `retf`，原版 oracle 的畫格也是回招呼語，所以是收據早於
+更正。腳本改成買完接 `> RET`（白框在 DOOR，往右一格是 MIRROR），22 步變 21 步；
+新第 16、20 步與舊第 18、22 步在改法術一覽之前逐 byte 相同。
+
+### 法術一覽：跑原版才看到的三處
+
+新 oracle 情境 `town-spell-list`（沿用 `town-spell-edit` 到買下為止的 100 步，再開
+MIRROR 與法術那一格），272 個去重畫格，109 個檢查點全部穩定、角色檔沒動。
+frame-270 推翻了 remake 的版面：
+
+1. 只剩抬頭那一層——`sub_16239` 不是「重畫整頁」，屬性以下四框是 `sub_15ABF` 自己畫的
+   （RE-137，更正 RE-123）。任務一覽走同一支，一起改。
+2. 每一格右下有四像素投影（`sub_1BA9D` 收尾必呼叫 `sub_1B7E9`）。
+3. 名字是大寫（`0x163FB` 的大寫旗標）；資料頁的教派與頭銜也在旗標底下，一併改。
+
+改完兩張整頁（法術一覽、資料頁）逐點比對，允許區（滑鼠游標）外零差異；反面對照
+（remake 法術一覽比原版資料頁）差 25,906 點。資料頁拆成抬頭層與內容層後照原版順序
+畫，坐騎投影在 y = 52 那 41 點被武器框頂邊蓋掉，town-stable 第 16 步因此重生。
+
+中文模式同一個分界：`drawSheetHeaderCJK` ＋ 法術格／徽章乘倍率，實跑截圖確認。
+
+### 驗證與狀態
+
+- `go vet`、`go test ./cmd/... ./internal/...` 全過（Xvfb 容器）。
+- `check_player_paths.py`：town-scroll、town-mirror、town-load 一致；town-stable 重生後一致。
+  quest-list 從書本選單起步、重跑卡在名冊頁，屬於 `player-path-receipts-stale` 既有那一類。
+- 畫廊的 en／zh-town-sheet 重生後逐 byte 不變。
+- 物品頁選中之後的畫面與原版不同（原版只剩明細框與木紋底），新條目 `item-detail-page-parity`。
+- worklist 訊號 `counterscan-style-and-retry` 的正則 `a\.Stuck` 對不上測試寫法，放寬為 `\.Stuck\b`。
+- 容器全用 `--rm`；專案內無 root-owned 檔案。

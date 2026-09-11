@@ -183,10 +183,11 @@ func TestScrollMenuHasSpellbookRow(t *testing.T) {
 	}
 }
 
-// 資料頁上的法術一覽：兩欄各八格，空的一格之後全部不畫（RE-123）。
+// 資料頁上的法術一覽：兩欄各八格，空的一格之後全部不畫（RE-123）。名字走資料頁
+// 的大寫旗標（`0x163FB`），原版畫面上是 `DAYNALON`。
 func TestSpellCellsStopAtTheFirstGap(t *testing.T) {
 	cells := SpellCells([]Spell{{Name: "Tyanalon"}, {Name: ""}, {Name: "Kelnalon"}})
-	if len(cells) != 1 || cells[0].Name != "Tyanalon" {
+	if len(cells) != 1 || cells[0].Name != "TYANALON" {
 		t.Fatalf("排出來是 %+v", cells)
 	}
 }

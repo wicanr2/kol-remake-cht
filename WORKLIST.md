@@ -118,15 +118,20 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：座標指格接上，兩種 mode 的夾限都照 SPEC-010，並有收據。
   核實：`cmd/kol/input.go` 找得到 `故意不列` 就是還沒完
 
-- **cjk-sheet-subpages** — 資料頁的法術／任務兩個入口與坐騎的中文版面
-  物品與隊伍立繪那兩頁已經做了（2026-09-11）：與英文版共用同一份版面，每個座標乘上 book.CJKScale；物品頁的槽位清單十七列三倍之後剛好放得下（最後一列底 462、右欄底 465）。剩法術與任務那兩個入口——它們要角色身上有法術或已回報的任務才出現，還沒走到；坐騎那一塊（RE-120）也還沒畫。
-  完成條件：法術、任務兩頁與坐騎的中文版面畫出來並有截圖。
+- **cjk-sheet-subpages** — 資料頁的坐騎與頂端隊員格的中文版面
+  物品、隊伍立繪、法術一覽與任務一覽四頁已經做了（2026-09-11）：與英文版共用同一份版面，每個座標乘上 book.CJKScale。法術與任務兩頁照原版只重畫 `sub_16239` 那一層（RE-137），實跑截圖確認過。剩坐騎那一塊（RE-120）與頂端的隊員格（`sub_13EEE`）——英文版有、中文模式整塊沒畫。
+  完成條件：坐騎那一塊與頂端隊員格的中文版面畫出來並有截圖。
   核實：`docs/spec/030-cjk-character-sheet.md` 找得到 `不在這一版` 就是還沒完
 
 - **cjk-battle-remaining-pages** — 戰鬥的戰利品與法術清單兩頁還沒中文版面
   戰場那一頁與遭遇那一頁已經做了（2026-09-11）：同一份版面乘上 `book.CJKScale`，三倍之後訊息區的行高 6 變成 18 剛好是字模格高，四行都放得下。戰利品與法術清單兩頁仍走「原版解析度畫完再整張放大」，字是原版字模放大的。
   完成條件：兩頁的中文版面畫出來並有截圖。
   核實：`cmd/kol/battle_render.go` 找得到 `還沒有中文版面` 就是還沒完
+
+- **item-detail-page-parity** — 物品頁選中之後的明細畫面與原版不同
+  原版 `town-sheet-items-run1/frames/frame-072.png`：選中一件東西之後，立繪與十七列清單都不見了，只剩木紋底圖與明細框 (62,58)–(257,125)，框右下有 `sub_1BA9D` 自帶的四像素投影。remake 保留立繪與清單，也沒畫投影——`internal/ui/itempage.go` 那段註解寫「沒有投影」與反組譯不符（`0x1BAF1` 一定呼叫 `sub_1B7E9`）。既有的物品頁對拍只比到選中之前那一格（frame-070）。見 RE-137 末段。
+  完成條件：讀出選中之後那一段重畫了什麼，改正 remake 之後與 frame-072 整頁逐點對拍，允許區外零差異。
+  核實：`internal/ui/itempage.go` 找得到 `沒有投影` 就是還沒完
 
 
 ### 接了但沒驗過
@@ -218,6 +223,8 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 - **player-path-receipts-stale** — 正常玩家路徑的收據對不上現在的程式
   2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑。**plan 先補齊了**：六條的描述寫「讀存檔開場」而沒有 `load` 欄位、`full` 沒有 `scene` 欄位，都補上了；補完之後 town-shop、town-stable、town-train、town-load 四條直接變一致——那幾條本來就沒問題，是重跑條件不完整。\n\n現況：**9 條一致**（town、town-edge、town-mirror、town-recruit、town-rest、town-talk 之外再加那四條中的三條；town 與 town-leave 等仍待確認）、**其餘對不上**，第一個差異步：`full` 21、`world-quest` 12、`town-scroll` 14、`town` 8、`town-leave` 12、`world-clock` 12、`world-road` 12、`town-round-trip` 需再看。\n\n對不上的是**行為變了**，不是 plan 的問題：\n- 經過選角那幾條（full、town、flow-quest…）是 `e118596` 把 SceneInn 改成 SceneTown 造成的，進門少一步、之後整串偏掉。\n- `town-scroll` 第 14 步收據是法術清單、重跑回到店主招呼語，而它是 `-load` 開場不經過選角——SCROLL 那條流程自己變過。\n- `world-quest` 第 12 步起不同，同樣是 `-load` 開場。\n\n**英文與中文模式重跑全程相同**，與中文化無關。長路徑那幾條（有 trace 的）還沒跑，一條十幾二十分鐘。
+
+  **town-scroll 已處理**（2026-09-11）：現在的行為是對的——RE-128 讀到買完就在 `0x178DA` `retf` 回招呼語，原版 oracle 的畫格也是如此；收據（09-05）早於那次更正。腳本改成買完接 `> RET`，順帶把法術一覽照原版改正（RE-137）後重生，21 步全過。town-stable 第 16 步因資料頁繪製順序照原版改正（武器框頂邊蓋過坐騎投影，41 點）重生。quest-list 從書本選單起步，重跑卡在名冊頁，屬於經過選角那一類。
   完成條件：逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。
   核實：`docs/verification/player-path/README.md` 找得到 `收據過期` 就是還沒完
 

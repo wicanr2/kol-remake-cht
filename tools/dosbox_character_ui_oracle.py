@@ -1339,6 +1339,31 @@ _quest_steps = SCENARIOS["world-quest-site"]["steps"]
 SCENARIOS_QUEST_PREFIX = _quest_steps[:[s["label"] for s in _quest_steps]
                                       .index("戰鬥第 4 鍵（space）") + 1]
 
+# town-spell-list 的前綴是 town-spell-edit 走到「買下第一筆法術」為止：同一名角色、
+# 同一條路、同一筆 Daynalon。買完回到招呼語之後改開 MIRROR，再按資料頁上的法術那一格。
+_spell_steps = SCENARIOS["town-spell-edit"]["steps"]
+SCENARIOS_SPELL_BUY_PREFIX = _spell_steps[:[s["label"] for s in _spell_steps]
+                                          .index("第一筆的價錢") + 1]
+
+# 法術一覽（`sub_166CC`，RE-123）。原版先重畫整頁，再把每一筆法術用 `sub_1BA9D`
+# 畫成一格——那一支收尾一定呼叫 `sub_1B7E9` 投影，所以每一格右下都有四像素黑帶。
+SCENARIOS["town-spell-list"] = {
+    "description": "同 town-spell-edit 走到巫師塔、加入 White Pearl Order、買下"
+                   "Daynalon（340）；買完回到招呼語之後把白框移到 MIRROR 開資料頁，"
+                   "再把白框移到法術那一格按下去，看法術一覽蓋在資料頁上的樣子。"
+                   "純觀察，不保存角色（RE-123）。",
+    "steps": SCENARIOS_SPELL_BUY_PREFIX + [
+        step("買完直接回招呼語", "greater", settle=1.2),
+        step("白框第 2 格（MIRROR）", "Return", settle=4.0),
+        step("角色資料頁（圖示列多出法術那一格）", "greater", settle=2.0),
+        step("資料頁白框第 2 格", "greater", settle=2.0),
+        step("資料頁白框第 3 格", "greater", settle=2.0),
+        step("資料頁白框第 4 格（法術）", "Return", settle=4.0),
+        step("法術一覽", "Return", settle=3.0),
+        step("按 U-TURN 之後", None, settle=4.0),
+    ],
+}
+
 # 執行段的訊息畫面。進戰場之後只做一件事：讓 Poontang 選休息、答應
 # 「Begin next round?」，再一路按鍵推完整個執行段的訊息。
 #

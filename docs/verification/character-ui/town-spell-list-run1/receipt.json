@@ -1,0 +1,4164 @@
+{
+  "tool": "tools/dosbox_character_ui_oracle.py",
+  "scenario": "town-spell-list",
+  "description": "同 town-spell-edit 走到巫師塔、加入 White Pearl Order、買下Daynalon（340）；買完回到招呼語之後把白框移到 MIRROR 開資料頁，再把白框移到法術那一格按下去，看法術一覽蓋在資料頁上的樣子。純觀察，不保存角色（RE-123）。",
+  "generated_utc": "2026-09-11T12:53:46Z",
+  "dosbox_x_version": "DOSBox-X version 2026.06.02 SDL2, copyright 2011-2026 The DOSBox-X Team.",
+  "dosbox_conf_sha256": "192945c5604fb6e87d88e7ce2fa042b64a19ae20c9268fff70778a45f41e9c90",
+  "dosbox_cycles": "fixed 3000",
+  "input_method": "X11 XTEST FakeInput，畫面靜止後逐鍵送出",
+  "sample_interval_s": 0.3,
+  "stability_tolerance": 0.002,
+  "original_zip": {
+    "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "entry_count": 75
+  },
+  "character_files_before": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_after": {
+    "CHARDATA": {
+      "bytes": 12288,
+      "sha256": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e"
+    },
+    "CHARPICS": {
+      "bytes": 12160,
+      "sha256": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7"
+    },
+    "SHLDPICS": {
+      "bytes": 12160,
+      "sha256": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd"
+    }
+  },
+  "character_files_changed": [],
+  "character_files_saved": false,
+  "distinct_frames": 272,
+  "checkpoints": [
+    {
+      "index": 0,
+      "label": "TITLE 標題序列",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 8.0,
+      "reached_stable": true,
+      "t": 10.14,
+      "frame": 5,
+      "file": "frames/frame-005.png",
+      "png_sha256": "1a120fbb455c633c96f5abe2cdbf564dbbb0a0af1b0694d0fc5e575ddf4dcbd8"
+    },
+    {
+      "index": 1,
+      "label": "書本封面",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 9.0,
+      "reached_stable": true,
+      "t": 19.9,
+      "frame": 7,
+      "file": "frames/frame-007.png",
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "index": 2,
+      "label": "目錄頁",
+      "key": "6",
+      "settle_s": 2.0,
+      "fixed_delay_s": 12.0,
+      "reached_stable": true,
+      "t": 32.74,
+      "frame": 19,
+      "file": "frames/frame-019.png",
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "index": 3,
+      "label": "角色清單往下第 1 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 34.65,
+      "frame": 19,
+      "file": "frames/frame-019.png",
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "index": 4,
+      "label": "角色清單往下第 2 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 43.78,
+      "frame": 32,
+      "file": "frames/frame-032.png",
+      "png_sha256": "818e5dc3a142fef87b4f7aff72145907ed6ac466c3184fe8088abc751e2388cc"
+    },
+    {
+      "index": 5,
+      "label": "角色清單往下第 3 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 45.94,
+      "frame": 33,
+      "file": "frames/frame-033.png",
+      "png_sha256": "96a471564afe63bb795183776eac99c201a78b78142207720ac859887ff6eb7e"
+    },
+    {
+      "index": 6,
+      "label": "角色清單往下第 4 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 48.05,
+      "frame": 34,
+      "file": "frames/frame-034.png",
+      "png_sha256": "b21b37987e61d3de1ab17c8e0957821a61ab2d800363851f2782d54a49a1bfa0"
+    },
+    {
+      "index": 7,
+      "label": "角色清單往下第 5 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 49.92,
+      "frame": 35,
+      "file": "frames/frame-035.png",
+      "png_sha256": "0c57ce28bbee7584127da739ead12c254aefb3af18f26ceffde27ff5d936f2b0"
+    },
+    {
+      "index": 8,
+      "label": "角色清單往下第 6 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 51.85,
+      "frame": 36,
+      "file": "frames/frame-036.png",
+      "png_sha256": "cd3ae7e0cec58ca86021b7c80dc717adeb593b3716094f5ce31b0b63ab12fe79"
+    },
+    {
+      "index": 9,
+      "label": "角色清單往下第 7 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 53.91,
+      "frame": 37,
+      "file": "frames/frame-037.png",
+      "png_sha256": "16b488f6fd2f1e09c63144d88f9f7163dadcf120b1302c73af950d07fbda9bf9"
+    },
+    {
+      "index": 10,
+      "label": "角色清單往下第 8 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 55.82,
+      "frame": 38,
+      "file": "frames/frame-038.png",
+      "png_sha256": "de990f6b028b6a239bf6dff4bdb9b9eb6b6cc4969a012a0a5a255d7f6bed921a"
+    },
+    {
+      "index": 11,
+      "label": "角色清單往下第 9 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 57.87,
+      "frame": 39,
+      "file": "frames/frame-039.png",
+      "png_sha256": "933ae4ec6bf614f85093235d6c2c08dd164fad134a70b56c440229d08352aebe"
+    },
+    {
+      "index": 12,
+      "label": "角色清單往下第 10 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 59.99,
+      "frame": 40,
+      "file": "frames/frame-040.png",
+      "png_sha256": "fb52d0c72f255dd843fb38a692cabcc8db6e2a975229ab6e843614a555192f2c"
+    },
+    {
+      "index": 13,
+      "label": "角色清單往下第 11 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 61.9,
+      "frame": 41,
+      "file": "frames/frame-041.png",
+      "png_sha256": "b4b5a0259e325ee34d3610ad893e0a52dfbd93faee86d35edb1c792b47a90b12"
+    },
+    {
+      "index": 14,
+      "label": "角色清單往下第 12 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 63.96,
+      "frame": 42,
+      "file": "frames/frame-042.png",
+      "png_sha256": "0d79d09e85e9480f33e9717c73b4b154d662fedb37186d7bee105786a0200f3b"
+    },
+    {
+      "index": 15,
+      "label": "角色清單往下第 13 名",
+      "key": "Down",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 65.88,
+      "frame": 43,
+      "file": "frames/frame-043.png",
+      "png_sha256": "799c5d6363c6fe57d6d58143921c7ba3d6eb7759e045fa7ce682f7ed0575856a"
+    },
+    {
+      "index": 16,
+      "label": "選第 14 名角色",
+      "key": "Return",
+      "settle_s": 2.0,
+      "fixed_delay_s": 25.0,
+      "reached_stable": true,
+      "t": 91.73,
+      "frame": 44,
+      "file": "frames/frame-044.png",
+      "png_sha256": "025478f3583da2ec645cc2b8670462b6469e94b56f6faa0211423c8f34f349ea"
+    },
+    {
+      "index": 17,
+      "label": "旅店老闆對話（第一段）",
+      "key": "space",
+      "settle_s": 2.0,
+      "fixed_delay_s": 15.0,
+      "reached_stable": true,
+      "t": 107.71,
+      "frame": 57,
+      "file": "frames/frame-057.png",
+      "png_sha256": "0a7c9db5e4bb86083ed1cf2556aed626887441b1cb99e1261a087af4e79fea67"
+    },
+    {
+      "index": 18,
+      "label": "旅店圖示列（白框在 DOOR）",
+      "key": "Return",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 111.46,
+      "frame": 58,
+      "file": "frames/frame-058.png",
+      "png_sha256": "c23b0e6dca994530abc41c103e8ff181e3b18485066fe5ba6f29b86829791cd6"
+    },
+    {
+      "index": 19,
+      "label": "走出旅店",
+      "key": null,
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 115.19,
+      "frame": 62,
+      "file": "frames/frame-062.png",
+      "png_sha256": "1546f884648b6d91d77476e522df9cef3fc281fd91a2ccae7918593686cf0a04"
+    },
+    {
+      "index": 20,
+      "label": "往巫師塔第 1 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 117.14,
+      "frame": 60,
+      "file": "frames/frame-060.png",
+      "png_sha256": "b245f5d52cfdd882d9a11219a290a42674ef1b0f69e9ae2a4bd60552cbd14500"
+    },
+    {
+      "index": 21,
+      "label": "往巫師塔第 2 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 119.02,
+      "frame": 66,
+      "file": "frames/frame-066.png",
+      "png_sha256": "fad1a2d80fcf2f9254818d7968b456f48d7fd8396597ce067d3385820f0f777f"
+    },
+    {
+      "index": 22,
+      "label": "往巫師塔第 3 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 120.84,
+      "frame": 67,
+      "file": "frames/frame-067.png",
+      "png_sha256": "138b0b131ac84693496ae4802971ee0cb7ce7126bb7bb57e6b44c649ed4f5022"
+    },
+    {
+      "index": 23,
+      "label": "往巫師塔第 4 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 122.8,
+      "frame": 69,
+      "file": "frames/frame-069.png",
+      "png_sha256": "b44893d5f11410fa749ee9b308c562c22fb12059a2df378b2c0ab184211cdfa1"
+    },
+    {
+      "index": 24,
+      "label": "往巫師塔第 5 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 125.38,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "png_sha256": "abe2d3589f5b0d5b93b63803033f6cac2fc62af089f838c85dec5118773eb6d8"
+    },
+    {
+      "index": 25,
+      "label": "往巫師塔第 6 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 128.21,
+      "frame": 75,
+      "file": "frames/frame-075.png",
+      "png_sha256": "14b69571332eb2c1cfafcdbc1bcd9de6176e79a4398783fbbc4d17ca45d2057e"
+    },
+    {
+      "index": 26,
+      "label": "往巫師塔第 7 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 130.7,
+      "frame": 77,
+      "file": "frames/frame-077.png",
+      "png_sha256": "368f7e16fe2f4bc8ba6eb8516f87124b001d9eb8df08cc23d0646838d6c2b5d8"
+    },
+    {
+      "index": 27,
+      "label": "往巫師塔第 8 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 132.75,
+      "frame": 80,
+      "file": "frames/frame-080.png",
+      "png_sha256": "55166e9048929441790d23ec4ebb287cd42b17d39caf06425e9edce4ffb8c21a"
+    },
+    {
+      "index": 28,
+      "label": "往巫師塔第 9 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 134.47,
+      "frame": 83,
+      "file": "frames/frame-083.png",
+      "png_sha256": "59054c55f633c7277bf6cdd31d528a0bb205609029eb2902d4ec6a7a63c598f5"
+    },
+    {
+      "index": 29,
+      "label": "往巫師塔第 10 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 136.21,
+      "frame": 86,
+      "file": "frames/frame-086.png",
+      "png_sha256": "1ad578885a2f4b728bb7a9261b918b4152a94ddae4ded44d06eb841d80d9163f"
+    },
+    {
+      "index": 30,
+      "label": "往巫師塔第 11 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 138.3,
+      "frame": 89,
+      "file": "frames/frame-089.png",
+      "png_sha256": "4abbf64b54f8d17e66b7761887bf309cb0c996c8213922b461b76e0efc295b66"
+    },
+    {
+      "index": 31,
+      "label": "往巫師塔第 12 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 140.09,
+      "frame": 91,
+      "file": "frames/frame-091.png",
+      "png_sha256": "df137cccc2c06fb96ac840dcd05cc0bb3e5ecb05ef88ece192f0a406c17cc3a0"
+    },
+    {
+      "index": 32,
+      "label": "往巫師塔第 13 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 142.63,
+      "frame": 94,
+      "file": "frames/frame-094.png",
+      "png_sha256": "6a0110e4aff118b04dac00263be90a6c94a5d2069ddd8b2b79adfb297fcede4c"
+    },
+    {
+      "index": 33,
+      "label": "往巫師塔第 14 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 144.56,
+      "frame": 96,
+      "file": "frames/frame-096.png",
+      "png_sha256": "b064b589d436e910a93470ddc155d46d2d9883c59db276ec26d476fe6469e207"
+    },
+    {
+      "index": 34,
+      "label": "往巫師塔第 15 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 146.64,
+      "frame": 99,
+      "file": "frames/frame-099.png",
+      "png_sha256": "e8208127aad45fcf6c4903b017f3f3d3f2552d130b9cfca4b5cc2d19294489f6"
+    },
+    {
+      "index": 35,
+      "label": "往巫師塔第 16 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 148.34,
+      "frame": 102,
+      "file": "frames/frame-102.png",
+      "png_sha256": "19a365a3278abe86de99851fbfd0adabc4a18f6ab678b99bcab37d4a13dd6bca"
+    },
+    {
+      "index": 36,
+      "label": "往巫師塔第 17 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 149.87,
+      "frame": 104,
+      "file": "frames/frame-104.png",
+      "png_sha256": "07861c1882cbed4c98fc0b0b89963894b9213fd24d60e460ade92115877a7963"
+    },
+    {
+      "index": 37,
+      "label": "往巫師塔第 18 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 152.13,
+      "frame": 107,
+      "file": "frames/frame-107.png",
+      "png_sha256": "c59899692e8717de1826a09bce54f8cf512d74c8fa5930be308e3119139aed2a"
+    },
+    {
+      "index": 38,
+      "label": "往巫師塔第 19 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 154.09,
+      "frame": 109,
+      "file": "frames/frame-109.png",
+      "png_sha256": "f4066b616624791fef27de2ea28173ed25b53abf42884e9f186f472fc5802927"
+    },
+    {
+      "index": 39,
+      "label": "往巫師塔第 20 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 155.88,
+      "frame": 112,
+      "file": "frames/frame-112.png",
+      "png_sha256": "31b354b260588dea0ba8324b83948c6e8a755b46a8b24de2ad972570785d374a"
+    },
+    {
+      "index": 40,
+      "label": "往巫師塔第 21 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 157.77,
+      "frame": 113,
+      "file": "frames/frame-113.png",
+      "png_sha256": "b31d02b44a0429416f5d7d9bf6f11c631a7489589b0743724151799093cf989c"
+    },
+    {
+      "index": 41,
+      "label": "往巫師塔第 22 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 159.41,
+      "frame": 116,
+      "file": "frames/frame-116.png",
+      "png_sha256": "983060e3db6ccbc71cb053792a329814a2254772d9fabf0f6412544151c22008"
+    },
+    {
+      "index": 42,
+      "label": "往巫師塔第 23 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 161.15,
+      "frame": 119,
+      "file": "frames/frame-119.png",
+      "png_sha256": "8b1c953630b15a77658cb17951a59cfe4fa5ba7b0b2a711e1966bba9d819dabc"
+    },
+    {
+      "index": 43,
+      "label": "往巫師塔第 24 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 163.13,
+      "frame": 123,
+      "file": "frames/frame-123.png",
+      "png_sha256": "4bddf56a8cab7ed45133ccd3e5f3e34b6020bc7a9d70dfbd316d1d205b2b464e"
+    },
+    {
+      "index": 44,
+      "label": "往巫師塔第 25 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 164.78,
+      "frame": 126,
+      "file": "frames/frame-126.png",
+      "png_sha256": "8dc07e7a83dd01510c1b34ec483af8b32ef4f944366f104afc714eb19d91827c"
+    },
+    {
+      "index": 45,
+      "label": "往巫師塔第 26 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 166.49,
+      "frame": 129,
+      "file": "frames/frame-129.png",
+      "png_sha256": "562df90a28e51d724a2921cacedc4f48bd9245b7d9c74e58c25787d1a1dc3f49"
+    },
+    {
+      "index": 46,
+      "label": "往巫師塔第 27 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 168.3,
+      "frame": 132,
+      "file": "frames/frame-132.png",
+      "png_sha256": "2061da8f7161bfdbcbd98810dd4d1eedb92e2445fc7a36fa5d0269b9dfa6472e"
+    },
+    {
+      "index": 47,
+      "label": "往巫師塔第 28 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 170.26,
+      "frame": 135,
+      "file": "frames/frame-135.png",
+      "png_sha256": "24930ed1f96f306fffbc334a57fbd6d7804fdca8c18a8a2b62a4de0471c3b7ac"
+    },
+    {
+      "index": 48,
+      "label": "往巫師塔第 29 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 172.1,
+      "frame": 138,
+      "file": "frames/frame-138.png",
+      "png_sha256": "b51097eef24d1fbda516168a9e6469da73b614c7a370bbc110755e0554d00c6d"
+    },
+    {
+      "index": 49,
+      "label": "往巫師塔第 30 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 173.92,
+      "frame": 141,
+      "file": "frames/frame-141.png",
+      "png_sha256": "d9f12d2e062aa77dfa7499dd32f18489304fed0eb6133db3176025413480ce29"
+    },
+    {
+      "index": 50,
+      "label": "往巫師塔第 31 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 175.42,
+      "frame": 144,
+      "file": "frames/frame-144.png",
+      "png_sha256": "df9a0c85f15c962746d5038d34ce9abe4cd521f8fce0d685567a69d738c57ae1"
+    },
+    {
+      "index": 51,
+      "label": "往巫師塔第 32 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 177.37,
+      "frame": 145,
+      "file": "frames/frame-145.png",
+      "png_sha256": "d166f7577894d3b1d638df2b0c23628899a7d3a1c9606e854d63eb969d0d8a7e"
+    },
+    {
+      "index": 52,
+      "label": "往巫師塔第 33 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 179.16,
+      "frame": 151,
+      "file": "frames/frame-151.png",
+      "png_sha256": "248b046aaf7afa1ef1ed29914e295276a4bded236e8e7d9b42f27a6c5cf0e79d"
+    },
+    {
+      "index": 53,
+      "label": "往巫師塔第 34 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 180.82,
+      "frame": 153,
+      "file": "frames/frame-153.png",
+      "png_sha256": "4f46c0d8d23d24b62ac9dc5566c2ae084fe44cb3f24429e1c4197dc2ca0019fa"
+    },
+    {
+      "index": 54,
+      "label": "往巫師塔第 35 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 182.37,
+      "frame": 154,
+      "file": "frames/frame-154.png",
+      "png_sha256": "a7e0d7d90f4aef0b249f5504961e19a6cd7eb5796fb41d686d36151aacc7f767"
+    },
+    {
+      "index": 55,
+      "label": "往巫師塔第 36 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 184.04,
+      "frame": 158,
+      "file": "frames/frame-158.png",
+      "png_sha256": "89b2e4d64cf147ce63c6e5978927e46e9308a2a25f406c68dd6f595e7f21ea13"
+    },
+    {
+      "index": 56,
+      "label": "往巫師塔第 37 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 185.65,
+      "frame": 161,
+      "file": "frames/frame-161.png",
+      "png_sha256": "6921ac370e7c925ef66fca1e0354256e4879111c348d30333f705719da58196c"
+    },
+    {
+      "index": 57,
+      "label": "往巫師塔第 38 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 187.67,
+      "frame": 165,
+      "file": "frames/frame-165.png",
+      "png_sha256": "5e50b00e6fb42f58d374c5d7842e1591f8321335e90558ae4e3e2f5a7dd781d2"
+    },
+    {
+      "index": 58,
+      "label": "往巫師塔第 39 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 189.73,
+      "frame": 168,
+      "file": "frames/frame-168.png",
+      "png_sha256": "7bca463e8d557f83d1a2337495e49a24fec5bd32fb1c3375aafbd6a28e578cbf"
+    },
+    {
+      "index": 59,
+      "label": "往巫師塔第 40 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 191.67,
+      "frame": 171,
+      "file": "frames/frame-171.png",
+      "png_sha256": "eac5b6a38ddc3b3a3b69d8c35e7385403fdc205727f1f230195bdcf3b20268e5"
+    },
+    {
+      "index": 60,
+      "label": "往巫師塔第 41 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 193.53,
+      "frame": 174,
+      "file": "frames/frame-174.png",
+      "png_sha256": "9bc561e981a1cbeca16cf4c68008a53b77dcd64282984a5d35fbf72c202577cb"
+    },
+    {
+      "index": 61,
+      "label": "往巫師塔第 42 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 195.36,
+      "frame": 175,
+      "file": "frames/frame-175.png",
+      "png_sha256": "19fe5560b9daf66eb5efd05787fa19d932a7b974e3ada460fcd5eb8672f9c3a7"
+    },
+    {
+      "index": 62,
+      "label": "往巫師塔第 43 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 197.02,
+      "frame": 179,
+      "file": "frames/frame-179.png",
+      "png_sha256": "d207ad073786c632ddef4261b94880e6609070ad653cb669dc55a422d1cd5108"
+    },
+    {
+      "index": 63,
+      "label": "往巫師塔第 44 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 198.53,
+      "frame": 182,
+      "file": "frames/frame-182.png",
+      "png_sha256": "71f22afc6b237742cee3d445f630a2aaece4f5e3248474895f72ca9cb8a707b9"
+    },
+    {
+      "index": 64,
+      "label": "往巫師塔第 45 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 200.22,
+      "frame": 185,
+      "file": "frames/frame-185.png",
+      "png_sha256": "e4bb3c5af8e1f3dd72329ef572fda5a4a4788364895670add558ff5794f21694"
+    },
+    {
+      "index": 65,
+      "label": "往巫師塔第 46 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 201.96,
+      "frame": 188,
+      "file": "frames/frame-188.png",
+      "png_sha256": "34e5f151ffa53cea7e1e6406724b94f9e5c832f45868677d3d747d5fdb820b8e"
+    },
+    {
+      "index": 66,
+      "label": "往巫師塔第 47 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 203.85,
+      "frame": 191,
+      "file": "frames/frame-191.png",
+      "png_sha256": "aec06e3723bc6a5f63a9912a2112e73402fc7550cda2cf1337d3ad3360a18460"
+    },
+    {
+      "index": 67,
+      "label": "往巫師塔第 48 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 205.8,
+      "frame": 192,
+      "file": "frames/frame-192.png",
+      "png_sha256": "58671b4a396de49513ca4d8253a330d72f01752e2ce96829cd148afd3f165f3a"
+    },
+    {
+      "index": 68,
+      "label": "往巫師塔第 49 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 207.26,
+      "frame": 197,
+      "file": "frames/frame-197.png",
+      "png_sha256": "14a8904b52bb44fa1f9f67ea7e03e64f089627bd2763368c5d96803583f29145"
+    },
+    {
+      "index": 69,
+      "label": "往巫師塔第 50 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 208.87,
+      "frame": 200,
+      "file": "frames/frame-200.png",
+      "png_sha256": "f1d637cd248c0550b19004919fcb8b375c4049d143851747059e684041cfc5c5"
+    },
+    {
+      "index": 70,
+      "label": "往巫師塔第 51 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 210.62,
+      "frame": 203,
+      "file": "frames/frame-203.png",
+      "png_sha256": "1ddc437f45cd76ecb996ca461d266f797f17dcb3a19288f4de572e7cc6e7278e"
+    },
+    {
+      "index": 71,
+      "label": "往巫師塔第 52 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 212.51,
+      "frame": 206,
+      "file": "frames/frame-206.png",
+      "png_sha256": "47ced647668a88f549629f8f2f833ebcfc974b42dd58df0e82b1835fa28a097a"
+    },
+    {
+      "index": 72,
+      "label": "往巫師塔第 53 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 214.18,
+      "frame": 209,
+      "file": "frames/frame-209.png",
+      "png_sha256": "da5837a2ebed656757090f3c02d9d2e0e1419ffeb1fec71fc382785da16868ca"
+    },
+    {
+      "index": 73,
+      "label": "往巫師塔第 54 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 216.1,
+      "frame": 212,
+      "file": "frames/frame-212.png",
+      "png_sha256": "0cc32e825771bf7f5ff5b7646cdbbf6b93305a84fe51eccc97520c89191e6547"
+    },
+    {
+      "index": 74,
+      "label": "往巫師塔第 55 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 218.71,
+      "frame": 215,
+      "file": "frames/frame-215.png",
+      "png_sha256": "314e6ed83ad238fe6c655d973dbee7d5c13d40ff0d64f9b0c5e75923b5c76047"
+    },
+    {
+      "index": 75,
+      "label": "往巫師塔第 56 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 221.64,
+      "frame": 218,
+      "file": "frames/frame-218.png",
+      "png_sha256": "870d5942fed04bc135d329186a5ed5d3de273fdb1fea120a5fa2b65905779690"
+    },
+    {
+      "index": 76,
+      "label": "往巫師塔第 57 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 223.97,
+      "frame": 220,
+      "file": "frames/frame-220.png",
+      "png_sha256": "ed3c5d35bb039d91a8fd52dd3a4438b4e1b49371f11710467c8cbdfd4eb58e2b"
+    },
+    {
+      "index": 77,
+      "label": "往巫師塔第 58 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 225.55,
+      "frame": 222,
+      "file": "frames/frame-222.png",
+      "png_sha256": "d36d976beb056e3d82dd3bffda84e82c78a5f8977b27b88c4751a5c6859fbc1c"
+    },
+    {
+      "index": 78,
+      "label": "往巫師塔第 59 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 228.0,
+      "frame": 225,
+      "file": "frames/frame-225.png",
+      "png_sha256": "c8dd52ccd8b5c7c6b727eb757db1adb4f2e7d871de53cb27d2708864b16d7f24"
+    },
+    {
+      "index": 79,
+      "label": "往巫師塔第 60 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 230.64,
+      "frame": 228,
+      "file": "frames/frame-228.png",
+      "png_sha256": "92b5d713fc81558a6cc376f27dc02068f1438b43a90cea42aab92311f030caaa"
+    },
+    {
+      "index": 80,
+      "label": "往巫師塔第 61 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 233.11,
+      "frame": 229,
+      "file": "frames/frame-229.png",
+      "png_sha256": "aee5101a23506e87116572f79f65957a4fe49e5c1cd8d49a5d99efb601320f91"
+    },
+    {
+      "index": 81,
+      "label": "往巫師塔第 62 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 235.97,
+      "frame": 231,
+      "file": "frames/frame-231.png",
+      "png_sha256": "64d2916a687d84a3252473edc63a2cda9779d2f83e5002b5a841bd84e6862f0b"
+    },
+    {
+      "index": 82,
+      "label": "往巫師塔第 63 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 238.34,
+      "frame": 235,
+      "file": "frames/frame-235.png",
+      "png_sha256": "97345e8ad3bd986016d2f994ff08d760a29d55c43fa63709b728defcf1184f6e"
+    },
+    {
+      "index": 83,
+      "label": "往巫師塔第 64 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 240.08,
+      "frame": 237,
+      "file": "frames/frame-237.png",
+      "png_sha256": "ec120eefccaf05ada7842da96870ef6407625c5500e4761e8a0152313219c344"
+    },
+    {
+      "index": 84,
+      "label": "往巫師塔第 65 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 242.22,
+      "frame": 238,
+      "file": "frames/frame-238.png",
+      "png_sha256": "4fb001bf4bebf876efc1522b435f670943f09302081dfc2a91dc8fa730e8f569"
+    },
+    {
+      "index": 85,
+      "label": "往巫師塔第 66 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 244.79,
+      "frame": 241,
+      "file": "frames/frame-241.png",
+      "png_sha256": "7abd41e97849a2a0bdadc76475cb86ef0f2331779d29c4d0daf6807f60801ab2"
+    },
+    {
+      "index": 86,
+      "label": "往巫師塔第 67 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 246.61,
+      "frame": 244,
+      "file": "frames/frame-244.png",
+      "png_sha256": "c2c61df4c3a5542fcd9d29da3dd17b7111fe09441903e88e6e6620a8c08b90c5"
+    },
+    {
+      "index": 87,
+      "label": "往巫師塔第 68 步",
+      "key": "Up",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 249.64,
+      "frame": 247,
+      "file": "frames/frame-247.png",
+      "png_sha256": "1b06f60287d9712abbb1df049a250d8ea40f49b70ef1e25750c68501dad559bf"
+    },
+    {
+      "index": 88,
+      "label": "往巫師塔第 69 步",
+      "key": "Left",
+      "settle_s": 0.9,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 252.72,
+      "frame": 249,
+      "file": "frames/frame-249.png",
+      "png_sha256": "960b98e00580ead538ade0cf4e9a44522cb7eda314f0803b5f333b30f5f6a641"
+    },
+    {
+      "index": 89,
+      "label": "站到巫師塔門口",
+      "key": "Return",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 258.36,
+      "frame": 251,
+      "file": "frames/frame-251.png",
+      "png_sha256": "054566fab2e1f077a2c743abc523caccebe64aa8b8c4861e87dc23164f1011c5"
+    },
+    {
+      "index": 90,
+      "label": "進門敘述",
+      "key": "space",
+      "settle_s": 2.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 263.02,
+      "frame": 252,
+      "file": "frames/frame-252.png",
+      "png_sha256": "0db2cc735b03166e035054426f154b0e18467403c6932fe7dff37a7d75d165c8"
+    },
+    {
+      "index": 91,
+      "label": "讀完敘述",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 265.1,
+      "frame": 253,
+      "file": "frames/frame-253.png",
+      "png_sha256": "d8b23a4e0aac6ad302ab598b25b32948d702fcf32448f19384dad10689f5ee55"
+    },
+    {
+      "index": 92,
+      "label": "白框第 2 格",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 267.56,
+      "frame": 254,
+      "file": "frames/frame-254.png",
+      "png_sha256": "e36572da77e7ea8cc13c066b9efc202c06fc157d41fe3e9926e4223a9e87458d"
+    },
+    {
+      "index": 93,
+      "label": "白框第 3 格",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 269.56,
+      "frame": 255,
+      "file": "frames/frame-255.png",
+      "png_sha256": "7ca3e4c52e546dbebd829ab1a6fca3aec1a474f6f996395815252f65d29d855b"
+    },
+    {
+      "index": 94,
+      "label": "白框第 4 格",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 272.3,
+      "frame": 256,
+      "file": "frames/frame-256.png",
+      "png_sha256": "7c8d6299be6fa285b1c3cd8cd0893f029104a770ef64129a8df85413a209ffe6"
+    },
+    {
+      "index": 95,
+      "label": "白框第 5 格（SCROLL）",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 277.36,
+      "frame": 257,
+      "file": "frames/frame-257.png",
+      "png_sha256": "817bdfa2805b9ce9a6c62071e5e0f75e4b08d7f6b83992c9c55c12d17308c840"
+    },
+    {
+      "index": 96,
+      "label": "入會的問句",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 282.54,
+      "frame": 258,
+      "file": "frames/frame-258.png",
+      "png_sha256": "4fa4c9e94ba2a335c6c81fa0e4ce3e67b35d329f06b46e3624dde5ade66e228a"
+    },
+    {
+      "index": 97,
+      "label": "入會之後",
+      "key": "space",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 287.25,
+      "frame": 259,
+      "file": "frames/frame-259.png",
+      "png_sha256": "2750f5bef282b0adebc15048aff93c10422a46f83c1532053382c7f7fc88f28f"
+    },
+    {
+      "index": 98,
+      "label": "選單只有一列（Learn a spell）",
+      "key": "Return",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 292.17,
+      "frame": 260,
+      "file": "frames/frame-260.png",
+      "png_sha256": "67a145e1eadcb78d1530560efd81462ae557208370cd43d60c9a3140eb714d95"
+    },
+    {
+      "index": 99,
+      "label": "八筆法術的清單",
+      "key": "Return",
+      "settle_s": 3.5,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 297.03,
+      "frame": 261,
+      "file": "frames/frame-261.png",
+      "png_sha256": "d5fc1fbd5bdc12218b4cf3739fa0342769094efc57f7959b833bc827cc0b02d4"
+    },
+    {
+      "index": 100,
+      "label": "第一筆的價錢",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 302.18,
+      "frame": 262,
+      "file": "frames/frame-262.png",
+      "png_sha256": "179c5d83cdf968bef5f8e3690bca5af09d7c5f4a1c0e2cf324ac9d17b3fbca7e"
+    },
+    {
+      "index": 101,
+      "label": "買完直接回招呼語",
+      "key": "greater",
+      "settle_s": 1.2,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 304.29,
+      "frame": 263,
+      "file": "frames/frame-263.png",
+      "png_sha256": "99637780ff82941fe306948c96cdf6a9678fc91acf5a6bee526e33db159c440e"
+    },
+    {
+      "index": 102,
+      "label": "白框第 2 格（MIRROR）",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 309.56,
+      "frame": 264,
+      "file": "frames/frame-264.png",
+      "png_sha256": "3612fce921a89e30c7bda77e4a3a2be21b12536744c45a57071c5f4c624cb8e3"
+    },
+    {
+      "index": 103,
+      "label": "角色資料頁（圖示列多出法術那一格）",
+      "key": "greater",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 314.15,
+      "frame": 266,
+      "file": "frames/frame-266.png",
+      "png_sha256": "81893ad960c4e1ada2e59a8e0d3233ca4bf7490ff7c1e032001989dad1bd0bdb"
+    },
+    {
+      "index": 104,
+      "label": "資料頁白框第 2 格",
+      "key": "greater",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 317.4,
+      "frame": 267,
+      "file": "frames/frame-267.png",
+      "png_sha256": "a476eb3ae0738fb91c6dd33e0a92126756c7d4bba22b54c67c8d9c45f7265a00"
+    },
+    {
+      "index": 105,
+      "label": "資料頁白框第 3 格",
+      "key": "greater",
+      "settle_s": 2.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 320.74,
+      "frame": 268,
+      "file": "frames/frame-268.png",
+      "png_sha256": "744e98e7460c0fd56414d7d64ced0b1d6d94046b3186de7da41d268e48445f7b"
+    },
+    {
+      "index": 106,
+      "label": "資料頁白框第 4 格（法術）",
+      "key": "Return",
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 325.81,
+      "frame": 269,
+      "file": "frames/frame-269.png",
+      "png_sha256": "f0828ff258c2efef52557a8899222d4d7cd2d9eff2d52268236df1a1a7a6423a"
+    },
+    {
+      "index": 107,
+      "label": "法術一覽",
+      "key": "Return",
+      "settle_s": 3.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 330.78,
+      "frame": 270,
+      "file": "frames/frame-270.png",
+      "png_sha256": "2401b1c127b98682a72ddcad6b18f60d5268562ff72c1519c5f085930f47d00e"
+    },
+    {
+      "index": 108,
+      "label": "按 U-TURN 之後",
+      "key": null,
+      "settle_s": 4.0,
+      "fixed_delay_s": null,
+      "reached_stable": true,
+      "t": 336.66,
+      "frame": 266,
+      "file": "frames/frame-266.png",
+      "png_sha256": "81893ad960c4e1ada2e59a8e0d3233ca4bf7490ff7c1e032001989dad1bd0bdb"
+    }
+  ],
+  "timeline": [
+    {
+      "t": 2.25,
+      "frame": 0,
+      "file": "frames/frame-000.png",
+      "size": [
+        640,
+        400
+      ],
+      "png_sha256": "eccad29bf3e3c27e4f959dfdb498c46c0418a316dee1f6b9b8daad1d67d4ba04"
+    },
+    {
+      "t": 2.74,
+      "frame": 1,
+      "file": "frames/frame-001.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "5b1b5400f295a27198b7e865daddd36fcb79901a394f90ff77af07d6e9e5102a"
+    },
+    {
+      "t": 3.39,
+      "frame": 2,
+      "file": "frames/frame-002.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "e705990807272ff1183125286274d2b64482496efdf228261460fceafad76042"
+    },
+    {
+      "t": 3.9,
+      "frame": 3,
+      "file": "frames/frame-003.png",
+      "size": [
+        640,
+        350
+      ],
+      "png_sha256": "e14d6941a7500b0079fb6e2dfc2d5181830931eeb58aff27d2f900c871b73358"
+    },
+    {
+      "t": 4.36,
+      "frame": 1,
+      "repeat": true
+    },
+    {
+      "t": 4.7,
+      "frame": 4,
+      "file": "frames/frame-004.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8ef6bda61c7ae6ba2e411405edd87056782337a996a73a93099365cff25ceeb0"
+    },
+    {
+      "t": 8.91,
+      "frame": 5,
+      "file": "frames/frame-005.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1a120fbb455c633c96f5abe2cdbf564dbbb0a0af1b0694d0fc5e575ddf4dcbd8"
+    },
+    {
+      "t": 11.68,
+      "frame": 6,
+      "file": "frames/frame-006.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "10f6a9c59e69887c346c44ee4575b2eb7e53cbcf8610e0684df3717871f4b18c"
+    },
+    {
+      "t": 13.79,
+      "frame": 7,
+      "file": "frames/frame-007.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c13c9210fa3399b8e8a1c1e2c188a5aa5ee6bc5a01b958715a0dfa6d3bf1753a"
+    },
+    {
+      "t": 20.56,
+      "frame": 8,
+      "file": "frames/frame-008.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b46847625203ee2eab887ab8dcb8da0b757820b7d0f8803c19a8d86ba9a1930f"
+    },
+    {
+      "t": 21.12,
+      "frame": 9,
+      "file": "frames/frame-009.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "476fb50d3e5b955c961ac1263b8c1124af3373b256ca08d868a0bf4951de4500"
+    },
+    {
+      "t": 21.56,
+      "frame": 10,
+      "file": "frames/frame-010.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "69eb3b0ab535481ddf0481e1cd5d4c17a9c259e76f51a1e0d27eb471ce75780f"
+    },
+    {
+      "t": 22.06,
+      "frame": 11,
+      "file": "frames/frame-011.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "736c48575594e5491cdd0364fa9bd454e015b3e009d4e18b5e5594e0c6478d51"
+    },
+    {
+      "t": 22.73,
+      "frame": 12,
+      "file": "frames/frame-012.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a0c8f40adfbca063d89d65328cb42925b6c9f70ba0d9bf0797c2042766e22042"
+    },
+    {
+      "t": 23.38,
+      "frame": 13,
+      "file": "frames/frame-013.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5b32dd90f6f7f171d68f6413daefbe33d081a995e951d8aab505ad47bbe32c69"
+    },
+    {
+      "t": 23.98,
+      "frame": 14,
+      "file": "frames/frame-014.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7b58a862f156a44ff89fed388a7bd01ae3f195eae5a97254ce2a39f6410ed7c3"
+    },
+    {
+      "t": 24.45,
+      "frame": 15,
+      "file": "frames/frame-015.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d411b0c86139213a0d18812a7c484708151fe33eb07f08db57d08a882ee480e7"
+    },
+    {
+      "t": 25.0,
+      "frame": 16,
+      "file": "frames/frame-016.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1654f07aa7ada16f499c28de6ff3790e66f890ee832996abd2472dc75d6c53a7"
+    },
+    {
+      "t": 25.53,
+      "frame": 17,
+      "file": "frames/frame-017.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "73124b04aafc0a7d01368b6b76c3a1427dc05eddb6cc074bcc3a9a18be7f7aa4"
+    },
+    {
+      "t": 26.44,
+      "frame": 18,
+      "file": "frames/frame-018.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "eb7fea9fd4d2cb73944e8a9740a6fa0ec347e9d1edce9aadaf1690fc1a8f3194"
+    },
+    {
+      "t": 26.93,
+      "frame": 19,
+      "file": "frames/frame-019.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e939180cf9fe9451454201bd73aadd17538560b52ab3957602edd5cbb4e79a43"
+    },
+    {
+      "t": 35.94,
+      "frame": 20,
+      "file": "frames/frame-020.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f2e8ea08373a90bedf43cc628c28f197dee842410191803ac9f0c4ee3e8d599d"
+    },
+    {
+      "t": 36.45,
+      "frame": 21,
+      "file": "frames/frame-021.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3fcad756eb495b293582ce1bbb91c7ae3eea2ab576ea2af2453135d8121dec14"
+    },
+    {
+      "t": 36.93,
+      "frame": 22,
+      "file": "frames/frame-022.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3a667d2f149a5258741939d16d194851302df184dbad234c5e34798264ad5729"
+    },
+    {
+      "t": 37.44,
+      "frame": 23,
+      "file": "frames/frame-023.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2d38df550291fb1d64e9f86a4563d19db7a33b1cfd03419acb2cdc7a5b5c6135"
+    },
+    {
+      "t": 37.87,
+      "frame": 24,
+      "file": "frames/frame-024.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cae5b888f7ba1d78836cd829ec39d64265ddc6088e63d18454fe21ee51bcfdc7"
+    },
+    {
+      "t": 38.3,
+      "frame": 25,
+      "file": "frames/frame-025.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b380e4d4b18b725295b86ff6282bdf9cb9ad87fc9cc85545b6d01c6455be9ad4"
+    },
+    {
+      "t": 38.72,
+      "frame": 26,
+      "file": "frames/frame-026.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5951c2275733e75de560b94e7fc4ef1331c6d0a4144d2bff9ffe60af70900681"
+    },
+    {
+      "t": 39.21,
+      "frame": 27,
+      "file": "frames/frame-027.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3d745560f1a79915f0cb948700f3f6b12f93114f41ee550018a7d76f798931fa"
+    },
+    {
+      "t": 39.67,
+      "frame": 28,
+      "file": "frames/frame-028.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c54e06d9b32a41f5e642cd103b29c5a3e38e5abf0c481a2929039a4d6b98721"
+    },
+    {
+      "t": 40.19,
+      "frame": 29,
+      "file": "frames/frame-029.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bfc2a06824e67cb7e43504c8ad3368a33a382cfa1ec8dde5f2770a8569c406bc"
+    },
+    {
+      "t": 40.75,
+      "frame": 30,
+      "file": "frames/frame-030.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e6e0520454b39d547511d421c443edc63c83b041582e661b52fb67de20e536ba"
+    },
+    {
+      "t": 41.53,
+      "frame": 31,
+      "file": "frames/frame-031.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "11293cf7f1efe4270658771ca8b367c08ae5de6c766f0f782b6bfec23d41aa09"
+    },
+    {
+      "t": 42.22,
+      "frame": 32,
+      "file": "frames/frame-032.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "818e5dc3a142fef87b4f7aff72145907ed6ac466c3184fe8088abc751e2388cc"
+    },
+    {
+      "t": 44.46,
+      "frame": 33,
+      "file": "frames/frame-033.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "96a471564afe63bb795183776eac99c201a78b78142207720ac859887ff6eb7e"
+    },
+    {
+      "t": 46.63,
+      "frame": 34,
+      "file": "frames/frame-034.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b21b37987e61d3de1ab17c8e0957821a61ab2d800363851f2782d54a49a1bfa0"
+    },
+    {
+      "t": 48.62,
+      "frame": 35,
+      "file": "frames/frame-035.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0c57ce28bbee7584127da739ead12c254aefb3af18f26ceffde27ff5d936f2b0"
+    },
+    {
+      "t": 50.51,
+      "frame": 36,
+      "file": "frames/frame-036.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cd3ae7e0cec58ca86021b7c80dc717adeb593b3716094f5ce31b0b63ab12fe79"
+    },
+    {
+      "t": 52.46,
+      "frame": 37,
+      "file": "frames/frame-037.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "16b488f6fd2f1e09c63144d88f9f7163dadcf120b1302c73af950d07fbda9bf9"
+    },
+    {
+      "t": 54.5,
+      "frame": 38,
+      "file": "frames/frame-038.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "de990f6b028b6a239bf6dff4bdb9b9eb6b6cc4969a012a0a5a255d7f6bed921a"
+    },
+    {
+      "t": 56.43,
+      "frame": 39,
+      "file": "frames/frame-039.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "933ae4ec6bf614f85093235d6c2c08dd164fad134a70b56c440229d08352aebe"
+    },
+    {
+      "t": 58.55,
+      "frame": 40,
+      "file": "frames/frame-040.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fb52d0c72f255dd843fb38a692cabcc8db6e2a975229ab6e843614a555192f2c"
+    },
+    {
+      "t": 60.56,
+      "frame": 41,
+      "file": "frames/frame-041.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b4b5a0259e325ee34d3610ad893e0a52dfbd93faee86d35edb1c792b47a90b12"
+    },
+    {
+      "t": 62.58,
+      "frame": 42,
+      "file": "frames/frame-042.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0d79d09e85e9480f33e9717c73b4b154d662fedb37186d7bee105786a0200f3b"
+    },
+    {
+      "t": 64.54,
+      "frame": 43,
+      "file": "frames/frame-043.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "799c5d6363c6fe57d6d58143921c7ba3d6eb7759e045fa7ce682f7ed0575856a"
+    },
+    {
+      "t": 66.46,
+      "frame": 44,
+      "file": "frames/frame-044.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "025478f3583da2ec645cc2b8670462b6469e94b56f6faa0211423c8f34f349ea"
+    },
+    {
+      "t": 92.53,
+      "frame": 45,
+      "file": "frames/frame-045.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c77437b4ba3c0768ba23643079f5dc5840626421ff38626b351c19e3ab35697"
+    },
+    {
+      "t": 94.15,
+      "frame": 46,
+      "file": "frames/frame-046.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7d955b16f3ee9a3d119163085c9c54610709c262e6f945de4e35c1c47d8ec0d5"
+    },
+    {
+      "t": 94.77,
+      "frame": 47,
+      "file": "frames/frame-047.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3aeeb09a7e737ca71a943230fd594630ed4ec229e042230182377753ca739ca5"
+    },
+    {
+      "t": 95.42,
+      "frame": 48,
+      "file": "frames/frame-048.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cfc8de116a7b67e61ec99614ecc04f2ac9a38290300455973a196214104fd932"
+    },
+    {
+      "t": 96.13,
+      "frame": 49,
+      "file": "frames/frame-049.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "93ac82c3e194f88eb58e5b3c3ae34e069c6961fdeddbd5205e3c1b283037896f"
+    },
+    {
+      "t": 96.81,
+      "frame": 50,
+      "file": "frames/frame-050.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1ead7e053c4e2a81b75b8e431ee921929bce0a74f29e0ec71b3f57b12e0d76a5"
+    },
+    {
+      "t": 97.56,
+      "frame": 51,
+      "file": "frames/frame-051.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f7a5f799c1f8eacdbccff9a3c3541846c475c4f8e672650beff530aa668e0e58"
+    },
+    {
+      "t": 98.25,
+      "frame": 52,
+      "file": "frames/frame-052.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e93fb6085cb4220ddfb2af85d434f0f7b9a2efabea38505759264840536d1725"
+    },
+    {
+      "t": 98.83,
+      "frame": 53,
+      "file": "frames/frame-053.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5f4bbbcd857390dc8534eefcba215e44802db1dc39a35b91f52ea6b4218929a7"
+    },
+    {
+      "t": 99.64,
+      "frame": 54,
+      "file": "frames/frame-054.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8d537991df76d7ffa21b8f790cfa9f456bf9cc75d7bc5095c647a5fa3b7e8a9e"
+    },
+    {
+      "t": 102.71,
+      "frame": 55,
+      "file": "frames/frame-055.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6265f0c8a2a2247fc1832d34d30b070627e1ba315942b916ad0e82738b432580"
+    },
+    {
+      "t": 104.76,
+      "frame": 56,
+      "file": "frames/frame-056.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8593c8e1f27e99b5f9e6af1b1b7e7e7a043cc2e03b8cccaf1eda851af0f47acf"
+    },
+    {
+      "t": 105.21,
+      "frame": 57,
+      "file": "frames/frame-057.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0a7c9db5e4bb86083ed1cf2556aed626887441b1cb99e1261a087af4e79fea67"
+    },
+    {
+      "t": 108.42,
+      "frame": 58,
+      "file": "frames/frame-058.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c23b0e6dca994530abc41c103e8ff181e3b18485066fe5ba6f29b86829791cd6"
+    },
+    {
+      "t": 112.25,
+      "frame": 59,
+      "file": "frames/frame-059.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fc224d4a6f935afe58ae0ff69b2f5491bd478ea45301a89c01bdbb59e41b938e"
+    },
+    {
+      "t": 112.81,
+      "frame": 60,
+      "file": "frames/frame-060.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b245f5d52cfdd882d9a11219a290a42674ef1b0f69e9ae2a4bd60552cbd14500"
+    },
+    {
+      "t": 113.7,
+      "frame": 61,
+      "file": "frames/frame-061.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "69e939fe8f100ceb7c898c5f1172eb0e22deb2744e3929b81740f0acacf8556b"
+    },
+    {
+      "t": 114.77,
+      "frame": 62,
+      "file": "frames/frame-062.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1546f884648b6d91d77476e522df9cef3fc281fd91a2ccae7918593686cf0a04"
+    },
+    {
+      "t": 115.88,
+      "frame": 63,
+      "file": "frames/frame-063.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8976cb8de561b6cfa44ed8141205976374c675fcdb814efcfcda4afe0cd5d381"
+    },
+    {
+      "t": 116.31,
+      "frame": 61,
+      "repeat": true
+    },
+    {
+      "t": 116.73,
+      "frame": 62,
+      "repeat": true
+    },
+    {
+      "t": 117.14,
+      "frame": 60,
+      "repeat": true
+    },
+    {
+      "t": 117.81,
+      "frame": 64,
+      "file": "frames/frame-064.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ad9308a2f2887954b23b0ab03809879d44e4250fb9e01d9dfa24b87143952a8c"
+    },
+    {
+      "t": 118.55,
+      "frame": 65,
+      "file": "frames/frame-065.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "939902ceb73ab2bde4b687c2394532662a0d6b61ce4fda39e65739d767a5fcab"
+    },
+    {
+      "t": 119.02,
+      "frame": 66,
+      "file": "frames/frame-066.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fad1a2d80fcf2f9254818d7968b456f48d7fd8396597ce067d3385820f0f777f"
+    },
+    {
+      "t": 119.66,
+      "frame": 67,
+      "file": "frames/frame-067.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "138b0b131ac84693496ae4802971ee0cb7ce7126bb7bb57e6b44c649ed4f5022"
+    },
+    {
+      "t": 120.12,
+      "frame": 68,
+      "file": "frames/frame-068.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4518e05ea0de82eb7a3ea182a5c25355792493e62a66d7986206181fab3c5cfa"
+    },
+    {
+      "t": 120.47,
+      "frame": 67,
+      "repeat": true
+    },
+    {
+      "t": 121.54,
+      "frame": 69,
+      "file": "frames/frame-069.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b44893d5f11410fa749ee9b308c562c22fb12059a2df378b2c0ab184211cdfa1"
+    },
+    {
+      "t": 122.04,
+      "frame": 70,
+      "file": "frames/frame-070.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "79e967960bfcb6a80464a97410d5fce34a4ce624baa70400628c79060367cd78"
+    },
+    {
+      "t": 122.42,
+      "frame": 69,
+      "repeat": true
+    },
+    {
+      "t": 123.59,
+      "frame": 71,
+      "file": "frames/frame-071.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c53386d0806e096f90c714f41e6fb8142f9f7547d26fbf2bf22208f5f36e417d"
+    },
+    {
+      "t": 125.38,
+      "frame": 72,
+      "file": "frames/frame-072.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "abe2d3589f5b0d5b93b63803033f6cac2fc62af089f838c85dec5118773eb6d8"
+    },
+    {
+      "t": 126.35,
+      "frame": 73,
+      "file": "frames/frame-073.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "85b486e8a5c40c55f59a96fea71a987bfa8eb795d41204d9383b3e0ba42ce97a"
+    },
+    {
+      "t": 127.19,
+      "frame": 74,
+      "file": "frames/frame-074.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "438ae2d6c1285e70db31cbc4c69187a17afb0ca5efa575f7a4f231bdffc7aeb6"
+    },
+    {
+      "t": 128.2,
+      "frame": 75,
+      "file": "frames/frame-075.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "14b69571332eb2c1cfafcdbc1bcd9de6176e79a4398783fbbc4d17ca45d2057e"
+    },
+    {
+      "t": 129.68,
+      "frame": 76,
+      "file": "frames/frame-076.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c22794b7d56913863b84d198e3d8590c28f1b17995478078237e239b20638e2b"
+    },
+    {
+      "t": 130.69,
+      "frame": 77,
+      "file": "frames/frame-077.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "368f7e16fe2f4bc8ba6eb8516f87124b001d9eb8df08cc23d0646838d6c2b5d8"
+    },
+    {
+      "t": 131.38,
+      "frame": 78,
+      "file": "frames/frame-078.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0becb5e90d9d99d15f8d71db0c4f460f251288cd82d71caa03dada1e1cd8c34c"
+    },
+    {
+      "t": 131.89,
+      "frame": 79,
+      "file": "frames/frame-079.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "959635b9b21a3d77da07e64a864c0e1e2631f7d07669f7df373b6c3ef0e63b78"
+    },
+    {
+      "t": 132.75,
+      "frame": 80,
+      "file": "frames/frame-080.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "55166e9048929441790d23ec4ebb287cd42b17d39caf06425e9edce4ffb8c21a"
+    },
+    {
+      "t": 133.42,
+      "frame": 81,
+      "file": "frames/frame-081.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cdb8ef8560b375f548601798940f41e6234b52243982fc7792a193de37b8a4b6"
+    },
+    {
+      "t": 133.91,
+      "frame": 82,
+      "file": "frames/frame-082.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "849e5193fc22dff2f483632bee0d778a19a9440a7ed710a5d04428224e2dc56d"
+    },
+    {
+      "t": 134.47,
+      "frame": 83,
+      "file": "frames/frame-083.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "59054c55f633c7277bf6cdd31d528a0bb205609029eb2902d4ec6a7a63c598f5"
+    },
+    {
+      "t": 135.13,
+      "frame": 84,
+      "file": "frames/frame-084.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c1051f5908575ad782bfbf4ff01331701c4b38bd9f0347e71b953bb188c8d250"
+    },
+    {
+      "t": 135.6,
+      "frame": 85,
+      "file": "frames/frame-085.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2ec5e5f14d2de891799842489c230c8d7d6793450a62a3198372c0e6e4d6889e"
+    },
+    {
+      "t": 136.21,
+      "frame": 86,
+      "file": "frames/frame-086.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1ad578885a2f4b728bb7a9261b918b4152a94ddae4ded44d06eb841d80d9163f"
+    },
+    {
+      "t": 137.03,
+      "frame": 87,
+      "file": "frames/frame-087.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "44b9568cb192a24ef61ac95b8d8942100c0f09ef3af6a522cf0e9baef9cb0c80"
+    },
+    {
+      "t": 137.74,
+      "frame": 88,
+      "file": "frames/frame-088.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1564166d3482d314990e494e498762cf4e87edccbcb338bb369680b451b211bb"
+    },
+    {
+      "t": 138.3,
+      "frame": 89,
+      "file": "frames/frame-089.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4abbf64b54f8d17e66b7761887bf309cb0c996c8213922b461b76e0efc295b66"
+    },
+    {
+      "t": 139.16,
+      "frame": 90,
+      "file": "frames/frame-090.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4bdb95142e06cb723b1bef0d5a11e5a173c866f14e257e765577f719c774b7e9"
+    },
+    {
+      "t": 140.09,
+      "frame": 91,
+      "file": "frames/frame-091.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "df137cccc2c06fb96ac840dcd05cc0bb3e5ecb05ef88ece192f0a406c17cc3a0"
+    },
+    {
+      "t": 141.02,
+      "frame": 92,
+      "file": "frames/frame-092.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f0b1b978fbd4097ae9cb7f2e6dac748c88fbb938504fd68b8ea9b038a91686af"
+    },
+    {
+      "t": 141.77,
+      "frame": 93,
+      "file": "frames/frame-093.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3e8799af695f11d2d5ad86572eb1024d834a8d3ae12463760e0e6f7a4013768f"
+    },
+    {
+      "t": 142.62,
+      "frame": 94,
+      "file": "frames/frame-094.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6a0110e4aff118b04dac00263be90a6c94a5d2069ddd8b2b79adfb297fcede4c"
+    },
+    {
+      "t": 143.41,
+      "frame": 95,
+      "file": "frames/frame-095.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "aec78429cb7e2bd194cec0484b3986d4c6d34f0fc61b71f9904f31a228dc7564"
+    },
+    {
+      "t": 144.54,
+      "frame": 96,
+      "file": "frames/frame-096.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b064b589d436e910a93470ddc155d46d2d9883c59db276ec26d476fe6469e207"
+    },
+    {
+      "t": 145.28,
+      "frame": 97,
+      "file": "frames/frame-097.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c82213c31925c0e75ca5067e4dc52e312cee14d8d3c71006bd6ec7af81c253fe"
+    },
+    {
+      "t": 146.16,
+      "frame": 98,
+      "file": "frames/frame-098.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "39cc3f6a5f1e2d58d34b2d03d0f39e2ff5ee21b4ddf13dba521eb72256b08303"
+    },
+    {
+      "t": 146.64,
+      "frame": 99,
+      "file": "frames/frame-099.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e8208127aad45fcf6c4903b017f3f3d3f2552d130b9cfca4b5cc2d19294489f6"
+    },
+    {
+      "t": 147.24,
+      "frame": 100,
+      "file": "frames/frame-100.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "31e941a7f395216b13f29660c09db9e0d08c23b5a3569f5d0639644db06a1de5"
+    },
+    {
+      "t": 147.68,
+      "frame": 101,
+      "file": "frames/frame-101.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7da47e5d8612e0ff3f7bb50f11d35b9f4207cddba8a7ebdce326aeeef26a63be"
+    },
+    {
+      "t": 148.34,
+      "frame": 102,
+      "file": "frames/frame-102.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "19a365a3278abe86de99851fbfd0adabc4a18f6ab678b99bcab37d4a13dd6bca"
+    },
+    {
+      "t": 148.93,
+      "frame": 103,
+      "file": "frames/frame-103.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d3c8e5e1e8e8b8b0c2637e2eb64f069b6d91a767224d1a043a262cbdc8d7e5c2"
+    },
+    {
+      "t": 149.87,
+      "frame": 104,
+      "file": "frames/frame-104.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "07861c1882cbed4c98fc0b0b89963894b9213fd24d60e460ade92115877a7963"
+    },
+    {
+      "t": 150.77,
+      "frame": 105,
+      "file": "frames/frame-105.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "dbe25fedc910e1845de9c7d7d5aeed28cb3bd9e57333baf1b2de3a78b00314b2"
+    },
+    {
+      "t": 151.57,
+      "frame": 106,
+      "file": "frames/frame-106.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fb82aa3fdd0885bbabdf4bb6541fb27fa71aa4e6d898d689fd0bc763b8711f88"
+    },
+    {
+      "t": 152.12,
+      "frame": 107,
+      "file": "frames/frame-107.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c59899692e8717de1826a09bce54f8cf512d74c8fa5930be308e3119139aed2a"
+    },
+    {
+      "t": 153.08,
+      "frame": 108,
+      "file": "frames/frame-108.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f422a661029339469fed51d97d63d9c2a6cb9c4e16b0a1ac048094b7c2f5cd3a"
+    },
+    {
+      "t": 153.99,
+      "frame": 109,
+      "file": "frames/frame-109.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f4066b616624791fef27de2ea28173ed25b53abf42884e9f186f472fc5802927"
+    },
+    {
+      "t": 154.77,
+      "frame": 110,
+      "file": "frames/frame-110.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a9f2d61c6a8ed4e9f0735c3a41059841a105c735174fd2a7a75b8ef6905b3567"
+    },
+    {
+      "t": 155.45,
+      "frame": 111,
+      "file": "frames/frame-111.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b872532d8815b5eb9b868b66e946679791fb69e73451ae9fb8a21e3ea7df5804"
+    },
+    {
+      "t": 155.88,
+      "frame": 112,
+      "file": "frames/frame-112.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "31b354b260588dea0ba8324b83948c6e8a755b46a8b24de2ad972570785d374a"
+    },
+    {
+      "t": 156.61,
+      "frame": 113,
+      "file": "frames/frame-113.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b31d02b44a0429416f5d7d9bf6f11c631a7489589b0743724151799093cf989c"
+    },
+    {
+      "t": 157.08,
+      "frame": 114,
+      "file": "frames/frame-114.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3a159bfaf31c5614c2309f1f7610c8a203482d47573825b48e373e971b85b8d0"
+    },
+    {
+      "t": 157.43,
+      "frame": 113,
+      "repeat": true
+    },
+    {
+      "t": 158.39,
+      "frame": 115,
+      "file": "frames/frame-115.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3316f5863d6c1522765cf0c32ba2436c66e76fc8d898734a5fadf7d6dd1158ae"
+    },
+    {
+      "t": 158.99,
+      "frame": 116,
+      "file": "frames/frame-116.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "983060e3db6ccbc71cb053792a329814a2254772d9fabf0f6412544151c22008"
+    },
+    {
+      "t": 160.24,
+      "frame": 117,
+      "file": "frames/frame-117.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fb7ed2ef411d414445bbe1dedea4bcdfa0ce94fcb219ea489c103e6a73552031"
+    },
+    {
+      "t": 160.7,
+      "frame": 118,
+      "file": "frames/frame-118.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "eea32c301592254f1cc8e989bcf76339a63afb3b70c27f64380d1609dca02b7a"
+    },
+    {
+      "t": 161.15,
+      "frame": 119,
+      "file": "frames/frame-119.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8b1c953630b15a77658cb17951a59cfe4fa5ba7b0b2a711e1966bba9d819dabc"
+    },
+    {
+      "t": 161.81,
+      "frame": 120,
+      "file": "frames/frame-120.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "db19bee51fb2bf684d1aee1d32d88fb475c5ee4a152eea1248359b74c03bf507"
+    },
+    {
+      "t": 162.26,
+      "frame": 121,
+      "file": "frames/frame-121.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c3eb5d13968ec5a16b312357d82dc81f80cc7ea4e0aaab7bf8c4451f2b24c294"
+    },
+    {
+      "t": 162.7,
+      "frame": 122,
+      "file": "frames/frame-122.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5f489595ee5ef93984c06357c5b394aa303854a0f974c0a739314cc4d07dddc6"
+    },
+    {
+      "t": 163.12,
+      "frame": 123,
+      "file": "frames/frame-123.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4bddf56a8cab7ed45133ccd3e5f3e34b6020bc7a9d70dfbd316d1d205b2b464e"
+    },
+    {
+      "t": 163.78,
+      "frame": 124,
+      "file": "frames/frame-124.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "35070036cee79aec81987555c1112945271060ec6713f32e7f9703ae692a4bc5"
+    },
+    {
+      "t": 164.3,
+      "frame": 125,
+      "file": "frames/frame-125.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9a4bdd1f62249f3230ef9e9b2c3e8671f8a3bbbd1561176410f7ca00f3a531c2"
+    },
+    {
+      "t": 164.78,
+      "frame": 126,
+      "file": "frames/frame-126.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8dc07e7a83dd01510c1b34ec483af8b32ef4f944366f104afc714eb19d91827c"
+    },
+    {
+      "t": 165.48,
+      "frame": 127,
+      "file": "frames/frame-127.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ee09cf3d7027fbe8b79d8bb4094beb76e95941fa6c8604c38b004ccaaa31079f"
+    },
+    {
+      "t": 165.99,
+      "frame": 128,
+      "file": "frames/frame-128.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c08d6cdc18892e9d7726ee8f2591f7bff955839ca12dfdeb23920fa7d457c623"
+    },
+    {
+      "t": 166.49,
+      "frame": 129,
+      "file": "frames/frame-129.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "562df90a28e51d724a2921cacedc4f48bd9245b7d9c74e58c25787d1a1dc3f49"
+    },
+    {
+      "t": 167.29,
+      "frame": 130,
+      "file": "frames/frame-130.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fcbad8463d3c6eee61782fbba4dbe05162b2706f503e06b7a6398409978c16d2"
+    },
+    {
+      "t": 167.78,
+      "frame": 131,
+      "file": "frames/frame-131.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3c11b72043ec397256720721348b405e1699e1b8ba7e99de2d11fc3de7c11c3f"
+    },
+    {
+      "t": 168.3,
+      "frame": 132,
+      "file": "frames/frame-132.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2061da8f7161bfdbcbd98810dd4d1eedb92e2445fc7a36fa5d0269b9dfa6472e"
+    },
+    {
+      "t": 168.92,
+      "frame": 133,
+      "file": "frames/frame-133.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "621f37d4fdaf39ec68ba9577608af50f7205b893484477d1a7bc4d89c935e1a6"
+    },
+    {
+      "t": 169.46,
+      "frame": 134,
+      "file": "frames/frame-134.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "797571370d3ac84ad856768156575250ed293f6094e69ab5b18a8d023d9010b0"
+    },
+    {
+      "t": 170.26,
+      "frame": 135,
+      "file": "frames/frame-135.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "24930ed1f96f306fffbc334a57fbd6d7804fdca8c18a8a2b62a4de0471c3b7ac"
+    },
+    {
+      "t": 171.04,
+      "frame": 136,
+      "file": "frames/frame-136.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "df3e1fd49bcb91ed2d6b78c4bc1c411e98e0f345d87253683220126d9c91e87f"
+    },
+    {
+      "t": 171.51,
+      "frame": 137,
+      "file": "frames/frame-137.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7d8d751f8839690344f8230f51b0f4e3ded7a5a7807cef34644473425e075ab6"
+    },
+    {
+      "t": 172.09,
+      "frame": 138,
+      "file": "frames/frame-138.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b51097eef24d1fbda516168a9e6469da73b614c7a370bbc110755e0554d00c6d"
+    },
+    {
+      "t": 172.73,
+      "frame": 139,
+      "file": "frames/frame-139.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5ffb80cc176e7b76fd1f1712e7c1d9f7b15b2c31a428427017a279c94505c285"
+    },
+    {
+      "t": 173.3,
+      "frame": 140,
+      "file": "frames/frame-140.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5d242250b04bf196b8e7a222da23d93e148057d28b13645cc52848776d280245"
+    },
+    {
+      "t": 173.92,
+      "frame": 141,
+      "file": "frames/frame-141.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d9f12d2e062aa77dfa7499dd32f18489304fed0eb6133db3176025413480ce29"
+    },
+    {
+      "t": 174.51,
+      "frame": 142,
+      "file": "frames/frame-142.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "aae8ded78063c6f78eef4df4549ad39517d48d23cf59dcc2fe8562100832aee4"
+    },
+    {
+      "t": 174.96,
+      "frame": 143,
+      "file": "frames/frame-143.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4c2867700e02570395f4714e6d35005758ebbc034a8783ce101fff5cf84bd136"
+    },
+    {
+      "t": 175.42,
+      "frame": 144,
+      "file": "frames/frame-144.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "df9a0c85f15c962746d5038d34ce9abe4cd521f8fce0d685567a69d738c57ae1"
+    },
+    {
+      "t": 176.16,
+      "frame": 145,
+      "file": "frames/frame-145.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d166f7577894d3b1d638df2b0c23628899a7d3a1c9606e854d63eb969d0d8a7e"
+    },
+    {
+      "t": 176.57,
+      "frame": 146,
+      "file": "frames/frame-146.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e23680ae76d4228116128bdd07fdda4a00ba7eee27fc78bfc55a0f4d8c7953a6"
+    },
+    {
+      "t": 177.01,
+      "frame": 147,
+      "file": "frames/frame-147.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "70fe7cef4ab819f6462f1c0dabf8e16ef84bf6944273042c3eee37b81bfbcfe6"
+    },
+    {
+      "t": 177.37,
+      "frame": 145,
+      "repeat": true
+    },
+    {
+      "t": 177.92,
+      "frame": 148,
+      "file": "frames/frame-148.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b9d9543d3c1ce4e28e5ac73f2e818aca419d6fa3c07f72908da431bc098623a4"
+    },
+    {
+      "t": 178.33,
+      "frame": 149,
+      "file": "frames/frame-149.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8b0ac45bef50dba45641144f1425a37551ffb7535dcb8b9c59dde0550ad31ec4"
+    },
+    {
+      "t": 178.74,
+      "frame": 150,
+      "file": "frames/frame-150.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7a55cd6a2d16e64236acfde29c8d5ad3d1078f1f254dd088edfa1a31a4400438"
+    },
+    {
+      "t": 179.16,
+      "frame": 151,
+      "file": "frames/frame-151.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "248b046aaf7afa1ef1ed29914e295276a4bded236e8e7d9b42f27a6c5cf0e79d"
+    },
+    {
+      "t": 179.67,
+      "frame": 152,
+      "file": "frames/frame-152.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4c2c77b067c251958f4e0f9931ba8696fa519f4ee148d5f244f1fb9d36521648"
+    },
+    {
+      "t": 180.48,
+      "frame": 153,
+      "file": "frames/frame-153.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4f46c0d8d23d24b62ac9dc5566c2ae084fe44cb3f24429e1c4197dc2ca0019fa"
+    },
+    {
+      "t": 181.34,
+      "frame": 154,
+      "file": "frames/frame-154.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a7e0d7d90f4aef0b249f5504961e19a6cd7eb5796fb41d686d36151aacc7f767"
+    },
+    {
+      "t": 181.7,
+      "frame": 155,
+      "file": "frames/frame-155.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9549725b5572c420c2af84febeca2af3528d576915e78755edf19b5180e2ce6d"
+    },
+    {
+      "t": 182.37,
+      "frame": 154,
+      "repeat": true
+    },
+    {
+      "t": 182.9,
+      "frame": 156,
+      "file": "frames/frame-156.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d32025372386d7c971584f935567f95fd03510d7578ee8023e07e44bc1c2acc3"
+    },
+    {
+      "t": 183.35,
+      "frame": 157,
+      "file": "frames/frame-157.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "aa81aac79d20d1a1906066826f3155f7ad81f7aa91fa5d2696fffc0df3989ec9"
+    },
+    {
+      "t": 183.67,
+      "frame": 156,
+      "repeat": true
+    },
+    {
+      "t": 184.04,
+      "frame": 158,
+      "file": "frames/frame-158.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "89b2e4d64cf147ce63c6e5978927e46e9308a2a25f406c68dd6f595e7f21ea13"
+    },
+    {
+      "t": 184.71,
+      "frame": 159,
+      "file": "frames/frame-159.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4397cf59489b62e7278cbd3da287097af8d7284d8d6314a65e3cd7fcab91ea3c"
+    },
+    {
+      "t": 185.14,
+      "frame": 160,
+      "file": "frames/frame-160.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c59d61f37cdde78e56392f09267b788881333365e2c54bae0025072c8df58b47"
+    },
+    {
+      "t": 185.65,
+      "frame": 161,
+      "file": "frames/frame-161.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6921ac370e7c925ef66fca1e0354256e4879111c348d30333f705719da58196c"
+    },
+    {
+      "t": 186.38,
+      "frame": 162,
+      "file": "frames/frame-162.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "296bd409bde7ff0fb9464744ddee9b19e82dc2576a0a5a4bf9672da38480066b"
+    },
+    {
+      "t": 186.85,
+      "frame": 163,
+      "file": "frames/frame-163.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7ed348e8259c63323ad3d40ba7bf8e2257f5d8767c42dd4a4c1b2889cd028889"
+    },
+    {
+      "t": 187.23,
+      "frame": 164,
+      "file": "frames/frame-164.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4a7baa7e9a443f85a2682d10b8cc33c5cc705b47d03270a18cc51148316db5a7"
+    },
+    {
+      "t": 187.67,
+      "frame": 165,
+      "file": "frames/frame-165.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5e50b00e6fb42f58d374c5d7842e1591f8321335e90558ae4e3e2f5a7dd781d2"
+    },
+    {
+      "t": 188.39,
+      "frame": 166,
+      "file": "frames/frame-166.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "deabb4122c16fe0e488878183531bb2b60efacfc3d6cdd8b81e850f7d77946b7"
+    },
+    {
+      "t": 188.9,
+      "frame": 167,
+      "file": "frames/frame-167.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "018e22807a99b5b365214ebdc5d7e61bc2af32d1d423642d32669f477f4aa3f3"
+    },
+    {
+      "t": 189.73,
+      "frame": 168,
+      "file": "frames/frame-168.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7bca463e8d557f83d1a2337495e49a24fec5bd32fb1c3375aafbd6a28e578cbf"
+    },
+    {
+      "t": 190.49,
+      "frame": 169,
+      "file": "frames/frame-169.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f27e19cec56b3f4541380339bca18405bc21a03868e1c0aa83cee505a1b27b6f"
+    },
+    {
+      "t": 191.25,
+      "frame": 170,
+      "file": "frames/frame-170.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2052b5f4ea1ec4e30ac2f5c310c22b61b92a4386a8eb8c0dbc71cbdcfd05f1ee"
+    },
+    {
+      "t": 191.67,
+      "frame": 171,
+      "file": "frames/frame-171.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "eac5b6a38ddc3b3a3b69d8c35e7385403fdc205727f1f230195bdcf3b20268e5"
+    },
+    {
+      "t": 192.58,
+      "frame": 172,
+      "file": "frames/frame-172.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e6364349198ceaaca8e6a97fb5edd1c9b4d80e2030c9e701f400659c9a430b33"
+    },
+    {
+      "t": 193.16,
+      "frame": 173,
+      "file": "frames/frame-173.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3126cad516461a2d1fbb156fca994a52ad497e1e30831e7282b40169d7e21acc"
+    },
+    {
+      "t": 193.53,
+      "frame": 174,
+      "file": "frames/frame-174.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9bc561e981a1cbeca16cf4c68008a53b77dcd64282984a5d35fbf72c202577cb"
+    },
+    {
+      "t": 194.18,
+      "frame": 175,
+      "file": "frames/frame-175.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "19fe5560b9daf66eb5efd05787fa19d932a7b974e3ada460fcd5eb8672f9c3a7"
+    },
+    {
+      "t": 194.66,
+      "frame": 176,
+      "file": "frames/frame-176.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "bc1f94bbe38749fb92d019894d5c465e94bc76d023a50d8de6146d5d88243c49"
+    },
+    {
+      "t": 195.03,
+      "frame": 177,
+      "file": "frames/frame-177.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8c5ef0309a0ee49329933acef7d80b2e79365f9064139db6d5f24fb8c38db3c4"
+    },
+    {
+      "t": 195.36,
+      "frame": 175,
+      "repeat": true
+    },
+    {
+      "t": 195.92,
+      "frame": 178,
+      "file": "frames/frame-178.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "11bad2db7711643f3add97fcd98cdd3ff5a3edc5477db2196743cafda89fa7e8"
+    },
+    {
+      "t": 196.67,
+      "frame": 179,
+      "file": "frames/frame-179.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d207ad073786c632ddef4261b94880e6609070ad653cb669dc55a422d1cd5108"
+    },
+    {
+      "t": 197.55,
+      "frame": 180,
+      "file": "frames/frame-180.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a51e2f1f674bd0a97ce56ba1d364d2e0a7cec3453391f941e015f15201bfab2d"
+    },
+    {
+      "t": 198.06,
+      "frame": 181,
+      "file": "frames/frame-181.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c631258b91735e99455f954d962c1ea8fcb66651f0c0c5a9ec2ef9d37ddb6402"
+    },
+    {
+      "t": 198.53,
+      "frame": 182,
+      "file": "frames/frame-182.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "71f22afc6b237742cee3d445f630a2aaece4f5e3248474895f72ca9cb8a707b9"
+    },
+    {
+      "t": 199.22,
+      "frame": 183,
+      "file": "frames/frame-183.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "67587a1f6818dcc02ce5df5d28fd6b79dfdedbee44f9f4f06b78a925dc684056"
+    },
+    {
+      "t": 199.66,
+      "frame": 184,
+      "file": "frames/frame-184.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "346fdc7dc063086459ec78e7230dc72508495c4df72e1e671aec8e1c442f3d8d"
+    },
+    {
+      "t": 200.22,
+      "frame": 185,
+      "file": "frames/frame-185.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e4bb3c5af8e1f3dd72329ef572fda5a4a4788364895670add558ff5794f21694"
+    },
+    {
+      "t": 201.05,
+      "frame": 186,
+      "file": "frames/frame-186.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b36fbaf664deb03b77eb052def7ddd066f8b9e567f36baa84d6a2a59444883df"
+    },
+    {
+      "t": 201.53,
+      "frame": 187,
+      "file": "frames/frame-187.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fd979d3d49ddd3df817cea8309657b9053bf664e1ddd8c26490982bab859904c"
+    },
+    {
+      "t": 201.96,
+      "frame": 188,
+      "file": "frames/frame-188.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "34e5f151ffa53cea7e1e6406724b94f9e5c832f45868677d3d747d5fdb820b8e"
+    },
+    {
+      "t": 202.72,
+      "frame": 189,
+      "file": "frames/frame-189.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "094758a29b9dcfdc60d3bffda8d27a34f2b6037f2d2d3dfa9cb88ed69cadefb4"
+    },
+    {
+      "t": 203.33,
+      "frame": 190,
+      "file": "frames/frame-190.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a706def1d4156a04170139d86bf95d7a8a8964a57478344e55acc9ae3469204c"
+    },
+    {
+      "t": 203.85,
+      "frame": 191,
+      "file": "frames/frame-191.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "aec06e3723bc6a5f63a9912a2112e73402fc7550cda2cf1337d3ad3360a18460"
+    },
+    {
+      "t": 204.63,
+      "frame": 192,
+      "file": "frames/frame-192.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "58671b4a396de49513ca4d8253a330d72f01752e2ce96829cd148afd3f165f3a"
+    },
+    {
+      "t": 205.02,
+      "frame": 193,
+      "file": "frames/frame-193.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fec7bfff73abd009c13c1a34e3aee07b1b6d6ff669a2a0a456f6a9179095372b"
+    },
+    {
+      "t": 205.47,
+      "frame": 194,
+      "file": "frames/frame-194.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f5157ca92ec59971a98f8bccb95372c7653521daa03824f6abf0ae6c554516ee"
+    },
+    {
+      "t": 205.8,
+      "frame": 192,
+      "repeat": true
+    },
+    {
+      "t": 206.36,
+      "frame": 195,
+      "file": "frames/frame-195.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "8db757e2140450b7191ae596e8d280e85d5f9043958930f38be2bce8892f2bc9"
+    },
+    {
+      "t": 206.83,
+      "frame": 196,
+      "file": "frames/frame-196.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "710c6136bdfd35b3b0d4e82930d2b8136d7ac7567eb88f558c101bc86d98306e"
+    },
+    {
+      "t": 207.26,
+      "frame": 197,
+      "file": "frames/frame-197.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "14a8904b52bb44fa1f9f67ea7e03e64f089627bd2763368c5d96803583f29145"
+    },
+    {
+      "t": 207.81,
+      "frame": 198,
+      "file": "frames/frame-198.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ca598c5573a317efa9bea5551147e9ee6b0eba2668fed69231b54417b270027d"
+    },
+    {
+      "t": 208.28,
+      "frame": 199,
+      "file": "frames/frame-199.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "75c22ed057d8bf32d97d966468b652bbc1e9e031bd895e21dfb1af2e0e677ac2"
+    },
+    {
+      "t": 208.87,
+      "frame": 200,
+      "file": "frames/frame-200.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f1d637cd248c0550b19004919fcb8b375c4049d143851747059e684041cfc5c5"
+    },
+    {
+      "t": 209.57,
+      "frame": 201,
+      "file": "frames/frame-201.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e29a040789b94a8b1d7f401220b04f23f9101f8477b612118ea36027e7cd7c2d"
+    },
+    {
+      "t": 210.1,
+      "frame": 202,
+      "file": "frames/frame-202.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fd9a244dee348f6eefa0191cbbda754d7bae79183b2e3e175a753f25639b977c"
+    },
+    {
+      "t": 210.61,
+      "frame": 203,
+      "file": "frames/frame-203.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1ddc437f45cd76ecb996ca461d266f797f17dcb3a19288f4de572e7cc6e7278e"
+    },
+    {
+      "t": 211.37,
+      "frame": 204,
+      "file": "frames/frame-204.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3cd8aaf201c593b9c4369b10b25264c55d3f60abea6b3dc7a0dfa1348b7b1b6b"
+    },
+    {
+      "t": 212.0,
+      "frame": 205,
+      "file": "frames/frame-205.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f1f2af728e3c3f2f0f535c65af0c6ce55b68a2a10c846ee3a253eba2686acb2f"
+    },
+    {
+      "t": 212.51,
+      "frame": 206,
+      "file": "frames/frame-206.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "47ced647668a88f549629f8f2f833ebcfc974b42dd58df0e82b1835fa28a097a"
+    },
+    {
+      "t": 213.08,
+      "frame": 207,
+      "file": "frames/frame-207.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "fe936617ec71b0bd73a66beab65a1e829d21fcc08ce02a7273237d6660790632"
+    },
+    {
+      "t": 213.61,
+      "frame": 208,
+      "file": "frames/frame-208.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "848f47f3798d7c2a5fcae7b2dfd18790bb2443ec876dc6cbabfb087a440a2386"
+    },
+    {
+      "t": 214.18,
+      "frame": 209,
+      "file": "frames/frame-209.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "da5837a2ebed656757090f3c02d9d2e0e1419ffeb1fec71fc382785da16868ca"
+    },
+    {
+      "t": 214.78,
+      "frame": 210,
+      "file": "frames/frame-210.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ee7659eb8d4e586cefac49bfa8fe995fe9d1122d7faeacc4836a8422bcb265c0"
+    },
+    {
+      "t": 215.62,
+      "frame": 211,
+      "file": "frames/frame-211.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ea2e56c646432a13346acea88ea8facb1300923a069ef3cf6c81d63edcac94a8"
+    },
+    {
+      "t": 216.1,
+      "frame": 212,
+      "file": "frames/frame-212.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0cc32e825771bf7f5ff5b7646cdbbf6b93305a84fe51eccc97520c89191e6547"
+    },
+    {
+      "t": 216.76,
+      "frame": 213,
+      "file": "frames/frame-213.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6e26e345246784dc0f83a34707122eea548ca7c8b74bf5378e4d2edcaa39f9a2"
+    },
+    {
+      "t": 217.53,
+      "frame": 214,
+      "file": "frames/frame-214.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f6f6dd5f67a5e9352357d8dc8fb01ba70e5d2eda4ce933baca1ee85d7796f1ed"
+    },
+    {
+      "t": 218.71,
+      "frame": 215,
+      "file": "frames/frame-215.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "314e6ed83ad238fe6c655d973dbee7d5c13d40ff0d64f9b0c5e75923b5c76047"
+    },
+    {
+      "t": 219.65,
+      "frame": 216,
+      "file": "frames/frame-216.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "92c11957ee3936fa9620f82f20c9cdc2eec334c1ba1bb7d3a0c8e93132e2357d"
+    },
+    {
+      "t": 220.5,
+      "frame": 217,
+      "file": "frames/frame-217.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "cc38df652429b8bfc16114f8ea2d7ff2d6e22c60ba58164c8feaba55c222d94f"
+    },
+    {
+      "t": 221.63,
+      "frame": 218,
+      "file": "frames/frame-218.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "870d5942fed04bc135d329186a5ed5d3de273fdb1fea120a5fa2b65905779690"
+    },
+    {
+      "t": 222.87,
+      "frame": 219,
+      "file": "frames/frame-219.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "9cf2968bd6bce7fda57837fc92771e2bb7a0a1159e21455e29cd089c4c0afb54"
+    },
+    {
+      "t": 223.97,
+      "frame": 220,
+      "file": "frames/frame-220.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ed3c5d35bb039d91a8fd52dd3a4438b4e1b49371f11710467c8cbdfd4eb58e2b"
+    },
+    {
+      "t": 224.63,
+      "frame": 221,
+      "file": "frames/frame-221.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "33167104b7b9b1898a33090042dbced43b2192fa32a7968661a9913d86f9301d"
+    },
+    {
+      "t": 225.54,
+      "frame": 222,
+      "file": "frames/frame-222.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d36d976beb056e3d82dd3bffda84e82c78a5f8977b27b88c4751a5c6859fbc1c"
+    },
+    {
+      "t": 226.48,
+      "frame": 223,
+      "file": "frames/frame-223.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d42b7499a388e8eb18540b4a8035e9a5efb031e7095a80546e047408ff0c67e3"
+    },
+    {
+      "t": 227.05,
+      "frame": 224,
+      "file": "frames/frame-224.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "87e0aae6631537b2c0ddb30d319caa4ba09153420d1aa1444159a729b4ba2a6a"
+    },
+    {
+      "t": 228.0,
+      "frame": 225,
+      "file": "frames/frame-225.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c8dd52ccd8b5c7c6b727eb757db1adb4f2e7d871de53cb27d2708864b16d7f24"
+    },
+    {
+      "t": 228.77,
+      "frame": 226,
+      "file": "frames/frame-226.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "6340d86014f7e9f5ca067f9d9855d0729fb7c4d8e357279f7f5be3ddd33f0fb0"
+    },
+    {
+      "t": 229.23,
+      "frame": 227,
+      "file": "frames/frame-227.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "707be289865b57968b0bf1e31786ad0dab5122df4bb259310175863249b3684c"
+    },
+    {
+      "t": 230.63,
+      "frame": 228,
+      "file": "frames/frame-228.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "92b5d713fc81558a6cc376f27dc02068f1438b43a90cea42aab92311f030caaa"
+    },
+    {
+      "t": 231.6,
+      "frame": 229,
+      "file": "frames/frame-229.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "aee5101a23506e87116572f79f65957a4fe49e5c1cd8d49a5d99efb601320f91"
+    },
+    {
+      "t": 232.43,
+      "frame": 230,
+      "file": "frames/frame-230.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "dde0cb9e37d0e227b5f634ce1d9be7fcf1234b5f90faf065d823c9d618288114"
+    },
+    {
+      "t": 233.11,
+      "frame": 229,
+      "repeat": true
+    },
+    {
+      "t": 234.73,
+      "frame": 231,
+      "file": "frames/frame-231.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "64d2916a687d84a3252473edc63a2cda9779d2f83e5002b5a841bd84e6862f0b"
+    },
+    {
+      "t": 235.46,
+      "frame": 232,
+      "file": "frames/frame-232.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "631e71ee97d7ace3daa9368b85e3a33f8af95636756c35d7086df5be3e9d9403"
+    },
+    {
+      "t": 235.97,
+      "frame": 231,
+      "repeat": true
+    },
+    {
+      "t": 236.98,
+      "frame": 233,
+      "file": "frames/frame-233.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "06e237100e3fb2ed7b97c7a70604a52b9db6be195d8676db4bfd8bed6232a9c8"
+    },
+    {
+      "t": 237.75,
+      "frame": 234,
+      "file": "frames/frame-234.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "edc14067ead20585e198fcfef14bf555423b60880dd435af51af5e69fca94f73"
+    },
+    {
+      "t": 238.34,
+      "frame": 235,
+      "file": "frames/frame-235.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "97345e8ad3bd986016d2f994ff08d760a29d55c43fa63709b728defcf1184f6e"
+    },
+    {
+      "t": 239.18,
+      "frame": 236,
+      "file": "frames/frame-236.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f7d758ab035dc6c7ab58ef19c02cdf8f6e8514013099279af5bbbdb7f3673dee"
+    },
+    {
+      "t": 239.7,
+      "frame": 237,
+      "file": "frames/frame-237.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "ec120eefccaf05ada7842da96870ef6407625c5500e4761e8a0152313219c344"
+    },
+    {
+      "t": 241.03,
+      "frame": 238,
+      "file": "frames/frame-238.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4fb001bf4bebf876efc1522b435f670943f09302081dfc2a91dc8fa730e8f569"
+    },
+    {
+      "t": 241.86,
+      "frame": 239,
+      "file": "frames/frame-239.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "29b6e9f927e3b24abeafe74bf933b423a266c9881223077e33832fcfc128449c"
+    },
+    {
+      "t": 242.21,
+      "frame": 238,
+      "repeat": true
+    },
+    {
+      "t": 243.43,
+      "frame": 240,
+      "file": "frames/frame-240.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1ff55facb6b6fb41653b574289c22f1798006b68c21fbb81a0e9897ce864641c"
+    },
+    {
+      "t": 244.3,
+      "frame": 241,
+      "file": "frames/frame-241.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7abd41e97849a2a0bdadc76475cb86ef0f2331779d29c4d0daf6807f60801ab2"
+    },
+    {
+      "t": 245.55,
+      "frame": 242,
+      "file": "frames/frame-242.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "83d70235f7decd87150937945076306f47b1bc3bf761086632597c268620fc41"
+    },
+    {
+      "t": 246.1,
+      "frame": 243,
+      "file": "frames/frame-243.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "b8bb8326191bfce8adc8d245f1742505f31fbf349d7734417d29c7d2a7262478"
+    },
+    {
+      "t": 246.61,
+      "frame": 244,
+      "file": "frames/frame-244.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "c2c61df4c3a5542fcd9d29da3dd17b7111fe09441903e88e6e6620a8c08b90c5"
+    },
+    {
+      "t": 247.88,
+      "frame": 245,
+      "file": "frames/frame-245.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "5ccb0b3ab045f054c5dd2636a3b83128f25f263d9cb5a81f4956387a5417e7c2"
+    },
+    {
+      "t": 248.39,
+      "frame": 246,
+      "file": "frames/frame-246.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "80aa1a1eb1054a2c7bbb2de45f2251aa6db88275a261c957eb083525f01bda76"
+    },
+    {
+      "t": 249.63,
+      "frame": 247,
+      "file": "frames/frame-247.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "1b06f60287d9712abbb1df049a250d8ea40f49b70ef1e25750c68501dad559bf"
+    },
+    {
+      "t": 251.34,
+      "frame": 248,
+      "file": "frames/frame-248.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2ac3fd7617cb86e3c68d42af70dbd93774a3a22d00036043a8a09d61fbe49228"
+    },
+    {
+      "t": 252.72,
+      "frame": 249,
+      "file": "frames/frame-249.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "960b98e00580ead538ade0cf4e9a44522cb7eda314f0803b5f333b30f5f6a641"
+    },
+    {
+      "t": 254.15,
+      "frame": 250,
+      "file": "frames/frame-250.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "52a167f848d33ee1cb5abb38ba1d8ecf5d3c03e8121ee5c2f9cda9a301f6e3be"
+    },
+    {
+      "t": 254.8,
+      "frame": 251,
+      "file": "frames/frame-251.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "054566fab2e1f077a2c743abc523caccebe64aa8b8c4861e87dc23164f1011c5"
+    },
+    {
+      "t": 259.52,
+      "frame": 55,
+      "repeat": true
+    },
+    {
+      "t": 260.41,
+      "frame": 252,
+      "file": "frames/frame-252.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "0db2cc735b03166e035054426f154b0e18467403c6932fe7dff37a7d75d165c8"
+    },
+    {
+      "t": 263.86,
+      "frame": 253,
+      "file": "frames/frame-253.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d8b23a4e0aac6ad302ab598b25b32948d702fcf32448f19384dad10689f5ee55"
+    },
+    {
+      "t": 266.09,
+      "frame": 254,
+      "file": "frames/frame-254.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "e36572da77e7ea8cc13c066b9efc202c06fc157d41fe3e9926e4223a9e87458d"
+    },
+    {
+      "t": 268.21,
+      "frame": 255,
+      "file": "frames/frame-255.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7ca3e4c52e546dbebd829ab1a6fca3aec1a474f6f996395815252f65d29d855b"
+    },
+    {
+      "t": 270.76,
+      "frame": 256,
+      "file": "frames/frame-256.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "7c8d6299be6fa285b1c3cd8cd0893f029104a770ef64129a8df85413a209ffe6"
+    },
+    {
+      "t": 272.99,
+      "frame": 257,
+      "file": "frames/frame-257.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "817bdfa2805b9ce9a6c62071e5e0f75e4b08d7f6b83992c9c55c12d17308c840"
+    },
+    {
+      "t": 278.36,
+      "frame": 258,
+      "file": "frames/frame-258.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "4fa4c9e94ba2a335c6c81fa0e4ce3e67b35d329f06b46e3624dde5ade66e228a"
+    },
+    {
+      "t": 283.73,
+      "frame": 259,
+      "file": "frames/frame-259.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2750f5bef282b0adebc15048aff93c10422a46f83c1532053382c7f7fc88f28f"
+    },
+    {
+      "t": 288.23,
+      "frame": 260,
+      "file": "frames/frame-260.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "67a145e1eadcb78d1530560efd81462ae557208370cd43d60c9a3140eb714d95"
+    },
+    {
+      "t": 293.18,
+      "frame": 261,
+      "file": "frames/frame-261.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "d5fc1fbd5bdc12218b4cf3739fa0342769094efc57f7959b833bc827cc0b02d4"
+    },
+    {
+      "t": 297.99,
+      "frame": 262,
+      "file": "frames/frame-262.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "179c5d83cdf968bef5f8e3690bca5af09d7c5f4a1c0e2cf324ac9d17b3fbca7e"
+    },
+    {
+      "t": 302.99,
+      "frame": 263,
+      "file": "frames/frame-263.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "99637780ff82941fe306948c96cdf6a9678fc91acf5a6bee526e33db159c440e"
+    },
+    {
+      "t": 305.19,
+      "frame": 264,
+      "file": "frames/frame-264.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "3612fce921a89e30c7bda77e4a3a2be21b12536744c45a57071c5f4c624cb8e3"
+    },
+    {
+      "t": 311.44,
+      "frame": 265,
+      "file": "frames/frame-265.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f9c1f2aebb1a0463e3a57f4a3fd57fa82642ddb610636925ba540594a70a2637"
+    },
+    {
+      "t": 311.88,
+      "frame": 266,
+      "file": "frames/frame-266.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "81893ad960c4e1ada2e59a8e0d3233ca4bf7490ff7c1e032001989dad1bd0bdb"
+    },
+    {
+      "t": 315.04,
+      "frame": 267,
+      "file": "frames/frame-267.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "a476eb3ae0738fb91c6dd33e0a92126756c7d4bba22b54c67c8d9c45f7265a00"
+    },
+    {
+      "t": 318.29,
+      "frame": 268,
+      "file": "frames/frame-268.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "744e98e7460c0fd56414d7d64ced0b1d6d94046b3186de7da41d268e48445f7b"
+    },
+    {
+      "t": 321.75,
+      "frame": 269,
+      "file": "frames/frame-269.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "f0828ff258c2efef52557a8899222d4d7cd2d9eff2d52268236df1a1a7a6423a"
+    },
+    {
+      "t": 327.5,
+      "frame": 270,
+      "file": "frames/frame-270.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "2401b1c127b98682a72ddcad6b18f60d5268562ff72c1519c5f085930f47d00e"
+    },
+    {
+      "t": 331.95,
+      "frame": 271,
+      "file": "frames/frame-271.png",
+      "size": [
+        320,
+        200
+      ],
+      "png_sha256": "65d07cc6a376c673c6ec47c5132006ba8a1bd31d3cdd6f64928fb052267a5d99"
+    },
+    {
+      "t": 332.33,
+      "frame": 266,
+      "repeat": true
+    }
+  ]
+}
