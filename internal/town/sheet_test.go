@@ -1,6 +1,9 @@
 package town
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 // theodoric 是原版存檔第 0 格的角色，欄位直接抄自 CHARDATA。
 func theodoric() *Sheet {
@@ -124,15 +127,30 @@ func TestMirrorOpensAndCloses(t *testing.T) {
 	}
 }
 
-// 中文模式還沒有資料頁的版面，選 MIRROR 只記一筆，不開出排錯的畫面。
-func TestMirrorSkippedInCJK(t *testing.T) {
+// 中文模式的資料頁走 SPEC-030 的版面，開出來的是**同一份 `SheetPage`**——
+// 欄位與計算兩邊相同，差別只在畫法。
+func TestMirrorOpensInCJK(t *testing.T) {
+	english := innSession(t, 56, Member{Name: "Theodoric", Speaker: true, Sheet: theodoric()})
+	english.OpenSheet()
+	if !english.ShowingSheet() {
+		t.Fatal("英文模式開不了資料頁，這個比較沒有基準")
+	}
 	s := innSession(t, 56, Member{Name: "Theodoric", Speaker: true, Sheet: theodoric()})
 	s.CJK = true
 	s.OpenSheet()
-	if s.ShowingSheet() {
-		t.Fatal("中文模式不該開資料頁")
+	if !s.ShowingSheet() {
+		t.Fatal("中文模式應該開得了資料頁")
 	}
-	if len(s.Unimplemented) != 1 {
-		t.Fatalf("未實作清單是 %v", s.Unimplemented)
+	if len(s.Unimplemented) != 0 {
+		t.Fatalf("不該再記成未實作：%v", s.Unimplemented)
+	}
+	// 兩邊是同一份資料。版面不同不代表算出來的東西不同。
+	if !reflect.DeepEqual(s.Inside.Sheet, english.Inside.Sheet) {
+		t.Fatal("中文模式的 SheetPage 與英文模式不同")
+	}
+	// 標籤那十四段也是同一份（記錄 0x73）；中文譯文在 docs/i18n/ui-zh-Hant.json。
+	if len(s.Inside.SheetLabels) != len(english.Inside.SheetLabels) {
+		t.Fatalf("標籤段數不同：中文 %d、英文 %d",
+			len(s.Inside.SheetLabels), len(english.Inside.SheetLabels))
 	}
 }

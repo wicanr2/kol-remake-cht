@@ -238,6 +238,14 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	}
 	drawScaled(dst, bg, 0, 0, l.Scale)
 
+	// 資料頁蓋掉整個建築畫面，與英文版同一個語意（`Town` 那一支的 `in.Sheet`）。
+	// 物品與隊伍那兩頁是換頁不是蓋上去（RE-126／RE-127），中文版面另計，
+	// 所以這裡只在沒有那兩頁的時候畫。
+	if in.Sheet != nil && in.ItemPage == nil && len(in.PartyPage) == 0 {
+		drawSheetCJK(dst, f, in.SheetLabels, in.Sheet)
+		return drawIconBarCJK(dst, sprites, in)
+	}
+
 	for i, m := range in.Party {
 		x := l.PartyX + i*l.PartyStep
 		c := town.ColourIdle
@@ -314,6 +322,12 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 			town.ColourText[0], town.ColourText[1], town.ColourText[2])
 	}
 
+	return drawIconBarCJK(dst, sprites, in)
+}
+
+// drawIconBarCJK 畫中文模式的圖示列。建築畫面與資料頁共用同一條。
+func drawIconBarCJK(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
+	l := town.CJKInn
 	for i, index := range in.Icons {
 		x := l.IconX + i*l.IconStep
 		icon, err := sprites.Get("KOLMPICS", index)

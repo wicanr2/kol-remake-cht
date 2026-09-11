@@ -66,8 +66,9 @@ type Session struct {
 	TurnedIn []QuestTurnIn
 	// TookQuest 是這一次接下的任務（RE-110）；沒接就是 nil。
 	TookQuest *TakenQuest
-	// CJK 為真時是中文模式。角色資料頁的中文版面還沒做，選 MIRROR 只會記一筆，
-	// 不會開出一頁排錯的畫面。
+	// CJK 為真時是中文模式。資料頁的中文版面走 SPEC-030 的那一組座標
+	// （`CJKSheet`），與英文版共用同一份 `SheetPage`——欄位與計算相同，只是
+	// 中文字模格高 18 而原版行距只有 6…8，等比放大會溢出，所以垂直重排過。
 	CJK bool
 
 	// Rand 是 LISTEN 挑話題槽用的亂數來源。原版是 `rand(6)`；這裡可以注入，

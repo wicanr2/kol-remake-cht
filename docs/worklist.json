@@ -17,13 +17,17 @@
       "body": "資料頁的中文版面沒做，選 MIRROR 只會記一筆 Unimplemented。規格與正常 GUI 都缺。與 a07-a08-cjk-and-inn 綁同一個訊號——那一條是同一件事在 A 系列稽核裡的編號。",
       "acceptance": "中文模式下資料頁可開、五個入口可用，功能結果與英文／規格一致。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/town/session.go"
+          "internal/ui/sheet_cjk.go",
+          "internal/ui/sheet_cjk_test.go",
+          "docs/spec/030-cjk-character-sheet.md"
         ],
-        "pattern": "角色資料頁的中文版面還沒做",
-        "note": "session.go 的自承註解；接上時這一句會消失。"
-      }
+        "pattern": "CJKSheet|SPEC-030",
+        "note": "已完成，當回歸訊號：實作、版面測試與規格都要在。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 接上：中文模式的角色資料頁走 SPEC-030 的版面。**不是等比放大**——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每個框都差一點，所以垂直重排、抬頭從六列併成四列；水平不用改（CJK 字模格寬 16 正好是原版 8 的兩倍，欄號照搬）。標籤直接取記錄 0x73 那十四段的譯文（docs/i18n/ui-zh-Hant.json 早就翻好了），不另外查表。畫面在 docs/screenshots/zh-town-sheet.png，版面測試在 internal/ui/sheet_cjk_test.go（框在畫布內、不重疊、每一列加字高留在框內、clip 截到安全寬度、抬頭三欄放得下最長的種族／職業名），TestMirrorOpensInCJK 另外確認兩邊是同一份 SheetPage。"
     },
     {
       "id": "g03-arena-vertical-chain",
@@ -204,13 +208,17 @@
       "body": "開場旅店已依 SPEC-016 接入正式 Session 並補繁中候選人清單，跨城選角已通；招募候選人滑鼠列選擇已接。中文資料頁與戰鬥中文版面仍未做——與 g01-cjk-sheet-pages 是同一件事，只是編號不同。",
       "acceptance": "中文正常流程可操作、可讀，功能結果與英文／規格一致。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/town/session.go"
+          "internal/ui/sheet_cjk.go",
+          "internal/ui/sheet_cjk_test.go",
+          "docs/spec/030-cjk-character-sheet.md"
         ],
-        "pattern": "角色資料頁的中文版面還沒做",
-        "note": "與 g01-cjk-sheet-pages 綁同一句。兩條同時閉嘴才是真的做完。"
-      }
+        "pattern": "CJKSheet|SPEC-030",
+        "note": "已完成，當回歸訊號：實作、版面測試與規格都要在。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 接上：中文模式的角色資料頁走 SPEC-030 的版面。**不是等比放大**——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每個框都差一點，所以垂直重排、抬頭從六列併成四列；水平不用改（CJK 字模格寬 16 正好是原版 8 的兩倍，欄號照搬）。標籤直接取記錄 0x73 那十四段的譯文（docs/i18n/ui-zh-Hant.json 早就翻好了），不另外查表。畫面在 docs/screenshots/zh-town-sheet.png，版面測試在 internal/ui/sheet_cjk_test.go（框在畫布內、不重疊、每一列加字高留在框內、clip 截到安全寬度、抬頭三欄放得下最長的種族／職業名），TestMirrorOpensInCJK 另外確認兩邊是同一份 SheetPage。"
     },
     {
       "id": "a10-battle-info-panel",
@@ -1216,6 +1224,21 @@
         ],
         "pattern": "故意不列",
         "note": "input.go 的自承，接上時會改寫。"
+      }
+    },
+    {
+      "id": "cjk-sheet-subpages",
+      "layer": "gap",
+      "title": "資料頁那五個入口與坐騎的中文版面",
+      "body": "SPEC-030 只做了資料頁本身。物品、隊伍、法術、任務、換人那五個入口各自是**換頁**而不是蓋上去（RE-126／RE-127），版面要分別算；坐騎那一塊（RE-120）也還沒有中文版面。中文模式進到那幾頁目前會落回英文版面或空白。",
+      "acceptance": "五個入口與坐騎的中文版面各自算好、畫出來並有截圖。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/030-cjk-character-sheet.md"
+        ],
+        "pattern": "不在這一版",
+        "note": "SPEC-030 的自承，補完時會改寫。"
       }
     }
   ],

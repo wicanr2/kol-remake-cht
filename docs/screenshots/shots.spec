@@ -43,3 +43,4 @@ docs/screenshots/en-world-town.png|-scene|play|-play-script|R R U U U U U U U U 
 docs/screenshots/zh-world-map.png|-lang|zh-Hant|-scene|world|-shot|docs/screenshots/zh-world-map.png
 docs/screenshots/zh-world-town.png|-lang|zh-Hant|-scene|play|-play-script|R R U U U U U U U U U RET R R R R R L|-shot|docs/screenshots/zh-world-town.png
 docs/screenshots/en-town-sheet.png|-scene|play|-play-script|L R RET SPACE > RET|-shot|docs/screenshots/en-town-sheet.png
+docs/screenshots/zh-town-sheet.png|-lang|zh-Hant|-scene|play|-play-script|L R RET SPACE > RET|-shot|docs/screenshots/zh-town-sheet.png

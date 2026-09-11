@@ -267,10 +267,6 @@ func (s *Session) OpenSheet() {
 	if s.Mode != ModeInside || s.Inside == nil {
 		return
 	}
-	if s.CJK {
-		s.note("角色資料頁（中文版面未實作）")
-		return
-	}
 	i := s.speakerIndex()
 	if i < 0 {
 		return

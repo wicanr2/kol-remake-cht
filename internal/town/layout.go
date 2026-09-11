@@ -238,6 +238,62 @@ var SheetLayout = struct {
 	BarCell: 8, BarInset: 1,
 }
 
+// CJKSheet 是中文模式的角色資料頁版面（SPEC-030）。**不是 SheetLayout 等比放大**
+// ——畫布放大兩倍而中文字模格高 18（原版行距只有 6…8），每一個框都差一點，
+// 所以垂直重排過。水平不用：CJK 字模格寬 16 正好是原版 8 的兩倍，ASCII 在這份
+// 字模表裡也是全形，欄號可以照搬。
+//
+// 這一頁不對拍，原版沒有中文畫面。
+var CJKSheet = struct {
+	Header, Stats, Weapons, Gold, Bars Rect
+	DamageBar, NutritionBar            Rect
+	// 抬頭併成四列（SPEC-030）：名字／性別·種族·職業／位階／身高·體重。
+	NameRow, IdentityRow, RankRow, BodyRow int
+	// 抬頭那三欄的起點，用來把性別·種族·職業與身高·體重分開。
+	HeaderCols [3]int
+	LineStep   int
+	// 屬性：標籤靠左、值靠右。
+	StatFirstRow, StatLabelCol, StatValueCol int
+	// 武器：表頭在 HeaderRow，橫線在 RuleRow，資料列從 WeaponFirstRow 起。
+	HeaderRow, RuleRow, WeaponFirstRow           int
+	WeaponNameCol, WeaponOffCol, WeaponDefCol    int
+	WeaponRows                                   int
+	GoldRow, AdventureRow, MovementRow, EquipRow int
+	LabelCol, ValueCol                           int
+	OrderCol, TitleCol                           int
+	// 兩條長條的標籤放在**同一列的左側**，不另佔一列——圖示列從 y=340 起，
+	// 垂直預算只到 338，標籤各佔一列就放不下了。
+	BarLabelCol, BarRows [2]int
+	BarCell, BarInset    int
+}{
+	Header:  Rect{140, 8, 498, 94},
+	Stats:   Rect{28, 102, 242, 266},
+	Weapons: Rect{252, 102, 610, 210},
+	Gold:    Rect{252, 214, 610, 295},
+	Bars:    Rect{76, 299, 576, 337},
+	// 條從標籤右緣起，高度小於字高——這一列還要擺標籤。
+	DamageBar:    Rect{236, 305, 570, 317},
+	NutritionBar: Rect{236, 324, 570, 336},
+
+	NameRow: 12, IdentityRow: 31, RankRow: 50, BodyRow: 69,
+	HeaderCols: [3]int{9, 16, 24},
+	LineStep:   19,
+
+	StatFirstRow: 106, StatLabelCol: 2, StatValueCol: 12,
+
+	HeaderRow: 106, RuleRow: 126, WeaponFirstRow: 130,
+	WeaponNameCol: 16, WeaponOffCol: 30, WeaponDefCol: 35,
+	WeaponRows: 4,
+
+	GoldRow: 218, AdventureRow: 237, MovementRow: 256, EquipRow: 275,
+	LabelCol: 16, ValueCol: 29,
+	OrderCol: 16, TitleCol: 38,
+
+	BarLabelCol: [2]int{5, 5}, BarRows: [2]int{303, 322},
+	// 長條一格的寬度照畫布放大一倍；紅色上下各縮 2 px。
+	BarCell: 16, BarInset: 2,
+}
+
 // 角色資料頁的顏色：抬頭框是白的，其餘的框與長條底是青色，長條本身是亮紅。
 var (
 	ColourSheetHeader = [3]uint8{255, 255, 255}
