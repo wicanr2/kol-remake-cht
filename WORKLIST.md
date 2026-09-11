@@ -114,11 +114,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
-- **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域
-  書本、城鎮兩層已有可點區域並驗過（點第 N 列＝鍵盤走到第 N 列同一張畫面）。走出城門之後的野外與戰鬥還沒做，那兩層只吃「點一下等於 Return」與滾輪。
-  完成條件：野外與戰鬥的可點區域接上，並比照既有判準驗過。
-  核實：`cmd/kol/input.go` 找得到 `那兩層的可點區域還沒做` 就是還沒完
-
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散
   原版的離開是回旅店把隊伍解散。remake 目前只有 Ctrl+Q 這條退路。
   完成條件：正常玩家路徑走得到解散離開，並有收據。
@@ -129,11 +124,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：接上並重生那兩條長路徑的收據。
   核實：`internal/battle/ai.go` 找得到 `\*\*解出來了但還沒接上\*\*` 就是還沒完
 
-- **victory-drop-sub-289ee** — 打贏之後掉落的東西
-  `sub_289EE(0)`（RE-091）還沒做。戰利品清單本身已完成，缺的是這一段掉落。
-  完成條件：掉落接上，正常路徑撿得到並有收據。
-  核實：`internal/battle/state.go` 找得到 `sub_289EE\(0\)`，還沒做` 就是還沒完
-
 - **town-typing-input-box** — 城鎮打字問話的輸入框
   MOUTH 的打字問話功能本身已解並驗過（RE-067／RE-114），但 remake 沒有輸入框，腳本用替代形式送同一件事。正常玩家在 GUI 上打不了字。
   完成條件：輸入框做出來，正常 GUI 打得了字並問得到關鍵字。
@@ -143,6 +133,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
   核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
+
+- **battle-target-cursor-click** — 選目標格那一層的滑鼠指格
+  規劃段選目標格時原版收的是滑鼠座標直接指格（SPEC-010 §3：X 0x130…0x250、Y 8…0x98 之內直接指到那一格），語意與圖示列的「搬白框幾步」不同，所以 2026-09-11 那一輪的可點區域刻意跳過這一層。要接就得接真正的座標指格，還要處理 mode 1／mode 2 各自的夾限規則。
+  完成條件：座標指格接上，兩種 mode 的夾限都照 SPEC-010，並有收據。
+  核實：`cmd/kol/input.go` 找得到 `故意不列` 就是還沒完
 
 
 ### 接了但沒驗過
@@ -427,7 +422,9 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 本輪核實為已完成（原本掛在未完成清單上）
 
+- **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
+- **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
 - **sheet-items-and-party-portrait** — 角色資料頁的物品（sub_16986）與隊伍立繪（sub_18D61）兩個圖示：2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。
 - **party-limit-six-boundary** — 隊伍上限六人的邊界：2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。

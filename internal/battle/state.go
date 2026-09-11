@@ -159,8 +159,9 @@ type State struct {
 	WoreOff []int
 	// QuestDone 是打贏那一刻有幾名隊員的任務旗標被標成完成（RE-101）。
 	QuestDone int
-	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，
-	// 打贏之後掉落的東西也放這裡（RE-091 的 `sub_289EE(0)`，還沒做）。
+	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，打贏之後
+	// `DropSpoils` 擲出來的東西也放這裡（RE-091 的 `sub_289EE(0)` 前半）。
+	// **掉落物沒有座標**——打完之後這十六格就是戰利品池，領取靠清單不是走過去撿。
 	Ground [GroundSlots]GroundItem
 	// PickUp 是撿那一手停在「要不要撿」那一問時的狀態（RE-113）；沒問就是 nil。
 	PickUp *PickUpAsk

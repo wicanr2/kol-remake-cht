@@ -4,10 +4,12 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
+	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/input"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
 )
 
 // 這一份是輸入裝置那一半：把鍵盤與滑鼠讀成 token。可點區域怎麼算在
@@ -126,9 +128,17 @@ func (g *game) flowTargets() []input.Target {
 		}
 		return iconTargets(len(g.flow.Inn.Icons), g.flow.Inn.Selected, cjk)
 	case flow.SceneTown:
-		// 走出城門之後畫面換成野外與戰鬥，那兩層的可點區域還沒做，先只吃
-		// fallback 與滾輪。
-		if g.leftTown() || g.endingReached() || g.flow.Town == nil {
+		// 走出城門之後畫面換成野外與戰鬥。結局那幾頁只吃 fallback。
+		if g.endingReached() {
+			return nil
+		}
+		if g.quest != nil && g.quest.state != nil {
+			return battleTargets(g.quest.state, cjk)
+		}
+		if g.leftTown() {
+			return worldTargets(g.worldSession, cjk)
+		}
+		if g.flow.Town == nil {
 			return nil
 		}
 		if g.flow.Town.Mode == town.ModeInside {
@@ -141,6 +151,61 @@ func (g *game) flowTargets() []input.Target {
 		}
 		icons, selected := g.flow.Town.Outdoor.IconRow()
 		return iconTargets(len(icons), selected, cjk)
+	}
+	return nil
+}
+
+// worldTargets 是野外那一層的圖示列。白框走 `<`／`>`、確認是 RET，與城鎮同一套，
+// 所以直接沿用 `iconTargets`——圖示列的位置本來就是同一組版面常數。
+//
+// 野外的移動是方向鍵，不在這裡：點地圖要另外決定「點某一格等於往哪走幾步」，
+// 那是一條有語意的規則，不是版面換算，沒有原版依據之前不補。
+func worldTargets(s *world.Session, cjk bool) []input.Target {
+	if s == nil || s.Screen == nil || len(s.Screen.Icons) == 0 {
+		return nil
+	}
+	// 露營與問句那幾頁蓋在圖示列上，點下去不該還去搬白框。
+	if s.Camping || s.Prompt != nil {
+		return nil
+	}
+	return iconTargets(len(s.Screen.Icons), s.Screen.Selected, cjk)
+}
+
+// battleTargets 是戰鬥那一層。規劃段與戰利品段各有一列圖示，兩列都走 `<`／`>`
+// 與 RET（`applyBattleToken`）。
+//
+// 選目標格那一層**故意不列**：原版那裡收的是滑鼠座標直接指格（SPEC-010 §3 的
+// X 0x130…0x250、Y 8…0x98），語意是「指這一格」而不是「把游標搬過去幾步」，
+// 用 token 序列表達會變成另一回事——那一層要接就得接真正的座標指格。
+func battleTargets(s *battle.State, cjk bool) []input.Target {
+	if s == nil {
+		return nil
+	}
+	switch s.Stage {
+	case battle.StageSpoils:
+		// 清單與圖示列都可點。清單是「Items Found:」或「Characters:」那一張，
+		// 座標與 `ui.BattleSpoils` 畫的是同一組常數。
+		var out []input.Target
+		l := battle.SpoilList
+		for i := range s.SpoilLines() {
+			row := input.Row(l.Col*8, l.Row, battle.SpoilBox.Width-8,
+				l.LineStep, i, s.Spoil.Cursor, "U", "D")
+			// 白框可能停在 U-TURN，點某一列仍應確認那一列。
+			row.Tokens = row.Tokens[:len(row.Tokens)-1]
+			for n := 0; n < s.Spoil.Icon; n++ {
+				row.Tokens = append(row.Tokens, "<")
+			}
+			row.Tokens = append(row.Tokens, "RET")
+			out = append(out, row)
+		}
+		return append(out, iconTargets(len(battle.SpoilIcons), s.Spoil.Icon, cjk)...)
+	case battle.StageField:
+		if s.Plan.Prompt == battle.PromptTarget {
+			return nil
+		}
+		if n := len(s.Plan.Bar); n > 0 {
+			return iconTargets(n, s.Plan.Selected, cjk)
+		}
 	}
 	return nil
 }

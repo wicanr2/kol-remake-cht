@@ -639,13 +639,16 @@
       "body": "書本、城鎮兩層已有可點區域並驗過（點第 N 列＝鍵盤走到第 N 列同一張畫面）。走出城門之後的野外與戰鬥還沒做，那兩層只吃「點一下等於 Return」與滾輪。",
       "acceptance": "野外與戰鬥的可點區域接上，並比照既有判準驗過。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "cmd/kol/input.go"
+          "cmd/kol/input.go",
+          "cmd/kol/world_battle_mouse_test.go"
         ],
-        "pattern": "那兩層的可點區域還沒做",
-        "note": "input.go 的自承，接上時會消失。"
-      }
+        "pattern": "worldTargets|battleTargets",
+        "note": "已完成，當回歸訊號：實作與驗收測試都要在。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。"
     },
     {
       "id": "inn-disband-exit",
@@ -795,13 +798,16 @@
       "body": "`sub_289EE(0)`（RE-091）還沒做。戰利品清單本身已完成，缺的是這一段掉落。",
       "acceptance": "掉落接上，正常路徑撿得到並有收據。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/battle/state.go"
+          "internal/battle/spoils.go",
+          "internal/battle/execution.go"
         ],
-        "pattern": "sub_289EE\\(0\\)`，還沒做",
-        "note": "state.go 的自承，接上時會消失。"
-      }
+        "pattern": "DropSpoils",
+        "note": "已完成，當回歸訊號：實作與打贏那一段的呼叫都要在。"
+      },
+      "status": "done",
+      "resolved": "2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。"
     },
     {
       "id": "town-typing-input-box",
@@ -1189,6 +1195,21 @@
         ],
         "pattern": "沒有逐格走過",
         "note": "收據的自承，走完時會改寫。"
+      }
+    },
+    {
+      "id": "battle-target-cursor-click",
+      "layer": "gap",
+      "title": "選目標格那一層的滑鼠指格",
+      "body": "規劃段選目標格時原版收的是滑鼠座標直接指格（SPEC-010 §3：X 0x130…0x250、Y 8…0x98 之內直接指到那一格），語意與圖示列的「搬白框幾步」不同，所以 2026-09-11 那一輪的可點區域刻意跳過這一層。要接就得接真正的座標指格，還要處理 mode 1／mode 2 各自的夾限規則。",
+      "acceptance": "座標指格接上，兩種 mode 的夾限都照 SPEC-010，並有收據。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/input.go"
+        ],
+        "pattern": "故意不列",
+        "note": "input.go 的自承，接上時會改寫。"
       }
     }
   ],
