@@ -42,6 +42,11 @@ def spec_line(plan: dict, shot_dir: pathlib.Path) -> str:
         args += ["-quest-sites", plan["quest_sites"]]
     if plan.get("monsters"):
         args += ["-monsters", plan["monsters"]]
+    # 會寫存檔的那幾條要把 -save 帶上，否則下一條讀不到它的產出
+    # （`town-load` 讀的就是 `town-rest` 寫出來的那一份）。寫到暫存目錄，
+    # 不動 workplace/saves 裡那幾份現成的。
+    if plan.get("save"):
+        args += ["-save", str(shot_dir / "save.json")]
     flag = "-flow-script" if scene == "flow" else "-play-script"
     args += [flag, plan["script"], "-shot-dir", str(shot_dir)]
     steps = sorted({c["step"] for c in plan.get("checkpoints", [])})

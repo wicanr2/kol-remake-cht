@@ -33,10 +33,13 @@ plan 因此要帶齊重跑所需的每一個旗標——`full-chain-ending` 的 
 > （town-edge、town-mirror、town-recruit、town-rest、town-talk）、10 條對不上、
 > 2 條因為 plan 缺旗標跑不動。
 >
-> **有六條 plan 的描述寫「讀存檔開場」而 plan 沒有 `load` 欄位**（town-load、
-> town-scroll、town-shop、town-stable、town-train、world-quest），`full` 要走 flow
-> 而沒有 `scene` 欄位——那正是這份 README 上面說過的坑：重跑所需的每一個旗標都要
-> 寫進 plan，寫在散文裡機器讀不到。見未完成項 `player-path-receipts-stale`。
+> **plan 已經補齊**（2026-09-11）：六條的描述寫「讀存檔開場」而沒有 `load` 欄位
+> （town-load、town-scroll、town-shop、town-stable、town-train、world-quest）、
+> `full` 沒有 `scene` 欄位，都補上了。補完之後 town-shop、town-stable、town-train、
+> town-load 四條直接變一致——它們本來就沒問題，是重跑條件不完整。
+>
+> 剩下對不上的是**行為真的變了**，要逐條確認之後重生收據。見未完成項
+> `player-path-receipts-stale`。
 
 **改了戰鬥數值之後戰鬥那一段的按鍵就作廢了**（打幾個回合、每一手的訊息都不同）。
 `tools/drive_battle_script.py` 用來重生它：跑一次腳本 → 讀軌跡的最後一筆 →

@@ -1,6 +1,7 @@
 {
   "name": "town-train",
   "description": "讀存檔開場在城 1 布瑞特堡壘的門邊，走進去按 AWARD 訓練：付學費、從四門技能裡挑長劍、選攻擊、在數字欄打一個 1 再按 Return。ddduhh 的冒險點數不到 100，一級要 100 點，所以最後一句是「點數不夠」，技能與點數都不變；全程經過 town.Session。存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,53,52 --out workplace/saves/train.json` 產生。",
+  "load": "workplace/saves/train.json",
   "script": "D RET SPACE > > > > RET RET SPACE RET RET 1 RET",
   "shot_dir": "docs/verification/player-path/town-train",
   "size": [

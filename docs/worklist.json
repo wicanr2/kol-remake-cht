@@ -1256,8 +1256,8 @@
       "id": "player-path-receipts-stale",
       "layer": "verification",
       "title": "正常玩家路徑的收據對不上現在的程式",
-      "body": "2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑：**5 條一致**（town-edge、town-mirror、town-recruit、town-rest、town-talk），**10 條對不上**，**2 條跑不動**。長路徑那幾條（有 trace 的）還沒跑，一條要十幾二十分鐘。\\n\\n對不上的分兩類：\\n1. **plan 缺重跑所需的旗標**（6 條）：town-load、town-scroll、town-shop、town-stable、town-train、world-quest 的描述都寫「讀存檔開場」，而 plan 沒有 `load` 欄位——重跑時載不到那份存檔，隊伍與位置都不對。`full` 要走 flow 而 plan 沒有 `scene` 欄位。\\n2. **旅店流程改過**（其餘）：`e118596` 把選角之後的 `SceneInn` 改成 `SceneTown`（開場旅店接進正式 town.Session），進門少了一步，之後的按鍵整串偏掉。`town` 的第 8 步收據還在戶外、重跑已經在旅店裡；`flow-quest` 的 109 步收據是遭遇畫面、重跑停在城鎮戶外。**英文與中文模式重跑全程相同**，不是中文化造成的。",
-      "acceptance": "plan 補齊旗標、受影響的收據重生並通過 check_player_paths.py；或說明為何某一條刻意保留舊版。",
+      "body": "2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑。**plan 先補齊了**：六條的描述寫「讀存檔開場」而沒有 `load` 欄位、`full` 沒有 `scene` 欄位，都補上了；補完之後 town-shop、town-stable、town-train、town-load 四條直接變一致——那幾條本來就沒問題，是重跑條件不完整。\\n\\n現況：**9 條一致**（town、town-edge、town-mirror、town-recruit、town-rest、town-talk 之外再加那四條中的三條；town 與 town-leave 等仍待確認）、**其餘對不上**，第一個差異步：`full` 21、`world-quest` 12、`town-scroll` 14、`town` 8、`town-leave` 12、`world-clock` 12、`world-road` 12、`town-round-trip` 需再看。\\n\\n對不上的是**行為變了**，不是 plan 的問題：\\n- 經過選角那幾條（full、town、flow-quest…）是 `e118596` 把 SceneInn 改成 SceneTown 造成的，進門少一步、之後整串偏掉。\\n- `town-scroll` 第 14 步收據是法術清單、重跑回到店主招呼語，而它是 `-load` 開場不經過選角——SCROLL 那條流程自己變過。\\n- `world-quest` 第 12 步起不同，同樣是 `-load` 開場。\\n\\n**英文與中文模式重跑全程相同**，與中文化無關。長路徑那幾條（有 trace 的）還沒跑，一條十幾二十分鐘。",
+      "acceptance": "逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。",
       "verify": {
         "kind": "present",
         "paths": [

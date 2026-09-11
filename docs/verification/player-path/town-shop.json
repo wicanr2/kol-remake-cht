@@ -1,6 +1,7 @@
 {
   "name": "town-shop",
   "description": "讀存檔開場在城 1 的魯德曼甲冑鋪門邊，走進去按 TRADE 看商品清單：上下移動反白、選第一件看明細、答應買下。買完扣掉 32 枚金幣；毛皮帽的尺寸剛好合身，店家直接幫他穿上，讀完那一句回到清單。全程只經過 town.Session。存檔用 `tools/import_original_characters.py --names ddduhh --location 1,0,24,52 --out workplace/saves/shop.json` 產生。",
+  "load": "workplace/saves/shop.json",
   "script": "L RET SPACE > > > > RET D U RET RET SPACE",
   "shot_dir": "docs/verification/player-path/town-shop",
   "size": [

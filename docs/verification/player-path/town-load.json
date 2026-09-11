@@ -1,6 +1,7 @@
 {
   "name": "town-load",
   "description": "從存檔開場：`-load` 把隊伍、金幣、傷勢與所在位置放回去，再走同一條路打開角色資料頁。這一份與 `town-rest` 合起來把存檔的迴圈閉起來——住宿寫出 953 枚金幣，讀檔之後畫面上就是 953。要先跑 `town-rest` 產生 `workplace/saves/town-rest.json`，這一份才有東西可讀。",
+  "load": "workplace/saves/town-rest.json",
   "script": "L R RET SPACE > RET",
   "shot_dir": "docs/verification/player-path/town-load",
   "size": [
