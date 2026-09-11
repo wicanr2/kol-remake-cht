@@ -239,10 +239,20 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	drawScaled(dst, bg, 0, 0, l.Scale)
 
 	// 資料頁蓋掉整個建築畫面，與英文版同一個語意（`Town` 那一支的 `in.Sheet`）。
-	// 物品與隊伍那兩頁是換頁不是蓋上去（RE-126／RE-127），中文版面另計，
-	// 所以這裡只在沒有那兩頁的時候畫。
-	if in.Sheet != nil && in.ItemPage == nil && len(in.PartyPage) == 0 {
-		drawSheetCJK(dst, f, in.SheetLabels, in.Sheet)
+	// 物品與隊伍那兩頁是**換頁**不是蓋上去（RE-126／RE-127），所以各自畫。
+	if in.Sheet != nil {
+		switch {
+		case in.ItemPage != nil:
+			if err := drawItemPageCJK(dst, sprites, f, t, in.ItemPage); err != nil {
+				return err
+			}
+		case len(in.PartyPage) > 0:
+			if err := drawPartyPageCJK(dst, sprites, in.PartyPage); err != nil {
+				return err
+			}
+		default:
+			drawSheetCJK(dst, f, in.SheetLabels, in.Sheet)
+		}
 		return drawIconBarCJK(dst, sprites, in)
 	}
 

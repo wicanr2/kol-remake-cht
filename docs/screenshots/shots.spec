@@ -47,3 +47,7 @@ docs/screenshots/zh-town-sheet.png|-lang|zh-Hant|-scene|play|-play-script|L R RE
 docs/screenshots/zh-book-contents.png|-lang|zh-Hant|-scene|contents|-shot|docs/screenshots/zh-book-contents.png
 docs/screenshots/zh-newchar-stats.png|-lang|zh-Hant|-scene|script|-script|t e s t RET RET RET RET|-shot|docs/screenshots/zh-newchar-stats.png
 docs/screenshots/zh-book-cover.png|-lang|zh-Hant|-scene|cover|-shot|docs/screenshots/zh-book-cover.png
+docs/screenshots/en-town-items.png|-scene|play|-play-script|L R RET SPACE > RET > RET|-shot|docs/screenshots/en-town-items.png
+docs/screenshots/zh-town-items.png|-lang|zh-Hant|-scene|play|-play-script|L R RET SPACE > RET > RET|-shot|docs/screenshots/zh-town-items.png
+docs/screenshots/en-town-party-page.png|-scene|play|-play-script|L R RET SPACE > RET > > RET|-shot|docs/screenshots/en-town-party-page.png
+docs/screenshots/zh-town-party-page.png|-lang|zh-Hant|-scene|play|-play-script|L R RET SPACE > RET > > RET|-shot|docs/screenshots/zh-town-party-page.png

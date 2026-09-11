@@ -6,7 +6,7 @@
   "producer": {
     "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
     "renderer": "Xvfb ＋ Mesa llvmpipe 軟體算繪，320×200／960×600 離屏畫布",
-    "commit": "6266943225bcf8847b2dfa6f27f0497fa4e4a47f"
+    "commit": "c473d3a97f12ef2e59508e803cc3deaab62637cb"
   },
   "inputs": {
     "ega_assets_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
@@ -18,7 +18,7 @@
     "note": "畫面由 remake 繪製，但內容含原版衍生素材（BOOKPICS／CHARPICS／KOLMPICS／TWNxPICS 等抽出的 PNG）與原版點陣字型，著作權仍屬原權利人。使用者 2026-09-01 的 private-repo 例外只涵蓋 PNG，不等於公開散布權；repo 轉 public、public fork、GitHub Release 或公開 release 之前必須重新做權利審查。中文字模表另衍生自 Noto Sans CJK（OFL 1.1）。"
   },
   "criterion": "每張圖都要能解碼、尺寸符合該模式、顏色數不少於 4；有對應對拍收據的畫面必須與那張逐 byte 相同",
-  "count": 42,
+  "count": 46,
   "failed": 0,
   "screenshots": [
     {
@@ -472,6 +472,46 @@
       "height": 600,
       "distinct_colours": 8,
       "sha256": "4ed83efbbaebf44c9f1934e3549aad8333dcac1c43a8b2fc87e8813824cbc72c",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-items.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene play -play-script L R RET SPACE > RET > RET -shot docs/screenshots/en-town-items.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 15,
+      "sha256": "fd71ad4f282bb88ef14269a1b04b036fbe314d075c0e1776b065e20c354bf329",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-items.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene play -play-script L R RET SPACE > RET > RET -shot docs/screenshots/zh-town-items.png",
+      "width": 960,
+      "height": 600,
+      "distinct_colours": 15,
+      "sha256": "680a3609eb7cc1dd1e447f8beb998e84ce8f71b46ff2b630984ecfe941a62ba9",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/en-town-party-page.png",
+      "mode": "英文模式（逐畫面對拍）",
+      "command": "cmd/kol -scene play -play-script L R RET SPACE > RET > > RET -shot docs/screenshots/en-town-party-page.png",
+      "width": 320,
+      "height": 200,
+      "distinct_colours": 12,
+      "sha256": "a971008624a88d9e337e07616ae810669222c913a8c0e62800d43d6bc867aa04",
+      "pass": true
+    },
+    {
+      "file": "docs/screenshots/zh-town-party-page.png",
+      "mode": "中文模式（不對拍）",
+      "command": "cmd/kol -lang zh-Hant -scene play -play-script L R RET SPACE > RET > > RET -shot docs/screenshots/zh-town-party-page.png",
+      "width": 960,
+      "height": 600,
+      "distinct_colours": 12,
+      "sha256": "ef97549dcac07c994fdce0176473bdd7cfb3abd95ebf69b9c1eeb71975f32041",
       "pass": true
     }
   ]
