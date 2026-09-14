@@ -11,16 +11,22 @@ import (
 func (g *game) renderBattle() error {
 	dst := g.canvas.Image()
 	w, h := dst.Bounds().Dx(), dst.Bounds().Dy()
-	// 中文模式的戰場那一頁自己畫在放大後的畫布上，文字才會是中文字模；其餘幾頁
-	// （遭遇、戰利品、法術清單）還沒有中文版面，仍走「原版解析度畫完再整張放大」
-	// 那一條，字是原版字模放大的。
+	// 中文模式的遭遇、戰場、戰利品與法術清單都直接畫在放大後的畫布上，文字才會
+	// 使用中文字模；英文模式仍走下面的 320×200 renderer。
 	if g.strings != nil && g.quest != nil && g.quest.state != nil {
 		s := g.quest.state
 		switch {
 		case s.Stage == battle.StageEncounter:
 			return ui.BattleEncounterCJK(dst, g.sprites, g.cjk, s, g.quest.lines)
-		case s.Stage != battle.StageSpoils &&
-			s.Plan.Prompt != battle.PromptSpell && s.Plan.Prompt != battle.PromptAffect:
+		case s.Stage == battle.StageSpoils:
+			return ui.BattleSpoilsCJK(dst, g.sprites, g.quest.tiles, g.cjk, g.strings,
+				s, town.UISegments(g.quest.bank, g.quest.trans, town.BankUI, s.SpoilTitle()),
+				&g.battleBody)
+		case s.Plan.Prompt == battle.PromptSpell || s.Plan.Prompt == battle.PromptAffect:
+			return ui.BattleSpellListCJK(dst, g.sprites, g.quest.tiles, g.cjk, g.strings,
+				s, town.UISegments(g.quest.bank, g.quest.trans, town.BankUI, s.SpellListTitle()),
+				g.battleSpellRows(), &g.battleBody)
+		default:
 			return ui.BattleFieldCJK(dst, g.sprites, g.quest.tiles, g.cjk, g.strings,
 				s, &g.battleBody)
 		}

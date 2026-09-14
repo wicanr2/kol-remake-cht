@@ -38,13 +38,18 @@ ICON_MOVE_WALK = 0x3C
 # DISPLAY）。沒有的話照舊每一輪開一個容器——那是主要成本：一輪要花三秒開容器，
 # 而一場戰鬥要跑上百輪。
 KOL_BIN = os.environ.get('KOL_BIN', '')
+KOL_SCENE = os.environ.get('KOL_SCENE', 'flow')
+KOL_SCRIPT_FLAG = os.environ.get('KOL_SCRIPT_FLAG', '-flow-script')
+KOL_MONSTERS = os.environ.get('KOL_MONSTERS', '')
 
 
 def run(tokens, seed, save):
-    args = ['-scene', 'flow', '-seed', str(seed), '-load', save, '-trace-detail']
+    args = ['-scene', KOL_SCENE, '-seed', str(seed), '-load', save, '-trace-detail']
     if SITES:
         args += ['-quest-sites', SITES]
-    args += ['-flow-script', ' '.join(tokens),
+    if KOL_MONSTERS:
+        args += ['-monsters', KOL_MONSTERS]
+    args += [KOL_SCRIPT_FLAG, ' '.join(tokens),
              '-shot', str(SPEC / 'last.png'), '-trace', str(SPEC / 'last.json')]
     if KOL_BIN:
         subprocess.run([KOL_BIN] + args, check=True,

@@ -2,6 +2,7 @@ package ui
 
 import (
 	"fmt"
+	"image"
 	"strings"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -150,6 +151,122 @@ func BattleEncounterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	b := town.IconBar
 	drawScaled(dst, icon, b.X*sc, (b.Y+1)*sc, sc)
 	frame(dst, b.X*sc, b.Y*sc, b.Width*sc, b.Height*sc, town.ColourSelected)
+	return nil
+}
+
+// BattleSpoilsCJK 畫中文模式的戰利品清單。戰場底層與英文 renderer 共用同一份狀態，
+// 但清單本身直接在 960×600 畫布上畫中文字，避免把原版小字模放大後再當成中文頁。
+// 原版沒有中文畫面；這裡只保留已知的框、列距、選中顏色與圖示覆蓋範圍。
+func BattleSpoilsCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
+	f *font.Font, t Translator, s *battle.State, title []town.Segment, body *BattleBody) error {
+	if err := BattleFieldCJK(dst, sprites, tiles, f, t, s, body); err != nil {
+		return err
+	}
+	sc := book.CJKScale
+	b := battle.SpoilBox
+	drawBattleBoxCJK(dst, b.X, b.Y, b.Width, b.Height, sc)
+	drawBattleTitleCJK(dst, f, title, b.X, b.Width, sc)
+
+	l := battle.SpoilList
+	textX := l.Col * town.CellWidth
+	safe := battleCJKListSafeWidth(b.X, b.Width, textX, sc)
+	for i, line := range s.SpoilLines() {
+		y := l.Row + i*l.LineStep
+		ink := town.ColourListIdle
+		if i == s.Spoil.Cursor {
+			ink = town.ColourText
+		}
+		drawBattleListTextCJK(dst, f, textX*sc, y*sc, line, safe, ink)
+	}
+	return drawSpoilIconsCJK(dst, sprites, s, sc)
+}
+
+// BattleSpellListCJK 畫中文模式的法術／正負效果清單。rows 已由 cmd/kol 依狀態機
+// 選好；法術名保持資料原文，正負效果文字則沿用已翻譯的 KOLDATA。
+func BattleSpellListCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
+	f *font.Font, t Translator, s *battle.State, title []town.Segment,
+	rows []string, body *BattleBody) error {
+	if err := BattleFieldCJK(dst, sprites, tiles, f, t, s, body); err != nil {
+		return err
+	}
+	sc := book.CJKScale
+	b := battle.SpellListBox
+	drawBattleBoxCJK(dst, b.X, b.Y, b.Width, b.Height, sc)
+	drawBattleTitleCJK(dst, f, title, b.X, b.Width, sc)
+
+	l := battle.SpellListRows
+	textX := l.Col * town.CellWidth
+	safe := battleCJKListSafeWidth(b.X, b.Width, textX, sc)
+	for i, row := range rows {
+		if i >= l.Visible {
+			break
+		}
+		y := l.Row + i*l.LineStep
+		if i == s.Plan.ListPick {
+			// 英文版目前以白框表示重製版游標；原版外觀尚未完全對拍，中文只等比
+			// 保留這個既有視覺契約。
+			frame(dst, (textX-2)*sc, (y-1)*sc,
+				(b.Width-(textX-2-b.X)-4)*sc, l.LineStep*sc,
+				town.ColourSelected)
+		}
+		drawBattleListTextCJK(dst, f, textX*sc, y*sc, row, safe, town.ColourText)
+	}
+	return nil
+}
+
+// drawBattleBoxCJK 與英文戰鬥框使用相同的投影、外框與內填色，只把座標乘上倍率。
+func drawBattleBoxCJK(dst *ebiten.Image, x, y, width, height, scale int) {
+	x, y, width, height = x*scale, y*scale, width*scale, height*scale
+	shadow(dst, x, y, width, height)
+	fill(dst, x, y, width, height, town.ColourBoxEdge)
+	fill(dst, x+1, y+1, width-2, height-2, town.ColourBoxFill)
+}
+
+// battleCJKListSafeWidth 給固定列的文字安全矩形：框右側保留四個原版像素，
+// 與英文法術游標框及戰利品內緣一致。
+func battleCJKListSafeWidth(boxX, boxWidth, textX, scale int) int {
+	return (boxX + boxWidth - 4 - textX) * scale
+}
+
+func drawBattleTitleCJK(dst *ebiten.Image, f *font.Font, title []town.Segment,
+	boxX, boxWidth, scale int) {
+	for _, seg := range title {
+		x := seg.Col * town.CellWidth * scale
+		y := seg.Row * scale
+		safe := battleCJKListSafeWidth(boxX, boxWidth, seg.Col*town.CellWidth, scale)
+		drawBattleListTextCJK(dst, f, x, y, seg.Text, safe, town.ColourText)
+	}
+}
+
+func drawBattleListTextCJK(dst *ebiten.Image, f *font.Font,
+	x, y int, text string, safe int, ink [3]uint8) {
+	cellInAt(dst, f, x, y, clip(f, text, safe), ink)
+}
+
+// drawSpoilIconsCJK 清掉報獎勵卷軸所在的同一塊底圖，再放回 YES／U-TURN 圖示。
+func drawSpoilIconsCJK(dst *ebiten.Image, sprites Sprites, s *battle.State, scale int) error {
+	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
+	if err != nil {
+		return err
+	}
+	m := battle.MessageBox
+	strip := image.Rect(m.X, m.Y, m.X+m.Width, m.Y+m.Height)
+	drawScaled(dst, bg.SubImage(strip).(*ebiten.Image), m.X*scale, m.Y*scale, scale)
+
+	b := town.IconBar
+	for i, code := range battle.SpoilIcons {
+		icon, err := sprites.Get("KOLMPICS", town.IconSprite(code))
+		if err != nil {
+			return err
+		}
+		x := (b.X + i*b.Step) * scale
+		drawScaled(dst, icon, x, (b.Y+1)*scale, scale)
+		ink := town.ColourIdle
+		if i == s.Spoil.Icon {
+			ink = town.ColourSelected
+		}
+		frame(dst, x, b.Y*scale, b.Width*scale, b.Height*scale, ink)
+	}
 	return nil
 }
 

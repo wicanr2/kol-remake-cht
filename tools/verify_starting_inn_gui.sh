@@ -2,6 +2,8 @@
 # 僅在 Docker 內執行；/src 唯讀，/out 是已建置 kol 所在的可寫驗證目錄。
 set -eu
 test "$(stat -c %u:%g /out)" = "$(id -u):$(id -g)"
+recruit_down="${KOL_RECRUIT_DOWN:-0}"
+[[ "$recruit_down" =~ ^[0-7]$ ]] || { echo 'KOL_RECRUIT_DOWN 必須介於 0 至 7' >&2; exit 2; }
 if [ "${KOL_ENTER_BATTLE:-0}" = 1 ]; then
  world_steps="${KOL_WORLD_STEPS:-15}"
  [[ "$world_steps" =~ ^[1-9][0-9]?$|^100$ ]] || { echo 'KOL_WORLD_STEPS 必須介於 1 至 100' >&2; exit 2; }
@@ -51,6 +53,7 @@ key Return
 shot inn-recruit-question
 key Return
 shot inn-recruit-list
+for n in $(seq 1 "$recruit_down"); do key Down; done
 if [ "${KOL_RECRUIT_MOUSE:-0}" = 1 ]; then
  key greater
  # 繁中畫布第二列；依視窗大小換算，避免把實體像素當成畫布座標。
@@ -67,6 +70,9 @@ shot inn-two-members
 key Return
 shot inn-exit
 if [ "${KOL_ENTER_BATTLE:-0}" = 1 ]; then
+ # 多人隊伍離開旅店先停在告別訊息；SPACE 才會回到戶外地圖。
+ key space
+ shot town-entry
  key Right
  key Right
  for n in $(seq 1 9); do key Up; done

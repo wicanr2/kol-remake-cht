@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
+	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 	"github.com/wicanr2/kol-remake-cht/internal/world"
 )
@@ -77,29 +78,87 @@ func TestBattleCommandBarClick(t *testing.T) {
 
 // 戰利品畫面：兩張清單各自可點，圖示列另外兩格。
 func TestBattleSpoilsClick(t *testing.T) {
-	s := &battle.State{Stage: battle.StageSpoils}
-	s.Ground[0] = battle.GroundItem{Name: "DAGGER"}
-	s.Ground[3] = battle.GroundItem{Name: "SHIELD"}
-	if !s.BeginSpoils() {
-		t.Fatal("兩件東西在地上，戰利品畫面該開得起來")
+	for _, cjk := range []bool{false, true} {
+		s := &battle.State{Stage: battle.StageSpoils}
+		s.Ground[0] = battle.GroundItem{Name: "DAGGER"}
+		s.Ground[3] = battle.GroundItem{Name: "SHIELD"}
+		if !s.BeginSpoils() {
+			t.Fatal("兩件東西在地上，戰利品畫面該開得起來")
+		}
+		lines := len(s.SpoilLines())
+		if lines != 2 {
+			t.Fatalf("中文=%v 清單 %d 列，地上有兩件", cjk, lines)
+		}
+		targets := battleTargets(s, cjk)
+		if len(targets) != lines+len(battle.SpoilIcons) {
+			t.Fatalf("中文=%v 可點區域 %d 個，要 %d 列加 %d 格圖示",
+				cjk, len(targets), lines, len(battle.SpoilIcons))
+		}
+		// 游標在第 0 列、白框在第 0 格，點第 1 列就是往下一步再確認。
+		if want := []string{"D", "RET"}; !reflect.DeepEqual(targets[1].Tokens, want) {
+			t.Fatalf("中文=%v 第 1 列：%v，要 %v", cjk, targets[1].Tokens, want)
+		}
+		if cjk {
+			wantX := battle.SpoilList.Col * town.CellWidth * book.CJKScale
+			wantY := battle.SpoilList.Row * book.CJKScale
+			if targets[0].Rect.Min.X != wantX || targets[0].Rect.Min.Y != wantY {
+				t.Fatalf("中文戰利品第 0 列起點 %v，要 (%d,%d)",
+					targets[0].Rect, wantX, wantY)
+			}
+			if targets[0].Rect.Max.X > 960 || targets[0].Rect.Max.Y > 600 {
+				t.Fatalf("中文戰利品命中區超出畫布：%v", targets[0].Rect)
+			}
+		}
+		// 白框停在取消那一格時，點某一列仍要把白框搬回第一格才確認。
+		s.Spoil.Icon = battle.SpoilIconUTurn
+		moved := battleTargets(s, cjk)
+		if want := []string{"<", "RET"}; !reflect.DeepEqual(moved[0].Tokens, want) {
+			t.Fatalf("中文=%v 白框在取消格時第 0 列：%v，要 %v", cjk, moved[0].Tokens, want)
+		}
 	}
-	lines := len(s.SpoilLines())
-	if lines != 2 {
-		t.Fatalf("清單 %d 列，地上有兩件", lines)
-	}
-	targets := battleTargets(s, false)
-	if len(targets) != lines+len(battle.SpoilIcons) {
-		t.Fatalf("可點區域 %d 個，要 %d 列加 %d 格圖示",
-			len(targets), lines, len(battle.SpoilIcons))
-	}
-	// 游標在第 0 列、白框在第 0 格，點第 1 列就是往下一步再確認。
-	if want := []string{"D", "RET"}; !reflect.DeepEqual(targets[1].Tokens, want) {
-		t.Fatalf("第 1 列：%v，要 %v", targets[1].Tokens, want)
-	}
-	// 白框停在取消那一格時，點某一列仍要把白框搬回第一格才確認。
-	s.Spoil.Icon = battle.SpoilIconUTurn
-	moved := battleTargets(s, false)
-	if want := []string{"<", "RET"}; !reflect.DeepEqual(moved[0].Tokens, want) {
-		t.Fatalf("白框在取消格時第 0 列：%v，要 %v", moved[0].Tokens, want)
+}
+
+// 法術與正負效果清單必須和鍵盤共用上下移動 token；中文模式只改變畫布座標。
+func TestBattleSpellListClick(t *testing.T) {
+	for _, tc := range []struct {
+		name   string
+		prompt battle.Prompt
+		rows   []string
+		pick   int
+	}{
+		{name: "法術", prompt: battle.PromptSpell, rows: []string{"A", "B", "C"}, pick: 1},
+		{name: "正負效果", prompt: battle.PromptAffect, rows: []string{"Positive", "Negative"}, pick: 0},
+	} {
+		for _, cjk := range []bool{false, true} {
+			s := &battle.State{Stage: battle.StageField}
+			s.Plan.Prompt = tc.prompt
+			s.Plan.List = tc.rows
+			s.Plan.ListPick = tc.pick
+			targets := battleTargets(s, cjk)
+			if len(targets) != len(tc.rows) {
+				t.Fatalf("%s 中文=%v 可點列數 %d，要 %d", tc.name, cjk, len(targets), len(tc.rows))
+			}
+			for i := 1; i < len(targets); i++ {
+				if targets[i-1].Rect.Overlaps(targets[i].Rect) {
+					t.Fatalf("%s 中文=%v 第 %d 列與前一列重疊", tc.name, cjk, i)
+				}
+			}
+			if !reflect.DeepEqual(targets[0].Tokens, []string{"U", "RET"}) && tc.pick == 1 {
+				t.Fatalf("%s 中文=%v 第 0 列 token：%v", tc.name, cjk, targets[0].Tokens)
+			}
+			if tc.pick == 0 && !reflect.DeepEqual(targets[1].Tokens, []string{"D", "RET"}) {
+				t.Fatalf("%s 中文=%v 第 1 列 token：%v", tc.name, cjk, targets[1].Tokens)
+			}
+			if cjk {
+				wantX := battle.SpellListRows.Col * town.CellWidth * book.CJKScale
+				wantY := battle.SpellListRows.Row * book.CJKScale
+				if targets[0].Rect.Min.X != wantX || targets[0].Rect.Min.Y != wantY {
+					t.Fatalf("%s 中文第 0 列起點 %v，要 (%d,%d)", tc.name, targets[0].Rect, wantX, wantY)
+				}
+				if targets[len(targets)-1].Rect.Max.X > 960 || targets[len(targets)-1].Rect.Max.Y > 600 {
+					t.Fatalf("%s 中文命中區超出畫布：%v", tc.name, targets[len(targets)-1].Rect)
+				}
+			}
+		}
 	}
 }

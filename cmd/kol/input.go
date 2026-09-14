@@ -187,9 +187,14 @@ func battleTargets(s *battle.State, cjk bool) []input.Target {
 		// 座標與 `ui.BattleSpoils` 畫的是同一組常數。
 		var out []input.Target
 		l := battle.SpoilList
+		x, y, w, step := l.Col*town.CellWidth, l.Row,
+			battle.SpoilBox.Width-(l.Col*town.CellWidth-battle.SpoilBox.X)-4, l.LineStep
+		if cjk {
+			x, y, w, step = x*book.CJKScale, y*book.CJKScale,
+				w*book.CJKScale, step*book.CJKScale
+		}
 		for i := range s.SpoilLines() {
-			row := input.Row(l.Col*8, l.Row, battle.SpoilBox.Width-8,
-				l.LineStep, i, s.Spoil.Cursor, "U", "D")
+			row := input.Row(x, y, w, step, i, s.Spoil.Cursor, "U", "D")
 			// 白框可能停在 U-TURN，點某一列仍應確認那一列。
 			row.Tokens = row.Tokens[:len(row.Tokens)-1]
 			for n := 0; n < s.Spoil.Icon; n++ {
@@ -202,6 +207,29 @@ func battleTargets(s *battle.State, cjk bool) []input.Target {
 	case battle.StageField:
 		if s.Plan.Prompt == battle.PromptTarget {
 			return nil
+		}
+		if s.Plan.Prompt == battle.PromptSpell || s.Plan.Prompt == battle.PromptAffect {
+			count := len(s.Plan.List)
+			if count == 0 && s.Plan.Prompt == battle.PromptAffect {
+				count = len(battle.AffectRecords())
+			}
+			if count > battle.SpellListRows.Visible {
+				count = battle.SpellListRows.Visible
+			}
+			l := battle.SpellListRows
+			x, y, w, step := l.Col*town.CellWidth, l.Row,
+				battle.SpellListBox.Width-(l.Col*town.CellWidth-battle.SpellListBox.X)-4,
+				l.LineStep
+			if cjk {
+				x, y, w, step = x*book.CJKScale, y*book.CJKScale,
+					w*book.CJKScale, step*book.CJKScale
+			}
+			out := make([]input.Target, 0, count)
+			for i := 0; i < count; i++ {
+				out = append(out, input.Row(x, y, w, step, i,
+					s.Plan.ListPick, "U", "D"))
+			}
+			return out
 		}
 		if n := len(s.Plan.Bar); n > 0 {
 			return iconTargets(n, s.Plan.Selected, cjk)
