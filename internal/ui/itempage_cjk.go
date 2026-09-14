@@ -22,6 +22,7 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 	p *town.ItemPage) error {
 	l := town.ItemPageLayout
 	s := book.CJKScale
+	interactionBase := itemPageUsesInteractionBase(p)
 
 	// 背景與背板：整頁美術，放大同樣的倍率。
 	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
@@ -29,76 +30,72 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 		return err
 	}
 	drawScaled(dst, bg, 0, 0, s)
-	b := town.SheetPageBack
-	for _, c := range [2]struct{ index, y int }{{b.TopIndex, b.TopY}, {b.LowIndex, b.LowY}} {
-		pic, err := sprites.Get(b.Archive, c.index)
-		if err != nil {
-			return err
-		}
-		drawScaled(dst, pic, b.X*s, c.y*s, s)
-	}
-
-	// 左邊那個人：一層一層貼上去。X 與寬的單位是 byte 欄，所以乘八才是像素。
-	for _, piece := range p.Figure {
-		pic, err := sprites.Get(piece.Archive, piece.Index)
-		if err != nil {
-			return err
-		}
-		drawScaled(dst, pic, piece.X*PixelsPerByte*s, piece.Y*s, s)
-	}
-
-	right := scaleRect(l.RightPane, s)
-	fill(dst, right.X0, right.Y0, right.Width(), right.Height(), town.ColourBoxFill)
-	fr := scaleRect(l.Frame, s)
-	frame(dst, fr.X0, fr.Y0, fr.Width(), fr.Height(), town.ColourSheetFrame)
-	div := scaleRect(l.Divider, s)
-	fill(dst, div.X0, div.Y0, div.Width(), div.Height(), town.ColourSheetFrame)
-	shadow(dst, fr.X0, fr.Y0, fr.Width(), fr.Height())
-
-	// 槽位清單。名稱走譯文，取不到就留原文——這幾個是原版的欄位名，
-	// 缺一格比混排更難看出是哪一格。
-	for i, row := range p.Rows {
-		colour := town.ColourListIdle
-		if i == p.Selected {
-			colour = town.ColourText
-		}
-		y := (l.ListRow + i*l.ListStep) * s
-		text := t.T(row)
-		cellInAt(dst, f, l.ListCol*town.CellWidth*s, y, text, colour)
-	}
-
-	// 選中那一格的小框：部位名、物品名、骰式與重量。
-	if m := p.Mark; m != nil {
-		x, y := m.X*s, m.Y*s
-		w, h := (town.MarkWidth+1)*s, (town.MarkHeight+1)*s
-		fill(dst, x+1, y+1, w-2, h-2, town.ColourBoxFill)
-		frame(dst, x, y, w, h, town.ColourSheetHeader)
-		shadow(dst, x, y, w, h)
-		tx := x + 2*s
-		ty := y + town.MarkTextTop*s
-		step := town.MarkLineStep * s
-		cellCJKAt(dst, f, tx, ty, t.T(m.Slot))
-		if m.Name != "" {
-			cellCJKAt(dst, f, tx, ty+step, m.Name)
-			third := ty + 2*step
-			cellCJKAt(dst, f, tx, third, m.Dice)
-			if m.Skill != "" {
-				cellCJKAt(dst, f, tx+8*f.Advance(), third, m.Skill)
+	if !interactionBase {
+		b := town.SheetPageBack
+		for _, c := range [2]struct{ index, y int }{{b.TopIndex, b.TopY}, {b.LowIndex, b.LowY}} {
+			pic, err := sprites.Get(b.Archive, c.index)
+			if err != nil {
+				return err
 			}
-			weight := fmt.Sprintf("%d", m.Weight)
-			ww, _ := f.Measure(weight)
-			cellCJKAt(dst, f, x+w-2*s-ww, third, weight)
+			drawScaled(dst, pic, b.X*s, c.y*s, s)
+		}
+
+		right := scaleRect(l.RightPane, s)
+		fill(dst, right.X0, right.Y0, right.Width(), right.Height(), town.ColourBoxFill)
+		fr := scaleRect(l.Frame, s)
+		frame(dst, fr.X0, fr.Y0, fr.Width(), fr.Height(), town.ColourSheetFrame)
+		div := scaleRect(l.Divider, s)
+		fill(dst, div.X0, div.Y0, div.Width(), div.Height(), town.ColourSheetFrame)
+		shadow(dst, fr.X0, fr.Y0, fr.Width(), fr.Height())
+
+		// 槽位清單。名稱走譯文，取不到就留原文——這幾個是原版的欄位名，
+		// 缺一格比混排更難看出是哪一格。
+		for i, row := range p.Rows {
+			colour := town.ColourListIdle
+			if i == p.Selected {
+				colour = town.ColourText
+			}
+			y := (l.ListRow + i*l.ListStep) * s
+			text := t.T(row)
+			cellInAt(dst, f, l.ListCol*town.CellWidth*s, y, text, colour)
+		}
+
+		// 選中那一格的小框：部位名、物品名、骰式與重量。
+		if m := p.Mark; m != nil {
+			x, y := m.X*s, m.Y*s
+			w, h := (town.MarkWidth+1)*s, (town.MarkHeight+1)*s
+			fill(dst, x+1, y+1, w-2, h-2, town.ColourBoxFill)
+			frame(dst, x, y, w, h, town.ColourSheetHeader)
+			shadow(dst, x, y, w, h)
+			tx := x + 2*s
+			ty := y + town.MarkTextTop*s
+			step := town.MarkLineStep * s
+			cellCJKAt(dst, f, tx, ty, t.T(m.Slot))
+			if m.Name != "" {
+				cellCJKAt(dst, f, tx, ty+step, m.Name)
+				third := ty + 2*step
+				cellCJKAt(dst, f, tx, third, m.Dice)
+				if m.Skill != "" {
+					cellCJKAt(dst, f, tx+8*f.Advance(), third, m.Skill)
+				}
+				weight := fmt.Sprintf("%d", m.Weight)
+				ww, _ := f.Measure(weight)
+				cellCJKAt(dst, f, x+w-2*s-ww, third, weight)
+			}
 		}
 	}
 
 	if p.Detail == nil && len(p.Message) == 0 && len(p.Note) == 0 {
 		return nil
 	}
-	// 明細框：填黑加一圈白，沒有投影（原版這一頁沒呼叫投影那一支）。
+	// 明細框：填黑、白框，再畫 `sub_1B7E9` 對應的右／下四像素投影。
 	de := scaleRect(l.Detail, s)
 	fill(dst, de.X0+1, de.Y0+1, de.Width()-2, de.Height()-2, town.ColourBoxFill)
 	frame(dst, de.X0, de.Y0, de.Width(), de.Height(), town.ColourSheetHeader)
-	dx, dy := de.X0+2*s, de.Y0+2*s
+	shadow(dst, de.X0, de.Y0, de.Width(), de.Height())
+	// 對應英文版 `sub_153FF` 模式 8 的文字基準；中文只放大這個已量得的
+	// 英文版面，原版沒有中文畫面可作像素對拍。
+	dx, dy := de.X0+2*s, (l.Detail.Y0-8)*s
 	step := town.LineStep * s
 	// 動作做完那一句蓋在明細上面（原版是整頁重畫再印，效果相同）。
 	if len(p.Note) > 0 {

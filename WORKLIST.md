@@ -132,11 +132,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：兩頁的中文版面畫出來並有截圖。
   核實：`cmd/kol/battle_render.go` 找得到 `還沒有中文版面` 就是還沒完
 
-- **item-detail-page-parity**（#91） — 物品頁選中之後的明細畫面與原版不同
-  原版 `town-sheet-items-run1/frames/frame-072.png`：選中一件東西之後，立繪與十七列清單都不見了，只剩木紋底圖與明細框 (62,58)–(257,125)，框右下有 `sub_1BA9D` 自帶的四像素投影。remake 保留立繪與清單，也沒畫投影——`internal/ui/itempage.go` 那段註解寫「沒有投影」與反組譯不符（`0x1BAF1` 一定呼叫 `sub_1B7E9`）。既有的物品頁對拍只比到選中之前那一格（frame-070）。見 RE-137 末段。
-  完成條件：讀出選中之後那一段重畫了什麼，改正 remake 之後與 frame-072 整頁逐點對拍，允許區外零差異。
-  核實：`internal/ui/itempage.go` 找得到 `沒有投影` 就是還沒完
-
 
 ### 接了但沒驗過
 

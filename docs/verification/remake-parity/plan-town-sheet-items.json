@@ -5,6 +5,45 @@
   "original": "tools/run_character_ui_oracle.sh docs/verification/character-ui/town-sheet-items-run1 --scenario town-sheet-items",
   "remake": "tools/run_kol_shots.sh workplace/specs/items-parity.txt（-scene play -play-script \"L R RET SPACE > RET > RET D\"）"
  },
+ "metadata": {
+  "issue": 91,
+  "spec": "SPEC-031",
+  "generated_date": "2026-09-14",
+  "canvas": [320, 200],
+  "original_oracle": {
+   "status": "dosbox-bootstrap",
+   "tool": "DOSBox-X 2026.06.02",
+   "cycles": "fixed 3000",
+   "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+   "exe": "KOLTOWN-unpacked.EXE",
+   "exe_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+   "frame_070_sha256": "5fb0a49ab3ad15faaf030e275ecc2353222f80c2d27cce265649367c0a242d95",
+   "frame_072_sha256": "ac647de3b2865c5547a6ce41d4fdc1952b85fa7650078a56042c3b2a2d65c9ae"
+  },
+  "dosgolem": {
+   "supported": false,
+   "reason": "dosgolem 目前只有 eob1、fd2、rich2、wolong 程式適配器，沒有 KOL／KOLTOWN 適配器；因此本收據不宣稱 strict dosgolem parity。"
+  },
+  "remake": {
+   "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+   "go_version": "go1.26.7 linux/amd64",
+   "binary_sha256": "d2869ddfc6bad5c0d3e4bf9aa569665648cdcda4c966a7f15ed35a58ff260de3",
+   "preselection_script": "L R RET SPACE > RET > RET D",
+   "selected_script": "L R RET SPACE > RET > RET D RET",
+   "selected_shot": "step-010.png",
+   "selected_shot_sha256": "e6ab1a385817827a2a4afb557549f55c04a832fccfafcb35fd5aa3b0827e9b07",
+   "preselection_shot_sha256": "761d977d22e71a100720b0b137c1d20bcf897a9d367eab00c94033da9c4815b4",
+   "diff_png": "docs/verification/remake-parity/shots/town-sheet-items/items-selected-diff.png",
+   "diff_png_sha256": "020031697da861f1be604ba3e40a09cb430f9b69858f81e19afb46d1a6bdf04a"
+  },
+  "comparison": {
+   "tool": "tools/verify_remake_parity.py",
+   "pixel_format": "RGB exact",
+   "outside_allowed_must_differ": 0,
+   "allowed_selected_region": "原版滑鼠游標 (158,100) 14x14",
+   "required_selected_regions": "明細框四邊與右／下四像素投影逐像素相同"
+  }
+ },
  "pairs": [
   {
    "label": "物品頁：整頁",
@@ -43,6 +82,27 @@
    "remake": "docs/verification/remake-parity/shots/town-sheet-items/items.png",
    "original": "docs/verification/character-ui/town-sheet-items-run1/frames/frame-070.png",
    "allow": []
+  },
+  {
+   "label": "選中物品：明細層與四像素投影",
+   "compare": {"x": 0, "y": 0, "width": 320, "height": 200},
+   "remake": "docs/verification/remake-parity/shots/town-sheet-items/items-selected.png",
+   "original": "docs/verification/character-ui/town-sheet-items-run1/frames/frame-072.png",
+   "allow": [
+    {
+     "name": "原版滑鼠游標",
+     "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+     "x": 158, "y": 100, "width": 14, "height": 14
+    }
+   ],
+   "require": [
+    {"name": "明細框上緣", "reason": "sub_1BA9D → sub_1B6DC", "x": 62, "y": 58, "width": 196, "height": 1},
+    {"name": "明細框下緣", "reason": "sub_1BA9D → sub_1B6DC", "x": 62, "y": 125, "width": 196, "height": 1},
+    {"name": "明細框左緣", "reason": "sub_1BA9D → sub_1B6DC", "x": 62, "y": 58, "width": 1, "height": 68},
+    {"name": "明細框右緣", "reason": "sub_1BA9D → sub_1B6DC", "x": 257, "y": 58, "width": 1, "height": 68},
+    {"name": "明細框右側四像素投影", "reason": "sub_1BA9D:0x1BAF1 → sub_1B7E9", "x": 258, "y": 62, "width": 4, "height": 68},
+    {"name": "明細框下側四像素投影", "reason": "sub_1BA9D:0x1BAF1 → sub_1B7E9", "x": 66, "y": 126, "width": 196, "height": 4}
+   ]
   }
  ]
 }

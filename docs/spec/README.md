@@ -19,6 +19,7 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
+| SPEC-031 | [資料頁物品選中後的明細層](031-item-detail-page.md) | CONFORMED | 選中物品頁的圖層與投影已完成；frame-072 是 DOSBox-X 輔助收據，非 strict dosgolem parity |
 | SPEC-028 | [三個可關閉的加速選項](028-optional-battle-speed.md) | DRAFT | 已決需求與現有接口已核對；細節／原型待確認，不授權先加空開關 |
 | SPEC-027 | [戰鬥共同出口傷勢回寫](027-battle-exit-wounds.md) | READY | 傷勢折算及敗北回寫已接；4608 組原版比較、五條結算至 v2 重載通過，正常玩家鏈與額外掉落待驗 |
 | SPEC-026 | [天候圖層與正常動畫](026-weather-animation.md) | READY | 六組資料、128 像素捲雲與雨雪輪播已接線；原版四組合成、六組分派及正常出城動畫通過 |
@@ -71,3 +72,9 @@ SPEC-030：[中文模式的畫布倍率與角色資料頁](030-cjk-character-she
 中文模式**不對拍**——原版沒有中文畫面。倍率取三是算出來的：中文字模格高 18，
 而原版最小行距 6，`6 × 3 = 18` 剛好；兩倍只給得起 12 放不下。三倍之後版面照抄就
 成立，資料頁直接用 `SheetLayout × CJKScale`，沒有第二份座標表。
+
+SPEC-031：[資料頁物品選中後的明細層](031-item-detail-page.md) CONFORMED。
+選中非空物品後，原版由 `sub_16986:0x16BBF` 先以 `sub_1103F(0)` 蓋整頁，再由
+`sub_1BA9D` 畫明細框；`sub_1BA9D:0x1BAF1` 必定呼叫 `sub_1B7E9`，因此明細框
+有右／下四像素投影。實作與收據已完成，frame-072 允許區外差異為 0；dosgolem
+目前沒有 KOL 適配器，因此該畫面只作 DOSBox-X `dosbox-bootstrap` 輔助收據。

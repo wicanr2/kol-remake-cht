@@ -2,8 +2,8 @@
   "tool": "tools/verify_remake_parity.py",
   "plan": "town-sheet-items",
   "description": "資料頁上物品那一頁（`sub_16986`，RE-127／128）。原版與 remake 走同一條路：旅店 → MIRROR → 資料頁圖示列往右一格 → Return → 清單往下一列（TORSO，身上是 Platemail T）。這一頁蓋掉整個旅店畫面：`sub_1103F(0)` 貼整頁圖、兩張木屋內裝、七層立繪、把分隔線右邊那一條清成黑、畫外框與分隔線再投影，然後是十七列清單與左上那個小框。三件由這張畫面驗到的事：`sub_1BA9D` 畫的每個框都自帶四像素的投影（小框那一圈）、清單那十七列的字是大字型不是小字型、**腰帶那一格另外橫放在畫面左下角**——Theodoric 的 `+0x190` 是 Greatsword，原版把它畫在腳邊（`0x19585`…`0x1969B`，只有 dx 是 0 時才畫，所以隊伍那一頁看不到）。",
-  "pair_count": 3,
-  "pass_count": 3,
+  "pair_count": 4,
+  "pass_count": 4,
   "failure_count": 0,
   "pairs": [
     {
@@ -100,6 +100,141 @@
       "first_outside_pixel": null,
       "allowed_regions": [],
       "required_regions": []
+    },
+    {
+      "label": "選中物品：明細層與四像素投影",
+      "remake": "docs/verification/remake-parity/shots/town-sheet-items/items-selected.png",
+      "original": "docs/verification/character-ui/town-sheet-items-run1/frames/frame-072.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 200
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在畫面中央畫游標，remake 沒有這個元素。",
+          "rect": [
+            158,
+            100,
+            14,
+            14
+          ],
+          "differing_pixels": 34
+        }
+      ],
+      "required_regions": [
+        {
+          "name": "明細框上緣",
+          "reason": "sub_1BA9D → sub_1B6DC",
+          "rect": [
+            62,
+            58,
+            196,
+            1
+          ]
+        },
+        {
+          "name": "明細框下緣",
+          "reason": "sub_1BA9D → sub_1B6DC",
+          "rect": [
+            62,
+            125,
+            196,
+            1
+          ]
+        },
+        {
+          "name": "明細框左緣",
+          "reason": "sub_1BA9D → sub_1B6DC",
+          "rect": [
+            62,
+            58,
+            1,
+            68
+          ]
+        },
+        {
+          "name": "明細框右緣",
+          "reason": "sub_1BA9D → sub_1B6DC",
+          "rect": [
+            257,
+            58,
+            1,
+            68
+          ]
+        },
+        {
+          "name": "明細框右側四像素投影",
+          "reason": "sub_1BA9D:0x1BAF1 → sub_1B7E9",
+          "rect": [
+            258,
+            62,
+            4,
+            68
+          ]
+        },
+        {
+          "name": "明細框下側四像素投影",
+          "reason": "sub_1BA9D:0x1BAF1 → sub_1B7E9",
+          "rect": [
+            66,
+            126,
+            196,
+            4
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "metadata": {
+    "issue": 91,
+    "spec": "SPEC-031",
+    "generated_date": "2026-09-14",
+    "canvas": [
+      320,
+      200
+    ],
+    "original_oracle": {
+      "status": "dosbox-bootstrap",
+      "tool": "DOSBox-X 2026.06.02",
+      "cycles": "fixed 3000",
+      "zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "exe": "KOLTOWN-unpacked.EXE",
+      "exe_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+      "frame_070_sha256": "5fb0a49ab3ad15faaf030e275ecc2353222f80c2d27cce265649367c0a242d95",
+      "frame_072_sha256": "ac647de3b2865c5547a6ce41d4fdc1952b85fa7650078a56042c3b2a2d65c9ae"
+    },
+    "dosgolem": {
+      "supported": false,
+      "reason": "dosgolem 目前只有 eob1、fd2、rich2、wolong 程式適配器，沒有 KOL／KOLTOWN 適配器；因此本收據不宣稱 strict dosgolem parity。"
+    },
+    "remake": {
+      "container_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+      "go_version": "go1.26.7 linux/amd64",
+      "binary_sha256": "d2869ddfc6bad5c0d3e4bf9aa569665648cdcda4c966a7f15ed35a58ff260de3",
+      "preselection_script": "L R RET SPACE > RET > RET D",
+      "selected_script": "L R RET SPACE > RET > RET D RET",
+      "selected_shot": "step-010.png",
+      "selected_shot_sha256": "e6ab1a385817827a2a4afb557549f55c04a832fccfafcb35fd5aa3b0827e9b07",
+      "preselection_shot_sha256": "761d977d22e71a100720b0b137c1d20bcf897a9d367eab00c94033da9c4815b4",
+      "diff_png": "docs/verification/remake-parity/shots/town-sheet-items/items-selected-diff.png",
+      "diff_png_sha256": "020031697da861f1be604ba3e40a09cb430f9b69858f81e19afb46d1a6bdf04a"
+    },
+    "comparison": {
+      "tool": "tools/verify_remake_parity.py",
+      "pixel_format": "RGB exact",
+      "outside_allowed_must_differ": 0,
+      "allowed_selected_region": "原版滑鼠游標 (158,100) 14x14",
+      "required_selected_regions": "明細框四邊與右／下四像素投影逐像素相同"
+    }
+  }
 }

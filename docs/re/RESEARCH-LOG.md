@@ -9887,3 +9887,40 @@ RE-123 把 `sub_16239` 寫成「先重畫整頁（含坐騎那一塊）」，rem
 畫面上立繪與清單都不見了，只剩木紋底圖與明細框。remake 保留立繪與清單、也沒畫投影
 （`internal/ui/itempage.go` 的註解寫「沒有投影」與反組譯不符）。先前的物品頁對拍只比到
 選中之前那一格（frame-070），這一格沒比過。未完成項 `item-detail-page-parity`。
+
+## RE-138：物品頁選中後明細層勘誤與同狀態收據
+
+輸入仍為 `KOLTOWN-unpacked.EXE`，SHA-256
+`01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2`；位址空間仍是
+IDA Pro 9.4 的 **IDA linear effective address for reconstructed unpacked MZ**。
+反組譯回查 `sub_16986:0x16BBF`、`sub_16986:0x16CEC`、`sub_1BA9D:0x1BAF1` 與
+`sub_1B7E9:0x1B7E9..0x1B8B8`；原始函式名與 operand 未改寫。證據等級：**已證實**。
+
+### 控制流與像素量測
+
+- `sub_16986:0x16BBF` 先呼叫 `sub_1103F(0)`，再以
+  `(0x3E,0x3A,0x101,0x7D,0x0F)` 呼叫 `sub_1BA9D`；因此選中分支從整頁底圖開始，
+  不再保留立繪、木屋背板、十七列清單或完整頁外框。
+- `sub_1BA9D:0x1BAF1` 無條件呼叫 `sub_1B7E9`。在 `(62,58)`–`(257,125)` 的
+  frame-072 對拍中，框四邊與右側 `(258,62) 4×68`、下側 `(66,126) 196×4`
+  投影 required 區均為零差。
+- 既有英文 `book-small` 是 8×6；原版 frame-072 明細字形列是 7 行，且第一段
+  從 `y=66` 起。把明細改用既有 `book-large` 8×8，並將 `goodDetail` 原始列 102
+  以模式 8 文字基準 50 換算，畫面內文差異降至只剩原版游標區。
+
+### 收據與限制
+
+`docs/verification/remake-parity/receipt-town-sheet-items.json` 由
+`tools/verify_remake_parity.py` 產生，4 個 pair 全部通過；frame-070 的既有完整頁
+與十七列比較保留，新增正常按鍵路徑
+`L R RET SPACE > RET > RET D RET` 對 `frame-072`。重製使用
+`eob-remake-go:1.26.7-ebiten2.9.9-audio`、Go `1.26.7 linux/amd64`，二進位 SHA-256
+`d2869ddfc6bad5c0d3e4bf9aa569665648cdcda4c966a7f15ed35a58ff260de3`；選中 PNG SHA-256
+`e6ab1a385817827a2a4afb557549f55c04a832fccfafcb35fd5aa3b0827e9b07`，差分 PNG
+`020031697da861f1be604ba3e40a09cb430f9b69858f81e19afb46d1a6bdf04a`。原版畫面來源為
+DOSBox-X 2026.06.02、fixed 3000、原版 ZIP SHA-256
+`2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46`；dosgolem 目前
+沒有 KOL 適配器，所以本收據是 `dosbox-bootstrap`，不宣稱 strict dosgolem parity。
+
+此勘誤只關閉 `item-detail-page-parity` 的英文選中畫面範圍；CJK 沒有原版畫面，
+戰鬥、整個資料頁及其他未列入 pair 的 parity 仍不在本結論內。

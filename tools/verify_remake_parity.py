@@ -124,6 +124,8 @@ def main() -> int:
         "failure_count": len(failures),
         "pairs": rows,
     }
+    if "metadata" in plan:
+        result["metadata"] = plan["metadata"]
     text = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.out:
         pathlib.Path(args.out).write_text(text)

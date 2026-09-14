@@ -6172,3 +6172,43 @@ frame-270 推翻了 remake 的版面：
   標題並加 `bug`，同步後標題蓋回、`bug` 保留（不在受管的那組 label 裡），測試用的
   `bug` 已拿掉。
 - 順手修正：`player-path-receipts-stale` 內文有 9 處字面上的 `\n`，換回真正的換行。
+
+## 2026-09-14：Issue #91 物品頁選中後明細層完成
+
+- 入口與授權：依專案路由載入復古重製的 RE→spec→同狀態驗證流程，並使用
+  `reverse-engineer-retro-game-remake` 技能的規格閘門與交接要求。以 host
+  `/home/anr2/.local/bin/gh auth status --hostname github.com` 確認 `wicanr2`
+  憑證，再以 host `gh issue view 91` 讀取 Issue #91；本輪沒有留言、關閉、標籤或
+  其他遠端寫入。
+- 證據與規格：依 RE-127、RE-137 及新增的 RE-138，保留
+  `KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2`、
+  IDA Pro 9.4 線性有效位址與 `sub_16986:0x16BBF`／`sub_1BA9D:0x1BAF1`／
+  `sub_1B7E9` 原始定位。SPEC-031 完成 READY→CONFORMED；frame-072 仍明確標為
+  DOSBox-X 2026.06.02 `dosbox-bootstrap`，因 dosgolem 目前沒有 KOL 適配器，
+  不宣稱 strict dosgolem parity。
+- 實作：`internal/ui/itempage.go` 與 `itempage_cjk.go` 依互動狀態改走全頁底圖，
+  選中／訊息狀態不再重畫立繪、木屋背板、右欄、十七列清單與完整頁外框；明細框
+  接回 `shadow` 的右／下四像素投影。新增 UI 狀態分支與投影幾何測試，未改動
+  `internal/town/itempage.go` 的正常狀態轉換與保存格式。
+- 對拍：Docker 內重生 `tools/verify_remake_parity.py` 收據，4/4 pair 通過；
+  frame-070 完整頁回歸保留，frame-072 正常玩家輸入新增，允許區外差異為 0，
+  明細框四邊及兩條四像素投影列為 required regions。重製選中畫面 SHA-256
+  `e6ab1a385817827a2a4afb557549f55c04a832fccfafcb35fd5aa3b0827e9b07`，差異圖
+  SHA-256 `020031697da861f1be604ba3e40a09cb430f9b69858f81e19afb46d1a6bdf04a`。
+- 測試：Docker 內 `go test ./cmd/... ./internal/... -count=1 -timeout 600s`、
+  `go build -o /tmp/kol ./cmd/kol` 與 UI／town 測試通過；以收據原本的
+  `/tmp/mod`、`/tmp/gocache`、`/tmp/gopath` 重建，執行檔 SHA-256 為
+  `d2869ddfc6bad5c0d3e4bf9aa569665648cdcda4c966a7f15ed35a58ff260de3`。CJK
+  文字安全矩形檢查 `6952/0`，UI 翻譯檢查 `486/0`，另有 2 個刻意空白。
+  `go test ./...` 仍會因 `workplace/` 的既有 scratch packages 缺少外部模組／含
+  重複與未定義符號而失敗；產品範圍已獨立通過，分類為聚合環境／工作區問題。
+- 文件與台帳：更新 `CONTEXT.md`、RESEARCH-LOG RE-138、SPEC-031、規格索引、
+  parity plan／receipt；由 `tools/worklist.py render` 重生 `WORKLIST.md` 與統計，
+  從權威 `docs/worklist.json` 移除已完成的 `item-detail-page-parity`，其餘 73 條
+  未完成項保持原狀。JSON、收據、工作清單與擁有權檢查通過；所有本輪檔案為目前
+  使用者 UID/GID，沒有 root-owned 專案產物。
+- 勘誤：第一次產品重跑未設定 `GOWORK=off`，被不存在的 `/dosgolem` 路徑擋下；
+  第二次以同一 Docker 映像隔離後通過。收尾包裝檢查第一次誤讀收據的 `summary`
+  欄位，改按實際 `pair_count`／`pass_count` schema 重跑後通過。容器均使用
+  `--rm`，未保留長駐工作程序；目前 HEAD 為 `a442b78b64c02b99adcf214ec9236883e54bd15d`，
+  本輪未 commit／push，最後容器與暫存清理於本節收尾複核。

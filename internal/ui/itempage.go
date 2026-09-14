@@ -11,81 +11,83 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
 
-// drawItemPage 畫資料頁上的物品那一頁（`sub_16986`，RE-127）。畫的順序與原版相同：
-// 先把分隔線右邊那一條清成黑，再畫整頁的框與那條線，然後才是清單與明細。
+// drawItemPage 畫資料頁上的物品那一頁（`sub_16986`，RE-127）。完整清單層與選中後
+// 的明細層是兩個原版分支：選中後先以 `sub_1103F(0)` 蓋整頁，再畫明細框。
 //
 // 清單那十七列落在分隔線右邊的窄欄裡（字格欄 32 ＝ x 256），寬度剛好六個字元。
 // 沒有反白的列是青色（EGA 索引 3）、選中的是白色（0x0F）。
 func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	p *town.ItemPage, party []town.Member) error {
 	l := town.ItemPageLayout
+	interactionBase := itemPageUsesInteractionBase(p)
 
-	// 畫的順序照原版：整頁清掉 → 背景 → 立繪 → 右邊那條窄欄清成黑 → 框與分隔線
-	// → 清單（`sub_1103F(0)`、`(0x21)`／`(0x64)`、`sub_18F3A(0)`、`sub_1B779`、
-	// `sub_1B6DC`、`sub_1BB57`、`sub_196A9`）。
+	// 兩個分支都先以 `sub_1103F(0)` 對應的整頁底圖覆蓋目前畫布。
 	if err := drawSheetPageFull(dst, sprites); err != nil {
 		return err
 	}
-	if err := drawSheetPageBack(dst, sprites); err != nil {
-		return err
-	}
-
-	// 左邊那個人：一層一層貼上去，順序就是原版畫的順序（RE-126）。
-	// X 與寬的單位是 byte 欄，所以乘八才是像素。
-	for _, piece := range p.Figure {
-		pic, err := sprites.Get(piece.Archive, piece.Index)
-		if err != nil {
+	if !interactionBase {
+		// 完整清單層才畫木屋背板、立繪、右欄、外框、分隔線、清單與小框。
+		if err := drawSheetPageBack(dst, sprites); err != nil {
 			return err
 		}
-		draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
-	}
 
-	fill(dst, l.RightPane.X0, l.RightPane.Y0,
-		l.RightPane.Width(), l.RightPane.Height(), town.ColourBoxFill)
-	frame(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
-		town.ColourSheetFrame)
-	fill(dst, l.Divider.X0, l.Divider.Y0,
-		l.Divider.Width(), l.Divider.Height(), town.ColourSheetFrame)
-	// 框畫完投一次影（`sub_1B7E9(0x0F, 2, 0x131, 0x9C, 3)`）：右邊與下面各一條
-	// 四像素寬的黑帶。
-	shadow(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height())
-
-	for i, row := range p.Rows {
-		colour := town.ColourListIdle
-		if i == p.Selected {
-			colour = town.ColourText
+		// 左邊那個人：一層一層貼上去，順序就是原版畫的順序（RE-126）。
+		// X 與寬的單位是 byte 欄，所以乘八才是像素。
+		for _, piece := range p.Figure {
+			pic, err := sprites.Get(piece.Archive, piece.Index)
+			if err != nil {
+				return err
+			}
+			draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
 		}
-		cellIn(dst, large, l.ListCol, l.ListRow+i*l.ListStep, row, colour)
-	}
 
-	// 清單移動時左上角那個小框（`sub_16D0B`）：三行——部位名稱加冒號、那件東西的
-	// 名字、骰式與重量。重量靠右，位數少就往右挪。
-	if m := p.Mark; m != nil {
-		fill(dst, m.X+1, m.Y+1, town.MarkWidth-1, town.MarkHeight-1,
-			town.ColourBoxFill)
-		frame(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1,
-			town.ColourSheetHeader)
-		// `sub_1BA9D` 是三件事的複合：填內部（`sub_1B779`）、畫框（`sub_1B6DC`）、
-		// **再投影**（`sub_1B7E9`）。用它畫的每一個框都自帶那一圈四像素的黑帶。
-		shadow(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1)
-		col := m.X/small.Advance() + 1
-		row := m.Y + town.MarkTextTop
-		cell(dst, small, col, row, m.Slot)
-		if m.Name != "" {
-			cell(dst, small, col, row+town.MarkLineStep, m.Name)
-			third := row + 2*town.MarkLineStep
-			cell(dst, small, col, third, m.Dice)
-			if m.Skill != "" {
-				cell(dst, small, col+8, third, m.Skill)
+		fill(dst, l.RightPane.X0, l.RightPane.Y0,
+			l.RightPane.Width(), l.RightPane.Height(), town.ColourBoxFill)
+		frame(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height(),
+			town.ColourSheetFrame)
+		fill(dst, l.Divider.X0, l.Divider.Y0,
+			l.Divider.Width(), l.Divider.Height(), town.ColourSheetFrame)
+		// 框畫完投一次影（`sub_1B7E9(0x0F, 2, 0x131, 0x9C, 3)`）：右邊與下面各一條
+		// 四像素寬的黑帶。
+		shadow(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height())
+
+		for i, row := range p.Rows {
+			colour := town.ColourListIdle
+			if i == p.Selected {
+				colour = town.ColourText
 			}
-			w := col + town.MarkWeightCol - 1
-			if m.Weight < 100 {
-				w++
+			cellIn(dst, large, l.ListCol, l.ListRow+i*l.ListStep, row, colour)
+		}
+
+		// 清單移動時左上角那個小框（`sub_16D0B`）：三行——部位名稱加冒號、那件東西的
+		// 名字、骰式與重量。重量靠右，位數少就往右挪。
+		if m := p.Mark; m != nil {
+			fill(dst, m.X+1, m.Y+1, town.MarkWidth-1, town.MarkHeight-1,
+				town.ColourBoxFill)
+			frame(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1,
+				town.ColourSheetHeader)
+			// `sub_1BA9D` 是三件事的複合：填內部（`sub_1B779`）、畫框（`sub_1B6DC`）、
+			// **再投影**（`sub_1B7E9`）。用它畫的每一個框都自帶那一圈四像素的黑帶。
+			shadow(dst, m.X, m.Y, town.MarkWidth+1, town.MarkHeight+1)
+			col := m.X/small.Advance() + 1
+			row := m.Y + town.MarkTextTop
+			cell(dst, small, col, row, m.Slot)
+			if m.Name != "" {
+				cell(dst, small, col, row+town.MarkLineStep, m.Name)
+				third := row + 2*town.MarkLineStep
+				cell(dst, small, col, third, m.Dice)
+				if m.Skill != "" {
+					cell(dst, small, col+8, third, m.Skill)
+				}
+				w := col + town.MarkWeightCol - 1
+				if m.Weight < 100 {
+					w++
+				}
+				if m.Weight < 10 {
+					w++
+				}
+				cell(dst, small, w, third, fmt.Sprintf("%d", m.Weight))
 			}
-			if m.Weight < 10 {
-				w++
-			}
-			cell(dst, small, w, third, fmt.Sprintf("%d", m.Weight))
 		}
 	}
 
@@ -93,19 +95,21 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	if p.Detail == nil && len(p.Message) == 0 && len(p.Note) == 0 {
 		return nil
 	}
-	// 明細框是 `sub_1BA9D` 畫的：填黑加一圈白，**沒有投影**（那是 `sub_1B7E9`，
-	// 這一頁沒有呼叫它）。它的右緣壓在清單左緣上，原版也是這樣。
+	// 明細框是 `sub_1BA9D` 畫的複合框：填色、框線、再投影（`sub_1B7E9`）。
+	// 右緣與下緣各自延伸四像素，與原版 `0x1BAF1` 的呼叫順序一致。
 	fill(dst, l.Detail.X0+1, l.Detail.Y0+1,
 		l.Detail.Width()-2, l.Detail.Height()-2, town.ColourBoxFill)
 	frame(dst, l.Detail.X0, l.Detail.Y0, l.Detail.Width(), l.Detail.Height(),
 		town.ColourSheetHeader)
-	// 明細那幾段的座標是商店那一頁算好的（`sub_153FF`，RE-075），而這一頁的框在
-	// 別的位置——`sub_153FF` 的模式 8 自己怎麼擺還沒讀。這裡照兩個框「內縮兩個
-	// 像素」的同一個慣例平移過去（商店的框在 (102,84)、文字從 (104,86) 起），
-	// 等模式 8 讀出來再換成它自己的座標。證據等級：強推論。
-	f := small
+	shadow(dst, l.Detail.X0, l.Detail.Y0, l.Detail.Width(), l.Detail.Height())
+	// 明細那幾段使用商店 `sub_153FF` 的模式 8 大字模（`book-large`，RE-075）。
+	// frame-072 量得第一段字形從 y=66 起；`goodDetail` 的第一段原始列是 102，
+	// 以對話框文字列 86 換算時，這一頁的文字基準是 50（明細框頂端往下 8 px）。
+	// 這個垂直平移已由 frame-072 的像素列與字模高度交叉確認，不再沿用原先
+	// 以 `small` 字模和框內 2 px 起點作的強推論。
+	f := large
 	dc := (l.Detail.X0 + 2) / f.Advance()
-	dr := l.Detail.Y0 + 2
+	dr := l.Detail.Y0 - 8
 	sc := (town.DialogBox.TextX) / f.Advance()
 	sr := town.DialogBox.TextY
 	// 動作做完那一句蓋在明細上面（原版是整頁重畫再印，效果相同）。
@@ -131,6 +135,14 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 		cell(dst, f, dc, dr+i*town.LineStep, line)
 	}
 	return nil
+}
+
+// itemPageUsesInteractionBase mirrors the split in `sub_16986`: a selected item or
+// item-page message starts from `sub_1103F(0)` rather than the complete list layer.
+// The state fields are the existing typed-data mapping; this helper only selects the
+// rendering layer and does not alter item actions or persistence.
+func itemPageUsesInteractionBase(p *town.ItemPage) bool {
+	return p.Acting || p.Detail != nil || len(p.Message) > 0
 }
 
 // PixelsPerByte 是 EGA 平面模式一個 byte 橫跨幾個像素。立繪的版面表用 byte 欄

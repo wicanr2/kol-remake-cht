@@ -1,8 +1,35 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-09-10
+更新日期：2026-09-14
 
-## 目前狀態（2026-09-10，以本節為準）
+## 目前狀態（2026-09-14，以本節為準）
+
+Issue #91「物品頁選中之後的明細畫面與原版不同」已完成。SPEC-031 已由 READY
+升為 CONFORMED：原版 `sub_16986:0x16BBF` 的選中分支現在在重製版清除立繪、
+木屋背板、右欄、十七列清單與完整頁外框，只保留全頁木紋底圖與明細層；
+`sub_1BA9D` 的右／下四像素投影也已接回英文與中文繪製器。正常物品頁狀態與
+保存資料模型沒有改動。
+
+- 同狀態收據：`docs/verification/remake-parity/receipt-town-sheet-items.json`。
+  4/4 pair 通過；frame-072 的 320×200 比較允許區外差異為 0，明細框四邊與
+  右／下四像素投影列為必須相同區。重製選中畫格 PNG 及差異圖的位置在同一個
+  `shots/town-sheet-items/` 目錄。
+- 驗證：Docker 內 `go test ./cmd/... ./internal/... -count=1 -timeout 600s`、
+  `go build -o /tmp/kol ./cmd/kol`、相關 UI／town 測試與 CJK 檢查通過；CJK
+  文字安全矩形 `6952/0`、UI 翻譯 `486/0`（另有 2 個刻意空白）。本次建置
+  SHA-256 為 `d2869ddfc6bad5c0d3e4bf9aa569665648cdcda4c966a7f15ed35a58ff260de3`。
+- `go test ./...` 的聚合命令仍會掃到 `workplace/` 下既有 scratch package，
+  其缺少 `dosgolem` 本地模組或含重複／未定義測試符號；產品範圍的 `cmd/...`
+  與 `internal/...` 已獨立通過，這不是 Issue #91 的產品失敗。
+- 原版 frame-070／frame-072 仍是 DOSBox-X 2026.06.02 的
+  `dosbox-bootstrap` 輸入；能力矩陣確認目前 dosgolem 沒有 KOL 適配器，因此
+  本輪不宣稱 strict dosgolem parity。`gh auth status` 與 Issue #91 讀取已在
+  host 完成，本輪沒有留言、關閉或修改遠端 Issue，也沒有 commit／push。
+
+下一個最小動作是若要提升為 strict dosgolem parity，另立 KOL dosgolem 適配器與
+對拍規格；這不屬於 Issue #91 的完成條件，不能把本輪 DOSBox-X 收據重新命名。
+
+## 2026-09-10 狀態快照（歷史交接；後續以最新日期段落為準）
 
 已依使用者指示恢復。自評 **75／100**，不是完成百分比或原版一致率。
 
@@ -10,9 +37,9 @@
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **74 條未完成**（33 條沒有機器訊號、標 `manual`），
+- 目前 **73 條未完成**（33 條沒有機器訊號、標 `manual`），
   另有 17 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`present` 38、`manual` 33、`absent` 2、`required_in_all` 1。
+  未完成項的 verify 種類：`present` 37、`manual` 33、`absent` 2、`required_in_all` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
   （base 為 `origin/main`，`5f9a9a1`，已推送到 `origin/kol-oracle`）。舊的 `kol-force-call` 已刪除——它的 commit
