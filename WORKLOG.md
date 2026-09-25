@@ -6496,3 +6496,15 @@ frame-270 推翻了 remake 的版面：
   `battle-flee-0`、`battle-rideaway-1`、`battle-spoils-0` 三行舊 replay.spec 在野外送
   `SPACE` 而中止，與語言無關，屬過期腳本，未處理。中途停止一次過時的掃描，
   僅停了本專案自己的容器；另一個 `eob_123_remake` 容器未碰。
+- 續查「看不見／沒畫出來」的問題：`cellInAt` 呼叫點的字色都不與底色相同；但中文
+  `InnCJK` 完全沒處理 `Inn.SpellEdit`，法術編輯頁在中文模式只剩兩行造價數字。
+  新增 `drawSpellEditCJK`（SPEC-035 READY）：英文版面乘 3，欄名改用說明書術語
+  （KOLDATA 0x4D 譯文為 RANGE／DUR／DMG 各給 `~Hxx`），欄位值查顯示譯名（補 MAGIC.0
+  的 class／stat／All 18 筆），名稱下接 SPEC-034 注解；選單畫在被編輯欄位另一側，
+  名稱輸入顯示游標。英文模式同輸入畫格與對拍畫格逐位元相同。
+- `verify_ui_translation.py` 放寬欄座標規則：多出的 `~Hxx` 只允許等於原文同段某字的
+  起始欄；正例 `~H18／~H1D` 通過、負例 `~H19` 失敗。
+- 收據 `docs/verification/cjk-ui/spell-pages-receipt.json`：七張繁中畫格（編輯頁、修改
+  清單、選單、名稱輸入、法術店注解、戰鬥選法術注解、戰鬥執行訊息）經目視檢查。
+  SPEC-034 升 CONFORMED。檢查：安全矩形 9,557／0、字模 5,959／0、譯名 510／0、
+  Go 測試全過。

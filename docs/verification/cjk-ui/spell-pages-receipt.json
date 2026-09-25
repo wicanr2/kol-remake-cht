@@ -1,0 +1,161 @@
+{
+ "schema": "kol-cjk-spell-pages-receipt-v1",
+ "date": "2026-09-25",
+ "specs": [
+  "docs/spec/034-cjk-spell-name-gloss.md",
+  "docs/spec/035-cjk-spell-editor.md"
+ ],
+ "tool": {
+  "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+  "runner": "tools/run_kol_shots.sh"
+ },
+ "inputs_sha256": {
+  "docs/i18n/ui-zh-Hant.json": "3dfb63fef071ca3158e2fa5122193201b914d9e2cd06caef5f602124d31c0783",
+  "docs/i18n/display-names-zh-Hant.tsv": "086ff9e4b2318a97e6dfdb7523cbb977df9da22130f5f25e8a22d02919069b1d",
+  "docs/i18n/spell-words-zh-Hant.json": "882542c615909a975b34fc7287e74d2230952d515c136294c3ac52ed34c08bd0",
+  "assets/ui-font/manifest.json": "4a1df3d7697f361aa301cc15c1fbdb7c94e24368f162588734a5f5a17fccd3f8",
+  "assets/ui-font/zh-hant-16.png": "66298b7179a961f7eb36d6f166915036a31ce07e33329a4e5f1f7f82e165391e"
+ },
+ "english_control": {
+  "file": "docs/verification/remake-parity/shots/town-spell-edit/editor.png",
+  "result": "同一輸入的英文模式畫格與既有對拍畫格逐位元相同",
+  "png_sha256": "6bd314d0b7da2433012509402e003b3a46c0232d7191e5fc6abf79ac892d6b9b"
+ },
+ "frames": [
+  {
+   "file": "docs/verification/cjk-ui/shots/spell-pages/editor-zh.png",
+   "png_sha256": "31c25205abcdae4f9432a080b93fbde9b48b77d1b1ad7281c10cf3ac593d1e6f",
+   "size": [
+    960,
+    600
+   ],
+   "step": 89,
+   "visible": "法術編輯頁：13 欄中文、法術名下注解",
+   "invocation": {
+    "lang": "zh-Hant",
+    "scene": "play",
+    "load": "workplace/saves/ddduhh.json",
+    "load_sha256": "cc04f985c98754a9913b0695ab0bf654a1866a0ea3d84e00ca7550190e67139f",
+    "seed": null,
+    "play_script_sha256": "2a6de92eda4852f6ef9dd43fd633ee811e5f9201e19dac3a027220572e97b011",
+    "play_script": "L L L L L U U U U U U U U U U U L U L U U L L U L U L L U L U L L U L U U L U L L U L L L L L L L L L L L L L L L U L U U U U U U U U U L RET SPACE > > > > RET RET SPACE RET RET RET > > > > RET D RET RET"
+   }
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/spell-pages/modify-list-zh.png",
+   "png_sha256": "a1df3df312e3466fdb99c7b6fc2ab3214781601235ad58b29158e13c1793e30f",
+   "size": [
+    960,
+    600
+   ],
+   "step": 88,
+   "visible": "修改法術清單：選中列後接注解",
+   "invocation": {
+    "lang": "zh-Hant",
+    "scene": "play",
+    "load": "workplace/saves/ddduhh.json",
+    "load_sha256": "cc04f985c98754a9913b0695ab0bf654a1866a0ea3d84e00ca7550190e67139f",
+    "seed": null,
+    "play_script_sha256": "2a6de92eda4852f6ef9dd43fd633ee811e5f9201e19dac3a027220572e97b011",
+    "play_script": "L L L L L U U U U U U U U U U U L U L U U L L U L U L L U L U L L U L U U L U L L U L L L L L L L L L L L L L L L U L U U U U U U U U U L RET SPACE > > > > RET RET SPACE RET RET RET > > > > RET D RET RET"
+   }
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/spell-pages/editor-menu-zh.png",
+   "png_sha256": "b2e356fd5f00e973efbe0a0562e662f084a2d893f419eee33429f352543e06e9",
+   "size": [
+    960,
+    600
+   ],
+   "step": 91,
+   "visible": "種族欄選單：開在另一側，欄名與編輯中欄位可見",
+   "invocation": {
+    "lang": "zh-Hant",
+    "scene": "play",
+    "load": "workplace/saves/ddduhh.json",
+    "load_sha256": "cc04f985c98754a9913b0695ab0bf654a1866a0ea3d84e00ca7550190e67139f",
+    "seed": null,
+    "play_script_sha256": "d50c69f59978e9015b86faf1afc5d3ff829c6f63a2f4a4b007f8f82109c840ab",
+    "play_script": "L L L L L U U U U U U U U U U U L U L U U L L U L U L L U L U L L U L U U L U L L U L L L L L L L L L L L L L L L U L U U U U U U U U U L RET SPACE > > > > RET RET SPACE RET RET RET > > > > RET D RET RET D RET"
+   }
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/spell-pages/editor-typing-zh.png",
+   "png_sha256": "2241089ac9748ed8e1c86b65fbf74c9280feb1ed966d09a8a31580ca370416bd",
+   "size": [
+    960,
+    600
+   ],
+   "step": 90,
+   "visible": "名稱輸入：名稱欄接橫槓游標",
+   "invocation": {
+    "lang": "zh-Hant",
+    "scene": "play",
+    "load": "workplace/saves/ddduhh.json",
+    "load_sha256": "cc04f985c98754a9913b0695ab0bf654a1866a0ea3d84e00ca7550190e67139f",
+    "seed": null,
+    "play_script_sha256": "e266a3e0e0f68d4f415c4aa64c811b1033c62d410251c9d969d0719ba715cf04",
+    "play_script": "L L L L L U U U U U U U U U U U L U L U U L L U L U L L U L U L L U L U U L U L L U L L L L L L L L L L L L L L L U L U U U U U U U U U L RET SPACE > > > > RET RET SPACE RET RET RET > > > > RET D RET RET RET x"
+   }
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/spell-pages/shop-list-gloss-zh.png",
+   "png_sha256": "14a9c59b7b933aa11bc15736d936468364fb2b07d4e2725d705cd88b58e72ab6",
+   "size": [
+    960,
+    600
+   ],
+   "step": 12,
+   "visible": "城鎮法術店清單：選中列後接注解",
+   "invocation": {
+    "lang": "zh-Hant",
+    "scene": "play",
+    "load": "workplace/saves/hostel.json",
+    "load_sha256": "fee5d5d4fc058cf4b3f62eee122b77552574f929643a89ea4932a1ffdf935dc9",
+    "seed": null,
+    "play_script_sha256": "74a4bb523bbb2547e3b69c9219e3cc292d44f946d48bd13c8a56f6eb96cdc70a",
+    "play_script": "U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > > > RET"
+   }
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/spell-pages/battle-spell-gloss-zh.png",
+   "png_sha256": "0f6c6cd96dafc9bcc1f1a44362cef02e7d72e2dabaaeab986e831b84ae2c910e",
+   "size": [
+    960,
+    600
+   ],
+   "step": 109,
+   "visible": "戰鬥選法術：底部卷軸兩行注解",
+   "invocation": {
+    "lang": "zh-Hant",
+    "scene": "play",
+    "load": "workplace/saves/warder.json",
+    "load_sha256": "b4408df9beec389e8939c08b6c27aad8a7c6560da13a72b83a4a7c749c248f16",
+    "seed": 141421,
+    "play_script_sha256": "db9bf15fd9c4ebee4c212e6b1a9eec0a053d533c05e98f141f363b201781b969",
+    "play_script": "R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R U U U U U U U U U U U U U RET > > > RET RET SPACE SPACE SPACE SPACE SPACE > > RET RET > RET RET RET SPACE SPACE SPACE"
+   }
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/spell-pages/battle-message-zh.png",
+   "png_sha256": "7ace5d414b45478fd0d5d2c924e375bfa427966ed8c8717d0e0ef550a026e01a",
+   "size": [
+    960,
+    600
+   ],
+   "step": 115,
+   "visible": "戰鬥執行訊息：卷軸上黑字可讀、依像素寬排版",
+   "invocation": {
+    "lang": "zh-Hant",
+    "scene": "play",
+    "load": "workplace/saves/warder.json",
+    "load_sha256": "b4408df9beec389e8939c08b6c27aad8a7c6560da13a72b83a4a7c749c248f16",
+    "seed": 141421,
+    "play_script_sha256": "db9bf15fd9c4ebee4c212e6b1a9eec0a053d533c05e98f141f363b201781b969",
+    "play_script": "R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R U U U U U U U U U U U U U RET > > > RET RET SPACE SPACE SPACE SPACE SPACE > > RET RET > RET RET RET SPACE SPACE SPACE"
+   }
+  }
+ ],
+ "evidence": "已證實：重製版正常按鍵路徑的繁中畫格，七張皆經目視檢查。不是原版中文或原版同狀態對拍。",
+ "rights": "重製版執行畫面含原版衍生美術；依 2026-09-01 決定可存 private repo，不得公開散布"
+}

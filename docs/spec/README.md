@@ -19,7 +19,8 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
-| SPEC-034 | [法術名的中文注解](034-cjk-spell-name-gloss.md) | READY | 法術名保留原文，依說明書音節表加注解；48 筆法術記錄交叉驗證通過，位置經原型確認，待正常路徑收據 |
+| SPEC-035 | [法術編輯器的繁中頁面](035-cjk-spell-editor.md) | READY | 中文模式原本看不到編輯頁，已補；四張正常按鍵畫格已驗，選值寫回與英中同狀態待驗 |
+| SPEC-034 | [法術名的中文注解](034-cjk-spell-name-gloss.md) | CONFORMED | 法術名保留原文，依說明書音節表加注解；48 筆法術記錄交叉驗證，三處正常按鍵畫格已驗 |
 | SPEC-033 | [中文畫面的資料名稱顯示](033-cjk-display-names.md) | READY | 491 個來源原名已有暫譯並接顯示端（含所在地、城鎮代碼、教派與 MAGIC.0 亞種）；待英中同狀態與正常玩家畫格驗收 |
 | SPEC-031 | [資料頁物品選中後的明細層](031-item-detail-page.md) | CONFORMED | 選中物品頁的圖層與投影已完成；frame-072 是 DOSBox-X 輔助收據，非 strict dosgolem parity |
 | SPEC-032 | [戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) | CONFORMED | 四種清單畫格與正常按鍵路徑已驗，戰利品採明示觀察用資料；不宣稱原版中文或整場戰鬥 parity |

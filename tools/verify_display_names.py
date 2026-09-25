@@ -46,6 +46,10 @@ def required_names(root: pathlib.Path) -> set[str]:
     magic = json.loads((root / "magic.json").read_text())
     for group in magic["subclass"]:
         required.update(name.upper() for name in group if name not in ("None", "All"))
+    # 法術編輯器的 CLASS／STAT 選項與 SUBCLASS 的 All（RE-128，SPEC-035）。
+    required.update(magic["class"])
+    required.update(name for name in magic["stat"] if name != "None")
+    required.add("All")
     world = json.loads((root / "world-map.json").read_text())
     required.update(town["code"] for town in world["towns"])
     return required

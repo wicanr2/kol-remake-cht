@@ -339,7 +339,8 @@
    },
    "77": {
     "en": "~V36~H0BCLASS~H17SUBCLASS~V68~H07STAT~H12RANGE DUR  DMG~V82~H07Adventure Point Cost..@Gold Crown Cost.......",
-    "zh": "~V36~H0B階級~H17次階級~V68~H07屬性~H12射程 持續 傷害~V82~H07冒險點數花費..@金冠花費........"
+    "zh": "~V36~H0B種族~H17亞種~V68~H07屬性~H12距離~H18持續~H1D強度~V82~H07冒險點數花費..@金冠花費........",
+    "note": "欄名依說明書第 7 章（種族／亞種／屬性／強度／距離／持續時間）；RANGE／DUR／DMG 各給 ~H，中文字寬與英文不同，不能靠空白對齊欄位"
    },
    "78": {
     "en": "Learn a spell",

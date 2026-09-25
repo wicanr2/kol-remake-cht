@@ -12,6 +12,8 @@
 - `~Vxx`（掃描列）的**集合**要一致。那是原版量出來的縱向座標，少一個就有一段畫錯位置。
 - `~Hxx`／`~Cxx`（欄、置中）**可以少**但不得多。中文比英文短，兩行常併成一行，
   併掉的那一行不再需要把游標移回左緣；但憑空多一個欄座標會把文字推到別的地方。
+  唯一例外：原文在同一段裡靠空白把幾個字對齊到欄位（`~H12RANGE DUR  DMG`），
+  中文字寬不同只能明寫座標；多出的 `~Hxx` 必須正好是原文某個字的起始欄。
 - 換行 `@` 的**個數**可以少（中文較短），但不得變多——多一行會擠掉下一段。
 - 每一行的實際像素寬度不得超過畫面寬。這是**弱檢查**：它只擋得住「畫到畫面外」，
   擋不住「畫到框外」——每一筆記錄畫在哪個框要等它接上畫面才知道，那時再用
@@ -37,6 +39,16 @@ COLUMN = re.compile(r"~[HC][0-9A-Fa-f]{2}")
 LAYOUT_ANY = re.compile(r"~[VHC][0-9A-Fa-f]{2}|\|[A-Z]")
 
 
+def word_columns(en: str) -> set[str]:
+    """原文每個 `~Hxx` 段落裡，各個字實際落在第幾欄（段落起點 ＋ 字在段內的位移）。"""
+    cols = set()
+    for m in re.finditer(r"~H([0-9A-Fa-f]{2})([^~@|]*)", en):
+        base = int(m.group(1), 16)
+        for w in re.finditer(r"\S+", m.group(2)):
+            cols.add(f"~H{base + w.start():02X}")
+    return cols
+
+
 def check(bank: str, index: str, row: dict) -> list[str]:
     en, zh, note = row["en"], row["zh"], row.get("note", "")
     if en in ("", "\x00", "\x1a\x00"):
@@ -49,6 +61,9 @@ def check(bank: str, index: str, row: dict) -> list[str]:
                                     ("欄", COLUMN, True)):
         a, b = set(pattern.findall(en)), set(pattern.findall(zh))
         lost, extra = sorted(a - b), sorted(b - a)
+        if name == "欄":
+            aligned = word_columns(en)
+            extra = [c for c in extra if c.upper() not in aligned]
         bits = []
         if lost and not may_drop:
             bits.append(f"漏了 {' '.join(lost)}")

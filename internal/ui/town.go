@@ -251,6 +251,14 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		return err
 	}
 
+	// 法術編輯器蓋掉整個畫面，連隊員格都不留；底下那排圖示照畫（RE-128，SPEC-035）。
+	if in.SpellEdit != nil {
+		if err := drawSpellEditCJK(dst, sprites, f, t, in.SpellEdit); err != nil {
+			return err
+		}
+		return drawIconBarCJK(dst, sprites, in)
+	}
+
 	// 資料頁蓋掉整個建築畫面，與英文版同一個語意（`Town` 那一支的 `in.Sheet`）。
 	// 物品與隊伍那兩頁是**換頁**不是蓋上去（RE-126／RE-127），所以各自畫。
 	if in.Sheet != nil {

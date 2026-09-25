@@ -43,6 +43,12 @@ const (
 	spellGoldRow  = 0x8A
 )
 
+// SpellNameLeft／SpellNameCols 是名稱欄的起始欄與寬度，給中文頁以實際字寬置中。
+const (
+	SpellNameLeft = spellNameLeft
+	SpellNameCols = spellNameCols
+)
+
 // 欄位的兩種顏色：游標停著的那一欄是 3，其餘 0x0F（`0x18377`…`0x18395`）。
 const (
 	SpellFieldColor  = 0x0F
