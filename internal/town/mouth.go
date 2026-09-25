@@ -63,6 +63,12 @@ func (s *Session) SubmitAsk() bool {
 		return false
 	}
 	question := strings.TrimSpace(string(s.mouth.buf))
+	// 讀入函式收工前把筆尖那一格的橫槓蓋掉（RE-114，`sub_1B5C8` 結尾的
+	// `sub_1C2DA(' ')`），所以不論問句是否為空，游標都要從對話框消失。
+	if s.Inside != nil {
+		s.Inside.Dialog = append(append([]string(nil), s.mouth.prompt...), string(s.mouth.buf))
+		s.Inside.DialogZh = nil
+	}
 	s.mouth = nil
 	if question == "" {
 		s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))

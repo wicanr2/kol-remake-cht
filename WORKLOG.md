@@ -6522,3 +6522,10 @@ frame-270 推翻了 remake 的版面：
   兩倍最近鄰放大、黑底，一般卡放畫面下緣，標誌卡做成劍身右段銘牌，封面副標放在書名
   板下方；人名與版權行保留原文。字模 2,557 字零流失、覆蓋 5,966／0。英文封面與標題
   畫格逐位元不變。收據 `docs/verification/cjk-ui/title-subtitles-receipt.json`。
+- #61 城鎮打字問話：腳本 token 在第 7 城民宅驗基準／退格／空問句，英中軌跡相同，
+  退格版最終狀態與基準相同。空問句送出後游標仍留在對話框，與 RE-114「讀入函式收工前
+  蓋掉橫槓」不符，改 `SubmitAsk`；英文 `town-talk` 收據重跑 10 張一致。另寫
+  `tools/verify_town_typing_gui.sh`：互動遊玩下 xdotool 真實按鍵、每鍵等輸入紀錄，
+  英中輸入序列相同，十二張畫格收據 `docs/verification/cjk-ui/town-typing-gui-receipt.json`。
+  第一次 GUI 腳本用了修正前編的執行檔，已在腳本加過期檢查。空問句後白框重設到門，
+  原版位置未對拍，未改。#61 本地完成。

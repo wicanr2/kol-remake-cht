@@ -106,11 +106,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：接上並重生那兩條長路徑的收據。
   核實：`internal/battle/ai.go` 找得到 `\*\*解出來了但還沒接上\*\*` 就是還沒完
 
-- **town-typing-input-box**（#61） — 城鎮打字問話的輸入框
-  MOUTH 的打字問話有 RE-067／RE-114 證據；正式 GUI 鍵盤迴圈已接 TypeAsk／退格／送出，中文對話框也畫橫槓游標。第 7 城觀察存檔以正式按鍵逐字輸入 nobj，問中第 5 槽並接受任務；英中 16 步狀態相同，見 docs/verification/cjk-ui/quest-offer-receipt.json。舊的 ASK: 快捷 token 只供腳本。本項還缺空問句、退格及真實鍵盤焦點的 GUI 畫格驗收；不能把觀察位置起跑當作從標題自然抵達。
-  完成條件：輸入框可由正常 GUI 打字、退格、送出與空問句；關鍵字可問中，畫格與英中狀態有收據。
-  核實：要人判——關鍵字正常按鍵畫格已取得，空問句、退格與真實鍵盤焦點尚需補；不可因自承消失就關閉。
-
 - **spell-target-figure**（#71） — 施法時目標的人形還沒畫
   `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
@@ -422,6 +417,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
+- **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
 - **sheet-items-and-party-portrait** — 角色資料頁的物品（sub_16986）與隊伍立繪（sub_18D61）兩個圖示：2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。
 - **party-limit-six-boundary** — 隊伍上限六人的邊界：2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。

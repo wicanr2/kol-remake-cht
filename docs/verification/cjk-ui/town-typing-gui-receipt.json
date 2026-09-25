@@ -1,0 +1,78 @@
+{
+ "schema": "kol-cjk-town-typing-gui-v1",
+ "date": "2026-09-26",
+ "issue": 61,
+ "tool": {
+  "script": "tools/verify_town_typing_gui.sh",
+  "script_sha256": "a470d3aae2588f815bc8bbc5708491a3058f5acf9c81f4cd8a7d6016f3d962b9",
+  "image": "kol-package:20260907",
+  "input": "Xvfb＋xdotool 真實按鍵，每鍵等 -log-input 新增一行"
+ },
+ "start_save": "workplace/appimage-v.0.2.5-20260925/created-first.json",
+ "start_save_sha256": "b16fc813fe5d70bc39e4e5f23b775261cac46692ecddbf29771100d4ddbb7494",
+ "keys": "Escape 6 Down×14 Return space > > > Return e l v x BackSpace e Return space > > > Return Return",
+ "input_logs": {
+  "zh": "docs/verification/cjk-ui/shots/town-typing/input-zh.log",
+  "en": "docs/verification/cjk-ui/shots/town-typing/input-en.log",
+  "token_sequence_identical": true
+ },
+ "frames": [
+  {
+   "state": "prompt",
+   "visible": "按 MOUTH：敘述與輸入游標",
+   "zh": "docs/verification/cjk-ui/shots/town-typing/prompt-zh.png",
+   "zh_sha256": "a1cdee13fc61f0801e383aa496d5317225f833367d083a5f6ffe44d0fdfee711",
+   "en": "docs/verification/cjk-ui/shots/town-typing/prompt-en.png",
+   "en_sha256": "1834d7e68d6f5f56754781e13456d5d5e69c62b6900aae63f319a23605d5592d"
+  },
+  {
+   "state": "typed",
+   "visible": "真實鍵盤打 ELVX",
+   "zh": "docs/verification/cjk-ui/shots/town-typing/typed-zh.png",
+   "zh_sha256": "6f85da118eb2a51b9ce8f56bf00889dae962499d66bac26cb8d6155f46945759",
+   "en": "docs/verification/cjk-ui/shots/town-typing/typed-en.png",
+   "en_sha256": "cca3b529ecaf2736f035927b25d156116a27c4e34869a32174ddec0d60649738"
+  },
+  {
+   "state": "backspaced",
+   "visible": "Backspace 退成 ELV",
+   "zh": "docs/verification/cjk-ui/shots/town-typing/backspaced-zh.png",
+   "zh_sha256": "f1fa9dbb1ed5e2db9a2b469c4f138ca07555b545d95236b5cecf60ad53f08b9e",
+   "en": "docs/verification/cjk-ui/shots/town-typing/backspaced-en.png",
+   "en_sha256": "9a2ba96222bd2dab5d4db1ef5d99aaa73af1242fb4533c2363272cf88a268b46"
+  },
+  {
+   "state": "answer",
+   "visible": "補 E 後 Return：關鍵字 ELVE 問中，顯示回答",
+   "zh": "docs/verification/cjk-ui/shots/town-typing/answer-zh.png",
+   "zh_sha256": "fc018548eacdcd1bf3af9c9abeae3fe4b4e9654bcefdac15fda9702aad616ea9",
+   "en": "docs/verification/cjk-ui/shots/town-typing/answer-en.png",
+   "en_sha256": "b6e945c61f15036e32a75a143ba64c8e7ee0bccb17bdd94a96c0278f85857729"
+  },
+  {
+   "state": "prompt2",
+   "visible": "回答後重選 MOUTH",
+   "zh": "docs/verification/cjk-ui/shots/town-typing/prompt2-zh.png",
+   "zh_sha256": "a1cdee13fc61f0801e383aa496d5317225f833367d083a5f6ffe44d0fdfee711",
+   "en": "docs/verification/cjk-ui/shots/town-typing/prompt2-en.png",
+   "en_sha256": "1834d7e68d6f5f56754781e13456d5d5e69c62b6900aae63f319a23605d5592d"
+  },
+  {
+   "state": "empty-submit",
+   "visible": "空問句 Return：輸入結束、游標消失",
+   "zh": "docs/verification/cjk-ui/shots/town-typing/empty-submit-zh.png",
+   "zh_sha256": "1c3a902c1e6df9baa5c1c79771870bf4e54ba64b66e55872404fd0b22a2225ba",
+   "en": "docs/verification/cjk-ui/shots/town-typing/empty-submit-en.png",
+   "en_sha256": "12acfbf8144e6518dd5978c7c45a41b8a358df7ea60055087883690ae96e720f"
+  }
+ ],
+ "scripted_controls": {
+  "note": "第 7 城民宅 quest-offer 起點，腳本 token 版本：基準 nobj、退格 nobx BS j、空問句；中英軌跡各自逐位元相同，退格版最終狀態與基準相同（接下第 6 號任務）"
+ },
+ "fix": "RE-114：讀入函式收工前蓋掉筆尖橫槓；重製版原本在空問句送出後仍留游標，已改（internal/town/mouth.go SubmitAsk）",
+ "open": [
+  "空問句送出後白框重設到第 0 格（門），原版白框位置未對拍"
+ ],
+ "evidence": "已證實：互動遊玩下真實鍵盤的打字、退格、送出、空問句與繁中回答；英中輸入序列相同，十二張畫格已目視檢查。非原版同狀態對拍。",
+ "rights": "含原版衍生美術；private repo 可保存，不得公開散布"
+}

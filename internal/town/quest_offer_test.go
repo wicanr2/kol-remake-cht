@@ -1,6 +1,9 @@
 package town
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func questDoor() *Door {
 	return &Door{Index: 14, IconFlags: [2]int{1, QuestFlagBit},
@@ -172,5 +175,11 @@ func TestMouthTyping(t *testing.T) {
 	}
 	if s.Asking() {
 		t.Fatal("送出之後就不在打字了")
+	}
+	// 讀入函式收工前把橫槓蓋掉（RE-114）：空問句送出後游標不能還留在對話框。
+	for _, line := range s.Inside.Dialog {
+		if strings.Contains(line, TextCaret) {
+			t.Fatalf("送出之後游標還在：%q", s.Inside.Dialog)
+		}
 	}
 }

@@ -897,10 +897,17 @@
       "body": "MOUTH 的打字問話有 RE-067／RE-114 證據；正式 GUI 鍵盤迴圈已接 TypeAsk／退格／送出，中文對話框也畫橫槓游標。第 7 城觀察存檔以正式按鍵逐字輸入 nobj，問中第 5 槽並接受任務；英中 16 步狀態相同，見 docs/verification/cjk-ui/quest-offer-receipt.json。舊的 ASK: 快捷 token 只供腳本。本項還缺空問句、退格及真實鍵盤焦點的 GUI 畫格驗收；不能把觀察位置起跑當作從標題自然抵達。",
       "acceptance": "輸入框可由正常 GUI 打字、退格、送出與空問句；關鍵字可問中，畫格與英中狀態有收據。",
       "verify": {
-        "kind": "manual",
-        "note": "關鍵字正常按鍵畫格已取得，空問句、退格與真實鍵盤焦點尚需補；不可因自承消失就關閉。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/cjk-ui/town-typing-gui-receipt.json",
+          "tools/verify_town_typing_gui.sh"
+        ],
+        "pattern": "xdotool",
+        "note": "已完成，當回歸訊號：真實鍵盤驗收腳本與收據都要在。"
       },
-      "issue": 61
+      "issue": 61,
+      "status": "done",
+      "resolved": "2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。"
     },
     {
       "id": "word-2df2c-outdoor-switch",
