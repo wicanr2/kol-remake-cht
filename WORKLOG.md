@@ -6563,3 +6563,10 @@ frame-270 推翻了 remake 的版面：
   `remake-parity/shots/world/` 四張，`world` 4/4、`world-road` 10/10 通過）；09-04 後才接上的
   野外遭遇插進路徑（world-clock、world-quest，未重生）；標題選角後落點不同（10 條，未重生）。
   重跑途中重烘字型，但差異都不在中文畫面，不影響分類。#88 仍開放。
+- #8／#19：唯讀子代理逐句稽核 SPEC-005、008、010～015，回報 16 條過時；逐條以 RE-064／088／
+  092／098／108／113／115／118／124／135 與程式核對後改寫 SPEC-008、010、011，另補稽核漏掉的
+  SPEC-008 授權段 `+0x05` 舊說法。#56 由 RE-118 結案（原版 `+0x05` 恆為 0）；#52 改綁殘留的
+  攻擊致死 collapse／shatter 分支。核對時發現 RE-118 對 `sub_21E0B` 過濾條件前後矛盾，
+  登 `sub-21e0b-filter-contradiction`；`battleStep` 跳過無訊息手的迴圈理由已過時，登
+  `battle-silent-steps-inventory`。main.go、battle.go 只改註解，Go 測試通過。
+- #88 README 的 world-clock 處置改引 SPEC-011 §9 既有前例（不驗遭遇的路徑可另選種子並寫明理由）。

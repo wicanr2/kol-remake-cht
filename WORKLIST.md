@@ -174,6 +174,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：同 v01-full-battle-parity。
   核實：要人判——同 v01-full-battle-parity。這兩條應該一起收掉，或合成一條。
 
+- **battle-silent-steps-inventory** — 執行段裡沒有訊息就不停的那幾手
+  原版每一手都印一句再等鍵（sub_1B100(5)）。remake 的 battleStep 仍保留「這一手沒有訊息就直接往下走」的迴圈，當初是因為敵人那一手與攻擊訊息都還沒接；兩者現已接上，哪些手仍會落進這條迴圈還沒盤點。
+  完成條件：列出現行 Act 結果中沒有訊息的手並逐一對照原版；原版有訊息的補上，確定原版也不印的寫進 SPEC-008，最後移除或收窄這條迴圈。
+  核實：`cmd/kol/main.go`、`docs/spec/008-combat-field.md` 找得到 `哪些手會落到這裡還沒盤點|迴圈尚未盤點` 就是還沒完
+
 - **ui-details-unverified**（#64） — 五處 UI 細節還沒對拍
   程式裡自承「還沒對拍」的幾處：法術清單的標題座標與版面（`spell.go`）、戰利品畫面（`spoils.go`，要打贏一場而且擲中兩成的掉落才看得到）、選目標格的那一圈與游標樣子（`ui/battle.go` 兩處）、物品頁 `sub_153FF` 模式 8 的擺法（`ui/itempage.go`）。都是畫得出來但沒有與原版逐畫面比過。
   完成條件：五處各有一份逐畫面對拍收據。
@@ -236,20 +241,10 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 規格與文件
 
-- **d01-spec-stale-clauses**（#8） — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款
-  已訂正 SPEC-005 的保存／滿槽範圍、SPEC-012 的效果 7／8 與怪物徒手排除、SPEC-015 的結局觸發及保存；008 的疲勞／時間／逃走順序、010 的物品與施法、011 的治療、014 的物品來源與升階已部分訂正；013 的環索引、同環續查與「原版亂數不可固定」舊限制已訂正。剩餘未知與差異仍續查。
-  完成條件：七份規格裡沒有已被推翻的禁作條款，舊證據索引保留。
-  核實：要人判——「還有沒有過期條款」要逐句讀才知道，硬綁 pattern 會誤判。與 spec-backfill-stale-clauses 是同一件事的兩次登記。
-
 - **armour-durability-ai-review**（#18） — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE
   耐久子常式九組邊界已重驗；護甲分支映射、骰數與耐久呼叫由 IDA 確認；加值 256 種輸入通過；SPEC-017 升 READY 並接近戰／射擊；84 組記錄、部位與骰值比較通過；破損與 Condition／Record／Carried 已接勝利與撤退回寫。攻擊結算／破損顯示、完整保存、武器超上限與四個其他磨損呼叫仍待驗收。
   完成條件：四個磨損呼叫各自有證據，破損顯示與保存驗過，競技場地形的窄 RE 完成。
   核實：要人判——「四個其他磨損呼叫」要逐支查。接上時會多出四個呼叫點，到時改成 json_len 綁磨損呼叫清單。
-
-- **spec-backfill-stale-clauses**（#19） — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況
-  與 d01-spec-stale-clauses 是同一件事的兩次登記（一次在現行缺口表、一次在修復項表）。原則：不把「已有程式」自動升成 READY／CONFORMED。
-  完成條件：六份規格的現況與歷史訂正鏈都在，沒有已被推翻的禁作條款。
-  核實：要人判——同 d01。這兩條應該一起收掉。
 
 - **package-boundaries-and-injection**（#29） — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案
   internal/ 已分成 21 個套件，四處已有 Rand interface（title、world、charcreate、battle），存檔 schema 已到 v2。缺的是把邊界與固定 timestep 寫成文件契約——現在只在程式裡成立，沒有一份說得出「哪一層不准依賴哪一層」。
@@ -261,20 +256,20 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **attack-message-chain-index**（#52） — 攻擊那一手的訊息鏈索引規則
-  0x140／0x141／0x143／0x144 起那一串的索引規則還沒解完（RE-086／RE-087）。SPEC-008 的未解清單也列著同一項。
-  完成條件：索引規則解出並接上，攻擊訊息與原版一致。
-  核實：`cmd/kol/main.go`、`docs/spec/008-combat-field.md` 找得到 `攻擊那一手的訊息鏈還沒解完|攻擊的訊息鏈也還沒解完` 就是還沒完
+- **attack-message-chain-index**（#52） — 攻擊致死的 collapse／shatter 分支
+  攻擊訊息索引規則已由 RE-088 解出並接上（SPEC-008 第 6 節）。殘留的是倒下那一句：原版依 `sub_22229` 分出 0x14C「collapse」、依怪物記錄 +0x10 bit 7 分出 0x14E「shatter into pieces!」，remake 的 `DamageLine` 一律走 die。bit 7 已抽成 `Monster.Shatters`；`sub_22229` 在這個分支的語意要先確認。
+  完成條件：兩條分支依 RE 證據接上，並有 collapse 與 shatter 各一次的訊息收據；或證明原版現行資料下走不到。
+  核實：`internal/battle/message.go`、`docs/spec/008-combat-field.md` 找得到 `那兩個條件的語意還沒定|攻擊致死這兩條分支尚未接上` 就是還沒完
 
 - **sub-26c5f-damage-line**（#53） — 那一句的數字要 sub_26C5F(0x17) 才算得出來
   該常式還沒解讀，所以那一句寧可不報也不報錯的數字。
   完成條件：sub_26C5F 解出，那一句的數字報得出來。
   核實：`cmd/kol/main.go` 找得到 `那一支還沒解讀，寧可不報` 就是還沒完
 
-- **actor-record-05-ability**（#56） — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力
-  `sub_21FCD` 依裝備賦予的四格之三各自是什麼還沒解（RE-081）。賦予 +0x05 的那條路（哪一件裝備、哪一個位元）也還沒解，所以 remake 這一格一律是 0，等於沒有人免疫。SPEC-008 的未解清單列著同一項。
-  完成條件：那條路解出並接上，或確認原版在現行內容下也恆為 0。
-  核實：`internal/battle/battle.go`、`docs/spec/008-combat-field.md` 找得到 `依裝備賦予的四格之三|哪一件裝備、哪一個位元|遮罩 0x10 要的` 就是還沒完
+- **sub-21e0b-filter-contradiction** — sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值
+  RE-118 記下「種類 byte 大於 0x7F 才算有東西」，又說種類 byte 為 0 的 Fur Boots、Fur Cape、Leather Cape 走 kind 0 （設 +0x04，+0x03 為 0 就設 1）。兩句互相矛盾。若斗篷或靴子確實會設 +0x03，移動方式選單的門檻（commands.go）會變；remake 目前不設 Flag03。
+  完成條件：回 IDA 重讀 sub_21E0B 的過濾分支並改正 RE-118；依結論接上或確認 Flag03 在現行資料下恆為 0，同步 SPEC-008。
+  核實：`internal/battle/battle.go`、`docs/spec/008-combat-field.md`、`docs/spec/010-combat-commands.md` 找得到 `還要回 IDA 重讀|要回 IDA 重讀|參戰者記錄 \+0x03 的完整語意` 就是還沒完
 
 - **move-unlock-tile-reason**（#57） — 磚塊 0x0C 為什麼解鎖後三個移動方式
   `MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。
@@ -380,8 +375,10 @@ tools/run_python_tool.sh tools/worklist.py verify
 ### 本輪核實為已完成（原本掛在未完成清單上）
 
 - **g01-cjk-sheet-pages** — G01：繁中資料頁與 MIRROR／物品／隊伍／法術／任務入口：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
+- **d01-spec-stale-clauses** — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款：已完成
 - **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊：2026-09-26 v.0.2.5 AppImage 真實按鍵：建兩名、各自入隊、住宿離隊後重載各自再選進旅店、刪除不搬槽、空槽重用與滿槽拒絕皆通過；兩種預設存檔位置另通過。收據 docs/verification/identity-save-chain/receipt.json。
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
+- **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
@@ -391,6 +388,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
+- **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。

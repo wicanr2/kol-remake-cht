@@ -124,13 +124,20 @@
       "id": "d01-spec-stale-clauses",
       "layer": "spec",
       "title": "D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款",
-      "body": "已訂正 SPEC-005 的保存／滿槽範圍、SPEC-012 的效果 7／8 與怪物徒手排除、SPEC-015 的結局觸發及保存；008 的疲勞／時間／逃走順序、010 的物品與施法、011 的治療、014 的物品來源與升階已部分訂正；013 的環索引、同環續查與「原版亂數不可固定」舊限制已訂正。剩餘未知與差異仍續查。",
+      "body": "2026-09-26 對 SPEC-005、008、010～015 逐句稽核一輪：16 條過時條款（008 十條、010 五條、011 一條）逐條以 RE-064／088／092／098／108／113／115／118／124／135 與程式核對後改寫；其餘 16 條未決項確認仍成立，其中 8 條已有自己的工作項（#33、#57、#58、#63、#67、#70、#71、#72）。不把「已有程式」升成 READY／CONFORMED。",
       "acceptance": "七份規格裡沒有已被推翻的禁作條款，舊證據索引保留。",
       "verify": {
-        "kind": "manual",
-        "note": "「還有沒有過期條款」要逐句讀才知道，硬綁 pattern 會誤判。與 spec-backfill-stale-clauses 是同一件事的兩次登記。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/spec/008-combat-field.md",
+          "docs/spec/010-combat-commands.md",
+          "docs/spec/011-wilderness-ambush.md"
+        ],
+        "pattern": "RE-118|RE-113|RE-098",
+        "note": "已完成，當回歸訊號：三份規格引用關閉舊條款的 RE 編號。"
       },
-      "issue": 8
+      "issue": 8,
+      "status": "done"
     },
     {
       "id": "battle-normal-seed-alignment",
@@ -271,13 +278,20 @@
       "id": "spec-backfill-stale-clauses",
       "layer": "spec",
       "title": "回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況",
-      "body": "與 d01-spec-stale-clauses 是同一件事的兩次登記（一次在現行缺口表、一次在修復項表）。原則：不把「已有程式」自動升成 READY／CONFORMED。",
+      "body": "2026-09-26 對 SPEC-005、008、010～015 逐句稽核一輪：16 條過時條款（008 十條、010 五條、011 一條）逐條以 RE-064／088／092／098／108／113／115／118／124／135 與程式核對後改寫；其餘 16 條未決項確認仍成立，其中 8 條已有自己的工作項（#33、#57、#58、#63、#67、#70、#71、#72）。不把「已有程式」升成 READY／CONFORMED。",
       "acceptance": "六份規格的現況與歷史訂正鏈都在，沒有已被推翻的禁作條款。",
       "verify": {
-        "kind": "manual",
-        "note": "同 d01。這兩條應該一起收掉。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/spec/008-combat-field.md",
+          "docs/spec/010-combat-commands.md",
+          "docs/spec/011-wilderness-ambush.md"
+        ],
+        "pattern": "RE-118|RE-113|RE-098",
+        "note": "已完成，當回歸訊號：三份規格引用關閉舊條款的 RE 編號。"
       },
-      "issue": 19
+      "issue": 19,
+      "status": "done"
     },
     {
       "id": "weather-animation-and-speed",
@@ -775,17 +789,17 @@
     {
       "id": "attack-message-chain-index",
       "layer": "spec",
-      "title": "攻擊那一手的訊息鏈索引規則",
-      "body": "0x140／0x141／0x143／0x144 起那一串的索引規則還沒解完（RE-086／RE-087）。SPEC-008 的未解清單也列著同一項。",
-      "acceptance": "索引規則解出並接上，攻擊訊息與原版一致。",
+      "title": "攻擊致死的 collapse／shatter 分支",
+      "body": "攻擊訊息索引規則已由 RE-088 解出並接上（SPEC-008 第 6 節）。殘留的是倒下那一句：原版依 `sub_22229` 分出 0x14C「collapse」、依怪物記錄 +0x10 bit 7 分出 0x14E「shatter into pieces!」，remake 的 `DamageLine` 一律走 die。bit 7 已抽成 `Monster.Shatters`；`sub_22229` 在這個分支的語意要先確認。",
+      "acceptance": "兩條分支依 RE 證據接上，並有 collapse 與 shatter 各一次的訊息收據；或證明原版現行資料下走不到。",
       "verify": {
         "kind": "present",
         "paths": [
-          "cmd/kol/main.go",
+          "internal/battle/message.go",
           "docs/spec/008-combat-field.md"
         ],
-        "pattern": "攻擊那一手的訊息鏈還沒解完|攻擊的訊息鏈也還沒解完",
-        "note": "程式與 SPEC-008 各一處；解出時會一起改寫。"
+        "pattern": "那兩個條件的語意還沒定|攻擊致死這兩條分支尚未接上",
+        "note": "程式與 SPEC-008 各一處自承；接上時一起改寫。"
       },
       "issue": 52
     },
@@ -844,18 +858,52 @@
       "id": "actor-record-05-ability",
       "layer": "spec",
       "title": "參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力",
-      "body": "`sub_21FCD` 依裝備賦予的四格之三各自是什麼還沒解（RE-081）。賦予 +0x05 的那條路（哪一件裝備、哪一個位元）也還沒解，所以 remake 這一格一律是 0，等於沒有人免疫。SPEC-008 的未解清單列著同一項。",
+      "body": "RE-118 已證實：`sub_21FCD` 依四格穿戴欄（部位 3／5／7／8）種類 byte 最低兩位元設 +0x03～+0x06；原版 ITEM.LST 在那四格沒有 kind 1 的物品，+0x05 恆為 0，反制掃描遮罩 0x10 的條件在原版也恆真，remake 相同。",
       "acceptance": "那條路解出並接上，或確認原版在現行內容下也恆為 0。",
+      "verify": {
+        "kind": "required_in_all",
+        "paths": [
+          "docs/spec/008-combat-field.md",
+          "internal/battle/battle.go"
+        ],
+        "pattern": "RE-118",
+        "note": "已完成，當回歸訊號：規格與程式都引用 RE-118。"
+      },
+      "issue": 56,
+      "status": "done"
+    },
+    {
+      "id": "sub-21e0b-filter-contradiction",
+      "layer": "spec",
+      "title": "sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值",
+      "body": "RE-118 記下「種類 byte 大於 0x7F 才算有東西」，又說種類 byte 為 0 的 Fur Boots、Fur Cape、Leather Cape 走 kind 0 （設 +0x04，+0x03 為 0 就設 1）。兩句互相矛盾。若斗篷或靴子確實會設 +0x03，移動方式選單的門檻（commands.go）會變；remake 目前不設 Flag03。",
+      "acceptance": "回 IDA 重讀 sub_21E0B 的過濾分支並改正 RE-118；依結論接上或確認 Flag03 在現行資料下恆為 0，同步 SPEC-008。",
       "verify": {
         "kind": "present",
         "paths": [
           "internal/battle/battle.go",
+          "docs/spec/008-combat-field.md",
+          "docs/spec/010-combat-commands.md"
+        ],
+        "pattern": "還要回 IDA 重讀|要回 IDA 重讀|參戰者記錄 \\+0x03 的完整語意",
+        "note": "程式與規格的自承；查清時一起改寫。"
+      }
+    },
+    {
+      "id": "battle-silent-steps-inventory",
+      "layer": "verification",
+      "title": "執行段裡沒有訊息就不停的那幾手",
+      "body": "原版每一手都印一句再等鍵（sub_1B100(5)）。remake 的 battleStep 仍保留「這一手沒有訊息就直接往下走」的迴圈，當初是因為敵人那一手與攻擊訊息都還沒接；兩者現已接上，哪些手仍會落進這條迴圈還沒盤點。",
+      "acceptance": "列出現行 Act 結果中沒有訊息的手並逐一對照原版；原版有訊息的補上，確定原版也不印的寫進 SPEC-008，最後移除或收窄這條迴圈。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/main.go",
           "docs/spec/008-combat-field.md"
         ],
-        "pattern": "依裝備賦予的四格之三|哪一件裝備、哪一個位元|遮罩 0x10 要的",
-        "note": "程式兩處自承加 SPEC-008 的反制掃描條件；解出時會一起改寫。"
-      },
-      "issue": 56
+        "pattern": "哪些手會落到這裡還沒盤點|迴圈尚未盤點",
+        "note": "程式與規格的自承；盤點完一起改寫。"
+      }
     },
     {
       "id": "move-unlock-tile-reason",

@@ -1970,9 +1970,6 @@ func (g *game) battleRecord(record int) string {
 	return town.UIRaw(g.quest.bank, g.quest.trans, town.BankUI, record)
 }
 
-// battleStep 做出執行段的下一手，並把那一句訊息展開、斷行放進畫面
-// （RE-086／RE-087）。攻擊那一手的訊息鏈還沒解完（0x140／0x141／0x143 起那一串
-// 的索引規則），所以只有結算，沒有訊息。
 // battleAreaLine 是挑完部位之後那一句效果（`0x287E4`，RE-100）。問句本身已經印過，
 // 這裡直接換成效果那一句。
 func (g *game) battleAreaLine(s *battle.State, res battle.CastResult, caster int) {
@@ -1983,6 +1980,8 @@ func (g *game) battleAreaLine(s *battle.State, res battle.CastResult, caster int
 		g.battleRecords(before) + " " + g.battleRecords(after)))
 }
 
+// battleStep 做出執行段的下一手，並把那一句訊息展開、斷行放進畫面
+// （RE-086／RE-087；攻擊那一串的索引規則見 RE-088）。
 func (g *game) battleStep() {
 	if g.quest == nil || g.quest.state == nil {
 		return
@@ -2038,8 +2037,8 @@ func (g *game) battleStep() {
 		g.quest.state = nil
 		return
 	}
-	// 沒有訊息的那幾手不停下來等鍵：敵人那一手還沒實作（RE-081），
-	// 停在空白畫面只會讓人以為當掉了。
+	// 沒有訊息的那幾手不停下來等鍵，停在空白畫面只會讓人以為當掉了。原版每一手
+	// 都印一句（SPEC-008「已知差異」），哪些手會落到這裡還沒盤點。
 	var r battle.ActResult
 	for {
 		var ok bool
