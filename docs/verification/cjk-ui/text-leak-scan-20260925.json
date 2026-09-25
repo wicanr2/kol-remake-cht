@@ -1,0 +1,209 @@
+{
+ "schema": "kol-cjk-text-leak-scan-v1",
+ "date": "2026-09-25",
+ "git_head": "f6faa44",
+ "tool": "tools/scan_cjk_text_leaks.py",
+ "tool_sha256": "ca7fa16ecf773671ced1d219830f7ad653c848d594497ae42ed983615cb65726",
+ "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+ "inputs_sha256": {
+  "docs/i18n/ui-zh-Hant.json": "c89f76686e99b41ab81b872445808809ff2e6a054c3268c4ceece7012e253128",
+  "docs/i18n/town-zh-Hant.json": "4b98632e3eb2f0d254b9ebed27a1b9d5dc4c92e43b5cf4054a5dc3b0b38e0a1d",
+  "docs/i18n/display-names-zh-Hant.tsv": "49bef4ee86a9afee639dba0574c13ad7e126e9f1fc227f2c2a904d151b79f1cc",
+  "docs/i18n/spell-words-zh-Hant.json": "882542c615909a975b34fc7287e74d2230952d515c136294c3ac52ed34c08bd0",
+  "assets/ui-font/manifest.json": "4a1df3d7697f361aa301cc15c1fbdb7c94e24368f162588734a5f5a17fccd3f8"
+ },
+ "scope": "中文模式重播 docs/verification/player-path 的 23 條計畫與 docs/verification/battle-*/replay.spec 的 9 行；只記錄字模繪製的字串",
+ "plans_logged": [
+  "arena",
+  "battle-ambush-0",
+  "battle-flee-0",
+  "battle-missile-0",
+  "battle-pickup-0",
+  "battle-pickup-1",
+  "battle-rideaway-0",
+  "battle-rideaway-1",
+  "battle-spell-0",
+  "battle-spoils-0",
+  "flow-quest",
+  "full",
+  "full-chain",
+  "full-chain-ending",
+  "full-chain-reload",
+  "quest-list",
+  "quest-take",
+  "town",
+  "town-edge",
+  "town-leave",
+  "town-load",
+  "town-mirror",
+  "town-recruit",
+  "town-rest",
+  "town-round-trip",
+  "town-scroll",
+  "town-shop",
+  "town-stable",
+  "town-talk",
+  "town-train",
+  "world-clock",
+  "world-healer",
+  "world-quest",
+  "world-road"
+ ],
+ "failed_replays": {
+  "lines": [
+   "battle-flee-0",
+   "battle-rideaway-1",
+   "battle-spoils-0"
+  ],
+  "reason": "既有 replay.spec 在野外送 SPACE，現行輸入不接受；與語言無關，屬過期腳本"
+ },
+ "latin_strings": [
+  {
+   "font": "zh-hant-16",
+   "text": "E（4）",
+   "plans": [
+    "town-stable"
+   ],
+   "class": "移動率等級字母（使用者決定保留並補數值）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Kelnalon",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Kelnalyr",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Keltwelon",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Keltwelyr",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Poontang 丟下了 他的長矛！",
+   "plans": [
+    "battle-pickup-0",
+    "battle-pickup-1"
+   ],
+   "class": "句中僅玩家名或法術名為拉丁字母"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "TYATWELON",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Tyanalon",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Tyanalyr",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Tyatwelon",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Tyatwelyr",
+   "plans": [
+    "town-scroll"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "U（20）",
+   "plans": [
+    "town-load",
+    "town-mirror",
+    "town-scroll"
+   ],
+   "class": "移動率等級字母（使用者決定保留並補數值）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Vartwelyrmi",
+   "plans": [
+    "battle-spell-0"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Vartwelyrmi：",
+   "plans": [
+    "battle-spell-0"
+   ],
+   "class": "精靈語法術名（SPEC-034 保留原文加注解）"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Warder 丟下了 他的精靈弓！",
+   "plans": [
+    "battle-spell-0"
+   ],
+   "class": "句中僅玩家名或法術名為拉丁字母"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Warder 對 Warder施放Vartwelyrmi。",
+   "plans": [
+    "battle-spell-0"
+   ],
+   "class": "句中僅玩家名或法術名為拉丁字母"
+  },
+  {
+   "font": "zh-hant-16",
+   "text": "Warder射出一發，但那裡什麼也沒有！",
+   "plans": [
+    "battle-missile-0"
+   ],
+   "class": "句中僅玩家名或法術名為拉丁字母"
+  }
+ ],
+ "player_name_only": 21,
+ "limits": [
+  "畫在原版圖片裡的英文不在紀錄中",
+  "有畫但看不見（例如黑底黑字）要看畫格",
+  "腳本沒走到的分支未涵蓋",
+  "不證明原版同狀態"
+ ],
+ "rights": "只含重製版字串與譯文，private repo 可保存"
+}
