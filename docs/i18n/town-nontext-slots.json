@@ -1,0 +1,637 @@
+{
+ "schema": "kol-town-nontext-slots-v1",
+ "updated": "2026-09-25",
+ "evidence": "docs/re/RESEARCH-LOG.md RE-140",
+ "rule": "建築 payload 以 DGROUP:0x1CF4 為緩衝，訊息 n 位於 0x80 + n*0x40；同一段位移在馬廄、商店與任務建築另有資料用途。列在這裡的槽位經 RE-140 判定不會以文字顯示給玩家，不列入繁中覆蓋母體；原文變動時檢查器會失敗。",
+ "slots": [
+  {
+   "town": 1,
+   "door": 8,
+   "index": 2,
+   "building": "Holcroft Stables",
+   "payload_range": "0x100..0x13F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 1,
+   "door": 8,
+   "index": 3,
+   "building": "Holcroft Stables",
+   "payload_range": "0x140..0x17F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 1,
+   "door": 8,
+   "index": 4,
+   "building": "Holcroft Stables",
+   "payload_range": "0x180..0x1BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 1,
+   "door": 8,
+   "index": 5,
+   "building": "Holcroft Stables",
+   "payload_range": "0x1C0..0x1FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 1,
+   "door": 8,
+   "index": 6,
+   "building": "Holcroft Stables",
+   "payload_range": "0x200..0x23F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " p",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 1,
+   "door": 8,
+   "index": 7,
+   "building": "Holcroft Stables",
+   "payload_range": "0x240..0x27F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 1,
+   "door": 8,
+   "index": 8,
+   "building": "Holcroft Stables",
+   "payload_range": "0x280..0x2BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " pa",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 1,
+   "door": 8,
+   "index": 9,
+   "building": "Holcroft Stables",
+   "payload_range": "0x2C0..0x2FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 2,
+   "building": "Fallerton Stables",
+   "payload_range": "0x100..0x13F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 3,
+   "building": "Fallerton Stables",
+   "payload_range": "0x140..0x17F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 4,
+   "building": "Fallerton Stables",
+   "payload_range": "0x180..0x1BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 5,
+   "building": "Fallerton Stables",
+   "payload_range": "0x1C0..0x1FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 6,
+   "building": "Fallerton Stables",
+   "payload_range": "0x200..0x23F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " p",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 7,
+   "building": "Fallerton Stables",
+   "payload_range": "0x240..0x27F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 8,
+   "building": "Fallerton Stables",
+   "payload_range": "0x280..0x2BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " pa",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 3,
+   "door": 6,
+   "index": 9,
+   "building": "Fallerton Stables",
+   "payload_range": "0x2C0..0x2FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 2,
+   "building": "Ma's Stables",
+   "payload_range": "0x100..0x13F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 3,
+   "building": "Ma's Stables",
+   "payload_range": "0x140..0x17F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 4,
+   "building": "Ma's Stables",
+   "payload_range": "0x180..0x1BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 5,
+   "building": "Ma's Stables",
+   "payload_range": "0x1C0..0x1FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 6,
+   "building": "Ma's Stables",
+   "payload_range": "0x200..0x23F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " p",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 7,
+   "building": "Ma's Stables",
+   "payload_range": "0x240..0x27F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 8,
+   "building": "Ma's Stables",
+   "payload_range": "0x280..0x2BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " pa",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 0,
+   "index": 9,
+   "building": "Ma's Stables",
+   "payload_range": "0x2C0..0x2FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 4,
+   "door": 9,
+   "index": 8,
+   "building": "The River Watchhouse",
+   "payload_range": "0x280..0x2BF",
+   "class": "quest-text-without-reader",
+   "evidence_level": "強推論",
+   "reason": "可辨識的任務敘述續文，止於 0x2DF（0x2E0 起是任務物品記錄）。sub_14234 的 25 個直接呼叫與 sub_1B94F 的 31 個呼叫點都沒有讀到 payload 0x280..0x2DF。",
+   "source_display": [
+    "sorcerer turned the king",
+    "and his guards into",
+    "ghouls, and that they're",
+    "hauntin' the place."
+   ]
+  },
+  {
+   "town": 4,
+   "door": 9,
+   "index": 9,
+   "building": "The River Watchhouse",
+   "payload_range": "0x2C0..0x2FF",
+   "class": "quest-text-without-reader",
+   "evidence_level": "強推論",
+   "reason": "可辨識的任務敘述續文，止於 0x2DF（0x2E0 起是任務物品記錄）。sub_14234 的 25 個直接呼叫與 sub_1B94F 的 31 個呼叫點都沒有讀到 payload 0x280..0x2DF。",
+   "source_display": [
+    "Bring back the king's",
+    "crown and we'll bury it"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 2,
+   "building": "Livery Stable",
+   "payload_range": "0x100..0x13F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 3,
+   "building": "Livery Stable",
+   "payload_range": "0x140..0x17F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 4,
+   "building": "Livery Stable",
+   "payload_range": "0x180..0x1BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 5,
+   "building": "Livery Stable",
+   "payload_range": "0x1C0..0x1FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 6,
+   "building": "Livery Stable",
+   "payload_range": "0x200..0x23F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " p",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 7,
+   "building": "Livery Stable",
+   "payload_range": "0x240..0x27F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 8,
+   "building": "Livery Stable",
+   "payload_range": "0x280..0x2BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " pa",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 6,
+   "index": 9,
+   "building": "Livery Stable",
+   "payload_range": "0x2C0..0x2FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 5,
+   "door": 9,
+   "index": 8,
+   "building": "Journeys' End Stores",
+   "payload_range": "0x280..0x2BF",
+   "class": "shop-residual-data",
+   "evidence_level": "強推論",
+   "reason": "商品表在 0x280 以首 byte 0 結束（sub_11A93:0x12D17 迴圈），其後位元組與馬廄坐騎記錄同型；沒有文字讀取點。",
+   "source_display": [
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 3,
+   "index": 8,
+   "building": "The Gatehouse",
+   "payload_range": "0x280..0x2BF",
+   "class": "quest-text-without-reader",
+   "evidence_level": "強推論",
+   "reason": "可辨識的任務敘述續文，止於 0x2DF（0x2E0 起是任務物品記錄）。sub_14234 的 25 個直接呼叫與 sub_1B94F 的 31 個呼叫點都沒有讀到 payload 0x280..0x2DF。",
+   "source_display": [
+    "the mountains and down",
+    "to the coast.  Find that",
+    "path and recover",
+    "Belinda's most prized"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 3,
+   "index": 9,
+   "building": "The Gatehouse",
+   "payload_range": "0x2C0..0x2FF",
+   "class": "quest-text-without-reader",
+   "evidence_level": "強推論",
+   "reason": "可辨識的任務敘述續文，止於 0x2DF（0x2E0 起是任務物品記錄）。sub_14234 的 25 個直接呼叫與 sub_1B94F 的 31 個呼叫點都沒有讀到 payload 0x280..0x2DF。",
+   "source_display": [
+    "posession and you will",
+    "win the favor of our"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 2,
+   "building": "Bophets Steeds",
+   "payload_range": "0x100..0x13F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 3,
+   "building": "Bophets Steeds",
+   "payload_range": "0x140..0x17F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 4,
+   "building": "Bophets Steeds",
+   "payload_range": "0x180..0x1BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 5,
+   "building": "Bophets Steeds",
+   "payload_range": "0x1C0..0x1FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 6,
+   "building": "Bophets Steeds",
+   "payload_range": "0x200..0x23F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " p",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 7,
+   "building": "Bophets Steeds",
+   "payload_range": "0x240..0x27F",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 8,
+   "building": "Bophets Steeds",
+   "payload_range": "0x280..0x2BF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    " pa",
+    "pbahg",
+    "xwfhycd"
+   ]
+  },
+  {
+   "town": 6,
+   "door": 6,
+   "index": 9,
+   "building": "Bophets Steeds",
+   "payload_range": "0x2C0..0x2FF",
+   "class": "stable-steed-record",
+   "evidence_level": "已證實",
+   "reason": "馬廄 payload 0x100..0x2FF 是四筆 0x80 byte 的坐騎記錄（RE-119）；這段位移屬坐騎資料，不是訊息文字。",
+   "source_display": [
+    "p"
+   ]
+  }
+ ]
+}

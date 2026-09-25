@@ -10,16 +10,17 @@ GitHub Issue 狀態與本地 Markdown；README 截圖仍留待整體驗收完成
 這一新閘門尚未完成，先前的候選包不可改稱全中文或完整原版一致。
 目前狀態表與逐項缺口見
 [手冊功能與繁中收尾稽核](docs/verification/manual-fidelity-audit-20260923.md)。
-遠端 Issue #86、#90 已依局部版面收據關閉；#92 追蹤 45 個未譯來源槽位，
+遠端 Issue #86、#90 已依局部版面收據關閉；#92 的 45 個來源槽位已由 RE-140 在本地結案（遠端未關閉），
 #93 追蹤任務交付的原版同狀態與自然玩家鏈。#14、#33、#34、#35、#39、
-#61、#88 仍開放；`docs/worklist.json` 目前為 72 項未完成、20 項已完成（#45 本機包重建於 2026-09-25 完成，遠端 Issue 尚未關閉）。
+#61、#88 仍開放；`docs/worklist.json` 目前為 71 項未完成、21 項已完成（#45、#92 已於 2026-09-25 在本地完成，遠端 Issue 尚未關閉）。
 
 - 本輪以原始城鎮資料為母體，新增 `tools/verify_runtime_translation.py`；建角表
   99 筆建角／共用 UI 字串均有中文，六個精靈部族名改用術語表暫譯。城鎮 2,121 則非空後續訊息
-  已譯 2,076 則，先前補入 138 則任務文字。餘 45 則是馬廄亂碼或來源殘句。
-  RE-139 的 IDA 9.4 直接呼叫審查將其中 30 則 2–7 號訊息定位為受任務旗標阻擋，
-  15 則 8–9 號訊息找不到直接繪製呼叫；間接讀取尚未排除，嚴格檢查仍失敗 45 筆，
-  不猜補內容。
+  已譯 2,076 則，先前補入 138 則任務文字。餘 45 則經 RE-140 判定：訊息槽位與
+  建築 payload（`DGROUP:0x1CF4`）共用位移，40 則其實是馬廄坐騎記錄（已證實），
+  1 則是商品表後的殘留資料、4 則是找不到讀取點的任務續文（強推論）。依使用者
+  選定處置不翻譯，列入 `docs/i18n/town-nontext-slots.json` 並綁原文快照；嚴格
+  來源檢查現為 0 缺譯。這不代表程式動態字串或全部畫面已中文化。
 - RE-139 也推翻舊「交付任務物品時沒有台詞」的結論：原版在初次 SPACE 後只交換
   第一件物品並顯示訊息 6／7，下一次 SPACE 才替所有完成該任務的隊員回報。
   SPEC-014 已補 READY 規格並修正重製版狀態機；鎮長宅邸觀察存檔的中英
@@ -121,9 +122,9 @@ Issue #91「物品頁選中之後的明細畫面與原版不同」已完成。SP
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **72 條未完成**（33 條沒有機器訊號、標 `manual`），
-  另有 20 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`present` 36、`manual` 33、`absent` 2、`required_in_all` 1。
+- 目前 **71 條未完成**（33 條沒有機器訊號、標 `manual`），
+  另有 21 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`present` 35、`manual` 33、`absent` 2、`required_in_all` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
   （base 為 `origin/main`，`5f9a9a1`，已推送到 `origin/kol-oracle`）。舊的 `kol-force-call` 已刪除——它的 commit
