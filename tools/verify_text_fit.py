@@ -69,6 +69,8 @@ def main() -> int:
                    help="城鎮建築譯文表（可重複）；檢查標題框與對話框的行寬與行數")
     p.add_argument("--display-names", help="怪物、裝備與商品的顯示譯名 TSV")
     p.add_argument("--out", required=True)
+    p.add_argument("--overflow-policy", default="docs/i18n/overflow-policy.json",
+                   help="每種欄位的溢出原則；未登記的欄位種類算失敗")
     args = p.parse_args()
 
     layout_doc = json.loads(pathlib.Path(args.layout).read_text())
@@ -403,12 +405,22 @@ def main() -> int:
     bottom = 0
 
 
+    # 每種欄位都要先登記溢出原則（docs/i18n/overflow-policy.json）；新增欄位漏登記就失敗。
+    policy = json.loads(pathlib.Path(args.overflow_policy).read_text())["kinds"]
+    unregistered = sorted({c["kind"] for c in checks if c["kind"] not in policy})
+    for c in checks:
+        if c["kind"] in policy:
+            c["overflow_policy"] = policy[c["kind"]]["policy"]
     failed = [c for c in checks if not c["pass"]]
+    for kind in unregistered:
+        failed.append({"kind": kind, "pass": False, "reason": "欄位種類沒有登記溢出原則"})
     receipt = {"schema": "kol-cjk-text-fit-v1",
                "tool": "tools/verify_text_fit.py",
                "layout": args.layout, "font": args.font, "strings": args.strings,
                "checked": len(checks), "failed": len(failed),
                "criterion": "每個字元都要有字模，且字串右緣不得超出所屬的文字安全矩形",
+               "overflow_policy": args.overflow_policy,
+               "unregistered_kinds": unregistered,
                "failures": failed, "checks": checks}
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)

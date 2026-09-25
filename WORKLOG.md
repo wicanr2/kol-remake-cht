@@ -6551,3 +6551,10 @@ frame-270 推翻了 remake 的版面：
   v.0.2.5 AppImage 真實按鍵連同既有建角、入隊、刪除、空槽重用、滿槽拒絕全數通過，
   兩種預設存檔位置亦過。同日第一次執行在建角後因視窗偵測偶發失敗而靜默結束，
   相同輸入重跑兩次皆通過；腳本補上失敗訊息。收據 `docs/verification/identity-save-chain/`。
+- #39：`docs/i18n/overflow-policy.json` 為 22 種 CJK 欄位登記 overflow policy
+  （拒絕、拒絕並執行期裁切、拒絕多列），`verify_text_fit.py` 對未登記欄位判失敗；
+  9,557 項 0 失敗，移除一種欄位的負例失敗。新增 `verify_glossary_consistency.py`
+  以術語表核准／暫譯詞對照資料譯名、建角字串與文字庫：201 詞、105 處比對、0 衝突，
+  語境不同的 8 處登在 `glossary-exceptions.json`，假例外負例失敗。依術語表改
+  懸崖巨魔、岩石食人魔、勳章／黃銅勳章、精靈族／矮人族、遠望者；字模重烘為 2,559 字。
+- 新登 `target-mode-icon-bar-mouse`：選目標格時圖示列的滑鼠行為原版未查，只收鍵盤。

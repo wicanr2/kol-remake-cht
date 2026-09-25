@@ -1,0 +1,14 @@
+{
+ "schema": "kol-glossary-exceptions-v1",
+ "note": "同一個英文字在遊戲裡是另一個意思時，不套術語表譯法。每筆寫明語境；tools/verify_glossary_consistency.py 遇到清單外的不一致、或清單列了卻已不存在的項目都會失敗。",
+ "exceptions": {
+  "display-names:monster-item.07": "Fire 是怪物的噴火攻擊（火焰），術語表的 FIRE 是射擊指令",
+  "display-names:magic-class.0": "None 是法術類別「無」，術語表的 NONE 是攻防選項「不攻擊／不防禦」",
+  "ui:KOLDATA:222": "ROAD 是野外地形名「道路」（與 221 HILL「丘陵」同組），術語表的 ROAD 是移動圖示",
+  "ui:KOLDATA:389": "heal 只是「要治療哪個部位」那句話的片段",
+  "ui:BOOKDATA:65": "MASTER 在 BOOKDATA 64（A4）與 66（製作名單）之間，指主磁碟，不是社會階級 Master",
+  "newchar:professions:HUNTRESS": "術語表列的是全名 Olanthan Huntress；遊戲職業欄只寫 Huntress",
+  "ui:KOLDATA:20": "同上：職業名 Huntress",
+  "ui:BOOKDATA:35": "同上：職業名 HUNTRESS"
+ }
+}

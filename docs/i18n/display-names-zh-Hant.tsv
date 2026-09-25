@@ -8,7 +8,7 @@ monster.05	ETTIN	雙頭巨人	暫譯	monsters.json:5
 monster.06	OGRE	食人魔	暫譯	monsters.json:6
 monster.07	GOBLIN	哥布林	暫譯	monsters.json:7
 monster.08	HILL GIANT	丘陵巨人	暫譯	monsters.json:8
-monster.09	CLIFF TROLL	崖地巨魔	暫譯	monsters.json:9
+monster.09	CLIFF TROLL	懸崖巨魔	暫譯	monsters.json:9
 monster.10	HOBGOBLIN	大哥布林	暫譯	monsters.json:10
 monster.11	GREAT ORC	巨型獸人	暫譯	monsters.json:11
 monster.12	WALBAR	瓦爾巴	暫譯	monsters.json:12
@@ -25,7 +25,7 @@ monster.22	ZOMBIE	殭屍	暫譯	monsters.json:22
 monster.23	GHOUL	食屍鬼	暫譯	monsters.json:23
 monster.24	SYLPH	風精	暫譯	monsters.json:24
 monster.25	DJINN	燈神	暫譯	monsters.json:25
-monster.26	STONE OGRE	石食人魔	暫譯	monsters.json:26
+monster.26	STONE OGRE	岩石食人魔	暫譯	monsters.json:26
 monster.27	SLEDGE	斯萊吉	暫譯	monsters.json:27
 monster.28	BRIGAND	強盜	暫譯	monsters.json:28
 monster.29	BANDIT	盜匪	暫譯	monsters.json:29
@@ -175,7 +175,7 @@ shop-good.023	Brandy	白蘭地	暫譯	town-buildings.json:T4D3G6
 shop-good.024	Brass Bowl	黃銅碗	暫譯	town-buildings.json:T5D9G17
 shop-good.025	Brass Buckle	黃銅扣	暫譯	town-buildings.json:T2D3G27
 shop-good.026	Brass Goblet	黃銅高腳杯	暫譯	town-buildings.json:T2D7G10
-shop-good.027	Brass Medal	黃銅獎章	暫譯	town-buildings.json:T4D1G16
+shop-good.027	Brass Medal	黃銅勳章	暫譯	town-buildings.json:T4D1G16
 shop-good.028	Breaded Fish	裹粉魚排	暫譯	town-buildings.json:T1D3G2
 shop-good.029	Briar Pipe	石楠木菸斗	暫譯	town-buildings.json:T2D13G0
 shop-good.030	Brigandine L	布里甘丁護腿	暫譯	town-buildings.json:T1D9G20
@@ -272,7 +272,7 @@ shop-good.120	Matches	火柴	暫譯	town-buildings.json:T2D13G8
 shop-good.121	Mavaldak	馬瓦爾達克	暫譯	town-buildings.json:T7D13G2
 shop-good.122	Meat Pie	肉派	暫譯	town-buildings.json:T3D0G10
 shop-good.123	Med Warhorse	中型戰馬	暫譯	town-buildings.json:T1D8G2
-shop-good.124	Medal	獎章	暫譯	town-buildings.json:T2D3G22
+shop-good.124	Medal	勳章	暫譯	town-buildings.json:T2D3G22
 shop-good.125	Medallion	紀念章	暫譯	town-buildings.json:T2D3G21
 shop-good.126	Metal Mirror	金屬鏡	暫譯	town-buildings.json:T5D7G5
 shop-good.127	Minced Beef	牛絞肉	暫譯	town-buildings.json:T1D3G7
@@ -509,8 +509,8 @@ order-title.7.17	Illusionist	幻術師	暫譯	town-buildings.json:town 7 door 17
 magic-sub.5.04	SALAMANDAR	火蜥蜴	暫譯	magic.json:subclass[5][4]（原版拼法，同 monster.20）
 magic-class.0	None	無	暫譯	magic.json:class[0]；中文同說明書第 7 章種族表
 magic-class.1	Human	人類	暫譯	magic.json:class[1]；中文同說明書第 7 章種族表
-magic-class.2	Elven	精靈	暫譯	magic.json:class[2]；中文同說明書第 7 章種族表
-magic-class.3	Dwarven	矮人	暫譯	magic.json:class[3]；中文同說明書第 7 章種族表
+magic-class.2	Elven	精靈族	暫譯	magic.json:class[2]；中文同說明書第 7 章種族表
+magic-class.3	Dwarven	矮人族	暫譯	magic.json:class[3]；中文同說明書第 7 章種族表
 magic-class.4	Kelden	凱爾登	暫譯	magic.json:class[4]；中文同說明書第 7 章種族表
 magic-class.5	Elemental	元素生物	暫譯	magic.json:class[5]；中文同說明書第 7 章種族表
 magic-class.6	Giant	巨人族	暫譯	magic.json:class[6]；中文同說明書第 7 章種族表

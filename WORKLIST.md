@@ -86,11 +86,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：三種畫面的中文都上得去且不溢出，職業名譯法定案。
   核實：要人判——要人判：靜態譯表與文字安全矩形只能證明局部覆蓋；完整玩家路徑與動態名稱仍需收據。
 
-- **terminology-and-safe-rects**（#39） — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy
-  術語表已建（docs/manual/glossary.md），現有文字安全矩形 9,301 項已全過檢查器，資料譯名也納入字模涵蓋。缺的是遊戲與說明書共用同一份已核准術語，以及每個欄位明確的 overflow policy（換行還是截斷）。
-  完成條件：術語表是唯一來源，遊戲字串引用它；每個 CJK 欄位有 overflow policy。
-  核實：要人判——檢查器管的是「會不會超出矩形」，不管「超出了要怎麼辦」。policy 寫進資料時改成 json_len 綁它。
-
 - **save-across-battle-and-clock**（#47） — 存檔跨事件與戰鬥階段恢復：戰鬥中途狀態與世界時間
   任務旗標、已回報數與身上帶的東西已進存檔，並由 `full-chain` ＋ `full-chain-reload` 驗過往返。戰鬥中途的狀態與世界時間還沒進存檔——存檔格式裡連日期欄位都還沒有。
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
@@ -158,6 +153,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解；繁中 renderer 只把這個既有白框等比放大，未額外宣稱原版外觀已對拍。
   完成條件：兩塊都有逐畫面對拍收據。
   核實：`internal/ui/battle.go`、`internal/ui/battle_cjk.go`、`docs/spec/010-combat-commands.md` 找得到 `確切的視覺效果還沒解出來|原版外觀尚未完全對拍` 就是還沒完
+
+- **target-mode-icon-bar-mouse** — 選目標格那一層的圖示列怎麼接滑鼠
+  選目標格時滑鼠直接指格已接（SPEC-010 §3、sub_24131:0x24332，收據 docs/verification/battle-target-mouse/receipt.json）。同一層畫面下方的圖示列原版是否也收滑鼠點擊還沒證據，remake 目前只收鍵盤，點在場地外的位置不做事。
+  完成條件：以 IDA 或 dosgolem 實驗確認原版在選目標格時圖示列的滑鼠行為，remake 照著接並附收據；若原版不收滑鼠，把結論寫進 SPEC-010 並移除 input.go 的自承註解。
+  核實：`cmd/kol/input.go` 找得到 `圖示列原版怎麼接滑鼠還沒證據` 就是還沒完
 
 - **longest-cjk-visual-regression**（#40） — 最長繁中內容的視覺回歸、正常路徑截圖與輸入測試
   安全矩形檢查器是靜態的，沒有跑過最長字串的視覺回歸。
@@ -384,6 +384,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
+- **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
 - **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。

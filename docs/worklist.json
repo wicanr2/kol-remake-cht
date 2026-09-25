@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -483,6 +483,21 @@
       "issue": 33
     },
     {
+      "id": "target-mode-icon-bar-mouse",
+      "layer": "verification",
+      "title": "選目標格那一層的圖示列怎麼接滑鼠",
+      "body": "選目標格時滑鼠直接指格已接（SPEC-010 §3、sub_24131:0x24332，收據 docs/verification/battle-target-mouse/receipt.json）。同一層畫面下方的圖示列原版是否也收滑鼠點擊還沒證據，remake 目前只收鍵盤，點在場地外的位置不做事。",
+      "acceptance": "以 IDA 或 dosgolem 實驗確認原版在選目標格時圖示列的滑鼠行為，remake 照著接並附收據；若原版不收滑鼠，把結論寫進 SPEC-010 並移除 input.go 的自承註解。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "cmd/kol/input.go"
+        ],
+        "pattern": "圖示列原版怎麼接滑鼠還沒證據",
+        "note": "註解消失＝已查清並處理。"
+      }
+    },
+    {
       "id": "text-layout-remaining-screens",
       "layer": "gap",
       "title": "量測城鎮、世界、戰鬥畫面的文字版面",
@@ -553,13 +568,19 @@
       "id": "terminology-and-safe-rects",
       "layer": "gap",
       "title": "統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy",
-      "body": "術語表已建（docs/manual/glossary.md），現有文字安全矩形 9,301 項已全過檢查器，資料譯名也納入字模涵蓋。缺的是遊戲與說明書共用同一份已核准術語，以及每個欄位明確的 overflow policy（換行還是截斷）。",
+      "body": "術語表（docs/manual/glossary.md）核准與暫譯的詞由 tools/verify_glossary_consistency.py 對照資料譯名、建角字串與三個文字庫：201 個詞、105 處比對、0 衝突；語境不同的 8 處登在 docs/i18n/glossary-exceptions.json，例外清單失效也會失敗。22 種 CJK 欄位各自在 docs/i18n/overflow-policy.json 登記 overflow policy，tools/verify_text_fit.py 對未登記的欄位直接判失敗：9,557 項 0 失敗。",
       "acceptance": "術語表是唯一來源，遊戲字串引用它；每個 CJK 欄位有 overflow policy。",
       "verify": {
-        "kind": "manual",
-        "note": "檢查器管的是「會不會超出矩形」，不管「超出了要怎麼辦」。policy 寫進資料時改成 json_len 綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "tools/verify_text_fit.py",
+          "docs/i18n/overflow-policy.json"
+        ],
+        "pattern": "overflow",
+        "note": "已完成，當回歸訊號：policy 資料與寬度檢查都要在。"
       },
-      "issue": 39
+      "issue": 39,
+      "status": "done"
     },
     {
       "id": "longest-cjk-visual-regression",

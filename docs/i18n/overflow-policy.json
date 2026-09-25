@@ -1,0 +1,33 @@
+{
+ "schema": "kol-cjk-overflow-policy-v1",
+ "note": "每個 CJK 欄位的溢出原則。建置時一律不准超出（verify_text_fit.py 失敗即要改譯文：重新斷行或縮短），執行期不做換行補救；只有 runtime_clip 為真的欄位在執行期另有截斷安全網，截斷不能取代建置檢查。verify_text_fit.py 遇到未登記的欄位種類會失敗。",
+ "policies": {
+  "reject": "建置時超出即失敗；執行期照譯文原樣繪製，不截斷、不換行",
+  "reject+runtime-clip": "建置時超出即失敗；執行期另依實際字寬截斷，只作安全網",
+  "reject-rows": "行數檢查：譯文行數超過欄位可放的列數即失敗"
+ },
+ "kinds": {
+  "town-message": {"policy": "reject", "renderer": "internal/ui/town.go InnCJK 對話框；譯文自帶斷行"},
+  "town-entry": {"policy": "reject", "renderer": "InnCJK 進門敘述；譯文自帶斷行"},
+  "town-dialog": {"policy": "reject", "renderer": "InnCJK 對話框"},
+  "dialog-ui": {"policy": "reject", "renderer": "InnCJK 對話框的 UI 文字庫句子"},
+  "town-title": {"policy": "reject", "renderer": "InnCJK 標題框置中"},
+  "town-date": {"policy": "reject", "renderer": "internal/ui/world.go 日期框"},
+  "vertical": {"policy": "reject-rows", "renderer": "各對話框與日期框的行數"},
+  "display-name-shop-list": {"policy": "reject+runtime-clip", "renderer": "InnCJK 清單列逐字截到對話框寬"},
+  "display-name-battle-spoils": {"policy": "reject+runtime-clip", "renderer": "internal/ui/battle_cjk.go drawBattleListTextCJK → clip"},
+  "display-name-sheet-weapon": {"policy": "reject+runtime-clip", "renderer": "internal/ui/sheet_cjk.go 武器名 clip"},
+  "display-name-battle-equipment": {"policy": "reject", "renderer": "battle_cjk.go 裝備欄 at()，不截斷"},
+  "display-name-item-mark": {"policy": "reject", "renderer": "internal/ui/itempage_cjk.go cellCJKAt，不截斷"},
+  "display-name-roster-location": {"policy": "reject", "renderer": "internal/ui/roster.go、delete.go 右欄，不截斷"},
+  "label": {"policy": "reject", "renderer": "建角／書本頁欄名"},
+  "value": {"policy": "reject", "renderer": "建角／書本頁欄值"},
+  "heading": {"policy": "reject", "renderer": "書本頁標題"},
+  "menu": {"policy": "reject", "renderer": "書本選單"},
+  "list": {"policy": "reject", "renderer": "書本頁清單"},
+  "confirm": {"policy": "reject", "renderer": "確認框"},
+  "actions": {"policy": "reject", "renderer": "建角頁動作列"},
+  "name": {"policy": "reject", "renderer": "名字欄"},
+  "message": {"policy": "reject", "renderer": "書本頁訊息"}
+ }
+}
