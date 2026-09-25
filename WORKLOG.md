@@ -6540,3 +6540,10 @@ frame-270 推翻了 remake 的版面：
   且為 PNG／JSON／TSV／OGG 或目錄，非測試程式碼不得有像原版檔名的字面值；`assets.Decode`
   拒絕非 PNG、逃出目錄與內容非 PNG 的測試。自我負例與把旗標改成原版封裝的真實負例皆失敗。
 - #21：25 份規則規格加「說明書對照」表，連結全數可解析；015、028、029 明示說明書無對應。
+- #87：`shots.spec` 46 行各跑兩次逐位元相同；與收據不同的 9 張逐一以像素差對到擲骰、
+  捲雲動畫與中文化改動，非編碼不穩定。README 展示圖依使用者指示暫不重生。
+- #85：以新探針 `tools/ida_probe_koltown_function_dump.py` 傾印 `sub_24131`，讀出滑鼠
+  分支：嚴格區間換格後轉為位移、與方向鍵同段夾限，位移為零整段略過。規則層早已照
+  RE 實作，本次只接輸入端 `fieldCellTargets`＋`CELL:` token；另發現選目標格時戰場外
+  點擊會落到 fallback 的 RET 而直接確定，與原版不符，已改為吃掉。射擊重播 X→CELL:8,8
+  英中軌跡逐位元相同，收據 `docs/verification/battle-target-mouse/receipt.json`。

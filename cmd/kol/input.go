@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"image"
 
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
@@ -174,9 +176,8 @@ func worldTargets(s *world.Session, cjk bool) []input.Target {
 // battleTargets 是戰鬥那一層。規劃段與戰利品段各有一列圖示，兩列都走 `<`／`>`
 // 與 RET（`applyBattleToken`）。
 //
-// 選目標格那一層**故意不列**：原版那裡收的是滑鼠座標直接指格（SPEC-010 §3 的
-// X 0x130…0x250、Y 8…0x98），語意是「指這一格」而不是「把游標搬過去幾步」，
-// 用 token 序列表達會變成另一回事——那一層要接就得接真正的座標指格。
+// 選目標格那一層是滑鼠座標直接指格（SPEC-010 §3、`sub_24131:0x24332`），見
+// fieldCellTargets；那一層的圖示列原版怎麼接滑鼠還沒證據，只收鍵盤。
 func battleTargets(s *battle.State, cjk bool) []input.Target {
 	if s == nil {
 		return nil
@@ -206,7 +207,7 @@ func battleTargets(s *battle.State, cjk bool) []input.Target {
 		return append(out, iconTargets(len(battle.SpoilIcons), s.Spoil.Icon, cjk)...)
 	case battle.StageField:
 		if s.Plan.Prompt == battle.PromptTarget {
-			return nil
+			return fieldCellTargets(cjk)
 		}
 		if s.Plan.Prompt == battle.PromptSpell || s.Plan.Prompt == battle.PromptAffect {
 			count := len(s.Plan.List)
@@ -268,6 +269,31 @@ func recruitTargets(in *town.Inn, cjk bool) []input.Target {
 
 // iconTargets 是畫面底部那一列圖示的可點區域。旅店、建築內與戶外共用同一組
 // 版面常數。
+// fieldCellTargets 是選目標格時戰場上的 9×9 格。原版滑鼠 X 以 640 寬計，
+// `(X − 0x130) ÷ 0x20`、`(Y − 8) ÷ 0x10` 換成格，且座標必須**嚴格**落在
+// X 0x130…0x250、Y 8…0x98 之間（`0x2433C`…`0x24362`）。換成 320×200 畫布就是
+// x 153…295、y 9…151：最左一欄與最上一列的第一個像素不算。點下去送 `CELL:列,欄`，
+// 由 applyBattleToken 換成相對位移交給 TargetCursor.Move（mouse 為真）；
+// 點在游標本身那一格位移為零，原版整段跳過（`0x24411`）。
+func fieldCellTargets(cjk bool) []input.Target {
+	v := battle.FieldView
+	valid := image.Rect(v.X+1, v.Y+1, v.X+battle.ViewCols*battle.TileSide, v.Y+battle.ViewRows*battle.TileSide)
+	out := make([]input.Target, 0, battle.ViewRows*battle.ViewCols)
+	for r := 0; r < battle.ViewRows; r++ {
+		for c := 0; c < battle.ViewCols; c++ {
+			cell := image.Rect(v.X+c*battle.TileSide, v.Y+r*battle.TileSide,
+				v.X+(c+1)*battle.TileSide, v.Y+(r+1)*battle.TileSide).Intersect(valid)
+			if cjk {
+				cell = image.Rect(cell.Min.X*book.CJKScale, cell.Min.Y*book.CJKScale,
+					cell.Max.X*book.CJKScale, cell.Max.Y*book.CJKScale)
+			}
+			out = append(out, input.Target{Rect: cell, Tokens: []string{fmt.Sprintf("CELL:%d,%d", r, c)}})
+		}
+	}
+	// 落在戰場外的點擊原版整段略過（位移為零），不能掉進 fallback 的 RET 而確定目標。
+	return append(out, input.Target{Rect: image.Rect(-1<<20, -1<<20, 1<<20, 1<<20), Tokens: []string{}})
+}
+
 func iconTargets(count, cursor int, cjk bool) []input.Target {
 	b := town.IconBar
 	x, y, step, w, h := b.X, b.Y, b.Step, b.Width, b.Height

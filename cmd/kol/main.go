@@ -507,6 +507,14 @@ func (g *game) applyBattleToken(s *battle.State, token string,
 		s.MoveCursor(step[0], step[1], false)
 		return nil
 	}
+	// 滑鼠指格（fieldCellTargets）：換成相對於游標的位移，照原版走同一段夾限。
+	if cell, ok := strings.CutPrefix(token, "CELL:"); ok {
+		var r, c int
+		if _, err := fmt.Sscanf(cell, "%d,%d", &r, &c); err == nil && s.Plan.Prompt == battle.PromptTarget {
+			s.MoveCursor(r-s.Plan.Cursor.Row, c-s.Plan.Cursor.Col, true)
+		}
+		return nil
+	}
 	switch token {
 	case "<":
 		s.MoveSelection(-1)

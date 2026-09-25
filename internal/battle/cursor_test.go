@@ -115,3 +115,23 @@ func TestCursorConfirm(t *testing.T) {
 		t.Fatal("白框停在 U-TURN 上應該當成取消")
 	}
 }
+
+// 近戰／移動的滑鼠指格走同一段（`0x24332`→`0x2444C`）：位移照加，落在中心就再加一次，
+// 最後夾在 3…5；點在游標本身位移為零就不動。
+func TestAdjacentCursorMouse(t *testing.T) {
+	c := TargetCursor{Mode: CursorAdjacent, Row: 3, Col: 4}
+	c.Move(8-3, 8-4, true) // 點最右下角那一格
+	if c.Row != 5 || c.Col != 5 {
+		t.Fatalf("點遠處應夾在 (5, 5)，得到 (%d, %d)", c.Row, c.Col)
+	}
+	c = TargetCursor{Mode: CursorAdjacent, Row: 3, Col: 4}
+	c.Move(1, 0, true) // 點中心
+	if c.Row != 5 || c.Col != 4 {
+		t.Fatalf("點中心應再走一步到 (5, 4)，得到 (%d, %d)", c.Row, c.Col)
+	}
+	c = TargetCursor{Mode: CursorAdjacent, Row: 3, Col: 4}
+	c.Move(0, 0, true)
+	if c.Row != 3 || c.Col != 4 {
+		t.Fatalf("點在游標本身不該動，得到 (%d, %d)", c.Row, c.Col)
+	}
+}

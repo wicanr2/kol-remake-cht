@@ -111,11 +111,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
   核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
 
-- **battle-target-cursor-click**（#85） — 選目標格那一層的滑鼠指格
-  規劃段選目標格時原版收的是滑鼠座標直接指格（SPEC-010 §3：X 0x130…0x250、Y 8…0x98 之內直接指到那一格），語意與圖示列的「搬白框幾步」不同，所以 2026-09-11 那一輪的可點區域刻意跳過這一層。要接就得接真正的座標指格，還要處理 mode 1／mode 2 各自的夾限規則。
-  完成條件：座標指格接上，兩種 mode 的夾限都照 SPEC-010，並有收據。
-  核實：`cmd/kol/input.go` 找得到 `故意不列` 就是還沒完
-
 
 ### 接了但沒驗過
 
@@ -198,11 +193,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。
   完成條件：其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。
   核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
-
-- **screenshot-png-nondeterminism**（#87） — 重生截圖會讓無關的英文圖出現 diff
-  跑一次 tools/run_kol_shots.sh 之後，沒有被改動影響的英文截圖也會出現位元差異（尺寸與內容相同）。MANIFEST 的判準之一是「有對應對拍收據的畫面必須與那張逐 byte 相同」，所以那些圖重生之後會被判 failed，得手動還原。來源還沒查——可能是 PNG 編碼、Ebitengine 的算繪，或 llvmpipe。
-  完成條件：查明來源並讓重生是決定性的，或說明為何無法並改判準。
-  核實：要人判——沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。
 
 - **player-path-receipts-stale**（#88） — 正常玩家路徑的收據對不上現在的程式
   2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑，當時 9 條一致；其餘多條因 SceneInn 改成 SceneTown、讀檔起點或輸入計畫不同而對不上。town-scroll 與 town-stable 的已知差異已各自重生。2026-09-25 再重播 quest-take 舊 34 步：存檔把隊伍位置設在第 7 城，角色所在地卻仍是 MIN，現行標題選角依所在地還原旅店，因此停在名冊。改由觀察存檔的第 7 城位置起跑，接任務的 15 鍵局部路徑已驗中英同狀態，但不能替代原本從標題起跑的收據。其他路徑及長路徑尚未以目前程式完整重跑，舊收據仍不得冒充現況。
@@ -415,7 +405,9 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **save-v1-entry-replacement** — SPEC-023 的保存核心已是正式入口：2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。
 - **region-dat-provenance** — `region1.dat`…`region4.dat` 缺檔的來由：2026-09-11 核實：那五筆是擴充地區，由地區磁片經原版內建的 REGION INSTALLER 裝入，Origin 未曾發行擴充。執行時觀測（開檔序列、模板位址與 KOLBOOK.EXE 靜態偏移逐項對位、原版自己的訊息文字）見 docs/re/20260911-region-installer.md；探針在 tools/oracle/book_startup_test.go 的 KOL_BOOK_REGION_PROBE 模式。
 - **planning-current-slot-semantics** — 規劃逐鍵時 DS:0x9E5A 的語意：2026-09-11 定案：它是走訪參戰者的**索引游標**（IDA `word_37D2A`），規劃、執行與訊息三段各自的迴圈都會設它，不是「輪到誰行動」的權威狀態。寫入監看抓到五個寫入點，其中 0x1F073 正是 SPEC-020 步驟一的收尾。remake 不需要它——輪到誰由 Round.Order 與 Cursor 表達。見 docs/re/20260911-actor-index-cursor.md。
+- **battle-target-cursor-click** — 選目標格那一層的滑鼠指格：2026-09-26 依 sub_24131:0x24332..0x24543 的 IDA 傾印接上滑鼠指格：嚴格區間換格、位移走方向鍵同段夾限（mode 1 中心再走一步、夾 3…5；mode 2 夾 0…8、內圈還原）、位移為零不動、戰場外點擊不觸發 Return。射擊重播把方向鍵 X 換成 CELL:8,8，英中各自軌跡逐位元相同；近戰夾限與邊界像素由單元測試驗。
 - **cjk-sheet-subpages** — 資料頁的坐騎與頂端隊員格的中文版面：docs/verification/cjk-ui/stable-six-page-receipt.json；六張繁中畫格及逐位元相同的英中軌跡。
+- **screenshot-png-nondeterminism** — 重生截圖會讓無關的英文圖出現 diff：2026-09-26 鎖定映像下以 run_kol_shots.sh 把 shots.spec 全部 46 行各跑兩次，46 張逐位元相同，重生是決定性的；「內容相同但位元不同」無法重現。與 docs/screenshots 收據不同的 9 張全是內容真的改變：en-newchar-picture／stats 為擲骰對上原版後同 seed 數值不同，en-world-map／town 為 SPEC-026 捲雲位置，zh-book-cover／roster／delete、zh-town-items／sheet 為本週中文化。判準（有對拍收據者須逐位元相同）不必改；這 9 張依使用者指示待整體驗收後隨 README 一併重生。
 - **path-verify-does-not-replay** — 路徑驗證只看收據自洽，不重跑：2026-09-11 做了 `tools/check_player_paths.py`：重跑到 workplace/replay-check/ 再與收據逐 byte 比，不覆寫。第一次跑就抓到 10 條對不上。`verify_full_path.py` 保留原用途（驗收據自洽），兩支分工不同。
 - **cjk-battle-remaining-pages** — 補戰後戰利品清單的繁中正常路徑畫格：法術／效果兩頁及戰利品 Items Found／Characters 兩頁均已擷取並目視檢查。戰利品由 seed 39 固定輸入在重製版正常按鍵路徑第 22 回合勝利後取得；收據含輸入、程式雜湊、PNG／trace 雜湊與觀察用資料限制。本項只驗中文版面；完整戰鬥、原版同狀態與正式封包另列未完成。
 - **town-untranslated-source-slot-reachability** — 城鎮 45 個未譯來源槽位的全域可達性與中文處置：2026-09-25 RE-140：訊息槽位與建築 payload 共用 DGROUP:0x1CF4，45 筆分為 40 筆馬廄坐騎記錄（已證實）、1 筆商店殘留資料（強推論）、4 筆無讀取點的任務續文（強推論）。依使用者選定處置不翻譯，列入 docs/i18n/town-nontext-slots.json 並綁原文快照；嚴格檢查 2,076 則 0 缺譯、另排除 45 筆，三個負例皆失敗。

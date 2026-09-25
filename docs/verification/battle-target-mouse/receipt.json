@@ -1,0 +1,43 @@
+{
+ "schema": "kol-battle-target-mouse-v1",
+ "date": "2026-09-26",
+ "issue": 85,
+ "spec": "docs/spec/010-combat-commands.md §3",
+ "evidence_re": "sub_24131:0x24332..0x24543（IDA 9.4 傾印，tools/ida_probe_koltown_function_dump.py；原始輸出含指令 bytes 只留本機）",
+ "rule": "滑鼠 X∈(0x130,0x250)、Y∈(8,0x98) 嚴格區間換成格，減去目前游標得位移後走方向鍵同一段：mode 1 落中心再加一次位移並夾 3…5；mode 2 夾 0…8，落內圈時滑鼠還原上一格；位移為零整段略過，不確定。",
+ "remake": {
+  "hit_test": "cmd/kol/input.go fieldCellTargets（320×200 畫布 x 153…295、y 9…151，中文乘 3；戰場外點擊吃掉，不落 fallback RET）",
+  "token": "CELL:列,欄 → battle.State.MoveCursor(Δ列, Δ欄, mouse=true)"
+ },
+ "replay": {
+  "source": "docs/verification/battle-missile/replay.spec",
+  "seed": 141421,
+  "load": "workplace/saves/warder.json",
+  "load_sha256": "b4408df9beec389e8939c08b6c27aad8a7c6560da13a72b83a4a7c749c248f16",
+  "change": "第 100 個 token 由方向鍵 X（游標 (4,4)→內圈→乘三到 (8,8)）改為 CELL:8,8",
+  "traces": {
+   "en_keyboard": "462901de3230a69a141ff1407d87209b2e1cfea1e0261f9e5eb90e83e4c33c8c",
+   "en_mouse": "462901de3230a69a141ff1407d87209b2e1cfea1e0261f9e5eb90e83e4c33c8c",
+   "zh_keyboard": "18778c641f88566e76c568b118fb6f57ecdeecfa4c2f25c758a3261649bedd00",
+   "zh_mouse": "18778c641f88566e76c568b118fb6f57ecdeecfa4c2f25c758a3261649bedd00"
+  },
+  "result": "英文、中文各自的鍵盤與滑鼠版詳細軌跡逐位元相同"
+ },
+ "unit_tests": [
+  "cmd/kol TestBattleCommandBarClick（邊界像素與中文倍率）",
+  "internal/battle TestRangedCursorInnerRing",
+  "internal/battle TestAdjacentCursorMouse"
+ ],
+ "limits": [
+  "mode 1 的滑鼠路徑只有單元測試，沒有重播收據",
+  "選目標格那一層圖示列的滑鼠行為原版未證實，只收鍵盤",
+  "非互動 GUI 真實滑鼠事件；點擊到 token 的換算以單元測試驗"
+ ],
+ "rights": "private repo 可保存",
+ "frame": {
+  "file": "docs/verification/battle-target-mouse/cell-8-8-zh.png",
+  "png_sha256": "004881b4006218119b72de71e3ca52f596a9691779e5f19782c7ac2c87e3a511",
+  "step": 100,
+  "visible": "CELL:8,8 之後游標框在右下角 (8,8)，已目視檢查"
+ }
+}

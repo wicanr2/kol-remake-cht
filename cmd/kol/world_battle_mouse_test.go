@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/wicanr2/kol-remake-cht/internal/input"
 	"reflect"
 	"testing"
 
@@ -69,10 +70,26 @@ func TestBattleCommandBarClick(t *testing.T) {
 			t.Fatalf("第 %d 格：%v，要 %v", i, targets[i].Tokens, want)
 		}
 	}
-	// 選目標格那一層收的是座標指格，不是搬白框——不列進來，免得點下去變成另一回事。
+	// 選目標格那一層是座標指格（SPEC-010 §3）：9×9 格各送 CELL:列,欄，戰場外的點擊吃掉。
 	s.Plan.Prompt = battle.PromptTarget
-	if got := battleTargets(s, false); got != nil {
-		t.Fatalf("選目標格那一層不該列可點區域，得到 %d 個", len(got))
+	for _, tc := range []struct {
+		cjk  bool
+		x, y int
+		want []string
+	}{
+		{false, 153, 9, []string{"CELL:0,0"}},
+		{false, 152, 9, []string{}}, // X 0x130 本身不算（嚴格大於）
+		{false, 153, 8, []string{}}, // Y 8 本身不算
+		{false, 295, 151, []string{"CELL:8,8"}},
+		{false, 296, 100, []string{}}, // X 0x250 不算
+		{false, 10, 190, []string{}},  // 圖示列：這一層只收鍵盤
+		{true, 153*3 + 1, 9*3 + 1, []string{"CELL:0,0"}},
+		{true, (152 + 16*4 + 8) * 3, (8 + 16*4 + 8) * 3, []string{"CELL:4,4"}},
+	} {
+		got := input.Hit(battleTargets(s, tc.cjk), tc.x, tc.y, "RET")
+		if !reflect.DeepEqual(got, tc.want) {
+			t.Errorf("cjk=%v (%d,%d) 得到 %q，要 %q", tc.cjk, tc.x, tc.y, got, tc.want)
+		}
 	}
 }
 

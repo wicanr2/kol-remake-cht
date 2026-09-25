@@ -1318,14 +1318,17 @@
       "body": "規劃段選目標格時原版收的是滑鼠座標直接指格（SPEC-010 §3：X 0x130…0x250、Y 8…0x98 之內直接指到那一格），語意與圖示列的「搬白框幾步」不同，所以 2026-09-11 那一輪的可點區域刻意跳過這一層。要接就得接真正的座標指格，還要處理 mode 1／mode 2 各自的夾限規則。",
       "acceptance": "座標指格接上，兩種 mode 的夾限都照 SPEC-010，並有收據。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "cmd/kol/input.go"
+          "cmd/kol/input.go",
+          "docs/verification/battle-target-mouse/receipt.json"
         ],
-        "pattern": "故意不列",
-        "note": "input.go 的自承，接上時會改寫。"
+        "pattern": "CELL:",
+        "note": "已完成，當回歸訊號：指格 token 與收據都要在。"
       },
-      "issue": 85
+      "issue": 85,
+      "status": "done",
+      "resolved": "2026-09-26 依 sub_24131:0x24332..0x24543 的 IDA 傾印接上滑鼠指格：嚴格區間換格、位移走方向鍵同段夾限（mode 1 中心再走一步、夾 3…5；mode 2 夾 0…8、內圈還原）、位移為零不動、戰場外點擊不觸發 Return。射擊重播把方向鍵 X 換成 CELL:8,8，英中各自軌跡逐位元相同；近戰夾限與邊界像素由單元測試驗。"
     },
     {
       "id": "cjk-sheet-subpages",
@@ -1355,7 +1358,9 @@
         "kind": "manual",
         "note": "沒有產品碼訊號可綁：現象出現在工具鏈的輸出而不是程式裡的自承。查明之後如果是編碼問題，訊號會落在 tools/ 那一側。"
       },
-      "issue": 87
+      "issue": 87,
+      "status": "done",
+      "resolved": "2026-09-26 鎖定映像下以 run_kol_shots.sh 把 shots.spec 全部 46 行各跑兩次，46 張逐位元相同，重生是決定性的；「內容相同但位元不同」無法重現。與 docs/screenshots 收據不同的 9 張全是內容真的改變：en-newchar-picture／stats 為擲骰對上原版後同 seed 數值不同，en-world-map／town 為 SPEC-026 捲雲位置，zh-book-cover／roster／delete、zh-town-items／sheet 為本週中文化。判準（有對拍收據者須逐位元相同）不必改；這 9 張依使用者指示待整體驗收後隨 README 一併重生。"
     },
     {
       "id": "player-path-receipts-stale",

@@ -144,6 +144,11 @@ RE-081 同一支 `sub_252CB`。游標離開就還原成行動者本人。
 
 ## 實作現況
 
+- 2026-09-26：選目標格的滑鼠指格已接（#85）。`cmd/kol/input.go` 的 `fieldCellTargets`
+  依 `sub_24131:0x24332` 的嚴格區間換成格，送 `CELL:列,欄`，再以 mouse=true 走
+  `TargetCursor.Move` 同一段夾限；戰場外的點擊吃掉，不落到 fallback 的 Return。
+  收據見 [battle-target-mouse](../verification/battle-target-mouse/receipt.json)。
+
 規則層在 `internal/battle/commands.go`（指令列組成與四列選項換算）與
 `cursor.go`（兩個 mode 的游標），規劃段的選單狀態機在 `planning.go`，
 畫面在 `internal/ui/battle.go`，輸入在 `cmd/kol/main.go` 的 `updateBattle`
