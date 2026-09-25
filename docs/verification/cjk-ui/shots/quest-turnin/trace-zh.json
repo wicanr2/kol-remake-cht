@@ -1,0 +1,10 @@
+{
+ "schema": "kol-play-trace-v1",
+ "steps": [
+  {"ending":{"armed":false,"panel":0},"name":"step-000","scene":"play","step":0,"town":{"left_town":false,"mode":0,"party":["Poontang gold=158 wounds=1 reported=0 quests=128,4,0,0,0,0 carried=10","Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14","Fighting Bull gold=442 wounds=0 reported=0 quests=128,0,0,0,0,0 carried=15","Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12","Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10","Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"],"town":1,"x":31,"y":11}},
+  {"ending":{"armed":false,"panel":0},"name":"step-001","scene":"play","step":1,"town":{"at_door":true,"left_town":false,"mode":1,"town":1,"x":31,"y":10}},
+  {"ending":{"armed":false,"panel":0},"name":"step-002","scene":"play","step":2,"town":{"at_door":true,"door":{"index":0,"name":"The Mayors house","quest_final":false,"quest_site":3,"quest_wants":"Truth Sword"},"left_town":false,"mode":2,"town":1,"x":31,"y":10}},
+  {"ending":{"armed":false,"panel":0},"name":"step-003","scene":"play","step":3,"town":{"at_door":true,"door":{"index":0,"name":"The Mayors house","quest_final":false,"quest_site":3,"quest_wants":"Truth Sword"},"left_town":false,"mode":2,"town":1,"turned_in":1,"x":31,"y":10}},
+  {"ending":{"armed":false,"panel":0},"name":"step-004","scene":"play","step":4,"town":{"at_door":true,"door":{"index":0,"name":"The Mayors house","quest_final":false,"quest_site":3,"quest_wants":"Truth Sword"},"left_town":false,"mode":2,"party":["Poontang gold=158 wounds=1 reported=1 quests=192,4,0,0,0,0 carried=10","Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14","Fighting Bull gold=442 wounds=0 reported=1 quests=192,0,0,0,0,0 carried=15","Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12","Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10","Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"],"town":1,"turned_in":1,"x":31,"y":10}}
+ ]
+}

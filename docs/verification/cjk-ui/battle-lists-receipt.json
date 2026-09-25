@@ -1,0 +1,66 @@
+{
+  "schema": "kol-cjk-battle-lists-v1",
+  "date": "2026-09-23",
+  "status": "partial",
+  "spec": "docs/spec/032-cjk-battle-list-pages.md",
+  "git_head": "5d2f6ce6c78484073d57c3a2e0dbee4aba499386",
+  "tool": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+    "go": "go1.26.7 linux/amd64",
+    "replay": "cmd/kol -lang zh-Hant -scene play -seed 141421 -load workplace/saves/warder.json -play-script <由 battle-lists.spec 固定的按鍵> -shot-dir <spec 輸出> -trace <spec 輸出>"
+  },
+  "input_sha256": {
+    "Knights-of-legend.zip": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "workplace/saves/warder.json": "b4408df9beec389e8939c08b6c27aad8a7c6560da13a72b83a4a7c749c248f16",
+    "docs/verification/battle-spell/replay.spec": "e3f5795b77b84cb120223534a4b5abd3d1cc637e3a07ce9b6ef0a0c5c4314c30",
+    "docs/verification/cjk-ui/battle-lists.spec": "22e24f26b0aa11abaf24e2effe7badbb3d913d5d0c19006a2d682ad43d896e2e",
+    "docs/i18n/ui-zh-Hant.json": "814eea3426659a35de4998cc589deb40ba03c0799b3f6cdb7ccdd0969533ab82",
+    "assets/ui-font/manifest.json": "11f9b9adcbd34565df093e810a89bb7ac0a969061bd0a8130fc8c7da0d5ee3ff"
+  },
+  "trace": {
+    "file": "docs/verification/cjk-ui/shots/battle-lists/spell/trace.json",
+    "sha256": "3e8fa116bc03ad873bda23a4f095eb1c12e1b20d76aa213ec1ecb45fa4d607a6",
+    "step_109_prompt": 6,
+    "step_110_prompt": 7
+  },
+  "frames": [
+    {
+      "file": "docs/verification/cjk-ui/shots/battle-lists/spell/step-109.png",
+      "frame": 109,
+      "state": "PromptSpell",
+      "shown": "哪一個法術？與 Vartwelyrmi 清單",
+      "size": [
+        960,
+        600
+      ],
+      "png_sha256": "8e7f5b7aafc4438a2010a92be2df4e458a3badc13f87679f612b73ee9bc81c73",
+      "evidence": "已證實：2026-09-23 以正常玩家按鍵重播並目視檢查繁中畫面；不主張原版中文像素對拍",
+      "rights": "private GitHub 可保存；不得公開散布原作衍生素材"
+    },
+    {
+      "file": "docs/verification/cjk-ui/shots/battle-lists/spell/step-110.png",
+      "frame": 110,
+      "state": "PromptAffect",
+      "shown": "選擇效果、正面與負面清單",
+      "size": [
+        960,
+        600
+      ],
+      "png_sha256": "5c2894820a27c3c2fba98abd69457c6d585d8633d5d51e5032d8302b794f6e72",
+      "evidence": "已證實：2026-09-23 以正常玩家按鍵重播並目視檢查繁中畫面；不主張原版中文像素對拍",
+      "rights": "private GitHub 可保存；不得公開散布原作衍生素材"
+    }
+  ],
+  "pending": {
+    "page": "StageSpoils：Items Found 與 Characters",
+    "reason": "既有 battle-spoils/replay.spec 的 seed=39 在步驟 40 遇治療提示；後續移動鍵被提示攔住。補 RET 後步驟 67 又遇 GOLEM，未走到任務地點與戰利品頁。須重生正常按鍵序列並擷取兩頁，才可關閉 #90。",
+    "evidence": "docs/verification/battle-spoils/replay.spec 的舊腳本；本輪只保留收據摘要，探索畫格與軌跡已清理。"
+  },
+  "not_claimed": [
+    "原版中文像素對拍",
+    "dosgolem 已支援 KOL",
+    "戰利品頁完成",
+    "整場戰鬥同狀態"
+  ]
+}

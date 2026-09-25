@@ -1,0 +1,52 @@
+{
+  "schema": "kol-cjk-stable-six-page-v1",
+  "date": "2026-09-24",
+  "status": "remake-normal-input-path-confirmed",
+  "scope": "六人城鎮馬廄購買、角色資料頁、物品換頁、隊伍立繪換頁與返回；僅驗重製版繁中畫面及英中語意狀態",
+  "spec": "docs/spec/030-cjk-character-sheet.md",
+  "git_head_before_worktree_changes": "5d2f6ce6c78484073d57c3a2e0dbee4aba499386",
+  "tool": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "go": "go1.26.7 linux/amd64",
+    "binary_sha256": "e80cdfa7a69fbc3066b61d4123db219f92fe0b77d542a45b8c0657c0f3bf0bda"
+  },
+  "inputs": {
+    "Knights-of-legend.zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "workplace/saves/full-chain.json_sha256": "7edc778d41bfd071e487b93b6bcd18b7fe07070c4b540055e89812cea557dd40",
+    "observation_save_command": "python3 tools/make_stable_save.py --in workplace/saves/full-chain.json --out <temporary stable-six.json> --gold 3000",
+    "observation_save_sha256": "d20e931c039ff82237bb6df474c14ce5f30160361d9b039530cc604201a3d736",
+    "v1_to_v2": "讀取暫存 v1 後由遊戲自動匯入 v2；英中兩側均從同一份暫存 v2 開始。",
+    "temporary_v2_sha256": "eb6845624043715808438cb01d49235827a7f7c20d7472843023e61f0fdbbd04",
+    "docs/i18n/display-names-zh-Hant.tsv_sha256": "fad9e9ca64789f36b3065ea01d4f1618bf72288711294508a88226b851310d05",
+    "docs/i18n/newchar-zh-Hant.json_sha256": "68d84134e78c77886805e8575b0de01a64753e534164f6edf499062a45d909f2",
+    "assets/ui-font/manifest.json_sha256": "49a9df98ebae50c2ba231286e70c3a843f35caa16096a76a0e033f8b2f16034e",
+    "script": "U RET SPACE > > > > RET D RET RET SPACE > RET > RET > RET > RET > > RET SPACE",
+    "script_steps": 24,
+    "command": "cmd/kol -scene play -lang <zh-Hant 或 en> -load <同一份暫存 v2> -play-script <script> -shot-dir <輸出目錄> -trace <軌跡檔>"
+  },
+  "frames": [
+    {"step": 8, "state": "四匹坐騎清單與六名隊員格", "file": "docs/verification/cjk-ui/shots/stable-six/shop-list-zh.png", "size": [960, 600], "sha256": "7640e17105dba336cbfad2e6f8e5592e8b2b02fd53eb9587cf9e68c0dc4f5286"},
+    {"step": 10, "state": "輕型戰馬圖、譯名與價格問句", "file": "docs/verification/cjk-ui/shots/stable-six/steed-detail-zh.png", "size": [960, 600], "sha256": "546f5eee745169587966750682372ef6a5bcc4b6b7b38def1c00264da6d6c95c"},
+    {"step": 16, "state": "購買後角色資料頁的完整譯名、中文體重單位、坐騎雙框與六名隊員格", "file": "docs/verification/cjk-ui/shots/stable-six/sheet-zh.png", "size": [960, 600], "sha256": "4af56692dbdc021cd44dbb44fed7d3a0da424d46422060bfc3262772d555459c"},
+    {"step": 18, "state": "物品頁覆蓋角色資料、坐騎與隊員格", "file": "docs/verification/cjk-ui/shots/stable-six/items-zh.png", "size": [960, 600], "sha256": "c81608e6d5d043487204fdc7b1b056e57d619809204593e7b4448fc78957cf17"},
+    {"step": 23, "state": "隊伍立繪頁覆蓋角色資料與坐騎", "file": "docs/verification/cjk-ui/shots/stable-six/party-zh.png", "size": [960, 600], "sha256": "e96d62a4d934904b2664e12cf5622633ecd30ff9162a3f7c2051cc51cc28a0ea"},
+    {"step": 24, "state": "按 SPACE 從隊伍立繪頁返回角色資料頁；與 step 16 PNG 完全相同", "file": "docs/verification/cjk-ui/shots/stable-six/returned-sheet-zh.png", "size": [960, 600], "sha256": "4af56692dbdc021cd44dbb44fed7d3a0da424d46422060bfc3262772d555459c"}
+  ],
+  "english_comparison": {
+    "sheet": "docs/verification/cjk-ui/shots/stable-six/sheet-en.png",
+    "returned_sheet": "docs/verification/cjk-ui/shots/stable-six/returned-sheet-en.png",
+    "size": [320, 200],
+    "sha256_both": "79a0661ec08c4b2edf8a2592b5bcb42c0edbf91d59e49ec389d658096bed163d",
+    "trace_zh": "docs/verification/cjk-ui/shots/stable-six/trace-zh.json",
+    "trace_en": "docs/verification/cjk-ui/shots/stable-six/trace-en.json",
+    "trace_sha256_both": "2d43d5c0c916af4cd994719f09bfa60f3f7c08520f8a4b7265626cec2f7c281f",
+    "result": "英中 25 筆重播狀態逐位元相同；第 11 步發言者金冠由 3000 降為 2600。"
+  },
+  "evidence": "已證實：重製版由觀察用存檔起跑，經相同正式按鍵分派可購馬、顯示六人與坐騎，並正確切換物品／隊伍頁及返回；角色頁體重單位已譯為磅，數值不變。上述 PNG 已目視檢查。",
+  "rights": "private GitHub 可保存；不得公開散布原作衍生畫面",
+  "limits": [
+    "起始存檔由 full-chain 改位置到城 1 馬廄門口並補金幣；不代表從新遊戲自然抵達馬廄。",
+    "沒有同位置原版畫格或 dosgolem KOL 正式收據；不宣稱原版畫面、價格、保存或規則已完整對拍。",
+    "畫格由本輪工作樹重建的程式產生，不是既有 AppImage。"
+  ]
+}

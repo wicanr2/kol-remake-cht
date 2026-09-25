@@ -1,0 +1,43 @@
+{
+  "schema": "kol-quest-turnin-cjk-v1",
+  "date": "2026-09-25",
+  "status": "remake-normal-input-path-confirmed; original-same-state-pending",
+  "scope": "觀察用六人存檔從城 1 鎮長宅邸門前，經正式按鍵進門、讀交付台詞、回到招呼語；檢查繁中畫面及英中狀態",
+  "spec": "docs/spec/014-quest-completion.md",
+  "re": "docs/re/RESEARCH-LOG.md#re-139城鎮訊息-29-的直接消費者與任務物品交付勘誤",
+  "tool": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "go": "go1.26.7 linux/amd64",
+    "binary_sha256": "bb393edcb9d1e7f62797ec7f6653b8fe26984a861d8127864e3965cc080681d5"
+  },
+  "inputs": {
+    "Knights-of-legend.zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6eb6ec49f46",
+    "workplace/saves/full-chain.json_sha256": "7edc778d41bfd071e487b93b6bcd18b7fe07070c4b540055e89812cea557dd40",
+    "observation_save": "暫存 v1：城 1 (31,11)，第 3 號任務建築門下；隊員 1、2 的空物品格 14 放同一件任務物品；隊員 0、2 的第 3 號任務旗標設為完成。這是明示的局部觀察初態，不是自然取得任務或物品。",
+    "observation_save_sha256": "edd561160b9c4348d4d0e335289d6976b4dc08e43588bbbe6abbf9054dd58290",
+    "v1_to_v2": "遊戲載入暫存 v1 時自動匯入 v2；英中兩側從同一份暫存 v2 起跑。",
+    "temporary_v2_sha256": "e10c7a15d20d42588331a45e78bc63f558411da24cc4aea5aabf6ff7995ea4e6",
+    "script": "U RET SPACE SPACE",
+    "script_steps": 4,
+    "command": "cmd/kol -scene play -lang <zh-Hant 或 en> -load <同一份暫存 v2> -play-script 'U RET SPACE SPACE' -shot-dir <輸出目錄> -trace <軌跡檔>"
+  },
+  "frames": [
+    {"step": 2, "state": "鎮長宅邸進門敘述；尚未交換任務物品", "zh": "docs/verification/cjk-ui/shots/quest-turnin/entry-zh.png", "zh_size": [960, 600], "zh_sha256": "0ca85cf1c3d0b3a7015170fa5f962a35effa1a8a9cdaaf1ae1b3a6b7018597e3", "en": "docs/verification/cjk-ui/shots/quest-turnin/entry-en.png", "en_size": [320, 200], "en_sha256": "2377b738af2db127c8f5f1b32a0609314dd09ab5004a10294e6ba380d7b75d04"},
+    {"step": 3, "state": "第一次 SPACE 後交換第一件吻合物品，顯示訊息 6／7；任務旗標尚未回報", "zh": "docs/verification/cjk-ui/shots/quest-turnin/turnin-zh.png", "zh_size": [960, 600], "zh_sha256": "3f1314a6704bf4455fab3f20ea115545c13d0f544a952288ca79af5e2db4c2e1", "en": "docs/verification/cjk-ui/shots/quest-turnin/turnin-en.png", "en_size": [320, 200], "en_sha256": "fdc15073881a37c4065530b7723f4994f8db1a6915712ad149c9e97adfaa3f11"},
+    {"step": 4, "state": "第二次 SPACE 後進入招呼語；兩名已完成任務隊員變為已回報", "zh": "docs/verification/cjk-ui/shots/quest-turnin/greeting-zh.png", "zh_size": [960, 600], "zh_sha256": "87b0fe08cfc951fae5c61b4a5ff8fb61543f08ca3b1e248aee2fe5ceaa186ceb", "en": "docs/verification/cjk-ui/shots/quest-turnin/greeting-en.png", "en_size": [320, 200], "en_sha256": "5da1af5b2254cd75cb62a3e12a427326afa7ba8dedff781de7f79111363cc7b9"}
+  ],
+  "trace": {
+    "zh": "docs/verification/cjk-ui/shots/quest-turnin/trace-zh.json",
+    "en": "docs/verification/cjk-ui/shots/quest-turnin/trace-en.json",
+    "sha256_both": "079b9b3615de5007ec494a97fbcd3b36aba5d21474fcffd82a25b4651b51f8e9",
+    "result": "五個狀態步驟逐位元相同。第 3 步只有一筆交付事件；第 4 步隊員 0 與 2 的第 3 號任務旗標由 2 改 3、已回報數各加 1。"
+  },
+  "evidence": "已證實：本輪重製程式在同一觀察初態的正式按鍵分派中顯示繁中交付台詞，並使英中遊戲狀態相同；三張繁中畫格已目視檢查。原版按鍵與角色迴圈以 RE-139 的 IDA 9.4 控制流為依據。",
+  "rights": "private GitHub 可保存；不得公開散布原作衍生畫面",
+  "limits": [
+    "觀察用存檔明示注入位置、任務旗標及兩件任務物品，不能證明自然接任務、取得物品或新遊戲走到此處。",
+    "追蹤只記物品數量，不記原始 16-byte 物品內容；第一件交換及型別化欄位同步另由 internal/town 回歸測試驗證。",
+    "沒有原版正常 GUI 同狀態畫格與 dosgolem KOL 收據；SPEC-014 維持 READY。",
+    "畫格由目前工作樹重建的 binary 產生，既有 AppImage 尚未重建。"
+  ]
+}

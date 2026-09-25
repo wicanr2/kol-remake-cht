@@ -1,0 +1,48 @@
+{
+  "schema": "kol-cjk-quest-offer-v1",
+  "date": "2026-09-25",
+  "status": "remake-town-input-path-confirmed; original-same-state-pending",
+  "scope": "霍布城第 7 扇門的第 6 號任務：進門、MOUTH 輸入 nobj、兩頁敘述、接受問句與答應回應",
+  "spec": "docs/spec/014-quest-completion.md",
+  "tool": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "go": "go1.26.7 linux/amd64",
+    "binary_sha256": "bb393edcb9d1e7f62797ec7f6653b8fe26984a861d8127864e3965cc080681d5"
+  },
+  "inputs": {
+    "Knights-of-legend.zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6eb6ec49f46",
+    "workplace/saves/quest-take.json_sha256": "cbeba6a376e3c869c426b03e949ab4e8b6d282b5455c2cf1f37b944875266702",
+    "temporary_v2_sha256": "5373c1e40d05943edcbf1173df9d8297b81912e10072644fcb173c466203c5d2",
+    "docs/i18n/town-zh-Hant.json_sha256": "4b98632e3eb2f0d254b9ebed27a1b9d5dc4c92e43b5cf4054a5dc3b0b38e0a1d",
+    "docs/i18n/ui-zh-Hant.json_sha256": "814eea3426659a35de4998cc589deb40ba03c0799b3f6cdb7ccdd0969533ab82",
+    "assets/ui-font/manifest.json_sha256": "49a9df98ebae50c2ba231286e70c3a843f35caa16096a76a0e033f8b2f16034e",
+    "observation_save": "既有 v1 觀察存檔指定隊伍在第 7 城 (9,24)、門口南方一格；來源角色紀錄所在地仍為 MIN，不能由目前的標題選角流程直接抵達這個位置。遊戲先將暫存 v1 匯入 v2，英中兩側再從同一份暫存 v2 起跑。",
+    "scene": "play",
+    "seed": 1,
+    "script": "U RET SPACE > > > RET n o b j RET SPACE SPACE RET",
+    "script_steps": 15,
+    "command": "cmd/kol -scene play -lang <zh-Hant 或 en> -load <同一份暫存 v2> -seed 1 -play-script <script> -shot-dir <輸出目錄> -trace <軌跡檔>"
+  },
+  "frames": [
+    {"step": 7, "state": "MOUTH 輸入提示與游標，尚未輸入關鍵字", "zh": "docs/verification/cjk-ui/shots/quest-offer/step-007-zh.png", "zh_sha256": "75eeb9d9f5e08606f8b607803ce9f6b396e5fc8c24fa347f9bd9c369bf7ae447", "en": "docs/verification/cjk-ui/shots/quest-offer/step-007-en.png", "en_sha256": "3b3b47de67dc9c9604ed1bc32bcfcaeb3c1ef7a1bb00686d39789eefb97df8ec"},
+    {"step": 12, "state": "問中 nobj 後的第一頁任務敘述", "zh": "docs/verification/cjk-ui/shots/quest-offer/step-012-zh.png", "zh_sha256": "86ff4460fdadf057b357280799650e4cacc07d0902013578ed4d1520db7b5304", "en": "docs/verification/cjk-ui/shots/quest-offer/step-012-en.png", "en_sha256": "269f763e1c25d8c4c1d8616ef70c78037a91bf9ae56aa4fd0f42b01f9f77994c"},
+    {"step": 13, "state": "第二頁任務敘述", "zh": "docs/verification/cjk-ui/shots/quest-offer/step-013-zh.png", "zh_sha256": "285c76cc07583932f19a822c6f0b61f4447093ab07648385934b2f3b5080e61d", "en": "docs/verification/cjk-ui/shots/quest-offer/step-013-en.png", "en_sha256": "c3f840b6a6f2b567bdab98a5c37eb3459d009b8d3584cac291b683538f7e9ae5"},
+    {"step": 14, "state": "是否接受任務的繁中問句與 YES／NO 圖示", "zh": "docs/verification/cjk-ui/shots/quest-offer/step-014-zh.png", "zh_sha256": "dcfd39d4abd53bf47ec58cccfb23754cf235afb6df5eebfa9733ff255874056a", "en": "docs/verification/cjk-ui/shots/quest-offer/step-014-en.png", "en_sha256": "5ed13f4d636ebc3c09c32a4bc19594e5efea9b09e3249a30a6febca6370668f7"},
+    {"step": 15, "state": "答應任務後的繁中回應，第 6 號任務記為已接", "zh": "docs/verification/cjk-ui/shots/quest-offer/step-015-zh.png", "zh_sha256": "7e05e9a42f592d62413045c8aa9e6b0074e85b94e6ce6cf56257fd2c0b3308bb", "en": "docs/verification/cjk-ui/shots/quest-offer/step-015-en.png", "en_sha256": "3c7b7b4ea0964dfd81bf3ab082f1b74146ef341d28eca504e75ef18faa927169"}
+  ],
+  "frame_size": {"zh": [960, 600], "en": [320, 200]},
+  "trace": {
+    "zh": "docs/verification/cjk-ui/shots/quest-offer/trace-zh.json",
+    "en": "docs/verification/cjk-ui/shots/quest-offer/trace-en.json",
+    "sha256_both": "b5c6c640e946b802d3a3cbe197469282572e16c571898a2e454fb4e8516557d4",
+    "result": "英中 16 個狀態步驟逐位元相同；最後一步 took_quest 為 member 0、site 6、final false。"
+  },
+  "evidence": "已證實：目前重製版從明示的觀察用城鎮位置出發，以正式按鍵問中原文關鍵字、顯示繁中任務敘述與接受回應，英中狀態相同。五張繁中畫格已目視檢查。",
+  "rights": "private GitHub 可保存；不得公開散布原作衍生畫面",
+  "limits": [
+    "既有 34 步 quest-take 計畫的 v1 存檔將隊伍位置設在第 7 城，角色原始所在地卻是 MIN；現行標題選角按所在地載入旅店，原計畫在第 17 步後停於選角。這是舊收據初態不一致，不能把本收據冒稱為從標題自然走到第 7 城。",
+    "本收據只驗第 7 城門前開始的局部玩家按鍵路徑，不證明從新遊戲自然抵達、任務物品取得、回報或跨存檔。",
+    "尚無原版相同初態的正常 GUI／dosgolem 正式收據；SPEC-014 的整體任務鏈仍 READY。",
+    "畫格由目前工作樹重建的 binary 產生，既有 AppImage 尚未重建。"
+  ]
+}

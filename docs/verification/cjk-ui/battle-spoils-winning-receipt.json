@@ -1,0 +1,79 @@
+{
+  "schema": "kol-cjk-battle-spoils-winning-v1",
+  "date": "2026-09-23",
+  "status": "remake-screen-path-confirmed",
+  "spec": "docs/spec/032-cjk-battle-list-pages.md",
+  "git_head_before_worktree_changes": "5d2f6ce6c78484073d57c3a2e0dbee4aba499386",
+  "tool": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "go": "go1.26.7 linux/amd64",
+    "binary_sha256": "f50e99dd0cb174fcad87389cb5be36f59a0c47ae3095398ff5334f8a529d7d8"
+  },
+  "replay": {
+    "scene": "play",
+    "language": "zh-Hant（原執行依當時工作樹的旗標預設；重現時須明寫 -lang zh-Hant）",
+    "seed": 39,
+    "initial_save": "workplace/saves/full-chain.json",
+    "save_migration": "程式先將 v1 存檔匯入並寫成暫存 v2；後續從同一份 v2 狀態重播。",
+    "temporary_v2_sha256": "8c3fe9ff28dc621fa4b7c1036d1c6f07b7beccd0b20d4a97111f775edede0bb7",
+    "quest_sites": "workplace/observe/quest-sites-one-enemy.json",
+    "monsters": "workplace/observe/monsters-weak.json",
+    "tokens": "docs/verification/cjk-ui/battle-spoils-winning.tokens",
+    "tokens_sha256": "9948de81bd0cd012ca3b51b6b1dcce6c6c67513c31c0f4094ba4d875d627d0c6",
+    "items_found_prefix_tokens": 1926,
+    "characters_prefix_tokens": 1927,
+    "invocation": "cmd/kol -scene play -lang zh-Hant -seed 39 -load <temporary v2> -quest-sites workplace/observe/quest-sites-one-enemy.json -monsters workplace/observe/monsters-weak.json -play-script <前 1926 或 1927 個空白分隔 token> -shot <PNG> -trace <JSON>"
+  },
+  "input_sha256": {
+    "Knights-of-legend.zip": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "workplace/saves/full-chain.json": "7edc778d41bfd071e487b93b6bcd18b7fe07070c4b540055e89812cea557dd40",
+    "workplace/observe/quest-sites-one-enemy.json": "e4c12460844969a79df8068b4e49381760cf98bb5c9966359eafa9bd7f867c80",
+    "workplace/observe/monsters-weak.json": "147844796fc5c27faef6543d3cb8dea2aa807f39bb2a147f3649f31959012a08",
+    "docs/i18n/display-names-zh-Hant.tsv": "fad9e9ca64789f36b3065ea01d4f1618bf72288711294508a88226b851310d05",
+    "assets/ui-font/manifest.json": "9b5f14f56a10477426b7ca1588eb3f90189c2dae3f973f4cd23b3a49a405896c"
+  },
+  "frames": [
+    {
+      "file": "docs/verification/cjk-ui/shots/battle-lists/spoils/items-found.png",
+      "png_sha256": "3f5407f86c1d72dcbf3afc30cab32b3f3eaf05ef83704993b125fd909a02a7d8",
+      "trace": "docs/verification/cjk-ui/shots/battle-lists/spoils/items-found-trace.json",
+      "trace_sha256": "8421d0be6e77cb7b93a544bede347fd3b1473a2e4cc2f562dd695a086a5f466c",
+      "size": [960, 600],
+      "state": "StageSpoils, verdict=2, spoil_phase=0, round=22",
+      "visible": "找到的物品與兩筆中文物品譯名"
+    },
+    {
+      "file": "docs/verification/cjk-ui/shots/battle-lists/spoils/characters.png",
+      "png_sha256": "d6e62d0a675e20fb883bc611a79b112f92893050dbdf8b6ee15eeac84642ab39",
+      "trace": "docs/verification/cjk-ui/shots/battle-lists/spoils/characters-trace.json",
+      "trace_sha256": "42c69fa909756ab59110f2689bf9029331da7d4c7f376cbe7f6acd29df57fc2b",
+      "size": [960, 600],
+      "state": "StageSpoils, verdict=2, spoil_phase=1, round=22",
+      "visible": "角色清單；Moraine、Kenneth、Olear 是玩家角色名稱"
+    }
+  ],
+  "evidence": "已證實：重製版固定輸入的正常按鍵路徑可到兩張繁中戰利品頁，兩張 PNG 已目視檢查可讀。",
+  "exit_continuation_2026_09_24": {
+    "reason": "戰利品第一頁取消後下一次結算曾重新開啟清單；RE-115 的取消路徑應返回野外。修正為每場勝利只開啟清單一次。",
+    "binary_sha256": "e923df8cda9793dd96a7ba6c0e9b4443735c3960b1781314bbddb98deea4ff64",
+    "tokens": "沿用前 1927 個 token，再輸入 N N RET：從角色頁返回物品頁、取消物品頁、確認結算。",
+    "result": "中文與英文模式均離開戰鬥並返回世界地圖；兩份結束軌跡逐位元相同。中文日期顯示「四月一日／西元 1100」，英文字樣留在英文模式。",
+    "size_zh": [960, 600],
+    "size_en": [320, 200],
+    "zh_png": "docs/verification/cjk-ui/shots/battle-lists/spoils/exit-world-zh.png",
+    "zh_png_sha256": "c9ab31bdafa2c07927970c313ff0e422055a44a53d54a578befad745d0c6fedc",
+    "en_png": "docs/verification/cjk-ui/shots/battle-lists/spoils/exit-world-en.png",
+    "en_png_sha256": "48dc843e39f8f7b69e9de5275de116fef7df42fa8dba81f9ba0a84a03f835b44",
+    "zh_trace": "docs/verification/cjk-ui/shots/battle-lists/spoils/exit-world-zh-trace.json",
+    "en_trace": "docs/verification/cjk-ui/shots/battle-lists/spoils/exit-world-en-trace.json",
+    "trace_sha256_both": "633010aa837b7e9426854fbcb1bb59551ef97193ab40547e770c5c3bcf2908b3",
+    "evidence": "已證實：重製版的戰後返回與中英文狀態相同；不含原版同狀態對拍或戰後存檔。"
+  },
+  "rights": "private GitHub 可保存；不得公開散布原作衍生素材",
+  "limits": [
+    "怪物與任務地點採觀察用替代資料；不代表原版資料的自然遭遇難度或掉落機率。",
+    "續測已證明取消清單後返回野外；尚未證明戰後保存、重載或完整正常任務流程。",
+    "沒有原版同狀態戰鬥收據；不宣稱原版規則、亂數或整場戰鬥一致。",
+    "這次驗證的是目前工作樹重建的程式，不是既有 AppImage。"
+  ]
+}
