@@ -82,6 +82,7 @@ tools/run_cjk_font_build.sh --strings docs/i18n/newchar-zh-Hant.json \
     --extra-tsv docs/i18n/display-names-zh-Hant.tsv \
     --extra-json docs/i18n/ui-symbols-zh-Hant.json \
     --extra-json docs/i18n/spell-words-zh-Hant.json \
+    --extra-json docs/i18n/title-zh-Hant.json \
     --extra-json docs/re/town1-outdoor-sample.json \
     --extra-json docs/re/town-outdoor-sample.json \
     --extra-json docs/re/town-inn-sample.json \

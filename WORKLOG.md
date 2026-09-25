@@ -6516,3 +6516,9 @@ frame-270 推翻了 remake 的版面：
   既有的 `drawPage`，已改；英文標題畫格與既有截圖逐位元相同。其餘畫格未見黑塊或
   錯位。原版美術內的英文（開場 ORIGIN／製作名單／標誌與版權、封面書名）列為待
   使用者決定。`montage` 在該映像因缺字型崩潰，改用 `convert +append／-append`。
+- 使用者 2026-09-26 決定：開場保留原圖加中文字幕、英文標誌保留加中文副標。新增
+  `docs/i18n/title-zh-Hant.json`（以 TITLE.EXE 呈現的 BACKPICS 圖號 7…12 為鍵，由
+  `-title-timeline` 對出六張字幕卡）與 `cmd/kol/title_subtitles.go`：字幕以中文字模
+  兩倍最近鄰放大、黑底，一般卡放畫面下緣，標誌卡做成劍身右段銘牌，封面副標放在書名
+  板下方；人名與版權行保留原文。字模 2,557 字零流失、覆蓋 5,966／0。英文封面與標題
+  畫格逐位元不變。收據 `docs/verification/cjk-ui/title-subtitles-receipt.json`。

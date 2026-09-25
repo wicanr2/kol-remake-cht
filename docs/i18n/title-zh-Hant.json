@@ -1,0 +1,13 @@
+{
+ "schema": "kol-title-subtitles-v1",
+ "note": "開場動畫與書本封面的中文字幕。原版美術不動，中文模式另畫字幕（使用者 2026-09-26 決定：保留原圖加中文字幕、保留英文標誌加中文副標）。鍵是 TITLE.EXE 呈現的 BACKPICS 圖號（docs/re/title-sequence.json）；人名與版權行保留原文。",
+ "backs": {
+  "7": {"en": "ORIGIN PRESENTS...", "zh": "ORIGIN 出品"},
+  "8": {"en": "A Dallas Snell & Alan Gardner Production of", "zh": "Dallas Snell 與 Alan Gardner 製作"},
+  "9": {"en": "A Fantasy Role Playing Epic By Todd Porter", "zh": "奇幻角色扮演史詩　作者 Todd Porter"},
+  "10": {"en": "Knights of Legend", "zh": "武士傳說", "placement": "logo"},
+  "11": {"en": "Programming:", "zh": "程式設計"},
+  "12": {"en": "Graphics:", "zh": "美術"}
+ },
+ "cover": {"en": "Knights of Legend", "zh": "武士傳說"}
+}

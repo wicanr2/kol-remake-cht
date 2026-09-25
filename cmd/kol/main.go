@@ -1006,25 +1006,27 @@ type game struct {
 	small       *font.Font
 	large       *font.Font
 	cjk         *font.Font
-	strings     *i18n.Table
-	roster      *roster.Roster
-	remove      *roster.DeleteFlow
-	inn         *town.Inn
-	outdoor     *town.Outdoor
-	play        *town.Session
-	flow        *flow.Flow
-	walkTick    int
-	markerStep  int
-	canvas      *screen.Canvas
-	state       *charcreate.State
-	sequence    *title.Sequence
-	player      *title.Player
-	book        *book.OpenPlayer
-	bookAnim    *book.OpenAnimation
-	bookWait    float64
-	bookFrom    string // 動畫的起始畫面
-	bookTarget  string // 動畫的目標畫面
-	bookLib     *assets.Library
+	// titleSubs 是中文模式的開場字幕與封面副標；英文模式為 nil。
+	titleSubs  *titleSubtitles
+	strings    *i18n.Table
+	roster     *roster.Roster
+	remove     *roster.DeleteFlow
+	inn        *town.Inn
+	outdoor    *town.Outdoor
+	play       *town.Session
+	flow       *flow.Flow
+	walkTick   int
+	markerStep int
+	canvas     *screen.Canvas
+	state      *charcreate.State
+	sequence   *title.Sequence
+	player     *title.Player
+	book       *book.OpenPlayer
+	bookAnim   *book.OpenAnimation
+	bookWait   float64
+	bookFrom   string // 動畫的起始畫面
+	bookTarget string // 動畫的目標畫面
+	bookLib    *assets.Library
 
 	// ending 是結局播到第幾段（RE-106）；endBank／endTrans 是敘事的文字庫與譯文。
 	ending   *ending.State
@@ -1365,6 +1367,9 @@ func (g *game) render() error {
 			return err
 		}
 		g.drawPage(img, 0, 0)
+		if g.scene == sceneCover {
+			drawCoverSubtitle(g.canvas.Image(), g.cjk, g.titleSubs)
+		}
 	case sceneNewChar:
 		bg, err := g.sprites.Get("BOOKPICS", book.OpenSpread)
 		if err != nil {
@@ -1488,6 +1493,7 @@ func (g *game) render() error {
 		}
 		g.drawPage(bg, 0, 0)
 		if g.frame.Archive == "" || g.frame.Overlay < 0 {
+			drawTitleSubtitle(g.canvas.Image(), g.cjk, g.titleSubs, g.frame.Back)
 			return nil
 		}
 		rect, ok := g.sequence.Rect(g.frame.Archive)
@@ -2480,6 +2486,8 @@ func main() {
 		"UI 文字庫（KOLDATA／BOOKDATA／ENDTXT）的繁體中文譯文")
 	displayNamesPath := flag.String("display-names", "docs/i18n/display-names-zh-Hant.tsv",
 		"資料名稱的繁體中文顯示譯名")
+	titleSubsPath := flag.String("title-i18n", "docs/i18n/title-zh-Hant.json",
+		"開場字幕卡與書本封面的中文字幕")
 	spellWordsPath := flag.String("spell-words", "docs/i18n/spell-words-zh-Hant.json",
 		"法術名精靈語音節的中文注解表（SPEC-034）")
 	townI18nPath := flag.String("town-i18n", "docs/i18n/town-zh-Hant.json",
@@ -2677,7 +2685,7 @@ func main() {
 	// 旗標預設維持 `en`：沒寫 `-lang` 的對拍計畫要照舊產出 320×200 英文畫格。
 	// 互動遊玩在上面已切成繁中，所以這裡才檢查譯表，雙擊啟動也涵蓋得到。
 	if *lang != "en" {
-		for _, path := range []string{*townI18nPath, *uiI18nPath, *displayNamesPath, *spellWordsPath} {
+		for _, path := range []string{*townI18nPath, *uiI18nPath, *displayNamesPath, *spellWordsPath, *titleSubsPath} {
 			info, err := os.Stat(path)
 			if err != nil || !info.Mode().IsRegular() {
 				fmt.Fprintf(os.Stderr, "繁體中文譯表無法讀取：%s（%v）\n", path, err)
@@ -3727,6 +3735,14 @@ func main() {
 		}
 	}
 
+	var titleSubs *titleSubtitles
+	if table != nil {
+		if titleSubs, err = loadTitleSubtitles(*titleSubsPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
+
 	g := &game{
 		ending:       &ending.State{},
 		endBank:      endBank,
@@ -3736,6 +3752,7 @@ func main() {
 		small:        small,
 		large:        large,
 		cjk:          cjk,
+		titleSubs:    titleSubs,
 		strings:      table,
 		canvas:       canvasFor(*lang),
 		state:        charcreate.New(data, newRand(*seed)),

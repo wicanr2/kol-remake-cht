@@ -1,0 +1,65 @@
+{
+ "schema": "kol-cjk-title-subtitles-receipt-v1",
+ "date": "2026-09-26",
+ "decision": "使用者 2026-09-26：開場保留原圖加中文字幕；英文標誌保留並加中文副標",
+ "inputs_sha256": {
+  "docs/i18n/title-zh-Hant.json": "d8f7246c051436b4a711bd85ffde24f08d407677c0f8fc1b499c47f141aea3be",
+  "assets/ui-font/manifest.json": "94d74a90b71e2b0995a92474db50e56d7f0d423a7ea6b4c10dd7486d63a64788",
+  "docs/re/title-sequence.json": "f33613cf1df27c8c91533d3c5e74d8f1a306a929ecb9fbb6c394df10db576de9"
+ },
+ "english_control": [
+  {
+   "file": "docs/screenshots/en-book-cover.png",
+   "result": "英文模式封面與既有截圖逐位元相同"
+  },
+  {
+   "file": "docs/screenshots/en-title.png",
+   "result": "英文模式標題第 89 格與既有截圖逐位元相同"
+  }
+ ],
+ "frames": [
+  {
+   "file": "docs/verification/cjk-ui/shots/title/title-frame-22-zh.png",
+   "png_sha256": "a83de4fab2b8aecd4aa46db1b4fedd8647b1ccbb1b1d603f870f59e35ab4f76f",
+   "invocation": "cmd/kol -lang zh-Hant -title-frame 22 -shot <PNG>",
+   "back": 7
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/title/title-frame-23-zh.png",
+   "png_sha256": "b4fdf610a253ff536226123f9e2bea52e091170d7bfc73d8a6fa4c638974d749",
+   "invocation": "cmd/kol -lang zh-Hant -title-frame 23 -shot <PNG>",
+   "back": 8
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/title/title-frame-45-zh.png",
+   "png_sha256": "0ce4c69dac76b56b8b010f8160ee89fb4d9c324e749bf6a96311b46842dd3707",
+   "invocation": "cmd/kol -lang zh-Hant -title-frame 45 -shot <PNG>",
+   "back": 9
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/title/title-frame-46-zh.png",
+   "png_sha256": "6945ad34a97b536b21ab891bfb5594f7177e74dd41f965f98883e11206a2713d",
+   "invocation": "cmd/kol -lang zh-Hant -title-frame 46 -shot <PNG>",
+   "back": 10
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/title/title-frame-68-zh.png",
+   "png_sha256": "28faac2d7a2465bf9bdaeb18c848ce38c642895033dd30290effaa5ad4b3cb07",
+   "invocation": "cmd/kol -lang zh-Hant -title-frame 68 -shot <PNG>",
+   "back": 11
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/title/title-frame-69-zh.png",
+   "png_sha256": "3efe6aaa1737f9f3cf726ce55230f7ac8700ef45d90abd4b71e83624ba669464",
+   "invocation": "cmd/kol -lang zh-Hant -title-frame 69 -shot <PNG>",
+   "back": 12
+  },
+  {
+   "file": "docs/verification/cjk-ui/shots/title/book-cover-zh.png",
+   "png_sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e",
+   "invocation": "cmd/kol -lang zh-Hant -scene cover -shot <PNG>"
+  }
+ ],
+ "evidence": "已證實：七張中文模式畫格經目視檢查，字幕位於畫面下緣或銘牌，不遮蓋原版英文字樣。",
+ "rights": "含原版衍生美術；依 2026-09-01 決定可存 private repo，不得公開散布"
+}

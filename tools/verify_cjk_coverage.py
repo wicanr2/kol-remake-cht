@@ -68,6 +68,11 @@ def main():
         for i, row in enumerate(words[part]):
             entries.append((f"{words_path}.{part}[{i}].zh", row["zh"]))
     entries.append((f"{words_path}.gloss-prefix", "持續"))
+    title_path = "docs/i18n/title-zh-Hant.json"
+    title = read(title_path)
+    for key, row in title["backs"].items():
+        entries.append((f"{title_path}.backs.{key}.zh", row["zh"]))
+    entries.append((f"{title_path}.cover.zh", title["cover"]["zh"]))
     missing = []
     for location, value in entries:
         absent = sorted({c for c in value if c.isprintable() and not c.isspace() and ord(c) not in supported})
