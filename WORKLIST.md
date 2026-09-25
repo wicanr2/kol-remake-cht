@@ -174,7 +174,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：同 v01-full-battle-parity。
   核實：要人判——同 v01-full-battle-parity。這兩條應該一起收掉，或合成一條。
 
-- **battle-silent-steps-inventory** — 執行段裡沒有訊息就不停的那幾手
+- **battle-silent-steps-inventory**（#96） — 執行段裡沒有訊息就不停的那幾手
   原版每一手都印一句再等鍵（sub_1B100(5)）。remake 的 battleStep 仍保留「這一手沒有訊息就直接往下走」的迴圈，當初是因為敵人那一手與攻擊訊息都還沒接；兩者現已接上，哪些手仍會落進這條迴圈還沒盤點。
   完成條件：列出現行 Act 結果中沒有訊息的手並逐一對照原版；原版有訊息的補上，確定原版也不印的寫進 SPEC-008，最後移除或收窄這條迴圈。
   核實：`cmd/kol/main.go`、`docs/spec/008-combat-field.md` 找得到 `哪些手會落到這裡還沒盤點|迴圈尚未盤點` 就是還沒完
@@ -266,7 +266,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：sub_26C5F 解出，那一句的數字報得出來。
   核實：`cmd/kol/main.go` 找得到 `那一支還沒解讀，寧可不報` 就是還沒完
 
-- **sub-21e0b-filter-contradiction** — sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值
+- **sub-21e0b-filter-contradiction**（#95） — sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值
   RE-118 記下「種類 byte 大於 0x7F 才算有東西」，又說種類 byte 為 0 的 Fur Boots、Fur Cape、Leather Cape 走 kind 0 （設 +0x04，+0x03 為 0 就設 1）。兩句互相矛盾。若斗篷或靴子確實會設 +0x03，移動方式選單的門檻（commands.go）會變；remake 目前不設 Flag03。
   完成條件：回 IDA 重讀 sub_21E0B 的過濾分支並改正 RE-118；依結論接上或確認 Flag03 在現行資料下恆為 0，同步 SPEC-008。
   核實：`internal/battle/battle.go`、`docs/spec/008-combat-field.md`、`docs/spec/010-combat-commands.md` 找得到 `還要回 IDA 重讀|要回 IDA 重讀|參戰者記錄 \+0x03 的完整語意` 就是還沒完

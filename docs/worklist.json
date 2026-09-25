@@ -887,7 +887,8 @@
         ],
         "pattern": "還要回 IDA 重讀|要回 IDA 重讀|參戰者記錄 \\+0x03 的完整語意",
         "note": "程式與規格的自承；查清時一起改寫。"
-      }
+      },
+      "issue": 95
     },
     {
       "id": "battle-silent-steps-inventory",
@@ -903,7 +904,8 @@
         ],
         "pattern": "哪些手會落到這裡還沒盤點|迴圈尚未盤點",
         "note": "程式與規格的自承；盤點完一起改寫。"
-      }
+      },
+      "issue": 96
     },
     {
       "id": "move-unlock-tile-reason",
