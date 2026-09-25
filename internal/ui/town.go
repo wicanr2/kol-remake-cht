@@ -330,12 +330,29 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 				text = text[:len(text)-1]
 			}
 			f.Draw(dst, l.DialogTextX, l.DialogTextY+i*16, string(text), c[0], c[1], c[2])
+			// 選中那一列的注解接在名字後面（SPEC-034）；用未選取的顏色，放不下就截斷，
+			// 不蓋到右側的捲動箭頭。
+			if i == in.List.Selected && i < len(in.List.Notes) && in.List.Notes[i] != "" {
+				nameW, _ := f.Measure(string(text))
+				x := l.DialogTextX + nameW + 16
+				note := []rune(in.List.Notes[i])
+				for len(note) > 0 {
+					w, _ := f.Measure(string(note))
+					if x+w <= l.DialogX+l.DialogW-24 {
+						break
+					}
+					note = note[:len(note)-1]
+				}
+				g := town.ColourListIdle
+				f.Draw(dst, x, l.DialogTextY+i*16, string(note), g[0], g[1], g[2])
+			}
 		}
 		if in.List.Scrolls() {
 			a := town.ColourListArrow
 			x := l.DialogX + l.DialogW - 20
-			f.Draw(dst, x, l.DialogTextY, "^", a[0], a[1], a[2])
-			f.Draw(dst, x, l.DialogTextY+7*16, "v", a[0], a[1], a[2])
+			// 中文字模的 ▲▼（docs/i18n/ui-symbols-zh-Hant.json）；半形 v 在中文畫面像字母。
+			f.Draw(dst, x, l.DialogTextY, "▲", a[0], a[1], a[2])
+			f.Draw(dst, x, l.DialogTextY+7*16, "▼", a[0], a[1], a[2])
 		}
 		lines = nil
 	}

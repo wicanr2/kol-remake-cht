@@ -49,7 +49,8 @@ func (s *Session) ownSpellView() *InnList {
 	for _, sp := range spells[sc.top:end] {
 		rows = append(rows, sp.Name)
 	}
-	return &InnList{Rows: rows, Selected: sc.cursor - sc.top, Total: len(spells)}
+	return &InnList{Rows: rows, Notes: s.spellNotes(rows), Selected: sc.cursor - sc.top,
+		Total: len(spells)}
 }
 
 // ownSpells 是這名隊員身上有名字的那幾筆——原版跳過空槽（`0x17917`）。
@@ -212,7 +213,7 @@ func (s *Session) spellDenied() {
 	lines := nonEmpty(s.uiLines(SpellDeniedRecord))
 	lines = append(lines, nonEmpty(s.uiLines(SpellDeniedOrderRecord))...)
 	if i := s.speakerIndex(); i >= 0 && s.Party[i].Order != nil {
-		lines = append(lines, s.Party[i].Order.Name+"!")
+		lines = append(lines, s.shownExclaim(s.Party[i].Order.Name))
 	}
 	s.scrollSay(lines, s.refreshSpellEdit)
 }

@@ -166,7 +166,10 @@ func (c Candidate) member() Member {
 
 // InnList 是對話框改畫成清單時的內容。Rows 是**視窗內**那幾列。
 type InnList struct {
-	Rows     []string
+	Rows []string
+	// Notes 與 Rows 平行，只給中文畫面用：選中那一列後面的注解（SPEC-034 的
+	// 法術名音節解析）。英文畫面不畫，nil 表示沒有注解。
+	Notes    []string
 	Selected int
 	// Total 是清單全部有幾筆。原版只有「視窗裝不下」時才畫捲動箭頭
 	// （`sub_1AAE8:0x1AB0D` 比的是列數與筆數），0 代表與 Rows 一樣多。

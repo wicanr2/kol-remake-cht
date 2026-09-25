@@ -90,7 +90,7 @@ func DeleteListCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translato
 		}
 		y := l.RosterY + i*l.RosterStep
 		text(dst, f, l.RosterNamesX, y, s.Name, c)
-		text(dst, f, l.RosterLocationsX, y, s.Location(), c)
+		text(dst, f, l.RosterLocationsX, y, locationCJK(t, s), c)
 	}
 	if confirm {
 		w := book.CJKConfirm

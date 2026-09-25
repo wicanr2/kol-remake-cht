@@ -133,16 +133,19 @@ func drawSheetBodyCJK(dst *ebiten.Image, f *font.Font, t Translator, labels []to
 	}{
 		{l.GoldRow, l.GoldValueCol, fmt.Sprintf("% 9d", p.Gold)},
 		{l.AdventureRow, l.AdventureCol, fmt.Sprintf("%5d", p.Adventure)},
-		{l.MovementRow, l.MovementCol, p.Movement},
+		{l.MovementRow, l.MovementCol, ""},
 	} {
 		cellCJK(dst, f, s, l.WeaponNameCol, row.y, clip(f, label(labels, sheetLabelGold+i), labelSafe))
 		cellCJK(dst, f, s, row.col, row.y, row.value)
 	}
+	// 移動率照原版印等級字母，再補括號數值（使用者 2026-09-25 決定）；右緣對齊
+	// 原本那一個字母的右緣，不超出金幣框。
+	rightCJK(dst, f, s, l.MovementCol+1, l.MovementRow, movementCJK(p.Movement))
 	if p.Order != "" {
-		cellCJK(dst, f, s, l.OrderCol, l.EquipRow, p.Order)
+		cellCJK(dst, f, s, l.OrderCol, l.EquipRow, displayName(t, p.Order))
 	}
 	if p.Title != "" {
-		rightCJK(dst, f, s, l.TitleCol, l.EquipRow, p.Title)
+		rightCJK(dst, f, s, l.TitleCol, l.EquipRow, displayName(t, p.Title))
 	}
 
 	// 兩條長條的標籤在原版記錄裡就自帶位置（`~V84~H05`／`~V92`），照那一組放。
@@ -222,6 +225,14 @@ func centredCJK(dst *ebiten.Image, f *font.Font, r town.Rect, y int, text string
 	}
 	w, _ := f.Measure(text)
 	cellCJKAt(dst, f, r.X0+(r.Width()-w)/2, y, text)
+}
+
+// movementCJK 是中文資料頁的移動率：原版字母 `chr(0x41 + 移動率)` 後接括號數值。
+func movementCJK(letter string) string {
+	if len(letter) != 1 || letter[0] < 'A' || letter[0] > 'Z' {
+		return letter
+	}
+	return fmt.Sprintf("%s（%d）", letter, int(letter[0]-'A'))
 }
 
 // rightCJK 把一段文字的右緣靠到某一欄。

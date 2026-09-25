@@ -48,13 +48,18 @@ const (
 
 // Session 是一次城鎮遊玩。
 type Session struct {
-	Outdoor   *Outdoor
-	Buildings *TownBuildings
-	Text      *Text
-	Topics    *Topics
-	UIText    *UIText
-	Trans     *Translations
-	Party     []Member
+	// DisplayName 只在中文模式設定：把代入對話句的資料原名（例如教派名）換成
+	// 顯示譯名（SPEC-033）。nil 時照原名；遊戲狀態與存檔永遠存原名。
+	DisplayName func(string) string
+	// SpellGloss 只在中文模式設定：法術名的音節注解（SPEC-034），法術名本身不譯。
+	SpellGloss func(string) string
+	Outdoor    *Outdoor
+	Buildings  *TownBuildings
+	Text       *Text
+	Topics     *Topics
+	UIText     *UIText
+	Trans      *Translations
+	Party      []Member
 	// Roster 是全部角色檔的清單，招募同伴時用來挑出這間建築裡的人。
 	Roster []Candidate
 	// TownCode 是這座城鎮在世界地圖上的三字母代碼（BRT、MIN…），
@@ -714,7 +719,7 @@ func nonEmpty(lines []string) []string {
 // 中文比英文短，譯文常把原版的兩行併成一行，`@` 因此可以比原文少（
 // `tools/verify_ui_translation.py` 的判準）。
 func (s *Session) uiLines(index int) []string {
-	if zh := s.Trans.UIRecord(index); zh != "" {
+	if zh, ok := s.Trans.UIRecordOK(index); ok {
 		return splitUILines(zh)
 	}
 	if s.UIText == nil {
@@ -725,7 +730,7 @@ func (s *Session) uiLines(index int) []string {
 
 // uiRecord 取 UI 文字庫的一筆記錄，中文模式優先用譯文。版面標記照樣剝掉。
 func (s *Session) uiRecord(index int) string {
-	if zh := s.Trans.UIRecord(index); zh != "" {
+	if zh, ok := s.Trans.UIRecordOK(index); ok {
 		return strip(zh)
 	}
 	if s.UIText == nil {
@@ -737,7 +742,7 @@ func (s *Session) uiRecord(index int) string {
 // uiRaw 取一筆記錄但**保留前後空白**。原版有些記錄靠自己帶的空白接在別段後面，
 // 例如訓練問句裡的 `" Skill"`（記錄 0x40）。
 func (s *Session) uiRaw(index int) string {
-	if zh := s.Trans.UIRecord(index); zh != "" {
+	if zh, ok := s.Trans.UIRecordOK(index); ok {
 		return stripKeepSpaces(zh)
 	}
 	if s.UIText == nil {

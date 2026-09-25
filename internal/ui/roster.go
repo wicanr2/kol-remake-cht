@@ -38,8 +38,8 @@ func Roster(dst *ebiten.Image, sprites Sprites, small *font.Font,
 	return nil
 }
 
-// RosterCJK 是角色清單頁的中文模式。角色名字與所在地是原版資料，維持原文；
-// 標題與欄名改為中文。版面是 remake 自訂的，不對拍。
+// RosterCJK 是角色清單頁的中文模式。角色名字是玩家自取，維持原文；所在地查
+// 顯示譯名（SPEC-033），標題與欄名改為中文。版面是 remake 自訂的，不對拍。
 func RosterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	slots []roster.Slot) error {
 	bg, err := sprites.Get("BOOKPICS", book.OpenSpread)
@@ -53,7 +53,7 @@ func RosterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	for i, s := range slots {
 		y := l.RosterY + i*l.RosterStep
 		text(dst, f, l.RosterNamesX, y, s.Name, book.ColourValue)
-		text(dst, f, l.RosterLocationsX, y, s.Location(), book.ColourValue)
+		text(dst, f, l.RosterLocationsX, y, locationCJK(t, s), book.ColourValue)
 	}
 	return nil
 }

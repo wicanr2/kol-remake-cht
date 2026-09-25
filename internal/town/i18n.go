@@ -87,6 +87,20 @@ func (t *UITranslations) Record(bank string, index int) string {
 	return t.Banks[bank][strconv.Itoa(index)].Zh
 }
 
+// RecordOK 與 Record 相同，另回報這一筆是否算「有譯文」。譯文為空但寫了 note
+// 的是刻意留空（例如 `The]`、` has`，中文不需要冠詞與單數動詞），要照空字串
+// 顯示，不能退回英文；沒有這一筆或空而無 note 才算沒譯。
+func (t *UITranslations) RecordOK(bank string, index int) (string, bool) {
+	if t == nil || t.Banks == nil {
+		return "", false
+	}
+	row, ok := t.Banks[bank][strconv.Itoa(index)]
+	if !ok {
+		return "", false
+	}
+	return row.Zh, row.Zh != "" || row.Note != ""
+}
+
 // LoadTranslations 讀取譯文表。找不到檔案不是錯誤——沒有譯文就顯示原文。
 func LoadTranslations(path string) (*Translations, error) {
 	body, err := os.ReadFile(path)
@@ -137,6 +151,14 @@ func (t *Translations) UIRecord(index int) string {
 		return ""
 	}
 	return t.UI.Record(BankUI, index)
+}
+
+// UIRecordOK 是 KOLDATA 那一筆的 RecordOK。
+func (t *Translations) UIRecordOK(index int) (string, bool) {
+	if t == nil {
+		return "", false
+	}
+	return t.UI.RecordOK(BankUI, index)
 }
 
 // UIBank 回傳這份譯文表的 UI 文字庫譯文；t 是 nil 時回 nil，

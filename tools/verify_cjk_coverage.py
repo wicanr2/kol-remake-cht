@@ -58,6 +58,16 @@ def main():
             raise SystemExit("資料名稱譯表欄位不符")
         for row in rows:
             entries.append((f"{names_path}.{row['key']}", row["zh-Hant"]))
+    symbols_path = "docs/i18n/ui-symbols-zh-Hant.json"
+    symbols = read(symbols_path)
+    for key, value in symbols["symbols"].items():
+        entries.append((f"{symbols_path}.symbols.{key}", value))
+    words_path = "docs/i18n/spell-words-zh-Hant.json"
+    words = read(words_path)
+    for part in ("race", "stat", "severity", "range", "duration"):
+        for i, row in enumerate(words[part]):
+            entries.append((f"{words_path}.{part}[{i}].zh", row["zh"]))
+    entries.append((f"{words_path}.gloss-prefix", "持續"))
     missing = []
     for location, value in entries:
         absent = sorted({c for c in value if c.isprintable() and not c.isspace() and ord(c) not in supported})

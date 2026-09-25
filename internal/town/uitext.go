@@ -66,7 +66,7 @@ func LoadUIText(path string) (*UIText, error) {
 // 戰鬥的訊息是靠記錄號串接的碎片（RE-088），少了自帶的空白就會黏在一起，
 // 所以這裡不能用 Record——那一支會把兩端的空白 trim 掉。
 func UIRaw(bank *UIText, tr *Translations, bankName string, index int) string {
-	if zh := tr.UIBank().Record(bankName, index); zh != "" {
+	if zh, ok := tr.UIBank().RecordOK(bankName, index); ok {
 		return stripKeepSpaces(zh)
 	}
 	if bank == nil {
@@ -81,7 +81,7 @@ func UIRaw(bank *UIText, tr *Translations, bankName string, index int) string {
 // 剝掉；帶框的清單標題（`~H02~V09Items Found:`）反過來，座標就是那一筆記錄的內容，
 // 剝掉之後整段會畫到畫面左上角去。
 func UISegments(bank *UIText, tr *Translations, bankName string, index int) []Segment {
-	if zh := tr.UIBank().Record(bankName, index); zh != "" {
+	if zh, ok := tr.UIBank().RecordOK(bankName, index); ok {
 		return ParseSegments(zh)
 	}
 	if bank == nil {
@@ -102,7 +102,7 @@ func JoinedSegments(bank *UIText, tr *Translations, bankName string,
 	joined := ""
 	for _, i := range indexes {
 		if tr != nil {
-			if zh := tr.UIBank().Record(bankName, i); zh != "" {
+			if zh, ok := tr.UIBank().RecordOK(bankName, i); ok {
 				joined += zh
 				continue
 			}

@@ -11,6 +11,8 @@ import (
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/wicanr2/kol-remake-cht/internal/magic"
 )
 
 type Entry struct {
@@ -36,6 +38,8 @@ type Table struct {
 	entries    map[string]Entry
 	names      map[string]string
 	upperNames map[string]string
+	spellWords *magic.WordTable
+	spellSub   func(class, sub int) string
 }
 
 // Load 讀取字串表。
@@ -118,6 +122,39 @@ func (t *Table) LoadDisplayNames(path string) error {
 	t.names = names
 	t.upperNames = upperNames
 	return nil
+}
+
+// LoadSpellWords 讀法術音節表（SPEC-034）。subName 把 MAGIC.0 的亞種索引換成
+// 英文名，再由 DisplayName 轉成顯示譯名。
+func (t *Table) LoadSpellWords(path string, subName func(class, sub int) string) error {
+	if t == nil {
+		return fmt.Errorf("字串表是空的")
+	}
+	w, err := magic.LoadWordTable(path)
+	if err != nil {
+		return err
+	}
+	t.spellWords, t.spellSub = w, subName
+	return nil
+}
+
+// SpellGloss 是法術名的中文注解；名字不是可解析的精靈語音節串就回空字串。
+// 法術名本身不翻譯：它就是法術構成規則，玩家在編輯器輸入的也是這些詞。
+func (t *Table) SpellGloss(name string) string {
+	if t == nil || t.spellWords == nil {
+		return ""
+	}
+	w, ok := t.spellWords.Parse(name)
+	if !ok {
+		return ""
+	}
+	sub := ""
+	if w.Sub > 0 && t.spellSub != nil {
+		if en := t.spellSub(w.Class, w.Sub); en != "" {
+			sub = t.DisplayName(strings.ToUpper(en))
+		}
+	}
+	return w.Gloss(sub)
 }
 
 // DisplayName 僅翻譯完整的資料原名；玩家自取的姓名與法術名不在表內。

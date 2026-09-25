@@ -1,0 +1,49 @@
+{
+ "schema": "kol-spell-words-v1",
+ "source": "knightslegend-manual.pdf 印刷頁 72–75（docs/manual/chapters/07-advanced-gamers.md「施放法術」）",
+ "note": "法術名是精靈語音節串：種族＋屬性＋強度＋距離＋（持續時間）＋亞種。中文模式保留原文，只依這張表加注解；索引對應 MAGIC.0 的 class／stat／subclass（RE-128）。遊戲資料的四個人形種族省略說明書的 TA 結尾，兩種都接受。",
+ "race": [
+  {"syllable": "DAY", "class": 1, "zh": "人類"},
+  {"syllable": "AR", "class": 2, "zh": "精靈"},
+  {"syllable": "TYA", "class": 3, "zh": "矮人"},
+  {"syllable": "KEL", "class": 4, "zh": "凱爾登"},
+  {"syllable": "VON", "class": 5, "zh": "元素生物"},
+  {"syllable": "KUM", "class": 6, "zh": "巨人族"},
+  {"syllable": "VAR", "class": 7, "zh": "傳奇生物"},
+  {"syllable": "VOR", "class": 8, "zh": "不死生物"}
+ ],
+ "stat": [
+  {"syllable": "DAN", "stat": 1, "zh": "力量"},
+  {"syllable": "VA", "stat": 2, "zh": "敏捷"},
+  {"syllable": "DA", "stat": 3, "zh": "先見"},
+  {"syllable": "VOR", "stat": 4, "zh": "智力"},
+  {"syllable": "TWE", "stat": 5, "zh": "疲勞"},
+  {"syllable": "NA", "stat": 6, "zh": "身體"},
+  {"syllable": "KUT", "stat": 7, "zh": "進攻技能"},
+  {"syllable": "AND", "stat": 8, "zh": "防禦技能"}
+ ],
+ "severity": [
+  {"syllable": "R", "zh": "微不足道"},
+  {"syllable": "L", "zh": "中等"},
+  {"syllable": "W", "zh": "嚴重"},
+  {"syllable": "Y", "zh": "強大"},
+  {"syllable": "F", "zh": "驚人"}
+ ],
+ "range": [
+  {"syllable": "ON", "zh": "近距離"},
+  {"syllable": "YR", "zh": "遠距離"}
+ ],
+ "duration": [
+  {"syllable": "A", "zh": "最短"},
+  {"syllable": "E", "zh": "短"},
+  {"syllable": "I", "zh": "中"},
+  {"syllable": "O", "zh": "長"},
+  {"syllable": "U", "zh": "最長"}
+ ],
+ "subclass": {
+  "5": {"MU": 1, "FE": 2, "TI": 3, "MI": 4},
+  "6": {"MU": 1, "FE": 2, "TI": 3, "MI": 4, "KO": 5, "RA": 6, "A": 7, "VA": 8, "KE": 9, "AT": 10, "LO": 11, "RI": 12},
+  "7": {"MU": 1, "FE": 2, "TI": 3, "MI": 4, "KO": 5, "RA": 6, "A": 7, "VA": 8},
+  "8": {"MU": 1, "FE": 2, "TI": 3, "MI": 4}
+ }
+}

@@ -1,6 +1,10 @@
 package battle
 
-import "testing"
+import (
+	"strings"
+	"testing"
+	"unicode/utf8"
+)
 
 // 用 KOLDATA 原文當樣本：代名詞、名字與武器名都要填對。
 func testLookup(record int) string {
@@ -259,6 +263,32 @@ func assertRecords(t *testing.T, got, want []int) {
 	for i := range got {
 		if got[i] != want[i] {
 			t.Fatalf("第 %d 筆是 %#x，應該是 %#x：%#x vs %#x", i, got[i], want[i], got, want)
+		}
+	}
+}
+
+// 中文譯表把 `The]` 刻意留空：文字庫回空字串時敵人名字前不補任何冠詞，
+// 不能退回內建的英文 `The `。
+func TestMonsterNameWithoutArticleWhenRecordBlank(t *testing.T) {
+	c := testContext()
+	c.Lookup = func(record int) string {
+		if record == TheRecord {
+			return ""
+		}
+		return testLookup(record)
+	}
+	c.Actor = Speaker{Name: "巨魔", Monster: true}
+	if got := c.Line("移動了！"); got != "巨魔 移動了！" {
+		t.Fatalf("得到 %q", got)
+	}
+}
+
+// 中文譯文沒有空白時硬斷，不能切在多位元組字元中間。
+func TestWrapMessageKeepsRunesWhole(t *testing.T) {
+	text := strings.Repeat("這道法術產生了明顯負面的效果", 4)
+	for _, line := range WrapMessage(text) {
+		if !utf8.ValidString(line) {
+			t.Fatalf("斷行切壞了字元：%q", line)
 		}
 	}
 }

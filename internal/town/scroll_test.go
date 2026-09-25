@@ -249,3 +249,34 @@ func TestSheetSpellListOpensAndCloses(t *testing.T) {
 		t.Fatal("U-TURN 應該回資料頁")
 	}
 }
+
+// 中文模式只把代入對話的教派名換成顯示譯名；存進角色與資料頁的仍是原名（SPEC-033）。
+func TestScrollJoinShowsDisplayNameButStoresOriginal(t *testing.T) {
+	s := scrollSession(t, 1000, 109)
+	s.DisplayName = func(en string) string {
+		if en == "Blue Gem" {
+			return "藍寶石"
+		}
+		return en
+	}
+	s.StartScroll()
+	joined := false
+	for _, line := range s.Inside.Dialog {
+		if line == "the 藍寶石 Order" {
+			joined = true
+		}
+		if line == "the Blue Gem Order" {
+			t.Fatalf("入會問句仍代入原名：%q", s.Inside.Dialog)
+		}
+	}
+	if !joined {
+		t.Fatalf("入會問句沒有代入譯名：%q", s.Inside.Dialog)
+	}
+	yes(s)
+	if last := s.Inside.Dialog[len(s.Inside.Dialog)-1]; last != "藍寶石！" {
+		t.Fatalf("入會完成句是 %q", last)
+	}
+	if s.Party[0].Order.Name != "Blue Gem" || s.Party[0].Sheet.Order != "Blue Gem" {
+		t.Fatalf("存進角色的教派名被改寫：%+v", s.Party[0].Order)
+	}
+}

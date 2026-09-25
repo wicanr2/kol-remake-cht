@@ -49,6 +49,10 @@ type glyphEntry struct {
 	Advance     int `json:"advance"`
 }
 
+// DrawObserver 若不為 nil，每次 Draw 都會收到字型名稱與字串。只給驗收工具
+// （`-text-log`）用來找中文模式下漏譯的英文；正式遊玩不設，繪製路徑不受影響。
+var DrawObserver func(font, text string)
+
 // Font 是一套已載入的原版點陣字型。
 type Font struct {
 	meta   entry
@@ -186,6 +190,9 @@ func (f *Font) DrawOpaque(dst *ebiten.Image, x, y int, text string,
 // Draw 以指定顏色把字串畫到目標影像；字模表是白色，靠 ColorScale 上色。
 // 回傳實際畫出的字元數，未涵蓋的 codepoint 會被跳過並照樣前進，避免版面位移。
 func (f *Font) Draw(dst *ebiten.Image, x, y int, text string, r, g, b uint8) int {
+	if DrawObserver != nil {
+		DrawObserver(f.meta.Name, text)
+	}
 	drawn, pen := 0, x
 	for _, ch := range []rune(text) {
 		width := f.advance(ch)

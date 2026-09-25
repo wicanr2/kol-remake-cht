@@ -2073,9 +2073,9 @@ func (g *game) battleStep() {
 	// 丟與撿的訊息在動作**做完之後**才展開，東西已經不在原處了，所以名字由
 	// ActResult 帶出來（RE-094）：`|E` 是丟掉的那件、`|H` 是撿到的那件。
 	if r.Item != "" {
-		ctx.Item = r.Item
+		ctx.Item = g.strings.DisplayName(r.Item)
 		if r.Command == battle.CmdDrop {
-			ctx.Actor.Weapon = r.Item
+			ctx.Actor.Weapon = g.strings.DisplayName(r.Item)
 		}
 	}
 	// 施法那一手：`|S` 是法術的名字，生效之後再接一句「The spell has a … effect.」
@@ -2480,6 +2480,8 @@ func main() {
 		"UI 文字庫（KOLDATA／BOOKDATA／ENDTXT）的繁體中文譯文")
 	displayNamesPath := flag.String("display-names", "docs/i18n/display-names-zh-Hant.tsv",
 		"資料名稱的繁體中文顯示譯名")
+	spellWordsPath := flag.String("spell-words", "docs/i18n/spell-words-zh-Hant.json",
+		"法術名精靈語音節的中文注解表（SPEC-034）")
 	townI18nPath := flag.String("town-i18n", "docs/i18n/town-zh-Hant.json",
 		"城鎮建築的譯文表")
 	townTextPath := flag.String("town-text",
@@ -2589,6 +2591,8 @@ func main() {
 			"與原版對拍時要打開")
 	tracePath := flag.String("trace", "",
 		"把每一步的狀態軌跡寫成 JSON：場景、城鎮／世界座標、戰鬥階段與結局段號")
+	textLog := flag.String("text-log", "",
+		"把每個第一次畫出的（字型, 字串）以 JSON 行寫進這個檔，供找中文模式的漏譯")
 	traceDetail := flag.Bool("trace-detail", false,
 		"軌跡多記指令列、游標與逐步的戰場；產生腳本用，收據不需要")
 	routeTo := flag.String("route-to", "",
@@ -2606,6 +2610,12 @@ func main() {
 	}
 	// 發行包被雙擊時工作目錄不是程式所在地，先把它擺正再解析任何相對路徑。
 	useResourceDir(*assetRoot)
+	if *textLog != "" {
+		if err := startTextLog(*textLog); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
 
 	// `-scene game` 是互動遊玩。它借 `flow` 那條路徑的全部初始化，差別只在 token
 	// 來自鍵盤與滑鼠而不是腳本，所以這裡改寫成 flow，另外記一個旗標給 Update。
@@ -2667,7 +2677,7 @@ func main() {
 	// 旗標預設維持 `en`：沒寫 `-lang` 的對拍計畫要照舊產出 320×200 英文畫格。
 	// 互動遊玩在上面已切成繁中，所以這裡才檢查譯表，雙擊啟動也涵蓋得到。
 	if *lang != "en" {
-		for _, path := range []string{*townI18nPath, *uiI18nPath, *displayNamesPath} {
+		for _, path := range []string{*townI18nPath, *uiI18nPath, *displayNamesPath, *spellWordsPath} {
 			info, err := os.Stat(path)
 			if err != nil || !info.Mode().IsRegular() {
 				fmt.Fprintf(os.Stderr, "繁體中文譯表無法讀取：%s（%v）\n", path, err)
@@ -2796,6 +2806,15 @@ func main() {
 			os.Exit(1)
 		}
 		if err := table.LoadDisplayNames(*displayNamesPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		dict, err := magicdata.Load(*magicPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := table.LoadSpellWords(*spellWordsPath, dict.SubclassName); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
@@ -3114,6 +3133,10 @@ func main() {
 			trans = nil
 		}
 		playSession = town.NewSession(state, info, texts, trans, state.Party)
+		if trans != nil && table != nil {
+			playSession.DisplayName = table.DisplayName
+			playSession.SpellGloss = table.SpellGloss
+		}
 		topics, err := town.LoadTopics(*topicsPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -4168,4 +4191,24 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+}
+
+// startTextLog 讓字模繪製回報每個畫出的字串；同一組只記第一次，每行立即寫出，
+// 批次流程以 os.Exit 結束也不會漏掉。
+func startTextLog(path string) error {
+	f, err := os.Create(path)
+	if err != nil {
+		return fmt.Errorf("無法建立文字紀錄：%w", err)
+	}
+	seen := map[[2]string]bool{}
+	font.DrawObserver = func(name, text string) {
+		key := [2]string{name, text}
+		if seen[key] {
+			return
+		}
+		seen[key] = true
+		line, _ := json.Marshal(map[string]string{"font": name, "text": text})
+		f.Write(append(line, '\n'))
+	}
+	return nil
 }

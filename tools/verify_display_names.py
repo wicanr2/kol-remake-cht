@@ -36,6 +36,18 @@ def required_names(root: pathlib.Path) -> set[str]:
             for field in ("quest_wants", "quest_gives"):
                 if door.get(field):
                     required.add(door[field])
+            # 教派名與頭銜（RE-121）：入會對話、角色資料頁的教派欄與頭銜欄。
+            if door.get("order"):
+                required.update(door["order"][f] for f in ("name", "title") if door["order"].get(f))
+            # 名冊右欄的所在地鍵：角色記錄存的是建築名前 10 個大寫字元（`placeKey`）。
+            if door.get("name"):
+                required.add(door["name"].upper()[:10])
+    # MAGIC.0 的亞種名（RE-128）：法術注解與法術編輯器的 SUBCLASS 欄。
+    magic = json.loads((root / "magic.json").read_text())
+    for group in magic["subclass"]:
+        required.update(name.upper() for name in group if name not in ("None", "All"))
+    world = json.loads((root / "world-map.json").read_text())
+    required.update(town["code"] for town in world["towns"])
     return required
 
 

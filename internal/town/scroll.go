@@ -132,7 +132,7 @@ func (s *Session) intellect(i int) int {
 func (s *Session) askJoin() {
 	s.scroll.stage = scrollJoinAsk
 	lines := nonEmpty(s.uiLines(JoinOfferRecord))
-	lines = append(lines, joinLine(s.uiRaw(JoinTheRecord), s.door.Order.Name,
+	lines = append(lines, joinLine(s.uiRaw(JoinTheRecord), s.shownName(s.door.Order.Name),
 		s.uiRaw(JoinOrderRecord)))
 	lines = append(lines, s.priceLines(0, s.door.Price)[1:]...)
 	s.Inside.List = nil
@@ -140,6 +140,34 @@ func (s *Session) askJoin() {
 	s.Inside.Dialog = lines
 	s.Inside.DialogZh = nil
 	s.setInsideIcons([]int{IconYes, IconNo})
+}
+
+// shownName 是代入對話句的資料名稱：中文模式查顯示譯名，英文照原名。
+func (s *Session) shownName(en string) string {
+	if s.DisplayName == nil {
+		return en
+	}
+	return s.DisplayName(en)
+}
+
+// spellNotes 是法術清單每一列的中文注解；英文模式回 nil。
+func (s *Session) spellNotes(rows []string) []string {
+	if s.SpellGloss == nil {
+		return nil
+	}
+	notes := make([]string, len(rows))
+	for i, name := range rows {
+		notes[i] = s.SpellGloss(name)
+	}
+	return notes
+}
+
+// shownExclaim 是名稱接驚嘆號的那一行；中文句用全形「！」。
+func (s *Session) shownExclaim(en string) string {
+	if s.DisplayName == nil {
+		return en + "!"
+	}
+	return s.DisplayName(en) + "！"
 }
 
 // joinLine 把「the」、教派名與「Order」接成一行。兩筆記錄各自帶著前後空白，
@@ -190,7 +218,8 @@ func (s *Session) spellView() *InnList {
 	for _, o := range offers[sc.top:end] {
 		rows = append(rows, o.Name)
 	}
-	return &InnList{Rows: rows, Selected: sc.cursor - sc.top, Total: len(offers)}
+	return &InnList{Rows: rows, Notes: s.spellNotes(rows), Selected: sc.cursor - sc.top,
+		Total: len(offers)}
 }
 
 // MoveScroll 是 SCROLL 兩張清單上的方向鍵。
@@ -351,7 +380,7 @@ func (s *Session) join() {
 	}
 	s.syncParty()
 	lines := nonEmpty(s.uiLines(MemberRecord))
-	lines = append(lines, order.Name+"!")
+	lines = append(lines, s.shownExclaim(order.Name))
 	s.scrollSay(lines, s.showScrollMenu)
 }
 

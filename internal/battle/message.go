@@ -1,6 +1,9 @@
 package battle
 
-import "strings"
+import (
+	"strings"
+	"unicode/utf8"
+)
 
 // 訊息的代換（RE-086）。KOLDATA 的記錄裡有兩種記號：`]` 換成一個空白，
 // `|X` 交給代換表換成名字、代名詞或裝備名。`~Vxx`／`~Hxx`／`~Cxx` 是座標與
@@ -67,12 +70,22 @@ func WrapMessage(text string) []string {
 		for end > start && text[end] != ' ' {
 			end--
 		}
-		if end == start {
+		hard := end == start
+		if hard {
 			// 這一段裡沒有空白：原版會繼續往回掃，這裡硬斷在行寬處。
+			// 中文譯文是多位元組 UTF-8，硬斷要退到完整字元的開頭，不能切半個字。
 			end = limit
+			for end > start && !utf8.RuneStart(text[end]) {
+				end--
+			}
 		}
 		lines = append(lines, text[start:end])
-		start = end + 1
+		// 在空白處斷就跳過那個空白；硬斷沒有空白可跳，下一行從斷點本身接上，
+		// 否則會吃掉一個 byte。
+		start = end
+		if !hard {
+			start++
+		}
 		for start < len(text) && text[start] == ' ' {
 			start++
 		}
@@ -199,14 +212,15 @@ func (c MessageContext) name(s Speaker) string {
 	}
 	prefix := "The "
 	if c.Lookup != nil {
-		if t := c.Lookup(TheRecord); t != "" {
-			prefix = strings.ReplaceAll(t, "]", " ")
-			// 記錄本身以 `]` 收尾（`The]`），有些取法會把它 trim 掉；
-			// 名字前面一定要有一個空白。
-			if !strings.HasSuffix(prefix, " ") {
-				prefix += " "
-			}
+		// 有文字庫就照它：中文譯表刻意把 `The]` 留空（中文不加冠詞），
+		// 空字串不能當成「查不到」而退回英文。
+		t := strings.TrimSpace(strings.ReplaceAll(c.Lookup(TheRecord), "]", " "))
+		if t == "" {
+			return s.Name
 		}
+		// 記錄本身以 `]` 收尾（`The]`），有些取法會把它 trim 掉；
+		// 名字前面一定要有一個空白。
+		prefix = t + " "
 	}
 	return prefix + s.Name
 }

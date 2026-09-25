@@ -99,11 +99,13 @@ func BattleFieldCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 		}
 		drawScaled(dst, scroll, box.X*sc, box.Y*sc, sc)
 		area := battle.MessageArea
-		for i, line := range s.Exec.Text {
+		x0 := area.Col * town.CellWidth * sc
+		width := (box.X+box.Width)*sc - x0 - town.CellWidth*sc
+		for i, line := range rewrapCJK(f, s.Exec.Text, t, width) {
 			y := (area.Y + i*area.LineHeight) * sc
 			// 中文不轉大寫——原版轉大寫是因為它的小字模只有大寫好看，
 			// 中文沒有大小寫，轉了只會讓夾在句子裡的英文名字變形。
-			cellInAt(dst, f, area.Col*town.CellWidth*sc, y, t.T(line), battle.MessageInk)
+			scrollTextCJK(dst, f, x0, y, line)
 		}
 		return nil
 	}
@@ -214,7 +216,89 @@ func BattleSpellListCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 		}
 		drawBattleListTextCJK(dst, f, textX*sc, y*sc, row, safe, town.ColourText)
 	}
+	// 選中的法術名若是精靈語音節串，底部訊息區畫卷軸與中文注解（SPEC-034）。
+	// 規劃段這一區原本是空的；正負效果那一頁的列解析不出來，不會畫。
+	if p := s.Plan.ListPick; p >= 0 && p < len(rows) {
+		if gloss := spellGloss(t, rows[p]); gloss != "" {
+			box := battle.MessageBox
+			scroll, err := sprites.Get(battle.MessageScroll.Archive, battle.MessageScroll.Index)
+			if err != nil {
+				return err
+			}
+			drawScaled(dst, scroll, box.X*sc, box.Y*sc, sc)
+			area := battle.MessageArea
+			scrollTextCJK(dst, f, area.Col*town.CellWidth*sc, area.Y*sc, rows[p]+"：")
+			scrollTextCJK(dst, f, area.Col*town.CellWidth*sc, (area.Y+area.LineHeight)*sc, gloss)
+		}
+	}
 	return nil
+}
+
+// rewrapCJK 把一頁已依原版字元數斷好的訊息接回整句，再依中文字模的實際寬度
+// 重新斷行。原版斷行以 byte 計（`sub_1C1BF`），一個中文字佔三個 byte，照用會
+// 讓每行只剩十個字、卷軸右側大半空著。斷點若落在兩個英文字母之間，接回時補一
+// 個空白；中文之間不補。重新斷行只會讓行數變少，不會超出原本的卷軸列數。
+func rewrapCJK(f *font.Font, lines []string, t Translator, width int) []string {
+	joined := ""
+	for _, line := range lines {
+		line = t.T(line)
+		if joined != "" && line != "" && isASCIIWord(lastRune(joined)) && isASCIIWord(firstRune(line)) {
+			joined += " "
+		}
+		joined += line
+	}
+	var out []string
+	rest := []rune(joined)
+	for len(rest) > 0 {
+		n := len(rest)
+		for n > 1 {
+			if w, _ := f.Measure(string(rest[:n])); w <= width {
+				break
+			}
+			n--
+		}
+		// 不把英文單字切成兩半：往回找空白。
+		if n < len(rest) && isASCIIWord(rest[n-1]) && isASCIIWord(rest[n]) {
+			for k := n - 1; k > 0; k-- {
+				if rest[k] == ' ' {
+					n = k
+					break
+				}
+			}
+		}
+		out = append(out, strings.TrimRight(string(rest[:n]), " "))
+		rest = []rune(strings.TrimLeft(string(rest[n:]), " "))
+	}
+	return out
+}
+
+func isASCIIWord(r rune) bool {
+	return r < 0x80 && (r == '\'' || r >= '0' && r <= '9' || r >= 'A' && r <= 'Z' || r >= 'a' && r <= 'z')
+}
+
+func lastRune(s string) rune {
+	r := []rune(s)
+	if len(r) == 0 {
+		return 0
+	}
+	return r[len(r)-1]
+}
+
+func firstRune(s string) rune {
+	for _, r := range s {
+		return r
+	}
+	return 0
+}
+
+// scrollTextCJK 把一行字直接畫在羊皮紙卷軸上：墨色是黑色，不能像黑底面板那樣
+// 先填 ColourBoxFill，否則整行會變成看不見字的黑塊。
+func scrollTextCJK(dst *ebiten.Image, f *font.Font, x, y int, text string) {
+	if text == "" {
+		return
+	}
+	ink := battle.MessageInk
+	f.Draw(dst, x, y, text, ink[0], ink[1], ink[2])
 }
 
 // drawBattleBoxCJK 與英文戰鬥框使用相同的投影、外框與內填色，只把座標乘上倍率。

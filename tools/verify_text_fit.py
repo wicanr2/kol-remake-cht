@@ -114,8 +114,23 @@ def main() -> int:
             rows = csv.DictReader(handle, delimiter="\t")
             if rows.fieldnames != ["key", "en", "zh-Hant", "status", "source"]:
                 raise SystemExit("資料名稱譯表欄位不符")
+            rows = list(rows)
+            towns = [r["zh-Hant"] for r in rows if r["key"].startswith("town-code.")]
+            longest_town = max(towns, key=lambda z: width(z)[0]) if towns else ""
             for row in rows:
                 value = row["zh-Hant"]
+                if row["key"].startswith("town-code."):
+                    continue
+                if row["key"].startswith("place."):
+                    # 名冊右欄：所在地接空白與最長城名，從 RosterLocationsX 畫到右頁邊。
+                    combined = f"{value} {longest_town}"
+                    w, missing = width(combined)
+                    limit = 408
+                    checks.append({"kind": "display-name-roster-location", "en": row["en"],
+                                   "zh": combined, "x": 0, "width": w, "right_limit": limit,
+                                   "overflow": max(0, w - limit), "missing_glyphs": missing,
+                                   "pass": w <= limit and not missing})
+                    continue
                 w, missing = width(value)
                 for kind, limit in name_limits.items():
                     checks.append({"kind": "display-name-" + kind, "en": row["en"],

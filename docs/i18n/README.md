@@ -16,6 +16,10 @@
 資料名稱另執行 `tools/run_python_tool.sh tools/verify_display_names.py`；此表僅由
 中文畫面的顯示端查詢，不得改寫原始名稱或規則鍵值。
 正式「全中文」還需要逐條正常玩家路徑、程式生成文字、字模與文字安全矩形驗收。
+程式生成文字以 `python3 tools/scan_cjk_text_leaks.py run --all`（玩家路徑）與
+`run-battle`（戰鬥情境）在中文模式重播，報表在 `workplace/cjk-leaks/report.json`。
+法術名保留原文，注解來源是 [音節表](spell-words-zh-Hant.json)（SPEC-034）；
+程式直接畫的符號列在 [符號表](ui-symbols-zh-Hant.json)。
 
 城鎮訊息槽位與建築 payload 共用位移，馬廄坐騎表等資料會被抽取器解成看似
 亂碼的「訊息」。這些槽位列在非文字槽位清單，不列入翻譯母體；清單的原文快照
