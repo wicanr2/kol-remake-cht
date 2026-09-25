@@ -1,9 +1,10 @@
 package town
 
-// 任務物品的交付與回報（RE-107／RE-109）。
+// 任務物品的交付與回報（RE-107／RE-109／RE-139）。
 //
-// 玩家把任務要的東西帶進對的建築，走進去就自動交付：那件東西被換成建築給的另一件
-// （有的話），任務旗標從「完成」變成「回報過」，角色的「已回報數」加一。回報滿
+// 玩家把任務要的東西帶進對的建築，讀完進門敘述才自動交付：第一件吻合物品
+// 被換成建築給的另一件（有的話）；讀完交付台詞後，所有已完成這件任務的隊員
+// 都把旗標改成「回報過」，各自的「已回報數」加一。回報滿
 // 二十三個才接得到最終任務，打完它就播結局（RE-106）。
 //
 // 這一份只做規則；接進建築內那一層要先有角色身上那十六格的 typed data。
@@ -90,20 +91,12 @@ func questField(flags []int, site int) (value, divisor int, ok bool) {
 	return flags[site/4], QuestDivisors[site&3], true
 }
 
-// TurnIn 是走進一棟收任務物品的建築時發生的事（`sub_11A93:0x11B5A` 起）。
-//
-// carried 是一名角色身上那幾格的內容，索引與 CarriedOffsets 對齊；flags 是他的
-// 任務旗標；progress 是「已回報數」那幾格（角色記錄 0x1DD 起），group 是
-// `word_2DF70`。
-//
-// 找到那件東西就換成建築給的那件（Gives 為空就清空那一格），旗標改成
-// QuestReported，已回報數加一，回傳換掉的是第幾格。**旗標不是「完成」也照樣換**
-// ——原版比的只有物品，旗標那一段是分開跑的（`0x11C9C` 另外判 == 2 才記）。
-func TurnIn(carried [][]byte, flags, progress []int, group int,
-	b QuestBuilding) (slot int, reported bool) {
-	slot = -1
+// SwapQuestItem 只做原版 `sub_11A93:0x11B8D..0x11C09` 的物品交換。
+// carried 的索引與 CarriedOffsets 對齊；找到後回傳格號，沒找到回 -1。
+// 旗標與已回報數必須等訊息 6／7 的 SPACE 才更新（RE-139）。
+func SwapQuestItem(carried [][]byte, b QuestBuilding) int {
 	if len(b.Wants) != CarriedStride {
-		return -1, false
+		return -1
 	}
 	for i, item := range carried {
 		if len(item) != CarriedStride || !sameItem(item, b.Wants) {
@@ -114,21 +107,22 @@ func TurnIn(carried [][]byte, flags, progress []int, group int,
 			give = make([]byte, CarriedStride)
 		}
 		copy(item, give)
-		slot = i
-		break
+		return i
 	}
-	if slot < 0 {
-		return -1, false
+	return -1
+}
+
+// ReportQuest 是原版 `sub_11A93:0x11C63..0x11CD0` 對每位隊員做的一次回報。
+// 只看該角色的完成旗標，不看誰持有剛交出的物品。
+func ReportQuest(flags, progress []int, group, site int) bool {
+	if group < 0 || group >= len(progress) || QuestFlag(flags, site) != QuestDone {
+		return false
 	}
-	// 回報那一段只收「已完成」的（`0x11C9C`）。
-	if QuestFlag(flags, b.Site) == QuestDone {
-		SetQuestFlag(flags, b.Site, QuestReported)
-		if group >= 0 && group < len(progress) {
-			progress[group]++
-			reported = true
-		}
+	if !SetQuestFlag(flags, site, QuestReported) {
+		return false
 	}
-	return slot, reported
+	progress[group]++
+	return true
 }
 
 // CanTakeFinal 回報「已回報數」夠不夠接最終任務（`sub_14564:0x145E7`）。

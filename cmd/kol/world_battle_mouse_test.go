@@ -94,6 +94,11 @@ func TestBattleSpoilsClick(t *testing.T) {
 			t.Fatalf("中文=%v 可點區域 %d 個，要 %d 列加 %d 格圖示",
 				cjk, len(targets), lines, len(battle.SpoilIcons))
 		}
+		for i := 1; i < lines; i++ {
+			if targets[i-1].Rect.Overlaps(targets[i].Rect) {
+				t.Fatalf("中文=%v 第 %d 列與前一列重疊", cjk, i)
+			}
+		}
 		// 游標在第 0 列、白框在第 0 格，點第 1 列就是往下一步再確認。
 		if want := []string{"D", "RET"}; !reflect.DeepEqual(targets[1].Tokens, want) {
 			t.Fatalf("中文=%v 第 1 列：%v，要 %v", cjk, targets[1].Tokens, want)

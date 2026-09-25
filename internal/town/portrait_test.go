@@ -146,4 +146,14 @@ func TestOpenPartyPage(t *testing.T) {
 	if !s.ShowingSheet() {
 		t.Fatal("應該回到角色資料頁")
 	}
+	// 空白鍵走另一條正式按鍵分派，不能只把圖示列還原而留下立繪頁。
+	s.Inside.Selected = 2
+	s.Key("RET")
+	if !s.ShowingPartyPage() {
+		t.Fatal("重新開啟隊伍立繪頁失敗")
+	}
+	s.Key("SPACE")
+	if s.ShowingPartyPage() || !s.ShowingSheet() {
+		t.Fatal("空白鍵沒有從隊伍立繪頁返回角色資料頁")
+	}
 }

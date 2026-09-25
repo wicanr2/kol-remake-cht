@@ -14,6 +14,8 @@ token → 再跑。**產出的是一串固定按鍵**，之後用一般的 `-flo
 
 `KOL_QUEST_SITES` 指定換過的任務地點資料檔；`KOL_DRIVE_DIR` 是這一次的暫存目錄
 （同時跑好幾條時要各給一個，否則會互相覆寫）。
+`KOL_STOP_AFTER_BATTLE=1` 讓腳本在第一場戰鬥離場時停止；勝負仍須讀
+`VerdictLost=1`／`VerdictWon=2`／`VerdictFled=3`，不能把離場當成勝利。
 
 游標移到目標格的序列是「先歸位再走」：`U U L L` 之後一定停在 (3,3)，
 接著 `D`×(dx+1)、`R`×(dy+1) 就到相對位移 (dx, dy) 那一格——先垂直再水平不會
@@ -177,6 +179,9 @@ def world_step(tokens, row, target):
     if w.get('camping'):
         tokens.append('L')          # CAMPING! 停在原地等一個鍵
         return True
+    if w.get('heal_prompt'):
+        tokens.append('RET')        # 自動治療提示先收掉，方向鍵此時不會移動
+        return True
     if w.get('quest_prompt'):
         tokens.append('RET')        # Will you partake?
         return True
@@ -206,6 +211,8 @@ def main():
     if len(sys.argv) > 7 and sys.argv[7]:
         town_target = tuple(int(v) for v in sys.argv[7].split(','))
     memo = {}
+    stop_after_battle = os.environ.get('KOL_STOP_AFTER_BATTLE') == '1'
+    seen_battle = False
     if len(sys.argv) > 8 and sys.argv[8]:
         memo['bounds'] = tuple(int(v) for v in sys.argv[8].split(','))
 
@@ -229,12 +236,16 @@ def main():
         memo['last_batch'] = 0
         b = row.get('battle')
         if b is None:
+            if stop_after_battle and seen_battle:
+                print('首場戰鬥已結束並返回遊戲路徑', row.get('world'), row.get('town'))
+                break
             if row.get('world') is None:
                 if not town_step(tokens, row, town_target, memo):
                     break
             elif not world_step(tokens, row, target):
                 break
             continue
+        seen_battle = True
         # roster 只在與上一步不同時才寫進軌跡，沒寫就沿用上一份。
         if 'roster' in b:
             memo['roster'] = parse_roster(b['roster'])
@@ -244,7 +255,8 @@ def main():
               f'round={b["round"]} turn={b["turn"]} cursor={b["cursor"]} bar={b["bar"]}')
         if stage == 5:
             # 勝負那兩句、獎勵與戰利品清單都要按鍵推完，才真的離開戰場。
-            print('這一場的去向', b['verdict'])
+            verdict = {1: '敗北', 2: '勝利', 3: '逃走'}.get(b['verdict'], '未知')
+            print(f'這一場的去向 {verdict}（verdict={b["verdict"]}）')
             tokens += press(memo)
             continue
         if stage == 1:

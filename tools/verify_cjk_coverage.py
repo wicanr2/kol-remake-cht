@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """在 Docker 中核對正式翻譯文字的字模涵蓋率；不把研究註記當成玩家文字。"""
 import argparse
+import csv
 import hashlib
 import json
 from pathlib import Path
@@ -48,6 +49,15 @@ def main():
     for bank, records in ui["banks"].items():
         for number, row in records.items():
             entries.append((f"{paths[2]}.banks.{bank}.{number}.zh", row["zh"]))
+    names_path = "docs/i18n/display-names-zh-Hant.tsv"
+    names_raw = (args.root / names_path).read_bytes()
+    hashes[names_path] = hashlib.sha256(names_raw).hexdigest()
+    with (args.root / names_path).open(encoding="utf-8", newline="") as handle:
+        rows = csv.DictReader(handle, delimiter="\t")
+        if rows.fieldnames != ["key", "en", "zh-Hant", "status", "source"]:
+            raise SystemExit("資料名稱譯表欄位不符")
+        for row in rows:
+            entries.append((f"{names_path}.{row['key']}", row["zh-Hant"]))
     missing = []
     for location, value in entries:
         absent = sorted({c for c in value if c.isprintable() and not c.isspace() and ord(c) not in supported})

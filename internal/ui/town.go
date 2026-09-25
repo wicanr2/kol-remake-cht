@@ -247,10 +247,18 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		return err
 	}
 	drawScaled(dst, bg, 0, 0, l.Scale)
+	if err := drawCJKPartySlots(dst, sprites, f, in.Party); err != nil {
+		return err
+	}
 
 	// 資料頁蓋掉整個建築畫面，與英文版同一個語意（`Town` 那一支的 `in.Sheet`）。
 	// 物品與隊伍那兩頁是**換頁**不是蓋上去（RE-126／RE-127），所以各自畫。
 	if in.Sheet != nil {
+		if in.ItemPage == nil && len(in.PartyPage) == 0 && in.Sheet.Steed != nil {
+			if err := drawSheetSteedCJK(dst, sprites, f, t, in.Sheet.Steed); err != nil {
+				return err
+			}
+		}
 		switch {
 		case in.ItemPage != nil:
 			if err := drawItemPageCJK(dst, sprites, f, t, in.ItemPage); err != nil {
@@ -262,7 +270,7 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 			}
 		case in.QuestList != nil || in.SpellList != nil:
 			// 與英文版同一個分界：這兩頁只重畫 `sub_16239` 那一層。
-			drawSheetHeaderCJK(dst, f, in.Sheet)
+			drawSheetHeaderCJK(dst, f, t, in.Sheet)
 			if in.QuestList != nil {
 				if err := drawQuestBadgesCJK(dst, sprites, in.QuestList); err != nil {
 					return err
@@ -272,29 +280,12 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 				drawSpellCellsCJK(dst, f, in.SpellList)
 			}
 		default:
-			drawSheetCJK(dst, f, in.SheetLabels, in.Sheet)
+			drawSheetCJK(dst, f, t, in.SheetLabels, in.Sheet)
 		}
 		return drawIconBarCJK(dst, sprites, in)
 	}
 
-	for i, m := range in.Party {
-		x := l.PartyX + i*l.PartyStep
-		c := town.ColourIdle
-		if m.Speaker {
-			c = town.ColourSelected
-		}
-		h := l.PortraitBoxHeight + l.PlateHeight - 1
-		fill(dst, x, l.PartyY, l.PartyWidth, h, town.ColourBoxFill)
-		frame(dst, x, l.PartyY, l.PartyWidth, l.PortraitBoxHeight, c)
-		frame(dst, x, l.PartyY+l.PortraitBoxHeight-1, l.PartyWidth, l.PlateHeight, c)
-		portrait, err := sprites.Get("CHARPICS", m.Portrait)
-		if err != nil {
-			return err
-		}
-		drawScaled(dst, portrait, l.PortraitX+i*l.PartyStep, l.PortraitY, l.Scale)
-		f.Draw(dst, l.NameX+i*l.PartyStep, l.NameY, m.PlateName(),
-			town.ColourText[0], town.ColourText[1], town.ColourText[2])
-	}
+	// 資料頁只蓋建築右側；頂端隊員格在兩種語言模式都保持可見。
 
 	// 競技場尚無已證實的店主肖像，與英文介面一致略過空素材。
 	if in.Portrait.Archive != "" {
@@ -330,7 +321,7 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 			if i == in.List.Selected {
 				c = town.ColourText
 			}
-			text := []rune(line)
+			text := []rune(displayName(t, line))
 			for len(text) > 0 {
 				w, _ := f.Measure(string(text))
 				if w <= l.DialogW-32 {
@@ -348,12 +339,61 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		}
 		lines = nil
 	}
+	if in.Steed != nil {
+		pic, err := sprites.Get("STEEDS", in.Steed.Picture)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, pic, town.StablePic.X*l.Scale, town.StablePic.Y*l.Scale, l.Scale)
+		cellCJKAt(dst, f, town.StablePic.NameCol*town.CellWidth*l.Scale,
+			town.StablePic.NameRow*l.Scale, displayName(t, in.Steed.Name))
+	}
+	for _, seg := range in.Detail {
+		cellCJKAt(dst, f, seg.Col*town.CellWidth*l.Scale, seg.Row*l.Scale,
+			displayName(t, t.T(seg.Text)))
+	}
+	dialogY := l.DialogTextY
+	if in.DialogRow != 0 {
+		dialogY = in.DialogRow * l.Scale
+	}
 	for i, line := range lines {
-		f.Draw(dst, l.DialogTextX, l.DialogTextY+i*l.DialogStep, line,
+		x, y := l.DialogTextX, dialogY+i*l.DialogStep
+		value, caret := splitCaret(line)
+		f.Draw(dst, x, y, value,
 			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+		if caret >= 0 {
+			prefix := []rune(line)[:caret]
+			width, _ := f.Measure(string(prefix))
+			fill(dst, x+width, y+f.Height()-1, f.Advance(), 1, town.ColourText)
+		}
 	}
 
 	return drawIconBarCJK(dst, sprites, in)
+}
+
+func drawCJKPartySlots(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	party []town.Member) error {
+	l := town.CJKInn
+	for i, m := range party {
+		x := l.PartyX + i*l.PartyStep
+		c := town.ColourIdle
+		if m.Speaker {
+			c = town.ColourSelected
+		}
+		h := l.PortraitBoxHeight + l.PlateHeight - 1
+		fill(dst, x, l.PartyY, l.PartyWidth, h, town.ColourBoxFill)
+		frame(dst, x, l.PartyY, l.PartyWidth, l.PortraitBoxHeight, c)
+		frame(dst, x, l.PartyY+l.PortraitBoxHeight-1, l.PartyWidth, l.PlateHeight, c)
+		portrait, err := sprites.Get("CHARPICS", m.Portrait)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, portrait, l.PortraitX+i*l.PartyStep, l.PortraitY, l.Scale)
+		f.Draw(dst, l.NameX+i*l.PartyStep, l.NameY, m.PlateName(),
+			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+	}
+
+	return nil
 }
 
 // drawIconBarCJK 畫中文模式的圖示列。建築畫面與資料頁共用同一條。

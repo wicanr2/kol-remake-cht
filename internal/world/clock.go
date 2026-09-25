@@ -23,6 +23,24 @@ var monthDays = [12]int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 var monthName = [12]string{"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
 
+var chineseNumeral = [10]string{"", "一", "二", "三", "四", "五", "六", "七", "八", "九"}
+
+// DateLinesZh 是中文畫面的日期標籤；不改原版時鐘或英文對拍的 DateLines。
+func (c *Clock) DateLinesZh() []string {
+	return []string{chineseDay(c.Month+1) + "月" + chineseDay(c.Day+1) + "日",
+		fmt.Sprintf("西元 %d", YearBase+c.Year)}
+}
+
+func chineseDay(n int) string {
+	if n < 10 {
+		return chineseNumeral[n]
+	}
+	if n < 20 {
+		return "十" + chineseNumeral[n%10]
+	}
+	return chineseNumeral[n/10] + "十" + chineseNumeral[n%10]
+}
+
 // hungerPerDay 是換日時每名隊員的營養條要加多少（DGROUP+0x12D6）。
 // 數字越大條子越紅：一月四月最餓、六月與九月不餓，與說明書「晚春與初秋最豐饒」相符。
 var hungerPerDay = [12]int{4, 4, 3, 2, 1, 0, 1, 1, 0, 1, 2, 3}

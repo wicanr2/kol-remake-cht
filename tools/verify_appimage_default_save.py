@@ -14,7 +14,7 @@ config_home = "/out/home/.config" if args.home_fallback else "/out/config"
 out = Path("/out")
 assert (out.stat().st_uid, out.stat().st_gid) == (os.getuid(), os.getgid())
 assert not any(p.name != ".keep" for p in out.iterdir()), "需要新的驗收目錄"
-version = "v.0.2.2-20260908"
+version = json.loads((Path("/dist") / "build-inputs.json").read_text())["version"]
 artifact = Path(f"/dist/full/kol-{version}-full-linux-x86_64.AppImage")
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 before = sha(artifact)

@@ -28,8 +28,8 @@ func TestQuestRewardDoesNotAliasBuildingOrOtherMember(t *testing.T) {
 					m.Worn[slot-7] = item
 				}
 				m.SyncCarried()
-				if got, reported := m.TurnInQuest(b); got != slot || !reported || m.Progress[0] != 1 {
-					t.Fatalf("交付結果=%d/%v", got, reported)
+				if got := m.SwapQuestItem(b); got != slot || !ReportQuest(m.Quests, m.Progress, 0, b.Site) || m.Progress[0] != 1 {
+					t.Fatalf("交付結果=%d", got)
 				}
 				return m
 			}

@@ -94,6 +94,9 @@ type questBattle struct {
 	// awarded 記這一場的冒險點數與金冠發過了沒有——收尾那一段每按一次鍵都會
 	// 走一遍，發放只能有一次。
 	awarded bool
+	// 戰利品清單只在勝利結算時開一次。玩家從物品頁取消或領完後，
+	// 下一次按鍵要返回野外，不能把地上未領物品重新列出（RE-115）。
+	spoilsOpened bool
 }
 
 // battleMember 把城鎮那一側的隊員換成戰鬥要用的欄位（RE-080）：戰鬥等級由
@@ -1189,6 +1192,12 @@ func (g *game) snapshot() map[string]any {
 		if len(st.Exec.Text) > 0 {
 			b["exec_text"] = st.Exec.Text
 		}
+		if st.Stage == battle.StageSpoils {
+			b["spoil_phase"] = int(st.Spoil.Phase)
+			b["spoil_lines"] = st.SpoilLines()
+			b["spoil_cursor"] = st.Spoil.Cursor
+			b["spoil_icon"] = st.Spoil.Icon
+		}
 		// 指令列、游標與參戰者只有產生腳本的時候要看；收據裡逐步記會把軌跡
 		// 撐大好幾倍，`-trace-detail` 才寫。
 		if g.traceDetail {
@@ -1923,6 +1932,8 @@ func (g *game) battleSpeaker(i int) battle.Speaker {
 		out.Female = m.Female
 		out.Weapon = m.WeaponName
 		out.Belt = m.BeltName
+		out.Weapon = g.strings.DisplayName(out.Weapon)
+		out.Belt = g.strings.DisplayName(out.Belt)
 		return out
 	}
 	// 敵人手上那件武器的名字在怪物記錄 +0x20（RE-080）。少了它 `|E` 會展開成空，
@@ -1930,6 +1941,8 @@ func (g *game) battleSpeaker(i int) battle.Speaker {
 	if s.Monster.Weapon != nil {
 		out.Weapon = s.Monster.Weapon.Name
 	}
+	out.Name = g.strings.DisplayName(out.Name)
+	out.Weapon = g.strings.DisplayName(out.Weapon)
 	return out
 }
 
@@ -1979,9 +1992,12 @@ func (g *game) battleStep() {
 			return
 		}
 		// 打贏的話還有一張戰利品清單（RE-096）。地上什麼都沒有就跳過。
-		if s.Verdict == battle.VerdictWon && s.BeginSpoils() {
-			s.Stage = battle.StageSpoils
-			return
+		if s.Verdict == battle.VerdictWon && !g.quest.spoilsOpened {
+			g.quest.spoilsOpened = true
+			if s.BeginSpoils() {
+				s.Stage = battle.StageSpoils
+				return
+			}
 		}
 		// 競技場那一場的收尾（`0x21607`，RE-103／RE-108）：打贏升一階（一次一級），
 		// 接著結算賭金——輸掉那一場時整排先取負。
@@ -2147,6 +2163,9 @@ func (g *game) battleVerdictLines() []string {
 	s := g.quest.state
 	enemies := s.EnemyCount()
 	name := s.Monster.Name
+	if !g.quest.english {
+		name = g.strings.DisplayName(name)
+	}
 	won, lost := "", ""
 	if g.quest.english {
 		won = battle.PluralSuffix(name, enemies)
@@ -2459,6 +2478,8 @@ func main() {
 	outdoorMarker := flag.String("outdoor-marker", "", "覆寫隊伍標記在視窗內的偏移，格式 列,欄")
 	uiI18nPath := flag.String("ui-i18n", "docs/i18n/ui-zh-Hant.json",
 		"UI 文字庫（KOLDATA／BOOKDATA／ENDTXT）的繁體中文譯文")
+	displayNamesPath := flag.String("display-names", "docs/i18n/display-names-zh-Hant.tsv",
+		"資料名稱的繁體中文顯示譯名")
 	townI18nPath := flag.String("town-i18n", "docs/i18n/town-zh-Hant.json",
 		"城鎮建築的譯文表")
 	townTextPath := flag.String("town-text",
@@ -2583,7 +2604,6 @@ func main() {
 		fmt.Println(buildVersion)
 		return
 	}
-
 	// 發行包被雙擊時工作目錄不是程式所在地，先把它擺正再解析任何相對路徑。
 	useResourceDir(*assetRoot)
 
@@ -2639,6 +2659,18 @@ func main() {
 				*savePath = p
 			} else {
 				fmt.Fprintln(os.Stderr, "找不到可寫的存檔目錄，無法開始可保存的遊戲：", err)
+				os.Exit(1)
+			}
+		}
+	}
+
+	// 旗標預設維持 `en`：沒寫 `-lang` 的對拍計畫要照舊產出 320×200 英文畫格。
+	// 互動遊玩在上面已切成繁中，所以這裡才檢查譯表，雙擊啟動也涵蓋得到。
+	if *lang != "en" {
+		for _, path := range []string{*townI18nPath, *uiI18nPath, *displayNamesPath} {
+			info, err := os.Stat(path)
+			if err != nil || !info.Mode().IsRegular() {
+				fmt.Fprintf(os.Stderr, "繁體中文譯表無法讀取：%s（%v）\n", path, err)
 				os.Exit(1)
 			}
 		}
@@ -2760,6 +2792,10 @@ func main() {
 		// 書本畫面的標籤走 BOOKDATA 那一份譯文：那份文字庫逐筆翻過
 		// 也驗過，`-strings` 只留 remake 自己加的字串。
 		if _, err := table.LoadBank(*uiI18nPath, town.BankBook); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := table.LoadDisplayNames(*displayNamesPath); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
@@ -3395,7 +3431,11 @@ func main() {
 				quest.bank = bank
 				quest.trans = trans
 				quest.english = *lang == "en"
-				quest.lines = ambushLines(bank, trans, a, mon.Name, *lang == "en")
+				name := mon.Name
+				if table != nil {
+					name = table.DisplayName(name)
+				}
+				quest.lines = ambushLines(bank, trans, a, name, *lang == "en")
 			}
 			// notice 是只等一個鍵那一頁（`sub_144C3`）：騎走成功或失敗的那一句。
 			notice := func(record int) {

@@ -87,6 +87,9 @@ type Session struct {
 	// told 記的是這一次進門裡哪些話題槽已經講過。原版是進門時清零的六個旗標。
 	told    [TopicSlots]bool
 	greeted bool
+	// 任務物品先在第一個 SPACE 後交換，訊息 6／7 讀完才替全隊回報（RE-139）。
+	turnInChecked        bool
+	turnInAwaitingReport bool
 	// recruit 是招募流程的狀態；nil 代表不在招募中。
 	recruit *Recruit
 	// rest 是 REST 流程的狀態；nil 代表不在住宿／治療中（SPEC-006）。
@@ -491,27 +494,41 @@ func (s *Session) enter() {
 	s.mouth = nil
 	s.questList = nil
 	s.TookQuest = nil
-	s.turnInQuests(door)
+	s.TurnedIn = nil
+	s.turnInChecked = false
+	s.turnInAwaitingReport = false
 }
 
-// turnInQuests 是進門時的任務交付（`sub_11A93:0x11B5A`，RE-109）：這一棟收任務
-// 物品的話，逐一看六名角色身上有沒有那件東西，有就換掉、旗標標成回報過、
-// 已回報數加一。**原版沒有為此印任何訊息**，所以這裡也不印，只把結果記下來
-// 讓上層決定要不要說。
-func (s *Session) turnInQuests(door *Door) {
-	s.TurnedIn = nil
+// swapFirstQuestItem 依隊員與物品格順序只交換第一件吻合物品（RE-139）。
+// 原版先讓玩家讀完進門敘述，回報旗標還要等訊息 6／7 的下一個 SPACE。
+func (s *Session) swapFirstQuestItem(door *Door) bool {
 	q := door.Quest()
 	if q == nil {
-		return
+		return false
 	}
 	for i := range s.Party {
-		slot, reported := s.Party[i].TurnInQuest(q)
+		slot := s.Party[i].SwapQuestItem(q)
 		if slot < 0 {
 			continue
 		}
-		s.TurnedIn = append(s.TurnedIn, QuestTurnIn{
-			Member: i, Slot: slot, Site: q.Site, Reported: reported,
-			Gave: q.Wants != nil, Name: door.QuestWants, Got: door.QuestGives})
+		s.TurnedIn = []QuestTurnIn{{
+			Member: i, Slot: slot, Site: q.Site,
+			Gave: q.Wants != nil, Name: door.QuestWants, Got: door.QuestGives}}
+		return true
+	}
+	return false
+}
+
+// reportTurnedInQuest 把同一件任務已完成的所有隊員都標成已回報，
+// 不只更新剛才持有任務物品的角色（`sub_11A93:0x11C63..0x11CD0`）。
+func (s *Session) reportTurnedInQuest() {
+	if len(s.TurnedIn) == 0 {
+		return
+	}
+	for i := range s.Party {
+		if ReportQuest(s.Party[i].Quests, s.Party[i].Progress, 0, s.TurnedIn[0].Site) {
+			s.TurnedIn[0].Reported = true
+		}
 	}
 }
 
@@ -522,8 +539,8 @@ func (s *Session) Door() *Door { return s.door }
 type QuestTurnIn struct {
 	// Member 是隊伍裡的第幾名；Slot 是身上的第幾格（索引與 CarriedOffsets 對齊）。
 	Member, Slot int
-	// Site 是這一棟收的任務編號；Reported 為真表示那名角色的旗標本來是「完成」，
-	// 所以這一次真的記進了「已回報數」。
+	// Site 是這一棟收的任務編號；Reported 為真表示全隊至少一人的完成旗標
+	// 在交付台詞後改成「回報過」。
 	Site     int
 	Reported bool
 	// Gave 恆為真（有交出東西才會有這一筆）；Name 是交出去的那件、Got 是換回來的。
@@ -545,6 +562,12 @@ func (s *Session) Continue() {
 	}
 	if s.leaving {
 		s.finishLeaveDoor()
+		return
+	}
+	// 隊伍立繪頁等待的是任一按鍵（RE-128 的 sub_144C3），空白鍵要和
+	// Return 一樣回資料頁；只恢復圖示列會留下上一頁的立繪。
+	if s.ShowingPartyPage() {
+		s.closePartyPage()
 		return
 	}
 	// 賭場那幾句讀完就回去問「要不要下注」（RE-108）。
@@ -593,6 +616,19 @@ func (s *Session) Continue() {
 		s.train.next = nil
 		step()
 		return
+	}
+	if s.turnInAwaitingReport {
+		s.reportTurnedInQuest()
+		s.turnInAwaitingReport = false
+	} else if !s.turnInChecked {
+		s.turnInChecked = true
+		if s.swapFirstQuestItem(s.door) {
+			s.Inside.Dialog = append(s.message(6), s.message(7)...)
+			s.Inside.DialogZh = nil
+			s.setInsideIcons([]int{IconSpacebar})
+			s.turnInAwaitingReport = true
+			return
+		}
 	}
 	if !s.greeted {
 		s.greeted = true

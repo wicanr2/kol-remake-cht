@@ -33,3 +33,29 @@ func TestLoadBankOverridesLabels(t *testing.T) {
 		t.Fatal("remake 自己的字串不該被清掉")
 	}
 }
+
+func TestDisplayNamesDoNotChangeUIOrOriginalValues(t *testing.T) {
+	table, err := Load("../../docs/i18n/newchar-zh-Hant.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := table.LoadDisplayNames("../../docs/i18n/display-names-zh-Hant.tsv"); err != nil {
+		t.Fatal(err)
+	}
+	for _, row := range [][2]string{
+		{"MINOTAUR", "牛頭怪"}, {"Dagger", "匕首"},
+		{"DAGGER", "匕首"}, {"Aged Ale", "陳年麥酒"},
+		{"PLAYER-NAME", "PLAYER-NAME"},
+	} {
+		if got := table.DisplayName(row[0]); got != row[1] {
+			t.Fatalf("DisplayName(%q) = %q，預期 %q", row[0], got, row[1])
+		}
+	}
+	if got := table.T("Dagger"); got != "Dagger" {
+		t.Fatalf("顯示譯名不應改動一般 UI 查表：%q", got)
+	}
+	var english *Table
+	if got := english.DisplayName("Dagger"); got != "Dagger" {
+		t.Fatalf("英文模式不應翻譯原名：%q", got)
+	}
+}

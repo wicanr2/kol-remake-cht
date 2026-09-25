@@ -204,7 +204,9 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	fill(dst, l.DateX, l.DateY, l.DateW, l.DateH, town.ColourBoxEdge)
 	fill(dst, l.DateX+1, l.DateY+1, l.DateW-2, l.DateH-2, town.ColourBoxFill)
 	dateLines := s.DateZh
-	if len(dateLines) == 0 {
+	if s.Clock != nil {
+		dateLines = s.Clock.DateLinesZh()
+	} else if len(dateLines) == 0 {
 		dateLines = s.Date
 	}
 	for i, line := range dateLines {

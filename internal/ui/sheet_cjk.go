@@ -27,14 +27,40 @@ import (
 // 金冠／冒險點數／移動率、傷勢、營養。
 //
 // 這一頁不對拍，原版沒有中文畫面。
-func drawSheetCJK(dst *ebiten.Image, f *font.Font, labels []town.Segment, p *town.SheetPage) {
-	drawSheetHeaderCJK(dst, f, p)
-	drawSheetBodyCJK(dst, f, labels, p)
+func drawSheetCJK(dst *ebiten.Image, f *font.Font, t Translator, labels []town.Segment, p *town.SheetPage) {
+	drawSheetHeaderCJK(dst, f, t, p)
+	drawSheetBodyCJK(dst, f, t, labels, p)
+}
+
+// drawSheetSteedCJK 沿用 RE-120 的圖、雙框和投影。中文版名牌取未截短的
+// 資料原名查顯示譯文；英文字模的四字截斷只留給英文對拍畫面。
+func drawSheetSteedCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	t Translator, steed *town.SteedPic) error {
+	l, sc := town.SheetSteed, book.CJKScale
+	pic, err := sprites.Get("STEEDS", steed.Picture)
+	if err != nil {
+		return err
+	}
+	fillRect := scaleRect(l.Fill, sc)
+	fill(dst, fillRect.X0, fillRect.Y0, fillRect.Width(), fillRect.Height(), town.ColourBoxFill)
+	drawScaled(dst, pic, l.X*sc, l.Y*sc, sc)
+	frameRect, plateRect := scaleRect(l.Frame, sc), scaleRect(l.Plate, sc)
+	frame(dst, frameRect.X0, frameRect.Y0, frameRect.Width(), frameRect.Height(), town.ColourBoxEdge)
+	frame(dst, plateRect.X0, plateRect.Y0, plateRect.Width(), plateRect.Height(), town.ColourBoxEdge)
+	shadow(dst, frameRect.X0, frameRect.Y0, frameRect.Width(), plateRect.Y1-frameRect.Y0+1)
+	name := steed.FullName
+	if name == "" {
+		name = steed.Name
+	}
+	name = displayName(t, name)
+	name = clip(f, name, plateRect.X1-l.NameCol*town.CellWidth*sc)
+	cellCJK(dst, f, sc, l.NameCol, l.NameRow, name)
+	return nil
 }
 
 // drawSheetHeaderCJK 是 `sub_16239` 那一層（抬頭框、橫線、抬頭六列），與英文版的
 // `drawSheetHeader` 同一個分界：法術一覽與任務一覽只重畫這一層。
-func drawSheetHeaderCJK(dst *ebiten.Image, f *font.Font, p *town.SheetPage) {
+func drawSheetHeaderCJK(dst *ebiten.Image, f *font.Font, t Translator, p *town.SheetPage) {
 	l := town.SheetLayout
 	s := book.CJKScale
 
@@ -52,11 +78,12 @@ func drawSheetHeaderCJK(dst *ebiten.Image, f *font.Font, p *town.SheetPage) {
 		rightCJK(dst, f, s, l.RightCol, l.RankRow, p.RankRight)
 	}
 	cellCJK(dst, f, s, l.HeightCol, l.HeightRow, p.Height)
-	cellCJK(dst, f, s, l.WeightCol, l.WeightRow, p.Weight)
+	cellCJK(dst, f, s, l.WeightCol, l.WeightRow,
+		strings.TrimSuffix(p.Weight, "LBS")+t.T("LBS"))
 }
 
 // drawSheetBodyCJK 是屬性以下那一層（`sub_15ABF` 自己畫的四個框與各欄）。
-func drawSheetBodyCJK(dst *ebiten.Image, f *font.Font, labels []town.Segment, p *town.SheetPage) {
+func drawSheetBodyCJK(dst *ebiten.Image, f *font.Font, t Translator, labels []town.Segment, p *town.SheetPage) {
 	l := town.SheetLayout
 	s := book.CJKScale
 
@@ -92,7 +119,7 @@ func drawSheetBodyCJK(dst *ebiten.Image, f *font.Font, labels []town.Segment, p 
 		}
 		row := l.WeaponFirstRow + i*l.WeaponRowStep
 		// 武器名是原版資料裡的物品名，不在譯文表的記錄裡——與英文版一樣照原文印。
-		cellCJK(dst, f, s, l.WeaponNameCol, row, clip(f, w.Name, nameSafe))
+		cellCJK(dst, f, s, l.WeaponNameCol, row, clip(f, displayName(t, w.Name), nameSafe))
 		cellCJK(dst, f, s, l.WeaponOffCol, row, fmt.Sprintf("%3d", w.Offence))
 		cellCJK(dst, f, s, l.WeaponDefCol, row, fmt.Sprintf("%3d", w.Defence))
 	}

@@ -171,6 +171,9 @@ func BattleSpoilsCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	textX := l.Col * town.CellWidth
 	safe := battleCJKListSafeWidth(b.X, b.Width, textX, sc)
 	for i, line := range s.SpoilLines() {
+		if s.Spoil.Phase == battle.SpoilPickItem {
+			line = displayName(t, line)
+		}
 		y := l.Row + i*l.LineStep
 		ink := town.ColourListIdle
 		if i == s.Spoil.Cursor {
@@ -295,7 +298,7 @@ func drawBattleSheetCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	if d.Equipment {
 		for i := 0; i < d.Count; i++ {
 			at(24, 24+6*i, t.T(battle.EquipmentLabels[i]), false)
-			at(48, 24+6*i, d.Rows[i], true)
+			at(48, 24+6*i, displayName(t, d.Rows[i]), false)
 		}
 		if d.AmmunitionLabel != "" {
 			at(24, 60, fmt.Sprintf("%s%d", t.T(d.AmmunitionLabel), d.Ammunition), false)

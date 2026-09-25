@@ -64,7 +64,7 @@ func carriedFixture(want []byte, at int) [][]byte {
 	return out
 }
 
-// 帶著那件東西走進去：換成建築給的那件，旗標變成回報過，已回報數加一。
+// 物品交換與全隊旗標回報分成兩個按鍵階段。
 func TestTurnInSwapsAndReports(t *testing.T) {
 	want := []byte("SWORD-----------")
 	give := []byte("CLOAK-----------")
@@ -74,12 +74,18 @@ func TestTurnInSwapsAndReports(t *testing.T) {
 	SetQuestFlag(flags, 3, QuestDone)
 	progress := make([]int, 5)
 
-	slot, reported := TurnIn(carried, flags, progress, 0, b)
-	if slot != 5 || !reported {
-		t.Fatalf("應該在第 5 格交出去並回報，得到 %d／%v", slot, reported)
+	slot := SwapQuestItem(carried, b)
+	if slot != 5 {
+		t.Fatalf("應該在第 5 格交出去，得到 %d", slot)
 	}
 	if string(carried[5]) != string(give) {
 		t.Fatalf("那一格應該換成 %q，得到 %q", give, carried[5])
+	}
+	if QuestFlag(flags, 3) != QuestDone || progress[0] != 0 {
+		t.Fatal("交換物品時不該提前回報")
+	}
+	if !ReportQuest(flags, progress, 0, b.Site) {
+		t.Fatal("台詞讀完後應回報已完成的任務")
 	}
 	if QuestFlag(flags, 3) != QuestReported {
 		t.Fatalf("旗標應該是回報過，得到 %d", QuestFlag(flags, 3))
@@ -89,7 +95,7 @@ func TestTurnInSwapsAndReports(t *testing.T) {
 	}
 }
 
-// 建築沒有要給的東西時那一格清空；旗標不是「完成」就只換東西不記帳。
+// 建築沒有要給的東西時那一格清空；旗標不是「完成」就不記帳。
 func TestTurnInWithoutGiveAndWithoutFlag(t *testing.T) {
 	want := []byte("FLAG------------")
 	b := QuestBuilding{Site: 1, Wants: want}
@@ -97,20 +103,17 @@ func TestTurnInWithoutGiveAndWithoutFlag(t *testing.T) {
 	flags := make([]int, QuestFlagBytes)
 	progress := make([]int, 5)
 
-	slot, reported := TurnIn(carried, flags, progress, 0, b)
+	slot := SwapQuestItem(carried, b)
 	if slot != 0 {
 		t.Fatalf("應該在第 0 格交出去，得到 %d", slot)
-	}
-	if reported {
-		t.Fatal("旗標不是「完成」就不記帳")
 	}
 	for _, v := range carried[0] {
 		if v != 0 {
 			t.Fatalf("沒有要給的東西時那一格該清空，得到 %v", carried[0])
 		}
 	}
-	if progress[0] != 0 {
-		t.Fatalf("已回報數不該動，得到 %d", progress[0])
+	if ReportQuest(flags, progress, 0, b.Site) || progress[0] != 0 {
+		t.Fatal("旗標不是完成時不得記帳")
 	}
 }
 
@@ -120,9 +123,8 @@ func TestTurnInWithoutTheItem(t *testing.T) {
 	carried := carriedFixture(nil, -1)
 	flags := make([]int, QuestFlagBytes)
 	SetQuestFlag(flags, 2, QuestDone)
-	progress := make([]int, 5)
-	if slot, reported := TurnIn(carried, flags, progress, 0, b); slot >= 0 || reported {
-		t.Fatalf("不該交出任何東西，得到 %d／%v", slot, reported)
+	if slot := SwapQuestItem(carried, b); slot >= 0 {
+		t.Fatalf("不該交出任何東西，得到 %d", slot)
 	}
 	if QuestFlag(flags, 2) != QuestDone {
 		t.Fatal("旗標不該動")
@@ -144,11 +146,12 @@ func TestCanTakeFinal(t *testing.T) {
 	}
 }
 
-// 進門時的交付：這一棟收的那件在誰身上就換誰的，旗標與已回報數跟著動。
-func TestSessionTurnInOnEnter(t *testing.T) {
+// 原版先讓玩家讀進門敘述，再交換第一件物品並顯示訊息 6／7；第二次按鍵後
+// 才替所有已完成這個任務的人回報，持物者不必是其中之一（RE-139）。
+func TestSessionQuestTurnInKeySequence(t *testing.T) {
 	want := []byte("SWORD-----------")
 	give := []byte("CLOAK-----------")
-	door := &Door{IconFlags: [2]int{0, QuestFlagBit}, QuestSite: 3,
+	door := &Door{Index: 0, IconFlags: [2]int{0, QuestFlagBit}, QuestSite: 3,
 		QuestWants: "Truth Sword", QuestWantsBytes: hexOf(want),
 		QuestGives: "Flying Cloak", QuestGivesBytes: hexOf(give)}
 	if door.Quest() == nil {
@@ -160,34 +163,60 @@ func TestSessionTurnInOnEnter(t *testing.T) {
 		t.Fatal("旗標沒開就不該收")
 	}
 
-	s := &Session{Party: []Member{
-		{Name: "甲", Quests: make([]int, QuestFlagBytes), Progress: make([]int, 5),
-			Carried: carriedFixture(nil, -1)},
-		{Name: "乙", Quests: make([]int, QuestFlagBytes), Progress: make([]int, 5),
-			Carried: carriedFixture(want, 2)},
-	}}
-	SetQuestFlag(s.Party[1].Quests, 3, QuestDone)
-	s.turnInQuests(door)
+	s := &Session{
+		Party: []Member{
+			{Name: "甲", Speaker: true, Quests: make([]int, QuestFlagBytes),
+				Progress: make([]int, 5), Carried: carriedFixture(nil, -1)},
+			{Name: "乙", Quests: make([]int, QuestFlagBytes),
+				Progress: make([]int, 5), Carried: carriedFixture(want, 2)},
+			{Name: "丙", Quests: make([]int, QuestFlagBytes),
+				Progress: make([]int, 5), Carried: carriedFixture(want, 3)},
+		},
+		Mode: ModeInside, Inside: &Inn{Icons: []int{IconSprite(IconSpacebar)},
+			Dialog: []string{"進門敘述"}},
+		Outdoor: &Outdoor{Town: 0}, door: door, Trans: &Translations{},
+		Text: &Text{Towns: []townText{{Town: 0, Buildings: []BuildingText{{Door: 0,
+			Messages: []Message{
+				{Index: 6, Display: []string{"交付第一段"}},
+				{Index: 7, Display: []string{"交付第二段"}},
+			}}}}}},
+	}
+	SetQuestFlag(s.Party[0].Quests, 3, QuestDone)
+	SetQuestFlag(s.Party[2].Quests, 3, QuestDone)
+	if s.TurnedIn != nil || string(s.Party[1].Carried[2]) != string(want) {
+		t.Fatal("讀進門敘述之前不得交付")
+	}
+	s.Key("SPACE")
 
 	if len(s.TurnedIn) != 1 {
-		t.Fatalf("應該只有一名交得出來，得到 %d", len(s.TurnedIn))
+		t.Fatalf("一次只應交換第一件，得到 %d", len(s.TurnedIn))
 	}
 	got := s.TurnedIn[0]
-	if got.Member != 1 || got.Slot != 2 || !got.Reported || got.Site != 3 {
+	if got.Member != 1 || got.Slot != 2 || got.Reported || got.Site != 3 {
 		t.Fatalf("交付結果不對：%+v", got)
+	}
+	if len(s.Inside.Dialog) != 2 || s.Inside.Dialog[0] != "交付第一段" ||
+		s.Inside.Dialog[1] != "交付第二段" {
+		t.Fatalf("未顯示訊息 6／7：%v", s.Inside.Dialog)
 	}
 	if string(s.Party[1].Carried[2]) != string(give) {
 		t.Fatalf("那一格應該換成 %q", give)
 	}
-	if QuestFlag(s.Party[1].Quests, 3) != QuestReported {
-		t.Fatal("旗標應該變成回報過")
+	if string(s.Party[2].Carried[3]) != string(want) {
+		t.Fatal("同一次進門不該交換第二件")
 	}
-	if s.Party[1].Progress[0] != 1 {
-		t.Fatalf("已回報數應該是 1，得到 %d", s.Party[1].Progress[0])
+	if s.Party[0].Progress[0] != 0 || s.Party[2].Progress[0] != 0 {
+		t.Fatal("交付台詞未讀完，不得提前回報")
+	}
+	s.Key("SPACE")
+	if !s.TurnedIn[0].Reported || QuestFlag(s.Party[0].Quests, 3) != QuestReported ||
+		QuestFlag(s.Party[2].Quests, 3) != QuestReported ||
+		s.Party[0].Progress[0] != 1 || s.Party[2].Progress[0] != 1 ||
+		s.Party[1].Progress[0] != 0 {
+		t.Fatalf("全隊回報狀態不符：%+v", s.Party)
 	}
 	// 不收任務物品的建築什麼都不做。
-	s.turnInQuests(plain)
-	if s.TurnedIn != nil {
+	if s.swapFirstQuestItem(plain) || string(s.Party[2].Carried[3]) != string(want) {
 		t.Fatal("不收任務物品的建築不該有交付紀錄")
 	}
 }

@@ -5,6 +5,7 @@
 package i18n
 
 import (
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -31,8 +32,10 @@ type table struct {
 
 // Table 是一種語言的 UI 字串查表。
 type Table struct {
-	Language string
-	entries  map[string]Entry
+	Language   string
+	entries    map[string]Entry
+	names      map[string]string
+	upperNames map[string]string
 }
 
 // Load 讀取字串表。
@@ -67,6 +70,66 @@ func (t *Table) T(en string) string {
 	}
 	if e, ok := t.entries[en]; ok && e.Zh != "" {
 		return e.Zh
+	}
+	return en
+}
+
+// LoadDisplayNames 讀取資料名稱的繁中顯示譯名。這張表只由繪製端查詢；
+// 原始資料名稱仍用於任務比較、戰鬥狀態與存檔。
+func (t *Table) LoadDisplayNames(path string) error {
+	if t == nil {
+		return fmt.Errorf("字串表是空的")
+	}
+	f, err := os.Open(path)
+	if err != nil {
+		return fmt.Errorf("讀取資料名稱譯表失敗：%w", err)
+	}
+	defer f.Close()
+	r := csv.NewReader(f)
+	r.Comma = '\t'
+	r.FieldsPerRecord = 5
+	rows, err := r.ReadAll()
+	if err != nil {
+		return fmt.Errorf("解析資料名稱譯表失敗：%w", err)
+	}
+	if len(rows) < 2 || strings.Join(rows[0], "\t") != "key\ten\tzh-Hant\tstatus\tsource" {
+		return fmt.Errorf("資料名稱譯表欄位不符或為空")
+	}
+	names := make(map[string]string, len(rows)-1)
+	upperNames := make(map[string]string, len(rows)-1)
+	keys := make(map[string]bool, len(rows)-1)
+	for i, row := range rows[1:] {
+		key, en, zh, status, source := row[0], row[1], row[2], row[3], row[4]
+		if key == "" || en == "" || zh == "" || source == "" ||
+			(status != "核准" && status != "暫譯") || keys[key] {
+			return fmt.Errorf("資料名稱譯表第 %d 行內容無效", i+2)
+		}
+		keys[key] = true
+		if old, ok := names[en]; ok && old != zh {
+			return fmt.Errorf("資料名稱 %q 的譯文衝突", en)
+		}
+		names[en] = zh
+		upper := strings.ToUpper(en)
+		if old, ok := upperNames[upper]; ok && old != zh {
+			return fmt.Errorf("資料名稱 %q 的大寫譯文衝突", en)
+		}
+		upperNames[upper] = zh
+	}
+	t.names = names
+	t.upperNames = upperNames
+	return nil
+}
+
+// DisplayName 僅翻譯完整的資料原名；玩家自取的姓名與法術名不在表內。
+func (t *Table) DisplayName(en string) string {
+	if t == nil {
+		return en
+	}
+	if zh, ok := t.names[en]; ok {
+		return zh
+	}
+	if zh, ok := t.upperNames[en]; ok {
+		return zh
 	}
 	return en
 }

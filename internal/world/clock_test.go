@@ -115,6 +115,14 @@ func TestClockDateLines(t *testing.T) {
 	if len(got) != 2 || got[0] != " Apr 1" || got[1] != "AD  1100" {
 		t.Fatalf("日期框是 %q", got)
 	}
+	zh := NewClock().DateLinesZh()
+	if len(zh) != 2 || zh[0] != "四月一日" || zh[1] != "西元 1100" {
+		t.Fatalf("中文日期框是 %q", zh)
+	}
+	last := &Clock{Month: 11, Day: 30, Year: 1}
+	if got := last.DateLinesZh(); got[0] != "十二月三十一日" || got[1] != "西元 1101" {
+		t.Fatalf("年末中文日期框是 %q", got)
+	}
 }
 
 // 循路一步扣的時刻與一般步伐不同：原版量到的是 RoadStepCost，

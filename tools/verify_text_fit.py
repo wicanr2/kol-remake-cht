@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import re
 import pathlib
@@ -66,6 +67,7 @@ def main() -> int:
                    help="城鎮畫面樣本 JSON，檢查中文台詞是否放得進對話框（可重複）")
     p.add_argument("--town-i18n", action="append", default=[],
                    help="城鎮建築譯文表（可重複）；檢查標題框與對話框的行寬與行數")
+    p.add_argument("--display-names", help="怪物、裝備與商品的顯示譯名 TSV")
     p.add_argument("--out", required=True)
     args = p.parse_args()
 
@@ -100,6 +102,27 @@ def main() -> int:
         return total, missing
 
     checks = []
+
+    if args.display_names:
+        # 這些寬度分別對應現行 CJK 交易清單、戰利品框、角色資料頁武器欄、
+        # 戰鬥裝備欄和物品頁選中小框。逐名量寬，不以字數推測比例字寬。
+        name_limits = {"shop-list": 585 - 32, "battle-spoils": (4 + 125 - 4 - 8) * 3,
+                       "sheet-weapon": (30 - 16) * 8 * 3,
+                       "battle-equipment": (17 + 119 - 48) * 3,
+                       "item-mark": 99 * 3 - 12}
+        with pathlib.Path(args.display_names).open(encoding="utf-8", newline="") as handle:
+            rows = csv.DictReader(handle, delimiter="\t")
+            if rows.fieldnames != ["key", "en", "zh-Hant", "status", "source"]:
+                raise SystemExit("資料名稱譯表欄位不符")
+            for row in rows:
+                value = row["zh-Hant"]
+                w, missing = width(value)
+                for kind, limit in name_limits.items():
+                    checks.append({"kind": "display-name-" + kind, "en": row["en"],
+                                   "zh": value, "x": 0, "width": w, "right_limit": limit,
+                                   "overflow": max(0, w - limit),
+                                   "missing_glyphs": missing,
+                                   "pass": w <= limit and not missing})
 
     def check(kind: str, en: str, x: int, right: int) -> None:
         text = zh.get(en, en)

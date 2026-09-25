@@ -72,7 +72,7 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 			step := town.MarkLineStep * s
 			cellCJKAt(dst, f, tx, ty, t.T(m.Slot))
 			if m.Name != "" {
-				cellCJKAt(dst, f, tx, ty+step, m.Name)
+				cellCJKAt(dst, f, tx, ty+step, displayName(t, m.Name))
 				third := ty + 2*step
 				cellCJKAt(dst, f, tx, third, m.Dice)
 				if m.Skill != "" {
@@ -111,7 +111,7 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 		for _, seg := range p.Detail {
 			x := dx + (seg.Col*town.CellWidth-sc)*s
 			y := dy + (seg.Row-sr)*s
-			cellCJKAt(dst, f, x, y, t.T(seg.Text))
+			cellCJKAt(dst, f, x, y, displayName(t, t.T(seg.Text)))
 		}
 		return nil
 	}

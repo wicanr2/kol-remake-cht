@@ -15,6 +15,7 @@ remake 的中文模式不在執行期做字型排版：字模先烘成 PNG 字�
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import os
@@ -52,7 +53,8 @@ def _walk(node, seen: set[str]) -> None:
 
 
 def collect(strings_path: pathlib.Path,
-            extra: list[pathlib.Path] | None = None) -> list[str]:
+            extra: list[pathlib.Path] | None = None,
+            extra_tsv: list[pathlib.Path] | None = None) -> list[str]:
     data = json.loads(strings_path.read_text())
     seen: set[str] = set()
     for key in ("labels", "races", "secondary", "professions", "ui"):
@@ -62,6 +64,13 @@ def collect(strings_path: pathlib.Path,
     # 那些字沒烘進來就會在畫面上變成空白。
     for path in extra or []:
         _walk(json.loads(path.read_text()), seen)
+    for path in extra_tsv or []:
+        with path.open(encoding="utf-8", newline="") as handle:
+            rows = csv.DictReader(handle, delimiter="\t")
+            if rows.fieldnames != ["key", "en", "zh-Hant", "status", "source"]:
+                raise SystemExit(f"資料名稱譯表欄位不符：{path}")
+            for row in rows:
+                seen.update(ch for ch in row["zh-Hant"] if ord(ch) > 0x7F)
     # 玩家輸入的名字與屬性數值都是 ASCII，因此整段可見 ASCII 一律烘進來，
     # 中文模式才不需要在兩套字型之間切換。
     seen.update(chr(c) for c in range(0x21, 0x7F))
@@ -197,6 +206,8 @@ def main() -> int:
     p.add_argument("--strings", required=True)
     p.add_argument("--extra-json", action="append", default=[],
                    help="另外掃描這些 JSON 裡所有字串值的非 ASCII 字元（可重複）")
+    p.add_argument("--extra-tsv", action="append", default=[],
+                   help="另掃描資料名稱 TSV 的繁中譯名（可重複）")
     p.add_argument("--out", required=True)
     p.add_argument("--name", default="zh-hant-16")
     p.add_argument("--family", default="Noto Sans CJK TC")
@@ -211,7 +222,8 @@ def main() -> int:
     args = p.parse_args()
 
     chars = collect(pathlib.Path(args.strings),
-                    [pathlib.Path(x) for x in args.extra_json])
+                    [pathlib.Path(x) for x in args.extra_json],
+                    [pathlib.Path(x) for x in args.extra_tsv])
     work = pathlib.Path(args.work)
     work.mkdir(parents=True, exist_ok=True)
     width, height, grey = render(chars, args.family, args.size, args.columns, work)
@@ -323,6 +335,10 @@ def main() -> int:
         "schema": "kol-font-manifest-v2",
         "tool": "tools/build_cjk_font.py",
         "note": "中文 UI 字模表。執行期只讀 PNG，不在執行期做字型排版。",
+        "inputs": [{"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+                   for path in [pathlib.Path(args.strings)]
+                   + [pathlib.Path(x) for x in args.extra_json]
+                   + [pathlib.Path(x) for x in args.extra_tsv]],
         "rights": {"source_family": args.family, "source_license": args.license,
                    "classification": "字型著作權屬原作者；散布時必須隨附授權全文",
                    "derived": "本表是指定字元在固定大小下的點陣化結果"},

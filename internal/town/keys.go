@@ -147,8 +147,8 @@ func (s *Session) Key(token string) bool {
 	case "LISTEN":
 		s.Listen()
 	default:
-		// `ASK:<字>` 是 MOUTH：把玩家打的那句話送進關鍵字比對。原版是在畫面上
-		// 打字，remake 的輸入框還沒做，腳本先用這個形式送同一件事。
+		// `ASK:<字>` 是重播腳本的快捷 token；正式玩家路徑由 StartAsk、
+		// TypeAsk、BackspaceAsk 和 SubmitAsk 接鍵盤輸入並畫出游標。
 		if q, ok := strings.CutPrefix(token, "ASK:"); ok {
 			return s.Ask(q)
 		}

@@ -62,17 +62,17 @@ type Member struct {
 	Carried [][]byte `json:"carried,omitempty"`
 }
 
-// TurnInQuest 是這一名走進一棟收任務物品的建築時發生的事（RE-109）。
-// 回傳交出去的是第幾格（沒有就是 −1）與有沒有記進「已回報數」。
-func (m *Member) TurnInQuest(b *QuestBuilding) (slot int, reported bool) {
+// SwapQuestItem 把這名角色的第一件吻合任務物品換成獎勵（RE-139）。
+// 回報旗標由 Session 在交付台詞讀完後替全隊更新。
+func (m *Member) SwapQuestItem(b *QuestBuilding) (slot int) {
 	if b == nil {
-		return -1, false
+		return -1
 	}
 	hasTyped := m.InHand != nil || len(m.Backpack) > 0
 	for _, item := range m.Worn {
 		hasTyped = hasTyped || item != nil
 	}
-	slot, reported = TurnIn(m.Carried, m.Quests, m.Progress, 0, *b)
+	slot = SwapQuestItem(m.Carried, *b)
 	if slot >= 0 {
 		// 原版複製獎勵的 16 bytes 到各角色，不共用建築母表物品。
 		var reward *Good
@@ -100,7 +100,7 @@ func (m *Member) TurnInQuest(b *QuestBuilding) (slot int, reported bool) {
 			m.SyncCarried()
 		}
 	}
-	return slot, reported
+	return slot
 }
 
 // Inn 是旅店畫面的完整狀態。
@@ -147,6 +147,8 @@ type Inn struct {
 type SteedPic struct {
 	Picture int    `json:"picture"`
 	Name    string `json:"name,omitempty"`
+	// FullName 只給中文版面查顯示譯名；英文資料頁仍照原版只印 Name 的前四字。
+	FullName string `json:"full_name,omitempty"`
 }
 
 // LoadInn 讀取旅店畫面的樣本狀態。這份 JSON 只作對拍輸入，不是遊戲資料模型。

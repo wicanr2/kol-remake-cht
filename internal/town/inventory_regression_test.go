@@ -18,9 +18,9 @@ func TestQuestTurnInDoesNotRestoreConsumedItem(t *testing.T) {
 			m.Backpack = []Good{item}
 		}
 		m.SyncCarried()
-		slot, reported := m.TurnInQuest(&QuestBuilding{Site: 0, Wants: wants, Gives: gives, GivesItem: &reward})
-		if slot < 0 || !reported || m.Progress[0] != 1 {
-			t.Fatalf("未完成交付：%d %v", slot, reported)
+		slot := m.SwapQuestItem(&QuestBuilding{Site: 0, Wants: wants, Gives: gives, GivesItem: &reward})
+		if slot < 0 || !ReportQuest(m.Quests, m.Progress, 0, 0) || m.Progress[0] != 1 {
+			t.Fatalf("未完成交付：%d", slot)
 		}
 		m.SyncCarried()
 		for _, raw := range m.Carried {

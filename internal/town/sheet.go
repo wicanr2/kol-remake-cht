@@ -219,7 +219,7 @@ func (s *Session) buildSheet(m Member) *SheetPage {
 	}
 	if m.Steed != nil {
 		page.Steed = &SteedPic{Picture: m.Steed.Picture,
-			Name: steedPlateName(m.Steed.Name)}
+			Name: steedPlateName(m.Steed.Name), FullName: m.Steed.Name}
 	}
 	if sh.Rank%5 != 0 {
 		page.RankRight = strings.ToUpper(s.uiRecord(RankRecord + sh.Rank))
