@@ -154,7 +154,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：兩塊都有逐畫面對拍收據。
   核實：`internal/ui/battle.go`、`internal/ui/battle_cjk.go`、`docs/spec/010-combat-commands.md` 找得到 `確切的視覺效果還沒解出來|原版外觀尚未完全對拍` 就是還沒完
 
-- **target-mode-icon-bar-mouse** — 選目標格那一層的圖示列怎麼接滑鼠
+- **target-mode-icon-bar-mouse**（#94） — 選目標格那一層的圖示列怎麼接滑鼠
   選目標格時滑鼠直接指格已接（SPEC-010 §3、sub_24131:0x24332，收據 docs/verification/battle-target-mouse/receipt.json）。同一層畫面下方的圖示列原版是否也收滑鼠點擊還沒證據，remake 目前只收鍵盤，點在場地外的位置不做事。
   完成條件：以 IDA 或 dosgolem 實驗確認原版在選目標格時圖示列的滑鼠行為，remake 照著接並附收據；若原版不收滑鼠，把結論寫進 SPEC-010 並移除 input.go 的自承註解。
   核實：`cmd/kol/input.go` 找得到 `圖示列原版怎麼接滑鼠還沒證據` 就是還沒完
