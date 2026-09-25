@@ -51,6 +51,9 @@ for path in out.glob("*.log"):
 assert (out / "legacy.json").read_bytes() == (out / "legacy-before.json").read_bytes()
 files = sorted(p for p in out.iterdir() if p.is_file() and p.name != "receipt.json")
 assert all((p.stat().st_uid, p.stat().st_gid) == (os.getuid(), os.getgid()) for p in files)
+# 三包的 manifest 逐檔重算 SHA-256 與大小（#49）；不符就停在這裡，不寫收據。
+subprocess.run(["python3", str(Path(__file__).with_name("verify_packages.py")),
+                "--manifests-only", str(dist)], check=True)
 receipt = dict(version=version, appimage_sha256=sha(artifact),
                binary_sha256=build["binary_sha256"], platform="linux/amd64",
                execution="AppImage --appimage-extract-and-run，Docker Xvfb",

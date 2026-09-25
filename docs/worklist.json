@@ -306,7 +306,9 @@
         "pattern": "docs/manual/",
         "note": "條目要求每一份規則 spec 都連得回去，所以不能用 `absent`——那是 OR，做完其中一份就會把整條判成完成。不列 003（那是說明書翻譯規格本身）。"
       },
-      "issue": 21
+      "issue": 21,
+      "status": "done",
+      "resolved": "2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。"
     },
     {
       "id": "asset-inventory-format-spec",
@@ -372,9 +374,11 @@
       "acceptance": "測試會在 runtime 讀到非 PNG／OGG 時失敗。",
       "verify": {
         "kind": "manual",
-        "note": "完成物是測試檔，而 verify 不掃測試檔——掃了會被別的測試裡提到的字串騙過去。這一條要人看 go test 清單裡有沒有那支守門測試。"
+        "note": "回歸看 go test 清單：cmd/kol 的 TestRuntimeReadsNoOriginalFiles、TestRuntimeFlagDefaultsAreDerivedFormats、TestRuntimeGuardDetectsOriginalLiterals，以及 internal/assets 的 TestDecodeRejectsNonPNG。verify 不掃測試檔，綁不到。"
       },
-      "issue": 26
+      "issue": 26,
+      "status": "done",
+      "resolved": "2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。"
     },
     {
       "id": "release-asset-separation",
@@ -689,15 +693,17 @@
       "body": "`tools/verify_dist.sh` 驗過 manifest 存在、授權文件、release 的素材 deny-list、Windows PE 檔頭、macOS 四道靜態驗收與 Linux 啟動；`verify_packages.py` 另驗六個發行檔的結構並做過注入缺陷的負對照。存檔位置由 AppImage 那一輪的兩組各 95 次驗過。**但兩支驗收腳本都沒有比對 SHA-256**——manifest 裡有雜湊，沒有人回頭驗它對不對。平台／架構的真機部分見 `windows-macos-real-machine` 與 `cross-platform-build-smoke`。",
       "acceptance": "驗收腳本會重算每個檔案的 SHA-256 並與 manifest 比對，不符即失敗。",
       "verify": {
-        "kind": "absent",
+        "kind": "required_in_all",
         "paths": [
-          "tools/verify_dist.sh",
-          "tools/verify_packages.py"
+          "tools/verify_packages.py",
+          "tools/verify_local_appimage.py"
         ],
-        "pattern": "sha256",
-        "note": "正反對照過：同一個 pattern 在 tools/write_dist_manifest.py 命中兩次（它產雜湊），在兩支驗收腳本都是零——缺口是真的，不是 pattern 太窄。"
+        "pattern": "manifests-only",
+        "note": "已完成，當回歸訊號：兩條驗收路徑都要跑 manifest 雜湊核對。"
       },
-      "issue": 49
+      "issue": 49,
+      "status": "done",
+      "resolved": "2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。"
     },
     {
       "id": "world-battle-click-regions",

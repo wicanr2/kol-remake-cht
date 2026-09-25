@@ -266,16 +266,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：六份規格的現況與歷史訂正鏈都在，沒有已被推翻的禁作條款。
   核實：要人判——同 d01。這兩條應該一起收掉。
 
-- **spec-manual-page-links**（#21） — 讓規則 spec 連回說明書頁碼
-  說明書譯文已完成（84 頁全部 reviewed），但規則 spec 沒有連回頁碼。說明書未涵蓋的邊界行為不得自行推定。
-  完成條件：每份規則 spec 的公開規則段落都指得回說明書頁碼。
-  核實：`docs/spec/005-character-creation.md`、`docs/spec/008-combat-field.md`、`docs/spec/010-combat-commands.md`、`docs/spec/012-combat-spells.md`、`docs/spec/014-quest-completion.md` **每一個**都要有 `docs/manual/`，少一個就是還沒完
-
-- **runtime-format-guard-test**（#26） — 建立測試，保證 runtime 只會讀 PNG 與 OGG
-  internal/assets/assets.go 的檔頭已寫明「runtime 只讀這個目錄下的 manifest.json 與 PNG」，但沒有測試釘住它。禁止讀原版 archive／EXE 目前只靠約定。
-  完成條件：測試會在 runtime 讀到非 PNG／OGG 時失敗。
-  核實：要人判——完成物是測試檔，而 verify 不掃測試檔——掃了會被別的測試裡提到的字串騙過去。這一條要人看 go test 清單裡有沒有那支守門測試。
-
 - **package-boundaries-and-injection**（#29） — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案
   internal/ 已分成 21 個套件，四處已有 Rand interface（title、world、charcreate、battle），存檔 schema 已到 v2。缺的是把邊界與固定 timestep 寫成文件契約——現在只在程式裡成立，沒有一份說得出「哪一層不准依賴哪一層」。
   完成條件：有一份文件說明分層契約與固定 timestep，並且違反時測得出來。
@@ -401,18 +391,16 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：版本號定案，用它重建一次並驗收。
   核實：要人判——版本號是決策不是程式狀態。`build_dist.sh` 把版本當參數收，綁不到也不該綁。
 
-- **dist-package-sha256-verification**（#49） — 發行包的 SHA-256 驗收
-  `tools/verify_dist.sh` 驗過 manifest 存在、授權文件、release 的素材 deny-list、Windows PE 檔頭、macOS 四道靜態驗收與 Linux 啟動；`verify_packages.py` 另驗六個發行檔的結構並做過注入缺陷的負對照。存檔位置由 AppImage 那一輪的兩組各 95 次驗過。**但兩支驗收腳本都沒有比對 SHA-256**——manifest 裡有雜湊，沒有人回頭驗它對不對。平台／架構的真機部分見 `windows-macos-real-machine` 與 `cross-platform-build-smoke`。
-  完成條件：驗收腳本會重算每個檔案的 SHA-256 並與 manifest 比對，不符即失敗。
-  核實：`tools/verify_dist.sh`、`tools/verify_packages.py` 找不到 `sha256` 就是還沒完
-
 
 ### 本輪核實為已完成（原本掛在未完成清單上）
 
 - **g01-cjk-sheet-pages** — G01：繁中資料頁與 MIRROR／物品／隊伍／法術／任務入口：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
+- **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
+- **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
+- **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。

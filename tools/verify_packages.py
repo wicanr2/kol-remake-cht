@@ -6,8 +6,11 @@
 release 那一份是不是真的不含原作衍生位元組。
 
     verify_packages.py <dist 目錄> <版本>
+    verify_packages.py --manifests-only <dist 目錄>   # 只重算三包的 SHA-256
 """
 
+import hashlib
+import json
 import os
 import sys
 import zipfile
@@ -82,9 +85,59 @@ def check_appimage(path: str, bundle: str) -> None:
     ok(f"{name}：{os.path.getsize(path) // 1024} KB", before)
 
 
+def check_manifest(dist: str, bundle: str) -> None:
+    """重算每個檔的 SHA-256 與大小，與 `<bundle>/manifest.json` 逐筆比對。
+
+    manifest 由 `write_dist_manifest.py` 在打包時寫下；這裡回頭驗它，打包後被改過、
+    少了、多了的檔案都算失敗。manifest 自己不在清單裡。
+    """
+    base = os.path.join(dist, bundle)
+    before = globals()["FAILURES"]
+    try:
+        with open(os.path.join(base, "manifest.json"), encoding="utf-8") as fh:
+            manifest = json.load(fh)
+    except (OSError, ValueError) as err:
+        fail(f"{bundle}/manifest.json 讀不到：{err}")
+        return
+    listed = {row["path"]: row for row in manifest.get("files", [])}
+    if manifest.get("file_count") != len(listed):
+        fail(f"{bundle}：file_count {manifest.get('file_count')} 與清單 {len(listed)} 筆不符")
+    on_disk = set()
+    for root, _, names in os.walk(base):
+        for n in names:
+            rel = os.path.relpath(os.path.join(root, n), base)
+            if rel != "manifest.json":
+                on_disk.add(rel)
+    for rel in sorted(on_disk - listed.keys()):
+        fail(f"{bundle}：{rel} 不在 manifest 裡")
+    for rel, row in sorted(listed.items()):
+        path = os.path.join(base, rel)
+        if not os.path.isfile(path):
+            fail(f"{bundle}：manifest 列了 {rel}，檔案不存在")
+            continue
+        h = hashlib.sha256()
+        with open(path, "rb") as fh:
+            for chunk in iter(lambda: fh.read(1 << 20), b""):
+                h.update(chunk)
+        if h.hexdigest() != row.get("sha256"):
+            fail(f"{bundle}：{rel} 的 SHA-256 與 manifest 不符")
+        if os.path.getsize(path) != row.get("bytes"):
+            fail(f"{bundle}：{rel} 的大小與 manifest 不符")
+    ok(f"{bundle}/manifest.json：{len(listed)} 個檔案的 SHA-256 與大小相符", before)
+
+
 def main() -> int:
     globals()["FAILURES"] = 0
+    if len(sys.argv) == 3 and sys.argv[1] == "--manifests-only":
+        for bundle in ("full", "release", "promo"):
+            if os.path.isdir(os.path.join(sys.argv[2], bundle)):
+                check_manifest(sys.argv[2], bundle)
+        print("manifest 驗收" + ("未通過" if globals()["FAILURES"] else "通過"))
+        return 1 if globals()["FAILURES"] else 0
     dist, version = sys.argv[1], sys.argv[2]
+    for bundle in ("full", "release", "promo"):
+        print(f"== {bundle} manifest")
+        check_manifest(dist, bundle)
     pkg = os.path.join(dist, "packages")
     for bundle in ("full", "release"):
         print(f"== {bundle}")

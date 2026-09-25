@@ -101,3 +101,17 @@ schema、migration 與既有圖像引用以 SPEC-023 READY 為準，已接正式
 4. 由使用者決定繁中名字長度／重名 policy 與是否保留原版性別限制；決策前不現代化。
 5. 固定 remake typed schema、migration 與 deterministic RNG 契約。
 6. 證據審查通過後才可升 READY 並開始 production implementation。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 建角狀態機 | [PDF 4（印刷頁 2–3）](../manual/chapters/01-getting-started.md) | 開始遊戲、建立角色：輸入名字，選種族、性別、職業與圖像 |
+| 名冊與刪除 | [PDF 5（印刷頁 4–5）](../manual/chapters/01-getting-started.md) | 角色清單最多 16 名、位置文字為旅店名前十字母加城鎮三字母縮寫；刪除要再確認，選錯可按 No 返回 |
+| 已知屬性契約 | [PDF 27（印刷頁 48–53）](../manual/chapters/07-advanced-gamers.md)、[PDF 30（印刷頁 54–57）](../manual/chapters/07-advanced-gamers.md) | 種族與性別限制職業、職業屬性範圍表、各屬性與次要屬性的意義 |
+| 圖像／盾牌編輯 | [PDF 5（印刷頁 4–5）](../manual/chapters/01-getting-started.md) | 編輯圖像或盾牌的用途；操作細節見參考卡第 2–3 頁（Apple II 版，不直接套用 DOS） |
+
+說明書沒寫：建角逐層取消、滿槽拒絕、名字欄字元集合與存檔欄位，這些以本規格引用的 KOLBOOK 反組譯與 UI oracle 收據為準。

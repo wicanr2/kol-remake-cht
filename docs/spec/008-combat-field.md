@@ -406,3 +406,18 @@ FEET、盾擊用 SHIELD、頭槌用 HEAD、拳用 HANDS，位址是角色記錄
 推翻；該欄位依 RE-097 對應 IDA `word_3B26A`。本次等級為 3，不能把舊括註
 當成固定規則。保留原文以回查形成原因，見
 [正常隊員數值收據](../verification/battle-party-state-20260908.md)。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 1. 戰場視窗 | [PDF 16（印刷頁 26–27）](../manual/chapters/05-coming-to-blows.md)、[PDF 17（印刷頁 28–29）](../manual/chapters/05-coming-to-blows.md) | 遭遇後切到戰鬥畫面；戰鬥者視窗逐一顯示角色 |
+| 2. 視線 | [PDF 18（印刷頁 30–31）](../manual/chapters/05-coming-to-blows.md) | 射擊要確認視線暢通，樹木與其他角色都會擋住 |
+| 5. 回合：規劃與執行 | [PDF 17（印刷頁 28–29）](../manual/chapters/05-coming-to-blows.md)、[PDF 33（印刷頁 60–61）](../manual/chapters/07-advanced-gamers.md) | 每回合先逐一決定行動，再一起執行；戰鬥選項順序 |
+| 4. 執行順序 | [PDF 34（印刷頁 62–63）](../manual/chapters/07-advanced-gamers.md) | 出手順序由敏捷加隨機數決定，再依疲勞、負重調整 |
+| 回合結束與戰鬥結局 | [PDF 35（印刷頁 64–65）](../manual/chapters/07-advanced-gamers.md)、[PDF 22（印刷頁 38–39）](../manual/chapters/05-coming-to-blows.md) | 疲勞更新後進入下一回合，直到一方勝利或隊伍逃跑 |
+
+說明書沒寫：戰場地形的亂數索引、站位、游標初始位置與視線的格子判定，這些以本規格的 IDA 位址與 dosgolem 比對為準。

@@ -6529,3 +6529,14 @@ frame-270 推翻了 remake 的版面：
   英中輸入序列相同，十二張畫格收據 `docs/verification/cjk-ui/town-typing-gui-receipt.json`。
   第一次 GUI 腳本用了修正前編的執行檔，已在腳本加過期檢查。空問句後白框重設到門，
   原版位置未對拍，未改。#61 本地完成。
+
+## 2026-09-26：可獨立完成的工作項
+
+- #49：`verify_packages.py` 新增 `check_manifest`，三包逐檔重算 SHA-256 與大小、抓清單外
+  與缺檔；`verify_dist.sh` 經它執行，`verify_local_appimage.py` 也呼叫 `--manifests-only`。
+  v.0.2.5 通過，竄改／多檔／少檔三個負例失敗。舊版 0.2.1 因 2026-09-04 打包工具排除所有
+  `manifest.json`，`full/assets/ui-font/manifest.json` 未入清單，新檢查會報出，舊交付未改。
+- #26：容器無 strace、Go 不經 libc，改以 `go/ast` 靜態守門：旗標預設路徑須在 assets/、docs/
+  且為 PNG／JSON／TSV／OGG 或目錄，非測試程式碼不得有像原版檔名的字面值；`assets.Decode`
+  拒絕非 PNG、逃出目錄與內容非 PNG 的測試。自我負例與把旗標改成原版封裝的真實負例皆失敗。
+- #21：25 份規則規格加「說明書對照」表，連結全數可解析；015、028、029 明示說明書無對應。

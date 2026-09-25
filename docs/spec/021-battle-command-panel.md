@@ -27,3 +27,12 @@ Command／Style／Guard；其他人物讀 Actor。方向皆讀被檢視者 Facin
 審查：CommandPanel、CommandInspection、CommandIntellect、CommandText、
 CommandDirection 的既有原版測試已分別核對參數、可見性、字元及素材路由；
 SPEC-020 已接一次性門檻。此範圍不另開規則或忠實度取捨，授權實作上述唯讀面板。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 左下命令面板 | [PDF 17（印刷頁 28–29）](../manual/chapters/05-coming-to-blows.md)、[PDF 18（印刷頁 30–31）](../manual/chapters/05-coming-to-blows.md) | 投入戰局、接近戰鬥、攻擊的圖示 |

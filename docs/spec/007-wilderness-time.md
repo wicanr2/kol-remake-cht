@@ -62,3 +62,13 @@
 - 玩家路徑：`world-clock.json` 走完十五步，第 14／15 步與對拍截圖逐 byte 相同。
 - 單元測試：`internal/world/clock_test.go` 覆蓋門檻、換日、換月換年、天候上下限、
   每步成本與日期框兩行。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 野外時刻與天候 | [PDF 14（印刷頁 22–23）](../manual/chapters/04-into-the-wilderness.md)、[PDF 15（印刷頁 24–25）](../manual/chapters/04-into-the-wilderness.md) | 荒野旅行、風雨無阻；天候與地形影響旅行 |
+| 營養 | [PDF 15（印刷頁 24–25）](../manual/chapters/04-into-the-wilderness.md)、[PDF 16（印刷頁 26–27）](../manual/chapters/05-coming-to-blows.md) | 就地取食與營養 |

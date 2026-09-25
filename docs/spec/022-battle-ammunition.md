@@ -66,3 +66,12 @@ UI 仍限於既有 119×73 安全區，最長有效文字 ARROWS:255 可完整�
 實作驗收更新：正式資訊框 128 組原版比較與完整測試／建置通過。
 正常 GUI 150 個輸入確認 Olear 的 Elf Bow 從 20 發射至 19 發；弩與耗盡的正常 GUI
 及 dosgolem 整場同狀態仍未完成，保持 READY。見 `docs/verification/ammunition-panel-20260908.md`。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 隊員射擊彈藥 | [PDF 20（印刷頁 34–35）](../manual/chapters/05-coming-to-blows.md)、[PDF 22（印刷頁 38–39）](../manual/chapters/05-coming-to-blows.md) | 裝填十字弓、箭矢消耗 |

@@ -142,3 +142,14 @@ rand(100) >= 體型差 → 什麼都不做
 **還沒實跑到。**規則層有測試，但要湊到「攻擊者比目標大」才觸發得了——手上這一份
 原版存檔裡 Poontang 的體型是 114、BINDERAK 是 100，敵人打過來永遠推不動，
 而 Poontang 打過去常常一擊斃命。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 攻擊結算 | [PDF 34（印刷頁 62–63）](../manual/chapters/07-advanced-gamers.md) | 命中由技能與隨機數決定，傷害與擊退 |
+| 攻擊類型與部位 | [PDF 18（印刷頁 30–31）](../manual/chapters/05-coming-to-blows.md)、[PDF 19（印刷頁 32–33）](../manual/chapters/05-coming-to-blows.md) | 攻擊類型、瞄準部位 |
+| 武器與盔甲數值 | [PDF 32（印刷頁 58–59）](../manual/chapters/07-advanced-gamers.md)、[PDF 33（印刷頁 60–61）](../manual/chapters/07-advanced-gamers.md) | 武器與盔甲表 |

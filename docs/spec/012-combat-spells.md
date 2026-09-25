@@ -213,3 +213,17 @@ Giant／Legendary／Undead），低 nibble 是那一類底下的 SUBCLASS，名�
 `50 × 累積傷害 ÷ 昏迷門檻`，等於替原版加了一條「傷得越重打得越差」的乘法惩罰。
 規劃鍵值、執行鍵值、攻防值、力量加成與敵人 AI 的撤退門檻五處都吃這個值，
 數字因此整體偏低。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 1. 法術放在角色記錄裡 | [PDF 40（印刷頁 74–75）](../manual/chapters/07-advanced-gamers.md)、[PDF 41（印刷頁 76–77）](../manual/chapters/07-advanced-gamers.md) | 學習法術、魔法教團與修改；SCROLL 查看法術清單 |
+| 2. 骰式與法術構成 | [PDF 38（印刷頁 70–71）](../manual/chapters/07-advanced-gamers.md)、[PDF 39（印刷頁 72–73）](../manual/chapters/07-advanced-gamers.md) | 魔法詞＝種族＋屬性＋強度＋距離＋（持續時間）＋亞種，各音節表 |
+| 5. 三種效果、6. 倒數與失效 | [PDF 39（印刷頁 72–73）](../manual/chapters/07-advanced-gamers.md) | 施法時選正面或負面效果；持續時間五級，身體與疲勞法術持續整場 |
+| 施法的指令入口 | [PDF 18（印刷頁 30–31）](../manual/chapters/05-coming-to-blows.md) | 戰鬥中施法的說明指向印刷頁 71 |
+
+說明書沒寫：抵擋判定、倒數的扣減時機與最後一句訊息的組法，這些以本規格的 IDA 證據為準。法術名的中文注解見 SPEC-034。

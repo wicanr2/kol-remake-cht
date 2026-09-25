@@ -225,3 +225,17 @@ RE-113 解出。**
 有沒有別人，有就印記錄 0x11A，沒有才把 `+0x1E` 清掉並印 0x11B「lands!」。
 上馬是移動方式選到第 3 式以後把 `+0x1E` 設成 1（RE-085），0x3F 則是騎著移動。
 三條都接上了；原版同時清的 `+0x25` 在哪裡被讀還沒解，remake 沒有那一格。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 2. 主指令列 | [PDF 17（印刷頁 28–29）](../manual/chapters/05-coming-to-blows.md)、[PDF 18（印刷頁 30–31）](../manual/chapters/05-coming-to-blows.md) | MOVE、攻擊等圖示；移動方式 WALK／RUN／SPRINT |
+| 3. 選目標格 | [PDF 18（印刷頁 30–31）](../manual/chapters/05-coming-to-blows.md) | 射擊與攻擊要先指定目標，滑鼠可直接點選 |
+| 4. 子選單的選項換算 | [PDF 18（印刷頁 30–31）](../manual/chapters/05-coming-to-blows.md)、[PDF 19（印刷頁 32–33）](../manual/chapters/05-coming-to-blows.md)、[PDF 33（印刷頁 60–61）](../manual/chapters/07-advanced-gamers.md) | 攻擊類型、瞄準部位、出手時的防禦與戰鬥選項順序 |
+| 丟、撿與切換 | [PDF 20（印刷頁 34–35）](../manual/chapters/05-coming-to-blows.md)、[PDF 21（印刷頁 36–37）](../manual/chapters/05-coming-to-blows.md) | 裝填十字弓、切換武器、撿起與放下 |
+
+說明書沒寫：決策欄位的記錄位移、白框夾限、子選單索引換算與選完之後的狀態轉移，這些以本規格的反組譯證據為準。

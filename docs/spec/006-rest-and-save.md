@@ -174,3 +174,13 @@ REST 是 remake 唯一的存檔觸發點，與原版相同。存檔是原子操�
 買賣、訓練、AWARD、SCROLL、MIRROR、戰鬥結算、任務進度與世界時間推進。
 存檔 schema 預留 `settings` 與頂層擴充，但**新欄位要等對應規格 READY 才加**，
 不得先寫進格式當佔位。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 住宿與存檔 | [PDF 13（印刷頁 20–21）](../manual/chapters/04-into-the-wilderness.md)、[PDF 14（印刷頁 22–23）](../manual/chapters/04-into-the-wilderness.md)、[PDF 26（印刷頁 46–47）](../manual/chapters/06-back-in-town.md) | 一夜好眠、旅店保存隊伍；再享一夜好眠 |
+| 治療 | [PDF 26（印刷頁 46–47）](../manual/chapters/06-back-in-town.md) | 修道院治療傷勢要付費 |

@@ -173,3 +173,12 @@ tools/run_python_tool.sh tools/read_dgroup_table.py \
 角色記錄 `+0x9F` 的早期未知已由 RE-077／112 及 `Nourished` 讀取端訂正為飢餓；
 不可與怪物記錄的同數字偏移混用。`sub_2A39B` 的畫面範圍另見 RE-068／SPEC-026，
 不是全部未知的 helper。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 隨機遭遇 | [PDF 15（印刷頁 24–25）](../manual/chapters/04-into-the-wilderness.md)、[PDF 16（印刷頁 26–27）](../manual/chapters/05-coming-to-blows.md) | 荒野伏擊；徒步隊伍自動進入遭遇，全隊騎乘可嘗試避開 |

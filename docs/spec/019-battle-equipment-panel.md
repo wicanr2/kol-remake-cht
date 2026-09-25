@@ -57,3 +57,12 @@ IDA `sub_22EFC:0x22F3B/0x22F60/0x22F77/0x22FB3` 均讀取全場怪物索引
 輸入、工具及位址基準同上，原始匯出在 `workplace/monster-panel-20260908/monster-kind-private.json`。
 授權面板從 `State.Monster.Index` 取得 typed PNG 索引，與 `Actor.Kind` 分離；
 能力值改變不得改變肖像。此訂正不授權猜改能力初始化。
+
+## 說明書對照
+
+頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；
+執行順序、邊界與隱藏值以本規格引用的原版證據為準，說明書沒寫的部分不從說明書推定。
+
+| 本規格段落 | 說明書 | 說明書寫了什麼 |
+|---|---|---|
+| 左上肖像與裝備 | [PDF 17（印刷頁 28–29）](../manual/chapters/05-coming-to-blows.md)、[PDF 20（印刷頁 34–35）](../manual/chapters/05-coming-to-blows.md) | 戰鬥者視窗；手中之劍：切換武器 |
