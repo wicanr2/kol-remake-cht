@@ -1395,7 +1395,7 @@
       "id": "player-path-receipts-stale",
       "layer": "verification",
       "title": "正常玩家路徑的收據對不上現在的程式",
-      "body": "2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑，當時 9 條一致；其餘多條因 SceneInn 改成 SceneTown、讀檔起點或輸入計畫不同而對不上。town-scroll 與 town-stable 的已知差異已各自重生。2026-09-25 再重播 quest-take 舊 34 步：存檔把隊伍位置設在第 7 城，角色所在地卻仍是 MIN，現行標題選角依所在地還原旅店，因此停在名冊。改由觀察存檔的第 7 城位置起跑，接任務的 15 鍵局部路徑已驗中英同狀態，但不能替代原本從標題起跑的收據。其他路徑及長路徑尚未以目前程式完整重跑，舊收據仍不得冒充現況。",
+      "body": "2026-09-26 以 check_player_paths.py --all 重跑 25 條：10 條一致；只差天候圖雲層的 town-leave、town-round-trip、world-road 已重生（對拍圖 remake-parity/shots/world/ 四張同步，world 與 world-road 對拍仍全過）。world-clock、world-quest 是 09-04 之後才接上的野外遭遇插進路徑，world-clock 的時段標籤檢查點被伏擊蓋掉，要改寫路徑而不是換種子。arena、flow-quest、full、full-chain、full-chain-ending、full-chain-reload、quest-list、quest-take、town、world-healer 從標題選角後落點不同，要逐條改寫輸入計畫。分類與證據見 docs/verification/player-path/README.md。",
       "acceptance": "逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。",
       "verify": {
         "kind": "present",

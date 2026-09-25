@@ -50,6 +50,24 @@ plan 因此要帶齊重跑所需的每一個旗標——`full-chain-ending` 的 
 > [`quest-offer-receipt.json`](../cjk-ui/quest-offer-receipt.json)，已證明該局部路徑
 > 可重播；它不代表從標題走起的 `quest-take` 已修復。
 
+> **2026-09-26 全數重跑：**`check_player_paths.py --all` 25 條中 10 條一致，15 條對不上，
+> 依差異分三類（像素差與差異矩形逐張算過）：
+>
+> 1. **只差天候圖的雲層**：`town-leave`、`town-round-trip`、`world-road`。差異全落在
+>    左側天候圖（約 60×39 像素），來自 `e118596` 接上的天候六組與捲雲（SPEC-026）。
+>    已重生；同狀態的對拍圖 `remake-parity/shots/world/` 四張一併換新，`world`
+>    4/4、`world-road` 10/10 仍通過（對拍矩形本來就排除天候圖）。
+> 2. **新接的野外遭遇插進路徑**：`world-clock` 最後一步多了一場伏擊、`world-quest`
+>    第 66 步起遇到治療僧侶；前面各步只差雲層。兩份收據產生於 2026-09-03，野外隨機
+>    遭遇（`f69e1b4`，09-04）與治療那一條（`71d9be8`，09-06）都在之後才接上，舊收據
+>    裡根本沒有遭遇可擲。`world-clock` 要驗的時段標籤換成 MID MORN 正好落在被伏擊
+>    蓋掉的那一步；換種子避開遭遇等於挑結果，不採用，要改寫路徑讓標籤檢查點落在
+>    遭遇之前或打完之後。
+> 3. **起點或流程不同**：`arena`、`flow-quest`、`full`、`full-chain`、
+>    `full-chain-ending`、`full-chain-reload`、`quest-list`、`quest-take`、`town`、
+>    `world-healer`。從標題選角後落在旅店、名冊或城鎮戶外，與舊按鍵預期的畫面不同，
+>    要逐條改寫輸入計畫。
+
 **改了戰鬥數值之後戰鬥那一段的按鍵就作廢了**（打幾個回合、每一手的訊息都不同）。
 `tools/drive_battle_script.py` 用來重生它：跑一次腳本 → 讀軌跡的最後一筆 →
 依規劃段停在哪一層決定下一批 token → 再跑，產出的仍是一串固定按鍵。走路與城裡

@@ -6558,3 +6558,8 @@ frame-270 推翻了 remake 的版面：
   語境不同的 8 處登在 `glossary-exceptions.json`，假例外負例失敗。依術語表改
   懸崖巨魔、岩石食人魔、勳章／黃銅勳章、精靈族／矮人族、遠望者；字模重烘為 2,559 字。
 - 新登 `target-mode-icon-bar-mouse`：選目標格時圖示列的滑鼠行為原版未查，只收鍵盤。
+- #88：`check_player_paths.py --all` 重跑 25 條，10 條一致、15 條對不上。逐張算像素差與
+  差異矩形分三類：只差天候圖雲層（SPEC-026 捲雲，3 條，已重生並同步
+  `remake-parity/shots/world/` 四張，`world` 4/4、`world-road` 10/10 通過）；09-04 後才接上的
+  野外遭遇插進路徑（world-clock、world-quest，未重生）；標題選角後落點不同（10 條，未重生）。
+  重跑途中重烘字型，但差異都不在中文畫面，不影響分類。#88 仍開放。
