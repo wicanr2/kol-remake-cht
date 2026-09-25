@@ -1,8 +1,9 @@
 # SPEC-032：戰鬥戰利品與法術清單的繁中版面
 
-狀態：**READY**（2026-09-14；由 DRAFT 證據審查升級）。本規格固定 CJK 畫面、文字
-安全矩形與輸入命中區，授權進入 implementation。原版沒有中文畫面，因此本規格不宣稱
-中文像素 parity。
+狀態：**CONFORMED**（2026-09-24；2026-09-14 由 DRAFT 證據審查升 READY）。
+本規格固定 CJK 畫面、文字安全矩形與輸入命中區。四種畫格已由正常按鍵路徑產生並目視
+檢查；戰利品路徑使用明示的觀察用怪物／任務資料。原版沒有中文畫面，因此本規格不宣稱
+中文像素 parity，也不證明整場戰鬥規則一致。
 
 ## 1. 範圍與排除
 
@@ -22,8 +23,8 @@ Issue #90（`wicanr2/kol-remake-cht`）目前要求兩頁有中文畫面與截�
 
 既有來源與落點：
 
-- `cmd/kol/battle_render.go`：目前 CJK 分派只涵蓋遭遇與主戰場，戰利品／法術清單
-  仍落到英文 renderer 再放大。
+- `cmd/kol/battle_render.go`：2026-09-14 READY 審查時，CJK 分派只涵蓋遭遇與
+  主戰場，戰利品／法術清單仍落到英文 renderer 再放大；後續實作已補。
 - `internal/ui/battle.go`：英文 renderer 的框、標題、列、選中樣式與戰利品圖示列。
 - `internal/battle/spoils.go`：`SpoilBox`、`SpoilList`、兩階段標題與 `SpoilIcons`。
 - `internal/battle/spell.go`：`SpellListBox`、`SpellListRows`、法術／正負效果標題。
@@ -53,8 +54,8 @@ Issue #90（`wicanr2/kol-remake-cht`）目前要求兩頁有中文畫面與截�
 - 選中列保留英文 renderer 與 RE-115 的已知語意：選中為白字，其他列為青字，
   不額外畫白框。
 - 清單文字不得越過框內安全右緣。安全右緣取框右側保留 4 個原版像素，超出時使用
-  既有 `clip` 逐字截斷；不得換行或縮小字級。物品名與角色名仍沿用 typed data 的
-  原文，未有翻譯證據時不得擅自翻譯。
+  既有 `clip` 逐字截斷；不得換行或縮小字級。物品名依 SPEC-033 的暫譯表只在
+  中文繪製端替換，規則資料與存檔仍保留原文；角色自取姓名保持輸入原樣。
 - 清除 `battle.MessageBox` 對應的底圖區域後，使用原有 YES／U-TURN 圖示與
   `town.IconBar` 的相對位置，所有座標、圖示與選中框乘三。此區域仍覆蓋報獎勵卷軸，
   不新增第二個訊息框。
@@ -103,3 +104,16 @@ Issue #90（`wicanr2/kol-remake-cht`）目前要求兩頁有中文畫面與截�
 - 法術選目標格、指定部位的規則與游標外觀的未證實原版細節。
 - 戰利品掉落機率、背包交換、角色資料回寫與戰後保存。
 - 英文 renderer 的既有版面修正；若英文證據另有缺口，另立規格處理。
+
+## 7. 完成收據與限制
+
+- 法術與正負效果兩頁：`docs/verification/cjk-ui/battle-lists-receipt.json`；
+  重製版正常按鍵路徑，畫格、工具與來源雜湊在收據內。
+- 戰利品物品與角色兩頁：`docs/verification/cjk-ui/battle-spoils-winning-receipt.json`；
+  固定 seed 39、六人存檔、觀察用怪物與任務地點資料，第 22 回合勝利後擷取。
+  收據延伸驗證取消清單後返回野外及英中結束狀態一致。
+- `cmd/kol/world_battle_mouse_test.go` 覆蓋清單列、token、CJK 座標、列間重疊與
+  畫布邊界；2026-09-24 Docker 內完整 Go 測試通過。
+- 字模覆蓋 5,785 筆文字、缺字 0；`docs/verification/cjk-ui/text-fit.json`
+  的文字安全矩形 9,301 項失敗 0。這些只證明重製版中文顯示範圍，
+  不代替英文原版畫面或戰鬥規則的同狀態對拍。

@@ -19,8 +19,9 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
+| SPEC-033 | [中文畫面的資料名稱顯示](033-cjk-display-names.md) | READY | 385 個來源原名已有暫譯並接顯示端；待英中同狀態與正常玩家畫格驗收 |
 | SPEC-031 | [資料頁物品選中後的明細層](031-item-detail-page.md) | CONFORMED | 選中物品頁的圖層與投影已完成；frame-072 是 DOSBox-X 輔助收據，非 strict dosgolem parity |
-| SPEC-032 | [戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) | READY | 只授權 CJK 呈現、文字安全矩形與輸入命中區；原版沒有中文 oracle |
+| SPEC-032 | [戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) | CONFORMED | 四種清單畫格與正常按鍵路徑已驗，戰利品採明示觀察用資料；不宣稱原版中文或整場戰鬥 parity |
 | SPEC-028 | [三個可關閉的加速選項](028-optional-battle-speed.md) | DRAFT | 已決需求與現有接口已核對；細節／原型待確認，不授權先加空開關 |
 | SPEC-027 | [戰鬥共同出口傷勢回寫](027-battle-exit-wounds.md) | READY | 傷勢折算及敗北回寫已接；4608 組原版比較、五條結算至 v2 重載通過，正常玩家鏈與額外掉落待驗 |
 | SPEC-026 | [天候圖層與正常動畫](026-weather-animation.md) | READY | 六組資料、128 像素捲雲與雨雪輪播已接線；原版四組合成、六組分派及正常出城動畫通過 |
@@ -69,7 +70,8 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 SPEC-029：[怪物遠程能力初始化](029-monster-ranged-initialization.md) 已 READY 並接入正式
 首次規劃；固定種子原版比較及完整回歸通過，正常整場尚未 CONFORMED。
 
-SPEC-030：[中文模式的畫布倍率與角色資料頁](030-cjk-character-sheet.md) DRAFT。
+SPEC-030：[中文模式的畫布倍率與角色資料頁](030-cjk-character-sheet.md) CONFORMED；
+六人購馬、坐騎與隊員格、物品及隊伍換頁的繁中畫格與英中狀態已有收據。
 中文模式**不對拍**——原版沒有中文畫面。倍率取三是算出來的：中文字模格高 18，
 而原版最小行距 6，`6 × 3 = 18` 剛好；兩倍只給得起 12 放不下。三倍之後版面照抄就
 成立，資料頁直接用 `SheetLayout × CJKScale`，沒有第二份座標表。
@@ -80,6 +82,6 @@ SPEC-031：[資料頁物品選中後的明細層](031-item-detail-page.md) CONFO
 有右／下四像素投影。實作與收據已完成，frame-072 允許區外差異為 0；dosgolem
 目前沒有 KOL 適配器，因此該畫面只作 DOSBox-X `dosbox-bootstrap` 輔助收據。
 
-SPEC-032：[戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) READY。
+SPEC-032：[戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) CONFORMED。
 本規格只處理 Issue #90 指出的兩個 CJK 清單頁；原版沒有中文 oracle，中文畫面不作
 原版像素 parity 宣稱。

@@ -6212,3 +6212,235 @@ frame-270 推翻了 remake 的版面：
   欄位，改按實際 `pair_count`／`pass_count` schema 重跑後通過。容器均使用
   `--rm`，未保留長駐工作程序；目前 HEAD 為 `a442b78b64c02b99adcf214ec9236883e54bd15d`，
   本輪未 commit／push，最後容器與暫存清理於本節收尾複核。
+
+## 2026-09-23：接手收尾、核實繁中戰鬥清單與修正現況入口
+
+- 開工依路由命中復古重製收尾與工作清單，載入 `reverse-engineer-retro-game-remake`、
+  收尾 playbook、驗收交接與工作清單規則；`grill-me` 用於待決的完成級別。
+  `main`／`origin/main` 同為 `5d2f6ce6c78484073d57c3a2e0dbee4aba499386`，
+  開工 `git status --short` 為空。host `gh auth status` 通過，已唯讀核對遠端 Issue；
+  沒有建立、編輯、留言或關閉 Issue。
+- `tools/worklist.py verify` 首跑指出 #90 的 `還沒有中文版面` 訊號已消失，
+  但 SPEC-032 要求的四種正常路徑畫格未齊。從既有 `battle-spell/replay.spec`
+  以目前程式重建並重播，取得 `PromptSpell`／`PromptAffect` 兩張 960×600
+  繁中畫格，目視確認標題與清單可讀；輸入、工具映像、步號、SHA-256、證據
+  等級和權利分類見 `docs/verification/cjk-ui/battle-lists-receipt.json`。這是
+  remake 的正常按鍵路徑收據，不是原版中文像素對拍。
+- 戰利品舊腳本用 seed 39 重播時，第 40 步遇治療提示，原移動鍵被攔住；
+  插入 `RET` 後，第 67 步又遇 GOLEM，未走到 `Items Found`／`Characters`。
+  已把 #90 改為誠實的 `manual` 驗收缺口，保留開放。對 `battle_cjk.go`
+  的原版游標外觀自承，納入既有 #33 的訊號，不另外製造同義項。
+- 第一次 Go 測試未設 `DISPLAY`，`cmd/kol`／`internal/ui` 在 GLFW 初始化失敗；
+  分類為驗證環境，於同一 `eob-remake-go:1.26.7-ebiten2.9.9-audio` 映像加 Xvfb
+  乾淨重跑 `go test ./cmd/... ./internal/... -count=1 -timeout 600s` 全部通過。
+  繁中字模覆蓋 5,122 筆／0 缺字、既有文字安全矩形 6,952 筆／0 失敗。
+  `tools/worklist.py selftest` 正反對照通過，`verify` 為 73 條未完成、17 條
+  已核實完成，無過期訊號；`git diff --check` 通過。
+- `README.md` 移除過期的 2026-09-05 自評流水帳並修正繁中資料頁現況；
+  `CONTEXT.md` 頂部、`WORKLIST.md` 與繁中收據索引已更新。尚未選定近似完成
+  或嚴格對拍的交付門檻，已向使用者提出一個父層決策；回答前不把建議寫成決定。
+- 清理本輪生成的 207 張探索 PNG、探索軌跡與暫存 CJK 報表，只保留兩張正式
+  法術畫格、其 118 步軌跡與收據。所有新增檔案為 UID/GID `1000:1000`；
+  專案根未見 root-owned 檔或誤建的 `.md` 目錄。一次性容器均用 `--rm`，
+  依專案映像查無殘留容器。`workplace/tmp/kol` 原本已存在，本輪探索時
+  被目前 HEAD 重建覆寫；這是被忽略的中間產物，已記錄而未再清除。
+  現行 AppImage 未重建；本輪未 commit／push，也未作遠端 Issue 寫入。
+
+## 2026-09-23：本機可玩版範圍、候選封包與戰鬥判讀勘誤
+
+- 使用者在完成級別決策選「本機可玩版」。這輪以最新原始碼的本機 Linux 封包、
+  正常操作與保存／重載為目標；近似完成的全面抽樣、嚴格對拍、其他平台及公開
+  發行沒有被納入完成宣稱。載入交付目錄與版號契約後沿用專案既有
+  `full/release/promo` 結構；沒有把含原版素材的包放進 Git 或公開目錄。
+- `kol-package:20260907` 以唯讀來源與乾淨新目錄重建
+  `dist-all/v.0.2.3-20260923/full/kol-v.0.2.3-20260923-full-linux-x86_64.AppImage`。
+  SHA-256 為 `3413ec68699eb4ff06044c014bec0c6a720234fcd958d056a8d467b29d9f7a4e`；
+  `build-inputs.json` 記 1,107 筆輸入。解包驗證程式版號、x86-64 ELF、849 筆
+  素材／文件雜湊，三目錄 manifest 與 SHA256SUMS 逐檔核對通過。`release/`／
+  `promo/` 只有「尚未交付」佔位。第一次自製 manifest 檢查把容器掛載點名
+  `/dist` 當成版號，屬驗證腳本錯誤；同一映像修正讀取 `build-inputs.json` 後通過。
+- 實際 AppImage 以 `--appimage-extract-and-run` 進行 GUI 抽樣：建角、名冊、
+  住宿、刪角與重用槽位、v1 匯入、受控世界時間，及兩種預設保存位置
+  `XDG_CONFIG_HOME`、`HOME/.config` 的三次啟動／95 次輸入均通過。第一次
+  `verify_local_appimage.py` 沒有 DISPLAY 而失敗，補 Xvfb 後以相同映像重跑通過；
+  這不是產品缺陷。輸出收據在三個 `workplace/appimage-*v.0.2.3-20260923/` 目錄。
+- 六人隊伍 seed 1 的正常按鍵路徑從城鎮走到野外 WALBAR 遭遇、規劃 26 回合，
+  回到世界後走入半途之家，住宿寫 v2 存檔，重新啟動同一 AppImage 載入後
+  六人、傷勢、金冠與城鎮位置仍在。**勘誤：**最初把 `verdict=1` 誤讀成勝利；
+  畫面是「The WALBARs have defeated you!」，`internal/battle/victory.go` 亦定義
+  `1=敗北`、`2=勝利`。本條只證明敗北結算與存檔，不證明勝利或獎勵回寫。
+  已讓 `tools/drive_battle_script.py` 同列顯示文字勝負與原值，避免再誤讀。
+- 額外以原版名冊的單人 Poontang 和 Moraine 探索固定 seed GOBLIN 戰鬥，
+  兩條也敗北；未為通過而改動正式規則或素材。Poontang seed 3 正常行走到
+  世界 `(48,21)`，觸發第 5 號任務提示並進入 BINDERAK 戰鬥。
+  現行封包尚無正常路徑勝利、獎勵或 #90 戰利品繁中畫格收據，故維持候選
+  身分，不把歷史勝利收據升格成本版完成。細節、雜湊與限制見
+  `docs/verification/appimage-v.0.2.3-20260923.md`。
+- 本輪 Docker 作業均 `--rm --network none`，有資源限制及外層逾時；
+  專案資料與封包為 UID/GID `1000:1000`。清掉 76 個明確列名的種子掃描與
+  敗北探索暫存檔／目錄，保留戰後保存、重載及任務入口證據；本輪未產生
+  root-owned 專案檔或誤建的 `.md` 目錄。`git diff --check`、
+  `tools/worklist.py selftest/verify`、腳本語法與 JSON 檢查通過；
+  工作清單仍是 73 條未完成、17 條核實完成。專案映像未見殘留容器。
+  沒有 GitHub Issue 寫入、公開發行、commit 或 push。
+
+## 2026-09-24：繁中戰利品與戰後返回續測
+
+- 固定 seed 39、六人 v1 存檔轉成暫存 v2，配合明示的觀察用怪物與任務地點資料，
+  以正常玩家 token 重播至第 22 回合勝利（`verdict=2`）。「找到的物品」與「角色」
+  兩張 960×600 畫格已目視檢查，PNG、trace、輸入及程式雜湊收在
+  `docs/verification/cjk-ui/battle-spoils-winning-receipt.json`；本地 #90 按其畫格條件
+  標為完成，GitHub 遠端仍依使用者要求等整體驗收後更新。
+- 續按取消鍵發現戰利品第一頁結束後會重開清單；依 RE-115 的取消路徑，在單場
+  結算加只開一次的閘門。`N N RET` 現返回野外，中文與英文模式的最後狀態軌跡
+  SHA-256 均為 `633010aa837b7e9426854fbcb1bb59551ef97193ab40547e770c5c3bcf2908b3`。
+- 返回野外的繁中畫格揭出日期仍是 `Apr 1`／`AD 1100`，已改由時鐘提供
+  「四月一日／西元 1100」，年末日期測試與目視畫格通過；英文模式的
+  `DateLines` 與畫布不變。修正後二模式結束畫格與軌跡同列於上述收據。
+- 修正後以 `eob-remake-go:1.26.7-ebiten2.9.9-audio`、唯讀來源、Xvfb、
+  `--rm --network none` 重跑 `go test ./cmd/... ./internal/... -count=1 -timeout 600s`
+  全部通過；新 binary SHA-256 為
+  `e923df8cda9793dd96a7ba6c0e9b4443735c3960b1781314bbddb98deea4ff64`。
+  這只驗重製版狀態，不是原版同狀態或正式 AppImage 驗收。
+- SPEC-032 按四頁畫格、幾何測試與來源收據升 CONFORMED；這是中文版面規格，
+  不替代戰鬥機制對拍。另核對字模 5,785 筆文字缺字 0、資料原名 385 種缺譯 0、
+  共用文字庫 486 筆失敗 0；城鎮來源仍有 45 筆 2–9 號亂碼／殘句缺譯，
+  其原版全域可達性尚未證實，沒有把靜態檢查改成假綠燈。
+- 收尾清理：`git diff --check` 通過，`tools/worklist.py verify` 通過（72 條未完成、
+  18 條已核實完成）；無本專案殘留容器，也無 root-owned 專案檔或誤建的 `.md`
+  目錄。`/tmp/kol-closure-driver` 保留 14 MiB 的 UID 1000 暫存 v2 存檔、
+  本輪 binary 與重播輸出，供後續同狀態研究；正式可追溯畫格及收據已複製進
+  `docs/verification/cjk-ui/`。本輪未更新遠端 GitHub Issue、README 截圖、
+  正式封包，也未 commit 或 push，因使用者指定整體完成後才更新前兩者。
+
+## 2026-09-24：六人馬廄、角色換頁與體重單位
+
+- 以 `workplace/saves/full-chain.json` 建六人觀察存檔，移至城 1 馬廄門口並給
+  3,000 金冠；原始輸入與暫存 v1／v2 的 SHA-256、24 個按鍵、程式雜湊及
+  25 筆狀態見 `docs/verification/cjk-ui/stable-six-page-receipt.json`。這是正式
+  按鍵分派的局部玩家路徑，並非新遊戲自然抵達或原版同狀態對拍。
+- 購馬後的六人角色資料頁、物品頁、隊伍立繪頁與返回畫格已目視檢查。
+  第 11 步金冠由 3,000 降至 2,600；英中重播軌跡 SHA-256 相同。
+  原先按 `SPACE` 離開隊伍立繪頁時，圖示列返回建築但立繪頁仍殘留；
+  `Session.Continue` 現先關閉該頁，`TestOpenPartyPage` 加入正常按鍵回歸。
+- 繁中角色頁體重欄仍印 `LBS`，依手冊「磅」補 UI 譯文，繪製端只替換單位，
+  重量數值與英文畫面不變。既有字型映像重烘為 2,542 字；新版角色畫格
+  顯示「288 磅」且第 16／24 步 PNG 相同。六張畫格的尺寸與雜湊均對照
+  正式收據通過；英文角色畫格逐 byte 不變，英中軌跡仍相同。
+- `go test ./cmd/... ./internal/... -count=1 -timeout 600s` 在鎖版 Go 映像與
+  Xvfb 下全部通過。字模 5,786 筆文字缺字 0、資料譯名 385 種缺譯 0、
+  共用文字庫 486 筆失敗 0；同一套排版輸入重跑 9,301 項安全矩形失敗 0。
+  全中文硬閘門仍有 45 筆城鎮來源亂碼或殘句
+  缺譯，原版可達性未知；手冊列出的整體機制與原版同狀態仍未完成。
+- 第一次完整測試命令以登入 shell 改掉了 Go 的 `PATH`，屬驗證環境錯誤；
+  改用同映像非登入 shell 並把 Xvfb 設為有 trap 的背景程序後乾淨重跑通過。
+  第一次英文重播用了 22 而非 24 個按鍵，修正為同一 24 鍵序列後英中軌跡
+  完全相同，屬驗證命令錯誤。
+- SPEC-030 的繁中版面升 CONFORMED，本地 #86 完成；工作清單 71 條未完成、
+  19 條本地完成。遠端 GitHub Issue 與 README 截圖依使用者要求留待整體
+  完成；正式 AppImage 尚未以本輪原始碼重建。
+- 清理核對：`git diff --check`、`tools/worklist.py verify` 通過；本專案相關容器
+  無殘留，專案內無 root-owned 檔或誤建 `.md` 目錄。新字模、收據與畫格均由
+  UID/GID `1000:1000` 擁有。`/tmp/kol-closure-driver` 約 43 MiB，保留可重播的
+  暫存存檔、binary 與新舊英中畫格；此目錄不是交付物。
+
+## 2026-09-25：任務交付勘誤、中文來源槽位分類與 GUI 抽驗
+
+- 以固定 `KOLTOWN-unpacked.EXE`、專用 IDA Pro 9.4 映像及 `.i64` 一次性副本查
+  `sub_14234` 的 25 個直接呼叫。訊息 2–5 是接任務、6–7 是任務物品交付；
+  2–7 的 30 筆馬廄未譯槽位受 `icon_flags[1] & 4` 阻擋，8–9 的 15 筆未見
+  直接繪製呼叫。沒有排除間接讀取，嚴格翻譯檢查維持 45 筆失敗。
+  工具版本、原始位址、輸入與原始收據雜湊及 RE-109 勘誤見 RE-139。
+- RE-139 證實舊「交付時沒有台詞」不成立。依 SPEC-014 READY 補充條款，
+  `Session` 改為進門敘述讀完才交換第一件吻合物品並顯示訊息 6／7；再按一次
+  SPACE 才替所有已完成該任務的隊員回報。規則、型別化物品同步、同時持有
+  兩件、非持物者回報與按鍵順序均補回歸測試。
+- 用六人觀察存檔在鎮長宅邸門前執行 `U RET SPACE SPACE`；三張繁中畫格
+  已目視檢查，英中五個狀態步驟的追蹤 SHA-256 相同。來源 v1／v2、程式、
+  PNG、trace 雜湊與「注入任務物品／旗標」限制見
+  `docs/verification/cjk-ui/quest-turnin-receipt.json`。這證明重製版正常按鍵
+  分派，不證明從新遊戲自然取得任務或原版同狀態；SPEC-014 留在 READY。
+- `eob-remake-go:1.26.7-ebiten2.9.9-audio`、Xvfb、唯讀來源執行
+  `go test ./cmd/... ./internal/... -count=1 -timeout 600s` 全部通過。翻譯分類器
+  已對原版建築旗標標出 30／15 筆兩種缺口，仍以非零狀態拒絕 45 筆缺譯。
+  初次 Python `py_compile` 因唯讀掛載試圖建立 `__pycache__` 失敗，屬驗證命令
+  的寫入位置錯誤，並非遊戲缺陷；後續以容器內 `PYTHONPYCACHEPREFIX=/tmp/kol-pycache`
+  重跑語法檢查通過。另核對 23 間啟用任務物品的建築，獎勵 raw 16-byte 記錄
+  與 typed 記錄不符 0 筆、缺少 typed 獎勵 0 筆。
+- 本地 `docs/worklist.json` 新增兩條未結工作，`render`、`verify`、`selftest`
+  通過；73 條未完成、19 條已核實完成。新增的 CJK 畫格與追蹤檔由 UID/GID
+  `1000:1000` 容器寫入。原版同狀態、自然任務鏈、全部中文字串及新版封包
+  仍待驗；沒有更新遠端 GitHub Issue、README 截圖、正式封包、commit 或 push。
+- 收尾核對：六張 PNG 與兩份 trace 的 SHA-256／尺寸和 JSON 收據一致，
+  `git diff --check`、Python 腳本語法、JSON 語法與 Go 格式檢查通過。
+  本輪既有 Go／IDA 映像沒有殘留容器；專案樹未發現 root-owned 檔案或誤建
+  `.md` 目錄。`/tmp/kol-quest-turnin-20260925` 約 13 MiB、
+  `/tmp/kol-msg-ida-20260925` 約 6.3 MiB，均為 UID/GID `1000:1000` 的
+  本機觀察與 IDA 副本暫存，供後續同狀態研究，非交付包。
+- 翻譯檢查器原先只計已有譯文的建築名／人物名，整欄缺失可能漏算；已改以
+  原始建築欄位為母體。現行 101 個建築名與 101 個人物名均有中文；從暫存
+  譯表刪掉鎮長宅邸名稱的負例使缺譯由 45 增至 46，證明新閘門能抓整筆缺欄。
+  重跑統計也確認建角／共用 UI 譯表現為 99 筆（包含新加的「磅」），
+  `CONTEXT.md` 與手冊稽核已訂正先前的 98 筆數字。
+- 接著用既有 `quest-take` 34 步計畫試繁中任務台詞。初次誤用城鎮專用
+  `-play-script` 執行整個 flow，第三鍵 `5` 不被接受，屬命令路由錯誤；改
+  `-flow-script` 後，舊存檔在第 17 步停於選角。該 v1 觀察存檔的城鎮位置
+  是第 7 城，角色所在地卻是 MIN，與現行依所在地還原旅店的 `StartLeader`
+  不相容；不能把舊 34 步收據當作現行自然玩家路徑。
+- 從該存檔明示的第 7 城 `(9,24)` 起跑，經正式按鍵
+  `U RET SPACE > > > RET n o b j RET SPACE SPACE RET` 問中第 5 槽、顯示
+  兩頁繁中任務敘述、問是否接受，答應後第 6 號任務由未接改為已接。
+  中英文用同一暫存 v2、同一 seed 1 與 15 鍵，16 個狀態步驟逐位元相同；
+  五張繁中畫格已目視檢查。正式輸入、程式、譯表、字模、PNG 與 trace 雜湊
+  見 `docs/verification/cjk-ui/quest-offer-receipt.json`。這只證明指定城鎮起點
+  的局部玩家路徑，不替代自然抵達、原版同狀態或完整任務鏈。
+
+## 2026-09-25：GitHub Issue 與本機狀態文件同步
+
+- 使用者明確授權先更新 Issue 狀態與本機 Markdown。主機 `gh auth status` 成功，
+  目標為 private 儲存庫 `wicanr2/kol-remake-cht`；先讀遠端 Issue，
+  再由 `docs/worklist.json` 在 `kol-package:20260907` 一次性容器產生正文。
+- 更新 #14、#33、#34、#35、#39、#61、#86、#88、#90 的正文；#61、#90
+  補 `manual` 標籤，#90 標題改為「補戰後戰利品清單的繁中正常路徑畫格」。
+  #86、#90 依各自局部版面收據標為完成並關閉；這兩項完成不代表全遊戲
+  中文或原版一致。#14、#33、#34、#35、#39、#61、#88 保持開放。
+- 新建 #92 追蹤 45 個未譯來源槽位的可達性及中文處置；新建 #93 追蹤
+  任務物品交付的原版同狀態與自然玩家鏈。兩者保持開放，編號已寫回
+  `docs/worklist.json`，並重生 `WORKLIST.md`、`CONTEXT.md` 統計區。
+  回讀遠端 11 張相關 Issue 的開關、標題與標籤；#86、#90、#92、#93
+  正文的工作清單識別碼也已抽查。
+- `README.md`、`CONTEXT.md`、手冊忠實度稽核及玩家路徑說明改以目前收據
+  描述候選包、45 筆缺譯與過期 `quest-take` 計畫；README 截圖未更新，
+  仍待整體驗收。`tools/worklist.py render`、`verify`、`selftest` 通過：
+  73 項未完成、19 項已完成；`git diff --check` 通過。本輪沒有重新建置
+  遊戲、提交或推送工作樹，因此遠端 Issue 中指向新收據的本機路徑尚未
+  隨 Git 同步。
+- 全部本輪分析與產生器執行使用 `docker run --rm`、`--network none`、
+  有界資源及 UID/GID `1000:1000`；專案檔案擁有權抽查正常，未見
+  root-owned 專案檔或誤建 `.md` 目錄。本專案沒有殘留容器；其他專案
+  容器未清理。Issue 正文暫存於 `workplace/worklist-issues/bodies-20260925/`。
+
+## 2026-09-25：接手收尾、語言預設修正與提交
+
+- 使用者指定本輪範圍：先結清 09-23～09-25 未提交成果、分批 commit 並授權
+  push，再從目前原始碼重建本機包；45 個來源槽位先查可達性再決定處置。
+  開工時 git 身分與歷史作者均為 `wicanr2@gmail.com`，本專案無殘留容器。
+- 工作樹曾把 `-lang` 旗標預設由 `en` 改為 `zh-Hant`，但未記錄決策。HEAD
+  已在互動遊玩時自動切繁中；全域改預設會讓 30 餘份沒寫 `-lang` 的對拍計畫
+  （如 `remake-parity/plan-*.json`、`battle-*/replay.spec`）改產 960×600 中文畫格。
+  實測 `-scene inn -shot` 預設輸出 960×600，加 `-lang en` 為 320×200 且與既有
+  `remake-parity/shots/inn.png` SHA-256 相同。已把旗標預設改回 `en`，
+  繁中譯表存在檢查移到互動切換之後，雙擊啟動仍涵蓋。玩家預設體驗不變。
+- `battle-spoils-winning-receipt.json` 原命令依賴該預設而未寫語言，已補
+  `-lang zh-Hant`。以修正後程式、同一 v1 存檔、觀察資料與前 1,926 個 token
+  重播，`items-found.png` 與軌跡 SHA-256 與收據逐位元相同。
+- `tools/run_kol_headless.sh` 在執行檔比原始碼舊時以狀態 2 拒跑；先前
+  `-dump-cjk-layout` 因此沒有覆寫 `workplace/cjk-layout.json`，text-fit 收據
+  （含 HEAD 版本）一直使用 09-05 的 2 倍座標版面。重編後以 3 倍現行版面重跑，
+  仍為 9,301 項、失敗 0，已更新 `docs/verification/cjk-ui/text-fit.json`。
+  規則：重生版面後要確認命令成功且檔案確實更新，不能只看檢查器結果。
+- 驗證：鎖定映像、唯讀來源、Xvfb 下 `go vet ./cmd/...`、
+  `go test ./cmd/... ./internal/... -count=1` 全過；顯示譯名 385／0 問題、
+  字模覆蓋 5,786／0 缺字、`worklist.py verify`／`selftest` 通過；
+  `verify_runtime_translation.py` 仍以 45 筆缺譯非零結束，屬已知 #92。
+  `gofmt -l` 列出 7 個 HEAD 既有、未在本輪異動的檔案，未處理。

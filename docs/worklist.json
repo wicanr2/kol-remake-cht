@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-09-11",
+  "updated": "2026-09-25",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -196,8 +196,8 @@
       "id": "a03-a04-writeback-and-contract",
       "layer": "gap",
       "title": "A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約",
-      "body": "勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。跨戰鬥／城鎮／存檔的逐欄一致仍未驗。",
-      "acceptance": "跨戰鬥／城鎮／存檔逐欄一致。",
+      "body": "勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。RE-139 揭出的任務交付順序與全隊回報已依 SPEC-014 READY 接回，觀察用存檔的正常按鍵及英中狀態相同；自然取得任務物品、原版同狀態及跨戰鬥／城鎮／存檔逐欄一致仍未驗。",
+      "acceptance": "從自然接任務、取得物品、城鎮交付到保存／重載，跨戰鬥與城鎮逐欄一致，並有原版同狀態證據。",
       "verify": {
         "kind": "manual",
         "note": "同 a01-a02：逐欄一致要跑過才知道。"
@@ -457,16 +457,17 @@
       "id": "attack-row-and-target-cursor",
       "layer": "verification",
       "title": "攻擊式那一列（frame-899）與選目標格畫面的對拍",
-      "body": "選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解。",
+      "body": "選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解；繁中 renderer 只把這個既有白框等比放大，未額外宣稱原版外觀已對拍。",
       "acceptance": "兩塊都有逐畫面對拍收據。",
       "verify": {
         "kind": "present",
         "paths": [
           "internal/ui/battle.go",
+          "internal/ui/battle_cjk.go",
           "docs/spec/010-combat-commands.md"
         ],
-        "pattern": "確切的視覺效果還沒解出來",
-        "note": "同一句話在程式與 SPEC-010 各有一處；`sub_1C683` 的效果解出時會一起消失。"
+        "pattern": "確切的視覺效果還沒解出來|原版外觀尚未完全對拍",
+        "note": "英文畫面、繁中等比白框與 SPEC-010 都歸這項；`sub_1C683` 的外觀解出並對拍時一併審查。"
       },
       "issue": 33
     },
@@ -474,7 +475,7 @@
       "id": "text-layout-remaining-screens",
       "layer": "gap",
       "title": "量測城鎮、世界、戰鬥畫面的文字版面",
-      "body": "書本的文字版面已機械量得並對拍；其餘三種畫面還沒量。戰鬥那一段（索引 ≥ 0x100）的中文版面因此定不下來。",
+      "body": "書本版面已機械量得；城鎮、世界與戰鬥已有部分中文安全矩形和畫格。資料名稱 387 筆在五種固定欄位新增 1,935 項寬度檢查，目前合計 9,301 項失敗 0；戰鬥訊息與其他分支仍未全覆蓋。最新手冊／中文稽核見 docs/verification/manual-fidelity-audit-20260923.md。",
       "acceptance": "三種畫面的文字版面都量過，每個 CJK 欄位有安全矩形。",
       "verify": {
         "kind": "manual",
@@ -486,12 +487,12 @@
       "id": "cjk-remaining-screens",
       "layer": "gap",
       "title": "城鎮、世界、戰鬥畫面的中文化與職業名暫譯的交叉確認",
-      "body": "城鎮 1,938 則對話與三個 UI 文字庫 486 筆已翻完、缺字 0；戰鬥那一段（索引 ≥ 0x100）的中文版面還沒定。職業名仍是暫譯。",
+      "body": "城鎮原始資料 2,121 則非空後續訊息已有 2,076 則譯文，其餘 45 則經 RE-139 分為 30 筆受任務旗標阻擋的直接路徑與 15 筆未見直接繪製呼叫的槽位，全域可達性仍待查。101 個建築名、101 個人物名、建角／共用 UI 譯表 99 筆及三個共用文字庫 486 筆已有中文；385 個不同資料原名已有暫譯。字模 2,542 字、文字安全矩形 9,301 項失敗 0。六人馬廄／角色頁、任務接取與交付、戰後戰利品已有局部正常按鍵繁中畫格與英中同狀態收據；其他動態名稱、程式生成文字、全部分支及原版同狀態尚待驗。職業與專名的暫譯也待交叉確認。詳見 docs/verification/manual-fidelity-audit-20260923.md。",
       "acceptance": "三種畫面的中文都上得去且不溢出，職業名譯法定案。",
-      "blocked_by": "要先有 text-layout-remaining-screens 的版面",
+      "blocked_by": "核實 45 個來源槽位的全域可達性；補其他分支的英中同狀態與動態文字畫格",
       "verify": {
         "kind": "manual",
-        "note": "卡在版面。版面定了之後這一條會變成可綁的（安全矩形檢查器的項數）。"
+        "note": "要人判：靜態譯表與文字安全矩形只能證明局部覆蓋；完整玩家路徑與動態名稱仍需收據。"
       },
       "issue": 35
     },
@@ -541,7 +542,7 @@
       "id": "terminology-and-safe-rects",
       "layer": "gap",
       "title": "統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy",
-      "body": "術語表已建（docs/manual/glossary.md），文字安全矩形 6,952 項已全過檢查器，5,109 個字串無可見缺字。缺的是遊戲與說明書共用同一份已核准術語，以及每個欄位明確的 overflow policy（換行還是截斷）。",
+      "body": "術語表已建（docs/manual/glossary.md），現有文字安全矩形 9,301 項已全過檢查器，資料譯名也納入字模涵蓋。缺的是遊戲與說明書共用同一份已核准術語，以及每個欄位明確的 overflow policy（換行還是截斷）。",
       "acceptance": "術語表是唯一來源，遊戲字串引用它；每個 CJK 欄位有 overflow policy。",
       "verify": {
         "kind": "manual",
@@ -887,15 +888,11 @@
       "id": "town-typing-input-box",
       "layer": "gap",
       "title": "城鎮打字問話的輸入框",
-      "body": "MOUTH 的打字問話功能本身已解並驗過（RE-067／RE-114），但 remake 沒有輸入框，腳本用替代形式送同一件事。正常玩家在 GUI 上打不了字。",
-      "acceptance": "輸入框做出來，正常 GUI 打得了字並問得到關鍵字。",
+      "body": "MOUTH 的打字問話有 RE-067／RE-114 證據；正式 GUI 鍵盤迴圈已接 TypeAsk／退格／送出，中文對話框也畫橫槓游標。第 7 城觀察存檔以正式按鍵逐字輸入 nobj，問中第 5 槽並接受任務；英中 16 步狀態相同，見 docs/verification/cjk-ui/quest-offer-receipt.json。舊的 ASK: 快捷 token 只供腳本。本項還缺空問句、退格及真實鍵盤焦點的 GUI 畫格驗收；不能把觀察位置起跑當作從標題自然抵達。",
+      "acceptance": "輸入框可由正常 GUI 打字、退格、送出與空問句；關鍵字可問中，畫格與英中狀態有收據。",
       "verify": {
-        "kind": "present",
-        "paths": [
-          "internal/town/keys.go"
-        ],
-        "pattern": "remake 的輸入框還沒做",
-        "note": "keys.go 的自承，做出來時會消失。"
+        "kind": "manual",
+        "note": "關鍵字正常按鍵畫格已取得，空問句、退格與真實鍵盤焦點尚需補；不可因自承消失就關閉。"
       },
       "issue": 61
     },
@@ -1315,15 +1312,17 @@
       "id": "cjk-sheet-subpages",
       "layer": "gap",
       "title": "資料頁的坐騎與頂端隊員格的中文版面",
-      "body": "物品、隊伍立繪、法術一覽與任務一覽四頁已經做了（2026-09-11）：與英文版共用同一份版面，每個座標乘上 book.CJKScale。法術與任務兩頁照原版只重畫 `sub_16239` 那一層（RE-137），實跑截圖確認過。剩坐騎那一塊（RE-120）與頂端的隊員格（`sub_13EEE`）——英文版有、中文模式整塊沒畫。",
+      "body": "物品、隊伍立繪、法術一覽與任務一覽四頁已有既有收據。2026-09-24 以六人觀察存檔及正式按鍵路徑驗證馬廄購馬、坐騎雙框、頂端隊員格、物品與隊伍頁遮蓋及返回，英中 25 筆狀態相同，SPEC-030 的繁中版面升 CONFORMED。原版同狀態與新遊戲自然抵達仍列整體稽核缺口。",
       "acceptance": "坐騎那一塊與頂端隊員格的中文版面畫出來並有截圖。",
+      "status": "done",
+      "resolved": "docs/verification/cjk-ui/stable-six-page-receipt.json；六張繁中畫格及逐位元相同的英中軌跡。",
       "verify": {
-        "kind": "present",
+        "kind": "absent",
         "paths": [
           "docs/spec/030-cjk-character-sheet.md"
         ],
-        "pattern": "不在這一版",
-        "note": "SPEC-030 的自承，補完時會改寫。"
+        "pattern": "docs/verification/cjk-ui/stable-six-page-receipt.json",
+        "note": "SPEC-030 的收據連結是回歸訊號；收據本身及 PNG 雜湊仍要另外核對。"
       },
       "issue": 86
     },
@@ -1343,7 +1342,7 @@
       "id": "player-path-receipts-stale",
       "layer": "verification",
       "title": "正常玩家路徑的收據對不上現在的程式",
-      "body": "2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑。**plan 先補齊了**：六條的描述寫「讀存檔開場」而沒有 `load` 欄位、`full` 沒有 `scene` 欄位，都補上了；補完之後 town-shop、town-stable、town-train、town-load 四條直接變一致——那幾條本來就沒問題，是重跑條件不完整。\n\n現況：**9 條一致**（town、town-edge、town-mirror、town-recruit、town-rest、town-talk 之外再加那四條中的三條；town 與 town-leave 等仍待確認）、**其餘對不上**，第一個差異步：`full` 21、`world-quest` 12、`town` 8、`town-leave` 12、`world-clock` 12、`world-road` 12、`town-round-trip` 需再看。\n\n對不上的是**行為變了**，不是 plan 的問題：\n- 經過選角那幾條（full、town、flow-quest…）是 `e118596` 把 SceneInn 改成 SceneTown 造成的，進門少一步、之後整串偏掉。\n- `world-quest` 第 12 步起不同，是 `-load` 開場、不經過選角，要另外查。\n\n**英文與中文模式重跑全程相同**，與中文化無關。長路徑那幾條（有 trace 的）還沒跑，一條十幾二十分鐘。\n\n**town-scroll 已處理**（2026-09-11）：現在的行為是對的——RE-128 讀到買完就在 `0x178DA` `retf` 回招呼語，原版 oracle 的畫格也是如此；收據（09-05）早於那次更正。腳本改成買完接 `> RET`，順帶把法術一覽照原版改正（RE-137）後重生，21 步全過。town-stable 第 16 步因資料頁繪製順序照原版改正（武器框頂邊蓋過坐騎投影，41 點）重生。quest-list 從書本選單起步，重跑卡在名冊頁，屬於經過選角那一類。",
+      "body": "2026-09-11 用 `tools/check_player_paths.py` 重跑比對 17 條短路徑，當時 9 條一致；其餘多條因 SceneInn 改成 SceneTown、讀檔起點或輸入計畫不同而對不上。town-scroll 與 town-stable 的已知差異已各自重生。2026-09-25 再重播 quest-take 舊 34 步：存檔把隊伍位置設在第 7 城，角色所在地卻仍是 MIN，現行標題選角依所在地還原旅店，因此停在名冊。改由觀察存檔的第 7 城位置起跑，接任務的 15 鍵局部路徑已驗中英同狀態，但不能替代原本從標題起跑的收據。其他路徑及長路徑尚未以目前程式完整重跑，舊收據仍不得冒充現況。",
       "acceptance": "逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。",
       "verify": {
         "kind": "present",
@@ -1377,18 +1376,48 @@
     {
       "id": "cjk-battle-remaining-pages",
       "layer": "gap",
-      "title": "戰鬥的戰利品與法術清單兩頁還沒中文版面",
-      "body": "戰場那一頁與遭遇那一頁已經做了（2026-09-11）：同一份版面乘上 `book.CJKScale`，三倍之後訊息區的行高 6 變成 18 剛好是字模格高，四行都放得下。戰利品與法術清單兩頁仍走「原版解析度畫完再整張放大」，字是原版字模放大的。",
-      "acceptance": "兩頁的中文版面畫出來並有截圖。",
+      "title": "補戰後戰利品清單的繁中正常路徑畫格",
+      "body": "SPEC-032 的 CJK renderer 已接上 StageSpoils、PromptSpell、PromptAffect，並於 2026-09-24 以四種清單畫格升 CONFORMED。法術與效果清單的正常按鍵重播及兩張 960×600 畫格見 docs/verification/cjk-ui/battle-lists-receipt.json。其後以 seed 39、六人存檔及正常按鍵序列，於第 22 回合勝利後取得 Items Found 與 Characters 兩張 960×600 畫格並目視檢查，見 docs/verification/cjk-ui/battle-spoils-winning-receipt.json。使用觀察用怪物／任務地點資料；只結案本項中文版面，不代表原版同狀態戰鬥或正式封包驗收。",
+      "acceptance": "重生現行正常玩家按鍵序列，擷取並檢視 Items Found 與 Characters 兩張繁中畫格；收據記錄輸入、版本、PNG 雜湊與觀察用替代資料的限制，四種畫格齊全後關閉。",
+      "verify": {
+        "kind": "manual",
+        "note": "四張正常按鍵畫格及目視審查均有收據；原版整場戰鬥與正式封包另由其他工作項追蹤。"
+      },
+      "status": "done",
+      "resolved": "法術／效果兩頁及戰利品 Items Found／Characters 兩頁均已擷取並目視檢查。戰利品由 seed 39 固定輸入在重製版正常按鍵路徑第 22 回合勝利後取得；收據含輸入、程式雜湊、PNG／trace 雜湊與觀察用資料限制。本項只驗中文版面；完整戰鬥、原版同狀態與正式封包另列未完成。",
+      "issue": 90
+    },
+    {
+      "id": "town-untranslated-source-slot-reachability",
+      "layer": "verification",
+      "title": "城鎮 45 個未譯來源槽位的全域可達性與中文處置",
+      "body": "RE-139 已把 30 個 2–7 號槽位定位為直接路徑受任務旗標阻擋，15 個 8–9 號槽位沒有直接訊息繪製呼叫；間接讀取或其他解碼器尚未排除。嚴格來源翻譯檢查仍失敗 45 筆，不能宣稱所有遊戲文字已譯。",
+      "acceptance": "追完可影響玩家畫面的間接讀取，對實際可達文字補經校對的繁中譯文；亂碼或不可達槽位以原始位址、來源雜湊與證據等級解釋，重新界定並通過嚴格中文閘門。",
       "verify": {
         "kind": "present",
         "paths": [
-          "cmd/kol/battle_render.go"
+          "tools/verify_runtime_translation.py"
         ],
-        "pattern": "還沒有中文版面",
-        "note": "battle_render.go 的自承，補完時會改寫。"
+        "pattern": "這不排除尚未解出的間接讀取",
+        "note": "以來源槽位分類註記作開放訊號；全域可達性核實且閘門定案後須同步改寫註記。"
       },
-      "issue": 90
+      "issue": 92
+    },
+    {
+      "id": "quest-turnin-original-same-state",
+      "layer": "verification",
+      "title": "任務物品交付的原版同狀態與自然玩家鏈",
+      "body": "RE-139 的 IDA 控制流與重製版觀察存檔 GUI 已覆蓋兩次 SPACE、第一件物品交換及全隊回報。原版同狀態畫格／狀態、自然接任務與取得物品，以及回報後保存／重載尚缺。SPEC-014 維持 READY。",
+      "acceptance": "以原版與重製版可比初態驗證兩次按鍵、原始物品記錄、六名角色旗標及回報數，再完成自然取得到保存／重載的正常玩家鏈；附版本、輸入、亂數條件與收據後才將 SPEC-014 對應範圍升 CONFORMED。",
+      "verify": {
+        "kind": "present",
+        "paths": [
+          "docs/spec/014-quest-completion.md"
+        ],
+        "pattern": "同狀態畫格／狀態尚未取得前維持 READY",
+        "note": "以 SPEC-014 的同狀態缺口作開放訊號；取得原版收據後須更新規格狀態。"
+      },
+      "issue": 93
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",
