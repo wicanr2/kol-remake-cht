@@ -43,7 +43,8 @@ log = (out / "verification.log").read_text()
 for message in ("正常建角兩人、重啟選角與忠實住宿保存通過",
                 "刪除不搬槽、重用空槽產生新身分及滿槽流程通過",
                 "v1 匯入保留原檔、零值、傷勢與未知設定通過",
-                "受控世界時間已重載並走過正常走路／露營"):
+                "受控世界時間已重載並走過正常走路／露營",
+                "住宿離隊後重載，兩名新角色都能再選進旅店"):
     assert message in log, message
 for path in out.glob("*.log"):
     text = path.read_text()

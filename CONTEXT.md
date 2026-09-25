@@ -131,9 +131,9 @@ Issue #91「物品頁選中之後的明細畫面與原版不同」已完成。SP
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **65 條未完成**（30 條沒有機器訊號、標 `manual`），
-  另有 27 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`present` 34、`manual` 30、`absent` 1。
+- 目前 **64 條未完成**（29 條沒有機器訊號、標 `manual`），
+  另有 28 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`present` 34、`manual` 29、`absent` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
   （base 為 `origin/main`，`5f9a9a1`，已推送到 `origin/kol-oracle`）。舊的 `kol-force-call` 已刪除——它的 commit

@@ -6547,3 +6547,7 @@ frame-270 推翻了 remake 的版面：
   RE 實作，本次只接輸入端 `fieldCellTargets`＋`CELL:` token；另發現選目標格時戰場外
   點擊會落到 fallback 的 RET 而直接確定，與原版不符，已改為吃掉。射擊重播 X→CELL:8,8
   英中軌跡逐位元相同，收據 `docs/verification/battle-target-mouse/receipt.json`。
+- #13：`verify_complete_save_gui.sh` 補「住宿離隊後重載，兩名新角色都能再選進旅店」，
+  v.0.2.5 AppImage 真實按鍵連同既有建角、入隊、刪除、空槽重用、滿槽拒絕全數通過，
+  兩種預設存檔位置亦過。同日第一次執行在建角後因視窗偵測偶發失敗而靜默結束，
+  相同輸入重跑兩次皆通過；腳本補上失敗訊息。收據 `docs/verification/identity-save-chain/`。

@@ -1,0 +1,69 @@
+{
+ "schema": "kol-identity-save-chain-v1",
+ "date": "2026-09-26",
+ "issue": 13,
+ "package": {
+  "version": "v.0.2.5-20260925",
+  "appimage_sha256": "8bcb7814ebce17a4b52e85fedbe386c8f1278656d23719e2c857cdeb558fc27f"
+ },
+ "tool": {
+  "script": "tools/verify_complete_save_gui.sh",
+  "script_sha256": "477e2d29d5aade5585519ee37a3ee9483b9655e260c49fb6c00344ea80b802c1",
+  "verifier": "tools/verify_local_appimage.py",
+  "image": "kol-package:20260907",
+  "input": "Xvfb＋xdotool 真實按鍵，每鍵等 -log-input"
+ },
+ "acceptance": [
+  {
+   "item": "新建兩名角色",
+   "result": "NOVA、LUNA 寫入第 15、16 格，身分不同"
+  },
+  {
+   "item": "各自能入隊",
+   "result": "重啟選 NOVA 進旅店，招募 LUNA 成兩人隊",
+   "frame": "docs/verification/identity-save-chain/two-new-members.png"
+  },
+  {
+   "item": "離開重載仍可選",
+   "result": "住宿離隊保存後重新啟動，NOVA、LUNA 各自選進巨魔剋星旅店",
+   "frames": [
+    "docs/verification/identity-save-chain/reselect-nova.png",
+    "docs/verification/identity-save-chain/reselect-luna.png"
+   ]
+  },
+  {
+   "item": "刪除",
+   "result": "刪除 NOVA 不搬動 LUNA 的槽位",
+   "frame": "docs/verification/identity-save-chain/deleted.png"
+  },
+  {
+   "item": "滿槽",
+   "result": "空槽重用產生新身分 NOVA2，16 格全滿時拒絕建角",
+   "frames": [
+    "docs/verification/identity-save-chain/reused-slot.png",
+    "docs/verification/identity-save-chain/full-roster.png"
+   ]
+  }
+ ],
+ "verification_log": [
+  "正常建角兩人、重啟選角與忠實住宿保存通過",
+  "住宿離隊後重載，兩名新角色都能再選進旅店",
+  "刪除不搬槽、重用空槽產生新身分及滿槽流程通過",
+  "v1 匯入保留原檔、零值、傷勢與未知設定通過",
+  "受控世界時間已重載並走過正常走路／露營，日期畫面另行檢視"
+ ],
+ "frames_sha256": {
+  "docs/verification/identity-save-chain/deleted.png": "99172a5c04609bb7ff2bc0b26ec41603f3d0917091658f4a14f7dae24d0ffb74",
+  "docs/verification/identity-save-chain/full-roster.png": "f7b69cdafe2f7c4153bf2d2b2d18adcc85cf135702861415eea06f3fb5d758a1",
+  "docs/verification/identity-save-chain/reselect-luna.png": "bd9518d6b0bbf1e928faef9f5cc3b933241a2b5036fc2e0af0629e9ca15ba28e",
+  "docs/verification/identity-save-chain/reselect-nova.png": "dbb1a84e740acc14ad619296223573d1a85a69a86318f30477b977f577f4b223",
+  "docs/verification/identity-save-chain/reused-slot.png": "936618578a1fd3524a3af43db46783c2b0078119a9b548ce848dc6eb95858283",
+  "docs/verification/identity-save-chain/two-new-members.png": "c4716d34ff0a26f86d8d985cd3c144c75ae0fb0028d57b2fe652819798721b45"
+ },
+ "flake": "同日第一次執行在建角後因視窗偵測偶發失敗而靜默結束；以相同輸入重跑兩次皆通過，腳本已補失敗訊息",
+ "limits": [
+  "Linux AppImage，Docker Xvfb；非原版同狀態",
+  "預設存檔兩種位置另由 verify_appimage_default_save.py 通過"
+ ],
+ "rights": "含原版衍生美術；private repo 可保存，不得公開散布"
+}

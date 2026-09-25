@@ -12,7 +12,8 @@ start() {
  /out/kol -seed 1 -log-input "$@" >"$log" 2>&1 & pid=$!
  win=""
  for n in $(seq 1 100); do win=$(xdotool search --onlyvisible --name . 2>/dev/null | head -1 || true); [ -n "$win" ] && break; sleep .1; done
- test -n "$win";xdotool windowfocus "$win";sleep 3
+ test -n "$win" || { echo "視窗沒有出現：$log（偶發時重跑；連續失敗再查）" >&2; exit 1; }
+ xdotool windowfocus "$win";sleep 3
 }
 key() {
  before=$(grep -c '^input scene=' "$log" || true)
@@ -90,6 +91,19 @@ assert first['party']==[15] and first['characters'][14]['gold']==1440
 assert first['characters'][15]['gold']==1500
 PY
 echo '正常建角兩人、重啟選角與忠實住宿保存通過'
+
+# 住宿離隊之後重新啟動，兩名新角色仍能從名冊選進旅店（#13「離開重載仍可選」）。
+# 名冊第 15 格是 NOVA、第 16 格是 LUNA；選中之後應進入城鎮畫面。
+for pick in 14 15; do
+  start reselect-$pick -load /out/created.json
+  key Escape;key 6
+  for n in $(seq 1 $pick);do key Down;done
+  key Return;key space
+  shot reselected-$pick
+  stop
+  grep -q '^input scene=town' /out/reselect-$pick.log
+done
+echo '住宿離隊後重載，兩名新角色都能再選進旅店'
 
 cp /out/created.json /out/before-delete.json
 start delete -load /out/created.json -save /out/created.json

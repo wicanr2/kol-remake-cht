@@ -187,10 +187,17 @@
       "body": "第一批修復已接建角入口／表單／取消與同城選隊顯示；SPEC-023 已接完整存檔與名冊保存。整條垂直鏈的驗收仍未做。",
       "acceptance": "新建兩名角色，各自能入隊，離開重載仍可選；刪除與滿槽也驗證。",
       "verify": {
-        "kind": "manual",
-        "note": "垂直鏈驗收沒有單一程式訊號。A 系列稽核測試轉成回歸測試後，改成 json_len 綁回歸測試清單的項數。"
+        "kind": "required_in_all",
+        "paths": [
+          "tools/verify_complete_save_gui.sh",
+          "docs/verification/identity-save-chain/receipt.json"
+        ],
+        "pattern": "reselect",
+        "note": "已完成，當回歸訊號：重載再選的步驟與收據都要在。"
       },
-      "issue": 13
+      "issue": 13,
+      "status": "done",
+      "resolved": "2026-09-26 v.0.2.5 AppImage 真實按鍵：建兩名、各自入隊、住宿離隊後重載各自再選進旅店、刪除不搬槽、空槽重用與滿槽拒絕皆通過；兩種預設存檔位置另通過。收據 docs/verification/identity-save-chain/receipt.json。"
     },
     {
       "id": "a03-a04-writeback-and-contract",
