@@ -6444,3 +6444,13 @@ frame-270 推翻了 remake 的版面：
   字模覆蓋 5,786／0 缺字、`worklist.py verify`／`selftest` 通過；
   `verify_runtime_translation.py` 仍以 45 筆缺譯非零結束，屬已知 #92。
   `gofmt -l` 列出 7 個 HEAD 既有、未在本輪異動的檔案，未處理。
+- 已推送 `c4d967c`、`de70372`、`5a0c0ad` 至 `origin/main`（private
+  `wicanr2/kol-remake-cht`），提交檔無 ZIP／EXE／PDF 等原版輸入。
+- 以 `kol-package:20260907`、唯讀來源與新空目錄建 `v.0.2.4-20260925`；
+  AppImage SHA-256 `1c8930406eef65c63a61dbe7bc9361cae6d9f3d9096496bd897696fa1cc9ccbf`。
+  完整保存 GUI（28／32／35／0／3 次輸入）、封包 851 筆雜湊與兩種預設存檔位置
+  通過；雙擊啟動畫面為繁中，日期中文化已目視確認。
+  `verify_local_appimage.py` 首次因沒把 GUI 腳本 stdout 存成
+  `verification.log` 而失敗，屬驗證命令錯誤；XDG 預設位置首次因 Xvfb `:95`
+  尚未就緒使 GLFW 無法開 display，屬驗證環境時序，兩者皆以新空目錄重跑通過，
+  失敗目錄已刪。收據見 `docs/verification/appimage-v.0.2.4-20260925.md`。

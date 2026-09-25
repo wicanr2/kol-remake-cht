@@ -622,10 +622,16 @@
       "body": "現行包尚未包含 SPEC-029 的怪物遠程初始化與後續面板修正。",
       "acceptance": "新包重建、驗收通過，正式交付入口指向它。",
       "verify": {
-        "kind": "manual",
-        "note": "「包裡有沒有那個修正」要拆包比對。重建收據落地時改綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/appimage-v.0.2.4-20260925.md"
+        ],
+        "pattern": "1c8930406eef65c63a61dbe7bc9361cae6d9f3d9096496bd897696fa1cc9ccbf",
+        "note": "已完成，當回歸訊號：v.0.2.4-20260925 收據要在，且記著這個 AppImage 雜湊。"
       },
-      "issue": 45
+      "issue": 45,
+      "status": "done",
+      "resolved": "2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。"
     },
     {
       "id": "train-forge-entry-condition",
