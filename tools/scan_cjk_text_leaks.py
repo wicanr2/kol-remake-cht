@@ -35,12 +35,12 @@ def plan_names() -> list[str]:
     return sorted(f.stem for f in PLANS.glob("*.json") if not f.stem.endswith("-receipt"))
 
 
-def line_for(name: str) -> str:
+def line_for(name: str, all_checkpoints: bool = False) -> str:
     plan = json.loads((PLANS / f"{name}.json").read_text(encoding="utf-8"))
     shot_dir = OUT / name
     shot_dir.mkdir(parents=True, exist_ok=True)
     steps = sorted({c["step"] for c in plan.get("checkpoints", [])})
-    if steps:
+    if steps and not all_checkpoints:
         plan = {**plan, "checkpoints": [{"step": steps[-1]}]}
     line = spec_line(plan, shot_dir)
     head, rest = line.split("|", 1)
@@ -70,8 +70,11 @@ def run_lines(index: int, lines: list[str]) -> tuple[int, str]:
     return _run_spec(spec)
 
 
+FRAMES = False
+
+
 def run_batch(index: int, names: list[str]) -> tuple[int, str]:
-    return run_lines(index, [line_for(n) for n in names])
+    return run_lines(index, [line_for(n, FRAMES) for n in names])
 
 
 def _run_spec(spec: pathlib.Path) -> tuple[int, str]:
@@ -127,6 +130,7 @@ def main() -> int:
     r.add_argument("names", nargs="*")
     r.add_argument("--all", action="store_true")
     r.add_argument("--jobs", type=int, default=1)
+    r.add_argument("--frames", action="store_true", help="保留計畫的全部檢查點畫格，供目視檢查")
     sub.add_parser("report")
     b = sub.add_parser("run-battle")
     b.add_argument("--jobs", type=int, default=1)
@@ -144,6 +148,8 @@ def main() -> int:
                 print(err, file=sys.stderr)
         report()
         return 1 if any(c for c, _ in codes) else 0
+    global FRAMES
+    FRAMES = args.frames
     names = plan_names() if args.all else args.names
     if not names:
         p.error("要指定計畫名，或加 --all")

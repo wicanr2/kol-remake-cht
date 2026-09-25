@@ -6510,3 +6510,9 @@ frame-270 推翻了 remake 的版面：
   Go 測試全過。
 - 從 `c62bef2` 重建 `v.0.2.5-20260925`（AppImage SHA-256 `8bcb7814…fc27f`，1,119 筆輸入）；
   完整保存 GUI、封包雜湊與兩種預設存檔位置通過。README 交付入口改指向它。
+- 目視檢查：以 `scan_cjk_text_leaks.py run --frames` 產生 1,276 張中文檢查點畫格，
+  在 `kol-package` 容器以 32×20 灰階指紋全域去重為 48 種版面，拼 3×3 縮圖逐張看。
+  發現中文模式開場標題只畫在左上角 320×200：`sceneTitle` 用 `canvas.DrawAt` 而非
+  既有的 `drawPage`，已改；英文標題畫格與既有截圖逐位元相同。其餘畫格未見黑塊或
+  錯位。原版美術內的英文（開場 ORIGIN／製作名單／標誌與版權、封面書名）列為待
+  使用者決定。`montage` 在該映像因缺字型崩潰，改用 `convert +append／-append`。

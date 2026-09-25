@@ -1486,7 +1486,7 @@ func (g *game) render() error {
 		if err != nil {
 			return err
 		}
-		g.canvas.DrawAt(bg, 0, 0)
+		g.drawPage(bg, 0, 0)
 		if g.frame.Archive == "" || g.frame.Overlay < 0 {
 			return nil
 		}
@@ -1498,7 +1498,7 @@ func (g *game) render() error {
 		if err != nil {
 			return err
 		}
-		g.canvas.DrawAt(overlay, rect.X, rect.Y)
+		g.drawPage(overlay, rect.X, rect.Y)
 	default:
 		return fmt.Errorf("未知場景 %q", g.scene)
 	}
