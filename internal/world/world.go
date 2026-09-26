@@ -191,6 +191,21 @@ func (d *Data) TownByCode(code string) *Town {
 	return found
 }
 
+// TownsByCode 回傳同一個代碼的全部入城點記錄，依記錄順序。TOWN7 的十個入城點
+// 都是 MIN，各自帶不同的鏡頭與夾限，所以「找唯一一筆」在這裡不適用。
+func (d *Data) TownsByCode(code string) []Town {
+	if code == "" {
+		return nil
+	}
+	var out []Town
+	for _, t := range d.towns {
+		if t.Code == code {
+			out = append(out, t)
+		}
+	}
+	return out
+}
+
 // TownCount 是有資料的城鎮入口數。
 func (d *Data) TownCount() int { return len(d.towns) }
 

@@ -1,31 +1,39 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "quest-take",
- "description": "從標題按下去，走進霍布城西的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。打字那一格的版面另有對拍（`docs/verification/remake-parity/plan-town-mouth.json`）：文字欄從第 13 欄起、一格 8 px，筆尖底下那條 8×1 的橫槓與原版逐像素相同。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。",
+ "description": "讀存檔開場在第 7 城入城點 4 那一區，走進西邊的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。打字那一格的版面另有對拍（`docs/verification/remake-parity/plan-town-mouth.json`）：文字欄從第 13 欄起、一格 8 px，筆尖底下那條 8×1 的橫槓與原版逐像素相同。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。讀存檔開場、不經過標題：標題選角會以名冊角色回到旅店，存檔指定的開場位置不會生效；標題到旅店那一段由 `full` 驗。",
  "seed": 1,
  "load": "workplace/saves/quest-take.json",
- "token_count": 34,
+ "token_count": 15,
  "trace": "docs/verification/player-path/quest-take/trace.json",
- "trace_sha256": "fd72943d4501acabb1512e26d76e64e34b0496bbba7786790220600456ad1718",
+ "trace_sha256": "b5c6c640e946b802d3a3cbe197469282572e16c571898a2e454fb4e8516557d4",
  "milestones": [
   {
-   "step": 19,
-   "token": "RET",
-   "note": "DOOR：城鎮戶外地圖（入城點 4 那一區）",
-   "scene": "flow:town",
+   "step": 0,
+   "token": "（起始）",
+   "note": "讀檔開場：城鎮戶外地圖（入城點 4 那一區）",
+   "scene": "play",
    "town": {
     "left_town": false,
     "mode": 0,
+    "party": [
+     "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
     "town": 7,
     "x": 9,
     "y": 24
    }
   },
   {
-   "step": 20,
+   "step": 1,
    "token": "U",
    "note": "往北一步，站到那一戶門口",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "left_town": false,
@@ -36,10 +44,10 @@
    }
   },
   {
-   "step": 21,
+   "step": 2,
    "token": "RET",
    "note": "DOOR：進門，主人的敘述",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -57,10 +65,10 @@
    }
   },
   {
-   "step": 22,
+   "step": 3,
    "token": "SPACE",
    "note": "讀完敘述，圖示列出來",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -78,10 +86,10 @@
    }
   },
   {
-   "step": 26,
+   "step": 7,
    "token": "RET",
    "note": "白框走到 MOUTH 按下去：問話的敘述與輸入框",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -99,10 +107,10 @@
    }
   },
   {
-   "step": 30,
+   "step": 11,
    "token": "j",
    "note": "打完 `nobj` 四個字元",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -120,10 +128,10 @@
    }
   },
   {
-   "step": 31,
+   "step": 12,
    "token": "RET",
    "note": "Return 送出：任務敘述第一頁",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -141,10 +149,10 @@
    }
   },
   {
-   "step": 32,
+   "step": 13,
    "token": "SPACE",
    "note": "第二頁",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -162,10 +170,10 @@
    }
   },
   {
-   "step": 33,
+   "step": 14,
    "token": "SPACE",
    "note": "「Will you do this?」，圖示列是 YES／NO",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -183,10 +191,10 @@
    }
   },
   {
-   "step": 34,
+   "step": 15,
    "token": "RET",
    "note": "答應：「Very well. Be off!」，第 6 個任務的旗標從 0 變成 1",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -219,44 +227,44 @@
  ],
  "checkpoints": [
   {
-   "step": 21,
-   "file": "step-021.png",
+   "step": 2,
+   "file": "step-002.png",
    "sha256": "b55cca3fa3130c4ed8b6c7606df2d69ab5eb94daff22e5c7a4c0458fc2d54ac8",
    "shows": "進門的敘述"
   },
   {
-   "step": 26,
-   "file": "step-026.png",
+   "step": 7,
+   "file": "step-007.png",
    "sha256": "3b3b47de67dc9c9604ed1bc32bcfcaeb3c1ef7a1bb00686d39789eefb97df8ec",
    "shows": "MOUTH：問話的敘述與空的輸入框"
   },
   {
-   "step": 30,
-   "file": "step-030.png",
+   "step": 11,
+   "file": "step-011.png",
    "sha256": "7a7dd13e818790512e69f36fafb472cd5252e5734c02be395f15878205772058",
    "shows": "打完 `nobj`，游標在字尾"
   },
   {
-   "step": 31,
-   "file": "step-031.png",
+   "step": 12,
+   "file": "step-012.png",
    "sha256": "269f763e1c25d8c4c1d8616ef70c78037a91bf9ae56aa4fd0f42b01f9f77994c",
    "shows": "任務敘述第一頁（八行）"
   },
   {
-   "step": 32,
-   "file": "step-032.png",
+   "step": 13,
+   "file": "step-013.png",
    "sha256": "c3f840b6a6f2b567bdab98a5c37eb3459d009b8d3584cac291b683538f7e9ae5",
    "shows": "第二頁"
   },
   {
-   "step": 33,
-   "file": "step-033.png",
+   "step": 14,
+   "file": "step-014.png",
    "sha256": "5ed13f4d636ebc3c09c32a4bc19594e5efea9b09e3249a30a6febca6370668f7",
    "shows": "\"Will you do this?\"（記錄 0x42）"
   },
   {
-   "step": 34,
-   "file": "step-034.png",
+   "step": 15,
+   "file": "step-015.png",
    "sha256": "3c7b7b4ea0964dfd81bf3ab082f1b74146ef341d28eca504e75ef18faa927169",
    "shows": "\"Very well. Be off!\"（記錄 0x43）"
   }

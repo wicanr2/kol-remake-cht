@@ -83,44 +83,59 @@ func (s *Session) StartLeader(name string) bool {
 		if c.Name != name || c.Town == "" {
 			continue
 		}
-		if c.Town != s.TownCode {
-			if s.LoadStartingTown == nil {
-				return false
-			}
-			entry, buildings, grid, err := s.LoadStartingTown(c.Town)
-			if err != nil || entry.Code != c.Town || buildings == nil || grid == nil {
-				return false
+		if c.Town == s.TownCode && s.startAtLodging(c) {
+			return true
+		}
+		// 所在地在別座城，或同一座城的另一個入城區（讀檔的位置不一定在旅店那一區）：
+		// 依所在地的代碼載入，挑第一個鏡頭夾限放得下旅店門口的入城點。原版怎麼挑
+		// 入城點沒有讀過；這個順序是 remake 的選法，只影響之後走路時的夾限範圍。
+		if s.LoadStartingTown == nil {
+			return false
+		}
+		entries, buildings, grid, err := s.LoadStartingTown(c.Town)
+		if err != nil || buildings == nil || grid == nil {
+			return false
+		}
+		for _, entry := range entries {
+			if entry.Code != c.Town {
+				continue
 			}
 			// 先在副本驗證建築與位置，失敗時保留玩家原本的隊伍及城鎮。
 			trial, outdoor := *s, *s.Outdoor
 			trial.Outdoor = &outdoor
 			trial.EnterFromWorld(entry, buildings, grid)
-			if !trial.StartLeader(name) {
-				return false
+			if !trial.startAtLodging(c) {
+				continue
 			}
 			*s.Outdoor = outdoor
 			trial.Outdoor = s.Outdoor
 			*s = trial
 			return true
 		}
-		for i := range s.Buildings.Doors {
-			door := &s.Buildings.Doors[i]
-			if door.RecordID != c.BuildingID || placeKey(door.Name) != c.Place {
-				continue
-			}
-			position := *s.Outdoor
-			position.PlaceParty(door.X, door.Y)
-			if x, y := position.PartyPosition(); x != door.X || y != door.Y {
-				return false
-			}
-			s.Party = []Member{c.member()}
-			s.Outdoor.PlaceParty(door.X, door.Y)
-			s.Outdoor.AtEdge = false
-			s.Outdoor.AtDoorCell = true
-			s.syncParty()
-			s.enter()
-			return true
+		return false
+	}
+	return false
+}
+
+// startAtLodging 把隊伍放到角色所在旅店的門口並進門；目前的夾限放不下門口就不動。
+func (s *Session) startAtLodging(c Candidate) bool {
+	for i := range s.Buildings.Doors {
+		door := &s.Buildings.Doors[i]
+		if door.RecordID != c.BuildingID || placeKey(door.Name) != c.Place {
+			continue
 		}
+		position := *s.Outdoor
+		position.PlaceParty(door.X, door.Y)
+		if x, y := position.PartyPosition(); x != door.X || y != door.Y {
+			return false
+		}
+		s.Party = []Member{c.member()}
+		s.Outdoor.PlaceParty(door.X, door.Y)
+		s.Outdoor.AtEdge = false
+		s.Outdoor.AtDoorCell = true
+		s.syncParty()
+		s.enter()
+		return true
 	}
 	return false
 }

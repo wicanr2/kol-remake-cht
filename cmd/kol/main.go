@@ -3289,21 +3289,28 @@ func main() {
 			playSession.Magic = dict
 		}
 		if worldScreenState != nil {
-			playSession.LoadStartingTown = func(code string) (town.TownEntry, *town.TownBuildings, *town.Grid, error) {
-				rec := worldScreenState.Travel.Data.TownByCode(code)
-				if rec == nil {
-					return town.TownEntry{}, nil, nil, fmt.Errorf("找不到唯一城鎮代碼：%s", code)
+			playSession.LoadStartingTown = func(code string) ([]town.TownEntry, *town.TownBuildings, *town.Grid, error) {
+				recs := worldScreenState.Travel.Data.TownsByCode(code)
+				if len(recs) == 0 {
+					return nil, nil, nil, fmt.Errorf("找不到城鎮代碼：%s", code)
 				}
-				info := buildings.Town(rec.Town)
+				var entries []town.TownEntry
+				for _, rec := range recs {
+					if rec.Town != recs[0].Town {
+						return nil, nil, nil, fmt.Errorf("城鎮代碼 %s 對到不同的城鎮檔", code)
+					}
+					entries = append(entries, town.TownEntry{Code: rec.Code, Town: rec.Town,
+						Camera: town.Point{X: rec.Camera.X, Y: rec.Camera.Y},
+						MinX:   rec.Bounds.MinX, MaxX: rec.Bounds.MaxX,
+						MinY: rec.Bounds.MinY, MaxY: rec.Bounds.MaxY,
+						EntryPoint: rec.EntryPoint})
+				}
+				info := buildings.Town(recs[0].Town)
 				if info == nil {
-					return town.TownEntry{}, nil, nil, fmt.Errorf("缺少城鎮建築：%d", rec.Town)
+					return nil, nil, nil, fmt.Errorf("缺少城鎮建築：%d", recs[0].Town)
 				}
-				grid, err := loadGrid(lib, fmt.Sprintf("TOWN%d", rec.Town))
-				return town.TownEntry{Code: rec.Code, Town: rec.Town,
-					Camera: town.Point{X: rec.Camera.X, Y: rec.Camera.Y},
-					MinX:   rec.Bounds.MinX, MaxX: rec.Bounds.MaxX,
-					MinY: rec.Bounds.MinY, MaxY: rec.Bounds.MaxY,
-					EntryPoint: rec.EntryPoint}, info, grid, err
+				grid, err := loadGrid(lib, fmt.Sprintf("TOWN%d", recs[0].Town))
+				return entries, info, grid, err
 			}
 			playSession.TownCode = worldScreenState.Travel.Data.TownCode(
 				state.Town, state.EntryPoint)

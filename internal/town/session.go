@@ -140,7 +140,8 @@ type Session struct {
 	// 上層用它換到野外畫面；沒有掛就只是把事情記下來。
 	OnLeaveTown func(Point)
 	// LoadStartingTown 依角色所在地載入已驗證的城鎮資料，不自行改變遊玩狀態。
-	LoadStartingTown func(code string) (TownEntry, *TownBuildings, *Grid, error)
+	// 同一個代碼可能有多個入城點（TOWN7 十個都是 MIN），全部依記錄順序回傳。
+	LoadStartingTown func(code string) ([]TownEntry, *TownBuildings, *Grid, error)
 	// World 只是給上層判斷「有沒有野外畫面可以換過去」的旗標。
 	World        any
 	WorldEntered bool

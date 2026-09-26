@@ -1,9 +1,9 @@
 {
  "name": "quest-take",
- "description": "從標題按下去，走進霍布城西的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。打字那一格的版面另有對拍（`docs/verification/remake-parity/plan-town-mouth.json`）：文字欄從第 13 欄起、一格 8 px，筆尖底下那條 8×1 的橫槓與原版逐像素相同。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。",
+ "description": "讀存檔開場在第 7 城入城點 4 那一區，走進西邊的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。打字那一格的版面另有對拍（`docs/verification/remake-parity/plan-town-mouth.json`）：文字欄從第 13 欄起、一格 8 px，筆尖底下那條 8×1 的橫槓與原版逐像素相同。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。讀存檔開場、不經過標題：標題選角會以名冊角色回到旅店，存檔指定的開場位置不會生效；標題到旅店那一段由 `full` 驗。",
  "seed": 1,
  "load": "workplace/saves/quest-take.json",
- "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET U RET SPACE > > > RET n o b j RET SPACE SPACE RET",
+ "script": "U RET SPACE > > > RET n o b j RET SPACE SPACE RET",
  "shot_dir": "docs/verification/player-path/quest-take",
  "trace": "docs/verification/player-path/quest-take/trace.json",
  "size": [
@@ -13,17 +13,16 @@
  "receipt": "docs/verification/player-path/quest-take-receipt.json",
  "milestones": [
   {
-   "step": 19,
-   "scene": "flow:town",
+   "step": 0,
    "town": {
     "x": 9,
     "y": 24,
     "mode": 0
    },
-   "note": "DOOR：城鎮戶外地圖（入城點 4 那一區）"
+   "note": "讀檔開場：城鎮戶外地圖（入城點 4 那一區）"
   },
   {
-   "step": 20,
+   "step": 1,
    "town": {
     "x": 9,
     "y": 23,
@@ -32,56 +31,56 @@
    "note": "往北一步，站到那一戶門口"
   },
   {
-   "step": 21,
+   "step": 2,
    "town": {
     "mode": 2
    },
    "note": "DOOR：進門，主人的敘述"
   },
   {
-   "step": 22,
+   "step": 3,
    "town": {
     "mode": 2
    },
    "note": "讀完敘述，圖示列出來"
   },
   {
-   "step": 26,
+   "step": 7,
    "town": {
     "mode": 2
    },
    "note": "白框走到 MOUTH 按下去：問話的敘述與輸入框"
   },
   {
-   "step": 30,
+   "step": 11,
    "town": {
     "mode": 2
    },
    "note": "打完 `nobj` 四個字元"
   },
   {
-   "step": 31,
+   "step": 12,
    "town": {
     "mode": 2
    },
    "note": "Return 送出：任務敘述第一頁"
   },
   {
-   "step": 32,
+   "step": 13,
    "town": {
     "mode": 2
    },
    "note": "第二頁"
   },
   {
-   "step": 33,
+   "step": 14,
    "town": {
     "mode": 2
    },
    "note": "「Will you do this?」，圖示列是 YES／NO"
   },
   {
-   "step": 34,
+   "step": 15,
    "town": {
     "mode": 2,
     "took_quest": {
@@ -95,39 +94,40 @@
  ],
  "checkpoints": [
   {
-   "step": 21,
-   "file": "step-021.png",
+   "step": 2,
+   "file": "step-002.png",
    "shows": "進門的敘述"
   },
   {
-   "step": 26,
-   "file": "step-026.png",
+   "step": 7,
+   "file": "step-007.png",
    "shows": "MOUTH：問話的敘述與空的輸入框"
   },
   {
-   "step": 30,
-   "file": "step-030.png",
+   "step": 11,
+   "file": "step-011.png",
    "shows": "打完 `nobj`，游標在字尾"
   },
   {
-   "step": 31,
-   "file": "step-031.png",
+   "step": 12,
+   "file": "step-012.png",
    "shows": "任務敘述第一頁（八行）"
   },
   {
-   "step": 32,
-   "file": "step-032.png",
+   "step": 13,
+   "file": "step-013.png",
    "shows": "第二頁"
   },
   {
-   "step": 33,
-   "file": "step-033.png",
+   "step": 14,
+   "file": "step-014.png",
    "shows": "\"Will you do this?\"（記錄 0x42）"
   },
   {
-   "step": 34,
-   "file": "step-034.png",
+   "step": 15,
+   "file": "step-015.png",
    "shows": "\"Very well. Be off!\"（記錄 0x43）"
   }
- ]
+ ],
+ "scene": "play"
 }
