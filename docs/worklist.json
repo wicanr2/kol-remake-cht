@@ -1471,7 +1471,8 @@
       "verify": {
         "kind": "manual",
         "note": "`replay_battle_receipts.py --all` 全數通過才算完成；重跑要數十分鐘，不綁 pattern。"
-      }
+      },
+      "issue": 97
     },
     {
       "id": "path-verify-does-not-replay",
