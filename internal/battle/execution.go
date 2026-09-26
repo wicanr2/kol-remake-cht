@@ -376,11 +376,20 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		}
 		// 令人生畏的怪物在場時，隊員出手前先過一次意志檢定（RE-135）。
 		s.checkFlinch(i, rng)
+		// 參戰者記錄 `+0x25` 就是 `Command`：原版在輪到時（`0x20A8B`）把它讀進
+		// `word_31122`，這一手之後的判斷（含疲勞）都看那一份。下馬會把記錄裡的
+		// `+0x25` 清成 0，但不影響這一手自己的疲勞，所以疲勞用出手前的指令碼。
+		cmd := a.Command
 		out := s.act(i, rng)
+		after := a.Command
+		a.Command = cmd
 		// 疲勞的收尾（`0x20AE0` 與 `0x20D40`）：休息的人回復三成，其餘的人把這一手
 		// 花剩的時間額度除以十扣進疲勞——額度為負就是往上加。要在清掉 Hurt
 		// **之前**做，休息那一條與挨傷那一項都要讀它。力竭的人當場倒下。
 		out.Exhausted = s.EndTurnFatigue(i)
+		if out.Exhausted == 0 {
+			a.Command = after
+		}
 		// 一手做完的收尾（`sub_1E3A8:0x20E64`）：這一手挨的傷搬進 +0x2A，
 		// 挨傷計數與招架次數歸零——兩格都是「這一手」的計數，不是整場的。
 		a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0
@@ -431,15 +440,14 @@ func (s *State) act(i int, rng Rand) ActResult {
 		return out
 	case CmdLand:
 		// 下馬（`0x2070f`…`0x20774`，RE-124）：那一格上還有別人就印記錄 0x11A
-		// 走人，沒人才把 +0x1E 清掉並印「lands!」。
-		//
-		// 原版同時把記錄 `+0x25` 也清成 0；remake 沒有那一格（它在哪裡被讀還沒解），
-		// 所以這裡只清 Flag1E。
+		// 走人，沒人才把 +0x1E 清掉並印「lands!」。原版同時把記錄 `+0x25`
+		// 清成 0——那一格就是 `Command`（RE-142），下一次規劃才會再填。
 		if s.sharesCell(i) {
 			out.Message = BlockedByRecord
 			return out
 		}
 		a.Flag1E = 0
+		a.Command = 0
 		out.Message = LandsRecord
 		// 原版接 `sub_1C1BF` 重畫戰場再等一次鍵。
 		out.Redraw = true

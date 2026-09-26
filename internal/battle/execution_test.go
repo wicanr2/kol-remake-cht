@@ -199,6 +199,18 @@ func TestActDispatch(t *testing.T) {
 		t.Fatalf("下馬應該印 %#x 並清掉 Flag1E，得到 %#x／%d",
 			LandsRecord, r.Message, s.Actors[0].Flag1E)
 	}
+	// 記錄 +0x25 就是 Command：下馬把它清成 0（RE-142），但這一手的疲勞仍照
+	// 輪到時讀進的「下馬」算（0x20A8B 的 word_31122）。
+	if r.Command != CmdLand || s.Actors[0].Command != 0 {
+		t.Fatalf("下馬之後指令應清成 0、結果仍記下馬，得到 %#x／%#x", r.Command, s.Actors[0].Command)
+	}
+	ref := newState()
+	ref.Actors[0].Command = CmdLand
+	ref.EndTurnFatigue(0)
+	if s.Actors[0].Fatigue != ref.Actors[0].Fatigue {
+		t.Fatalf("下馬那一手的疲勞應照下馬的時間成本算：%d，應為 %d",
+			s.Actors[0].Fatigue, ref.Actors[0].Fatigue)
+	}
 	// 同一格上還有別人就下不來，印記錄 0x11A。
 	s = newState()
 	s.Actors[0].Flag1E = 1

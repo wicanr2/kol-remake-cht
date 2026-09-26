@@ -808,17 +808,19 @@
       "id": "sub-26c5f-damage-line",
       "layer": "spec",
       "title": "那一句的數字要 sub_26C5F(0x17) 才算得出來",
-      "body": "該常式還沒解讀，所以那一句寧可不報也不報錯的數字。",
+      "body": "`sub_26C5F(0x17)` 已由 RE-091／RE-096 解出：讀怪物記錄 `+0x17`／`+0x19` 的攻擊與招架技能原值；`State.AdventureReward` 照 `0x21270`…`0x212CF` 實作，打贏那一句已報冒險點數與金冠（battle-spoils 收據斷言）。main.go 留著「還沒解讀」的過時註解，2026-09-27 改寫。",
       "acceptance": "sub_26C5F 解出，那一句的數字報得出來。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "cmd/kol/main.go"
+          "internal/battle/victory.go",
+          "docs/verification/battle-spoils/receipt.json"
         ],
-        "pattern": "那一支還沒解讀，寧可不報",
-        "note": "main.go 的自承，解出時會改寫。"
+        "pattern": "AdventureReward|receives",
+        "note": "已完成，當回歸訊號：實作與收據斷言都要在。"
       },
-      "issue": 53
+      "issue": 53,
+      "status": "done"
     },
     {
       "id": "enemy-move-direction-unhooked",
@@ -931,18 +933,19 @@
       "id": "actor-record-25-reader",
       "layer": "spec",
       "title": "參戰者記錄 +0x25 在哪裡被讀",
-      "body": "原版下馬時同時把 `+0x25` 清成 0，但那一格在哪裡被讀還沒解，所以 remake 沒有那一格。SPEC-010 末段記著同一項。",
+      "body": "RE-142：`+0x25` 就是參戰者的指令碼（SPEC-010 欄位表），輪到時在 `sub_1E3A8:0x20A8B` 讀進 `word_31122` 供分派與疲勞使用。remake 的 `Actor.Command` 就是這一格；下馬時照原版清成 0，疲勞改用出手前的指令碼，新增單元測試。",
       "acceptance": "讀取端找出來，並判斷 remake 需不需要那一格。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
           "internal/battle/execution.go",
           "docs/spec/010-combat-commands.md"
         ],
-        "pattern": "它在哪裡被讀還沒解|`\\+0x25` 在哪裡被讀還沒解",
-        "note": "程式與 SPEC-010 末段各一處。"
+        "pattern": "RE-142",
+        "note": "已完成，當回歸訊號：程式與規格都引用 RE-142。"
       },
-      "issue": 58
+      "issue": 58,
+      "status": "done"
     },
     {
       "id": "sub-1aae8-params",

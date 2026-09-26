@@ -241,20 +241,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **sub-26c5f-damage-line**（#53） — 那一句的數字要 sub_26C5F(0x17) 才算得出來
-  該常式還沒解讀，所以那一句寧可不報也不報錯的數字。
-  完成條件：sub_26C5F 解出，那一句的數字報得出來。
-  核實：`cmd/kol/main.go` 找得到 `那一支還沒解讀，寧可不報` 就是還沒完
-
 - **move-unlock-tile-reason**（#57） — 磚塊 0x0C 為什麼解鎖後三個移動方式
   `MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。
   完成條件：理由解出並寫進 SPEC-010。
   核實：`internal/battle/commands.go` 找得到 `為什麼是這一塊還沒解出來` 就是還沒完
-
-- **actor-record-25-reader**（#58） — 參戰者記錄 +0x25 在哪裡被讀
-  原版下馬時同時把 `+0x25` 清成 0，但那一格在哪裡被讀還沒解，所以 remake 沒有那一格。SPEC-010 末段記著同一項。
-  完成條件：讀取端找出來，並判斷 remake 需不需要那一格。
-  核實：`internal/battle/execution.go`、`docs/spec/010-combat-commands.md` 找得到 `它在哪裡被讀還沒解|`\+0x25` 在哪裡被讀還沒解` 就是還沒完
 
 - **word-2df2c-outdoor-switch**（#62） — word_2DF2C：城外換整張底圖的那個開關
   在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。
@@ -358,11 +348,13 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
 - **attack-message-chain-index** — 攻擊致死的 collapse／shatter 分支：已完成
+- **sub-26c5f-damage-line** — 那一句的數字要 sub_26C5F(0x17) 才算得出來：已完成
 - **enemy-move-direction-unhooked** — 敵人移動段的方向規則：解出來了但還沒接上：已完成
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力：已完成
 - **sub-21e0b-filter-contradiction** — sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值：已完成
 - **battle-silent-steps-inventory** — 執行段裡沒有訊息就不停的那幾手：已完成
+- **actor-record-25-reader** — 參戰者記錄 +0x25 在哪裡被讀：已完成
 - **sub-1aae8-params** — sub_1AAE8 的參數語意：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。

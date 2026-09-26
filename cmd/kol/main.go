@@ -2180,8 +2180,8 @@ func townCarried(slots []roster.CarriedSlot) [][]byte {
 // battleVerdictLines 是這一場結束時要印的那幾句（RE-091）。沒分勝負就回 nil，
 // 執行段照常排下一回合。
 //
-// 打贏分兩句、各等一次鍵：第一句報戰果，第二句報金冠。**冒險點數沒有報**——
-// 那一句的數字要 `sub_26C5F(0x17)` 才算得出來，那一支還沒解讀，寧可不報。
+// 打贏分兩句、各等一次鍵：第一句報戰果，第二句報冒險點數與金冠。冒險點數用
+// `sub_26C5F(0x17)` 讀的怪物記錄攻擊與招架技能原值（RE-091／RE-096，`AdventureReward`）。
 func (g *game) battleVerdictLines() []string {
 	s := g.quest.state
 	enemies := s.EnemyCount()
