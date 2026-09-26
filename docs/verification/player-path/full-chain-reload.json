@@ -1,9 +1,9 @@
 {
  "name": "full-chain-reload",
- "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，先在半途之家開角色資料頁確認金幣是住宿後的 158，再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 flow.Flow、town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
+ "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在第一次入夜換日時同時擲到治療僧侶，照實答應後繼續走（路上的自然事件，不是這條要驗的內容）；野外那一段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
  "seed": 3,
  "load": "workplace/saves/full-chain.json",
- "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET L R RET SPACE > RET > < RET RET R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R U U U U U U U U U U U U U RET",
+ "script": "L R RET SPACE > RET > < RET RET SPACE R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R S L RET S S S R R R R R R R R R R R R R R R U U U U U U U U RET",
  "shot_dir": "docs/verification/player-path/full-chain-reload",
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
  "size": [
@@ -14,51 +14,50 @@
  "milestones": [
   {
    "step": 0,
-   "scene": "flow:title",
    "town": {
     "x": 57,
-    "y": 8
+    "y": 8,
+    "mode": 0
    },
    "note": "讀檔的落點就是存檔記的那一格；放置不觸發門口狀態（SPEC-006）"
   },
   {
-   "step": 19,
-   "scene": "flow:town",
-   "town": {
-    "mode": 0
-   },
-   "note": "DOOR：城鎮戶外地圖"
-  },
-  {
-   "step": 21,
+   "step": 2,
    "town": {
     "mode": 1
    },
    "note": "走離門口再走回來，門口狀態成立"
   },
   {
-   "step": 22,
+   "step": 3,
    "town": {
     "mode": 2
    },
    "note": "DOOR：進半途之家"
   },
   {
-   "step": 25,
+   "step": 6,
    "town": {
     "mode": 2
    },
    "note": "MIRROR：角色資料頁，金幣是住宿後的 158"
   },
   {
-   "step": 29,
+   "step": 10,
+   "town": {
+    "mode": 2
+   },
+   "note": "DOOR：多人隊伍的告別語"
+  },
+  {
+   "step": 11,
    "town": {
     "mode": 0
    },
    "note": "回到戶外地圖"
   },
   {
-   "step": 40,
+   "step": 22,
    "town": {
     "x": 59,
     "y": 0,
@@ -67,7 +66,7 @@
    "note": "城門提示"
   },
   {
-   "step": 41,
+   "step": 23,
    "town": {
     "left_town": true
    },
@@ -78,16 +77,17 @@
    "note": "出城，落到霍布入城點 3"
   },
   {
-   "step": 110,
+   "step": 66,
    "world": {
-    "x": 48,
-    "y": 22,
-    "camping": true
+    "x": 45,
+    "y": 23,
+    "camping": true,
+    "heal_prompt": true
    },
-   "note": "走到入夜換日：CAMPING!，停在原地等一個鍵（RE-077）"
+   "note": "入夜換日：CAMPING!，同一次時段變換擲到治療僧侶"
   },
   {
-   "step": 118,
+   "step": 94,
    "world": {
     "x": 48,
     "y": 21,
@@ -96,7 +96,7 @@
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）"
   },
   {
-   "step": 119,
+   "step": 95,
    "battle": {
     "stage": 1,
     "site": 5,
@@ -107,29 +107,30 @@
  ],
  "checkpoints": [
   {
-   "step": 25,
-   "file": "step-025.png",
+   "step": 6,
+   "file": "step-006.png",
    "shows": "角色資料頁：GOLD CROWNS 158——`full-chain` 住宿扣掉 56 之後的數字"
   },
   {
-   "step": 41,
-   "file": "step-041.png",
+   "step": 23,
+   "file": "step-023.png",
    "shows": "出城的落點 (40,23)"
   },
   {
-   "step": 110,
-   "file": "step-110.png",
-   "shows": "CAMPING!"
+   "step": 66,
+   "file": "step-066.png",
+   "shows": "CAMPING! 與治療僧侶的提示"
   },
   {
-   "step": 118,
-   "file": "step-118.png",
+   "step": 94,
+   "file": "step-094.png",
    "shows": "任務敘述與 Will you partake?"
   },
   {
-   "step": 119,
-   "file": "step-119.png",
+   "step": 95,
+   "file": "step-095.png",
    "shows": "滿版的 BINDERAK 圖"
   }
- ]
+ ],
+ "scene": "play"
 }

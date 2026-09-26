@@ -6604,3 +6604,6 @@ frame-270 推翻了 remake 的版面：
 - `-play-script` 改為遵守 `-shot-steps`（與 flow 相同）；`check_player_paths.py` 只對長路徑
   帶 `-shot-steps`，短路徑逐張比（`full` 因此從比 2 張變成比 27 張）。quest-list、quest-take、
   world-healer 收據目錄只留檢查點畫格。
+- #88 續：`full-chain-reload` 改讀檔開場（讀新的 v2 `full-chain.json`）。出門時多了多人隊伍的
+  告別語，補一鍵；種子 3 在第一次入夜同時擲到治療僧侶（自然事件），野外段交給驅動器處理後
+  走到任務地點，第 94 步任務提示、第 95 步 BINDERAK。重生通過，README 與驗證矩陣步數同步。

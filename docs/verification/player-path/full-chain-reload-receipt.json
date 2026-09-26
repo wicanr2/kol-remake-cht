@@ -1,18 +1,18 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "full-chain-reload",
- "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，先在半途之家開角色資料頁確認金幣是住宿後的 158，再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 flow.Flow、town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
+ "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在第一次入夜換日時同時擲到治療僧侶，照實答應後繼續走（路上的自然事件，不是這條要驗的內容）；野外那一段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
  "seed": 3,
  "load": "workplace/saves/full-chain.json",
- "token_count": 119,
+ "token_count": 95,
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
- "trace_sha256": "3bdaeceef6274356cb0de26faca2216801b4172c2b219f7a78022a1d66f19e73",
+ "trace_sha256": "2f17b5204c95fe96b506ed9b2b66cea4c309471d4713d17ba722b5d060f2916c",
  "milestones": [
   {
    "step": 0,
    "token": "（起始）",
    "note": "讀檔的落點就是存檔記的那一格；放置不觸發門口狀態（SPEC-006）",
-   "scene": "flow:title",
+   "scene": "play",
    "town": {
     "left_town": false,
     "mode": 0,
@@ -30,23 +30,10 @@
    }
   },
   {
-   "step": 19,
-   "token": "RET",
-   "note": "DOOR：城鎮戶外地圖",
-   "scene": "flow:town",
-   "town": {
-    "left_town": false,
-    "mode": 0,
-    "town": 7,
-    "x": 57,
-    "y": 8
-   }
-  },
-  {
-   "step": 21,
+   "step": 2,
    "token": "R",
    "note": "走離門口再走回來，門口狀態成立",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "left_town": false,
@@ -57,10 +44,10 @@
    }
   },
   {
-   "step": 22,
+   "step": 3,
    "token": "RET",
    "note": "DOOR：進半途之家",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -75,10 +62,10 @@
    }
   },
   {
-   "step": 25,
+   "step": 6,
    "token": "RET",
    "note": "MIRROR：角色資料頁，金幣是住宿後的 158",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_door": true,
     "door": {
@@ -93,10 +80,28 @@
    }
   },
   {
-   "step": 29,
+   "step": 10,
    "token": "RET",
+   "note": "DOOR：多人隊伍的告別語",
+   "scene": "play",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 11,
+   "token": "SPACE",
    "note": "回到戶外地圖",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "door": {
      "index": 5,
@@ -110,10 +115,10 @@
    }
   },
   {
-   "step": 40,
+   "step": 22,
    "token": "U",
    "note": "城門提示",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_edge": true,
     "door": {
@@ -128,10 +133,10 @@
    }
   },
   {
-   "step": 41,
+   "step": 23,
    "token": "RET",
    "note": "出城，落到霍布入城點 3",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "door": {
      "index": 5,
@@ -149,17 +154,17 @@
     "month": 4,
     "sub_x": 3,
     "sub_y": 3,
-    "ticks": 4200,
-    "time_index": 0,
+    "ticks": 2732,
+    "time_index": 1,
     "x": 40,
     "y": 23
    }
   },
   {
-   "step": 110,
-   "token": "U",
-   "note": "走到入夜換日：CAMPING!，停在原地等一個鍵（RE-077）",
-   "scene": "flow:town",
+   "step": 66,
+   "token": "S",
+   "note": "入夜換日：CAMPING!，同一次時段變換擲到治療僧侶",
+   "scene": "play",
    "town": {
     "door": {
      "index": 5,
@@ -174,21 +179,22 @@
    "world": {
     "camping": true,
     "day": 1,
+    "heal_prompt": true,
     "mode": 0,
     "month": 4,
-    "sub_x": 3,
-    "sub_y": 6,
+    "sub_x": 6,
+    "sub_y": 2,
     "ticks": 4200,
     "time_index": 0,
-    "x": 48,
-    "y": 22
+    "x": 45,
+    "y": 23
    }
   },
   {
-   "step": 118,
+   "step": 94,
    "token": "U",
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "door": {
      "index": 5,
@@ -205,19 +211,19 @@
     "mode": 0,
     "month": 4,
     "quest_prompt": true,
-    "sub_x": 3,
+    "sub_x": 0,
     "sub_y": 7,
-    "ticks": 3804,
-    "time_index": 0,
+    "ticks": 2644,
+    "time_index": 1,
     "x": 48,
     "y": 21
    }
   },
   {
-   "step": 119,
+   "step": 95,
    "token": "RET",
    "note": "答應參戰：滿版的怪物圖",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "door": {
      "index": 5,
@@ -233,10 +239,10 @@
     "day": 2,
     "mode": 0,
     "month": 4,
-    "sub_x": 3,
+    "sub_x": 0,
     "sub_y": 7,
-    "ticks": 3804,
-    "time_index": 0,
+    "ticks": 2644,
+    "time_index": 1,
     "x": 48,
     "y": 21
    },
@@ -274,32 +280,32 @@
  ],
  "checkpoints": [
   {
-   "step": 25,
-   "file": "step-025.png",
+   "step": 6,
+   "file": "step-006.png",
    "sha256": "7aa05f25da48618c9af070d8d8c52ac3109192d0d72295c104f276b6c13dae0d",
    "shows": "角色資料頁：GOLD CROWNS 158——`full-chain` 住宿扣掉 56 之後的數字"
   },
   {
-   "step": 41,
-   "file": "step-041.png",
-   "sha256": "09b0ecbdf331c0c32fe421186da32228b0e95126935fae844b9011ab18867e86",
+   "step": 23,
+   "file": "step-023.png",
+   "sha256": "92af07c693ffa94ab2369cca47317718697ac4e426e16ecec0a6d7a6cc4cf928",
    "shows": "出城的落點 (40,23)"
   },
   {
-   "step": 110,
-   "file": "step-110.png",
-   "sha256": "707bf5eb0d2f410d84ea22bb917a3ba6efd7c090a5256a76f24bcadf1e3a6274",
-   "shows": "CAMPING!"
+   "step": 66,
+   "file": "step-066.png",
+   "sha256": "ef6991ce0e7a7acbd69ad0ce0255873ec4548168be1c820ae18a37fbd445b340",
+   "shows": "CAMPING! 與治療僧侶的提示"
   },
   {
-   "step": 118,
-   "file": "step-118.png",
-   "sha256": "416e3e07c2a49a0e6aa830050b0444b941ad4927e6b28b37b7baffe72c99bd7d",
+   "step": 94,
+   "file": "step-094.png",
+   "sha256": "d2fef7d86d768aa868c9c8863d1a93b86de473ee7fa49eb0fc6700a7f7178188",
    "shows": "任務敘述與 Will you partake?"
   },
   {
-   "step": 119,
-   "file": "step-119.png",
+   "step": 95,
+   "file": "step-095.png",
    "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
    "shows": "滿版的 BINDERAK 圖"
   }
