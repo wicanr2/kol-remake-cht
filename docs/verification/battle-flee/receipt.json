@@ -1,8 +1,8 @@
 {
- "schema": "kol-battle-flee-observation-v1",
+ "schema": "kol-battle-mechanics-v1",
  "name": "battle-flee",
  "kind": "observation",
- "description": "戰鬥中逃走那一問（SPEC-014）。Poontang 走到第 5 個任務地點、答應參戰，第一回合選休息，回合結束時因為站在戰場最外圈而被問「要逃嗎」，答 y 就離開戰場回到野外。**但輸入被換過**：那個地點的隊伍站位原本在戰場中央，正常玩法要一回合走一格、走二十幾格才到得了邊上，所以用替代檔把第一格挪到上緣。除此之外全程正常玩家路徑，沒有 direct-entry 也沒有測試旗標。",
+ "description": "戰鬥中逃走那一問（SPEC-014）。Poontang 走到第 5 個任務地點、答應參戰，第一回合選休息，回合結束時因為站在戰場最外圈而被問「要逃嗎」，答 y 就離開戰場回到野外。**但輸入被換過**：那個地點的隊伍站位原本在戰場中央，正常玩法要一回合走一格、走二十幾格才到得了邊上，所以用替代檔把第一格挪到上緣。除此之外全程正常玩家路徑，沒有 direct-entry 也沒有測試旗標。路上的遭遇以 `-ambush-rolls` 讓它不成立（使用者 2026-09-26 決定：野外擲點受控、戰場照種子）；收據驗的是機制斷言，畫格只作示意。",
  "not_claimed": [
   {
    "name": "與原版的畫面一致",
@@ -33,15 +33,96 @@
  "frames": [
   {
    "file": "ask.png",
-   "step": 97,
+   "step": 95,
    "shows": "DO YOU WANT TO FLEE?（記錄 0x109）——執行段走完、還沒分勝負，而且全隊都站到了戰場可走區的最外圈，才問得出這一句（`0x21045`）。戰場右側那一排石頭就是走不出去的邊界。",
-   "sha256": "a82c2e543e1a2243a4afe78d7f6608e0ce380582f59bbd34f7a99969c3588b1a"
+   "sha256": "870628dc62d14ff03de1d9efb8c36bbde8a0894fe0f3c38e3de7b5e35db1c3ee",
+   "run": 0,
+   "check": 3
   },
   {
    "file": "fled.png",
    "step": 101,
    "shows": "YOU FLEE FOR YOUR LIFE!（記錄 0x17B ＋ 0x17C）——單人隊伍用單數那一筆，`word_2DF2A` 決定（`0x215C9`）。按一次鍵才真的離開戰場。",
-   "sha256": "20835f45d620213e33ba378a5ac9ea79e14d82105e3b5b2a41e483a67e263350"
+   "sha256": "9af8b404f06fcfcd5bb3b1571e8c3ecf933a27a718f1f29c743e0125a9c230b1",
+   "run": 0,
+   "check": 4
+  }
+ ],
+ "runs": [
+  {
+   "name": "任務地點第一回合休息後被問要不要逃",
+   "checks": [
+    {
+     "find": {
+      "world": {
+       "quest_prompt": true
+      }
+     },
+     "note": "踏上第 5 個任務地點：Will you partake?"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": 5
+      }
+     },
+     "within": 1,
+     "note": "答應參戰"
+    },
+    {
+     "find": {
+      "battle": {
+       "exec_text": {
+        "$re": "is resting!$"
+       }
+      }
+     },
+     "note": "第一回合選休息"
+    },
+    {
+     "find": {
+      "battle": {
+       "verdict": 0,
+       "exec_text": [
+        "Do you want to flee?"
+       ]
+      }
+     },
+     "within": 2,
+     "note": "執行段走完、還沒分勝負，全隊站在最外圈：問要不要逃（0x109）"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 5,
+       "verdict": 3,
+       "exec_text": [
+        "You flee for your life!"
+       ]
+      }
+     },
+     "note": "答 y：逃走（0x17B＋0x17C，單人用單數）"
+    },
+    {
+     "find": {
+      "battle": null,
+      "world": {
+       "mode": 0
+      }
+     },
+     "within": 2,
+     "note": "回到野外"
+    }
+   ],
+   "found": [
+    89,
+    90,
+    94,
+    95,
+    101,
+    102
+   ]
   }
  ]
 }

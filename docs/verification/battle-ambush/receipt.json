@@ -1,8 +1,8 @@
 {
- "schema": "kol-battle-ambush-observation-v1",
+ "schema": "kol-battle-mechanics-v1",
  "name": "battle-ambush",
  "kind": "observation",
- "description": "野外的隨機遭遇（SPEC-011）。從城 7 出城往東走九十步，第 66 步時段變換那一下被伏擊：兩隻 1 級 BINDERAK。訊息、站位與地形都走正常玩家路徑，沒有座標注入也沒有測試旗標，輸入也沒有換過——與 `battle-spoils` 那一組不同。",
+ "description": "野外的隨機遭遇（SPEC-011）。從城 7 出城往東走，時段變換那一下擲遭遇；這一份驗的是**機制**：遭遇只在時段變換時成立、遭遇頁的兩行組法（記錄 0xE7 自帶 `@` 換行、`BY n, LEVEL m 名字!`）、隊員站在固定格、下一步進戰場第一回合。遇到哪一種怪、幾隻幾級由種子決定，不綁定（2026-09-26 定案：驗機制，不驗像素）。訊息、站位與地形都走正常玩家路徑，沒有座標注入也沒有測試旗標，輸入也沒有換過。",
  "not_claimed": [
   {
    "name": "與原版的畫面一致",
@@ -11,6 +11,14 @@
   {
    "name": "遇到的是哪一隻、幾隻、幾級",
    "reason": "那是機率，換一顆種子就不同。這一組只證明擲點、站位、地形與訊息都接得起來。"
+  },
+  {
+   "name": "遇到的怪物與隻數",
+   "reason": "由種子決定，收據不綁定；擲點規則由 RE-078／RE-097 與 internal/battle/ambush_test.go 支撐。"
+  },
+  {
+   "name": "截圖逐位元一致",
+   "reason": "截圖只作示意，`--write` 時照找到的步數重截；通過與否只看機制斷言。"
   }
  ],
  "command": "tools/run_kol_shots.sh docs/verification/battle-ambush/replay.spec（存檔先用 tools/import_original_characters.py 重生）",
@@ -22,16 +30,78 @@
  "frames": [
   {
    "file": "ambushed.png",
-   "step": 66,
+   "step": 52,
    "shows": "YOU HAVE BEEN AMBUSHED / BY 2, LEVEL 1 BINDERAKS!——記錄 0xE7 自帶的`@` 換行與 `]` 空白都照原版（`sub_1A8FD:0x1A990`），複數後綴與打贏那一句同一套。",
-   "sha256": "1bb55225e4279e27d26e8a5fa7dc23ac455b99ef05f55cb9a847fe0b1d08a82c"
+   "sha256": "b0702915e8c757fcea5ea660565ec5a58be40b599fc67cdf6edcda64548b61be",
+   "run": 0,
+   "check": 0
   },
   {
    "file": "field.png",
-   "step": 67,
+   "step": 53,
    "shows": "戰場：地形是逐格擲出來的（RE-099），樹叢另外灑一次；隊員站在固定的六格、敵人依站位組排在另一側（RE-098）。",
-   "sha256": "484d6b0160ef5f1c62d3173d1e5464830c37834216827cf79a75bc2e9392763a"
+   "sha256": "41a9e51c888bd2024e4749f8dbf30c947d4d507e6901c8ee9104afb4923080c4",
+   "run": 0,
+   "check": 3
   }
  ],
- "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
+ "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+ "runs": [
+  {
+   "name": "往東走到被伏擊",
+   "checks": [
+    {
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": -1,
+       "encounter_text": {
+        "$re": "^BY \\d+, LEVEL \\d+ [A-Z][A-Z ]*!$"
+       }
+      }
+     },
+     "time_part_change": true,
+     "note": "時段變換那一步被伏擊，第二行是 BY n, LEVEL m 名字!"
+    },
+    {
+     "find": {
+      "battle": {
+       "encounter_text": {
+        "$re": "^YOU HAVE BEEN AMBUSHED$"
+       }
+      }
+     },
+     "same_step_as_previous": true,
+     "note": "第一行是 YOU HAVE BEEN AMBUSHED（0xE7 自帶的 @ 換行）"
+    },
+    {
+     "find": {
+      "battle": {
+       "roster": {
+        "$re": "^0 \\S.* party 33,30 "
+       }
+      }
+     },
+     "same_step_as_previous": true,
+     "note": "隊員第 0 格站在 (33,30)（RE-098 的固定表）"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 2,
+       "round": 1
+      }
+     },
+     "within": 1,
+     "note": "下一步進戰場，第一回合的規劃"
+    }
+   ],
+   "found": [
+    52,
+    52,
+    52,
+    53
+   ]
+  }
+ ]
 }

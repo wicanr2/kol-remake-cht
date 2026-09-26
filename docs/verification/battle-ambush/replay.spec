@@ -1,4 +1,4 @@
-# battle-ambush 的重跑規格。收據的 frames 逐 byte 比對這一批畫格。
+# battle-ambush 的重跑規格。收據驗的是軌跡上的機制斷言，畫格只作示意。
 # tools/run_kol_shots.sh docs/verification/battle-ambush/replay.spec
 # 存檔在 workplace/（不進版控），由 import_original_characters.py 重生；
 # 輸出寫進 workplace/tmp/ambush。

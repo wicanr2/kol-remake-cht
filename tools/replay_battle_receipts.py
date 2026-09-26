@@ -21,6 +21,9 @@ import pathlib
 import subprocess
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from mechanics import locate  # noqa: E402
+
 ROOT = pathlib.Path("docs/verification")
 
 
@@ -28,13 +31,86 @@ def sha256(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def replay(name: str) -> bool:
+def with_shots(line: str, steps: list[int]) -> str:
+    """把一行規格的 `-shot-steps` 換成指定步數（沒有就補上），並確保有 `-trace`。"""
+    parts = line.split("|")
+    out, i = [], 0
+    while i < len(parts):
+        if parts[i] in ("-shot-steps", "-trace"):
+            i += 2
+            continue
+        out.append(parts[i])
+        i += 1
+    shot_dir = pathlib.Path(parts[0]).parent
+    out += ["-shot-steps", ",".join(str(s) for s in steps) or "0",
+            "-trace", str(shot_dir / "trace.json")]
+    return "|".join(out)
+
+
+def run_lines(lines: list[str], spec: pathlib.Path) -> bool:
+    spec.parent.mkdir(parents=True, exist_ok=True)
+    spec.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    run = subprocess.run(["tools/run_kol_shots.sh", str(spec)],
+                         stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+    if run.returncode != 0:
+        print(run.stderr[-600:])
+    return run.returncode == 0
+
+
+def replay_mechanics(name: str, base: pathlib.Path, receipt: dict,
+                     lines: list[str], write: bool) -> bool:
+    """機制收據：跑一次拿軌跡，逐條找斷言；`--write` 時照找到的步數重截示意圖。
+
+    截圖不參與通過與否（2026-09-26 定案：驗機制，不驗像素）。"""
+    work = pathlib.Path("workplace/tmp/battle-mechanics") / name
+    traced = [with_shots(l, [0]) for l in lines]
+    if not run_lines(traced, work / "trace.spec"):
+        print(f"{name}：跑不起來")
+        return False
+    ok = True
+    located: list[list[int]] = []
+    for n, run in enumerate(receipt["runs"]):
+        trace = pathlib.Path(traced[n].split("|", 1)[0]).parent / "trace.json"
+        steps = json.loads(trace.read_text(encoding="utf-8"))["steps"]
+        found, failures = locate(run["checks"], steps)
+        located.append(found)
+        for f in failures:
+            print(f"失敗：{name}（{run.get('name', n)}）{f}")
+        ok = ok and not failures
+        run["found"] = found
+    if ok and write:
+        shots = []
+        for n, line in enumerate(lines):
+            wanted = sorted({located[n][f["check"]] for f in receipt["frames"]
+                             if f.get("run", 0) == n})
+            shots.append(with_shots(line, wanted))
+        if not run_lines(shots, work / "shots.spec"):
+            print(f"{name}：截圖那一次跑不起來")
+            return False
+        for f in receipt["frames"]:
+            n = f.get("run", 0)
+            step = located[n][f["check"]]
+            src = pathlib.Path(shots[n].split("|", 1)[0]).parent / f"step-{step:03d}.png"
+            (base / f["file"]).write_bytes(src.read_bytes())
+            f["step"] = step
+            f["sha256"] = sha256(base / f["file"])
+        (base / "receipt.json").write_text(
+            json.dumps(receipt, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(f"{name}：{'通過' if ok else '失敗'}")
+    return ok
+
+
+def replay(name: str, write: bool = False) -> bool:
     base = ROOT / name
     spec = base / "replay.spec"
     receipt = json.loads((base / "receipt.json").read_text(encoding="utf-8"))
     if not spec.exists():
         print(f"{name}：沒有 replay.spec，無法重跑")
         return False
+    if "runs" in receipt:
+        lines = [l for l in spec.read_text(encoding="utf-8").splitlines()
+                 if l.strip() and not l.startswith("#")]
+        return replay_mechanics(name, base, receipt, lines, write)
     lines = [l for l in spec.read_text(encoding="utf-8").splitlines()
              if l.strip() and not l.startswith("#")]
     # 一份規格檔可以有好幾行（同一段路的不同分支），畫格用 `spec_line` 指定
@@ -71,13 +147,15 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("names", nargs="*")
     ap.add_argument("--all", action="store_true")
+    ap.add_argument("--write", action="store_true",
+                    help="機制收據通過後，照找到的步數重截示意圖並寫回收據")
     args = ap.parse_args()
     names = args.names
     if args.all:
         names = sorted(p.parent.name for p in ROOT.glob("battle-*/replay.spec"))
     if not names:
         ap.error("要指定收據名稱或 --all")
-    bad = [n for n in names if not replay(n)]
+    bad = [n for n in names if not replay(n, args.write)]
     if bad:
         print("沒過：" + "、".join(bad))
         return 1

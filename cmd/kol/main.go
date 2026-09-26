@@ -1202,6 +1202,11 @@ func (g *game) snapshot() map[string]any {
 		if len(st.Exec.Text) > 0 {
 			b["exec_text"] = st.Exec.Text
 		}
+		// 遭遇那一頁的文字（伏擊的「AMBUSHED BY n, LEVEL m」或任務地點那一句）。
+		// 收據驗的是機制，要看得到這一句的組法，不必比畫面。
+		if st.Stage == battle.StageEncounter && len(g.quest.lines) > 0 {
+			b["encounter_text"] = g.quest.lines
+		}
 		if st.Stage == battle.StageSpoils {
 			b["spoil_phase"] = int(st.Spoil.Phase)
 			b["spoil_lines"] = st.SpoilLines()
