@@ -49,15 +49,15 @@ func Parts(threshold int) [6]int {
 // PlanKey 是一名參戰者這一回合的**規劃**鍵值（`sub_1E3A8:0x1EF84`…`0x1F028`）：
 //
 //	基準 = (等級 − 1) × 10 + 洞察
-//	隊員在第二回合起先除以 2 × 回合數
+//	隊員在這一回合重排過時（`word_30D00` ≠ 0）先除以 2 × word_30D00（RE-145）
 //	基準 −= 基準 × 傷勢 ÷ 200，傷勢 = 50 × 累積傷害 ÷ 昏迷門檻
 //	鍵值 = 擲骰 + 基準
 //
 // roll 是 1…100 的擲骰結果。**鍵值小的先規劃**——洞察低的先決定、高的後決定。
-func PlanKey(a Actor, round int, roll int) int {
+func PlanKey(a Actor, replans int, roll int) int {
 	base := (a.Level-1)*LevelStep + a.Foresight
-	if a.Side == SideParty && round > 0 {
-		base /= 2 * round
+	if a.Side == SideParty && replans > 0 {
+		base /= 2 * replans
 	}
 	base -= base * a.FatigueRatio() / 200
 	return roll + base
@@ -81,8 +81,12 @@ func (a Actor) Down() bool { return a.Head <= 0 || a.Chest <= 0 }
 
 // Round 是這一場的回合狀態。這一版只走規劃段。
 type Round struct {
-	// Number 是已經開始過幾個回合（原版 `word_30D00`，排完序才加一）。
+	// Number 是已經開始過幾個回合。原版沒有對應的全域，remake 用來記錄與顯示。
 	Number int
+	// Replans 是原版的 `word_30D00`：每個新回合在 `0x2119B` 歸零，排完序
+	// （`0x1F04C`）加一，所以只有 U-TURN 重排時才會大於 0；規劃鍵值拿它除
+	// 隊員的基準（RE-145）。
+	Replans int
 	// Order 是這一回合的規劃順序，內容是參戰者索引。
 	Order []int
 	// Turn 是現在輪到 Order 的第幾個。
@@ -103,11 +107,13 @@ func (s *State) BeginPlanning(rng Rand) {
 			s.WoreOff = append(s.WoreOff, i)
 		}
 	}
+	s.Round.Number++
+	s.Round.Replans = 0 // `0x2119B`
 	s.Replan(rng)
 }
 
 // Replan 從 `0x1EF3A` 起重排這一回合：逐名重擲規劃鍵值、排序（`sub_2616C`）、
-// 回合數加一（`0x1F04C` 的 `word_30D00`）。「Begin next round?」選 U-TURN 或在
+// `word_30D00` 加一（`0x1F04C`）。「Begin next round?」選 U-TURN 或在
 // 逃走格答 n 都跳回這裡（RE-143），**不經過**回合結束的法術倒數 `0x20F01`。
 func (s *State) Replan(rng Rand) {
 	s.InitializeMonsterRanged(rng)
@@ -121,7 +127,7 @@ func (s *State) Replan(rng Rand) {
 			keys[i] = EmptyKey
 			continue
 		}
-		keys[i] = PlanKey(a, s.Round.Number, rng.Roll(PlanRoll))
+		keys[i] = PlanKey(a, s.Round.Replans, rng.Roll(PlanRoll))
 	}
 	limit := len(s.Actors)
 	if s.Site != nil && PartySlots+s.Site.Count < limit {
@@ -136,7 +142,7 @@ func (s *State) Replan(rng Rand) {
 	})
 	s.Round.Order = order
 	s.Round.Turn = 0
-	s.Round.Number++
+	s.Round.Replans++
 	s.skipDown()
 }
 

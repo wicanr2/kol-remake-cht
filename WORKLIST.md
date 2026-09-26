@@ -364,6 +364,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **path-verify-does-not-replay** — 路徑驗證只看收據自洽，不重跑：2026-09-11 做了 `tools/check_player_paths.py`：重跑到 workplace/replay-check/ 再與收據逐 byte 比，不覆寫。第一次跑就抓到 10 條對不上。`verify_full_path.py` 保留原用途（驗收據自洽），兩支分工不同。
 - **cjk-battle-remaining-pages** — 補戰後戰利品清單的繁中正常路徑畫格：法術／效果兩頁及戰利品 Items Found／Characters 兩頁均已擷取並目視檢查。戰利品由 seed 39 固定輸入在重製版正常按鍵路徑第 22 回合勝利後取得；收據含輸入、程式雜湊、PNG／trace 雜湊與觀察用資料限制。本項只驗中文版面；完整戰鬥、原版同狀態與正式封包另列未完成。
 - **town-untranslated-source-slot-reachability** — 城鎮 45 個未譯來源槽位的全域可達性與中文處置：2026-09-25 RE-140：訊息槽位與建築 payload 共用 DGROUP:0x1CF4，45 筆分為 40 筆馬廄坐騎記錄（已證實）、1 筆商店殘留資料（強推論）、4 筆無讀取點的任務續文（強推論）。依使用者選定處置不翻譯，列入 docs/i18n/town-nontext-slots.json 並綁原文快照；嚴格檢查 2,076 則 0 缺譯、另排除 45 筆，三個負例皆失敗。
+- **plan-key-replans** — 規劃鍵值的除數是本回合重排次數：已完成
 
 <!-- worklist:end -->
 

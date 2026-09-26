@@ -1577,6 +1577,24 @@
         "note": "以 SPEC-014 的同狀態缺口作開放訊號；取得原版收據後須更新規格狀態。"
       },
       "issue": 93
+    },
+    {
+      "id": "plan-key-replans",
+      "layer": "spec",
+      "title": "規劃鍵值的除數是本回合重排次數",
+      "body": "RE-145：`word_30D00` 在每個新回合 `0x2119B` 歸零、排序後 `0x1F04C` 加一，所以隊員基準只在同一回合 U-TURN 或逃走格答 n 重排時才除以 2 × 重排次數。remake 拆出 `Round.Replans` 對應它，`PlanKey` 改用它；SPEC-008 §5 與 RE-080 同步。",
+      "acceptance": "規劃鍵值的除數與原版 `word_30D00` 同語意，單元測試涵蓋新回合歸零與 U-TURN 加一，戰鬥收據與玩家路徑重跑。",
+      "verify": {
+        "kind": "required_in_all",
+        "paths": [
+          "docs/spec/008-combat-field.md",
+          "docs/re/RESEARCH-LOG.md",
+          "internal/battle/round.go"
+        ],
+        "pattern": "RE-145",
+        "note": "已完成，當回歸訊號：規格、研究日誌與程式都引用 RE-145。"
+      },
+      "status": "done"
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

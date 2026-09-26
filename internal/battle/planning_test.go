@@ -268,13 +268,14 @@ func TestPlanningEveryBarIconHandled(t *testing.T) {
 	}
 }
 
-// U-TURN 跳回 `0x1EF3A` 重排這一回合：回合數照樣加一（`0x1F04C`），但不經過回合
-// 結束的法術倒數（`0x20F01`），身上法術的剩餘回合不能多扣（RE-143，#69）。
+// U-TURN 跳回 `0x1EF3A` 重排這一回合：`word_30D00` 加一（`0x1F04C`），但不經過回合
+// 結束的法術倒數（`0x20F01`），身上法術的剩餘回合不能多扣，回合數也不變
+// （RE-143／RE-145，#69）。
 func TestUTurnReplansWithoutSpellCountdown(t *testing.T) {
 	s := planningState(Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}})
 	s.Rand = &fixedRoll{values: []int{50, 50, 50, 50}}
 	s.Actors[0].SpellTurns = 3
-	round := s.Round.Number
+	round, replans := s.Round.Number, s.Round.Replans
 	s.Plan.Prompt = PromptNextRound
 	s.Plan.Bar = s.NextRoundBar()
 	s.Plan.Selected = 1 // U-TURN
@@ -284,7 +285,20 @@ func TestUTurnReplansWithoutSpellCountdown(t *testing.T) {
 	if s.Actors[0].SpellTurns != 3 {
 		t.Fatalf("U-TURN 不該扣法術回合，剩 %d", s.Actors[0].SpellTurns)
 	}
-	if s.Round.Number != round+1 {
-		t.Fatalf("回合數應該加一：%d → %d", round, s.Round.Number)
+	if s.Round.Number != round || s.Round.Replans != replans+1 {
+		t.Fatalf("U-TURN 只加 word_30D00：回合 %d → %d，重排 %d → %d",
+			round, s.Round.Number, replans, s.Round.Replans)
+	}
+}
+
+// 每個新回合 `word_30D00` 在 `0x2119B` 歸零，所以第二回合起的第一次規劃不除基準；
+// 只有同一回合 U-TURN 重排時才除（RE-145）。
+func TestNewRoundResetsReplans(t *testing.T) {
+	s := planningState(Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}})
+	s.Rand = &fixedRoll{values: []int{50}}
+	s.BeginPlanning(s.Rand)
+	s.BeginPlanning(s.Rand)
+	if s.Round.Replans != 1 {
+		t.Fatalf("新回合排完序之後 word_30D00 應為 1，得到 %d", s.Round.Replans)
 	}
 }

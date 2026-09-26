@@ -17,14 +17,15 @@ func (r *fixedRand) Roll(n int) int {
 	return v
 }
 
-// 規劃鍵值：(等級 − 1) × 10 + 洞察，再加擲骰；隊員第二回合起先除以 2 × 回合數。
+// 規劃鍵值：(等級 − 1) × 10 + 洞察，再加擲骰；隊員在這一回合重排過時先除以
+// 2 × word_30D00（RE-145）。
 func TestPlanKey(t *testing.T) {
 	a := Actor{Side: SideParty, Level: 3, Foresight: 40, Threshold: 100}
 	if got := PlanKey(a, 0, 7); got != 7+(3-1)*10+40 {
 		t.Fatalf("第一回合鍵值 %d", got)
 	}
 	if got := PlanKey(a, 1, 7); got != 7+((3-1)*10+40)/2 {
-		t.Fatalf("第二回合鍵值 %d", got)
+		t.Fatalf("重排過一次的鍵值 %d", got)
 	}
 	// 疲勞會再折損：比例 = 50 × 疲勞 ÷ 耐力，基準扣掉基準 × 比例 ÷ 200。
 	// 累積傷害在這一條式子裡不出現（RE-130）。
@@ -39,10 +40,10 @@ func TestPlanKey(t *testing.T) {
 	if got := PlanKey(hurt, 0, 7); got != 7+base {
 		t.Fatalf("累積傷害不該動規劃鍵值，得到 %d", got)
 	}
-	// 敵人不吃回合數那一條。
+	// 敵人不吃重排那一條。
 	m := Actor{Side: SideMonster, Level: 3, Foresight: 40, Threshold: 100}
 	if got := PlanKey(m, 2, 7); got != 7+(3-1)*10+40 {
-		t.Fatalf("敵人第三回合鍵值 %d", got)
+		t.Fatalf("敵人重排兩次的鍵值 %d", got)
 	}
 }
 
