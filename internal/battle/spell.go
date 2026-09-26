@@ -354,11 +354,12 @@ var SpellListBox = SheetBox
 
 // SpellListRows 是清單第一行的位置與行距。
 //
-// **還沒對拍**：標題那兩個座標是記錄自己帶的（`~H03~V07`），清單則是
-// `sub_1AAE8(3, 4, 11h, …)` 的前三個參數，那一支的參數語意還沒解出來
-// （戰利品那張清單也卡在同一件事）。先接在標題下面一行。
+// 標題的座標是記錄自己帶的（`~H03~V07`）；清單是 `sub_1E3A8:0x1F4DE` 呼叫
+// `sub_1AAE8(3, 4, 11h, 可見列數, 總筆數, 2E3Ah, 0Dh)`，依 RE-115 的參數語意：
+// 第一列左緣在第 4 個 byte 欄、上緣在第 0x11 條掃描線，可見列數上限 7（`0x1F4D8`），
+// 行距 `6 + 2 × word_2DF18`，戰鬥裡是大字的 8（與戰利品清單相同）。
 var SpellListRows = struct{ Col, Row, LineStep, Visible int }{
-	Col: 3, Row: 0x0F, LineStep: 8, Visible: 7,
+	Col: 4, Row: 0x11, LineStep: 8, Visible: 7,
 }
 
 // SpellListTitle 是目前這一張清單的標題記錄。

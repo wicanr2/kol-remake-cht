@@ -158,6 +158,9 @@ The Hostel 賣的第一筆 Tyanalon（340）、Kelnalon（340）就是，巫師�
 已經做完的：法術從角色記錄抽出來一路接到 `battle.Member`，指令列在「有法術而且手上
 空著」時放出那一格，規劃段走「Which Spell?」→「Select Affect」→ 選目標格三步，
 執行段印施法與效果兩句。實跑收據 `docs/verification/battle-spell/`。
+「Which Spell?」那張清單由 `sub_1E3A8:0x1F4DE` 呼叫 `sub_1AAE8(3, 4, 11h, 可見列數,
+總筆數, 2E3Ah, 0Dh)` 畫出（`已證實`，參數語意見 RE-115）：第一列在第 4 個 byte 欄、
+第 0x11 條掃描線，可見列數上限 7，寬 13 欄，行距是戰鬥大字的 8。
 
 ## 9. 實跑
 

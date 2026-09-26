@@ -947,17 +947,19 @@
       "id": "sub-1aae8-params",
       "layer": "spec",
       "title": "sub_1AAE8 的參數語意",
-      "body": "`sub_1AAE8(3, 4, 11h, …)` 的前三個參數語意還沒解出來。SPEC-008 的未解清單列著同一項（選單協定）。",
+      "body": "`sub_1AAE8` 的參數語意由 RE-115 解出。法術清單的呼叫 `sub_1E3A8:0x1F4DE` 推入 (3, 4, 11h, 可見列數, 總筆數, 2E3Ah, 0Dh)，remake 原本的 Col 3／Row 0x0F 改為 Col 4／Row 0x11；寫進 SPEC-012。中文版面與文字寬度檢查 0 失敗，battle-spell 收據通過。",
       "acceptance": "參數語意解出並寫進規格。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/battle/spell.go"
+          "internal/battle/spell.go",
+          "docs/spec/012-combat-spells.md"
         ],
-        "pattern": "那一支的參數語意還沒解出來",
-        "note": "spell.go 的自承，解出時會改寫。"
+        "pattern": "0x1F4DE",
+        "note": "已完成，當回歸訊號：座標常數與規格都引用呼叫點。"
       },
-      "issue": 59
+      "issue": 59,
+      "status": "done"
     },
     {
       "id": "victory-drop-sub-289ee",

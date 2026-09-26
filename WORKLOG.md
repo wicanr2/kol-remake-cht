@@ -6654,3 +6654,7 @@ frame-270 推翻了 remake 的版面：
   驗丟武器後才出現施法與選法術、選正負、施法、效果；`battle-spoils` 路上遭遇受控不成立，驗打贏、
   獎勵、戰利品清單。軌跡加記野外提示頁文字（`prompt_lines`）。Go 測試通過，
   `replay_battle_receipts.py --all` 七份全數通過。
+- #59 結案：法術清單的 `sub_1AAE8` 呼叫在 `sub_1E3A8:0x1F4DE`，推入順序（右到左）得
+  (旗標 3, 行 4, 列 0x11, 可見列數≤7, 總筆數, 2E3Ah, 寬 0Dh)；依 RE-115 語意把 `SpellListRows`
+  從 Col 3／Row 0x0F 改為 Col 4／Row 0x11，寫進 SPEC-012。Go 測試通過，中文版面與文字寬度
+  9,557 項 0 失敗，battle-spell 收據通過並重截示意圖。

@@ -261,11 +261,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：讀取端找出來，並判斷 remake 需不需要那一格。
   核實：`internal/battle/execution.go`、`docs/spec/010-combat-commands.md` 找得到 `它在哪裡被讀還沒解|`\+0x25` 在哪裡被讀還沒解` 就是還沒完
 
-- **sub-1aae8-params**（#59） — sub_1AAE8 的參數語意
-  `sub_1AAE8(3, 4, 11h, …)` 的前三個參數語意還沒解出來。SPEC-008 的未解清單列著同一項（選單協定）。
-  完成條件：參數語意解出並寫進規格。
-  核實：`internal/battle/spell.go` 找得到 `那一支的參數語意還沒解出來` 就是還沒完
-
 - **word-2df2c-outdoor-switch**（#62） — word_2DF2C：城外換整張底圖的那個開關
   在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。
   完成條件：開關語意解出並寫進規格。
@@ -372,6 +367,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力：已完成
 - **battle-silent-steps-inventory** — 執行段裡沒有訊息就不停的那幾手：已完成
+- **sub-1aae8-params** — sub_1AAE8 的參數語意：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
