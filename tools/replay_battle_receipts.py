@@ -32,18 +32,22 @@ def sha256(path: pathlib.Path) -> str:
 
 
 def with_shots(line: str, steps: list[int]) -> str:
-    """把一行規格的 `-shot-steps` 換成指定步數（沒有就補上），並確保有 `-trace`。"""
+    """把一行規格的 `-shot-steps` 換成指定步數（沒有就補上），並確保有 `-trace` 與
+    `-trace-detail`（指令列、游標等欄位只在細節模式才記）。"""
     parts = line.split("|")
     out, i = [], 0
     while i < len(parts):
         if parts[i] in ("-shot-steps", "-trace"):
             i += 2
             continue
+        if parts[i] == "-trace-detail":
+            i += 1
+            continue
         out.append(parts[i])
         i += 1
     shot_dir = pathlib.Path(parts[0]).parent
     out += ["-shot-steps", ",".join(str(s) for s in steps) or "0",
-            "-trace", str(shot_dir / "trace.json")]
+            "-trace", str(shot_dir / "trace.json"), "-trace-detail"]
     return "|".join(out)
 
 

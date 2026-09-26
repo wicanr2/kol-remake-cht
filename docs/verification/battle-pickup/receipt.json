@@ -1,64 +1,229 @@
 {
-  "schema": "kol-battle-pickup-observation-v1",
-  "name": "battle-pickup",
-  "kind": "observation",
-  "description": "撿那一手在執行段中間問的那一句（RE-113）。Poontang 從城 7 出城往東走九十步被伏擊，第一回合把手上的長矛丟在腳下，第二回合指令列上才出現撿那一格（原版看腳下那一格有沒有東西，`sub_228B7:0x22A5E`），選它之後執行段印記錄 0x111「You have found a Long Spear.  Do you want to pick it up?」停下來等 y／n（`0x20354` 的 `sub_1B100(5)`）。答是就撿起來、指令列換回帶武器那一組；答否東西留在地上、下一回合還問得到。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
-  "not_claimed": [
+ "schema": "kol-battle-mechanics-v1",
+ "name": "battle-pickup",
+ "kind": "observation",
+ "description": "撿那一手在執行段中間問的那一句（RE-113）。Poontang 從城 7 出城往東走，時段變換那一下被伏擊（種子自然擲出，TROLL），第一回合把手上的長矛丟在腳下，第二回合指令列上才出現撿那一格（原版看腳下那一格有沒有東西，`sub_228B7:0x22A5E`），選它之後執行段印記錄 0x111「You have found a Long Spear.  Do you want to pick it up?」停下來等 y／n（`0x20354` 的 `sub_1B100(5)`）。答是就撿起來、第三回合指令列換回帶武器那一組；答否東西留在地上、撿那一格還在。收據驗的是這幾件事的機制，畫格只作示意（2026-09-26 定案）。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到對應的畫格。問句印在執行段那張卷軸上（與逃走那一問同一條路，RE-103），卷軸本身已對拍過（RE-087）。"
+  },
+  {
+   "name": "腳下有好幾件時的問法",
+   "reason": "原版答否會接著問同一格上的下一件（`0x20501` 回到同一個迴圈），這一版照做並有單元測試，但實跑只放了一件。"
+  },
+  {
+   "name": "記錄 0x113 那一句",
+   "reason": "撿到任務要的那一件才喊，而任務物品要打任務戰鬥才有。這一組是隨機遭遇（`Site.Index < 0`），走不到那一條。"
+  }
+ ],
+ "command": "tools/run_kol_shots.sh docs/verification/battle-pickup/replay.spec（存檔先用 tools/import_original_characters.py 重生）",
+ "seed": 141421,
+ "size": [
+  320,
+  200
+ ],
+ "frames": [
+  {
+   "file": "drop.png",
+   "step": 61,
+   "shows": "第一回合的丟：POONTANG DROPS HIS LONG SPEAR!（記錄 0x10D，名字由 ActResult 帶出來，RE-094）。",
+   "sha256": "a903f7f800b2e7a6d4c6dbffc27996fa77afb91f07cef11317890a4cacf6df30",
+   "run": 0,
+   "check": 1
+  },
+  {
+   "file": "bar.png",
+   "step": 62,
+   "shows": "第二回合的指令列多了撿那一格（0x26）：YES、徒手、撿、移動、休息——武器不在手上，所以攻擊與丟都不見了。",
+   "sha256": "df9b51654bffb3e33a9e317b003fc8fa573dc8581e9e9d6a1e1b5628e7a77886",
+   "run": 0,
+   "check": 2
+  },
+  {
+   "file": "ask.png",
+   "step": 68,
+   "shows": "執行段停在問句上：YOU HAVE FOUND A LONG SPEAR.  DO YOU WANT TO PICK IT UP?——**前面沒有動作者的名字**，記錄 0x111 自己就是一句完整的話。",
+   "sha256": "050040e7f73d84359616cf675a68c2c535756fdb5e8a0904632a792dd0c3a3ae",
+   "run": 0,
+   "check": 3
+  },
+  {
+   "file": "taken.png",
+   "step": 75,
+   "shows": "答是之後的第三回合：指令列換回七格（武器、切換、丟都回來了），長矛回到手上。撿成功本身不印任何一句。",
+   "sha256": "77989cfb67a1eff50eac0795fc676a216b8ea0179d943005a2eceac6c0a47506",
+   "run": 0,
+   "check": 4
+  },
+  {
+   "file": "kept.png",
+   "step": 75,
+   "shows": "同一步答否：指令列還是五格、撿那一格還在——東西留在地上，下一回合還問得到。",
+   "sha256": "596a0ee686bc9b23b271d625c24110c26de2dfebb85d9a330212f8cff1b746bb",
+   "run": 1,
+   "check": 4
+  }
+ ],
+ "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+ "runs": [
+  {
+   "name": "答是",
+   "checks": [
     {
-      "name": "與原版的畫面一致",
-      "reason": "原版沒有取到對應的畫格。問句印在執行段那張卷軸上（與逃走那一問同一條路，RE-103），卷軸本身已對拍過（RE-087）。"
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": -1
+      }
+     },
+     "time_part_change": true,
+     "note": "時段變換那一步被伏擊"
     },
     {
-      "name": "腳下有好幾件時的問法",
-      "reason": "原版答否會接著問同一格上的下一件（`0x20501` 回到同一個迴圈），這一版照做並有單元測試，但實跑只放了一件。"
+     "find": {
+      "battle": {
+       "exec_text": [
+        "Poontang drops his Long Spear!"
+       ]
+      }
+     },
+     "note": "第一回合的丟（記錄 0x10D，名字由 ActResult 帶出，RE-094）"
     },
     {
-      "name": "記錄 0x113 那一句",
-      "reason": "撿到任務要的那一件才喊，而任務物品要打任務戰鬥才有。這一組是隨機遭遇（`Site.Index < 0`），走不到那一條。"
+     "find": {
+      "battle": {
+       "stage": 2,
+       "round": 2,
+       "prompt": 0,
+       "bar": [
+        7,
+        41,
+        38,
+        39,
+        5
+       ]
+      }
+     },
+     "note": "第二回合：指令列多了撿那一格，攻擊與丟不見了"
+    },
+    {
+     "find": {
+      "battle": {
+       "prompt": 11,
+       "exec_text": [
+        "You have found a Long Spear. ",
+        "Do you want to pick it up?"
+       ]
+      }
+     },
+     "note": "執行段停在問句上，前面沒有動作者的名字（0x111）"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 2,
+       "round": 3,
+       "prompt": 0,
+       "bar": [
+        7,
+        33,
+        41,
+        36,
+        21,
+        39,
+        5
+       ]
+      }
+     },
+     "note": "答是之後的第三回合：指令列換回帶武器那一組"
     }
-  ],
-  "command": "tools/run_kol_shots.sh docs/verification/battle-pickup/replay.spec（存檔先用 tools/import_original_characters.py 重生）",
-  "seed": 141421,
-  "size": [
-    320,
-    200
-  ],
-  "frames": [
+   ],
+   "found": [
+    52,
+    61,
+    62,
+    68,
+    75
+   ]
+  },
+  {
+   "name": "答否",
+   "checks": [
     {
-      "file": "drop.png",
-      "spec_line": 0,
-      "step": 110,
-      "shows": "第一回合的丟：POONTANG DROPS HIS LONG SPEAR!（記錄 0x10D，名字由 ActResult 帶出來，RE-094）。",
-      "sha256": "3110b0e11986cbc9f02e1ffca0f56a69fa1d46a0d8978a39e53e04db7cac7c6d"
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": -1
+      }
+     },
+     "time_part_change": true,
+     "note": "時段變換那一步被伏擊"
     },
     {
-      "file": "bar.png",
-      "spec_line": 0,
-      "step": 112,
-      "shows": "第二回合的指令列多了撿那一格（0x26）：YES、徒手、撿、移動、休息——武器不在手上，所以攻擊與丟都不見了。",
-      "sha256": "3e850f556898764367960c9cf0348fa8d1515d1e1f1c2cf67a627dd4f50751ef"
+     "find": {
+      "battle": {
+       "exec_text": [
+        "Poontang drops his Long Spear!"
+       ]
+      }
+     },
+     "note": "第一回合的丟（記錄 0x10D，名字由 ActResult 帶出，RE-094）"
     },
     {
-      "file": "ask.png",
-      "spec_line": 0,
-      "step": 120,
-      "shows": "執行段停在問句上：YOU HAVE FOUND A LONG SPEAR.  DO YOU WANT TO PICK IT UP?——**前面沒有動作者的名字**，記錄 0x111 自己就是一句完整的話。",
-      "sha256": "09b0245e0a202dcb22d43e3b55237ed016ad51040372dd0d002acf40505be091"
+     "find": {
+      "battle": {
+       "stage": 2,
+       "round": 2,
+       "prompt": 0,
+       "bar": [
+        7,
+        41,
+        38,
+        39,
+        5
+       ]
+      }
+     },
+     "note": "第二回合：指令列多了撿那一格，攻擊與丟不見了"
     },
     {
-      "file": "taken.png",
-      "spec_line": 0,
-      "step": 122,
-      "shows": "答是之後的第三回合：指令列換回七格（武器、切換、丟都回來了），長矛回到手上。撿成功本身不印任何一句。",
-      "sha256": "3522e6d5844b290a9bda21f68e688c62954ed9d8635fddf5cf313bfaadc42e7e"
+     "find": {
+      "battle": {
+       "prompt": 11,
+       "exec_text": [
+        "You have found a Long Spear. ",
+        "Do you want to pick it up?"
+       ]
+      }
+     },
+     "note": "執行段停在問句上，前面沒有動作者的名字（0x111）"
     },
     {
-      "file": "kept.png",
-      "spec_line": 1,
-      "step": 122,
-      "shows": "同一步答否：指令列還是五格、撿那一格還在——東西留在地上，下一回合還問得到。",
-      "sha256": "6794f9bdf54ed16bcf99ef37b3b71fb573d3cab163242340a84e95c6a3b65c16"
+     "find": {
+      "battle": {
+       "stage": 2,
+       "round": 3,
+       "prompt": 0,
+       "bar": [
+        7,
+        41,
+        38,
+        39,
+        5
+       ]
+      }
+     },
+     "note": "答否之後的第三回合：撿那一格還在"
     }
-  ],
-  "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
+   ],
+   "found": [
+    52,
+    61,
+    62,
+    68,
+    75
+   ]
+  }
+ ]
 }

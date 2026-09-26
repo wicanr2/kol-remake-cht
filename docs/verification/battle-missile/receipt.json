@@ -1,8 +1,8 @@
 {
- "schema": "kol-battle-missile-observation-v1",
+ "schema": "kol-battle-mechanics-v1",
  "name": "battle-missile",
  "kind": "observation",
- "description": "射擊整條路徑（SPEC-013）。Warder 從城 7 出城往東走九十步被伏擊，第一回合就選指令列上的射擊那一格、把游標往右下移一格當目標，執行段依序印出敵人射中 Warder 與 Warder 射進樹裡。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
+ "description": "射擊整條路徑（SPEC-013）。Warder 從城 7 出城往東走，第一次時段變換遇到 BRIGAND（受控骰值指定遭遇，戰場照種子）。前兩回合休息讓它靠近，它在第二回合射中 Warder（敵人 AI 的射擊分支，RE-104）；第三回合 Warder 選指令列上的射擊那一格，目標游標（9×9、中心是自己）移到 BRIGAND 那一格，執行段印出 Warder 射向它、它再射回來。收據驗的是這幾件事的機制，畫格只作示意（2026-09-26 定案）。射進樹裡那一條（RE-102）由 `internal/battle/missile_test.go` 支撐，這一條路上沒有發生。",
  "not_claimed": [
   {
    "name": "與原版的畫面一致",
@@ -22,28 +22,103 @@
  "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
  "frames": [
   {
-   "file": "aim.png",
-   "step": 100,
-   "shows": "選好目標格：指令列換成 YES 與 U-TURN，白框是 mode 2 的游標（`[0x1A74]`／`[0x1B36]`，RE-081），這一次往右下移了一格。",
-   "sha256": "a93d5180620618b684934086c1eaabb0c10ed24049f17735c4cc1fecf6aa03b4"
-  },
-  {
    "file": "enemy-fires.png",
-   "step": 104,
-   "shows": "THE BINDERAK FIRES A MISSLE AT WARDER WHO CANNOT PARRY THE BLOW!——敵人 AI 的射擊分支（RE-104）：它在環 1／2 上看得見就射，而且不必先花一回合上弦。",
-   "sha256": "e20af4a226f5752ed64b88fb9a75be5c12ee598daa06cfeae5466edb6fa91e55"
+   "run": 0,
+   "check": 1,
+   "shows": "THE BRIGAND FIRES A MISSLE AT WARDER WHO CANNOT PARRY THE BLOW!",
+   "step": 45,
+   "sha256": "111f94cd131651f0ba4144e1d654b642116d2c9307b43e52c2b79c79c344008e"
   },
   {
    "file": "blow-hits.png",
-   "step": 105,
-   "shows": "THE BLOW HITS WARDER'S CHEST CAUSING A SERIOUS WOUND!——射中之後的傷害那一句，與近戰共用同一條鏈（RE-088）。",
-   "sha256": "1c31b04fb7b2f5c75d3df4aa130735e766e6ccbac939f290b5568cf9dab4742c"
+   "run": 0,
+   "check": 2,
+   "shows": "射中之後的傷害那一句",
+   "step": 46,
+   "sha256": "e5051d5280665680994bbc35deddf1e862f30127881648a2745065545480c632"
   },
   {
-   "file": "into-tree.png",
-   "step": 106,
-   "shows": "WARDER FIRES A MISSLE INTO A TREE!——彈道撞在樹上停下（記錄 0x121 ＋ 0x122，`word_30A74 == 1`）。命中值扣掉 0x23 之後不夠，就停在那一格。",
-   "sha256": "0d7db491fefe3f1cf68b253e9c7aab7492b76ef2792896e05a9ca475ae26c16b"
+   "file": "aim.png",
+   "run": 0,
+   "check": 3,
+   "shows": "目標格模式：指令列換成 YES 與 U-TURN，白框是目標游標",
+   "step": 49,
+   "sha256": "c43708fb9baa9ca02bd6393be039b4fc43ca091f67f43fc6b0b37bdfdc886d11"
+  },
+  {
+   "file": "player-fires.png",
+   "run": 0,
+   "check": 4,
+   "shows": "WARDER FIRES A MISSLE AT THE BRIGAND 那一句",
+   "step": 53,
+   "sha256": "9e1250f5baabc6e622abc5c24cc86a85cbacde634b769bb0b884981ef1537a79"
+  }
+ ],
+ "runs": [
+  {
+   "name": "BRIGAND 伏擊後互射",
+   "checks": [
+    {
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": -1,
+       "encounter_text": {
+        "$re": "BRIGAND!$"
+       }
+      }
+     },
+     "time_part_change": true,
+     "note": "時段變換那一步遇到 BRIGAND"
+    },
+    {
+     "find": {
+      "battle": {
+       "exec_text": {
+        "$re": "^The BRIGAND fires a missle at$"
+       }
+      }
+     },
+     "note": "敵人射擊（RE-104），不必先花一回合上弦"
+    },
+    {
+     "find": {
+      "battle": {
+       "exec_text": {
+        "$re": "^The blow hits Warder's"
+       }
+      }
+     },
+     "within": 1,
+     "note": "射中之後的傷害那一句，與近戰共用同一條鏈（RE-088）"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 2,
+       "prompt": 1
+      }
+     },
+     "note": "選好射擊：進入目標格模式（指令列換成 YES 與 U-TURN）"
+    },
+    {
+     "find": {
+      "battle": {
+       "exec_text": {
+        "$re": "^Warder fires a missle at The$"
+       }
+      }
+     },
+     "note": "Warder 射向 BRIGAND"
+    }
+   ],
+   "found": [
+    26,
+    45,
+    46,
+    49,
+    53
+   ]
   }
  ]
 }
