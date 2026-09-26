@@ -38,6 +38,11 @@ exec timeout "${KOL_DRIVE_TIMEOUT:-3600}" docker run --rm \
   -e "KOL_BIN=/src/$BIN" \
   -e "KOL_DRIVE_DIR=${KOL_DRIVE_DIR:-workplace/tmp/drive}" \
   -e "KOL_QUEST_SITES=${KOL_QUEST_SITES:-}" \
+  -e "KOL_SCENE=${KOL_SCENE:-flow}" \
+  -e "KOL_SCRIPT_FLAG=${KOL_SCRIPT_FLAG:--flow-script}" \
+  -e "KOL_MONSTERS=${KOL_MONSTERS:-}" \
+  -e "KOL_AMBUSH_ROLLS=${KOL_AMBUSH_ROLLS:-}" \
+  -e "KOL_STOP_AFTER_BATTLE=${KOL_STOP_AFTER_BATTLE:-}" \
   -v "$REPO_ROOT:/src" -w /src \
   --tmpfs "/tmp:exec,uid=$(id -u),gid=$(id -g),size=512m" \
   "$IMAGE" \

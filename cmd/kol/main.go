@@ -4110,13 +4110,21 @@ func main() {
 			g.jobs = []shotJob{{name: "play", path: *shot}}
 			break
 		}
+		// 長路徑只留檢查點那幾張，與 flow 那一條相同；軌跡仍然每一步都記。
+		keep, err := parseSteps(*shotSteps)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(2)
+		}
 		g.jobs = append(g.jobs, shotJob{
-			name: "step-000", path: filepath.Join(*shotDir, "step-000.png")})
+			name: "step-000", path: filepath.Join(*shotDir, "step-000.png"),
+			skip: keep != nil && !keep[0]})
 		for i, token := range strings.Fields(*playScript) {
 			tok := token
 			g.jobs = append(g.jobs, shotJob{
 				name: fmt.Sprintf("step-%03d", i+1),
 				path: filepath.Join(*shotDir, fmt.Sprintf("step-%03d.png", i+1)),
+				skip: keep != nil && !keep[i+1],
 				apply: func() {
 					if err := g.playToken(tok); err != nil {
 						fmt.Fprintln(os.Stderr, err)

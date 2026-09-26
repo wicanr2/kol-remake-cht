@@ -43,6 +43,8 @@ KOL_BIN = os.environ.get('KOL_BIN', '')
 KOL_SCENE = os.environ.get('KOL_SCENE', 'flow')
 KOL_SCRIPT_FLAG = os.environ.get('KOL_SCRIPT_FLAG', '-flow-script')
 KOL_MONSTERS = os.environ.get('KOL_MONSTERS', '')
+# 受控亂數（plan 的 `ambush_rolls`）：重生時要與重播時帶同一組，否則遇到的不是同一場。
+KOL_AMBUSH_ROLLS = os.environ.get('KOL_AMBUSH_ROLLS', '')
 
 
 def run(tokens, seed, save):
@@ -51,6 +53,8 @@ def run(tokens, seed, save):
         args += ['-quest-sites', SITES]
     if KOL_MONSTERS:
         args += ['-monsters', KOL_MONSTERS]
+    if KOL_AMBUSH_ROLLS:
+        args += ['-ambush-rolls', KOL_AMBUSH_ROLLS]
     args += [KOL_SCRIPT_FLAG, ' '.join(tokens),
              '-shot', str(SPEC / 'last.png'), '-trace', str(SPEC / 'last.json')]
     if KOL_BIN:

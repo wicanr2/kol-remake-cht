@@ -6596,3 +6596,11 @@ frame-270 推翻了 remake 的版面：
   亂數，超出骰面直接停下；預設為空，正式遊戲不經過。plan 以 `ambush_rolls` 記錄、重跑工具
   帶上、`verify_full_path.py` 照抄進收據。`1,1,1` 指定遭遇成立、落在治療、僧侶那一組；
   第一次試 `1,1` 時場景由種子擲到不問治療的 Brettle 那一組，屬正確行為。收據 28 步一致。
+- #88 續：`full-chain` 改讀檔開場。種子 1 自然遇到 6 隻 WALBAR 而敗北，依使用者決定改用
+  `-ambush-rolls 1,100,23`（遭遇成立、不落治療、ZOMBIE），等級隻數與戰鬥仍由種子決定；
+  結果 2 隻 3 級 ZOMBIE、十二回合打贏，回城住宿後存檔數值（158 金、AP 2376、位階 1）與舊收據
+  相同，存檔改為 v2 格式，期望值路徑同步。戰鬥段由 `drive_battle_script.py` 重生；
+  `run_driver.sh` 補傳 `KOL_SCENE` 等環境變數並支援 `KOL_AMBUSH_ROLLS`。
+- `-play-script` 改為遵守 `-shot-steps`（與 flow 相同）；`check_player_paths.py` 只對長路徑
+  帶 `-shot-steps`，短路徑逐張比（`full` 因此從比 2 張變成比 27 張）。quest-list、quest-take、
+  world-healer 收據目錄只留檢查點畫格。

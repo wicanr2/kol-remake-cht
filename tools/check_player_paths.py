@@ -52,8 +52,9 @@ def spec_line(plan: dict, shot_dir: pathlib.Path) -> str:
         args += ["-save", str(shot_dir / "save.json")]
     flag = "-flow-script" if scene == "flow" else "-play-script"
     args += [flag, plan["script"], "-shot-dir", str(shot_dir)]
+    # 短路徑逐步存圖、逐張比；只有長路徑（有 trace）才只截檢查點那幾張。
     steps = sorted({c["step"] for c in plan.get("checkpoints", [])})
-    if steps:
+    if steps and plan.get("trace"):
         args += ["-shot-steps", ",".join(str(s) for s in steps)]
     if plan.get("trace"):
         args += ["-trace", f"{shot_dir}/trace.json"]
