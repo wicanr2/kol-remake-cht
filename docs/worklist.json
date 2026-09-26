@@ -1463,6 +1463,17 @@
       "status": "done"
     },
     {
+      "id": "battle-receipts-stale",
+      "layer": "verification",
+      "title": "七份戰鬥短收據對不上現行程式",
+      "body": "2026-09-26 `tools/replay_battle_receipts.py --all`：battle-ambush、battle-flee、battle-missile、battle-pickup、battle-rideaway、battle-spell、battle-spoils 全數對不上或跑不起來。成因與 #88 相同：天候重擲接在遭遇之前（SPEC-011 §1），同一顆種子在往東那段路上的遭遇不同，後面的按鍵整串錯位。ambush、rideaway、pickup 要驗的是野外遭遇本身；flee、missile、spell、spoils 在任務地點開打，路上的遭遇是干擾，但戰場裡的結果也靠種子。重生前要先定亂數處理原則。",
+      "acceptance": "七份逐一以現行程式重生或改寫，`replay_battle_receipts.py --all` 全數通過；收據寫明種子與受控亂數的用法。",
+      "verify": {
+        "kind": "manual",
+        "note": "`replay_battle_receipts.py --all` 全數通過才算完成；重跑要數十分鐘，不綁 pattern。"
+      }
+    },
+    {
       "id": "path-verify-does-not-replay",
       "layer": "verification",
       "title": "路徑驗證只看收據自洽，不重跑",
