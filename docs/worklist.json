@@ -878,19 +878,20 @@
       "id": "sub-21e0b-filter-contradiction",
       "layer": "spec",
       "title": "sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值",
-      "body": "RE-118 記下「種類 byte 大於 0x7F 才算有東西」，又說種類 byte 為 0 的 Fur Boots、Fur Cape、Leather Cape 走 kind 0 （設 +0x04，+0x03 為 0 就設 1）。兩句互相矛盾。若斗篷或靴子確實會設 +0x03，移動方式選單的門檻（commands.go）會變；remake 目前不設 Flag03。",
+      "body": "RE-141：`sub_21E0B` 在 `0x21E1A` 先比格內 `+0x0D` > 0x7F，不成立整格跳過，不呼叫 `sub_21FCD`。RE-118「種類 byte 0 走 kind 0 設 +0x03／+0x04」不成立，已在 RE-141 更正；現行資料下穿戴欄不設 +0x03～+0x06，remake 不設 Flag03 與原版一致。SPEC-008、SPEC-010 與 battle.go 註解同步。",
       "acceptance": "回 IDA 重讀 sub_21E0B 的過濾分支並改正 RE-118；依結論接上或確認 Flag03 在現行資料下恆為 0，同步 SPEC-008。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
           "internal/battle/battle.go",
           "docs/spec/008-combat-field.md",
-          "docs/spec/010-combat-commands.md"
+          "docs/re/RESEARCH-LOG.md"
         ],
-        "pattern": "還要回 IDA 重讀|要回 IDA 重讀|參戰者記錄 \\+0x03 的完整語意",
-        "note": "程式與規格的自承；查清時一起改寫。"
+        "pattern": "RE-141",
+        "note": "已完成，當回歸訊號：程式、規格與研究日誌都引用 RE-141。"
       },
-      "issue": 95
+      "issue": 95,
+      "status": "done"
     },
     {
       "id": "battle-silent-steps-inventory",

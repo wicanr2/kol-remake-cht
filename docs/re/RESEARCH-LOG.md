@@ -10017,3 +10017,32 @@ SHA-256 依序為 `b4c352e5…b672`、`e7db6144…d765`、`f973c00f…18eb`，�
 45 筆寫入 `docs/i18n/town-nontext-slots.json`，每筆帶 payload 範圍、類別、證據等級
 與原文快照；`tools/verify_runtime_translation.py` 以此排除，原文變動、清單多列或
 少列都會失敗。4 筆任務續文日後若找到讀取點，應移出清單並補譯。
+
+## RE-141：穿戴欄過濾條件與 RE-118 的更正
+
+輸入同 RE-070（`KOLTOWN-unpacked.EXE`，SHA-256
+`01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2`），讀既有整份反組譯
+`workplace/analysis/koltown/KOLTOWN-unpacked.EXE.asm` 的 `sub_21E0B`。證據等級 `已證實`。
+
+### `sub_21E0B` 每一格先過濾，不過就整格跳過（`已證實`）
+
+以第一格（部位 3，`0x130`）為例，其餘三格（`0x150`／`0x170`／`0x180`）同樣結構：
+
+```
+sub_21E0B:0x21E1A  [記錄 + 0x13D] > 0x7F ?   否 → 跳到下一格（0x21E89），不呼叫 sub_21FCD
+         0x21E32   kind = sub_22376([+0x13D], 1, 2)          ; 最低兩個位元
+         0x21E5E   sub_22084(0x130, 1)
+         0x21E66   [+0x130] != 0 ? 否 → 跳到下一格
+         0x21E7A   sub_21FCD(i, kind)
+```
+
+所以只有格內 `+0x0D` 大於 0x7F 的東西才會設 `+0x03`～`+0x06`。
+
+### 對 RE-118 的更正
+
+RE-118 一方面寫「種類 byte（格內 `+0x0D`）大於 0x7F 才算有東西」，另一方面又說 Fur Boots、
+Fur Cape、Leather Cape 的種類 byte 是 0、因此走 `kind = 0` 設 `+0x04` 與 `+0x03`。前一句
+與反組譯相符，後一句不成立：種類 byte 為 0 的東西在 `0x21E1A` 就被跳過，根本不會走到
+`sub_21FCD`。原版名冊與 `ITEM.LST` 放得進這四格的東西種類 byte 都是 0，所以在現行資料下
+穿戴欄**不會**設 `+0x03`～`+0x06`；RE-118「`+0x05` 恆為 0」的結論不受影響，並擴及
+`+0x03`、`+0x04`、`+0x06`。remake 不從穿戴欄設 `Flag03` 與原版一致。

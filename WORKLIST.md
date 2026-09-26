@@ -246,11 +246,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：sub_26C5F 解出，那一句的數字報得出來。
   核實：`cmd/kol/main.go` 找得到 `那一支還沒解讀，寧可不報` 就是還沒完
 
-- **sub-21e0b-filter-contradiction**（#95） — sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值
-  RE-118 記下「種類 byte 大於 0x7F 才算有東西」，又說種類 byte 為 0 的 Fur Boots、Fur Cape、Leather Cape 走 kind 0 （設 +0x04，+0x03 為 0 就設 1）。兩句互相矛盾。若斗篷或靴子確實會設 +0x03，移動方式選單的門檻（commands.go）會變；remake 目前不設 Flag03。
-  完成條件：回 IDA 重讀 sub_21E0B 的過濾分支並改正 RE-118；依結論接上或確認 Flag03 在現行資料下恆為 0，同步 SPEC-008。
-  核實：`internal/battle/battle.go`、`docs/spec/008-combat-field.md`、`docs/spec/010-combat-commands.md` 找得到 `還要回 IDA 重讀|要回 IDA 重讀|參戰者記錄 \+0x03 的完整語意` 就是還沒完
-
 - **move-unlock-tile-reason**（#57） — 磚塊 0x0C 為什麼解鎖後三個移動方式
   `MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。
   完成條件：理由解出並寫進 SPEC-010。
@@ -366,6 +361,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **enemy-move-direction-unhooked** — 敵人移動段的方向規則：解出來了但還沒接上：已完成
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力：已完成
+- **sub-21e0b-filter-contradiction** — sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值：已完成
 - **battle-silent-steps-inventory** — 執行段裡沒有訊息就不停的那幾手：已完成
 - **sub-1aae8-params** — sub_1AAE8 的參數語意：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
