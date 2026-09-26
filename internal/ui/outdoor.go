@@ -18,7 +18,7 @@ func Outdoor(dst *ebiten.Image, sprites Sprites, small *font.Font, out *town.Out
 	}
 	draw(dst, bg, 0, 0)
 
-	if err := drawPartySlots(dst, sprites, small, out.Party); err != nil {
+	if err := drawPartySlots(dst, sprites, small, idleParty(out.Party)); err != nil {
 		return err
 	}
 
@@ -51,6 +51,17 @@ func Outdoor(dst *ebiten.Image, sprites Sprites, small *font.Font, out *town.Out
 		frame(dst, x, b.Y, b.Width, b.Height, c)
 	}
 	return nil
+}
+
+// idleParty 回傳發言者白框全部拿掉的隊伍副本。原版只在建築裡把發言者畫成白框；
+// 同一個隊伍走到戶外（town-map-edge-run1 frame-071）或野外（town-leave-run1
+// frame-131）都是藍框。發言者本身仍留在角色狀態與存檔裡，這裡只改畫法。
+func idleParty(party []town.Member) []town.Member {
+	out := append([]town.Member(nil), party...)
+	for i := range out {
+		out[i].Speaker = false
+	}
+	return out
 }
 
 // drawPartySlots 是旅店與戶外共用的隊員格：上格圖像、下格名字，整塊先填黑再畫。
@@ -156,7 +167,7 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	}
 	drawScaled(dst, bg, 0, 0, l.Scale)
 
-	for i, m := range out.Party {
+	for i, m := range idleParty(out.Party) {
 		x := l.PartyX + i*l.PartyStep
 		c := town.ColourIdle
 		if m.Speaker {

@@ -31,7 +31,7 @@ func WorldSession(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	}
 	draw(dst, bg, 0, 0)
 
-	if err := drawPartySlots(dst, sprites, small, party); err != nil {
+	if err := drawPartySlots(dst, sprites, small, idleParty(party)); err != nil {
 		return err
 	}
 	drawBox(dst, small, town.DateBox, s.Date)
@@ -182,7 +182,7 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	}
 	drawScaled(dst, bg, 0, 0, l.Scale)
 
-	for i, m := range party {
+	for i, m := range idleParty(party) {
 		x := l.PartyX + i*l.PartyStep
 		c := town.ColourIdle
 		if m.Speaker {

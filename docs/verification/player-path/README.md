@@ -63,6 +63,12 @@ plan 因此要帶齊重跑所需的每一個旗標——`full-chain-ending` 的 
 >    以軌跡判斷路徑事件、取第一顆符合原設計的（world-clock 3、world-quest 5），
 >    試過的種子與理由寫在各自的 plan 描述。world-clock 的 12 顆種子最後的時刻與時段
 >    完全相同，標籤結果不依賴種子。已重生，`world-clock` 4/4、`world-quest` 4/4 對拍通過。
+> 另外修正一個 remake 缺陷：走出建築後隊員格仍畫成發言者的白框。原版在已有發言者
+> 的狀態下，戶外（`town-map-edge-run1` frame-071）與野外（`town-leave-run1`
+> frame-131）都是藍框；改成戶外與野外一律畫閒置色，發言者仍留在角色狀態。讀存檔
+> 開場的 town-load、town-scroll、town-shop、town-stable、town-train、world-quest
+> 因此只差第一格頭像框（43×48），已重生。
+>
 > 3. **起點或流程不同**：`arena`、`flow-quest`、`full`、`full-chain`、
 >    `full-chain-ending`、`full-chain-reload`、`quest-list`、`quest-take`、`town`、
 >    `world-healer`。從標題選角後落在旅店、名冊或城鎮戶外，與舊按鍵預期的畫面不同，

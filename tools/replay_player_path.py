@@ -30,7 +30,10 @@ SPECS = pathlib.Path("workplace/tmp/replay")
 
 def spec_line(plan: dict) -> str:
     """把 plan 組成一行規格檔。旗標的順序與手寫時相同，方便逐字比對。"""
-    args = [f"{plan['shot_dir']}/step-000.png", "-scene", "flow"]
+    # 長路徑多半從標題走起（flow）；讀存檔直接在城裡開場的要在 plan 寫 `scene`，
+    # 與 check_player_paths.py 的判斷相同。
+    scene = plan.get("scene") or "flow"
+    args = [f"{plan['shot_dir']}/step-000.png", "-scene", scene]
     if plan.get("seed") is not None:
         args += ["-seed", str(plan["seed"])]
     if plan.get("load"):
@@ -42,7 +45,8 @@ def spec_line(plan: dict) -> str:
         args += ["-quest-sites", plan["quest_sites"]]
     if plan.get("monsters"):
         args += ["-monsters", plan["monsters"]]
-    args += ["-flow-script", plan["script"], "-shot-dir", plan["shot_dir"]]
+    flag = "-flow-script" if scene == "flow" else "-play-script"
+    args += [flag, plan["script"], "-shot-dir", plan["shot_dir"]]
     keep = sorted({c["step"] for c in plan.get("checkpoints", [])})
     if keep:
         args += ["-shot-steps", ",".join(str(k) for k in keep)]

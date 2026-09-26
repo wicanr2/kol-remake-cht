@@ -1,7 +1,7 @@
 {
   "name": "town-walk-and-enter",
-  "description": "城鎮的正常玩家路徑：從旅店門口走開再走回來（門口狀態）、白框移到 U-TURN 回地圖、再走回門口按 DOOR 進建築、出來之後往東南走四步再往回一步。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
-  "script": "L R > RET L R RET RET R R D D U",
+  "description": "城鎮的正常玩家路徑：從旅店門口走開再走回來（門口狀態）、白框移到 U-TURN 回地圖、再走回門口按 DOOR 進建築、讀完進門敘述聽店主招呼、白框停在 DOOR 按 RET 出來之後往東南走四步再往回一步。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "script": "L R > RET L R RET RET RET R R D D U",
   "shot_dir": "docs/verification/player-path/town",
   "size": [320, 200],
   "receipt": "docs/verification/player-path/town-receipt.json",

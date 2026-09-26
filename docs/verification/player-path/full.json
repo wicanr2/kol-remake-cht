@@ -1,8 +1,8 @@
 {
   "name": "full-chain",
-  "description": "從標題序列一路走到城鎮戶外地圖的完整遊玩路徑：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 目錄頁 6 → 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走。全程經過 flow.Flow 與各畫面自己的狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "description": "從標題序列一路走到城鎮戶外地圖的完整遊玩路徑：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 目錄頁 6 → 角色選擇清單 → 旅店（讀完進門敘述聽招呼）→ DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走。全程經過 flow.Flow 與各畫面自己的狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
   "scene": "flow",
-  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET L R RET RET R D",
+  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET RET L R RET RET RET R D",
   "shot_dir": "docs/verification/player-path/full",
   "size": [
     320,

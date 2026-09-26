@@ -1,9 +1,9 @@
 {
   "schema": "kol-player-path-v1",
   "name": "town-walk-and-enter",
-  "description": "城鎮的正常玩家路徑：從旅店門口走開再走回來（門口狀態）、白框移到 U-TURN 回地圖、再走回門口按 DOOR 進建築、出來之後往東南走四步再往回一步。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
-  "script": "L R > RET L R RET RET R R D D U",
-  "step_count": 14,
+  "description": "城鎮的正常玩家路徑：從旅店門口走開再走回來（門口狀態）、白框移到 U-TURN 回地圖、再走回門口按 DOOR 進建築、讀完進門敘述聽店主招呼、白框停在 DOOR 按 RET 出來之後往東南走四步再往回一步。全程只經過 town.Session 這個狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "script": "L R > RET L R RET RET RET R R D D U",
+  "step_count": 15,
   "checkpoints": [
     {
       "step": 2,
@@ -76,36 +76,42 @@
       "step": 8,
       "token": "RET",
       "file": "docs/verification/player-path/town/step-008.png",
-      "sha256": "334538d00801be49f2f50ac4a4ac46b0713e1709eda38077f9cdc11a67fd30ec"
+      "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
     },
     {
       "step": 9,
-      "token": "R",
+      "token": "RET",
       "file": "docs/verification/player-path/town/step-009.png",
-      "sha256": "2af52bcb084bcb107f2804db235ab8cb7d0085f71e7971d95b1bed4c07616aea"
+      "sha256": "334538d00801be49f2f50ac4a4ac46b0713e1709eda38077f9cdc11a67fd30ec"
     },
     {
       "step": 10,
       "token": "R",
       "file": "docs/verification/player-path/town/step-010.png",
-      "sha256": "4c4207e88540a74a8a25eaa7cb1c3490c15c381755c79a57fd660d3a585d569a"
+      "sha256": "2af52bcb084bcb107f2804db235ab8cb7d0085f71e7971d95b1bed4c07616aea"
     },
     {
       "step": 11,
-      "token": "D",
+      "token": "R",
       "file": "docs/verification/player-path/town/step-011.png",
-      "sha256": "c7f623e92f46c8bbf871844375273ce2b59deb34c6021d96ec140a4589a95d1e"
+      "sha256": "4c4207e88540a74a8a25eaa7cb1c3490c15c381755c79a57fd660d3a585d569a"
     },
     {
       "step": 12,
       "token": "D",
       "file": "docs/verification/player-path/town/step-012.png",
-      "sha256": "a0a69d4eb276dee858729c5a44f5512b526ad80eb73b21bc475f17746f1fd2f9"
+      "sha256": "c7f623e92f46c8bbf871844375273ce2b59deb34c6021d96ec140a4589a95d1e"
     },
     {
       "step": 13,
-      "token": "U",
+      "token": "D",
       "file": "docs/verification/player-path/town/step-013.png",
+      "sha256": "a0a69d4eb276dee858729c5a44f5512b526ad80eb73b21bc475f17746f1fd2f9"
+    },
+    {
+      "step": 14,
+      "token": "U",
+      "file": "docs/verification/player-path/town/step-014.png",
       "sha256": "531f0723af230719fa468596a2f7953861d54045cdf3aba8483e91c52474498b"
     }
   ]

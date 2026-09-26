@@ -6575,3 +6575,11 @@ frame-270 推翻了 remake 的版面：
   （world-clock 試 2…13 取 3；world-quest 試 3…14 取 5，種子 4 在第 52 步有遭遇提示而排除）。
   world-clock 12 顆種子最後 ticks=3360、time_index=1 全同。重生後路徑 28／91 步 0 失敗，
   對拍 `world-clock`、`world-quest` 各 4/4。對拍圖 step14／step15／intro 同步換新。
+- #88 續：選角後現在先進旅店敘述，舊按鍵的 `>` 落在敘述頁而無效。`full` 改成敘述 RET、
+  招呼 RET 選門出去，`town` 在招呼頁多按一次 RET 出門；門口與進門兩個檢查點仍與對拍圖
+  逐位元相同。`quest-list` 的舊 `party` 格式存檔在標題選角時用不上，改成讀檔直接在城裡
+  開場（標題段由 `full` 驗），任務一覽只重畫抬頭層依 RE-137 為正確行為。
+  `replay_player_path.py` 改為遵守 plan 的 `scene` 欄位。
+- 修正走出建築後隊員格仍畫白框：原版 frame-071（戶外）與 frame-131（野外）在有發言者時
+  都是藍框。`idleParty` 只改畫法，新增單元測試；Go 測試通過。讀存檔開場的六條收據因此
+  只差第一格頭像框而重生，`world-quest` 對拍 4/4。

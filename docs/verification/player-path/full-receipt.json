@@ -1,9 +1,9 @@
 {
   "schema": "kol-player-path-v1",
   "name": "full-chain",
-  "description": "從標題序列一路走到城鎮戶外地圖的完整遊玩路徑：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 目錄頁 6 → 角色選擇清單 → 旅店 → DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走。全程經過 flow.Flow 與各畫面自己的狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
-  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET > RET L R RET RET R D",
-  "step_count": 26,
+  "description": "從標題序列一路走到城鎮戶外地圖的完整遊玩路徑：標題 → 書本封面 → 目錄頁 → 角色選項（走過 CREATE、DELETE、HARBOR MASTER）→ 目錄頁 6 → 角色選擇清單 → 旅店（讀完進門敘述聽招呼）→ DOOR → 戶外地圖 → 門口 → 進建築 → 出來 → 續走。全程經過 flow.Flow 與各畫面自己的狀態機，沒有 direct-entry、沒有座標注入、沒有測試旗標。",
+  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET RET L R RET RET RET R D",
+  "step_count": 27,
   "checkpoints": [
     {
       "step": 21,
@@ -53,7 +53,7 @@
       "step": 5,
       "token": "RET",
       "file": "docs/verification/player-path/full/step-005.png",
-      "sha256": "21e2569d921c06565135d6d8de3c45a7bcebb45ff35abf1567685ff71613cb9f"
+      "sha256": "7e11e37556659901aecbbb44eb295920ec9e759ab6590e23d43352def3f9bf9c"
     },
     {
       "step": 6,
@@ -125,11 +125,11 @@
       "step": 17,
       "token": "RET",
       "file": "docs/verification/player-path/full/step-017.png",
-      "sha256": "670865b46cbf69673e6ce0427301ab0e89bcdada2110b15337524efbe47e572d"
+      "sha256": "9fdac495e8f9c6733b4d71514047240ef8eb7253e3347ff7b049642583bbf55f"
     },
     {
       "step": 18,
-      "token": ">",
+      "token": "RET",
       "file": "docs/verification/player-path/full/step-018.png",
       "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
     },
@@ -161,18 +161,24 @@
       "step": 23,
       "token": "RET",
       "file": "docs/verification/player-path/full/step-023.png",
-      "sha256": "334538d00801be49f2f50ac4a4ac46b0713e1709eda38077f9cdc11a67fd30ec"
+      "sha256": "c98d38a2c8a32672e90e69ad170a1479c9a33adf3eefeca812f4d721afcc9e44"
     },
     {
       "step": 24,
-      "token": "R",
+      "token": "RET",
       "file": "docs/verification/player-path/full/step-024.png",
-      "sha256": "2af52bcb084bcb107f2804db235ab8cb7d0085f71e7971d95b1bed4c07616aea"
+      "sha256": "334538d00801be49f2f50ac4a4ac46b0713e1709eda38077f9cdc11a67fd30ec"
     },
     {
       "step": 25,
-      "token": "D",
+      "token": "R",
       "file": "docs/verification/player-path/full/step-025.png",
+      "sha256": "2af52bcb084bcb107f2804db235ab8cb7d0085f71e7971d95b1bed4c07616aea"
+    },
+    {
+      "step": 26,
+      "token": "D",
+      "file": "docs/verification/player-path/full/step-026.png",
       "sha256": "856c07b4a6fba3ad3bff25f5260412011916ed69e2cceebc814fa6e4e0809ed8"
     }
   ]
