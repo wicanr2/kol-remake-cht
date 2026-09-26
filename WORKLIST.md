@@ -91,7 +91,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
-- **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）
+- **begin-round-flee-icon**（#98） — 「Begin next round?」那一列的逃走格（0x30）
   原版整輪規劃完印記錄 0x108，圖示列是 YES、U-TURN，`word_345DE == 0xFFFF`（競技場與訓練戰以外的所有戰鬥，含任務戰鬥）再加一格 0x30（`sub_1E3A8` 的 `loc_1FB5F`）。選它印記錄 0x109「Do you want to flee?」，答 y 後從 `0x1FC01` 起逐名以參戰者記錄 `+0x0C`、`+0x08`、`+0x02` 算機率並擲 `rand(100)`。remake 的這一列一律只有 YES 與 U-TURN，逃走只有戰場邊緣那一條（RE-103）。
   完成條件：讀完 `0x1FBAD`…`0x1FD1E` 的逃走判定與成敗後續、寫進 SPEC-014 升 READY，接上 0x30 並以機制收據驗證（競技場不出現、一般與任務戰鬥出現、成敗兩條）。
   核實：`internal/battle/planning.go` 找得到 `remake 還沒接，見工作項 begin-round-flee-icon` 就是還沒完
