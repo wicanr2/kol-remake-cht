@@ -1,49 +1,149 @@
 {
-  "schema": "kol-battle-spell-observation-v1",
-  "name": "battle-spell",
-  "kind": "observation",
-  "description": "施法整條路徑（SPEC-012）。Warder 從城 7 出城往東走九十步被伏擊，第一回合先把手上的射擊武器丟掉——**原版有武器就不放出施法那一格**（`0x22A82`）——第二回合指令列上才出現施法，接著走「Which Spell?」→「Select Affect」→ 選目標格，執行段印出施法與效果兩句。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
-  "not_claimed": [
+ "schema": "kol-battle-mechanics-v1",
+ "name": "battle-spell",
+ "kind": "observation",
+ "description": "施法整條路徑（SPEC-012）。Warder 從城 7 出城往東走，第一次時段變換遇到 BRIGAND（受控骰值指定遭遇，戰場照種子），第一回合先把手上的弓丟掉——**原版有武器就不放出施法那一格**（`0x22A82`）——第二回合指令列上才出現施法，接著走「Which Spell?」→「Select Affect」→ 選目標格，執行段印出施法與效果兩句。收據驗的是這幾件事的機制，畫格只作示意（2026-09-26 定案）。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版沒有取到對應的畫格。兩張清單的內部版面（第一行的位置與游標的樣子）在 SPEC-012 標為未對拍，與戰利品那張清單卡在同一件事（`sub_1AAE8` 的參數語意）。"
+  },
+  {
+   "name": "法術真的改了什麼",
+   "reason": "Warder 唯一的法術 Vartwelyrmi 是效果 5（疲勞）。疲勞那一條鏈已經接上了（RE-130／RE-131），但這一份收據的畫格是接上之前錄的，畫面上看不出數值差別——效果 5 只動疲勞那一格，它不畫在畫面上。**選部位那一次互動也走不到**：那要效果 6 而且不用選目標格的法術，十六名原版角色都沒有（SPEC-012 第 8 節）。"
+  }
+ ],
+ "command": "tools/run_kol_shots.sh docs/verification/battle-spell/replay.spec（存檔先用 tools/import_original_characters.py --names Warder 重生）",
+ "seed": 141421,
+ "size": [
+  320,
+  200
+ ],
+ "frames": [
+  {
+   "file": "which-spell.png",
+   "step": 40,
+   "shows": "WHICH SPELL? ＋ VARTWELYRMI——清單蓋在裝備欄那個框上，標題由記錄 0x104 自帶的 ~H03~V07 定位。",
+   "sha256": "6f5844021733923155c52a135f5bcff005781ffb64ce55a10e86760fe82ef3b2",
+   "run": 0,
+   "check": 3
+  },
+  {
+   "file": "select-affect.png",
+   "step": 41,
+   "shows": "SELECT AFFECT ＋ POSITIVE／NEGATIVE（記錄 0x105 與 0x106／0x107）。",
+   "sha256": "8dfde364a95e96fad9146ce3dc0ecb26eefa221a06742dc7922211c61749d34d",
+   "run": 0,
+   "check": 4
+  },
+  {
+   "file": "casts.png",
+   "step": 45,
+   "shows": "WARDER CASTS VARTWELYRMI AT WARDER.——`|S` 展開成法術名字。目標是自己，因為腳本沒有移動選目標格的游標。",
+   "sha256": "726c1e240b857d19cda05893c90c7d6416e5319b73d88294966b92cdc86fe2d2",
+   "run": 0,
+   "check": 5
+  },
+  {
+   "file": "effect.png",
+   "step": 46,
+   "shows": "THE SPELL HAS A MARKEDLY NEGATIVE EFFECT.——強度形容詞由 min(強度 ÷ 8, 3) 選，方向由 +0x27 決定；中間那個空白是程式印的，不在任何一筆記錄裡。",
+   "sha256": "cf4987398a094eda98053b8a1f8408306a03f4438642379216e7a7cc87353b27",
+   "run": 0,
+   "check": 6
+  }
+ ],
+ "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+ "runs": [
+  {
+   "name": "丟武器後施法",
+   "checks": [
     {
-      "name": "與原版的畫面一致",
-      "reason": "原版沒有取到對應的畫格。兩張清單的內部版面（第一行的位置與游標的樣子）在 SPEC-012 標為未對拍，與戰利品那張清單卡在同一件事（`sub_1AAE8` 的參數語意）。"
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": -1
+      }
+     },
+     "time_part_change": true,
+     "note": "時段變換那一步被伏擊"
     },
     {
-      "name": "法術真的改了什麼",
-      "reason": "Warder 唯一的法術 Vartwelyrmi 是效果 5（疲勞）。疲勞那一條鏈已經接上了（RE-130／RE-131），但這一份收據的畫格是接上之前錄的，畫面上看不出數值差別——效果 5 只動疲勞那一格，它不畫在畫面上。**選部位那一次互動也走不到**：那要效果 6 而且不用選目標格的法術，十六名原版角色都沒有（SPEC-012 第 8 節）。"
+     "find": {
+      "battle": {
+       "exec_text": {
+        "$re": "^Warder drops his "
+       }
+      }
+     },
+     "note": "第一回合丟掉手上的武器"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 2,
+       "round": 2,
+       "prompt": 0,
+       "bar": [
+        7,
+        41,
+        13,
+        38,
+        39,
+        5
+       ]
+      }
+     },
+     "note": "第二回合指令列出現施法那一格（0x0D）"
+    },
+    {
+     "find": {
+      "battle": {
+       "prompt": 6
+      }
+     },
+     "note": "Which Spell?（記錄 0x104）"
+    },
+    {
+     "find": {
+      "battle": {
+       "prompt": 7
+      }
+     },
+     "within": 1,
+     "note": "Select Affect（記錄 0x105 與 0x106／0x107）"
+    },
+    {
+     "find": {
+      "battle": {
+       "exec_text": {
+        "$re": "^Warder casts \\S+ at"
+       }
+      }
+     },
+     "note": "施法那一句，|S 展開成法術名字"
+    },
+    {
+     "find": {
+      "battle": {
+       "exec_text": {
+        "$re": "^The spell has a "
+       }
+      }
+     },
+     "within": 1,
+     "note": "效果那一句：強度形容詞與正負方向"
     }
-  ],
-  "command": "tools/run_kol_shots.sh docs/verification/battle-spell/replay.spec（存檔先用 tools/import_original_characters.py --names Warder 重生）",
-  "seed": 141421,
-  "size": [
-    320,
-    200
-  ],
-  "frames": [
-    {
-      "file": "which-spell.png",
-      "step": 109,
-      "shows": "WHICH SPELL? ＋ VARTWELYRMI——清單蓋在裝備欄那個框上，標題由記錄 0x104 自帶的 ~H03~V07 定位。",
-      "sha256": "98002bd413c8064e24c10d17b181bffb050787beb12b47b53cf485bee1f55a16"
-    },
-    {
-      "file": "select-affect.png",
-      "step": 110,
-      "shows": "SELECT AFFECT ＋ POSITIVE／NEGATIVE（記錄 0x105 與 0x106／0x107）。",
-      "sha256": "77dac120e7fa99fa2942224870a85bef64888f3eaf1076b5e48f1b582cb4e327"
-    },
-    {
-      "file": "casts.png",
-      "step": 116,
-      "shows": "WARDER CASTS VARTWELYRMI AT WARDER.——`|S` 展開成法術名字。目標是自己，因為腳本沒有移動選目標格的游標。",
-      "sha256": "17e3a4f8fd822fb4f5d8ca0b8f0b87ee596eb2342bc68f587786a3640a48594c"
-    },
-    {
-      "file": "effect.png",
-      "step": 117,
-      "shows": "THE SPELL HAS A MARKEDLY NEGATIVE EFFECT.——強度形容詞由 min(強度 ÷ 8, 3) 選，方向由 +0x27 決定；中間那個空白是程式印的，不在任何一筆記錄裡。",
-      "sha256": "7a41048ad1f9c843602e272331bc33f07208e763486a88da150fc59946295048"
-    }
-  ],
-  "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。"
+   ],
+   "found": [
+    26,
+    32,
+    35,
+    40,
+    41,
+    45,
+    46
+   ]
+  }
+ ]
 }

@@ -6649,3 +6649,8 @@ frame-270 推翻了 remake 的版面：
   第三回合瞄準射擊，驗敵人射擊、傷害鏈、目標格模式與玩家射擊；射進樹裡由 missile_test.go 支撐。
   `battle-pickup` 伏擊照種子自然發生（TROLL），驗丟 → 指令列出現撿 → 問句 → 答是／答否兩條分支
   的第三回合指令列。重跑工具一律帶 `-trace-detail`。
+- #97 結案：`battle-rideaway` 受控骰值依 `RollAmbush` 擲骰順序加上騎走那一骰（`-ambush-rolls` 改為
+  同時接遭遇擲點與騎走判定），驗跑不掉接開打／跑掉回野外；`battle-spell` 以受控骰值指定 BRIGAND，
+  驗丟武器後才出現施法與選法術、選正負、施法、效果；`battle-spoils` 路上遭遇受控不成立，驗打贏、
+  獎勵、戰利品清單。軌跡加記野外提示頁文字（`prompt_lines`）。Go 測試通過，
+  `replay_battle_receipts.py --all` 七份全數通過。

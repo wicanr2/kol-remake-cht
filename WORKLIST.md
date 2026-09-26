@@ -184,11 +184,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。
   核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
 
-- **battle-receipts-stale**（#97） — 七份戰鬥短收據對不上現行程式
-  2026-09-26 `tools/replay_battle_receipts.py --all`：battle-ambush、battle-flee、battle-missile、battle-pickup、battle-rideaway、battle-spell、battle-spoils 全數對不上或跑不起來。成因與 #88 相同：天候重擲接在遭遇之前（SPEC-011 §1），同一顆種子在往東那段路上的遭遇不同，後面的按鍵整串錯位。ambush、rideaway、pickup 要驗的是野外遭遇本身；flee、missile、spell、spoils 在任務地點開打，路上的遭遇是干擾，但戰場裡的結果也靠種子。重生前要先定亂數處理原則。
-  完成條件：七份逐一以現行程式重生或改寫，`replay_battle_receipts.py --all` 全數通過；收據寫明種子與受控亂數的用法。
-  核實：要人判——`replay_battle_receipts.py --all` 全數通過才算完成；重跑要數十分鐘，不綁 pattern。
-
 - **quest-turnin-original-same-state**（#93） — 任務物品交付的原版同狀態與自然玩家鏈
   RE-139 的 IDA 控制流與重製版觀察存檔 GUI 已覆蓋兩次 SPACE、第一件物品交換及全隊回報。原版同狀態畫格／狀態、自然接任務與取得物品，以及回報後保存／重載尚缺。SPEC-014 維持 READY。
   完成條件：以原版與重製版可比初態驗證兩次按鍵、原始物品記錄、六名角色旗標及回報數，再完成自然取得到保存／重載的正常玩家鏈；附版本、輸入、亂數條件與收據後才將 SPEC-014 對應範圍升 CONFORMED。
@@ -392,6 +387,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **cjk-sheet-subpages** — 資料頁的坐騎與頂端隊員格的中文版面：docs/verification/cjk-ui/stable-six-page-receipt.json；六張繁中畫格及逐位元相同的英中軌跡。
 - **screenshot-png-nondeterminism** — 重生截圖會讓無關的英文圖出現 diff：2026-09-26 鎖定映像下以 run_kol_shots.sh 把 shots.spec 全部 46 行各跑兩次，46 張逐位元相同，重生是決定性的；「內容相同但位元不同」無法重現。與 docs/screenshots 收據不同的 9 張全是內容真的改變：en-newchar-picture／stats 為擲骰對上原版後同 seed 數值不同，en-world-map／town 為 SPEC-026 捲雲位置，zh-book-cover／roster／delete、zh-town-items／sheet 為本週中文化。判準（有對拍收據者須逐位元相同）不必改；這 9 張依使用者指示待整體驗收後隨 README 一併重生。
 - **player-path-receipts-stale** — 正常玩家路徑的收據對不上現在的程式：已完成
+- **battle-receipts-stale** — 七份戰鬥短收據對不上現行程式：已完成
 - **path-verify-does-not-replay** — 路徑驗證只看收據自洽，不重跑：2026-09-11 做了 `tools/check_player_paths.py`：重跑到 workplace/replay-check/ 再與收據逐 byte 比，不覆寫。第一次跑就抓到 10 條對不上。`verify_full_path.py` 保留原用途（驗收據自洽），兩支分工不同。
 - **cjk-battle-remaining-pages** — 補戰後戰利品清單的繁中正常路徑畫格：法術／效果兩頁及戰利品 Items Found／Characters 兩頁均已擷取並目視檢查。戰利品由 seed 39 固定輸入在重製版正常按鍵路徑第 22 回合勝利後取得；收據含輸入、程式雜湊、PNG／trace 雜湊與觀察用資料限制。本項只驗中文版面；完整戰鬥、原版同狀態與正式封包另列未完成。
 - **town-untranslated-source-slot-reachability** — 城鎮 45 個未譯來源槽位的全域可達性與中文處置：2026-09-25 RE-140：訊息槽位與建築 payload 共用 DGROUP:0x1CF4，45 筆分為 40 筆馬廄坐騎記錄（已證實）、1 筆商店殘留資料（強推論）、4 筆無讀取點的任務續文（強推論）。依使用者選定處置不翻譯，列入 docs/i18n/town-nontext-slots.json 並綁原文快照；嚴格檢查 2,076 則 0 缺譯、另排除 45 筆，三個負例皆失敗。

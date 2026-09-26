@@ -1190,6 +1190,10 @@ func (g *game) snapshot() map[string]any {
 				case world.PromptHealing:
 					w["heal_prompt"] = true
 				}
+				// 提示頁印的是哪幾行：收據驗機制時要分得出跑掉（0xE4）還是跑不掉（0xE5）。
+				if len(p.Lines) > 0 {
+					w["prompt_lines"] = p.Lines
+				}
 			}
 		}
 		row["world"] = w
@@ -2561,7 +2565,7 @@ func main() {
 	script := flag.String("script", "", "以空白分隔的操作腳本；每一步後截一張圖")
 	seed := flag.Int("seed", 1, "亂數種子，供可重播的屬性擲骰與標題序列使用")
 	ambushRolls := flag.String("ambush-rolls", "",
-		"測試用受控亂數：以逗號分隔，依序當作野外遭遇擲點（RollAmbush）的骰值，用完回到種子亂數")
+		"測試用受控亂數：以逗號分隔，依序當作野外遭遇擲點（RollAmbush）與騎走判定的骰值，用完回到種子亂數")
 	titlePath := flag.String("title-sequence", "docs/re/title-sequence.json",
 		"標題序列腳本（由 RE-047 從 TITLE.EXE 的 _main 轉寫）")
 	titleShots := flag.String("title-shot-dir", "", "把標題序列一輪的每個畫面輸出到這個目錄")
@@ -3498,6 +3502,20 @@ func main() {
 			}
 			// healScene 是治療那一條走近之後那一頁（`0x2A719`）：印第
 			// `Scene + 1` 段，第 4 段那一組只等一個鍵，其餘接記錄 0xE6 的問句。
+			// 受控亂數（測試用）：接在遭遇擲點與騎走判定上，兩者同屬 `sub_2A4E5` 那一段。
+			ambushScript, err := parseScriptedRolls(*ambushRolls)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(2)
+			}
+			wildRand := func() battle.Rand {
+				rng := battle.Rand(worldSessionState.Rand)
+				if ambushScript != nil {
+					ambushScript.next = rng
+					rng = ambushScript
+				}
+				return rng
+			}
 			healScene := func(a *battle.Ambush) {
 				lines := healScenes.Scene(a.Scene + 1)
 				if a.Scene == battle.HealerNoAskScene {
@@ -3543,8 +3561,7 @@ func main() {
 						startAmbush(a)
 						return
 					}
-					if battle.RideAway(a.Monster, worldScreenState.Movement,
-						worldSessionState.Rand) {
+					if battle.RideAway(a.Monster, worldScreenState.Movement, wildRand()) {
 						ride, heal = nil, nil
 						notice(battle.RodeAwayRecord)
 						return
@@ -3619,11 +3636,6 @@ func main() {
 			}
 			// 野外的隨機遭遇：時段一變就擲一次（SPEC-011）。走進某一格不會擲，
 			// 所以一天最多四次。
-			ambushScript, err := parseScriptedRolls(*ambushRolls)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				os.Exit(2)
-			}
 			worldSessionState.OnTimePart = func() {
 				if quest.state != nil || worldScreenState == nil {
 					return
@@ -3632,11 +3644,7 @@ func main() {
 				if c == nil || worldSessionState.Rand == nil {
 					return
 				}
-				rng := battle.Rand(worldSessionState.Rand)
-				if ambushScript != nil {
-					ambushScript.next = rng
-					rng = ambushScript
-				}
+				rng := wildRand()
 				ranks := make([]int, 0, len(playSession.Party))
 				for _, m := range playSession.Party {
 					if m.Sheet != nil {

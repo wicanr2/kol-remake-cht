@@ -21,7 +21,7 @@ GitHub Issue 狀態與本地 Markdown；README 截圖仍留待整體驗收完成
 [手冊功能與繁中收尾稽核](docs/verification/manual-fidelity-audit-20260923.md)。
 遠端 Issue #86、#90 已依局部版面收據關閉；#92 的 45 個來源槽位已由 RE-140 結案並關閉，
 #93 追蹤任務交付的原版同狀態與自然玩家鏈。#14、#33、#34、#35 仍開放；
-`docs/worklist.json` 目前為 60 項未完成、36 項已完成（#45、#92 已於 2026-09-25 完成並關閉遠端 Issue）。
+`docs/worklist.json` 目前為 59 項未完成、37 項已完成（#45、#92 已於 2026-09-25 完成並關閉遠端 Issue）。
 
 - 本輪以原始城鎮資料為母體，新增 `tools/verify_runtime_translation.py`；建角表
   99 筆建角／共用 UI 字串均有中文，六個精靈部族名改用術語表暫譯。城鎮 2,121 則非空後續訊息
@@ -131,9 +131,9 @@ Issue #91「物品頁選中之後的明細畫面與原版不同」已完成。SP
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **60 條未完成**（27 條沒有機器訊號、標 `manual`），
-  另有 36 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`present` 32、`manual` 27、`absent` 1。
+- 目前 **59 條未完成**（26 條沒有機器訊號、標 `manual`），
+  另有 37 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`present` 32、`manual` 26、`absent` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
   （base 為 `origin/main`，`5f9a9a1`，已推送到 `origin/kol-oracle`）。舊的 `kol-force-call` 已刪除——它的 commit

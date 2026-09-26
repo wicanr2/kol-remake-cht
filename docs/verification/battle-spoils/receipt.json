@@ -1,8 +1,8 @@
 {
- "schema": "kol-battle-spoils-observation-v1",
+ "schema": "kol-battle-mechanics-v1",
  "name": "battle-spoils",
  "kind": "observation",
- "description": "打贏一場之後的獎勵與戰利品畫面（RE-096）。冒險點數、金冠、「Items Found:」清單與領取都走正常玩家路徑的按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過**：第 5 個任務地點原本是十二隻 3 級 BINDERAK，單人隊伍打不贏，所以改用兩份觀察用替代檔（見 substituted_inputs）把它換成一隻壓弱的怪。因此這一組**不是對原版的 parity 宣稱**，只證明 remake 這條路徑走得通、數字算得出來、畫面畫得出來。",
+ "description": "打贏一場之後的獎勵與戰利品畫面（RE-096）。冒險點數、金冠、「Items Found:」清單與領取都走正常玩家路徑的按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過**：第 5 個任務地點原本是十二隻 3 級 BINDERAK，單人隊伍打不贏，所以改用兩份觀察用替代檔（見 substituted_inputs）把它換成一隻壓弱的怪。因此這一組**不是對原版的 parity 宣稱**，只證明 remake 這條路徑走得通、數字算得出來、畫面畫得出來。路上的遭遇以 `-ambush-rolls` 讓它不成立；收據驗的是勝負、獎勵與戰利品清單的機制，金冠與掉落物由種子決定、不綁定，畫格只作示意（2026-09-26 定案）。",
  "not_claimed": [
   {
    "name": "與原版的畫面一致",
@@ -39,22 +39,96 @@
    "file": "victory.png",
    "step": 104,
    "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）",
-   "sha256": "d5126f98b2cd3d3245b095bc94da8ef5fb02d329fe00b9fc74453c1aa7cab7c8"
+   "sha256": "e68f8c0681c3547840b8c2547d58ba3e05496d10812114b33e398e65066dbbaf",
+   "run": 0,
+   "check": 2
   },
   {
    "file": "reward.png",
    "step": 105,
    "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 127 GOLD CROWNS!——單人隊伍不印 Each player，改逐句接（RE-096）。",
-   "sha256": "ca7cceec0347ade497d2e101199f3164f7cfc3ad54e8bdeaaf17403eee18ce32"
+   "sha256": "9fc7e3603007200074391a8f1fb6574d2d62692a3d1dc9d24a83e5959e60d1ef",
+   "run": 0,
+   "check": 3
   },
   {
    "file": "items-found.png",
    "step": 106,
    "shows": "戰利品清單：框在 (4,7) 125×146，標題 ITEMS FOUND: 由記錄自帶的 ~H02~V09 定位；清單從行 1（x = 8）、列 0x13 起，行距 8，一行 PLATEMAIL。選中那一列是換文字顏色（亮白，其餘青），不是框起來——原版的清單元件用 `sub_1B033` 重畫整列。底下那一條換成兩格圖示（YES ＋ U-TURN，白框在第 0 格），連帶把報獎勵那張卷軸蓋掉——圖示列與卷軸在原版佔同一塊 (8, 0xA4) 296×32（RE-115）。",
-   "sha256": "e01a905788ceea784fdfd3dbff6e64511798d86650fcf9d4d6c9e2d9578554ed"
+   "sha256": "4b47af083e17308fcf0ac41ac10b61325568669784737a5368226f38c073c97a",
+   "run": 0,
+   "check": 4
   }
  ],
  "rights": "remake 自己畫的畫面，不含原版素材的直接複製；字模與圖示來自已通過權利審查的原作衍生 PNG。",
  "substituted_inputs_tool": "tools/make_observation_inputs.py",
- "script": "腳本見 command（`workplace/` 不進版控）"
+ "script": "腳本見 command（`workplace/` 不進版控）",
+ "runs": [
+  {
+   "name": "任務地點打贏一隻",
+   "checks": [
+    {
+     "find": {
+      "world": {
+       "quest_prompt": true
+      }
+     },
+     "note": "踏上第 5 個任務地點"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": 5
+      }
+     },
+     "within": 1,
+     "note": "答應參戰"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 5,
+       "verdict": 2,
+       "exec_text": {
+        "$re": "^You have defeated The"
+       }
+      }
+     },
+     "note": "打贏那一句（單隻不補複數後綴）"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 5,
+       "exec_text": {
+        "$re": "^Poontang receives \\d+ adventure"
+       }
+      }
+     },
+     "within": 1,
+     "note": "單人隊伍不印 Each player，冒險點數與金冠逐句接（RE-096）"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 4,
+       "spoil_lines": {
+        "$re": "."
+       }
+      }
+     },
+     "within": 2,
+     "note": "Items Found: 戰利品清單"
+    }
+   ],
+   "found": [
+    89,
+    90,
+    104,
+    105,
+    106
+   ]
+  }
+ ]
 }
