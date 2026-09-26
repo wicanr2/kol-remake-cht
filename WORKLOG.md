@@ -6570,3 +6570,8 @@ frame-270 推翻了 remake 的版面：
   登 `sub-21e0b-filter-contradiction`；`battleStep` 跳過無訊息手的迴圈理由已過時，登
   `battle-silent-steps-inventory`。main.go、battle.go 只改註解，Go 測試通過。
 - #88 README 的 world-clock 處置改引 SPEC-011 §9 既有前例（不驗遭遇的路徑可另選種子並寫明理由）。
+- #88 續：world-clock、world-quest 原種子因天候重擲位移而遇到遭遇。依 SPEC-011 §9 前例，
+  以多行規格一次跑多顆種子並輸出軌跡，從原種子往上取第一顆路徑事件符合原設計的
+  （world-clock 試 2…13 取 3；world-quest 試 3…14 取 5，種子 4 在第 52 步有遭遇提示而排除）。
+  world-clock 12 顆種子最後 ticks=3360、time_index=1 全同。重生後路徑 28／91 步 0 失敗，
+  對拍 `world-clock`、`world-quest` 各 4/4。對拍圖 step14／step15／intro 同步換新。
