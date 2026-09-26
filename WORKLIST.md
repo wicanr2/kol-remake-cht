@@ -190,9 +190,9 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
 
 - **player-path-receipts-stale**（#88） — 正常玩家路徑的收據對不上現在的程式
-  2026-09-26 重跑 25 條並逐條處理：已一致或已重生 19 條（含 town、full、quest-list、quest-take 改寫，world-clock、world-quest 依 SPEC-011 §9 重選種子）。過程中修正兩個缺陷：走出建築後隊員格仍畫白框、讀檔後選角停在名冊。剩 6 條：world-healer 原種子已擲不到治療（要驗的就是亂數遭遇，換種子需決策）；flow-quest 的前提（標題流程沿用讀檔隊伍）已不成立；full-chain、full-chain-reload、full-chain-ending、arena 從標題起跑但依賴讀檔隊伍，需改成讀檔開場並以 drive_battle_script.py 重生戰鬥段。分類與證據見 docs/verification/player-path/README.md。
+  2026-09-26 已重生或改寫 24 條，其中修正兩個 remake 缺陷（出建築後頭像白框、讀檔後選角停在名冊）、撤下 flow-quest、world-healer 與 full-chain 依使用者決定改用受控亂數。剩 arena：現行程式下種子 1 的路上伏擊與競技場那一場都敗北（沒有升階），要以自然結果重生還是另作處理待使用者決定。README 的「收據與現行程式的對應」記錄現行做法。
   完成條件：逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。
-  核實：`docs/verification/player-path/README.md` 找得到 `收據過期` 就是還沒完
+  核實：`docs/verification/player-path/README.md` 找得到 `收據重生中` 就是還沒完
 
 - **quest-turnin-original-same-state**（#93） — 任務物品交付的原版同狀態與自然玩家鏈
   RE-139 的 IDA 控制流與重製版觀察存檔 GUI 已覆蓋兩次 SPACE、第一件物品交換及全隊回報。原版同狀態畫格／狀態、自然接任務與取得物品，以及回報後保存／重載尚缺。SPEC-014 維持 READY。
