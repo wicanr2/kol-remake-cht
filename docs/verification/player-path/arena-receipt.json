@@ -1,18 +1,39 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "arena",
- "description": "從標題按下去，出城走到世界地圖 (55,13) 的競技場，選 Moraine 上場、進賭場下兩注、打完升一階並結算賭金（RE-108）。那一格與城鎮入口走同一個版面：DOOR 進場、U-TURN 留在野外。進去先看誰夠格——帳面位階與實得位階不同、而且帳面還沒到 24 才算；隊伍多人就印「Which one wishs to fight?」讓玩家選，選好再問「Are you sure you wish to enter?」。多人隊伍答應之後先換到賭場：「A Gambling Booth／The Bet Taker」，金額讀兩位數（上限 99），押他會贏寫正值、押他會輸寫負值再多講一句「Good friends, eh?」，答否才開打。**場上只有上場那一名**：其餘五名排到觀眾席、記錄 `+0x01` 設成 2 不參戰，上場那一名與唯一那隻對手各站一格固定的（RE-098 的第三條分支）。對手一隻，等級是上場那一名的實得位階加一。打贏印「you have gained a level!」，帳面位階加一——**一次只加一級**，所以帳面追上實得要打好幾場；賭金接在升階後面結算，押中的加進那一名的錢包。路上還打贏了兩場伏擊。**輸入被換過**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。",
+ "description": "讀存檔在霍布入城點 7 那一區開場，出城走到世界地圖 (55,13) 的競技場，選 Moraine 上場、進賭場下兩注、開打並結算賭金（RE-108）。那一格與城鎮入口走同一個版面：DOOR 進場、U-TURN 留在野外。進去先看誰夠格——帳面位階與實得位階不同、而且帳面還沒到 24 才算；隊伍多人就印「Which one wishs to fight?」讓玩家選，選好再問「Are you sure you wish to enter?」。多人隊伍答應之後先換到賭場：「A Gambling Booth／The Bet Taker」，金額讀兩位數（上限 99），押他會贏寫正值、押他會輸寫負值再多講一句「Good friends, eh?」，答否才開打。**場上只有上場那一名**：其餘五名排到觀眾席、記錄 `+0x01` 設成 2 不參戰，上場那一名與唯一那隻對手各站一格固定的（RE-098 的第三條分支）。對手一隻，等級是上場那一名的實得位階加一。打贏印「you have gained a level!」，帳面位階加一——**一次只加一級**，所以帳面追上實得要打好幾場；賭金接在升階後面結算，押中的加進那一名的錢包。**輸入被換過**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。讀存檔開場、不經過標題（標題選角會以名冊角色重新組隊；標題段由 `full` 驗）。野外與兩場戰鬥由 `tools/drive_battle_script.py` 依軌跡重生，結果照種子 1 自然發生（使用者 2026-09-26 決定）：路上那一場 WALBAR 伏擊敗北，競技場那一場 Moraine 對 TROLL 也敗北，**所以這條收據展示的是輸的分支**——沒有升階，賭金整排先取負再結算：Poontang 押她會贏輸 25（214 → 189）、Fighting Bull 押她會輸贏 10（442 → 452）。打贏升一階那一句由 RE-108 與單元測試支撐，不由這條收據展示。",
  "seed": 1,
  "load": "workplace/observe/arena-ready.json",
- "token_count": 2973,
+ "token_count": 2606,
  "trace": "docs/verification/player-path/arena/trace.json",
- "trace_sha256": "552d8639c42abdff9fbb54e373dcbbb64fc2d461ff66ba4e6b26a662cb4165c0",
+ "trace_sha256": "a3cec73366c1f7a129f6d525b8cfcb07523a8e16bbfb697721d946d434d26456",
  "milestones": [
   {
-   "step": 64,
+   "step": 0,
+   "token": "（起始）",
+   "note": "讀檔開場：城鎮戶外地圖（入城點 7 那一區）",
+   "scene": "play",
+   "town": {
+    "left_town": false,
+    "mode": 0,
+    "party": [
+     "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
+    "town": 7,
+    "x": 56,
+    "y": 24
+   }
+  },
+  {
+   "step": 45,
    "token": "RET",
    "note": "出城",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -33,10 +54,10 @@
    }
   },
   {
-   "step": 77,
+   "step": 70,
    "token": "X",
-   "note": "路上第一場伏擊",
-   "scene": "flow:town",
+   "note": "路上的伏擊（WALBAR）",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -48,15 +69,15 @@
     "day": 1,
     "mode": 0,
     "month": 4,
-    "sub_x": 0,
-    "sub_y": 0,
-    "ticks": 3316,
-    "time_index": 1,
-    "x": 44,
-    "y": 11
+    "sub_x": 4,
+    "sub_y": 4,
+    "ticks": 2500,
+    "time_index": 2,
+    "x": 45,
+    "y": 12
    },
    "battle": {
-    "monster": "BINDERAK",
+    "monster": "WALBAR",
     "prompt": 0,
     "quest_done": 0,
     "roster": [
@@ -66,9 +87,12 @@
      "3 Kenneth party 31,32 head=17 chest=17",
      "4 Sharakan party 33,34 head=17 chest=17",
      "5 Olear party 31,34 head=15 chest=15",
-     "6 BINDERAK foe 28,32 head=15 chest=15",
-     "7 BINDERAK foe 28,30 head=15 chest=15",
-     "8 BINDERAK foe 28,34 head=15 chest=15"
+     "6 WALBAR foe 28,32 head=18 chest=18",
+     "7 WALBAR foe 28,30 head=18 chest=18",
+     "8 WALBAR foe 28,34 head=18 chest=18",
+     "9 WALBAR foe 28,28 head=18 chest=18",
+     "10 WALBAR foe 27,31 head=18 chest=18",
+     "11 WALBAR foe 27,29 head=18 chest=18"
     ],
     "round": 0,
     "site": -1,
@@ -78,10 +102,10 @@
    }
   },
   {
-   "step": 1496,
+   "step": 1969,
    "token": "SPACE",
-   "note": "打贏第一場",
-   "scene": "flow:town",
+   "note": "那一場敗北，回到野外",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -93,140 +117,46 @@
     "day": 1,
     "mode": 0,
     "month": 4,
-    "sub_x": 0,
-    "sub_y": 0,
-    "ticks": 3316,
-    "time_index": 1,
-    "x": 44,
-    "y": 11
+    "sub_x": 4,
+    "sub_y": 4,
+    "ticks": 2500,
+    "time_index": 2,
+    "x": 45,
+    "y": 12
    },
    "battle": {
     "exec_text": [
-     "You have defeated The",
-     "BINDERAKS!"
+     "The WALBARs have defeated you!"
     ],
-    "monster": "BINDERAK",
+    "monster": "WALBAR",
     "prompt": 10,
     "quest_done": 0,
     "roster": [
-     "0 Poontang party 29,29 head=5 chest=16",
-     "1 Moraine party 31,32 head=15 chest=15",
-     "2 Fighting Bull party 30,30 head=14 chest=14",
-     "3 Kenneth party 30,31 head=17 chest=17",
-     "4 Sharakan party 30,32 head=0 chest=0 down",
-     "5 Olear party 29,33 head=0 chest=0 down",
-     "6 BINDERAK foe 27,32 head=15 chest=0 down",
-     "7 BINDERAK foe 28,31 head=15 chest=0 down",
-     "8 BINDERAK foe 31,31 head=15 chest=0 down"
+     "0 Poontang party 28,30 head=0 chest=0 down",
+     "1 Moraine party 30,31 head=0 chest=0 down",
+     "2 Fighting Bull party 31,30 head=0 chest=0 down",
+     "3 Kenneth party 30,32 head=17 chest=0 down",
+     "4 Sharakan party 27,33 head=0 chest=0 down",
+     "5 Olear party 29,32 head=0 chest=9 down",
+     "6 WALBAR foe 29,34 head=18 chest=0 down",
+     "7 WALBAR foe 29,34 head=18 chest=2",
+     "8 WALBAR foe 31,31 head=18 chest=0 down",
+     "9 WALBAR foe 30,30 head=18 chest=0 down",
+     "10 WALBAR foe 29,33 head=12 chest=5",
+     "11 WALBAR foe 30,33 head=18 chest=13"
     ],
-    "round": 15,
+    "round": 26,
     "site": -1,
     "stage": 5,
-    "turn": 9,
-    "verdict": 2
+    "turn": 12,
+    "verdict": 1
    }
   },
   {
-   "step": 1564,
-   "token": "R",
-   "note": "第二場伏擊",
-   "scene": "flow:town",
-   "town": {
-    "left_town": true,
-    "mode": 0,
-    "town": 7,
-    "x": 56,
-    "y": 16
-   },
-   "world": {
-    "day": 2,
-    "mode": 0,
-    "month": 4,
-    "sub_x": 1,
-    "sub_y": 0,
-    "ticks": 3316,
-    "time_index": 1,
-    "x": 52,
-    "y": 13
-   },
-   "battle": {
-    "monster": "GREMLIN",
-    "prompt": 0,
-    "quest_done": 0,
-    "roster": [
-     "0 Poontang party 33,30 head=16 chest=16",
-     "1 Moraine party 31,30 head=15 chest=15",
-     "2 Fighting Bull party 33,32 head=14 chest=14",
-     "3 Kenneth party 31,32 head=17 chest=17",
-     "4 Sharakan party 33,34 head=17 chest=17",
-     "5 Olear party 31,34 head=15 chest=15",
-     "6 GREMLIN foe 31,27 head=10 chest=10",
-     "7 GREMLIN foe 33,27 head=10 chest=10",
-     "8 GREMLIN foe 29,27 head=10 chest=10",
-     "9 GREMLIN foe 35,27 head=10 chest=10"
-    ],
-    "round": 0,
-    "site": -1,
-    "stage": 1,
-    "turn": 0,
-    "verdict": 0
-   }
-  },
-  {
-   "step": 2754,
-   "token": "SPACE",
-   "note": "打贏第二場",
-   "scene": "flow:town",
-   "town": {
-    "left_town": true,
-    "mode": 0,
-    "town": 7,
-    "x": 56,
-    "y": 16
-   },
-   "world": {
-    "day": 2,
-    "mode": 0,
-    "month": 4,
-    "sub_x": 1,
-    "sub_y": 0,
-    "ticks": 3316,
-    "time_index": 1,
-    "x": 52,
-    "y": 13
-   },
-   "battle": {
-    "exec_text": [
-     "You have defeated The",
-     "GREMLINS!"
-    ],
-    "monster": "GREMLIN",
-    "prompt": 10,
-    "quest_done": 0,
-    "roster": [
-     "0 Poontang party 34,27 head=0 chest=0 down",
-     "1 Moraine party 32,25 head=15 chest=9",
-     "2 Fighting Bull party 32,26 head=14 chest=14",
-     "3 Kenneth party 33,27 head=17 chest=14",
-     "4 Sharakan party 32,27 head=17 chest=11",
-     "5 Olear party 33,25 head=15 chest=15",
-     "6 GREMLIN foe 31,26 head=10 chest=0 down",
-     "7 GREMLIN foe 34,26 head=10 chest=0 down",
-     "8 GREMLIN foe 29,29 head=10 chest=0 down",
-     "9 GREMLIN foe 33,26 head=10 chest=0 down"
-    ],
-    "round": 12,
-    "site": -1,
-    "stage": 5,
-    "turn": 10,
-    "verdict": 2
-   }
-  },
-  {
-   "step": 2788,
+   "step": 2048,
    "token": "R",
    "note": "走到競技場那一格：圖示列剩 DOOR／U-TURN",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -247,10 +177,10 @@
    }
   },
   {
-   "step": 2789,
+   "step": 2049,
    "token": "RET",
    "note": "DOOR：「Which one wishs to fight?」",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -271,10 +201,10 @@
    }
   },
   {
-   "step": 2790,
+   "step": 2050,
    "token": "D",
    "note": "反白移到 Moraine 再確定：「Are you sure you wish to enter?」",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -295,10 +225,10 @@
    }
   },
   {
-   "step": 2791,
+   "step": 2051,
    "token": "RET",
    "note": "答應：換到賭場，「You follow him down a tunnel…」",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -319,10 +249,10 @@
    }
   },
   {
-   "step": 2792,
+   "step": 2052,
    "token": "RET",
    "note": "「Do any of you wish to bet?」",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -343,10 +273,10 @@
    }
   },
   {
-   "step": 2793,
+   "step": 2053,
    "token": "SPACE",
    "note": "答是：哪一位要押的清單（選到上場那一位會被擋）",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -367,10 +297,10 @@
    }
   },
   {
-   "step": 2794,
+   "step": 2054,
    "token": "RET",
    "note": "選 Poontang：「How much?」讀兩位數",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -391,10 +321,10 @@
    }
   },
   {
-   "step": 2795,
+   "step": 2055,
    "token": "RET",
    "note": "送出 25：「Betting on your friend?」",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -415,10 +345,10 @@
    }
   },
   {
-   "step": 2796,
+   "step": 2056,
    "token": "2",
    "note": "第二注押 Fighting Bull 的 10 賭她會輸：「Good friends, eh?」",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 2,
@@ -439,10 +369,10 @@
    }
   },
   {
-   "step": 2811,
+   "step": 2071,
    "token": "RET",
    "note": "答否：開打，一隻，等級是實得位階加一；場上只有 Moraine 一名參戰",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -462,7 +392,7 @@
     "y": 13
    },
    "battle": {
-    "monster": "HILL GIANT",
+    "monster": "TROLL",
     "prompt": 0,
     "quest_done": 0,
     "roster": [
@@ -472,7 +402,7 @@
      "3 Kenneth watch 47,36 head=17 chest=17",
      "4 Sharakan watch 47,30 head=17 chest=17",
      "5 Olear watch 47,31 head=15 chest=15",
-     "6 HILL GIANT foe 22,31 head=33 chest=33"
+     "6 TROLL foe 22,31 head=24 chest=24"
     ],
     "round": 0,
     "site": -1,
@@ -482,10 +412,10 @@
    }
   },
   {
-   "step": 2971,
+   "step": 2604,
    "token": "SPACE",
-   "note": "第五回合打贏",
-   "scene": "flow:town",
+   "note": "競技場那一場第 23 回合敗北",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -506,43 +436,42 @@
    },
    "battle": {
     "exec_text": [
-     "You have defeated The HILL",
-     "GIANT!"
+     "The TROLL has defeated you!"
     ],
-    "monster": "HILL GIANT",
+    "monster": "TROLL",
     "prompt": 10,
     "quest_done": 0,
     "roster": [
      "0 Poontang watch 16,25 head=16 chest=16",
-     "1 Moraine party 21,30 head=15 chest=15",
+     "1 Moraine party 20,28 head=0 chest=0 down",
      "2 Fighting Bull watch 16,35 head=14 chest=14",
      "3 Kenneth watch 47,36 head=17 chest=17",
      "4 Sharakan watch 47,30 head=17 chest=17",
      "5 Olear watch 47,31 head=15 chest=15",
-     "6 HILL GIANT foe 21,31 head=33 chest=0 down"
+     "6 TROLL foe 21,28 head=20 chest=7"
     ],
-    "round": 8,
+    "round": 23,
     "site": -1,
     "stage": 5,
-    "turn": 2,
-    "verdict": 2
+    "turn": 7,
+    "verdict": 1
    }
   },
   {
-   "step": 2972,
+   "step": 2605,
    "token": "SPACE",
-   "note": "升階那一句**直接接在打贏後面**——競技場整段戰後獎勵都跳過（`0x2124E` 的閘門，RE-096），接著就是賭金結算。錢包上看得到三件事疊起來：路上兩場伏擊的金冠每人 ＋11（第一場 11、第二場 0）、押中的 Poontang 再 ＋25、押錯的 Fighting Bull −10",
-   "scene": "flow:town",
+   "note": "沒有升階；賭金整排取負後結算：Poontang 214 → 189、Fighting Bull 442 → 452",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
     "party": [
-     "Poontang gold=246 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
-     "Moraine gold=2156 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
-     "Fighting Bull gold=439 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
-     "Kenneth gold=822 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
-     "Sharakan gold=1950 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
-     "Olear gold=1784 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+     "Poontang gold=189 wounds=0 reported=0 quests=0,4,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=452 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
     ],
     "town": 7,
     "x": 56,
@@ -561,87 +490,92 @@
    },
    "battle": {
     "exec_text": [
-     "you have gained a level!",
-     "Poontang wins a bet!",
-     "Fighting Bull loses a bet!"
+     "Poontang loses a bet!",
+     "Fighting Bull wins a bet!"
     ],
-    "monster": "HILL GIANT",
+    "monster": "TROLL",
     "prompt": 10,
     "quest_done": 0,
-    "round": 8,
+    "round": 23,
     "site": -1,
     "stage": 5,
-    "turn": 2,
-    "verdict": 2
+    "turn": 7,
+    "verdict": 1
    }
   }
  ],
  "checkpoints": [
   {
-   "step": 2788,
-   "file": "step-2788.png",
-   "sha256": "1440f6a775c604e1f3b86cb5068ad812c314074bb5382cfc21710421ada10a37",
+   "step": 2048,
+   "file": "step-2048.png",
+   "sha256": "5d1dc29ba57ebfd8c5c027faeef7f2096b031d83f42c53df7b68300e99bc4782",
    "shows": "競技場那一格的圖示列"
   },
   {
-   "step": 2789,
-   "file": "step-2789.png",
+   "step": 2049,
+   "file": "step-2049.png",
    "sha256": "15b34091774b6f7057fa9f9c42b5fd6cb353ebec6839b195fde913762145b8f8",
    "shows": "The Arena／The Tester 與「誰要上場」的清單"
   },
   {
-   "step": 2790,
-   "file": "step-2790.png",
+   "step": 2050,
+   "file": "step-2050.png",
    "sha256": "85cef276e861b3a0b09b54bc35cfbef4edd06aec5e92bdc1df6e64c11a9b069d",
    "shows": "\"Are you sure you wish to enter?\""
   },
   {
-   "step": 2791,
-   "file": "step-2791.png",
+   "step": 2051,
+   "file": "step-2051.png",
    "sha256": "57be93e98ca817e44d343c3184c0e4639edf73674f546be0f4fc95de9cca3cdd",
    "shows": "賭場：A Gambling Booth／The Bet Taker 與那段敘述"
   },
   {
-   "step": 2792,
-   "file": "step-2792.png",
+   "step": 2052,
+   "file": "step-2052.png",
    "sha256": "afab6c0fd312ae04fa4cb52e830950901875043eb1a77448b0796b7a991ea9f9",
    "shows": "\"Do any of you wish to bet?\""
   },
   {
-   "step": 2793,
-   "file": "step-2793.png",
+   "step": 2053,
+   "file": "step-2053.png",
    "sha256": "85776cc4937c740a093df9c7cdd9ec9a6d699b9dc1dc58aaaaea58aee02db232",
    "shows": "哪一位要押：上場那一位也列在裡面，選到她會被擋"
   },
   {
-   "step": 2794,
-   "file": "step-2794.png",
+   "step": 2054,
+   "file": "step-2054.png",
    "sha256": "12f8806c7a1c0d83ffa34aa6ceb08a16be712f513cf40add6ff244f246ed4363",
    "shows": "\"How much?\" 與打到一半的金額"
   },
   {
-   "step": 2795,
-   "file": "step-2795.png",
+   "step": 2055,
+   "file": "step-2055.png",
    "sha256": "f0c09b9bf7be6174e8ab9f7d9d68fa1798ad4bc5a6eb2fe28fe7f82f09ca9171",
    "shows": "\"Betting on your friend?\""
   },
   {
-   "step": 2796,
-   "file": "step-2796.png",
+   "step": 2056,
+   "file": "step-2056.png",
    "sha256": "3d8834c196d1a0da7dcb5bf6ced7ab320b08163fac393aae9dd8c891395c49f8",
    "shows": "押她會輸那一句：\"Good friends, eh?\""
   },
   {
-   "step": 2811,
-   "file": "step-2811.png",
-   "sha256": "b3918a5b3818a3d9c9f3deca880a8f42c5a45299021a23fb3f8444a75134b491",
+   "step": 2071,
+   "file": "step-2071.png",
+   "sha256": "fd8a59889930af0eea788b1fd86d2afda36b9564e7fc022f34cba4ae51be8771",
    "shows": "開打：滿版的對手圖"
   },
   {
-   "step": 2972,
-   "file": "step-2972.png",
-   "sha256": "2121618f02f4047607e34211b02e7403c73ff1d8d283bcab748f6556722d5ce4",
-   "shows": "\"YOU HAVE GAINED A LEVEL!\" 與兩行賭金結算"
+   "step": 2604,
+   "file": "step-2604.png",
+   "sha256": "854d2468cfac3bec1350ba50ea758d01e399066c99ce7873a195cdc84cff7ae3",
+   "shows": "\"The TROLL has defeated you!\""
+  },
+  {
+   "step": 2605,
+   "file": "step-2605.png",
+   "sha256": "45d99d6da17f9456b584b1c9f1495c55d3bbc7e0c90e35d0c91a63717ad8a469",
+   "shows": "兩行賭金結算：Poontang loses a bet!、Fighting Bull wins a bet!"
   }
  ],
  "save": null,
