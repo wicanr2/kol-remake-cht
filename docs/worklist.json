@@ -1446,17 +1446,19 @@
       "id": "player-path-receipts-stale",
       "layer": "verification",
       "title": "正常玩家路徑的收據對不上現在的程式",
-      "body": "2026-09-26 已重生或改寫 24 條，其中修正兩個 remake 缺陷（出建築後頭像白框、讀檔後選角停在名冊）、撤下 flow-quest、world-healer 與 full-chain 依使用者決定改用受控亂數。剩 arena：現行程式下種子 1 的路上伏擊與競技場那一場都敗北（沒有升階），要以自然結果重生還是另作處理待使用者決定。README 的「收據與現行程式的對應」記錄現行做法。",
+      "body": "2026-09-26 全部 24 條正常玩家路徑以現行程式重生或確認，`check_player_paths.py --all` 24 條逐張一致，`verify_player_path.py`／`verify_full_path.py` 全數 0 失敗。過程修正兩個 remake 缺陷（出建築後頭像白框、讀檔後選角停在名冊），撤下 flow-quest；world-healer、full-chain 依使用者決定用受控亂數，arena 依使用者決定照自然結果展示輸的分支。現行做法記在 docs/verification/player-path/README.md「收據與現行程式的對應」。",
       "acceptance": "逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/verification/player-path/README.md"
+          "docs/verification/player-path/README.md",
+          "tools/check_player_paths.py"
         ],
-        "pattern": "收據重生中",
-        "note": "README 的自承，arena 定案重生後改寫。"
+        "pattern": "check_player_paths",
+        "note": "已完成，當回歸訊號：重跑比對工具與 README 的現況節都要在；回歸本身要跑 --all 才看得到。"
       },
-      "issue": 88
+      "issue": 88,
+      "status": "done"
     },
     {
       "id": "path-verify-does-not-replay",

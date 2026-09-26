@@ -6625,3 +6625,6 @@ frame-270 推翻了 remake 的版面：
   進場、選 Moraine、賭場下兩注的 23 鍵照舊（步數整體減 740），對手 TROLL 第 23 回合敗北，
   沒有升階，賭金整排取負後結算（Poontang 214 → 189、Fighting Bull 442 → 452）。收據、README
   與驗證矩陣改為展示輸的分支。
+- #88 結案：`check_player_paths.py --all` 24 條逐張一致；`verify_player_path.py` 17 條、
+  `verify_full_path.py` 7 條全數 0 失敗（含存檔逐欄比對）。回歸訊號改綁重跑工具與 README 現況節。
+  容器皆 `--rm`，本專案無殘留容器；中途停掉的驅動器容器已確認移除。
