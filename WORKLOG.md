@@ -6588,3 +6588,6 @@ frame-270 推翻了 remake 的版面：
   遇到重複代碼一律回 nil。改成 `LoadStartingTown` 回傳該代碼全部入城點，逐一試到放得下
   門口為止（入城點順序是 remake 選法，寫進 SPEC-016）。新增同城異區正反測試，Go 測試通過；
   實跑 quest-take 舊按鍵，選角後進到半途之家。`quest-take` 改成讀檔開場（15 鍵），重生一致。
+- 使用者決定（2026-09-26）：`flow-quest` 撤下（前提「標題選角沿用讀檔隊伍」已不成立，標題段由
+  `full`、任務地點由 `world-quest` 涵蓋）；`world-healer` 改用受控亂數並在收據標明方法；
+  `full-chain`、`full-chain-reload`、`full-chain-ending`、`arena` 改成讀檔開場並重生戰鬥段。

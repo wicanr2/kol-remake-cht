@@ -678,7 +678,7 @@ PLAYER_CHAIN = [
     ("世界探索", ["town-leave", "town-round-trip", "world-road", "world-clock",
                   "world-healer"]),
     ("戰鬥規劃與結算", ["full-chain-ending", "arena"]),
-    ("任務", ["quest-take", "quest-list", "world-quest", "flow-quest"]),
+    ("任務", ["quest-take", "quest-list", "world-quest"]),
     ("存檔", ["town-rest", "full-chain"]),
     ("離開與重載", ["town-load", "full-chain-reload"]),
     ("結局", ["full-chain-ending"]),
