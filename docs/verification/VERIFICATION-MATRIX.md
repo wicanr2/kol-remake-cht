@@ -71,7 +71,7 @@ remake 同狀態截圖存於 `docs/verification/remake-parity/shots/`，對拍�
 | `quest-take` | 16 | 讀檔開場，按 MOUTH 打字問話，接下一個任務（沒有換過任何輸入） |
 | `quest-list` | 11 | 讀檔開場，資料頁的任務一覽：回報過的任務排成八欄三列（觀察，存檔是換過的） |
 | `arena` | 1770 | 競技場：選人、進賭場下注、單挑打完升一階並結算賭金（觀察，存檔是換過的） |
-| `full-chain-ending` | 1003 | 出城 → 打贏一場伏擊 → 最終任務的地點打完 → 結局七段（觀察，存檔與怪物是換過的） |
+| `full-chain-ending` | 3174 | 讀檔開場 → 出城 → 路上伏擊敗北 → 最終任務的地點打完 → 結局七段（觀察，存檔與怪物是換過的） |
 
 尚未實作的功能會被記進 `flow.Unimplemented` 或 `battle.ActResult.Unimplemented`，
 不會默默吞掉。

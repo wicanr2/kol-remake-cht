@@ -1,31 +1,39 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "full-chain-ending",
- "description": "從標題按下去，走出霍布的另一個城門，在最終任務的地點打完那一場，看完結局那七段。**結局的觸發點是任務戰鬥打完那一刻**（RE-106）：原版在 `sub_2B0FF` 的尾端先看`word_34968`——那是「這一場真的把任務標成完成了」的旗標（`sub_28F5D` 設的，RE-101）——成立才逐名檢查已回報數等於 0x17。七張圖與七段敘事都與 `-scene ending` 那一組收據**逐 byte 相同**。全程只按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過兩處**：存檔要「已回報 23 件、最終任務已接」，而接任務那一側（`sub_14564`）雖然做完了（RE-110），要在遊戲裡真的回報 23 件仍然不現實；最終任務原本是十二隻 10 級 CYCLOPS，六人隊打不贏，所以壓成一隻 1 級。",
+ "description": "讀存檔在霍布入城點 7 那一區開場，走出另一個城門，在最終任務的地點打完那一場，看完結局那七段。**結局的觸發點是任務戰鬥打完那一刻**（RE-106）：原版在 `sub_2B0FF` 的尾端先看`word_34968`——那是「這一場真的把任務標成完成了」的旗標（`sub_28F5D` 設的，RE-101）——成立才逐名檢查已回報數等於 0x17。七張圖與七段敘事都與 `-scene ending` 那一組收據**逐 byte 相同**。全程只按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過兩處**：存檔要「已回報 23 件、最終任務已接」，而接任務那一側（`sub_14564`）雖然做完了（RE-110），要在遊戲裡真的回報 23 件仍然不現實；最終任務原本是十二隻 10 級 CYCLOPS，六人隊打不贏，所以壓成一隻 1 級。讀存檔開場、不經過標題（標題選角會以名冊角色重新組隊，用不上存檔隊伍；標題段由 `full` 驗）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡重生。路上那一場伏擊以種子 1 自然擲出，隊伍在第 26 回合**敗北**後回到野外、帶傷繼續走到任務地點；那一場不是這條要驗的內容，敗北的回寫與原版返回路徑另列待驗（SPEC-027），這條不宣稱它們與原版一致。",
  "seed": 1,
  "load": "workplace/observe/final-battle.json",
- "token_count": 2063,
+ "token_count": 3174,
  "trace": "docs/verification/player-path/full-chain-ending/trace.json",
- "trace_sha256": "e7f0204ab28a3dcaf41216b4d929a97321257cfecf873b2036d2e71425653dd1",
+ "trace_sha256": "363160c7018065a3740ad671b9a2a0cf2a13c5c28c2af4961baf41147255c2d0",
  "milestones": [
   {
-   "step": 19,
-   "token": "RET",
-   "note": "DOOR：城鎮戶外地圖（入城點 7 那一區）",
-   "scene": "flow:town",
+   "step": 0,
+   "token": "（起始）",
+   "note": "讀檔開場：城鎮戶外地圖（入城點 7 那一區）",
+   "scene": "play",
    "town": {
     "left_town": false,
     "mode": 0,
+    "party": [
+     "Poontang gold=214 wounds=1 reported=23 quests=0,1,0,0,0,0 carried=1",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
     "town": 7,
     "x": 56,
     "y": 24
    }
   },
   {
-   "step": 63,
+   "step": 44,
    "token": "U",
    "note": "走到地圖上緣，城門提示",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "at_edge": true,
     "left_town": false,
@@ -36,10 +44,10 @@
    }
   },
   {
-   "step": 64,
+   "step": 45,
    "token": "RET",
    "note": "出城",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -60,10 +68,10 @@
    }
   },
   {
-   "step": 77,
+   "step": 70,
    "token": "R",
    "note": "路上被伏擊（SPEC-011）",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -75,15 +83,15 @@
     "day": 1,
     "mode": 0,
     "month": 4,
-    "sub_x": 0,
+    "sub_x": 4,
     "sub_y": 3,
-    "ticks": 3316,
-    "time_index": 1,
-    "x": 44,
+    "ticks": 2500,
+    "time_index": 2,
+    "x": 45,
     "y": 9
    },
    "battle": {
-    "monster": "BINDERAK",
+    "monster": "WALBAR",
     "prompt": 0,
     "quest_done": 0,
     "roster": [
@@ -93,9 +101,12 @@
      "3 Kenneth party 31,32 head=17 chest=17",
      "4 Sharakan party 33,34 head=17 chest=17",
      "5 Olear party 31,34 head=15 chest=15",
-     "6 BINDERAK foe 28,32 head=15 chest=15",
-     "7 BINDERAK foe 28,30 head=15 chest=15",
-     "8 BINDERAK foe 28,34 head=15 chest=15"
+     "6 WALBAR foe 28,32 head=18 chest=18",
+     "7 WALBAR foe 28,30 head=18 chest=18",
+     "8 WALBAR foe 28,34 head=18 chest=18",
+     "9 WALBAR foe 28,28 head=18 chest=18",
+     "10 WALBAR foe 27,31 head=18 chest=18",
+     "11 WALBAR foe 27,29 head=18 chest=18"
     ],
     "round": 0,
     "site": -1,
@@ -105,10 +116,10 @@
    }
   },
   {
-   "step": 1496,
+   "step": 1969,
    "token": "SPACE",
-   "note": "打贏那一場遭遇",
-   "scene": "flow:town",
+   "note": "那一場遭遇敗北，回到野外",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -120,44 +131,46 @@
     "day": 1,
     "mode": 0,
     "month": 4,
-    "sub_x": 0,
+    "sub_x": 4,
     "sub_y": 3,
-    "ticks": 3316,
-    "time_index": 1,
-    "x": 44,
+    "ticks": 2500,
+    "time_index": 2,
+    "x": 45,
     "y": 9
    },
    "battle": {
     "exec_text": [
-     "You have defeated The",
-     "BINDERAKS!"
+     "The WALBARs have defeated you!"
     ],
-    "monster": "BINDERAK",
+    "monster": "WALBAR",
     "prompt": 10,
     "quest_done": 0,
     "roster": [
-     "0 Poontang party 29,29 head=5 chest=16",
-     "1 Moraine party 31,32 head=15 chest=15",
-     "2 Fighting Bull party 30,30 head=14 chest=14",
-     "3 Kenneth party 30,31 head=17 chest=17",
-     "4 Sharakan party 30,32 head=0 chest=0 down",
-     "5 Olear party 29,33 head=0 chest=0 down",
-     "6 BINDERAK foe 27,32 head=15 chest=0 down",
-     "7 BINDERAK foe 28,31 head=15 chest=0 down",
-     "8 BINDERAK foe 31,31 head=15 chest=0 down"
+     "0 Poontang party 28,30 head=0 chest=0 down",
+     "1 Moraine party 30,31 head=0 chest=0 down",
+     "2 Fighting Bull party 31,30 head=0 chest=0 down",
+     "3 Kenneth party 30,32 head=17 chest=0 down",
+     "4 Sharakan party 27,33 head=0 chest=0 down",
+     "5 Olear party 29,32 head=0 chest=9 down",
+     "6 WALBAR foe 29,34 head=18 chest=0 down",
+     "7 WALBAR foe 29,34 head=18 chest=2",
+     "8 WALBAR foe 31,31 head=18 chest=0 down",
+     "9 WALBAR foe 30,30 head=18 chest=0 down",
+     "10 WALBAR foe 29,33 head=12 chest=5",
+     "11 WALBAR foe 30,33 head=18 chest=13"
     ],
-    "round": 15,
+    "round": 26,
     "site": -1,
     "stage": 5,
-    "turn": 9,
-    "verdict": 2
+    "turn": 12,
+    "verdict": 1
    }
   },
   {
-   "step": 1530,
+   "step": 1990,
    "token": "R",
    "note": "踏上第 4 個任務地點：最終任務的敘述與「Will you partake?」",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -179,10 +192,10 @@
    }
   },
   {
-   "step": 1531,
+   "step": 1991,
    "token": "RET",
    "note": "答應參戰",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -222,20 +235,20 @@
    }
   },
   {
-   "step": 2049,
+   "step": 3162,
    "token": "SPACE",
    "note": "打贏：六名的任務旗標都標成完成（RE-101）",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
     "party": [
-     "Poontang gold=221 wounds=1 reported=23 quests=0,2,0,0,0,0 carried=1",
-     "Moraine gold=2156 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=13",
-     "Fighting Bull gold=449 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=14",
-     "Kenneth gold=822 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=12",
-     "Sharakan gold=1950 wounds=0 reported=0 quests=1,2,0,0,0,0 carried=10",
-     "Olear gold=1784 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=11"
+     "Poontang gold=214 wounds=8 reported=23 quests=0,2,0,0,0,0 carried=10",
+     "Moraine gold=2149 wounds=3 reported=0 quests=0,2,0,0,0,0 carried=13",
+     "Fighting Bull gold=442 wounds=1 reported=0 quests=0,2,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=18 reported=0 quests=0,2,0,0,0,0 carried=12",
+     "Sharakan gold=1943 wounds=17 reported=0 quests=1,2,0,0,0,0 carried=10",
+     "Olear gold=1777 wounds=25 reported=0 quests=0,2,0,0,0,0 carried=11"
     ],
     "town": 7,
     "x": 56,
@@ -260,15 +273,15 @@
     "prompt": 10,
     "quest_done": 6,
     "roster": [
-     "0 Poontang party 9,13 head=16 chest=16",
-     "1 Moraine party 8,12 head=15 chest=15",
-     "2 Fighting Bull party 9,14 head=14 chest=14",
-     "3 Kenneth party 9,12 head=17 chest=17",
-     "4 Sharakan party 8,14 head=17 chest=17",
-     "5 Olear party 8,11 head=15 chest=15",
-     "6 CYCLOPS foe 10,13 head=25 chest=0 down"
+     "0 Poontang party 9,13 head=16 chest=3",
+     "1 Moraine party 10,13 head=15 chest=6",
+     "2 Fighting Bull party 9,15 head=14 chest=14",
+     "3 Kenneth party 8,12 head=17 chest=17",
+     "4 Sharakan party 8,15 head=17 chest=17",
+     "5 Olear party 9,14 head=15 chest=15",
+     "6 CYCLOPS foe 10,14 head=25 chest=0 down"
     ],
-    "round": 5,
+    "round": 11,
     "site": 4,
     "stage": 5,
     "turn": 7,
@@ -276,13 +289,21 @@
    }
   },
   {
-   "step": 2054,
+   "step": 3167,
    "token": "SPACE",
    "note": "戰鬥收尾時檢查已回報數等於 0x17，成立就播結局（RE-106）",
    "scene": "ending",
    "town": {
     "left_town": true,
     "mode": 0,
+    "party": [
+     "Poontang gold=222 wounds=14 reported=23 quests=0,2,0,0,0,0 carried=10",
+     "Moraine gold=2157 wounds=7 reported=0 quests=0,2,0,0,0,0 carried=13",
+     "Fighting Bull gold=450 wounds=1 reported=0 quests=0,2,0,0,0,0 carried=14",
+     "Kenneth gold=823 wounds=18 reported=0 quests=0,2,0,0,0,0 carried=12",
+     "Sharakan gold=1951 wounds=17 reported=0 quests=1,2,0,0,0,0 carried=10",
+     "Olear gold=1785 wounds=25 reported=0 quests=0,2,0,0,0,0 carried=11"
+    ],
     "town": 7,
     "x": 56,
     "y": 16
@@ -300,7 +321,7 @@
    }
   },
   {
-   "step": 2060,
+   "step": 3173,
    "token": "SPACE",
    "note": "第七段",
    "scene": "ending",
@@ -326,80 +347,80 @@
  ],
  "checkpoints": [
   {
-   "step": 64,
-   "file": "step-064.png",
-   "sha256": "195d6c17e04b64b0e620c87deaa7c46e1b9b328f70f3ac79be7ca2edd18bccf3",
+   "step": 45,
+   "file": "step-045.png",
+   "sha256": "9fa92a8ca7528a15c62c48063c957c45607c5e071953b5abb99c99214f7ff55a",
    "shows": "出城的落點 (42,9)"
   },
   {
-   "step": 77,
-   "file": "step-077.png",
-   "sha256": "190de95061a2003a43f22ef79f96b00d588ca5141ebb1952ea3507fc9a4dd6bb",
+   "step": 70,
+   "file": "step-070.png",
+   "sha256": "84a3182271d943306f48a92150792f878149daed9166a5f742c063a277ed136e",
    "shows": "路上的伏擊"
   },
   {
-   "step": 1530,
-   "file": "step-1530.png",
-   "sha256": "6117fe8c080eb56e0a2e204bd901fee27dd9ae7986d576f482b4eea1910f9fd5",
+   "step": 1990,
+   "file": "step-1990.png",
+   "sha256": "0336c7c77056de3a07d89684f91231cf3ac1f7676f6b58de4c54670f1fda094d",
    "shows": "最終任務的敘述與 Will you partake?"
   },
   {
-   "step": 2049,
-   "file": "step-2049.png",
-   "sha256": "34fe90d2c29d38f68065e3c31d458254fd166605c78d47c42143920febbc3bb3",
+   "step": 3162,
+   "file": "step-3162.png",
+   "sha256": "45984431c23a5cbb9e06b455399e03e7f69e2c07ffb77d9946f764b09a8fc914",
    "shows": "打贏最終任務"
   },
   {
-   "step": 2054,
-   "file": "step-2054.png",
+   "step": 3167,
+   "file": "step-3167.png",
    "sha256": "b7acdd5a6760776372b689b7b23b267cbd9ce9229edf5c38d9873eae3b29e86a",
    "shows": "結局第 1 段，與 `-scene ending` 的收據逐 byte 相同",
    "identical_to": "docs/verification/ending/panel-0.png",
    "identical": true
   },
   {
-   "step": 2055,
-   "file": "step-2055.png",
+   "step": 3168,
+   "file": "step-3168.png",
    "sha256": "4a9cffedfc275f97bfa63f9a7753c2ac93f1fe5c30e27463e525186a39178a92",
    "shows": "結局第 2 段，與 `-scene ending` 的收據逐 byte 相同",
    "identical_to": "docs/verification/ending/panel-1.png",
    "identical": true
   },
   {
-   "step": 2056,
-   "file": "step-2056.png",
+   "step": 3169,
+   "file": "step-3169.png",
    "sha256": "20a8e69dfb9625c1fb2d97e624744e7f9da37a0c7931bf4bea78717eb2fe0d27",
    "shows": "結局第 3 段，與 `-scene ending` 的收據逐 byte 相同",
    "identical_to": "docs/verification/ending/panel-2.png",
    "identical": true
   },
   {
-   "step": 2057,
-   "file": "step-2057.png",
+   "step": 3170,
+   "file": "step-3170.png",
    "sha256": "283d96b9f253ed7377b571e305e6534d7c98f0d4b48385bceb1dfd06fb44fa32",
    "shows": "結局第 4 段，與 `-scene ending` 的收據逐 byte 相同",
    "identical_to": "docs/verification/ending/panel-3.png",
    "identical": true
   },
   {
-   "step": 2058,
-   "file": "step-2058.png",
+   "step": 3171,
+   "file": "step-3171.png",
    "sha256": "19fb742d992bd96377473336ffe84032d606d72288781db2dc77e4bbc7db675f",
    "shows": "結局第 5 段，與 `-scene ending` 的收據逐 byte 相同",
    "identical_to": "docs/verification/ending/panel-4.png",
    "identical": true
   },
   {
-   "step": 2059,
-   "file": "step-2059.png",
+   "step": 3172,
+   "file": "step-3172.png",
    "sha256": "03c502a7b1e131819fb706d617a7840b0f4145a1dd3dcf94b7688b21566bfc04",
    "shows": "結局第 6 段，與 `-scene ending` 的收據逐 byte 相同",
    "identical_to": "docs/verification/ending/panel-5.png",
    "identical": true
   },
   {
-   "step": 2060,
-   "file": "step-2060.png",
+   "step": 3173,
+   "file": "step-3173.png",
    "sha256": "75c5cf062f7f03bee08a51d8ff175ef9640edb842af7d815bbac51428ca53485",
    "shows": "結局第 7 段，與 `-scene ending` 的收據逐 byte 相同",
    "identical_to": "docs/verification/ending/panel-6.png",
