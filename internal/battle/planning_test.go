@@ -185,10 +185,10 @@ func TestPlanningDirectCommands(t *testing.T) {
 	}
 }
 
-// 還沒實作的圖示按下去會被記下來，不默默吞掉。分派表（`0x1FA02`）認得的圖號
-// 現在都做了，所以這裡拿一個表上沒有、remake 也還沒接的圖號當樣本。
+// 指令列被改壞時，分派表認不得的圖號會被記下來，不默默吞掉。0x30 是「Begin next
+// round?」那一列的逃走格，不會出現在主指令列，拿來當認不得的樣本。
 func TestPlanningUnimplemented(t *testing.T) {
-	const notYet = 0x30 // 一般遭遇那一列多出來的那一格，語意未定
+	const notYet = 0x30
 	s := planningState(Member{HasWeapon: true,
 		Weapon: Weapon{Kind: 0x20, Code: 1}})
 	s.Plan.Bar = []int{CmdYes, notYet}
@@ -249,4 +249,21 @@ func selectIcon(t *testing.T, s *State, icon int) {
 		}
 	}
 	t.Fatalf("圖示列 %#x 裡沒有 %#x", s.Plan.Bar, icon)
+}
+
+// 主指令列產生得出的每一個圖號，分派表都有 case：選下去不會落到 default（#67）。
+// 圖號清單照 `CommandBar` 會 append 的那幾個常數。
+func TestPlanningEveryBarIconHandled(t *testing.T) {
+	icons := []int{CmdMissile, CmdLoad, CmdWeapon, CmdUnarmed, CmdCast, CmdSwitchAlt2,
+		CmdSwitchAlt1, CmdSwitch, CmdDrop, CmdPickUp, CmdLand, CmdMountedMove, CmdMove, CmdRest}
+	for _, icon := range icons {
+		s := planningState(Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1},
+			Spells: []Spell{{Name: "Test"}}})
+		s.Plan.Bar = []int{CmdYes, icon}
+		s.Plan.Selected = 1
+		s.Choose()
+		if len(s.Plan.Unimplemented) != 0 {
+			t.Errorf("圖號 %#x 落到 default：%#x", icon, s.Plan.Unimplemented)
+		}
+	}
 }

@@ -185,8 +185,9 @@ func (s *State) chooseCommand(i int) bool {
 		// 兩個選項原版沿用上一次的殘留值，這裡取 0——裝填那一手不看它們。
 		return s.commit(i, icon, 0, 0)
 	default:
-		// 分派表認不得的圖號。原版一樣落 default 收尾，但那時寫進 +0x25 的是
-		// 什麼還沒逐格核對過，所以 remake 記下來不動，不假裝做過。
+		// `CommandBar` 產生得出的圖號上面都有 case，正常指令列走不到這裡
+		// （`TestPlanningEveryBarIconHandled`）。原版的 default 走收尾 `0x1FA6D`、
+		// 把圖號寫進 +0x25；remake 只有指令列被改壞時才會到這裡，記下來不假裝做過。
 		s.Plan.Unimplemented = append(s.Plan.Unimplemented, icon)
 	}
 	return false
@@ -306,8 +307,10 @@ func (s *State) commit(i, command, style, guard int) bool {
 		}
 		done = true
 	}
-	// 整輪決定完印記錄 0x108，圖示列換成 YES 與 U-TURN（RE-080；一般遭遇還會多
-	// 一格逃走，任務戰鬥沒有）。這一列在執行段不會被重畫，訊息就蓋在它上面。
+	// 整輪決定完印記錄 0x108，圖示列換成 YES 與 U-TURN（RE-080）。原版在
+	// `word_345DE == 0xFFFF`（競技場與訓練戰以外的戰鬥）還會多一格 0x30 問要不要逃
+	// （`sub_1E3A8` 的 `loc_1FB5F`），remake 還沒接，見工作項 begin-round-flee-icon。
+	// 這一列在執行段不會被重畫，訊息就蓋在它上面。
 	s.Plan.Prompt = PromptNextRound
 	s.Plan.Bar = []int{CmdYes, CmdCancel}
 	s.Plan.Selected = 0

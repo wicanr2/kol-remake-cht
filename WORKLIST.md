@@ -91,6 +91,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
+- **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）
+  原版整輪規劃完印記錄 0x108，圖示列是 YES、U-TURN，`word_345DE == 0xFFFF`（競技場與訓練戰以外的所有戰鬥，含任務戰鬥）再加一格 0x30（`sub_1E3A8` 的 `loc_1FB5F`）。選它印記錄 0x109「Do you want to flee?」，答 y 後從 `0x1FC01` 起逐名以參戰者記錄 `+0x0C`、`+0x08`、`+0x02` 算機率並擲 `rand(100)`。remake 的這一列一律只有 YES 與 U-TURN，逃走只有戰場邊緣那一條（RE-103）。
+  完成條件：讀完 `0x1FBAD`…`0x1FD1E` 的逃走判定與成敗後續、寫進 SPEC-014 升 READY，接上 0x30 並以機制收據驗證（競技場不出現、一般與任務戰鬥出現、成敗兩條）。
+  核實：`internal/battle/planning.go` 找得到 `remake 還沒接，見工作項 begin-round-flee-icon` 就是還沒完
+
 - **spell-target-figure**（#71） — 施法時目標的人形還沒畫
   `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
@@ -173,11 +178,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   程式裡自承「還沒對拍」的幾處：法術清單的標題座標與版面（`spell.go`）、戰利品畫面（`spoils.go`，要打贏一場而且擲中兩成的掉落才看得到）、選目標格的那一圈與游標樣子（`ui/battle.go` 兩處）、物品頁 `sub_153FF` 模式 8 的擺法（`ui/itempage.go`）。都是畫得出來但沒有與原版逐畫面比過。
   完成條件：五處各有一份逐畫面對拍收據。
   核實：`internal/battle/spell.go`、`internal/battle/spoils.go`、`internal/ui/battle.go`、`internal/ui/itempage.go`、`docs/spec/010-combat-commands.md` 找得到 `還沒對拍|還沒讀|的畫面還沒對` 就是還沒完
-
-- **planning-25-not-verified**（#67） — 規劃段寫進 +0x25 的值沒逐格核對
-  分派表認不得的圖號落 default 收尾時，原版寫進 `+0x25` 的是什麼還沒逐格核對過，所以 remake 記下來不動、不假裝做過。
-  完成條件：逐格核對過，或確認 remake 目前的做法與原版等價。
-  核實：`internal/battle/planning.go` 找得到 `還沒逐格核對過` 就是還沒完
 
 - **planning-other-commands-unwalked**（#84） — 規劃段只走過徒手那一條
   2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。
@@ -358,6 +358,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **sub-1aae8-params** — sub_1AAE8 的參數語意：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。
+- **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對：已完成
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
 - **sheet-items-and-party-portrait** — 角色資料頁的物品（sub_16986）與隊伍立繪（sub_18D61）兩個圖示：2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。
 - **party-limit-six-boundary** — 隊伍上限六人的邊界：2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。

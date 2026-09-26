@@ -6667,3 +6667,7 @@ frame-270 推翻了 remake 的版面：
 - #58 結案（RE-142）：`+0x25` 就是參戰者指令碼（SPEC-010 欄位表早有記載），輪到時在
   `sub_1E3A8:0x20A8B` 讀進 `word_31122` 供分派與疲勞使用。remake 下馬時照原版把 `Command`
   清成 0，疲勞改用出手前的指令碼；補單元測試，Go 測試通過。
+- #67 結案：`CommandBar` 產生得出的圖號在規劃分派表都有 case，default 走不到；補
+  `TestPlanningEveryBarIconHandled`。核對時讀 `sub_1E3A8:0x1FB3x` 起的「Begin next round?」：
+  `word_345DE == 0xFFFF`（競技場與訓練戰以外，含任務戰鬥）會多一格 0x30 問要不要逃，並逐名擲
+  逃走判定；remake 沒有這一格，註解「任務戰鬥沒有」也不正確。已改寫註解並登 `begin-round-flee-icon`。

@@ -1091,17 +1091,33 @@
       "id": "planning-25-not-verified",
       "layer": "verification",
       "title": "規劃段寫進 +0x25 的值沒逐格核對",
-      "body": "分派表認不得的圖號落 default 收尾時，原版寫進 `+0x25` 的是什麼還沒逐格核對過，所以 remake 記下來不動、不假裝做過。",
+      "body": "`CommandBar` 產生得出的每一個圖號在分派表（`0x1FA02`）都有 case，正常指令列走不到 default；`TestPlanningEveryBarIconHandled` 把這件事釘住。原版 default 走收尾 `0x1FA6D` 把圖號寫進 +0x25（RE-105），remake 只在指令列被改壞時才到 default 並記下來。核對中另發現「Begin next round?」缺逃走格，另登 begin-round-flee-icon。",
       "acceptance": "逐格核對過，或確認 remake 目前的做法與原版等價。",
+      "verify": {
+        "kind": "required_in_all",
+        "paths": [
+          "internal/battle/planning_test.go"
+        ],
+        "pattern": "TestPlanningEveryBarIconHandled",
+        "note": "已完成，當回歸訊號：圖號覆蓋測試要在。"
+      },
+      "issue": 67,
+      "status": "done"
+    },
+    {
+      "id": "begin-round-flee-icon",
+      "layer": "gap",
+      "title": "「Begin next round?」那一列的逃走格（0x30）",
+      "body": "原版整輪規劃完印記錄 0x108，圖示列是 YES、U-TURN，`word_345DE == 0xFFFF`（競技場與訓練戰以外的所有戰鬥，含任務戰鬥）再加一格 0x30（`sub_1E3A8` 的 `loc_1FB5F`）。選它印記錄 0x109「Do you want to flee?」，答 y 後從 `0x1FC01` 起逐名以參戰者記錄 `+0x0C`、`+0x08`、`+0x02` 算機率並擲 `rand(100)`。remake 的這一列一律只有 YES 與 U-TURN，逃走只有戰場邊緣那一條（RE-103）。",
+      "acceptance": "讀完 `0x1FBAD`…`0x1FD1E` 的逃走判定與成敗後續、寫進 SPEC-014 升 READY，接上 0x30 並以機制收據驗證（競技場不出現、一般與任務戰鬥出現、成敗兩條）。",
       "verify": {
         "kind": "present",
         "paths": [
           "internal/battle/planning.go"
         ],
-        "pattern": "還沒逐格核對過",
-        "note": "planning.go 的自承。"
-      },
-      "issue": 67
+        "pattern": "remake 還沒接，見工作項 begin-round-flee-icon",
+        "note": "planning.go 的自承；接上時改寫。"
+      }
     },
     {
       "id": "koldata-action-messages",
