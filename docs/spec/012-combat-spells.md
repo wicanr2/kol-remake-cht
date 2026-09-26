@@ -188,8 +188,9 @@ The Hostel 賣的第一筆 Tyanalon（340）、Kelnalon（340）就是，巫師�
 - **罰值不改記錄裡的技能。** 每次要用才折算，所以 remake 用
   `Actor.OffenceSkill()`／`DefenceSkill()` 取，欄位本身留原值。
 
-參戰者記錄 `+0x2C` 仍未解（`SpellEffectField` 的第 5、6 項指到它，但那兩個效果
-在前面就被自己的分支接走，寫不到）。
+參戰者記錄 `+0x2C` 在原版沒有作用（RE-144）：`SpellEffectField` 的第 5、6 項指到它，
+但 `sub_2818D` 先在 `0x2844A`／`0x2869D` 把效果 6、5 分走，查表讀不到那兩格，整份
+反組譯也沒有直接存取 `+0x2C` 的指令。
 
 **法術護符那四格已經解了**（RE-128）：它們不是屬性，是「這個法術對哪一類、哪一種
 怪物有效」。高 nibble 是 CLASS（None／Human／Elven／Dwarven／Kelden／Elemental／

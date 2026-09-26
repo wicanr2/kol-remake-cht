@@ -1193,17 +1193,19 @@
       "id": "actor-record-2c",
       "layer": "spec",
       "title": "參戰者記錄 +0x2C 仍未解",
-      "body": "`SpellEffectField` 的第 5、6 項指到它，但那兩個效果的來源還沒解出來。",
+      "body": "RE-144：整份反組譯沒有直接存取參戰者 `+0x2C` 的指令；效果欄位表第 5、6 項雖指到它，`sub_2818D` 在 `0x2844A`／`0x2869D` 先把效果 6、5 分走，查表讀不到那兩格。`+0x2C` 在原版沒有作用，remake 的分派順序相同，不需實作。SPEC-012 同步。",
       "acceptance": "+0x2C 的語意解出，兩個效果接上或確認無作用。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/spec/012-combat-spells.md"
+          "docs/spec/012-combat-spells.md",
+          "docs/re/RESEARCH-LOG.md"
         ],
-        "pattern": "`\\+0x2C` 仍未解",
-        "note": "SPEC-012 的自承。"
+        "pattern": "RE-144",
+        "note": "已完成，當回歸訊號：規格與研究日誌都引用 RE-144。"
       },
-      "issue": 72
+      "issue": 72,
+      "status": "done"
     },
     {
       "id": "quest-count-ff-writer",

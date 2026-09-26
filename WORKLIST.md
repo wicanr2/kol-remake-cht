@@ -271,11 +271,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：五份的未解章節各自清空，或剩下的每一項有自己的條目。
   核實：`docs/spec` 找得到 `^#{2,3} .*(還沒|尚未).*(關閉|解|通過|gate)` 就是還沒完
 
-- **actor-record-2c**（#72） — 參戰者記錄 +0x2C 仍未解
-  `SpellEffectField` 的第 5、6 項指到它，但那兩個效果的來源還沒解出來。
-  完成條件：+0x2C 的語意解出，兩個效果接上或確認無作用。
-  核實：`docs/spec/012-combat-spells.md` 找得到 ``\+0x2C` 仍未解` 就是還沒完
-
 - **quest-count-ff-writer**（#73） — 兩個計數怎麼變成 0xFF 還沒找到寫入點
   所以 remake 用自己的 `VerdictFled` 判定。找不到寫入點就無法確認那個判定與原版等價。
   完成條件：寫入點找出來，或確認 remake 的判定等價。
@@ -351,6 +346,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對：已完成
 - **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）：已完成
 - **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址：已完成
+- **actor-record-2c** — 參戰者記錄 +0x2C 仍未解：已完成
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
 - **sheet-items-and-party-portrait** — 角色資料頁的物品（sub_16986）與隊伍立繪（sub_18D61）兩個圖示：2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。
 - **party-limit-six-boundary** — 隊伍上限六人的邊界：2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。
