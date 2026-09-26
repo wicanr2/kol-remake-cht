@@ -195,7 +195,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
 
 - **player-path-receipts-stale**（#88） — 正常玩家路徑的收據對不上現在的程式
-  2026-09-26 以 check_player_paths.py --all 重跑 25 條：10 條一致；只差天候圖雲層的 town-leave、town-round-trip、world-road 已重生（對拍圖 remake-parity/shots/world/ 四張同步，world 與 world-road 對拍仍全過）。world-clock、world-quest 因天候重擲使原種子遇到遭遇，已依 SPEC-011 §9 重選種子（3、5）並重生。arena、flow-quest、full、full-chain、full-chain-ending、full-chain-reload、quest-list、quest-take、town、world-healer 從標題選角後落點不同，要逐條改寫輸入計畫。分類與證據見 docs/verification/player-path/README.md。
+  2026-09-26 重跑 25 條並逐條處理：已一致或已重生 19 條（含 town、full、quest-list、quest-take 改寫，world-clock、world-quest 依 SPEC-011 §9 重選種子）。過程中修正兩個缺陷：走出建築後隊員格仍畫白框、讀檔後選角停在名冊。剩 6 條：world-healer 原種子已擲不到治療（要驗的就是亂數遭遇，換種子需決策）；flow-quest 的前提（標題流程沿用讀檔隊伍）已不成立；full-chain、full-chain-reload、full-chain-ending、arena 從標題起跑但依賴讀檔隊伍，需改成讀檔開場並以 drive_battle_script.py 重生戰鬥段。分類與證據見 docs/verification/player-path/README.md。
   完成條件：逐條確認現在的行為是對的之後重生收據，或修回原行為；跑 check_player_paths.py --all 全數一致。
   核實：`docs/verification/player-path/README.md` 找得到 `收據過期` 就是還沒完
 
