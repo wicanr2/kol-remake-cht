@@ -91,11 +91,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
-- **enemy-move-direction-unhooked**（#54） — 敵人移動段的方向規則：解出來了但還沒接上
-  RE-117 已解：方向要先試往目標那一步、再試左右各一格，沒有目標時從隨機方向起繞八格，八格都站不下另有三條退路。**沒接的理由寫在程式裡**——接上去會改變戰況，`arena` 與 `full-chain-ending` 那兩條長路徑的固定按鍵序列得整條重生（各有兩到三場戰鬥，中間還夾著城鎮互動），所以留待專門的一輪。
-  完成條件：接上並重生那兩條長路徑的收據。
-  核實：`internal/battle/ai.go` 找得到 `\*\*解出來了但還沒接上\*\*` 就是還沒完
-
 - **spell-target-figure**（#71） — 施法時目標的人形還沒畫
   `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
@@ -387,6 +382,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
+- **enemy-move-direction-unhooked** — 敵人移動段的方向規則：解出來了但還沒接上：已完成
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。

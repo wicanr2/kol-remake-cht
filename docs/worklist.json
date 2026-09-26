@@ -823,17 +823,18 @@
       "id": "enemy-move-direction-unhooked",
       "layer": "gap",
       "title": "敵人移動段的方向規則：解出來了但還沒接上",
-      "body": "RE-117 已解：方向要先試往目標那一步、再試左右各一格，沒有目標時從隨機方向起繞八格，八格都站不下另有三條退路。**沒接的理由寫在程式裡**——接上去會改變戰況，`arena` 與 `full-chain-ending` 那兩條長路徑的固定按鍵序列得整條重生（各有兩到三場戰鬥，中間還夾著城鎮互動），所以留待專門的一輪。",
+      "body": "RE-117 的方向規則已於 2026-09-05 接上：`stepToward` 先試往目標與左右各一格、沒有目標時從隨機方向繞八格，`enemyStuck` 走三條退路並以 `Actor.Stuck` 記次數。ai.go 留著的「還沒接上」是過時註解，2026-09-26 改寫。長路徑收據的重生由 #88 追蹤。",
       "acceptance": "接上並重生那兩條長路徑的收據。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
           "internal/battle/ai.go"
         ],
-        "pattern": "\\*\\*解出來了但還沒接上\\*\\*",
-        "note": "ai.go 的自承，接上時會改寫。"
+        "pattern": "func \\(s \\*State\\) stepToward|func \\(s \\*State\\) enemyStuck",
+        "note": "已完成，當回歸訊號：方向與退路兩支函式都要在。"
       },
-      "issue": 54
+      "issue": 54,
+      "status": "done"
     },
     {
       "id": "counterscan-style-and-retry",

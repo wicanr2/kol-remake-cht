@@ -10,7 +10,7 @@ import (
 
 // scriptedRolls 是測試用的受控亂數（CLAUDE.md「RND() 固定種子對拍鐵則」）：依序吐出
 // 指定的骰值，用完就交回種子亂數。只接在野外遭遇的擲點上，用來把「這一次時段變換
-// 擲到治療」這種待驗規則隔離出來；正式遊戲不帶 -ambush-rolls 就不會經過這裡。
+// 擲到治療」這種要驗的規則隔離出來；正式遊戲不帶 -ambush-rolls 就不會經過這裡。
 type scriptedRolls struct {
 	values []int
 	next   battle.Rand
