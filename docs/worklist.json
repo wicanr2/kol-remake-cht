@@ -790,18 +790,19 @@
       "id": "attack-message-chain-index",
       "layer": "spec",
       "title": "攻擊致死的 collapse／shatter 分支",
-      "body": "攻擊訊息索引規則已由 RE-088 解出並接上（SPEC-008 第 6 節）。殘留的是倒下那一句：原版依 `sub_22229` 分出 0x14C「collapse」、依怪物記錄 +0x10 bit 7 分出 0x14E「shatter into pieces!」，remake 的 `DamageLine` 一律走 die。bit 7 已抽成 `Monster.Shatters`；`sub_22229` 在這個分支的語意要先確認。",
+      "body": "攻擊訊息索引規則由 RE-088 解出並接上；攻擊致死那一句的三個分支依 `sub_277F4:0x2796F` 的反組譯接上：`sub_22229` 讀參戰者 `+0x01` 判隊員（collapse from blood loss）、怪物記錄 `+0x10` bit 7（SKELETON）shatter into pieces、其餘 die from blood loss。`internal/battle/message_test.go` 驗三個分支的記錄序列，`cmd/kol/death_line_test.go` 以真實 KOLDATA 文字庫與繁中譯表展開三句。原版同狀態畫格沒有取，不宣稱逐畫面一致。",
       "acceptance": "兩條分支依 RE 證據接上，並有 collapse 與 shatter 各一次的訊息收據；或證明原版現行資料下走不到。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
           "internal/battle/message.go",
-          "docs/spec/008-combat-field.md"
+          "cmd/kol/death_line_test.go"
         ],
-        "pattern": "那兩個條件的語意還沒定|攻擊致死這兩條分支尚未接上",
-        "note": "程式與 SPEC-008 各一處自承；接上時一起改寫。"
+        "pattern": "0x2796F",
+        "note": "已完成，當回歸訊號：分支實作與展開測試都要在。"
       },
-      "issue": 52
+      "issue": 52,
+      "status": "done"
     },
     {
       "id": "sub-26c5f-damage-line",
@@ -895,18 +896,19 @@
       "id": "battle-silent-steps-inventory",
       "layer": "verification",
       "title": "執行段裡沒有訊息就不停的那幾手",
-      "body": "原版每一手都印一句再等鍵（sub_1B100(5)）。remake 的 battleStep 仍保留「這一手沒有訊息就直接往下走」的迴圈，當初是因為敵人那一手與攻擊訊息都還沒接；兩者現已接上，哪些手仍會落進這條迴圈還沒盤點。",
+      "body": "盤點完成：`act` 不帶訊息的只有三類——怪物在隊員看不到的地方休息或移動（`sub_2625A` 回非零）、腳下沒東西時撿、以及理應不會發生的 Unimplemented。反組譯證實原版的等鍵 `sub_1B100` 寫在印訊息的分支裡（休息 `sub_1E3A8:0x206E1`、移動 `sub_26384:0x2654F`／`0x265B4`），跳過時不印也不等，remake 的迴圈與原版一致；SPEC-008 那條差異改寫為相同。",
       "acceptance": "列出現行 Act 結果中沒有訊息的手並逐一對照原版；原版有訊息的補上，確定原版也不印的寫進 SPEC-008，最後移除或收窄這條迴圈。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "cmd/kol/main.go",
-          "docs/spec/008-combat-field.md"
+          "docs/spec/008-combat-field.md",
+          "cmd/kol/main.go"
         ],
-        "pattern": "哪些手會落到這裡還沒盤點|迴圈尚未盤點",
-        "note": "程式與規格的自承；盤點完一起改寫。"
+        "pattern": "sub_2625A",
+        "note": "已完成，當回歸訊號：規格與程式都引用 sub_2625A 的依據。"
       },
-      "issue": 96
+      "issue": 96,
+      "status": "done"
     },
     {
       "id": "move-unlock-tile-reason",

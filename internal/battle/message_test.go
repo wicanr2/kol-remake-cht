@@ -220,14 +220,14 @@ func TestAttackLine(t *testing.T) {
 func TestDamageLine(t *testing.T) {
 	head := []int{TheBlowRecord, BlowKindBase, HitsRecord, LocationBase + 2}
 	// 傷害為 0。
-	assertRecords(t, DamageLine(Outcome{Location: 2}, 0, false),
+	assertRecords(t, DamageLine(Outcome{Location: 2}, 0, false, false),
 		append(append([]int{}, head...), LittleRecord))
 	// 三段輕重。
 	for _, c := range []struct {
 		damage, record int
 	}{{1, SeriousRecord}, {0x0F, SeriousRecord}, {0x10, TerribleRecord},
 		{0x17, TerribleRecord}, {0x18, GrievousRecord}} {
-		got := DamageLine(Outcome{Damage: c.damage, Location: 2}, 0, false)
+		got := DamageLine(Outcome{Damage: c.damage, Location: 2}, 0, false, false)
 		if got[len(got)-2] != c.record {
 			t.Errorf("傷害 %d 應該印 %#x，得到 %#x", c.damage, c.record, got[len(got)-2])
 		}
@@ -236,20 +236,27 @@ func TestDamageLine(t *testing.T) {
 		}
 	}
 	// 手腳廢了。
-	got := DamageLine(Outcome{Damage: 5, Location: 2, Limb: true}, 0, false)
+	got := DamageLine(Outcome{Damage: 5, Location: 2, Limb: true}, 0, false, false)
 	assertRecords(t, got, append(append([]int{}, head...), LimbUselessRecord))
 	// 頭廢了：敵人是 killing it、隊員是 unconscious。
 	headHit := []int{TheBlowRecord, BlowKindBase, HitsRecord, LocationBase}
-	got = DamageLine(Outcome{Damage: 5, Location: 0, Limb: true}, 0, true)
+	got = DamageLine(Outcome{Damage: 5, Location: 0, Limb: true}, 0, true, false)
 	assertRecords(t, got, append(append([]int{}, headHit...), KilledRecord))
-	got = DamageLine(Outcome{Damage: 5, Location: 0, Limb: true}, 0, false)
+	got = DamageLine(Outcome{Damage: 5, Location: 0, Limb: true}, 0, false, false)
 	assertRecords(t, got, append(append([]int{}, headHit...), UnconsciousRecord))
-	// 倒下。
-	got = DamageLine(Outcome{Damage: 5, Location: 2, Down: true}, 0, false)
-	assertRecords(t, got, append(append([]int{}, head...),
+	// 倒下（`0x2796F`）：隊員 collapse、會碎的怪物 shatter、其餘怪物 die。
+	down := Outcome{Damage: 5, Location: 2, Down: true}
+	assertRecords(t, DamageLine(down, 0, false, false), append(append([]int{}, head...),
+		MakingRecord, CollapseRecord, BloodLossRecord))
+	assertRecords(t, DamageLine(down, 0, true, true), append(append([]int{}, head...),
+		MakingRecord, ShatterRecord))
+	assertRecords(t, DamageLine(down, 0, true, false), append(append([]int{}, head...),
 		MakingRecord, DieRecord, BloodLossRecord))
+	// shatters 只看怪物；隊員就算帶了也照 collapse。
+	assertRecords(t, DamageLine(down, 0, false, true), append(append([]int{}, head...),
+		MakingRecord, CollapseRecord, BloodLossRecord))
 	// 法術用 0x142。
-	got = DamageLine(Outcome{Location: 2}, 1, false)
+	got = DamageLine(Outcome{Location: 2}, 1, false, false)
 	if got[1] != BlowKindBase+1 {
 		t.Errorf("法術應該印 %#x，得到 %#x", BlowKindBase+1, got[1])
 	}

@@ -2037,8 +2037,8 @@ func (g *game) battleStep() {
 		g.quest.state = nil
 		return
 	}
-	// 沒有訊息的那幾手不停下來等鍵，停在空白畫面只會讓人以為當掉了。原版每一手
-	// 都印一句（SPEC-008「已知差異」），哪些手會落到這裡還沒盤點。
+	// 沒有訊息的那幾手不停下來等鍵：原版的等鍵寫在印訊息的分支裡面，看不到的怪物
+	// 休息、移動與腳下沒東西的撿都是不印也不等（SPEC-008，`sub_2625A`）。
 	var r battle.ActResult
 	for {
 		var ok bool
@@ -2141,8 +2141,9 @@ func (g *game) battleStep() {
 		return
 	}
 	monster := r.Target >= 0 && s.Actors[r.Target].Member < 0
+	shatters := monster && s.Actors[r.Target].Shatters
 	s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
-		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster))))}
+		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster, shatters))))}
 	// 擊退或打暈那一句接在傷害之後（RE-095）。`|F` 指的還是被打的那一位。
 	if len(r.Knock) > 0 {
 		s.Exec.Pending = append(s.Exec.Pending, battle.WrapMessage(

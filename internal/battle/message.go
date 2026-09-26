@@ -351,16 +351,24 @@ func AttackLine(command, style int, out Outcome, heavy bool) []int {
 
 // DamageLine 回傳一次攻擊第二句要印哪幾筆記錄（`sub_277F4`，RE-088）。
 // kind 是傷害種類（0 是 blow、1 是 spell）；targetMonster 決定倒下那一句要用
-// 「killing it instantly」還是「making him unconscious」。
-func DamageLine(out Outcome, kind int, targetMonster bool) []int {
+// 「killing it instantly」還是「making him unconscious」，以及致死那一句的分支；
+// shatters 是目標怪物記錄 `+0x10` 的 bit 7。
+func DamageLine(out Outcome, kind int, targetMonster, shatters bool) []int {
 	records := []int{TheBlowRecord, BlowKindBase + kind, HitsRecord,
 		LocationBase + out.Location}
 	switch {
 	case out.Damage == 0:
 		return append(records, LittleRecord)
 	case out.Down:
-		// 原版在這裡還會依 `sub_22229` 與怪物記錄 +0x10 分出 collapse／shatter，
-		// 那兩個條件的語意還沒定（RE-088），先一律走 die。
+		// `sub_277F4:0x2796F`：印 0x14B 之後問 `sub_22229(目標)`——它看參戰者記錄
+		// `+0x01`，隊員是 0。隊員「collapse from blood loss」；怪物記錄 `+0x10`
+		// 大於 0x7F（bit 7）的「shatter into pieces」；其餘「die from blood loss」。
+		switch {
+		case !targetMonster:
+			return append(records, MakingRecord, CollapseRecord, BloodLossRecord)
+		case shatters:
+			return append(records, MakingRecord, ShatterRecord)
+		}
 		return append(records, MakingRecord, DieRecord, BloodLossRecord)
 	case out.Limb:
 		if out.Location > 1 {

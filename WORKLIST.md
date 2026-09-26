@@ -169,11 +169,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：同 v01-full-battle-parity。
   核實：要人判——同 v01-full-battle-parity。這兩條應該一起收掉，或合成一條。
 
-- **battle-silent-steps-inventory**（#96） — 執行段裡沒有訊息就不停的那幾手
-  原版每一手都印一句再等鍵（sub_1B100(5)）。remake 的 battleStep 仍保留「這一手沒有訊息就直接往下走」的迴圈，當初是因為敵人那一手與攻擊訊息都還沒接；兩者現已接上，哪些手仍會落進這條迴圈還沒盤點。
-  完成條件：列出現行 Act 結果中沒有訊息的手並逐一對照原版；原版有訊息的補上，確定原版也不印的寫進 SPEC-008，最後移除或收窄這條迴圈。
-  核實：`cmd/kol/main.go`、`docs/spec/008-combat-field.md` 找得到 `哪些手會落到這裡還沒盤點|迴圈尚未盤點` 就是還沒完
-
 - **ui-details-unverified**（#64） — 五處 UI 細節還沒對拍
   程式裡自承「還沒對拍」的幾處：法術清單的標題座標與版面（`spell.go`）、戰利品畫面（`spoils.go`，要打贏一場而且擲中兩成的掉落才看得到）、選目標格的那一圈與游標樣子（`ui/battle.go` 兩處）、物品頁 `sub_153FF` 模式 8 的擺法（`ui/itempage.go`）。都是畫得出來但沒有與原版逐畫面比過。
   完成條件：五處各有一份逐畫面對拍收據。
@@ -245,11 +240,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   這是流程規則不是一次性工作。目前 docs/spec/ 底下只有 004 與 028 兩份還是 DRAFT，其餘已升 READY 或部分 READY。
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
-
-- **attack-message-chain-index**（#52） — 攻擊致死的 collapse／shatter 分支
-  攻擊訊息索引規則已由 RE-088 解出並接上（SPEC-008 第 6 節）。殘留的是倒下那一句：原版依 `sub_22229` 分出 0x14C「collapse」、依怪物記錄 +0x10 bit 7 分出 0x14E「shatter into pieces!」，remake 的 `DamageLine` 一律走 die。bit 7 已抽成 `Monster.Shatters`；`sub_22229` 在這個分支的語意要先確認。
-  完成條件：兩條分支依 RE 證據接上，並有 collapse 與 shatter 各一次的訊息收據；或證明原版現行資料下走不到。
-  核實：`internal/battle/message.go`、`docs/spec/008-combat-field.md` 找得到 `那兩個條件的語意還沒定|攻擊致死這兩條分支尚未接上` 就是還沒完
 
 - **sub-26c5f-damage-line**（#53） — 那一句的數字要 sub_26C5F(0x17) 才算得出來
   該常式還沒解讀，所以那一句寧可不報也不報錯的數字。
@@ -377,9 +367,11 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。
+- **attack-message-chain-index** — 攻擊致死的 collapse／shatter 分支：已完成
 - **enemy-move-direction-unhooked** — 敵人移動段的方向規則：解出來了但還沒接上：已完成
 - **counterscan-style-and-retry** — 反制掃描的攻擊選項來源，與移動繞不出去的重試路徑：2026-09-11 核實：兩條**都已經在程式裡**，過期的是 enemyStrike 頭上那兩句註解。抄對手那格是 counterScan 的 bestStyle（三支測試護著）；重試路徑是 enemyStuck 的 a.Stuck++ 與 enemyStrike 的 `if a.Stuck == 0`——後者原本沒有測試，這一輪補上 TestEnemyStrikeFixesStyleAfterBeingStuck（含反面對照：沒困住過時同一顆骰子要給出不同的攻擊式）與 TestEnemyStuckCountsUpAndRetries。
 - **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力：已完成
+- **battle-silent-steps-inventory** — 執行段裡沒有訊息就不停的那幾手：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。

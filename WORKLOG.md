@@ -6628,3 +6628,12 @@ frame-270 推翻了 remake 的版面：
 - #88 結案：`check_player_paths.py --all` 24 條逐張一致；`verify_player_path.py` 17 條、
   `verify_full_path.py` 7 條全數 0 失敗（含存檔逐欄比對）。回歸訊號改綁重跑工具與 README 現況節。
   容器皆 `--rm`，本專案無殘留容器；中途停掉的驅動器容器已確認移除。
+- #52 結案：依 `sub_277F4:0x2796F` 反組譯接上攻擊致死三分支——`sub_22229` 讀參戰者 `+0x01`
+  判隊員（collapse from blood loss），怪物記錄 `+0x10` bit 7（只有 SKELETON）shatter into
+  pieces，其餘 die from blood loss。`DamageLine` 加 `shatters` 參數；新增
+  `cmd/kol/death_line_test.go` 以真實文字庫與繁中譯表展開三句。Go 測試通過，24 條玩家路徑仍一致。
+- #96 結案：`act` 無訊息的手只有看不到的怪物休息／移動與腳下沒東西的撿。反組譯證實原版等鍵
+  `sub_1B100` 在印訊息的分支裡（`sub_1E3A8:0x206E1`、`sub_26384:0x2654F`／`0x265B4`），
+  跳過時不印也不等；SPEC-008「原版每一手都印一句」的前提不成立，改寫為與原版相同。
+- 發現：`replay_battle_receipts.py --all` 7 份 `battle-*` 收據全數對不上或跑不起來（野外遭遇
+  沒發生，`SPACE` 落在野外），與 #88 同一成因，另登工作項處理。
