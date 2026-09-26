@@ -1108,17 +1108,20 @@
       "id": "begin-round-flee-icon",
       "layer": "gap",
       "title": "「Begin next round?」那一列的逃走格（0x30）",
-      "body": "原版整輪規劃完印記錄 0x108，圖示列是 YES、U-TURN，`word_345DE == 0xFFFF`（競技場與訓練戰以外的所有戰鬥，含任務戰鬥）再加一格 0x30（`sub_1E3A8` 的 `loc_1FB5F`）。選它印記錄 0x109「Do you want to flee?」，答 y 後從 `0x1FC01` 起逐名以參戰者記錄 `+0x0C`、`+0x08`、`+0x02` 算機率並擲 `rand(100)`。remake 的這一列一律只有 YES 與 U-TURN，逃走只有戰場邊緣那一條（RE-103）。",
+      "body": "RE-143 讀清並接上：「Begin next round?」在競技場與訓練戰以外多一格 0x30（`NextRoundBar`），`ChooseNextRound` 依白框分成進執行段、U-TURN 重新規劃、問 0x109；答 y 走 `BarFlee`（逐名以 ((智力＋力量)÷2×等級)÷3 擲判定，失敗且手上是武器的丟在腳下，一律逃掉、不標任務完成），答 n 回去重新規劃。SPEC-008、SPEC-014 §3b 同步；單元測試四項與機制收據 `battle-bar-flee` 通過。",
       "acceptance": "讀完 `0x1FBAD`…`0x1FD1E` 的逃走判定與成敗後續、寫進 SPEC-014 升 READY，接上 0x30 並以機制收據驗證（競技場不出現、一般與任務戰鬥出現、成敗兩條）。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/battle/planning.go"
+          "internal/battle/flee.go",
+          "docs/spec/014-quest-completion.md",
+          "docs/verification/battle-bar-flee/receipt.json"
         ],
-        "pattern": "remake 還沒接，見工作項 begin-round-flee-icon",
-        "note": "planning.go 的自承；接上時改寫。"
+        "pattern": "RE-143",
+        "note": "已完成，當回歸訊號：實作、規格與收據都引用 RE-143。"
       },
-      "issue": 98
+      "issue": 98,
+      "status": "done"
     },
     {
       "id": "koldata-action-messages",
@@ -1140,17 +1143,19 @@
       "id": "reshuffle-behavior-address",
       "layer": "spec",
       "title": "重排這一輪的行為沒對上位址",
-      "body": "那一段的行為還沒對上原版位址，remake 取「重排這一輪」；逃走不接在這裡。",
+      "body": "RE-143：「Begin next round?」選 U-TURN（或逃走格答 n）跳回 `0x1EF3A`，重擲規劃鍵值、排序、`word_30D00` 回合數加一，不經過回合結束的法術倒數 `0x20F01`。remake 原本走完整 `BeginPlanning` 會多扣一次法術剩餘回合，已拆出 `Replan`；`TestUTurnReplansWithoutSpellCountdown` 釘住。SPEC-008 同步。",
       "acceptance": "位址對上，行為確認。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/battle/state.go"
+          "internal/battle/round.go",
+          "internal/battle/planning_test.go"
         ],
-        "pattern": "行為還沒對上位址",
-        "note": "state.go 的自承。"
+        "pattern": "Replan",
+        "note": "已完成，當回歸訊號：Replan 與測試都要在。"
       },
-      "issue": 69
+      "issue": 69,
+      "status": "done"
     },
     {
       "id": "spec-unsolved-sections",

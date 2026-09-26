@@ -456,9 +456,14 @@ func (g *game) applyBattleToken(s *battle.State, token string,
 	}
 	if s.Plan.Prompt == battle.PromptNextRound {
 		switch token {
+		case ">":
+			s.MoveSelection(1)
+		case "<":
+			s.MoveSelection(-1)
 		case "RET", "SPACE":
-			s.Answer(true)
-			step(s)
+			if g.chooseNextRound(s) {
+				step(s)
+			}
 		case "N":
 			s.Answer(false)
 		}
@@ -2177,6 +2182,18 @@ func townCarried(slots []roster.CarriedSlot) [][]byte {
 	return out
 }
 
+// chooseNextRound 處理「Begin next round?」那一列選下去（RE-143）。回報要不要
+// 接著推執行段；選到逃走格時把記錄 0x109 印在卷軸上等 y／n。
+func (g *game) chooseNextRound(s *battle.State) bool {
+	switch s.ChooseNextRound() {
+	case battle.NextRoundExecute:
+		return true
+	case battle.NextRoundAskFlee:
+		s.Exec.Text = battle.WrapMessage(g.battleRecord(battle.FleeAskRecord))
+	}
+	return false
+}
+
 // battleVerdictLines 是這一場結束時要印的那幾句（RE-091）。沒分勝負就回 nil，
 // 執行段照常排下一回合。
 //
@@ -2311,8 +2328,9 @@ func (g *game) updateBattle() {
 		inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		switch s.Plan.Prompt {
 		case battle.PromptNextRound:
-			s.Answer(true)
-			g.battleStep()
+			if g.chooseNextRound(s) {
+				g.battleStep()
+			}
 		case battle.PromptExecuting:
 			g.battleStep()
 		case battle.PromptFlee, battle.PromptPickUp, battle.PromptArea:

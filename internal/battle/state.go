@@ -106,6 +106,9 @@ type Member struct {
 
 // State 是一場戰鬥。
 type State struct {
+	// fleeFromBar 表示目前那一問是從「Begin next round?」的逃走格來的（RE-143），
+	// 不是戰場邊上那一條（RE-103）。
+	fleeFromBar   bool
 	rangedPending bool
 	Site          *Site
 	Stage         Stage
@@ -291,9 +294,9 @@ func (s *State) Answer(yes bool) bool {
 		}
 		s.Stage = StageEncounter
 	case StageField:
-		// 整輪規劃完問「Begin next round?」：YES 進執行段。U-TURN 那一格的原版
-		// 行為還沒對上位址，這裡取「重排這一輪」——逃走**不接在這裡**，
-		// 它由執行段走完之後的 `OfferFlee` 決定（RE-103 訂正了 RE-079 的順序）。
+		// 整輪規劃完問「Begin next round?」：YES 進執行段；U-TURN 跳回 `0x1EF3A`
+		// 重新規劃這一回合（RE-143）。逃走格由 `ChooseNextRound` 另外處理，
+		// 戰場邊上那一條逃走在執行段之後由 `OfferFlee` 決定（RE-103）。
 		if yes {
 			// 答應之後進執行段：一手一句訊息，由 Step 推進（RE-084）。
 			if s.Rand != nil {
@@ -309,11 +312,29 @@ func (s *State) Answer(yes bool) bool {
 			break
 		}
 		if s.Rand != nil {
-			s.BeginPlanning(s.Rand)
+			s.Replan(s.Rand)
 		}
 		s.AdvanceToParty()
 		s.BeginTurn()
 	case StageFlee:
+		// 從「Begin next round?」的逃走格來的那一問（RE-143）：答應走 BarFlee，
+		// 不答應跳回 `0x1EF3A` 重新規劃這一回合，與 U-TURN 相同。
+		if s.fleeFromBar {
+			if yes {
+				if s.Rand != nil {
+					s.BarFlee(s.Rand)
+				}
+				return true
+			}
+			s.fleeFromBar = false
+			s.Stage = StageField
+			if s.Rand != nil {
+				s.Replan(s.Rand)
+			}
+			s.AdvanceToParty()
+			s.BeginTurn()
+			return true
+		}
 		if yes {
 			s.Flee()
 			return true

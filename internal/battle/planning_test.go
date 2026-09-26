@@ -267,3 +267,24 @@ func TestPlanningEveryBarIconHandled(t *testing.T) {
 		}
 	}
 }
+
+// U-TURN 跳回 `0x1EF3A` 重排這一回合：回合數照樣加一（`0x1F04C`），但不經過回合
+// 結束的法術倒數（`0x20F01`），身上法術的剩餘回合不能多扣（RE-143，#69）。
+func TestUTurnReplansWithoutSpellCountdown(t *testing.T) {
+	s := planningState(Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}})
+	s.Rand = &fixedRoll{values: []int{50, 50, 50, 50}}
+	s.Actors[0].SpellTurns = 3
+	round := s.Round.Number
+	s.Plan.Prompt = PromptNextRound
+	s.Plan.Bar = s.NextRoundBar()
+	s.Plan.Selected = 1 // U-TURN
+	if c := s.ChooseNextRound(); c != NextRoundReplan {
+		t.Fatalf("U-TURN 應該重新規劃，得到 %d", c)
+	}
+	if s.Actors[0].SpellTurns != 3 {
+		t.Fatalf("U-TURN 不該扣法術回合，剩 %d", s.Actors[0].SpellTurns)
+	}
+	if s.Round.Number != round+1 {
+		t.Fatalf("回合數應該加一：%d → %d", round, s.Round.Number)
+	}
+}

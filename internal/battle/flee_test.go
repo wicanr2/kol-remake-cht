@@ -165,3 +165,64 @@ func TestNewQuestTakesQuestItemName(t *testing.T) {
 		t.Fatalf("隨機遭遇不該有任務物品，得到 %q", s.QuestItem)
 	}
 }
+
+// 「Begin next round?」那一列：一般與任務戰鬥多一格逃走，競技場與訓練戰沒有（RE-143）。
+func TestNextRoundBarFleeIcon(t *testing.T) {
+	s := fleeState()
+	if bar := s.NextRoundBar(); len(bar) != 3 || bar[2] != IconFleeBar {
+		t.Fatalf("一般戰鬥應該有逃走格，得到 %#x", bar)
+	}
+	s.RankFight = true
+	if bar := s.NextRoundBar(); len(bar) != 2 {
+		t.Fatalf("競技場不該有逃走格，得到 %#x", bar)
+	}
+}
+
+// 白框停在哪一格決定往哪裡走：U-TURN 重新規劃、逃走格進問句、其餘進執行段。
+func TestChooseNextRound(t *testing.T) {
+	s := fleeState()
+	s.Stage = StageField
+	s.Plan.Prompt = PromptNextRound
+	s.Plan.Bar = s.NextRoundBar()
+	s.Plan.Selected = 2
+	if c := s.ChooseNextRound(); c != NextRoundAskFlee || s.Stage != StageFlee || s.Plan.Prompt != PromptFlee {
+		t.Fatalf("逃走格應該進問句，得到 %d／%d／%d", c, s.Stage, s.Plan.Prompt)
+	}
+}
+
+// 答應之後全隊都逃掉；擲出大於門檻、手上是武器的人把武器丟在腳下。
+// 從這一格逃走不經過 0x21176，帶著任務物品也不算完成。
+func TestBarFleeDropsWeaponOnFailedRoll(t *testing.T) {
+	for _, c := range []struct {
+		roll    int
+		dropped bool
+	}{{roll: 100, dropped: true}, {roll: 1, dropped: false}} {
+		s := fleeState()
+		s.Actors[0].Intellect, s.Actors[0].Strength, s.Actors[0].Level = 60, 60, 3 // 門檻 60
+		s.Party[0].HasWeapon = true
+		s.Party[0].Weapon = Weapon{Kind: 0x20, Code: 1}
+		s.Party[1].HasWeapon = false // 帶著任務物品的那一名手上不是武器，不丟
+		s.Stage, s.fleeFromBar = StageFlee, true
+		s.Rand = &fixedRoll{values: []int{c.roll, c.roll}}
+		if !s.Answer(true) {
+			t.Fatal("答應逃走應該回報處理了")
+		}
+		if s.Verdict != VerdictFled || s.Stage != StageDone || s.QuestDone != 0 {
+			t.Fatalf("應該逃走而且不標任務完成，得到 %d／%d／%d", s.Verdict, s.Stage, s.QuestDone)
+		}
+		on := s.Ground[0].Name != ""
+		if on != c.dropped || s.Party[0].HasWeapon == c.dropped {
+			t.Fatalf("擲 %d：丟下=%v，應為 %v", c.roll, on, c.dropped)
+		}
+	}
+}
+
+// 不逃就跳回重新規劃這一回合（`0x1FD1B` 走 `0x1EF3A`），與 U-TURN 相同。
+func TestBarFleeDeclined(t *testing.T) {
+	s := fleeState()
+	s.Stage, s.fleeFromBar = StageFlee, true
+	s.Answer(false)
+	if s.Stage != StageField || s.fleeFromBar || s.Verdict != 0 {
+		t.Fatalf("不逃應該回戰場重新規劃，得到 %d／%v／%d", s.Stage, s.fleeFromBar, s.Verdict)
+	}
+}

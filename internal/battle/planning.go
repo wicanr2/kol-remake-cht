@@ -307,12 +307,10 @@ func (s *State) commit(i, command, style, guard int) bool {
 		}
 		done = true
 	}
-	// 整輪決定完印記錄 0x108，圖示列換成 YES 與 U-TURN（RE-080）。原版在
-	// `word_345DE == 0xFFFF`（競技場與訓練戰以外的戰鬥）還會多一格 0x30 問要不要逃
-	// （`sub_1E3A8` 的 `loc_1FB5F`），remake 還沒接，見工作項 begin-round-flee-icon。
-	// 這一列在執行段不會被重畫，訊息就蓋在它上面。
+	// 整輪決定完印記錄 0x108，圖示列換成 YES 與 U-TURN，競技場與訓練戰以外再多
+	// 一格逃走（`NextRoundBar`，RE-143）。這一列在執行段不會被重畫，訊息就蓋在它上面。
 	s.Plan.Prompt = PromptNextRound
-	s.Plan.Bar = []int{CmdYes, CmdCancel}
+	s.Plan.Bar = s.NextRoundBar()
 	s.Plan.Selected = 0
 	return true
 }

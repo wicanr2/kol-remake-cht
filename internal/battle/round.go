@@ -93,12 +93,8 @@ type Round struct {
 	inspectionRand     Rand
 }
 
-// BeginPlanning 依規劃鍵值排出這一回合誰先決定。空位排最後。
+// BeginPlanning 開新的一回合：先跑一次法術倒數，再排出誰先決定。空位排最後。
 func (s *State) BeginPlanning(rng Rand) {
-	s.InitializeMonsterRanged(rng)
-	s.Round.inspectionRand = rng
-	s.Round.inspectionPosition = 0
-	s.Round.InspectionRoll = 0
 	// 排順序之前先跑一次法術倒數（`sub_1E3A8:0x20F01`）：過期的把屬性重算回原值，
 	// 因為規劃鍵值要用洞察，而洞察本身可能正被法術改著。
 	s.WoreOff = s.WoreOff[:0]
@@ -107,6 +103,17 @@ func (s *State) BeginPlanning(rng Rand) {
 			s.WoreOff = append(s.WoreOff, i)
 		}
 	}
+	s.Replan(rng)
+}
+
+// Replan 從 `0x1EF3A` 起重排這一回合：逐名重擲規劃鍵值、排序（`sub_2616C`）、
+// 回合數加一（`0x1F04C` 的 `word_30D00`）。「Begin next round?」選 U-TURN 或在
+// 逃走格答 n 都跳回這裡（RE-143），**不經過**回合結束的法術倒數 `0x20F01`。
+func (s *State) Replan(rng Rand) {
+	s.InitializeMonsterRanged(rng)
+	s.Round.inspectionRand = rng
+	s.Round.inspectionPosition = 0
+	s.Round.InspectionRoll = 0
 	keys := make([]int, len(s.Actors))
 	order := make([]int, 0, len(s.Actors))
 	for i, a := range s.Actors {

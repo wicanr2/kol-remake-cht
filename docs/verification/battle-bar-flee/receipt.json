@@ -1,0 +1,130 @@
+{
+ "schema": "kol-battle-mechanics-v1",
+ "name": "battle-bar-flee",
+ "kind": "mechanics",
+ "description": "「Begin next round?」那一列的逃走格（RE-143，SPEC-014 §3b）。Poontang 出城往東走，時段變換那一下被伏擊（種子自然擲出），第一回合選休息；整輪規劃完的 0x108 那一列在一般戰鬥多一格 0x30，白框移到那一格按 RET 印記錄 0x109「Do you want to flee?」，答 Y 全隊逃掉、印 0x17B＋0x17C，按一個鍵回野外。擲骰失敗丟武器那一層由 `internal/battle/flee_test.go` 支撐。收據驗的是機制，畫格只作示意（2026-09-26 定案）。全程正常玩家路徑，沒有換過輸入也沒有測試旗標。",
+ "command": "tools/replay_battle_receipts.py battle-bar-flee --write",
+ "seed": 141421,
+ "size": [
+  320,
+  200
+ ],
+ "not_claimed": [
+  {
+   "name": "與原版的畫面一致",
+   "reason": "原版這一格的同狀態畫格沒有取；流程與條件由 RE-143 靜態讀出。"
+  },
+  {
+   "name": "丟武器的擲骰結果",
+   "reason": "由種子決定，收據不綁定；規則由單元測試支撐。"
+  }
+ ],
+ "runs": [
+  {
+   "name": "伏擊後從逃走格逃走",
+   "checks": [
+    {
+     "find": {
+      "battle": {
+       "stage": 1,
+       "site": -1
+      }
+     },
+     "time_part_change": true,
+     "note": "時段變換那一步被伏擊"
+    },
+    {
+     "find": {
+      "battle": {
+       "prompt": 8,
+       "bar": [
+        7,
+        15,
+        48
+       ]
+      }
+     },
+     "note": "整輪規劃完：YES、U-TURN、逃走格（0x30）"
+    },
+    {
+     "find": {
+      "battle": {
+       "prompt": 8,
+       "selected": 2
+      }
+     },
+     "note": "白框移到逃走格"
+    },
+    {
+     "find": {
+      "battle": {
+       "exec_text": [
+        "Do you want to flee?"
+       ]
+      }
+     },
+     "within": 1,
+     "note": "選逃走格印記錄 0x109"
+    },
+    {
+     "find": {
+      "battle": {
+       "stage": 5,
+       "verdict": 3,
+       "exec_text": [
+        "You flee for your life!"
+       ]
+      }
+     },
+     "within": 1,
+     "note": "答 Y：全隊逃掉（0x17B＋0x17C）"
+    },
+    {
+     "find": {
+      "battle": null,
+      "world": {
+       "mode": 0
+      }
+     },
+     "within": 1,
+     "note": "按一個鍵回野外"
+    }
+   ],
+   "found": [
+    52,
+    60,
+    62,
+    63,
+    64,
+    65
+   ]
+  }
+ ],
+ "frames": [
+  {
+   "file": "bar.png",
+   "run": 0,
+   "check": 2,
+   "shows": "Begin next round? 那一列三格，白框在逃走格",
+   "step": 62,
+   "sha256": "87a85803a56381d58ca48ccb0b0f1841d1c1d69fd9911b80ddb4537dbd73bd34"
+  },
+  {
+   "file": "ask.png",
+   "run": 0,
+   "check": 3,
+   "shows": "DO YOU WANT TO FLEE?",
+   "step": 63,
+   "sha256": "74df9cdf12e615aba3d67ecbc11be84c52ac015e276a37be8ba4a84fae253712"
+  },
+  {
+   "file": "fled.png",
+   "run": 0,
+   "check": 4,
+   "shows": "YOU FLEE FOR YOUR LIFE!",
+   "step": 64,
+   "sha256": "a1c12fa9da6b63172a9b091bfa95c301bef8ea1ab24d7c696f2f55418c259823"
+  }
+ ],
+ "rights": "remake 自己畫的畫面；圖示來自已通過權利審查的原作衍生 PNG。"
+}
