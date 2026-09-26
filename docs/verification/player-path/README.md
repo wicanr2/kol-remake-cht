@@ -24,8 +24,10 @@ plan 因此要帶齊重跑所需的每一個旗標——`full-chain-ending` 的 
 
 `verify_player_path.py` 與 `verify_full_path.py` **不重跑**，比的是收據目錄裡那幾張圖
 與軌跡自不自洽，程式改了它們照樣通過。要抓回歸得重跑再比：`tools/check_player_paths.py`
-重跑到 `workplace/replay-check/` 再與這個目錄裡同名那幾張逐 byte 比，不寫回收據。
-短路徑逐張比，長路徑（有 trace 的）只比檢查點那幾張。
+重跑到 `workplace/replay-check/`，拿新的**狀態軌跡**與收據目錄裡的參考軌跡逐步比
+（場景、位置與模式、提示、戰鬥階段與訊息、隊伍數值、結局），不寫回收據。
+判準是機制一致，不要求畫面逐位元相同（2026-09-26 定案）：截圖差異只列出張數當參考。
+短路徑的參考軌跡是 `<名字>/trace.json`，由 `--bootstrap` 從現行程式產生。
 
 ```
 python3 tools/check_player_paths.py --all

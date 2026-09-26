@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
-"""把收據的 plan 重跑一次，比對每個檢查點的截圖——**不覆寫收據**。
+"""把收據的 plan 重跑一次，比對狀態軌跡——**不覆寫收據**。
 
 `verify_full_path.py` 比的是收據目錄裡那幾張圖與軌跡自不自洽，而它們全部來自
 同一次產生，所以程式改了它照樣通過。`replay_player_path.py` 會重跑，但它把結果
 寫回 `docs/verification/`，跑完收據就被換掉了，看不出有沒有變。
 
-這一支重跑到 `workplace/replay-check/<名字>/`，再拿產出的截圖與收據目錄裡同名那
-幾張逐 byte 比。不同就列出來並回非零。
+這一支重跑到 `workplace/replay-check/<名字>/`，拿產出的**狀態軌跡**（`-trace`）與收據
+目錄裡的參考軌跡逐步比：場景、城鎮／野外位置與模式、提示、戰鬥階段與訊息、隊伍數值、
+結局。不同就列出來並回非零。2026-09-26 定案：收據驗機制，不要求畫面逐位元相同——
+截圖差異只列出數量當參考，不算失敗。
+
+短路徑原本沒有軌跡；`--bootstrap` 把這一次跑出來的軌跡寫成參考（只補缺少的）。
 
   tools/check_player_paths.py world-quest town-mirror
   tools/check_player_paths.py --all
@@ -56,16 +60,41 @@ def spec_line(plan: dict, shot_dir: pathlib.Path) -> str:
     steps = sorted({c["step"] for c in plan.get("checkpoints", [])})
     if steps and plan.get("trace"):
         args += ["-shot-steps", ",".join(str(s) for s in steps)]
-    if plan.get("trace"):
-        args += ["-trace", f"{shot_dir}/trace.json"]
+    args += ["-trace", f"{shot_dir}/trace.json"]
     return "|".join(args)
+
+
+def reference_trace(plan: dict) -> pathlib.Path:
+    return pathlib.Path(plan.get("trace") or f"{plan['shot_dir']}/trace.json")
+
+
+def state(step: dict) -> dict:
+    """一步的狀態：軌跡整筆去掉步名（步名只是畫格檔名）。"""
+    return {k: v for k, v in step.items() if k != "name"}
+
+
+def compare_traces(ref: list[dict], got: list[dict]) -> list[str]:
+    out = []
+    if len(ref) != len(got):
+        out.append(f"軌跡長度不同：參考 {len(ref)} 步、這一次 {len(got)} 步")
+    for i, (a, b) in enumerate(zip(ref, got)):
+        a, b = state(a), state(b)
+        if a == b:
+            continue
+        keys = sorted(k for k in set(a) | set(b) if a.get(k) != b.get(k))
+        detail = "；".join(f"{k}: {json.dumps(a.get(k), ensure_ascii=False)[:120]} → "
+                          f"{json.dumps(b.get(k), ensure_ascii=False)[:120]}" for k in keys[:2])
+        out.append(f"第 {i} 步 {detail}")
+        if len(out) >= 4:
+            break
+    return out
 
 
 def digest(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def check(name: str) -> bool:
+def check(name: str, bootstrap: bool = False) -> bool:
     path = PLANS / f"{name}.json"
     plan = json.loads(path.read_text(encoding="utf-8"))
     shot_dir = OUT / name
@@ -79,24 +108,28 @@ def check(name: str) -> bool:
         print(f"{name}：跑不動\n{run.stderr[-800:]}")
         return False
 
+    got_path = shot_dir / "trace.json"
+    got = json.loads(got_path.read_text(encoding="utf-8"))["steps"]
+    ref_path = reference_trace(plan)
+    if not ref_path.exists():
+        if not bootstrap:
+            print(f"{name}：沒有參考軌跡 {ref_path}（先跑 --bootstrap）")
+            return False
+        ref_path.write_bytes(got_path.read_bytes())
+        print(f"{name}：寫出參考軌跡 {ref_path}（{len(got)} 步）")
+    ref = json.loads(ref_path.read_text(encoding="utf-8"))["steps"]
+    problems = compare_traces(ref, got)
+
+    # 截圖只當參考：數一下有幾張與收據目錄不同，不算失敗。
     kept = pathlib.Path(plan["shot_dir"])
-    same, diff, missing = 0, [], []
-    for shot in sorted(shot_dir.glob("step-*.png")):
-        old = kept / shot.name
-        if not old.exists():
-            missing.append(shot.name)
-            continue
-        if digest(shot) == digest(old):
-            same += 1
-        else:
-            diff.append(shot.name)
-    ok = not diff and not missing
-    print(f"{name}：{'一致' if ok else '對不上'}"
-          f"（相同 {same}、不同 {len(diff)}、收據裡沒有 {len(missing)}）")
-    for n in diff[:5]:
-        print(f"    ✗ {n}")
-    for n in missing[:5]:
-        print(f"    ? {n}（重跑產出，收據裡沒有）")
+    shots = sorted(shot_dir.glob("step-*.png"))
+    pixel = sum(1 for shot in shots
+                if (kept / shot.name).exists() and digest(shot) != digest(kept / shot.name))
+    ok = not problems
+    print(f"{name}：{'狀態一致' if ok else '狀態不同'}（{len(got)} 步；"
+          f"截圖與收據不同 {pixel} 張，僅供參考）")
+    for line in problems:
+        print(f"    ✗ {line}")
     return ok
 
 
@@ -105,6 +138,8 @@ def main() -> int:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("names", nargs="*", help="收據名，例如 world-quest")
     p.add_argument("--all", action="store_true", help="檢查全部")
+    p.add_argument("--bootstrap", action="store_true",
+                   help="缺少參考軌跡的路徑，把這一次的軌跡寫成參考")
     args = p.parse_args()
     names = args.names
     if args.all:
@@ -112,7 +147,7 @@ def main() -> int:
                        if not f.stem.endswith("-receipt"))
     if not names:
         p.error("要指定收據名，或加 --all")
-    bad = [n for n in names if not check(n)]
+    bad = [n for n in names if not check(n, args.bootstrap)]
     if bad:
         print(f"\n對不上的：{'、'.join(bad)}")
     return 1 if bad else 0

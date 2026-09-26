@@ -6671,3 +6671,6 @@ frame-270 推翻了 remake 的版面：
   `TestPlanningEveryBarIconHandled`。核對時讀 `sub_1E3A8:0x1FB3x` 起的「Begin next round?」：
   `word_345DE == 0xFFFF`（競技場與訓練戰以外，含任務戰鬥）會多一格 0x30 問要不要逃，並逐名擲
   逃走判定；remake 沒有這一格，註解「任務戰鬥沒有」也不正確。已改寫註解並登 `begin-round-flee-icon`。
+- `check_player_paths.py` 改為比**狀態軌跡**（去掉步名後逐步比對），截圖差異只列張數當參考；
+  短路徑以 `--bootstrap` 產生參考軌跡（17 份新進版控），長路徑參考軌跡因今天新增
+  `encounter_text`／`prompt_lines` 兩欄而更新——逐一確認差異只有這兩欄才覆寫。24 條狀態一致。
