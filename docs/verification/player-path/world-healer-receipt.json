@@ -1,18 +1,19 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "world-healer",
- "description": "野外遇見治療的那一條（怪物編號 0xFF，RE-112；敘述的來源由 RE-128 解出）。低位階的隊伍在野外每次時刻推進都有機會擲到它——`0x2A56A` 先算平均位階，低於 11 才擲 `rand(100) < [0x133E + 位階 − 1]`（21%／16%／11%）。走到的時候原版不擲數量與等級：先印一段遠景敘述，全隊都有坐騎才問要不要騎走；沒騎走就印走近之後那一段，再用記錄 0xE6 問「Will you be healed?」，答應之後把六名角色的傷勢（`+0x1B`）與飢餓（`+0x9F`）一起清零。這一隊沒有坐騎，所以直接跳到走近那一段。**那六段敘述不在怪物記錄裡**：它們在 DGROUP `0x2350`，而那一塊在 BSS、整份反組譯零個參照點。掃 `sub_1A4FE` 的每一個載入點才看到 `sub_29004:0x2905E` 把 `TOWN0` 的payload 4 載進 DGROUP `0x22D0`——`0x2350` 是它的 `+0x80`。版面是六段 × 四行 × 16 byte，**每行的第 0 個 byte 是要解幾個 5-bit 值**，不照它截斷句尾就會拖出一串垃圾字母。隊伍是 full-chain 那六名，平均位階 2；種子 23 在野外第 14 步擲到這一條。",
+ "description": "野外遇見治療的那一條（怪物編號 0xFF，RE-112；敘述的來源由 RE-128 解出）。低位階的隊伍在野外每次時刻推進都有機會擲到它——`0x2A56A` 先算平均位階，低於 11 才擲 `rand(100) < [0x133E + 位階 − 1]`（21%／16%／11%）。走到的時候原版不擲數量與等級：先印一段遠景敘述，全隊都有坐騎才問要不要騎走；沒騎走就印走近之後那一段，再用記錄 0xE6 問「Will you be healed?」，答應之後把六名角色的傷勢（`+0x1B`）與飢餓（`+0x9F`）一起清零。這一隊沒有坐騎，所以直接跳到走近那一段。**那六段敘述不在怪物記錄裡**：它們在 DGROUP `0x2350`，而那一塊在 BSS、整份反組譯零個參照點。掃 `sub_1A4FE` 的每一個載入點才看到 `sub_29004:0x2905E` 把 `TOWN0` 的payload 4 載進 DGROUP `0x22D0`——`0x2350` 是它的 `+0x80`。版面是六段 × 四行 × 16 byte，**每行的第 0 個 byte 是要解幾個 5-bit 值**，不照它截斷句尾就會拖出一串垃圾字母。隊伍是 full-chain 那六名，平均位階 2，讀存檔直接在半途之家門口開場（標題選角會以名冊角色重新組隊，用不上存檔隊伍）。**這條收據使用受控亂數**（使用者 2026-09-26 決定，依 CLAUDE.md「明示的受控亂數輸入」）：天候重擲接在遭遇之前之後，種子 23 已擲不到治療；要驗的就是這一條遭遇，換種子等於挑結果，所以改以 `-ambush-rolls 1,1,1` 指定野外第一次時段變換時`RollAmbush` 的三骰——遭遇成立（1 < 機率／2）、落在治療（1 < 21）、場景取僧侶那一組（(1−1)×2 = 0）——其餘亂數仍來自種子 23。它證明的是「擲到之後的畫面、問答與治療結果」，不證明機率本身；機率由 RE-078／RE-112 與 `internal/battle/ambush_test.go` 支撐。",
  "seed": 23,
  "load": "workplace/saves/party6.json",
- "token_count": 33,
+ "ambush_rolls": "1,1,1",
+ "token_count": 27,
  "trace": "docs/verification/player-path/world-healer/trace.json",
- "trace_sha256": "54cdd18e9de13aae7426cb5bfe6cbde5ef73e15639272f9189c312dcd96d6082",
+ "trace_sha256": "d49e8f23703d709723e6f286d445bc32e4990684b45eb5c0294aaaa5cae171d7",
  "milestones": [
   {
-   "step": 18,
+   "step": 12,
    "token": "RET",
    "note": "出城之後站在世界地圖上",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -33,10 +34,10 @@
    }
   },
   {
-   "step": 32,
+   "step": 26,
    "token": "R",
    "note": "第 14 步擲到治療那一條：走近的敘述加記錄 0xE6 的問句",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -58,10 +59,10 @@
    }
   },
   {
-   "step": 33,
+   "step": 27,
    "token": "RET",
    "note": "答應之後那一頁收掉，全隊的傷勢與飢餓歸零",
-   "scene": "flow:town",
+   "scene": "play",
    "town": {
     "left_town": true,
     "mode": 0,
@@ -92,15 +93,15 @@
  ],
  "checkpoints": [
   {
-   "step": 32,
-   "file": "step-032.png",
-   "sha256": "fffbb50c6fc9a5bb5ced7b49693687416ece0d2a95625e12863f021370567c61",
+   "step": 26,
+   "file": "step-026.png",
+   "sha256": "12853329f4b58f6dcbe784bfa969c07cfe23f6895948450ead84712f58bdeeb3",
    "shows": "治療那一頁：四行敘述加「Will you be healed?」"
   },
   {
-   "step": 33,
-   "file": "step-033.png",
-   "sha256": "8a8e8bb193490b52f570b8ffb0d092b616ab6c740a6e121f73c956b03d7da71d",
+   "step": 27,
+   "file": "step-027.png",
+   "sha256": "c7b0e625be2df17296631625185fb83e7a39d277291294cfdd8c661d821ee585",
    "shows": "答應之後回到地圖"
   }
  ],

@@ -42,6 +42,9 @@ def spec_line(plan: dict, shot_dir: pathlib.Path) -> str:
         args += ["-quest-sites", plan["quest_sites"]]
     if plan.get("monsters"):
         args += ["-monsters", plan["monsters"]]
+    # 受控亂數（CLAUDE.md 允許的「明示的受控亂數輸入」）：plan 寫明才帶，收據照抄。
+    if plan.get("ambush_rolls"):
+        args += ["-ambush-rolls", plan["ambush_rolls"]]
     # 會寫存檔的那幾條要把 -save 帶上，否則下一條讀不到它的產出
     # （`town-load` 讀的就是 `town-rest` 寫出來的那一份）。寫到暫存目錄，
     # 不動 workplace/saves 裡那幾份現成的。

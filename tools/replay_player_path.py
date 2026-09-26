@@ -45,6 +45,9 @@ def spec_line(plan: dict) -> str:
         args += ["-quest-sites", plan["quest_sites"]]
     if plan.get("monsters"):
         args += ["-monsters", plan["monsters"]]
+    # 受控亂數（CLAUDE.md 允許的「明示的受控亂數輸入」）：plan 寫明才帶，收據照抄。
+    if plan.get("ambush_rolls"):
+        args += ["-ambush-rolls", plan["ambush_rolls"]]
     flag = "-flow-script" if scene == "flow" else "-play-script"
     args += [flag, plan["script"], "-shot-dir", plan["shot_dir"]]
     keep = sorted({c["step"] for c in plan.get("checkpoints", [])})

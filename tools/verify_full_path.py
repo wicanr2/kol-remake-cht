@@ -166,6 +166,8 @@ def main() -> int:
         "description": plan.get("description", ""),
         "seed": plan.get("seed"),
         "load": plan.get("load"),
+        # 受控亂數要在收據上看得到，不能只寫在描述裡（CLAUDE.md 的 RND 鐵則）。
+        **({"ambush_rolls": plan["ambush_rolls"]} if plan.get("ambush_rolls") else {}),
         "token_count": len(tokens),
         "trace": plan["trace"],
         "trace_sha256": sha256(trace_path) if trace_path.exists() else None,

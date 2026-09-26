@@ -6591,3 +6591,8 @@ frame-270 推翻了 remake 的版面：
 - 使用者決定（2026-09-26）：`flow-quest` 撤下（前提「標題選角沿用讀檔隊伍」已不成立，標題段由
   `full`、任務地點由 `world-quest` 涵蓋）；`world-healer` 改用受控亂數並在收據標明方法；
   `full-chain`、`full-chain-reload`、`full-chain-ending`、`arena` 改成讀檔開場並重生戰鬥段。
+- #88 續：`world-healer` 改讀檔開場，依使用者決定改用受控亂數。新增只供測試的
+  `-ambush-rolls`（`cmd/kol/scripted_rolls.go`）：依序當作 `RollAmbush` 的骰值，用完回到種子
+  亂數，超出骰面直接停下；預設為空，正式遊戲不經過。plan 以 `ambush_rolls` 記錄、重跑工具
+  帶上、`verify_full_path.py` 照抄進收據。`1,1,1` 指定遭遇成立、落在治療、僧侶那一組；
+  第一次試 `1,1` 時場景由種子擲到不問治療的 Brettle 那一組，屬正確行為。收據 28 步一致。

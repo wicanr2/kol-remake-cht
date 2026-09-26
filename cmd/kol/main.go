@@ -2554,6 +2554,8 @@ func main() {
 	shotDir := flag.String("shot-dir", "", "批次截圖輸出目錄")
 	script := flag.String("script", "", "以空白分隔的操作腳本；每一步後截一張圖")
 	seed := flag.Int("seed", 1, "亂數種子，供可重播的屬性擲骰與標題序列使用")
+	ambushRolls := flag.String("ambush-rolls", "",
+		"測試用受控亂數：以逗號分隔，依序當作野外遭遇擲點（RollAmbush）的骰值，用完回到種子亂數")
 	titlePath := flag.String("title-sequence", "docs/re/title-sequence.json",
 		"標題序列腳本（由 RE-047 從 TITLE.EXE 的 _main 轉寫）")
 	titleShots := flag.String("title-shot-dir", "", "把標題序列一輪的每個畫面輸出到這個目錄")
@@ -3611,6 +3613,11 @@ func main() {
 			}
 			// 野外的隨機遭遇：時段一變就擲一次（SPEC-011）。走進某一格不會擲，
 			// 所以一天最多四次。
+			ambushScript, err := parseScriptedRolls(*ambushRolls)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(2)
+			}
 			worldSessionState.OnTimePart = func() {
 				if quest.state != nil || worldScreenState == nil {
 					return
@@ -3619,7 +3626,11 @@ func main() {
 				if c == nil || worldSessionState.Rand == nil {
 					return
 				}
-				rng := worldSessionState.Rand
+				rng := battle.Rand(worldSessionState.Rand)
+				if ambushScript != nil {
+					ambushScript.next = rng
+					rng = ambushScript
+				}
 				ranks := make([]int, 0, len(playSession.Party))
 				for _, m := range playSession.Party {
 					if m.Sheet != nil {
