@@ -1,13 +1,13 @@
 {
   "tool": "tools/verify_remake_parity.py",
   "plan": "world-clock",
-  "description": "野外的時刻推進（RE-077）。每走一步扣 `2 × (地形成本 + 隊伍移動率)`：地形成本表在 DGROUP+0x12B8、隊伍移動率取最慢的那個（0 當成 20）。時段是時刻落在 DGROUP+0x12CC 五個門檻的哪一段，從 4200 倒數。原版在平原上左右來回：第 15 次按鍵時刻降到 3360，跨過 DAWN 的下限 3367，標籤換成 MID MORN；第 14 次的 3416 還沒跨。remake 走同一串按鍵，兩個取樣點的標籤框與日期框都與原版逐像素相同。撞到不可通行的地形那一步不耗時間——原版走 `0x2958F` 把座標復原，之後跳過整支 `sub_297F2`。",
+  "description": "野外的時刻推進（RE-077、RE-151）。每走一步扣 `2 × ([0x12B8 + dy] + 隊伍移動率)`：索引是這一步的 Y 位移，東西每步 60、往北 40，與地形無關；時段在每一步扣之前才判。原版在平原上左右來回：第 14 步時刻 3360 已跨過 DAWN 的下限 3367，第 15 步開頭標籤才換成 MID MORN。原版錄影的畫格比按鍵晚一拍，所以第 14 步的狀態在標為「野外第 15 步」的 frame-217、第 15 步在 frame-223。remake 走同一串按鍵，兩個取樣點的標籤框與日期框都與原版逐像素相同。撞到不可通行的地形那一步不耗時間——原版走 `0x2958F` 把座標復原，之後跳過整支 `sub_297F2`。",
   "pair_count": 4,
   "pass_count": 4,
   "failure_count": 0,
   "pairs": [
     {
-      "label": "第 14 步：時刻 3416，還在 DAWN／標籤框",
+      "label": "第 14 步：時刻 3360，還在 DAWN／標籤框",
       "remake": "docs/verification/remake-parity/shots/world-clock/step14.png",
       "original": "docs/verification/character-ui/world-clock-run2/frames/frame-217.png",
       "size": [
@@ -27,7 +27,7 @@
       "required_regions": []
     },
     {
-      "label": "第 14 步：時刻 3416，還在 DAWN／日期框",
+      "label": "第 14 步：時刻 3360，還在 DAWN／日期框",
       "remake": "docs/verification/remake-parity/shots/world-clock/step14.png",
       "original": "docs/verification/character-ui/world-clock-run2/frames/frame-217.png",
       "size": [
@@ -47,7 +47,7 @@
       "required_regions": []
     },
     {
-      "label": "第 15 步：時刻 3360 跨過門檻，換成 MID MORN／標籤框",
+      "label": "第 15 步開頭換成 MID MORN／標籤框",
       "remake": "docs/verification/remake-parity/shots/world-clock/step15.png",
       "original": "docs/verification/character-ui/world-clock-run2/frames/frame-223.png",
       "size": [
@@ -67,7 +67,7 @@
       "required_regions": []
     },
     {
-      "label": "第 15 步：時刻 3360 跨過門檻，換成 MID MORN／日期框",
+      "label": "第 15 步開頭換成 MID MORN／日期框",
       "remake": "docs/verification/remake-parity/shots/world-clock/step15.png",
       "original": "docs/verification/character-ui/world-clock-run2/frames/frame-223.png",
       "size": [

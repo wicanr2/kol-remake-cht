@@ -1,7 +1,7 @@
 {
   "schema": "kol-player-path-v1",
   "name": "world-clock",
-  "description": "從旅店走到城鎮上緣、在城門選 DOOR 出城，接著在平原上左右來回十五步。每一步扣 2 × (平原 8 + 隊伍移動率 20) = 56 點時刻；第 15 步時刻由 3416 降到 3360，跨過 DAWN 的下限，左下標籤換成 MID MORN。全程只經過 town.Session 與 world.Session。 **這條路徑釘住了亂數種子。**野外每次時段變換都會擲一次隨機遭遇（SPEC-011，原版就是這樣），被伏擊就走不到終點——原版量測也一樣會被攔下。這條路要驗的不是遭遇，所以選一顆不會在半路被攔下的種子：2026-09-26 天候重擲接在遭遇之前（SPEC-011 §1）之後，原本的種子 2 在第 15 步被伏擊；依序試 2…13，種子 3 是第一顆整條路徑沒有遭遇的，而 12 顆種子最後一步的時刻（3360）與時段索引（1）全部相同，標籤結果與種子無關（`workplace/seed-scan/world-clock/`）；遭遇本身另有 `internal/battle/ambush_test.go` 與實跑畫格。",
+  "description": "從旅店走到城鎮上緣、在城門選 DOOR 出城，接著在平原上左右來回十五步。東西每一步扣 60 點時刻（成本依步伐的 Y 位移查表，與地形無關，RE-151）；第 14 步時刻降到 3360，已跨過 DAWN 的下限，但原版在每一步扣之前才判時段，所以第 15 步開頭左下標籤才換成 MID MORN。全程只經過 town.Session 與 world.Session。 **這條路徑釘住了亂數種子。**野外每次時段變換都會擲一次隨機遭遇（SPEC-011，原版就是這樣），被伏擊就走不到終點——原版量測也一樣會被攔下。這條路要驗的不是遭遇，所以選一顆不會在半路被攔下的種子：2026-09-26 天候重擲接在遭遇之前（SPEC-011 §1）之後，原本的種子 2 在第 15 步被伏擊；依序試 2…13，種子 3 是第一顆整條路徑沒有遭遇的，時刻與時段只看步數，與種子無關（`workplace/seed-scan/world-clock/`）；遭遇本身另有 `internal/battle/ambush_test.go` 與實跑畫格。",
   "script": "R R U U U U U U U U U RET R L R L R L R L R L R L R L R",
   "step_count": 28,
   "checkpoints": [
@@ -185,7 +185,7 @@
       "step": 27,
       "token": "R",
       "file": "docs/verification/player-path/world-clock/step-027.png",
-      "sha256": "c59fdd7fcccec233fb447bb113254e1baec8bbfa28e167be8275243f6fb86db7"
+      "sha256": "f4033abc03fe170a5a7fb9d521502a748f25028f7434a75fbe562eb8c69abba6"
     }
   ]
 }
