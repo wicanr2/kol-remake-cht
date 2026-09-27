@@ -44,7 +44,7 @@ payload 已有足夠契約；多筆彩圖／遮罩可合成一張 runtime PNG，
 | WEATPICS | 18 | 18 | 0 | 0 | 18 | 三層 data PNG；另可重生六張 preview | `koltown-weatpics-layered-visual-probe.json` |
 | **總計** | **1,022** | **996** | **0** | **26** | **752** |  |  |
 
-## 尚未關閉的來源
+## 來源關閉狀態
 
 固定 EGA 母體目前為 0 筆。KOLMPICS 的 68 筆圖示已由 480-index 全批證據、兩條固定
 24×20 consumer 與完整接觸表共同關閉 canonical extraction shape；動態 caller 的螢幕

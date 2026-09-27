@@ -236,11 +236,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **spec-unsolved-sections**（#70） — 各規格末尾的未解章節
-  五份規格各自留了一節未解項，內容在產品碼裡多半沒有落點（沒有程式落點就沒有自承可綁），靠這一條追。目前有：`002-ega-extraction-set` 的「尚未關閉的來源」、`004-ogg-audio-catalog` 的「尚未通過的 READY gate」、`008-combat-field` 的「還沒解出來的（不得實作）」（敵人 AI 三張權重表的執行期值、`sub_1B94F`、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關、`sub_2625A` 的語意）、`010-combat-commands` 的「還沒關閉的」、`011-wilderness-ambush` 的「還沒解的」（`sub_2A39B`、`word_2FA2A` 那一條分支）。其中已經各自有條目的四項（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8`、`+0x25` 讀取端）不重複列。
-  完成條件：五份的未解章節各自清空，或剩下的每一項有自己的條目。
-  核實：`docs/spec` 找得到 `^#{2,3} .*(還沒|尚未).*(關閉|解|通過|gate)` 就是還沒完
-
 - **spec029-wiring-review**（#74） — SPEC-029 的接線順序與取圖來源審查
   怪物遠程初始化的規則已實作並通過原版比較，但顯示取圖來源與「正式建構到第一輪」的接線順序還沒審查完，所以規格仍是 DRAFT。
   完成條件：審查完成，SPEC-029 升 READY。
@@ -317,6 +312,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）：已完成
 - **koldata-action-messages** — 戰鬥指令的動作敘述都已對上：已完成
 - **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址：已完成
+- **spec-unsolved-sections** — 各規格末尾的未解章節：已完成
 - **actor-record-2c** — 參戰者記錄 +0x2C 仍未解：已完成
 - **quest-count-ff-writer** — 兩個倒下計數的 0xFF 寫入點：已完成
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。

@@ -57,7 +57,7 @@ Ebitengine 音訊路徑。
 - 目錄與逐 cue 欄位在 `assets/audio/manifest.json`，技術驗收收據在
   `docs/verification/audio/`。
 
-## 尚未通過的 READY gate
+## READY gate（人耳驗收由 #4 追蹤）
 
 1. **人耳驗收尚未執行**，需使用者實際聆聽 `assets/audio/title-thunder.ogg`。技術解碼
    通過不等於聽起來對。
