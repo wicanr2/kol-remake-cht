@@ -446,6 +446,7 @@ func (s *State) act(i int, rng Rand) ActResult {
 			return out
 		}
 		outcome := Resolve(a, &s.Actors[target], a.Style, rng)
+		s.WearOverCap(i, outcome.OverCap)
 		out.Target = target
 		out.Outcome = &outcome
 		// 命中就再判一次擊退（`0x27B77`）。落空或被擋下不判。
@@ -770,6 +771,7 @@ func (s *State) shoot(i int, rng Rand) ActResult {
 	out.Target = target
 	outcome := ResolveMissile(a, &s.Actors[target], a.Style,
 		shot.Score, shot.Block == MissileActor, rng)
+	s.WearOverCap(i, outcome.OverCap)
 	out.Outcome = &outcome
 	if !outcome.Miss && !outcome.Parried {
 		out.Knock = s.Knockback(i, target, rng)

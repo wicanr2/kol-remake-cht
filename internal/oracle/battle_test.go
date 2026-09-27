@@ -1447,6 +1447,85 @@ func TestDamageMatchesOriginal(t *testing.T) {
 	}
 }
 
+// 上限加倍（`0x27525`…`0x27546`，RE-155）：力量推高到傷害一定超過上限，
+// 再換武器種類 `word_34A16` 與指令碼，兩邊夾出同一個數。
+func TestDamageCapMatchesOriginal(t *testing.T) {
+	const (
+		resolveEA   = 0x26D76
+		currentSlot = 0x9E5A
+		defenderEA  = 0x3237E
+		codeEA      = 0x31122
+		styleEA     = 0x30A78
+		kindEA      = 0x34A16
+		dmgCodeEA   = 0x30A76
+		baseFn      = 0x26D3C
+		fatigueOut  = 0x2FB4A
+		encumbOut   = 0x30C88
+		shieldOut   = 0x34A0C
+		atkScoreEA  = 0x2FB46
+		defScoreEA  = 0x2F942
+		fatigueFn   = 0x23683
+		encumbFn    = 0x24FD3
+		skillFn     = 0x26AC2
+		durabFn     = 0x22084
+		waitFn      = 0x1B100
+		hurtOff     = 0x2D
+	)
+	for _, c := range []struct {
+		name       string
+		code, kind int
+	}{
+		{"種類不合：加倍", 0x21, 0},
+		{"種類相合：不加倍", 0x21, 6},
+		{"徒手：不加倍", 0x29, 0},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			o := townMap(t)
+			o.SyncDGroupFromDS()
+			o.WriteU16(o.DS(currentSlot), 0)
+			o.WriteU16(o.IDA(defenderEA), 1)
+			atk := uint16(actorBase)
+			def := uint16(actorBase) + uint16(actorStride)
+			o.WriteU8(o.DS(atk+0x01), 0)
+			o.WriteU16(o.DS(atk+0x02), 1)
+			o.WriteU8(o.DS(atk+0x08), 250) // 力量加成 (250 − 70) ÷ 8 × 70 ÷ 100 ＝ 15
+			o.WriteU8(o.DS(def+0x01), 1)
+			o.WriteU16(o.DS(def+0x02), 1)
+			o.WriteU8(o.DS(def+0x24), 1)
+			o.WriteU8(o.DS(def+0x09), 10)
+			o.WriteU8(o.DS(def+0x0F), 0)
+			o.WriteU8(o.DS(def+hurtOff), 0)
+			o.WriteU16(o.IDA(codeEA), uint16(c.code))
+			o.WriteU16(o.IDA(styleEA), 0)
+			o.WriteU16(o.IDA(kindEA), uint16(c.kind))
+			o.WriteU16(o.IDA(dmgCodeEA), 0) // 1 骰 2 面、基礎 0：上限 3
+			o.WriteU16(o.IDA(fatigueOut), 0)
+			o.WriteU16(o.IDA(encumbOut), 0)
+			o.WriteU16(o.IDA(shieldOut), 0x80)
+			for _, fn := range []uint32{fatigueFn, encumbFn, skillFn, durabFn, waitFn} {
+				o.StubValue(o.IDA(fn), 0)
+			}
+			o.StubValue(o.IDA(baseFn), 0)
+			o.Stub(o.IDA(rollEnter), func(p *oracle.Oracle) uint32 { return 1 })
+			_, _ = o.CallBudget(20_000_000, o.IDA(resolveEA), 0)
+			for _, fn := range []uint32{fatigueFn, encumbFn, skillFn, durabFn, baseFn, waitFn, uint32(rollEnter)} {
+				o.Stub(o.IDA(fn), nil)
+			}
+			margin := int(int16(o.Word(o.IDA(atkScoreEA)))) - int(int16(o.Word(o.IDA(defScoreEA))))
+			got := int(o.Byte(o.DS(def + hurtOff)))
+
+			w := battle.Weapon{Kind: c.kind, Count: 1, Sides: 2}
+			a := battle.Actor{Strength: 250, Stamina: 50, Command: c.code, Weapon: w}
+			a.UnarmedWeapon[0] = w
+			want := battle.DamageRoll(a, 0, margin, &recordingRand{values: []int{1, 1, 1, 1, 1}})
+			if got != want {
+				t.Fatalf("原版 %d，remake %d（指令 %#x、種類 %d、餘裕 %d）", got, want, c.code, c.kind, margin)
+			}
+			t.Logf("兩邊都是 %d（指令 %#x、種類 %d、餘裕 %d）", got, c.code, c.kind, margin)
+		})
+	}
+}
+
 // 把一次傷害記到身上：設好狀態之後兩邊算出同一份記錄（`sub_277F4`）。
 //
 // 攻擊常式在 IDA 0x277E6 呼叫此函式，傳入傷害、部位及第三參數零；

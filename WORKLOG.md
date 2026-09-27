@@ -6770,3 +6770,11 @@ frame-270 推翻了 remake 的版面：
   酒館逃走補上 RE-143 漏的分支：手上是任務要的那件武器，擲多少都丟下。`go test`（戰鬥套件、
   Xvfb 下 cmd/kol 與 ui）通過；八份戰鬥收據與 24 條玩家路徑全數一致，不需重生。
   容器：只留自己 `--rm` 的一次性容器，已結束；無 root-owned 檔案。
+- #18 部分（RE-155）：傷害上限在「不是徒手而且武器種類沒有 `[0x109C + 攻擊選項 − 2]` 那一位」
+  時加倍，選項 0、1 讀到 0x109A／0x109B。新增原版對拍 `TestDamageCapMatchesOriginal`
+  （dosgolem 呼叫 `sub_26D76`）：原版 6／3／3，remake 修改前第一組是 3，修改後三組相同。
+  超出量扣攻擊者那一格耐久（`WearOverCap`）：隊員武器扣手上那件、徒手扣那一式的穿戴品，
+  怪物扣記錄 `+0x30` 穿戴欄第一格；會碰到的是 BRIGAND／BANDIT 的 Leather Hood、CYCLOPS 的 Skin。
+  八份戰鬥收據通過；玩家路徑 23 條一致，full-chain-ending 最終任務戰鬥第 16 回合兩句
+  執行順序對調（CYCLOPS 的 Skin 磨損後出手鍵值改變，推論）後重生，仍到結局。
+  容器：只有自己的 `--rm` 一次性容器，已結束；無 root-owned 檔案。

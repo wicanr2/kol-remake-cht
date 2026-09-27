@@ -13,7 +13,8 @@ func testArmour(bonus, condition, flags byte) *Item {
 
 func TestArmourBothAttackPaths(t *testing.T) {
 	for _, missile := range []bool{false, true} {
-		a := Actor{Attack: 10000, Strength: 70, Stamina: 100, Weapon: Weapon{Base: 5, Count: 1, Sides: 2}}
+		// 種類帶 capMask(0) 的位元，上限不加倍（RE-155）。
+		a := Actor{Attack: 10000, Strength: 70, Stamina: 100, Weapon: Weapon{Kind: 6, Base: 5, Count: 1, Sides: 2}}
 		d := Actor{Side: SideParty, Threshold: 100, Head: 100, Chest: 100, RightArm: 100, LeftArm: 100, RightLeg: 100, LeftLeg: 100}
 		for i := range d.Armour {
 			d.Armour[i] = testArmour(0x70, 255, 0x20)

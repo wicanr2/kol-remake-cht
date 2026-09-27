@@ -284,13 +284,37 @@ func HitLocation(style, roll int) int {
 	return len(locationOdds[row]) - 1
 }
 
+// capMask 是上限加倍那一關查的遮罩 `[0x109C + 攻擊選項 − 2]`（`0x27525`）。
+// 與攻擊分數減半同一張表，但這一關不限攻擊選項 > 1：選項 0、1 讀到表前的
+// `0x109A`／`0x109B`，是攻擊式基礎權重表的最後兩筆（RE-155）。
+func capMask(style int) int {
+	switch style {
+	case 0:
+		return AttackStyleBase[8]
+	case 1:
+		return AttackStyleBase[9]
+	}
+	return styleWeaponMask[(style-2)&0x0F]
+}
+
 // DamageRoll 擲這一擊的傷害（`sub_26D76:0x274D6`…`0x275B4`）。
 // margin 是攻擊分數減防禦分數。回傳值已夾在 0 與武器上限之間。
 func DamageRoll(a Actor, style, margin int, rng Rand) int {
+	total, _ := damageRoll(a, style, margin, rng)
+	return total
+}
+
+// damageRoll 另外回傳超過上限多少（夾回之前的傷害減上限，沒超過為 0）。
+// 不是徒手而且武器種類沒有 capMask 那一位時，上限加倍（`0x27546`，RE-155）。
+func damageRoll(a Actor, style, margin int, rng Rand) (total, over int) {
 	w := a.AttackWeapon(style)
 	bonus := (a.Strength - 70) / 8
 	bonus = (70 - a.FatigueRatio()) * bonus / 100
-	total := w.Base
+	limit := w.Count*w.Sides + 1 + w.Base
+	if a.Command != CmdUnarmed && w.Kind&capMask(style) == 0 {
+		limit *= 2
+	}
+	total = w.Base
 	for i := 0; i < w.Count; i++ {
 		total += rng.Roll(w.Sides)
 	}
@@ -301,13 +325,13 @@ func DamageRoll(a Actor, style, margin int, rng Rand) int {
 		}
 		total += marginBonus[step]
 	}
-	if limit := w.Count*w.Sides + 1 + w.Base; total > limit {
-		total = limit
+	if total > limit {
+		over, total = total-limit, limit
 	}
 	if total < 0 {
 		total = 0
 	}
-	return total
+	return total, over
 }
 
 // Outcome 是一次攻擊的結果。
@@ -324,6 +348,8 @@ type Outcome struct {
 	// Down 為真代表這一擊把對手打倒；Limb 為真代表那一肢廢了。
 	Down bool
 	Limb bool
+	// OverCap 是傷害超過上限多少；攻擊者那一格要照這個數扣耐久（RE-155）。
+	OverCap int
 }
 
 // Resolve 打一次近戰。style 是攻擊選項，rng 依序擲：攻擊、（選項為 1 時的列）、
@@ -347,11 +373,11 @@ func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 		}
 		return Outcome{Parried: true, Message: msg}
 	}
-	damage := DamageRoll(*a, style, attack-defence, rng)
+	damage, over := damageRoll(*a, style, attack-defence, rng)
 	location := HitLocation(style, rng.Roll(AttackRoll))
 	rawDamage := damage
 	damage = d.AbsorbArmour(damage, location, rng)
-	out := Outcome{Damage: damage, Location: location}
+	out := Outcome{Damage: damage, Location: location, OverCap: over}
 	out.Down, out.Limb = d.Take(damage, location)
 	d.Hurt += rawDamage - damage
 	return out
@@ -379,11 +405,11 @@ func ResolveMissile(a *Actor, d *Actor, style, attack int, stray bool, rng Rand)
 	if attack < defence {
 		return Outcome{Parried: true}
 	}
-	damage := DamageRoll(*a, style, attack-defence, rng)
+	damage, over := damageRoll(*a, style, attack-defence, rng)
 	location := HitLocation(style, rng.Roll(AttackRoll))
 	rawDamage := damage
 	damage = d.AbsorbArmour(damage, location, rng)
-	out := Outcome{Damage: damage, Location: location}
+	out := Outcome{Damage: damage, Location: location, OverCap: over}
 	out.Down, out.Limb = d.Take(damage, location)
 	d.Hurt += rawDamage - damage
 	return out

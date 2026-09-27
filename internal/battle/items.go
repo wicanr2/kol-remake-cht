@@ -53,6 +53,20 @@ func (s *State) DropItem(i int) (int, string) {
 	return DropsRecord, name
 }
 
+// breakHandItem 把手上那件整格清掉（耐久扣光，RE-155）：與丟下相同，只是不放到地上。
+func (s *State) breakHandItem(i int) {
+	a := &s.Actors[i]
+	m := s.member(i)
+	m.HandItem = nil
+	m.HasWeapon = false
+	m.WeaponName = ""
+	m.Weapon = Weapon{}
+	m.Worn[0] = ""
+	a.Weapon = Weapon{}
+	a.ReloadGear()
+	a.ReloadSkills()
+}
+
 // GroundUnder 找第 from 格之後、腳下那一格上的第一件東西（`0x202DE`…`0x20315`）。
 //
 // **只撿得到腳下那一格**——原版 X 與 Y 都要對上。沒有就回 −1。
