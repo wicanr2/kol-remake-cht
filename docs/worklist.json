@@ -1027,18 +1027,19 @@
     {
       "id": "quest-item-0xb926",
       "layer": "spec",
-      "title": "任務物品的 `[0xB926]`",
-      "body": "SPEC-014 記著這一格還沒解，所以那一條收據裡 `State.QuestItem` 是空的。任務物品本身的記錄與拾取已完成（RE-113／128），缺的是這一格的來源。",
+      "title": "任務物品比對的是 DS:0xB956",
+      "body": "`[0xB926]` 是位址誤算，實際是 DS:0xB956（RE-113 更正 RE-103），由 `sub_2B0FF:0x2B1C4` 從任務 payload `+0x29` 複製；remake 以 `Site.QuestItem` 承接並放到地上。SPEC-014 §6 與 `battle-flee` 收據的過時說法改寫：那一次 QuestItem 是 Kelder Crown，只是沒有人撿。",
       "acceptance": "`[0xB926]` 解出，那一條的 QuestItem 不再是空的。",
       "verify": {
-        "kind": "present",
+        "kind": "absent",
         "paths": [
           "docs/spec/014-quest-completion.md"
         ],
         "pattern": "`\\[0xB926\\]` 還沒解",
-        "note": "SPEC-014 的自承；解出時會改寫。"
+        "note": "已完成：SPEC-014 不再有這一句。"
       },
-      "issue": 63
+      "issue": 63,
+      "status": "done"
     },
     {
       "id": "ui-details-unverified",

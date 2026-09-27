@@ -236,11 +236,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **quest-item-0xb926**（#63） — 任務物品的 `[0xB926]`
-  SPEC-014 記著這一格還沒解，所以那一條收據裡 `State.QuestItem` 是空的。任務物品本身的記錄與拾取已完成（RE-113／128），缺的是這一格的來源。
-  完成條件：`[0xB926]` 解出，那一條的 QuestItem 不再是空的。
-  核實：`docs/spec/014-quest-completion.md` 找得到 ``\[0xB926\]` 還沒解` 就是還沒完
-
 - **world-clock-threshold-mechanism**（#65） — 世界時刻門檻的機制沒追出來
   9 步 852 剛好卡在門檻 3367 的兩側（差一），機制還沒追出來，目前靠量到的值。差一的邊界最容易在別的路徑上露餡。
   完成條件：機制追出來並寫進規格，門檻不再是量出來的常數。
@@ -330,6 +325,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。
 - **word-2df2c-outdoor-switch** — word_2DF2C 是所在城鎮編號：已完成
+- **quest-item-0xb926** — 任務物品比對的是 DS:0xB956：已完成
 - **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對：已完成
 - **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）：已完成
 - **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址：已完成

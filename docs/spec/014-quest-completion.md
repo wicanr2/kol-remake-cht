@@ -116,7 +116,8 @@ remake 用 `State.QuestItem` 承接，空字串表示這一場沒有那樣的東
 ## 6. 實跑收據
 
 `docs/verification/battle-flee/`：問句與收尾兩張畫格，走的是「全隊都到邊上」
-那一條（`State.QuestItem` 這一次是空的，因為 `[0xB926]` 還沒解）。
+那一條：第 5 個地點的任務物品 Kelder Crown 放在地上（`Site.QuestItem`，RE-113），
+這一次沒有人撿，所以不是「帶著東西逃掉」那一條。
 
 逃走那一問畫在執行段的卷軸上（`Plan.Prompt` 的一層）；答 y 之後直接回野外，
 不印逃走那一句（RE-146）。問句沒畫出來這種缺口單元測試看不到——規則層回傳值

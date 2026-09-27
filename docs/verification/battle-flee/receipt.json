@@ -10,7 +10,7 @@
   },
   {
    "name": "帶著任務物品逃掉會記完成",
-   "reason": "`[0xB926]` 那十六個 byte 是誰填的還沒解（RE-103），所以 `State.QuestItem` 這一次是空的，走的是「全隊都到邊上」那一條。標記本身由 victory_test 的單元測試覆蓋。"
+   "reason": "這一次沒有人撿地上的 Kelder Crown（任務物品由 `Site.QuestItem` 放好，RE-113），走的是「全隊都到邊上」那一條。帶著東西逃掉的標記由 victory_test 的單元測試覆蓋。"
   }
  ],
  "substituted_inputs": [

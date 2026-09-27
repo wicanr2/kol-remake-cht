@@ -6727,3 +6727,6 @@ frame-270 推翻了 remake 的版面：
 - #62 結案（RE-150）：`word_2DF2C` 是所在城鎮編號，野外迴圈 `sub_29004` 設成 0；物品頁與立繪頁在
   野外用 KOLPICS 第 4 張整張。查呼叫者時發現資料頁 `sub_15ABF` 在城鎮戶外（`sub_10000`）與野外
   （`sub_29004`）都能按 `1`…`6` 打開，remake 只掛在建築內的 MIRROR，登 `sheet-digit-outside`。
+- #63 結案：`[0xB926]` 是位址誤算，實際 DS:0xB956 已由 RE-113 解出（任務 payload `+0x29`）。
+  SPEC-014 §6 與 `battle-flee` 收據仍說 QuestItem 是空的，改寫為：第 5 個地點的 Kelder Crown
+  放在地上，那一次沒有人撿，所以走「全隊到邊上」那一條。
