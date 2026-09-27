@@ -164,9 +164,11 @@ const (
 
 // WriteRecord 把角色寫進槽位樣板，回傳新的 768-byte 記錄。
 //
-// **只寫已證實來源的欄位**。武器樣板（0x30、0x4a、0x52、0x57、0x5f）與 REGION 中繼資料
-// 的來源尚未反追，因此那些位移保留樣板原值——寫進猜出來的 bytes 比留白更糟。
-// 覆蓋率由 tools/verify_chardata_write.py 對原版實際寫入的結果逐 byte 量出來。
+// **只寫已證實來源的欄位**。武器樣板（0x30、0x4a、0x52、0x57、0x5f）來自 `BOOKDATA`
+// 第 3 個項目（`sub_11820` 的 `[bx+79EEh]`）；其餘位移原版建立角色時不動，保留樣板
+// 原值就是原版的結果。覆蓋率由 tools/verify_chardata_write.py 對原版實際寫入的結果
+// 逐 byte 量出來：BARBARIAN 與 RANGER 各 58 個改動 byte 全部相同，沒有漏寫、寫錯或多寫
+// （docs/verification/chardata-write/）。
 func WriteRecord(template []byte, c NewCharacter, contract StartingContract,
 	weapons *WeaponTemplates) ([]byte, error) {
 	if len(template) != RecordBytes {

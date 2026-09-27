@@ -1084,18 +1084,19 @@
     {
       "id": "chardata-writer-untraced-fields",
       "layer": "spec",
-      "title": "角色寫回：幾個位移的來源沒反追",
-      "body": "那些位移目前保留樣板原值——寫進猜出來的 bytes 比留白更糟。要反追出來源才能確定它們在正常遊玩中會不會變。",
+      "title": "角色寫回：原版改動的位移全數寫對，其餘保留樣板",
+      "body": "`docs/verification/chardata-write/` 兩個職業（BARBARIAN、RANGER）原版建立角色時改動的 58 個 byte，remake writer 全部寫出相同值，沒有漏寫、寫錯或多寫。原本列為「來源未反追」的武器樣板已由 `BOOKDATA` 第 3 個項目寫出；REGION 中繼資料等其餘位移原版建立時不動，保留樣板原值即與原版相同。writer.go 的過時註解改寫為現況。",
       "acceptance": "來源反追出來，或確認那些位移在正常路徑上恆為樣板值。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
           "internal/chardata/writer.go"
         ],
-        "pattern": "來源尚未反追",
-        "note": "writer.go 的自承。"
+        "pattern": "其餘位移原版建立角色時不動",
+        "note": "已完成，當回歸訊號。"
       },
-      "issue": 66
+      "issue": 66,
+      "status": "done"
     },
     {
       "id": "planning-25-not-verified",

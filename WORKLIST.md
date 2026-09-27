@@ -236,11 +236,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **chardata-writer-untraced-fields**（#66） — 角色寫回：幾個位移的來源沒反追
-  那些位移目前保留樣板原值——寫進猜出來的 bytes 比留白更糟。要反追出來源才能確定它們在正常遊玩中會不會變。
-  完成條件：來源反追出來，或確認那些位移在正常路徑上恆為樣板值。
-  核實：`internal/chardata/writer.go` 找得到 `來源尚未反追` 就是還沒完
-
 - **koldata-action-messages**（#68） — 幾個動作敘述還沒對上 KOLDATA
   SPEC-010 末段列了哪幾個指令的動作敘述還沒對上 KOLDATA 的記錄。
   完成條件：那幾個對上，或確認 KOLDATA 裡沒有對應的句子。
@@ -322,6 +317,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **word-2df2c-outdoor-switch** — word_2DF2C 是所在城鎮編號：已完成
 - **quest-item-0xb926** — 任務物品比對的是 DS:0xB956：已完成
 - **world-clock-threshold-mechanism** — 野外時刻：成本依步伐 Y 位移查表、時段在扣之前判：已完成
+- **chardata-writer-untraced-fields** — 角色寫回：原版改動的位移全數寫對，其餘保留樣板：已完成
 - **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對：已完成
 - **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）：已完成
 - **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址：已完成

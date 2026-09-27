@@ -6750,3 +6750,5 @@ frame-270 推翻了 remake 的版面：
   battle-ambush／bar-flee／pickup 改接第 129 步的 OGRE 伏擊，missile／spell 多走一步。
   驅動器在 full-chain-reload 一路打進任務戰鬥卡在第 316 回合（反覆次數上限），改截在任務戰鬥
   開始那一步。八份戰鬥收據、24 條玩家路徑、四份野外對拍全數通過。
+- #66 結案：`chardata-write` 收據兩個職業原版改動的 58 byte 全數寫對、零漏寫；「來源未反追」的
+  武器樣板早已由 `BOOKDATA` 第 3 項寫出，其餘位移原版建立角色時不動。writer.go 過時註解改寫。
