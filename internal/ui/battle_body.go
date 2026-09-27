@@ -34,10 +34,6 @@ func (b *BattleBody) DrawScaled(dst *ebiten.Image, sprites Sprites, s *battle.St
 	if err != nil {
 		return err
 	}
-	boundary, err := battle.BodyFatigueBoundary(data.Stamina, data.Fatigue)
-	if err != nil {
-		return err
-	}
 	src, err := sprites.Get("MISCPICS", 3+data.Kind)
 	if err != nil {
 		return err
@@ -65,6 +61,13 @@ func (b *BattleBody) DrawScaled(dst *ebiten.Image, sprites Sprites, s *battle.St
 		draw(dst, b.image, bodyX, bodyY)
 	} else {
 		drawScaled(dst, b.image, bodyX*scale, bodyY*scale, scale)
+	}
+	if !data.FatigueBar {
+		return nil
+	}
+	boundary, err := battle.BodyFatigueBoundary(data.Stamina, data.Fatigue)
+	if err != nil {
+		return err
 	}
 	// 原版兩個矩形包含端點；後畫的藍色蓋住共同分界列。
 	fill(dst, 132*scale, 84*scale, 7*scale, (boundary-84+1)*scale, [3]uint8{255, 85, 85})

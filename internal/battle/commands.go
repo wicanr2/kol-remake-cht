@@ -272,7 +272,6 @@ func MoveForms(a *Actor, groundTile int) []int {
 	return forms
 }
 
-
 // MoveGuard 是選了移動方式之後的防禦選項（`0x1F8F8`）：
 // 走路那一格給 2、其餘 0。敵人 AI 的輪盤也是同一條規則（RE-081）。
 func MoveGuard(icon int) int {

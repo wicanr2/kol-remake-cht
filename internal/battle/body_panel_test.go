@@ -67,3 +67,26 @@ func TestBodyPanelRejectsInvalidDenominators(t *testing.T) {
 		t.Fatal("零體力須回報錯誤")
 	}
 }
+
+// 問部位那一頁的人形框換成法術的目標（`sub_2818D:0x28484`，RE-153）。
+func TestBodyPanelShowsAreaTarget(t *testing.T) {
+	s := fleeState()
+	s.Stage = StageField
+	s.Plan.Prompt = PromptExecuting
+	if _, show := s.BodyPanel(); show {
+		t.Fatal("執行段一般時候人形框不畫")
+	}
+	s.Plan.Prompt = PromptArea
+	s.Area = &AreaQuestion{Caster: 0, Target: 1, Power: 3}
+	d, show := s.BodyPanel()
+	if !show {
+		t.Fatal("問部位那一頁應該畫目標的人形")
+	}
+	want := Parts(s.Actors[1].Threshold)
+	if d.Maximum != want {
+		t.Fatalf("人形應該是目標那一名：%v，應為 %v", d.Maximum, want)
+	}
+	if d.FatigueBar {
+		t.Fatal("問部位那一頁只畫人形與傷勢，不畫疲勞直條")
+	}
+}

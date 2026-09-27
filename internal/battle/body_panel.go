@@ -49,12 +49,23 @@ type BodyPanelData struct {
 	Kind             int
 	Current, Maximum [6]int
 	Stamina, Fatigue int
+	// FatigueBar 是右側那兩段直條：規劃段的 `sub_2324F` 自己畫，問部位那一頁只呼叫
+	// `sub_27E20`（人形與傷勢遮罩），沒有這一條。
+	FatigueBar bool
 }
 
 // BodyPanel 讀取被檢視者，不改動行動者。零值 Planning 不會憑空顯示角色零。
+//
+// 效果 6 的法術問部位那一頁（`PromptArea`）也用這一框：原版在 `sub_2818D:0x28484`
+// 重畫同一個框 (8,0x52)–(0x8E,0x9D)，暫時把 `word_37D2A` 換成目標、呼叫同一支
+// `sub_27E20` 畫人形（隊員 0x47＋性別、敵人 0x49），畫完再換回來（RE-153）。
 func (s *State) BodyPanel() (BodyPanelData, bool) {
 	i := s.Plan.BodyActor - 1
-	if s.Stage != StageField || s.Plan.Prompt >= PromptNextRound || i < 0 || i >= len(s.Actors) || s.Actors[i].Side == SideEmpty {
+	planning := s.Stage == StageField && s.Plan.Prompt < PromptNextRound
+	if s.Plan.Prompt == PromptArea && s.Area != nil {
+		i, planning = s.Area.Target, true
+	}
+	if !planning || i < 0 || i >= len(s.Actors) || s.Actors[i].Side == SideEmpty {
 		return BodyPanelData{}, false
 	}
 	a := &s.Actors[i]
@@ -69,7 +80,8 @@ func (s *State) BodyPanel() (BodyPanelData, bool) {
 			kind = 1
 		}
 	}
-	return BodyPanelData{Kind: kind, Current: [6]int{a.Head, a.Chest, a.RightArm, a.LeftArm, a.RightLeg, a.LeftLeg}, Maximum: Parts(a.Threshold), Stamina: a.Stamina, Fatigue: a.Fatigue}, true
+	return BodyPanelData{Kind: kind, Current: [6]int{a.Head, a.Chest, a.RightArm, a.LeftArm, a.RightLeg, a.LeftLeg}, Maximum: Parts(a.Threshold), Stamina: a.Stamina, Fatigue: a.Fatigue,
+		FatigueBar: s.Plan.Prompt != PromptArea}, true
 }
 
 func (s *State) inspectBodyTarget() {

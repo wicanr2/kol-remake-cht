@@ -1190,18 +1190,20 @@
     {
       "id": "spell-target-figure",
       "layer": "gap",
-      "title": "施法時目標的人形還沒畫",
-      "body": "`sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。",
-      "acceptance": "圖庫與幾何升到已證實，人形畫出來並對拍。",
+      "title": "施法問部位那一頁畫目標的人形",
+      "body": "RE-153：`sub_2818D:0x28484` 重畫左下角人形框、暫時把 `word_37D2A` 換成目標，呼叫規劃段同一支 `sub_27E20`（0x47＋性別／0x49，含傷勢遮罩），沒有疲勞直條。圖庫與幾何就是 SPEC-018 已 READY 的那一套，不是新的強推論。remake `BodyPanel` 在 `PromptArea` 時取 `Area.Target`、`FatigueBar` 為假，單元測試涵蓋。",
+      "acceptance": "人形畫出來，取圖與幾何與規劃段相同的已證實路徑。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/spec/012-combat-spells.md"
+          "docs/spec/012-combat-spells.md",
+          "internal/battle/body_panel.go"
         ],
-        "pattern": "目標的人形還沒畫",
-        "note": "SPEC-012 的自承。"
+        "pattern": "RE-153",
+        "note": "已完成，當回歸訊號。這一頁的原版同狀態畫格仍待效果 6 法術的實跑收據（SPEC-012 §「還缺實跑收據」）。"
       },
-      "issue": 71
+      "issue": 71,
+      "status": "done"
     },
     {
       "id": "actor-record-2c",

@@ -91,11 +91,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
-- **spell-target-figure**（#71） — 施法時目標的人形還沒畫
-  `sub_27E20` 的圖庫與幾何只到 `強推論`（RE-047 那一輪標的），所以選部位那一頁的人形沒畫出來。
-  完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
-  核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
-
 - **sheet-digit-outside**（#101） — 城鎮戶外與野外按 1…6 打開角色資料頁
   原版在城鎮戶外（`sub_10000:loc_10DA4`）與野外（`sub_29004:loc_29652`）按 `1`…`6` 開第 n 名在籍角色的資料頁，含物品頁與隊伍立繪頁；野外那兩頁背景換成 KOLPICS 第 4 張（RE-150）。remake 只在建築內用 MIRROR 開得到。
   完成條件：城鎮戶外與野外按數字鍵開得出資料頁與其子頁，野外背景正確，離開後回到原畫面與原狀態；正常玩家路徑收據。
@@ -313,6 +308,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **koldata-action-messages** — 戰鬥指令的動作敘述都已對上：已完成
 - **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址：已完成
 - **spec-unsolved-sections** — 各規格末尾的未解章節：已完成
+- **spell-target-figure** — 施法問部位那一頁畫目標的人形：已完成
 - **actor-record-2c** — 參戰者記錄 +0x2C 仍未解：已完成
 - **quest-count-ff-writer** — 兩個倒下計數的 0xFF 寫入點：已完成
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
