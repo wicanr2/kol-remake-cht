@@ -96,7 +96,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
   核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
 
-- **combat-result-pictures** — 戰鬥結果圖（COMBPICS）沒有畫
+- **combat-result-pictures**（#100） — 戰鬥結果圖（COMBPICS）沒有畫
   原版出口在打贏、打輸、逃走（逃走格）與升級各呼叫 `sub_288D4` 畫一張 296×144 的 COMBPICS 圖（圖號 3、2、0、4，另一處傳 1；RE-006、RE-146）。素材已抽成 PNG，remake runtime 沒有讀，訊息只印在卷軸上。
   完成條件：五個呼叫點的圖號與觸發條件接上，戰鬥收據有對應畫格，並與原版同狀態畫格比對。
   核實：要人判——要實作並做畫面收據，沒有可 grep 的單一訊號。
