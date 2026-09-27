@@ -231,11 +231,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **spec029-wiring-review**（#74） — SPEC-029 的接線順序與取圖來源審查
-  怪物遠程初始化的規則已實作並通過原版比較，但顯示取圖來源與「正式建構到第一輪」的接線順序還沒審查完，所以規格仍是 DRAFT。
-  完成條件：審查完成，SPEC-029 升 READY。
-  核實：`docs/spec/029-monster-ranged-initialization.md` 找得到 `仍待審查|接線順序審查` 就是還沒完
-
 
 ### 交付與發行
 
@@ -311,6 +306,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **spell-target-figure** — 施法問部位那一頁畫目標的人形：已完成
 - **actor-record-2c** — 參戰者記錄 +0x2C 仍未解：已完成
 - **quest-count-ff-writer** — 兩個倒下計數的 0xFF 寫入點：已完成
+- **spec029-wiring-review** — SPEC-029 接線審查完成：已完成
 - **license-into-packages** — 打包時把 LICENSE 複製進每一個發行包與 dist-all/<版本>/ 根目錄：2026-09-10 核實：tools/build_dist.sh:51-54 已把 LICENSE 複製進 dist-all 根、promo/ 與每個子目錄；tools/package_dist.sh:110 的打包清單也帶 LICENSE。
 - **sheet-items-and-party-portrait** — 角色資料頁的物品（sub_16986）與隊伍立繪（sub_18D61）兩個圖示：2026-09-10 核實：internal/town/itempage.go 的 OpenItemPage 與 internal/town/portrait.go 的 OpenPartyPage 都已實作，立繪疊法在 internal/portrait/（RE-126／127／128）。殘留的 s.note(sheetIconName(...)) 只是資料缺失時的退路，不是未實作標記。自評表也已記為做完，只有這一條沒回頭改。
 - **party-limit-six-boundary** — 隊伍上限六人的邊界：2026-09-10 核實：internal/town/interior.go:64 的 const MaxParty = 6 已在 recruit.go:291（招募）、interior.go:44（進門）與 save/characters.go:191（保存）三處把關。

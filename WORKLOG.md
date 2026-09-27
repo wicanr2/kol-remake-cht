@@ -6760,3 +6760,5 @@ frame-270 推翻了 remake 的版面：
 - #71 結案（RE-153）：施法問部位那一頁，原版重畫左下人形框並以目標呼叫同一支 `sub_27E20`，
   沒有疲勞直條。remake `BodyPanel` 在 `PromptArea` 時改取 `Area.Target`、不畫直條；取圖與
   幾何沿用 SPEC-018 已驗證的那一套。原版同狀態畫格仍待效果 6 法術的實跑收據。全套測試通過。
+- #74 結案：SPEC-029 早已於 2026-09-08 升 READY，正文殘留的 DRAFT 待辦句改寫為現況；
+  補註 `Replan` 每次呼叫 `InitializeMonsterRanged`，由 `rangedPending` 保證只擲一次。

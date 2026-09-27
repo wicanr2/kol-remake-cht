@@ -1245,18 +1245,19 @@
     {
       "id": "spec029-wiring-review",
       "layer": "spec",
-      "title": "SPEC-029 的接線順序與取圖來源審查",
-      "body": "怪物遠程初始化的規則已實作並通過原版比較，但顯示取圖來源與「正式建構到第一輪」的接線順序還沒審查完，所以規格仍是 DRAFT。",
+      "title": "SPEC-029 接線審查完成",
+      "body": "SPEC-029 已於 2026-09-08 依接線審查升 READY（初始化區段、轉換全鏈、768＋2304 組固定種子比較、面板索引分離、三種建構入口）；正文殘留的 DRAFT 待辦句改寫為現況。RE-143／145 之後 `Replan` 每次呼叫 `InitializeMonsterRanged`，由 `rangedPending` 保證只擲一次。",
       "acceptance": "審查完成，SPEC-029 升 READY。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
           "docs/spec/029-monster-ranged-initialization.md"
         ],
-        "pattern": "仍待審查|接線順序審查",
-        "note": "SPEC-029 的自承；審查完成時會改寫。"
+        "pattern": "狀態：READY",
+        "note": "已完成，當回歸訊號。"
       },
-      "issue": 74
+      "issue": 74,
+      "status": "done"
     },
     {
       "id": "license-into-packages",
