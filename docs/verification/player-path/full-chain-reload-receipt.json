@@ -1,12 +1,12 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "full-chain-reload",
- "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在第一次入夜換日時同時擲到治療僧侶，照實答應後繼續走（路上的自然事件，不是這條要驗的內容）；野外那一段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
+ "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在入夜換日、CAMPING! 收掉之後擲到治療僧侶，照實答應；下一次時段變換自然遇到 GOBLIN 伏擊，第十四回合打贏後繼續走（路上的自然事件，不是這條要驗的內容）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
  "seed": 3,
  "load": "workplace/saves/full-chain.json",
- "token_count": 95,
+ "token_count": 1515,
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
- "trace_sha256": "2f17b5204c95fe96b506ed9b2b66cea4c309471d4713d17ba722b5d060f2916c",
+ "trace_sha256": "7d5711a59c95445c15d7f016f3c50452fe1c74487497a4ec1a97f3f67e3cb5a3",
  "milestones": [
   {
    "step": 0,
@@ -154,16 +154,16 @@
     "month": 4,
     "sub_x": 3,
     "sub_y": 3,
-    "ticks": 2732,
+    "ticks": 2700,
     "time_index": 1,
     "x": 40,
     "y": 23
    }
   },
   {
-   "step": 66,
-   "token": "S",
-   "note": "入夜換日：CAMPING!，同一次時段變換擲到治療僧侶",
+   "step": 70,
+   "token": "R",
+   "note": "入夜換日：CAMPING!",
    "scene": "play",
    "town": {
     "door": {
@@ -179,19 +179,159 @@
    "world": {
     "camping": true,
     "day": 1,
-    "heal_prompt": true,
     "mode": 0,
     "month": 4,
-    "sub_x": 6,
-    "sub_y": 2,
+    "sub_x": 2,
+    "sub_y": 7,
     "ticks": 4200,
-    "time_index": 0,
-    "x": 45,
-    "y": 23
+    "time_index": 4,
+    "x": 46,
+    "y": 22
    }
   },
   {
-   "step": 94,
+   "step": 71,
+   "token": "L",
+   "note": "按鍵收掉之後才判時段（換成 DAWN），這一次擲到治療僧侶（RE-151）",
+   "scene": "play",
+   "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 2,
+    "heal_prompt": true,
+    "mode": 0,
+    "month": 4,
+    "prompt_lines": [
+     "You see a cloaked",
+     "figure bent over an",
+     "injured man.  She comes",
+     "towards you and smiles."
+    ],
+    "sub_x": 2,
+    "sub_y": 7,
+    "ticks": 4200,
+    "time_index": 0,
+    "x": 46,
+    "y": 22
+   }
+  },
+  {
+   "step": 87,
+   "token": "U",
+   "note": "下一次時段變換自然遇到 GOBLIN 伏擊",
+   "scene": "play",
+   "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 2,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 6,
+    "ticks": 3320,
+    "time_index": 1,
+    "x": 48,
+    "y": 22
+   },
+   "battle": {
+    "encounter_text": [
+     "YOU HAVE BEEN AMBUSHED",
+     "BY 3, LEVEL 3 GOBLINS!"
+    ],
+    "monster": "GOBLIN",
+    "prompt": 0,
+    "quest_done": 0,
+    "roster": [
+     "0 Poontang party 33,30 head=16 chest=16",
+     "1 Moraine party 31,30 head=15 chest=15",
+     "2 Fighting Bull party 33,32 head=14 chest=14",
+     "3 Kenneth party 31,32 head=17 chest=17",
+     "4 Sharakan party 33,34 head=17 chest=17",
+     "5 Olear party 31,34 head=15 chest=15",
+     "6 GOBLIN foe 28,32 head=13 chest=13",
+     "7 GOBLIN foe 36,32 head=13 chest=13",
+     "8 GOBLIN foe 27,30 head=13 chest=13"
+    ],
+    "round": 0,
+    "site": -1,
+    "stage": 1,
+    "turn": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 1505,
+   "token": "SPACE",
+   "note": "第十四回合打贏，回到野外",
+   "scene": "play",
+   "town": {
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 2,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 0,
+    "sub_y": 6,
+    "ticks": 3320,
+    "time_index": 1,
+    "x": 48,
+    "y": 22
+   },
+   "battle": {
+    "exec_text": [
+     "You have defeated The GOBLINS!"
+    ],
+    "monster": "GOBLIN",
+    "prompt": 10,
+    "quest_done": 0,
+    "result_picture": 3,
+    "roster": [
+     "0 Poontang party 28,28 head=16 chest=16",
+     "1 Moraine party 27,29 head=15 chest=15",
+     "2 Fighting Bull party 28,29 head=14 chest=14",
+     "3 Kenneth party 26,30 head=17 chest=17",
+     "4 Sharakan party 27,31 head=17 chest=17",
+     "5 Olear party 27,30 head=15 chest=15",
+     "6 GOBLIN foe 32,32 head=0 chest=13 down",
+     "7 GOBLIN foe 36,31 head=13 chest=0 down",
+     "8 GOBLIN foe 26,31 head=13 chest=0 down"
+    ],
+    "round": 14,
+    "site": -1,
+    "stage": 5,
+    "turn": 9,
+    "verdict": 2
+   }
+  },
+  {
+   "step": 1514,
    "token": "U",
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）",
    "scene": "play",
@@ -210,17 +350,27 @@
     "day": 2,
     "mode": 0,
     "month": 4,
+    "prompt_lines": [
+     "From the rim of one of",
+     "the hills surrounding",
+     "the valley below, you",
+     "see the spidery forms of",
+     "Binderaks running about",
+     "in what once was the",
+     "druid's keep.  Slowly, ",
+     "you approach its walls.  "
+    ],
     "quest_prompt": true,
     "sub_x": 0,
     "sub_y": 7,
-    "ticks": 2644,
+    "ticks": 3040,
     "time_index": 1,
     "x": 48,
     "y": 21
    }
   },
   {
-   "step": 95,
+   "step": 1515,
    "token": "RET",
    "note": "答應參戰：滿版的怪物圖",
    "scene": "play",
@@ -241,12 +391,17 @@
     "month": 4,
     "sub_x": 0,
     "sub_y": 7,
-    "ticks": 2644,
+    "ticks": 3040,
     "time_index": 1,
     "x": 48,
     "y": 21
    },
    "battle": {
+    "encounter_text": [
+     "YOU ENCOUNTER THE",
+     "FEARSOME CREATURES OF",
+     "YOUR QUEST!"
+    ],
     "monster": "BINDERAK",
     "prompt": 0,
     "quest_done": 0,
@@ -282,30 +437,42 @@
   {
    "step": 6,
    "file": "step-006.png",
-   "sha256": "7aa05f25da48618c9af070d8d8c52ac3109192d0d72295c104f276b6c13dae0d",
+   "sha256": "4e7fc42d36c6ef770d4a0970c19e6ddba2f03dc71579c05faeb703ca929a3452",
    "shows": "角色資料頁：GOLD CROWNS 158——`full-chain` 住宿扣掉 56 之後的數字"
   },
   {
    "step": 23,
    "file": "step-023.png",
-   "sha256": "92af07c693ffa94ab2369cca47317718697ac4e426e16ecec0a6d7a6cc4cf928",
+   "sha256": "1ca40809441cededd0618bf2eaa57affb18f6d21c408730ab39f7ccb94dc6dc2",
    "shows": "出城的落點 (40,23)"
   },
   {
-   "step": 66,
-   "file": "step-066.png",
-   "sha256": "ef6991ce0e7a7acbd69ad0ce0255873ec4548168be1c820ae18a37fbd445b340",
-   "shows": "CAMPING! 與治療僧侶的提示"
+   "step": 70,
+   "file": "step-070.png",
+   "sha256": "97c6f50c5eeb6d57d2e374940517dcdca9bd4672b16aba02be0fbce18dbd743c",
+   "shows": "CAMPING!"
   },
   {
-   "step": 94,
-   "file": "step-094.png",
-   "sha256": "d2fef7d86d768aa868c9c8863d1a93b86de473ee7fa49eb0fc6700a7f7178188",
+   "step": 71,
+   "file": "step-071.png",
+   "sha256": "6b1080ca85539db87ebeef730306b6e60d5580ab388ac338b3cb7e9c6a01eaca",
+   "shows": "治療僧侶的提示"
+  },
+  {
+   "step": 87,
+   "file": "step-087.png",
+   "sha256": "1bb51bfb7c1346ca8d8f972faf2954feda6d5c323e700357faa8b3f548895018",
+   "shows": "GOBLIN 伏擊"
+  },
+  {
+   "step": 1514,
+   "file": "step-1514.png",
+   "sha256": "59635ac1d886c353e999ce9b2cbe3ec7d0953d8929a256da2a90a799644d6a30",
    "shows": "任務敘述與 Will you partake?"
   },
   {
-   "step": 95,
-   "file": "step-095.png",
+   "step": 1515,
+   "file": "step-1515.png",
    "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
    "shows": "滿版的 BINDERAK 圖"
   }

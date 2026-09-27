@@ -6742,3 +6742,11 @@ frame-270 推翻了 remake 的版面：
   full-chain、arena、full-chain-ending、full-chain-reload、world-healer、world-quest、
   world-road 與 battle-ambush、bar-flee、missile、pickup、spell 另行重生。
 - #63 的 verify 改用 required_in_all（`absent` 是「出現前都算未完成」，先前用反了）。
+- RE-151 收據重生完成：world-clock（東西每步 60，第 15 步開頭換 MID MORN，與原版錄影對拍仍逐像素
+  相同；對拍規格帶與路徑同一顆種子 3）、world-road、town-round-trip 只差時刻值；world-quest 事件
+  不變、露營移到第 86 步；world-healer 多走一步；full-chain 伏擊移到第 27 步、五隻 1 級 ZOMBIE
+  第十八回合打贏，存檔冒險點數 2466／2966；full-chain-ending 按鍵不變；arena 路上換成 CLIFF TROLL；
+  full-chain-reload 在 CAMPING! 收掉後擲到治療、再自然遇到 GOBLIN 伏擊打贏，全長 1515 步；
+  battle-ambush／bar-flee／pickup 改接第 129 步的 OGRE 伏擊，missile／spell 多走一步。
+  驅動器在 full-chain-reload 一路打進任務戰鬥卡在第 316 回合（反覆次數上限），改截在任務戰鬥
+  開始那一步。八份戰鬥收據、24 條玩家路徑、四份野外對拍全數通過。

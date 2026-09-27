@@ -1,9 +1,9 @@
 {
  "name": "full-chain-reload",
- "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在第一次入夜換日時同時擲到治療僧侶，照實答應後繼續走（路上的自然事件，不是這條要驗的內容）；野外那一段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
+ "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在入夜換日、CAMPING! 收掉之後擲到治療僧侶，照實答應；下一次時段變換自然遇到 GOBLIN 伏擊，第十四回合打贏後繼續走（路上的自然事件，不是這條要驗的內容）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
  "seed": 3,
  "load": "workplace/saves/full-chain.json",
- "script": "L R RET SPACE > RET > < RET RET SPACE R R U U U U U U U U U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R S L RET S S S R R R R R R R R R R R R R R R U U U U U U U U RET",
+ "script": "L R RET SPACE > RET > < RET RET SPACE R R U U U U U U U U U RET S S S S R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R L RET R R R R R R R R R R R R R R U SPACE > > > > > RET U U L L RET > RET > > > > > RET U U L L D D R RET > RET > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D RET > RET > RET U U L L D D R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L D R R RET > RET > > RET U U L L RET > > RET > > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L D RET > > RET > > > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R RET > RET > > RET U U L L R RET > > RET > > > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET > > RET U U L L D RET > > RET > > > RET > RET U U L L R RET > > RET > RET U U L L R R RET > > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D D RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > > > RET U U L L R R RET > RET > RET U U L L R RET > > RET > > > > > RET U U L L R RET > RET > > RET U U L L R RET > > RET > > > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D D RET > RET > > > > RET U U L L RET > RET > RET U U L L D R R RET > > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D RET > RET > > > > > RET U U L L D D R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D R R RET > RET > RET U U L L D D R R RET > > RET > > > > > RET U U L L R R RET > RET > RET U U L L D D R RET > > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L R R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET > > > > > RET U U L L RET > RET > RET U U L L D R R RET > > RET > > > > > RET U U L L R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET > RET U U L L D R R RET > > RET > > > > > RET U U L L RET > RET > > > > > RET U U L L RET > RET > RET U U L L R RET > > RET > > RET U U L L R R RET > > RET > > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE U U U U U U U RET",
  "shot_dir": "docs/verification/player-path/full-chain-reload",
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
  "size": [
@@ -77,17 +77,42 @@
    "note": "出城，落到霍布入城點 3"
   },
   {
-   "step": 66,
+   "step": 70,
    "world": {
-    "x": 45,
-    "y": 23,
-    "camping": true,
-    "heal_prompt": true
+    "x": 46,
+    "y": 22,
+    "camping": true
    },
-   "note": "入夜換日：CAMPING!，同一次時段變換擲到治療僧侶"
+   "note": "入夜換日：CAMPING!"
   },
   {
-   "step": 94,
+   "step": 71,
+   "world": {
+    "x": 46,
+    "y": 22,
+    "heal_prompt": true
+   },
+   "note": "按鍵收掉之後才判時段（換成 DAWN），這一次擲到治療僧侶（RE-151）"
+  },
+  {
+   "step": 87,
+   "battle": {
+    "stage": 1,
+    "site": -1,
+    "monster": "GOBLIN"
+   },
+   "note": "下一次時段變換自然遇到 GOBLIN 伏擊"
+  },
+  {
+   "step": 1505,
+   "battle": {
+    "stage": 5,
+    "verdict": 2
+   },
+   "note": "第十四回合打贏，回到野外"
+  },
+  {
+   "step": 1514,
    "world": {
     "x": 48,
     "y": 21,
@@ -96,7 +121,7 @@
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）"
   },
   {
-   "step": 95,
+   "step": 1515,
    "battle": {
     "stage": 1,
     "site": 5,
@@ -117,18 +142,28 @@
    "shows": "出城的落點 (40,23)"
   },
   {
-   "step": 66,
-   "file": "step-066.png",
-   "shows": "CAMPING! 與治療僧侶的提示"
+   "step": 70,
+   "file": "step-070.png",
+   "shows": "CAMPING!"
   },
   {
-   "step": 94,
-   "file": "step-094.png",
+   "step": 71,
+   "file": "step-071.png",
+   "shows": "治療僧侶的提示"
+  },
+  {
+   "step": 87,
+   "file": "step-087.png",
+   "shows": "GOBLIN 伏擊"
+  },
+  {
+   "step": 1514,
+   "file": "step-1514.png",
    "shows": "任務敘述與 Will you partake?"
   },
   {
-   "step": 95,
-   "file": "step-095.png",
+   "step": 1515,
+   "file": "step-1515.png",
    "shows": "滿版的 BINDERAK 圖"
   }
  ],
