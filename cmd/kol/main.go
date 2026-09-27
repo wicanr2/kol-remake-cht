@@ -2012,9 +2012,10 @@ func (g *game) battleStep() {
 	// 再呼叫一次 Step 會把勝負訊息重新排一遍，變成按不完的迴圈。
 	if s.Stage == battle.StageDone {
 		g.awardBattle()
-		// 逃走那一句（RE-103）：`Flee()` 把訊息清空，所以第一次進來先印
-		// 「You flee for your life!」，按一次鍵才真的離開戰場。
-		if s.Verdict == battle.VerdictFled && len(s.Exec.Text) == 0 {
+		// 逃走那一句（RE-103）：只有逃走格那一條印（RE-146，`FleeLine`）。
+		// 訊息先清空，所以第一次進來先印「You flee for your life!」，按一次鍵才
+		// 真的離開戰場；戰場邊上的逃走不印，直接離開。
+		if s.FleeLine() && len(s.Exec.Text) == 0 {
 			s.Exec.Text = g.battleVerdictLines()
 			return
 		}

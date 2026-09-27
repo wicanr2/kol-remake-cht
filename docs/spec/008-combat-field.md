@@ -272,7 +272,8 @@ remake 用 `Side == SideEmpty` 表示前者，用 `Actor.Down()` 表示後者。
 **0x179**（` has`）＋ **0x17A**（` defeated you!`）。
 
 逃走：記錄 **0x17B**（`You flee for your]`）＋ 隊伍人數為 1 時 **0x17C**（`life!`）、
-否則 **0x17D**（`lives!`）。
+否則 **0x17D**（`lives!`）。只有逃走格那一條會印；戰場邊上的逃走在一般戰鬥不印任何
+一句（RE-146）。
 
 ### 冒險點數與金冠（`已證實`）
 

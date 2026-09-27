@@ -129,7 +129,7 @@ func TestFleeRecords(t *testing.T) {
 	}
 }
 
-// 答應逃走之後回到執行段那一層，訊息清空——呼叫端拿它當「那一句還沒印」的判準。
+// 答應逃走之後回到執行段那一層，訊息清空——呼叫端據此接手出口那一步。
 func TestFleeReturnsToExecuting(t *testing.T) {
 	s := fleeState()
 	s.Actors[0].X, s.Actors[1].X = FieldMin, FieldMin
@@ -224,5 +224,22 @@ func TestBarFleeDeclined(t *testing.T) {
 	s.Answer(false)
 	if s.Stage != StageField || s.fleeFromBar || s.Verdict != 0 {
 		t.Fatalf("不逃應該回戰場重新規劃，得到 %d／%v／%d", s.Stage, s.fleeFromBar, s.Verdict)
+	}
+}
+
+// 出口只有兩個倒下計數都是 0xFF 才印逃走那一句（`0x21592`），而 0xFF 只在逃走格
+// 答 y 的 `0x1FCF5` 設；戰場邊上的逃走不印（RE-146）。
+func TestFleeLineOnlyFromBar(t *testing.T) {
+	s := fleeState()
+	s.Flee()
+	if s.FleeLine() {
+		t.Fatal("戰場邊上逃走不該印逃走那一句")
+	}
+	s = fleeState()
+	s.Stage, s.fleeFromBar = StageFlee, true
+	s.Rand = &fixedRoll{values: []int{1}}
+	s.Answer(true)
+	if !s.FleeLine() {
+		t.Fatal("逃走格逃走應該印逃走那一句")
 	}
 }

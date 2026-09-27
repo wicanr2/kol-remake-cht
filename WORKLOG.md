@@ -6697,3 +6697,11 @@ frame-270 推翻了 remake 的版面：
   2026-09-27 決定改以 `-ambush-rolls 100×6` 讓出城到任務地點不遇伏，戰場照種子 1，
   第 16 回合打贏、結局七段與 `-scene ending` 逐 byte 相同。README 路徑表同步。
   24 條玩家路徑狀態一致、八份戰鬥收據通過。
+- #73 結案（RE-146）：兩個倒下計數同時設成 0xFF 只有逃走格答 y 的 `0x1FCF5` 一處。
+  共同出口 `0x211AD` 依序分派打贏、打輸（全隊倒下或競技場／訓練戰）、逃走（兩者皆 0xFF），
+  其餘直接到 `0x21607`。戰場邊上答 y 帶著本回合的倒下計數出去，一般戰鬥不印任何一句。
+  remake 原本兩條逃走都印「You flee for your life!」，改由 `State.FleeLine` 只讓逃走格那條印；
+  `battle-flee` 收據改斷言答 y 直接回野外，並拿掉答 y 前五個無作用的 SPACE（`fled.png` 的刪除
+  誤併入上一個 commit，本次補上 `back.png`）。SPEC-014 §5–6、SPEC-008 改寫為現況。
+  另登 `combat-result-pictures`：`sub_288D4` 的 COMBPICS 結果圖 runtime 沒有讀。
+  全套 Go 測試、八份戰鬥收據通過。

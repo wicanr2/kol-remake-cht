@@ -1210,18 +1210,21 @@
     {
       "id": "quest-count-ff-writer",
       "layer": "spec",
-      "title": "兩個計數怎麼變成 0xFF 還沒找到寫入點",
-      "body": "所以 remake 用自己的 `VerdictFled` 判定。找不到寫入點就無法確認那個判定與原版等價。",
+      "title": "兩個倒下計數的 0xFF 寫入點",
+      "body": "RE-146：0xFF 只在逃走格答 y 的 `0x1FCF5` 設。戰場邊上答 y 帶著 `0x20FA9` 數到的倒下計數到共同出口 `0x211AD`，一般戰鬥落到 `0x21607`，不印逃走那一句。remake 以 `State.FleeLine` 分辨，`battle-flee` 收據改為答 y 直接回野外。SPEC-014、SPEC-008 同步。",
       "acceptance": "寫入點找出來，或確認 remake 的判定等價。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/spec/014-quest-completion.md"
+          "docs/spec/014-quest-completion.md",
+          "docs/re/RESEARCH-LOG.md",
+          "internal/battle/flee.go"
         ],
-        "pattern": "還沒找到寫入點",
-        "note": "SPEC-014 的自承。"
+        "pattern": "RE-146",
+        "note": "已完成，當回歸訊號：規格、研究日誌與程式都引用 RE-146。"
       },
-      "issue": 73
+      "issue": 73,
+      "status": "done"
     },
     {
       "id": "spec029-wiring-review",
@@ -1595,6 +1598,17 @@
         "note": "已完成，當回歸訊號：規格、研究日誌與程式都引用 RE-145。"
       },
       "status": "done"
+    },
+    {
+      "id": "combat-result-pictures",
+      "layer": "gap",
+      "title": "戰鬥結果圖（COMBPICS）沒有畫",
+      "body": "原版出口在打贏、打輸、逃走（逃走格）與升級各呼叫 `sub_288D4` 畫一張 296×144 的 COMBPICS 圖（圖號 3、2、0、4，另一處傳 1；RE-006、RE-146）。素材已抽成 PNG，remake runtime 沒有讀，訊息只印在卷軸上。",
+      "acceptance": "五個呼叫點的圖號與觸發條件接上，戰鬥收據有對應畫格，並與原版同狀態畫格比對。",
+      "verify": {
+        "kind": "manual",
+        "note": "要實作並做畫面收據，沒有可 grep 的單一訊號。"
+      }
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

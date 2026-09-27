@@ -71,14 +71,17 @@ func (s *State) OfferFlee() bool {
 
 // Flee 是玩家答應逃走那一下（`0x2116C`…`0x2117B`）。帶著任務要的東西的話
 // 任務就標成完成——**不必把怪物打完**（RE-101）。回傳標到幾個人。
+//
+// 這條路帶著本回合數到的兩個倒下計數跳到共同出口 `0x211AD`，兩個都不是 0xFF，
+// 出口不印逃走那一句，直接離開戰場（RE-146，`FleeLine`）。
 func (s *State) Flee() int {
 	if s.FleeOffer().Carrying > 0 {
 		s.QuestDone = s.markQuestDone()
 	}
 	s.Verdict = VerdictFled
 	s.Stage = StageDone
-	// 回到執行段那一層：逃走那一句與打贏、打輸一樣印在卷軸上，按一次鍵才走。
-	// 訊息清空是給呼叫端當「那一句還沒印」的判準。
+	s.fledFromBar = false
+	// 回到執行段那一層；訊息清空讓呼叫端知道出口這一步輪到它處理。
 	s.Plan.Prompt = PromptExecuting
 	s.Exec.Text = nil
 	return s.QuestDone
@@ -163,8 +166,17 @@ func (s *State) BarFlee(rng Rand) {
 		s.DropItem(i)
 	}
 	s.fleeFromBar = false
+	s.fledFromBar = true
 	s.Verdict = VerdictFled
 	s.Stage = StageDone
 	s.Plan.Prompt = PromptExecuting
 	s.Exec.Text = nil
+}
+
+// FleeLine 回報戰鬥出口要不要印「You flee for your life!」（`0x21592`…`0x215EE`）。
+// 出口要 `word_345DA` 與 `word_34966` 都等於 0xFF 才印，而這兩個計數只在逃走格答 y
+// 的 `0x1FCF5` 設成 0xFF；戰場邊上的逃走帶著本回合的倒下計數出去，一般戰鬥落到
+// `0x21607` 什麼都不印（RE-146）。
+func (s *State) FleeLine() bool {
+	return s.Verdict == VerdictFled && s.fledFromBar
 }

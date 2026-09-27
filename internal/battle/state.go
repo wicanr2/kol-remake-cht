@@ -108,7 +108,10 @@ type Member struct {
 type State struct {
 	// fleeFromBar 表示目前那一問是從「Begin next round?」的逃走格來的（RE-143），
 	// 不是戰場邊上那一條（RE-103）。
-	fleeFromBar   bool
+	fleeFromBar bool
+	// fledFromBar 表示這一場是從逃走格逃掉的：只有那一條把兩個計數設成 0xFF，
+	// 出口才印逃走那一句（RE-146）。
+	fledFromBar   bool
 	rangedPending bool
 	Site          *Site
 	Stage         Stage

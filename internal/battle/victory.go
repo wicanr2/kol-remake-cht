@@ -14,7 +14,9 @@ const (
 	VerdictLost
 	// VerdictWon 是倒下的敵人等於敵人數。
 	VerdictWon
-	// VerdictFled 是逃走。原版用兩個計數同時等於 0xFF 表示，remake 由 `Flee()` 設。
+	// VerdictFled 是逃走，由 `Flee()`（戰場邊上）或 `BarFlee()`（逃走格）設。
+	// 原版沒有對應的單一值：逃走格把兩個倒下計數設成 0xFF，戰場邊上那一條
+	// 帶著本回合的計數出去（RE-146）。
 	VerdictFled
 )
 
