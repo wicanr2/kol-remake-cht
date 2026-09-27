@@ -1137,18 +1137,19 @@
     {
       "id": "koldata-action-messages",
       "layer": "spec",
-      "title": "幾個動作敘述還沒對上 KOLDATA",
-      "body": "SPEC-010 末段列了哪幾個指令的動作敘述還沒對上 KOLDATA 的記錄。",
+      "title": "戰鬥指令的動作敘述都已對上",
+      "body": "丟、撿、切換（RE-094）、裝填（RE-105）、降落（RE-124／RE-149）與施法（RE-093）的名稱都由執行段印的 KOLDATA 記錄證實，移動方式六格由說明書證實（RE-149）；SPEC-010 末段早已標為關閉。commands.go 開頭的過時自承改寫為現況。",
       "acceptance": "那幾個對上，或確認 KOLDATA 裡沒有對應的句子。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
           "internal/battle/commands.go"
         ],
-        "pattern": "還沒對上 KOLDATA",
-        "note": "commands.go 的自承，指向 SPEC-010 末段。"
+        "pattern": "不再有只憑圖號推的名稱",
+        "note": "已完成，當回歸訊號。"
       },
-      "issue": 68
+      "issue": 68,
+      "status": "done"
     },
     {
       "id": "reshuffle-behavior-address",

@@ -236,11 +236,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **koldata-action-messages**（#68） — 幾個動作敘述還沒對上 KOLDATA
-  SPEC-010 末段列了哪幾個指令的動作敘述還沒對上 KOLDATA 的記錄。
-  完成條件：那幾個對上，或確認 KOLDATA 裡沒有對應的句子。
-  核實：`internal/battle/commands.go` 找得到 `還沒對上 KOLDATA` 就是還沒完
-
 - **spec-unsolved-sections**（#70） — 各規格末尾的未解章節
   五份規格各自留了一節未解項，內容在產品碼裡多半沒有落點（沒有程式落點就沒有自承可綁），靠這一條追。目前有：`002-ega-extraction-set` 的「尚未關閉的來源」、`004-ogg-audio-catalog` 的「尚未通過的 READY gate」、`008-combat-field` 的「還沒解出來的（不得實作）」（敵人 AI 三張權重表的執行期值、`sub_1B94F`、`word_3B26A` 在城鎮被設成什麼、怯戰檢定的兩個開關、`sub_2625A` 的語意）、`010-combat-commands` 的「還沒關閉的」、`011-wilderness-ambush` 的「還沒解的」（`sub_2A39B`、`word_2FA2A` 那一條分支）。其中已經各自有條目的四項（攻擊訊息索引、參戰者記錄 +0x05、`sub_1AAE8`、`+0x25` 讀取端）不重複列。
   完成條件：五份的未解章節各自清空，或剩下的每一項有自己的條目。
@@ -320,6 +315,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **chardata-writer-untraced-fields** — 角色寫回：原版改動的位移全數寫對，其餘保留樣板：已完成
 - **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對：已完成
 - **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）：已完成
+- **koldata-action-messages** — 戰鬥指令的動作敘述都已對上：已完成
 - **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址：已完成
 - **actor-record-2c** — 參戰者記錄 +0x2C 仍未解：已完成
 - **quest-count-ff-writer** — 兩個倒下計數的 0xFF 寫入點：已完成

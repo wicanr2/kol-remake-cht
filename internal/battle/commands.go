@@ -4,8 +4,8 @@ package battle
 // `sub_228B7` 逐項看裝備、傷勢與腳下有什麼決定要不要放；選中之後依圖號走到
 // 對應的子選單，把攻擊選項與防禦選項算出來，最後與指令碼一起寫回參戰者記錄。
 
-// 指令列上的命令碼。名稱只寫已證實的用途；語意未定的沿用圖號
-// （SPEC-010 末段列了哪幾個還沒對上 KOLDATA 的動作敘述）。
+// 指令列上的命令碼。每一個的名稱都由執行段印的 KOLDATA 記錄或說明書證實
+// （RE-093／094／105／124／149），不再有只憑圖號推的名稱。
 const (
 	// CmdYes 是大姆指，與城鎮共用同一個圖。
 	CmdYes = 0x07
@@ -51,7 +51,8 @@ const (
 	// 徒手攻擊式（`0x1F940`）：0x2A 落到選項 0，0x37…0x3A 是四種動作。
 	IconUnarmedFormBase = 0x37
 	IconUnarmedFormLast = 0x3A
-	// 移動方式（`0x1F7D9`）。
+	// 移動方式（`0x1F7D9`），名稱依說明書（RE-149）：WALK、RUN、SPRINT，
+	// 以及 Kelden 的 FLY、FLY FASTER、ZOOM。
 	IconMoveWalk = 0x3C
 	IconMoveNext = 0x3D
 	IconMoveFast = 0x3E
