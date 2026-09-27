@@ -6730,3 +6730,15 @@ frame-270 推翻了 remake 的版面：
 - #63 結案：`[0xB926]` 是位址誤算，實際 DS:0xB956 已由 RE-113 解出（任務 payload `+0x29`）。
   SPEC-014 §6 與 `battle-flee` 收據仍說 QuestItem 是空的，改寫為：第 5 個地點的 Kelder Crown
   放在地上，那一次沒有人撿，所以走「全隊到邊上」那一條。
+- #65 結案（RE-151）：野外時刻的成本表 DGROUP+0x12B8 在原版是用 `word_39A54`（這一步的 Y 位移）
+  查的，查到 `[0x12B7…0x12B9]` = `00 0A 0A`：移動率 20 時往北 40、其餘 60，與地形無關。
+  `sub_297F2` 開頭先呼叫 `sub_29987` 依扣之前的時刻判時段，換了才重畫標籤、擲遭遇，最後
+  擲天候（SPEC-011 §1 原本把標籤重畫 `sub_29B40` 當成天候、寫成遭遇在後，更正）；換日在
+  CAMPING! 收掉之後才換成 DAWN。`tools/oracle/book_startup_test.go` 加 `KOL_BOOK_CLOCK_PROBE`，
+  dosgolem 讀記憶體實測四個方向與第 15 步換時段，收據 `docs/verification/world-clock-probe-20260927/`。
+  兩段舊 DOSBox 錄影計入「畫格晚按鍵一拍」後逐步相符。remake：`StepCost(dy, 移動率)`、
+  `Clock.UpdatePart`、`Session.updatePart`（遭遇在天候前），`RoadStepCost` 移除；全套測試通過。
+  **收據待重生**：時段換的時機與骰子先後都變了，野外路徑的遭遇位置跟著移動——
+  full-chain、arena、full-chain-ending、full-chain-reload、world-healer、world-quest、
+  world-road 與 battle-ambush、bar-flee、missile、pickup、spell 另行重生。
+- #63 的 verify 改用 required_in_all（`absent` 是「出現前都算未完成」，先前用反了）。

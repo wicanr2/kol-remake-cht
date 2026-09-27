@@ -122,8 +122,8 @@ func (s *Session) FollowRoad(other bool) bool {
 		s.Screen.SyncTerrain()
 	}
 	if moved {
-		// 循路一步扣的時刻與一般步伐不同（見 `RoadStepCost`）。
-		s.spendTime(RoadStepCost)
+		// 循路那一步與一般步伐走同一支 `sub_297F2`，成本看模擬那一步的 dy（RE-151）。
+		s.advanceTime(dy)
 	}
 	return moved
 }

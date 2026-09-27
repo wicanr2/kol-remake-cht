@@ -21,7 +21,7 @@ func TestClockDayParts(t *testing.T) {
 func TestClockNewDay(t *testing.T) {
 	c := NewClock()
 	steps := 0
-	for !c.Advance(7, 0) {
+	for !c.Advance(0, 0) {
 		steps++
 		if steps > 500 {
 			t.Fatal("走了五百步還沒換日")
@@ -35,31 +35,63 @@ func TestClockNewDay(t *testing.T) {
 	if c.Day != 1 || c.Month != 3 {
 		t.Fatalf("收掉紮營之後是 %+v", c)
 	}
-	want := (ClockStart / c.StepCost(7, 0)) + 1
+	want := (ClockStart / c.StepCost(0, 0)) + 1
 	if steps+1 != want {
 		t.Fatalf("換日走了 %d 步，預期 %d", steps+1, want)
 	}
 }
 
-// 每步的成本是 2 × (地形成本 + 隊伍移動率)，平原加移動率 20 是 56。
-// 原版實測：平原上第 15 步跨過 DAWN 的門檻，第 14 步還沒跨（world-clock-run2）。
+// 每步的成本是 `2 × ([0x12B8 + dy] + 隊伍移動率)`：索引是這一步的 Y 位移，
+// 不是地形（RE-151）。dosgolem 在平原上量到移動率 20 時往北每步 40、往南與
+// 東西每步 60。
 func TestClockStepCost(t *testing.T) {
 	c := NewClock()
-	if got := c.StepCost(7, 0); got != 56 {
-		t.Fatalf("平原每步是 %d", got)
+	for _, v := range []struct{ dy, want int }{{-1, 40}, {0, 60}, {1, 60}} {
+		if got := c.StepCost(v.dy, 0); got != v.want {
+			t.Errorf("dy=%d 每步 %d，原版 %d", v.dy, got, v.want)
+		}
 	}
-	if got := c.StepCost(4, 20); got != 52 {
-		t.Fatalf("道路每步是 %d", got)
-	}
+}
+
+// clockStep 照原版 `sub_297F2` 的順序走一步：先依扣之前的時刻判時段，再扣。
+func clockStep(c *Clock, dy int) {
+	c.UpdatePart()
+	c.Advance(dy, 20)
+}
+
+// 東西走十四步是 840，4200 − 840 = 3360 已經跨過 DAWN 的下限 3367，但時段要到
+// 下一步開頭才換（RE-151）：第 14 步畫面上還是 DAWN，第 15 步換成 MID MORN。
+func TestClockPartChangesOneStepLate(t *testing.T) {
+	c := NewClock()
 	for i := 0; i < 14; i++ {
-		c.Advance(7, 20)
+		clockStep(c, 0)
 	}
-	if c.Part != 0 {
-		t.Fatalf("第 14 步就換時段了：%d", c.Ticks)
+	if c.Ticks != 3360 || c.Part != 0 {
+		t.Fatalf("第 14 步應為時刻 3360、還在 DAWN，得到 %d／%d", c.Ticks, c.Part)
 	}
-	c.Advance(7, 20)
+	clockStep(c, 0)
 	if c.Part != 1 {
-		t.Fatalf("第 15 步沒換時段：%d", c.Ticks)
+		t.Fatalf("第 15 步開頭應換成 MID MORN，得到 %d", c.Part)
+	}
+}
+
+// `world-road-run1` 那一條：往北十二步（每步 40），循路先斜向西北三步拉回中線
+// （每步 40），之後往西（每步 60）。第 7 次循路跨過門檻、第 8 次換時段；原版錄影
+// 在第 9 次才看到，是擷取比按鍵晚一拍（出城那一下的畫格還停在城門提示）。
+func TestRoadRunClock(t *testing.T) {
+	c := NewClock()
+	for i := 0; i < 12+3; i++ {
+		clockStep(c, -1)
+	}
+	for i := 0; i < 4; i++ {
+		clockStep(c, 0)
+	}
+	if c.Ticks != 3360 || c.Part != 0 {
+		t.Fatalf("循路第 7 步應為時刻 3360、還在 DAWN，得到 %d／%d", c.Ticks, c.Part)
+	}
+	clockStep(c, 0)
+	if c.Part != 1 {
+		t.Fatalf("循路第 8 步應換成 MID MORN，得到 %d", c.Part)
 	}
 }
 
@@ -122,34 +154,5 @@ func TestClockDateLines(t *testing.T) {
 	last := &Clock{Month: 11, Day: 30, Year: 1}
 	if got := last.DateLinesZh(); got[0] != "十二月三十一日" || got[1] != "西元 1101" {
 		t.Fatalf("年末中文日期框是 %q", got)
-	}
-}
-
-// 循路一步扣的時刻與一般步伐不同：原版量到的是 RoadStepCost，
-// 一般步伐在道路上是 2 × (6 + 20) = 52。
-func TestRoadStepCost(t *testing.T) {
-	c := NewClock()
-	normal := c.StepCost(4, 20)
-	if normal != 52 {
-		t.Fatalf("道路上的一般步伐 %d", normal)
-	}
-	if RoadStepCost >= normal {
-		t.Fatalf("循路一步 %d 不該比一般步伐貴", RoadStepCost)
-	}
-	// 平原十二步之後連按 ROAD：第 8 次還在 DAWN、第 9 次翻成 MID MORN
-	// （`workplace/oracle/world-road-clock` 兩輪都量到第 9 次）。
-	c = NewClock()
-	for i := 0; i < 12; i++ {
-		c.Advance(7, 20)
-	}
-	for i := 0; i < 8; i++ {
-		c.Spend(RoadStepCost)
-	}
-	if c.Part != 0 {
-		t.Fatalf("循路第 8 步時段 %d，預期還在 DAWN", c.Part)
-	}
-	c.Spend(RoadStepCost)
-	if c.Part != 1 {
-		t.Fatalf("循路第 9 步時段 %d，預期翻成 MID MORN", c.Part)
 	}
 }

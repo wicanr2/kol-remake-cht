@@ -52,22 +52,14 @@ var weatherChance = [12]int{40, 40, 35, 30, 25, 25, 20, 15, 25, 30, 35, 40}
 // 低三位元是上限、除以 8 之後的低三位元是下限；大於 0x7F 的月份會多一段（下雪）。
 var weatherBounds = [12]int{139, 139, 131, 3, 3, 2, 2, 1, 2, 10, 139, 139}
 
-// terrainStep 是每種地形走一步的基本成本（DGROUP+0x12B8，索引是地形碼）：
-// 沙漠、河、沼澤、丘陵、道路、森林、岸、平原。道路最省、岸最貴，與說明書
-// 「公路最快、丘陵最難走、平原最好走」一致。
-var terrainStep = [8]int{10, 10, 10, 20, 6, 14, 30, 8}
+// stepCost 是 `sub_297F2` 查的那三個 byte（DGROUP+0x12B7 起：`00 0A 0A`）。
+// DGROUP+0x12B8 本來是八種地形的成本表（`10 10 10 20 6 14 30 8`），但原版拿來
+// 當索引的是 `word_39A54`——這一步的 Y 位移（−1、0、+1），不是地形碼，所以往北
+// 讀到表前面那個 0、其餘方向讀到沙漠與河的 10（RE-151，原版記憶體實測）。
+var stepCost = [3]int{0, 10, 10}
 
 // DefaultMovement 是移動率 0 時代入的值（`sub_29004:0x290C2`）。
 const DefaultMovement = 20
-
-// RoadStepCost 是循路一步扣的時刻。原版**不是**照一般步伐算的：兩輪 oracle
-// （`workplace/oracle/world-road-clock`／`world-road-clock2`）都量到「往北十二步
-// （PLAINS，每步 56）之後連按 ROAD，時段標籤在第 9 次才翻成 MID MORN」，
-// 往回推一步只扣 18…20，而一般步伐在道路上是 `2 × (6 + 20) = 52`。
-// 取 20 是因為 `2 × (10 + 0)` 是成本表上唯一自洽的組合，而且 8 步 832、
-// 9 步 852 剛好卡在門檻 3367 的兩側（差一）。**機制還沒追出來**：
-// `sub_297F2` 只有一處扣時刻，呼叫前的 `word_39A54`／`word_2FA2C` 對不上這個值。
-const RoadStepCost = 20
 
 // CampWeather 是換日那一張畫面用的天候組；ClearWeather 是收掉之後設回去的那一組。
 const (
@@ -102,21 +94,23 @@ func NewClock() *Clock {
 	return &Clock{Ticks: ClockStart, Part: 0, Day: 0, Month: 3, Year: 0, Weather: 1}
 }
 
-// StepCost 回傳走一步要扣的時刻：`2 × (地形成本 + 隊伍移動率)`
-// （`sub_297F2:0x29800`…`0x2981F`）。移動率取隊伍裡最大的那個，0 當成 20。
-//
-// 這個式子由原版實測釘住：`world-clock-run2` 在平原上左右來回，第 15 次按鍵
-// 跨過 DAWN 的門檻（4200 − 15 × 56 = 3360 < 3367，第 14 次的 3416 還沒跨）。
-// 平原成本 8、隊伍移動率 20，只有 56 對得上。
-func (c *Clock) StepCost(terrain, movement int) int {
+// StepCost 回傳走一步要扣的時刻：`2 × ([0x12B8 + dy] + 隊伍移動率)`
+// （`sub_297F2` 開頭）。dy 是這一步的 Y 位移，往北 −1、往南 +1、東西 0；
+// 移動率取隊伍裡最大的那個，0 當成 20。所以移動率 20 時往北 40、其餘 60，
+// 與腳下地形無關（RE-151：dosgolem 在平原上四個方向各走八步量到）。
+// 循路那一步也走同一支，dy 是模擬出來那一步的方向。
+func (c *Clock) StepCost(dy, movement int) int {
 	if movement == 0 {
 		movement = DefaultMovement
 	}
-	step := 0
-	if terrain >= 0 && terrain < len(terrainStep) {
-		step = terrainStep[terrain]
+	i := 1
+	switch {
+	case dy < 0:
+		i = 0
+	case dy > 0:
+		i = 2
 	}
-	return 2 * (step + movement)
+	return 2 * (stepCost[i] + movement)
 }
 
 // Advance 走一步。回傳是不是換日了——換日要跳出 CAMPING! 畫面。
@@ -124,19 +118,30 @@ func (c *Clock) StepCost(terrain, movement int) int {
 // **日期不在這裡推。** 原版的順序是：時刻歸位、補營養、停在 CAMPING! 等鍵，
 // 收掉之後才推日期並重畫日期框（`sub_297F2:0x2993B`），所以紮營那一張上面
 // 印的還是前一天。推日期是 `NextDay`。
-func (c *Clock) Advance(terrain, movement int) bool {
-	return c.Spend(c.StepCost(terrain, movement))
+func (c *Clock) Advance(dy, movement int) bool {
+	return c.Spend(c.StepCost(dy, movement))
 }
 
-// Spend 扣掉指定的時刻，回傳這一步是不是把日子推過去了。
+// Spend 扣掉指定的時刻，回傳這一步是不是把日子推過去了。**時段不在這裡更新**：
+// 原版 `sub_297F2` 先呼叫 `sub_29987` 依扣之前的時刻判時段，再扣（RE-151），
+// 所以跨過門檻的那一步畫面上還是舊時段，下一步才換。時段由 `UpdatePart` 更新。
 func (c *Clock) Spend(cost int) bool {
 	c.Ticks -= cost
 	if c.Ticks >= 0 {
-		c.Part = c.partFor(c.Ticks)
 		return false
 	}
 	c.Ticks = ClockStart
-	c.Part = c.partFor(c.Ticks)
+	return true
+}
+
+// UpdatePart 是 `sub_29987` 判時段那一段：依目前的時刻重算，回傳是不是換了。
+// 換了原版接著重畫標籤、擲野外遭遇與天候（呼叫端處理）。
+func (c *Clock) UpdatePart() bool {
+	p := c.partFor(c.Ticks)
+	if p == c.Part {
+		return false
+	}
+	c.Part = p
 	return true
 }
 

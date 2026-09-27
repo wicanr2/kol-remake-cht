@@ -238,3 +238,54 @@ func TestPromptBlocksWalking(t *testing.T) {
 		t.Fatalf("座標動到 (%d,%d)", s.Travel.X, s.Travel.Y)
 	}
 }
+
+// 時段換了先擲遭遇、再擲天候（`sub_29987`：`sub_2A4E5` 在 `0x29A83` 的天候之前，
+// RE-151）。
+func TestTimePartRollsEncounterBeforeWeather(t *testing.T) {
+	data := testData(t)
+	c := NewClock()
+	s := &Screen{Travel: New(data, testGrid(t, nil), 20, 20),
+		Clock: c, TerrainCode: 7, Movement: 20}
+	sess := NewSession(s)
+	rng := &orderRand{}
+	sess.Rand = rng
+	sess.OnTimePart = func() { rng.log = append(rng.log, "遭遇") }
+	for i := 0; i < 40 && c.Part == 0; i++ {
+		sess.spendTime(100)
+	}
+	if len(rng.log) < 2 || rng.log[0] != "遭遇" || rng.log[1] != "天候" {
+		t.Fatalf("順序應為遭遇、天候，得到 %v", rng.log)
+	}
+}
+
+// 換日那一步不擲；按鍵收掉 CAMPING! 之後才判時段（換成 DAWN）並擲遭遇
+// （`sub_297F2` 換日分支在 `sub_144C3` 之後才呼叫 `sub_29987`）。
+func TestNewDayPartChangesAfterCamping(t *testing.T) {
+	data := testData(t)
+	c := NewClock()
+	c.Ticks, c.Part = 10, DayParts-1
+	s := &Screen{Travel: New(data, testGrid(t, nil), 20, 20),
+		Clock: c, TerrainCode: 7, Movement: 20}
+	sess := NewSession(s)
+	sess.Rand = stepRand{}
+	calls := 0
+	sess.OnTimePart = func() { calls++ }
+	sess.spendTime(60)
+	if !sess.Camping || calls != 0 || c.Part != DayParts-1 {
+		t.Fatalf("換日那一步應停在 CAMPING!、還沒擲：camping=%v 擲 %d 次 時段 %d", sess.Camping, calls, c.Part)
+	}
+	sess.EndCamping()
+	if calls != 1 || c.Part != 0 {
+		t.Fatalf("收掉之後應換成 DAWN 並擲一次：擲 %d 次 時段 %d", calls, c.Part)
+	}
+}
+
+// orderRand 記下天候那一擲（`Roll(0x80)`）發生在什麼時候。
+type orderRand struct{ log []string }
+
+func (r *orderRand) Roll(n int) int {
+	if n == 0x80 {
+		r.log = append(r.log, "天候")
+	}
+	return 1
+}

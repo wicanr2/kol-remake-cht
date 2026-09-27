@@ -459,6 +459,88 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			return
 		}
 
+		// 時刻探針（#65）：從出城後的同一份狀態，四個方向各走八步，逐步記下時刻
+		// 與 `sub_297F2` 算成本時讀的兩個字組。DS 位移＝IDA 線性 − 0x2DED0：
+		// 時刻 `word_2DF40`＝0x70、時段 `word_2DF42`＝0x72、索引 `word_39A54`＝0xBB84、`word_39A4E`＝0xBB7E、
+		// 隊伍移動率 `word_2FA2C`＝0x1B5C、地形碼 `word_3499A`＝0x6ACA。
+		if os.Getenv("KOL_BOOK_CLOCK_PROBE") == "1" {
+			base := o.Save()
+			type row struct {
+				Key     string `json:"key"`
+				Step    int    `json:"step"`
+				Before  int    `json:"time_before"`
+				After   int    `json:"time_after"`
+				Dy      int    `json:"word_39A54"`
+				Dx      int    `json:"word_39A4E"`
+				Rate    int    `json:"word_2FA2C"`
+				Terrain int    `json:"word_3499A"`
+				Moved   bool   `json:"screen_changed"`
+				X       int    `json:"x"`
+				Y       int    `json:"y"`
+				SubX    int    `json:"sub_x"`
+				SubY    int    `json:"sub_y"`
+				Part    int    `json:"word_2DF42"`
+			}
+			var rows []row
+			signed := func(v uint16) int { return int(int16(v)) }
+			// 第五組照 `world-road-run1` 走：往北十二步站上道路，再連按九次 Return
+			// （白框在 ROAD）。世界座標 `word_2FB50`／`word_2FB56`＝0x1C80／0x1C86，
+			// 次格 `word_2DF36`／`word_2DF38`＝0x66／0x68。
+			road := append(strings.Split(strings.Repeat("Up,", 12), ",")[:12],
+				strings.Split(strings.Repeat("Return,", 9), ",")[:9]...)
+			for _, seq := range [][]string{{"Up"}, {"Down"}, {"Left"}, {"Right"}, road} {
+				o.Restore(base)
+				last := screenDigest(o)
+				n := 8
+				if seq[0] == "Left" {
+					n = 16 // 東西十四步跨過 DAWN 的門檻，多走兩步看時段哪一步換
+				}
+				if len(seq) > 1 {
+					n = len(seq)
+				}
+				for i := 0; i < n; i++ {
+					key := seq[0]
+					if len(seq) > 1 {
+						key = seq[i]
+					}
+					before := signed(o.Word(o.DS(0x70)))
+					if err := o.SendKeys(key); err != nil {
+						t.Fatalf("送 %q：%v", key, err)
+					}
+					if err := o.Run(2_000_000); err != nil {
+						t.Fatalf("走 %q：%v", key, err)
+					}
+					now := screenDigest(o)
+					rows = append(rows, row{Key: key, Step: i, Before: before,
+						After: signed(o.Word(o.DS(0x70))), Dy: signed(o.Word(o.DS(0xBB84))),
+						Dx: signed(o.Word(o.DS(0xBB7E))), Rate: signed(o.Word(o.DS(0x1B5C))),
+						Terrain: signed(o.Word(o.DS(0x6ACA))), Moved: now != last,
+						X: signed(o.Word(o.DS(0x1C80))), Y: signed(o.Word(o.DS(0x1C86))),
+						SubX: signed(o.Word(o.DS(0x66))), SubY: signed(o.Word(o.DS(0x68))),
+						Part: signed(o.Word(o.DS(0x72)))})
+					last = now
+					r := rows[len(rows)-1]
+					t.Logf("時刻探針 %-6s %2d：%d → %d（扣 %d）時段=%d 39A54=%d 移動率=%d 地形=%d 位置 (%d,%d) 次格 (%d,%d)",
+						key, i, r.Before, r.After, r.Before-r.After, r.Part, r.Dy, r.Rate, r.Terrain, r.X, r.Y, r.SubX, r.SubY)
+				}
+			}
+			body, err := json.MarshalIndent(map[string]any{
+				"schema": "kol-world-clock-probe-v1", "source": "dosgolem-normal-player-path",
+				"address_space": "執行期 DGROUP 相對位移；IDA 線性 − 0x2DED0",
+				"rows":          rows,
+			}, "", "  ")
+			if err != nil {
+				t.Fatal(err)
+			}
+			if dir := os.Getenv("KOL_ORACLE_CAPTURE"); dir != "" {
+				if err = os.WriteFile(filepath.Join(dir, "world-clock-probe.json"), append(body, '\n'), 0600); err != nil {
+					t.Fatal(err)
+				}
+			}
+			o.Restore(base)
+			return
+		}
+
 		// 走到遇敵為止，**不要走固定步數**。遭遇是機率性的（SPEC-011），
 		// 固定一百步走完之後 `DS:2D9C`（敵人數）可能還是 0，而症狀是
 		// 「參戰上限不一致：count=0」——看起來像擷取壞了，其實是根本沒打起來。

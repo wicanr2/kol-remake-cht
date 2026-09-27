@@ -64,8 +64,9 @@ type Session struct {
 	OnArrive func(x, y int) *Prompt
 	// OnPromptAnswer 是玩家對那一頁的回答。只等一個鍵的那一種收掉時傳 false。
 	OnPromptAnswer func(yes bool)
-	// OnTimePart 在時段變換、天候重擲完之後被呼叫（`sub_29A3E`）。原版就是在這裡
-	// 擲一次野外遭遇；走進某一格不會擲，所以一天最多四次（RE-078）。
+	// OnTimePart 在時段變換、標籤重畫之後、天候重擲之前被呼叫（`sub_29987` 呼叫
+	// `sub_2A4E5` 那一處，RE-151）。原版就是在這裡擲一次野外遭遇；走進某一格不會
+	// 擲，所以一天最多四次（RE-078）。
 	OnTimePart func()
 }
 
@@ -171,7 +172,7 @@ func (s *Session) Walk(dx, dy int) bool {
 		}
 	}
 	if moved {
-		s.advanceTime()
+		s.advanceTime(dy)
 	}
 	return moved
 }
@@ -179,19 +180,22 @@ func (s *Session) Walk(dx, dy int) bool {
 // advanceTime 是走一步之後的時刻推進（`sub_297F2`）。格內的次格移動也算一步：
 // 原版「世界座標沒變」那一條路（`0x295C1`）同樣呼叫這一支。**被地形擋住的那一步
 // 不算**：原版走 `0x2958F` 把座標復原，之後 `jmp 0x295DD` 跳過整支 `sub_297F2`。
-func (s *Session) advanceTime() { s.spendTime(0) }
+// dy 是這一步的 Y 位移，成本依它查表（`StepCost`，RE-151）。
+func (s *Session) advanceTime(dy int) {
+	if c := s.Screen.Clock; c != nil {
+		s.spendTime(c.StepCost(dy, s.Screen.Movement))
+	}
+}
 
-// spendTime 推進時刻。cost 為 0 表示照一般步伐算（地形與隊伍移動率），
-// 非 0 就直接扣那個數——循路走的是後者（RoadStepCost）。
+// spendTime 是 `sub_297F2`：**先**依扣之前的時刻判時段（`sub_29987`，換了就擲
+// 天候與遭遇），**再**扣時刻；扣成負的就換日，停在 CAMPING! 等鍵（RE-151）。
+// 所以跨過門檻那一步不換時段，下一步開頭才換。
 func (s *Session) spendTime(cost int) {
 	c := s.Screen.Clock
 	if c == nil {
 		return
 	}
-	part := c.Part
-	if cost == 0 {
-		cost = c.StepCost(s.Screen.TerrainCode, s.Screen.Movement)
-	}
+	s.updatePart()
 	if c.Spend(cost) {
 		s.Camping = true
 		// 換日那一張把天候切到第 5 組（`sub_297F2:0x2989D`）。
@@ -200,17 +204,25 @@ func (s *Session) spendTime(cost int) {
 			s.OnNewDay(c.Hunger())
 		}
 	}
-	changed := c.Part != part
-	if changed {
-		s.rollWeather()
+	s.Screen.Date = c.DateLines()
+}
+
+// updatePart 是 `sub_29987`：時段換了就重畫標籤（`sub_29B40`）、擲一次野外遭遇
+// （`sub_2A4E5`），最後才擲天候（`0x29A83`，RE-151 更正早先「天候在前」的讀法）。
+// 走進某一格不會擲，所以一天最多四次（RE-078）。
+//
+// 遭遇成立時原版先打完那一場才擲天候；remake 的戰鬥由呼叫端接手，天候在這裡就擲，
+// 差別只在骰子的先後，不影響狀態（SPEC-011 §1 註明）。
+func (s *Session) updatePart() {
+	c := s.Screen.Clock
+	if !c.UpdatePart() {
+		return
 	}
 	s.Screen.TimeIndex = c.Part
-	s.Screen.Date = c.DateLines()
-	// 時段變了才擲一次野外遭遇（`sub_29987:0x29A3E`，接在天候之後）。走進某一格
-	// 不會擲，所以一天最多四次（RE-078）。
-	if changed && s.OnTimePart != nil {
+	if s.OnTimePart != nil {
 		s.OnTimePart()
 	}
+	s.rollWeather()
 }
 
 // rollWeather 是時段變換時的天候隨機漫步。原版每次都擲，擲出同一組就不重畫。
@@ -234,8 +246,10 @@ func (s *Session) EndCamping() {
 	}
 	s.Camping = false
 	c := s.Screen.Clock
-	// 原版收掉那一張之後把天候設回第 1 組，再推日期、重畫日期框
-	// （`sub_297F2:0x298FC`…`0x2997C`）。
+	// 原版等到那一鍵之後才判時段（`sub_297F2` 換日分支裡的 `sub_29987`）：時刻已經
+	// 歸位成 4200，由 TWILIGHT 換成 DAWN，擲天候與遭遇；接著把天候設回第 1 組、
+	// 推日期、重畫日期框（`0x298FC`…`0x2997C`，RE-151）。
+	s.updatePart()
 	c.Weather, s.Screen.Group = ClearWeather, ClearWeather
 	c.NextDay()
 	s.Screen.Date = c.DateLines()

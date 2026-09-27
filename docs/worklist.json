@@ -1031,12 +1031,13 @@
       "body": "`[0xB926]` 是位址誤算，實際是 DS:0xB956（RE-113 更正 RE-103），由 `sub_2B0FF:0x2B1C4` 從任務 payload `+0x29` 複製；remake 以 `Site.QuestItem` 承接並放到地上。SPEC-014 §6 與 `battle-flee` 收據的過時說法改寫：那一次 QuestItem 是 Kelder Crown，只是沒有人撿。",
       "acceptance": "`[0xB926]` 解出，那一條的 QuestItem 不再是空的。",
       "verify": {
-        "kind": "absent",
+        "kind": "required_in_all",
         "paths": [
-          "docs/spec/014-quest-completion.md"
+          "docs/spec/014-quest-completion.md",
+          "docs/verification/battle-flee/receipt.json"
         ],
-        "pattern": "`\\[0xB926\\]` 還沒解",
-        "note": "已完成：SPEC-014 不再有這一句。"
+        "pattern": "Kelder Crown",
+        "note": "已完成，當回歸訊號：規格與收據都寫明那一次的任務物品。"
       },
       "issue": 63,
       "status": "done"
@@ -1064,18 +1065,21 @@
     {
       "id": "world-clock-threshold-mechanism",
       "layer": "spec",
-      "title": "世界時刻門檻的機制沒追出來",
-      "body": "9 步 852 剛好卡在門檻 3367 的兩側（差一），機制還沒追出來，目前靠量到的值。差一的邊界最容易在別的路徑上露餡。",
+      "title": "野外時刻：成本依步伐 Y 位移查表、時段在扣之前判",
+      "body": "RE-151：`sub_297F2` 以 `word_39A54`（這一步的 Y 位移）查 DGROUP+0x12B7 起的 `00 0A 0A`，移動率 20 時往北 40、其餘 60，與地形無關；開頭先呼叫 `sub_29987` 依扣之前的時刻判時段，換了才重畫標籤、擲遭遇、再擲天候；換日在 CAMPING! 收掉之後才換成 DAWN。dosgolem 讀記憶體實測（`world-clock-probe-20260927`），兩段舊錄影在計入擷取晚一拍後逐步相符。`RoadStepCost` 移除；SPEC-007、SPEC-011 §1 更正。",
       "acceptance": "機制追出來並寫進規格，門檻不再是量出來的常數。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/world/clock.go"
+          "internal/world/clock.go",
+          "docs/spec/007-wilderness-time.md",
+          "docs/re/RESEARCH-LOG.md"
         ],
-        "pattern": "機制還沒追出來",
-        "note": "clock.go 的自承。"
+        "pattern": "RE-151",
+        "note": "已完成，當回歸訊號。"
       },
-      "issue": 65
+      "issue": 65,
+      "status": "done"
     },
     {
       "id": "chardata-writer-untraced-fields",
