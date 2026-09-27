@@ -10233,8 +10233,7 @@ remake 以 `State.ResultPicture` 依去向、`RankFight` 與 `FleeLine` 回圖�
 
 ## RE-148：參戰者 `+0x03` 由種族決定，磚塊 0x0C 擋住移動方式的後三格
 
-輸入同 RE-145。證據等級：寫入點與條件 `已證實`（靜態控制流＋原版執行時記錄），
-Kelden 會飛 `強推論`。
+輸入同 RE-145。證據等級 `已證實`（靜態控制流＋原版執行時記錄；飛行的語意見 RE-149）。
 
 ### 發現經過
 
@@ -10266,11 +10265,11 @@ loc_1F87E：sub_24E2B(0, 8) → word_3499A（腳下那一塊）
 RE-085 與 SPEC-010 原本寫成「腳下是 0x0C 才推」，方向相反。Theodoric 站的格不是 0x0C，
 所以原版有 7 格。
 
-### Kelden 會飛（`強推論`）
+### Kelden 會飛（`已證實`，見 RE-149）
 
 只有 Kelden 叫得出後三格；選了之後 `+0x1E` 設起來，大部分擋路磚穿得過去、只被同樣
 `+0x1E` 非零的人擋（RE-085）；解除的指令 0x28 印記錄 0x11B「lands!」（RE-124）。
-remake 的欄位與常數名稱沿用「騎乘」，只照行為實作，不改名。
+說明書的移動一節證實這就是飛行（RE-149）。remake 的識別字沿用 Mounted 系列名稱。
 
 ### remake 的修正
 
@@ -10279,4 +10278,37 @@ remake 的欄位與常數名稱沿用「騎乘」，只照行為實作，不改�
 - `castArea`：治好隊員的腿依種族重設 `Flag03`。
 - `MoveForms`：腳下不是 `StuckTile`（0x0C）或 `Flag1E` 非零才推後三格。
 - 原版逐格收據 `docs/verification/planning-cells-20260927/`：十一組全部一致。
+
+## RE-149：`+0x1E` 是飛行，磚塊 0x0C 是洞穴與迷宮的地面
+
+證據等級 `已證實`。
+
+### 飛行
+
+說明書第五章移動一節（`docs/manual/chapters/05-coming-to-blows.md`，印刷頁 30–31）：
+MOVE 叫出 WALK、RUN、SPRINT；「凱爾登族，或持有魔法物品而能飛行的其他種族，還能在
+戰場上飛行」，另有 FLY、FLY FASTER、ZOOM 在空中移動一、二、三格，LAND 返回地面。
+對到程式：
+
+| 說明書 | 圖號 | 程式證據 |
+|---|---|---|
+| WALK、RUN、SPRINT | 0x3C、0x3D、0x3E | 0x3E 要 `+0x03 != 0`（Dwarven 為 0，RE-148） |
+| FLY、FLY FASTER、ZOOM | 0x3F、0x40、0x35 | 要 `+0x03 == 2`（Kelden）；選了設 `+0x1E`（RE-085） |
+| LAND | 0x28 | 清 `+0x1E`、印 0x11B「lands!」（RE-124） |
+| 持有魔法物品的其他種族 | — | `sub_21FCD` 依穿戴欄位元把 `+0x03` 設成 2 的那一條（RE-141：現行 ITEM.LST 走不到） |
+
+所以 `+0x1E` 是「飛在空中」。RE-093 讀成騎乘、RE-124 讀成下馬，程式註解與 SPEC-010
+改為飛行與降落；識別字（`CmdMountedMove`、`MountedSight`、`MountingForm`）沿用。
+
+### 磚塊 0x0C
+
+一般遭遇的地形生成只用 0x09、0x0A、0x0D（`Generate`／`Scatter`），0x0C 只出現在
+任務戰場。統計 `assets/original-derived-png/ega/BATTLE/battle-map-*.png` 的格值，
+28 張裡 24 張有 0x0C（12…549 格）。以 `battle-tiles-08.png` 拼出地圖、把 0x0C 標紅後
+（`workplace/tile0c/`），標紅的格全部落在牆圍起來的洞穴通道與迷宮內部，外面的地表、
+水面與樹叢一格都沒有。圖集上它是黑底夾橘綠斑點的那一塊（第 1 列第 2 塊）。
+
+合起來的規則：站在洞穴地面上叫不出飛行三格（`loc_1F87E`），飛在空中踩到它走不動
+（`0x2647D`）——在頂上有遮蔽的地方不能飛。「因為有頂」是依地圖位置的解讀；規則本身
+照原版位元組實作，不依賴這個解讀。
 

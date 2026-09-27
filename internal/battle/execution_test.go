@@ -190,25 +190,25 @@ func TestActDispatch(t *testing.T) {
 		t.Fatalf("怯戰應該印 %#x 並把防禦選項設 2，得到 %#x／%d",
 			FlinchRecord, r.Message, s.Actors[0].Guard)
 	}
-	// 下馬（0x28）：那一格沒別人就清掉 Flag1E 並印「lands!」（RE-124）。
+	// 降落（0x28）：那一格沒別人就清掉 Flag1E 並印「lands!」（RE-124）。
 	s = newState()
 	s.Actors[0].Flag1E = 1
 	s.Actors[0].Command = CmdLand
 	r, _ = s.Act(&fixedRoll{values: []int{50}})
 	if r.Message != LandsRecord || s.Actors[0].Flag1E != 0 {
-		t.Fatalf("下馬應該印 %#x 並清掉 Flag1E，得到 %#x／%d",
+		t.Fatalf("降落應該印 %#x 並清掉 Flag1E，得到 %#x／%d",
 			LandsRecord, r.Message, s.Actors[0].Flag1E)
 	}
-	// 記錄 +0x25 就是 Command：下馬把它清成 0（RE-142），但這一手的疲勞仍照
-	// 輪到時讀進的「下馬」算（0x20A8B 的 word_31122）。
+	// 記錄 +0x25 就是 Command：降落把它清成 0（RE-142），但這一手的疲勞仍照
+	// 輪到時讀進的「降落」算（0x20A8B 的 word_31122）。
 	if r.Command != CmdLand || s.Actors[0].Command != 0 {
-		t.Fatalf("下馬之後指令應清成 0、結果仍記下馬，得到 %#x／%#x", r.Command, s.Actors[0].Command)
+		t.Fatalf("降落之後指令應清成 0、結果仍記降落，得到 %#x／%#x", r.Command, s.Actors[0].Command)
 	}
 	ref := newState()
 	ref.Actors[0].Command = CmdLand
 	ref.EndTurnFatigue(0)
 	if s.Actors[0].Fatigue != ref.Actors[0].Fatigue {
-		t.Fatalf("下馬那一手的疲勞應照下馬的時間成本算：%d，應為 %d",
+		t.Fatalf("降落那一手的疲勞應照降落的時間成本算：%d，應為 %d",
 			s.Actors[0].Fatigue, ref.Actors[0].Fatigue)
 	}
 	// 同一格上還有別人就下不來，印記錄 0x11A。
@@ -499,7 +499,7 @@ func TestFlinchCheck(t *testing.T) {
 	if r.Message == FlinchRecord {
 		t.Errorf("怪物不該怯戰")
 	}
-	// 不在名單裡的指令不判：移動、休息、下馬都不判。
+	// 不在名單裡的指令不判：移動、休息、降落都不判。
 	for _, cmd := range []int{CmdMove, CmdRest, CmdLand} {
 		s = newState(true)
 		s.Actors[0].Command = cmd

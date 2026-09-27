@@ -32,9 +32,9 @@ const (
 	// CmdWeapon 是武器攻擊；CmdUnarmed 是徒手。
 	CmdWeapon  = 0x21
 	CmdUnarmed = 0x29
-	// CmdMove 是移動。另外兩格只在 Flag1E 非零（騎著）時出現：
-	// CmdLand 是**下馬**——執行段把 +0x1E 清掉並印記錄 0x11B「lands!」
-	// （`0x2070f`…`0x20774`，RE-124）；CmdMountedMove 是騎著移動，執行段與
+	// CmdMove 是移動。另外兩格只在 Flag1E 非零（飛在空中）時出現：
+	// CmdLand 是**降落**（說明書的 LAND）——執行段把 +0x1E 清掉並印記錄 0x11B
+	// 「lands!」（`0x2070f`…`0x20774`，RE-124）；CmdMountedMove 是空中移動，執行段與
 	// 一般移動同一支。
 	CmdMove        = 0x27
 	CmdLand        = 0x28
@@ -349,7 +349,7 @@ func (s *State) CommandEnv(i int) CommandEnv {
 	if s.Field != nil {
 		out.Standable = !BlocksMovement(s.Field.At(a.X, a.Y))
 	}
-	// 腳下那一格有沒有別人（`sub_227C0`）：下馬那一格要的是「沒有別人擋著」。
+	// 腳下那一格有沒有別人（`sub_227C0`）：降落那一格要的是「沒有別人擋著」。
 	for n := range s.Actors {
 		if n == i {
 			continue

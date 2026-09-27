@@ -13,7 +13,7 @@ const TileUnseen = 0x4A
 var sightBits = [10]byte{0xFF, 0x80, 0x01, 0xFF, 0xF1, 0xFF, 0x17, 0xF9, 0x76, 0x7F}
 
 // 0x23…0x2D 這一段（牆與碎石）另有兩條例外，都在 `sub_25F8A:0x2602C`…`0x26095`：
-// 騎著的人（記錄 +0x1E 非零）整條線都穿得過去，或者站在 RoadTileA／RoadTileB 上
+// 飛在空中的人（記錄 +0x1E 非零）整條線都穿得過去，或者站在 RoadTileA／RoadTileB 上
 // 時視線的第一步穿得過去。
 const (
 	seeOverLow  = 0x23
@@ -21,7 +21,7 @@ const (
 	// RoadTileA／RoadTileB 是那兩塊「站上去就看得過去」的磚。
 	RoadTileA = 0x24
 	RoadTileB = 0x25
-	// MountedSight 不是磚塊，是「騎著」這件事在 seesOver 裡的代號——原版那一條
+	// MountedSight 不是磚塊，是「飛在空中」這件事在 seesOver 裡的代號——原版那一條
 	// 走的是參戰者記錄 +0x1E，不看腳下（`sub_25F8A:0x2606C`）。
 	MountedSight = -1
 )
@@ -61,7 +61,7 @@ const (
 // （`sub_223C0:0x22436` 兩層迴圈呼叫 `sub_25D7A(3)`）：線上的格子依序標記，
 // 標到擋住的那一格就停，後面的格子維持「還沒看到」。
 //
-// mounted 是看的人記錄 +0x1E 非零，也就是騎著——那時牆與碎石整段都看得過去。
+// mounted 是看的人記錄 +0x1E 非零，也就是飛在空中——那時牆與碎石整段都看得過去。
 func (f *Field) Visible(x, y int, mounted bool) Sight {
 	var state [ViewRows * ViewCols]int
 	foot := f.At(clampCell(x), clampCell(y))
@@ -141,7 +141,7 @@ func (f *Field) ray(ox, oy, tx, ty, foot int, state *[ViewRows * ViewCols]int) {
 	})
 }
 
-// seesOver 是牆與碎石那一段的例外。騎著的人（foot 為 MountedSight）不受步數與
+// seesOver 是牆與碎石那一段的例外。飛在空中的人（foot 為 MountedSight）不受步數與
 // 腳下磚塊限制；其餘只有視線的第一步、而且站在路面上才穿得過去。
 func seesOver(tile, foot, step int) bool {
 	if tile < seeOverLow || tile >= seeOverHigh {

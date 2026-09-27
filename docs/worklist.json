@@ -916,14 +916,21 @@
     {
       "id": "move-unlock-tile-reason",
       "layer": "spec",
-      "title": "磚塊 0x0C 在地圖上是什麼",
-      "body": "RE-148 更正了方向：0x0C 不是解鎖，是擋住移動方式後三格（Kelden 起飛）的磚，而且已經飛起來時踩在上面走不動。行為已照原版實作；那一塊磚在戰場上畫的是什麼、為什麼擋飛行還沒從圖形或文字證實。",
-      "acceptance": "從戰場磚圖或原版文字確認 0x0C 是哪一種地形，或說明為何不影響玩法而結案。",
+      "title": "磚塊 0x0C 是洞穴與迷宮的地面",
+      "body": "RE-149：0x0C 只出現在任務戰場，拼圖標紅後全數落在牆圍起來的洞穴通道與迷宮內部。站在上面不能起飛、飛在空中踩到走不動（RE-148）。說明書證實 `+0x1E` 是飛行（FLY／LAND），程式註解與 SPEC-010 由騎乘改為飛行。",
+      "acceptance": "確認 0x0C 是哪一種地形，規則照原版實作。",
       "verify": {
-        "kind": "manual",
-        "note": "要看磚圖與地形來源，沒有可 grep 的單一訊號。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/spec/010-combat-commands.md",
+          "docs/re/RESEARCH-LOG.md",
+          "internal/battle/execution.go"
+        ],
+        "pattern": "RE-149",
+        "note": "已完成，當回歸訊號。"
       },
-      "issue": 57
+      "issue": 57,
+      "status": "done"
     },
     {
       "id": "actor-record-25-reader",

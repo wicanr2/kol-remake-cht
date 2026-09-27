@@ -231,11 +231,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **move-unlock-tile-reason**（#57） — 磚塊 0x0C 在地圖上是什麼
-  RE-148 更正了方向：0x0C 不是解鎖，是擋住移動方式後三格（Kelden 起飛）的磚，而且已經飛起來時踩在上面走不動。行為已照原版實作；那一塊磚在戰場上畫的是什麼、為什麼擋飛行還沒從圖形或文字證實。
-  完成條件：從戰場磚圖或原版文字確認 0x0C 是哪一種地形，或說明為何不影響玩法而結案。
-  核實：要人判——要看磚圖與地形來源，沒有可 grep 的單一訊號。
-
 - **word-2df2c-outdoor-switch**（#62） — word_2DF2C：城外換整張底圖的那個開關
   在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。
   完成條件：開關語意解出並寫進規格。
@@ -329,6 +324,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **actor-record-05-ability** — 參戰者記錄 +0x05：哪一件裝備、哪一個位元賦予的能力：已完成
 - **sub-21e0b-filter-contradiction** — sub_21E0B 掃穿戴欄的過濾條件與 +0x03 設值：已完成
 - **battle-silent-steps-inventory** — 執行段裡沒有訊息就不停的那幾手：已完成
+- **move-unlock-tile-reason** — 磚塊 0x0C 是洞穴與迷宮的地面：已完成
 - **actor-record-25-reader** — 參戰者記錄 +0x25 在哪裡被讀：已完成
 - **sub-1aae8-params** — sub_1AAE8 的參數語意：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。

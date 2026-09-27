@@ -40,7 +40,7 @@ const (
 	// BlockedRecord／MovedRecord 是移動走不動與走了一步那兩句（RE-085）。
 	BlockedRecord = 0x10A
 	MovedRecord   = 0x10B
-	// BlockedByRecord 是下馬時那一格還有別人：`is blocked!`。
+	// BlockedByRecord 是降落時那一格還有別人：`is blocked!`。
 	// LandsRecord 是下來了：`lands!`。
 	BlockedByRecord = 0x11A
 	LandsRecord     = 0x11B
@@ -80,8 +80,9 @@ const MoveFormBase = 0x3C
 // MountingForm 是會把 Flag1E 設起來的第一個移動方式（`0x263BD`）。
 const MountingForm = 3
 
-// StuckTile 是 0x0C 那一塊磚：Flag1E 非零時腳下踩到就走不動（`0x2647D`），
-// Flag1E 為零時站在上面叫不出移動方式的後三格（`loc_1F87E`，RE-148）。
+// StuckTile 是 0x0C 那一塊磚：任務戰場上洞穴通道與迷宮內部的地面（RE-149）。
+// Flag1E 非零時腳下踩到就走不動（`0x2647D`），Flag1E 為零時站在上面叫不出
+// 飛行那三格（`loc_1F87E`，RE-148）。
 const StuckTile = 0x0C
 
 // MoveForm 把攻擊選項欄放的移動方式圖號換成方式編號 0…5（`0x263A6`）。
@@ -97,7 +98,7 @@ func MoveForm(style int) int {
 const CmdFlinch = 0x0B
 
 // FlinchCommands 是會被怯戰蓋掉的五個指令碼（`0x20047`…`0x200A5`）。只有這幾種
-// 「主動出手」才判；移動、休息、下馬、丟東西那些不判。
+// 「主動出手」才判；移動、休息、降落、丟東西那些不判。
 //
 // 原版那一串比較把 `0x26` 寫了兩次，是同一個值——這裡只留一份。
 var FlinchCommands = [5]int{CmdWeapon, CmdMissile, CmdCast, CmdPickUp, CmdUnarmed}
@@ -378,7 +379,7 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		// 令人生畏的怪物在場時，隊員出手前先過一次意志檢定（RE-135）。
 		s.checkFlinch(i, rng)
 		// 參戰者記錄 `+0x25` 就是 `Command`：原版在輪到時（`0x20A8B`）把它讀進
-		// `word_31122`，這一手之後的判斷（含疲勞）都看那一份。下馬會把記錄裡的
+		// `word_31122`，這一手之後的判斷（含疲勞）都看那一份。降落會把記錄裡的
 		// `+0x25` 清成 0，但不影響這一手自己的疲勞，所以疲勞用出手前的指令碼。
 		cmd := a.Command
 		out := s.act(i, rng)
@@ -440,7 +441,7 @@ func (s *State) act(i int, rng Rand) ActResult {
 		}
 		return out
 	case CmdLand:
-		// 下馬（`0x2070f`…`0x20774`，RE-124）：那一格上還有別人就印記錄 0x11A
+		// 降落（`0x2070f`…`0x20774`，RE-124）：那一格上還有別人就印記錄 0x11A
 		// 走人，沒人才把 +0x1E 清掉並印「lands!」。原版同時把記錄 `+0x25`
 		// 清成 0——那一格就是 `Command`（RE-142），下一次規劃才會再填。
 		if s.sharesCell(i) {

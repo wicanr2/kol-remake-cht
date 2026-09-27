@@ -47,7 +47,7 @@ func (a Actor) TimeAllowance() int {
 }
 
 // commandTimeIndex 是這一手指令的時間成本索引（`0x20B4A`…`0x20BA2`）。
-// 移動與騎乘移動是 0、射擊 9、徒手 8、武器攻擊查 `[0x10B2 + 攻擊選項]`，其餘 0。
+// 移動與空中移動是 0、射擊 9、徒手 8、武器攻擊查 `[0x10B2 + 攻擊選項]`，其餘 0。
 func commandTimeIndex(a Actor) int {
 	switch a.Command {
 	case CmdMove, CmdMountedMove:
@@ -65,7 +65,7 @@ func commandTimeIndex(a Actor) int {
 }
 
 // encumbranceMultiplier 是負重那一項的乘數（`sub_268D4`）：移動查移動方式那張表、
-// 下馬固定 2、武器與徒手查防禦姿態那張表，其餘 1；騎著再加倍。
+// 降落固定 2、武器與徒手查防禦姿態那張表，其餘 1；飛著再加倍。
 func encumbranceMultiplier(a Actor) int {
 	m := 1
 	switch a.Command {
@@ -188,7 +188,7 @@ func (s *State) EndTurnFatigue(i int) int {
 		a.Fatigue = a.Fatigue * RestRecoveryNum / RestRecoveryDen
 	} else {
 		left := s.spendTime(i)
-		// 騎著的人另外折算：額度為負就加倍、否則折半（`0x20D30` 看 `+0x1E`）。
+		// 飛著的人另外折算：額度為負就加倍、否則折半（`0x20D30` 看 `+0x1E`）。
 		if a.Flag1E != 0 {
 			if left < 0 {
 				left *= 2

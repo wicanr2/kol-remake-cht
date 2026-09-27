@@ -6720,3 +6720,7 @@ frame-270 推翻了 remake 的版面：
   `tools/summarize_planning_probes.py` 先驗進場狀態與 2026-09-11 逐 byte 相同。#57 改題為
   「0x0C 在地圖上是什麼」。全套 Go 測試、原版對拍、八份戰鬥收據、24 條玩家路徑通過。
   原版跑法：兩個並行各 2 CPU（當時主機負載約 39，另有其他 session 的工作）。
+- #57 結案（RE-149）：磚塊 0x0C 只出現在任務戰場，拼圖標紅後全落在洞穴通道與迷宮內部的地面。
+  說明書移動一節證實 `+0x1E` 是飛行（WALK／RUN／SPRINT 對 0x3C…0x3E，FLY／FLY FASTER／ZOOM 對
+  0x3F、0x40、0x35，LAND 對 0x28），RE-148 的 Kelden 飛行升為已證實。戰鬥程式與測試註解、
+  SPEC-010 由騎乘／下馬改為飛行／降落，識別字不改。只動註解與文件，battle 測試通過。
