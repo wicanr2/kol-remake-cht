@@ -26,7 +26,7 @@
    "run": 0,
    "check": 1,
    "shows": "THE BRIGAND FIRES A MISSLE AT WARDER WHO CANNOT PARRY THE BLOW!",
-   "step": 45,
+   "step": 46,
    "sha256": "111f94cd131651f0ba4144e1d654b642116d2c9307b43e52c2b79c79c344008e"
   },
   {
@@ -34,7 +34,7 @@
    "run": 0,
    "check": 2,
    "shows": "射中之後的傷害那一句",
-   "step": 46,
+   "step": 47,
    "sha256": "e5051d5280665680994bbc35deddf1e862f30127881648a2745065545480c632"
   },
   {
@@ -42,7 +42,7 @@
    "run": 0,
    "check": 3,
    "shows": "目標格模式：指令列換成 YES 與 U-TURN，白框是目標游標",
-   "step": 49,
+   "step": 50,
    "sha256": "c43708fb9baa9ca02bd6393be039b4fc43ca091f67f43fc6b0b37bdfdc886d11"
   },
   {
@@ -50,8 +50,8 @@
    "run": 0,
    "check": 4,
    "shows": "WARDER FIRES A MISSLE AT THE BRIGAND 那一句",
-   "step": 53,
-   "sha256": "9e1250f5baabc6e622abc5c24cc86a85cbacde634b769bb0b884981ef1537a79"
+   "step": 54,
+   "sha256": "b403a5a8af853a25ec66b01b68dbb257c24303a06104c2f58087865f8d912dfa"
   }
  ],
  "runs": [
@@ -113,11 +113,11 @@
     }
    ],
    "found": [
-    26,
-    45,
+    27,
     46,
-    49,
-    53
+    47,
+    50,
+    54
    ]
   }
  ]
