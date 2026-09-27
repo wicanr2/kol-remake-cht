@@ -96,6 +96,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
   核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
 
+- **sheet-digit-outside** — 城鎮戶外與野外按 1…6 打開角色資料頁
+  原版在城鎮戶外（`sub_10000:loc_10DA4`）與野外（`sub_29004:loc_29652`）按 `1`…`6` 開第 n 名在籍角色的資料頁，含物品頁與隊伍立繪頁；野外那兩頁背景換成 KOLPICS 第 4 張（RE-150）。remake 只在建築內用 MIRROR 開得到。
+  完成條件：城鎮戶外與野外按數字鍵開得出資料頁與其子頁，野外背景正確，離開後回到原畫面與原狀態；正常玩家路徑收據。
+  核實：要人判——要實作並做玩家路徑收據。
+
 
 ### 接了但沒驗過
 
@@ -231,11 +236,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **word-2df2c-outdoor-switch**（#62） — word_2DF2C：城外換整張底圖的那個開關
-  在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。
-  完成條件：開關語意解出並寫進規格。
-  核實：`internal/town/layout.go` 找得到 `是那個開關，語意還沒解` 就是還沒完
-
 - **quest-item-0xb926**（#63） — 任務物品的 `[0xB926]`
   SPEC-014 記著這一格還沒解，所以那一條收據裡 `State.QuestItem` 是空的。任務物品本身的記錄與拾取已完成（RE-113／128），缺的是這一格的來源。
   完成條件：`[0xB926]` 解出，那一條的 QuestItem 不再是空的。
@@ -329,6 +329,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **sub-1aae8-params** — sub_1AAE8 的參數語意：已完成
 - **victory-drop-sub-289ee** — 打贏之後掉落的東西：2026-09-11 核實：早就做了，過期的是 state.go 的註解。DropSpoils（spoils.go）是 sub_289EE(0) 的前半，三支測試護著，execution.go 的打贏那一段照原版順序呼叫：任務完成 → 冒險點數 → 金冠 → 掉落物。
 - **town-typing-input-box** — 城鎮打字問話的輸入框：2026-09-26 互動遊玩以 Xvfb＋xdotool 真實按鍵在旅店 MOUTH 打字、退格、送出問中 ELVE、空問句，英中輸入序列相同，十二張畫格收據；修正空問句送出後游標殘留（RE-114 讀入函式收工前蓋掉橫槓）。腳本 token 版本在第 7 城民宅另驗退格與空問句，英中軌跡相同。空問句後白框位置未對拍。
+- **word-2df2c-outdoor-switch** — word_2DF2C 是所在城鎮編號：已完成
 - **planning-25-not-verified** — 規劃段寫進 +0x25 的值沒逐格核對：已完成
 - **begin-round-flee-icon** — 「Begin next round?」那一列的逃走格（0x30）：已完成
 - **reshuffle-behavior-address** — 重排這一輪的行為沒對上位址：已完成

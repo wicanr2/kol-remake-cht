@@ -1009,18 +1009,20 @@
     {
       "id": "word-2df2c-outdoor-switch",
       "layer": "spec",
-      "title": "word_2DF2C：城外換整張底圖的那個開關",
-      "body": "在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。",
+      "title": "word_2DF2C 是所在城鎮編號",
+      "body": "RE-150：`word_2DF2C` 是所在城鎮（1…7），野外迴圈 `sub_29004` 設成 0；物品頁與立繪頁在野外改用 KOLPICS 第 4 張整張。另查出資料頁在城鎮戶外與野外都能按 1…6 打開，另列 `sheet-digit-outside`。",
       "acceptance": "開關語意解出並寫進規格。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/town/layout.go"
+          "internal/town/layout.go",
+          "docs/re/RESEARCH-LOG.md"
         ],
-        "pattern": "是那個開關，語意還沒解",
-        "note": "layout.go 的自承，解出時會改寫。"
+        "pattern": "RE-150",
+        "note": "已完成，當回歸訊號。"
       },
-      "issue": 62
+      "issue": 62,
+      "status": "done"
     },
     {
       "id": "quest-item-0xb926",
@@ -1623,6 +1625,17 @@
       },
       "issue": 100,
       "status": "done"
+    },
+    {
+      "id": "sheet-digit-outside",
+      "layer": "gap",
+      "title": "城鎮戶外與野外按 1…6 打開角色資料頁",
+      "body": "原版在城鎮戶外（`sub_10000:loc_10DA4`）與野外（`sub_29004:loc_29652`）按 `1`…`6` 開第 n 名在籍角色的資料頁，含物品頁與隊伍立繪頁；野外那兩頁背景換成 KOLPICS 第 4 張（RE-150）。remake 只在建築內用 MIRROR 開得到。",
+      "acceptance": "城鎮戶外與野外按數字鍵開得出資料頁與其子頁，野外背景正確，離開後回到原畫面與原狀態；正常玩家路徑收據。",
+      "verify": {
+        "kind": "manual",
+        "note": "要實作並做玩家路徑收據。"
+      }
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

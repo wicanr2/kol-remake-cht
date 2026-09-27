@@ -288,8 +288,9 @@ var PartyPageFrame = Rect{14, 2, 305, 156}
 
 // SheetPageBack 是資料頁那兩頁（物品、隊伍立繪）的背景（`sub_1103F`，RE-127）。
 // 在城裡是 KOLPICS 第 5 張（上半）加第 13 張（下半），兩張各 288 px 寬；
-// 在城外換成第 4 張整張（288×155）。`word_2DF2C` 是那個開關，語意還沒解，
-// 而這兩頁只在建築內開得到，所以 remake 走「在城裡」那一條。
+// 在野外換成第 4 張整張（288×155）。開關 `word_2DF2C` 是目前所在的城鎮編號，
+// 野外迴圈 `sub_29004` 把它設成 0（RE-150）。remake 目前只從建築內開資料頁，
+// 所以走「在城裡」那一條；野外按 1…6 開資料頁另列工作項。
 var SheetPageBack = struct {
 	Archive            string
 	TopIndex, LowIndex int

@@ -6724,3 +6724,6 @@ frame-270 推翻了 remake 的版面：
   說明書移動一節證實 `+0x1E` 是飛行（WALK／RUN／SPRINT 對 0x3C…0x3E，FLY／FLY FASTER／ZOOM 對
   0x3F、0x40、0x35，LAND 對 0x28），RE-148 的 Kelden 飛行升為已證實。戰鬥程式與測試註解、
   SPEC-010 由騎乘／下馬改為飛行／降落，識別字不改。只動註解與文件，battle 測試通過。
+- #62 結案（RE-150）：`word_2DF2C` 是所在城鎮編號，野外迴圈 `sub_29004` 設成 0；物品頁與立繪頁在
+  野外用 KOLPICS 第 4 張整張。查呼叫者時發現資料頁 `sub_15ABF` 在城鎮戶外（`sub_10000`）與野外
+  （`sub_29004`）都能按 `1`…`6` 打開，remake 只掛在建築內的 MIRROR，登 `sheet-digit-outside`。
