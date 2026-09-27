@@ -121,6 +121,12 @@ func battleMember(m town.Member) battle.Member {
 	out.Intellect = m.Sheet.Stats[town.StatIntellect]
 	out.Ward = m.Sheet.Ward
 	out.Race = m.Sheet.Race
+	// 部位 3／5／7／8 那四件的種類 byte，戰鬥開始時設 +0x03…+0x06（RE-154）。
+	for k, pos := range battle.CharmSlots {
+		if g := m.Worn[pos]; g != nil {
+			out.Charms[k] = g.Class
+		}
+	}
 	// 手上那件武器（角色記錄 0x30，不在穿戴欄裡）與三件護甲、盾牌的重量：
 	// 攻擊值、負重與骰子都要用。
 	if w := m.InHand; w != nil {

@@ -174,6 +174,9 @@ type Execution struct {
 	// （`sub_26D76:0x2746A` 與 `sub_277F4:0x27B66`，RE-088），擊退成立還會再多
 	// 一到兩句（RE-095），所以這裡是一個佇列而不是單獨一段。
 	Pending [][]string
+	// extra 是第二輪走到 Order 的第幾個；extraActor／extraLeft 是那一名還要多走幾步
+	// （`ExtraSteps`，RE-154）。
+	extra, extraActor, extraLeft int
 }
 
 // Step 做出下一手。原版每一手印一句訊息再等玩家按一個鍵（`sub_1B100(5)`），
@@ -285,6 +288,7 @@ func (s *State) BeginExecution(rng Rand) {
 	})
 	s.Exec.Order = order
 	s.Exec.Turn = 0
+	s.Exec.extra, s.Exec.extraLeft = 0, 0
 }
 
 // ActResult 是一手做出來的結果。
@@ -397,7 +401,22 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0
 		return out, true
 	}
-	return ActResult{}, false
+	// 第二輪（`0x20927`…`0x20A48`）：同一個順序再走一次，跑步、衝刺與飛快的人
+	// 多走幾步，每一步都是一次 `sub_26384`（RE-154）。
+	for {
+		if s.Exec.extraLeft > 0 {
+			s.Exec.extraLeft--
+			return s.move(s.Exec.extraActor), true
+		}
+		if s.Exec.extra >= len(s.Exec.Order) {
+			return ActResult{}, false
+		}
+		i := s.Exec.Order[s.Exec.extra]
+		s.Exec.extra++
+		if n := ExtraSteps(s.Actors[i]); n > 0 {
+			s.Exec.extraActor, s.Exec.extraLeft = i, n
+		}
+	}
 }
 
 // act 是一手的分派（`0x2065E`…`0x2070F`）。

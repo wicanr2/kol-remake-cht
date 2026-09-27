@@ -140,10 +140,14 @@ func (s *State) BarFleeChance(i int) int {
 
 // BarFlee 是在逃走格答應之後（`loc_1FBF9`…`0x1FCF5`，RE-143）：
 //
-// 全隊一定逃得掉，六格逐名擲 `rand(100)`，**大於**門檻的那一名，手上那件的種類
-// byte 高三位元非零（是武器）就丟在腳下（`sub_269BA`）。原版在這裡另看
-// `[word_37D2A]+0x06` 與「手上是不是任務要的那件」，但 `+0x06` 在現行資料下恆為 0
-// （RE-141），那一層等於不作用，remake 以這一名自己的 `Flag06` 代入。
+// 全隊一定逃得掉，六格逐名擲 `rand(100)`，手上那件的種類 byte 高三位元非零（是武器）
+// 而且符合下列之一，就丟在腳下（`sub_269BA`）：
+//
+//   - 骰**大於**門檻，而且 `[word_37D2A]+0x06` 為 0；
+//   - 手上拿的是這一場任務要的那件（`sub_2886C(0x30)`，與骰無關，RE-154）。
+//
+// `word_37D2A` 在這裡沒有指向這一名，是規劃段留下來的值（RE-154）；remake 以這一名
+// 自己的 `Flag06`（Courage Coat）代入，只有隊上有人穿 Courage Coat 時兩邊才可能不同。
 //
 // 這條路直接跳到共同出口 `0x211AD`，**不經過** `0x21176`——所以與戰場邊上的逃走
 // 不同，帶著任務物品從這裡逃走不會把任務標成完成。
@@ -153,17 +157,14 @@ func (s *State) BarFlee(rng Rand) {
 		if a.Side != SideParty {
 			continue
 		}
-		if rng.Roll(100) <= s.BarFleeChance(i) {
-			continue
-		}
+		fail := rng.Roll(100) > s.BarFleeChance(i)
 		m := s.member(i)
 		if m == nil || !m.HasWeapon || m.Weapon.Kind&0xE0 == 0 {
 			continue
 		}
-		if a.Flag06 != 0 && !s.matchesQuestItem(m.HandItem) {
-			continue
+		if (fail && a.Flag06 == 0) || s.matchesQuestItem(m.HandItem) {
+			s.DropItem(i)
 		}
-		s.DropItem(i)
 	}
 	s.fleeFromBar = false
 	s.fledFromBar = true

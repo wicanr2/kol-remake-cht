@@ -181,18 +181,19 @@ type Actor struct {
 	Flag1E int
 	// Flag03 是記錄 +0x03，移動方式那一列的門檻（RE-148）。戰鬥開始時
 	// `sub_2193A` 逐名呼叫 `sub_21D94`，依種族設定（`MoveAbility`）；腿廢掉時
-	// `sub_277F4` 清成 0，治好隊員的腿時再跑一次 `sub_21D94`。`sub_21FCD` 另有
-	// 依穿戴欄種類位元設它的兩條路，但 `sub_21E0B` 只收格內 `+0x0D` 大於 0x7F 的
-	// 東西（RE-141），現行資料下走不到。
+	// `sub_277F4` 清成 0，治好隊員的腿時再跑一次 `sub_21D94`。穿戴 Flying Cloak
+	// 會設成 2、Speed Boots 之類會把 0 補成 1（`ApplyCharms`，RE-154）。
 	Flag03 int
+	// Flag04 是 +0x04：跑步與衝刺多走（Speed Boots、Shoes，RE-154）。
+	Flag04 int
+	// Flag05 是 +0x05：聰明的敵人找目標時看不到這一名（Shade Ring，RE-154）。
+	Flag05 int
 	// Race 是隊員的種族（角色記錄 +0x24），治好腿時重算 Flag03 要用；敵人留 0。
 	Race int
 	// Flag06 是記錄 +0x06：**免疫怯戰**。`sub_21FCD(索引, 2)` 會把它設成 1，
 	// 而那一支是 `sub_21E0B` 依身上某件裝備的位元欄呼叫的（RE-135）。非零時
-	// `0x200D0` 那一關直接跳過，令人生畏的怪物對這一名沒有效。
-	//
-	// 要種類 byte 最低兩位元是 2 的物品放在部位 3／5／7／8 才會設（RE-118）；
-	// 原版 ITEM.LST 裡沒有這種組合，所以一律是 0。
+	// `0x200D0` 那一關直接跳過，令人生畏的怪物對這一名沒有效。穿 Courage Coat
+	// 會設（RE-154）。
 	Flag06 int
 	// Threshold 是 +0x10 的昏迷門檻，Damage 是 +0x0E 的累積傷害。
 	Threshold int

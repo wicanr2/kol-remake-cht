@@ -192,9 +192,8 @@ func EnemyMoveForm(level, ring int, legsOK bool, hurt int, rng Rand) int {
 // 撤退（`0x237F5`…`0x238C1`）、反制掃描（`sub_253E7`）、側翼（`sub_25653`）與
 // 空手去撿（`0x23BC2`，RE-116）也都照原版做了。
 //
-// 反制掃描的篩選遮罩 0x10 要的 `+0x05` **在原版也恆為零**（RE-118：那一格只由
-// 穿戴欄部位 3／5／7／8 那件東西的種類 byte 決定，而 `ITEM.LST` 裡放得進那四格的
-// 三件種類 byte 都是 0），所以那個條件兩邊都恆真——不是缺口。
+// 找目標的篩選遮罩 0x10（`sub_24C35`）：這一名的智力擲骰過關時，`+0x05` 非零的
+// 隊員看不到。`+0x05` 由穿戴的 Shade Ring 設（RE-154）；`hiddenFrom`。
 //
 // 移動段的方向（RE-117）：先試往目標那一步、再試左右各一格，沒有目標時從隨機方向
 // 起繞八格（`stepToward`），八格都站不下走三條退路（`enemyStuck`）。
@@ -233,6 +232,7 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return EnemyDecision{Target: -1}
 	}
 	a := &s.Actors[i]
+	s.aiRoll = 0
 
 	// 兩隻手臂都廢就只能移動（`0x237E9`）。
 	if a.RightArm <= 0 && a.LeftArm <= 0 {
@@ -273,7 +273,7 @@ func (s *State) planTactics(i int, rng Rand) EnemyDecision {
 
 	// 反制掃描（`0x23C1A`）：智力擲骰過關才跑。有結論就直接走攻擊那一段，
 	// 不再往外環找目標——抄來的攻擊選項會變成抽命中部位的列號。
-	if EnemyIntellectCheck(a.Intellect, a.Level, rng.Roll(100)) {
+	if s.enemySmart(i, rng) {
 		if prev, t, ok := s.counterScan(i, rng); ok {
 			if rng.Roll(3) == 1 {
 				return s.enemyMove(i, t, 0, rng)
@@ -373,7 +373,7 @@ func (s *State) counterScan(i int, rng Rand) (style, target int, ok bool) {
 		n := (start + k) % len(cells)
 		c := cells[n]
 		t := s.actorAt(a.X+c.Row, a.Y+c.Col)
-		if t < 0 || s.Actors[t].Side != SideParty || s.Actors[t].Down() {
+		if t < 0 || s.Actors[t].Side != SideParty || s.Actors[t].Down() || s.hiddenFrom(i, t, rng) {
 			continue
 		}
 		d := &s.Actors[t]
@@ -603,7 +603,7 @@ func (s *State) enemyRetreat(i int, rng Rand) (EnemyDecision, bool) {
 	if !a.Retreating && hurt < a.FleeAt {
 		return EnemyDecision{}, false
 	}
-	if s.adjacentParty(i) {
+	if s.adjacentParty(i, rng) {
 		return s.enemyMove(i, -1, -1, rng), true
 	}
 	if !a.Retreating || a.LastHurt == 0 {
@@ -617,11 +617,11 @@ func (s *State) enemyRetreat(i int, rng Rand) (EnemyDecision, bool) {
 
 // adjacentParty 回報八個相鄰格有沒有站著的隊員（`sub_24BB6(0, 方向, 0x19)`）。
 // 撤退那一段是按方向編號順序掃的，不像找目標那樣從隨機的一格起跳。
-func (s *State) adjacentParty(i int) bool {
+func (s *State) adjacentParty(i int, rng Rand) bool {
 	a := s.Actors[i]
 	for _, c := range RingCells(0) {
 		if t := s.actorAt(a.X+c.Row, a.Y+c.Col); t >= 0 &&
-			s.Actors[t].Side == SideParty && !s.Actors[t].Down() {
+			s.Actors[t].Side == SideParty && !s.Actors[t].Down() && !s.hiddenFrom(i, t, rng) {
 			return true
 		}
 	}
@@ -692,7 +692,8 @@ func (s *State) findInRingMatching(i, ring int, rng Rand, accept func(int) bool)
 	for n := 0; n < len(cells); n++ {
 		c := cells[(start+n)%len(cells)]
 		if t := s.actorAt(a.X+c.Row, a.Y+c.Col); t >= 0 &&
-			s.Actors[t].Side == SideParty && !s.Actors[t].Down() && (accept == nil || accept(t)) {
+			s.Actors[t].Side == SideParty && !s.Actors[t].Down() && !s.hiddenFrom(i, t, rng) &&
+			(accept == nil || accept(t)) {
 			return t
 		}
 	}
@@ -773,4 +774,21 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// enemySmart 是 `sub_252CB(智力, word_3AC5E)`：`智力 × 等級 ÷ 3 > 骰`。原版 AI 一開頭就擲
+// `word_3AC5E`、整支共用；remake 延到第一次用到才擲（反制掃描前，或找目標時碰到
+// Shade Ring 的隊員），同一次決策只擲一次，差別只在骰子的先後（RE-154）。
+func (s *State) enemySmart(i int, rng Rand) bool {
+	if s.aiRoll <= 0 {
+		s.aiRoll = rng.Roll(100)
+	}
+	a := s.Actors[i]
+	return EnemyIntellectCheck(a.Intellect, a.Level, s.aiRoll)
+}
+
+// hiddenFrom 是篩選遮罩 0x10（`sub_24C35:0x24D76`…`0x24DC8`）：看的人智力擲骰過關，
+// 而目標的 `+0x05` 非零（Shade Ring），就當那一格沒有人。只有目標有 `+0x05` 才需要擲。
+func (s *State) hiddenFrom(i, t int, rng Rand) bool {
+	return s.Actors[t].Flag05 != 0 && s.enemySmart(i, rng)
 }

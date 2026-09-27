@@ -217,6 +217,35 @@ func TestBarFleeDropsWeaponOnFailedRoll(t *testing.T) {
 	}
 }
 
+// 手上拿的是任務要的那件，而且那件是武器，不論擲幾都丟下（`loc_1FCB4`，RE-154）；
+// 穿 Courage Coat（`Flag06`）只擋得住擲骰失敗那一條。
+func TestBarFleeDropsQuestWeapon(t *testing.T) {
+	for _, c := range []struct {
+		roll, flag06 int
+		quest        bool
+		dropped      bool
+	}{
+		{1, 0, true, true}, {100, 1, true, true},
+		{100, 1, false, false}, {1, 0, false, false}, {100, 0, false, true},
+	} {
+		s := fleeState()
+		s.Actors[1].Intellect, s.Actors[1].Strength, s.Actors[1].Level = 60, 60, 3 // 門檻 60
+		s.Actors[1].Flag06 = c.flag06
+		s.Party[0].HasWeapon = false
+		s.Party[1].HasWeapon = true
+		s.Party[1].Weapon = Weapon{Kind: 0x20, Code: 1}
+		if !c.quest {
+			s.Party[1].HandItem = &Item{Name: "SWORD", Record: "02000000000000000000000000000000"}
+		}
+		s.Stage, s.fleeFromBar = StageFlee, true
+		s.Rand = &fixedRoll{values: []int{c.roll, c.roll}}
+		s.Answer(true)
+		if on := s.Ground[0].Name != ""; on != c.dropped {
+			t.Errorf("擲 %d、Flag06=%d、任務物品=%v：丟下=%v，應為 %v", c.roll, c.flag06, c.quest, on, c.dropped)
+		}
+	}
+}
+
 // 不逃就跳回重新規劃這一回合（`0x1FD1B` 走 `0x1EF3A`），與 U-TURN 相同。
 func TestBarFleeDeclined(t *testing.T) {
 	s := fleeState()

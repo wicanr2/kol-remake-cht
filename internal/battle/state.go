@@ -99,6 +99,9 @@ type Member struct {
 	// Race 是角色記錄 +0x24（0 Human、1 Elven、2 Dwarven、3 Kelden）。戰鬥開始時
 	// 由它決定參戰者記錄 `+0x03`，移動方式那一列要用（RE-148）。
 	Race int
+	// Charms 是穿戴部位 3／5／7／8（披風、靴、項鍊、戒指）那四件的種類 byte
+	// （物品 `+0x0D`），空格為 0。戰鬥開始時依它設 `+0x03`…`+0x06`（RE-154）。
+	Charms [4]int
 	// Pack 是背包六格的名字（角色記錄 0xA0 起，一格 16 byte，RE-075）。
 	// 空字串是空格。戰利品優先往這裡放。
 	Pack [BackpackSlots]string
@@ -115,6 +118,8 @@ type State struct {
 	// fledFromBar 表示這一場是從逃走格逃掉的：只有那一條把兩個計數設成 0xFF，
 	// 出口才印逃走那一句（RE-146）。
 	fledFromBar bool
+	// aiRoll 是這一次敵人決策共用的智力骰（`word_3AC5E`），0 表示還沒擲（`enemySmart`）。
+	aiRoll int
 	// resultOver 表示結果圖已經收掉：打贏進戰利品畫面之後就不再畫。
 	resultOver    bool
 	rangedPending bool
@@ -233,6 +238,8 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			ShieldWeight: m.ShieldWeight, WeaponRows: m.WeaponRows,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds,
 			Stamina: strength + m.Health, Race: m.Race, Flag03: MoveAbility(m.Race)}
+		// `sub_2193A` 先 `sub_21D94`（種族）再 `sub_21E0B`（穿戴），所以裝備蓋在種族之上。
+		s.Actors[i].ApplyCharms(m.Charms)
 		s.Actors[i].SetParts()
 	}
 	for i := 0; i < site.Count && i < len(site.MonsterX) && i < len(site.MonsterY); i++ {

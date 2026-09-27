@@ -383,3 +383,72 @@ func MoveAbility(race int) int {
 	}
 	return 1
 }
+
+// CharmSlots 是 `sub_21E0B` 依序看的四個穿戴部位：記錄 0x130／0x150／0x170／0x180。
+var CharmSlots = [4]int{3, 5, 7, 8}
+
+// ApplyCharms 是 `sub_21E0B`：四件的種類 byte 大於 0x7F 才算數，取最低兩位元交給
+// `sub_21FCD`（RE-154）：
+//
+//	0 → +0x04 = 1；+0x03 為 0 時補成 1    （Speed Boots、Shoes）
+//	1 → +0x05 = 1                          （Shade Ring）
+//	2 → +0x06 = 1                          （Courage Coat）
+//	3 → +0x03 = 2                          （Flying Cloak）
+//
+// 原版在呼叫 `sub_21FCD` 之前先以 `sub_22084(部位, 1)` 磨一次：物品 `+0x0F` 有 0x20
+// 才扣 32 點耐久、扣成負的整件清掉。現行資料裡過得了這一關的五件 `+0x0F` 都沒有
+// 0x20，這一次磨損不會發生，remake 不實作（RE-154）。
+func (a *Actor) ApplyCharms(classes [4]int) {
+	for _, c := range classes {
+		if c <= 0x7F {
+			continue
+		}
+		switch c & 3 {
+		case 0:
+			a.Flag04 = 1
+			if a.Flag03 == 0 {
+				a.Flag03 = 1
+			}
+		case 1:
+			a.Flag05 = 1
+		case 2:
+			a.Flag06 = 1
+		case 3:
+			a.Flag03 = 2
+		}
+	}
+}
+
+// ExtraSteps 是執行段第二輪（`sub_1E3A8:0x20927`…`0x20A48`）替這一名多呼叫幾次
+// `sub_26384`：指令是移動或空中移動、還站著的人，依移動方式與 +0x04（RE-154）。
+//
+//	WALK 0x3C、FLY 0x3F   0
+//	RUN 0x3D              +0x04 非零時 1
+//	SPRINT 0x3E           1，+0x04 非零時 3
+//	ZOOM 0x35             2
+//	其餘（FLY FASTER 0x40） 1
+//
+// 加上第一輪那一步，合計與說明書的 WALK／RUN 一格、SPRINT 兩格、FLY／FLY FASTER／
+// ZOOM 一、二、三格相同；Speed Boots 讓 RUN 多一格、SPRINT 多兩格。
+func ExtraSteps(a Actor) int {
+	if a.Side == SideEmpty || a.Down() || (a.Command != CmdMove && a.Command != CmdMountedMove) {
+		return 0
+	}
+	switch a.Style {
+	case IconMoveWalk, IconMoveAlt1:
+		return 0
+	case IconMoveNext:
+		if a.Flag04 != 0 {
+			return 1
+		}
+		return 0
+	case IconMoveFast:
+		if a.Flag04 != 0 {
+			return 3
+		}
+		return 1
+	case IconMoveAlt3:
+		return 2
+	}
+	return 1
+}

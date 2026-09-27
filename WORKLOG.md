@@ -6762,3 +6762,11 @@ frame-270 推翻了 remake 的版面：
   幾何沿用 SPEC-018 已驗證的那一套。原版同狀態畫格仍待效果 6 法術的實跑收據。全套測試通過。
 - #74 結案：SPEC-029 早已於 2026-09-08 升 READY，正文殘留的 DRAFT 待辦句改寫為現況；
   補註 `Replan` 每次呼叫 `InitializeMonsterRanged`，由 `rangedPending` 保證只擲一次。
+- #18 部分（RE-154）：`sub_21E0B` 的過濾條件雖對，任務獎品與商店有五件過得了（Flying Cloak、
+  Courage Coat、Shade Ring、Speed Boots、Shoes），更正 RE-141／RE-118。remake 接上
+  `ApplyCharms`（種族之後套穿戴）、執行段主迴圈之後的第二輪移動（`ExtraSteps`，RUN／SPRINT／
+  FLY FASTER／ZOOM 的格數依圖號與 `+0x04`）、AI 找目標遮罩 0x10 的 Shade Ring（智力骰改為用到
+  才擲，已知差異）。四個穿戴欄磨損呼叫只扣 `+0x0F` 有 0x20 的東西，五件都沒有，不改耐久。
+  酒館逃走補上 RE-143 漏的分支：手上是任務要的那件武器，擲多少都丟下。`go test`（戰鬥套件、
+  Xvfb 下 cmd/kol 與 ui）通過；八份戰鬥收據與 24 條玩家路徑全數一致，不需重生。
+  容器：只留自己 `--rm` 的一次性容器，已結束；無 root-owned 檔案。

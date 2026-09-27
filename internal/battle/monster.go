@@ -12,15 +12,15 @@ import (
 // Monster 是一種怪物，欄位名與 `tools/extract_monsters.py` 的輸出相同。
 type Monster struct {
 	// SPEC-029：初始化射擊資格，原版怪物記錄 +0x1E／+0x1F。
-	RangedChance int `json:"ranged_chance"`
-	RangedCode int `json:"ranged_code"`
-	Index     int    `json:"index"`
-	Name      string `json:"name"`
-	Strength  int    `json:"strength"`
-	Quickness int    `json:"quickness"`
-	Foresight int    `json:"foresight"`
-	Size      int    `json:"size"`
-	Health    int    `json:"health"`
+	RangedChance int    `json:"ranged_chance"`
+	RangedCode   int    `json:"ranged_code"`
+	Index        int    `json:"index"`
+	Name         string `json:"name"`
+	Strength     int    `json:"strength"`
+	Quickness    int    `json:"quickness"`
+	Foresight    int    `json:"foresight"`
+	Size         int    `json:"size"`
+	Health       int    `json:"health"`
 	// TerrainMask／SeasonMask 是這一隻出沒的地形與季節遮罩（`TOWN0` payload 4 的
 	// `0x40`／`0x60`，RE-078）：bit 7 是地形 0、bit 3 是冬。
 	TerrainMask int `json:"terrain_mask"`
@@ -172,8 +172,12 @@ func LoadMonsters(path string) (*Monsters, error) {
 	if m.Schema != "kol-monster-data-v1" {
 		return nil, fmt.Errorf("怪物資料 schema 不符：%q", m.Schema)
 	}
-	var fields struct { List []map[string]json.RawMessage `json:"monsters"` }
-	if err := json.Unmarshal(body, &fields); err != nil { return nil, err }
+	var fields struct {
+		List []map[string]json.RawMessage `json:"monsters"`
+	}
+	if err := json.Unmarshal(body, &fields); err != nil {
+		return nil, err
+	}
 	for i, mon := range m.List {
 		if len(fields.List[i]["ranged_chance"]) == 0 || len(fields.List[i]["ranged_code"]) == 0 ||
 			string(fields.List[i]["ranged_chance"]) == "null" || string(fields.List[i]["ranged_code"]) == "null" ||
