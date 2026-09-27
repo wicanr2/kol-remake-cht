@@ -38,8 +38,8 @@
   {
    "file": "victory.png",
    "step": 104,
-   "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）",
-   "sha256": "e68f8c0681c3547840b8c2547d58ba3e05496d10812114b33e398e65066dbbaf",
+   "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）上方蓋著 COMBPICS 圖 3 與白框（`sub_288D4(3)`，RE-147）；下一張獎勵那一句時圖仍留著。",
+   "sha256": "361fc27211ece8835351d6a104375115650ee7de1aa800ee34649a97d4ea5939",
    "run": 0,
    "check": 2
   },
@@ -47,7 +47,7 @@
    "file": "reward.png",
    "step": 105,
    "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 127 GOLD CROWNS!——單人隊伍不印 Each player，改逐句接（RE-096）。",
-   "sha256": "9fc7e3603007200074391a8f1fb6574d2d62692a3d1dc9d24a83e5959e60d1ef",
+   "sha256": "f534920fa0193b150e4fa71efaf179659d0259ce522ad64f5f6493e3eeedff76",
    "run": 0,
    "check": 3
   },
@@ -92,10 +92,11 @@
        "verdict": 2,
        "exec_text": {
         "$re": "^You have defeated The"
-       }
+       },
+       "result_picture": 3
       }
      },
-     "note": "打贏那一句（單隻不補複數後綴）"
+     "note": "打贏那一句（單隻不補複數後綴）；同一步畫 COMBPICS 圖 3（`0x2125C`，RE-147）"
     },
     {
      "find": {

@@ -262,16 +262,15 @@ func MoveForms(a *Actor, groundTile int) []int {
 		}
 	}
 	if a.Flag03 == 2 || a.Flag1E != 0 {
-		if groundTile == MoveUnlockTile || a.Flag1E != 0 {
+		// `loc_1F87E`：腳下是 0x0C 而且 +0x1E 為零就跳過；不是 0x0C 或已經非零
+		// 才推（RE-148 更正早先「0x0C 才解鎖」的讀法）。
+		if groundTile != StuckTile || a.Flag1E != 0 {
 			forms = append(forms, IconMoveAlt1, IconMoveAlt2, IconMoveAlt3)
 		}
 	}
 	return forms
 }
 
-// MoveUnlockTile 是會解鎖後三個移動方式的磚塊編號（`0x1F88E`）。
-// 為什麼是這一塊還沒解出來（SPEC-010 末段）。
-const MoveUnlockTile = 0x0C
 
 // MoveGuard 是選了移動方式之後的防禦選項（`0x1F8F8`）：
 // 走路那一格給 2、其餘 0。敵人 AI 的輪盤也是同一條規則（RE-081）。
@@ -362,4 +361,25 @@ func (s *State) CommandEnv(i int) CommandEnv {
 		}
 	}
 	return out
+}
+
+// 種族（角色記錄 +0x24）。
+const (
+	RaceHuman   = 0
+	RaceElven   = 1
+	RaceDwarven = 2
+	RaceKelden  = 3
+)
+
+// MoveAbility 是 `sub_21D94` 依種族寫進參戰者記錄 `+0x03` 的值（RE-148）：
+// Kelden 2、Dwarven 0、其餘 1。移動方式那一列 1 以上多一格 0x3E，等於 2 而且
+// 腳下是 0x0C 那一塊時再多 0x3F、0x40、0x35（`MoveForms`）。
+func MoveAbility(race int) int {
+	switch race {
+	case RaceKelden:
+		return 2
+	case RaceDwarven:
+		return 0
+	}
+	return 1
 }

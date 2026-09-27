@@ -96,6 +96,9 @@ type Member struct {
 	Spells []Spell
 	// Ward 是角色記錄 +0x28，擋法術要用（RE-100）。
 	Ward int
+	// Race 是角色記錄 +0x24（0 Human、1 Elven、2 Dwarven、3 Kelden）。戰鬥開始時
+	// 由它決定參戰者記錄 `+0x03`，移動方式那一列要用（RE-148）。
+	Race int
 	// Pack 是背包六格的名字（角色記錄 0xA0 起，一格 16 byte，RE-075）。
 	// 空字串是空格。戰利品優先往這裡放。
 	Pack [BackpackSlots]string
@@ -111,7 +114,9 @@ type State struct {
 	fleeFromBar bool
 	// fledFromBar 表示這一場是從逃走格逃掉的：只有那一條把兩個計數設成 0xFF，
 	// 出口才印逃走那一句（RE-146）。
-	fledFromBar   bool
+	fledFromBar bool
+	// resultOver 表示結果圖已經收掉：打贏進戰利品畫面之後就不再畫。
+	resultOver    bool
 	rangedPending bool
 	Site          *Site
 	Stage         Stage
@@ -227,7 +232,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			Armour:       cloneArmour(m.Armour[:]),
 			ShieldWeight: m.ShieldWeight, WeaponRows: m.WeaponRows,
 			Threshold: Threshold(m.Size, m.Health), Damage: m.Wounds,
-			Stamina: strength + m.Health}
+			Stamina: strength + m.Health, Race: m.Race, Flag03: MoveAbility(m.Race)}
 		s.Actors[i].SetParts()
 	}
 	for i := 0; i < site.Count && i < len(site.MonsterX) && i < len(site.MonsterY); i++ {

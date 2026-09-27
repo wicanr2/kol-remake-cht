@@ -916,16 +916,12 @@
     {
       "id": "move-unlock-tile-reason",
       "layer": "spec",
-      "title": "磚塊 0x0C 為什麼解鎖後三個移動方式",
-      "body": "`MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。",
-      "acceptance": "理由解出並寫進 SPEC-010。",
+      "title": "磚塊 0x0C 在地圖上是什麼",
+      "body": "RE-148 更正了方向：0x0C 不是解鎖，是擋住移動方式後三格（Kelden 起飛）的磚，而且已經飛起來時踩在上面走不動。行為已照原版實作；那一塊磚在戰場上畫的是什麼、為什麼擋飛行還沒從圖形或文字證實。",
+      "acceptance": "從戰場磚圖或原版文字確認 0x0C 是哪一種地形，或說明為何不影響玩法而結案。",
       "verify": {
-        "kind": "present",
-        "paths": [
-          "internal/battle/commands.go"
-        ],
-        "pattern": "為什麼是這一塊還沒解出來",
-        "note": "commands.go 的自承，解出時會改寫。"
+        "kind": "manual",
+        "note": "要看磚圖與地形來源，沒有可 grep 的單一訊號。"
       },
       "issue": 57
     },
@@ -1413,18 +1409,20 @@
     {
       "id": "planning-other-commands-unwalked",
       "layer": "verification",
-      "title": "規劃段只走過徒手那一條",
-      "body": "2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。",
+      "title": "規劃段逐格走完 Theodoric 的指令列",
+      "body": "原版與 remake 照同一串鍵走主指令列每一格、徒手攻擊式與防禦方式每一格、移動方式六格，比每一鍵之後的格數、白框與寫回的四個值，全數一致（planning-cells-20260927）。過程追出 RE-148：`+0x03` 由種族決定、磚塊 0x0C 擋住移動方式後三格。武器攻擊、射擊、施法、丟撿不在這名的指令列上，換算由單元測試驗。",
       "acceptance": "其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/verification/planning-parity-20260911.md"
+          "docs/verification/planning-cells-20260927/README.md",
+          "cmd/kol/original_planning_cells_test.go"
         ],
-        "pattern": "沒有逐格走過",
-        "note": "收據的自承，走完時會改寫。"
+        "pattern": "planning-cells",
+        "note": "已完成，當回歸訊號：收據與原版逐格測試。"
       },
-      "issue": 84
+      "issue": 84,
+      "status": "done"
     },
     {
       "id": "battle-target-cursor-click",
@@ -1604,13 +1602,20 @@
       "id": "combat-result-pictures",
       "layer": "gap",
       "title": "戰鬥結果圖（COMBPICS）沒有畫",
-      "body": "原版出口在打贏、打輸、逃走（逃走格）與升級各呼叫 `sub_288D4` 畫一張 296×144 的 COMBPICS 圖（圖號 3、2、0、4，另一處傳 1；RE-006、RE-146）。素材已抽成 PNG，remake runtime 沒有讀，訊息只印在卷軸上。",
-      "acceptance": "五個呼叫點的圖號與觸發條件接上，戰鬥收據有對應畫格，並與原版同狀態畫格比對。",
+      "body": "RE-147：`sub_288D4` 五個呼叫點依去向畫 COMBPICS 圖 3／2／0／4／1，貼在 (8,8)、白框 (7,7)–(305,152) 與投影，圖留到收尾，戰利品畫面蓋掉。remake `State.ResultPicture`，英文與中文戰場都畫，軌跡記 `result_picture`；`battle-spoils`、`battle-bar-flee` 收據加斷言。",
+      "acceptance": "五個呼叫點的圖號與觸發條件接上，戰鬥收據有對應斷言與畫格。",
       "verify": {
-        "kind": "manual",
-        "note": "要實作並做畫面收據，沒有可 grep 的單一訊號。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/spec/008-combat-field.md",
+          "docs/re/RESEARCH-LOG.md",
+          "internal/battle/result.go"
+        ],
+        "pattern": "RE-147",
+        "note": "已完成，當回歸訊號。"
       },
-      "issue": 100
+      "issue": 100,
+      "status": "done"
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

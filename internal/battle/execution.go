@@ -80,7 +80,8 @@ const MoveFormBase = 0x3C
 // MountingForm 是會把 Flag1E 設起來的第一個移動方式（`0x263BD`）。
 const MountingForm = 3
 
-// StuckTile 是 Flag1E 非零時腳下踩到就走不動的磚（`0x2647D`）。
+// StuckTile 是 0x0C 那一塊磚：Flag1E 非零時腳下踩到就走不動（`0x2647D`），
+// Flag1E 為零時站在上面叫不出移動方式的後三格（`loc_1F87E`，RE-148）。
 const StuckTile = 0x0C
 
 // MoveForm 把攻擊選項欄放的移動方式圖號換成方式編號 0…5（`0x263A6`）。

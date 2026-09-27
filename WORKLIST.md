@@ -96,11 +96,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：圖庫與幾何升到已證實，人形畫出來並對拍。
   核實：`docs/spec/012-combat-spells.md` 找得到 `目標的人形還沒畫` 就是還沒完
 
-- **combat-result-pictures**（#100） — 戰鬥結果圖（COMBPICS）沒有畫
-  原版出口在打贏、打輸、逃走（逃走格）與升級各呼叫 `sub_288D4` 畫一張 296×144 的 COMBPICS 圖（圖號 3、2、0、4，另一處傳 1；RE-006、RE-146）。素材已抽成 PNG，remake runtime 沒有讀，訊息只印在卷軸上。
-  完成條件：五個呼叫點的圖號與觸發條件接上，戰鬥收據有對應畫格，並與原版同狀態畫格比對。
-  核實：要人判——要實作並做畫面收據，沒有可 grep 的單一訊號。
-
 
 ### 接了但沒驗過
 
@@ -179,11 +174,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：五處各有一份逐畫面對拍收據。
   核實：`internal/battle/spell.go`、`internal/battle/spoils.go`、`internal/ui/battle.go`、`internal/ui/itempage.go`、`docs/spec/010-combat-commands.md` 找得到 `還沒對拍|還沒讀|的畫面還沒對` 就是還沒完
 
-- **planning-other-commands-unwalked**（#84） — 規劃段只走過徒手那一條
-  2026-09-11 的規劃對拍只比了「主指令列第 1 格（徒手）→ 攻擊式第 2 格 → 防禦式第 3 格」這一組。射擊、施法、移動、丟撿那幾格，以及其他攻擊式／防禦式的格位都沒有逐格走過。
-  完成條件：其餘指令與各攻擊式／防禦式格位逐格走過並比對，或說明為何不需要。
-  核實：`docs/verification/planning-parity-20260911.md` 找得到 `沒有逐格走過` 就是還沒完
-
 - **quest-turnin-original-same-state**（#93） — 任務物品交付的原版同狀態與自然玩家鏈
   RE-139 的 IDA 控制流與重製版觀察存檔 GUI 已覆蓋兩次 SPACE、第一件物品交換及全隊回報。原版同狀態畫格／狀態、自然接任務與取得物品，以及回報後保存／重載尚缺。SPEC-014 維持 READY。
   完成條件：以原版與重製版可比初態驗證兩次按鍵、原始物品記錄、六名角色旗標及回報數，再完成自然取得到保存／重載的正常玩家鏈；附版本、輸入、亂數條件與收據後才將 SPEC-014 對應範圍升 CONFORMED。
@@ -241,10 +231,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：沒有未達 READY 的規格被實作進 production path。
   核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
 
-- **move-unlock-tile-reason**（#57） — 磚塊 0x0C 為什麼解鎖後三個移動方式
-  `MoveUnlockTile = 0x0C` 的行為已接（`0x1F88E`），但「為什麼是這一塊」還沒解出來（SPEC-010 末段）。行為正確不代表理由清楚——換一張地圖或一種地形時可能才看得出差別。
-  完成條件：理由解出並寫進 SPEC-010。
-  核實：`internal/battle/commands.go` 找得到 `為什麼是這一塊還沒解出來` 就是還沒完
+- **move-unlock-tile-reason**（#57） — 磚塊 0x0C 在地圖上是什麼
+  RE-148 更正了方向：0x0C 不是解鎖，是擋住移動方式後三格（Kelden 起飛）的磚，而且已經飛起來時踩在上面走不動。行為已照原版實作；那一塊磚在戰場上畫的是什麼、為什麼擋飛行還沒從圖形或文字證實。
+  完成條件：從戰場磚圖或原版文字確認 0x0C 是哪一種地形，或說明為何不影響玩法而結案。
+  核實：要人判——要看磚圖與地形來源，沒有可 grep 的單一訊號。
 
 - **word-2df2c-outdoor-switch**（#62） — word_2DF2C：城外換整張底圖的那個開關
   在城外會換成第 4 張整張（288×155），`word_2DF2C` 是那個開關，語意還沒解。
@@ -357,6 +347,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **save-v1-entry-replacement** — SPEC-023 的保存核心已是正式入口：2026-09-10 核實：`save.go:17` 寫明「正式遊戲使用 CompleteSchema，v1 保留為匯入入口」，`cmd/kol/complete_save.go` 用的就是 `save.Characters`。v1 是刻意保留的匯入路徑，不是還沒取代——`characters.go` 那句「尚未取代正式 v1 入口」是過期斷言，已刪除。
 - **region-dat-provenance** — `region1.dat`…`region4.dat` 缺檔的來由：2026-09-11 核實：那五筆是擴充地區，由地區磁片經原版內建的 REGION INSTALLER 裝入，Origin 未曾發行擴充。執行時觀測（開檔序列、模板位址與 KOLBOOK.EXE 靜態偏移逐項對位、原版自己的訊息文字）見 docs/re/20260911-region-installer.md；探針在 tools/oracle/book_startup_test.go 的 KOL_BOOK_REGION_PROBE 模式。
 - **planning-current-slot-semantics** — 規劃逐鍵時 DS:0x9E5A 的語意：2026-09-11 定案：它是走訪參戰者的**索引游標**（IDA `word_37D2A`），規劃、執行與訊息三段各自的迴圈都會設它，不是「輪到誰行動」的權威狀態。寫入監看抓到五個寫入點，其中 0x1F073 正是 SPEC-020 步驟一的收尾。remake 不需要它——輪到誰由 Round.Order 與 Cursor 表達。見 docs/re/20260911-actor-index-cursor.md。
+- **planning-other-commands-unwalked** — 規劃段逐格走完 Theodoric 的指令列：已完成
 - **battle-target-cursor-click** — 選目標格那一層的滑鼠指格：2026-09-26 依 sub_24131:0x24332..0x24543 的 IDA 傾印接上滑鼠指格：嚴格區間換格、位移走方向鍵同段夾限（mode 1 中心再走一步、夾 3…5；mode 2 夾 0…8、內圈還原）、位移為零不動、戰場外點擊不觸發 Return。射擊重播把方向鍵 X 換成 CELL:8,8，英中各自軌跡逐位元相同；近戰夾限與邊界像素由單元測試驗。
 - **cjk-sheet-subpages** — 資料頁的坐騎與頂端隊員格的中文版面：docs/verification/cjk-ui/stable-six-page-receipt.json；六張繁中畫格及逐位元相同的英中軌跡。
 - **screenshot-png-nondeterminism** — 重生截圖會讓無關的英文圖出現 diff：2026-09-26 鎖定映像下以 run_kol_shots.sh 把 shots.spec 全部 46 行各跑兩次，46 張逐位元相同，重生是決定性的；「內容相同但位元不同」無法重現。與 docs/screenshots 收據不同的 9 張全是內容真的改變：en-newchar-picture／stats 為擲骰對上原版後同 seed 數值不同，en-world-map／town 為 SPEC-026 捲雲位置，zh-book-cover／roster／delete、zh-town-items／sheet 為本週中文化。判準（有對拍收據者須逐位元相同）不必改；這 9 張依使用者指示待整體驗收後隨 README 一併重生。
@@ -366,6 +357,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **cjk-battle-remaining-pages** — 補戰後戰利品清單的繁中正常路徑畫格：法術／效果兩頁及戰利品 Items Found／Characters 兩頁均已擷取並目視檢查。戰利品由 seed 39 固定輸入在重製版正常按鍵路徑第 22 回合勝利後取得；收據含輸入、程式雜湊、PNG／trace 雜湊與觀察用資料限制。本項只驗中文版面；完整戰鬥、原版同狀態與正式封包另列未完成。
 - **town-untranslated-source-slot-reachability** — 城鎮 45 個未譯來源槽位的全域可達性與中文處置：2026-09-25 RE-140：訊息槽位與建築 payload 共用 DGROUP:0x1CF4，45 筆分為 40 筆馬廄坐騎記錄（已證實）、1 筆商店殘留資料（強推論）、4 筆無讀取點的任務續文（強推論）。依使用者選定處置不翻譯，列入 docs/i18n/town-nontext-slots.json 並綁原文快照；嚴格檢查 2,076 則 0 缺譯、另排除 45 筆，三個負例皆失敗。
 - **plan-key-replans** — 規劃鍵值的除數是本回合重排次數：已完成
+- **combat-result-pictures** — 戰鬥結果圖（COMBPICS）沒有畫：已完成
 
 <!-- worklist:end -->
 

@@ -86,6 +86,9 @@ func BattleFieldCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	if err := drawBattleCommandPanelCJK(dst, sprites, f, t, s, sc); err != nil {
 		return err
 	}
+	if err := drawBattleResultScaled(dst, sprites, s, sc); err != nil {
+		return err
+	}
 
 	// 執行段：整條訊息區換成一張卷軸，圖示列被蓋掉（RE-089、RE-090）。
 	if s.Plan.Prompt == battle.PromptExecuting ||

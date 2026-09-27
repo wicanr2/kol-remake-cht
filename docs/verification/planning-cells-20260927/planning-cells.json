@@ -1,0 +1,858 @@
+{
+ "schema": "kol-planning-cells-v1",
+ "source": "dosgolem-normal-player-path",
+ "actor_slot": 1,
+ "alignment_seed": 1,
+ "entry_state_sha256": "0cf773d14a1e48308555b6cf78be9b0867bdcb298e0b84210823267ae4c0c869",
+ "method": "每一組從規劃入口送一串鍵；比每一鍵之後的圖示列格數、白框位置與槽 1 寫回的四個值",
+ "cases": [
+  {
+   "name": "u-s1-g1",
+   "probe_sha256": "98bab9961860d91513214d1376f69650c89cfc0dd09f65a42eaeffc6538f8979",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 6,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 8,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 5,
+    "attack_option": 0,
+    "defence_option": 0,
+    "facing": 0
+   }
+  },
+  {
+   "name": "u-s2-g2",
+   "probe_sha256": "6405bd50ad8663b5214b491abd911bd9757f183a83918d391a52f2cfb0610786",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 6,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 2
+    },
+    {
+     "key": "Return",
+     "icon_slots": 8,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 2
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 41,
+    "attack_option": 0,
+    "defence_option": 1,
+    "facing": 0
+   }
+  },
+  {
+   "name": "u-s3-g4",
+   "probe_sha256": "b7a247335fd3cb3eacc6744059a2fac79f4d08ef4e5d88c78522995c8a0050ef",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 6,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 8,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 4
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 41,
+    "attack_option": 2,
+    "defence_option": 3,
+    "facing": 0
+   }
+  },
+  {
+   "name": "u-s4-g5",
+   "probe_sha256": "7b04c790a476b46d636c43dff05154078e489c3bdfd1aca44bd6d206e337056c",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 6,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 4
+    },
+    {
+     "key": "Return",
+     "icon_slots": 8,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 4
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 5
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 41,
+    "attack_option": 3,
+    "defence_option": 4,
+    "facing": 0
+   }
+  },
+  {
+   "name": "u-s5-g6",
+   "probe_sha256": "d3a02942d1278d0bbb544462a5a812a702775432c80adc25fe60dee1377384f1",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 6,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 4
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 5
+    },
+    {
+     "key": "Return",
+     "icon_slots": 8,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 4
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 5
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 6
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 41,
+    "attack_option": 4,
+    "defence_option": 5,
+    "facing": 0
+   }
+  },
+  {
+   "name": "u-s1-g7",
+   "probe_sha256": "a42414942c240119a9aad6a86fc6103d6175c5dcf12142f96f81ee64369f7169",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 6,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 6,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 8,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 4
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 5
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 6
+    },
+    {
+     "key": ".",
+     "icon_slots": 8,
+     "framed_slot": 7
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 41,
+    "attack_option": 0,
+    "defence_option": 6,
+    "facing": 0
+   }
+  },
+  {
+   "name": "switch",
+   "probe_sha256": "c1fd6ee294cae9722e9bd0911575360bcf24276b06ec6bd9c501e3e1a7d4c84c",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 22,
+    "attack_option": 0,
+    "defence_option": 0,
+    "facing": 0
+   }
+  },
+  {
+   "name": "move-1",
+   "probe_sha256": "d35786cc629f999fb47e24e8dbc084a7b55d513935fc8b47648c9e249deebb9f",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 7,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 1
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 39,
+    "attack_option": 60,
+    "defence_option": 2,
+    "facing": 0
+   }
+  },
+  {
+   "name": "move-2",
+   "probe_sha256": "a6e8c55934eb4c83661898e5f828c68aa278983d0f781710bb505e5d8eb5673c",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 7,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 2
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 39,
+    "attack_option": 61,
+    "defence_option": 0,
+    "facing": 0
+   }
+  },
+  {
+   "name": "move-3",
+   "probe_sha256": "4dc710c24b0a348d408d767b452df288073c550b537c6cc9908dfddc65edfe20",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 7,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 39,
+    "attack_option": 62,
+    "defence_option": 0,
+    "facing": 0
+   }
+  },
+  {
+   "name": "move-4",
+   "probe_sha256": "369fd0987fc9a04c5edaecf79ebf9a17151d49aec08086469cfc623496af7fe0",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 7,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 4
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 39,
+    "attack_option": 63,
+    "defence_option": 0,
+    "facing": 0
+   }
+  },
+  {
+   "name": "move-5",
+   "probe_sha256": "6c6836b688a07ed7a4833f419503580cfca1af179684cdc1b5f9dddd98172c76",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 7,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 4
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 5
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 39,
+    "attack_option": 64,
+    "defence_option": 0,
+    "facing": 0
+   }
+  },
+  {
+   "name": "move-6",
+   "probe_sha256": "e5784ca97f17360f9eec375cce1631e8b8d810ee4ab00731ca72b6b50184f7f6",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 3
+    },
+    {
+     "key": "Return",
+     "icon_slots": 2,
+     "framed_slot": 0
+    },
+    {
+     "key": "Return",
+     "icon_slots": 7,
+     "framed_slot": 0
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 4
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 5
+    },
+    {
+     "key": ".",
+     "icon_slots": 7,
+     "framed_slot": 6
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 39,
+    "attack_option": 53,
+    "defence_option": 0,
+    "facing": 0
+   }
+  },
+  {
+   "name": "rest",
+   "probe_sha256": "b7665de4bd6e765f066351fd4b7ea7c758cf06b9eb4bb59298767523a0689923",
+   "steps": [
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 1
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 2
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 3
+    },
+    {
+     "key": ".",
+     "icon_slots": 5,
+     "framed_slot": 4
+    },
+    {
+     "key": "Return",
+     "icon_slots": 5,
+     "framed_slot": 0
+    }
+   ],
+   "final": {
+    "command_code": 5,
+    "attack_option": 0,
+    "defence_option": 0,
+    "facing": 0
+   }
+  }
+ ]
+}

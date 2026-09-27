@@ -391,6 +391,10 @@ func ResolveMissile(a *Actor, d *Actor, style, attack int, stray bool, rng Rand)
 
 // Take 把一次傷害記到身上（`sub_277F4`）：累積傷害到頂就倒下，
 // 部位血量扣光那一肢就廢了。回傳是不是倒下、那一肢是不是廢了。
+//
+// 手臂或腿廢掉那一刻（部位 > 1）原版印 0x152 之後把 `+0x25` 清成 0，這一回合
+// 排好的那一手作廢；腿（部位 > 3）再把 `+0x03` 清成 0，移動方式少掉 0x3E
+// 以後那幾格（`sub_277F4:loc_27A5B`，RE-148）。
 func (a *Actor) Take(damage, location int) (down, limb bool) {
 	a.Damage += damage
 	if a.Damage > 0x7F {
@@ -408,6 +412,12 @@ func (a *Actor) Take(damage, location int) (down, limb bool) {
 			if *p <= 0 {
 				*p = 0
 				limb = true
+				if location > 1 {
+					a.Command = 0
+				}
+				if location > 3 {
+					a.Flag03 = 0
+				}
 			}
 		}
 	}

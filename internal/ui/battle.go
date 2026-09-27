@@ -134,6 +134,9 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	if err := drawBattleCommandPanel(dst, sprites, f, s); err != nil {
 		return err
 	}
+	if err := drawBattleResult(dst, sprites, s); err != nil {
+		return err
+	}
 
 	// 執行段：整條訊息區換成一張卷軸，圖示列被蓋掉（RE-089、RE-090）。底圖是
 	// MISCPICS 的圖 1，296×32，白紙面配黃色的捲邊與軸心；文字寫在紙面上，
@@ -163,6 +166,30 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	}
 
 	return drawBattleIcons(dst, sprites, s)
+}
+
+// drawBattleResult 在收尾時把戰鬥結果圖蓋在裝備欄、人形框與戰場視窗上
+// （`sub_288D4`，RE-147）：貼圖、白框、投影。底下的訊息卷軸不受影響。
+func drawBattleResult(dst *ebiten.Image, sprites Sprites, s *battle.State) error {
+	return drawBattleResultScaled(dst, sprites, s, 1)
+}
+
+// drawBattleResultScaled 是同一張圖乘上倍率，中文模式用。
+func drawBattleResultScaled(dst *ebiten.Image, sprites Sprites, s *battle.State, sc int) error {
+	n := s.ResultPicture()
+	if n == battle.ResultNone {
+		return nil
+	}
+	pic, err := sprites.Get(battle.ResultArchive, n)
+	if err != nil {
+		return err
+	}
+	at := battle.ResultPictureAt
+	drawScaled(dst, pic, at.X*sc, at.Y*sc, sc)
+	fr := battle.ResultFrame
+	frame(dst, fr.X*sc, fr.Y*sc, fr.Width*sc, fr.Height*sc, town.ColourBoxEdge)
+	shadow(dst, fr.X*sc, fr.Y*sc, fr.Width*sc, fr.Height*sc)
+	return nil
 }
 
 // drawBattleIcons 畫指令圖示列。版面與城鎮同一組（RE-080：(32 + 32i, 171)、

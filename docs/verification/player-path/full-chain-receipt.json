@@ -7,7 +7,7 @@
  "ambush_rolls": "1,100,23",
  "token_count": 585,
  "trace": "docs/verification/player-path/full-chain/trace.json",
- "trace_sha256": "2347e67d3785b027daab9fa21e3085145a4581b7eb40d12b66f926590b028352",
+ "trace_sha256": "c24a2ac1078fe07eaad4188b386e0c1daea10803a5e1c77d98195c77ce0eaa3c",
  "milestones": [
   {
    "step": 0,
@@ -190,6 +190,7 @@
     "monster": "ZOMBIE",
     "prompt": 10,
     "quest_done": 0,
+    "result_picture": 3,
     "roster": [
      "0 Poontang party 34,30 head=16 chest=16",
      "1 Moraine party 33,29 head=15 chest=15",
@@ -331,7 +332,7 @@
   {
    "step": 439,
    "file": "step-439.png",
-   "sha256": "a595e6ca9025a3c2c94756ecbf0bea0eb0d8e809af829f468413d5dad4dba814",
+   "sha256": "8d70882fc56024a2c75088d40634998f14763f5c44645d03c524b195e7de0b62",
    "shows": "打贏那一句"
   },
   {

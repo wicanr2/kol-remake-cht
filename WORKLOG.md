@@ -6705,3 +6705,18 @@ frame-270 推翻了 remake 的版面：
   誤併入上一個 commit，本次補上 `back.png`）。SPEC-014 §5–6、SPEC-008 改寫為現況。
   另登 `combat-result-pictures`：`sub_288D4` 的 COMBPICS 結果圖 runtime 沒有讀。
   全套 Go 測試、八份戰鬥收據通過。
+- #100 結案（RE-147）：`sub_288D4` 五個呼叫點依去向畫 COMBPICS 圖（一般戰鬥贏 3、輸 2、逃走格 0、
+  競技場／訓練戰贏 4、輸 1），貼在 (8,8)、白框 (7,7)–(305,152) 與投影，第一句勝負訊息時出現、
+  留到收尾，戰利品畫面蓋掉。remake `State.ResultPicture`，英文與中文戰場都畫，軌跡記
+  `result_picture`。`battle-spoils`、`battle-bar-flee` 加斷言並重生畫格；三條長路徑的參考軌跡
+  逐步確認差異只有這一欄後更新。SPEC-008 補結果圖一節。
+- #84 結案（RE-148）：原版以 dosgolem 逐格走 Theodoric 的指令列十四組（徒手攻擊式六格、防禦方式
+  八格、切換、休息、移動方式六格），`TestOriginalNormalPlanningCells` 在 remake 照同一串鍵重播，
+  比每一鍵之後的格數、白框與寫回的四個值。第一次移動方式原版 7 格、remake 3 格，追出：
+  參戰者 `+0x03` 由 `sub_21D94` 依種族設（Kelden 2、Dwarven 0、其餘 1），remake 一律當 0；
+  磚塊 0x0C 在移動方式列是擋住後三格而非解鎖（RE-085、SPEC-010 方向讀反）；同一分支的
+  手臂／腿廢掉清 `+0x25`、腿廢掉清 `+0x03`、治好隊員的腿依種族重設，remake 都沒做。修正後
+  十四組全數一致。收據 `docs/verification/planning-cells-20260927/`，摘要工具
+  `tools/summarize_planning_probes.py` 先驗進場狀態與 2026-09-11 逐 byte 相同。#57 改題為
+  「0x0C 在地圖上是什麼」。全套 Go 測試、原版對拍、八份戰鬥收據、24 條玩家路徑通過。
+  原版跑法：兩個並行各 2 CPU（當時主機負載約 39，另有其他 session 的工作）。

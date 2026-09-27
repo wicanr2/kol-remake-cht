@@ -6,7 +6,7 @@
  "load": "workplace/observe/arena-ready.json",
  "token_count": 2796,
  "trace": "docs/verification/player-path/arena/trace.json",
- "trace_sha256": "1571d4d0754711f4d5fa368e18192a629fdb6ce5af1b5d8f044b234a8a104cd4",
+ "trace_sha256": "a84d20985cb09d938d0acf93ad7af7cf1e8461bfff044f5474679045a8ae467e",
  "milestones": [
   {
    "step": 0,
@@ -135,6 +135,7 @@
     "monster": "WALBAR",
     "prompt": 10,
     "quest_done": 0,
+    "result_picture": 2,
     "roster": [
      "0 Poontang party 29,28 head=16 chest=0 down",
      "1 Moraine party 28,29 head=0 chest=0 down",
@@ -450,6 +451,7 @@
     "monster": "TROLL",
     "prompt": 10,
     "quest_done": 0,
+    "result_picture": 1,
     "roster": [
      "0 Poontang watch 16,25 head=16 chest=16",
      "1 Moraine party 19,29 head=9 chest=0 down",
@@ -505,6 +507,7 @@
     "monster": "TROLL",
     "prompt": 10,
     "quest_done": 0,
+    "result_picture": 1,
     "round": 37,
     "site": -1,
     "stage": 5,
@@ -577,13 +580,13 @@
   {
    "step": 2794,
    "file": "step-2794.png",
-   "sha256": "30b19774e2b5f3ccb7ebb04ec83c49570621b0b4ea09de221af65a3d94be6e70",
+   "sha256": "b9b2b51333d9acdf5f0e1d46634f4fd0d0548259fb7b3db385657600d47e670a",
    "shows": "\"The TROLL has defeated you!\""
   },
   {
    "step": 2795,
    "file": "step-2795.png",
-   "sha256": "c47ad3875660d6a143ad3fc758d3dcec83165c438629c6a643ec52aacb6334d4",
+   "sha256": "6bdc95da61c69ba71e3fffa81d3e4bc457de1a6407593a934b12bb4829707fa1",
    "shows": "兩行賭金結算：Poontang loses a bet!、Fighting Bull wins a bet!"
   }
  ],

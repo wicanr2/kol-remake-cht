@@ -158,13 +158,13 @@ func TestMoveForms(t *testing.T) {
 	a.Flag03 = 1
 	assertBar(t, MoveForms(a, 0),
 		[]int{CmdCancel, IconMoveWalk, IconMoveNext, IconMoveFast})
-	// Flag03 為 2 而且腳下是那一塊磚，後三格才出現。
+	// Flag03 為 2 時後三格出現，但腳下是 0x0C 那一塊就不出現（`loc_1F87E`，RE-148）。
 	a.Flag03 = 2
 	assertBar(t, MoveForms(a, 0),
-		[]int{CmdCancel, IconMoveWalk, IconMoveNext, IconMoveFast})
-	assertBar(t, MoveForms(a, MoveUnlockTile),
 		[]int{CmdCancel, IconMoveWalk, IconMoveNext, IconMoveFast,
 			IconMoveAlt1, IconMoveAlt2, IconMoveAlt3})
+	assertBar(t, MoveForms(a, StuckTile),
+		[]int{CmdCancel, IconMoveWalk, IconMoveNext, IconMoveFast})
 	// Flag1E 非零時前三格消失、後三格無條件出現。
 	a.Flag1E = 1
 	assertBar(t, MoveForms(a, 0),

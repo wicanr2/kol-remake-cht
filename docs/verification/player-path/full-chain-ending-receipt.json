@@ -7,7 +7,7 @@
  "ambush_rolls": "100,100,100,100,100,100",
  "token_count": 1776,
  "trace": "docs/verification/player-path/full-chain-ending/trace.json",
- "trace_sha256": "4354c7af32adb7298f20ee0058eed6c58cef942b8fad227a0268d74ae4e242ce",
+ "trace_sha256": "d14740ffb92019e0399020b1e53418f047f826eda77e7632e214de9a2f83882e",
  "milestones": [
   {
    "step": 0,
@@ -189,6 +189,7 @@
     "monster": "CYCLOPS",
     "prompt": 10,
     "quest_done": 6,
+    "result_picture": 3,
     "roster": [
      "0 Poontang party 8,15 head=16 chest=2",
      "1 Moraine party 6,16 head=15 chest=15",
@@ -278,7 +279,7 @@
   {
    "step": 1765,
    "file": "step-1765.png",
-   "sha256": "715ed910c9e1dfb45bbbdb28c01079c6fe22cc46659c1234f80c0ded7677c5d5",
+   "sha256": "5f5d9305cb71b14a0b3173f2b9277fbbe6996396077b484290592b7fffffef84",
    "shows": "打贏最終任務"
   },
   {

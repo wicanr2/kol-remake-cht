@@ -73,11 +73,12 @@
        "verdict": 3,
        "exec_text": [
         "You flee for your life!"
-       ]
+       ],
+       "result_picture": 0
       }
      },
      "within": 1,
-     "note": "答 Y：全隊逃掉（0x17B＋0x17C）"
+     "note": "答 Y：全隊逃掉（0x17B＋0x17C）；同一步畫 COMBPICS 圖 0（`0x215AC`，RE-147）"
     },
     {
      "find": {
@@ -121,9 +122,9 @@
    "file": "fled.png",
    "run": 0,
    "check": 4,
-   "shows": "YOU FLEE FOR YOUR LIFE!",
+   "shows": "YOU FLEE FOR YOUR LIFE!上方蓋著 COMBPICS 圖 0 與白框（`sub_288D4(0)`，RE-147）。",
    "step": 64,
-   "sha256": "a1c12fa9da6b63172a9b091bfa95c301bef8ea1ab24d7c696f2f55418c259823"
+   "sha256": "431658188544f8ec40e85a21ee365e4dcbe9efb31cfac22847a2bfa24ec0ad57"
   }
  ],
  "rights": "remake 自己畫的畫面；圖示來自已通過權利審查的原作衍生 PNG。"

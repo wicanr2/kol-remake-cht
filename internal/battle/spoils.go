@@ -252,6 +252,7 @@ func (s *State) BeginSpoils() bool {
 		return false
 	}
 	s.Spoil = SpoilScreen{Phase: SpoilPickItem, Slots: slots, Slot: -1}
+	s.resultOver = true
 	return true
 }
 

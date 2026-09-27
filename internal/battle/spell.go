@@ -246,6 +246,10 @@ func (s *State) castArea(target, area, power int, negative bool) {
 		v = caps[area]
 	}
 	*parts[area] = v
+	// 治好隊員的腿再跑一次 `sub_21D94`，移動方式照種族回來（RE-148）。
+	if area > 3 && t.Side == SideParty {
+		t.Flag03 = MoveAbility(t.Race)
+	}
 	// 部位那一條把「身上有法術」設回 0（`0x283EA`）——它不是持續效果。
 	t.SpellTurns = 0
 }
