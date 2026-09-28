@@ -6809,3 +6809,12 @@ frame-270 推翻了 remake 的版面：
   8 份戰鬥收據通過；21 條玩家路徑一致，**arena、full-chain、full-chain-ending、full-chain-reload
   四條的戰鬥段待重生**（擊退與防禦骰改變了戰況）。`go test` 全過（ui 在 Xvfb）。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- RE-158 後重生四條長路徑（`regen_long_path.py --battles-only`：每場戰鬥用自己的亂數，戰鬥外照抄）：
+  arena 路上伏擊 30 回合敗北、競技場第 12 回合敗北，1961 步；full-chain 第 20 回合打贏，2057 步，
+  存檔驗證通過；full-chain-reload 第 21 回合打贏、戰利品清單選 U-TURN 不領，2204 步；
+  full-chain-ending 第 10 回合打贏、結局七段，1124 步。里程碑與檢查點依段落換算後逐項複核，
+  只改回合數與伏擊留下的傷勢。工具修正：driver 在戰利品清單改按 `>` `RET` 離開；
+  `--battles-only` 帶上 plan 的場景與受控骰值、路徑停在戰場開場的不再打。25 條路徑一致。
+- #10 結案：全城逐店告別審查（building-goodbye-review-20260928）。`TestGoodbyeEveryBuilding`
+  以正式資料驗證 101 棟英文與中文的告別文字、圖示列與按一次回地圖；TOWN7 門 21 原版缺文字，
+  另列 `town7-door21-missing-text`。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

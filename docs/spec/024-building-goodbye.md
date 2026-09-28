@@ -26,6 +26,9 @@
 單人與兩人、等待時不移動／不改隊伍、確認一次離店、門口取消不等待，均須回歸。
 正常 dosgolem 與 remake 分別重跑兩人離店；回歸通過不自動升 CONFORMED。
 
+全城逐店的差異審查見 [building-goodbye-review-20260928](../verification/building-goodbye-review-20260928.md)：
+101 棟無差異，TOWN7 門 21 原版缺文字、行為未知。
+
 ## 說明書對照
 
 頁碼是說明書 PDF 實體頁（括號內是印刷頁），連到 `docs/manual/chapters/` 已校對的繁中章節。說明書是公開規則的來源；

@@ -176,13 +176,30 @@
       "id": "inn-farewell-diff-review",
       "layer": "verification",
       "title": "審查原版離店告別訊息與確認流程",
-      "body": "SPEC-024 與告別確認已實作，dosgolem 單人／多人正常離店與繁中 GUI 已抽驗，但不是全城逐店文字驗收。要補與 remake 直接離店的玩家可見差異。",
+      "body": "全城逐店審查（building-goodbye-review-20260928）：101 棟的告別文字、圖示列與按一次回地圖，英文與中文逐棟驗證（TestGoodbyeEveryBuilding），與原版控制流無差異；一人隊伍直接離開相同。TOWN7 門 21 原版缺文字，另列 town7-door21-missing-text。",
       "acceptance": "列出所有可見差異並各自處置，或證明沒有差異。",
       "verify": {
-        "kind": "manual",
-        "note": "差異審查的產物是文件不是程式。審查報告落地時改成 absent 綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/building-goodbye-review-20260928.md",
+          "docs/spec/024-building-goodbye.md"
+        ],
+        "pattern": "building-goodbye-review",
+        "note": "已完成，當回歸訊號：審查文件與 SPEC-024 互相指到。"
       },
-      "issue": 10
+      "issue": 10,
+      "status": "done"
+    },
+    {
+      "id": "town7-door21-missing-text",
+      "layer": "verification",
+      "title": "TOWN7 門 21 缺文字時原版怎麼表現",
+      "body": "TOWN7 的門 21（20, 36）有門面圖 45 與肖像 44，但文字 payload 26 不存在（TOWN7.0 只有 0–25，RE-061）。remake 進得去：畫出肖像 44，標題與對話框是空的（`EnterBuilding` 沒有文字就不填），離開時直接回地圖。原版走到這扇門時讀的是什麼、會不會當機，都沒有證據。",
+      "acceptance": "dosgolem 正常路徑走到 TOWN7 (20, 36) 進門並離開，記下原版畫面與狀態；有差異就依證據處置或列為保留差異。",
+      "verify": {
+        "kind": "manual",
+        "note": "要原版實走，沒有產品碼訊號。"
+      }
     },
     {
       "id": "dosgolem-gui-ai-acceptance",

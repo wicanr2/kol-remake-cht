@@ -104,10 +104,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：一整場戰鬥從進場到結算、保存都與原版同狀態，走的是正常玩家路徑。
   核實：要人判——常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。
 
-- **inn-farewell-diff-review**（#10） — 審查原版離店告別訊息與確認流程
-  SPEC-024 與告別確認已實作，dosgolem 單人／多人正常離店與繁中 GUI 已抽驗，但不是全城逐店文字驗收。要補與 remake 直接離店的玩家可見差異。
-  完成條件：列出所有可見差異並各自處置，或證明沒有差異。
-  核實：要人判——差異審查的產物是文件不是程式。審查報告落地時改成 absent 綁它。
+- **town7-door21-missing-text** — TOWN7 門 21 缺文字時原版怎麼表現
+  TOWN7 的門 21（20, 36）有門面圖 45 與肖像 44，但文字 payload 26 不存在（TOWN7.0 只有 0–25，RE-061）。remake 進得去：畫出肖像 44，標題與對話框是空的（`EnterBuilding` 沒有文字就不填），離開時直接回地圖。原版走到這扇門時讀的是什麼、會不會當機，都沒有證據。
+  完成條件：dosgolem 正常路徑走到 TOWN7 (20, 36) 進門並離開，記下原版畫面與狀態；有差異就依證據處置或列為保留差異。
+  核實：要人判——要原版實走，沒有產品碼訊號。
 
 - **dosgolem-gui-ai-acceptance**（#11） — 補新版正常 GUI 與玩家可見 AI 行為驗收
   最新工作樹已重跑 Olear 正常射擊 150 個輸入、確認彈藥 20→19，dosgolem Olear 旅店入口亦通過（docs/verification/fixed-seed-player-path-20260908.md）。完整 AI／原版戰鬥仍待驗。
@@ -258,6 +258,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **g05-picture-shield-editor-spec** — G05：圖像／盾牌編輯另立規格：已完成
 - **d01-spec-stale-clauses** — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款：已完成
 - **battle-normal-seed-alignment** — 原版戰鬥同狀態：攻擊結算比較：已完成
+- **inn-farewell-diff-review** — 審查原版離店告別訊息與確認流程：已完成
 - **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊：2026-09-26 v.0.2.5 AppImage 真實按鍵：建兩名、各自入隊、住宿離隊後重載各自再選進旅店、刪除不搬槽、空槽重用與滿槽拒絕皆通過；兩種預設存檔位置另通過。收據 docs/verification/identity-save-chain/receipt.json。
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
 - **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE：已完成

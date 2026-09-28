@@ -267,7 +267,9 @@ def main():
             tokens.append('SPACE')
             continue
         if stage == 4:
-            tokens.append('RET')
+            # 戰利品清單：白框移到 U-TURN（第 1 格）再確認，不領東西就離開。只按 RET
+            # 會一直領、背包滿了就停在這一頁出不去（full-chain-reload 重生時卡過）。
+            tokens += ['>', 'RET']
             continue
         if stage == 3:
             tokens.append('N')

@@ -14,6 +14,7 @@
 
   tools/regen_long_path.py arena
   tools/regen_long_path.py arena full-chain-ending
+  tools/regen_long_path.py --battles-only arena   # 只改了戰鬥規則時：只重打戰鬥段
 
 跑完要自己再跑一次 `tools/replay_player_path.py <名字>` 產收據並驗證。
 """
@@ -125,16 +126,80 @@ def regen(name: str) -> None:
         print(f"   第 {seq} 場：{len(tokens) - before} 個 token")
 
     plan["script"] = " ".join(tokens)
-    path.write_text(json.dumps(plan, ensure_ascii=False, indent=1) + "\n",
+    path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n",
                     encoding="utf-8")
     print(f"   寫回 {path}：{len(tokens)} 個 token（舊的是 {len(old)} 個）")
 
 
+def drive_battle(name: str, plan: dict, prefix: list[str], seq: int) -> list[str]:
+    """只打一場：前綴含進場那一下，driver 打到離開戰場、回到遊戲路徑就停。
+
+    帶上 plan 的場景、受控骰值與換過的資料檔——重生與重播要走同一條路。
+    """
+    WORK.mkdir(parents=True, exist_ok=True)
+    pre = WORK / f"{name}-b{seq}-pre.txt"
+    out = WORK / f"{name}-b{seq}-out.txt"
+    pre.write_text(" ".join(prefix) + "\n", encoding="utf-8")
+    env = dict(os.environ)
+    env["KOL_DRIVE_DIR"] = str(WORK / f"{name}-b{seq}")
+    env["KOL_STOP_AFTER_BATTLE"] = "1"
+    scene = plan.get("scene") or ("flow" if "trace" not in plan else "play")
+    env["KOL_SCENE"] = scene
+    env["KOL_SCRIPT_FLAG"] = "-flow-script" if scene == "flow" else "-play-script"
+    for key, var in (("quest_sites", "KOL_QUEST_SITES"), ("monsters", "KOL_MONSTERS"),
+                     ("ambush_rolls", "KOL_AMBUSH_ROLLS")):
+        if plan.get(key):
+            env[var] = str(plan[key])
+    cmd = ["tools/run_driver.sh", str(plan.get("seed", 1)), plan["load"],
+           str(pre), str(out), str(DRIVE_LIMIT)]
+    print("   driver:", " ".join(cmd), flush=True)
+    subprocess.run(cmd, check=True, env=env)
+    return out.read_text(encoding="utf-8").split()
+
+
+def regen_battles(name: str) -> None:
+    """只重打戰鬥段，其餘照抄。
+
+    每一場戰鬥用自己的亂數（`newRand(seed)`，與野外那一條分開），所以只改了戰鬥
+    規則時，戰鬥之外的每一步都與舊軌跡相同，照抄就對得上。戰鬥結束後照抄時跳過
+    舊腳本裡把那一場推出去的那一下（step b+1 由 token[b] 產生）：driver 已經自己
+    按到離開戰場才停。
+    """
+    path = PLANS / f"{name}.json"
+    plan = json.loads(path.read_text(encoding="utf-8"))
+    trace = json.loads(pathlib.Path(plan["trace"]).read_text(encoding="utf-8"))["steps"]
+    old = plan["script"].split()
+    segs = [(a, b) for inb, a, b in segments(trace) if inb]
+    print(f"== {name}：{len(old)} 個 token，{len(segs)} 場戰鬥", flush=True)
+    tokens: list[str] = []
+    cursor = 0  # 舊腳本抄到哪裡
+    last = trace[-1]["step"]
+    for seq, (a, b) in enumerate(segs, 1):
+        tokens += old[cursor:a]  # 含 token[a−1]：進場那一下
+        if a == last:
+            # 路徑本來就停在「進戰場」那一步（例如 full-chain-reload 截在任務戰鬥開場），
+            # 這一場不是要打的，不交給 driver。
+            cursor = a
+            break
+        before = len(tokens)
+        tokens = drive_battle(name, plan, tokens, seq)
+        print(f"   第 {seq} 場（舊步 {a}…{b}）：{len(tokens) - before} 個 token", flush=True)
+        cursor = b + 1
+    tokens += old[cursor:]
+    plan["script"] = " ".join(tokens)
+    path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8")
+    print(f"   寫回 {path}：{len(tokens)} 個 token（舊的是 {len(old)} 個）", flush=True)
+
+
 def main() -> int:
-    if len(sys.argv) < 2:
-        raise SystemExit("用法：regen_long_path.py <收據名字> [更多…]")
-    for name in sys.argv[1:]:
-        regen(name)
+    args = sys.argv[1:]
+    battles_only = "--battles-only" in args
+    names = [a for a in args if a != "--battles-only"]
+    if not names:
+        raise SystemExit("用法：regen_long_path.py [--battles-only] <收據名字> [更多…]")
+    for name in names:
+        (regen_battles if battles_only else regen)(name)
     return 0
 
 

@@ -1,12 +1,12 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "full-chain-reload",
- "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在入夜換日、CAMPING! 收掉之後擲到治療僧侶，照實答應；下一次時段變換自然遇到 GOBLIN 伏擊，第十四回合打贏後繼續走（路上的自然事件，不是這條要驗的內容）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
+ "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在入夜換日、CAMPING! 收掉之後擲到治療僧侶，照實答應；下一次時段變換自然遇到 GOBLIN 伏擊，第二十一回合打贏後繼續走（路上的自然事件，不是這條要驗的內容）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
  "seed": 3,
  "load": "workplace/saves/full-chain.json",
- "token_count": 1515,
+ "token_count": 2204,
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
- "trace_sha256": "7d5711a59c95445c15d7f016f3c50452fe1c74487497a4ec1a97f3f67e3cb5a3",
+ "trace_sha256": "d4e48c6846ebf7eaa86759286f7b8720aa2f316b2bd1804e6bdc49d1cb96a83a",
  "milestones": [
   {
    "step": 0,
@@ -278,9 +278,9 @@
    }
   },
   {
-   "step": 1505,
-   "token": "SPACE",
-   "note": "第十四回合打贏，回到野外",
+   "step": 2195,
+   "token": "RET",
+   "note": "第二十一回合打贏（戰利品清單選 U-TURN 不領），回到野外",
    "scene": "play",
    "town": {
     "door": {
@@ -306,24 +306,25 @@
    },
    "battle": {
     "exec_text": [
-     "You have defeated The GOBLINS!"
+     "Each player receives 102",
+     "adventure points, and 9 gold",
+     "crowns!"
     ],
     "monster": "GOBLIN",
     "prompt": 10,
     "quest_done": 0,
-    "result_picture": 3,
     "roster": [
-     "0 Poontang party 28,28 head=16 chest=16",
-     "1 Moraine party 27,29 head=15 chest=15",
-     "2 Fighting Bull party 28,29 head=14 chest=14",
-     "3 Kenneth party 26,30 head=17 chest=17",
-     "4 Sharakan party 27,31 head=17 chest=17",
-     "5 Olear party 27,30 head=15 chest=15",
-     "6 GOBLIN foe 32,32 head=0 chest=13 down",
-     "7 GOBLIN foe 36,31 head=13 chest=0 down",
-     "8 GOBLIN foe 26,31 head=13 chest=0 down"
+     "0 Poontang party 28,30 head=0 chest=0 down",
+     "1 Moraine party 27,30 head=15 chest=15",
+     "2 Fighting Bull party 26,30 head=14 chest=14",
+     "3 Kenneth party 28,31 head=17 chest=17",
+     "4 Sharakan party 26,29 head=17 chest=17",
+     "5 Olear party 28,32 head=15 chest=15",
+     "6 GOBLIN foe 29,32 head=13 chest=0 down",
+     "7 GOBLIN foe 35,31 head=13 chest=0 down",
+     "8 GOBLIN foe 27,31 head=13 chest=0 down"
     ],
-    "round": 14,
+    "round": 21,
     "site": -1,
     "stage": 5,
     "turn": 9,
@@ -331,7 +332,7 @@
    }
   },
   {
-   "step": 1514,
+   "step": 2203,
    "token": "U",
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）",
    "scene": "play",
@@ -370,7 +371,7 @@
    }
   },
   {
-   "step": 1515,
+   "step": 2204,
    "token": "RET",
    "note": "答應參戰：滿版的怪物圖",
    "scene": "play",
@@ -465,14 +466,14 @@
    "shows": "GOBLIN 伏擊"
   },
   {
-   "step": 1514,
-   "file": "step-1514.png",
+   "step": 2203,
+   "file": "step-2203.png",
    "sha256": "59635ac1d886c353e999ce9b2cbe3ec7d0953d8929a256da2a90a799644d6a30",
    "shows": "任務敘述與 Will you partake?"
   },
   {
-   "step": 1515,
-   "file": "step-1515.png",
+   "step": 2204,
+   "file": "step-2204.png",
    "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
    "shows": "滿版的 BINDERAK 圖"
   }
