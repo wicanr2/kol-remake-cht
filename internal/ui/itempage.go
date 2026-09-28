@@ -17,7 +17,7 @@ import (
 // 清單那十七列落在分隔線右邊的窄欄裡（字格欄 32 ＝ x 256），寬度剛好六個字元。
 // 沒有反白的列是青色（EGA 索引 3）、選中的是白色（0x0F）。
 func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
-	p *town.ItemPage, party []town.Member) error {
+	p *town.ItemPage, party []town.Member, wild bool) error {
 	l := town.ItemPageLayout
 	interactionBase := itemPageUsesInteractionBase(p)
 
@@ -27,7 +27,7 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	}
 	if !interactionBase {
 		// 完整清單層才畫木屋背板、立繪、右欄、外框、分隔線、清單與小框。
-		if err := drawSheetPageBack(dst, sprites); err != nil {
+		if err := drawSheetPageBack(dst, sprites, wild); err != nil {
 			return err
 		}
 
@@ -161,12 +161,12 @@ func cellIn(dst *ebiten.Image, f *font.Font, col, row int, s string, c [3]uint8)
 
 // drawPartyPage 畫隊伍立繪那一頁（`sub_18D61`，RE-126）：整頁清成黑、畫一圈框，
 // 再把六個人由後往前貼上去。
-func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece) error {
+func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece, wild bool) error {
 	r := town.PartyPageFrame
 	if err := drawSheetPageFull(dst, sprites); err != nil {
 		return err
 	}
-	if err := drawSheetPageBack(dst, sprites); err != nil {
+	if err := drawSheetPageBack(dst, sprites, wild); err != nil {
 		return err
 	}
 	frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetFrame)
@@ -194,15 +194,15 @@ func drawSheetPageFull(dst *ebiten.Image, sprites Sprites) error {
 }
 
 // drawSheetPageBack 畫資料頁那兩頁的背景（`sub_1103F(0x21)` 與 `(0x64)`，RE-127）：
-// 一間木屋的內裝，上下兩張各貼一次。
-func drawSheetPageBack(dst *ebiten.Image, sprites Sprites) error {
+// 一間木屋的內裝，上下兩張各貼一次；在野外打開時換成第 4 張整張（RE-150）。
+func drawSheetPageBack(dst *ebiten.Image, sprites Sprites, wild bool) error {
 	b := town.SheetPageBack
-	for _, c := range [2]struct{ index, y int }{{b.TopIndex, b.TopY}, {b.LowIndex, b.LowY}} {
-		pic, err := sprites.Get(b.Archive, c.index)
+	for _, c := range town.SheetPageBackPieces(wild) {
+		pic, err := sprites.Get(b.Archive, c.Index)
 		if err != nil {
 			return err
 		}
-		draw(dst, pic, b.X, c.y)
+		draw(dst, pic, b.X, c.Y)
 	}
 	return nil
 }

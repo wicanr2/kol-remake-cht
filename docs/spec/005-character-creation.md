@@ -7,7 +7,7 @@
 刪除及重用已由 [完整保存整合](../verification/complete-save-integration-20260908.md)
 正常 GUI 驗證。身分、v2 schema、v1 匯入與建角原子回填由
 [SPEC-023](023-complete-save.md) 補充並優先適用；下方早期 schema 待定不再阻止已審查保存。
-圖像／盾牌編輯器仍未涵蓋，不將它們算入已完成建角。
+圖像／盾牌編輯器另立 SPEC-036，不算入已完成建角。
 
 ## 範圍
 

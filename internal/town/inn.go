@@ -111,6 +111,9 @@ type Inn struct {
 		Archive string `json:"archive"`
 		Index   int    `json:"index"`
 	} `json:"portrait"`
+	// Wild 表示資料頁是在野外按數字鍵打開的（RE-150）：物品與隊伍立繪那兩頁的
+	// 背板換成 KOLPICS 第 4 張。
+	Wild bool `json:"wild,omitempty"`
 	// Sheet 非 nil 時整個畫面換成角色資料頁（RE-074）。
 	Sheet *SheetPage `json:"sheet,omitempty"`
 	// SheetLabels 是 KOLDATA 記錄 73h 拆出來的帶座標標籤。

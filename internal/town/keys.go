@@ -131,6 +131,12 @@ func (s *Session) Key(token string) bool {
 			return true
 		}
 	}
+	// 城鎮戶外按 1…6 打開第 n 名的資料頁（`sub_10000:loc_10DA4`，RE-150）。
+	if s.Mode == ModeMap {
+		if n, ok := sheetDigit(token); ok {
+			return s.OpenSheetOutside(n, false)
+		}
+	}
 	if d, ok := walkKeys[token]; ok {
 		s.Walk(d[0], d[1])
 		return true

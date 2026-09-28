@@ -289,8 +289,8 @@ var PartyPageFrame = Rect{14, 2, 305, 156}
 // SheetPageBack 是資料頁那兩頁（物品、隊伍立繪）的背景（`sub_1103F`，RE-127）。
 // 在城裡是 KOLPICS 第 5 張（上半）加第 13 張（下半），兩張各 288 px 寬；
 // 在野外換成第 4 張整張（288×155）。開關 `word_2DF2C` 是目前所在的城鎮編號，
-// 野外迴圈 `sub_29004` 把它設成 0（RE-150）。remake 目前只從建築內開資料頁，
-// 所以走「在城裡」那一條；野外按 1…6 開資料頁另列工作項。
+// 野外迴圈 `sub_29004` 把它設成 0（RE-150）。第 4 張貼在 (2 欄, 3)，與上半那張同一個
+// 原點（`sub_1103F(0x20)`，RE-127 的表）。
 var SheetPageBack = struct {
 	Archive            string
 	TopIndex, LowIndex int
@@ -299,4 +299,17 @@ var SheetPageBack = struct {
 }{
 	Archive: "KOLPICS", TopIndex: 5, LowIndex: 13, OutdoorIndex: 4,
 	X: 16, TopY: 3, LowY: 0x50,
+}
+
+// SheetBackPiece 是背板的一張圖與貼上去的掃描列。
+type SheetBackPiece struct{ Index, Y int }
+
+// SheetPageBackPieces 是背板要貼的幾張（`sub_16986:0x169C1`）：城裡（含城鎮戶外）是上下
+// 兩半，野外是第 4 張整張（RE-150）。
+func SheetPageBackPieces(wild bool) []SheetBackPiece {
+	b := SheetPageBack
+	if wild {
+		return []SheetBackPiece{{b.OutdoorIndex, b.TopY}}
+	}
+	return []SheetBackPiece{{b.TopIndex, b.TopY}, {b.LowIndex, b.LowY}}
 }

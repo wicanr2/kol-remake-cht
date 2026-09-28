@@ -19,7 +19,7 @@ import (
 //
 // 這一頁不對拍，原版沒有中文畫面。
 func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
-	p *town.ItemPage) error {
+	p *town.ItemPage, wild bool) error {
 	l := town.ItemPageLayout
 	s := book.CJKScale
 	interactionBase := itemPageUsesInteractionBase(p)
@@ -32,12 +32,12 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 	drawScaled(dst, bg, 0, 0, s)
 	if !interactionBase {
 		b := town.SheetPageBack
-		for _, c := range [2]struct{ index, y int }{{b.TopIndex, b.TopY}, {b.LowIndex, b.LowY}} {
-			pic, err := sprites.Get(b.Archive, c.index)
+		for _, c := range town.SheetPageBackPieces(wild) {
+			pic, err := sprites.Get(b.Archive, c.Index)
 			if err != nil {
 				return err
 			}
-			drawScaled(dst, pic, b.X*s, c.y*s, s)
+			drawScaled(dst, pic, b.X*s, c.Y*s, s)
 		}
 
 		right := scaleRect(l.RightPane, s)
@@ -133,7 +133,7 @@ func cellInAt(dst *ebiten.Image, f *font.Font, x, y int, text string, c [3]uint8
 
 // drawPartyPageCJK 畫中文模式的隊伍立繪那一頁（RE-126）。這一頁沒有文字，
 // 與英文版是同一份版面乘上倍率。
-func drawPartyPageCJK(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece) error {
+func drawPartyPageCJK(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece, wild bool) error {
 	s := book.CJKScale
 	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
 	if err != nil {
@@ -141,12 +141,12 @@ func drawPartyPageCJK(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piec
 	}
 	drawScaled(dst, bg, 0, 0, s)
 	b := town.SheetPageBack
-	for _, c := range [2]struct{ index, y int }{{b.TopIndex, b.TopY}, {b.LowIndex, b.LowY}} {
-		pic, err := sprites.Get(b.Archive, c.index)
+	for _, c := range town.SheetPageBackPieces(wild) {
+		pic, err := sprites.Get(b.Archive, c.Index)
 		if err != nil {
 			return err
 		}
-		drawScaled(dst, pic, b.X*s, c.y*s, s)
+		drawScaled(dst, pic, b.X*s, c.Y*s, s)
 	}
 	r := scaleRect(town.PartyPageFrame, s)
 	frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetFrame)

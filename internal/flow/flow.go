@@ -140,7 +140,7 @@ func (f *Flow) menu(token string) bool {
 		case MenuHarbor:
 			f.Scene = SceneHarbor
 		default:
-			// EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作。
+			// EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器還沒實作：原版行為見 SPEC-036，是否實作待使用者決定。
 			f.note("角色選項 " + []string{"", "", "", "EDIT PICTURE", "EDIT SHIELD"}[f.MenuCursor])
 			return false
 		}

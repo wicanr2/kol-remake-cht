@@ -138,6 +138,10 @@ func (g *game) flowTargets() []input.Target {
 			return battleTargets(g.quest.state, cjk)
 		}
 		if g.leftTown() {
+			if g.play != nil && g.play.ShowingSheetOutside() {
+				in := g.play.Inside
+				return iconTargets(len(in.Icons), in.Selected, cjk)
+			}
 			return worldTargets(g.worldSession, cjk)
 		}
 		if g.flow.Town == nil {

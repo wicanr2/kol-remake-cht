@@ -1,0 +1,15 @@
+{
+  "name": "sheet-outside",
+  "description": "六人存檔在城鎮戶外開場，按 2 打開第二名的角色資料頁、進物品頁再退回資料頁、U-TURN 回到戶外；走出城門到野外按 1 打開第一名的資料頁，物品頁背板換成 KOLPICS 第 4 張，再一路退回野外（RE-150：`sub_10000:loc_10DA4`、`sub_29004:loc_29652`）。發言者跟著換成被打開的那一名，原版不還原 `word_39A52`。",
+  "load": "workplace/saves/party6.json",
+  "seed": 1,
+  "scene": "play",
+  "script": "2 > RET > RET RET R R U U U U U U U U U RET 1 > RET > RET RET R",
+  "shot_dir": "docs/verification/player-path/sheet-outside",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/sheet-outside-receipt.json",
+  "checkpoints": []
+}

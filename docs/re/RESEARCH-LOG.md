@@ -6207,8 +6207,8 @@ word_34968 = 1                        ; 走「任務地點」那一條（RE-098�
 
 ### 還沒解的
 
-`sub_14CCF` 取的是哪一份錢包（角色自己的還是隊伍共用的）、以及
-`sub_2B454(5)`／`sub_2B454(6)` 畫的是什麼。
+`sub_14CCF` 取的是哪一份錢包（角色自己的還是隊伍共用的）。`sub_2B454` 的兩張肖像見
+RE-156。
 
 `word_37CF6` 這一場**不會被讀到**：站位走的是 RE-098 的「訓練戰與競技場那一條」，
 上場那一名與那隻敵人都用固定格，陣型表只有隨機遭遇那一條會讀。同一條分支也決定了
@@ -10333,7 +10333,11 @@ MOVE 叫出 WALK、RUN、SPRINT；「凱爾登族，或持有魔法物品而能�
 找到就保存 `word_2DF3C` 與 `byte_30C7E`（野外另存 `byte_30C7F`）、呼叫 `sub_15ABF`、
 回來再還原。
 
-remake 的資料頁只掛在建築內的 MIRROR，城鎮戶外與野外按數字鍵沒有反應；另列工作項。
+remake：`Session.OpenSheetOutside`（城鎮戶外的 `Key` 在 `ModeMap` 收 `1`…`6`，野外由
+`playToken` 在主迴圈狀態下轉交），暫借 `Inside` 掛資料頁，U-TURN 還原打開前的模式、
+畫面與圖示列白框；發言者換成第 n 名、不還原。野外那一份 `Inn.Wild` 讓物品與隊伍立繪
+兩頁的背板改畫 KOLPICS 第 4 張（`sub_1103F(0x20)`，RE-127 的表）。收據
+`docs/verification/player-path/sheet-outside`。
 
 ## RE-151：野外時刻的成本表是用步伐的 Y 位移查的
 
@@ -10575,3 +10579,46 @@ Leather Hood、Skin、Magic Ingot、Black Ingot 與法術記錄（法術不在�
   （護甲 `breakArmour`、手上那件 `breakHandItem`）並把指令碼清成 0。
 - 單元測試 `overcap_test.go`；`TestArmourBothAttackPaths` 的武器改帶種類 6，維持原本
   「上限 8 被護甲擋完」的情境。
+
+## RE-156：競技場與賭場的肖像
+
+輸入同 RE-141。讀 `sub_2B454` 與它的兩個呼叫點。證據等級 `已證實`（靜態控制流與資料）。
+
+```
+sub_2B454(n)：矩形 = 欄 1…0x0C、掃描列 0x40…0x80   ; word_3499E／349A0／34A06／34A0E
+              sprintf(0x2D50, [DS:0x18A8] "comb%s", [DS:0x670 + 5 × word_2DF64])
+              sub_10F9C(n, 0x2D50)                  ; 載入並貼上第 n 張
+```
+
+`DS:0x670` 起每 5 byte 一個模式後綴，EGA（`word_2DF64 = 0`）是 `pics`，所以檔名是
+COMBPICS。字串由 unpacked EXE 以骰面表（`DS:0x00D4`，檔案 `0x203A4`）定出 DS 基底後讀出。
+兩個呼叫點：
+
+| 位址 | 圖號 | 前後文 |
+|---|---:|---|
+| `0x2ABD2` | 6 | 進競技場，畫完外框之後；接著 `sub_1B7E9(8, 0x40, 0x5F, 0x7F)` 投影、印記錄 0xEB |
+| `0x2ADCB` | 5 | 換到賭場：記錄 0xEC、`sub_1452D` 清文字區（不等鍵）、記錄 0xF0 之後 |
+
+RE-014 已確認這兩張各為 88×64，矩形與建築肖像 `town.Portrait` (8, 64) 同一格。
+remake：`EnterArena` 設 COMBPICS 第 6 張，`openBooth` 印完 0xF0 後換第 5 張；兩種介面
+沿用建築肖像的繪製與投影。單元測試 `TestArenaChoose` 檢查兩個時點。
+
+## RE-157：KOLBOOK 的圖像與盾牌編輯器
+
+輸入 `KOLBOOK.EXE`（SHA-256 `2cada028…e5832`），IDA Pro 9.4 產生整份反組譯
+（`tools/ida_probe_kolbook_asm_dump.py`，只留本機）。完整行為契約見 SPEC-036，
+這裡只記結論與推翻紀錄。證據等級 `已證實`（靜態控制流），另註明者除外。
+
+- 主體 `sub_1293E(n)`：`n = 0` 編 CHARPICS、`n = 1` 編 SHLDPICS；一筆 760 bytes，40 × 38 個
+  4 位元像素。放大圖每格 4 × 4 像素，色盤 4 × 4，工具列 8 格。
+- 兩種模式（`word_1A36C`）：工具列與色盤、畫布。滑鼠命中三個區域之一或按 ESC 就翻到
+  另一種模式。
+- 工具 0、2 離開，1 放棄修改重載，3 填滿，4 右移、5 上移（皆繞回），6 水平鏡射、7 垂直鏡射。
+- 有修改才問 BOOKDATA 0x3A「SAVE CHANGES」，答 y 寫回整個 0x2F80 bytes 的檔案；沒修改或答 n
+  不寫檔。
+
+### 推翻紀錄
+
+RE-052 記「原版是滑鼠驅動的，現有的鍵盤 oracle 走不完」以及「ESC 沒有作用」。編輯器實際上
+鍵盤與滑鼠都能操作全部功能，ESC 在編輯器裡是切換模式；RE-052 那三次 ESC 畫面沒變的原因
+仍 `未知`（見 SPEC-036 第 4 節）。所以鍵盤 oracle 走得完這個編輯器，不需要送滑鼠事件。

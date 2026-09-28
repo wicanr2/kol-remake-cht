@@ -284,6 +284,10 @@ func (s *Session) OpenSheet() {
 
 // closeSheet 是資料頁上選 U-TURN：回到建築內的一般畫面。
 func (s *Session) closeSheet() {
+	if s.sheetHost != nil {
+		s.closeSheetOutside()
+		return
+	}
 	if s.Inside == nil || s.door == nil {
 		return
 	}

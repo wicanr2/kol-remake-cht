@@ -1,0 +1,168 @@
+{
+  "schema": "kol-player-path-v1",
+  "name": "sheet-outside",
+  "description": "六人存檔在城鎮戶外開場，按 2 打開第二名的角色資料頁、進物品頁再退回資料頁、U-TURN 回到戶外；走出城門到野外按 1 打開第一名的資料頁，物品頁背板換成 KOLPICS 第 4 張，再一路退回野外（RE-150：`sub_10000:loc_10DA4`、`sub_29004:loc_29652`）。發言者跟著換成被打開的那一名，原版不還原 `word_39A52`。",
+  "script": "2 > RET > RET RET R R U U U U U U U U U RET 1 > RET > RET RET R",
+  "step_count": 26,
+  "checkpoints": [],
+  "save": null,
+  "failures": [],
+  "steps": [
+    {
+      "step": 0,
+      "token": "（起始）",
+      "file": "docs/verification/player-path/sheet-outside/step-000.png",
+      "sha256": "0815d922b70f975850aa63f0454bf678884746c983ec1dc7aa79dc90d20e8b30"
+    },
+    {
+      "step": 1,
+      "token": "2",
+      "file": "docs/verification/player-path/sheet-outside/step-001.png",
+      "sha256": "c3bf5a012eca2a52c9759aab2e0e3fccebd40530881caa40c55f576d8e4a1a09"
+    },
+    {
+      "step": 2,
+      "token": ">",
+      "file": "docs/verification/player-path/sheet-outside/step-002.png",
+      "sha256": "06113d86fdb5c87579bab9a4ece763e691cb5c0f81d6600c13a599e19fedea55"
+    },
+    {
+      "step": 3,
+      "token": "RET",
+      "file": "docs/verification/player-path/sheet-outside/step-003.png",
+      "sha256": "d2b0b5e83b9be7e05f641c0ac04eed24303d65f4fdd5afa2a148708069df127c"
+    },
+    {
+      "step": 4,
+      "token": ">",
+      "file": "docs/verification/player-path/sheet-outside/step-004.png",
+      "sha256": "51bf1d1fd0d02bec0029c9cad8198518d21865ed22fc2e90dac2a39cda9180b2"
+    },
+    {
+      "step": 5,
+      "token": "RET",
+      "file": "docs/verification/player-path/sheet-outside/step-005.png",
+      "sha256": "c3bf5a012eca2a52c9759aab2e0e3fccebd40530881caa40c55f576d8e4a1a09"
+    },
+    {
+      "step": 6,
+      "token": "RET",
+      "file": "docs/verification/player-path/sheet-outside/step-006.png",
+      "sha256": "0815d922b70f975850aa63f0454bf678884746c983ec1dc7aa79dc90d20e8b30"
+    },
+    {
+      "step": 7,
+      "token": "R",
+      "file": "docs/verification/player-path/sheet-outside/step-007.png",
+      "sha256": "1481bb5d5b897afc3e3a9c1e0eb844be681df40174c78159bf646bec7ce77f2a"
+    },
+    {
+      "step": 8,
+      "token": "R",
+      "file": "docs/verification/player-path/sheet-outside/step-008.png",
+      "sha256": "5a803021dfe77b41b23cb7fa614bd68eb645b7db649a4684afc87b85848e946c"
+    },
+    {
+      "step": 9,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-009.png",
+      "sha256": "725290bf34b823e2134cf2a6cfde2dc0890efc90fcb303a869804826efdd57ac"
+    },
+    {
+      "step": 10,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-010.png",
+      "sha256": "83bd95b6e4762d5e2e3ff66a1cff357de04407b12168e7c2c344d1274bc8b0e7"
+    },
+    {
+      "step": 11,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-011.png",
+      "sha256": "7f0a01fb9bf43afe468eb9deb9f769d179d5da38058068007e25d5c658495467"
+    },
+    {
+      "step": 12,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-012.png",
+      "sha256": "57253564aa9a196cf141d33b99ecc93e7147603537f7d6ea01cb139f5809cc80"
+    },
+    {
+      "step": 13,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-013.png",
+      "sha256": "277c36616a6a81754b9ff09a6ca6d273b1ee5d127ac96c0b0806048996640b1e"
+    },
+    {
+      "step": 14,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-014.png",
+      "sha256": "c44ae479181ac7f7899138128f96c587e514674c5bd5d80204d022b0db7992f8"
+    },
+    {
+      "step": 15,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-015.png",
+      "sha256": "4c443cc9d0fced90f9728715d70c463eea68af9631517e25ec1ed2872450f242"
+    },
+    {
+      "step": 16,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-016.png",
+      "sha256": "78e7f27ed150116b73f9a7be8c7ddfeb06e9510421dde02fb189efc3c1fd6ac4"
+    },
+    {
+      "step": 17,
+      "token": "U",
+      "file": "docs/verification/player-path/sheet-outside/step-017.png",
+      "sha256": "795579b600f711394125ec62ef793a9699d18dc20deb8f77b8ddd84766cce62f"
+    },
+    {
+      "step": 18,
+      "token": "RET",
+      "file": "docs/verification/player-path/sheet-outside/step-018.png",
+      "sha256": "ba4f90002dfcd7f1cd87f0e85cd5c24c9ae8368cc38ec737a7450a72c3d514af"
+    },
+    {
+      "step": 19,
+      "token": "1",
+      "file": "docs/verification/player-path/sheet-outside/step-019.png",
+      "sha256": "09c794c72e369be6a64f4c2b75730867f1e85533af6e20feb67f54ac443b1f61"
+    },
+    {
+      "step": 20,
+      "token": ">",
+      "file": "docs/verification/player-path/sheet-outside/step-020.png",
+      "sha256": "91552eec8f991e0be6f70493ed62fcd44f031c31ec7ed111200d8e0f7c83e5cd"
+    },
+    {
+      "step": 21,
+      "token": "RET",
+      "file": "docs/verification/player-path/sheet-outside/step-021.png",
+      "sha256": "1f31c9946a514b9d17ccdaa51db9e97ffb2ed947004a28c3f330510119d0cca4"
+    },
+    {
+      "step": 22,
+      "token": ">",
+      "file": "docs/verification/player-path/sheet-outside/step-022.png",
+      "sha256": "ad902ef14d4c5740e794af8b83f1389dbb16cc2c2d6af0bd0b928be85605425e"
+    },
+    {
+      "step": 23,
+      "token": "RET",
+      "file": "docs/verification/player-path/sheet-outside/step-023.png",
+      "sha256": "09c794c72e369be6a64f4c2b75730867f1e85533af6e20feb67f54ac443b1f61"
+    },
+    {
+      "step": 24,
+      "token": "RET",
+      "file": "docs/verification/player-path/sheet-outside/step-024.png",
+      "sha256": "ba4f90002dfcd7f1cd87f0e85cd5c24c9ae8368cc38ec737a7450a72c3d514af"
+    },
+    {
+      "step": 25,
+      "token": "R",
+      "file": "docs/verification/player-path/sheet-outside/step-025.png",
+      "sha256": "290a7bcce4cf2bb4eb8249c8a2b0fff6a449d1419e9a87e909a714d552c3419a"
+    }
+  ]
+}

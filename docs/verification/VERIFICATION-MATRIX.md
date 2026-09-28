@@ -11,7 +11,7 @@
 | 書本畫面與翻頁 | `internal/book`、`internal/flow` | `KOLBOOK.EXE` `sub_114F5` 的表驅動捲動（RE-048） | 書本 3 ＋ 翻頁 54 對 | `full` 路徑前段 | 已對拍 |
 | 角色建立 UI | 22 個情境、32 輪，檢查點畫面 SHA-256 交叉比對 | `KOL.EXE` 正常入口；DOSBox-X 2026.06.02 固定設定 | 建立 9 ＋ 圖像層 92 對 | 目錄頁 → 建立 → 接受屬性 → 接受圖像 → 保存 | SPEC-005 READY；16 槽全滿、重名、字元集合未涵蓋 |
 | 角色寫入與刪除 | `DeleteFlow`／`DeleteSlot`；writer 逐 byte | 改動的 58 個 byte 兩個職業各 58/58 相同；刪除只寫一個 byte | 刪除流程 13 對 | 角色選項 → 刪除 → 確認 | SPEC-005 涵蓋；ESC、大寫 Y／N、空名冊未涵蓋 |
-| 書本其他功能 | 尚無 | 四個功能共用同一張角色選擇清單；HARBOR MASTER 為三行訊息頁 | HARBOR MASTER 1 對 | 角色選項 → Harbor Master | `EDIT PICTURE`／`EDIT SHIELD` **未實作**：原版滑鼠驅動，鍵盤 oracle 走不完 |
+| 書本其他功能 | 尚無 | 四個功能共用同一張角色選擇清單；HARBOR MASTER 為三行訊息頁 | HARBOR MASTER 1 對 | 角色選項 → Harbor Master | `EDIT PICTURE`／`EDIT SHIELD` **未實作**：原版行為見 SPEC-036，是否實作待決定 |
 | 城鎮移動、門口與邊界 | `Grid`／`Outdoor`／`Markers`／`Session` | 94 張移動 oracle 中 22 張畫格的鏡頭全部唯一解 | 戶外 22 ＋ 城門提示 4 對 | `town` 14 步、`town-edge` 14 步 | 已對拍 |
 | 建築內部與對話 | `EnterBuilding`、`Topics`、`mouthState` | 進門敘述八行逐格讀回與 5-bit 解碼逐字相同；409 個話題槽交叉檢查零例外；MOUTH 讀入 23 個字元、轉小寫、字首比對（RE-067） | 進門 1 ＋ 對話 3 ＋ 打字那一格 2 對 | `town-talk` 10 步、`quest-take` 34 步 | 已對拍，**打字那一格的版面也對拍過**（RE-114：第 13 欄起、一格 8 px、筆尖底下 8×1 的橫槓每 0.27 秒翻一次，圖示列不收；收據 `town-mouth-run1`）；訊息 10 起的後續對話觸發條件仍未解 |
 | 招募同伴 | `Inn` 的清單捲動與名牌 | 候選人由角色檔所在地欄比對建築名稱（RE-072） | 旅店 8 ＋ 招募 9 對 | `town-recruit` 15 步 | 已對拍 |

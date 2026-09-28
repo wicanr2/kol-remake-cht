@@ -570,7 +570,17 @@ func (g *game) playToken(token string) error {
 		g.startArenaFight()
 		return nil
 	}
+	// 野外按 1…6 打開的資料頁：開著的時候按鍵全歸城鎮那一層（RE-150）。
+	if g.play != nil && g.play.ShowingSheetOutside() {
+		return applyPlayToken(g.play, token)
+	}
 	if g.play != nil && g.play.LeftTown && g.worldSession != nil {
+		// 野外主迴圈讀到 `1`…`6` 就開第 n 名的資料頁（`sub_29004:loc_29652`）。
+		// 換日那一張與問句各自等鍵，不在主迴圈裡。
+		if n, ok := town.SheetDigit(token); ok && !g.worldSession.Camping && g.worldSession.Prompt == nil {
+			g.play.OpenSheetOutside(n, true)
+			return nil
+		}
 		return applyWorldToken(g.worldSession, token)
 	}
 	return applyPlayToken(g.play, token)
@@ -1166,6 +1176,28 @@ func (g *game) snapshot() map[string]any {
 			}
 			town["spell_edit"] = edit
 		}
+		// 城鎮戶外或野外按 1…6 打開的資料頁（RE-150）：停在哪一頁、是誰、是不是野外。
+		// 只在開著時記，建築內 MIRROR 那一份的既有軌跡不變。
+		if in := g.play.Inside; in != nil && g.play.ShowingSheetOutside() {
+			page := "sheet"
+			switch {
+			case in.ItemPage != nil:
+				page = "items"
+			case len(in.PartyPage) > 0:
+				page = "party"
+			case in.SpellList != nil:
+				page = "spells"
+			case in.QuestList != nil:
+				page = "quests"
+			}
+			who := ""
+			for _, m := range in.Party {
+				if m.Speaker {
+					who = m.Name
+				}
+			}
+			town["outside_sheet"] = map[string]any{"page": page, "member": who, "wild": in.Wild}
+		}
 		if d := g.play.Door(); d != nil {
 			door := map[string]any{"index": d.Index, "name": d.Name}
 			if q := d.Quest(); q != nil {
@@ -1452,6 +1484,13 @@ func (g *game) render() error {
 		}
 		if g.quest != nil && g.quest.state != nil {
 			return g.renderBattle()
+		}
+		// 野外按 1…6 打開的資料頁整頁重畫，與建築內那一份同一支（RE-150）。
+		if g.play.ShowingSheetOutside() {
+			if g.strings != nil {
+				return ui.InnCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings, g.play.Inside)
+			}
+			return ui.Inn(g.canvas.Image(), g.sprites, g.small, g.large, g.play.Inside)
 		}
 		if g.play.LeftTown && g.worldState != nil {
 			if g.strings != nil {
@@ -3641,7 +3680,7 @@ func main() {
 					battle.QuestCreaturesRecord))
 			}
 			// 競技場（RE-108）：走到世界地圖 (55,13) 選 DOOR 就進去。
-			// 畫面借建築那一套，但沒有肖像——`sub_2B454` 畫的是什麼還沒解。
+			// 畫面借建築那一套，肖像在 `EnterArena` 換成 COMBPICS 第 6 張（RE-014）。
 			if atlas, err := loadBattlePNG(*battleTiles); err == nil {
 				arenaImage, err := loadBattlePNG(fmt.Sprintf(*battleMaps, 24))
 				if err != nil {

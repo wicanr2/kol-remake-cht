@@ -61,17 +61,17 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 		// 物品那一頁把整塊換成十七列的清單（RE-127）。
 		// 隊伍立繪那一頁蓋掉整塊（RE-126）。
 		if len(in.PartyPage) > 0 {
-			if err := drawPartyPage(dst, sprites, in.PartyPage); err != nil {
+			if err := drawPartyPage(dst, sprites, in.PartyPage, in.Wild); err != nil {
 				return err
 			}
 		}
 		if in.ItemPage != nil {
-			if err := drawItemPage(dst, sprites, small, large, in.ItemPage, in.Party); err != nil {
+			if err := drawItemPage(dst, sprites, small, large, in.ItemPage, in.Party, in.Wild); err != nil {
 				return err
 			}
 		}
 	} else {
-		// 競技場沒有肖像可畫（`sub_2B454` 畫的是什麼還沒解），Archive 空著就跳過。
+		// Archive 空著就跳過（測試用的空 `Inn`）。競技場的肖像是 COMBPICS（RE-014）。
 		if in.Portrait.Archive != "" {
 			pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
 			if err != nil {
@@ -269,11 +269,11 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		}
 		switch {
 		case in.ItemPage != nil:
-			if err := drawItemPageCJK(dst, sprites, f, t, in.ItemPage); err != nil {
+			if err := drawItemPageCJK(dst, sprites, f, t, in.ItemPage, in.Wild); err != nil {
 				return err
 			}
 		case len(in.PartyPage) > 0:
-			if err := drawPartyPageCJK(dst, sprites, in.PartyPage); err != nil {
+			if err := drawPartyPageCJK(dst, sprites, in.PartyPage, in.Wild); err != nil {
 				return err
 			}
 		case in.QuestList != nil || in.SpellList != nil:
@@ -295,7 +295,7 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 
 	// 資料頁只蓋建築右側；頂端隊員格在兩種語言模式都保持可見。
 
-	// 競技場尚無已證實的店主肖像，與英文介面一致略過空素材。
+	// Archive 空著就跳過，與英文介面一致。
 	if in.Portrait.Archive != "" {
 		pic, err := sprites.Get(in.Portrait.Archive, in.Portrait.Index)
 		if err != nil {

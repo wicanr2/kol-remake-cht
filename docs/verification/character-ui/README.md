@@ -96,8 +96,8 @@ GitHub Release 或公開 `dist-all/.../release/`。畫格編號是擷取順序�
   `EDIT SHIELD`、`HARBOR MASTER` 進入後的第一張畫面是同一個 PNG（四份收據的 SHA-256
   完全相同）；由清單 ESC 回到選單（反白重置），再 ESC 回到目錄頁。
 - **HARBOR MASTER 在只安裝一個 region 時是一張訊息頁**，按鍵回到角色選項。
-  `EDIT PICTURE` 與 `EDIT SHIELD` 是同一個滑鼠驅動的點陣圖編輯器，ESC 沒有作用，
-  現有的鍵盤 oracle 走不完（RE-052）。
+  `EDIT PICTURE` 與 `EDIT SHIELD` 是同一個點陣圖編輯器，鍵盤與滑鼠都能操作，ESC 切換
+  模式（SPEC-036，RE-157）。
 - **DELETE CHARACTER 用的就是角色清單頁。** 版面與 `LIST CHARACTERS` 完全相同，
   差別只有顏色語意：反白那一列黑字、其餘青字，左右兩欄同時反白；反白條起點是第 0 列，
   不繞圈。Return 叫出 (94,58) 的 132×24 確認視窗（黑框白底、右下 4 px 投影），

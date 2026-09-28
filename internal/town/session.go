@@ -135,6 +135,8 @@ type Session struct {
 	leaving bool
 	topic   *BuildingTopics
 	door    *Door
+	// sheetHost 非 nil 表示資料頁是在城鎮戶外或野外按數字鍵打開的（RE-150）。
+	sheetHost *sheetHost
 
 	// OnLeaveTown 在玩家於城門選 DOOR 時被呼叫一次，參數是隊伍在世界地圖上的座標。
 	// 上層用它換到野外畫面；沒有掛就只是把事情記下來。

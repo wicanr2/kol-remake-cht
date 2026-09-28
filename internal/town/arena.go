@@ -5,6 +5,15 @@ package town
 //
 // 這裡只做「誰上場」到「開打」與打完的升階；下注那一段另外一塊。
 
+// 競技場與賭場的肖像（`sub_2B454`，RE-014／RE-108）：`comb%s` 加模式後綴 ＝ COMBPICS，
+// 貼在欄 [1, 12)、掃描列 [64, 128)，與建築肖像同一格。進競技場（`0x2ABD2`）畫第 6 張，
+// 換到賭場、印完記錄 0xF0 之後（`0x2ADCB`）畫第 5 張。
+const (
+	ArenaPortraitArchive = "COMBPICS"
+	ArenaPortraitTester  = 6
+	ArenaPortraitBetter  = 5
+)
+
 // 競技場用到的 KOLDATA 記錄。
 const (
 	// ArenaTitleRecord 是 `The Arena@The Tester`。
@@ -130,6 +139,7 @@ func (s *Session) EnterArena(inside *Inn) bool {
 	s.Inside = inside
 	s.Mode = ModeInside
 	s.arena = &arenaState{chosen: -1}
+	s.Inside.Portrait.Archive, s.Inside.Portrait.Index = ArenaPortraitArchive, ArenaPortraitTester
 	s.Inside.Title = s.uiLines(ArenaTitleRecord)
 	cands := ArenaCandidates(s.Party)
 	if len(cands) == 0 {
@@ -250,6 +260,7 @@ func (s *Session) openBooth() {
 	s.arena.better = -1
 	s.Inside.Title = s.uiLines(ArenaBoothRecord)
 	s.say(nonEmpty(s.uiLines(ArenaBetTunnelRecord)), nil)
+	s.Inside.Portrait.Index = ArenaPortraitBetter
 }
 
 // askBet 問「要不要下注」。單人隊伍走不到這裡，記錄仍照原版分兩筆。

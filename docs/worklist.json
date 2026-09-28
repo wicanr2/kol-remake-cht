@@ -34,16 +34,15 @@
       "id": "g03-arena-vertical-chain",
       "layer": "verification",
       "title": "G03：競技場正常取得資格與完整垂直鏈",
-      "body": "固定地圖已依 SPEC-025 接線，4096 格 dosgolem 解碼比較與地圖隔離回歸通過；繁中空肖像繪圖錯誤已修，受控資格存檔可經正式按鍵選人、不下注及進場（docs/verification/arena-dialog-fix-20260908.md）。剩正常取得資格與完整垂直鏈；原版特殊肖像仍未知。make_arena_save.py 只產生受控輸入，不能代替正常取得資格。",
+      "body": "固定地圖已依 SPEC-025 接線，4096 格 dosgolem 解碼比較與地圖隔離回歸通過；競技場與賭場肖像已接上 COMBPICS 第 6、5 張（RE-156）。受控資格存檔可經正式按鍵選人、下注、進場並結算（`arena` 路徑）。剩正常取得資格：`arena` 仍讀 make_arena_save.py 產生的 `arena-ready.json`，不能代替玩家自然升到夠格。",
       "acceptance": "玩家從正常路徑取得資格、下注、打完單挑並結算，全程不靠受控存檔。",
       "verify": {
         "kind": "present",
         "paths": [
-          "cmd/kol/main.go",
-          "internal/ui/town.go"
+          "docs/verification/player-path/arena.json"
         ],
-        "pattern": "sub_2B454",
-        "note": "競技場肖像的自承在兩處（主迴圈與 UI）；`sub_2B454` 畫的是什麼解出來時會一起消失。正常取得資格那一段沒有可綁的產品碼，靠這一條一起追。"
+        "pattern": "arena-ready",
+        "note": "競技場路徑仍讀受控資格存檔；換成自然取得資格的存檔鏈時這個字樣會消失。"
       },
       "issue": 2
     },
@@ -51,17 +50,20 @@
       "id": "g05-picture-shield-editor-spec",
       "layer": "gap",
       "title": "G05：圖像／盾牌編輯另立規格",
-      "body": "EDIT PICTURE／EDIT SHIELD 未列入 SPEC-005 已完成的建角範圍，要另立規格。原版是滑鼠驅動的點陣圖編輯器、ESC 無作用，現有鍵盤 oracle 走不完。",
+      "body": "SPEC-036 立起並經證據審查升 READY（RE-157）：兩種模式、八個工具、有修改才問存檔並寫回整檔；鍵盤與滑鼠都能操作全部功能，ESC 是切換模式。是否實作、自訂圖像的存檔格式與介面列為待使用者決定，本項不授權實作。",
       "acceptance": "規格立起來並經證據審查升 READY。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/flow/flow.go"
+          "docs/spec/036-picture-shield-editor.md",
+          "docs/re/RESEARCH-LOG.md",
+          "docs/spec/README.md"
         ],
-        "pattern": "EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作",
-        "note": "flow.go 的自承註解。與 picture-shield-bitmap-editor 綁同一句——規格與實作是同一條路上的兩段。"
+        "pattern": "SPEC-036",
+        "note": "已完成，當回歸訊號：規格、研究日誌與索引都有 SPEC-036。"
       },
-      "issue": 3
+      "issue": 3,
+      "status": "done"
     },
     {
       "id": "g06-audio-listening-gate",
@@ -460,16 +462,16 @@
       "id": "picture-shield-bitmap-editor",
       "layer": "gap",
       "title": "EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器",
-      "body": "原版是滑鼠驅動、ESC 無作用，現有鍵盤 oracle 走不完；要往下做得先讓 oracle 能送滑鼠事件。這是 g05-picture-shield-editor-spec 的實作段。",
-      "acceptance": "oracle 能送滑鼠事件，編輯器接上並對拍。",
-      "blocked_by": "oracle 還不能送滑鼠事件",
+      "body": "SPEC-036 已 READY（RE-157）：鍵盤與滑鼠都能操作全部功能，鍵盤 oracle 走得完。實作前要先由使用者決定是否實作、自訂圖像存進存檔的格式與介面。",
+      "acceptance": "使用者決定要做之後，依 SPEC-036 接上編輯器與自訂圖像的保存，並與原版同狀態對拍。",
+      "blocked_by": "待使用者決定（SPEC-036 待共同決定四項）",
       "verify": {
         "kind": "present",
         "paths": [
           "internal/flow/flow.go"
         ],
-        "pattern": "EDIT PICTURE／EDIT SHIELD 是滑鼠驅動的點陣圖編輯器，還沒實作",
-        "note": "與 g05 綁同一句自承註解。"
+        "pattern": "點陣圖編輯器還沒實作",
+        "note": "與 flow.go 的自承註解綁在一起；實作之後這句會消失。"
       },
       "issue": 31
     },
@@ -1649,13 +1651,20 @@
       "id": "sheet-digit-outside",
       "layer": "gap",
       "title": "城鎮戶外與野外按 1…6 打開角色資料頁",
-      "body": "原版在城鎮戶外（`sub_10000:loc_10DA4`）與野外（`sub_29004:loc_29652`）按 `1`…`6` 開第 n 名在籍角色的資料頁，含物品頁與隊伍立繪頁；野外那兩頁背景換成 KOLPICS 第 4 張（RE-150）。remake 只在建築內用 MIRROR 開得到。",
+      "body": "原版在城鎮戶外（`sub_10000:loc_10DA4`）與野外（`sub_29004:loc_29652`）按 `1`…`6` 開第 n 名的資料頁（RE-150）。remake `OpenSheetOutside` 已接上：子頁照常可用，U-TURN 回原畫面與白框，發言者換成第 n 名（原版不還原 `word_39A52`），野外物品與隊伍立繪頁背板換 KOLPICS 第 4 張。玩家路徑收據 `sheet-outside`（26 步）。原版在這兩處的同狀態畫格未取。",
       "acceptance": "城鎮戶外與野外按數字鍵開得出資料頁與其子頁，野外背景正確，離開後回到原畫面與原狀態；正常玩家路徑收據。",
       "verify": {
-        "kind": "manual",
-        "note": "要實作並做玩家路徑收據。"
+        "kind": "required_in_all",
+        "paths": [
+          "internal/town/sheet_outside.go",
+          "docs/re/RESEARCH-LOG.md",
+          "docs/verification/player-path/sheet-outside.json"
+        ],
+        "pattern": "RE-150",
+        "note": "已完成，當回歸訊號：程式、研究日誌與收據 plan 都引用 RE-150。"
       },
-      "issue": 101
+      "issue": 101,
+      "status": "done"
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

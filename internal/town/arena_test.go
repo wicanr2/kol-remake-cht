@@ -79,9 +79,15 @@ func TestArenaChoose(t *testing.T) {
 	if s.Inside.List != nil {
 		t.Fatal("選到夠格的就該換成確認那一問")
 	}
+	if p := s.Inside.Portrait; p.Archive != ArenaPortraitArchive || p.Index != ArenaPortraitTester {
+		t.Fatalf("競技場的肖像應該是 COMBPICS 第 6 張，得到 %s[%d]", p.Archive, p.Index)
+	}
 	// 多人隊伍答應之後先換到賭場，答「不下注」才開打。
 	if s.ArenaAnswer(true) != nil {
 		t.Fatal("多人隊伍要先進賭場")
+	}
+	if p := s.Inside.Portrait; p.Archive != ArenaPortraitArchive || p.Index != ArenaPortraitBetter {
+		t.Fatalf("賭場的肖像應該換成 COMBPICS 第 5 張（`0x2ADCB`），得到 %s[%d]", p.Archive, p.Index)
 	}
 	s.Continue()
 	fight := s.BetAnswer(false)

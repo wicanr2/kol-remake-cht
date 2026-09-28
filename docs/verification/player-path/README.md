@@ -283,6 +283,15 @@ CYCLOPS，六人隊打不贏，所以壓成一隻 1 級。收據裡列了換過�
 檢查點：第 6 步與 `remake-parity/shots/town-mirror/sheet.png` 逐 byte 相同——
 那一張整頁只和原版差原版自己畫的滑鼠游標。
 
+## `sheet-outside`：城鎮戶外與野外按數字鍵開資料頁
+
+`2 > RET > RET RET R R U U U U U U U U U RET 1 > RET > RET RET R`，26 步，讀 `party6.json`
+在城鎮戶外開場。按 `2` 打開第二名的資料頁，進物品頁再退回、U-TURN 回到戶外；走出城門
+在野外按 `1` 打開第一名的資料頁，物品頁背板換成 KOLPICS 第 4 張，再退回野外繼續走。
+軌跡在資料頁開著時多記 `outside_sheet`（哪一頁、是誰、是不是野外）；發言者跟著換成
+打開的那一名（RE-150）。沒有檢查點：原版在這兩處打開資料頁的同狀態畫格還沒取，
+資料頁本身與物品頁的畫面已由 `town-mirror` 與 RE-127 對過。
+
 ## `town-load`：從存檔開場
 
 `L R RET SPACE > RET`，7 步，用 `-load` 讀 `town-rest` 寫出來的那一份存檔。
