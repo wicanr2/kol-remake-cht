@@ -6778,3 +6778,8 @@ frame-270 推翻了 remake 的版面：
   八份戰鬥收據通過；玩家路徑 23 條一致，full-chain-ending 最終任務戰鬥第 16 回合兩句
   執行順序對調（CYCLOPS 的 Skin 磨損後出手鍵值改變，推論）後重生，仍到結局。
   容器：只有自己的 `--rm` 一次性容器，已結束；無 root-owned 檔案。
+- #18 結案：`TestBattleSettlementCompleteSaveReload` 補上 RE-155 的手上那件磨光（`WearOverCap`）
+  與物品頁狀況檔次，五種結局（勝利、撤退、敗北、競技場勝敗）回寫後 v2 存檔重載全等。原版兩個
+  磨損呼叫點不印訊息，顯示只有物品頁狀況名稱與空格。競技場地形窄 RE 早由 SPEC-025
+  `TestArenaMapOriginal` 完成。限制：存讀驗證從結算狀態起跑，正常路徑的破損存讀歸整體交付閘門。
+  SPEC-017 的保存段改為現況。容器：只有 `--rm` 一次性容器；無 root-owned 檔案。

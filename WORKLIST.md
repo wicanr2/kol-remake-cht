@@ -216,11 +216,6 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 規格與文件
 
-- **armour-durability-ai-review**（#18） — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE
-  耐久子常式九組邊界已重驗；護甲分支映射、骰數與耐久呼叫由 IDA 確認；加值 256 種輸入通過；SPEC-017 升 READY 並接近戰／射擊；84 組記錄、部位與骰值比較通過；破損與 Condition／Record／Carried 已接勝利與撤退回寫。穿戴欄那四個磨損呼叫由 RE-154 查清（過得了過濾的五件都沒有 0x20，不改耐久），同批接上穿戴魔法物品、第二輪移動與 Shade Ring。傷害超過上限那一條由 RE-155 接上（上限加倍有原版對拍，超出量扣攻擊者那一格耐久）。破損顯示、完整保存與競技場地形窄 RE 仍待驗收。
-  完成條件：四個磨損呼叫各自有證據（RE-154），武器超上限接上，破損顯示與保存驗過，競技場地形的窄 RE 完成。
-  核實：要人判——磨損呼叫六處都已查清（RE-154 穿戴欄四處、RE-155 超上限兩處）；剩破損顯示、保存與競技場地形。
-
 - **package-boundaries-and-injection**（#29） — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案
   internal/ 已分成 21 個套件，四處已有 Rand interface（title、world、charcreate、battle），存檔 schema 已到 v2。缺的是把邊界與固定 timestep 寫成文件契約——現在只在程式裡成立，沒有一份說得出「哪一層不准依賴哪一層」。
   完成條件：有一份文件說明分層契約與固定 timestep，並且違反時測得出來。
@@ -273,6 +268,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **d01-spec-stale-clauses** — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款：已完成
 - **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊：2026-09-26 v.0.2.5 AppImage 真實按鍵：建兩名、各自入隊、住宿離隊後重載各自再選進旅店、刪除不搬槽、空槽重用與滿槽拒絕皆通過；兩種預設存檔位置另通過。收據 docs/verification/identity-save-chain/receipt.json。
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
+- **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE：已完成
 - **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。

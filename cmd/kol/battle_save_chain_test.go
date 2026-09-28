@@ -43,6 +43,10 @@ func TestBattleSettlementCompleteSaveReload(t *testing.T) {
 					m.Worn[j] = &town.Good{Name: "GEAR", Record: hex.EncodeToString(raw), Condition: 200, Encumbrance: 4}
 				}
 				m.InHand = &town.Good{Name: "SWORD", Class: 0x21, Record: "01000000000000000000002121000000"}
+				if i == 1 {
+					// +0x0F 帶 0x20、耐久 200：超上限 7 就扣光（RE-155）。
+					m.InHand = &town.Good{Name: "INGOT", Class: 0x21, Condition: 200, Record: "010000000000000000000ac821000020"}
+				}
 				m.SyncCarried()
 				r.Slots[slots[i]] = roster.Slot{Slot: slots[i], ID: name, Name: name, Occupied: true}
 			}
@@ -67,8 +71,14 @@ func TestBattleSettlementCompleteSaveReload(t *testing.T) {
 			if s.Actors[1].Armour[0] != nil || s.Actors[1].Armour[1] == nil || s.Actors[1].Armour[1].Condition >= 200 {
 				t.Fatal("測試前置狀態未形成破損及耐久降低")
 			}
+			s.Actors[1].Command = battle.CmdWeapon
+			s.WearOverCap(1, 7)
+			if s.Party[1].HandItem != nil || s.Actors[1].Command != 0 {
+				t.Fatal("測試前置狀態未形成手上那件磨光")
+			}
 			// 本測試驗資料跨邊界保留，不重測 SPEC-017 的骰式公式。
 			wantCondition := s.Actors[1].Armour[1].Condition
+			wantStep := (&town.Good{Condition: wantCondition}).ConditionStep()
 			g := &game{play: &town.Session{Party: party, LeftTown: true}, quest: &questBattle{state: s}, arenaFighter: -1}
 			if tc.arena {
 				g.arenaFighter, g.arenaBets = 1, []int{17, 0, -9}
@@ -99,6 +109,10 @@ func TestBattleSettlementCompleteSaveReload(t *testing.T) {
 				}
 				if i == 1 && (m.Wounds != 14 || m.Worn[0] != nil || m.Worn[1] == nil || m.Worn[1].Condition != wantCondition) {
 					t.Fatal("傷勢或護甲未回寫")
+				}
+				// 物品頁的狀況名稱只看 Condition 分檔（`goodDetail`）；磨光的手上那件整格空掉。
+				if i == 1 && (m.InHand != nil || m.Worn[1].ConditionStep() != wantStep) {
+					t.Fatalf("破損或狀況檔次未回寫：手上 %v、檔次 %d／%d", m.InHand, m.Worn[1].ConditionStep(), wantStep)
 				}
 				if i != 1 && m.Wounds != 5 {
 					t.Fatal("未受傷隊員或觀眾傷勢被改寫")
