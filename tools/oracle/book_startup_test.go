@@ -247,6 +247,22 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 	o.WriteU16(o.DS(0x1600), 1)
 	o.WriteU16(o.DS(0x1602), 0)
 	t.Logf("原版測試 seed=1，設定點=旅店招呼後，DGROUP=%04X；尚未宣稱與 remake 戰鬥同狀態", o.DGroupSeg())
+	// RE-159：攻擊式遮罩第 8、9 筆讀的共用緩衝 +0x20…+0x2A 是誰寫的。監看到進規劃探測為止
+	// （一次只能裝一個監看）。
+	var scratchEarly *[]oracle.MemWrite
+	if os.Getenv("KOL_BOOK_EXECUTE") == "1" {
+		scratchEarly = o.WatchWrites(0x9E48, 0x9E52)
+		scratchBefore := hex.EncodeToString(o.Bytes(o.DS(0x9E28), 0x30))
+		defer func() {
+			if dir := os.Getenv("KOL_ORACLE_CAPTURE"); dir != "" && scratchEarly != nil {
+				base := uint32(o.DGroupSeg())*16 - 0x2DED0
+				ida := func(a oracle.Addr) string { return fmt.Sprintf("%#x", a.Linear()-base) }
+				body, _ := json.MarshalIndent(map[string]any{"before_hex": scratchBefore,
+					"writes": scratchLog(*scratchEarly, ida)}, "", "  ")
+				_ = os.WriteFile(filepath.Join(dir, "scratch-writes.json"), body, 0o644)
+			}
+		}()
+	}
 	// 送鍵之前先留一張。點擊落空時「座標不對」與「那個位置本來就沒東西」在
 	// 畫面上一模一樣（`oracle/input.go` 的 Button 註解），有這張才分得開。
 	captureBook(t, o, "battle-path-before.png")
@@ -579,6 +595,11 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			exportNormalBattleState(t, o)
 			t.Log("已確認伏擊訊息；只擷取戰鬥入口，不送戰鬥結算命令")
 			if os.Getenv("KOL_BOOK_PLAN") == "1" {
+				if scratchEarly != nil {
+					o.StopWatchingWrites()
+					early := *scratchEarly
+					scratchEarly = &early
+				}
 				probeNormalPlanning(t, o)
 				if os.Getenv("KOL_BOOK_EXECUTE") == "1" {
 					executeFirstRound(t, o)
@@ -1151,11 +1172,33 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 		At    string         `json:"at"`
 		State map[string]any `json:"state"`
 	}
+	// enemyPlan 是敵人 AI（`sub_2374C`）進場那一刻：誰、參戰者記錄（含 `+0x22` 規劃過了沒有）
+	// 與亂數狀態。決策寫回的結果看同一回合執行段入口的記錄（#11）。
+	type enemyPlan struct {
+		Round int            `json:"round"`
+		Actor int            `json:"actor"`
+		State map[string]any `json:"state"`
+	}
+	// aiPick 是加權輪盤 `sub_25A3A` 進場那一刻：項數、呼叫點、共用緩衝 `byte_37CF8`
+	// 的前 0x30 byte（基礎權重 +0、情境權重 +0x10、攻擊式遮罩 +0x20）、`word_30916`、
+	// 額度與花費（`word_30D06`／`word_2F940`），以及 `word_39A48` 指的記錄 +0x2D（RE-159）。
+	type aiPick struct {
+		Round  int    `json:"round"`
+		N      int    `json:"n"`
+		Caller string `json:"caller_ida"`
+		Buffer string `json:"buffer_hex"`
+		Guard  int    `json:"word_30916"`
+		Allow  int    `json:"word_30D06"`
+		Cost   int    `json:"word_2F940"`
+		Bits   int    `json:"record_2d"`
+	}
 	// 第一次進執行段起開始記，之後的規劃段也記（敵人的決策在那裡擲骰）。
 	// 有人受傷（參戰者記錄 +0x2D 或累積傷害 +0x0E 變了）之後再多跑一回合就停，最多八回合。
 	const maxRounds = 8
 	var (
 		boundaries      []boundary
+		plans           []enemyPlan
+		picks           []aiPick
 		rolls           []roll
 		messages        []message
 		recording, done bool
@@ -1165,6 +1208,11 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 		endAt           string
 	)
 	ida := func(a oracle.Addr) string { return fmt.Sprintf("%#x", a.Linear()-base) }
+	// 攻擊式遮罩第 8、9 筆讀的是共用緩衝 `byte_37CF8` +0x28／+0x29（DGROUP 0x9E50），
+	// 不是 `sub_2578F` 自己寫的（RE-159）。記下探測開始時的值與之後每一次寫入。
+	scratchStart := hex.EncodeToString(o.Bytes(o.DS(0x9E28), 0x30))
+	scratchWrites := o.WatchWrites(0x9E50, 0x9E51)
+	defer o.StopWatchingWrites()
 	hurt := func() bool {
 		for i := 0; i < slots; i++ {
 			rec := uint16(actorBase + i*stride)
@@ -1190,6 +1238,20 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 	o.OnCall(at(randEA), func(p *oracle.Oracle) {
 		if recording && !done && len(rolls) < 20000 {
 			rolls = append(rolls, roll{N: int(p.Arg(0)), Caller: ida(p.Caller()), Before: seed(), Phase: phase, Round: round})
+		}
+	})
+	o.OnCall(at(0x2374C), func(p *oracle.Oracle) {
+		if recording && !done && phase == "plan" {
+			plans = append(plans, enemyPlan{round, int(o.Word(o.DS(0x9E5A))), snapshot()})
+		}
+	})
+	o.OnCall(at(0x25A3A), func(p *oracle.Oracle) {
+		if recording && !done && phase == "plan" && len(picks) < 200 {
+			ptr := o.Word(o.DS(0xBB78))
+			picks = append(picks, aiPick{Round: round, N: int(p.Arg(0)), Caller: ida(p.Caller()),
+				Buffer: hex.EncodeToString(o.Bytes(o.DS(0x9E28), 0x30)), Guard: int(o.Word(o.DS(0x2A46))),
+				Allow: int(int16(o.Word(o.DS(0x2E36)))), Cost: int(int16(o.Word(o.DS(0x1A70)))),
+				Bits: int(o.Byte(o.DS(ptr + 0x2D)))})
 		}
 	})
 	asked := false // 印過記錄 0x108「Begin next round?」
@@ -1292,11 +1354,12 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 	data := map[string]any{
 		"schema": "kol-battle-rounds-v1", "source": "dosgolem-normal-player-path",
 		"input": "KOLTOWN-unpacked.EXE", "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
-		"address_space": "記錄為 DGROUP 相對位移；caller_ida 為 IDA linear",
-		"evidence":      "RE-132 亂數、RE-080 參戰者記錄、RE-143 執行段入口；#9 攻擊結算比較",
+		"address_space":  "記錄為 DGROUP 相對位移；caller_ida 為 IDA linear",
+		"evidence":       "RE-132 亂數、RE-080 參戰者記錄、RE-143 執行段入口；#9 攻擊結算比較",
 		"alignment_seed": 1, "rounds": round, "hurt_round": hurtRound, "end_at": endAt,
-		"boundaries": boundaries, "rolls": rolls, "messages": messages,
-		"inputs": "隊員每回合按 YES：Theodoric 第一回合選徒手，之後重複；其餘隊員不選指令",
+		"boundaries": boundaries, "enemy_plans": plans, "ai_picks": picks,
+		"scratch_start_hex": scratchStart, "scratch_writes": scratchLog(*scratchWrites, ida), "rolls": rolls, "messages": messages,
+		"inputs":      "隊員每回合按 YES：Theodoric 第一回合選徒手，之後重複；其餘隊員不選指令",
 		"limitations": []string{"等鍵 sub_1B100 在記錄期間 stub 掉", "只到有人受傷後一回合或第八回合"},
 	}
 	body, err := json.MarshalIndent(data, "", "  ")
@@ -1307,4 +1370,17 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 		t.Fatal(err)
 	}
 	t.Logf("跑了 %d 回合（第 %d 回合有人受傷）：擲骰 %d 次、訊息 %d 則，停在 %s", round, hurtRound, len(rolls), len(messages), endAt)
+}
+
+// scratchLog 把共用緩衝的寫入紀錄轉成收據用的形式（最多 200 筆）。
+func scratchLog(ws []oracle.MemWrite, ida func(oracle.Addr) string) []map[string]any {
+	var out []map[string]any
+	for _, w := range ws {
+		if len(out) >= 200 {
+			break
+		}
+		out = append(out, map[string]any{"off": fmt.Sprintf("%#x", w.Off), "old": w.Old, "new": w.New,
+			"ip_ida": ida(w.IP), "step": w.Step})
+	}
+	return out
 }

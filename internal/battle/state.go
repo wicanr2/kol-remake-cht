@@ -118,7 +118,7 @@ type State struct {
 	// fledFromBar 表示這一場是從逃走格逃掉的：只有那一條把兩個計數設成 0xFF，
 	// 出口才印逃走那一句（RE-146）。
 	fledFromBar bool
-	// aiRoll 是這一次敵人決策共用的智力骰（`word_3AC5E`），0 表示還沒擲（`enemySmart`）。
+	// aiRoll 是敵人 AI 開頭擲的那一次（`word_3AC5E`），Shade Ring 的篩選用它（`hiddenFrom`）。
 	aiRoll int
 	// resultOver 表示結果圖已經收掉：打贏進戰利品畫面之後就不再畫。
 	resultOver    bool
@@ -144,6 +144,9 @@ type State struct {
 	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
 	// 所以這裡是一份不是一組。
 	Monster Monster
+	// StyleMaskTail 是敵人抽攻擊式時遮罩第 8、9 筆讀到的共用緩衝殘值（RE-159）。
+	// nil 表示沿用重製版的近似（`EnemyStyle`）；同狀態對拍時由原版收據填入。
+	StyleMaskTail *[2]int
 	// QuestItem 是這一個任務要的那件東西的名字（原版存在 `0xB956` 那十六個
 	// byte，來自任務 payload 的 `+0x29`，RE-113）。帶著它逃出戰場就算完成，
 	// 不必把怪物打完。空字串表示這一場沒有那樣的東西。

@@ -49,6 +49,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：使用者決定之後：照原版流程實作並重生戰鬥收據，或明確記為保留的差異。
   核實：要人判——待使用者決定，沒有產品碼訊號。
 
+- **ai-style-mask-tail** — 敵人攻擊式遮罩第 8、9 筆讀到旅店名冊清單的殘值（原版行為）
+  原版 sub_2578F 只寫攻擊式遮罩前 8 筆，第 8、9 筆讀共用緩衝 byte_37CF8 +0x28／+0x29；那兩格由旅店名冊加入清單（sub_147DD:0x149DD）寫入可加入角色的名冊索引，名冊不足九名時是更早的殘值（RE-159）。這兩筆乘在攻擊式第 8、9 項（攻擊選項 10、11）的權重上：這一場是 9、10，那兩式被大幅偏重；是 0 時那兩式永遠抽不到。remake 目前用 StyleMask 第 8、9 筆算 2 或 1 的近似，State.StyleMaskTail 可注入。選項：照原版模擬名冊清單殘值、固定一組值、或保留近似並記為差異。
+  完成條件：使用者決定之後：照決定實作並重生受影響的戰鬥收據，或明確記為保留的差異。
+  核實：要人判——待使用者決定，沒有產品碼訊號。
+
 - **a03-a04-writeback-and-contract**（#14） — A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約
   勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。RE-139 揭出的任務交付順序與全隊回報已依 SPEC-014 READY 接回，觀察用存檔的正常按鍵及英中狀態相同；自然取得任務物品、原版同狀態及跨戰鬥／城鎮／存檔逐欄一致仍未驗。
   完成條件：從自然接任務、取得物品、城鎮交付到保存／重載，跨戰鬥與城鎮逐欄一致，並有原版同狀態證據。
@@ -110,9 +115,9 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：要人判——要原版實走，沒有產品碼訊號。
 
 - **dosgolem-gui-ai-acceptance**（#11） — 補新版正常 GUI 與玩家可見 AI 行為驗收
-  最新工作樹已重跑 Olear 正常射擊 150 個輸入、確認彈藥 20→19，dosgolem Olear 旅店入口亦通過（docs/verification/fixed-seed-player-path-20260908.md）。完整 AI／原版戰鬥仍待驗。
+  最新工作樹已重跑 Olear 正常射擊 150 個輸入、確認彈藥 20→19，dosgolem Olear 旅店入口亦通過（docs/verification/fixed-seed-player-path-20260908.md）。正常遭遇 SLEDGE 第 2…6 回合的敵人規劃已與原版同狀態一致（靠近三回合、貼身攻擊兩回合；RE-159，docs/verification/battle-rounds-parity-20260928.md）。撤退、反制掃描成立、側翼、射擊與撿武器還沒有原版同狀態收據。
   完成條件：玩家看得到的 AI 行為（撤退、反制掃描、側翼、撿武器）在正常 GUI 下與原版一致。
-  核實：要人判——AI 行為要實跑才看得見。整場 AI 對拍收據落地時改綁它。
+  核實：要人判——靠近與貼身攻擊已由 TestOriginalNormalEnemyPlanning 對拍；其餘四種行為要另找會出現它們的原版戰鬥。
 
 - **appimage-parity-continuation**（#12） — 旅店、戰鬥與存讀檔的 AppImage 同狀態對拍
   要等 remake 未完成的接線修好才能往下做。工具鏈側已可用：dosgolem 正常 KOL.EXE 入口經 DOS Enter 進 KOLBOOK，已走到 Halfway House。

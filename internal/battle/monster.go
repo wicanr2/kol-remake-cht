@@ -66,6 +66,25 @@ type Monster struct {
 	// 原版只在**問要不要騎走那一頁**印它——全隊都有坐騎才問得出那一句，
 	// 有人用走的就整段跳過，那四行也就看不到（`sub_2A4E5:0x2A667`）。
 	Encounter []string `json:"encounter"`
+	// StyleWeights／LocationWeights／MoveWeights 是記錄 `+0x1A0`／`+0x1AA`／`+0x1B1`
+	// 起的 10、7、3 筆 AI 基礎權重；`+0x1A0` 為零時原版改用預設表（RE-159）。
+	StyleWeights    []int `json:"style_weights"`
+	LocationWeights []int `json:"location_weights"`
+	MoveWeights     []int `json:"move_weights"`
+}
+
+// AIWeights 是 `sub_1E3A8:0x1EC49` 那一道選擇：記錄 `+0x1A0` 非零就用記錄自帶的
+// 三張表，否則用預設表。資料缺欄時同預設表。
+func (m Monster) AIWeights() AIWeights {
+	w := DefaultAIWeights
+	if len(m.StyleWeights) != len(w.Style) || len(m.LocationWeights) != len(w.Location) ||
+		len(m.MoveWeights) != len(w.Move) || m.StyleWeights[0] == 0 {
+		return w
+	}
+	copy(w.Style[:], m.StyleWeights)
+	copy(w.Location[:], m.LocationWeights)
+	copy(w.Move[:], m.MoveWeights)
+	return w
 }
 
 // Item 是一格裝備，欄位名與商店的商品記錄相同（RE-075）。

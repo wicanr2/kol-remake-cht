@@ -131,7 +131,7 @@ func TestEnemyLocationFavoursSlotsWhenSlow(t *testing.T) {
 	hit := func(a Actor) [7]int {
 		var n [7]int
 		for r := 1; r <= 256; r++ {
-			n[EnemyLocation(a, 2, &fixedRand{values: []int{r}})]++
+			n[EnemyLocation(a, DefaultAIWeights, 2, &fixedRand{values: []int{r}})]++
 		}
 		return n
 	}

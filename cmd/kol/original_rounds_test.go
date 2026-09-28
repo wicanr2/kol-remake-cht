@@ -161,3 +161,129 @@ func (r *recordingRoll) Roll(n int) int {
 	r.ns = append(r.ns, n)
 	return r.lcg.Roll(n)
 }
+
+// 敵人規劃的同狀態比較（#11）：原版每一回合 AI（`sub_2374C`）進場那一刻的參戰者記錄、
+// 規劃過了沒有（`+0x22`）與亂數狀態交給 remake 的 `PlanEnemy`，比 AI 這一段的擲骰、
+// 之後的亂數狀態，以及寫回的指令、攻擊選項、防禦選項與方向（取同一回合執行段入口的記錄）。
+func TestOriginalNormalEnemyPlanning(t *testing.T) {
+	path := os.Getenv("KOL_ROUNDS_INPUT")
+	if path == "" {
+		t.Skip("需要 dosgolem 正常路徑的多回合收據")
+	}
+	var input struct {
+		Boundaries []struct {
+			Round int
+			At    string
+			State struct{ Actors []string }
+		}
+		EnemyPlans []struct {
+			Round, Actor int
+			State        struct {
+				Seed     uint32
+				Actors   []string
+				Counters []struct{ Slot, Stamina, Fatigue int }
+			}
+		} `json:"enemy_plans"`
+		// ScratchStart 是探測開始時共用緩衝 `byte_37CF8` 的前 0x30 byte：攻擊式遮罩第 8、9 筆
+		// 讀它的 +0x28／+0x29（RE-159）。
+		ScratchStart string `json:"scratch_start_hex"`
+		Rolls        []struct {
+			N      int
+			Caller string `json:"caller_ida"`
+			Before uint32 `json:"seed_before"`
+			Phase  string
+			Round  int
+		}
+	}
+	body, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = json.Unmarshal(body, &input); err != nil {
+		t.Fatal(err)
+	}
+	if len(input.EnemyPlans) == 0 {
+		t.Fatal("收據裡沒有敵人規劃（要用加了 AI 入口鉤子的探針重跑）")
+	}
+	scratch, err := hex.DecodeString(input.ScratchStart)
+	if err != nil || len(scratch) < 0x2A {
+		t.Fatal("收據裡沒有共用緩衝的初值（要用加了寫入監看的探針重跑）")
+	}
+	tail := [2]int{int(scratch[0x28]), int(scratch[0x29])}
+	// 規劃段裡不屬於 AI 的三個呼叫點：規劃鍵值、檢視擲骰。
+	notAI := map[string]bool{"0x1f01c": true, "0x1f07f": true}
+	for _, p := range input.EnemyPlans {
+		t.Run(fmt.Sprintf("第%d回合", p.Round), func(t *testing.T) {
+			s := originalPlanningState(t)
+			s.StyleMaskTail = &tail
+			for _, i := range []int{0, 1, 6} {
+				applyOriginalRecord(t, &s.Actors[i], p.State.Actors[i])
+			}
+			for _, c := range p.State.Counters {
+				if c.Slot < len(s.Actors) && s.Actors[c.Slot].Side != battle.SideEmpty {
+					s.Actors[c.Slot].Stamina, s.Actors[c.Slot].Fatigue = c.Stamina, c.Fatigue
+				}
+			}
+			// 規劃過了沒有：`+0x22` 立起來的排在前面，AI 那一名接著。
+			var order []int
+			for i, rec := range p.State.Actors {
+				raw, _ := hex.DecodeString(rec)
+				if i != p.Actor && len(raw) == 50 && raw[0x22] != 0 && raw[1] != 2 {
+					order = append(order, i)
+				}
+			}
+			turn := len(order)
+			order = append(order, p.Actor)
+			s.Round.Order, s.Round.Turn = order, turn
+
+			// 原版 AI 那一段：從進場時的亂數起，連續、不屬於規劃鍵值與檢視擲骰的那幾次。
+			var want []int
+			var after uint32
+			start := -1
+			for k, r := range input.Rolls {
+				if r.Round == p.Round && r.Phase == "plan" && r.Before == p.State.Seed && !notAI[r.Caller] {
+					start = k
+					break
+				}
+			}
+			if start < 0 {
+				t.Fatalf("找不到 AI 進場那一刻的擲骰（seed %#x）", p.State.Seed)
+			}
+			for k := start; k < len(input.Rolls); k++ {
+				r := input.Rolls[k]
+				if r.Round != p.Round || r.Phase != "plan" || notAI[r.Caller] {
+					after = r.Before
+					break
+				}
+				want = append(want, r.N)
+			}
+			rec := &recordingRoll{lcg: rng.NewState(p.State.Seed)}
+			d := s.PlanEnemy(p.Actor, rec)
+			if fmt.Sprint(rec.ns) != fmt.Sprint(want) {
+				t.Errorf("AI 擲骰不同：原版 %v，remake %v", want, rec.ns)
+			}
+			if got := rec.lcg.State(); after != 0 && got != after {
+				t.Errorf("AI 之後的亂數狀態：原版 %#x，remake %#x", after, got)
+			}
+			var exec string
+			for _, b := range input.Boundaries {
+				if b.Round == p.Round && strings.HasPrefix(b.At, "執行段入口") {
+					exec = b.State.Actors[p.Actor]
+				}
+			}
+			raw, _ := hex.DecodeString(exec)
+			a := s.Actors[p.Actor]
+			for _, f := range []struct {
+				name        string
+				off, actual int
+			}{
+				{"指令碼 +0x25", 0x25, a.Command}, {"攻擊選項 +0x23", 0x23, a.Style},
+				{"防禦選項 +0x24", 0x24, a.Guard}, {"方向 +0x28", 0x28, a.Facing},
+			} {
+				if len(raw) != 50 || f.actual != int(raw[f.off]) {
+					t.Errorf("%s：原版 %#x，remake %#x（決策 %+v）", f.name, raw[f.off], f.actual, d)
+				}
+			}
+		})
+	}
+}

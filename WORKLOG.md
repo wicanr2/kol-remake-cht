@@ -6818,3 +6818,16 @@ frame-270 推翻了 remake 的版面：
 - #10 結案：全城逐店告別審查（building-goodbye-review-20260928）。`TestGoodbyeEveryBuilding`
   以正式資料驗證 101 棟英文與中文的告別文字、圖示列與按一次回地圖；TOWN7 門 21 原版缺文字，
   另列 `town7-door21-missing-text`。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #11 部分（RE-159）：探針加 AI 入口 `sub_2374C`、輪盤入口 `sub_25A3A` 的記憶體取樣與共用緩衝寫入監看，
+  `TestOriginalNormalEnemyPlanning` 以原版第 2…6 回合 AI 進場狀態接手，擲骰、亂數終態與寫回的
+  `+0x25`／`+0x23`／`+0x24`／`+0x28` 全部一致。修正五處：AI 開頭與反制掃描前各擲一次智力骰；
+  1/3 改移動只對 `+0x00` 非零的怪物擲；三張基礎權重取自怪物記錄 `+0x1A0` 起（推翻 RE-092
+  「旗標恆為零」，`monsters.json` 新增三欄）；移動三式照 `0x239D7` 重寫；攻擊式的情境列號是
+  `word_30916`。攻擊式遮罩第 8、9 筆原版讀旅店名冊清單（`sub_147DD:0x149DD`）留下的殘值，
+  測試注入、正式路徑沿用近似，新增 `ai-style-mask-tail` 待使用者決定。#11 仍開放：撤退、
+  側翼、射擊、撿武器沒有原版同狀態收據。
+  8 份戰鬥收據通過；四條長路徑戰鬥段以 `regen_long_path.py --battles-only` 重生：arena 路上伏擊
+  39 回合敗北、競技場第 7 回合敗北，2313 步；full-chain 第 15 回合打贏，1782 步；full-chain-reload
+  第 16 回合打贏，1649 步；full-chain-ending 第 6 回合打贏，截掉結局第七段後多按的 7 次 SPACE，
+  677 步。里程碑依段落換算並更新回合數與伏擊傷勢，刪除 26 張不再引用的舊截圖。25 條路徑一致；
+  `go test ./internal/... ./cmd/...` 全過。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

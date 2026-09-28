@@ -4712,7 +4712,9 @@ byte_399D6 = 0 →  從 DGROUP 的靜態表取（0x1ECCF…0x1ED38）
 與原版敵人常常直接衝過來的印象相符。部位那一組 `1 3 4 4 4 4 2` 是頭、胸、
 右臂、左臂、右腿、左腿的順序（RE-088 的部位表），頭最少、四肢均等。
 
-### 那個旗標恆為零（`強推論`）
+### 那個旗標恆為零（`強推論`，已由 RE-159 推翻）
+
+> RE-159：`byte_399D6` 就是載入緩衝 `0xB966 + 0x1A0`，由載入怪物記錄寫入；30 隻非零。
 
 `byte_399D6`（DGROUP `0xBB06`）**全庫只有一個使用者**，就是 `0x1EC49` 那一次讀；
 逐條掃過所有 operand 落在它附近的指令，**沒有任何 writer**。它落在 BSS
@@ -10493,8 +10495,7 @@ Dwarven 叫得出 SPRINT。治好腿時 `sub_2818D` 只重跑 `sub_21D94`，穿�
 `sub_24C35` 的遮罩 0x10（`0x24D76`…`0x24DC8`）：`sub_252CB(找人那一名的智力,
 word_3AC5E)` 過關，而目標的 `+0x05` 非零，那一格就當沒有人。`word_3AC5E` 是 AI 開頭擲的
 那一次智力骰，整支決策共用。RE-118「`+0x05` 恆為 0、條件恆真」只在沒有人戴 Shade Ring
-時成立。remake 把那一次骰延到第一次用到（反制掃描之前，或找目標時碰到 `+0x05` 非零的
-隊員）才擲，同一次決策只擲一次；沒有人戴 Shade Ring 時骰序與原版相同。
+時成立。remake 現在照原版在 AI 開頭擲這一次（RE-159 推翻「延到用到才擲」的近似）。
 
 ### 酒館逃走的任務物品分支（`已證實`，更正 RE-143）
 
@@ -10680,3 +10681,74 @@ SLEDGE 打中 Olear。靜態讀碼同 RE-141。證據等級 `已證實`。
 - `Act`：出手與第二輪之後加回合收尾（`Exec.settle`），力竭獨立成一步；怯戰還原指令碼。
 - 測試：`TestOriginalNormalRoundsExecution`（`tools/run_original_parity_tests.sh`）、
   `TestSettleAfterEveryoneActed`、`TestFlinchKeepsCommand`。
+
+## RE-159：敵人規劃的同狀態比較與 AI 權重的真正來源
+
+輸入與工具同 RE-158，探針 `tools/oracle/book_startup_test.go` 的 `KOL_BOOK_EXECUTE` 模式
+另掛三處：AI 入口 `sub_2374C`（參戰者記錄、`+0x22`、亂數狀態，存 `enemy_plans`）、
+加權輪盤入口 `sub_25A3A`（共用緩衝 `byte_37CF8` 前 0x30 byte、`word_30916`、
+`word_30D06`／`word_2F940`、`[word_39A48]+0x2D`，存 `ai_picks`），以及共用緩衝
+DGROUP `0x9E48`…`0x9E52` 的寫入監看（`scratch_writes`、`scratch-writes.json`）。收據只留
+本機，SHA-256 見 `docs/verification/battle-rounds-parity-20260928.md`。靜態讀碼用
+`KOLTOWN-unpacked.EXE.asm`（IDA Pro 9.4）。
+
+`TestOriginalNormalEnemyPlanning` 從原版每一回合 AI 進場那一刻的狀態與亂數接手跑
+`PlanEnemy`，比擲骰序列、之後的亂數狀態，以及寫回的 `+0x25`／`+0x23`／`+0x24`／`+0x28`
+（取同一回合執行段入口的記錄）。第 2…6 回合（第 1 回合 AI 在探針開始記錄之前）全部一致。
+
+### 開頭兩次智力骰（`已證實`）
+
+`0x237A6` 擲 `rand(100)` 存 `word_3AC5E`，找目標遮罩 0x10 整支決策共用；反制掃描前
+`0x23C1A` 再擲一次 `rand(100)` 給 `sub_252CB(+0x0C, 骰)` 做檢定。收據每一回合 AI 段開頭
+都是 `100 100`。
+
+### 1/3 改移動只對 `+0x00` 非零的怪物擲（`已證實`）
+
+`0x23CA7` 先看記錄 `+0x00`（怪物是 SPEC-029 的遠程能力值），為 0 直接跳 `0x23CD6`
+攻擊，不擲 `rand(3)`。SLEDGE 的 `+0x00` 是 0，收據裡貼身時沒有這一骰。
+
+### 三張基礎權重由怪物記錄決定（`已證實`）
+
+`byte_399D6` 是 DGROUP `0xBB06` ＝ 載入緩衝 `0xB966 + 0x1A0`。`sub_1A4FE` 把怪物記錄讀進
+`0xB966`，所以它由檔案載入寫入，靜態 operand 掃描看不到。它同時是攻擊式權重的第 0 筆：
+非零就抄記錄 `+0x1A0`／`+0x1AA`／`+0x1B1` 三張表。`TOWN0` payload 5…36 的 32 隻裡 30 隻
+非零，只有 MUCK THING 與 LIZARION 走預設表。收據 `ai_picks` 的基礎權重是 SLEDGE 的
+`7 2 2 2 2 2 7 7 2 1` 與 `1 6 7 1 7 1 5`，與抽取結果一致。
+
+### 移動三式（`已證實`）
+
+`0x239D7`…`0x23BB9`：兩腿 `+0x19`／`+0x1B` 都 < 0x80 且 `word_349B2` < 7 就把衝刺歸零；
+否則環號 < 2 減半、`word_2FB4A` > 0x31 減半，再以 `sub_251B0(6, 0)`、`sub_2526C` 的比值
+乘兩次（16 位元乘除）。正規化迴圈從索引 2 往下、`var_2` 到 0 就停，索引 0 不正規化。
+`r = rand(256) − 1` 從索引 0 起逐項扣，扣成負的就選中，兩項都沒扣完就落在 2。
+攻擊選項 `0x3C + 選中`，選中 0 防禦選項 2，否則 0；沒有等級加權。
+
+### 攻擊式的情境列號與遮罩（`已證實`）
+
+`sub_2578F` 的情境列號是 `word_30916`，不是對手的防禦選項。環 0 那條在 `0x23CA1` 設 7；
+反制掃描那條由 `sub_253E7` 的 `var_8` 帶出：對方還沒規劃是 7（`0x255AF`），其餘各條是
+對方的 `+0x24`。收據兩次攻擊式抽樣 `word_30916` 都是 7。
+
+遮罩迴圈 `0x25802` 只寫 8 筆（`< 8`），`0x2585B` 卻乘 10 筆。第 8、9 筆讀共用緩衝
+`byte_37CF8` +0x28／+0x29。收據裡這兩格是 9、10，整場沒有被寫過；寫入監看從戰鬥路徑
+起點記到規劃，唯一的寫入者是 `sub_147DD:0x149DD`：旅店名冊加入清單把每一名可加入角色的
+名冊索引依序寫在 `+0x20` 起。所以這兩筆取決於上一次打開名冊清單時的內容，名冊不到九名
+可加入時是更早的殘值。這一場的名冊清單是 `1 3 4 5 6 7 8 9 10 11`。
+
+### 推翻紀錄
+
+- RE-092「`byte_399D6` 恆為零、永遠走預設表」：它在載入緩衝裡，由怪物記錄決定。
+- RE-154「智力骰延到用到才擲」的近似：原版 AI 開頭擲一次，反制掃描前再擲一次。
+- SPEC-008「抽攻擊式的列號是對手的防禦選項」：是 `word_30916`。
+- remake 的移動三式（等級加權、全部正規化）與「1/3 改移動一律擲」。
+
+### remake
+
+- `Monster.AIWeights`（`monsters.json` 新增 `style_weights`／`location_weights`／
+  `move_weights`），`State.AIWeights`；`EnemyStyle`／`EnemyLocation`／`EnemyMoveForm`
+  改吃這一份。
+- `EnemyMoveForm` 照上面重寫；`counterScan` 帶回列號，`enemyStrike` 以列號抽攻擊式。
+- `EnemyStyle` 的第 8、9 筆遮罩可由 `State.StyleMaskTail` 注入；正式路徑未注入時沿用
+  `StyleMask` 的近似，是否模擬名冊清單殘值待決策（worklist `ai-style-mask-tail`）。
+- 測試：`TestOriginalNormalEnemyPlanning`、`TestMonsterAIWeights`、
+  `TestEnemyMoveFormZeroesSprintWhenLegsAreFine`、`TestEnemyPlanRollsIntellectTwice`。

@@ -41,8 +41,8 @@ func TestWeightedPickAllZero(t *testing.T) {
 func TestEnemyStyleDoublesUsableForms(t *testing.T) {
 	// StyleMask[0] 是 16；武器位元帶 16 的話第 0 式權重加倍。
 	a := Actor{Level: 1, Stamina: 200, Threshold: 100}
-	with := EnemyStyle(a, 0, 16, &fixedRand{values: []int{1}})
-	without := EnemyStyle(a, 0, 0, &fixedRand{values: []int{1}})
+	with := EnemyStyle(a, DefaultAIWeights, 0, 16, nil, &fixedRand{values: []int{1}})
+	without := EnemyStyle(a, DefaultAIWeights, 0, 0, nil, &fixedRand{values: []int{1}})
 	if with < 0 || with >= len(AttackStyleBase) {
 		t.Fatalf("攻擊式 %d 出界", with)
 	}
@@ -56,7 +56,7 @@ func TestEnemyLocationInRange(t *testing.T) {
 	for level := 0; level < 8; level++ {
 		for style := 0; style < 10; style++ {
 			a := Actor{Level: level, Stamina: 200, Threshold: 100}
-			got := EnemyLocation(a, style, &fixedRand{values: []int{level*7 + style + 1}})
+			got := EnemyLocation(a, DefaultAIWeights, style, &fixedRand{values: []int{level*7 + style + 1}})
 			if got < 0 || got >= len(LocationWeights) {
 				t.Fatalf("等級 %d 攻擊式 %d 抽到 %d，出界", level, style, got)
 			}
@@ -64,25 +64,47 @@ func TestEnemyLocationInRange(t *testing.T) {
 	}
 }
 
-// 移動三式：兩腿都還在而且不是最外圈時，衝刺那一項歸零。
+// 移動三式：兩腿都還在而且不是最外圈時，衝刺那一項歸零；但正規化只做索引 2 與 1，
+// 索引 0 維持原值，權重加起來不到 255，擲到尾端的仍落在衝刺（RE-159）。
 func TestEnemyMoveFormZeroesSprintWhenLegsAreFine(t *testing.T) {
-	// 權重變成 12:24:0，r 掃過整個範圍都不該選到 2。
+	legs := Actor{RightLeg: 10, LeftLeg: 10}
+	// 預設權重 12:24:72 → 12:0x18×255÷36=170:0，前兩項合計 182。
 	for r := 1; r <= 256; r++ {
-		got := EnemyMoveForm(1, 0, true, 0, &fixedRand{values: []int{r}})
-		if got == 2 {
-			t.Fatalf("腿還在的時候不該選衝刺（r=%d）", r)
+		got := EnemyMoveForm(legs, DefaultAIWeights, 0, &fixedRand{values: []int{r}})
+		want := 2
+		switch {
+		case r-1 < 12:
+			want = 0
+		case r-1 < 182:
+			want = 1
+		}
+		if got != want {
+			t.Fatalf("r=%d 選到 %d，應為 %d", r, got, want)
 		}
 	}
-	// 腿廢了就選得到衝刺——權重 12:24:72，大部分的 r 會落在第 2 項。
-	sprinted := false
-	for r := 1; r <= 256; r++ {
-		if EnemyMoveForm(1, 0, false, 0, &fixedRand{values: []int{r}}) == 2 {
-			sprinted = true
-			break
-		}
+	// 腿廢了：衝刺不歸零，環 0 減半、額度夠時比值 1 → 12:24:36，正規化成 12:85:127。
+	lame := Actor{RightLeg: 0x90, LeftLeg: 10, Stamina: 200, Threshold: 50}
+	if got := EnemyMoveForm(lame, DefaultAIWeights, 0, &fixedRand{values: []int{12 + 85 + 1}}); got != 2 {
+		t.Fatalf("腿廢了應該選得到衝刺，得到 %d", got)
 	}
-	if !sprinted {
-		t.Fatal("腿廢了應該選得到衝刺")
+	if got := EnemyMoveForm(lame, DefaultAIWeights, 0, &fixedRand{values: []int{12 + 85}}); got != 1 {
+		t.Fatalf("r=97 應落在奔跑，得到 %d", got)
+	}
+}
+
+// 怪物記錄 `+0x1A0` 非零才用自帶的三張表（RE-159）。
+func TestMonsterAIWeights(t *testing.T) {
+	m := Monster{StyleWeights: []int{7, 2, 2, 2, 2, 2, 7, 7, 2, 1},
+		LocationWeights: []int{1, 6, 7, 1, 7, 1, 5}, MoveWeights: []int{6, 6, 72}}
+	if w := m.AIWeights(); w.Move != [3]int{6, 6, 72} || w.Style[0] != 7 || w.Location[1] != 6 {
+		t.Fatalf("旗標非零應用記錄自帶的表，得到 %+v", w)
+	}
+	m.StyleWeights[0] = 0
+	if w := m.AIWeights(); w != DefaultAIWeights {
+		t.Fatalf("+0x1A0 為零應用預設表，得到 %+v", w)
+	}
+	if w := (Monster{}).AIWeights(); w != DefaultAIWeights {
+		t.Fatalf("缺欄時應用預設表，得到 %+v", w)
 	}
 }
 
@@ -259,7 +281,7 @@ func TestEnemyStrikeFillsGuardFromLocation(t *testing.T) {
 	// 擲什麼都回 1：攻擊式是 sub_2578F 的第一項加二，不會退回 1，
 	// 所以會走到抽部位那一條。
 	var d EnemyDecision
-	s.enemyStrike(&d, 1, 0, EnemyNearStyle, &fixedRand{values: []int{1}})
+	s.enemyStrike(&d, 1, 0, EnemyNearStyle, EnemyNearGuard, &fixedRand{values: []int{1}})
 	if d.Style == 0 && d.Guard != 1 {
 		t.Fatalf("部位超過 6 時該是攻擊選項 0、防禦選項 1，得到 %d／%d", d.Style, d.Guard)
 	}
@@ -268,7 +290,7 @@ func TestEnemyStrikeFillsGuardFromLocation(t *testing.T) {
 	}
 	// 進來時沒有攻擊選項：擲一次決定 0 或 2（`0x23D2F`）。
 	var zero EnemyDecision
-	s.enemyStrike(&zero, 1, 0, 0, &fixedRand{values: []int{1}})
+	s.enemyStrike(&zero, 1, 0, 0, EnemyNearGuard, &fixedRand{values: []int{1}})
 	if zero.Style != 1 && zero.Guard != 0 && zero.Guard != 2 {
 		t.Fatalf("prev 為 0 時防禦選項該是 0 或 2，得到 %d", zero.Guard)
 	}
@@ -316,7 +338,7 @@ func TestCounterScanCopiesFacingAttacker(t *testing.T) {
 	}}
 	// 兩名都已經規劃過：Turn 停在尾端。
 	s.Round.Order, s.Round.Turn = []int{0, 1}, 2
-	prev, target, ok := s.counterScan(1, &fixedRand{values: []int{1}})
+	prev, _, target, ok := s.counterScan(1, &fixedRand{values: []int{1}})
 	if !ok {
 		t.Fatal("環 0 有隊員，該有結論")
 	}
@@ -341,7 +363,7 @@ func TestCounterScanUnplannedTarget(t *testing.T) {
 	}}
 	// 隊員排在敵人後面，還沒輪到它規劃。
 	s.Round.Order, s.Round.Turn = []int{1, 0}, 1
-	prev, target, ok := s.counterScan(1, &fixedRand{values: []int{1}})
+	prev, _, target, ok := s.counterScan(1, &fixedRand{values: []int{1}})
 	if !ok || target != 0 {
 		t.Fatalf("該挑到第 0 名，得到 ok=%v target=%d", ok, target)
 	}
@@ -359,7 +381,7 @@ func TestCounterScanFindsNothing(t *testing.T) {
 			FleeAt: 65, FleeRecover: 35, Intellect: 90},
 	}}
 	s.Round.Order, s.Round.Turn = []int{0, 1}, 2
-	if _, _, ok := s.counterScan(1, &fixedRand{values: []int{1}}); ok {
+	if _, _, _, ok := s.counterScan(1, &fixedRand{values: []int{1}}); ok {
 		t.Fatal("環 0 沒有人，不該有結論")
 	}
 }
@@ -479,7 +501,7 @@ func TestEnemyStrikeFixesStyleAfterBeingStuck(t *testing.T) {
 	stuck := newState()
 	stuck.Actors[1].Stuck = 1
 	var d EnemyDecision
-	stuck.enemyStrike(&d, 1, 0, EnemyNearStyle, &fixedRand{values: []int{3}})
+	stuck.enemyStrike(&d, 1, 0, EnemyNearStyle, EnemyNearGuard, &fixedRand{values: []int{3}})
 	if d.Style != 1 {
 		t.Fatalf("被困住過該固定第 1 式，得到 %d", d.Style)
 	}
@@ -490,7 +512,7 @@ func TestEnemyStrikeFixesStyleAfterBeingStuck(t *testing.T) {
 	// 否則上面那個 1 證明不了是 Stuck 造成的。
 	fresh := newState()
 	var free EnemyDecision
-	fresh.enemyStrike(&free, 1, 0, EnemyNearStyle, &fixedRand{values: []int{3}})
+	fresh.enemyStrike(&free, 1, 0, EnemyNearStyle, EnemyNearGuard, &fixedRand{values: []int{3}})
 	if free.Style == 1 {
 		t.Fatal("沒被困住過時攻擊式仍是 1，這個測試分不出 Stuck 有沒有作用")
 	}

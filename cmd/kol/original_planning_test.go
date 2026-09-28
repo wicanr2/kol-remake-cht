@@ -120,6 +120,21 @@ func originalPlanningState(t *testing.T) *battle.State {
 			input.Source, input.Seed, snapshot.Source, snapshot.AlignmentSeed)
 	}
 
+	// fixture 裡的怪物是早期抽取的副本，沒有 AI 權重那三欄（RE-159）；從正式的
+	// monsters.json 補上同一隻的。
+	if len(input.Monster.StyleWeights) == 0 {
+		all, err := battle.LoadMonsters("../../assets/original-derived-data/monsters.json")
+		if err != nil {
+			t.Fatal(err)
+		}
+		m := all.At(input.Monster.Index)
+		if m.Name != input.Monster.Name {
+			t.Fatalf("monsters.json 第 %d 隻是 %q，fixture 是 %q", input.Monster.Index, m.Name, input.Monster.Name)
+		}
+		input.Monster.StyleWeights, input.Monster.LocationWeights, input.Monster.MoveWeights =
+			m.StyleWeights, m.LocationWeights, m.MoveWeights
+	}
+
 	site := &battle.Site{Index: -1}
 	var party []battle.Member
 	for i, slot := range input.Party {

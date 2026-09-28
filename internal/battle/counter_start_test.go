@@ -28,7 +28,7 @@ func TestCounterScanUsesOriginalStartRange(t *testing.T) {
 				s.Actors[1].Side = SideEmpty
 			}
 			rng := &counterStartRand{t: t, first: first}
-			style, target, ok := s.counterScan(2, rng)
+			style, _, target, ok := s.counterScan(2, rng)
 			if rng.rolls != 1 || ok != occupied {
 				t.Fatalf("起點 %d 結果 %v，擲骰 %d", first, ok, rng.rolls)
 			}

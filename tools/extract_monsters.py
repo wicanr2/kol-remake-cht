@@ -56,6 +56,10 @@ FLEE_AT_OFFSET, FLEE_RECOVER_OFFSET = 0x0D, 0x0E
 #（指令碼 0x0B，印 0x118 `is frozen in terror!`，RE-135）。三十二隻裡只有
 # CYCLOPS、CLIFF TROLL、SLEDGE、MIST GRUB 是 0x01。整格另外留著。
 FLAGS_OFFSET, FLAG_SHATTERS, FLAG_FEARSOME = 0x10, 0x80, 0x01
+# +0x1A0／+0x1AA／+0x1B1 是 AI 的三張基礎權重（攻擊式 10、部位 7、移動三式 3）。
+# 戰鬥初始化 `sub_1E3A8:0x1EC49` 看 +0x1A0：非零就抄這三張，零就用 DGROUP 的
+# 預設表（RE-159）。
+STYLE_WEIGHTS, LOCATION_WEIGHTS, MOVE_WEIGHTS = 0x1A0, 0x1AA, 0x1B1
 # 怪物記錄的屬性欄位（RE-080）。名稱欄是 +0x00…+0x0C（長度 ＋ 最多 12 個字元），
 # 屬性從 +0x11 起：
 # `sub_2215A` 把 +0x11…+0x16 搬進參戰者記錄的 +0x08…+0x0C，
@@ -186,6 +190,9 @@ def main() -> int:
             "armour_weight": sum(
                 rec[off + 10] for off in ARMOUR_OFFSETS if any(rec[off:off + 16])),
             "shield": item(rec, SHIELD_OFFSET),
+            "style_weights": list(rec[STYLE_WEIGHTS:STYLE_WEIGHTS + 10]),
+            "location_weights": list(rec[LOCATION_WEIGHTS:LOCATION_WEIGHTS + 7]),
+            "move_weights": list(rec[MOVE_WEIGHTS:MOVE_WEIGHTS + 3]),
             "record_sha256": hashlib.sha256(rec).hexdigest(),
         })
 

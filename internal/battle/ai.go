@@ -1,21 +1,33 @@
 package battle
 
-// 敵人那一手的抽樣器（RE-081／RE-092）。攻擊式與命中部位共用同一個加權輪盤
-// `sub_25A3A`；三張基礎權重表由 RE-092 從 DGROUP 的靜態表解出來。
+// 敵人那一手的抽樣器（RE-081／RE-092／RE-159）。攻擊式與命中部位共用同一個加權輪盤
+// `sub_25A3A`；三張基礎權重表在戰鬥初始化時填好，見 `AIWeights`。
 
-// AttackStyleBase 是武器攻擊式的基礎權重（DGROUP `0x1092`，10 筆）。
+// AttackStyleBase 是武器攻擊式的預設基礎權重（DGROUP `0x1092`，10 筆）。
 var AttackStyleBase = [10]int{6, 6, 5, 4, 6, 4, 4, 6, 6, 5}
 
 // LocationWeights 是命中部位的基礎權重（DGROUP `0x10A6`，7 筆）：
 // 頭、胸、右臂、左臂、右腿、左腿，最後一筆是第七個索引。
 var LocationWeights = [7]int{1, 3, 4, 4, 4, 4, 2}
 
-// MoveBase 是移動三式的基礎權重（DGROUP `0x10AE`）：步行、奔跑、衝刺。
-// 比例約 1 : 2 : 6——原版的敵人偏好衝過來。
+// MoveBase 是移動三式的預設基礎權重（DGROUP `0x10AE`）：步行、奔跑、衝刺。
 var MoveBase = [3]int{12, 24, 72}
 
+// AIWeights 是這一場戰鬥敵人 AI 用的三張基礎權重表（DGROUP `0x6AD2`、`0x1A9A`、
+// `0x6A9A`）。`sub_1E3A8:0x1EC49` 看怪物記錄 `+0x1A0` 那一格：非零就從記錄
+// `+0x1A0`／`+0x1AA`／`+0x1B1` 抄三張表，零就抄上面三張預設表（RE-159）。
+// 旗標那一格同時是攻擊式權重的第 0 筆。
+type AIWeights struct {
+	Style    [10]int
+	Location [7]int
+	Move     [3]int
+}
+
+// DefaultAIWeights 是記錄 `+0x1A0` 為零時的三張預設表。
+var DefaultAIWeights = AIWeights{Style: AttackStyleBase, Location: LocationWeights, Move: MoveBase}
+
 // ContextWeights 是情境權重矩陣（DGROUP `0x0FF4`，16 列 × 10）。抽攻擊式時列號是
-// 對手的防禦選項，抽部位時列號換成攻擊式。
+// `word_30916`（見 `enemyStrike`），抽部位時列號換成攻擊式。
 var ContextWeights = [16][10]int{
 	{8, 8, 8, 6, 8, 7, 7, 8, 9, 11},
 	{4, 4, 3, 2, 4, 2, 2, 4, 4, 6},
@@ -103,23 +115,33 @@ func WeightedPick(base, context []int, level int, rng Rand) int {
 	return 0
 }
 
-// EnemyStyle 是 `sub_2578F`：抽武器攻擊式。情境權重的列號是對手的防禦選項，
-// 再乘上「這一式能不能用」——`StyleMask[i]` 與怪物的武器位元有交集算 2、沒有算 1。
+// EnemyStyle 是 `sub_2578F`：抽武器攻擊式。情境權重的列號是 `word_30916`（`guard`，
+// 呼叫端決定，見 `enemyStrike`），再乘上「這一式能不能用」——前 8 筆
+// `StyleMask[i]` 與怪物記錄 `+0x2D` 有交集算 2、沒有算 1。乘積存成一個 byte。
+//
+// **遮罩只寫前 8 筆**（`0x25841`：`< 8`），第 8、9 筆讀到的是共用緩衝 `byte_37CF8`
+// +0x28／+0x29 當時的殘值——旅店名冊清單 `sub_147DD:0x149DD` 寫在那裡的索引（RE-159）。
+// `tail` 非 nil 時用它當這兩筆；nil 時沿用 `StyleMask` 的第 8、9 筆算 2 或 1
+// （重製版的既有近似，待決策）。
 //
 // 最後一項（索引 9）另外乘「額度 ÷ 花費」，花費是 `sub_251B0(15, 1)`
 // （`0x2589E`，RE-131）。比值夾在 1/3…1，所以那一項只會被壓低。
-func EnemyStyle(a Actor, guard, weaponBits int, rng Rand) int {
+func EnemyStyle(a Actor, w AIWeights, guard, weaponBits int, tail *[2]int, rng Rand) int {
 	if guard < 0 || guard >= len(ContextWeights) {
 		guard = 0
 	}
-	base := make([]int, len(AttackStyleBase))
-	ctx := make([]int, len(AttackStyleBase))
+	base := make([]int, len(w.Style))
+	ctx := make([]int, len(w.Style))
 	for i := range base {
-		base[i] = AttackStyleBase[i]
-		ctx[i] = ContextWeights[guard][i]
-		if StyleMask[i]&weaponBits != 0 {
-			ctx[i] *= 2
+		base[i] = w.Style[i]
+		mask := 1
+		switch {
+		case i >= 8 && tail != nil:
+			mask = tail[i-8]
+		case StyleMask[i]&weaponBits != 0:
+			mask = 2
 		}
+		ctx[i] = ContextWeights[guard][i] * mask & 0xFF
 	}
 	num, den := ClampEffort(a.TimeAllowance(), ActionCost(a, StyleEffortTime, 1))
 	if last := len(ctx) - 1; last >= 0 && den != 0 {
@@ -136,14 +158,14 @@ func EnemyStyle(a Actor, guard, weaponBits int, rng Rand) int {
 //
 // **額度用的是這一手完整的那一份**（`0x2596C` 先把 `word_30D06` 設回
 // `word_2FBB6`），不是花剩的。
-func EnemyLocation(a Actor, style int, rng Rand) int {
+func EnemyLocation(a Actor, w AIWeights, style int, rng Rand) int {
 	if style < 0 || style >= len(ContextWeights) {
 		style = 0
 	}
-	base := make([]int, len(LocationWeights))
-	ctx := make([]int, len(LocationWeights))
+	base := make([]int, len(w.Location))
+	ctx := make([]int, len(w.Location))
 	for i := range base {
-		base[i] = LocationWeights[i]
+		base[i] = w.Location[i]
 		ctx[i] = ContextWeights[style][i]
 	}
 	cost := ActionCost(a, commandTime[style&(len(commandTime)-1)], 2)
@@ -164,30 +186,58 @@ const StyleEffortTime = 0x0F
 // LocationEffortSlots 是要套那個比例的三個部位索引（`0x259A9`：`< 2` 或 `== 6`）。
 var LocationEffortSlots = [3]int{0, 1, 6}
 
-// EnemyMoveForm 是移動三式的抽樣（`0x239D7` 之後）：步行 0、奔跑 1、衝刺 2。
-// 三個基礎權重照狀況打折之後正規化，這裡只做腿還在不在那一條——其餘幾條要
-// `word_30D06`／`word_2F940` 的語意才做得了。
-func EnemyMoveForm(level, ring int, legsOK bool, hurt int, rng Rand) int {
-	w := [3]int{MoveBase[0], MoveBase[1], MoveBase[2]}
-	switch {
-	case legsOK && ring < RingCount:
-		// 兩腿都還在而且不是最外圈：衝刺這一項歸零（`0x23A3B`）。
+// MoveFormEffortTime 是移動三式那一段傳給 `sub_251B0` 的引數（`0x23A81`：6, 0）。
+const MoveFormEffortTime = 6
+
+// EnemyMoveForm 是移動三式的抽樣（`0x239D7`…`0x23BB9`，RE-159）：步行 0、奔跑 1、衝刺 2。
+//
+// 基礎權重（`AIWeights.Move`）只調衝刺那一項：兩腿都還在（`< 0x80`）而且環號 < 7 就歸零；
+// 否則環號 < 2 減半、疲勞比 > 0x31 減半，再乘兩次「額度 ÷ 花費」（花費
+// `sub_251B0(6, 0)`，比值由 `sub_2526C` 夾在 1/3…1）。乘除都在 16 位元裡做。
+//
+// 正規化只做索引 2 與 1（迴圈從 2 往下、到 0 就停），索引 0 維持原值；抽樣擲
+// `rand(256) − 1` 從索引 0 起逐項扣，扣成負的就選中。沒有等級加權。
+func EnemyMoveForm(a Actor, weights AIWeights, ring int, rng Rand) int {
+	w := weights.Move
+	if a.RightLeg < PartLost && a.LeftLeg < PartLost && ring < RingCount {
 		w[2] = 0
-	case ring < 2:
-		w[2] /= 2
+	} else {
+		if ring < 2 {
+			w[2] /= 2
+		}
+		if a.FatigueRatio() > 0x31 {
+			w[2] /= 2
+		}
+		num, den := ClampEffort(a.TimeAllowance(), ActionCost(a, MoveFormEffortTime, 0))
+		if den != 0 {
+			v := (w[2] * num & 0xFFFF) / den
+			v = (v * num & 0xFFFF) / den
+			w[2] = v & 0xFF
+		}
 	}
-	if hurt > 49 {
-		w[2] /= 2
+	sum := w[0] + w[1] + w[2]
+	if sum == 0 {
+		sum = 1
 	}
-	base := []int{w[0], w[1], w[2]}
-	return WeightedPick(base, base, level, rng)
+	for i := 2; i > 0; i-- {
+		w[i] = w[i] * 0xFF / sum & 0xFF
+	}
+	r := rng.Roll(256) - 1
+	i := 0
+	for ; i < 2; i++ {
+		r -= w[i]
+		if r < 0 {
+			break
+		}
+	}
+	return i
 }
 
 // 敵人那一手的決策（RE-081 的主幹）。
 //
-// **這是簡化版，不是整棵樹。**已經照原版做的：兩臂都廢就移動、同心環由內往外找
-// 目標而且起點隨機、貼上去就攻擊、有 1/3 機率放棄攻擊改移動、攻擊式與部位走原版
-// 的加權輪盤、移動方式走三式的權重。
+// 照原版做的：兩臂都廢就移動、同心環由內往外找目標而且起點隨機、貼上去就攻擊、
+// `+0x00` 非零的怪物有 1/3 機率放棄攻擊改移動、攻擊式與部位走原版的加權輪盤、
+// 移動方式走三式的權重（RE-159 以正常遭遇五個回合同狀態對拍）。
 //
 // 撤退（`0x237F5`…`0x238C1`）、反制掃描（`sub_253E7`）、側翼（`sub_25653`）與
 // 空手去撿（`0x23BC2`，RE-116）也都照原版做了。
@@ -221,7 +271,7 @@ type EnemyDecision struct {
 //
 // 主幹（`0x23C1A`…`0x24030`）：
 //
-//	環 0（八個相鄰格）找隊員 → 找到就攻擊，但有 1/3 機率改成移動
+//	環 0（八個相鄰格）找隊員 → 找到就攻擊，`+0x00` 非零的有 1/3 機率改成移動
 //	環 0 沒人 → 往外掃環 1…6
 //	    線通不到就換一個目標（`0x23EAB` 的 `sub_25D0F`）
 //	    環號 < 4、種類非零又有右臂 → 射擊（`0x23F15`，RE-104）
@@ -232,7 +282,9 @@ func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 		return EnemyDecision{Target: -1}
 	}
 	a := &s.Actors[i]
-	s.aiRoll = 0
+	// AI 一進來就擲一次（`0x237A6` → `word_3AC5E`），在手臂與撤退判斷之前，不論後面用不用
+	// 得到。找目標的篩選遮罩 0x10（Shade Ring）用的是這一次（`hiddenFrom`，RE-159）。
+	s.aiRoll = rng.Roll(100)
 
 	// 兩隻手臂都廢就只能移動（`0x237E9`）。
 	if a.RightArm <= 0 && a.LeftArm <= 0 {
@@ -271,34 +323,34 @@ func (s *State) planTactics(i int, rng Rand) EnemyDecision {
 		return d
 	}
 
-	// 反制掃描（`0x23C1A`）：智力擲骰過關才跑。有結論就直接走攻擊那一段，
-	// 不再往外環找目標——抄來的攻擊選項會變成抽命中部位的列號。
-	if s.enemySmart(i, rng) {
-		if prev, t, ok := s.counterScan(i, rng); ok {
-			if rng.Roll(3) == 1 {
+	// 反制掃描（`0x23C1A`）：另擲一次 rand(100) 做智力檢定，過關才跑。有結論就直接走
+	// 攻擊那一段，不再往外環找目標——抄來的攻擊選項會變成抽命中部位的列號。
+	if EnemyIntellectCheck(a.Intellect, a.Level, rng.Roll(100)) {
+		if prev, row, t, ok := s.counterScan(i, rng); ok {
+			if a.Kind != 0 && rng.Roll(3) == 1 {
 				return s.enemyMove(i, t, 0, rng)
 			}
 			d.Command = CmdWeapon
 			d.Target = t
 			d.Ring = 0
 			d.Facing = a.Facing
-			s.enemyStrike(&d, i, t, prev, rng)
+			s.enemyStrike(&d, i, t, prev, row, rng)
 			s.applyEnemy(i, d)
 			return d
 		}
 	}
 
-	// 環 0：貼著的隊員直接打。種類非零的怪物有 1/3 機率放棄攻擊改成移動
-	// （`0x23CA7`），所以敵人不會每回合都撲上來。
+	// 環 0：貼著的隊員直接打。種類（`+0x00`）非零的怪物有 1/3 機率放棄攻擊改成移動
+	// （`0x23CA7`）；種類為 0 的**不擲**這一骰（RE-159）。反制掃描有結論時也走這一關。
 	if t := s.findInRing(i, 0, rng); t >= 0 {
-		if rng.Roll(3) == 1 {
+		if a.Kind != 0 && rng.Roll(3) == 1 {
 			return s.enemyMove(i, t, 0, rng)
 		}
 		d.Command = CmdWeapon
 		d.Target = t
 		d.Ring = 0
 		d.Facing = s.facingToward(i, t)
-		s.enemyStrike(&d, i, t, EnemyNearStyle, rng)
+		s.enemyStrike(&d, i, t, EnemyNearStyle, EnemyNearGuard, rng)
 		s.applyEnemy(i, d)
 		return d
 	}
@@ -363,10 +415,13 @@ func (s *State) planned(i int) bool {
 //
 // 「方向對著我」的判準是 `對方的 +0x28 XOR 我看到他的方向 == 4`——方向編號差 4
 // 就是正對面。每找到一個有結論的目標就把自己的方向轉過去（`0x2562A`）。
-func (s *State) counterScan(i int, rng Rand) (style, target int, ok bool) {
+func (s *State) counterScan(i int, rng Rand) (style, row, target int, ok bool) {
 	a := &s.Actors[i]
 	cells := RingCells(0)
 	best, bestStyle, last := 0, 0, -1
+	// bestRow 是跟著攻擊選項一起記下的情境列號（`var_8`，出口寫進 `word_30916`）：
+	// 還沒規劃那一條是 7，其餘都是對方的防禦選項 `+0x24`（RE-159）。
+	bestRow := 0
 	// 起點隨機，與 `sub_2531C` 第一次傳 0xFFFF 時的行為相同。
 	start := rng.Roll(len(cells)-1) - 1
 	for k := 0; k < len(cells); k++ {
@@ -381,19 +436,19 @@ func (s *State) counterScan(i int, rng Rand) (style, target int, ok bool) {
 		if !s.planned(t) {
 			// 還沒規劃（`0x255A6`）。
 			if best < 4 {
-				best, bestStyle, pri = 4, EnemyNearStyle, 4
+				best, bestStyle, bestRow, pri = 4, EnemyNearStyle, EnemyNearGuard, 4
 				if d.Command == CmdWeapon && rng.Roll(2) == 1 {
-					bestStyle = d.Style
+					bestStyle, bestRow = d.Style, d.Guard
 				}
 			}
 		} else {
 			if d.Command == CmdWeapon || d.Command == CmdUnarmed {
 				if d.Facing^n == 4 {
 					if d.Command == CmdWeapon {
-						best, bestStyle = 5, d.Style
+						best, bestStyle, bestRow = 5, d.Style, d.Guard
 					}
 					if best < 3 {
-						best, bestStyle = 3, EnemyNearStyle
+						best, bestStyle, bestRow = 3, EnemyNearStyle, d.Guard
 					}
 				}
 			}
@@ -408,7 +463,7 @@ func (s *State) counterScan(i int, rng Rand) (style, target int, ok bool) {
 				pri = 4
 			}
 			if pri >= best {
-				bestStyle, best = 0, pri
+				bestStyle, bestRow, best = 0, d.Guard, pri
 			}
 		}
 		if pri != 0 {
@@ -417,13 +472,13 @@ func (s *State) counterScan(i int, rng Rand) (style, target int, ok bool) {
 		}
 	}
 	if best == 0 || last < 0 {
-		return 0, -1, false
+		return 0, 0, -1, false
 	}
 	// 優先度 1（對方要移動）才繞側面（`0x25435`）。
 	if best == 1 {
 		s.flank(i, last)
 	}
-	return bestStyle, last, true
+	return bestStyle, bestRow, last, true
 }
 
 // flank 是 `sub_25653`：從自己現在的方向出發，依方向編號的奇偶決定要掃幾格
@@ -510,7 +565,10 @@ const (
 // `prev` 是進來時的攻擊選項：環 0 那條是 `EnemyNearStyle`，反制掃描那條是
 // `counterScan` 從對手抄來的那一格。**`+0x24` 這一格兩種用途**——填進去的是
 // 「命中部位 ＋1」，而同一格在這一名被攻擊時就是它的招架姿態（RE-081／RE-105）。
-func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
+//
+// `row` 是抽攻擊式時情境權重的列號（`word_30916`）：環 0 那條是 7
+// （`0x23CA1`），反制掃描那條由 `counterScan` 帶回。
+func (s *State) enemyStrike(d *EnemyDecision, i, target, prev, row int, rng Rand) {
 	a := &s.Actors[i]
 	d.Guard = EnemyNearGuard
 	// 攻擊選項是 `sub_2578F()` 的結果加二；超過 10 就退回 1（`0x23CEE`）。
@@ -518,7 +576,7 @@ func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
 	// RE-117）。
 	style := 1
 	if a.Stuck == 0 {
-		style = EnemyStyle(*a, s.Actors[target].Guard, a.Weapon.Kind, rng) + 2
+		style = EnemyStyle(*a, s.AIWeights(), row, a.Weapon.Kind, s.StyleMaskTail, rng) + 2
 		if style > 0x0A {
 			style = 1
 		}
@@ -536,7 +594,7 @@ func (s *State) enemyStrike(d *EnemyDecision, i, target, prev int, rng Rand) {
 		}
 	default:
 		// 列號是**進來時**那個值，不是剛抽出來的攻擊式（`0x23D58`）。
-		loc := EnemyLocation(*a, prev, rng)
+		loc := EnemyLocation(*a, s.AIWeights(), prev, rng)
 		switch {
 		case loc == 0:
 			d.Guard = 0
@@ -565,7 +623,7 @@ func (s *State) enemyStuck(i int, rng Rand) EnemyDecision {
 		// 原版跳的是 `0x23CD6`，也就是貼近打那一段的開頭。
 		d := EnemyDecision{Command: CmdWeapon, Target: -1, Ring: 0,
 			Facing: a.Facing}
-		s.enemyStrike(&d, i, i, EnemyNearStyle, rng)
+		s.enemyStrike(&d, i, i, EnemyNearStyle, a.Guard, rng)
 		s.applyEnemy(i, d)
 		return d
 	}
@@ -655,8 +713,7 @@ func (s *State) enemyMove(i, target, ring int, rng Rand) EnemyDecision {
 	}
 	d := EnemyDecision{Command: CmdMove, Target: target, Ring: ring}
 	d.Facing = facing
-	legsOK := a.RightLeg > 0 && a.LeftLeg > 0
-	form := EnemyMoveForm(a.Level, max(ring, 0), legsOK, a.FatigueRatio(), rng)
+	form := EnemyMoveForm(*a, s.AIWeights(), max(ring, 0), rng)
 	d.Style = IconMoveWalk + form
 	if form == 0 {
 		d.Guard = 2
@@ -776,19 +833,15 @@ func max(a, b int) int {
 	return b
 }
 
-// enemySmart 是 `sub_252CB(智力, word_3AC5E)`：`智力 × 等級 ÷ 3 > 骰`。原版 AI 一開頭就擲
-// `word_3AC5E`、整支共用；remake 延到第一次用到才擲（反制掃描前，或找目標時碰到
-// Shade Ring 的隊員），同一次決策只擲一次，差別只在骰子的先後（RE-154）。
-func (s *State) enemySmart(i int, rng Rand) bool {
-	if s.aiRoll <= 0 {
-		s.aiRoll = rng.Roll(100)
-	}
+// hiddenFrom 是篩選遮罩 0x10（`sub_24C35:0x24D76`…`0x24DC8`）：`sub_252CB(看的人的智力,
+// word_3AC5E)` 過關、而目標的 `+0x05` 非零（Shade Ring），就當那一格沒有人。
+// `word_3AC5E` 是 AI 開頭擲的那一次（`PlanEnemy` 的 `aiRoll`），這裡不再擲。
+func (s *State) hiddenFrom(i, t int, rng Rand) bool {
 	a := s.Actors[i]
-	return EnemyIntellectCheck(a.Intellect, a.Level, s.aiRoll)
+	return s.Actors[t].Flag05 != 0 && EnemyIntellectCheck(a.Intellect, a.Level, s.aiRoll)
 }
 
-// hiddenFrom 是篩選遮罩 0x10（`sub_24C35:0x24D76`…`0x24DC8`）：看的人智力擲骰過關，
-// 而目標的 `+0x05` 非零（Shade Ring），就當那一格沒有人。只有目標有 `+0x05` 才需要擲。
-func (s *State) hiddenFrom(i, t int, rng Rand) bool {
-	return s.Actors[t].Flag05 != 0 && s.enemySmart(i, rng)
+// AIWeights 是這一場的三張基礎權重表：由這一場的怪物記錄決定（`Monster.AIWeights`）。
+func (s *State) AIWeights() AIWeights {
+	return s.Monster.AIWeights()
 }

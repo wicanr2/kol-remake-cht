@@ -48,21 +48,37 @@ func TestExtraSteps(t *testing.T) {
 	}
 }
 
-// 聰明的敵人看不到戴 Shade Ring 的隊員；只有碰到 +0x05 才需要擲智力骰。
+// 聰明的敵人看不到戴 Shade Ring 的隊員。判定用的是 AI 開頭擲好的 `word_3AC5E`
+// （`aiRoll`），篩選時不再擲骰（RE-159）。
 func TestHiddenFromSmartEnemy(t *testing.T) {
 	s := &State{Actors: []Actor{{Side: SideParty}, {Side: SideMonster, Intellect: 90, Level: 5}}}
+	s.aiRoll = 1
 	rng := &fixedRoll{values: []int{1}}
 	if s.hiddenFrom(1, 0, rng) || rng.i != 0 {
 		t.Fatal("沒戴 Shade Ring 不該隱形，也不該擲骰")
 	}
 	s.Actors[0].Flag05 = 1
-	if !s.hiddenFrom(1, 0, rng) {
-		t.Fatal("聰明的敵人看不到戴 Shade Ring 的隊員")
+	if !s.hiddenFrom(1, 0, rng) || rng.i != 0 {
+		t.Fatal("聰明的敵人看不到戴 Shade Ring 的隊員，而且不另擲骰")
 	}
-	s.aiRoll = 0
+	s.aiRoll = 100
 	s.Actors[1].Intellect = 1
-	if s.hiddenFrom(1, 0, &fixedRoll{values: []int{100}}) {
+	if s.hiddenFrom(1, 0, rng) {
 		t.Fatal("智力擲骰沒過的敵人照樣看得到")
+	}
+}
+
+// AI 一進來就擲 word_3AC5E（`0x237A6`），反制掃描前再擲一次（`0x23C1A`），兩次是分開的。
+func TestEnemyPlanRollsIntellectTwice(t *testing.T) {
+	s := &State{Field: NewField(), Actors: []Actor{
+		{Side: SideParty, X: 10, Y: 10, Head: 10, Chest: 10, Threshold: 100},
+		{Side: SideMonster, X: 30, Y: 30, Head: 10, Chest: 10, Threshold: 100,
+			RightArm: 10, LeftArm: 10, RightLeg: 10, LeftLeg: 10, Level: 1, FleeAt: 100},
+	}}
+	rec := &fixedRoll{values: []int{50, 60, 1}}
+	s.PlanEnemy(1, rec)
+	if s.aiRoll != 50 || rec.i < 2 {
+		t.Fatalf("開頭那一次應該是 50 並另擲反制掃描那一次，得到 aiRoll=%d、擲了 %d 次", s.aiRoll, rec.i)
 	}
 }
 
