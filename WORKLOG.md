@@ -6800,3 +6800,12 @@ frame-270 推翻了 remake 的版面：
   oracle 走不完」。實作授權待使用者決定（是否實作、自訂圖像存檔格式、介面、巨盾顯示位置）；
   #31 的阻擋原因同步改寫。25 條玩家路徑、8 份戰鬥收據一致；`go test` 全過。
   容器：只有自己的 `--rm` 一次性容器，已結束；無 root-owned 檔案。
+- #9 結案（RE-158）：`book_startup_test.go` 新增 `KOL_BOOK_EXECUTE` 模式，以 OnCall 記下原版正常路徑
+  六個回合的擲骰、訊息與每回合入口／結束狀態（收據 workplace/battle-first-round-20260928/，只留本機）。
+  `TestOriginalNormalRoundsExecution` 逐回合接手比對，修正三處：近戰不招架不擲防禦骰、擊退只在傷害
+  16 以上判且一定擲骰、疲勞挨傷招架改到回合收尾；怯戰不改記錄指令碼。修正後六回合全部一致；
+  `run_original_parity_tests.sh` 六支全過，`check_updated_dosgolem.sh` 的 book 逾時可用
+  `KOL_BOOK_TIMEOUT` 調整。另發現原版規劃按 YES 才換人，新增 `planning-yes-confirm` 待使用者決定。
+  8 份戰鬥收據通過；21 條玩家路徑一致，**arena、full-chain、full-chain-ending、full-chain-reload
+  四條的戰鬥段待重生**（擊退與防禦骰改變了戰況）。`go test` 全過（ui 在 Xvfb）。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

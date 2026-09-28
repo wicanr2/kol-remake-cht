@@ -94,9 +94,7 @@ func TestActClearsPerTurnCounters(t *testing.T) {
 			Command: CmdRest, Hurt: 9, Parries: 3},
 	}}
 	s.Exec.Order = []int{0}
-	if _, ok := s.Act(&fixedRand{values: []int{1}}); !ok {
-		t.Fatal("該做出一手")
-	}
+	drainAct(s, &fixedRand{values: []int{1}})
 	a := s.Actors[0]
 	if a.LastHurt != 9 {
 		t.Fatalf("這一手挨的傷該搬進 LastHurt，得到 %d", a.LastHurt)

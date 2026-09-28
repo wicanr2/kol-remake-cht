@@ -424,9 +424,7 @@ func TestRestRecoversFatigue(t *testing.T) {
 			Command: CmdRest, Stamina: 200, Fatigue: 100},
 	}}
 	s.Exec.Order = []int{0}
-	if _, ok := s.Act(&fixedRand{values: []int{1}}); !ok {
-		t.Fatal("該做出一手")
-	}
+	drainAct(s, &fixedRand{values: []int{1}})
 	if got := s.Actors[0].Fatigue; got != 70 {
 		t.Fatalf("疲勞是 %d，期望 70", got)
 	}
@@ -438,7 +436,7 @@ func TestRestRecoversFatigue(t *testing.T) {
 			Command: CmdRest, Stamina: 200, Fatigue: 100, Hurt: 3},
 	}}
 	s.Exec.Order = []int{0}
-	s.Act(&fixedRand{values: []int{1}})
+	drainAct(s, &fixedRand{values: []int{1}})
 	if got := s.Actors[0].Fatigue; got != 62 {
 		t.Fatalf("挨過打該走額度那一條，疲勞是 %d，期望 62", got)
 	}

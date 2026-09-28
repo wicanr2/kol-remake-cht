@@ -360,10 +360,14 @@ func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 	if attack < 0 {
 		return Outcome{Miss: true, Margin: -attack}
 	}
+	// 對手的防禦選項為 0（不招架）時，防禦分數直接為 0，**不擲防禦骰**、招架次數
+	// 也不加（`sub_26D76:0x27204`→`0x27220` 直接跳命中）。多擲那一次會讓後面
+	// 傷害、部位與護甲的骰序整串錯開（#9 原版執行段對拍抓到）。
+	defence := 0
 	if d.Guard != 0 {
 		d.Parries++
+		defence = DefenceScore(*d, rng.Roll(AttackRoll))
 	}
-	defence := DefenceScore(*d, rng.Roll(AttackRoll))
 	if attack < defence {
 		guard := d.Guard & 7
 		msg := parryMessage[guard][style&0x0F]

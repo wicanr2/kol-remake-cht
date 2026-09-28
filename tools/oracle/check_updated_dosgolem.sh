@@ -54,5 +54,5 @@ go test -tags oracle ./tools/oracle -run '^TestNormalStartupUpdatedDosgolem$' -c
 fi
 if [ "${KOL_CHECK:-all}" != normal ]; then
 KOL_ORACLE_ROOT=/tmp/kol/workplace/oracle/game KOL_ORACLE_CAPTURE=/out \
-go test -tags oracle ./tools/oracle -run '^TestNormalBookEntry$' -count=1 -v -timeout 240s > /out/book-startup.log 2>&1
+go test -tags oracle ./tools/oracle -run '^TestNormalBookEntry$' -count=1 -v -timeout "${KOL_BOOK_TIMEOUT:-240s}" > /out/book-startup.log 2>&1
 fi

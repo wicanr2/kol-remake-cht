@@ -27,9 +27,7 @@ func TestFatigueRisesWhenAllowanceIsNegative(t *testing.T) {
 			Command: CmdRest, Stamina: 200, Damage: 50, Hurt: 1},
 	}}
 	s.Exec.Order = []int{0}
-	if _, ok := s.Act(&fixedRand{values: []int{1}}); !ok {
-		t.Fatal("該做出一手")
-	}
+	drainAct(s, &fixedRand{values: []int{1}})
 	// 額度 −100 − 挨傷 5 ＝ −105，疲勞 −= −105÷10 ＝ +10。
 	if got := s.Actors[0].Fatigue; got != 10 {
 		t.Fatalf("疲勞是 %d，期望 10", got)
@@ -54,12 +52,14 @@ func TestExhaustionKnocksDown(t *testing.T) {
 				Shatters: c.shatters},
 		}}
 		s.Exec.Order = []int{0}
-		out, ok := s.Act(&fixedRand{values: []int{1}})
-		if !ok {
-			t.Fatalf("%s：該做出一手", c.name)
+		exhausted := 0
+		for _, out := range drainAct(s, &fixedRand{values: []int{1}}) {
+			if out.Exhausted != 0 {
+				exhausted = out.Exhausted
+			}
 		}
-		if out.Exhausted != c.record {
-			t.Fatalf("%s：力竭那一句是 %#x，期望 %#x", c.name, out.Exhausted, c.record)
+		if exhausted != c.record {
+			t.Fatalf("%s：力竭那一句是 %#x，期望 %#x", c.name, exhausted, c.record)
 		}
 		if !s.Actors[0].Down() {
 			t.Fatalf("%s：力竭該當場倒下", c.name)
@@ -71,8 +71,10 @@ func TestExhaustionKnocksDown(t *testing.T) {
 			Command: CmdRest, Stamina: 200},
 	}}
 	s.Exec.Order = []int{0}
-	if out, _ := s.Act(&fixedRand{values: []int{1}}); out.Exhausted != 0 {
-		t.Fatalf("不該力竭，得到 %#x", out.Exhausted)
+	for _, out := range drainAct(s, &fixedRand{values: []int{1}}) {
+		if out.Exhausted != 0 {
+			t.Fatalf("不該力竭，得到 %#x", out.Exhausted)
+		}
 	}
 }
 
@@ -137,5 +139,59 @@ func TestEnemyLocationFavoursSlotsWhenSlow(t *testing.T) {
 	favoured := func(n [7]int) int { return n[0] + n[1] + n[6] }
 	if favoured(s) <= favoured(f) {
 		t.Fatalf("慢的那一邊該更偏向那三項：%v vs %v", s, f)
+	}
+}
+
+// drainAct 把執行段跑完（含回合收尾），回傳每一步的結果。疲勞、挨傷搬移與招架歸零
+// 在回合收尾才做（`0x20A52` 起，#9），所以檢查這些值要等整段走完。
+func drainAct(s *State, rng Rand) []ActResult {
+	var out []ActResult
+	for n := 0; n < 100; n++ {
+		r, ok := s.Act(rng)
+		if !ok {
+			break
+		}
+		out = append(out, r)
+	}
+	return out
+}
+
+// 回合收尾在所有人出手之後才做：先動的人在後面挨的傷，也算進這一回合的疲勞，
+// 回合結束時整回合的傷搬進 +0x2A、+0x2D 歸零（#9 原版執行段對拍抓到）。
+func TestSettleAfterEveryoneActed(t *testing.T) {
+	s := &State{Actors: []Actor{
+		{Side: SideParty, X: 5, Y: 5, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdRest, Stamina: 200, Fatigue: 100},
+		{Side: SideParty, X: 9, Y: 9, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdRest, Stamina: 200},
+	}}
+	s.Exec.Order = []int{0, 1}
+	if _, ok := s.Act(&fixedRand{values: []int{1}}); !ok {
+		t.Fatal("該做出第一手")
+	}
+	if s.Actors[0].Fatigue != 100 {
+		t.Fatal("出手之後還不該算疲勞")
+	}
+	s.Actors[0].Hurt = 3 // 在自己出手之後才挨打
+	drainAct(s, &fixedRand{values: []int{1}})
+	a := s.Actors[0]
+	if a.Fatigue != 62 || a.LastHurt != 3 || a.Hurt != 0 {
+		t.Fatalf("回合收尾：疲勞 %d（期望 62，挨過打走額度那一條）、LastHurt %d、Hurt %d", a.Fatigue, a.LastHurt, a.Hurt)
+	}
+}
+
+// 怯戰只換這一手，記錄裡的指令碼不動（`0x2016A` 只寫 word_31122）。
+func TestFlinchKeepsCommand(t *testing.T) {
+	s := &State{Monster: Monster{Fearsome: true}, Actors: []Actor{
+		{Side: SideParty, X: 5, Y: 5, Head: 10, Chest: 10, Threshold: 100,
+			Command: CmdUnarmed, Stamina: 200},
+	}}
+	s.Exec.Order = []int{0}
+	out, _ := s.Act(&fixedRand{values: []int{100}})
+	if out.Command != CmdFlinch {
+		t.Fatalf("擲 100 應該怯戰，得到指令 %#x", out.Command)
+	}
+	if s.Actors[0].Command != CmdUnarmed {
+		t.Fatalf("記錄裡的指令碼應該還是徒手，得到 %#x", s.Actors[0].Command)
 	}
 }

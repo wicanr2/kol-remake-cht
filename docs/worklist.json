@@ -102,13 +102,24 @@
       "id": "v01-full-battle-parity",
       "layer": "verification",
       "title": "V01：完整戰鬥同狀態結算、武器／護甲與保存的正常垂直鏈",
-      "body": "地形亂數位置轉置已依 SPEC-008 修正（三組固定種子、兩條路徑 24,576 格與亂數終態一致）；SPEC-029 修好敵人 Kind 與遠程初始化（768＋2304 組通過，加 SLEDGE 後合計 60 個初始欄位）；SPEC-027 修好戰後傷勢折算與敗北回寫（4608 組、五條結算至 v2 重載）；任務物品名稱誤認已修（258 組）；任務回報獎勵的母表共用指標已修。以上都是常式比較，正常整場仍未驗。",
+      "body": "地形亂數位置轉置已依 SPEC-008 修正（三組固定種子、兩條路徑 24,576 格與亂數終態一致）；SPEC-029 修好敵人 Kind 與遠程初始化（768＋2304 組通過，加 SLEDGE 後合計 60 個初始欄位）；SPEC-027 修好戰後傷勢折算與敗北回寫（4608 組、五條結算至 v2 重載）；任務物品名稱誤認已修（258 組）；任務回報獎勵的母表共用指標已修。以上都是常式比較，正常整場仍未驗。 執行段已有六回合原版同狀態比較（RE-158）；規劃段確認流程與原版不同（planning-yes-confirm），整場正常路徑仍未驗。",
       "acceptance": "一整場戰鬥從進場到結算、保存都與原版同狀態，走的是正常玩家路徑。",
       "verify": {
         "kind": "manual",
         "note": "常式比較過不代表整場過，沒有單一訊號能代表它。整場對拍收據落地時改成 absent 綁那份收據的路徑。與 v01-remaining-battle-chain 是同一件事的兩次登記。"
       },
       "issue": 6
+    },
+    {
+      "id": "planning-yes-confirm",
+      "layer": "gap",
+      "title": "規劃段選完指令要按 YES 才換人（原版流程）",
+      "body": "原版選指令寫回後畫面留在同一名、顯示摘要，可以重選；按第一格 YES 才換下一名，而且 +0x25 跨回合保留，新回合直接按 YES 就是重複上一回合的指令（RE-158）。remake 選完就換人、YES 不做事。改成原版流程會改變操作方式與所有戰鬥收據的按鍵，也與 SPEC-028 的「重複上一指令」選項相關，需使用者決定。",
+      "acceptance": "使用者決定之後：照原版流程實作並重生戰鬥收據，或明確記為保留的差異。",
+      "verify": {
+        "kind": "manual",
+        "note": "待使用者決定，沒有產品碼訊號。"
+      }
     },
     {
       "id": "v02-appimage-platform-acceptance",
@@ -145,13 +156,20 @@
       "id": "battle-normal-seed-alignment",
       "layer": "verification",
       "title": "原版戰鬥同狀態：攻擊結算比較",
-      "body": "兩名隊員與 SLEDGE 共 60 個初始欄位、4096 格地形、SLEDGE 本體記錄 20 項都通過。**規劃段也比完了**（2026-09-11）：主指令列 5 格、第 1 格 0x29，走同一組位置之後三個決策值 Command=0x29／Style=1／Guard=2 與原版逐項相同，正反對照過——planning-parity-20260911.md，跑法 tools/run_original_parity_tests.sh。剩下的是**攻擊結算**：原版要在規劃寫回之後繼續跑到結算，remake 走同一組輸入比傷害與狀態。",
+      "body": "規劃段已比完（2026-09-11）。攻擊結算（RE-158）：dosgolem 正常路徑六個回合的執行段，remake 從原版每回合入口的狀態與亂數接手，擲骰序列、亂數終態、位置、傷勢、部位、挨打累計、招架次數、方向與疲勞逐項一致（TestOriginalNormalRoundsExecution）。過程修正三處：近戰不招架時不擲防禦骰、擊退只在傷害 16 以上判、疲勞與挨傷改到回合收尾。",
       "acceptance": "同一 seed、同一初始狀態下，remake 與原版的攻擊結算逐項一致。",
       "verify": {
-        "kind": "manual",
-        "note": "結算的對拍沒有產品碼訊號可綁。**不要綁對拍測試那句收尾自承**：verify 不掃測試檔，綁 present 會每輪回報「找不到＝可能已完成」，綁 absent 則永遠為真。規劃那一半已由 TestOriginalNormalPlanning 蓋住；結算的載入器接上時 internal/oracle 會出現產品碼落點，到時綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/re/RESEARCH-LOG.md",
+          "docs/verification/battle-rounds-parity-20260928.md",
+          "docs/spec/008-combat-field.md"
+        ],
+        "pattern": "RE-158",
+        "note": "已完成，當回歸訊號：研究日誌、驗證文件與 SPEC-008 都引用 RE-158。"
       },
-      "issue": 9
+      "issue": 9,
+      "status": "done"
     },
     {
       "id": "inn-farewell-diff-review",

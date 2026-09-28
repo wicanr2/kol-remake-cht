@@ -177,6 +177,8 @@ type Execution struct {
 	// extra 是第二輪走到 Order 的第幾個；extraActor／extraLeft 是那一名還要多走幾步
 	// （`ExtraSteps`，RE-154）。
 	extra, extraActor, extraLeft int
+	// settle 是回合收尾走到第幾名（參戰者索引）。
+	settle int
 }
 
 // Step 做出下一手。原版每一手印一句訊息再等玩家按一個鍵（`sub_1B100(5)`），
@@ -288,7 +290,7 @@ func (s *State) BeginExecution(rng Rand) {
 	})
 	s.Exec.Order = order
 	s.Exec.Turn = 0
-	s.Exec.extra, s.Exec.extraLeft = 0, 0
+	s.Exec.extra, s.Exec.extraLeft, s.Exec.settle = 0, 0, 0
 }
 
 // ActResult 是一手做出來的結果。
@@ -380,25 +382,16 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		if a.Side == SideEmpty || a.Down() {
 			continue
 		}
-		// 令人生畏的怪物在場時，隊員出手前先過一次意志檢定（RE-135）。
-		s.checkFlinch(i, rng)
-		// 參戰者記錄 `+0x25` 就是 `Command`：原版在輪到時（`0x20A8B`）把它讀進
-		// `word_31122`，這一手之後的判斷（含疲勞）都看那一份。降落會把記錄裡的
-		// `+0x25` 清成 0，但不影響這一手自己的疲勞，所以疲勞用出手前的指令碼。
+		// 令人生畏的怪物在場時，隊員出手前先過一次意志檢定（RE-135）。原版怯戰只把
+		// 這一手的 `word_31122` 換成 0x0B，記錄 `+0x25` 不動（`0x2016A`），所以下一回合
+		// 按 YES 重複的、回合末算疲勞讀的都還是原本的指令。
 		cmd := a.Command
+		s.checkFlinch(i, rng)
+		flinched := a.Command == CmdFlinch && cmd != CmdFlinch
 		out := s.act(i, rng)
-		after := a.Command
-		a.Command = cmd
-		// 疲勞的收尾（`0x20AE0` 與 `0x20D40`）：休息的人回復三成，其餘的人把這一手
-		// 花剩的時間額度除以十扣進疲勞——額度為負就是往上加。要在清掉 Hurt
-		// **之前**做，休息那一條與挨傷那一項都要讀它。力竭的人當場倒下。
-		out.Exhausted = s.EndTurnFatigue(i)
-		if out.Exhausted == 0 {
-			a.Command = after
+		if flinched {
+			a.Command = cmd
 		}
-		// 一手做完的收尾（`sub_1E3A8:0x20E64`）：這一手挨的傷搬進 +0x2A，
-		// 挨傷計數與招架次數歸零——兩格都是「這一手」的計數，不是整場的。
-		a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0
 		return out, true
 	}
 	// 第二輪（`0x20927`…`0x20A48`）：同一個順序再走一次，跑步、衝刺與飛快的人
@@ -409,7 +402,7 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 			return s.move(s.Exec.extraActor), true
 		}
 		if s.Exec.extra >= len(s.Exec.Order) {
-			return ActResult{}, false
+			break
 		}
 		i := s.Exec.Order[s.Exec.extra]
 		s.Exec.extra++
@@ -417,6 +410,32 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 			s.Exec.extraActor, s.Exec.extraLeft = i, n
 		}
 	}
+	// 回合收尾（`0x20A52` 起，#9）：第二輪走完之後依**參戰者索引**逐名做，不是在各人
+	// 出手之後。空位跳過；已退出戰鬥的只做挨傷那一段（`0x20A77` 直接跳 `0x20E64`）。
+	//
+	// 疲勞（`0x20A8B`…`0x20D9A`）讀的是這時記錄裡的 `+0x25`——出手之後的指令碼
+	// （降落、擊退、耐久扣光都已經把它清成 0）。休息的人回復三成，其餘的人把花剩的
+	// 時間額度除以十扣進疲勞，額度為負就是往上加；要在清掉 Hurt 之前做。比例到 100
+	// 的人當場倒下，印一句（這一步交出去）。
+	//
+	// 挨傷（`0x20E64`）：整回合挨的傷搬進 `+0x2A`，`+0x2D` 與招架次數 `+0x0F` 歸零。
+	for s.Exec.settle < len(s.Actors) {
+		i := s.Exec.settle
+		s.Exec.settle++
+		a := &s.Actors[i]
+		if a.Side == SideEmpty {
+			continue
+		}
+		exhausted := 0
+		if !a.Down() {
+			exhausted = s.EndTurnFatigue(i)
+		}
+		a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0
+		if exhausted != 0 {
+			return ActResult{Actor: i, Target: -1, Exhausted: exhausted}, true
+		}
+	}
+	return ActResult{}, false
 }
 
 // act 是一手的分派（`0x2065E`…`0x2070F`）。
@@ -449,8 +468,8 @@ func (s *State) act(i int, rng Rand) ActResult {
 		s.WearOverCap(i, outcome.OverCap)
 		out.Target = target
 		out.Outcome = &outcome
-		// 命中就再判一次擊退（`0x27B77`）。落空或被擋下不判。
-		if !outcome.Miss && !outcome.Parried {
+		// 傷得夠重才判擊退（`0x27B77`，見 KnocksBack）。
+		if KnocksBack(outcome) {
 			out.Knock = s.Knockback(i, target, rng)
 		}
 		return out
@@ -773,7 +792,7 @@ func (s *State) shoot(i int, rng Rand) ActResult {
 		shot.Score, shot.Block == MissileActor, rng)
 	s.WearOverCap(i, outcome.OverCap)
 	out.Outcome = &outcome
-	if !outcome.Miss && !outcome.Parried {
+	if KnocksBack(outcome) {
 		out.Knock = s.Knockback(i, target, rng)
 	}
 	return out

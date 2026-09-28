@@ -15,8 +15,10 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 IMAGE="${KOL_GO_IMAGE:-eob-remake-go:1.26.7-ebiten2.9.9-audio}"
 RECEIPTS="${1:-workplace/battle-planning-20260911}"
 FIXTURE="${KOL_PARTY_FIXTURE:-workplace/planning-parity-20260911/party-fixture.json}"
+# 多回合執行段收據（#9）：`tools/oracle/book_startup_test.go` 的 KOL_BOOK_EXECUTE 模式產出。
+ROUNDS="${KOL_ROUNDS_RECEIPT:-workplace/battle-first-round-20260928/battle-rounds.json}"
 
-for f in "$REPO_ROOT/$FIXTURE" "$REPO_ROOT/$RECEIPTS/battle-terrain.json" \
+for f in "$REPO_ROOT/$FIXTURE" "$REPO_ROOT/$RECEIPTS/battle-terrain.json" "$REPO_ROOT/$ROUNDS" \
          "$REPO_ROOT/$RECEIPTS/battle-state-records.json"; do
   [ -f "$f" ] || { echo "缺少 $f" >&2; exit 2; }
 done
@@ -29,6 +31,7 @@ exec timeout "${KOL_TEST_TIMEOUT:-900}" docker run --rm \
   -e "KOL_PARTY_STATE_INPUT=/src/$FIXTURE" \
   -e "KOL_TERRAIN_INPUT=/src/$RECEIPTS/battle-terrain.json" \
   -e "KOL_STATE_RECORDS_INPUT=/src/$RECEIPTS/battle-state-records.json" \
+  -e "KOL_ROUNDS_INPUT=/src/$ROUNDS" \
   -v "$REPO_ROOT:/src" -w /src \
   --tmpfs "/tmp:exec,uid=$(id -u),gid=$(id -g),size=2g" \
   "$IMAGE" \

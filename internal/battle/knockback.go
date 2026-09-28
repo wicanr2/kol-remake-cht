@@ -45,6 +45,14 @@ func KnockbackIndex(attacker, target Actor) int {
 	return index
 }
 
+// KnocksBack 回報這一擊要不要判擊退。原版的判定在受傷那一支 `sub_277F4` 裡，只有
+// 「causing … wound」那一條、而且傷害到 0x10 以上（印 0x156／0x157 的那兩種）才走到
+// `loc_27B56`；傷害為 0、倒下、部位廢掉、傷得輕（0x155）都不判（#9 原版執行段對拍）。
+// 近戰與射擊共用這一支。
+func KnocksBack(out Outcome) bool {
+	return !out.Miss && !out.Parried && out.Damage >= woundSerious && !out.Down && !out.Limb
+}
+
 // Knockback 是攻擊命中之後的擊退判定（`0x27B77`）。回傳這一手還要印的訊息記錄
 // （依序），沒有擊退也沒有打暈就回 nil。
 //
@@ -59,8 +67,9 @@ func (s *State) Knockback(attacker, target int, rng Rand) []int {
 		return nil
 	}
 	a, d := s.Actors[attacker], s.Actors[target]
+	// 走到這裡一定擲 rand(100)，體型差不是正的也照擲（`0x27BC4`），只是必定不成立。
 	margin := a.Size - d.Size
-	if margin <= 0 || rng.Roll(100) >= margin {
+	if rng.Roll(100) >= margin {
 		return nil
 	}
 

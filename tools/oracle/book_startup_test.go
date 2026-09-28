@@ -580,6 +580,9 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 			t.Log("已確認伏擊訊息；只擷取戰鬥入口，不送戰鬥結算命令")
 			if os.Getenv("KOL_BOOK_PLAN") == "1" {
 				probeNormalPlanning(t, o)
+				if os.Getenv("KOL_BOOK_EXECUTE") == "1" {
+					executeFirstRound(t, o)
+				}
 			}
 		}
 	}
@@ -1073,4 +1076,235 @@ func keysOf(m map[string]bool) []string {
 	}
 	sort.Strings(out)
 	return out
+}
+
+// executeFirstRound 接在規劃探針之後：其餘隊員選休息、在「Begin next round?」答 YES，
+// 讓原版把第一回合的執行段跑完（#9，攻擊結算）。
+//
+// 記三樣東西，全部是原版自己的值，不從畫面推：
+//
+//   - 執行段入口（`sub_1E3A8:0x1FD21`）那一刻的參戰者記錄、耐力／疲勞與 32 位元亂數狀態；
+//   - 執行段裡每一次 `sub_1B5A8(n)`（rand(n)）的 n、呼叫點與擲之前的狀態，以及每一次
+//     `sub_1A8FD(記錄)` 印的 KOLDATA 記錄號；
+//   - 回到下一回合（`0x1EF3A`）或戰鬥出口（`0x211AD`）那一刻的同一組狀態。
+//
+// 等鍵的 `sub_1B100` 在執行段 stub 掉——它只等玩家看完訊息，不擲骰、不改狀態。
+func executeFirstRound(t *testing.T, o *oracle.Oracle) {
+	t.Helper()
+	dir := os.Getenv("KOL_ORACLE_CAPTURE")
+	if dir == "" {
+		t.Fatal("執行段探測需要 KOL_ORACLE_CAPTURE")
+	}
+	// IDA 線性位址換成這一次載入的執行期位址：DGROUP 在 IDA 的 0x2DED0。
+	base := uint32(o.DGroupSeg())*16 - 0x2DED0
+	at := func(ea uint32) oracle.Addr {
+		lin := base + ea
+		return oracle.Far(uint16(lin>>4), uint16(lin&0xF))
+	}
+	const (
+		randEA    = 0x1B5A8
+		printEA   = 0x1A8FD
+		waitEA    = 0x1B100
+		execEA    = 0x1FD21
+		roundEA   = 0x1EF3A
+		exitEA    = 0x211AD
+		seedLo    = 0x1600
+		seedHi    = 0x1602
+		actorBase = 0x6712
+		stride    = 50
+		slots     = 18
+	)
+	// 位址換算要先驗：rand(n) 開頭是 `push bp; mov bp, sp`。
+	if b := []byte{o.Byte(at(randEA)), o.Byte(at(randEA + 1)), o.Byte(at(randEA + 2))}; !bytes.Equal(b, []byte{0x55, 0x8B, 0xEC}) {
+		t.Fatalf("sub_1B5A8 換算錯了：%x", b)
+	}
+	seed := func() uint32 { return uint32(o.Word(o.DS(seedLo))) | uint32(o.Word(o.DS(seedHi)))<<16 }
+	snapshot := func() map[string]any {
+		var actors []string
+		var counters []map[string]int
+		for i := 0; i < slots; i++ {
+			raw := make([]byte, stride)
+			for j := range raw {
+				raw[j] = o.Byte(o.DS(uint16(actorBase + i*stride + j)))
+			}
+			actors = append(actors, hex.EncodeToString(raw))
+			counters = append(counters, map[string]int{"slot": i,
+				"stamina": int(o.Word(o.DS(uint16(0x1C50 + i*2)))),
+				"fatigue": int(int16(o.Word(o.DS(uint16(0x322E + i*2)))))})
+		}
+		return map[string]any{"seed": seed(), "actors": actors, "counters": counters}
+	}
+	type roll struct {
+		N      int    `json:"n"`
+		Caller string `json:"caller_ida"`
+		Before uint32 `json:"seed_before"`
+		Phase  string `json:"phase"`
+		Round  int    `json:"round"`
+	}
+	type message struct {
+		Record int    `json:"record"`
+		Caller string `json:"caller_ida"`
+		Round  int    `json:"round"`
+	}
+	type boundary struct {
+		Round int            `json:"round"`
+		At    string         `json:"at"`
+		State map[string]any `json:"state"`
+	}
+	// 第一次進執行段起開始記，之後的規劃段也記（敵人的決策在那裡擲骰）。
+	// 有人受傷（參戰者記錄 +0x2D 或累積傷害 +0x0E 變了）之後再多跑一回合就停，最多八回合。
+	const maxRounds = 8
+	var (
+		boundaries      []boundary
+		rolls           []roll
+		messages        []message
+		recording, done bool
+		round           int
+		phase           = "plan"
+		hurtRound       = -1
+		endAt           string
+	)
+	ida := func(a oracle.Addr) string { return fmt.Sprintf("%#x", a.Linear()-base) }
+	hurt := func() bool {
+		for i := 0; i < slots; i++ {
+			rec := uint16(actorBase + i*stride)
+			if o.Byte(o.DS(rec+0x0E)) != 0 || o.Byte(o.DS(rec+0x2D)) != 0 {
+				return true
+			}
+		}
+		return false
+	}
+	o.OnCall(at(execEA), func(p *oracle.Oracle) {
+		if done {
+			return
+		}
+		if !recording {
+			recording = true
+			round = 1
+		}
+		// 等鍵只在執行段 stub：規劃段靠它等玩家按鍵，stub 掉會空轉。
+		p.StubValue(at(waitEA), 0)
+		phase = "exec"
+		boundaries = append(boundaries, boundary{round, "執行段入口 0x1FD21", snapshot()})
+	})
+	o.OnCall(at(randEA), func(p *oracle.Oracle) {
+		if recording && !done && len(rolls) < 20000 {
+			rolls = append(rolls, roll{N: int(p.Arg(0)), Caller: ida(p.Caller()), Before: seed(), Phase: phase, Round: round})
+		}
+	})
+	asked := false // 印過記錄 0x108「Begin next round?」
+	o.OnCall(at(printEA), func(p *oracle.Oracle) {
+		if recording && !done && len(messages) < 20000 {
+			messages = append(messages, message{Record: int(p.Arg(0)), Caller: ida(p.Caller()), Round: round})
+		}
+		if p.Arg(0) == 0x108 {
+			asked = true
+		}
+	})
+	o.OnCall(at(roundEA), func(p *oracle.Oracle) {
+		if !recording || done {
+			return
+		}
+		boundaries = append(boundaries, boundary{round, "下一回合規劃 0x1EF3A", snapshot()})
+		p.Stub(at(waitEA), nil)
+		if hurtRound < 0 && hurt() {
+			hurtRound = round
+		}
+		if round >= maxRounds || (hurtRound >= 0 && round > hurtRound) {
+			done, endAt = true, "下一回合規劃 0x1EF3A"
+			return
+		}
+		round++
+		phase = "plan"
+		asked = false
+		p.Stub(at(waitEA), nil)
+	})
+	o.OnCall(at(exitEA), func(p *oracle.Oracle) {
+		if recording && !done {
+			boundaries = append(boundaries, boundary{round, "戰鬥出口 0x211AD", snapshot()})
+			done, endAt = true, "戰鬥出口 0x211AD"
+		}
+	})
+
+	// 原版的規劃是「選指令寫回、畫面留在同一名；按 YES（第 0 格，圖號 7）才換下一名」
+	// （`0x1F38D`：`sub_228B7` 回 7 才跳 `loc_1FAC4` 設 `+0x22` 換人）。所以這裡每一步都把
+	// 白框移回第 0 格再 Return：Theodoric 確認寫回的徒手、其餘隊員不選指令直接確認、
+	// 最後在「Begin next round?」按 YES。指令碼 `+0x25` 跨回合保留，之後每回合按 YES 就是
+	// 重複上一回合的指令。白框位置由畫面量（同規劃探針的量法）。
+	frameSlot := func() int {
+		w, _, rgb := o.ScreenRGB()
+		frame, best := -1, 0
+		for g := 0; g < 8; g++ {
+			white := 0
+			for y := 170; y <= 191; y++ {
+				for x := 32 + g*32; x < 64+g*32; x++ {
+					i := (y*w + x) * 3
+					if rgb[i] > 200 && rgb[i+1] > 200 && rgb[i+2] > 200 {
+						white++
+					}
+				}
+			}
+			if white > 60 && white > best {
+				best, frame = white, g
+			}
+		}
+		return frame
+	}
+	press := func(key string) {
+		var err error
+		if len([]rune(key)) == 1 {
+			err = o.TypeKeys(key)
+		} else {
+			err = o.SendKeys(key)
+		}
+		if err != nil {
+			t.Fatalf("送 %q：%v", key, err)
+		}
+		for n := 0; n < 20; n++ {
+			if err := o.Run(20_000_000); err != nil {
+				t.Fatalf("跑 %q：%v", key, err)
+			}
+			if o.KeysPending() == 0 {
+				break
+			}
+		}
+	}
+	for n := 0; n < 80 && !done; n++ {
+		for k := 0; k < 8 && frameSlot() > 0; k++ {
+			press(",")
+		}
+		if n < 4 {
+			captureBook(t, o, fmt.Sprintf("exec-plan-%02d.png", n))
+		}
+		t.Logf("第 %d 次：回合 %d，白框在第 %d 格，已印 0x108=%v，按 Return", n, round, frameSlot(), asked)
+		press("Return")
+		for k := 0; k < 50 && phase == "exec" && !done; k++ {
+			if err := o.Run(20_000_000); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	o.Stub(at(waitEA), nil)
+	captureBook(t, o, "exec-end.png")
+	if !done {
+		t.Fatalf("執行段沒有跑完：回合 %d，擲骰 %d 次、訊息 %d 則", round, len(rolls), len(messages))
+	}
+	data := map[string]any{
+		"schema": "kol-battle-rounds-v1", "source": "dosgolem-normal-player-path",
+		"input": "KOLTOWN-unpacked.EXE", "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+		"address_space": "記錄為 DGROUP 相對位移；caller_ida 為 IDA linear",
+		"evidence":      "RE-132 亂數、RE-080 參戰者記錄、RE-143 執行段入口；#9 攻擊結算比較",
+		"alignment_seed": 1, "rounds": round, "hurt_round": hurtRound, "end_at": endAt,
+		"boundaries": boundaries, "rolls": rolls, "messages": messages,
+		"inputs": "隊員每回合按 YES：Theodoric 第一回合選徒手，之後重複；其餘隊員不選指令",
+		"limitations": []string{"等鍵 sub_1B100 在記錄期間 stub 掉", "只到有人受傷後一回合或第八回合"},
+	}
+	body, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(filepath.Join(dir, "battle-rounds.json"), append(body, '\n'), 0600); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("跑了 %d 回合（第 %d 回合有人受傷）：擲骰 %d 次、訊息 %d 則，停在 %s", round, hurtRound, len(rolls), len(messages), endAt)
 }

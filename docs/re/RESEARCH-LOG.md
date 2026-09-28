@@ -10622,3 +10622,61 @@ remake：`EnterArena` 設 COMBPICS 第 6 張，`openBooth` 印完 0xF0 後換第
 RE-052 記「原版是滑鼠驅動的，現有的鍵盤 oracle 走不完」以及「ESC 沒有作用」。編輯器實際上
 鍵盤與滑鼠都能操作全部功能，ESC 在編輯器裡是切換模式；RE-052 那三次 ESC 畫面沒變的原因
 仍 `未知`（見 SPEC-036 第 4 節）。所以鍵盤 oracle 走得完這個編輯器，不需要送滑鼠事件。
+
+## RE-158：正常戰鬥六個回合的執行段同狀態比較
+
+輸入：dosgolem（`~/cht/dosgolem-kolrand` `968ca77`）正常路徑 seed 1 那一場 Olear、Theodoric
+對一隻 SLEDGE（與 RE-145／planning-parity-20260911 同一場）。`tools/oracle/book_startup_test.go`
+的 `KOL_BOOK_EXECUTE` 模式在 `sub_1B5A8`（rand）、`sub_1A8FD`（印記錄）、執行段入口
+`0x1FD21`、下一回合 `0x1EF3A`、戰鬥出口 `0x211AD` 掛 `OnCall`，記下每回合入口與結束的
+參戰者記錄、耐力疲勞、32 位元亂數狀態，以及每一次擲骰的 n 與呼叫點；等鍵 `sub_1B100`
+只在執行段 stub。收據 `workplace/battle-first-round-20260928/battle-rounds.json`（只留本機，
+SHA-256 見 `docs/verification/battle-rounds-parity-20260928.md`）。六個回合，第 5 回合起
+SLEDGE 打中 Olear。靜態讀碼同 RE-141。證據等級 `已證實`。
+
+`TestOriginalNormalRoundsExecution` 以每回合執行段入口的狀態與亂數接手，比擲骰序列、
+亂數終態與回合末欄位。先抓到三處不同，修正後六回合全部一致：
+
+### 近戰防禦選項為 0 不擲防禦骰
+
+`sub_26D76:0x27204` 讀對手 `+0x24`，為 0 就把防禦分數設 0 直接跳命中（`0x27220`→`0x2745A`），
+不擲骰、不加招架次數。remake 原本分數雖為 0 卻照擲一次，後面傷害、部位、護甲整串骰序錯開。
+射擊（`0x271E3`）不經這一關，照擲。
+
+### 擊退只在傷得夠重時判
+
+判定在受傷那一支 `sub_277F4` 的 `loc_27B56`，只從「causing … wound」那一條進來
+（`0x27AE0`）：傷害 < 0x10 印 0x155 後把傷害值歸 0、< 8 印 0x154 就離開；0x10…0x17 印 0x156、
+0x18 以上印 0x157，才進擊退。傷害為 0、倒下、部位廢掉的分支都不經過這裡。進來之後
+`rand(100)` 一定擲，體型差不是正的也擲（`0x27BC4`）。`0x27BB8` 把體型差的一半加進
+`var_4`，但 `var_4` 在使用前被方向骰覆寫，那一步沒有作用。
+
+### 疲勞、挨傷與招架次數在回合收尾才結算
+
+`0x20A52` 把 `word_37D2A` 設 0，接著 `0x20A5B`…`0x20F9D` 依參戰者索引逐名：空位跳過、
+退出戰鬥的跳到 `0x20E64`；其餘在 `0x20A8B` 讀 `+0x25` 進 `word_31122`，做疲勞收尾
+（`0x20AF8` 起）與力竭；`0x20E64` 把 `+0x2D` 搬進 `+0x2A`、`+0x2D` 與 `+0x0F` 歸零；再做法術倒數
+（`0x20F01`）。這個迴圈在主迴圈與第二輪移動（RE-154）之後。敵人的 `+0x25` 在這裡清 0，
+隊員的留著（收據：SLEDGE 每回合結束 0x27→0、Theodoric 的 0x29 保留）。
+
+### 規劃段按 YES 才換人
+
+選指令寫回（`0x1FA6D`）之後跳 `loc_1F16A` 重畫同一名的指令列與摘要；`sub_228B7` 回 7（YES）
+才跳 `loc_1FAC4` 設 `+0x22`、換下一名（`0x1F38D`）。收據裡 Theodoric 寫回徒手之後畫面仍是他，
+按 YES 才輪到 Olear。remake 選完就換人，另列 worklist `planning-yes-confirm` 待使用者決定。
+
+### 推翻紀錄
+
+- RE-142 把 `0x20A8B` 說成「每個參戰者輪到時」讀指令碼、疲勞看出手前那一份；它其實是回合
+  收尾迴圈，疲勞讀的是出手之後的 `+0x25`。
+- RE-131 與 SPEC-009「疲勞每一手更新一次」、remake 在各人出手後做疲勞與挨傷搬移，更正為
+  回合收尾。
+- RE-095 與 remake「命中就判擊退」，更正為上述條件。
+
+### remake
+
+- `Resolve`：對手防禦選項為 0 不擲防禦骰。
+- `KnocksBack`：擊退條件；`Knockback` 一定擲 rand(100)。
+- `Act`：出手與第二輪之後加回合收尾（`Exec.settle`），力竭獨立成一步；怯戰還原指令碼。
+- 測試：`TestOriginalNormalRoundsExecution`（`tools/run_original_parity_tests.sh`）、
+  `TestSettleAfterEveryoneActed`、`TestFlinchKeepsCommand`。
