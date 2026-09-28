@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -125,14 +125,22 @@
     {
       "id": "ai-style-mask-tail",
       "layer": "gap",
-      "title": "敵人攻擊式遮罩第 8、9 筆讀到旅店名冊清單的殘值（原版行為）",
+      "title": "敵人攻擊式遮罩第 8、9 筆照原版讀名冊清單殘值",
       "body": "原版 sub_2578F 只寫攻擊式遮罩前 8 筆，第 8、9 筆讀共用緩衝 byte_37CF8 +0x28／+0x29；那兩格由旅店名冊加入清單（sub_147DD:0x149DD）寫入可加入角色的名冊索引，名冊不足九名時是更早的殘值（RE-159）。這兩筆乘在攻擊式第 8、9 項（攻擊選項 10、11）的權重上：這一場是 9、10，那兩式被大幅偏重；是 0 時那兩式永遠抽不到。remake 目前用 StyleMask 第 8、9 筆算 2 或 1 的近似，State.StyleMaskTail 可注入。選項：照原版模擬名冊清單殘值、固定一組值、或保留近似並記為差異。",
       "acceptance": "使用者決定之後：照決定實作並重生受影響的戰鬥收據，或明確記為保留的差異。",
       "verify": {
-        "kind": "manual",
-        "note": "待使用者決定，沒有產品碼訊號。"
+        "kind": "required_in_all",
+        "paths": [
+          "internal/town/recruit.go",
+          "internal/battle/ai.go",
+          "cmd/kol/main.go"
+        ],
+        "pattern": "RosterListTail|StyleMaskTail",
+        "note": "已完成，當回歸訊號：城鎮記錄、戰鬥讀取與接線三處都要在。"
       },
-      "issue": 104
+      "issue": 104,
+      "status": "done",
+      "resolved": "使用者 2026-09-29 選照原版模擬。town.Session.RosterListTail 在開名冊清單時記下第 8、9 名的槽號，三種戰鬥建立時帶進 State.StyleMaskTail；只存在記憶體、程式啟動為 0。靜態盤點確認一般遊玩中只有名冊清單會寫那兩格（RE-159）。住宿後隊伍空了答 NO 改為進名冊流程，與原版 0x128A5 相同。"
     },
     {
       "id": "v02-appimage-platform-acceptance",

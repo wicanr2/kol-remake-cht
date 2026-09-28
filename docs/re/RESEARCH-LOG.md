@@ -10735,6 +10735,17 @@ DGROUP `0x9E48`…`0x9E52` 的寫入監看（`scratch_writes`、`scratch-writes.
 名冊索引依序寫在 `+0x20` 起。所以這兩筆取決於上一次打開名冊清單時的內容，名冊不到九名
 可加入時是更早的殘值。這一場的名冊清單是 `1 3 4 5 6 7 8 9 10 11`。
 
+靜態盤點（子代理初讀，主工作階段抽驗 `loc_131CF` 與 `sub_147DD` 的上界）：直接寫入這塊緩衝的
+約 30 處，除了 `sub_147DD:0x149C4` 之外，上界都是常數，最遠到 +0x27（例如 `loc_131CF`
+從 +0x20 寫三格、`sub_1716A` 寫 +0x20…+0x25、`sub_2578F` 寫 +0x20…+0x27）；`sub_1B94F`
+只讀；`sub_1C0F6` 寫進這塊的那一處最多 8 byte。立即數 `9E29h`…`9E57h` 零命中。所以一般
+遊玩中 +0x28／+0x29 只由名冊清單改寫（直接寫入 `已證實`；以執行期指標做的間接寫入靜態
+掃不到，上述動態監看期間沒有出現）。BSS 在程式啟動時清零，從未打開名冊清單時兩格是 0，
+那兩式永遠抽不到。
+
+`sub_147DD` 有兩個入口：建築動作 6（COMPANION，`0x13D2E`→`0x12903`），以及住宿後隊伍
+空了、`Do you wish to quit?` 答 NO（`0x128A5`）。
+
 ### 推翻紀錄
 
 - RE-092「`byte_399D6` 恆為零、永遠走預設表」：它在載入緩衝裡，由怪物記錄決定。
@@ -10748,7 +10759,10 @@ DGROUP `0x9E48`…`0x9E52` 的寫入監看（`scratch_writes`、`scratch-writes.
   `move_weights`），`State.AIWeights`；`EnemyStyle`／`EnemyLocation`／`EnemyMoveForm`
   改吃這一份。
 - `EnemyMoveForm` 照上面重寫；`counterScan` 帶回列號，`enemyStrike` 以列號抽攻擊式。
-- `EnemyStyle` 的第 8、9 筆遮罩可由 `State.StyleMaskTail` 注入；正式路徑未注入時沿用
-  `StyleMask` 的近似，是否模擬名冊清單殘值待決策（worklist `ai-style-mask-tail`）。
-- 測試：`TestOriginalNormalEnemyPlanning`、`TestMonsterAIWeights`、
+- 使用者 2026-09-29 決定照原版模擬名冊清單殘值：`town.Session.RosterListTail` 在開名冊清單時
+  記下第 8、9 名的槽號（`Candidate.Slot`），三種戰鬥建立時帶進 `State.StyleMaskTail`；
+  只存在記憶體，不進存檔，程式啟動是 0。`StyleMask` 只留前 8 筆。
+- 住宿後隊伍空了答 NO 改為進名冊流程（原版 `0x128A5`），原本只回建築畫面。
+- 測試：`TestOriginalNormalEnemyPlanning`、`TestMonsterAIWeights`、`TestRosterListTail`、
+  `TestFaithfulInnStayQuitNoOpensRoster`、
   `TestEnemyMoveFormZeroesSprintWhenLegsAreFine`、`TestEnemyPlanRollsIntellectTwice`。

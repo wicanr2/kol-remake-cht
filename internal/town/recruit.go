@@ -29,6 +29,8 @@ const (
 
 // Candidate 是一名可招募的角色。Place 與 Town 是角色檔裡的所在地欄位。
 type Candidate struct {
+	// Slot 是角色檔裡的槽號（0…15）。原版名冊清單記的是它，戰鬥 AI 會讀到（RE-159）。
+	Slot     int
 	ID       string
 	Full     *Member
 	Name     string
@@ -271,6 +273,14 @@ func (s *Session) candidatesHere() []Candidate {
 	return out
 }
 
+// recordRosterList 照原版 `sub_147DD:0x149C4` 把清單的槽號依序寫到共用緩衝 +0x20 起：
+// 只有第 8、9 名落在 +0x28／+0x29，清單不夠長就不動（RE-159）。
+func (s *Session) recordRosterList(list []Candidate) {
+	for i := 8; i < 10 && i < len(list); i++ {
+		s.RosterListTail[i-8] = list[i].Slot
+	}
+}
+
 // StartRecruit 是按下 COMPANION：先問要不要搜尋硬碟，圖示列換成大拇指朝上與朝下。
 func (s *Session) StartRecruit() {
 	if s.Mode != ModeInside || s.Inside == nil {
@@ -288,6 +298,7 @@ func (s *Session) StartRecruit() {
 func (s *Session) openList() {
 	s.asking = false
 	s.recruit = &Recruit{Candidates: s.candidatesHere()}
+	s.recordRosterList(s.recruit.Candidates)
 	s.Inside.Dialog = nil
 	s.Inside.DialogZh = nil
 	s.Inside.List = s.recruit.View()

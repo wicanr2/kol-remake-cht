@@ -94,7 +94,9 @@ func commitCreated(c *charcreate.State, d *creationStart, r *roster.Roster, s *t
 	previous := r.Slots[slot]
 	oldRoster := s.Roster
 	r.Slots[slot] = roster.Slot{Slot: slot, ID: m.ID, Name: m.Name, Portrait: m.Portrait, Occupied: true, Place: m.Place, Town: m.TownCode, Gold: m.Gold, Building: m.BuildingID, Female: m.Female}
-	s.Roster = append(append([]town.Candidate(nil), s.Roster...), town.CandidateFromMember(m))
+	cand := town.CandidateFromMember(m)
+	cand.Slot = slot
+	s.Roster = append(append([]town.Candidate(nil), s.Roster...), cand)
 	if s.SaveGame != nil {
 		if err := s.SaveGame(); err != nil {
 			r.Slots[slot] = previous

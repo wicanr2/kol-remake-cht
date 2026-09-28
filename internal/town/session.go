@@ -62,6 +62,10 @@ type Session struct {
 	Party      []Member
 	// Roster 是全部角色檔的清單，招募同伴時用來挑出這間建築裡的人。
 	Roster []Candidate
+	// RosterListTail 是原版名冊清單留在共用緩衝 `byte_37CF8` +0x28／+0x29 的兩格：
+	// 清單第 8、9 名的槽號，清單不夠長就保留上一次的值；遊戲啟動時是 0。戰鬥裡敵人
+	// 抽攻擊式會讀到它（RE-159）。只存在記憶體裡，不進存檔。
+	RosterListTail [2]int
 	// TownCode 是這座城鎮在世界地圖上的三字母代碼（BRT、MIN…），
 	// 與角色檔所在地欄的第二段比對。空字串代表不比對城鎮。
 	TownCode string

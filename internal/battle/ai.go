@@ -47,9 +47,9 @@ var ContextWeights = [16][10]int{
 	{2, 4, 6, 6, 6, 6, 3, 0, 6, 6},
 }
 
-// StyleMask 是攻擊式要的武器位元（DGROUP `0x109C`，10 筆）。與怪物記錄 +0x2D
-// 有交集的那一式權重乘 2，沒有乘 1。
-var StyleMask = [10]int{16, 16, 16, 8, 8, 8, 4, 4, 4, 2}
+// StyleMask 是攻擊式要的武器位元（DGROUP `0x109C` 的前 8 筆，`sub_2578F` 只讀這 8 筆）。
+// 與怪物記錄 +0x2D 有交集的那一式權重乘 2，沒有乘 1；第 8、9 式見 `EnemyStyle`。
+var StyleMask = [8]int{16, 16, 16, 8, 8, 8, 4, 4}
 
 // levelDivisor 是 `w^等級` 的除數（DGROUP `0x10C6`）＝ 2^(等級−1)。
 var levelDivisor = [8]int{1, 1, 2, 4, 8, 16, 32, 64}
@@ -121,12 +121,11 @@ func WeightedPick(base, context []int, level int, rng Rand) int {
 //
 // **遮罩只寫前 8 筆**（`0x25841`：`< 8`），第 8、9 筆讀到的是共用緩衝 `byte_37CF8`
 // +0x28／+0x29 當時的殘值——旅店名冊清單 `sub_147DD:0x149DD` 寫在那裡的索引（RE-159）。
-// `tail` 非 nil 時用它當這兩筆；nil 時沿用 `StyleMask` 的第 8、9 筆算 2 或 1
-// （重製版的既有近似，待決策）。
+// `tail` 就是這兩格（`State.StyleMaskTail`）。是 0 時那兩式的權重歸零，永遠抽不到。
 //
 // 最後一項（索引 9）另外乘「額度 ÷ 花費」，花費是 `sub_251B0(15, 1)`
 // （`0x2589E`，RE-131）。比值夾在 1/3…1，所以那一項只會被壓低。
-func EnemyStyle(a Actor, w AIWeights, guard, weaponBits int, tail *[2]int, rng Rand) int {
+func EnemyStyle(a Actor, w AIWeights, guard, weaponBits int, tail [2]int, rng Rand) int {
 	if guard < 0 || guard >= len(ContextWeights) {
 		guard = 0
 	}
@@ -134,12 +133,14 @@ func EnemyStyle(a Actor, w AIWeights, guard, weaponBits int, tail *[2]int, rng R
 	ctx := make([]int, len(w.Style))
 	for i := range base {
 		base[i] = w.Style[i]
-		mask := 1
+		var mask int
 		switch {
-		case i >= 8 && tail != nil:
-			mask = tail[i-8]
+		case i >= len(StyleMask):
+			mask = tail[i-len(StyleMask)]
 		case StyleMask[i]&weaponBits != 0:
 			mask = 2
+		default:
+			mask = 1
 		}
 		ctx[i] = ContextWeights[guard][i] * mask & 0xFF
 	}

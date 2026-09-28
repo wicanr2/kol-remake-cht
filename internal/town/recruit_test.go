@@ -120,3 +120,27 @@ func TestFullPartyHasNoCompanionIcon(t *testing.T) {
 		}
 	}
 }
+
+// 原版名冊清單把第 8、9 名的槽號留在共用緩衝 +0x28／+0x29，戰鬥 AI 會讀到；
+// 清單不到九名時那兩格保留上一次的值（RE-159）。
+func TestRosterListTail(t *testing.T) {
+	s := recruitSession(t, 1)
+	for i := range s.Roster {
+		s.Roster[i].Slot = i + 2
+	}
+	s.StartRecruit()
+	s.Accept()
+	// 清單從 Poontang（槽 2）起共 11 名，第 8、9 名（從 0 數）是槽 10、11。
+	if s.RosterListTail != [2]int{10, 11} {
+		t.Fatalf("殘值是 %v，應為 [10 11]", s.RosterListTail)
+	}
+	s.cancelRecruit()
+	// 清單變短：隊伍多了十人的名字，候選只剩一名，殘值不動。
+	for _, n := range []string{"Poontang", "Olear", "Moraine", "Fighting Bull", "Kenneth", "Jax", "Sharakan", "Warder", "Shyla", "Aventhalas"} {
+		s.Party = append(s.Party, Member{Name: n})
+	}
+	s.openList()
+	if len(s.recruit.Candidates) != 1 || s.RosterListTail != [2]int{10, 11} {
+		t.Fatalf("候選 %d 名、殘值 %v；清單不夠長時應保留上一次的值", len(s.recruit.Candidates), s.RosterListTail)
+	}
+}

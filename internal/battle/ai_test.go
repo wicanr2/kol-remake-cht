@@ -41,8 +41,8 @@ func TestWeightedPickAllZero(t *testing.T) {
 func TestEnemyStyleDoublesUsableForms(t *testing.T) {
 	// StyleMask[0] 是 16；武器位元帶 16 的話第 0 式權重加倍。
 	a := Actor{Level: 1, Stamina: 200, Threshold: 100}
-	with := EnemyStyle(a, DefaultAIWeights, 0, 16, nil, &fixedRand{values: []int{1}})
-	without := EnemyStyle(a, DefaultAIWeights, 0, 0, nil, &fixedRand{values: []int{1}})
+	with := EnemyStyle(a, DefaultAIWeights, 0, 16, [2]int{}, &fixedRand{values: []int{1}})
+	without := EnemyStyle(a, DefaultAIWeights, 0, 0, [2]int{}, &fixedRand{values: []int{1}})
 	if with < 0 || with >= len(AttackStyleBase) {
 		t.Fatalf("攻擊式 %d 出界", with)
 	}

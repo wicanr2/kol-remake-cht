@@ -4,7 +4,7 @@
   "description": "讀存檔在霍布入城點 7 那一區開場，走出另一個城門，在最終任務的地點打完那一場，看完結局那七段。**結局的觸發點是任務戰鬥打完那一刻**（RE-106）：原版在 `sub_2B0FF` 的尾端先看`word_34968`——那是「這一場真的把任務標成完成了」的旗標（`sub_28F5D` 設的，RE-101）——成立才逐名檢查已回報數等於 0x17。七張圖與七段敘事都與 `-scene ending` 那一組收據**逐 byte 相同**。全程只按鍵，沒有 direct-entry 也沒有測試旗標。**但輸入被換過兩處**：存檔要「已回報 23 件、最終任務已接」，而接任務那一側（`sub_14564`）雖然做完了（RE-110），要在遊戲裡真的回報 23 件仍然不現實；最終任務原本是十二隻 10 級 CYCLOPS，六人隊打不贏，所以壓成一隻 1 級。讀存檔開場、不經過標題（標題選角會以名冊角色重新組隊，用不上存檔隊伍；標題段由 `full` 驗）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡重生。**這條收據使用受控亂數**（使用者 2026-09-27 決定）：以 `-ambush-rolls 100,100,100,100,100,100` 讓出城到任務地點那幾次時段變換的遭遇不成立，隊伍不帶傷走到最終任務地點；最終那一場的戰場與每一擲仍由種子 1 決定，第 10 回合打贏。路上遭遇的機制由 `world-quest`、`battle-ambush` 等收據驗。",
   "seed": 1,
   "load": "workplace/observe/final-battle.json",
-  "script": "U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R RET SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L RET > > RET > RET U U L L R RET > > RET > > > > > RET U U L L D D R RET > RET > RET U U L L R R RET > > RET > > RET U U L L D D R R RET > > RET > > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L RET > > RET > > RET U U L L D D R R RET > > RET > > > RET > RET U U L L D D RET > > RET > RET U U L L D D R RET > > RET > RET U U L L R R RET > > RET > RET U U L L R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R RET > > RET > > RET U U L L D D R R RET > > RET > > > RET > RET U U L L D D R RET > > RET > RET U U L L R R RET > > RET > RET U U L L RET > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L D D R R RET > > RET > > > RET > RET U U L L RET > > RET > RET U U L L D D RET > > RET > RET U U L L R R RET > > RET > RET U U L L D D R RET > > RET > RET U U L L R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > RET U U L L D D R R RET > > RET > > > RET > RET U U L L RET > > RET > RET U U L L D D RET > > RET > RET U U L L D D R RET > > RET > RET U U L L R RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE",
+  "script": "U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R RET SPACE > > > > > RET U U L L R R RET > RET > > > > > RET U U L L D R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L R R RET > RET > > > > > RET U U L L RET > RET > > > > RET U U L L D R R RET > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L RET > > RET > RET U U L L R RET > > RET > > > > > RET U U L L D D R RET > RET > RET U U L L R R RET > > RET > > RET U U L L D D R R RET > > RET > > > RET > RET U U L L D D RET > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > RET U U L L D D R RET > > RET > RET U U L L RET > > RET > RET U U L L D D RET > > RET > RET U U L L R RET > > RET > > RET U U L L D D R R RET > > RET > > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE",
   "shot_dir": "docs/verification/player-path/full-chain-ending",
   "trace": "docs/verification/player-path/full-chain-ending/trace.json",
   "size": [
@@ -91,16 +91,16 @@
       "note": "答應參戰"
     },
     {
-      "step": 664,
+      "step": 391,
       "battle": {
         "stage": 5,
         "verdict": 2,
         "quest_done": 6
       },
-      "note": "第 6 回合打贏：六名的任務旗標都標成完成（RE-101）"
+      "note": "第 3 回合打贏：六名的任務旗標都標成完成（RE-101）"
     },
     {
-      "step": 671,
+      "step": 396,
       "scene": "ending",
       "ending": {
         "armed": true,
@@ -109,7 +109,7 @@
       "note": "戰鬥收尾時檢查已回報數等於 0x17，成立就播結局（RE-106）"
     },
     {
-      "step": 677,
+      "step": 402,
       "ending": {
         "panel": 6
       },
@@ -128,49 +128,49 @@
       "shows": "最終任務的敘述與 Will you partake?"
     },
     {
-      "step": 666,
-      "file": "step-666.png",
+      "step": 391,
+      "file": "step-391.png",
       "shows": "打贏最終任務"
     },
     {
-      "step": 671,
-      "file": "step-671.png",
+      "step": 396,
+      "file": "step-396.png",
       "identical_to": "docs/verification/ending/panel-0.png",
       "shows": "結局第 1 段，與 `-scene ending` 的收據逐 byte 相同"
     },
     {
-      "step": 672,
-      "file": "step-672.png",
+      "step": 397,
+      "file": "step-397.png",
       "identical_to": "docs/verification/ending/panel-1.png",
       "shows": "結局第 2 段，與 `-scene ending` 的收據逐 byte 相同"
     },
     {
-      "step": 673,
-      "file": "step-673.png",
+      "step": 398,
+      "file": "step-398.png",
       "identical_to": "docs/verification/ending/panel-2.png",
       "shows": "結局第 3 段，與 `-scene ending` 的收據逐 byte 相同"
     },
     {
-      "step": 674,
-      "file": "step-674.png",
+      "step": 399,
+      "file": "step-399.png",
       "identical_to": "docs/verification/ending/panel-3.png",
       "shows": "結局第 4 段，與 `-scene ending` 的收據逐 byte 相同"
     },
     {
-      "step": 675,
-      "file": "step-675.png",
+      "step": 400,
+      "file": "step-400.png",
       "identical_to": "docs/verification/ending/panel-4.png",
       "shows": "結局第 5 段，與 `-scene ending` 的收據逐 byte 相同"
     },
     {
-      "step": 676,
-      "file": "step-676.png",
+      "step": 401,
+      "file": "step-401.png",
       "identical_to": "docs/verification/ending/panel-5.png",
       "shows": "結局第 6 段，與 `-scene ending` 的收據逐 byte 相同"
     },
     {
-      "step": 677,
-      "file": "step-677.png",
+      "step": 402,
+      "file": "step-402.png",
       "identical_to": "docs/verification/ending/panel-6.png",
       "shows": "結局第 7 段，與 `-scene ending` 的收據逐 byte 相同"
     }

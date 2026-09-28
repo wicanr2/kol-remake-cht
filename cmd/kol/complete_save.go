@@ -73,7 +73,9 @@ func restoreRoster(s *save.Save, r *roster.Roster, session *town.Session) error 
 			return err
 		}
 		r.Slots[i] = roster.Slot{Slot: i, ID: c.ID, Name: c.Name, Occupied: true, Place: c.Place, Town: c.TownCode, Portrait: c.Portrait, Gold: c.Gold, Female: c.Female, Wounds: c.Wounds, Building: c.BuildingID}
-		session.Roster = append(session.Roster, town.CandidateFromMember(m))
+		cand := town.CandidateFromMember(m)
+		cand.Slot = i
+		session.Roster = append(session.Roster, cand)
 	}
 	return nil
 }

@@ -202,6 +202,20 @@ func TestFaithfulInnStayRetires(t *testing.T) {
 	}
 }
 
+// 隊伍空了答 NO：原版接著進名冊清單（`0x128A5` 呼叫 `sub_147DD`），先問搜不搜硬碟。
+func TestFaithfulInnStayQuitNoOpensRoster(t *testing.T) {
+	s := innSession(t, 56, Member{Name: "Theodoric", Gold: 1009, Speaker: true})
+	s.FaithfulInnStay = true
+	s.SaveGame = func() error { return nil }
+	s.StartRest()
+	yes(s)
+	yes(s)
+	no(s)
+	if s.QuitAsked() || s.Resting() || !s.Recruiting() {
+		t.Fatalf("答 NO 應進名冊流程：離開=%v 住宿中=%v 招募中=%v", s.QuitAsked(), s.Resting(), s.Recruiting())
+	}
+}
+
 // 存檔失敗就整筆退回：不扣錢、不改所在地、不離隊。
 func TestInnStaySaveFailureRollsBack(t *testing.T) {
 	s := innSession(t, 56, Member{Name: "Theodoric", Gold: 1009, Speaker: true})

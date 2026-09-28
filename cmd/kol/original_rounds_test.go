@@ -215,7 +215,7 @@ func TestOriginalNormalEnemyPlanning(t *testing.T) {
 	for _, p := range input.EnemyPlans {
 		t.Run(fmt.Sprintf("第%d回合", p.Round), func(t *testing.T) {
 			s := originalPlanningState(t)
-			s.StyleMaskTail = &tail
+			s.StyleMaskTail = tail
 			for _, i := range []int{0, 1, 6} {
 				applyOriginalRecord(t, &s.Actors[i], p.State.Actors[i])
 			}

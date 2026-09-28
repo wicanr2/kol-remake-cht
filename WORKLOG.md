@@ -6831,3 +6831,14 @@ frame-270 推翻了 remake 的版面：
   第 16 回合打贏，1649 步；full-chain-ending 第 6 回合打贏，截掉結局第七段後多按的 7 次 SPACE，
   677 步。里程碑依段落換算並更新回合數與伏擊傷勢，刪除 26 張不再引用的舊截圖。25 條路徑一致；
   `go test ./internal/... ./cmd/...` 全過。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #104 結案（使用者 2026-09-29 選 A：照原版）：敵人抽攻擊式的遮罩第 8、9 筆讀旅店名冊清單留在共用緩衝
+  +0x28／+0x29 的槽號。子代理靜態盤點約 30 處直接寫入，主工作階段抽驗上界：一般遊玩中只有
+  `sub_147DD:0x149C4` 會寫這兩格（RE-159 補述）。remake：`Candidate.Slot`、
+  `Session.RosterListTail`（開名冊清單時記下，只在記憶體、啟動為 0）→ 三種戰鬥的
+  `State.StyleMaskTail`；`StyleMask` 只留前 8 筆。另補原版流程：住宿後隊伍空了答 NO 進名冊流程
+  （`0x128A5`）。新增 `TestRosterListTail`、`TestFaithfulInnStayQuitNoOpensRoster`。
+  8 份戰鬥收據通過；四條長路徑戰鬥段再重生：arena 路上 20 回合敗北、競技場第 10 回合敗北，1697 步；
+  full-chain 第 19 回合打贏，2202 步；full-chain-reload 第 13 回合打贏，1372 步；full-chain-ending
+  第 3 回合打贏，402 步。25 條路徑一致；`go test ./internal/... ./cmd/...` 全過。
+  過程中誤用 `git checkout` 還原了剛重生的 plan，已重跑重生；無其他影響。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

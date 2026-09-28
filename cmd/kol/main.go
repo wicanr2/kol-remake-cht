@@ -630,6 +630,7 @@ func (g *game) startArenaFight() {
 		return
 	}
 	st.Rand = g.arena.rand
+	st.StyleMaskTail = g.play.RosterListTail
 	st.SpoilItems = g.arena.spoils
 	g.quest.tiles = g.arena.tiles
 	g.quest.state = st
@@ -3246,7 +3247,7 @@ func main() {
 			}
 			for _, slot := range rosterState.Occupied() {
 				playSession.Roster = append(playSession.Roster, town.Candidate{
-					Name: slot.Name, Portrait: slot.Portrait,
+					Slot: slot.Slot, Name: slot.Name, Portrait: slot.Portrait,
 					Place: slot.Place, Town: slot.Town,
 					Female: slot.Female, Wounds: slot.Wounds,
 					Gold: slot.Gold, BuildingID: slot.Building,
@@ -3550,6 +3551,8 @@ func main() {
 				if st == nil {
 					return
 				}
+				// 共用緩衝殘值：城鎮上一次名冊清單留下的（RE-159）。
+				st.StyleMaskTail = playSession.RosterListTail
 				st.Rand = newRand(*seed)
 				st.SpoilItems = spoilItems
 				quest.tiles = ui.NewBattleTiles(atlas)
@@ -3670,6 +3673,7 @@ func main() {
 				quest.tiles = ui.NewBattleTiles(atlas)
 				st := battle.NewQuest(site, members, monsters.At(site.Monster), field)
 				st.Rand = newRand(*seed)
+				st.StyleMaskTail = playSession.RosterListTail
 				st.SpoilItems = spoilItems
 				st.Stage = battle.StageEncounter
 				quest.state = st

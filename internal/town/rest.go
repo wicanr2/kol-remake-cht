@@ -199,8 +199,12 @@ func (s *Session) restAnswer(yes bool) {
 	case restQuit:
 		if yes {
 			s.quit = true
+			s.endRest()
+			return
 		}
-		s.endRest()
+		// 答 NO 接著進名冊清單（`sub_11A93:0x128A5` 呼叫 `sub_147DD`），與 COMPANION 同一條路。
+		s.rest = nil
+		s.StartRecruit()
 	}
 }
 
@@ -255,6 +259,7 @@ func (s *Session) commitStay() {
 	found := false
 	for j := range s.Roster {
 		if s.Roster[j].Name == updated.Name {
+			updated.Slot = s.Roster[j].Slot
 			s.Roster[j] = updated
 			found = true
 			break

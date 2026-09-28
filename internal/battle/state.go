@@ -144,9 +144,9 @@ type State struct {
 	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
 	// 所以這裡是一份不是一組。
 	Monster Monster
-	// StyleMaskTail 是敵人抽攻擊式時遮罩第 8、9 筆讀到的共用緩衝殘值（RE-159）。
-	// nil 表示沿用重製版的近似（`EnemyStyle`）；同狀態對拍時由原版收據填入。
-	StyleMaskTail *[2]int
+	// StyleMaskTail 是敵人抽攻擊式時遮罩第 8、9 筆讀到的共用緩衝殘值（RE-159）：
+	// 城鎮上一次名冊清單留下的兩格（`town.Session.RosterListTail`），沒打開過是 0。
+	StyleMaskTail [2]int
 	// QuestItem 是這一個任務要的那件東西的名字（原版存在 `0xB956` 那十六個
 	// byte，來自任務 payload 的 `+0x29`，RE-113）。帶著它逃出戰場就算完成，
 	// 不必把怪物打完。空字串表示這一場沒有那樣的東西。
