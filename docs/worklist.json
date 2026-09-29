@@ -245,13 +245,19 @@
       "id": "appimage-parity-continuation",
       "layer": "verification",
       "title": "旅店、戰鬥與存讀檔的 AppImage 同狀態對拍",
-      "body": "要等 remake 未完成的接線修好才能往下做。工具鏈側已可用：dosgolem 正常 KOL.EXE 入口經 DOS Enter 進 KOLBOOK，已走到 Halfway House。",
+      "body": "以本機 AppImage v.0.2.6-20260929 的執行檔重跑旅店、招募、住宿的原版畫面對拍與戰鬥、長鏈收據（docs/verification/appimage-v.0.2.6-20260929.md）。",
       "acceptance": "AppImage 與原版在旅店、戰鬥、存讀檔三段同狀態一致。",
       "verify": {
-        "kind": "manual",
-        "note": "卡在上游接線。對拍收據落地時改綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/appimage-v.0.2.6-20260929.md"
+        ],
+        "pattern": "8／8",
+        "note": "已完成，當回歸訊號：AppImage 對拍紀錄在。"
       },
-      "issue": 12
+      "issue": 12,
+      "status": "done",
+      "resolved": "2026-09-29：封包執行檔（雜湊與建置收據相符）跑 plan-town-inn 8／8、plan-town-recruit 9／9、plan-town-rest 11／11 對原版畫格全過；8 份戰鬥機制收據與 25 條玩家路徑（含打贏、住宿存檔、讀檔續玩）一致；完整保存 GUI 在真的 AppImage 上通過。戰鬥規則的原版同狀態由同一 commit 的原版對拍測試支撐。不宣稱：存檔格式與原版不同，重載後續玩只與 remake 收據比；戰鬥只有一場正常遭遇的原版收據。"
     },
     {
       "id": "a01-a02-identity-and-save",

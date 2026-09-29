@@ -103,11 +103,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：玩家看得到的 AI 行為（撤退、反制掃描、側翼、撿武器）在正常 GUI 下與原版一致。
   核實：要人判——靠近與貼身攻擊已由 TestOriginalNormalEnemyPlanning 對拍；其餘四種行為要另找會出現它們的原版戰鬥。
 
-- **appimage-parity-continuation**（#12） — 旅店、戰鬥與存讀檔的 AppImage 同狀態對拍
-  要等 remake 未完成的接線修好才能往下做。工具鏈側已可用：dosgolem 正常 KOL.EXE 入口經 DOS Enter 進 KOLBOOK，已走到 Halfway House。
-  完成條件：AppImage 與原版在旅店、戰鬥、存讀檔三段同狀態一致。
-  核實：要人判——卡在上游接線。對拍收據落地時改綁它。
-
 - **a10-battle-info-panel**（#17） — A10：戰鬥左側完整資訊內容的原版同狀態
   人形／傷勢／疲勞（SPEC-018）、左上裝備／肖像與模式切換（SPEC-019）、左下命令／招式（SPEC-021）、彈藥數字（SPEC-022）都已接線；3,168 組命令參數、144 組遮罩、十二組直條與九組敵人智力檢定由 dosgolem 通過，正常 GUI 已畫出人形、兩張戰場畫格縮放比較零差異。完整裝備與攻擊後傷勢對拍仍待完成。
   完成條件：正常戰鬥能辨識目前角色、裝備與傷勢，破損後顯示同步；不能以空框截圖通過代替。
@@ -250,6 +245,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **d01-spec-stale-clauses** — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款：已完成
 - **battle-normal-seed-alignment** — 原版戰鬥同狀態：攻擊結算比較：已完成
 - **inn-farewell-diff-review** — 審查原版離店告別訊息與確認流程：已完成
+- **appimage-parity-continuation** — 旅店、戰鬥與存讀檔的 AppImage 同狀態對拍：2026-09-29：封包執行檔（雜湊與建置收據相符）跑 plan-town-inn 8／8、plan-town-recruit 9／9、plan-town-rest 11／11 對原版畫格全過；8 份戰鬥機制收據與 25 條玩家路徑（含打贏、住宿存檔、讀檔續玩）一致；完整保存 GUI 在真的 AppImage 上通過。戰鬥規則的原版同狀態由同一 commit 的原版對拍測試支撐。不宣稱：存檔格式與原版不同，重載後續玩只與 remake 收據比；戰鬥只有一場正常遭遇的原版收據。
 - **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊：2026-09-26 v.0.2.5 AppImage 真實按鍵：建兩名、各自入隊、住宿離隊後重載各自再選進旅店、刪除不搬槽、空槽重用與滿槽拒絕皆通過；兩種預設存檔位置另通過。收據 docs/verification/identity-save-chain/receipt.json。
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
 - **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE：已完成

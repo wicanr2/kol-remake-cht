@@ -21,7 +21,7 @@ GitHub Issue 狀態與本地 Markdown；README 截圖仍留待整體驗收完成
 [手冊功能與繁中收尾稽核](docs/verification/manual-fidelity-audit-20260923.md)。
 遠端 Issue #86、#90 已依局部版面收據關閉；#92 的 45 個來源槽位已由 RE-140 結案並關閉，
 #93 追蹤任務交付的原版同狀態與自然玩家鏈。#14、#33、#34、#35 仍開放；
-`docs/worklist.json` 目前為 37 項未完成、66 項已完成（#18、#101、#3、#9、#10 已於 2026-09-28 完成，#104 ai-style-mask-tail、#102 planning-yes-confirm 與 #31 點陣圖編輯器（SPEC-036）於 2026-09-29 依使用者決定完成；存檔升為 kol-save-v3；#11 敵人規劃靠近與貼身攻擊已對拍，其餘行為仍開放）。
+`docs/worklist.json` 目前為 36 項未完成、67 項已完成（#12 AppImage 同狀態對拍於 2026-09-29 以 v.0.2.6-20260929 完成；#18、#101、#3、#9、#10 已於 2026-09-28 完成，#104 ai-style-mask-tail、#102 planning-yes-confirm 與 #31 點陣圖編輯器（SPEC-036）於 2026-09-29 依使用者決定完成；存檔升為 kol-save-v3；#11 敵人規劃靠近與貼身攻擊已對拍，其餘行為仍開放）。
 
 - 本輪以原始城鎮資料為母體，新增 `tools/verify_runtime_translation.py`；建角表
   99 筆建角／共用 UI 字串均有中文，六個精靈部族名改用術語表暫譯。城鎮 2,121 則非空後續訊息
@@ -131,9 +131,9 @@ Issue #91「物品頁選中之後的明細畫面與原版不同」已完成。SP
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **37 條未完成**（24 條沒有機器訊號、標 `manual`），
-  另有 66 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`manual` 24、`present` 12、`absent` 1。
+- 目前 **36 條未完成**（23 條沒有機器訊號、標 `manual`），
+  另有 67 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`manual` 23、`present` 12、`absent` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**
   （base 為 `origin/main`，`5f9a9a1`，已推送到 `origin/kol-oracle`）。舊的 `kol-force-call` 已刪除——它的 commit

@@ -40,7 +40,7 @@ python3 - <<'PY'
 import json
 from pathlib import Path
 a=json.loads(Path('/out/created-first.json').read_text());b=json.loads(Path('/out/created.json').read_text())
-assert a['schema']=='kol-save-v2' and sum(x is not None for x in a['characters'])==15
+assert a['schema']=='kol-save-v3' and sum(x is not None for x in a['characters'])==15
 assert sum(x is not None for x in b['characters'])==16
 assert b['characters'][14]['name']=='NOVA' and b['characters'][15]['name']=='LUNA'
 assert b['characters'][14]['id']!=b['characters'][15]['id']

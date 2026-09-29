@@ -20,6 +20,15 @@ if [ $# -lt 1 ]; then
 fi
 SPECS="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 
+# KOL_BIN 指向一個已建好的執行檔（例如從 AppImage 解出來的 usr/bin/kol）時不從原始碼
+# 建置，直接用它跑；用來驗證封包裡的那一份。工作目錄仍是 /src，素材讀的是工作樹，
+# 與封包內素材是否相同另由 verify_local_appimage.py 逐檔核對。
+BIN_MOUNT=()
+if [ -n "${KOL_BIN:-}" ]; then
+  [ -f "$KOL_BIN" ] || { echo "找不到 KOL_BIN：$KOL_BIN" >&2; exit 2; }
+  BIN_MOUNT=(-v "$(cd "$(dirname "$KOL_BIN")" && pwd)/$(basename "$KOL_BIN"):/prebuilt/kol:ro" -e KOL_PREBUILT=1)
+fi
+
 exec timeout "${KOL_GO_TIMEOUT:-1800}" docker run --rm \
   --network none \
   --memory 3g --cpus "${KOL_GO_CPUS:-2}" --pids-limit 512 \
@@ -28,6 +37,7 @@ exec timeout "${KOL_GO_TIMEOUT:-1800}" docker run --rm \
   -e HOME=/tmp \
   -v "$REPO_ROOT:/src" -w /src \
   -v "$SPECS:/specs.txt:ro" \
+  "${BIN_MOUNT[@]}" \
   --tmpfs "/tmp:exec,uid=$(id -u),gid=$(id -g),size=1g" \
   "$IMAGE" \
   bash -lc '
@@ -40,7 +50,11 @@ exec timeout "${KOL_GO_TIMEOUT:-1800}" docker run --rm \
     # 而且 workspace 模式不接受 `-mod=mod`。這裡不需要 oracle，直接關掉。
     export GOWORK=off
     export LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe
-    go build -o /tmp/kol ./cmd/kol
+    if [ -n "${KOL_PREBUILT:-}" ]; then
+      cp /prebuilt/kol /tmp/kol
+    else
+      go build -o /tmp/kol ./cmd/kol
+    fi
     Xvfb :92 -screen 0 1280x800x24 -nolisten tcp >/tmp/xvfb.log 2>&1 &
     XPID=$!
     for _ in $(seq 1 50); do [ -e /tmp/.X11-unix/X92 ] && break; sleep 0.1; done
