@@ -85,6 +85,8 @@ python3 tools/check_player_paths.py --all
 | `quest-list` | 11 | 讀檔開場，資料頁按第 19 個圖示，看回報過的任務排成八欄三列 |
 | `arena` | 1961 | 讀檔開場 → 出城 → 路上伏擊敗北 → 競技場 (55,13) 選人、下兩注、開打敗北並結算賭金 |
 | `full-chain-ending` | 1124 | 讀檔開場 → 出城（受控骰值，路上不遇伏）→ 最終任務的地點 → 打贏 → 結局七段 |
+| `quest-chain` | 7096 | 標題起跑 → 招募 → 接 Ship Wheel 任務 → 戰場撿起、帶物逃走 → 回城交付、全隊回報 → 繞到旅店住宿存檔 |
+| `quest-chain-reload` | 11 | 讀 `quest-chain` 的存檔 → 進旅店看資料頁 → 出門；旗標、已回報數與金幣帶回 |
 
 ### `full-chain`：出城打一場再回城存檔
 
@@ -103,6 +105,12 @@ Sharakan、Olear），用 `tools/import_original_characters.py` 匯入，讀檔�
 
 寫出來的 v2 存檔逐欄比對，其中冒險點數證明了戰後獎勵真的寫回角色：Poontang 從角色檔
 的 2,316 變成 2,466（RE-096）。
+
+### `quest-chain`：接任務、撿物逃走、交付
+
+從標題起跑（種子 1），野外遭遇前 200 擲固定 100，戰場內是種子亂數。戰鬥按鍵由
+`tools/drive_battle_script.py` 的任務模式（`KOL_DRIVE_QUEST=1`）打出。逐步說明與原版關鍵點
+見 [任務鏈驗證](../quest-chain-20260930.md)。
 
 ### `full-chain-reload`：存檔的迴圈
 

@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -282,13 +282,20 @@
       "id": "a03-a04-writeback-and-contract",
       "layer": "gap",
       "title": "A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約",
-      "body": "勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。RE-139 揭出的任務交付順序與全隊回報已依 SPEC-014 READY 接回，觀察用存檔的正常按鍵及英中狀態相同；自然取得任務物品、原版同狀態及跨戰鬥／城鎮／存檔逐欄一致仍未驗。",
+      "body": "勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。任務鏈以 `quest-chain`／`quest-chain-reload` 玩家路徑走完：自然接任務、戰場撿起、帶物逃走標成完成、城鎮交付與全隊回報、住宿存檔與重載，存檔逐欄檢查旗標、已回報數與物品。原版以關鍵點接手比較標完成、撿起、戰場邊逃走與交付四處（RE-162），並修正撿後 +0x25 與敵人撿起訊息兩個差異。",
       "acceptance": "從自然接任務、取得物品、城鎮交付到保存／重載，跨戰鬥與城鎮逐欄一致，並有原版同狀態證據。",
       "verify": {
-        "kind": "manual",
-        "note": "同 a01-a02：逐欄一致要跑過才知道。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/quest-chain-20260930.md",
+          "docs/verification/player-path/quest-chain.json",
+          "docs/verification/player-path/quest-chain-reload.json"
+        ],
+        "pattern": "quest-chain",
+        "note": "已完成，當回歸訊號：驗證文件與兩份玩家路徑計畫都在。"
       },
-      "issue": 14
+      "issue": 14,
+      "status": "done"
     },
     {
       "id": "a05-a06-a09-belt-ward-nutrition",
@@ -1670,17 +1677,20 @@
       "id": "quest-turnin-original-same-state",
       "layer": "verification",
       "title": "任務物品交付的原版同狀態與自然玩家鏈",
-      "body": "RE-139 的 IDA 控制流與重製版觀察存檔 GUI 已覆蓋兩次 SPACE、第一件物品交換及全隊回報。原版同狀態畫格／狀態、自然接任務與取得物品，以及回報後保存／重載尚缺。SPEC-014 維持 READY。",
+      "body": "原版以關鍵點接手比較交付 8 組（交換落點、訊息 6／7、六名旗標與已回報數）及撿起、帶物逃走、標完成（RE-162）；自然接任務到保存／重載的玩家鏈見 `quest-chain`。SPEC-014 第 3–5、8 節與撿起升 CONFORMED。",
       "acceptance": "以原版與重製版可比初態驗證兩次按鍵、原始物品記錄、六名角色旗標及回報數，再完成自然取得到保存／重載的正常玩家鏈；附版本、輸入、亂數條件與收據後才將 SPEC-014 對應範圍升 CONFORMED。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/spec/014-quest-completion.md"
+          "docs/spec/014-quest-completion.md",
+          "docs/verification/quest-chain-20260930.md",
+          "docs/re/RESEARCH-LOG.md"
         ],
-        "pattern": "同狀態畫格／狀態尚未取得前維持 READY",
-        "note": "以 SPEC-014 的同狀態缺口作開放訊號；取得原版收據後須更新規格狀態。"
+        "pattern": "RE-162",
+        "note": "已完成，當回歸訊號：規格、驗證文件與研究日誌都引用 RE-162。"
       },
-      "issue": 93
+      "issue": 93,
+      "status": "done"
     },
     {
       "id": "plan-key-replans",

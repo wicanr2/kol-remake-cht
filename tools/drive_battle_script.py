@@ -16,11 +16,16 @@ token → 再跑。**產出的是一串固定按鍵**，之後用一般的 `-flo
 （同時跑好幾條時要各給一個，否則會互相覆寫）。
 `KOL_STOP_AFTER_BATTLE=1` 讓腳本在第一場戰鬥離場時停止；勝負仍須讀
 `VerdictLost=1`／`VerdictWon=2`／`VerdictFled=3`，不能把離場當成勝利。
+存檔給 `-` 表示不讀檔，從標題走（`-scene flow`）。
+`KOL_DRIVE_QUEST=1` 是任務地點的「撿物逃走」策略（SPEC-014 §5）：離任務物品最近的
+隊員走去撿，撿到後走到最近的戰場邊，逃走問句答 y；其餘隊員護送持物者。找路讀軌跡的
+`walls`（要 `-trace-detail`，每一場記一次）。
 
 游標移到目標格的序列是「先歸位再走」：`U U L L` 之後一定停在 (3,3)，
 接著 `D`×(dx+1)、`R`×(dy+1) 就到相對位移 (dx, dy) 那一格——先垂直再水平不會
 撞到中央那一格的跳過規則。
 """
+import collections
 import json
 import os
 import pathlib
@@ -33,6 +38,11 @@ SITES = os.environ.get('KOL_QUEST_SITES', '')
 SPEC.mkdir(parents=True, exist_ok=True)
 
 CMD_YES, CMD_WEAPON, CMD_UNARMED, CMD_MOVE, CMD_REST = 0x07, 0x21, 0x29, 0x27, 0x05
+CMD_PICKUP = 0x26
+# KOL_DRIVE_QUEST=1：任務地點那一場改走「搶任務物品、走到戰場邊、逃走」（SPEC-014 §5）。
+# 離任務物品最近的那一名去撿，撿到之後往最近的戰場邊走；其他人照舊迎敵。
+QUEST_MODE = os.environ.get('KOL_DRIVE_QUEST') == '1'
+EDGE_LO, EDGE_HI = 4, 0x3B
 ICON_MOVE_WALK = 0x3C
 
 
@@ -48,7 +58,10 @@ KOL_AMBUSH_ROLLS = os.environ.get('KOL_AMBUSH_ROLLS', '')
 
 
 def run(tokens, seed, save):
-    args = ['-scene', KOL_SCENE, '-seed', str(seed), '-load', save, '-trace-detail']
+    args = ['-scene', KOL_SCENE, '-seed', str(seed), '-trace-detail']
+    # 存檔給 `-` 表示不讀檔：從標題／書本一路走的正常流程（`-scene flow`）。
+    if save != '-':
+        args += ['-load', save]
     if SITES:
         args += ['-quest-sites', SITES]
     if KOL_MONSTERS:
@@ -66,7 +79,16 @@ def run(tokens, seed, save):
                         encoding='utf-8')
         subprocess.run(['tools/run_kol_shots_fast.sh', str(spec)], check=True,
                        stdout=subprocess.DEVNULL)
-    return json.loads((SPEC / 'last.json').read_text(encoding='utf-8'))['steps'][-1]
+    steps = json.loads((SPEC / 'last.json').read_text(encoding='utf-8'))['steps']
+    row = steps[-1]
+    # 地形每一場只記一次（`walls`），這裡把最近那一份接到最後一步上。
+    if row.get('battle') is not None and 'walls' not in row['battle']:
+        for prev in reversed(steps):
+            walls = (prev.get('battle') or {}).get('walls')
+            if walls:
+                row['battle']['walls'] = walls
+                break
+    return row
 
 
 def parse_roster(lines):
@@ -202,6 +224,90 @@ def world_step(tokens, row, target):
     return True
 
 
+def first_step(walls, taken, start, is_goal):
+    """在地形（`walls[y][x]`）與站著的人之間找最短路，回第一步的 (dx, dy)。
+    站著的人只擋第一步：再遠的人下一回合多半已經走開了。"""
+    def free(x, y):
+        if not (EDGE_LO <= x <= EDGE_HI and EDGE_LO <= y <= EDGE_HI):
+            return False
+        return not walls or walls[y][x] != '#'
+    prev = {start: None}
+    queue = collections.deque([start])
+    while queue:
+        cur = queue.popleft()
+        if cur != start and is_goal(*cur):
+            while prev[cur] != start:
+                cur = prev[cur]
+            return cur[0] - start[0], cur[1] - start[1]
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                nxt = (cur[0] + dx, cur[1] + dy)
+                if (dx or dy) and nxt not in prev and free(*nxt) and \
+                        not (cur == start and nxt in taken):
+                    prev[nxt] = cur
+                    queue.append(nxt)
+    return None
+
+
+def quest_step(b, memo):
+    """任務物品那一名這一手要按的鍵；不是那一名就回 None 交給一般邏輯。"""
+    roster = {a['i']: a for a in b['roster']}
+    me = roster.get(b['cursor'])
+    if me is None or me['side'] != 0:
+        return None
+    holders = b.get('quest_holders') or []
+    item = None
+    for g in b.get('ground') or []:
+        name, pos = g.rsplit(' ', 1)
+        if name == memo.get('quest_item_name', name):
+            x, y = (int(v) for v in pos.split(','))
+            item = (x, y)
+            memo.setdefault('quest_item_name', name)
+            break
+    party = [a for a in b['roster'] if a['side'] == 0 and not a['down']]
+    if holders:
+        carrier = holders[0]
+    elif item is not None and party:
+        carrier = memo.get('carrier')
+        if carrier is None or roster.get(carrier, {}).get('down', True):
+            carrier = min(party, key=lambda a: max(abs(a['x'] - item[0]), abs(a['y'] - item[1])))['i']
+            memo['carrier'] = carrier
+    else:
+        return None
+    bar = b['bar']
+    taken = {(a['x'], a['y']) for a in b['roster'] if a['i'] != me['i'] and not a['down']}
+    if me['i'] != carrier:
+        # 護送：身邊有敵人就交給一般邏輯去打，否則跟著持物者走，擋在他與追兵之間。
+        foes = [a for a in b['roster'] if a['side'] == 1 and not a['down']]
+        if any(max(abs(f['x'] - me['x']), abs(f['y'] - me['y'])) == 1 for f in foes):
+            return None
+        c = roster[carrier]
+        if max(abs(c['x'] - me['x']), abs(c['y'] - me['y'])) <= 1 or CMD_MOVE not in bar:
+            return pick(bar, CMD_REST) if CMD_REST in bar else None
+        near = lambda x, y: max(abs(c['x'] - x), abs(c['y'] - y)) == 1
+        first = first_step(b.get('walls'), taken, (me['x'], me['y']), near)
+        if first is None:
+            return None
+        return pick(bar, CMD_MOVE) + to_cell(*first) + ['RET', '>', 'RET']
+    on_edge = lambda x, y: x in (EDGE_LO, EDGE_HI) or y in (EDGE_LO, EDGE_HI)
+    if me['i'] in holders:
+        if on_edge(me['x'], me['y']):
+            return pick(bar, CMD_REST) if CMD_REST in bar else None
+        is_goal = on_edge
+    else:
+        if (me['x'], me['y']) == item and CMD_PICKUP in bar:
+            return pick(bar, CMD_PICKUP)
+        is_goal = lambda x, y: (x, y) == item
+    if CMD_MOVE not in bar:
+        return None
+    first = first_step(b.get('walls'), taken, (me['x'], me['y']), is_goal)
+    if first is None:
+        return pick(bar, CMD_REST) if CMD_REST in bar else None
+    dx, dy = first
+    # 移動方式選第二格（奔跑）：`>` 一次再確定。
+    return pick(bar, CMD_MOVE) + to_cell(dx, dy) + ['RET', '>', 'RET']
+
+
 def main():
     seed = sys.argv[1]
     save = sys.argv[2]
@@ -272,7 +378,9 @@ def main():
             tokens += ['>', 'RET']
             continue
         if stage == 3:
-            tokens.append('N')
+            # 逃走那一問（StageFlee）。任務模式有人拿著任務物品時答 y（SPEC-014 §5）。
+            holders = b.get('quest_holders') or []
+            tokens.append('Y' if QUEST_MODE and holders else 'N')
             continue
         if prompt == 10:
             # 執行段一句一個鍵。一次補一批再看——一場戰鬥的執行段有上百句，
@@ -284,8 +392,14 @@ def main():
             tokens.append('RET')
             continue
         if prompt == 9:
-            # Do you want to flee? 這一條路要打完，不逃。
-            tokens.append('N')
+            # Do you want to flee? 一般路徑要打完，不逃；任務模式在有人拿著任務物品
+            # 站在邊上時答 y（帶著東西逃掉也算完成）。
+            holders = b.get('quest_holders') or []
+            tokens.append('Y' if QUEST_MODE and holders else 'N')
+            continue
+        if prompt == 11:
+            # Do you want to pick it up? 任務模式一律撿。
+            tokens.append('Y' if QUEST_MODE else 'N')
             continue
         # 攻擊式那一列的第一個選項（0x2A）換算出來的攻擊選項是 **0**，
         # 防禦式那一列的第一個（0x2A）換算出來的防禦選項也是 0——兩個都是 0
@@ -324,6 +438,11 @@ def main():
             tokens.append('RET')
             continue
         memo['decided'] = key
+        if QUEST_MODE:
+            step = quest_step(b, memo)
+            if step is not None:
+                tokens += step
+                continue
         # 相鄰就打，不然往最近的敵人走一格。
         roster = {a['i']: a for a in b['roster']}
         me = roster.get(b['cursor'])

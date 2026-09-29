@@ -211,15 +211,16 @@ func TestPickUpDeclineAsksNextItem(t *testing.T) {
 	}
 }
 
-// 敵人不問，直接撿（`0x20332` 比參戰者記錄 +0x01）。
+// 敵人不問，直接撿（`0x20332` 比參戰者記錄 +0x01），撿成功也不印任何一句
+// （`0x204E4` 直接收尾，RE-162）。
 func TestPickUpEnemyDoesNotAsk(t *testing.T) {
 	s := pickUpState()
 	s.Actors[0].Side = SideMonster
 	s.Party = nil
 	s.Exec.Order, s.Exec.Turn = []int{0}, 0
 	r, ok := s.Step(maxRand{})
-	if !ok || r.Message != FoundItemRecord {
-		t.Fatalf("敵人該直接撿，得到 %#x（ok=%v）", r.Message, ok)
+	if !ok || r.Message != 0 || r.Item == "" {
+		t.Fatalf("敵人該不出聲直接撿，得到 %#x／%q（ok=%v）", r.Message, r.Item, ok)
 	}
 	if s.Plan.Prompt == PromptPickUp || s.PickUp != nil {
 		t.Fatal("敵人不該被問")

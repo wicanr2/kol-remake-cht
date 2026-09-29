@@ -1103,6 +1103,8 @@ type game struct {
 	// lastStage 是上一步的戰鬥階段，只有它變了才記一次戰場。
 	lastParty []string
 	lastStage int
+	// wallsFor 是已經把地形記進軌跡的那一場。
+	wallsFor *battle.State
 	// traceDetail 打開時軌跡多記指令列、游標與逐步的戰場——產生腳本用，
 	// 收據不需要。
 	traceDetail bool
@@ -1296,6 +1298,36 @@ func (g *game) snapshot() map[string]any {
 			b["actors"] = len(st.Actors)
 			b["cursor_cell"] = []int{st.Plan.Cursor.Row, st.Plan.Cursor.Col,
 				st.Plan.Cursor.Mode, st.Plan.Cursor.Icon}
+			var ground []string
+			for _, gi := range st.Ground {
+				if gi.Name != "" {
+					ground = append(ground, fmt.Sprintf("%s %d,%d", gi.Name, gi.X, gi.Y))
+				}
+			}
+			b["ground"] = ground
+			var holders []int
+			for i := range st.Actors {
+				if st.HoldsQuestItem(i) {
+					holders = append(holders, i)
+				}
+			}
+			b["quest_holders"] = holders
+			// 地形擋不擋路（`BlocksMovement`）每一場只記一次，給驅動器找路。
+			if st.Field != nil && g.wallsFor != st {
+				g.wallsFor = st
+				walls := make([]string, 0, battle.FieldMax+1)
+				for y := 0; y <= battle.FieldMax; y++ {
+					row := make([]byte, battle.FieldMax+1)
+					for x := range row {
+						row[x] = '.'
+						if battle.BlocksMovement(st.Field.At(x, y)) {
+							row[x] = '#'
+						}
+					}
+					walls = append(walls, string(row))
+				}
+				b["walls"] = walls
+			}
 		}
 		// 戰場上的位置與傷勢每一步都在動，逐步記會把軌跡撐大好幾倍而且沒有人讀。
 		// 只在**階段改變**時記一次：進戰場、分勝負、收尾各留一份。

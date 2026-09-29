@@ -20,3 +20,10 @@ func (s *State) matchesQuestItem(item *Item) bool {
 	return s.Site != nil && s.Site.Index >= 0 && item != nil &&
 		EqualQuestItemRecords(s.Site.QuestItem.Record, item.Record)
 }
+
+// HoldsQuestItem 回報第 i 名是不是手上拿著這一場的任務物品（`sub_2886C(0x30)`，
+// 與 FleeOffer 同一個判準）。
+func (s *State) HoldsQuestItem(i int) bool {
+	m := s.member(i)
+	return m != nil && s.matchesQuestItem(m.HandItem)
+}

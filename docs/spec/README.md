@@ -46,7 +46,7 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 | SPEC-011 | [野外的隨機遭遇](011-wilderness-ambush.md) | READY | 含 RE-112／128 治療問答及敘述；正常治療與保存往返仍待驗 |
 | SPEC-012 | [施法](012-combat-spells.md) | READY | 含 RE-128～131 護符、效果 5／7／8 及疲勞鏈；選部位互動已做，正常 GUI 收據仍待補 |
 | SPEC-013 | [射擊](013-combat-missiles.md) | READY（飛行動畫除外） | 授權彈道、目標選擇、攻防與訊息、裝填那一手，以及敵人 AI 的射擊分支 |
-| SPEC-014 | [任務的完成與逃走](014-quest-completion.md) | READY | 旗標、逃走問答及 RE-108 競技場升階已接；掉落與完整保存鏈限制見本文 |
+| SPEC-014 | [任務的完成與逃走](014-quest-completion.md) | READY（第 3–5、8 節與撿起 CONFORMED） | 撿物、帶物逃走、交付與保存鏈經 RE-162 原版關鍵點與 `quest-chain` 驗證；逃走／落敗掉落仍待證據 |
 | SPEC-015 | [結局](015-ending.md) | READY | RE-107 回報計數、保存與戰鬥收尾觸發已接；完整正常玩家結局鏈仍待驗 |
 | SPEC-016 | [開場旅店接線](016-starting-inn.md) | READY | 已核准選隊及跨城建築整合；完整操作對拍仍待完成 |
 | SPEC-017 | [護甲減傷及命中後耐久](017-armour-reduction.md) | READY | 授權兩類護甲減傷、命中後耐久及近戰／射擊回寫；正常 GUI 與完整保存仍待驗收 |

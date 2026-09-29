@@ -1,0 +1,75 @@
+{
+  "name": "quest-chain-reload",
+  "description": "接著 `quest-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場。隊伍六人的地點 6 旗標（回報過）、已回報數 1 與 Theodoric 手上的 Treasure Map 都從存檔帶回；進門開 MIRROR 看 Theodoric 的資料頁，再出門。與 `quest-chain` 合起來把「接任務 → 撿物逃走 → 交付 → 存檔 → 離開 → 重載」閉起來。",
+  "seed": 1,
+  "scene": "play",
+  "load": "workplace/saves/quest-chain.json",
+  "script": "L R RET SPACE > RET > < RET RET SPACE",
+  "shot_dir": "docs/verification/player-path/quest-chain-reload",
+  "trace": "docs/verification/player-path/quest-chain-reload/trace.json",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/quest-chain-reload-receipt.json",
+  "milestones": [
+    {
+      "step": 0,
+      "town": {
+        "mode": 0,
+        "party": [
+          "Theodoric gold=953 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=10",
+          "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+        ]
+      },
+      "note": "讀檔：六人地點 6 旗標（回報過）、已回報數 1、Theodoric 住宿後 953 枚金幣，與 `quest-chain` 住宿那一步的隊伍列逐字相同"
+    },
+    {
+      "step": 2,
+      "town": {
+        "x": 57,
+        "y": 8,
+        "mode": 1
+      },
+      "note": "走離門口再走回來，門口狀態成立"
+    },
+    {
+      "step": 3,
+      "town": {
+        "mode": 2,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        }
+      },
+      "note": "DOOR：進半途之家"
+    },
+    {
+      "step": 6,
+      "town": {
+        "mode": 2
+      },
+      "note": "MIRROR：Theodoric 的資料頁"
+    },
+    {
+      "step": 11,
+      "town": {
+        "mode": 0,
+        "x": 57,
+        "y": 8
+      },
+      "note": "DOOR 出門回到戶外地圖"
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": 6,
+      "file": "step-006.png",
+      "shows": "MIRROR：Theodoric 的資料頁"
+    }
+  ]
+}

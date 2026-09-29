@@ -44,11 +44,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。
   核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接` 就是還沒完
 
-- **a03-a04-writeback-and-contract**（#14） — A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約
-  勝利／撤退的物品與傷勢回寫、零金冠、訓練技能與設定重載已在第一批修復處理。RE-139 揭出的任務交付順序與全隊回報已依 SPEC-014 READY 接回，觀察用存檔的正常按鍵及英中狀態相同；自然取得任務物品、原版同狀態及跨戰鬥／城鎮／存檔逐欄一致仍未驗。
-  完成條件：從自然接任務、取得物品、城鎮交付到保存／重載，跨戰鬥與城鎮逐欄一致，並有原版同狀態證據。
-  核實：要人判——同 a01-a02：逐欄一致要跑過才知道。
-
 - **a05-a06-a09-belt-ward-nutrition**（#15） — A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition
   三個缺陷已在第一批修復處理，診斷測試尚未轉為回歸測試。
   完成條件：對應診斷測試轉為回歸測試並通過，再補正常玩家路徑抽測。
@@ -148,11 +143,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：五處各有一份逐畫面對拍收據。
   核實：`internal/battle/spell.go`、`internal/battle/spoils.go`、`internal/ui/battle.go`、`internal/ui/itempage.go`、`docs/spec/010-combat-commands.md` 找得到 `還沒對拍|還沒讀|的畫面還沒對` 就是還沒完
 
-- **quest-turnin-original-same-state**（#93） — 任務物品交付的原版同狀態與自然玩家鏈
-  RE-139 的 IDA 控制流與重製版觀察存檔 GUI 已覆蓋兩次 SPACE、第一件物品交換及全隊回報。原版同狀態畫格／狀態、自然接任務與取得物品，以及回報後保存／重載尚缺。SPEC-014 維持 READY。
-  完成條件：以原版與重製版可比初態驗證兩次按鍵、原始物品記錄、六名角色旗標及回報數，再完成自然取得到保存／重載的正常玩家鏈；附版本、輸入、亂數條件與收據後才將 SPEC-014 對應範圍升 CONFORMED。
-  核實：`docs/spec/014-quest-completion.md` 找得到 `同狀態畫格／狀態尚未取得前維持 READY` 就是還沒完
-
 
 ### 素材抽取與音訊
 
@@ -247,6 +237,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **inn-farewell-diff-review** — 審查原版離店告別訊息與確認流程：已完成
 - **appimage-parity-continuation** — 旅店、戰鬥與存讀檔的 AppImage 同狀態對拍：2026-09-29：封包執行檔（雜湊與建置收據相符）跑 plan-town-inn 8／8、plan-town-recruit 9／9、plan-town-rest 11／11 對原版畫格全過；8 份戰鬥機制收據與 25 條玩家路徑（含打贏、住宿存檔、讀檔續玩）一致；完整保存 GUI 在真的 AppImage 上通過。戰鬥規則的原版同狀態由同一 commit 的原版對拍測試支撐。不宣稱：存檔格式與原版不同，重載後續玩只與 remake 收據比；戰鬥只有一場正常遭遇的原版收據。
 - **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊：2026-09-26 v.0.2.5 AppImage 真實按鍵：建兩名、各自入隊、住宿離隊後重載各自再選進旅店、刪除不搬槽、空槽重用與滿槽拒絕皆通過；兩種預設存檔位置另通過。收據 docs/verification/identity-save-chain/receipt.json。
+- **a03-a04-writeback-and-contract** — A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約：已完成
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
 - **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE：已完成
 - **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成
@@ -302,6 +293,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **path-verify-does-not-replay** — 路徑驗證只看收據自洽，不重跑：2026-09-11 做了 `tools/check_player_paths.py`：重跑到 workplace/replay-check/ 再與收據逐 byte 比，不覆寫。第一次跑就抓到 10 條對不上。`verify_full_path.py` 保留原用途（驗收據自洽），兩支分工不同。
 - **cjk-battle-remaining-pages** — 補戰後戰利品清單的繁中正常路徑畫格：法術／效果兩頁及戰利品 Items Found／Characters 兩頁均已擷取並目視檢查。戰利品由 seed 39 固定輸入在重製版正常按鍵路徑第 22 回合勝利後取得；收據含輸入、程式雜湊、PNG／trace 雜湊與觀察用資料限制。本項只驗中文版面；完整戰鬥、原版同狀態與正式封包另列未完成。
 - **town-untranslated-source-slot-reachability** — 城鎮 45 個未譯來源槽位的全域可達性與中文處置：2026-09-25 RE-140：訊息槽位與建築 payload 共用 DGROUP:0x1CF4，45 筆分為 40 筆馬廄坐騎記錄（已證實）、1 筆商店殘留資料（強推論）、4 筆無讀取點的任務續文（強推論）。依使用者選定處置不翻譯，列入 docs/i18n/town-nontext-slots.json 並綁原文快照；嚴格檢查 2,076 則 0 缺譯、另排除 45 筆，三個負例皆失敗。
+- **quest-turnin-original-same-state** — 任務物品交付的原版同狀態與自然玩家鏈：已完成
 - **plan-key-replans** — 規劃鍵值的除數是本回合重排次數：已完成
 - **combat-result-pictures** — 戰鬥結果圖（COMBPICS）沒有畫：已完成
 - **sheet-digit-outside** — 城鎮戶外與野外按 1…6 打開角色資料頁：已完成

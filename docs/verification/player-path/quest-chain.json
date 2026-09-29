@@ -1,0 +1,326 @@
+{
+  "name": "quest-chain",
+  "description": "任務鏈的正常玩家路徑（#14，SPEC-014）：標題 → 書本選 Theodoric → 半途之家招募五名 → 出城 → 野外走到 4 號入城點 → 7 號門 Residence 用 MOUTH 問 `nobj` 接下 Ship Wheel 任務（地點 6）→ 出城走到地點 6 答應參戰 → 十隻 HOBGOBLIN 的戰場上 Theodoric 走到 Ship Wheel 那一格撿起（0x111 答 y，接 0x113），其餘隊員護送 → 帶著走到戰場上緣，回合末的逃走問句答 y（任務標成完成）→ 走回 4 號入城點 → 7 號門讀完進門敘述後交付，Ship Wheel 換成 Treasure Map，訊息 6／7 之後全隊回報 → 出城繞到 3 號入城點 → 半途之家 REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入。**這條收據使用受控亂數**：野外遭遇擲點前 200 次固定為 100（不遭遇），戰場內一律種子亂數。戰鬥裡的按鍵由 `tools/drive_battle_script.py`（`KOL_DRIVE_QUEST=1`）依軌跡打出。",
+  "seed": 1,
+  "scene": "flow",
+  "ambush_rolls": "100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100",
+  "script": "SPACE SPACE 6 RET SPACE > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R U U U U U U U U U RET U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U L L L L L L L L L L L L L L L L L L L L L SPACE L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L U U U U U U U U U U U U U U U U L L L L L SPACE L L L U RET R U U U U U U RET SPACE > > > RET n o b j RET SPACE SPACE RET SPACE RET SPACE D D D D D D D D D D RET D D D D D D D D D D D D R R R R R D D D D D D D D D R R R R R R R R R R R R R R R R U U U U U U U U R R R R R R R R U U U U U U U U U U U U U U U U U U SPACE U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U L L L L L L L L L L L L L L L L L L L L L L L L L RET SPACE > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L RET > RET RET > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > > RET RET > > > RET U U L L D RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > RET U U L L RET > RET RET > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L RET > RET RET > > > > > > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > RET U U L L D D RET > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L RET > RET RET > RET U U L L D D R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D D R RET > RET RET > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > RET U U L L D RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > RET U U L L D D R R RET > > RET RET > > > RET U U L L D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > RET U U L L RET > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > RET U U L L RET > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET RET > > > RET U U L L RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET RET > > > RET U U L L D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > RET U U L L D D RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET RET > > > > RET U U L L D D RET > RET RET > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L RET > RET RET > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET > > > RET U U L L D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > RET U U L L D RET > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D RET > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L RET > RET RET > RET U U L L D RET > > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > RET U U L L RET > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET > > > RET U U L L R RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET RET > > > RET U U L L R R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L R RET > RET RET > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > RET U U L L R R RET > RET RET > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L RET > RET RET > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L D R R RET > RET RET > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L D RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET RET > > > RET U U L L D D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET RET > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET RET > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L D RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET RET > > > RET U U L L D D RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L D RET > RET RET > > > RET U U L L D D RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET RET > > > RET U U L L RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > RET U U L L R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L D RET > RET RET > > > RET RET > > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE Y SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET RET > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L R RET > RET RET > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET > > > RET U U L L D D R R RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L R RET > RET RET > > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L R R RET > > RET > > > RET RET > > > > > RET U U L L D D R RET > RET RET > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L R RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > RET U U L L R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L R R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D D R R RET > RET RET > RET U U L L D D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > RET U U L L D D RET > > RET RET > > > RET U U L L D D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D D R RET > RET RET > RET U U L L D RET > > RET RET > RET U U L L D D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D RET > > RET RET > RET U U L L D RET > > RET RET > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > RET U U L L D D RET > > RET RET > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L RET > > RET RET > > > RET U U L L D D R RET > RET RET > RET U U L L D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D D R RET > RET RET > RET U U L L D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D D RET > RET RET > RET U U L L D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET > RET U U L L D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET > RET U U L L D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE Y R R R R R R R R R R R R R R R R R R R R SPACE R R R R R D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D L L L L L L L L D SPACE D D D D D D D L L L L L L L L L L L L L L L L U U U U U U U U U L L L L L U U U U U U U U U U U U RET R U U U U U U RET SPACE SPACE RET SPACE D D D D D D D D D D RET D D D D D D D D D D D D R R R R R D D D D D D D D D D D D D D D SPACE D R R R R R R R R D D D D D D D D R R R R R R R R D D D D D D D D R R R R R R R R R R R R R R R R D D D D D D D D D D D D D D D D D D D D D D SPACE D D D D D D D D D D D D D D D D D D R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R D D D D D SPACE D D D D RET R R R D D D D L D D L RET SPACE > > > > RET RET RET",
+  "shot_dir": "docs/verification/player-path/quest-chain",
+  "trace": "docs/verification/player-path/quest-chain/trace.json",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/quest-chain-receipt.json",
+  "save": {
+    "file": "workplace/saves/quest-chain.json",
+    "expect": {
+      "schema": "kol-save-v3",
+      "location.kind": "town",
+      "location.town": 7,
+      "location.entry_point": 3,
+      "location.x": 57,
+      "location.y": 8,
+      "characters[0].name": "Theodoric",
+      "characters[0].gold": 953,
+      "characters[0].in_hand.name": "Treasure Map",
+      "characters[0].quests": [
+        0,
+        48,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[0].progress": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[1].quests": [
+        0,
+        52,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[1].progress": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[2].quests": [
+        0,
+        48,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[2].progress": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[3].quests": [
+        0,
+        48,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[3].progress": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[4].quests": [
+        0,
+        48,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[4].progress": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[5].quests": [
+        0,
+        48,
+        0,
+        0,
+        0,
+        0
+      ],
+      "characters[5].progress": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "milestones": [
+    {
+      "step": 4,
+      "scene": "flow:town",
+      "town": {
+        "mode": 2,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        }
+      },
+      "note": "書本選 Theodoric，進半途之家"
+    },
+    {
+      "step": 246,
+      "town": {
+        "x": 9,
+        "y": 23,
+        "mode": 2,
+        "door": {
+          "index": 7,
+          "name": "Residence"
+        }
+      },
+      "note": "野外走到 4 號入城點，進 7 號門 Residence"
+    },
+    {
+      "step": 259,
+      "town": {
+        "took_quest": {
+          "final": false,
+          "member": 5,
+          "site": 6
+        },
+        "party": [
+          "Theodoric gold=1009 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=9",
+          "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=0 reported=0 quests=0,16,0,0,0,0 carried=12"
+        ]
+      },
+      "note": "MOUTH 問 nobj 接下 Ship Wheel 任務：Kenneth 的地點 6 欄位成為 1（接了）"
+    },
+    {
+      "step": 414,
+      "world": {
+        "x": 29,
+        "y": 5,
+        "quest_prompt": true
+      },
+      "note": "出城走到地點 6，Will you partake?"
+    },
+    {
+      "step": 416,
+      "battle": {
+        "stage": 2,
+        "site": 6,
+        "monster": "HOBGOBLIN"
+      },
+      "note": "答應參戰，進戰場"
+    },
+    {
+      "step": 4990,
+      "battle": {
+        "prompt": 11,
+        "exec_text": [
+          "You have found a SHIP WHEEL. ",
+          "Do you want to pick it up?"
+        ]
+      },
+      "note": "Theodoric 走到 Ship Wheel 那一格選撿：0x111 問句"
+    },
+    {
+      "step": 4995,
+      "battle": {
+        "exec_text": [
+          " Theodoric, this is the quest",
+          "item!  Run for the exit!"
+        ]
+      },
+      "note": "答 y 撿起，接 0x113"
+    },
+    {
+      "step": 6721,
+      "battle": {
+        "stage": 3,
+        "prompt": 9,
+        "exec_text": [
+          "Do you want to flee?"
+        ]
+      },
+      "note": "帶著 Ship Wheel 走到戰場上緣（Y=4），回合末問逃走"
+    },
+    {
+      "step": 6728,
+      "battle": null,
+      "world": {
+        "x": 29,
+        "y": 5
+      },
+      "town": {
+        "party": [
+          "Theodoric gold=1009 wounds=2 reported=0 quests=0,32,0,0,0,0 carried=10",
+          "Poontang gold=214 wounds=15 reported=0 quests=0,36,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=15 reported=0 quests=0,32,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=6 reported=0 quests=0,32,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=0 quests=0,32,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=19 reported=0 quests=0,32,0,0,0,0 carried=12"
+        ]
+      },
+      "note": "答 y 逃走：六人地點 6 欄位全部成為 2（完成），沒有接任務的人也一樣"
+    },
+    {
+      "step": 6879,
+      "town": {
+        "x": 9,
+        "y": 23,
+        "mode": 2,
+        "door": {
+          "index": 7
+        }
+      },
+      "note": "走回 4 號入城點，再進 7 號門"
+    },
+    {
+      "step": 6880,
+      "town": {
+        "turned_in": 1
+      },
+      "note": "讀完進門敘述才交付：Ship Wheel 換成 Treasure Map，訊息 6／7"
+    },
+    {
+      "step": 6881,
+      "town": {
+        "party": [
+          "Theodoric gold=1009 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=10",
+          "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+        ]
+      },
+      "note": "再按一鍵：全隊回報，欄位成為 3、已回報數各加一"
+    },
+    {
+      "step": 6894,
+      "world": {
+        "x": 29,
+        "y": 11
+      },
+      "note": "出城"
+    },
+    {
+      "step": 7087,
+      "town": {
+        "x": 57,
+        "y": 8,
+        "mode": 1
+      },
+      "note": "繞到 3 號入城點進城，走到半途之家門口"
+    },
+    {
+      "step": 7096,
+      "town": {
+        "mode": 2,
+        "party": [
+          "Theodoric gold=953 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=10",
+          "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+        ]
+      },
+      "note": "REST 住一晚（扣 56 枚金幣），存檔寫出"
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": 259,
+      "file": "step-259.png",
+      "shows": "Residence 裡接下任務"
+    },
+    {
+      "step": 4995,
+      "file": "step-4995.png",
+      "shows": "撿起之後 0x113：Theodoric, this is the quest item!"
+    },
+    {
+      "step": 6721,
+      "file": "step-6721.png",
+      "shows": "持物者站在戰場上緣，Do you want to flee?"
+    },
+    {
+      "step": 6880,
+      "file": "step-6880.png",
+      "shows": "交付台詞（訊息 6／7），圖示列只剩 SPACEBAR"
+    },
+    {
+      "step": 7096,
+      "file": "step-7096.png",
+      "shows": "住宿之後"
+    }
+  ]
+}

@@ -518,8 +518,7 @@ func (s *State) act(i int, rng Rand) ActResult {
 		if a.Side == SideParty {
 			return s.askPickUp(i, slot)
 		}
-		out.Message, out.Item = s.TakeItem(i, slot)
-		return out
+		return s.EnemyPickUp(i, slot)
 	case CmdSwitch, CmdSwitchAlt1, CmdSwitchAlt2:
 		out.Message = s.SwitchItem(i)
 		return out

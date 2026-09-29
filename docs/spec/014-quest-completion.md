@@ -1,6 +1,9 @@
 # SPEC-014：任務的完成與逃走
 
-狀態：**READY**；競技場升階依 RE-108，固定地形補充見 SPEC-025。掉落與正常保存鏈依下方驗收限制。
+狀態：**READY**；第 3–5、8 節（逃走條件、物品比對、帶物逃走、建築內交付）與撿起
+**CONFORMED**（2026-09-30：RE-162 原版關鍵點接手＋`quest-chain` 玩家路徑，見
+`docs/verification/quest-chain-20260930.md`）。競技場升階依 RE-108，固定地形補充見 SPEC-025。
+逃走或落敗後的掉落與扣錢依下方驗收限制。
 2026-09-25 任務物品交付的畫面與全隊回報補充先列 DRAFT，再以 RE-139 的
 IDA 9.4 原始交叉參照、旗標與分支審查為 READY；實作後仍須同狀態及正常 GUI
 驗證，不能因 Go 測試通過就升 CONFORMED。
@@ -122,6 +125,10 @@ remake 用 `State.QuestItem` 承接，空字串表示這一場沒有那樣的東
 那一條：第 5 個地點的任務物品 Kelder Crown 放在地上（`Site.QuestItem`，RE-113），
 這一次沒有人撿，所以不是「帶著東西逃掉」那一條。
 
+`docs/verification/player-path/quest-chain.json`：帶著東西逃掉那一條的正常玩家路徑。
+從標題接下 Ship Wheel 任務（地點 6），戰場上撿起、走到上緣答 y，六人旗標成為完成；
+回 7 號門交付後全隊回報，住宿存檔；`quest-chain-reload` 讀檔重載。
+
 逃走那一問畫在執行段的卷軸上（`Plan.Prompt` 的一層）；答 y 之後直接回野外，
 不印逃走那一句（RE-146）。問句沒畫出來這種缺口單元測試看不到——規則層回傳值
 正確，畫面上什麼都沒有——所以這一條要靠實跑收據。
@@ -134,16 +141,17 @@ remake 用 `State.QuestItem` 承接，空字串表示這一場沒有那樣的東
 
 `victory.go` 的 `QuestTaken`／`MarkQuestDone`／`markQuestDone`，
 `flee.go` 的 `OnFieldEdge`／`FleeOffer`／`OfferFlee`／`Flee`，
+`items.go` 的 `AnswerPickUp`／`EnemyPickUp`／`QuestItemCall`（撿起與 0x113），
 `execution.go` 的 `Step` 在 `VerdictWon` 的第一件事，
-UI 是 `PromptFlee` ＋ `StageFlee`。
+UI 是 `PromptFlee` ＋ `StageFlee`；交付在 `internal/town/quest.go` 與 `Session`。
 
 **目前剩餘**：逃走或落敗後額外掉落及扣錢（`0x21765`）尚缺機率來源證據；
 不再以「缺少物品 typed data」描述阻塞，完整物品記錄已接線。
 競技場升階已依 RE-108 實作，傷勢共同出口已依 SPEC-027 修正；
-正常完整玩家鏈仍須驗收，不可由舊「升級未做」條款重新開啟已完成接線。
+不可由舊「升級未做」條款重新開啟已完成接線。
 
 2026-09-08：`EqualQuestItemRecords`、`FleeOffer` 與 `QuestItemCall` 已依第 4 節
-完整記錄契約修正。dosgolem 258 組原版比對與完整回歸通過；正常攜物逃走仍待驗。
+完整記錄契約修正。dosgolem 258 組原版比對與完整回歸通過；正常攜物逃走見第 6 節。
 
 ## 8. 建築內交付任務物品（2026-09-25 READY 補充）
 
@@ -164,10 +172,9 @@ RE-139 以 IDA Pro 9.4、固定 unpacked EXE 的原始位址與交叉參照複�
 4. 一次進門只交換第一件吻合物品。按鍵後回到既有招呼語及建築圖示列；
    同一隊若還有人持有相同物品，必須再次進門才會交換下一件。
 
-驗收：原版證據已固定；Go 規則與正常按鍵測試須覆蓋「非持物者也回報」、
-「兩人持相同物品只交換第一件」、「首次 SPACE 前不得回寫」、中文台詞
-與保存後原件不復活。英文與繁中同一初態輸入的狀態須一致；原版正常
-同狀態畫格／狀態尚未取得前維持 READY，不得升 CONFORMED。
+驗收：Go 規則與正常按鍵測試覆蓋「非持物者也回報」、「兩人持相同物品只交換第一件」、
+「首次 SPACE 前不得回寫」、中文台詞與保存後原件不復活；原版以關鍵點接手比較 8 組
+（RE-162），正常玩家路徑見 `quest-chain`／`quest-chain-reload`。
 
 ## 說明書對照
 

@@ -6870,3 +6870,19 @@ frame-270 推翻了 remake 的版面：
   `verify_local_appimage.py` 通過；預設存檔位置 XDG 通過、HOME 後備第一次重載後按鍵沒被讀到而失敗，
   重跑通過，原因未查明。README 交付入口改指 v.0.2.6。容器：只有自己的 `--rm` 一次性容器；
   無 root-owned 檔案。
+- #14、#93 結案（2026-09-30，使用者 2026-09-29 決定：對拍只比機制；戰鬥路線選「撿起物品後逃走」）。
+  原版以關鍵點接手：新探針 `internal/oracle/quest_chain_test.go`（`KOL_CHECK=quest`），入口橋進
+  `sub_1E3A8`／`sub_11A93` 中段、出口改帶回傳碼的 `retf`。標完成 36864 組、撿起 9 組、戰場邊與帶物
+  逃走 6 組、交付 8 組全數一致（RE-162）。對拍找出兩個 remake 差異並修正：撿成功後 `+0x25` 寫 0x15；
+  敵人撿起原本把問句 0x111 當訊息印出，改成不印、撿到任務物品才喊 0x113（`State.EnemyPickUp`）。
+  舊測試 `TestPickUpEnemyDoesNotAsk` 斷言的是錯的訊息，已改；新增 `TestEnemyPickUpIsSilentExceptQuestItem`。
+  remake 自然路徑 `quest-chain`（7096 步）與 `quest-chain-reload`：軌跡新增戰場 `ground`、
+  `quest_holders`、每場一次的 `walls`（只在 `-trace-detail`）；`drive_battle_script.py` 加任務模式
+  （`KOL_DRIVE_QUEST=1`：BFS 繞牆找路、撿物、走到邊、逃走問句答 y；`-` 表示不讀檔）。
+  過程：持物者單獨走時在上緣前三格被追上倒下（敗北），改成其餘隊員護送後通過；驅動器
+  stage 3 分支原本一律答 N，逃走問句被答掉，修正後從問句處接續。城鎮 4 號入城點的鏡頭範圍
+  到不了旅店，改繞 3 號入城點；野外路線從戰場出口直接 BFS 會卡在河邊（路線工具起點子位置
+  固定 3,3，與實際 7,7 不同），改用去程實際移動的方向鍵反序反向。一次 `pgrep -f` 的樣式同時
+  比對到自己的 shell，中斷了當時的命令，驅動器程序已確認停止、無其他影響。第一次重播
+  `quest-chain` 沒有設檢查點而逐步截了 7000 張圖，已刪到只剩五張檢查點。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

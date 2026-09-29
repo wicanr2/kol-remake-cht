@@ -486,6 +486,35 @@ func TestEnemyPickUpFillsTheHand(t *testing.T) {
 	}
 }
 
+// 敵人撿起成功本身不印任何一句；撿到任務物品而且這一場還沒喊過才印 0x113，
+// 撿完 `+0x25` 寫成 0x15（RE-162）。
+func TestEnemyPickUpIsSilentExceptQuestItem(t *testing.T) {
+	record := "5101020304050607080910111213140f"
+	s := &State{Site: &Site{Index: 6}, Actors: []Actor{
+		{Side: SideMonster, X: 4, Y: 4, Command: CmdPickUp, Unarmed: true, PickedUp: 1},
+		{Side: SideMonster, X: 6, Y: 6, Command: CmdPickUp, Unarmed: true, PickedUp: 1},
+	}}
+	s.Site.QuestItem.Record = record
+	s.Ground[0] = GroundItem{Name: "AXE", X: 4, Y: 4, Item: &Item{Name: "AXE", Record: "52000000000000000000000000000001"}}
+	s.Ground[1] = GroundItem{Name: "SHIP WHEEL", X: 6, Y: 6, Item: &Item{Name: "SHIP WHEEL", Record: record}}
+	if out := s.EnemyPickUp(0, 0); out.Message != 0 || out.Item != "AXE" {
+		t.Fatalf("一般物品：訊息 %#x、名字 %q", out.Message, out.Item)
+	}
+	out := s.EnemyPickUp(1, 1)
+	if out.Message != QuestItemRecord || !out.Plain {
+		t.Fatalf("任務物品應該印 0x113，得到 %#x", out.Message)
+	}
+	for i, a := range s.Actors {
+		if a.Command != CmdDrop || a.PickedUp != 0 {
+			t.Fatalf("第 %d 名撿完 +0x25=%#x +0x2B=%d", i, a.Command, a.PickedUp)
+		}
+	}
+	s.Ground[2] = GroundItem{Name: "SHIP WHEEL", X: 4, Y: 4, Item: &Item{Name: "SHIP WHEEL", Record: record}}
+	if out := s.EnemyPickUp(0, 2); out.Message != 0 {
+		t.Fatalf("同一場第二次不再喊，得到 %#x", out.Message)
+	}
+}
+
 // 這一次規劃裡被困住過（`word_34A08` 非零）就不抽攻擊式，固定第 1 式
 // （`0x23CD6` 先比 `word_34A08`，RE-117）。
 func TestEnemyStrikeFixesStyleAfterBeingStuck(t *testing.T) {

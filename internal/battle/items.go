@@ -117,6 +117,11 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 		s.Actors[i].Unarmed = false
 		s.Actors[i].PickedUp = 0
 	}
+	// 撿成功之後原版把這一名的 `+0x25` 寫成 0x15（`0x204E4`，RE-162），隊員與敵人
+	// 都一樣；手上滿了那一條（0x112）與答否都不改。
+	if i >= 0 && i < len(s.Actors) {
+		s.Actors[i].Command = CmdDrop
+	}
 	s.Ground[slot] = GroundItem{}
 	return FoundItemRecord, g.Name
 }
@@ -150,6 +155,24 @@ func (s *State) PickUpItem(i int) (int, int, string) {
 		return msg, -1, item
 	}
 	return msg, slot, item
+}
+
+// EnemyPickUp 是敵人撿腳下第 slot 格那一手（`0x203CC`…`0x204E4`）。敵人不問，
+// 撿成功本身也不印任何一句；撿到的正是任務要的那一件而且這一場還沒喊過，才印
+// 記錄 0x113（`|G` 是那隻怪物）。原版比的是怪物記錄 +0x20 起剛搬進去的十六 byte
+// （`sub_2886C(0x20)`），與地上那一件相同（RE-162）。
+func (s *State) EnemyPickUp(i, slot int) ActResult {
+	out := ActResult{Actor: i, Command: CmdPickUp, Target: -1}
+	if slot < 0 || slot >= len(s.Ground) {
+		return out
+	}
+	item := s.Ground[slot].Item
+	_, out.Item = s.TakeItem(i, slot)
+	if s.QuestItemCall(item) {
+		out.Message = QuestItemRecord
+		out.Plain = true
+	}
+	return out
 }
 
 // SwitchItem 是切換那一手（指令碼 `0x24`／`0x25`／`0x16`，`0x2050E`）：
