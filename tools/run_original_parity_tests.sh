@@ -17,8 +17,10 @@ RECEIPTS="${1:-workplace/battle-planning-20260911}"
 FIXTURE="${KOL_PARTY_FIXTURE:-workplace/planning-parity-20260911/party-fixture.json}"
 # 多回合執行段收據（#9）：`tools/oracle/book_startup_test.go` 的 KOL_BOOK_EXECUTE 模式產出。
 ROUNDS="${KOL_ROUNDS_RECEIPT:-workplace/battle-first-round-20260928/battle-rounds.json}"
+# 點陣圖編輯器收據（SPEC-036）：`tools/oracle/book_editor_test.go`（KOL_CHECK=editor）產出。
+EDITOR="${KOL_EDITOR_RECEIPT:-workplace/bitmap-editor-20260929/bitmap-editor.json}"
 
-for f in "$REPO_ROOT/$FIXTURE" "$REPO_ROOT/$RECEIPTS/battle-terrain.json" "$REPO_ROOT/$ROUNDS" \
+for f in "$REPO_ROOT/$FIXTURE" "$REPO_ROOT/$RECEIPTS/battle-terrain.json" "$REPO_ROOT/$ROUNDS" "$REPO_ROOT/$EDITOR" \
          "$REPO_ROOT/$RECEIPTS/battle-state-records.json"; do
   [ -f "$f" ] || { echo "缺少 $f" >&2; exit 2; }
 done
@@ -32,6 +34,7 @@ exec timeout "${KOL_TEST_TIMEOUT:-900}" docker run --rm \
   -e "KOL_TERRAIN_INPUT=/src/$RECEIPTS/battle-terrain.json" \
   -e "KOL_STATE_RECORDS_INPUT=/src/$RECEIPTS/battle-state-records.json" \
   -e "KOL_ROUNDS_INPUT=/src/$ROUNDS" \
+  -e "KOL_BITMAP_EDITOR_INPUT=/src/$EDITOR" \
   -v "$REPO_ROOT:/src" -w /src \
   --tmpfs "/tmp:exec,uid=$(id -u),gid=$(id -g),size=2g" \
   "$IMAGE" \
@@ -46,4 +49,5 @@ exec timeout "${KOL_TEST_TIMEOUT:-900}" docker run --rm \
     for _ in $(seq 1 50); do [ -e /tmp/.X11-unix/X94 ] && break; sleep 0.1; done
     export DISPLAY=:94
     go test ./cmd/kol/ -run TestOriginalNormal -v -count=1 2>&1 | grep -vE "^XGB"
+    go test ./internal/bitmapedit/ -run TestOriginalEditor -v -count=1
   '

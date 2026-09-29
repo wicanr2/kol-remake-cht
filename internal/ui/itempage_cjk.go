@@ -152,7 +152,7 @@ func drawPartyPageCJK(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piec
 	frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetFrame)
 	shadow(dst, r.X0, r.Y0, r.Width(), r.Height())
 	for _, piece := range pieces {
-		pic, err := sprites.Get(piece.Archive, piece.Index)
+		pic, err := pieceImage(sprites, piece)
 		if err != nil {
 			return err
 		}

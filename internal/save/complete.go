@@ -1,6 +1,7 @@
 package save
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"reflect"
@@ -76,6 +77,15 @@ func decodeSave(raw []byte) (*Save, error) {
 	}
 	var state *Characters
 	var clock *Clock
+	if schema == CompleteSchemaV2 {
+		migrated, err := migrateV2Characters(fields["characters"])
+		if err != nil {
+			return nil, err
+		}
+		fields["characters"] = migrated
+		schema = CompleteSchema
+		fields["schema"], _ = json.Marshal(schema)
+	}
 	if schema == CompleteSchema {
 		subset := map[string]json.RawMessage{}
 		for _, k := range []string{"characters", "party", "speaker"} {
@@ -126,4 +136,36 @@ func decodeSave(raw []byte) (*Save, error) {
 		s.Clock = clock
 	}
 	return &s, nil
+}
+
+// migrateV2Characters 在 v2 每一名角色上補 v3 的兩個欄位（null）。空槽維持 null。
+func migrateV2Characters(raw json.RawMessage) (json.RawMessage, error) {
+	if raw == nil {
+		return nil, fmt.Errorf("缺少 characters")
+	}
+	var slots []json.RawMessage
+	if err := json.Unmarshal(raw, &slots); err != nil {
+		return nil, fmt.Errorf("characters：%w", err)
+	}
+	for i, slot := range slots {
+		if bytes.Equal(bytes.TrimSpace(slot), []byte("null")) {
+			continue
+		}
+		var fields map[string]json.RawMessage
+		if err := json.Unmarshal(slot, &fields); err != nil {
+			return nil, fmt.Errorf("characters[%d]：%w", i, err)
+		}
+		for _, k := range []string{"picture", "shield"} {
+			if _, ok := fields[k]; ok {
+				return nil, fmt.Errorf("v2 存檔的 characters[%d] 不該有 %s", i, k)
+			}
+			fields[k] = json.RawMessage("null")
+		}
+		out, err := json.Marshal(fields)
+		if err != nil {
+			return nil, err
+		}
+		slots[i] = out
+	}
+	return json.Marshal(slots)
 }

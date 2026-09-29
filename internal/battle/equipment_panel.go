@@ -15,10 +15,12 @@ type EquipmentPanelData struct {
 	Name               string
 	Monster, Equipment bool
 	Portrait           int
-	Rows               [6]string
-	Count              int
-	AmmunitionLabel    string
-	Ammunition         int
+	// Picture 是改過的頭像（SPEC-036）；nil 就畫 CHARPICS 的 Portrait。
+	Picture         *string
+	Rows            [6]string
+	Count           int
+	AmmunitionLabel string
+	Ammunition      int
 }
 
 func (s *State) EquipmentPanel() (EquipmentPanelData, bool) {
@@ -35,7 +37,7 @@ func (s *State) EquipmentPanel() (EquipmentPanelData, bool) {
 	}
 	if a.Side == SideParty {
 		m := s.member(i)
-		d.Name, d.Portrait = m.Name, m.Portrait
+		d.Name, d.Portrait, d.Picture = m.Name, m.Portrait, m.Picture
 		d.Rows[0], d.Rows[4], d.Rows[5] = m.WeaponName, m.Worn[4], m.BeltName
 		if d.Equipment && m.HasWeapon && m.Weapon.Code&1 != 0 && m.Weapon.Kind&0xE0 == 0 {
 			d.AmmunitionLabel = "ARROWS:"

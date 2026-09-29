@@ -43,7 +43,7 @@ func CloneMember(m Member) Member {
 func CandidateFromMember(m Member) Candidate {
 	m = CloneMember(m)
 	m.Speaker = false
-	return Candidate{ID: m.ID, Full: &m, Name: m.Name, Portrait: m.Portrait, Place: m.Place, Town: m.TownCode, Female: m.Female, Wounds: m.Wounds, Gold: m.Gold, BuildingID: m.BuildingID, Sheet: m.Sheet, Quests: m.Quests, Worn: m.Worn, InHand: m.InHand, Backpack: m.Backpack, Spells: m.Spells, Progress: m.Progress, Carried: m.Carried}
+	return Candidate{ID: m.ID, Full: &m, Name: m.Name, Portrait: m.Portrait, Place: m.Place, Town: m.TownCode, Female: m.Female, Wounds: m.Wounds, Gold: m.Gold, BuildingID: m.BuildingID, Sheet: m.Sheet, Quests: m.Quests, Worn: m.Worn, InHand: m.InHand, Backpack: m.Backpack, Spells: m.Spells, Progress: m.Progress, Carried: m.Carried, Picture: m.Picture, Shield: m.Shield}
 }
 
 func (c Candidate) Member() Member { return c.member() }

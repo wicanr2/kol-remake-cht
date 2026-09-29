@@ -59,11 +59,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：雨雪在正常 GUI 下與原版同相位；加速選項依 SPEC-028 READY 後接上。
   核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*` 就是還沒完
 
-- **picture-shield-bitmap-editor**（#31） — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器
-  SPEC-036 已 READY（RE-157）。使用者 2026-09-29 決定實作：自訂像素存進 v2 存檔（每名角色 40×38 的 16 色索引，存檔格式升版），介面照原版鍵位與滑鼠並翻譯中文提示、不另加功能；盾牌先查出原版在哪裡顯示每名角色的盾牌並接上，再做 EDIT SHIELD 的顯示。
-  完成條件：使用者決定要做之後，依 SPEC-036 接上編輯器與自訂圖像的保存，並與原版同狀態對拍。
-  核實：`internal/flow/flow.go` 找得到 `點陣圖編輯器還沒實作` 就是還沒完
-
 - **building-followup-dialogue**（#32） — 建築內的後續對話（訊息 10 起）
   訊息 10…13 的選法已知（聲望等第為 0 時是「訊息 10 ＋ 性別×2 ＋ 會不會法術」，否則訊息 26 ＋ 等第），但觸發條件還沒讀出來。
   完成條件：觸發條件解出並接上，正常路徑能看到後續對話。
@@ -261,6 +256,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
+- **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。

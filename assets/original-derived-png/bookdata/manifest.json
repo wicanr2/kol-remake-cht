@@ -1,0 +1,27 @@
+{
+  "schema": "kol-default-shield-v1",
+  "tool": "tools/extract_default_shield.py",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "source_entry": "Knights-of-legend/BOOKDATA.0",
+  "source_item": 4,
+  "source_item_sha256": "f54af788d854292a92b2884fcceca6c34b202d0091bb1a451eba2d4bb7a50e8e",
+  "decoded_sha256": "057ddcf1715fe61e6fb3ed47b454e9109534adf83435dae9301c3143613308bb",
+  "evidence": "SPEC-036；KOLBOOK sub_13E3F(\"bookdata\", 4) → DS:0x91A，sub_11820:0x1263D 抄 0x2F8 byte",
+  "palette": "BIOS mode 0Dh EGA 16 色，索引即原版 4-bit 值",
+  "shldpics_check": {
+    "entry": "Knights-of-legend/SHLDPICS",
+    "slots": 16,
+    "empty": 0,
+    "equal_to_default": 16
+  },
+  "images": [
+    {
+      "file": "default-shield.png",
+      "width": 40,
+      "height": 38,
+      "png_sha256": "4ddc8519acefcfcd134d72f514be3396d4f320ba36aedf833b895eee0203fbcf"
+    }
+  ],
+  "evidence_status": "已證實",
+  "rights": "原作衍生 PNG；依 2026-09-01 決定只存 private GitHub，不得公開發布"
+}

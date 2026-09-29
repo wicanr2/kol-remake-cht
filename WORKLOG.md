@@ -6853,3 +6853,13 @@ frame-270 推翻了 remake 的版面：
   子代理查出（主工作階段抽驗 `sub_18F3A:0x192D6` 盾牌那一段）：每名角色的 CHARPICS 畫在城鎮隊伍格、
   資料頁抬頭與戰鬥資訊框；個人 SHLDPICS 只畫在資料頁全身立繪，盾牌型別 3 時貼在模板盾牌左上角下一列。
   新角色的盾牌初值固定取 BOOKDATA 第 4 項。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #31 結案（SPEC-036 CONFORMED，RE-161）：新增 `internal/bitmapedit`（照 KOLBOOK `sub_1293E`／`sub_146CE`
+  的按鍵、滑鼠、四支變換與存檔問句）、`ui/bitmap_editor.go`、書本流程 `SceneEditPick`／`SceneEditor`，
+  取圖與寫回在 `cmd/kol/bitmap_edit.go`。存檔升 `kol-save-v3`（角色加 `picture`／`shield`，讀 v2 時遷移）。
+  預設盾牌由新工具 `tools/extract_default_shield.py` 從 BOOKDATA 第 4 項抽成 PNG，並核對原版 SHLDPICS
+  16 槽都等於它。圖像接到城鎮隊伍格、戶外與世界隊伍格、戰鬥資訊框；個人盾牌接到資料頁立繪
+  （型別 3）。原版同狀態：`KOL_CHECK=editor` 新探針 `tools/oracle/book_editor_test.go`，同一串鍵
+  存檔結果 760 byte 相同，進場畫格除 DOS 滑鼠指標 57 像素外逐像素相同；對拍加進
+  `run_original_parity_tests.sh`。子代理兩次靜態盤點（顯示位置、畫面組成），主工作階段抽驗
+  `sub_18F3A:0x192D6` 與編輯器主迴圈。`full-chain` 存檔斷言與兩支工具改認 v3。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

@@ -60,7 +60,20 @@ type Figure struct {
 	// Belt 是腰帶那一格（`+0x190`，物品頁上叫 BELT）。原版為它多畫一層，
 	// 橫放在畫面左下角——見 Compose 最後那一段（RE-128 更正 RE-126）。
 	Belt *Item
+	// PersonalShield 是這一名自己的盾牌圖（SHLDPICS 那一槽，SPEC-036）：改過的是 760 byte
+	// 的十六進位字串，nil 表示沒改過、就是新角色的預設盾牌。
+	PersonalShield *string
 }
+
+// ArchiveDefaultShield／DefaultShieldIndex 是新角色的預設盾牌：BOOKDATA 第 4 項
+// （KOLBOOK `sub_11820:0x1263D` 抄進 SHLDPICS 那一槽的初值）。
+const (
+	ArchiveDefaultShield = "BOOKDATA"
+	DefaultShieldIndex   = 4
+)
+
+// PersonalShieldStyle 是會把個人盾牌貼上去的盾牌型別（`sub_18F3A:0x192D0` 比 `var_8 == 3`）。
+const PersonalShieldStyle = 3
 
 // Build 是體型組合：性別 × 4 ＋ 種族。原版資料下只有 0…5——女性只有種族 0 與 1。
 func (f Figure) Build() int { return f.Gender*4 + f.Race }
@@ -86,6 +99,8 @@ type Piece struct {
 	Y       int    `json:"y"`
 	W       int    `json:"w"`
 	H       int    `json:"h"`
+	// Custom 非空時畫這一張自訂圖（760 byte 十六進位），不讀 Archive／Index。
+	Custom string `json:"custom,omitempty"`
 }
 
 // Compose 把一名角色疊成一串要貼的圖，順序就是畫的順序。dx 是整個人往右挪幾個
@@ -121,6 +136,16 @@ func (l *Layout) Compose(f Figure, dx int) []Piece {
 			c := l.Shields[v][t]
 			out = append(out, Piece{Archive: ArchiveShield, Index: t,
 				X: c.X + dx, Y: c.Y, W: c.W, H: c.H})
+			// 型別 3 的盾再把這一名自己的盾牌圖 1:1 不透明地貼在模板盾牌矩形的左上角、
+			// 往下一列（`0x192D6`：`sub_1C70E(槽, word_3499E, word_349A0 + 1)`）。
+			if t == PersonalShieldStyle {
+				p := Piece{Archive: ArchiveDefaultShield, Index: DefaultShieldIndex,
+					X: c.X + dx, Y: c.Y + 1, W: 40 / 8, H: 38}
+				if f.PersonalShield != nil {
+					p.Custom = *f.PersonalShield
+				}
+				out = append(out, p)
+			}
 		}
 	}
 	if held {

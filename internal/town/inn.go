@@ -60,6 +60,10 @@ type Member struct {
 	// Carried 是交任務物品時要逐 byte 比的那十七格，索引與 CarriedOffsets 對齊
 	// （RE-109）。typed 的 Worn／Backpack 丟掉了原始位元組，比對用不上。
 	Carried [][]byte `json:"carried,omitempty"`
+	// Picture／Shield 是書本 EDIT PICTURE／EDIT SHIELD 改過的圖（SPEC-036），760 byte 的
+	// 十六進位字串；nil 表示沒改過：圖像用 Portrait 那一張模板、盾牌用預設盾牌。
+	Picture *string `json:"picture,omitempty"`
+	Shield  *string `json:"shield,omitempty"`
 }
 
 // SwapQuestItem 把這名角色的第一件吻合任務物品換成獎勵（RE-139）。

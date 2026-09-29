@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/wicanr2/kol-remake-cht/internal/bitmapedit"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
@@ -93,7 +94,7 @@ func TestStartingInnRejectsWrongLocationWithoutChangingParty(t *testing.T) {
 	}
 }
 
-// 角色選項頁的反白條會繞回；EDIT PICTURE／EDIT SHIELD 不轉場但要記下來。
+// 角色選項頁的反白條會繞回；EDIT PICTURE 走選角清單進編輯器，存檔後回清單（SPEC-036）。
 func TestMenuCursorWrapsAndRecordsGaps(t *testing.T) {
 	f := testFlow(t)
 	f.Key("SPACE")
@@ -113,11 +114,32 @@ func TestMenuCursorWrapsAndRecordsGaps(t *testing.T) {
 	if f.MenuCursor != MenuEditPicture {
 		t.Fatalf("反白條在 %d", f.MenuCursor)
 	}
-	if f.Key("RET") {
-		t.Fatal("EDIT PICTURE 還沒實作，不該轉場")
+	f.LoadBitmap = func(roster.Slot, bool) (bitmapedit.Bitmap, error) { return bitmapedit.Bitmap{}, nil }
+	var saved []bitmapedit.Bitmap
+	f.SaveBitmap = func(_ roster.Slot, shield bool, b bitmapedit.Bitmap) error {
+		if shield {
+			t.Fatal("EDIT PICTURE 不該寫盾牌")
+		}
+		saved = append(saved, b)
+		return nil
 	}
-	if len(f.Unimplemented) == 0 {
-		t.Fatal("未實作的功能要記下來")
+	if !f.Key("RET") || f.Scene != SceneEditPick || f.EditShield {
+		t.Fatalf("EDIT PICTURE 應進選角清單，取到 %s", f.Scene)
+	}
+	f.Key("RET")
+	if f.Scene != SceneEditor || f.Editor == nil {
+		t.Fatalf("選角之後應進編輯器，取到 %s", f.Scene)
+	}
+	// 右移三格工具到填滿，執行；左移三格回離開，答 y 存檔、回到選角清單。
+	for _, k := range []string{">", ">", ">", "RET", "<", "<", "<", "RET", "y"} {
+		f.Key(k)
+	}
+	if f.Scene != SceneEditPick || len(saved) != 1 || saved[0].At(0, 0) != 3 {
+		t.Fatalf("存檔後應回選角清單並寫回填滿的圖：%s，存了 %d 次", f.Scene, len(saved))
+	}
+	f.Key("ESC")
+	if f.Scene != SceneMenu || f.MenuCursor != 0 {
+		t.Fatalf("選角清單 ESC 應回角色選項第 0 項，取到 %s／%d", f.Scene, f.MenuCursor)
 	}
 	f.Key("ESC")
 	if f.Scene != SceneContents {

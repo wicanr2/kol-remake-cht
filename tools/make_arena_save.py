@@ -39,8 +39,8 @@ def main() -> int:
         raise SystemExit("位階必須介於 0 至 24")
     source_bytes = src.read_bytes()
     doc = json.loads(source_bytes)
-    if not isinstance(doc, dict) or doc.get("schema") not in ("kol-save-v1", "kol-save-v2"):
-        raise SystemExit("只接受 kol-save-v1 或 kol-save-v2")
+    if not isinstance(doc, dict) or doc.get("schema") not in ("kol-save-v1", "kol-save-v2", "kol-save-v3"):
+        raise SystemExit("只接受 kol-save-v1、kol-save-v2 或 kol-save-v3")
     party = doc.get("party")
     if not isinstance(party, list) or not party:
         raise SystemExit("來源存檔沒有活動隊伍")
@@ -48,7 +48,7 @@ def main() -> int:
     for i in dict.fromkeys(args.members):
         if i < 0 or i >= len(party):
             raise SystemExit(f"隊伍裡沒有第 {i} 名")
-        if doc["schema"] == "kol-save-v2":
+        if doc["schema"] in ("kol-save-v2", "kol-save-v3"):
             characters = doc.get("characters")
             slot = party[i]
             if (not isinstance(characters, list) or type(slot) is not int or

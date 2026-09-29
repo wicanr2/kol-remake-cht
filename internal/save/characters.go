@@ -41,7 +41,15 @@ type Character struct {
 	Steed       *Item            `json:"steed"`
 	Spells      []CharacterSpell `json:"spells"`
 	Order       *CharacterOrder  `json:"order"`
+	// Picture／Shield 是在書本 EDIT PICTURE／EDIT SHIELD 改過的圖（SPEC-036）：760 byte
+	// 的 40 × 38 4 位元索引，以十六進位字串保存。null 表示沒改過，圖像沿用 Portrait 那一張
+	// 模板、盾牌沿用新角色的預設盾牌。v3 新增。
+	Picture *string `json:"picture"`
+	Shield  *string `json:"shield"`
 }
+
+// BitmapBytes 是自訂圖像一筆的長度（原版 CHARPICS／SHLDPICS 的一筆）。
+const BitmapBytes = 760
 
 type CharacterSheet struct {
 	Ward            int               `json:"ward"`
@@ -241,6 +249,15 @@ func (s *Characters) Validate() error {
 			b, err := hex.DecodeString(raw)
 			if err != nil || len(b) != 16 {
 				return fmt.Errorf("角色槽位 %d 物品記錄必須為 16 bytes", slot)
+			}
+		}
+		for _, bm := range []*string{c.Picture, c.Shield} {
+			if bm == nil {
+				continue
+			}
+			b, err := hex.DecodeString(*bm)
+			if err != nil || len(b) != BitmapBytes {
+				return fmt.Errorf("角色槽位 %d 自訂圖像必須為 %d bytes", slot, BitmapBytes)
 			}
 		}
 	}

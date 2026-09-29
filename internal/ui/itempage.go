@@ -34,7 +34,7 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 		// 左邊那個人：一層一層貼上去，順序就是原版畫的順序（RE-126）。
 		// X 與寬的單位是 byte 欄，所以乘八才是像素。
 		for _, piece := range p.Figure {
-			pic, err := sprites.Get(piece.Archive, piece.Index)
+			pic, err := pieceImage(sprites, piece)
 			if err != nil {
 				return err
 			}
@@ -173,7 +173,7 @@ func drawPartyPage(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piece, 
 	// 同物品那一頁：框之後投一次影（`sub_18F21`）。
 	shadow(dst, r.X0, r.Y0, r.Width(), r.Height())
 	for _, piece := range pieces {
-		pic, err := sprites.Get(piece.Archive, piece.Index)
+		pic, err := pieceImage(sprites, piece)
 		if err != nil {
 			return err
 		}

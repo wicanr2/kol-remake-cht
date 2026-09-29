@@ -9,6 +9,10 @@
 package flow
 
 import (
+	"strconv"
+	"strings"
+
+	"github.com/wicanr2/kol-remake-cht/internal/bitmapedit"
 	"github.com/wicanr2/kol-remake-cht/internal/charcreate"
 	"github.com/wicanr2/kol-remake-cht/internal/roster"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
@@ -29,6 +33,10 @@ const (
 	SceneSelect   Scene = "select"
 	SceneInn      Scene = "inn"
 	SceneTown     Scene = "town"
+	// SceneEditPick 是 EDIT PICTURE／EDIT SHIELD 的選角清單（與 SceneSelect 同一張畫面，
+	// RE-052）；SceneEditor 是點陣圖編輯器本身（SPEC-036）。
+	SceneEditPick Scene = "editpick"
+	SceneEditor   Scene = "editor"
 )
 
 // 角色選項頁的項目順序，與 `book.CharacterOptionsItems` 相同。
@@ -59,6 +67,19 @@ type Flow struct {
 
 	// Unimplemented 記下玩家選到但還沒實作的功能，讓測試與收據看得見。
 	Unimplemented []string
+
+	// EditShield 為真表示這一次是 EDIT SHIELD；EditCursor 是選角清單的反白列。
+	EditShield bool
+	EditCursor int
+	// Editor 是編輯器的狀態；EditSession 是跨越多次進出仍留著的滑鼠全域。
+	Editor      *bitmapedit.Editor
+	EditSession bitmapedit.Session
+	// LoadBitmap 取某一名角色目前的圖（改過的那一張，沒改過就是模板或預設盾牌）；
+	// SaveBitmap 在答 YES 時把改好的圖寫回角色並存檔。兩者由呼叫端接到存檔。
+	LoadBitmap func(slot roster.Slot, shield bool) (bitmapedit.Bitmap, error)
+	SaveBitmap func(slot roster.Slot, shield bool, b bitmapedit.Bitmap) error
+	// EditError 是最近一次載入或存檔失敗的原因。
+	EditError error
 }
 
 // New 從標題序列開始。
@@ -93,6 +114,10 @@ func (f *Flow) Key(token string) bool {
 		return f.innKey(token)
 	case SceneTown:
 		return f.townKey(token)
+	case SceneEditPick:
+		return f.editPick(token)
+	case SceneEditor:
+		return f.editorKey(token)
 	}
 	return true
 }
@@ -139,10 +164,15 @@ func (f *Flow) menu(token string) bool {
 			f.Scene = SceneDelete
 		case MenuHarbor:
 			f.Scene = SceneHarbor
-		default:
-			// EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器還沒實作：原版行為見 SPEC-036，是否實作待使用者決定。
-			f.note("角色選項 " + []string{"", "", "", "EDIT PICTURE", "EDIT SHIELD"}[f.MenuCursor])
-			return false
+		case MenuEditPicture, MenuEditShield:
+			// 與 DELETE CHARACTER 同一張選角清單，反白從第 0 列起（RE-052）。
+			if len(f.Roster.Occupied()) == 0 {
+				f.note("EDIT PICTURE／EDIT SHIELD：名冊是空的（原版印 BOOKDATA 0x39）")
+				return false
+			}
+			f.EditShield = f.MenuCursor == MenuEditShield
+			f.EditCursor = 0
+			f.Scene = SceneEditPick
 		}
 	default:
 		return false
@@ -266,4 +296,83 @@ func (f *Flow) note(what string) {
 		}
 	}
 	f.Unimplemented = append(f.Unimplemented, what)
+}
+
+// editPick 是編輯器的選角清單：上下移動不繞圈，Return 進編輯器，ESC 回角色選項且
+// 反白回到第 0 項（RE-052）。
+func (f *Flow) editPick(token string) bool {
+	slots := f.Roster.Occupied()
+	switch token {
+	case "ESC":
+		f.Scene = SceneMenu
+		f.MenuCursor = 0
+	case "U":
+		if f.EditCursor > 0 {
+			f.EditCursor--
+		}
+	case "D":
+		if f.EditCursor < len(slots)-1 {
+			f.EditCursor++
+		}
+	case "RET":
+		if f.EditCursor >= len(slots) || f.LoadBitmap == nil {
+			return false
+		}
+		b, err := f.LoadBitmap(slots[f.EditCursor], f.EditShield)
+		if err != nil {
+			f.EditError = err
+			return false
+		}
+		f.Editor = bitmapedit.New(b, &f.EditSession)
+		f.Scene = SceneEditor
+	default:
+		return false
+	}
+	return true
+}
+
+// editorTokens 是編輯器的按鍵 token。方向鍵沿用 `U D L R`，所以字母鍵在這個畫面送
+// **小寫**（原版大小寫都認）；`<`／`>` 與逗號、句號同義；數字鍵盤 5 是 `5`。
+var editorTokens = map[string]int{
+	"U": bitmapedit.KeyUp, "D": bitmapedit.KeyDown, "L": bitmapedit.KeyLeft, "R": bitmapedit.KeyRight,
+	"HOME": bitmapedit.KeyHome, "PGUP": bitmapedit.KeyPgUp, "END": bitmapedit.KeyEnd, "PGDN": bitmapedit.KeyPgDn,
+	"5": bitmapedit.KeyCenter, "RET": bitmapedit.KeyEnter, "ESC": bitmapedit.KeyEsc,
+	"<": '<', ">": '>', ",": ',', ".": '.',
+	"d": 'd', "u": 'u', "x": 'x', "c": 'c', "y": 'y', "n": 'n',
+	"Y": 'Y', "N": 'N',
+}
+
+// editorKey 把一個 token 交給編輯器。`CLICK:x,y` 是滑鼠左鍵落在 320 × 200 的 (x, y)，
+// 按住拖曳時每到一個新位置送一次。離開之後答 YES 就寫回，接著回到選角清單
+// （`_main` 在 `sub_1293E` 之後跳回清單那一段）。
+func (f *Flow) editorKey(token string) bool {
+	e := f.Editor
+	if e == nil {
+		f.Scene = SceneEditPick
+		return true
+	}
+	if rest, ok := strings.CutPrefix(token, "CLICK:"); ok {
+		xs, ys, found := strings.Cut(rest, ",")
+		x, errX := strconv.Atoi(xs)
+		y, errY := strconv.Atoi(ys)
+		if !found || errX != nil || errY != nil {
+			return false
+		}
+		e.Click(x, y)
+	} else if k, ok := editorTokens[token]; ok {
+		e.Key(k)
+	} else {
+		return false
+	}
+	if e.Done {
+		if e.Save && f.SaveBitmap != nil {
+			slots := f.Roster.Occupied()
+			if f.EditCursor < len(slots) {
+				f.EditError = f.SaveBitmap(slots[f.EditCursor], f.EditShield, e.Pix)
+			}
+		}
+		f.Editor = nil
+		f.Scene = SceneEditPick
+	}
+	return true
 }

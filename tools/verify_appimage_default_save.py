@@ -46,7 +46,8 @@ with (out / "verification.log").open("w") as log:
 assert sha(artifact) == before
 save = Path(config_home) / "kol-remake-cht/save.dat"
 state = json.loads(save.read_text())
-assert state["schema"] == "kol-save-v2"
+# v0.2.3 的封包寫 v2；SPEC-036 之後的建置寫 v3（角色多了 picture／shield）。
+assert state["schema"] in ("kol-save-v2", "kol-save-v3")
 assert state["characters"][14]["name"] == "NOVA2"
 assert state["characters"][15]["name"] == "LUNA"
 assert state["characters"][15]["gold"] == 1440

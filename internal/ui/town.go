@@ -409,7 +409,7 @@ func drawCJKPartySlots(dst *ebiten.Image, sprites Sprites, f *font.Font,
 		fill(dst, x, l.PartyY, l.PartyWidth, h, town.ColourBoxFill)
 		frame(dst, x, l.PartyY, l.PartyWidth, l.PortraitBoxHeight, c)
 		frame(dst, x, l.PartyY+l.PortraitBoxHeight-1, l.PartyWidth, l.PlateHeight, c)
-		portrait, err := sprites.Get("CHARPICS", m.Portrait)
+		portrait, err := memberPortrait(sprites, m.Portrait, m.Picture)
 		if err != nil {
 			return err
 		}

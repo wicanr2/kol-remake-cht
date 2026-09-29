@@ -186,3 +186,36 @@ func TestComposeAppliesOffset(t *testing.T) {
 		}
 	}
 }
+
+// 型別 3 的盾在模板盾牌之後多貼一片個人盾牌，位置是模板矩形左上角往下一列；
+// 改過就帶那一張，沒改過畫預設盾牌（`sub_18F3A:0x192D6`，SPEC-036）。
+func TestPersonalShieldOnStyleThree(t *testing.T) {
+	l := load(t)
+	f := Figure{Styles: [LayerCount]int{-1, -1, -1}}
+	for style := 0; style < len(l.Shields[0]); style++ {
+		f.Shield = &Item{Style: style}
+		got := l.Compose(f, 0)
+		var tmpl, personal *Piece
+		for i := range got {
+			switch got[i].Archive {
+			case ArchiveShield:
+				tmpl = &got[i]
+			case ArchiveDefaultShield:
+				personal = &got[i]
+			}
+		}
+		if (personal != nil) != (style == PersonalShieldStyle) {
+			t.Fatalf("型別 %d：個人盾牌 %v", style, personal)
+		}
+		if personal != nil && (tmpl == nil || personal.X != tmpl.X || personal.Y != tmpl.Y+1 || personal.Custom != "") {
+			t.Fatalf("個人盾牌位置 %+v，模板 %+v", personal, tmpl)
+		}
+	}
+	custom := "ab"
+	f.Shield, f.PersonalShield = &Item{Style: PersonalShieldStyle}, &custom
+	for _, p := range l.Compose(f, 0) {
+		if p.Archive == ArchiveDefaultShield && p.Custom != custom {
+			t.Fatal("改過的個人盾牌應帶那一張")
+		}
+	}
+}

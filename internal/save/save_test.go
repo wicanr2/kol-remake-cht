@@ -115,7 +115,7 @@ func TestUnknownSettingsSurvive(t *testing.T) {
 // schema 不符一律失敗，不做寬鬆讀取。
 func TestSchemaMismatchFails(t *testing.T) {
 	dir := t.TempDir()
-	for _, schema := range []string{"", "kol-save-v2", "something-else"} {
+	for _, schema := range []string{"", "kol-save-v2", "kol-save-v3", "something-else"} {
 		path := filepath.Join(dir, "bad.json")
 		body, _ := json.Marshal(map[string]any{"schema": schema})
 		if err := os.WriteFile(path, body, 0o644); err != nil {

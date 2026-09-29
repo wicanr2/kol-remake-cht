@@ -48,6 +48,8 @@ type Member struct {
 	Name string
 	// Portrait 是角色存檔縮圖已匹配的 CHARPICS 索引（SPEC-019）。
 	Portrait int
+	// Picture／Shield 是書本改過的圖（SPEC-036），nil 表示沿用模板與預設盾牌。
+	Picture, Shield *string
 	// Worn 是六個裝備欄的名稱，順序同記錄 0x101：武器、頭、軀幹、腿、盾、腰帶。
 	Worn [6]string
 	// Skills 是四列武器的攻防原始值，用來算戰鬥等級（RE-080）。

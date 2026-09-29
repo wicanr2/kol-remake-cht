@@ -79,7 +79,7 @@ func drawPartySlots(dst *ebiten.Image, sprites Sprites, small *font.Font,
 		fill(dst, x, s.Y, s.Width, h, town.ColourBoxFill)
 		frame(dst, x, s.Y, s.Width, s.PortraitHeight, c)
 		frame(dst, x, s.Y+s.PortraitHeight-1, s.Width, s.PlateHeight, c)
-		portrait, err := sprites.Get("CHARPICS", m.Portrait)
+		portrait, err := memberPortrait(sprites, m.Portrait, m.Picture)
 		if err != nil {
 			return err
 		}
@@ -177,7 +177,7 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		fill(dst, x, l.PartyY, l.PartyWidth, h, town.ColourBoxFill)
 		frame(dst, x, l.PartyY, l.PartyWidth, l.PortraitBoxHeight, c)
 		frame(dst, x, l.PartyY+l.PortraitBoxHeight-1, l.PartyWidth, l.PlateHeight, c)
-		portrait, err := sprites.Get("CHARPICS", m.Portrait)
+		portrait, err := memberPortrait(sprites, m.Portrait, m.Picture)
 		if err != nil {
 			return err
 		}

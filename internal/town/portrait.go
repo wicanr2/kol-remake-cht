@@ -92,6 +92,7 @@ func (m Member) Figure() portrait.Figure {
 	}
 	f.Shield = m.item(PortraitShieldPos, PortraitHeadSlot+PortraitShieldPos*0x10)
 	f.Belt = m.item(WornSlots-1, PortraitBeltSlot)
+	f.PersonalShield = m.Shield
 	return f
 }
 

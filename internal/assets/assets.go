@@ -5,6 +5,8 @@
 package assets
 
 import (
+	"bytes"
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"image"
@@ -116,3 +118,43 @@ func (l *Library) Decode(archive string, index int) (image.Image, Image, error) 
 
 // Count 回傳 archive 的圖號數量。
 func (l *Library) Count(archive string) int { return len(l.index[archive]) }
+
+// DefaultShieldArchive 是預設盾牌那一張的圖庫名（BOOKDATA 第 4 項，SPEC-036）。它不在
+// EGA 圖庫的 manifest 裡，而是由 tools/extract_default_shield.py 另外抽到 EGA 目錄旁的
+// `bookdata/`，有自己的 manifest。
+const DefaultShieldArchive = "BOOKDATA"
+
+// DecodeDefaultShield 讀預設盾牌 PNG，核對 manifest 記的 SHA-256 與尺寸。
+func (l *Library) DecodeDefaultShield() (image.Image, error) {
+	dir := filepath.Join(filepath.Dir(filepath.Clean(l.root)), "bookdata")
+	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
+	if err != nil {
+		return nil, fmt.Errorf("讀取預設盾牌 manifest 失敗：%w", err)
+	}
+	var m struct {
+		Schema string  `json:"schema"`
+		Images []Image `json:"images"`
+	}
+	if err = json.Unmarshal(raw, &m); err != nil {
+		return nil, err
+	}
+	if m.Schema != "kol-default-shield-v1" || len(m.Images) != 1 {
+		return nil, fmt.Errorf("預設盾牌 manifest 格式不符")
+	}
+	meta := m.Images[0]
+	body, err := os.ReadFile(filepath.Join(dir, filepath.Base(meta.File)))
+	if err != nil {
+		return nil, err
+	}
+	if fmt.Sprintf("%x", sha256.Sum256(body)) != meta.SHA256 {
+		return nil, fmt.Errorf("預設盾牌 PNG 雜湊與 manifest 不符")
+	}
+	img, format, err := image.Decode(bytes.NewReader(body))
+	if err != nil || format != "png" {
+		return nil, fmt.Errorf("預設盾牌不是可讀的 PNG：%v", err)
+	}
+	if b := img.Bounds(); b.Dx() != meta.Width || b.Dy() != meta.Height {
+		return nil, fmt.Errorf("預設盾牌尺寸與 manifest 不符")
+	}
+	return img, nil
+}

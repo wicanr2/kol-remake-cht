@@ -37,7 +37,13 @@ func (p *BattleSheet) Draw(dst *ebiten.Image, sprites Sprites, f *font.Font, s *
 		if d.Monster {
 			archive = "MONPICS"
 		}
-		pic, err := sprites.Get(archive, d.Portrait)
+		var pic *ebiten.Image
+		var err error
+		if d.Monster {
+			pic, err = sprites.Get(archive, d.Portrait)
+		} else {
+			pic, err = memberPortrait(sprites, d.Portrait, d.Picture)
+		}
 		if err != nil {
 			return err
 		}

@@ -14,7 +14,7 @@ cp /repo/go.mod /tmp/dosgolem/
 cp -r /repo/internal /repo/oracle /tmp/dosgolem/
 cp -r /go/pkg/mod /tmp/mod
 export GOMODCACHE=/tmp/mod GOCACHE=/tmp/gocache GOPATH=/tmp/gopath GOPROXY=off GOSUMDB=off GOWORK=off
-case "${KOL_CHECK:-all}" in all|normal|book|durability|panels|gaps|exit|terrain) ;; *) echo 'KOL_CHECK 只接受 all、normal、book、durability、panels、gaps、exit 或 terrain' >&2; exit 2 ;; esac
+case "${KOL_CHECK:-all}" in all|normal|book|editor|durability|panels|gaps|exit|terrain) ;; *) echo 'KOL_CHECK 只接受 all、normal、book、editor、durability、panels、gaps、exit 或 terrain' >&2; exit 2 ;; esac
 cd /tmp/dosgolem
 if [ "${KOL_CHECK:-all}" = all ]; then
 go test ./internal/cpu/... ./internal/dos/... ./internal/dosfile/... ./internal/machine/... ./oracle/... -count=1 -timeout 180s > /out/dosgolem.log 2>&1
@@ -48,6 +48,12 @@ fi
 mkdir -p /tmp/kol/tools/oracle
 cp /src/tools/oracle/normal_startup_test.go /tmp/kol/tools/oracle/
 cp /src/tools/oracle/book_startup_test.go /tmp/kol/tools/oracle/
+cp /src/tools/oracle/book_editor_test.go /tmp/kol/tools/oracle/
+if [ "${KOL_CHECK:-all}" = editor ]; then
+KOL_ORACLE_ROOT=/tmp/kol/workplace/oracle/game KOL_ORACLE_CAPTURE=/out \
+go test -tags oracle ./tools/oracle -run '^TestBookBitmapEditorOriginal$' -count=1 -v -timeout "${KOL_BOOK_TIMEOUT:-600s}" > /out/book-editor.log 2>&1
+exit 0
+fi
 if [ "${KOL_CHECK:-all}" != book ]; then
 KOL_ORACLE_ROOT=/tmp/kol/workplace/oracle/game KOL_ORACLE_CAPTURE=/out \
 go test -tags oracle ./tools/oracle -run '^TestNormalStartupUpdatedDosgolem$' -count=1 -v -timeout 240s > /out/normal-startup.log 2>&1

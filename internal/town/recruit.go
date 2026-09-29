@@ -58,6 +58,8 @@ type Candidate struct {
 	// 那十七格（RE-107／RE-109）。
 	Progress []int
 	Carried  [][]byte
+	// Picture／Shield 同 Member（SPEC-036）。
+	Picture, Shield *string
 }
 
 // SelectLeader 以名冊中的角色開始隊伍；不沿用畫面樣本中的預設隊員。
@@ -155,6 +157,7 @@ func (c Candidate) member() Member {
 		Backpack: append([]Good(nil), c.Backpack...),
 		Spells:   append([]Spell(nil), c.Spells...),
 		Quests:   append([]int(nil), c.Quests...), Progress: append([]int(nil), c.Progress...),
+		Picture: c.Picture, Shield: c.Shield,
 		Speaker: true}
 	if c.Sheet != nil {
 		sheet := *c.Sheet

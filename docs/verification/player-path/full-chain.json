@@ -172,7 +172,7 @@
   "save": {
     "file": "workplace/saves/full-chain.json",
     "expect": {
-      "schema": "kol-save-v2",
+      "schema": "kol-save-v3",
       "location.kind": "town",
       "location.town": 7,
       "location.entry_point": 3,

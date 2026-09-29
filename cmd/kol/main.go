@@ -6,6 +6,7 @@ package main
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"flag"
@@ -102,7 +103,8 @@ type questBattle struct {
 // battleMember 把城鎮那一側的隊員換成戰鬥要用的欄位（RE-080）：戰鬥等級由
 // 四列武器的攻防原始值算出來，規劃順序要洞察，昏迷門檻要體型與健康。
 func battleMember(m town.Member) battle.Member {
-	out := battle.Member{Name: m.Name, Wounds: m.Wounds, Female: m.Female, Portrait: m.Portrait}
+	out := battle.Member{Name: m.Name, Wounds: m.Wounds, Female: m.Female, Portrait: m.Portrait,
+		Picture: m.Picture, Shield: m.Shield}
 	if m.Sheet == nil {
 		return out
 	}
@@ -396,7 +398,14 @@ func (c *spriteCache) Get(archive string, index int) (*ebiten.Image, error) {
 	if img, ok := c.m[key]; ok {
 		return img, nil
 	}
-	src, _, err := c.lib.Decode(archive, index)
+	var src image.Image
+	var err error
+	if archive == assets.DefaultShieldArchive {
+		// 預設盾牌不在 EGA 圖庫 manifest 裡，另有自己的一份（SPEC-036）。
+		src, err = c.lib.DecodeDefaultShield()
+	} else {
+		src, _, err = c.lib.Decode(archive, index)
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -1034,9 +1043,12 @@ type game struct {
 	battleAtlas *ebiten.Image
 	worldParty  []town.Member
 	sprites     *spriteCache
-	small       *font.Font
-	large       *font.Font
-	cjk         *font.Font
+	// editMouse／editBlink 是點陣圖編輯器畫面的滑鼠拖曳與游標閃爍（SPEC-036）。
+	editMouse editorMouse
+	editBlink int
+	small     *font.Font
+	large     *font.Font
+	cjk       *font.Font
 	// titleSubs 是中文模式的開場字幕與封面副標；英文模式為 nil。
 	titleSubs  *titleSubtitles
 	strings    *i18n.Table
@@ -1137,6 +1149,14 @@ func (g *game) snapshot() map[string]any {
 		row["scene"] = "flow:" + string(g.flow.Scene)
 	default:
 		row["scene"] = string(g.scene)
+	}
+	if g.flow != nil && g.flow.Editor != nil {
+		// 點陣圖編輯器（SPEC-036）：模式、白框、顏色、游標、筆、已修改、問句與圖的雜湊。
+		e := g.flow.Editor
+		sum := sha256.Sum256(e.Pix[:])
+		row["bitmap_editor"] = map[string]any{"shield": g.flow.EditShield, "tools_mode": e.ToolsMode,
+			"tool": e.Tool, "color": e.Color, "x": e.X, "y": e.Y, "pen": e.Pen,
+			"modified": e.Modified, "asking": e.Asking, "pix_sha256": hex.EncodeToString(sum[:])}
 	}
 	if g.play != nil {
 		x, y := g.play.Outdoor.PartyPosition()
@@ -1763,13 +1783,23 @@ func (g *game) renderFlow() error {
 		return g.renderScene(sceneDelete)
 	case flow.SceneHarbor:
 		return g.renderScene(sceneHarbor)
-	case flow.SceneSelect:
+	case flow.SceneSelect, flow.SceneEditPick:
+		cursor := g.flow.SelectCursor
+		if g.flow.Scene == flow.SceneEditPick {
+			cursor = g.flow.EditCursor
+		}
 		if g.strings != nil {
 			return ui.DeleteListCJK(dst, g.sprites, g.cjk, g.strings,
-				g.roster.Occupied(), g.flow.SelectCursor, false)
+				g.roster.Occupied(), cursor, false)
 		}
-		return ui.SelectCharacter(dst, g.sprites, g.small,
-			g.roster.Occupied(), g.flow.SelectCursor)
+		return ui.SelectCharacter(dst, g.sprites, g.small, g.roster.Occupied(), cursor)
+	case flow.SceneEditor:
+		// 游標約每 10 幀換一次相位（原版是校正過的忙等迴圈，實際週期未知）。
+		blink := g.editBlink/10%2 == 0
+		if g.strings != nil {
+			return ui.BitmapEditorCJK(dst, g.sprites, g.cjk, g.strings, g.flow.Editor, blink)
+		}
+		return ui.BitmapEditor(dst, g.sprites, g.small, g.flow.Editor, blink)
 	case flow.SceneInn:
 		if g.strings != nil {
 			return ui.InnCJK(dst, g.sprites, g.cjk, g.strings, g.flow.Inn)
@@ -1845,6 +1875,10 @@ func (g *game) updateInteractive() error {
 	targets := g.flowTargets()
 	typingName := g.flow.Scene == flow.SceneNewChar && g.flow.Create.Stage == charcreate.StageName
 	tokens := append(keyboardTokens(typingName), mouseTokens(targets, "RET")...)
+	if g.flow.Scene == flow.SceneEditor {
+		g.editBlink++
+		tokens = g.editorTokens()
+	}
 	if len(g.notice) > 0 {
 		if len(tokens) > 0 {
 			g.notice = nil
@@ -3937,6 +3971,9 @@ func main() {
 		}
 	}
 	attachCreation := func(f *flow.Flow) {
+		if playSession != nil {
+			attachBitmapEditor(f, lib, playSession)
+		}
 		if creationData != nil {
 			f.CommitCreate = func(c *charcreate.State) error {
 				err := commitCreated(c, creationData, slots, playSession)

@@ -529,14 +529,18 @@
       "body": "SPEC-036 已 READY（RE-157）。使用者 2026-09-29 決定實作：自訂像素存進 v2 存檔（每名角色 40×38 的 16 色索引，存檔格式升版），介面照原版鍵位與滑鼠並翻譯中文提示、不另加功能；盾牌先查出原版在哪裡顯示每名角色的盾牌並接上，再做 EDIT SHIELD 的顯示。",
       "acceptance": "使用者決定要做之後，依 SPEC-036 接上編輯器與自訂圖像的保存，並與原版同狀態對拍。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "internal/flow/flow.go"
+          "internal/bitmapedit/bitmapedit.go",
+          "internal/bitmapedit/original_test.go",
+          "docs/spec/036-picture-shield-editor.md"
         ],
-        "pattern": "點陣圖編輯器還沒實作",
-        "note": "與 flow.go 的自承註解綁在一起；實作之後這句會消失。"
+        "pattern": "SPEC-036",
+        "note": "已完成，當回歸訊號：編輯器規則、原版對拍測試與規格都在。"
       },
-      "issue": 31
+      "issue": 31,
+      "status": "done",
+      "resolved": "2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。"
     },
     {
       "id": "building-followup-dialogue",

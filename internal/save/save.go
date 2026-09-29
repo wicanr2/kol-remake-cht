@@ -17,7 +17,11 @@ import (
 // Schema 是 v1 相容格式；正式遊戲使用 CompleteSchema，v1 保留為匯入入口。
 const Schema = "kol-save-v1"
 
-const CompleteSchema = "kol-save-v2"
+const CompleteSchema = "kol-save-v3"
+
+// CompleteSchemaV2 是 v3 之前的完整存檔。讀進來時補上 v3 新增的欄位（角色的自訂圖像與
+// 盾牌都是 null，也就是沿用預設），之後當成 v3 處理；寫出一律是 v3。
+const CompleteSchemaV2 = "kol-save-v2"
 
 // SchemaPrefix 是版本檢查用的字首。
 const SchemaPrefix = "kol-save-v"
