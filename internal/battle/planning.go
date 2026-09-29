@@ -71,6 +71,10 @@ type Planning struct {
 	ListPick int
 	// Unimplemented 記下按了但還沒實作的圖示，照 town.Session 的做法不默默吞掉。
 	Unimplemented []int
+	// Summary 是主指令列重畫時標在地圖上的那一格（視窗座標，`0x1F16A`…`0x1F38D`）；
+	// SummaryShown 為假就不標。
+	Summary      Cell
+	SummaryShown bool
 }
 
 // BeginTurn 為現在輪到的那一名組出主指令列。不是隊員就什麼都不做。
@@ -89,6 +93,55 @@ func (s *State) BeginTurn() {
 	s.Plan.Bar = CommandBar(&s.Actors[i], m, s.Plan.Env)
 	s.Plan.Selected = 0
 	s.Plan.Command, s.Plan.Style, s.Plan.Guard = 0, 0, 0
+	s.Plan.Summary, s.Plan.SummaryShown = s.planSummary(i)
+}
+
+// planSummary 是 `0x1F16A`…`0x1F38D`：主指令列重畫前，依 `word_31122`（上一個寫回的
+// 指令碼，`State.LastCommand`）決定要不要在地圖上標出這一名的目標格。
+//
+//	武器、徒手、施法、移動、騎乘移動，以及已上弦（`+0x1D`）的射擊 → 標
+//	施法而且法術不用選目標格（`+0x0E` < 0x80）→ 改走面向那一格
+//	射擊與要選目標格的施法 → 記住的目標格（`[0x1A74]`／`[0x1B36]`），出了 0…8 不標
+//	其餘                      → 面向那一格（`[0x0B76]`）
+//
+// 只有那一格站著人時才畫（`[0x6AE4]` 非零）。指令碼讀的是全域，不是這一名自己的
+// `+0x25`，所以新一回合第一名看到的是上一個寫回者的指令（RE-160）。
+func (s *State) planSummary(i int) (Cell, bool) {
+	a := &s.Actors[i]
+	cmd := s.LastCommand
+	switch cmd {
+	case CmdWeapon, CmdUnarmed, CmdCast, CmdMove, CmdMountedMove:
+	case CmdMissile:
+		if a.Flag1D == 0 {
+			return Cell{}, false
+		}
+	default:
+		return Cell{}, false
+	}
+	if cmd == CmdCast {
+		m := s.member(i)
+		if m == nil || a.SpellPick < 0 || a.SpellPick >= len(m.Spells) || !m.Spells[a.SpellPick].NeedsTarget() {
+			cmd = 0
+		}
+	}
+	var c Cell
+	if cmd == CmdMissile || cmd == CmdCast {
+		memo := s.memo(i)
+		c = Cell{Row: memo.Row + ViewCentre.Row - a.X, Col: memo.Col + ViewCentre.Col - a.Y}
+		if c.Row < 0 || c.Col < 0 || c.Row > 8 || c.Col > 8 {
+			return Cell{}, false
+		}
+	} else {
+		if a.Facing < 0 || a.Facing > 7 {
+			return Cell{}, false
+		}
+		n := FacingCell(a.Facing)
+		c = Cell{Row: n/3 + 3, Col: n%3 + 3}
+	}
+	if s.actorAt(a.X+c.Row-ViewCentre.Row, a.Y+c.Col-ViewCentre.Col) < 0 {
+		return Cell{}, false
+	}
+	return c, true
 }
 
 // MoveSelection 移動圖示列的白框：末格繞回，與城鎮同一條規則。
@@ -154,8 +207,10 @@ func (s *State) chooseCommand(i int) bool {
 	icon := s.icon()
 	switch icon {
 	case CmdYes:
-		// 第一格是大姆指，原版沒有把它當成一個指令；留在原地。
-		return false
+		// 大姆指是確認（`0x1F39E`：`sub_228B7` 回 7 跳 `0x1FAC4`）：立起「規劃過了」、
+		// 換下一名。記錄裡的指令碼與兩個選項原樣留著，所以新回合直接按 YES 就是
+		// 重複上一回合那一手（RE-158）。
+		return s.confirm()
 	case CmdWeapon:
 		s.Plan.Command = icon
 		s.beginTarget(i, CursorAdjacent, PromptWeaponForm)
@@ -294,10 +349,20 @@ func (s *State) chooseGuardForm(i int) bool {
 
 // commit 把三個值寫回那一名，往下一名走，並回報這一輪是不是決定完了
 // （`0x1FA6D`…`0x1FAE7`）。
+//
+// 寫回之後原版跳 `0x1F16A` 重畫**同一名**的指令列（白框在 Return 時已歸零，停在 YES），
+// 還可以重選；按 YES 才換人（`confirm`）。回傳值恆為假。
 func (s *State) commit(i, command, style, guard int) bool {
 	s.Actors[i].Command = command
 	s.Actors[i].Style = style
 	s.Actors[i].Guard = guard
+	s.LastCommand = command
+	s.BeginTurn()
+	return false
+}
+
+// confirm 是指令列按下 YES：這一名規劃完，換下一名；整輪決定完回報真。
+func (s *State) confirm() bool {
 	done := s.EndTurn()
 	if !done {
 		s.AdvanceToParty()

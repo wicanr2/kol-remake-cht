@@ -6842,3 +6842,14 @@ frame-270 推翻了 remake 的版面：
   第 3 回合打贏，402 步。25 條路徑一致；`go test ./internal/... ./cmd/...` 全過。
   過程中誤用 `git checkout` 還原了剛重生的 plan，已重跑重生；無其他影響。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #102 結案（使用者 2026-09-29 決定照原版，RE-160）：規劃段寫回後停在同一名、白框在 YES，按 YES 才換人；
+  `+0x25` 跨回合保留，新回合直接按 YES 即沿用。指令列重畫時依 `word_31122`（`State.LastCommand`）標出
+  目標格。既有規劃測試改經 `commitThenYes`，新增 `TestPlanningYesRepeatsLastCommand`、
+  `TestPlanningSummaryMarksTarget`。`drive_battle_script.py` 下完指令後按 RET 確認。五份戰鬥收據
+  （flee、bar-flee、missile、pickup、spoils）在按鍵序列補上 YES 並以 `--write` 重截示意圖；pickup
+  第一次寫回回報沒過，之後兩次重跑都通過，原因未查明。四條長路徑戰鬥段重生，回合數與勝負不變，
+  只多了確認鍵。8 份戰鬥收據、25 條路徑一致；`go test ./internal/... ./cmd/...` 全過。
+- SPEC-036 決定（使用者 2026-09-29）：實作；像素存 v2 存檔；原版鍵位加中文提示；盾牌先查顯示位置。
+  子代理查出（主工作階段抽驗 `sub_18F3A:0x192D6` 盾牌那一段）：每名角色的 CHARPICS 畫在城鎮隊伍格、
+  資料頁抬頭與戰鬥資訊框；個人 SHLDPICS 只畫在資料頁全身立繪，盾牌型別 3 時貼在模板盾牌左上角下一列。
+  新角色的盾牌初值固定取 BOOKDATA 第 4 項。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

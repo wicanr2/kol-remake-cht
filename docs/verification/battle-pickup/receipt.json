@@ -26,7 +26,7 @@
  "frames": [
   {
    "file": "drop.png",
-   "step": 138,
+   "step": 139,
    "shows": "第一回合的丟：POONTANG DROPS HIS LONG SPEAR!（記錄 0x10D，名字由 ActResult 帶出來，RE-094）。",
    "sha256": "a903f7f800b2e7a6d4c6dbffc27996fa77afb91f07cef11317890a4cacf6df30",
    "run": 0,
@@ -34,33 +34,33 @@
   },
   {
    "file": "bar.png",
-   "step": 139,
+   "step": 142,
    "shows": "第二回合的指令列多了撿那一格（0x26）：YES、徒手、撿、移動、休息——武器不在手上，所以攻擊與丟都不見了。",
-   "sha256": "df9b51654bffb3e33a9e317b003fc8fa573dc8581e9e9d6a1e1b5628e7a77886",
+   "sha256": "596a0ee686bc9b23b271d625c24110c26de2dfebb85d9a330212f8cff1b746bb",
    "run": 0,
    "check": 2
   },
   {
    "file": "ask.png",
-   "step": 145,
+   "step": 147,
    "shows": "執行段停在問句上：YOU HAVE FOUND A LONG SPEAR.  DO YOU WANT TO PICK IT UP?——**前面沒有動作者的名字**，記錄 0x111 自己就是一句完整的話。",
-   "sha256": "050040e7f73d84359616cf675a68c2c535756fdb5e8a0904632a792dd0c3a3ae",
+   "sha256": "9ffe4ff8775a2f14ee5664d0213b47a59af5c3f637cdfe2f1b55f10e61644e75",
    "run": 0,
    "check": 3
   },
   {
    "file": "taken.png",
-   "step": 152,
+   "step": 154,
    "shows": "答是之後的第三回合：指令列換回七格（武器、切換、丟都回來了），長矛回到手上。撿成功本身不印任何一句。",
-   "sha256": "77989cfb67a1eff50eac0795fc676a216b8ea0179d943005a2eceac6c0a47506",
+   "sha256": "0038ff269d12d3ac4688f4cf7c451ee4ebc7f1815a1edd7001cc597736adf78b",
    "run": 0,
    "check": 4
   },
   {
    "file": "kept.png",
-   "step": 152,
+   "step": 154,
    "shows": "同一步答否：指令列還是五格、撿那一格還在——東西留在地上，下一回合還問得到。",
-   "sha256": "596a0ee686bc9b23b271d625c24110c26de2dfebb85d9a330212f8cff1b746bb",
+   "sha256": "85c2474f065835f1ab9925ff46e2f1a4cea1baf6895661f211418b6d87e7c946",
    "run": 1,
    "check": 4
   }
@@ -141,10 +141,10 @@
    ],
    "found": [
     129,
-    138,
     139,
-    145,
-    152
+    142,
+    147,
+    154
    ]
   },
   {
@@ -219,10 +219,10 @@
    ],
    "found": [
     129,
-    138,
     139,
-    145,
-    152
+    142,
+    147,
+    154
    ]
   }
  ]

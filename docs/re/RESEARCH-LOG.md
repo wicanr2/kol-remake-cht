@@ -10664,7 +10664,7 @@ SLEDGE 打中 Olear。靜態讀碼同 RE-141。證據等級 `已證實`。
 
 選指令寫回（`0x1FA6D`）之後跳 `loc_1F16A` 重畫同一名的指令列與摘要；`sub_228B7` 回 7（YES）
 才跳 `loc_1FAC4` 設 `+0x22`、換下一名（`0x1F38D`）。收據裡 Theodoric 寫回徒手之後畫面仍是他，
-按 YES 才輪到 Olear。remake 選完就換人，另列 worklist `planning-yes-confirm` 待使用者決定。
+按 YES 才輪到 Olear。remake 依 RE-160 照做。
 
 ### 推翻紀錄
 
@@ -10766,3 +10766,48 @@ DGROUP `0x9E48`…`0x9E52` 的寫入監看（`scratch_writes`、`scratch-writes.
 - 測試：`TestOriginalNormalEnemyPlanning`、`TestMonsterAIWeights`、`TestRosterListTail`、
   `TestFaithfulInnStayQuitNoOpensRoster`、
   `TestEnemyMoveFormZeroesSprintWhenLegsAreFine`、`TestEnemyPlanRollsIntellectTwice`。
+
+## RE-160：規劃段按 YES 才換人與指令列的目標標記
+
+輸入與工具同 RE-158（`KOLTOWN-unpacked.EXE` SHA-256 `01f6f9a9…d1d2`，IDA Pro 9.4，
+IDA linear）。使用者 2026-09-29 決定規劃段照原版流程（worklist `planning-yes-confirm`，#102）。
+證據等級除另註明外 `已證實`（靜態控制流逐條讀過）。
+
+### 流程
+
+隊員輪到時 `0x1F155`：`sub_223C0` 以那一名為中心重畫地圖，接著落到 `loc_1F16A`。
+`loc_1F16A`…`loc_1F38D` 畫目標標記（下一節），`0x1F38D` 呼叫 `sub_228B7` 等輸入：
+回 7（YES）跳 `0x1FAC4` 設 `+0x22 = 1`、`word_2F972++`，換下一名；其他圖號進分派表
+`0x1FA02`，各條收尾都到 `0x1FA6D` 寫回 `+0x25`／`+0x23`／`+0x24`，再 `jmp loc_1F16A`
+回到同一名。`sub_11722` 的鍵值分派讀到 Return（0x0D）時把白框 `word_2DF3A` 歸零，
+所以每次回到指令列白框都在 YES。
+
+隊員的 `+0x25` 在回合收尾不清（RE-158），收據裡 Theodoric 六回合都是 0x29、Olear 都是 0：
+新回合直接按 YES 就是沿用。
+
+### 目標標記（`0x1F16A`…`0x1F38D`）
+
+指令碼取全域 `word_31122`，不是這一名的 `+0x25`。`word_31122` 由 `0x1FA6D`（隊員寫回）、
+`sub_2374C`（敵人 AI）與回合收尾 `0x20A8B`（逐名讀 `+0x25`）寫入，所以新回合第一名看到的
+是上一個寫入者的指令碼。
+
+```
+指令碼 ∈ {0x21, 0x29, 0x0D, 0x27, 0x3F}，或 0x23 且 +0x1D ≠ 0 → 要標（word_39A54 = 1）
+0x0D 而且法術 +0x0E < 0x80                       → 當成 0，走面向那一格
+0x23、0x0D → 記住的目標格 [0x1A74]／[0x1B36] 換成視窗座標（+4 − 自己），出了 0…8 不標
+其餘       → 面向那一格：[0x0B76 + +0x28] 的 3×3 編號，列 n/3+3、欄 n%3+3
+[0x6AE4 + 9×列 + 欄] 非零（那一格有人）才以 sub_1C683 重畫
+```
+
+`word_39A54` 經 `word_2EA1A` 傳進 `sub_228B7`：輸入模式變成 5，讀完鍵之後 `sub_223C0`
+重畫地圖把標記擦掉。視覺效果與選目標格那一圈同為 `sub_1C683`，尚未對拍原版畫格。
+
+### remake
+
+- `commit` 寫回後重畫同一名的指令列（白框在 YES）；`CmdYes` 走 `confirm` 換人。
+- `State.LastCommand` 對應 `word_31122`，在隊員寫回、`applyEnemy` 與回合收尾更新；
+  `planSummary` 算出標記格，`ui/battle.go` 以白框畫出。
+- `tools/drive_battle_script.py`：同一名同一回合第二次回到主指令列時按 RET 確認。
+- 測試：`TestPlanningYesRepeatsLastCommand`、`TestPlanningSummaryMarksTarget`，
+  既有規劃測試改經 `commitThenYes`。
+

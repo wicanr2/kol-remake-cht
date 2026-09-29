@@ -37,7 +37,7 @@
  "frames": [
   {
    "file": "victory.png",
-   "step": 104,
+   "step": 105,
    "shows": "YOU HAVE DEFEATED THE BINDERAK!（複數後綴由 PluralSuffix 決定，單隻不補）上方蓋著 COMBPICS 圖 3 與白框（`sub_288D4(3)`，RE-147）；下一張獎勵那一句時圖仍留著。",
    "sha256": "361fc27211ece8835351d6a104375115650ee7de1aa800ee34649a97d4ea5939",
    "run": 0,
@@ -45,7 +45,7 @@
   },
   {
    "file": "reward.png",
-   "step": 105,
+   "step": 106,
    "shows": "POONTANG RECEIVES 1 ADVENTURE POINTS, AND 127 GOLD CROWNS!——單人隊伍不印 Each player，改逐句接（RE-096）。",
    "sha256": "f534920fa0193b150e4fa71efaf179659d0259ce522ad64f5f6493e3eeedff76",
    "run": 0,
@@ -53,7 +53,7 @@
   },
   {
    "file": "items-found.png",
-   "step": 106,
+   "step": 107,
    "shows": "戰利品清單：框在 (4,7) 125×146，標題 ITEMS FOUND: 由記錄自帶的 ~H02~V09 定位；清單從行 1（x = 8）、列 0x13 起，行距 8，一行 PLATEMAIL。選中那一列是換文字顏色（亮白，其餘青），不是框起來——原版的清單元件用 `sub_1B033` 重畫整列。底下那一條換成兩格圖示（YES ＋ U-TURN，白框在第 0 格），連帶把報獎勵那張卷軸蓋掉——圖示列與卷軸在原版佔同一塊 (8, 0xA4) 296×32（RE-115）。",
    "sha256": "4b47af083e17308fcf0ac41ac10b61325568669784737a5368226f38c073c97a",
    "run": 0,
@@ -126,9 +126,9 @@
    "found": [
     89,
     90,
-    104,
     105,
-    106
+    106,
+    107
    ]
   }
  ]

@@ -726,6 +726,7 @@ func (s *State) enemyMove(i, target, ring int, rng Rand) EnemyDecision {
 func (s *State) applyEnemy(i int, d EnemyDecision) {
 	a := &s.Actors[i]
 	a.Command, a.Style, a.Guard = d.Command, d.Style, d.Guard
+	s.LastCommand = d.Command
 	if d.Facing >= 0 {
 		a.Facing = d.Facing
 	}

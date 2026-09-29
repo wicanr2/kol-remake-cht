@@ -317,7 +317,14 @@ def main():
         if prompt != 0:
             print('停在沒預期的一層', prompt, b['bar'])
             break
-        # 主指令列：相鄰就打，不然往最近的敵人走一格。
+        # 主指令列。這一名在這一回合已經下過指令了：寫回之後原版停在同一名、白框在
+        # YES（RE-158），按 RET 確認換人。
+        key = (b['round'], b['turn'])
+        if memo.get('decided') == key:
+            tokens.append('RET')
+            continue
+        memo['decided'] = key
+        # 相鄰就打，不然往最近的敵人走一格。
         roster = {a['i']: a for a in b['roster']}
         me = roster.get(b['cursor'])
         if me is None:

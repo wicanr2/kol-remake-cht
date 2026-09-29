@@ -116,6 +116,14 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 		}
 	}
 
+	// 主指令列重畫時標出這一名已決定的目標格（`0x1F16A`，RE-160）。原版同樣是用
+	// `sub_1C683` 重畫那一格的精靈，視覺效果與選目標格那一圈同一個未對拍的近似。
+	if s.Plan.Prompt == battle.PromptCommand && s.Plan.SummaryShown {
+		c := s.Plan.Summary
+		frame(dst, v.X+c.Col*battle.TileSide, v.Y+c.Row*battle.TileSide,
+			battle.TileSide, battle.TileSide, town.ColourSelected)
+	}
+
 	for _, box := range []struct{ X, Y, Width, Height int }{
 		{battle.SheetBox.X, battle.SheetBox.Y, battle.SheetBox.Width, battle.SheetBox.Height},
 		{battle.BodyBox.X, battle.BodyBox.Y, battle.BodyBox.Width, battle.BodyBox.Height},

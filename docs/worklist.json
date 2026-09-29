@@ -117,10 +117,17 @@
       "body": "原版選指令寫回後畫面留在同一名、顯示摘要，可以重選；按第一格 YES 才換下一名，而且 +0x25 跨回合保留，新回合直接按 YES 就是重複上一回合的指令（RE-158）。remake 選完就換人、YES 不做事。改成原版流程會改變操作方式與所有戰鬥收據的按鍵，也與 SPEC-028 的「重複上一指令」選項相關，需使用者決定。",
       "acceptance": "使用者決定之後：照原版流程實作並重生戰鬥收據，或明確記為保留的差異。",
       "verify": {
-        "kind": "manual",
-        "note": "待使用者決定，沒有產品碼訊號。"
+        "kind": "required_in_all",
+        "paths": [
+          "internal/battle/planning.go",
+          "tools/drive_battle_script.py"
+        ],
+        "pattern": "RE-158|confirm",
+        "note": "已完成，當回歸訊號：規劃段的 confirm 與驅動器的確認鍵都要在。"
       },
-      "issue": 102
+      "issue": 102,
+      "status": "done",
+      "resolved": "使用者 2026-09-29 決定照原版流程。寫回後停在同一名、白框在 YES，按 YES 才換人；+0x25 跨回合保留，新回合直接按 YES 即沿用。指令列重畫時依 word_31122 標出目標格（RE-160）。戰鬥驅動器同步改為下完指令後按 RET 確認，收據依新按鍵重生。"
     },
     {
       "id": "ai-style-mask-tail",
@@ -519,9 +526,8 @@
       "id": "picture-shield-bitmap-editor",
       "layer": "gap",
       "title": "EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器",
-      "body": "SPEC-036 已 READY（RE-157）：鍵盤與滑鼠都能操作全部功能，鍵盤 oracle 走得完。實作前要先由使用者決定是否實作、自訂圖像存進存檔的格式與介面。",
+      "body": "SPEC-036 已 READY（RE-157）。使用者 2026-09-29 決定實作：自訂像素存進 v2 存檔（每名角色 40×38 的 16 色索引，存檔格式升版），介面照原版鍵位與滑鼠並翻譯中文提示、不另加功能；盾牌先查出原版在哪裡顯示每名角色的盾牌並接上，再做 EDIT SHIELD 的顯示。",
       "acceptance": "使用者決定要做之後，依 SPEC-036 接上編輯器與自訂圖像的保存，並與原版同狀態對拍。",
-      "blocked_by": "待使用者決定（SPEC-036 待共同決定四項）",
       "verify": {
         "kind": "present",
         "paths": [

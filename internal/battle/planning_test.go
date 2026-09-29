@@ -44,7 +44,7 @@ func TestPlanningWeaponAttack(t *testing.T) {
 		t.Fatalf("選完攻擊式應該進防禦方式，得到 %d", s.Plan.Prompt)
 	}
 	selectIcon(t, s, 0x32) // 防禦選項 3
-	if !s.Choose() {
+	if !commitThenYes(t, s) {
 		t.Fatal("只有一名隊員，選完防禦式這一輪就該結束")
 	}
 	a := s.Actors[0]
@@ -64,7 +64,7 @@ func TestPlanningWeaponFormOneSkipsGuard(t *testing.T) {
 	s.Choose()
 	s.Choose() // 確定目標格
 	selectIcon(t, s, 0x2B)
-	if !s.Choose() {
+	if !commitThenYes(t, s) {
 		t.Fatal("攻擊選項 1 應該直接收尾")
 	}
 	a := s.Actors[0]
@@ -86,7 +86,7 @@ func TestPlanningMove(t *testing.T) {
 		t.Fatalf("確定目標之後應該進移動方式，得到 %d", s.Plan.Prompt)
 	}
 	selectIcon(t, s, IconMoveWalk)
-	if !s.Choose() {
+	if !commitThenYes(t, s) {
 		t.Fatal("選完移動方式這一輪就該結束")
 	}
 	a := s.Actors[0]
@@ -105,7 +105,7 @@ func TestPlanningMissileRemembersTarget(t *testing.T) {
 		t.Fatalf("射擊應該用 mode 2 的游標，得到 %d", s.Plan.Cursor.Mode)
 	}
 	s.MoveCursor(-2, 0, false) // 從中心往上兩格，落在外圈
-	if !s.Choose() {
+	if !commitThenYes(t, s) {
 		t.Fatal("射擊確定目標就該收尾")
 	}
 	a := s.Actors[0]
@@ -161,7 +161,7 @@ func TestPlanningZeroOptionsBecomeRest(t *testing.T) {
 	selectIcon(t, s, 0x2A) // 攻擊選項 0
 	s.Choose()
 	selectIcon(t, s, 0x2A) // 防禦選項 0
-	if !s.Choose() {
+	if !commitThenYes(t, s) {
 		t.Fatal("這一輪應該結束")
 	}
 	if s.Actors[0].Command != CmdRest {
@@ -174,7 +174,7 @@ func TestPlanningDirectCommands(t *testing.T) {
 	for _, icon := range []int{CmdRest, CmdDrop} {
 		s := planningState(Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}})
 		selectIcon(t, s, icon)
-		if !s.Choose() {
+		if !commitThenYes(t, s) {
 			t.Fatalf("%#x 應該直接收尾", icon)
 		}
 		a := s.Actors[0]
@@ -211,7 +211,7 @@ func TestPlanningLoadCommits(t *testing.T) {
 	s.Plan.Bar = []int{CmdYes, CmdLoad}
 	s.Plan.Selected = 1
 	who := s.Current()
-	if !s.Choose() {
+	if !commitThenYes(t, s) {
 		t.Fatal("選 0x22 應該直接收尾")
 	}
 	if len(s.Plan.Unimplemented) != 0 {
@@ -300,5 +300,60 @@ func TestNewRoundResetsReplans(t *testing.T) {
 	s.BeginPlanning(s.Rand)
 	if s.Round.Replans != 1 {
 		t.Fatalf("新回合排完序之後 word_30D00 應為 1，得到 %d", s.Round.Replans)
+	}
+}
+
+// commitThenYes 按下收尾那一個 Return：原版寫回之後停在同一名、白框在 YES（RE-158），
+// 再按一次 Return（YES）才換人。回報第二下之後這一輪是不是決定完了。
+func commitThenYes(t *testing.T, s *State) bool {
+	t.Helper()
+	who := s.Current()
+	if s.Choose() {
+		t.Fatal("寫回之後不該直接換人")
+	}
+	if s.Current() != who || s.Plan.Prompt != PromptCommand || s.Plan.Selected != 0 || s.Plan.Bar[0] != CmdYes {
+		t.Fatalf("寫回之後應停在同一名的主指令列、白框在 YES：輪到 %d（原本 %d）、層 %d、白框 %d",
+			s.Current(), who, s.Plan.Prompt, s.Plan.Selected)
+	}
+	return s.Choose()
+}
+
+// 新回合一開始白框在 YES，直接按下就是沿用記錄裡上一回合那一手（RE-158）。
+func TestPlanningYesRepeatsLastCommand(t *testing.T) {
+	s := planningState(Member{Name: "Theodoric"})
+	s.Actors[0].Command, s.Actors[0].Style, s.Actors[0].Guard = CmdUnarmed, 1, 2
+	s.BeginTurn()
+	if s.icon() != CmdYes {
+		t.Fatalf("白框應停在 YES，停在 %#x", s.icon())
+	}
+	if !s.Choose() {
+		t.Fatal("唯一一名按 YES，這一輪就該決定完")
+	}
+	if a := s.Actors[0]; a.Command != CmdUnarmed || a.Style != 1 || a.Guard != 2 {
+		t.Fatalf("YES 不該改記錄：%#x／%d／%d", a.Command, a.Style, a.Guard)
+	}
+}
+
+// 寫回武器攻擊之後，主指令列重畫時把面向那一格標出來，但只在那一格有人時（`0x1F16A`）。
+func TestPlanningSummaryMarksTarget(t *testing.T) {
+	s := planningState(Member{Name: "Poontang", HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}})
+	a := &s.Actors[0]
+	s.Actors[PartySlots] = Actor{Side: SideMonster, Member: -1, X: a.X - 1, Y: a.Y, Threshold: 80, Stamina: 160}
+	s.Actors[PartySlots].SetParts()
+	selectIcon(t, s, CmdWeapon)
+	s.Choose()
+	s.Choose() // 面向上方那一格
+	selectIcon(t, s, 0x2D)
+	s.Choose()
+	selectIcon(t, s, 0x32)
+	s.Choose()
+	if !s.Plan.SummaryShown || s.Plan.Summary != (Cell{Row: 3, Col: 4}) {
+		t.Fatalf("應標出 (3,4)，得到 %v／%v", s.Plan.Summary, s.Plan.SummaryShown)
+	}
+	// 反面對照：那一格沒有人就不標。
+	s.Actors[PartySlots].Side = SideEmpty
+	s.BeginTurn()
+	if s.Plan.SummaryShown {
+		t.Fatal("目標格沒有人時不該標")
 	}
 }

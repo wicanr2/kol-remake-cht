@@ -426,6 +426,8 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		if a.Side == SideEmpty {
 			continue
 		}
+		// `0x20A8B` 把這一名的 `+0x25` 讀進 `word_31122`。
+		s.LastCommand = a.Command
 		exhausted := 0
 		if !a.Down() {
 			exhausted = s.EndTurnFatigue(i)

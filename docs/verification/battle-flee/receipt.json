@@ -33,7 +33,7 @@
  "frames": [
   {
    "file": "ask.png",
-   "step": 95,
+   "step": 96,
    "shows": "DO YOU WANT TO FLEE?（記錄 0x109）——執行段走完、還沒分勝負，而且全隊都站到了戰場可走區的最外圈，才問得出這一句（`0x21045`）。戰場右側那一排石頭就是走不出去的邊界。",
    "sha256": "870628dc62d14ff03de1d9efb8c36bbde8a0894fe0f3c38e3de7b5e35db1c3ee",
    "run": 0,
@@ -41,7 +41,7 @@
   },
   {
    "file": "back.png",
-   "step": 96,
+   "step": 97,
    "shows": "答 y 之後直接回到野外；逃走那一句只在「Begin next round?」的逃走格那一條印（`battle-bar-flee`）。",
    "sha256": "3d55633e730370120db22eeccf9580d168614de378eac67d1f22e95bbf8e9ab7",
    "run": 0,
@@ -106,9 +106,9 @@
    "found": [
     89,
     90,
-    94,
     95,
-    96
+    96,
+    97
    ]
   }
  ]

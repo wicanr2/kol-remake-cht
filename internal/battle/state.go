@@ -135,6 +135,9 @@ type State struct {
 	Round Round
 	// Plan 是規劃段停在哪一層選單（SPEC-010）。
 	Plan Planning
+	// LastCommand 是全域 `word_31122`：最後一個寫進參戰者 `+0x25` 的指令碼。隊員寫回、
+	// 敵人 AI 與回合收尾都會改它；主指令列的地圖標記看它（`planSummary`）。
+	LastCommand int
 	// Exec 是執行段的出手順序（RE-084）。
 	Exec Execution
 	// Rand 是排規劃順序要用的亂數來源。

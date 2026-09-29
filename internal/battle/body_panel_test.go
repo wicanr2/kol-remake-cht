@@ -32,6 +32,8 @@ func TestBodyPanelFollowsPlanningInspection(t *testing.T) {
 	check(2, true)
 	selectIcon(t, s, 0x32)
 	s.Choose()
+	check(1, true) // 寫回後停在同一名，人形框回到自己（`0x1F16A`）。
+	s.Choose()     // YES 換人：這一輪決定完。
 	check(0, false)
 	s.Round.Turn = 0 // 開始新一輪後才能重新輪到這名隊員。
 	s.BeginTurn()

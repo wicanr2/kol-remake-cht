@@ -5,9 +5,9 @@
  "seed": 1,
  "load": "workplace/saves/party6.json",
  "ambush_rolls": "1,100,23",
- "token_count": 2202,
+ "token_count": 2316,
  "trace": "docs/verification/player-path/full-chain/trace.json",
- "trace_sha256": "8b54f98080b6ee34e629c521854e91ce057c3c4bbb79fe17de76476c140515d2",
+ "trace_sha256": "9c81d5c438d16cfe4e00517fd2429330ede4b82b5479937f4b526859c6655d90",
  "milestones": [
   {
    "step": 0,
@@ -167,7 +167,7 @@
    }
   },
   {
-   "step": 2055,
+   "step": 2169,
    "token": "SPACE",
    "note": "第十九回合打贏",
    "scene": "play",
@@ -218,7 +218,7 @@
    }
   },
   {
-   "step": 2057,
+   "step": 2171,
    "token": "SPACE",
    "note": "勝負的訊息推完，回到世界地圖",
    "scene": "play",
@@ -242,7 +242,7 @@
    }
   },
   {
-   "step": 2069,
+   "step": 2183,
    "token": "RET",
    "note": "走回入城點選 DOOR，回到霍布城內，鏡頭 (56,2)",
    "scene": "play",
@@ -255,7 +255,7 @@
    }
   },
   {
-   "step": 2193,
+   "step": 2307,
    "token": "A",
    "note": "走回半途之家門口",
    "scene": "play",
@@ -269,7 +269,7 @@
    }
   },
   {
-   "step": 2194,
+   "step": 2308,
    "token": "RET",
    "note": "DOOR：進門，店主的敘述",
    "scene": "play",
@@ -287,7 +287,7 @@
    }
   },
   {
-   "step": 2202,
+   "step": 2316,
    "token": "RET",
    "note": "答應 56 枚金幣住一晚，存檔寫出",
    "scene": "play",
@@ -339,32 +339,32 @@
    "shows": "戰場與第一回合的指令列"
   },
   {
-   "step": 2055,
-   "file": "step-2055.png",
+   "step": 2169,
+   "file": "step-2169.png",
    "sha256": "8d70882fc56024a2c75088d40634998f14763f5c44645d03c524b195e7de0b62",
    "shows": "打贏那一句"
   },
   {
-   "step": 2069,
-   "file": "step-2069.png",
+   "step": 2183,
+   "file": "step-2183.png",
    "sha256": "8be3328e6307c5ebf512ffe3d3b77c7c34bb1a85bfbd4882a8547fb503ca0377",
    "shows": "回到霍布城內"
   },
   {
-   "step": 2193,
-   "file": "step-2193.png",
+   "step": 2307,
+   "file": "step-2307.png",
    "sha256": "27095ffefe616da6d200ff011ebae904dcbe127626a38a47bee75e7dd6de785f",
    "shows": "半途之家門口，圖示列剩 DOOR／U-TURN"
   },
   {
-   "step": 2201,
-   "file": "step-2201.png",
+   "step": 2315,
+   "file": "step-2315.png",
    "sha256": "a37fef1a5c212017826674a18e396b4abf101752a97127e4d4d2b5ca77decb0b",
    "shows": "住一晚要 56 枚金幣的問句"
   },
   {
-   "step": 2202,
-   "file": "step-2202.png",
+   "step": 2316,
+   "file": "step-2316.png",
    "sha256": "27b6be126f926eb978a08ad8b6fe98b565e57e98cf883e2a8c442d33ba99e092",
    "shows": "答應之後：扣錢、記下留宿的建築、寫出存檔"
   }
