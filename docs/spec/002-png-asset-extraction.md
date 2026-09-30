@@ -149,6 +149,31 @@ IDA 證據匯出與可丟棄解碼探針，不得建立 production importer 或 
 
 ## 實作狀態
 
+### 正式素材審查圖集
+
+`tools/build_asset_contact_sheets.py` 只合成既有已驗證 PNG，不改 runtime 引用或抽取格式。
+它逐張核對來源 manifest 的 SHA-256、尺寸、EGA 色盤與二值透明度，另將 type 0 灰階
+地圖明列為索引資料；使用原尺寸或整數最近鄰二倍及棋盤背景，不裁切圖片。
+來源涵蓋 773 張主 EGA PNG、27 張戰鬥磚塊／索引圖、兩張原字型與預設盾牌，共 803 張。
+每張圖號、來源 PNG／上游 manifest 雜湊及圖集矩形均列入輸出 manifest。
+
+Docker 內的重生命令為
+`python3 tools/build_asset_contact_sheets.py --output workplace/asset-sheets-20261001`；
+輸出必須尚不存在，使用既有 `kol-package:20260907`、目前 UID/GID、唯讀原始來源與
+有界逾時。逐頁目視通過前僅留本機，沒有核准新的原版資料或公開散布權。
+這批圖集只驗證圖號序列、尺寸、透明輪廓與圖片完整性，不能證明動畫時長或所有
+動態 caller 裁切；正常原版畫面對拍仍依各自收據驗收。
+
+2026-10-01 逐頁目視與逐像素核實完成的正式產物位於
+[contact-sheets/manifest.json](../../assets/original-derived-png/contact-sheets/manifest.json)，
+77 頁涵蓋 44 批／803 張來源，仍僅適用 private GitHub PNG 特例。
+每頁有原版 ZIP entry／SHA-256、來源圖號／PNG 雜湊、繪圖矩形、倍率與目視範圍。
+核實命令為 Docker 內 `python3 tools/verify_asset_contact_sheets.py`；它檢查完整母體、
+矩形不重疊、每個輸出像素／透明極性與來源雜湊。圖集由獨立本機提交保存，
+沒有遠端寫入或公開發布；上游原始資料、研究輸出與 typed data 不隨圖集入庫。
+
+### 正式 PNG 抽取器
+
 `tools/extract_ega_assets.py` 是本 spec 的 production 抽取器，輸出
 `assets/original-derived-png/ega/`：30 個邏輯 archive、752 張 PNG，逐張重讀驗證並與
 已版控 visual probe 紀錄的 SHA-256 核對，任何一項不符即整批失敗、不留半套輸出；
