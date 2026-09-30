@@ -1,6 +1,9 @@
 package battle
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func itemState() *State {
 	s := &State{Party: []Member{{
@@ -126,6 +129,27 @@ func TestSwitchItemSwapsHandAndBelt(t *testing.T) {
 	s.SwitchItem(0)
 	if s.Party[0].WeaponName != "LONG SPEAR" {
 		t.Fatal("換兩次應該回到原狀")
+	}
+}
+
+// 切換之後的那一句依兩格有沒有東西組成（RE-163）。
+func TestSwitchLineFollowsBothSlots(t *testing.T) {
+	for _, c := range []struct {
+		hand, belt string
+		want       []int
+		bang       bool
+	}{
+		{"SWORD", "AXE", []int{PutsInBeltRecord, AndRecord, WieldsRecord}, false},
+		{"SWORD", "", []int{PutsInBeltRecord}, true},
+		{"", "AXE", []int{WieldsRecord}, false},
+		{"", "", []int{WieldsRecord}, false},
+	} {
+		s := &State{Actors: []Actor{{Member: 0}}, Party: []Member{{WeaponName: c.hand, BeltName: c.belt}}}
+		s.SwitchItem(0)
+		got, bang := s.SwitchLine(0)
+		if fmt.Sprint(got) != fmt.Sprint(c.want) || bang != c.bang {
+			t.Fatalf("手上 %q 腰帶 %q：得到 %#x／%t", c.hand, c.belt, got, bang)
+		}
 	}
 }
 

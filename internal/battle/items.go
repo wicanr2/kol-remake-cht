@@ -194,6 +194,34 @@ func (s *State) SwitchItem(i int) int {
 	return PutsInBeltRecord
 }
 
+// 切換那一手的三筆訊息（`0x205B0`…`0x20610`）。
+const (
+	AndRecord    = 0x115 // ", and]"
+	WieldsRecord = 0x116 // "wields|B|E."
+)
+
+// SwitchLine 是切換之後要印的那一句（`0x20597`…`0x20610`，RE-163）：
+//
+//   - 腰帶那一格有東西（原本手上有）→ 印 0x114；接著手上空了就只補一個 `!`
+//     （`sub_1C2DA(0x21)`），否則接 0x115 再接 0x116。
+//   - 腰帶那一格是空的（原本手上沒東西）→ 只印 0x116。
+//
+// 回傳要串接的記錄與要不要在句尾補 `!`。原版比的是兩格記錄的第 0 個 byte，
+// remake 看名字是否為空。
+func (s *State) SwitchLine(i int) ([]int, bool) {
+	m := s.member(i)
+	if m == nil {
+		return nil, false
+	}
+	if m.BeltName == "" {
+		return []int{WieldsRecord}, false
+	}
+	if m.WeaponName == "" {
+		return []int{PutsInBeltRecord}, true
+	}
+	return []int{PutsInBeltRecord, AndRecord, WieldsRecord}, false
+}
+
 // askPickUp 把執行段停在「要不要撿」那一問上（`0x20354`，RE-113）。
 // 訊息是記錄 0x111 —— 它自己就帶著「You have found a|H.」與問句兩半，
 // 所以名字要跟著出去，`|H` 展開的時候東西還在地上。

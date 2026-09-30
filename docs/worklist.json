@@ -301,13 +301,20 @@
       "id": "a05-a06-a09-belt-ward-nutrition",
       "layer": "gap",
       "title": "A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition",
-      "body": "三個缺陷已在第一批修復處理，診斷測試尚未轉為回歸測試。",
+      "body": "三支診斷測試已是正式回歸測試；原版關鍵點接手（RE-163）修正切換訊息與倒下目標的法術判定；正常玩家路徑抽測 `gear-switch`、`gear-abbey`，A06 施法沿用 battle-spell 收據。",
       "acceptance": "對應診斷測試轉為回歸測試並通過，再補正常玩家路徑抽測。",
       "verify": {
-        "kind": "manual",
-        "note": "完成物是測試檔，而 verify 不掃測試檔（測試會提到還沒接的東西）。正常玩家路徑抽測收據落地時改綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/gear-20260930.md",
+          "docs/verification/player-path/gear-switch.json",
+          "docs/verification/player-path/gear-abbey.json"
+        ],
+        "pattern": "gear-",
+        "note": "已完成，當回歸訊號：驗證文件與兩份抽測計畫都在。"
       },
-      "issue": 15
+      "issue": 15,
+      "status": "done"
     },
     {
       "id": "a07-a08-cjk-and-inn",

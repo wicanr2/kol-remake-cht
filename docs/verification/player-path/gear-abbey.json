@@ -1,0 +1,77 @@
+{
+  "name": "gear-abbey",
+  "description": "A09 修道院治療的正常玩家抽測（#15，RE-163）：標題 → 書本選 Warder（名冊帶傷 20、Nutrition 20、金幣 467）→ 半途之家出門 → 城門出城 → 野外走到城 5 → 走到 Free Faith Fellowship（費率 11）→ 進門先開 MIRROR 看資料頁 → REST：「要花你 220 枚金幣」答應 →「Drink and be healed!」→ 再開 MIRROR：金幣 247、NUTRITION 條清空 → 出門。受控亂數：野外遭遇前 200 擲固定 100（不遭遇）。",
+  "seed": 1,
+  "scene": "flow",
+  "ambush_rolls": "100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100",
+  "script": "SPACE SPACE 6 D D D D D D D D RET SPACE RET R R U U U U U U U U U RET D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D SPACE D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D D L L L L L L L L L L L L L L L L L L L L RET L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L L U U L L L L L U U L L U U U U L U U R U R R R R U R R U R R U R R U U R R R R U R R U R R U R R U U R U U U U R U U U U U U RET SPACE > RET RET > > > > RET RET SPACE > RET RET RET SPACE",
+  "shot_dir": "docs/verification/player-path/gear-abbey",
+  "trace": "docs/verification/player-path/gear-abbey/trace.json",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/gear-abbey-receipt.json",
+  "milestones": [
+    {
+      "step": 12,
+      "town": {
+        "mode": 2,
+        "party": [
+          "Warder gold=467 wounds=20 reported=0 quests=0,0,0,0,0,0 carried=7"
+        ]
+      },
+      "note": "書本選 Warder：傷勢 20、金幣 467"
+    },
+    {
+      "step": 262,
+      "town": {
+        "mode": 2,
+        "door": {
+          "index": 12,
+          "name": "Free Faith Fellowship"
+        }
+      },
+      "note": "城 5，進 Free Faith Fellowship"
+    },
+    {
+      "step": 272,
+      "town": {
+        "mode": 2,
+        "party": [
+          "Warder gold=247 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=7"
+        ]
+      },
+      "note": "REST 答應 220 枚：傷勢 0、金幣 247"
+    },
+    {
+      "step": 278,
+      "town": {
+        "mode": 0
+      },
+      "note": "出門"
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": 265,
+      "file": "step-265.png",
+      "shows": "治療前資料頁：金幣 467、NUTRITION 有一段"
+    },
+    {
+      "step": 271,
+      "file": "step-271.png",
+      "shows": "要花你 220 枚金幣"
+    },
+    {
+      "step": 272,
+      "file": "step-272.png",
+      "shows": "Drink and be healed!"
+    },
+    {
+      "step": 275,
+      "file": "step-275.png",
+      "shows": "治療後資料頁：金幣 247、NUTRITION 清空"
+    }
+  ]
+}

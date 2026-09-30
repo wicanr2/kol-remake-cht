@@ -6886,3 +6886,13 @@ frame-270 推翻了 remake 的版面：
   比對到自己的 shell，中斷了當時的命令，驅動器程序已確認停止、無其他影響。第一次重播
   `quest-chain` 沒有設檢查點而逐步截了 7000 張圖，已刪到只剩五張檢查點。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #15 結案（2026-09-30，RE-163）：A05／A06／A09 的三支診斷測試早已是正式回歸測試。原版關鍵點接手
+  新探針 `internal/oracle/belt_ward_abbey_test.go`（`KOL_CHECK=gear`）：切換 4 組、法術 Ward
+  14336 組、修道院治療 144 組一致。對拍修正兩處：切換後原本一律只印 0x114，改照原版依兩格有無
+  組 0x114／0x115／0x116 或補 `!`（`State.SwitchLine`、`ActResult.Bang`）；倒下的目標原本讓法術
+  生效，原版是一律沒有效果（`SpellBlocked`），SPEC-012 §4 那句方向寫反已更正。修道院抽出
+  `HealPrice`、`Member.ApplyHeal`。正常路徑抽測 `gear-switch`（讀 quest-chain 存檔，Theodoric
+  丟地圖後切換兩次再逃走）與 `gear-abbey`（標題選 Warder 走到城 5 修道院治療）。
+  過程：第一版驅動在第 3 回合切換後隨即從「Begin next round?」逃走，切換沒被執行，改成第 4 回合
+  才逃。治療前資料頁的 DAMAGE 條沒畫出傷勢，未追查，記在驗證文件的不宣稱。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

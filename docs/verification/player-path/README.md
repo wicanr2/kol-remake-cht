@@ -87,6 +87,8 @@ python3 tools/check_player_paths.py --all
 | `full-chain-ending` | 1124 | 讀檔開場 → 出城（受控骰值，路上不遇伏）→ 最終任務的地點 → 打贏 → 結局七段 |
 | `quest-chain` | 7096 | 標題起跑 → 招募 → 接 Ship Wheel 任務 → 戰場撿起、帶物逃走 → 回城交付、全隊回報 → 繞到旅店住宿存檔 |
 | `quest-chain-reload` | 11 | 讀 `quest-chain` 的存檔 → 進旅店看資料頁 → 出門；旗標、已回報數與金幣帶回 |
+| `gear-switch` | 240 | 讀 `quest-chain` 的存檔 → 出城遇 CLIFF TROLL → Theodoric 丟地圖、切換兩次 → 逃走 |
+| `gear-abbey` | 278 | 標題選 Warder → 走到城 5 修道院 → 付 220 枚治療，傷勢與 NUTRITION 歸零 |
 
 ### `full-chain`：出城打一場再回城存檔
 

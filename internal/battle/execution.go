@@ -320,6 +320,9 @@ type ActResult struct {
 	// Records 是這一手要印的幾筆記錄，給一句話要接兩筆的情形用（射擊撞在樹上
 	// 或牆上，RE-102）。有 Records 就不看 Message。
 	Records []int
+	// Bang 為真表示 Records 印完之後原版直接補一個 `!`（`sub_1C2DA(0x21)`），
+	// 不是另一筆記錄：切換之後手上空著就是這樣收尾（RE-163）。
+	Bang bool
 	// Plain 為真表示這一句**前面不加動作者的名字**。撿那三句是這樣：問句
 	// （0x111）自己就是一句完整的話，而 0x112／0x113 開頭就是 `|G`，加了會變成
 	// 兩次名字。原版對它們另外起一段訊息（`sub_1C1A4`，`0x20354`／`0x20417`／
@@ -520,7 +523,9 @@ func (s *State) act(i int, rng Rand) ActResult {
 		}
 		return s.EnemyPickUp(i, slot)
 	case CmdSwitch, CmdSwitchAlt1, CmdSwitchAlt2:
-		out.Message = s.SwitchItem(i)
+		if s.SwitchItem(i) != 0 {
+			out.Records, out.Bang = s.SwitchLine(i)
+		}
 		return out
 	case CmdCast:
 		return s.cast(i, rng)

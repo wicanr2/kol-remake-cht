@@ -2247,7 +2247,14 @@ func (g *game) battleStep() {
 	}
 	if len(r.Records) > 0 {
 		// 一句要接兩筆記錄的（射擊撞在樹上或牆上，RE-102）。
-		s.Exec.Text = battle.WrapMessage(ctx.Line(g.battleRecords(r.Records)))
+		line := ctx.Line(g.battleRecords(r.Records))
+		if r.Bang {
+			line = strings.TrimRight(line, " ") + "!"
+			if g.strings != nil {
+				line = strings.TrimSuffix(line, "!") + "！"
+			}
+		}
+		s.Exec.Text = battle.WrapMessage(line)
 		return
 	}
 	// 撿那三句前面不加名字：問句自己就是一句完整的話，0x112／0x113 開頭就是

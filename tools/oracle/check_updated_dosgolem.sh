@@ -14,7 +14,7 @@ cp /repo/go.mod /tmp/dosgolem/
 cp -r /repo/internal /repo/oracle /tmp/dosgolem/
 cp -r /go/pkg/mod /tmp/mod
 export GOMODCACHE=/tmp/mod GOCACHE=/tmp/gocache GOPATH=/tmp/gopath GOPROXY=off GOSUMDB=off GOWORK=off
-case "${KOL_CHECK:-all}" in all|normal|book|editor|durability|panels|gaps|exit|terrain|quest) ;; *) echo 'KOL_CHECK 只接受 all、normal、book、editor、durability、panels、gaps、exit、terrain 或 quest' >&2; exit 2 ;; esac
+case "${KOL_CHECK:-all}" in all|normal|book|editor|durability|panels|gaps|exit|terrain|quest|gear) ;; *) echo 'KOL_CHECK 只接受 all、normal、book、editor、durability、panels、gaps、exit、terrain、quest 或 gear' >&2; exit 2 ;; esac
 cd /tmp/dosgolem
 if [ "${KOL_CHECK:-all}" = all ]; then
 go test ./internal/cpu/... ./internal/dos/... ./internal/dosfile/... ./internal/machine/... ./oracle/... -count=1 -timeout 180s > /out/dosgolem.log 2>&1
@@ -33,6 +33,10 @@ fi
 if [ "${KOL_CHECK:-all}" = quest ] || [ "${KOL_CHECK:-all}" = all ]; then
 go test -tags oracle ./internal/oracle -run '^TestQuest(DoneMark|PickUp|Delivery|FleeEdge)Original$' -count=1 -v -timeout 600s > /out/quest-chain.log 2>&1
 if [ "${KOL_CHECK:-all}" = quest ]; then exit 0; fi
+fi
+if [ "${KOL_CHECK:-all}" = gear ] || [ "${KOL_CHECK:-all}" = all ]; then
+go test -tags oracle ./internal/oracle -run '^Test(BeltSwitch|SpellWard|AbbeyHeal)Original$' -count=1 -v -timeout 600s > /out/gear.log 2>&1
+if [ "${KOL_CHECK:-all}" = gear ]; then exit 0; fi
 fi
 if [ "${KOL_CHECK:-all}" = gaps ]; then
 go test -tags oracle ./internal/oracle -run '^Test(ArenaMap|WeatherDispatch|WeatherComposite)Original$' -count=1 -v -timeout 120s > /out/player-gaps.log 2>&1

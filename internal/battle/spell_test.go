@@ -38,11 +38,12 @@ func TestSpellNeedsTarget(t *testing.T) {
 	}
 }
 
-// 擋招：倒下的一定擋不住；高 nibble 要相同，那一格 ≥ 0x50 時低 nibble 還要夠大。
+// 擋招：倒下的目標一律沒有效果（RE-163）；高 nibble 要相同，那一格 ≥ 0x50 時低 nibble
+// 還要夠大。
 func TestSpellBlocked(t *testing.T) {
 	sp := Spell{Guards: [4]int{0x31, 0x55, 0x00, 0x00}}
-	if SpellBlocked(sp, 0xFF, true) {
-		t.Fatal("倒下的目標一定擋不住")
+	if !SpellBlocked(sp, 0x31, true) {
+		t.Fatal("倒下的目標，護符對得上也沒有效果")
 	}
 	// 高 nibble 3 對上 0x31，低 nibble 不看（0x30 < 0x50）。
 	if SpellBlocked(sp, 0x3F, false) {

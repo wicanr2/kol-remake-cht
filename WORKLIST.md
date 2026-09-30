@@ -44,11 +44,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。
   核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接` 就是還沒完
 
-- **a05-a06-a09-belt-ward-nutrition**（#15） — A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition
-  三個缺陷已在第一批修復處理，診斷測試尚未轉為回歸測試。
-  完成條件：對應診斷測試轉為回歸測試並通過，再補正常玩家路徑抽測。
-  核實：要人判——完成物是測試檔，而 verify 不掃測試檔（測試會提到還沒接的東西）。正常玩家路徑抽測收據落地時改綁它。
-
 - **weather-animation-and-speed**（#20） — 接正式天候動畫及既定加速選項
   SPEC-026 已接六組天候、128 像素捲雲與正式節拍，dosgolem 四組完整合成與六組分派通過，正常出城 GUI 只在天空區改變；雨雪的正常 GUI 與原版正常野外同相位仍未宣稱。加速選項的部分與 g07-battle-speed-options 同源。
   完成條件：雨雪在正常 GUI 下與原版同相位；加速選項依 SPEC-028 READY 後接上。
@@ -238,6 +233,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **appimage-parity-continuation** — 旅店、戰鬥與存讀檔的 AppImage 同狀態對拍：2026-09-29：封包執行檔（雜湊與建置收據相符）跑 plan-town-inn 8／8、plan-town-recruit 9／9、plan-town-rest 11／11 對原版畫格全過；8 份戰鬥機制收據與 25 條玩家路徑（含打贏、住宿存檔、讀檔續玩）一致；完整保存 GUI 在真的 AppImage 上通過。戰鬥規則的原版同狀態由同一 commit 的原版對拍測試支撐。不宣稱：存檔格式與原版不同，重載後續玩只與 remake 收據比；戰鬥只有一場正常遭遇的原版收據。
 - **a01-a02-identity-and-save** — A01／A02：角色身分與保存規格整合、建角逐層取消、名冊保存與實際選隊：2026-09-26 v.0.2.5 AppImage 真實按鍵：建兩名、各自入隊、住宿離隊後重載各自再選進旅店、刪除不搬槽、空槽重用與滿槽拒絕皆通過；兩種預設存檔位置另通過。收據 docs/verification/identity-save-chain/receipt.json。
 - **a03-a04-writeback-and-contract** — A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約：已完成
+- **a05-a06-a09-belt-ward-nutrition** — A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition：已完成
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
 - **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE：已完成
 - **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成

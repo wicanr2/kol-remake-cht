@@ -106,8 +106,22 @@ func (s *Session) startHeal() {
 	}
 	s.rest = &restState{stage: restPrice, abbey: true,
 		target: s.Party[i].Name,
-		price:  s.Party[i].Wounds * s.door.HealRate}
+		price:  HealPrice(s.Party[i].Wounds, s.door.HealRate)}
 	s.askPrice(HealOfferRecord)
+}
+
+// HealPrice 是修道院的價錢：傷勢乘上 `payload[0x39]`（`sub_11A93:0x126A3` 的 16-bit
+// `imul`）。付不付得起是 `價錢 > 金幣` 才算不夠（`0x1272A`…`0x12745`），剛好相等可以付。
+func HealPrice(wounds, rate int) int { return wounds * rate }
+
+// ApplyHeal 是修道院成交（`0x12767`…`0x12790`）：扣錢，傷勢（`+0x1B`）與 Nutrition
+// （`+0x9F`）一起歸零。
+func (m *Member) ApplyHeal(price int) {
+	m.Gold -= price
+	m.Wounds = 0
+	if m.Sheet != nil {
+		m.Sheet.Nutrition = 0
+	}
 }
 
 // startStay 是客棧。隊伍超過一人就先問 `Whole party?`。
@@ -231,11 +245,7 @@ func (s *Session) commitHeal() {
 		s.endRest()
 		return
 	}
-	s.Party[i].Gold -= s.rest.price
-	s.Party[i].Wounds = 0
-	if s.Party[i].Sheet != nil {
-		s.Party[i].Sheet.Nutrition = 0
-	}
+	s.Party[i].ApplyHeal(s.rest.price)
 	s.syncParty()
 	s.restSay(nonEmpty(s.uiLines(HealedRecord)), s.endRest)
 }

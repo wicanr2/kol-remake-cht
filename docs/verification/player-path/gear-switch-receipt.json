@@ -1,0 +1,294 @@
+{
+ "schema": "kol-full-path-receipt-v1",
+ "name": "gear-switch",
+ "description": "A05 腰帶切換的正常玩家抽測（#15，RE-163）：讀 `quest-chain` 寫出的存檔，從半途之家門口出城，往東走遇上 CLIFF TROLL（受控骰值 `1,100,23`，同 `full-chain`）。Theodoric 手上是 Treasure Map、腰帶是 Greatsword；手上不是武器時原版不給切換（`0x22AF6`），所以第 1 回合先丟掉地圖，第 2 回合切換拿出 Greatsword（0x116），第 3 回合再切換收回腰帶（0x114 ＋ `!`），第 4 回合在「Begin next round?」選逃走格離開。其餘隊員每回合休息。",
+ "seed": 1,
+ "load": "workplace/saves/quest-chain.json",
+ "ambush_rolls": "1,100,23",
+ "token_count": 240,
+ "trace": "docs/verification/player-path/gear-switch/trace.json",
+ "trace_sha256": "7e5dd37aa7452a64ef9ecc93b37cba4fc241ae4e9a2f0f58da613124c5d35554",
+ "milestones": [
+  {
+   "step": 12,
+   "token": "RET",
+   "note": "出城，落到 3 號入城點 (40,23)",
+   "scene": "play",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 9,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 3,
+    "sub_y": 3,
+    "ticks": 4020,
+    "time_index": 0,
+    "x": 40,
+    "y": 23
+   }
+  },
+  {
+   "step": 24,
+   "token": "R",
+   "note": "往東走遇上 CLIFF TROLL（受控骰值）",
+   "scene": "play",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 9,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 7,
+    "sub_y": 3,
+    "ticks": 3300,
+    "time_index": 1,
+    "x": 41,
+    "y": 23
+   },
+   "battle": {
+    "encounter_text": [
+     "YOU HAVE BEEN AMBUSHED",
+     "BY 2, LEVEL 3 CLIFF TROLLS!"
+    ],
+    "monster": "CLIFF TROLL",
+    "prompt": 0,
+    "quest_done": 0,
+    "roster": [
+     "0 Theodoric party 33,30 head=16 chest=16",
+     "1 Poontang party 31,30 head=16 chest=16",
+     "2 Olear party 33,32 head=15 chest=15",
+     "3 Moraine party 31,32 head=15 chest=15",
+     "4 Fighting Bull party 33,34 head=14 chest=14",
+     "5 Kenneth party 31,34 head=17 chest=17",
+     "6 CLIFF TROLL foe 36,32 head=30 chest=30",
+     "7 CLIFF TROLL foe 36,30 head=30 chest=30"
+    ],
+    "round": 0,
+    "site": -1,
+    "stage": 1,
+    "turn": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 75,
+   "token": "SPACE",
+   "note": "第 1 回合：手上是 Treasure Map（不是武器，沒有切換格），先丟掉",
+   "scene": "play",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 9,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 7,
+    "sub_y": 3,
+    "ticks": 3300,
+    "time_index": 1,
+    "x": 41,
+    "y": 23
+   },
+   "battle": {
+    "exec_text": [
+     "Theodoric drops his Treasure",
+     "Map!"
+    ],
+    "monster": "CLIFF TROLL",
+    "prompt": 10,
+    "quest_done": 0,
+    "round": 1,
+    "site": -1,
+    "stage": 2,
+    "turn": 8,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 130,
+   "token": "SPACE",
+   "note": "第 2 回合切換：腰帶那一格原本空，只印 0x116",
+   "scene": "play",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 9,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 7,
+    "sub_y": 3,
+    "ticks": 3300,
+    "time_index": 1,
+    "x": 41,
+    "y": 23
+   },
+   "battle": {
+    "exec_text": [
+     "Theodoric wields his",
+     "Greatsword."
+    ],
+    "monster": "CLIFF TROLL",
+    "prompt": 10,
+    "quest_done": 0,
+    "round": 2,
+    "site": -1,
+    "stage": 2,
+    "turn": 8,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 181,
+   "token": "SPACE",
+   "note": "第 3 回合切換：手上的 Greatsword 收進腰帶，手上空了補 `!`",
+   "scene": "play",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 9,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 7,
+    "sub_y": 3,
+    "ticks": 3300,
+    "time_index": 1,
+    "x": 41,
+    "y": 23
+   },
+   "battle": {
+    "exec_text": [
+     "Theodoric puts his Greatsword",
+     "in his belt!"
+    ],
+    "monster": "CLIFF TROLL",
+    "prompt": 10,
+    "quest_done": 0,
+    "round": 3,
+    "site": -1,
+    "stage": 2,
+    "turn": 8,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 238,
+   "token": "RET",
+   "note": "第 4 回合「Begin next round?」選逃走格",
+   "scene": "play",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 9,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 7,
+    "sub_y": 3,
+    "ticks": 3300,
+    "time_index": 1,
+    "x": 41,
+    "y": 23
+   },
+   "battle": {
+    "exec_text": [
+     "Do you want to flee?"
+    ],
+    "monster": "CLIFF TROLL",
+    "prompt": 9,
+    "quest_done": 0,
+    "roster": [
+     "0 Theodoric party 33,30 head=16 chest=16",
+     "1 Poontang party 31,30 head=16 chest=16",
+     "2 Olear party 33,32 head=15 chest=15",
+     "3 Moraine party 31,32 head=15 chest=15",
+     "4 Fighting Bull party 33,34 head=14 chest=14",
+     "5 Kenneth party 31,34 head=17 chest=17",
+     "6 CLIFF TROLL foe 35,29 head=30 chest=30",
+     "7 CLIFF TROLL foe 34,30 head=30 chest=30"
+    ],
+    "round": 4,
+    "site": -1,
+    "stage": 3,
+    "turn": 8,
+    "verdict": 0
+   }
+  },
+  {
+   "step": 240,
+   "token": "SPACE",
+   "note": "答 y 逃走，回到野外",
+   "scene": "play",
+   "town": {
+    "left_town": true,
+    "mode": 0,
+    "party": [
+     "Theodoric gold=953 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=9",
+     "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=9",
+     "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
+     "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=12",
+     "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=13",
+     "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+    ],
+    "town": 7,
+    "x": 59,
+    "y": 0
+   },
+   "world": {
+    "day": 9,
+    "mode": 0,
+    "month": 4,
+    "sub_x": 7,
+    "sub_y": 3,
+    "ticks": 3300,
+    "time_index": 1,
+    "x": 41,
+    "y": 23
+   }
+  }
+ ],
+ "checkpoints": [
+  {
+   "step": 130,
+   "file": "step-130.png",
+   "sha256": "57fee9d2ac22f045d56ee78401c45b2ed447d5359f481fc91cbe921f605e13b5",
+   "shows": "Theodoric wields his Greatsword."
+  },
+  {
+   "step": 181,
+   "file": "step-181.png",
+   "sha256": "a82c33612158490e083cd767bebb1d85ae3d6780ea9bcce1d363712bbafc5a08",
+   "shows": "Theodoric puts his Greatsword in his belt!"
+  }
+ ],
+ "save": null,
+ "failures": []
+}

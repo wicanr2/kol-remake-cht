@@ -1,0 +1,93 @@
+{
+  "name": "gear-switch",
+  "description": "A05 腰帶切換的正常玩家抽測（#15，RE-163）：讀 `quest-chain` 寫出的存檔，從半途之家門口出城，往東走遇上 CLIFF TROLL（受控骰值 `1,100,23`，同 `full-chain`）。Theodoric 手上是 Treasure Map、腰帶是 Greatsword；手上不是武器時原版不給切換（`0x22AF6`），所以第 1 回合先丟掉地圖，第 2 回合切換拿出 Greatsword（0x116），第 3 回合再切換收回腰帶（0x114 ＋ `!`），第 4 回合在「Begin next round?」選逃走格離開。其餘隊員每回合休息。",
+  "seed": 1,
+  "scene": "play",
+  "load": "workplace/saves/quest-chain.json",
+  "ambush_rolls": "1,100,23",
+  "script": "R R U U U U U U U U U RET R R R R R R R R R R R R SPACE > > > > > > RET RET > > > > > > RET RET > > RET RET > > > > > > RET RET > > > > > RET RET > > > > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > > > RET RET > > > > > > RET RET > > > > > > RET RET > > > > > > RET RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > > > > RET RET > > > RET RET > > > > > RET RET > > > > > > RET RET > > > > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > > > > RET RET > > > > > RET RET > > > > > RET RET > > > > > > RET RET > > > > > > RET RET > > RET Y SPACE",
+  "shot_dir": "docs/verification/player-path/gear-switch",
+  "trace": "docs/verification/player-path/gear-switch/trace.json",
+  "size": [
+    320,
+    200
+  ],
+  "receipt": "docs/verification/player-path/gear-switch-receipt.json",
+  "milestones": [
+    {
+      "step": 12,
+      "world": {
+        "x": 40,
+        "y": 23
+      },
+      "note": "出城，落到 3 號入城點 (40,23)"
+    },
+    {
+      "step": 24,
+      "battle": {
+        "stage": 1,
+        "monster": "CLIFF TROLL"
+      },
+      "note": "往東走遇上 CLIFF TROLL（受控骰值）"
+    },
+    {
+      "step": 75,
+      "battle": {
+        "exec_text": [
+          "Theodoric drops his Treasure",
+          "Map!"
+        ]
+      },
+      "note": "第 1 回合：手上是 Treasure Map（不是武器，沒有切換格），先丟掉"
+    },
+    {
+      "step": 130,
+      "battle": {
+        "exec_text": [
+          "Theodoric wields his",
+          "Greatsword."
+        ]
+      },
+      "note": "第 2 回合切換：腰帶那一格原本空，只印 0x116"
+    },
+    {
+      "step": 181,
+      "battle": {
+        "exec_text": [
+          "Theodoric puts his Greatsword",
+          "in his belt!"
+        ]
+      },
+      "note": "第 3 回合切換：手上的 Greatsword 收進腰帶，手上空了補 `!`"
+    },
+    {
+      "step": 238,
+      "battle": {
+        "stage": 3,
+        "prompt": 9
+      },
+      "note": "第 4 回合「Begin next round?」選逃走格"
+    },
+    {
+      "step": 240,
+      "battle": null,
+      "world": {
+        "x": 41,
+        "y": 23
+      },
+      "note": "答 y 逃走，回到野外"
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": 130,
+      "file": "step-130.png",
+      "shows": "Theodoric wields his Greatsword."
+    },
+    {
+      "step": 181,
+      "file": "step-181.png",
+      "shows": "Theodoric puts his Greatsword in his belt!"
+    }
+  ]
+}

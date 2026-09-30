@@ -122,14 +122,16 @@ func AreaPrompt(negative bool) []int {
 	return []int{SelectAreaRecord, verb, AreaListRecord}
 }
 
-// SpellBlocked 是「目標擋不擋得住」（`0x28284`…`0x2835C`）。
+// SpellBlocked 是「法術有沒有效果」反過來問（`0x28284`…`0x2835C`）：回 true 就印
+// 0x16A（`casts a spell, but it has no effect!`）。
 //
-// 倒下的目標一定擋不住。否則拿法術的四格護符與目標那一格（隊員看 `+0x1D`、
-// 敵人看 `+0x28`）比高低 nibble：高 nibble 要相同；那一格 ≥ 0x50 時低 nibble
-// 還要夠大。四格裡有一格中就算穿得過去。
+// 目標倒下（`sub_22866`：頭或胸是 0xFF）直接算沒有效果，不看護符（RE-163）。
+// 否則拿法術的四格護符與目標那一格（隊員看角色記錄 `+0x28`、敵人看怪物記錄
+// `+0x1D`）比高低 nibble：高 nibble 要相同；那一格 ≥ 0x50 時低 nibble 還要夠大。
+// 四格裡有一格中就算穿得過去。
 func SpellBlocked(sp Spell, guard int, down bool) bool {
 	if down {
-		return false
+		return true
 	}
 	high, low := guard&0xF0, guard&0x0F
 	for _, g := range sp.Guards {
