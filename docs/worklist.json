@@ -710,13 +710,19 @@
       "id": "spec-ready-before-implement",
       "layer": "spec",
       "title": "每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED",
-      "body": "這是流程規則不是一次性工作。目前 docs/spec/ 底下只有 004 與 028 兩份還是 DRAFT，其餘已升 READY 或部分 READY。",
-      "acceptance": "沒有未達 READY 的規格被實作進 production path。",
+      "body": "規格狀態登記（docs/spec/README.md 索引、各檔「狀態：」行、CONFORMED 的驗證證據）由 `tools/verify_spec_states.py` 檢查，第一次執行抓到三處矛盾並修正：SPEC-029、SPEC-030 不在索引表、SPEC-036 索引仍寫 READY 而檔內是 CONFORMED。「實作之前必須先 READY」是流程規則，工具看不出實作與升級的先後，仍靠 CLAUDE.md 與審查。",
+      "acceptance": "規格狀態登記自洽，並有工具擋下矛盾（索引、狀態行、CONFORMED 缺證據）。",
       "verify": {
-        "kind": "manual",
-        "note": "流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。"
+        "kind": "required_in_all",
+        "paths": [
+          "tools/verify_spec_states.py",
+          "docs/spec/README.md"
+        ],
+        "pattern": "SPEC-03[0-9]",
+        "note": "已完成，當回歸訊號：檢查工具與索引都在。"
       },
-      "issue": 38
+      "issue": 38,
+      "status": "done"
     },
     {
       "id": "terminology-and-safe-rects",

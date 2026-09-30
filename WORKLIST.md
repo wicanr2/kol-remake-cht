@@ -143,14 +143,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：`cmd`、`internal` 找不到 `ebiten/v2/audio` 就是還沒完
 
 
-### 規格與文件
-
-- **spec-ready-before-implement**（#38） — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED
-  這是流程規則不是一次性工作。目前 docs/spec/ 底下只有 004 與 028 兩份還是 DRAFT，其餘已升 READY 或部分 READY。
-  完成條件：沒有未達 READY 的規格被實作進 production path。
-  核實：要人判——流程規則沒有終點，不該用 verify 判它「完成」。留在清單上是為了每一輪被看見；真要收掉就是把它移進 CLAUDE.md 的常駐契約。
-
-
 ### 交付與發行
 
 - **v02-appimage-platform-acceptance**（#7） — V02：主機 FUSE、其他平台與推廣交付的驗收
@@ -208,6 +200,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。
 - **building-followup-dialogue** — 建築進門後的發言者選擇、好惡與教派（訊息 14、15、16）：已完成
 - **target-mode-icon-bar-mouse** — 選目標格那一層的圖示列怎麼接滑鼠：已完成
+- **spec-ready-before-implement** — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。

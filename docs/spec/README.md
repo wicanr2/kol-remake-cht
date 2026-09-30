@@ -21,13 +21,15 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
 | SPEC-038 | [套件邊界、固定步進與注入點](038-package-boundaries.md) | READY | remake 工程契約；`internal/layers` 四項守門測試擋依賴方向、Ebitengine 越界、規則層讀時鐘與全域亂數 |
-| SPEC-037 | [建築進門後的發言者選擇與好惡](037-building-greeting.md) | READY | 多人隊伍先選發言者、被討厭與被欣賞的訊息、全隊被趕、SCROLL 教派；原版關鍵點三組共 36,176 組一致，滑鼠點肖像未含 |
-| SPEC-036 | [圖像與盾牌編輯器](036-picture-shield-editor.md) | READY | 否；原版行為已證實（兩種模式、八工具、有修改才問存檔），是否實作、自訂圖像存檔格式與介面待使用者決定 |
+| SPEC-037 | [建築進門後的發言者選擇與好惡](037-building-greeting.md) | READY | 多人隊伍先選發言者、被討厭與被欣賞的訊息、全隊被趕、SCROLL 教派；原版關鍵點三組共 36,176 組一致；滑鼠點肖像見 RE-167 |
+| SPEC-036 | [圖像與盾牌編輯器](036-picture-shield-editor.md) | CONFORMED | 點陣圖編輯器已實作；鍵盤路徑與原版同狀態逐 byte 一致，滑鼠路徑依靜態讀碼、未與原版實跑比較 |
 | SPEC-035 | [法術編輯器的繁中頁面](035-cjk-spell-editor.md) | READY | 中文模式原本看不到編輯頁，已補；四張正常按鍵畫格已驗，選值寫回與英中同狀態待驗 |
 | SPEC-034 | [法術名的中文注解](034-cjk-spell-name-gloss.md) | CONFORMED | 法術名保留原文，依說明書音節表加注解；48 筆法術記錄交叉驗證，三處正常按鍵畫格已驗 |
 | SPEC-033 | [中文畫面的資料名稱顯示](033-cjk-display-names.md) | READY | 491 個來源原名已有暫譯並接顯示端（含所在地、城鎮代碼、教派與 MAGIC.0 亞種）；待英中同狀態與正常玩家畫格驗收 |
 | SPEC-031 | [資料頁物品選中後的明細層](031-item-detail-page.md) | CONFORMED | 選中物品頁的圖層與投影已完成；frame-072 是 DOSBox-X 輔助收據，非 strict dosgolem parity |
 | SPEC-032 | [戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) | CONFORMED | 四種清單畫格與正常按鍵路徑已驗，戰利品採明示觀察用資料；不宣稱原版中文或整場戰鬥 parity |
+| SPEC-030 | [中文模式的畫布倍率與角色資料頁](030-cjk-character-sheet.md) | CONFORMED | 六人與坐騎的正常按鍵畫格、物品與隊伍換頁及英中語意狀態已驗；中文模式不對拍，英文嚴格對拍那一版不動 |
+| SPEC-029 | [怪物遠程能力初始化](029-monster-ranged-initialization.md) | READY | 遠程機率與轉換骰已接入首次規劃；正式實作 768＋2304 組通過 |
 | SPEC-028 | [三個可關閉的加速選項](028-optional-battle-speed.md) | DRAFT | 已決需求與現有接口已核對；細節／原型待確認，不授權先加空開關 |
 | SPEC-027 | [戰鬥共同出口傷勢回寫](027-battle-exit-wounds.md) | READY | 傷勢折算及敗北回寫已接；4608 組原版比較、五條結算至 v2 重載通過，正常玩家鏈與額外掉落待驗 |
 | SPEC-026 | [天候圖層與正常動畫](026-weather-animation.md) | CONFORMED | 六組資料、128 像素捲雲與雨雪輪播；原版四組合成、六組分派、節拍與相位逐次對拍通過（RE-164） |
