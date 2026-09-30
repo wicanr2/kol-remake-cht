@@ -6966,3 +6966,9 @@ frame-270 推翻了 remake 的版面：
   `docs/RELEASE-RIGHTS-REVIEW.md` 補一節說明閘門與它管不到的範圍（網頁直接改可見度、手動建立 Release）。
   過程：「沒有 gh」的測試第一版靠覆寫 `command` 函式，難以確認是因為那個原因失敗，改成 PATH 只放
   `dirname` 並檢查訊息。容器：無新增。
+- #41 結案（2026-09-30）：新增 `docs/verification/parity-registry.json`（schema `kol-parity-registry/1`）與
+  `tools/verify_parity_registry.py`。四個階段各登記宣稱、母體、gate、硬失敗、平台矩陣與證據檔；
+  玩家路徑母體 29 份，實際檔案數與登記不符會被檢查抓到。目前狀態：可啟動 linux-only、可玩 claimed-local、
+  近似完成與嚴格 parity not-claimed。使用者 2026-09-26／29 的決定（對拍看規則狀態，不看畫面逐位元）寫進
+  登記的 note 與嚴格 parity 的宣稱。gate 內容是依現有工具與收據草擬，使用者可修改；改動要走 revisions。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

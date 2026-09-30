@@ -1,0 +1,156 @@
+{
+  "schema": "kol-parity-registry/1",
+  "registered": "2026-09-30",
+  "note": "CLAUDE.md 要求先分開四個階段並預先登記每階段的 gate，不得做到一半才選容易通過的完成標準。這份是登記資料；tools/verify_parity_registry.py 檢查它的結構、引用的檔案與抽樣母體的數量。已宣稱的階段不得回頭放寬 gate：要改就在 revisions 追加一筆並寫明理由與使用者決定，舊條件留在 git 歷史。使用者 2026-09-26／29 決定：對拍以遊戲機制（狀態轉移、規則結果）一致為準，不要求畫面或整條路徑的結果逐位元相同（CONTEXT.md 已定案決策表）。",
+  "stages": [
+    {
+      "id": "launchable",
+      "name": "可啟動",
+      "claim": "封包在目標平台上啟動、讀得到素材、畫得出封面與結局頁。",
+      "population": {
+        "description": "三個平台各兩個包（full、release）共六份發行檔",
+        "items": [
+          "kol-<版本>-full-linux-x86_64.AppImage",
+          "kol-<版本>-release-linux-x86_64.AppImage",
+          "kol-<版本>-full-windows-amd64.zip",
+          "kol-<版本>-release-windows-amd64.zip",
+          "kol-<版本>-full-macos-universal.zip",
+          "kol-<版本>-release-macos-universal.zip"
+        ],
+        "count": 6
+      },
+      "gate": [
+        "manifest、LICENSE、版本與 SHA-256 與包內檔案一致",
+        "release 沒有任何原版衍生位元組（PNG、OGG、EXE、ZIP、PDF、JPG 全部找不到）",
+        "儲存庫可見度是 private",
+        "Linux：包內執行檔在 Xvfb 裡畫出封面與結局頁",
+        "Windows：kol.exe 是 PE 執行檔（靜態）",
+        "macOS：雙弧、arm64 ad-hoc 簽章、最低系統版本、動態相依只在系統目錄（靜態）"
+      ],
+      "hard_failures": [
+        "任何包缺 manifest 或 LICENSE",
+        "release 含 deny-list 內的檔案",
+        "儲存庫可見度不是 private，或查不到",
+        "Linux 包啟動後畫不出封面",
+        "包內素材與 manifest 雜湊不符"
+      ],
+      "platform_matrix": [
+        {"platform": "linux-x86_64", "coverage": "容器內啟動驗收", "real_machine": "沒做（本機 FUSE 未驗）"},
+        {"platform": "windows-amd64", "coverage": "只驗 PE 靜態", "real_machine": "沒做（#42）"},
+        {"platform": "macos-universal", "coverage": "只驗靜態四道", "real_machine": "沒做（#42）"}
+      ],
+      "evidence": [
+        "tools/verify_dist.sh",
+        "tools/verify_packages.py",
+        "tools/verify_macos.sh",
+        "tools/check_repo_visibility.sh",
+        "docs/verification/appimage-v.0.2.6-20260929.md"
+      ],
+      "status": "linux-only"
+    },
+    {
+      "id": "playable",
+      "name": "可玩",
+      "claim": "玩家能從正常入口按鍵走完列出的路徑：建隊、城鎮、野外、戰鬥、任務、存檔、重載，沒有 direct-entry、座標注入或測試旗標。",
+      "population": {
+        "description": "docs/verification/player-path/ 底下的玩家路徑計畫（不含 *-receipt.json）",
+        "glob": "docs/verification/player-path/*.json",
+        "exclude_suffix": "-receipt.json",
+        "count": 29
+      },
+      "gate": [
+        "tools/check_player_paths.py --all：每條路徑重跑後狀態軌跡與收據一致（場景、位置與模式、提示、戰鬥階段與訊息、隊伍數值、結局）",
+        "go test ./cmd/... ./internal/... 在 Xvfb 下全過",
+        "中文文字安全矩形與譯文檢查 0 失敗（verify_text_fit.py、verify_runtime_translation.py）",
+        "原版對拍測試（tools/run_original_parity_tests.sh）與關鍵點接手（tools/oracle/check_updated_dosgolem.sh）沒有新的失敗"
+      ],
+      "hard_failures": [
+        "任何一條路徑「跑不動」或狀態軌跡不同",
+        "任何 Go 測試失敗",
+        "任何文字安全矩形失敗或缺譯",
+        "執行中崩潰，或留下 root 擁有的專案檔案"
+      ],
+      "platform_matrix": [
+        {"platform": "linux-x86_64", "coverage": "容器內重跑", "real_machine": "本機 GUI 抽樣"},
+        {"platform": "windows-amd64", "coverage": "沒有", "real_machine": "沒做（#42）"},
+        {"platform": "macos-universal", "coverage": "沒有", "real_machine": "沒做（#42）"}
+      ],
+      "evidence": [
+        "docs/verification/player-path/README.md",
+        "tools/check_player_paths.py",
+        "tools/replay_player_path.py",
+        "tools/verify_text_fit.py",
+        "tools/verify_runtime_translation.py",
+        "tools/run_original_parity_tests.sh",
+        "tools/oracle/check_updated_dosgolem.sh"
+      ],
+      "status": "claimed-local"
+    },
+    {
+      "id": "approximate",
+      "name": "近似完成",
+      "claim": "說明書列出的玩家功能都有正常路徑收據或原版關鍵點接手；工作清單裡玩家會撞到的缺口與「接了但沒驗過」的項目都已完成，或由使用者明示延後。",
+      "population": {
+        "description": "docs/worklist.json 的 gap 與 verification 兩層所有項目",
+        "source": "docs/worklist.json",
+        "layers": ["gap", "verification"]
+      },
+      "gate": [
+        "上述兩層沒有未完成項，除非該項有使用者明示延後的決定紀錄",
+        "含亂數的規則用固定種子或受控亂數輸入對拍，收據記錄兩側種子、初始狀態與輸入（CLAUDE.md 的 RND() 鐵則）",
+        "規格中影響玩家體驗的行為由 READY 升到 CONFORMED，範圍只寫實際驗過的部分",
+        "戰鬥、城鎮、野外、存檔各有至少一條完整垂直鏈通過"
+      ],
+      "hard_failures": [
+        "任何已列入母體的項目沒有收據就宣稱完成",
+        "關鍵點接手或同狀態比較出現規則轉移不一致",
+        "為了通過而把母體縮小、改條件或挑種子",
+        "跨事件的保存重載出現重複結算（付款、任務、戰鬥）"
+      ],
+      "platform_matrix": [
+        {"platform": "linux-x86_64", "coverage": "容器與本機", "real_machine": "本機 GUI"},
+        {"platform": "windows-amd64", "coverage": "沒有", "real_machine": "需要"},
+        {"platform": "macos-universal", "coverage": "沒有", "real_machine": "需要"}
+      ],
+      "evidence": [
+        "docs/worklist.json",
+        "docs/spec/README.md",
+        "CONTEXT.md"
+      ],
+      "status": "not-claimed"
+    },
+    {
+      "id": "strict",
+      "name": "嚴格 parity",
+      "claim": "整場戰鬥與城鎮互動的規則狀態轉移與原版逐步一致（狀態、訊息、結算與存檔欄位），不含畫面逐位元與亂數整段序列。",
+      "population": {
+        "description": "V01 登記的垂直鏈：整場戰鬥從進場到結算與保存，涵蓋近戰、射擊、施法、撤退、撿丟、敵人 AI；以及各建築功能的完整流程",
+        "source": "docs/worklist.json",
+        "issues": [6, 11, 44]
+      },
+      "gate": [
+        "每個母體項目都有原版同狀態比較，逐回合或逐步比對規則狀態",
+        "整場對拍在受控亂數或固定種子下進行，收據標明方法",
+        "存檔往返後繼續的狀態與原版保存的欄位一致",
+        "三個平台各自真機通過同一批路徑"
+      ],
+      "hard_failures": [
+        "任何規則狀態不一致（畫面差異不算）",
+        "母體項目沒有原版證據",
+        "以固定種子當作對拍通過的證據（CLAUDE.md：固定種子本身不是證據）"
+      ],
+      "platform_matrix": [
+        {"platform": "linux-x86_64", "coverage": "容器內", "real_machine": "需要"},
+        {"platform": "windows-amd64", "coverage": "沒有", "real_machine": "需要"},
+        {"platform": "macos-universal", "coverage": "沒有", "real_machine": "需要"}
+      ],
+      "evidence": [
+        "docs/verification/battle-rounds-parity-20260928.md",
+        "docs/verification/planning-parity-20260911.md",
+        "docs/verification/quest-chain-20260930.md"
+      ],
+      "status": "not-claimed"
+    }
+  ],
+  "revisions": []
+}

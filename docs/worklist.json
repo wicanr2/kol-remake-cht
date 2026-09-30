@@ -752,13 +752,19 @@
       "id": "parity-sampling-registry",
       "layer": "verification",
       "title": "預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣",
-      "body": "CLAUDE.md 要求先分開「可啟動」「可玩」「近似完成」「嚴格 parity」並預先登記每階段 gate，不得做到一半才選容易通過的標準。目前沒有這份登記。",
+      "body": "四個階段（可啟動、可玩、近似完成、嚴格 parity）的抽樣母體、gate、硬失敗條件與平台矩陣寫成 docs/verification/parity-registry.json，`tools/verify_parity_registry.py` 檢查結構、引用檔案與母體數量（玩家路徑 29 份）。目前登記：可啟動只有 Linux、可玩只在本機、近似完成與嚴格 parity 未宣稱。已宣稱的階段不得回頭放寬，要改就在 revisions 追加。",
       "acceptance": "四個階段各自的抽樣母體、硬失敗條件與平台矩陣寫成資料。",
       "verify": {
-        "kind": "manual",
-        "note": "這一份本身就該是 JSON。寫出來之後改成 json_len 綁它的階段數。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/parity-registry.json",
+          "tools/verify_parity_registry.py"
+        ],
+        "pattern": "kol-parity-registry",
+        "note": "已完成，當回歸訊號：登記資料與檢查工具都在。"
       },
-      "issue": 41
+      "issue": 41,
+      "status": "done"
     },
     {
       "id": "windows-macos-real-machine",

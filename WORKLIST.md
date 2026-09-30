@@ -98,11 +98,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：最長字串在正常路徑上截圖比對過。
   核實：要人判——視覺回歸的產物是收據。那份收據落地時改綁它。
 
-- **parity-sampling-registry**（#41） — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣
-  CLAUDE.md 要求先分開「可啟動」「可玩」「近似完成」「嚴格 parity」並預先登記每階段 gate，不得做到一半才選容易通過的標準。目前沒有這份登記。
-  完成條件：四個階段各自的抽樣母體、硬失敗條件與平台矩陣寫成資料。
-  核實：要人判——這一份本身就該是 JSON。寫出來之後改成 json_len 綁它的階段數。
-
 - **v01-remaining-battle-chain**（#44） — V01 剩餘：完整裝備、地形、指令及攻擊結算、正常 GUI 戰後保存鏈
   與 v01-full-battle-parity 是同一件事的兩次登記（一次在現行缺口表、一次在最新驗證補充）。
   完成條件：同 v01-full-battle-parity。
@@ -214,6 +209,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **building-followup-dialogue** — 建築進門後的發言者選擇、好惡與教派（訊息 14、15、16）：已完成
 - **target-mode-icon-bar-mouse** — 選目標格那一層的圖示列怎麼接滑鼠：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
+- **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
 - **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。
