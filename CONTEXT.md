@@ -21,7 +21,7 @@ GitHub Issue 狀態與本地 Markdown；README 截圖仍留待整體驗收完成
 [手冊功能與繁中收尾稽核](docs/verification/manual-fidelity-audit-20260923.md)。
 遠端 Issue #86、#90 已依局部版面收據關閉；#92 的 45 個來源槽位已由 RE-140 結案並關閉，
 #14 與 #93（任務鏈與交付的原版關鍵點、自然玩家鏈）於 2026-09-30 完成。#33、#34、#35 仍開放；
-`docs/worklist.json` 目前為 30 項未完成、73 項已完成（#103 TOWN7 門 21 在續卷 TOWN7.1，2026-09-30 補齊資料與繁中，見 [門 21 驗證](docs/verification/town7-door21-20260930.md)；#20 天候節拍與相位於 2026-09-30 對拍一致，SPEC-026 升 CONFORMED，加速選項併入 #5 追蹤，見 [天候相位驗證](docs/verification/weather-phase-20260930.md)；#17 戰鬥左側兩框於 2026-09-30 與原版同狀態一致，SPEC-018／019 升 CONFORMED，見 [戰鬥面板驗證](docs/verification/battle-panels-20260930.md)；#15 腰帶切換／Ward／修道院於 2026-09-30 完成，見 [A05／A06／A09 驗證](docs/verification/gear-20260930.md)；#14、#93 任務鏈於 2026-09-30 完成，SPEC-014 相關各節升 CONFORMED，見 [任務鏈驗證](docs/verification/quest-chain-20260930.md)；#12 AppImage 同狀態對拍於 2026-09-29 以 v.0.2.6-20260929 完成；#18、#101、#3、#9、#10 已於 2026-09-28 完成，#104 ai-style-mask-tail、#102 planning-yes-confirm 與 #31 點陣圖編輯器（SPEC-036）於 2026-09-29 依使用者決定完成；存檔升為 kol-save-v3；#11 敵人規劃靠近與貼身攻擊已對拍，其餘行為仍開放）。
+`docs/worklist.json` 目前為 30 項未完成、74 項已完成（#32 進門後的發言者選擇、建築好惡與教派於 2026-09-30 與原版關鍵點一致，SPEC-037 READY，見 [進門招呼驗證](docs/verification/building-greeting-20260930.md)，另開「點肖像換發言者」追蹤滑鼠；#103 TOWN7 門 21 在續卷 TOWN7.1，2026-09-30 補齊資料與繁中，見 [門 21 驗證](docs/verification/town7-door21-20260930.md)；#20 天候節拍與相位於 2026-09-30 對拍一致，SPEC-026 升 CONFORMED，加速選項併入 #5 追蹤，見 [天候相位驗證](docs/verification/weather-phase-20260930.md)；#17 戰鬥左側兩框於 2026-09-30 與原版同狀態一致，SPEC-018／019 升 CONFORMED，見 [戰鬥面板驗證](docs/verification/battle-panels-20260930.md)；#15 腰帶切換／Ward／修道院於 2026-09-30 完成，見 [A05／A06／A09 驗證](docs/verification/gear-20260930.md)；#14、#93 任務鏈於 2026-09-30 完成，SPEC-014 相關各節升 CONFORMED，見 [任務鏈驗證](docs/verification/quest-chain-20260930.md)；#12 AppImage 同狀態對拍於 2026-09-29 以 v.0.2.6-20260929 完成；#18、#101、#3、#9、#10 已於 2026-09-28 完成，#104 ai-style-mask-tail、#102 planning-yes-confirm 與 #31 點陣圖編輯器（SPEC-036）於 2026-09-29 依使用者決定完成；存檔升為 kol-save-v3；#11 敵人規劃靠近與貼身攻擊已對拍，其餘行為仍開放）。
 
 - 本輪以原始城鎮資料為母體，新增 `tools/verify_runtime_translation.py`；建角表
   99 筆建角／共用 UI 字串均有中文，六個精靈部族名改用術語表暫譯。城鎮 2,146 則非空後續訊息
@@ -132,7 +132,7 @@ Issue #91「物品頁選中之後的明細畫面與原版不同」已完成。SP
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
 - 目前 **30 條未完成**（19 條沒有機器訊號、標 `manual`），
-  另有 73 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  另有 74 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
   未完成項的 verify 種類：`manual` 19、`present` 10、`absent` 1。
 <!-- worklist:stats:end -->
 - **dosgolem 對拍工作區是 `~/cht/dosgolem-kolrand` 的 `kol-oracle` 分支**

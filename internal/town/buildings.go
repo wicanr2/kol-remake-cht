@@ -57,6 +57,10 @@ type Door struct {
 	QuestGives      string `json:"quest_gives"`
 	QuestGivesBytes string `json:"quest_gives_bytes"`
 	QuestGivesItem  *Good  `json:"quest_gives_item,omitempty"`
+	// Dislikes 與 Likes 是建築 payload 位移 0x40／0x48 的兩個名稱（RE-166）：討厭與
+	// 欣賞的種族或職業，內容是 KOLDATA 記錄 0…38 的其中一筆名字，找不到就是 `None`。
+	Dislikes string `json:"dislikes,omitempty"`
+	Likes    string `json:"likes,omitempty"`
 }
 
 // QuestFlagBit 是 `icon_flags[1]` 裡「收任務物品」那一位（`sub_11A93:0x11B5A`）。
@@ -150,6 +154,8 @@ type rawDoor struct {
 	QuestGives      string `json:"quest_gives"`
 	QuestGivesBytes string `json:"quest_gives_bytes"`
 	QuestGivesItem  *Good  `json:"quest_gives_item,omitempty"`
+	Dislikes        string `json:"dislikes"`
+	Likes           string `json:"likes"`
 }
 
 type rawTown struct {
@@ -202,6 +208,7 @@ func LoadBuildings(path string) (*Buildings, error) {
 				QuestWants: d.QuestWants, QuestWantsBytes: d.QuestWantsBytes,
 				QuestGives: d.QuestGives, QuestGivesBytes: d.QuestGivesBytes,
 				QuestGivesItem: d.QuestGivesItem,
+				Dislikes:       d.Dislikes, Likes: d.Likes,
 			}
 			if len(d.IconFlags) == 2 {
 				door.IconFlags = [2]int{d.IconFlags[0], d.IconFlags[1]}

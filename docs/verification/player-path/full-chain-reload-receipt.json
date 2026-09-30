@@ -4,9 +4,9 @@
  "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在入夜換日、CAMPING! 收掉之後擲到治療僧侶，照實答應；下一次時段變換自然遇到 GOBLIN 伏擊，第二十一回合打贏後繼續走（路上的自然事件，不是這條要驗的內容）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
  "seed": 3,
  "load": "workplace/saves/full-chain.json",
- "token_count": 1450,
+ "token_count": 1451,
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
- "trace_sha256": "11ec197d6725ef271825c66221e936bf54aaa118efb45c9650e74d36940efb57",
+ "trace_sha256": "59546484a3d04e469d2fcafa9c8685bb5f185a3cfa04d5f0d799b17f236fd64c",
  "milestones": [
   {
    "step": 0,
@@ -62,7 +62,25 @@
    }
   },
   {
-   "step": 6,
+   "step": 5,
+   "token": "1",
+   "note": "多人隊伍：按 1 選第一位開口（RE-166）",
+   "scene": "play",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 7,
    "token": "RET",
    "note": "MIRROR：角色資料頁，金幣是住宿後的 158",
    "scene": "play",
@@ -80,7 +98,7 @@
    }
   },
   {
-   "step": 10,
+   "step": 11,
    "token": "RET",
    "note": "DOOR：多人隊伍的告別語",
    "scene": "play",
@@ -98,7 +116,7 @@
    }
   },
   {
-   "step": 11,
+   "step": 12,
    "token": "SPACE",
    "note": "回到戶外地圖",
    "scene": "play",
@@ -115,7 +133,7 @@
    }
   },
   {
-   "step": 22,
+   "step": 23,
    "token": "U",
    "note": "城門提示",
    "scene": "play",
@@ -133,7 +151,7 @@
    }
   },
   {
-   "step": 23,
+   "step": 24,
    "token": "RET",
    "note": "出城，落到霍布入城點 3",
    "scene": "play",
@@ -161,7 +179,7 @@
    }
   },
   {
-   "step": 70,
+   "step": 71,
    "token": "R",
    "note": "入夜換日：CAMPING!",
    "scene": "play",
@@ -190,7 +208,7 @@
    }
   },
   {
-   "step": 71,
+   "step": 72,
    "token": "L",
    "note": "按鍵收掉之後才判時段（換成 DAWN），這一次擲到治療僧侶（RE-151）",
    "scene": "play",
@@ -225,7 +243,7 @@
    }
   },
   {
-   "step": 87,
+   "step": 88,
    "token": "U",
    "note": "下一次時段變換自然遇到 GOBLIN 伏擊",
    "scene": "play",
@@ -278,7 +296,7 @@
    }
   },
   {
-   "step": 1441,
+   "step": 1442,
    "token": "SPACE",
    "note": "第十三回合打贏（戰利品清單選 U-TURN 不領），回到野外",
    "scene": "play",
@@ -322,7 +340,7 @@
    }
   },
   {
-   "step": 1449,
+   "step": 1450,
    "token": "U",
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）",
    "scene": "play",
@@ -361,7 +379,7 @@
    }
   },
   {
-   "step": 1450,
+   "step": 1451,
    "token": "RET",
    "note": "答應參戰：滿版的怪物圖",
    "scene": "play",
@@ -426,44 +444,44 @@
  ],
  "checkpoints": [
   {
-   "step": 6,
-   "file": "step-006.png",
+   "step": 7,
+   "file": "step-007.png",
    "sha256": "4e7fc42d36c6ef770d4a0970c19e6ddba2f03dc71579c05faeb703ca929a3452",
    "shows": "角色資料頁：GOLD CROWNS 158——`full-chain` 住宿扣掉 56 之後的數字"
   },
   {
-   "step": 23,
-   "file": "step-023.png",
-   "sha256": "1ca40809441cededd0618bf2eaa57affb18f6d21c408730ab39f7ccb94dc6dc2",
+   "step": 24,
+   "file": "step-024.png",
+   "sha256": "c62d98f534458d3853344f5b84d98e7e4bf5d7dd7721d6724b975c1ca4e29c98",
    "shows": "出城的落點 (40,23)"
-  },
-  {
-   "step": 70,
-   "file": "step-070.png",
-   "sha256": "97c6f50c5eeb6d57d2e374940517dcdca9bd4672b16aba02be0fbce18dbd743c",
-   "shows": "CAMPING!"
   },
   {
    "step": 71,
    "file": "step-071.png",
-   "sha256": "6b1080ca85539db87ebeef730306b6e60d5580ab388ac338b3cb7e9c6a01eaca",
+   "sha256": "6e9646a7c0a86a9f2071a0a51b40a5d4a15a4578fd9ad04d70508ad41e4d9fac",
+   "shows": "CAMPING!"
+  },
+  {
+   "step": 72,
+   "file": "step-072.png",
+   "sha256": "0024c2b2d66ddb0803396f635cd033ff37a75eab158cebfb19820f2b5226a027",
    "shows": "治療僧侶的提示"
   },
   {
-   "step": 87,
-   "file": "step-087.png",
+   "step": 88,
+   "file": "step-088.png",
    "sha256": "1bb51bfb7c1346ca8d8f972faf2954feda6d5c323e700357faa8b3f548895018",
    "shows": "GOBLIN 伏擊"
   },
   {
-   "step": 1449,
-   "file": "step-1449.png",
-   "sha256": "59635ac1d886c353e999ce9b2cbe3ec7d0953d8929a256da2a90a799644d6a30",
+   "step": 1450,
+   "file": "step-1450.png",
+   "sha256": "f5817fc539f934bc3e01045c52976254d41084edbe0760672882288900a98d2d",
    "shows": "任務敘述與 Will you partake?"
   },
   {
-   "step": 1450,
-   "file": "step-1450.png",
+   "step": 1451,
+   "file": "step-1451.png",
    "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
    "shows": "滿版的 BINDERAK 圖"
   }

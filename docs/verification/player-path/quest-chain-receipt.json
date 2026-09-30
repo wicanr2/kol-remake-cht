@@ -5,9 +5,9 @@
  "seed": 1,
  "load": null,
  "ambush_rolls": "100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100",
- "token_count": 7096,
+ "token_count": 7099,
  "trace": "docs/verification/player-path/quest-chain/trace.json",
- "trace_sha256": "c004cf603595a080d4f1086bd24f6e3c0218c2f8ef22de725474d9656149fb25",
+ "trace_sha256": "a920f6f0bc54d18c474f61f0e774124ef5f8325941396e396b71de023c0edb39",
  "milestones": [
   {
    "step": 4,
@@ -52,7 +52,28 @@
    }
   },
   {
-   "step": 259,
+   "step": 248,
+   "token": "6",
+   "note": "多人隊伍：按 6 選 Kenneth 開口（RE-166）。最後招募的人是發言者，這一步保持與舊路徑相同的人接任務",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 260,
    "token": "RET",
    "note": "MOUTH 問 nobj 接下 Ship Wheel 任務：Kenneth 的地點 6 欄位成為 1（接了）",
    "scene": "flow:town",
@@ -86,7 +107,7 @@
    }
   },
   {
-   "step": 414,
+   "step": 415,
    "token": "L",
    "note": "出城走到地點 6，Will you partake?",
    "scene": "flow:town",
@@ -133,7 +154,7 @@
    }
   },
   {
-   "step": 416,
+   "step": 417,
    "token": "SPACE",
    "note": "答應參戰，進戰場",
    "scene": "flow:town",
@@ -197,7 +218,7 @@
    }
   },
   {
-   "step": 4990,
+   "step": 4991,
    "token": "SPACE",
    "note": "Theodoric 走到 Ship Wheel 那一格選撿：0x111 問句",
    "scene": "flow:town",
@@ -247,7 +268,7 @@
    }
   },
   {
-   "step": 4995,
+   "step": 4996,
    "token": "Y",
    "note": "答 y 撿起，接 0x113",
    "scene": "flow:town",
@@ -297,7 +318,7 @@
    }
   },
   {
-   "step": 6721,
+   "step": 6722,
    "token": "SPACE",
    "note": "帶著 Ship Wheel 走到戰場上緣（Y=4），回合末問逃走",
    "scene": "flow:town",
@@ -364,7 +385,7 @@
    }
   },
   {
-   "step": 6728,
+   "step": 6729,
    "token": "Y",
    "note": "答 y 逃走：六人地點 6 欄位全部成為 2（完成），沒有接任務的人也一樣",
    "scene": "flow:town",
@@ -408,7 +429,7 @@
    }
   },
   {
-   "step": 6879,
+   "step": 6880,
    "token": "RET",
    "note": "走回 4 號入城點，再進 7 號門",
    "scene": "flow:town",
@@ -429,7 +450,7 @@
    }
   },
   {
-   "step": 6880,
+   "step": 6881,
    "token": "SPACE",
    "note": "讀完進門敘述才交付：Ship Wheel 換成 Treasure Map，訊息 6／7",
    "scene": "flow:town",
@@ -451,7 +472,7 @@
    }
   },
   {
-   "step": 6881,
+   "step": 6882,
    "token": "SPACE",
    "note": "再按一鍵：全隊回報，欄位成為 3、已回報數各加一",
    "scene": "flow:town",
@@ -481,7 +502,29 @@
    }
   },
   {
-   "step": 6894,
+   "step": 6883,
+   "token": "1",
+   "note": "多人隊伍：按 1 選第一位開口（RE-166）",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "turned_in": 1,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 6896,
    "token": "RET",
    "note": "出城",
    "scene": "flow:town",
@@ -513,7 +556,7 @@
    }
   },
   {
-   "step": 7087,
+   "step": 7089,
    "token": "L",
    "note": "繞到 3 號入城點進城，走到半途之家門口",
    "scene": "flow:town",
@@ -535,7 +578,25 @@
    }
   },
   {
-   "step": 7096,
+   "step": 7092,
+   "token": "1",
+   "note": "多人隊伍：按 1 選第一位開口（RE-166）",
+   "scene": "flow:town",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 7099,
    "token": "RET",
    "note": "REST 住一晚（扣 56 枚金幣），存檔寫出",
    "scene": "flow:town",
@@ -563,32 +624,32 @@
  ],
  "checkpoints": [
   {
-   "step": 259,
-   "file": "step-259.png",
+   "step": 260,
+   "file": "step-260.png",
    "sha256": "60c3b4c782a9e94bc8c98e5ca71fcd6aeaa0984de18b1d38ceeaf47d2626f626",
    "shows": "Residence 裡接下任務"
   },
   {
-   "step": 4995,
-   "file": "step-4995.png",
+   "step": 4996,
+   "file": "step-4996.png",
    "sha256": "34d2ff6671d357ab94fb0380f46eff9f6f62524547d34cb05b3d7597c6f9b9c9",
    "shows": "撿起之後 0x113：Theodoric, this is the quest item!"
   },
   {
-   "step": 6721,
-   "file": "step-6721.png",
+   "step": 6722,
+   "file": "step-6722.png",
    "sha256": "dc722aac4ea72c2eae8ae5fb1967fbfc5ef0bdca761f1f9966b8805ef5a7e7ad",
    "shows": "持物者站在戰場上緣，Do you want to flee?"
   },
   {
-   "step": 6880,
-   "file": "step-6880.png",
+   "step": 6881,
+   "file": "step-6881.png",
    "sha256": "edba0ac4fb0d2bdaf1fd95799a9dec91acf01291ee651b812d6458850e25f6e1",
    "shows": "交付台詞（訊息 6／7），圖示列只剩 SPACEBAR"
   },
   {
-   "step": 7096,
-   "file": "step-7096.png",
+   "step": 7099,
+   "file": "step-7099.png",
    "sha256": "a5c37f85cda035535e74217dc671f6630d9db79489f47333cd10d503a13d15b2",
    "shows": "住宿之後"
   }

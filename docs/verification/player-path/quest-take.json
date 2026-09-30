@@ -3,7 +3,7 @@
  "description": "讀存檔開場在第 7 城入城點 4 那一區，走進西邊的一戶人家，按 MOUTH 打字問話，接下一個任務（RE-067／RE-110）。原版按下 MOUTH 之後放訊息 18 的敘述再讀入最多 23 個字元，整串轉小寫走關鍵字的字首比對；命中第 5 槽而且這一棟的 `icon_flags[1] & 4` 開著，就把任務講出來——敘述分兩頁各八行（建築 payload 的 0x100…0x1FF），讀完問「Will you do this?」，答應之後任務旗標從「沒接」變成「接了」。打字那一格的版面另有對拍（`docs/verification/remake-parity/plan-town-mouth.json`）：文字欄從第 13 欄起、一格 8 px，筆尖底下那條 8×1 的橫槓與原版逐像素相同。**沒有換過任何輸入**：隊伍是原版名冊裡的六名角色，存檔只指定開場站在哪一格。讀存檔開場、不經過標題：標題選角會以名冊角色回到旅店，存檔指定的開場位置不會生效；標題到旅店那一段由 `full` 驗。",
  "seed": 1,
  "load": "workplace/saves/quest-take.json",
- "script": "U RET SPACE > > > RET n o b j RET SPACE SPACE RET",
+ "script": "U RET SPACE 1 > > > RET n o b j RET SPACE SPACE RET",
  "shot_dir": "docs/verification/player-path/quest-take",
  "trace": "docs/verification/player-path/quest-take/trace.json",
  "size": [
@@ -45,42 +45,49 @@
    "note": "讀完敘述，圖示列出來"
   },
   {
-   "step": 7,
+   "step": 4,
+   "town": {
+    "mode": 2
+   },
+   "note": "多人隊伍：按 1 選第一位開口（RE-166）"
+  },
+  {
+   "step": 8,
    "town": {
     "mode": 2
    },
    "note": "白框走到 MOUTH 按下去：問話的敘述與輸入框"
   },
   {
-   "step": 11,
+   "step": 12,
    "town": {
     "mode": 2
    },
    "note": "打完 `nobj` 四個字元"
   },
   {
-   "step": 12,
+   "step": 13,
    "town": {
     "mode": 2
    },
    "note": "Return 送出：任務敘述第一頁"
   },
   {
-   "step": 13,
+   "step": 14,
    "town": {
     "mode": 2
    },
    "note": "第二頁"
   },
   {
-   "step": 14,
+   "step": 15,
    "town": {
     "mode": 2
    },
    "note": "「Will you do this?」，圖示列是 YES／NO"
   },
   {
-   "step": 15,
+   "step": 16,
    "town": {
     "mode": 2,
     "took_quest": {
@@ -99,33 +106,33 @@
    "shows": "進門的敘述"
   },
   {
-   "step": 7,
-   "file": "step-007.png",
+   "step": 8,
+   "file": "step-008.png",
    "shows": "MOUTH：問話的敘述與空的輸入框"
-  },
-  {
-   "step": 11,
-   "file": "step-011.png",
-   "shows": "打完 `nobj`，游標在字尾"
   },
   {
    "step": 12,
    "file": "step-012.png",
-   "shows": "任務敘述第一頁（八行）"
+   "shows": "打完 `nobj`，游標在字尾"
   },
   {
    "step": 13,
    "file": "step-013.png",
-   "shows": "第二頁"
+   "shows": "任務敘述第一頁（八行）"
   },
   {
    "step": 14,
    "file": "step-014.png",
-   "shows": "\"Will you do this?\"（記錄 0x42）"
+   "shows": "第二頁"
   },
   {
    "step": 15,
    "file": "step-015.png",
+   "shows": "\"Will you do this?\"（記錄 0x42）"
+  },
+  {
+   "step": 16,
+   "file": "step-016.png",
    "shows": "\"Very well. Be off!\"（記錄 0x43）"
   }
  ],

@@ -333,9 +333,8 @@ func (s *Session) endRest() {
 	if s.Inside == nil || s.door == nil {
 		return
 	}
-	s.Inside.Dialog = s.greeting()
-	s.Inside.DialogZh = nil
-	s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))
+	// 發言者可能換了人（住宿之後指回第一位），先看建築喜不喜歡他（RE-166）。
+	s.speakerGreeting()
 }
 
 // restSay 顯示一段話，圖示列縮成一格 SPACEBAR；讀完之後接著做 next。

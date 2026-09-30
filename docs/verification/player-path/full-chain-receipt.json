@@ -5,9 +5,9 @@
  "seed": 1,
  "load": "workplace/saves/party6.json",
  "ambush_rolls": "1,100,23",
- "token_count": 2316,
+ "token_count": 2317,
  "trace": "docs/verification/player-path/full-chain/trace.json",
- "trace_sha256": "9c81d5c438d16cfe4e00517fd2429330ede4b82b5479937f4b526859c6655d90",
+ "trace_sha256": "8e32198845c3a6b08ba78cf37bd0457b13b7e4bd9142bdc62ff2552c065d39e0",
  "milestones": [
   {
    "step": 0,
@@ -287,7 +287,25 @@
    }
   },
   {
-   "step": 2316,
+   "step": 2310,
+   "token": "1",
+   "note": "多人隊伍：按 1 選第一位開口（RE-166）",
+   "scene": "play",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 2317,
    "token": "RET",
    "note": "答應 56 枚金幣住一晚，存檔寫出",
    "scene": "play",
@@ -323,7 +341,7 @@
   {
    "step": 12,
    "file": "step-012.png",
-   "sha256": "ba4f90002dfcd7f1cd87f0e85cd5c24c9ae8368cc38ec737a7450a72c3d514af",
+   "sha256": "50e00ff57974d36facd60553ca08741d5619dbe3f2787f67a38e02daf13ff59e",
    "shows": "世界地圖 (40,23)：出城的落點"
   },
   {
@@ -357,14 +375,14 @@
    "shows": "半途之家門口，圖示列剩 DOOR／U-TURN"
   },
   {
-   "step": 2315,
-   "file": "step-2315.png",
+   "step": 2316,
+   "file": "step-2316.png",
    "sha256": "a37fef1a5c212017826674a18e396b4abf101752a97127e4d4d2b5ca77decb0b",
    "shows": "住一晚要 56 枚金幣的問句"
   },
   {
-   "step": 2316,
-   "file": "step-2316.png",
+   "step": 2317,
+   "file": "step-2317.png",
    "sha256": "27b6be126f926eb978a08ad8b6fe98b565e57e98cf883e2a8c442d33ba99e092",
    "shows": "答應之後：扣錢、記下留宿的建築、寫出存檔"
   }

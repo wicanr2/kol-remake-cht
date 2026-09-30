@@ -96,6 +96,9 @@ type Session struct {
 	// told 記的是這一次進門裡哪些話題槽已經講過。原版是進門時清零的六個旗標。
 	told    [TopicSlots]bool
 	greeted bool
+	// greetWait 是讀完被拒或被趕那一句之後要做的事；askingWho 是停在「誰要開口」（RE-166）。
+	greetWait greetWait
+	askingWho bool
 	// 任務物品先在第一個 SPACE 後交換，訊息 6／7 讀完才替全隊回報（RE-139）。
 	turnInChecked        bool
 	turnInAwaitingReport bool
@@ -497,6 +500,7 @@ func (s *Session) enter() {
 	s.door = door
 	s.told = [TopicSlots]bool{} // 原版進門時把六個「講過了」旗標清零
 	s.greeted = false
+	s.greetWait, s.askingWho = greetNone, false
 	s.pending = nil
 	s.topic = nil
 	if s.Topics != nil {
@@ -576,6 +580,9 @@ func (s *Session) Continue() {
 		s.finishLeaveDoor()
 		return
 	}
+	if s.continueGreeting() {
+		return
+	}
 	// 隊伍立繪頁等待的是任一按鍵（RE-128 的 sub_144C3），空白鍵要和
 	// Return 一樣回資料頁；只恢復圖示列會留下上一頁的立繪。
 	if s.ShowingPartyPage() {
@@ -643,12 +650,11 @@ func (s *Session) Continue() {
 		}
 	}
 	if !s.greeted {
-		s.greeted = true
-		s.Inside.Dialog = s.greeting()
-		s.Inside.DialogZh = nil
 		// 進門那一刻說話的是建築裡的人，所以隊員外框是藍的；讀完敘述換玩家開口，
 		// 發言者的白框就回到隊員身上（原版畫格 071 與 072 的差別就在這裡）。
-		s.restoreSpeaker()
+		// 多人隊伍要先選誰開口，被討厭的人與全隊被趕見 greet.go（RE-166）。
+		s.startGreeting()
+		return
 	}
 	s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))
 }
@@ -670,16 +676,13 @@ func (s *Session) restoreSpeaker() {
 	}
 }
 
-// greeting 是讀完進門敘述之後店主說的那一段：招呼語再加上
+// greeting 是選定發言者之後店主說的那一段：招呼語再加上
 // KOLDATA 記錄 45 的 `"What can I do for you?"`。
-// 隊伍不只一人時原版另外講訊息 16（`word_2DF2A != 1`）。
+// 隊伍不只一人時，訊息 16 是「誰要開口」那一問，不在這裡（greet.go，RE-166）。
 func (s *Session) greeting() []string {
 	speaker := Member{}
-	for _, m := range s.Party {
-		if m.Speaker {
-			speaker = m
-			break
-		}
+	if i := s.speakerIndex(); i >= 0 {
+		speaker = s.Party[i]
 	}
 	// 發言者身上有傷時，招呼語整段換成 KOLDATA 的兩筆記錄；能治療的建築
 	// （旗標 byte 0 的 bit6）換成另一筆（`sub_11A93:0x11F47`，RE-072）。
@@ -696,11 +699,10 @@ func (s *Session) greeting() []string {
 		}
 		return lines
 	}
+	// 沒有傷、建築欣賞他的種族或職業：訊息 15（`sub_11A93:0x11FA4`）。
 	index := GreetMessage(speaker)
-	if len(s.Party) != 1 {
-		if lines := s.message(GreetPartyMessage); lines != nil {
-			index = GreetPartyMessage
-		}
+	if s.rule().Likes(speaker) {
+		index = FavoredMessage
 	}
 	lines := s.message(index)
 	if ask := s.uiRecord(GreetingRecord); ask != "" {

@@ -55,6 +55,9 @@ QUEST_WANT_OFFSET, QUEST_GIVE_OFFSET, QUEST_ITEM_BYTES = 0x2E0, 0x2F0, 0x10
 # `icon_flags` 第二個 byte 的 bit 2（`sub_11A93:0x11B5A` 的 `byte_2FC01 & 4`）。
 QUEST_FLAG = 4
 RECORD_ID_OFFSET = 0x3A
+# 好惡兩格（RE-166）：位移 0x40 是討厭的種族／職業、0x48 是欣賞的，各八個 byte 的
+# 5-bit 名稱，`sub_14189(0x40／0x48)` 解開後在 KOLDATA 記錄 0…38 裡找同名的那一筆。
+DISLIKE_OFFSET, LIKE_OFFSET, LIKE_BYTES = 0x40, 0x48, 8
 # 商店的商品表（RE-075）：payload 位移 0x100 起，一筆 16 byte，最多 32 筆，
 # 第一個 byte 是 0 就結束。名稱是 5-bit 壓縮（高 nibble 是字數，字元從第 4 個
 # bit 起，與武器範本同一種），價錢是 `(rec[8] & 0x0F) << 8 | rec[9]`。
@@ -292,6 +295,8 @@ def main() -> int:
                     door["price"] = be16(body, PRICE_OFFSET)
                     door["heal_rate"] = body[PRICE_OFFSET + 1]
                     door["record_id"] = be16(body, RECORD_ID_OFFSET)
+                    door["dislikes"] = packed_name(bytes(body[DISLIKE_OFFSET:DISLIKE_OFFSET + LIKE_BYTES]))
+                    door["likes"] = packed_name(bytes(body[LIKE_OFFSET:LIKE_OFFSET + LIKE_BYTES]))
                     if body[ICON_FLAGS + 1] & QUEST_FLAG:
                         quest = body[QUEST_OFFSET]
                         want = bytes(body[QUEST_WANT_OFFSET:
@@ -359,6 +364,9 @@ def main() -> int:
                      "bit6 的修道院只用低位元組，當每一點傷勢的價錢。",
             "record_id": f"建築 payload[0x{RECORD_ID_OFFSET:02X}／0x{RECORD_ID_OFFSET + 1:02X}]："
                          "住宿存檔時寫進角色記錄位移 0x2E／0x2F 的建築編號。",
+            "dislikes": f"建築 payload[0x{DISLIKE_OFFSET:02X}…0x{DISLIKE_OFFSET + LIKE_BYTES - 1:02X}]："
+                        "討厭的種族或職業名稱（5-bit，八個 byte）；隊員符合就被拒於門外。"
+                        f"[0x{LIKE_OFFSET:02X}…0x{LIKE_OFFSET + LIKE_BYTES - 1:02X}] 是欣賞的（RE-166）。",
             "skills": f"訓練建築的技能表在 payload 0x{SKILL_OFFSET:02X} 起，一筆 "
                       f"0x{SKILL_STRIDE:02X} byte、四筆；+8 是武器識別，"
                       "+0x0A／+0x0B 是收得起的技能值上下限（RE-076）。",

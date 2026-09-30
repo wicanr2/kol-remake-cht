@@ -3,7 +3,7 @@
   "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在入夜換日、CAMPING! 收掉之後擲到治療僧侶，照實答應；下一次時段變換自然遇到 GOBLIN 伏擊，第二十一回合打贏後繼續走（路上的自然事件，不是這條要驗的內容）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
   "seed": 3,
   "load": "workplace/saves/full-chain.json",
-  "script": "L R RET SPACE > RET > < RET RET SPACE R R U U U U U U U U U RET S S S S R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R L RET R R R R R R R R R R R R R R U SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > RET U U L L D D R RET > > RET RET > > > > RET U U L L RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > RET U U L L RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L R RET > RET RET > RET U U L L D RET > > RET RET > RET U U L L R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L RET > RET RET > RET U U L L R RET > > RET RET > RET U U L L R R RET > > RET RET > RET U U L L D RET > > RET RET > RET U U L L RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET > RET U U L L R RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D RET > RET RET > RET U U L L D RET > > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > RET U U L L D D R RET > > RET > > > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET RET > RET U U L L RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET RET > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > RET U U L L D D R R RET > > RET > > > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE U U U U U U U RET",
+  "script": "L R RET SPACE 1 > RET > < RET RET SPACE R R U U U U U U U U U RET S S S S R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R L RET R R R R R R R R R R R R R R U SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > RET U U L L D D R RET > > RET RET > > > > RET U U L L RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L RET > RET RET > > RET U U L L RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L RET > RET RET > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L R RET > RET RET > > > > > RET U U L L R RET > RET RET > RET U U L L D RET > > RET RET > RET U U L L R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L RET > RET RET > RET U U L L R RET > > RET RET > RET U U L L R R RET > > RET RET > RET U U L L D RET > > RET RET > RET U U L L RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET > RET U U L L R RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D RET > RET RET > RET U U L L D RET > > RET RET > > > > > RET U U L L RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > RET U U L L D D R RET > > RET > > > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET RET > RET U U L L RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET RET > RET U U L L D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > RET U U L L D D R R RET > > RET > > > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE U U U U U U U RET",
   "shot_dir": "docs/verification/player-path/full-chain-reload",
   "trace": "docs/verification/player-path/full-chain-reload/trace.json",
   "size": [
@@ -36,28 +36,35 @@
       "note": "DOOR：進半途之家"
     },
     {
-      "step": 6,
+      "step": 5,
+      "town": {
+        "mode": 2
+      },
+      "note": "多人隊伍：按 1 選第一位開口（RE-166）"
+    },
+    {
+      "step": 7,
       "town": {
         "mode": 2
       },
       "note": "MIRROR：角色資料頁，金幣是住宿後的 158"
     },
     {
-      "step": 10,
+      "step": 11,
       "town": {
         "mode": 2
       },
       "note": "DOOR：多人隊伍的告別語"
     },
     {
-      "step": 11,
+      "step": 12,
       "town": {
         "mode": 0
       },
       "note": "回到戶外地圖"
     },
     {
-      "step": 22,
+      "step": 23,
       "town": {
         "x": 59,
         "y": 0,
@@ -66,7 +73,7 @@
       "note": "城門提示"
     },
     {
-      "step": 23,
+      "step": 24,
       "town": {
         "left_town": true
       },
@@ -77,7 +84,7 @@
       "note": "出城，落到霍布入城點 3"
     },
     {
-      "step": 70,
+      "step": 71,
       "world": {
         "x": 46,
         "y": 22,
@@ -86,7 +93,7 @@
       "note": "入夜換日：CAMPING!"
     },
     {
-      "step": 71,
+      "step": 72,
       "world": {
         "x": 46,
         "y": 22,
@@ -95,7 +102,7 @@
       "note": "按鍵收掉之後才判時段（換成 DAWN），這一次擲到治療僧侶（RE-151）"
     },
     {
-      "step": 87,
+      "step": 88,
       "battle": {
         "stage": 1,
         "site": -1,
@@ -104,7 +111,7 @@
       "note": "下一次時段變換自然遇到 GOBLIN 伏擊"
     },
     {
-      "step": 1441,
+      "step": 1442,
       "battle": {
         "stage": 5,
         "verdict": 2
@@ -112,7 +119,7 @@
       "note": "第十三回合打贏（戰利品清單選 U-TURN 不領），回到野外"
     },
     {
-      "step": 1449,
+      "step": 1450,
       "world": {
         "x": 48,
         "y": 21,
@@ -121,7 +128,7 @@
       "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）"
     },
     {
-      "step": 1450,
+      "step": 1451,
       "battle": {
         "stage": 1,
         "site": 5,
@@ -132,38 +139,38 @@
   ],
   "checkpoints": [
     {
-      "step": 6,
-      "file": "step-006.png",
+      "step": 7,
+      "file": "step-007.png",
       "shows": "角色資料頁：GOLD CROWNS 158——`full-chain` 住宿扣掉 56 之後的數字"
     },
     {
-      "step": 23,
-      "file": "step-023.png",
+      "step": 24,
+      "file": "step-024.png",
       "shows": "出城的落點 (40,23)"
-    },
-    {
-      "step": 70,
-      "file": "step-070.png",
-      "shows": "CAMPING!"
     },
     {
       "step": 71,
       "file": "step-071.png",
+      "shows": "CAMPING!"
+    },
+    {
+      "step": 72,
+      "file": "step-072.png",
       "shows": "治療僧侶的提示"
     },
     {
-      "step": 87,
-      "file": "step-087.png",
+      "step": 88,
+      "file": "step-088.png",
       "shows": "GOBLIN 伏擊"
-    },
-    {
-      "step": 1449,
-      "file": "step-1449.png",
-      "shows": "任務敘述與 Will you partake?"
     },
     {
       "step": 1450,
       "file": "step-1450.png",
+      "shows": "任務敘述與 Will you partake?"
+    },
+    {
+      "step": 1451,
+      "file": "step-1451.png",
       "shows": "滿版的 BINDERAK 圖"
     }
   ],

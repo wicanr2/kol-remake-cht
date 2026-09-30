@@ -4,9 +4,9 @@
  "description": "角色資料頁上按第 19 個圖示打開任務一覽（RE-111）：二十四個任務排成八欄三列，`編號 % 8` 決定欄、`編號 / 8` 決定列，**只列回報過的**，一格是 AWDnPICS 的一張 24×21 圖加一個 0x0A 的外框。一組一頁，按一個鍵翻下一組，翻完回資料頁；任務一覽和法術一覽一樣只重畫抬頭那一層（`sub_16239`，RE-137），底下是木紋底不是完整資料頁。那一格圖示本身也是條件出現的——原版看角色記錄 `0x1DD`…`0x1E1` 有沒有東西，一件都沒回報過就不會有這一格。**輸入被換過**：原版名冊裡的角色都是全新的，一件任務都沒回報過，所以用工具把存檔改成「回報過第 4 個任務、已回報數 5」。讀存檔開場在城 7 的 Residence 門口南側，不經過標題：這份存檔是舊的 `party` 格式，被改過的任務紀錄只在存檔隊伍裡，標題選角會依名冊重新組隊而用不上它；標題到旅店那一段由 `full` 驗。",
  "seed": 1,
  "load": "workplace/observe/quest-list.json",
- "token_count": 10,
+ "token_count": 11,
  "trace": "docs/verification/player-path/quest-list/trace.json",
- "trace_sha256": "690f4e9d4f8acf1bb89b6b17773102c990b210d6bbc3dfe54c6297c8c5b25cff",
+ "trace_sha256": "4b10dc31cbf6b28ee1f7443170efad1ecc3d9e23f72f6567e9d39c1f6bba6d98",
  "milestones": [
   {
    "step": 2,
@@ -30,7 +30,28 @@
    }
   },
   {
-   "step": 5,
+   "step": 4,
+   "token": "1",
+   "note": "多人隊伍：按 1 選第一位開口（RE-166）",
+   "scene": "play",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 7,
+     "name": "Residence",
+     "quest_final": false,
+     "quest_site": 6,
+     "quest_wants": "Ship Wheel"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 9,
+    "y": 23
+   }
+  },
+  {
+   "step": 6,
    "token": "RET",
    "note": "MIRROR：角色資料頁",
    "scene": "play",
@@ -51,7 +72,7 @@
    }
   },
   {
-   "step": 9,
+   "step": 10,
    "token": "RET",
    "note": "第 19 個圖示：任務一覽只重畫抬頭層",
    "scene": "play",
@@ -72,7 +93,7 @@
    }
   },
   {
-   "step": 10,
+   "step": 11,
    "token": "SPACE",
    "note": "翻完一組，回資料頁",
    "scene": "play",
@@ -95,20 +116,20 @@
  ],
  "checkpoints": [
   {
-   "step": 5,
-   "file": "step-005.png",
+   "step": 6,
+   "file": "step-006.png",
    "sha256": "331a37b4e7e7e674c55ff588afb2d8f72285a56fae39ff53c02c0ea3f3d8da18",
    "shows": "角色資料頁，圖示列多了任務一覽那一格"
   },
   {
-   "step": 9,
-   "file": "step-009.png",
+   "step": 10,
+   "file": "step-010.png",
    "sha256": "d0e0e4bed6fd93bc12a8d5e979c6eb85af0b08a55a2fd49b6d41fb105f8c5c32",
    "shows": "任務一覽：回報過的第 4 個任務畫在第 5 欄第 1 列"
   },
   {
-   "step": 10,
-   "file": "step-010.png",
+   "step": 11,
+   "file": "step-011.png",
    "sha256": "944d6c3d913bf36342039810b602d546ba3e1e95fa8e3e77697262393c66b105",
    "shows": "翻完回到資料頁"
   }

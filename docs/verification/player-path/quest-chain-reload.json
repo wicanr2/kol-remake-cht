@@ -4,7 +4,7 @@
   "seed": 1,
   "scene": "play",
   "load": "workplace/saves/quest-chain.json",
-  "script": "L R RET SPACE > RET > < RET RET SPACE",
+  "script": "L R RET SPACE 1 > RET > < RET RET SPACE",
   "shot_dir": "docs/verification/player-path/quest-chain-reload",
   "trace": "docs/verification/player-path/quest-chain-reload/trace.json",
   "size": [
@@ -49,14 +49,21 @@
       "note": "DOOR：進半途之家"
     },
     {
-      "step": 6,
+      "step": 5,
+      "town": {
+        "mode": 2
+      },
+      "note": "多人隊伍：按 1 選第一位開口（RE-166）"
+    },
+    {
+      "step": 7,
       "town": {
         "mode": 2
       },
       "note": "MIRROR：Theodoric 的資料頁"
     },
     {
-      "step": 11,
+      "step": 12,
       "town": {
         "mode": 0,
         "x": 57,
@@ -67,8 +74,8 @@
   ],
   "checkpoints": [
     {
-      "step": 6,
-      "file": "step-006.png",
+      "step": 7,
+      "file": "step-007.png",
       "shows": "MIRROR：Theodoric 的資料頁"
     }
   ]

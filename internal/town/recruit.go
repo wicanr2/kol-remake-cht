@@ -333,9 +333,8 @@ func (s *Session) joinSelected() {
 	s.recruit, s.asking = nil, false
 	s.Inside.List = nil
 	s.greeted = true
-	s.Inside.Dialog = s.greeting()
-	s.Inside.DialogZh = nil
-	s.setInsideIcons(InteriorIcons(s.door.IconFlags, len(s.Party)))
+	// 新加入的人就是發言者：原版跳回 `0x11E8E`，先看建築喜不喜歡他（RE-166）。
+	s.speakerGreeting()
 }
 
 // cancelRecruit 放棄招募，回到建築內的一般圖示列。

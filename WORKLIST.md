@@ -44,11 +44,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。
   核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接` 就是還沒完
 
-- **building-followup-dialogue**（#32） — 建築內的後續對話（訊息 10 起）
-  訊息 10…13 的選法已知（聲望等第為 0 時是「訊息 10 ＋ 性別×2 ＋ 會不會法術」，否則訊息 26 ＋ 等第），但觸發條件還沒讀出來。
-  完成條件：觸發條件解出並接上，正常路徑能看到後續對話。
-  核實：要人判——topics.go 已有訊息 10 的選法但沒有觸發條件。接上時會多一支判斷觸發的函式，到時改成 absent 綁它。
-
 - **text-layout-remaining-screens**（#34） — 量測城鎮、世界、戰鬥畫面的文字版面
   書本版面已機械量得；城鎮、世界與戰鬥已有部分中文安全矩形和畫格。資料名稱 387 筆在五種固定欄位新增 1,935 項寬度檢查，目前合計 9,301 項失敗 0；戰鬥訊息與其他分支仍未全覆蓋。最新手冊／中文稽核見 docs/verification/manual-fidelity-audit-20260923.md。
   完成條件：三種畫面的文字版面都量過，每個 CJK 欄位有安全矩形。
@@ -64,6 +59,11 @@ tools/run_python_tool.sh tools/worklist.py verify
   任務旗標、已回報數與身上帶的東西已進存檔，並由 `full-chain` ＋ `full-chain-reload` 驗過往返。戰鬥中途的狀態與世界時間還沒進存檔——存檔格式裡連日期欄位都還沒有。
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
+
+- **building-portrait-click-speaker** — 點隊伍肖像換發言者（滑鼠）
+  說明書寫「選擇另一名角色的圖像即可更換發言者」，remake 目前只有 1…6 鍵。原版 `sub_1B100` 的滑鼠座標分支沒有讀完，不知道點肖像是不是轉成鍵值 0x31…0x36，也不知道戶外、野外與建築內各層的點擊區域。
+  完成條件：讀出原版的點擊區域與回傳值，決定是否接滑鼠，並在輸入層加肖像區域。
+  核實：要人判——RE-166 標為不宣稱。讀完 sub_1B100 之後，接上時多一個輸入目標，到時改成 absent 綁它。
 
 
 ### 接了但沒驗過
@@ -228,6 +228,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
 - **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。
+- **building-followup-dialogue** — 建築進門後的發言者選擇、好惡與教派（訊息 14、15、16）：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。

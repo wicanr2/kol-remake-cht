@@ -137,6 +137,10 @@ func (s *Session) Key(token string) bool {
 			return s.OpenSheetOutside(n, false)
 		}
 	}
+	// 建築內問誰要開口，或一般圖示列停著的時候，按 1…6 換發言者（RE-166）。
+	if n, ok := sheetDigit(token); ok && s.Mode == ModeInside {
+		return s.ChooseSpeaker(n)
+	}
 	if d, ok := walkKeys[token]; ok {
 		s.Walk(d[0], d[1])
 		return true

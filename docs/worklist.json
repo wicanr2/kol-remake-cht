@@ -580,14 +580,20 @@
     {
       "id": "building-followup-dialogue",
       "layer": "gap",
-      "title": "建築內的後續對話（訊息 10 起）",
-      "body": "訊息 10…13 的選法已知（聲望等第為 0 時是「訊息 10 ＋ 性別×2 ＋ 會不會法術」，否則訊息 26 ＋ 等第），但觸發條件還沒讀出來。",
-      "acceptance": "觸發條件解出並接上，正常路徑能看到後續對話。",
+      "title": "建築進門後的發言者選擇、好惡與教派（訊息 14、15、16）",
+      "body": "原版進門後先問誰開口（訊息 16 與記錄 0x55），被討厭的人得到訊息 14、被欣賞的人訊息 15，全隊被討厭只印 Get out 並離開，SCROLL 建築拒絕別的教派。remake 依 RE-166 接上，原版關鍵點接手三組共 36,176 組一致。",
+      "acceptance": "原版流程與 remake 一致，多人隊伍進門會先選發言者。",
       "verify": {
-        "kind": "manual",
-        "note": "topics.go 已有訊息 10 的選法但沒有觸發條件。接上時會多一支判斷觸發的函式，到時改成 absent 綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/building-greeting-20260930.md",
+          "docs/spec/037-building-greeting.md"
+        ],
+        "pattern": "RE-166",
+        "note": "已完成，當回歸訊號：驗證文件與規格都引用 RE-166。"
       },
-      "issue": 32
+      "issue": 32,
+      "status": "done"
     },
     {
       "id": "attack-row-and-target-cursor",
@@ -1770,6 +1776,17 @@
       },
       "issue": 101,
       "status": "done"
+    },
+    {
+      "id": "building-portrait-click-speaker",
+      "layer": "gap",
+      "title": "點隊伍肖像換發言者（滑鼠）",
+      "body": "說明書寫「選擇另一名角色的圖像即可更換發言者」，remake 目前只有 1…6 鍵。原版 `sub_1B100` 的滑鼠座標分支沒有讀完，不知道點肖像是不是轉成鍵值 0x31…0x36，也不知道戶外、野外與建築內各層的點擊區域。",
+      "acceptance": "讀出原版的點擊區域與回傳值，決定是否接滑鼠，並在輸入層加肖像區域。",
+      "verify": {
+        "kind": "manual",
+        "note": "RE-166 標為不宣稱。讀完 sub_1B100 之後，接上時多一個輸入目標，到時改成 absent 綁它。"
+      }
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

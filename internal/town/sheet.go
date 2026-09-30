@@ -171,17 +171,10 @@ const (
 	SheetLabels = 0x73
 )
 
-// professionRecord 是職業名稱的 KOLDATA 記錄號（`sub_14307`）。
-// 矮人與凱爾登（種族 ≥ 2）以及女性精靈用低六號的那一筆。
+// professionRecord 是職業名稱的 KOLDATA 記錄號：`char[0x1C] + 6` 再過 `sub_14307`
+// 的換算（見 CanonicalRecord）。
 func professionRecord(profession, race, gender int) int {
-	record := profession + ProfessionOffset
-	if record == 0x7F || record <= 0x0B {
-		return record
-	}
-	if race >= 2 || (race == 1 && gender != 0) {
-		return record - ProfessionOffset
-	}
-	return record
+	return CanonicalRecord(profession+ProfessionOffset, race, gender)
 }
 
 // buildSheet 把一名隊員的資料頁組出來。記錄號在這裡就換成字串，

@@ -6926,3 +6926,20 @@ frame-270 推翻了 remake 的版面：
   告別對話區 0 差異像素。順帶發現原版多人隊伍進門後會印「Which one needs help?」讓玩家選發言者，remake
   沒有這一步，併入 #32。過程：`quest-reward` 鍵值第一次撞號（已有 08），改 09。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #32 結案（2026-09-30，RE-166、SPEC-037）：進門後的發言者選擇、建築好惡與教派。建築 payload
+  `+0x40`／`+0x48` 各有 8 byte 的 5-bit 名稱（討厭與欣賞），抽取器新增 `dislikes`／`likes`。原版流程：
+  全隊被討厭只印 `Get out, scum!` 並離開；多人隊伍先印訊息 16 加記錄 0x55，圖示列只剩 DOOR，按 1…6 選人；
+  被討厭或（SCROLL 建築）教派不同印訊息 14，一人離開、多人回頭問；被欣賞印訊息 15。remake 新增
+  `internal/town/greet.go`（`GreetRule`、`CanonicalRecord`、狀態機）與 `greet_test.go`；`Continue`、招募、
+  住宿、`Key` 接上；職業記錄換算改用同一份 `CanonicalRecord`。原版關鍵點接手 `internal/oracle/greet_test.go`
+  （`KOL_CHECK=greet`）：名稱換算 1,280、全隊被趕 24,000、發言者好惡 10,896，全部一致；負對照（換算門檻
+  改壞）三支測試都失敗。修正舊說法：RE-067 與 RE-165 都把訊息 16 當成招呼語，已在 RE-166 推翻並改指標。
+  多人隊伍進門多一步，六條玩家路徑補鍵：`quest-list`、`quest-take`、`quest-chain-reload`、`full-chain-reload`
+  各在進門敘述後補 `1`；`full-chain` 補 1 處；`quest-chain` 補 3 處，其中第一處要按 6（最後招募的
+  Kenneth 本來就是發言者，按 1 會換成 Theodoric 而讓接任務的人變了）。補鍵位置用暫時掛鉤（腳本跑到問誰
+  開口時自動按 1 並記步號）一次收集，掛鉤與暫時腳本已撤掉，不進版控。過程：掛鉤第一次把步號寫到 stderr，
+  被包裝腳本吞掉，改寫檔案；兩次中途停掉自己起的容器（掛載路徑確認是 `workplace/autowho/`）；
+  補鍵工具第一次沒保留 plan 的縮排與結尾換行，改為自動偵測。worklist 新增
+  `building-portrait-click-speaker`（滑鼠點肖像換發言者，不宣稱）。`go test ./cmd/... ./internal/...`
+  全過（Xvfb），原版對拍測試全過；29 條玩家路徑除六條補鍵者外狀態一致，六條重生後再驗。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

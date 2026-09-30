@@ -4,9 +4,9 @@
  "description": "接著 `quest-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場。隊伍六人的地點 6 旗標（回報過）、已回報數 1 與 Theodoric 手上的 Treasure Map 都從存檔帶回；進門開 MIRROR 看 Theodoric 的資料頁，再出門。與 `quest-chain` 合起來把「接任務 → 撿物逃走 → 交付 → 存檔 → 離開 → 重載」閉起來。",
  "seed": 1,
  "load": "workplace/saves/quest-chain.json",
- "token_count": 11,
+ "token_count": 12,
  "trace": "docs/verification/player-path/quest-chain-reload/trace.json",
- "trace_sha256": "92216654abdd4c9de3b9c7f0f16b5c0c779a5cc835757dc126a1c88551df0fde",
+ "trace_sha256": "91568b5352000993817d2bfee847d14a80e0186dcadce0b22e601f4fdc77cdf9",
  "milestones": [
   {
    "step": 0,
@@ -62,7 +62,25 @@
    }
   },
   {
-   "step": 6,
+   "step": 5,
+   "token": "1",
+   "note": "多人隊伍：按 1 選第一位開口（RE-166）",
+   "scene": "play",
+   "town": {
+    "at_door": true,
+    "door": {
+     "index": 5,
+     "name": "Halfway House"
+    },
+    "left_town": false,
+    "mode": 2,
+    "town": 7,
+    "x": 57,
+    "y": 8
+   }
+  },
+  {
+   "step": 7,
    "token": "RET",
    "note": "MIRROR：Theodoric 的資料頁",
    "scene": "play",
@@ -80,7 +98,7 @@
    }
   },
   {
-   "step": 11,
+   "step": 12,
    "token": "SPACE",
    "note": "DOOR 出門回到戶外地圖",
    "scene": "play",
@@ -99,8 +117,8 @@
  ],
  "checkpoints": [
   {
-   "step": 6,
-   "file": "step-006.png",
+   "step": 7,
+   "file": "step-007.png",
    "sha256": "3f6a78964baac3238379dd957e639400bd649624d75445e21ee51d1ac64b7230",
    "shows": "MIRROR：Theodoric 的資料頁"
   }
