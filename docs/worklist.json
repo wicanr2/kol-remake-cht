@@ -630,17 +630,18 @@
       "id": "target-mode-icon-bar-mouse",
       "layer": "verification",
       "title": "選目標格那一層的圖示列怎麼接滑鼠",
-      "body": "選目標格時滑鼠直接指格已接（SPEC-010 §3、sub_24131:0x24332，收據 docs/verification/battle-target-mouse/receipt.json）。同一層畫面下方的圖示列原版是否也收滑鼠點擊還沒證據，remake 目前只收鍵盤，點在場地外的位置不做事。",
+      "body": "選目標格那一層的圖示列（YES、U-TURN）原版收滑鼠（`sub_1B100` 順序 2 的分支，RE-167）。remake 已把這兩格加進可點區域並移除自承註解；點擊語意的差異另列 mouse-original-semantics。",
       "acceptance": "以 IDA 或 dosgolem 實驗確認原版在選目標格時圖示列的滑鼠行為，remake 照著接並附收據；若原版不收滑鼠，把結論寫進 SPEC-010 並移除 input.go 的自承註解。",
       "verify": {
-        "kind": "present",
+        "kind": "absent",
         "paths": [
           "cmd/kol/input.go"
         ],
         "pattern": "圖示列原版怎麼接滑鼠還沒證據",
-        "note": "註解消失＝已查清並處理。"
+        "note": "已完成，當回歸訊號：自承註解不再出現。"
       },
-      "issue": 94
+      "issue": 94,
+      "status": "done"
     },
     {
       "id": "text-layout-remaining-screens",
@@ -1794,13 +1795,30 @@
       "id": "building-portrait-click-speaker",
       "layer": "gap",
       "title": "點隊伍肖像換發言者（滑鼠）",
-      "body": "說明書寫「選擇另一名角色的圖像即可更換發言者」，remake 目前只有 1…6 鍵。原版 `sub_1B100` 的滑鼠座標分支沒有讀完，不知道點肖像是不是轉成鍵值 0x31…0x36，也不知道戶外、野外與建築內各層的點擊區域。",
+      "body": "說明書寫「選擇另一名角色的圖像即可更換發言者」。`sub_1B100` 把點肖像轉成鍵 1…6（RE-167），remake 依此接上戶外走路、建築內、野外三處。",
       "acceptance": "讀出原版的點擊區域與回傳值，決定是否接滑鼠，並在輸入層加肖像區域。",
       "verify": {
-        "kind": "manual",
-        "note": "RE-166 標為不宣稱。讀完 sub_1B100 之後，接上時多一個輸入目標，到時改成 absent 綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "cmd/kol/portrait_mouse_test.go",
+          "docs/verification/mouse-sub1b100-20260930.md"
+        ],
+        "pattern": "portrait|肖像",
+        "note": "已完成，當回歸訊號：測試檔與驗證文件都在。"
       },
-      "issue": 105
+      "issue": 105,
+      "status": "done"
+    },
+    {
+      "id": "mouse-original-semantics",
+      "layer": "gap",
+      "title": "滑鼠語意與原版 sub_1B100 的三處差異（待使用者決定）",
+      "body": "RE-167 讀出原版滑鼠的實際行為，與 remake 有三處不同：一，圖示列在原版是兩次點擊（第一次只搬白框，再點同一格才確認），remake 一次點擊就搬並確認；二，右鍵在原版是空白鍵，remake 送 ESC；三，地圖窗點擊在原版會往點的方位走一步，remake 沒有。前兩項會改變操作手感，第三項是新增操作；都要先決定是否採原版行為。",
+      "acceptance": "使用者對三項各選「維持現狀」或「照原版」；照原版的項目實作並附區域測試。",
+      "verify": {
+        "kind": "manual",
+        "note": "要人判：操作手感取捨。決定後照原版的項目會有對應的輸入 token 與測試，再改成 absent 或 required_in_all 綁它。"
+      }
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

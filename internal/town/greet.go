@@ -243,6 +243,19 @@ func (s *Session) ChooseSpeaker(n int) bool {
 	return true
 }
 
+// PortraitClicks 回報原版此刻是否收「點隊伍肖像＝按數字」：戶外走路、問誰開口、
+// 建築內一般圖示列這幾個輸入迴圈（`word_2DF3E == 1`，RE-167）。門口與城門的圖示列、
+// 資料頁與各功能流程都不收。
+func (s *Session) PortraitClicks() bool {
+	switch {
+	case s.Mode == ModeMap:
+		return !s.ShowingSheetOutside()
+	case s.Mode == ModeInside:
+		return s.askingWho || s.interiorIdle()
+	}
+	return false
+}
+
 // AskingWho 回報畫面是不是停在「誰要開口」。
 func (s *Session) AskingWho() bool { return s.askingWho }
 

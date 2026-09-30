@@ -60,10 +60,10 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。
   核實：`internal/save/save.go` 找得到 `世界時間還沒有規格` 就是還沒完
 
-- **building-portrait-click-speaker**（#105） — 點隊伍肖像換發言者（滑鼠）
-  說明書寫「選擇另一名角色的圖像即可更換發言者」，remake 目前只有 1…6 鍵。原版 `sub_1B100` 的滑鼠座標分支沒有讀完，不知道點肖像是不是轉成鍵值 0x31…0x36，也不知道戶外、野外與建築內各層的點擊區域。
-  完成條件：讀出原版的點擊區域與回傳值，決定是否接滑鼠，並在輸入層加肖像區域。
-  核實：要人判——RE-166 標為不宣稱。讀完 sub_1B100 之後，接上時多一個輸入目標，到時改成 absent 綁它。
+- **mouse-original-semantics** — 滑鼠語意與原版 sub_1B100 的三處差異（待使用者決定）
+  RE-167 讀出原版滑鼠的實際行為，與 remake 有三處不同：一，圖示列在原版是兩次點擊（第一次只搬白框，再點同一格才確認），remake 一次點擊就搬並確認；二，右鍵在原版是空白鍵，remake 送 ESC；三，地圖窗點擊在原版會往點的方位走一步，remake 沒有。前兩項會改變操作手感，第三項是新增操作；都要先決定是否採原版行為。
+  完成條件：使用者對三項各選「維持現狀」或「照原版」；照原版的項目實作並附區域測試。
+  核實：要人判——要人判：操作手感取捨。決定後照原版的項目會有對應的輸入 token 與測試，再改成 absent 或 required_in_all 綁它。
 
 
 ### 接了但沒驗過
@@ -92,11 +92,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解；繁中 renderer 只把這個既有白框等比放大，未額外宣稱原版外觀已對拍。
   完成條件：兩塊都有逐畫面對拍收據。
   核實：`internal/ui/battle.go`、`internal/ui/battle_cjk.go`、`docs/spec/010-combat-commands.md` 找得到 `確切的視覺效果還沒解出來|原版外觀尚未完全對拍` 就是還沒完
-
-- **target-mode-icon-bar-mouse**（#94） — 選目標格那一層的圖示列怎麼接滑鼠
-  選目標格時滑鼠直接指格已接（SPEC-010 §3、sub_24131:0x24332，收據 docs/verification/battle-target-mouse/receipt.json）。同一層畫面下方的圖示列原版是否也收滑鼠點擊還沒證據，remake 目前只收鍵盤，點在場地外的位置不做事。
-  完成條件：以 IDA 或 dosgolem 實驗確認原版在選目標格時圖示列的滑鼠行為，remake 照著接並附收據；若原版不收滑鼠，把結論寫進 SPEC-010 並移除 input.go 的自承註解。
-  核實：`cmd/kol/input.go` 找得到 `圖示列原版怎麼接滑鼠還沒證據` 就是還沒完
 
 - **longest-cjk-visual-regression**（#40） — 最長繁中內容的視覺回歸、正常路徑截圖與輸入測試
   安全矩形檢查器是靜態的，沒有跑過最長字串的視覺回歸。
@@ -221,6 +216,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **minimal-player-chain** — 選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔：已完成
 - **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。
 - **building-followup-dialogue** — 建築進門後的發言者選擇、好惡與教派（訊息 14、15、16）：已完成
+- **target-mode-icon-bar-mouse** — 選目標格那一層的圖示列怎麼接滑鼠：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
@@ -274,6 +270,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **plan-key-replans** — 規劃鍵值的除數是本回合重排次數：已完成
 - **combat-result-pictures** — 戰鬥結果圖（COMBPICS）沒有畫：已完成
 - **sheet-digit-outside** — 城鎮戶外與野外按 1…6 打開角色資料頁：已完成
+- **building-portrait-click-speaker** — 點隊伍肖像換發言者（滑鼠）：已完成
 
 <!-- worklist:end -->
 

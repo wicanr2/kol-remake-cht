@@ -19,12 +19,12 @@ func TestOriginalNormalPartyState(t *testing.T) {
 		t.Skip("需要 dosgolem 正常入口角色資料")
 	}
 	var input struct {
-		Source string
-		Seed   int
-		Party  []roster.Slot
-		Monster battle.Monster
+		Source       string
+		Seed         int
+		Party        []roster.Slot
+		Monster      battle.Monster
 		MonsterLevel int `json:"monster_level"`
-		Actors []struct {
+		Actors       []struct {
 			Slot   int
 			Record string `json:"record_hex"`
 			X, Y   int

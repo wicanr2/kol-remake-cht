@@ -5,6 +5,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"image"
+	"strconv"
 
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"github.com/wicanr2/kol-remake-cht/internal/book"
@@ -142,7 +143,12 @@ func (g *game) flowTargets() []input.Target {
 				in := g.play.Inside
 				return iconTargets(len(in.Icons), in.Selected, cjk)
 			}
-			return worldTargets(g.worldSession, cjk)
+			targets := worldTargets(g.worldSession, cjk)
+			// 野外走路的輸入迴圈也收「點肖像＝按數字」（`sub_29004:0x29105`）。
+			if ws := g.worldSession; ws != nil && g.play != nil && !ws.Camping && ws.Prompt == nil {
+				targets = append(targets, portraitTargets(len(g.play.Party), cjk)...)
+			}
+			return targets
 		}
 		if g.flow.Town == nil {
 			return nil
@@ -153,12 +159,45 @@ func (g *game) flowTargets() []input.Target {
 			if g.flow.Town.Recruiting() && in.List != nil {
 				targets = append(targets, recruitTargets(in, cjk)...)
 			}
+			if g.flow.Town.PortraitClicks() {
+				targets = append(targets, portraitTargets(len(g.flow.Town.Party), cjk)...)
+			}
 			return targets
 		}
 		icons, selected := g.flow.Town.Outdoor.IconRow()
-		return iconTargets(len(icons), selected, cjk)
+		targets := iconTargets(len(icons), selected, cjk)
+		if g.flow.Town.PortraitClicks() {
+			targets = append(targets, portraitTargets(len(g.flow.Town.Party), cjk)...)
+		}
+		return targets
 	}
 	return nil
+}
+
+// 隊伍肖像列的點擊（RE-167，`sub_1B100:0x1B451`…`0x1B4C0`）：左鍵落在畫面上緣 y < 50、
+// x 從 16 起每 48 像素一位（原版滑鼠 x 以 640 寬計，`(x − 0x20) ÷ 0x60`），而且那一位在隊伍裡，
+// 就回傳 `0x31 + 位置`，也就是按 1…6。只有 `word_2DF3E == 1` 的輸入迴圈收（城鎮戶外走路、
+// 問誰開口、建築內一般圖示列、野外走路）；第一格左緣的半個像素（x = 0x20 整）不算。
+const (
+	portraitLeft   = 16
+	portraitStep   = 48
+	portraitBottom = 50
+)
+
+// portraitTargets 是隊伍前 count 位肖像的可點區域，點下去送 `1`…`6`。
+func portraitTargets(count int, cjk bool) []input.Target {
+	if count > town.MaxParty {
+		count = town.MaxParty
+	}
+	out := make([]input.Target, 0, count)
+	for i := 0; i < count; i++ {
+		r := image.Rect(portraitLeft+i*portraitStep, 0, portraitLeft+(i+1)*portraitStep, portraitBottom)
+		if cjk {
+			r = image.Rect(r.Min.X*book.CJKScale, r.Min.Y*book.CJKScale, r.Max.X*book.CJKScale, r.Max.Y*book.CJKScale)
+		}
+		out = append(out, input.Target{Rect: r, Tokens: []string{strconv.Itoa(i + 1)}})
+	}
+	return out
 }
 
 // worldTargets 是野外那一層的圖示列。白框走 `<`／`>`、確認是 RET，與城鎮同一套，
@@ -181,7 +220,7 @@ func worldTargets(s *world.Session, cjk bool) []input.Target {
 // 與 RET（`applyBattleToken`）。
 //
 // 選目標格那一層是滑鼠座標直接指格（SPEC-010 §3、`sub_24131:0x24332`），見
-// fieldCellTargets；那一層的圖示列原版怎麼接滑鼠還沒證據，只收鍵盤。
+// fieldCellTargets；同一層的圖示列（YES、U-TURN）與其他層走同一組可點區域（RE-167）。
 func battleTargets(s *battle.State, cjk bool) []input.Target {
 	if s == nil {
 		return nil
@@ -211,7 +250,11 @@ func battleTargets(s *battle.State, cjk bool) []input.Target {
 		return append(out, iconTargets(len(battle.SpoilIcons), s.Spoil.Icon, cjk)...)
 	case battle.StageField:
 		if s.Plan.Prompt == battle.PromptTarget {
-			return fieldCellTargets(cjk)
+			// 選目標格那一層的圖示列（YES、U-TURN）：原版 `sub_24131` 用 `sub_1B100(6)` 取鍵，
+			// 圖示列的點擊分支與其他層共用（RE-167）。圖示區在戰場下方、不與格重疊；
+			// 格那一組最後有一個吃掉場外點擊的區域，所以圖示要排在它前面。
+			targets := iconTargets(len(s.Plan.Bar), s.Plan.Selected, cjk)
+			return append(targets, fieldCellTargets(cjk)...)
 		}
 		if s.Plan.Prompt == battle.PromptSpell || s.Plan.Prompt == battle.PromptAffect {
 			count := len(s.Plan.List)

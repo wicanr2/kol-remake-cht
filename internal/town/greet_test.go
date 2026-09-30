@@ -309,3 +309,29 @@ func TestGreetingRefusesOtherOrder(t *testing.T) {
 		t.Fatalf("沒有教派的人：%q", dialog(s))
 	}
 }
+
+// 點肖像只在原版收的那幾個輸入迴圈有效（RE-167）：戶外走路、問誰開口、建築內一般圖示列。
+func TestPortraitClicksState(t *testing.T) {
+	s := playSession(t)
+	if s.Mode != ModeMap || !s.PortraitClicks() {
+		t.Fatal("戶外走路應該收點肖像")
+	}
+	s.Walk(-1, 0)
+	s.Walk(1, 0)
+	if s.Mode != ModeDoor || s.PortraitClicks() {
+		t.Fatal("門口的圖示列不收點肖像")
+	}
+	s2 := greetSession(t, "None", "None", [2]int{0x09, 0},
+		member("A", 0, 0, false), member("B", 0, 1, true))
+	if !s2.AskingWho() || !s2.PortraitClicks() {
+		t.Fatal("問誰開口應該收點肖像")
+	}
+	s2.Key("1")
+	if !s2.PortraitClicks() {
+		t.Fatal("建築內一般圖示列應該收點肖像")
+	}
+	s2.StartRest()
+	if s2.PortraitClicks() {
+		t.Fatal("住宿流程進行中不收點肖像")
+	}
+}

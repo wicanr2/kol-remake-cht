@@ -6950,3 +6950,12 @@ frame-270 推翻了 remake 的版面：
   檔案刪掉後通過。#30 以既有的 `full-chain`、`quest-chain` 與兩條重載路徑認定滿足，另寫
   `docs/verification/minimal-player-chain-20260930.md`，範圍不含新遊戲到結局。過程：無失敗。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #94、#105 結案（2026-09-30，RE-167）：讀完 `sub_1B100` 的滑鼠分支。原版左鍵依序判斷：地圖窗八方位扇區
+  （`mode == 3`）、圖示列（兩次點擊：先搬白框，再點同一格才確認）、只剩 SPACEBAR 的等鍵、`mode 4／6` 回 0xFF、
+  隊伍肖像（`word_2DF3E == 1`，y < 50、x 從 16 起每 48 像素一位，回鍵 1…6）；右鍵回空白鍵。選目標格
+  （`sub_24131`）用 `sub_1B100(6)`，圖示 7 與 0xF 的圖示列照常收滑鼠。remake：`portraitTargets`、
+  `Session.PortraitClicks`（戶外走路、問誰開口、建築內一般圖示列、野外走路），目標層圖示列排在戰場格之前，
+  移除 input.go 的「還沒證據」註解；`portrait_mouse_test.go` 與 `TestPortraitClicksState` 驗區域。全部是靜態證據，
+  沒有真實視窗點擊。原版與 remake 三處操作差異（圖示列兩次點擊、右鍵是空白鍵、地圖點擊走路）不在這一版動，
+  列成 `mouse-original-semantics` 等使用者決定。過程：讀 3×3 表時第一次用 EXE 檔內偏移換算落在檔外
+  （解包 EXE 只有 138,528 byte），改讀反組譯清單的資料列。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

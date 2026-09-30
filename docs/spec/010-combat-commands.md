@@ -172,6 +172,10 @@ RE-154）：Flying Cloak 設 2，Speed Boots 與 Shoes 把 0 補成 1 並設 `+0
   依 `sub_24131:0x24332` 的嚴格區間換成格，送 `CELL:列,欄`，再以 mouse=true 走
   `TargetCursor.Move` 同一段夾限；戰場外的點擊吃掉，不落到 fallback 的 Return。
   收據見 [battle-target-mouse](../verification/battle-target-mouse/receipt.json)。
+- 2026-09-30：同一層的圖示列（YES、U-TURN）也收滑鼠（#94，RE-167）：`sub_24131` 用
+  `sub_1B100(6)` 取鍵，圖示列的點擊分支與其他層共用。remake 把這兩格排在 `fieldCellTargets`
+  之前，點擊語意與各層相同（搬白框並確認）；原版是兩次點擊，見 RE-167 的已知差異。
+  `cmd/kol/portrait_mouse_test.go` 的 `TestTargetLayerIconBarClicks` 驗區域。
 
 規則層在 `internal/battle/commands.go`（指令列組成與四列選項換算）與
 `cursor.go`（兩個 mode 的游標），規劃段的選單狀態機在 `planning.go`，
