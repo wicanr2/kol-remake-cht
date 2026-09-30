@@ -86,7 +86,7 @@
       "id": "g07-battle-speed-options",
       "layer": "gap",
       "title": "G07：三個加速選項的詳細規格、控制與保存",
-      "body": "SPEC-028 草案已核對現有接口與完成條件，狀態仍是 DRAFT，明寫「不授權先加空開關」。無訊息自動略過不等於未接敵快轉；細節與可見原型待確認。",
+      "body": "SPEC-028 草案已核對現有接口與完成條件，狀態仍是 DRAFT，明寫「不授權先加空開關」。無訊息自動略過不等於未接敵快轉；細節與可見原型待確認。（2026-09-30：原本也掛在 weather-animation-and-speed 的加速選項併到這一條。）",
       "acceptance": "SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。",
       "verify": {
         "kind": "present",
@@ -396,18 +396,20 @@
     {
       "id": "weather-animation-and-speed",
       "layer": "gap",
-      "title": "接正式天候動畫及既定加速選項",
-      "body": "SPEC-026 已接六組天候、128 像素捲雲與正式節拍，dosgolem 四組完整合成與六組分派通過，正常出城 GUI 只在天空區改變；雨雪的正常 GUI 與原版正常野外同相位仍未宣稱。加速選項的部分與 g07-battle-speed-options 同源。",
-      "acceptance": "雨雪在正常 GUI 下與原版同相位；加速選項依 SPEC-028 READY 後接上。",
+      "title": "接正式天候動畫（加速選項併入 g07-battle-speed-options）",
+      "body": "天候的節拍、雨雪畫格索引、雲層旋轉、地圖重畫、進野外的畫面組與推進時機照原版 `sub_11390` 狀態機實作，逐次對拍 53 次一致（RE-164），SPEC-026 升 CONFORMED。原本併在這一條的加速選項與 g07-battle-speed-options（#5）同源，依使用者先前決定跳過，改由那一條追蹤。",
+      "acceptance": "雨雪在正常野外與原版同相位（節拍與相位狀態機逐次一致）。",
       "verify": {
-        "kind": "present",
+        "kind": "required_in_all",
         "paths": [
-          "docs/spec/028-optional-battle-speed.md"
+          "docs/verification/weather-phase-20260930.md",
+          "docs/spec/026-weather-animation.md"
         ],
-        "pattern": "狀態：\\*\\*DRAFT\\*\\*",
-        "note": "只綁得到加速那一半；天候同相位沒有訊號。SPEC-028 升 READY 之後這一條會閉嘴，但天候那一半要另外看——到時拆成兩條。"
+        "pattern": "RE-164",
+        "note": "已完成，當回歸訊號：驗證文件與 SPEC-026 都引用 RE-164。加速選項看 g07-battle-speed-options。"
       },
-      "issue": 20
+      "issue": 20,
+      "status": "done"
     },
     {
       "id": "spec-manual-page-links",

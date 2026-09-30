@@ -130,24 +130,69 @@ func (w *Weather) CompositeGroup(group, phase int) []color.RGBA {
 	return w.groups[group].Composite(phase)
 }
 
-// AdvanceWeather 只累積動畫用的名義 BIOS ticks，不改動世界時間或亂數。
+// 天候動畫的節拍是 `sub_11390` 野外那一半（`0x11510`…`0x115C6`，RE-164）：野外主迴圈
+// 等方向鍵時（`sub_1B100(3)`，`sub_29004:0x29105`）每轉一圈呼叫一次。
+//
+//	計數（`word_2DF28`）非零 → 等一個 BIOS tick、計數減一
+//	計數為零            → 立刻畫一格、計數設 2
+//	  雨雪（組 3／4）：畫第 `word_2DF5C` 格，再把它加一（到 3 歸零）
+//	  其餘：先把雲層旋轉一格（`sub_2A18E`）再合成
+//
+// 雨雪的畫格索引整局延續，**換組不歸零**（`sub_2A0C6` 只寫 `word_2DF5A`）；雲層在換組時
+// 重新載入，旋轉從 0 起算。地圖重畫（`sub_115D1` 結尾）把計數清零並立刻呼叫一次。
+const WeatherWaitTicks = 2
+
+// WeatherCall 是 `sub_11390` 野外那一半的一次呼叫。回傳這一次是不是等了一個 tick。
+func (s *Screen) WeatherCall() bool {
+	if !s.weatherStarted || s.weatherGroup != s.Group {
+		// 換組（或第一次）：雲層重新載入，旋轉歸零；雨雪畫格索引不動。
+		s.weatherGroup, s.weatherStarted = s.Group, true
+		s.cloudTurns = 0
+		if s.Group == 3 || s.Group == 4 {
+			s.Phase = s.rainNext
+		} else {
+			s.Phase = 0
+		}
+	}
+	if s.weatherCounter > 0 {
+		s.weatherCounter--
+		return true
+	}
+	s.weatherCounter = WeatherWaitTicks
+	if s.Group == 3 || s.Group == 4 {
+		s.Phase = s.rainNext
+		s.rainNext = (s.rainNext + 1) % 3
+	} else {
+		s.cloudTurns = (s.cloudTurns + 1) % WeatherWidth
+		s.Phase = s.cloudTurns
+	}
+	return false
+}
+
+// WeatherRedraw 是地圖重畫之後的那一次（`sub_115D1` 結尾：計數清零、立刻呼叫）。
+func (s *Screen) WeatherRedraw() {
+	s.weatherCounter = 0
+	s.WeatherCall()
+}
+
+// AdvanceWeather 把經過的名義 BIOS ticks 餵給 `WeatherCall`：等的那一次吃掉一個 tick，
+// 畫的那一次不花時間。不改動世界時間或亂數；呼叫端只在野外地圖等鍵時餵
+// （CAMPING!、提示頁與戰鬥時原版不呼叫）。
 func (s *Screen) AdvanceWeather(ticks float64) {
 	if ticks <= 0 {
 		return
 	}
-	if s.weatherStarted && s.weatherGroup != s.Group {
-		s.Phase, s.weatherTicks = 0, 0
+	if !s.weatherStarted {
+		s.WeatherRedraw()
 	}
-	s.weatherGroup, s.weatherStarted = s.Group, true
 	s.weatherTicks += ticks
-	for s.weatherTicks >= 2 {
-		s.weatherTicks -= 2
-		s.Phase++
-		period := 128
-		if s.Group == 3 || s.Group == 4 {
-			period = 3
+	for {
+		if s.weatherCounter > 0 && s.weatherTicks < 1 {
+			return
 		}
-		s.Phase %= period
+		if s.WeatherCall() {
+			s.weatherTicks--
+		}
 	}
 }
 

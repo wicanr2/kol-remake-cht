@@ -1893,7 +1893,10 @@ func (g *game) updateInteractive() error {
 	// 隊伍標記的走路動畫。腳本模式逐步截圖不需要它自己動，互動模式要。
 	if g.flow.Scene == flow.SceneTown && g.leftTown() && !g.endingReached() &&
 		g.play != nil && !g.play.InArena() &&
-		(g.quest == nil || g.quest.state == nil) && g.worldSession != nil {
+		(g.quest == nil || g.quest.state == nil) && g.worldSession != nil &&
+		!g.worldSession.Camping && g.worldSession.Prompt == nil {
+		// 天候只在野外地圖等方向鍵時前進（`sub_1B100(3)` 的等鍵迴圈，RE-164）；
+		// CAMPING! 與提示頁的等鍵不呼叫 `sub_11390`。
 		g.worldSession.Screen.AdvanceWeather(title.TickHz / 60)
 	}
 	if g.flow.Scene == flow.SceneTown && g.play != nil && !g.leftTown() &&
@@ -3473,6 +3476,7 @@ func main() {
 			playSession.OnLeaveTown = func(p town.Point) {
 				enterWorld(worldScreenState, p)
 				worldSessionState.Reset()
+				worldSessionState.EnterFromTown()
 			}
 			// 野外選 DOOR 就回到城鎮：鏡頭、夾限、入城點都由世界地圖的記錄給
 			// （RE-069），格子陣列與建築資料則換成該城鎮那一份。

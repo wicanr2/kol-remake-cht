@@ -6906,3 +6906,11 @@ frame-270 推翻了 remake 的版面：
   `KOL_BOOK_SELECT_DOWN=2`，選到另一組隊伍（Theodoric＋Poontang），與 remake 夾具不是同一場，
   部位上限因此對不上；補上之後重現 0928 同一場。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #20 天候那一半結案（2026-09-30，RE-164）：靜態讀 `sub_11390`／`sub_115D1`／`sub_29004`／`sub_2A0C6`／
+  `sub_1B100`，並在原版野外實跑觀察（`KOL_BOOK_WEATHER=1`）。remake 改成 `sub_11390` 的計數
+  狀態機（`Screen.WeatherCall`、`WeatherRedraw`）：雨雪索引換組不歸零、雲層先轉再畫、只在野外
+  地圖等鍵時推進、離城時畫面組設 0 並重畫（`Session.EnterFromTown`）。新探針
+  `internal/oracle/weather_phase_test.go`（`KOL_CHECK=gaps`）53 次呼叫逐次一致；SPEC-026 升
+  CONFORMED，契約第 4 條「換組歸零相位」更正。加速選項併入 g07（#5，使用者先前決定跳過）。
+  過程：插入觀察呼叫時錨點重複，第一次替換沒生效，改用行號插入；`go_docker.sh build` 沒帶 `-o`
+  在根目錄留下 `kol`（已被 gitignore），已刪。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

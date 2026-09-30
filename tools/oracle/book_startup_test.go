@@ -561,6 +561,10 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 		// 固定一百步走完之後 `DS:2D9C`（敵人數）可能還是 0，而症狀是
 		// 「參戰上限不一致：count=0」——看起來像擷取壞了，其實是根本沒打起來。
 		// 每一步問一次那個字組，非零就停，並記下走到第幾步。
+		if os.Getenv("KOL_BOOK_WEATHER") == "1" {
+			probeWeatherPhase(t, o)
+			return
+		}
 		const enemyCount = 0x2D9C
 		encounterAt := -1
 		w := newWalker(o)
@@ -1521,4 +1525,76 @@ func capturePanels(t *testing.T, o *oracle.Oracle, at func(uint32) oracle.Addr) 
 		out = append(out, c)
 	}
 	return out
+}
+
+// weatherStep 是野外一步（或一段空等）裡天候那幾支被呼叫的情形（#20）。
+type weatherStep struct {
+	Key      string `json:"key"`
+	Redraws  int    `json:"map_redraws"`
+	Calls    int    `json:"weather_calls"`
+	Frames   []int  `json:"rain_frames"`
+	Ticks    uint64 `json:"bios_ticks"`
+	Counter  int    `json:"counter_after"`
+	RainNext int    `json:"rain_index_after"`
+}
+
+// probeWeatherPhase 觀察雨雪相位怎麼推進：次日野外把分派組改成 3（雨），逐步送方向鍵，
+// 每一步記地圖重畫（`sub_115D1`）、天候更新（`sub_11390`）、雨畫格繪製（`sub_19E9D`
+// 由 `sub_11390` 呼叫，引數段減 `word_34A1A` 除 0x7C 就是第幾格）與經過的 BIOS tick；
+// 最後空等一段不送鍵。只觀察，不改規則。寫 `weather-phase.json`。
+func probeWeatherPhase(t *testing.T, o *oracle.Oracle) {
+	t.Helper()
+	base := uint32(o.DGroupSeg())*16 - 0x2DED0
+	at := func(ea uint32) oracle.Addr {
+		lin := base + ea
+		return oracle.Far(uint16(lin>>4), uint16(lin&0xF))
+	}
+	ds := func(ea uint32) oracle.Addr { return o.DS(uint16(ea - 0x2DED0)) }
+	o.WriteU16(ds(0x2DF5A), 3)
+	var cur weatherStep
+	o.OnCall(at(0x115D1), func(*oracle.Oracle) { cur.Redraws++ })
+	o.OnCall(at(0x11390), func(*oracle.Oracle) { cur.Calls++ })
+	lo, hi := at(0x11390).Linear(), at(0x115CB).Linear()
+	o.OnCall(at(0x19E9D), func(p *oracle.Oracle) {
+		if c := p.Caller().Linear(); c < lo || c > hi {
+			return
+		}
+		cur.Frames = append(cur.Frames, int(p.Arg(0)-o.Word(ds(0x34A1A)))/0x7C)
+	})
+	var rows []weatherStep
+	finish := func(key string, start uint64) {
+		cur.Key, cur.Ticks = key, o.Ticks()-start
+		cur.Counter, cur.RainNext = int(o.Word(ds(0x2DF28))), int(o.Word(ds(0x2DF5C)))
+		rows = append(rows, cur)
+		t.Logf("天候 %-6s 重畫 %d 更新 %d 雨格 %v tick %d 計數 %d 下一格 %d",
+			key, cur.Redraws, cur.Calls, cur.Frames, cur.Ticks, cur.Counter, cur.RainNext)
+		cur = weatherStep{}
+	}
+	keys := []string{"Right", "Right", "Right", "Right", "Down", "Down", "Right", "Right", "Right", "Right",
+		"Right", "Right", "Right", "Right", "Right", "Right", "Down", "Down", "Down", "Down"}
+	for _, k := range keys {
+		start := o.Ticks()
+		if err := o.SendKeys(k); err != nil {
+			t.Fatal(err)
+		}
+		if err := o.Run(2_000_000); err != nil {
+			t.Fatal(err)
+		}
+		finish(k, start)
+	}
+	for i := 0; i < 4; i++ {
+		start := o.Ticks()
+		if err := o.Run(20_000_000); err != nil {
+			t.Fatal(err)
+		}
+		finish("idle", start)
+	}
+	body, _ := json.MarshalIndent(map[string]any{
+		"schema": "kol-weather-phase-probe-v1", "source": "dosgolem-normal-player-path",
+		"note":   "次日野外，分派組寫成 3（雨）；每一步 o.Run(2M)，空等每段 o.Run(20M)",
+		"rows":   rows,
+	}, "", "  ")
+	if dir := os.Getenv("KOL_ORACLE_CAPTURE"); dir != "" {
+		_ = os.WriteFile(filepath.Join(dir, "weather-phase.json"), append(body, '\n'), 0o600)
+	}
 }

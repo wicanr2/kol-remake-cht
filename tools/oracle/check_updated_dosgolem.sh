@@ -39,7 +39,7 @@ go test -tags oracle ./internal/oracle -run '^Test(BeltSwitch|SpellWard|AbbeyHea
 if [ "${KOL_CHECK:-all}" = gear ]; then exit 0; fi
 fi
 if [ "${KOL_CHECK:-all}" = gaps ]; then
-go test -tags oracle ./internal/oracle -run '^Test(ArenaMap|WeatherDispatch|WeatherComposite)Original$' -count=1 -v -timeout 120s > /out/player-gaps.log 2>&1
+go test -tags oracle ./internal/oracle -run '^Test(ArenaMap|WeatherDispatch|WeatherComposite|WeatherPhase)Original$' -count=1 -v -timeout 120s > /out/player-gaps.log 2>&1
 exit 0
 fi
 if [ "${KOL_CHECK:-all}" = panels ] || [ "${KOL_CHECK:-all}" = all ]; then

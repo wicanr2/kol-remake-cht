@@ -40,14 +40,9 @@ tools/run_python_tool.sh tools/worklist.py verify
 ### 玩家會撞到的功能缺口
 
 - **g07-battle-speed-options**（#5） — G07：三個加速選項的詳細規格、控制與保存
-  SPEC-028 草案已核對現有接口與完成條件，狀態仍是 DRAFT，明寫「不授權先加空開關」。無訊息自動略過不等於未接敵快轉；細節與可見原型待確認。
+  SPEC-028 草案已核對現有接口與完成條件，狀態仍是 DRAFT，明寫「不授權先加空開關」。無訊息自動略過不等於未接敵快轉；細節與可見原型待確認。（2026-09-30：原本也掛在 weather-animation-and-speed 的加速選項併到這一條。）
   完成條件：SPEC-028 升 READY，三個選項可開關、會保存，並有可見原型讓使用者判斷。
   核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接` 就是還沒完
-
-- **weather-animation-and-speed**（#20） — 接正式天候動畫及既定加速選項
-  SPEC-026 已接六組天候、128 像素捲雲與正式節拍，dosgolem 四組完整合成與六組分派通過，正常出城 GUI 只在天空區改變；雨雪的正常 GUI 與原版正常野外同相位仍未宣稱。加速選項的部分與 g07-battle-speed-options 同源。
-  完成條件：雨雪在正常 GUI 下與原版同相位；加速選項依 SPEC-028 READY 後接上。
-  核實：`docs/spec/028-optional-battle-speed.md` 找得到 `狀態：\*\*DRAFT\*\*` 就是還沒完
 
 - **building-followup-dialogue**（#32） — 建築內的後續對話（訊息 10 起）
   訊息 10…13 的選法已知（聲望等第為 0 時是「訊息 10 ＋ 性別×2 ＋ 會不會法術」，否則訊息 26 ＋ 等第），但觸發條件還沒讀出來。
@@ -233,6 +228,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **a10-battle-info-panel** — A10：戰鬥左側完整資訊內容的原版同狀態：已完成
 - **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE：已完成
 - **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成
+- **weather-animation-and-speed** — 接正式天候動畫（加速選項併入 g07-battle-speed-options）：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
 - **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。

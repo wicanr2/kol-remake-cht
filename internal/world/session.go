@@ -94,6 +94,17 @@ func (s *Session) Reset() {
 	s.Screen.SyncTerrain()
 }
 
+// EntrySky 是進野外那一刻畫面上的天候組：`sub_29004:0x290F5` 呼叫 `sub_2A0C6(0)`，
+// 接著 `sub_2A39B` 重畫（`sub_115D1` 結尾立刻畫一格）。天候的隨機漫步狀態
+// （`Clock.Weather`）不動，下一次時段變換才換成它（RE-164）。
+const EntrySky = 0
+
+// EnterFromTown 是離開城鎮、野外主迴圈開頭那一段的畫面：天候組設回晴空並重畫。
+func (s *Session) EnterFromTown() {
+	s.Screen.Group = EntrySky
+	s.Screen.WeatherRedraw()
+}
+
 // Sync 依腳下那一格決定模式與圖示列。原版的比對迴圈也是接在移動後面。
 func (s *Session) Sync() {
 	s.Town = s.Screen.Travel.TownHere()
