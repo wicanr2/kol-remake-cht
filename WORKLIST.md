@@ -163,11 +163,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：三平台各自驗收通過，推廣交付有影音驗收收據。
   核實：要人判——跨平台驗收沒有本機訊號。與 windows-macos-real-machine 相鄰但不同：那一條是真機，這一條含 FUSE 與推廣。
 
-- **release-asset-separation**（#27） — 分離本機、private-repo PNG 與可公開輸出
-  GitHub Release／公開 release 的 deny-list 要預設失敗即關閉，並檢查 repo visibility 沒有被改成 public。權利審查已寫在 docs/RELEASE-RIGHTS-REVIEW.md。
-  完成條件：deny-list 預設失敗即關閉，visibility 檢查納入發行流程。
-  核實：要人判——verify_dist.sh 已驗 release 的素材 deny-list，缺的是 visibility 檢查。那一步接上時會多一個 gh api 呼叫，到時改成 absent 綁它。
-
 - **cross-platform-build-smoke**（#37） — Linux／Windows／macOS 可重現編譯與最小啟動 smoke
   build_dist.sh 已建出三平台（linux/amd64 原生、windows/amd64 交叉編、macOS universal 經 osxcross ＋ lipo），verify_dist.sh 驗過 manifest、授權、deny-list、Windows PE 檔頭、macOS 四道靜態驗收與 Linux 啟動。編譯這一半已經成立；缺的是 Windows 與 macOS 的最小啟動 smoke——Linux 容器裡只驗得了結構。
   完成條件：三平台各有一次真的把程式跑起來的 smoke。
@@ -212,6 +207,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **weather-animation-and-speed** — 接正式天候動畫（加速選項併入 g07-battle-speed-options）：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
+- **release-asset-separation** — 分離本機、private-repo PNG 與可公開輸出：已完成
 - **package-boundaries-and-injection** — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案：已完成
 - **minimal-player-chain** — 選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔：已完成
 - **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。

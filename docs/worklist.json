@@ -513,13 +513,21 @@
       "id": "release-asset-separation",
       "layer": "release",
       "title": "分離本機、private-repo PNG 與可公開輸出",
-      "body": "GitHub Release／公開 release 的 deny-list 要預設失敗即關閉，並檢查 repo visibility 沒有被改成 public。權利審查已寫在 docs/RELEASE-RIGHTS-REVIEW.md。",
+      "body": "`release/` 的素材 deny-list 原本就失敗即關閉；現在 build_dist、package_dist、verify_dist 開頭都先跑 `tools/check_repo_visibility.sh`（查不到或不是 private 就停，沒有略過旗標），回歸測試 `tools/test_check_repo_visibility.sh`。權利審查見 docs/RELEASE-RIGHTS-REVIEW.md。發 GitHub Release（#43）建立時要呼叫同一支。",
       "acceptance": "deny-list 預設失敗即關閉，visibility 檢查納入發行流程。",
       "verify": {
-        "kind": "manual",
-        "note": "verify_dist.sh 已驗 release 的素材 deny-list，缺的是 visibility 檢查。那一步接上時會多一個 gh api 呼叫，到時改成 absent 綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "tools/check_repo_visibility.sh",
+          "tools/build_dist.sh",
+          "tools/package_dist.sh",
+          "tools/verify_dist.sh"
+        ],
+        "pattern": "check_repo_visibility",
+        "note": "已完成，當回歸訊號：閘門腳本與三支發行腳本都引用它。"
       },
-      "issue": 27
+      "issue": 27,
+      "status": "done"
     },
     {
       "id": "roster-full-ui-oracle",

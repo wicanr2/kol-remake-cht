@@ -74,3 +74,21 @@
 
 每次要發行都重跑一次：包的內容變了、抽取器帶的檔案變了、promo 換了素材，
 上一次的結論就不自動成立。
+
+## 儲存庫可見度閘門（2026-09-30）
+
+`tools/build_dist.sh`、`tools/package_dist.sh` 與 `tools/verify_dist.sh` 在主機端開頭都先跑
+`tools/check_repo_visibility.sh`，用 `gh api repos/<owner>/<name> --jq .visibility` 問 GitHub 目前的可見度：
+
+| 結果 | 動作 |
+|---|---|
+| `private` | 放行 |
+| 其他值（`public`、`internal`）、空輸出 | 停下，結束碼 4，訊息指向本文件 |
+| 沒有 `gh`、沒登入、沒網路、API 出錯 | 停下，結束碼 4；查不到就不放行 |
+
+沒有略過旗標。儲存庫要轉 public，要先重做本文件的權利審查、修改這支腳本的判定並留下紀錄。
+回歸測試是 `tools/test_check_repo_visibility.sh`（假的 `gh` 走完五種輸出與沒有 `gh` 的情形）。
+`release/` 的素材 deny-list 原本就是失敗即關閉（`verify_dist.sh` 找到 PNG、OGG、EXE、ZIP、PDF、JPG 就退出）。
+
+這道閘門只擋自家腳本；在 GitHub 網頁或 `gh` 直接改可見度、建立 Release，腳本管不到。
+發 GitHub Release 的流程（#43）建立時要先呼叫同一支腳本。

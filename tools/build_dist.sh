@@ -20,6 +20,8 @@ fi
 
 VERSION="${1:?用法：build_dist.sh <版本>}"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# 儲存庫可見度閘門：不是 private 或查不到就停（失敗即關閉，`docs/RELEASE-RIGHTS-REVIEW.md`）。
+"$REPO_ROOT/tools/check_repo_visibility.sh" || exit $?
 OUT="$REPO_ROOT/dist-all/$VERSION"
 
 if [ -n "$(git -C "$REPO_ROOT" status --porcelain --untracked-files=no)" ]; then

@@ -6959,3 +6959,10 @@ frame-270 推翻了 remake 的版面：
   沒有真實視窗點擊。原版與 remake 三處操作差異（圖示列兩次點擊、右鍵是空白鍵、地圖點擊走路）不在這一版動，
   列成 `mouse-original-semantics` 等使用者決定。過程：讀 3×3 表時第一次用 EXE 檔內偏移換算落在檔外
   （解包 EXE 只有 138,528 byte），改讀反組譯清單的資料列。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #27 結案（2026-09-30）：新增 `tools/check_repo_visibility.sh`，`build_dist.sh`、`package_dist.sh`、
+  `verify_dist.sh` 主機端開頭都先跑它。判定：`gh api repos/<owner>/<name> --jq .visibility` 是 `private` 才放行；
+  其他值、空輸出、沒有 `gh`、沒登入、API 出錯一律結束碼 4（失敗即關閉），沒有略過旗標。回歸測試
+  `tools/test_check_repo_visibility.sh` 用假的 `gh` 走過六種情形，全部通過；對真實儲存庫回報 private。
+  `docs/RELEASE-RIGHTS-REVIEW.md` 補一節說明閘門與它管不到的範圍（網頁直接改可見度、手動建立 Release）。
+  過程：「沒有 gh」的測試第一版靠覆寫 `command` 函式，難以確認是因為那個原因失敗，改成 PATH 只放
+  `dirname` 並檢查訊息。容器：無新增。
