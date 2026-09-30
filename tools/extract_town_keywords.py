@@ -113,7 +113,7 @@ def main() -> int:
             buildings = []
             for door in range(doors[COUNT_OFFSET] + 1):
                 index = text_payload_index(door)
-                if index >= contract["count"]:
+                if index >= len(parts):
                     continue
                 body = lzw_decode(parts[index])
                 slots = []

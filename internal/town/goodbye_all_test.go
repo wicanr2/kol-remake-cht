@@ -69,7 +69,8 @@ func TestGoodbyeEveryBuilding(t *testing.T) {
 			}
 		}
 	}
-	if checked != 2*101 || missing != 2 {
-		t.Fatalf("檢查了 %d 次告別、%d 次缺文字，應為 202 與 2", checked, missing)
+	// 102 棟建築逐一有告別：TOWN7 門 21 的資料在分卷 TOWN7.1（RE-165），不再缺文字。
+	if checked != 2*102 || missing != 0 {
+		t.Fatalf("檢查了 %d 次告別、%d 次缺文字，應為 204 與 0", checked, missing)
 	}
 }

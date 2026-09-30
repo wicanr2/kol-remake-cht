@@ -6914,3 +6914,15 @@ frame-270 推翻了 remake 的版面：
   CONFORMED，契約第 4 條「換組歸零相位」更正。加速選項併入 g07（#5，使用者先前決定跳過）。
   過程：插入觀察呼叫時錨點重複，第一次替換沒生效，改用行號插入；`go_docker.sh build` 沒帶 `-o`
   在根目錄留下 `kol`（已被 gitignore），已刪。容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #103 結案（2026-09-30，RE-165）：原以為的原版資料缺口其實是抽取器漏讀續卷。原版正常路徑
+  （旅店走出來後用關鍵點接手把城鎮鏡頭與夾限換成入城點 9，再走到門 21 進門）畫出完整建築，
+  並開了 `TOWN7.1`；`TOWN7.0` 表頭第 12…13 byte（2195）就是那一卷的長度。`payloads()` 改把續卷
+  算成再下一個全域索引，三支城鎮抽取器改用 `len(parts)`，重生三份 JSON（`assets/original-derived-data/`
+  被 gitignore，只有工具進版控）。門 21：Krag Keep／Ballastar of Simmer、任務地點 10（Stone Mallet →
+  Death Blade）、27 則訊息、六個話題槽；24 個任務地點各有一棟交付建築，最終任務的 23 個回報門檻
+  終於湊得滿。繁中：名稱、人物、進門敘述與 25 則後續訊息、三筆顯示名、術語表九列，字模表 2,553 → 2,567
+  字，`verify_text_fit.py` 9,650 項 0 失敗，`verify_runtime_translation.py` 與 `verify_display_names.py`
+  0 缺譯。`TestGoodbyeEveryBuilding` 改為 102 棟、0 缺文字。原版與 remake 畫格：進門敘述從 y=53 起相同，
+  告別對話區 0 差異像素。順帶發現原版多人隊伍進門後會印「Which one needs help?」讓玩家選發言者，remake
+  沒有這一步，併入 #32。過程：`quest-reward` 鍵值第一次撞號（已有 08），改 09。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

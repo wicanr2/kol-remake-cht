@@ -136,6 +136,15 @@
 | Hobe / Hobean Squire | 霍布／霍布侍從 | 暫譯 | 岩鑿城堡及其侍從；對應 `TOWN7`，世界地圖上是十個代碼 `MIN` 的入口 |
 | Htron Pirate | 赫特隆海盜 | 暫譯 | 赫特隆的海盜文化 |
 | Krag Barbarian | Krag Barbarian | 待查 | 北方岩地的野蠻戰士；正式音譯待世界資料 consumer |
+| Krag Keep | 克拉格要塞 | 暫譯 | TOWN7 門 21 的建築名（RE-165）；Krag 沿用既有「克拉格」 |
+| Ballastar of Simmer | 西默的巴拉斯塔 | 暫譯 | 門 21 的人物；「X of Y」照既有寫成「Y 的 X」 |
+| Stone Mallet | 石槌 | 暫譯 | 任務地點 10 的任務物品 |
+| Death Blade | 死亡之刃 | 暫譯 | 任務地點 10 的獎勵；對話裡的 Deathblade 同譯 |
+| Rhording | 羅丁 | 暫譯 | 門 21 話題 25 的暗語，說給育幼所聽；音譯，沒有其他來源可交叉 |
+| Fostering | 育幼所 | 暫譯 | 門 16、17 已有的譯法，門 21 沿用 |
+| Wesswald | 威斯瓦德 | 暫譯 | 森林地名；-wald 比照「辛博瓦德」 |
+| Thims | 辛姆人 | 暫譯 | 門 21 話題裡與克拉格對立的一群人 |
+| Wilding | 野民 | 暫譯 | 門 21 訊息 15 的稱呼；沒有其他來源可交叉 |
 | Krell Warrion | 戰士 | 暫譯 | 人類職業（KOLDATA 記錄 8，原版拼作 `Warrion`）；遊戲 UI 用意譯，專名一致性待審 |
 | Lintle Plainsmen | Lintle Plainsmen | 待查 | 東南平原游牧民族；正式譯名待世界資料 consumer |
 | Olanthan Hunter / Huntress | 奧蘭斯獵人／奧蘭斯女獵人 | 暫譯 | 中立村落奧蘭斯的獵人 |

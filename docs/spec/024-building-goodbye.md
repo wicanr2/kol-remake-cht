@@ -27,7 +27,7 @@
 正常 dosgolem 與 remake 分別重跑兩人離店；回歸通過不自動升 CONFORMED。
 
 全城逐店的差異審查見 [building-goodbye-review-20260928](../verification/building-goodbye-review-20260928.md)：
-101 棟無差異，TOWN7 門 21 原版缺文字、行為未知。
+102 棟無差異；TOWN7 門 21 的資料在續卷 TOWN7.1（RE-165），告別畫格與原版逐像素相同。
 
 ## 說明書對照
 

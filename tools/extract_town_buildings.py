@@ -280,7 +280,7 @@ def main() -> int:
                 index = text_payload_index(i)
                 door = {"index": i, "x": x, "y": y,
                         "picture": 2 * i + 3, "portrait": 2 * i + 2}
-                if index < contract["count"]:
+                if index < len(parts):
                     body = lzw_decode(parts[index])
                     door["icon_flags"] = [body[ICON_FLAGS], body[ICON_FLAGS + 1]]
                     name, ok_name = pascal_high_bit(body, NAME_OFFSET)
@@ -314,7 +314,8 @@ def main() -> int:
                     if body[ICON_FLAGS] & 0x80:
                         door["skills"] = skills(body)
                 else:
-                    # TOWN7 的門 21 有圖與肖像，卻沒有對應的文字 payload。
+                    # 索引超出所有分卷的 payload：資料缺口，不猜內容。八座城目前都不會走到
+                    # （TOWN7 的門 21 在 TOWN7.1，RE-165）。
                     door["text_missing"] = True
                 doors.append(door)
 

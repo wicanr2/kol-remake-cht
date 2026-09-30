@@ -121,6 +121,12 @@ def payloads(volumes: dict[str, bytes], root: str) -> tuple[dict, list[bytes]]:
     for i, off in enumerate(offsets):
         end = offsets[i + 1] if i + 1 < count else off + last_length
         out.append(bytes(blob[off:end]))
+    # 索引只數 .0 裡的 payload；`.0` 已經用到檔尾時，後面的分卷各自是**再往下一個全域索引**的
+    # payload（`sub_1A4FE` 依全域索引挑分卷，RE-165）。TOWN7.1 整檔就是索引 26，也就是門 21
+    # 的建築資料。表頭 12…13 的 word 記的正是這一卷的長度。
+    if contract["payload_end_equals_file_size"]:
+        for name in volume_order:
+            out.append(bytes(volumes[name]))
     return contract, out
 
 

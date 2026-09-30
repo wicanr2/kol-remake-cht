@@ -174,7 +174,7 @@ def main() -> int:
             buildings = []
             for door in range(table[COUNT_OFFSET] + 1):
                 index = text_payload_index(door)
-                if index >= contract["count"]:
+                if index >= len(parts):
                     continue
                 data = lzw_decode(parts[index])
                 lines, skipped = building_lines(data)

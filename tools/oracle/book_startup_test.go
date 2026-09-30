@@ -323,6 +323,10 @@ func probeNormalBattlePath(t *testing.T, o *oracle.Oracle) {
 		captureBook(t, o, fmt.Sprintf("battle-path-%02d.png", i))
 		t.Logf("正常旅店延伸 step=%d key=%q IP=%s 已讀=%d 待讀=%d", i, key, o.IP(), o.KeysConsumed(), o.KeysPending())
 	}
+	if os.Getenv("KOL_BOOK_DOOR21") == "1" {
+		probeTownDoor21(t, o)
+		return
+	}
 	if os.Getenv("KOL_BOOK_WALK") != "1" {
 		return
 	}
@@ -1596,5 +1600,161 @@ func probeWeatherPhase(t *testing.T, o *oracle.Oracle) {
 	}, "", "  ")
 	if dir := os.Getenv("KOL_ORACLE_CAPTURE"); dir != "" {
 		_ = os.WriteFile(filepath.Join(dir, "weather-phase.json"), append(body, '\n'), 0o600)
+	}
+}
+
+// probeTownDoor21 觀察 TOWN7 門 21（20, 36）：它有門面圖與肖像，文字 payload 卻不存在
+// （RE-061，#103）。旅店出來之後把城鎮鏡頭與夾限換成入城點 9 的那一組（世界地圖記錄，
+// 鏡頭 24,33、夾限 16…31 × 32…47），這是關鍵點接手，不是一路從世界地圖走來；接著用
+// 方向鍵走到那一格、進門，逐步記畫面指紋、IP、缺檔與未實作呼叫。
+func probeTownDoor21(t *testing.T, o *oracle.Oracle) {
+	t.Helper()
+	ds := func(ea uint32) oracle.Addr { return o.DS(uint16(ea - 0x2DED0)) }
+	type bound struct {
+		ea   uint32
+		name string
+	}
+	bounds := []bound{{0x2DF66, "2DF66"}, {0x2DF68, "2DF68"}, {0x2DF6A, "2DF6A"}, {0x2DF6C, "2DF6C"}}
+	before := map[string]int{}
+	for _, b := range bounds {
+		before[b.name] = int(int16(o.Word(ds(b.ea))))
+	}
+	t.Logf("注入前 鏡頭=(%d,%d) 夾限=%v 標記偏移=(%d,%d)",
+		int16(o.Word(ds(0x2FB50))), int16(o.Word(ds(0x2FB56))), before,
+		int16(o.Word(ds(0x2DF36))), int16(o.Word(ds(0x2DF38))))
+	// 入城點 3 的夾限是 48…63 × 0…15：四個值互不相同，用值認角色。
+	role := map[int]uint32{}
+	for _, b := range bounds {
+		role[before[b.name]] = b.ea
+	}
+	if len(role) != 4 || role[48] == 0 || role[63] == 0 || role[0] == 0 || role[15] == 0 {
+		t.Fatalf("認不出夾限四個變數：%v", before)
+	}
+	o.WriteU16(ds(0x2FB50), 24)
+	o.WriteU16(ds(0x2FB56), 33)
+	o.WriteU16(ds(role[48]), 16)
+	o.WriteU16(ds(role[63]), 31)
+	o.WriteU16(ds(role[0]), 32)
+	o.WriteU16(ds(role[15]), 47)
+	o.WriteU16(ds(0x2DF36), 0)
+	o.WriteU16(ds(0x2DF38), 0)
+	o.WriteU16(ds(0x2DF62), 9)
+	t.Logf("夾限角色：minX=%#x maxX=%#x minY=%#x maxY=%#x", role[48], role[63], role[0], role[15])
+	type frame struct {
+		Key    string `json:"key"`
+		Camera [2]int `json:"camera"`
+		Marker [2]int `json:"marker"`
+		IP     string `json:"ip"`
+		Digest string `json:"digest"`
+		Moved  bool   `json:"moved"`
+	}
+	var rows []frame
+	last := screenDigest(o)
+	snap := func(key string) frame {
+		now := screenDigest(o)
+		f := frame{Key: key, IP: o.IP().String(), Digest: now, Moved: now != last,
+			Camera: [2]int{int(int16(o.Word(ds(0x2FB50)))), int(int16(o.Word(ds(0x2FB56))))},
+			Marker: [2]int{int(int16(o.Word(ds(0x2DF36)))), int(int16(o.Word(ds(0x2DF38))))}}
+		last = now
+		rows = append(rows, f)
+		return f
+	}
+	press := func(key string, run uint64) {
+		if err := o.SendKeys(key); err != nil {
+			t.Fatalf("送 %q：%v", key, err)
+		}
+		if err := o.Run(run); err != nil {
+			t.Fatalf("跑 %q：%v", key, err)
+		}
+	}
+	// 先讓畫面重畫一次：按一個會被夾限擋住的方向鍵沒用，改按 Right 再 Left 之前先看一眼。
+	captureBook(t, o, "door21-inject.png")
+	route := []string{"Down", "Down", "Down", "Down", "Left", "Down", "Down", "Down", "Left", "Left", "Left", "Up", "Up", "Up", "Up"}
+	for i, k := range route {
+		press(k, 3_000_000)
+		f := snap(k)
+		t.Logf("走 %2d %-5s 鏡頭 %v 標記 %v 指紋 %s 動了=%t", i, k, f.Camera, f.Marker, f.Digest, f.Moved)
+		if i == 0 || i == len(route)-1 {
+			captureBook(t, o, fmt.Sprintf("door21-walk-%02d.png", i))
+		}
+	}
+	captureBook(t, o, "door21-at-door.png")
+	press("Return", 20_000_000)
+	snap("Return")
+	captureBook(t, o, "door21-enter.png")
+	t.Logf("進門之後 IP=%s 缺檔=%v 未實作=%v", o.IP(), o.Missing(), o.Unimplemented())
+	for i := 0; i < 6; i++ {
+		if err := o.Run(60_000_000); err != nil {
+			t.Fatalf("進門後空跑第 %d 段：%v", i, err)
+		}
+		f := snap("idle")
+		t.Logf("空跑 %d 指紋 %s IP=%s 動了=%t 輪詢=%d", i, f.Digest, f.IP, f.Moved, len(o.MousePollSteps()))
+	}
+	captureBook(t, o, "door21-idle.png")
+	// 建築 payload（DGROUP 0x1CF4）+0x40／+0x48 的兩個 5-bit 名稱，與 `sub_14189` 拿來比對的
+	// 名稱表（0x9E5C 起，以 0x0D 分隔）；招呼語的「敵意」與「偏好」判定用它們（#32）。
+	o.SyncDGroupFromDS()
+	table := o.Bytes(o.DS(0x9E5C), 900)
+	shown := make([]byte, 0, len(table))
+	for _, b := range table {
+		switch {
+		case b == 0x0D:
+			shown = append(shown, '|')
+		case b >= 32 && b < 127:
+			shown = append(shown, b)
+		default:
+			shown = append(shown, '.')
+		}
+	}
+	t.Logf("名稱表 0x9E5C：%s", shown)
+	t.Logf("payload +0x40：% x；+0x48：% x", o.Bytes(o.DS(0x1CF4+0x40), 8), o.Bytes(o.DS(0x1CF4+0x48), 8))
+	for i := 0; i < 2; i++ {
+		rec := uint16(0xBB88 + i*0x300)
+		t.Logf("隊員 %d 記錄 +0x1A=%d +0x1B=%d +0x1C=%d +0x24=%d 名字 %q", i, o.Byte(o.DS(rec+0x1A)), o.Byte(o.DS(rec+0x1B)),
+			o.Byte(o.DS(rec+0x1C)), o.Byte(o.DS(rec+0x24)), o.Bytes(o.DS(rec), 10))
+	}
+	// 之後的鍵可由 KOL_BOOK_DOOR21_KEYS（逗號分隔）指定；單一字元用 TypeKeys，其餘是鍵名。
+	// 每一鍵之後記下這一段印過哪些訊息（`sub_14234`）與 UI 記錄（`sub_1A8FD`）。
+	keys := []string{"Space", "Return", "Escape"}
+	if raw := os.Getenv("KOL_BOOK_DOOR21_KEYS"); raw != "" {
+		keys = strings.Split(raw, ",")
+	}
+	base := uint32(o.DGroupSeg())*16 - 0x2DED0
+	at := func(ea uint32) oracle.Addr {
+		lin := base + ea
+		return oracle.Far(uint16(lin>>4), uint16(lin&0xF))
+	}
+	var printed []string
+	o.OnCall(at(0x14234), func(p *oracle.Oracle) {
+		printed = append(printed, fmt.Sprintf("訊息 %d（+%#x, 第二引數 %d）", p.Arg(0)/0x40, p.Arg(0), p.Arg(1)))
+	})
+	o.OnCall(at(0x1A8FD), func(p *oracle.Oracle) { printed = append(printed, fmt.Sprintf("UI %#x", p.Arg(0))) })
+	o.OnCall(at(0x11722), func(p *oracle.Oracle) { printed = append(printed, fmt.Sprintf("sub_11722(%d)", p.Arg(0))) })
+	o.OnCall(at(0x144EF), func(*oracle.Oracle) { printed = append(printed, "sub_144EF 是非問答") })
+	o.OnCall(at(0x144C3), func(*oracle.Oracle) { printed = append(printed, "sub_144C3 等鍵") })
+	for i, k := range keys {
+		printed = nil
+		if len([]rune(k)) == 1 {
+			if err := o.TypeKeys(k); err != nil {
+				t.Fatalf("打 %q：%v", k, err)
+			}
+			if err := o.Run(20_000_000); err != nil {
+				t.Fatal(err)
+			}
+		} else {
+			press(k, 20_000_000)
+		}
+		f := snap(k)
+		t.Logf("送 %-6s 指紋 %s IP=%s 動了=%t 印了 %v", k, f.Digest, f.IP, f.Moved, printed)
+		captureBook(t, o, fmt.Sprintf("door21-key-%02d-%s.png", i, strings.ToLower(k)))
+	}
+	t.Logf("結束：缺檔=%v 未實作=%v 已開檔尾段=%v", o.Missing(), o.Unimplemented(), tailOf(o.Opened(), 6))
+	body, _ := json.MarshalIndent(map[string]any{
+		"schema": "kol-town7-door21-probe-v1", "source": "dosgolem-normal-player-path",
+		"note": "旅店出來後把鏡頭與夾限換成入城點 9（關鍵點接手），方向鍵走到門 21 進門",
+		"rows": rows,
+	}, "", "  ")
+	if dir := os.Getenv("KOL_ORACLE_CAPTURE"); dir != "" {
+		_ = os.WriteFile(filepath.Join(dir, "town7-door21.json"), append(body, '\n'), 0o600)
 	}
 }
