@@ -16,7 +16,7 @@ IMAGE="${KOL_GO_IMAGE:-eob-remake-go:1.26.7-ebiten2.9.9-audio}"
 RECEIPTS="${1:-workplace/battle-planning-20260911}"
 FIXTURE="${KOL_PARTY_FIXTURE:-workplace/planning-parity-20260911/party-fixture.json}"
 # 多回合執行段收據（#9）：`tools/oracle/book_startup_test.go` 的 KOL_BOOK_EXECUTE 模式產出。
-ROUNDS="${KOL_ROUNDS_RECEIPT:-workplace/battle-first-round-20260928/battle-rounds.json}"
+ROUNDS="${KOL_ROUNDS_RECEIPT:-workplace/battle-panels-20260930/battle-rounds.json}"
 # 點陣圖編輯器收據（SPEC-036）：`tools/oracle/book_editor_test.go`（KOL_CHECK=editor）產出。
 EDITOR="${KOL_EDITOR_RECEIPT:-workplace/bitmap-editor-20260929/bitmap-editor.json}"
 

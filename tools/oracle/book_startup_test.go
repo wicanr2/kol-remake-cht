@@ -1213,9 +1213,20 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 	scratchStart := hex.EncodeToString(o.Bytes(o.DS(0x9E28), 0x30))
 	scratchWrites := o.WatchWrites(0x9E50, 0x9E51)
 	defer o.StopWatchingWrites()
+	// KOL_BOOK_UNTIL_WOUND=1（#17 面板擷取用）：改成等到有部位真的掉血（+0x11 起六組
+	// 「目前／上限」有一組目前小於上限），左側人形才有傷勢遮罩可比。
+	untilWound := os.Getenv("KOL_BOOK_UNTIL_WOUND") == "1"
 	hurt := func() bool {
 		for i := 0; i < slots; i++ {
 			rec := uint16(actorBase + i*stride)
+			if untilWound {
+				for k := uint16(0); k < 6; k++ {
+					if cur, max := o.Byte(o.DS(rec+0x11+2*k)), o.Byte(o.DS(rec+0x12+2*k)); max != 0 && cur < max {
+						return true
+					}
+				}
+				continue
+			}
 			if o.Byte(o.DS(rec+0x0E)) != 0 || o.Byte(o.DS(rec+0x2D)) != 0 {
 				return true
 			}
@@ -1351,7 +1362,9 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 	if !done {
 		t.Fatalf("執行段沒有跑完：回合 %d，擲骰 %d 次、訊息 %d 則", round, len(rolls), len(messages))
 	}
+	panels := capturePanels(t, o, at)
 	data := map[string]any{
+		"panels": panels,
 		"schema": "kol-battle-rounds-v1", "source": "dosgolem-normal-player-path",
 		"input": "KOLTOWN-unpacked.EXE", "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
 		"address_space":  "記錄為 DGROUP 相對位移；caller_ida 為 IDA linear",
@@ -1381,6 +1394,131 @@ func scratchLog(ws []oracle.MemWrite, ida func(oracle.Addr) string) []map[string
 		}
 		out = append(out, map[string]any{"off": fmt.Sprintf("%#x", w.Off), "old": w.Old, "new": w.New,
 			"ip_ida": ida(w.IP), "step": w.Step})
+	}
+	return out
+}
+
+// panelCapture 是原版在受傷之後那一刻，對一名參戰者畫左側兩框時交給繪製層的參數（#17）：
+// 疲勞直條的兩個矩形、人形編號、傷勢遮罩逐像素讀取的座標序，以及裝備列每一列的來源位移、
+// 原版自己解出的名字與畫在哪一列。
+type panelCapture struct {
+	Slot int `json:"slot"`
+	// Broken 非零表示這一筆是受控破損之後重擷的裝備框：那一格記錄先改成可損（`+0x0F`
+	// 的 0x20）、耐久 31，再由原版 `sub_22084(位移, 1)` 扣到壞（清成 16 個零）。
+	Broken  int         `json:"broken,omitempty"`
+	Body    []int       `json:"body"`
+	Rects   [][5]int    `json:"fatigue_rects"`
+	Mask    [][2]int    `json:"mask_reads"`
+	Records []panelLine `json:"equipment"`
+}
+
+type panelLine struct {
+	Offset int    `json:"offset"`
+	Text   string `json:"text"`
+	Y      int    `json:"y"`
+}
+
+// capturePanels 在執行段探測結束、原版停在下一回合規劃段時，對槽 0、1、6 各呼叫一次
+// `sub_2324F`（左下框：疲勞直條與人形）、`sub_27E20`（傷勢遮罩）與 `sub_22EFC`（左上框的
+// 裝備模式）。繪製原語以替身記錄參數，整段前後 Save／Restore，不影響之後的收尾。
+func capturePanels(t *testing.T, o *oracle.Oracle, at func(uint32) oracle.Addr) []panelCapture {
+	t.Helper()
+	saved := o.Save()
+	defer o.Restore(saved)
+	var out []panelCapture
+	pending, listening := -1, false
+	o.OnCall(at(0x1B94F), func(p *oracle.Oracle) {
+		if listening {
+			pending = int(p.Arg(0))
+		}
+	})
+	defer func() { listening = false }()
+	for _, slot := range []int{0, 1, 6} {
+		c := panelCapture{Slot: slot}
+		// `word_37D2A`（DGROUP 0x9E5A）同時是被檢視者與裝備框的行動者。
+		o.WriteU16(o.DS(0x9E5A), uint16(slot))
+		o.WriteU16(o.DS(uint16(0x2DF1E-0x2DED0)), 0)
+		o.Stub(at(0x1B779), func(p *oracle.Oracle) uint32 {
+			c.Rects = append(c.Rects, [5]int{int(p.Arg(0)), int(p.Arg(1)), int(p.Arg(2)), int(p.Arg(3)), int(p.Arg(4))})
+			return 0
+		})
+		o.Stub(at(0x27E20), func(p *oracle.Oracle) uint32 { c.Body = append(c.Body, int(p.Arg(0))); return 0 })
+		o.StubValue(at(0x1BA9D), 0)
+		if _, err := o.Call(at(0x2324F), 0); err != nil {
+			t.Fatalf("sub_2324F 槽 %d：%v", slot, err)
+		}
+		o.Stub(at(0x27E20), nil)
+		if len(c.Body) != 1 {
+			t.Fatalf("槽 %d 人形呼叫 %d 次", slot, len(c.Body))
+		}
+		o.StubValue(at(0x1103F), 0)
+		o.Stub(at(0x1C94E), func(p *oracle.Oracle) uint32 {
+			c.Mask = append(c.Mask, [2]int{int(p.Arg(0)), int(p.Arg(1))})
+			return 0
+		})
+		o.StubValue(at(0x1C9AB), 0)
+		if _, err := o.Call(at(0x27E20), uint16(c.Body[0])); err != nil {
+			t.Fatalf("sub_27E20 槽 %d：%v", slot, err)
+		}
+		// 裝備模式：`word_303FC = 1`、行動者 `word_37D2A` 換成這一名。
+		o.WriteU16(o.DS(uint16(0x303FC-0x2DED0)), 1)
+		pending, listening = -1, true
+		o.StubValue(at(0x1C2DA), 0)
+		o.StubValue(at(0x1C53D), 0)
+		base := 0xBB88 + slot*0x300
+		if slot >= 6 {
+			base = 0xCD92 + (slot-6)*0x80
+		}
+		o.Stub(at(0x1A8FD), func(p *oracle.Oracle) uint32 {
+			if p.Arg(1) == 0x2D50 && pending >= 0 {
+				buf := p.Bytes(p.DS(0x2D50), 24)
+				if n := bytes.IndexByte(buf, 0); n >= 0 {
+					buf = buf[:n]
+				}
+				c.Records = append(c.Records, panelLine{Offset: pending - base, Text: string(buf),
+					Y: int(p.Word(p.DS(uint16(0x2DF16 - 0x2DED0))))})
+				pending = -1
+			}
+			return 0
+		})
+		if _, err := o.Call(at(0x22EFC)); err != nil {
+			t.Fatalf("sub_22EFC 槽 %d：%v", slot, err)
+		}
+		if slot == 0 {
+			// 受控破損：槽 0 的軀幹（+0x110）改成可損、耐久 31，原版自己的耐久常式扣一次。
+			b := uint16(0xBB88 + 0x110)
+			o.WriteU8(o.DS(b+11), 31)
+			o.WriteU8(o.DS(b+15), o.Byte(o.DS(b+15))|0x20)
+			o.WriteU16(o.DS(0xBB78), 0xBB88)
+			if _, err := o.Call(at(0x22084), 0x110, 1); err != nil {
+				t.Fatalf("sub_22084：%v", err)
+			}
+			if o.Byte(o.DS(b)) != 0 {
+				t.Fatal("受控破損之後軀幹那一格沒有清掉")
+			}
+			broken := panelCapture{Slot: slot, Broken: 0x110}
+			c.Records, pending, listening = nil, -1, true
+			if _, err := o.Call(at(0x22EFC)); err != nil {
+				t.Fatalf("破損後 sub_22EFC：%v", err)
+			}
+			broken.Records = c.Records
+			c.Records = nil
+			out = append(out, broken)
+			t.Logf("面板 槽 0 軀幹破損之後：裝備 %v", broken.Records)
+			o.Restore(saved)
+			o.WriteU16(o.DS(0x9E5A), uint16(slot))
+			o.WriteU16(o.DS(uint16(0x303FC-0x2DED0)), 1)
+			c.Records, pending, listening = nil, -1, true
+			if _, err := o.Call(at(0x22EFC)); err != nil {
+				t.Fatalf("sub_22EFC 槽 %d：%v", slot, err)
+			}
+		}
+		for _, a := range []uint32{0x1B779, 0x1BA9D, 0x1103F, 0x1C94E, 0x1C9AB, 0x1C2DA, 0x1C53D, 0x1A8FD} {
+			o.Stub(at(a), nil)
+		}
+		listening = false
+		t.Logf("面板 槽 %d：人形 %#x、直條 %v、遮罩 %d 點、裝備 %v", slot, c.Body[0], c.Rects, len(c.Mask), c.Records)
+		out = append(out, c)
 	}
 	return out
 }

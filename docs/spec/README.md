@@ -50,8 +50,8 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 | SPEC-015 | [結局](015-ending.md) | READY | RE-107 回報計數、保存與戰鬥收尾觸發已接；完整正常玩家結局鏈仍待驗 |
 | SPEC-016 | [開場旅店接線](016-starting-inn.md) | READY | 已核准選隊及跨城建築整合；完整操作對拍仍待完成 |
 | SPEC-017 | [護甲減傷及命中後耐久](017-armour-reduction.md) | READY | 授權兩類護甲減傷、命中後耐久及近戰／射擊回寫；正常 GUI 與完整保存仍待驗收 |
-| SPEC-018 | [戰鬥左下人形與疲勞框](018-battle-body-panel.md) | READY | 人形、傷勢遮罩、疲勞條與被檢視人物；不含尚未完成的指令圖示及左上框 |
-| SPEC-019 | [戰鬥左上肖像與裝備框](019-battle-equipment-panel.md) | READY | 肖像、裝備列與模式切換已接；彈藥標題及數字由 SPEC-022 後續證據補足 |
+| SPEC-018 | [戰鬥左下人形與疲勞框](018-battle-body-panel.md) | CONFORMED | 人形、傷勢遮罩、疲勞條與被檢視人物；不含尚未完成的指令圖示及左上框 |
+| SPEC-019 | [戰鬥左上肖像與裝備框](019-battle-equipment-panel.md) | CONFORMED | 肖像、裝備列與模式切換已接；彈藥標題及數字由 SPEC-022 後續證據補足 |
 | SPEC-020 | [規劃人物的檢視門檻生命週期](020-planning-inspection-roll.md) | READY | 門檻、跳過順序與取消保持已接，原版局部比較及回歸通過；完整戰鬥同狀態仍待驗 |
 | SPEC-021 | [戰鬥左下命令面板](021-battle-command-panel.md) | READY | 授權唯讀命令、招式、部位、防禦及方向顯示；正常操作對拍仍待完成 |
 | SPEC-022 | [隊員射擊彈藥消耗](022-battle-ammunition.md) | READY | 扣除、裝填、耗盡停止與資訊框已接；原版局部比較及 Olear 正常射擊 20→19 已驗，弩與耗盡 GUI 待驗 |

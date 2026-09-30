@@ -93,11 +93,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：玩家看得到的 AI 行為（撤退、反制掃描、側翼、撿武器）在正常 GUI 下與原版一致。
   核實：要人判——靠近與貼身攻擊已由 TestOriginalNormalEnemyPlanning 對拍；其餘四種行為要另找會出現它們的原版戰鬥。
 
-- **a10-battle-info-panel**（#17） — A10：戰鬥左側完整資訊內容的原版同狀態
-  人形／傷勢／疲勞（SPEC-018）、左上裝備／肖像與模式切換（SPEC-019）、左下命令／招式（SPEC-021）、彈藥數字（SPEC-022）都已接線；3,168 組命令參數、144 組遮罩、十二組直條與九組敵人智力檢定由 dosgolem 通過，正常 GUI 已畫出人形、兩張戰場畫格縮放比較零差異。完整裝備與攻擊後傷勢對拍仍待完成。
-  完成條件：正常戰鬥能辨識目前角色、裝備與傷勢，破損後顯示同步；不能以空框截圖通過代替。
-  核實：要人判——面板已接線，缺的是攻擊後的同狀態對拍。那份收據落地時改綁它。
-
 - **roster-full-ui-oracle**（#28） — 補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle
   SPEC-005 已經證據審查升 READY，但 16 槽全滿只有靜態證據，沒有正常 UI oracle。
   完成條件：三種情境各有正常 DOS UI 的畫格與輸入序列收據。
@@ -235,6 +230,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **a03-a04-writeback-and-contract** — A03／A04：戰後傷勢、裝備、戰利品與任務物品回寫；可變狀態保存契約：已完成
 - **a05-a06-a09-belt-ward-nutrition** — A05／A06／A09：腰帶轉接與武器數值交換、14 名角色 Ward 傳遞、修道院 Nutrition：已完成
 - **a07-a08-cjk-and-inn** — A07／A08：中文資料頁、戰鬥中文字型、開場旅店五個圖示與忠實住宿退出：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
+- **a10-battle-info-panel** — A10：戰鬥左側完整資訊內容的原版同狀態：已完成
 - **armour-durability-ai-review** — 護甲減傷／耐久與既知 AI 差異的規格審查，競技場地形另做窄 RE：已完成
 - **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。

@@ -6896,3 +6896,13 @@ frame-270 推翻了 remake 的版面：
   過程：第一版驅動在第 3 回合切換後隨即從「Begin next round?」逃走，切換沒被執行，改成第 4 回合
   才逃。治療前資料頁的 DAMAGE 條沒畫出傷勢，未追查，記在驗證文件的不宣稱。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #17 結案（2026-09-30）：`tools/oracle/book_startup_test.go` 在執行段探測結束時加 `capturePanels`：
+  對槽 0、1、6 呼叫原版 `sub_2324F`、`sub_27E20`、`sub_22EFC`，記人形、疲勞直條、傷勢遮罩讀取序與
+  原版自己解出的裝備名字，另在槽 0 做一次受控破損（`sub_22084`）後重擷裝備框，寫進
+  `battle-rounds.json` 的 `panels`。新旗標 `KOL_BOOK_UNTIL_WOUND=1` 讓探測等到部位真的掉血。
+  新測試 `TestOriginalNormalBattlePanels`（cmd/kol）全部一致；SPEC-018／019 升 CONFORMED。
+  `run_original_parity_tests.sh` 預設回合收據改指 `workplace/battle-panels-20260930/`（回合邊界、
+  擲骰與 0928 那一份逐項相同）。過程：第一趟沒帶 `KOL_BOOK_NEXT_DAY=1` 沒進戰鬥；第二、三趟沒帶
+  `KOL_BOOK_SELECT_DOWN=2`，選到另一組隊伍（Theodoric＋Poontang），與 remake 夾具不是同一場，
+  部位上限因此對不上；補上之後重現 0928 同一場。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

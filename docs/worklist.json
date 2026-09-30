@@ -340,13 +340,20 @@
       "id": "a10-battle-info-panel",
       "layer": "verification",
       "title": "A10：戰鬥左側完整資訊內容的原版同狀態",
-      "body": "人形／傷勢／疲勞（SPEC-018）、左上裝備／肖像與模式切換（SPEC-019）、左下命令／招式（SPEC-021）、彈藥數字（SPEC-022）都已接線；3,168 組命令參數、144 組遮罩、十二組直條與九組敵人智力檢定由 dosgolem 通過，正常 GUI 已畫出人形、兩張戰場畫格縮放比較零差異。完整裝備與攻擊後傷勢對拍仍待完成。",
+      "body": "原版正常戰鬥打到部位掉血後，在下一回合規劃段對兩名隊員與敵人擷取左下框（人形、疲勞直條、傷勢遮罩逐點）與左上框裝備列（原版自己解出的名字），並在同一刻做一次受控破損；remake 以同一刻參戰者記錄建狀態，`TestOriginalNormalBattlePanels` 逐項一致。SPEC-018／019 升 CONFORMED。",
       "acceptance": "正常戰鬥能辨識目前角色、裝備與傷勢，破損後顯示同步；不能以空框截圖通過代替。",
       "verify": {
-        "kind": "manual",
-        "note": "面板已接線，缺的是攻擊後的同狀態對拍。那份收據落地時改綁它。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/battle-panels-20260930.md",
+          "docs/spec/018-battle-body-panel.md",
+          "docs/spec/019-battle-equipment-panel.md"
+        ],
+        "pattern": "battle-panels-20260930",
+        "note": "已完成，當回歸訊號：驗證文件與兩份規格都引用這次對拍。"
       },
-      "issue": 17
+      "issue": 17,
+      "status": "done"
     },
     {
       "id": "armour-durability-ai-review",
