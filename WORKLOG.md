@@ -6943,3 +6943,10 @@ frame-270 推翻了 remake 的版面：
   `building-portrait-click-speaker`（滑鼠點肖像換發言者，不宣稱）。`go test ./cmd/... ./internal/...`
   全過（Xvfb），原版對拍測試全過；29 條玩家路徑除六條補鍵者外狀態一致，六條重生後再驗。
   容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。
+- #29、#30 結案（2026-09-30）：#29 新增 `internal/layers/layers_test.go`（四項：套件登記、依賴方向、
+  Ebitengine 只在 `cmd/kol`／`ui`／`font`／`screen`、規則層不讀 `time.Now` 系列與全域亂數）與
+  SPEC-038；現況核對後全部通過，例外只有 `cmd/kol` 的存檔時間戳記與隨機角色 ID。負對照：在 `town`
+  放依賴 `battle`、Ebitengine、`time.Now` 的暫時檔，在 `battle` 放 `math/rand`，第 2、3、4 項都失敗，
+  檔案刪掉後通過。#30 以既有的 `full-chain`、`quest-chain` 與兩條重載路徑認定滿足，另寫
+  `docs/verification/minimal-player-chain-20260930.md`，範圍不含新遊戲到結局。過程：無失敗。
+  容器：只有自己的 `--rm` 一次性容器；無 root-owned 檔案。

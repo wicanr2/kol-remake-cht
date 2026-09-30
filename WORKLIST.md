@@ -88,11 +88,6 @@ tools/run_python_tool.sh tools/worklist.py verify
   完成條件：三種情境各有正常 DOS UI 的畫格與輸入序列收據。
   核實：要人判——oracle 收據是檔案不是程式。那三份收據落地時改成 absent 綁它們的路徑。
 
-- **minimal-player-chain**（#30） — 選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔
-  full-chain 等五條走到底的收據已經涵蓋這條鏈（docs/verification/player-path/），但這一條當初的用意是「先挑一條窄的走通」，而實際做法是直接走完整條。條目留著沒動。
-  完成條件：確認 player-path 的收據已滿足這一條，然後收掉。
-  核實：要人判——這一條很可能已經被 player-path 收據滿足了，要人看一眼再決定收掉或改寫。
-
 - **attack-row-and-target-cursor**（#33） — 攻擊式那一列（frame-899）與選目標格畫面的對拍
   選目標格的游標目前畫成一圈白框標位置，原版是拿 sub_1C683 重畫該格的精靈，效果還沒解；繁中 renderer 只把這個既有白框等比放大，未額外宣稱原版外觀已對拍。
   完成條件：兩塊都有逐畫面對拍收據。
@@ -160,11 +155,6 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 ### 規格與文件
 
-- **package-boundaries-and-injection**（#29） — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案
-  internal/ 已分成 21 個套件，四處已有 Rand interface（title、world、charcreate、battle），存檔 schema 已到 v2。缺的是把邊界與固定 timestep 寫成文件契約——現在只在程式裡成立，沒有一份說得出「哪一層不准依賴哪一層」。
-  完成條件：有一份文件說明分層契約與固定 timestep，並且違反時測得出來。
-  核實：要人判——程式面已大致成立，缺的是文件與守門。硬綁 timestep 這種猜想中的識別字會永遠為真——那種條目看起來盡責，其實一次都沒真的看過。
-
 - **spec-ready-before-implement**（#38） — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED
   這是流程規則不是一次性工作。目前 docs/spec/ 底下只有 004 與 028 兩份還是 DRAFT，其餘已升 READY 或部分 READY。
   完成條件：沒有未達 READY 的規格被實作進 production path。
@@ -227,6 +217,8 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **weather-animation-and-speed** — 接正式天候動畫（加速選項併入 g07-battle-speed-options）：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
+- **package-boundaries-and-injection** — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案：已完成
+- **minimal-player-chain** — 選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔：已完成
 - **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。
 - **building-followup-dialogue** — 建築進門後的發言者選擇、好惡與教派（訊息 14、15、16）：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成

@@ -537,25 +537,38 @@
       "id": "package-boundaries-and-injection",
       "layer": "spec",
       "title": "定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案",
-      "body": "internal/ 已分成 21 個套件，四處已有 Rand interface（title、world、charcreate、battle），存檔 schema 已到 v2。缺的是把邊界與固定 timestep 寫成文件契約——現在只在程式裡成立，沒有一份說得出「哪一層不准依賴哪一層」。",
+      "body": "internal/ 的依賴方向、Ebitengine 只在畫面層、規則層不讀時鐘與全域亂數，寫成 SPEC-038 並由 internal/layers 的四項測試守門；固定步進（Ebitengine 預設 60 TPS，規則以事件計數）與注入點（四個 Rand 介面、Session.Rand、輸入 token）列在文件裡。存檔 schema 沿用 SPEC-023。",
       "acceptance": "有一份文件說明分層契約與固定 timestep，並且違反時測得出來。",
       "verify": {
-        "kind": "manual",
-        "note": "程式面已大致成立，缺的是文件與守門。硬綁 timestep 這種猜想中的識別字會永遠為真——那種條目看起來盡責，其實一次都沒真的看過。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/spec/038-package-boundaries.md",
+          "internal/layers/layers_test.go"
+        ],
+        "pattern": "allowed",
+        "note": "已完成，當回歸訊號：規格提到 `allowed` 表，守門測試檔存在。"
       },
-      "issue": 29
+      "issue": 29,
+      "status": "done"
     },
     {
       "id": "minimal-player-chain",
       "layer": "verification",
       "title": "選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔",
-      "body": "full-chain 等五條走到底的收據已經涵蓋這條鏈（docs/verification/player-path/），但這一條當初的用意是「先挑一條窄的走通」，而實際做法是直接走完整條。條目留著沒動。",
+      "body": "full-chain、quest-chain 與兩條重載路徑已走完 PNG → typed data → 互動 → UI → 存讀檔（kol-save-v3 逐欄核對）；範圍寬於「最小」，不另建新路徑，也不宣稱新遊戲到結局。",
       "acceptance": "確認 player-path 的收據已滿足這一條，然後收掉。",
       "verify": {
-        "kind": "manual",
-        "note": "這一條很可能已經被 player-path 收據滿足了，要人看一眼再決定收掉或改寫。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/minimal-player-chain-20260930.md",
+          "docs/verification/player-path/full-chain.json",
+          "docs/verification/player-path/full-chain-reload.json"
+        ],
+        "pattern": "full-chain",
+        "note": "已完成，當回歸訊號：驗證文件與兩份路徑計畫都在。"
       },
-      "issue": 30
+      "issue": 30,
+      "status": "done"
     },
     {
       "id": "picture-shield-bitmap-editor",
