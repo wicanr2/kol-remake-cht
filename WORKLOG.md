@@ -10809,3 +10809,17 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 合計60C／5651 bytes、179個函式庫函式／17999 bytes、一個組合語言入口13 bytes及三個連結填補byte。六支EXE都有同位元組重建基準，只有TANDYPIN完整來源；其餘五支尚559函式、176286 CODE bytes與13788初始化DATA bytes未還原，全部明列，不計進度。
 - 封存1315份附件，保存1288份檔案，28份可重建執行檔只保留hash；77436265 bytes保存為8459328 bytes。全唯讀核對六原始EXE、四支新程式完整雜湊、十二份來源及正式Go後，精確清理第四批工作區；匹配C、ASM、LIB、OBJ、DB與原版片段只留本機。
 - 工作表render／verify／scan通過，19未完成／89完成／15人工保持；新增研究證據沿既有逆向與保存入口索引。最後檔案擁有權、工作表、引用及Docker清理在提交前核對；沒有Issue寫入、版號、封包或發行，目標保持進行中。
+
+## 2026-10-08：KOL.EXE完整來源還原
+
+- 前輪為實際進度，HEAD 939119b2與origin/main同步，工作樹乾淨且專案容器清單為空。沿工具鏈、MZ／IDA與文件職責入口，建立已登記的matching-c5-20261008工作區；原始ZIP、前批來源與programs唯讀，固定QuickC／MASM／LINK按相同commit及hash重取。
+- KOL `_main`原始567 bytes以C控制流及五個明列BIOS／I/O ASM區塊重寫。原位body完整匹配，326個C產生bytes與241個硬體ASM bytes分列為混合來源，未增加純C數。第一個for候選少三byte入口跳躍，讀compiler後改while形狀，不用ASM補普通C差異。
+- 補真實LOCAL PUBLIC／EXTERNAL與COMDEF索引順序；局部名稱按模組隔離。解析LIDATA的巢狀重複及literal offset到展開位置的fixup映射，補byte BAKPAT；標準_FILE與五個重複指標均由真正來源物件供應。錯誤import名稱、未支援記錄與候選失敗保留，未放寬普通指令檢查。
+- 已知公共符號及模組CODE基址擴展成48個完整runtime模組，覆蓋75個非main函式及所有IDA共享chunks；沒有修改原始chunk歸屬。兩個小函式false-positive候選在完整binding後拒絕。CODE實際來源9600 bytes，13個LIB宣告零byte及44個段零byte另列，不計指令還原。
+- DATA.C產生122 bytes的可讀字串、旗標、九個register初值及兩個word；其餘初始化DATA由固定LIB initializer、copyright、runtime訊息、stdlib指標與對齊供應，1235 bytes無原始blob。DS+2F8兩個word初值已證實，語意未知；不猜名字或接Go格式。
+- 第一個完整DATA候選把兩個far pointer改為物理等價的DGROUP表示，四個DATA bytes與checksum不同；保留原始0x0283框後native LINK直接生成相同header、checksum及六筆有序重定位。沒有手改指標或MZ header。
+- KOL完整11971 bytes與原版SHA 4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71相同。兩次乾淨MAIN.C／OBJ、DATA.C／OBJ、原位OBJ、native MZ、MAP與完整EXE八項相同；獨立reader解析compiler、真LIB、initializer、byte／word BAKPAT及段零填補，完整11459-byte映像相同且全部76函式的所有chunks有來源。
+- 八項反例實際拒絕C、硬體ASM、LIB、C初始化、LIDATA、byte BAKPAT、checksum及far pointer段框修改。正式342份程式輸入保持；只執行compiler／linker，沒有原版／重製遊戲執行或恢復對拍。
+- 累計60純C／5651 bytes、219個LIB函式／23682 bytes、一個混合主程式567 bytes及TANDYPIN入口13 bytes。KOL與TANDYPIN完整來源，其餘四支仍有518函式、169979 CODE bytes與12553 DATA bytes。完整matching目標未完成；原版唯一文字、部分初值語意與精確歷史工具版本仍未知。
+- 封存1457份附件，保存1438份檔案，20份可重建執行檔只保留hash；91189586 bytes保存為9237881 bytes。全唯讀核對六原始輸入、兩次完整來源、全檔hash及Go後，精確清理第五批工作區。C、ASM、LIB、OBJ、DB與原版片段只留本機，不加入Git。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持；研究與保存索引已更新，完整源碼範圍保持open。檔案擁有權、引用及Docker終檢於提交前核對；沒有Issue寫入、版號、封包或發行。

@@ -15,17 +15,19 @@
 KOLBOOK另有九個C函式594 bytes、36個函式庫函式3705 bytes，完整40192-byte EXE與原版相同。
 KOL、TITLE、MAKEMODE另有101個固定函式庫函式10080 bytes，三支完整EXE均與原版相同。
 TANDYPIN由13-byte組合語言入口、3-byte連結填補與96-byte重複字串完整還原來源，原生重建624 bytes相同。
-合計60個C函式5651 bytes、179個函式庫函式17999 bytes及一個組合語言入口13 bytes。
-本批16項乾淨產物、九項反例及十二份新舊來源核對通過。六支EXE都有同位元組重建基準，五支仍為部分來源。
-目前[來源清冊](docs/verification/local/matching-c4-20261008/source-ledger.json)保存全部799個原始函式，
-尚有559個函式、176286 CODE bytes與13788初始化DATA bytes未還原；完整反編譯尚未完成。
+KOL現已完整來源還原：567-byte C與硬體組合語言主程式、75個LIB函式、全部1235-byte初始化DATA均由明列來源供應。
+沒有使用原始CODE／DATA片段，兩次乾淨重編的11971-byte EXE與原版相同。
+合計60個純C函式5651 bytes、219個函式庫函式23682 bytes、一個混合主程式567 bytes及TANDYPIN組合語言入口13 bytes。
+本批八項乾淨產物、八項反例與兩份完整來源核對通過；KOL與TANDYPIN完整來源，其餘四支仍為部分來源。
+目前[來源清冊](docs/verification/local/matching-c5-20261008/source-ledger.json)保存全部799個原始函式，
+尚有518個函式、169979 CODE bytes與12553初始化DATA bytes未還原；完整反編譯尚未完成。
 現有Go程式、已完成證據及原完成條件保留；原版C重建與Go移植的證明範圍分開處理。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
-| 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：60C／5651 bytes、179個函式庫函式／17999 bytes、TANDYPIN完整組合語言來源13 bytes；六支完整EXE均有同位元組重建基準。本批16項乾淨產物、九項反例及十二份來源核對通過 | 五支部分來源仍有559函式、176286 CODE bytes與13788 DATA bytes；混合來源全檔相同不代表完整還原。特殊符號原始定義與精確工具版本仍未知 |
+| 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：60純C／5651 bytes、219個函式庫函式／23682 bytes、KOL混合主程式567 bytes與TANDYPIN入口13 bytes。KOL全部CODE、DATA與76函式的chunks有來源，八項乾淨產物及八項反例通過；兩支完整來源、四支部分來源 | 尚518函式、169979 CODE與12553 DATA bytes；其他混合基準的全檔相同不代表來源完成。兩個KOL初值語意、原始文字及精確工具版本仍未知 |
 | 正式來源 | 340份Go、342份程式輸入；[任務亂數接續](docs/verification/quest-rng-20261007.md)與[受阻打暈持物](docs/verification/blocked-stun-20261007.md)有限CONFORMED；RE-295出城移動率及RE-290移動呈現保持 | 最新只改main.go既有任務入口；舊H名稱、原始記錄未知欄位及整場末端仍未閉合 |
 | 最近測試 | 十九套件通過；雙語正式及觀察前綴3540狀態／108PNG，各753個原版戰鬥點零差；正常回城保存及新程序重載4236狀態／72PNG，完整v3核對通過 | 重播原前綴，不增加原版覆蓋；回城末端只驗remake |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |

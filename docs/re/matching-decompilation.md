@@ -1,7 +1,7 @@
 # 原版同位元組反編譯
 
-日期：2026-10-08。狀態：六支EXE均有同位元組重建基準；TANDYPIN完整來源，其餘五支部分還原。
-目前60個純C函式5651 bytes、179個函式庫函式17999 bytes與一個組合語言入口13 bytes；剩餘範圍見「持續C來源還原」。
+日期：2026-10-08。狀態：六支EXE均有同位元組重建基準；KOL與TANDYPIN完整來源，其餘四支部分還原。
+目前60個純C函式5651 bytes、219個函式庫函式23682 bytes、KOL混合主程式567 bytes及TANDYPIN入口13 bytes；剩餘範圍見「持續C來源還原」。
 使用者要求暫停目前對拍，改以 matching decompilation 重建原版C程式，
 希望降低重製過程中反覆行為比對的成本。本入口保存查證與首個試點範圍；
 現有Go程式、規格、原版收據與未完成條件保留。
@@ -414,7 +414,7 @@ KOLTOWN既有完整packed hash保持；封存核對器另重算兩支程式各�
 
 第四批接續第三批清冊；現況以後面的「持續C來源還原」及第四批清冊為準。
 
-## 持續C來源還原
+## 第四批六支程式來源基準紀錄
 
 2026-10-08第四批建立六支EXE的完整同位元組重建基準。
 [來源清冊](../verification/local/matching-c4-20261008/source-ledger.json)保存全部799個IDA9.4原始函式及各自位址基準。
@@ -481,6 +481,60 @@ MAKEMODE另外保留原始63-byte `0x1A`填補，KOL與TITLE沒有此填補。
 [保存清冊](../verification/local/matching-c4-20261008/retention.json)為本批入口。
 已完成比較的`workplace/matching-c4-20261008/`封存後清理；下一批沿清冊還原五支剩餘來源。
 
+第五批接續第四批清冊；現況以後面的「持續C來源還原」及第五批清冊為準。
+
+## 持續C來源還原
+
+2026-10-08第五批已完成KOL.EXE的完整來源還原。
+[來源清冊](../verification/local/matching-c5-20261008/source-ledger.json)保持全部六支、799個原始函式的範圍。
+KOL與TANDYPIN為完整來源；KOLTOWN、KOLBOOK、TITLE及MAKEMODE仍部分來源，完整目標尚未完成。
+
+KOL的原始`_main`為IDA線性`0x10010..0x10247`、MZ檔案偏移`0x210..0x447`。
+控制流程以C重寫，直接BIOS／I/O、ROM掃描及畫面初始化以五個明列ASM區塊保留。
+完整567 bytes經QuickC2.01與LINK4.07原位匹配，區分326個C產生bytes與241個硬體ASM bytes，
+整個函式列為混合來源，不加到純C函式數。
+`for (;;)`候選少一個三byte入口跳躍，實際compiler比較後改成原版的`while (1)`形狀；
+沒有用ASM填補普通C控制流差異，也沒有使用`_emit`或原版CODE blob。
+
+| KOL初始化映像來源 | 已驗範圍 |
+|---|---|
+| 混合C／硬體ASM `_main` | 567 bytes，一個完整函式 |
+| 固定LIB CODE | 48個完整模組、75個IDA函式及全部原始chunks；9600個實際來源bytes，另13個宣告零byte |
+| 其他CODE零填補 | 44 bytes，由宣告段與native LINK供應 |
+| 初始化DATA | 全部1235 bytes；122個實際DATA.C compiler bytes，其餘固定LIB initializer與四個對齊零byte |
+| 原版CODE／DATA片段 | 0 bytes |
+
+解析器補LOCAL PUBLIC／EXTERNAL、COMDEF及LIDATA，所有external索引保持實際記錄順序。
+LIDATA的fixup位置依編碼中的literal offset映射到每次展開後的位置；`cmiscdat.asm`的五個指標
+由同一個來源word展開，不能把編碼偏移當展開後記憶體偏移。
+局部名稱按模組隔離，完整模組供應共用tail及非函式內的資料，不改IDA原始chunk歸屬。
+首次小函式候選的`_ldexp`與`B$FIST`在完整binding後不符，保留拒絕，沒有只以遮罩比對計入進度。
+
+主程式DATA由可讀C字串、九個硬體register初值、旗標初值及兩個原始word產生。
+`DS:+0x2F8`的`0x07E4／0x2464`初值已證實，語意仍未知；此限制不改寫為推測名稱。
+固定LIB提供stdio、runtime訊息、copyright與其他initializer，普通DATA bytes另與實際物件核對。
+第一個完整DATA候選把兩筆far pointer正規化成DGROUP表示，物理位置相同但四個bytes與checksum不同；
+改為保留原始`0x0283`段框後，native LINK直接產生相同指標、checksum與六筆有序重定位。
+沒有手改header、checksum或pointer bytes。
+
+兩次乾淨MAIN.C／OBJ、DATA.C／OBJ、原位OBJ、native MZ、MAP及完整EXE共八項逐byte相同。
+完整11971 bytes的SHA-256保持`4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71`。
+獨立reader重算兩份compiler、真實LIB CODE與initializer、byte／word BAKPAT、far pointer及段零填補，
+完整11459-byte初始化映像相同，76個原始函式的全部chunks有來源，沒有重複LEDATA供應。
+八項反例涵蓋C、硬體ASM、LIB、C資料、LIDATA、byte BAKPAT、header checksum與far pointer段框。
+
+累計60個純C函式5651 bytes、219個函式庫函式23682 bytes、一個混合主程式567 bytes及TANDYPIN入口13 bytes。
+KOL新增40個完整LIB函式，原始CODE／DATA未還原範圍均降為0；其餘四支尚有518函式、169979 CODE bytes及12553 DATA bytes。
+原作者的唯一文字、部分初值語意及精確歷史工具版本仍未知；正式342份Go等程式輸入保持，對拍維持暫停。
+
+本機[收據](../verification/local/matching-c5-20261008/receipt.json)、
+[完整差分及反例](../verification/local/matching-c5-20261008/checkpoint-review.json)、
+[MAIN.C與DATA.C完整來源封存](../verification/local/matching-c5-20261008/evidence.tar.xz)、
+[獨立完整來源核對](../verification/local/matching-c5-20261008/proof-full-kol.py)、
+[封存核對器](../verification/local/matching-c5-20261008/verify.py)及
+[保存清冊](../verification/local/matching-c5-20261008/retention.json)為本批入口。
+已完成比較的`workplace/matching-c5-20261008/`封存並清理，後續從本清冊接續其他四支來源。
+
 ## 工具與重生入口
 
 - IDA9.4使用既有`ida-pro-9.4-idapython:py312-v1`，UID1000:1000、正式DB唯讀、一次性副本可寫；
@@ -505,6 +559,7 @@ python3 -B /out/matching-c-20261008/verify.py
 python3 -B /out/matching-c2-20261008/verify.py
 python3 -B /out/matching-c3-20261008/verify.py
 python3 -B /out/matching-c4-20261008/verify.py
+python3 -B /out/matching-c5-20261008/verify.py
 ```
 
 需乾淨重編時按保存清冊抽出源檔、固定候選工具及命令到Docker暫存，來源唯讀、輸出可寫。

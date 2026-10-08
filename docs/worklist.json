@@ -14,11 +14,11 @@
       "id": "matching-koltown-binary",
       "layer": "verification",
       "title": "以匹配反編譯重建原始KOLTOWN.EXE",
-      "body": "持續目標為完成kol matching decompilation，範圍為六支原始EXE。現在六支都有完整同位元組重建基準；TANDYPIN以五條組合語言指令13 bytes、3-byte連結填補與96-byte重複字串完整還原來源，其餘五支仍為部分來源。合計60C／5651 bytes、179個固定函式庫函式／17999 bytes及一個組合語言入口。第四批新增KOL／TITLE／MAKEMODE 101個函式庫函式10080 bytes，全部普通指令、native LINK原位body、初始化映像與有序重定位核對；16項乾淨產物相同、九項反例拒絕、新舊十二份來源獨立重算。特殊__aDBdoswp值0xD6D6明列相容ABS binding，原始定義與語意仍未知；不沿用candidate DATA類別作證據。尚有559個函式、176286 CODE bytes及13788初始化DATA bytes未還原；完整matching仍未完成，原始片段不計來源進度。入口docs/re/matching-decompilation.md，唯一清冊與封存核對器在docs/verification/local/matching-c4-20261008。正式342份程式輸入保持，遊戲對拍暫停。",
+      "body": "持續目標為完成六支原始EXE的kol matching decompilation。六支都有同位元組重建基準；KOL與TANDYPIN完整來源還原，其他四支仍部分來源。KOL的567-byte C與硬體ASM主程式、75個runtime函式及全部1235-byte初始化DATA均由C compiler、固定LIB initializer與宣告零填補供應，原始CODE／DATA blob為0；八項乾淨產物、八項反例及兩份完整來源核對通過。KOL完整11971-byte EXE與原版相同，原始76函式全部chunks有來源。局部符號、COMDEF與LIDATA literal fixup依實際OMF記錄解析，far pointer保留原始段框；兩個資料初值語意仍未知。累計60純C／5651 bytes、219函式庫函式／23682 bytes、KOL混合主程式567 bytes及TANDYPIN入口13 bytes。其餘四支尚518函式、169979 CODE bytes與12553 DATA bytes未還原，完整matching仍未完成。入口docs/re/matching-decompilation.md，來源清冊與核對器在docs/verification/local/matching-c5-20261008。正式342份程式輸入保持，遊戲對拍維持暫停。",
       "acceptance": "固定原版KOLTOWN.EXE SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221由可重現建置重生；header、資料、段配置、relocation及EXEPACK全部逐byte相同。每個code範圍登記C編譯、library、assembly或原始未匹配bytes，不以原版blob包裝或未宣告fixtures稱為C還原。匹配工具、參數、源檔、objects及完整差分均有固定hash。",
       "verify": {
         "kind": "manual",
-        "note": "六支同位元組重建基準中只有TANDYPIN完整來源，其餘五支尚有559函式、176286 CODE bytes及13788 DATA bytes未還原。合計60C、179個函式庫函式與一個組合語言入口均按實際來源分列，來源覆蓋保持open；全檔hash相同不能替代完整來源還原。"
+        "note": "完整源碼範圍仍open：只有KOL與TANDYPIN完整來源，其餘四支尚518函式、169979 CODE bytes及12553 DATA bytes。純C、硬體ASM、固定LIB及生成填補分列；全部EXE hash相同不能代替剩餘來源還原。"
       },
       "status": "open"
     },
