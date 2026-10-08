@@ -12,16 +12,17 @@
 [原始工具鏈與匹配工作](docs/re/matching-decompilation.md)，KOLTOWN的51個純C函式共5057 bytes，
 42個固定函式庫函式4214 bytes，經QuickC2.01／LINK4.07原位匹配；EXEMOD4.02與EXEPACK4.06完成原版packed EXE重建，
 133760 bytes與原版SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221完全相同。
-KOLBOOK另有一個89-byte C函式，完整40192-byte EXE與原版相同。合計52個C函式5146 bytes。
-乾淨重編十三項產物相同；KOLTOWN尚有113305 CODE bytes／245函式，KOLBOOK尚有37351 CODE bytes／190函式。
-目前[來源清冊](docs/verification/local/matching-c2-20261008/source-ledger.json)含原始六支EXE，其餘四支尚未還原，完整反編譯尚未完成。
+KOLBOOK另有九個C函式594 bytes、36個函式庫函式3705 bytes，完整40192-byte EXE與原版相同。
+合計60個C函式5651 bytes與78個函式庫函式7919 bytes。KOLBOOK本批六項乾淨重編產物相同，兩支來源另獨立核對。
+KOLTOWN尚有113305 CODE bytes／245函式，KOLBOOK尚有33141 CODE bytes／146函式。
+目前[來源清冊](docs/verification/local/matching-c3-20261008/source-ledger.json)含原始六支EXE，其餘四支尚未還原，完整反編譯尚未完成。
 現有Go程式、已完成證據及原完成條件保留；原版C重建與Go移植的證明範圍分開處理。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
-| 匹配原版C | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：KOLTOWN 51C／5057 bytes、42函式庫函式／4214 bytes；KOLBOOK 1C／89 bytes。兩支完整EXE與原版相同，十三項乾淨重編產物相同，三份獨立來源核對通過 | KOLTOWN 245函式／113305 CODE bytes、KOLBOOK 190函式／37351 CODE bytes及其他四EXE尚未還原；原版精確工具版本／OBJ邊界未知 |
+| 匹配原版C | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：KOLTOWN 51C／5057 bytes、42函式庫函式／4214 bytes；KOLBOOK 9C／594 bytes、36函式庫函式／3705 bytes。兩支完整EXE與原版相同；本批KOLBOOK六項乾淨重編、六項反例及兩支各兩份來源核對通過 | KOLTOWN 245函式／113305 CODE bytes、KOLBOOK 146函式／33141 CODE bytes及其他四EXE尚未還原；原版精確工具版本／OBJ邊界未知 |
 | 正式來源 | 340份Go、342份程式輸入；[任務亂數接續](docs/verification/quest-rng-20261007.md)與[受阻打暈持物](docs/verification/blocked-stun-20261007.md)有限CONFORMED；RE-295出城移動率及RE-290移動呈現保持 | 最新只改main.go既有任務入口；舊H名稱、原始記錄未知欄位及整場末端仍未閉合 |
 | 最近測試 | 十九套件通過；雙語正式及觀察前綴3540狀態／108PNG，各753個原版戰鬥點零差；正常回城保存及新程序重載4236狀態／72PNG，完整v3核對通過 | 重播原前綴，不增加原版覆蓋；回城末端只驗remake |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
@@ -153,7 +154,7 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 
 遠端Issue最近於前輪2026-10-07以主機gh唯讀核對：private儲存庫，24 OPEN。
 本機18未完成與遠端尚未完全同步，本機計數不代替遠端現況。
-本輪無提交、推送、Issue寫入、版號、封包或發行。
+本輪已依授權提交與推送matching研究紀錄；沒有Issue寫入、版號、封包或發行。
 Docker、擁有權與暫存終檢見本輪收據及 WORKLOG 末次紀錄。
 
 ## 比較與工作區清理

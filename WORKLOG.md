@@ -10783,3 +10783,15 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 本批1048份附件封存為1014份檔案，35份可重建執行檔只保留hash；58514028 bytes保存為19148105 bytes。完全唯讀核對原始六EXE、完整雜湊、三份來源證明與正式Go後，才精確刪除matching-c2-20261008工作區；C、LIB、OBJ、DB與原版片段只留本機壓縮證據。
 - 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1959行自承全部認領。新增入口沿既有逆向索引與保存索引，檔案擁有權1000:1000，已清範圍沒有root-owned檔案或.md目錄；容器終檢與Git提交結果於本輪交接提供。
 - 依使用者「先commit + push，然後繼續」授權提交本批研究紀錄與保存工具；GitHub儲存庫仍為private。沒有Issue寫入、封包、版號或發行，原版衍生來源不進Git。
+
+## 2026-10-08：push後接續KOLBOOK來源還原
+
+- 第二批提交e44cddde78434df2372a16ff5db473fd44b795f6已推送origin/main，工作樹與遠端同步後才接續第三批。完整matching目標保持進行中，沒有恢復遊戲對拍。
+- 沿既有工具鏈及文件職責入口，在已登記的matching-c3-20261008工作區復原第二批封存；原版ZIP、前批來源與programs唯讀。固定QuickC2.01／LINK4.07及small model函式庫按commit、Git blob與SHA重取，沒有新增image。
+- KOLBOOK新增八個C函式505 bytes，現九C／594 bytes。near-call的self-relative FIXUPP保留compiler指令與addend，交由native LINK原位回填；長值與條件分支依原始指令匹配。sub_13E25的far pointer候選24 bytes與原版26 bytes不同，保留負例、沒有用ASM補差。
+- 搜尋SLIBC／SLIBFP／LIBH；本批36個實際供應函式均為固定SLIBC物件，3705 bytes完整匹配。初次LIB解碼遇到未支援LIDATA後改為明確拒絕該物件並保存診斷，不放寬檢查或把部分物件當作已支援。一次交叉讀取未設容器工作目錄造成omf import失敗，修正同一容器命令後重跑，兩項均為工具問題。
+- 完整KOLBOOK 40192 bytes及SHA-256 2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832保持。乾淨C、compiler OBJ、原位OBJ、native MZ、MAP及完整EXE六項相同；兩份Book來源與兩份既有Town來源由獨立reader重算完整初始化映像及有序重定位。
+- 六項反例包括有效OMF checksum下的C指令、函式庫指令、near-call目標修改，以及ASM注入、MZ checksum與尾端填補。三個來源修改確實執行獨立reader並以AssertionError拒絕，不只寫入預期布林值。等待迴圈只驗靜態compiler結果，不宣稱硬體wall-clock一致。
+- 合計60C／5651 bytes與78個函式庫函式／7919 bytes。唯一清冊含338個Town與191個Book原始函式；Town尚245函式／113305 CODE bytes，Book尚146函式／33141 CODE bytes，其餘四EXE未還原。完整源碼目標未完成；原始CODE與DATA不計進度。
+- 封存1125份附件，保存1108份檔案，18份可重建執行檔只保留hash；62672804 bytes保存為7518680 bytes。完全唯讀核對六原始EXE、兩支各兩份來源及正式342份程式輸入後，精確清理第三批工作區；匹配C、LIB、OBJ、DB及原版片段保持本機。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1964行自承全部認領。Git、入口、擁有權及Docker終檢於提交前核對；本批沒有遊戲執行、Issue寫入、版號、封包或發行。

@@ -1,6 +1,6 @@
 # 《武士傳說》逆向知識庫
 
-- [原版同位元組反編譯](matching-decompilation.md)：依使用者指令暫停對拍；KOLTOWN 51C／5057 bytes與42函式庫函式／4214 bytes、KOLBOOK 1C／89 bytes已原位匹配，兩支完整EXE與原版相同；剩餘CODE及其他四EXE仍待來源還原。
+- [原版同位元組反編譯](matching-decompilation.md)：依使用者指令暫停對拍；合計60C／5651 bytes與78個函式庫函式／7919 bytes已原位匹配，KOLTOWN與KOLBOOK完整EXE保持相同；剩餘CODE及其他四EXE仍待來源還原。
 
 - [RE-296：正常紮營的方向鍵與確認](20261006-camping-confirmation.md)：固定真保存、正常出城，查方向鍵及三種確認鍵；原型與正式規則分開。
 
