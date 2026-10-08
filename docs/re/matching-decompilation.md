@@ -1,7 +1,7 @@
 # 原版同位元組反編譯
 
-日期：2026-10-08。狀態：完整packed KOLTOWN.EXE持續逐byte匹配原版。
-目前46個純C函式4309 bytes、八個固定library函式372 bytes；117895個CODE bytes仍未還原。
+日期：2026-10-08。狀態：完整KOLTOWN.EXE與KOLBOOK.EXE逐byte匹配原版，來源仍為部分還原。
+目前合計52個純C函式5146 bytes與42個函式庫函式4214 bytes；剩餘範圍見「持續C來源還原」。
 使用者要求暫停目前對拍，改以 matching decompilation 重建原版C程式，
 希望降低重製過程中反覆行為比對的成本。本入口保存查證與首個試點範圍；
 現有Go程式、規格、原版收據與未完成條件保留。
@@ -260,7 +260,7 @@ LINK4.07及LINK3.65內建`/EXEPACK`的候選均未匹配，保留完整負例；
 `workplace/matching-c-20261008/`，先取代KOLTOWN剩餘函式，再核對原版其他EXE的來源範圍。
 完整packed基準沿用；原始未匹配CODE不計為C、library或重寫asm的還原進度。
 
-## 持續C來源還原
+## 第一批C來源還原紀錄
 
 目前[來源清冊](../verification/local/matching-c-20261008/source-ledger.json)包含固定ZIP內六支EXE，
 以及IDA9.4匯出的全部338個KOLTOWN函式、原始名稱、線性位址、chunks與檔案偏移。
@@ -303,11 +303,65 @@ KOLTOWN以外五支EXE的來源狀態仍為`not-restored`。歷史四函式基�
 正式342份程式輸入保持，遊戲對拍維持暫停。完整matching目標仍進行中，完成條件包含全部來源範圍，
 不能只以目前重建EXE的hash相同結案。
 
+第二批從46C／8library清冊接續；現況以後面的「持續C來源還原」及第二批來源清冊為準。
+
 完整重編時，先依保存清冊解出輸入並按`fetch-tools.py`重取固定工具。
 建立乾淨可寫輸出，複製`rebuild.py`、`dos-run.py`、`split-objects.py`與`pad-record.py`；
 原版專案唯讀掛`/src`，解出的`baseline/`與`tools/`分別唯讀掛`/out/baseline`及`/out/tools`。
 輸出掛`/out`，UID/GID1000:1000、無網路、1GiB、1CPU、96程序及240秒外層逾時，執行
 `python3 -B /out/rebuild.py`。來源與所有掛載目錄先確認存在與擁有權。
+
+## 持續C來源還原
+
+2026-10-08第二批已完成來源與完整檔案核對；[來源清冊](../verification/local/matching-c2-20261008/source-ledger.json)
+保存全部六支EXE。KOLTOWN與KOLBOOK為部分來源還原，其餘四支仍為`not-restored`。
+完整EXE相同的證明包含原始未匹配片段，不能當作完整源碼還原。
+
+| 程式 | 純C | 固定函式庫 | 原始未匹配CODE |
+|---|---|---|---|
+| KOLTOWN | 51函式／5057 bytes | 42函式／4214 bytes | 113305 bytes／245函式未還原 |
+| KOLBOOK | 1函式／89 bytes | 本批未替換 | 37351 bytes／190函式未還原 |
+
+合計52個C函式5146 bytes。KOLTOWN的6736-byte初始化DATA保持；原始CODE與DATA的來源明列，
+不計為C或函式庫還原進度。原始名稱、IDA9.4線性位址、函式邊界與檔案偏移均保留。
+
+本批新增KOLTOWN的`sub_22084`、`sub_2215A`、`sub_236AB`、`sub_14CCF`與`sub_14D3A`。
+後兩者以C的32-bit運算重建三位元組讀寫，實際compiler helper由固定LIBH供應。
+函式完整指令原位相同為已證實；C宣告與型別只證明能產生相同指令，不證明原作者文字唯一。
+本批沒有改動正式Go來源或恢復遊戲對拍。
+
+函式庫來源為同一固定commit的`MLIBC.LIB`、`LIBH.LIB`與`MLIBFP.LIB`。
+候選比對只遮蔽地址欄位，計入進度前仍逐項解出外部符號、段基址與回填值，再經native LINK核對完整函式。
+同一外部符號與同一物件段必須共享相容定位；不能各函式任意指定不同地址。
+LIBH的部分LEDATA會以來源物件中後寫入的`retf 8`覆蓋較早的`retf`；這是來源記錄的順序，
+沒有修改原始普通指令來湊匹配。三個LIB的Git blob、SHA-256與物件hash見
+[來源輸入](../verification/local/matching-c2-20261008/library-inputs.json)及
+[物件清冊](../verification/local/matching-c2-20261008/runtime-library-inventory.json)。
+這組工具與來源相容為已證實，原版精確工具版本及原始符號名稱仍未知。
+
+KOLBOOK使用`/AS`的near C函式`sub_1276F`，IDA線性位址`0x1276F`至`0x127C8`。
+原版資料區的兩個重定位site以比資料段起點晚64 bytes的段框定位。
+保留此段框後，native LINK產生的header、checksum、初始化映像與四筆有序重定位均相同，
+再依原始55-byte `0x1A`尾端填補，完整40192 bytes的SHA-256為
+`2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832`。
+未分段的候選雖有相同物理site，重定位表及checksum不同，保留為負例；沒有手改checksum。
+
+KOLTOWN的2281筆有序重定位與完整初始化映像相同；完整133760-byte packed檔案SHA-256仍為
+`c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。
+兩支程式的乾淨C、compiler OBJ、原位OBJ、native MZ、MAP及KOLTOWN封裝共十三項逐byte相同。
+六項反例涵蓋C、函式庫、最小記憶體、尾端填補、KOLBOOK checksum及C來源。
+
+本機[收據](../verification/local/matching-c2-20261008/receipt.json)、
+[乾淨重建](../verification/local/matching-c2-20261008/checkpoint-review.json)、
+[KOLTOWN獨立來源核對](../verification/local/matching-c2-20261008/trial-51-source-proof.json)、
+[KOLBOOK獨立來源核對](../verification/local/matching-c2-20261008/book-source-proof.json)、
+[純C](../verification/local/matching-c2-20261008/bulk.c)、
+[KOLBOOK純C](../verification/local/matching-c2-20261008/book.c)、
+[封存核對器](../verification/local/matching-c2-20261008/verify.py)及
+[保存清冊](../verification/local/matching-c2-20261008/retention.json)為本批入口。
+核對器從固定ZIP重生衍生MZ，獨立解析compiler／LIB／原位OBJ，重算完整映像及重定位；
+完整DOS重編的成果由收據與十三項雜湊另證，不宣稱封存核對器重新執行了DOS compiler。
+全部匹配C、LIB、OBJ、DB及原始片段只留本機；完整matching目標保持進行中。
 
 ## 工具與重生入口
 
@@ -330,6 +384,7 @@ python3 -B /out/matching-pilot-20261008/verify.py
 python3 -B /out/matching-link-20261008/verify.py
 python3 -B /out/matching-pack-20261008/verify.py
 python3 -B /out/matching-c-20261008/verify.py
+python3 -B /out/matching-c2-20261008/verify.py
 ```
 
 需乾淨重編時按保存清冊抽出源檔、固定候選工具及命令到Docker暫存，來源唯讀、輸出可寫。

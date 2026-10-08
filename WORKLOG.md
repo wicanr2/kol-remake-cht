@@ -10771,3 +10771,15 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 本批835附件收據与全唯讀驗證通過；原版、C、LIB、OBJ、DB、完整ASM／bytes匯出只留本機。完成比較的工作區按既有保存契約封存與清理，goal仍active；最終數據與核對於下文追加。
 - 封存805份檔案、31份可重建EXE只保留hash，37125058bytes保存為16841622bytes。封存後完全唯讀重生原版並獨立解析兩份compiler／LIB／OMF來源，全部已驗來源與完整packed hashes符合，六EXE與284個未完成函式清冊保持；才精確清理本批工作區。來源與文件抽查1000:1000，全專案find無root-owned檔或.md目錄，沒有本批容器殘留。
 - 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1957行自承全部認領，matching入口所有本機證據連結存在；正式342份程式輸入與原交付物保持。完整goal的completion audit不成立，原始CODE與其他EXE尚未還原，保持active並從此46C／8LIB來源繼續。沒有Issue寫入或發行；本機源碼及binary不提交。
+
+## 2026-10-08：第二批來源還原與中斷後提交
+
+- 從HEAD 8b024c5與已完成的46C／8函式庫批次接續。中斷後先查容器及產物，沒有仍在執行的工作，不重啟已完成的compiler；本輪屬進度推進，完整matching目標維持。
+- 沿工具鏈、MZ／IDA及文件職責路由。KOLTOWN新增五個完整C函式，現51C／5057 bytes；三個固定函式庫的候選須共享外部符號及物件段定位，再由native LINK驗完整指令。現42個函式庫函式／4214 bytes，包含實際32-bit helper，原始名稱與IDA位址保持。
+- LIBH後寫入的LEDATA把部分retf覆蓋為retf 8，按實際來源記錄順序處理；地址計算採16-bit段內模數。來源核對不只遮蔽地址，不改普通指令或放寬checksum；相容工具鏈已證實，原版精確歷史版本仍未知。
+- KOLBOOK以IDA9.4重新核對191個函式，首個near C函式sub_1276F的89 bytes完整匹配。原版資料區兩筆重定位使用晚64 bytes的段框；以實際段配置保留後，native LINK的header、checksum、初始化映像與四筆重定位均相同。未分段候選保留為負例，沒有手補checksum。
+- 合計52C／5146 bytes。兩支完整EXE逐byte符合固定ZIP：KOLTOWN 133760 bytes、KOLBOOK 40192 bytes。十三項乾淨C、OBJ、native、MAP及封裝產物相同；三份獨立compiler／LIB／原位OMF來源核對通過，六項反例均拒絕。正式342份程式輸入保持，沒有遊戲執行或恢復對拍。
+- 唯一清冊保持完整目標未完成：KOLTOWN尚有245函式／113305 CODE bytes，KOLBOOK尚有190函式／37351 CODE bytes，其餘四支EXE尚未還原。原始CODE及DATA不計來源進度。
+- 本批1048份附件封存為1014份檔案，35份可重建執行檔只保留hash；58514028 bytes保存為19148105 bytes。完全唯讀核對原始六EXE、完整雜湊、三份來源證明與正式Go後，才精確刪除matching-c2-20261008工作區；C、LIB、OBJ、DB與原版片段只留本機壓縮證據。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1959行自承全部認領。新增入口沿既有逆向索引與保存索引，檔案擁有權1000:1000，已清範圍沒有root-owned檔案或.md目錄；容器終檢與Git提交結果於本輪交接提供。
+- 依使用者「先commit + push，然後繼續」授權提交本批研究紀錄與保存工具；GitHub儲存庫仍為private。沒有Issue寫入、封包、版號或發行，原版衍生來源不進Git。
