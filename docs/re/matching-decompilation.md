@@ -1,7 +1,7 @@
 # 原版同位元組反編譯
 
-日期：2026-10-08。狀態：完整KOLTOWN.EXE與KOLBOOK.EXE逐byte匹配原版，來源仍為部分還原。
-目前合計60個純C函式5651 bytes與78個函式庫函式7919 bytes；剩餘範圍見「持續C來源還原」。
+日期：2026-10-08。狀態：六支EXE均有同位元組重建基準；TANDYPIN完整來源，其餘五支部分還原。
+目前60個純C函式5651 bytes、179個函式庫函式17999 bytes與一個組合語言入口13 bytes；剩餘範圍見「持續C來源還原」。
 使用者要求暫停目前對拍，改以 matching decompilation 重建原版C程式，
 希望降低重製過程中反覆行為比對的成本。本入口保存查證與首個試點範圍；
 現有Go程式、規格、原版收據與未完成條件保留。
@@ -365,7 +365,7 @@ KOLTOWN的2281筆有序重定位與完整初始化映像相同；完整133760-by
 
 第三批從第二批壓縮證據接續，現況以後面的「持續C來源還原」及第三批清冊為準。
 
-## 持續C來源還原
+## 第三批KOLBOOK來源還原紀錄
 
 2026-10-08第三批擴大KOLBOOK，原始191個函式均已列入
 [目前來源清冊](../verification/local/matching-c3-20261008/source-ledger.json)。
@@ -412,6 +412,75 @@ KOLTOWN既有完整packed hash保持；封存核對器另重算兩支程式各�
 [保存清冊](../verification/local/matching-c3-20261008/retention.json)為本批入口。
 完成比較後封存並清理`workplace/matching-c3-20261008/`；下一批從本清冊接續，完整matching目標仍未完成。
 
+第四批接續第三批清冊；現況以後面的「持續C來源還原」及第四批清冊為準。
+
+## 持續C來源還原
+
+2026-10-08第四批建立六支EXE的完整同位元組重建基準。
+[來源清冊](../verification/local/matching-c4-20261008/source-ledger.json)保存全部799個IDA9.4原始函式及各自位址基準。
+除TANDYPIN以外，五支程式仍使用原始未匹配CODE與DATA，完整matching目標尚未完成。
+
+| 程式 | 純C | 固定函式庫 | 未還原CODE／函式 |
+|---|---|---|---|
+| KOLTOWN | 51函式／5057 bytes | 42函式／4214 bytes | 113305 bytes／245函式 |
+| KOLBOOK | 9函式／594 bytes | 36函式／3705 bytes | 33141 bytes／146函式 |
+| KOL | 本批未替換 | 35函式／3917 bytes | 6307 bytes／41函式 |
+| TITLE | 本批未替換 | 36函式／3704 bytes | 13176 bytes／79函式 |
+| MAKEMODE | 本批未替換 | 30函式／2459 bytes | 10357 bytes／48函式 |
+| TANDYPIN | 不計為C | 組合語言入口13 bytes，連結填補3 bytes | 原始CODE片段0／未還原函式0 |
+
+合計60C／5651 bytes、179個函式庫函式／17999 bytes及一個組合語言入口13 bytes。
+尚有559個函式、176286 CODE bytes與13788初始化DATA bytes未還原，均不計為來源進度。
+清冊的`source_root`明列前批來源所在目錄，歷史清冊、原始名稱、chunks及檔案偏移保留。
+
+### TANDYPIN完整來源
+
+IDA9.4原始`start`在載入線性位址`0x10000..0x1000D`，原始MZ檔案偏移`0x200..0x20D`。
+五條指令由MASM5.10組譯，段selector由LINK4.07回填；後面三個零byte由段對齊產生。
+96-byte資料由`16 dup ('stack ')`生成，沒有貼回原始CODE或DATA映像。
+原始MZ的一筆重定位、header、checksum及全部624 bytes均相同，SHA-256保持
+`036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3`。
+
+獨立reader解析真正MASM OBJ的CODE、巢狀LIDATA及segment fixup，重算完整112-byte初始化映像；
+兩次乾淨ASM、OBJ、完整EXE及MAP共四項相同。
+這支程式的完整來源重建已證實，原作者的唯一文字、原始段名及歷史工具版本仍未知。
+組合語言`TANDY.ASM`保存於[完整來源封存](../verification/local/matching-c4-20261008/evidence.tar.xz)，
+證據為[來源核對](../verification/local/matching-c4-20261008/tandy-repeat-source-proof.json)。
+不把這13 bytes計為C，也不以它取代其餘遊戲源碼的還原。
+
+### 三支程式的函式庫來源
+
+KOL、TITLE、MAKEMODE分別匯出76、115、78個原始函式。
+新增101個實際SLIBC供應函式10080 bytes，全部普通指令保持來源LIB，回填值另依共享binding核對。
+native LINK的三支完整EXE、header、checksum、初始化映像與6／4／4筆有序重定位均相同；
+MAKEMODE另外保留原始63-byte `0x1A`填補，KOL與TITLE沒有此填補。
+各程式重新從真實LIB重生原位OBJ、MZ、MAP及完整EXE，共十二項相同。
+
+### 特殊符號binding勘誤
+
+`__aDBdoswp`的所有來源引用一致要求16-bit值`0xD6D6`。
+先前candidate resolver把無已知PUBLIC類別的引用預設成DATA，所算位置在KOL與TITLE超出靜態段範圍；
+這個預設不能證明原始DATA地址。先前普通指令及全檔相同的證據仍成立，該語意推論撤回。
+目前在相容建置中明列ABS binding，保留原始符號、fixup、先前定位與勘誤索引。
+完整body、native MAP的`0000:D6D6 Abs`與原版全檔相同為已證實；原版符號定義與用途仍未知。
+不把相容ABS配置提升成原版歷史型別。
+
+不供應此符號的native LINK反例會報L2029，仍可能留下EXE；驗證器明確拒絕有連結錯誤的產物。
+另有初次EXTDEF索引遺漏的失敗，屬匯出工具問題，完整來源索引修正後另建乾淨候選。
+沒有改普通指令、任意放寬段界線或刪除未解析引用。
+
+本批十六項乾淨產物及九項反例均通過，包含三支LIB指令、ABS值、TANDYPIN指令及LIDATA修改，
+另拒絕錯誤checksum、尾端填補與「連結出錯但EXE存在」。
+完全唯讀封存核對器重算新舊共十二份來源證明，正式342份程式輸入保持；沒有遊戲執行或恢復對拍。
+
+本機[收據](../verification/local/matching-c4-20261008/receipt.json)、
+[乾淨重生與反例](../verification/local/matching-c4-20261008/checkpoint-review.json)、
+[來源核對器](../verification/local/matching-c4-20261008/proof-program.py)、
+[TANDYPIN核對器](../verification/local/matching-c4-20261008/proof-tandy.py)、
+[封存核對器](../verification/local/matching-c4-20261008/verify.py)及
+[保存清冊](../verification/local/matching-c4-20261008/retention.json)為本批入口。
+已完成比較的`workplace/matching-c4-20261008/`封存後清理；下一批沿清冊還原五支剩餘來源。
+
 ## 工具與重生入口
 
 - IDA9.4使用既有`ida-pro-9.4-idapython:py312-v1`，UID1000:1000、正式DB唯讀、一次性副本可寫；
@@ -435,6 +504,7 @@ python3 -B /out/matching-pack-20261008/verify.py
 python3 -B /out/matching-c-20261008/verify.py
 python3 -B /out/matching-c2-20261008/verify.py
 python3 -B /out/matching-c3-20261008/verify.py
+python3 -B /out/matching-c4-20261008/verify.py
 ```
 
 需乾淨重編時按保存清冊抽出源檔、固定候選工具及命令到Docker暫存，來源唯讀、輸出可寫。

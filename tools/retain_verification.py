@@ -24,6 +24,7 @@ NAMES = (
     'matching-c-20261008',
     'matching-c2-20261008',
     'matching-c3-20261008',
+    'matching-c4-20261008',
 )
 EXECUTABLE_MAGIC = (b'\x7fELF', b'MZ', bytes.fromhex('cafebabe'),
                     bytes.fromhex('cffaedfe'), bytes.fromhex('feedfacf'))

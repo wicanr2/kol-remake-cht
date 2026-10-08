@@ -10795,3 +10795,17 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 合計60C／5651 bytes與78個函式庫函式／7919 bytes。唯一清冊含338個Town與191個Book原始函式；Town尚245函式／113305 CODE bytes，Book尚146函式／33141 CODE bytes，其餘四EXE未還原。完整源碼目標未完成；原始CODE與DATA不計進度。
 - 封存1125份附件，保存1108份檔案，18份可重建執行檔只保留hash；62672804 bytes保存為7518680 bytes。完全唯讀核對六原始EXE、兩支各兩份來源及正式342份程式輸入後，精確清理第三批工作區；匹配C、LIB、OBJ、DB及原版片段保持本機。
 - 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1964行自承全部認領。Git、入口、擁有權及Docker終檢於提交前核對；本批沒有遊戲執行、Issue寫入、版號、封包或發行。
+
+## 2026-10-08：四支新程式的來源基準與TANDYPIN完整還原
+
+- 前輪屬實際進度：新增八個Book C函式與36個函式庫函式，HEAD 6208cd95已與origin/main同步。本輪開工重查工作樹乾淨、專案容器清單為空；完整matching目標保持，對拍維持暫停。
+- 知識路由命中工具鏈、MZ／IDA及文件職責，重新核對IDA技能的權威專案入口。安裝技能的外部符號連結在容器內無法解析，改直接唯讀掛檔。沿已驗IDA9.4 image4ac62de與matching image5992e601，沒有另建image；全部工作UID/GID1000:1000，固定ZIP與前批來源唯讀。
+- IDA9.4一次性DB匯出KOL76、TITLE115、MAKEMODE78與TANDYPIN1個原始函式，schema、輸入SHA、段界及載入／原始bytes分開核對。全清冊現799函式，沒有推測性改名或修改正式DB。
+- TANDYPIN五條指令13 bytes，由MASM5.10／LINK4.07加三個段對齊零byte與96-byte重複字串生成624-byte原版檔案。獨立reader解析實際CODE、巢狀LIDATA及selector fixup，完整112-byte初始化映像與重定位相同，原始CODE／DATA片段為0；兩次ASM、OBJ、EXE、MAP四項相同。計為完整組合語言來源，不計為C，原作者文字及歷史工具版本仍未知。
+- KOL／TITLE／MAKEMODE新增35／36／30個實際SLIBC供應函式，共101個／10080 bytes。共享符號與模組段約束、普通指令、native完整body及6／4／4筆有序重定位均核對；三支完整EXE符合原版。只有MAKEMODE有原始63-byte外層填補；三支OBJ、native MZ、MAP、完整EXE十二項乾淨相同。
+- 兩支程式在同一binding邊界失敗後重查runtime路由：未知PUBLIC類別的__aDBdoswp被candidate預設成DATA，不能當原版DATA地址證據。所有來源使用一致的16-bit值0xD6D6，以明列ABS binding通過native MAP與完整原版差分；原始定義與語意未知，先前DATA推論撤回，原始fixup與先前定位保留。沒有放寬靜態段範圍或修改普通指令。
+- 不供應特殊符號的native LINK報L2029但留下EXE，驗證器新增連結錯誤拒絕。初次EXTDEF索引遺漏造成L1101，修正後另建候選；子目錄的omf module搜尋與舊profile缺少選用ABS欄位也修正。以上為工具問題，失敗輸出保存；不宣稱linker自動提供此符號。
+- 本批16項乾淨產物與九項反例通過：三個LIB指令、ABS值、組合語言指令、LIDATA、checksum、填補及「有EXE的連結錯誤」。新舊共十二份來源由獨立reader重新解析，正式342份程式輸入保持；沒有執行遊戲。
+- 合計60C／5651 bytes、179個函式庫函式／17999 bytes、一個組合語言入口13 bytes及三個連結填補byte。六支EXE都有同位元組重建基準，只有TANDYPIN完整來源；其餘五支尚559函式、176286 CODE bytes與13788初始化DATA bytes未還原，全部明列，不計進度。
+- 封存1315份附件，保存1288份檔案，28份可重建執行檔只保留hash；77436265 bytes保存為8459328 bytes。全唯讀核對六原始EXE、四支新程式完整雜湊、十二份來源及正式Go後，精確清理第四批工作區；匹配C、ASM、LIB、OBJ、DB與原版片段只留本機。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持；新增研究證據沿既有逆向與保存入口索引。最後檔案擁有權、工作表、引用及Docker清理在提交前核對；沒有Issue寫入、版號、封包或發行，目標保持進行中。

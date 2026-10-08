@@ -14,11 +14,11 @@
       "id": "matching-koltown-binary",
       "layer": "verification",
       "title": "以匹配反編譯重建原始KOLTOWN.EXE",
-      "body": "持續目標為完成kol matching decompilation，範圍按六支原始EXE清冊保存。KOLTOWN目前51個純C函式5057 bytes、42個固定函式庫函式4214 bytes；KOLBOOK九個C函式594 bytes、36個函式庫函式3705 bytes。合計60C／5651 bytes與78個函式庫函式／7919 bytes。普通指令與真實compiler／LIB來源獨立核對，native LINK回填後完整初始化映像與有序重定位相同；兩支完整EXE保持與原版相同。KOLBOOK本批六項乾淨重編產物相同、六項反例拒絕，KOLTOWN既有來源另獨立重算。沒有ASM或original CODE blob塞入C。KOLTOWN尚有113305 CODE bytes／245函式，KOLBOOK尚有33141 CODE bytes／146函式，其餘四EXE尚未還原；完整matching仍未完成。入口docs/re/matching-decompilation.md，來源清冊與封存核對器在docs/verification/local/matching-c3-20261008。正式342份程式輸入保持，遊戲對拍暫停。",
+      "body": "持續目標為完成kol matching decompilation，範圍為六支原始EXE。現在六支都有完整同位元組重建基準；TANDYPIN以五條組合語言指令13 bytes、3-byte連結填補與96-byte重複字串完整還原來源，其餘五支仍為部分來源。合計60C／5651 bytes、179個固定函式庫函式／17999 bytes及一個組合語言入口。第四批新增KOL／TITLE／MAKEMODE 101個函式庫函式10080 bytes，全部普通指令、native LINK原位body、初始化映像與有序重定位核對；16項乾淨產物相同、九項反例拒絕、新舊十二份來源獨立重算。特殊__aDBdoswp值0xD6D6明列相容ABS binding，原始定義與語意仍未知；不沿用candidate DATA類別作證據。尚有559個函式、176286 CODE bytes及13788初始化DATA bytes未還原；完整matching仍未完成，原始片段不計來源進度。入口docs/re/matching-decompilation.md，唯一清冊與封存核對器在docs/verification/local/matching-c4-20261008。正式342份程式輸入保持，遊戲對拍暫停。",
       "acceptance": "固定原版KOLTOWN.EXE SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221由可重現建置重生；header、資料、段配置、relocation及EXEPACK全部逐byte相同。每個code範圍登記C編譯、library、assembly或原始未匹配bytes，不以原版blob包裝或未宣告fixtures稱為C還原。匹配工具、參數、源檔、objects及完整差分均有固定hash。",
       "verify": {
         "kind": "manual",
-        "note": "合計60個C／5651 bytes與78個函式庫函式／7919 bytes已原位匹配；KOLTOWN 245函式／113305 CODE bytes、KOLBOOK 146函式／33141 CODE bytes及其他四EXE未還原。來源覆蓋保持open，原始名稱與位址、真實函式庫及剩餘定位仍需審查；全檔hash相同不能替代完整來源還原。"
+        "note": "六支同位元組重建基準中只有TANDYPIN完整來源，其餘五支尚有559函式、176286 CODE bytes及13788 DATA bytes未還原。合計60C、179個函式庫函式與一個組合語言入口均按實際來源分列，來源覆蓋保持open；全檔hash相同不能替代完整來源還原。"
       },
       "status": "open"
     },

@@ -18,7 +18,8 @@
 | 完整原版EXEPACK重建基準 | [封裝與來源覆蓋](../re/matching-decompilation.md#完整packed-exe的增量重建基準) | [保存清冊](local/matching-pack-20261008/retention.json) |
 | 第一批46個C與八個library來源替換 | [第一批紀錄](../re/matching-decompilation.md#第一批c來源還原紀錄) | [保存清冊](local/matching-c-20261008/retention.json) |
 | 第二批52個C與42個函式庫函式來源替換 | [第二批紀錄](../re/matching-decompilation.md#第二批c與函式庫還原紀錄) | [保存清冊](local/matching-c2-20261008/retention.json) |
-| 第三批KOLBOOK九個C與36個函式庫函式 | [目前來源進度](../re/matching-decompilation.md#持續c來源還原) | [保存清冊](local/matching-c3-20261008/retention.json) |
+| 第三批KOLBOOK九個C與36個函式庫函式 | [第三批紀錄](../re/matching-decompilation.md#第三批kolbook來源還原紀錄) | [保存清冊](local/matching-c3-20261008/retention.json) |
+| 第四批TANDYPIN完整來源及三支函式庫替換 | [目前來源進度](../re/matching-decompilation.md#持續c來源還原) | [保存清冊](local/matching-c4-20261008/retention.json) |
 
 各目錄的 `evidence.tar.xz` 保留完整狀態紀錄、圖片、保存、腳本、輸入清冊與原收據。
 執行檔屬可重建產物，移除位元組並保留原 SHA-256。原收據不改寫，內部路徑仍指向
@@ -40,7 +41,7 @@ python3 -B /src/tools/retain_verification.py verify \
   move-message-visibility-20261006 blocked-stun-formal-20261007 \
   finish-platform-20261007 quest-rng-formal-20261007 platform-quest-rng-20261007 \
   matching-pilot-20261008 matching-link-20261008 matching-pack-20261008 matching-c-20261008 \
-  matching-c2-20261008 matching-c3-20261008
+  matching-c2-20261008 matching-c3-20261008 matching-c4-20261008
 ```
 
 需重查大檔時，工具的 `extract` 可解到容器的暫存目錄。只抽出原證據，不產生新收據。
@@ -95,3 +96,8 @@ KOLBOOK九C／594 bytes與36個函式庫函式／3705 bytes、六項乾淨重編
 兩支程式各兩份來源核對經全唯讀封存重算後，才清理`workplace/matching-c3-20261008/`。
 合計60C／5651 bytes與78個函式庫函式／7919 bytes；KOLBOOK未還原降為146函式／33141 CODE bytes。
 KOLTOWN與其餘四支EXE的來源限制保持，完整matching目標仍未完成。
+
+第四批保存1288份檔案，28份可重建執行檔只保留hash；77436265 bytes保存為8459328 bytes。
+TANDYPIN完整來源與KOL／TITLE／MAKEMODE新增101個函式庫函式，16項乾淨產物及九項反例通過。
+原始六EXE、四支新程式全檔雜湊、新舊十二份來源證明與342份正式輸入經全唯讀封存核對後，
+才清理`workplace/matching-c4-20261008/`。清冊明列五支部分來源、559函式及176286 CODE／13788 DATA bytes未還原。
