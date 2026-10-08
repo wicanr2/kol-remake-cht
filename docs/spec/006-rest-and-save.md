@@ -94,7 +94,7 @@ REST 是 remake 唯一的存檔觸發點，與原版相同。存檔是原子操�
 | `schema` | 字串 | 必須以 `kol-save-v` 開頭；版本不符即失敗，不做寬鬆讀取。 |
 | `origin.kind` | `remake` 或 `imported` | 匯入的存檔另記 `source_sha256` 與 `tool`。 |
 | `settings` | 物件 | 只放 remake 真的會遵守的開關；未知鍵原樣保留，不靜默丟掉。 |
-| `world` | 物件 | 野外座標與次格座標（RE-068／069）。世界時間還沒有規格，格式裡先不放。 |
+| `world` | 物件 | 野外座標與次格座標（RE-068／069）。本表的 v1 格式不保存世界時間；正式 v3 以 `clock` 保存，見 [SPEC-023](023-complete-save.md)。 |
 | `location.kind` | `town` 或 `world` | `town` 時 `town`／`entry_point`／`x`／`y` 對應角色記錄 0x97／0x13／0x99／0x9C。 |
 | `party[].gold` | 整數 0…16777215 | 角色記錄 0x2A–0x2C 的 24-bit 大端欄位。 |
 | `party[].wounds` | 整數 | 角色記錄 0x1B。 |
@@ -184,3 +184,9 @@ REST 是 remake 唯一的存檔觸發點，與原版相同。存檔是原子操�
 |---|---|---|
 | 住宿與存檔 | [PDF 13（印刷頁 20–21）](../manual/chapters/04-into-the-wilderness.md)、[PDF 14（印刷頁 22–23）](../manual/chapters/04-into-the-wilderness.md)、[PDF 26（印刷頁 46–47）](../manual/chapters/06-back-in-town.md) | 一夜好眠、旅店保存隊伍；再享一夜好眠 |
 | 治療 | [PDF 26（印刷頁 46–47）](../manual/chapters/06-back-in-town.md) | 修道院治療傷勢要付費 |
+
+## RE-213 正常修改法術後保存與重載的有限驗證
+
+RE-213從正常啟動、招募、購買與修改法術，經自然遇敵逃離回旅館，取得原版CHARDATA實際寫檔。原版574狀態、4次正常逃離；從實際檔正常重載及招募7狀態。Olear法術N／Strength、護符與骰式、金冠601及冒險點數2486和雙語重製保存相符。營養欄原版10／重製8；原版三次CAMPING、重製兩次，每次實際+2。差異保留，不宣稱旅程同狀態。雙語正式／觀察各380保存與16重載狀態，1584PNG及可比trace相同；兩人34物品槽與14持久欄位重載相符。正常旅店招呼後seed1，世界、戰鬥與住宿不重設；原版4次遇敵，重製一次，不宣稱整段骰序、整場或整頁parity。正式325份Go／56bfb4c8不變，保存格式v3保持。原版payload只留本機。22未完成／84完成保持。繁中法術注解A／B、怪物四套資料格式及既有未決事項維持原閘門。入口docs/re/20261003-spell-edit-inn-save.md。
+
+整體狀態保持READY。本切片不替代整場戰鬥、全部分支、平台或發行驗收。

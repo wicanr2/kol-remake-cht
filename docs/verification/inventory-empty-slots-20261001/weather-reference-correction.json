@@ -1,0 +1,236 @@
+{
+  "schema": "kol-weather-reference-correction-v1",
+  "images": [
+    {
+      "old": "docs/verification/remake-parity/shots/world/leave-brettle.png",
+      "old_sha256": "1da27da81685266d4716860b77bca6d1eac305e38d94a56b789050c540385102",
+      "new": "docs/verification/inventory-empty-slots-20261001/weather-leave.png",
+      "new_sha256": "4ed3ea25007a96f33cfacb2ed6b4a947bc978a1fcbef338aead8797ae2e7e565",
+      "source_capture": "workplace/inventory-empty-slots-20261001/all-before/town-leave/step-012.png",
+      "step": 12,
+      "weather_pixel_differences": 57,
+      "outside_weather_differences": 0,
+      "current_weather_candidates": [
+        {
+          "group": 0,
+          "phase": 1
+        }
+      ]
+    },
+    {
+      "old": "docs/verification/remake-parity/shots/world-clock/step14.png",
+      "old_sha256": "1da27da81685266d4716860b77bca6d1eac305e38d94a56b789050c540385102",
+      "new": "docs/verification/inventory-empty-slots-20261001/weather-clock-14.png",
+      "new_sha256": "4ed3ea25007a96f33cfacb2ed6b4a947bc978a1fcbef338aead8797ae2e7e565",
+      "source_capture": "workplace/inventory-empty-slots-20261001/all-before/world-clock/step-026.png",
+      "step": 26,
+      "weather_pixel_differences": 57,
+      "outside_weather_differences": 0,
+      "current_weather_candidates": [
+        {
+          "group": 0,
+          "phase": 1
+        }
+      ]
+    },
+    {
+      "old": "docs/verification/remake-parity/shots/world-clock/step15.png",
+      "old_sha256": "f4033abc03fe170a5a7fb9d521502a748f25028f7434a75fbe562eb8c69abba6",
+      "new": "docs/verification/inventory-empty-slots-20261001/weather-clock-15.png",
+      "new_sha256": "a10e0f4c8e38c97d90cf3861db98c5227d4f0b003dc88053a1829b1d8d7e69c0",
+      "source_capture": "workplace/inventory-empty-slots-20261001/all-before/world-clock/step-027.png",
+      "step": 27,
+      "weather_pixel_differences": 182,
+      "outside_weather_differences": 0,
+      "current_weather_candidates": [
+        {
+          "group": 2,
+          "phase": 1
+        }
+      ]
+    },
+    {
+      "old": "docs/verification/remake-parity/shots/world-quest/intro.png",
+      "old_sha256": "0e6687312ecf59814c36fbd00f82ce8d497cdb2d9c0b6d664296c233a5298e76",
+      "new": "docs/verification/inventory-empty-slots-20261001/weather-quest-intro.png",
+      "new_sha256": "cf382e95191b628eeb4ba1487b7b59fb038e33743c312e265fa27bb45e8147c8",
+      "source_capture": "workplace/inventory-empty-slots-20261001/all-before/world-quest/step-089.png",
+      "step": 89,
+      "weather_pixel_differences": 135,
+      "outside_weather_differences": 0,
+      "current_weather_candidates": [
+        {
+          "group": 1,
+          "phase": 1
+        }
+      ]
+    },
+    {
+      "old": "docs/verification/remake-parity/shots/world/road-stand.png",
+      "old_sha256": "7ca91372a498301b3ab73abc72b6f2c918d92bea7243f68c822f607fa1cc7b36",
+      "new": "docs/verification/inventory-empty-slots-20261001/weather-road-stand.png",
+      "new_sha256": "23bbda2c0be0642e73b380368be346bdfa6cdbfebc0ef245715dd10f0a91c362",
+      "source_capture": "workplace/inventory-empty-slots-20261001/all-before/world-road/step-024.png",
+      "step": 24,
+      "weather_pixel_differences": 57,
+      "outside_weather_differences": 0,
+      "current_weather_candidates": [
+        {
+          "group": 0,
+          "phase": 1
+        }
+      ]
+    },
+    {
+      "old": "docs/verification/remake-parity/shots/world/road-follow7.png",
+      "old_sha256": "a16a509ae9816bb60d8301bd591e121edc4b5fd08937770be1ade3f355f76d82",
+      "new": "docs/verification/inventory-empty-slots-20261001/weather-road-follow7.png",
+      "new_sha256": "03755cd36f714580fbea4f22375a5a71391059644da125a1f1afab174d169b98",
+      "source_capture": "workplace/inventory-empty-slots-20261001/all-before/world-road/step-031.png",
+      "step": 31,
+      "weather_pixel_differences": 57,
+      "outside_weather_differences": 0,
+      "current_weather_candidates": [
+        {
+          "group": 0,
+          "phase": 1
+        }
+      ]
+    },
+    {
+      "old": "docs/verification/remake-parity/shots/world/road-signpost.png",
+      "old_sha256": "b017aac1941c23b84dce463378b9ee021d29164f1fde957c7b268d6af9916894",
+      "new": "docs/verification/inventory-empty-slots-20261001/weather-road-signpost.png",
+      "new_sha256": "da5ae9a17e15cc1320b2bbc1c4b659c715b2bb5dc1017a4edc23e539c7e2f20c",
+      "source_capture": "workplace/inventory-empty-slots-20261001/all-before/world-road/step-033.png",
+      "step": 33,
+      "weather_pixel_differences": 57,
+      "outside_weather_differences": 0,
+      "current_weather_candidates": [
+        {
+          "group": 0,
+          "phase": 1
+        }
+      ]
+    }
+  ],
+  "original_region_rechecks": [
+    {
+      "name": "world",
+      "pairs": 4,
+      "failures": 0,
+      "plan": "docs/verification/inventory-empty-slots-20261001/region-plan-world.json",
+      "plan_sha256": "48b5ba6aa8868ce9d846fa4a2a2c9c7da575c4b0deaf57722045789f44eca03c",
+      "receipt": "docs/verification/inventory-empty-slots-20261001/region-receipt-world.json",
+      "receipt_sha256": "e647e2d819f0e2d3d025534f096e67db60eb4a7ff8e077faaa51a744a3c6182b",
+      "original_images_sha256": {
+        "docs/verification/character-ui/town-leave-run1/frames/frame-131.png": "10f035fdaceac15501c0686bc71c8ce09e17c0cdc9979d2934255d8dc0e1c360"
+      }
+    },
+    {
+      "name": "world-road",
+      "pairs": 10,
+      "failures": 0,
+      "plan": "docs/verification/inventory-empty-slots-20261001/region-plan-world-road.json",
+      "plan_sha256": "9dbc4916787c7fdf4ebfc39bfd8f1fbed22d1154e5625696216e8c349d46ef27",
+      "receipt": "docs/verification/inventory-empty-slots-20261001/region-receipt-world-road.json",
+      "receipt_sha256": "52c6c584e888606c99889b07925fb24dc78a6b381236179bb6fd169d236f65df",
+      "original_images_sha256": {
+        "docs/verification/character-ui/world-road-run1/frames/frame-450.png": "7854cbe3ee53f5922e7e1ad5692533d7989adce1fa9fb5de591c931e22d9b2d1",
+        "docs/verification/character-ui/world-road-run1/frames/frame-552.png": "9611cb95ae777d3a6f4154505e48a840b46db6886e890456564a797f4cd96d60",
+        "docs/verification/character-ui/world-road-run1/frames/frame-691.png": "e1fd4e0f99ba0f47c5cfe7da8de886601971014a9628c19cd4cad87b041b0066",
+        "docs/verification/character-ui/world-road-run1/frames/frame-775.png": "d8bbd7c427a72e34ec3c53e3cd2c3efc8aeeb66551b36b8aeb2845ad597bb6de"
+      }
+    },
+    {
+      "name": "world-clock",
+      "pairs": 4,
+      "failures": 0,
+      "plan": "docs/verification/inventory-empty-slots-20261001/region-plan-world-clock.json",
+      "plan_sha256": "3dca0c87b5d48c9574282cf860cf1f7341bc1bf0aee29ac27a4004abf1ae15b2",
+      "receipt": "docs/verification/inventory-empty-slots-20261001/region-receipt-world-clock.json",
+      "receipt_sha256": "4b65830dad7fc3f6398371fac0b7d92bde97c288eb171406ad1c5d7d4c98f8f4",
+      "original_images_sha256": {
+        "docs/verification/character-ui/world-clock-run2/frames/frame-217.png": "987bc48ddca8933d4bf262e14b2e7a5db576ef86a3dc6ca093fa4f909a52dcec",
+        "docs/verification/character-ui/world-clock-run2/frames/frame-223.png": "0ed710703cee8b1bc20e313fe6f1bbd1a21ec241c9894869e384f3a94434e5dd"
+      }
+    },
+    {
+      "name": "world-quest",
+      "pairs": 4,
+      "failures": 0,
+      "plan": "docs/verification/inventory-empty-slots-20261001/region-plan-world-quest.json",
+      "plan_sha256": "9a1f6aa52cf6c77e4f51c3ac2234f90d4e6e59379108aee3ff88b38a5ded3ef4",
+      "receipt": "docs/verification/inventory-empty-slots-20261001/region-receipt-world-quest.json",
+      "receipt_sha256": "63a6299a7e9f954d3f9dd26f479f074cc991e896a1b62dcee7e3092e432e88ca",
+      "original_images_sha256": {
+        "docs/verification/character-ui/world-quest-run1/frames/frame-862.png": "9efdd88c5ae6563f80e26afd75f99f3acbdb7f54b80a541745c1faaab3566168",
+        "docs/verification/character-ui/world-quest-run1/frames/frame-883.png": "9947374e65f3c14932d836d7ad9d80ee104cfc02a47c9d11b712f4923a984070",
+        "docs/verification/character-ui/world-quest-run1/frames/frame-886.png": "ea95f74f13c6c1dfffe8cec45a6b5b3d47a830ebf25a41afc0113cffe680b6c5"
+      }
+    }
+  ],
+  "player_plan_updates": [
+    {
+      "name": "town-leave",
+      "steps": [
+        12
+      ],
+      "plan_sha256": "9baade4689ec7dea307c5e404974a5968da86ba8a82e4318c45343468aba2a6b"
+    },
+    {
+      "name": "town-round-trip",
+      "steps": [
+        12
+      ],
+      "plan_sha256": "6e12a98626860963f545ca4b8f26a2c75f0a632e62eaa6f7d7519db83a3a49b1"
+    },
+    {
+      "name": "world-clock",
+      "steps": [
+        26,
+        27
+      ],
+      "plan_sha256": "566fd42902882c5c1ae2d0bc563d44d9cb23677aba31290746a2fcb43b5a4a4d"
+    },
+    {
+      "name": "world-quest",
+      "steps": [
+        89
+      ],
+      "plan_sha256": "9ffef522c938379e3eaeb5b1ed14688f4f55212134ba4f0438fb4a7e952759e3"
+    },
+    {
+      "name": "world-road",
+      "steps": [
+        24,
+        31,
+        33
+      ],
+      "plan_sha256": "b0b47365b14d65f32a496ef449088db25c3bdb3e4897b82fe2d5e4c0053233b8"
+    }
+  ],
+  "contract": "RE-164／SPEC-026：正常進野外組0，先旋轉一格再畫",
+  "weather_sources_sha256": {
+    "assets/original-derived-png/ega/WEATPICS/weatpics-000-base_color.png": "9e366c5c6ae36f43d24650bac20212f1d3988c22b045bdd93b177d05a2912fbc",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-001-or_color.png": "8705585acc6425fb1cd0156b52e0d91256537505dd3008dbf2211c425ad3a06b",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-002-and_mask_1bit.png": "314e5d83b1b5feabcc283045440ddca80aa05d10f0fb8d5eda39dd55e4991cb1",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-003-base_color.png": "95b339001950b6361b7fbb61fbc5f4d04a65871f689898e820aff793dcf8add6",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-004-or_color.png": "7934420c2ecc8197adae9bd6b1c6ce5109f6e9c650895a6661c9f6b1f23a8882",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-005-and_mask_1bit.png": "575cd15b5d126bea36f3e4b3e6746474324d2e34b7daf0c84a7da50ebcd7765c",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-006-base_color.png": "50a5f1f5b6a215ed939b34e05a6ce8bb70349a98cda27926de189ac073be9cfe",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-007-or_color.png": "3ddd741dc8961208a0044fe74ccf9cd0c799d44be57bf608aff40b5b359aa81d",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-008-and_mask_1bit.png": "67db5ac04ae14b74b378680938721a0a0f6cf7f93b7cab32f6c2f5344776ff02",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-009-base_color.png": "583bec5e50e8bf36ee4605398a5ad296a5db2c32656279148c617bde717fce62",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-010-or_color.png": "2f9a661aaa4fc5c00e0bbbd805f76337ddc05b6dd06ffa27a8d0f8a8852eb71a",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-011-and_mask_4plane.png": "6c66f5a979243f98e0070f71277c246cbd975455b61b69f189ed82ecc3b1b242",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-012-base_color.png": "6cbdc988868771a88e7a1d1b8b73c8962ca2bb8a654e45700465bc14be4a6696",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-013-or_color.png": "65e210aea65bdcdf006ed9f7784a5e6d7630a3224061ad3f784c06f83b544d88",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-014-and_mask_4plane.png": "5cfcceb27a95a68838bf2028454365d0f878097c6ce9c2ccdb74f75ef2a43e5f",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-015-base_color.png": "b3d502b81df8a3f457b05f4b295692dc57fd312d3f51b75d26b4fb59179fe4a7",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-016-or_color.png": "e8389bbd5ea29ff9f0a6d13ae00308b0db743864c6fa3840b09515632368c86a",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-017-and_mask_1bit.png": "9c9a9491c32cbb025ce31f8ed251acea9642c4503a3487cf3153364811e5af41"
+  },
+  "rights": "原作衍生PNG只限既有private GitHub特例；舊截圖不移動、不覆寫",
+  "limitations": "原版比較仍僅為原計畫的矩形區域；天候相位只沿用既有53次常式對拍，不新增原版GUI／硬體時序收據。"
+}

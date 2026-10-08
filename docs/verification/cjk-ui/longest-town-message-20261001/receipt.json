@@ -1,0 +1,292 @@
+{
+  "schema": "kol-cjk-longest-town-message-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "正式 town-message 全母體最寬之一；由正常六人招募與第七城旅舍離店告別觸發，不宣稱其他欄位或原版完成。",
+  "selection": {
+    "scope": "正式 town-message 全母體最寬之一；由正常六人招募與第七城旅舍離店告別觸發，不宣稱其他欄位或原版完成。",
+    "population_count": 4201,
+    "maximum_width": 368,
+    "selected": [
+      {
+        "kind": "town-message",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門17 訊息17",
+        "zh": "她說：「願路揚起迎向你，願陽光永遠在你背後。」",
+        "x": 315,
+        "width": 368,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      },
+      {
+        "kind": "town-message",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門17 訊息17",
+        "zh": "你聽了竟覺得傷感。",
+        "x": 315,
+        "width": 144,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      }
+    ],
+    "all_maximum_candidates": [
+      {
+        "kind": "town-message",
+        "en": "docs/i18n/town-zh-Hant.json 城6 門10 訊息15",
+        "zh": "「哎，這才叫男人！海瑟，把我最烈的麥酒端出來，",
+        "x": 315,
+        "width": 368,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      },
+      {
+        "kind": "town-message",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門2 訊息27",
+        "zh": "「你的兵器跟你樸素的衣著不相稱。有這種兵器的人",
+        "x": 315,
+        "width": 368,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      },
+      {
+        "kind": "town-message",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門12 訊息29",
+        "zh": "「給你我最好的作品。這把塔什塔克是我親手打的，",
+        "x": 315,
+        "width": 368,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      },
+      {
+        "kind": "town-message",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門17 訊息17",
+        "zh": "她說：「願路揚起迎向你，願陽光永遠在你背後。」",
+        "x": 315,
+        "width": 368,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      }
+    ],
+    "town": 7,
+    "door": 17,
+    "message": 17,
+    "position": [
+      59,
+      28
+    ],
+    "door_step": 90,
+    "entry_step": 91,
+    "who_step": 92,
+    "farewell_step": 93,
+    "back_step": 94,
+    "shot_steps": [
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "walk_moves": 28,
+    "seed": 1,
+    "seed_method": "執行前 -seed 1",
+    "load": null,
+    "monsters": null,
+    "ambush_rolls": null,
+    "report_sha256": "c8b81562610e724e371f2df34b617dc4bf65de9fda23d5cc583a4de4ec874459"
+  },
+  "selected_before_execution": true,
+  "identical_en_zh_states": 95,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "seed": {
+    "remake": 1,
+    "original": null,
+    "method": "執行前 -seed 1"
+  },
+  "geometry": {
+    "dialog": [
+      306,
+      252,
+      585,
+      204
+    ],
+    "text_start": [
+      315,
+      258
+    ],
+    "safe_width": 575,
+    "line_step": 24,
+    "font_height": 18
+  },
+  "geometry_evidence": "internal/town/layout.go CJKInn 及 internal/ui/town.go InnCJK。",
+  "normal_path_evidence": "標題→新隊伍→正常六人招募→城內走路→門口→進門敘述→問誰開口→選門離店→訊息17→確認返回原門格；internal/town/session.go leaveDoor 的多人告別規則。",
+  "line_checks": [
+    {
+      "text": "她說：「願路揚起迎向你，願陽光永遠在你背後。」",
+      "width": 368,
+      "start": [
+        315,
+        258
+      ],
+      "bottom": 276
+    },
+    {
+      "text": "你聽了竟覺得傷感。",
+      "width": 144,
+      "start": [
+        315,
+        282
+      ],
+      "bottom": 300
+    }
+  ],
+  "dialog_pixel_differences": 0,
+  "single_missing_ink_pixel_rejected": true,
+  "picture_checks": [
+    {
+      "step": 90,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-037.png",
+      "scale": 1,
+      "position": [
+        104,
+        58
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 90,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-037.png",
+      "scale": 3,
+      "position": [
+        312,
+        174
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 91,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-036.png",
+      "scale": 1,
+      "position": [
+        8,
+        64
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 91,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-036.png",
+      "scale": 3,
+      "position": [
+        24,
+        192
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 92,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-036.png",
+      "scale": 1,
+      "position": [
+        8,
+        64
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 92,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-036.png",
+      "scale": 3,
+      "position": [
+        24,
+        192
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 93,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-036.png",
+      "scale": 1,
+      "position": [
+        8,
+        64
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 93,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-036.png",
+      "scale": 3,
+      "position": [
+        24,
+        192
+      ],
+      "pixel_differences": 0
+    }
+  ],
+  "visual_review": {
+    "status": "passed",
+    "method": "主代理檢視五張中文完整畫格與英文告別畫格；告別兩行完整可讀、無缺字裁切，確認可返回原門格。"
+  },
+  "inputs_sha256": {
+    "assets/original-derived-png/ega/TWN7PICS/twn7pics-037.png": "a029c93c48b51d4768dfd618b84763de9a5ab3d107e380df6df634c0ac952254",
+    "assets/original-derived-png/ega/TWN7PICS/twn7pics-036.png": "61495832492184bf527a6255f05caae8ba076552ec06aecbabac297b67a9529d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "docs/i18n/town-zh-Hant.json": "5554248cef962e0b91948407486890a6020f1c54ceee9edc4e795461545a8638",
+    "docs/verification/cjk-text-fit.json": "c8b81562610e724e371f2df34b617dc4bf65de9fda23d5cc583a4de4ec874459",
+    "internal/town/layout.go": "b11c4a2706b8a907f238c73c5ff26e892fa123f1578067a9ea0e4936bbcaf3a1",
+    "internal/town/session.go": "150cf64c7dcc77deb852e9b33e9061cf54f55a1d358af075d4c8416329aa41c6",
+    "internal/ui/town.go": "f9fef8b0f7747193d438fd4bb9a14b0b22332f79cf3e4642a725454353c7e741",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-png/ega/TOWN7/town7-map.png": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f"
+  },
+  "toolchain": "eob-remake-go:1.26.7-ebiten2.9.9-audio；sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+  "rights": "重製執行畫面含原作衍生 PNG，沿用既有 private GitHub PNG 特例；沒有公開散布授權。",
+  "limitations": "只驗正式 town-message 全母體最寬之一；另外三則同寬訊息、其他欄位、最長輸入、原版與平台封包未驗。#34／#40 不結案。",
+  "files": {
+    "selection.json": "03efd100998894097d561458eefdcdb2c7189e5b56e478a4c9f085878c81a3b9",
+    "script.txt": "77e858294da214d3a21bbcb70812317a1afb578dee187be45dee7866e4e87cc5",
+    "en-trace.json": "0ae2fbe2adeb4eae59e7fe52e17b686afa065d4a8ee288b4611c7da3232c0c8a",
+    "en-run.json": "8ef89600ec964b2e90857ab7e2d7e4e8f03ef9151c3952c89725190e389751cd",
+    "en-engine.log": "22ffaeb6c6f0c08cdeb22719d64c05e55ede541af0ee7c8c33509710ac88399d",
+    "en-step-090.png": "dc31accca8582dfdb72c953f32cf235217fa6632f86e7d260e8849b918bac509",
+    "en-step-091.png": "401ac9dd85ea7d71b5208d3e8cfd702235b4432204b72371d66123c165c1e45a",
+    "en-step-092.png": "800a2fabbc5a9ffffe720d1094a05fd185e32308f68cd4165d7786c846fa1d5f",
+    "en-step-093.png": "d91dfd897bd5e4156fa5c8abcafca9210107137b137b11a400e6fcf45e3e92d5",
+    "en-step-094.png": "c2187986b1de84ccc694748de7908a377bf336007dfeb0d28ceb021cd85c7c1d",
+    "zh-Hant-trace.json": "0ae2fbe2adeb4eae59e7fe52e17b686afa065d4a8ee288b4611c7da3232c0c8a",
+    "zh-Hant-run.json": "f5c1b3d43e276d588fcb0b0abc1261ae45cfc873726ce336b801147ad05734a1",
+    "zh-Hant-engine.log": "d6b0dbb69e78e3621109ed02abcdc7073e76761c946491f7104cbf02f0c9ac05",
+    "zh-Hant-step-090.png": "7151bdfda0b3952f1d4e0b0531793c6c4827e4620ea22ec534485acbd9c55f86",
+    "zh-Hant-step-091.png": "c6fede7cf2e0a0545ae3cfe88ee9cc9a0d812dbfd023e9bef0172876dd3b237f",
+    "zh-Hant-step-092.png": "77cb694cdb2c0372b78c86b45b948604fbb8caa7193c7bc88b80fe8965221c72",
+    "zh-Hant-step-093.png": "9d3b78fb2c0057b7497c9775c71969c2760cd3261067c74236ab500d25fa8cbc",
+    "zh-Hant-step-094.png": "62b2b6f0351ba34700d2801bc5b35f822e0a67055eb69d5706d0de062905b60c",
+    "kol_cjk_longest_message_run.py": "993509e641b279f98b974596ade48f1013b25c2d012f1b5aeb37e9bad6cc8eeb",
+    "kol_cjk_longest_message_verify.py": "9c2e91c5c5b621535ce93d814cfab924e8fb6a9ced89ea429188e91a5c305493"
+  }
+}

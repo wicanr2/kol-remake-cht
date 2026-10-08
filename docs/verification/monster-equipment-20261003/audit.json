@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+  "initial_dirty": 410,
+  "final_dirty": 412,
+  "all_initial_paths_retained": true,
+  "staged": [],
+  "diff_check_exit_code": 0,
+  "project_containers": [],
+  "other_project_container_records": 17,
+  "container_inspection_race": "兩個其他工作容器於清單與檢視之間自動移除；已完成17筆實際掛載檢視，另核對kol-名稱無剩餘容器",
+  "worklist": {
+    "open": 22,
+    "done": 84
+  },
+  "commit": false,
+  "push": false,
+  "remote_issue_write": false,
+  "package": false,
+  "release": false,
+  "receipt_sha256": "70413a2088f018e321751660c26d31117fed225fe8a7552afe90c19e723570c2",
+  "attachments": 1715,
+  "recalculated_result": true,
+  "owners": {
+    "1000:1000": 1715
+  },
+  "root_owned_or_md_directories": [],
+  "production_inputs": 319,
+  "changed_production_inputs": [],
+  "goal_status": "active",
+  "format_decision": "pending",
+  "private_local_outputs": true,
+  "audit_tool": "docs/verification/monster-equipment-20261003/audit_final.py",
+  "audit_tool_sha256": "049157d100343ac2ec7d5f33e7069bd12eb73cd0887e7ef4c203e823d3a096c2",
+  "original_audit_preserved": true,
+  "audit_correction": "第一版stat追蹤既有Wine z:符號連結到根目錄而誤報root-owned；已依find預設改lstat，原封存receipt及audit.py不改。"
+}

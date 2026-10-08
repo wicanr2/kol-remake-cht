@@ -1,6 +1,6 @@
 {
   "name": "gear-switch",
-  "description": "A05 腰帶切換的正常玩家抽測（#15，RE-163）：讀 `quest-chain` 寫出的存檔，從半途之家門口出城，往東走遇上 CLIFF TROLL（受控骰值 `1,100,23`，同 `full-chain`）。Theodoric 手上是 Treasure Map、腰帶是 Greatsword；手上不是武器時原版不給切換（`0x22AF6`），所以第 1 回合先丟掉地圖，第 2 回合切換拿出 Greatsword（0x116），第 3 回合再切換收回腰帶（0x114 ＋ `!`），第 4 回合在「Begin next round?」選逃走格離開。其餘隊員每回合休息。",
+  "description": "A05 腰帶切換的正常玩家抽測（#15，RE-163）：讀 `quest-chain` 寫出的存檔，從半途之家門口出城，往東走遇上 CLIFF TROLL（受控骰值 `1,100,23`，同 `full-chain`）。Theodoric 手上是 Treasure Map、腰帶是 Greatsword；手上不是武器時原版不給切換（`0x22AF6`），所以第 1 回合先丟掉地圖，第 2 回合切換拿出 Greatsword（0x116），第 3 回合再切換收回腰帶（0x114 ＋ `!`），第 4 回合在「Begin next round?」選逃走格離開。其餘隊員每回合休息。 2026-10-01 讀本輪任務新存檔重驗：只有隊伍傷勢繼承值不同，差額逐員等於母存檔變化；訊息、階段、操作結果、金幣、物品、任務／回報與全部畫格一致。原按鍵不變，舊收據保留。",
   "seed": 1,
   "scene": "play",
   "load": "workplace/saves/quest-chain.json",

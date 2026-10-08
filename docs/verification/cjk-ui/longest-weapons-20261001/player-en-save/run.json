@@ -1,0 +1,27 @@
+{
+  "label": "player-en-save",
+  "command": [
+    "workplace/platform-smoke-20261001/build/kol-linux",
+    "-scene",
+    "flow",
+    "-seed",
+    "1",
+    "-lang",
+    "en",
+    "-trace-detail",
+    "-flow-script",
+    "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE 5 > RET D D D D D D D D D D D D D RET > RET U U U RET RET > RET RET R L RET SPACE 1 > > > > RET > RET RET",
+    "-shot-dir",
+    "workplace/cjk-weapon-20261001/player-en-save",
+    "-shot-steps",
+    "82,83,87,100",
+    "-trace",
+    "workplace/cjk-weapon-20261001/player-en-save/trace.json",
+    "-save",
+    "workplace/cjk-weapon-20261001/player-en-save.json"
+  ],
+  "exit_code": 0,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "expected_states": 101,
+  "seed": 1
+}

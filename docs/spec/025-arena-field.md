@@ -47,3 +47,7 @@
 | 本規格段落 | 說明書 | 說明書寫了什麼 |
 |---|---|---|
 | 競技場 | [PDF 38（印刷頁 70–71）](../manual/chapters/07-advanced-gamers.md) | 競技場一對一、不能撤退 |
+
+## 正常入口續核
+
+2026-10-04的[自然競技場收據](../verification/arena-natural-20261004/receipt.json)與[唯讀重驗](../verification/arena-natural-20261004/verify.py)完成G03正常入口：從標題招募、付費訓練取得資格、下注、單挑自然敗北、結算、六人保存及雙語重載。原受控資格計畫已逐字封存，未改原地圖、scatter、規則或保存格式。這條玩家鏈不提供新的原版scatter同種子實驗或整場同狀態證據，因此本規格仍為READY；不由remake能跑宣稱原版CONFORMED。

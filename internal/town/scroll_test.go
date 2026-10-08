@@ -1,6 +1,10 @@
 package town
 
-import "testing"
+import (
+	"fmt"
+	"reflect"
+	"testing"
+)
 
 // hostelOrder 是城 7 The Hostel 那一棟的教派（RE-121），欄位直接抄自建築 payload。
 func hostelOrder() *Order {
@@ -89,6 +93,17 @@ func TestScrollJoinsTheOrder(t *testing.T) {
 	if s.Party[0].Token == nil || s.Party[0].Token.Name != "Blue Chain" {
 		t.Fatalf("信物是 %+v", s.Party[0].Token)
 	}
+	// RE-200 正常原版入會：角色 +0x170 是實際頸部物品，不只教派資訊。
+	neck := s.Party[0].Worn[7]
+	if neck == nil || neck.Record != hostelOrder().TokenRecord {
+		t.Fatalf("入會後實際頸部槽缺信物：%+v", neck)
+	}
+	if neck.Kind != 2 || neck.Position != 7 || neck.Price != 430 || neck.Dice != (Dice{Count: 1, Sides: 3, Low: 1, High: 3}) {
+		t.Fatalf("信物明細不符 RE-075 原始記錄：%+v", neck)
+	}
+	if len(s.Party[0].Carried) != 17 || fmt.Sprintf("%x", s.Party[0].Carried[14]) != hostelOrder().TokenRecord {
+		t.Fatal("入會後原始頸部物品槽未同步")
+	}
 	if s.Party[0].Sheet.Order != "Blue Gem" || s.Party[0].Sheet.Title != "Illusionist" {
 		t.Fatalf("資料頁那一列是 %q／%q", s.Party[0].Sheet.Order,
 			s.Party[0].Sheet.Title)
@@ -98,6 +113,47 @@ func TestScrollJoinsTheOrder(t *testing.T) {
 	if s.Inside.List == nil || len(s.Inside.List.Rows) != 1 ||
 		s.Inside.List.Rows[0] != "Learn a spell" {
 		t.Fatalf("選單是 %+v", s.Inside.List)
+	}
+}
+
+func TestScrollJoinKeepsOccupiedNeck(t *testing.T) {
+	s := scrollSession(t, 1000, 109)
+	existing := Good{Name: "Blue Chain", Record: hostelOrder().TokenRecord, Kind: 2, Position: 7}
+	s.Party[0].Worn[7] = &existing
+	s.Party[0].Backpack = []Good{existing, {}}
+	s.StartScroll()
+	yes(s)
+	if s.Party[0].Worn[7] != &existing || len(s.Party[0].Backpack) != 2 || s.Party[0].Backpack[1].Record != existing.Record || s.Party[0].Gold != 550 {
+		t.Fatalf("占用頸部時應保留原物並填首個空背包槽：%+v", s.Party[0])
+	}
+	if len(s.Party[0].Carried) != 17 || fmt.Sprintf("%x", s.Party[0].Carried[2]) != existing.Record {
+		t.Fatal("背包信物沒有同步原始槽")
+	}
+}
+
+func TestScrollJoinRefusesFullInventory(t *testing.T) {
+	s := scrollSession(t, 1000, 109)
+	existing := Good{Name: "Blue Chain", Record: hostelOrder().TokenRecord}
+	s.Party[0].Worn[7] = &existing
+	for range BackpackSlots {
+		s.Party[0].Backpack = append(s.Party[0].Backpack, existing)
+	}
+	s.Party[0].SyncCarried()
+	before := CloneMember(s.Party[0])
+	s.StartScroll()
+	yes(s)
+	if s.Party[0].Gold != before.Gold || s.Party[0].Order != nil || s.Party[0].Token != nil || !reflect.DeepEqual(s.Party[0].Carried, before.Carried) {
+		t.Fatal("頸部及背包全滿時不應扣錢或改物品、教派")
+	}
+}
+
+func TestScrollJoinInvalidTokenDoesNotCharge(t *testing.T) {
+	s := scrollSession(t, 1000, 109)
+	s.door.Order.TokenRecord = "not-a-record"
+	s.StartScroll()
+	yes(s)
+	if s.Party[0].Gold != 1000 || s.Party[0].Order != nil || s.Party[0].Worn[7] != nil {
+		t.Fatal("損壞信物記錄不應成交")
 	}
 }
 

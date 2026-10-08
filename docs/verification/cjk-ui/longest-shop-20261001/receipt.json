@@ -1,0 +1,690 @@
+{
+  "schema": "kol-cjk-longest-shop-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "最長資料顯示名稱112像素的正常酒館購買與背包檢視；只驗商品清單、商品明細與背包小框／明細，不把酒館食品當武器。",
+  "selection": {
+    "scope": "最長資料顯示名稱112像素的正常酒館購買與背包檢視；只驗商品清單、商品明細與背包小框／明細，不把酒館食品當武器。",
+    "population_count": 420,
+    "maximum_width": 112,
+    "selected": [
+      {
+        "kind": "display-name-shop-list",
+        "en": "Girak Helbak",
+        "zh": "吉拉克赫爾巴克",
+        "x": 0,
+        "width": 112,
+        "right_limit": 553,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject+runtime-clip"
+      }
+    ],
+    "town": 7,
+    "door": 13,
+    "position": [
+      38,
+      26
+    ],
+    "good": {
+      "index": 5,
+      "name": "Girak Helbak",
+      "price": 35,
+      "kind": 0,
+      "damage": false,
+      "hands": 0,
+      "class": 0,
+      "position": 10,
+      "encumbrance": 0,
+      "size_class": 0,
+      "condition": 55,
+      "dice": {
+        "count": 1,
+        "sides": 3,
+        "bonus": 0,
+        "low": 1,
+        "high": 3
+      },
+      "record": "c3a641581056082b002300370000a000"
+    },
+    "steps": {
+      "door": 103,
+      "entry": 104,
+      "greeting": 106,
+      "list": 111,
+      "selected": 116,
+      "shop_detail": 117,
+      "eat_question": 118,
+      "packed": 120,
+      "end_shop": 122,
+      "sheet": 124,
+      "items": 126,
+      "pocket": 142,
+      "item_detail": 143,
+      "leave_tavern": 149,
+      "inn_entry": 193,
+      "inn_greeting": 195,
+      "rest_whole": 200,
+      "rest_price": 202,
+      "saved": 203
+    },
+    "shot_steps": [
+      103,
+      104,
+      106,
+      111,
+      116,
+      117,
+      118,
+      120,
+      122,
+      124,
+      126,
+      142,
+      143,
+      149,
+      193,
+      195,
+      200,
+      202,
+      203
+    ],
+    "walk_moves": 41,
+    "seed": 1,
+    "seed_method": "執行前 -seed 1",
+    "load": null,
+    "monsters": null,
+    "ambush_rolls": null,
+    "inputs_sha256": {
+      "docs/verification/cjk-text-fit.json": "89f888a8f582169a45c9d83b557a0bf4d5c1660acff8f7fae1c8c3eaaa331ec6",
+      "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+      "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+      "assets/original-derived-png/ega/TOWN7/town7-map.png": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f",
+      "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f"
+    }
+  },
+  "states": 204,
+  "reload_states": 21,
+  "all_locale_states_identical": true,
+  "checks": [
+    {
+      "label": "商品清單",
+      "file": "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant/step-116.png",
+      "rect": [
+        306,
+        252,
+        585,
+        204
+      ],
+      "lines": [
+        {
+          "text": "克拉克拉",
+          "position": [
+            315,
+            258
+          ],
+          "width": 64,
+          "bottom": 276
+        },
+        {
+          "text": "巨魔肉片",
+          "position": [
+            315,
+            274
+          ],
+          "width": 64,
+          "bottom": 292
+        },
+        {
+          "text": "馬瓦爾達克",
+          "position": [
+            315,
+            290
+          ],
+          "width": 80,
+          "bottom": 308
+        },
+        {
+          "text": "食人魔腿",
+          "position": [
+            315,
+            306
+          ],
+          "width": 64,
+          "bottom": 324
+        },
+        {
+          "text": "鼠腿肉",
+          "position": [
+            315,
+            322
+          ],
+          "width": 48,
+          "bottom": 340
+        },
+        {
+          "text": "吉拉克赫爾巴克",
+          "position": [
+            315,
+            338
+          ],
+          "width": 112,
+          "bottom": 356
+        },
+        {
+          "text": "卡克爾巴克爾",
+          "position": [
+            315,
+            354
+          ],
+          "width": 96,
+          "bottom": 372
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "label": "商品明細",
+      "file": "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant/step-117.png",
+      "rect": [
+        306,
+        252,
+        585,
+        204
+      ],
+      "lines": [
+        {
+          "text": "「你要這個嗎？」",
+          "position": [
+            315,
+            258
+          ],
+          "width": 128,
+          "bottom": 276
+        },
+        {
+          "text": "吉拉克赫爾巴克",
+          "position": [
+            480,
+            306
+          ],
+          "width": 112,
+          "bottom": 324
+        },
+        {
+          "text": "類別：物品",
+          "position": [
+            384,
+            354
+          ],
+          "width": 80,
+          "bottom": 372
+        },
+        {
+          "text": "防護：1-3",
+          "position": [
+            384,
+            378
+          ],
+          "width": 74,
+          "bottom": 396
+        },
+        {
+          "text": "負重：0",
+          "position": [
+            624,
+            378
+          ],
+          "width": 58,
+          "bottom": 396
+        },
+        {
+          "text": "金冠：35",
+          "position": [
+            384,
+            402
+          ],
+          "width": 68,
+          "bottom": 420
+        },
+        {
+          "text": "營養：良好",
+          "position": [
+            624,
+            402
+          ],
+          "width": 80,
+          "bottom": 420
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "label": "背包小框",
+      "file": "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant/step-142.png",
+      "rect": [
+        18,
+        120,
+        300,
+        66
+      ],
+      "lines": [
+        {
+          "text": "口袋:",
+          "position": [
+            24,
+            126
+          ],
+          "width": 37,
+          "bottom": 144
+        },
+        {
+          "text": "吉拉克赫爾巴克",
+          "position": [
+            24,
+            144
+          ],
+          "width": 112,
+          "bottom": 162
+        },
+        {
+          "text": "1-3",
+          "position": [
+            24,
+            162
+          ],
+          "width": 26,
+          "bottom": 180
+        },
+        {
+          "text": "0",
+          "position": [
+            302,
+            162
+          ],
+          "width": 10,
+          "bottom": 180
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "label": "背包明細",
+      "file": "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant/step-143.png",
+      "rect": [
+        186,
+        174,
+        588,
+        204
+      ],
+      "lines": [
+        {
+          "text": "吉拉克赫爾巴克",
+          "position": [
+            360,
+            198
+          ],
+          "width": 112,
+          "bottom": 216
+        },
+        {
+          "text": "類別：物品",
+          "position": [
+            264,
+            246
+          ],
+          "width": 80,
+          "bottom": 264
+        },
+        {
+          "text": "防護：1-3",
+          "position": [
+            264,
+            270
+          ],
+          "width": 74,
+          "bottom": 288
+        },
+        {
+          "text": "負重：0",
+          "position": [
+            504,
+            270
+          ],
+          "width": 58,
+          "bottom": 288
+        },
+        {
+          "text": "金冠：35",
+          "position": [
+            264,
+            294
+          ],
+          "width": 68,
+          "bottom": 312
+        },
+        {
+          "text": "營養：良好",
+          "position": [
+            504,
+            294
+          ],
+          "width": 80,
+          "bottom": 312
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "label": "重載背包小框",
+      "file": "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant-reload2/step-019.png",
+      "rect": [
+        18,
+        120,
+        300,
+        66
+      ],
+      "lines": [
+        {
+          "text": "口袋:",
+          "position": [
+            24,
+            126
+          ],
+          "width": 37,
+          "bottom": 144
+        },
+        {
+          "text": "吉拉克赫爾巴克",
+          "position": [
+            24,
+            144
+          ],
+          "width": 112,
+          "bottom": 162
+        },
+        {
+          "text": "1-3",
+          "position": [
+            24,
+            162
+          ],
+          "width": 26,
+          "bottom": 180
+        },
+        {
+          "text": "0",
+          "position": [
+            302,
+            162
+          ],
+          "width": 10,
+          "bottom": 180
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "label": "重載背包明細",
+      "file": "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant-reload2/step-020.png",
+      "rect": [
+        186,
+        174,
+        588,
+        204
+      ],
+      "lines": [
+        {
+          "text": "吉拉克赫爾巴克",
+          "position": [
+            360,
+            198
+          ],
+          "width": 112,
+          "bottom": 216
+        },
+        {
+          "text": "類別：物品",
+          "position": [
+            264,
+            246
+          ],
+          "width": 80,
+          "bottom": 264
+        },
+        {
+          "text": "防護：1-3",
+          "position": [
+            264,
+            270
+          ],
+          "width": 74,
+          "bottom": 288
+        },
+        {
+          "text": "負重：0",
+          "position": [
+            504,
+            270
+          ],
+          "width": 58,
+          "bottom": 288
+        },
+        {
+          "text": "金冠：35",
+          "position": [
+            264,
+            294
+          ],
+          "width": 68,
+          "bottom": 312
+        },
+        {
+          "text": "營養：良好",
+          "position": [
+            504,
+            294
+          ],
+          "width": 80,
+          "bottom": 312
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    }
+  ],
+  "picture_checks": [
+    {
+      "step": 103,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-029.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 103,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-029.png",
+      "scale": 3,
+      "pixel_differences": 0
+    },
+    {
+      "step": 104,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-028.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 104,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-028.png",
+      "scale": 3,
+      "pixel_differences": 0
+    }
+  ],
+  "save_comparison": {
+    "excluded_fields": [
+      "saved_at"
+    ],
+    "other_differences": 0,
+    "leader": "Theodoric",
+    "gold": 918,
+    "gold_before": 1009,
+    "purchase_price": 35,
+    "inn_price": 56,
+    "backpack_index": 5,
+    "good": {
+      "index": 5,
+      "name": "Girak Helbak",
+      "price": 35,
+      "kind": 0,
+      "damage": false,
+      "hands": 0,
+      "class": 0,
+      "position": 10,
+      "encumbrance": 0,
+      "condition": 55,
+      "percent": 0,
+      "dice": {
+        "count": 1,
+        "sides": 3,
+        "bonus": 0,
+        "low": 1,
+        "high": 3
+      },
+      "size_class": 0,
+      "record": "c3a641581056082b002300370000a000",
+      "picture": 0,
+      "movement": 0
+    },
+    "location": {
+      "kind": "town",
+      "town": 7,
+      "entry_point": 3,
+      "x": 57,
+      "y": 8
+    }
+  },
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "seed": {
+    "remake": 1,
+    "original": null,
+    "method": "兩次啟動前固定 -seed 1；正常首次購買保存，第二次只讀本次自然保存。"
+  },
+  "inputs_sha256": {
+    "assets/original-derived-png/ega/TWN7PICS/twn7pics-029.png": "e5b78d97018472f495a11f45a21f56bf5981760e3d289cb305c43e08e880c2fb",
+    "assets/original-derived-png/ega/TWN7PICS/twn7pics-028.png": "5b72adacb6167081ec1f1dcd362e5ba01af83416f7da1364a10405f822e896a2",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "docs/i18n/ui-zh-Hant.json": "3dec02c25fbca4b3b537041121a3cdd62c03333ac9379cbe059e1582d8c71003",
+    "assets/original-derived-data/character-roster.json": "f8f05ff26b1c278ab457616eb951fa1517c2e4ab8e7e8401a5c3151209fa972e",
+    "assets/original-derived-data/portrait-layout.json": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df",
+    "internal/ui/town.go": "f9fef8b0f7747193d438fd4bb9a14b0b22332f79cf3e4642a725454353c7e741",
+    "internal/ui/itempage_cjk.go": "52f5e540d3c1a22ae36fd78522f61c659ef404c063d20ac25266ecd0024ff798",
+    "internal/town/shop.go": "b61dea7142f7301739afdb6b6d97b63f73ff10d45d41253ba7a27f6545e05cd2",
+    "internal/town/itempage.go": "0d6cd5279fa17f6f71b9012d19456ce8de982b411225a4dc6d1ae13d5a119d25"
+  },
+  "toolchain": "eob-remake-go:1.26.7-ebiten2.9.9-audio；sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+  "visual_review": {
+    "status": "reviewed",
+    "files": [
+      "zh-Hant-step-103.png",
+      "zh-Hant-step-104.png",
+      "zh-Hant-step-116.png",
+      "zh-Hant-step-117.png",
+      "zh-Hant-step-118.png",
+      "zh-Hant-step-120.png",
+      "zh-Hant-step-142.png",
+      "zh-Hant-step-143.png",
+      "zh-Hant-step-203.png",
+      "zh-Hant-reload-step-019.png",
+      "zh-Hant-reload-step-020.png",
+      "en-step-143.png"
+    ],
+    "reviewer": "主代理逐張檢視9張正常中文畫格、兩張重載中文畫格及英文物品明細，共12張",
+    "findings": "商品清單選取／購買明細、帶走問句及返回清單、背包小框與物品明細中的112像素名稱完整可讀；重載後小框及明細仍完整，沒有裁切。"
+  },
+  "rights": "原作衍生PNG僅適用既有private GitHub特例，不授權公開發布。",
+  "limitations": "僅驗最長資料顯示名稱在商品清單、商品明細、物品小框／明細與正常保存重載。此食品不作戰鬥武器／裝備／戰利品最大名稱證明，不宣稱原版或平台完成；軌跡carried摘要依既有原始Carried資料，本次未以它證明背包增格。#34／#40仍開放。",
+  "files": {
+    "selection.json": "ec0cd9d84f591dd81db98e5b706b68b3c283c0a96d32ff22e493868cfd29d476",
+    "script.txt": "1e286ca84aeea9f373862a2a045feebcd10cd2978e7ca00db25db11d8f1f471a",
+    "en-trace.json": "14326fe6ca39b90ce993fa329ec879294c8ce625429eef3f39cfd7cf992b1a37",
+    "en-run.json": "aa94ff25b142ee79f713fb050f03ce106009237d8656d8059e21e0b07a77e8d4",
+    "en-engine.log": "d2e38383c3e7f36493622972211bbd08a6174c67f0a3e102789afc33aeaf89d3",
+    "en-save.json": "723f9b3f8d45796936d662dbae430820f34c5684a07d303c36ad580e8ab3c51f",
+    "en-step-103.png": "a8c1c99f972fb45745e25322a5740d186067e78329fd330f6da00b724db3556f",
+    "en-step-104.png": "a09cf58e0342b4dbac6f9798f9ff5e7a0a531623a6240ca7511ebdcdbe843f23",
+    "en-step-116.png": "c71a32d405ec77669de89e9e44d2aaf67ca4b03cb2baa253ad53daccdc6ba347",
+    "en-step-117.png": "33f8d6949c0a8216f5bc40c868a7e578e871f7e969e594a8677c14ea6e40e09f",
+    "en-step-118.png": "eee4a518c63fea7b122ad386edd110f7b413c8115aa64b64364642dc68f9ffd3",
+    "en-step-120.png": "c71a32d405ec77669de89e9e44d2aaf67ca4b03cb2baa253ad53daccdc6ba347",
+    "en-step-142.png": "aba60fe2f1aaf3e199c2ab1bd4aef009502e870b8d876ba132c68ed63bd10d91",
+    "en-step-143.png": "a489288fba3db6028b18837c594b3c9e11e24f9e7bed53cd8a39f8ec49bd3021",
+    "en-step-203.png": "5d33f2b8fc326febbeede4119a1d24aab2998b5e811380ea41fbb14c656182f0",
+    "en-reload-trace.json": "f8f4f570576b7aec1d7c6f77a0604b764b178bad14d57b6e7b5fbda765147b4a",
+    "en-reload-run.json": "303ea54297d0dda9d0d54b72aff32352df79a61a70d2b3f3dfdc016560ea3d9b",
+    "en-reload-engine.log": "3d5451825e82f0badb3d45b6f2812c97211a72a2e117cced7e2abbf9ba6ffe64",
+    "en-reload-step-000.png": "44d5d87b2665c30fe23dbce0bea92ce09ee96f7d36c91b133e18d61ee507e6f5",
+    "en-reload-step-019.png": "aba60fe2f1aaf3e199c2ab1bd4aef009502e870b8d876ba132c68ed63bd10d91",
+    "en-reload-step-020.png": "a489288fba3db6028b18837c594b3c9e11e24f9e7bed53cd8a39f8ec49bd3021",
+    "zh-Hant-trace.json": "14326fe6ca39b90ce993fa329ec879294c8ce625429eef3f39cfd7cf992b1a37",
+    "zh-Hant-run.json": "eefcd86d00b0fa5e5ab1656c47db9aae36946626e3f1f171cf4a2a0ed4300d9d",
+    "zh-Hant-engine.log": "8ee4b612863cbe1bb333a147ed200fba96a9cb1e5579391d295a8bac3f31271f",
+    "zh-Hant-save.json": "4d478e7ac5edeb18e913781d948ebed33aef4c853d7a5be9be4fa58a2475b8fd",
+    "zh-Hant-step-103.png": "f6ccebcba5cf5d6567b2262687fb7e0b65eab3a93a0cb29313bdc2730eb50a20",
+    "zh-Hant-step-104.png": "0de6757b814bcfa7141f7f593f5c4c9efb431966ab9a307f85c38c5c32b38f42",
+    "zh-Hant-step-116.png": "bad44971eaf02ac1bd23fb05dfce9c03ea7fc974212ca7beef88a6a250af0f81",
+    "zh-Hant-step-117.png": "25b22ab908e759ad29120c692e2760816b7d6b5e0cf12990e2cdf1e0d67df3ec",
+    "zh-Hant-step-118.png": "a5cbbba76754887cc3a8cf84ddcbd2a4b71919679fd44b4d0aa49dfeb94a06d8",
+    "zh-Hant-step-120.png": "bad44971eaf02ac1bd23fb05dfce9c03ea7fc974212ca7beef88a6a250af0f81",
+    "zh-Hant-step-142.png": "fd669ee8f285e106a4a76a59d707c03d4a49fd45d639c6e95e23d015d440e323",
+    "zh-Hant-step-143.png": "00e9ccc7881bb1766e6448dac1320398ca56f76c40ec3bea1ccc003ddfe9bf52",
+    "zh-Hant-step-203.png": "d9f266065a41fb91dc4c39ad4b9372eafffae226aa248d7a110a60ad2f956b06",
+    "zh-Hant-reload-trace.json": "f8f4f570576b7aec1d7c6f77a0604b764b178bad14d57b6e7b5fbda765147b4a",
+    "zh-Hant-reload-run.json": "22528507ccb5fe189b98f5ebbeacaa0c41d7d54c2238582bca7989ef7757d551",
+    "zh-Hant-reload-engine.log": "1d830e7ad13f0d91e37bd5337a8dc41e69720b053adb67c5481fbaf7c393038b",
+    "zh-Hant-reload-step-000.png": "b5a834ea22bb27a1d0fe69f2c985741042b3730ae304c2f6d698bca3f437068d",
+    "zh-Hant-reload-step-019.png": "fd669ee8f285e106a4a76a59d707c03d4a49fd45d639c6e95e23d015d440e323",
+    "zh-Hant-reload-step-020.png": "00e9ccc7881bb1766e6448dac1320398ca56f76c40ec3bea1ccc003ddfe9bf52",
+    "kol_cjk_longest_shop_run.py": "c58a2e3e3bfffb5ba819fc3739ee9bc327728c71bb5e5c892b1c7b7a8dc5efa7",
+    "kol_cjk_longest_shop_reload.py": "4b6239e9f318048748802227d72117b823f53a50da2f08e270e9462b65654fa8",
+    "kol_cjk_longest_shop_verify.py": "1d627b62f35b76beb5b88a1efd2359dc263a0169362f72ffe10a86ee819c1ba7",
+    "initial-control-before.py": "7233986b0c18f118b7af9caa4167906bdd5ce23b41dd69e03591ff1416732699",
+    "initial-selection.json": "ce0daf37b651d2269baf4c9cc6f8b85fad0cd92cfb5f32c75d44f1ded172bf6f",
+    "initial-en-trace.json": "a91a95a50f65168af1c856879d6123ce061d3d4ec325474ff4db54e55f9d62bc",
+    "initial-en-run.json": "73e3f7c326bc8b9c01b7e2075ce9ab76dcdff52d20cb4b195705ac32137e3748",
+    "initial-reload-trace.json": "7fa08a67f526f6924d0c17689256c93ad352d9c51f8db89a57ee424801796ef7",
+    "initial-reload-run.json": "c2945267d849c92aa575c2e96631e3fe57e59b28e96a6fa0b45ad754545c3741",
+    "shop-population.json": "7c50556d0ad3383bb880d9de80af85b2aa545ad228123bb3a3f19495402af0a5"
+  },
+  "actual_shop_population": {
+    "records": 503,
+    "unique_names": 292,
+    "maximum_width": 112,
+    "maximum_candidates": [
+      {
+        "town": 7,
+        "door": 13,
+        "good": 5,
+        "name": "Girak Helbak",
+        "zh": "吉拉克赫爾巴克",
+        "width": 112
+      }
+    ],
+    "catalog": "shop-population.json"
+  },
+  "failures_preserved": [
+    "首次錯以第一背包格及Carried摘要驗入袋，正式斷言拒絕；角色原有五格，食品在第六格。",
+    "首次重載錯用flow-script落在書本目錄，場景斷言拒絕；改用正式play-script正常讀本次住宿存檔。",
+    "像素工具在繁中重載尚未完成時因缺來源拒絕；待重載完成後同命令通過。"
+  ]
+}

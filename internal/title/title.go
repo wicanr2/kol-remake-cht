@@ -104,14 +104,15 @@ type Rand interface {
 
 // Frame 是序列送出的一個畫面。
 type Frame struct {
-	Index   int    // 在序列中的順序
-	EA      string // 原版送出這個畫面的呼叫位址
-	Kind    string // present_back / present_composed / draw_overlay
-	Back    int    // 背景 BACKPICS 圖號
-	Archive string // 疊圖 archive；沒有疊圖時為空
-	Overlay int    // 疊圖張號
-	Ticks   int    // 這個畫面停留的 tick 數；雷聲等非 tick 等待記為 0
-	Thunder bool   // 送出這個畫面之後是否放雷聲
+	Index        int    // 在序列中的順序
+	EA           string // 原版送出這個畫面的呼叫位址
+	Kind         string // present_back / present_composed / draw_overlay
+	Back         int    // 背景 BACKPICS 圖號
+	Archive      string // 疊圖 archive；沒有疊圖時為空
+	Overlay      int    // 疊圖張號
+	Ticks        int    // 這個畫面停留的 tick 數；雷聲等非 tick 等待記為 0
+	Thunder      bool   // 送出這個畫面之後是否放雷聲
+	ThunderCount int    // 原版連續呼叫次數；閃電為兩次，其他 cue 為一次
 }
 
 // Expand 把序列展開成一輪播放的畫面清單。
@@ -134,11 +135,13 @@ func (s *Sequence) Expand(rng Rand) ([]Frame, error) {
 	thunder := func() {
 		if len(out) > 0 {
 			out[len(out)-1].Thunder = true
+			out[len(out)-1].ThunderCount++
 		}
 	}
 	lightning := func(ea string) {
 		back, archive, overlay = 6, "", -1
 		emit(ea, "present_back")
+		thunder()
 		thunder()
 	}
 	runSet := func(set int) error {
@@ -241,7 +244,7 @@ func (p *Player) load() {
 	f := p.frames[p.index]
 	p.pending = float64(f.Ticks)
 	if f.Thunder {
-		p.pending += p.thunder
+		p.pending += p.thunder * float64(f.CueCount())
 	}
 	if p.pending < MinDwellTicks {
 		p.pending = MinDwellTicks
@@ -278,8 +281,19 @@ func (s *Sequence) Timeline(frames []Frame, thunderTicks float64) []float64 {
 		out = append(out, t/TickHz)
 		t += float64(f.Ticks)
 		if f.Thunder {
-			t += thunderTicks
+			t += thunderTicks * float64(f.CueCount())
 		}
 	}
 	return append(out, t/TickHz)
+}
+
+// CueCount 保留只指定 Thunder 的呼叫端，正式展開序列另記原版次數。
+func (f Frame) CueCount() int {
+	if !f.Thunder {
+		return 0
+	}
+	if f.ThunderCount > 0 {
+		return f.ThunderCount
+	}
+	return 1
 }

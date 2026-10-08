@@ -1,0 +1,24 @@
+{
+  "schema": "kol-complete-battle-final-audit-v1",
+  "date": "2026-10-01",
+  "current_inputs": 1213,
+  "attachments": 275,
+  "root_owned_or_md_directories": [],
+  "uid": 1000,
+  "gid": 1000,
+  "locks": {
+    "docs/verification/battle-complete-20261001/receipt.json": "b219d14e49e415883a0234147bef16bc261a2d3ca95016ca71d9170ee70b6c3b",
+    "docs/verification/battle-complete-20261001/verify_rounds.py": "365aaba72e71c4c9d02ef710166b20477bb2b2cba8a3f968d79f9cb1417420d7",
+    "docs/re/20261001-complete-battle.md": "ce61aa9eaea682974af14e8d665ca23af360de7b6cef1afa568b1bfbfd59a092",
+    "docs/re/battle-order-address-index.json": "a6b5227629563c91f1442daced95abbe934a08346179125271c8bfeff077180a",
+    "docs/spec/009-combat-attack.md": "421c76c3648683aaa80db442fc440129a5a8f9b5abe41638c4dbb010273bae8a",
+    "internal/battle/attack.go": "2ea216965067200514d19d6da4f75b8b1d10d386a3fa91f220cb0691b8311143",
+    "internal/battle/attack_test.go": "d28d4aa1ae1a244fa64a9da18f6f76db15d26cd8690e3dd15c557ebd06453d4e",
+    "internal/battle/state.go": "39865ec53036dc87e5c757f1e15270d1fb43debd962f6f68ef83efbd3ed0331e",
+    "internal/battle/battle.go": "52040ddcd48ae01f28b6380e0bbbc7315e7288f18f5816428e509a7ccb175b75",
+    "cmd/kol/original_rounds_test.go": "a4f2677dd1332bf5a307532cf7f853cbd146e89179bfdba1444902437a82c9a8",
+    "docs/worklist.json": "705247c7d4dccc9a3ccc14c758d80798aaeb2da29b439e787d765ee6e0adcab1",
+    "workplace/battle-complete-20261001/worklist-rules-final.txt": "45ea1cd1fd1c983d5e754715dda837feed0af626457aefae20977d9905a18f05"
+  },
+  "limitation": "完整正常GUI／戰後回寫／保存待驗；沒有正式交付。"
+}

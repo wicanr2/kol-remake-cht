@@ -1,0 +1,1992 @@
+{
+  "schema": "kol-ui-text-i18n-zh-Hant-v1",
+  "note": "原版三個 UI 文字庫的繁體中文譯文。原文由 tools/extract_ui_text.py 從 KOLDATA.0／BOOKDATA.0／ENDTXT.0 抽出（見 assets/original-derived-data/ui-text.json），這裡以**記錄號**索引——記錄號是原版的識別，譯文換了字也對得回去。",
+  "status": "三個文字庫共 486 筆全部翻完。",
+  "conventions": [
+    "`~Vxx`（掃描列）、`~Hxx`（欄）、`~Cxx`（置中）、`@`（換行）原樣保留。中文模式的欄數與英文模式同樣是 40，`~Hxx` 可直接沿用；`~Vxx` 是掃描列，中文模式要由 code 換算。",
+    "`|A`…`|S` 代換碼原樣保留，位置依中文語序調整（例：`|B|E at|F` → `|B的|E，攻向|F`）。",
+    "英文分詞用的 `]`（保證一個空白）中文不需要，譯文一律不放；欄位對齊用的除外。",
+    "戰鬥訊息是靠記錄號串接的碎片（RE-088），每一筆譯成「接得上去的片段」而不是獨立的句子，一筆記錄對一筆譯文，方便逐筆改。",
+    "工作人員名單的人名一律保留原文——那是署名，不是可譯的內容。",
+    "KOLDATA 320（原文 `The]`）譯成空字串：它同時當敵人名字的前綴與 `The blow` 的冠詞，中文兩處都不需要冠詞（RE-088）。"
+  ],
+  "source": {
+    "file": "assets/original-derived-data/ui-text.json",
+    "banks": {
+      "KOLDATA": {
+        "sha256": "1562c381a0ebd8fe982fd2923c33ec300448fb4fc0468cb5d953cd91e9d8a5c2",
+        "record_count": 395
+      },
+      "BOOKDATA": {
+        "sha256": "0378dedd8b41e7dc07a4e154fe38a662ae53bb30e02c924fce3745a4f1d36b41",
+        "record_count": 73
+      },
+      "ENDTXT": {
+        "sha256": "c31f188e20420c1b7ee8c48f95b5fba4c65852e063ddd5f7eec29bf8c2fa4fc8",
+        "record_count": 18
+      }
+    }
+  },
+  "banks": {
+    "KOLDATA": {
+      "0": {
+        "en": "Human",
+        "zh": "人類"
+      },
+      "1": {
+        "en": "Elven",
+        "zh": "精靈族"
+      },
+      "2": {
+        "en": "Dwarven",
+        "zh": "矮人族"
+      },
+      "3": {
+        "en": "Kelden",
+        "zh": "凱爾登"
+      },
+      "4": {
+        "en": "Male",
+        "zh": "男"
+      },
+      "5": {
+        "en": "Female",
+        "zh": "女"
+      },
+      "6": {
+        "en": "Barbarian",
+        "zh": "野蠻人"
+      },
+      "7": {
+        "en": "Ranger",
+        "zh": "遊俠"
+      },
+      "8": {
+        "en": "Warrion",
+        "zh": "戰士"
+      },
+      "9": {
+        "en": "Squire",
+        "zh": "侍從"
+      },
+      "10": {
+        "en": "Darkguard",
+        "zh": "黑衛"
+      },
+      "11": {
+        "en": "Watchman",
+        "zh": "守望者"
+      },
+      "12": {
+        "en": "Plainsman",
+        "zh": "平原人"
+      },
+      "13": {
+        "en": "Hunter",
+        "zh": "獵人"
+      },
+      "14": {
+        "en": "Regular",
+        "zh": "正規兵"
+      },
+      "15": {
+        "en": "Highwayman",
+        "zh": "築路工"
+      },
+      "16": {
+        "en": "Pirate",
+        "zh": "海盜"
+      },
+      "17": {
+        "en": "Rogue",
+        "zh": "盜賊"
+      },
+      "18": {
+        "en": "Tigress",
+        "zh": "虎女"
+      },
+      "19": {
+        "en": "Amazon",
+        "zh": "亞馬遜"
+      },
+      "20": {
+        "en": "Huntress",
+        "zh": "女獵人"
+      },
+      "21": {
+        "en": "Plainswoman",
+        "zh": "平原女"
+      },
+      "22": {
+        "en": "Brekland",
+        "zh": "布雷克蘭"
+      },
+      "23": {
+        "en": "Klvar",
+        "zh": "克爾瓦"
+      },
+      "24": {
+        "en": "Melod",
+        "zh": "梅洛德"
+      },
+      "25": {
+        "en": "Pyar",
+        "zh": "皮亞爾"
+      },
+      "26": {
+        "en": "Thism",
+        "zh": "席斯姆"
+      },
+      "27": {
+        "en": "Usip",
+        "zh": "烏西普"
+      },
+      "28": {
+        "en": "Tunneler",
+        "zh": "掘道者"
+      },
+      "29": {
+        "en": "Ratguard",
+        "zh": "鼠衛"
+      },
+      "30": {
+        "en": "Trollbane",
+        "zh": "巨魔剋星"
+      },
+      "31": {
+        "en": "Militia",
+        "zh": "民兵"
+      },
+      "32": {
+        "en": "Digger",
+        "zh": "挖掘者"
+      },
+      "33": {
+        "en": "Spider Guard",
+        "zh": "蛛衛"
+      },
+      "34": {
+        "en": "Orcbane",
+        "zh": "獸人剋星"
+      },
+      "35": {
+        "en": "Levy",
+        "zh": "徵召兵"
+      },
+      "36": {
+        "en": "Cliff Guard",
+        "zh": "崖衛"
+      },
+      "37": {
+        "en": "Rock Ranger",
+        "zh": "岩地遊俠"
+      },
+      "38": {
+        "en": "Far Seeker",
+        "zh": "遠望者"
+      },
+      "39": {
+        "en": "Too small to wear!",
+        "zh": "太小了，穿不下！"
+      },
+      "40": {
+        "en": "Give to whom?",
+        "zh": "要給誰？"
+      },
+      "41": {
+        "en": "Their backpack is full!",
+        "zh": "他的背包滿了！"
+      },
+      "42": {
+        "en": "The Object is traded!",
+        "zh": "物品交出去了！"
+      },
+      "43": {
+        "en": "\"You are hurt! You@",
+        "zh": "「你受傷了！"
+      },
+      "44": {
+        "en": "~H0Dshould go to the abbey.\"@",
+        "zh": "該去修道院看看。」"
+      },
+      "45": {
+        "en": "\"What can I do for you?\"@",
+        "zh": "「有什麼我能效勞的嗎？」"
+      },
+      "46": {
+        "en": "\"Any other gossip?\"",
+        "zh": "「還有別的消息嗎？」"
+      },
+      "47": {
+        "en": "\"I heard]",
+        "zh": "「我聽過"
+      },
+      "48": {
+        "en": "talking about]",
+        "zh": "談起"
+      },
+      "49": {
+        "en": "\"Do you want this?\"@@",
+        "zh": "「你要這個嗎？」@@"
+      },
+      "50": {
+        "en": "\"Eat here?\"",
+        "zh": "「在這裡吃嗎？」"
+      },
+      "51": {
+        "en": "\"If you want this fitted@",
+        "zh": "「這件要改到合身@"
+      },
+      "52": {
+        "en": "\"Sell me this?\"@@",
+        "zh": "「這個賣我？」@@"
+      },
+      "53": {
+        "en": "Whole party?",
+        "zh": "全隊一起住嗎？"
+      },
+      "54": {
+        "en": "Do you wish to quit?",
+        "zh": "你要離開遊戲嗎？"
+      },
+      "55": {
+        "en": "\"If you want to stay@",
+        "zh": "「你要住下的話，"
+      },
+      "56": {
+        "en": "~H0Djust grab an open room!\"@",
+        "zh": "隨便挑間空房吧！」"
+      },
+      "57": {
+        "en": "\"If you need healing@",
+        "zh": "「你需要療傷的話，"
+      },
+      "58": {
+        "en": "\"The armor on your]",
+        "zh": "「你身上的]"
+      },
+      "59": {
+        "en": "@~H0Dneeds to be adjusted!\"",
+        "zh": "@~H0D該調整一下了！」"
+      },
+      "60": {
+        "en": "\"If you want this forged@",
+        "zh": "「這個要打造@"
+      },
+      "61": {
+        "en": "\"Name this weapon.\"@@",
+        "zh": "「為這把武器命名。」@@"
+      },
+      "62": {
+        "en": "\"If you want to train@",
+        "zh": "「你想訓練@"
+      },
+      "63": {
+        "en": "How many]",
+        "zh": "要幾點]"
+      },
+      "64": {
+        "en": " Skill@",
+        "zh": "技能@"
+      },
+      "65": {
+        "en": "~H0DPoints did you want?\"",
+        "zh": "~H0D點數呢？」"
+      },
+      "66": {
+        "en": "\"Will you do this?\"",
+        "zh": "「你要這麼做嗎？」"
+      },
+      "67": {
+        "en": "\"Very well. Be off!\"",
+        "zh": "「很好。去吧！」"
+      },
+      "68": {
+        "en": "\"If you want to join@",
+        "zh": "「你想加入@"
+      },
+      "69": {
+        "en": "~H0Dthe]",
+        "zh": "~H0D這個]"
+      },
+      "70": {
+        "en": " Order]",
+        "zh": "教團]"
+      },
+      "71": {
+        "en": "\"Your",
+        "zh": "「你的"
+      },
+      "72": {
+        "en": "\"You are now a member of@",
+        "zh": "「你現在是這裡的成員了@"
+      },
+      "73": {
+        "en": "\"If you want this spell@",
+        "zh": "「這個法術要@"
+      },
+      "74": {
+        "en": "~V5A~H06Record changes in Spellbook?",
+        "zh": "~V5A~H06把變更記進法術書？"
+      },
+      "75": {
+        "en": "~V5A~H0E\"That one is unknown to@",
+        "zh": "~V5A~H0E「那個我不認得@"
+      },
+      "76": {
+        "en": "the Order of the@",
+        "zh": "所屬的教團是@"
+      },
+      "77": {
+        "en": "~V36~H0BCLASS~H17SUBCLASS~V68~H07STAT~H12RANGE DUR  DMG~V82~H07Adventure Point Cost..@Gold Crown Cost.......",
+        "zh": "~V36~H0B種族~H17亞種~V68~H07屬性~H12距離~H18持續~H1D強度~V82~H07冒險點數花費..@金冠花費........",
+        "note": "欄名依說明書第 7 章（種族／亞種／屬性／強度／距離／持續時間）；RANGE／DUR／DMG 各給 ~H，中文字寬與英文不同，不能靠空白對齊欄位"
+      },
+      "78": {
+        "en": "Learn a spell",
+        "zh": "學一個法術"
+      },
+      "79": {
+        "en": "Modify a spell",
+        "zh": "修改一個法術"
+      },
+      "80": {
+        "en": "Short",
+        "zh": "短"
+      },
+      "81": {
+        "en": "Long",
+        "zh": "長"
+      },
+      "82": {
+        "en": "----",
+        "zh": "----"
+      },
+      "83": {
+        "en": "~H0Dit will cost you]",
+        "zh": "要付"
+      },
+      "84": {
+        "en": "@~H0Dgold, interested?\"@",
+        "zh": "枚金幣，願意嗎？」"
+      },
+      "85": {
+        "en": "\"Which one needs help?\"",
+        "zh": "「哪一位需要幫忙？」"
+      },
+      "86": {
+        "en": "\"Sorry, not enough@~H0Dgold crowns!\"",
+        "zh": "「抱歉，你的金幣不夠。」"
+      },
+      "87": {
+        "en": "Just a moment...",
+        "zh": "請稍候……"
+      },
+      "88": {
+        "en": "\"Sorry, I have no@~H0Dguests!\"",
+        "zh": "「抱歉，我這裡沒有@~H0D客人！」"
+      },
+      "89": {
+        "en": "pack is full!",
+        "zh": "背包滿了！"
+      },
+      "90": {
+        "en": "\"Get out, scum!\"",
+        "zh": "「滾出去，人渣！」"
+      },
+      "91": {
+        "en": "\"Not lately.\"@",
+        "zh": "「最近沒有。」"
+      },
+      "92": {
+        "en": "\"I'll put this on you.\"@",
+        "zh": "「我幫你穿上。」@"
+      },
+      "93": {
+        "en": "\"I'll pack it for you.\"@",
+        "zh": "「我幫你打包。」@"
+      },
+      "94": {
+        "en": "\"You have no items!\"@",
+        "zh": "「你身上沒有東西！」@"
+      },
+      "95": {
+        "en": "\"I haven't enough!\"@",
+        "zh": "「我的錢不夠！」@"
+      },
+      "96": {
+        "en": "\"Thanks!\"@",
+        "zh": "「謝啦！」@"
+      },
+      "97": {
+        "en": "Something is missing!",
+        "zh": "少了什麼東西！"
+      },
+      "98": {
+        "en": "\"You look fine!\"",
+        "zh": "「你看起來好得很！」"
+      },
+      "99": {
+        "en": "\"Drink and be healed!\"",
+        "zh": "「喝下去，傷就好了！」"
+      },
+      "100": {
+        "en": "\"I'm all booked up!\"",
+        "zh": "「客滿了！」"
+      },
+      "101": {
+        "en": "\"Give me your reins.\"@",
+        "zh": "「把韁繩給我。」@"
+      },
+      "102": {
+        "en": "\"Take these reins.\"@",
+        "zh": "「拿去這副韁繩。」@"
+      },
+      "103": {
+        "en": "\"You don't need to fit!\"",
+        "zh": "「你不需要調整！」"
+      },
+      "104": {
+        "en": "\"Show me your Ingot.\"@",
+        "zh": "「把金屬錠給我看。」@"
+      },
+      "105": {
+        "en": "\"This isn't an Ingot!\"@",
+        "zh": "「這不是金屬錠！」@"
+      },
+      "106": {
+        "en": "\"Your weapon is forged!\"",
+        "zh": "「你的武器打好了！」"
+      },
+      "107": {
+        "en": "\"Go to the Arena!\"",
+        "zh": "「去競技場吧！」"
+      },
+      "108": {
+        "en": "\"In which skill?\"@",
+        "zh": "「要練哪一項？」@"
+      },
+      "109": {
+        "en": "\"You've learned enough!\"",
+        "zh": "「你學得夠多了！」"
+      },
+      "110": {
+        "en": "\"You're not that good!\"",
+        "zh": "「你還沒那麼行！」"
+      },
+      "111": {
+        "en": "\"You're too good!\"",
+        "zh": "「你太強了！」"
+      },
+      "112": {
+        "en": "\"Let's train!\"",
+        "zh": "「來訓練吧！」"
+      },
+      "113": {
+        "en": "\"You lack valor.\"@",
+        "zh": "「你缺乏勇氣。」@"
+      },
+      "114": {
+        "en": "\"Those wounds need@~H0Dtending.\"@",
+        "zh": "「這身傷得好好處理。」"
+      },
+      "115": {
+        "en": "~V3A~H02STRENGTH :@~V42QUICKNESS:@~V4AHEALTH   :@~V52FORESIGHT:@~V5ACHARISMA :@~V62INTELLECT:@~V6ABALANCE  :@~V72ENDURANCE:~V36~H10WEAPON SKILL  OFF  DEF~V5F~H10GOLD CROWNS  :@~V67ADVENTURE PTS:@~V6FMOVEMENT RATE:~V84~H05DAMAGE :@~V92NUTRITION :",
+        "zh": "~V3A~H02力量　：@~V42敏捷　：@~V4A健康　：@~V52先見　：@~V5A魅力　：@~V62智力　：@~V6A平衡　：@~V72耐力　：~V36~H10武器技能　攻擊　防禦~V5F~H10金冠　　：@~V67冒險點數：@~V6F移動率　：~V84~H05傷勢：@~V92營養："
+      },
+      "116": {
+        "en": "PEASANT",
+        "zh": "農民"
+      },
+      "117": {
+        "en": "SERF",
+        "zh": "農奴"
+      },
+      "118": {
+        "en": "LABORER",
+        "zh": "工人"
+      },
+      "119": {
+        "en": "FREEDMAN",
+        "zh": "自由民"
+      },
+      "120": {
+        "en": "TRADESMAN",
+        "zh": "商人"
+      },
+      "121": {
+        "en": "COMMON",
+        "zh": "平民"
+      },
+      "122": {
+        "en": "APPRETINCE",
+        "zh": "學徒"
+      },
+      "123": {
+        "en": "JOURNEYMAN",
+        "zh": "工匠"
+      },
+      "124": {
+        "en": "MASTER",
+        "zh": "師傅"
+      },
+      "125": {
+        "en": "COURTIER",
+        "zh": "廷臣"
+      },
+      "126": {
+        "en": "GENTLE",
+        "zh": "仕紳"
+      },
+      "127": {
+        "en": "WANDERER",
+        "zh": "流浪者"
+      },
+      "128": {
+        "en": "ADVENTURER",
+        "zh": "冒險者"
+      },
+      "129": {
+        "en": "HERO",
+        "zh": "英雄"
+      },
+      "130": {
+        "en": "ARMIGER",
+        "zh": "扈從"
+      },
+      "131": {
+        "en": "SQUIRE",
+        "zh": "侍從"
+      },
+      "132": {
+        "en": "NOVICE",
+        "zh": "新手"
+      },
+      "133": {
+        "en": "INITIATE",
+        "zh": "入門者"
+      },
+      "134": {
+        "en": "ADEPT",
+        "zh": "熟練者"
+      },
+      "135": {
+        "en": "CANDIDATE",
+        "zh": "候選人"
+      },
+      "136": {
+        "en": "KNIGHT",
+        "zh": "騎士"
+      },
+      "137": {
+        "en": "ERRANT",
+        "zh": "遊俠騎士"
+      },
+      "138": {
+        "en": "COMMANDER",
+        "zh": "指揮官"
+      },
+      "139": {
+        "en": "MARSHALL",
+        "zh": "元帥"
+      },
+      "140": {
+        "en": "BARONET",
+        "zh": "男爵"
+      },
+      "141": {
+        "en": "HEAD@TORSO@LEGS@BODY@HANDS@FEET@SHIELD@NECK@RING@BELT@WEAPON@POCKET@POCKET@POCKET@POCKET@POCKET@POCKET",
+        "zh": "頭部@軀幹@腿部@身體@雙手@雙足@盾牌@頸部@指環@腰帶@武器@口袋@口袋@口袋@口袋@口袋@口袋"
+      },
+      "142": {
+        "en": "Head",
+        "zh": "頭部"
+      },
+      "143": {
+        "en": "Torso",
+        "zh": "軀幹"
+      },
+      "144": {
+        "en": "Legs",
+        "zh": "腿部"
+      },
+      "145": {
+        "en": "Body",
+        "zh": "身體"
+      },
+      "146": {
+        "en": "Hands",
+        "zh": "雙手"
+      },
+      "147": {
+        "en": "Feet",
+        "zh": "雙足"
+      },
+      "148": {
+        "en": "Shield",
+        "zh": "盾牌"
+      },
+      "149": {
+        "en": "Neck",
+        "zh": "頸部"
+      },
+      "150": {
+        "en": "Ring",
+        "zh": "指環"
+      },
+      "151": {
+        "en": "Belt",
+        "zh": "腰帶"
+      },
+      "152": {
+        "en": "Weapon",
+        "zh": "武器"
+      },
+      "153": {
+        "en": "Pocket",
+        "zh": "口袋"
+      },
+      "154": {
+        "en": "\"What do you know?\"",
+        "zh": "「你知道些什麼？」"
+      },
+      "155": {
+        "en": "\"How are things?\"",
+        "zh": "「近來如何？」"
+      },
+      "156": {
+        "en": "\"Any news in town?\"",
+        "zh": "「鎮上有什麼消息嗎？」"
+      },
+      "157": {
+        "en": "\"What news have you of@~H0Dthe world?\"",
+        "zh": "「外頭的世事，你聽說了什麼？」"
+      },
+      "158": {
+        "en": "that",
+        "zh": "那件事"
+      },
+      "159": {
+        "en": "them",
+        "zh": "他們"
+      },
+      "160": {
+        "en": "him",
+        "zh": "他"
+      },
+      "161": {
+        "en": "her",
+        "zh": "她"
+      },
+      "162": {
+        "en": "~H0D\"Your backpack is full!\"",
+        "zh": "~H0D「你的背包滿了！」"
+      },
+      "163": {
+        "en": "Typ:",
+        "zh": "類別："
+      },
+      "164": {
+        "en": "Item",
+        "zh": "物品"
+      },
+      "165": {
+        "en": "Wield",
+        "zh": "持握"
+      },
+      "166": {
+        "en": "Wear",
+        "zh": "穿戴"
+      },
+      "167": {
+        "en": "Both",
+        "zh": "兩者"
+      },
+      "168": {
+        "en": "Hnd:",
+        "zh": "手數："
+      },
+      "169": {
+        "en": "One",
+        "zh": "單手"
+      },
+      "170": {
+        "en": "Two",
+        "zh": "雙手"
+      },
+      "171": {
+        "en": "Pos:",
+        "zh": "部位："
+      },
+      "172": {
+        "en": "Dmg:",
+        "zh": "傷害："
+      },
+      "173": {
+        "en": "Prt:",
+        "zh": "防護："
+      },
+      "174": {
+        "en": "Enc:",
+        "zh": "負重："
+      },
+      "175": {
+        "en": "GC :",
+        "zh": "金冠："
+      },
+      "176": {
+        "en": "Nut:",
+        "zh": "營養："
+      },
+      "177": {
+        "en": "Cnd:",
+        "zh": "狀況："
+      },
+      "178": {
+        "en": "Fc :",
+        "zh": "合身："
+      },
+      "179": {
+        "en": "Poor",
+        "zh": "差"
+      },
+      "180": {
+        "en": "Fair",
+        "zh": "尚可"
+      },
+      "181": {
+        "en": "Good",
+        "zh": "良好"
+      },
+      "182": {
+        "en": "Great",
+        "zh": "極佳"
+      },
+      "183": {
+        "en": "Bad",
+        "zh": "很糟"
+      },
+      "184": {
+        "en": "Poor",
+        "zh": "破舊"
+      },
+      "185": {
+        "en": "Worn",
+        "zh": "磨損"
+      },
+      "186": {
+        "en": "New",
+        "zh": "全新"
+      },
+      "187": {
+        "en": "Head",
+        "zh": "頭部"
+      },
+      "188": {
+        "en": "Trso",
+        "zh": "軀幹"
+      },
+      "189": {
+        "en": "Legs",
+        "zh": "腿部"
+      },
+      "190": {
+        "en": "Body",
+        "zh": "身體"
+      },
+      "191": {
+        "en": "Hnds",
+        "zh": "雙手"
+      },
+      "192": {
+        "en": "Feet",
+        "zh": "雙足"
+      },
+      "193": {
+        "en": "Shld",
+        "zh": "盾牌"
+      },
+      "194": {
+        "en": "Neck",
+        "zh": "頸部"
+      },
+      "195": {
+        "en": "Fngr",
+        "zh": "手指"
+      },
+      "196": {
+        "en": "Belt",
+        "zh": "腰帶"
+      },
+      "197": {
+        "en": "Food",
+        "zh": "食物"
+      },
+      "198": {
+        "en": "The meal was]",
+        "zh": "這一餐]"
+      },
+      "199": {
+        "en": "head",
+        "zh": "頭部"
+      },
+      "200": {
+        "en": "torso",
+        "zh": "軀幹"
+      },
+      "201": {
+        "en": "legs",
+        "zh": "腿部"
+      },
+      "202": {
+        "en": "    You have nothing@",
+        "zh": "　　你的",
+        "note": "202＋203＋部位名串成「你的<部位>上沒有東西」；原版的英文語序是 nothing on your <部位>，中文顛倒過來。這三筆目前沒有 code 用到，接上時要複核。"
+      },
+      "203": {
+        "en": "    on your]",
+        "zh": "上沒有東西",
+        "note": "202＋203＋部位名串成「你的<部位>上沒有東西」；原版的英文語序是 nothing on your <部位>，中文顛倒過來。這三筆目前沒有 code 用到，接上時要複核。"
+      },
+      "204": {
+        "en": "    in your pocket!",
+        "zh": "　　你的口袋裡沒有東西！"
+      },
+      "205": {
+        "en": "\"If you want this steed@",
+        "zh": "「這匹坐騎要@"
+      },
+      "206": {
+        "en": "Offensive",
+        "zh": "攻擊"
+      },
+      "207": {
+        "en": "Defensive",
+        "zh": "防禦"
+      },
+      "208": {
+        "en": "\"Sorry, not enough@~H0DAdventure Points!\"",
+        "zh": "「抱歉，冒險點數@~H0D不夠！」"
+      },
+      "209": {
+        "en": "Are you sure?",
+        "zh": "確定嗎？"
+      },
+      "210": {
+        "en": "It is dropped!",
+        "zh": "丟掉了！"
+      },
+      "211": {
+        "en": "Your backpack is full!",
+        "zh": "你的背包滿了！"
+      },
+      "212": {
+        "en": "    in your weapon hand!",
+        "zh": "　　武器手上沒有東西！"
+      },
+      "213": {
+        "en": "  DAWN ]",
+        "zh": "破曉"
+      },
+      "214": {
+        "en": "MID MORN",
+        "zh": "上午"
+      },
+      "215": {
+        "en": "  NOON ]",
+        "zh": "正午"
+      },
+      "216": {
+        "en": "AFT NOON",
+        "zh": "午後"
+      },
+      "217": {
+        "en": "TWILIGHT",
+        "zh": "黃昏"
+      },
+      "218": {
+        "en": "DESERT",
+        "zh": "沙漠"
+      },
+      "219": {
+        "en": "RIVER]",
+        "zh": "河流"
+      },
+      "220": {
+        "en": "SWAMP]",
+        "zh": "沼澤"
+      },
+      "221": {
+        "en": " HILL]",
+        "zh": "丘陵"
+      },
+      "222": {
+        "en": " ROAD]",
+        "zh": "道路"
+      },
+      "223": {
+        "en": "FOREST",
+        "zh": "森林"
+      },
+      "224": {
+        "en": "SHORE]",
+        "zh": "海岸"
+      },
+      "225": {
+        "en": "PLAINS",
+        "zh": "平原"
+      },
+      "226": {
+        "en": "CAMPING!",
+        "zh": "紮營！"
+      },
+      "227": {
+        "en": "@~H0DAttempt to ride away?",
+        "zh": "@~H0D要騎馬離開嗎？"
+      },
+      "228": {
+        "en": "~H0DRiding skillfully, you@leave the unknown@behind!",
+        "zh": "~H0D你騎術高明，@把未知拋在@身後！"
+      },
+      "229": {
+        "en": "You cannot ride away.",
+        "zh": "你無法騎馬離開。"
+      },
+      "230": {
+        "en": "~H0DWill you be healed?",
+        "zh": "~H0D要接受治療嗎？"
+      },
+      "231": {
+        "en": "~V0B~H08YOU HAVE BEEN AMBUSHED@BY]",
+        "zh": "~V0B~H08你遭到埋伏！@來襲的是"
+      },
+      "232": {
+        "en": ", LEVEL]",
+        "zh": "隻，等級"
+      },
+      "233": {
+        "en": "~V0B~H08YOU ENCOUNTER THE@FEARSOME CREATURES OF@YOUR QUEST!",
+        "zh": "~V0B~H08你遇上了任務中@那些可怕的@生物！"
+      },
+      "234": {
+        "en": "@~H0DWill you partake?",
+        "zh": "@~H0D要接下嗎？"
+      },
+      "235": {
+        "en": "~V3C~H14The Arena@The Tester",
+        "zh": "~V3C~H14競技場@試煉者"
+      },
+      "236": {
+        "en": "~V3C~H11A Gambling Booth@~H12The Bet Taker",
+        "zh": "~V3C~H11賭博攤@~H12莊家"
+      },
+      "237": {
+        "en": "~H0D\"Which one wishs to@fight?\"",
+        "zh": "~H0D「哪一位想要@上場？」"
+      },
+      "238": {
+        "en": "~H0D\"Are you sure you wish@to enter?\"",
+        "zh": "~H0D「你確定要@進場嗎？」"
+      },
+      "239": {
+        "en": "~H0D\"Return when you have@gained courage!\"",
+        "zh": "~H0D「等你有了膽量@再回來吧！」"
+      },
+      "240": {
+        "en": "~H0DYou follow him down a@tunnel.  A man shouts@at you.@",
+        "zh": "~H0D你跟著他走下一條@通道。有個男人朝你@大喊。@"
+      },
+      "241": {
+        "en": "~H0D\"Do you wish to bet?\"",
+        "zh": "~H0D「你要下注嗎？」"
+      },
+      "242": {
+        "en": "~H0D\"Do any of you wish to@to bet?\"",
+        "zh": "~H0D「你們有誰要@下注嗎？」"
+      },
+      "243": {
+        "en": "~H0D\"Which of you would like@to wager?\"",
+        "zh": "~H0D「你們哪一位想@押注？」"
+      },
+      "244": {
+        "en": "\"You cannot bet!\"",
+        "zh": "「你不能下注！」"
+      },
+      "245": {
+        "en": "\"You cannot bet again!\"",
+        "zh": "「你不能再下注了！」"
+      },
+      "246": {
+        "en": "\"How much?\" ]",
+        "zh": "「多少？」"
+      },
+      "247": {
+        "en": "~H0D\"Betting on your@friend?\"",
+        "zh": "~H0D「押你的@朋友嗎？」"
+      },
+      "248": {
+        "en": "\"Good friends, eh?\"",
+        "zh": "「交情不錯嘛？」"
+      },
+      "249": {
+        "en": "~H0D\"You are not ready@for the Arena.\"",
+        "zh": "~H0D「你還沒準備好@上競技場。」"
+      },
+      "250": {
+        "en": "~H0D\"None of you are ready@for the Arena.\"",
+        "zh": "~H0D「你們沒有一個準備好@上競技場。」"
+      },
+      "251": {
+        "en": "~V11~H09YOU ENTER THE ARENA!",
+        "zh": "~V11~H09你踏進了競技場！"
+      },
+      "252": {
+        "en": "~V5B~H02OPT",
+        "zh": "~V5B~H02選項"
+      },
+      "253": {
+        "en": "~V5B~H02ATK",
+        "zh": "~V5B~H02攻擊"
+      },
+      "254": {
+        "en": "~V7B~H02LOC",
+        "zh": "~V7B~H02部位"
+      },
+      "255": {
+        "en": "~V7B~H06DEF",
+        "zh": "~V7B~H06防禦"
+      },
+      "256": {
+        "en": "~V5B~H06DIR",
+        "zh": "~V5B~H06方向"
+      },
+      "257": {
+        "en": "~V18~H03W:@H:@T:@L:@S:@B:@",
+        "zh": "~V18~H03武：@頭：@軀：@腿：@盾：@腰：@"
+      },
+      "258": {
+        "en": "ARROWS:",
+        "zh": "箭："
+      },
+      "259": {
+        "en": "BOLTS:",
+        "zh": "弩矢："
+      },
+      "260": {
+        "en": "~V07~H03Which Spell?",
+        "zh": "~V07~H03哪一個法術？"
+      },
+      "261": {
+        "en": "~V07~H03Select Affect",
+        "zh": "~V07~H03選擇效果"
+      },
+      "262": {
+        "en": "Positive",
+        "zh": "正面"
+      },
+      "263": {
+        "en": "Negative",
+        "zh": "負面"
+      },
+      "264": {
+        "en": "~V16~H03Begin next@round?",
+        "zh": "~V16~H03開始下@一回合？"
+      },
+      "265": {
+        "en": "~VB0~H0ADo you want to flee?",
+        "zh": "~VB0~H0A要逃跑嗎？"
+      },
+      "266": {
+        "en": "is blocked from moving!",
+        "zh": "移動受阻！"
+      },
+      "267": {
+        "en": "moves!",
+        "zh": "移動了！"
+      },
+      "268": {
+        "en": "cannot drop|B|E!",
+        "zh": "無法丟下|B的|E！"
+      },
+      "269": {
+        "en": "drops|B|E!",
+        "zh": "丟下了|B的|E！"
+      },
+      "270": {
+        "en": "him",
+        "zh": "他"
+      },
+      "271": {
+        "en": "her",
+        "zh": "她"
+      },
+      "272": {
+        "en": "his",
+        "zh": "他",
+        "note": "所有格代名詞；中文模板在 |A／|B 後自帶「的」，與 271「她」同一寫法，避免「他的的」"
+      },
+      "273": {
+        "en": "You have found a|H.  Do you want to pick it up?",
+        "zh": "你找到了|H。要撿起來嗎？"
+      },
+      "274": {
+        "en": "|G, you must drop or belt your|E to pick this up!",
+        "zh": "|G，要先丟下或把你的|E收進腰帶，才撿得起這個！"
+      },
+      "275": {
+        "en": "|G, this is the quest item!  Run for the exit!",
+        "zh": "|G，這就是任務物品！快跑向出口！"
+      },
+      "276": {
+        "en": "puts|B|I in|B belt",
+        "zh": "把|B的|I收進腰帶"
+      },
+      "277": {
+        "en": ", and]",
+        "zh": "，並且"
+      },
+      "278": {
+        "en": "wields|B|E.",
+        "zh": "舉起|B的|E。"
+      },
+      "279": {
+        "en": "does nothing.",
+        "zh": "什麼也沒做。"
+      },
+      "280": {
+        "en": "is frozen in terror!",
+        "zh": "嚇得動彈不得！"
+      },
+      "281": {
+        "en": "is resting!",
+        "zh": "正在休息！"
+      },
+      "282": {
+        "en": "is blocked!",
+        "zh": "被擋住了！"
+      },
+      "283": {
+        "en": "lands!",
+        "zh": "降落了！"
+      },
+      "284": {
+        "en": "collapses from exhaustion!",
+        "zh": "力竭倒地！"
+      },
+      "285": {
+        "en": "dies from blood loss!",
+        "zh": "失血過多而死！"
+      },
+      "286": {
+        "en": "shatters into pieces!",
+        "zh": "碎成了片片！"
+      },
+      "287": {
+        "en": "staggers about.",
+        "zh": "踉蹌搖晃。"
+      },
+      "288": {
+        "en": "whips|B|E through the air.",
+        "zh": "揮舞|B的|E劃過空中。"
+      },
+      "289": {
+        "en": "fires a missle into a]",
+        "zh": "射出一發，打中了"
+      },
+      "290": {
+        "en": "tree!",
+        "zh": "樹！"
+      },
+      "291": {
+        "en": "wall!",
+        "zh": "牆！"
+      },
+      "292": {
+        "en": "fires a missle but nothing is there!",
+        "zh": "射出一發，但那裡什麼也沒有！"
+      },
+      "293": {
+        "en": "fires a missle",
+        "zh": "射出一發"
+      },
+      "294": {
+        "en": "throws a boulder",
+        "zh": "扔出一塊巨石"
+      },
+      "295": {
+        "en": " at|F",
+        "zh": "，攻向|F"
+      },
+      "296": {
+        "en": "kicks|B leg",
+        "zh": "踢出|B的腿"
+      },
+      "297": {
+        "en": "throws|B body",
+        "zh": "撞出|B的身體"
+      },
+      "298": {
+        "en": "butts|B head",
+        "zh": "頂出|B的頭"
+      },
+      "299": {
+        "en": "swings|B fist",
+        "zh": "揮出|B的拳"
+      },
+      "300": {
+        "en": "f",
+        "zh": "f"
+      },
+      "301": {
+        "en": "f",
+        "zh": "f"
+      },
+      "302": {
+        "en": "f",
+        "zh": "f"
+      },
+      "303": {
+        "en": "f",
+        "zh": "f"
+      },
+      "304": {
+        "en": "whacks",
+        "zh": "揮砍"
+      },
+      "305": {
+        "en": "chops",
+        "zh": "劈下"
+      },
+      "306": {
+        "en": "hacks",
+        "zh": "猛砍"
+      },
+      "307": {
+        "en": "cuts",
+        "zh": "割向"
+      },
+      "308": {
+        "en": "thrusts",
+        "zh": "突刺"
+      },
+      "309": {
+        "en": "stabs",
+        "zh": "刺出"
+      },
+      "310": {
+        "en": "jabs",
+        "zh": "戳出"
+      },
+      "311": {
+        "en": "slices",
+        "zh": "削向"
+      },
+      "312": {
+        "en": "rakes",
+        "zh": "橫掃"
+      },
+      "313": {
+        "en": "slashes",
+        "zh": "斬出"
+      },
+      "314": {
+        "en": "|B|E at|F",
+        "zh": "|B的|E，攻向|F"
+      },
+      "315": {
+        "en": " but misses|C completely!",
+        "zh": "，卻完全沒打中|C！"
+      },
+      "316": {
+        "en": " but misses|C.",
+        "zh": "，但沒打中|C。"
+      },
+      "317": {
+        "en": " but narrowly misses|C.",
+        "zh": "，差一點就打中|C。"
+      },
+      "318": {
+        "en": " who cannot parry the blow!",
+        "zh": "，對方擋不住這一擊！"
+      },
+      "319": {
+        "en": " but misses completely!",
+        "zh": "，卻完全落空！"
+      },
+      "320": {
+        "en": "The]",
+        "zh": "",
+        "note": "刻意留空：原文 `The]` 同時當敵人名字的前綴與 `The blow`／`The spell` 的冠詞，中文兩處都不需要冠詞（RE-088）。"
+      },
+      "321": {
+        "en": "blow",
+        "zh": "這一擊"
+      },
+      "322": {
+        "en": "spell",
+        "zh": "這道法術"
+      },
+      "323": {
+        "en": " hits|F's]",
+        "zh": "擊中|F的"
+      },
+      "324": {
+        "en": "head",
+        "zh": "頭部"
+      },
+      "325": {
+        "en": "chest",
+        "zh": "胸口"
+      },
+      "326": {
+        "en": "right arm",
+        "zh": "右臂"
+      },
+      "327": {
+        "en": "left arm",
+        "zh": "左臂"
+      },
+      "328": {
+        "en": "right leg",
+        "zh": "右腿"
+      },
+      "329": {
+        "en": "left leg",
+        "zh": "左腿"
+      },
+      "330": {
+        "en": " doing little damage!",
+        "zh": "，只造成輕微傷害！"
+      },
+      "331": {
+        "en": " making|C]",
+        "zh": "，讓|C"
+      },
+      "332": {
+        "en": "collapse",
+        "zh": "倒了下去"
+      },
+      "333": {
+        "en": " from blood loss!",
+        "zh": "——失血過多！"
+      },
+      "334": {
+        "en": "shatter into pieces!",
+        "zh": "碎成了片片！"
+      },
+      "335": {
+        "en": "die",
+        "zh": "死去"
+      },
+      "336": {
+        "en": " making|C unconscious!",
+        "zh": "，讓|C昏了過去！"
+      },
+      "337": {
+        "en": " killing it instantly!",
+        "zh": "，當場斃命！"
+      },
+      "338": {
+        "en": " making that limb useless!",
+        "zh": "，那條肢體廢了！"
+      },
+      "339": {
+        "en": " causing a]",
+        "zh": "，造成"
+      },
+      "340": {
+        "en": " wound!",
+        "zh": "的傷口！"
+      },
+      "341": {
+        "en": "serious",
+        "zh": "嚴重"
+      },
+      "342": {
+        "en": "terrible",
+        "zh": "可怕"
+      },
+      "343": {
+        "en": "grievous",
+        "zh": "致命"
+      },
+      "344": {
+        "en": "The blow stuns|F]",
+        "zh": "這一擊打得|F暈頭轉向"
+      },
+      "345": {
+        "en": "The force of the blow knocks|F]",
+        "zh": "這一擊的力道把|F擊得"
+      },
+      "346": {
+        "en": "backwards,",
+        "zh": "向後倒退，"
+      },
+      "347": {
+        "en": "and|A|H falls to the ground!",
+        "zh": "|A的|H掉到了地上！"
+      },
+      "348": {
+        "en": "backwards!",
+        "zh": "向後倒退！"
+      },
+      "349": {
+        "en": "places a bolt in|B|E!",
+        "zh": "把一支弩矢裝進|B的|E！"
+      },
+      "350": {
+        "en": " who]",
+        "zh": "，對方"
+      },
+      "351": {
+        "en": "does not attempt to parry!",
+        "zh": "沒有試圖招架！"
+      },
+      "352": {
+        "en": "avoids the blow by covering up!",
+        "zh": "用護身動作躲開了這一擊！"
+      },
+      "353": {
+        "en": "turns the attack with a brilliant parry!",
+        "zh": "以漂亮的招架擋開了攻擊！"
+      },
+      "354": {
+        "en": "avoids the blow by backing up!",
+        "zh": "後退躲開了這一擊！"
+      },
+      "355": {
+        "en": "avoids the blow by ducking under it!",
+        "zh": "蹲低躲過了這一擊！"
+      },
+      "356": {
+        "en": "avoids the strike by dodging it!",
+        "zh": "閃身避開了攻擊！"
+      },
+      "357": {
+        "en": "avoids the blow by jumping over it!",
+        "zh": "跳起躲過了這一擊！"
+      },
+      "358": {
+        "en": "jumps back and away from the smash!",
+        "zh": "向後跳開，避開了重擊！"
+      },
+      "359": {
+        "en": "leaps to the side, escaping any damage!",
+        "zh": "側身躍開，毫髮無傷！"
+      },
+      "360": {
+        "en": "kneels and dirverts the blow with a parry!",
+        "zh": "單膝跪下，招架化解了這一擊！"
+      },
+      "361": {
+        "en": "casts a spell, but nothing is there!",
+        "zh": "施放法術，但那裡什麼也沒有！"
+      },
+      "362": {
+        "en": "casts a spell, but it has no effect!",
+        "zh": "施放法術，卻沒有效果！"
+      },
+      "363": {
+        "en": "casts|S at|F.",
+        "zh": "對|F施放|S。"
+      },
+      "364": {
+        "en": ", 1 head, 2 chest, 3 right arm, 4 left arm, 5 right leg or 6 left leg.",
+        "zh": "，1 頭部、2 胸口、3 右臂、4 左臂、5 右腿或 6 左腿。"
+      },
+      "365": {
+        "en": "The spell has a]",
+        "zh": "這道法術產生了"
+      },
+      "366": {
+        "en": "mildly",
+        "zh": "輕微"
+      },
+      "367": {
+        "en": "markedly",
+        "zh": "明顯"
+      },
+      "368": {
+        "en": "strongly",
+        "zh": "強烈"
+      },
+      "369": {
+        "en": "powerfully",
+        "zh": "強大"
+      },
+      "370": {
+        "en": " effect.",
+        "zh": "的效果。"
+      },
+      "371": {
+        "en": "'s spell wears off!",
+        "zh": "的法術效力消退了！"
+      },
+      "372": {
+        "en": "You have defeated|F",
+        "zh": "你們擊敗了|F"
+      },
+      "373": {
+        "en": "Each player]",
+        "zh": "每位成員"
+      },
+      "374": {
+        "en": "receives|N adventure points, and",
+        "zh": "獲得 |N 點冒險點數，以及"
+      },
+      "375": {
+        "en": "|N gold crowns!",
+        "zh": "|N 枚金冠！"
+      },
+      "376": {
+        "en": "s have",
+        "zh": "們"
+      },
+      "377": {
+        "en": " has",
+        "zh": "",
+        "note": "刻意留空：原文 ` has` 是英文的單數動詞，中文不需要（複數的 376 `s have` 譯成「們」是為了接在名字後面）。"
+      },
+      "378": {
+        "en": " defeated you!",
+        "zh": "擊敗了你們！"
+      },
+      "379": {
+        "en": "You flee for your]",
+        "zh": "你們拚命逃走"
+      },
+      "380": {
+        "en": "life!",
+        "zh": "！"
+      },
+      "381": {
+        "en": "lives!",
+        "zh": "！"
+      },
+      "382": {
+        "en": "you have gained a level!",
+        "zh": "你升了一級！"
+      },
+      "383": {
+        "en": "wins a bet!",
+        "zh": "賭贏了！"
+      },
+      "384": {
+        "en": "loses a bet!",
+        "zh": "賭輸了！"
+      },
+      "385": {
+        "en": "~H02~V09Items Found:",
+        "zh": "~H02~V09找到的物品："
+      },
+      "386": {
+        "en": "~H02~V09Characters:",
+        "zh": "~H02~V09角色："
+      },
+      "387": {
+        "en": "You empty your hands and pick up the item.",
+        "zh": "你空出雙手，撿起了那件物品。"
+      },
+      "388": {
+        "en": "Select an area to]",
+        "zh": "選擇要"
+      },
+      "389": {
+        "en": "heal",
+        "zh": "治療的部位"
+      },
+      "390": {
+        "en": "hurt",
+        "zh": "傷害的部位"
+      },
+      "391": {
+        "en": "~V43~H08Outfitting your character",
+        "zh": "~V43~H08為你的角色配裝"
+      },
+      "392": {
+        "en": "Look for characters on@~H0Dhard disk?",
+        "zh": "要從硬碟找角色嗎？"
+      },
+      "393": {
+        "en": "Save character to hard@disk?",
+        "zh": "把角色存到硬碟嗎？"
+      },
+      "394": {
+        "en": "\\x00",
+        "zh": "\u0000",
+        "note": "原版的結束標記，不是文字。"
+      }
+    },
+    "BOOKDATA": {
+      "0": {
+        "en": "~V34~H03CREATED AND@PROGRAMMED BY:@@TODD PORTER@@@ADDITIONAL@PROGRAMMING:@@ARVIN VANZANTE@@COMBAT SYSTEMS:@@DAVID BARNES@ARVIN VANZANTE@TODD PORTER@AARON PORTER@@LANGUAGES:@@JEFF GROTEBOER",
+        "zh": "~V34~H03創作與程式：@@TODD PORTER@@@程式協力：@@ARVIN VANZANTE@@戰鬥系統：@@DAVID BARNES@ARVIN VANZANTE@TODD PORTER@AARON PORTER@@語言：@@JEFF GROTEBOER"
+      },
+      "1": {
+        "en": "~V3A~H15MAGIC SYSTEMS:@@TODD PORTER@DAVID BARNES@@TOWNS:@@TODD PORTER@JEFF GROTEBOER@AARON PORTER@DAVID BARNES@PAT VANZANTE@@GRAPHICS:@@DENIS LOUBET@TODD PORTER",
+        "zh": "~V3A~H15魔法系統：@@TODD PORTER@DAVID BARNES@@城鎮：@@TODD PORTER@JEFF GROTEBOER@AARON PORTER@DAVID BARNES@PAT VANZANTE@@美術：@@DENIS LOUBET@TODD PORTER"
+      },
+      "2": {
+        "en": "~V34~H03PLAYTESTING:@@MARC SCHAEFGEN@RICH BANDSTRA@STEVE CANTRELL@PAUL MALONE@JON NIALS@PETER VANZANTE@LIBBY VANZANTE@JOHN WATSON@ERIN D. ROBERTS@SIMON ELMS@TOM BOUCHER",
+        "zh": "~V34~H03測試：@@MARC SCHAEFGEN@RICH BANDSTRA@STEVE CANTRELL@PAUL MALONE@JON NIALS@PETER VANZANTE@LIBBY VANZANTE@JOHN WATSON@ERIN D. ROBERTS@SIMON ELMS@TOM BOUCHER"
+      },
+      "3": {
+        "en": "~V34~H15IBM VERSION:@@GARY SCOTT SMITH@NASER JANNATI@@@PRODUCER:@@DALLAS SNELL@@@ASSOCIATE@PRODUCER:@@ALAN GARDNER",
+        "zh": "~V34~H15IBM 版：@@GARY SCOTT SMITH@NASER JANNATI@@@製作人：@@DALLAS SNELL@@@副製作人：@@ALAN GARDNER"
+      },
+      "4": {
+        "en": "~V34~H03I WOULD LIKE TO@THANK A FEW@PEOPLE WITHOUT@WHOM KNIGHTS OF@LEGEND WOULD@HAVE BEEN@IMPOSSIBLE:@@~C10MY LORD@@DALLAS SNELL@RICHARD GARRIOTT@ROBERT GARRIOTT@ALAN GARDNER@PAUL ISAAC",
+        "zh": "~V34~H03沒有這幾位，@就不會有@《武士傳說》，@我要謝謝他們：@@~C10我的主@@DALLAS SNELL@RICHARD GARRIOTT@ROBERT GARRIOTT@ALAN GARDNER@PAUL ISAAC"
+      },
+      "5": {
+        "en": "~V3A~H15AND THOSE BEHIND@THE SCENES:@~C12LORI PERRY@~C12DORIS PORTER@~C12AL EVANS@~C12CELESTE EVANS@~C12GERALD FARR@~C12MIKE FARRIS@~C12DAVE HUFFMAN",
+        "zh": "~V3A~H15以及幕後的@這些人：@~C12LORI PERRY@~C12DORIS PORTER@~C12AL EVANS@~C12CELESTE EVANS@~C12GERALD FARR@~C12MIKE FARRIS@~C12DAVE HUFFMAN"
+      },
+      "6": {
+        "en": "~V34~H03THIS GAME IS@DEDICATED TO TWO@DEAR FRIENDS.@@@~C12FOREST DALE@~C12REPLOGLE@@~C12AND@@~C12RICHARD BANDSTRA",
+        "zh": "~V34~H03這款遊戲@獻給兩位@摯友。@@@~C12FOREST DALE@~C12REPLOGLE@@~C12以及@@~C12RICHARD BANDSTRA"
+      },
+      "7": {
+        "en": "~V34~H15ONE TAUGHT ME@HOW TO SEE THE@WORLD AROUND ME,@@ONE TAUGHT US@HOW TO SEE@WITHIN OURSELVES@@THEY ARE THE@REAL KNIGHTS OF@LEGEND.",
+        "zh": "~V34~H15一位教我@看見身邊的世界，@@一位教我們@看見自己的內心@@他們才是真正的@武士傳說。"
+      },
+      "8": {
+        "en": "LIST CHARACTERS@CREATE CHARACTER@DELETE CHARACTER@EDIT PICTURE@EDIT SHIELD@HARBOR MASTER",
+        "zh": "角色清單@建立角色@刪除角色@編輯圖像@編輯盾牌@港務長"
+      },
+      "9": {
+        "en": "~V34~H03NAME :@",
+        "zh": "~V34~H03姓名：@"
+      },
+      "10": {
+        "en": "@~V44RACE :",
+        "zh": "@~V44種族："
+      },
+      "11": {
+        "en": "@~V54SEX  :",
+        "zh": "@~V54性別："
+      },
+      "12": {
+        "en": "@~V64CLASS:",
+        "zh": "@~V64職業："
+      },
+      "13": {
+        "en": "~V76~H03STRENGTH  :@QUICKNESS :@SIZE      :@HEALTH    :@FORESIGHT :@CHARISMA  :@INTELLECT :@BALANCE   :@ENDURANCE :@BODY PTS. :",
+        "zh": "~V76~H03力量　　：@敏捷　　：@體型　　：@健康　　：@先見　　：@魅力　　：@智力　　：@平衡　　：@耐力　　：@身體點數："
+      },
+      "14": {
+        "en": "HUMAN",
+        "zh": "人類"
+      },
+      "15": {
+        "en": "ELVEN",
+        "zh": "精靈族"
+      },
+      "16": {
+        "en": "DWARVEN",
+        "zh": "矮人族"
+      },
+      "17": {
+        "en": "KELDEN",
+        "zh": "凱爾登"
+      },
+      "18": {
+        "en": "MALE",
+        "zh": "男"
+      },
+      "19": {
+        "en": "FEMALE",
+        "zh": "女"
+      },
+      "20": {
+        "en": "REROLL STATS@ACCEPT STATS",
+        "zh": "重新擲骰@接受屬性"
+      },
+      "21": {
+        "en": "BARBARIAN",
+        "zh": "野蠻人"
+      },
+      "22": {
+        "en": "RANGER",
+        "zh": "遊俠"
+      },
+      "23": {
+        "en": "WARRION",
+        "zh": "戰士"
+      },
+      "24": {
+        "en": "SQUIRE",
+        "zh": "侍從"
+      },
+      "25": {
+        "en": "DARKGUARD",
+        "zh": "黑衛"
+      },
+      "26": {
+        "en": "WATCHMAN",
+        "zh": "守望者"
+      },
+      "27": {
+        "en": "PLAINSMAN",
+        "zh": "平原人"
+      },
+      "28": {
+        "en": "HUNTER",
+        "zh": "獵人"
+      },
+      "29": {
+        "en": "REGULAR",
+        "zh": "正規兵"
+      },
+      "30": {
+        "en": "HIGHWAYMAN",
+        "zh": "攔路盜",
+        "note": "highwayman 是攔路的強盜，不是修路的工人；原譯「築路工」是把 highway 當成道路工程。"
+      },
+      "31": {
+        "en": "PIRATE",
+        "zh": "海盜"
+      },
+      "32": {
+        "en": "ROGUE",
+        "zh": "盜賊"
+      },
+      "33": {
+        "en": "TIGRESS",
+        "zh": "虎女"
+      },
+      "34": {
+        "en": "AMAZON",
+        "zh": "亞馬遜"
+      },
+      "35": {
+        "en": "HUNTRESS",
+        "zh": "女獵人"
+      },
+      "36": {
+        "en": "PLAINSWOMAN",
+        "zh": "平原女"
+      },
+      "37": {
+        "en": "BREKLAND",
+        "zh": "布雷克蘭"
+      },
+      "38": {
+        "en": "KLVAR",
+        "zh": "克爾瓦"
+      },
+      "39": {
+        "en": "MELOD",
+        "zh": "梅洛德"
+      },
+      "40": {
+        "en": "PYAR",
+        "zh": "皮亞爾"
+      },
+      "41": {
+        "en": "THISM",
+        "zh": "席斯姆"
+      },
+      "42": {
+        "en": "USIP",
+        "zh": "烏西普"
+      },
+      "43": {
+        "en": "TUNNELER",
+        "zh": "掘道者"
+      },
+      "44": {
+        "en": "RATGUARD",
+        "zh": "鼠衛"
+      },
+      "45": {
+        "en": "TROLLBANE",
+        "zh": "巨魔剋星"
+      },
+      "46": {
+        "en": "MILITIA",
+        "zh": "民兵"
+      },
+      "47": {
+        "en": "DIGGER",
+        "zh": "挖掘者"
+      },
+      "48": {
+        "en": "SPIDER GUARD",
+        "zh": "蛛衛"
+      },
+      "49": {
+        "en": "ORCBANE",
+        "zh": "獸人剋星"
+      },
+      "50": {
+        "en": "LEVY",
+        "zh": "徵召兵"
+      },
+      "51": {
+        "en": "CLIFF GUARD",
+        "zh": "崖衛"
+      },
+      "52": {
+        "en": "ROCK RANGER",
+        "zh": "岩地遊俠"
+      },
+      "53": {
+        "en": "FAR SEEKER",
+        "zh": "遠望者"
+      },
+      "54": {
+        "en": "~V34~H16USE ARROW KEYS@TO SELECT A@CHARACTER@PRESS RETURN@TO ACCEPT",
+        "zh": "~V34~H16用方向鍵@選擇角色@按 RETURN@確認"
+      },
+      "55": {
+        "en": "~VA6~H16CANCEL   ACCEPT",
+        "zh": "~VA6~H16取消　　確認"
+      },
+      "56": {
+        "en": "~V40~H0DNO MORE ROOM@ON THIS DISK!",
+        "zh": "~V40~H0D這張磁碟@沒有空位了！"
+      },
+      "57": {
+        "en": "~V40~H0DNO CHARACTERS@ON THIS DISK!",
+        "zh": "~V40~H0D這張磁碟上@沒有角色！"
+      },
+      "58": {
+        "en": "~V40~H0DSAVE CHANGES@~H10YES/NO",
+        "zh": "~V40~H0D儲存變更@~H10是／否"
+      },
+      "59": {
+        "en": "~V40~H0DARE YOU SURE?@~H10YES/NO",
+        "zh": "~V40~H0D確定嗎？@~H10是／否"
+      },
+      "60": {
+        "en": "~V0F~H03A BREEZE BEGINS@TO BLOW THROUGH@YOUR HAIR.  THE@WORLD SPINS...",
+        "zh": "~V0F~H03一陣風開始@吹過你的髮間。@世界旋轉起來……"
+      },
+      "61": {
+        "en": "~V3D~H0CPLEASE INSERT@THE]",
+        "zh": "~V3D~H0C請放入"
+      },
+      "62": {
+        "en": "DISK.",
+        "zh": "磁碟。"
+      },
+      "63": {
+        "en": "CHARACTER@",
+        "zh": "角色@"
+      },
+      "64": {
+        "en": "A4]",
+        "zh": "A4"
+      },
+      "65": {
+        "en": "MASTER]",
+        "zh": "主"
+      },
+      "66": {
+        "en": "~V34~H15IBM VERSION:@@NASER JANNATI@GARY SCOTT SMITH@@@PRODUCER:@@DALLAS SNELL@@@ASSOCIATE@PRODUCER:@@ALAN GARDNER",
+        "zh": "~V34~H15IBM 版：@@NASER JANNATI@GARY SCOTT SMITH@@@製作人：@@DALLAS SNELL@@@副製作人：@@ALAN GARDNER"
+      },
+      "67": {
+        "en": "~V34~H03SELECT ONE:",
+        "zh": "~V34~H03請選擇："
+      },
+      "68": {
+        "en": "~V34~H03REGION INSTALLER@@INSERT DISK 3 OF@THE NEW REGION@AND PRESS ANY@KEY OR PRESS ESC@TO ABORT.",
+        "zh": "~V34~H03區域安裝程式@@放入新區域的@第 3 張磁碟，@按任意鍵，@或按 ESC@中止。"
+      },
+      "69": {
+        "en": "@@NOW INSERT A@BLANK FORMATED@DISK IF YOU WISH@TO MAKE A NEW@CHARACTER DISK@OR A CHARACTER@DISK WHICH WILL@BE UPDATED FOR@THE NEW REGION.@PRESS ANY KEY.",
+        "zh": "@@如果你想做一張@新的角色磁碟，@或要為新區域@更新角色磁碟，@現在放入一張@空白已格式化的@磁碟。@按任意鍵。"
+      },
+      "70": {
+        "en": "~V34~H03ONLY ONE REGION@IS INSTALLED.@@PRESS ANY KEY.",
+        "zh": "~V34~H03只安裝了一個@區域。@@按任意鍵。"
+      },
+      "71": {
+        "en": "~V34~H15SELECT THE@REGION YOU WISH@TO SAIL TO.",
+        "zh": "~V34~H15請選擇你想@航向的區域。"
+      },
+      "72": {
+        "en": "\\x1a\\x00",
+        "zh": "\u001a\u0000",
+        "note": "原版的結束標記，不是文字。"
+      }
+    },
+    "ENDTXT": {
+      "0": {
+        "en": "~V08~H17    The last foe@lies dead behind@you.  but   your@instincts   warn@that  all is not@as it should be.@In  the   nearby@cliff   face.  a@huge  stone door@has    appeared!@    Approaching@it   cautiously.@you  insert  and@turn   the   key@",
+        "zh": "~V08~H17　最後一個敵人@已倒在你身後，@但直覺告訴你，@事情並不對勁。@就在附近的@崖壁上，@出現了一道@巨大的石門！@　你小心翼翼@地走近，插入@並轉動了那把@鑰匙——"
+      },
+      "1": {
+        "en": "Dundle gave you.~V8A~H01An enormous groan begins  -  the sound@of machinery.  The massive door swings@open.  revealing a torchlit labyrinth.@    Stepping warily into the cave. you@prepare  to  meet whatever enemy might@be waiting.",
+        "zh": "那是丹德爾給你的。~V8A~H01一聲低沉的巨響傳來——那是機械的聲音。@厚重的門緩緩開啟，露出一座火炬照亮的迷宮。@　你戒慎地踏進洞穴，@準備迎接任何可能等在裡面的敵人。"
+      },
+      "2": {
+        "en": "~V08~H01   The maze of tunnels leads relent-@lessly downward, until  it seems you@must tread within  the very heart of@the mountain.@ @ @Water    oozes@through cracks@in  the  rocky@ground.@Stagnant pools@and     slime-@covered  rocks@",
+        "zh": "~V08~H01　隧道構成的迷宮不斷向下延伸，直到你彷彿@得走進這座山的心臟深處。@ @ @水從岩地的@裂縫滲出。@死水窪與@覆滿黏泥的@岩石，@"
+      },
+      "3": {
+        "en": "make the foot-@ing  uncertain@at best.~V9C~H01   Hours  pass,  and you find yourself@growing tired.  Your torchlight wanes.@You  begin  to  wonder if this maze of@tunnels will ever end.@",
+        "zh": "讓每一步都@踩不踏實。~V9C~H01　一小時一小時過去，你開始感到疲倦。@火炬的光逐漸微弱。@你開始懷疑這座隧道迷宮@究竟有沒有盡頭。@"
+      },
+      "4": {
+        "en": "~V04~H01   Daylight  is  only  a  fond  memory@when,  at last,  the   passage   turns@sharply  to  the  left  and  ends at a@rusty iron door!   Using what strength@you  can  muster,  you  press  against@",
+        "zh": "~V04~H01　日光已經成了遙遠的記憶，通道終於@向左急轉，盡頭是一道生鏽的鐵門！@你使出所有還擠得出來的力氣，@抵住那片冰冷的鐵——@"
+      },
+      "5": {
+        "en": "~V94~H01the  cold  iron.   With  a loud creak,@the  ancient door relents and you find@yourself before an ebony stairway.  As@you mount the stairs, you faintly hear@labored breathing and muttered oaths.@",
+        "zh": "~V94~H01隨著一聲刺耳的嘎吱，這道古老的門終於@讓步，你眼前出現一道烏木階梯。@拾級而上時，你隱約聽見粗重的喘息@與低聲的咒罵。@"
+      },
+      "6": {
+        "en": "~V04~H00   Quickening your pace, you bolt into a@dimly lit chamber. A large, unshaven man@struggles against the stout chains which@bind him to the wall.@ \"Who has Pildar sent to test me now?\" @~H18he demands.     @\"I   will   pity@your  souls when@",
+        "zh": "~V04~H00　你加快腳步，衝進一間光線昏暗的石室。@一個高大、滿臉鬍碴的男人正掙扎著@對抗把他鎖在牆上的粗重鎖鏈。@「這次皮爾達又派誰來試探我了？」@~H18他喝問道。　　@「等我的追隨者@來的時候，我會@"
+      },
+      "7": {
+        "en": "my     followers@come!\"  You look@at him and  ask,@\"Who would those@followers be?\"  @Glaring  at  you@he says \"Any who@count themselves@on  the side  of@Seggallion!\" @ @~H01Puzzled for  a  moment,  you  suddenly@exclaim,  \"WE follow him!\"@",
+        "zh": "憐憫你們的@靈魂！」你看@著他，問道：@「那些追隨者@會是誰？」　@他瞪著你說：@「任何自認@站在塞加利昂@這一邊的人！」@ @~H01你怔了一下，忽然喊了出來：@「我們就是追隨他的人！」@"
+      },
+      "8": {
+        "en": "He  looks  at you and smiles \"Well met@then!  I  am  he! Quickly,  free  me.\"@",
+        "zh": "他看著你，笑了。「那就幸會了！@我就是他！快，把我放開。」@"
+      },
+      "9": {
+        "en": "~V08~H01   Using  your@weapons,   you@free  him from@the  chains as@you   discribe@how  you  came@to be here.   @   Rubbing his@chafed wrists,@Seggallion    @begins      to@speak, and the@import  of his@words    chill@you.",
+        "zh": "~V08~H01　你用手上的@武器把他從@鎖鏈中解開，@一邊說明你們@是怎麼來到@這裡的。　　@　塞加利昂@揉著磨破的@手腕，開口@說話，而他@話裡的份量@讓你渾身@發冷。"
+      },
+      "10": {
+        "en": "~V8C~H01\"I  congratulate you.   Your exploits@thus far have kept the realm safe, but@an  even  more  perilous  journey lies@ahead.   Duke Fuquan  must be informed@of my capture - and warned of Pildar\"s@treachery. You must be my voice!\"@",
+        "zh": "~V8C~H01「我要恭喜你們。你們至今的作為保住了@這片王國，但前方還有更凶險的旅程。@必須讓富匡公爵知道我被囚禁的事——@並警告他皮爾達的背叛。@你們得替我傳話！」@"
+      },
+      "11": {
+        "en": "~V08~H01     \"Pildar will surely seek to throw@Ashtalarea into chaos.   I will remain@here  to safeguard the realm until you@return with the Duke.\"@~H19  Holding your@gaze with eyes@of blue steel,@Seggallion@pauses  for  a@moment,@measuring you.@",
+        "zh": "~V08~H01　「皮爾達必定會設法把阿什塔拉瑞亞@推入混亂。我會留在這裡守護這片國土，@直到你們帶著公爵回來。」@~H19　塞加利昂以@藍鋼般的眼神@盯住你，@停頓了片刻，@掂量著你們。@"
+      },
+      "12": {
+        "en": "Apparently,@you  pass  his@test,  for  he@continues.@  \"I  dare not@breathe a word@of this to the@~H01nobility, but I fear the whole Kingdom@is at stake!  After alerting the Duke,@journey  throughout  the lands and win@",
+        "zh": "看來你們@通過了他的@試探，他@接著說：@　「這件事@我不敢向貴族@透露半個字，@~H01但我怕整個王國都危在旦夕！@通知公爵之後，走遍各地，@贏得任何@"
+      },
+      "13": {
+        "en": "the trust of any who will join us!\"",
+        "zh": "願意加入我們的人的信任！」"
+      },
+      "14": {
+        "en": "~V04~H01   Seggallion  rises.   \"You  have  my@thanks,  brave  ones, but I must be on@my  way  before  Pildar  does any more@harm.\"   He pauses at the door.@~V28~H01   \"Dundle    @must know that@I   am  free.\"@He   bends  to@pick   up  the@",
+        "zh": "~V04~H01　塞加利昂站起身。「多謝你們，勇敢的人；@但在皮爾達造成更多傷害之前，@我得上路了。」他在門邊停下腳步。@~V28~H01　「得讓丹德爾@知道我自由了。」@他彎腰撿起@那副曾經@"
+      },
+      "15": {
+        "en": "shackles  that@bound     him.@\"Take these to@him  as proof.@I  will muster@my knights and@ride  for  the@Dark Tower.\"@~V94~H01   With  a   wave,  Seggallion  plunges@into  the darkness beyond.  You journey@back   through  the cave, contemplating@",
+        "zh": "銬住他的@腳鐐。@「把這個帶去@給他當憑證。@我要集結我的@騎士，馳往@黑暗之塔。」@~V94~H01　塞加利昂揮了揮手，投身進門外的黑暗。@你們穿過洞穴往回走，心裡想著@"
+      },
+      "16": {
+        "en": "the  end of one saga, and the beginning@of another...",
+        "zh": "一段傳奇的結束，以及另一段的開始……"
+      },
+      "17": {
+        "en": "\\x00",
+        "zh": "\u0000",
+        "note": "原版的結束標記，不是文字。"
+      }
+    }
+  }
+}

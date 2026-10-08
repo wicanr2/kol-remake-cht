@@ -1,0 +1,111 @@
+{
+  "schema": "kol-player-path-build/1",
+  "path": "full-chain-ending",
+  "date": "2026-10-01",
+  "base_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+  "dirty_worktree": true,
+  "build_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "evidence": "RE-170初始空物品修正後，正常按鍵／受控輸入與里程碑驗證；不宣稱原版完整對拍",
+  "rights": "原作衍生PNG僅限既有private GitHub特例；原始輸入與存檔留本機",
+  "toolchain": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+    "go": "1.26.7",
+    "ebitengine": "2.9.9"
+  },
+  "plan_sha256": "01bd27038f7d4737eae7d71e63142710a533ef91e06ae45fd08884e64200c4b6",
+  "trace_sha256": "2dba555bb3cf275a8f5262cb148c7fde6ae12906eb3f1282c4d7b53c827bd829",
+  "receipt_sha256": "db3dcb71a1f264d071da5cd51a38ee6172941dcc514c0dc436373b6db0fbdb86",
+  "inventory_review": "docs/verification/inventory-empty-slots-20261001/all-path-review.json",
+  "previous_baseline": "workplace/inventory-empty-slots-20261001/baseline-before/full-chain-ending",
+  "run_spec": "workplace/inventory-empty-slots-20261001/all-before/full-chain-ending/shots.spec",
+  "run_spec_sha256": "ef31cf8e78a29abef377c9dbab9345f695151787b871a360b738964cae37c82b",
+  "inputs_sha256": {
+    "workplace/cjk-edge-20261001/kol-edge-fixed": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "tools/check_player_paths.py": "a282bc533b138304b1c3699defde015a28b3c78ef77f9c37de879ca827bf16ff",
+    "tools/replay_player_path.py": "4889eb1087e1625c7a672ba05ba9f53d8dda590682ae7d0b174b75d6c102672c",
+    "tools/verify_player_path.py": "40e9b201fe657fd98061e2d521d16421868c96c6d49f40eecf8b94871129d6bc",
+    "tools/verify_full_path.py": "0113fc4fc05cae52b5815366a77ae7c58bfbf1b223747bce75546c1b1628cc1d",
+    "assets/original-derived-data/book-open-animation.json": "b7c7a9498f4fc1edf4754730718d2272be2b9f10486db14cbafd618cbc891e73",
+    "assets/original-derived-data/character-creation.json": "878fa12acf5749acb25d47421455caaa1ee9f46dcaa6de64fdc79864822926dc",
+    "assets/original-derived-data/creation-start.json": "4d32f3a56bca422f85317ab88959ace98687e459ed9f9d8d2f475b1810667c1a",
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/magic.json": "eb8579370aeae74efd32bcb9fb4c8eebd2a7bf99d18395433709fa05fb648aba",
+    "assets/original-derived-data/monsters.json": "39aeef6efb5388c947f721e8ea75847106526c869090aa185bad912aa4fce992",
+    "assets/original-derived-data/portrait-layout.json": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df",
+    "assets/original-derived-data/quest-sites.json": "ed6a1238a1eb1e51008db7b84fa4234735c41283a28ce9c48a7eaf679151dd2a",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-data/town-keywords.json": "98fecebce452ea48528356e63e9575cc1ac62780fba988bc80e5b4a50ef9f9af",
+    "assets/original-derived-data/town-text.json": "3f75b91691cedbbe99b83af42771d3656ed0c9a0aa67c12352ada7e0c9513320",
+    "assets/original-derived-data/ui-text.json": "886093e4ed6d8ba13beba63a6e6f0b946bc640658983c2e1eca397c35ac76b5d",
+    "assets/original-derived-data/weapon-templates.json": "74bad47083da8c41dd3ac807418bde45d555b5fa5e112e217d9934015d36ccab",
+    "assets/original-derived-data/wilderness-scenes.json": "9d3547e32833ea28296ede6286b3217d5e5098f9adb58ea091152679b92858c8",
+    "assets/original-derived-data/world-map.json": "73441fd1f956edb08957a44a28c79df4845447a1e102346c4de6751d1947e5df",
+    "assets/ui-font/LICENSE-NotoSansCJK.txt": "27a8d920f9707034bb2879cb6d632334aa8d99e204c744bf89f5f21d8537fc21",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318"
+  },
+  "frames": [
+    {
+      "step": 45,
+      "file": "step-045.png",
+      "sha256": "f5af806c9f62f0345ff89791d63d4142fdfebd4f1f9e9e5c4d0eae1b5cb62952"
+    },
+    {
+      "step": 90,
+      "file": "step-090.png",
+      "sha256": "fa73788686e47bad0535e5e1ddcc379ef1c38007313b6417d551463a1ed10292"
+    },
+    {
+      "step": 409,
+      "file": "step-409.png",
+      "sha256": "5f5d9305cb71b14a0b3173f2b9277fbbe6996396077b484290592b7fffffef84"
+    },
+    {
+      "step": 414,
+      "file": "step-414.png",
+      "sha256": "b7acdd5a6760776372b689b7b23b267cbd9ce9229edf5c38d9873eae3b29e86a"
+    },
+    {
+      "step": 415,
+      "file": "step-415.png",
+      "sha256": "4a9cffedfc275f97bfa63f9a7753c2ac93f1fe5c30e27463e525186a39178a92"
+    },
+    {
+      "step": 416,
+      "file": "step-416.png",
+      "sha256": "20a8e69dfb9625c1fb2d97e624744e7f9da37a0c7931bf4bea78717eb2fe0d27"
+    },
+    {
+      "step": 417,
+      "file": "step-417.png",
+      "sha256": "283d96b9f253ed7377b571e305e6534d7c98f0d4b48385bceb1dfd06fb44fa32"
+    },
+    {
+      "step": 418,
+      "file": "step-418.png",
+      "sha256": "19fb742d992bd96377473336ffe84032d606d72288781db2dc77e4bbc7db675f"
+    },
+    {
+      "step": 419,
+      "file": "step-419.png",
+      "sha256": "03c502a7b1e131819fb706d617a7840b0f4145a1dd3dcf94b7688b21566bfc04"
+    },
+    {
+      "step": 420,
+      "file": "step-420.png",
+      "sha256": "75c5cf062f7f03bee08a51d8ff175ef9640edb842af7d815bbac51428ca53485"
+    }
+  ],
+  "input": {
+    "source_name": "Knights-of-legend.zip",
+    "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "character_roster_sha256": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "seed": 1,
+    "controlled_ambush": true,
+    "ambush_rolls": "100,100,100,100,100,100",
+    "effective_load": "workplace/inventory-empty-slots-20261001/all-before/full-chain-ending/input-save.json",
+    "effective_load_sha256": "9f7be7fb7d00051934d738a2693668a6d19e84052f2114297abe13c152f8f052"
+  }
+}

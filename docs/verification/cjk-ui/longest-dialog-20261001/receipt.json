@@ -1,0 +1,350 @@
+{
+  "schema": "kol-cjk-longest-dialog-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "正式 dialog-ui 全母體最寬問句；從標題正常六人招募、船屋選人與三次聆聽，依固定種子既定順序完整走三則傳聞，不反覆抽取挑選。",
+  "selection": {
+    "scope": "正式 dialog-ui 全母體最寬問句；從標題正常六人招募、船屋選人與三次聆聽，依固定種子既定順序完整走三則傳聞，不反覆抽取挑選。",
+    "population_count": 260,
+    "maximum_width": 240,
+    "selected": [
+      {
+        "kind": "dialog-ui",
+        "en": "docs/i18n/ui-zh-Hant.json 記錄 0x9d",
+        "zh": "「外頭的世事，你聽說了什麼？」",
+        "x": 315,
+        "width": 240,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      }
+    ],
+    "town": 7,
+    "door": 8,
+    "position": [
+      4,
+      25
+    ],
+    "entry_step": 151,
+    "greeting_step": 153,
+    "cycles": [
+      {
+        "cycle": 1,
+        "prompt_step": 156,
+        "answer_step": 157,
+        "idle_step": 158
+      },
+      {
+        "cycle": 2,
+        "prompt_step": 161,
+        "answer_step": 162,
+        "idle_step": 163
+      },
+      {
+        "cycle": 3,
+        "prompt_step": 166,
+        "answer_step": 167,
+        "idle_step": 168
+      }
+    ],
+    "shot_steps": [
+      151,
+      153,
+      156,
+      157,
+      158,
+      161,
+      162,
+      163,
+      166,
+      167,
+      168
+    ],
+    "seed": 1,
+    "seed_method": "執行前 -seed 1",
+    "load": null,
+    "monsters": null,
+    "ambush_rolls": null,
+    "report_sha256": "89f888a8f582169a45c9d83b557a0bf4d5c1660acff8f7fae1c8c3eaaa331ec6"
+  },
+  "identical_en_zh_states": 169,
+  "checks": [
+    {
+      "step": 156,
+      "kind": "question",
+      "cycle": 1,
+      "category": 3,
+      "record": 157,
+      "lines": [
+        "你沒見過比他更老練的海上老狗。",
+        "你想知道他懂些什麼，便問：",
+        "「外頭的世事，你聽說了什麼？」"
+      ],
+      "widths": [
+        240,
+        208,
+        240
+      ],
+      "bottom": 324,
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 157,
+      "kind": "answer",
+      "cycle": 1,
+      "category": 3,
+      "record": 20,
+      "lines": [
+        "「外頭有些東西能嚇壞你的腦子！",
+        "火蜥蜴和風精就是其中兩種。」"
+      ],
+      "widths": [
+        240,
+        224
+      ],
+      "bottom": 300,
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 161,
+      "kind": "question",
+      "cycle": 2,
+      "category": 1,
+      "record": 155,
+      "lines": [
+        "你沒見過比他更老練的海上老狗。",
+        "你想知道他懂些什麼，便問：",
+        "「近來如何？」"
+      ],
+      "widths": [
+        240,
+        208,
+        112
+      ],
+      "bottom": 324,
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 162,
+      "kind": "answer",
+      "cycle": 2,
+      "category": 1,
+      "record": 24,
+      "lines": [
+        "「我的船在海上遇風暴沉了。",
+        "我和老木腿是活下來的少數。」"
+      ],
+      "widths": [
+        208,
+        224
+      ],
+      "bottom": 300,
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 166,
+      "kind": "question",
+      "cycle": 3,
+      "category": 0,
+      "record": 154,
+      "lines": [
+        "你沒見過比他更老練的海上老狗。",
+        "你想知道他懂些什麼，便問：",
+        "「你知道些什麼？」"
+      ],
+      "widths": [
+        240,
+        208,
+        144
+      ],
+      "bottom": 324,
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 167,
+      "kind": "answer",
+      "cycle": 3,
+      "category": 0,
+      "record": 23,
+      "lines": [
+        "「這裡的魚從前很好，可是現在海裡的東西",
+        "都住進沉船的殘骸了。」"
+      ],
+      "widths": [
+        304,
+        176
+      ],
+      "bottom": 300,
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true
+    }
+  ],
+  "picture_checks": [
+    {
+      "step": 156,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 156,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 3,
+      "pixel_differences": 0
+    },
+    {
+      "step": 157,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 157,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 3,
+      "pixel_differences": 0
+    },
+    {
+      "step": 161,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 161,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 3,
+      "pixel_differences": 0
+    },
+    {
+      "step": 162,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 162,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 3,
+      "pixel_differences": 0
+    },
+    {
+      "step": 166,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 166,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 3,
+      "pixel_differences": 0
+    },
+    {
+      "step": 167,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 1,
+      "pixel_differences": 0
+    },
+    {
+      "step": 167,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png",
+      "scale": 3,
+      "pixel_differences": 0
+    }
+  ],
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "seed": {
+    "remake": 1,
+    "original": null,
+    "method": "執行前 -seed 1；一次走完三則固定順序傳聞，未重擲挑結果。"
+  },
+  "geometry": {
+    "dialog": [
+      306,
+      252,
+      585,
+      204
+    ],
+    "text_start": [
+      315,
+      258
+    ],
+    "safe_width": 575,
+    "line_step": 24,
+    "font_height": 18
+  },
+  "visual_review": {
+    "status": "passed",
+    "method": "主代理檢視三張中文問句、三張中文答覆及英文最長問句完整畫格；三次正常聆聽與兩段確認完整、可讀、無裁切。"
+  },
+  "inputs_sha256": {
+    "assets/original-derived-png/ega/TWN7PICS/twn7pics-018.png": "57f54491db558b4f209a05b0f116a101fd27e749ea40d5de6efefc946143af2a",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "docs/i18n/town-zh-Hant.json": "5554248cef962e0b91948407486890a6020f1c54ceee9edc4e795461545a8638",
+    "docs/i18n/ui-zh-Hant.json": "3dec02c25fbca4b3b537041121a3cdd62c03333ac9379cbe059e1582d8c71003",
+    "assets/original-derived-data/town-keywords.json": "98fecebce452ea48528356e63e9575cc1ac62780fba988bc80e5b4a50ef9f9af",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "internal/town/session.go": "150cf64c7dcc77deb852e9b33e9061cf54f55a1d358af075d4c8416329aa41c6",
+    "internal/town/topics.go": "b7ac43fd31adec84d52fc724b0f5a5986772449a7e1299db6762a308e1001828",
+    "internal/ui/town.go": "f9fef8b0f7747193d438fd4bb9a14b0b22332f79cf3e4642a725454353c7e741",
+    "internal/town/layout.go": "b11c4a2706b8a907f238c73c5ff26e892fa123f1578067a9ea0e4936bbcaf3a1"
+  },
+  "toolchain": "eob-remake-go:1.26.7-ebiten2.9.9-audio；sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+  "rights": "原作衍生 PNG 僅適用既有 private GitHub 特例，不授權公開發布。",
+  "limitations": "只驗正式 dialog-ui 母體最寬問句與所列三則正常聆聽；不宣稱原版亂數、同狀態或全話題對拍。肖像名牌、其他欄位、最長標題及平台仍未完成；#34／#40保持開放。",
+  "files": {
+    "selection.json": "3a4e2ed499788ff3a63d597d0ee81ac9b09df372c31f728d595f19f114644178",
+    "script.txt": "286fbee7efdbb9cb44b3fbad8a5d3e1f22931e52f569456d48db2c2ea57be000",
+    "en-trace.json": "fbe2625c98fef3f94d928064d0c92308844ca74141220e18dd0638559605fa69",
+    "en-run.json": "2814acbaa6b455050d46d7b07004fb45de0589c958d107c0b547149e29c33450",
+    "en-engine.log": "874087bd87ec9937686e2bd5f9478ec95f2ad570bc826ac40c20e4bffe9cde55",
+    "en-step-151.png": "4596005e40476384da8b62f9d45dbaf8a9f2c6aeb6d58da72f4e613befb9f9ca",
+    "en-step-153.png": "0b2ccc850e639a8f62eb70e643f59b88aed900a2035dc5c91482b7074acec7bd",
+    "en-step-156.png": "7457976888721425366fbf3afc557a9ac272a47eb7c55d95d5d42f3d90cf70ef",
+    "en-step-157.png": "e361b03fe82d1f3a1f4a069d5a62fe600db5cebf2a7e6cf62f04df49d3ffcaf6",
+    "en-step-158.png": "caeea3ae515a34712df14e2b77d876b55b416459931c442439e93d080507de74",
+    "en-step-161.png": "f3640d95125b1e863a44218fdb46877981210b84ffc3558c7f7fe9c63ff0ce72",
+    "en-step-162.png": "42d0f3c152fb656cb43eb9b99d9608dc27f2e9a2eec749cb05049f09bd451c13",
+    "en-step-163.png": "71a026a15c48ca46a1f7c116bd49edb4999c2021cfbbaf3ef77bbf4c0bae2af8",
+    "en-step-166.png": "7219c112959284128601bcca6f62d6efadc2b484c0d91e576fedcba508343a04",
+    "en-step-167.png": "55a88478e5340672cc5154b05cf40571569a3b09e4b8813569aa7217a592695a",
+    "en-step-168.png": "4549b18ef128c470a303a0355c5f74485e2bb7119c0035b314a3c0ed3d5d4bbf",
+    "zh-Hant-trace.json": "fbe2625c98fef3f94d928064d0c92308844ca74141220e18dd0638559605fa69",
+    "zh-Hant-run.json": "6d099b5229471bfcc84072b91f406439d3101df795742ad00b868a9d7b25f4eb",
+    "zh-Hant-engine.log": "5b3b87c548dc24e781aac88e3dd5132fb93fb9b2afcdf395bc58bdc65ef7b772",
+    "zh-Hant-step-151.png": "fb1bad714385f2a54fec1cba045ff11beda85907f71bc72ae7ef385c1e3d28e6",
+    "zh-Hant-step-153.png": "a22094b0d848631fc759349a1c87e69826fefbf60b3f466afab558b70c3f4ef7",
+    "zh-Hant-step-156.png": "b02f345c82cc4b3a60a2d58d6c78376636d95c68ce6be5b15b1e7e1bf823ddc3",
+    "zh-Hant-step-157.png": "a3a97087a37ef814abfb7e2142d7dbe2c763ae1f7a64505cd38e51fc3197497a",
+    "zh-Hant-step-158.png": "0fb381a15073213a71b5bfe6563d2023c45bb2846577ea56c19912c5c90e01e5",
+    "zh-Hant-step-161.png": "c46ac924690bc2901d979a71331bf7bdfb54b5d58ba0ab56694cca073480fcd7",
+    "zh-Hant-step-162.png": "3853f0dd0c2d7795ef19963f7fbc41d4afdf51fc7a042a60ca8edf1048d8978a",
+    "zh-Hant-step-163.png": "08d0f5351c4c576a401139cf3fb8214001859379cbff05afd7ee4ab031ce0c54",
+    "zh-Hant-step-166.png": "b5db5f6f43ed1a776af2f39f63750a98469bdbb93f70b8eaf0004c86016196ea",
+    "zh-Hant-step-167.png": "9df86ac33ae1387a1d42a94f4d14b548ed1cd518c6802f1f6284137143f9dd1c",
+    "zh-Hant-step-168.png": "b7deb322e81b4f93880fe2ed31a1dbe445a1c4f6d5e2240941370d69dcd24c97",
+    "kol_cjk_longest_dialog_run.py": "3e293c4b78e1d900536e4a2193c1da79759562e6ef4f0c3c93a0177c4afd44e3",
+    "kol_cjk_longest_dialog_verify.py": "fc9a246d0f3753c20853ecbb05bea2e067c17ad56c66c7253b26a09f845b09f3"
+  }
+}

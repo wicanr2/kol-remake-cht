@@ -564,7 +564,7 @@ func TestEnemyStuckCountsUpAndRetries(t *testing.T) {
 			got, s.Actors[1].FleeAt)
 	}
 	before := s.Actors[1].Stuck
-	s.enemyStuck(1, &fixedRand{values: []int{2}})
+	s.enemyBoxed(1, &fixedRand{values: []int{2}})
 	if s.Actors[1].Stuck <= before {
 		t.Fatalf("第三條退路該把 Stuck 加上去，%d → %d", before, s.Actors[1].Stuck)
 	}

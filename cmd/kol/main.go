@@ -84,6 +84,11 @@ func newRand(seed int) *lcg { return rng.New(seed) }
 type questBattle struct {
 	state *battle.State
 	lines []string
+	// worldAmbush只標記sub_2A4E5開啟的隨機戰鬥；共同出口須回世界次格4,4。
+	// 任務／競技場共用畫面，不能靠畫面模式判斷返回來源（SPEC-011 RE-185）。
+	worldAmbush *battle.State
+	// worldQuest 只標記正常任務到達所開啟的這一場（SPEC-011 RE-214）。
+	worldQuest *battle.State
 	// bank 是 KOLDATA，執行段的訊息要照記錄號取文字（RE-086）。
 	bank *town.UIText
 	// trans 是譯文表；中文模式的戰鬥訊息從這裡取，取不到才退回原文。
@@ -105,6 +110,9 @@ type questBattle struct {
 func battleMember(m town.Member) battle.Member {
 	out := battle.Member{Name: m.Name, Wounds: m.Wounds, Female: m.Female, Portrait: m.Portrait,
 		Picture: m.Picture, Shield: m.Shield}
+	for pos, item := range m.Worn {
+		out.WornItems[pos] = battleItem(item)
+	}
 	if m.Sheet == nil {
 		return out
 	}
@@ -163,6 +171,9 @@ func battleMember(m town.Member) battle.Member {
 		if i >= battle.BackpackSlots {
 			break
 		}
+		if g.Name == "" {
+			continue
+		}
 		out.Pack[i] = g.Name
 		out.PackItems[i] = battleItem(&g)
 	}
@@ -182,8 +193,8 @@ func battleMember(m town.Member) battle.Member {
 		}
 	}
 	// 徒手四式各拿一格穿戴品當武器（`UnarmedSlots`，RE-131）：踢用 FEET、
-	// 盾擊用 SHIELD、頭槌用 HEAD、拳用 HANDS。那一格空著就是空的武器，
-	// 傷害只剩力量加成——與原版讀到一筆全零的記錄一樣。
+	// 盾擊用 SHIELD、頭槌用 HEAD、拳用 HANDS。空槽保留零值 Weapon，
+	// AttackWeapon 依原版傷害碼0補出1d2，其他數字保持零（RE-197）。
 	for style, pos := range battle.UnarmedSlots {
 		if pos >= len(m.Worn) {
 			continue
@@ -638,6 +649,7 @@ func (g *game) startArenaFight() {
 	if st == nil {
 		return
 	}
+	st.MonsterReloadMemory = g.monsterReloadMemory
 	st.Rand = g.arena.rand
 	st.StyleMaskTail = g.play.RosterListTail
 	st.SpoilItems = g.arena.spoils
@@ -1034,9 +1046,10 @@ type shotJob struct {
 }
 
 type game struct {
-	notice       []string
-	worldState   *world.Screen
-	worldSession *world.Session
+	monsterReloadMemory *battle.MonsterReloadMemory
+	notice              []string
+	worldState          *world.Screen
+	worldSession        *world.Session
 	// quest 是走到任務地點之後開起來的那一場戰鬥；用指標是因為建構之後才會被填。
 	quest *questBattle
 	// battleAtlas 是戰場磚圖。
@@ -1050,26 +1063,28 @@ type game struct {
 	large     *font.Font
 	cjk       *font.Font
 	// titleSubs 是中文模式的開場字幕與封面副標；英文模式為 nil。
-	titleSubs  *titleSubtitles
-	strings    *i18n.Table
-	roster     *roster.Roster
-	remove     *roster.DeleteFlow
-	inn        *town.Inn
-	outdoor    *town.Outdoor
-	play       *town.Session
-	flow       *flow.Flow
-	walkTick   int
-	markerStep int
-	canvas     *screen.Canvas
-	state      *charcreate.State
-	sequence   *title.Sequence
-	player     *title.Player
-	book       *book.OpenPlayer
-	bookAnim   *book.OpenAnimation
-	bookWait   float64
-	bookFrom   string // 動畫的起始畫面
-	bookTarget string // 動畫的目標畫面
-	bookLib    *assets.Library
+	titleSubs      *titleSubtitles
+	strings        *i18n.Table
+	roster         *roster.Roster
+	remove         *roster.DeleteFlow
+	inn            *town.Inn
+	outdoor        *town.Outdoor
+	play           *town.Session
+	flow           *flow.Flow
+	walkTick       int
+	markerStep     int
+	canvas         *screen.Canvas
+	state          *charcreate.State
+	sequence       *title.Sequence
+	player         *title.Player
+	titleSound     *titleSound
+	titleAudioPath string
+	book           *book.OpenPlayer
+	bookAnim       *book.OpenAnimation
+	bookWait       float64
+	bookFrom       string // 動畫的起始畫面
+	bookTarget     string // 動畫的目標畫面
+	bookLib        *assets.Library
 
 	// ending 是結局播到第幾段（RE-106）；endBank／endTrans 是敘事的文字庫與譯文。
 	ending   *ending.State
@@ -1087,9 +1102,10 @@ type game struct {
 	selected int
 	frame    title.Frame
 
-	jobs  []shotJob
-	jobAt int
-	drawn bool
+	jobs    []shotJob
+	jobAt   int
+	drawn   bool
+	drawErr error
 
 	// tracePath 是狀態軌跡的輸出檔；每截一張圖就記一筆目前站在哪一層、位置與階段。
 	// 截圖只證明畫面長什麼樣，軌跡才證明這一步走的是哪一個狀態機。
@@ -1696,6 +1712,10 @@ func (g *game) renderPage(name string) (*image.RGBA, error) {
 }
 
 func (g *game) Update() error {
+	// Draw不能回傳錯誤；交回RunGame，避免壞資產卡住待繪圖工作。
+	if g.drawErr != nil {
+		return g.drawErr
+	}
 	if len(g.jobs) > 0 {
 		if !g.drawn {
 			return nil
@@ -1725,6 +1745,7 @@ func (g *game) Update() error {
 		return nil
 	}
 	if g.interactive {
+		g.advanceBattleMarker()
 		return g.updateInteractive()
 	}
 	// 截圖模式沒有離開流程，Escape 直接關掉。互動遊玩的 Escape 是「回上一頁」，
@@ -1741,6 +1762,7 @@ func (g *game) Update() error {
 		}
 	}
 	if g.scene == scenePlay && g.play != nil {
+		g.advanceBattleMarker()
 		g.updatePlay()
 	}
 	if g.scene == sceneEnding && g.ending != nil {
@@ -1752,9 +1774,9 @@ func (g *game) Update() error {
 		}
 	}
 	if g.scene == sceneTitle && g.player != nil {
-		// 原版的等待單位是 BIOS tick；Ebitengine 固定 60 TPS，換算後推進播放器。
-		g.player.Advance(title.TickHz / 60)
-		g.frame = g.player.Current()
+		if err := g.advanceTitleAudio(); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -1887,8 +1909,9 @@ func (g *game) updateInteractive() error {
 	}
 	// 標題序列自己會播，按任何鍵才離開（RE-047）。
 	if g.flow.Scene == flow.SceneTitle && g.player != nil {
-		g.player.Advance(title.TickHz / 60)
-		g.frame = g.player.Current()
+		if err := g.advanceTitleAudio(); err != nil {
+			return err
+		}
 	}
 	// 隊伍標記的走路動畫。腳本模式逐步截圖不需要它自己動，互動模式要。
 	if g.flow.Scene == flow.SceneTown && g.leftTown() && !g.endingReached() &&
@@ -1909,7 +1932,11 @@ func (g *game) updateInteractive() error {
 	}
 	targets := g.flowTargets()
 	typingName := g.flow.Scene == flow.SceneNewChar && g.flow.Create.Stage == charcreate.StageName
-	tokens := append(keyboardTokens(typingName), mouseTokens(targets, "RET")...)
+	typingSpellName := g.flow.Scene == flow.SceneTown && g.play != nil && g.play.SpellNameTyping()
+	if typingSpellName {
+		typingName = true
+	}
+	tokens := append(keyboardTokens(typingName, typingSpellName), mouseTokens(targets, "RET")...)
 	if g.flow.Scene == flow.SceneEditor {
 		g.editBlink++
 		tokens = g.editorTokens()
@@ -1939,6 +1966,9 @@ func (g *game) updateInteractive() error {
 		if full {
 			g.notice = g.saveNotice("full")
 		}
+	}
+	if g.flow.Scene != flow.SceneTitle && g.titleSound != nil && g.titleSound.frame != -1 {
+		g.titleSound.stop()
 	}
 	return nil
 }
@@ -2003,7 +2033,7 @@ func ambushLines(bank *town.UIText, trans *town.Translations, a *battle.Ambush,
 	name string, english bool) []string {
 	countRec, levelRec := battle.AmbushLines()
 	// 記錄 0xE7 自己帶一個 `@`（換行），所以取 Segment 而不是剝掉版面碼的 UIRaw：
-	// 原版印出來是「YOU HAVE BEEN AMBUSHED」「BY n, LEVEL m NAMES!」兩行。
+	// RE-258：原版在等級後另起怪物名稱列，英文按三行組合；繁中沿既有譯文。
 	segs := town.UISegments(bank, trans, town.BankUI, countRec)
 	out := make([]string, 0, len(segs))
 	for i, seg := range segs {
@@ -2011,13 +2041,23 @@ func ambushLines(bank *town.UIText, trans *town.Translations, a *battle.Ambush,
 			out = append(out, seg.Text)
 			continue
 		}
+		baseName := name
+		if english {
+			baseName = battle.PluralBaseName(name, a.Count)
+		}
 		last := seg.Text + strconv.Itoa(a.Count) +
 			town.UIRaw(bank, trans, town.BankUI, levelRec) +
-			strconv.Itoa(a.Level) + " " + name
+			strconv.Itoa(a.Level) + " " + baseName
 		if english {
 			last += battle.PluralSuffix(name, a.Count)
 		}
-		out = append(out, last+"!")
+		if english {
+			prefix := seg.Text + strconv.Itoa(a.Count) +
+				town.UIRaw(bank, trans, town.BankUI, levelRec) + strconv.Itoa(a.Level)
+			out = append(out, prefix, baseName+battle.PluralSuffix(name, a.Count)+"!")
+		} else {
+			out = append(out, last+"!")
+		}
 	}
 	return nonEmptyLines(out)
 }
@@ -2032,22 +2072,6 @@ func (g *game) battleSpellRows() []string {
 	out := make([]string, 0, len(battle.AffectRecords()))
 	for _, rec := range battle.AffectRecords() {
 		out = append(out, g.battleRecord(rec))
-	}
-	return out
-}
-
-// battleWoreOffLines 是這一回合法術剛好失效的那幾句（記錄 0x173，RE-100）：
-// 一位一句，各等一次鍵。
-func (g *game) battleWoreOffLines() [][]string {
-	s := g.quest.state
-	if len(s.WoreOff) == 0 {
-		return nil
-	}
-	out := make([][]string, 0, len(s.WoreOff))
-	for _, i := range s.WoreOff {
-		ctx := battle.MessageContext{Actor: g.battleSpeaker(i), Lookup: g.battleRecord}
-		out = append(out,
-			battle.WrapMessage(ctx.Line(g.battleRecord(battle.WearsOffRecord))))
 	}
 	return out
 }
@@ -2084,9 +2108,10 @@ func (g *game) battleSpeaker(i int) battle.Speaker {
 		out.Belt = g.strings.DisplayName(out.Belt)
 		return out
 	}
-	// 敵人手上那件武器的名字在怪物記錄 +0x20（RE-080）。少了它 `|E` 會展開成空，
-	// 訊息變成 `THE BINDERAK CUTS HIS  AT POONTANG`——實跑抓到的。
-	if s.Monster.Weapon != nil {
+	// RE-203：訊息讀這隻怪物當前選組的手持，掉落後不回退母表。
+	if a.HandItem != nil && !a.Unarmed {
+		out.Weapon = a.HandItem.Name
+	} else if len(s.Monster.EquipmentVariants) == 0 && s.Monster.Weapon != nil && !a.Unarmed {
 		out.Weapon = s.Monster.Weapon.Name
 	}
 	out.Name = g.strings.DisplayName(out.Name)
@@ -2104,14 +2129,25 @@ func (g *game) battleRecord(record int) string {
 	return town.UIRaw(g.quest.bank, g.quest.trans, town.BankUI, record)
 }
 
-// battleAreaLine 是挑完部位之後那一句效果（`0x287E4`，RE-100）。問句本身已經印過，
-// 這裡直接換成效果那一句。
-func (g *game) battleAreaLine(s *battle.State, res battle.CastResult, caster int) {
-	ctx := battle.MessageContext{Lookup: g.battleRecord}
+// battleSpellResultLine 展開本次實際結果：負面部位法術走 sub_277F4 的傷害句，
+// 其他效果走 0x287E4 通用句（RE-206）。
+func (g *game) battleSpellResultLine(s *battle.State, res battle.CastResult, caster int) []string {
+	ctx := battle.MessageContext{Target: g.battleSpeaker(res.Target), Lookup: g.battleRecord}
+	if res.Damage != nil {
+		monster := res.Target >= 0 && res.Target < len(s.Actors) && s.Actors[res.Target].Member < 0
+		shatters := monster && s.Actors[res.Target].Shatters
+		return battle.WrapMessage(ctx.Substitute(
+			g.battleRecords(battle.DamageLine(*res.Damage, 1, monster, shatters))))
+	}
 	negative := caster >= 0 && caster < len(s.Actors) && s.Actors[caster].Negative
 	before, after := battle.SpellEffectLine(res.Power, negative)
-	s.Exec.Text = battle.WrapMessage(ctx.Substitute(
+	return battle.WrapMessage(ctx.Substitute(
 		g.battleRecords(before) + " " + g.battleRecords(after)))
+}
+
+// battleAreaLine 在部位回答後直接換成結果頁；問句本身已經顯示。
+func (g *game) battleAreaLine(s *battle.State, res battle.CastResult, caster int) {
+	s.Exec.Text = g.battleSpellResultLine(s, res, caster)
 }
 
 // battleStep 做出執行段的下一手，並把那一句訊息展開、斷行放進畫面
@@ -2124,6 +2160,7 @@ func (g *game) battleStep() {
 	// 同一手還沒印完的下一句：攻擊命中分兩句，擊退成立還會再多一到兩句，
 	// 各等一次鍵（RE-088／RE-095）。
 	if len(s.Exec.Pending) > 0 {
+		s.RefreshView()
 		s.Exec.Text = s.Exec.Pending[0]
 		s.Exec.Pending = s.Exec.Pending[1:]
 		return
@@ -2165,11 +2202,40 @@ func (g *game) battleStep() {
 		// 這一場標到了任務完成，而且有人的已回報數正好是 0x17，就接結局
 		// （RE-106）。檢查在放開畫面之前，順序與原版相同。
 		g.armEnding(s)
+		s.LootDownParty(s.Rand)
 		g.writeBattleParty(s)
+		returnToWorld := g.quest.worldAmbush == s
+		returnToQuest := g.quest.worldQuest == s
+		if returnToWorld || returnToQuest {
+			if g.worldSession != nil && g.worldSession.Screen != nil && g.worldSession.Screen.Travel != nil {
+				g.worldSession.Screen.Travel.SubX = 4
+				g.worldSession.Screen.Travel.SubY = 4
+			}
+			if returnToWorld {
+				g.quest.worldAmbush = nil
+			}
+			if returnToQuest {
+				g.quest.worldQuest = nil
+			}
+		}
 		// 勝負那兩句與戰利品都處理完了，這一場真的結束——放開畫面回野外，
 		// 玩家才能繼續走。傷勢與既有裝備修改已依 SPEC-027 回寫；
-		// 敗北的額外掉落及完整原版返回路徑仍待驗證。
+		// SPEC-027搜刮與傷勢已接共同出口；完整原版保存鏈另驗。
 		g.quest.state = nil
+		if returnToWorld && g.worldSession != nil {
+			// 原版等整場結束後才擲天候；沿這一場的亂數接續，不重新播種。
+			g.worldSession.Rand = s.Rand
+			g.worldSession.ResumeAfterBattle(s.ReturnScratch)
+			if index := g.worldSession.UnresolvedReturnIndex; index != nil {
+				fmt.Fprintf(os.Stderr, "world return cost unresolved: index=%d; retained previous directional approximation\n", *index)
+			}
+		}
+		if returnToQuest && g.worldSession != nil {
+			g.worldSession.ResumeAfterQuest(s.ReturnScratch)
+			if index := g.worldSession.UnresolvedReturnIndex; index != nil {
+				fmt.Fprintf(os.Stderr, "world quest return cost unresolved: index=%d; retained previous directional approximation\n", *index)
+			}
+		}
 		return
 	}
 	// 沒有訊息的那幾手不停下來等鍵：原版的等鍵寫在印訊息的分支裡面，看不到的怪物
@@ -2179,13 +2245,6 @@ func (g *game) battleStep() {
 		var ok bool
 		r, ok = s.Step(s.Rand)
 		if !ok {
-			// 新回合開始前，身上的法術先倒數一次；剛好過期的各印一句
-			// （記錄 0x173，RE-100）。
-			if lines := g.battleWoreOffLines(); len(lines) > 0 {
-				s.WoreOff = nil
-				s.Exec.Text, s.Exec.Pending = lines[0], lines[1:]
-				return
-			}
 			// 還沒分勝負但站到了戰場邊上：問「要逃嗎」（記錄 0x109，RE-103）。
 			if s.Plan.Prompt == battle.PromptFlee {
 				s.Exec.Text = battle.WrapMessage(
@@ -2196,7 +2255,7 @@ func (g *game) battleStep() {
 			return
 		}
 		if r.Message != 0 || r.Outcome != nil || len(r.Records) > 0 ||
-			r.Exhausted != 0 {
+			r.Exhausted != 0 || r.KnockOnly {
 			break
 		}
 	}
@@ -2218,16 +2277,21 @@ func (g *game) battleStep() {
 		}
 		s.Exec.Pending = append(s.Exec.Pending, line)
 	}()
-	// 丟與撿的訊息在動作**做完之後**才展開，東西已經不在原處了，所以名字由
-	// ActResult 帶出來（RE-094）：`|E` 是丟掉的那件、`|H` 是撿到的那件。
+	// RE-252：名稱先綁定，再進擊退提前返回；沿既有顯示譯名。
 	if r.Item != "" {
 		ctx.Item = g.strings.DisplayName(r.Item)
 		if r.Command == battle.CmdDrop {
 			ctx.Actor.Weapon = g.strings.DisplayName(r.Item)
 		}
 	}
-	// 施法那一手：`|S` 是法術的名字，生效之後再接一句「The spell has a … effect.」
-	// （RE-100）。
+	// RE-245：嚴重傷害確認後的擊退句；不重印傷害，也不把它塞成下一句等待。
+	if r.KnockOnly {
+		s.Exec.Text = battle.WrapMessage(ctx.Substitute(g.battleRecords(r.Records)))
+		return
+	}
+	// 丟與撿的訊息在動作**做完之後**才展開，東西已經不在原處了，所以名字由
+	// ActResult 帶出來（RE-094）：`|E` 是丟掉的那件、`|H` 是撿到的那件。
+	// 施法那一手：`|S` 是法術的名字，生效後接傷害或通用效果句（RE-206）。
 	if r.Cast != nil {
 		if m := s.Member(r.Actor); m != nil && r.Actor >= 0 {
 			if a := s.Actors[r.Actor]; a.SpellPick >= 0 && a.SpellPick < len(m.Spells) {
@@ -2238,19 +2302,21 @@ func (g *game) battleStep() {
 		// 效果 6 而且不用選目標格：接的不是效果那一句，是「挑一個部位」那一問
 		// （記錄 0x184 ＋ hurt／heal ＋ 0x16C，RE-100）。答完才輪到效果那一句。
 		if r.Cast.NeedsArea {
-			s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
-				g.battleRecords(battle.AreaPrompt(s.Actors[r.Actor].Negative))))}
+			// 此層只收 1…6，問句須立即可見，不能等另一個 Return 出列。
+			s.Exec.Text = battle.WrapMessage(ctx.Substitute(
+				g.battleRecords(battle.AreaPrompt(s.Actors[r.Actor].Negative))))
+			s.Exec.Pending = nil
 			return
 		}
-		before, after := battle.SpellEffectLine(r.Cast.Power,
-			s.Actors[r.Actor].Negative)
-		s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
-			g.battleRecords(before) + " " + g.battleRecords(after)))}
+		s.Exec.Pending = [][]string{g.battleSpellResultLine(s, *r.Cast, r.Actor)}
 		return
 	}
 	if len(r.Records) > 0 {
 		// 一句要接兩筆記錄的（射擊撞在樹上或牆上，RE-102）。
 		line := ctx.Line(g.battleRecords(r.Records))
+		if r.Plain {
+			line = ctx.Substitute(g.battleRecords(r.Records))
+		}
 		if r.Bang {
 			line = strings.TrimRight(line, " ") + "!"
 			if g.strings != nil {
@@ -2277,15 +2343,22 @@ func (g *game) battleStep() {
 	// 攻擊那一手：第一句是動作加結果，命中的話第二句是傷害（RE-088）。
 	a := s.Actors[r.Actor]
 	heavy := a.Weapon.Kind > 0x7F
-	s.Exec.Text = battle.WrapMessage(ctx.Line(
-		g.battleRecords(battle.AttackLine(r.Command, a.Style, *r.Outcome, heavy))))
-	if r.Outcome.Miss || r.Outcome.Parried {
-		return
+	if !r.DamageOnly {
+		s.Exec.Text = battle.WrapMessage(ctx.Line(
+			g.battleRecords(battle.AttackLine(r.Command, a.Style, *r.Outcome, heavy))))
+		if r.HitPending || r.Outcome.Miss || r.Outcome.Parried {
+			return
+		}
 	}
 	monster := r.Target >= 0 && s.Actors[r.Target].Member < 0
 	shatters := monster && s.Actors[r.Target].Shatters
-	s.Exec.Pending = [][]string{battle.WrapMessage(ctx.Substitute(
-		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster, shatters))))}
+	line := battle.WrapMessage(ctx.Substitute(
+		g.battleRecords(battle.DamageLine(*r.Outcome, 0, monster, shatters))))
+	if r.DamageOnly {
+		s.Exec.Text = line
+	} else {
+		s.Exec.Pending = [][]string{line}
+	}
 	// 擊退或打暈那一句接在傷害之後（RE-095）。`|F` 指的還是被打的那一位。
 	if len(r.Knock) > 0 {
 		s.Exec.Pending = append(s.Exec.Pending, battle.WrapMessage(
@@ -2338,12 +2411,16 @@ func (g *game) battleVerdictLines() []string {
 	if g.quest.english {
 		won = battle.PluralSuffix(name, enemies)
 		lost = battle.DefeatSuffix(name, enemies)
+		name = battle.PluralBaseName(name, enemies)
 	}
 	ctx := battle.MessageContext{Lookup: g.battleRecord}
 	switch s.Verdict {
 	case battle.VerdictWon:
 		// `|F` 展開要有目標；原版是把 word_3237E 指到第一個敵人（`0x211D5`）。
 		ctx.Target = g.battleSpeaker(battle.PartySlots)
+		if g.quest.english {
+			ctx.Target.Name = battle.PluralBaseName(ctx.Target.Name, enemies)
+		}
 		first := ctx.Substitute(g.battleRecords(battle.VictoryRecords())) + won + "!"
 		// 競技場與訓練戰整段獎勵都跳過（`0x2124E`，RE-096），所以那一句不印，
 		// 接著的是升階與賭金結算。
@@ -2504,7 +2581,7 @@ func (g *game) updateBattle() {
 
 func (g *game) Draw(dst *ebiten.Image) {
 	if err := g.render(); err != nil {
-		fmt.Fprintln(os.Stderr, "繪製失敗：", err)
+		g.drawErr = err
 		return
 	}
 	op := &ebiten.DrawImageOptions{}
@@ -2628,6 +2705,7 @@ func defaultSavePath() (string, error) {
 var buildVersion = "development"
 
 func main() {
+	var monsterReloadMemory battle.MonsterReloadMemory
 	showVersion := flag.Bool("version", false, "顯示程式版本後結束")
 	assetRoot := flag.String("assets", "assets/original-derived-png/ega", "抽取資產根目錄")
 	fontRoot := flag.String("fonts", "assets/original-derived-png/fonts", "字型資產目錄")
@@ -2647,6 +2725,8 @@ func main() {
 	outdoorMarker := flag.String("outdoor-marker", "", "覆寫隊伍標記在視窗內的偏移，格式 列,欄")
 	uiI18nPath := flag.String("ui-i18n", "docs/i18n/ui-zh-Hant.json",
 		"UI 文字庫（KOLDATA／BOOKDATA／ENDTXT）的繁體中文譯文")
+	worldPromptsPath := flag.String("world-prompts", "docs/i18n/world-prompts-zh-Hant.tsv",
+		"世界提示的完整段落譯表（TSV）")
 	displayNamesPath := flag.String("display-names", "docs/i18n/display-names-zh-Hant.tsv",
 		"資料名稱的繁體中文顯示譯名")
 	titleSubsPath := flag.String("title-i18n", "docs/i18n/title-zh-Hant.json",
@@ -2714,6 +2794,7 @@ func main() {
 		"測試用受控亂數：以逗號分隔，依序當作野外遭遇擲點（RollAmbush）與騎走判定的骰值，用完回到種子亂數")
 	titlePath := flag.String("title-sequence", "docs/re/title-sequence.json",
 		"標題序列腳本（由 RE-047 從 TITLE.EXE 的 _main 轉寫）")
+	titleAudioPath := flag.String("audio", "assets/audio/manifest.json", "已驗收的 OGG 音訊目錄")
 	titleShots := flag.String("title-shot-dir", "", "把標題序列一輪的每個畫面輸出到這個目錄")
 	titleFrame := flag.Int("title-frame", -1,
 		"只輸出標題序列展開後的第 N 個畫面到 -shot，供展示圖使用")
@@ -2979,6 +3060,10 @@ func main() {
 			os.Exit(1)
 		}
 		if err := table.LoadDisplayNames(*displayNamesPath); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		if err := table.LoadParagraphs(*worldPromptsPath); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
@@ -3474,6 +3559,7 @@ func main() {
 				state.Town, state.EntryPoint)
 			playSession.World = worldScreenState
 			playSession.OnLeaveTown = func(p town.Point) {
+				worldScreenState.Movement = partyMovement(playSession.Party)
 				enterWorld(worldScreenState, p)
 				worldSessionState.Reset()
 				worldSessionState.EnterFromTown()
@@ -3623,17 +3709,19 @@ func main() {
 					members = append(members, battleMember(m))
 				}
 				mon := monsters.At(a.Monster)
-				st := battle.NewAmbush(a, mon, members,
-					battle.Generate(newRand(*seed)))
+				// SPEC-011／RE-202：確認遭遇圖後才生成地形，接續野外同一亂數。
+				st := battle.NewAmbush(a, mon, members, nil)
 				if st == nil {
 					return
 				}
 				// 共用緩衝殘值：城鎮上一次名冊清單留下的（RE-159）。
+				st.MonsterReloadMemory = &monsterReloadMemory
 				st.StyleMaskTail = playSession.RosterListTail
-				st.Rand = newRand(*seed)
+				st.Rand = worldSessionState.Rand
 				st.SpoilItems = spoilItems
 				quest.tiles = ui.NewBattleTiles(atlas)
 				quest.state = st
+				quest.worldAmbush = st
 				quest.bank = bank
 				quest.trans = trans
 				quest.english = *lang == "en"
@@ -3745,15 +3833,18 @@ func main() {
 					fmt.Fprintln(os.Stderr, err)
 					return
 				}
-				// 任務地圖不重生地形，但照樣灑一次樹叢（`sub_1E3A8:0x1E5E5`）。
-				field.Scatter(newRand(*seed))
+				// SPEC-008／RE-288：任務灑點與戰鬥接續同一世界亂數。
+				questRand := battle.Rand(worldSessionState.Rand)
+				field.Scatter(questRand)
 				quest.tiles = ui.NewBattleTiles(atlas)
 				st := battle.NewQuest(site, members, monsters.At(site.Monster), field)
-				st.Rand = newRand(*seed)
+				st.Rand = questRand
+				st.MonsterReloadMemory = &monsterReloadMemory
 				st.StyleMaskTail = playSession.RosterListTail
 				st.SpoilItems = spoilItems
 				st.Stage = battle.StageEncounter
 				quest.state = st
+				quest.worldQuest = st
 				quest.bank = bank
 				quest.trans = trans
 				quest.english = *lang == "en"
@@ -3844,6 +3935,7 @@ func main() {
 				}
 				startAmbush(a)
 			}
+			worldSessionState.OnTimePartBusy = func() bool { return quest.state != nil }
 		}
 		// 野外的時刻：隊伍最慢的那個移動率決定每步扣多少，換日補營養（RE-077）。
 		if worldScreenState != nil {
@@ -3933,36 +4025,38 @@ func main() {
 	}
 
 	g := &game{
-		ending:       &ending.State{},
-		endBank:      endBank,
-		endTrans:     endTrans,
-		sprites:      &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
-		sequence:     sequence,
-		small:        small,
-		large:        large,
-		cjk:          cjk,
-		titleSubs:    titleSubs,
-		strings:      table,
-		canvas:       canvasFor(*lang),
-		state:        charcreate.New(data, newRand(*seed)),
-		scene:        scene(*sceneName),
-		portrait:     *portrait,
-		selected:     *menuSelected,
-		roster:       slots,
-		inn:          innState,
-		outdoor:      outdoorState,
-		play:         playSession,
-		flow:         flowState,
-		worldState:   worldScreenState,
-		worldSession: worldSessionState,
-		worldParty:   worldPartyState,
-		quest:        quest,
-		tracePath:    *tracePath,
-		traceDetail:  *traceDetail,
-		arena:        arenaDep,
-		arenaFighter: -1,
-		interactive:  interactive,
-		logInput:     *logInput,
+		monsterReloadMemory: &monsterReloadMemory,
+		ending:              &ending.State{},
+		endBank:             endBank,
+		endTrans:            endTrans,
+		sprites:             &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
+		sequence:            sequence,
+		titleAudioPath:      *titleAudioPath,
+		small:               small,
+		large:               large,
+		cjk:                 cjk,
+		titleSubs:           titleSubs,
+		strings:             table,
+		canvas:              canvasFor(*lang),
+		state:               charcreate.New(data, newRand(*seed)),
+		scene:               scene(*sceneName),
+		portrait:            *portrait,
+		selected:            *menuSelected,
+		roster:              slots,
+		inn:                 innState,
+		outdoor:             outdoorState,
+		play:                playSession,
+		flow:                flowState,
+		worldState:          worldScreenState,
+		worldSession:        worldSessionState,
+		worldParty:          worldPartyState,
+		quest:               quest,
+		tracePath:           *tracePath,
+		traceDetail:         *traceDetail,
+		arena:               arenaDep,
+		arenaFighter:        -1,
+		interactive:         interactive,
+		logInput:            *logInput,
 	}
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
@@ -4051,14 +4145,14 @@ func main() {
 			os.Exit(2)
 		}
 	}
-	if scene(*sceneName) == sceneTitle {
+	if scene(*sceneName) == sceneTitle || interactive && *loadPath == "" {
 		// 實際播放模式：依 BIOS tick 推進，按鍵中止，與原版同一條腳本。
 		frames, err := sequence.Expand(newRand(*seed))
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
-		g.player = title.NewPlayer(frames, title.ThunderSeconds*title.TickHz)
+		g.player = title.NewPlayer(frames, 0)
 		g.frame = g.player.Current()
 	}
 
@@ -4404,7 +4498,11 @@ func main() {
 	bounds := g.canvas.Image().Bounds()
 	ebiten.SetWindowSize(bounds.Dx()**scaleFlag, bounds.Dy()**scaleFlag)
 	ebiten.SetWindowTitle("武士傳說")
-	if err := ebiten.RunGame(g); err != nil {
+	err = ebiten.RunGame(g)
+	if g.titleSound != nil {
+		g.titleSound.stop()
+	}
+	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}

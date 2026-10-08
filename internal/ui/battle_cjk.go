@@ -35,8 +35,8 @@ func BattleFieldCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 
 	cx, cy := s.Camera()
 	mounted := false
-	if s.Cursor >= 0 && s.Cursor < len(s.Actors) {
-		mounted = s.Actors[s.Cursor].Flag1E != 0
+	if a, ok := s.ViewActor(); ok {
+		mounted = a.Flag1E != 0
 	}
 	sight := s.Field.Visible(cx, cy, mounted)
 	v := battle.FieldView
@@ -59,12 +59,8 @@ func BattleFieldCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	}
 	cur := battle.FieldCursor
 	frame(dst, cur.X*sc, cur.Y*sc, cur.Width*sc, cur.Height*sc, town.ColourSelected)
-	if s.Plan.Prompt == battle.PromptTarget {
-		c := s.Plan.Cursor
-		if c.Row >= 0 && c.Row < battle.ViewRows && c.Col >= 0 && c.Col < battle.ViewCols {
-			frame(dst, (v.X+c.Col*battle.TileSide)*sc, (v.Y+c.Row*battle.TileSide)*sc,
-				battle.TileSide*sc, battle.TileSide*sc, town.ColourSelected)
-		}
+	if err := drawBattleTargetMarker(dst, sprites, tiles, s, sc); err != nil {
+		return err
 	}
 
 	for _, box := range [2]struct{ X, Y, Width, Height int }{
@@ -108,7 +104,7 @@ func BattleFieldCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 			y := (area.Y + i*area.LineHeight) * sc
 			// 中文不轉大寫——原版轉大寫是因為它的小字模只有大寫好看，
 			// 中文沒有大小寫，轉了只會讓夾在句子裡的英文名字變形。
-			scrollTextCJK(dst, f, x0, y, line)
+			drawBattleMessageText(dst, f, x0, y, line)
 		}
 		return nil
 	}
@@ -116,7 +112,7 @@ func BattleFieldCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 }
 
 // BattleEncounterCJK 是中文模式的遭遇那一頁：同一份版面乘上倍率，訊息改用
-// 中文字模。`lines` 已經是譯好的敘述（`quest.lines` 走 KOLDATA 的譯文），
+// 中文字模。`lines` 已經是繪製端取出的譯文（任務遭遇走 KOLDATA 記錄 0xE9），
 // 所以這裡不再查表。
 func BattleEncounterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	s *battle.State, lines []string) error {
@@ -203,6 +199,7 @@ func BattleSpellListCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	drawBattleTitleCJK(dst, f, title, b.X, b.Width, sc)
 
 	l := battle.SpellListRows
+	l.Row = s.SpellListRow()
 	textX := l.Col * town.CellWidth
 	safe := battleCJKListSafeWidth(b.X, b.Width, textX, sc)
 	for i, row := range rows {
@@ -210,14 +207,11 @@ func BattleSpellListCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 			break
 		}
 		y := l.Row + i*l.LineStep
+		ink := town.ColourListIdle
 		if i == s.Plan.ListPick {
-			// 英文版目前以白框表示重製版游標；原版外觀尚未完全對拍，中文只等比
-			// 保留這個既有視覺契約。
-			frame(dst, (textX-2)*sc, (y-1)*sc,
-				(b.Width-(textX-2-b.X)-4)*sc, l.LineStep*sc,
-				town.ColourSelected)
+			ink = town.ColourSelected
 		}
-		drawBattleListTextCJK(dst, f, textX*sc, y*sc, row, safe, town.ColourText)
+		drawBattleListTextCJK(dst, f, textX*sc, y*sc, row, safe, ink)
 	}
 	// 選中的法術名若是精靈語音節串，底部訊息區畫卷軸與中文注解（SPEC-034）。
 	// 規劃段這一區原本是空的；正負效果那一頁的列解析不出來，不會畫。
@@ -360,8 +354,8 @@ func drawSpoilIconsCJK(dst *ebiten.Image, sprites Sprites, s *battle.State, scal
 	return nil
 }
 
-// drawBattleSheetCJK 是左上那一格的裝備欄。六列標籤走譯文，值照原文印
-// ——那是物品名，不在譯文表裡。
+// drawBattleSheetCJK 是左上那一格的裝備欄。六列標籤走譯文，
+// 物品值由 displayName 查顯示譯名；第六列是腰帶武器（SPEC-019）。
 func drawBattleSheetCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	t Translator, s *battle.State, sc int) error {
 	d, show := s.EquipmentPanel()
@@ -380,7 +374,7 @@ func drawBattleSheetCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 		cellInAt(dst, f, x*sc, y*sc, value, [3]uint8{255, 255, 255})
 	}
 	if !d.Monster {
-		at(24, 7, d.Name, true)
+		at(24, 7, d.Name, false)
 	}
 	if d.Equipment {
 		for i := 0; i < d.Count; i++ {
@@ -450,7 +444,11 @@ func drawBattleIconsCJK(dst *ebiten.Image, sprites Sprites, s *battle.State, sc 
 		if i == s.Plan.Selected {
 			c = town.ColourSelected
 		}
-		frame(dst, x, b.Y*sc, b.Width*sc, b.Height*sc, c)
+		// SPEC-010：一個原版邏輯像素的外框也等比放大，不能只放大矩形尺寸。
+		for inset := 0; inset < sc; inset++ {
+			frame(dst, x+inset, b.Y*sc+inset,
+				b.Width*sc-2*inset, b.Height*sc-2*inset, c)
+		}
 	}
 	return nil
 }

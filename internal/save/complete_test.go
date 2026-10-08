@@ -63,6 +63,33 @@ func TestClockRejectsInvalidDateAndPart(t *testing.T) {
 	}
 }
 
+func TestClockDelayedPartFileRoundTrip(t *testing.T) {
+	for part, ticks := range []int{3366, 2526, 1686, 846} {
+		s := New()
+		s.Schema = CompleteSchema
+		s.Characters = characterSample()
+		s.Clock = &Clock{Ticks: ticks, Part: part, Month: 3, Weather: 1}
+		path := filepath.Join(t.TempDir(), "delayed-part.json")
+		if err := Write(path, s); err != nil {
+			t.Fatalf("合法延後時段不可被拒絕：%+v：%v", s.Clock, err)
+		}
+		got, err := Read(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !reflect.DeepEqual(s, got) {
+			t.Fatal("延後時段保存往返改變了內容")
+		}
+		for _, invalid := range []int{-1, 5, part + 2} {
+			bad := *s.Clock
+			bad.Part = invalid
+			if err := bad.Validate(); err == nil {
+				t.Fatalf("提前或超界時段應被拒絕：%+v", bad)
+			}
+		}
+	}
+}
+
 // v2 完整存檔讀進來補上自訂圖像兩欄（null），當成 v3；寫出是 v3，自訂圖像能往返（SPEC-036）。
 func TestCompleteV2MigratesAndPictureRoundTrips(t *testing.T) {
 	s := New()

@@ -10,6 +10,10 @@
 | Reference Card | 參考卡 | 核准 | 文件種類 |
 | Ashtalarea | 阿什塔拉瑞亞 | 暫譯 | 玩家手冊實體頁 3；專名音譯待全書一致性審查 |
 | Brettle | 布雷特爾 | 暫譯 | 城鎮名；世界地圖記錄代碼 `BRT`，對應 `TOWN1` |
+| Stonesthrow | 斯通斯羅 | 暫譯 | 任務地點 15 的舊比武場；來源為 `quest-sites.json` 的敘述 |
+| Sheller Ridge | 謝勒山脊 | 暫譯 | 任務地點 20 的敘述；不可與城鎮 Shellernoon 混為一個名稱 |
+| Thanakesh hills | 塔納凱什丘陵 | 暫譯 | 任務地點 21 的敘述；地名採音譯 |
+| Sodden hills | 濕泥丘陵 | 暫譯 | 任務地點 23 的敘述；地名採意譯，待交叉確認 |
 | Htron | 赫特隆 | 暫譯 | 北方城鎮；代碼 `HTN`，對應 `TOWN2`。城鎮對話「north is Htron」與世界地圖座標 (51,4) 互證 |
 | Thimblewald | 辛博瓦德 | 暫譯 | 西方城鎮；代碼 `THM`，對應 `TOWN3`。對話「west is Thimblewald」與座標 (15,10) 互證 |
 | Poitle's Lock | 波伊特水閘 | 暫譯 | 運河閘鎮；代碼 `POT`，對應 `TOWN4`；鎮上有 Lockkeeper |
@@ -175,3 +179,8 @@
 | Gentle / Wanderer / Adventurer / Hero / Armiger | 仕紳／流浪者／冒險者／英雄／扈從 | 暫譯 | 社會階級第 11…15 級（KOLDATA 記錄 126…130） |
 | Squire / Novice / Initiate / Adept / Candidate | 侍從／新手／入門者／熟練者／候選人 | 暫譯 | 社會階級第 16…20 級（KOLDATA 記錄 131…135） |
 | Knight / Errant / Commander / Marshall / Baronet | 騎士／遊俠騎士／指揮官／元帥／男爵 | 暫譯 | 社會階級第 21…25 級（KOLDATA 記錄 136…140） |
+| Blue Chain | 藍鍊 | 暫譯 | 教派信物；town-buildings.json 的 order.token，RE-200；原文拼字保留 |
+| Pearl Amulet | 珍珠護符 | 暫譯 | 教派信物；town-buildings.json 的 order.token，RE-200；原文拼字保留 |
+| Red Neclace | 紅色項鍊 | 暫譯 | 教派信物；town-buildings.json 的 order.token，RE-200；原文拼字保留 |
+| Stone Amulet | 石護符 | 暫譯 | 教派信物；town-buildings.json 的 order.token，RE-200；原文拼字保留 |
+| Black Choker | 黑色頸鍊 | 暫譯 | 教派信物；town-buildings.json 的 order.token，RE-200；原文拼字保留 |

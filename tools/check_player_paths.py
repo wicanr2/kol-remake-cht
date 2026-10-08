@@ -15,8 +15,8 @@
   tools/check_player_paths.py world-quest town-mirror
   tools/check_player_paths.py --all
 
-跑起來要 Docker（`run_kol_shots.sh` 自己會開容器），所以這一支在主機上執行。
-長路徑一條要跑十幾二十分鐘，`--all` 會很久。
+必須在 Docker 內執行 Python；容器內設 `KOL_BIN` 直接使用已建置的執行檔，
+`KOL_REPLAY_CHECK_DIR` 指定可寫輸出。`--all` 依存檔依賴排序，續玩讀當輪新存檔。
 """
 
 from __future__ import annotations
@@ -24,12 +24,13 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import pathlib
 import subprocess
 import sys
 
 PLANS = pathlib.Path("docs/verification/player-path")
-OUT = pathlib.Path("workplace/replay-check")
+OUT = pathlib.Path(os.environ.get("KOL_REPLAY_CHECK_DIR", "workplace/replay-check"))
 
 
 def spec_line(plan: dict, shot_dir: pathlib.Path) -> str:
@@ -94,16 +95,60 @@ def digest(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def check(name: str, bootstrap: bool = False) -> bool:
+def dependency_order(names: list[str]) -> tuple[list[str], dict[str, str]]:
+    """先執行存檔產生者；拒絕重複寫入者與循環，不偷偷讀上一輪存檔。"""
+    plans = {n: json.loads((PLANS / f"{n}.json").read_text(encoding="utf-8")) for n in names}
+    writers = {}
+    for name, plan in plans.items():
+        save = plan.get("save", {}).get("file")
+        if save:
+            if save in writers:
+                raise ValueError(f"同一存檔有多個產生者：{save}")
+            writers[save] = name
+    ordered, visiting, visited = [], set(), set()
+
+    def visit(name):
+        if name in visiting:
+            raise ValueError(f"玩家路徑存檔依賴有循環：{name}")
+        if name in visited:
+            return
+        visiting.add(name)
+        parent = writers.get(plans[name].get("load"))
+        if parent:
+            visit(parent)
+        visiting.remove(name)
+        visited.add(name)
+        ordered.append(name)
+
+    for name in names:
+        visit(name)
+    return ordered, {path: str(OUT / name / "save.json") for path, name in writers.items()}
+
+
+def check(name: str, bootstrap: bool = False, fresh_saves: dict[str, str] | None = None) -> bool:
     path = PLANS / f"{name}.json"
     plan = json.loads(path.read_text(encoding="utf-8"))
+    if fresh_saves and plan.get("load") in fresh_saves:
+        plan["load"] = fresh_saves[plan["load"]]
+        independent_save = False
+    else:
+        independent_save = bool(plan.get("load"))
     shot_dir = OUT / name
     shot_dir.mkdir(parents=True, exist_ok=True)
+    if independent_save:
+        # v1 匯入會在輸入旁寫轉換檔。複製相同位元組到輸出區，保留觀察來源唯讀。
+        source = pathlib.Path(plan["load"])
+        copied = shot_dir / "input-save.json"
+        copied.write_bytes(source.read_bytes())
+        plan["load"] = str(copied)
     spec = shot_dir / "shots.spec"
     spec.write_text(spec_line(plan, shot_dir) + "\n", encoding="utf-8")
 
-    run = subprocess.run(["tools/run_kol_shots.sh", str(spec)],
-                         capture_output=True, text=True)
+    binary = os.environ.get("KOL_BIN")
+    command = ([binary, *spec_line(plan, shot_dir).split("|")[1:]] if binary else
+               ["tools/run_kol_shots.sh", str(spec)])
+    run = subprocess.run(command, capture_output=True, text=True)
+    (shot_dir / "engine.log").write_text(run.stdout + run.stderr, encoding="utf-8")
     if run.returncode != 0:
         print(f"{name}：跑不動\n{run.stderr[-800:]}")
         return False
@@ -147,7 +192,11 @@ def main() -> int:
                        if not f.stem.endswith("-receipt"))
     if not names:
         p.error("要指定收據名，或加 --all")
-    bad = [n for n in names if not check(n, args.bootstrap)]
+    try:
+        names, fresh_saves = dependency_order(names)
+    except ValueError as error:
+        p.error(str(error))
+    bad = [n for n in names if not check(n, args.bootstrap, fresh_saves)]
     if bad:
         print(f"\n對不上的：{'、'.join(bad)}")
     return 1 if bad else 0

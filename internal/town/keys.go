@@ -43,6 +43,24 @@ func (s *Session) Key(token string) bool {
 		}
 		return false
 	}
+	// 名稱文字先接收字母、空白與退格；RET與圖示保留既有確認／取消流程。
+	if s.SpellNameTyping() {
+		switch token {
+		case "BS":
+			s.BackspaceSpellName()
+			return true
+		case "SPACE":
+			s.TypeSpellName(' ')
+			return true
+		}
+		if r := []rune(token); len(r) == 1 && (r[0] >= 'A' && r[0] <= 'Z' || r[0] >= 'a' && r[0] <= 'z') {
+			s.TypeSpellName(r[0])
+			return true
+		}
+		if token != "RET" && token != "<" && token != ">" {
+			return false
+		}
+	}
 	// 在城門選了 DOOR 就換到世界地圖。放在這裡而不是呼叫端：`LeftTown` 是這個
 	// 狀態機自己翻的旗標，誰送鍵進來都要走同一條路——原本掛在 `cmd/kol` 那一份
 	// 包裝上，走 flow 進來的鍵就繞過了它，落到世界地圖的哪一格只是碰巧對。
@@ -70,6 +88,33 @@ func (s *Session) Key(token string) bool {
 	}
 	switch {
 	case s.ShowingItemPage():
+		p := s.Inside.ItemPage
+		if p.GiftConfirm {
+			if token == "RET" || token == "SPACE" {
+				s.confirmGift()
+			}
+			return true
+		}
+		if len(p.DropMessage) > 0 && !p.DropConfirm {
+			if token == "RET" || token == "SPACE" {
+				s.afterItemAction()
+			}
+			return true
+		}
+		if p.DropConfirm && token == "SPACE" {
+			return true
+		}
+		// 動作／YES-NO等待走sub_11722(0)，方向鍵不能改物品來源欄。
+		if p.Acting && (token == "U" || token == "D") {
+			return true
+		}
+		// SPEC-031：空格訊息的sub_144C3只接受ENTER／SPACE確認，方向鍵不移清單。
+		if len(s.Inside.ItemPage.Message) > 0 {
+			if token == "RET" || token == "SPACE" {
+				s.closeItemAction()
+			}
+			return true
+		}
 		// 物品那一頁：上下選格，數字鍵在問「給誰」的時候選人（RE-127）。
 		switch token {
 		case "U":

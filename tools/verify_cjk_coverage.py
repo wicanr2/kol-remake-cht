@@ -49,15 +49,15 @@ def main():
     for bank, records in ui["banks"].items():
         for number, row in records.items():
             entries.append((f"{paths[2]}.banks.{bank}.{number}.zh", row["zh"]))
-    names_path = "docs/i18n/display-names-zh-Hant.tsv"
-    names_raw = (args.root / names_path).read_bytes()
-    hashes[names_path] = hashlib.sha256(names_raw).hexdigest()
-    with (args.root / names_path).open(encoding="utf-8", newline="") as handle:
-        rows = csv.DictReader(handle, delimiter="\t")
-        if rows.fieldnames != ["key", "en", "zh-Hant", "status", "source"]:
-            raise SystemExit("資料名稱譯表欄位不符")
-        for row in rows:
-            entries.append((f"{names_path}.{row['key']}", row["zh-Hant"]))
+    for names_path in ["docs/i18n/display-names-zh-Hant.tsv", "docs/i18n/world-prompts-zh-Hant.tsv"]:
+        names_raw = (args.root / names_path).read_bytes()
+        hashes[names_path] = hashlib.sha256(names_raw).hexdigest()
+        with (args.root / names_path).open(encoding="utf-8", newline="") as handle:
+            rows = csv.DictReader(handle, delimiter="\t")
+            if rows.fieldnames != ["key", "en", "zh-Hant", "status", "source"]:
+                raise SystemExit(f"翻譯 TSV 欄位不符：{names_path}")
+            for row in rows:
+                entries.append((f"{names_path}.{row['key']}", row["zh-Hant"]))
     symbols_path = "docs/i18n/ui-symbols-zh-Hant.json"
     symbols = read(symbols_path)
     for key, value in symbols["symbols"].items():

@@ -1,0 +1,44 @@
+{
+  "schema": "kol-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x21765": {
+      "semantic": "讀取本場倒地隊員搜刮門檻；正常SLEDGE實例為20，對應怪物記錄+0x1B",
+      "confidence": "已證實",
+      "evidence": "RE-181；IDA原始mov al,byte_3AC7D；post2正常出口DS:+0xCDAD=20，TOWN0 payload32前32bytes與DS:+0xCD92相同；不把旁邊重用word當固定競技場旗標。"
+    },
+    "0x217be": {
+      "semantic": "倒地隊員物品搜刮從角色+0xA0開始，每次增加16至+0x1A0之前",
+      "confidence": "已證實",
+      "evidence": "RE-181；IDA 0x217BE、0x2182B、0x21830；正常32骰來源模型重建六份768-byte角色全零差。"
+    },
+    "0x217c7": {
+      "semantic": "角色物品槽+0x170直接跳過，不消耗搜刮骰",
+      "confidence": "已證實",
+      "evidence": "RE-181；IDA cmp word_2FB5A,170h及0x217D2跳到0x2182B；每倒地隊員15物品骰加1錢包骰，正常來源共32次。"
+    },
+    "0x217dc": {
+      "semantic": "每個未跳過的物品槽先擲rand(100)，空槽亦照樣擲骰",
+      "confidence": "已證實",
+      "evidence": "RE-181；IDA 0x217D8..0x217E1先呼叫sub_1B5A8，後續才檢查保護；正常來源兩名各15骰的caller_ida=0x217E1。"
+    },
+    "0x217e4": {
+      "semantic": "骰結果嚴格小於門檻才進入物品保護與清槽判定",
+      "confidence": "已證實",
+      "evidence": "RE-181；IDA cmp ax,word_39A4E與0x217E8 jl；SLEDGE門檻20，11及19兩次清+0xC0，來源模型全記錄一致。"
+    },
+    "0x21819": {
+      "semantic": "通過搜刮及保護判定後逐byte清空整個16-byte物品槽",
+      "confidence": "已證實",
+      "evidence": "RE-181；IDA 0x21801..0x21828的16次迴圈、mov byte ptr [bx],0；兩份正常+0xC0差分各完整16bytes清零。"
+    },
+    "0x2183f": {
+      "semantic": "物品槽之後另擲一次rand(100)決定倒地隊員的錢包搜刮",
+      "confidence": "已證實",
+      "evidence": "RE-181；IDA 0x2183B..0x21856嚴格小於同一門檻；正常Theodoric擲8後24-bit角色錢包從1009清零，32骰來源模型一致。"
+    }
+  }
+}

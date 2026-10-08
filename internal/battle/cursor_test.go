@@ -54,7 +54,7 @@ func TestAdjacentCursorClamp(t *testing.T) {
 
 // 射擊的起點是上次記住的目標換算成視窗座標（`0x2423D`）。
 func TestRangedCursorStart(t *testing.T) {
-	a := &Actor{X: 20, Y: 30}
+	a := &Actor{X: 20, Y: 30, Command: CmdMissile}
 	c := NewRangedCursor(a, Cell{Row: 18, Col: 33})
 	if c.Row != 2 || c.Col != 7 || !c.Memo {
 		t.Fatalf("起點應該是 (2, 7) 且有記憶目標，得到 (%d, %d) memo=%v",
@@ -64,6 +64,20 @@ func TestRangedCursorStart(t *testing.T) {
 	c = NewRangedCursor(a, Cell{Row: 4, Col: 30})
 	if c.Memo {
 		t.Fatal("越界的記憶目標不該算成可用")
+	}
+}
+
+func TestRangedCursorFirstUseStartsAtCorner(t *testing.T) {
+	for _, cmd := range []int{0, CmdRest, CmdMove, CmdWeapon, CmdCast, CmdMissile} {
+		a := &Actor{X: 20, Y: 30, Command: cmd}
+		c := NewRangedCursor(a, Cell{Row: 24, Col: 34})
+		want := Cell{}
+		if cmd == CmdCast || cmd == CmdMissile {
+			want = Cell{Row: 8, Col: 8}
+		}
+		if c.Row != want.Row || c.Col != want.Col {
+			t.Fatalf("舊指令%#x的遠程起點=%v，應為%v", cmd, c, want)
+		}
 	}
 }
 

@@ -31,7 +31,9 @@ func TestCommandBarProducesOriginalFrameLayout(t *testing.T) {
 
 // 兩隻手臂都廢就整段武器類與物品都跳過（`sub_228B7:0x22920`）。
 func TestCommandBarBothArmsLost(t *testing.T) {
-	a := &Actor{Threshold: 100, RightArm: 0xFF, LeftArm: 0xFF}
+	a := &Actor{Threshold: 100}
+	a.SetParts()
+	a.RightArm, a.LeftArm = 0xFF, 0xFF
 	m := &Member{HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}}
 	got := CommandBar(a, m, CommandEnv{})
 	assertBar(t, got, []int{CmdYes, CmdMove, CmdRest})
@@ -39,8 +41,9 @@ func TestCommandBarBothArmsLost(t *testing.T) {
 
 // 雙手武器少一隻手臂就整組武器攻擊跳過（`0x2296D`），徒手還在。
 func TestCommandBarTwoHandNeedsBothArms(t *testing.T) {
-	a := &Actor{Threshold: 100, RightArm: 0xFF}
-	a.LeftArm = 30
+	a := &Actor{Threshold: 100}
+	a.SetParts()
+	a.RightArm = 0xFF
 	m := &Member{HasWeapon: true, Weapon: Weapon{Kind: 0x22, Code: 1}}
 	got := CommandBar(a, m, CommandEnv{})
 	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdSwitch, CmdDrop, CmdMove, CmdRest})
@@ -121,7 +124,9 @@ func TestCommandBarFlag1E(t *testing.T) {
 
 // 兩條腿都廢就沒有移動那一格（`0x22CCC`）。
 func TestCommandBarNoLegs(t *testing.T) {
-	a := &Actor{Threshold: 100, RightLeg: 0xFF, LeftLeg: 0xFF}
+	a := &Actor{Threshold: 100}
+	a.SetParts()
+	a.RightLeg, a.LeftLeg = 0xFF, 0xFF
 	got := CommandBar(a, &Member{}, CommandEnv{})
 	assertBar(t, got, []int{CmdYes, CmdUnarmed, CmdRest})
 }

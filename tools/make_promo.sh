@@ -32,7 +32,10 @@ timeout "${KOL_PROMO_TIMEOUT:-1800}" docker run --rm \
   -v "$REPO_ROOT/assets:/assets:ro" \
   -v "$ABS:/out" \
   --tmpfs "/tmp:exec,uid=$(id -u),gid=$(id -g),size=1g" \
-  "$IMAGE" bash /docs/promo/compose.sh
+  "$IMAGE" bash -c '
+    set -euo pipefail
+    bash /docs/promo/compose.sh
+    cp /docs/promo/theme.sh /docs/promo/compose.sh /out/
+  '
 
-cp "$REPO_ROOT/docs/promo/theme.sh" "$REPO_ROOT/docs/promo/compose.sh" "$ABS/"
 echo "$ABS"

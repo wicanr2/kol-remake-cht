@@ -1,0 +1,927 @@
+{
+  "schema": "kol-cjk-font-width-validation-v1",
+  "date": "2026-10-01",
+  "status": "measurement-contract-confirmed",
+  "scope": "只核實既有靜態母體字寬與正式 Font.Measure 一致，不宣稱全畫面覆蓋、最長字串正常 GUI 或原版 parity",
+  "checked_rectangles": 9635,
+  "runtime_checked_nonempty_strings": 7425,
+  "runtime_unique_strings": 5586,
+  "changed_width_checks": 110,
+  "changed_widths": [
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE MAYORS",
+      "text": "鎮長宅邸 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "TROLLSBANE",
+      "text": "巨魔剋星旅店 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SAINT PAUL",
+      "text": "聖保羅修道院 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE LONELY",
+      "text": "孤頁酒館 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "BROKEN KEG",
+      "text": "破桶旅店 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "FORTRESS O",
+      "text": "布雷特爾要塞 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "FARCLIFF",
+      "text": "遠崖莊園 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "HANSARD FO",
+      "text": "漢薩德鍛坊 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "HOLCROFT S",
+      "text": "霍克羅夫馬廄 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "LUDEMAN AR",
+      "text": "路德曼甲冑鋪 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "BOWYER AND",
+      "text": "弓匠與箭匠 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "WEAPONER",
+      "text": "兵器匠 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "WIZARD'S T",
+      "text": "法師之塔 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "RESIDENCE",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "OFTER'S AL",
+      "text": "歐夫特麥酒館 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "WAILING PE",
+      "text": "悲鳴孔雀旅店 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "BIBLIK THE",
+      "text": "智者比布利克 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE TOWNE ",
+      "text": "鎮上商行 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SAINT VITR",
+      "text": "聖維特里斯修道院 波伊特水閘",
+      "old_width": 216,
+      "runtime_width": 224
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "TRAINING G",
+      "text": "練武場 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A HOLLOW T",
+      "text": "空心樹 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE QUIET ",
+      "text": "靜灣旅店 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SHIP CHAND",
+      "text": "船具行 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "GRUMBLING ",
+      "text": "腹鳴酒館 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "STIFFNUCKL",
+      "text": "史提夫納克斯旅店 波伊特水閘",
+      "old_width": 216,
+      "runtime_width": 224
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "ARMORER AN",
+      "text": "甲冑與鍛造 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SAINT HIBI",
+      "text": "聖希比斯修道院 波伊特水閘",
+      "old_width": 200,
+      "runtime_width": 208
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "FALLERTON ",
+      "text": "法勒頓馬廄 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "RESIDENCE",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE KEEP",
+      "text": "要塞 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE WATCH ",
+      "text": "衛哨屋 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "MILLER AND",
+      "text": "磨坊與穀倉 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE WIZARD",
+      "text": "法師之塔 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "MA'S STABL",
+      "text": "媽媽馬廄 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "JEWELER",
+      "text": "珠寶匠 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "LONELY CHE",
+      "text": "孤天使旅店 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "BRAUMEISTE",
+      "text": "釀酒師之家 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "FISHHOUSE",
+      "text": "魚舖 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SMOKING HO",
+      "text": "燻製坊 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE MYSTIC",
+      "text": "祕法之塔 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "OUR LADY O",
+      "text": "法蒂瑪聖母堂 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SMITHY",
+      "text": "鐵鋪 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE RIVER ",
+      "text": "河畔哨屋 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE BOORIS",
+      "text": "粗魯寡婦酒館 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "LOCKKEEPER",
+      "text": "閘官宅 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "LORD OF SH",
+      "text": "謝勒農領主府 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "WEAPONS TR",
+      "text": "武器教頭 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE MAIN G",
+      "text": "主城門樓 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "STONE INN",
+      "text": "石屋旅店 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SORDSMITH ",
+      "text": "非凡鑄劍坊 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE COMMHO",
+      "text": "康霍布旅店 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "LIVERY STA",
+      "text": "出租馬廄 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "WILBUR'S M",
+      "text": "威伯法器行 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "RESIDENCE",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "JOURNEYS' ",
+      "text": "旅途終點商行 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE COURAG",
+      "text": "勇獅鷲酒館 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A RESIDENC",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "FREE FAITH",
+      "text": "自由信仰會 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "ARMORER EX",
+      "text": "絕世甲冑鋪 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE ABBEY ",
+      "text": "奧蘭森修道院 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "HANDCRAFTE",
+      "text": "手工皮件 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "RHUN MANOR",
+      "text": "倫恩莊園 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE GATEHO",
+      "text": "門樓 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "LONG DAYS ",
+      "text": "長日旅店 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "RESIDENCE",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "BOPHETS ST",
+      "text": "波菲特駿馬行 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "JOOLIE THE",
+      "text": "祕法師朱莉 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "COBBLER",
+      "text": "鞋匠 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE MILL",
+      "text": "磨坊 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "NE'ER DRY ",
+      "text": "不涸酒館 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "ISOBEL'S B",
+      "text": "伊索貝烘焙坊 波伊特水閘",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE HOBE'S",
+      "text": "霍布主城門 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE GUARDS",
+      "text": "衛哨屋 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE HOBEAN",
+      "text": "霍布城堡 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "TOWER AT T",
+      "text": "三岔路塔樓 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "KLVAR TREE",
+      "text": "克瓦樹屋 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "HALFWAY HO",
+      "text": "半途之家 波伊特水閘",
+      "old_width": 152,
+      "runtime_width": 160
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "WEAPONS MA",
+      "text": "兵器師 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "RESIDENCE",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "A SMALL BO",
+      "text": "小船屋 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "SHELLER BR",
+      "text": "謝勒橋 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "ON THE PAR",
+      "text": "城垛上 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE GREAT ",
+      "text": "卡薩德大門 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "KHERRIKVAA",
+      "text": "克瑞卡瓦鐵匠鋪 波伊特水閘",
+      "old_width": 200,
+      "runtime_width": 208
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "T'A KALLA ",
+      "text": "塔卡拉酒館 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE ASSEMB",
+      "text": "議事廳 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE FOSTER",
+      "text": "育幼所 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE PORTAL",
+      "text": "傳送門 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "THE HOSTEL",
+      "text": "旅舍 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "TINKERER",
+      "text": "修補匠 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "OLD GUARD",
+      "text": "舊哨所 波伊特水閘",
+      "old_width": 136,
+      "runtime_width": 144
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "RESIDENCE",
+      "text": "民宅 波伊特水閘",
+      "old_width": 120,
+      "runtime_width": 128
+    },
+    {
+      "kind": "display-name-roster-location",
+      "source": "KRAG KEEP",
+      "text": "克拉格要塞 波伊特水閘",
+      "old_width": 168,
+      "runtime_width": 176
+    },
+    {
+      "kind": "list",
+      "source": "PRESS RETURN TO ACCEPT",
+      "text": "按 RETURN 確認",
+      "old_width": 129,
+      "runtime_width": 145
+    },
+    {
+      "kind": "town-message",
+      "source": "docs/i18n/town-zh-Hant.json 城1 門13 訊息7",
+      "text": "暗語是 Aklom，鑰字是 A。」",
+      "old_width": 223,
+      "runtime_width": 239
+    },
+    {
+      "kind": "town-message",
+      "source": "docs/i18n/town-zh-Hant.json 城1 門14 訊息7",
+      "text": "「記住，入門者：暗語是 Moram。",
+      "old_width": 255,
+      "runtime_width": 263
+    },
+    {
+      "kind": "town-message",
+      "source": "docs/i18n/town-zh-Hant.json 城1 門15 訊息7",
+      "text": "「我們的暗語是 Kydar，",
+      "old_width": 184,
+      "runtime_width": 192
+    },
+    {
+      "kind": "town-message",
+      "source": "docs/i18n/town-zh-Hant.json 城3 門7 訊息7",
+      "text": "找那戰士之魂，說 Scalfeth。」",
+      "old_width": 236,
+      "runtime_width": 244
+    },
+    {
+      "kind": "town-message",
+      "source": "docs/i18n/town-zh-Hant.json 城4 門6 訊息17",
+      "text": "『泰勒拉斯 摩爾 瓦弗瑞 圖瑪特』。」",
+      "old_width": 280,
+      "runtime_width": 304
+    },
+    {
+      "kind": "town-message",
+      "source": "docs/i18n/town-zh-Hant.json 城7 門8 訊息7",
+      "text": "去找姓名縮寫是 T. D. 的人。」",
+      "old_width": 233,
+      "runtime_width": 257
+    },
+    {
+      "kind": "town-message",
+      "source": "docs/i18n/town-zh-Hant.json 城7 門8 訊息25",
+      "text": "「你的圖上說要找名字縮寫 T.D. 的人。",
+      "old_width": 289,
+      "runtime_width": 305
+    }
+  ],
+  "space_advance": 16,
+  "failures": 0,
+  "negative_control": {
+    "method": "以真正舊版與修正版檢查器執行相同人工 TSV；正式翻譯與版面輸入不改。",
+    "fixture": "人工 A＋16 個半形空白＋A，不宣稱玩家可達；隔離字距界限。",
+    "baseline_git_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "baseline_width": 150,
+    "runtime_width": 278,
+    "right_limit": 264,
+    "runs": {
+      "before": {
+        "command": [
+          "python3",
+          "workplace/font-space-20261001/baseline-verify-text-fit.py",
+          "--layout",
+          "workplace/cjk-layout.json",
+          "--font",
+          "assets/ui-font/manifest.json",
+          "--strings",
+          "docs/i18n/newchar-zh-Hant.json",
+          "--bank-strings",
+          "docs/i18n/ui-zh-Hant.json",
+          "--data",
+          "assets/original-derived-data/character-creation.json",
+          "--town-i18n",
+          "docs/i18n/town-zh-Hant.json",
+          "--ui-i18n",
+          "docs/i18n/ui-zh-Hant.json",
+          "--display-names",
+          "workplace/font-space-20261001/space-boundary.tsv",
+          "--out",
+          "workplace/font-space-20261001/negative-before.json"
+        ],
+        "returncode": 0,
+        "stdout": "{\"checked\": 7438, \"failed\": 0}\n",
+        "stderr": "",
+        "failed": 0
+      },
+      "after": {
+        "command": [
+          "python3",
+          "tools/verify_text_fit.py",
+          "--layout",
+          "workplace/cjk-layout.json",
+          "--font",
+          "assets/ui-font/manifest.json",
+          "--strings",
+          "docs/i18n/newchar-zh-Hant.json",
+          "--bank-strings",
+          "docs/i18n/ui-zh-Hant.json",
+          "--data",
+          "assets/original-derived-data/character-creation.json",
+          "--town-i18n",
+          "docs/i18n/town-zh-Hant.json",
+          "--ui-i18n",
+          "docs/i18n/ui-zh-Hant.json",
+          "--display-names",
+          "workplace/font-space-20261001/space-boundary.tsv",
+          "--out",
+          "workplace/font-space-20261001/negative-after.json"
+        ],
+        "returncode": 1,
+        "stdout": "{\"checked\": 7438, \"failed\": 1}\n",
+        "stderr": "",
+        "failed": 1
+      }
+    }
+  },
+  "evidence": "internal/font/font.go 的 Font.advance 對 manifest 未列空白使用 Advance=16；Go probe 直接載入正式 font.Load 後逐字串執行 Font.Measure，沒有另寫字寬模型。",
+  "toolchain": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+    "GOWORK": "off",
+    "GOMODCACHE": "/go/pkg/mod",
+    "network": "none"
+  },
+  "commands": {
+    "checker": [
+      "python3",
+      "tools/verify_text_fit.py",
+      "--layout",
+      "workplace/cjk-layout.json",
+      "--font",
+      "assets/ui-font/manifest.json",
+      "--strings",
+      "docs/i18n/newchar-zh-Hant.json",
+      "--bank-strings",
+      "docs/i18n/ui-zh-Hant.json",
+      "--data",
+      "assets/original-derived-data/character-creation.json",
+      "--town-i18n",
+      "docs/i18n/town-zh-Hant.json",
+      "--ui-i18n",
+      "docs/i18n/ui-zh-Hant.json",
+      "--display-names",
+      "docs/i18n/display-names-zh-Hant.tsv",
+      "--out",
+      "workplace/font-space-20261001/text-fit.json"
+    ],
+    "runtime": [
+      "go",
+      "run",
+      "workplace/font-space-20261001/measure.go"
+    ]
+  },
+  "runtime_source": {
+    "path": "internal/font/font.go",
+    "sha256": "14b951db9d2dd22aeeea103d54a3c36d60e8b3a95a45e93aa38f70d134e34b4f"
+  },
+  "inputs_sha256": {
+    "workplace/cjk-layout.json": "e8056474a4d68a774b35655cc8fd05d60f6885df94808d1518b76a6ef0e3b168",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "docs/i18n/newchar-zh-Hant.json": "5d29c2c65b57921d6d0e2573f00e34c7ed58989eac8f7f1565dbffad0be7e7c2",
+    "assets/original-derived-data/character-creation.json": "878fa12acf5749acb25d47421455caaa1ee9f46dcaa6de64fdc79864822926dc",
+    "docs/i18n/overflow-policy.json": "5c8d01bbb6557612ac8b33b78086ddf6a5c7a969f5b5865c83a5a7b7719bbcac",
+    "docs/i18n/ui-zh-Hant.json": "3dec02c25fbca4b3b537041121a3cdd62c03333ac9379cbe059e1582d8c71003",
+    "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "docs/i18n/town-zh-Hant.json": "5554248cef962e0b91948407486890a6020f1c54ceee9edc4e795461545a8638"
+  },
+  "font_png": {
+    "path": "assets/ui-font/zh-hant-16.png",
+    "sha256": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318"
+  },
+  "product_binary": {
+    "path": "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "rebuilt": false
+  },
+  "files": {
+    "before-text-fit.json": "59322c77851f9ab4c93960cae1c730d75449d3db9c1287f945e0258f24077bbd",
+    "previous-formal-text-fit.json": "b6f4e7b6f5180782c55dd16e195c0407d1b65cfbf1bd7b86ee4782da6646176d",
+    "text-fit.json": "c8b81562610e724e371f2df34b617dc4bf65de9fda23d5cc583a4de4ec874459",
+    "runtime-widths.json": "b0820da042dd3ddeba375b94ce322de845ecce566870c3e7c856bb4e57cdc44a",
+    "measure.go.txt": "bf7da199f3851726f4397eb7c397122561a91876d6ab3322cb13d49845670123",
+    "verify_text_fit.py.txt": "342bb45c1818e994294b7b01263bac2916fb9582b311dab207d114614c2b5f35",
+    "layout.json": "e8056474a4d68a774b35655cc8fd05d60f6885df94808d1518b76a6ef0e3b168",
+    "kol_font_space_finish.py.txt": "f1337e591df21586292b97e1b1190a3258291723cb77e2fe57cec9132bd5ecf7",
+    "baseline-verify-text-fit.py.txt": "d05a4616c3131a8a810ad3b65c83927eaaf74a6ad5ddf14558d630334500b9af",
+    "space-boundary.tsv": "66d7e699885e8544edaad870100055b3018ff87cb7b5b57ab596dfa6eb600b1f",
+    "negative-before.json": "681ed482a43c19474da88987b78be4605c04f783471d3f14db3978aa5651bf32",
+    "negative-after.json": "932738039400431197f7d44452a211a520955a8d45c4800b9a7a18bffdcae7ed",
+    "negative-control.json": "6656346b4c19aa8ac05a3a3e5d49949b384642f1152f441a9e99a4a9fb130c85",
+    "kol_font_space_negative.py.txt": "d40d1367eca28592ee6dec1fac300bc52801564054dde05c06b14442bc6fb855"
+  },
+  "rights": "不包含原始封裝或反組譯 payload；沿用專案資料／翻譯／字型權利，不授權公開原作素材。"
+}

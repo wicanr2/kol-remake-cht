@@ -1,0 +1,182 @@
+{
+  "schema": "kol-longest-player-weapon-checks-v1",
+  "runs": [
+    {
+      "label": "player-en",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "flow",
+        "-seed",
+        "1",
+        "-lang",
+        "en",
+        "-trace-detail",
+        "-flow-script",
+        "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE 5 > RET D D D D D D D D D D D D D RET > RET U U U RET RET > RET RET R R U U U U U U U U U RET Z Z Z D Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z D X X X X D D L D D D D D Z Z Z Z D X X X X X SPACE SPACE SPACE",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/player-en",
+        "-shot-steps",
+        "60,76,77,79,82,83,87,186,187,188,189",
+        "-trace",
+        "workplace/cjk-weapon-20261001/player-en/trace.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "expected_states": 190,
+      "seed": 1
+    },
+    {
+      "label": "player-en-save",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "flow",
+        "-seed",
+        "1",
+        "-lang",
+        "en",
+        "-trace-detail",
+        "-flow-script",
+        "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE 5 > RET D D D D D D D D D D D D D RET > RET U U U RET RET > RET RET R L RET SPACE 1 > > > > RET > RET RET",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/player-en-save",
+        "-shot-steps",
+        "82,83,87,100",
+        "-trace",
+        "workplace/cjk-weapon-20261001/player-en-save/trace.json",
+        "-save",
+        "workplace/cjk-weapon-20261001/player-en-save.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "expected_states": 101,
+      "seed": 1
+    },
+    {
+      "label": "player-en-reload",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "play",
+        "-seed",
+        "1",
+        "-lang",
+        "en",
+        "-trace-detail",
+        "-play-script",
+        "5 > RET D D D D D D D D D D RET",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/player-en-reload",
+        "-shot-steps",
+        "0,13,14",
+        "-trace",
+        "workplace/cjk-weapon-20261001/player-en-reload/trace.json",
+        "-load",
+        "workplace/cjk-weapon-20261001/player-en-save.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "expected_states": 15,
+      "seed": 1
+    },
+    {
+      "label": "player-zh-Hant",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "flow",
+        "-seed",
+        "1",
+        "-lang",
+        "zh-Hant",
+        "-trace-detail",
+        "-flow-script",
+        "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE 5 > RET D D D D D D D D D D D D D RET > RET U U U RET RET > RET RET R R U U U U U U U U U RET Z Z Z D Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z D X X X X D D L D D D D D Z Z Z Z D X X X X X SPACE SPACE SPACE",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/player-zh-Hant",
+        "-shot-steps",
+        "60,76,77,79,82,83,87,186,187,188,189",
+        "-trace",
+        "workplace/cjk-weapon-20261001/player-zh-Hant/trace.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "expected_states": 190,
+      "seed": 1
+    },
+    {
+      "label": "player-zh-Hant-save",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "flow",
+        "-seed",
+        "1",
+        "-lang",
+        "zh-Hant",
+        "-trace-detail",
+        "-flow-script",
+        "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE 5 > RET D D D D D D D D D D D D D RET > RET U U U RET RET > RET RET R L RET SPACE 1 > > > > RET > RET RET",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/player-zh-Hant-save",
+        "-shot-steps",
+        "82,83,87,100",
+        "-trace",
+        "workplace/cjk-weapon-20261001/player-zh-Hant-save/trace.json",
+        "-save",
+        "workplace/cjk-weapon-20261001/player-zh-Hant-save.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "expected_states": 101,
+      "seed": 1
+    },
+    {
+      "label": "player-zh-Hant-reload",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "play",
+        "-seed",
+        "1",
+        "-lang",
+        "zh-Hant",
+        "-trace-detail",
+        "-play-script",
+        "5 > RET D D D D D D D D D D RET",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/player-zh-Hant-reload",
+        "-shot-steps",
+        "0,13,14",
+        "-trace",
+        "workplace/cjk-weapon-20261001/player-zh-Hant-reload/trace.json",
+        "-load",
+        "workplace/cjk-weapon-20261001/player-zh-Hant-save.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "expected_states": 15,
+      "seed": 1
+    }
+  ],
+  "language_display_differences": [
+    {
+      "step": 186,
+      "field": "battle.encounter_text",
+      "en": [
+        "YOU HAVE BEEN AMBUSHED",
+        "BY 3, LEVEL 1 CLIFF TROLLS!"
+      ],
+      "zh": [
+        "你遭到埋伏！",
+        "來襲的是3隻，等級1 懸崖巨魔!"
+      ]
+    }
+  ],
+  "all_other_states_equal": true,
+  "saves_except_saved_at_equal": true,
+  "raw_weapon_records_preserved": true,
+  "normal_take_moved_exact_good_to_hand_and_old_hand_into_pack": true,
+  "reload_did_not_rewrite_save": true
+}

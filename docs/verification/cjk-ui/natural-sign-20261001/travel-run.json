@@ -1,0 +1,30 @@
+{
+  "seed": 1,
+  "seed_method": "-seed 1",
+  "initial_state": "正式標題、固定原版名冊、正常旅店招募六人，再按鍵出城",
+  "input_prefix": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R U U U U U U U U U RET",
+  "world_target": [
+    37,
+    38
+  ],
+  "town_target": [
+    40,
+    19
+  ],
+  "load": null,
+  "quest_sites": null,
+  "monsters": null,
+  "ambush_rolls": null,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "driver_sha256": "01f6fc2d953aa1b6747054c3d9f78ef9270f9323b463fe360bfb80284a4f028a",
+  "comparison_scope": "僅重製正常玩家路徑，沒有原版亂數對拍或完整原版 parity 聲明",
+  "navigation_adapter": {
+    "file": "kol_natural_world_route.py",
+    "sha256": "86afa97d8695e229eee633730edd173ea5b27b97867374f924a2022373bee245",
+    "scope": "工具只選方向鍵，依正式 world.Travel 的次格與地形契約避障；不改遊戲狀態或規則"
+  },
+  "source_hash_domains": {
+    "world_grid_raw_column_major": "e4efc545371d292c05386e06a2d11b188a63cbf9fc2a171300f87bd69c994b9b",
+    "world_grid_png_bytes": "9b34f6295aafc089cb7d001adf383c470c1c8f2f969f48c14a9eb7c7bedbe303"
+  }
+}

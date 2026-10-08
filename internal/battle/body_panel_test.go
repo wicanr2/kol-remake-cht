@@ -92,3 +92,59 @@ func TestBodyPanelShowsAreaTarget(t *testing.T) {
 		t.Fatal("問部位那一頁只畫人形與傷勢，不畫疲勞直條")
 	}
 }
+
+func TestTargetInspectionKeepsNonActorTileAndClearsEmpty(t *testing.T) {
+	s := planningState(Member{Size: 80, Health: 80, Strength: 80})
+	a := &s.Actors[0]
+	a.X, a.Y, a.Facing = 10, 10, 0
+	s.Actors[PartySlots] = Actor{Side: SideMonster, Member: -1, X: 9, Y: 10, Threshold: 80, Stamina: 160}
+	s.Actors[PartySlots].SetParts()
+	s.Actors[PartySlots].Head = 0
+	s.Actors[PartySlots+1] = Actor{Side: SideMonster, Member: -1, X: 9, Y: 11, Threshold: 80, Stamina: 160}
+	s.Actors[PartySlots+1].SetParts()
+	s.beginTarget(0, CursorAdjacent, PromptMoveForm)
+	if s.Plan.BodyActor != 0 {
+		t.Fatalf("新進倒地格須空框，得到 %d", s.Plan.BodyActor)
+	}
+	s.MoveCursor(0, 1, false)
+	if s.Plan.BodyActor != PartySlots+2 {
+		t.Fatalf("站立者資訊錯誤：%d", s.Plan.BodyActor)
+	}
+	s.MoveCursor(0, -1, false)
+	if s.Plan.BodyActor != PartySlots+2 {
+		t.Fatalf("倒地格須保留前框：%d", s.Plan.BodyActor)
+	}
+	s.MoveCursor(0, -1, false)
+	if s.Plan.BodyActor != 0 {
+		t.Fatalf("空格須清框：%d", s.Plan.BodyActor)
+	}
+}
+
+func TestTargetInspectionUsesStandingSpriteOverDownActor(t *testing.T) {
+	s := planningState(Member{Size: 80, Health: 80, Strength: 80})
+	s.Actors[0].X, s.Actors[0].Y, s.Actors[0].Facing = 10, 10, 0
+	s.Actors[1] = Actor{Side: SideParty, X: 9, Y: 10, Threshold: 80}
+	s.Actors[PartySlots] = Actor{Side: SideMonster, Member: -1, X: 9, Y: 10, Threshold: 80, Stamina: 160}
+	s.Actors[PartySlots].SetParts()
+	s.beginTarget(0, CursorAdjacent, PromptMoveForm)
+	if s.Plan.BodyActor != PartySlots+1 {
+		t.Fatalf("應檢視實際站立精靈：%d", s.Plan.BodyActor)
+	}
+}
+
+func TestTargetInspectionObjectKeepsPreviousPanel(t *testing.T) {
+	s := planningState(Member{Size: 80, Health: 80, Strength: 80})
+	s.Actors[0].X, s.Actors[0].Y = 10, 10
+	s.Plan.Prompt, s.Plan.BodyActor = PromptTarget, 1
+	s.Plan.Cursor = TargetCursor{Mode: CursorAdjacent, Row: 3, Col: 3}
+	s.Ground[0] = GroundItem{Name: "Dagger", X: 9, Y: 9}
+	s.inspectBodyTarget()
+	if s.Plan.BodyActor != 1 {
+		t.Fatalf("物品格須保留前框：%d", s.Plan.BodyActor)
+	}
+	s.Ground[0] = GroundItem{}
+	s.inspectBodyTarget()
+	if s.Plan.BodyActor != 0 {
+		t.Fatalf("空格須清框：%d", s.Plan.BodyActor)
+	}
+}

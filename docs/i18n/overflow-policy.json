@@ -1,12 +1,14 @@
 {
  "schema": "kol-cjk-overflow-policy-v1",
- "note": "每個 CJK 欄位的溢出原則。建置時一律不准超出（verify_text_fit.py 失敗即要改譯文：重新斷行或縮短），執行期不做換行補救；只有 runtime_clip 為真的欄位在執行期另有截斷安全網，截斷不能取代建置檢查。verify_text_fit.py 遇到未登記的欄位種類會失敗。",
+ "note": "每個 CJK 欄位的溢出原則。建置時一律不准超出（verify_text_fit.py 失敗即要改譯文：重新斷行或縮短）；固定列依譯文原斷行，world-prompt 依真實字模重排並拒絕溢出。只有 runtime_clip 為真的欄位在執行期另有截斷安全網，截斷不能取代建置檢查。verify_text_fit.py 遇到未登記的欄位種類會失敗。",
  "policies": {
   "reject": "建置時超出即失敗；執行期照譯文原樣繪製，不截斷、不換行",
   "reject+runtime-clip": "建置時超出即失敗；執行期另依實際字寬截斷，只作安全網",
-  "reject-rows": "行數檢查：譯文行數超過欄位可放的列數即失敗"
+  "reject-rows": "行數檢查：譯文行數超過欄位可放的列數即失敗",
+  "wrap+reject": "顯示層依實際字模重排；建置檢查全部 catalog，執行期超出行數或安全矩形則回傳顯示錯誤，不以裁切吞字"
  },
  "kinds": {
+  "world-prompt": {"policy": "wrap+reject", "renderer": "internal/ui/world.go worldPromptCJKLines；原 PromptBox／PromptText 乘倍率，Go 真實 catalog 測試與 tools/verify_world_prompts.py 共同驗證"},
   "town-message": {"policy": "reject", "renderer": "internal/ui/town.go InnCJK 對話框；譯文自帶斷行"},
   "town-entry": {"policy": "reject", "renderer": "InnCJK 進門敘述；譯文自帶斷行"},
   "town-dialog": {"policy": "reject", "renderer": "InnCJK 對話框"},

@@ -1,0 +1,9 @@
+--- FAIL: TestGiveItem (0.00s)
+    itempage_test.go:413: 送出者與接收者的原始物品鏡像沒有同步
+--- FAIL: TestItemActionsSynchronizeCarriedBeforeFigure (0.00s)
+    itempage_test.go:457: 位移0x30物品鏡像=00000000000000000000000000000000，預期a3c8a1a4eef9100301904bff4f579600
+--- FAIL: TestFigureIgnoresEmptyRecordTails (0.00s)
+    portrait_test.go:102: 空欄尾端不得生成裝備圖：{Gender:0 Race:0 Styles:[6 6 6] Weapon:0x219250572dc0 Shield:0x219250572de0 Belt:0x219250572e00 PersonalShield:<nil>}
+FAIL
+FAIL	github.com/wicanr2/kol-remake-cht/internal/town	0.009s
+FAIL

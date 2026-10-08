@@ -1,0 +1,169 @@
+{
+  "schema": "kol-cjk-natural-sign-reachability-v1",
+  "date": "2026-10-01",
+  "scope": "固定種子 1、正常標題／名冊／旅店招募、自然遭遇與入城後走到住宅門口；只驗重製可達性及英中語意，不宣稱原版同狀態對拍",
+  "status": "remake-normal-player-path-confirmed",
+  "goal_status": "#35 圖片告示英文仍可見，翻譯未實作，未結案",
+  "source_mapping": {
+    "town": 5,
+    "archive": "TWN5PICS",
+    "picture": 19,
+    "door": 8,
+    "position": [
+      40,
+      19
+    ],
+    "building": "Residence",
+    "person": "Chauncey Lawnwatcher",
+    "world_entrance": [
+      37,
+      38
+    ]
+  },
+  "semantic_comparison": {
+    "states_per_language": 3081,
+    "differing_display_steps": 386,
+    "excluded_fields": [
+      "battle.exec_text",
+      "battle.encounter_text"
+    ],
+    "display_field_evidence": "cmd/kol/main.go:1273–1283 的顯示文字匯出；遭遇欄位僅允許已登記第 159、1653 步譯文差異",
+    "encounter_display_differences": [
+      {
+        "step": 159,
+        "en": [
+          "YOU HAVE BEEN AMBUSHED",
+          "BY 3, LEVEL 1 CLIFF TROLLS!"
+        ],
+        "zh-Hant": [
+          "你遭到埋伏！",
+          "來襲的是3隻，等級1 懸崖巨魔!"
+        ]
+      },
+      {
+        "step": 1653,
+        "en": [
+          "YOU HAVE BEEN AMBUSHED",
+          "BY 3, LEVEL 3 ORCS!"
+        ],
+        "zh-Hant": [
+          "你遭到埋伏！",
+          "來襲的是3隻，等級3 獸人!"
+        ]
+      }
+    ],
+    "other_differences": 0
+  },
+  "pixel_checks": {
+    "en": 0,
+    "zh-Hant": 0
+  },
+  "encounters": [
+    {
+      "start_step": 159,
+      "monster": "CLIFF TROLL",
+      "world": {
+        "day": 2,
+        "mode": 0,
+        "month": 4,
+        "sub_x": 1,
+        "sub_y": 1,
+        "ticks": 3300,
+        "time_index": 1,
+        "x": 33,
+        "y": 34
+      },
+      "result_step": 1624,
+      "round": 18,
+      "verdict": 1
+    },
+    {
+      "start_step": 1653,
+      "monster": "ORC",
+      "world": {
+        "day": 2,
+        "mode": 0,
+        "month": 4,
+        "sub_x": 5,
+        "sub_y": 5,
+        "ticks": 1620,
+        "time_index": 3,
+        "x": 36,
+        "y": 37
+      },
+      "result_step": 2972,
+      "round": 13,
+      "verdict": 1
+    }
+  ],
+  "seed": {
+    "en": 1,
+    "zh-Hant": 1,
+    "method": "執行前 -seed 1",
+    "original": null,
+    "original_scope": "本次沒有執行原版亂數對拍，不將相同 remake seed 冒稱原版 parity"
+  },
+  "load": null,
+  "ambush_rolls": null,
+  "monsters": null,
+  "quest_sites": null,
+  "limitations": "門口的 town.door 仍保留 Session 上一間室內建築，不能把它當 Outdoor.AtDoor；本次另以座標、來源圖片逐像素及正常入屋後 door=8 核實。未改正式程式；未驗本次鏈的住宿保存、原版或平台封包。",
+  "git_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+  "binary": {
+    "path": "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4"
+  },
+  "toolchain": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa"
+  },
+  "inputs": {
+    "Knights-of-legend.zip": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "assets/original-derived-png/ega/TWN5PICS/twn5pics-019.png": "f5cca181118966eef85d0a323ea8caf9d82585f125552a4cdfaf89f76d90e763",
+    "assets/original-derived-data/world-map.json": "73441fd1f956edb08957a44a28c79df4845447a1e102346c4de6751d1947e5df",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-data/character-roster.json": "f8f05ff26b1c278ab457616eb951fa1517c2e4ab8e7e8401a5c3151209fa972e",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318"
+  },
+  "rights": "原作衍生 PNG 僅適用既有 private GitHub 特例；不授權公開發布",
+  "visual_review": {
+    "status": "passed",
+    "files": [
+      "door-en.png",
+      "party-zh-Hant.png",
+      "cliff-troll-zh-Hant.png",
+      "town-entrance-zh-Hant.png",
+      "town-map-zh-Hant.png",
+      "door-zh-Hant.png",
+      "inside-zh-Hant.png"
+    ],
+    "method": "主代理逐張檢視七張完整畫格；確認隊伍、遭遇、入城、地圖、英文告示及住宅繁中對話，未見缺字或文字裁切。英文告示仍未翻譯。",
+    "date": "2026-10-01"
+  },
+  "files": {
+    "en-trace.json": "d199baf13b1517c799787f9ebb0e5f26adca17bd503661785c5a7dcbb57ff6c1",
+    "en-engine.log": "6a340cb50fc6ad75ef00658506870a2914eb812e9d6985c8303b0690112d0ba3",
+    "en-run.json": "4bd5096f0ceb28d8765abf677aae72cf5f3ddeee343200cdc6d4cb3e32b44a9c",
+    "zh-Hant-trace.json": "6d58e75f0a1217bce912423a68703e48ac5af38ed76e58b77cf7f6d5a574442f",
+    "zh-Hant-engine.log": "6be6435846d2de99140461f5b05bd767f3e1dfc999d645bff45fda7e4e6db482",
+    "zh-Hant-run.json": "0a3309287557111facabfebedd75b7f2403806b72017053aa91a64f9511f3db7",
+    "script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f",
+    "travel-run.json": "71f3d529573b4e2025f29034ce9cde23f9e50711ab7013167e0cc6565b56e97b",
+    "town-navigation.json": "71ad2b66fa3412f73560c0e19167b07123f9e1559191c4ac5a98b85ce5c01132",
+    "door-en.png": "7478bc751a291a68df57dd07d6749732448630e89b57f4a2f3e8a0cd5aed8306",
+    "party-zh-Hant.png": "6fba3dfa84f1efbfbaf0a5f912e0183b15487c599f4096b6e0362bc93c09e5df",
+    "cliff-troll-zh-Hant.png": "86c3c54f1edf669517a0489da505a6d8154550482add9f0d69cbd058107924b0",
+    "town-entrance-zh-Hant.png": "0767504b30b87f4c10247e726db722b0b41774ce766c1e1dd455dcd3ea84c0e6",
+    "town-map-zh-Hant.png": "e86d848e1de0ad6d9d20453b21c1ea18518443c45f77ed877d5151964b7a7b7d",
+    "door-zh-Hant.png": "21ff3f22d580a3b1a6dd48fb6fe2c4de119d2eeed93502ddd124d4da4ede6210",
+    "inside-zh-Hant.png": "b193eed54c6ac05b29fe2865fb0c75568c1477bf8fbd2aba006b67955e7a0bae",
+    "kol_natural_sign_prepare.py": "e1249ada171fadb2949298b41ec2fc93d4ae66915f78f475b073bf3f1dd8f053",
+    "kol_natural_sign_party.py": "234185ee8d2cc2d273d8833f02f3e27dea1789fb4fbca694009c8734965f7783",
+    "kol_natural_sign_drive.sh": "2031c3819d1a24c6e449be0c37bc7cc0d652e6007e74bcaef543dd6e8c4967e1",
+    "kol_natural_world_route.py": "86afa97d8695e229eee633730edd173ea5b27b97867374f924a2022373bee245",
+    "kol_natural_sign_town.py": "a542fde64a67c74f56742a2b2fe0370807e22b15bd26989672c935959cb3f7c8",
+    "kol_natural_sign_replay.py": "f10e07f70a62e9b49aa8a8f39470f9f2a22653da68394608621a9a3226996ecb",
+    "kol_natural_sign_receipt.py": "4ac346665de4e47c1e80425e697e5c4f413536678baf0950226ee0e974570bc8"
+  }
+}

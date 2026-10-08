@@ -1,0 +1,60 @@
+{
+  "schema": "kol-normal-longest-weapon-selection-v1",
+  "date": "2026-10-01",
+  "selected_before_execution": true,
+  "population_count": 282,
+  "player_source_count": 197,
+  "monster_source_count": 85,
+  "maximum_width": 80,
+  "classification": "kind 1／3 的共用物品、商店、有效角色持物及怪物武器／持物；不含玩家自訂名稱",
+  "selected": {
+    "monster_index": 19,
+    "monster_name": "BINDERAK",
+    "weapon_name": "Spiney Mace",
+    "zh": "棘刺釘頭鎚",
+    "record": "b9c12e2e40d08ca0000023ff2b3c9100",
+    "width": 80,
+    "quest": 5,
+    "world": [
+      48,
+      21
+    ]
+  },
+  "seed": 1,
+  "load": null,
+  "strategy": "正常標題、六人招募、城門離城，再走到初始 Poontang 已持有的任務5；不改種子、遭遇、座標或 typed data。",
+  "initial_quest_flag": {
+    "character": "Poontang",
+    "byte_index": 1,
+    "raw": 4,
+    "divisor": 4,
+    "value": 1
+  },
+  "inputs_sha256": {
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "assets/original-derived-data/monsters.json": "39aeef6efb5388c947f721e8ea75847106526c869090aa185bad912aa4fce992",
+    "assets/original-derived-data/world-map.json": "73441fd1f956edb08957a44a28c79df4845447a1e102346c4de6751d1947e5df",
+    "assets/original-derived-data/quest-sites.json": "ed6a1238a1eb1e51008db7b84fa4234735c41283a28ce9c48a7eaf679151dd2a",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "docs/i18n/display-names-zh-Hant.tsv": "679d011aa245f644584b88d8b8614e24edcc9b080a375f4deea9ecaf28812e4b",
+    "docs/i18n/newchar-zh-Hant.json": "e7a4c37d800931904e97ade517f6293f52b3692fbecb371ec39912d175610675",
+    "docs/i18n/ui-zh-Hant.json": "af3ac4b95945b442b8ba4ae861a37b377856ed3f7637b4ae23cfdbf36bf03c17",
+    "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f",
+    "internal/battle/equipment_panel.go": "1d1b4ffb8317c3cfd10e2cfe4e8c4ba223249ff1aa1a4e46023ee85f4fb5e040",
+    "internal/ui/battle_cjk.go": "24ab72efd7aa173d36a627abdc4b4c513980ca690ec1d3338f5c6b5943522d25"
+  },
+  "binary": {
+    "path": "workplace/platform-smoke-20261001/build/kol-linux",
+    "sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4"
+  },
+  "local_population_sha256": "fb1c5ccc4e907e7883c2a0f92d7b334bfa52d2cb701dbaa67ac43ca6af7942fb",
+  "maximum_names": [
+    "Blom Hammer",
+    "Grub Mace",
+    "Spiney Mace",
+    "Wind Mace"
+  ]
+}

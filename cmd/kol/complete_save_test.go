@@ -97,3 +97,39 @@ func TestNormalCreationCommitFullSaveReloadAndRetry(t *testing.T) {
 		t.Fatal("保存時間跨月不正確")
 	}
 }
+
+func TestCompleteSaveKeepsPendingWorldPart(t *testing.T) {
+	m := town.Member{ID: "PLAYER", Name: "PLAYER", Gold: 100, Sheet: &town.Sheet{}}
+	m.SyncCarried()
+	s := &town.Session{Party: []town.Member{m}, Outdoor: &town.Outdoor{}}
+	r := &roster.Roster{Slots: make([]roster.Slot, 16)}
+	r.Slots[0] = roster.Slot{Slot: 0, ID: m.ID, Name: m.Name, Occupied: true}
+	w := &world.Screen{Travel: &world.Travel{}, Clock: world.NewClock()}
+	w.Clock.Ticks = 3420
+	if w.Clock.Spend(60) || w.Clock.Ticks != 3360 || w.Clock.Part != 0 {
+		t.Fatal("未重現RE-151合法延後時段")
+	}
+	complete, err := buildCompleteSave(s, w, r, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(t.TempDir(), "pending-world-part.json")
+	if err := save.Write(path, complete); err != nil {
+		t.Fatal(err)
+	}
+	loaded, err := save.Read(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	c := loaded.Clock
+	restored := world.Clock{Ticks: c.Ticks, Part: c.Part, Day: c.Day, Month: c.Month, Year: c.Year, Weather: c.Weather}
+	if !reflect.DeepEqual(restored, *w.Clock) {
+		t.Fatal("保存或重載提早更新了世界時段")
+	}
+	if !restored.UpdatePart() || restored.Part != 1 || restored.Ticks != 3360 || restored.Weather != w.Clock.Weather {
+		t.Fatal("重載後未保留下一次正常時段變換")
+	}
+	if restored.UpdatePart() {
+		t.Fatal("同一時段變換被重複處理")
+	}
+}

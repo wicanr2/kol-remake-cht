@@ -343,14 +343,15 @@ func (s *Session) finishBuy(eaten bool) {
 		s.endShop()
 		return
 	}
-	if len(s.Party[i].Backpack) >= BackpackSlots {
+	slot := s.Party[i].emptyPackSlot()
+	if slot < 0 {
 		s.Inside.Detail = nil
 		s.shopSay(nonEmpty(s.uiLines(BackpackFullRecord)), s.showShopList)
 		return
 	}
-	s.Party[i].Backpack = append(s.Party[i].Backpack, g)
+	s.Party[i].putPack(slot, g)
 	s.syncParty()
-	s.offerFit(i, len(s.Party[i].Backpack)-1)
+	s.offerFit(i, slot)
 }
 
 // clearSteedPic 把馬廄那一頁的坐騎圖與挪下去的問句位置收回來。
@@ -408,7 +409,8 @@ func (s *Session) goodDetail(g Good) []Segment {
 	}
 	name := g.Name
 	out = append(out, Segment{
-		Col: detailNameCol + (detailCells-len([]rune(name)))/2,
+		// RE-173：sub_153FF先增加計數再檢查NUL，名稱置中包含結尾字元。
+		Col: detailNameCol + (detailCells-len([]rune(name))-1)/2,
 		Row: detailNameRow, Text: name})
 
 	add(detailLeftCol, s.uiRecord(TypeLabelRecord)+s.uiRecord(TypeNameRecord+g.Kind))
@@ -558,9 +560,9 @@ func (s *Session) equip(member, slot int) {
 		return
 	}
 	worn := m.Worn[g.Position]
-	m.Backpack = append(m.Backpack[:slot], m.Backpack[slot+1:]...)
+	m.clearPack(slot)
 	if worn != nil {
-		m.Backpack = append(m.Backpack, *worn)
+		m.putPack(slot, *worn)
 	}
 	item := g
 	m.Worn[g.Position] = &item

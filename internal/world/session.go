@@ -68,6 +68,18 @@ type Session struct {
 	// `sub_2A4E5` 那一處，RE-151）。原版就是在這裡擲一次野外遭遇；走進某一格不會
 	// 擲，所以一天最多四次（RE-078）。
 	OnTimePart func()
+	// OnTimePartBusy回報遭遇回呼是否仍在等待戰鬥。提示頁由Session自行檢查。
+	OnTimePartBusy func() bool
+	// 時段更新的後續操作只保留一次，不進存檔（SPEC-011 RE-187）。
+	pendingTimePart func()
+	// 步行索引在遭遇返回後才讀，不進存檔（SPEC-011 RE-195）。
+	pendingStepIndex *uint16
+	// 任務到達先等問答及實際戰鬥返回，再更新時段及扣一步成本（RE-214）。
+	// 只在本次到達期間存在，不進存檔。
+	pendingArrivalIndex *uint16
+	pendingArrivalDY    int
+	// UnresolvedReturnIndex 記錄仍未實作的表外讀取；nil 表示最近一步已解決。
+	UnresolvedReturnIndex *uint16
 }
 
 // Rand 是可注入的亂數來源；n 為骰面數，回傳 1…n。與角色建立用的是同一個介面。
@@ -162,7 +174,7 @@ func (s *Session) leaveSlot() {
 // 那個分支把整段跳過去）。格內的次格移動不重跑，否則站在入口那一格上時
 // 每走一次次格都會再彈一次提示。
 func (s *Session) Walk(dx, dy int) bool {
-	if s.Mode != ModeMap || s.Prompt != nil {
+	if s.Mode != ModeMap || s.Prompt != nil || s.pendingTimePart != nil || s.pendingArrivalIndex != nil {
 		return false
 	}
 	t := s.Screen.Travel
@@ -183,6 +195,11 @@ func (s *Session) Walk(dx, dy int) bool {
 		}
 	}
 	if moved {
+		if s.Prompt != nil {
+			index := stepIndex(dy)
+			s.pendingArrivalIndex, s.pendingArrivalDY = &index, dy
+			return moved
+		}
 		s.advanceTime(dy)
 	}
 	return moved
@@ -193,20 +210,55 @@ func (s *Session) Walk(dx, dy int) bool {
 // 不算**：原版走 `0x2958F` 把座標復原，之後 `jmp 0x295DD` 跳過整支 `sub_297F2`。
 // dy 是這一步的 Y 位移，成本依它查表（`StepCost`，RE-151）。
 func (s *Session) advanceTime(dy int) {
-	if c := s.Screen.Clock; c != nil {
-		s.spendTime(c.StepCost(dy, s.Screen.Movement))
+	s.advanceTimeIndex(stepIndex(dy), dy)
+}
+
+func stepIndex(dy int) uint16 {
+	if dy < 0 {
+		return 0xffff
 	}
+	if dy > 0 {
+		return 1
+	}
+	return 0
+}
+
+func (s *Session) advanceTimeIndex(index uint16, dy int) {
+	c := s.Screen.Clock
+	if c == nil || s.pendingTimePart != nil {
+		return
+	}
+	s.UnresolvedReturnIndex = nil
+	s.pendingStepIndex = &index
+	s.updatePart(func() {
+		s.pendingStepIndex = nil
+		cost, ok := c.ReturnCost(index, s.Screen.Movement, s.Rand)
+		if !ok {
+			// 這條既有近似尚未修正；保留診斷，不宣稱表外成本已完成。
+			unresolved := index
+			s.UnresolvedReturnIndex = &unresolved
+			cost = c.StepCost(dy, s.Screen.Movement)
+		}
+		s.finishTime(cost)
+	})
 }
 
 // spendTime 是 `sub_297F2`：**先**依扣之前的時刻判時段（`sub_29987`，換了就擲
 // 天候與遭遇），**再**扣時刻；扣成負的就換日，停在 CAMPING! 等鍵（RE-151）。
 // 所以跨過門檻那一步不換時段，下一步開頭才換。
 func (s *Session) spendTime(cost int) {
+	if s.pendingTimePart != nil {
+		return
+	}
 	c := s.Screen.Clock
 	if c == nil {
 		return
 	}
-	s.updatePart()
+	s.updatePart(func() { s.finishTime(cost) })
+}
+
+func (s *Session) finishTime(cost int) {
+	c := s.Screen.Clock
 	if c.Spend(cost) {
 		s.Camping = true
 		// 換日那一張把天候切到第 5 組（`sub_297F2:0x2989D`）。
@@ -222,18 +274,43 @@ func (s *Session) spendTime(cost int) {
 // （`sub_2A4E5`），最後才擲天候（`0x29A83`，RE-151 更正早先「天候在前」的讀法）。
 // 走進某一格不會擲，所以一天最多四次（RE-078）。
 //
-// 遭遇成立時原版先打完那一場才擲天候；remake 的戰鬥由呼叫端接手，天候在這裡就擲，
-// 差別只在骰子的先後，不影響狀態（SPEC-011 §1 註明）。
-func (s *Session) updatePart() {
+// 遭遇提示與戰鬥完成後才接著擲天候及執行finish（SPEC-011 RE-187）。
+func (s *Session) updatePart(finish func()) {
 	c := s.Screen.Clock
 	if !c.UpdatePart() {
+		finish()
 		return
 	}
 	s.Screen.TimeIndex = c.Part
+	s.pendingTimePart = func() {
+		s.rollWeather()
+		finish()
+	}
 	if s.OnTimePart != nil {
 		s.OnTimePart()
 	}
-	s.rollWeather()
+	s.ResumeTimePart()
+}
+
+// ResumeTimePart在遭遇提示鏈或實際戰鬥結束後接續，重複呼叫沒有作用。
+func (s *Session) ResumeTimePart() {
+	if s.pendingTimePart == nil || s.Prompt != nil || (s.OnTimePartBusy != nil && s.OnTimePartBusy()) {
+		return
+	}
+	finish := s.pendingTimePart
+	s.pendingTimePart = nil
+	finish()
+}
+
+// ResumeArrival 接續已回答且沒有實際戰鬥等待的到達操作。清除後才更新時段，
+// 讓後續隨機遭遇可以建立自己的 pendingTimePart（SPEC-011 RE-214）。
+func (s *Session) ResumeArrival() {
+	if s.pendingArrivalIndex == nil || s.Prompt != nil || (s.OnTimePartBusy != nil && s.OnTimePartBusy()) {
+		return
+	}
+	index, dy := *s.pendingArrivalIndex, s.pendingArrivalDY
+	s.pendingArrivalIndex = nil
+	s.advanceTimeIndex(index, dy)
 }
 
 // rollWeather 是時段變換時的天候隨機漫步。原版每次都擲，擲出同一組就不重畫。
@@ -260,10 +337,11 @@ func (s *Session) EndCamping() {
 	// 原版等到那一鍵之後才判時段（`sub_297F2` 換日分支裡的 `sub_29987`）：時刻已經
 	// 歸位成 4200，由 TWILIGHT 換成 DAWN，擲天候與遭遇；接著把天候設回第 1 組、
 	// 推日期、重畫日期框（`0x298FC`…`0x2997C`，RE-151）。
-	s.updatePart()
-	c.Weather, s.Screen.Group = ClearWeather, ClearWeather
-	c.NextDay()
-	s.Screen.Date = c.DateLines()
+	s.updatePart(func() {
+		c.Weather, s.Screen.Group = ClearWeather, ClearWeather
+		c.NextDay()
+		s.Screen.Date = c.DateLines()
+	})
 }
 
 // MoveCursor 移動圖示列的白框，兩端繞回。
@@ -284,6 +362,9 @@ func (s *Session) MoveCursor(delta int) {
 //   - U-TURN：回地圖，圖示列只剩一格 DOOR。
 //   - ROAD／SIGNPOST：沿道路走一步。
 func (s *Session) Accept() {
+	if (s.pendingTimePart != nil || s.pendingArrivalIndex != nil) && s.Prompt == nil {
+		return
+	}
 	if len(s.Screen.Icons) == 0 || s.Cursor >= len(s.Screen.Icons) {
 		return
 	}
@@ -302,6 +383,8 @@ func (s *Session) Accept() {
 		if s.Prompt == page {
 			s.ClearPrompt()
 		}
+		s.ResumeArrival()
+		s.ResumeTimePart()
 		return
 	}
 	// 按下之後白框一律回到第 0 格，原本那一格改畫青色（`sub_29004:0x29765`）。
@@ -407,6 +490,8 @@ func (s *Session) DismissNotice() {
 	if s.OnPromptAnswer != nil {
 		s.OnPromptAnswer(false)
 	}
+	s.ResumeArrival()
+	s.ResumeTimePart()
 }
 
 // ClearPrompt 收掉提示，圖示列回到地圖的那一組。

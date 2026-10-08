@@ -72,6 +72,11 @@ const (
 // PartLost 是部位被打到廢掉的門檻：現值超過 0x7F 就算沒了。
 const PartLost = 0x80
 
+// partLost 回報一格部位耐久是不是廢了。**兩種表示法都認**：原版把打廢的部位存成 0xFF
+// （`sub_277F4:0x278DE`，記錄值 ≥ 0x80），remake 的 `Actor.Take` 扣光就存 0；活著的部位
+// 一定是 1…0x7F（RE-168：兩種表示法並存曾讓指令列與 AI 對「廢了」的判斷不一致）。
+func partLost(v int) bool { return v <= 0 || v >= PartLost }
+
 // IconOffset 是命令碼換成 KOLMPICS 圖號要加的數。原版 frame-887 的七格
 // （命令碼 7、0x21、0x29、0x24、0x15、0x27、5）逐像素命中 KOLMPICS 的
 // 10、36、44、39、24、42、8（RE-080）。
@@ -109,10 +114,10 @@ type CommandEnv struct {
 // ArmsLost 數這一名廢掉幾隻手臂（`sub_228B7:0x228ED`…`0x2291B`）。
 func (a *Actor) ArmsLost() int {
 	n := 0
-	if a.RightArm > PartLost {
+	if partLost(a.RightArm) {
 		n++
 	}
-	if a.LeftArm > PartLost {
+	if partLost(a.LeftArm) {
 		n++
 	}
 	return n
@@ -120,7 +125,7 @@ func (a *Actor) ArmsLost() int {
 
 // LegsUsable 回報還有沒有腿能走（`0x22CCC`…`0x22CED`）。
 func (a *Actor) LegsUsable() bool {
-	return a.RightLeg < PartLost || a.LeftLeg < PartLost
+	return !partLost(a.RightLeg) || !partLost(a.LeftLeg)
 }
 
 // CommandBar 依原版的順序組出這一名的指令列（`sub_228B7`）。

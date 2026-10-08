@@ -1,0 +1,31 @@
+{
+  "schema": "kol-normal-settlement-audit-v1",
+  "date": "2026-10-02",
+  "preserved_re180_inputs": 1213,
+  "preserved_re180_attachments": 275,
+  "re181_attachments": 2522,
+  "merged_annotations": 7,
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned": [],
+  "md_same_name_directories": [],
+  "worklist": {
+    "open": 22,
+    "done": 84
+  },
+  "locks": {
+    "docs/verification/battle-settlement-20261002/receipt.json": "c6a39a1f789b56c0473ed0e240b9967250845e70092cb3efcd3c8161efc2ff83",
+    "docs/verification/battle-settlement-20261002/verify.py": "90fcb98ac5d49864f53f859bf418ed034997da2824fe22cfee2866ff705d7026",
+    "docs/verification/battle-settlement-20261002/verify_readonly.py": "db86c4d199bcab64fe41dadbb32250ea0d597aaaa50a94091fda59b4e3e16bd3",
+    "docs/verification/battle-settlement-20261002/audit.py": "89bf9b01800a0573063dbfe15a9a913123b58222d25c72db94e52c6293930c1c",
+    "docs/re/battle-settlement-address-index.json": "e5b570aed1cade143af5f9807a21fe4b06bfa02eeca91c25d789b8cd6dbb7a24",
+    "workplace/battle-settlement-20261001/settlement-index-final-private.json": "f4174d29c3e8ee75accb9fdbfcd019477bb2db272127c620e75c5b5ace79bff1",
+    "docs/re/20261002-battle-settlement.md": "9c0c03d8dc4dac2b5362dbb9b66e9298726feaca4a609873655faefd87c3b1da",
+    "docs/spec/027-battle-exit-wounds.md": "fd70fabf76886efbec3a016c24c69321c8c57b7ceafd5c8b6da86e36a5074476",
+    "docs/worklist.json": "4e27565b6f367455497425939e6b826544ca9781ce2d42ce119d42fdf6048a58",
+    "WORKLIST.md": "79f765a041c126546bb92bb90d8f6f5afda75e75d6706a9fe54300ec07ee90a6",
+    "docs/verification/battle-settlement-20261002/worklist-final.log": "0ad9348a989869f3a1cb20d4226777e6443e604d0d21fbcbd827b69278eb77b2"
+  },
+  "cleanup": "一次性容器均使用--rm；批末主機docker ps -a核實，GUI的Xvfb由trap與wait清理。",
+  "remaining": "SPEC-027搜刮切片DRAFT、正式產品及正常保存鏈仍開放；未提交或發布。"
+}

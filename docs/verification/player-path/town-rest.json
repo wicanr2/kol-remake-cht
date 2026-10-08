@@ -18,20 +18,21 @@
   "save": {
     "file": "workplace/saves/town-rest.json",
     "expect": {
-      "schema": "kol-save-v1",
+      "schema": "kol-save-v3",
       "settings.faithful_inn_stay": false,
       "location.kind": "town",
       "location.town": 7,
       "location.entry_point": 3,
       "location.x": 57,
       "location.y": 8,
-      "party[0].name": "Theodoric",
-      "party[0].gold": 953,
-      "party[0].wounds": 0,
-      "party[0].place": "HALFWAY HO",
-      "party[0].town_code": "MIN",
-      "party[0].building_id": 86,
-      "party[0].speaker": true
+      "characters[0].name": "Theodoric",
+      "characters[0].gold": 953,
+      "characters[0].wounds": 0,
+      "characters[0].place": "HALFWAY HO",
+      "characters[0].town_code": "MIN",
+      "characters[0].building_id": 86,
+      "speaker": 0,
+      "party[0]": 0
     }
   }
 }

@@ -5,48 +5,463 @@
   "tool": "IDA Pro 9.4",
   "address_space": "IDA linear",
   "entries": {
-    "0x25409": {"semantic": "反制搜尋以遮罩 0x19 及前次游標呼叫 sub_2531C；環 0 首次 rand(7)-1，續查不重擲", "confidence": "已證實", "evidence": "TestBattleCounterScanStartOriginal 14 組有無候選、七個起點；0x25402..0x25417 與 sub_2531C 真實呼叫鏈"},
-    "0x23c1a": {"semantic": "先設搜尋環號為零；鄰圈是環 0，並非環 1", "confidence": "已證實", "evidence": "SPEC-013 20260908 訂正；TestBattleRingSearchOriginal 讀取原版環 0..6 表值為 8..56，原始 mov word_349B2,0"},
-    "0x2533d": {"semantic": "首次搜尋呼叫 rand(環長-1)，再減一作為起始位置；不包含最後一格作首次起點", "confidence": "已證實", "evidence": "TestBattleRingSearchOriginal 七環首末合法起點、完整續查及終止共 14 條；0x25332..0x25345 原始指令"},
-    "0x23ebb": {"semantic": "原版與 remake 同號環；ring<4 才進射擊資格判斷，不能把門檻減成 3", "confidence": "已證實", "evidence": "TestBattleEnemyShootRingOriginal 12 組原版分支；SPEC-013 20260908 訂正，原始 cmp word_349B2,4"},
-    "0x23eb8": {"semantic": "視線被擋住時回跳 0x23DEC，在同一環以先前游標續查", "confidence": "已證實", "evidence": "docs/re/20260908-ai-ring.md；0x23EAB..0x23EB8 與 0x23DEC..0x23DFA 的原始控制流"},
-    "0x25325": {"semantic": "只有 arg_0=-1 的首次搜尋才進入起點亂數分支；續查保留起點", "confidence": "已證實", "evidence": "docs/re/20260908-ai-ring.md；0x25325..0x25357 的分支與 CALL sub_1B5A8"},
-    "0x25357": {"semantic": "同環續查從先前位置加一，後續於環尾回繞並以 word_345DC 判斷結束", "confidence": "已證實", "evidence": "docs/re/20260908-ai-ring.md；0x25351..0x25389 的原始位置比較"},
-    "0x1e78d": {"semantic": "隊員初始化：[bx+6712h] 寫入 0x13，表示二十發彈藥的減一表示；敵人同偏移另作怪物索引", "confidence": "已證實", "evidence": "docs/re/20260908-ammunition.md；0x1E921 另一初始化；0x20884..0x208CE 消耗與 0x231AE..0x231D1 顯示共同證實"},
-    "0x2088d": {"semantic": "讀取目前隊員的彈藥減一表示，後續再減一", "confidence": "已證實", "evidence": "docs/re/20260908-ammunition.md；TestBattleAmmunitionConsumeOriginal 2550 組"},
-    "0x208b8": {"semantic": "最後一發消耗後清除目前隊員 +0x25 指令", "confidence": "已證實", "evidence": "0x2089A..0x208CE；TestBattleAmmunitionConsumeOriginal 原值零邊界"},
-    "0x208ce": {"semantic": "將扣除後彈藥寫回原運算元 [bx+6712h]；耗盡為 0xFF", "confidence": "已證實", "evidence": "docs/re/20260908-ammunition.md；TestBattleAmmunitionConsumeOriginal 2550 組正式比較"},
-    "0x229a5": {"semantic": "隊員首位元組 0xFF 代表耗盡，不提供射擊／裝填指令", "confidence": "已證實", "evidence": "sub_228B7:0x22996..0x229AD；SPEC-022 與原始消耗／顯示資料流"},
-    "0x231ae": {"semantic": "彈藥數字讀被檢視隊員首位元組，0xFF 顯示零，其餘加一", "confidence": "已證實", "evidence": "0x231AE..0x231D1；TestBattleAmmunitionPanelOriginal 128 組正式顯示比較"},
-    "0x2318a": {"semantic": "隊員持有有效遠程武器且種類為 0x12／0x16，繪製 BOLTS: 標頭；承接裝備模板於 (24,60)", "confidence": "已證實", "evidence": "0x2311D..0x231A5；TestBattleAmmunitionPanelOriginal 與 TestBattleAmmunitionTextOriginal"},
-    "0x2319d": {"semantic": "其他符合遠程武器條件的隊員繪製 ARROWS: 標頭；承接裝備模板於 (24,60)", "confidence": "已證實", "evidence": "0x2311D..0x231A5；TestBattleAmmunitionPanelOriginal 與 TestBattleAmmunitionTextOriginal"},
-    "0x111cb": {"semantic": "當 sub_1103F 輸入為 0x47..0x49，以 word_2FBB8 快取呼叫 sub_11262，索引為 3..5", "confidence": "已證實", "evidence": "0x11129..0x111CB 的座標與索引資料流；TestBattleBodySpriteOriginal 三次原版路由確認"},
-    "0x2f548": {"semantic": "初始化人形共用快取的檔名格式為 misc%s.0；模式字串表由 DS 相對 0x670 起讀取", "confidence": "已證實", "evidence": "0x105EC..0x10626 資料流；原始 bytes 6d69736325732e300000；TestBattleBodySpriteOriginal 記錄原版字串表"},
-    "0x1f178": {"semantic": "規劃指令迴圈以 arg_0=1 繪製目前人物的左下資訊框", "confidence": "已證實", "evidence": "sub_1E3A8:0x1F16A..0x1F17D；sub_2324F 使用 word_37D2A"},
-    "0x24316": {"semantic": "初始目標格的人物圖號非零時，不等待方向輸入，直接跳到該格重畫與資訊框檢視", "confidence": "已證實", "evidence": "0x242E1..0x24316 的 9*row+col 與 DS 相對 0x6AE4 讀取，跳轉 0x245CE"},
-    "0x246dd": {"semantic": "以暫設的被檢視人物索引畫左下框；arg_0 只控制命令圖示，身體與疲勞仍繪製", "confidence": "已證實", "evidence": "0x24672..0x246DD 的角色索引資料流；sub_2324F:0x23463 在身體繪製之後才檢查 arg_0"},
-    "0x24714": {"semantic": "目標從人物移至空格時清空左下框，並恢復行動人物索引", "confidence": "已證實", "evidence": "0x246EC..0x24719 的檢視狀態、索引恢復與框座標參數"},
-    "0x1fb20": {"semantic": "整輪規劃結束後清空左下框，再顯示 KOLDATA 0x108 下一輪問句", "confidence": "已證實", "evidence": "0x1FAEA..0x1FB35 控制流與 CALL 參數"},
-    "0x2f12c": {"semantic": "三種人形各六部位的半開像素矩形；每筆依序為 x0、y0、x1、y1，三組各 24 bytes", "confidence": "已證實", "evidence": "DS 相對 0x125C；sub_27E20 逐位元組讀表，TestBattleBodyOverlayOriginal 144 組座標與順序驗證"},
-    "0x27e9b": {"semantic": "剩餘傷肢百分比為 current*100/max 的無號整數商；current>127 先當作零", "confidence": "已證實", "evidence": "0x27E58..0x27EA2 原始資料流；TestBattleBodyOverlayOriginal 涵蓋 0、128、255 與 1/7"},
-    "0x27f37": {"semantic": "傷勢遮罩下界為 y0+(y1-y0)*(100-current*100/max)/100，整數截斷", "confidence": "已證實", "evidence": "0x27F29..0x27F3D 原始指令；144 組人形部位驗證"},
-    "0x27f88": {"semantic": "僅將原始色號 7、8、15 的像素寫為 12；其餘色號保留", "confidence": "已證實", "evidence": "0x27F60..0x27F8D 的比較與 CALL；TestBattleBodyOverlayOriginal 使用循環 16 色逐像素驗證"},
-    "0x1d45e": {"semantic": "EGA 像素讀取的記憶體列偏移為 y*40+x/8，x 的單位是像素", "confidence": "已證實", "evidence": "sub_1D44A:0x1D458..0x1D477，保留原始 EGA 位元平面讀取指令"},
-    "0x118be": {"semantic": "主圖示讀鍵 mode 4／5 按空白時反轉肖像／裝備模式，不確認圖示；第一格為空白鍵圖示時走前置返回分支", "confidence": "已證實", "evidence": "0x11889..0x118C3；TestBattlePanelSpaceOriginal 十二組模式及初值"},
-    "0x1f155": {"semantic": "新隊員規劃開始將顯示模式 word_303FC 設為零；取消子選單不經此重設點", "confidence": "已證實", "evidence": "0x1F0EA..0x1F155 的陣營判斷；取消返回 0x1F16A"},
-    "0x2474f": {"semantic": "選目標時按空白，且目前正在檢視人物，才反轉肖像／裝備模式", "confidence": "已證實", "evidence": "0x2473D..0x24754；TestBattleTargetPanelSpaceOriginal 有人／空格分支"},
-    "0x11889": {"semantic": "byte_30C7E 是圖示列第一個 byte，等於 DS 相對 0x2DAE；不是獨立讀鍵旗標", "confidence": "已證實", "evidence": "DGROUP 基底 0x2DED0 加 0x2DAE 等於 0x30C7E；TestBattlePanelSpaceOriginal 的首次別名初始化勘誤"},
-    "0x22d1a": {"semantic": "主指令列以 word_2EA1A+4 作為讀鍵模式，兩種主模式為 4／5", "confidence": "已證實", "evidence": "0x22D0D..0x22D1F 的參數堆疊；0x118BE 的模式分支"},
-    "0x230f6": {"semantic": "隊員零模式顯示 40×38 縮圖，位置 (56,37)，來源 DS 相對 0x3254+760*隊員索引", "confidence": "已證實", "evidence": "0x230D2..0x230FB、sub_1C53D；TestBattlePortraitPositionOriginal；角色抽取器匹配 CHARPICS 模板"},
-    "0x23065": {"semantic": "敵方依序解名五格 0x20..0x60，模式 1；名稱位置欄 5、起列 24、步長 6", "confidence": "已證實", "evidence": "0x23006..0x23086；TestBattleEquipmentRowsOriginal 的敵方首末槽"},
-    "0x23219": {"semantic": "隊員六格非空裝備以 sub_1B94F(ptr,1) 解名，再由文字常式顯示", "confidence": "已證實", "evidence": "0x231D9..0x2323E；TestBattleEquipmentRowsOriginal 的隊員首末槽"},
-    "0x230c0": {"semantic": "隊員分支以記錄開頭呼叫文字繪製；前置文字欄為 3、掃描列為 7", "confidence": "已證實", "evidence": "sub_22EFC:0x23098..0x230C5 的基底、座標寫入與 CALL"},
-    "0x23115": {"semantic": "非零顯示模式使用 KOLDATA 0x101 裝備欄模板", "confidence": "已證實", "evidence": "0x230C8 分支及 0x23101..0x2311A 參數堆疊"},
-    "0x231ef": {"semantic": "隊員六列裝備從 DS 相對 0x0B80 的 word 位移表取得；名稱欄 5、起列 24、每列加 6", "confidence": "已證實", "evidence": "0x231D9..0x23243 的迴圈、表取值、座標寫入與解名呼叫"},
-    "0x2ea50": {"semantic": "六個隊員裝備位移為 0x30、0x100、0x110、0x120、0x160、0x190", "confidence": "已證實", "evidence": "原始 bytes 300000011001200160019001；IDA linear 0x2EA50 等於 DGROUP 0x2DED0 加 DS 相對 0x0B80"},
-    "0x23408": {"semantic": "疲勞直條第一個矩形為 x132..138、y84..分界；非單色分支色碼 12", "confidence": "已證實", "evidence": "0x23311..0x2340D 的資料流；TestBattleStatusBarOriginal 十二組參數驗證"},
-    "0x23423": {"semantic": "疲勞直條第二個矩形為 x132..138、分界..156，色碼 1", "confidence": "已證實", "evidence": "0x23410..0x23428 參數堆疊；TestBattleStatusBarOriginal"},
-    "0x2344c": {"semantic": "隊員人形呼叫 sub_27E20，參數為角色性別 byte 加 0x47；此索引不猜素材 archive", "confidence": "已證實", "evidence": "0x2342B..0x23451；TestBattleStatusBarOriginal"},
-    "0x2345b": {"semantic": "敵方人形呼叫 sub_27E20，參數固定 0x49", "confidence": "已證實", "evidence": "0x23457..0x23460；TestBattleStatusBarOriginal"}
+    "0x25409": {
+      "semantic": "反制搜尋以遮罩 0x19 及前次游標呼叫 sub_2531C；環 0 首次 rand(7)-1，續查不重擲",
+      "confidence": "已證實",
+      "evidence": "TestBattleCounterScanStartOriginal 14 組有無候選、七個起點；0x25402..0x25417 與 sub_2531C 真實呼叫鏈"
+    },
+    "0x23c1a": {
+      "semantic": "先設搜尋環號為零；鄰圈是環 0，並非環 1",
+      "confidence": "已證實",
+      "evidence": "SPEC-013 20260908 訂正；TestBattleRingSearchOriginal 讀取原版環 0..6 表值為 8..56，原始 mov word_349B2,0"
+    },
+    "0x2533d": {
+      "semantic": "首次搜尋呼叫 rand(環長-1)，再減一作為起始位置；不包含最後一格作首次起點",
+      "confidence": "已證實",
+      "evidence": "TestBattleRingSearchOriginal 七環首末合法起點、完整續查及終止共 14 條；0x25332..0x25345 原始指令"
+    },
+    "0x23ebb": {
+      "semantic": "原版與 remake 同號環；ring<4 才進射擊資格判斷，不能把門檻減成 3",
+      "confidence": "已證實",
+      "evidence": "TestBattleEnemyShootRingOriginal 12 組原版分支；SPEC-013 20260908 訂正，原始 cmp word_349B2,4"
+    },
+    "0x23eb8": {
+      "semantic": "視線被擋住時回跳 0x23DEC，在同一環以先前游標續查",
+      "confidence": "已證實",
+      "evidence": "docs/re/20260908-ai-ring.md；0x23EAB..0x23EB8 與 0x23DEC..0x23DFA 的原始控制流"
+    },
+    "0x25325": {
+      "semantic": "只有 arg_0=-1 的首次搜尋才進入起點亂數分支；續查保留起點",
+      "confidence": "已證實",
+      "evidence": "docs/re/20260908-ai-ring.md；0x25325..0x25357 的分支與 CALL sub_1B5A8"
+    },
+    "0x25357": {
+      "semantic": "同環續查從先前位置加一，後續於環尾回繞並以 word_345DC 判斷結束",
+      "confidence": "已證實",
+      "evidence": "docs/re/20260908-ai-ring.md；0x25351..0x25389 的原始位置比較"
+    },
+    "0x1e78d": {
+      "semantic": "隊員初始化：[bx+6712h] 寫入 0x13，表示二十發彈藥的減一表示；敵人同偏移另作怪物索引",
+      "confidence": "已證實",
+      "evidence": "docs/re/20260908-ammunition.md；0x1E921 另一初始化；0x20884..0x208CE 消耗與 0x231AE..0x231D1 顯示共同證實"
+    },
+    "0x2088d": {
+      "semantic": "讀取目前隊員的彈藥減一表示，後續再減一",
+      "confidence": "已證實",
+      "evidence": "docs/re/20260908-ammunition.md；TestBattleAmmunitionConsumeOriginal 2550 組"
+    },
+    "0x208b8": {
+      "semantic": "最後一發消耗後清除目前隊員 +0x25 指令",
+      "confidence": "已證實",
+      "evidence": "0x2089A..0x208CE；TestBattleAmmunitionConsumeOriginal 原值零邊界"
+    },
+    "0x208ce": {
+      "semantic": "將扣除後彈藥寫回原運算元 [bx+6712h]；耗盡為 0xFF",
+      "confidence": "已證實",
+      "evidence": "docs/re/20260908-ammunition.md；TestBattleAmmunitionConsumeOriginal 2550 組正式比較"
+    },
+    "0x229a5": {
+      "semantic": "隊員首位元組 0xFF 代表耗盡，不提供射擊／裝填指令",
+      "confidence": "已證實",
+      "evidence": "sub_228B7:0x22996..0x229AD；SPEC-022 與原始消耗／顯示資料流"
+    },
+    "0x231ae": {
+      "semantic": "彈藥數字讀被檢視隊員首位元組，0xFF 顯示零，其餘加一",
+      "confidence": "已證實",
+      "evidence": "0x231AE..0x231D1；TestBattleAmmunitionPanelOriginal 128 組正式顯示比較"
+    },
+    "0x2318a": {
+      "semantic": "隊員持有有效遠程武器且種類為 0x12／0x16，繪製 BOLTS: 標頭；承接裝備模板於 (24,60)",
+      "confidence": "已證實",
+      "evidence": "0x2311D..0x231A5；TestBattleAmmunitionPanelOriginal 與 TestBattleAmmunitionTextOriginal"
+    },
+    "0x2319d": {
+      "semantic": "其他符合遠程武器條件的隊員繪製 ARROWS: 標頭；承接裝備模板於 (24,60)",
+      "confidence": "已證實",
+      "evidence": "0x2311D..0x231A5；TestBattleAmmunitionPanelOriginal 與 TestBattleAmmunitionTextOriginal"
+    },
+    "0x111cb": {
+      "semantic": "當 sub_1103F 輸入為 0x47..0x49，以 word_2FBB8 快取呼叫 sub_11262，索引為 3..5",
+      "confidence": "已證實",
+      "evidence": "0x11129..0x111CB 的座標與索引資料流；TestBattleBodySpriteOriginal 三次原版路由確認"
+    },
+    "0x2f548": {
+      "semantic": "初始化人形共用快取的檔名格式為 misc%s.0；模式字串表由 DS 相對 0x670 起讀取",
+      "confidence": "已證實",
+      "evidence": "0x105EC..0x10626 資料流；原始 bytes 6d69736325732e300000；TestBattleBodySpriteOriginal 記錄原版字串表"
+    },
+    "0x1f178": {
+      "semantic": "規劃指令迴圈以 arg_0=1 繪製目前人物的左下資訊框",
+      "confidence": "已證實",
+      "evidence": "sub_1E3A8:0x1F16A..0x1F17D；sub_2324F 使用 word_37D2A"
+    },
+    "0x24316": {
+      "semantic": "初始目標格的人物圖號非零時，不等待方向輸入，直接跳到該格重畫與資訊框檢視",
+      "confidence": "已證實",
+      "evidence": "0x242E1..0x24316 的 9*row+col 與 DS 相對 0x6AE4 讀取，跳轉 0x245CE"
+    },
+    "0x246dd": {
+      "semantic": "以暫設的被檢視人物索引畫左下框；arg_0 只控制命令圖示，身體與疲勞仍繪製",
+      "confidence": "已證實",
+      "evidence": "0x24672..0x246DD 的角色索引資料流；sub_2324F:0x23463 在身體繪製之後才檢查 arg_0"
+    },
+    "0x24714": {
+      "semantic": "目標從人物移至空格時清空左下框，並恢復行動人物索引",
+      "confidence": "已證實",
+      "evidence": "0x246EC..0x24719 的檢視狀態、索引恢復與框座標參數"
+    },
+    "0x1fb20": {
+      "semantic": "整輪規劃結束後清空左下框，再顯示 KOLDATA 0x108 下一輪問句",
+      "confidence": "已證實",
+      "evidence": "0x1FAEA..0x1FB35 控制流與 CALL 參數"
+    },
+    "0x2f12c": {
+      "semantic": "三種人形各六部位的半開像素矩形；每筆依序為 x0、y0、x1、y1，三組各 24 bytes",
+      "confidence": "已證實",
+      "evidence": "DS 相對 0x125C；sub_27E20 逐位元組讀表，TestBattleBodyOverlayOriginal 144 組座標與順序驗證"
+    },
+    "0x27e9b": {
+      "semantic": "剩餘傷肢百分比為 current*100/max 的無號整數商；current>127 先當作零",
+      "confidence": "已證實",
+      "evidence": "0x27E58..0x27EA2 原始資料流；TestBattleBodyOverlayOriginal 涵蓋 0、128、255 與 1/7"
+    },
+    "0x27f37": {
+      "semantic": "傷勢遮罩下界為 y0+(y1-y0)*(100-current*100/max)/100，整數截斷",
+      "confidence": "已證實",
+      "evidence": "0x27F29..0x27F3D 原始指令；144 組人形部位驗證"
+    },
+    "0x27f88": {
+      "semantic": "僅將原始色號 7、8、15 的像素寫為 12；其餘色號保留",
+      "confidence": "已證實",
+      "evidence": "0x27F60..0x27F8D 的比較與 CALL；TestBattleBodyOverlayOriginal 使用循環 16 色逐像素驗證"
+    },
+    "0x1d45e": {
+      "semantic": "EGA 像素讀取的記憶體列偏移為 y*40+x/8，x 的單位是像素",
+      "confidence": "已證實",
+      "evidence": "sub_1D44A:0x1D458..0x1D477，保留原始 EGA 位元平面讀取指令"
+    },
+    "0x118be": {
+      "semantic": "主圖示讀鍵 mode 4／5 按空白時反轉肖像／裝備模式，不確認圖示；第一格為空白鍵圖示時走前置返回分支",
+      "confidence": "已證實",
+      "evidence": "0x11889..0x118C3；TestBattlePanelSpaceOriginal 十二組模式及初值"
+    },
+    "0x1f155": {
+      "semantic": "新隊員規劃開始將顯示模式 word_303FC 設為零；取消子選單不經此重設點",
+      "confidence": "已證實",
+      "evidence": "0x1F0EA..0x1F155 的陣營判斷；取消返回 0x1F16A"
+    },
+    "0x2474f": {
+      "semantic": "選目標時按空白，且目前正在檢視人物，才反轉肖像／裝備模式",
+      "confidence": "已證實",
+      "evidence": "0x2473D..0x24754；TestBattleTargetPanelSpaceOriginal 有人／空格分支"
+    },
+    "0x11889": {
+      "semantic": "byte_30C7E 是圖示列第一個 byte，等於 DS 相對 0x2DAE；不是獨立讀鍵旗標",
+      "confidence": "已證實",
+      "evidence": "DGROUP 基底 0x2DED0 加 0x2DAE 等於 0x30C7E；TestBattlePanelSpaceOriginal 的首次別名初始化勘誤"
+    },
+    "0x22d1a": {
+      "semantic": "主指令列以 word_2EA1A+4 作為讀鍵模式，兩種主模式為 4／5",
+      "confidence": "已證實",
+      "evidence": "0x22D0D..0x22D1F 的參數堆疊；0x118BE 的模式分支"
+    },
+    "0x230f6": {
+      "semantic": "隊員零模式顯示 40×38 縮圖，位置 (56,37)，來源 DS 相對 0x3254+760*隊員索引",
+      "confidence": "已證實",
+      "evidence": "0x230D2..0x230FB、sub_1C53D；TestBattlePortraitPositionOriginal；角色抽取器匹配 CHARPICS 模板"
+    },
+    "0x23065": {
+      "semantic": "敵方依序解名五格 0x20..0x60，模式 1；名稱位置欄 5、起列 24、步長 6",
+      "confidence": "已證實",
+      "evidence": "0x23006..0x23086；TestBattleEquipmentRowsOriginal 的敵方首末槽"
+    },
+    "0x23219": {
+      "semantic": "隊員六格非空裝備以 sub_1B94F(ptr,1) 解名，再由文字常式顯示",
+      "confidence": "已證實",
+      "evidence": "0x231D9..0x2323E；TestBattleEquipmentRowsOriginal 的隊員首末槽"
+    },
+    "0x230c0": {
+      "semantic": "隊員分支以記錄開頭呼叫文字繪製；前置文字欄為 3、掃描列為 7",
+      "confidence": "已證實",
+      "evidence": "sub_22EFC:0x23098..0x230C5 的基底、座標寫入與 CALL"
+    },
+    "0x23115": {
+      "semantic": "非零顯示模式使用 KOLDATA 0x101 裝備欄模板",
+      "confidence": "已證實",
+      "evidence": "0x230C8 分支及 0x23101..0x2311A 參數堆疊"
+    },
+    "0x231ef": {
+      "semantic": "隊員六列裝備從 DS 相對 0x0B80 的 word 位移表取得；名稱欄 5、起列 24、每列加 6",
+      "confidence": "已證實",
+      "evidence": "0x231D9..0x23243 的迴圈、表取值、座標寫入與解名呼叫"
+    },
+    "0x2ea50": {
+      "semantic": "六個隊員裝備位移為 0x30、0x100、0x110、0x120、0x160、0x190",
+      "confidence": "已證實",
+      "evidence": "原始 bytes 300000011001200160019001；IDA linear 0x2EA50 等於 DGROUP 0x2DED0 加 DS 相對 0x0B80"
+    },
+    "0x23408": {
+      "semantic": "疲勞直條第一個矩形為 x132..138、y84..分界；非單色分支色碼 12",
+      "confidence": "已證實",
+      "evidence": "0x23311..0x2340D 的資料流；TestBattleStatusBarOriginal 十二組參數驗證"
+    },
+    "0x23423": {
+      "semantic": "疲勞直條第二個矩形為 x132..138、分界..156，色碼 1",
+      "confidence": "已證實",
+      "evidence": "0x23410..0x23428 參數堆疊；TestBattleStatusBarOriginal"
+    },
+    "0x2344c": {
+      "semantic": "隊員人形呼叫 sub_27E20，參數為角色性別 byte 加 0x47；此索引不猜素材 archive",
+      "confidence": "已證實",
+      "evidence": "0x2342B..0x23451；TestBattleStatusBarOriginal"
+    },
+    "0x2345b": {
+      "semantic": "敵方人形呼叫 sub_27E20，參數固定 0x49",
+      "confidence": "已證實",
+      "evidence": "0x23457..0x23460；TestBattleStatusBarOriginal"
+    },
+    "0x249cb": {
+      "semantic": "主列重建重載人物+0x25到word_31122，唯讀面板不能用重製新選擇空值取代",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-command-panel-lifecycle.md；既有IDA sub_249AE全指令byte核對，正常213指令區零差"
+    },
+    "0x249e2": {
+      "semantic": "主列重建重載人物+0x23到word_30A78",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-command-panel-lifecycle.md；既有IDA sub_249AE全指令byte核對，正常213指令區零差"
+    },
+    "0x249f9": {
+      "semantic": "主列重建重載人物+0x24到word_30916",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-command-panel-lifecycle.md；既有IDA sub_249AE全指令byte核對，正常213指令區零差"
+    },
+    "0x1c1da": {
+      "semantic": "執行卷軸背景word_2DF1C設FF",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x1c327": {
+      "semantic": "EGA模式0D呼叫sub_1CE04，不是低模式sub_1DE84",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x1ce55": {
+      "semantic": "EGA小字每字六列；大字0x1CE74才八列",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x1ce93": {
+      "semantic": "逐列寫背景，空白零字模亦覆寫FF",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x1cea1": {
+      "semantic": "逐列寫反向字模；配合背景六列",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x1c40d": {
+      "semantic": "矩形與游標全域比較並呼叫sub_1C3CB，沒有字格背景填色",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x27d9e": {
+      "semantic": "成功位移分支先對目標呼叫sub_269BA，再印掉落句",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x26a65": {
+      "semantic": "成功空槽寫word_39A54",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x26a6b": {
+      "semantic": "成功空槽寫word_30D02",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x26769": {
+      "semantic": "H代換讀word_30D02",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x26774": {
+      "semantic": "H代換讀DS9D20的16-byte地上記錄",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-battle-message-background.md；1256道重定位byte核對及213正常訊息區零差"
+    },
+    "0x27db9": {
+      "semantic": "碰撞或地形受阻的打暈入口，與成功位移掉落分支分開",
+      "confidence": "已證實",
+      "evidence": "RE-253 source-review.json 867原始指令；native-review.json正常seed2第317格；docs/re/20261005-blocked-knockback.md。只證實列出的控制流與有限隊員樣本，不推定word_39A54。 RE-254有限續核：同EXE正常seed2第317格DS:BB84=6，H DS:2E32=0；268戰鬥seed／暫存點及正常六人保存重載通過。docs/re/20261005-blocked-knockback-return.md；不推定舊H名稱或完整記錄。"
+    },
+    "0x27dd4": {
+      "semantic": "原版受阻時檢查手持首byte，空手直接返回；控制流已證實，未新增正常空手樣本",
+      "confidence": "已證實",
+      "evidence": "RE-253 source-review.json 867原始指令；native-review.json正常seed2第317格；docs/re/20261005-blocked-knockback.md。只證實列出的控制流與有限隊員樣本，不推定word_39A54。 RE-254有限續核：同EXE正常seed2第317格DS:BB84=6，H DS:2E32=0；268戰鬥seed／暫存點及正常六人保存重載通過。docs/re/20261005-blocked-knockback-return.md；不推定舊H名稱或完整記錄。"
+    },
+    "0x27de0": {
+      "semantic": "受阻持物印記錄158；正常Olear持物保留，不能由落地文字推定物品搬移",
+      "confidence": "已證實",
+      "evidence": "RE-253 source-review.json 867原始指令；native-review.json正常seed2第317格；docs/re/20261005-blocked-knockback.md。只證實列出的控制流與有限隊員樣本，不推定word_39A54。 RE-254有限續核：同EXE正常seed2第317格DS:BB84=6，H DS:2E32=0；268戰鬥seed／暫存點及正常六人保存重載通過。docs/re/20261005-blocked-knockback-return.md；不推定舊H名稱或完整記錄。"
+    },
+    "0x27df0": {
+      "semantic": "受阻持物印記錄15B，正常樣本H保持0且地上槽全零；未呼叫sub_269BA",
+      "confidence": "已證實",
+      "evidence": "RE-253 source-review.json 867原始指令；native-review.json正常seed2第317格；docs/re/20261005-blocked-knockback.md。只證實列出的控制流與有限隊員樣本，不推定word_39A54。 RE-254有限續核：同EXE正常seed2第317格DS:BB84=6，H DS:2E32=0；268戰鬥seed／暫存點及正常六人保存重載通過。docs/re/20261005-blocked-knockback-return.md；不推定舊H名稱或完整記錄。"
+    },
+    "0x27e16": {
+      "semantic": "成功位移或受阻持物的共同尾端清目標+25；正常受阻Olear由5清0",
+      "confidence": "已證實",
+      "evidence": "RE-253 source-review.json 867原始指令；native-review.json正常seed2第317格；docs/re/20261005-blocked-knockback.md。只證實列出的控制流與有限隊員樣本，不推定word_39A54。 RE-254有限續核：同EXE正常seed2第317格DS:BB84=6，H DS:2E32=0；268戰鬥seed／暫存點及正常六人保存重載通過。docs/re/20261005-blocked-knockback-return.md；不推定舊H名稱或完整記錄。"
+    },
+    "0x2120c": {
+      "semantic": "勝利多隻且末S時退輸出游標，覆寫E S",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-monster-plural-ending.md；199條原始bytes、正常seed2戰敗名稱與訊息區；完整GUI範圍見文內限制",
+      "immutable_key": {
+        "platform": "DOS",
+        "module": "KOLTOWN-unpacked.EXE",
+        "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+        "address_space": "IDA Pro9.4 linear, load base0x10000",
+        "original_address": "0x2120c"
+      }
+    },
+    "0x21524": {
+      "semantic": "戰敗多隻且末S時退輸出游標，覆寫E，再接記錄178的s have",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-monster-plural-ending.md；199條原始bytes、正常seed2戰敗名稱與訊息區；完整GUI範圍見文內限制",
+      "immutable_key": {
+        "platform": "DOS",
+        "module": "KOLTOWN-unpacked.EXE",
+        "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+        "address_space": "IDA Pro9.4 linear, load base0x10000",
+        "original_address": "0x21524"
+      }
+    },
+    "0x2a8fd": {
+      "semantic": "遭遇多隻且末S時退屏幕欄位，覆寫E S",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-monster-plural-ending.md；199條原始bytes、正常seed2戰敗名稱與訊息區；完整GUI範圍見文內限制",
+      "immutable_key": {
+        "platform": "DOS",
+        "module": "KOLTOWN-unpacked.EXE",
+        "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+        "address_space": "IDA Pro9.4 linear, load base0x10000",
+        "original_address": "0x2a8fd"
+      }
+    },
+    "0x1c2f9": {
+      "semantic": "在DS:1B60加原始word_345E0游標寫字元，游標已遞增",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261005-monster-plural-ending.md；199條原始bytes、正常seed2戰敗名稱與訊息區；完整GUI範圍見文內限制",
+      "immutable_key": {
+        "platform": "DOS",
+        "module": "KOLTOWN-unpacked.EXE",
+        "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+        "address_space": "IDA Pro9.4 linear, load base0x10000",
+        "original_address": "0x1c2f9"
+      }
+    },
+    "0x2417a": {
+      "semantic": "新進目標層清空左下框；0x24196同步清空左上框",
+      "confidence": "已證實",
+      "evidence": "RE-275：IDA Pro9.4原始bytes與既有匯出相符；原版正常339畫格及DRAFT候選"
+    },
+    "0x24643": {
+      "semantic": "視窗精靈圖號>=8略過人物辨識，經0x24648跳0x246E9，保留被檢視框",
+      "confidence": "已證實",
+      "evidence": "RE-275：IDA Pro9.4原始bytes與既有匯出相符；原版正常339畫格及DRAFT候選"
+    },
+    "0x24600": {
+      "semantic": "視窗精靈圖號零走0x246EC空格清框分支",
+      "confidence": "已證實",
+      "evidence": "RE-275：IDA Pro9.4原始bytes與既有匯出相符；原版正常339畫格及DRAFT候選"
+    },
+    "0x211b1": {
+      "semantic": "共同結算入口先呼叫sub_1103F(0)恢復完整底圖",
+      "confidence": "已證實",
+      "evidence": "RE-276：IDA Pro9.4原始名稱與載入bytes；MZ relocation核對；RE-273原版631及雙語正常候選"
+    },
+    "0x1105a": {
+      "semantic": "arg_0=0設完整畫布位元組欄[0,40)、掃描列[0,200)，其餘值另有分支",
+      "confidence": "已證實",
+      "evidence": "RE-276：IDA Pro9.4原始名稱與載入bytes；MZ relocation核對；RE-273原版631及雙語正常候選"
+    },
+    "0x11254": {
+      "semantic": "arg_0=0由word_39820快取呼叫sub_11262恢復背景圖0",
+      "confidence": "已證實",
+      "evidence": "RE-276：IDA Pro9.4原始名稱與載入bytes；MZ relocation核對；RE-273原版631及雙語正常候選"
+    },
+    "0x23098": {
+      "semantic": "隊員姓名輸出先選大字型；後續肖像沒有改回小字",
+      "confidence": "已證實",
+      "evidence": "RE-278：548道新IDA載入bytes及MZ重定位核對；正常唯讀144標籤helper／3056圓環回傳；同相位正常GPU頁"
+    },
+    "0x22fcd": {
+      "semantic": "怪物裝備文字分支設小字型",
+      "confidence": "已證實",
+      "evidence": "RE-278：548道新IDA載入bytes及MZ重定位核對；正常唯讀144標籤helper／3056圓環回傳；同相位正常GPU頁"
+    },
+    "0x23107": {
+      "semantic": "隊員裝備文字分支設小字型",
+      "confidence": "已證實",
+      "evidence": "RE-278：548道新IDA載入bytes及MZ重定位核對；正常唯讀144標籤helper／3056圓環回傳；同相位正常GPU頁"
+    },
+    "0x23648": {
+      "semantic": "指令標籤沿目前文字模式呼叫sub_1A8FD",
+      "confidence": "已證實",
+      "evidence": "RE-278：548道新IDA載入bytes及MZ重定位核對；正常唯讀144標籤helper／3056圓環回傳；同相位正常GPU頁"
+    },
+    "0x1cb4d": {
+      "semantic": "圓環EGA繪製呼叫sub_1D21D；RE-278第460張捕捉仍在此被呼叫函式",
+      "confidence": "已證實",
+      "evidence": "RE-278：548道新IDA載入bytes及MZ重定位核對；正常唯讀144標籤helper／3056圓環回傳；同相位正常GPU頁"
+    },
+    "0x2638d": {
+      "semantic": "移動入口在改方式旗標前判斷起點可見性；回傳0才重畫",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x2639e": {
+      "semantic": "起點可見分支以目前人物呼叫sub_223C0；不可見分支跳過，保留舊戰場",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x26542": {
+      "semantic": "受阻分支在座標未寫入時判斷可見性",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x2658a": {
+      "semantic": "成功移動先寫參戰者原始欄+0x1F",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x265a4": {
+      "semantic": "成功移動寫原始欄+0x20，先於目的地可見性查詢",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x265a7": {
+      "semantic": "成功移動以寫入後位置判斷可見性，回傳0才印0x10B",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x265cd": {
+      "semantic": "可見移動訊息之後第一次sub_1B100(5)等待",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x265d9": {
+      "semantic": "第一次確認後以實際動作者呼叫sub_223C0重畫目的地",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    },
+    "0x265e5": {
+      "semantic": "目的地重畫之後第二次sub_1B100(5)等待",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-move-message-visibility.md；IDA Pro 9.4線性位址；固定解包EXE SHA-256 01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2；702道MZ載入位元組及正常原版584..595畫格"
+    }
   }
 }

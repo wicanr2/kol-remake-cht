@@ -10,7 +10,7 @@
 遮罩的位元順序來自 KOLTOWN 的 DGROUP：地形是 `0x1312` 的 `80 40 20 10 08 04 02 01`
 （bit 7 是地形 0），季節是 `0x1316` 的 `08 04 02 01`（bit 3 是冬）。
 
-怪物本身是 `TOWN0` 的 payload 5…36，一筆 512 byte，第 0 個 byte 是名稱長度、
+怪物本身是 `TOWN0` 的 payload 5…36，一筆 513 byte，第 0 個 byte 是名稱長度、
 名稱從第 1 個 byte 起（`sub_2A4E5:0x2A64D` 把它讀進 `byte_39836`，
 畫的時候 `sub_1BA60(0xB967, 長度)`）。名稱之後 +0x11 起
 是六個屬性（力量、快捷、洞察、體型、健康、智力），戰鬥的先攻與昏迷門檻
@@ -82,13 +82,10 @@ SKILL_OFFSET = 0x17
 WEAPON_OFFSET = 0x20
 ARMOUR_OFFSETS = (0x30, 0x40, 0x50)
 SHIELD_OFFSET = 0x60
-# 怪物記錄的 `+0x30` 起就是**穿戴欄**，一格 16 byte，順序與角色記錄的十格相同
-#（HEAD／TORSO／LEGS／BODY／HANDS／FEET／SHIELD…，RE-127／RE-131）：
-# `sub_26AC2` 對怪物的射擊那一條取 `+0x70`（HANDS，弓與投石就放在那裡），
-# 徒手那一條取 `[0x0FD2 + 攻擊選項] + 0x30`，也就是 0x80 FEET（踢）、0x90 SHIELD
-#（盾擊）、0x30 HEAD（頭槌）、0x70 HANDS（拳）——與隊員那一側同一張表、同一個意思。
-# 八個位移解出來全部是像樣的物品名，這就是這一段版面讀對了的證據。
-WORN_BASE, WORN_STRIDE, WORN_SLOTS = 0x30, 0x10, 7
+# RE-203：32-byte標頭後四組96-byte裝備，每組六件16-byte。
+# +0x80／+0x90已屬下一組，不能當第一組穿戴品。
+RECORD_BYTES, EQUIPMENT_BASE, EQUIPMENT_GROUPS, EQUIPMENT_BYTES = 513, 32, 4, 96
+WORN_BASE, WORN_STRIDE, WORN_SLOTS = 0x30, 0x10, 3
 TERRAIN_NAMES = ("DESERT", "RIVER", "SWAMP", "HILL",
                  "ROAD", "FOREST", "SHORE", "PLAINS")
 SEASON_NAMES = ("WINTER", "SPRING", "SUMMER", "AUTUMN")
@@ -104,7 +101,9 @@ def bits(mask: int, count: int, names: tuple[str, ...]) -> list[str]:
 def item(record: bytes, offset: int) -> dict | None:
     """怪物身上的一格裝備；空的回 None。"""
     block = record[offset:offset + 16]
-    if len(block) < 16 or not any(block):
+    if offset < 0 or len(block) != 16:
+        raise ValueError("裝備記錄截短或越界")
+    if block[0] == 0:
         return None
     out = good(block, 0)
     out["offset"] = offset
@@ -152,12 +151,18 @@ def main() -> int:
 
     with zipfile.ZipFile(zip_path) as zf:
         _, parts = payloads(read_volumes(zf, "TOWN0"), "TOWN0")
+        if len(parts) < FIRST_MONSTER_PAYLOAD + MONSTER_COUNT:
+            raise SystemExit("TOWN0 payload數量不足")
         table = lzw_decode(parts[TABLE_PAYLOAD])
+        if len(table) < SEASON_MASKS + MONSTER_COUNT:
+            raise SystemExit("遭遇與遮罩表截短")
         records = [lzw_decode(parts[FIRST_MONSTER_PAYLOAD + i])
                    for i in range(MONSTER_COUNT)]
 
     monsters = []
     for i, rec in enumerate(records):
+        if len(rec) != RECORD_BYTES:
+            raise SystemExit(f"怪物{i}記錄必須是{RECORD_BYTES}bytes，實際{len(rec)}")
         terrain, season = table[TERRAIN_MASKS + i], table[SEASON_MASKS + i]
         monsters.append({
             "index": i,
@@ -169,13 +174,13 @@ def main() -> int:
             "season": bits(season << 4, SEASON_COUNT, SEASON_NAMES),
             **{name: rec[off] for name, off in STAT_OFFSETS.items()},
             "encounter": encounter_lines(rec),
-            "worn": [good(rec[WORN_BASE + WORN_STRIDE * k:
-                            WORN_BASE + WORN_STRIDE * (k + 1)], k)
-                     for k in range(WORN_SLOTS)],
+            "worn": [item(rec, WORN_BASE + WORN_STRIDE*k) for k in range(WORN_SLOTS)],
             "flags": rec[FLAGS_OFFSET],
             "shatters": bool(rec[FLAGS_OFFSET] & FLAG_SHATTERS),
             "fearsome": bool(rec[FLAGS_OFFSET] & FLAG_FEARSOME),
             "flee_at": rec[FLEE_AT_OFFSET],
+            # SPEC-027／RE-182：原版共同出口從怪物+0x1B讀搜刮門檻。
+            "loot_chance": rec[0x1B],
             "ranged_chance": rec[0x1E],
             "ranged_code": rec[0x1F],
             "flee_recover": rec[FLEE_RECOVER_OFFSET],
@@ -193,6 +198,13 @@ def main() -> int:
             "style_weights": list(rec[STYLE_WEIGHTS:STYLE_WEIGHTS + 10]),
             "location_weights": list(rec[LOCATION_WEIGHTS:LOCATION_WEIGHTS + 7]),
             "move_weights": list(rec[MOVE_WEIGHTS:MOVE_WEIGHTS + 3]),
+            "decoded_bytes": len(rec),
+            "equipment_variants": [
+                {"source_offset": EQUIPMENT_BASE + EQUIPMENT_BYTES * v,
+                 "records": [rec[EQUIPMENT_BASE+EQUIPMENT_BYTES*v+16*k:EQUIPMENT_BASE+EQUIPMENT_BYTES*v+16*(k+1)].hex() for k in range(6)],
+                 "items": [item(rec, EQUIPMENT_BASE + EQUIPMENT_BYTES*v + 16*k)
+                           for k in range(6)]}
+                for v in range(EQUIPMENT_GROUPS)],
             "record_sha256": hashlib.sha256(rec).hexdigest(),
         })
 
@@ -206,14 +218,14 @@ def main() -> int:
         })
 
     doc = {
-        "schema": "kol-monster-data-v1",
+        "schema": "kol-monster-data-v2",
         "tool": "tools/extract_monsters.py",
         "source_zip": {"name": zip_path.name, "sha256": digest},
         "source_archive": {"root": "Knights-of-legend/TOWN0",
                            "table_payload": TABLE_PAYLOAD,
                            "monster_payloads": [FIRST_MONSTER_PAYLOAD,
                                                 FIRST_MONSTER_PAYLOAD + MONSTER_COUNT - 1]},
-        "evidence": "RE-078／RE-112",
+        "evidence": "RE-078／RE-112／RE-182／RE-203；SPEC-011第13節",
         "rights": {
             "classification": "private-repo 可保存；不得公開散布",
             "note": "衍生自原版資料檔，著作權仍屬原權利人；公開前須重新權利審查。"
@@ -224,7 +236,7 @@ def main() -> int:
                       "程式除以 2 之後才當百分比",
             "terrain_mask": f"payload4[0x{TERRAIN_MASKS:X} + 怪物]",
             "season_mask": f"payload4[0x{SEASON_MASKS:X} + 怪物]",
-            "monster_record": "payload 5 + 怪物，一筆 512 byte：第 0 byte 是名稱長度，"
+            "monster_record": "payload 5 + 怪物，一筆 513 byte：第 0 byte 是名稱長度，"
                               "名稱接在後面；屬性從 +0x11 起（RE-080）",
             "encounter": f"記錄 +0x{ENCOUNTER_OFFSET:X} 起 {ENCOUNTER_SLOTS} 格文字，"
                          "一格 16 byte（字數 ＋ 每 5 個 bit 一個字元），"

@@ -1,0 +1,42 @@
+{
+  "label": "after-en-warder-reload-v2",
+  "command": [
+    "workplace/platform-smoke-20261001/build/kol-linux",
+    "-scene",
+    "play",
+    "-seed",
+    "1",
+    "-lang",
+    "en",
+    "-display-names",
+    "docs/i18n/display-names-zh-Hant.tsv",
+    "-play-script",
+    "1 > RET D D D D D D D RET",
+    "-shot-dir",
+    "workplace/cjk-held-names-20261001/after-en-warder-reload-v2",
+    "-shot-steps",
+    "0,3,10,11",
+    "-trace",
+    "workplace/cjk-held-names-20261001/after-en-warder-reload-v2/trace.json",
+    "-load",
+    "workplace/cjk-held-names-20261001/after-en-warder-save-v2.json"
+  ],
+  "returncode": 0,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "catalog_sha256": "679d011aa245f644584b88d8b8614e24edcc9b080a375f4deea9ecaf28812e4b",
+  "seed": 1,
+  "inputs": [
+    "1",
+    ">",
+    "RET",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "RET"
+  ],
+  "expected_states": 12
+}

@@ -4,6 +4,10 @@ import "testing"
 
 // planningState 擺一場只有一名隊員的戰鬥，並把規劃段推到那一名頭上。
 func planningState(m Member) *State {
+	// 部位耐久由體型與健康算出；兩者都是 0 會讓六個部位全是 0，等於手腳都廢了。
+	if m.Size == 0 && m.Health == 0 {
+		m.Size, m.Health = 40, 40
+	}
 	site := testSite()
 	site.Count = 0
 	s := NewQuest(site, []Member{m}, testMonster(), NewField())
@@ -104,7 +108,16 @@ func TestPlanningMissileRemembersTarget(t *testing.T) {
 	if s.Plan.Cursor.Mode != CursorRanged {
 		t.Fatalf("射擊應該用 mode 2 的游標，得到 %d", s.Plan.Cursor.Mode)
 	}
-	s.MoveCursor(-2, 0, false) // 從中心往上兩格，落在外圈
+	if s.Plan.Cursor.Row != 0 || s.Plan.Cursor.Col != 0 {
+		t.Fatal("首次射擊應從左上角開始")
+	}
+	// RE-171 gui10：沿左邊、下邊正常走到右下角，越界方向鍵留在邊界。
+	for n := 0; n < 9; n++ {
+		s.MoveCursor(1, 0, false)
+	}
+	for n := 0; n < 9; n++ {
+		s.MoveCursor(0, 1, false)
+	}
 	if !commitThenYes(t, s) {
 		t.Fatal("射擊確定目標就該收尾")
 	}
@@ -113,7 +126,7 @@ func TestPlanningMissileRemembersTarget(t *testing.T) {
 		t.Fatalf("射擊應該寫 %#x／0／0，得到 %#x／%d／%d",
 			CmdMissile, a.Command, a.Style, a.Guard)
 	}
-	want := Cell{Row: a.X - 2, Col: a.Y}
+	want := Cell{Row: a.X + 4, Col: a.Y + 4}
 	if got := s.Plan.Memo[0]; got != want {
 		t.Fatalf("記住的目標是 (%d, %d)，應該是 (%d, %d)",
 			got.Row, got.Col, want.Row, want.Col)
@@ -334,7 +347,7 @@ func TestPlanningYesRepeatsLastCommand(t *testing.T) {
 	}
 }
 
-// 寫回武器攻擊之後，主指令列重畫時把面向那一格標出來，但只在那一格有人時（`0x1F16A`）。
+// RE-171：主指令摘要不依格上有人與否，人物條件只控制合成暫存重建。
 func TestPlanningSummaryMarksTarget(t *testing.T) {
 	s := planningState(Member{Name: "Poontang", HasWeapon: true, Weapon: Weapon{Kind: 0x20, Code: 1}})
 	a := &s.Actors[0]
@@ -350,10 +363,33 @@ func TestPlanningSummaryMarksTarget(t *testing.T) {
 	if !s.Plan.SummaryShown || s.Plan.Summary != (Cell{Row: 3, Col: 4}) {
 		t.Fatalf("應標出 (3,4)，得到 %v／%v", s.Plan.Summary, s.Plan.SummaryShown)
 	}
-	// 反面對照：那一格沒有人就不標。
+	// 原版正常空摘要的回歸：格上沒有人仍標，取消或休息才清掉。
 	s.Actors[PartySlots].Side = SideEmpty
 	s.BeginTurn()
+	if !s.Plan.SummaryShown {
+		t.Fatal("空目標格仍應標示圓環")
+	}
+	s.LastCommand = CmdRest
+	s.Actors[0].Command = CmdRest
+	s.BeginTurn()
 	if s.Plan.SummaryShown {
-		t.Fatal("目標格沒有人時不該標")
+		t.Fatal("休息命令不應標示圓環")
+	}
+}
+
+// 原版gui7 plan-09→10：前一人移動，換到指令0的Theodoric主列後摘要必須清掉。
+func TestPlanningSummaryReloadsCurrentActorCommand(t *testing.T) {
+	s := planningState(Member{Name: "Theodoric"})
+	s.LastCommand = CmdMove
+	s.Actors[0].Command = 0
+	s.BeginTurn()
+	if s.LastCommand != 0 || s.Plan.SummaryShown {
+		t.Fatal("主列重建不應沿用前一人物／AI的移動指令")
+	}
+	s.LastCommand = CmdRest
+	s.Actors[0].Command = CmdWeapon
+	s.BeginTurn()
+	if s.LastCommand != CmdWeapon || !s.Plan.SummaryShown {
+		t.Fatal("主列應從目前人物重新載入已決定的指令")
 	}
 }

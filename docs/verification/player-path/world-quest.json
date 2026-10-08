@@ -13,7 +13,7 @@
   "checkpoints": [
     {
       "step": 89,
-      "identical_to": "docs/verification/remake-parity/shots/world-quest/intro.png",
+      "identical_to": "docs/verification/inventory-empty-slots-20261001/weather-quest-intro.png",
       "note": "任務提示那一頁，與已對拍的截圖逐 byte 相同"
     },
     {
@@ -21,5 +21,6 @@
       "identical_to": "docs/verification/remake-parity/shots/world-quest/creatures.png",
       "note": "答應之後的滿版怪物圖，與已對拍的截圖逐 byte 相同"
     }
-  ]
+  ],
+  "reference_correction": "RE-164／SPEC-026天候修正後的正常截圖；原版已驗區域另見inventory-empty-slots-20261001/region-receipt-*.json，舊圖與原始比較條件保留。"
 }

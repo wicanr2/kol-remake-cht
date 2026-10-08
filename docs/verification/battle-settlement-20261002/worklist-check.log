@@ -1,0 +1,122 @@
+已回寫 WORKLIST.md
+已回寫 CONTEXT.md 的統計區塊
+正反對照通過：每一種 kind 都驗過「訊號在」與「訊號拿掉」兩個方向。
+id                                 狀態             依據
+----------------------------------------------------------------------------------------------------
+g03-arena-vertical-chain           仍未完成           自承還在 docs/verification/player-path/arena.json
+g06-audio-listening-gate           仍未完成           自承還在 docs/spec/004-ogg-audio-catalog.md
+g07-battle-speed-options           仍未完成           自承還在 docs/spec/028-optional-battle-speed.md
+v01-full-battle-parity             仍未完成           要人判（沒有機器訊號）
+v02-appimage-platform-acceptance   仍未完成           要人判（沒有機器訊號）
+dosgolem-gui-ai-acceptance         仍未完成           要人判（沒有機器訊號）
+asset-inventory-format-spec        仍未完成           要人判（沒有機器訊號）
+pit-square-wave-synth              仍未完成           自承還在 docs/spec/004-ogg-audio-catalog.md
+ogg-conversion-pipeline            仍未完成           自承還在 docs/spec/004-ogg-audio-catalog.md
+text-layout-remaining-screens      仍未完成           要人判（沒有機器訊號）
+cjk-remaining-screens              仍未完成           要人判（沒有機器訊號）
+title-thunder-audio-hookup         仍未完成           還沒出現
+cross-platform-build-smoke         仍未完成           要人判（沒有機器訊號）
+longest-cjk-visual-regression      仍未完成           要人判（沒有機器訊號）
+windows-macos-real-machine         仍未完成           自承還在 tools/verify_dist.sh
+github-release                     仍未完成           要人判（沒有機器訊號）
+v01-remaining-battle-chain         仍未完成           自承還在 docs/spec/009-combat-attack.md
+save-across-battle-and-clock       仍未完成           要人判（沒有機器訊號）
+dist-rebuild-version-number        仍未完成           要人判（沒有機器訊號）
+ui-details-unverified              仍未完成           自承還在 internal/battle/spoils.go
+mouse-original-semantics           仍未完成           要人判（沒有機器訊號）
+character-creation-boundary-parity 仍未完成           要人判（沒有機器訊號）
+
+已核實完成（跑的是回歸檢查：訊號還在＝仍然完成）
+----------------------------------------------------------------------------------------------------
+g01-cjk-sheet-pages                仍然完成           3 個都有了
+g05-picture-shield-editor-spec     仍然完成           3 個都有了
+planning-yes-confirm               仍然完成           2 個都有了
+ai-style-mask-tail                 仍然完成           3 個都有了
+d01-spec-stale-clauses             仍然完成           3 個都有了
+battle-normal-seed-alignment       仍然完成           3 個都有了
+inn-farewell-diff-review           仍然完成           2 個都有了
+town7-door21-missing-text          仍然完成           2 個都有了
+appimage-parity-continuation       仍然完成           1 個都有了
+a01-a02-identity-and-save          仍然完成           2 個都有了
+a03-a04-writeback-and-contract     仍然完成           3 個都有了
+a05-a06-a09-belt-ward-nutrition    仍然完成           3 個都有了
+a07-a08-cjk-and-inn                仍然完成           3 個都有了
+a10-battle-info-panel              仍然完成           3 個都有了
+armour-durability-ai-review        仍然完成           3 個都有了
+spec-backfill-stale-clauses        仍然完成           3 個都有了
+weather-animation-and-speed        仍然完成           2 個都有了
+spec-manual-page-links             仍然完成           5 個都有了
+atlas-and-contact-tables           仍然完成           4 個都有了
+runtime-format-guard-test          要人判            完成後沒有訊號可綁
+release-asset-separation           仍然完成           4 個都有了
+roster-full-ui-oracle              仍然完成           3 個都有了
+package-boundaries-and-injection   仍然完成           2 個都有了
+minimal-player-chain               仍然完成           3 個都有了
+picture-shield-bitmap-editor       仍然完成           3 個都有了
+building-followup-dialogue         仍然完成           2 個都有了
+attack-row-and-target-cursor       仍然完成           4 個都有了
+target-mode-icon-bar-mouse         仍然完成           1 個都有了
+spec-ready-before-implement        仍然完成           2 個都有了
+terminology-and-safe-rects         仍然完成           2 個都有了
+parity-sampling-registry           仍然完成           2 個都有了
+appimage-rebuild-latest-fixes      仍然完成           1 個都有了
+train-forge-entry-condition        仍然完成           2 個都有了
+dist-package-sha256-verification   仍然完成           2 個都有了
+world-battle-click-regions         仍然完成           2 個都有了
+inn-disband-exit                   仍然完成           2 個都有了
+attack-message-chain-index         仍然完成           2 個都有了
+sub-26c5f-damage-line              仍然完成           2 個都有了
+enemy-move-direction-unhooked      仍然完成           1 個都有了
+counterscan-style-and-retry        仍然完成           2 個都有了
+actor-record-05-ability            仍然完成           2 個都有了
+sub-21e0b-filter-contradiction     仍然完成           3 個都有了
+battle-silent-steps-inventory      仍然完成           2 個都有了
+move-unlock-tile-reason            仍然完成           3 個都有了
+actor-record-25-reader             仍然完成           2 個都有了
+sub-1aae8-params                   仍然完成           2 個都有了
+victory-drop-sub-289ee             仍然完成           2 個都有了
+town-typing-input-box              仍然完成           2 個都有了
+word-2df2c-outdoor-switch          仍然完成           2 個都有了
+quest-item-0xb926                  仍然完成           2 個都有了
+world-clock-threshold-mechanism    仍然完成           3 個都有了
+chardata-writer-untraced-fields    仍然完成           1 個都有了
+planning-25-not-verified           仍然完成           1 個都有了
+begin-round-flee-icon              仍然完成           3 個都有了
+koldata-action-messages            仍然完成           1 個都有了
+reshuffle-behavior-address         仍然完成           2 個都有了
+spec-unsolved-sections             仍然完成           2 個都有了
+spell-target-figure                仍然完成           2 個都有了
+actor-record-2c                    仍然完成           2 個都有了
+quest-count-ff-writer              仍然完成           3 個都有了
+spec029-wiring-review              仍然完成           1 個都有了
+license-into-packages              仍然完成           2 個都有了
+sheet-items-and-party-portrait     仍然完成           2 個都有了
+party-limit-six-boundary           仍然完成           3 個都有了
+extraction-docker-image            仍然完成           已經出現在 tools/run_python_tool.sh
+wilderness-cloud-animation         仍然完成           已經出現在 internal/ui/world.go
+monster-unarmed-weapon-source      仍然完成           已經出現在 internal/battle/attack.go
+save-v1-entry-replacement          仍然完成           已經出現在 internal/save/save.go
+region-dat-provenance              仍然完成           2 個都有了
+planning-current-slot-semantics    仍然完成           2 個都有了
+planning-other-commands-unwalked   仍然完成           2 個都有了
+battle-target-cursor-click         仍然完成           2 個都有了
+cjk-sheet-subpages                 仍然完成           已經出現在 docs/spec/030-cjk-character-sheet.md
+screenshot-png-nondeterminism      要人判            完成後沒有訊號可綁
+player-path-receipts-stale         要人判            完成後沒有訊號可綁
+battle-receipts-stale              仍然完成           2 個都有了
+path-verify-does-not-replay        仍然完成           2 個都有了
+cjk-battle-remaining-pages         要人判            完成後沒有訊號可綁
+town-untranslated-source-slot-reachability 仍然完成           2 個都有了
+quest-turnin-original-same-state   仍然完成           3 個都有了
+plan-key-replans                   仍然完成           3 個都有了
+combat-result-pictures             仍然完成           3 個都有了
+sheet-digit-outside                仍然完成           3 個都有了
+building-portrait-click-speaker    仍然完成           2 個都有了
+
+未完成 22 條；已核實完成 84 條（都跑過回歸檢查）。
+其中 13 條沒有機器訊號，要人判：v01-full-battle-parity、v02-appimage-platform-acceptance、dosgolem-gui-ai-acceptance、asset-inventory-format-spec、text-layout-remaining-screens、cjk-remaining-screens、cross-platform-build-smoke、longest-cjk-visual-regression、github-release、save-across-battle-and-clock、dist-rebuild-version-number、mouse-original-semantics、character-creation-boundary-parity
+
+★ 有 1 行自承沒有條目認領（跑 scan 看細節）：
+  - docs/spec/027-battle-exit-wounds.md:40　與住宿保存／重載的完整垂直鏈尚未完成。
+
+WORKLIST.md 與 CONTEXT.md 的產生區塊都與 JSON 同步。

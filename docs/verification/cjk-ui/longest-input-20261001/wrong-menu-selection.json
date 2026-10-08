@@ -1,0 +1,93 @@
+{
+  "scope": "現行正式鍵盤可輸入的英文與空白；從標題正常建角核實滿16字、退格、游標、種族前進與肖像名牌。不宣稱中文輸入、重名政策或原版一致。",
+  "seed": 1,
+  "seed_method": "執行前 -seed 1",
+  "capacity": 16,
+  "widest_letter": "W",
+  "letter_advance": 15,
+  "space_advance": 16,
+  "all_space_capacity_width": 256,
+  "cases": {
+    "letters": {
+      "tokens": [
+        "SPACE",
+        "SPACE",
+        "5",
+        "RET",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "BS",
+        "W",
+        "W",
+        "W",
+        "RET",
+        "RET",
+        "RET",
+        "D",
+        "RET"
+      ],
+      "shots": [
+        4,
+        19,
+        20,
+        22,
+        23,
+        28
+      ],
+      "maximum_text": "WWWWWWWWWWWWWWWW",
+      "width": 240
+    },
+    "spaces": {
+      "tokens": [
+        "SPACE",
+        "SPACE",
+        "5",
+        "RET",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "SPACE",
+        "W",
+        "W",
+        "RET",
+        "RET",
+        "RET",
+        "D",
+        "RET"
+      ],
+      "shots": [
+        4,
+        19,
+        20,
+        21,
+        26
+      ],
+      "maximum_text": "               W",
+      "width": 255
+    }
+  }
+}

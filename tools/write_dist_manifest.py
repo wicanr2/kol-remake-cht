@@ -5,7 +5,7 @@
 素材 deny-list 與授權文件。這一支負責 manifest 那一項，其餘由
 `tools/build_dist.sh` 做。
 
-  tools/run_python_tool.sh tools/write_dist_manifest.py --dist dist-all/0.1.0 --version 0.1.0
+  tools/run_python_tool.sh tools/write_dist_manifest.py --dist dist-all/v.1.0.0-20260901 --version v.1.0.0-20260901
 """
 
 from __future__ import annotations

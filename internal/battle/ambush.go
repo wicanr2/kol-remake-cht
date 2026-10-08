@@ -258,7 +258,31 @@ func NewAmbush(a *Ambush, monster Monster, party []Member, field *Field) *State 
 	}
 	s := NewQuest(site, party, monster, field)
 	s.Stage = StageEncounter
+	s.ambushPending = true
 	return s
+}
+
+// placeAmbushEnemies 是 sub_1E3A8:0x1EA13..0x1EB87 的進場校正（RE-202）。
+// 每隻敵人擲一次起點，從當時的位置逐步檢查八個方向；成功後仍繼續。
+// 這兩張表不同於 AI 的方環表，保留原版 DGROUP:0x0C1C／0x0C2C 順序。
+func (s *State) placeAmbushEnemies(rng Rand) {
+	dx := [8]int{0, 1, 1, 1, 0, -1, -1, -1}
+	dy := [8]int{-1, -1, 0, 1, 1, 1, 0, -1}
+	for slot := PartySlots; slot < len(s.Actors); slot++ {
+		a := &s.Actors[slot]
+		if a.Side != SideMonster {
+			continue
+		}
+		first := rng.Roll(8) - 1
+		for step := 0; step < 8; step++ {
+			dir := (first + step) % 8
+			x, y := a.X+dx[dir], a.Y+dy[dir]
+			if s.actorAt(x, y) >= 0 || s.Field.At(x, y) == TileScatter {
+				continue
+			}
+			a.X, a.Y = x, y
+		}
+	}
 }
 
 // AmbushLines 是「YOU HAVE BEEN AMBUSHED BY n, LEVEL m NAMES!」那一句要用的記錄與

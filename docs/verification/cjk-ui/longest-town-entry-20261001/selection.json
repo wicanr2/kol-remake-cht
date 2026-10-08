@@ -1,0 +1,75 @@
+{
+  "scope": "正式 town-entry 全母體最寬之一，由標題、正常六人招募與城內方向鍵抵達；不宣稱其他欄位或原版完成",
+  "population_count": 451,
+  "maximum_width": 240,
+  "selected": [
+    {
+      "kind": "town-entry",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+      "zh": "寂靜的石牆在你四周聳立，你走進",
+      "x": 315,
+      "width": 240,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-entry",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+      "zh": "要塞，爬上崩塌的石階，沿著胸牆",
+      "x": 315,
+      "width": 240,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-entry",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+      "zh": "走到轉角塔樓一扇敞開的門前。",
+      "x": 315,
+      "width": 224,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-entry",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+      "zh": "一個男人坐在裡面。",
+      "x": 315,
+      "width": 144,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    }
+  ],
+  "town": 7,
+  "door": 21,
+  "position": [
+    20,
+    36
+  ],
+  "door_step": 139,
+  "inside_step": 140,
+  "start": [
+    57,
+    8
+  ],
+  "walk_moves": 77,
+  "seed": 1,
+  "seed_method": "執行前 -seed 1",
+  "load": null,
+  "monsters": null,
+  "ambush_rolls": null,
+  "report_sha256": "c8b81562610e724e371f2df34b617dc4bf65de9fda23d5cc583a4de4ec874459",
+  "map_sha256": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f"
+}

@@ -97,16 +97,8 @@ type Round struct {
 	inspectionRand     Rand
 }
 
-// BeginPlanning 開新的一回合：先跑一次法術倒數，再排出誰先決定。空位排最後。
+// BeginPlanning 開新的一回合，排出誰先決定。法術倒數已在回合末結算（RE-208）。
 func (s *State) BeginPlanning(rng Rand) {
-	// 排順序之前先跑一次法術倒數（`sub_1E3A8:0x20F01`）：過期的把屬性重算回原值，
-	// 因為規劃鍵值要用洞察，而洞察本身可能正被法術改著。
-	s.WoreOff = s.WoreOff[:0]
-	for i := range s.Actors {
-		if s.WearsOff(i) {
-			s.WoreOff = append(s.WoreOff, i)
-		}
-	}
 	s.Round.Number++
 	s.Round.Replans = 0 // `0x2119B`
 	s.Replan(rng)
@@ -116,6 +108,8 @@ func (s *State) BeginPlanning(rng Rand) {
 // `word_30D00` 加一（`0x1F04C`）。「Begin next round?」選 U-TURN 或在
 // 逃走格答 n 都跳回這裡（RE-143），**不經過**回合結束的法術倒數 `0x20F01`。
 func (s *State) Replan(rng Rand) {
+	s.Exec.viewActor, s.Exec.viewBefore = nil, nil
+	s.initializeMonsterEquipment(rng)
 	s.InitializeMonsterRanged(rng)
 	s.Round.inspectionRand = rng
 	s.Round.inspectionPosition = 0
@@ -168,6 +162,9 @@ func (s *State) AdvanceToParty() {
 	for s.Round.Turn < len(s.Round.Order) {
 		i := s.Round.Order[s.Round.Turn]
 		if s.Actors[i].Side == SideParty {
+			// RE-248：原版 0x1F15F 只在可行動隊員規劃時重畫。
+			focus := i
+			s.Exec.viewActor, s.Exec.viewBefore = &focus, nil
 			break
 		}
 		// 輪到敵人就讓 AI 決定那一手（RE-081／RE-092）。原版是規劃段呼叫
@@ -178,15 +175,13 @@ func (s *State) AdvanceToParty() {
 		s.Round.Turn++
 		s.skipDown()
 	}
-	s.Cursor = s.Current()
-	if s.Cursor < 0 {
-		s.Cursor = 0
-	}
 }
 
 // skipDown 跳過倒下或空掉的位置（`sub_1E3A8:0x1F085` 的 `sub_22866` 檢查）。
 func (s *State) skipDown() {
 	for s.Round.Turn < len(s.Round.Order) {
+		// RE-248：原版 0x1F070 在倒地檢查前保存目前槽位。
+		s.Cursor = s.Round.Order[s.Round.Turn]
 		if s.Round.inspectionPosition != s.Round.Turn+1 {
 			rng := s.Round.inspectionRand
 			if rng == nil {

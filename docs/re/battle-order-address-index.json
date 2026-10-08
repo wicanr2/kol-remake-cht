@@ -1,0 +1,197 @@
+{
+  "schema": "kol-battle-order-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x24fea": {
+      "semantic": "負重係數直接讀參戰者記錄+0x02；怪物也使用換算後的戰鬥等級。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261001-complete-battle.md RE-180；0x24FDC..0x24FFD及正常183次負重觀察。"
+    },
+    "0x24ffd": {
+      "semantic": "係數為70-(參戰者等級-1)*5，這段沒有怪物遭遇等級分支。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261001-complete-battle.md RE-180；0x24FEA..0x24FFD原始資料流。"
+    },
+    "0x25063": {
+      "semantic": "武器速度為選中的物品重量乘負重係數除以100。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261001-complete-battle.md RE-180；0x25041..0x25063，正常SLEDGE重量50、速度35。"
+    },
+    "0x251a7": {
+      "semantic": "將係數乘總重量除以100的結果寫到word_30C88；SLEDGE本情境負重87。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261001-complete-battle.md RE-180；0x25174..0x251A7及正常61回合唯讀觀察。"
+    },
+    "0x1fdb3": {
+      "semantic": "執行順序鍵值先呼叫sub_24FD3重算本名負重與武器速度。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261001-complete-battle.md RE-180；0x1FDAD..0x1FDC6及直接xref。"
+    },
+    "0x1fe78": {
+      "semantic": "執行排序的rand(100)返回點；此刻可觀測本名等級、已重算負重與速度。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261001-complete-battle.md RE-180；0x1FE6F..0x1FE80及183次正常呼叫記錄。"
+    },
+    "0x261a4": {
+      "semantic": "排序只在前鍵值大於後鍵值時交換；相同值保留原索引先後。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261001-complete-battle.md RE-180；0x2618F..0x261A6的CMP／JG及後續交換鍵值／+0x21。"
+    },
+    "0x27c0b": {
+      "semantic": "目標+0x1F減攻擊者+0x1F；正式Actor.X的差決定主索引。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-direction.md RE-219；245指令及表bytes核對，正常第五回合30/29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-219：座標索引勘誤"
+      }
+    },
+    "0x27c17": {
+      "semantic": "X差為零時主索引設4；正差8、負差0，見0x27C28／0x27C30。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-direction.md RE-219；245指令及表bytes核對，正常第五回合30/29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-219：座標索引勘誤"
+      }
+    },
+    "0x27c65": {
+      "semantic": "目標+0x20減攻擊者+0x20；正式Actor.Y的差決定次索引增量。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-direction.md RE-219；245指令及表bytes核對，正常第五回合30/29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-219：座標索引勘誤"
+      }
+    },
+    "0x27c81": {
+      "semantic": "Y負差加1；正差在0x27C71加2；零差不增加。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-direction.md RE-219；245指令及表bytes核對，正常第五回合30/29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-219：座標索引勘誤"
+      }
+    },
+    "0x27c8b": {
+      "semantic": "候選表為DGROUP:0x123A+3乘相對位置索引，rand(3)-1選候選。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-direction.md RE-219；245指令及表bytes核對，正常第五回合30/29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-219：座標索引勘誤"
+      }
+    },
+    "0x27d3a": {
+      "semantic": "擊退成功後方向表0x0C1C的值加到目標+0x1F，對應Actor.X。 以byte加法把0x0C1C方向值加到目標+0x1F；不追加實際落點碰撞檢查。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-direction.md RE-219；245指令及表bytes核對，正常第五回合30/29。 docs/re/20261004-knockback-vector.md RE-222；269指令及129表bytes、八方向原版與正常第七回合29／29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-222：碰撞格保持，成功位移採0C1C／0C2C"
+      }
+    },
+    "0x27d5a": {
+      "semantic": "擊退成功後方向表0x0C2C的值加到目標+0x20，對應Actor.Y。 以byte加法把0x0C2C方向值加到目標+0x20。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-direction.md RE-219；245指令及表bytes核對，正常第五回合30/29。 docs/re/20261004-knockback-vector.md RE-222；269指令及129表bytes、八方向原版與正常第七回合29／29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-222：碰撞格保持，成功位移採0C1C／0C2C"
+      }
+    },
+    "0x26115": {
+      "semantic": "半途人物成本對word_3237C做16位元減法。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-missile-pass-through.md RE-221；648指令bytes與24組原版完整彈道；正常第五回合0x124。",
+      "resolution": {
+        "evidence_spec": "docs/spec/013-combat-missiles.md",
+        "required_correction": "RE-221：半途人物負分數回繞勘誤"
+      }
+    },
+    "0x2611e": {
+      "semantic": "分數非負才走0x26123；負值繼續回到同格。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-missile-pass-through.md RE-221；648指令bytes與24組原版完整彈道；正常第五回合0x124。",
+      "resolution": {
+        "evidence_spec": "docs/spec/013-combat-missiles.md",
+        "required_correction": "RE-221：半途人物負分數回繞勘誤"
+      }
+    },
+    "0x2612b": {
+      "semantic": "負分數跳回0x260B1，重新尋找同格人物及扣成本。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-missile-pass-through.md RE-221；648指令bytes與24組原版完整彈道；正常第五回合0x124。",
+      "resolution": {
+        "evidence_spec": "docs/spec/013-combat-missiles.md",
+        "required_correction": "RE-221：半途人物負分數回繞勘誤"
+      }
+    },
+    "0x26123": {
+      "semantic": "非負分數設var_6=1，人物碰撞原因2保持。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-missile-pass-through.md RE-221；648指令bytes與24組原版完整彈道；正常第五回合0x124。",
+      "resolution": {
+        "evidence_spec": "docs/spec/013-combat-missiles.md",
+        "required_correction": "RE-221：半途人物負分數回繞勘誤"
+      }
+    },
+    "0x26137": {
+      "semantic": "var_6非零時回0，讓外層彈道繼續。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-missile-pass-through.md RE-221；648指令bytes與24組原版完整彈道；正常第五回合0x124。",
+      "resolution": {
+        "evidence_spec": "docs/spec/013-combat-missiles.md",
+        "required_correction": "RE-221：半途人物負分數回繞勘誤"
+      }
+    },
+    "0x25f62": {
+      "semantic": "sub_25F8A回0時繼續步進；半途人物回繞不停止。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-missile-pass-through.md RE-221；648指令bytes與24組原版完整彈道；正常第五回合0x124。",
+      "resolution": {
+        "evidence_spec": "docs/spec/013-combat-missiles.md",
+        "required_correction": "RE-221：半途人物負分數回繞勘誤"
+      }
+    },
+    "0x27ce6": {
+      "semantic": "以方向呼叫sub_24BB6(0,方向,8)檢查環0人物格。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-vector.md RE-222；269指令及129表bytes、八方向原版與正常第七回合29／29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-222：碰撞格保持，成功位移採0C1C／0C2C"
+      }
+    },
+    "0x27d07": {
+      "semantic": "以方向呼叫sub_24E2B(0,方向)檢查環0地形格。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-vector.md RE-222；269指令及129表bytes、八方向原版與正常第七回合29／29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-222：碰撞格保持，成功位移採0C1C／0C2C"
+      }
+    },
+    "0x27d22": {
+      "semantic": "成功位移X讀DGROUP:0x0C1C，與碰撞格X表0x0C4E不同。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-vector.md RE-222；269指令及129表bytes、八方向原版與正常第七回合29／29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-222：碰撞格保持，成功位移採0C1C／0C2C"
+      }
+    },
+    "0x27d42": {
+      "semantic": "成功位移Y讀DGROUP:0x0C2C，與碰撞格Y表0x0C3C不同。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-knockback-vector.md RE-222；269指令及129表bytes、八方向原版與正常第七回合29／29。",
+      "resolution": {
+        "evidence_spec": "docs/spec/009-combat-attack.md",
+        "required_correction": "RE-222：碰撞格保持，成功位移採0C1C／0C2C"
+      }
+    }
+  }
+}

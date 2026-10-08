@@ -1,0 +1,27 @@
+{
+  "schema": "kol-unarmed-resolution-audit-v1",
+  "receipt_sha256": "725c6210098138b46d9b674e3746a28f54a84395d15e26ab0f5465655a5aebaf",
+  "attachments": 2115,
+  "code_inputs": 318,
+  "parent_results_recomputed": true,
+  "full_readonly_verification": "passed",
+  "host_control": {
+    "schema": "kol-unarmed-host-control-v1",
+    "checked_at": "2026-10-02 19:31:44 UTC",
+    "head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "git_diff_check": "passed",
+    "git_staged": [],
+    "project_containers": [],
+    "other_project_container_count": 24,
+    "committed": false,
+    "pushed": false,
+    "remote_writes": false,
+    "release_or_package": false
+  },
+  "root_owned_files": [],
+  "md_directories": [],
+  "artifact_uid_gid": [
+    1000,
+    1000
+  ]
+}

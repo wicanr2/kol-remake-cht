@@ -1,0 +1,241 @@
+{
+  "status": "通過",
+  "receipt_sha256": "75616fa5be90046faff4e213412b57e4bee0a1a3514fed7e50fcda0f997b78e8",
+  "current_inputs": 528,
+  "attachments": {
+    "docs/verification/item-detail-20261001/mark-receipt.json": 27,
+    "docs/verification/item-detail-20261001/cjk-figure-receipt.json": 43,
+    "docs/verification/item-detail-20261001/mirror-receipt.json": 113,
+    "docs/verification/item-detail-20261001/actions-receipt.json": 94,
+    "docs/verification/item-detail-20261001/all-slots-receipt.json": 72,
+    "docs/verification/item-detail-20261001/receipt.json": 27,
+    "docs/verification/battle-target-cursor-20261001/receipt.json": 25,
+    "docs/verification/battle-target-cursor-20261001/remake-receipt.json": 145,
+    "docs/verification/battle-target-cursor-20261001/attack-row-receipt.json": 58
+  },
+  "previous_persistence_locked": [
+    {
+      "frame": 15,
+      "language": "en",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-15-en/save.json",
+      "sha256": "7dcdf5cb50e611cd3576caf8dfe3e76f207b272e7658cf25d55504dcbcd487c6",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 15,
+      "language": "en",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-15-en/save.json",
+      "sha256": "75baea7bd0bdd6e6ff849097057a150ab8d56c7b49139479c9896252f83e2882",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 15,
+      "language": "zh-Hant",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-15-zh-Hant/save.json",
+      "sha256": "244dc286c8d270a924adb15d7f86216b15a65666eba23be131ba6283c4714f33",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 15,
+      "language": "zh-Hant",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-15-zh-Hant/save.json",
+      "sha256": "ab687534027b4c8d062beae118b21b6b0c4efe1e63ce6f7fbdcb3fabdc65b58d",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 28,
+      "language": "en",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-28-en/save.json",
+      "sha256": "50852c9a1a62cdbf00fb41b40d4a6cdade2ce9f90cfe7bea15d0e66d7fb1ad49",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 28,
+      "language": "en",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-28-en/save.json",
+      "sha256": "7cea380eba74fb4154021fee1a9f4bbdfc3b9a1a97f160250ab94ed853f928db",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 28,
+      "language": "zh-Hant",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-28-zh-Hant/save.json",
+      "sha256": "6ca16c36260e08b516f91e99cafb167f39f0fc435ffc61748953a82ddb65bdad",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 28,
+      "language": "zh-Hant",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-28-zh-Hant/save.json",
+      "sha256": "92237072d089561d80fc1d553c7cb7ded8ff05c9a3b1c642c3188a5505bf9a61",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 42,
+      "language": "en",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-42-en/save.json",
+      "sha256": "bb8b4fb22bdc172325bc8338d50ecfe6e076db687d8d41582952784b79df681a",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 42,
+      "language": "en",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-42-en/save.json",
+      "sha256": "553e0fb1727e9ec4ce40631b8d090eb98c24b437a882ad28f8681de9dd07ad1b",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 42,
+      "language": "zh-Hant",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-42-zh-Hant/save.json",
+      "sha256": "3af6f959b527f358251f82551e1b3b22507c6825ac28180d168f62db55bf7268",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 42,
+      "language": "zh-Hant",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-42-zh-Hant/save.json",
+      "sha256": "fb6d34fbec73797bfc0a0c181c14fed52052e66a71250da5783c32e14deb8c9f",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 56,
+      "language": "en",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-56-en/save.json",
+      "sha256": "801501edbef080446591e73e53660546b3f9d0fe8d75f0ece6162bc209612afc",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 56,
+      "language": "en",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-56-en/save.json",
+      "sha256": "ea8c3ff6143a8bd4a32b419eddf52e032e7bdca729e7936dc41de420fe788db6",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 56,
+      "language": "zh-Hant",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-56-zh-Hant/save.json",
+      "sha256": "fc60bf2fb029499d33f537fd4e87f225448a7fe5d85ce9d93d997a87670614a1",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 56,
+      "language": "zh-Hant",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-56-zh-Hant/save.json",
+      "sha256": "f38d079177a232641a3f7d92daafe7dfc0df4eb1db4fee6d38ca19047c20f3c6",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 72,
+      "language": "en",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-72-en/save.json",
+      "sha256": "2e582b812913561a28f1ee24b7b85d7e2a7b0d25af226b1205e530fc81660993",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 72,
+      "language": "en",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-72-en/save.json",
+      "sha256": "df62334925b058b46ec9448d09665cd59abab47472ef24d4a5ef8ad4c5905ceb",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 72,
+      "language": "zh-Hant",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-72-zh-Hant/save.json",
+      "sha256": "843947af97bac929a8fde0c1ae78edf83480652593b936f05e887614e4f66f64",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 72,
+      "language": "zh-Hant",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-72-zh-Hant/save.json",
+      "sha256": "1e1e9228386c88691e11cd037dc5a269b92aaf58e88e4b8662e4526634e491ac",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 88,
+      "language": "en",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-88-en/save.json",
+      "sha256": "761839b1ee897213e6aec610d83ae1c5493cff7e858db348500817b77da3c80a",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 88,
+      "language": "en",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-88-en/save.json",
+      "sha256": "6b873ecac27ddd09af95d8d78de135aca4f995170c80d947960970a63b0cc5a7",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 88,
+      "language": "zh-Hant",
+      "phase": "save",
+      "path": "workplace/item-detail-20261001/save-cjk-figure-88-zh-Hant/save.json",
+      "sha256": "8f9a457e98026d824918b194c216c9e0a1634d904f2c75aa26b007119b7c5280",
+      "compared_with_RE175_except_saved_at": true
+    },
+    {
+      "frame": 88,
+      "language": "zh-Hant",
+      "phase": "reload",
+      "path": "workplace/item-detail-20261001/reload-cjk-figure-88-zh-Hant/save.json",
+      "sha256": "391124b5c7e109bac7d838462533b62308070f4ce6c0a14249e44659e4706d13",
+      "compared_with_RE175_except_saved_at": true
+    }
+  ],
+  "runner_scripts": [
+    {
+      "source": "remake_cjk_figure.py",
+      "source_sha256": "af2556642966a9beb46af702713c7d71e13fc11b3c754f72fa29a4064862cc99",
+      "path": "remake_mark.py",
+      "sha256": "8f76febb9dfbd5fe88a7b741d7e879e2c3890c462be9055af0eb749b4818633a"
+    },
+    {
+      "source": "save_cjk_figure.py",
+      "source_sha256": "0e06b619d378936298cdbc3dc5410fc30b52ba2faa603a3442810d4fe1b46c47",
+      "path": "save_mark.py",
+      "sha256": "c9d5b7b29ef75fd29c1d026aafa4f6dd1a9ddd5fef4f5a070a093adb7a151e84"
+    },
+    {
+      "source": "reload_cjk_figure.py",
+      "source_sha256": "f97a7b856dc4268055c909861fa997074e3a4e478d9f88994da4898511a2619c",
+      "path": "reload_mark.py",
+      "sha256": "ffa01a7f29bb1b98a2f2474726e9628620658a1cb9880226b2803ed8e6352eb0"
+    }
+  ],
+  "tests": {
+    "command": "GOWORK=off KOL_MARKER_ORACLE=1 go test ./internal/... ./cmd/kol -count=1",
+    "log": "workplace/item-detail-20261001/tests-mark.log",
+    "sha256": "23f95a01de964b6ebfcd1c81e203d60098ed0d07cc047fd7766645c9db62095d",
+    "circle_frames": 104
+  },
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned_or_md_directories": 0,
+  "unverified_list_frames": 70,
+  "limits": "手持技能列號座標窄切片；其他技能列母體、全部物品動作與英文x15續畫未全驗。"
+}

@@ -1,6 +1,7 @@
 package battle
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -10,7 +11,17 @@ import (
 // 才從記錄 +0x11 起讀出來的六個 byte：戰鬥要用洞察、體型與健康。
 
 // Monster 是一種怪物，欄位名與 `tools/extract_monsters.py` 的輸出相同。
+// MonsterEquipment保存一套六格：手持、頭甲、軀幹甲、腿甲、盾、遠程。
+type MonsterEquipment struct {
+	SourceOffset int      `json:"source_offset"`
+	Records      []string `json:"records"`
+	Items        []*Item  `json:"items"`
+}
+
 type Monster struct {
+	EquipmentVariants []MonsterEquipment `json:"equipment_variants"`
+	// LootChance 是共同出口搜刮倒地隊員的門檻，怪物記錄+0x1B（SPEC-027／RE-182）。
+	LootChance int `json:"loot_chance"`
 	// SPEC-029：初始化射擊資格，原版怪物記錄 +0x1E／+0x1F。
 	RangedChance int    `json:"ranged_chance"`
 	RangedCode   int    `json:"ranged_code"`
@@ -58,9 +69,8 @@ type Monster struct {
 	Weapon       *Item `json:"weapon"`
 	ArmourWeight int   `json:"armour_weight"`
 	Shield       *Item `json:"shield"`
-	// Worn 是記錄 `+0x30` 起那七格穿戴欄，順序與角色記錄的十格相同
-	// （HEAD／TORSO／LEGS／BODY／HANDS／FEET／SHIELD，RE-131）。徒手四式拿的
-	// 就是其中四格；射擊那一手拿的是 HANDS。
+	// Worn只保留第一組三件護甲的相容投影（RE-203）。
+	// 正式每隻敵人使用EquipmentVariants；怪物徒手取現行手持，不取此投影。
 	Worn []*Item `json:"worn"`
 	// Encounter 是遇到這一隻時印的四行敘述（記錄 +0x1C0 起那四格，RE-112）。
 	// 原版只在**問要不要騎走那一頁**印它——全隊都有坐騎才問得出那一句，
@@ -116,9 +126,9 @@ func (i *Item) CombatWeapon() Weapon {
 	if i == nil {
 		return Weapon{}
 	}
-	w := Weapon{Kind: i.Class, Base: i.Dice.Bonus,
+	w := Weapon{Kind: i.Class, Base: i.Dice.Bonus, Code: i.damageCode(),
 		Weight: i.Encumbrance, TwoHand: i.Hands == 1}
-	w.Count, w.Sides = DamageCode(i.damageCode())
+	w.Count, w.Sides = DamageCode(w.Code)
 	return w
 }
 
@@ -188,7 +198,7 @@ func LoadMonsters(path string) (*Monsters, error) {
 	if err := json.Unmarshal(body, &m); err != nil {
 		return nil, fmt.Errorf("解析怪物資料：%w", err)
 	}
-	if m.Schema != "kol-monster-data-v1" {
+	if m.Schema != "kol-monster-data-v2" {
 		return nil, fmt.Errorf("怪物資料 schema 不符：%q", m.Schema)
 	}
 	var fields struct {
@@ -197,7 +207,31 @@ func LoadMonsters(path string) (*Monsters, error) {
 	if err := json.Unmarshal(body, &fields); err != nil {
 		return nil, err
 	}
+	if len(m.List) != MonsterCount {
+		return nil, fmt.Errorf("怪物資料必須有%d種", MonsterCount)
+	}
+	seen := make([]bool, MonsterCount)
 	for i, mon := range m.List {
+		if mon.Index < 0 || mon.Index >= MonsterCount || seen[mon.Index] {
+			return nil, fmt.Errorf("怪物索引錯誤或重複：%d", mon.Index)
+		}
+		seen[mon.Index] = true
+		if len(mon.EquipmentVariants) != 4 {
+			return nil, fmt.Errorf("怪物%d必須有四套裝備", mon.Index)
+		}
+		for v, gear := range mon.EquipmentVariants {
+			if gear.SourceOffset != 32+96*v || len(gear.Items) != 6 || len(gear.Records) != 6 {
+				return nil, fmt.Errorf("怪物%d第%d套裝備形狀錯誤", mon.Index, v)
+			}
+			for k, it := range gear.Items {
+				if err := validateMonsterItem(it, gear.Records[k]); err != nil {
+					return nil, fmt.Errorf("怪物%d第%d套第%d格：%w", mon.Index, v, k, err)
+				}
+			}
+		}
+		if value := fields.List[i]["loot_chance"]; len(value) == 0 || string(value) == "null" || mon.LootChance < 0 || mon.LootChance > 255 {
+			return nil, fmt.Errorf("怪物 %d 缺少合法搜刮欄位，請重新抽取資料", mon.Index)
+		}
 		if len(fields.List[i]["ranged_chance"]) == 0 || len(fields.List[i]["ranged_code"]) == 0 ||
 			string(fields.List[i]["ranged_chance"]) == "null" || string(fields.List[i]["ranged_code"]) == "null" ||
 			mon.RangedChance < 0 || mon.RangedChance > 255 || mon.RangedCode < 0 || mon.RangedCode > 255 {
@@ -215,4 +249,32 @@ func (m *Monsters) At(index int) Monster {
 		}
 	}
 	return Monster{}
+}
+
+// 載入時確認已證實的typed數值與16-byte來源一致。空格以第一byte判定；原始填充仍保存在records。
+func validateMonsterItem(it *Item, record string) error {
+	raw, err := hex.DecodeString(record)
+	if err != nil || len(raw) != 16 {
+		return fmt.Errorf("物品record必須是16-byte合法hex")
+	}
+	if raw[0] == 0 {
+		if it != nil {
+			return fmt.Errorf("第一byte為零的空格必須用null")
+		}
+		return nil
+	}
+	if it == nil || it.Record != record {
+		return fmt.Errorf("非空格缺物品或record不符")
+	}
+	bonus := int(raw[8] >> 4)
+	if bonus > 7 {
+		bonus = 8 - bonus
+	}
+	count := int(raw[12])/32 + 1
+	displaySides := [8]int{3, 4, 6, 8, 10, 12, 20, 100}
+	sides := displaySides[(int(raw[12])/4)&7]
+	if it.Name == "" || it.Price != int(raw[8]&15)*256+int(raw[9]) || it.Kind != int(raw[12]&3) || it.Damage != (raw[12]&1 != 0) || it.Hands != int(raw[13]&2)>>1 || it.Class != int(raw[13]) || it.Position != int(raw[14]>>4) || it.SizeClass != int(raw[14]&15) || it.Encumbrance != int(raw[10]) || it.Condition != int(raw[11]) || it.Dice.Count != count || it.Dice.Sides != sides || it.Dice.Bonus != bonus {
+		return fmt.Errorf("物品typed欄位與record不符")
+	}
+	return nil
 }

@@ -1,0 +1,89 @@
+{
+  "scope": "最長資料顯示名稱112像素的正常酒館購買與背包檢視；只驗商品清單、商品明細與背包小框／明細，不把酒館食品當武器。",
+  "population_count": 420,
+  "maximum_width": 112,
+  "selected": [
+    {
+      "kind": "display-name-shop-list",
+      "en": "Girak Helbak",
+      "zh": "吉拉克赫爾巴克",
+      "x": 0,
+      "width": 112,
+      "right_limit": 553,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject+runtime-clip"
+    }
+  ],
+  "town": 7,
+  "door": 13,
+  "position": [
+    38,
+    26
+  ],
+  "good": {
+    "index": 5,
+    "name": "Girak Helbak",
+    "price": 35,
+    "kind": 0,
+    "damage": false,
+    "hands": 0,
+    "class": 0,
+    "position": 10,
+    "encumbrance": 0,
+    "size_class": 0,
+    "condition": 55,
+    "dice": {
+      "count": 1,
+      "sides": 3,
+      "bonus": 0,
+      "low": 1,
+      "high": 3
+    },
+    "record": "c3a641581056082b002300370000a000"
+  },
+  "steps": {
+    "door": 103,
+    "entry": 104,
+    "greeting": 106,
+    "list": 111,
+    "selected": 116,
+    "shop_detail": 117,
+    "eat_question": 118,
+    "packed": 120,
+    "end_shop": 122,
+    "sheet": 124,
+    "items": 126,
+    "pocket": 137,
+    "item_detail": 138
+  },
+  "shot_steps": [
+    103,
+    104,
+    106,
+    111,
+    116,
+    117,
+    118,
+    120,
+    122,
+    124,
+    126,
+    137,
+    138
+  ],
+  "walk_moves": 41,
+  "seed": 1,
+  "seed_method": "執行前 -seed 1",
+  "load": null,
+  "monsters": null,
+  "ambush_rolls": null,
+  "inputs_sha256": {
+    "docs/verification/cjk-text-fit.json": "89f888a8f582169a45c9d83b557a0bf4d5c1660acff8f7fae1c8c3eaaa331ec6",
+    "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-png/ega/TOWN7/town7-map.png": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f",
+    "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f"
+  }
+}

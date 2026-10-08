@@ -16,8 +16,8 @@
     "fields": [
       {
         "field": "schema",
-        "want": "kol-save-v1",
-        "got": "kol-save-v1",
+        "want": "kol-save-v3",
+        "got": "kol-save-v3",
         "pass": true
       },
       {
@@ -57,49 +57,55 @@
         "pass": true
       },
       {
-        "field": "party[0].name",
+        "field": "characters[0].name",
         "want": "Theodoric",
         "got": "Theodoric",
         "pass": true
       },
       {
-        "field": "party[0].gold",
+        "field": "characters[0].gold",
         "want": 953,
         "got": 953,
         "pass": true
       },
       {
-        "field": "party[0].wounds",
+        "field": "characters[0].wounds",
         "want": 0,
         "got": 0,
         "pass": true
       },
       {
-        "field": "party[0].place",
+        "field": "characters[0].place",
         "want": "HALFWAY HO",
         "got": "HALFWAY HO",
         "pass": true
       },
       {
-        "field": "party[0].town_code",
+        "field": "characters[0].town_code",
         "want": "MIN",
         "got": "MIN",
         "pass": true
       },
       {
-        "field": "party[0].building_id",
+        "field": "characters[0].building_id",
         "want": 86,
         "got": 86,
         "pass": true
       },
       {
-        "field": "party[0].speaker",
-        "want": true,
-        "got": true,
+        "field": "speaker",
+        "want": 0,
+        "got": 0,
+        "pass": true
+      },
+      {
+        "field": "party[0]",
+        "want": 0,
+        "got": 0,
         "pass": true
       }
     ],
-    "sha256_without_saved_at": "ef7628b5127985d60644d11edeca245fa3cee29a40b6675267c372734aa0a76b"
+    "sha256_without_saved_at": "0fa6bf2d67b81cbc780e47924b21729e9109757498f3984b70271e732a1a8bdd"
   },
   "failures": [],
   "steps": [

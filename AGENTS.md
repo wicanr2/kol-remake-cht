@@ -140,6 +140,12 @@
 
 README 不得累積日期 checkpoint、失敗嘗試或 commit 流水帳。歷史不得反向覆蓋目前狀態。
 
+### 比較工作區清理
+
+每次原型比較或對拍驗證完成後，保存必要證據、核對雜湊並修正引用，再刪除
+`workplace/` 中該次工作目錄。只清理已完成且已保存的範圍，不刪其他任務資料。
+本機壓縮證據、工具及核對方法見 [docs/verification/retained-evidence.md](docs/verification/retained-evidence.md)。
+
 ## 驗證、交付與完成定義
 
 - 先分開「可啟動」、「可玩」、「近似完成」與「嚴格 parity」，並預先登記每階段 gate；

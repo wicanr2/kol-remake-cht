@@ -1,0 +1,2491 @@
+{
+  "schema": "kol-target-marker-remake-v1",
+  "date": "2026-10-01",
+  "status": "CONFORMED，限SPEC-010圓環來源／合成／列出的等待層、首次遠程初值與主列重載目前人物指令；父規格未結案",
+  "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+  "image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+  "binary": {
+    "path": "workplace/battle-cursor-20261001/kol-ring-linux-final",
+    "sha256": "ac79bb47fc5d19c54fffe838e2d991c0d7b76497d9432e0a1c1885fd75bf847d"
+  },
+  "original_base": {
+    "path": "receipt.json",
+    "sha256": "4dbcf84cc67b838b61a35cd7a6fd5051b25acdf6dc54527923b9ff80d1ed287a"
+  },
+  "original_lifecycle": {
+    "path": "lifecycle-receipt.json",
+    "sha256": "6c60995124bcbb166c7438022e333853ed00cd46968fa14c95b9ac0163373963"
+  },
+  "original_replay": [
+    {
+      "run": "gui6",
+      "keys": ".,Return,Right,Esc,.,Return,Right,.,Return,.,Return,Return,.,.,Return",
+      "roster_down": 0
+    },
+    {
+      "run": "gui7",
+      "keys": ".,.,.,.,.,Return,Down,Return,.,Return,Return,.,.,.,.,Return,Return,Return,Space,Space,Space,Space,Space,Space,Space,.,Return,Right,Left,Down,Up,Return,.,.,Return,.,.,.,Return",
+      "roster_down": 0
+    },
+    {
+      "run": "gui9",
+      "keys": "Return,.,Return,Right,Down,Left,Up,Home,End,PageUp,PageDown,.,Return",
+      "roster_down": 2
+    },
+    {
+      "run": "gui10",
+      "keys": "Return,.,Return,Down,Down,Down,Down,Down,Down,Down,Down,Down,Right,Right,Right,Right,Right,Right,Right,Right,Right,Home,End,PageUp,PageDown,Return,.,Return",
+      "roster_down": 2
+    }
+  ],
+  "summary": {
+    "original_lifecycle_boxes": 52,
+    "remake_scaled_boxes": 104,
+    "different_pixels": 0,
+    "normal_runs": 4,
+    "normal_inputs_each": 455,
+    "normal_states_each": 456,
+    "normal_full_frames": 34,
+    "different_pixels_outside_field": 0,
+    "annotation_entries": 14,
+    "malformed_atlas_rejected": true,
+    "presentation_rng_calls": 0,
+    "phase_injected_for_pixel_fixture": true
+  },
+  "build": "既有鎖定映像、UID/GID1000、離線module cache、Xvfb：go test ./internal/battle ./internal/ui ./cmd/kol；go build -o /out/kol-ring-linux-final ./cmd/kol",
+  "normal_changes": [
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-417.png",
+      "sha256": "d0e2ff9a03f46ecd4e8aa1161c3dae01e8bcfb3fb1c13199f14a6d1bc69289f2",
+      "before_sha256": "d0e2ff9a03f46ecd4e8aa1161c3dae01e8bcfb3fb1c13199f14a6d1bc69289f2",
+      "changed_in_field": 0,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-418.png",
+      "sha256": "fae777db4be82a3562fa38c3ba15790db6cb10e9b1ad72c73ca02eac7c4b5790",
+      "before_sha256": "fae777db4be82a3562fa38c3ba15790db6cb10e9b1ad72c73ca02eac7c4b5790",
+      "changed_in_field": 0,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-420.png",
+      "sha256": "83660dba9a5ac8f83d3c1d4f9406ad6768ddac62ba759c8fbe992b6e2771b13b",
+      "before_sha256": "23236663615c8e3f88ce1727e77795c5bb432c8b82596ded32011b9c1243244a",
+      "changed_in_field": 65,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-421.png",
+      "sha256": "315082ef6b434af61d6652aab5c2e1819cf260836d8d152f6d9c482fca7662bc",
+      "before_sha256": "d0da9f7725cd997ff5f5f3210d60a7b9eabfe6101cb66fd185999710768f6403",
+      "changed_in_field": 65,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-422.png",
+      "sha256": "35d733943360ac7c7bf4403589d1c0b01e56a9557fc047cc6ba03510978f36f8",
+      "before_sha256": "97e43d3d8d1294372dc7d95291c178edf9823aadefad44fc3e1e824922735abc",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-426.png",
+      "sha256": "f92cd43ee7a33acdd9873db4d4ff6c6873690dac6e11fcd8ef360b4dcf9b54ad",
+      "before_sha256": "b413470436151434f40e0b9ba19338f78b278b91f9410f062e8a2241802f894c",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-430.png",
+      "sha256": "dcc44b937d9e7862b9f1fbb1baa2260bab18d7539ccfac1a29ab91769abec976",
+      "before_sha256": "fae777db4be82a3562fa38c3ba15790db6cb10e9b1ad72c73ca02eac7c4b5790",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-436.png",
+      "sha256": "315082ef6b434af61d6652aab5c2e1819cf260836d8d152f6d9c482fca7662bc",
+      "before_sha256": "d0da9f7725cd997ff5f5f3210d60a7b9eabfe6101cb66fd185999710768f6403",
+      "changed_in_field": 65,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-437.png",
+      "sha256": "d153a6dcaee6dbad4761057db968601dce9a9b1079cc4edfaaf860252d0b492a",
+      "before_sha256": "59a260a6795919622ff19fd632642a8068726d73ae890b0e1022d66ebf83be73",
+      "changed_in_field": 65,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-438.png",
+      "sha256": "6ea203d6be628a67e839930a11ef71438839fd2ba95111e98957feae90eaf75b",
+      "before_sha256": "6d3d3c9d358b25a975c87e1fea86e348fae11369478f2a137ea5b6efa2cf40ef",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-440.png",
+      "sha256": "e3d8eff95697c700b81ef7a1902d3f4482f2b8cea3faf82b2f0f6e62f1ae9c18",
+      "before_sha256": "fae777db4be82a3562fa38c3ba15790db6cb10e9b1ad72c73ca02eac7c4b5790",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-442.png",
+      "sha256": "d153a6dcaee6dbad4761057db968601dce9a9b1079cc4edfaaf860252d0b492a",
+      "before_sha256": "59a260a6795919622ff19fd632642a8068726d73ae890b0e1022d66ebf83be73",
+      "changed_in_field": 65,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-444.png",
+      "sha256": "e3d8eff95697c700b81ef7a1902d3f4482f2b8cea3faf82b2f0f6e62f1ae9c18",
+      "before_sha256": "fae777db4be82a3562fa38c3ba15790db6cb10e9b1ad72c73ca02eac7c4b5790",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-447.png",
+      "sha256": "d153a6dcaee6dbad4761057db968601dce9a9b1079cc4edfaaf860252d0b492a",
+      "before_sha256": "59a260a6795919622ff19fd632642a8068726d73ae890b0e1022d66ebf83be73",
+      "changed_in_field": 65,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-448.png",
+      "sha256": "00035f478f797b2791baa1003f725e5f5c64c63415fd116143da683068ee2004",
+      "before_sha256": "626aae5ef2cfbfc2f9f14832cedd7d98d78dd7bbe4a4fe441c21c6f1d41a496c",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-451.png",
+      "sha256": "676b3cdcb8cb9e3e49bb030910d8e551777d05b80891af4f1d4879d7fe9561a8",
+      "before_sha256": "b413470436151434f40e0b9ba19338f78b278b91f9410f062e8a2241802f894c",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "en",
+      "file": "normal-final-en-step-455.png",
+      "sha256": "e3d8eff95697c700b81ef7a1902d3f4482f2b8cea3faf82b2f0f6e62f1ae9c18",
+      "before_sha256": "fae777db4be82a3562fa38c3ba15790db6cb10e9b1ad72c73ca02eac7c4b5790",
+      "changed_in_field": 5,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-417.png",
+      "sha256": "e8b31dd1fe67bdadb5e742b3d0004b84793246a0ab6f6f83091c7210e37f4796",
+      "before_sha256": "e8b31dd1fe67bdadb5e742b3d0004b84793246a0ab6f6f83091c7210e37f4796",
+      "changed_in_field": 0,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-418.png",
+      "sha256": "1c525a896d473c5c9c6b8dea1c20f8bffac3bbf8275e655d5fab5d2050d47f8e",
+      "before_sha256": "1c525a896d473c5c9c6b8dea1c20f8bffac3bbf8275e655d5fab5d2050d47f8e",
+      "changed_in_field": 0,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-420.png",
+      "sha256": "9b62a06996a8174816fce3dd59b60fb12f66f369dbd8642b6f1fb0f8fcc8205e",
+      "before_sha256": "f91c078710d6e4670ae9bd8d053d8a8cb6bcd4199a747ae3cbf875f583307021",
+      "changed_in_field": 233,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-421.png",
+      "sha256": "79cb6c4899ecdf139b6adbd6768d4e67debc03e9e695b5a465a6e2240d8f881e",
+      "before_sha256": "c1371d114de9a1b05e508d212a13fbceba83ae55608fe2932b4f227ed17c2489",
+      "changed_in_field": 233,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-422.png",
+      "sha256": "5168a713bc20f51a43faeb70d4c05069621e15fd5765e99f9f2106d754af117f",
+      "before_sha256": "f66d4eda8b35973634989398e45bc281e0009b1a9b168955ae4b5529271d5823",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-426.png",
+      "sha256": "ad35869c5996097ca5b0ea163c409e838d2d5834e8718b0e58199bb1de8d1d0d",
+      "before_sha256": "00b59abca7aae88bd2da0174146400e76506271139abc1a1de2eb73fc7ebae26",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-430.png",
+      "sha256": "bcc88ebf487cac55277110c9727191f0e9c93548544d5e9142985e3f2f4870f9",
+      "before_sha256": "1c525a896d473c5c9c6b8dea1c20f8bffac3bbf8275e655d5fab5d2050d47f8e",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-436.png",
+      "sha256": "79cb6c4899ecdf139b6adbd6768d4e67debc03e9e695b5a465a6e2240d8f881e",
+      "before_sha256": "c1371d114de9a1b05e508d212a13fbceba83ae55608fe2932b4f227ed17c2489",
+      "changed_in_field": 233,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-437.png",
+      "sha256": "8d58f01efe31e0d502d7e4fc0bd8dbcc9f46ffc8fee5c962d35bc3e28b1497bf",
+      "before_sha256": "69d63f8f39ae2c96df138c27b3989acdf5bf9d22a90753877be2fa2699dc341e",
+      "changed_in_field": 233,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-438.png",
+      "sha256": "009641a05297389c9d25c288f2ad5fd8253be11b955c8043363917be6d63d380",
+      "before_sha256": "27c2be773b225c89fb3d6886bd980bf30a7d3276df3138b07a96ab6e7108b2ec",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-440.png",
+      "sha256": "30dae9d55ca018ae7cac11c4bbdafe6715fec5a4168fff04de58584e7ee4b086",
+      "before_sha256": "1c525a896d473c5c9c6b8dea1c20f8bffac3bbf8275e655d5fab5d2050d47f8e",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-442.png",
+      "sha256": "8d58f01efe31e0d502d7e4fc0bd8dbcc9f46ffc8fee5c962d35bc3e28b1497bf",
+      "before_sha256": "69d63f8f39ae2c96df138c27b3989acdf5bf9d22a90753877be2fa2699dc341e",
+      "changed_in_field": 233,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-444.png",
+      "sha256": "30dae9d55ca018ae7cac11c4bbdafe6715fec5a4168fff04de58584e7ee4b086",
+      "before_sha256": "1c525a896d473c5c9c6b8dea1c20f8bffac3bbf8275e655d5fab5d2050d47f8e",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-447.png",
+      "sha256": "8d58f01efe31e0d502d7e4fc0bd8dbcc9f46ffc8fee5c962d35bc3e28b1497bf",
+      "before_sha256": "69d63f8f39ae2c96df138c27b3989acdf5bf9d22a90753877be2fa2699dc341e",
+      "changed_in_field": 233,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-448.png",
+      "sha256": "c6f67e11d497ba929b8958e01a0206f1776396aeccaf49eca8e3e408b8d30009",
+      "before_sha256": "a7c6a5c0438f8d7261398ebb1d392ddbf0befbe5f29adcaadddafc4901213903",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-451.png",
+      "sha256": "865a3f5852f75b4b8674a027115079f6caec066a9384763dec17fbb4ed6dd33c",
+      "before_sha256": "00b59abca7aae88bd2da0174146400e76506271139abc1a1de2eb73fc7ebae26",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    },
+    {
+      "lang": "zh-Hant",
+      "file": "normal-final-zh-Hant-step-455.png",
+      "sha256": "30dae9d55ca018ae7cac11c4bbdafe6715fec5a4168fff04de58584e7ee4b086",
+      "before_sha256": "1c525a896d473c5c9c6b8dea1c20f8bffac3bbf8275e655d5fab5d2050d47f8e",
+      "changed_in_field": 45,
+      "changed_outside_field": 0
+    }
+  ],
+  "inputs": [
+    {
+      "path": "cmd/kol/adapter_regression_test.go",
+      "sha256": "b6527ae24beb36bf3497dc59feca8f45230461e5b88c89f097c27446ac451987"
+    },
+    {
+      "path": "cmd/kol/arena_field_test.go",
+      "sha256": "0fc8d523c2a4d4d9c43f9cc36f0f776587327dd098e02ec193438ee02418b382"
+    },
+    {
+      "path": "cmd/kol/battle_encounter_lines_test.go",
+      "sha256": "00543db5792e924f7ee3fe90198b58445588c24361d0a3e0bf7ca141af341c86"
+    },
+    {
+      "path": "cmd/kol/battle_inventory.go",
+      "sha256": "5702d4989cf48a625b3973d7724f41af27615ea40be729cf2f8807f56f04150a"
+    },
+    {
+      "path": "cmd/kol/battle_render.go",
+      "sha256": "0b5401f75d62dfa89b290ab6a26f248c824ec6337635652af428ddad29c976ff"
+    },
+    {
+      "path": "cmd/kol/battle_save_chain_test.go",
+      "sha256": "06002a959cb40811c0fc0f12594a104f083410d7430188cee734798bacdb06a5"
+    },
+    {
+      "path": "cmd/kol/bitmap_edit.go",
+      "sha256": "ffde4033078d7c95e18df3d817b2611c81063b3cfb2e8f818acce83e79f2a69c"
+    },
+    {
+      "path": "cmd/kol/bitmap_edit_test.go",
+      "sha256": "2bdda8822c7bdfe3e45901988dc8376be811901215aca7040e29b2970783ebd4"
+    },
+    {
+      "path": "cmd/kol/complete_save.go",
+      "sha256": "61606227843f422a1e4dd8beb7fa64050e8bff369a3b736045ab001a2e1a7e4d"
+    },
+    {
+      "path": "cmd/kol/complete_save_test.go",
+      "sha256": "b3419b28e6fa564c60dcd94859973160eb82cb906f0bb33b358286312a2826bd"
+    },
+    {
+      "path": "cmd/kol/creation_commit.go",
+      "sha256": "2fd6ca6da6738896be13790a01ea2eb368e429376e49dbf30e8a687966708a6a"
+    },
+    {
+      "path": "cmd/kol/death_line_test.go",
+      "sha256": "9e59565429cf8309689bd48af2ab3a13b12800ff847afb69e8c68df7f17bd6ef"
+    },
+    {
+      "path": "cmd/kol/input.go",
+      "sha256": "737660b95bd92f1ebfae5fe92af04dbfd39cfc45887a202ae1ba08c85cd46f9d"
+    },
+    {
+      "path": "cmd/kol/main.go",
+      "sha256": "342e6386f929a20fe3582b2aad6b448d2099059e8e5810e5428468bba91dc730"
+    },
+    {
+      "path": "cmd/kol/original_ai_fuzz_test.go",
+      "sha256": "a41aed39ecb05e30dc358d83f2d12ac716fbf10b3279c36fcffde3d1dbf9da86"
+    },
+    {
+      "path": "cmd/kol/original_battle_terrain_test.go",
+      "sha256": "d1ca1a85d266d2189eae15d72fd1718fd0dcfab9f8886647e5855622211c5967"
+    },
+    {
+      "path": "cmd/kol/original_monster_equipment_test.go",
+      "sha256": "b98ea839581b6c4bd4ce82e77f00d9c1f6162bd7e4f2e54b753501f5d398a2b8"
+    },
+    {
+      "path": "cmd/kol/original_panels_test.go",
+      "sha256": "c8bbdc78e8a9cc1b79cf3f3023272407001f7ded8b164c2d4d8a2b4ff9b0955c"
+    },
+    {
+      "path": "cmd/kol/original_party_state_test.go",
+      "sha256": "f50799fc87b6ed10d4847fd33a4a4749f72630fda6be60d844b6e0e2e72abf4d"
+    },
+    {
+      "path": "cmd/kol/original_planning_cells_test.go",
+      "sha256": "9fddf74d8827883c5e052d11495c08c86f071da0c3acb15a760a959c0fde5927"
+    },
+    {
+      "path": "cmd/kol/original_planning_test.go",
+      "sha256": "0e18495c474c613566d034ff480598af57f2d7ea1051736c696c641b8326ab94"
+    },
+    {
+      "path": "cmd/kol/original_rounds_test.go",
+      "sha256": "fbabf820d100d413ec8d506c18aca462ba522eb0719e211a6bc7d2cf7a395b15"
+    },
+    {
+      "path": "cmd/kol/portrait_mouse_test.go",
+      "sha256": "b76319702d3e387030dfeca016e6040284b4bebcacaf7e719c288de033bccf02"
+    },
+    {
+      "path": "cmd/kol/recruit_mouse_test.go",
+      "sha256": "93497e11d8ff7cbd2c28ba2a2c9a73671ff66bf76d5a231cfcff703d139defcc"
+    },
+    {
+      "path": "cmd/kol/runtime_format_guard_test.go",
+      "sha256": "b853e548a4c244f5f90df5929e22693ff16c2f1e3bab658edb137db90090c5ea"
+    },
+    {
+      "path": "cmd/kol/save_notice.go",
+      "sha256": "d3b2b9c42d64ed97937af30acaf724ce3a1fd58e51aa1ec36b98f177a79e6639"
+    },
+    {
+      "path": "cmd/kol/save_notice_test.go",
+      "sha256": "68ad78a6cc94c2c0d619a3da4d917f94eb55b0fc9a6143a98e4c03e0efb499b5"
+    },
+    {
+      "path": "cmd/kol/scripted_rolls.go",
+      "sha256": "b08279b7ac7b23db41c0f732516a659c71bd7b871e6a155e5b26fa28978671e1"
+    },
+    {
+      "path": "cmd/kol/scripted_rolls_test.go",
+      "sha256": "d71a200f335440bba4a092569e3f3389ca7e1f72d618caaec2660b4d37c60886"
+    },
+    {
+      "path": "cmd/kol/title_subtitles.go",
+      "sha256": "17aff7d058f650c283181b9ace871fbda2ffb46032dc45b186742d5c4fa1c65a"
+    },
+    {
+      "path": "cmd/kol/world_battle_mouse_test.go",
+      "sha256": "15f4acbb609fa0d588fa13583e759d4a631881c003aed1f85c94f02c0508a1d1"
+    },
+    {
+      "path": "internal/assets/assets.go",
+      "sha256": "c688ecad99fca6ae69bca106b74ab091eaeccade4044dff10c33492351169873"
+    },
+    {
+      "path": "internal/assets/assets_test.go",
+      "sha256": "41ab6ac8027209df04f99d1349b0dd5b48cf7aaa1a3f61930e7476d0cac21ab4"
+    },
+    {
+      "path": "internal/battle/ai.go",
+      "sha256": "fa2755757b8fbdfd24675848e0c5d7111ff13f09d449adaa839c08f32549b73b"
+    },
+    {
+      "path": "internal/battle/ai_ring_test.go",
+      "sha256": "89e7ff974e7bb07838f438a5d02bf579adc9099b7c6490a7712765c4be59391c"
+    },
+    {
+      "path": "internal/battle/ai_test.go",
+      "sha256": "1b87d4bb249bdb38b964b3b599f13725e9f9772bfb89eecc7673aad58436e76f"
+    },
+    {
+      "path": "internal/battle/ambush.go",
+      "sha256": "c2e277a227f4ac2ff104d335a5f315befe95168d10a35b5a67f37e7a1f6d3b04"
+    },
+    {
+      "path": "internal/battle/ambush_test.go",
+      "sha256": "09b114a200a7457a605d1b25cc459269843345568691925203f69df7f46ac2ff"
+    },
+    {
+      "path": "internal/battle/ammunition_test.go",
+      "sha256": "1dcc687cf9e7137cf36b510c453b68ba409b3baf0ce0a8230888d1bdf46d6a84"
+    },
+    {
+      "path": "internal/battle/arena.go",
+      "sha256": "0ca52ce8fc80b9fdcbb52ef11f5452479a5c65ad9ba2cbca1d04abb72c85e171"
+    },
+    {
+      "path": "internal/battle/arena_test.go",
+      "sha256": "f8d3514199c15e67ea8729ba6a99121f64f4b62dcc6a36e7bc0cf1ce966ee897"
+    },
+    {
+      "path": "internal/battle/armour.go",
+      "sha256": "00c84bae5d96783b8f0a6f5af8df18dddc9f48cfa3f3eee04c45a27e5aa70952"
+    },
+    {
+      "path": "internal/battle/armour_test.go",
+      "sha256": "c7581b3e18be4617df8ba84ec4863eaeb3d172be3d2c52e68b8139c64e39ecd1"
+    },
+    {
+      "path": "internal/battle/attack.go",
+      "sha256": "b6e21026125efaa22bfa68b83e5bd05b93980ca564437363ec3a83b8baf722ab"
+    },
+    {
+      "path": "internal/battle/attack_test.go",
+      "sha256": "fcc69be26dbfd035041cc310ddfd957ef8c24d8e3dca67e86b13fe756dc9c784"
+    },
+    {
+      "path": "internal/battle/battle.go",
+      "sha256": "8dc69a476ee02289e5bf33fd2761bdc21ea77898fb2954e793bd520d7484b9bb"
+    },
+    {
+      "path": "internal/battle/battle_test.go",
+      "sha256": "91df6f4425289786adf4cd42be9245701703e1082180bc5e5f7d43560b7d181f"
+    },
+    {
+      "path": "internal/battle/belt_regression_test.go",
+      "sha256": "8a518fd07dfdd63ec73f9dde43543a170f2e771c4237ee1b829b05ff375c7e6a"
+    },
+    {
+      "path": "internal/battle/body_panel.go",
+      "sha256": "a9e0d2ab6581dda119a016ced324963dfc590a87caf0a873577bd35f54e59a0c"
+    },
+    {
+      "path": "internal/battle/body_panel_test.go",
+      "sha256": "3ead06c65a072fcca6ec3e0ccbd82384647f8e18de3a13fe8fb949f2adc94519"
+    },
+    {
+      "path": "internal/battle/charms_test.go",
+      "sha256": "883dc4cbfce5f734ded089f8e790b21c4841f9c5ff6cfe030f12c30fe66984da"
+    },
+    {
+      "path": "internal/battle/command_panel.go",
+      "sha256": "ea9b42de8bad51af1dc067ebefe1e0e7c0d9357f045d72a92df1c15c91d4fb6f"
+    },
+    {
+      "path": "internal/battle/command_panel_test.go",
+      "sha256": "e1965d300d2e0b7ca9ebaf54e8af46427996a7dc855169617caae0228b536f4c"
+    },
+    {
+      "path": "internal/battle/commands.go",
+      "sha256": "f19e2be27091a08314452bca1ce246d23a8418fd8923c4124221c7ca11e37a0a"
+    },
+    {
+      "path": "internal/battle/commands_test.go",
+      "sha256": "23c6bf45bbb070103aa1da60af7044b6acd4cfa0c6887a937835e451573b62b1"
+    },
+    {
+      "path": "internal/battle/counter_start_test.go",
+      "sha256": "f55a429c3b429beca89454e9a2a3a47fe7d551359f4e418273de16b2f744392e"
+    },
+    {
+      "path": "internal/battle/cursor.go",
+      "sha256": "ac24436607c413b2c171613c02aa85823821baca283a12435c4c8220001f3a1a"
+    },
+    {
+      "path": "internal/battle/cursor_test.go",
+      "sha256": "19387a4b6b4336544cbf48eff6ff1708589e28e446713b01db94f852b6c9e79a"
+    },
+    {
+      "path": "internal/battle/equipment_panel.go",
+      "sha256": "1d1b4ffb8317c3cfd10e2cfe4e8c4ba223249ff1aa1a4e46023ee85f4fb5e040"
+    },
+    {
+      "path": "internal/battle/equipment_panel_test.go",
+      "sha256": "4c44f75863a164304d6c3985ee9955720a8ef167f2e63e68c2acabdcd3ba10c3"
+    },
+    {
+      "path": "internal/battle/execution.go",
+      "sha256": "6713118c91ca4a0de417a66e8c360b91527b78f5eff46ca4441252e60e735dfa"
+    },
+    {
+      "path": "internal/battle/execution_test.go",
+      "sha256": "11f502bfeee0c20bdc440e5d10a583f0068ec819b621fd3609a3c7d6374a5981"
+    },
+    {
+      "path": "internal/battle/exit.go",
+      "sha256": "578b48d496e5fc89759d766baa8c00a0331eecfe6922298388a65921802856b9"
+    },
+    {
+      "path": "internal/battle/fatigue.go",
+      "sha256": "56a64d1ef9ad5deb6a488e0181c2dc5d6b45cf19c4f4f008f69a09aef33d865a"
+    },
+    {
+      "path": "internal/battle/fatigue_test.go",
+      "sha256": "dc3cd13eb0ecaa0854236e55be3a43146e5e1e235388d4797469019afe97152f"
+    },
+    {
+      "path": "internal/battle/field.go",
+      "sha256": "79b11b5195609d7b678b8f8e42be0330be8c8d085d5ded03b6172dcfdf7d6f56"
+    },
+    {
+      "path": "internal/battle/flee.go",
+      "sha256": "588b22b09f5e066b59c33d714ae8546cb911eacc7393a090e71c6180c21968d3"
+    },
+    {
+      "path": "internal/battle/flee_test.go",
+      "sha256": "f97fce873c20bc12d4f9d7eb086fd387ab58ae4d88b05e506c595bdf2f2707b2"
+    },
+    {
+      "path": "internal/battle/intellect_initialization_test.go",
+      "sha256": "3e6345543305fa1d37f1e74552b688569d39e4fec1fff4b8d4a1f27ebdb5a5ea"
+    },
+    {
+      "path": "internal/battle/items.go",
+      "sha256": "6fa32b4ec1cd7d3659504f1ac4cbb6624642ff6342c403be2198c79121965ecd"
+    },
+    {
+      "path": "internal/battle/items_test.go",
+      "sha256": "730ef4bee2b53b372e64e38822a1527ad8f01caa48a1eded3b491721bf7e761c"
+    },
+    {
+      "path": "internal/battle/knockback.go",
+      "sha256": "6ae1f4f26f56f39d4cd777915e4bb5edf89f3a64df4bd9c3d241e166d2156773"
+    },
+    {
+      "path": "internal/battle/knockback_test.go",
+      "sha256": "b553ed4b9e9e6b1049e4b317c65609077bb708cd357169c73edf92de8a665d84"
+    },
+    {
+      "path": "internal/battle/message.go",
+      "sha256": "77ebb5f7a2ef3a5c2d0eda6cdf2ce5dbb0dda0600dd2814756b813e506c7d726"
+    },
+    {
+      "path": "internal/battle/message_test.go",
+      "sha256": "3dfcecad3f151abce1bac709b9042c643f154730ccd96dd5f1f38794ca72154a"
+    },
+    {
+      "path": "internal/battle/missile.go",
+      "sha256": "cc7e6b67fbf1e65fe3b74c5f4dc00699ade8d12c8e0353be9b2fad041dc16b3d"
+    },
+    {
+      "path": "internal/battle/missile_test.go",
+      "sha256": "1d9d3b85588c9a6b0f83731c34fe731f702d4083945953761f733eb78b848e6b"
+    },
+    {
+      "path": "internal/battle/monster.go",
+      "sha256": "888ed6be6b5313d8f5b94282632d89c8c7e8bbf61da182905bbd2a95714350f5"
+    },
+    {
+      "path": "internal/battle/monster_load_test.go",
+      "sha256": "ca607c86e5626d29d0f5fd1ab14459afa5b5dee73e6168e8efbde7abf3504f89"
+    },
+    {
+      "path": "internal/battle/monster_portrait_test.go",
+      "sha256": "fed21e4441fdff7f26faaa282930c6467eb0ada59d37be1b900eb185ae16159d"
+    },
+    {
+      "path": "internal/battle/monster_ranged.go",
+      "sha256": "7d3a31372d5794e81eb02664f5fb3bf36e915920e59df80a63089d769a4ac021"
+    },
+    {
+      "path": "internal/battle/monster_ranged_test.go",
+      "sha256": "8e809c20813f5e1ad50a0d056850eaaa33cdc4fd6503c687b537acad40c8c2da"
+    },
+    {
+      "path": "internal/battle/monster_test.go",
+      "sha256": "fa5673a93160ceaa9c52649de598777619471b24dd7442ffdd98e7e22d227e32"
+    },
+    {
+      "path": "internal/battle/move_ability_test.go",
+      "sha256": "abe87b7d5ccffa0ec6173b7cf71668ff324c24b6491315a1b9e2a755dd43c185"
+    },
+    {
+      "path": "internal/battle/original_alignment_test.go",
+      "sha256": "bdaa04b2cbc217653275d8fb3593823c636ceba45f1791cf80a68f44e6d66c6f"
+    },
+    {
+      "path": "internal/battle/overcap_test.go",
+      "sha256": "96204899cf304cc0db6f24d5e4218b0fce90491958ec7e40b8319c13f5343073"
+    },
+    {
+      "path": "internal/battle/planning.go",
+      "sha256": "59625e49c26be0374428dc47f3f895fb9b7deb65af2f704506a7c555f57fd782"
+    },
+    {
+      "path": "internal/battle/planning_inspection_test.go",
+      "sha256": "5d67eab40e46460a5dad71b97e4a7b8b26f3b0cd245e0160014a3b1d94029a8f"
+    },
+    {
+      "path": "internal/battle/planning_test.go",
+      "sha256": "7231abd0ec8394e117153d4ceafbe1a43a37a7c0e67502307a82ed2fed123734"
+    },
+    {
+      "path": "internal/battle/quest_item.go",
+      "sha256": "a3085bc6518feb585d51faac12fd071adc1fb889fc4b79d812caf15037908773"
+    },
+    {
+      "path": "internal/battle/quest_item_test.go",
+      "sha256": "6d74ecc19e595a7022989dc323e717a498642d479bb42bc800756a6a94767703"
+    },
+    {
+      "path": "internal/battle/result.go",
+      "sha256": "05c7bd8832b16c58a56364a92f3c32833465320265f3b0393739cd661d045a46"
+    },
+    {
+      "path": "internal/battle/result_test.go",
+      "sha256": "b30cd6b9078dfce317410d7d1d274775c598b79aecc7c8b4c989ec10f57083a1"
+    },
+    {
+      "path": "internal/battle/retreat_test.go",
+      "sha256": "f2f2cc1f73b8c2014a0786d4a5e0668687ae18e9d6e4dea95e891f6951a52417"
+    },
+    {
+      "path": "internal/battle/rings.go",
+      "sha256": "dc0d412c99b415ab81362c3e7af36b7072230ddfa7ff0940b2f8a507e9fa16bc"
+    },
+    {
+      "path": "internal/battle/rings_test.go",
+      "sha256": "08d764254c7bcfda510b18ac269007c04cad7d688c79c3c262210b33d61dae02"
+    },
+    {
+      "path": "internal/battle/round.go",
+      "sha256": "5068c1089fa46e4230d024305045a06f8e61581fbfc26368705ff3edd1b0066f"
+    },
+    {
+      "path": "internal/battle/round_test.go",
+      "sha256": "2181fae62ec9a306f3f24356fb4bdd6357889de81b3c77bb8ef2a1dcb536f06a"
+    },
+    {
+      "path": "internal/battle/scenes.go",
+      "sha256": "762d5834a84348f8cd3888f797ccc0df4b899e034f946fcf56074815c28e7c0c"
+    },
+    {
+      "path": "internal/battle/sight.go",
+      "sha256": "e0a4ccf51e2864dfed36b4403e9deb0346c9b283e24193abca8c4364990d2b24"
+    },
+    {
+      "path": "internal/battle/sight_test.go",
+      "sha256": "e4bfe5785a0424090fbaf15de8780fa8c5e1e022393ab2b85280fb609a0bcc43"
+    },
+    {
+      "path": "internal/battle/spell.go",
+      "sha256": "aafb59014831695f458b8bcc51d0d588813539a1ff998ec6c20d15143ac586ff"
+    },
+    {
+      "path": "internal/battle/spell_test.go",
+      "sha256": "19add9131ec1ab654cbfd462de6cf2274c13741136e8a35d5a77f0d7a6012c48"
+    },
+    {
+      "path": "internal/battle/spoils.go",
+      "sha256": "23dbe7b91f6697b7c57dddf17df2526b8259b4f2f8dc67b9c88baa18a2afb7fd"
+    },
+    {
+      "path": "internal/battle/spoils_test.go",
+      "sha256": "c5f251318a5001eccf9664caf0078c578f5fddd6a6df1bc67fa75c2c88db016f"
+    },
+    {
+      "path": "internal/battle/state.go",
+      "sha256": "194ba29c448df7cdbe0619f8f20018c180fddf7e00cd0b77b1b3bccc31a18d04"
+    },
+    {
+      "path": "internal/battle/victory.go",
+      "sha256": "6826f3a82e50f666d6a8de4f19dc445a5614ac4375bd2daf7ebe67d949441a37"
+    },
+    {
+      "path": "internal/battle/victory_test.go",
+      "sha256": "48b1814196783165925927d6322181a33f3381c417f757c36af98b0dc3f7c6d0"
+    },
+    {
+      "path": "internal/battle/weapon_sync_test.go",
+      "sha256": "20ef12590da8e58f911468a61f5dd1894dbbd3b3244204ee0652a6559b8aa1a1"
+    },
+    {
+      "path": "internal/bitmapedit/bitmapedit.go",
+      "sha256": "67b10633195d234a6d298359acaa95bfe4ae95b870e385f61848e7b2743cd92b"
+    },
+    {
+      "path": "internal/bitmapedit/bitmapedit_test.go",
+      "sha256": "907a98ec7d2cf4dbe9afb87e0d725a1fa9f803bfb331f263cdea315acee6f0e9"
+    },
+    {
+      "path": "internal/bitmapedit/original_test.go",
+      "sha256": "6c34917491dd5dc1eca34aa9364d51299f75f5bb044928144cf82f77e107199a"
+    },
+    {
+      "path": "internal/book/animation.go",
+      "sha256": "308b61b4a4fd7d4d73ef15d2059350a578f7fbdfc0d318e4d595623e119bf41b"
+    },
+    {
+      "path": "internal/book/book.go",
+      "sha256": "33d29ef9c167f27d70375cfea3d879932bda9d6cf7bd4826c5481c54a016a48a"
+    },
+    {
+      "path": "internal/book/layout.go",
+      "sha256": "1c7061f26b306a4b4007c149b46b1fb8923bb025a7d625759ea19ea26a84103c"
+    },
+    {
+      "path": "internal/book/layout_cjk.go",
+      "sha256": "723b21c8d028afa2156b93c4324380bdcf2b70c472fe337bc48bbd7b20a44893"
+    },
+    {
+      "path": "internal/charcreate/charcreate.go",
+      "sha256": "e25834ff6f18d1ac12571994acabd5518bb6d829319d7978c6d600c02028e313"
+    },
+    {
+      "path": "internal/chardata/chardata.go",
+      "sha256": "740df7a665035a64d47586fd12732070c0c89e934784e8243995526c6af23ab1"
+    },
+    {
+      "path": "internal/chardata/delete.go",
+      "sha256": "3d8718f91ae33881916d9907523ee7a14293c2ad904d06a4032a312832a23ae6"
+    },
+    {
+      "path": "internal/chardata/delete_test.go",
+      "sha256": "13ddc0be072eac440b1d870a0bcf60b21aa03cb8c3131ba8c900d188b5a42bcb"
+    },
+    {
+      "path": "internal/chardata/writer.go",
+      "sha256": "d8b294c97f1f94d00b5389ec49e8d2ebe4502f1ea86223c95da8971ab54ec081"
+    },
+    {
+      "path": "internal/chardata/writer_test.go",
+      "sha256": "e5d2d5a74e9ac49ea546be7dee6ca9ad098fe1ae60b036dfdd9c774c36beb89a"
+    },
+    {
+      "path": "internal/ending/ending.go",
+      "sha256": "b6b989d82796fc6ca23f061fd9d50bd78aed5cfb2f1a818f0b12f7df513aaa83"
+    },
+    {
+      "path": "internal/ending/ending_test.go",
+      "sha256": "b18df2f10f6217f3c93223282258f482cc35e68ae63abf6c8d1812fa463f0a60"
+    },
+    {
+      "path": "internal/flow/creation_regression_test.go",
+      "sha256": "a9958f73c2ba99652a83dce401e56211ca12f70cc24d566547976d9f02bb9de1"
+    },
+    {
+      "path": "internal/flow/flow.go",
+      "sha256": "0c6a294b67e100169ec64fa92c5751de485d32817cbf9664748f2fe38ff5fb9a"
+    },
+    {
+      "path": "internal/flow/flow_test.go",
+      "sha256": "1235fa4e62c7b3d106e101ae78e25ae19b3fc39909af020141488216186dcfc3"
+    },
+    {
+      "path": "internal/font/font.go",
+      "sha256": "14b951db9d2dd22aeeea103d54a3c36d60e8b3a95a45e93aa38f70d134e34b4f"
+    },
+    {
+      "path": "internal/i18n/i18n.go",
+      "sha256": "7c94b09a13724cb50577738f5401516cf74d6140719c659297dcdb5c12f38337"
+    },
+    {
+      "path": "internal/i18n/i18n_test.go",
+      "sha256": "fc368b84c304217f78cd5e70acdbfc6313a61bd5b87680d76c5b95ccb3f6975b"
+    },
+    {
+      "path": "internal/i18n/paragraphs.go",
+      "sha256": "fe8b89cd0d0a7107629fe54b45f8cd399d99e33f18236bfd24d31ebfb53d9975"
+    },
+    {
+      "path": "internal/i18n/paragraphs_test.go",
+      "sha256": "8002d2883e51ead9ad22ef5e6631fff690c38578543c03e9043b5cc71e4055c2"
+    },
+    {
+      "path": "internal/input/input.go",
+      "sha256": "f6dfadc2938c256a858ba9059a793253fc23aff81b6412d562b560cb86823127"
+    },
+    {
+      "path": "internal/input/input_test.go",
+      "sha256": "f3d614ac30380a0afcce4d6d47ae1f3735e6d07012da609205c65e2d360d0fde"
+    },
+    {
+      "path": "internal/layers/layers_test.go",
+      "sha256": "15010b924aaa3d9e71457e0e390c43e586b662b5ad23ac8e1a3375640f2d5115"
+    },
+    {
+      "path": "internal/magic/magic.go",
+      "sha256": "1b3e37ca2f6aaa070397ac0b0ab7b063f95c631137021cf635c04ac6cf1b64b2"
+    },
+    {
+      "path": "internal/magic/magic_test.go",
+      "sha256": "18ad996a93913a1fe898bae2f2c9146cbe5753261e52148e92e5cca322e9fb85"
+    },
+    {
+      "path": "internal/magic/word.go",
+      "sha256": "5fc5a32d15e4de0529680f6bee08cbc0bd92023c6df7dea61735c5df24579726"
+    },
+    {
+      "path": "internal/magic/word_test.go",
+      "sha256": "7b48f8100fc43053de67a4f6a216f973362a99b251e22770fd5915ccfc1fe4da"
+    },
+    {
+      "path": "internal/oracle/ammunition_test.go",
+      "sha256": "edcbfdaf9f3d143c5974c8aca2440a45f878063052c2157cbf03ffcd664310e6"
+    },
+    {
+      "path": "internal/oracle/armour_reduction_test.go",
+      "sha256": "b12fe9060309e7c6e7091855b47c5fe44b11c5a628ab565207cc45f86b5524b3"
+    },
+    {
+      "path": "internal/oracle/battle_exit_test.go",
+      "sha256": "3f84b126e8230f66ae04203e19003109eab460a602d1681d14302ea24d65a049"
+    },
+    {
+      "path": "internal/oracle/battle_panel_test.go",
+      "sha256": "508b9209198f5b96c504bc90c194daad15eb1261b4a8e1d742480d325ab720a8"
+    },
+    {
+      "path": "internal/oracle/battle_test.go",
+      "sha256": "7a4302682e29afd65e30ab4b92348c78ff18fd946ae34348444c5bbb3c67cb2a"
+    },
+    {
+      "path": "internal/oracle/belt_ward_abbey_test.go",
+      "sha256": "c774d9753676b0fa1ca943cebfe158a34d2378ec3df30a0d7d336df21478d33d"
+    },
+    {
+      "path": "internal/oracle/boot_test.go",
+      "sha256": "29146aeda3537f18f3e8c67fa268815beb71f840a0d6b2ef61d2e4b0f56d2efb"
+    },
+    {
+      "path": "internal/oracle/command_panel_test.go",
+      "sha256": "452d01531619833ce9a452a2e684d77a6ae70eeb95e077ee45782122125a1567"
+    },
+    {
+      "path": "internal/oracle/counter_scan_test.go",
+      "sha256": "99921de7ad1b429647b523103b44980df0999aeceefcd26c3b606d83b84e3c8c"
+    },
+    {
+      "path": "internal/oracle/doc.go",
+      "sha256": "f71c15d5a6a1342af288e1fafc517caff21b67561e46584850e34b44c91b10ee"
+    },
+    {
+      "path": "internal/oracle/drive_test.go",
+      "sha256": "0c1d836eaeca5aa442938377d7f568d3b4badab8a8eb87dc9b0e3795e5b8685b"
+    },
+    {
+      "path": "internal/oracle/durability_test.go",
+      "sha256": "625d108ae2af9da9ab5909c401dbc6d61594fcaa46055ccaf40fed8b64cd4e3e"
+    },
+    {
+      "path": "internal/oracle/equipment_panel_test.go",
+      "sha256": "a866d4f407232c87ea526ba72e8eb8cd8ff97d531d9861e42362299ab4393e4b"
+    },
+    {
+      "path": "internal/oracle/equipment_pointer_test.go",
+      "sha256": "9d8eb8cfadf0fb657c4c8f99c4c6cd2f383e629a39e70e9258ac345be21ef0ad"
+    },
+    {
+      "path": "internal/oracle/field_generation_test.go",
+      "sha256": "d7adb66e0fcb982c0d881f8800b17882a2f73261d219be5cc6176a7414bcff90"
+    },
+    {
+      "path": "internal/oracle/greet_test.go",
+      "sha256": "14c8d683d7676ca29a47a3dcb71bed955a42e7b11e5fb1bf1b06707bdd8e033c"
+    },
+    {
+      "path": "internal/oracle/hook_test.go",
+      "sha256": "509cdc381d9ac67fcabe28f9736193627bfc586a2fe4d6feaaa2c33196ed888c"
+    },
+    {
+      "path": "internal/oracle/item_bonus_test.go",
+      "sha256": "47e4c2916476e2275f5016d651c06ec8a5359819b9de9d3801bd440f62633d24"
+    },
+    {
+      "path": "internal/oracle/map_test.go",
+      "sha256": "4ac356bf8cb0d868f8f6dbd23d4f499e6e3a1b3fe2c128099d99dcef84f62d4e"
+    },
+    {
+      "path": "internal/oracle/monster_ranged_init_test.go",
+      "sha256": "ddff8bc0eece1af80f70292a60fc56e90bcb0a5fe5eb5206813dea0594da4a47"
+    },
+    {
+      "path": "internal/oracle/monster_unarmed_probe_test.go",
+      "sha256": "cf5396fe6f6ecf805204a763815c95d86b6872fb473a1b0e5aaa09b6d23d8eb6"
+    },
+    {
+      "path": "internal/oracle/player_gaps_test.go",
+      "sha256": "81fcdf5ced48e69c44f9bf07feadb8e5d02b9787b9c69c46c6147a24c8dcb30e"
+    },
+    {
+      "path": "internal/oracle/quest_chain_test.go",
+      "sha256": "49d9c7f7b837c379302a9260ef8ba377e3aa2a85bfa83c2fd45e5c08cc512a75"
+    },
+    {
+      "path": "internal/oracle/quest_item_test.go",
+      "sha256": "feed0e2daa59b132f861715ac49bbe066c093ad2c5095a492df63b4fab6acb3e"
+    },
+    {
+      "path": "internal/oracle/rand_test.go",
+      "sha256": "73e56274b5f1264ba48dd7dd19a0c9c85e309d1f155c756605e477ed56e93951"
+    },
+    {
+      "path": "internal/oracle/ring_search_test.go",
+      "sha256": "4834e9eb82c93cc7bdf77327f746c363eeaec5c09acbd542d81cf210b2bd36bc"
+    },
+    {
+      "path": "internal/oracle/terrain.go",
+      "sha256": "37783f94a480256244bc55d866ee6ee4149c132b01d4bd05dfdb6a908b003c84"
+    },
+    {
+      "path": "internal/oracle/terrain_test.go",
+      "sha256": "5966a6f996917dfc300406bb87fe7e10ebf521f9d308734a9df602dd098f7fa4"
+    },
+    {
+      "path": "internal/oracle/weather_phase_test.go",
+      "sha256": "ceb78bc8fb5c10ec0d860bd5191c3be631ed0d5a2ec4a068caac3b25b5cf4419"
+    },
+    {
+      "path": "internal/oracle/zz_dump_test.go",
+      "sha256": "dfa6975084b1b81e7e32e235f13012a154127d665d54f81d4428f323be5d124b"
+    },
+    {
+      "path": "internal/portrait/layout.go",
+      "sha256": "dcae1c3939cd70c9688aba08f5e878714194f2d1c2d6507b3164cd8230508e8e"
+    },
+    {
+      "path": "internal/portrait/portrait.go",
+      "sha256": "732917d3917d2325c2058773f7d8c8bd4901db97af7da325e28a11d7fca620d0"
+    },
+    {
+      "path": "internal/portrait/portrait_test.go",
+      "sha256": "03c8e3dca4d935e34d66a937b95a3fcafa8e5aa63f7bbc2441b006a49c357b32"
+    },
+    {
+      "path": "internal/rng/rng.go",
+      "sha256": "166467cb268924581ab00f181cbdefa40c8f66084764c5328a0a94bf9846b7c6"
+    },
+    {
+      "path": "internal/roster/delete.go",
+      "sha256": "fe1a74171c6bdfa3d3db1d78300eeddaaaca135f4fbee6d4737143baf750c8b4"
+    },
+    {
+      "path": "internal/roster/delete_test.go",
+      "sha256": "bf9678c1327f7da87c97270040ac0f6acfcce21db65979e0c1b169514ee4f47c"
+    },
+    {
+      "path": "internal/roster/roster.go",
+      "sha256": "a143f13efa0de2e5761a3bd87ba90b6de7b726c8d0d32606b338cd6f004431c4"
+    },
+    {
+      "path": "internal/save/characters.go",
+      "sha256": "7e3ca10531f11219f3c1fe526d0ae9a68560bf7144325c93e5a29af632441db7"
+    },
+    {
+      "path": "internal/save/characters_test.go",
+      "sha256": "4286d0d761063d52e95a9546f366e482872d1f8523eda2c476dd0f3ac8fe9696"
+    },
+    {
+      "path": "internal/save/complete.go",
+      "sha256": "543c89094b4e3ad28bb5b5858939342f5f3110f3526add64ebf128f3aedbd67a"
+    },
+    {
+      "path": "internal/save/complete_test.go",
+      "sha256": "806eb9d6ce82fa91746c6dc55d0bab293933bf56a00d4004506fc5a2e0f6f7ad"
+    },
+    {
+      "path": "internal/save/save.go",
+      "sha256": "28b9f8fabb131b4cf49cb9aced0583ff094fd9ee50e0f1ea350e1e8e138795eb"
+    },
+    {
+      "path": "internal/save/save_test.go",
+      "sha256": "dd34adc4bf3ad0a04429c5aa861609b720fd49a543080f9fb45a3418c599d904"
+    },
+    {
+      "path": "internal/save/settings_regression_test.go",
+      "sha256": "052eb83206cecc72917c2c8750cd1c3d07b150e5c92761ef6b841108253c56ba"
+    },
+    {
+      "path": "internal/screen/screen.go",
+      "sha256": "1f9a68e58e798c07567b2edb549168dea7caafab8a19ea3e58521b92bef62f20"
+    },
+    {
+      "path": "internal/title/title.go",
+      "sha256": "5764b6b8e50f63e2039690a9b579b2b051ba8d4b43d073193f81f0d0a5786a07"
+    },
+    {
+      "path": "internal/title/title_test.go",
+      "sha256": "b9fe515467e8d97e7d9045b27540f5ce6cfd5754de70dfed23545573bea8fc1c"
+    },
+    {
+      "path": "internal/town/arena.go",
+      "sha256": "01362d1e8e07b8ed157a915380b50ae8addfbf3aa23ef0c4069fb27b4112839a"
+    },
+    {
+      "path": "internal/town/arena_test.go",
+      "sha256": "6a07517117aa2a556e74dc0c2c61136a1f562b706570c0d37bc5ab97c4fc8acf"
+    },
+    {
+      "path": "internal/town/buildings.go",
+      "sha256": "f593af1ecf5d45c64a3ccf51a74ecd50ee9bfdc64fb108725d6e960ca6f9581b"
+    },
+    {
+      "path": "internal/town/enter.go",
+      "sha256": "9cbea9b45893d1efae0f742e957694fc0fe6ff37b392faebcd76b416f1af2ead"
+    },
+    {
+      "path": "internal/town/fitting_record_test.go",
+      "sha256": "99df0021df3151015540cb4471e8894efa124388bf4cb72a716eff7730859e99"
+    },
+    {
+      "path": "internal/town/goodbye_all_test.go",
+      "sha256": "4ae4650d4aac606aad37d7f14b5f0413419a799bc953d1259a78927014e6b381"
+    },
+    {
+      "path": "internal/town/goodbye_test.go",
+      "sha256": "a104125057dea2c2889f30abc58ef2bade6a83d4fa78eefe7a2022453c3753a4"
+    },
+    {
+      "path": "internal/town/greet.go",
+      "sha256": "a49d2345ebe122df24855bdc2ce51ec44d0116802387c50d3e6322cecbcba5db"
+    },
+    {
+      "path": "internal/town/greet_test.go",
+      "sha256": "457d9a74ddbe850a4dfe08dca64c4df1d571ab0292972338a3f69b8e0ba244b6"
+    },
+    {
+      "path": "internal/town/heal_regression_test.go",
+      "sha256": "8ebff55589c348b8d0db6bfe66f8a3e795d7a10c485e2d843a02c79aa714a3c9"
+    },
+    {
+      "path": "internal/town/healing.go",
+      "sha256": "410e927607d5c8dfff953a9eff9db440dc545b2c266bd8326e928d974881042e"
+    },
+    {
+      "path": "internal/town/healing_test.go",
+      "sha256": "16f9882d50ff47a60d5b9caf6c84539cd82470a110e7837c49fa37830a71aeeb"
+    },
+    {
+      "path": "internal/town/i18n.go",
+      "sha256": "4addb26ceb0e34ef07b4cd8bc2ab6800c4b9631342f3e7e2bc57ebff27d1910b"
+    },
+    {
+      "path": "internal/town/inn.go",
+      "sha256": "94d3ecc3bfaf3e597b09416a12ec3b56e37c69eb7d5735039b54b668c4f144b5"
+    },
+    {
+      "path": "internal/town/inn_test.go",
+      "sha256": "719c8f9d95ffbc1423c16d280b0e7e970422e7e8b0a667cdf73a242ac3f41801"
+    },
+    {
+      "path": "internal/town/interior.go",
+      "sha256": "123d644160942e15964b12f5f0d306c51802266a3522f54d562403ea08bfe46a"
+    },
+    {
+      "path": "internal/town/inventory.go",
+      "sha256": "5ff706cf120fb8a4f81c3351eea44e8dbb57b160776894538449ba286acad584"
+    },
+    {
+      "path": "internal/town/inventory_regression_test.go",
+      "sha256": "1b229d15b8a9add97f6c1018885ffbd477db8b70aab28c1de6e784e5c2d34788"
+    },
+    {
+      "path": "internal/town/itempage.go",
+      "sha256": "0d6cd5279fa17f6f71b9012d19456ce8de982b411225a4dc6d1ae13d5a119d25"
+    },
+    {
+      "path": "internal/town/itempage_test.go",
+      "sha256": "92c097f79d34c2c6761a1283b22586aed2cae95f8a53912e8d31d5695ee8408c"
+    },
+    {
+      "path": "internal/town/keys.go",
+      "sha256": "4dd3228ad4981f6a12113cab524d52b4d5d3b81df37fc8f57eb165d175390d97"
+    },
+    {
+      "path": "internal/town/layout.go",
+      "sha256": "b11c4a2706b8a907f238c73c5ff26e892fa123f1578067a9ea0e4936bbcaf3a1"
+    },
+    {
+      "path": "internal/town/marker.go",
+      "sha256": "7f649c431fb2bb62a0b3090e19186ce25614b3add684d8f086cb412488bbe558"
+    },
+    {
+      "path": "internal/town/marker_test.go",
+      "sha256": "f692f012301c8924df9844ce354a9fbf0e53196bfb690e37338d2e373c2a69a7"
+    },
+    {
+      "path": "internal/town/member_snapshot.go",
+      "sha256": "025e7b842deeb08b5f363ba7f97217ed52180aa520ba4f4a79bb7d1783bc43b1"
+    },
+    {
+      "path": "internal/town/mouth.go",
+      "sha256": "1af0f23b6d03e75d3521ff14dd2f5424561f4e8288d2f0af0e4ae1fb7188e9fd"
+    },
+    {
+      "path": "internal/town/outdoor.go",
+      "sha256": "896058b46fa98880812d85c528e0a2f965066f8d12690138b3e6b6e4772a7ef3"
+    },
+    {
+      "path": "internal/town/outdoor_test.go",
+      "sha256": "7a692de13844f901c44d68e1a94e9401dce8a34ded16a2c9196c0f8f7824164f"
+    },
+    {
+      "path": "internal/town/portrait.go",
+      "sha256": "88d0738776d4aff439d5800476a75a6ace7a513a68273e5b88826f961693468d"
+    },
+    {
+      "path": "internal/town/portrait_test.go",
+      "sha256": "529b5ea2bcbe21f7f7eb1b4e5c799329a7cdb22c17b4f64248db0fa816092d3a"
+    },
+    {
+      "path": "internal/town/quest.go",
+      "sha256": "ed0e766a58ae2c97ee1cdb92c9257495d3caa9b8a3e7a4b65af86871b480e2a1"
+    },
+    {
+      "path": "internal/town/quest_offer.go",
+      "sha256": "679f49066a33905825efd97d4173e1ab125a87a05388714797a2fbb892da0870"
+    },
+    {
+      "path": "internal/town/quest_offer_test.go",
+      "sha256": "a2d4733c6b307934cfd844cacc535e6b2370c50526bae119794841d8299a55eb"
+    },
+    {
+      "path": "internal/town/quest_reward_isolation_test.go",
+      "sha256": "54fa3a5c76745ca03e9ae420ada6b35a663aa20f820d6fc4069ecf2bf4bacd30"
+    },
+    {
+      "path": "internal/town/quest_test.go",
+      "sha256": "b9e72a5381dbbd1c59df289ee8580c8a805a981ab01256a5b432fc99ba2a6699"
+    },
+    {
+      "path": "internal/town/questlist.go",
+      "sha256": "acb3dc5b6fab437bd8c5ceffb5d5b8ad5d18035d72b1097c7fce5f4e9cf12274"
+    },
+    {
+      "path": "internal/town/questlist_test.go",
+      "sha256": "b39d0eaeb9e7f9c0833a7c7a15b997ec7913ee457d2621f491b860017d23bed1"
+    },
+    {
+      "path": "internal/town/recruit.go",
+      "sha256": "bbf6050637f5874bbf201a9ca078d30a17320f8740a2b6cd045d98327a48136a"
+    },
+    {
+      "path": "internal/town/recruit_isolation_test.go",
+      "sha256": "a2541ce559c3083898810d27200650aef957c1d36a27d90a5fa1b4e3bfe59b6a"
+    },
+    {
+      "path": "internal/town/recruit_test.go",
+      "sha256": "d7870d7535e524402bc243e825512252ff09ef7a2cfa5dc08d1ad743f55e3a5f"
+    },
+    {
+      "path": "internal/town/rest.go",
+      "sha256": "5e7360454d9242ce3c19be3c1cb42a0c9a4e70ba39a8e40d962c203e9b5eef41"
+    },
+    {
+      "path": "internal/town/rest_test.go",
+      "sha256": "422f40d1871abaaf31302f010ab9cce300fb585abd983919393e31e4c34c8a15"
+    },
+    {
+      "path": "internal/town/route.go",
+      "sha256": "0b0211c6df3519fed64155057f009e008c4891c9e0a4c537f66386f5a0e7a90c"
+    },
+    {
+      "path": "internal/town/scroll.go",
+      "sha256": "c7321a69a92f1fcd47e132c484fd2a6ce94ba40f6aec22dc493089219819ccac"
+    },
+    {
+      "path": "internal/town/scroll_test.go",
+      "sha256": "24d4a93b17ab0c27d6fde25bbeefbc20bca8a7050f49aaf6b651e75f0656d5a4"
+    },
+    {
+      "path": "internal/town/session.go",
+      "sha256": "150cf64c7dcc77deb852e9b33e9061cf54f55a1d358af075d4c8416329aa41c6"
+    },
+    {
+      "path": "internal/town/session_test.go",
+      "sha256": "847c86cf92e2f895f702dd7670630eb4e8811d3d6c4f538b42c7c93b6261e436"
+    },
+    {
+      "path": "internal/town/sheet.go",
+      "sha256": "c5b2d1d01518a183289deac80bc2e84c7b35c3c331bb5ca17391ef838403cc8b"
+    },
+    {
+      "path": "internal/town/sheet_outside.go",
+      "sha256": "4e1a58579ac2f7604dd795f1fe01e1dc8f5187eb13db4f884ce6a669872d9d57"
+    },
+    {
+      "path": "internal/town/sheet_outside_test.go",
+      "sha256": "bbecbbaa28c66576937b4c8bc2967a0df3dc8dd278b12e4a08f28ca7f1ac369f"
+    },
+    {
+      "path": "internal/town/sheet_return_test.go",
+      "sha256": "5e93e95c85ee9e4e533c0880ee66ee939e69cf39175bc9dcf3cd941f58e9c1c8"
+    },
+    {
+      "path": "internal/town/sheet_test.go",
+      "sha256": "5dd4b6c637c8ef98f08f96dfd238b8ce44d751129eb2f69a40893347df43e177"
+    },
+    {
+      "path": "internal/town/shop.go",
+      "sha256": "b61dea7142f7301739afdb6b6d97b63f73ff10d45d41253ba7a27f6545e05cd2"
+    },
+    {
+      "path": "internal/town/shop_test.go",
+      "sha256": "09d6f7a455d929a8411646d61cd30193060a85cfc8dddf8dfed5502624312a0c"
+    },
+    {
+      "path": "internal/town/spelledit.go",
+      "sha256": "6f6eba4eb075b48d28a6dd5c6b670fb4b13461f96f70515755dc692aa540465e"
+    },
+    {
+      "path": "internal/town/spelledit_flow.go",
+      "sha256": "45e8e5d4ef9d0de395249fd125b6beff96673426dd36a41a7d4d84fe1d3a8023"
+    },
+    {
+      "path": "internal/town/spelledit_page.go",
+      "sha256": "07797f8b7fc48753b1b044a6c11ab752210ca45c23170205ea57c300af359045"
+    },
+    {
+      "path": "internal/town/spelledit_test.go",
+      "sha256": "08450872824c535ccdc56dc96ae46be2eae56d02bb7ce79c0297d92ba315c889"
+    },
+    {
+      "path": "internal/town/spelllist.go",
+      "sha256": "4cbbaf7f9af2996bf3985e116e4c41fa43184337a34b69f377f65b8025e55973"
+    },
+    {
+      "path": "internal/town/start_leader_test.go",
+      "sha256": "66b3796f87c200ee1b8e8b091b6c32dedc329b5a9fd440d531b94231d865c19d"
+    },
+    {
+      "path": "internal/town/stay_transaction_test.go",
+      "sha256": "c7306975c89c9ad48e1e14ea55036f0bc56bf5016aaf71ded708440895fc2f2a"
+    },
+    {
+      "path": "internal/town/text.go",
+      "sha256": "5354a120fbc3d4331a0a4dc13950dca1ac2c11a7a2bf5be208602362fefe96bd"
+    },
+    {
+      "path": "internal/town/topics.go",
+      "sha256": "b7ac43fd31adec84d52fc724b0f5a5986772449a7e1299db6762a308e1001828"
+    },
+    {
+      "path": "internal/town/topics_test.go",
+      "sha256": "c6d18692900e0f291006dd34276db8cd69cdb6f2babfa387bd727cd73eb9b82b"
+    },
+    {
+      "path": "internal/town/train.go",
+      "sha256": "8811f07bdd86782a8e6bd50adf2c34715473b6ea9480638dcc776838a6df220d"
+    },
+    {
+      "path": "internal/town/train_test.go",
+      "sha256": "35c7bf8cae3f085a3a58d300a2f7b28b84882ceaac6d3a30637f5d7e989a4be7"
+    },
+    {
+      "path": "internal/town/uitext.go",
+      "sha256": "439e3dd562716fd87b8a7545f3cdea00a35423d9e1d87b36e82d195896d68651"
+    },
+    {
+      "path": "internal/town/uitext_blank_test.go",
+      "sha256": "e05e9597dd50bde18139a5138def487ecb9f4cba2f65c0fac4386517bbccb775"
+    },
+    {
+      "path": "internal/ui/battle.go",
+      "sha256": "ec5501101d2e3a1db259593df8686209c49f312be73c1e4b28eee1afd817e76c"
+    },
+    {
+      "path": "internal/ui/battle_body.go",
+      "sha256": "d368adbb714a87a1a160b701762632334d7c03b06f68bd2e2709a176e88dc4a0"
+    },
+    {
+      "path": "internal/ui/battle_body_test.go",
+      "sha256": "bca5f49a9f8c02599f42788b2801ffb39a7a7694b3bc76ea772de9bc380954c1"
+    },
+    {
+      "path": "internal/ui/battle_cjk.go",
+      "sha256": "6e19cdcd5b55c32635ab362ed70093409fda16cade88837d80863b3ebd0cf093"
+    },
+    {
+      "path": "internal/ui/battle_commands.go",
+      "sha256": "125b9512b50748031d2bf8d64f135d24081f8fb8d2f45a52c7281f7429f56874"
+    },
+    {
+      "path": "internal/ui/battle_marker_test.go",
+      "sha256": "f35dac541c06ad9b89bcb0354b1e1f7073d09bef55fd7bfe685faf58361e429c"
+    },
+    {
+      "path": "internal/ui/battle_message_cjk_test.go",
+      "sha256": "02099b23dfd80a56ed8afa85d875926de524a47c14a56037daa10d4619bde36d"
+    },
+    {
+      "path": "internal/ui/battle_sheet.go",
+      "sha256": "b749d3de6b43544763cf18471d5ffa1cb4ef646972306164707ee00a42952709"
+    },
+    {
+      "path": "internal/ui/battletiles.go",
+      "sha256": "0603e06c856398c96c5f9849e379ab24823cbf0b623e32aca8dde7856a26f358"
+    },
+    {
+      "path": "internal/ui/bitmap_editor.go",
+      "sha256": "605c1f97b4f8ea76444abd0f962b59006810f7b22c0ad040a0db77183ab5ee5b"
+    },
+    {
+      "path": "internal/ui/custom_bitmap.go",
+      "sha256": "03981dab48277d888d4fe27d171a58a1fbaf42092e3d3fc7b444b77d3db66f10"
+    },
+    {
+      "path": "internal/ui/delete.go",
+      "sha256": "38c3c9c8511fd97d73efff2ab88dd4718c149f07fdbe1bb816006cffca559fd2"
+    },
+    {
+      "path": "internal/ui/display_name.go",
+      "sha256": "c06f2aa71b6eef5c1ca7e1d1b13338dbd06b4664ca9141c6e99c836b2ef2dc94"
+    },
+    {
+      "path": "internal/ui/display_name_test.go",
+      "sha256": "c9bb557861d4f6f63128ae3bc70eff19b11f37ebd9b28afa73223d2cc4cb6bd5"
+    },
+    {
+      "path": "internal/ui/ending.go",
+      "sha256": "ee55efec77b13d1d6078d3cca32c918c4a73956c7993a5a8f9055c9011408523"
+    },
+    {
+      "path": "internal/ui/harbor.go",
+      "sha256": "aa89e89d669ac94e80d35fb37d37c62e8c8a0c5753a7e7cf9a516e40c2118ec6"
+    },
+    {
+      "path": "internal/ui/idle_party_test.go",
+      "sha256": "508d7dfbbb7c7e496b8f75f8c43ac3a9a1d0c8fba4d74c7c552713888473cf2c"
+    },
+    {
+      "path": "internal/ui/itempage.go",
+      "sha256": "49406114a3e64be17970e4372802109bbde8ddaf6d803cf44ccea0d6133ab9b7"
+    },
+    {
+      "path": "internal/ui/itempage_cjk.go",
+      "sha256": "52f5e540d3c1a22ae36fd78522f61c659ef404c063d20ac25266ecd0024ff798"
+    },
+    {
+      "path": "internal/ui/itempage_test.go",
+      "sha256": "b85e358079be8aeca9de7a0cd692de02dd78e821304ff8aeaadb9cba24fa2f91"
+    },
+    {
+      "path": "internal/ui/menu.go",
+      "sha256": "54f3562bb13e0491416b58bbbe090b7a59f20360dbf74810695ec41a970508c7"
+    },
+    {
+      "path": "internal/ui/newcharacter.go",
+      "sha256": "25d79a7931fc8d29f366e841b980b09c39717b2cdf38d4ddcd43197d4fc08019"
+    },
+    {
+      "path": "internal/ui/newcharacter_cjk.go",
+      "sha256": "5065ecabf7af03eb7bb9ad8e2a96003d414f0d98c1d9a7beabc4213fca36236e"
+    },
+    {
+      "path": "internal/ui/outdoor.go",
+      "sha256": "89630cbfec3050df0d188bd1ce5833d31fcbbea09d9ff81223aaca734765de89"
+    },
+    {
+      "path": "internal/ui/roster.go",
+      "sha256": "bccf50eba08000b5bf15b680eb2c2b498dc896577362edca2a6b8c25c05e4378"
+    },
+    {
+      "path": "internal/ui/sheet.go",
+      "sha256": "905e8cdbd820c50b9f1170b831df531216d291c4b7035fde0ce99326cf7abade"
+    },
+    {
+      "path": "internal/ui/sheet_cjk.go",
+      "sha256": "7d9cec86a27419f04e5efd1e9387cfcf1333de5368d72508aa5d191f7c15e584"
+    },
+    {
+      "path": "internal/ui/sheet_cjk_test.go",
+      "sha256": "f5ca945f4074d512600c981a8c85efaa19a3442739b1e0181c017abfd9fecbdb"
+    },
+    {
+      "path": "internal/ui/spelledit.go",
+      "sha256": "13db0c0ff5326112cbf3662278066beed1136bbee7dd2fd0bc8669c471eb0e95"
+    },
+    {
+      "path": "internal/ui/spelledit_cjk.go",
+      "sha256": "26b6f9c5f5d3bc2d808caebbe4659cd731d0390f6c754933dc9c467ba428b8a5"
+    },
+    {
+      "path": "internal/ui/town.go",
+      "sha256": "f9fef8b0f7747193d438fd4bb9a14b0b22332f79cf3e4642a725454353c7e741"
+    },
+    {
+      "path": "internal/ui/world.go",
+      "sha256": "04b19bf5b2630e257a39dcf36e07135fbda58bc33f71be59f1bd2c1fabd6bb42"
+    },
+    {
+      "path": "internal/ui/world_prompt_cjk_test.go",
+      "sha256": "e3d24cd4ff81f608175af355b97fa12c3acb5840703ca3c4964074df7f4343f7"
+    },
+    {
+      "path": "internal/world/cjk.go",
+      "sha256": "2f91edc68dc2eef1eecf5caf154856c0806f6337ee7f24ad90c0f5e1397d3e3e"
+    },
+    {
+      "path": "internal/world/clock.go",
+      "sha256": "a41808edda2e42280833d2e23f7aa78462d9a5711b0977a9afd286f5af2ee8dd"
+    },
+    {
+      "path": "internal/world/clock_test.go",
+      "sha256": "c8e27e854245ed7cb576c5d5a3c79084d73b4fc5459b6b0415c38df0ecf6a19b"
+    },
+    {
+      "path": "internal/world/marker.go",
+      "sha256": "ffc8ad0bbc0fde960d58c5a660d9cd26ad8a4b3e31b6cd5182637fa7ae7c5a44"
+    },
+    {
+      "path": "internal/world/names.go",
+      "sha256": "02a741a4ccaed322a95bef1d7cb7298bc11008382e8d88096040639dd7c1a2bf"
+    },
+    {
+      "path": "internal/world/road.go",
+      "sha256": "00dea8eae45146f931c557542ba660c23b013ea6d2d6623dfc606bcccb389661"
+    },
+    {
+      "path": "internal/world/road_test.go",
+      "sha256": "fd7861f5cb2fec1c255ed5299ae413dbd11c78ac1d7ad40e8a6ca8b402c493e2"
+    },
+    {
+      "path": "internal/world/screen.go",
+      "sha256": "e4a29c473ee5a84be7717cd07367640520603a6d284fe410391b497211a8ea70"
+    },
+    {
+      "path": "internal/world/session.go",
+      "sha256": "caf2eb573c71e788406cb7501ea105ca4f9dba4f7fc11c0fce1875622a7c7933"
+    },
+    {
+      "path": "internal/world/session_test.go",
+      "sha256": "5f72aa54906358615144dc880bc98a1606b56a7567bb51c44659b53939554bc0"
+    },
+    {
+      "path": "internal/world/town_code_test.go",
+      "sha256": "7b478d8e8cf7537f8abfca8ecb35d434386344fb34e4330291d854ed0cda20e2"
+    },
+    {
+      "path": "internal/world/travel.go",
+      "sha256": "1add402c229f0ac5c44dfd324412508d7ab6af9a81cac35a3e83e16f4f42a79e"
+    },
+    {
+      "path": "internal/world/travel_test.go",
+      "sha256": "4edf33ca63388e5023719b6c326bfd9fb460a6e878333daae2f44b4378f70d4b"
+    },
+    {
+      "path": "internal/world/weather.go",
+      "sha256": "fcbf0ba2bffc06f61f2618abae0ff10e4e3bbbb8ba5c3cb3df04bdf8fc5729d2"
+    },
+    {
+      "path": "internal/world/weather_animation_test.go",
+      "sha256": "c35becae4fafca32b9752cd361fbb4cb625f479a186f8b60a474a8cdc38f4f92"
+    },
+    {
+      "path": "internal/world/world.go",
+      "sha256": "1b3fecff0b020db2ceca10cc627e7bbc4ad47fd5e6e576cd6600d99c0be03364"
+    },
+    {
+      "path": "go.mod",
+      "sha256": "dc42b76efeee7041fc0177bb963b6b4c6c9d48170115251ef496ab5763974e40"
+    },
+    {
+      "path": "go.sum",
+      "sha256": "d0196e44f1e5cf37ce4fb34627196e7a269b4e5899fe71d663b7d6b557f2bffb"
+    },
+    {
+      "path": "assets/original-derived-data/character-roster.json",
+      "sha256": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413"
+    },
+    {
+      "path": "assets/original-derived-png/ega/KOLPICS-MARKERS/kolpics-markers.png",
+      "sha256": "112c03fc64c96499989ef312749b898a3d59a96bce520cfbc2d3308f4c49ff17"
+    },
+    {
+      "path": "assets/original-derived-png/ega/BATTLE/battle-tiles-08.png",
+      "sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b"
+    },
+    {
+      "path": "assets/ui-font/manifest.json",
+      "sha256": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d"
+    },
+    {
+      "path": "assets/ui-font/zh-hant-16.png",
+      "sha256": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318"
+    },
+    {
+      "path": "docs/i18n/display-names-zh-Hant.tsv",
+      "sha256": "679d011aa245f644584b88d8b8614e24edcc9b080a375f4deea9ecaf28812e4b"
+    },
+    {
+      "path": "docs/i18n/ui-zh-Hant.json",
+      "sha256": "af3ac4b95945b442b8ba4ae861a37b377856ed3f7637b4ae23cfdbf36bf03c17"
+    }
+  ],
+  "attachments": [
+    {
+      "file": "remake-gui6-plan-01.png-x1.png",
+      "sha256": "a25d5982d0f73a572722e9438da620a20022ec8469b1ed3bbe89e45439600914",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-01.png-x3.png",
+      "sha256": "441a0c525f96c8130f9d1a38c04ae8f76e2f7e172e06c610dd14a199fbd23c1a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-02.png-x1.png",
+      "sha256": "7ac29ad833d4acb8a25816e9fd6cea53427b00bf65e2790271c51219968b793a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-02.png-x3.png",
+      "sha256": "59d140a5aea10da8cbd35da3cc5991434e7196da17c16efe4d940c6fd5f2a845",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-03.png-x1.png",
+      "sha256": "7ac29ad833d4acb8a25816e9fd6cea53427b00bf65e2790271c51219968b793a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-03.png-x3.png",
+      "sha256": "59d140a5aea10da8cbd35da3cc5991434e7196da17c16efe4d940c6fd5f2a845",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-05.png-x1.png",
+      "sha256": "1b0bcb07f96b3869efaddc4804346851c9e26798a0b42e244cc765363f2b3512",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-05.png-x3.png",
+      "sha256": "f682a119bf6381a2721e7c5ad4b1d8e51f92aa46bc64332b43979e62f16f55ad",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-08.png-x1.png",
+      "sha256": "7ac29ad833d4acb8a25816e9fd6cea53427b00bf65e2790271c51219968b793a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-08.png-x3.png",
+      "sha256": "59d140a5aea10da8cbd35da3cc5991434e7196da17c16efe4d940c6fd5f2a845",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-10.png-x1.png",
+      "sha256": "1b0bcb07f96b3869efaddc4804346851c9e26798a0b42e244cc765363f2b3512",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-10.png-x3.png",
+      "sha256": "f682a119bf6381a2721e7c5ad4b1d8e51f92aa46bc64332b43979e62f16f55ad",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-14.png-x1.png",
+      "sha256": "75a718e9b77bb76983b29d81c5a686c74ded3f4a74b0dcaa93162c8fcf4f6ff9",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui6-plan-14.png-x3.png",
+      "sha256": "ed0b02dea756b8fb93bd634eafa4fe62c0059905ed6eb6b83c86fa20e9746f70",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-07.png-x1.png",
+      "sha256": "93a41caa518e4b729cc743434f3754482477c99ae62cd89b5f7c9b227357cd44",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-07.png-x3.png",
+      "sha256": "e491a6ce78bf9a5ae05b2a70a0b9b6ad5a70cec5144c0032a5bc3511eb8338e4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-09.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-09.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-10.png-x1.png",
+      "sha256": "1b0bcb07f96b3869efaddc4804346851c9e26798a0b42e244cc765363f2b3512",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-10.png-x3.png",
+      "sha256": "f682a119bf6381a2721e7c5ad4b1d8e51f92aa46bc64332b43979e62f16f55ad",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-15.png-x1.png",
+      "sha256": "1b0bcb07f96b3869efaddc4804346851c9e26798a0b42e244cc765363f2b3512",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-15.png-x3.png",
+      "sha256": "f682a119bf6381a2721e7c5ad4b1d8e51f92aa46bc64332b43979e62f16f55ad",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-24.png-x1.png",
+      "sha256": "1b0bcb07f96b3869efaddc4804346851c9e26798a0b42e244cc765363f2b3512",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-24.png-x3.png",
+      "sha256": "f682a119bf6381a2721e7c5ad4b1d8e51f92aa46bc64332b43979e62f16f55ad",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-31.png-x1.png",
+      "sha256": "22b1c9b53df44a2b5d4726f0a310185e1caa99caaedc87a779c67f4c72ef0038",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-31.png-x3.png",
+      "sha256": "944708a3a944252368dbc8307125e2c73797fa97890669e1aaa7045027b5be0e",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-34.png-x1.png",
+      "sha256": "060d42b9d620de3576854ecef0fd131ddd5ab468fe613b77ab3283288c0c1cc4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-34.png-x3.png",
+      "sha256": "e6db5005da3d8ebcbce06f7a18d93788591bba8f28247a882ce90762911396d5",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-38.png-x1.png",
+      "sha256": "e0a38f7c6763f2181b7c504f06cd584f3fc34a588519e27fc589470abe19794e",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui7-plan-38.png-x3.png",
+      "sha256": "69494ba54183e4c4122e80e3d08bb589450c996668b9a0340248c106e672e49a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-02.png-x1.png",
+      "sha256": "a25d5982d0f73a572722e9438da620a20022ec8469b1ed3bbe89e45439600914",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-02.png-x3.png",
+      "sha256": "441a0c525f96c8130f9d1a38c04ae8f76e2f7e172e06c610dd14a199fbd23c1a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-03.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-03.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-04.png-x1.png",
+      "sha256": "93a41caa518e4b729cc743434f3754482477c99ae62cd89b5f7c9b227357cd44",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-04.png-x3.png",
+      "sha256": "e491a6ce78bf9a5ae05b2a70a0b9b6ad5a70cec5144c0032a5bc3511eb8338e4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-05.png-x1.png",
+      "sha256": "e6134d10e9941332896e8d0b91811bed428d93e6ef9a80b7daf44eb9ebb9730d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-05.png-x3.png",
+      "sha256": "b9dbf80be2049fb5271745c77ac811b791da9643ef28ae06619e0cb0d00a9082",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-06.png-x1.png",
+      "sha256": "841e4320eb0dcd8441f095f108b1b62f7d33345fbc6eb3a0b72db886ebbb4cc3",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-06.png-x3.png",
+      "sha256": "d757d4cb202fb6e1bb6d0c30a746bd0c1e407214076cfd0beb57ab1e0b6c0ed7",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-07.png-x1.png",
+      "sha256": "727770a3c75d76c7923dd458d8ab8577b9d9408750cdf375cc51643f65511c00",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-07.png-x3.png",
+      "sha256": "b0bcc38654fdc8598416093c32e9c861266548d3b7a6cf4af8bbd50f328ef111",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-08.png-x1.png",
+      "sha256": "e6134d10e9941332896e8d0b91811bed428d93e6ef9a80b7daf44eb9ebb9730d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-08.png-x3.png",
+      "sha256": "b9dbf80be2049fb5271745c77ac811b791da9643ef28ae06619e0cb0d00a9082",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-09.png-x1.png",
+      "sha256": "e6134d10e9941332896e8d0b91811bed428d93e6ef9a80b7daf44eb9ebb9730d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-09.png-x3.png",
+      "sha256": "b9dbf80be2049fb5271745c77ac811b791da9643ef28ae06619e0cb0d00a9082",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-10.png-x1.png",
+      "sha256": "d92b999016496bf9de1b6e0dcff0bdfc88026863ae706f7217a1c28896222a50",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-10.png-x3.png",
+      "sha256": "6f232216e55b87c8c9d827c465ae5bd2cf23990fd89ce4e4f671b3d7ddc5cc25",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-11.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-11.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-12.png-x1.png",
+      "sha256": "75a718e9b77bb76983b29d81c5a686c74ded3f4a74b0dcaa93162c8fcf4f6ff9",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui9-plan-12.png-x3.png",
+      "sha256": "ed0b02dea756b8fb93bd634eafa4fe62c0059905ed6eb6b83c86fa20e9746f70",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-02.png-x1.png",
+      "sha256": "a25d5982d0f73a572722e9438da620a20022ec8469b1ed3bbe89e45439600914",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-02.png-x3.png",
+      "sha256": "441a0c525f96c8130f9d1a38c04ae8f76e2f7e172e06c610dd14a199fbd23c1a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-03.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-03.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-04.png-x1.png",
+      "sha256": "93a41caa518e4b729cc743434f3754482477c99ae62cd89b5f7c9b227357cd44",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-04.png-x3.png",
+      "sha256": "e491a6ce78bf9a5ae05b2a70a0b9b6ad5a70cec5144c0032a5bc3511eb8338e4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-05.png-x1.png",
+      "sha256": "3885f4dcdf3a3558877f61c71411c831e3ba4b07bee60704d6b4e91279d94e4d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-05.png-x3.png",
+      "sha256": "688d7177ce22b27a80f829c69ecd856aca591f5afc651afcae026c5bd77f5115",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-06.png-x1.png",
+      "sha256": "841e4320eb0dcd8441f095f108b1b62f7d33345fbc6eb3a0b72db886ebbb4cc3",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-06.png-x3.png",
+      "sha256": "d757d4cb202fb6e1bb6d0c30a746bd0c1e407214076cfd0beb57ab1e0b6c0ed7",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-07.png-x1.png",
+      "sha256": "d92b999016496bf9de1b6e0dcff0bdfc88026863ae706f7217a1c28896222a50",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-07.png-x3.png",
+      "sha256": "6f232216e55b87c8c9d827c465ae5bd2cf23990fd89ce4e4f671b3d7ddc5cc25",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-08.png-x1.png",
+      "sha256": "31fb162d72a8df2ad1fb58d6e18a670cc9225fccfbbfa59f4ea7c47a4604f23c",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-08.png-x3.png",
+      "sha256": "638e3f20110439fe0037916919ad476e54d01fc473ca4241ba013c5e38cbe7d4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-09.png-x1.png",
+      "sha256": "e6134d10e9941332896e8d0b91811bed428d93e6ef9a80b7daf44eb9ebb9730d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-09.png-x3.png",
+      "sha256": "b9dbf80be2049fb5271745c77ac811b791da9643ef28ae06619e0cb0d00a9082",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-10.png-x1.png",
+      "sha256": "d92b999016496bf9de1b6e0dcff0bdfc88026863ae706f7217a1c28896222a50",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-10.png-x3.png",
+      "sha256": "6f232216e55b87c8c9d827c465ae5bd2cf23990fd89ce4e4f671b3d7ddc5cc25",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-11.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-11.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-12.png-x1.png",
+      "sha256": "e6134d10e9941332896e8d0b91811bed428d93e6ef9a80b7daf44eb9ebb9730d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-12.png-x3.png",
+      "sha256": "b9dbf80be2049fb5271745c77ac811b791da9643ef28ae06619e0cb0d00a9082",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-13.png-x1.png",
+      "sha256": "7ac29ad833d4acb8a25816e9fd6cea53427b00bf65e2790271c51219968b793a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-13.png-x3.png",
+      "sha256": "59d140a5aea10da8cbd35da3cc5991434e7196da17c16efe4d940c6fd5f2a845",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-14.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-14.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-15.png-x1.png",
+      "sha256": "438dd5f02f8c7f0bd2269936866a346493ae8fa5a956d3b23a85a5a53703f44c",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-15.png-x3.png",
+      "sha256": "4a18226f29a5af9e7ad2ceabbeb1807530367e634dcc989f931ac62840c9243f",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-16.png-x1.png",
+      "sha256": "93a41caa518e4b729cc743434f3754482477c99ae62cd89b5f7c9b227357cd44",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-16.png-x3.png",
+      "sha256": "e491a6ce78bf9a5ae05b2a70a0b9b6ad5a70cec5144c0032a5bc3511eb8338e4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-17.png-x1.png",
+      "sha256": "8535df4be0b516524fda6a1937a97734e94716720b71ffd492391556db4f6ec8",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-17.png-x3.png",
+      "sha256": "79be11f646b27a4a3edfe168dbc35fb1632f9b8635cf464fe7bd02be769201fc",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-18.png-x1.png",
+      "sha256": "438dd5f02f8c7f0bd2269936866a346493ae8fa5a956d3b23a85a5a53703f44c",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-18.png-x3.png",
+      "sha256": "4a18226f29a5af9e7ad2ceabbeb1807530367e634dcc989f931ac62840c9243f",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-19.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-19.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-20.png-x1.png",
+      "sha256": "93a41caa518e4b729cc743434f3754482477c99ae62cd89b5f7c9b227357cd44",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-20.png-x3.png",
+      "sha256": "e491a6ce78bf9a5ae05b2a70a0b9b6ad5a70cec5144c0032a5bc3511eb8338e4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-21.png-x1.png",
+      "sha256": "31fb162d72a8df2ad1fb58d6e18a670cc9225fccfbbfa59f4ea7c47a4604f23c",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-21.png-x3.png",
+      "sha256": "638e3f20110439fe0037916919ad476e54d01fc473ca4241ba013c5e38cbe7d4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-22.png-x1.png",
+      "sha256": "490933f7e377433eddf0fbe744540b75d7cabfe7719a5c803cb54ae36f4f72e1",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-22.png-x3.png",
+      "sha256": "172a8cf84dc99082c71da97597924e79a25aca80869f25b06dd0a95568296147",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-23.png-x1.png",
+      "sha256": "727770a3c75d76c7923dd458d8ab8577b9d9408750cdf375cc51643f65511c00",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-23.png-x3.png",
+      "sha256": "b0bcc38654fdc8598416093c32e9c861266548d3b7a6cf4af8bbd50f328ef111",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-24.png-x1.png",
+      "sha256": "e6134d10e9941332896e8d0b91811bed428d93e6ef9a80b7daf44eb9ebb9730d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-24.png-x3.png",
+      "sha256": "b9dbf80be2049fb5271745c77ac811b791da9643ef28ae06619e0cb0d00a9082",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-25.png-x1.png",
+      "sha256": "e6134d10e9941332896e8d0b91811bed428d93e6ef9a80b7daf44eb9ebb9730d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-25.png-x3.png",
+      "sha256": "b9dbf80be2049fb5271745c77ac811b791da9643ef28ae06619e0cb0d00a9082",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-26.png-x1.png",
+      "sha256": "93a41caa518e4b729cc743434f3754482477c99ae62cd89b5f7c9b227357cd44",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-26.png-x3.png",
+      "sha256": "e491a6ce78bf9a5ae05b2a70a0b9b6ad5a70cec5144c0032a5bc3511eb8338e4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-27.png-x1.png",
+      "sha256": "f9e9724809832c00eb1e741f9a73abb35e8075158178044efbc848ca99460105",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-gui10-plan-27.png-x3.png",
+      "sha256": "5ff279ac65d13fa221d364a426b9a3f72a834f7c3941ba8a395bcc4d8f38ff34",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-417.png",
+      "sha256": "d0e2ff9a03f46ecd4e8aa1161c3dae01e8bcfb3fb1c13199f14a6d1bc69289f2",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-418.png",
+      "sha256": "fae777db4be82a3562fa38c3ba15790db6cb10e9b1ad72c73ca02eac7c4b5790",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-420.png",
+      "sha256": "83660dba9a5ac8f83d3c1d4f9406ad6768ddac62ba759c8fbe992b6e2771b13b",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-421.png",
+      "sha256": "315082ef6b434af61d6652aab5c2e1819cf260836d8d152f6d9c482fca7662bc",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-422.png",
+      "sha256": "35d733943360ac7c7bf4403589d1c0b01e56a9557fc047cc6ba03510978f36f8",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-426.png",
+      "sha256": "f92cd43ee7a33acdd9873db4d4ff6c6873690dac6e11fcd8ef360b4dcf9b54ad",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-430.png",
+      "sha256": "dcc44b937d9e7862b9f1fbb1baa2260bab18d7539ccfac1a29ab91769abec976",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-436.png",
+      "sha256": "315082ef6b434af61d6652aab5c2e1819cf260836d8d152f6d9c482fca7662bc",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-437.png",
+      "sha256": "d153a6dcaee6dbad4761057db968601dce9a9b1079cc4edfaaf860252d0b492a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-438.png",
+      "sha256": "6ea203d6be628a67e839930a11ef71438839fd2ba95111e98957feae90eaf75b",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-440.png",
+      "sha256": "e3d8eff95697c700b81ef7a1902d3f4482f2b8cea3faf82b2f0f6e62f1ae9c18",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-442.png",
+      "sha256": "d153a6dcaee6dbad4761057db968601dce9a9b1079cc4edfaaf860252d0b492a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-444.png",
+      "sha256": "e3d8eff95697c700b81ef7a1902d3f4482f2b8cea3faf82b2f0f6e62f1ae9c18",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-447.png",
+      "sha256": "d153a6dcaee6dbad4761057db968601dce9a9b1079cc4edfaaf860252d0b492a",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-448.png",
+      "sha256": "00035f478f797b2791baa1003f725e5f5c64c63415fd116143da683068ee2004",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-451.png",
+      "sha256": "676b3cdcb8cb9e3e49bb030910d8e551777d05b80891af4f1d4879d7fe9561a8",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-en-step-455.png",
+      "sha256": "e3d8eff95697c700b81ef7a1902d3f4482f2b8cea3faf82b2f0f6e62f1ae9c18",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-417.png",
+      "sha256": "e8b31dd1fe67bdadb5e742b3d0004b84793246a0ab6f6f83091c7210e37f4796",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-418.png",
+      "sha256": "1c525a896d473c5c9c6b8dea1c20f8bffac3bbf8275e655d5fab5d2050d47f8e",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-420.png",
+      "sha256": "9b62a06996a8174816fce3dd59b60fb12f66f369dbd8642b6f1fb0f8fcc8205e",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-421.png",
+      "sha256": "79cb6c4899ecdf139b6adbd6768d4e67debc03e9e695b5a465a6e2240d8f881e",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-422.png",
+      "sha256": "5168a713bc20f51a43faeb70d4c05069621e15fd5765e99f9f2106d754af117f",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-426.png",
+      "sha256": "ad35869c5996097ca5b0ea163c409e838d2d5834e8718b0e58199bb1de8d1d0d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-430.png",
+      "sha256": "bcc88ebf487cac55277110c9727191f0e9c93548544d5e9142985e3f2f4870f9",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-436.png",
+      "sha256": "79cb6c4899ecdf139b6adbd6768d4e67debc03e9e695b5a465a6e2240d8f881e",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-437.png",
+      "sha256": "8d58f01efe31e0d502d7e4fc0bd8dbcc9f46ffc8fee5c962d35bc3e28b1497bf",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-438.png",
+      "sha256": "009641a05297389c9d25c288f2ad5fd8253be11b955c8043363917be6d63d380",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-440.png",
+      "sha256": "30dae9d55ca018ae7cac11c4bbdafe6715fec5a4168fff04de58584e7ee4b086",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-442.png",
+      "sha256": "8d58f01efe31e0d502d7e4fc0bd8dbcc9f46ffc8fee5c962d35bc3e28b1497bf",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-444.png",
+      "sha256": "30dae9d55ca018ae7cac11c4bbdafe6715fec5a4168fff04de58584e7ee4b086",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-447.png",
+      "sha256": "8d58f01efe31e0d502d7e4fc0bd8dbcc9f46ffc8fee5c962d35bc3e28b1497bf",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-448.png",
+      "sha256": "c6f67e11d497ba929b8958e01a0206f1776396aeccaf49eca8e3e408b8d30009",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-451.png",
+      "sha256": "865a3f5852f75b4b8674a027115079f6caec066a9384763dec17fbb4ed6dd33c",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal-final-zh-Hant-step-455.png",
+      "sha256": "30dae9d55ca018ae7cac11c4bbdafe6715fec5a4168fff04de58584e7ee4b086",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "remake-pixel-checks.json",
+      "sha256": "a5c7e5df1baabe6466bf5ea91ebf5a51ab33d3105335114431603497d65c449d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal3-player-receipt.json",
+      "sha256": "d4ee9ee1bcadce32f48bd297d64f450f05cb7e592d8da89bd250ad0ca5de984d",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "product-tests-final.log",
+      "sha256": "912bca0542f4e477aa791b91174f1677ddab7ddc7c6ff0b27af227f40c9075f4",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "normal_final_replay.py",
+      "sha256": "7c6797bffce89c61cdbff49cc1cfbcc6ca96b158049591046e814c235274921e",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "lifecycle-kol_cursor_gui.sh",
+      "sha256": "a0f42ed1add46ea786b4eef8f9125b0ee424bce25237b6bd7be68353f125b483",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "lifecycle-kol_cursor_gui_prepare.py",
+      "sha256": "dc5be50bda020a222a6fd2ce5e082ebf7b6a920bc0e022ed2dc030133fabcaa6",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "lifecycle-kol_cursor_gui_finish.py",
+      "sha256": "f783d8ad515ffbe1c680fa2989cea6314c13b11d4f289f33aacff4af1d4e367f",
+      "uid": 1000,
+      "gid": 1000
+    }
+  ],
+  "resolution_backlinks": [
+    {
+      "module": "DOS/KOLTOWN-unpacked.EXE",
+      "address_space": "IDA linear",
+      "address": "0x249cb",
+      "confidence": "已證實",
+      "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+      "index": "docs/re/target-cursor-address-index.json",
+      "evidence": "docs/re/20261001-target-cursor.md",
+      "older_spec": "docs/re/RESEARCH-LOG.md",
+      "required_correction": "2026-10-01 RE-171-source 勘誤：主列重建重載目前人物指令"
+    }
+  ],
+  "provenance": {
+    "ida_private_output": "workplace/battle-cursor-20261001/cursor-final14-annotated-private.json",
+    "ida_private_sha256": "8ce790191ec1412d2d208170a8736536535b3bc7cabef684d87c7239baf03b6a"
+  },
+  "corrections": [
+    "首輪正常重播第一位是Olear，不能把按鍵說明當作Poontang近戰分支；第二輪先正常YES，再完整走四種子選單",
+    "首輪遠程面板差異來自已證實的起點0,0及空格清除；不放寬第二輪非戰場區零差異判準",
+    "Ebitengine RunGame結束後不能再建圖片，GPU測試改在隔離子行程；修正後同命令乾淨重跑通過",
+    "前版5bf08653沿用其他人物／AI的全域指令；RE-171-source補證sub_249AE前置重載後，先訂正READY規格再修BeginTurn，第三輪以新程式重驗"
+  ],
+  "limits": [
+    "正常軌跡不含游標座標，逐框同相位證據由GPU fixture補充；不稱整場同狀態戰鬥",
+    "等待速度為BIOS等待契約的現代近似，不稱逐週期／精確wall-clock",
+    "回合確認／執行／戰利品其他層、完整攻擊圖示列與保存鏈仍另驗；#33／#64不結案",
+    "此為本機中間建置，未重建dist-all、未發布、未變更正式版號"
+  ],
+  "rights": "經驗證PNG僅依private GitHub既有例外；不授權公開；原始輸入與反組譯payload僅本機",
+  "verifier": {
+    "path": "finish_remake.py",
+    "sha256": "524688c2a014e4f3e3e71512db3454b9c77127a4e264b987e7b6ac45fb6c9552"
+  },
+  "superseded": {
+    "path": "remake-receipt-render-only.json",
+    "sha256": "f1185439465276c2665530106702bb99bde4eeab52ad2b20d258067e7449810c",
+    "reason": "前版5bf08653未追sub_249AE前置重載，初次／換人摘要來源仍錯；保留其原始PNG、來源與測試，不視為來源已驗收"
+  }
+}

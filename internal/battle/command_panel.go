@@ -20,7 +20,7 @@ func (s *State) CommandPanel() []CommandPanelIcon {
 		return nil
 	}
 	command, style, guard := a.Command, a.Style, a.Guard
-	if i == current {
+	if i == current && s.Plan.Prompt != PromptCommand {
 		command, style, guard = s.Plan.Command, s.Plan.Style, s.Plan.Guard
 	}
 	var out []CommandPanelIcon

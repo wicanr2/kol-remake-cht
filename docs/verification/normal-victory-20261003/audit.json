@@ -1,0 +1,27 @@
+{
+  "schema": "kol-normal-victory-final-audit-v1",
+  "receipt_sha256": "6347ca37de9862e4ed5fe51d603d36f455ffe4f5c2d5edb7905474509c82819a",
+  "attachments": 5343,
+  "code_inputs": 318,
+  "initial_receipt_preserved": true,
+  "full_readonly_verification": "passed",
+  "host_control": {
+    "schema": "kol-normal-victory-host-control-v1",
+    "checked_at": "2026-10-02 18:57:30 UTC",
+    "head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "git_diff_check": "passed",
+    "git_staged": [],
+    "project_containers": [],
+    "other_project_container_count": 20,
+    "committed": false,
+    "pushed": false,
+    "remote_writes": false,
+    "release_or_package": false
+  },
+  "root_owned_files": [],
+  "md_directories": [],
+  "artifact_uid_gid": [
+    1000,
+    1000
+  ]
+}

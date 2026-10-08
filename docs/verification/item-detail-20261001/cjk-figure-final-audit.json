@@ -1,0 +1,143 @@
+{
+  "status": "通過",
+  "receipt_sha256": "e419f1e8f1bbb1775a27695c18a2e49652ce966b1c2964ed952a4f12c582eec2",
+  "current_inputs": 526,
+  "attachments": {
+    "docs/verification/item-detail-20261001/cjk-figure-receipt.json": 43,
+    "docs/verification/item-detail-20261001/mirror-receipt.json": 113,
+    "docs/verification/item-detail-20261001/actions-receipt.json": 94,
+    "docs/verification/item-detail-20261001/all-slots-receipt.json": 72,
+    "docs/verification/item-detail-20261001/receipt.json": 27,
+    "docs/verification/battle-target-cursor-20261001/receipt.json": 25,
+    "docs/verification/battle-target-cursor-20261001/remake-receipt.json": 145,
+    "docs/verification/battle-target-cursor-20261001/attack-row-receipt.json": 58
+  },
+  "previous_persistence_locked": [
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-15-en/save.json",
+      "sha256": "63636a5d9b8b104158c616032ef6434705b26b07dddc643f4be9026d3e816386"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-15-en/save.json",
+      "sha256": "d33eb4e9e5fdc27f6d3d2cbe36387dad2114518b8fe27f9fed3084388a3446fe"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-15-zh-Hant/save.json",
+      "sha256": "a7e605e1611e5965259e32e5270ee3f814ed96853f9912beb4b9c4cfb0ca6cc3"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-15-zh-Hant/save.json",
+      "sha256": "0d769c7e33fa36f78da5dbde0c0a24a30da276ab7f3f25b8917c8214b07bb3ac"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-28-en/save.json",
+      "sha256": "bf55f21211b9ac959b6b9e6d32965b36ffd4248c0b8860ed698d2fb9a53d04e0"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-28-en/save.json",
+      "sha256": "cceb95558dec947bc8b7284d129ddae934e7f70054406b40edbc80cd7933e3fd"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-28-zh-Hant/save.json",
+      "sha256": "6cf4914c57fcbd4c5c79f619906766ce2a47e2c54e1b7ff3b2ebaa7e705f47b8"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-28-zh-Hant/save.json",
+      "sha256": "c80b0208007a3446e28cb50d56a372ef9d0f0dbd7335a16ff8eb800b17e8d9e1"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-42-en/save.json",
+      "sha256": "638b5dc58543bfe21932dd6a1d4726307aaa3fb3e0613e2d11c0ccfcc5a50182"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-42-en/save.json",
+      "sha256": "6c2806a392f6d9c0a9263ca2e9df2983b179fa11982a62dc939db3280e414e2f"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-42-zh-Hant/save.json",
+      "sha256": "0aac381be3ea21a4bf86ed2125be924e2b56efde4ec826eaf6ad8504368f42bc"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-42-zh-Hant/save.json",
+      "sha256": "7da5618b32a5ba4dd7dc30b9759a7f1f3795fa95ba998cf6167cc5af71308958"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-56-en/save.json",
+      "sha256": "5254a10fb3bf24ac13e5078badb55c0bf4b71775ed95c167bd29c3e226c009e5"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-56-en/save.json",
+      "sha256": "3cd7c2fa699d869378a78da758f87acf7ced2121da1c7a2bfcf9b253fe21ef11"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-56-zh-Hant/save.json",
+      "sha256": "5e6a64830357ec7bb4e4fc06e2646f47093abe1c9c2eb469428b5f0a146e9300"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-56-zh-Hant/save.json",
+      "sha256": "706f970e6f2279b9b9b75972557a13990c0d06314696855f6c8d7f4052f3251f"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-72-en/save.json",
+      "sha256": "d613e3abeaa56d011b71facbfc72b8f72322684b2ff7c7a1c0b47afe4be45f4d"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-72-en/save.json",
+      "sha256": "2a25d005008e8bd80ff3bccb89fdd1048e94faddbf1e53ee946650b4a75a1a0b"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-72-zh-Hant/save.json",
+      "sha256": "62893dcc2a781bc0f3bdaf307b0768992c7c6239e497c512403649a003d63547"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-72-zh-Hant/save.json",
+      "sha256": "323c41a7a516168f82121bfb908e0fcfd128ab94ec59f449ebbc4f15a42ce3ec"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-88-en/save.json",
+      "sha256": "a45fc817487a54521b935162172583460d528cb82784726b60eb282b21876c61"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-88-en/save.json",
+      "sha256": "728576b108ddd1c6268dc65ae6cf430391b95a54fdb80b5294a7b5798068c9db"
+    },
+    {
+      "path": "workplace/item-detail-20261001/save-mirror-88-zh-Hant/save.json",
+      "sha256": "80230017254d1ac56fa232bb3abc93b729aed1472d97b1fec9a6e0cbf07a0487"
+    },
+    {
+      "path": "workplace/item-detail-20261001/reload-mirror-88-zh-Hant/save.json",
+      "sha256": "f6dcf9d29759da5228cc47eb92695b2718737077f30ab5fbf59c07fe51c04a79"
+    }
+  ],
+  "runner_scripts": [
+    {
+      "source": "remake_mirror.py",
+      "source_sha256": "728f76c4da5977021a312ac78ea2fe9209e2ddbfee36d6321810ec0eac5b1002",
+      "path": "remake_cjk_figure.py",
+      "sha256": "af2556642966a9beb46af702713c7d71e13fc11b3c754f72fa29a4064862cc99"
+    },
+    {
+      "source": "save_mirror.py",
+      "source_sha256": "46d45d69ba9db4a45bcd08b905ecc0c994399eb8c2c0439f9bf6896efcad0a2a",
+      "path": "save_cjk_figure.py",
+      "sha256": "0e06b619d378936298cdbc3dc5410fc30b52ba2faa603a3442810d4fe1b46c47"
+    },
+    {
+      "source": "reload_mirror.py",
+      "source_sha256": "e532133da1f015a24247b05dd237ae8067649b6c520de27c81b0faa247715b59",
+      "path": "reload_cjk_figure.py",
+      "sha256": "f97a7b856dc4268055c909861fa997074e3a4e478d9f88994da4898511a2619c"
+    }
+  ],
+  "tests": {
+    "command": "GOWORK=off KOL_MARKER_ORACLE=1 go test ./internal/... ./cmd/kol -count=1",
+    "log": "workplace/item-detail-20261001/tests-cjk-figure.log",
+    "sha256": "266df961caf9b3f3b247fbd2e8d869bb33638beef34cf56b2d48e7490427b69f",
+    "circle_frames": 104
+  },
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned_or_md_directories": 0,
+  "limits": "繁中Theodoric正常物品頁立繪切片；其他造型、全部動作及英文清單剩餘差異未全驗。"
+}

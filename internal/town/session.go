@@ -338,6 +338,17 @@ func (s *Session) acceptInside() {
 	case s.ShowingItemPage():
 		p := s.Inside.ItemPage
 		switch {
+		case p.GiftConfirm:
+			if id == IconSpacebar {
+				s.confirmGift()
+			}
+		case p.DropConfirm:
+			s.answerItemDrop(id)
+		case len(p.DropMessage) > 0:
+			s.afterItemAction()
+		case len(p.Message) > 0:
+			// 空格確認層唯一的SPACEBAR圖示返回同一選中列（SPEC-031）。
+			s.closeItemAction()
 		case p.Giving:
 			// 等玩家按數字選人；U-TURN 取消。
 			if id == IconUTurn {

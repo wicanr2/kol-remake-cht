@@ -1,0 +1,1605 @@
+{
+  "schema": "kol-original-target-lifecycle-v1",
+  "date": "2026-10-01",
+  "evidence": "已證實；限逐框列出的正常原版路徑與像素",
+  "dosgolem_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+  "seed": 1,
+  "rng_reroll": false,
+  "state_injection": false,
+  "direct_entry": false,
+  "remake_compared": false,
+  "checks": [
+    {
+      "run": "gui6",
+      "frame": "gui6-plan-01.png",
+      "frame_sha256": "63d87090d7c346455e0d128c7ac929b3e53a0ba8c98a4e6103b4119a16818fdb",
+      "key": "Return",
+      "icon_slots": 2,
+      "row": 3,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 5,
+      "capture_step": 1199000000,
+      "last_draw_step": 1197913255,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "191c38c2d50660f5b6eb11b9f4436a60bb5632af20ad20278413013fa2f42eb8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui6",
+      "frame": "gui6-plan-02.png",
+      "frame_sha256": "ace03abcfb331adb3072b4e8d9268b046e5c5c53e78f96670cd115c457df620b",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 3,
+      "col": 5,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1219000000,
+      "last_draw_step": 1218904060,
+      "rect": [
+        232,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "75f9a6afca3c1cc9b589460351e4a9462e9b3db3d00c79cc2b5f65ef4ebaa2c7",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui6",
+      "frame": "gui6-plan-03.png",
+      "frame_sha256": "ace03abcfb331adb3072b4e8d9268b046e5c5c53e78f96670cd115c457df620b",
+      "key": "Esc",
+      "icon_slots": 2,
+      "row": 3,
+      "col": 5,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1239000000,
+      "last_draw_step": 1237986611,
+      "rect": [
+        232,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "75f9a6afca3c1cc9b589460351e4a9462e9b3db3d00c79cc2b5f65ef4ebaa2c7",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui6",
+      "frame": "gui6-plan-05.png",
+      "frame_sha256": "91b7c74ac8233ddd914d53c1f7a7e662ae2cafcffe70c70a2253155c1cc8fe62",
+      "key": "Return",
+      "icon_slots": 7,
+      "row": 3,
+      "col": 5,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": false,
+      "unit": null,
+      "capture_step": 1279000000,
+      "last_draw_step": 1258977416,
+      "rect": [
+        232,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "c7eea0755e47f4e0ce56d7351ccb6e996943d55ff34a911715f3b27c4caf085e",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui6",
+      "frame": "gui6-plan-08.png",
+      "frame_sha256": "2a0c7065174d37bd8550234fda3adc02dfe2402e277eac02bb684a6a9bad0d2f",
+      "key": "Return",
+      "icon_slots": 2,
+      "row": 3,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1339000000,
+      "last_draw_step": 1338488041,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "75f9a6afca3c1cc9b589460351e4a9462e9b3db3d00c79cc2b5f65ef4ebaa2c7",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui6",
+      "frame": "gui6-plan-10.png",
+      "frame_sha256": "91b7c74ac8233ddd914d53c1f7a7e662ae2cafcffe70c70a2253155c1cc8fe62",
+      "key": "Return",
+      "icon_slots": 7,
+      "row": 3,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": false,
+      "unit": null,
+      "capture_step": 1379000000,
+      "last_draw_step": 1359478846,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "c7eea0755e47f4e0ce56d7351ccb6e996943d55ff34a911715f3b27c4caf085e",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui6",
+      "frame": "gui6-plan-14.png",
+      "frame_sha256": "84ade2e588ce815c9aaaca55bd383f23211ddda0a9f7cdd0efb792bec34dbea6",
+      "key": "Return",
+      "icon_slots": 5,
+      "row": 3,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": false,
+      "unit": null,
+      "capture_step": 1459000000,
+      "last_draw_step": 1359478846,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "43b252a8817f6d3d76b33a3237fe52b3eb85c585c8536eae82dc9ca985a8585e",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-07.png",
+      "frame_sha256": "f71ff18648f4e6d378706bfb5b8c2ac7cac425a609359d71be18bc16cdeeb03f",
+      "key": "Return",
+      "icon_slots": 7,
+      "row": 5,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1319000000,
+      "last_draw_step": 1318133316,
+      "rect": [
+        216,
+        88,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "ed620c926b5d16444ec412ad3d5f719d6c8252f3ef59f9e8149545b7c872b14a",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-09.png",
+      "frame_sha256": "e43850587a4fc1018a0d40f64aa270b17c92d2ade5d635d7fd7fa8c7b2dde097",
+      "key": "Return",
+      "icon_slots": 7,
+      "row": 5,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1359000000,
+      "last_draw_step": 1358842756,
+      "rect": [
+        216,
+        88,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-10.png",
+      "frame_sha256": "80eb89a7b6e9d9a1bd1460733372c58814f15f6ad3e1e59820c3f908387a1a00",
+      "key": "Return",
+      "icon_slots": 5,
+      "row": 5,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": false,
+      "unit": null,
+      "capture_step": 1379000000,
+      "last_draw_step": 1358842756,
+      "rect": [
+        216,
+        88,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "c7eea0755e47f4e0ce56d7351ccb6e996943d55ff34a911715f3b27c4caf085e",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-15.png",
+      "frame_sha256": "97bcc8d52a02b6d4654ac01d0f1ff1f2837c82888f6594487bfc94554dd748e7",
+      "key": "Return",
+      "icon_slots": 5,
+      "row": 5,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": false,
+      "unit": null,
+      "capture_step": 1479000000,
+      "last_draw_step": 1358842756,
+      "rect": [
+        216,
+        88,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "c7eea0755e47f4e0ce56d7351ccb6e996943d55ff34a911715f3b27c4caf085e",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-24.png",
+      "frame_sha256": "71969902d3f7110d1dfdf3d423ede62d130b94987be0db064d922897ecbf6478",
+      "key": "Space",
+      "icon_slots": 5,
+      "row": 5,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": false,
+      "unit": null,
+      "capture_step": 1659000000,
+      "last_draw_step": 1358842756,
+      "rect": [
+        216,
+        88,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "c7eea0755e47f4e0ce56d7351ccb6e996943d55ff34a911715f3b27c4caf085e",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-31.png",
+      "frame_sha256": "8cf252b4797966ba6f605fe33d7e7c5fd4afc12c7bec70ee724f925f4a18d683",
+      "key": "Return",
+      "icon_slots": 6,
+      "row": 3,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 2,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1799000000,
+      "last_draw_step": 1798377491,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "f528ea3019afe877f094f1d7cca32d050f2328c66adbf930463907be2c2ccc02",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-34.png",
+      "frame_sha256": "f434f9afdffa94da9f804e2decf803aeab7f1a39029b668f6fd905fb7e32fb5a",
+      "key": "Return",
+      "icon_slots": 8,
+      "row": 3,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 2,
+      "shown": true,
+      "unit": 5,
+      "capture_step": 1859000000,
+      "last_draw_step": 1857533397,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "a30ca27a7a6149653cb833463cc573ebfc69b9f4879e276c776d5de04f398524",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui7",
+      "frame": "gui7-plan-38.png",
+      "frame_sha256": "67a06d5ad2dd435cbe982ea40de4b7acf159dd93b858fc4f078b257b2322b80d",
+      "key": "Return",
+      "icon_slots": 5,
+      "row": 3,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 2,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1939000000,
+      "last_draw_step": 1938316191,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "d620a332f6e0a436428d33034265e354d6fd7ed0b8702c73de7606c1d60f5099",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-02.png",
+      "frame_sha256": "af9902dda16040dad24d6d164d3f8d8123ff1d77b2ea2ba3417ade17753eed71",
+      "key": "Return",
+      "icon_slots": 2,
+      "row": 0,
+      "col": 0,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 5,
+      "capture_step": 1249000000,
+      "last_draw_step": 1248163965,
+      "rect": [
+        152,
+        8,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "191c38c2d50660f5b6eb11b9f4436a60bb5632af20ad20278413013fa2f42eb8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-03.png",
+      "frame_sha256": "5fa13e497ec0351d042b39d7c19a2231a12bd9b0faacf6bf46007dacae71b04d",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 0,
+      "col": 1,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1269000000,
+      "last_draw_step": 1267246521,
+      "rect": [
+        168,
+        8,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-04.png",
+      "frame_sha256": "3ba16db96091ddea8642f27f55a79600cd1b9d0d56c630d7ceb12ba46d0568d5",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 1,
+      "col": 1,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1289000000,
+      "last_draw_step": 1288237324,
+      "rect": [
+        168,
+        24,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "ed620c926b5d16444ec412ad3d5f719d6c8252f3ef59f9e8149545b7c872b14a",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-05.png",
+      "frame_sha256": "073f28559a12c86ad93bfd33afe21a062fbab4c2ee24b83a724d9e9fe824addb",
+      "key": "Left",
+      "icon_slots": 2,
+      "row": 1,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1309000000,
+      "last_draw_step": 1307319871,
+      "rect": [
+        152,
+        24,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-06.png",
+      "frame_sha256": "10667dda67675dd6a653c64ea4c5f815c6011c8e40b956b8920d3d61e90089eb",
+      "key": "Up",
+      "icon_slots": 2,
+      "row": 0,
+      "col": 0,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1329000000,
+      "last_draw_step": 1328310677,
+      "rect": [
+        152,
+        8,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "0175c0ee544a0ca0e86225bba542beda1f12e9966809f128ae54dd475103bb1b",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-07.png",
+      "frame_sha256": "6ab39b966b5f7fca426caf1c60cc79e323268f9251f29c7bbd70fdbcd9abc56c",
+      "key": "Home",
+      "icon_slots": 2,
+      "row": 0,
+      "col": 0,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 9,
+      "capture_step": 1349000000,
+      "last_draw_step": 1347393227,
+      "rect": [
+        152,
+        8,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "416ffa3ea9de497519444d45bc820182e2f1ae68ea2cce9e1a01466026290fbd",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-08.png",
+      "frame_sha256": "073f28559a12c86ad93bfd33afe21a062fbab4c2ee24b83a724d9e9fe824addb",
+      "key": "End",
+      "icon_slots": 2,
+      "row": 1,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1369000000,
+      "last_draw_step": 1368384030,
+      "rect": [
+        152,
+        24,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-09.png",
+      "frame_sha256": "010a6b266fed0b9ab9d5b2337956d78d27e9325995062fec4b40ac1689d7d49b",
+      "key": "PageUp",
+      "icon_slots": 2,
+      "row": 0,
+      "col": 1,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1389000000,
+      "last_draw_step": 1387466584,
+      "rect": [
+        168,
+        8,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-10.png",
+      "frame_sha256": "e4b75d4975239226459719d3a8530ce86ef0425f58575063949292f4c12040c5",
+      "key": "PageDown",
+      "icon_slots": 2,
+      "row": 1,
+      "col": 2,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 9,
+      "capture_step": 1409000000,
+      "last_draw_step": 1408457390,
+      "rect": [
+        184,
+        24,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "f3f7ebc196de7a67052e5e7a81a58a468a5fab4ad1d32ef447536b9aa736b9f3",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-11.png",
+      "frame_sha256": "5be1b359832e105b3f7cf3664740f61a6d8ba84d1a615ee49c2d4a69393a6471",
+      "key": ".",
+      "icon_slots": 2,
+      "row": 1,
+      "col": 2,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1429000000,
+      "last_draw_step": 1427539941,
+      "rect": [
+        184,
+        24,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui9",
+      "frame": "gui9-plan-12.png",
+      "frame_sha256": "d873e577e99cf8aa6cbfd9c86baa61e7eb7f8a4a1894c14d2151dd66c105b7f7",
+      "key": "Return",
+      "icon_slots": 6,
+      "row": 1,
+      "col": 2,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": false,
+      "unit": null,
+      "capture_step": 1449000000,
+      "last_draw_step": 1429448195,
+      "rect": [
+        184,
+        24,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "43b252a8817f6d3d76b33a3237fe52b3eb85c585c8536eae82dc9ca985a8585e",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-02.png",
+      "frame_sha256": "af9902dda16040dad24d6d164d3f8d8123ff1d77b2ea2ba3417ade17753eed71",
+      "key": "Return",
+      "icon_slots": 2,
+      "row": 0,
+      "col": 0,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 5,
+      "capture_step": 1249000000,
+      "last_draw_step": 1248163965,
+      "rect": [
+        152,
+        8,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "191c38c2d50660f5b6eb11b9f4436a60bb5632af20ad20278413013fa2f42eb8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-03.png",
+      "frame_sha256": "c8ebd22aae0eb10f47d68bdb42c0dd6273b03e38954973fe4efa7b257715b1fd",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 1,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1269000000,
+      "last_draw_step": 1267246515,
+      "rect": [
+        152,
+        24,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-04.png",
+      "frame_sha256": "a3e230f2d6ad10e907d3d50d04a9e30b47fbdc5b253f64f229a7fc462cb8d0ae",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 2,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1289000000,
+      "last_draw_step": 1288237321,
+      "rect": [
+        152,
+        40,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "ed620c926b5d16444ec412ad3d5f719d6c8252f3ef59f9e8149545b7c872b14a",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-05.png",
+      "frame_sha256": "65dfbeb7e39d13ea0d479667945681558cd0fcba5eeff2208428c72bdd1985c3",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 3,
+      "col": 0,
+      "tile": 10,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1309000000,
+      "last_draw_step": 1307319871,
+      "rect": [
+        152,
+        56,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "00559a51acea74d7e67092cc11882637440136d75f3ec6c687a2219bfff97ad9",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-06.png",
+      "frame_sha256": "20d09edf5a2a6e68223b256ea2fa17a856fb2d06de622fc3a00f31b64a8c5268",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 4,
+      "col": 0,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1329000000,
+      "last_draw_step": 1328310677,
+      "rect": [
+        152,
+        72,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "0175c0ee544a0ca0e86225bba542beda1f12e9966809f128ae54dd475103bb1b",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-07.png",
+      "frame_sha256": "88e4c628b68a90ccbed390c38fc4e8b4045a29f5c5d2c1bd9ffec70e40f6b310",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 5,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 9,
+      "capture_step": 1349000000,
+      "last_draw_step": 1347393227,
+      "rect": [
+        152,
+        88,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "f3f7ebc196de7a67052e5e7a81a58a468a5fab4ad1d32ef447536b9aa736b9f3",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-08.png",
+      "frame_sha256": "f4860e62bdaf86602ea12a7da99dce2313329f268fb21ca0395faa0a1bbc8c5f",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 6,
+      "col": 0,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1369000000,
+      "last_draw_step": 1368384030,
+      "rect": [
+        152,
+        104,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "e982d9e3266da2719c1883f2cfb2735e497ebdb878ff4a860f9ab8446c23a5b9",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-09.png",
+      "frame_sha256": "b1208c4e805636b63a20bc249d4627ff35f957e4826ecac9cda363af3d6e7a2a",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 7,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1389000000,
+      "last_draw_step": 1387466580,
+      "rect": [
+        152,
+        120,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-10.png",
+      "frame_sha256": "adba5f85e51b44e10cc61ab1ab61746904de4944ddaed6088dbee4e37e11133d",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 9,
+      "capture_step": 1409000000,
+      "last_draw_step": 1408457386,
+      "rect": [
+        152,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "f3f7ebc196de7a67052e5e7a81a58a468a5fab4ad1d32ef447536b9aa736b9f3",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-11.png",
+      "frame_sha256": "90005842c3227b5dc7caff606b2598dc061e562eb48c2bd8db3d335326e75f8f",
+      "key": "Down",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 0,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1429000000,
+      "last_draw_step": 1427539936,
+      "rect": [
+        152,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-12.png",
+      "frame_sha256": "9ddd09af19e582e7fbba754325432343d9222ed4c0b2fd81da82867b48f89a1e",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 1,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1449000000,
+      "last_draw_step": 1448530745,
+      "rect": [
+        168,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-13.png",
+      "frame_sha256": "288bab3e98a0c02ae29f5a311cc1a94de0f24cbb1215f44133ae4d0e92c957b6",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 2,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1469000000,
+      "last_draw_step": 1467613296,
+      "rect": [
+        184,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "75f9a6afca3c1cc9b589460351e4a9462e9b3db3d00c79cc2b5f65ef4ebaa2c7",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-14.png",
+      "frame_sha256": "5858682fddf08090332885e0f51ce648c7b01c8998914e68470cc1727e442a72",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 3,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1489000000,
+      "last_draw_step": 1488604101,
+      "rect": [
+        200,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-15.png",
+      "frame_sha256": "72f8b46a0fe9a8168e4d5cf5e3c11eb709903badcb5da1358e3211bf1f39460f",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 5,
+      "capture_step": 1509000000,
+      "last_draw_step": 1507686649,
+      "rect": [
+        216,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "6c100afce2d0dab1ec20f48f96231dcf0eff6e79e1fc63f9405d3bfe08196ade",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-16.png",
+      "frame_sha256": "8492ee0c8bdebec3725afd531654dca4459a434adafecb94d6183deb32311647",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 5,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1529000000,
+      "last_draw_step": 1528677454,
+      "rect": [
+        232,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "ed620c926b5d16444ec412ad3d5f719d6c8252f3ef59f9e8149545b7c872b14a",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-17.png",
+      "frame_sha256": "9c45df4d7cb24c1b805c2da62fbf0d6bdaeddd9d2592c537922db06e5efba43f",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 6,
+      "tile": 10,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1549000000,
+      "last_draw_step": 1547759992,
+      "rect": [
+        248,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "3b50bbf950b711b4eed2a22cb12e20ad0bceceea631dc19d22f43f98c9c773e3",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-18.png",
+      "frame_sha256": "a117e6dc14ef01e1dc7bce6cbddd5ed88cbeb6f768f086f622bbe43ebc7bd640",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 7,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 5,
+      "capture_step": 1569000000,
+      "last_draw_step": 1568750799,
+      "rect": [
+        264,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "6c100afce2d0dab1ec20f48f96231dcf0eff6e79e1fc63f9405d3bfe08196ade",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-19.png",
+      "frame_sha256": "21d441ff556e453d01a860f3680506894e180f8145e53949450969e873030874",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 8,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1589000000,
+      "last_draw_step": 1587833349,
+      "rect": [
+        280,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-20.png",
+      "frame_sha256": "3d5527d6729128111d261a56cb930b0f55800ba1f8e4fa9558c0ce39cae7a67f",
+      "key": "Right",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 8,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1609000000,
+      "last_draw_step": 1608824153,
+      "rect": [
+        280,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "ed620c926b5d16444ec412ad3d5f719d6c8252f3ef59f9e8149545b7c872b14a",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-21.png",
+      "frame_sha256": "2b308340af27fa1a97a945cf9b45b4194d23d09e68cf830851b3d5eff9c9f59c",
+      "key": "Home",
+      "icon_slots": 2,
+      "row": 7,
+      "col": 7,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1629000000,
+      "last_draw_step": 1627906704,
+      "rect": [
+        264,
+        120,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "e982d9e3266da2719c1883f2cfb2735e497ebdb878ff4a860f9ab8446c23a5b9",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-22.png",
+      "frame_sha256": "83ef52a76ec90a31c182a565a41e4f2e2f31e5c1dedac05febf00c0dbdd50539",
+      "key": "End",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 6,
+      "tile": 10,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1649000000,
+      "last_draw_step": 1648897509,
+      "rect": [
+        248,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "37c47185a11a7d24c1cc00aef5c2d6db1ceda34d32911ffb42ca1d7e377d387c",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-23.png",
+      "frame_sha256": "535730b9e20e945c39a5e60e3f6c3c6923aec4cd9d3dcfb2258d9ce60b9e3d61",
+      "key": "PageUp",
+      "icon_slots": 2,
+      "row": 7,
+      "col": 7,
+      "tile": 13,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 9,
+      "capture_step": 1669000000,
+      "last_draw_step": 1667980057,
+      "rect": [
+        264,
+        120,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "416ffa3ea9de497519444d45bc820182e2f1ae68ea2cce9e1a01466026290fbd",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-24.png",
+      "frame_sha256": "013b7dc6398e049a8c92f68662a3c2e39c16ea894b2db36c2d95ca46eeba3e8b",
+      "key": "PageDown",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 8,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1689000000,
+      "last_draw_step": 1688970862,
+      "rect": [
+        280,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-25.png",
+      "frame_sha256": "1f059ec1da33582c523040c968b0dd65d01ca45d7af73909c33c2a610ebadb30",
+      "key": "Return",
+      "icon_slots": 6,
+      "row": 8,
+      "col": 8,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 6,
+      "capture_step": 1709000000,
+      "last_draw_step": 1708689496,
+      "rect": [
+        280,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-26.png",
+      "frame_sha256": "f004c2a03fefe65b333c7f686ab7a46d5f29fe9a5edf0e080302a88549845f63",
+      "key": ".",
+      "icon_slots": 6,
+      "row": 8,
+      "col": 8,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 8,
+      "capture_step": 1729000000,
+      "last_draw_step": 1727772046,
+      "rect": [
+        280,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "ed620c926b5d16444ec412ad3d5f719d6c8252f3ef59f9e8149545b7c872b14a",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui10",
+      "frame": "gui10-plan-27.png",
+      "frame_sha256": "21d441ff556e453d01a860f3680506894e180f8145e53949450969e873030874",
+      "key": "Return",
+      "icon_slots": 2,
+      "row": 8,
+      "col": 8,
+      "tile": 9,
+      "sprite_code": 0,
+      "shown": true,
+      "unit": 7,
+      "capture_step": 1749000000,
+      "last_draw_step": 1748762852,
+      "rect": [
+        280,
+        136,
+        16,
+        16
+      ],
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    }
+  ],
+  "private_sources": [
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/plan-01.png.state.json",
+      "sha256": "0a9d95e6c40d3bb8d8d441a2ca67c2560431616c0fd3caaff58a38976c9e9e44"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/plan-02.png.state.json",
+      "sha256": "a774bd513ea0c14dc1301fdf53ca0e5dc247a469bbefb87d79581fa14cc35190"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/plan-03.png.state.json",
+      "sha256": "b0565b38bd3cad8472fb2573eb6762a1eb3269a3e09270847112ff1a213b8af0"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/plan-05.png.state.json",
+      "sha256": "b7a87225269eeded7b2ce47485fe9b3bd0472a9528197e69e0aa8a87c1ef37e1"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/plan-08.png.state.json",
+      "sha256": "a80becc25b8863dd0dc0a9f3e85d3175daea69774f585a257b5f0c93cc784b8b"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/plan-10.png.state.json",
+      "sha256": "ea07741fc0d5c8a40be03f8d51a6a1cdca9f64e90fc96086de3b60078ed81713"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/plan-14.png.state.json",
+      "sha256": "7d6ba38ae5cd2a32660d2ed8215ffa4dbda0d0a1ec936995d034c3e8b64f26d2"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/inputs.json",
+      "sha256": "191e806d0be79d3ab90e7d9ccdbfc983876e03e37c97d996a7a4fc08af854c6f"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/cursor-calls.json",
+      "sha256": "77d508ae12d68128286409e2cffa9e7a83c3715c69bf279d312b33b5533a31ce"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/battle-planning.json",
+      "sha256": "8ec105b0bf6c7029f76e70f65f1d6b690c20b0835b8bbfce9731b75c3d15cedf"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/run.log",
+      "sha256": "7ce4efb0b905ba137a49422623293945c1a56051d33c6826d356a9829615ad18"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui6/instrumented-book-startup-private.go",
+      "sha256": "998d0d481a3ddd8c8dcc35202040e367491ee0b022549cf1c3c29672c753578b"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-07.png.state.json",
+      "sha256": "5396c9a6846b872e89d78533fa9854769314c003c4aa0670809185f6a8bf9cd8"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-09.png.state.json",
+      "sha256": "69af0c1c8807f31a3e71a93086784195f98a5e990c9922cb1d6fdcc507ef41a7"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-10.png.state.json",
+      "sha256": "dd3953968babb1b5371c314110fc805b50f0dd378a42c106a654f7cbba9a2c75"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-15.png.state.json",
+      "sha256": "b60cd8db743474b5a53671e3d34e8a4a05b610cc81c037fbec313c32f7d87395"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-24.png.state.json",
+      "sha256": "0bc79241ec3b4a1e89840ec936899f906c6b75fb4fd665b5395b71e400d399bb"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-31.png.state.json",
+      "sha256": "0b10bc7bf5bafec4b54bcc30abadc281fd5ada5346007554f41aa7e078cbd94e"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-34.png.state.json",
+      "sha256": "30804bb03e0c3d2140596964a9c12ded6ae89b3e9fe3f4095636b956a51e74d1"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/plan-38.png.state.json",
+      "sha256": "eb1ab8cb8c8e0a1366cb9822c54a1ba821fe36aa2f694f17af096714275e805f"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/inputs.json",
+      "sha256": "afc2ab960775b60fd9a22d837c67283c6b76a08d0dfea278ad5a35c3ca3f5419"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/cursor-calls.json",
+      "sha256": "aa6d011903e04cb5769d82405d31ba8c92a0ada080266508eb09c304f42e6ae5"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/battle-planning.json",
+      "sha256": "a61ac1ceed78139033326d61f7836ef028b132f32f1799ae854addc6c0044675"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/run.log",
+      "sha256": "8b6574a0a92f8d524acc54e5b02395c39f67ce55892550e56cbf6af80b55d20e"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui7/instrumented-book-startup-private.go",
+      "sha256": "998d0d481a3ddd8c8dcc35202040e367491ee0b022549cf1c3c29672c753578b"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-02.png.state.json",
+      "sha256": "891c3f3e755ff5d9f2e93564ab028f993648b814d8ce583704683484a768cb9a"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-03.png.state.json",
+      "sha256": "2ef2eca52776b7fbc7da33c700613e22b3ff18f15543a236b4a159e3e437ddfc"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-04.png.state.json",
+      "sha256": "1f982503a52f49c6cc0f6875593abcbbfe43ac00f5a1e6e0fb92a6648e833643"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-05.png.state.json",
+      "sha256": "4ef8ee8b34a9b278a5886abab884c30d899eaadbd720ddaed9e2416e1c73e657"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-06.png.state.json",
+      "sha256": "72886a4b59b32856d1e64335da78d53044d056a45431f34f4f52581cebdd3fc7"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-07.png.state.json",
+      "sha256": "95a04925376ab967c552240a5a5914898fc3919515d1d37cb19a6c75d7f9adc2"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-08.png.state.json",
+      "sha256": "dac9be22c75ec6ce5042c65eb1bea59e2f188eee10d3dfc9def0525ac6990de7"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-09.png.state.json",
+      "sha256": "df671951262f6236d2d6ef2ea59e6abeeead839164974a32a0ed8ff3f57a57ee"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-10.png.state.json",
+      "sha256": "d4d7bc104635301977a8954f5767c190426396003f9b070c1b2fc6158f48c1d3"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-11.png.state.json",
+      "sha256": "f6585a2dec647d4211b85e105f5330b5a81bb4160de28b7255a20646f145b929"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/plan-12.png.state.json",
+      "sha256": "e05b57618000c599fa5218b60ecb6b84687a567989b5a44a818a7e5a4abd1f1e"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/inputs.json",
+      "sha256": "6c8fcec29924a56e14580441817bfbd42d1874eaf90566a0d93565cb69867241"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/cursor-calls.json",
+      "sha256": "137cc8a22b9ab2ddafb6ea79178443ed9b5facfb723979f2b66fadad58dbb8e5"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/battle-planning.json",
+      "sha256": "344b5c68803d867adfad1dcfac5bc3d3e4c72787b20fbaa49f5c33c77cd0f3d0"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/run.log",
+      "sha256": "59c3993acae2694d024f6ddbe8b0ea1e7f41467fdfd32b88387eaecf803398f5"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui9/instrumented-book-startup-private.go",
+      "sha256": "3442c576b7498a6f0dba01fa74e4eb1205434022500dcd82627799c5bbc86f46"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-02.png.state.json",
+      "sha256": "891c3f3e755ff5d9f2e93564ab028f993648b814d8ce583704683484a768cb9a"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-03.png.state.json",
+      "sha256": "b26074365b6cf98209ad5c3a1be4eb4a094a198fc2deac2739078c2fc5a75fbe"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-04.png.state.json",
+      "sha256": "fffde4f2eb10a5d69d728bb26c5837ff96b0e71e5eafb397ec9672f9785db8bf"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-05.png.state.json",
+      "sha256": "e861ef08d4808ff3fa5c8ef6ebd39ab9f4b10814c5a4c0cef268839555899883"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-06.png.state.json",
+      "sha256": "fe95589d42794e12ed4a4a927a4d26008413149f2fd0e96e88f752f19d086713"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-07.png.state.json",
+      "sha256": "3bca75bf790f25ac85e6994f664fc07238dd93f866ac211a8bf1de279370a97d"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-08.png.state.json",
+      "sha256": "697b8491eadca7d8bab9844d71a4ab1be5f77a3a8b244dd968a86ed30327d2df"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-09.png.state.json",
+      "sha256": "839b98c962f23d46c3602898c2df20655de822b9a98e1129d3ae648df2085128"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-10.png.state.json",
+      "sha256": "14705ccc3633187ddc086b90d3f4da2b16298169954a06ca48a48d2f248d0620"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-11.png.state.json",
+      "sha256": "e45edeb36e5f20c92e1c98e9aec394cc9ca9c07bb656918caf6d2a6b6c8c8119"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-12.png.state.json",
+      "sha256": "852be0387cafaaf6be5cbfd27fe8c4accc992caa96a05f05a7d88a42267f7e7a"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-13.png.state.json",
+      "sha256": "34481be6dca5016b8503993b1c8dc5066cf9ed6e130ed30916915b72982122bf"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-14.png.state.json",
+      "sha256": "66639f1c0e12dfd8c8ece51ab8419088fa3d802a43dd4cb683215a5c231d6822"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-15.png.state.json",
+      "sha256": "47f7f32b1f6f5286e6b70fb9137d0a09db0b9a01d0ca523ddcb18e4d663bc09e"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-16.png.state.json",
+      "sha256": "75a944629e27460e3042f6e9d1bc1f5b491fe42a997b31a46cb309ffb4e74ba7"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-17.png.state.json",
+      "sha256": "b0c3a091b57121f6ced4976f46ee684ea876fa0f47d89a047a82c066d9f6fc8f"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-18.png.state.json",
+      "sha256": "a72ce625982493a093393ff9ad840c817e49755591528b3feffeaa03ce328a2f"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-19.png.state.json",
+      "sha256": "c12ac9324ecd9cef8bf6113510ede536393634b681fab65c72beaddb08c99e3e"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-20.png.state.json",
+      "sha256": "14fbefdf5329d578708493191c0fc84e90c4e48ef75a2492bcd653d032c1f24a"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-21.png.state.json",
+      "sha256": "47a52515f43f5d8bdb0a91ed39a1c3b427b71695afe0e4b132c53447d1c0d815"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-22.png.state.json",
+      "sha256": "47e816a8795b00b3d82c2b0316c4fbcbcc791d4457b877fbfc37d7d72fd5b23e"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-23.png.state.json",
+      "sha256": "4e3a1dddaf989e8432774602f17a6116c476c3a8b4e0f48daded76254319dbda"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-24.png.state.json",
+      "sha256": "372b1f2ff989d346e1147c2af8d833e861d15aa2eead5c0a049f637f09cd7f2f"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-25.png.state.json",
+      "sha256": "c5062cf6503ddbc31602e088603f708c1fd117acb11070a3597b0c09ef5320f4"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-26.png.state.json",
+      "sha256": "582f73d63f1eefc0f6ea9220d1b5ec75ff59293e0294917c4bb8c51650532d30"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/plan-27.png.state.json",
+      "sha256": "c2506963576fc9e01cc7700b789cfec7727d4b4d6047d476081acbcbbe8f824b"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/inputs.json",
+      "sha256": "66f5d74ce01c623182c1ddf5e0f2894f8b9ff07e79cff65615347cb1d74926c4"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/cursor-calls.json",
+      "sha256": "9c51950781dcb2ee7ca5773df30638b7685172eb779eab5260b93df2502ed57e"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/battle-planning.json",
+      "sha256": "9a11d4b386fa60320ee54737c7e7784b39377d1ec26cf0112d020367bd1bdd7d"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/run.log",
+      "sha256": "e8c18092cf7a15a00ddc662de7bdf4c92c60fd69d213448323bddd0d59715dfa"
+    },
+    {
+      "path": "workplace/battle-cursor-20261001/gui10/instrumented-book-startup-private.go",
+      "sha256": "3442c576b7498a6f0dba01fa74e4eb1205434022500dcd82627799c5bbc86f46"
+    }
+  ],
+  "rights": "已驗證PNG僅依private GitHub既有例外；不授權公開；原始快照只留本機",
+  "verifier": {
+    "path": "verify_lifecycle.py",
+    "sha256": "224d8e13ae2be647e1755a9db0d432c6da0a2d1c64753b6eebd8ce5580029f45"
+  },
+  "original_base": {
+    "path": "receipt.json",
+    "sha256": "4dbcf84cc67b838b61a35cd7a6fd5051b25acdf6dc54527923b9ff80d1ed287a"
+  },
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "original_tools": {
+    "dosgolem_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+    "image": "kol-package:20260907",
+    "image_id": "sha256:3d32441befe02810c3220a2e9f2db5b84ee65c703e5b65ee563712a3519ad193",
+    "ida_version": "9.4",
+    "ida_image": "ida-pro-9.4-idapython:locked-v1",
+    "ida_image_id": "sha256:6f6d59af49d0008c4109a5295b5f374bdc007e2d1ab28cb9de08779584de2780"
+  },
+  "executable_sources": [
+    {
+      "path": "/src/workplace/oracle/game/KOL.EXE",
+      "sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71"
+    },
+    {
+      "path": "/src/workplace/oracle/game/KOLBOOK.EXE",
+      "sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832"
+    },
+    {
+      "path": "/src/workplace/oracle/game/KOLTOWN.EXE",
+      "sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221"
+    },
+    {
+      "path": "/src/workplace/oracle/game/MAKEMODE.EXE",
+      "sha256": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56"
+    },
+    {
+      "path": "/src/workplace/oracle/game/TANDYPIN.EXE",
+      "sha256": "036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3"
+    },
+    {
+      "path": "/src/workplace/oracle/game/TITLE.EXE",
+      "sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/original-derived-png/ega/KOLPICS-MARKERS/kolpics-markers.png",
+      "sha256": "112c03fc64c96499989ef312749b898a3d59a96bce520cfbc2d3308f4c49ff17"
+    },
+    {
+      "path": "assets/original-derived-png/ega/BATTLE/battle-tiles-08.png",
+      "sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b"
+    }
+  ]
+}

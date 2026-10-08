@@ -1,0 +1,58 @@
+{
+  "scope": "既有固定種子 1、正常六人招募與兩次自然戰鬥的 3,081 筆完整路徑；先選全母體最寬可見訊息，再重播相同前綴擷取畫格。不宣稱全遊戲最長內容。",
+  "source": "docs/verification/cjk-ui/natural-sign-20261001/receipt.json",
+  "source_trace_sha256": "6d58e75f0a1217bce912423a68703e48ac5af38ed76e58b77cf7f6d5a574442f",
+  "candidate_count": 386,
+  "unique_messages": 150,
+  "maximum_width": 564,
+  "selected": [
+    {
+      "step": 2566,
+      "pixel_width": 564,
+      "text": "Fighting Bull 揮砍 他的戰錘，攻向獸人，對方以漂亮的招架擋開了攻擊！",
+      "lines": [
+        "Fighting Bull 揮砍 他的",
+        "戰錘，攻向",
+        "獸人，對方以漂亮的招架",
+        "擋開了攻擊！"
+      ]
+    },
+    {
+      "step": 545,
+      "pixel_width": 563,
+      "text": "懸崖巨魔 斬出 他的長矛，攻向Theodoric，對方以漂亮的招架擋開了攻擊！",
+      "lines": [
+        "懸崖巨魔 斬出 他的",
+        "長矛，攻向",
+        "Theodoric，對方以漂亮的招",
+        "架擋開了攻擊！"
+      ]
+    },
+    {
+      "step": 1287,
+      "pixel_width": 557,
+      "text": "懸崖巨魔 斬出 他的長矛，攻向Poontang，對方以漂亮的招架擋開了攻擊！",
+      "lines": [
+        "懸崖巨魔 斬出 他的",
+        "長矛，攻向",
+        "Poontang，對方以漂亮的招",
+        "架擋開了攻擊！"
+      ]
+    }
+  ],
+  "shot_steps": [
+    545,
+    1287,
+    2565,
+    2566,
+    2567
+  ],
+  "input_count": 2567,
+  "seed": 1,
+  "seed_method": "執行前 -seed 1",
+  "ambush_rolls": null,
+  "load": null,
+  "monsters": null,
+  "quest_sites": null,
+  "font_sha256": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d"
+}

@@ -1,0 +1,353 @@
+{
+  "schema": "kol-platform-smoke-check-v1",
+  "date": "2026-10-01",
+  "status": "所列 Windows Wine／Linux 與 macOS 靜態範圍通過",
+  "source_count": 167,
+  "binary_sha256": {
+    "kol-linux": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "kol-windows.exe": "304890ea429ca7106b47b104d69d619201de6eda523e1c8890efc2d91d6ca8c6",
+    "kol-macos": "2b6370c9fbc9097fd948650e1e6e127d49d7de5bfe3825dfe2ba117b48ceb168",
+    "kol-macos-amd64": "fdc84fcdf13ca0535295a3ae6e97bb687bb7ea713df1051633e1951cc5db67f7",
+    "kol-macos-arm64": "1f27f753e4bc6ff4e987320ccad9940c975d499bc71cd1f93e6256697611fe46"
+  },
+  "linux_windows_rebuild_identical": true,
+  "linux_matches_current_reference": true,
+  "windows_pe_machine": "AMD64 PE32+",
+  "macos_static": [
+    {
+      "architecture": "amd64",
+      "sha256": "fdc84fcdf13ca0535295a3ae6e97bb687bb7ea713df1051633e1951cc5db67f7",
+      "minimum_macos": "11.0",
+      "signature": null,
+      "system_library_paths": [
+        "/usr/lib/libresolv.9.dylib",
+        "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo",
+        "/usr/lib/libobjc.A.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "sha256": "1f27f753e4bc6ff4e987320ccad9940c975d499bc71cd1f93e6256697611fe46",
+      "minimum_macos": "11.0",
+      "signature": {
+        "offset": 11962496,
+        "size": 93586,
+        "superblob_header_valid": true
+      },
+      "system_library_paths": [
+        "/usr/lib/libresolv.9.dylib",
+        "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo",
+        "/usr/lib/libobjc.A.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+      ]
+    }
+  ],
+  "macos_executed": false,
+  "native_windows_executed": false,
+  "wine_version": "9.0 (Ubuntu 9.0~repack-4build3)",
+  "seed": {
+    "value": 1,
+    "method": "兩平台啟動前 -seed 1；未讀觀察保存或改指定遭遇"
+  },
+  "interactive_keys_per_platform": 198,
+  "reload_interactive_keys_per_platform": 15,
+  "batch_trace_states_per_platform": 199,
+  "reload_batch_trace_states_per_platform": 16,
+  "batch_traces_match_prior_receipt": true,
+  "saves_equal_except": [
+    "saved_at"
+  ],
+  "default_save_paths": {
+    "windows": "C:\\users\\ubuntu\\AppData\\Roaming\\kol-remake-cht\\save.dat",
+    "linux": "$XDG_CONFIG_HOME/kol-remake-cht/save.dat"
+  },
+  "reload_save_hash_unchanged": true,
+  "purchase": {
+    "name": "Girak Helbak",
+    "zh": "吉拉克赫爾巴克",
+    "gold_before": 1009,
+    "food_price": 35,
+    "gold_after_purchase": 974,
+    "inn_price": 56,
+    "saved_gold": 918,
+    "backpack_items": 1,
+    "record": "c3a641581056082b002300370000a000"
+  },
+  "pixel_checks": [
+    {
+      "label": "linux互動對批次正常104",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-104.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-104.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常111",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-111.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-111.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常116",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-116.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-116.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常117",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-117.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-117.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常120",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-120.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-120.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常126",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-126.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-126.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常137",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-137.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-137.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常138",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-138.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-138.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次正常198",
+      "a": "workplace/platform-smoke-20261001/linux/gui-normal2/step-198.png",
+      "b": "workplace/platform-smoke-20261001/linux/normal/step-198.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次重載1",
+      "a": "workplace/platform-smoke-20261001/linux/gui-reload/step-001.png",
+      "b": "workplace/platform-smoke-20261001/linux/reload/step-001.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次重載3",
+      "a": "workplace/platform-smoke-20261001/linux/gui-reload/step-003.png",
+      "b": "workplace/platform-smoke-20261001/linux/reload/step-003.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次重載14",
+      "a": "workplace/platform-smoke-20261001/linux/gui-reload/step-014.png",
+      "b": "workplace/platform-smoke-20261001/linux/reload/step-014.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "linux互動對批次重載15",
+      "a": "workplace/platform-smoke-20261001/linux/gui-reload/step-015.png",
+      "b": "workplace/platform-smoke-20261001/linux/reload/step-015.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常104",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-104.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-104.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常111",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-111.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-111.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常116",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-116.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-116.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常117",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-117.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-117.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常120",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-120.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-120.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常126",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-126.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-126.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常137",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-137.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-137.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常138",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-138.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-138.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次正常198",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-198.png",
+      "b": "workplace/platform-smoke-20261001/windows/normal/step-198.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次重載1",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-001.png",
+      "b": "workplace/platform-smoke-20261001/windows/reload/step-001.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次重載3",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-003.png",
+      "b": "workplace/platform-smoke-20261001/windows/reload/step-003.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次重載14",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-014.png",
+      "b": "workplace/platform-smoke-20261001/windows/reload/step-014.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "windows互動對批次重載15",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-015.png",
+      "b": "workplace/platform-smoke-20261001/windows/reload/step-015.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常104",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-104.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-104.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常111",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-111.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-111.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常116",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-116.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-116.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常117",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-117.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-117.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常120",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-120.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-120.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常126",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-126.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-126.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常137",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-137.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-137.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常138",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-138.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-138.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動正常198",
+      "a": "workplace/platform-smoke-20261001/windows/gui-normal/step-198.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-normal2/step-198.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動重載1",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-001.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-reload/step-001.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動重載3",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-003.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-reload/step-003.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動重載14",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-014.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-reload/step-014.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台互動重載15",
+      "a": "workplace/platform-smoke-20261001/windows/gui-reload/step-015.png",
+      "b": "workplace/platform-smoke-20261001/linux/gui-reload/step-015.png",
+      "different_pixels": 0
+    },
+    {
+      "label": "兩平台中文封面",
+      "a": "workplace/platform-smoke-20261001/windows/cover.png",
+      "b": "workplace/platform-smoke-20261001/linux/cover.png",
+      "different_pixels": 0
+    }
+  ],
+  "negative_controls": {
+    "wrong_windows_architecture_rejected": true,
+    "gold_change_not_equal": true,
+    "single_pixel_change_not_equal": true
+  },
+  "limitations": [
+    "Wine不等於Windows真機；macOS未實際執行",
+    "只驗目前 source資源工作目錄，未驗正式封包或從其他目錄啟動",
+    "重載明寫-load，未驗預設自動續玩入口",
+    "正常GUI標題與戶外隊伍標記會隨實時動畫推進，整圖嚴格比較只選靜止室內／物品狀態",
+    "未驗音訊人耳、原版同狀態、全戰鬥／任務、完整通關或公開散布"
+  ],
+  "local_evidence_sha256": {
+    "workplace/platform-smoke-20261001/linux/normal/trace.json": "d15a9d7720ad5fc640c75dde66a2758b60ebe2738843f5309b659ca7c06170ce",
+    "workplace/platform-smoke-20261001/linux/reload/trace.json": "2b90cef9af31c0812b57add6c6efbbdd862cb495f505b4309e88fc33ae7c8591",
+    "workplace/platform-smoke-20261001/linux/default-save.dat": "ef3d7034d3c58296db447256f7e9b0a670bd94b1de8874a93898566ab481d34d",
+    "workplace/platform-smoke-20261001/windows/normal/trace.json": "d15a9d7720ad5fc640c75dde66a2758b60ebe2738843f5309b659ca7c06170ce",
+    "workplace/platform-smoke-20261001/windows/reload/trace.json": "2b90cef9af31c0812b57add6c6efbbdd862cb495f505b4309e88fc33ae7c8591",
+    "workplace/platform-smoke-20261001/windows/default-save.dat": "df2328a4e00c6bbf96bf41be2a9b310bbc9ce4380cee5c4f492bfee936745508"
+  }
+}

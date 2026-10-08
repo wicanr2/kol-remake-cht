@@ -59,13 +59,22 @@ type ItemPage struct {
 	// Acting 為真時圖示列換成那一格能做的事（`sub_18857`）。
 	Acting bool `json:"acting,omitempty"`
 	// Giving 為真時在等玩家選要給誰。
-	Giving bool `json:"giving,omitempty"`
+	Giving      bool     `json:"giving,omitempty"`
+	GiftConfirm bool     `json:"gift_confirm,omitempty"`
+	GiftTarget  int      `json:"gift_target,omitempty"`
+	GiftMessage []string `json:"gift_message,omitempty"`
 	// Note 是動作做完之後那一句（丟掉了、給出去了、穿不下…）。
 	Note []string `json:"note,omitempty"`
+	// DropConfirm 等待YES／NO；DropMessage在提問或丟棄後等待時疊於明細下方。
+	DropConfirm bool     `json:"drop_confirm,omitempty"`
+	DropMessage []string `json:"drop_message,omitempty"`
 	// Figure 是左邊那個人要貼的幾張圖（`sub_18F3A(0)`，RE-126）。
 	Figure []portrait.Piece `json:"figure,omitempty"`
 	// Mark 是清單移動時左上角那個小框（`sub_16D0B`，RE-127）。
 	Mark *ItemMark `json:"mark,omitempty"`
+	// RestoredEdge記錄原版快取在左緣被還原的列（RE-178／SPEC-031第13節）。
+	// 這是呈現暫態，不寫入角色或存檔；目前小框仍由UI最後覆蓋。
+	RestoredEdge [200]bool `json:"-"`
 }
 
 // 動作用得到的幾筆訊息（RE-127）。
@@ -75,6 +84,7 @@ const (
 	TheirPackFullRecord = 0x29
 	TradedRecord        = 0x2A
 	DroppedRecord       = 0xD2
+	DropSureRecord      = 0xD1
 	YourPackFullRecord  = 0xD3
 )
 
@@ -103,7 +113,7 @@ func (m Member) itemAt(row int) *Good {
 		return m.InHand
 	}
 	i := row - WornSlots - 1
-	if i < len(m.Backpack) {
+	if i < len(m.Backpack) && m.Backpack[i].Name != "" {
 		return &m.Backpack[i]
 	}
 	return nil
@@ -156,10 +166,15 @@ func (s *Session) MoveItemSelection(delta int) {
 	if n == 0 {
 		return
 	}
-	p.Selected = ((p.Selected+delta)%n + n) % n
+	next := ((p.Selected+delta)%n + n) % n
+	if next != p.Selected {
+		p.restoreMarkEdge(p.Mark)
+	}
+	p.Selected = next
 	// 清單層只有立繪、清單與左上角那個小框：明細框要按下那一格才彈出來
 	// （原版是 `sub_196A9` 回來之後才 `sub_1BA9D`）。
 	p.Detail, p.Message, p.Note = nil, nil, nil
+	p.DropConfirm, p.DropMessage = false, nil
 	s.Inside.Detail = nil
 	s.refreshItemMark()
 }
@@ -168,16 +183,30 @@ func (s *Session) MoveItemSelection(delta int) {
 // 身上那十一格印「You have nothing on your <部位>」，背包六格印
 // 「You have nothing in your pocket!」。
 func (s *Session) emptySlotLines(row int) []string {
-	out := nonEmpty(s.uiLines(NothingRecord))
-	if row > LastWornRow {
-		return append(out, nonEmpty(s.uiLines(InPocketRecord))...)
-	}
-	out = append(out, nonEmpty(s.uiLines(OnYourRecord))...)
 	name := row
 	if name > SlotNameLast {
 		name = SlotNameLast
 	}
-	return append(out, nonEmpty(s.uiLines(SlotNameRecord+name))...)
+	// SPEC-031續核：原版@換行，但]與部位名稱接同一行；保留前導空白。
+	// 中文語序由既有202／203譯文註記指定，不能照英文片段順序排列。
+	if prefix, ok := s.Trans.UIRecordOK(NothingRecord); ok {
+		if row > LastWornRow {
+			line, _ := s.Trans.UIRecordOK(InPocketRecord)
+			return nonEmpty(splitUILines(line))
+		}
+		return []string{prefix + s.uiRecord(SlotNameRecord+name) + s.uiRecord(OnYourRecord) + "！"}
+	}
+	if s.UIText == nil {
+		return nil
+	}
+	raw := s.UIText.Raw(BankUI, NothingRecord)
+	if row > LastWornRow {
+		raw += s.UIText.Raw(BankUI, InPocketRecord)
+	} else {
+		raw += s.UIText.Raw(BankUI, OnYourRecord) + s.UIText.Raw(BankUI, SlotNameRecord+name) + "!"
+	}
+	raw = strings.ReplaceAll(strings.ToUpper(raw), "]", " ")
+	return nonEmpty(strings.Split(raw, "@"))
 }
 
 // 物品頁的動作圖示（`sub_18857` 的跳表，RE-127）。編號就是原版的圖號。
@@ -224,8 +253,7 @@ func itemIcons(g Good, row, party int) []int {
 
 // removeItem 把清單第 row 列那一格清空，回傳原本放在那裡的東西。
 //
-// 背包在 remake 是緊湊的 slice（原版是固定六格、中間可以有洞）。兩者在「沒有洞」
-// 的狀態下等價，而 remake 只會從尾端補，所以洞不會出現。
+// 背包按原版固定槽位清除；中間空格保留，尾部空格可省略（SPEC-027／RE-182）。
 func (m *Member) removeItem(row int) *Good {
 	switch {
 	case row < 0 || row >= ItemSlotCount:
@@ -240,12 +268,7 @@ func (m *Member) removeItem(row int) *Good {
 		return g
 	}
 	i := row - WornSlots - 1
-	if i >= len(m.Backpack) {
-		return nil
-	}
-	g := m.Backpack[i]
-	m.Backpack = append(m.Backpack[:i], m.Backpack[i+1:]...)
-	return &g
+	return m.clearPack(i)
 }
 
 // AcceptItemSlot 是清單層按下那一格：換成動作圖示列（`sub_18857`）。
@@ -264,6 +287,7 @@ func (s *Session) AcceptItemSlot() {
 		p.Detail, p.Note = nil, nil
 		p.Message = s.emptySlotLines(p.Selected)
 		s.Inside.Detail = nil
+		s.setInsideIcons([]int{IconSpacebar})
 		return
 	}
 	// 資料頁那一整頁走大寫旗標（`word_2DF54`，RE-074），明細跟著轉大寫——
@@ -278,11 +302,20 @@ func (s *Session) AcceptItemSlot() {
 // closeItemAction 回到清單層：框裡那幾行收掉，圖示列換回那兩格。
 func (s *Session) closeItemAction() {
 	p := s.Inside.ItemPage
+	// 未要求重建的返回沿用已修改快取；完整框再覆蓋其中的列。
+	for y := range p.RestoredEdge {
+		p.RestoredEdge[y] = y < ItemPageLayout.Frame.Y0 || y > ItemPageLayout.Frame.Y1
+	}
 	p.Acting = false
 	p.Giving = false
+	p.GiftConfirm = false
+	p.GiftTarget = 0
+	p.GiftMessage = nil
 	p.Detail, p.Message, p.Note = nil, nil, nil
+	p.DropConfirm, p.DropMessage = false, nil
 	s.Inside.Detail = nil
 	s.refreshItemMark()
+	p.restoreMarkEdge(p.Mark)
 	s.setInsideIcons([]int{IconItemUse, IconUTurn})
 }
 
@@ -314,15 +347,48 @@ func (s *Session) ItemAction(id int) {
 	case IconItemStow:
 		s.stowItem(m, p.Selected)
 	case IconItemDrop:
-		m.removeItem(p.Selected)
-		p.Note = nonEmpty(s.uiLines(DroppedRecord))
-		s.afterItemAction()
+		// RE-174：先等待確認，不能在選到丟棄圖示時就清除物品。
+		p.DropConfirm = true
+		p.DropMessage = s.itemDropMessage(DropSureRecord)
+		s.setInsideIcons([]int{IconYes, IconNo})
 	case IconItemEat:
 		s.eatItem(m, p.Selected, *g)
 	case IconItemGive:
 		p.Giving = true
 		p.Note = nonEmpty(s.uiLines(GiveToWhomRecord))
+		s.setInsideIcons([]int{IconUTurn})
 	}
+}
+
+// itemDropMessage沿用資料頁的大寫旗標及既有譯文。
+func (s *Session) itemDropMessage(record int) []string {
+	lines := nonEmpty(s.uiLines(record))
+	for i, line := range lines {
+		lines[i] = strings.ToUpper(line)
+	}
+	return lines
+}
+
+// answerItemDrop在YES之後清除物品，再等SPACEBAR確認；NO完整返回首欄。
+func (s *Session) answerItemDrop(id int) {
+	p := s.Inside.ItemPage
+	if id == IconNo {
+		s.afterItemAction()
+		return
+	}
+	if id != IconYes {
+		return
+	}
+	i := s.speakerIndex()
+	if i < 0 {
+		return
+	}
+	s.Party[i].removeItem(p.Selected)
+	s.Party[i].SyncCarried()
+	p.DropConfirm = false
+	p.DropMessage = s.itemDropMessage(DroppedRecord)
+	s.setInsideIcons([]int{IconSpacebar})
+	s.syncParty()
 }
 
 // moveItem 把那一格的東西搬到另一格（`sub_18CD5`）。目標有東西就對調。
@@ -352,9 +418,7 @@ func (m *Member) putItem(row int, g *Good) {
 	case row == WornSlots:
 		m.InHand = g
 	default:
-		if len(m.Backpack) < BackpackSlots {
-			m.Backpack = append(m.Backpack, *g)
-		}
+		m.putPack(row-WornSlots-1, *g)
 	}
 }
 
@@ -375,7 +439,8 @@ func (s *Session) wearItem(m *Member, from int, g Good) {
 // stowItem 是放回自己的背包：滿了就印那一句（記錄 0xD3）。
 func (s *Session) stowItem(m *Member, from int) {
 	p := s.Inside.ItemPage
-	if len(m.Backpack) >= BackpackSlots {
+	slot := m.emptyPackSlot()
+	if slot < 0 {
 		p.Note = nonEmpty(s.uiLines(YourPackFullRecord))
 		return
 	}
@@ -384,7 +449,7 @@ func (s *Session) stowItem(m *Member, from int) {
 		s.afterItemAction()
 		return
 	}
-	m.Backpack = append(m.Backpack, *g)
+	m.putPack(slot, *g)
 	s.afterItemAction()
 }
 
@@ -400,7 +465,8 @@ func (s *Session) eatItem(m *Member, from int, g Good) {
 		m.Sheet = &sheet
 	}
 	m.removeItem(from)
-	s.afterItemAction()
+	// 原版圖示3另走清頁，未設1898F的完整重建旗標；保留既有選取。
+	s.finishItemAction()
 }
 
 // GiveItem 把選中那一格給隊伍中的第 n 位（`sub_18857` 的 `'1'`…`'6'`）。
@@ -413,8 +479,35 @@ func (s *Session) GiveItem(n int) {
 	if n < 0 || n >= len(s.Party) || n == i || i < 0 {
 		return
 	}
-	if len(s.Party[n].Backpack) >= BackpackSlots {
+	slot := s.Party[n].emptyPackSlot()
+	if slot < 0 {
 		p.Note = nonEmpty(s.uiLines(TheirPackFullRecord))
+		return
+	}
+	if s.Party[i].itemAt(p.Selected) == nil {
+		s.closeItemAction()
+		return
+	}
+	p.Giving = false
+	p.GiftConfirm = true
+	p.GiftTarget = n
+	p.Note = nil
+	p.GiftMessage = s.itemDropMessage(TradedRecord)
+	s.setInsideIcons([]int{IconSpacebar})
+}
+
+// SPEC-031第17節：只在正常ENTER／SPACE確認後搬移完整物品。
+func (s *Session) confirmGift() {
+	if !s.ShowingItemPage() || !s.Inside.ItemPage.GiftConfirm {
+		return
+	}
+	p := s.Inside.ItemPage
+	i, n := s.speakerIndex(), p.GiftTarget
+	if i < 0 || n < 0 || n >= len(s.Party) || n == i {
+		return
+	}
+	slot := s.Party[n].emptyPackSlot()
+	if slot < 0 {
 		return
 	}
 	g := s.Party[i].removeItem(p.Selected)
@@ -422,16 +515,46 @@ func (s *Session) GiveItem(n int) {
 		s.closeItemAction()
 		return
 	}
-	s.Party[n].Backpack = append(s.Party[n].Backpack, *g)
-	p.Note = nonEmpty(s.uiLines(TradedRecord))
+	s.Party[n].putPack(slot, *g)
+	s.Party[n].SyncCarried()
+	p.Note = nil
 	s.afterItemAction()
 }
 
 // afterItemAction 是動作做完：回清單層並重新算明細。原版是把 `byte_2DF50` 設成 1
 // 讓物品頁整頁重畫，效果相同。
 func (s *Session) afterItemAction() {
+	// RE-174：原版完整重建時word_39A56清零；單純關閉動作仍保留原列。
+	s.Inside.ItemPage.Selected = 0
+	s.finishItemAction()
+	// byte_2DF50要求重新合成快取；不是從已修改的舊快取返回。
+	s.Inside.ItemPage.RestoredEdge = [200]bool{}
+}
+
+// restoreMarkEdge依sub_16D0B:0x16D25..0x16D82的byte矩形記錄曝光，
+// 不依特定槽位或驗收畫格填色。手持框的byte範圍不包含左緣。
+func (p *ItemPage) restoreMarkEdge(m *ItemMark) {
+	if m == nil {
+		return
+	}
+	x0 := m.X / CellWidth * CellWidth
+	x1 := (m.X + 0x6D) / CellWidth * CellWidth
+	x := ItemPageLayout.Frame.X0
+	if x < x0 || x >= x1 {
+		return
+	}
+	for y := max(0, m.Y); y < min(len(p.RestoredEdge), m.Y+26); y++ {
+		p.RestoredEdge[y] = true
+	}
+}
+
+func (s *Session) finishItemAction() {
 	p := s.Inside.ItemPage
 	note := p.Note
+	// RE-175：立繪與任務比對共用目前物品，先同步鏡像再重畫。
+	if i := s.speakerIndex(); i >= 0 {
+		s.Party[i].SyncCarried()
+	}
 	s.closeItemAction()
 	p.Note = note
 	s.refreshItemFigure()
@@ -483,6 +606,12 @@ type ItemMark struct {
 	Dice   string `json:"dice,omitempty"`
 	Skill  string `json:"skill,omitempty"`
 	Weight int    `json:"weight,omitempty"`
+}
+
+// SkillX 是技能列號的原版像素位置，供英文與繁中共用（RE-177）。
+// sub_16D0B:0x16F36重新計算框X除以8加8，未加骰式文字起點的那一欄。
+func (m ItemMark) SkillX() int {
+	return (m.X/CellWidth + 8) * CellWidth
 }
 
 // refreshItemMark 重算左上角那個小框。位置來自版面表裡「那個部位在立繪上的高度」。

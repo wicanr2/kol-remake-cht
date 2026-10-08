@@ -122,11 +122,15 @@ func (s *State) spendTime(i int) int {
 	a := &s.Actors[i]
 	left := a.TimeAllowance()
 	left -= a.Hurt * hurtTimeCost
-	left -= actionCostPlanned(*a, commandTimeIndex(*a), encumbranceMultiplier(*a))
+	multiplier := encumbranceMultiplier(*a)
+	left -= actionCostPlanned(*a, commandTimeIndex(*a), multiplier)
+	s.setScratch(multiplier)
 	if a.Command == CmdCast {
 		if m := s.member(i); m != nil &&
 			a.SpellPick >= 0 && a.SpellPick < len(m.Spells) {
-			left -= CastTime(m.Spells[a.SpellPick])
+			castTime := CastTime(m.Spells[a.SpellPick])
+			left -= castTime
+			s.setScratch(castTime)
 		}
 	}
 	return left
@@ -205,6 +209,7 @@ func (s *State) EndTurnFatigue(i int) int {
 	}
 	// 倒下：頭與胸清掉（remake 用 0 表示廢掉），指令也清掉。
 	a.Head, a.Chest, a.Command = 0, 0, 0
+	s.forcedDrop(i)
 	if a.Side == SideParty {
 		return ExhaustedPartyRecord
 	}

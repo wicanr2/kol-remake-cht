@@ -54,6 +54,224 @@
       "semantic": "每平面合成上方 31 列後跳過 0xF8 bytes；下方 31 列保留初始化底圖。",
       "confidence": "已證實",
       "evidence": "docs/spec/026-weather-animation.md；0x2A1D9 設定 31 列、0x2A1DB 每列四 words、此處 add di,0F8h；平面總長 496 bytes。"
+    },
+    "0x29488": {
+      "semantic": "同步呼叫任務流程；該流程返回後才走世界成本。",
+      "confidence": "已證實",
+      "evidence": "RE-214；docs/re/20261003-quest-return-time.md；IDA Pro 9.4 正式 .i64 複本匯出，workplace/quest-return-20261003/ida2/export.json",
+      "original_disassembly": "call    sub_2B0FF",
+      "bytes": "9aff200029"
+    },
+    "0x2b352": {
+      "semantic": "接受任務後同步呼叫戰鬥 sub_1E3A8。",
+      "confidence": "已證實",
+      "evidence": "RE-214；docs/re/20261003-quest-return-time.md；IDA Pro 9.4 正式 .i64 複本匯出，workplace/quest-return-20261003/ida2/export.json",
+      "original_disassembly": "call    sub_1E3A8",
+      "bytes": "9a08003a1e"
+    },
+    "0x2b35f": {
+      "semantic": "實際任務戰鬥返回後將次格 X word_2DF36 設為4。",
+      "confidence": "已證實",
+      "evidence": "RE-214；docs/re/20261003-quest-return-time.md；IDA Pro 9.4 正式 .i64 複本匯出，workplace/quest-return-20261003/ida2/export.json",
+      "original_disassembly": "mov     word_2DF36, 4",
+      "bytes": "c70666000400"
+    },
+    "0x2b365": {
+      "semantic": "實際任務戰鬥返回後將次格 Y word_2DF38 設為4。",
+      "confidence": "已證實",
+      "evidence": "RE-214；docs/re/20261003-quest-return-time.md；IDA Pro 9.4 正式 .i64 複本匯出，workplace/quest-return-20261003/ida2/export.json",
+      "original_disassembly": "mov     word_2DF38, 4",
+      "bytes": "c70668000400"
+    },
+    "0x2b3c6": {
+      "semantic": "任務問答／戰鬥完成後呼叫世界整頁重畫。",
+      "confidence": "已證實",
+      "evidence": "RE-214；docs/re/20261003-quest-return-time.md；IDA Pro 9.4 正式 .i64 複本匯出，workplace/quest-return-20261003/ida2/export.json",
+      "original_disassembly": "call    sub_2A39B",
+      "bytes": "9a9b130029"
+    },
+    "0x2a427": {
+      "semantic": "世界整頁重畫呼叫時段更新 sub_29987。",
+      "confidence": "已證實",
+      "evidence": "RE-214；docs/re/20261003-quest-return-time.md；IDA Pro 9.4 正式 .i64 複本匯出，workplace/quest-return-20261003/ida2/export.json",
+      "original_disassembly": "call    sub_29987",
+      "bytes": "9a87090029"
+    },
+    "0x2954f": {
+      "semantic": "特殊地點及城鎮掃描後才呼叫 sub_297F2 扣一步時刻。",
+      "confidence": "已證實",
+      "evidence": "RE-214；docs/re/20261003-quest-return-time.md；IDA Pro 9.4 正式 .i64 複本匯出，workplace/quest-return-20261003/ida2/export.json",
+      "original_disassembly": "call    sub_297F2",
+      "bytes": "9af2070029"
+    },
+    "0x25953": {
+      "semantic": "部位情境列由DGROUP:0x0FF4加10倍舊選項，逐項讀一個byte。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "mov     al, [bx]",
+      "bytes": "8a07"
+    },
+    "0x25a14": {
+      "semantic": "部位額度乘除後只以AL存回權重緩衝，保留低8位元。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "mov     [bx-61D8h], al",
+      "bytes": "8887289e"
+    },
+    "0x25aa0": {
+      "semantic": "乘冪每次以sub_2DE8C返回DX:AX的低32位元乘積。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "call    sub_2DE8C",
+      "bytes": "9a9c258f2b"
+    },
+    "0x25ae7": {
+      "semantic": "以sub_2DDF0進行有號32位元除法，除數為等級除數byte。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "call    sub_2DDF0",
+      "bytes": "9a00258f2b"
+    },
+    "0x25b88": {
+      "semantic": "加總低16位元；下一個adc累加高16位元，溢位不延伸到64位元。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "add     word_39A4A, ax",
+      "bytes": "01067abb"
+    },
+    "0x25bc4": {
+      "semantic": "比較總和高字符號；負總和不走大於65535的正規化分支。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "cmp     word_39A4C, 0",
+      "bytes": "833e7cbb00"
+    },
+    "0x25c61": {
+      "semantic": "正規化權重以有號32位元除法向零截斷。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "call    sub_2DDF0",
+      "bytes": "9a00258f2b"
+    },
+    "0x2ddfb": {
+      "semantic": "長整數除法檢查被除數高字符號，負值先取絕對值。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "or      ax, ax",
+      "bytes": "0bc0"
+    },
+    "0x2de13": {
+      "semantic": "長整數除法檢查除數高字符號，商依兩側符號還原。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "or      ax, ax",
+      "bytes": "0bc0"
+    },
+    "0x2deb8": {
+      "semantic": "乘法返回低32位元DX:AX，高字加總不保留第33位進位。",
+      "confidence": "已證實",
+      "evidence": "RE-237；docs/re/20261005-ai-move-globals.md；IDA Pro9.4一次性DB與原始bytes；900同輸入比較及300正對照。",
+      "original_disassembly": "add     dx, cx",
+      "bytes": "03d1"
+    },
+    "0x20f74": {
+      "semantic": "法術消失訊息先呼叫原始sub_1B100(5)等待確認；此時尚未走20F94清指令。",
+      "confidence": "已證實",
+      "evidence": "RE-240；docs/re/20261005-round-command-reset.md；RE-239封存IDA9.4 bytes／xref與正常兩回合；RE-240等待邊界及七AI入口比較。",
+      "original_disassembly": "call    sub_1B100",
+      "bytes": "9a7013d919"
+    },
+    "0x20f7c": {
+      "semantic": "以原始word_37D2A槽號大於5為清指令條件；前六槽保留，不依陣營判斷。",
+      "confidence": "已證實",
+      "evidence": "RE-240；docs/re/20261005-round-command-reset.md；RE-239封存IDA9.4 bytes／xref與正常兩回合；RE-240等待邊界及七AI入口比較。",
+      "original_disassembly": "cmp     word_37D2A, 5",
+      "bytes": "833e5a9e05"
+    },
+    "0x20f94": {
+      "semantic": "法術倒數及其等待之後，清原始[bx+25h]；bx由32h乘槽號加6712h取得，先於下一槽。",
+      "confidence": "已證實",
+      "evidence": "RE-240；docs/re/20261005-round-command-reset.md；RE-239封存IDA9.4 bytes／xref與正常兩回合；RE-240等待邊界及七AI入口比較。",
+      "original_disassembly": "mov     byte ptr [bx+25h], 0",
+      "bytes": "c6472500"
+    },
+    "0x2746a": {
+      "semantic": "命中訊息後呼叫原始sub_1C1BF輸出卷軸文字，先於等鍵及傷害骰；戰場繪圖由sub_223C0負責。",
+      "confidence": "已證實",
+      "evidence": "RE-241；docs/re/20261005-attack-message-phases.md；IDA9.4原始控制流與固定seed1正常四次命中前後收據。 RE-242直接匯出sub_1C1BF與sub_223C0，訂正先前重畫標記，原始bytes不改。",
+      "original_disassembly": "call    sub_1C1BF",
+      "bytes": "9a2f24d919",
+      "superseded_semantic": "命中訊息後呼叫原始sub_1C1BF重畫，先於傷害骰。"
+    },
+    "0x27473": {
+      "semantic": "原始sub_1B100(5)等待命中訊息確認；尚未走274E9傷害骰。",
+      "confidence": "已證實",
+      "evidence": "RE-241；docs/re/20261005-attack-message-phases.md；IDA9.4原始控制流與固定seed1正常四次命中前後收據。",
+      "original_disassembly": "call    sub_1B100",
+      "bytes": "9a7013d919"
+    },
+    "0x274e9": {
+      "semantic": "命中訊息等鍵返回後才呼叫原始sub_26D3C傷害骰。",
+      "confidence": "已證實",
+      "evidence": "RE-241；docs/re/20261005-attack-message-phases.md；IDA9.4原始控制流與固定seed1正常四次命中前後收據。",
+      "original_disassembly": "call    sub_26D3C",
+      "bytes": "9a9c893a1e"
+    },
+    "0x1ff6f": {
+      "semantic": "執行序記錄+21h的槽號寫入原始word_37D2A，先於動作。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "mov     word_37D2A, ax",
+      "bytes": "a35a9e"
+    },
+    "0x2003a": {
+      "semantic": "將原始word_37D2A出手者傳給sub_223C0作執行視窗中心。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "call    sub_223C0",
+      "bytes": "9a20403a1e"
+    },
+    "0x223eb": {
+      "semantic": "讀renderer引數槽的原始[bx+1Fh]，寫word_2FB4C作視窗中心。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "mov     al, [bx+1Fh]",
+      "bytes": "8a471f"
+    },
+    "0x22401": {
+      "semantic": "讀renderer引數槽的原始[bx+20h]，寫word_2FB44作另一軸中心。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "mov     al, [bx+20h]",
+      "bytes": "8a4720"
+    },
+    "0x2263d": {
+      "semantic": "同格候選依原始sub_22866判倒地，再選encoded8／9圖示。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "call    sub_22866",
+      "bytes": "9ac6443a1e"
+    },
+    "0x226ff": {
+      "semantic": "無參戰者圖示、非空物品座標相符時填encoded27h地上物品。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "mov     byte ptr [bx+6AE4h], 27h ; '''",
+      "bytes": "c687e46a27"
+    },
+    "0x265d9": {
+      "semantic": "原始265CD移動訊息等鍵後才依出手者重畫，第一句保留移動前畫面。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "call    sub_223C0",
+      "bytes": "9a20403a1e"
+    },
+    "0x279ff": {
+      "semantic": "倒地重畫傳原始word_3237E被擊中者，與word_37D2A出手者分開。",
+      "confidence": "已證實",
+      "evidence": "RE-242；docs/re/20261005-execution-camera.md；IDA9.4原始控制流／caller與固定seed1正常78英文戰場逐像素比較。",
+      "original_disassembly": "call    sub_223C0",
+      "bytes": "9a20403a1e"
     }
   }
 }

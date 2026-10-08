@@ -152,6 +152,15 @@ func (s *State) GoldAward(rng Rand) int {
 // 結尾補 `ES`、否則補 `S`，最後再接一個 `!`。
 //
 // 中文沒有這個變化，譯文把三個記錄都處理掉了，所以只有英文模式會用到。
+// PluralBaseName 回傳英文複數拼接前的名稱底字（RE-256）。
+// 原版先退一個欄位，把末尾 S 覆成 E，再寫 S；原始名稱保持。
+func PluralBaseName(name string, count int) string {
+	if count > 1 && name != "" && endsWithS(name) {
+		return name[:len(name)-1]
+	}
+	return name
+}
+
 func PluralSuffix(name string, count int) string {
 	if count <= 1 || name == "" {
 		return ""

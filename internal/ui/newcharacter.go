@@ -6,6 +6,7 @@ package ui
 
 import (
 	"fmt"
+	"image"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -158,11 +159,18 @@ func NewCharacter(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 }
 
 func fill(dst *ebiten.Image, x, y, w, h int, c [3]uint8) {
-	rect := ebiten.NewImage(w, h)
-	rect.Fill(color.RGBA{c[0], c[1], c[2], 0xFF})
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(float64(x), float64(y))
-	dst.DrawImage(rect, op)
+	if w <= 0 || h <= 0 {
+		// 非正尺寸沿用既有流程，包括拒絕行為與負尺寸的正規化。
+		rect := ebiten.NewImage(w, h)
+		rect.Fill(color.RGBA{c[0], c[1], c[2], 0xFF})
+		op := &ebiten.DrawImageOptions{}
+		op.GeoM.Translate(float64(x), float64(y))
+		dst.DrawImage(rect, op)
+		return
+	}
+	// 直接填同一畫布的子矩形，避免每幀建立暫存紋理；邊界與不透明色保持相同。
+	dst.SubImage(image.Rect(x, y, x+w, y+h)).(*ebiten.Image).Fill(
+		color.RGBA{c[0], c[1], c[2], 0xFF})
 }
 
 func draw(dst, src *ebiten.Image, x, y int) {

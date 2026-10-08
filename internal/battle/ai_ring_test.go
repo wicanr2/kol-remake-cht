@@ -18,11 +18,12 @@ func TestEnemyContinuesSameRingAfterBlockedTarget(t *testing.T) {
 	if d.Target != 2 || d.Ring != 1 || d.Command != CmdMissile {
 		t.Fatalf("應選同環未被遮擋的隊員射擊，得到 %+v", d)
 	}
-	// AI 開頭的 word_3AC5E、反制掃描前的智力骰、鄰圈與外圈起點（RE-159）。
-	if len(rng.limits) != 4 {
-		t.Fatalf("兩次智力、鄰圈與外圈以外出現額外擲骰：%v", rng.limits)
+	// AI 開頭的 word_3AC5E、反制掃描前的智力骰、鄰圈起點、種類非零的搜尋遮罩骰
+	// （`rand(2)`，RE-168）與外圈起點。
+	if len(rng.limits) != 5 {
+		t.Fatalf("兩次智力、鄰圈、遮罩骰與外圈以外出現額外擲骰：%v", rng.limits)
 	}
-	if rng.limits[2] != 7 || rng.limits[3] != 15 {
-		t.Fatalf("起點骰應為環長減一：%v", rng.limits)
+	if rng.limits[2] != 7 || rng.limits[3] != 2 || rng.limits[4] != 15 {
+		t.Fatalf("起點骰應為環長減一、遮罩骰是 rand(2)：%v", rng.limits)
 	}
 }

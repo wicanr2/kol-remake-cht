@@ -1,0 +1,1183 @@
+{
+  "schema": "kol-normal-longest-weapons-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "玩家與敵方最長武器顯示；SPEC-033 父規格仍 READY",
+  "selection": "selection.json",
+  "selected_before_execution": true,
+  "population": {
+    "total": 282,
+    "player": 197,
+    "monster": 85,
+    "maximum_width": 80,
+    "player_maximum": 64
+  },
+  "normal_path": {
+    "player": "標題、六人招募、原背包取用戰鬥重槌、手持檢視、自然遭遇裝備欄；另一同前綴流程正常住宿保存，重啟檢視",
+    "enemy": "標題、六人招募、離城、步行至 Poontang 初始已持有的任務5，正常戰鬥移動／休息後檢視鄰格 Binderak"
+  },
+  "seed": {
+    "remake": 1,
+    "method": "八次正式執行前固定 -seed 1；不改坐標、遭遇、typed data，重載只用本次正常住宿保存",
+    "original": null,
+    "limitation": "本次只驗重製版顯示，不宣稱原版同狀態、亂數或完整戰鬥 parity"
+  },
+  "binary": {
+    "path": "workplace/platform-smoke-20261001/build/kol-linux",
+    "sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "rebuilt": false
+  },
+  "toolchain": {
+    "game_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "game_image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+    "checks_image": "kol-package:20260907",
+    "checks_image_id": "sha256:3d32441befe02810c3220a2e9f2db5b84ee65c703e5b65ee563712a3519ad193"
+  },
+  "states": {
+    "runs": 8,
+    "total": 1204,
+    "player_normal_per_language": 190,
+    "player_save_per_language": 101,
+    "player_reload_per_language": 15,
+    "enemy_normal_per_language": 296,
+    "all_non_display_fields_equal": true,
+    "language_display_differences": {
+      "player": [
+        {
+          "step": 186,
+          "field": "battle.encounter_text",
+          "en": [
+            "YOU HAVE BEEN AMBUSHED",
+            "BY 3, LEVEL 1 CLIFF TROLLS!"
+          ],
+          "zh": [
+            "你遭到埋伏！",
+            "來襲的是3隻，等級1 懸崖巨魔!"
+          ]
+        }
+      ],
+      "enemy": [
+        {
+          "field": "steps[191].battle.exec_text",
+          "en": [
+            "Olear is resting!"
+          ],
+          "zh": [
+            "Olear 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[192].battle.exec_text",
+          "en": [
+            "The BINDERAK moves!"
+          ],
+          "zh": [
+            "賓德拉克 移動了！"
+          ]
+        },
+        {
+          "field": "steps[193].battle.exec_text",
+          "en": [
+            "The BINDERAK moves!"
+          ],
+          "zh": [
+            "賓德拉克 移動了！"
+          ]
+        },
+        {
+          "field": "steps[194].battle.exec_text",
+          "en": [
+            "Kenneth is resting!"
+          ],
+          "zh": [
+            "Kenneth 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[195].battle.exec_text",
+          "en": [
+            "Poontang is resting!"
+          ],
+          "zh": [
+            "Poontang 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[196].battle.exec_text",
+          "en": [
+            "Theodoric moves!"
+          ],
+          "zh": [
+            "Theodoric 移動了！"
+          ]
+        },
+        {
+          "field": "steps[197].battle.exec_text",
+          "en": [
+            "Theodoric moves!"
+          ],
+          "zh": [
+            "Theodoric 移動了！"
+          ]
+        },
+        {
+          "field": "steps[198].battle.exec_text",
+          "en": [
+            "Fighting Bull is resting!"
+          ],
+          "zh": [
+            "Fighting Bull 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[199].battle.exec_text",
+          "en": [
+            "Moraine is resting!"
+          ],
+          "zh": [
+            "Moraine 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[200].battle.exec_text",
+          "en": [
+            "The BINDERAK moves!"
+          ],
+          "zh": [
+            "賓德拉克 移動了！"
+          ]
+        },
+        {
+          "field": "steps[201].battle.exec_text",
+          "en": [
+            "The BINDERAK moves!"
+          ],
+          "zh": [
+            "賓德拉克 移動了！"
+          ]
+        },
+        {
+          "field": "steps[258].battle.exec_text",
+          "en": [
+            "Olear is resting!"
+          ],
+          "zh": [
+            "Olear 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[259].battle.exec_text",
+          "en": [
+            "Kenneth is resting!"
+          ],
+          "zh": [
+            "Kenneth 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[260].battle.exec_text",
+          "en": [
+            "The BINDERAK moves!"
+          ],
+          "zh": [
+            "賓德拉克 移動了！"
+          ]
+        },
+        {
+          "field": "steps[261].battle.exec_text",
+          "en": [
+            "The BINDERAK moves!"
+          ],
+          "zh": [
+            "賓德拉克 移動了！"
+          ]
+        },
+        {
+          "field": "steps[262].battle.exec_text",
+          "en": [
+            "Poontang is resting!"
+          ],
+          "zh": [
+            "Poontang 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[263].battle.exec_text",
+          "en": [
+            "Fighting Bull is resting!"
+          ],
+          "zh": [
+            "Fighting Bull 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[264].battle.exec_text",
+          "en": [
+            "Theodoric is blocked from",
+            "moving!"
+          ],
+          "zh": [
+            "Theodoric 移動受阻！"
+          ]
+        },
+        {
+          "field": "steps[265].battle.exec_text",
+          "en": [
+            "Moraine is resting!"
+          ],
+          "zh": [
+            "Moraine 正在休息！"
+          ]
+        },
+        {
+          "field": "steps[266].battle.exec_text",
+          "en": [
+            "The BINDERAK is blocked from",
+            "moving!"
+          ],
+          "zh": [
+            "賓德拉克 移動受阻！"
+          ]
+        }
+      ]
+    }
+  },
+  "checks": {
+    "complete_text_boxes": 8,
+    "text_box_pixel_differences": 0,
+    "whole_frame_comparisons": 6,
+    "whole_frame_pixel_differences": 0,
+    "missing_ink_pixel_rejected": true,
+    "narrow_63_player_and_79_enemy_widths_rejected": true,
+    "saves_except_saved_at_equal": true,
+    "raw_names_and_records_preserved": true,
+    "normal_take_moves_exact_good": true,
+    "reload_did_not_rewrite_save": true
+  },
+  "visual_review": {
+    "files": [
+      "player-zh-Hant/step-076.png",
+      "player-zh-Hant/step-077.png",
+      "player-zh-Hant/step-082.png",
+      "player-zh-Hant/step-083.png",
+      "player-zh-Hant/step-188.png",
+      "enemy-zh-Hant/step-294.png"
+    ],
+    "result": "六張完整中文畫格可讀，武器譯名、骰式、重量與明細未裁切"
+  },
+  "current_inputs_sha256": {
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "assets/original-derived-data/monsters.json": "39aeef6efb5388c947f721e8ea75847106526c869090aa185bad912aa4fce992",
+    "assets/original-derived-data/world-map.json": "73441fd1f956edb08957a44a28c79df4845447a1e102346c4de6751d1947e5df",
+    "assets/original-derived-data/quest-sites.json": "ed6a1238a1eb1e51008db7b84fa4234735c41283a28ce9c48a7eaf679151dd2a",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "docs/i18n/display-names-zh-Hant.tsv": "679d011aa245f644584b88d8b8614e24edcc9b080a375f4deea9ecaf28812e4b",
+    "docs/i18n/newchar-zh-Hant.json": "e7a4c37d800931904e97ade517f6293f52b3692fbecb371ec39912d175610675",
+    "docs/i18n/ui-zh-Hant.json": "af3ac4b95945b442b8ba4ae861a37b377856ed3f7637b4ae23cfdbf36bf03c17",
+    "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f",
+    "internal/battle/equipment_panel.go": "1d1b4ffb8317c3cfd10e2cfe4e8c4ba223249ff1aa1a4e46023ee85f4fb5e040",
+    "internal/ui/battle_cjk.go": "24ab72efd7aa173d36a627abdc4b4c513980ca690ec1d3338f5c6b5943522d25",
+    "internal/ui/itempage_cjk.go": "52f5e540d3c1a22ae36fd78522f61c659ef404c063d20ac25266ecd0024ff798",
+    "assets/original-derived-data/portrait-layout.json": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df",
+    "tools/png_io.py": "0295c62847b9e66e9a997940224c1d4c04bf5e0acbeab2d820bfecd0fd020c9c",
+    "assets/original-derived-png/ega/manifest.json": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9"
+  },
+  "local_save_sha256": {
+    "workplace/cjk-weapon-20261001/player-en-save.json": "adacc5d3d0362eef104459779e1f8e9a74435b0dbb340032b6bdd9470137114b",
+    "workplace/cjk-weapon-20261001/player-zh-Hant-save.json": "147e60bc656b1359c6b4a2af8d091a307fc3cf5fe0cab52d4661464cf274c963"
+  },
+  "original_inputs": {
+    "archive": "Knights-of-legend.zip",
+    "archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "exe": "Knights-of-legend/KOL.EXE",
+    "exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+    "quest_site": {
+      "payload": 42,
+      "payload_sha256": "2d81ceada93b6d09c6f14a4546feff405f63be2e184f7c51c0cbfd4661aa0ab2"
+    },
+    "executable_entries_sha256": {
+      "Knights-of-legend/KOL.EXE": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "Knights-of-legend/KOLBOOK.EXE": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+      "Knights-of-legend/KOLTOWN.EXE": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "Knights-of-legend/MAKEMODE.EXE": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56",
+      "Knights-of-legend/TANDYPIN.EXE": "036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3",
+      "Knights-of-legend/TITLE.EXE": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6"
+    }
+  },
+  "rights": "畫格 PNG 僅沿用已授權 private GitHub 特例，不取得公開散布權；原版封裝、typed data、完整保存及完整母體清冊留本機",
+  "limitations": [
+    "尚未驗最長怪物名、戰利品母體、名牌修法與其他分支",
+    "未改產品、規則、資料、字模、譯表或存檔格式",
+    "不宣稱原版對拍、真機平台、正式封包或全遊戲完成"
+  ],
+  "attachments": [
+    {
+      "file": "enemy-checkpoint.json",
+      "sha256": "1b64a92adde6d8cc98516ea416f5b8debfbb77920fb240f5869e657ca27fd244",
+      "bytes": 318
+    },
+    {
+      "file": "enemy-checks.json",
+      "sha256": "f87a265e2afadc25be48d3e766df9e93c7465c6a999780a83aea34176a37063b",
+      "bytes": 6858
+    },
+    {
+      "file": "enemy-en/engine.log",
+      "sha256": "b1f6058e209d90ca65ffdc99a062183c469d21cd6c8a1846f8328213149689a3",
+      "bytes": 674
+    },
+    {
+      "file": "enemy-en/run.json",
+      "sha256": "098e7674b71b5bfbb8c71dbc6d8c2cbb535df2bcbcbfe4effa4b5ded322a8ef4",
+      "bytes": 1369
+    },
+    {
+      "file": "enemy-en/step-133.png",
+      "sha256": "0af2a70c061cc907f5e80613da75f5f79eb952793e86be943227dd9b8fc4a2b9",
+      "bytes": 10679,
+      "frame": 133,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-en/step-134.png",
+      "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
+      "bytes": 6738,
+      "frame": 134,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-en/step-135.png",
+      "sha256": "12f288f9477155ac72cd703af8092e1651f2591a9848226c3fa8bc3dc2684682",
+      "bytes": 9294,
+      "frame": 135,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-en/step-293.png",
+      "sha256": "f01a3c8abf9f612921252349a62aababa7d38a2bf2e970d58e0539e23b6a69ae",
+      "bytes": 8468,
+      "frame": 293,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-en/step-294.png",
+      "sha256": "7c2d4e4ea8d1b14404f93aedec5ef9f98f49d9b097270e71ffeced731bb55023",
+      "bytes": 7904,
+      "frame": 294,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-en/step-295.png",
+      "sha256": "f01a3c8abf9f612921252349a62aababa7d38a2bf2e970d58e0539e23b6a69ae",
+      "bytes": 8468,
+      "frame": 295,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-en/trace.json",
+      "sha256": "038e70a1af80b9dedcda3c35aabaa25781a5727d1baa5b0d29caa016f338413e",
+      "bytes": 246681
+    },
+    {
+      "file": "enemy-zh-Hant/engine.log",
+      "sha256": "f8d557bd91ff2fa1bf335832afa905f8bee1ed9806e39e8daf67bfc3378ea32b",
+      "bytes": 704
+    },
+    {
+      "file": "enemy-zh-Hant/run.json",
+      "sha256": "4989363e70ee4734235ca05f4d3b69e0f25b35fd49b3ed0a57d71ce6f89feab2",
+      "bytes": 1389
+    },
+    {
+      "file": "enemy-zh-Hant/step-133.png",
+      "sha256": "f1da750b258f8d841171f8a5e5b908c47f9c8f22f4ea5fd53e612b1cfa330ea6",
+      "bytes": 19356,
+      "frame": 133,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-zh-Hant/step-134.png",
+      "sha256": "fc5d48ec52f362dc8ec60568984b7b813d5fdd5ee27dbff2c9c29cf3777aa064",
+      "bytes": 13885,
+      "frame": 134,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-zh-Hant/step-135.png",
+      "sha256": "26edd2bf157d4884bfb07da8f8955e1f47ac5986e89e66342b254cdcb9732665",
+      "bytes": 19670,
+      "frame": 135,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-zh-Hant/step-293.png",
+      "sha256": "ba9544dfcbfa84a6be1f9abc4530057aacd62f01421d944318fdca579d372fbf",
+      "bytes": 16767,
+      "frame": 293,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-zh-Hant/step-294.png",
+      "sha256": "88dc580faf7d8147ec66fd1b51552908586d3eb77e556df265209b96c2d92558",
+      "bytes": 17274,
+      "frame": 294,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-zh-Hant/step-295.png",
+      "sha256": "ba9544dfcbfa84a6be1f9abc4530057aacd62f01421d944318fdca579d372fbf",
+      "bytes": 16767,
+      "frame": 295,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "enemy-zh-Hant/trace.json",
+      "sha256": "16fb2b7ea9946cda995e0edc55b2785edf7e46c89c96995ef94afa2426b35e72",
+      "bytes": 246749
+    },
+    {
+      "file": "normal-script.txt",
+      "sha256": "156b344e7e82f4791be4d43bc7e11f0a260352e7987dbf53b4571bb2806a6e5c",
+      "bytes": 820
+    },
+    {
+      "file": "pixel-checks.json",
+      "sha256": "162e0f11f898e4654a1106c2a166766fbe9b99c0ebc1a6577844efaa7187a1cd",
+      "bytes": 9933
+    },
+    {
+      "file": "pixels.py",
+      "sha256": "5e503c27a5620a363e551cdb92c0fae8f5fabeecbdce930e90575d2528a5d005",
+      "bytes": 5988
+    },
+    {
+      "file": "player-checks.json",
+      "sha256": "2828e4e5147abb0396eb9bd726e86792f06d9d33274c2330aff3c15e42c3bc82",
+      "bytes": 6529
+    },
+    {
+      "file": "player-en/engine.log",
+      "sha256": "85832a9850dcd46339660c132e1d59c58a277a4f395d4b9ffe757345c8430d60",
+      "bytes": 990
+    },
+    {
+      "file": "player-en/run.json",
+      "sha256": "ab5d2a3df279ca444b0a2aa51abe9ceb98b80e527ff019eda75e5de7a4871fed",
+      "bytes": 1035
+    },
+    {
+      "file": "player-en/step-060.png",
+      "sha256": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+      "bytes": 15780,
+      "frame": 60,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-076.png",
+      "sha256": "db152dd7972c3e00972289ff4013388d0a691f9b257ce6bbb89c98e9800a2a3b",
+      "bytes": 16311,
+      "frame": 76,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-077.png",
+      "sha256": "d829deac1287d035a71eb482808940097105d3c33605490576f9d9862707e1c3",
+      "bytes": 5763,
+      "frame": 77,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-079.png",
+      "sha256": "31e04eb5187a1b7ca875b77ab110b1a09a38d416f9a7870891a48a66fb5db00f",
+      "bytes": 16448,
+      "frame": 79,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-082.png",
+      "sha256": "4b003e05134d2e81e63286f5f2c85cb1c830b19aea86fd5f054f3c5b7fe65c6f",
+      "bytes": 16380,
+      "frame": 82,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-083.png",
+      "sha256": "5af81829a251d477e3a609b5e8fd5829a1eb84151665a15187260eb0c1004a7b",
+      "bytes": 5934,
+      "frame": 83,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-087.png",
+      "sha256": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+      "bytes": 15780,
+      "frame": 87,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-186.png",
+      "sha256": "b38a252f8ad1dbddff7fc2d5c4305cf1940a2f9507e1423d7434c7494bd88135",
+      "bytes": 5003,
+      "frame": 186,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-187.png",
+      "sha256": "2a816d205210cd59f070ac6fe3d2e5ef3c77ff79f19ee7b44fc4c7cafedce08c",
+      "bytes": 8424,
+      "frame": 187,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-188.png",
+      "sha256": "4bb2a6196e1ae18b827b3a0695aad63f37baa4b108b8ba758a374ee02a99fdd1",
+      "bytes": 8467,
+      "frame": 188,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/step-189.png",
+      "sha256": "2a816d205210cd59f070ac6fe3d2e5ef3c77ff79f19ee7b44fc4c7cafedce08c",
+      "bytes": 8424,
+      "frame": 189,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en/trace.json",
+      "sha256": "7a17ebca9f8feac5be8971f45614c52eb2c6c1a5e35ae78a39f6adc35bfbca92",
+      "bytes": 54507
+    },
+    {
+      "file": "player-en-reload/engine.log",
+      "sha256": "4fe3af9daa8ba021b663dd5207ef946fbd13eb2803096f5ecce0c7139869f0c1",
+      "bytes": 515
+    },
+    {
+      "file": "player-en-reload/run.json",
+      "sha256": "bb4c620c72f2b0996d31447469126359e9c30996fb86ec66e4836c2b66d5e610",
+      "bytes": 658
+    },
+    {
+      "file": "player-en-reload/step-000.png",
+      "sha256": "44d5d87b2665c30fe23dbce0bea92ce09ee96f7d36c91b133e18d61ee507e6f5",
+      "bytes": 15628,
+      "frame": 0,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en-reload/step-013.png",
+      "sha256": "4b003e05134d2e81e63286f5f2c85cb1c830b19aea86fd5f054f3c5b7fe65c6f",
+      "bytes": 16380,
+      "frame": 13,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en-reload/step-014.png",
+      "sha256": "5af81829a251d477e3a609b5e8fd5829a1eb84151665a15187260eb0c1004a7b",
+      "bytes": 5934,
+      "frame": 14,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en-reload/trace.json",
+      "sha256": "96940dd542c455ebb24fd9eabf6855fbac05507227472cfb04f80c341826d0ed",
+      "bytes": 3581
+    },
+    {
+      "file": "player-en-save/engine.log",
+      "sha256": "58c6f2148b7fddb9b4b4a2609672176f50eaa73d2ebb6cbe14f144ac445872a0",
+      "bytes": 576
+    },
+    {
+      "file": "player-en-save/run.json",
+      "sha256": "a1db1ac95c6e636f70e9cb367a7aec813013f4cd60277cb49fa54708c1b1cd85",
+      "bytes": 916
+    },
+    {
+      "file": "player-en-save/step-082.png",
+      "sha256": "4b003e05134d2e81e63286f5f2c85cb1c830b19aea86fd5f054f3c5b7fe65c6f",
+      "bytes": 16380,
+      "frame": 82,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en-save/step-083.png",
+      "sha256": "5af81829a251d477e3a609b5e8fd5829a1eb84151665a15187260eb0c1004a7b",
+      "bytes": 5934,
+      "frame": 83,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en-save/step-087.png",
+      "sha256": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+      "bytes": 15780,
+      "frame": 87,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en-save/step-100.png",
+      "sha256": "5d33f2b8fc326febbeede4119a1d24aab2998b5e811380ea41fbb14c656182f0",
+      "bytes": 12095,
+      "frame": 100,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-en-save/trace.json",
+      "sha256": "08b97b8af6f63aea1b4cfa5722679b0b96e3e587fef92d8a7dfcb1f1e85377b4",
+      "bytes": 22974
+    },
+    {
+      "file": "player-plan.json",
+      "sha256": "9dab117e811293ccb4679a4286442a002b9dce66e017066f351c296397ab6f9f",
+      "bytes": 4102
+    },
+    {
+      "file": "player-zh-Hant/engine.log",
+      "sha256": "f57cdceaeb4f81530e9af52fd5b55a789117d4d0328b0efceda9e287e4b71328",
+      "bytes": 1045
+    },
+    {
+      "file": "player-zh-Hant/run.json",
+      "sha256": "f576c3eb56d152c51d77ab73765dec9eb24207b42655505e4dbd744e4365be26",
+      "bytes": 1055
+    },
+    {
+      "file": "player-zh-Hant/step-060.png",
+      "sha256": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+      "bytes": 27634,
+      "frame": 60,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-076.png",
+      "sha256": "a408d5e3d42939359a79c13ac2c3cdf170108126db4afcb45f7b46f2c943087b",
+      "bytes": 26965,
+      "frame": 76,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-077.png",
+      "sha256": "275a9e1ec36d20818cf307ea49cb8d13c37afcd328dea2e8611d3b33170f8fb1",
+      "bytes": 11319,
+      "frame": 77,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-079.png",
+      "sha256": "01d5c86246245595c005e1589a52096b42966d4f503ffdd3b6d38f3510127506",
+      "bytes": 26762,
+      "frame": 79,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-082.png",
+      "sha256": "d292036699424e4dbfa6d949e4f7147c53144441f29377d5513f57d3564790a0",
+      "bytes": 27161,
+      "frame": 82,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-083.png",
+      "sha256": "719fd450eca03922f9a18a3ed967afb65661fb79372f2c4d4339d437bf0b6e64",
+      "bytes": 11572,
+      "frame": 83,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-087.png",
+      "sha256": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+      "bytes": 27634,
+      "frame": 87,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-186.png",
+      "sha256": "86c3c54f1edf669517a0489da505a6d8154550482add9f0d69cbd058107924b0",
+      "bytes": 10686,
+      "frame": 186,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-187.png",
+      "sha256": "2bc8b293ae154e1a5554320e31460ad3c6b76f5ea535963790e0198c54293cc5",
+      "bytes": 16668,
+      "frame": 187,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-188.png",
+      "sha256": "4961f477d4c9b916e4b8899a29eb6e501ae925e644af86b95699ab1b253f55e8",
+      "bytes": 18262,
+      "frame": 188,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/step-189.png",
+      "sha256": "2bc8b293ae154e1a5554320e31460ad3c6b76f5ea535963790e0198c54293cc5",
+      "bytes": 16668,
+      "frame": 189,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant/trace.json",
+      "sha256": "f97a49bc73c3ef9efeb97d539a33d4f229775d29b7b1d3b44a95c2516e35f288",
+      "bytes": 54516
+    },
+    {
+      "file": "player-zh-Hant-reload/engine.log",
+      "sha256": "c8f0e09d11e807139c239266bf45c0a71790b9b4f4ab97c0f704dd7932294bd9",
+      "bytes": 530
+    },
+    {
+      "file": "player-zh-Hant-reload/run.json",
+      "sha256": "46061992c1ad0daedd8a7137cf9d3ceca713eff732f5d0f7d7d62065b8d3c770",
+      "bytes": 683
+    },
+    {
+      "file": "player-zh-Hant-reload/step-000.png",
+      "sha256": "b5a834ea22bb27a1d0fe69f2c985741042b3730ae304c2f6d698bca3f437068d",
+      "bytes": 27342,
+      "frame": 0,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant-reload/step-013.png",
+      "sha256": "d292036699424e4dbfa6d949e4f7147c53144441f29377d5513f57d3564790a0",
+      "bytes": 27161,
+      "frame": 13,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant-reload/step-014.png",
+      "sha256": "719fd450eca03922f9a18a3ed967afb65661fb79372f2c4d4339d437bf0b6e64",
+      "bytes": 11572,
+      "frame": 14,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant-reload/trace.json",
+      "sha256": "96940dd542c455ebb24fd9eabf6855fbac05507227472cfb04f80c341826d0ed",
+      "bytes": 3581
+    },
+    {
+      "file": "player-zh-Hant-save/engine.log",
+      "sha256": "c8cacc94a06fe8487239d997ea9d7fe558f884ff694cf0913a9c840300510b42",
+      "bytes": 596
+    },
+    {
+      "file": "player-zh-Hant-save/run.json",
+      "sha256": "755376a07d2e7b6493465ec0c979e25d08df48c9d475271cf841ffdeac15f118",
+      "bytes": 941
+    },
+    {
+      "file": "player-zh-Hant-save/step-082.png",
+      "sha256": "d292036699424e4dbfa6d949e4f7147c53144441f29377d5513f57d3564790a0",
+      "bytes": 27161,
+      "frame": 82,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant-save/step-083.png",
+      "sha256": "719fd450eca03922f9a18a3ed967afb65661fb79372f2c4d4339d437bf0b6e64",
+      "bytes": 11572,
+      "frame": 83,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant-save/step-087.png",
+      "sha256": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+      "bytes": 27634,
+      "frame": 87,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant-save/step-100.png",
+      "sha256": "d9f266065a41fb91dc4c39ad4b9372eafffae226aa248d7a110a60ad2f956b06",
+      "bytes": 21488,
+      "frame": 100,
+      "source_entry": "Knights-of-legend/KOL.EXE 與資料 archive 的衍生 PNG；素材逐筆來源見 assets/original-derived-png/ega/manifest.json",
+      "source_archive_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_exe_sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+      "renderer_binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "source_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "evidence": "已證實：本次重製版顯示；原版 parity 未知",
+      "rights": "private GitHub 可保存；未授權公開散布",
+      "source_manifest": "assets/original-derived-png/ega/manifest.json"
+    },
+    {
+      "file": "player-zh-Hant-save/trace.json",
+      "sha256": "08b97b8af6f63aea1b4cfa5722679b0b96e3e587fef92d8a7dfcb1f1e85377b4",
+      "bytes": 22974
+    },
+    {
+      "file": "prepare.py",
+      "sha256": "8ce1a1c69e7b24f4dd6150ee1bf6eb51978fed3ec25eba345342219652cd3b5f",
+      "bytes": 4565
+    },
+    {
+      "file": "replay-plan.json",
+      "sha256": "db60f9775f4793df1471b0da60cf084e391141f036b2a5cb43304403a264b34d",
+      "bytes": 8473
+    },
+    {
+      "file": "replay.py",
+      "sha256": "acddb11e5ff87ccf2d1b9a39113b923424f55d8aab88a8fb926d2243ba790ccd",
+      "bytes": 2855
+    },
+    {
+      "file": "selection.json",
+      "sha256": "9b46db826933bd731ac8c89dee830815ab90a1a8fe98fa9318a7c184e4d7145a",
+      "bytes": 2915
+    },
+    {
+      "file": "fresh-replay-checks.json",
+      "sha256": "a8005c6a5da394b94643186cb0b3b104334213a41284b253f811a08d782446fb",
+      "bytes": 2000
+    },
+    {
+      "file": "final-audit.json",
+      "sha256": "e4f1565dd4875f9d8e6b61880c9f0c4a1a946fefc00d2d5472922e15aee6f726",
+      "bytes": 1206
+    }
+  ],
+  "fresh_replay": {
+    "file": "fresh-replay-checks.json",
+    "runs": 8,
+    "states": 1204,
+    "all_48_pngs_and_traces_identical": true,
+    "saves_except_saved_at_equal": true
+  },
+  "final_audit": "final-audit.json"
+}

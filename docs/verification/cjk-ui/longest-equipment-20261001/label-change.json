@@ -1,0 +1,12 @@
+{
+  "schema": "kol-battle-belt-label-correction-v1",
+  "backup_sha256": {
+    "docs/i18n/newchar-zh-Hant.json": "5d29c2c65b57921d6d0e2573f00e34c7ed58989eac8f7f1565dbffad0be7e7c2",
+    "docs/i18n/ui-zh-Hant.json": "3dec02c25fbca4b3b537041121a3cdd62c03333ac9379cbe059e1582d8c71003",
+    "docs/verification/cjk-text-fit.json": "89f888a8f582169a45c9d83b557a0bf4d5c1660acff8f7fae1c8c3eaaa331ec6"
+  },
+  "scope": "只改繁中譯文與註解；正式Go控制流、裝備規則、保存與英文畫面不變",
+  "old": "身體：",
+  "new": "腰帶：",
+  "KOLDATA_257": "身：→腰："
+}

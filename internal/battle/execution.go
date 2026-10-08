@@ -1,6 +1,9 @@
 package battle
 
-import "sort"
+import (
+	"encoding/hex"
+	"sort"
+)
 
 // 執行段（RE-084）。整輪規劃做完、玩家在「Begin next round?」答應之後，原版
 // **另外排一次順序**：這一次看的是快捷、負重與指令的時間成本，鍵值大的先動。
@@ -179,6 +182,13 @@ type Execution struct {
 	extra, extraActor, extraLeft int
 	// settle 是回合收尾走到第幾名（參戰者索引）。
 	settle int
+	// settledFatigue 表示該名已算疲勞，力竭頁回答後續做挨傷與法術倒數。
+	settledFatigue bool
+	settledSpell   bool
+	pendingDamage  *attackWait
+	pendingKnock   *attackWait
+	viewActor      *int
+	viewBefore     *Actor
 }
 
 // Step 做出下一手。原版每一手印一句訊息再等玩家按一個鍵（`sub_1B100(5)`），
@@ -187,7 +197,10 @@ type Execution struct {
 // 走完之後自己收尾：數兩邊倒下的人，依 RE-091 的四個條件決定這一場的去向，
 // 沒分勝負才排下一回合的規劃。
 func (s *State) Step(rng Rand) (ActResult, bool) {
-	r, ok := s.Act(rng)
+	before := append([]Actor(nil), s.Actors...)
+	previousIndex := s.viewActorIndex()
+	previousView, previousBefore := &previousIndex, s.Exec.viewBefore
+	r, ok := s.nextAct(rng, true)
 	if !ok {
 		s.Exec.Text = nil
 		switch v := s.RoundVerdict(); v {
@@ -219,6 +232,20 @@ func (s *State) Step(rng Rand) (ActResult, bool) {
 		s.AdvanceToParty()
 		s.BeginTurn()
 		return r, false
+	}
+	// SPEC-008／RE-242：執行畫面與視線跟隨本次出手者。
+	s.Cursor = r.Actor
+	focus := r.Actor
+	if r.Target >= 0 && r.Target < len(s.Actors) && (r.KnockOnly || r.DamageOnly && s.Actors[r.Target].Down()) {
+		focus = r.Target
+	}
+	s.Exec.viewActor, s.Exec.viewBefore = &focus, nil
+	if r.moveView < 0 {
+		// RE-290：起點不可見時不重畫，無訊息移動也保留前一張戰場。
+		s.Exec.viewActor, s.Exec.viewBefore = previousView, previousBefore
+	} else if (r.Redraw || r.moveView > 0) && r.Actor >= 0 && r.Actor < len(before) {
+		prior := before[r.Actor]
+		s.Exec.viewBefore = &prior
 	}
 	s.Exec.Log = append(s.Exec.Log, r)
 	return r, true
@@ -278,7 +305,11 @@ func (s *State) BeginExecution(rng Rand) {
 		if a.Side == SideEmpty {
 			continue
 		}
+		s.trackExecStart(i)
 		keys[i] = ExecKey(a, rng.Roll(PlanRoll))
+		if a.Command == CmdMissile {
+			s.setScratch(a.Weapon.Kind)
+		}
 		order = append(order, i)
 	}
 	// 原版排小到大再從尾端往回走。等價於由大到小，而相同鍵值時索引大的先動。
@@ -291,6 +322,12 @@ func (s *State) BeginExecution(rng Rand) {
 	s.Exec.Order = order
 	s.Exec.Turn = 0
 	s.Exec.extra, s.Exec.extraLeft, s.Exec.settle = 0, 0, 0
+	s.Exec.settledFatigue = false
+	s.Exec.settledSpell = false
+	s.Exec.pendingDamage = nil
+	s.Exec.pendingKnock = nil
+	s.Exec.viewActor, s.Exec.viewBefore = nil, nil
+	s.spellReaction = nil
 }
 
 // ActResult 是一手做出來的結果。
@@ -302,6 +339,10 @@ type ActResult struct {
 	Target int
 	// Outcome 是打中的話那一次結算的結果。
 	Outcome *Outcome
+	// HitPending 停在命中句；DamageOnly 表示確認後才完成的傷害句（RE-241）。
+	HitPending bool
+	DamageOnly bool
+	KnockOnly  bool
 	// Message 是要印的 KOLDATA 記錄；0 表示沒有訊息。
 	Message int
 	// Unimplemented 為真表示這一手 remake 還沒做出來，不是原版沒有動作。
@@ -317,6 +358,8 @@ type ActResult struct {
 	// Redraw 為真表示這一句之後原版會重畫戰場再等一次鍵
 	// （`sub_26384:0x265D5`，移動成功才有）。
 	Redraw bool
+	// moveView記錄移動入口的重畫：負值保留舊圖，正值重畫起點。
+	moveView int
 	// Records 是這一手要印的幾筆記錄，給一句話要接兩筆的情形用（射擊撞在樹上
 	// 或牆上，RE-102）。有 Records 就不看 Message。
 	Records []int
@@ -370,6 +413,29 @@ const (
 // Act 做出下一手，回報做完了沒有。第二個回傳值為 false 表示這一回合的執行段
 // 已經走完。
 func (s *State) Act(rng Rand) (ActResult, bool) {
+	return s.nextAct(rng, false)
+}
+
+func (s *State) nextAct(rng Rand, phased bool) (ActResult, bool) {
+	if s.Exec.pendingKnock != nil {
+		wait := *s.Exec.pendingKnock
+		s.Exec.pendingKnock = nil
+		knock, item := s.knockback(wait.actor, wait.target, rng)
+		s.finishAttackAmmo(wait)
+		if len(knock) > 0 {
+			return ActResult{Actor: wait.actor, Target: wait.target, Command: wait.command,
+				KnockOnly: true, Records: knock, Item: item, Plain: true}, true
+		}
+		// 擊退不成立時沒有新增一句或等鍵，直接續原執行迴圈。
+	}
+	if s.Exec.pendingDamage != nil {
+		wait := *s.Exec.pendingDamage
+		s.Exec.pendingDamage = nil
+		return s.finishAttack(wait, rng), true
+	}
+	if s.spellReaction != nil {
+		return s.resumeSpellReaction(rng), true
+	}
 	// 「要不要撿」那一問答完之後還有一句要印（RE-113）：先把它交出去再取下一手，
 	// 順序才與原版一樣（問句、回答、結果三句接在同一手後面）。
 	if s.resume != nil {
@@ -391,7 +457,7 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 		cmd := a.Command
 		s.checkFlinch(i, rng)
 		flinched := a.Command == CmdFlinch && cmd != CmdFlinch
-		out := s.act(i, rng)
+		out := s.actPhase(i, rng, phased)
 		if flinched {
 			a.Command = cmd
 		}
@@ -424,27 +490,45 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 	// 挨傷（`0x20E64`）：整回合挨的傷搬進 `+0x2A`，`+0x2D` 與招架次數 `+0x0F` 歸零。
 	for s.Exec.settle < len(s.Actors) {
 		i := s.Exec.settle
-		s.Exec.settle++
 		a := &s.Actors[i]
 		if a.Side == SideEmpty {
+			s.Exec.settle++
 			continue
 		}
-		// `0x20A8B` 把這一名的 `+0x25` 讀進 `word_31122`。
-		s.LastCommand = a.Command
-		exhausted := 0
-		if !a.Down() {
-			exhausted = s.EndTurnFatigue(i)
+		if !s.Exec.settledFatigue {
+			// `0x20A8B` 把這一名的 `+0x25` 讀進 `word_31122`。
+			s.LastCommand = a.Command
+			exhausted := 0
+			if !a.Down() {
+				exhausted = s.EndTurnFatigue(i)
+			}
+			s.Exec.settledFatigue = true
+			if exhausted != 0 {
+				return ActResult{Actor: i, Target: -1, Exhausted: exhausted}, true
+			}
 		}
-		a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0
-		if exhausted != 0 {
-			return ActResult{Actor: i, Target: -1, Exhausted: exhausted}, true
+		if !s.Exec.settledSpell {
+			a.LastHurt, a.Hurt, a.Parries = a.Hurt, 0, 0
+			s.Exec.settledSpell = true
+			// RE-208／240：倒數先結算；消失訊息確認後才清指令。
+			if s.WearsOff(i) {
+				return ActResult{Actor: i, Target: -1, Message: WearsOffRecord}, true
+			}
 		}
+		// SPEC-008／RE-240：原版 0x20F94 按槽號清 +0x25。
+		if i >= PartySlots {
+			a.Command = 0
+		}
+		s.Exec.settle++
+		s.Exec.settledFatigue, s.Exec.settledSpell = false, false
 	}
 	return ActResult{}, false
 }
 
 // act 是一手的分派（`0x2065E`…`0x2070F`）。
-func (s *State) act(i int, rng Rand) ActResult {
+func (s *State) act(i int, rng Rand) ActResult { return s.actPhase(i, rng, false) }
+
+func (s *State) actPhase(i int, rng Rand, phased bool) ActResult {
 	a := &s.Actors[i]
 	out := ActResult{Actor: i, Command: a.Command, Target: -1}
 	// 規劃段應該已經替敵人填好指令了（RE-081／RE-092）。真的空著就標成還沒實作，
@@ -469,13 +553,26 @@ func (s *State) act(i int, rng Rand) ActResult {
 			}
 			return out
 		}
+		if phased {
+			outcome, margin := checkAttack(a, &s.Actors[target], a.Style, rng)
+			out.Target, out.Outcome = target, &outcome
+			if !outcome.Miss && !outcome.Parried {
+				s.Exec.pendingDamage = &attackWait{actor: i, target: target, style: a.Style, margin: margin, command: out.Command}
+				out.HitPending = true
+			}
+			return out
+		}
 		outcome := Resolve(a, &s.Actors[target], a.Style, rng)
 		s.WearOverCap(i, outcome.OverCap)
 		out.Target = target
 		out.Outcome = &outcome
+		if s.Actors[target].Down() {
+			s.Actors[target].Command = 0
+			s.forcedDrop(target)
+		}
 		// 傷得夠重才判擊退（`0x27B77`，見 KnocksBack）。
 		if KnocksBack(outcome) {
-			out.Knock = s.Knockback(i, target, rng)
+			out.Knock, out.Item = s.knockback(i, target, rng)
 		}
 		return out
 	case CmdRest:
@@ -532,7 +629,7 @@ func (s *State) act(i int, rng Rand) ActResult {
 	case CmdMissile, CmdLoad:
 		// 兩個指令碼走同一支，與原版一樣（`0x20785` 兩條都跳 `0x20799`）：
 		// 該裝填的自己會變成裝填那一手（RE-105）。
-		return s.shoot(i, rng)
+		return s.shootPhase(i, rng, phased)
 	}
 	// 剩下的幾個指令碼。**撿（0x15）與丟（0x24）不會走到這裡**——執行段的分派只認
 	// 十個指令碼，那兩個不在其中，它們是規劃段的即時動作（RE-093）。真的落到這裡
@@ -570,7 +667,7 @@ func (s *State) cast(i int, rng Rand) ActResult {
 	area := -1
 	if spell.Effect == SpellEffectArea {
 		if spell.NeedsTarget() {
-			area = rng.Roll(6) - 1
+			area = AreaRandom
 		} else {
 			area = AreaAsk
 		}
@@ -602,8 +699,8 @@ type AreaQuestion struct {
 	Negative       bool
 }
 
-// AnswerArea 是那一問的回答（`0x284F1`…`0x2851C`）：套上效果，回傳「效果那一句」
-// 要用的結果與施法者。area 是 0…5；超出範圍不動作、也不離開那一層。
+// AnswerArea 是那一問的回答（`0x284F1`…`0x2851C`）：套上效果，回傳傷害或通用效果句
+// 要用的結果與施法者（RE-206）。area 是 0…5；超出範圍不動作、也不離開那一層。
 func (s *State) AnswerArea(area int) (CastResult, int, bool) {
 	ask := s.Area
 	if ask == nil || area < 0 || area > 5 {
@@ -611,8 +708,10 @@ func (s *State) AnswerArea(area int) (CastResult, int, bool) {
 	}
 	s.Area = nil
 	s.Plan.Prompt = PromptExecuting
-	s.castArea(ask.Target, area, ask.Power, ask.Negative)
-	return CastResult{Verdict: SpellHits, Power: ask.Power, Area: area},
+	damage := s.castArea(ask.Target, area, ask.Power, ask.Negative)
+	s.queueSpellReaction(ask.Caster, ask.Target, damage)
+	return CastResult{Verdict: SpellHits, Power: ask.Power, Area: area,
+			Target: ask.Target, Damage: damage},
 		ask.Caster, true
 }
 
@@ -620,12 +719,16 @@ func (s *State) AnswerArea(area int) (CastResult, int, bool) {
 func (s *State) move(i int) ActResult {
 	a := &s.Actors[i]
 	out := ActResult{Actor: i, Command: a.Command, Target: -1}
+	out.moveView = 1
+	if !s.messageSeen(i) {
+		out.moveView = -1
+	}
 	// 方式 3…5 會把 Flag1E 設起來（`0x263BD`）。
 	if MoveForm(a.Style) > MountingForm-1 {
 		a.Flag1E = 1
 	}
-	// 三句都要先問「有沒有人看得到」（`sub_2625A`，RE-124）：看不到就整段跳過，
-	// 連走成功之後那次重畫都不做。
+	// 受阻時用原位置判斷；成功時改用目的地（RE-290，0x2658A..0x265A7）。
+	// 看不到時不顯示訊息，也不等待成功後的重畫。
 	seen := s.messageSeen(i)
 	if a.Facing < 0 || a.Facing >= len(ring0) {
 		if seen {
@@ -642,6 +745,7 @@ func (s *State) move(i int) ActResult {
 		return out
 	}
 	a.X, a.Y = x, y
+	seen = s.messageSeen(i)
 	if !seen {
 		return out
 	}
@@ -756,10 +860,15 @@ func (s *State) moveBlocked(i, x, y int) bool {
 // 目標是規劃段記住的那一格（`Plan.Memo`），中間拉一條線：撞在樹或牆上就印
 // 「fires a missle into a …」，被半路的人接下就打那個人，一路到底就打停下來
 // 那一格上的人，那一格空著印「fires a missle but nothing is there!」。
-func (s *State) shoot(i int, rng Rand) ActResult {
+func (s *State) shoot(i int, rng Rand) ActResult { return s.shootPhase(i, rng, false) }
+
+func (s *State) shootPhase(i int, rng Rand, phased bool) ActResult {
 	a := &s.Actors[i]
 	out := ActResult{Actor: i, Command: a.Command, Target: -1}
 	reload := NeedsReload(a.Weapon.Kind)
+	if raw, known := s.monsterReloadByte(i); known {
+		reload = NeedsReload(raw)
+	}
 	if reload && a.Flag1D == 0 {
 		a.Flag1D = 1
 		a.Command = 0
@@ -767,10 +876,15 @@ func (s *State) shoot(i int, rng Rand) ActResult {
 		out.Message = ReloadRecord
 		return out
 	}
-	if reload {
-		a.Flag1D = 0
-	}
-	defer a.ConsumeAmmunition()
+	defer func() {
+		if out.HitPending {
+			return
+		}
+		if reload {
+			a.Flag1D = 0
+		}
+		s.consumeShotAmmunition(i)
+	}()
 	c := s.memo(i)
 	shot := s.Shoot(i, c.Row, c.Col, a.AttackValue()/10+rng.Roll(AttackRoll))
 	if shot.Stopped && shot.Block != MissileActor {
@@ -786,7 +900,7 @@ func (s *State) shoot(i int, rng Rand) ActResult {
 		// （`sub_24C35(0, …)`）——**兩次都只看敵方陣營那一格**，射的人是誰不影響。
 		target = s.enemyAt(shot.X, shot.Y)
 		if target < 0 {
-			target = s.actorAt(shot.X, shot.Y)
+			target = s.candidateAt(i, shot.X, shot.Y, 0)
 		}
 	}
 	if target < 0 || target == i || s.Actors[target].Down() {
@@ -794,22 +908,37 @@ func (s *State) shoot(i int, rng Rand) ActResult {
 		return out
 	}
 	out.Target = target
+	if phased {
+		outcome, margin := checkMissile(&s.Actors[target], shot.Score, shot.Block == MissileActor, rng)
+		out.Outcome = &outcome
+		if !outcome.Miss && !outcome.Parried {
+			s.Exec.pendingDamage = &attackWait{actor: i, target: target, style: a.Style, margin: margin, command: out.Command, missile: true, reload: reload}
+			out.HitPending = true
+		}
+		return out
+	}
 	outcome := ResolveMissile(a, &s.Actors[target], a.Style,
 		shot.Score, shot.Block == MissileActor, rng)
 	s.WearOverCap(i, outcome.OverCap)
 	out.Outcome = &outcome
+	if s.Actors[target].Down() {
+		s.Actors[target].Command = 0
+		s.forcedDrop(target)
+	}
 	if KnocksBack(outcome) {
-		out.Knock = s.Knockback(i, target, rng)
+		out.Knock, out.Item = s.knockback(i, target, rng)
 	}
 	return out
 }
 
-// ConsumeAmmunition 是隊員射擊完成的共同收尾（SPEC-022）；裝填不可呼叫。
+// ConsumeAmmunition 是射擊完成的計數收尾（SPEC-022／RE-217）；裝填不可呼叫。
 func (a *Actor) ConsumeAmmunition() {
-	if a.Side != SideParty {
+	if a.Side != SideParty && a.Side != SideMonster {
 		return
 	}
-	if NeedsReload(a.Weapon.Kind) {
+	// 怪物的裝填種類讀人物區域外別名，完整來源仍未知。
+	// 本次只接已證實的減值，不以手持或遠程種類猜補該分支。
+	if a.Side == SideParty && NeedsReload(a.Weapon.Kind) {
 		a.Flag1D = 0
 		a.Command = CmdLoad
 	}
@@ -817,6 +946,10 @@ func (a *Actor) ConsumeAmmunition() {
 	if a.Kind < 0 {
 		a.Kind = 0xFF
 		a.Command = 0
+	}
+	if a.Side == SideMonster {
+		// RE-216：負重取槽依當前 Kind；耗至零後切回手持。
+		a.ReloadGear()
 	}
 }
 
@@ -833,4 +966,73 @@ func (s *State) enemyAt(x, y int) int {
 		}
 	}
 	return -1
+}
+
+// attackWait 保存已完成的命中判定，確認前不擲傷害、不扣血、不倒地。
+// 僅屬於本次執行段；不新增存檔欄位。
+type attackWait struct {
+	actor, target, style, margin, command int
+	missile, reload                       bool
+}
+
+func (s *State) finishAttack(wait attackWait, rng Rand) ActResult {
+	a := &s.Actors[wait.actor]
+	outcome := finishDamage(a, &s.Actors[wait.target], wait.style, wait.margin, rng)
+	s.WearOverCap(wait.actor, outcome.OverCap)
+	out := ActResult{Actor: wait.actor, Target: wait.target, Command: wait.command, Outcome: &outcome, DamageOnly: true}
+	if s.Actors[wait.target].Down() {
+		s.Actors[wait.target].Command = 0
+		s.forcedDrop(wait.target)
+	}
+	if KnocksBack(outcome) {
+		// 原版 0x27B6F 先等待嚴重傷害句；確認後才到 0x27BC4 的擊退骰。
+		s.Exec.pendingKnock = &wait
+	} else {
+		s.finishAttackAmmo(wait)
+	}
+	return out
+}
+
+func (s *State) finishAttackAmmo(wait attackWait) {
+	if wait.missile {
+		a := &s.Actors[wait.actor]
+		if wait.reload {
+			a.Flag1D = 0
+		}
+		s.consumeShotAmmunition(wait.actor)
+	}
+}
+
+// SPEC-022 / RE-267: first monster source byte. Other aliases remain unresolved.
+// Exact copied source byte +0x33 = first head item record +3, including empty padding.
+func (s *State) firstMonsterReloadByte(i int) (int, bool) {
+	if i != PartySlots || i >= len(s.Actors) || s.Actors[i].Side != SideMonster {
+		return 0, false
+	}
+	v := s.Actors[i].EquipmentVariant
+	if v < 0 || v >= len(s.Monster.EquipmentVariants) {
+		return 0, false
+	}
+	records := s.Monster.EquipmentVariants[v].Records
+	if len(records) != 6 {
+		return 0, false
+	}
+	b, err := hex.DecodeString(records[1])
+	if err != nil || len(b) != 16 {
+		return 0, false
+	}
+	// A destroyed nonempty head record is cleared in full (IDA 0x220E9).
+	if b[0] != 0 && s.Actors[i].Armour[0] == nil {
+		return 0, true
+	}
+	return int(b[3]), true
+}
+
+func (s *State) consumeShotAmmunition(i int) {
+	a := &s.Actors[i]
+	if raw, known := s.monsterReloadByte(i); known && NeedsReload(raw) {
+		a.Flag1D = 0
+		a.Command = CmdLoad
+	}
+	a.ConsumeAmmunition()
 }

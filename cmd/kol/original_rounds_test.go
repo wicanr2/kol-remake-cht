@@ -107,8 +107,12 @@ func TestOriginalNormalRoundsExecution(t *testing.T) {
 					{"挨的傷 +0x2D", 0x2D, a.Hurt}, {"招架次數 +0x0F", 0x0F, a.Parries},
 					{"方向 +0x28", 0x28, a.Facing},
 				} {
-					if f.actual != int(raw[f.off]) {
-						t.Errorf("槽 %d %s：原版 %d，remake %d", i, f.name, raw[f.off], f.actual)
+					want := int(raw[f.off])
+					if f.off >= 0x11 && f.off <= 0x1B && f.off%2 == 1 {
+						want = originalPart(raw[f.off])
+					}
+					if f.actual != want {
+						t.Errorf("槽 %d %s：原版原始 byte %#x／語意值 %d，remake %d", i, f.name, raw[f.off], want, f.actual)
 					}
 				}
 				for _, c := range end.State.Counters {
@@ -139,9 +143,9 @@ func applyOriginalRecord(t *testing.T, a *battle.Actor, record string) {
 	a.X, a.Y = int(raw[0x1F]), int(raw[0x20])
 	a.Damage = int(raw[0x0E])
 	a.Parries = int(raw[0x0F])
-	a.Head, a.Chest = int(raw[0x11]), int(raw[0x13])
-	a.RightArm, a.LeftArm = int(raw[0x15]), int(raw[0x17])
-	a.RightLeg, a.LeftLeg = int(raw[0x19]), int(raw[0x1B])
+	a.Head, a.Chest = originalPart(raw[0x11]), originalPart(raw[0x13])
+	a.RightArm, a.LeftArm = originalPart(raw[0x15]), originalPart(raw[0x17])
+	a.RightLeg, a.LeftLeg = originalPart(raw[0x19]), originalPart(raw[0x1B])
 	a.Flag1D, a.Flag1E = int(raw[0x1D]), int(raw[0x1E])
 	a.Style, a.Guard, a.Command = int(raw[0x23]), int(raw[0x24]), int(raw[0x25])
 	a.Facing = int(raw[0x28])
@@ -149,6 +153,15 @@ func applyOriginalRecord(t *testing.T, a *battle.Actor, record string) {
 	a.LastHurt = int(raw[0x2A])
 	a.PickedUp = int(raw[0x2B])
 	a.Hurt = int(raw[0x2D])
+}
+
+// 原版部位的 0xFF 是倒地／失效標記（SPEC-009 第 7 節）；Actor.Take 使用 0。
+// 只用於六個部位，其他 byte 保留原值。
+func originalPart(value byte) int {
+	if value == 0xFF {
+		return 0
+	}
+	return int(value)
 }
 
 // recordingRoll 是原版那一支亂數，另外記下每一次 Roll(n) 的 n。

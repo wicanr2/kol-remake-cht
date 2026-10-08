@@ -1,17 +1,16 @@
 # 規格索引
 
-2026-09-08 現況訂正：共有 26 個 ID、27 份規格；最新實作與剩餘缺口以
-[本輪稽核](../verification/spec-source-audit-20260908.md) 為準。
-SPEC-019 的彈藥排除由 SPEC-022 補充；SPEC-020 已實作，SPEC-022 彈藥畫面與
-Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及世界時間。
-下表的早期授權限制不可直接當成目前未實作清單；本次不自動升 CONFORMED。
+目前共有 38 個 ID、39 份規格，SPEC-002 分為抽取契約與 EGA 集合。
+目前程式、驗收範圍及待決事項見 [CONTEXT](../../CONTEXT.md)，
+未完成工作的完成條件見 [WORKLIST](../../WORKLIST.md)。
+任務入口共用亂數的最新有限正式驗收見[驗收入口](../verification/quest-rng-20261007.md)。
+父規格的 READY／CONFORMED 登記不代表所有子分支已驗收；各節的 DRAFT 仍須先確認。
 
 規則規格（005～029）末尾都有「說明書對照」表，連回說明書 PDF 頁碼與繁中章節。
-規格狀態以下方登記與各文件的最新審查為準。2026-09-07 原始碼稽核
-確認多份索引／本文保留過時的未實作或禁作條款，不能直接當成現行工作清單。
-逐份實作落點、缺口與回填證據見
-[原始碼／規格稽核](../verification/spec-source-audit-20260907.md)。
-以下保留既有授權登記供回查；本次不自動升降 READY／CONFORMED，矛盾條款須逐項審查。
+規格狀態以下方登記與各文件的最新審查為準。
+早期實作落點與當時缺口見 [原始碼稽核](../verification/spec-source-audit-20260907.md)
+及 [後續稽核](../verification/spec-source-audit-20260908.md)，這兩份保存歷史範圍。
+下表只修正已證實的現況，不自動升降規格狀態。
 所有原版衍生行為必須依序經過：
 
 `RE 證據 → DRAFT → 證據審查 → READY → implementation → 同狀態驗證 → CONFORMED`
@@ -23,31 +22,31 @@ Olear 正常射擊已驗。SPEC-023 已補 v1 匯入、建角、住宿交易及�
 | SPEC-038 | [套件邊界、固定步進與注入點](038-package-boundaries.md) | READY | remake 工程契約；`internal/layers` 四項守門測試擋依賴方向、Ebitengine 越界、規則層讀時鐘與全域亂數 |
 | SPEC-037 | [建築進門後的發言者選擇與好惡](037-building-greeting.md) | READY | 多人隊伍先選發言者、被討厭與被欣賞的訊息、全隊被趕、SCROLL 教派；原版關鍵點三組共 36,176 組一致；滑鼠點肖像見 RE-167 |
 | SPEC-036 | [圖像與盾牌編輯器](036-picture-shield-editor.md) | CONFORMED | 點陣圖編輯器已實作；鍵盤路徑與原版同狀態逐 byte 一致，滑鼠路徑依靜態讀碼、未與原版實跑比較 |
-| SPEC-035 | [法術編輯器的繁中頁面](035-cjk-spell-editor.md) | READY | 中文模式原本看不到編輯頁，已補；四張正常按鍵畫格已驗，選值寫回與英中同狀態待驗 |
+| SPEC-035 | [法術編輯器的繁中頁面](035-cjk-spell-editor.md) | READY | 編輯頁、扣款與名稱輸入已接；[RE-213](../re/20261003-spell-edit-inn-save.md)已驗原版住宿保存及重載的有限欄位，營養差異保留；名稱空白邊界仍DRAFT，整體未驗收 |
 | SPEC-034 | [法術名的中文注解](034-cjk-spell-name-gloss.md) | CONFORMED | 法術名保留原文，依說明書音節表加注解；48 筆法術記錄交叉驗證，三處正常按鍵畫格已驗 |
-| SPEC-033 | [中文畫面的資料名稱顯示](033-cjk-display-names.md) | READY | 491 個來源原名已有暫譯並接顯示端（含所在地、城鎮代碼、教派與 MAGIC.0 亞種）；待英中同狀態與正常玩家畫格驗收 |
-| SPEC-031 | [資料頁物品選中後的明細層](031-item-detail-page.md) | CONFORMED | 選中物品頁的圖層與投影已完成；frame-072 是 DOSBox-X 輔助收據，非 strict dosgolem parity |
+| SPEC-033 | [中文畫面的資料名稱顯示](033-cjk-display-names.md) | READY | 顯示譯名已接；[RE-261](../re/20261006-cjk-v2-name-population.md)核對怪物v2四套裝備、475筆戰利品候選及正式字寬，既有最長名稱正常畫格與字模相符；其他母體及完整正常路徑仍待驗 |
+| SPEC-031 | [資料頁物品選中後的明細層](031-item-detail-page.md) | READY | Theodoric兩條正常序列的完整清單、明細、搬移／丟棄與保存切片CONFORMED；等價shader的有限DirectX續核通過；其他物品與動作仍待驗 |
 | SPEC-032 | [戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) | CONFORMED | 四種清單畫格與正常按鍵路徑已驗，戰利品採明示觀察用資料；不宣稱原版中文或整場戰鬥 parity |
-| SPEC-030 | [中文模式的畫布倍率與角色資料頁](030-cjk-character-sheet.md) | CONFORMED | 六人與坐騎的正常按鍵畫格、物品與隊伍換頁及英中語意狀態已驗；中文模式不對拍，英文嚴格對拍那一版不動 |
+| SPEC-030 | [中文模式的畫布倍率與角色資料頁](030-cjk-character-sheet.md) | CONFORMED | 六人、坐騎及換頁已驗；[RE-233](../re/20261005-sheet-party-header.md)修正六人英文肖像層，[RE-285](../re/20261006-sheet-subpages.md)續驗正常重載子頁；名牌與其他分支仍由原項追蹤 |
 | SPEC-029 | [怪物遠程能力初始化](029-monster-ranged-initialization.md) | READY | 遠程機率與轉換骰已接入首次規劃；正式實作 768＋2304 組通過 |
 | SPEC-028 | [三個可關閉的加速選項](028-optional-battle-speed.md) | DRAFT | 已決需求與現有接口已核對；細節／原型待確認，不授權先加空開關 |
 | SPEC-027 | [戰鬥共同出口傷勢回寫](027-battle-exit-wounds.md) | READY | 傷勢折算及敗北回寫已接；4608 組原版比較、五條結算至 v2 重載通過，正常玩家鏈與額外掉落待驗 |
 | SPEC-026 | [天候圖層與正常動畫](026-weather-animation.md) | CONFORMED | 六組資料、128 像素捲雲與雨雪輪播；原版四組合成、六組分派、節拍與相位逐次對拍通過（RE-164） |
 | SPEC-024 | [建築告別與確認](024-building-goodbye.md) | READY | 單人直接退出、多人告別確認已實作；正常原版與繁中 GUI 已抽驗 |
-| SPEC-025 | [競技場固定地形](025-arena-field.md) | READY | 固定底圖及繁中對話已接；4096 格原版比較、地圖隔離與受控資格 GUI 進場通過，正常取得資格與結算鏈仍待驗 |
-| SPEC-023 | [完整角色、名冊與續玩保存](023-complete-save.md) | READY | 完整 v2、v1 匯入、建角、住宿交易及世界時間已接線；保存與 GUI 驗證見本輪收據 |
+| SPEC-025 | [競技場固定地形](025-arena-field.md) | READY | 4096格原版地形比較已過；[正常資格鏈](../verification/arena-natural-20261004/receipt.json)已驗付費訓練、下注、自然敗北、保存及重載；這條鏈沒有新增原版整場或勝利升階GUI證據 |
+| SPEC-023 | [完整角色、名冊與續玩保存](023-complete-save.md) | READY | 正式kol-save-v3，v2遷移、v1匯入、建角、住宿交易及世界時間已接；[RE-279](../re/20261006-move-current-regression.md)驗現行正常任務保存與新程序重載；戰鬥中途保存不在已核准格式內 |
 | SPEC-001 | [原版 Oracle 準備與位址契約](001-original-oracle-preparation.md) | READY | 僅授權研究 derivative，不授權玩法實作 |
 | SPEC-002 | [PNG 素材抽取契約](002-png-asset-extraction.md) | READY | 僅授權已關閉像素格式的抽取器，其他 archive 仍須逐批驗證 |
 | SPEC-002 | [EGA 抽取集合](002-ega-extraction-set.md) | READY | 僅授權本集合的 PNG 抽取與驗證 |
 | SPEC-003 | [繁中說明書翻譯與校對契約](003-manual-translation.md) | CONFORMED | 僅授權文件翻譯，不授權玩法／runtime |
-| SPEC-004 | [OGG 音訊目錄與執行期契約](004-ogg-audio-catalog.md) | DRAFT | 否；先完成 cue 母體與產品決策 |
-| SPEC-005 | [角色建立與角色儲存區](005-character-creation.md) | READY | 建角、刪除、穩定槽位與保存已接；重製版滿槽 GUI 已驗，原版滿槽對拍及圖像編輯仍未完成 |
+| SPEC-004 | [OGG 音訊目錄與執行期契約](004-ogg-audio-catalog.md) | CONFORMED | 是；限RE-228標題OGG、23次cue及正式播放 |
+| SPEC-005 | [角色建立與角色儲存區](005-character-creation.md) | READY | 建角、刪除、穩定槽位與保存已接；[RE-169](../re/character-creation.md#2026-10-01-名冊邊界正常-ui-訂正re-169)已證實原版滿槽時點、重名及字元集合；正式差異待決，圖像編輯另見SPEC-036 |
 | SPEC-006 | [住宿、治療與存檔格式](006-rest-and-save.md) | READY | 僅授權 REST 三條路、remake 存檔讀寫與離線匯入 |
 | SPEC-007 | [野外的時刻、日曆與天候](007-wilderness-time.md) | READY | 僅授權時刻、日曆、天候與紮營畫面；遭遇見 SPEC-011 |
-| SPEC-008 | [戰場的畫面、視線與回合順序](008-combat-field.md) | READY | 含戰場、回合、獎勵與 AI 主幹；敵人拾取已依 RE-116 接線，卡住重試仍有有界近似，完整 AI 正常路徑待驗 |
-| SPEC-009 | [戰鬥的攻擊結算](009-combat-attack.md) | 近戰與**擊退／打暈** READY | 僅授權近戰攻擊與擊退的規則層，不含 UI |
+| SPEC-008 | [戰場的畫面、視線與回合順序](008-combat-field.md) | READY | 含戰場、回合、獎勵與 AI 主幹；受阻打暈保留持物子切片有限 CONFORMED，見[正常保存驗收](../verification/blocked-stun-20261007.md)；完整 AI 正常路徑待驗 |
+| SPEC-009 | [戰鬥的攻擊結算](009-combat-attack.md) | 父規格READY；RE-180自然來源61個逐回合執行段窄切片CONFORMED | 近戰骰序／怪物負重修正與夾具倒地轉換已驗；完整GUI、戰後保存及其他情境仍由V01追蹤 |
 | SPEC-010 | [戰場上的指令與選目標](010-combat-commands.md) | READY；施法／射擊另依 012／013 | 指令列、游標、物品動作、下馬及任務物品已接線；未驗收分支見本文 |
-| SPEC-011 | [野外的隨機遭遇](011-wilderness-ambush.md) | READY | 含 RE-112／128 治療問答及敘述；正常治療與保存往返仍待驗 |
+| SPEC-011 | [野外的隨機遭遇](011-wilderness-ambush.md) | READY | 含 RE-112／128 治療問答及敘述、怪物v2第13節有限CONFORMED；正常治療及其他入口仍待驗 |
 | SPEC-012 | [施法](012-combat-spells.md) | READY | 含 RE-128～131 護符、效果 5／7／8 及疲勞鏈；選部位互動已做，正常 GUI 收據仍待補 |
 | SPEC-013 | [射擊](013-combat-missiles.md) | READY（飛行動畫除外） | 授權彈道、目標選擇、攻防與訊息、裝填那一手，以及敵人 AI 的射擊分支 |
 | SPEC-014 | [任務的完成與逃走](014-quest-completion.md) | READY（第 3–5、8 節與撿起 CONFORMED） | 撿物、帶物逃走、交付與保存鏈經 RE-162 原版關鍵點與 `quest-chain` 驗證；逃走／落敗掉落仍待證據 |
@@ -84,11 +83,37 @@ SPEC-030：[中文模式的畫布倍率與角色資料頁](030-cjk-character-she
 而原版最小行距 6，`6 × 3 = 18` 剛好；兩倍只給得起 12 放不下。三倍之後版面照抄就
 成立，資料頁直接用 `SheetLayout × CJKScale`，沒有第二份座標表。
 
-SPEC-031：[資料頁物品選中後的明細層](031-item-detail-page.md) CONFORMED。
+SPEC-031：[資料頁物品選中後的明細層](031-item-detail-page.md) READY，Theodoric兩條正常序列與既有明細／保存切片CONFORMED；其他物品及動作仍待驗。
 選中非空物品後，原版由 `sub_16986:0x16BBF` 先以 `sub_1103F(0)` 蓋整頁，再由
 `sub_1BA9D` 畫明細框；`sub_1BA9D:0x1BAF1` 必定呼叫 `sub_1B7E9`，因此明細框
-有右／下四像素投影。實作與收據已完成，frame-072 允許區外差異為 0；dosgolem
-目前沒有 KOL 適配器，因此該畫面只作 DOSBox-X `dosbox-bootstrap` 輔助收據。
+有右／下四像素投影。原frame-072維持DOSBox-X `dosbox-bootstrap`輔助分類；
+2026-10-01以固定dosgolem正常啟動重生六張英文明細／空格頁，除了實際滑鼠外均零差。
+空格位置、字串接續及確認返回已修；RE-172首批完整清單續畫有1／8像素差異，不稱父規格全通過。
+
+第9節另補正常搬移／丟棄確認與保存切片：23完整明細／等待及返回頁除滑鼠外零差，
+四繁中字模框及十二重載選中頁通過；[收據](../verification/item-detail-20261001/actions-receipt.json)。
+RE-174當時76清單畫格未通過、動作後有692像素殘留；後續第10／13節已閉合這些差異，父規格維持READY。
+
+第10節RE-175修正物品鏡像及立繪回退：29完整頁除滑鼠外零差、24份typed／raw保存
+符合原版同期動作記錄，[新收據](../verification/item-detail-20261001/mirror-receipt.json)。
+前批692像素殘留已消除；當時清單、手持文字及繁中立繪缺口由後續第11～13節閉合。
+
+第11節RE-176補繁中Figure貼圖：78張正常清單與固定原版同期記錄＋PNG的獨立三倍
+合成全零差，32其他繁中頁／110英文頁及24份完整持久資料不變，
+[新收據與重驗入口](../verification/item-detail-20261001/cjk-figure-receipt.json)已接入規格。
+前批繁中漏圖已閉合；當時英文清單及手持文字缺口由第12／13節閉合，其他造型／物品動作仍由#64追蹤。
+
+第12節RE-177修手持技能列號共用座標：三個英文小框全零差、三繁中圖與獨立字模重建
+一致，其他107圖各語言不變；24份持久資料不變，
+[新收據](../verification/item-detail-20261001/mark-receipt.json)。前批三框文字差異已閉合，
+當時70張英文清單只剩x15續畫差異，已由第13節閉合；其他技能列／造型及物品動作仍由#64追蹤。
+
+第13節RE-178先證實快取步長與還原生命週期，RE-179再完成暫態呈現：104動作及
+61張十七欄／繞回英文整頁除既定滑鼠外全零差，110繁中圖、24份持久資料及十二重載
+明細頁不變，雙語狀態一致。[正式收據](../verification/item-detail-20261001/edge-receipt.json)
+及[重驗入口](../verification/item-detail-20261001/verify_edge.py)另存，窄切片CONFORMED。
+父規格維持READY；Theodoric這兩條序列的x15差異已閉合，其他人物／全部動作、法術／
+戰利品及整場戰鬥仍依#64與既有閘門驗收。
 
 SPEC-032：[戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) CONFORMED。
 本規格只處理 Issue #90 指出的兩個 CJK 清單頁；原版沒有中文 oracle，中文畫面不作

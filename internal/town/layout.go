@@ -270,16 +270,25 @@ var ItemPageLayout = struct {
 	RightPane Rect
 	// Detail 是選中那一格的明細框（`sub_1BA9D(0x3E, 0x3A, 0x101, 0x7D, 0x0F)`）。
 	Detail Rect
+	// DropMessage 是sub_18D2A的丟棄確認／完成疊框；文字欄8、列141。
+	DropMessage              Rect
+	DropTextCol, DropTextRow int
+	// ControlBack是原版重畫圖示列底板的矩形（RE-178正常sub_19E9D）。
+	// byte欄1..38、列164..196均以右／下端不包含換成含端點矩形。
+	ControlBack Rect
 	// 清單畫在字格欄 32（＝ x 256）、第 4 列，列高 9（`sub_196A9` 的參數）。
 	// 那一欄正好落在分隔線右邊的窄欄裡，寬度剛好六個字元——`SHIELD`、`WEAPON`、
 	// `POCKET` 都是六個字。
 	ListCol, ListRow, ListStep int
 }{
-	Frame:     Rect{15, 2, 305, 156},
-	Divider:   Rect{254, 3, 254, 156},
-	RightPane: Rect{255, 3, 305, 155},
-	Detail:    Rect{62, 58, 257, 125},
-	ListCol:   32, ListRow: 4, ListStep: 9,
+	Frame:       Rect{15, 2, 305, 156},
+	Divider:     Rect{254, 3, 254, 156},
+	RightPane:   Rect{255, 3, 305, 155},
+	Detail:      Rect{62, 58, 257, 125},
+	DropMessage: Rect{56, 138, 266, 152},
+	DropTextCol: 8, DropTextRow: 141,
+	ControlBack: Rect{8, 164, 303, 195},
+	ListCol:     32, ListRow: 4, ListStep: 9,
 }
 
 // PartyPageFrame 是隊伍立繪那一頁的外框（`sub_18D61` 收尾的

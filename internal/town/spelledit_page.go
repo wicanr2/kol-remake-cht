@@ -49,6 +49,16 @@ const (
 	SpellNameCols = spellNameCols
 )
 
+// 英文名稱輸入框來自sub_178E0:0x17C59…0x17CAB（RE-212），座標為像素。
+const (
+	SpellNameInputX       = 0x5F
+	SpellNameInputY       = 0x58
+	SpellNameInputWidth   = 0x73
+	SpellNameInputHeight  = 0x0D
+	SpellNameInputTextCol = 0x0C
+	SpellNameInputTextRow = 0x5B
+)
+
 // 欄位的兩種顏色：游標停著的那一欄是 3，其餘 0x0F（`0x18377`…`0x18395`）。
 const (
 	SpellFieldColor  = 0x0F

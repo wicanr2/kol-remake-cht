@@ -1,0 +1,139 @@
+{
+  "schema": "kol-monster-ranged-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x27487": {
+      "semantic": "傷害計算先把力量加成局部變數設零。",
+      "confidence": "已證實",
+      "evidence": "RE-218 docs/re/20261004-missile-damage.md；IDA 0x27487..0x27493、301條原始bytes核對及正常首發Hurt12。"
+    },
+    "0x2748c": {
+      "semantic": "目前指令0x23的射擊跳過力量及疲勞傷害加成。",
+      "confidence": "已證實",
+      "evidence": "RE-218 docs/re/20261004-missile-damage.md；cmp word_31122,23h後的條件分支，正常三發傷害4/4/5。",
+      "resolution": {
+        "platform_module": "DOS KOLTOWN-unpacked.EXE",
+        "evidence_spec": "docs/re/20261004-missile-damage.md",
+        "older_specs": [
+          "docs/spec/009-combat-attack.md",
+          "docs/spec/013-combat-missiles.md"
+        ],
+        "required_correction": "RE-218：射擊力量加成為零"
+      }
+    },
+    "0x27493": {
+      "semantic": "射擊直接跳0x274D6取武器骰，保留力量加成零。",
+      "confidence": "已證實",
+      "evidence": "RE-218 docs/re/20261004-missile-damage.md；0x27487初始化、0x2748C分支及0x27493目標，正常兩侧七次首發骰一致。"
+    },
+    "0x26b23": {
+      "semantic": "怪物傷害武器預設本體+0x20。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x26B23..0x26B43，正常兩名怪物武器讀取。"
+    },
+    "0x26b43": {
+      "semantic": "怪物指令0x23將傷害武器偏移改成+0x70。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x26B35..0x26B43與正常Boulder完整記錄。"
+    },
+    "0x26c30": {
+      "semantic": "從選定物品槽+0x0C取得傷害碼。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x26C2D..0x26C40與兩名正常怪物傷害碼0x51。"
+    },
+    "0x26c46": {
+      "semantic": "從選定物品槽+0x08取得基礎傷害byte。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x26C43..0x26C56與兩名正常怪物基礎byte0。"
+    },
+    "0x25025": {
+      "semantic": "怪物負重取槽條件讀參戰首byte，與當前指令分開。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x2501C..0x2503C與正常資格14/8/0。"
+    },
+    "0x25034": {
+      "semantic": "怪物首byte非零時，負重武器取本體+0x70。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x25025..0x25039與正常速度63、負重172/169。"
+    },
+    "0x2503c": {
+      "semantic": "怪物首byte為零時，負重武器取本體+0x20。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x25025..0x2503C與正常槽8速度84、負重185。"
+    },
+    "0x207a5": {
+      "semantic": "裝填種類讀DS:BB88+0x300×參戰槽+0x3D；怪物槽的別名資料來源尚未閉合。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x20799..0x207AC，公式已證實；完整來源未知。 docs/re/20261004-monster-ranged-consume.md RE-217；IDA9.4／173指令bytes核對，正常兩名怪物與15,360有界指令組。 正常槽6讀怪物0+33值33，槽7讀未使用怪物6+33值0；全槽／跨場仍未知。"
+    },
+    "0x20838": {
+      "semantic": "射後裝填種類再次使用角色區域索引公式；不能推成怪物手持或遠程種類。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x2082C..0x2083F；別名來源仍未知。 docs/re/20261004-monster-ranged-consume.md RE-217；IDA9.4／173指令bytes核對，正常兩名怪物與15,360有界指令組。 正常已讀位址CDC5／D0C5；未推廣成物品種類。"
+    },
+    "0x20880": {
+      "semantic": "非6/10/11的種類將射後指令寫為0x22，種類的怪物來源尚未閉合。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x20842..0x20880與正常重量觀察中指令0x22。"
+    },
+    "0x208ce": {
+      "semantic": "射後首byte寫回減一結果；原值0改成0xFF並清指令，沒有陣營分支。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-use.md RE-216；0x20884..0x208CE與正常怪物14/8到13/7。 docs/re/20261004-monster-ranged-consume.md RE-217；IDA9.4／173指令bytes核對，正常兩名怪物與15,360有界指令組。"
+    },
+    "0x1ec29": {
+      "semantic": "將固定所選怪物裝備複製至本體；本次怪物0+0x33由0寫33，對應槽6裝填別名DS:CDC5。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-consume.md RE-217；IDA9.4／173指令bytes核對，正常兩名怪物與15,360有界指令組。",
+      "lifetime_evidence": {
+        "confidence": "已證實",
+        "evidence": "docs/re/20261006-monster-second-reload.md RE-269；IDA Pro 9.4載入bytes與dosgolem固定版本啟動、32複製／跨場及18耐久邊界核實。",
+        "semantic": "複製actor6..最後參戰者至CD92+(actor-6)*128；actor12頭部+3為actor7的D0C5來源，未複製列保留。"
+      }
+    },
+    "0x20884": {
+      "semantic": "射後減值共同入口；前段裝填種類不影響此段，沒有陣營閘門。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-consume.md RE-217；IDA9.4／173指令bytes核對，正常兩名怪物與15,360有界指令組。"
+    },
+    "0x20894": {
+      "semantic": "讀取當前參戰首byte後，以16-bit加FFFF減一。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-consume.md RE-217；IDA9.4／173指令bytes核對，正常兩名怪物與15,360有界指令組。"
+    },
+    "0x208b8": {
+      "semantic": "原值0的耗盡分支清除+0x25指令，再將首byte寫FF。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261004-monster-ranged-consume.md RE-217；IDA9.4／173指令bytes核對，正常兩名怪物與15,360有界指令組。"
+    },
+    "0x2b980": {
+      "semantic": "rep stosb：ES=DGROUP，清零偏移[0x1A42,0xD5B0)，含怪物裝備池與DS:D0C5；不改原名或操作數。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-monster-second-reload.md RE-269；IDA Pro 9.4載入bytes與dosgolem固定版本啟動、32複製／跨場及18耐久邊界核實。",
+      "resolution": {
+        "platform_module": "DOS KOLTOWN-unpacked.EXE",
+        "evidence_spec": "docs/re/20261006-monster-second-reload.md",
+        "older_specs": [
+          "docs/spec/022-battle-ammunition.md"
+        ],
+        "required_correction": "啟動清零"
+      }
+    },
+    "0x220e9": {
+      "semantic": "sub_22084耐久扣成負時逐byte清除所選完整16-byte物品；頭部來源+3亦清零。",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261006-monster-second-reload.md RE-269；IDA Pro 9.4載入bytes與dosgolem固定版本啟動、32複製／跨場及18耐久邊界核實。",
+      "resolution": {
+        "platform_module": "DOS KOLTOWN-unpacked.EXE",
+        "evidence_spec": "docs/re/20261006-monster-second-reload.md",
+        "older_specs": [
+          "docs/spec/022-battle-ammunition.md"
+        ],
+        "required_correction": "0x220E9"
+      }
+    }
+  }
+}

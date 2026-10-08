@@ -1,0 +1,444 @@
+#!/usr/bin/env python3
+"""中文模式的文字安全矩形檢查。
+
+繁體中文字比原版英文字模寬，版面能不能容納不是看起來像就算數。這支工具用實際的
+字模表字寬，算出每一個會畫到畫面上的字串的實際寬度，逐條檢查：
+
+- 每個字元在字模表裡都有字模（缺字會被畫成空白，那是漏字不是排版問題）。
+- 字串畫在指定起點時，右緣不超出所屬的文字安全矩形。
+
+版面座標由 `cmd/kol -dump-cjk-layout` 匯出，因此不會和程式裡的版面表脫節。
+
+  python3 tools/verify_text_fit.py --layout workplace/cjk-layout.json \\
+      --font assets/ui-font/manifest.json --strings docs/i18n/newchar-zh-Hant.json \\
+      --data assets/original-derived-data/character-creation.json \\
+      --out docs/verification/cjk-text-fit.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import re
+import pathlib
+import sys
+
+
+MARKUP = re.compile(r"~[VHCvhc][0-9A-Fa-f]{2}")
+
+
+def bank_labels(path: pathlib.Path, bank: str) -> dict[str, str]:
+    """把一份 UI 文字庫的譯文攤成「英文段 → 中文段」，規則與 runtime 相同。
+
+    剝掉 `~Vxx`／`~Hxx`／`~Cxx` 定位碼、按 `@` 切段、去掉尾端的冒號與補齊寬度的
+    空白。中英段數不同的記錄整筆跳過——對不上就不猜哪一段配哪一段
+    （`internal/i18n` 的 `LoadBank` 是同一套判斷）。
+    """
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    out: dict[str, str] = {}
+    for rec in doc["banks"][bank].values():
+        en = MARKUP.sub("", rec.get("en") or "").split("@")
+        zh = MARKUP.sub("", rec.get("zh") or "").split("@")
+        if not rec.get("zh") or len(en) != len(zh):
+            continue
+        for a, b in zip(en, zh):
+            key = a.strip().rstrip(": ").strip()
+            value = b.strip().rstrip("：:").strip()
+            if key and value:
+                out[key] = value
+    return out
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--layout", required=True)
+    p.add_argument("--font", required=True)
+    p.add_argument("--strings", required=True)
+    p.add_argument("--bank-strings",
+                   help="UI 文字庫的譯文（`docs/i18n/ui-zh-Hant.json`）；"
+                        "書本標籤走這一份，與 runtime 的合併規則相同")
+    p.add_argument("--bank", default="BOOKDATA", help="要疊上來的文字庫名稱")
+    p.add_argument("--ui-i18n",
+                   help="UI 文字庫的譯文；KOLDATA 那一份畫在城鎮對話框與野外標籤框裡，"
+                        "一併做安全矩形檢查")
+    p.add_argument("--data", required=True)
+    p.add_argument("--town-sample", action="append", default=[],
+                   help="城鎮畫面樣本 JSON，檢查中文台詞是否放得進對話框（可重複）")
+    p.add_argument("--town-i18n", action="append", default=[],
+                   help="城鎮建築譯文表（可重複）；檢查標題框與對話框的行寬與行數")
+    p.add_argument("--display-names", help="怪物、裝備與商品的顯示譯名 TSV")
+    p.add_argument("--out", required=True)
+    p.add_argument("--overflow-policy", default="docs/i18n/overflow-policy.json",
+                   help="每種欄位的溢出原則；未登記的欄位種類算失敗")
+    args = p.parse_args()
+
+    layout_doc = json.loads(pathlib.Path(args.layout).read_text())
+    layout, box = layout_doc["layout"], layout_doc["text_box"]
+    font = json.loads(pathlib.Path(args.font).read_text())["fonts"][0]
+    advance = {chr(g["codepoint"]): g["advance"] for g in font["glyphs"]}
+    default = font["advance"]
+    table = json.loads(pathlib.Path(args.strings).read_text())
+    data = json.loads(pathlib.Path(args.data).read_text())
+
+    zh = {}
+    for key in ("labels", "races", "secondary", "professions", "ui"):
+        for item in table.get(key, []):
+            zh[item["en"]] = item["zh"]
+    if args.bank_strings:
+        zh.update(bank_labels(pathlib.Path(args.bank_strings), args.bank))
+
+    def width(text: str) -> tuple[int, list[str]]:
+        total, missing = 0, []
+        for ch in text:
+            # 空白不畫墨，字距仍依 Font.advance：未登記時使用固定字距。
+            # 現行字模表沒有半形空白，正式 Measure 因此前進 16 像素。
+            if ch == " ":
+                total += advance.get(ch, default)
+            elif ch == "\u3000":
+                total += advance.get(ch, default)
+            elif ch in advance:
+                total += advance[ch]
+            else:
+                missing.append(ch)
+                total += default
+        return total, missing
+
+    checks = []
+
+    if args.display_names:
+        # 這些寬度分別對應現行 CJK 交易清單、戰利品框、角色資料頁武器欄、
+        # 戰鬥裝備欄和物品頁選中小框。逐名量寬，不以字數推測比例字寬。
+        name_limits = {"shop-list": 585 - 32, "battle-spoils": (4 + 125 - 4 - 8) * 3,
+                       "sheet-weapon": (30 - 16) * 8 * 3,
+                       "battle-equipment": (17 + 119 - 48) * 3,
+                       "item-mark": 99 * 3 - 12}
+        with pathlib.Path(args.display_names).open(encoding="utf-8", newline="") as handle:
+            rows = csv.DictReader(handle, delimiter="\t")
+            if rows.fieldnames != ["key", "en", "zh-Hant", "status", "source"]:
+                raise SystemExit("資料名稱譯表欄位不符")
+            rows = list(rows)
+            towns = [r["zh-Hant"] for r in rows if r["key"].startswith("town-code.")]
+            longest_town = max(towns, key=lambda z: width(z)[0]) if towns else ""
+            for row in rows:
+                value = row["zh-Hant"]
+                if row["key"].startswith("town-code."):
+                    continue
+                if row["key"].startswith("place."):
+                    # 名冊右欄：所在地接空白與最長城名，從 RosterLocationsX 畫到右頁邊。
+                    combined = f"{value} {longest_town}"
+                    w, missing = width(combined)
+                    limit = 408
+                    checks.append({"kind": "display-name-roster-location", "en": row["en"],
+                                   "zh": combined, "x": 0, "width": w, "right_limit": limit,
+                                   "overflow": max(0, w - limit), "missing_glyphs": missing,
+                                   "pass": w <= limit and not missing})
+                    continue
+                w, missing = width(value)
+                for kind, limit in name_limits.items():
+                    checks.append({"kind": "display-name-" + kind, "en": row["en"],
+                                   "zh": value, "x": 0, "width": w, "right_limit": limit,
+                                   "overflow": max(0, w - limit),
+                                   "missing_glyphs": missing,
+                                   "pass": w <= limit and not missing})
+
+    def check(kind: str, en: str, x: int, right: int) -> None:
+        text = zh.get(en, en)
+        w, missing = width(text)
+        checks.append({"kind": kind, "en": en, "zh": text, "x": x, "width": w,
+                       "right_limit": right, "overflow": max(0, x + w - right),
+                       "missing_glyphs": missing,
+                       "pass": x + w <= right and not missing})
+
+    left_right = box["LeftX"] + box["LeftW"]
+    right_right = box["RightX"] + box["RightW"]
+
+    check("heading", "New character", layout["HeadingX"], left_right)
+    check("heading", "Select one", layout["RightX"], right_right)
+    for item in table["labels"]:
+        check("label", item["en"], layout["FieldX"], layout["ColonX"])
+    for en in ("Character options", "LIST CHARACTERS", "CREATE CHARACTER",
+               "DELETE CHARACTER", "EDIT PICTURE", "EDIT SHIELD", "HARBOR MASTER"):
+        check("menu", en, layout["MenuX"], left_right)
+    check("heading", "Character names", layout["HeadingX"], left_right)
+    check("heading", "Location", layout["RightX"], right_right)
+    for item in table["races"] + table["secondary"]:
+        check("value", item["en"], layout["ValueX"], left_right)
+    seen = set()
+    for group in data["profession_groups"]:
+        for prof in group["professions"]:
+            if prof["name"] in seen:
+                continue
+            seen.add(prof["name"])
+            check("value", prof["name"], layout["ValueX"], left_right)
+            check("list", prof["name"], layout["RightX"], right_right)
+    for en in ("REROLL STATS", "ACCEPT STATS",
+               "USE ARROW KEYS TO BROWSE", "CHARACTER PICTURES",
+               "PRESS RETURN TO ACCEPT"):
+        check("list", en, layout["RightX"], right_right)
+    check("actions", "CANCEL", layout["ActionsX"], right_right)
+
+    for en in ("ONLY ONE REGION IS INSTALLED.", "PRESS ANY KEY."):
+        check("message", en, layout["FieldX"], left_right)
+
+    # 城鎮對話框的中文台詞：安全矩形是對話框內緣，行數不得超過框高。
+    town = layout_doc.get("town_inn")
+    for path in args.town_sample:
+        sample = json.loads(pathlib.Path(path).read_text())
+        lines = sample.get("dialog_zh", [])
+        if town and lines:
+            right = town["DialogX"] + town["DialogW"] - 1
+            for line in lines:
+                w, missing = width(line)
+                checks.append({"kind": "town-dialog", "en": path, "zh": line,
+                               "x": town["DialogTextX"], "width": w,
+                               "right_limit": right,
+                               "overflow": max(0, town["DialogTextX"] + w - right),
+                               "missing_glyphs": missing,
+                               "pass": town["DialogTextX"] + w <= right and not missing})
+            bottom = (town["DialogTextY"] + (len(lines) - 1) * town["DialogStep"]
+                      + font["cell"]["height"])
+            limit_y = town["DialogY"] + town["DialogH"] - 1
+            checks.append({"kind": "vertical", "en": f"{path} 台詞行數", "zh": "", "x": 0,
+                           "width": bottom, "right_limit": limit_y,
+                           "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
+                           "pass": bottom <= limit_y})
+
+    # 城鎮建築的譯文：標題框兩行置中、對話框最多六行，安全矩形都是框的內緣。
+    inn = layout_doc.get("town_inn")
+    for path in args.town_i18n:
+        doc = json.loads(pathlib.Path(path).read_text())
+        if not inn:
+            break
+        title_right = inn["TitleX"] + inn["TitleW"] - 1
+        dialog_right = inn["DialogX"] + inn["DialogW"] - 1
+        for town, tdoc in sorted(doc.get("towns", {}).items()):
+            for door, entry in sorted(tdoc.get("doors", {}).items(),
+                                      key=lambda kv: int(kv[0])):
+                label = f"{path} 城{town} 門{door}"
+                for field, limit in (("name", title_right), ("person", title_right)):
+                    w, missing = width(entry.get(field, ""))
+                    x = inn["TitleX"] + (inn["TitleW"] - w) // 2
+                    checks.append({"kind": "town-title", "en": f"{label} {field}",
+                                   "zh": entry.get(field, ""), "x": x, "width": w,
+                                   "right_limit": limit,
+                                   "overflow": max(0, x + w - limit),
+                                   "missing_glyphs": missing,
+                                   "pass": x + w <= limit and not missing})
+                lines = entry.get("entry", [])
+                # 建築內對話的譯文與進門敘述共用同一個對話框，規則相同。
+                groups = [("town-entry", label, lines)]
+                for index, msg in sorted(entry.get("messages", {}).items(),
+                                         key=lambda kv: int(kv[0])):
+                    groups.append(("town-message", f"{label} 訊息{index}", msg))
+                for kind, tag, group in groups:
+                    for line in group:
+                        w, missing = width(line)
+                        checks.append({"kind": kind, "en": tag, "zh": line,
+                                       "x": inn["DialogTextX"], "width": w,
+                                       "right_limit": dialog_right,
+                                       "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
+                                       "missing_glyphs": missing,
+                                       "pass": inn["DialogTextX"] + w <= dialog_right
+                                               and not missing})
+                    if not group:
+                        continue
+                    bottom = (inn["DialogTextY"] + (len(group) - 1) * inn["DialogStep"]
+                              + font["cell"]["height"])
+                    limit_y = inn["DialogY"] + inn["DialogH"] - 1
+                    checks.append({"kind": "vertical", "en": f"{tag} 行數",
+                                   "zh": "", "x": 0, "width": bottom,
+                                   "right_limit": limit_y,
+                                   "overflow": max(0, bottom - limit_y),
+                                   "missing_glyphs": [], "pass": bottom <= limit_y})
+
+    # KOLDATA 的譯文也畫在同一個對話框（招呼語、住宿與治療的問答）。
+    # 野外標籤那一段（0xD5–0xE1）另有自己的框，這裡跳過。
+    for path in args.town_i18n:
+        doc = json.loads(pathlib.Path(path).read_text())
+        if not inn:
+            break
+        dialog_right = inn["DialogX"] + inn["DialogW"] - 1
+        ui = doc.get("ui") or {}
+        texts = [(f"記錄 {int(k):#x}", v) for k, v in sorted(ui.items(), key=lambda kv: int(kv[0]))
+                 if not 0xD5 <= int(k) <= 0xE1]
+        # 價錢句是「前綴 ＋ 數字 ＋ 後綴」組出來的，要檢查組完的那一行。
+        # 最貴的情形是修道院的 20 點傷勢 × 12，四位數留給日後的價格上調。
+        prefix, suffix = ui.get("83"), ui.get("84")
+        if prefix and suffix:
+            texts.append(("價錢句（四位數）", f"{prefix} 9999 {suffix}"))
+        for tag, text in texts:
+            w, missing = width(text)
+            checks.append({"kind": "dialog-ui", "en": f"{path} {tag}", "zh": text,
+                           "x": inn["DialogTextX"], "width": w,
+                           "right_limit": dialog_right,
+                           "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
+                           "missing_glyphs": missing,
+                           "pass": inn["DialogTextX"] + w <= dialog_right
+                                   and not missing})
+
+    # KOLDATA 的譯文（`docs/i18n/ui-zh-Hant.json`）畫在城鎮對話框裡：招呼語、
+    # 住宿與治療的問答、商店那幾句。原文用 `@` 換行，這裡按 `@` 拆行逐行量寬度。
+    #
+    # **只驗寬度，不驗行數**：一筆記錄不一定是「一次畫出來的一段」——部位名那一筆
+    # （0x8D）是十六個詞的名稱表，程式一次只取一行。哪一筆會一次畫幾行，要等每一筆
+    # 都接上畫面才知道。
+    #
+    # 三種記錄排除在外：**索引 ≥ 0x100** 是戰鬥那一段（畫在戰鬥的訊息框，
+    # 中文版面還沒定）、**含 `~Vxx` 的**自己跳到畫面別處（例如資料頁的標籤表 0x73）、
+    # 以及野外標籤那一段（0xD5–0xE1，另有自己的框，下面單獨檢查）。
+    ui_records = {}
+    if args.ui_i18n:
+        doc = json.loads(pathlib.Path(args.ui_i18n).read_text())
+        ui_records = {int(k): (v.get("zh") or "")
+                      for k, v in doc["banks"]["KOLDATA"].items()}
+    if inn and ui_records:
+        dialog_right = inn["DialogX"] + inn["DialogW"] - 1
+        for index in sorted(ui_records):
+            text = ui_records[index]
+            if index >= 0x100 or 0xD5 <= index <= 0xE1 or not text:
+                continue
+            if re.search(r"~[Vv][0-9A-Fa-f]{2}", text):
+                continue
+            lines = [ln for ln in MARKUP.sub("", text).split("@") if ln.strip()]
+            for line in lines:
+                w, missing = width(line)
+                checks.append({"kind": "dialog-ui",
+                               "en": f"{args.ui_i18n} 記錄 {index:#x}", "zh": line,
+                               "x": inn["DialogTextX"], "width": w,
+                               "right_limit": dialog_right,
+                               "overflow": max(0, inn["DialogTextX"] + w - dialog_right),
+                               "missing_glyphs": missing,
+                               "pass": inn["DialogTextX"] + w <= dialog_right
+                                       and not missing})
+
+    # 戶外畫面的日期框：兩行中文字，安全矩形是框的內緣。
+    outdoor = layout_doc.get("town_outdoor")
+    for path in args.town_sample:
+        sample = json.loads(pathlib.Path(path).read_text())
+        lines = sample.get("date_zh", [])
+        if not (outdoor and lines):
+            continue
+        right = outdoor["DateX"] + outdoor["DateW"] - 1
+        for line in lines:
+            w, missing = width(line)
+            checks.append({"kind": "town-date", "en": path, "zh": line,
+                           "x": outdoor["DateTextX"], "width": w,
+                           "right_limit": right,
+                           "overflow": max(0, outdoor["DateTextX"] + w - right),
+                           "missing_glyphs": missing,
+                           "pass": outdoor["DateTextX"] + w <= right and not missing})
+        bottom = (outdoor["DateTextY"] + (len(lines) - 1) * outdoor["DateStep"]
+                  + font["cell"]["height"])
+        limit_y = outdoor["DateY"] + outdoor["DateH"] - 1
+        checks.append({"kind": "vertical", "en": f"{path} 日期行數", "zh": "", "x": 0,
+                       "width": bottom, "right_limit": limit_y,
+                       "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
+                       "pass": bottom <= limit_y})
+
+    # 野外畫面的時段／地形標籤：中文模式在框內置中，安全矩形是框的內緣。
+    world = layout_doc.get("world")
+    for path in args.town_i18n:
+        doc = json.loads(pathlib.Path(path).read_text())
+        if not world:
+            break
+        ui = doc.get("ui") or {}
+        for index in range(0xD5, 0xE2):
+            text = ui.get(str(index))
+            if not text:
+                continue
+            w, missing = width(text)
+            x = world["LabelX"] + (world["LabelW"] - w) // 2
+            limit = world["LabelX"] + world["LabelW"] - 1
+            checks.append({"kind": "world-label", "en": f"{path} 記錄 {index:#x}",
+                           "zh": text, "x": x, "width": w, "right_limit": limit,
+                           "overflow": max(0, x + w - limit),
+                           "missing_glyphs": missing,
+                           "pass": x >= world["LabelX"] + 1 and x + w <= limit
+                                   and not missing})
+        bottom = world["LabelTextY"] + world["LabelStep"] + font["cell"]["height"]
+        limit_y = world["LabelY"] + world["LabelH"] - 1
+        checks.append({"kind": "vertical", "en": f"{path} 野外標籤兩行", "zh": "",
+                       "x": 0, "width": bottom, "right_limit": limit_y,
+                       "overflow": max(0, bottom - limit_y), "missing_glyphs": [],
+                       "pass": bottom <= limit_y})
+
+    # 刪除確認視窗是覆蓋在書頁上的獨立視窗，安全矩形就是視窗自己的內緣。
+    confirm = layout_doc.get("confirm")
+    if confirm:
+        limit = confirm["X"] + confirm["Width"] - 1
+        check("confirm", "ARE YOU SURE?", confirm["Line1X"], limit)
+        check("confirm", "YES/NO", confirm["Line2X"], limit)
+
+    # 名字欄容量：16 個 ASCII 字元的最寬情形。
+    widest = max(advance[chr(c)] for c in range(0x21, 0x7F) if chr(c) in advance)
+    name_width = widest * 16
+    checks.append({"kind": "name", "en": "name field capacity 16",
+                   "zh": "", "x": layout["FieldX"], "width": name_width,
+                   "right_limit": left_right,
+                   "overflow": max(0, layout["FieldX"] + name_width - left_right),
+                   "missing_glyphs": [],
+                   "pass": layout["FieldX"] + name_width <= left_right})
+
+    # 最後一列的底緣要留在文字安全矩形內。
+    limit = box["LeftY"] + box["LeftH"]
+    right_limit_y = box["RightY"] + box["RightH"]
+    for name, bottom, lim in (
+            ("attribute rows",
+             layout["AttrY"] + 9 * layout["AttrStep"] + font["cell"]["height"], limit),
+            ("right page list (12 items)",
+             layout["RightListY"] + 11 * layout["RightStep"] + font["cell"]["height"],
+             right_limit_y),
+            ("character options menu",
+             layout["MenuY"] + 5 * layout["MenuStep"] + font["cell"]["height"], limit),
+            ("roster (16 slots)",
+             layout["RosterY"] + 15 * layout["RosterStep"] + font["cell"]["height"],
+             limit),
+            ("delete confirm window",
+             (layout_doc.get("confirm") or {"Line2Y": 0})["Line2Y"]
+             + font["cell"]["height"],
+             (layout_doc.get("confirm") or {"Y": 0, "Height": 0})["Y"]
+             + (layout_doc.get("confirm") or {"Height": 0})["Height"] - 1)):
+        checks.append({"kind": "vertical", "en": name, "zh": "", "x": 0,
+                       "width": bottom, "right_limit": lim,
+                       "overflow": max(0, bottom - lim), "missing_glyphs": [],
+                       "pass": bottom <= lim})
+    bottom = 0
+
+
+    # 每種欄位都要先登記溢出原則（docs/i18n/overflow-policy.json）；新增欄位漏登記就失敗。
+    policy = json.loads(pathlib.Path(args.overflow_policy).read_text())["kinds"]
+    unregistered = sorted({c["kind"] for c in checks if c["kind"] not in policy})
+    for c in checks:
+        if c["kind"] in policy:
+            c["overflow_policy"] = policy[c["kind"]]["policy"]
+    failed = [c for c in checks if not c["pass"]]
+    for kind in unregistered:
+        failed.append({"kind": kind, "pass": False, "reason": "欄位種類沒有登記溢出原則"})
+    receipt = {"schema": "kol-cjk-text-fit-v1",
+               "tool": "tools/verify_text_fit.py",
+               "layout": args.layout, "font": args.font, "strings": args.strings,
+               "checked": len(checks), "failed": len(failed),
+               "criterion": "每個字元都要有字模，且字串右緣不得超出所屬的文字安全矩形",
+               "overflow_policy": args.overflow_policy,
+               "unregistered_kinds": unregistered,
+               "failures": failed, "checks": checks}
+    input_paths = [args.layout, args.font, args.strings, args.data,
+                   args.overflow_policy, args.bank_strings, args.ui_i18n,
+                   args.display_names, *args.town_sample, *args.town_i18n]
+    receipt["inputs_sha256"] = {
+        path: hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+        for path in dict.fromkeys(p for p in input_paths if p)
+    }
+    receipt["width_contract"] = "字距與 internal/font.Font.advance 一致；空白不畫墨但仍按 manifest 前進"
+    out = pathlib.Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n")
+    print(json.dumps({"checked": len(checks), "failed": len(failed)},
+                     ensure_ascii=False))
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

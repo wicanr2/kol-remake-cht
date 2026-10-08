@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 把 `dist-all/<版本>/{full,release}` 封成三個平台各自獨立的發行檔。
 #
-#   tools/package_dist.sh 0.2.1
+#   tools/package_dist.sh v.1.0.0-20260901
 #
 # 產物放在 `dist-all/<版本>/packages/`：
 #
@@ -18,12 +18,23 @@
 # `workplace/tools/` 提供（本機、不進版控），版本與雜湊記在 WORKLOG。
 set -euo pipefail
 
+check_version() {
+  if ! [[ "$1" =~ ^v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}$ ]]; then
+    echo "版號必須使用 v.<主版>.<次版>.<修訂版>-YYYYMMDD" >&2
+    return 2
+  fi
+}
+
 if [ "${1:-}" = "--in-container" ]; then
   VERSION="${2:?缺版本}"
+  check_version "$VERSION"
   DIST="/src/dist-all/$VERSION"
   OUT="$DIST/packages"
-  rm -rf "$OUT"
-  mkdir -p "$OUT"
+  if [ -e "$OUT" ] || [ -L "$OUT" ]; then
+    echo "封包目錄已存在，拒絕覆寫：$OUT" >&2
+    exit 2
+  fi
+  mkdir "$OUT"
 
   # 圖示是 remake 自己畫的純幾何盾牌與劍——**不含任何原版衍生像素**，所以
   # release 那一份也帶得走。沒有 CJK 字型可用，因此不放文字。
@@ -155,6 +166,7 @@ TXT
 fi
 
 VERSION="${1:?用法：package_dist.sh <版本>}"
+check_version "$VERSION"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # 儲存庫可見度閘門：不是 private 或查不到就停（失敗即關閉，`docs/RELEASE-RIGHTS-REVIEW.md`）。
 "$REPO_ROOT/tools/check_repo_visibility.sh" || exit $?

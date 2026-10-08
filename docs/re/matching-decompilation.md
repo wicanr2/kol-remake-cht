@@ -1,0 +1,198 @@
+# 原版同位元組反編譯的可行性
+
+日期：2026-10-08。狀態：四個純C函式共300 bytes原位匹配通過；完整原始EXE仍待重建。
+使用者要求暫停目前對拍，改以 matching decompilation 重建原版C程式，
+希望降低重製過程中反覆行為比對的成本。本入口保存查證與首個試點範圍；
+現有Go程式、規格、原版收據與未完成條件保留。
+
+## 目前已知
+
+| 項目 | 證據與等級 |
+|---|---|
+| KOLTOWN工具鏈 | Microsoft C runtime family已證實；精確compiler／linker未知，見[工具鏈證據](toolchain.md) |
+| 原版封裝 | Microsoft EXEPACK已證實；精確packer版本未知 |
+| 其他主程式 | KOL、KOLBOOK、MAKEMODE、TITLE的Quick C1.0／2.01、MSC5.1為FLIRT候選，強推論，不作精確版本 |
+| 本機工具 | MSVC1.0／1.52仍為未驗候選；本輪新增釘commit及hash的MSC5.10負例與QuickC2.01匹配候選 |
+| 對拍狀態 | 已按使用者指令暫停；現有專案容器清單為空 |
+
+唯讀容器重查原版ZIP，六支EXE如下。原始輸入未修改，沒有執行原版或新對拍。
+
+| ZIP entry | 大小 | SHA-256 |
+|---|---|---|
+| `Knights-of-legend/KOL.EXE` | 11971 | `4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71` |
+| `Knights-of-legend/KOLBOOK.EXE` | 40192 | `2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832` |
+| `Knights-of-legend/KOLTOWN.EXE` | 133760 | `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221` |
+| `Knights-of-legend/MAKEMODE.EXE` | 15744 | `3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56` |
+| `Knights-of-legend/TANDYPIN.EXE` | 624 | `036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3` |
+| `Knights-of-legend/TITLE.EXE` | 18671 | `8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6` |
+
+## 完成標準的區別
+
+1. 函式匹配：C在固定編譯器、參數及記憶體模型下產生相同機器碼，逐項登記fixup及外部引用。
+2. 解壓映像匹配：程式碼、資料、段配置及relocation符合鎖定的衍生映像。
+3. 原始EXE匹配：header、relocation、padding、EXEPACK結果及所有位元組符合原版SHA-256。
+
+三層分開登記。不把相同解壓結果或正規化反組譯稱為完整EXE匹配。
+若仍使用原版片段、組合語言或既有library物件，分別列出其範圍；
+把原版bytes重新包裝而hash相同，不能當作C反編譯完成。
+
+同位元組重建證明特定建置結果與原版相同，無法追回唯一的變數名、註解、巨集與原始寫法。
+取得匹配C後，移植至Go或更換整數寬度、記憶體模型及硬體介面，仍屬另一個實作。
+其驗證範圍需另定，不能直接把原版C的匹配結果延伸成Go重製一致。
+方法依[decomp.me說明](https://www.decomp.me/faq)及
+[decomp-toolkit的逐物件替換流程](https://github.com/encounter/decomp-toolkit)。
+後者專用GameCube／Wii，流程可參考，沒有據此認定其工具支援DOS MZ。
+
+## 下一個窄試點
+
+使用者於2026-10-08確認開始此試點。工作目錄為`workplace/matching-pilot-20261008/`，
+保存`input-plan.json`、一次性IDA資料庫、`ida-probe.py`、C源檔、編譯命令、objects及差分收據。
+Microsoft官方MS-DOS公開repo的`v4.0/src/TOOLS`作候選來源，下載釘commit及Git blob／SHA-256；
+沒有據此認定本作編譯器。DOS執行工具見[Dockerfile.matching-dos](../../docker/Dockerfile.matching-dos)。
+
+先以KOLTOWN辨識compiler／linker、memory model、最佳化及library版本，
+選代表性的運算、分支與結構／far pointer函式，實測C編譯結果。
+已有固定IDA原始定位、bytes及xref可作輸入，原名與位址維持。
+首批匹配成立後再建立分段、物件與增量link流程，最後處理原始EXEPACK EXE。
+
+目前不能判定全量matching會比既有路線更快。試點須記錄實際匹配結果與耗時，
+再評估擴展。研究、舊工具及所有原版衍生輸出只留本機，沿Docker-only與既有權利界線。
+
+## 首批實際匹配
+
+固定QuickC2.01，參數`/AM /Od /Gs /Zl /G0`，linker4.07。
+純C經編譯及實際link後，三個完整函式共268 bytes符合原版，差分為零：
+
+| 原始IDA名稱 | IDA linear | 解壓EXE檔案偏移 | 長度 | 有效C表達與等級 |
+|---|---|---|---|---|
+| `sub_14427` | `0x14427` | `26663` | 62 | 取目前記錄的高／低byte組成word；已證實的匹配表達 |
+| `sub_18CD5` | `0x18CD5` | `45269` | 85 | 交換兩組16-byte記錄；已證實的匹配表達 |
+| `sub_1A866` | `0x1A866` | `52326` | 121 | 比較兩個近指標字串，完全相等回1；已證實的匹配表達 |
+
+保留原名、位址及bytes，沒有以語意改名覆蓋原定位。表格中的位址基準各列明，
+不把IDA linear、segment:offset及file offset混成同一數值。
+這些C寫法能產生相同機器碼，不據此宣稱它們就是原作者的唯一寫法。
+
+原版ZIP經既有CC0解包器原樣重生：來源SHA-256
+`0e1da11a1d5a4aa5722dc83dd16c683b4c2c25cec31d3741ee71039840a6b03c`，
+輸出138528 bytes，SHA-256
+`01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2`。
+三段raw file bytes與IDA輸出相同，再與實際linked MZ比較，沒有指令正規化或差分遮罩。
+乾淨重編的C、OBJ、BIND、MZ及MAP皆逐byte相同。
+
+link fixture只綁`_pool`的DGROUP offset`0xBB88`、`_active`的`0xBB82`及CRT anchor`__acrtused=0`。
+沒有重建原版資料、CRT、startup、stack或entry。780-byte片段只作連結證據，不能作可玩的原版。
+完整原版header、段配置、2281筆relocation及EXEPACK仍未閉合；工作目標保持完整EXE匹配。
+
+MSC5.10先產生的五組OBJ皆不匹配，特別是SI／DI保存順序與指令選擇不同，作負例保留。
+QuickC2.01的`sub_1A4E4`純C far-pointer樣本仍不匹配，不能擅稱為原版asm或偷偷補asm。
+QuickC2.01／linker4.07因此是本樣本已證實可用的工具組；原版精確版本及全程記憶體模型仍未知。
+
+本機[收據](../verification/local/matching-pilot-20261008/receipt.json)、
+[匹配C源檔](../verification/local/matching-pilot-20261008/linked-pilot.c)、
+[完整函式差分](../verification/local/matching-pilot-20261008/linked-review-v2.json)、
+[乾淨重編](../verification/local/matching-pilot-20261008/repeat-review.json)及
+[唯讀核對](../verification/local/matching-pilot-20261008/verify.py)保存全部定位、命令、工具及輸入hash。
+原始code、DB、工具binary與C衍生資料只留本機；這次沒有重新啟動原版、重製或遊戲對拍。
+
+已完成比較的工作區依[保存契約](../verification/retained-evidence.md)封存、核對後清理。
+下一步是分段與增量link基準，再逐函式用C替換原版物件，分類C、library、asm及原始未匹配bytes。
+流程參考[decomp-toolkit維護者文件](https://github.com/encounter/decomp-toolkit)，DOS MZ實作另行建立。
+
+使用者已確認繼續。增量連結研究工作區`workplace/matching-link-20261008/`已完成比較，
+核對封存後清理；固定源檔、物件、腳本與收據保存在下節的本機入口。
+
+## 增量連結與第四個函式
+
+沿原始IDA9.4資料庫匯出八個段與338個函式的定位。六個CODE段的起點、長度，
+DGROUP、入口`1B8F:001C`與堆疊`2B48:07D0`均由LINK的MAP與原始MZ核對。
+這裡的segment:offset是MZ相對載入基址，不能直接當作IDA linear。
+原始IDA DATA段涵蓋初始化資料與未初始化空間；按固定解包器輸出的檔案邊界分開，
+以免LINK把47968 bytes的未初始化空間寫進檔案。這是可用的重建物件邊界，
+原作者的OBJ名稱與切分仍未知。
+
+原始未匹配片段放在`ORIG.OBJ`。純C編譯後的LEDATA、FIXUPP與BAKPAT另作段定位適配，
+放在`CSLOT.OBJ`。適配保留編譯器輸出的指令bytes、回填值與外部目標，只轉換位置。
+真正的LINK4.07完成所有解析；沒有把已連結機器碼貼回原始EXE。
+物件覆蓋檢查拒絕缺洞、重疊及把原版片段列入C範圍。
+格式依[TIS1.1 OMF規格](https://openwatcom.org/ftp/devel/docs/omf.pdf)的
+COMMON段、LEDATA、FIXUPP與QuickC的BAKPAT規則。
+
+新增的跨段呼叫函式完整匹配：
+
+| 原始IDA名稱 | IDA linear | 解壓EXE檔案偏移 | 長度 | 有效C表達與等級 |
+|---|---|---|---|---|
+| `sub_1B5A8` | `0x1B5A8` | `55720` | 32 | `return sub_2D538() % n + 1;`，已證實的匹配表達 |
+
+`sub_2D538`仍保留原版bytes。LINK以原位PUBLIC解析遠呼叫，目標為MZ相對
+`1B8F:1C48`。檔案中的segment word為`0x1B8F`；IDA載入基址為`0x1000`，
+因此IDA原始匯出顯示`0x2B8F`。這四個fixup bytes現已完整核對，沒有遮罩或忽略。
+本函式原始檔bytes SHA-256為
+`5cfb827ff3a09bcc3fbb26a9ad9bbd9e4674233b606a2875810734d51d0ad343`。
+首批另外三函式的定位與hash維持。
+
+增量LINK的初始化映像129312 bytes與原版逐byte相同；2281筆重定位的
+實體位置與目標、入口與堆疊也相同。範圍清冊明列：
+
+| 來源分類 | bytes | 證明範圍 |
+|---|---|---|
+| 純C編譯 | 300 | 四個完整函式與原位外部引用均匹配 |
+| 原始未匹配片段 | 129012 | 只作增量連結基準，沒有C還原進度 |
+| 已匹配library／重寫asm | 0 | 本輪沒有新增此類匹配 |
+
+`_active`與`_pool`已由原版DGROUP的實際BSS位置解析，取代首批的絕對位址fixture。
+`__acrtused=0`仍作無程式引用的編譯器link anchor，原版CRT仍列未匹配。
+這不證明原作者曾使用相同PUBLIC名稱。
+
+完整native MZ仍與固定解包器輸出不同：
+
+| 標頭欄位 | 固定解包器輸出 | LINK4.07輸出 |
+|---|---|---|
+| `e_minalloc` | 2308 | 3123 |
+| `e_csum` | 0 | 57581 |
+| `e_lfarlc` | 28 | 30 |
+
+重定位項目的順序與segment:offset編碼也不同，雖然全部實體位置和目標相同。
+沒有覆寫標頭、換用較寬鬆的完成標準或稱為完整解壓MZ匹配。
+增量native MZ SHA-256為
+`3bb05eecbaff312af6d76ba79abbb019d8cf942e90ef82a133b99ca92a4a51d6`，
+與原始packed EXE的hash不同。EXEPACK尚未重建。
+
+乾淨第二工作區從唯讀原版ZIP靜態重生，重新編譯與連結。
+C、compiler OBJ、兩個增量OBJ、native MZ、MAP與重定位清冊七項逐byte相同。
+獨立核對器另直接解析兩次OMF，套用有明示目標的fixup與backpatch，
+重生全部初始化映像及2281筆重定位，與原版再比一次。
+修改C指令、移除重定位、改重定位目標及改入口CS四個負例均被拒絕。
+正式342份程式輸入保持，沒有執行原版、重製或遊戲對拍。
+
+本機[收據](../verification/local/matching-link-20261008/receipt.json)、
+[四函式C](../verification/local/matching-link-20261008/four-functions.c)、
+[完整映像與負例](../verification/local/matching-link-20261008/image-review.json)、
+[乾淨重編](../verification/local/matching-link-20261008/repeat-review.json)、
+[唯讀獨立核對器](../verification/local/matching-link-20261008/verify.py)及
+[保存清冊](../verification/local/matching-link-20261008/retention.json)為本輪入口。
+下一閘門是原始EXEPACK／MZ重建基準，再沿增量物件擴展C匹配；完整原版C仍未完成。
+
+## 工具與重生入口
+
+- IDA9.4使用既有`ida-pro-9.4-idapython:py312-v1`，UID1000:1000、正式DB唯讀、一次性副本可寫；
+  入口`ida-probe.py`及`ida-export-small.py`保存輸入SHA、函式邊界及原始指令。
+- 編譯器來源：[Microsoft公開工具](https://github.com/microsoft/MS-DOS)，commit
+  `2d04cacc5322951f187bb17e017c12920ac8ebe2`；[QuickC候選清冊](https://github.com/davidly/dos_compilers)，commit
+  `da3f15ce4912893a0dd9f8349dab29116a53ca59`。每檔核Git blob與SHA-256，下載成果留本機。
+- DOS工具`kol-matching-dos:bookworm-20261008-r1`沿[Dockerfile](../../docker/Dockerfile.matching-dos)，
+  支援無頭DOSBox0.74-3、候選compiler執行及Python核對。只編C，不跑遊戲。
+  `compile-linked.py`從乾淨輸出產生OBJ／MZ／MAP，`review-linked.py`按PUBLIC及CODE段長度核完整函式。
+- OMF依[TIS1.1規格](https://openwatcom.org/ftp/devel/docs/omf.pdf)接受計算checksum或合法零checksum；
+  record長度、PUBLIC、LEDATA及真實link結果另核，沒有把零checksum當損壞或當完整性證明。
+
+獨立核對使用目前Go驗證revision，專案唯讀掛`/src`、本機證據父目錄唯讀掛`/out`，
+UID/GID1000:1000、無網路、1GiB、1CPU、96程序與120秒逾時，執行：
+
+```sh
+python3 -B /out/matching-pilot-20261008/verify.py
+python3 -B /out/matching-link-20261008/verify.py
+```
+
+需乾淨重編時按保存清冊抽出源檔、固定候選工具及命令到Docker暫存，來源唯讀、輸出可寫。
+可重取的工具及可重建EXE只保留hash，原版EXE由合法本機ZIP重生，不冒稱已匹配整支遊戲。

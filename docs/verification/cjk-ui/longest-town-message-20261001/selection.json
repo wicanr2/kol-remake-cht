@@ -1,0 +1,107 @@
+{
+  "scope": "正式 town-message 全母體最寬之一；由正常六人招募與第七城旅舍離店告別觸發，不宣稱其他欄位或原版完成。",
+  "population_count": 4201,
+  "maximum_width": 368,
+  "selected": [
+    {
+      "kind": "town-message",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門17 訊息17",
+      "zh": "她說：「願路揚起迎向你，願陽光永遠在你背後。」",
+      "x": 315,
+      "width": 368,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-message",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門17 訊息17",
+      "zh": "你聽了竟覺得傷感。",
+      "x": 315,
+      "width": 144,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    }
+  ],
+  "all_maximum_candidates": [
+    {
+      "kind": "town-message",
+      "en": "docs/i18n/town-zh-Hant.json 城6 門10 訊息15",
+      "zh": "「哎，這才叫男人！海瑟，把我最烈的麥酒端出來，",
+      "x": 315,
+      "width": 368,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-message",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門2 訊息27",
+      "zh": "「你的兵器跟你樸素的衣著不相稱。有這種兵器的人",
+      "x": 315,
+      "width": 368,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-message",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門12 訊息29",
+      "zh": "「給你我最好的作品。這把塔什塔克是我親手打的，",
+      "x": 315,
+      "width": 368,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-message",
+      "en": "docs/i18n/town-zh-Hant.json 城7 門17 訊息17",
+      "zh": "她說：「願路揚起迎向你，願陽光永遠在你背後。」",
+      "x": 315,
+      "width": 368,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    }
+  ],
+  "town": 7,
+  "door": 17,
+  "message": 17,
+  "position": [
+    59,
+    28
+  ],
+  "door_step": 90,
+  "entry_step": 91,
+  "who_step": 92,
+  "farewell_step": 93,
+  "back_step": 94,
+  "shot_steps": [
+    90,
+    91,
+    92,
+    93,
+    94
+  ],
+  "walk_moves": 28,
+  "seed": 1,
+  "seed_method": "執行前 -seed 1",
+  "load": null,
+  "monsters": null,
+  "ambush_rolls": null,
+  "report_sha256": "c8b81562610e724e371f2df34b617dc4bf65de9fda23d5cc583a4de4ec874459"
+}

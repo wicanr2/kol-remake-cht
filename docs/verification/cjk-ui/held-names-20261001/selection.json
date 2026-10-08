@@ -1,0 +1,58 @@
+{
+  "schema": "kol-cjk-held-names-selection-v1",
+  "selected_before_execution": true,
+  "date": "2026-10-01",
+  "occupied_characters": 14,
+  "held_item_occurrences": 95,
+  "held_unique_names": 34,
+  "old_missing_names": [
+    "Black Choker",
+    "Maul"
+  ],
+  "selected": {
+    "slot": 2,
+    "character": "Olear",
+    "field": "backpack",
+    "index": 4,
+    "name": "Maul",
+    "record": "4686ac00c60a48e400f064ff53b79380"
+  },
+  "warder": {
+    "slot": 8,
+    "character": "Warder",
+    "field": "equipment",
+    "index": 7,
+    "name": "Black Choker",
+    "record": "c13023580687acb20000000002007000"
+  },
+  "seed": 1,
+  "load": null,
+  "source_prefix_inputs": 60,
+  "steps": {
+    "sheet": 61,
+    "items": 63,
+    "mark": 78,
+    "detail": 79,
+    "outside": 83
+  },
+  "warder_steps": {
+    "outside": 15,
+    "sheet": 16,
+    "items": 18,
+    "mark": 25,
+    "detail": 26,
+    "returned": 30
+  },
+  "before_inputs_sha256": {
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "tools/verify_display_names.py": "5f55eb23d80ade8ffe99b987f0aae7bf8f19c1024df021b16947724befbcd802",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "docs/verification/inventory-empty-slots-20261001/normal-script.txt": "2ed26c80d0c1806c123b99f3f9b200fb2a1e036d79b5f4188633980bb9a579bf"
+  },
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "local_full_selection_sha256": "dfb172b173b407287eacccbbc049069681f8e72b25900c4e16b6864c8777f985"
+}

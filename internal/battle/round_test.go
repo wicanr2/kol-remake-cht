@@ -101,3 +101,45 @@ func TestCombatLevel(t *testing.T) {
 		t.Fatalf("沒有技能時 %d", got)
 	}
 }
+
+// RE-248：原版掃描槽位與最後一次戰場重畫各自保留。
+func TestPlanningCursorRetainsScannedTailAndPartyView(t *testing.T) {
+	for _, side := range []Side{SideParty, SideEmpty} {
+		for _, withEnemy := range []bool{false, true} {
+			s := &State{Actors: make([]Actor, 18)}
+			for i := range s.Actors {
+				s.Actors[i].Side = SideEmpty
+			}
+			s.Actors[4] = Actor{Side: SideParty, Head: 10, Chest: 10, X: 30, Y: 31}
+			s.Actors[6] = Actor{Side: SideMonster, Head: 10, Chest: 10, X: 34, Y: 35}
+			s.Actors[1] = Actor{Side: side, Head: 0, Chest: 10, X: 20, Y: 21}
+			s.Round.Order = []int{4, 1}
+			if withEnemy {
+				s.Round.Order = []int{4, 6, 1}
+			}
+			rng := &fixedRand{values: []int{1}}
+			s.Round.inspectionRand = rng
+			s.AdvanceToParty()
+			if s.Cursor != 4 {
+				t.Fatalf("隊員索引 %d", s.Cursor)
+			}
+			done := s.EndTurn()
+			if !done {
+				s.AdvanceToParty()
+			}
+			if s.Cursor != 1 {
+				t.Errorf("末端槽位 %d，應保留 1；side=%d enemy=%v", s.Cursor, side, withEnemy)
+			}
+			x, y := s.Camera()
+			if x != 30 || y != 31 {
+				t.Errorf("鏡頭 %d,%d，應保留 30,31；side=%d enemy=%v", x, y, side, withEnemy)
+			}
+			if rng.i != len(s.Round.Order) {
+				t.Fatalf("檢視擲骰 %d，預期 %d", rng.i, len(s.Round.Order))
+			}
+			if s.Current() != -1 {
+				t.Fatalf("規劃尚未走完 %d", s.Current())
+			}
+		}
+	}
+}

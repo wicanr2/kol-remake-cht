@@ -1,0 +1,15 @@
+{
+  "schema": "kol-item-detail-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x16c66": {"semantic": "空格訊息設字格欄8，後續0x16C6C設像素列0x4C；不是模式8明細基準50。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md；IDA sub_16986 bytes／資料流；正常gui2空格BODY／HANDS／FEET畫格。"},
+    "0x16c82": {"semantic": "首行0xCA換行後重設字格欄8；0xCB與部位名稱接同一列。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md；0x16C82..0x16CD3及KOLDATA原文控制碼。"},
+    "0x16cdf": {"semantic": "部位名後額外印字元0x21感嘆號。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md；0x16CDB mov ax,21h、push與call sub_1C2DA；gui2實際標點。"},
+    "0x16ce7": {"semantic": "空格訊息進sub_144C3的SPACEBAR確認等待，返回既有清單。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md；IDA直接callee與原版gui2 ENTER／SPACE正常返回。"},
+    "0x144d5": {"semantic": "清列後加入SPACEBAR id1，後續sub_11722(0)等待。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md；sub_1449C、0x144D1 push1、0x144E1 call及gui2底列。"},
+    "0x11963": {"semantic": "等待函式只由ENTER或前段啟用的SPACE進0x1196C，其他鍵繼續等待。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md；sub_11722模式0資料流、0x11897..0x118A0與0x11963..0x11969。"}
+  }
+}

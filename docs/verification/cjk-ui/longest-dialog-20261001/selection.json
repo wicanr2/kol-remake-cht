@@ -1,0 +1,66 @@
+{
+  "scope": "正式 dialog-ui 全母體最寬問句；從標題正常六人招募、船屋選人與三次聆聽，依固定種子既定順序完整走三則傳聞，不反覆抽取挑選。",
+  "population_count": 260,
+  "maximum_width": 240,
+  "selected": [
+    {
+      "kind": "dialog-ui",
+      "en": "docs/i18n/ui-zh-Hant.json 記錄 0x9d",
+      "zh": "「外頭的世事，你聽說了什麼？」",
+      "x": 315,
+      "width": 240,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    }
+  ],
+  "town": 7,
+  "door": 8,
+  "position": [
+    4,
+    25
+  ],
+  "entry_step": 151,
+  "greeting_step": 153,
+  "cycles": [
+    {
+      "cycle": 1,
+      "prompt_step": 156,
+      "answer_step": 157,
+      "idle_step": 158
+    },
+    {
+      "cycle": 2,
+      "prompt_step": 161,
+      "answer_step": 162,
+      "idle_step": 163
+    },
+    {
+      "cycle": 3,
+      "prompt_step": 166,
+      "answer_step": 167,
+      "idle_step": 168
+    }
+  ],
+  "shot_steps": [
+    151,
+    153,
+    156,
+    157,
+    158,
+    161,
+    162,
+    163,
+    166,
+    167,
+    168
+  ],
+  "seed": 1,
+  "seed_method": "執行前 -seed 1",
+  "load": null,
+  "monsters": null,
+  "ambush_rolls": null,
+  "report_sha256": "89f888a8f582169a45c9d83b557a0bf4d5c1660acff8f7fae1c8c3eaaa331ec6"
+}

@@ -40,6 +40,10 @@ func NewAdjacentCursor(a *Actor) TargetCursor {
 // 原版在這裡也檢查了 0…8，但檢查唯一的效果是清掉一個馬上會被覆寫的區域變數，
 // 所以越界的起點照樣留在游標上。這裡照抄那個行為，只是另外把結果報出來。
 func NewRangedCursor(a *Actor, memo Cell) TargetCursor {
+	// RE-171：首次遠程先設 (0,0)，舊指令為射擊／施法才讀記憶座標。
+	if a.Command != CmdMissile && a.Command != CmdCast {
+		return TargetCursor{Mode: CursorRanged}
+	}
 	c := TargetCursor{Mode: CursorRanged,
 		Row: memo.Row + ViewCentre.Row - a.X,
 		Col: memo.Col + ViewCentre.Col - a.Y}

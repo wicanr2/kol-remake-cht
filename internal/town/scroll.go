@@ -1,6 +1,9 @@
 package town
 
-import "strings"
+import (
+	"encoding/hex"
+	"strings"
+)
 
 // SCROLL（建築內圖示 0x0D，`sub_17318`，RE-121）做兩件事：加入這一棟代表的教派，
 // 以及跟它買法術。原版的順序是
@@ -359,18 +362,27 @@ func (s *Session) join() {
 		s.scrollSay(nonEmpty(s.uiLines(NotEnoughRecord)), s.endScroll)
 		return
 	}
-	if s.Party[i].Token != nil && len(s.Party[i].Backpack) >= BackpackSlots {
+	slot := s.Party[i].emptyPackSlot()
+	neckOccupied := s.Party[i].Worn[7] != nil && s.Party[i].Worn[7].Name != ""
+	if neckOccupied && slot < 0 {
 		s.scrollSay(nonEmpty(s.uiLines(BackpackFullRecord)), s.endScroll)
 		return
 	}
-	s.Party[i].Gold -= s.door.Price
 	order := *s.door.Order
-	token := Good{Name: order.Token, Record: order.TokenRecord}
-	if s.Party[i].Token == nil {
-		s.Party[i].Token = &token
-	} else {
-		s.Party[i].Backpack = append(s.Party[i].Backpack, token)
+	token, ok := orderTokenGood(order)
+	if !ok {
+		s.endScroll()
+		return
 	}
+	s.Party[i].Gold -= s.door.Price
+	if !neckOccupied {
+		s.Party[i].Worn[7] = &token
+	} else {
+		s.Party[i].putPack(slot, token)
+	}
+	// 保留舊保存欄的信物資訊；實際位置由物品槽表示（RE-200）。
+	s.Party[i].Token = &token
+	s.Party[i].SyncCarried()
 	s.Party[i].Order = &order
 	if sheet := s.Party[i].Sheet; sheet != nil {
 		copied := *sheet
@@ -382,6 +394,30 @@ func (s *Session) join() {
 	lines := nonEmpty(s.uiLines(MemberRecord))
 	lines = append(lines, s.shownExclaim(order.Name))
 	s.scrollSay(lines, s.showScrollMenu)
+}
+
+// orderTokenGood 讀取既有 JSON 信物記錄的已證實欄位（RE-075／200）。
+// 名稱已由抽取器提供，不讀 archive 或解壓原始資產。
+func orderTokenGood(order Order) (Good, bool) {
+	raw, err := hex.DecodeString(order.TokenRecord)
+	if err != nil || len(raw) != CarriedStride || raw[0] == 0 || order.Token == "" {
+		return Good{}, false
+	}
+	bonus := int(raw[8] >> 4)
+	if bonus > 7 {
+		bonus = -(bonus - 8)
+	}
+	count := int(raw[12]/32) + 1
+	sides := [8]int{3, 4, 6, 8, 10, 12, 20, 100}[(raw[12]/4)&7]
+	good := Good{Name: order.Token, Record: order.TokenRecord,
+		Price: int(raw[8]&15)*256 + int(raw[9]), Kind: int(raw[12] & 3), Damage: raw[12]&1 != 0,
+		Hands: int((raw[13] & 2) >> 1), Class: int(raw[13]), Position: int(raw[14] >> 4),
+		Encumbrance: int(raw[10]), Condition: int(raw[11]), SizeClass: int(raw[14] & 15),
+		Dice: Dice{Count: count, Sides: sides, Bonus: bonus, Low: max(count+bonus, 0), High: count*sides + bonus}}
+	if good.Position == ShieldPosition {
+		good.Percent = int(raw[14]&3)*10 + 20
+	}
+	return good, true
 }
 
 // offerSpell 是選中一筆法術：先看法術槽滿了沒，再問價錢。

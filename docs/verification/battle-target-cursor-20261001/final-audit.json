@@ -1,0 +1,26 @@
+{
+  "schema": "kol-target-cursor-final-audit-v1",
+  "formal_png_count": 18,
+  "target_checks": 12,
+  "submenu_checks": 4,
+  "different_pixels": 0,
+  "formal_outputs_uid_gid": [
+    1000,
+    1000
+  ],
+  "all_formal_ownership_valid": true,
+  "root_owned_or_md_directories": [],
+  "original_png_matches_private_capture": true,
+  "original_pixel_report_replayed_identically": true,
+  "ida_formal_database_unchanged": true,
+  "ida_attached_confirmed_locations": 6,
+  "python_syntax_checked": [
+    "docs/verification/battle-target-cursor-20261001/kol_cursor_gui_finish.py",
+    "docs/verification/battle-target-cursor-20261001/verify_backlinks.py",
+    "docs/verification/battle-target-cursor-20261001/kol_cursor_gui_prepare.py",
+    "docs/verification/battle-target-cursor-20261001/kol_cursor_pixels.py",
+    "tools/ida_probe_target_cursor.py"
+  ],
+  "production_change": "無正式行為變更；internal/ui/battle.go僅註解訂正",
+  "scope": "原版圓環契約證據；不是重製版同狀態對拍"
+}

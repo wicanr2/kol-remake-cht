@@ -1,0 +1,179 @@
+{
+  "schema": "kol-player-path-verifier-summary-v1",
+  "paths": [
+    {
+      "name": "arena",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "full-chain-ending",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "full-chain-reload",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "full-chain",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "full",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "gear-abbey",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "gear-switch",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "quest-chain-reload",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "quest-chain",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "quest-list",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "quest-take",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "sheet-outside",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-edge",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-leave",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-load",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-mirror",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-recruit",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-rest",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-round-trip",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-scroll",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-shop",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-stable",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-talk",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town-train",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "town",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "world-clock",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "world-healer",
+      "tool": "tools/verify_full_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "world-quest",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    },
+    {
+      "name": "world-road",
+      "tool": "tools/verify_player_path.py",
+      "returncode": 0,
+      "failures": []
+    }
+  ]
+}

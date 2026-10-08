@@ -1,0 +1,80 @@
+{
+  "schema": "kol-item-edge-audit-v1",
+  "status": "英文快取還原正常窄切片通過",
+  "receipt_sha256": "e6c3db490d2fd4a8b3b3de830fe7b7bc87857a0054d0ce630bb54f1e90a2c699",
+  "binary": {
+    "path": "workplace/item-detail-20261001/kol-items-edge-final-linux",
+    "sha256": "fb185a0a1a9217feb25b66b2458cde1f6c15ae328f87ed79a9b6d291b57f5fba"
+  },
+  "current_inputs_locked": 531,
+  "source_inputs_locked": 536,
+  "original_frames": 165,
+  "chinese_frames_unchanged": 110,
+  "persistence": 24,
+  "reload_details": 12,
+  "previous_persistence_locked": [
+    {
+      "receipt": "mark-receipt.json",
+      "sha256": "75616fa5be90046faff4e213412b57e4bee0a1a3514fed7e50fcda0f997b78e8",
+      "count": 24
+    },
+    {
+      "receipt": "cjk-figure-receipt.json",
+      "sha256": "e419f1e8f1bbb1775a27695c18a2e49652ce966b1c2964ed952a4f12c582eec2",
+      "count": 24
+    }
+  ],
+  "source_addresses_unchanged": 9,
+  "attachments": {
+    "docs/verification/item-detail-20261001/edge-receipt.json": {
+      "sha256": "e6c3db490d2fd4a8b3b3de830fe7b7bc87857a0054d0ce630bb54f1e90a2c699",
+      "attachments": 15
+    },
+    "docs/verification/item-detail-20261001/edge-source-receipt.json": {
+      "sha256": "8f69e331073d7a4d774002bca54697609cb7ed85d3b6e3e64ffb24261b06bedc",
+      "attachments": 8
+    },
+    "docs/verification/item-detail-20261001/mark-receipt.json": {
+      "sha256": "75616fa5be90046faff4e213412b57e4bee0a1a3514fed7e50fcda0f997b78e8",
+      "attachments": 27
+    },
+    "docs/verification/item-detail-20261001/cjk-figure-receipt.json": {
+      "sha256": "e419f1e8f1bbb1775a27695c18a2e49652ce966b1c2964ed952a4f12c582eec2",
+      "attachments": 43
+    },
+    "docs/verification/item-detail-20261001/mirror-receipt.json": {
+      "sha256": "82d4e21da58dbeb0ecc86e2b6e0376679f4154a41025facf273443361f97ee01",
+      "attachments": 113
+    },
+    "docs/verification/item-detail-20261001/actions-receipt.json": {
+      "sha256": "d2d13cb2054d707450ce08df70fdc2a4cc85597c29ff9bc30c64f89255ddc049",
+      "attachments": 94
+    },
+    "docs/verification/item-detail-20261001/all-slots-receipt.json": {
+      "sha256": "4b21c2f87edf61a58804925f2e5ecb9fde2f4e3cdcd7b044e933a5ce547f1943",
+      "attachments": 72
+    },
+    "docs/verification/item-detail-20261001/receipt.json": {
+      "sha256": "3d498b4f902d50e6ff2e5bd3b1236cdd7c5175508742fa494dc10e3d4d2a3120",
+      "attachments": 27
+    },
+    "docs/verification/battle-target-cursor-20261001/receipt.json": {
+      "sha256": "4dbcf84cc67b838b61a35cd7a6fd5051b25acdf6dc54527923b9ff80d1ed287a",
+      "attachments": 25
+    },
+    "docs/verification/battle-target-cursor-20261001/remake-receipt.json": {
+      "sha256": "b7a31c4fc6f69e22bb8457e9b35e950dfdde7db2dd32baf6c4dfc953a60c874f",
+      "attachments": 145
+    },
+    "docs/verification/battle-target-cursor-20261001/attack-row-receipt.json": {
+      "sha256": "41b7d8a6551498ed1280650330e3aa6374e9d58685c32f1d2e34540f0b471572",
+      "attachments": 58
+    }
+  },
+  "tests_log_sha256": "9e4114a388c3fc3a424df6e15ca1385e30dacbe19855cad01634ad48dab028b9",
+  "worklist_log_sha256": "e1b801c079aa5bb21ada650f92b0ba2425ef3a5589b1f4a0e798ea03cb6918ba",
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned_or_md_directories": 0,
+  "limits": "Theodoric兩條正常物品序列；繁中只驗前後一致。其他人物／野外／全部物品動作仍未全驗，原版完整保存／時間／金幣未對拍。"
+}

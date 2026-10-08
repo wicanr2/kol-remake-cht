@@ -12,12 +12,14 @@ release 那一份是不是真的不含原作衍生位元組。
 import hashlib
 import json
 import os
+import re
 import sys
 import zipfile
 
 # release 不得含原作衍生位元組。圖示是 remake 自己畫的純幾何圖形，是唯一的例外。
 DERIVED_SUFFIXES = (".png", ".ogg", ".exe.bak", ".pdf", ".jpg", ".jpeg", ".icns")
 ICON_NAMES = ("kol.png", ".DirIcon", "kol.icns")
+VERSION_PATTERN = r"v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}"
 
 
 def fail(msg: str) -> None:
@@ -85,7 +87,7 @@ def check_appimage(path: str, bundle: str) -> None:
     ok(f"{name}：{os.path.getsize(path) // 1024} KB", before)
 
 
-def check_manifest(dist: str, bundle: str) -> None:
+def check_manifest(dist: str, bundle: str, version: str | None = None) -> None:
     """重算每個檔的 SHA-256 與大小，與 `<bundle>/manifest.json` 逐筆比對。
 
     manifest 由 `write_dist_manifest.py` 在打包時寫下；這裡回頭驗它，打包後被改過、
@@ -99,6 +101,15 @@ def check_manifest(dist: str, bundle: str) -> None:
     except (OSError, ValueError) as err:
         fail(f"{bundle}/manifest.json 讀不到：{err}")
         return
+    if manifest.get("schema") != "kol-dist-manifest-v1":
+        fail(f"{bundle}：manifest schema 不符")
+    if manifest.get("bundle") != bundle:
+        fail(f"{bundle}：manifest bundle 不符")
+    declared_version = manifest.get("version")
+    if not isinstance(declared_version, str) or not re.fullmatch(VERSION_PATTERN, declared_version):
+        fail(f"{bundle}：manifest 版號不符合完整版號契約")
+    elif version is not None and declared_version != version:
+        fail(f"{bundle}：manifest 版號 {declared_version} 與要求的 {version} 不符")
     listed = {row["path"]: row for row in manifest.get("files", [])}
     if manifest.get("file_count") != len(listed):
         fail(f"{bundle}：file_count {manifest.get('file_count')} 與清單 {len(listed)} 筆不符")
@@ -134,10 +145,13 @@ def main() -> int:
                 check_manifest(sys.argv[2], bundle)
         print("manifest 驗收" + ("未通過" if globals()["FAILURES"] else "通過"))
         return 1 if globals()["FAILURES"] else 0
+    if len(sys.argv) != 3 or not re.fullmatch(VERSION_PATTERN, sys.argv[2]):
+        print("用法：verify_packages.py <dist 目錄> v.<主版>.<次版>.<修訂版>-YYYYMMDD", file=sys.stderr)
+        return 2
     dist, version = sys.argv[1], sys.argv[2]
     for bundle in ("full", "release", "promo"):
         print(f"== {bundle} manifest")
-        check_manifest(dist, bundle)
+        check_manifest(dist, bundle, version)
     pkg = os.path.join(dist, "packages")
     for bundle in ("full", "release"):
         print(f"== {bundle}")

@@ -8,7 +8,7 @@ func (s *State) ToggleEquipmentPanel() {
 }
 
 // EquipmentLabels 是裝備欄那六列的標籤（原版是 `W: H: T: L: S: B:`，依序是
-// 武器、頭、軀幹、腿、盾、身體）。中文模式拿它去查譯文。
+// 武器、頭、軀幹、腿、盾、腰帶）。中文模式拿它去查譯文。
 var EquipmentLabels = [6]string{"W:", "H:", "T:", "L:", "S:", "B:"}
 
 type EquipmentPanelData struct {
@@ -50,11 +50,19 @@ func (s *State) EquipmentPanel() (EquipmentPanelData, bool) {
 		}
 	} else {
 		d.Monster, d.Portrait, d.Count = true, s.Monster.Index, 5
-		if s.Monster.Weapon != nil && !a.Unarmed {
-			d.Rows[0] = s.Monster.Weapon.Name
+		if a.HandItem != nil && !a.Unarmed {
+			d.Rows[0] = a.HandItem.Name
 		}
-		if s.Monster.Shield != nil {
-			d.Rows[4] = s.Monster.Shield.Name
+		if a.MonsterShield != nil {
+			d.Rows[4] = a.MonsterShield.Name
+		}
+		if len(s.Monster.EquipmentVariants) == 0 {
+			if s.Monster.Weapon != nil && !a.Unarmed {
+				d.Rows[0] = s.Monster.Weapon.Name
+			}
+			if s.Monster.Shield != nil {
+				d.Rows[4] = s.Monster.Shield.Name
+			}
 		}
 	}
 	return d, true

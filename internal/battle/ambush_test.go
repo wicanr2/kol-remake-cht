@@ -1,6 +1,13 @@
 package battle
 
-import "testing"
+import (
+	"encoding/hex"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/wicanr2/kol-remake-cht/internal/rng"
+)
 
 // ambushMonsters 造一份最小的怪物表：兩隻，遮罩不同，好驗篩選。
 func ambushMonsters() *Monsters {
@@ -243,5 +250,91 @@ func TestNewAmbush(t *testing.T) {
 	// 敵人的技能折算過等級，戰後結算用的原值另外留著。
 	if s.Actors[PartySlots].BaseAttack != 230 {
 		t.Fatalf("原始攻擊技能是 %d", s.Actors[PartySlots].BaseAttack)
+	}
+}
+
+// 原始資料來自 RE-202 的正常購買、出城、伏擊；不以測試生成資料冒充原版。
+func TestNormalAmbushPlacementOriginal(t *testing.T) {
+	path := os.Getenv("KOL_AMBUSH_PLACEMENT_CASE")
+	if path == "" {
+		t.Skip("正常原版收據只在本機隔離驗證掛載")
+	}
+	data, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var original struct {
+		Placement []struct {
+			Label    string   `json:"label"`
+			Seed     uint32   `json:"seed"`
+			Actors   []string `json:"actors"`
+			FieldHex string   `json:"field_hex"`
+		} `json:"placement"`
+	}
+	if err := json.Unmarshal(data, &original); err != nil {
+		t.Fatal(err)
+	}
+	if len(original.Placement) != 4 || original.Placement[0].Label != "before-placement" {
+		t.Fatal("原版位置觀察階段不符")
+	}
+	before, after := original.Placement[0], original.Placement[1]
+	raw, err := hex.DecodeString(before.FieldHex)
+	if err != nil || len(raw) != FieldSide*FieldSide {
+		t.Fatal("原版地形形狀不符")
+	}
+	for _, generated := range []bool{false, true} {
+		t.Run(map[bool]string{false: "已有地形", true: "正常確認時生成"}[generated], func(t *testing.T) {
+			field := &Field{Tiles: make([]int, len(raw))}
+			for i, tile := range raw {
+				field.Tiles[(i%FieldSide)*FieldSide+i/FieldSide] = int(tile)
+			}
+			seed := before.Seed
+			if generated {
+				field, seed = nil, 316395082
+			}
+			s := NewAmbush(&Ambush{Monster: 1, Count: 3, Level: 1, Group: 2},
+				Monster{Health: 180, Size: 232, Strength: 218},
+				[]Member{{Size: 100, Health: 100, Strength: 100},
+					{Size: 100, Health: 100, Strength: 100}}, field)
+			random := rng.NewState(seed)
+			s.Rand = random
+			if generated && (s.Field != nil || random.State() != seed) {
+				t.Fatal("確認遭遇圖前不應生成地形或擲骰")
+			}
+			s.Continue(random)
+			if s.Field == nil {
+				t.Fatal("正常伏擊未產生地形")
+			}
+			for i, tile := range raw {
+				if s.Field.At(i%FieldSide, i/FieldSide) != int(tile) {
+					t.Fatalf("原版地形第 %d 格不符", i)
+				}
+			}
+			for _, slot := range []int{0, 1, 6, 7, 8} {
+				a, err := hex.DecodeString(after.Actors[slot])
+				if err != nil || len(a) != 50 {
+					t.Fatal("原版參戰者形狀不符")
+				}
+				if s.Actors[slot].X != int(a[31]) || s.Actors[slot].Y != int(a[32]) {
+					t.Fatalf("進場位置槽 %d 得到 %d,%d，原版 %d,%d", slot,
+						s.Actors[slot].X, s.Actors[slot].Y, a[31], a[32])
+				}
+			}
+			positions := make([][2]int, len(s.Actors))
+			for i, a := range s.Actors {
+				positions[i] = [2]int{a.X, a.Y}
+			}
+			seed = random.State()
+			s.Continue(random)
+			if random.State() != seed {
+				t.Fatal("再次確認不應重擲進場骰")
+			}
+			s.Replan(random)
+			for i, a := range s.Actors {
+				if positions[i] != [2]int{a.X, a.Y} {
+					t.Fatalf("重排移動了槽 %d 的進場位置", i)
+				}
+			}
+		})
 	}
 }

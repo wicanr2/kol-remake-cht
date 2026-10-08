@@ -7,7 +7,8 @@ package battle
 
 // optionModifier 是 0x110A：一列七個 16-bit 有號數，列由攻擊選項決定、
 // 欄由對手的防禦選項決定，直接加到攻擊分數上。
-var optionModifier = [9][7]int{
+// RE-225：完整表有十二列；Style8／9／10讀row9／10／11。
+var optionModifier = [12][7]int{
 	{70, -10, 20, 13, -15, -2, 15},
 	{80, 0, 30, 18, 30, 13, 20},
 	{75, -5, 25, 18, 30, 13, -20},
@@ -17,6 +18,9 @@ var optionModifier = [9][7]int{
 	{37, -43, -13, 0, -58, -50, -18},
 	{55, -25, 5, 13, -5, -27, -5},
 	{43, -37, -7, 6, -12, -34, -52},
+	{42, -38, -8, -35, -33, -20, -18},
+	{55, -25, 5, -27, 15, -2, -10},
+	{59, -21, 9, -18, 24, 7, -41},
 }
 
 // styleWeaponMask 是 0x109C：攻擊選項要的武器位元。武器的種類 byte
@@ -102,13 +106,25 @@ var UnarmedSlots = [6]int{0, 5, 6, 0, 4, 1}
 //     同一份探針對隊員跑正對照，四式各自落在四個不同的槽，所以這不是探針沒
 //     走進徒手分支（`docs/re/20260910-monster-unarmed-slots.md`）。
 func (a Actor) AttackWeapon(style int) Weapon {
+	if a.Side == SideMonster && a.Command == CmdMissile {
+		w := a.MonsterRanged.CombatWeapon()
+		if w.Count == 0 && w.Sides == 0 {
+			w.Count, w.Sides = DamageCode(0)
+		}
+		return w
+	}
 	if a.Command != CmdUnarmed || a.Side == SideMonster {
 		return a.Weapon
 	}
 	if style < 0 || style >= len(a.UnarmedWeapon) {
 		return Weapon{}
 	}
-	return a.UnarmedWeapon[style]
+	w := a.UnarmedWeapon[style]
+	// 全零物品的傷害碼仍是 1d2（RE-197），不可因空槽略過傷害骰。
+	if w == (Weapon{}) {
+		w.Count, w.Sides = DamageCode(0)
+	}
+	return w
 }
 
 // DamageCode 把物品記錄 +0x0C 的傷害碼換成骰數與骰面（`sub_26D76:0x274D6`）。
@@ -135,7 +151,16 @@ func Encumbrance(level int, w Weapon, armour, shield int) (enc, speed int) {
 	return factor * total / 100, speed
 }
 
-// ReloadGear 依現在手上那件武器重算負重與武器速度。
+// loadWeapon 依原版首byte選怪物負重武器，與AttackWeapon的指令條件分開。
+// sub_24FD3:0x25000..0x25063，RE-216／SPEC-013同日READY增補。
+func (a Actor) loadWeapon() Weapon {
+	if a.Side == SideMonster && a.Kind != 0 {
+		return a.MonsterRanged.CombatWeapon()
+	}
+	return a.Weapon
+}
+
+// ReloadGear 依現在的負重武器重算負重與武器速度。
 //
 // **原版每次算一手的花費都重跑一遍**：`sub_251B0` 開頭就呼叫 `sub_24FD3`
 // （實跑量到，`internal/oracle` 的 `TestActionCostMatchesOriginal`——不擋掉它，
@@ -143,8 +168,13 @@ func Encumbrance(level int, w Weapon, armour, shield int) (enc, speed int) {
 // 換走手上那件武器，兩個數字都要立刻跟著變：花費 → 疲勞 → 撤退判斷是一條鏈，
 // 而攻擊分數與執行鍵值也各自減去負重。
 func (a *Actor) ReloadGear() {
+	// SPEC-008／RE-245：原版 0x25171 只加可用盾牌，保留原始裝備重量。
+	shield := a.ShieldWeight
+	if a.EffectiveShieldGrade() == NoShield {
+		shield = 0
+	}
 	a.Encumbrance, a.WeaponSpeed = Encumbrance(
-		a.LoadLevel, a.Weapon, a.ArmourWeight, a.ShieldWeight)
+		a.LoadLevel, a.loadWeapon(), a.ArmourWeight, shield)
 }
 
 // SkillPenaltyScale 是罰值折算成技能的倍率：`sub_26CD5` 扣的是那一格的十倍。
@@ -188,7 +218,7 @@ func (a Actor) EffectiveShieldGrade() int {
 	if a.RightArm <= 0 || a.LeftArm <= 0 {
 		return NoShield
 	}
-	if a.Weapon.TwoHand {
+	if a.loadWeapon().TwoHand {
 		return NoShield
 	}
 	return a.ShieldGrade
@@ -246,11 +276,22 @@ func DefenceScore(d Actor, roll int) int {
 // MissileDefenceValue 是被射中時防禦分數的骰前部分（`sub_26D76:0x271E3`）：
 // 招架與招架次數都不算，換成快捷的一半，其餘折算與盾牌照舊。射擊那一條在
 // `0x271FE` 直接跳到 `0x2728C`，連「防禦選項為 0」的檢查都跳過了。
+// RE-224：0x27309..0x27356仍依目標行動與防禦姿態加分，除十前最多加400。
 func (a Actor) MissileDefenceValue() int {
 	v := a.Quickness / 2
 	v -= v*a.FatigueRatio()/200 + a.Damage*10 + a.Encumbrance
 	if g := a.EffectiveShieldGrade(); g != NoShield {
 		v += 100*g + 200
+	}
+	m := encumbranceMultiplier(a)
+	if a.Command == CmdWeapon || a.Command == CmdUnarmed {
+		m++
+	}
+	if m >= 2 {
+		v += 200
+	}
+	if m >= 3 {
+		v += 200
 	}
 	return v
 }
@@ -308,8 +349,12 @@ func DamageRoll(a Actor, style, margin int, rng Rand) int {
 // 不是徒手而且武器種類沒有 capMask 那一位時，上限加倍（`0x27546`，RE-155）。
 func damageRoll(a Actor, style, margin int, rng Rand) (total, over int) {
 	w := a.AttackWeapon(style)
-	bonus := (a.Strength - 70) / 8
-	bonus = (70 - a.FatigueRatio()) * bonus / 100
+	bonus := 0
+	if a.Command != CmdMissile {
+		// 射擊在 0x2748C..0x27493 跳過力量與疲勞加成（RE-218）。
+		bonus = (a.Strength - 70) / 8
+		bonus = (70 - a.FatigueRatio()) * bonus / 100
+	}
 	limit := w.Count*w.Sides + 1 + w.Base
 	if a.Command != CmdUnarmed && w.Kind&capMask(style) == 0 {
 		limit *= 2
@@ -318,7 +363,10 @@ func damageRoll(a Actor, style, margin int, rng Rand) (total, over int) {
 	for i := 0; i < w.Count; i++ {
 		total += rng.Roll(w.Sides)
 	}
-	total += bonus + styleDamage[style&0x0F]
+	total += bonus
+	if a.Command != CmdUnarmed {
+		total += styleDamage[style&0x0F]
+	}
 	if step := margin / 20; step >= 0 {
 		if step >= len(marginBonus) {
 			step = len(marginBonus) - 1
@@ -352,13 +400,26 @@ type Outcome struct {
 	OverCap int
 }
 
-// Resolve 打一次近戰。style 是攻擊選項，rng 依序擲：攻擊、（選項為 1 時的列）、
+// Resolve 打一次近戰。style 是攻擊選項，rng 依序擲：攻擊、（持械選項為 1 時的列）、
 // 防禦、傷害骰、部位、護甲骰。攻擊者與被攻擊者的狀態都會被更新。
 func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
-	row := ModifierRow(style, rng)
-	attack := AttackScore(*a, style, d.Guard, row, rng.Roll(AttackRoll))
+	out, margin := checkAttack(a, d, style, rng)
+	if out.Miss || out.Parried {
+		return out
+	}
+	return finishDamage(a, d, style, margin, rng)
+}
+
+// checkAttack 停在原版命中訊息的等鍵點，尚未擲傷害（RE-241）。
+func checkAttack(a *Actor, d *Actor, style int, rng Rand) (Outcome, int) {
+	attackRoll := rng.Roll(AttackRoll)
+	attack := a.AttackValue()/10 + attackRoll
+	if a.Command != CmdUnarmed {
+		row := ModifierRow(style, rng)
+		attack = AttackScore(*a, style, d.Guard, row, attackRoll)
+	}
 	if attack < 0 {
-		return Outcome{Miss: true, Margin: -attack}
+		return Outcome{Miss: true, Margin: -attack}, 0
 	}
 	// 對手的防禦選項為 0（不招架）時，防禦分數直接為 0，**不擲防禦骰**、招架次數
 	// 也不加（`sub_26D76:0x27204`→`0x27220` 直接跳命中）。多擲那一次會讓後面
@@ -375,10 +436,20 @@ func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 		if msg == 4 && d.Size-a.Size > 100 {
 			msg = 2
 		}
-		return Outcome{Parried: true, Message: msg}
+		return Outcome{Parried: true, Message: msg}, 0
 	}
-	damage, over := damageRoll(*a, style, attack-defence, rng)
-	location := HitLocation(style, rng.Roll(AttackRoll))
+	return Outcome{}, attack - defence
+}
+
+// finishDamage 由原子規則 API 或玩家確認後呼叫，共用傷害與部位骰序。
+func finishDamage(a *Actor, d *Actor, style, margin int, rng Rand) Outcome {
+	damage, over := damageRoll(*a, style, margin, rng)
+	locationStyle := style
+	if a.Command == CmdUnarmed {
+		// 0x27648 先設部位列1，徒手不走持械攻擊式表（RE-197）。
+		locationStyle = 0
+	}
+	location := HitLocation(locationStyle, rng.Roll(AttackRoll))
 	rawDamage := damage
 	damage = d.AbsorbArmour(damage, location, rng)
 	out := Outcome{Damage: damage, Location: location, OverCap: over}
@@ -396,27 +467,28 @@ func Resolve(a *Actor, d *Actor, style int, rng Rand) Outcome {
 // 射擊不會被招架：分數不夠時原版印的是「but misses completely!」而不是招架句，
 // 所以這裡照樣回 Parried，訊息由 `AttackLine` 依指令碼分（RE-088）。
 func ResolveMissile(a *Actor, d *Actor, style, attack int, stray bool, rng Rand) Outcome {
+	out, margin := checkMissile(d, attack, stray, rng)
+	if out.Miss || out.Parried {
+		return out
+	}
+	return finishDamage(a, d, style, margin, rng)
+}
+
+func checkMissile(d *Actor, attack int, stray bool, rng Rand) (Outcome, int) {
 	defence := 0
 	if stray {
 		attack = rng.Roll(AttackRoll)
 		defence = clampDefence(rng.Roll(AttackRoll))
 	} else {
 		if attack < 0 {
-			return Outcome{Miss: true, Margin: -attack}
+			return Outcome{Miss: true, Margin: -attack}, 0
 		}
 		defence = MissileDefenceScore(*d, rng.Roll(AttackRoll))
 	}
 	if attack < defence {
-		return Outcome{Parried: true}
+		return Outcome{Parried: true}, 0
 	}
-	damage, over := damageRoll(*a, style, attack-defence, rng)
-	location := HitLocation(style, rng.Roll(AttackRoll))
-	rawDamage := damage
-	damage = d.AbsorbArmour(damage, location, rng)
-	out := Outcome{Damage: damage, Location: location, OverCap: over}
-	out.Down, out.Limb = d.Take(damage, location)
-	d.Hurt += rawDamage - damage
-	return out
+	return Outcome{}, attack - defence
 }
 
 // Take 把一次傷害記到身上（`sub_277F4`）：累積傷害到頂就倒下，
@@ -426,6 +498,7 @@ func ResolveMissile(a *Actor, d *Actor, style, attack int, stray bool, rng Rand)
 // 排好的那一手作廢；腿（部位 > 3）再把 `+0x03` 清成 0，移動方式少掉 0x3E
 // 以後那幾格（`sub_277F4:loc_27A5B`，RE-148）。
 func (a *Actor) Take(damage, location int) (down, limb bool) {
+	shieldBefore := a.EffectiveShieldGrade()
 	a.Damage += damage
 	if a.Damage > 0x7F {
 		a.Damage = 0x7F
@@ -452,6 +525,9 @@ func (a *Actor) Take(damage, location int) (down, limb bool) {
 		}
 	}
 	a.Hurt += damage
+	if a.ShieldWeight != 0 && a.EffectiveShieldGrade() != shieldBefore {
+		a.ReloadGear()
+	}
 	return down, limb
 }
 

@@ -1,0 +1,97 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "world-clock",
+  "description": "野外的時刻推進（RE-077、RE-151）。每走一步扣 `2 × ([0x12B8 + dy] + 隊伍移動率)`：索引是這一步的 Y 位移，東西每步 60、往北 40，與地形無關；時段在每一步扣之前才判。原版在平原上左右來回：第 14 步時刻 3360 已跨過 DAWN 的下限 3367，第 15 步開頭標籤才換成 MID MORN。原版錄影的畫格比按鍵晚一拍，所以第 14 步的狀態在標為「野外第 15 步」的 frame-217、第 15 步在 frame-223。remake 走同一串按鍵，兩個取樣點的標籤框與日期框都與原版逐像素相同。撞到不可通行的地形那一步不耗時間——原版走 `0x2958F` 把座標復原，之後跳過整支 `sub_297F2`。",
+  "pair_count": 4,
+  "pass_count": 4,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "第 14 步：時刻 3360，還在 DAWN／標籤框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-clock-14.png",
+      "original": "docs/verification/character-ui/world-clock-run2/frames/frame-217.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 14,
+        "y": 142,
+        "width": 67,
+        "height": 15
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "第 14 步：時刻 3360，還在 DAWN／日期框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-clock-14.png",
+      "original": "docs/verification/character-ui/world-clock-run2/frames/frame-217.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 14,
+        "y": 57,
+        "width": 67,
+        "height": 15
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "第 15 步開頭換成 MID MORN／標籤框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-clock-15.png",
+      "original": "docs/verification/character-ui/world-clock-run2/frames/frame-223.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 14,
+        "y": 142,
+        "width": 67,
+        "height": 15
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "第 15 步開頭換成 MID MORN／日期框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-clock-15.png",
+      "original": "docs/verification/character-ui/world-clock-run2/frames/frame-223.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 14,
+        "y": 57,
+        "width": 67,
+        "height": 15
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    }
+  ],
+  "metadata": {
+    "scope": "RE-164修正後的正常截圖，原版圖、比較矩形、游標例外與必須相同區均沿用原計畫；不宣稱天候框的原版GUI同狀態對拍",
+    "previous_plan": "docs/verification/remake-parity/plan-world-clock.json",
+    "previous_plan_sha256": "cbf89434872f65b246bd9008539f7f606199e46c1b441b115c484f4e19ae9e1c",
+    "weather_contract": "docs/spec/026-weather-animation.md",
+    "rights": "衍生PNG只適用private GitHub特例"
+  }
+}

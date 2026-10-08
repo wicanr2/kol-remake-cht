@@ -1,258 +1,855 @@
 {
   "name": "arena",
   "kind": "observation",
-  "description": "讀存檔在霍布入城點 7 那一區開場，出城走到世界地圖 (55,13) 的競技場，選 Moraine 上場、進賭場下兩注、開打並結算賭金（RE-108）。那一格與城鎮入口走同一個版面：DOOR 進場、U-TURN 留在野外。進去先看誰夠格——帳面位階與實得位階不同、而且帳面還沒到 24 才算；隊伍多人就印「Which one wishs to fight?」讓玩家選，選好再問「Are you sure you wish to enter?」。多人隊伍答應之後先換到賭場：「A Gambling Booth／The Bet Taker」，金額讀兩位數（上限 99），押他會贏寫正值、押他會輸寫負值再多講一句「Good friends, eh?」，答否才開打。**場上只有上場那一名**：其餘五名排到觀眾席、記錄 `+0x01` 設成 2 不參戰，上場那一名與唯一那隻對手各站一格固定的（RE-098 的第三條分支）。對手一隻，等級是上場那一名的實得位階加一。打贏印「you have gained a level!」，帳面位階加一——**一次只加一級**，所以帳面追上實得要打好幾場；賭金接在升階後面結算，押中的加進那一名的錢包。**輸入被換過**：原版名冊裡的角色兩個位階都是齊的（他們是遊戲開始前的狀態），照原樣走進去只會聽到「None of you are ready」，所以用工具把兩名的帳面位階降到 0。讀存檔開場、不經過標題（標題選角會以名冊角色重新組隊；標題段由 `full` 驗）。野外與兩場戰鬥由 `tools/drive_battle_script.py` 依軌跡重生，結果照種子 1 自然發生（使用者 2026-09-26 決定）：路上那一場 CLIFF TROLL 伏擊敗北，競技場那一場 Moraine 對 TROLL 也敗北，**所以這條收據展示的是輸的分支**——沒有升階，賭金整排先取負再結算：Poontang 押她會贏輸 25（214 → 189）、Fighting Bull 押她會輸贏 10（442 → 452）。打贏升一階那一句由 RE-108 與單元測試支撐，不由這條收據展示。",
+  "description": "從真正標題正常招募六人。Theodoric於城鎮7 Weapons Master付210金冠，使用200冒險點數練Club攻擊2點，技能原值總和200→400；帳面位階1不改、實得1→2，自然取得競技場資格。住宿付56保存後照seed1出城，SLEDGE39回合自然敗北。世界55,13選Theodoric上場，Poontang押25賭贏、Fighting Bull押10賭輸；TROLL單挑9回合自然敗北，兩筆金冠214→189、442→452。正常回城鎮2免費旅館，六人保存至v3。雙語各4204正常UI腳本鍵，另各23真實X11鍵重載／重存、8完整畫格及正常退出0。沒有載入或修改資格存檔、指定遇敵或強制勝利；只證明這條正常玩家鏈。",
+  "scene": "flow",
   "seed": 1,
-  "load": "workplace/observe/arena-ready.json",
-  "script": "U U U U U A S L R U A S R D S L A L U A L D A L > RET U A L D A L U A L U A U S S S S S U RET X X X X X X X X X X X X X X X X X X X X X X X X X X X X X R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R L R R R R R R R R R R R R R R R SPACE > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D RET > RET RET > RET U U L L D D R RET > > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D D RET > RET RET > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET > RET U U L L D D R R RET > > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R RET > > RET RET > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET RET > RET U U L L D D R RET > > RET RET > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R RET > RET RET > RET U U L L D D RET > > RET RET > > > > RET U U L L D RET > RET RET > RET U U L L D D R RET > > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L D D R RET > RET RET > RET U U L L D D R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D RET > > RET RET > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L R RET > RET RET > RET U U L L D D R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D RET > > RET RET > RET U U L L D D R RET > > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L R RET > RET RET > RET U U L L D D R RET > > RET RET > > > > RET U U L L R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D D R RET > RET RET > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L D D R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D R R RET > > RET RET > > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET > RET U U L L D R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET RET > RET U U L L D R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET > RET U U L L D R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D R R RET > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE R R R R R R R R R R R R R R R RET D RET RET SPACE RET RET 2 5 RET RET RET D D RET 1 0 RET > RET SPACE > RET SPACE > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE",
-  "shot_dir": "docs/verification/player-path/arena",
-  "trace": "docs/verification/player-path/arena/trace.json",
+  "load": null,
+  "script": "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET RET L L L D RET SPACE 1 > > > > RET RET SPACE RET RET 2 RET SPACE RET RET U R R R RET SPACE 1 > > > > RET RET RET > RET RET RET R R U U U U U U U U U RET S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S S R R R R R R R R R R R R R R R R R R R R L R R R R R R R R R R R R R R R SPACE > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D R RET > RET RET > RET U U L L D D RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D D R RET > RET RET > > > > > RET U U L L D D R R RET > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L R R RET > RET RET > > > > > RET U U L L D RET > RET RET > RET U U L L D D RET > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L R R RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D RET > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D RET > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L R R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D RET > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D RET > > RET RET > > > > > RET U U L L D R R RET > RET RET > RET U U L L D D R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D RET > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET > RET U U L L D D RET > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > RET U U L L D D RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L R R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R RET > > RET RET > > > > > RET U U L L R R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D RET > RET RET > RET U U L L D D R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D D RET > RET RET > RET U U L L D D R RET > > RET RET > > > > > RET U U L L D R R RET > RET RET > RET U U L L D D R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET RET > RET U U L L D D R RET > > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D R R RET > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D R R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > RET U U L L D D R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D D R RET > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L R R RET > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET > > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > > > > > RET U U L L D RET > RET RET > > > > > RET U U L L D R R RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET > > > > > RET U U L L D D R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET > RET U U L L D D R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D RET > RET RET > RET U U L L D D R R RET > > RET > > > RET RET > > > > > RET U U L L R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D R R RET > RET RET > RET U U L L D D R R RET > > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R R RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L R R D D D D RET RET > RET U U L L D RET > > RET RET > RET U U L L R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > RET U U L L R RET > > RET RET > RET U U U U U U U U U L L L L L L L L L R R D D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > RET U U L L R RET > > RET RET > RET U U U U U U U U U L L L L L L L L L R R D D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > RET U U L L R RET > > RET RET > RET U U U U U U U U U L L L L L L L L L R R D D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D RET > > RET RET > RET U U U U U U U U U L L L L L L L L L R R D D D D RET RET > RET U U L L R RET > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET > RET U U U U U U U U U L L L L L L L L L R R D D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET > RET U U U U U U U U U L L L L L L L L L R R D D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > RET U U L L D D R R RET > RET RET > RET U U U U U U U U U L L L L L L L L L D D D D D D R R R RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L D D R R RET > > RET RET > RET U U U U U U U U U L L L L L L L L L R R D D D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L R R D D D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L R D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L R D D D RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U U U U U U U U L L L L L L L L L R D D D RET RET RET SPACE SPACE SPACE SPACE SPACE R R R R RET RET RET SPACE RET D RET 2 5 RET RET RET D D D D RET 1 0 RET > RET SPACE > RET SPACE > > > RET U U L L D D RET > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > RET U U L L R R RET > > RET > > > RET RET RET SPACE SPACE SPACE SPACE SPACE > RET A A A A A A A A A A A A A A A A A A A A A A A A A U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U RET U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U U RET SPACE 1 > > > > RET RET SPACE SPACE SPACE SPACE SPACE SPACE",
+  "shot_dir": "workplace/arena-natural-20261004/formal-en",
+  "trace": "workplace/arena-natural-20261004/standard2-en/trace.json",
   "size": [
     320,
     200
   ],
-  "receipt": "docs/verification/player-path/arena-receipt.json",
-  "substituted_inputs": [
-    {
-      "flag": "-load",
-      "path": "workplace/observe/arena-ready.json",
-      "change": "Poontang 與 Moraine 的帳面位階降到 0（實得是 3 與 4），其餘欄位、其他隊員都不動。",
-      "generated_by": "tools/make_arena_save.py --members 0 1 --rank 0",
-      "base": "tools/import_original_characters.py --names Poontang Moraine \"Fighting Bull\" Kenneth Sharakan Olear --location 7,7,56,24"
-    }
-  ],
-  "not_claimed": [
-    {
-      "name": "競技場那一場的遭遇訊息與原版一致",
-      "reason": "原版在開打前把 `word_34968` 設成 1（走任務地點那一條），所以這一版用同一句（記錄 0xE9）；**那一句本身沒有從程式碼讀出來**。"
-    },
-    {
-      "name": "戰場的地形與原版一致",
-      "reason": "`word_34968 = 1` 表示地形是載入的而不是逐格擲的，但載的是哪一份沒讀出來（RE-108 的「還沒解的」），這一版沿用隨機遭遇的逐格擲。"
-    },
-    {
-      "name": "觀眾席那五格畫得出來",
-      "reason": "站位照 RE-098 擺了（DGROUP `0x12B2` 欄／`0x12AC` 列），但那五名的記錄 `+0x01` 是 2，這一版的繪製把它當空位跳過，所以畫面上看不到他們。原版那一格怎麼畫（`sub_223C0` 有沒有一併看 `+0x01`）還沒對拍。"
-    },
-    {
-      "name": "賭金那兩句與名字怎麼接",
-      "reason": "原版記錄本身只有 `wins a bet!`／`loses a bet!`，前面接誰、怎麼接沒有讀出來，這一版照最直白的「名字 ＋ 那一句」組。"
-    },
-    {
-      "name": "錢包取自哪一份",
-      "reason": "金額上限比的是 `sub_14CCF` 取的錢包，那一支取的是角色自己的還是隊伍共用的還沒解（RE-108 的「還沒解的」），這一版用角色自己的。"
-    },
-    {
-      "name": "畫面與原版一致",
-      "reason": "原版沒有取到競技場的畫格。標題與那幾句都是 KOLDATA 的記錄，肖像那一格空著——`sub_2B454` 畫的是什麼還沒解。"
-    }
-  ],
-  "rights": "remake 自己畫的畫面；字模與圖示來自已通過權利審查的原作衍生 PNG。",
+  "receipt": "docs/verification/arena-natural-20261004/receipt.json",
+  "substituted_inputs": [],
+  "normal_arena_chain_verified": true,
   "milestones": [
     {
       "step": 0,
+      "note": "真正標題開場，未載入存檔",
+      "scene": "flow:title",
       "town": {
-        "x": 56,
-        "y": 24,
-        "mode": 0
-      },
-      "note": "讀檔開場：城鎮戶外地圖（入城點 7 那一區）"
+        "left_town": false,
+        "mode": 0,
+        "town": 7,
+        "x": 57,
+        "y": 8
+      }
     },
     {
-      "step": 45,
+      "step": 58,
+      "note": "正常招募六人，Theodoric金冠1009",
+      "scene": "flow:town",
       "town": {
-        "left_town": true
-      },
-      "world": {
-        "x": 42,
+        "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          "Theodoric gold=1009 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=9",
+          "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12"
+        ],
+        "town": 7,
+        "x": 57,
+        "y": 8
+      }
+    },
+    {
+      "step": 78,
+      "note": "Weapons Master正常訓練Club攻擊2點完成",
+      "scene": "flow:town",
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 6,
+          "name": "Weapons Master"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 54,
         "y": 9
-      },
-      "note": "出城"
+      }
     },
     {
-      "step": 132,
-      "battle": {
-        "stage": 1,
-        "site": -1
-      },
-      "note": "路上的伏擊（CLIFF TROLL）"
+      "step": 95,
+      "note": "正常付學費210及住宿56後保存，金冠743，帳面位階1、實得2",
+      "scene": "flow:town",
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": false,
+        "mode": 2,
+        "party": [
+          "Theodoric gold=743 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=9",
+          "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+          "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+          "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+          "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12"
+        ],
+        "town": 7,
+        "x": 57,
+        "y": 8
+      }
     },
     {
-      "step": 1517,
+      "step": 3817,
+      "note": "路上SLEDGE第39回合自然敗北",
       "battle": {
+        "exec_text": [
+          "The SLEDGEs have defeated you!"
+        ],
+        "monster": "SLEDGE",
+        "prompt": 10,
+        "quest_done": 0,
+        "result_picture": 2,
+        "roster": [
+          "0 Theodoric party 34,31 head=14 chest=0 down",
+          "1 Poontang party 33,31 head=0 chest=0 down",
+          "2 Olear party 33,32 head=11 chest=0 down",
+          "3 Moraine party 33,29 head=0 chest=0 down",
+          "4 Fighting Bull party 34,33 head=0 chest=0 down",
+          "5 Kenneth party 34,32 head=17 chest=0 down",
+          "6 SLEDGE foe 32,29 head=18 chest=2",
+          "7 SLEDGE foe 33,31 head=18 chest=18",
+          "8 SLEDGE foe 34,32 head=18 chest=18"
+        ],
+        "round": 39,
+        "site": -1,
         "stage": 5,
+        "turn": 9,
         "verdict": 1
       },
-      "note": "那一場敗北，回到野外"
-    },
-    {
-      "step": 1533,
+      "scene": "flow:town",
+      "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
+        "town": 7,
+        "x": 59,
+        "y": 0
+      },
       "world": {
+        "day": 2,
+        "mode": 0,
+        "month": 4,
+        "sub_x": 2,
+        "sub_y": 7,
+        "ticks": 3360,
+        "time_index": 1,
+        "x": 54,
+        "y": 13
+      }
+    },
+    {
+      "step": 3818,
+      "note": "戰後正常回野外，兩名下注者金冠214／442",
+      "scene": "flow:town",
+      "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
+        "party": [
+          "Theodoric gold=0 wounds=16 reported=0 quests=0,0,0,0,0,0 carried=8",
+          "Poontang gold=214 wounds=18 reported=0 quests=0,4,0,0,0,0 carried=8",
+          "Olear gold=1777 wounds=16 reported=0 quests=0,0,0,0,0,0 carried=8",
+          "Moraine gold=2149 wounds=6 reported=0 quests=0,0,0,0,0,0 carried=11",
+          "Fighting Bull gold=442 wounds=1 reported=0 quests=0,0,0,0,0,0 carried=9",
+          "Kenneth gold=815 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=10"
+        ],
+        "town": 7,
+        "x": 59,
+        "y": 0
+      },
+      "world": {
+        "day": 2,
+        "mode": 0,
+        "month": 4,
+        "sub_x": 4,
+        "sub_y": 4,
+        "ticks": 3260,
+        "time_index": 1,
+        "x": 54,
+        "y": 13
+      }
+    },
+    {
+      "step": 3822,
+      "note": "世界55,13競技場門口",
+      "scene": "flow:town",
+      "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
+        "town": 7,
+        "x": 59,
+        "y": 0
+      },
+      "world": {
+        "day": 2,
+        "mode": 2,
+        "month": 4,
+        "sub_x": 0,
+        "sub_y": 4,
+        "ticks": 3020,
+        "time_index": 1,
         "x": 55,
-        "y": 13,
-        "mode": 2
-      },
-      "note": "走到競技場那一格：圖示列剩 DOOR／U-TURN"
+        "y": 13
+      }
     },
     {
-      "step": 1534,
+      "step": 3823,
+      "note": "競技場選人清單",
+      "scene": "flow:town",
       "town": {
-        "mode": 2
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 2,
+        "town": 7,
+        "x": 59,
+        "y": 0
       },
-      "note": "DOOR：「Which one wishs to fight?」"
+      "world": {
+        "day": 2,
+        "mode": 2,
+        "month": 4,
+        "sub_x": 0,
+        "sub_y": 4,
+        "ticks": 3020,
+        "time_index": 1,
+        "x": 55,
+        "y": 13
+      }
     },
     {
-      "step": 1535,
-      "town": {
-        "mode": 2
-      },
-      "note": "反白移到 Moraine 再確定：「Are you sure you wish to enter?」"
-    },
-    {
-      "step": 1536,
-      "town": {
-        "mode": 2
-      },
-      "note": "答應：換到賭場，「You follow him down a tunnel…」"
-    },
-    {
-      "step": 1537,
-      "town": {
-        "mode": 2
-      },
-      "note": "「Do any of you wish to bet?」"
-    },
-    {
-      "step": 1538,
-      "town": {
-        "mode": 2
-      },
-      "note": "答是：哪一位要押的清單（選到上場那一位會被擋）"
-    },
-    {
-      "step": 1539,
-      "town": {
-        "mode": 2
-      },
-      "note": "選 Poontang：「How much?」讀兩位數"
-    },
-    {
-      "step": 1540,
-      "town": {
-        "mode": 2
-      },
-      "note": "送出 25：「Betting on your friend?」"
-    },
-    {
-      "step": 1541,
-      "town": {
-        "mode": 2
-      },
-      "note": "第二注押 Fighting Bull 的 10 賭她會輸：「Good friends, eh?」"
-    },
-    {
-      "step": 1556,
+      "step": 3847,
+      "note": "Theodoric一名上場、五名觀眾、唯一TROLL對手",
       "battle": {
+        "encounter_text": [
+          "YOU ENCOUNTER THE",
+          "FEARSOME CREATURES OF",
+          "YOUR QUEST!"
+        ],
+        "monster": "TROLL",
+        "prompt": 0,
+        "quest_done": 0,
+        "roster": [
+          "0 Theodoric party 20,31 head=16 chest=16",
+          "1 Poontang watch 16,25 head=16 chest=16",
+          "2 Olear watch 16,35 head=15 chest=15",
+          "3 Moraine watch 47,36 head=15 chest=15",
+          "4 Fighting Bull watch 47,30 head=14 chest=14",
+          "5 Kenneth watch 47,31 head=17 chest=17",
+          "6 TROLL foe 22,31 head=24 chest=24"
+        ],
+        "round": 0,
+        "site": -1,
         "stage": 1,
-        "site": -1
+        "turn": 0,
+        "verdict": 0
       },
-      "note": "答否：開打，一隻，等級是實得位階加一；場上只有 Moraine 一名參戰"
+      "scene": "flow:town",
+      "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
+        "town": 7,
+        "x": 59,
+        "y": 0
+      },
+      "world": {
+        "day": 2,
+        "mode": 2,
+        "month": 4,
+        "sub_x": 0,
+        "sub_y": 4,
+        "ticks": 3020,
+        "time_index": 1,
+        "x": 55,
+        "y": 13
+      }
     },
     {
-      "step": 1776,
+      "step": 4073,
+      "note": "單挑第9回合自然敗北",
       "battle": {
-        "stage": 5,
-        "verdict": 1,
         "exec_text": [
           "The TROLL has defeated you!"
-        ]
+        ],
+        "monster": "TROLL",
+        "prompt": 10,
+        "quest_done": 0,
+        "result_picture": 1,
+        "roster": [
+          "0 Theodoric party 21,30 head=16 chest=0 down",
+          "1 Poontang watch 16,25 head=16 chest=16",
+          "2 Olear watch 16,35 head=15 chest=15",
+          "3 Moraine watch 47,36 head=15 chest=15",
+          "4 Fighting Bull watch 47,30 head=14 chest=14",
+          "5 Kenneth watch 47,31 head=17 chest=17",
+          "6 TROLL foe 20,31 head=24 chest=24"
+        ],
+        "round": 9,
+        "site": -1,
+        "stage": 5,
+        "turn": 7,
+        "verdict": 1
       },
-      "note": "競技場那一場第 10 回合敗北"
+      "scene": "flow:town",
+      "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
+        "town": 7,
+        "x": 59,
+        "y": 0
+      },
+      "world": {
+        "day": 2,
+        "mode": 2,
+        "month": 4,
+        "sub_x": 0,
+        "sub_y": 4,
+        "ticks": 3020,
+        "time_index": 1,
+        "x": 55,
+        "y": 13
+      }
     },
     {
-      "step": 1777,
+      "step": 4074,
+      "note": "賭金結算，Poontang189、Fighting Bull452",
       "battle": {
-        "stage": 5,
-        "verdict": 1,
         "exec_text": [
           "Poontang loses a bet!",
           "Fighting Bull wins a bet!"
-        ]
+        ],
+        "monster": "TROLL",
+        "prompt": 10,
+        "quest_done": 0,
+        "result_picture": 1,
+        "round": 9,
+        "site": -1,
+        "stage": 5,
+        "turn": 7,
+        "verdict": 1
       },
+      "scene": "flow:town",
       "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
         "party": [
-          "Poontang gold=189 wounds=11 reported=0 quests=0,4,0,0,0,0 carried=10",
-          "Moraine gold=2149 wounds=10 reported=0 quests=0,0,0,0,0,0 carried=13",
-          "Fighting Bull gold=452 wounds=29 reported=0 quests=0,0,0,0,0,0 carried=14",
-          "Kenneth gold=815 wounds=25 reported=0 quests=0,0,0,0,0,0 carried=12",
-          "Sharakan gold=1943 wounds=24 reported=0 quests=1,0,0,0,0,0 carried=10",
-          "Olear gold=1777 wounds=28 reported=0 quests=0,0,0,0,0,0 carried=11"
-        ]
+          "Theodoric gold=0 wounds=16 reported=0 quests=0,0,0,0,0,0 carried=8",
+          "Poontang gold=189 wounds=18 reported=0 quests=0,4,0,0,0,0 carried=8",
+          "Olear gold=1777 wounds=16 reported=0 quests=0,0,0,0,0,0 carried=8",
+          "Moraine gold=2149 wounds=6 reported=0 quests=0,0,0,0,0,0 carried=11",
+          "Fighting Bull gold=452 wounds=1 reported=0 quests=0,0,0,0,0,0 carried=9",
+          "Kenneth gold=815 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=10"
+        ],
+        "town": 7,
+        "x": 59,
+        "y": 0
       },
-      "note": "沒有升階；賭金整排取負後結算：Poontang 214 → 189、Fighting Bull 442 → 452；傷勢是路上那一場伏擊留下的"
+      "world": {
+        "day": 2,
+        "mode": 2,
+        "month": 4,
+        "sub_x": 0,
+        "sub_y": 4,
+        "ticks": 3020,
+        "time_index": 1,
+        "x": 55,
+        "y": 13
+      }
+    },
+    {
+      "step": 4075,
+      "note": "回野外，傷勢與持物同步",
+      "scene": "flow:town",
+      "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
+        "party": [
+          "Theodoric gold=0 wounds=38 reported=0 quests=0,0,0,0,0,0 carried=2",
+          "Poontang gold=189 wounds=18 reported=0 quests=0,4,0,0,0,0 carried=8",
+          "Olear gold=1777 wounds=16 reported=0 quests=0,0,0,0,0,0 carried=8",
+          "Moraine gold=2149 wounds=6 reported=0 quests=0,0,0,0,0,0 carried=11",
+          "Fighting Bull gold=452 wounds=1 reported=0 quests=0,0,0,0,0,0 carried=9",
+          "Kenneth gold=815 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=10"
+        ],
+        "town": 7,
+        "x": 59,
+        "y": 0
+      },
+      "world": {
+        "day": 2,
+        "mode": 2,
+        "month": 4,
+        "sub_x": 0,
+        "sub_y": 4,
+        "ticks": 3020,
+        "time_index": 1,
+        "x": 55,
+        "y": 13
+      }
+    },
+    {
+      "step": 4146,
+      "note": "正常回城鎮2入口",
+      "scene": "flow:town",
+      "town": {
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": true,
+        "mode": 0,
+        "town": 7,
+        "x": 59,
+        "y": 0
+      },
+      "world": {
+        "day": 2,
+        "mode": 1,
+        "month": 4,
+        "sub_x": 7,
+        "sub_y": 7,
+        "ticks": 300,
+        "time_index": 4,
+        "x": 51,
+        "y": 4
+      }
+    },
+    {
+      "step": 4189,
+      "note": "正常抵達免費旅館門口",
+      "scene": "flow:town",
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": false,
+        "mode": 1,
+        "town": 2,
+        "x": 36,
+        "y": 19
+      }
+    },
+    {
+      "step": 4204,
+      "note": "六人住宿保存完成",
+      "scene": "flow:town",
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 10,
+          "name": "The Quiet Cove Inn"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 2,
+        "x": 36,
+        "y": 19
+      }
     }
   ],
   "checkpoints": [
     {
-      "step": 1533,
-      "file": "step-1533.png",
-      "shows": "競技場那一格的圖示列"
+      "step": 0,
+      "file": "step-000.png",
+      "shows": "真正標題開場，未載入存檔"
     },
     {
-      "step": 1534,
-      "file": "step-1534.png",
-      "shows": "The Arena／The Tester 與「誰要上場」的清單，肖像是 COMBPICS 第 6 張"
+      "step": 17,
+      "file": "step-017.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1535,
-      "file": "step-1535.png",
-      "shows": "「誰要上場」清單反白移到第二名"
+      "step": 58,
+      "file": "step-058.png",
+      "shows": "正常招募六人，Theodoric金冠1009"
     },
     {
-      "step": 1536,
-      "file": "step-1536.png",
-      "shows": "\"Are you sure you wish to enter?\""
+      "step": 64,
+      "file": "step-064.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1537,
-      "file": "step-1537.png",
-      "shows": "賭場：A Gambling Booth／The Bet Taker 與那段敘述，肖像換成 COMBPICS 第 5 張"
+      "step": 66,
+      "file": "step-066.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1538,
-      "file": "step-1538.png",
-      "shows": "\"Do any of you wish to bet?\""
+      "step": 67,
+      "file": "step-067.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1539,
-      "file": "step-1539.png",
-      "shows": "哪一位要押：上場那一位也列在裡面"
+      "step": 71,
+      "file": "step-071.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1540,
-      "file": "step-1540.png",
-      "shows": "\"How much?\"，還沒輸入"
+      "step": 72,
+      "file": "step-072.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1541,
-      "file": "step-1541.png",
-      "shows": "\"How much?\" 與打到一半的金額"
+      "step": 73,
+      "file": "step-073.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1556,
-      "file": "step-1556.png",
-      "shows": "開打：滿版的對手圖"
+      "step": 74,
+      "file": "step-074.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1776,
-      "file": "step-1776.png",
-      "shows": "\"The TROLL has defeated you!\""
+      "step": 75,
+      "file": "step-075.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
     },
     {
-      "step": 1777,
-      "file": "step-1777.png",
-      "shows": "兩行賭金結算：Poontang loses a bet!、Fighting Bull wins a bet!"
+      "step": 76,
+      "file": "step-076.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 77,
+      "file": "step-077.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 78,
+      "file": "step-078.png",
+      "shows": "Weapons Master正常訓練Club攻擊2點完成"
+    },
+    {
+      "step": 85,
+      "file": "step-085.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 94,
+      "file": "step-094.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 95,
+      "file": "step-095.png",
+      "shows": "正常付學費210及住宿56後保存，金冠743，帳面位階1、實得2"
+    },
+    {
+      "step": 3817,
+      "file": "step-3817.png",
+      "shows": "路上SLEDGE第39回合自然敗北"
+    },
+    {
+      "step": 3818,
+      "file": "step-3818.png",
+      "shows": "戰後正常回野外，兩名下注者金冠214／442"
+    },
+    {
+      "step": 3822,
+      "file": "step-3822.png",
+      "shows": "世界55,13競技場門口"
+    },
+    {
+      "step": 3823,
+      "file": "step-3823.png",
+      "shows": "競技場選人清單"
+    },
+    {
+      "step": 3824,
+      "file": "step-3824.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3825,
+      "file": "step-3825.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3826,
+      "file": "step-3826.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3827,
+      "file": "step-3827.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3828,
+      "file": "step-3828.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3829,
+      "file": "step-3829.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3830,
+      "file": "step-3830.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3831,
+      "file": "step-3831.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3832,
+      "file": "step-3832.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3833,
+      "file": "step-3833.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3834,
+      "file": "step-3834.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3835,
+      "file": "step-3835.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3836,
+      "file": "step-3836.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3837,
+      "file": "step-3837.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3838,
+      "file": "step-3838.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3839,
+      "file": "step-3839.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3840,
+      "file": "step-3840.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3841,
+      "file": "step-3841.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3842,
+      "file": "step-3842.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3843,
+      "file": "step-3843.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3844,
+      "file": "step-3844.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3845,
+      "file": "step-3845.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3846,
+      "file": "step-3846.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 3847,
+      "file": "step-3847.png",
+      "shows": "Theodoric一名上場、五名觀眾、唯一TROLL對手"
+    },
+    {
+      "step": 3848,
+      "file": "step-3848.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4070,
+      "file": "step-4070.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4071,
+      "file": "step-4071.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4072,
+      "file": "step-4072.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4073,
+      "file": "step-4073.png",
+      "shows": "單挑第9回合自然敗北"
+    },
+    {
+      "step": 4074,
+      "file": "step-4074.png",
+      "shows": "賭金結算，Poontang189、Fighting Bull452"
+    },
+    {
+      "step": 4075,
+      "file": "step-4075.png",
+      "shows": "回野外，傷勢與持物同步"
+    },
+    {
+      "step": 4146,
+      "file": "step-4146.png",
+      "shows": "正常回城鎮2入口"
+    },
+    {
+      "step": 4147,
+      "file": "step-4147.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4189,
+      "file": "step-4189.png",
+      "shows": "正常抵達免費旅館門口"
+    },
+    {
+      "step": 4190,
+      "file": "step-4190.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4191,
+      "file": "step-4191.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4192,
+      "file": "step-4192.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4196,
+      "file": "step-4196.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4197,
+      "file": "step-4197.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4198,
+      "file": "step-4198.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4199,
+      "file": "step-4199.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4200,
+      "file": "step-4200.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4201,
+      "file": "step-4201.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4202,
+      "file": "step-4202.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4203,
+      "file": "step-4203.png",
+      "shows": "正常路線關鍵畫格；完整收據另記繁中與真實視窗畫格"
+    },
+    {
+      "step": 4204,
+      "file": "step-4204.png",
+      "shows": "六人住宿保存完成"
     }
   ],
-  "scene": "play"
+  "save": {
+    "file": "workplace/arena-natural-20261004/formal-en/save.json",
+    "expect": {
+      "schema": "kol-save-v3",
+      "party": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "location.town": 2,
+      "location.x": 36,
+      "location.y": 19,
+      "characters[0].sheet.rank": 1,
+      "characters[0].sheet.adventure_points": 474,
+      "characters[0].sheet.weapons[1].offence_raw": 200,
+      "characters[1].gold": 189,
+      "characters[4].gold": 452
+    }
+  },
+  "not_claimed": [
+    "G03 normal playability chain only; no original whole-battle same-state or RNG parity",
+    "arena natural loss demonstrated; win/rank increment branch not exercised",
+    "monster four-set schema decision remains pending",
+    "Linux actual execution only in this receipt; no Windows/macOS real-machine acceptance"
+  ],
+  "rights": "local-only screenshots and saves; no public packaging or upload",
+  "historical_controlled_plan": "workplace/arena-natural-20261004/parent-inputs/docs/verification/player-path/arena.json",
+  "correction_receipt": "docs/verification/cjk-sheet-visibility-20261004/receipt.json"
 }

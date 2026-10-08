@@ -94,7 +94,7 @@ func (m *Member) SwapQuestItem(b *QuestBuilding) (slot int) {
 				if reward != nil {
 					m.Backpack[i] = *reward
 				} else {
-					m.Backpack = append(m.Backpack[:i], m.Backpack[i+1:]...)
+					m.clearPack(i)
 				}
 			}
 		case slot-1-BackpackSlots < WornSlots:

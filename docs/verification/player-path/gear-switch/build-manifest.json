@@ -1,0 +1,75 @@
+{
+  "schema": "kol-player-path-build/1",
+  "date": "2026-10-01",
+  "base_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+  "dirty_worktree": true,
+  "build_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "toolchain": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+    "go": "1.26.7",
+    "ebitengine": "2.9.9"
+  },
+  "evidence": "RE-170初始空物品修正後，正常按鍵／受控輸入與里程碑驗證；不宣稱原版完整對拍",
+  "rights": "原作衍生PNG僅限既有private GitHub特例；原始輸入與存檔留本機",
+  "path": "gear-switch",
+  "input": {
+    "source_name": "Knights-of-legend.zip",
+    "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "asset_manifest": "assets/original-derived-png/ega/manifest.json",
+    "asset_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+    "seed": 1,
+    "load": "workplace/saves/quest-chain.json",
+    "load_sha256_without_saved_at": "b3a023d4a0598f8a0ef28b02c672033f45e96bec26d9465a2c866c894922a112",
+    "controlled_ambush": true,
+    "character_roster_sha256": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "ambush_rolls": "1,100,23",
+    "effective_load": "workplace/inventory-empty-slots-20261001/all-before/quest-chain/save.json",
+    "effective_load_sha256": "8460ca49630d55cc37ca9179ac81c69b5d5b58bdbbe95b3a1efc488bafe2646b"
+  },
+  "plan_sha256": "445af33856f43ff356625393816871e915ed91e5f6a234aae11ec989429250ce",
+  "trace_sha256": "311375005081feabdfd04afcc0124e46e99d1d44f43f6ce2cd65bb1915ca63ac",
+  "receipt_sha256": "813c5b8d5d7298783376afd1bd78ccd9304757ed16030af4d9446344fd5a6b93",
+  "frames": [
+    {
+      "step": 130,
+      "file": "step-130.png",
+      "sha256": "57fee9d2ac22f045d56ee78401c45b2ed447d5359f481fc91cbe921f605e13b5"
+    },
+    {
+      "step": 181,
+      "file": "step-181.png",
+      "sha256": "a82c33612158490e083cd767bebb1d85ae3d6780ea9bcce1d363712bbafc5a08"
+    }
+  ],
+  "inventory_review": "docs/verification/inventory-empty-slots-20261001/all-path-review.json",
+  "previous_baseline": "workplace/inventory-empty-slots-20261001/baseline-before/gear-switch",
+  "run_spec": "workplace/inventory-empty-slots-20261001/all-before/gear-switch/shots.spec",
+  "run_spec_sha256": "5576739b81a56817ed971b6f98619f436fbd3e043113c43a8a072a05b5da94fe",
+  "inputs_sha256": {
+    "workplace/cjk-edge-20261001/kol-edge-fixed": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "tools/check_player_paths.py": "a282bc533b138304b1c3699defde015a28b3c78ef77f9c37de879ca827bf16ff",
+    "tools/replay_player_path.py": "4889eb1087e1625c7a672ba05ba9f53d8dda590682ae7d0b174b75d6c102672c",
+    "tools/verify_player_path.py": "40e9b201fe657fd98061e2d521d16421868c96c6d49f40eecf8b94871129d6bc",
+    "tools/verify_full_path.py": "0113fc4fc05cae52b5815366a77ae7c58bfbf1b223747bce75546c1b1628cc1d",
+    "assets/original-derived-data/book-open-animation.json": "b7c7a9498f4fc1edf4754730718d2272be2b9f10486db14cbafd618cbc891e73",
+    "assets/original-derived-data/character-creation.json": "878fa12acf5749acb25d47421455caaa1ee9f46dcaa6de64fdc79864822926dc",
+    "assets/original-derived-data/creation-start.json": "4d32f3a56bca422f85317ab88959ace98687e459ed9f9d8d2f475b1810667c1a",
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/magic.json": "eb8579370aeae74efd32bcb9fb4c8eebd2a7bf99d18395433709fa05fb648aba",
+    "assets/original-derived-data/monsters.json": "39aeef6efb5388c947f721e8ea75847106526c869090aa185bad912aa4fce992",
+    "assets/original-derived-data/portrait-layout.json": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df",
+    "assets/original-derived-data/quest-sites.json": "ed6a1238a1eb1e51008db7b84fa4234735c41283a28ce9c48a7eaf679151dd2a",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-data/town-keywords.json": "98fecebce452ea48528356e63e9575cc1ac62780fba988bc80e5b4a50ef9f9af",
+    "assets/original-derived-data/town-text.json": "3f75b91691cedbbe99b83af42771d3656ed0c9a0aa67c12352ada7e0c9513320",
+    "assets/original-derived-data/ui-text.json": "886093e4ed6d8ba13beba63a6e6f0b946bc640658983c2e1eca397c35ac76b5d",
+    "assets/original-derived-data/weapon-templates.json": "74bad47083da8c41dd3ac807418bde45d555b5fa5e112e217d9934015d36ccab",
+    "assets/original-derived-data/wilderness-scenes.json": "9d3547e32833ea28296ede6286b3217d5e5098f9adb58ea091152679b92858c8",
+    "assets/original-derived-data/world-map.json": "73441fd1f956edb08957a44a28c79df4845447a1e102346c4de6751d1947e5df",
+    "assets/ui-font/LICENSE-NotoSansCJK.txt": "27a8d920f9707034bb2879cb6d632334aa8d99e204c744bf89f5f21d8537fc21",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318"
+  }
+}

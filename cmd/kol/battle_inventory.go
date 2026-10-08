@@ -11,7 +11,12 @@ func townBackpack(items []*roster.Item) []town.Good {
 	for _, item := range items {
 		if good := townGood(item); good != nil {
 			out = append(out, *good)
+		} else {
+			out = append(out, town.Good{})
 		}
+	}
+	for len(out) > 0 && out[len(out)-1].Name == "" {
+		out = out[:len(out)-1]
 	}
 	return out
 }
@@ -40,7 +45,7 @@ func battleGood(i *battle.Item) *town.Good {
 }
 
 // writeBattleParty 依 SPEC-027 共同出口折算傷勢，保留本場已發生的物品修改。
-// 未知掉落機率及額外敗北處置另列缺口，不在此猜測。
+// 搜刮由State在最後訊息完成後一次性結算；本段同步typed data與原始Carried。
 func (g *game) writeBattleParty(s *battle.State) {
 	if g.play == nil || (s.Verdict != battle.VerdictWon && s.Verdict != battle.VerdictFled && s.Verdict != battle.VerdictLost) {
 		return
@@ -59,6 +64,12 @@ func (g *game) writeBattleParty(s *battle.State) {
 		}
 		m, result := &g.play.Party[i], s.Party[a.Member]
 		m.Wounds = battle.PostBattleWounds(result.Wounds, a.Damage)
+		if result.GoldLooted {
+			m.Gold = 0
+		}
+		for pos, item := range result.WornItems {
+			m.Worn[pos] = battleGood(item)
+		}
 		for pos, item := range a.Armour {
 			m.Worn[pos] = battleGood(item)
 		}
@@ -67,6 +78,16 @@ func (g *game) writeBattleParty(s *battle.State) {
 		for _, item := range result.PackItems {
 			if good := battleGood(item); good != nil {
 				m.Backpack = append(m.Backpack, *good)
+			} else {
+				m.Backpack = append(m.Backpack, town.Good{})
+			}
+		}
+		for len(m.Backpack) > 0 && m.Backpack[len(m.Backpack)-1].Name == "" {
+			m.Backpack = m.Backpack[:len(m.Backpack)-1]
+		}
+		for slot, cleared := range result.LootCleared {
+			if cleared && 1+slot < len(m.Carried) {
+				m.Carried[1+slot] = make([]byte, town.CarriedStride)
 			}
 		}
 		m.SyncCarried()

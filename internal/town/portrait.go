@@ -29,17 +29,8 @@ func goodItem(g *Good) *portrait.Item {
 // carriedItem 走另一條路：從身上那一格的原始十六 byte 讀同樣四個欄位。
 // 讀檔回來的隊伍只有 Carried（存檔存的是原始位元組），typed 的 Worn 是空的。
 func carriedItem(rec []byte) *portrait.Item {
-	if len(rec) < 16 {
-		return nil
-	}
-	empty := true
-	for _, b := range rec {
-		if b != 0 {
-			empty = false
-			break
-		}
-	}
-	if empty {
+	// RE-175：sub_18F3A只以首byte判空，未用尾端不代表有效裝備。
+	if len(rec) < 16 || rec[0] == 0 {
 		return nil
 	}
 	return &portrait.Item{Class: int(rec[13]), Style: int(rec[14] & 0x0F),

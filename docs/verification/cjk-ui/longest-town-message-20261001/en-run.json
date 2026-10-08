@@ -1,0 +1,21 @@
+{
+  "command": [
+    "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "-scene",
+    "flow",
+    "-seed",
+    "1",
+    "-lang",
+    "en",
+    "-flow-script",
+    "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R D D D D D D R D R R D D D D D D D D L > RET D D D D D L L RET SPACE RET SPACE",
+    "-shot-dir",
+    "workplace/cjk-longest-message-20261001/en",
+    "-shot-steps",
+    "90,91,92,93,94",
+    "-trace",
+    "workplace/cjk-longest-message-20261001/en/trace.json"
+  ],
+  "returncode": 0,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4"
+}

@@ -1,0 +1,15 @@
+{
+  "town": 5,
+  "start": [
+    62,
+    57
+  ],
+  "goal": [
+    40,
+    19
+  ],
+  "method": "固定格子 PNG 與 typed 不可通行圖塊的四方向最短路，遇門用正式 U-TURN 返回地圖",
+  "steps": 100,
+  "world_route_tokens": 2976,
+  "total_tokens": 3079
+}

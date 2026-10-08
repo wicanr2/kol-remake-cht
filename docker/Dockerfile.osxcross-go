@@ -13,7 +13,8 @@
 # 而且 `GOPROXY=off` 也照樣成立。
 #
 # SDK 的授權只允許在 Apple 硬體上使用：**這個 image 只留本機，不上傳、不散布。**
-FROM eob-remake-go:1.26.7-ebiten2.9.9-audio AS gobase
+ARG KOL_GO_BASE=eob-remake-go:1.26.7-ebiten2.9.9-audio
+FROM ${KOL_GO_BASE} AS gobase
 FROM crazymax/osxcross:15.5-debian AS osxcross
 
 FROM ubuntu:24.04

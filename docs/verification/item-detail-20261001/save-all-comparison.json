@@ -1,0 +1,40 @@
+{
+  "runs": [
+    {
+      "phase": "before",
+      "lang": "en",
+      "keys": 73,
+      "saved_at": "2026-10-01T09:40:27Z",
+      "binary_sha256": "6ffca0ddcaacd88b0d0bca899d4c23aad613654b8ba0c230f802dca72f929bd2",
+      "save_sha256": "4281eb07c362b0f8ac879e06f874c15591b104e93db16fd0ae0e517989285f9e"
+    },
+    {
+      "phase": "before",
+      "lang": "zh-Hant",
+      "keys": 73,
+      "saved_at": "2026-10-01T09:40:37Z",
+      "binary_sha256": "6ffca0ddcaacd88b0d0bca899d4c23aad613654b8ba0c230f802dca72f929bd2",
+      "save_sha256": "184b4c94ed5df352c5bd50a0effd824eff477d883f27ce68ebc2693312439a8d"
+    },
+    {
+      "phase": "after",
+      "lang": "en",
+      "keys": 73,
+      "saved_at": "2026-10-01T09:40:41Z",
+      "binary_sha256": "351464d1bbff6848defd94e2346b7c4c4741e7299f0842abe340e855f6b10ec2",
+      "save_sha256": "3a3a9e4a532a269d5ee260c65691d81e57fb1df21eb7e14d62f94cdd29ce7b59"
+    },
+    {
+      "phase": "after",
+      "lang": "zh-Hant",
+      "keys": 73,
+      "saved_at": "2026-10-01T09:40:52Z",
+      "binary_sha256": "351464d1bbff6848defd94e2346b7c4c4741e7299f0842abe340e855f6b10ec2",
+      "save_sha256": "d0a56443a7aa79744c688f057d445de99cd4c65d1442c5b428316964a391b6f0"
+    }
+  ],
+  "excluded_fields": [
+    "saved_at"
+  ],
+  "equal": true
+}

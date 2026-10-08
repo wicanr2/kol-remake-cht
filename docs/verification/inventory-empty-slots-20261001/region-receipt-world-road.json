@@ -1,0 +1,265 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "world-road",
+  "description": "野外循路的對拍。`payload3[0x200 + 磚塊]` 不是布林值而是八個方向的道路位元遮罩（方向 0 是正北順時針數到 7，方向 d 對應位元 1 << (7−d)）；ROAD（圖示 17h）沿目前方向走，方向斷了就往兩側各找三格，SIGNPOST（18h）排除目前方向另挑一條。走正東西南北時隊伍若偏離格子中線會改走斜向拉回來，而那一步只准落在道路磚塊上（`word_37D28`）。圖示列的框色有三種：白框是目前這一格，被選過又離開的是青色，其餘是亮藍。七次 ROAD 加一次 SIGNPOST 的位置、地形標籤與圖示列都與原版逐 byte 相同。原版畫格挑的是隊伍那個點與 remake 同相的那一張——那個點是 XOR 閃爍，取樣落在哪一相不是行為差異。",
+  "pair_count": 10,
+  "pass_count": 10,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "站到路上：地圖視窗",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-stand.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-450.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 52,
+        "width": 224,
+        "height": 110
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            160,
+            100,
+            18,
+            15
+          ],
+          "differing_pixels": 56
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "站到路上：時段與地形標籤框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-stand.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-450.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 8,
+        "y": 140,
+        "width": 80,
+        "height": 20
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "站到路上：ROAD 與 SIGNPOST 圖示列",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-stand.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-450.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "循路三步：地圖視窗",
+      "remake": "docs/verification/remake-parity/shots/world/road-follow3.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-552.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 52,
+        "width": 224,
+        "height": 110
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            160,
+            100,
+            18,
+            15
+          ],
+          "differing_pixels": 56
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "循路三步：時段與地形標籤框",
+      "remake": "docs/verification/remake-parity/shots/world/road-follow3.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-552.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 8,
+        "y": 140,
+        "width": 80,
+        "height": 20
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "循路七步：地圖視窗",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-follow7.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-691.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 52,
+        "width": 224,
+        "height": 110
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            160,
+            100,
+            18,
+            15
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "循路七步：時段與地形標籤框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-follow7.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-691.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 8,
+        "y": 140,
+        "width": 80,
+        "height": 20
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "循路七步：圖示列",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-follow7.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-691.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "按 SIGNPOST 換另一條路：地圖視窗",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-signpost.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-775.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 52,
+        "width": 224,
+        "height": 110
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            160,
+            100,
+            18,
+            15
+          ],
+          "differing_pixels": 64
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "按 SIGNPOST 換另一條路：圖示列（白框回到第 0 格、原本那格轉青）",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-road-signpost.png",
+      "original": "docs/verification/character-ui/world-road-run1/frames/frame-775.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    }
+  ],
+  "metadata": {
+    "scope": "RE-164修正後的正常截圖，原版圖、比較矩形、游標例外與必須相同區均沿用原計畫；不宣稱天候框的原版GUI同狀態對拍",
+    "previous_plan": "docs/verification/remake-parity/plan-world-road.json",
+    "previous_plan_sha256": "775ef8a22d01c5b4d3a97165dec2729f894024163c52b6ebfd29a4fc7d1c64f8",
+    "weather_contract": "docs/spec/026-weather-animation.md",
+    "rights": "衍生PNG只適用private GitHub特例"
+  }
+}

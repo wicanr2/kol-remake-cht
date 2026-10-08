@@ -83,8 +83,9 @@ func TestShootBlockedByActor(t *testing.T) {
 		t.Fatalf("應該扣掉體型的一半，得到 score=%d block=%d", shot.Score, shot.Block)
 	}
 	shot = s.Shoot(0, 10, 17, 30)
-	if !shot.Stopped || shot.Target != 2 {
-		t.Fatalf("擋不過去應該停在那個人身上，得到 %+v", shot)
+	// RE-221：原版在同一格扣 820 次，16 位元回繞後繼續到終點。
+	if shot.Stopped || shot.Target != -1 || shot.Score != 32766 || shot.Block != MissileActor || shot.Y != 17 {
+		t.Fatalf("原版回繞後應該繼續飛行，得到 %+v", shot)
 	}
 	// 目標格上的人不算擋路（`0x260BA`）。
 	shot = s.Shoot(0, 10, 13, 30)
@@ -183,5 +184,42 @@ func TestResolveMissileStray(t *testing.T) {
 	out = ResolveMissile(&a, &d, 2, -500, false, &fixedRoll{values: []int{99}})
 	if !out.Miss || out.Margin != 500 {
 		t.Fatalf("命中值是負的應該落空 500，得到 %+v", out)
+	}
+}
+
+// RE-224：原版0x27309..0x27356依行動姿態補投射防禦，除十前最多加400。
+func TestMissileDefencePosture(t *testing.T) {
+	for _, c := range []struct {
+		name                                  string
+		command, style, guard, mounted, bonus int
+	}{
+		{"休息", CmdRest, 0, 1, 0, 0},
+		{"徒手無防禦", CmdUnarmed, 0, 0, 0, 0},
+		{"徒手全力防禦", CmdUnarmed, 0, 1, 0, 400},
+		{"徒手退縮", CmdUnarmed, 0, 2, 0, 200},
+		{"持械全力防禦", CmdWeapon, 0, 1, 0, 400},
+		{"移動", CmdMove, IconMoveWalk, 0, 0, 200},
+		{"空中移動", CmdMountedMove, IconMoveWalk, 0, 1, 400},
+		{"降落", CmdLand, 0, 0, 0, 200},
+		{"空中休息", CmdRest, 0, 0, 1, 200},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			a := Actor{Quickness: 100, ShieldGrade: NoShield, Command: c.command, Style: c.style, Guard: c.guard, Flag1E: c.mounted}
+			if got, want := a.MissileDefenceValue(), 50+c.bonus; got != want {
+				t.Fatalf("投射防禦基值=%d，原版應為%d", got, want)
+			}
+		})
+	}
+}
+
+func TestMissileDefenceNormalRoundFive(t *testing.T) {
+	d := Actor{Quickness: 116, Damage: 35, Fatigue: 40, Stamina: 183, Encumbrance: 177, ShieldGrade: NoShield, Command: CmdUnarmed, Guard: 1}
+	if got := MissileDefenceScore(d, 63); got != 56 {
+		t.Fatalf("第五回合投射防禦=%d，原版應為56", got)
+	}
+	a := Actor{Command: CmdMissile}
+	rng := &fixedRoll{values: []int{63}}
+	if out := ResolveMissile(&a, &d, 0, 39, false, rng); !out.Parried || out.Damage != 0 {
+		t.Fatalf("原版39 < 56應未命中，不擲傷害：%+v", out)
 	}
 }

@@ -59,6 +59,7 @@ const FleeAskRecord = 0x109
 // OfferFlee 在符合條件時把規劃段停在逃走那一問，回報有沒有停下來
 // （`0x21116`…`0x21146`）。
 func (s *State) OfferFlee() bool {
+	s.trackRoundEdge()
 	if !s.FleeOffer().Ask {
 		return false
 	}
@@ -163,7 +164,7 @@ func (s *State) BarFlee(rng Rand) {
 			continue
 		}
 		if (fail && a.Flag06 == 0) || s.matchesQuestItem(m.HandItem) {
-			s.DropItem(i)
+			s.forcedDrop(i)
 		}
 	}
 	s.fleeFromBar = false

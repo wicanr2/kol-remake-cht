@@ -1,13 +1,13 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "quest-chain",
- "description": "任務鏈的正常玩家路徑（#14，SPEC-014）：標題 → 書本選 Theodoric → 半途之家招募五名 → 出城 → 野外走到 4 號入城點 → 7 號門 Residence 用 MOUTH 問 `nobj` 接下 Ship Wheel 任務（地點 6）→ 出城走到地點 6 答應參戰 → 十隻 HOBGOBLIN 的戰場上 Theodoric 走到 Ship Wheel 那一格撿起（0x111 答 y，接 0x113），其餘隊員護送 → 帶著走到戰場上緣，回合末的逃走問句答 y（任務標成完成）→ 走回 4 號入城點 → 7 號門讀完進門敘述後交付，Ship Wheel 換成 Treasure Map，訊息 6／7 之後全隊回報 → 出城繞到 3 號入城點 → 半途之家 REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入。**這條收據使用受控亂數**：野外遭遇擲點前 200 次固定為 100（不遭遇），戰場內一律種子亂數。戰鬥裡的按鍵由 `tools/drive_battle_script.py`（`KOL_DRIVE_QUEST=1`）依軌跡打出。",
+ "description": "任務鏈的正常玩家路徑（#14，SPEC-014）：標題 → 書本選 Theodoric → 半途之家招募五名 → 出城 → 野外走到 4 號入城點 → 7 號門 Residence 用 MOUTH 問 `nobj` 接下 Ship Wheel 任務（地點 6）→ 出城走到地點 6 答應參戰 → 十隻 HOBGOBLIN 的戰場上 Theodoric 走到 Ship Wheel 那一格撿起（0x111 答 y，接 0x113），其餘隊員護送 → 帶著走到戰場上緣，回合末的逃走問句答 y（任務標成完成）→ 走回 4 號入城點 → 7 號門讀完進門敘述後交付，Ship Wheel 換成 Treasure Map，訊息 6／7 之後全隊回報 → 出城繞到 3 號入城點 → 半途之家 REST 住一晚並寫出存檔。全程經過 flow.Flow、town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入。**這條收據使用受控亂數**：野外遭遇擲點前 200 次固定為 100（不遭遇），戰場內一律種子亂數。戰鬥裡的按鍵由 `tools/drive_battle_script.py`（`KOL_DRIVE_QUEST=1`）依軌跡打出。 2026-10-01：維持種子 1 與原遭遇控制，7,435 個正式按鍵完成標題、招募、接任務、撿物與第九十七回合帶物逃走、回城交付、全隊回報及 v3 住宿保存。新策略加入休息並在撿物後直接尋找最近出口；傷勢依新戰鬥輸入記錄，金幣、物品、任務與回報完成條件保持不變。",
  "seed": 1,
  "load": null,
  "ambush_rolls": "100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100",
- "token_count": 7099,
+ "token_count": 7435,
  "trace": "docs/verification/player-path/quest-chain/trace.json",
- "trace_sha256": "a920f6f0bc54d18c474f61f0e774124ef5f8325941396e396b71de023c0edb39",
+ "trace_sha256": "c82df192c7af17ed556cd11e33d6b14866f405357dbed4b4d5c32a94eedc5a11",
  "milestones": [
   {
    "step": 4,
@@ -218,7 +218,7 @@
    }
   },
   {
-   "step": 4991,
+   "step": 5476,
    "token": "SPACE",
    "note": "Theodoric 走到 Ship Wheel 那一格選撿：0x111 問句",
    "scene": "flow:town",
@@ -260,7 +260,7 @@
     "monster": "HOBGOBLIN",
     "prompt": 11,
     "quest_done": 0,
-    "round": 50,
+    "round": 55,
     "site": 6,
     "stage": 2,
     "turn": 16,
@@ -268,7 +268,7 @@
    }
   },
   {
-   "step": 4996,
+   "step": 5477,
    "token": "Y",
    "note": "答 y 撿起，接 0x113",
    "scene": "flow:town",
@@ -310,7 +310,7 @@
     "monster": "HOBGOBLIN",
     "prompt": 10,
     "quest_done": 0,
-    "round": 50,
+    "round": 55,
     "site": 6,
     "stage": 2,
     "turn": 16,
@@ -318,9 +318,9 @@
    }
   },
   {
-   "step": 6722,
+   "step": 7064,
    "token": "SPACE",
-   "note": "帶著 Ship Wheel 走到戰場上緣（Y=4），回合末問逃走",
+   "note": "帶著 Ship Wheel 走到戰場邊，回合末問逃走；本輪按鍵路線與原版關鍵點的邊緣機制相同，不宣稱逐步走法一致。",
    "scene": "flow:town",
    "town": {
     "door": {
@@ -359,25 +359,7 @@
     "monster": "HOBGOBLIN",
     "prompt": 9,
     "quest_done": 0,
-    "roster": [
-     "0 Theodoric party 31,4 head=16 chest=11",
-     "1 Poontang party 23,23 head=0 chest=0 down",
-     "2 Olear party 24,24 head=14 chest=0 down",
-     "3 Moraine party 22,23 head=0 chest=0 down",
-     "4 Fighting Bull party 23,50 head=0 chest=0 down",
-     "5 Kenneth party 21,47 head=0 chest=0 down",
-     "6 HOBGOBLIN foe 34,45 head=17 chest=17",
-     "7 HOBGOBLIN foe 11,52 head=17 chest=17",
-     "8 HOBGOBLIN foe 21,56 head=17 chest=17",
-     "9 HOBGOBLIN foe 22,21 head=17 chest=17",
-     "10 HOBGOBLIN foe 25,31 head=17 chest=17",
-     "11 HOBGOBLIN foe 22,23 head=17 chest=17",
-     "12 HOBGOBLIN foe 20,15 head=15 chest=17",
-     "13 HOBGOBLIN foe 21,14 head=17 chest=17",
-     "14 HOBGOBLIN foe 19,13 head=17 chest=17",
-     "15 HOBGOBLIN foe 23,26 head=17 chest=13"
-    ],
-    "round": 84,
+    "round": 97,
     "site": 6,
     "stage": 3,
     "turn": 16,
@@ -385,7 +367,7 @@
    }
   },
   {
-   "step": 6729,
+   "step": 7065,
    "token": "Y",
    "note": "答 y 逃走：六人地點 6 欄位全部成為 2（完成），沒有接任務的人也一樣",
    "scene": "flow:town",
@@ -400,12 +382,12 @@
     "left_town": true,
     "mode": 0,
     "party": [
-     "Theodoric gold=1009 wounds=2 reported=0 quests=0,32,0,0,0,0 carried=10",
-     "Poontang gold=214 wounds=15 reported=0 quests=0,36,0,0,0,0 carried=10",
-     "Olear gold=1777 wounds=15 reported=0 quests=0,32,0,0,0,0 carried=11",
-     "Moraine gold=2149 wounds=6 reported=0 quests=0,32,0,0,0,0 carried=13",
+     "Theodoric gold=1009 wounds=3 reported=0 quests=0,32,0,0,0,0 carried=5",
+     "Poontang gold=214 wounds=16 reported=0 quests=0,36,0,0,0,0 carried=8",
+     "Olear gold=1777 wounds=9 reported=0 quests=0,32,0,0,0,0 carried=11",
+     "Moraine gold=2149 wounds=2 reported=0 quests=0,32,0,0,0,0 carried=12",
      "Fighting Bull gold=442 wounds=0 reported=0 quests=0,32,0,0,0,0 carried=14",
-     "Kenneth gold=815 wounds=19 reported=0 quests=0,32,0,0,0,0 carried=12"
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,32,0,0,0,0 carried=11"
     ],
     "took_quest": {
      "final": false,
@@ -429,7 +411,7 @@
    }
   },
   {
-   "step": 6880,
+   "step": 7216,
    "token": "RET",
    "note": "走回 4 號入城點，再進 7 號門",
    "scene": "flow:town",
@@ -450,7 +432,7 @@
    }
   },
   {
-   "step": 6881,
+   "step": 7217,
    "token": "SPACE",
    "note": "讀完進門敘述才交付：Ship Wheel 換成 Treasure Map，訊息 6／7",
    "scene": "flow:town",
@@ -472,7 +454,7 @@
    }
   },
   {
-   "step": 6882,
+   "step": 7218,
    "token": "SPACE",
    "note": "再按一鍵：全隊回報，欄位成為 3、已回報數各加一",
    "scene": "flow:town",
@@ -488,12 +470,12 @@
     "left_town": false,
     "mode": 2,
     "party": [
-     "Theodoric gold=1009 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=10",
-     "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=10",
-     "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
-     "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=13",
+     "Theodoric gold=1009 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=5",
+     "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=8",
+     "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+     "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
      "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
-     "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+     "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
     ],
     "town": 7,
     "turned_in": 1,
@@ -502,7 +484,7 @@
    }
   },
   {
-   "step": 6883,
+   "step": 7219,
    "token": "1",
    "note": "多人隊伍：按 1 選第一位開口（RE-166）",
    "scene": "flow:town",
@@ -524,7 +506,7 @@
    }
   },
   {
-   "step": 6896,
+   "step": 7232,
    "token": "RET",
    "note": "出城",
    "scene": "flow:town",
@@ -556,7 +538,7 @@
    }
   },
   {
-   "step": 7089,
+   "step": 7425,
    "token": "L",
    "note": "繞到 3 號入城點進城，走到半途之家門口",
    "scene": "flow:town",
@@ -578,7 +560,7 @@
    }
   },
   {
-   "step": 7092,
+   "step": 7428,
    "token": "1",
    "note": "多人隊伍：按 1 選第一位開口（RE-166）",
    "scene": "flow:town",
@@ -596,7 +578,7 @@
    }
   },
   {
-   "step": 7099,
+   "step": 7435,
    "token": "RET",
    "note": "REST 住一晚（扣 56 枚金幣），存檔寫出",
    "scene": "flow:town",
@@ -609,12 +591,12 @@
     "left_town": false,
     "mode": 2,
     "party": [
-     "Theodoric gold=953 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=10",
-     "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=10",
-     "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
-     "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=13",
+     "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=5",
+     "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=8",
+     "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+     "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
      "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
-     "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+     "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
     ],
     "town": 7,
     "x": 57,
@@ -630,33 +612,33 @@
    "shows": "Residence 裡接下任務"
   },
   {
-   "step": 4996,
-   "file": "step-4996.png",
+   "step": 5477,
+   "file": "step-5477.png",
    "sha256": "34d2ff6671d357ab94fb0380f46eff9f6f62524547d34cb05b3d7597c6f9b9c9",
    "shows": "撿起之後 0x113：Theodoric, this is the quest item!"
   },
   {
-   "step": 6722,
-   "file": "step-6722.png",
-   "sha256": "dc722aac4ea72c2eae8ae5fb1967fbfc5ef0bdca761f1f9966b8805ef5a7e7ad",
-   "shows": "持物者站在戰場上緣，Do you want to flee?"
+   "step": 7064,
+   "file": "step-7064.png",
+   "sha256": "f3e07d3f1b3d0039650ef28f1de95a1fbc5a1263af9c91715d8e7267ec2cd9cd",
+   "shows": "持物者站在戰場邊，Do you want to flee?"
   },
   {
-   "step": 6881,
-   "file": "step-6881.png",
+   "step": 7217,
+   "file": "step-7217.png",
    "sha256": "edba0ac4fb0d2bdaf1fd95799a9dec91acf01291ee651b812d6458850e25f6e1",
    "shows": "交付台詞（訊息 6／7），圖示列只剩 SPACEBAR"
   },
   {
-   "step": 7099,
-   "file": "step-7099.png",
+   "step": 7435,
+   "file": "step-7435.png",
    "sha256": "a5c37f85cda035535e74217dc671f6630d9db79489f47333cd10d503a13d15b2",
    "shows": "住宿之後"
   }
  ],
  "save": {
   "file": "workplace/saves/quest-chain.json",
-  "sha256_without_saved_at": "093341edfdf01df9ee46996b7ed15f414be6095627a6af445e90c3b1877b8ffa",
+  "sha256_without_saved_at": "ff52edf9152c4d455434947a5502d3da4715099e8131e4079b68752ff237afcf",
   "fields": {
    "schema": "kol-save-v3",
    "location.kind": "town",

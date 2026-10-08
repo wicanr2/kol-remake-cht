@@ -1,0 +1,54 @@
+{
+  "schema": "kol-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x211b9": {
+      "semantic": "共同出口先將重用暫存word_3AC5A清零；不是永久競技場旗標",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA原始mov word_3AC5A,0；正常出口0x211AD值2、0x21607與0x2175B值0；loot1/complete-source-private.json。"
+    },
+    "0x21249": {
+      "semantic": "原版怪物倒地計數等於總數的勝利出口將共同暫存加一",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA0x211BF..0x211CB的計數分支及0x21249 add word_3AC5A,1；loot-control-ida-private.json。"
+    },
+    "0x2175b": {
+      "semantic": "本次出口暫存非零跳過搜刮並進共同傷勢回寫；零值繼續讀搜刮門檻",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA原始cmp word_3AC5A,0／jz／jmp loc_2186E；144組固定種子完整角色與骰序對拍，正常61回合此處值0。"
+    },
+    "0x269f1": {
+      "semantic": "強制掉落先判手持首byte；為零則原記錄與地上表均不改",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA sub_269BA:0x269E4..0x269F6；12組無替代原常式，空手帶尾端殘留完整記錄保持。"
+    },
+    "0x26a2b": {
+      "semantic": "地上16格皆佔用時返回並保留手持；有空格才搬移",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA sub_269BA的掃描與0x26A2B..0x26A31分支；地上0／3／16格交叉12組原版案例。"
+    },
+    "0x26aac": {
+      "semantic": "每次搬移後將相同手持byte清零；迴圈涵蓋完整16byte",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA0x26A76..0x26AB9，原byte搬到地上0x26A9C後寫0；12組手持／地上256byte及兩軸座標核對。"
+    },
+    "0x27a29": {
+      "semantic": "傷害倒地共同收尾取消指令後呼叫sub_269BA處理手持掉落",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA sub_277F4:0x279FB..0x27A31；正常原版第24回合傷害48達門檻48，下一規劃+0x30全零。"
+    },
+    "0x20e3f": {
+      "semantic": "疲勞倒地寫頭胸0xFF並取消指令後呼叫同一sub_269BA",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA sub_1E3A8:0x20D9A..0x20E3F原始門檻、頭胸／指令寫入與CALL；hand-drop-ida-private.json。"
+    },
+    "0x2179a": {
+      "semantic": "搜刮只處理原始Side=0且sub_22866判頭或胸為0xFF的倒地隊員",
+      "confidence": "已證實",
+      "evidence": "RE-182；IDA0x21783..0x217AA及sub_22866原始+0x11／+0x13比較；144組三陣營與倒地／未倒地交叉案例，無常式替代。"
+    }
+  }
+}

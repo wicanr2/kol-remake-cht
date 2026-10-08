@@ -1,13 +1,12 @@
 # SPEC-004：OGG 音訊目錄與執行期契約
 
-狀態：**DRAFT**  
-是否授權實作：**否**
+狀態：**CONFORMED**（RE-228；限已驗收標題OGG、cue次數與正式播放）
+是否授權實作：**是**
 
 ## 目的
 
 把原版可聽事件轉成可追溯的 OGG 資產目錄，並保證 remake 執行期只讀 OGG，不直接模擬
-DOS 音訊硬體或讀取原版 executable。此規格未達 READY 前，不建立正式轉檔器、合成器或
-Ebitengine 音訊路徑。
+DOS 音訊硬體或讀取原版 executable。原版資料不進 runtime；轉換管線、合成器與 Ebitengine 音訊路徑依本規格實作。
 
 ## 已固定證據
 
@@ -28,7 +27,7 @@ Ebitengine 音訊路徑。
 - 原始定位、bytes、caller 與工具版本見 `docs/re/ida-fingerprints/`；目錄見
   `docs/re/audio-inventory.json`。
 
-## DRAFT 資產契約
+## 資產契約
 
 每個可交付 cue 至少記錄：穩定 ID、玩家觸發條件、原版函式／位址、證據等級、生成方法、
 取樣率、聲道、時長、loop、音量基準、來源權利、OGG SHA-256 與人耳驗收結果。檔名只用
@@ -57,14 +56,29 @@ Ebitengine 音訊路徑。
 - 目錄與逐 cue 欄位在 `assets/audio/manifest.json`，技術驗收收據在
   `docs/verification/audio/`。
 
-## READY gate（人耳驗收由 #4 追蹤）
+## READY 審查與執行期接線
 
-1. **人耳驗收尚未執行**，需使用者實際聆聽 `assets/audio/title-thunder.ogg`。技術解碼
-   通過不等於聽起來對。
-2. 證據審查後才可把本規格升為 READY；在那之前不建立 Ebitengine 執行期音訊路徑。
+2026-10-04使用者明確回覆「已聆聽，可接受並接正式播放」。已驗收候選SHA-256
+`0e95e887d2513161a4f07d85fad3c64d7fc538d3b61864256f787d98db85d362`保持。
+來源、格式、技術解碼及原版四段活動窗比對見既有收據；READY審查見
+[RE-228](../re/20261004-title-audio-runtime.md)。
 
-## 目前已產出的候選資產
+1. 原版閃電各連放兩次，SET每圈一次、FACE三次；同一92畫格序列每輪23 cue。
+2. 畫格先呈現，cue逐次播放，不重疊；實際播放完成後才計算該格tick等待。
+3. 音訊catalog只允許已驗收且SHA-256相符的OGG。缺檔、路徑、schema、取樣率、loop或解碼不符時拒絕，不讀原版資料或即時合成代替。
+4. 音訊狀態不進人物v3或怪物v2，不消耗遊戲亂數。離開標題停止播放。
+5. 生成PCM峰值目標−10.317 dB，既有Vorbis解碼峰值−7.5 dB；有損過衝及此次聆聽接受的音量保持，不重新正規化。
 
-`assets/audio/title-thunder.ogg`：`sub_10F75` 的規格近似合成，時長 0.961451 秒，與原版
-DOSBox-X 擷取四段非靜音視窗的平均值差 0.000581 秒。這是**待驗收的候選**，不是已授權的
-執行期資產。
+## 已驗收資產
+
+`assets/audio/title-thunder.ogg`為`sub_10F75`的規格近似合成，時長0.961451秒。
+與DOSBox-X四段活動窗平均差0.000581秒，僅證實結構與合理長度，不稱逐波形或硬體時鐘parity。
+正式接線與正常輸出驗收由RE-228追蹤；READY本身不代表runtime已完成。
+
+## 正式播放驗收
+
+[正式收據](../verification/audio/title-runtime.json)。
+雙語正常啟動各23次cue，首格雙聲；第23聲播放中SPACE離開，輸出尾端一秒為零。
+實際非靜音時長另驗，全部internal／cmd通過，RE-227真實v3重招離城31狀態及6圖保持。
+兩次固定參數新OGG雜湊相同，與原已驗收OGG解碼相同；候選原檔雜湊保持。
+硬體時序為規格近似，不宣稱逐波形、全遊戲parity、三平台實機或已發布封包更新。

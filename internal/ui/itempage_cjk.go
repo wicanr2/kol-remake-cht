@@ -19,7 +19,7 @@ import (
 //
 // 這一頁不對拍，原版沒有中文畫面。
 func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
-	p *town.ItemPage, wild bool) error {
+	p *town.ItemPage, party []town.Member, wild bool) error {
 	l := town.ItemPageLayout
 	s := book.CJKScale
 	interactionBase := itemPageUsesInteractionBase(p)
@@ -30,6 +30,13 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 		return err
 	}
 	drawScaled(dst, bg, 0, 0, s)
+
+	// SPEC-031第17節／RE-232：確認等待保留上方隊伍肖像。
+	if p.GiftConfirm {
+		if err := drawCJKPartySlots(dst, sprites, f, party); err != nil {
+			return err
+		}
+	}
 	if !interactionBase {
 		b := town.SheetPageBack
 		for _, c := range town.SheetPageBackPieces(wild) {
@@ -38,6 +45,15 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 				return err
 			}
 			drawScaled(dst, pic, b.X*s, c.Y*s, s)
+		}
+
+		// SPEC-031第11節：與英文完整清單共用七層合成及遮擋順序。
+		for _, piece := range p.Figure {
+			pic, err := pieceImage(sprites, piece)
+			if err != nil {
+				return err
+			}
+			drawScaled(dst, pic, piece.X*PixelsPerByte*s, piece.Y*s, s)
 		}
 
 		right := scaleRect(l.RightPane, s)
@@ -76,7 +92,7 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 				third := ty + 2*step
 				cellCJKAt(dst, f, tx, third, m.Dice)
 				if m.Skill != "" {
-					cellCJKAt(dst, f, tx+8*f.Advance(), third, m.Skill)
+					cellCJKAt(dst, f, m.SkillX()*s, third, m.Skill)
 				}
 				weight := fmt.Sprintf("%d", m.Weight)
 				ww, _ := f.Measure(weight)
@@ -102,6 +118,11 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 		for i, line := range p.Note {
 			cellCJKAt(dst, f, dx, dy+i*step, t.T(line))
 		}
+		if p.Giving {
+			for i, m := range party {
+				cellCJKAt(dst, f, dx, dy+(i+2)*step, fmt.Sprintf("%d %s", i+1, m.Name))
+			}
+		}
 		return nil
 	}
 	// 明細那幾段自帶座標，但那是商店那一頁的框算出來的；這一頁的框在別的位置，
@@ -113,10 +134,23 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 			y := dy + (seg.Row-sr)*s
 			cellCJKAt(dst, f, x, y, displayName(t, t.T(seg.Text)))
 		}
+		message := p.DropMessage
+		if p.GiftConfirm {
+			message = p.GiftMessage
+		}
+		if len(message) > 0 {
+			r := scaleRect(l.DropMessage, s)
+			fill(dst, r.X0+1, r.Y0+1, r.Width()-2, r.Height()-2, town.ColourBoxFill)
+			frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetHeader)
+			shadow(dst, r.X0, r.Y0, r.Width(), r.Height())
+			for i, line := range message {
+				cellCJKAt(dst, f, l.DropTextCol*town.CellWidth*s, (l.DropTextRow+i*town.LineStep)*s, t.T(line))
+			}
+		}
 		return nil
 	}
 	for i, line := range p.Message {
-		cellCJKAt(dst, f, dx, dy+i*step, t.T(line))
+		cellCJKAt(dst, f, 8*town.CellWidth*s, 76*s+i*step, t.T(line))
 	}
 	return nil
 }

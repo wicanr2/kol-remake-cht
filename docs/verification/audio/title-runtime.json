@@ -1,0 +1,339 @@
+{
+  "schema": "kol-title-audio-runtime-verification-v1",
+  "status": "CONFORMED",
+  "scope": "已驗收標題OGG與原版cue順序及次數；硬體時序為近似",
+  "human_listening": "2026-10-04使用者：已聆聽，可接受並接正式播放",
+  "accepted_ogg_sha256": "0e95e887d2513161a4f07d85fad3c64d7fc538d3b61864256f787d98db85d362",
+  "binary_sha256": "0aca34273a671a78eb6b6b5e93e4336fdead6e2db1aedc3aa8ca48ac24ef3496",
+  "source_files": 338,
+  "changed_inputs": [
+    "cmd/kol/main.go",
+    "cmd/kol/title_audio.go",
+    "cmd/kol/title_audio_test.go",
+    "go.mod",
+    "go.sum",
+    "internal/title/title.go",
+    "internal/title/title_test.go"
+  ],
+  "capture": {
+    "status": "PASS",
+    "runs": [
+      {
+        "status": "PASS",
+        "language": "en",
+        "cue_count": 23,
+        "cues": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            0
+          ],
+          [
+            5,
+            3,
+            0
+          ],
+          [
+            10,
+            4,
+            0
+          ],
+          [
+            15,
+            5,
+            0
+          ],
+          [
+            20,
+            6,
+            0
+          ],
+          [
+            21,
+            7,
+            1
+          ],
+          [
+            21,
+            8,
+            0
+          ],
+          [
+            28,
+            9,
+            0
+          ],
+          [
+            33,
+            10,
+            0
+          ],
+          [
+            38,
+            11,
+            0
+          ],
+          [
+            43,
+            12,
+            0
+          ],
+          [
+            44,
+            13,
+            1
+          ],
+          [
+            44,
+            14,
+            0
+          ],
+          [
+            51,
+            15,
+            0
+          ],
+          [
+            56,
+            16,
+            0
+          ],
+          [
+            61,
+            17,
+            0
+          ],
+          [
+            66,
+            18,
+            0
+          ],
+          [
+            67,
+            19,
+            1
+          ],
+          [
+            67,
+            20,
+            0
+          ],
+          [
+            76,
+            21,
+            0
+          ],
+          [
+            82,
+            22,
+            0
+          ],
+          [
+            90,
+            23,
+            0
+          ]
+        ],
+        "first_frame_double_cue": true,
+        "normal_keyboard_skip": true,
+        "skip_during_23rd_cue": true,
+        "output_seconds": 77.54097505668935,
+        "active_seconds": 21.275736961451248,
+        "peak": 13817,
+        "last_second_peak": 0,
+        "exit": {
+          "game_exit": 0,
+          "record_exit": 255,
+          "record_stopped_with_SIGINT": true
+        },
+        "output_sha256": "d1b3a55d297ee333411d0dd9c3e7f0c817bb53dc0b1cc13ff1216db16a47847e",
+        "binary_sha256": "0aca34273a671a78eb6b6b5e93e4336fdead6e2db1aedc3aa8ca48ac24ef3496",
+        "device": "PulseAudio null sink monitor at 44100 Hz; actual Ebitengine/Oto output",
+        "not_claimed": [
+          "跨平台實機聆聽",
+          "原版硬體wall-clock parity"
+        ]
+      },
+      {
+        "status": "PASS",
+        "language": "zh-Hant",
+        "cue_count": 23,
+        "cues": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            0
+          ],
+          [
+            5,
+            3,
+            0
+          ],
+          [
+            10,
+            4,
+            0
+          ],
+          [
+            15,
+            5,
+            0
+          ],
+          [
+            20,
+            6,
+            0
+          ],
+          [
+            21,
+            7,
+            1
+          ],
+          [
+            21,
+            8,
+            0
+          ],
+          [
+            28,
+            9,
+            0
+          ],
+          [
+            33,
+            10,
+            0
+          ],
+          [
+            38,
+            11,
+            0
+          ],
+          [
+            43,
+            12,
+            0
+          ],
+          [
+            44,
+            13,
+            1
+          ],
+          [
+            44,
+            14,
+            0
+          ],
+          [
+            51,
+            15,
+            0
+          ],
+          [
+            56,
+            16,
+            0
+          ],
+          [
+            61,
+            17,
+            0
+          ],
+          [
+            66,
+            18,
+            0
+          ],
+          [
+            67,
+            19,
+            1
+          ],
+          [
+            67,
+            20,
+            0
+          ],
+          [
+            76,
+            21,
+            0
+          ],
+          [
+            82,
+            22,
+            0
+          ],
+          [
+            90,
+            23,
+            0
+          ]
+        ],
+        "first_frame_double_cue": true,
+        "normal_keyboard_skip": true,
+        "skip_during_23rd_cue": true,
+        "output_seconds": 78.99990929705216,
+        "active_seconds": 21.291201814058958,
+        "peak": 13817,
+        "last_second_peak": 0,
+        "exit": {
+          "game_exit": 0,
+          "record_exit": 255,
+          "record_stopped_with_SIGINT": true
+        },
+        "output_sha256": "6e6943466f248092534d75fd2f420730cf3ca5f9d6a81cd3eb7b222b7fa4c58c",
+        "binary_sha256": "0aca34273a671a78eb6b6b5e93e4336fdead6e2db1aedc3aa8ca48ac24ef3496",
+        "device": "PulseAudio null sink monitor at 44100 Hz; actual Ebitengine/Oto output",
+        "not_claimed": [
+          "跨平台實機聆聽",
+          "原版硬體wall-clock parity"
+        ]
+      }
+    ]
+  },
+  "regression": {
+    "status": "PASS",
+    "runs": [
+      {
+        "language": "en",
+        "states": 31,
+        "sampled_png": 3,
+        "full_trace_equal_to_RE227": true,
+        "all_sampled_pixels_equal": true,
+        "real_save_unchanged": true
+      },
+      {
+        "language": "zh-Hant",
+        "states": 31,
+        "sampled_png": 3,
+        "full_trace_equal_to_RE227": true,
+        "all_sampled_pixels_equal": true,
+        "real_save_unchanged": true
+      }
+    ]
+  },
+  "pipeline": {
+    "same_decoded_audio": true,
+    "twice_rebuilt_same_ogg_sha256": "197b09a04d405096d3e95fa6cbaa1196785e36f1b9ac047628edc850cb15a640",
+    "byte_identical_to_accepted": false,
+    "accepted_asset_unchanged": true
+  },
+  "workplace": "workplace/title-audio-runtime-20261004/",
+  "not_claimed": [
+    "全遊戲parity",
+    "原版逐波形或硬體wall-clock",
+    "Windows與macOS實機",
+    "已發布封包更新"
+  ]
+}

@@ -110,10 +110,22 @@ type Member struct {
 	// 完整物品資料隨名稱一起搬移，供戰後回寫（RE-094／096）。
 	HandItem, BeltItem *Item
 	PackItems          [BackpackSlots]*Item
+	// WornItems 保留穿戴十格原始物品供SPEC-027出口搜刮；索引7不搜刮。
+	WornItems [10]*Item
+	// GoldLooted 只記本場是否清錢包，避免覆蓋呼叫端已結算的賭金或獎勵。
+	GoldLooted bool
+	// LootCleared 區分空槽未變與搜刮整槽清零，供原始Carried回寫（RE-182）。
+	LootCleared [16]bool
 }
 
 // State 是一場戰鬥。
 type State struct {
+	MonsterReloadMemory *MonsterReloadMemory
+	// ReturnScratch是原版word_39A54的戰鬥內暫存，按實際寫入階段覆寫。
+	// 不加入人物／存檔，也不在第一個寫入之前推定原版初值。
+	ReturnScratch uint16
+	// lootSettled 防止共同出口重入時再次搜刮或消耗亂數。
+	lootSettled bool
 	// fleeFromBar 表示目前那一問是從「Begin next round?」的逃走格來的（RE-143），
 	// 不是戰場邊上那一條（RE-103）。
 	fleeFromBar bool
@@ -122,9 +134,15 @@ type State struct {
 	fledFromBar bool
 	// aiRoll 是敵人 AI 開頭擲的那一次（`word_3AC5E`），Shade Ring 的篩選用它（`hiddenFrom`）。
 	aiRoll int
+	// aiStyle／aiGuard 是原版兩個全域（`word_30A78`／`word_30916`）：每個 AI 出口都會寫，
+	// 走不出去的那條退路（`0x23CD6`）拿進來當攻擊選項與列號的舊值（RE-168）。
+	aiStyle, aiGuard int
 	// resultOver 表示結果圖已經收掉：打贏進戰利品畫面之後就不再畫。
-	resultOver    bool
-	rangedPending bool
+	resultOver       bool
+	rangedPending    bool
+	equipmentPending bool
+	// SPEC-011／RE-202：正常伏擊確認遭遇圖後，先生成地形並校正敵人位置。
+	ambushPending bool
 	Site          *Site
 	Stage         Stage
 	Actors        []Actor
@@ -146,6 +164,8 @@ type State struct {
 	Rand Rand
 	// Area 是效果 6 的法術停在「挑一個部位」那一層時的狀態（RE-100）。
 	Area *AreaQuestion
+	// spellReaction 是負面部位法術傷害頁之後才結算的擊退（RE-207）。
+	spellReaction *spellReaction
 	// Monster 是這一場的敵人種類。原版一場戰鬥只放同一種（RE-090），
 	// 所以這裡是一份不是一組。
 	Monster Monster
@@ -178,9 +198,6 @@ type State struct {
 	SpoilItems []SpoilItem
 	// Spoil 是戰利品畫面的游標與清單。
 	Spoil SpoilScreen
-	// WoreOff 是這一回合法術剛好失效的參戰者（RE-100）：每一位要印一次
-	// 記錄 0x173。由 BeginPlanning 重填。
-	WoreOff []int
 	// QuestDone 是打贏那一刻有幾名隊員的任務旗標被標成完成（RE-101）。
 	QuestDone int
 	// Ground 是戰場上的十六格物品（RE-094）。丟會放進來、撿會拿走，打贏之後
@@ -206,7 +223,7 @@ type PickUpAsk struct {
 
 // NewQuest 依任務地點的記錄擺好一場戰鬥。
 func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State {
-	s := &State{rangedPending: true, Site: site, Stage: StageIntro, Field: field, Party: party,
+	s := &State{equipmentPending: len(monster.EquipmentVariants) == 4, rangedPending: true, Site: site, Stage: StageIntro, Field: field, Party: party,
 		Monster: monster}
 	// 任務地點才有那一件東西（`sub_2886C` 先看 `word_34968`，RE-113）。
 	if site.Index >= 0 {
@@ -249,6 +266,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		// `sub_2193A` 先 `sub_21D94`（種族）再 `sub_21E0B`（穿戴），所以裝備蓋在種族之上。
 		s.Actors[i].ApplyCharms(m.Charms)
 		s.Actors[i].SetParts()
+		s.Actors[i].ReloadGear()
 	}
 	for i := 0; i < site.Count && i < len(site.MonsterX) && i < len(site.MonsterY); i++ {
 		slot := PartySlots + i
@@ -260,10 +278,11 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		if monster.Shield != nil {
 			shieldWeight, shieldGrade = monster.Shield.Encumbrance, monster.Shield.SizeClass
 		}
-		enc, speed := Encumbrance(site.Level, weapon, monster.ArmourWeight, shieldWeight)
+		level := MonsterCombatLevel(site.Level)
+		enc, speed := Encumbrance(level, weapon, monster.ArmourWeight, shieldWeight)
 		s.Actors[slot] = Actor{Side: SideMonster,
 			X: site.MonsterX[i], Y: site.MonsterY[i],
-			Name: site.MonsterName, Level: MonsterCombatLevel(site.Level), Member: -1,
+			Name: site.MonsterName, Level: level, Member: -1,
 			Foresight: monster.Foresight, Size: monster.Size,
 			Strength: monster.Strength, Quickness: monster.Quickness,
 			// 敵人的技能要按等級縮放（`sub_26AC2:0x26AF6`）。
@@ -273,8 +292,8 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 			BaseAttack: monster.AttackSkill, BaseParry: monster.ParrySkill,
 			GoldRoll: monster.Gold.Raw,
 			FleeAt:   monster.FleeAt, FleeRecover: monster.FleeRecover,
-			Weapon: weapon, Encumbrance: enc, WeaponSpeed: speed,
-			LoadLevel: site.Level, ArmourWeight: monster.ArmourWeight,
+			Weapon: weapon, HandItem: monster.Weapon, Encumbrance: enc, WeaponSpeed: speed,
+			LoadLevel: level, ArmourWeight: monster.ArmourWeight,
 			Armour:       cloneArmour(monster.Worn),
 			ShieldWeight: shieldWeight,
 			ShieldGrade:  shieldGrade, Unarmed: monster.Weapon == nil,
@@ -286,6 +305,7 @@ func NewQuest(site *Site, party []Member, monster Monster, field *Field) *State 
 		// 不改變（`docs/re/20260910-monster-unarmed-slots.md`）。取用端在
 		// `Actor.AttackWeapon`。
 		s.Actors[slot].SetParts()
+		s.Actors[slot].ReloadGear()
 	}
 	for i := PartySlots; i < len(s.Actors); i++ {
 		if s.Actors[i].Side == SideMonster {
@@ -389,6 +409,13 @@ func (s *State) Continue(rng Rand) {
 	if s.Stage != StageEncounter {
 		return
 	}
+	if s.ambushPending && rng != nil {
+		if s.Field == nil {
+			s.Field = Generate(rng)
+		}
+		s.placeAmbushEnemies(rng)
+		s.ambushPending = false
+	}
 	s.Stage = StageField
 	s.BeginPlanning(rng)
 	s.AdvanceToParty()
@@ -471,26 +498,76 @@ const (
 // 原版是逐一比對參戰者的 +0x1F／+0x20（`sub_223C0:0x225BF`…`0x22682`）：
 // 隊伍前六名各畫自己的號碼圖，其餘畫共用的敵人圖，倒下的另有兩張。
 func (s *State) SpriteAt(x, y int) int {
-	for i := range s.Actors {
-		a := s.Actors[i]
+	sprite := -1
+	for i, a := range s.Actors {
+		if s.Exec.viewBefore != nil && i == s.viewActorIndex() {
+			a = *s.Exec.viewBefore
+		}
 		if a.Side == SideEmpty || a.X != x || a.Y != y {
 			continue
 		}
-		if i >= PartySlots {
-			return SpriteMonster
+		// RE-242：原版 encoded 8／9 可被下一槽蓋過；中心槽優先。
+		if sprite >= 0 && i != s.viewActorIndex() && sprite != SpriteMonsterDown && sprite != SpritePartyDown {
+			continue
 		}
-		return SpritePartyBase + i
+		if a.Down() {
+			sprite = SpritePartyDown
+			if i >= PartySlots {
+				sprite = SpriteMonsterDown
+			}
+		} else {
+			sprite = SpritePartyBase + i
+			if i >= PartySlots {
+				sprite = SpriteMonster
+			}
+		}
+	}
+	if sprite >= 0 {
+		return sprite
+	}
+	for _, item := range s.Ground {
+		if item.Name != "" && item.X == x && item.Y == y {
+			return SpriteObject
+		}
 	}
 	return -1
 }
 
-// Camera 回傳戰場視窗的中心格：目前輪到的那一名。
+// Camera 回傳原版最近一次戰場重畫的中心（SPEC-008／RE-242）。
 func (s *State) Camera() (int, int) {
-	if s.Cursor >= 0 && s.Cursor < len(s.Actors) {
-		a := s.Actors[s.Cursor]
-		if a.Side != SideEmpty {
-			return a.X, a.Y
-		}
+	if a, ok := s.ViewActor(); ok {
+		return a.X, a.Y
 	}
 	return FieldSide / 2, FieldSide / 2
 }
+
+func (s *State) viewActorIndex() int {
+	if s.Exec.viewActor != nil {
+		return *s.Exec.viewActor
+	}
+	return s.Cursor
+}
+
+// ViewActor 共用鏡頭、騎乘視線與同格圖示優先度；不改 Actor 的規則狀態。
+func (s *State) ViewActor() (Actor, bool) {
+	i := s.viewActorIndex()
+	if i < 0 || i >= len(s.Actors) {
+		return Actor{}, false
+	}
+	a := s.Actors[i]
+	if s.Exec.viewBefore != nil {
+		a = *s.Exec.viewBefore
+	}
+	return a, a.Side != SideEmpty
+}
+
+// RefreshView 是移動第一句確認後的原版重畫點，座標早已完成移動。
+func (s *State) RefreshView() {
+	// RE-290: the second wait follows sub_223C0 for the actual moving actor.
+	focus := s.Cursor
+	s.Exec.viewActor, s.Exec.viewBefore = &focus, nil
+}
+
+// SetEnemyAIGlobals 設定原版兩個 AI 全域（`word_30A78`／`word_30916`）的舊值，
+// 只給與原版對拍的測試用：正式流程它們由上一個 AI 決策留下（RE-168）。
+func (s *State) SetEnemyAIGlobals(style, guard int) { s.aiStyle, s.aiGuard = style, guard }

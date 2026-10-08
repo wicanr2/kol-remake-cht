@@ -64,10 +64,14 @@ const (
 // Kind 是 +0x00：隊員為剩餘發數減一（0xFF 耗盡，初始 0x13），敵人為 SPEC-029 的遠程能力值。
 // Side 是 +0x01、X／Y 是 +0x1F／+0x20（SPEC-022）。
 type Actor struct {
-	Kind int
-	Side Side
-	X, Y int
-	Name string
+	// HandItem 保留怪物手持完整記錄；隊員以Member.HandItem為準（RE-182）。
+	HandItem                     *Item
+	MonsterShield, MonsterRanged *Item
+	EquipmentVariant             int
+	Kind                         int
+	Side                         Side
+	X, Y                         int
+	Name                         string
 	// Level 是參戰者記錄 +0x02 的等級：隊員是四列武器攻防值加總 ÷ 1000 ＋ 1，
 	// 敵人是怪物等級 ÷ 5 ＋ 1（上限 5，`0x1EE12`）。規劃鍵值與敵人 AI 的權重都用
 	// 這一格。**怪物本身的等級在 `State.MonsterLevel`**，那是另一個尺度（RE-097）。
@@ -95,8 +99,8 @@ type Actor struct {
 	// 與手上那件無關。
 	WeaponRows []WeaponSkillRow
 	// LoadLevel、ArmourWeight、ShieldWeight 是重算負重與武器速度要用的三個輸入
-	// （`ReloadGear`）。**LoadLevel 不是 `Level`**：隊員這一格是技能推出來的戰鬥
-	// 等級，怪物是遭遇等級，而 `Level` 那一格對怪物另外除以 5 再加一。
+	// （`ReloadGear`）。兩側都讀參戰者 Level（+0x02，`sub_24FD3:0x24FEA`）；
+	// 怪物遭遇等級先經 MonsterCombatLevel 換算。勘誤見 SPEC-009 的完整戰鬥續核。
 	LoadLevel    int
 	ArmourWeight int
 	// Armour 保留頭、軀幹、腿三格可變物品，不能共用怪物母表。
@@ -150,8 +154,8 @@ type Actor struct {
 	// Intellect 是記錄 +0x0C。目前只有法術的效果 4 會動它（RE-100）。
 	Intellect int
 	// SpellPick 是選中的法術（+0x26，0…15）；Negative 是這一手要傷害還是治療
-	// （+0x27，RE-100）；SpellTurns 是身上的法術還剩幾回合（+0x30），
-	// 倒數到 0 就把屬性重算回原值並印記錄 0x173。
+	// （+0x27，RE-100）；SpellTurns 是有效倒數（RE-208）：原版啟用旗標 +0x0D
+	// 為零時映射為 0，否則讀 +0x30。回合末倒數到 0 就還原屬性並印記錄 0x173。
 	SpellPick  int
 	Negative   bool
 	SpellTurns int

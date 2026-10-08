@@ -1,0 +1,82 @@
+{
+  "checks": [
+    {
+      "label": "舊檢查器對舊表通過，證實漏掃",
+      "command": [
+        "python3",
+        "workplace/cjk-held-names-20261001/before-verify-display-names.py",
+        "--table",
+        "workplace/cjk-held-names-20261001/before-display-names.tsv"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"required_unique_names\": 513, \"catalog_keys\": 529, \"catalog_unique_names\": 513, \"problems\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "label": "新檢查器拒絕舊表",
+      "command": [
+        "python3",
+        "tools/verify_display_names.py",
+        "--table",
+        "workplace/cjk-held-names-20261001/before-display-names.tsv"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"required_unique_names\": 515, \"catalog_keys\": 529, \"catalog_unique_names\": 513, \"problems\": 1}\n",
+      "stderr": "缺譯原名：['Black Choker', 'Maul']\n"
+    },
+    {
+      "label": "新檢查器及新表無缺譯或孤兒",
+      "command": [
+        "python3",
+        "tools/verify_display_names.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"required_unique_names\": 515, \"catalog_keys\": 531, \"catalog_unique_names\": 515, \"problems\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "label": "字模涵蓋",
+      "command": [
+        "python3",
+        "tools/verify_cjk_coverage.py",
+        "--report",
+        "workplace/cjk-held-names-20261001/glyph-coverage.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema\": \"kol-cjk-coverage-v1\",\n  \"inputs_sha256\": {\n    \"assets/ui-font/manifest.json\": \"8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d\",\n    \"docs/i18n/newchar-zh-Hant.json\": \"e7a4c37d800931904e97ade517f6293f52b3692fbecb371ec39912d175610675\",\n    \"docs/i18n/town-zh-Hant.json\": \"5554248cef962e0b91948407486890a6020f1c54ceee9edc4e795461545a8638\",\n    \"docs/i18n/ui-zh-Hant.json\": \"af3ac4b95945b442b8ba4ae861a37b377856ed3f7637b4ae23cfdbf36bf03c17\",\n    \"docs/i18n/display-names-zh-Hant.tsv\": \"679d011aa245f644584b88d8b8614e24edcc9b080a375f4deea9ecaf28812e4b\",\n    \"docs/i18n/world-prompts-zh-Hant.tsv\": \"2251d38105887fc1a55400a12e44ad4e85404cf4f4f18a0d60263da23aa9fdad\",\n    \"docs/i18n/ui-symbols-zh-Hant.json\": \"cdd1c546adfdf3e15aa4d19e3a53658ccf8798af2d63653ba0cab34ccb1a7a1b\",\n    \"docs/i18n/spell-words-zh-Hant.json\": \"882542c615909a975b34fc7287e74d2230952d515c136294c3ac52ed34c08bd0\",\n    \"docs/i18n/title-zh-Hant.json\": \"d8f7246c051436b4a711bd85ffde24f08d407677c0f8fc1b499c47f141aea3be\"\n  },\n  \"checked_strings\": 6095,\n  \"missing\": [],\n  \"scope\": \"翻譯資料的字元涵蓋；不證明 PNG 墨跡、排版、程式動態字串或正常玩家路徑\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "文字安全矩形",
+      "command": [
+        "python3",
+        "tools/verify_text_fit.py",
+        "--layout",
+        "workplace/cjk-layout.json",
+        "--font",
+        "assets/ui-font/manifest.json",
+        "--strings",
+        "docs/i18n/newchar-zh-Hant.json",
+        "--bank-strings",
+        "docs/i18n/ui-zh-Hant.json",
+        "--ui-i18n",
+        "docs/i18n/ui-zh-Hant.json",
+        "--data",
+        "assets/original-derived-data/character-creation.json",
+        "--town-i18n",
+        "docs/i18n/town-zh-Hant.json",
+        "--display-names",
+        "docs/i18n/display-names-zh-Hant.tsv",
+        "--out",
+        "docs/verification/cjk-text-fit.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"checked\": 9645, \"failed\": 0}\n",
+      "stderr": ""
+    }
+  ],
+  "old_checks_unchanged": true,
+  "additional_checks": 10,
+  "checked": 9645,
+  "failed": 0
+}

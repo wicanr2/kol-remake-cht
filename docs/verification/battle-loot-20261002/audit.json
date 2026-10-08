@@ -1,0 +1,38 @@
+{
+  "schema": "kol-battle-loot-audit-v1",
+  "date": "2026-10-02",
+  "receipt_attachments": 5258,
+  "preserved_parent_inputs": 1213,
+  "unchanged_re181_receipt": true,
+  "unchanged_formal_database": true,
+  "source_cases": 288,
+  "drop_source_cases": 12,
+  "production_matching_reload_frames": 32,
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned": [],
+  "md_same_name_directories": [],
+  "worklist": {
+    "open": 22,
+    "done": 84
+  },
+  "remote_open": 24,
+  "related_containers": [],
+  "git_diff_check_exit": 0,
+  "staged_files": [],
+  "locks": {
+    "docs/verification/battle-loot-20261002/receipt.json": "d1d513cbeb937ffe064ae5698ff433b7ec941339be11fabf981c3cd787c37a76",
+    "docs/verification/battle-loot-20261002/verify_loot.py": "beb04c6be6a19e2f5ef7c804dcbcc20f19c638660e880b034e53cfd7b08a4665",
+    "docs/verification/battle-loot-20261002/audit.py": "63e9e43303c5cb7d2a6fab5ee3c96c396a1273ff2824e2e5b48a9682a73af11f",
+    "docs/verification/battle-settlement-20261002/receipt.json": "c6a39a1f789b56c0473ed0e240b9967250845e70092cb3efcd3c8161efc2ff83",
+    "workplace/analysis/koltown/KOLTOWN-unpacked-ida94-derived.i64": "5c32c977bd420c3a51e5c068ece78f830c4f252445cf138623fbaba64fe551c8",
+    "docs/worklist.json": "415f5f62f7f7fd2e4498f5f1b4a5f3cd6dfe5d56249eb85360da6aae4ce85ade",
+    "WORKLIST.md": "e3ba06f911cec0010fc4b84b9571242940d2817221e9a7ab807e7a147cccd115",
+    "CONTEXT.md": "2442b689ad9f3dcc7086d4e28197bdfe6025f90ee0d2d326e0bedd6537ad4358",
+    "docs/re/RESEARCH-LOG.md": "a10332262b4132e4fa81ec3506eb26f00fb7a7579d6290cdb5d39c46ab4cf450",
+    "tools/worklist.py": "cd079e088299bff8780ad1fb379fe54add09ad3fe30481eb547b06a5276d8fc9",
+    "workplace/battle-loot-20261002/final-control.json": "73acb75c9bd11762e6ce0fc94ad16214d1131f9641fddcb40deea7cc38b961c2"
+  },
+  "remaining": "搜刮／掉落子切片有限CONFORMED；父規格及其他戰鬥／世界／平台交付閘門仍開放。",
+  "cleanup": "一次性容器--rm；Xvfb由trap及wait清理；主機控制面核實專案容器0。"
+}

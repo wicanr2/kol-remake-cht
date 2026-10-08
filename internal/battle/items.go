@@ -6,6 +6,34 @@ package battle
 // GroundSlots 是戰場上的物品格數（`0x9D20` 十六格，每格 16 byte）。
 const GroundSlots = 16
 
+// forcedDrop 是原版sub_269BA：空手或地上全滿不改，有空格才完整搬移。
+// 倒地、疲勞及擊退共用；不額外印訊息或擲亂數（SPEC-027／RE-182）。
+func (s *State) forcedDrop(i int) string {
+	a := &s.Actors[i]
+	if m := s.member(i); m != nil {
+		_, name := s.dropItem(i, true)
+		return name
+	}
+	if a.Unarmed {
+		return ""
+	}
+	for slot := range s.Ground {
+		if s.Ground[slot].Name != "" {
+			continue
+		}
+		item := a.HandItem
+		if item == nil {
+			return ""
+		}
+		s.setScratch(slot)
+		s.Ground[slot] = GroundItem{Name: item.Name, X: a.X, Y: a.Y, Weapon: a.Weapon, Item: item}
+		a.HandItem, a.Weapon, a.Unarmed = nil, Weapon{}, true
+		a.ReloadGear()
+		return item.Name
+	}
+	return ""
+}
+
 // GroundItem 是戰場上的一格物品。原版把物品記錄放 `0x9D20`、座標分開放兩張
 // 平行的表（`0x2BAE` 是 X、`0x2D9E` 是 Y）；remake 併成一個結構，語意相同。
 type GroundItem struct {
@@ -25,6 +53,10 @@ type GroundItem struct {
 // **名字要另外帶出來**：原版是先印記錄 0x10D（`drops|B|E!`）再搬東西，`|E` 展開
 // 的時候手上還有那件；remake 這一支做完手上已經空了，訊息會變成 `DROPS HIS !`。
 func (s *State) DropItem(i int) (int, string) {
+	return s.dropItem(i, false)
+}
+
+func (s *State) dropItem(i int, forced bool) (int, string) {
 	a := &s.Actors[i]
 	m := s.member(i)
 	if m == nil || !m.HasWeapon {
@@ -39,6 +71,11 @@ func (s *State) DropItem(i int) (int, string) {
 	}
 	if slot < 0 {
 		return CannotDropRecord, ""
+	}
+	if forced {
+		s.setScratch(slot)
+	} else {
+		s.setScratch(0x300*i + 0x30)
 	}
 	name := m.WeaponName
 	s.Ground[slot] = GroundItem{Name: name, X: a.X, Y: a.Y, Weapon: a.Weapon, Item: m.HandItem}
@@ -115,6 +152,7 @@ func (s *State) TakeItem(i, slot int) (int, string) {
 		// `sub_1E3A8:0x203E0`），同時把 +0x2B 清成 0。手上不再空著，AI 那一條
 		// 「沒有武器就去撿」下一回合就不成立了（RE-116）。
 		s.Actors[i].Unarmed = false
+		s.Actors[i].HandItem = g.Item
 		s.Actors[i].PickedUp = 0
 	}
 	// 撿成功之後原版把這一名的 `+0x25` 寫成 0x15（`0x204E4`，RE-162），隊員與敵人

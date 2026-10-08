@@ -90,6 +90,22 @@ func TestFigureEmptySlotsAreNegative(t *testing.T) {
 	}
 }
 
+// RE-175：原版只看首byte；空欄未使用尾端可保留舊值。
+func TestFigureIgnoresEmptyRecordTails(t *testing.T) {
+	m := Member{Sheet: &Sheet{}, Carried: make([][]byte, len(CarriedOffsets()))}
+	for i := range m.Carried {
+		m.Carried[i] = rec(3, 87, 6)
+		m.Carried[i][0] = 0
+	}
+	f := m.Figure()
+	if f.Styles != [3]int{-1, -1, -1} || f.Weapon != nil || f.Shield != nil || f.Belt != nil {
+		t.Fatalf("空欄尾端不得生成裝備圖：%+v", f)
+	}
+	if carriedItem(rec(3, 87, 6)[:15]) != nil || carriedItem(rec(3, 87, 6)) == nil {
+		t.Fatal("短記錄須拒絕，完整非空記錄須保留")
+	}
+}
+
 // 物品那一頁的清單就是身上那十七格，只是順序不同（RE-127）。
 func TestItemSlotsAreTheCarriedSlots(t *testing.T) {
 	l, err := portrait.Load(filepath.Join("..", "..", "assets",

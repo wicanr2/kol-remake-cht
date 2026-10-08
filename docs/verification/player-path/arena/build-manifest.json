@@ -1,0 +1,126 @@
+{
+  "schema": "kol-player-path-build/1",
+  "date": "2026-10-01",
+  "base_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+  "dirty_worktree": true,
+  "build_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "toolchain": {
+    "image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+    "go": "1.26.7",
+    "ebitengine": "2.9.9"
+  },
+  "evidence": "RE-170初始空物品修正後，正常按鍵／受控輸入與里程碑驗證；不宣稱原版完整對拍",
+  "rights": "原作衍生PNG僅限既有private GitHub特例；原始輸入與存檔留本機",
+  "path": "arena",
+  "input": {
+    "source_name": "Knights-of-legend.zip",
+    "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "asset_manifest": "assets/original-derived-png/ega/manifest.json",
+    "asset_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+    "load": "workplace/observe/arena-ready.json",
+    "load_sha256": "82c33a04b0b94102d0a66160a79ea2587f112ec39b502135b3fc191c0b0f4de3",
+    "seed": 1,
+    "controlled_ambush": false,
+    "character_roster_sha256": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "effective_load": "workplace/inventory-empty-slots-20261001/all-before/arena/input-save.json",
+    "effective_load_sha256": "82c33a04b0b94102d0a66160a79ea2587f112ec39b502135b3fc191c0b0f4de3"
+  },
+  "generator_snapshot": "workplace/ai-fuzz-attack-only-20260930/arena-regeneration/generator.py",
+  "generator_sha256": "01f6fc2d953aa1b6747054c3d9f78ef9270f9323b463fe360bfb80284a4f028a",
+  "plan_sha256": "4f9ff8ed5eb451abcf88c2bf191a88d9539ed10cc63a6c6aa9860d2fa9e15455",
+  "trace_sha256": "a5e421a9384b5f0e31e1fc6133bb647570edfacd02c02b1a8852c82e4c514daf",
+  "receipt_sha256": "66d3a5184e1496d2982cfbb4919624d7283fe99feecc7c7a569e1a83f45fccb3",
+  "frames": [
+    {
+      "step": 1528,
+      "file": "step-1528.png",
+      "sha256": "fa7326d563968e1448cdd8734ac8a79a2437d66d4f33e91aae800fb3ba5d014e"
+    },
+    {
+      "step": 1529,
+      "file": "step-1529.png",
+      "sha256": "9eb3f01d67ea8f99ce8306628e1205e457903a4f1f3b040c1c79a2c9df4fc1cb"
+    },
+    {
+      "step": 1530,
+      "file": "step-1530.png",
+      "sha256": "4fa5e3917f3971b9d5d02646da4880691031beb8721c0fe31b81d5ba3386a692"
+    },
+    {
+      "step": 1531,
+      "file": "step-1531.png",
+      "sha256": "54fdf41a88185c9919ea9db16238bd1d9edad357e8c100bd801673353d9122eb"
+    },
+    {
+      "step": 1532,
+      "file": "step-1532.png",
+      "sha256": "c0f4d3373e9049a762948e6fbc8591be486466aa3276f5cfc584f8f26bf04b60"
+    },
+    {
+      "step": 1533,
+      "file": "step-1533.png",
+      "sha256": "b5686db12cb8656f253c399b43abbc0aec11260ee6a18b3f1e24c68d96a11323"
+    },
+    {
+      "step": 1534,
+      "file": "step-1534.png",
+      "sha256": "6dd0206a90b19460ca4f259f128fda1108976c189da7b749840b1fd12a0d352c"
+    },
+    {
+      "step": 1535,
+      "file": "step-1535.png",
+      "sha256": "d40ceba97bcb09b7ba454c61708eb6f05c62c46a719c55f21d007ff7a000b505"
+    },
+    {
+      "step": 1536,
+      "file": "step-1536.png",
+      "sha256": "529cf6dd0b84c7f92e42162fc36168b48a9e2575f6572b6f7e51961747d2926e"
+    },
+    {
+      "step": 1551,
+      "file": "step-1551.png",
+      "sha256": "fd8a59889930af0eea788b1fd86d2afda36b9564e7fc022f34cba4ae51be8771"
+    },
+    {
+      "step": 1705,
+      "file": "step-1705.png",
+      "sha256": "b9b2b51333d9acdf5f0e1d46634f4fd0d0548259fb7b3db385657600d47e670a"
+    },
+    {
+      "step": 1706,
+      "file": "step-1706.png",
+      "sha256": "6bdc95da61c69ba71e3fffa81d3e4bc457de1a6407593a934b12bb4829707fa1"
+    }
+  ],
+  "inventory_review": "docs/verification/inventory-empty-slots-20261001/all-path-review.json",
+  "previous_baseline": "workplace/inventory-empty-slots-20261001/baseline-before/arena",
+  "run_spec": "workplace/inventory-empty-slots-20261001/all-before/arena/shots.spec",
+  "run_spec_sha256": "93bcac49ded713153299fe76ada1300da75ad69c9bdddaa5ced3228970f88686",
+  "inputs_sha256": {
+    "workplace/cjk-edge-20261001/kol-edge-fixed": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "tools/check_player_paths.py": "a282bc533b138304b1c3699defde015a28b3c78ef77f9c37de879ca827bf16ff",
+    "tools/replay_player_path.py": "4889eb1087e1625c7a672ba05ba9f53d8dda590682ae7d0b174b75d6c102672c",
+    "tools/verify_player_path.py": "40e9b201fe657fd98061e2d521d16421868c96c6d49f40eecf8b94871129d6bc",
+    "tools/verify_full_path.py": "0113fc4fc05cae52b5815366a77ae7c58bfbf1b223747bce75546c1b1628cc1d",
+    "assets/original-derived-data/book-open-animation.json": "b7c7a9498f4fc1edf4754730718d2272be2b9f10486db14cbafd618cbc891e73",
+    "assets/original-derived-data/character-creation.json": "878fa12acf5749acb25d47421455caaa1ee9f46dcaa6de64fdc79864822926dc",
+    "assets/original-derived-data/creation-start.json": "4d32f3a56bca422f85317ab88959ace98687e459ed9f9d8d2f475b1810667c1a",
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/magic.json": "eb8579370aeae74efd32bcb9fb4c8eebd2a7bf99d18395433709fa05fb648aba",
+    "assets/original-derived-data/monsters.json": "39aeef6efb5388c947f721e8ea75847106526c869090aa185bad912aa4fce992",
+    "assets/original-derived-data/portrait-layout.json": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df",
+    "assets/original-derived-data/quest-sites.json": "ed6a1238a1eb1e51008db7b84fa4234735c41283a28ce9c48a7eaf679151dd2a",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-data/town-keywords.json": "98fecebce452ea48528356e63e9575cc1ac62780fba988bc80e5b4a50ef9f9af",
+    "assets/original-derived-data/town-text.json": "3f75b91691cedbbe99b83af42771d3656ed0c9a0aa67c12352ada7e0c9513320",
+    "assets/original-derived-data/ui-text.json": "886093e4ed6d8ba13beba63a6e6f0b946bc640658983c2e1eca397c35ac76b5d",
+    "assets/original-derived-data/weapon-templates.json": "74bad47083da8c41dd3ac807418bde45d555b5fa5e112e217d9934015d36ccab",
+    "assets/original-derived-data/wilderness-scenes.json": "9d3547e32833ea28296ede6286b3217d5e5098f9adb58ea091152679b92858c8",
+    "assets/original-derived-data/world-map.json": "73441fd1f956edb08957a44a28c79df4845447a1e102346c4de6751d1947e5df",
+    "assets/ui-font/LICENSE-NotoSansCJK.txt": "27a8d920f9707034bb2879cb6d632334aa8d99e204c744bf89f5f21d8537fc21",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318"
+  }
+}

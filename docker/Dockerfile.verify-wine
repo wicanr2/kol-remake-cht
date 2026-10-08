@@ -1,0 +1,9 @@
+# 恢復舊 coab-wine-smoke 的 Ubuntu Noble／Wine9 驗證環境。
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wine64 wine xvfb xauth python3 libgl1-mesa-dri mesa-vulkan-drivers \
+    ca-certificates fonts-liberation \
+    && rm -rf /var/lib/apt/lists/* \
+    && (getent passwd 1000 >/dev/null || useradd --uid 1000 --create-home kolverify) \
+    && dpkg-query -W > /opt/kol-verification-packages.tsv
+WORKDIR /src

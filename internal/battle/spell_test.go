@@ -344,23 +344,19 @@ func TestWearsOffUsesNourishedStrength(t *testing.T) {
 	}
 }
 
-// 回合開始時先跑倒數，過期的記進 WoreOff 讓呼叫端印記錄 0x173。
-func TestBeginPlanningRunsTheSpellCountdown(t *testing.T) {
+// 規劃與重排都不跑倒數；倒數在前一回合結算處理（RE-208）。
+func TestBeginPlanningPreservesTheSpellCountdown(t *testing.T) {
 	s := castState(Spell{Effect: 1, TurnCode: 0x02, PowerCode: 0x02})
 	s.Monster = Monster{Strength: 100, Quickness: 100, Foresight: 100, Intellect: 100}
 	s.Actors[1].SpellTurns = 1
 	s.Actors[1].Strength = 1
 	s.BeginPlanning(maxRand{})
-	if len(s.WoreOff) != 1 || s.WoreOff[0] != 1 {
-		t.Fatalf("失效清單是 %v，期望 [1]", s.WoreOff)
+	if s.Actors[1].SpellTurns != 1 || s.Actors[1].Strength != 1 {
+		t.Fatal("新規劃提前減倒數或還原屬性")
 	}
-	if s.Actors[1].Strength != 100 {
-		t.Fatalf("屬性沒有重算，力量是 %d", s.Actors[1].Strength)
-	}
-	// 下一回合沒有人失效。
-	s.BeginPlanning(maxRand{})
-	if len(s.WoreOff) != 0 {
-		t.Fatalf("不該再有失效，得到 %v", s.WoreOff)
+	s.Replan(maxRand{})
+	if s.Actors[1].SpellTurns != 1 || s.Actors[1].Strength != 1 {
+		t.Fatal("同回合重排提前減倒數或還原屬性")
 	}
 }
 
@@ -401,7 +397,7 @@ func TestPlanningSpellFlow(t *testing.T) {
 	}
 
 	// 游標移到第二項（Negative）再確認，然後去選目標格。
-	s.MoveSelection(1)
+	s.MoveCursor(1, 0, false)
 	if s.Plan.ListPick != 1 {
 		t.Fatalf("游標是 %d，期望 1", s.Plan.ListPick)
 	}

@@ -1,13 +1,13 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "gear-switch",
- "description": "A05 腰帶切換的正常玩家抽測（#15，RE-163）：讀 `quest-chain` 寫出的存檔，從半途之家門口出城，往東走遇上 CLIFF TROLL（受控骰值 `1,100,23`，同 `full-chain`）。Theodoric 手上是 Treasure Map、腰帶是 Greatsword；手上不是武器時原版不給切換（`0x22AF6`），所以第 1 回合先丟掉地圖，第 2 回合切換拿出 Greatsword（0x116），第 3 回合再切換收回腰帶（0x114 ＋ `!`），第 4 回合在「Begin next round?」選逃走格離開。其餘隊員每回合休息。",
+ "description": "A05 腰帶切換的正常玩家抽測（#15，RE-163）：讀 `quest-chain` 寫出的存檔，從半途之家門口出城，往東走遇上 CLIFF TROLL（受控骰值 `1,100,23`，同 `full-chain`）。Theodoric 手上是 Treasure Map、腰帶是 Greatsword；手上不是武器時原版不給切換（`0x22AF6`），所以第 1 回合先丟掉地圖，第 2 回合切換拿出 Greatsword（0x116），第 3 回合再切換收回腰帶（0x114 ＋ `!`），第 4 回合在「Begin next round?」選逃走格離開。其餘隊員每回合休息。 2026-10-01 讀本輪任務新存檔重驗：只有隊伍傷勢繼承值不同，差額逐員等於母存檔變化；訊息、階段、操作結果、金幣、物品、任務／回報與全部畫格一致。原按鍵不變，舊收據保留。",
  "seed": 1,
  "load": "workplace/saves/quest-chain.json",
  "ambush_rolls": "1,100,23",
  "token_count": 240,
  "trace": "docs/verification/player-path/gear-switch/trace.json",
- "trace_sha256": "7e5dd37aa7452a64ef9ecc93b37cba4fc241ae4e9a2f0f58da613124c5d35554",
+ "trace_sha256": "311375005081feabdfd04afcc0124e46e99d1d44f43f6ce2cd65bb1915ca63ac",
  "milestones": [
   {
    "step": 12,
@@ -251,12 +251,12 @@
     "left_town": true,
     "mode": 0,
     "party": [
-     "Theodoric gold=953 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=9",
-     "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=9",
-     "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
-     "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=12",
+     "Theodoric gold=953 wounds=7 reported=1 quests=0,48,0,0,0,0 carried=4",
+     "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=7",
+     "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+     "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=11",
      "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=13",
-     "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+     "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
     ],
     "town": 7,
     "x": 59,

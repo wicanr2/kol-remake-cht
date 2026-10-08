@@ -1,0 +1,778 @@
+{
+  "schema": "kol-player-path-inventory-change-review-v1",
+  "paths": [
+    {
+      "name": "arena",
+      "states": 1708,
+      "changed_steps": [
+        {
+          "step": 1513,
+          "old_party_event": [
+            "Poontang gold=214 wounds=14 reported=0 quests=0,4,0,0,0,0 carried=10",
+            "Moraine gold=2149 wounds=28 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=12 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=23 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1943 wounds=18 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=214 wounds=14 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2149 wounds=28 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=12 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=23 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1943 wounds=18 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 1706,
+          "old_party_event": [
+            "Poontang gold=189 wounds=14 reported=0 quests=0,4,0,0,0,0 carried=10",
+            "Moraine gold=2149 wounds=28 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=452 wounds=12 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=23 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1943 wounds=18 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=189 wounds=14 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2149 wounds=28 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=452 wounds=12 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=23 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1943 wounds=18 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 1707,
+          "old_party_event": [
+            "Poontang gold=189 wounds=14 reported=0 quests=0,4,0,0,0,0 carried=10",
+            "Moraine gold=2149 wounds=40 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=452 wounds=12 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=23 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1943 wounds=18 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=189 wounds=14 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2149 wounds=40 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=452 wounds=12 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=23 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1943 wounds=18 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=17 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        }
+      ],
+      "old_trace_sha256": "92defee0d52351ff2ad2bf755165873315cadf84aedb8e081d6cb90758ace799",
+      "new_trace_sha256": "a5e421a9384b5f0e31e1fc6133bb647570edfacd02c02b1a8852c82e4c514daf",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "full-chain-ending",
+      "states": 421,
+      "changed_steps": [
+        {
+          "step": 414,
+          "old_party_event": [
+            "Poontang gold=218 wounds=8 reported=23 quests=0,2,0,0,0,0 carried=10",
+            "Moraine gold=2153 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=13",
+            "Fighting Bull gold=446 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=14",
+            "Kenneth gold=819 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=12",
+            "Sharakan gold=1947 wounds=0 reported=0 quests=1,2,0,0,0,0 carried=10",
+            "Olear gold=1781 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=218 wounds=8 reported=23 quests=0,2,0,0,0,0 carried=9",
+            "Moraine gold=2153 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=12",
+            "Fighting Bull gold=446 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=14",
+            "Kenneth gold=819 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=11",
+            "Sharakan gold=1947 wounds=0 reported=0 quests=1,2,0,0,0,0 carried=9",
+            "Olear gold=1781 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=11"
+          ]
+        }
+      ],
+      "old_trace_sha256": "81904b06012356cb367ee7adb74a2ce95d60d04e587641ad8bc3efc588d730c7",
+      "new_trace_sha256": "2dba555bb3cf275a8f5262cb148c7fde6ae12906eb3f1282c4d7b53c827bd829",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "full-chain-reload",
+      "states": 2013,
+      "changed_steps": [
+        {
+          "step": 0,
+          "old_party_event": [
+            "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 73,
+          "old_party_event": [
+            "Poontang gold=158 wounds=0 reported=0 quests=0,4,0,0,0,0 carried=10",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=158 wounds=0 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 2004,
+          "old_party_event": [
+            "Poontang gold=166 wounds=0 reported=0 quests=0,4,0,0,0,0 carried=10",
+            "Moraine gold=2157 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=450 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=823 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1951 wounds=7 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1785 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=166 wounds=0 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2157 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=450 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=823 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1951 wounds=7 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1785 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        }
+      ],
+      "old_trace_sha256": "f78367da390ff6be590c3f53f756dc4a95b9a7ccd444e59563863cecfa42cf0c",
+      "new_trace_sha256": "7c04373dd5be77a46cab11674e68c62779ad4272df40d498d15bf5c5ff72a3ba",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "full-chain",
+      "states": 2318,
+      "changed_steps": [
+        {
+          "step": 2171,
+          "old_party_event": null,
+          "new_party_event": [
+            "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 2317,
+          "old_party_event": [
+            "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "new_party_event": [
+            "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=8",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ]
+        }
+      ],
+      "old_trace_sha256": "b0fbd3985b85c7341765fb67951c86583c52902c0b9d8b09c2cdfe9eb7f6583a",
+      "new_trace_sha256": "a84af3b6901a63e800672e7a5d5c76f8c47598f1596c0e726c240d97ddd1461d",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true,
+      "save": {
+        "changed_character_fields": [
+          {
+            "slot": 0,
+            "name": "Theodoric",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 1,
+            "name": "Poontang",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 3,
+            "name": "Moraine",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 5,
+            "name": "Kenneth",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 6,
+            "name": "Jax",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 7,
+            "name": "Sharakan",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 8,
+            "name": "Warder",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 9,
+            "name": "Shyla",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 10,
+            "name": "Aventhalas",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 11,
+            "name": "One tooth",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 12,
+            "name": "Mula",
+            "fields": [
+              "in_hand",
+              "backpack"
+            ]
+          }
+        ],
+        "old_sha256": "7fa97d7c84e68b6e1884061a45af9c729717cf3bc1a1e7ce23049971b9d8473a",
+        "new_sha256": "e06b325e2c945b2978e33229684bebe0d01e49c3a29d29610ae84748ec228709",
+        "other_fields_identical": true
+      }
+    },
+    {
+      "name": "full",
+      "states": 27,
+      "changed_steps": [],
+      "old_trace_sha256": "06ac8b7723a5750fe63f7b2ef9a4f3c5e855b0a69cd9e22ec25364588e7b198e",
+      "new_trace_sha256": "06ac8b7723a5750fe63f7b2ef9a4f3c5e855b0a69cd9e22ec25364588e7b198e",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "gear-abbey",
+      "states": 279,
+      "changed_steps": [],
+      "old_trace_sha256": "6fc667c4d88c93f2716ad08f7fc58938cf1139a9e2f04ef73162f0b92b89d24d",
+      "new_trace_sha256": "6fc667c4d88c93f2716ad08f7fc58938cf1139a9e2f04ef73162f0b92b89d24d",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "gear-switch",
+      "states": 241,
+      "changed_steps": [
+        {
+          "step": 0,
+          "old_party_event": [
+            "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=10",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=12"
+          ],
+          "new_party_event": [
+            "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=5",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=8",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 240,
+          "old_party_event": [
+            "Theodoric gold=953 wounds=7 reported=1 quests=0,48,0,0,0,0 carried=9",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=9",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=13",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=12"
+          ],
+          "new_party_event": [
+            "Theodoric gold=953 wounds=7 reported=1 quests=0,48,0,0,0,0 carried=4",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=7",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=13",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
+          ]
+        }
+      ],
+      "old_trace_sha256": "111d855dc4d24435af1146f91fc3ac15405efa59416604d5d8a9036d58383c95",
+      "new_trace_sha256": "311375005081feabdfd04afcc0124e46e99d1d44f43f6ce2cd65bb1915ca63ac",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "quest-chain-reload",
+      "states": 13,
+      "changed_steps": [
+        {
+          "step": 0,
+          "old_party_event": [
+            "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=10",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=12"
+          ],
+          "new_party_event": [
+            "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=5",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=8",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
+          ]
+        }
+      ],
+      "old_trace_sha256": "5b34f05f0f73bfa0f4e7be6f7d69d7ef1ddb5751e77c31bca355c79bfe553833",
+      "new_trace_sha256": "9db53bda94d8e7c32d1718c559f8dcc8e98e5150bc2f3908f6a6a63da68ffe01",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "quest-chain",
+      "states": 7436,
+      "changed_steps": [
+        {
+          "step": 7065,
+          "old_party_event": [
+            "Theodoric gold=1009 wounds=3 reported=0 quests=0,32,0,0,0,0 carried=10",
+            "Poontang gold=214 wounds=16 reported=0 quests=0,36,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=9 reported=0 quests=0,32,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=0 quests=0,32,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,32,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,32,0,0,0,0 carried=12"
+          ],
+          "new_party_event": [
+            "Theodoric gold=1009 wounds=3 reported=0 quests=0,32,0,0,0,0 carried=5",
+            "Poontang gold=214 wounds=16 reported=0 quests=0,36,0,0,0,0 carried=8",
+            "Olear gold=1777 wounds=9 reported=0 quests=0,32,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=0 quests=0,32,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,32,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,32,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 7218,
+          "old_party_event": [
+            "Theodoric gold=1009 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=10",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=12"
+          ],
+          "new_party_event": [
+            "Theodoric gold=1009 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=5",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=8",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
+          ]
+        },
+        {
+          "step": 7435,
+          "old_party_event": [
+            "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=10",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=12"
+          ],
+          "new_party_event": [
+            "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=5",
+            "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=8",
+            "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+            "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
+            "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
+          ]
+        }
+      ],
+      "old_trace_sha256": "5a73738b7740685c2dca16c1173310616f92b91b7c6f2cd184ac362e82394eb8",
+      "new_trace_sha256": "c82df192c7af17ed556cd11e33d6b14866f405357dbed4b4d5c32a94eedc5a11",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true,
+      "save": {
+        "changed_character_fields": [
+          {
+            "slot": 0,
+            "name": "Theodoric",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 1,
+            "name": "Poontang",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 3,
+            "name": "Moraine",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 5,
+            "name": "Kenneth",
+            "fields": [
+              "carried",
+              "backpack"
+            ]
+          },
+          {
+            "slot": 6,
+            "name": "Jax",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 7,
+            "name": "Sharakan",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 8,
+            "name": "Warder",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 9,
+            "name": "Shyla",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 10,
+            "name": "Aventhalas",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 11,
+            "name": "One tooth",
+            "fields": [
+              "backpack"
+            ]
+          },
+          {
+            "slot": 12,
+            "name": "Mula",
+            "fields": [
+              "in_hand",
+              "backpack"
+            ]
+          }
+        ],
+        "old_sha256": "c6326c30aac8af6c9df9a92f8ddbb08304fcf2db9d77ed2ea97aff8ec6199764",
+        "new_sha256": "8460ca49630d55cc37ca9179ac81c69b5d5b58bdbbe95b3a1efc488bafe2646b",
+        "other_fields_identical": true
+      }
+    },
+    {
+      "name": "quest-list",
+      "states": 12,
+      "changed_steps": [],
+      "old_trace_sha256": "4b10dc31cbf6b28ee1f7443170efad1ecc3d9e23f72f6567e9d39c1f6bba6d98",
+      "new_trace_sha256": "4b10dc31cbf6b28ee1f7443170efad1ecc3d9e23f72f6567e9d39c1f6bba6d98",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "quest-take",
+      "states": 17,
+      "changed_steps": [],
+      "old_trace_sha256": "22c844f0728c9660ff9d453392e2c2f1e8ca4b2edf564cb4b7168f41e10a0355",
+      "new_trace_sha256": "22c844f0728c9660ff9d453392e2c2f1e8ca4b2edf564cb4b7168f41e10a0355",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "sheet-outside",
+      "states": 26,
+      "changed_steps": [],
+      "old_trace_sha256": "c5894d9bb8fa9a30164019cde972bcf642e88bc98f2b94a7ada6efc9154e82da",
+      "new_trace_sha256": "c5894d9bb8fa9a30164019cde972bcf642e88bc98f2b94a7ada6efc9154e82da",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-edge",
+      "states": 14,
+      "changed_steps": [],
+      "old_trace_sha256": "dc420439b01b3aa7965efff39e39b1d345bcf9e222b7b6f4fe7e054dd730e9e9",
+      "new_trace_sha256": "dc420439b01b3aa7965efff39e39b1d345bcf9e222b7b6f4fe7e054dd730e9e9",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-leave",
+      "states": 13,
+      "changed_steps": [],
+      "old_trace_sha256": "be7d0895153e394707a5fb3cfde3e6c5e9996fa20892b867de2ddb283a9b5a56",
+      "new_trace_sha256": "be7d0895153e394707a5fb3cfde3e6c5e9996fa20892b867de2ddb283a9b5a56",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-load",
+      "states": 7,
+      "changed_steps": [],
+      "old_trace_sha256": "03371171e45f81b9e0da67a7c0203bbced7d5ab4d2f5d2bd9435158e215b2006",
+      "new_trace_sha256": "03371171e45f81b9e0da67a7c0203bbced7d5ab4d2f5d2bd9435158e215b2006",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-mirror",
+      "states": 10,
+      "changed_steps": [],
+      "old_trace_sha256": "94f7d457cda842cfc3dc216dfde47534513aaf1ab15907a5914fddbb8adf1759",
+      "new_trace_sha256": "94f7d457cda842cfc3dc216dfde47534513aaf1ab15907a5914fddbb8adf1759",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-recruit",
+      "states": 15,
+      "changed_steps": [],
+      "old_trace_sha256": "138bfd761b00b79bbc84e8e34690e4604713f8eda67af2815872db61803fa522",
+      "new_trace_sha256": "138bfd761b00b79bbc84e8e34690e4604713f8eda67af2815872db61803fa522",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-rest",
+      "states": 11,
+      "changed_steps": [],
+      "old_trace_sha256": "0fa8bf7231423df9fcd93af23353587d9b84a263f52a4ff78a8ce8f4b0dad1a4",
+      "new_trace_sha256": "0fa8bf7231423df9fcd93af23353587d9b84a263f52a4ff78a8ce8f4b0dad1a4",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true,
+      "save": {
+        "changed_character_fields": [
+          {
+            "scope": "v1 歷史保存逐欄投影；不聲稱 v3 新增欄位曾在舊檔保存",
+            "checked_legacy_fields": [
+              "party[0].name",
+              "party[0].portrait",
+              "party[0].female",
+              "party[0].wounds",
+              "party[0].gold",
+              "party[0].place",
+              "party[0].town_code",
+              "party[0].building_id",
+              "party[0].renown",
+              "party[0].spellcaster",
+              "party[0].speaker",
+              "party[0].quests",
+              "party[0].progress",
+              "party[0].carried",
+              "party[0].rank",
+              "party[0].adventure_points"
+            ],
+            "current_schema": "kol-save-v3"
+          }
+        ],
+        "old_sha256": "7ac179ad0e8a169be2c7b04fce3de8991c2bf3afd57681e488c8a86037f72bef",
+        "new_sha256": "88b099953d92c24eb79ee666423851125a409e5b3922ea8f03715c82428b6c7f",
+        "other_fields_identical": true
+      }
+    },
+    {
+      "name": "town-round-trip",
+      "states": 20,
+      "changed_steps": [],
+      "old_trace_sha256": "f6ec9e74a25ccfad03890bcc643ebd512df882783cbdb6987ce359984e1bd142",
+      "new_trace_sha256": "f6ec9e74a25ccfad03890bcc643ebd512df882783cbdb6987ce359984e1bd142",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-scroll",
+      "states": 21,
+      "changed_steps": [],
+      "old_trace_sha256": "2d9439914b540bfe01cbbd85debb8f7059d5b7ab6b9eaea5ded8f683ee4e871e",
+      "new_trace_sha256": "2d9439914b540bfe01cbbd85debb8f7059d5b7ab6b9eaea5ded8f683ee4e871e",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-shop",
+      "states": 14,
+      "changed_steps": [],
+      "old_trace_sha256": "8b31ddb75785e6e70ac196993ea8c9753d847d17f98fbdc9b9d5d2988c3faa99",
+      "new_trace_sha256": "8b31ddb75785e6e70ac196993ea8c9753d847d17f98fbdc9b9d5d2988c3faa99",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-stable",
+      "states": 17,
+      "changed_steps": [],
+      "old_trace_sha256": "f8cb67b46533b94b50c8774fc3d871429995115d36bdf97a30a0bd667a521d1d",
+      "new_trace_sha256": "f8cb67b46533b94b50c8774fc3d871429995115d36bdf97a30a0bd667a521d1d",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-talk",
+      "states": 10,
+      "changed_steps": [],
+      "old_trace_sha256": "94f7d457cda842cfc3dc216dfde47534513aaf1ab15907a5914fddbb8adf1759",
+      "new_trace_sha256": "94f7d457cda842cfc3dc216dfde47534513aaf1ab15907a5914fddbb8adf1759",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town-train",
+      "states": 15,
+      "changed_steps": [],
+      "old_trace_sha256": "57a3d385ad8e69d3d01a9cdd372bb01e5960071b50046e20b1adfb3ceb641455",
+      "new_trace_sha256": "57a3d385ad8e69d3d01a9cdd372bb01e5960071b50046e20b1adfb3ceb641455",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "town",
+      "states": 15,
+      "changed_steps": [],
+      "old_trace_sha256": "8268e9d18098152f8c8f04d1917e79a5764249a4c9e37dd5a971d7d8a909da1b",
+      "new_trace_sha256": "8268e9d18098152f8c8f04d1917e79a5764249a4c9e37dd5a971d7d8a909da1b",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "world-clock",
+      "states": 28,
+      "changed_steps": [],
+      "old_trace_sha256": "409d0e953eb51bf6e8c75fef3fc9e7e16f582dbef27981dd0df46eaaf8016ef1",
+      "new_trace_sha256": "409d0e953eb51bf6e8c75fef3fc9e7e16f582dbef27981dd0df46eaaf8016ef1",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "world-healer",
+      "states": 29,
+      "changed_steps": [],
+      "old_trace_sha256": "eef26932e0e17cf5ff408e5f1dae2e85fc44b8e82e3308b27cac8e058205d1ef",
+      "new_trace_sha256": "eef26932e0e17cf5ff408e5f1dae2e85fc44b8e82e3308b27cac8e058205d1ef",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "world-quest",
+      "states": 91,
+      "changed_steps": [],
+      "old_trace_sha256": "b5d49bc265752ec874bbe123a5e84fa4b86dbf2bd14d0af15b48a16ba43d388e",
+      "new_trace_sha256": "b5d49bc265752ec874bbe123a5e84fa4b86dbf2bd14d0af15b48a16ba43d388e",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    },
+    {
+      "name": "world-road",
+      "states": 34,
+      "changed_steps": [],
+      "old_trace_sha256": "7c6053b50748e2a0ce1d8d87b1e2f3c6740ca78e430dcf0184652b70d8f2c8ff",
+      "new_trace_sha256": "7c6053b50748e2a0ce1d8d87b1e2f3c6740ca78e430dcf0184652b70d8f2c8ff",
+      "other_trace_fields_identical": true,
+      "party_other_values_identical": true
+    }
+  ],
+  "path_count": 29,
+  "changed_path_count": 7,
+  "removed_empty_items": {
+    "Theodoric": 5,
+    "Poontang": 2,
+    "Olear": 0,
+    "Moraine": 1,
+    "Fighting Bull": 0,
+    "Kenneth": 1,
+    "Jax": 6,
+    "Sharakan": 1,
+    "Warder": 1,
+    "Shyla": 1,
+    "Aventhalas": 1,
+    "One tooth": 1,
+    "Mula": 2,
+    "ddduhh": 0
+  },
+  "scope": "固定 RE-170 初始資料變更的逐欄審查；不修改嚴格比較、不宣稱原版 parity",
+  "tool_sha256": "339b3f177fbf05522c4e7e1b6396a681eacb1bd686e1ed2a3a1858ee1049944e"
+}

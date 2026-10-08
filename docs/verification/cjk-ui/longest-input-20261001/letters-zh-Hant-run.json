@@ -1,0 +1,21 @@
+{
+  "command": [
+    "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "-scene",
+    "flow",
+    "-seed",
+    "1",
+    "-lang",
+    "zh-Hant",
+    "-flow-script",
+    "SPACE SPACE 5 D RET W W W W W W W W W W W W W W W BS W W W RET RET RET D RET",
+    "-shot-dir",
+    "workplace/cjk-longest-input-20261001/attempt2/letters/zh-Hant",
+    "-shot-steps",
+    "5,20,21,23,24,29",
+    "-trace",
+    "workplace/cjk-longest-input-20261001/attempt2/letters/zh-Hant/trace.json"
+  ],
+  "returncode": 0,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4"
+}

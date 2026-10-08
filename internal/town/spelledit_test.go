@@ -176,6 +176,9 @@ func TestSpellEditorFullPath(t *testing.T) {
 	for s.scroll.edit.cursor > 1 {
 		s.MoveScroll(-1)
 	}
+	for s.scroll.edit.cursor < 1 {
+		s.MoveScroll(1)
+	}
 	yes(s) // 選定
 	if got := s.Inside.SpellEdit.Fields[SpellFieldStat].Text; got != "Strength" {
 		t.Fatalf("屬性換成 %q", got)
@@ -246,11 +249,11 @@ func TestSpellNameTyping(t *testing.T) {
 	for _, r := range "xyzabc" {
 		s.TypeSpellName(r)
 	}
-	if got := *s.Inside.SpellEdit.Typing; got != "Vartwelyrmxyzabc"[:SpellNameMax] {
+	if got := *s.Inside.SpellEdit.Typing; got != "xyzabc" {
 		t.Fatalf("打成 %q", got)
 	}
 	yes(s)
-	if got := s.Inside.SpellEdit.Fields[SpellFieldName].Text; got != "Vartwelyrmxy" {
+	if got := s.Inside.SpellEdit.Fields[SpellFieldName].Text; got != "Xyzabc" {
 		t.Fatalf("名字變成 %q", got)
 	}
 }
@@ -276,6 +279,9 @@ func TestOrderLimitsTheClassColumn(t *testing.T) {
 	yes(s)          // 開選單
 	for s.scroll.edit.cursor > 3 {
 		s.MoveScroll(-1)
+	}
+	for s.scroll.edit.cursor < 3 {
+		s.MoveScroll(1)
 	}
 	yes(s) // 選 Dwarven：准
 	if got := s.Inside.SpellEdit.Fields[SpellFieldClassFirst].Text; got != "Dwarven" {

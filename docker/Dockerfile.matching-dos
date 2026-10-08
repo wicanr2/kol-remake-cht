@@ -1,0 +1,6 @@
+# Matching C 試點的隔離DOS編譯執行器；不執行原版遊戲。
+FROM kol-platform-verify:1.26.7-ebiten2.9.9-20261007-r1
+RUN apt-get update && apt-get install -y --no-install-recommends dosbox \
+    && rm -rf /var/lib/apt/lists/* \
+    && dpkg-query -W > /opt/kol-matching-packages.tsv
+WORKDIR /src

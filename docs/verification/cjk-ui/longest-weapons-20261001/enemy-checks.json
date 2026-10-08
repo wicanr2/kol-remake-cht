@@ -1,0 +1,253 @@
+{
+  "runs": [
+    {
+      "label": "enemy-en",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "flow",
+        "-seed",
+        "1",
+        "-lang",
+        "en",
+        "-trace-detail",
+        "-flow-script",
+        "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R U U U U U U U U U RET S S S S S S S S S S S S R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R RET SPACE > > > > > > RET RET > > > > > > RET RET > > > > > RET RET > > > RET U U L L D D R RET > > RET RET > > > > > > RET RET > > > > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > RET U U L L D D R RET > > RET RET > > > > > RET RET > > > > > > RET RET > > > > > > RET RET > > > > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > > > RET RET > > > RET U U L L D D R SPACE SPACE",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/enemy-en",
+        "-shot-steps",
+        "133,134,135,293,294,295",
+        "-trace",
+        "workplace/cjk-weapon-20261001/enemy-en/trace.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "seed": 1,
+      "expected_states": 296
+    },
+    {
+      "label": "enemy-zh-Hant",
+      "command": [
+        "workplace/platform-smoke-20261001/build/kol-linux",
+        "-scene",
+        "flow",
+        "-seed",
+        "1",
+        "-lang",
+        "zh-Hant",
+        "-trace-detail",
+        "-flow-script",
+        "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R U U U U U U U U U RET S S S S S S S S S S S S R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R RET SPACE > > > > > > RET RET > > > > > > RET RET > > > > > RET RET > > > RET U U L L D D R RET > > RET RET > > > > > > RET RET > > > > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > RET U U L L D D R RET > > RET RET > > > > > RET RET > > > > > > RET RET > > > > > > RET RET > > > > > > RET RET RET SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE SPACE > > > > > > RET RET > > > > > RET RET > > > RET U U L L D D R SPACE SPACE",
+        "-shot-dir",
+        "workplace/cjk-weapon-20261001/enemy-zh-Hant",
+        "-shot-steps",
+        "133,134,135,293,294,295",
+        "-trace",
+        "workplace/cjk-weapon-20261001/enemy-zh-Hant/trace.json"
+      ],
+      "exit_code": 0,
+      "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+      "seed": 1,
+      "expected_states": 296
+    }
+  ],
+  "language_display_differences": [
+    {
+      "field": "steps[191].battle.exec_text",
+      "en": [
+        "Olear is resting!"
+      ],
+      "zh": [
+        "Olear 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[192].battle.exec_text",
+      "en": [
+        "The BINDERAK moves!"
+      ],
+      "zh": [
+        "賓德拉克 移動了！"
+      ]
+    },
+    {
+      "field": "steps[193].battle.exec_text",
+      "en": [
+        "The BINDERAK moves!"
+      ],
+      "zh": [
+        "賓德拉克 移動了！"
+      ]
+    },
+    {
+      "field": "steps[194].battle.exec_text",
+      "en": [
+        "Kenneth is resting!"
+      ],
+      "zh": [
+        "Kenneth 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[195].battle.exec_text",
+      "en": [
+        "Poontang is resting!"
+      ],
+      "zh": [
+        "Poontang 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[196].battle.exec_text",
+      "en": [
+        "Theodoric moves!"
+      ],
+      "zh": [
+        "Theodoric 移動了！"
+      ]
+    },
+    {
+      "field": "steps[197].battle.exec_text",
+      "en": [
+        "Theodoric moves!"
+      ],
+      "zh": [
+        "Theodoric 移動了！"
+      ]
+    },
+    {
+      "field": "steps[198].battle.exec_text",
+      "en": [
+        "Fighting Bull is resting!"
+      ],
+      "zh": [
+        "Fighting Bull 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[199].battle.exec_text",
+      "en": [
+        "Moraine is resting!"
+      ],
+      "zh": [
+        "Moraine 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[200].battle.exec_text",
+      "en": [
+        "The BINDERAK moves!"
+      ],
+      "zh": [
+        "賓德拉克 移動了！"
+      ]
+    },
+    {
+      "field": "steps[201].battle.exec_text",
+      "en": [
+        "The BINDERAK moves!"
+      ],
+      "zh": [
+        "賓德拉克 移動了！"
+      ]
+    },
+    {
+      "field": "steps[258].battle.exec_text",
+      "en": [
+        "Olear is resting!"
+      ],
+      "zh": [
+        "Olear 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[259].battle.exec_text",
+      "en": [
+        "Kenneth is resting!"
+      ],
+      "zh": [
+        "Kenneth 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[260].battle.exec_text",
+      "en": [
+        "The BINDERAK moves!"
+      ],
+      "zh": [
+        "賓德拉克 移動了！"
+      ]
+    },
+    {
+      "field": "steps[261].battle.exec_text",
+      "en": [
+        "The BINDERAK moves!"
+      ],
+      "zh": [
+        "賓德拉克 移動了！"
+      ]
+    },
+    {
+      "field": "steps[262].battle.exec_text",
+      "en": [
+        "Poontang is resting!"
+      ],
+      "zh": [
+        "Poontang 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[263].battle.exec_text",
+      "en": [
+        "Fighting Bull is resting!"
+      ],
+      "zh": [
+        "Fighting Bull 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[264].battle.exec_text",
+      "en": [
+        "Theodoric is blocked from",
+        "moving!"
+      ],
+      "zh": [
+        "Theodoric 移動受阻！"
+      ]
+    },
+    {
+      "field": "steps[265].battle.exec_text",
+      "en": [
+        "Moraine is resting!"
+      ],
+      "zh": [
+        "Moraine 正在休息！"
+      ]
+    },
+    {
+      "field": "steps[266].battle.exec_text",
+      "en": [
+        "The BINDERAK is blocked from",
+        "moving!"
+      ],
+      "zh": [
+        "賓德拉克 移動受阻！"
+      ]
+    }
+  ],
+  "all_other_states_equal": true,
+  "checkpoint": {
+    "before": 293,
+    "equipment": 294,
+    "restored": 295,
+    "actor": "Theodoric",
+    "actor_index": 0,
+    "enemy_index": 11,
+    "enemy": "BINDERAK",
+    "weapon": "Spiney Mace",
+    "width": 80,
+    "source_iteration": "drive3/iteration-052",
+    "seed": 1,
+    "method": "正常移動目標格檢視；未確認目標或攻擊"
+  }
+}

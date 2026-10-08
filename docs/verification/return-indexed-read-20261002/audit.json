@@ -1,0 +1,138 @@
+{
+  "schema": "kol-return-indexed-window-audit-v1",
+  "receipt_sha256": "04fc5bae74df7fc5c0b7449ed4f27cadd3e6159843f08445d72c4b511480e284",
+  "attachments": 3323,
+  "full_readonly_verification": "passed",
+  "host_control": {
+    "observed_at": "2026-10-02 15:14:32 UTC",
+    "git_diff_check": "passed",
+    "git_staged": [],
+    "project_containers": [],
+    "other_containers_preserved": [
+      {
+        "name": "/san1-hd-player-gui",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/cht/softworld_san",
+          "/home/anr2/cht/softworld_san/org_game",
+          "/home/anr2/cht/softworld_san/org_game"
+        ]
+      },
+      {
+        "name": "/interesting_euclid",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/cht/colonization",
+          "/tmp",
+          "/home/anr2/cht/colonization/workplace/dosgolem",
+          "/home/anr2/cht/colonization/workplace/gocache",
+          "/home/anr2/cht/colonization/Sid Meier's Colonization (1994)/SMColoni/COLONIZE"
+        ]
+      },
+      {
+        "name": "/dinbando_web_dev",
+        "status": "exited",
+        "mounts": [
+          "/home/anr2/dinbando"
+        ]
+      },
+      {
+        "name": "/supabase_studio_dinbando",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/dinbando/supabase/snippets"
+        ]
+      },
+      {
+        "name": "/supabase_pg_meta_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_edge_runtime_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_storage_dinbando",
+        "status": "running",
+        "mounts": [
+          "/var/lib/docker/volumes/supabase_storage_dinbando/_data"
+        ]
+      },
+      {
+        "name": "/supabase_rest_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_realtime_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_inbucket_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_auth_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_kong_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_db_dinbando",
+        "status": "running",
+        "mounts": [
+          "/var/lib/docker/volumes/supabase_db_dinbando/_data"
+        ]
+      },
+      {
+        "name": "/focoria-local",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/tmp2/jinher/workplace/fbx-glb-viewer"
+        ]
+      },
+      {
+        "name": "/admiring_kowalevski",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/tmp2/jinher/workplace/fbx-glb-viewer"
+        ]
+      },
+      {
+        "name": "/agentacc-test-web",
+        "status": "exited",
+        "mounts": [
+          "/home/anr2/tmp2/總經銷會計軟體/.nuget-cache",
+          "/home/anr2/tmp2/總經銷會計軟體"
+        ]
+      },
+      {
+        "name": "/agentacc-test-pg",
+        "status": "exited",
+        "mounts": [
+          "/var/lib/docker/volumes/3187beea3cc62758ed7efbf441e1f8de35d8fd91a3678500afefe71e8dc81464/_data"
+        ]
+      },
+      {
+        "name": "/cool_bose",
+        "status": "exited",
+        "mounts": []
+      }
+    ]
+  },
+  "root_owned_files": [],
+  "md_directories": [],
+  "artifact_uid_gid": [
+    1000,
+    1000
+  ],
+  "production_unchanged": true
+}

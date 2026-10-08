@@ -1,0 +1,44 @@
+go version go1.26.7 linux/amd64
+f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4  /work/workplace/platform-smoke-20261001/build/kol-linux
+/work/workplace/platform-smoke-20261001/build/kol-linux: go1.26.7
+	path	github.com/wicanr2/kol-remake-cht/cmd/kol
+	mod	github.com/wicanr2/kol-remake-cht	v0.0.0-20260930221217-1384e508f70e+dirty	
+	dep	github.com/ebitengine/hideconsole	v1.0.0	h1:5J4U0kXF+pv/DhiXt5/lTz0eO5ogJ1iXb8Yj1yReDqE=
+	dep	github.com/ebitengine/purego	v0.9.0	h1:mh0zpKBIXDceC63hpvPuGLiJ8ZAa3DfrFTudmfi8A4k=
+	dep	github.com/hajimehoshi/ebiten/v2	v2.9.9	h1:JdDag6Ndj12iD4lxQGG8kbsrh7ssj4Sbzth6r929H/M=
+	dep	github.com/jezek/xgb	v1.1.1	h1:bE/r8ZZtSv7l9gk6nU0mYx51aXrvnyb44892TwSaqS4=
+	dep	golang.org/x/sync	v0.17.0	h1:l60nONMj9l5drqw6jlhIELNv9I0A4OFgRsG9k2oT9Ug=
+	dep	golang.org/x/sys	v0.36.0	h1:KVRy2GtZBrk1cBYA7MKu5bEZFxQk4NIDV6RLVcC8o0k=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	DefaultGODEBUG=containermaxprocs=0,cryptocustomrand=1,decoratemappings=0,tlssecpmlkem=0,tlssha1=1,updatemaxprocs=0,urlstrictcolons=0,x509sha256skid=0
+	build	CGO_ENABLED=1
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+	build	vcs=git
+	build	vcs.revision=1384e508f70e8a5d81bc050ea79f66d3f0d38fe6
+	build	vcs.time=2026-09-30T22:12:17Z
+	build	vcs.modified=true
+304890ea429ca7106b47b104d69d619201de6eda523e1c8890efc2d91d6ca8c6  /work/workplace/platform-smoke-20261001/build/kol-windows.exe
+/work/workplace/platform-smoke-20261001/build/kol-windows.exe: go1.26.7
+	path	github.com/wicanr2/kol-remake-cht/cmd/kol
+	mod	github.com/wicanr2/kol-remake-cht	v0.0.0-20260930221217-1384e508f70e+dirty	
+	dep	github.com/ebitengine/hideconsole	v1.0.0	h1:5J4U0kXF+pv/DhiXt5/lTz0eO5ogJ1iXb8Yj1yReDqE=
+	dep	github.com/ebitengine/purego	v0.9.0	h1:mh0zpKBIXDceC63hpvPuGLiJ8ZAa3DfrFTudmfi8A4k=
+	dep	github.com/hajimehoshi/ebiten/v2	v2.9.9	h1:JdDag6Ndj12iD4lxQGG8kbsrh7ssj4Sbzth6r929H/M=
+	dep	golang.org/x/sync	v0.17.0	h1:l60nONMj9l5drqw6jlhIELNv9I0A4OFgRsG9k2oT9Ug=
+	dep	golang.org/x/sys	v0.36.0	h1:KVRy2GtZBrk1cBYA7MKu5bEZFxQk4NIDV6RLVcC8o0k=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	DefaultGODEBUG=containermaxprocs=0,cryptocustomrand=1,decoratemappings=0,tlssecpmlkem=0,tlssha1=1,updatemaxprocs=0,urlstrictcolons=0,x509sha256skid=0
+	build	CGO_ENABLED=0
+	build	GOARCH=amd64
+	build	GOOS=windows
+	build	GOAMD64=v1
+	build	vcs=git
+	build	vcs.revision=1384e508f70e8a5d81bc050ea79f66d3f0d38fe6
+	build	vcs.time=2026-09-30T22:12:17Z
+	build	vcs.modified=true

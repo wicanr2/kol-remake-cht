@@ -1,0 +1,167 @@
+{
+  "schema": "kol-baked-text-free-audit-v1",
+  "references": [
+    {
+      "town": 3,
+      "tile": 39,
+      "file": "free-reference-town3-tile39.png",
+      "sha256": "a2ac0e9ab9a0d995e4e93d021332940274df481cede6ec83d0038edb74e31e71"
+    },
+    {
+      "town": 5,
+      "tile": 144,
+      "file": "free-reference-town5-tile144.png",
+      "sha256": "e4984f667376b8d5685bffd88438ec7e007e18ead60ab21df2a9d26d609d5573"
+    },
+    {
+      "town": 7,
+      "tile": 12,
+      "file": "free-reference-town7-tile12.png",
+      "sha256": "ee9cffc23b75ff5c87907151e41b2aed9a426eab40129e4ee87fe506da8888b2"
+    }
+  ],
+  "method": "逐 16×16 圖塊比較白底／非白字形遮罩；不使用 OCR 推測，逐地圖灰階索引計數",
+  "towns": [
+    {
+      "town": 1,
+      "matching_tiles": [],
+      "map_references": {},
+      "atlas_sha256": "926f97e7a2e019f02d2451b2b63f93ac9900078e20ce9c649d85f27d240365c5",
+      "map_sha256": "a2e96a8921ad70c6a8254ae71fe4273033bfd60ea52efb483a2c57b03a6118f8"
+    },
+    {
+      "town": 2,
+      "matching_tiles": [],
+      "map_references": {},
+      "atlas_sha256": "89bfb849436711796d99e0429cb1540cfdebc5f6538b07946dca6a47056bd668",
+      "map_sha256": "587b386b4ba90f2fa2294a6000f9446c249e454d74f213b4cf60c3e97f331667"
+    },
+    {
+      "town": 3,
+      "matching_tiles": [
+        39
+      ],
+      "map_references": {
+        "39": 0
+      },
+      "atlas_sha256": "dee3ae581248c68123905d95fc56e0acf9559cc85df461a405bff4543f7e15eb",
+      "map_sha256": "3f79392d3c196cc9a54b3ba4c72c6d60b1b43d33dbdd435dec6cef0078186ed9"
+    },
+    {
+      "town": 4,
+      "matching_tiles": [],
+      "map_references": {},
+      "atlas_sha256": "0daac8189507e6285934d9636d571b839146d04185c753cbbe3876f759dd8c16",
+      "map_sha256": "e6161200e7d4f6979df34521781abbf177b1e1afac626be7827c52859ffd3387"
+    },
+    {
+      "town": 5,
+      "matching_tiles": [
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        154,
+        155,
+        156,
+        161,
+        162,
+        164,
+        175,
+        176,
+        179,
+        203,
+        204,
+        205,
+        206
+      ],
+      "map_references": {
+        "137": 0,
+        "138": 0,
+        "139": 0,
+        "140": 0,
+        "141": 0,
+        "142": 0,
+        "143": 0,
+        "144": 0,
+        "145": 0,
+        "146": 0,
+        "147": 0,
+        "148": 0,
+        "149": 0,
+        "150": 0,
+        "154": 0,
+        "155": 0,
+        "156": 0,
+        "161": 0,
+        "162": 0,
+        "164": 0,
+        "175": 0,
+        "176": 0,
+        "179": 0,
+        "203": 0,
+        "204": 0,
+        "205": 0,
+        "206": 0
+      },
+      "atlas_sha256": "6067e99ec53f24881530cd99a4a08753064116b6093af309131438ac781d50c8",
+      "map_sha256": "df7ee9dc09204f0f26d588e0a8fd4758de7527e788a4becde04e1996a56e019c"
+    },
+    {
+      "town": 6,
+      "matching_tiles": [],
+      "map_references": {},
+      "atlas_sha256": "b6970be65df16da447426e07d4cd461b7832006cda8a15eec0adfed5260eaadc",
+      "map_sha256": "ce3c007318c0ff31a3cc648722396cdcb4fae263f78134dc3e9fc033291c02bb"
+    },
+    {
+      "town": 7,
+      "matching_tiles": [
+        12,
+        14,
+        22,
+        23,
+        27,
+        37,
+        38,
+        51,
+        74,
+        82,
+        84,
+        98,
+        124,
+        125,
+        126
+      ],
+      "map_references": {
+        "12": 0,
+        "14": 0,
+        "22": 0,
+        "23": 0,
+        "27": 0,
+        "37": 0,
+        "38": 0,
+        "51": 0,
+        "74": 0,
+        "82": 0,
+        "84": 0,
+        "98": 0,
+        "124": 0,
+        "125": 0,
+        "126": 0
+      },
+      "atlas_sha256": "07b10692a451d1e0a053d187033b010e2d46870d550dcfba87d52c3d70e9fef0",
+      "map_sha256": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f"
+    }
+  ]
+}

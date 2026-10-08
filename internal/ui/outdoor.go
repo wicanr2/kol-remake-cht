@@ -204,6 +204,15 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	drawScaled(dst, crest, l.CrestX, l.CrestY, l.Scale)
 
 	fill(dst, l.MapX, l.MapY, l.MapW, l.MapH, town.ColourBoxEdge)
+	// 城門與英文模式使用同一張林地圖；邊界狀態優先於建築門口（RE-065）。
+	if out.AtEdge {
+		pic, err := sprites.Get(town.EdgePicture.Archive, town.EdgePicture.Index)
+		if err != nil {
+			return err
+		}
+		drawScaled(dst, pic, l.ViewX, l.ViewY, l.Scale)
+		return drawOutdoorIconsCJK(dst, sprites, out)
+	}
 	if door := out.AtDoor(); door != nil {
 		pic, err := sprites.Get(out.CrestArchive(), door.Picture)
 		if err != nil {

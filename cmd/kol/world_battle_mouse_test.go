@@ -147,9 +147,10 @@ func TestBattleSpellListClick(t *testing.T) {
 		prompt battle.Prompt
 		rows   []string
 		pick   int
+		row    int
 	}{
-		{name: "法術", prompt: battle.PromptSpell, rows: []string{"A", "B", "C"}, pick: 1},
-		{name: "正負效果", prompt: battle.PromptAffect, rows: []string{"Positive", "Negative"}, pick: 0},
+		{name: "法術", prompt: battle.PromptSpell, rows: []string{"A", "B", "C"}, pick: 1, row: 17},
+		{name: "正負效果", prompt: battle.PromptAffect, rows: []string{"Positive", "Negative"}, pick: 0, row: 25},
 	} {
 		for _, cjk := range []bool{false, true} {
 			s := &battle.State{Stage: battle.StageField}
@@ -173,7 +174,7 @@ func TestBattleSpellListClick(t *testing.T) {
 			}
 			if cjk {
 				wantX := battle.SpellListRows.Col * town.CellWidth * book.CJKScale
-				wantY := battle.SpellListRows.Row * book.CJKScale
+				wantY := tc.row * book.CJKScale
 				if targets[0].Rect.Min.X != wantX || targets[0].Rect.Min.Y != wantY {
 					t.Fatalf("%s 中文第 0 列起點 %v，要 (%d,%d)", tc.name, targets[0].Rect, wantX, wantY)
 				}

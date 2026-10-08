@@ -1,0 +1,1342 @@
+{
+  "schema": "kol-item-edge-probe-v1",
+  "status": "正常原版快取窄證據通過，產品尚未修正",
+  "original_frames_unchanged": 104,
+  "states_unchanged": 104,
+  "original_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+  "original_seed": 1,
+  "remake_seed": 1,
+  "normal_startup": true,
+  "state_injection": false,
+  "direct_entry": false,
+  "cache_change_count": 436,
+  "observed_pixels": [
+    {
+      "frame": 4,
+      "x": 15,
+      "y": 7,
+      "cache_palette_index": 7,
+      "original_rgb": [
+        170,
+        170,
+        170
+      ],
+      "remake_rgb": [
+        0,
+        170,
+        170
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 0,
+      "cache_palette_index": 5,
+      "original_rgb": [
+        170,
+        0,
+        170
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 1,
+      "cache_palette_index": 5,
+      "original_rgb": [
+        170,
+        0,
+        170
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 157,
+      "cache_palette_index": 2,
+      "original_rgb": [
+        0,
+        170,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 158,
+      "cache_palette_index": 2,
+      "original_rgb": [
+        0,
+        170,
+        0
+      ],
+      "remake_rgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 159,
+      "cache_palette_index": 2,
+      "original_rgb": [
+        0,
+        170,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 161,
+      "cache_palette_index": 0,
+      "original_rgb": [
+        0,
+        0,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 162,
+      "cache_palette_index": 0,
+      "original_rgb": [
+        0,
+        0,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 100,
+      "x": 15,
+      "y": 163,
+      "cache_palette_index": 0,
+      "original_rgb": [
+        0,
+        0,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 0,
+      "cache_palette_index": 5,
+      "original_rgb": [
+        170,
+        0,
+        170
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 1,
+      "cache_palette_index": 5,
+      "original_rgb": [
+        170,
+        0,
+        170
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 157,
+      "cache_palette_index": 2,
+      "original_rgb": [
+        0,
+        170,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 158,
+      "cache_palette_index": 2,
+      "original_rgb": [
+        0,
+        170,
+        0
+      ],
+      "remake_rgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 159,
+      "cache_palette_index": 2,
+      "original_rgb": [
+        0,
+        170,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 161,
+      "cache_palette_index": 0,
+      "original_rgb": [
+        0,
+        0,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 162,
+      "cache_palette_index": 0,
+      "original_rgb": [
+        0,
+        0,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 101,
+      "x": 15,
+      "y": 163,
+      "cache_palette_index": 0,
+      "original_rgb": [
+        0,
+        0,
+        0
+      ],
+      "remake_rgb": [
+        170,
+        0,
+        0
+      ]
+    }
+  ],
+  "model_frames": [
+    {
+      "frame": 3,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 4,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 5,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 6,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 7,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 8,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 9,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 10,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 11,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 12,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 15,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 16,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 17,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 18,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 19,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 20,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 21,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 22,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 23,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 24,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 25,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 28,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 29,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 30,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 31,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 32,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 33,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 34,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 35,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 36,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 37,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 42,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 43,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 44,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 45,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 46,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 47,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 48,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 49,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 50,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 51,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 52,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 53,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 56,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 57,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 58,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 59,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 60,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 61,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 62,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 63,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 64,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 65,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 66,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 72,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 73,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 74,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 75,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 76,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 77,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 78,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 79,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 80,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 81,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 82,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 88,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": []
+    },
+    {
+      "frame": 89,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 90,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 91,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 92,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 93,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 94,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 95,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 96,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 97,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 98,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "frame": 100,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          0
+        ],
+        [
+          15,
+          1
+        ],
+        [
+          15,
+          157
+        ],
+        [
+          15,
+          158
+        ],
+        [
+          15,
+          159
+        ],
+        [
+          15,
+          161
+        ],
+        [
+          15,
+          162
+        ],
+        [
+          15,
+          163
+        ]
+      ]
+    },
+    {
+      "frame": 101,
+      "model_pixel_differences": 0,
+      "product_pending_pixels": [
+        [
+          15,
+          0
+        ],
+        [
+          15,
+          1
+        ],
+        [
+          15,
+          157
+        ],
+        [
+          15,
+          158
+        ],
+        [
+          15,
+          159
+        ],
+        [
+          15,
+          161
+        ],
+        [
+          15,
+          162
+        ],
+        [
+          15,
+          163
+        ]
+      ]
+    }
+  ],
+  "rebuild_checks": [
+    {
+      "frame": 3,
+      "actual_stride": 8160,
+      "plane_span": 8000,
+      "cache_differences": 0,
+      "corrected_stride_counterexample_rejected": true
+    },
+    {
+      "frame": 15,
+      "actual_stride": 8160,
+      "plane_span": 8000,
+      "cache_differences": 0,
+      "corrected_stride_counterexample_rejected": true
+    },
+    {
+      "frame": 28,
+      "actual_stride": 8160,
+      "plane_span": 8000,
+      "cache_differences": 0,
+      "corrected_stride_counterexample_rejected": true
+    },
+    {
+      "frame": 42,
+      "actual_stride": 8160,
+      "plane_span": 8000,
+      "cache_differences": 0,
+      "corrected_stride_counterexample_rejected": true
+    },
+    {
+      "frame": 56,
+      "actual_stride": 8160,
+      "plane_span": 8000,
+      "cache_differences": 0,
+      "corrected_stride_counterexample_rejected": true
+    },
+    {
+      "frame": 72,
+      "actual_stride": 8160,
+      "plane_span": 8000,
+      "cache_differences": 0,
+      "corrected_stride_counterexample_rejected": true
+    },
+    {
+      "frame": 88,
+      "actual_stride": 8160,
+      "plane_span": 8000,
+      "cache_differences": 0,
+      "corrected_stride_counterexample_rejected": true
+    }
+  ],
+  "private_source_sha256": "6291eb96a03be297fc6797e2bfd263e8dfe17b61a7474f51f3acc82572e5809a",
+  "date": "2026-10-01",
+  "product_changed": false,
+  "product_pending_frames": 70,
+  "product_binary_sha256": "821ee273ce3d78f658d4efa83b2716ec89a12e4002fa0365b7c8bf17fc86b78a",
+  "current_inputs_unchanged": 528,
+  "historical": [
+    {
+      "path": "receipt.json",
+      "sha256": "3d498b4f902d50e6ff2e5bd3b1236cdd7c5175508742fa494dc10e3d4d2a3120",
+      "attachments": 27
+    },
+    {
+      "path": "all-slots-receipt.json",
+      "sha256": "4b21c2f87edf61a58804925f2e5ecb9fde2f4e3cdcd7b044e933a5ce547f1943",
+      "attachments": 72
+    },
+    {
+      "path": "actions-receipt.json",
+      "sha256": "d2d13cb2054d707450ce08df70fdc2a4cc85597c29ff9bc30c64f89255ddc049",
+      "attachments": 94
+    },
+    {
+      "path": "mirror-receipt.json",
+      "sha256": "82d4e21da58dbeb0ecc86e2b6e0376679f4154a41025facf273443361f97ee01",
+      "attachments": 113
+    },
+    {
+      "path": "cjk-figure-receipt.json",
+      "sha256": "e419f1e8f1bbb1775a27695c18a2e49652ce966b1c2964ed952a4f12c582eec2",
+      "attachments": 43
+    },
+    {
+      "path": "mark-receipt.json",
+      "sha256": "75616fa5be90046faff4e213412b57e4bee0a1a3514fed7e50fcda0f997b78e8",
+      "attachments": 27
+    }
+  ],
+  "source_inputs": [
+    {
+      "path": "Knights-of-legend.zip",
+      "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "path": "workplace/analysis/koltown/KOLTOWN-unpacked.EXE",
+      "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2"
+    },
+    {
+      "path": "workplace/analysis/koltown/KOLTOWN-unpacked-ida94-derived.i64",
+      "sha256": "5c32c977bd420c3a51e5c068ece78f830c4f252445cf138623fbaba64fe551c8"
+    },
+    {
+      "path": "workplace/item-detail-20261001/kol-items-mark-linux",
+      "sha256": "821ee273ce3d78f658d4efa83b2716ec89a12e4002fa0365b7c8bf17fc86b78a"
+    },
+    {
+      "path": "workplace/item-detail-20261001/gui-edge2/item-calls-private.json",
+      "sha256": "6291eb96a03be297fc6797e2bfd263e8dfe17b61a7474f51f3acc82572e5809a"
+    },
+    {
+      "path": "workplace/item-detail-20261001/gui-edge2/inputs.json",
+      "sha256": "b2ae9bd508710131f30c2e686d20dd9284d5aaa95ddfc9cc9fe5c8bd1c017e41"
+    },
+    {
+      "path": "workplace/item-detail-20261001/gui-edge2/prepare.py",
+      "sha256": "6858d52a4bce5eb68a162e6ae769aed8195cc411a319e0855eb15ebbe1433b30"
+    },
+    {
+      "path": "workplace/item-detail-20261001/gui-edge2/original.sh",
+      "sha256": "76c1ba9250e34ee4b0d809449edc80ed85979f4c631eafbe86b22ba20d2a65dd"
+    },
+    {
+      "path": "workplace/item-detail-20261001/gui-edge2/instrumented-book-startup-private.go",
+      "sha256": "f454dd9d3d3b4c636120b921ed6895e5e081987569dab643920c470c96fc8703"
+    },
+    {
+      "path": "workplace/item-detail-20261001/item-edge-annotated-private.json",
+      "sha256": "819531e117275aca2071b66e6799d1a9fa0ba55e9c1a52ffbeca7ee95f7da304"
+    },
+    {
+      "path": "assets/original-derived-data/portrait-layout.json",
+      "sha256": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df"
+    },
+    {
+      "path": "docs/re/item-edge-address-index.json",
+      "sha256": "daf589b21d26b3d22086f1256b4d1c3a705096c70394deb0c9771bb16ac2ad0d"
+    },
+    {
+      "path": "docs/verification/item-detail-20261001/mark-receipt.json",
+      "sha256": "75616fa5be90046faff4e213412b57e4bee0a1a3514fed7e50fcda0f997b78e8"
+    },
+    {
+      "path": "docs/verification/item-detail-20261001/verify_cjk_figure.py",
+      "sha256": "430e412ba61e08ebc2f03c72acc79d5943f530caef4666e80ab96b3acfbd2b06"
+    },
+    {
+      "path": "tools/png_io.py",
+      "sha256": "0295c62847b9e66e9a997940224c1d4c04bf5e0acbeab2d820bfecd0fd020c9c"
+    }
+  ],
+  "verifier_sha256": "34eb61805a5aaa1243fe944eede82d272ed578fc6e8d3883a71a0094ba5cc746",
+  "confirmed_edge_addresses": [
+    "0x169aa",
+    "0x16a25",
+    "0x16aab",
+    "0x16abc",
+    "0x16ace",
+    "0x16ae0",
+    "0x16cff",
+    "0x16d02",
+    "0x16d82"
+  ],
+  "negative_controls": [
+    "8000平面步長與正常快取不符，七次重建均拒絕"
+  ],
+  "limits": "只證實Theodoric正常104鍵的快取與曝光原因，產品尚未修正；原版無繁中畫面。",
+  "attachments": [
+    {
+      "path": "edge-source-original-004.png",
+      "sha256": "5d39a3b3fe6a4ce503bd227a3d36cb2707767df54f065e7610a8e931d83979ac",
+      "role": "original",
+      "frame": 4,
+      "source_entry": "KOLTOWN.EXE正常書本／旅店／物品頁",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    },
+    {
+      "path": "edge-source-remake-en-004.png",
+      "sha256": "761d977d22e71a100720b0b137c1d20bcf897a9d367eab00c94033da9c4815b4",
+      "role": "remake-en",
+      "frame": 4,
+      "source_entry": "kol-items-mark-linux正常輸入",
+      "source_sha256": "821ee273ce3d78f658d4efa83b2716ec89a12e4002fa0365b7c8bf17fc86b78a",
+      "tool": "Go 1.26.7／Ebitengine 2.9.9",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    },
+    {
+      "path": "edge-source-original-015.png",
+      "sha256": "a30e11d21e883b5691b49afc729df61706c73aed1efadf1ffc5f8931b9301c56",
+      "role": "original",
+      "frame": 15,
+      "source_entry": "KOLTOWN.EXE正常書本／旅店／物品頁",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    },
+    {
+      "path": "edge-source-remake-en-015.png",
+      "sha256": "0032993f0c310e6dc2e5c060607d80734036660ff2ff2a7ead49b73cd6b713d6",
+      "role": "remake-en",
+      "frame": 15,
+      "source_entry": "kol-items-mark-linux正常輸入",
+      "source_sha256": "821ee273ce3d78f658d4efa83b2716ec89a12e4002fa0365b7c8bf17fc86b78a",
+      "tool": "Go 1.26.7／Ebitengine 2.9.9",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    },
+    {
+      "path": "edge-source-original-100.png",
+      "sha256": "9170ba35d85e7946aca2526ea934a0697204e85ee8b9842ac75768810d06e71d",
+      "role": "original",
+      "frame": 100,
+      "source_entry": "KOLTOWN.EXE正常書本／旅店／物品頁",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    },
+    {
+      "path": "edge-source-remake-en-100.png",
+      "sha256": "36c50c319079d0f46988bab077edfb86af83d5f4ff3b995b4092764a95b1f4ff",
+      "role": "remake-en",
+      "frame": 100,
+      "source_entry": "kol-items-mark-linux正常輸入",
+      "source_sha256": "821ee273ce3d78f658d4efa83b2716ec89a12e4002fa0365b7c8bf17fc86b78a",
+      "tool": "Go 1.26.7／Ebitengine 2.9.9",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    },
+    {
+      "path": "edge-source-original-101.png",
+      "sha256": "624b0e7813b10c7f7574d816ab93b9170eb9417353ed948bb753c6cd6b96712e",
+      "role": "original",
+      "frame": 101,
+      "source_entry": "KOLTOWN.EXE正常書本／旅店／物品頁",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    },
+    {
+      "path": "edge-source-remake-en-101.png",
+      "sha256": "0e354534c8e10248ddd00f5ff5c3726d09a714d7c4fc9e70e8fc3b3570a6af77",
+      "role": "remake-en",
+      "frame": 101,
+      "source_entry": "kol-items-mark-linux正常輸入",
+      "source_sha256": "821ee273ce3d78f658d4efa83b2716ec89a12e4002fa0365b7c8bf17fc86b78a",
+      "tool": "Go 1.26.7／Ebitengine 2.9.9",
+      "evidence_status": "已驗證PNG；來源原因已證實，產品差異仍未通過",
+      "rights": "private GitHub可保存；不得公開散布"
+    }
+  ]
+}

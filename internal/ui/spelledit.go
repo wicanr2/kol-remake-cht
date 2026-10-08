@@ -43,6 +43,14 @@ func drawSpellEdit(dst *ebiten.Image, sprites Sprites, large *font.Font,
 	for _, seg := range p.Costs {
 		over(dst, large, seg.Col, seg.Row, seg.Text, town.ColourSpellField)
 	}
+	if p.Typing != nil {
+		fill(dst, town.SpellNameInputX, town.SpellNameInputY,
+			town.SpellNameInputWidth, town.SpellNameInputHeight, town.ColourSpellRule)
+		fill(dst, town.SpellNameInputX+1, town.SpellNameInputY+1,
+			town.SpellNameInputWidth-2, town.SpellNameInputHeight-2, [3]uint8{255, 255, 255})
+		over(dst, large, town.SpellNameInputTextCol, town.SpellNameInputTextRow,
+			*p.Typing, town.ColourSpellField)
+	}
 	return nil
 }
 

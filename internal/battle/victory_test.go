@@ -354,3 +354,29 @@ func TestMarkQuestDoneAlsoMarksThoseWhoDidNotTakeIt(t *testing.T) {
 		t.Fatalf("旗標是 %d，期望完成", got)
 	}
 }
+
+// RE-256 原版正常 seed2 戰敗畫面與三個輸出分支。
+func TestMonsterPluralEndingAssembly(t *testing.T) {
+	for _, c := range []struct {
+		name         string
+		count        int
+		plural, lost string
+	}{
+		{"CYCLOPS", 2, "CYCLOPES", "CYCLOPEs have"},
+		{"CYCLOPS", 1, "CYCLOPS", "CYCLOPS has"},
+		{"CLIFF TROLL", 3, "CLIFF TROLLS", "CLIFF TROLLs have"},
+		{"MUCK THINGS", 2, "MUCK THINGES", "MUCK THINGEs have"},
+	} {
+		base := PluralBaseName(c.name, c.count)
+		if got := base + PluralSuffix(c.name, c.count); got != c.plural {
+			t.Fatalf("%s: %q, want %q", c.name, got, c.plural)
+		}
+		suffix := " has"
+		if c.count > 1 {
+			suffix = "s have"
+		}
+		if got := base + DefeatSuffix(c.name, c.count) + suffix; got != c.lost {
+			t.Fatalf("%s defeat: %q, want %q", c.name, got, c.lost)
+		}
+	}
+}

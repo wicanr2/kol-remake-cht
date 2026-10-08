@@ -1,0 +1,17 @@
+{
+  "schema": "kol-item-action-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x169b9": {"semantic": "完整重建物品頁時把word_39A56清零，選回首欄。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；gui-actions1動作後畫格15／28／42／56／72／88及原始mov word_39A56,0。"},
+    "0x16cff": {"semantic": "byte_2DF50非零時清旗標，再跳16995完整重建及重設選取。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；0x16CEC..0x16CFF資料流，保留原始jmp loc_16995。"},
+    "0x1898f": {"semantic": "除UTURN／退出／食用另支外，動作先設重建旗標；丟棄NO亦完整返回首欄。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；0x1896D..0x18997及gui-actions1畫格70..72。"},
+    "0x18c1d": {"semantic": "丟棄先印D1，再呼叫sub_144EF等待YES／NO；回值0才進清除。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；0x18C11..0x18C27、sub_144EF id7／8及gui-actions1畫格70／71／86。"},
+    "0x18c38": {"semantic": "確認YES後逐byte清除16-byte來源物品；NO越過此迴圈。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；0x18C22..0x18C47及唯讀角色記錄NO不變／YES清空。"},
+    "0x18c5f": {"semantic": "物品清除並印D2後，以sub_144C3的SPACEBAR等待，再完整返回首欄。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；0x18C4A..0x18C64及gui-actions1畫格87／88。"},
+    "0x18d47": {"semantic": "動作訊息疊框座標(56,138)..(266,152)，呼叫sub_1BA9D含四像素投影。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；0x18D33..0x18D47五引數與正常丟棄提問／完成畫格。"},
+    "0x18d4f": {"semantic": "疊框文字字格欄8、像素列141；後段18D55設word_2DF16。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174；0x18D4F..0x18D55及正常畫格70／87。"}
+  }
+}

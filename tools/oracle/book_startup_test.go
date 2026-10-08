@@ -12,6 +12,7 @@ import (
 	"image"
 	"image/color"
 	"image/png"
+	"math/rand"
 	"os"
 	"path/filepath"
 	"sort"
@@ -1204,6 +1205,8 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 	// 有人受傷（參戰者記錄 +0x2D 或累積傷害 +0x0E 變了）之後再多跑一回合就停，最多八回合。
 	const maxRounds = 8
 	var (
+		aiSnap          *oracle.State // 第一次敵人 AI 進場那一刻的整機快照（KOL_BOOK_AIFUZZ，#11）
+		aiActor         int
 		boundaries      []boundary
 		plans           []enemyPlan
 		picks           []aiPick
@@ -1262,6 +1265,9 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 	o.OnCall(at(0x2374C), func(p *oracle.Oracle) {
 		if recording && !done && phase == "plan" {
 			plans = append(plans, enemyPlan{round, int(o.Word(o.DS(0x9E5A))), snapshot()})
+			if aiSnap == nil && os.Getenv("KOL_BOOK_AIFUZZ") != "" {
+				aiSnap, aiActor = p.Save(), int(o.Word(o.DS(0x9E5A)))
+			}
 		}
 	})
 	o.OnCall(at(0x25A3A), func(p *oracle.Oracle) {
@@ -1371,6 +1377,20 @@ func executeFirstRound(t *testing.T, o *oracle.Oracle) {
 		t.Fatalf("執行段沒有跑完：回合 %d，擲骰 %d 次、訊息 %d 則", round, len(rolls), len(messages))
 	}
 	panels := capturePanels(t, o, at)
+	if raw := os.Getenv("KOL_BOOK_AIFUZZ"); raw != "" {
+		n, err := strconv.Atoi(raw)
+		if err != nil || n <= 0 || aiSnap == nil {
+			t.Fatalf("KOL_BOOK_AIFUZZ=%q 要是正整數，而且要有 AI 進場快照（有快照=%v）", raw, aiSnap != nil)
+		}
+		fuzz := fuzzEnemyAI(t, o, at, aiSnap, aiActor, n)
+		body, err := json.Marshal(fuzz)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err = os.WriteFile(filepath.Join(dir, "ai-fuzz.json"), append(body, '\n'), 0600); err != nil {
+			t.Fatal(err)
+		}
+	}
 	data := map[string]any{
 		"panels": panels,
 		"schema": "kol-battle-rounds-v1", "source": "dosgolem-normal-player-path",
@@ -1756,5 +1776,231 @@ func probeTownDoor21(t *testing.T, o *oracle.Oracle) {
 	}, "", "  ")
 	if dir := os.Getenv("KOL_ORACLE_CAPTURE"); dir != "" {
 		_ = os.WriteFile(filepath.Join(dir, "town7-door21.json"), append(body, '\n'), 0o600)
+	}
+}
+
+// fuzzEnemyAI 是敵人 AI（`sub_2374C`）的擾動對拍原版那一側（#11，RE-168）。
+//
+// 從第一次 AI 進場那一刻的整機快照出發，每一組先 Restore，再把隊員與敵人的參戰者記錄、怪物記錄、
+// 耐力／疲勞與亂數種子改成隨機的值（固定種子的測試用 PRNG，不是遊戲的亂數），然後從原版自己的
+// 入口 `Call(sub_2374C, 行動者)`，記下每一次 `rand(n)` 的 n、結束後的亂數狀態、三個結果全域
+// （`word_31122` 指令、`word_30A78` 攻擊選項、`word_30916` 防禦選項）與行動者記錄。
+// remake 那一側（`cmd/kol/original_ai_fuzz_test.go`）拿同一份原始位元組建狀態、跑 `PlanEnemy`，
+// 比擲骰序列、亂數狀態與寫回的欄位。原版呼叫失敗的組（超出指令預算等）也記下來，不靜靜略過。
+func fuzzEnemyAI(t *testing.T, o *oracle.Oracle, at func(uint32) oracle.Addr, snap *oracle.State, actor, n int) map[string]any {
+	t.Helper()
+	const (
+		randEA    = 0x1B5A8
+		seedLo    = 0x1600
+		seedHi    = 0x1602
+		actorBase = 0x6712
+		stride    = 50
+		slots     = 18
+		ptrWord   = 0xBB78 // word_39A48：目前那一名的怪物記錄指標
+		idWord    = 0x9E5A // word_37D2A：行動者索引
+		wCommand  = 0x3252 // word_31122
+		wStyle    = 0x2BA8 // word_30A78
+		wGuard    = 0x2A46 // word_30916
+	)
+	rec := func(slot int) uint16 { return uint16(actorBase + slot*stride) }
+	readActors := func() []string {
+		out := make([]string, slots)
+		for i := range out {
+			out[i] = hex.EncodeToString(o.Bytes(o.DS(rec(i)), stride))
+		}
+		return out
+	}
+	readCounters := func() []map[string]int {
+		out := make([]map[string]int, slots)
+		for i := range out {
+			out[i] = map[string]int{"slot": i,
+				"stamina": int(o.Word(o.DS(uint16(0x1C50 + i*2)))),
+				"fatigue": int(int16(o.Word(o.DS(uint16(0x322E + i*2)))))}
+		}
+		return out
+	}
+	// 基準：進場那一刻的記錄、怪物記錄指標與戰場（Y*64+X）。
+	o.Restore(snap)
+	base := readActors()
+	o.WriteU16(o.DS(idWord), uint16(actor))
+	if _, err := o.Call(at(0x22296), uint16(actor)); err != nil {
+		t.Fatalf("sub_22296：%v", err)
+	}
+	monster := o.Word(o.DS(ptrWord))
+	o.Restore(snap)
+	fieldSeg := o.Word(o.DS(0x2DBA))
+	field := make([]byte, 4096)
+	for i := range field {
+		field[i] = o.Byte(oracle.Addr{Seg: fieldSeg, Off: uint16(i)})
+	}
+	tileOK := func(x, y int) bool {
+		if x < 4 || x > 0x3B || y < 4 || y > 0x3B {
+			return false
+		}
+		switch field[y*64+x] {
+		case 9, 10, 13:
+			return true
+		}
+		return false
+	}
+	baseRec := func(slot int) []byte { raw, _ := hex.DecodeString(base[slot]); return raw }
+	scratch := hex.EncodeToString(o.Bytes(o.DS(0x9E28), 0x30))
+	monsterBase := hex.EncodeToString(o.Bytes(o.DS(monster), 0x80))
+
+	staleMode := os.Getenv("KOL_BOOK_AIFUZZ_STALE")
+	if staleMode != "" && staleMode != "attack-only" {
+		t.Fatal("KOL_BOOK_AIFUZZ_STALE 只接受空值（任意壓力樣本）或 attack-only（舊選項 0…10）")
+	}
+	rnd := rand.New(rand.NewSource(20260930))
+	pick := func(xs ...int) int { return xs[rnd.Intn(len(xs))] }
+	chance := func(pct int) bool { return rnd.Intn(100) < pct }
+	var rolls []int
+	o.OnCall(at(randEA), func(p *oracle.Oracle) { rolls = append(rolls, int(p.Arg(0))) })
+	// 額度與花費：`sub_251B0(a, b)` 寫 `word_2F940`（花費），緊接著 `sub_2526C` 拿它與 `word_30D06`（額度）夾比值。
+	// 在 `sub_2526C` 進入那一刻讀兩個值，就是夾之前的原始數字。
+	var costLog []map[string]int
+	var costArgs [2]int
+	o.OnCall(at(0x251B0), func(p *oracle.Oracle) { costArgs = [2]int{int(p.Arg(0)), int(p.Arg(1))} })
+	o.OnCall(at(0x2526C), func(p *oracle.Oracle) {
+		costLog = append(costLog, map[string]int{"a": costArgs[0], "b": costArgs[1],
+			"allow": int(int16(p.Word(p.DS(0x2E36)))), "cost": int(int16(p.Word(p.DS(0x1A70)))),
+			"speed": int(int16(p.Word(p.DS(0x9E20)))), "enc": int(int16(p.Word(p.DS(0x2DB8)))),
+			"ring": int(int16(p.Word(p.DS(0x62E2)))), "fat": int(int16(p.Word(p.DS(0x1C7A))))})
+	})
+
+	party := []int{0, 1}
+	cases := make([]map[string]any, 0, n)
+	failed := 0
+	for c := 0; c < n; c++ {
+		o.Restore(snap)
+		put := func(slot, off int, v int) { o.WriteU8(o.DS(rec(slot)+uint16(off)), byte(v)) }
+
+		// 位置：隊員在原位附近，敵人在隊員周圍最遠 8 格（環只有 7 層，超出的走「七環都沒人」）。
+		var px, py [2]int
+		for k, slot := range party {
+			b := baseRec(slot)
+			px[k], py[k] = int(b[0x1F]), int(b[0x20])
+			for try := 0; try < 50; try++ {
+				x, y := int(b[0x1F])+rnd.Intn(7)-3, int(b[0x20])+rnd.Intn(7)-3
+				if !tileOK(x, y) || (k == 1 && x == px[0] && y == py[0]) {
+					continue
+				}
+				px[k], py[k] = x, y
+				break
+			}
+			put(slot, 0x1F, px[k])
+			put(slot, 0x20, py[k])
+		}
+		ex, ey := int(baseRec(actor)[0x1F]), int(baseRec(actor)[0x20])
+		for try := 0; try < 50; try++ {
+			x, y := px[0]+rnd.Intn(17)-8, py[0]+rnd.Intn(17)-8
+			if tileOK(x, y) && !(x == px[0] && y == py[0]) && !(x == px[1] && y == py[1]) {
+				ex, ey = x, y
+				break
+			}
+		}
+		put(actor, 0x1F, ex)
+		put(actor, 0x20, ey)
+
+		// 隊員：規劃過了沒有、已排的指令、方向、偶爾倒下。
+		for _, slot := range party {
+			put(slot, 0x22, pick(0, 1))
+			put(slot, 0x23, rnd.Intn(10))
+			put(slot, 0x24, rnd.Intn(8))
+			put(slot, 0x25, pick(0x21, 0x29, 0x27, 0x23, 0x0D, 0x05, 0x3F, 0x26))
+			put(slot, 0x28, rnd.Intn(8))
+			if chance(10) {
+				put(slot, 0x11, 0xFF)
+			}
+		}
+
+		// 敵人本身。
+		put(actor, 0x00, pick(0, 0, 1, 1, 2, 5))
+		put(actor, 0x02, 1+rnd.Intn(5))
+		put(actor, 0x0C, pick(0, 30, 60, 90, 120, 200))
+		put(actor, 0x0E, rnd.Intn(60))
+		// 部位耐久：活著是 1…0x7F，被打廢是 0xFF（`sub_277F4:0x278DE`：扣到 ≤ 0 存 0xFF，
+		// 已經是 0xFF 就不再動）。0 與 0x80…0xFE 打不出來，不擾動到那裡。
+		part := func() int {
+			if chance(80) {
+				return pick(1, 5, 20, 40, 60, 0x7F)
+			}
+			return 0xFF
+		}
+		put(actor, 0x15, part())
+		put(actor, 0x17, part())
+		put(actor, 0x19, part())
+		put(actor, 0x1B, part())
+		put(actor, 0x1E, pick(0, 0, 0, 1))
+		put(actor, 0x28, rnd.Intn(8))
+		put(actor, 0x29, pick(0, 0, 1))
+		put(actor, 0x2A, pick(0, 0, 3, 10))
+		put(actor, 0x2B, pick(0, 0, 0, 0, 1))
+		// 怪物記錄：撤退兩個門檻與手上那一格。
+		if chance(60) {
+			o.WriteU8(o.DS(monster+0x0D), byte(pick(0, 20, 40, 60, 100)))
+			o.WriteU8(o.DS(monster+0x0E), byte(pick(0, 10, 30, 50)))
+		}
+		if chance(35) {
+			o.WriteU8(o.DS(monster+0x20), byte(pick(0, 0, 1, 0x41)))
+		}
+		// 耐力與疲勞：比值 50 × 疲勞 ÷ 耐力 掃過 0…100。
+		stamina := 20 + rnd.Intn(230)
+		o.WriteU16(o.DS(uint16(0x1C50+actor*2)), uint16(stamina))
+		o.WriteU16(o.DS(uint16(0x322E+actor*2)), uint16(rnd.Intn(2*stamina+1)))
+
+		// 兩個 AI 全域的舊值（走不出去那條退路拿它當進來時的攻擊選項與列號）。
+		staleStyle, staleGuard := rnd.Intn(0x40), rnd.Intn(8)
+		if staleMode == "attack-only" {
+			// 預先限定上一手為攻擊、休息、射擊或撿取留下的 0…10；
+			// 移動三式 60…62 與任意表外讀取另列，這一批不宣稱涵蓋。
+			staleStyle %= 11
+		}
+		o.WriteU16(o.DS(wStyle), uint16(staleStyle))
+		o.WriteU16(o.DS(wGuard), uint16(staleGuard))
+
+		seed := rnd.Uint32()
+		o.WriteU16(o.DS(seedLo), uint16(seed))
+		o.WriteU16(o.DS(seedHi), uint16(seed>>16))
+		o.WriteU16(o.DS(idWord), uint16(actor))
+
+		entry := map[string]any{
+			"actors": readActors(), "counters": readCounters(), "seed": seed,
+			"monster": hex.EncodeToString(o.Bytes(o.DS(monster), 0x80)),
+			"stale_style": staleStyle, "stale_guard": staleGuard,
+		}
+		rolls = rolls[:0]
+		costLog = costLog[:0]
+		if _, err := o.Call(at(0x2374C), uint16(actor)); err != nil {
+			entry["error"] = err.Error()
+			failed++
+			cases = append(cases, entry)
+			continue
+		}
+		entry["rolls"] = append([]int(nil), rolls...)
+		entry["seed_after"] = uint32(o.Word(o.DS(seedLo))) | uint32(o.Word(o.DS(seedHi)))<<16
+		entry["command"] = int(o.Word(o.DS(wCommand)))
+		entry["style"] = int(o.Word(o.DS(wStyle)))
+		entry["guard"] = int(o.Word(o.DS(wGuard)))
+		entry["record_after"] = hex.EncodeToString(o.Bytes(o.DS(rec(actor)), stride))
+		// 移動三式那一段的中間值：權重三格（byte_37CF8…A，正規化後）、
+		// `sub_251B0`／`sub_2526C` 留下的額度與花費（word_30D06、word_2F940）、環號與疲勞比。
+		entry["costs"] = append([]map[string]int(nil), costLog...)
+		entry["dbg"] = map[string]int{
+			"w0": int(o.Byte(o.DS(0x9E28))), "w1": int(o.Byte(o.DS(0x9E29))), "w2": int(o.Byte(o.DS(0x9E2A))),
+			"num": int(o.Word(o.DS(0x2E36))), "den": int(o.Word(o.DS(0x1A70))),
+			"ring": int(o.Word(o.DS(0x62E2))), "fat": int(int16(o.Word(o.DS(0x1C7A)))),
+		}
+		cases = append(cases, entry)
+	}
+	t.Logf("AI 擾動：%d 組，原版呼叫失敗 %d 組", n, failed)
+	return map[string]any{
+		"schema": "kol-enemy-ai-fuzz-v1", "source": "dosgolem-normal-player-path",
+		"input": "KOLTOWN-unpacked.EXE", "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+		"actor": actor, "monster_ptr": monster, "monster_base": monsterBase, "base_actors": base,
+		"scratch_hex": scratch, "terrain_hex": hex.EncodeToString(field),
+		"prng": "math/rand seed 20260930（只用來產生擾動，不是遊戲的亂數）",
+		"stale_mode": staleMode,
+		"failed": failed, "cases": cases,
 	}
 }

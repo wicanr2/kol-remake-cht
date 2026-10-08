@@ -1,0 +1,69 @@
+from pathlib import Path
+import json,hashlib,os,subprocess,shutil
+root=Path('workplace/font-space-20261001')
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def own(p):
+    assert (Path(p).stat().st_uid,Path(p).stat().st_gid)==(os.getuid(),os.getgid()),p
+for p in [root,root/'text-fit.json',Path('docs/verification/cjk-text-fit.json'),Path('docs/worklist.json'),Path('CONTEXT.md'),Path('WORKLIST.md'),Path('WORKLOG.md')]:own(p)
+args=json.loads((root/'run.json').read_text())['command']
+p=subprocess.run(args,text=True,capture_output=True);assert p.returncode==0,(p.stdout,p.stderr)
+old=json.loads((root/'before-text-fit.json').read_text());new=json.loads((root/'text-fit.json').read_text())
+actual=json.loads((root/'runtime-widths.json').read_text())
+assert old['checked']==new['checked']==9635 and new['failed']==0
+assert actual[' ']==16
+changed=[];checked=0
+for a,b in zip(old['checks'],new['checks']):
+    assert (a['kind'],a['en'],a['zh'])==(b['kind'],b['en'],b['zh'])
+    if b['zh']:
+        checked+=1;assert b['width']==actual[b['zh']],(b['kind'],b['en'],b['width'],actual[b['zh']])
+        if a['width']!=b['width']:changed.append({'kind':b['kind'],'source':b['en'],'text':b['zh'],'old_width':a['width'],'runtime_width':b['width']})
+assert changed
+sample=changed[0];negative=dict(sample,right_limit=sample['old_width'],old_would_pass=True,current_rejects=sample['runtime_width']>sample['old_width'])
+assert negative['current_rejects']
+target=Path('docs/verification/cjk-ui/font-width-20261001');assert not target.exists();own(target.parent);target.mkdir()
+files={}
+def save(p,name):
+    shutil.copyfile(p,target/name);own(target/name);files[name]=sha(target/name)
+save(root/'before-text-fit.json','before-text-fit.json')
+save(Path('docs/verification/cjk-text-fit.json'),'previous-formal-text-fit.json')
+save(root/'text-fit.json','text-fit.json')
+save(root/'runtime-widths.json','runtime-widths.json')
+save(root/'measure.go','measure.go.txt')
+save(Path('tools/verify_text_fit.py'),'verify_text_fit.py.txt')
+save(Path('workplace/cjk-layout.json'),'layout.json')
+save(Path('/control/kol_font_space_finish.py'),'kol_font_space_finish.py.txt')
+report={'schema':'kol-cjk-font-width-validation-v1','date':'2026-10-01',
+    'status':'measurement-contract-confirmed','scope':'只核實既有靜態母體字寬與正式 Font.Measure 一致，不宣稱全畫面覆蓋、最長字串正常 GUI 或原版 parity',
+    'checked_rectangles':9635,'runtime_checked_nonempty_strings':checked,'runtime_unique_strings':len(actual),
+    'changed_width_checks':len(changed),'changed_widths':changed,
+    'space_advance':actual[' '],'failures':0,'negative_control':negative,
+    'evidence':'internal/font/font.go 的 Font.advance 對 manifest 未列空白使用 Advance=16；Go probe 直接載入正式 font.Load 後逐字串執行 Font.Measure，沒有另寫字寬模型。',
+    'toolchain':{'image':'eob-remake-go:1.26.7-ebiten2.9.9-audio','image_id':'sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa','GOWORK':'off','GOMODCACHE':'/go/pkg/mod','network':'none'},
+    'commands':{'checker':args,'runtime':['go','run','workplace/font-space-20261001/measure.go']},
+    'runtime_source':{'path':'internal/font/font.go','sha256':sha('internal/font/font.go')},
+    'inputs_sha256':new['inputs_sha256'],
+    'font_png':{'path':'assets/ui-font/zh-hant-16.png','sha256':sha('assets/ui-font/zh-hant-16.png')},
+    'product_binary':{'path':'workplace/cjk-edge-20261001/kol-edge-fixed','sha256':sha('workplace/cjk-edge-20261001/kol-edge-fixed'),'rebuilt':False},
+    'files':files,'rights':'不包含原始封裝或反組譯 payload；沿用專案資料／翻譯／字型權利，不授權公開原作素材。'}
+(target/'receipt.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+shutil.copyfile(root/'text-fit.json',Path('docs/verification/cjk-text-fit.json'))
+paths=[Path('docs/i18n/README.md'),Path('docs/verification/manual-fidelity-audit-20260923.md')]
+for p in paths:own(p)
+with paths[0].open('a') as f:
+    f.write('\n2026-10-01 字寬量測勘誤：靜態工具原把半形空白計 8 像素，正式字模未列空白，\n`Font.Measure` 實際計 16。工具已改依 manifest 字距；同一母體 9,635 項檢查仍無溢出，\n非空字串與直接載入正式字模的 Go 量測逐項一致，見\n[字寬收據](../verification/cjk-ui/font-width-20261001/receipt.json)。\n[正式安全矩形報表](../verification/cjk-text-fit.json)已更新，舊報表完整保留於收據附件。\n此結果限靜態母體，不代替最長字串的正常畫面驗收。\n')
+with paths[1].open('a') as f:
+    f.write('\n## 2026-10-01：空白字距驗收勘誤\n\n靜態 `verify_text_fit.py` 原把半形空白計半格 8 像素；正式字模未列空白，\n`Font.advance` 因此使用完整固定字距 16。原有混合姓名／英文的寬度斷言低估，\n不是正式顯示改了字距。現依 runtime 契約訂正工具；相同 9,635 項檢查仍全數通過，\n每筆非空字串與直接 `font.Load`／`Font.Measure` 的 Go 結果一致。\n[收據及舊報表](cjk-ui/font-width-20261001/receipt.json)保留來源、直接量測與窄矩形反面對照；\n[正式報表](cjk-text-fit.json)同次更新。未改譯文、字模、版面或產品建置；\n#34 未覆蓋欄位與 #40 最長內容正常 GUI 仍維持原閘門。\n')
+p=Path('CONTEXT.md');s=p.read_text();marker='2026-10-01 名冊邊界訂正：';assert s.count(marker)==1
+paragraph=f'2026-10-01 空白字距驗收訂正：靜態工具原將半形空白算 8 像素，正式字模\n`Font.Measure` 實為 16。已只修檢查器，相同 9,635 項仍通過；{checked} 筆非空\n檢查與直接 Go 字模量測完全一致，{len(changed)} 項寬度斷言已訂正。\n[正式收據](docs/verification/cjk-ui/font-width-20261001/receipt.json)保存旧報表及反面對照，\n[安全矩形報表](docs/verification/cjk-text-fit.json)已更新。現行 f969a63f 產品未重建，\n字距、譯文、版面与存檔未改；#34／#40 未覆蓋的正常畫面驗收仍待完成。\n\n'.replace('旧','舊').replace('与','與')
+p.write_text(s.replace(marker,paragraph+marker))
+data=json.loads(Path('docs/worklist.json').read_text());item=next(x for x in data['items'] if x.get('issue')==34)
+item['body']+=f' 2026-10-01 空白字距訂正：靜態工具原計 8 像素、正式 Font.Measure 為 16。相同 9,635 項仍無失敗，{checked} 筆非空檢查与直接 Go 字模量測相同、{len(changed)} 項寬度已訂正。正式報表 docs/verification/cjk-text-fit.json、來源與舊報表收據 docs/verification/cjk-ui/font-width-20261001/receipt.json；未改正式字距或譯文，尚未涵蓋欄位仍待驗。'.replace('与','與')
+Path('docs/worklist.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+with Path('WORKLOG.md').open('a') as f:
+    f.write(f'\n## 2026-10-01：中文字模空白字距驗收勘誤\n\n- 告示呈現等待使用者選擇，續做不依賴該決定的文字量測。查實正式字模沒有空白 glyph，Font.advance 使用 Advance=16；靜態工具誤用 8，會低估混合姓名／英文句。只改檢查工具，不改正式字距、翻譯、版面或產品建置。\n- 保留前一 9,635 項報表與原正式 6,685 項報表；同母體修正版 9,635 項全部通過。Go oracle 直接 font.Load／Font.Measure 核對 {checked} 筆非空檢查，全部一致；{len(changed)} 項舊寬度訂正。以實際低估字串建立窄矩形反例，舊算法會放行、新契約拒絕。\n- Go oracle 首次被 go.work 的未掛載 /dosgolem 擋在載入前；本任務不依賴 oracle 模組，以 GOWORK=off 限定本專案、相同來源與字模乾淨重跑退出 0。Xvfb 有 trap 與程序邊界，使用既有 Go image、無網路及容器 tmpfs exec，未在主機執行。\n- 正式字寬收據、直接量測、原執行 Go 來源、工具、版面及舊報表同次保存與索引；新正式 cjk-text-fit.json 含每份輸入 SHA。此證明限既有靜態母體，#34 全欄位及 #40 最長正常 GUI 仍開放。\n')
+for cmd in [('python3','tools/worklist.py','render'),('python3','tools/worklist.py','selftest'),('python3','tools/worklist.py','verify')]:
+    cp=subprocess.run(cmd,text=True,capture_output=True);assert cp.returncode==0,(cmd,cp.stdout,cp.stderr)
+    print(cp.stdout.splitlines()[-1:])
+for name,h in files.items():assert sha(target/name)==h,name;own(target/name)
+assert sha('docs/verification/cjk-text-fit.json')==sha(root/'text-fit.json')
+print(json.dumps({'rectangles':new['checked'],'runtime_checks':checked,'changed_widths':len(changed),'negative_control':negative,'receipt':str(target/'receipt.json')},ensure_ascii=False))

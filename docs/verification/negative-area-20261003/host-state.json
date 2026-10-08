@@ -1,0 +1,393 @@
+{
+  "git_initial": " M CONTEXT.md\n M WORKLIST.md\n M WORKLOG.md\n M assets/ui-font/manifest.json\n M assets/ui-font/zh-hant-16.png\n M cmd/kol/battle_inventory.go\n M cmd/kol/battle_render.go\n M cmd/kol/complete_save_test.go\n M cmd/kol/main.go\n M cmd/kol/original_rounds_test.go\n M docs/i18n/README.md\n M docs/i18n/display-names-zh-Hant.tsv\n M docs/i18n/newchar-zh-Hant.json\n M docs/i18n/overflow-policy.json\n M docs/i18n/ui-zh-Hant.json\n M docs/manual/glossary.md\n M docs/re/RESEARCH-LOG.md\n M docs/re/character-creation.md\n M docs/spec/005-character-creation.md\n M docs/spec/006-rest-and-save.md\n M docs/spec/008-combat-field.md\n M docs/spec/009-combat-attack.md\n M docs/spec/010-combat-commands.md\n M docs/spec/011-wilderness-ambush.md\n M docs/spec/012-combat-spells.md\n M docs/spec/016-starting-inn.md\n M docs/spec/019-battle-equipment-panel.md\n M docs/spec/023-complete-save.md\n M docs/spec/026-weather-animation.md\n M docs/spec/027-battle-exit-wounds.md\n M docs/spec/031-item-detail-page.md\n M docs/spec/033-cjk-display-names.md\n M docs/spec/README.md\n M docs/verification/cjk-text-fit.json\n M docs/verification/cjk-ui/README.md\n M docs/verification/manual-fidelity-audit-20260923.md\n M docs/verification/player-path/README.md\n M docs/verification/player-path/arena-receipt.json\n M docs/verification/player-path/arena.json\n M docs/verification/player-path/arena/step-1533.png\n M docs/verification/player-path/arena/step-1534.png\n M docs/verification/player-path/arena/step-1535.png\n M docs/verification/player-path/arena/step-1536.png\n D docs/verification/player-path/arena/step-1537.png\n D docs/verification/player-path/arena/step-1538.png\n D docs/verification/player-path/arena/step-1539.png\n D docs/verification/player-path/arena/step-1540.png\n D docs/verification/player-path/arena/step-1541.png\n D docs/verification/player-path/arena/step-1556.png\n D docs/verification/player-path/arena/step-1776.png\n D docs/verification/player-path/arena/step-1777.png\n M docs/verification/player-path/arena/trace.json\n M docs/verification/player-path/full-chain-ending-receipt.json\n M docs/verification/player-path/full-chain-ending/step-045.png\n M docs/verification/player-path/full-chain-ending/step-090.png\n M docs/verification/player-path/full-chain-ending/trace.json\n M docs/verification/player-path/full-chain-receipt.json\n M docs/verification/player-path/full-chain-reload-receipt.json\n M docs/verification/player-path/full-chain-reload.json\n D docs/verification/player-path/full-chain-reload/step-1450.png\n D docs/verification/player-path/full-chain-reload/step-1451.png\n M docs/verification/player-path/full-chain-reload/trace.json\n M docs/verification/player-path/full-chain.json\n M docs/verification/player-path/full-chain/trace.json\n M docs/verification/player-path/gear-switch-receipt.json\n M docs/verification/player-path/gear-switch.json\n M docs/verification/player-path/gear-switch/trace.json\n M docs/verification/player-path/quest-chain-receipt.json\n M docs/verification/player-path/quest-chain-reload-receipt.json\n M docs/verification/player-path/quest-chain-reload.json\n M docs/verification/player-path/quest-chain-reload/trace.json\n M docs/verification/player-path/quest-chain.json\n D docs/verification/player-path/quest-chain/step-4996.png\n D docs/verification/player-path/quest-chain/step-6722.png\n D docs/verification/player-path/quest-chain/step-6881.png\n D docs/verification/player-path/quest-chain/step-7099.png\n M docs/verification/player-path/quest-chain/trace.json\n M docs/verification/player-path/town-leave-receipt.json\n M docs/verification/player-path/town-leave.json\n M docs/verification/player-path/town-leave/step-012.png\n M docs/verification/player-path/town-rest-receipt.json\n M docs/verification/player-path/town-rest.json\n M docs/verification/player-path/town-round-trip-receipt.json\n M docs/verification/player-path/town-round-trip.json\n M docs/verification/player-path/town-round-trip/step-012.png\n M docs/verification/player-path/town-round-trip/step-013.png\n M docs/verification/player-path/town-round-trip/step-014.png\n M docs/verification/player-path/town-round-trip/step-015.png\n M docs/verification/player-path/town-round-trip/step-016.png\n M docs/verification/player-path/town-round-trip/step-017.png\n M docs/verification/player-path/town-round-trip/step-018.png\n M docs/verification/player-path/world-clock-receipt.json\n M docs/verification/player-path/world-clock.json\n M docs/verification/player-path/world-clock/step-012.png\n M docs/verification/player-path/world-clock/step-013.png\n M docs/verification/player-path/world-clock/step-014.png\n M docs/verification/player-path/world-clock/step-015.png\n M docs/verification/player-path/world-clock/step-016.png\n M docs/verification/player-path/world-clock/step-017.png\n M docs/verification/player-path/world-clock/step-018.png\n M docs/verification/player-path/world-clock/step-019.png\n M docs/verification/player-path/world-clock/step-020.png\n M docs/verification/player-path/world-clock/step-021.png\n M docs/verification/player-path/world-clock/step-022.png\n M docs/verification/player-path/world-clock/step-023.png\n M docs/verification/player-path/world-clock/step-024.png\n M docs/verification/player-path/world-clock/step-025.png\n M docs/verification/player-path/world-clock/step-026.png\n M docs/verification/player-path/world-clock/step-027.png\n M docs/verification/player-path/world-quest-receipt.json\n M docs/verification/player-path/world-quest.json\n M docs/verification/player-path/world-quest/step-012.png\n M docs/verification/player-path/world-quest/step-013.png\n M docs/verification/player-path/world-quest/step-014.png\n M docs/verification/player-path/world-quest/step-015.png\n M docs/verification/player-path/world-quest/step-016.png\n M docs/verification/player-path/world-quest/step-017.png\n M docs/verification/player-path/world-quest/step-018.png\n M docs/verification/player-path/world-quest/step-019.png\n M docs/verification/player-path/world-quest/step-020.png\n M docs/verification/player-path/world-quest/step-021.png\n M docs/verification/player-path/world-quest/step-022.png\n M docs/verification/player-path/world-quest/step-023.png\n M docs/verification/player-path/world-quest/step-024.png\n M docs/verification/player-path/world-quest/step-025.png\n M docs/verification/player-path/world-quest/step-026.png\n M docs/verification/player-path/world-quest/step-027.png\n M docs/verification/player-path/world-quest/step-028.png\n M docs/verification/player-path/world-quest/step-029.png\n M docs/verification/player-path/world-quest/step-030.png\n M docs/verification/player-path/world-quest/step-031.png\n M docs/verification/player-path/world-quest/step-032.png\n M docs/verification/player-path/world-quest/step-033.png\n M docs/verification/player-path/world-quest/step-034.png\n M docs/verification/player-path/world-quest/step-035.png\n M docs/verification/player-path/world-quest/step-036.png\n M docs/verification/player-path/world-quest/step-037.png\n M docs/verification/player-path/world-quest/step-038.png\n M docs/verification/player-path/world-quest/step-039.png\n M docs/verification/player-path/world-quest/step-040.png\n M docs/verification/player-path/world-quest/step-041.png\n M docs/verification/player-path/world-quest/step-042.png\n M docs/verification/player-path/world-quest/step-043.png\n M docs/verification/player-path/world-quest/step-044.png\n M docs/verification/player-path/world-quest/step-045.png\n M docs/verification/player-path/world-quest/step-046.png\n M docs/verification/player-path/world-quest/step-047.png\n M docs/verification/player-path/world-quest/step-048.png\n M docs/verification/player-path/world-quest/step-049.png\n M docs/verification/player-path/world-quest/step-050.png\n M docs/verification/player-path/world-quest/step-051.png\n M docs/verification/player-path/world-quest/step-052.png\n M docs/verification/player-path/world-quest/step-053.png\n M docs/verification/player-path/world-quest/step-054.png\n M docs/verification/player-path/world-quest/step-055.png\n M docs/verification/player-path/world-quest/step-056.png\n M docs/verification/player-path/world-quest/step-057.png\n M docs/verification/player-path/world-quest/step-058.png\n M docs/verification/player-path/world-quest/step-059.png\n M docs/verification/player-path/world-quest/step-060.png\n M docs/verification/player-path/world-quest/step-061.png\n M docs/verification/player-path/world-quest/step-062.png\n M docs/verification/player-path/world-quest/step-063.png\n M docs/verification/player-path/world-quest/step-064.png\n M docs/verification/player-path/world-quest/step-065.png\n M docs/verification/player-path/world-quest/step-066.png\n M docs/verification/player-path/world-quest/step-067.png\n M docs/verification/player-path/world-quest/step-068.png\n M docs/verification/player-path/world-quest/step-069.png\n M docs/verification/player-path/world-quest/step-070.png\n M docs/verification/player-path/world-quest/step-071.png\n M docs/verification/player-path/world-quest/step-072.png\n M docs/verification/player-path/world-quest/step-073.png\n M docs/verification/player-path/world-quest/step-074.png\n M docs/verification/player-path/world-quest/step-075.png\n M docs/verification/player-path/world-quest/step-076.png\n M docs/verification/player-path/world-quest/step-077.png\n M docs/verification/player-path/world-quest/step-078.png\n M docs/verification/player-path/world-quest/step-079.png\n M docs/verification/player-path/world-quest/step-080.png\n M docs/verification/player-path/world-quest/step-081.png\n M docs/verification/player-path/world-quest/step-082.png\n M docs/verification/player-path/world-quest/step-083.png\n M docs/verification/player-path/world-quest/step-084.png\n M docs/verification/player-path/world-quest/step-085.png\n M docs/verification/player-path/world-quest/step-086.png\n M docs/verification/player-path/world-quest/step-087.png\n M docs/verification/player-path/world-quest/step-088.png\n M docs/verification/player-path/world-quest/step-089.png\n M docs/verification/player-path/world-road-receipt.json\n M docs/verification/player-path/world-road.json\n M docs/verification/player-path/world-road/step-012.png\n M docs/verification/player-path/world-road/step-013.png\n M docs/verification/player-path/world-road/step-014.png\n M docs/verification/player-path/world-road/step-015.png\n M docs/verification/player-path/world-road/step-016.png\n M docs/verification/player-path/world-road/step-017.png\n M docs/verification/player-path/world-road/step-018.png\n M docs/verification/player-path/world-road/step-019.png\n M docs/verification/player-path/world-road/step-020.png\n M docs/verification/player-path/world-road/step-021.png\n M docs/verification/player-path/world-road/step-022.png\n M docs/verification/player-path/world-road/step-023.png\n M docs/verification/player-path/world-road/step-024.png\n M docs/verification/player-path/world-road/step-025.png\n M docs/verification/player-path/world-road/step-026.png\n M docs/verification/player-path/world-road/step-027.png\n M docs/verification/player-path/world-road/step-028.png\n M docs/verification/player-path/world-road/step-029.png\n M docs/verification/player-path/world-road/step-030.png\n M docs/verification/player-path/world-road/step-031.png\n M docs/verification/player-path/world-road/step-032.png\n M docs/verification/player-path/world-road/step-033.png\n M docs/verification/quest-chain-20260930.md\n M docs/worklist.json\n M internal/battle/ai.go\n M internal/battle/ai_ring_test.go\n M internal/battle/ai_test.go\n M internal/battle/ambush.go\n M internal/battle/ambush_test.go\n M internal/battle/attack.go\n M internal/battle/attack_test.go\n M internal/battle/battle.go\n M internal/battle/commands.go\n M internal/battle/commands_test.go\n M internal/battle/cursor.go\n M internal/battle/cursor_test.go\n M internal/battle/equipment_panel.go\n M internal/battle/execution.go\n M internal/battle/fatigue.go\n M internal/battle/flee.go\n M internal/battle/items.go\n M internal/battle/knockback.go\n M internal/battle/monster.go\n M internal/battle/monster_load_test.go\n M internal/battle/planning.go\n M internal/battle/planning_test.go\n M internal/battle/state.go\n M internal/i18n/i18n.go\n M internal/save/complete.go\n M internal/save/complete_test.go\n M internal/save/save.go\n M internal/town/inn.go\n M internal/town/inventory.go\n M internal/town/itempage.go\n M internal/town/itempage_test.go\n M internal/town/keys.go\n M internal/town/layout.go\n M internal/town/portrait.go\n M internal/town/portrait_test.go\n M internal/town/scroll.go\n M internal/town/scroll_test.go\n M internal/town/session.go\n M internal/town/shop.go\n M internal/town/shop_test.go\n M internal/ui/battle.go\n M internal/ui/battle_cjk.go\n M internal/ui/battletiles.go\n M internal/ui/idle_party_test.go\n M internal/ui/itempage.go\n M internal/ui/itempage_cjk.go\n M internal/ui/newcharacter.go\n M internal/ui/outdoor.go\n M internal/ui/world.go\n M internal/world/road.go\n M internal/world/session.go\n M tools/check_player_paths.py\n M tools/drive_battle_script.py\n M tools/extract_character_roster.py\n M tools/extract_monsters.py\n M tools/oracle/book_startup_test.go\n M tools/oracle/check_updated_dosgolem.sh\n M tools/replay_player_path.py\n M tools/run_driver.sh\n M tools/scan_cjk_text_leaks.py\n M tools/verify_cjk_coverage.py\n M tools/verify_display_names.py\n M tools/verify_text_fit.py\n?? cmd/kol/battle_area_prompt_test.go\n?? cmd/kol/battle_encounter_lines_test.go\n?? cmd/kol/battle_loot_original_test.go\n?? cmd/kol/battle_loot_save_test.go\n?? cmd/kol/battle_world_return_test.go\n?? cmd/kol/battle_world_time_test.go\n?? cmd/kol/original_ai_fuzz_test.go\n?? docs/i18n/font-retained-characters.json\n?? docs/i18n/world-prompts-zh-Hant.tsv\n?? docs/re/20261001-complete-battle.md\n?? docs/re/20261001-item-detail.md\n?? docs/re/20261001-target-cursor.md\n?? docs/re/20261002-battle-exits.md\n?? docs/re/20261002-battle-loot.md\n?? docs/re/20261002-battle-return.md\n?? docs/re/20261002-battle-settlement.md\n?? docs/re/20261002-battle-victory.md\n?? docs/re/20261002-battle-world.md\n?? docs/re/20261002-indexed-return-window.md\n?? docs/re/20261002-normal-spell-return.md\n?? docs/re/20261002-production-return-scratch.md\n?? docs/re/20261002-return-cost-spells.md\n?? docs/re/20261002-return-cost.md\n?? docs/re/20261002-return-scratch-tracker.md\n?? docs/re/20261002-return-tracker-phases.md\n?? docs/re/20261002-world-clock.md\n?? docs/re/20261003-ambush-placement.md\n?? docs/re/20261003-monster-equipment.md\n?? docs/re/20261003-native-scroll-token.md\n?? docs/re/20261003-normal-flee.md\n?? docs/re/20261003-normal-victory.md\n?? docs/re/20261003-purchased-spell-effect.md\n?? docs/re/20261003-spell-area.md\n?? docs/re/20261003-unarmed-resolution.md\n?? docs/re/20261003-world-cost-resume.md\n?? docs/re/battle-loot-address-index.json\n?? docs/re/battle-order-address-index.json\n?? docs/re/battle-settlement-address-index.json\n?? docs/re/item-action-address-index.json\n?? docs/re/item-detail-address-index.json\n?? docs/re/item-edge-address-index.json\n?? docs/re/item-figure-address-index.json\n?? docs/re/item-mark-address-index.json\n?? docs/re/item-name-address-index.json\n?? docs/re/target-cursor-address-index.json\n?? docs/re/world-return-address-index.json\n?? docs/verification/ambush-placement-20261003/\n?? docs/verification/battle-complete-20261001/\n?? docs/verification/battle-exits-20261002/\n?? docs/verification/battle-loot-20261002/\n?? docs/verification/battle-return-20261002/\n?? docs/verification/battle-settlement-20261002/\n?? docs/verification/battle-target-cursor-20261001.md\n?? docs/verification/battle-target-cursor-20261001/\n?? docs/verification/battle-victory-20261002/\n?? docs/verification/battle-world-20261002/\n?? docs/verification/character-ui/roster-boundaries-20261001/\n?? docs/verification/cjk-ui/font-width-20261001/\n?? docs/verification/cjk-ui/held-names-20261001/\n?? docs/verification/cjk-ui/longest-battle-20261001/\n?? docs/verification/cjk-ui/longest-dialog-20261001/\n?? docs/verification/cjk-ui/longest-equipment-20261001/\n?? docs/verification/cjk-ui/longest-input-20261001/\n?? docs/verification/cjk-ui/longest-shop-20261001/\n?? docs/verification/cjk-ui/longest-title-20261001/\n?? docs/verification/cjk-ui/longest-town-entry-20261001/\n?? docs/verification/cjk-ui/longest-town-message-20261001/\n?? docs/verification/cjk-ui/longest-weapons-20261001/\n?? docs/verification/cjk-ui/natural-sign-20261001/\n?? docs/verification/cjk-ui/town-edge-20261001/\n?? docs/verification/enemy-ai-fuzz-20260930.md\n?? docs/verification/inventory-empty-slots-20261001.md\n?? docs/verification/inventory-empty-slots-20261001/\n?? docs/verification/item-detail-20261001/\n?? docs/verification/monster-equipment-20261003/\n?? docs/verification/native-scroll-20261003/\n?? docs/verification/normal-flee-20261003/\n?? docs/verification/normal-victory-20261003/\n?? docs/verification/platform-smoke-20261001.md\n?? docs/verification/platform-smoke-20261001/\n?? docs/verification/player-path/arena/build-manifest.json\n?? docs/verification/player-path/arena/step-1528.png\n?? docs/verification/player-path/arena/step-1529.png\n?? docs/verification/player-path/arena/step-1530.png\n?? docs/verification/player-path/arena/step-1531.png\n?? docs/verification/player-path/arena/step-1532.png\n?? docs/verification/player-path/arena/step-1551.png\n?? docs/verification/player-path/arena/step-1705.png\n?? docs/verification/player-path/arena/step-1706.png\n?? docs/verification/player-path/full-chain-ending/build-manifest.json\n?? docs/verification/player-path/full-chain-reload/build-manifest.json\n?? docs/verification/player-path/full-chain-reload/step-2011.png\n?? docs/verification/player-path/full-chain-reload/step-2012.png\n?? docs/verification/player-path/full-chain/build-manifest.json\n?? docs/verification/player-path/gear-switch/build-manifest.json\n?? docs/verification/player-path/quest-chain-reload/build-manifest.json\n?? docs/verification/player-path/quest-chain/build-manifest.json\n?? docs/verification/player-path/quest-chain/step-5477.png\n?? docs/verification/player-path/quest-chain/step-7064.png\n?? docs/verification/player-path/quest-chain/step-7217.png\n?? docs/verification/player-path/quest-chain/step-7435.png\n?? docs/verification/purchased-spell-effect-20261003/\n?? docs/verification/return-cost-20261002/\n?? docs/verification/return-cost-gate-20261002/\n?? docs/verification/return-indexed-read-20261002/\n?? docs/verification/return-tracker-20261002/\n?? docs/verification/return-tracker-phases-20261002/\n?? docs/verification/spell-area-20261003/\n?? docs/verification/spell-return-20261002/\n?? docs/verification/unarmed-resolution-20261003/\n?? docs/verification/world-clock-20261002/\n?? docs/verification/world-cost-resume-20261003/\n?? docs/verification/world-return-cost-20261002/\n?? internal/battle/forced_drop_test.go\n?? internal/battle/loot.go\n?? internal/battle/return_scratch.go\n?? internal/battle/return_scratch_test.go\n?? internal/i18n/paragraphs.go\n?? internal/i18n/paragraphs_test.go\n?? internal/oracle/zz_dump_test.go\n?? internal/town/inventory_holes_test.go\n?? internal/ui/battle_marker_test.go\n?? internal/ui/itempage_edge.go\n?? internal/ui/world_prompt_cjk_test.go\n?? internal/world/return_cost.go\n?? internal/world/return_cost_test.go\n?? internal/world/time_part_test.go\n?? tools/ida_probe_target_cursor.py\n?? tools/oracle/book_roster_test.go\n?? tools/oracle/check_book_roster.sh\n?? tools/review_player_path_inventory_change.py\n?? tools/verify_book_roster.py\n?? tools/verify_inventory_empty_slots.py\n?? tools/verify_world_prompts.py\n",
+  "git_final": " M CONTEXT.md\n M WORKLIST.md\n M WORKLOG.md\n M assets/ui-font/manifest.json\n M assets/ui-font/zh-hant-16.png\n M cmd/kol/battle_inventory.go\n M cmd/kol/battle_render.go\n M cmd/kol/complete_save_test.go\n M cmd/kol/main.go\n M cmd/kol/original_rounds_test.go\n M docs/i18n/README.md\n M docs/i18n/display-names-zh-Hant.tsv\n M docs/i18n/newchar-zh-Hant.json\n M docs/i18n/overflow-policy.json\n M docs/i18n/ui-zh-Hant.json\n M docs/manual/glossary.md\n M docs/re/RESEARCH-LOG.md\n M docs/re/character-creation.md\n M docs/spec/005-character-creation.md\n M docs/spec/006-rest-and-save.md\n M docs/spec/008-combat-field.md\n M docs/spec/009-combat-attack.md\n M docs/spec/010-combat-commands.md\n M docs/spec/011-wilderness-ambush.md\n M docs/spec/012-combat-spells.md\n M docs/spec/016-starting-inn.md\n M docs/spec/019-battle-equipment-panel.md\n M docs/spec/023-complete-save.md\n M docs/spec/026-weather-animation.md\n M docs/spec/027-battle-exit-wounds.md\n M docs/spec/031-item-detail-page.md\n M docs/spec/033-cjk-display-names.md\n M docs/spec/README.md\n M docs/verification/cjk-text-fit.json\n M docs/verification/cjk-ui/README.md\n M docs/verification/manual-fidelity-audit-20260923.md\n M docs/verification/player-path/README.md\n M docs/verification/player-path/arena-receipt.json\n M docs/verification/player-path/arena.json\n M docs/verification/player-path/arena/step-1533.png\n M docs/verification/player-path/arena/step-1534.png\n M docs/verification/player-path/arena/step-1535.png\n M docs/verification/player-path/arena/step-1536.png\n D docs/verification/player-path/arena/step-1537.png\n D docs/verification/player-path/arena/step-1538.png\n D docs/verification/player-path/arena/step-1539.png\n D docs/verification/player-path/arena/step-1540.png\n D docs/verification/player-path/arena/step-1541.png\n D docs/verification/player-path/arena/step-1556.png\n D docs/verification/player-path/arena/step-1776.png\n D docs/verification/player-path/arena/step-1777.png\n M docs/verification/player-path/arena/trace.json\n M docs/verification/player-path/full-chain-ending-receipt.json\n M docs/verification/player-path/full-chain-ending/step-045.png\n M docs/verification/player-path/full-chain-ending/step-090.png\n M docs/verification/player-path/full-chain-ending/trace.json\n M docs/verification/player-path/full-chain-receipt.json\n M docs/verification/player-path/full-chain-reload-receipt.json\n M docs/verification/player-path/full-chain-reload.json\n D docs/verification/player-path/full-chain-reload/step-1450.png\n D docs/verification/player-path/full-chain-reload/step-1451.png\n M docs/verification/player-path/full-chain-reload/trace.json\n M docs/verification/player-path/full-chain.json\n M docs/verification/player-path/full-chain/trace.json\n M docs/verification/player-path/gear-switch-receipt.json\n M docs/verification/player-path/gear-switch.json\n M docs/verification/player-path/gear-switch/trace.json\n M docs/verification/player-path/quest-chain-receipt.json\n M docs/verification/player-path/quest-chain-reload-receipt.json\n M docs/verification/player-path/quest-chain-reload.json\n M docs/verification/player-path/quest-chain-reload/trace.json\n M docs/verification/player-path/quest-chain.json\n D docs/verification/player-path/quest-chain/step-4996.png\n D docs/verification/player-path/quest-chain/step-6722.png\n D docs/verification/player-path/quest-chain/step-6881.png\n D docs/verification/player-path/quest-chain/step-7099.png\n M docs/verification/player-path/quest-chain/trace.json\n M docs/verification/player-path/town-leave-receipt.json\n M docs/verification/player-path/town-leave.json\n M docs/verification/player-path/town-leave/step-012.png\n M docs/verification/player-path/town-rest-receipt.json\n M docs/verification/player-path/town-rest.json\n M docs/verification/player-path/town-round-trip-receipt.json\n M docs/verification/player-path/town-round-trip.json\n M docs/verification/player-path/town-round-trip/step-012.png\n M docs/verification/player-path/town-round-trip/step-013.png\n M docs/verification/player-path/town-round-trip/step-014.png\n M docs/verification/player-path/town-round-trip/step-015.png\n M docs/verification/player-path/town-round-trip/step-016.png\n M docs/verification/player-path/town-round-trip/step-017.png\n M docs/verification/player-path/town-round-trip/step-018.png\n M docs/verification/player-path/world-clock-receipt.json\n M docs/verification/player-path/world-clock.json\n M docs/verification/player-path/world-clock/step-012.png\n M docs/verification/player-path/world-clock/step-013.png\n M docs/verification/player-path/world-clock/step-014.png\n M docs/verification/player-path/world-clock/step-015.png\n M docs/verification/player-path/world-clock/step-016.png\n M docs/verification/player-path/world-clock/step-017.png\n M docs/verification/player-path/world-clock/step-018.png\n M docs/verification/player-path/world-clock/step-019.png\n M docs/verification/player-path/world-clock/step-020.png\n M docs/verification/player-path/world-clock/step-021.png\n M docs/verification/player-path/world-clock/step-022.png\n M docs/verification/player-path/world-clock/step-023.png\n M docs/verification/player-path/world-clock/step-024.png\n M docs/verification/player-path/world-clock/step-025.png\n M docs/verification/player-path/world-clock/step-026.png\n M docs/verification/player-path/world-clock/step-027.png\n M docs/verification/player-path/world-quest-receipt.json\n M docs/verification/player-path/world-quest.json\n M docs/verification/player-path/world-quest/step-012.png\n M docs/verification/player-path/world-quest/step-013.png\n M docs/verification/player-path/world-quest/step-014.png\n M docs/verification/player-path/world-quest/step-015.png\n M docs/verification/player-path/world-quest/step-016.png\n M docs/verification/player-path/world-quest/step-017.png\n M docs/verification/player-path/world-quest/step-018.png\n M docs/verification/player-path/world-quest/step-019.png\n M docs/verification/player-path/world-quest/step-020.png\n M docs/verification/player-path/world-quest/step-021.png\n M docs/verification/player-path/world-quest/step-022.png\n M docs/verification/player-path/world-quest/step-023.png\n M docs/verification/player-path/world-quest/step-024.png\n M docs/verification/player-path/world-quest/step-025.png\n M docs/verification/player-path/world-quest/step-026.png\n M docs/verification/player-path/world-quest/step-027.png\n M docs/verification/player-path/world-quest/step-028.png\n M docs/verification/player-path/world-quest/step-029.png\n M docs/verification/player-path/world-quest/step-030.png\n M docs/verification/player-path/world-quest/step-031.png\n M docs/verification/player-path/world-quest/step-032.png\n M docs/verification/player-path/world-quest/step-033.png\n M docs/verification/player-path/world-quest/step-034.png\n M docs/verification/player-path/world-quest/step-035.png\n M docs/verification/player-path/world-quest/step-036.png\n M docs/verification/player-path/world-quest/step-037.png\n M docs/verification/player-path/world-quest/step-038.png\n M docs/verification/player-path/world-quest/step-039.png\n M docs/verification/player-path/world-quest/step-040.png\n M docs/verification/player-path/world-quest/step-041.png\n M docs/verification/player-path/world-quest/step-042.png\n M docs/verification/player-path/world-quest/step-043.png\n M docs/verification/player-path/world-quest/step-044.png\n M docs/verification/player-path/world-quest/step-045.png\n M docs/verification/player-path/world-quest/step-046.png\n M docs/verification/player-path/world-quest/step-047.png\n M docs/verification/player-path/world-quest/step-048.png\n M docs/verification/player-path/world-quest/step-049.png\n M docs/verification/player-path/world-quest/step-050.png\n M docs/verification/player-path/world-quest/step-051.png\n M docs/verification/player-path/world-quest/step-052.png\n M docs/verification/player-path/world-quest/step-053.png\n M docs/verification/player-path/world-quest/step-054.png\n M docs/verification/player-path/world-quest/step-055.png\n M docs/verification/player-path/world-quest/step-056.png\n M docs/verification/player-path/world-quest/step-057.png\n M docs/verification/player-path/world-quest/step-058.png\n M docs/verification/player-path/world-quest/step-059.png\n M docs/verification/player-path/world-quest/step-060.png\n M docs/verification/player-path/world-quest/step-061.png\n M docs/verification/player-path/world-quest/step-062.png\n M docs/verification/player-path/world-quest/step-063.png\n M docs/verification/player-path/world-quest/step-064.png\n M docs/verification/player-path/world-quest/step-065.png\n M docs/verification/player-path/world-quest/step-066.png\n M docs/verification/player-path/world-quest/step-067.png\n M docs/verification/player-path/world-quest/step-068.png\n M docs/verification/player-path/world-quest/step-069.png\n M docs/verification/player-path/world-quest/step-070.png\n M docs/verification/player-path/world-quest/step-071.png\n M docs/verification/player-path/world-quest/step-072.png\n M docs/verification/player-path/world-quest/step-073.png\n M docs/verification/player-path/world-quest/step-074.png\n M docs/verification/player-path/world-quest/step-075.png\n M docs/verification/player-path/world-quest/step-076.png\n M docs/verification/player-path/world-quest/step-077.png\n M docs/verification/player-path/world-quest/step-078.png\n M docs/verification/player-path/world-quest/step-079.png\n M docs/verification/player-path/world-quest/step-080.png\n M docs/verification/player-path/world-quest/step-081.png\n M docs/verification/player-path/world-quest/step-082.png\n M docs/verification/player-path/world-quest/step-083.png\n M docs/verification/player-path/world-quest/step-084.png\n M docs/verification/player-path/world-quest/step-085.png\n M docs/verification/player-path/world-quest/step-086.png\n M docs/verification/player-path/world-quest/step-087.png\n M docs/verification/player-path/world-quest/step-088.png\n M docs/verification/player-path/world-quest/step-089.png\n M docs/verification/player-path/world-road-receipt.json\n M docs/verification/player-path/world-road.json\n M docs/verification/player-path/world-road/step-012.png\n M docs/verification/player-path/world-road/step-013.png\n M docs/verification/player-path/world-road/step-014.png\n M docs/verification/player-path/world-road/step-015.png\n M docs/verification/player-path/world-road/step-016.png\n M docs/verification/player-path/world-road/step-017.png\n M docs/verification/player-path/world-road/step-018.png\n M docs/verification/player-path/world-road/step-019.png\n M docs/verification/player-path/world-road/step-020.png\n M docs/verification/player-path/world-road/step-021.png\n M docs/verification/player-path/world-road/step-022.png\n M docs/verification/player-path/world-road/step-023.png\n M docs/verification/player-path/world-road/step-024.png\n M docs/verification/player-path/world-road/step-025.png\n M docs/verification/player-path/world-road/step-026.png\n M docs/verification/player-path/world-road/step-027.png\n M docs/verification/player-path/world-road/step-028.png\n M docs/verification/player-path/world-road/step-029.png\n M docs/verification/player-path/world-road/step-030.png\n M docs/verification/player-path/world-road/step-031.png\n M docs/verification/player-path/world-road/step-032.png\n M docs/verification/player-path/world-road/step-033.png\n M docs/verification/quest-chain-20260930.md\n M docs/worklist.json\n M internal/battle/ai.go\n M internal/battle/ai_ring_test.go\n M internal/battle/ai_test.go\n M internal/battle/ambush.go\n M internal/battle/ambush_test.go\n M internal/battle/attack.go\n M internal/battle/attack_test.go\n M internal/battle/battle.go\n M internal/battle/commands.go\n M internal/battle/commands_test.go\n M internal/battle/cursor.go\n M internal/battle/cursor_test.go\n M internal/battle/equipment_panel.go\n M internal/battle/execution.go\n M internal/battle/fatigue.go\n M internal/battle/flee.go\n M internal/battle/items.go\n M internal/battle/knockback.go\n M internal/battle/monster.go\n M internal/battle/monster_load_test.go\n M internal/battle/planning.go\n M internal/battle/planning_test.go\n M internal/battle/state.go\n M internal/i18n/i18n.go\n M internal/save/complete.go\n M internal/save/complete_test.go\n M internal/save/save.go\n M internal/town/inn.go\n M internal/town/inventory.go\n M internal/town/itempage.go\n M internal/town/itempage_test.go\n M internal/town/keys.go\n M internal/town/layout.go\n M internal/town/portrait.go\n M internal/town/portrait_test.go\n M internal/town/scroll.go\n M internal/town/scroll_test.go\n M internal/town/session.go\n M internal/town/shop.go\n M internal/town/shop_test.go\n M internal/ui/battle.go\n M internal/ui/battle_cjk.go\n M internal/ui/battletiles.go\n M internal/ui/idle_party_test.go\n M internal/ui/itempage.go\n M internal/ui/itempage_cjk.go\n M internal/ui/newcharacter.go\n M internal/ui/outdoor.go\n M internal/ui/world.go\n M internal/world/road.go\n M internal/world/session.go\n M tools/check_player_paths.py\n M tools/drive_battle_script.py\n M tools/extract_character_roster.py\n M tools/extract_monsters.py\n M tools/oracle/book_startup_test.go\n M tools/oracle/check_updated_dosgolem.sh\n M tools/replay_player_path.py\n M tools/run_driver.sh\n M tools/scan_cjk_text_leaks.py\n M tools/verify_cjk_coverage.py\n M tools/verify_display_names.py\n M tools/verify_text_fit.py\n?? cmd/kol/battle_area_prompt_test.go\n?? cmd/kol/battle_encounter_lines_test.go\n?? cmd/kol/battle_loot_original_test.go\n?? cmd/kol/battle_loot_save_test.go\n?? cmd/kol/battle_world_return_test.go\n?? cmd/kol/battle_world_time_test.go\n?? cmd/kol/original_ai_fuzz_test.go\n?? docs/i18n/font-retained-characters.json\n?? docs/i18n/world-prompts-zh-Hant.tsv\n?? docs/re/20261001-complete-battle.md\n?? docs/re/20261001-item-detail.md\n?? docs/re/20261001-target-cursor.md\n?? docs/re/20261002-battle-exits.md\n?? docs/re/20261002-battle-loot.md\n?? docs/re/20261002-battle-return.md\n?? docs/re/20261002-battle-settlement.md\n?? docs/re/20261002-battle-victory.md\n?? docs/re/20261002-battle-world.md\n?? docs/re/20261002-indexed-return-window.md\n?? docs/re/20261002-normal-spell-return.md\n?? docs/re/20261002-production-return-scratch.md\n?? docs/re/20261002-return-cost-spells.md\n?? docs/re/20261002-return-cost.md\n?? docs/re/20261002-return-scratch-tracker.md\n?? docs/re/20261002-return-tracker-phases.md\n?? docs/re/20261002-world-clock.md\n?? docs/re/20261003-ambush-placement.md\n?? docs/re/20261003-monster-equipment.md\n?? docs/re/20261003-native-scroll-token.md\n?? docs/re/20261003-negative-area.md\n?? docs/re/20261003-normal-flee.md\n?? docs/re/20261003-normal-victory.md\n?? docs/re/20261003-purchased-spell-effect.md\n?? docs/re/20261003-spell-area.md\n?? docs/re/20261003-unarmed-resolution.md\n?? docs/re/20261003-world-cost-resume.md\n?? docs/re/battle-loot-address-index.json\n?? docs/re/battle-order-address-index.json\n?? docs/re/battle-settlement-address-index.json\n?? docs/re/item-action-address-index.json\n?? docs/re/item-detail-address-index.json\n?? docs/re/item-edge-address-index.json\n?? docs/re/item-figure-address-index.json\n?? docs/re/item-mark-address-index.json\n?? docs/re/item-name-address-index.json\n?? docs/re/target-cursor-address-index.json\n?? docs/re/world-return-address-index.json\n?? docs/verification/ambush-placement-20261003/\n?? docs/verification/battle-complete-20261001/\n?? docs/verification/battle-exits-20261002/\n?? docs/verification/battle-loot-20261002/\n?? docs/verification/battle-return-20261002/\n?? docs/verification/battle-settlement-20261002/\n?? docs/verification/battle-target-cursor-20261001.md\n?? docs/verification/battle-target-cursor-20261001/\n?? docs/verification/battle-victory-20261002/\n?? docs/verification/battle-world-20261002/\n?? docs/verification/character-ui/roster-boundaries-20261001/\n?? docs/verification/cjk-ui/font-width-20261001/\n?? docs/verification/cjk-ui/held-names-20261001/\n?? docs/verification/cjk-ui/longest-battle-20261001/\n?? docs/verification/cjk-ui/longest-dialog-20261001/\n?? docs/verification/cjk-ui/longest-equipment-20261001/\n?? docs/verification/cjk-ui/longest-input-20261001/\n?? docs/verification/cjk-ui/longest-shop-20261001/\n?? docs/verification/cjk-ui/longest-title-20261001/\n?? docs/verification/cjk-ui/longest-town-entry-20261001/\n?? docs/verification/cjk-ui/longest-town-message-20261001/\n?? docs/verification/cjk-ui/longest-weapons-20261001/\n?? docs/verification/cjk-ui/natural-sign-20261001/\n?? docs/verification/cjk-ui/town-edge-20261001/\n?? docs/verification/enemy-ai-fuzz-20260930.md\n?? docs/verification/inventory-empty-slots-20261001.md\n?? docs/verification/inventory-empty-slots-20261001/\n?? docs/verification/item-detail-20261001/\n?? docs/verification/monster-equipment-20261003/\n?? docs/verification/native-scroll-20261003/\n?? docs/verification/negative-area-20261003/\n?? docs/verification/normal-flee-20261003/\n?? docs/verification/normal-victory-20261003/\n?? docs/verification/platform-smoke-20261001.md\n?? docs/verification/platform-smoke-20261001/\n?? docs/verification/player-path/arena/build-manifest.json\n?? docs/verification/player-path/arena/step-1528.png\n?? docs/verification/player-path/arena/step-1529.png\n?? docs/verification/player-path/arena/step-1530.png\n?? docs/verification/player-path/arena/step-1531.png\n?? docs/verification/player-path/arena/step-1532.png\n?? docs/verification/player-path/arena/step-1551.png\n?? docs/verification/player-path/arena/step-1705.png\n?? docs/verification/player-path/arena/step-1706.png\n?? docs/verification/player-path/full-chain-ending/build-manifest.json\n?? docs/verification/player-path/full-chain-reload/build-manifest.json\n?? docs/verification/player-path/full-chain-reload/step-2011.png\n?? docs/verification/player-path/full-chain-reload/step-2012.png\n?? docs/verification/player-path/full-chain/build-manifest.json\n?? docs/verification/player-path/gear-switch/build-manifest.json\n?? docs/verification/player-path/quest-chain-reload/build-manifest.json\n?? docs/verification/player-path/quest-chain/build-manifest.json\n?? docs/verification/player-path/quest-chain/step-5477.png\n?? docs/verification/player-path/quest-chain/step-7064.png\n?? docs/verification/player-path/quest-chain/step-7217.png\n?? docs/verification/player-path/quest-chain/step-7435.png\n?? docs/verification/purchased-spell-effect-20261003/\n?? docs/verification/return-cost-20261002/\n?? docs/verification/return-cost-gate-20261002/\n?? docs/verification/return-indexed-read-20261002/\n?? docs/verification/return-tracker-20261002/\n?? docs/verification/return-tracker-phases-20261002/\n?? docs/verification/spell-area-20261003/\n?? docs/verification/spell-return-20261002/\n?? docs/verification/unarmed-resolution-20261003/\n?? docs/verification/world-clock-20261002/\n?? docs/verification/world-cost-resume-20261003/\n?? docs/verification/world-return-cost-20261002/\n?? internal/battle/forced_drop_test.go\n?? internal/battle/loot.go\n?? internal/battle/return_scratch.go\n?? internal/battle/return_scratch_test.go\n?? internal/i18n/paragraphs.go\n?? internal/i18n/paragraphs_test.go\n?? internal/oracle/zz_dump_test.go\n?? internal/town/inventory_holes_test.go\n?? internal/ui/battle_marker_test.go\n?? internal/ui/itempage_edge.go\n?? internal/ui/world_prompt_cjk_test.go\n?? internal/world/return_cost.go\n?? internal/world/return_cost_test.go\n?? internal/world/time_part_test.go\n?? tools/ida_probe_target_cursor.py\n?? tools/oracle/book_roster_test.go\n?? tools/oracle/check_book_roster.sh\n?? tools/review_player_path_inventory_change.py\n?? tools/verify_book_roster.py\n?? tools/verify_inventory_empty_slots.py\n?? tools/verify_world_prompts.py\n",
+  "diff_check": 0,
+  "docker_mount_records": [
+    {
+      "id": "62b624d109fa863eb59b5ddd1100983e97d1f81e155ce7a82fb0e0ae0e4f066a",
+      "name": "/colonization-cargo146-gui",
+      "mounts": [
+        {
+          "Destination": "/repo",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/colonization",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/game",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/colonization/Sid Meier's Colonization (1994)/SMColoni/COLONIZE",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "82391ddc578b5de7e56c3aaca9a90b569aa7b582b4b158aac91999093db58567",
+      "name": "/colonization-cargo145-replay",
+      "mounts": [
+        {
+          "Destination": "/dosgolem",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/colonization/workplace/dosgolem",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/cache",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/colonization/workplace/gocache",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/game",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/colonization/Sid Meier's Colonization (1994)/SMColoni/COLONIZE",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/task",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/tmp",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/repo",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/colonization",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "34d78462afae71e445d2e3b42cf097cf112f0d2bbe4b774f25ebc1897f5cc305",
+      "name": "/wiz7-r875-gui7",
+      "mounts": [
+        {
+          "Destination": "/resources",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/wizardry7/workplace/bake",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/src",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/wizardry7",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/out",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/wizardry7/workplace/r875",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/original",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/wizardry7/workplace/original/wizar7",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "35b7ea97cb721f28d07502d88542ddf2da73749e4ee6fcf645cdf4c2fd63f5f9",
+      "name": "/jovial_wescoff",
+      "mounts": [
+        {
+          "Destination": "/orig",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/fd2/org_game/炎龍騎士團/FLAME2",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/drive.py",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/fd2/tools/dosgolem_oracle_drive.py",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/plan.jsonl",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/fd2/docs/data/parity-plans/ch21-sample-r1.jsonl",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/out",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/fd2/work/parity-slot-ch21/full-original-r1",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/state",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/fd2/work/parity-slot-ch21/full-state-r1",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/maps",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/fd2/remake/assets/maps",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/gocache",
+          "Mode": "",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/dosgolem-fd2-oracle/workplace/gocache",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/gomodcache",
+          "Mode": "",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/cht/dosgolem-fd2-oracle/workplace/gomodcache",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/dos",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/cht/dosgolem-fd2-oracle",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "ef92e44a2a8ad251239bf2f9440144bcdbf525961acdb9563257225452804964",
+      "name": "/dq3-dosgolem-king-return",
+      "mounts": [
+        {
+          "Destination": "/dosgolem",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/tmp/dq3-dosgolem-2f44a68",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/repo",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/dq3",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/work",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/dq3/work",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "67673fb7a0498a5eab66780d7744cf1da55099e4c90d0c87d123318c92d87b85",
+      "name": "/dinbando_web_dev",
+      "mounts": [
+        {
+          "Destination": "/app",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/dinbando",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "46e6ad96c6ee160b36126255c72d37b598d879e5bdbc74844e132bd58b6e76e6",
+      "name": "/supabase_studio_dinbando",
+      "mounts": [
+        {
+          "Destination": "/home/anr2/dinbando/supabase/snippets",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/dinbando/supabase/snippets",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "3758c185ae0fb995ba9e12f60ab8d83fb859970e18ebdf41a9702586fbbe42dc",
+      "name": "/supabase_pg_meta_dinbando",
+      "mounts": []
+    },
+    {
+      "id": "21af3937d30f2431018a3ac4da2bb1bae11eacc4cc5cc86f3a51b10e36fdb3a0",
+      "name": "/supabase_edge_runtime_dinbando",
+      "mounts": []
+    },
+    {
+      "id": "a8827f69ad5c662d49a1ac298c4c6d38cec80d7d17c44840c845f336fa00d9f8",
+      "name": "/supabase_storage_dinbando",
+      "mounts": [
+        {
+          "Destination": "/mnt",
+          "Driver": "local",
+          "Mode": "z",
+          "Name": "supabase_storage_dinbando",
+          "Propagation": "",
+          "RW": true,
+          "Source": "/var/lib/docker/volumes/supabase_storage_dinbando/_data",
+          "Type": "volume"
+        }
+      ]
+    },
+    {
+      "id": "61eab0e501b8880fa4932762068894992af36b433fe08ad2f21ca16e78c3d761",
+      "name": "/supabase_rest_dinbando",
+      "mounts": []
+    },
+    {
+      "id": "56c13382a54783b9d7ef7bf8c975a17e0bf8b7b5a3daa6782de68664f073eb3b",
+      "name": "/supabase_realtime_dinbando",
+      "mounts": []
+    },
+    {
+      "id": "225501ae59276b3b772f498a7a261053aca269fb7016d9fd834445471b862743",
+      "name": "/supabase_inbucket_dinbando",
+      "mounts": []
+    },
+    {
+      "id": "2a0e6d87037604026882bb95e7940ad4dfb83117c1a3753d6e83dca9bfab66df",
+      "name": "/supabase_auth_dinbando",
+      "mounts": []
+    },
+    {
+      "id": "01d4eb953aaf93b2b4bce37b8d8d542957103102616814d5134007ec7c2db1ab",
+      "name": "/supabase_kong_dinbando",
+      "mounts": []
+    },
+    {
+      "id": "7a3f238898626135df2a5467ab7b80577dcfe20e4e18bbd3aa4fed0423bcd1d7",
+      "name": "/supabase_db_dinbando",
+      "mounts": [
+        {
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "z",
+          "Name": "supabase_db_dinbando",
+          "Propagation": "",
+          "RW": true,
+          "Source": "/var/lib/docker/volumes/supabase_db_dinbando/_data",
+          "Type": "volume"
+        }
+      ]
+    },
+    {
+      "id": "b4c4b99624ba3cefc05f4e02ff1c797eef737f1985520502b05d0882dec4cde6",
+      "name": "/focoria-local",
+      "mounts": [
+        {
+          "Destination": "/workspace",
+          "Mode": "ro",
+          "Propagation": "rprivate",
+          "RW": false,
+          "Source": "/home/anr2/tmp2/jinher/workplace/fbx-glb-viewer",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "8801a94a92c228d66d7587bc8df115d7f25c00da6206c90b9bad8ec36a598bdc",
+      "name": "/admiring_kowalevski",
+      "mounts": [
+        {
+          "Destination": "/workspace",
+          "Mode": "rw",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/tmp2/jinher/workplace/fbx-glb-viewer",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "c6524d61d4f4f8ae6a2b3a01f0f414d76976b48e074db5a357485d25bb2ec9ab",
+      "name": "/agentacc-test-web",
+      "mounts": [
+        {
+          "Destination": "/nuget",
+          "Mode": "",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/tmp2/總經銷會計軟體/.nuget-cache",
+          "Type": "bind"
+        },
+        {
+          "Destination": "/w",
+          "Mode": "",
+          "Propagation": "rprivate",
+          "RW": true,
+          "Source": "/home/anr2/tmp2/總經銷會計軟體",
+          "Type": "bind"
+        }
+      ]
+    },
+    {
+      "id": "e807a51bdae15a23020215dc0085fe44c6eebf87f3766375ca7b4a08c854247c",
+      "name": "/agentacc-test-pg",
+      "mounts": [
+        {
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "",
+          "Name": "3187beea3cc62758ed7efbf441e1f8de35d8fd91a3678500afefe71e8dc81464",
+          "Propagation": "",
+          "RW": true,
+          "Source": "/var/lib/docker/volumes/3187beea3cc62758ed7efbf441e1f8de35d8fd91a3678500afefe71e8dc81464/_data",
+          "Type": "volume"
+        }
+      ]
+    },
+    {
+      "id": "ba70f2339493c6a84d0490e833aaebcc9b74e37306cc5b07cab6ab01bc075c07",
+      "name": "/cool_bose",
+      "mounts": []
+    }
+  ],
+  "docker_inspect_note": "列舉後另一專案的 f37dfe82dfee --rm 容器已消失；21 個成功 inspect 的容器沒有本專案掛載或名稱。",
+  "remote_writes": false,
+  "commit": false,
+  "push": false,
+  "packaging": false,
+  "publishing": false
+}

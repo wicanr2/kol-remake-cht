@@ -29,7 +29,7 @@
 | 契約 | 證據 | 等級 | 限制 |
 |---|---|---|---|
 | 建立順序為名字→種族→性別→職業→屬性→圖像→保存 | 手冊實體頁 4–5 | 已證實 | DOS UI 的每個中間畫面尚未逐步 oracle |
-| 名字最多 16 個字母與空格；遊戲圖像旁只顯示前四字母 | 手冊實體頁 4；KOLBOOK `0x11907..0x11957`；`docs/verification/character-ui/name-length-run{1,2}.json` | 已證實 | DOS UI 實測容量為 16 個可見字元，輸入第 16 個字元即直接前進到種族層，不需 Return；空名按 Return 不前進。字元集合與大小寫保存方式仍未知 |
+| 名字最多 16 個字母與空格；遊戲圖像旁只顯示前四字母 | 手冊實體頁 4；KOLBOOK `0x11907..0x11957`；`docs/verification/character-ui/name-length-run{1,2}.json` | 已證實 | DOS UI 實測容量為 16 個可見字元，輸入第 16 個字元即直接前進到種族層，不需 Return；空名按 Return 不前進。可列印 ASCII 與大小寫保存已由 RE-169 證實；延伸字元仍未知 |
 | 種族為人類、精靈、矮人、凱爾登 | 手冊實體頁 4 | 已證實 | executable enum 值尚未定位 |
 | 人類／精靈可選男性或女性；矮人／凱爾登只可選男性 | 手冊實體頁 4 | 已證實 | 不自行增加現代化例外 |
 | 種族與性別限制職業；職業決定屬性可能範圍、基礎技能與初始裝備 | 手冊實體頁 4、27–29 | 已證實 | 表格提供平均值，不是亂數上下界 |
@@ -176,8 +176,38 @@
 2. DOS `rand` 的確切 library 序列；reroll／接受控制流已固定，正常 UI 截圖仍待完成。
 3. 768-byte record 其餘、非角色建立必要欄位的 reader／writer 與 checksum／狀態語意；
    角色建立最小 reader／writer 索引已交叉查核。
-4. 重名、名字接受的字元集合與大小寫保存、角色槽已滿的正常 UI oracle。空名、16 字元
-   邊界、ESC 每層返回與 reroll 已有兩輪可重生 receipt；滿槽只有靜態控制流證據。
-   固定 ZIP 的 `CHARDATA` 十六槽都非全零，前十四槽有名字，第 15、16 槽名字為空但
-   記錄非零，槽位可用性的 UI 判準尚未確認。
+4. 原先列於本項的滿槽、完全同名、可列印 ASCII 與大小寫保存已由 RE-169 關閉；
+   空名第 14／15 槽經正常建角實際使用。延伸字元、重名大小寫比較與存檔故障仍未知。
 5. 圖像模板 selector；三個檔案的寫入順序已證實，但失敗、rollback 與共同 commit 邊界未知。
+
+## 2026-10-01 名冊邊界正常 UI 訂正（RE-169）
+
+本節訂正「滿槽僅靜態／重名及字元未知」現況，保留原靜態定位與研究歷程。
+正常 KOL.EXE → KOLBOOK → 角色選項 → 建角；沒有直接跳入函式或修改名冊／名字。
+種子預先固定 1，沿用既有 IDA 9.4 loaded MZ linear EA `_srand:0x18922`、
+near caller `0x1015b`，runtime `0110:8922` 是 dosgolem CS:IP，兩者不是同一位址空間。
+名字緩衝區沿用 `byte_1A690`／DGROUP-relative `0x1450`，本輪未新增反組譯。
+
+| 已證實範圍 | 收據 | 結果 |
+|---|---|---|
+| 16 槽全滿 | [full](../verification/character-ui/roster-boundaries-20261001/full-receipt.json) | 原始 14 人正常建立 NOVA／LUNA，占第 14／15 槽；第三人接受肖像才顯示滿槽訊息，其後三檔雜湊不變 |
+| 完全相同名字 | [duplicate](../verification/character-ui/roster-boundaries-20261001/duplicate-receipt.json) | Theodoric 接受肖像直接覆寫第 0 槽，只該槽 CHARDATA／CHARPICS 改變，SHLDPICS 不變，不占空槽 |
+| ASCII／大小寫 | [charset](../verification/character-ui/roster-boundaries-20261001/charset-receipt.json) | 95 項逐字消費：53 字母／空白接受，42 數字／標點拒絕；MiXeD Name 保存第 14 槽且保留大小寫與空白 |
+
+full／charset 的 CHARPICS／SHLDPICS 與模板相同，不能把「有保存」說成「bytes 改變」。
+ASCII 子案例恢復正常抵達的未修改名字頁快照；短間隔逐字畫格可能仍在翻頁，結果採
+讀鍵紀錄與名字緩衝區，混合名字另有完整保存與目視 PNG。延伸字元、重名大小寫比較、
+存檔失敗與跨檔 rollback 未測。
+
+三份收據含 ZIP entry、完整來源 SHA-256、工具版本／映像、種子、輸入、前後雜湊、
+差分槽及 PNG 權利 manifest。只有已目視 PNG 依 private GitHub 特例保存；原始／變動
+角色檔與完整觀察留本機 `workplace/roster-boundaries-20261001/pinned3/`，來源由該處
+`input-manifest.json` 索引。探針／重生入口及核實命令見 [SPEC-005](../spec/005-character-creation.md)。
+
+現行 dosgolem `2f44a68ebfc54b28fb15dd4a34510b0b04a5415d` 的既有正常建角測試
+也因全黑、按鍵未消費失敗。本批鎖定 `968ca774705853276ae55c8d1163c369481ac71f`，
+68 份正式來源與前次成功 manifest 全數一致，未改共用 repo。首次失敗及未設
+SetScratch 的嘗試只作環境／探針失敗證據，不列正式通過；新版工具修復仍屬 #11。
+
+remake 三處差異另列 `character-creation-boundary-parity`，原版 oracle 補齊不等於
+正式重製版 parity。重名涉及既有角色重設，等待使用者政策決定。

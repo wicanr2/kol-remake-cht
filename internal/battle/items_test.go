@@ -5,6 +5,56 @@ import (
 	"testing"
 )
 
+// 怪物丟下的武器必須能經正常拾取後出現在主指令列，再搬至空腰帶。
+// SPEC-010：整筆搬移；傷害碼 bit0 控制武器攻擊及切換，不可在轉換時遺失。
+func TestMonsterDropPickupEnablesWeaponAndBeltCommands(t *testing.T) {
+	for _, code := range []int{0x2b, 0x2a} {
+		t.Run(fmt.Sprintf("code-%02x", code), func(t *testing.T) {
+			item := &Item{Name: "MACE", Class: 0x3c, Encumbrance: 35,
+				Record: fmt.Sprintf("010000000000000000000000%02x3c0000", code)}
+			s := &State{Party: []Member{{Name: "KENNETH"}}, Actors: []Actor{
+				{Side: SideParty, Member: 0, X: 16, Y: 41, Head: 10, Chest: 10, Threshold: 100},
+				{Side: SideMonster, Member: -1, X: 16, Y: 41, HandItem: item, Weapon: item.CombatWeapon()},
+			}}
+			s.Actors[0].SetParts()
+			s.forcedDrop(1)
+			if s.Ground[0].Item != item || s.Actors[1].HandItem != nil {
+				t.Fatal("怪物丟下的完整物品未留在腳下")
+			}
+			if _, slot, _ := s.PickUpItem(0); slot != 0 {
+				t.Fatal("隊員未正常拾取腳下物品")
+			}
+			bar := CommandBar(&s.Actors[0], &s.Party[0], CommandEnv{Standable: true})
+			for _, cmd := range []int{CmdWeapon, CmdSwitch} {
+				found := false
+				for _, got := range bar {
+					if got == cmd {
+						found = true
+					}
+				}
+				if found != (code&1 != 0) {
+					t.Fatalf("傷害碼%02x：主列%v，指令%d出現=%t", code, bar, cmd, found)
+				}
+			}
+			if s.Party[0].Weapon.Code != code || s.Actors[0].Weapon.Code != code {
+				t.Fatalf("拾取後遺失傷害碼：隊員%+v／參戰者%+v", s.Party[0].Weapon, s.Actors[0].Weapon)
+			}
+			if code&1 == 0 {
+				return
+			}
+			s.SwitchItem(0)
+			m := &s.Party[0]
+			if m.HasWeapon || !m.HasSecondItem || m.BeltItem != item || m.BeltWeapon.Code != code {
+				t.Fatalf("正常切換未完整搬至空腰帶：%+v", m)
+			}
+			s.SwitchItem(0)
+			if m.HandItem != item || m.Weapon.Code != code || !m.HasWeapon || m.HasSecondItem {
+				t.Fatal("腰帶換回手持後未保留物品及傷害碼")
+			}
+		})
+	}
+}
+
 func itemState() *State {
 	s := &State{Party: []Member{{
 		Name: "POONTANG", HasWeapon: true, WeaponName: "LONG SPEAR",
@@ -365,6 +415,8 @@ func TestPickUpReloadsGear(t *testing.T) {
 	s := pickUpState()
 	a := &s.Actors[0]
 	a.LoadLevel, a.ArmourWeight, a.ShieldWeight = 3, 20, 10
+	// 有盾重量的測試要明示盾牌可用，避免零值手臂代表失能。
+	a.ShieldGrade, a.RightArm, a.LeftArm = 1, 20, 20
 	a.ReloadGear()
 	bareEnc, bareSpeed := a.Encumbrance, a.WeaponSpeed
 
@@ -392,6 +444,8 @@ func TestDropReloadsGear(t *testing.T) {
 	s := itemState()
 	a := &s.Actors[0]
 	a.LoadLevel, a.ArmourWeight, a.ShieldWeight = 3, 20, 10
+	// 有盾重量的測試要明示盾牌可用，避免零值手臂代表失能。
+	a.ShieldGrade, a.RightArm, a.LeftArm = 1, 20, 20
 	a.Weapon = Weapon{Weight: 60}
 	a.ReloadGear()
 	armedEnc, armedSpeed := a.Encumbrance, a.WeaponSpeed

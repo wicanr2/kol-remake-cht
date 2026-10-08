@@ -95,7 +95,7 @@ func (s Settings) MarshalJSON() ([]byte, error) {
 }
 
 // World 是野外的位置。座標與次格座標的語意見 RE-068／RE-069。
-// 世界時間還沒有規格，所以格式裡先沒有日期欄位（SPEC-006）。
+// v1 只保存位置；正式 v3 的世界時間另存於 Save.Clock（SPEC-023）。
 type World struct {
 	X    int `json:"x"`
 	Y    int `json:"y"`

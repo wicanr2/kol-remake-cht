@@ -1,6 +1,15 @@
 package town
 
-import "testing"
+import (
+	"encoding/hex"
+	"encoding/json"
+	"path/filepath"
+	"reflect"
+	"strings"
+	"testing"
+
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
+)
 
 // itemText 是物品那一頁要用的幾筆記錄，內容照原版 KOLDATA（RE-127）。
 func itemText() *UIText {
@@ -20,6 +29,7 @@ func itemText() *UIText {
 		uiRecord{Index: TheirPackFullRecord, Text: "Their backpack is full!"},
 		uiRecord{Index: TradedRecord, Text: "The Object is traded!"},
 		uiRecord{Index: DroppedRecord, Text: "It is dropped!"},
+		uiRecord{Index: DropSureRecord, Text: "Are you sure?"},
 		uiRecord{Index: YourPackFullRecord, Text: "Your backpack is full!"},
 	)
 	return t
@@ -132,13 +142,14 @@ func TestEmptySlotMessage(t *testing.T) {
 	use(s)
 
 	worn := s.Inside.ItemPage.Message
-	if len(worn) < 2 || worn[len(worn)-1] != "Head" {
+	if len(worn) != 2 || worn[0] != "    YOU HAVE NOTHING" || worn[1] != "    ON YOUR HEAD!" {
 		t.Fatalf("身上那一格的訊息是 %v", worn)
 	}
+	s.Key("RET")
 	s.Inside.ItemPage.Selected = ItemSlotCount - 1
 	use(s)
 	pocket := s.Inside.ItemPage.Message
-	if len(pocket) < 2 || pocket[len(pocket)-1] != "in your pocket!" {
+	if len(pocket) != 2 || pocket[1] != "    IN YOUR POCKET!" {
 		t.Fatalf("背包那一格的訊息是 %v", pocket)
 	}
 }
@@ -154,12 +165,43 @@ func TestBeltAndWeaponAreDifferentRows(t *testing.T) {
 		row  int
 		want string
 	}{{WornSlots - 1, "Belt"}, {WornSlots, "Weapon"}} {
+		if len(s.Inside.ItemPage.Message) > 0 {
+			s.Key("RET")
+		}
 		s.Inside.ItemPage.Selected = c.row
 		use(s)
 		got := s.Inside.ItemPage.Message
-		if len(got) == 0 || got[len(got)-1] != c.want {
+		if len(got) != 2 || got[1] != "    ON YOUR "+strings.ToUpper(c.want)+"!" {
 			t.Fatalf("第 %d 列印的是 %v，期望 %s", c.row, got, c.want)
 		}
+	}
+}
+
+// 空格訊息不是物品動作層；確認只回到同一列，不再次開訊息或離開資料頁。
+func TestEmptySlotConfirmationReturnsToSameRow(t *testing.T) {
+	for _, confirm := range []string{"RET", "SPACE"} {
+		t.Run(confirm, func(t *testing.T) {
+			s := itemSession(t)
+			s.Party[s.speakerIndex()].Worn = [WornSlots]*Good{}
+			openItems(s)
+			s.Inside.ItemPage.Selected = 3
+			use(s)
+			icons, _ := s.Icons()
+			if len(icons) != 1 || icons[0] != IconSprite(IconSpacebar) {
+				t.Fatalf("空格確認圖示：%v", icons)
+			}
+			for _, ignored := range []string{"D", "U", ">", "A"} {
+				s.Key(ignored)
+				if s.Inside.ItemPage.Selected != 3 || len(s.Inside.ItemPage.Message) == 0 {
+					t.Fatalf("%s不應移列或關閉空格訊息", ignored)
+				}
+			}
+			s.Key(confirm)
+			if !s.ShowingItemPage() || s.Inside.ItemPage.Selected != 3 || len(s.Inside.ItemPage.Message) != 0 {
+				t.Fatal("確認應返回同一物品列")
+			}
+			wantIcons(t, s, IconItemUse, IconUTurn)
+		})
 	}
 }
 
@@ -213,6 +255,9 @@ func TestTakeItemIntoHand(t *testing.T) {
 	}
 	if len(s.Party[i].Backpack) != 0 {
 		t.Fatalf("背包應該空了：%+v", s.Party[i].Backpack)
+	}
+	if s.Inside.ItemPage.Selected != 0 {
+		t.Fatal("拿取後完整重建應選回首欄")
 	}
 }
 
@@ -281,6 +326,9 @@ func TestStowItem(t *testing.T) {
 
 	s.Party[i].Worn[1] = &Good{Name: "Platemail T", Kind: 2, Position: 1}
 	s.Party[i].Backpack = make([]Good, BackpackSlots)
+	for j := range s.Party[i].Backpack {
+		s.Party[i].Backpack[j] = Good{Name: "OCCUPIED"}
+	}
 	s.Inside.ItemPage.Selected = 1
 	use(s)
 	act(s, IconItemStow)
@@ -293,7 +341,7 @@ func TestStowItem(t *testing.T) {
 	}
 }
 
-// 丟掉（0x15）：那一格清空並印 It is dropped!。
+// 丟掉（0x15）：先確認YES才清空，訊息確認後完整返回首欄。
 func TestDropItem(t *testing.T) {
 	s := itemSession(t)
 	i := s.speakerIndex()
@@ -302,22 +350,60 @@ func TestDropItem(t *testing.T) {
 	s.Inside.ItemPage.Selected = 0
 	use(s)
 	act(s, IconItemDrop)
+	if s.Party[i].Worn[0] == nil || !s.Inside.ItemPage.DropConfirm {
+		t.Fatal("選丟棄時應先保留物品並等待YES／NO")
+	}
+	act(s, IconYes)
 	if s.Party[i].Worn[0] != nil {
 		t.Fatalf("應該丟掉了：%+v", s.Party[i].Worn[0])
 	}
-	if len(s.Inside.ItemPage.Note) == 0 ||
-		s.Inside.ItemPage.Note[0] != "It is dropped!" {
-		t.Fatalf("應該印 It is dropped!：%v", s.Inside.ItemPage.Note)
+	if len(s.Inside.ItemPage.DropMessage) == 0 ||
+		s.Inside.ItemPage.DropMessage[0] != "IT IS DROPPED!" || s.Inside.ItemPage.Detail == nil {
+		t.Fatalf("應保留明細並印IT IS DROPPED!：%+v", s.Inside.ItemPage)
+	}
+	s.Key("SPACE")
+	if len(s.Inside.ItemPage.DropMessage) != 0 || s.Inside.ItemPage.Selected != 0 {
+		t.Fatal("完成訊息確認後應返回首欄")
+	}
+}
+
+func TestDropItemCancelPreservesSource(t *testing.T) {
+	s := itemSession(t)
+	i := s.speakerIndex()
+	g := &Good{Name: "Greatsword", Kind: 3, Class: 87, Position: 9}
+	s.Party[i].Worn[9] = g
+	openItems(s)
+	s.Inside.ItemPage.Selected = 9
+	use(s)
+	act(s, IconItemDrop)
+	for _, key := range []string{"U", "D", "SPACE"} {
+		s.Key(key)
+		if !s.Inside.ItemPage.DropConfirm || s.Inside.ItemPage.Selected != 9 || s.Party[i].Worn[9] != g {
+			t.Fatalf("提問期間%s改變了來源或確認層", key)
+		}
+	}
+	s.Key(">")
+	s.Key("RET")
+	if s.Party[i].Worn[9] != g || s.Inside.ItemPage.Selected != 0 || s.Inside.ItemPage.DropConfirm {
+		t.Fatal("NO應保留物品，完整返回首欄")
 	}
 }
 
 // 給隊友（0x0E）：對方背包滿了就不搬。
 func TestGiveItem(t *testing.T) {
+	for _, confirmation := range []string{"RET", "SPACE", "ICON"} {
+		t.Run(confirmation, func(t *testing.T) { testGiveItemConfirmation(t, confirmation) })
+	}
+}
+
+func testGiveItemConfirmation(t *testing.T, confirmation string) {
 	s := itemSession(t)
 	s.Party = append(s.Party, Member{Name: "Poontang"})
 	s.Inside.Party = s.Party
 	i := s.speakerIndex()
-	s.Party[i].Worn[0] = &Good{Name: "Barbut Helm", Kind: 2, Position: 0}
+	record := "b10642ad0082b1a050fa17ff2a000840"
+	s.Party[i].Worn[0] = &Good{Name: "Barbut Helm", Kind: 2, Position: 0, Record: record}
+	s.Party[i].SyncCarried()
 	openItems(s)
 	s.Inside.ItemPage.Selected = 0
 	use(s)
@@ -325,16 +411,103 @@ func TestGiveItem(t *testing.T) {
 	if !s.Inside.ItemPage.Giving {
 		t.Fatal("應該在問給誰")
 	}
+	before, err := json.Marshal(s.Party)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, ignored := range []string{"1", "6"} {
+		s.Key(ignored)
+		if !s.Inside.ItemPage.Giving || s.Inside.ItemPage.GiftConfirm {
+			t.Fatalf("%s不應選收件人", ignored)
+		}
+	}
 	s.Key("2")
+	if !s.Inside.ItemPage.GiftConfirm || s.Inside.ItemPage.Giving || len(s.Inside.ItemPage.GiftMessage) == 0 {
+		t.Fatal("選收件人應保留明細及完成訊息等待確認")
+	}
+	wantIcons(t, s, IconSpacebar)
+	for _, ignored := range []string{"D", "U", "1", "2", "ESC"} {
+		s.Key(ignored)
+		after, err := json.Marshal(s.Party)
+		if err != nil || string(after) != string(before) || !s.Inside.ItemPage.GiftConfirm {
+			t.Fatalf("%s不應搬移物品或離開等待", ignored)
+		}
+	}
+	if confirmation == "ICON" {
+		act(s, IconSpacebar)
+	} else {
+		s.Key(confirmation)
+	}
 	if s.Party[i].Worn[0] != nil {
 		t.Fatalf("應該給出去了：%+v", s.Party[i].Worn[0])
 	}
 	if len(s.Party[1].Backpack) != 1 {
 		t.Fatalf("對方的背包是 %+v", s.Party[1].Backpack)
 	}
-	if len(s.Inside.ItemPage.Note) == 0 ||
-		s.Inside.ItemPage.Note[0] != "The Object is traded!" {
-		t.Fatalf("應該印 The Object is traded!：%v", s.Inside.ItemPage.Note)
+	if hex.EncodeToString(s.Party[i].Carried[1+BackpackSlots]) != strings.Repeat("00", 16) ||
+		len(s.Party[1].Carried) != ItemSlotCount || hex.EncodeToString(s.Party[1].Carried[1]) != record {
+		t.Fatal("送出者與接收者的原始物品鏡像沒有同步")
+	}
+	if p := s.Inside.ItemPage; p.Selected != 0 || p.GiftConfirm || len(p.GiftMessage) > 0 || len(p.Note) > 0 {
+		t.Fatalf("確認後應清訊息並回首欄：%+v", p)
+	}
+}
+
+// RE-175正常原版的四次巨劍交換與NO／YES；鏡像須在重畫前同步。
+func TestItemActionsSynchronizeCarriedBeforeFigure(t *testing.T) {
+	s := itemSession(t)
+	l, err := portrait.Load(filepath.Join("..", "..", "assets", "original-derived-data", "portrait-layout.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	s.Portraits = l
+	i := s.speakerIndex()
+	record := "a3c8a1a4eef9100301904bff4f579600"
+	g := &Good{Name: "Greatsword", Kind: 3, Class: 87, Hands: 1, SizeClass: 6, Position: 9, Record: record}
+	s.Party[i].Worn[9] = g
+	s.Party[i].SyncCarried()
+	openItems(s)
+	check := func(nonemptyOffset int) {
+		t.Helper()
+		for slot, offset := range CarriedOffsets() {
+			want := strings.Repeat("00", 16)
+			if offset == nonemptyOffset {
+				want = record
+			}
+			if got := hex.EncodeToString(s.Party[i].Carried[slot]); got != want {
+				t.Fatalf("位移0x%x物品鏡像=%s，預期%s", offset, got, want)
+			}
+		}
+		if !reflect.DeepEqual(s.Inside.ItemPage.Figure, l.Compose(s.Party[i].Figure(), 0)) {
+			t.Fatal("立繪在鏡像同步之前生成，仍含舊裝備")
+		}
+	}
+	for _, step := range []struct{ row, icon, offset int }{
+		{9, IconItemTake, 0x30}, {10, IconItemBelt, 0x190},
+		{9, IconItemStow, 0xA0}, {11, IconItemTake, 0x30},
+	} {
+		s.Inside.ItemPage.Selected = step.row
+		use(s)
+		act(s, step.icon)
+		check(step.offset)
+	}
+	s.Inside.ItemPage.Selected = 10
+	use(s)
+	act(s, IconItemDrop)
+	act(s, IconNo)
+	check(0x30)
+	s.Inside.ItemPage.Selected = 10
+	use(s)
+	act(s, IconItemDrop)
+	act(s, IconYes)
+	if hex.EncodeToString(s.Party[i].Carried[0]) != strings.Repeat("00", 16) {
+		t.Fatal("YES清除後、等待訊息時物品鏡像尚未清空")
+	}
+	s.Key("SPACE")
+	check(-1)
+	f := s.Party[i].Figure()
+	if f.Belt != nil || f.Weapon != nil {
+		t.Fatalf("丟棄後立繪仍有巨劍：%+v", f)
 	}
 }
 
@@ -354,6 +527,9 @@ func TestEatItem(t *testing.T) {
 	}
 	if len(s.Party[i].Backpack) != 0 {
 		t.Fatalf("吃掉的那一件應該不見了：%+v", s.Party[i].Backpack)
+	}
+	if s.Inside.ItemPage.Selected != WornSlots+1 {
+		t.Fatal("食用另支應保留既有選取，不套搬移的完整重建")
 	}
 }
 
@@ -390,5 +566,50 @@ func TestActionIconsFollowSlotAndKind(t *testing.T) {
 				t.Fatalf("%s 的圖示列是 %v，期望 %v", c.what, got, c.want)
 			}
 		}
+	}
+}
+
+// RE-178正常來源：換列露出y7、空手確認返回露出完整快取，
+// 搬移及重新開頁必須丟棄先前的還原歷史。
+func TestItemEdgeNormalReturnAndRebuild(t *testing.T) {
+	s := itemSession(t)
+	l, err := portrait.Load(filepath.Join("..", "..", "assets", "original-derived-data", "portrait-layout.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	s.Portraits = l
+	openItems(s)
+	p := s.Inside.ItemPage
+	s.Key("D")
+	if p.Selected != 1 || !p.RestoredEdge[7] || p.RestoredEdge[0] {
+		t.Fatal("首次換列應只保留舊頭框的快取曝光")
+	}
+	for p.Selected < WornSlots {
+		s.Key("D")
+	}
+	s.Party[s.speakerIndex()].InHand = nil
+	use(s)
+	s.Key("RET")
+	if p.Selected != WornSlots || !p.RestoredEdge[0] || !p.RestoredEdge[157] || !p.RestoredEdge[163] || p.RestoredEdge[7] {
+		t.Fatal("空手確認返回應複製已修改快取，再用完整框覆蓋y7")
+	}
+	s.Inside.Selected = 1
+	s.Accept()
+	openItems(s)
+	p = s.Inside.ItemPage
+	if p.RestoredEdge != [200]bool{} {
+		t.Fatal("重新開頁不應保留前頁快取曝光")
+	}
+	i := s.speakerIndex()
+	s.Party[i].Worn[9] = &Good{Name: "Greatsword", Kind: 3, Class: 87, Hands: 1, SizeClass: 6,
+		Position: 9, Record: "a3c8a1a4eef9100301904bff4f579600"}
+	s.Party[i].SyncCarried()
+	for p.Selected < 9 {
+		s.Key("D")
+	}
+	use(s)
+	act(s, IconItemTake)
+	if p.Selected != 0 || p.RestoredEdge != [200]bool{} || s.Party[i].InHand == nil {
+		t.Fatal("成功搬移應重建首欄，清除舊快取曝光")
 	}
 }

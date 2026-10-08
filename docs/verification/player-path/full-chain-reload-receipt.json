@@ -1,12 +1,12 @@
 {
  "schema": "kol-full-path-receipt-v1",
  "name": "full-chain-reload",
- "description": "接著 `full-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場，先進門開角色資料頁確認金幣是住宿後的 158，出門時多人隊伍會聽到店主的告別語（建築訊息 17），再出城走到第 5 個任務地點答應參戰。這一份與 `full-chain` 合起來把「存檔 → 離開 → 重載 → 繼續玩」閉起來——存檔不是一條沒人走的支線，而是同一次遊玩的中繼點。全程經過 town.Session、world.Session 與 battle.State，沒有 direct-entry、沒有座標注入、也沒有測試旗標。種子 3 在入夜換日、CAMPING! 收掉之後擲到治療僧侶，照實答應；下一次時段變換自然遇到 GOBLIN 伏擊，第二十一回合打贏後繼續走（路上的自然事件，不是這條要驗的內容）。野外與戰鬥段由 `tools/drive_battle_script.py` 依軌跡走出來。**要先跑 `full-chain` 產生 `workplace/saves/full-chain.json`。**",
+ "description": "本輪 full-chain 新存檔重載，種子 3 不變；生成器加入正式射擊，按鍵打完自然 GOBLIN 遭遇後前往原計畫第 5 個任務地點。保留原勝利、讀檔及任務接受條件；未強制勝利、未注入座標。",
  "seed": 3,
  "load": "workplace/saves/full-chain.json",
- "token_count": 1451,
+ "token_count": 2012,
  "trace": "docs/verification/player-path/full-chain-reload/trace.json",
- "trace_sha256": "59546484a3d04e469d2fcafa9c8685bb5f185a3cfa04d5f0d799b17f236fd64c",
+ "trace_sha256": "7c04373dd5be77a46cab11674e68c62779ad4272df40d498d15bf5c5ff72a3ba",
  "milestones": [
   {
    "step": 0,
@@ -17,11 +17,11 @@
     "left_town": false,
     "mode": 0,
     "party": [
-     "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
-     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=8",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
      "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
-     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
-     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=9",
      "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
     ],
     "town": 7,
@@ -296,9 +296,9 @@
    }
   },
   {
-   "step": 1442,
+   "step": 2003,
    "token": "SPACE",
-   "note": "第十三回合打贏（戰利品清單選 U-TURN 不領），回到野外",
+   "note": "自然 GOBLIN 戰鬥勝利，預期第十七回合結束",
    "scene": "play",
    "town": {
     "door": {
@@ -325,14 +325,14 @@
    "battle": {
     "exec_text": [
      "Each player receives 102",
-     "adventure points, and 6 gold",
+     "adventure points, and 8 gold",
      "crowns!"
     ],
     "monster": "GOBLIN",
     "prompt": 10,
     "quest_done": 0,
     "result_picture": 3,
-    "round": 13,
+    "round": 17,
     "site": -1,
     "stage": 5,
     "turn": 9,
@@ -340,7 +340,7 @@
    }
   },
   {
-   "step": 1450,
+   "step": 2011,
    "token": "U",
    "note": "踏上第 5 個任務地點：敘述與「Will you partake?」（RE-079）",
    "scene": "play",
@@ -379,7 +379,7 @@
    }
   },
   {
-   "step": 1451,
+   "step": 2012,
    "token": "RET",
    "note": "答應參戰：滿版的怪物圖",
    "scene": "play",
@@ -474,14 +474,14 @@
    "shows": "GOBLIN 伏擊"
   },
   {
-   "step": 1450,
-   "file": "step-1450.png",
+   "step": 2011,
+   "file": "step-2011.png",
    "sha256": "f5817fc539f934bc3e01045c52976254d41084edbe0760672882288900a98d2d",
    "shows": "任務敘述與 Will you partake?"
   },
   {
-   "step": 1451,
-   "file": "step-1451.png",
+   "step": 2012,
+   "file": "step-2012.png",
    "sha256": "c23b488b4c37a3953a2035d8e00623375a4afbf2d1cbb861da11e860a8e364b7",
    "shows": "滿版的 BINDERAK 圖"
   }

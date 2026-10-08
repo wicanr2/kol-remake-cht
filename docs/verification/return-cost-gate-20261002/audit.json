@@ -1,0 +1,26 @@
+{
+  "schema": "kol-return-cost-gate-audit-v1",
+  "receipt_sha256": "475785df9255cb8952362e4406205542613159860624057737bd2db25fb8a33d",
+  "attachments": 2680,
+  "full_readonly_verification": "passed",
+  "host_control": {
+    "source": "host git 與 docker 工具實查；其他專案容器保留",
+    "observed_utc": "2026-10-02 12:26:16 UTC",
+    "git_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "git_diff_check": "passed",
+    "git_staged": [],
+    "project_containers": [],
+    "pre_seal_readonly_validation": "passed",
+    "worklist_open": 22,
+    "worklist_done": 84,
+    "admission_lines": 1488,
+    "unclaimed_admission_lines": 0
+  },
+  "root_owned_files": [],
+  "md_directories": [],
+  "artifact_uid_gid": [
+    1000,
+    1000
+  ],
+  "production_unchanged": true
+}

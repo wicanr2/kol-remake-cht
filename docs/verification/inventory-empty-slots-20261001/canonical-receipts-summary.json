@@ -1,0 +1,237 @@
+{
+  "schema": "kol-canonical-player-path-summary-v1",
+  "paths": [
+    {
+      "name": "arena",
+      "plan": "docs/verification/player-path/arena.json",
+      "plan_sha256": "4f9ff8ed5eb451abcf88c2bf191a88d9539ed10cc63a6c6aa9860d2fa9e15455",
+      "receipt": "docs/verification/player-path/arena-receipt.json",
+      "receipt_sha256": "66d3a5184e1496d2982cfbb4919624d7283fe99feecc7c7a569e1a83f45fccb3",
+      "failures": []
+    },
+    {
+      "name": "full-chain-ending",
+      "plan": "docs/verification/player-path/full-chain-ending.json",
+      "plan_sha256": "01bd27038f7d4737eae7d71e63142710a533ef91e06ae45fd08884e64200c4b6",
+      "receipt": "docs/verification/player-path/full-chain-ending-receipt.json",
+      "receipt_sha256": "db3dcb71a1f264d071da5cd51a38ee6172941dcc514c0dc436373b6db0fbdb86",
+      "failures": []
+    },
+    {
+      "name": "full-chain-reload",
+      "plan": "docs/verification/player-path/full-chain-reload.json",
+      "plan_sha256": "3ffd53666c9a94c84830e89f082cea934c5c3acb3a45e06b74c78f649abcd7e3",
+      "receipt": "docs/verification/player-path/full-chain-reload-receipt.json",
+      "receipt_sha256": "bd6c40ca369f6d94b66c498e9b719ec21439c2018eda4de2b10abbfb6d56fe6e",
+      "failures": []
+    },
+    {
+      "name": "full-chain",
+      "plan": "docs/verification/player-path/full-chain.json",
+      "plan_sha256": "143bad101a20efced32c4ce03ef54b716b9735fc759b7afa9197492ca9b129e5",
+      "receipt": "docs/verification/player-path/full-chain-receipt.json",
+      "receipt_sha256": "f2e5c14d270a9b308ba7366c0728546e41e45b358345513939f01fde73732e40",
+      "failures": []
+    },
+    {
+      "name": "full",
+      "plan": "docs/verification/player-path/full.json",
+      "plan_sha256": "80ce22016bee46e3cbbdd73e949442a5601379ce711c6f74a66896581428b8f3",
+      "receipt": "docs/verification/player-path/full-receipt.json",
+      "receipt_sha256": "983a74d754a4839e1b91fc34ed92cf71ffdb86ad8a95465464a21eb5f1b75b04",
+      "failures": []
+    },
+    {
+      "name": "gear-abbey",
+      "plan": "docs/verification/player-path/gear-abbey.json",
+      "plan_sha256": "c97bc96cfd59b19f5aae21b1045962c26fc6f6d91a1079fbb323bd63d1e14040",
+      "receipt": "docs/verification/player-path/gear-abbey-receipt.json",
+      "receipt_sha256": "d863b1e9f1b120adeeba4255ac495f20d4fd6758ef02eac5b0f69d3ae362e2ab",
+      "failures": []
+    },
+    {
+      "name": "gear-switch",
+      "plan": "docs/verification/player-path/gear-switch.json",
+      "plan_sha256": "445af33856f43ff356625393816871e915ed91e5f6a234aae11ec989429250ce",
+      "receipt": "docs/verification/player-path/gear-switch-receipt.json",
+      "receipt_sha256": "813c5b8d5d7298783376afd1bd78ccd9304757ed16030af4d9446344fd5a6b93",
+      "failures": []
+    },
+    {
+      "name": "quest-chain-reload",
+      "plan": "docs/verification/player-path/quest-chain-reload.json",
+      "plan_sha256": "59edb9a1ea409ad724022b6580fb43b4a217d188be5c528e9b20fea54b43ccf6",
+      "receipt": "docs/verification/player-path/quest-chain-reload-receipt.json",
+      "receipt_sha256": "4ad70e3410e254be33ed043127ead556c455677818a3adf05c44cb673889c0c0",
+      "failures": []
+    },
+    {
+      "name": "quest-chain",
+      "plan": "docs/verification/player-path/quest-chain.json",
+      "plan_sha256": "292151f9fbb56728f48e19092a6d362781da9831973751ab76b5ede036501499",
+      "receipt": "docs/verification/player-path/quest-chain-receipt.json",
+      "receipt_sha256": "643e4ab954643bc9a490bbcec5000e65781d08cc69cd535903e375ef5e8481f4",
+      "failures": []
+    },
+    {
+      "name": "quest-list",
+      "plan": "docs/verification/player-path/quest-list.json",
+      "plan_sha256": "ec1abed328c23c4982abdf72073a155753c2889549984cc18109852b1250299d",
+      "receipt": "docs/verification/player-path/quest-list-receipt.json",
+      "receipt_sha256": "d351377d5b6644ee9d3cadf093f1a6673e91a101035520f1066bc3d4ce9b8427",
+      "failures": []
+    },
+    {
+      "name": "quest-take",
+      "plan": "docs/verification/player-path/quest-take.json",
+      "plan_sha256": "77faea17222e38a1be78ce819cefa0d9a06124f3108cc701c0b8629d87341a91",
+      "receipt": "docs/verification/player-path/quest-take-receipt.json",
+      "receipt_sha256": "9e3941d9b8be9f29e67278b401750130613dd50544404dc3ee8df3b6469dcd10",
+      "failures": []
+    },
+    {
+      "name": "sheet-outside",
+      "plan": "docs/verification/player-path/sheet-outside.json",
+      "plan_sha256": "0115b3dfd6e7c1b1fa8460161b7e8c17990dafbb557690f64f676ca65aab7491",
+      "receipt": "docs/verification/player-path/sheet-outside-receipt.json",
+      "receipt_sha256": "06cd0dea46526c8d0e4fb3da5ab3ca0e27a9ab59c66d1af3ee6eee01986c701d",
+      "failures": []
+    },
+    {
+      "name": "town-edge",
+      "plan": "docs/verification/player-path/town-edge.json",
+      "plan_sha256": "e34e94d86774662eb7552cca4213f297aaa5fd3796dafbb276f60c215fde08c4",
+      "receipt": "docs/verification/player-path/town-edge-receipt.json",
+      "receipt_sha256": "02a0a2fa6d9df677dfbe5a34d5013bed4d519975706cfce70cb048733a08cd38",
+      "failures": []
+    },
+    {
+      "name": "town-leave",
+      "plan": "docs/verification/player-path/town-leave.json",
+      "plan_sha256": "9baade4689ec7dea307c5e404974a5968da86ba8a82e4318c45343468aba2a6b",
+      "receipt": "docs/verification/player-path/town-leave-receipt.json",
+      "receipt_sha256": "92203ea07cfce4d9565bad79366092e8985adf806a9c8d35b3f6c348c7205c64",
+      "failures": []
+    },
+    {
+      "name": "town-load",
+      "plan": "docs/verification/player-path/town-load.json",
+      "plan_sha256": "6b3b2e2d75c3fa0b98f7139de7b3c6dce5a4a2353b58175a5c81febbb54829cb",
+      "receipt": "docs/verification/player-path/town-load-receipt.json",
+      "receipt_sha256": "37ea3814be485fabf37291306aa456cf06b0a54e3d17884f52ae23ead23e7fa3",
+      "failures": []
+    },
+    {
+      "name": "town-mirror",
+      "plan": "docs/verification/player-path/town-mirror.json",
+      "plan_sha256": "1b01ab8469adba67ec7b30bef0fc0c4f43c32d7a11f2b4f0e641e491a454b455",
+      "receipt": "docs/verification/player-path/town-mirror-receipt.json",
+      "receipt_sha256": "228805685c9ddc56aeb260f0ad501ab7cbf6d61158121b1ea04897715f937db1",
+      "failures": []
+    },
+    {
+      "name": "town-recruit",
+      "plan": "docs/verification/player-path/town-recruit.json",
+      "plan_sha256": "95cf581641234328c0cff92df9878b25387f5458985af18b2a55c0d100c6a6b0",
+      "receipt": "docs/verification/player-path/town-recruit-receipt.json",
+      "receipt_sha256": "ca228b779b97ca80bc168162f5890151c29bad5e82c14a16f1a5af7d30150871",
+      "failures": []
+    },
+    {
+      "name": "town-rest",
+      "plan": "docs/verification/player-path/town-rest.json",
+      "plan_sha256": "cc16293f64946e1e9ab8bbe0350ab641a19f6c8bc964746956c63fe79dd400b7",
+      "receipt": "docs/verification/player-path/town-rest-receipt.json",
+      "receipt_sha256": "64afba7b2220715a311e1341177d332ba8abef43067af8e9ebcbf0af8d12aa54",
+      "failures": []
+    },
+    {
+      "name": "town-round-trip",
+      "plan": "docs/verification/player-path/town-round-trip.json",
+      "plan_sha256": "6e12a98626860963f545ca4b8f26a2c75f0a632e62eaa6f7d7519db83a3a49b1",
+      "receipt": "docs/verification/player-path/town-round-trip-receipt.json",
+      "receipt_sha256": "1db9914b718e776537163f5ad9f7910604e97f322fed23a6c87283c7e92aaa9e",
+      "failures": []
+    },
+    {
+      "name": "town-scroll",
+      "plan": "docs/verification/player-path/town-scroll.json",
+      "plan_sha256": "36804b75c02ae3a9d21c60dc65b7c08464571c7a527ba8fde869fdef4614583d",
+      "receipt": "docs/verification/player-path/town-scroll-receipt.json",
+      "receipt_sha256": "4b32d5ac6aded437b8646bf2433302455ad92b1f508c7ea6786f5154247b39cb",
+      "failures": []
+    },
+    {
+      "name": "town-shop",
+      "plan": "docs/verification/player-path/town-shop.json",
+      "plan_sha256": "1c011544ba527d2f6ea8292d547a0f7e81ed4e5518d88d44e3aabb4aaad20245",
+      "receipt": "docs/verification/player-path/town-shop-receipt.json",
+      "receipt_sha256": "a47554316feddd921df1ac94eb939e137087aa1002942dce104c055d3f679145",
+      "failures": []
+    },
+    {
+      "name": "town-stable",
+      "plan": "docs/verification/player-path/town-stable.json",
+      "plan_sha256": "8e67a55ace9237a247c27faffaa5ed451ab8c11f6bb69858e69a61eb53926c35",
+      "receipt": "docs/verification/player-path/town-stable-receipt.json",
+      "receipt_sha256": "70aa2bb6e7e07170e187ee13880342a6e2f8b2efb8051b1b3a8186179794cb30",
+      "failures": []
+    },
+    {
+      "name": "town-talk",
+      "plan": "docs/verification/player-path/town-talk.json",
+      "plan_sha256": "464ba15220b8c847dc2784f408cd4710af912b8cbb5bcf2100fbc75b6406f854",
+      "receipt": "docs/verification/player-path/town-talk-receipt.json",
+      "receipt_sha256": "3e3094c0dcac0393a67181c7844e28e8b0d3ad8126478c1277009b5827987e93",
+      "failures": []
+    },
+    {
+      "name": "town-train",
+      "plan": "docs/verification/player-path/town-train.json",
+      "plan_sha256": "5af7a9b77dc2002089ab05b41c442f2c26bde756fd8f10491770db6cb5fbf794",
+      "receipt": "docs/verification/player-path/town-train-receipt.json",
+      "receipt_sha256": "9ab144c09698930775f41268322d13226095118978e3d4d44572a3a20d0e8804",
+      "failures": []
+    },
+    {
+      "name": "town",
+      "plan": "docs/verification/player-path/town.json",
+      "plan_sha256": "6837d6ae41afdd6a28c5bb8f02f22456b1076c821df1b0ddbbcd985df0d24f22",
+      "receipt": "docs/verification/player-path/town-receipt.json",
+      "receipt_sha256": "2f48372dbe16554d8d36528e8d7d2eeac74de81c55d68f7da326119d97a9d3bb",
+      "failures": []
+    },
+    {
+      "name": "world-clock",
+      "plan": "docs/verification/player-path/world-clock.json",
+      "plan_sha256": "566fd42902882c5c1ae2d0bc563d44d9cb23677aba31290746a2fcb43b5a4a4d",
+      "receipt": "docs/verification/player-path/world-clock-receipt.json",
+      "receipt_sha256": "d8158cb02a86ce1a6e681c6f8bc4cab5f2cd72aca52ad23e503fe5777a4cb761",
+      "failures": []
+    },
+    {
+      "name": "world-healer",
+      "plan": "docs/verification/player-path/world-healer.json",
+      "plan_sha256": "d8f3bf790c563cf7cba6f260ae764b01edb80016fb737acca691db2015caab92",
+      "receipt": "docs/verification/player-path/world-healer-receipt.json",
+      "receipt_sha256": "b9be3bdd3d89bb470fe15e5890513bd7bd0b5084e4827e6d97de032d69614bab",
+      "failures": []
+    },
+    {
+      "name": "world-quest",
+      "plan": "docs/verification/player-path/world-quest.json",
+      "plan_sha256": "9ffef522c938379e3eaeb5b1ed14688f4f55212134ba4f0438fb4a7e952759e3",
+      "receipt": "docs/verification/player-path/world-quest-receipt.json",
+      "receipt_sha256": "376b9611ad86283737c02f707f10a0df21179e47c8f2ee9936beea2c3d7ee043",
+      "failures": []
+    },
+    {
+      "name": "world-road",
+      "plan": "docs/verification/player-path/world-road.json",
+      "plan_sha256": "b0b47365b14d65f32a496ef449088db25c3bdb3e4897b82fe2d5e4c0053233b8",
+      "receipt": "docs/verification/player-path/world-road-receipt.json",
+      "receipt_sha256": "2643afb26c0b09f1c8916232d1ac96ca67d2f30596a6e4248c4f18be9b95f62b",
+      "failures": []
+    }
+  ]
+}

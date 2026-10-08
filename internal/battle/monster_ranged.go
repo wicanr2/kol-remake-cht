@@ -25,6 +25,8 @@ func (s *State) InitializeMonsterRanged(r Rand) {
 	for i := PartySlots; i < len(s.Actors); i++ {
 		if s.Actors[i].Side == SideMonster {
 			s.Actors[i].Kind = MonsterRangedValue(s.Monster.RangedChance, s.Monster.RangedCode, r)
+			// 資格決定負重取槽，寫入後不能保留選裝備時的速度（RE-216）。
+			s.Actors[i].ReloadGear()
 		}
 	}
 	s.rangedPending = false

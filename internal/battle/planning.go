@@ -53,7 +53,7 @@ type Planning struct {
 	// Bar 是目前那一列的圖號；Selected 是白框停在第幾格。
 	Bar      []int
 	Selected int
-	// Cursor 是選目標格的游標，只在 PromptTarget 有意義。
+	// Cursor 是選目標格的游標；四列子選單也沿用其最後位置。
 	Cursor TargetCursor
 	// Command／Style／Guard 是這一名已經決定的三個值。
 	Command, Style, Guard int
@@ -87,12 +87,15 @@ func (s *State) BeginTurn() {
 	if m == nil {
 		return
 	}
+	// sub_249AE:0x249CB（RE-171-source）：主列重建先重載目前人物指令。
+	s.LastCommand = s.Actors[i].Command
 	s.Plan.Prompt = PromptCommand
 	s.Plan.BodyActor = i + 1
 	s.Plan.Env = s.CommandEnv(i)
 	s.Plan.Bar = CommandBar(&s.Actors[i], m, s.Plan.Env)
 	s.Plan.Selected = 0
 	s.Plan.Command, s.Plan.Style, s.Plan.Guard = 0, 0, 0
+	s.trackMain(i)
 	s.Plan.Summary, s.Plan.SummaryShown = s.planSummary(i)
 }
 
@@ -104,8 +107,8 @@ func (s *State) BeginTurn() {
 //	射擊與要選目標格的施法 → 記住的目標格（`[0x1A74]`／`[0x1B36]`），出了 0…8 不標
 //	其餘                      → 面向那一格（`[0x0B76]`）
 //
-// 只有那一格站著人時才畫（`[0x6AE4]` 非零）。指令碼讀的是全域，不是這一名自己的
-// `+0x25`，所以新一回合第一名看到的是上一個寫回者的指令（RE-160）。
+// RE-171 訂正：有人條件只控制人物暫存重建，空格仍畫圓環。
+// 全域指令已由 BeginTurn 對應 sub_249AE 從目前人物 +0x25 重載，不跨人物沿用。
 func (s *State) planSummary(i int) (Cell, bool) {
 	a := &s.Actors[i]
 	cmd := s.LastCommand
@@ -138,24 +141,29 @@ func (s *State) planSummary(i int) (Cell, bool) {
 		n := FacingCell(a.Facing)
 		c = Cell{Row: n/3 + 3, Col: n%3 + 3}
 	}
-	if s.actorAt(a.X+c.Row-ViewCentre.Row, a.Y+c.Col-ViewCentre.Col) < 0 {
+	return c, true
+}
+
+// TargetMarker 是 RE-171 已驗證的等待層圓環位置；子選單沿用最後目標格。
+func (s *State) TargetMarker() (Cell, bool) {
+	var c Cell
+	switch s.Plan.Prompt {
+	case PromptTarget, PromptWeaponForm, PromptUnarmedForm, PromptMoveForm, PromptGuardForm:
+		c = Cell{Row: s.Plan.Cursor.Row, Col: s.Plan.Cursor.Col}
+	case PromptCommand:
+		if !s.Plan.SummaryShown {
+			return Cell{}, false
+		}
+		c = s.Plan.Summary
+	default:
 		return Cell{}, false
 	}
-	return c, true
+	return c, c.Row >= 0 && c.Row < ViewRows && c.Col >= 0 && c.Col < ViewCols
 }
 
 // MoveSelection 移動圖示列的白框：末格繞回，與城鎮同一條規則。
 // 選目標格時 `,`／`.` 移的是同一個白框（`sub_24131:0x24771`）。
 func (s *State) MoveSelection(step int) {
-	// 文字清單那兩張走自己的游標（RE-100）。
-	if s.Plan.Prompt == PromptSpell || s.Plan.Prompt == PromptAffect {
-		n := len(s.Plan.List)
-		if n == 0 {
-			return
-		}
-		s.Plan.ListPick = ((s.Plan.ListPick+step)%n + n) % n
-		return
-	}
 	n := len(s.Plan.Bar)
 	if n == 0 {
 		return
@@ -166,8 +174,22 @@ func (s *State) MoveSelection(step int) {
 	}
 }
 
-// MoveCursor 是選目標格時的方向鍵；mouse 為真表示這一步來自滑鼠指格。
+// MoveCursor 處理文字清單的上下鍵及目標格方向鍵；mouse 為真表示滑鼠指格。
 func (s *State) MoveCursor(dRow, dCol int, mouse bool) {
+	if s.Plan.Prompt == PromptSpell || s.Plan.Prompt == PromptAffect {
+		// RE-205：文字選項與 YES／U-TURN 白框分開，首末項夾限。
+		if mouse || dCol != 0 || len(s.Plan.List) == 0 {
+			return
+		}
+		s.Plan.ListPick += dRow
+		if s.Plan.ListPick < 0 {
+			s.Plan.ListPick = 0
+		}
+		if s.Plan.ListPick >= len(s.Plan.List) {
+			s.Plan.ListPick = len(s.Plan.List) - 1
+		}
+		return
+	}
 	if s.Plan.Prompt != PromptTarget {
 		return
 	}
@@ -260,6 +282,8 @@ func (s *State) beginTarget(i, mode int, after Prompt) {
 	s.Plan.Bar = []int{CmdYes, CmdCancel}
 	s.Plan.Selected = 0
 	s.Plan.Cursor.Icon = 0
+	// sub_24131:0x2417A／0x24196：新進目標層先清空兩框。
+	s.Plan.BodyActor = 0
 	s.inspectBodyTarget()
 }
 

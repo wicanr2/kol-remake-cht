@@ -1,0 +1,107 @@
+{
+  "schema": "kol-inventory-baseline-adoption-v1",
+  "updates": [
+    {
+      "name": "arena",
+      "milestones_changed": [
+        1706
+      ],
+      "trace_sha256": "a5e421a9384b5f0e31e1fc6133bb647570edfacd02c02b1a8852c82e4c514daf",
+      "manifest": "docs/verification/player-path/arena/build-manifest.json",
+      "manifest_sha256": "8998bc1e11991f3e255f33ba9cea4cd6f771f2514e9f4b642d93b051961cca59"
+    },
+    {
+      "name": "full-chain-ending",
+      "milestones_changed": [],
+      "trace_sha256": "2dba555bb3cf275a8f5262cb148c7fde6ae12906eb3f1282c4d7b53c827bd829",
+      "manifest": "docs/verification/player-path/full-chain-ending/build-manifest.json",
+      "manifest_sha256": "aa883e3f7b63a64057fbfe5fcb76d3b871f2a7cfa8a638cab4210df3d71eab20"
+    },
+    {
+      "name": "full-chain-reload",
+      "milestones_changed": [],
+      "trace_sha256": "7c04373dd5be77a46cab11674e68c62779ad4272df40d498d15bf5c5ff72a3ba",
+      "manifest": "docs/verification/player-path/full-chain-reload/build-manifest.json",
+      "manifest_sha256": "39d52a62fb07fa7f64f9a41402019eef5a1acb4dd8579aa1df44179b0cdc705c"
+    },
+    {
+      "name": "full-chain",
+      "milestones_changed": [
+        2317
+      ],
+      "trace_sha256": "a84af3b6901a63e800672e7a5d5c76f8c47598f1596c0e726c240d97ddd1461d",
+      "manifest": "docs/verification/player-path/full-chain/build-manifest.json",
+      "manifest_sha256": "460422d5c6ad1ebcb60da81f314f4acdb98319b62eb29087d6ae595ff5ea9d07"
+    },
+    {
+      "name": "gear-switch",
+      "milestones_changed": [],
+      "trace_sha256": "311375005081feabdfd04afcc0124e46e99d1d44f43f6ce2cd65bb1915ca63ac",
+      "manifest": "docs/verification/player-path/gear-switch/build-manifest.json",
+      "manifest_sha256": "d6195ed04245e7bf94646d2f70fb3bc7c55b9c0c7f097049484af67e776ddf78"
+    },
+    {
+      "name": "quest-chain-reload",
+      "milestones_changed": [
+        0
+      ],
+      "trace_sha256": "9db53bda94d8e7c32d1718c559f8dcc8e98e5150bc2f3908f6a6a63da68ffe01",
+      "manifest": "docs/verification/player-path/quest-chain-reload/build-manifest.json",
+      "manifest_sha256": "9166366e57400d228cd9e254b21dacdc60aca8ec828d33ab1d440813082fc884"
+    },
+    {
+      "name": "quest-chain",
+      "milestones_changed": [
+        7065,
+        7218,
+        7435
+      ],
+      "trace_sha256": "c82df192c7af17ed556cd11e33d6b14866f405357dbed4b4d5c32a94eedc5a11",
+      "manifest": "docs/verification/player-path/quest-chain/build-manifest.json",
+      "manifest_sha256": "fc39a0e86c7d8b52de0cff98ae9bfa5da9c5fad83c8ce50cfb04bba2b5f4c0ae"
+    }
+  ],
+  "review_sha256": "801d8579fccb47e8b9cfb5e615eb57a606ebe06c7e6a340fc7891d8c8ce83a8f",
+  "negative_controls_rejected": 3,
+  "town_rest_v3_expectations": {
+    "old": {
+      "schema": "kol-save-v1",
+      "settings.faithful_inn_stay": false,
+      "location.kind": "town",
+      "location.town": 7,
+      "location.entry_point": 3,
+      "location.x": 57,
+      "location.y": 8,
+      "party[0].name": "Theodoric",
+      "party[0].gold": 953,
+      "party[0].wounds": 0,
+      "party[0].place": "HALFWAY HO",
+      "party[0].town_code": "MIN",
+      "party[0].building_id": 86,
+      "party[0].speaker": true
+    },
+    "new": {
+      "schema": "kol-save-v3",
+      "settings.faithful_inn_stay": false,
+      "location.kind": "town",
+      "location.town": 7,
+      "location.entry_point": 3,
+      "location.x": 57,
+      "location.y": 8,
+      "characters[0].name": "Theodoric",
+      "characters[0].gold": 953,
+      "characters[0].wounds": 0,
+      "characters[0].place": "HALFWAY HO",
+      "characters[0].town_code": "MIN",
+      "characters[0].building_id": 86,
+      "speaker": 0,
+      "party[0]": 0
+    }
+  },
+  "save_backups_sha256": {
+    "full-chain.json": "7fa97d7c84e68b6e1884061a45af9c729717cf3bc1a1e7ce23049971b9d8473a",
+    "town-rest.json": "7ac179ad0e8a169be2c7b04fce3de8991c2bf3afd57681e488c8a86037f72bef",
+    "quest-chain.json": "c6326c30aac8af6c9df9a92f8ddbb08304fcf2db9d77ed2ea97aff8ec6199764"
+  },
+  "scope": "只更新經逐欄審查的七條基準與正式v3保存條件；比較器、按鍵、seed及其他條件不改"
+}

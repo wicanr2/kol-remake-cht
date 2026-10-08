@@ -11,7 +11,10 @@
 
 玩家自取的角色名、數字與標點不算漏譯；報表把「只含玩家名稱」的字串另列，
 其餘含拉丁字母的字串都要人判。這支只看得到字模繪製的字串，畫在原版圖片裡
-的英文字樣要另外看畫格。在主機上執行，重播本身在 `run_kol_shots.sh` 的容器裡。
+的英文字樣要另外看畫格。Python 分析必須在 Docker 內執行；既有 run 入口使用
+`run_kol_shots.sh` 的 Docker 控制面。容器沒有 Docker 控制面時，先用
+`check_player_paths.spec_line` 組成規格，於同一容器的遊戲加上 `-lang zh-Hant` 與
+`-text-log` 重播，再以 report 彙整；來源、存檔依賴與輸出目錄另記入驗證收據。
 """
 
 from __future__ import annotations

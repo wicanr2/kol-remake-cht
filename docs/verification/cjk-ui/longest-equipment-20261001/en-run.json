@@ -1,0 +1,22 @@
+{
+  "command": [
+    "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "-scene",
+    "flow",
+    "-seed",
+    "1",
+    "-lang",
+    "en",
+    "-flow-script",
+    "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R U U U U U U U U U RET Z Z Z D Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z D X X X X D D L D D D D D Z Z Z Z D X X X X X SPACE SPACE SPACE > > > > > RET U U L L D D RET > RET RET SPACE SPACE > > > > > RET U U L L D D RET > RET RET SPACE SPACE > > > > > RET U U L L D D RET > RET RET SPACE SPACE > RET U U U U U U U U U L L L L L L L L L D D D D D D D R R R R RET RET SPACE SPACE > > > > > RET U U L L D D RET > RET RET SPACE SPACE",
+    "-shot-dir",
+    "workplace/cjk-equipment-20261001/en-current",
+    "-shot-steps",
+    "160,161,162,178,179,180,196,197,198,214,215,216,249,250,251,267,268,269",
+    "-trace",
+    "workplace/cjk-equipment-20261001/en-current/trace.json"
+  ],
+  "returncode": 0,
+  "seconds": 7.6009455129969865,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4"
+}

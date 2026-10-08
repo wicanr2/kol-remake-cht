@@ -1,0 +1,24 @@
+{
+  "schema": "kol-world-return-source-audit-v1",
+  "date": "2026-10-02",
+  "receipt_sha256": "a83e099075222eaf568465c972220c84cacf72e6bfcedf8278b2eb22b4f44625",
+  "verifier_sha256": "5c4edf16c39784bd750902511c51b1d4cf5d62c2da248a28632c9d86317af376",
+  "auditor_sha256": "3e41b15cb1146c42ae5187f22a00d8241948e1e5066cc062be9f87da08a47d67",
+  "attachments": 1516,
+  "preserved_shared_inputs": 1303,
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned": [],
+  "md_same_name_directories": [],
+  "formal_database_unchanged": true,
+  "git_diff_check_exit": 0,
+  "staged_files": [],
+  "related_containers": [],
+  "worklist": {
+    "open": 22,
+    "done": 84
+  },
+  "production_unchanged": true,
+  "cleanup": "一次性Docker --rm；本輪無背景GUI程序，沒有新映像；原始payload與未驗PNG留本機。",
+  "remaining": "返回子切片DRAFT；先確認正常勝利／逃走最後暫存，產品世界同狀態仍開放。"
+}

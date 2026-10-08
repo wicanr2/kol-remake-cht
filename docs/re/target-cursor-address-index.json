@@ -1,0 +1,23 @@
+{
+  "schema": "kol-target-cursor-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x249cb": {"semantic": "主列前置重建由目前人物+0x25重載全域指令，不能沿用其他人物或AI", "confidence": "已證實", "evidence": "RE-171-source；sub_249AE:0x249C5..0x249CB；sub_1E3A8:0x1F16A；gui7 plan-09→10正常換人"},
+    "0x2413a": {"semantic": "遠程目標起點先設為0,0", "confidence": "已證實", "evidence": "RE-171生命週期續核；sub_24131:0x2413A..0x24143；gui9正常首開"},
+    "0x24213": {"semantic": "只在行動者舊指令0x23或0x0D時換算記憶目標", "confidence": "已證實", "evidence": "RE-171；sub_24131:0x24213..0x2423A；gui9首開與gui10重開"},
+    "0x2487b": {"semantic": "目標返回先停動畫並重畫目標底圖", "confidence": "已證實", "evidence": "RE-171；正式.i64與gui6正常U-TURN清除框"},
+    "0x117b2": {"semantic": "子選單mode6重新啟用動畫組5", "confidence": "已證實", "evidence": "RE-171；正式.i64與gui7徒手及防禦子選單"},
+    "0x11978": {"semantic": "圖示選單Return返回清除動畫組", "confidence": "已證實", "evidence": "RE-171；sub_11722原始資料流"},
+    "0x22d0d": {"semantic": "主指令列設動畫組5，摘要旗標決定等鍵模式", "confidence": "已證實", "evidence": "RE-171；sub_228B7:0x22D0D..0x22D25與gui7/gui10摘要"},
+    "0x1f38d": {"semantic": "摘要旗標不因目標空格而清除；有人僅控制人物重建", "confidence": "已證實", "evidence": "RE-171；sub_1E3A8原始旗標資料流；gui7 plan-09正常空格摘要"},
+    "0x2415b": {"semantic": "選目標格的動畫組基底設為5", "confidence": "已證實", "evidence": "RE-171；20261001-target-cursor.md；IDA正式.i64與gui4/gui5正常畫格模式值"},
+    "0x113ce": {"semantic": "目標格索引9×列+欄；有精靈時使用第100格暫存背景", "confidence": "已證實", "evidence": "RE-171；sub_11390:0x113CE..0x11412；12框原版像素收據"},
+    "0x114a6": {"semantic": "sub_1CB28疊KOLPICS payload0單元5..9的目標圓環", "confidence": "已證實", "evidence": "RE-171；正常最後繪製呼叫與16×16獨立合成；original-pixel-checks.json"},
+    "0x114cc": {"semantic": "動畫相位0..4往返，邊界反轉並設等待計數3", "confidence": "已證實", "evidence": "RE-171；sub_11390:0x114CC..0x11508；動態單元序列"},
+    "0x245a9": {"semantic": "離開有人格時重畫人物合成圖；此呼叫不是圓環來源", "confidence": "已證實", "evidence": "RE-171；.i64引數與gui5正常目標移動"},
+    "0x24631": {"semantic": "進入有人格時重畫人物合成圖；圓環另由等鍵迴圈繪製", "confidence": "已證實", "evidence": "RE-171；.i64引數與gui5正常目標重返"}
+  }
+}

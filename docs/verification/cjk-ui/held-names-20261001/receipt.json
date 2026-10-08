@@ -1,0 +1,887 @@
+{
+  "schema": "kol-cjk-initial-held-names-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "兩個初始持有物漏譯與名冊持物稽核；父 SPEC-033 仍 READY",
+  "selection": "selection.json",
+  "selected_before_execution": true,
+  "population": {
+    "occupied_characters": 14,
+    "held_item_occurrences": 95,
+    "held_unique_names": 34
+  },
+  "translations": {
+    "Maul": "大槌",
+    "Black Choker": "黑色頸鍊"
+  },
+  "translation_status": "暫譯",
+  "catalog": {
+    "keys": 531,
+    "unique_names": 515,
+    "missing": 0,
+    "orphan": 0
+  },
+  "normal_path": "標題、正常選角／招募、物品頁標記及明細、退出物品頁、步行進旅店、住宿保存；新程序重載並正常再開物品頁",
+  "seed": {
+    "remake": 1,
+    "method": "每次執行前 -seed 1；初次未 load 或注入座標，續玩只 load 同次住宿的保存",
+    "original": null,
+    "limitation": "本次是純顯示修正，未執行原版或聲稱原版亂數 parity"
+  },
+  "binary": {
+    "path": "workplace/platform-smoke-20261001/build/kol-linux",
+    "sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "rebuilt": false
+  },
+  "toolchain": {
+    "game_image": "eob-remake-go:1.26.7-ebiten2.9.9-audio",
+    "game_image_id": "sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+    "checks_image": "kol-package:20260907",
+    "checks_image_id": "sha256:3d32441befe02810c3220a2e9f2db5b84ee65c703e5b65ee563712a3519ad193",
+    "runtime": "Go 1.26.7／Ebitengine 2.9.9、Xvfb、Python 3.11"
+  },
+  "states": {
+    "runs": 12,
+    "total": 620,
+    "maul_normal_per_run": 97,
+    "warder_normal_per_run": 42,
+    "maul_reload_per_run": 20,
+    "warder_reload_per_run": 12,
+    "before_after_en_zh_equal": true
+  },
+  "checks": {
+    "text_boxes": 8,
+    "text_box_pixel_differences": 0,
+    "whole_frame_comparisons": 32,
+    "changed_name_rects": 4,
+    "outside_name_rect_differences": 0,
+    "saved_values_except_saved_at_equal": true,
+    "raw_names_and_records_preserved": true,
+    "reload_unchanged_save": true,
+    "static_text_fit": 9645,
+    "static_failures": 0,
+    "glyph_strings": 6095,
+    "missing_glyphs": 0,
+    "old_checker_old_table_passes": true,
+    "new_checker_old_table_rejected_missing_exact_two_names": true,
+    "single_missing_ink_pixel_rejected": true,
+    "existing_9635_static_checks_unchanged": true
+  },
+  "visual_review": {
+    "files": [
+      "after-zh-Hant-maul-save/step-078.png",
+      "after-zh-Hant-maul-save/step-079.png",
+      "after-zh-Hant-warder-save-v2/step-025.png",
+      "after-zh-Hant-warder-save-v2/step-026.png"
+    ],
+    "result": "四張完整畫格可讀，名稱、骰式、重量與明細未裁切"
+  },
+  "before_inputs_sha256": {
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "tools/verify_display_names.py": "5f55eb23d80ade8ffe99b987f0aae7bf8f19c1024df021b16947724befbcd802",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "docs/verification/inventory-empty-slots-20261001/normal-script.txt": "2ed26c80d0c1806c123b99f3f9b200fb2a1e036d79b5f4188633980bb9a579bf"
+  },
+  "current_inputs_sha256": {
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "assets/original-derived-data/items.json": "aa8c1377be9428fe49b15fefa12bf42802786aecc6a39950d28d66867d7bf0c2",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "docs/i18n/display-names-zh-Hant.tsv": "679d011aa245f644584b88d8b8614e24edcc9b080a375f4deea9ecaf28812e4b",
+    "tools/verify_display_names.py": "f65c5b8968c9f7d8f50cfdb86edda8656dac4155b51f2811d48f17e25b7ed1b8",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "docs/verification/inventory-empty-slots-20261001/normal-script.txt": "2ed26c80d0c1806c123b99f3f9b200fb2a1e036d79b5f4188633980bb9a579bf",
+    "docs/verification/cjk-text-fit.json": "a696d8545d31ad8f2e7c261a01ca31b324dabb823e87008e27eee148e1db5657",
+    "docs/spec/033-cjk-display-names.md": "4b8892fc8d27c51b0c2b95f1ebce33ecf8f85197c143551bc88f8461513abe19",
+    "internal/ui/itempage_cjk.go": "52f5e540d3c1a22ae36fd78522f61c659ef404c063d20ac25266ecd0024ff798",
+    "assets/original-derived-png/ega/manifest.json": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+    "tools/png_io.py": "0295c62847b9e66e9a997940224c1d4c04bf5e0acbeab2d820bfecd0fd020c9c",
+    "internal/i18n/i18n.go": "7c94b09a13724cb50577738f5401516cf74d6140719c659297dcdb5c12f38337"
+  },
+  "local_save_sha256": {
+    "workplace/cjk-held-names-20261001/before-en-maul-save.json": "4dffe3d408c5fdb102e16adaec579c4824b589c287c0aea2f7e2edb19889fc8e",
+    "workplace/cjk-held-names-20261001/before-zh-Hant-maul-save.json": "da53a33d06119d10b743dc5d1d6301c8121d8719ad517bcb713b627305054a1e",
+    "workplace/cjk-held-names-20261001/after-en-maul-save.json": "11344763405c9ee45c97596fef64425a9feb5e53248a06df5bd5f4369669452e",
+    "workplace/cjk-held-names-20261001/after-zh-Hant-maul-save.json": "713d5d80d634659736f5c08602d8dd1e0bd48f1b6d0122b7ccb2331e00c1f21c",
+    "workplace/cjk-held-names-20261001/before-en-warder-save-v2.json": "b82f9800d51b18b65d362d8c4f28f6d04f8b7f45d99fcfacf3146fa2e334e8ce",
+    "workplace/cjk-held-names-20261001/before-zh-Hant-warder-save-v2.json": "5c1619d0970263476d011423ff88e6f7fc0dedfc14e79b868c9bb940112b878b",
+    "workplace/cjk-held-names-20261001/after-en-warder-save-v2.json": "96f7383b688bab1a4a6ee850d1bffa71c5b2cb87b3936c4fbc6c87ea523d82fb",
+    "workplace/cjk-held-names-20261001/after-zh-Hant-warder-save-v2.json": "a38464cb39056f22e25358654aeb77778779bcfcc06d7a3d4569677bd0def966"
+  },
+  "local_evidence_sha256": {
+    "workplace/cjk-held-names-20261001/selection.json": "dfb172b173b407287eacccbbc049069681f8e72b25900c4e16b6864c8777f985",
+    "workplace/cjk-held-names-20261001/state-checks.json": "cb0d247ada7006796a6022fe1e52f641c970207505fbf7f42370aefa896138f4",
+    "workplace/cjk-held-names-20261001/pixel-checks.json": "788d053694871cd6d628e3102b08cf67530b2c96ea6c128fdaaaa938444c45a6",
+    "workplace/cjk-held-names-20261001/verification-plan.json": "e67dae368dd107e3d02c0aa557ce096f1b2baadc76a8082f558d78b278342f0b"
+  },
+  "source_assets": {
+    "source_file": "Knights-of-legend.zip",
+    "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "png_manifest": "assets/original-derived-png/ega/manifest.json",
+    "png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+    "source_entry_index": "上述 manifest 的 archives[].archive_root 與 images[].source_payloads",
+    "generator": "固定執行檔產生的正常重製畫格；每圖畫格號與完整命令見 png_frames／run.json",
+    "base_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "dirty_worktree": true,
+    "archives": [
+      {
+        "name": "BOOKPICS",
+        "zip_entry_root": "Knights-of-legend/BOOKPICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "BACKPICS",
+        "zip_entry_root": "Knights-of-legend/BACKPICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "CHARPICS",
+        "zip_entry_root": "Knights-of-legend/CHARPICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "PERPICS",
+        "zip_entry_root": "Knights-of-legend/PERPICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "WEAPPICS",
+        "zip_entry_root": "Knights-of-legend/WEAPPICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "HANDPICS",
+        "zip_entry_root": "Knights-of-legend/HANDPICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "KOLMPICS",
+        "zip_entry_root": "Knights-of-legend/KOLMPICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "TWN7PICS",
+        "zip_entry_root": "Knights-of-legend/TWN7PICS",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      },
+      {
+        "name": "TOWN7",
+        "zip_entry_root": "Knights-of-legend/TOWN7",
+        "extractor": "tools/extract_ega_assets.py",
+        "manifest": "assets/original-derived-png/ega/manifest.json"
+      }
+    ]
+  },
+  "png_frames": [
+    {
+      "file": "before-en-maul-save/step-083.png",
+      "frame": 83,
+      "sha256": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+      "generator_run": "before-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-maul-save/step-096.png",
+      "frame": 96,
+      "sha256": "5d33f2b8fc326febbeede4119a1d24aab2998b5e811380ea41fbb14c656182f0",
+      "generator_run": "before-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-maul-save/step-063.png",
+      "frame": 63,
+      "sha256": "35cb8d887e770c8411bd6909c62a75dd737a6d5ec58d2bbd59f33d6c95d0f919",
+      "generator_run": "before-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-maul-save/step-061.png",
+      "frame": 61,
+      "sha256": "8420aee3bd0c6c2d9b504e579a78c8ff145f2c11eaba499912e9dbfc3b28747a",
+      "generator_run": "before-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-maul-save/step-079.png",
+      "frame": 79,
+      "sha256": "0115ada5dcb1514c7c8bef1acce516b1ec889a8232dc28c7058418f83657cece",
+      "generator_run": "before-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-maul-save/step-060.png",
+      "frame": 60,
+      "sha256": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+      "generator_run": "before-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-maul-save/step-078.png",
+      "frame": 78,
+      "sha256": "a802097aa958c9c41eac2b5dbc2acf3a2333e647682fa92424a5581a067182d2",
+      "generator_run": "before-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-maul-save/step-083.png",
+      "frame": 83,
+      "sha256": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+      "generator_run": "before-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-maul-save/step-096.png",
+      "frame": 96,
+      "sha256": "d9f266065a41fb91dc4c39ad4b9372eafffae226aa248d7a110a60ad2f956b06",
+      "generator_run": "before-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-maul-save/step-063.png",
+      "frame": 63,
+      "sha256": "910e8b8fd589a5880f6c5c8c3e21b982d44b4715414c5dc2f765e5f86aaed64a",
+      "generator_run": "before-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-maul-save/step-061.png",
+      "frame": 61,
+      "sha256": "93cee17d9ba4e5683d7efe8b8a1e94ec1aa6ddb59c1876c7ce2de124b999460c",
+      "generator_run": "before-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-maul-save/step-079.png",
+      "frame": 79,
+      "sha256": "8b4f0b3b41767b5279b459f10f2fbc7afc14656e86364f240d036c2c41d2c921",
+      "generator_run": "before-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-maul-save/step-060.png",
+      "frame": 60,
+      "sha256": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+      "generator_run": "before-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-maul-save/step-078.png",
+      "frame": 78,
+      "sha256": "bc20dd792b84f1355d6c9a1ff2435c2107d973b78bd8b7df61e2466d4fb9856b",
+      "generator_run": "before-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-save/step-083.png",
+      "frame": 83,
+      "sha256": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+      "generator_run": "after-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-save/step-096.png",
+      "frame": 96,
+      "sha256": "5d33f2b8fc326febbeede4119a1d24aab2998b5e811380ea41fbb14c656182f0",
+      "generator_run": "after-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-save/step-063.png",
+      "frame": 63,
+      "sha256": "35cb8d887e770c8411bd6909c62a75dd737a6d5ec58d2bbd59f33d6c95d0f919",
+      "generator_run": "after-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-save/step-061.png",
+      "frame": 61,
+      "sha256": "8420aee3bd0c6c2d9b504e579a78c8ff145f2c11eaba499912e9dbfc3b28747a",
+      "generator_run": "after-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-save/step-079.png",
+      "frame": 79,
+      "sha256": "0115ada5dcb1514c7c8bef1acce516b1ec889a8232dc28c7058418f83657cece",
+      "generator_run": "after-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-save/step-060.png",
+      "frame": 60,
+      "sha256": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+      "generator_run": "after-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-save/step-078.png",
+      "frame": 78,
+      "sha256": "a802097aa958c9c41eac2b5dbc2acf3a2333e647682fa92424a5581a067182d2",
+      "generator_run": "after-en-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-save/step-083.png",
+      "frame": 83,
+      "sha256": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+      "generator_run": "after-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-save/step-096.png",
+      "frame": 96,
+      "sha256": "d9f266065a41fb91dc4c39ad4b9372eafffae226aa248d7a110a60ad2f956b06",
+      "generator_run": "after-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-save/step-063.png",
+      "frame": 63,
+      "sha256": "910e8b8fd589a5880f6c5c8c3e21b982d44b4715414c5dc2f765e5f86aaed64a",
+      "generator_run": "after-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-save/step-061.png",
+      "frame": 61,
+      "sha256": "93cee17d9ba4e5683d7efe8b8a1e94ec1aa6ddb59c1876c7ce2de124b999460c",
+      "generator_run": "after-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-save/step-079.png",
+      "frame": 79,
+      "sha256": "1787f4ebfd8cada570a9c3507e829997879c0480948154d44b9a84246031fb38",
+      "generator_run": "after-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-save/step-060.png",
+      "frame": 60,
+      "sha256": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+      "generator_run": "after-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-save/step-078.png",
+      "frame": 78,
+      "sha256": "86c9103336d0bc3aa23f845a606c8cc5e53a3c2e91a1ca234a88da5687a749a9",
+      "generator_run": "after-zh-Hant-maul-save/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-reload/step-019.png",
+      "frame": 19,
+      "sha256": "0115ada5dcb1514c7c8bef1acce516b1ec889a8232dc28c7058418f83657cece",
+      "generator_run": "after-en-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-reload/step-018.png",
+      "frame": 18,
+      "sha256": "a802097aa958c9c41eac2b5dbc2acf3a2333e647682fa92424a5581a067182d2",
+      "generator_run": "after-en-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-reload/step-000.png",
+      "frame": 0,
+      "sha256": "44d5d87b2665c30fe23dbce0bea92ce09ee96f7d36c91b133e18d61ee507e6f5",
+      "generator_run": "after-en-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-maul-reload/step-003.png",
+      "frame": 3,
+      "sha256": "35cb8d887e770c8411bd6909c62a75dd737a6d5ec58d2bbd59f33d6c95d0f919",
+      "generator_run": "after-en-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-reload/step-019.png",
+      "frame": 19,
+      "sha256": "1787f4ebfd8cada570a9c3507e829997879c0480948154d44b9a84246031fb38",
+      "generator_run": "after-zh-Hant-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-reload/step-018.png",
+      "frame": 18,
+      "sha256": "86c9103336d0bc3aa23f845a606c8cc5e53a3c2e91a1ca234a88da5687a749a9",
+      "generator_run": "after-zh-Hant-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-reload/step-000.png",
+      "frame": 0,
+      "sha256": "b5a834ea22bb27a1d0fe69f2c985741042b3730ae304c2f6d698bca3f437068d",
+      "generator_run": "after-zh-Hant-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-maul-reload/step-003.png",
+      "frame": 3,
+      "sha256": "910e8b8fd589a5880f6c5c8c3e21b982d44b4715414c5dc2f765e5f86aaed64a",
+      "generator_run": "after-zh-Hant-maul-reload/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-warder-save-v2/step-030.png",
+      "frame": 30,
+      "sha256": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+      "generator_run": "before-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-warder-save-v2/step-015.png",
+      "frame": 15,
+      "sha256": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+      "generator_run": "before-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-warder-save-v2/step-018.png",
+      "frame": 18,
+      "sha256": "4e48239a0f85aae511a4313d128650f9054f29985133abaffb7ba4d902f0d896",
+      "generator_run": "before-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-warder-save-v2/step-041.png",
+      "frame": 41,
+      "sha256": "e8f6c6add874aa43d894e71a5b42490a8cfe8ba9af6689528c81ca1b2671ef07",
+      "generator_run": "before-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-warder-save-v2/step-026.png",
+      "frame": 26,
+      "sha256": "54fdfc8bcd7c2d07821d834d23bcdf799fd8716a61134fab4631d8e4a5509c50",
+      "generator_run": "before-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-warder-save-v2/step-025.png",
+      "frame": 25,
+      "sha256": "17518ec036c3d5e6bc8b0dfc62308037ad377fb1bad4582f61b99388860373c7",
+      "generator_run": "before-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-en-warder-save-v2/step-016.png",
+      "frame": 16,
+      "sha256": "db710a9cd345f68d63c842388c9cf39a12d8b3fdd4cd83289bab48ae8de70138",
+      "generator_run": "before-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-warder-save-v2/step-030.png",
+      "frame": 30,
+      "sha256": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+      "generator_run": "before-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-warder-save-v2/step-015.png",
+      "frame": 15,
+      "sha256": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+      "generator_run": "before-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-warder-save-v2/step-018.png",
+      "frame": 18,
+      "sha256": "d93ab3bbe8e4f579f600f035ff4bd9da24770b736a184e69986193ba2aeda57d",
+      "generator_run": "before-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-warder-save-v2/step-041.png",
+      "frame": 41,
+      "sha256": "c1569a1e0fad34c8340e2e33f82afc7ade7558a57f3c5a98874bbfa347010af4",
+      "generator_run": "before-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-warder-save-v2/step-026.png",
+      "frame": 26,
+      "sha256": "e20ebf44ac0e066a14b24a33176a5a35ab529ef04fbef63b04d247cda676e6a0",
+      "generator_run": "before-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-warder-save-v2/step-025.png",
+      "frame": 25,
+      "sha256": "2df650c6cdbf58817bd5c8a405230c498d9bc58f7bc9b3af1bd0e7cc8ac4efdf",
+      "generator_run": "before-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "before-zh-Hant-warder-save-v2/step-016.png",
+      "frame": 16,
+      "sha256": "430e729dec024116576ea0679b3328872c2a114714265398116ef098dab664c1",
+      "generator_run": "before-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-save-v2/step-030.png",
+      "frame": 30,
+      "sha256": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+      "generator_run": "after-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-save-v2/step-015.png",
+      "frame": 15,
+      "sha256": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+      "generator_run": "after-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-save-v2/step-018.png",
+      "frame": 18,
+      "sha256": "4e48239a0f85aae511a4313d128650f9054f29985133abaffb7ba4d902f0d896",
+      "generator_run": "after-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-save-v2/step-041.png",
+      "frame": 41,
+      "sha256": "e8f6c6add874aa43d894e71a5b42490a8cfe8ba9af6689528c81ca1b2671ef07",
+      "generator_run": "after-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-save-v2/step-026.png",
+      "frame": 26,
+      "sha256": "54fdfc8bcd7c2d07821d834d23bcdf799fd8716a61134fab4631d8e4a5509c50",
+      "generator_run": "after-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-save-v2/step-025.png",
+      "frame": 25,
+      "sha256": "17518ec036c3d5e6bc8b0dfc62308037ad377fb1bad4582f61b99388860373c7",
+      "generator_run": "after-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-save-v2/step-016.png",
+      "frame": 16,
+      "sha256": "db710a9cd345f68d63c842388c9cf39a12d8b3fdd4cd83289bab48ae8de70138",
+      "generator_run": "after-en-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-save-v2/step-030.png",
+      "frame": 30,
+      "sha256": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+      "generator_run": "after-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-save-v2/step-015.png",
+      "frame": 15,
+      "sha256": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+      "generator_run": "after-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-save-v2/step-018.png",
+      "frame": 18,
+      "sha256": "d93ab3bbe8e4f579f600f035ff4bd9da24770b736a184e69986193ba2aeda57d",
+      "generator_run": "after-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-save-v2/step-041.png",
+      "frame": 41,
+      "sha256": "c1569a1e0fad34c8340e2e33f82afc7ade7558a57f3c5a98874bbfa347010af4",
+      "generator_run": "after-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-save-v2/step-026.png",
+      "frame": 26,
+      "sha256": "29ca86f53893724811c12fb0ccc1674cd8cc54c41b59f68cf06910496d164ab7",
+      "generator_run": "after-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-save-v2/step-025.png",
+      "frame": 25,
+      "sha256": "fe1cd8a49f28388aedeaf9a058b2858cd17d2c4bf78652506a7006f3f6f1eb15",
+      "generator_run": "after-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-save-v2/step-016.png",
+      "frame": 16,
+      "sha256": "430e729dec024116576ea0679b3328872c2a114714265398116ef098dab664c1",
+      "generator_run": "after-zh-Hant-warder-save-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-reload-v2/step-010.png",
+      "frame": 10,
+      "sha256": "17518ec036c3d5e6bc8b0dfc62308037ad377fb1bad4582f61b99388860373c7",
+      "generator_run": "after-en-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-reload-v2/step-000.png",
+      "frame": 0,
+      "sha256": "fb4c431c2d5ab41ea0f685f85551bda6bc7437b1ea1ee9cf92b283ba0b603e87",
+      "generator_run": "after-en-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-reload-v2/step-003.png",
+      "frame": 3,
+      "sha256": "4e48239a0f85aae511a4313d128650f9054f29985133abaffb7ba4d902f0d896",
+      "generator_run": "after-en-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-en-warder-reload-v2/step-011.png",
+      "frame": 11,
+      "sha256": "54fdfc8bcd7c2d07821d834d23bcdf799fd8716a61134fab4631d8e4a5509c50",
+      "generator_run": "after-en-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-reload-v2/step-010.png",
+      "frame": 10,
+      "sha256": "fe1cd8a49f28388aedeaf9a058b2858cd17d2c4bf78652506a7006f3f6f1eb15",
+      "generator_run": "after-zh-Hant-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-reload-v2/step-000.png",
+      "frame": 0,
+      "sha256": "790724d97a6dad4e37538461371898619f2ee5dd243169895d2f73decabd4cd0",
+      "generator_run": "after-zh-Hant-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-reload-v2/step-003.png",
+      "frame": 3,
+      "sha256": "d93ab3bbe8e4f579f600f035ff4bd9da24770b736a184e69986193ba2aeda57d",
+      "generator_run": "after-zh-Hant-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    },
+    {
+      "file": "after-zh-Hant-warder-reload-v2/step-011.png",
+      "frame": 11,
+      "sha256": "29ca86f53893724811c12fb0ccc1674cd8cc54c41b59f68cf06910496d164ab7",
+      "generator_run": "after-zh-Hant-warder-reload-v2/run.json",
+      "rights_classification": "private GitHub 可保存，禁止公開散布",
+      "evidence": "正常操作重播，前後及重載差分範圍見 pixel-checks.json；僅八個文字框作字模全像素核對"
+    }
+  ],
+  "rights": "含原作衍生 PNG，只適用既有 private GitHub 例外；原始名冊、完整存檔、執行檔及封裝留本機，無公開散布授權。",
+  "limitations": [
+    "未驗最長戰鬥武器、怪物、戰利品母體、未走到的分支、原版同狀態或真機平台。",
+    "原始名稱與譯名身分已證實，中文詞義仍暫譯；父規格仍 READY。",
+    "首輪單人住宿腳本誤答 NO，沒有保存；依既有 StartStay 的單人價錢問句修正腳本後重跑，原失敗留本機。"
+  ],
+  "files": {
+    "after-en-maul-reload/run.json": "75da738710f652da84ce9855f1982c92a630d5122ff27e71166852cf831dab8e",
+    "after-en-maul-reload/step-000.png": "44d5d87b2665c30fe23dbce0bea92ce09ee96f7d36c91b133e18d61ee507e6f5",
+    "after-en-maul-reload/step-003.png": "35cb8d887e770c8411bd6909c62a75dd737a6d5ec58d2bbd59f33d6c95d0f919",
+    "after-en-maul-reload/step-018.png": "a802097aa958c9c41eac2b5dbc2acf3a2333e647682fa92424a5581a067182d2",
+    "after-en-maul-reload/step-019.png": "0115ada5dcb1514c7c8bef1acce516b1ec889a8232dc28c7058418f83657cece",
+    "after-en-maul-reload/trace.json": "1bef5ee0262f8d0df1409f87bef19b360660557292af01754bdb110537489957",
+    "after-en-maul-save/run.json": "fabcd02bd1118465a8ccebdb21d028ade251d940129aaa6b0146bdc4406b85ba",
+    "after-en-maul-save/step-060.png": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+    "after-en-maul-save/step-061.png": "8420aee3bd0c6c2d9b504e579a78c8ff145f2c11eaba499912e9dbfc3b28747a",
+    "after-en-maul-save/step-063.png": "35cb8d887e770c8411bd6909c62a75dd737a6d5ec58d2bbd59f33d6c95d0f919",
+    "after-en-maul-save/step-078.png": "a802097aa958c9c41eac2b5dbc2acf3a2333e647682fa92424a5581a067182d2",
+    "after-en-maul-save/step-079.png": "0115ada5dcb1514c7c8bef1acce516b1ec889a8232dc28c7058418f83657cece",
+    "after-en-maul-save/step-083.png": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+    "after-en-maul-save/step-096.png": "5d33f2b8fc326febbeede4119a1d24aab2998b5e811380ea41fbb14c656182f0",
+    "after-en-maul-save/trace.json": "428eb9bae2cddaa7845ec7c70fe164799435e006d32c6ca1e8d9e57d7bdeccd9",
+    "after-en-warder-reload-v2/run.json": "7d772b483eccb244ebd7e964778dc7325b27d0edb7408ae3b53b1bd74b454ccf",
+    "after-en-warder-reload-v2/step-000.png": "fb4c431c2d5ab41ea0f685f85551bda6bc7437b1ea1ee9cf92b283ba0b603e87",
+    "after-en-warder-reload-v2/step-003.png": "4e48239a0f85aae511a4313d128650f9054f29985133abaffb7ba4d902f0d896",
+    "after-en-warder-reload-v2/step-010.png": "17518ec036c3d5e6bc8b0dfc62308037ad377fb1bad4582f61b99388860373c7",
+    "after-en-warder-reload-v2/step-011.png": "54fdfc8bcd7c2d07821d834d23bcdf799fd8716a61134fab4631d8e4a5509c50",
+    "after-en-warder-reload-v2/trace.json": "b0ad8b4c56f5428108d3d0d90e8f699f65613588b984cfa75913b07643fe28c1",
+    "after-en-warder-save-v2/run.json": "7ed6d74dc218d88700ecd696087d568a7cd3dba5862ec07d1347cb3e06b38f60",
+    "after-en-warder-save-v2/step-015.png": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+    "after-en-warder-save-v2/step-016.png": "db710a9cd345f68d63c842388c9cf39a12d8b3fdd4cd83289bab48ae8de70138",
+    "after-en-warder-save-v2/step-018.png": "4e48239a0f85aae511a4313d128650f9054f29985133abaffb7ba4d902f0d896",
+    "after-en-warder-save-v2/step-025.png": "17518ec036c3d5e6bc8b0dfc62308037ad377fb1bad4582f61b99388860373c7",
+    "after-en-warder-save-v2/step-026.png": "54fdfc8bcd7c2d07821d834d23bcdf799fd8716a61134fab4631d8e4a5509c50",
+    "after-en-warder-save-v2/step-030.png": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+    "after-en-warder-save-v2/step-041.png": "e8f6c6add874aa43d894e71a5b42490a8cfe8ba9af6689528c81ca1b2671ef07",
+    "after-en-warder-save-v2/trace.json": "2b9d4c01bd51192a3e71306a264c03973b27c2a219e05ec21245935874234796",
+    "after-zh-Hant-maul-reload/run.json": "830d39cadb2e9164d068a5d822ecaf3289a571ffacc8f5994ad5c25930c877cc",
+    "after-zh-Hant-maul-reload/step-000.png": "b5a834ea22bb27a1d0fe69f2c985741042b3730ae304c2f6d698bca3f437068d",
+    "after-zh-Hant-maul-reload/step-003.png": "910e8b8fd589a5880f6c5c8c3e21b982d44b4715414c5dc2f765e5f86aaed64a",
+    "after-zh-Hant-maul-reload/step-018.png": "86c9103336d0bc3aa23f845a606c8cc5e53a3c2e91a1ca234a88da5687a749a9",
+    "after-zh-Hant-maul-reload/step-019.png": "1787f4ebfd8cada570a9c3507e829997879c0480948154d44b9a84246031fb38",
+    "after-zh-Hant-maul-reload/trace.json": "1bef5ee0262f8d0df1409f87bef19b360660557292af01754bdb110537489957",
+    "after-zh-Hant-maul-save/run.json": "a6cbe083e5d87ed8f14a65a44bc753c6db8f572068be3ee02171e344b734a8e0",
+    "after-zh-Hant-maul-save/step-060.png": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+    "after-zh-Hant-maul-save/step-061.png": "93cee17d9ba4e5683d7efe8b8a1e94ec1aa6ddb59c1876c7ce2de124b999460c",
+    "after-zh-Hant-maul-save/step-063.png": "910e8b8fd589a5880f6c5c8c3e21b982d44b4715414c5dc2f765e5f86aaed64a",
+    "after-zh-Hant-maul-save/step-078.png": "86c9103336d0bc3aa23f845a606c8cc5e53a3c2e91a1ca234a88da5687a749a9",
+    "after-zh-Hant-maul-save/step-079.png": "1787f4ebfd8cada570a9c3507e829997879c0480948154d44b9a84246031fb38",
+    "after-zh-Hant-maul-save/step-083.png": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+    "after-zh-Hant-maul-save/step-096.png": "d9f266065a41fb91dc4c39ad4b9372eafffae226aa248d7a110a60ad2f956b06",
+    "after-zh-Hant-maul-save/trace.json": "428eb9bae2cddaa7845ec7c70fe164799435e006d32c6ca1e8d9e57d7bdeccd9",
+    "after-zh-Hant-warder-reload-v2/run.json": "15848bf14986574765630d177ec9e43bdd08511aa6bfa06066873611a61e69ec",
+    "after-zh-Hant-warder-reload-v2/step-000.png": "790724d97a6dad4e37538461371898619f2ee5dd243169895d2f73decabd4cd0",
+    "after-zh-Hant-warder-reload-v2/step-003.png": "d93ab3bbe8e4f579f600f035ff4bd9da24770b736a184e69986193ba2aeda57d",
+    "after-zh-Hant-warder-reload-v2/step-010.png": "fe1cd8a49f28388aedeaf9a058b2858cd17d2c4bf78652506a7006f3f6f1eb15",
+    "after-zh-Hant-warder-reload-v2/step-011.png": "29ca86f53893724811c12fb0ccc1674cd8cc54c41b59f68cf06910496d164ab7",
+    "after-zh-Hant-warder-reload-v2/trace.json": "b0ad8b4c56f5428108d3d0d90e8f699f65613588b984cfa75913b07643fe28c1",
+    "after-zh-Hant-warder-save-v2/run.json": "d11b754c3dd0f1851d30973e93460f8803dcd07d530bb06422669d6de5f8f2ee",
+    "after-zh-Hant-warder-save-v2/step-015.png": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+    "after-zh-Hant-warder-save-v2/step-016.png": "430e729dec024116576ea0679b3328872c2a114714265398116ef098dab664c1",
+    "after-zh-Hant-warder-save-v2/step-018.png": "d93ab3bbe8e4f579f600f035ff4bd9da24770b736a184e69986193ba2aeda57d",
+    "after-zh-Hant-warder-save-v2/step-025.png": "fe1cd8a49f28388aedeaf9a058b2858cd17d2c4bf78652506a7006f3f6f1eb15",
+    "after-zh-Hant-warder-save-v2/step-026.png": "29ca86f53893724811c12fb0ccc1674cd8cc54c41b59f68cf06910496d164ab7",
+    "after-zh-Hant-warder-save-v2/step-030.png": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+    "after-zh-Hant-warder-save-v2/step-041.png": "c1569a1e0fad34c8340e2e33f82afc7ade7558a57f3c5a98874bbfa347010af4",
+    "after-zh-Hant-warder-save-v2/trace.json": "2b9d4c01bd51192a3e71306a264c03973b27c2a219e05ec21245935874234796",
+    "before-display-names.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "before-en-maul-save/run.json": "4fbc0c756b7d1e9d5173acf3aeac3ebca7c918902c5c39ccca36762a8ec80538",
+    "before-en-maul-save/step-060.png": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+    "before-en-maul-save/step-061.png": "8420aee3bd0c6c2d9b504e579a78c8ff145f2c11eaba499912e9dbfc3b28747a",
+    "before-en-maul-save/step-063.png": "35cb8d887e770c8411bd6909c62a75dd737a6d5ec58d2bbd59f33d6c95d0f919",
+    "before-en-maul-save/step-078.png": "a802097aa958c9c41eac2b5dbc2acf3a2333e647682fa92424a5581a067182d2",
+    "before-en-maul-save/step-079.png": "0115ada5dcb1514c7c8bef1acce516b1ec889a8232dc28c7058418f83657cece",
+    "before-en-maul-save/step-083.png": "1b44ad28635e96ad4b59aa84f1a0d3505705885e139099418e2d07d281dca270",
+    "before-en-maul-save/step-096.png": "5d33f2b8fc326febbeede4119a1d24aab2998b5e811380ea41fbb14c656182f0",
+    "before-en-maul-save/trace.json": "428eb9bae2cddaa7845ec7c70fe164799435e006d32c6ca1e8d9e57d7bdeccd9",
+    "before-en-warder-save-v2/run.json": "9850159db2c4f0f0def2e4ceb1a4c1d1fcdd88eb59bd07a62ed99c8d5c179e24",
+    "before-en-warder-save-v2/step-015.png": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+    "before-en-warder-save-v2/step-016.png": "db710a9cd345f68d63c842388c9cf39a12d8b3fdd4cd83289bab48ae8de70138",
+    "before-en-warder-save-v2/step-018.png": "4e48239a0f85aae511a4313d128650f9054f29985133abaffb7ba4d902f0d896",
+    "before-en-warder-save-v2/step-025.png": "17518ec036c3d5e6bc8b0dfc62308037ad377fb1bad4582f61b99388860373c7",
+    "before-en-warder-save-v2/step-026.png": "54fdfc8bcd7c2d07821d834d23bcdf799fd8716a61134fab4631d8e4a5509c50",
+    "before-en-warder-save-v2/step-030.png": "288eaab72d03ae13da1bed0d14ca395d4334977aaa489afaf62c76855b024242",
+    "before-en-warder-save-v2/step-041.png": "e8f6c6add874aa43d894e71a5b42490a8cfe8ba9af6689528c81ca1b2671ef07",
+    "before-en-warder-save-v2/trace.json": "2b9d4c01bd51192a3e71306a264c03973b27c2a219e05ec21245935874234796",
+    "before-text-fit.json": "1385aafffcdfca376cd17e69628dacf4caf76668b08f246f477b3eb6e678619f",
+    "before-verify-display-names.py": "5f55eb23d80ade8ffe99b987f0aae7bf8f19c1024df021b16947724befbcd802",
+    "before-zh-Hant-maul-save/run.json": "320cd95fce3824edab47bdeab54ed2140d9265306e670fe9c5e767d5b9c6b403",
+    "before-zh-Hant-maul-save/step-060.png": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+    "before-zh-Hant-maul-save/step-061.png": "93cee17d9ba4e5683d7efe8b8a1e94ec1aa6ddb59c1876c7ce2de124b999460c",
+    "before-zh-Hant-maul-save/step-063.png": "910e8b8fd589a5880f6c5c8c3e21b982d44b4715414c5dc2f765e5f86aaed64a",
+    "before-zh-Hant-maul-save/step-078.png": "bc20dd792b84f1355d6c9a1ff2435c2107d973b78bd8b7df61e2466d4fb9856b",
+    "before-zh-Hant-maul-save/step-079.png": "8b4f0b3b41767b5279b459f10f2fbc7afc14656e86364f240d036c2c41d2c921",
+    "before-zh-Hant-maul-save/step-083.png": "5fd2e745d54ad0faab376f3b949c764ef22c356515aad6a1ca7f7af33ebcfa9a",
+    "before-zh-Hant-maul-save/step-096.png": "d9f266065a41fb91dc4c39ad4b9372eafffae226aa248d7a110a60ad2f956b06",
+    "before-zh-Hant-maul-save/trace.json": "428eb9bae2cddaa7845ec7c70fe164799435e006d32c6ca1e8d9e57d7bdeccd9",
+    "before-zh-Hant-warder-save-v2/run.json": "e9515912693977ac0dd971432c7edc983c29697954b3ba3af135130b831a6f58",
+    "before-zh-Hant-warder-save-v2/step-015.png": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+    "before-zh-Hant-warder-save-v2/step-016.png": "430e729dec024116576ea0679b3328872c2a114714265398116ef098dab664c1",
+    "before-zh-Hant-warder-save-v2/step-018.png": "d93ab3bbe8e4f579f600f035ff4bd9da24770b736a184e69986193ba2aeda57d",
+    "before-zh-Hant-warder-save-v2/step-025.png": "2df650c6cdbf58817bd5c8a405230c498d9bc58f7bc9b3af1bd0e7cc8ac4efdf",
+    "before-zh-Hant-warder-save-v2/step-026.png": "e20ebf44ac0e066a14b24a33176a5a35ab529ef04fbef63b04d247cda676e6a0",
+    "before-zh-Hant-warder-save-v2/step-030.png": "f62fb99b6d8a33d34c464f456b79da2729237545a534d1ac06c9b9d9ebdf0ac6",
+    "before-zh-Hant-warder-save-v2/step-041.png": "c1569a1e0fad34c8340e2e33f82afc7ade7558a57f3c5a98874bbfa347010af4",
+    "before-zh-Hant-warder-save-v2/trace.json": "2b9d4c01bd51192a3e71306a264c03973b27c2a219e05ec21245935874234796",
+    "glyph-coverage.json": "21f9ebc0981b232b0dd222eba5e17b45ddffd0d1f1b84afe466428ad79c2fa41",
+    "pixel-checks.json": "f7ef2c228fe48acc8095d308c3dd3043f9c149edbd041a0d5d139e0c555bdf19",
+    "pixels.py": "4f863593f2beb29d7b851a5efc92775ab1d6e715187a60742f6dd044344f5c75",
+    "scout-script.txt": "641f081958c619ba42ac683849e292a0f5a483fc9f5cf9062c3eb6f3aa0f791f",
+    "selection.json": "642833ed069367031e86bb1130f31b3b2f55b51437e3db0c7726110c4e6a69bf",
+    "state-checks.json": "cb0d247ada7006796a6022fe1e52f641c970207505fbf7f42370aefa896138f4",
+    "static-checks.json": "0d5ad4259bb9a4ad42aa8c440a14faa540d5d83254cd2a1e8c7094b791c3d9ab",
+    "static.py": "2c4f8c52dd0177b4fdf3b6f655971209632a2dcdf04897d84485645db211edd0",
+    "verification-plan-v2.json": "d7196b1ded1713a610acc6983451b4bc16222227f8f9a7d3c46dd14b8e7edb54",
+    "verify.py": "e0a81793c9441301442d347475fc76f6ceea65a2c982e96f2159075890ddb108",
+    "warder-script.txt": "db9fdd517dd4eb43264bf401e675cbe6fd829395cc4c0202b2724355d47b720c"
+  },
+  "final_audit": {
+    "local_path": "workplace/cjk-held-names-20261001/final-audit.json",
+    "sha256": "6fbfba7a55faaf7c8d66fed7930bc844f028186ccd18fc559ece88d48cb7250c"
+  }
+}

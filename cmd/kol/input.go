@@ -60,6 +60,10 @@ func keyboardTokens(typingName ...bool) []string {
 	var out []string
 	for _, k := range keyTokens {
 		if len(typingName) > 0 && typingName[0] && (k.key == ebiten.KeyArrowUp || k.key == ebiten.KeyArrowDown || k.key == ebiten.KeyArrowLeft || k.key == ebiten.KeyArrowRight) {
+			// 法術名稱的Left與退格同義（RE-212）；建角文字模式保持既有處理。
+			if len(typingName) > 1 && typingName[1] && k.key == ebiten.KeyArrowLeft && inpututil.IsKeyJustPressed(k.key) {
+				out = append(out, "BS")
+			}
 			continue
 		}
 		if inpututil.IsKeyJustPressed(k.key) {
@@ -265,6 +269,7 @@ func battleTargets(s *battle.State, cjk bool) []input.Target {
 				count = battle.SpellListRows.Visible
 			}
 			l := battle.SpellListRows
+			l.Row = s.SpellListRow()
 			x, y, w, step := l.Col*town.CellWidth, l.Row,
 				battle.SpellListBox.Width-(l.Col*town.CellWidth-battle.SpellListBox.X)-4,
 				l.LineStep
@@ -274,10 +279,15 @@ func battleTargets(s *battle.State, cjk bool) []input.Target {
 			}
 			out := make([]input.Target, 0, count)
 			for i := 0; i < count; i++ {
-				out = append(out, input.Row(x, y, w, step, i,
-					s.Plan.ListPick, "U", "D"))
+				row := input.Row(x, y, w, step, i, s.Plan.ListPick, "U", "D")
+				row.Tokens = row.Tokens[:len(row.Tokens)-1]
+				for n := 0; n < s.Plan.Selected; n++ {
+					row.Tokens = append(row.Tokens, "<")
+				}
+				row.Tokens = append(row.Tokens, "RET")
+				out = append(out, row)
 			}
-			return out
+			return append(out, iconTargets(len(s.Plan.Bar), s.Plan.Selected, cjk)...)
 		}
 		if n := len(s.Plan.Bar); n > 0 {
 			return iconTargets(n, s.Plan.Selected, cjk)

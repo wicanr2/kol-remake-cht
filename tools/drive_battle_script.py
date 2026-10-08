@@ -38,6 +38,7 @@ SITES = os.environ.get('KOL_QUEST_SITES', '')
 SPEC.mkdir(parents=True, exist_ok=True)
 
 CMD_YES, CMD_WEAPON, CMD_UNARMED, CMD_MOVE, CMD_REST = 0x07, 0x21, 0x29, 0x27, 0x05
+CMD_MISSILE = 0x23
 CMD_PICKUP = 0x26
 # KOL_DRIVE_QUEST=1：任務地點那一場改走「搶任務物品、走到戰場邊、逃走」（SPEC-014 §5）。
 # 離任務物品最近的那一名去撿，撿到之後往最近的戰場邊走；其他人照舊迎敵。
@@ -72,7 +73,7 @@ def run(tokens, seed, save):
              '-shot', str(SPEC / 'last.png'), '-trace', str(SPEC / 'last.json')]
     if KOL_BIN:
         subprocess.run([KOL_BIN] + args, check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                       stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
     else:
         spec = SPEC / 'spec.txt'
         spec.write_text('|'.join([str(SPEC / 'last.png')] + args) + '\n',
@@ -112,6 +113,18 @@ def parse_roster(lines):
 
 def to_cell(dx, dy):
     return ['U', 'U', 'L', 'L'] + ['D'] * (dx + 1) + ['R'] * (dy + 1)
+
+
+def to_ranged_cell(dx, dy):
+    """射擊游標歸位後沿外側前往目標，避開中央 3×3 禁區（SPEC-010）。"""
+    row, col = dx + 4, dy + 4
+    if not (0 <= row <= 8 and 0 <= col <= 8) or (3 <= row <= 5 and 3 <= col <= 5):
+        return None
+    # 原版允許記憶目標的初始座標在視窗外；第一鍵先夾回 0…8，再走八格歸零。
+    reset = ['U'] * 9 + ['L'] * 9
+    if 3 <= row <= 5:
+        return reset + ['R'] * col + ['D'] * row
+    return reset + ['D'] * row + ['R'] * col
 
 
 def pick(bar, code):
@@ -304,7 +317,7 @@ def quest_step(b, memo):
     if first is None:
         return pick(bar, CMD_REST) if CMD_REST in bar else None
     dx, dy = first
-    # 移動方式選第二格（奔跑）：`>` 一次再確定。
+    # 子選單從 U-TURN 起，`>` 一次選步行；一次只走一格（SPEC-008 §5）。
     return pick(bar, CMD_MOVE) + to_cell(dx, dy) + ['RET', '>', 'RET']
 
 
@@ -330,7 +343,9 @@ def main():
         out.write_text(' '.join(tokens) + '\n', encoding='utf-8')
         try:
             row = run(tokens, seed, save)
-        except subprocess.CalledProcessError:
+        except subprocess.CalledProcessError as error:
+            if error.stderr:
+                print(error.stderr, file=sys.stderr)
             # 「一句一個鍵」那幾段是一次補一批的。補過頭時多出來的 SPACE 會漏到
             # 戰鬥之外，而野外的 token 表沒有 SPACE，整條腳本就失敗——退回那一批
             # 再減半重試。減到 1 還是不行才真的停。
@@ -425,8 +440,16 @@ def main():
                 break
             foes.sort(key=lambda f: max(abs(f['x'] - me['x']), abs(f['y'] - me['y'])))
             foe = foes[0]
-            tokens += to_cell((foe['x'] > me['x']) - (foe['x'] < me['x']),
-                              (foe['y'] > me['y']) - (foe['y'] < me['y'])) + ['RET']
+            if b['cursor_cell'][2] == 2:
+                keys = to_ranged_cell(foe['x'] - me['x'], foe['y'] - me['y'])
+                if keys is None:
+                    tokens += ['>', 'RET']  # U-TURN 回主指令列，重新挑選指令
+                    memo.pop('decided', None)
+                    continue
+            else:
+                keys = to_cell((foe['x'] > me['x']) - (foe['x'] < me['x']),
+                               (foe['y'] > me['y']) - (foe['y'] < me['y']))
+            tokens += keys + ['RET']
             continue
         if prompt != 0:
             print('停在沒預期的一層', prompt, b['bar'])
@@ -455,10 +478,21 @@ def main():
             break
         # 六個人全部朝同一隻走會擠成一列，後面幾個一直「blocked from moving」。
         # 依隊伍裡的次序把人分給兩隻，再挑一格沒有人站的相鄰格前進。
-        mine = [a['i'] for a in b['roster'] if a['side'] == 0]
+        mine = [a['i'] for a in b['roster'] if a['side'] == 0 and not a['down']]
         # 挑**離自己最近**的那兩隻之一。按索引分給全部敵人的話，站得開的那幾場
         # （任務地點有十二隻）會讓每個人各追一隻跑到天邊，收斂不了。
         foes.sort(key=lambda f: max(abs(f['x'] - me['x']), abs(f['y'] - me['y'])))
+        # 射擊是一項正式指令；弓手不必為了生成腳本而一直追近戰目標。
+        if CMD_MISSILE in b['bar']:
+            for candidate in foes:
+                keys = to_ranged_cell(candidate['x'] - me['x'], candidate['y'] - me['y'])
+                if keys is not None:
+                    tokens += pick(b['bar'], CMD_MISSILE) + keys + ['RET']
+                    break
+            else:
+                keys = None
+            if keys is not None:
+                continue
         foe = foes[mine.index(me['i']) % min(len(foes), 2)]
         dist = lambda x, y: max(abs(foe['x'] - x), abs(foe['y'] - y))
         bar = b['bar']

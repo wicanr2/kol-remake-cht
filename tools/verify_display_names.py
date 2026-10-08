@@ -27,8 +27,17 @@ def required_names(root: pathlib.Path) -> set[str]:
     monsters = json.loads((root / "monsters.json").read_text())["monsters"]
     items = json.loads((root / "items.json").read_text())["items"]
     towns = json.loads((root / "town-buildings.json").read_text())["towns"]
+    roster = json.loads((root / "character-roster.json").read_text())["slots"]
     required = set(names(monsters))
     required.update(item["name"] for item in items if item["name"])
+    # 初始持有物不一定出現在共用物品表或商店（SPEC-033，RE-170）。
+    # 只掃有效角色的物品；玩家姓名與規則用法術名不屬於顯示譯名。
+    for character in roster:
+        if not character or not character["occupied"]:
+            continue
+        goods = [character["in_hand"], *character["equipment"],
+                 *character["backpack"]]
+        required.update(good["name"] for good in goods if good and good.get("name"))
     for town in towns:
         for door in town["doors"]:
             required.update(good["name"] for good in door.get("goods", [])
@@ -36,9 +45,9 @@ def required_names(root: pathlib.Path) -> set[str]:
             for field in ("quest_wants", "quest_gives"):
                 if door.get(field):
                     required.add(door[field])
-            # 教派名與頭銜（RE-121）：入會對話、角色資料頁的教派欄與頭銜欄。
+            # 教派名、頭銜與信物（RE-121／200）：對話、資料頁及物品明細。
             if door.get("order"):
-                required.update(door["order"][f] for f in ("name", "title") if door["order"].get(f))
+                required.update(door["order"][f] for f in ("name", "title", "token") if door["order"].get(f))
             # 名冊右欄的所在地鍵：角色記錄存的是建築名前 10 個大寫字元（`placeKey`）。
             if door.get("name"):
                 required.add(door["name"].upper()[:10])

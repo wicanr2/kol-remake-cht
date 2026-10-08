@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"fmt"
 	"image"
 	"strings"
 
@@ -43,7 +44,12 @@ func BattleEncounter(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	frame(dst, fr.X, fr.Y, fr.Width, fr.Height, town.ColourBoxEdge)
 	t := battle.EncounterText
 	for i, line := range lines {
-		f.Draw(dst, t.X, t.Y+i*t.Step, line,
+		y := t.Y + i*t.Step
+		// RE-258／0x2A8BE：伏擊名稱列在前一列後7像素，任務遭遇保持。
+		if s.Site.Index < 0 && i >= 2 {
+			y++
+		}
+		f.Draw(dst, t.X, y, line,
 			town.ColourText[0], town.ColourText[1], town.ColourText[2])
 	}
 
@@ -78,8 +84,8 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	cx, cy := s.Camera()
 	// 騎著的人看得過牆（參戰者記錄 +0x1E，RE-102）。
 	mounted := false
-	if s.Cursor >= 0 && s.Cursor < len(s.Actors) {
-		mounted = s.Actors[s.Cursor].Flag1E != 0
+	if a, ok := s.ViewActor(); ok {
+		mounted = a.Flag1E != 0
 	}
 	sight := s.Field.Visible(cx, cy, mounted)
 	v := battle.FieldView
@@ -103,25 +109,8 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	cur := battle.FieldCursor
 	frame(dst, cur.X, cur.Y, cur.Width, cur.Height, town.ColourSelected)
 
-	// 選目標格時把游標那一格也框起來。
-	//
-	// **這一圈還沒對拍**：原版是拿 `sub_1C683` 把那一格的精靈重畫一次
-	// （`sub_24131:0x24603`），確切的視覺效果還沒解出來，這裡先用與白框同一個
-	// 顏色標出位置，等取到選目標格的原版畫格再改（SPEC-010 的驗證那一節）。
-	if s.Plan.Prompt == battle.PromptTarget {
-		c := s.Plan.Cursor
-		if c.Row >= 0 && c.Row < battle.ViewRows && c.Col >= 0 && c.Col < battle.ViewCols {
-			frame(dst, v.X+c.Col*battle.TileSide, v.Y+c.Row*battle.TileSide,
-				battle.TileSide, battle.TileSide, town.ColourSelected)
-		}
-	}
-
-	// 主指令列重畫時標出這一名已決定的目標格（`0x1F16A`，RE-160）。原版同樣是用
-	// `sub_1C683` 重畫那一格的精靈，視覺效果與選目標格那一圈同一個未對拍的近似。
-	if s.Plan.Prompt == battle.PromptCommand && s.Plan.SummaryShown {
-		c := s.Plan.Summary
-		frame(dst, v.X+c.Col*battle.TileSide, v.Y+c.Row*battle.TileSide,
-			battle.TileSide, battle.TileSide, town.ColourSelected)
+	if err := drawBattleTargetMarker(dst, sprites, tiles, s, 1); err != nil {
+		return err
 	}
 
 	for _, box := range []struct{ X, Y, Width, Height int }{
@@ -139,7 +128,15 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	if err := sheet.Draw(dst, sprites, f, s); err != nil {
 		return err
 	}
-	if err := drawBattleCommandPanel(dst, sprites, f, s); err != nil {
+
+	commandFont := f
+	if sheet.commandLarge {
+		if sheet.NameFont == nil {
+			return fmt.Errorf("戰鬥指令標籤缺少大字型")
+		}
+		commandFont = sheet.NameFont
+	}
+	if err := drawBattleCommandPanel(dst, sprites, commandFont, s); err != nil {
 		return err
 	}
 	if err := drawBattleResult(dst, sprites, s); err != nil {
@@ -167,13 +164,31 @@ func BattleField(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 			y := area.Y + i*area.LineHeight
 			// 原版把訊息整段轉成大寫（KOLDATA 裡是小寫的 `moves!`，
 			// 畫面上是 `MOVES!`）——與角色資料頁同一種處理（RE-074）。
-			f.Draw(dst, area.Col*8, y, strings.ToUpper(line),
-				battle.MessageInk[0], battle.MessageInk[1], battle.MessageInk[2])
+			drawBattleMessageText(dst, f, area.Col*8, y, strings.ToUpper(line))
 		}
 		return nil
 	}
 
 	return drawBattleIcons(dst, sprites, s)
+}
+
+// drawBattleTargetMarker 是英文與繁中共用的原版圓環出口（RE-171）。
+func drawBattleTargetMarker(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles, s *battle.State, scale int) error {
+	c, shown := s.TargetMarker()
+	if !shown {
+		return nil
+	}
+	src, err := sprites.Get(town.MarkerArchive, 0)
+	if err != nil {
+		return err
+	}
+	ring, err := tiles.TargetRing(src)
+	if err != nil {
+		return err
+	}
+	v := battle.FieldView
+	drawScaled(dst, ring, (v.X+c.Col*battle.TileSide)*scale, (v.Y+c.Row*battle.TileSide)*scale, scale)
+	return nil
 }
 
 // drawBattleResult 在收尾時把戰鬥結果圖蓋在裝備欄、人形框與戰場視窗上
@@ -188,6 +203,13 @@ func drawBattleResultScaled(dst *ebiten.Image, sprites Sprites, s *battle.State,
 	if n == battle.ResultNone {
 		return nil
 	}
+	// RE-276：共同結算入口先以 sub_1103F(0) 恢復整張底圖。
+	// 結果圖周圍不能保留戰場、裝備欄或人形框；訊息卷軸由呼叫端再畫。
+	bg, err := sprites.Get(town.Background.Archive, town.Background.Index)
+	if err != nil {
+		return err
+	}
+	drawScaled(dst, bg, 0, 0, sc)
 	pic, err := sprites.Get(battle.ResultArchive, n)
 	if err != nil {
 		return err
@@ -322,18 +344,28 @@ func BattleSpellList(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 			ink[0], ink[1], ink[2])
 	}
 	l := battle.SpellListRows
+	l.Row = s.SpellListRow()
 	for i, row := range rows {
 		if i >= l.Visible {
 			break
 		}
 		y := l.Row + i*l.LineStep
+		ink := town.ColourListIdle
 		if i == s.Plan.ListPick {
-			// **游標的樣子還沒對拍**，與戰利品那張清單同一個狀況：先用與指令列
-			// 白框同一個顏色框起來。
-			frame(dst, l.Col*8-2, y-1, b.Width-(l.Col*8-2-b.X)-4, l.LineStep,
-				town.ColourSelected)
+			ink = town.ColourSelected
 		}
 		f.Draw(dst, l.Col*8, y, strings.ToUpper(row), ink[0], ink[1], ink[2])
 	}
 	return nil
+}
+
+// drawBattleMessageText 依 EGA 訊息出口清完整字模格，包含空白（RE-252）。
+func drawBattleMessageText(dst *ebiten.Image, f *font.Font, x, y int, text string) {
+	if text == "" {
+		return
+	}
+	width, height := f.Measure(text)
+	fill(dst, x, y, width, height, battle.MessageBack)
+	ink := battle.MessageInk
+	f.Draw(dst, x, y, text, ink[0], ink[1], ink[2])
 }

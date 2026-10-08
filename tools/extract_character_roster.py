@@ -95,9 +95,9 @@ WEIGHT_PER_FOOT = (0x41, 0x32, 0x4B, 0x46, 0x28, 0x00, 0x23)
 
 
 def worn_slot(rec: bytes, pos: int, base: int) -> dict | None:
-    """一格穿戴欄。空的是 None；其餘欄位與商店的商品記錄同名。"""
+    """物品首 byte 為零即空格，尾端殘留不算物品（RE-170）。"""
     block = rec[base:base + WORN_STRIDE]
-    if len(block) < WORN_STRIDE or not any(block):
+    if len(block) < WORN_STRIDE or block[0] == 0:
         return None
     item = good(block, pos)
     item["offset"] = base
@@ -333,7 +333,9 @@ def main() -> int:
                    "stats_offset": STATS_OFFSET, "stats_count": STATS_COUNT,
                    "stats_rule": "七個內部屬性：力量、敏捷、體型、健康、先見、魅力、智力；"
                                  "畫面值是內部值 × 100 / 150（RE-074）",
-                   "sheet_rule": "MIRROR 角色資料頁的欄位與算式見 RE-074"},
+                   "sheet_rule": "MIRROR 角色資料頁的欄位與算式見 RE-074",
+                   "item_empty_rule": "穿戴、手持與背包只看記錄首 byte：零即空格；"
+                                      "尾端殘留仍保留於 carried（RE-170）"},
         "location_rule": "畫面上的所在地欄是「10 byte 所在地 + 一個空白 + 3 byte 城鎮代碼」，"
                          "共 14 個字元；所在地欄不以 NUL 結尾，取固定長度。",
         "slots": slots,

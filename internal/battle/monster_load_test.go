@@ -1,6 +1,7 @@
 package battle
 
 import (
+	"encoding/json"
 	"os"
 	"path/filepath"
 	"testing"
@@ -29,13 +30,17 @@ func TestLoadMonsterRangedContract(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			path := filepath.Join(t.TempDir(), "monsters.json")
-			body := `{"schema":"kol-monster-data-v1","monsters":[{` + tc.fields + `}]}`
+			fields := `"loot_chance":20`
+			if tc.fields != "" {
+				fields += "," + tc.fields
+			}
+			body := monsterLoadFixture(t, fields)
 			if err := os.WriteFile(path, []byte(body), 0600); err != nil {
 				t.Fatal(err)
 			}
 			got, err := LoadMonsters(path)
 			if tc.valid {
-				if err != nil || len(got.List) != 1 {
+				if err != nil || len(got.List) != MonsterCount {
 					t.Fatalf("合法怪物資料載入失敗：%v", err)
 				}
 			} else if err == nil {
@@ -43,4 +48,57 @@ func TestLoadMonsterRangedContract(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestLoadMonsterLootContract(t *testing.T) {
+	for _, tc := range []struct {
+		fields string
+		valid  bool
+	}{
+		{``, false}, {`"loot_chance":null`, false}, {`"loot_chance":-1`, false},
+		{`"loot_chance":256`, false}, {`"loot_chance":"20"`, false},
+		{`"loot_chance":0`, true}, {`"loot_chance":20`, true}, {`"loot_chance":255`, true},
+	} {
+		path := filepath.Join(t.TempDir(), "monsters.json")
+		fields := `"ranged_chance":0,"ranged_code":0`
+		if tc.fields != "" {
+			fields += "," + tc.fields
+		}
+		body := monsterLoadFixture(t, fields)
+		if err := os.WriteFile(path, []byte(body), 0600); err != nil {
+			t.Fatal(err)
+		}
+		_, err := LoadMonsters(path)
+		if (err == nil) != tc.valid {
+			t.Fatalf("搜刮資料%s：%v", tc.fields, err)
+		}
+	}
+}
+
+func monsterLoadFixture(t *testing.T, fields string) string {
+	t.Helper()
+	body, err := os.ReadFile("../../assets/original-derived-data/monsters.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var doc map[string]any
+	if err = json.Unmarshal(body, &doc); err != nil {
+		t.Fatal(err)
+	}
+	first := doc["monsters"].([]any)[0].(map[string]any)
+	delete(first, "ranged_chance")
+	delete(first, "ranged_code")
+	delete(first, "loot_chance")
+	var supplied map[string]any
+	if err = json.Unmarshal([]byte("{"+fields+"}"), &supplied); err != nil {
+		t.Fatal(err)
+	}
+	for k, v := range supplied {
+		first[k] = v
+	}
+	out, err := json.Marshal(doc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return string(out)
 }

@@ -63,6 +63,34 @@ func TestShopDetailFields(t *testing.T) {
 	}
 }
 
+// 正常商店選品須沿用原版含結尾字元的置中欄位。
+func TestShopDetailNameCenterUsesTerminator(t *testing.T) {
+	// 原版sub_153FF mode13的欄位：偶數長度名稱不能多向右一格。
+	for _, tc := range []struct {
+		name string
+		col  int
+	}{
+		{"Greatsword", 20},
+		{"Battle Axe", 20},
+		{"Barbut Helm", 20},
+		{"Fur Cap", 22},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			s := shopSession(t, 3000, [2]int{0x07, 0x02}, []Good{{Name: tc.name}})
+			s.UIText = shopText()
+			s.StartShop()
+			yes(s)
+			if len(s.Inside.Detail) == 0 {
+				t.Fatal("正常選品沒有明細")
+			}
+			name := s.Inside.Detail[0]
+			if name.Col != tc.col || name.Text != tc.name || name.Row != 102 {
+				t.Fatalf("名稱欄位是 %+v，應為欄%d、列102及原名%q", name, tc.col, tc.name)
+			}
+		})
+	}
+}
+
 // shopText 是明細面板用得到的那幾筆記錄。
 func shopText() *UIText {
 	recs := []uiRecord{

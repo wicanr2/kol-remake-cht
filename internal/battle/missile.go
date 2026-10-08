@@ -42,12 +42,12 @@ type MissileShot struct {
 // Shoot 把一發從第 i 名射向 (tx, ty)，score 是這一擊的命中值。
 //
 // 每一格依序判三件事（`sub_25F8A`）：是樹就扣 TreeCost、擋路的磚就停、
-// 都不是就看那一格站不站人。站著人的話扣掉他體型的一半再往前，扣到負就停在
-// 他身上——**除了目標格本身**，走到那裡就算送到了。
+// 都不是就看那一格站不站人。站著人的話扣掉他體型的一半再往前。
+// 目標格本身不算擋路，走到那裡就算送到了。
 //
 // 原版扣成負之後會回頭再判同一格（`0x2612B` 跳回 `0x260B1`），而 `sub_24C35`
-// 每次都找回同一個人，要靠 16-bit 溢位才繞得出來。這裡扣一次就停，
-// 結果與原版繞完之後相同。
+// 每次都找回同一個人，要靠 16-bit 溢位才繞得出來，之後繼續飛行（RE-221）。
+// 體型一半為零且分數為負時，原版不能退出；保持重製的有界停止處理。
 func (s *State) Shoot(i, tx, ty, score int) MissileShot {
 	shot := MissileShot{Block: MissileClear, Score: score, Target: -1}
 	if i < 0 || i >= len(s.Actors) {
@@ -84,7 +84,11 @@ func (s *State) Shoot(i, tx, ty, score int) MissileShot {
 			return true
 		}
 		shot.Block = MissileActor
-		shot.Score -= s.Actors[j].Size / 2
+		cost := s.Actors[j].Size / 2
+		shot.Score = int(int16(shot.Score - cost))
+		for cost > 0 && shot.Score < 0 {
+			shot.Score = int(int16(shot.Score - cost))
+		}
 		if shot.Score < 0 {
 			shot.Target = j
 			shot.Stopped = true

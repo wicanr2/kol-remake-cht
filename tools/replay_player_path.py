@@ -13,13 +13,16 @@
   tools/replay_player_path.py full-chain arena
   tools/replay_player_path.py --all
 
-跑起來要 Docker（`run_kol_shots.sh` 自己會開容器），所以這一支在主機上執行。
+必須在 Docker 內執行 Python。容器內設 `KOL_BIN` 可直接使用已建置遊戲；
+未設定時沿用 Docker 包裝腳本。此工具會更新正式收據，審查回歸先用
+`check_player_paths.py`；可寫目錄與既有目標須先核對 UID/GID。
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
 import subprocess
 import sys
@@ -65,9 +68,20 @@ def replay(name: str) -> bool:
         return False
     SPECS.mkdir(parents=True, exist_ok=True)
     spec = SPECS / f"{name}.spec"
-    spec.write_text(spec_line(plan) + "\n", encoding="utf-8")
-    run = subprocess.run(["tools/run_kol_shots.sh", str(spec)],
+    runtime_plan = dict(plan)
+    if plan.get("load"):
+        # v1 匯入會在輸入旁保存轉換檔；保留觀察來源的原始位元組。
+        copied = SPECS / f"{name}-input.json"
+        copied.write_bytes(pathlib.Path(plan["load"]).read_bytes())
+        runtime_plan["load"] = str(copied)
+    line = spec_line(runtime_plan)
+    spec.write_text(line + "\n", encoding="utf-8")
+    binary = os.environ.get("KOL_BIN")
+    command = ([binary, *line.split("|")[1:]] if binary else
+               ["tools/run_kol_shots.sh", str(spec)])
+    run = subprocess.run(command,
                          capture_output=True, text=True)
+    (SPECS / f"{name}-engine.log").write_text(run.stdout + run.stderr, encoding="utf-8")
     if run.returncode != 0:
         print(f"{name}：跑不動\n{run.stderr[-800:]}")
         return False
@@ -95,11 +109,32 @@ def main() -> int:
                        and "trace" in json.loads(p.read_text(encoding="utf-8")))
     if not names:
         p.error("要指定收據名，或加 --all")
-    bad = [n for n in names if not replay(n)]
+    # 沿用檢查器的依賴排序；先產生存檔，才重播讀它的後續路徑。
+    from check_player_paths import dependency_order
+    try:
+        names, _ = dependency_order(names)
+    except ValueError as error:
+        p.error(str(error))
+    writers = {}
+    parents = {}
+    for name in names:
+        plan = json.loads((PLANS / f"{name}.json").read_text(encoding="utf-8"))
+        if plan.get("save"):
+            writers[plan["save"]["file"]] = name
+        parents[name] = plan.get("load")
+    bad = []
+    for name in names:
+        parent = writers.get(parents[name])
+        if parent in bad:
+            print(f"{name}：本輪存檔來源 {parent} 未通過，不讀上一輪保存結果")
+            bad.append(name)
+        elif not replay(name):
+            bad.append(name)
     if bad:
         print("沒過：" + "、".join(bad), file=sys.stderr)
         return 1
     return 0
 
 
-sys.exit(main())
+if __name__ == "__main__":
+    sys.exit(main())

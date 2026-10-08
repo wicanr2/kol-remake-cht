@@ -45,7 +45,7 @@ func TestShotConsumesAmmunition(t *testing.T) {
 	}
 	monster := Actor{Side: SideMonster, Kind: 19, Command: CmdMissile}
 	monster.ConsumeAmmunition()
-	if monster.Kind != 19 {
-		t.Fatal("不得扣除敵人肖像索引")
+	if monster.Kind != 18 {
+		t.Fatal("怪物射後未依RE-217扣除計數")
 	}
 }

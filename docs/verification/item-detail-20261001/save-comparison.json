@@ -1,0 +1,40 @@
+{
+  "runs": [
+    {
+      "phase": "before",
+      "lang": "en",
+      "keys": 22,
+      "saved_at": "2026-10-01T08:53:07Z",
+      "binary_sha256": "e5be211397bbb2eb11e355a77bbe490cc8a1cd8c618c049679dd97a1456bdc7a",
+      "save_sha256": "32a0fcef263f486d061fcf5bb842e56529ab530d18dffb0f90343f71d97f2e2d"
+    },
+    {
+      "phase": "before",
+      "lang": "zh-Hant",
+      "keys": 22,
+      "saved_at": "2026-10-01T08:53:11Z",
+      "binary_sha256": "e5be211397bbb2eb11e355a77bbe490cc8a1cd8c618c049679dd97a1456bdc7a",
+      "save_sha256": "5b173a49734b93ac58843370e2d0f9d61382ac1396c96b385d0efca2e79d14f9"
+    },
+    {
+      "phase": "after",
+      "lang": "en",
+      "keys": 37,
+      "saved_at": "2026-10-01T08:53:13Z",
+      "binary_sha256": "6ffca0ddcaacd88b0d0bca899d4c23aad613654b8ba0c230f802dca72f929bd2",
+      "save_sha256": "75554331a24b6aa77c8788dddfd852692d9ee1173ac72042aa8163757e0e5b4f"
+    },
+    {
+      "phase": "after",
+      "lang": "zh-Hant",
+      "keys": 37,
+      "saved_at": "2026-10-01T08:53:18Z",
+      "binary_sha256": "6ffca0ddcaacd88b0d0bca899d4c23aad613654b8ba0c230f802dca72f929bd2",
+      "save_sha256": "2abde4967f29e43d04a554b019554cd49aac555f021e0cf72eb3c489bb701001"
+    }
+  ],
+  "excluded_fields": [
+    "saved_at"
+  ],
+  "equal": true
+}

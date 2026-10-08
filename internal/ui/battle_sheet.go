@@ -9,12 +9,23 @@ import (
 )
 
 // BattleSheet 使用固定大小的文字安全區，保留外框與相鄰戰場。
-type BattleSheet struct{ canvas *ebiten.Image }
+type BattleSheet struct {
+	canvas       *ebiten.Image
+	NameFont     *font.Font
+	commandLarge bool
+}
 
 func (p *BattleSheet) Draw(dst *ebiten.Image, sprites Sprites, f *font.Font, s *battle.State) error {
 	d, show := s.EquipmentPanel()
 	if !show {
 		return nil
+	}
+	// RE-278：怪物肖像沒有文字輸出，沿用前一個人物框選出的字型。
+	if !d.Monster {
+		p.commandLarge = true
+	}
+	if d.Equipment {
+		p.commandLarge = false
 	}
 	if p.canvas == nil {
 		p.canvas = ebiten.NewImage(119, 73)
@@ -22,7 +33,17 @@ func (p *BattleSheet) Draw(dst *ebiten.Image, sprites Sprites, f *font.Font, s *
 	p.canvas.Clear()
 	text := func(x, y int, value string) { f.Draw(p.canvas, x-17, y-3, strings.ToUpper(value), 255, 255, 255) }
 	if !d.Monster {
-		text(24, 7, d.Name)
+
+		if p.NameFont == nil {
+			return fmt.Errorf("戰鬥人物名稱缺少大字型")
+		}
+		w, h := p.NameFont.Measure(d.Name)
+		if w > 112 || h > 8 {
+			return fmt.Errorf("戰鬥人物名稱超出文字安全區")
+		}
+		if p.NameFont.Draw(p.canvas, 24-17, 7-3, d.Name, 255, 255, 255) != len([]rune(d.Name)) {
+			return fmt.Errorf("戰鬥人物名稱含未涵蓋的字元")
+		}
 	}
 	if d.Equipment {
 		for i := 0; i < d.Count; i++ {

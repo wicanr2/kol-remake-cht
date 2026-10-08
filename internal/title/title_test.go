@@ -21,6 +21,19 @@ func TestExpandAndPlay(t *testing.T) {
 	if frames[0].Back != 6 {
 		t.Fatalf("第一格應該是閃電的 BACKPICS[6]，實際 %d", frames[0].Back)
 	}
+	count, lightning := 0, 0
+	for _, f := range frames {
+		count += f.CueCount()
+		if f.Back == 6 {
+			lightning++
+			if f.CueCount() != 2 {
+				t.Fatalf("閃電第%d格應連播兩聲", f.Index)
+			}
+		}
+	}
+	if count != 23 || lightning != 4 {
+		t.Fatalf("原版一輪應23聲、4次閃電，實際%d聲、%d次", count, lightning)
+	}
 
 	// 播放器必須在停留 tick 用完之後才換格，且走完一輪回到第一格。
 	p := NewPlayer(frames, ThunderSeconds*TickHz)

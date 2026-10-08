@@ -1,0 +1,515 @@
+{
+  "schema": "kol-original-target-cursor-pixels-v1",
+  "method": "原版實際最後一次 sub_11390→sub_1CB28 呼叫相位，獨立逐列16-bit遮罩合成，核對完整16×16框",
+  "assets": [
+    {
+      "path": "assets/original-derived-png/ega/KOLPICS-MARKERS/kolpics-markers.png",
+      "sha256": "112c03fc64c96499989ef312749b898a3d59a96bce520cfbc2d3308f4c49ff17"
+    },
+    {
+      "path": "assets/original-derived-png/ega/BATTLE/battle-tiles-08.png",
+      "sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b"
+    }
+  ],
+  "checks": [
+    {
+      "run": "gui4",
+      "frame": "plan-01.png",
+      "frame_sha256": "63d87090d7c346455e0d128c7ac929b3e53a0ba8c98a4e6103b4119a16818fdb",
+      "capture_step": 1199000000,
+      "last_draw_step": 1197913255,
+      "call_args": [
+        5,
+        2267,
+        17438,
+        13,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "unit": 5,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "191c38c2d50660f5b6eb11b9f4436a60bb5632af20ad20278413013fa2f42eb8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui4",
+      "frame": "plan-02.png",
+      "frame_sha256": "ace03abcfb331adb3072b4e8d9268b046e5c5c53e78f96670cd115c457df620b",
+      "capture_step": 1219000000,
+      "last_draw_step": 1218904060,
+      "call_args": [
+        8,
+        2269,
+        17438,
+        13,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 5,
+      "tile": 13,
+      "sprite_code": 0,
+      "unit": 8,
+      "rect": [
+        232,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "75f9a6afca3c1cc9b589460351e4a9462e9b3db3d00c79cc2b5f65ef4ebaa2c7",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui4",
+      "frame": "plan-03.png",
+      "frame_sha256": "92438d3af3ca648bf1bdd24db8ba85ece557d045d1b7ab5582a43496a2391103",
+      "capture_step": 1239000000,
+      "last_draw_step": 1237986609,
+      "call_args": [
+        8,
+        2909,
+        17438,
+        9,
+        15381,
+        10
+      ],
+      "row": 4,
+      "col": 5,
+      "tile": 9,
+      "sprite_code": 0,
+      "unit": 8,
+      "rect": [
+        232,
+        72,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "ed620c926b5d16444ec412ad3d5f719d6c8252f3ef59f9e8149545b7c872b14a",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui4",
+      "frame": "plan-04.png",
+      "frame_sha256": "807bbe25c94801796d0a975b74bf003c6c29fb3188bcd876926a59ae51d37889",
+      "capture_step": 1259000000,
+      "last_draw_step": 1258977416,
+      "call_args": [
+        5,
+        2905,
+        17438,
+        9,
+        15381,
+        10
+      ],
+      "row": 4,
+      "col": 3,
+      "tile": 9,
+      "sprite_code": 0,
+      "unit": 5,
+      "rect": [
+        200,
+        72,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "6c100afce2d0dab1ec20f48f96231dcf0eff6e79e1fc63f9405d3bfe08196ade",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui4",
+      "frame": "plan-05.png",
+      "frame_sha256": "8804eed1abd0400c5b7c3f3155e63132e623209c7faac6de5f1d5b2ca1c4eafa",
+      "capture_step": 1279000000,
+      "last_draw_step": 1278059965,
+      "call_args": [
+        7,
+        2265,
+        17438,
+        9,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 3,
+      "tile": 9,
+      "sprite_code": 0,
+      "unit": 7,
+      "rect": [
+        200,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-05.png",
+      "frame_sha256": "63d87090d7c346455e0d128c7ac929b3e53a0ba8c98a4e6103b4119a16818fdb",
+      "capture_step": 1279000000,
+      "last_draw_step": 1278059965,
+      "call_args": [
+        5,
+        2267,
+        17438,
+        13,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "unit": 5,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "191c38c2d50660f5b6eb11b9f4436a60bb5632af20ad20278413013fa2f42eb8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-06.png",
+      "frame_sha256": "8f72b7d7a8bfbad54a2e7edbea14894488afa5d0aa3d92386b00c179e98ecabb",
+      "capture_step": 1299000000,
+      "last_draw_step": 1297142516,
+      "call_args": [
+        7,
+        3547,
+        17438,
+        9,
+        15381,
+        10
+      ],
+      "row": 5,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 0,
+      "unit": 7,
+      "rect": [
+        216,
+        88,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "48c4ec81d38b4124e9e6556548ef11d2b0ebf28bbaa0543562b768196b9167a8",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-26.png",
+      "frame_sha256": "1a621dd7fa1eabe5296a9ff28edffa18fd9dd111dbb8587ea79ba6bdfed2ac68",
+      "capture_step": 1699000000,
+      "last_draw_step": 1697239981,
+      "call_args": [
+        9,
+        2267,
+        17438,
+        100,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 2,
+      "unit": 9,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "c32e8f256d7f9e6a2787568f76bd1ae58cfec1981aaf52ac415cfafbeaf76a3b",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-27.png",
+      "frame_sha256": "51a4a9f0b2a09ea4fbf4bae61ccc2da3cc2da6a8b664cb497cc836bdf83081dc",
+      "capture_step": 1719000000,
+      "last_draw_step": 1718230786,
+      "call_args": [
+        6,
+        2269,
+        17438,
+        10,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 5,
+      "tile": 10,
+      "sprite_code": 0,
+      "unit": 6,
+      "rect": [
+        232,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "00559a51acea74d7e67092cc11882637440136d75f3ec6c687a2219bfff97ad9",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-28.png",
+      "frame_sha256": "cceceae75f931743ea2936d3bd66c030587b3a261bbe40de47b4d217063dacb6",
+      "capture_step": 1739000000,
+      "last_draw_step": 1737313334,
+      "call_args": [
+        6,
+        2267,
+        17438,
+        100,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 2,
+      "unit": 6,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "f528ea3019afe877f094f1d7cca32d050f2328c66adbf930463907be2c2ccc02",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-29.png",
+      "frame_sha256": "18ccf85e3949119040231bfb78ffe4bcf8b34fc7851e56084f8952b2378c4ccf",
+      "capture_step": 1759000000,
+      "last_draw_step": 1758304139,
+      "call_args": [
+        9,
+        3547,
+        17438,
+        13,
+        15381,
+        10
+      ],
+      "row": 5,
+      "col": 4,
+      "tile": 13,
+      "sprite_code": 0,
+      "unit": 9,
+      "rect": [
+        216,
+        88,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "416ffa3ea9de497519444d45bc820182e2f1ae68ea2cce9e1a01466026290fbd",
+      "one_bit_negative_rejected": true
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-30.png",
+      "frame_sha256": "6c19dfea5a79fffc0f8c5f569a8285e8ade7e52e3aea79d04076ce2aa7edf3b3",
+      "capture_step": 1779000000,
+      "last_draw_step": 1777386691,
+      "call_args": [
+        7,
+        2267,
+        17438,
+        100,
+        15381,
+        10
+      ],
+      "row": 3,
+      "col": 4,
+      "tile": 9,
+      "sprite_code": 2,
+      "unit": 7,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "pixels": 256,
+      "different_pixels": 0,
+      "rgb_sha256": "d620a332f6e0a436428d33034265e354d6fd7ed0b8702c73de7606c1d60f5099",
+      "one_bit_negative_rejected": true
+    }
+  ],
+  "retained_in_submenus": [
+    {
+      "run": "gui4",
+      "frame": "plan-06.png",
+      "capture_step": 1299000000,
+      "last_draw_step": 1297142511,
+      "unit": 9,
+      "rect": [
+        200,
+        56,
+        16,
+        16
+      ],
+      "sprite_code": 0,
+      "cursor_mode": 5,
+      "different_pixels": 0,
+      "rgb_sha256": "f3f7ebc196de7a67052e5e7a81a58a468a5fab4ad1d32ef447536b9aa736b9f3",
+      "frame_sha256": "aab96a6828e105734e656f60b90226211e32decd249693bbdd690d549d83a1ab"
+    },
+    {
+      "run": "gui4",
+      "frame": "plan-07.png",
+      "capture_step": 1319000000,
+      "last_draw_step": 1318133318,
+      "unit": 6,
+      "rect": [
+        200,
+        56,
+        16,
+        16
+      ],
+      "sprite_code": 0,
+      "cursor_mode": 5,
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "frame_sha256": "6b777d7f2b0409f46cbf177d07f3d95481d94eb287be9e96c4f47f708635d533"
+    },
+    {
+      "run": "gui4",
+      "frame": "plan-08.png",
+      "capture_step": 1339000000,
+      "last_draw_step": 1337215868,
+      "unit": 6,
+      "rect": [
+        200,
+        56,
+        16,
+        16
+      ],
+      "sprite_code": 0,
+      "cursor_mode": 5,
+      "different_pixels": 0,
+      "rgb_sha256": "2826376a8ae8d1b58e74a20c9619fe7caf1c33770d8e6871e5ef2a43d475a469",
+      "frame_sha256": "ab20088aa3137be9cd3acd0f7f0177e13d251cf3e7fd81a037d2bfe3159325af"
+    },
+    {
+      "run": "gui5",
+      "frame": "plan-31.png",
+      "capture_step": 1799000000,
+      "last_draw_step": 1798377491,
+      "unit": 6,
+      "rect": [
+        216,
+        56,
+        16,
+        16
+      ],
+      "sprite_code": 2,
+      "cursor_mode": 5,
+      "different_pixels": 0,
+      "rgb_sha256": "f528ea3019afe877f094f1d7cca32d050f2328c66adbf930463907be2c2ccc02",
+      "frame_sha256": "8cf252b4797966ba6f605fe33d7e7c5fd4afc12c7bec70ee724f925f4a18d683"
+    }
+  ],
+  "sequences": [
+    {
+      "run": "gui4",
+      "render_count": 84,
+      "units": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "first_16": [
+        7,
+        6,
+        5,
+        6,
+        7,
+        8,
+        9,
+        8,
+        7,
+        6,
+        5,
+        6,
+        7,
+        8,
+        9,
+        8
+      ]
+    },
+    {
+      "run": "gui5",
+      "render_count": 116,
+      "units": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "first_16": [
+        7,
+        6,
+        5,
+        6,
+        7,
+        8,
+        9,
+        8,
+        7,
+        6,
+        5,
+        6,
+        7,
+        8,
+        9,
+        8
+      ]
+    }
+  ],
+  "remake_compared": false,
+  "limits": [
+    "只證明原版游標的來源、相位及合成；未修改或驗收重製版",
+    "實際等待秒數與動畫速度尚未作重製版契約"
+  ]
+}

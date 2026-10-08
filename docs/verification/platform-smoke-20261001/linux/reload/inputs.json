@@ -1,0 +1,108 @@
+{
+  "script": "/work/workplace/platform-smoke-20261001/reload-script.txt",
+  "tokens": [
+    "1",
+    ">",
+    "RET",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "RET"
+  ],
+  "records": [
+    {
+      "step": 1,
+      "token": "1",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=6 token=[1]",
+      "png_sha256": "e983034d17d0623f01d37ee024ef22948e8bb86fe7cca2f87a81200c2b0af47a"
+    },
+    {
+      "step": 2,
+      "token": ">",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=3 token=[>]"
+    },
+    {
+      "step": 3,
+      "token": "RET",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=3 token=[RET]",
+      "png_sha256": "4cd5c8a9be6f130ae8481e4359de179ecfc5029f30a2a7adff28bf2350c50035"
+    },
+    {
+      "step": 4,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 5,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 6,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 7,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 8,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 9,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 10,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 11,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 12,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 13,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 14,
+      "token": "D",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[D]",
+      "png_sha256": "14e8b59a432c8c83c4747a17132007c23e25ad2c0a17a4312e42bc47329701b7"
+    },
+    {
+      "step": 15,
+      "token": "RET",
+      "input_log": "input scene=town cursor=0 游標=(480,334) 可點=2 token=[RET]",
+      "png_sha256": "2f778383f53c54a672da68ee0d6a42291a7d7f391e7f82b4fb28c2d39550ba72"
+    }
+  ],
+  "window": 2097166,
+  "geometry": {
+    "x": 160,
+    "y": 66,
+    "width": 960,
+    "height": 600
+  }
+}

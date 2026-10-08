@@ -25,6 +25,13 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 	if err := drawSheetPageFull(dst, sprites); err != nil {
 		return err
 	}
+
+	// SPEC-031第17節／RE-232：確認等待保留上方隊伍肖像。
+	if p.GiftConfirm {
+		if err := drawPartySlots(dst, sprites, small, party); err != nil {
+			return err
+		}
+	}
 	if !interactionBase {
 		// 完整清單層才畫木屋背板、立繪、右欄、外框、分隔線、清單與小框。
 		if err := drawSheetPageBack(dst, sprites, wild); err != nil {
@@ -40,6 +47,11 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 			}
 			draw(dst, pic, piece.X*PixelsPerByte, piece.Y)
 		}
+		// 在框線之前保留背景／立繪的原生欄，供原版快取位元修改使用。
+		edge, err := itemEdgeSource(dst, p)
+		if err != nil {
+			return err
+		}
 
 		fill(dst, l.RightPane.X0, l.RightPane.Y0,
 			l.RightPane.Width(), l.RightPane.Height(), town.ColourBoxFill)
@@ -50,6 +62,9 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 		// 框畫完投一次影（`sub_1B7E9(0x0F, 2, 0x131, 0x9C, 3)`）：右邊與下面各一條
 		// 四像素寬的黑帶。
 		shadow(dst, l.Frame.X0, l.Frame.Y0, l.Frame.Width(), l.Frame.Height())
+		if edge != nil {
+			drawRestoredItemEdge(dst, edge, p)
+		}
 
 		for i, row := range p.Rows {
 			colour := town.ColourListIdle
@@ -77,7 +92,7 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 				third := row + 2*town.MarkLineStep
 				cell(dst, small, col, third, m.Dice)
 				if m.Skill != "" {
-					cell(dst, small, col+8, third, m.Skill)
+					cell(dst, small, m.SkillX()/small.Advance(), third, m.Skill)
 				}
 				w := col + town.MarkWeightCol - 1
 				if m.Weight < 100 {
@@ -129,10 +144,24 @@ func drawItemPage(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 		for _, seg := range p.Detail {
 			cell(dst, f, seg.Col-sc+dc, seg.Row-sr+dr, seg.Text)
 		}
+		message := p.DropMessage
+		if p.GiftConfirm {
+			message = p.GiftMessage
+		}
+		if len(message) > 0 {
+			r := l.DropMessage
+			fill(dst, r.X0+1, r.Y0+1, r.Width()-2, r.Height()-2, town.ColourBoxFill)
+			frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetHeader)
+			shadow(dst, r.X0, r.Y0, r.Width(), r.Height())
+			for i, line := range message {
+				cell(dst, f, l.DropTextCol, l.DropTextRow+i*town.LineStep, line)
+			}
+		}
 		return nil
 	}
+	// 空格訊息由sub_16986另設字格欄8、像素列76，不用模式8明細基準。
 	for i, line := range p.Message {
-		cell(dst, f, dc, dr+i*town.LineStep, line)
+		cell(dst, f, 8, 76+i*town.LineStep, line)
 	}
 	return nil
 }

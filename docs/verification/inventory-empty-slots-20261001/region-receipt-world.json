@@ -1,0 +1,109 @@
+{
+  "tool": "tools/verify_remake_parity.py",
+  "plan": "world",
+  "description": "野外地圖畫面對原版對拍。畫面由 TOWN0 的格子陣列與磚圖畫出，隊伍是視窗第 3 列第 5 欄那一格內的 2×2 白點，偏移「次格座標 × 2」像素；左下的標籤框直接畫 KOLDATA 記錄 0xD5 + 時段與 0xDA + 地形碼（記錄自帶空白用來置中），地形碼由腳下磚塊的 payload3[0x100 + 磚塊] 取最低位的 1（RE-068）。這一輪**不宣稱**天候圖那一塊：原版的雲層由 sub_2A18E 每個 tick 把覆蓋層整列旋轉一個位元，緩衝區的位元組版面還沒定案，remake 目前畫的是未旋轉的合成圖。每一對用 compare 指明它涵蓋的矩形，矩形之外不算通過也不算允許差異。",
+  "pair_count": 4,
+  "pass_count": 4,
+  "failure_count": 0,
+  "pairs": [
+    {
+      "label": "隊員格與日期框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-leave.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 52
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "地圖視窗與隊伍的點",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-leave.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 96,
+        "y": 52,
+        "width": 224,
+        "height": 110
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [
+        {
+          "name": "原版滑鼠游標",
+          "reason": "原版在地圖視窗上畫游標，remake 沒有這個元素。",
+          "rect": [
+            156,
+            98,
+            20,
+            18
+          ],
+          "differing_pixels": 38
+        }
+      ],
+      "required_regions": []
+    },
+    {
+      "label": "時段與地形標籤框",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-leave.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 8,
+        "y": 140,
+        "width": 80,
+        "height": 20
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    },
+    {
+      "label": "圖示列",
+      "remake": "docs/verification/inventory-empty-slots-20261001/weather-leave.png",
+      "original": "docs/verification/character-ui/town-leave-run1/frames/frame-131.png",
+      "size": [
+        320,
+        200
+      ],
+      "compare": {
+        "x": 0,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "pass": true,
+      "differing_outside_allowed": 0,
+      "first_outside_pixel": null,
+      "allowed_regions": [],
+      "required_regions": []
+    }
+  ],
+  "metadata": {
+    "scope": "RE-164修正後的正常截圖，原版圖、比較矩形、游標例外與必須相同區均沿用原計畫；不宣稱天候框的原版GUI同狀態對拍",
+    "previous_plan": "docs/verification/remake-parity/plan-world.json",
+    "previous_plan_sha256": "e19d358e21af6f9ff5ce5a03213651e330326ff96b5ba5e0b8208fbf7c368761",
+    "weather_contract": "docs/spec/026-weather-animation.md",
+    "rights": "衍生PNG只適用private GitHub特例"
+  }
+}

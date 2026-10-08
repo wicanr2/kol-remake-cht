@@ -1,0 +1,153 @@
+{
+  "schema": "kol-production-return-scratch-audit-v1",
+  "receipt_sha256": "efb42ea23bd1ef99d9567de9513778fb9419d70f58a17f71f4b3350516f4cf8f",
+  "attachments": 3779,
+  "full_readonly_verification": "passed",
+  "host_control": {
+    "observed_at": "2026-10-02 16:02:54 UTC",
+    "git_diff_check": "passed",
+    "git_staged": [],
+    "project_containers": [],
+    "other_containers_preserved": [
+      {
+        "name": "/priceless_satoshi",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/cht/eob_123_remake"
+        ]
+      },
+      {
+        "name": "/confident_williams",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/cht/dosgolem-fd2-oracle",
+          "/home/anr2/cht/dosgolem-fd2-oracle/workplace/gocache",
+          "/home/anr2/cht/fd2/docs/data/parity-plans/ch18-guard-r3.jsonl",
+          "/home/anr2/cht/fd2/org_game/炎龍騎士團/FLAME2",
+          "/home/anr2/cht/fd2/work/parity-slot-ch18/guard-original-r3",
+          "/home/anr2/cht/dosgolem-fd2-oracle/workplace/gomodcache",
+          "/home/anr2/cht/fd2/work/parity-slot-ch18/guard-state-r3",
+          "/home/anr2/cht/fd2/tools/dosgolem_oracle_drive.py",
+          "/home/anr2/cht/fd2/remake/assets/maps"
+        ]
+      },
+      {
+        "name": "/loving_wing",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/cht/dosgolem-fd2-oracle",
+          "/home/anr2/cht/dosgolem-fd2-oracle/workplace/gocache",
+          "/home/anr2/cht/dosgolem-fd2-oracle/workplace/gomodcache",
+          "/home/anr2/cht/dosgolem",
+          "/usr/bin/docker",
+          "/var/run/docker.sock",
+          "/home/anr2/cht/fd2",
+          "/home/anr2/cht/fd2/org_game/炎龍騎士團/FLAME2"
+        ]
+      },
+      {
+        "name": "/dinbando_web_dev",
+        "status": "exited",
+        "mounts": [
+          "/home/anr2/dinbando"
+        ]
+      },
+      {
+        "name": "/supabase_studio_dinbando",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/dinbando/supabase/snippets"
+        ]
+      },
+      {
+        "name": "/supabase_pg_meta_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_edge_runtime_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_storage_dinbando",
+        "status": "running",
+        "mounts": [
+          "/var/lib/docker/volumes/supabase_storage_dinbando/_data"
+        ]
+      },
+      {
+        "name": "/supabase_rest_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_realtime_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_inbucket_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_auth_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_kong_dinbando",
+        "status": "running",
+        "mounts": []
+      },
+      {
+        "name": "/supabase_db_dinbando",
+        "status": "running",
+        "mounts": [
+          "/var/lib/docker/volumes/supabase_db_dinbando/_data"
+        ]
+      },
+      {
+        "name": "/focoria-local",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/tmp2/jinher/workplace/fbx-glb-viewer"
+        ]
+      },
+      {
+        "name": "/admiring_kowalevski",
+        "status": "running",
+        "mounts": [
+          "/home/anr2/tmp2/jinher/workplace/fbx-glb-viewer"
+        ]
+      },
+      {
+        "name": "/agentacc-test-web",
+        "status": "exited",
+        "mounts": [
+          "/home/anr2/tmp2/總經銷會計軟體/.nuget-cache",
+          "/home/anr2/tmp2/總經銷會計軟體"
+        ]
+      },
+      {
+        "name": "/agentacc-test-pg",
+        "status": "exited",
+        "mounts": [
+          "/var/lib/docker/volumes/3187beea3cc62758ed7efbf441e1f8de35d8fd91a3678500afefe71e8dc81464/_data"
+        ]
+      },
+      {
+        "name": "/cool_bose",
+        "status": "exited",
+        "mounts": []
+      }
+    ]
+  },
+  "root_owned_files": [],
+  "md_directories": [],
+  "artifact_uid_gid": [
+    1000,
+    1000
+  ]
+}

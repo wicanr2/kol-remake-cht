@@ -85,20 +85,34 @@ func (s *State) BodyPanel() (BodyPanelData, bool) {
 }
 
 func (s *State) inspectBodyTarget() {
-	s.Plan.BodyActor = 0
 	c := s.Plan.Cursor
 	i := s.Current()
 	if i < 0 || s.Field == nil || c.Row < 0 || c.Row >= ViewRows || c.Col < 0 || c.Col >= ViewCols {
+		s.Plan.BodyActor = 0
 		return
 	}
 	a := s.Actors[i]
 	visible := s.Field.Visible(a.X, a.Y, a.Flag1E != 0)
 	if !visible[c.Row][c.Col] && (c.Row != ViewCentre.Row || c.Col != ViewCentre.Col) {
+		s.Plan.BodyActor = 0
 		return
 	}
 	x, y := clampCell(a.X+c.Row-ViewCentre.Row), clampCell(a.Y+c.Col-ViewCentre.Col)
+	// RE-275：原版按視窗精靈辨識；空格清框，圖號 >=8 保留先前框。
+	sprite := s.SpriteAt(x, y)
+	if sprite < 0 {
+		s.Plan.BodyActor = 0
+		return
+	}
+	if sprite >= SpriteMonsterDown {
+		return
+	}
+	if sprite < SpriteMonster {
+		s.Plan.BodyActor = sprite + 1
+		return
+	}
 	for j, target := range s.Actors {
-		if target.Side != SideEmpty && target.X == x && target.Y == y {
+		if target.Side == SideMonster && !target.Down() && target.X == x && target.Y == y {
 			s.Plan.BodyActor = j + 1
 			return
 		}

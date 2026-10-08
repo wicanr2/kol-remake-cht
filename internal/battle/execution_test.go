@@ -518,3 +518,90 @@ func TestFlinchCheck(t *testing.T) {
 		}
 	}
 }
+
+// RE-290: original normal round 6 actor 8 enters the six-cell message range.
+// Source 0x2658A..0x265A7 writes coordinates before the visibility query.
+func TestMoveVisibilityUsesDestination(t *testing.T) {
+	for _, tc := range []struct {
+		name                                 string
+		start, facing, blocker, end, message int
+		redraw                               bool
+	}{
+		{"enter range", 23, 0, 0, 22, MovedRecord, true},
+		{"leave range", 22, 4, 0, 23, 0, false},
+		{"blocked outside", 23, 0, 22, 23, 0, false},
+		{"blocked inside", 22, 4, 23, 22, BlockedRecord, false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			s := seenState()
+			s.Actors[0].X, s.Actors[0].Y = 16, 41
+			m := &s.Actors[PartySlots]
+			m.X, m.Y, m.Facing = tc.start, 41, tc.facing
+			m.Command, m.Style = CmdMove, MoveFormBase
+			if tc.blocker != 0 {
+				a := Actor{Side: SideMonster, X: tc.blocker, Y: 41, Threshold: 100}
+				a.SetParts()
+				s.Actors = append(s.Actors, a)
+			}
+			result := s.move(PartySlots)
+			if s.Actors[PartySlots].X != tc.end || s.Actors[PartySlots].Y != 41 ||
+				result.Message != tc.message || result.Redraw != tc.redraw {
+				t.Fatalf("position=(%d,%d), message=%#x redraw=%v; want (%d,41), %#x %v",
+					s.Actors[PartySlots].X, s.Actors[PartySlots].Y, result.Message, result.Redraw,
+					tc.end, tc.message, tc.redraw)
+			}
+		})
+	}
+}
+
+// Entering visibility keeps the previous field at the message wait, then redraws.
+func TestMoveEnteringViewKeepsFieldUntilConfirmation(t *testing.T) {
+	s := seenState()
+	s.Actors[0].X, s.Actors[0].Y = 16, 41
+	a := &s.Actors[PartySlots]
+	a.X, a.Y, a.Facing = 23, 41, 0
+	a.Command, a.Style = CmdMove, MoveFormBase
+	previous := 0
+	s.Exec.viewActor = &previous
+	s.Exec.Order = []int{PartySlots}
+	result, ok := s.Step(&fixedRoll{})
+	x, y := s.Camera()
+	if !ok || result.Message != MovedRecord || !result.Redraw || x != 16 || y != 41 {
+		t.Fatalf("first wait: result=%+v camera=(%d,%d)", result, x, y)
+	}
+	s.RefreshView()
+	x, y = s.Camera()
+	if x != 22 || y != 41 || s.Actors[PartySlots].X != 22 {
+		t.Fatalf("redraw wait: camera=(%d,%d), actor=%+v", x, y, s.Actors[PartySlots])
+	}
+}
+
+// Silent invisible movement must not replace the field kept for the next message.
+func TestSilentMoveDoesNotReplacePreviousView(t *testing.T) {
+	s := seenState()
+	s.Actors[0].X, s.Actors[0].Y = 16, 41
+	a := &s.Actors[PartySlots]
+	a.X, a.Y, a.Facing = 30, 41, 0
+	a.Command, a.Style = CmdMove, MoveFormBase
+	entering := *a
+	entering.X = 23
+	s.Actors = append(s.Actors, entering)
+	// A nil cache still represents the previous Cursor's field.
+	s.Cursor = 0
+	s.Exec.Order = []int{PartySlots, PartySlots + 1}
+	result, ok := s.Step(&fixedRoll{})
+	x, y := s.Camera()
+	if !ok || result.Message != 0 || result.Redraw || x != 16 || y != 41 {
+		t.Fatalf("silent step replaced field: result=%+v camera=(%d,%d)", result, x, y)
+	}
+	result, ok = s.Step(&fixedRoll{})
+	x, y = s.Camera()
+	if !ok || result.Message != MovedRecord || !result.Redraw || x != 16 || y != 41 {
+		t.Fatalf("entering message lost field: result=%+v camera=(%d,%d)", result, x, y)
+	}
+	s.RefreshView()
+	x, y = s.Camera()
+	if x != 22 || y != 41 {
+		t.Fatalf("confirmed field=(%d,%d)", x, y)
+	}
+}

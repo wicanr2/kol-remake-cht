@@ -1,0 +1,1213 @@
+{
+  "script": "/work/workplace/platform-smoke-20261001/purchase-script.txt",
+  "tokens": [
+    "SPACE",
+    "SPACE",
+    "5",
+    "D",
+    "RET",
+    "ESC",
+    "D",
+    "RET",
+    "ESC",
+    "D",
+    "D",
+    "D",
+    "RET",
+    "SPACE",
+    "ESC",
+    "6",
+    "RET",
+    "RET",
+    ">",
+    ">",
+    ">",
+    ">",
+    ">",
+    "RET",
+    "RET",
+    "RET",
+    ">",
+    ">",
+    ">",
+    ">",
+    ">",
+    "RET",
+    "RET",
+    "RET",
+    ">",
+    ">",
+    ">",
+    ">",
+    ">",
+    "RET",
+    "RET",
+    "RET",
+    ">",
+    ">",
+    ">",
+    ">",
+    ">",
+    "RET",
+    "RET",
+    "RET",
+    ">",
+    ">",
+    ">",
+    ">",
+    ">",
+    "RET",
+    "RET",
+    "RET",
+    "RET",
+    "SPACE",
+    "R",
+    "R",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "D",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "L",
+    "D",
+    "D",
+    "D",
+    "D",
+    ">",
+    "RET",
+    "D",
+    "L",
+    "L",
+    "D",
+    "D",
+    "D",
+    "L",
+    "D",
+    "D",
+    "D",
+    "L",
+    "RET",
+    "SPACE",
+    "1",
+    ">",
+    ">",
+    ">",
+    ">",
+    "RET",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "RET",
+    "RET",
+    ">",
+    "RET",
+    ">",
+    "RET",
+    ">",
+    "RET",
+    ">",
+    "RET",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D",
+    "RET",
+    "RET",
+    ">",
+    "RET",
+    "RET",
+    "RET",
+    "SPACE",
+    "R",
+    "U",
+    "U",
+    "U",
+    "R",
+    "U",
+    "U",
+    "U",
+    "R",
+    "R",
+    "U",
+    ">",
+    "RET",
+    "U",
+    "U",
+    "U",
+    "U",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "U",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "R",
+    "U",
+    "U",
+    "U",
+    "U",
+    "U",
+    "U",
+    "L",
+    "L",
+    "RET",
+    "SPACE",
+    "1",
+    ">",
+    ">",
+    ">",
+    ">",
+    "RET",
+    ">",
+    "RET",
+    "RET"
+  ],
+  "records": [
+    {
+      "step": 1,
+      "token": "SPACE",
+      "input_log": "input scene=title cursor=0 游標=(480,334) 可點=0 token=[SPACE]"
+    },
+    {
+      "step": 2,
+      "token": "SPACE",
+      "input_log": "input scene=cover cursor=0 游標=(480,334) 可點=0 token=[SPACE]",
+      "png_sha256": "a188de78fb658c87f1c5bf0d6248705f52ad05d738eabc9afb32e81fbf33d16c"
+    },
+    {
+      "step": 3,
+      "token": "5",
+      "input_log": "input scene=contents cursor=0 游標=(480,334) 可點=0 token=[5]"
+    },
+    {
+      "step": 4,
+      "token": "D",
+      "input_log": "input scene=menu cursor=0 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 5,
+      "token": "RET",
+      "input_log": "input scene=menu cursor=1 游標=(480,334) 可點=6 token=[RET]"
+    },
+    {
+      "step": 6,
+      "token": "ESC",
+      "input_log": "input scene=newchar cursor=1 游標=(480,334) 可點=0 token=[ESC]"
+    },
+    {
+      "step": 7,
+      "token": "D",
+      "input_log": "input scene=menu cursor=1 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 8,
+      "token": "RET",
+      "input_log": "input scene=menu cursor=2 游標=(480,334) 可點=6 token=[RET]"
+    },
+    {
+      "step": 9,
+      "token": "ESC",
+      "input_log": "input scene=delete cursor=2 游標=(480,334) 可點=0 token=[ESC]"
+    },
+    {
+      "step": 10,
+      "token": "D",
+      "input_log": "input scene=menu cursor=2 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 11,
+      "token": "D",
+      "input_log": "input scene=menu cursor=3 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 12,
+      "token": "D",
+      "input_log": "input scene=menu cursor=4 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 13,
+      "token": "RET",
+      "input_log": "input scene=menu cursor=5 游標=(480,334) 可點=6 token=[RET]"
+    },
+    {
+      "step": 14,
+      "token": "SPACE",
+      "input_log": "input scene=harbor cursor=5 游標=(480,334) 可點=0 token=[SPACE]"
+    },
+    {
+      "step": 15,
+      "token": "ESC",
+      "input_log": "input scene=menu cursor=5 游標=(480,334) 可點=6 token=[ESC]"
+    },
+    {
+      "step": 16,
+      "token": "6",
+      "input_log": "input scene=contents cursor=5 游標=(480,334) 可點=0 token=[6]"
+    },
+    {
+      "step": 17,
+      "token": "RET",
+      "input_log": "input scene=select cursor=5 游標=(480,334) 可點=0 token=[RET]"
+    },
+    {
+      "step": 18,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=1 token=[RET]"
+    },
+    {
+      "step": 19,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[>]"
+    },
+    {
+      "step": 20,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[>]"
+    },
+    {
+      "step": 21,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[>]"
+    },
+    {
+      "step": 22,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[>]"
+    },
+    {
+      "step": 23,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[>]"
+    },
+    {
+      "step": 24,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[RET]"
+    },
+    {
+      "step": 25,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 26,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[RET]"
+    },
+    {
+      "step": 27,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=8 token=[>]"
+    },
+    {
+      "step": 28,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=8 token=[>]"
+    },
+    {
+      "step": 29,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=8 token=[>]"
+    },
+    {
+      "step": 30,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=8 token=[>]"
+    },
+    {
+      "step": 31,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=8 token=[>]"
+    },
+    {
+      "step": 32,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=8 token=[RET]"
+    },
+    {
+      "step": 33,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 34,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[RET]"
+    },
+    {
+      "step": 35,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=9 token=[>]"
+    },
+    {
+      "step": 36,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=9 token=[>]"
+    },
+    {
+      "step": 37,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=9 token=[>]"
+    },
+    {
+      "step": 38,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=9 token=[>]"
+    },
+    {
+      "step": 39,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=9 token=[>]"
+    },
+    {
+      "step": 40,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=9 token=[RET]"
+    },
+    {
+      "step": 41,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 42,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[RET]"
+    },
+    {
+      "step": 43,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[>]"
+    },
+    {
+      "step": 44,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[>]"
+    },
+    {
+      "step": 45,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[>]"
+    },
+    {
+      "step": 46,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[>]"
+    },
+    {
+      "step": 47,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[>]"
+    },
+    {
+      "step": 48,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[RET]"
+    },
+    {
+      "step": 49,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 50,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=10 token=[RET]"
+    },
+    {
+      "step": 51,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 52,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 53,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 54,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 55,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 56,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[RET]"
+    },
+    {
+      "step": 57,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 58,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=9 token=[RET]"
+    },
+    {
+      "step": 59,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[RET]"
+    },
+    {
+      "step": 60,
+      "token": "SPACE",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=1 token=[SPACE]"
+    },
+    {
+      "step": 61,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[R]"
+    },
+    {
+      "step": 62,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 63,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 64,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 65,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 66,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 67,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 68,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 69,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 70,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 71,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 72,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 73,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 74,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 75,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 76,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 77,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 78,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 79,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 80,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 81,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 82,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 83,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 84,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 85,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 86,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 87,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 88,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 89,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 90,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 91,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[>]"
+    },
+    {
+      "step": 92,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 93,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[D]"
+    },
+    {
+      "step": 94,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 95,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 96,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 97,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 98,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 99,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 100,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 101,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 102,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[D]"
+    },
+    {
+      "step": 103,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]",
+      "png_sha256": "2d79ac70824da5cb2c40f5404a766d7fd032242896381ed07073501b513d2810"
+    },
+    {
+      "step": 104,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]",
+      "png_sha256": "7179f0cc4810732e8c6e12240b1f262dc48365ada4a53afbe3c660eae9b467dd"
+    },
+    {
+      "step": 105,
+      "token": "SPACE",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=1 token=[SPACE]"
+    },
+    {
+      "step": 106,
+      "token": "1",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[1]"
+    },
+    {
+      "step": 107,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 108,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 109,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 110,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 111,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[RET]",
+      "png_sha256": "c2c016c7df45da91494c27d8a9cb3bec22c38988f00aac9eca6f5ea3837e7f70"
+    },
+    {
+      "step": 112,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 113,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 114,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 115,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 116,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]",
+      "png_sha256": "1bc6815a6c9a20bcd221a15626f922c6e11dd84a40e6a1d843f1851126ebe7a2"
+    },
+    {
+      "step": 117,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]",
+      "png_sha256": "aa486fb59dd1b0aa574f640920267c8c86ae2aa1153cf20285db8008551ccb74"
+    },
+    {
+      "step": 118,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 119,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[>]"
+    },
+    {
+      "step": 120,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]",
+      "png_sha256": "1bc6815a6c9a20bcd221a15626f922c6e11dd84a40e6a1d843f1851126ebe7a2"
+    },
+    {
+      "step": 121,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[>]"
+    },
+    {
+      "step": 122,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 123,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 124,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[RET]"
+    },
+    {
+      "step": 125,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=3 token=[>]"
+    },
+    {
+      "step": 126,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=3 token=[RET]",
+      "png_sha256": "4cd5c8a9be6f130ae8481e4359de179ecfc5029f30a2a7adff28bf2350c50035"
+    },
+    {
+      "step": 127,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 128,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 129,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 130,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 131,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 132,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 133,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 134,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 135,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 136,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]"
+    },
+    {
+      "step": 137,
+      "token": "D",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[D]",
+      "png_sha256": "14e8b59a432c8c83c4747a17132007c23e25ad2c0a17a4312e42bc47329701b7"
+    },
+    {
+      "step": 138,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]",
+      "png_sha256": "2f778383f53c54a672da68ee0d6a42291a7d7f391e7f82b4fb28c2d39550ba72"
+    },
+    {
+      "step": 139,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=4 token=[RET]"
+    },
+    {
+      "step": 140,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[>]"
+    },
+    {
+      "step": 141,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 142,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=3 token=[RET]"
+    },
+    {
+      "step": 143,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[RET]"
+    },
+    {
+      "step": 144,
+      "token": "SPACE",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=1 token=[SPACE]"
+    },
+    {
+      "step": 145,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[R]"
+    },
+    {
+      "step": 146,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 147,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 148,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 149,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 150,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 151,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 152,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 153,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 154,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 155,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 156,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[>]"
+    },
+    {
+      "step": 157,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 158,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[U]"
+    },
+    {
+      "step": 159,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 160,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 161,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 162,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 163,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 164,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 165,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 166,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 167,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 168,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 169,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 170,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 171,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 172,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 173,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 174,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 175,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 176,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 177,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 178,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 179,
+      "token": "R",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[R]"
+    },
+    {
+      "step": 180,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 181,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 182,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 183,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 184,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 185,
+      "token": "U",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[U]"
+    },
+    {
+      "step": 186,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 187,
+      "token": "L",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=6 token=[L]"
+    },
+    {
+      "step": 188,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 189,
+      "token": "SPACE",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=1 token=[SPACE]"
+    },
+    {
+      "step": 190,
+      "token": "1",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=7 token=[1]"
+    },
+    {
+      "step": 191,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 192,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 193,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 194,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[>]"
+    },
+    {
+      "step": 195,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=11 token=[RET]"
+    },
+    {
+      "step": 196,
+      "token": ">",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[>]"
+    },
+    {
+      "step": 197,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]"
+    },
+    {
+      "step": 198,
+      "token": "RET",
+      "input_log": "input scene=town cursor=5 游標=(480,334) 可點=2 token=[RET]",
+      "png_sha256": "fed6f3ad2b047a9198acffea1092816b62bc95700144e5351389f8852b82bf82"
+    }
+  ],
+  "window": 10485767,
+  "geometry": {
+    "x": 160,
+    "y": 66,
+    "width": 960,
+    "height": 600
+  }
+}

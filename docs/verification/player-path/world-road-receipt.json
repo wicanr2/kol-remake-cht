@@ -7,17 +7,17 @@
   "checkpoints": [
     {
       "step": 24,
-      "identical_to": "docs/verification/remake-parity/shots/world/road-stand.png",
+      "identical_to": "docs/verification/inventory-empty-slots-20261001/weather-road-stand.png",
       "note": "站上道路，與已對拍的截圖逐 byte 相同"
     },
     {
       "step": 31,
-      "identical_to": "docs/verification/remake-parity/shots/world/road-follow7.png",
+      "identical_to": "docs/verification/inventory-empty-slots-20261001/weather-road-follow7.png",
       "note": "循路七步之後，與已對拍的截圖逐 byte 相同"
     },
     {
       "step": 33,
-      "identical_to": "docs/verification/remake-parity/shots/world/road-signpost.png",
+      "identical_to": "docs/verification/inventory-empty-slots-20261001/weather-road-signpost.png",
       "note": "按下 SIGNPOST 之後，與已對拍的截圖逐 byte 相同"
     }
   ],
@@ -100,133 +100,133 @@
       "step": 12,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-012.png",
-      "sha256": "1da27da81685266d4716860b77bca6d1eac305e38d94a56b789050c540385102"
+      "sha256": "4ed3ea25007a96f33cfacb2ed6b4a947bc978a1fcbef338aead8797ae2e7e565"
     },
     {
       "step": 13,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-013.png",
-      "sha256": "2dde462db57d6757bf2c47b41355e749c93ecf504fedbaaf9604fab478bcc42b"
+      "sha256": "81d140fa10c07caa9313166da0190976e00f84f28097d364d858525d965dcdf9"
     },
     {
       "step": 14,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-014.png",
-      "sha256": "3e79c766ef933d2ec2c13bffa619b5c9b5f4ed244332aa60e020ea4d31d38a28"
+      "sha256": "0c3dec56cfc8fa7d170bdd091899f0c91a9d39184851010a13b9041330571a4b"
     },
     {
       "step": 15,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-015.png",
-      "sha256": "d143f328d2cfecbd9f6ac443e31407250d811bee75a7b70cf261c93307f4dbab"
+      "sha256": "915799b13c32d489eb22a5469d25fecc9a54484e6594832e33cf2194d92cb42c"
     },
     {
       "step": 16,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-016.png",
-      "sha256": "7746d992f6264e091c036c4e8e4ca97114a9936a93d53f9f207f3750dbed39ed"
+      "sha256": "537da33f82cd2ee4a9a348b7d21a9d3743aa55a423c9e6d9faccbacf85dd75b9"
     },
     {
       "step": 17,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-017.png",
-      "sha256": "02a3227e935a0811caeaeb10eada923066a6b32fa14b87363b2bf836756fcf6c"
+      "sha256": "b0fe07cad38b6d7430df2005eb4b6c0fc53f92b1d3245acb18af3f735c9c7b6c"
     },
     {
       "step": 18,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-018.png",
-      "sha256": "f26656056b2a2f405cac4bdf226d0fcc5063a901f536c0a43b0e0b7342750775"
+      "sha256": "dc89f7d6407de47cc96bdfe8dcf5479f8fa3519036f5e22eb86a8b61d3da1fc3"
     },
     {
       "step": 19,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-019.png",
-      "sha256": "c3da7aa9bedb0b1f326c87afd893e41742e7b286f2eceea39d654d1cc4581e5d"
+      "sha256": "1ba2c749d51708c3629e6bc5c0f2d26f3c3368b3f2c3512672a7f6cd86094010"
     },
     {
       "step": 20,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-020.png",
-      "sha256": "3133a23580d3c16f6436e038bee755fa11b4c24c24bd9f58339a5acbac9d7059"
+      "sha256": "162be202fbb861a570c9383becc1dffe99c57dd72dad6705fb5476fee900335b"
     },
     {
       "step": 21,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-021.png",
-      "sha256": "023ec96d5a685665cfc7fb950aadb031221ce629f54f15d4bb375a969427f556"
+      "sha256": "7fc135074ca72f18fe2dbf032a735d6663f95372503b1bc303d6de31bfeda4e6"
     },
     {
       "step": 22,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-022.png",
-      "sha256": "38210d574849d5256dfc0f6cdb6b2098006e210a492ccf39d85f501e921fab95"
+      "sha256": "5bea442063fe8f51b13a4e680860d1bf2df412a185da3135b0908b2e8149da68"
     },
     {
       "step": 23,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-023.png",
-      "sha256": "b023c8c80710f3d156d1897a6084f55d7dfd9ebcc8907ef3671fe38e87487373"
+      "sha256": "3db1c21f760837face749ff60a77685b687da630a9cee20c2b7bb17584fe64e1"
     },
     {
       "step": 24,
       "token": "U",
       "file": "docs/verification/player-path/world-road/step-024.png",
-      "sha256": "7ca91372a498301b3ab73abc72b6f2c918d92bea7243f68c822f607fa1cc7b36"
+      "sha256": "23bbda2c0be0642e73b380368be346bdfa6cdbfebc0ef245715dd10f0a91c362"
     },
     {
       "step": 25,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-025.png",
-      "sha256": "61ab13a2b39481407281cfc334b2ed124bcb3bbf55b4b5df1763ee9fd4e41983"
+      "sha256": "35b325d2eb42622ddb245a29ef0770d497fd24fd49bac7bfebe3f6b6512d1dbf"
     },
     {
       "step": 26,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-026.png",
-      "sha256": "56a67560eb7b7fec235c130103e3fff5f45a50ed722aed19037be94b933a3c95"
+      "sha256": "ca3ad3c52c50a808fa7f3baf700acc7e54703ed6fd1f3a3f177199724ffc332e"
     },
     {
       "step": 27,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-027.png",
-      "sha256": "48f90619bca627f03e79685e1ed4eff5e100fe4a376b1d38f7edf99e29517817"
+      "sha256": "6e5fe96917bcc63071eac09f75fcde892c076b66c952d31dbb6d4b205c02f53e"
     },
     {
       "step": 28,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-028.png",
-      "sha256": "0df25dd411c8dc5a5d7d2c12bfd5b79ec5646f2ac8f9c929ad63028c790cb4c7"
+      "sha256": "d766730910180ba4a05410f9734d1829bec0ea1abe063d00c30559e23f178832"
     },
     {
       "step": 29,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-029.png",
-      "sha256": "bff467787ce54d8ff9516afcda834489a1d545c4f94b6fad9b06533a6c94caae"
+      "sha256": "4b4216616c6e1b15afd2273ae2eb0ad08ee3477fa7aad9953e914e366479f7fb"
     },
     {
       "step": 30,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-030.png",
-      "sha256": "694e8c911f90538ce6bc9e15f21d17d28fd9c129d910c92df743535d96eab932"
+      "sha256": "1d0b4d21b5a07e4ae8ddecaabe56d4eeb1a1e35617c898c298e89ca23cc514fa"
     },
     {
       "step": 31,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-031.png",
-      "sha256": "a16a509ae9816bb60d8301bd591e121edc4b5fd08937770be1ade3f355f76d82"
+      "sha256": "03755cd36f714580fbea4f22375a5a71391059644da125a1f1afab174d169b98"
     },
     {
       "step": 32,
       "token": ">",
       "file": "docs/verification/player-path/world-road/step-032.png",
-      "sha256": "3840b8d2fa6703dccbf4216b4b49fd575ce9fb8cb406cddb72370050efa1388b"
+      "sha256": "b7630d7c13377ca7d21386f2c41f1da86558c7d2cd9b5b843b5adf99fbada555"
     },
     {
       "step": 33,
       "token": "RET",
       "file": "docs/verification/player-path/world-road/step-033.png",
-      "sha256": "b017aac1941c23b84dce463378b9ee021d29164f1fde957c7b268d6af9916894"
+      "sha256": "da5ae9a17e15cc1320b2bbc1c4b659c715b2bb5dc1017a4edc23e539c7e2f20c"
     }
   ]
 }

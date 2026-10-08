@@ -1,0 +1,583 @@
+{
+  "schema": "kol-ui-i18n-v1",
+  "language": "zh-Hant",
+  "note": "remake 中文模式的 UI 字串。狀態沿用術語表的三級：核准／暫譯／待查；暫譯仍須由說明書其他段落或原版畫面交叉確認。專名沿用說明書作法保留拉丁拼寫。",
+  "glossary": "docs/manual/glossary.md",
+  "labels": [
+    {
+      "en": "NAME",
+      "zh": "名字",
+      "status": "核准",
+      "note": "New Character 頁欄位"
+    },
+    {
+      "en": "RACE",
+      "zh": "種族",
+      "status": "核准"
+    },
+    {
+      "en": "SEX",
+      "zh": "性別",
+      "status": "核准"
+    },
+    {
+      "en": "CLASS",
+      "zh": "職業",
+      "status": "核准"
+    },
+    {
+      "en": "STRENGTH",
+      "zh": "力量",
+      "status": "核准",
+      "note": "SPEC-005 已知屬性契約"
+    },
+    {
+      "en": "QUICKNESS",
+      "zh": "敏捷",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "SIZE",
+      "zh": "體型",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "HEALTH",
+      "zh": "健康",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "FORESIGHT",
+      "zh": "先見",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "CHARISMA",
+      "zh": "魅力",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "INTELLECT",
+      "zh": "智力",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "BALANCE",
+      "zh": "平衡",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "ENDURANCE",
+      "zh": "耐力",
+      "status": "核准",
+      "note": "同上"
+    },
+    {
+      "en": "BODY PTS.",
+      "zh": "身體點數",
+      "status": "核准",
+      "note": "同上"
+    }
+  ],
+  "races": [
+    {
+      "en": "HUMAN",
+      "zh": "人類",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "ELVEN",
+      "zh": "精靈族",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "DWARVEN",
+      "zh": "矮人族",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "KELDEN",
+      "zh": "凱爾登",
+      "status": "暫譯",
+      "note": "docs/manual/glossary.md"
+    }
+  ],
+  "secondary": [
+    {
+      "en": "MALE",
+      "zh": "男性",
+      "status": "核准"
+    },
+    {
+      "en": "FEMALE",
+      "zh": "女性",
+      "status": "核准"
+    }
+  ],
+  "professions": [
+    {
+      "en": "BARBARIAN",
+      "zh": "野蠻人",
+      "status": "暫譯",
+      "note": "手冊譯法（Krag 野蠻人）"
+    },
+    {
+      "en": "RANGER",
+      "zh": "遊俠",
+      "status": "暫譯"
+    },
+    {
+      "en": "WARRION",
+      "zh": "戰士",
+      "status": "暫譯",
+      "note": "原版字串就是 WARRION，不是 WARRIOR；已逐字模確認"
+    },
+    {
+      "en": "SQUIRE",
+      "zh": "侍從",
+      "status": "暫譯",
+      "note": "手冊索引 Squires（侍從）"
+    },
+    {
+      "en": "DARKGUARD",
+      "zh": "暗衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "WATCHMAN",
+      "zh": "守夜人",
+      "status": "暫譯"
+    },
+    {
+      "en": "PLAINSMAN",
+      "zh": "平原人",
+      "status": "暫譯"
+    },
+    {
+      "en": "HUNTER",
+      "zh": "獵人",
+      "status": "暫譯"
+    },
+    {
+      "en": "REGULAR",
+      "zh": "正規兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "HIGHWAYMAN",
+      "zh": "攔路盜",
+      "status": "暫譯"
+    },
+    {
+      "en": "PIRATE",
+      "zh": "海盜",
+      "status": "暫譯",
+      "note": "手冊索引 Pirates（海盜）"
+    },
+    {
+      "en": "ROGUE",
+      "zh": "盜賊",
+      "status": "暫譯"
+    },
+    {
+      "en": "TIGRESS",
+      "zh": "虎女",
+      "status": "暫譯"
+    },
+    {
+      "en": "AMAZON",
+      "zh": "亞馬遜",
+      "status": "暫譯",
+      "note": "手冊保留 Amazons"
+    },
+    {
+      "en": "HUNTRESS",
+      "zh": "女獵人",
+      "status": "暫譯"
+    },
+    {
+      "en": "PLAINSWOMAN",
+      "zh": "平原女",
+      "status": "暫譯"
+    },
+    {
+      "en": "BREKLAND",
+      "zh": "布雷克蘭",
+      "status": "暫譯",
+      "note": "暫譯；依 docs/manual/glossary.md 的精靈部族譯名"
+    },
+    {
+      "en": "KLVAR",
+      "zh": "克爾瓦",
+      "status": "暫譯",
+      "note": "暫譯；依 docs/manual/glossary.md 的精靈部族譯名"
+    },
+    {
+      "en": "MELOD",
+      "zh": "梅洛德",
+      "status": "暫譯",
+      "note": "暫譯；依 docs/manual/glossary.md 的精靈部族譯名"
+    },
+    {
+      "en": "PYAR",
+      "zh": "皮亞爾",
+      "status": "暫譯",
+      "note": "暫譯；依 docs/manual/glossary.md 的精靈部族譯名"
+    },
+    {
+      "en": "THISM",
+      "zh": "席斯姆",
+      "status": "暫譯",
+      "note": "暫譯；依 docs/manual/glossary.md 的精靈部族譯名"
+    },
+    {
+      "en": "USIP",
+      "zh": "烏西普",
+      "status": "暫譯",
+      "note": "暫譯；依 docs/manual/glossary.md 的精靈部族譯名"
+    },
+    {
+      "en": "TUNNELER",
+      "zh": "掘道兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "RATGUARD",
+      "zh": "鼠衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "TROLLBANE",
+      "zh": "巨魔剋星",
+      "status": "暫譯",
+      "note": "術語表 Trollsbane Inn 巨魔剋星旅店"
+    },
+    {
+      "en": "MILITIA",
+      "zh": "民兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "DIGGER",
+      "zh": "挖掘兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "SPIDER GUARD",
+      "zh": "蛛衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "ORCBANE",
+      "zh": "半獸人剋星",
+      "status": "暫譯"
+    },
+    {
+      "en": "LEVY",
+      "zh": "徵召兵",
+      "status": "暫譯"
+    },
+    {
+      "en": "CLIFF GUARD",
+      "zh": "崖衛",
+      "status": "暫譯"
+    },
+    {
+      "en": "ROCK RANGER",
+      "zh": "岩地遊俠",
+      "status": "暫譯"
+    },
+    {
+      "en": "FAR SEEKER",
+      "zh": "遠望者",
+      "status": "暫譯"
+    }
+  ],
+  "ui": [
+    {
+      "en": "New character",
+      "zh": "新角色",
+      "status": "暫譯",
+      "note": "原版是 BOOKPICS[10] 圖，中文模式改畫文字"
+    },
+    {
+      "en": "Select one",
+      "zh": "請選擇",
+      "status": "暫譯",
+      "note": "原版是 BOOKPICS[11] 圖，中文模式改畫文字"
+    },
+    {
+      "en": "REROLL STATS",
+      "zh": "重新擲骰",
+      "status": "核准",
+      "note": "術語表 reroll 重新擲骰"
+    },
+    {
+      "en": "ACCEPT STATS",
+      "zh": "接受屬性",
+      "status": "暫譯"
+    },
+    {
+      "en": "USE ARROW KEYS",
+      "zh": "用方向鍵",
+      "status": "暫譯"
+    },
+    {
+      "en": "TO SELECT A",
+      "zh": "選擇角色",
+      "status": "暫譯"
+    },
+    {
+      "en": "CHARACTER",
+      "zh": "圖像",
+      "status": "暫譯",
+      "note": "術語表 figure 角色圖像"
+    },
+    {
+      "en": "PRESS RETURN",
+      "zh": "按 RETURN",
+      "status": "核准",
+      "note": "術語表 RETURN 鍵保留原鍵名"
+    },
+    {
+      "en": "TO ACCEPT",
+      "zh": "確認",
+      "status": "暫譯"
+    },
+    {
+      "en": "CANCEL",
+      "zh": "取消",
+      "status": "核准"
+    },
+    {
+      "en": "ACCEPT",
+      "zh": "確認",
+      "status": "暫譯"
+    },
+    {
+      "en": "Character options",
+      "zh": "角色選項",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "LIST CHARACTERS",
+      "zh": "角色清單",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "CREATE CHARACTER",
+      "zh": "建立角色",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "DELETE CHARACTER",
+      "zh": "刪除角色",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "EDIT PICTURE",
+      "zh": "編輯圖像",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "EDIT SHIELD",
+      "zh": "編輯盾牌",
+      "status": "核准",
+      "note": "docs/manual/glossary.md"
+    },
+    {
+      "en": "HARBOR MASTER",
+      "zh": "港務長",
+      "status": "暫譯",
+      "note": "術語表尚無此詞"
+    },
+    {
+      "en": "Character names",
+      "zh": "角色名字",
+      "status": "暫譯",
+      "note": "原版是 BOOKPICS[12] 圖，中文模式改畫文字"
+    },
+    {
+      "en": "Location",
+      "zh": "所在地",
+      "status": "暫譯",
+      "note": "原版是 BOOKPICS[9] 圖，中文模式改畫文字"
+    },
+    {
+      "en": "ARE YOU SURE?",
+      "zh": "確定要刪除嗎？",
+      "status": "暫譯",
+      "note": "刪除角色確認視窗第一行"
+    },
+    {
+      "en": "SAVE CHANGES",
+      "zh": "要儲存變更嗎？",
+      "status": "暫譯",
+      "note": "點陣圖編輯器離開時的存檔問句第一行（BOOKDATA 0x3A，SPEC-036）"
+    },
+    {
+      "en": "YES/NO",
+      "zh": "是／否",
+      "status": "暫譯",
+      "note": "刪除角色確認視窗第二行；原版按 Y 或 N 回答"
+    },
+    {
+      "en": "PRESS ANY KEY.",
+      "zh": "按任意鍵繼續。",
+      "status": "暫譯"
+    },
+    {
+      "en": "ONLY ONE REGION IS INSTALLED.",
+      "zh": "本機只安裝了一個區域。",
+      "status": "暫譯",
+      "note": "HARBOR MASTER 訊息；原版英文分兩行，中文模式頁寬放得下整句"
+    },
+    {
+      "en": "Halfway House",
+      "zh": "半途之家",
+      "status": "暫譯",
+      "note": "旅店名；沿用術語表的旅店譯法"
+    },
+    {
+      "en": "DOOR",
+      "zh": "門",
+      "status": "核准",
+      "note": "城鎮圖示"
+    },
+    {
+      "en": "MIRROR",
+      "zh": "鏡子",
+      "status": "核准",
+      "note": "城鎮圖示；查看角色資料"
+    },
+    {
+      "en": "LISTEN",
+      "zh": "聆聽",
+      "status": "核准",
+      "note": "城鎮圖示"
+    },
+    {
+      "en": "TALK",
+      "zh": "交談",
+      "status": "核准",
+      "note": "城鎮圖示"
+    },
+    {
+      "en": "USE ARROW KEYS TO BROWSE",
+      "zh": "用方向鍵瀏覽",
+      "status": "暫譯",
+      "note": "圖像層說明；中文模式合併原版的五行"
+    },
+    {
+      "en": "CHARACTER PICTURES",
+      "zh": "角色圖像",
+      "status": "暫譯",
+      "note": "同上"
+    },
+    {
+      "en": "PRESS RETURN TO ACCEPT",
+      "zh": "按 RETURN 確認",
+      "status": "暫譯",
+      "note": "同上"
+    },
+    {
+      "en": "ATK",
+      "zh": "攻擊",
+      "status": "暫譯",
+      "note": "戰鬥命令面板：攻擊式那一格（`command_panel.go` 的 ATK）"
+    },
+    {
+      "en": "LOC",
+      "zh": "部位",
+      "status": "暫譯",
+      "note": "戰鬥命令面板：命中部位"
+    },
+    {
+      "en": "DEF",
+      "zh": "防禦",
+      "status": "暫譯",
+      "note": "戰鬥命令面板：防禦式"
+    },
+    {
+      "en": "DIR",
+      "zh": "方向",
+      "status": "暫譯",
+      "note": "戰鬥命令面板：面向"
+    },
+    {
+      "en": "OPT",
+      "zh": "招式",
+      "status": "暫譯",
+      "note": "戰鬥命令面板：移動方式那一格的選項"
+    },
+    {
+      "en": "W:",
+      "zh": "武器：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄第 1 列"
+    },
+    {
+      "en": "H:",
+      "zh": "頭部：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄第 2 列"
+    },
+    {
+      "en": "T:",
+      "zh": "軀幹：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄第 3 列"
+    },
+    {
+      "en": "L:",
+      "zh": "腿部：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄第 4 列"
+    },
+    {
+      "en": "S:",
+      "zh": "盾牌：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄第 5 列"
+    },
+    {
+      "en": "B:",
+      "zh": "身體：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄第 6 列"
+    },
+    {
+      "en": "ARROWS:",
+      "zh": "箭：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄的彈藥列（弓）"
+    },
+    {
+      "en": "BOLTS:",
+      "zh": "弩矢：",
+      "status": "暫譯",
+      "note": "戰鬥裝備欄的彈藥列（弩）"
+    },
+    {
+      "en": "LBS",
+      "zh": "磅",
+      "status": "核准",
+      "note": "手冊中文譯文使用「磅」；角色資料頁僅替換顯示單位，重量數值和存檔不變"
+    }
+  ]
+}

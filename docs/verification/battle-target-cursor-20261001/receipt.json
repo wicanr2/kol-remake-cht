@@ -1,0 +1,634 @@
+{
+  "schema": "kol-original-target-cursor-receipt-v1",
+  "date": "2026-10-01",
+  "status": "原版來源與像素已證實；重製版尚未修正／對拍",
+  "original_tools": {
+    "dosgolem_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+    "image": "kol-package:20260907",
+    "image_id": "sha256:3d32441befe02810c3220a2e9f2db5b84ee65c703e5b65ee563712a3519ad193",
+    "ida_version": "9.4",
+    "ida_image": "ida-pro-9.4-idapython:locked-v1",
+    "ida_image_id": "sha256:6f6d59af49d0008c4109a5295b5f374bdc007e2d1ab28cb9de08779584de2780"
+  },
+  "summary": {
+    "target_boxes": 12,
+    "empty_boxes": 9,
+    "occupied_boxes": 3,
+    "submenu_boxes": 4,
+    "pixels_per_box": 256,
+    "different_pixels": 0,
+    "one_bit_negative_rejected": true,
+    "seed_before_travel": 1,
+    "rng_reroll": false,
+    "rng_seed_scan": false,
+    "direct_entry": false,
+    "coordinate_injection": false,
+    "wait_routine_stub": false
+  },
+  "rights": "已驗證原版畫面PNG僅依既有private GitHub例外；不授權公開；原始資料與反組譯payload僅本機",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "original_pixels": "original-pixel-checks.json",
+  "replay": [
+    {
+      "name": "gui4",
+      "seed": 1,
+      "keys": ".,Return,Right,Down,Left,Up,Return,.,Return",
+      "executable_sources": [
+        {
+          "path": "/src/workplace/oracle/game/KOL.EXE",
+          "sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71"
+        },
+        {
+          "path": "/src/workplace/oracle/game/KOLBOOK.EXE",
+          "sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832"
+        },
+        {
+          "path": "/src/workplace/oracle/game/KOLTOWN.EXE",
+          "sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221"
+        },
+        {
+          "path": "/src/workplace/oracle/game/MAKEMODE.EXE",
+          "sha256": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56"
+        },
+        {
+          "path": "/src/workplace/oracle/game/TANDYPIN.EXE",
+          "sha256": "036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3"
+        },
+        {
+          "path": "/src/workplace/oracle/game/TITLE.EXE",
+          "sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6"
+        }
+      ],
+      "source_manifest_private": "workplace/battle-cursor-20261001/gui4/inputs.json",
+      "source_manifest_sha256": "7a0cb5b865cec72e46e9326916d4e4a694b93402ed67ff32a5b40feceb93da9d",
+      "state_metadata_private_sha256": {
+        "plan-00.png.state.json": "78305fbaadf6a1358acf676df84782d92aef65363a585d321f9c58df25390b3e",
+        "plan-01.png.state.json": "79e7926069fde898fb3d660d0cbd58b29c2d2301085544d2a4e884cdce0acb04",
+        "plan-02.png.state.json": "4a945e0627307674f98b4d4cc376571a737dcf3aa57c3f1bbaf49c338ac517f9",
+        "plan-03.png.state.json": "0f46ec7a8417cddb2104e8fefa02d53e49df177189ad0d3490305f502639f824",
+        "plan-04.png.state.json": "d1a98866b155407d0d077ea1ee2b44cd921866007860176d820f5d7c5da7d60e",
+        "plan-05.png.state.json": "eded799955dd52f9e216c367890964f5a77fe428164f97c7e7333bba3c3606e0",
+        "plan-06.png.state.json": "c2ed4454f85daff4a1d32413c39e8ded7c4575f5d2ec8b20760da29ea453538a",
+        "plan-07.png.state.json": "37d7c00bf3bd4c1762dcd39f6700d73bdab2d2b92a014053483d9c994bd10aad",
+        "plan-08.png.state.json": "9900f9f2f17eadccb572d018f9d85bc7b92e275777d2daeb86134c615442303f",
+        "plan-entry.png.state.json": "3794db34e3106cf61b127943efd2515e04ac497881aed7b0a9e889d474862a4d"
+      },
+      "planning_private_sha256": "36d736d5c53a297150a1c3fe22c11c7dfe0b799c86692aa3ab84d61a7fe9f1d3",
+      "calls_private_sha256": "850f09882be7cd8dd610e5d01e7e321ca737925863a586995024aa7af0c73c67",
+      "command": [
+        "bash",
+        "/scratch/kol_cursor_gui.sh"
+      ],
+      "env": {
+        "KOL_CURSOR_ATTEMPT": "gui4",
+        "KOL_CURSOR_KEYS": ".,Return,Right,Down,Left,Up,Return,.,Return"
+      },
+      "output_must_not_exist": "gui4"
+    },
+    {
+      "name": "gui5",
+      "seed": 1,
+      "keys": ".,.,.,.,.,Return,Down,Return,.,Return,Return,.,.,.,.,Return,Return,Return,Space,Space,Space,Space,Space,Space,Space,.,Return,Right,Left,Down,Up,Return",
+      "executable_sources": [
+        {
+          "path": "/src/workplace/oracle/game/KOL.EXE",
+          "sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71"
+        },
+        {
+          "path": "/src/workplace/oracle/game/KOLBOOK.EXE",
+          "sha256": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832"
+        },
+        {
+          "path": "/src/workplace/oracle/game/KOLTOWN.EXE",
+          "sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221"
+        },
+        {
+          "path": "/src/workplace/oracle/game/MAKEMODE.EXE",
+          "sha256": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56"
+        },
+        {
+          "path": "/src/workplace/oracle/game/TANDYPIN.EXE",
+          "sha256": "036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3"
+        },
+        {
+          "path": "/src/workplace/oracle/game/TITLE.EXE",
+          "sha256": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6"
+        }
+      ],
+      "source_manifest_private": "workplace/battle-cursor-20261001/gui5/inputs.json",
+      "source_manifest_sha256": "fa0821b11934f90e5c63338bb60148899d336297a888d54c6ff24af0d2a9cecb",
+      "state_metadata_private_sha256": {
+        "plan-00.png.state.json": "78305fbaadf6a1358acf676df84782d92aef65363a585d321f9c58df25390b3e",
+        "plan-01.png.state.json": "8ab63a18e262f2affc49625991b2516e928ce013cc82f4f2d0cf8542dc5646d4",
+        "plan-02.png.state.json": "f13b9274a6851be22b4210957abca01ccadd37c55783b91466c141df49d0d7f1",
+        "plan-03.png.state.json": "7985983093f01a2831f663460b7f9ff3cfb7433db8452e66da74be43512b0814",
+        "plan-04.png.state.json": "e9d5e7965ef639b6e0f61f6ec57546a8e4cf5ba1639ab0f2afa9588d25d27d03",
+        "plan-05.png.state.json": "657ae0ef13201130bcec93a529dfffb5128d001213a4888950dcfe066a16eb5b",
+        "plan-06.png.state.json": "32a90f7dbceb3fed5942d3b28e4515c31d6925a56be4ef7c6ae04ac3747e5021",
+        "plan-07.png.state.json": "38005181f4633e8ded83a5441a9ff155ccfa931d0ae9d0fa9f02ddaf6e615642",
+        "plan-08.png.state.json": "e5088e67c836cfd89f807450b9d53ac933b678de40ae238b633a7b7dd9495219",
+        "plan-09.png.state.json": "82dd434eb7deb9ea2621d845e98084c011dba74a27252d2619f87d9050012949",
+        "plan-10.png.state.json": "d10c1c77f5bafe909444e7f2ee7b87c3c28efc15929a79ce468d24db7d4d907d",
+        "plan-11.png.state.json": "efcc1af92047dd95c15b3afa9b8af54503b6f4630c98ca94507c8e10ce41d51d",
+        "plan-12.png.state.json": "01712a0f552fd56238af59cb7e7834490281ab931aba5f940dad8c1f06547404",
+        "plan-13.png.state.json": "4cc49f3cfe5f1d4e7696a6f718a4aed351739386094f276c6ae068369274bb85",
+        "plan-14.png.state.json": "c191f2aff8039c0a219d47a24a22b14f33b745a90ccd383082d728f45231b5eb",
+        "plan-15.png.state.json": "4fa99b0005ba485f6c920eb508e4d9cd3defc5d87fe79019be2beb58fbad129e",
+        "plan-16.png.state.json": "20b66f5fb1311af4a9561b2a2887a279bd0def211d0c45654689ae24440c48b2",
+        "plan-17.png.state.json": "cabfec3bbb46d9bfab511349356412954a97ddb21cad166a3b78554af473343e",
+        "plan-18.png.state.json": "b9f947be6588b484717e3c03c3139c0b97d1575b6ec4098c80f5a97d017373ef",
+        "plan-19.png.state.json": "f873290e7f3635d71f930d90db6d5e25045289f9a57f77fe68dc5d33b69ff176",
+        "plan-20.png.state.json": "408e3c94b3d5092539d2cb52939d730be0dd51ca861540c386c99d2d0c794e75",
+        "plan-21.png.state.json": "95035aead5876d9793b7d9314a8dd153b5e2cd1f3eeb1858b71acfb130dc4da0",
+        "plan-22.png.state.json": "e0738ec2e94601ebbdab2789c289ffa1e92316e0a9dc546eece51eb3697ac040",
+        "plan-23.png.state.json": "44fcf5001f4da4f0e50f2cc3f6043934c0e9d0cc73b1e4de477ad5988a08fca6",
+        "plan-24.png.state.json": "c6e41f07d3e87118c35c6d5f032db8d844017d8d7885f8740fe24ac312783123",
+        "plan-25.png.state.json": "2aaab5527e067a1d884a03fac47601f013199f6211fd63ae2e99221ffb643948",
+        "plan-26.png.state.json": "d1d6e40e6460dd89633266478e0228ea110271440f53c3e55d4e43012ec616e8",
+        "plan-27.png.state.json": "41358132f564891e0ea65697f3da5b05e17ae6c50f27d5aecb93f27aed3d4d1e",
+        "plan-28.png.state.json": "ce9817a620e169c28baf90e1d79fb49d513411ac33519f1cbf41b1e4b4a9407e",
+        "plan-29.png.state.json": "448b61ce84bc45bc10f4e980d8388b495da3769a00bba43716df02b351038f6d",
+        "plan-30.png.state.json": "d6c81682a292e7a7721fe20ec794c115ac56bc942ed6fc158a291f2b1b741210",
+        "plan-31.png.state.json": "89f33ea7bfdb5ba31e907c40cd87d8f838b6eb0dc63e161af936be37593e40fe",
+        "plan-entry.png.state.json": "3794db34e3106cf61b127943efd2515e04ac497881aed7b0a9e889d474862a4d"
+      },
+      "planning_private_sha256": "86e3f24edc5aa8bab9747687bc3cfc517244971919ff0c8860b2ae8510ffe9ed",
+      "calls_private_sha256": "3079cb67252540ee7e5d1dc6d04626cff6f383dbeb413eca4b4413c65b0cd00e",
+      "command": [
+        "bash",
+        "/scratch/kol_cursor_gui.sh"
+      ],
+      "env": {
+        "KOL_CURSOR_ATTEMPT": "gui5",
+        "KOL_CURSOR_KEYS": ".,.,.,.,.,Return,Down,Return,.,Return,Return,.,.,.,.,Return,Return,Return,Space,Space,Space,Space,Space,Space,Space,.,Return,Right,Left,Down,Up,Return"
+      },
+      "output_must_not_exist": "gui5"
+    }
+  ],
+  "docker_contract": {
+    "network": "none",
+    "user": "1000:1000",
+    "cpus": 2,
+    "memory": "4g",
+    "pids_limit": 128,
+    "outer_timeout_seconds": 900,
+    "rm": true,
+    "mounts": {
+      "/src": "本專案唯讀",
+      "/repo": "dosgolem儲存庫唯讀",
+      "/scratch": "本收據目錄唯讀",
+      "/out": "已存在且使用者所有的可寫研究目錄"
+    }
+  },
+  "private_evidence_sha256": {
+    "workplace/battle-cursor-20261001/cursor-animation-private.json": "c12c2e9b335c194250b65982d9b32a862536ff8f932263c1329b370dda315dd1",
+    "workplace/battle-cursor-20261001/cursor-input-private.json": "9636b17ab2627862b229b46f3c324078953c2aa4d3fdfbf47742487bbbce2164",
+    "workplace/battle-cursor-20261001/cursor-renderer-private.json": "c46eab207977865775765fd5507b43b870c853d4dc91b8eb09647b42cc22ce12",
+    "workplace/battle-cursor-20261001/cursor-annotated-private.json": "cbf4348d51fff328a59622f3985d08cbce459bd1081cb4403a66a09375ddfddf"
+  },
+  "resolution_backlinks": [
+    {
+      "module": "DOS/KOLTOWN-unpacked.EXE",
+      "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+      "address_space": "IDA linear",
+      "address": "0x114a6",
+      "confidence": "已證實",
+      "index": "docs/re/target-cursor-address-index.json",
+      "evidence": "docs/re/20261001-target-cursor.md",
+      "older_spec": "docs/spec/010-combat-commands.md",
+      "required_correction": "RE-171"
+    },
+    {
+      "module": "DOS/KOLTOWN-unpacked.EXE",
+      "input_sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+      "address_space": "IDA linear",
+      "address": "0x114a6",
+      "confidence": "已證實",
+      "index": "docs/re/target-cursor-address-index.json",
+      "evidence": "docs/re/20261001-target-cursor.md",
+      "older_spec": "docs/re/RESEARCH-LOG.md",
+      "required_correction": "RE-060 游標組訂正（RE-171）"
+    }
+  ],
+  "limits": [
+    "未修改重製版正式程式；Go異動僅訂正註解",
+    "原版捕捉不是重製版同狀態驗收",
+    "取消／摘要／遠程／邊界與精確動畫秒數尚待驗",
+    "沒有全遊戲原版parity或正式封包",
+    "gui1/2/3觀察與失敗副本僅本機保留"
+  ],
+  "ida_export": {
+    "tool": "tools/ida_probe_target_cursor.py",
+    "tool_sha256": "4fdb9c06885da51670766f6d509471cfc93cad9d7e134030d1b0b1b2f7f8aa3c",
+    "merged_graded_index": "docs/re/target-cursor-address-index.json",
+    "index_sha256": "558835a9d33b0008fd896a34e4df482855824daad3253eb2ed06bf6dbde81da2",
+    "attached_confirmed_locations": 6,
+    "formal_database_unchanged": true
+  },
+  "frames": [
+    {
+      "file": "gui4/plan-00.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-00",
+      "capture_step": 1179000000,
+      "png_sha256": "db293c7d07dc5ad9607a02dc7d711276b239e57b0218fae2f3cda5ab36286eeb",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-01.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-01",
+      "capture_step": 1199000000,
+      "png_sha256": "63d87090d7c346455e0d128c7ac929b3e53a0ba8c98a4e6103b4119a16818fdb",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-02.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-02",
+      "capture_step": 1219000000,
+      "png_sha256": "ace03abcfb331adb3072b4e8d9268b046e5c5c53e78f96670cd115c457df620b",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-03.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-03",
+      "capture_step": 1239000000,
+      "png_sha256": "92438d3af3ca648bf1bdd24db8ba85ece557d045d1b7ab5582a43496a2391103",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-04.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-04",
+      "capture_step": 1259000000,
+      "png_sha256": "807bbe25c94801796d0a975b74bf003c6c29fb3188bcd876926a59ae51d37889",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-05.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-05",
+      "capture_step": 1279000000,
+      "png_sha256": "8804eed1abd0400c5b7c3f3155e63132e623209c7faac6de5f1d5b2ca1c4eafa",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-06.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-06",
+      "capture_step": 1299000000,
+      "png_sha256": "aab96a6828e105734e656f60b90226211e32decd249693bbdd690d549d83a1ab",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-07.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-07",
+      "capture_step": 1319000000,
+      "png_sha256": "6b777d7f2b0409f46cbf177d07f3d95481d94eb287be9e96c4f47f708635d533",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-08.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-08",
+      "capture_step": 1339000000,
+      "png_sha256": "ab20088aa3137be9cd3acd0f7f0177e13d251cf3e7fd81a037d2bfe3159325af",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui4/plan-entry.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-entry",
+      "capture_step": 1159000000,
+      "png_sha256": "91b7c74ac8233ddd914d53c1f7a7e662ae2cafcffe70c70a2253155c1cc8fe62",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui4",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-05.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-05",
+      "capture_step": 1279000000,
+      "png_sha256": "63d87090d7c346455e0d128c7ac929b3e53a0ba8c98a4e6103b4119a16818fdb",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-06.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-06",
+      "capture_step": 1299000000,
+      "png_sha256": "8f72b7d7a8bfbad54a2e7edbea14894488afa5d0aa3d92386b00c179e98ecabb",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-26.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-26",
+      "capture_step": 1699000000,
+      "png_sha256": "1a621dd7fa1eabe5296a9ff28edffa18fd9dd111dbb8587ea79ba6bdfed2ac68",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-27.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-27",
+      "capture_step": 1719000000,
+      "png_sha256": "51a4a9f0b2a09ea4fbf4bae61ccc2da3cc2da6a8b664cb497cc836bdf83081dc",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-28.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-28",
+      "capture_step": 1739000000,
+      "png_sha256": "cceceae75f931743ea2936d3bd66c030587b3a261bbe40de47b4d217063dacb6",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-29.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-29",
+      "capture_step": 1759000000,
+      "png_sha256": "18ccf85e3949119040231bfb78ffe4bcf8b34fc7851e56084f8952b2378c4ccf",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-30.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-30",
+      "capture_step": 1779000000,
+      "png_sha256": "6c19dfea5a79fffc0f8c5f569a8285e8ade7e52e3aea79d04076ce2aa7edf3b3",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    },
+    {
+      "file": "gui5/plan-31.png",
+      "width": 320,
+      "height": 200,
+      "frame_index": "plan-31",
+      "capture_step": 1799000000,
+      "png_sha256": "8cf252b4797966ba6f605fe33d7e7c5fd4afc12c7bec70ee724f925f4a18d683",
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "capture_tool": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "capture_command_run": "gui5",
+      "evidence_status": "原版正常玩家路徑；目標／子選單框已逐像素核實，入口兩圖只核來源與格式",
+      "rights_class": "private GitHub 可保存的已驗證原版畫面 PNG；不得公開散布"
+    }
+  ],
+  "attachments": [
+    {
+      "file": "final-audit.json",
+      "sha256": "ec248e9da697fc7bbc5a267523f84bb362816f874d1ed121834b6ec990b53768",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-00.png",
+      "sha256": "db293c7d07dc5ad9607a02dc7d711276b239e57b0218fae2f3cda5ab36286eeb",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-01.png",
+      "sha256": "63d87090d7c346455e0d128c7ac929b3e53a0ba8c98a4e6103b4119a16818fdb",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-02.png",
+      "sha256": "ace03abcfb331adb3072b4e8d9268b046e5c5c53e78f96670cd115c457df620b",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-03.png",
+      "sha256": "92438d3af3ca648bf1bdd24db8ba85ece557d045d1b7ab5582a43496a2391103",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-04.png",
+      "sha256": "807bbe25c94801796d0a975b74bf003c6c29fb3188bcd876926a59ae51d37889",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-05.png",
+      "sha256": "8804eed1abd0400c5b7c3f3155e63132e623209c7faac6de5f1d5b2ca1c4eafa",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-06.png",
+      "sha256": "aab96a6828e105734e656f60b90226211e32decd249693bbdd690d549d83a1ab",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-07.png",
+      "sha256": "6b777d7f2b0409f46cbf177d07f3d95481d94eb287be9e96c4f47f708635d533",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-08.png",
+      "sha256": "ab20088aa3137be9cd3acd0f7f0177e13d251cf3e7fd81a037d2bfe3159325af",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui4/plan-entry.png",
+      "sha256": "91b7c74ac8233ddd914d53c1f7a7e662ae2cafcffe70c70a2253155c1cc8fe62",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-05.png",
+      "sha256": "63d87090d7c346455e0d128c7ac929b3e53a0ba8c98a4e6103b4119a16818fdb",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-06.png",
+      "sha256": "8f72b7d7a8bfbad54a2e7edbea14894488afa5d0aa3d92386b00c179e98ecabb",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-26.png",
+      "sha256": "1a621dd7fa1eabe5296a9ff28edffa18fd9dd111dbb8587ea79ba6bdfed2ac68",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-27.png",
+      "sha256": "51a4a9f0b2a09ea4fbf4bae61ccc2da3cc2da6a8b664cb497cc836bdf83081dc",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-28.png",
+      "sha256": "cceceae75f931743ea2936d3bd66c030587b3a261bbe40de47b4d217063dacb6",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-29.png",
+      "sha256": "18ccf85e3949119040231bfb78ffe4bcf8b34fc7851e56084f8952b2378c4ccf",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-30.png",
+      "sha256": "6c19dfea5a79fffc0f8c5f569a8285e8ade7e52e3aea79d04076ce2aa7edf3b3",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "gui5/plan-31.png",
+      "sha256": "8cf252b4797966ba6f605fe33d7e7c5fd4afc12c7bec70ee724f925f4a18d683",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "kol_cursor_gui.sh",
+      "sha256": "b7a85b81a3dff083d9bcb8ec049e53cafaf18786692ecab92f16dab339a63129",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "kol_cursor_gui_finish.py",
+      "sha256": "f783d8ad515ffbe1c680fa2989cea6314c13b11d4f289f33aacff4af1d4e367f",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "kol_cursor_gui_prepare.py",
+      "sha256": "ef4253ba003c95a5368ef9536548a636e7297feea83db28bd7d05a2b615e8c22",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "kol_cursor_pixels.py",
+      "sha256": "9ebdc59dc61748785b76c9f67565b427d32b8d19cfb5240e8ef8c7a3775de7fe",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "original-pixel-checks.json",
+      "sha256": "010e2020c7c38eb4e7d3982ada14117fc4c0e8738ba0fba6a799be4ab488e566",
+      "uid": 1000,
+      "gid": 1000
+    },
+    {
+      "file": "verify_backlinks.py",
+      "sha256": "bdf71e5118ccef0c9b6367b62f6856654e51718223194b7461eec432cf13a4d3",
+      "uid": 1000,
+      "gid": 1000
+    }
+  ]
+}

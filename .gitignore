@@ -17,6 +17,9 @@ extracted/
 assets/original/
 assets/extracted/
 
+# 完成對拍後保留的壓縮證據，只留本機。入口見 docs/verification/retained-evidence.md。
+docs/verification/local/
+
 # 原版衍生的 typed data。2026-09-01 的 private-repo 例外**只涵蓋 PNG**，
 # 尚未涵蓋資料表，因此本目錄留在本機；由 tools/extract_character_data.py
 # 從固定原版輸入重生，抽取器本身有進版控。

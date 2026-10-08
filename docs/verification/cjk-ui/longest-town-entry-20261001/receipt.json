@@ -1,0 +1,242 @@
+{
+  "schema": "kol-cjk-longest-town-entry-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "正式 town-entry 全母體最寬之一，由標題、正常六人招募與城內方向鍵抵達；不宣稱其他欄位或原版完成",
+  "selection": {
+    "scope": "正式 town-entry 全母體最寬之一，由標題、正常六人招募與城內方向鍵抵達；不宣稱其他欄位或原版完成",
+    "population_count": 451,
+    "maximum_width": 240,
+    "selected": [
+      {
+        "kind": "town-entry",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+        "zh": "寂靜的石牆在你四周聳立，你走進",
+        "x": 315,
+        "width": 240,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      },
+      {
+        "kind": "town-entry",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+        "zh": "要塞，爬上崩塌的石階，沿著胸牆",
+        "x": 315,
+        "width": 240,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      },
+      {
+        "kind": "town-entry",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+        "zh": "走到轉角塔樓一扇敞開的門前。",
+        "x": 315,
+        "width": 224,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      },
+      {
+        "kind": "town-entry",
+        "en": "docs/i18n/town-zh-Hant.json 城7 門21",
+        "zh": "一個男人坐在裡面。",
+        "x": 315,
+        "width": 144,
+        "right_limit": 890,
+        "overflow": 0,
+        "missing_glyphs": [],
+        "pass": true,
+        "overflow_policy": "reject"
+      }
+    ],
+    "town": 7,
+    "door": 21,
+    "position": [
+      20,
+      36
+    ],
+    "door_step": 139,
+    "inside_step": 140,
+    "start": [
+      57,
+      8
+    ],
+    "walk_moves": 77,
+    "seed": 1,
+    "seed_method": "執行前 -seed 1",
+    "load": null,
+    "monsters": null,
+    "ambush_rolls": null,
+    "report_sha256": "c8b81562610e724e371f2df34b617dc4bf65de9fda23d5cc583a4de4ec874459",
+    "map_sha256": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f"
+  },
+  "selected_before_execution": true,
+  "identical_en_zh_states": 141,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "seed": {
+    "remake": 1,
+    "original": null,
+    "method": "執行前 -seed 1"
+  },
+  "geometry": {
+    "dialog": [
+      306,
+      252,
+      585,
+      204
+    ],
+    "text_start": [
+      315,
+      258
+    ],
+    "safe_width": 575,
+    "line_step": 24,
+    "font_height": 18
+  },
+  "geometry_evidence": "internal/town/layout.go CJKInn 及 internal/ui/town.go InnCJK；現行版面、規則與字模不改。",
+  "line_checks": [
+    {
+      "text": "寂靜的石牆在你四周聳立，你走進",
+      "width": 240,
+      "start": [
+        315,
+        258
+      ],
+      "bottom": 276
+    },
+    {
+      "text": "要塞，爬上崩塌的石階，沿著胸牆",
+      "width": 240,
+      "start": [
+        315,
+        282
+      ],
+      "bottom": 300
+    },
+    {
+      "text": "走到轉角塔樓一扇敞開的門前。",
+      "width": 224,
+      "start": [
+        315,
+        306
+      ],
+      "bottom": 324
+    },
+    {
+      "text": "一個男人坐在裡面。",
+      "width": 144,
+      "start": [
+        315,
+        330
+      ],
+      "bottom": 348
+    }
+  ],
+  "dialog_pixel_differences": 0,
+  "single_missing_ink_pixel_rejected": true,
+  "picture_checks": [
+    {
+      "step": 139,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-045.png",
+      "position": [
+        104,
+        58
+      ],
+      "scale": 1,
+      "size": [
+        192,
+        96
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 139,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-045.png",
+      "position": [
+        312,
+        174
+      ],
+      "scale": 3,
+      "size": [
+        192,
+        96
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 140,
+      "language": "en",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-044.png",
+      "position": [
+        8,
+        64
+      ],
+      "scale": 1,
+      "size": [
+        88,
+        64
+      ],
+      "pixel_differences": 0
+    },
+    {
+      "step": 140,
+      "language": "zh-Hant",
+      "source": "assets/original-derived-png/ega/TWN7PICS/twn7pics-044.png",
+      "position": [
+        24,
+        192
+      ],
+      "scale": 3,
+      "size": [
+        88,
+        64
+      ],
+      "pixel_differences": 0
+    }
+  ],
+  "visual_review": {
+    "status": "passed",
+    "method": "主代理檢視中文門口、中文四行進門敘述與英文進門完整畫格；文字完整、可讀、無裁切。"
+  },
+  "toolchain": "eob-remake-go:1.26.7-ebiten2.9.9-audio；sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+  "inputs_sha256": {
+    "assets/original-derived-png/ega/TWN7PICS/twn7pics-045.png": "4b9afb813cde7330e8dbdd72ab78bf5567c84cb42e0b43da0079f6a7186cccb0",
+    "assets/original-derived-png/ega/TWN7PICS/twn7pics-044.png": "a39b6a4202b939d3abac4fa0808de56da4782fc62f3dc25563d3a70d1b8acde6",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "docs/i18n/town-zh-Hant.json": "5554248cef962e0b91948407486890a6020f1c54ceee9edc4e795461545a8638",
+    "docs/verification/cjk-text-fit.json": "c8b81562610e724e371f2df34b617dc4bf65de9fda23d5cc583a4de4ec874459",
+    "internal/town/layout.go": "b11c4a2706b8a907f238c73c5ff26e892fa123f1578067a9ea0e4936bbcaf3a1",
+    "internal/ui/town.go": "f9fef8b0f7747193d438fd4bb9a14b0b22332f79cf3e4642a725454353c7e741",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/original-derived-png/ega/TOWN7/town7-map.png": "a7315d7628a440d36cf2c085f5a0bd15a14ab427285aed317dfb3b46e39b088f"
+  },
+  "rights": "重製執行畫面含原作衍生 PNG，沿用既有 private GitHub PNG 特例；沒有公開散布授權。",
+  "limitations": "只驗正式 town-entry 全母體最寬之一；其他訊息、標題、輸入、原版與平台封包未驗，#34／#40 不結案。",
+  "files": {
+    "selection.json": "75a7db88e15ea43f2d63bbea766e2171d5a915f4b2ef3b28dcb8954dd0d9b833",
+    "script.txt": "4b09de4c776a04010b77b0a1027b26be901cd37c7d1f02552216cde5e5298f8d",
+    "en-trace.json": "d13b07501e0b0a22c5c56d1058828a67c0061e593c7d5db7c3e3e36a9766a3af",
+    "en-run.json": "fdafffc5ada5cfccaf7ebd3a3cc064d01895cc4a2fe5542a30d95268c647264e",
+    "en-engine.log": "cbd8ba703fc1c55891aef5f3402e183808e2489981e43648c24d0b96880c33eb",
+    "en-step-139.png": "dc11d3e98d78e55a6d0bbfdb863c3b21355c91a9beb4cd436b83784e4a6b27cd",
+    "en-step-140.png": "98199bb2078b6e4e9cb4ce9dd664d0915c80d528e1c439330b066a91e88e1b6c",
+    "zh-Hant-trace.json": "d13b07501e0b0a22c5c56d1058828a67c0061e593c7d5db7c3e3e36a9766a3af",
+    "zh-Hant-run.json": "3d908863bb27f726a5f9b3b40a8cc280b870c0a62d5a0382d0b8e81e74df6224",
+    "zh-Hant-engine.log": "88b08cb0f9c081dfb699bffab30fd14ce8ad28b670413f685f75d979b897e7e7",
+    "zh-Hant-step-139.png": "1de08e829b7f7ebcc04ffffcf4408aa34cb09dd26053bfff60f3a4d1c44cd111",
+    "zh-Hant-step-140.png": "f33ae6c33a74f9e393ffc9f46fd5a82c73f019881eb3b0ac775a387454b4a391",
+    "kol_cjk_longest_town_entry.py": "5b3026fc86c04f0613f1dec60524cbbd410dc4d42428d8874f117a2126fb475d",
+    "kol_cjk_longest_town_verify.py": "65da731cadf9ce6b5db6aa1576d691af81c4ff15a225223b1342b8581430dfe7"
+  }
+}

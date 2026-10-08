@@ -107,7 +107,7 @@ func centre(sub, high, low, dir int) int {
 // FollowRoad 是 ROAD 與 SIGNPOST 兩個圖示：挑方向、走一步。
 // 那一步只准落在道路磚塊上，否則整個動作退回（`word_37D28`）。
 func (s *Session) FollowRoad(other bool) bool {
-	if s.Mode != ModeMap || !s.pickRoad(other) {
+	if s.Mode != ModeMap || s.Prompt != nil || s.pendingTimePart != nil || s.pendingArrivalIndex != nil || !s.pickRoad(other) {
 		return false
 	}
 	dx, dy := s.roadStep()

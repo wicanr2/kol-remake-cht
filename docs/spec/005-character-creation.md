@@ -1,7 +1,7 @@
 # SPEC-005：角色建立與角色儲存區
 
 狀態：**READY**  
-是否授權實作：**是**（僅限本規格涵蓋的角色建立流程；16 槽全滿分支仍只有靜態證據，實作必須明確標示為未驗證分支）
+是否授權實作：**是**（既有已審查流程；2026-10-01 新證實的滿槽／重名／字元差異須先完成下述決策與規格審查）
 
 2026-09-08 現況訂正：上句的「未驗證」限原版滿槽行為；重製版的 16 槽全滿、
 刪除及重用已由 [完整保存整合](../verification/complete-save-integration-20260908.md)
@@ -80,9 +80,26 @@ REGION metadata route，沒有其他職業衍生的起始技能／物品。KOLTO
 畫面上名冊往上補齊是「只列出已建立槽位」的結果，不是資料搬移——remake 的槽位身分
 因此不隨刪除改變。
 
-尚未由 UI 證實：16 槽全滿的訊息與退出、重名處理、名字欄接受的字元集合與大小寫保存、
-刪除確認視窗按 ESC 與空名冊進入刪除畫面。
-remake 必須把這三項標為未驗證分支，不得以推測實作後宣稱 parity。
+2026-10-01 訂正：原版的滿槽、完全相同名字與可列印 ASCII 已補齊：
+[滿槽收據](../verification/character-ui/roster-boundaries-20261001/full-receipt.json)、
+[重名收據](../verification/character-ui/roster-boundaries-20261001/duplicate-receipt.json)、
+[字元收據](../verification/character-ui/roster-boundaries-20261001/charset-receipt.json)。
+
+- 滿槽仍可進建角草稿，接受肖像才顯示 `NO MORE ROOM ON THIS DISK!`，不寫角色檔。
+- 完全相同的 Theodoric 在接受肖像直接取代既有第 0 槽，不另占空槽。
+- ASCII 32…126 中字母與空白 53 項接受、其餘 42 項拒絕；MiXeD Name 實際保存保留大小寫與空白。延伸 ASCII／Unicode 未測。
+
+remake 目前提早拒絕滿槽、拒絕重名、正式鍵盤接受數字並固定大寫，本規格整體
+仍 READY，不能升 CONFORMED。重名涉及既有角色重設，已提出「拒絕／確認後覆寫／
+照原版覆寫」，尚待回答；名字政策及滿槽時點亦須規格審查後實作驗證，保存身分
+仍依 SPEC-023。刪除確認按 ESC 與空名冊進刪除畫面仍未知。
+
+重生入口為 `tools/oracle/check_book_roster.sh`／`book_roster_test.go`；僅在 Docker
+內掛 `/src` 本專案唯讀、`/repo` dosgolem 唯讀、`/out-root` 本機輸出可寫，以
+`KOL_ROSTER_ATTEMPT` 指定尚不存在的輸出名。固定 dosgolem `968ca774…ac71f`、
+`kol-package:20260907`、目前 UID/GID 與有界逾時，需本機合法原版
+`workplace/oracle/game/`。同一容器以 `python3 tools/verify_book_roster.py` 核實收據。
+證據與限制見 [RE-169](../re/character-creation.md#2026-10-01-名冊邊界正常-ui-訂正re-169)。
 
 ## 保存契約與早期草案訂正
 

@@ -1,0 +1,24 @@
+{
+  "schema": "kol-world-entry-audit-v1",
+  "date": "2026-10-02",
+  "receipt_sha256": "fd7e66138da1afe394c33e9e876b6d8298739791274989211924c406a96bc84c",
+  "verifier_sha256": "351c30423e707668bb49f8cd80d680a8993cda879014bff0ee6ed16f20e8dc90",
+  "auditor_sha256": "242720d0399f3f13abf3f37fc88d3c17fd5b86124ca535c04b6c871d52eddb98",
+  "attachments": 6130,
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned": [],
+  "md_same_name_directories": [],
+  "production_sha256": "7bc7d34a76270fe355c268393ac68308cead4d9c7f59ed960c6681cc311495d4",
+  "production_mode": "0755",
+  "production_unchanged": true,
+  "worklist": {
+    "open": 22,
+    "done": 84
+  },
+  "git_diff_check_exit": 0,
+  "staged_files": [],
+  "related_containers": [],
+  "cleanup": "一次性容器--rm；GUI Xvfb由trap及wait清理；主機控制面收據確認專案容器0。",
+  "remaining": "世界時刻3360／3320、次格返回與其他战鬥分支仍開放。"
+}

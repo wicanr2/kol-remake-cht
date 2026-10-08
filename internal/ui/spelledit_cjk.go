@@ -13,7 +13,7 @@ import (
 // 繪字與分隔線；欄名取 KOLDATA 0x4D 的譯文，欄位值查顯示譯名（SPEC-033），
 // 法術名保留原文並在底下加音節注解（SPEC-034）。
 //
-// 英文頁沒有畫欄位選單與名稱輸入；中文頁把選單畫成黑底清單框蓋在卷軸中央，
+// 英文名稱輸入框已依RE-212還原；中文頁把選單畫成黑底清單框蓋在卷軸中央，
 // 名稱輸入則在名稱欄接一條橫槓游標。這兩者是 remake 的版面，不對拍。
 func drawSpellEditCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	p *town.SpellEditPage) error {

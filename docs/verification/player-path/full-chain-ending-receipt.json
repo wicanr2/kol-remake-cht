@@ -7,7 +7,7 @@
  "ambush_rolls": "100,100,100,100,100,100",
  "token_count": 420,
  "trace": "docs/verification/player-path/full-chain-ending/trace.json",
- "trace_sha256": "81904b06012356cb367ee7adb74a2ce95d60d04e587641ad8bc3efc588d730c7",
+ "trace_sha256": "2dba555bb3cf275a8f5262cb148c7fde6ae12906eb3f1282c4d7b53c827bd829",
  "milestones": [
   {
    "step": 0,
@@ -215,11 +215,11 @@
     "left_town": true,
     "mode": 0,
     "party": [
-     "Poontang gold=218 wounds=8 reported=23 quests=0,2,0,0,0,0 carried=10",
-     "Moraine gold=2153 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=13",
+     "Poontang gold=218 wounds=8 reported=23 quests=0,2,0,0,0,0 carried=9",
+     "Moraine gold=2153 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=12",
      "Fighting Bull gold=446 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=14",
-     "Kenneth gold=819 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=12",
-     "Sharakan gold=1947 wounds=0 reported=0 quests=1,2,0,0,0,0 carried=10",
+     "Kenneth gold=819 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=11",
+     "Sharakan gold=1947 wounds=0 reported=0 quests=1,2,0,0,0,0 carried=9",
      "Olear gold=1781 wounds=0 reported=0 quests=0,2,0,0,0,0 carried=11"
     ],
     "town": 7,
@@ -267,13 +267,13 @@
   {
    "step": 45,
    "file": "step-045.png",
-   "sha256": "9fa92a8ca7528a15c62c48063c957c45607c5e071953b5abb99c99214f7ff55a",
+   "sha256": "f5af806c9f62f0345ff89791d63d4142fdfebd4f1f9e9e5c4d0eae1b5cb62952",
    "shows": "出城的落點 (42,9)"
   },
   {
    "step": 90,
    "file": "step-090.png",
-   "sha256": "0336c7c77056de3a07d89684f91231cf3ac1f7676f6b58de4c54670f1fda094d",
+   "sha256": "fa73788686e47bad0535e5e1ddcc379ef1c38007313b6417d551463a1ed10292",
    "shows": "最終任務的敘述與 Will you partake?"
   },
   {

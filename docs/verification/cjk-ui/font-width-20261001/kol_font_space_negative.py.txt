@@ -1,0 +1,39 @@
+from pathlib import Path
+import json,subprocess,hashlib,os,csv
+root=Path('workplace/font-space-20261001');target=Path('docs/verification/cjk-ui/font-width-20261001')
+for p in [root,target,target/'receipt.json',Path('WORKLOG.md')]:assert (p.stat().st_uid,p.stat().st_gid)==(os.getuid(),os.getgid())
+source=subprocess.check_output(['git','show','HEAD:tools/verify_text_fit.py'])
+assert b'total += default // 2' in source
+baseline=root/'baseline-verify-text-fit.py'
+if baseline.exists():assert baseline.read_bytes()==source
+else:baseline.write_bytes(source)
+fixture=root/'space-boundary.tsv'
+if fixture.exists():
+    with fixture.open(newline='') as f:assert list(csv.DictReader(f,delimiter='\t'))[0]['zh-Hant']=='A                A'
+else:
+    with fixture.open('w',newline='') as f:
+        w=csv.writer(f,delimiter='\t');w.writerow(['key','en','zh-Hant','status','source']);w.writerow(['monster.test-space-boundary','A                A','A                A','fixture','人工空白字距界限夾具；不是正式玩家文字'])
+args=json.loads((root/'run.json').read_text())['command'];args[args.index('--display-names')+1]=str(fixture)
+runs={};outputs={}
+for mode,tool,expected in [('before',str(baseline),0),('after','tools/verify_text_fit.py',1)]:
+    command=args.copy();command[1]=tool;out=root/f'negative-{mode}.json';command[command.index('--out')+1]=str(out)
+    if out.exists():assert (out.stat().st_uid,out.stat().st_gid)==(os.getuid(),os.getgid())
+    p=subprocess.run(command,text=True,capture_output=True);assert p.returncode==expected,(mode,p.returncode,p.stdout,p.stderr)
+    doc=json.loads(out.read_text());outputs[mode]=doc
+    runs[mode]={'command':command,'returncode':p.returncode,'stdout':p.stdout,'stderr':p.stderr,'failed':doc['failed']}
+assert outputs['before']['failed']==0
+assert len(outputs['after']['failures'])==1 and outputs['after']['failures'][0]['kind']=='display-name-battle-equipment'
+failure=outputs['after']['failures'][0];actual=json.loads((root/'runtime-widths.json').read_text())
+assert failure['width']==actual['A A']+15*actual[' '] and failure['right_limit']==264
+negative={'method':'以真正舊版與修正版檢查器執行相同人工 TSV；正式翻譯與版面輸入不改。','fixture':'人工 A＋16 個半形空白＋A，不宣稱玩家可達；隔離字距界限。',
+    'baseline_git_head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+    'baseline_width':next(x['width'] for x in outputs['before']['checks'] if x['kind']=='display-name-battle-equipment'),
+    'runtime_width':failure['width'],'right_limit':failure['right_limit'],'runs':runs}
+(root/'negative-control.json').write_text(json.dumps(negative,ensure_ascii=False,indent=2)+'\n')
+report=json.loads((target/'receipt.json').read_text());report['negative_control']=negative
+for p in [baseline,fixture,root/'negative-before.json',root/'negative-after.json',root/'negative-control.json',Path('/control/kol_font_space_negative.py')]:
+    name=p.name+('.txt' if p.suffix=='.py' else '');out=target/name;assert not out.exists();out.write_bytes(p.read_bytes());report['files'][name]=hashlib.sha256(out.read_bytes()).hexdigest()
+(target/'receipt.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+with Path('WORKLOG.md').open('a') as f:
+    f.write(f'- 字距反面對照已升級為真正工具執行：從 HEAD 取原檢查器，不修改正式譯表，以人工 A＋16 個半形空白＋A 的同一 TSV 跑舊／新工具。舊版計 {negative["baseline_width"]}、退出 0；修正版計 {failure["width"]}，對戰鬥裝備欄 264 像素拒絕、退出 1，恰一項失敗。兩側完整命令／stdout／報表／baseline 來源與人工夾具已保存並納入字寬收據；不把人工界限夾具稱為正常玩家路徑。反例彙整首輪錯假設 A 字寬 10 而拒絕，查實正式字寬 11，現改直接依 Go runtime 量測結果組合核實，同命令乾淨重跑。\n')
+print(json.dumps({'baseline_width':negative['baseline_width'],'runtime_width':failure['width'],'right_limit':failure['right_limit'],'before_returncode':runs['before']['returncode'],'after_returncode':runs['after']['returncode']},ensure_ascii=False))

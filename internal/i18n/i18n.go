@@ -38,6 +38,7 @@ type Table struct {
 	entries    map[string]Entry
 	names      map[string]string
 	upperNames map[string]string
+	paragraphs map[string]string
 	spellWords *magic.WordTable
 	spellSub   func(class, sub int) string
 }

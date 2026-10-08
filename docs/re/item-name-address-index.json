@@ -1,0 +1,13 @@
+{
+  "schema": "kol-item-name-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x15420": {"semantic": "先增加名稱計數，後取字元並檢查NUL；計數包含結尾字元。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-173；0x1541D..0x15433 bytes／迴圈資料流及gui3正常巨劍明細。"},
+    "0x15439": {"semantic": "24減去含NUL的名稱計數，作為置中分子。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-173；0x15436 mov ax,18h與本列sub ax,[bp+var_2]。"},
+    "0x15440": {"semantic": "以有號IDIV除以2；負數亦按朝零截斷，不改成floor。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-173；0x1543C mov cx,2、0x1543F cwd、本列idiv cx。"},
+    "0x15448": {"semantic": "名稱字格欄=mode+1+(24-(length+1))/2；0x15442加模式，0x15445加1。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-173；0x15442..0x15448資料流，原版gui3巨劍名x120、舊重製x128。"}
+  }
+}

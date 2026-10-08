@@ -1,0 +1,68 @@
+{
+  "schema": "kol-weather-image-review-v1",
+  "rows": [
+    {
+      "step": 45,
+      "difference_pixels": 1540,
+      "outside_weather_differences": 0,
+      "old_candidates": [
+        {
+          "group": 1,
+          "phase": 0
+        }
+      ],
+      "new_candidates": [
+        {
+          "group": 0,
+          "phase": 1
+        }
+      ],
+      "images_sha256": [
+        "9fa92a8ca7528a15c62c48063c957c45607c5e071953b5abb99c99214f7ff55a",
+        "f5af806c9f62f0345ff89791d63d4142fdfebd4f1f9e9e5c4d0eae1b5cb62952"
+      ]
+    },
+    {
+      "step": 90,
+      "difference_pixels": 57,
+      "outside_weather_differences": 0,
+      "old_candidates": [
+        {
+          "group": 0,
+          "phase": 0
+        }
+      ],
+      "new_candidates": [
+        {
+          "group": 0,
+          "phase": 1
+        }
+      ],
+      "images_sha256": [
+        "0336c7c77056de3a07d89684f91231cf3ac1f7676f6b58de4c54670f1fda094d",
+        "fa73788686e47bad0535e5e1ddcc379ef1c38007313b6417d551463a1ed10292"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "assets/original-derived-png/ega/WEATPICS/weatpics-000-base_color.png": "9e366c5c6ae36f43d24650bac20212f1d3988c22b045bdd93b177d05a2912fbc",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-001-or_color.png": "8705585acc6425fb1cd0156b52e0d91256537505dd3008dbf2211c425ad3a06b",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-002-and_mask_1bit.png": "314e5d83b1b5feabcc283045440ddca80aa05d10f0fb8d5eda39dd55e4991cb1",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-003-base_color.png": "95b339001950b6361b7fbb61fbc5f4d04a65871f689898e820aff793dcf8add6",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-004-or_color.png": "7934420c2ecc8197adae9bd6b1c6ce5109f6e9c650895a6661c9f6b1f23a8882",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-005-and_mask_1bit.png": "575cd15b5d126bea36f3e4b3e6746474324d2e34b7daf0c84a7da50ebcd7765c",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-006-base_color.png": "50a5f1f5b6a215ed939b34e05a6ce8bb70349a98cda27926de189ac073be9cfe",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-007-or_color.png": "3ddd741dc8961208a0044fe74ccf9cd0c799d44be57bf608aff40b5b359aa81d",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-008-and_mask_1bit.png": "67db5ac04ae14b74b378680938721a0a0f6cf7f93b7cab32f6c2f5344776ff02",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-009-base_color.png": "583bec5e50e8bf36ee4605398a5ad296a5db2c32656279148c617bde717fce62",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-010-or_color.png": "2f9a661aaa4fc5c00e0bbbd805f76337ddc05b6dd06ffa27a8d0f8a8852eb71a",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-011-and_mask_4plane.png": "6c66f5a979243f98e0070f71277c246cbd975455b61b69f189ed82ecc3b1b242",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-012-base_color.png": "6cbdc988868771a88e7a1d1b8b73c8962ca2bb8a654e45700465bc14be4a6696",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-013-or_color.png": "65e210aea65bdcdf006ed9f7784a5e6d7630a3224061ad3f784c06f83b544d88",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-014-and_mask_4plane.png": "5cfcceb27a95a68838bf2028454365d0f878097c6ce9c2ccdb74f75ef2a43e5f",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-015-base_color.png": "b3d502b81df8a3f457b05f4b295692dc57fd312d3f51b75d26b4fb59179fe4a7",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-016-or_color.png": "e8389bbd5ea29ff9f0a6d13ae00308b0db743864c6fa3840b09515632368c86a",
+    "assets/original-derived-png/ega/WEATPICS/weatpics-017-and_mask_1bit.png": "9c9a9491c32cbb025ce31f8ed251acea9642c4503a3487cf3153364811e5af41"
+  },
+  "scope": "只核對已存兩張天候框；不是原版時序、天候序列或其他畫格的驗收"
+}

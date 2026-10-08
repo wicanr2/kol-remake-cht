@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-02T23:50:11.308558+00:00",
+  "receipt_sha256": "06168bfdfc0c451978bee12c272ea052ebc654779d0dc5ebe06e7817233d3cdd",
+  "attachments": 2317,
+  "independent_recalculation_passed": true,
+  "deep_parent_recalculation_sealed": true,
+  "source_code_inputs": 319,
+  "changed_source_code_inputs": [],
+  "owners": [
+    [
+      1000,
+      1000
+    ]
+  ],
+  "root_owned_and_markdown_directories": 0,
+  "control": {
+    "head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "initial_dirty_count": 404,
+    "final_dirty_count": 406,
+    "initial_dirty_paths_retained": true,
+    "staged_paths": [],
+    "git_diff_check_exit": 0,
+    "project_containers": [],
+    "other_container_count": 20,
+    "ownership_find_exit": 0,
+    "ownership_find_output": "",
+    "normal_goal_status": "active",
+    "committed": false,
+    "pushed": false,
+    "remote_issue_writes": false,
+    "release": false
+  },
+  "audit_container": "kol-effect-audit，--rm，有界timeout180"
+}

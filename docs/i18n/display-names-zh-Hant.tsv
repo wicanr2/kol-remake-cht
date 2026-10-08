@@ -1,4 +1,6 @@
 key	en	zh-Hant	status	source
+roster-item.2.backpack.4	Maul	大槌	暫譯	character-roster.json:slot2.backpack[4];CHARDATA+0xE0;RE-170
+roster-item.8.equipment.7	Black Choker	黑色頸鍊	暫譯	character-roster.json:slot8.equipment[7];CHARDATA+0x170;RE-170
 monster.00	MINOTAUR	牛頭怪	暫譯	monsters.json:0
 monster.01	SKELETON	骷髏	暫譯	monsters.json:1
 monster.02	CYCLOPS	獨眼巨人	暫譯	monsters.json:2
@@ -528,3 +530,16 @@ magic-stat.6	Body	身體	暫譯	magic.json:stat[6]；中文同說明書第 7 章
 magic-stat.7	Off. Skill	進攻技能	暫譯	magic.json:stat[7]；中文同說明書第 7 章屬性表
 magic-stat.8	Def. Skill	防禦技能	暫譯	magic.json:stat[8]；中文同說明書第 7 章屬性表
 magic-sub.all	All	全部	暫譯	magic.json:subclass[1..4] 的 All
+order-token.1.12	Pearl Amulet	珍珠護符	暫譯	town-buildings.json:town 1 door 12 order.token;RE-200
+order-token.3.11	Red Neclace	紅色項鍊	暫譯	town-buildings.json:town 3 door 11 order.token;RE-200
+order-token.4.6	Black Choker	黑色頸鍊	暫譯	town-buildings.json:town 4 door 6 order.token;RE-200
+order-token.5.11	Black Choker	黑色頸鍊	暫譯	town-buildings.json:town 5 door 11 order.token;RE-200
+order-token.6.7	Stone Amulet	石護符	暫譯	town-buildings.json:town 6 door 7 order.token;RE-200
+order-token.7.17	Blue Chain	藍鍊	暫譯	town-buildings.json:town 7 door 17 order.token;RE-200
+monster-variant-item.00	Breatsplate	胸甲	暫譯	monsters.json:17.equipment_variants[2].items[2];RE-203
+monster-variant-item.01	Grub Club	幼蟲棍棒	暫譯	monsters.json:31.equipment_variants[2].items[0];RE-203
+monster-variant-item.02	Grub Hammer	幼蟲錘	暫譯	monsters.json:31.equipment_variants[3].items[0];RE-203
+monster-variant-item.03	Iron Club	鐵棒	暫譯	monsters.json:5.equipment_variants[3].items[0];monsters.json:6.equipment_variants[3].items[0];monsters.json:8.equipment_variants[3].items[0];monsters.json:26.equipment_variants[2].items[0];RE-203
+monster-variant-item.04	Troll Maul	巨魔大槌	暫譯	monsters.json:9.equipment_variants[2].items[0];monsters.json:9.equipment_variants[3].items[0];RE-203
+monster-variant-item.05	Wind Axe	風之斧	暫譯	monsters.json:25.equipment_variants[3].items[0];RE-203
+monster-variant-item.06	Wind Sword	風之劍	暫譯	monsters.json:25.equipment_variants[2].items[0];RE-203

@@ -1,0 +1,16 @@
+{
+  "schema": "kol-item-figure-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x19057": {"semantic": "頭／身／腿立繪以0x100起每16-byte部位記錄首byte判空；為零跳過該層。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-175；sub_18F3A 0x19043..0x19063原始operand／bytes與資料流。"},
+    "0x1916e": {"semantic": "手持記錄0x30的首byte為零時，不把它當作手持武器；後續種類判斷另行保留。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-175；0x19167..0x1919F及gui-actions1空手／拿取唯讀記錄。"},
+    "0x191f0": {"semantic": "盾牌記錄0x160的首byte為零時跳過盾圖；是否雙手武器的前置分支另行保留。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-175；0x191E8..0x191FC原始取址、單byte讀取及跳轉。"},
+    "0x19596": {"semantic": "腰帶記錄0x190的首byte為零時跳過腰帶圖，不讀未用尾端作有效物品。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-175；0x1958E..0x195A2及gui-actions1搬移後腰帶清空／立繪。"},
+    "0x18d06": {"semantic": "sub_18CD5把目標當前byte寫入來源物品同位移；讀寫共享角色原始記錄。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-175；0x18CEC..0x18D06讀寫鏈及原版正常四次交換。"},
+    "0x18d13": {"semantic": "sub_18CD5把暫存的來源byte寫回目標；兩欄交換而非只改另一份外觀資料。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-175；0x18CF3..0x18D13及gui-actions1同期17欄記錄。"},
+    "0x18d1b": {"semantic": "交換迴圈比較0x10，每件物品恰交換16 bytes；立繪隨後讀同一角色記錄。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-175；0x18CDE..0x18D21與sub_18F3A原始讀址。"}
+  }
+}

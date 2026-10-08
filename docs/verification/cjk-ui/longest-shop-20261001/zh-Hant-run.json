@@ -1,0 +1,24 @@
+{
+  "command": [
+    "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "-scene",
+    "flow",
+    "-seed",
+    "1",
+    "-lang",
+    "zh-Hant",
+    "-save",
+    "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant/save.json",
+    "-flow-script",
+    "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R D D D D D D L L L L L L D L L L L L L L L L L L D D D D > RET D L L D D D L D D D L RET SPACE 1 > > > > RET D D D D D RET RET > RET > RET > RET > RET D D D D D D D D D D D D D D D D RET RET > RET RET RET SPACE R U U U R U U U R R U > RET U U U U R R R R R R R R R R R U R R R R R R U U U U U U L L RET SPACE 1 > > > > RET > RET RET",
+    "-shot-dir",
+    "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant",
+    "-shot-steps",
+    "103,104,106,111,116,117,118,120,122,124,126,142,143,149,193,195,200,202,203",
+    "-trace",
+    "workplace/cjk-longest-shop-20261001/attempt2/zh-Hant/trace.json"
+  ],
+  "returncode": 0,
+  "seconds": 15.61820952501148,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4"
+}

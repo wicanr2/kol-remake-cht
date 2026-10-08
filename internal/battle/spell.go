@@ -110,6 +110,10 @@ type CastResult struct {
 	Area int
 	// NeedsArea 為真表示骰已經擲完、效果還沒套，正等玩家挑一個部位。
 	NeedsArea bool
+	// Target 是實際命中的參戰者索引。Damage 只用於負面部位法術（RE-206），
+	// 保存 Take 的結果，讓訊息層不用從已改動的角色重新推算。
+	Target int
+	Damage *Outcome
 }
 
 // AreaPrompt 是問部位那一句要用的三筆記錄（`0x2845E`…`0x284F1`）：
@@ -169,13 +173,18 @@ func DirectionWord(negative bool) int {
 // `0x283B2`（持續）、`0x28420`（強度）、`0x2845E`（問），順序換了整串亂數就不同。
 const AreaAsk = -2
 
+// AreaRandom 表示通過阻擋並擲完持續、強度後，再擲部位（RE-207，0x28473）。
+const AreaRandom = -3
+
+type spellReaction struct{ caster, target int }
+
 // Cast 是施法那一手（`sub_2818D`）。target 是目標的參戰者索引、area 是效果 6 要打
 // 哪一個部位（0…5，其他效果傳 −1，`AreaAsk` 表示要問）。
 //
 // 擲骰的順序照原版：**先擲持續回合、再擲強度**（`0x283B2` 與 `0x28420`），
 // 兩者共用同一顆亂數，對調會讓整串結果不同。
 func (s *State) Cast(caster, target, area int, rng Rand) CastResult {
-	res := CastResult{Verdict: SpellNothingThere, Area: -1}
+	res := CastResult{Verdict: SpellNothingThere, Area: -1, Target: -1}
 	if caster < 0 || caster >= len(s.Actors) {
 		return res
 	}
@@ -193,15 +202,23 @@ func (s *State) Cast(caster, target, area int, rng Rand) CastResult {
 		return res
 	}
 	res.Verdict = SpellHits
+	res.Target = target
 	res.Turns = sp.Turns(rng)
+	// 原版 +0x0D 是啟用旗標，+0x30 才是倒數（RE-208，0x283EA）。
+	// 所有成功法術先停用舊效果；屬性分支稍後重新掛有效倒數。
+	s.Actors[target].SpellTurns = 0
 	res.Power = sp.Power(rng)
+	if sp.Effect == SpellEffectArea && area == AreaRandom {
+		area = rng.Roll(6) - 1
+	}
 	switch {
 	case sp.Effect == SpellEffectArea && area == AreaAsk:
 		// 停在問部位那一層：效果留到 `AnswerArea` 才套。
 		res.NeedsArea = true
 	case sp.Effect == SpellEffectArea:
 		res.Area = area
-		s.castArea(target, area, res.Power, a.Negative)
+		res.Damage = s.castArea(target, area, res.Power, a.Negative)
+		s.queueSpellReaction(caster, target, res.Damage)
 	case sp.Effect == SpellEffectFatigue:
 		s.castFatigue(target, res.Power, a.Negative)
 	case sp.Effect >= 1 && sp.Effect <= len(SpellEffectField):
@@ -227,14 +244,29 @@ func (s *State) castFatigue(target, power int, negative bool) {
 }
 
 // castArea 是效果 6：治療或傷害指定的部位（`0x2859E`…`0x2869A`）。
-func (s *State) castArea(target, area, power int, negative bool) {
+func (s *State) castArea(target, area, power int, negative bool) *Outcome {
 	if area < 0 || area > 5 {
-		return
+		return nil
 	}
 	t := &s.Actors[target]
 	if negative {
-		t.Take(power, area)
-		return
+		down, limb := t.Take(power, area)
+		// 原本已失效的部位也走傷害常式的失效出口（RE-207）。
+		parts := [6]int{t.Head, t.Chest, t.RightArm, t.LeftArm, t.RightLeg, t.LeftLeg}
+		if power > 0 && parts[area] <= 0 {
+			limb = true
+			if area > 1 {
+				t.Command = 0
+			}
+			if area > 3 {
+				t.Flag03 = 0
+			}
+		}
+		if power > 0 && t.Down() {
+			t.Command = 0
+			s.forcedDrop(target)
+		}
+		return &Outcome{Damage: power, Location: area, Down: down, Limb: limb}
 	}
 	// 治療：補到那個部位的上限為止。廢掉的部位（原版是 0xFF）從零開始補。
 	caps := Parts(t.Threshold)
@@ -247,13 +279,35 @@ func (s *State) castArea(target, area, power int, negative bool) {
 	if v > caps[area] {
 		v = caps[area]
 	}
+	shieldBefore := t.EffectiveShieldGrade()
 	*parts[area] = v
+	if t.ShieldWeight != 0 && t.EffectiveShieldGrade() != shieldBefore {
+		t.ReloadGear()
+	}
 	// 治好隊員的腿再跑一次 `sub_21D94`，移動方式照種族回來（RE-148）。
 	if area > 3 && t.Side == SideParty {
 		t.Flag03 = MoveAbility(t.Race)
 	}
-	// 部位那一條把「身上有法術」設回 0（`0x283EA`）——它不是持續效果。
-	t.SpellTurns = 0
+	return nil
+}
+
+func (s *State) queueSpellReaction(caster, target int, damage *Outcome) {
+	if damage != nil && KnocksBack(*damage) {
+		s.spellReaction = &spellReaction{caster: caster, target: target}
+	}
+}
+
+func (s *State) resumeSpellReaction(rng Rand) ActResult {
+	reaction := s.spellReaction
+	s.spellReaction = nil
+	name := ""
+	if m := s.member(reaction.target); m != nil {
+		name = m.WeaponName
+	} else if item := s.Actors[reaction.target].HandItem; item != nil {
+		name = item.Name
+	}
+	return ActResult{Actor: reaction.caster, Target: reaction.target, Plain: true,
+		Item: name, Records: s.Knockback(reaction.caster, reaction.target, rng)}
 }
 
 // castStat 是效果 1…4、7、8：把某一個屬性加減強度，並掛上倒數（`0x28704`）。
@@ -368,6 +422,14 @@ var SpellListRows = struct{ Col, Row, LineStep, Visible int }{
 	Col: 4, Row: 0x11, LineStep: 8, Visible: 7,
 }
 
+// SpellListRow 是第一列掃描線。效果清單從 0x19 起，與法術清單分開（RE-205）。
+func (s *State) SpellListRow() int {
+	if s.Plan.Prompt == PromptAffect {
+		return 0x19
+	}
+	return SpellListRows.Row
+}
+
 // SpellListTitle 是目前這一張清單的標題記錄。
 func (s *State) SpellListTitle() int {
 	if s.Plan.Prompt == PromptAffect {
@@ -399,12 +461,21 @@ func (s *State) beginSpellList(i int) {
 	s.Plan.Prompt = PromptSpell
 	s.Plan.List = s.SpellNames(i)
 	s.Plan.ListPick = 0
-	s.Plan.Bar = nil
+	s.Plan.Bar = []int{CmdYes, CmdCancel}
+	s.Plan.Selected = 0
 }
 
 // chooseSpell 選好法術之後接著問正負（`0x1F553`）。清單的文字由呼叫端填——
 // 那兩項是 KOLDATA 記錄，規則層不碰文字。
 func (s *State) chooseSpell(i int) bool {
+	if s.icon() == CmdCancel {
+		s.Plan.List, s.Plan.ListPick = nil, 0
+		s.BeginTurn()
+		return false
+	}
+	if s.icon() != CmdYes {
+		return false
+	}
 	if s.Plan.ListPick < 0 || s.Plan.ListPick >= len(s.Plan.List) {
 		return false
 	}
@@ -412,6 +483,8 @@ func (s *State) chooseSpell(i int) bool {
 	s.Plan.Prompt = PromptAffect
 	s.Plan.List = []string{"", ""}
 	s.Plan.ListPick = 0
+	s.Plan.Bar = []int{CmdYes, CmdCancel}
+	s.Plan.Selected = 0
 	return false
 }
 
@@ -420,6 +493,13 @@ func (s *State) chooseSpell(i int) bool {
 // 用哪一種游標由法術自己決定：`+0x0E` 的 bit 7 沒設就是相鄰、設了就是遠距
 // （`0x1F677` 的 `mode = 記錄[+0x0E] ÷ 0x80 + 1`）。
 func (s *State) chooseAffect(i int) bool {
+	if s.icon() == CmdCancel {
+		s.beginSpellList(i)
+		return false
+	}
+	if s.icon() != CmdYes {
+		return false
+	}
 	s.Actors[i].Negative = s.Plan.ListPick != 0
 	mode := CursorAdjacent
 	if m := s.member(i); m != nil {

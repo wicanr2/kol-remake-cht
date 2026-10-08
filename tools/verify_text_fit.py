@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import re
 import pathlib
@@ -91,11 +92,12 @@ def main() -> int:
     def width(text: str) -> tuple[int, list[str]]:
         total, missing = 0, []
         for ch in text:
-            # 空白沒有字模也不畫墨，但照樣前進；半形算半格、全形算一格。
+            # 空白不畫墨，字距仍依 Font.advance：未登記時使用固定字距。
+            # 現行字模表沒有半形空白，正式 Measure 因此前進 16 像素。
             if ch == " ":
-                total += default // 2
+                total += advance.get(ch, default)
             elif ch == "\u3000":
-                total += default
+                total += advance.get(ch, default)
             elif ch in advance:
                 total += advance[ch]
             else:
@@ -369,11 +371,15 @@ def main() -> int:
         check("confirm", "ARE YOU SURE?", confirm["Line1X"], limit)
         check("confirm", "YES/NO", confirm["Line2X"], limit)
 
-    # 名字欄容量：16 個 ASCII 字元的最寬情形。
-    widest = max(advance[chr(c)] for c in range(0x21, 0x7F) if chr(c) in advance)
+    # 正式 keyboardTokens 的姓名輸入包含大寫字母、數字與空白。
+    # 空白未必有 glyph，但 Font.advance 仍前進；不能只掃有墨跡的字模。
+    name_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+    widest = max(width(ch)[0] for ch in name_characters)
     name_width = widest * 16
     checks.append({"kind": "name", "en": "name field capacity 16",
                    "zh": "", "x": layout["FieldX"], "width": name_width,
+                   "capacity": 16, "input_characters": name_characters,
+                   "widest_characters": [ch for ch in name_characters if width(ch)[0] == widest],
                    "right_limit": left_right,
                    "overflow": max(0, layout["FieldX"] + name_width - left_right),
                    "missing_glyphs": [],
@@ -422,6 +428,14 @@ def main() -> int:
                "overflow_policy": args.overflow_policy,
                "unregistered_kinds": unregistered,
                "failures": failed, "checks": checks}
+    input_paths = [args.layout, args.font, args.strings, args.data,
+                   args.overflow_policy, args.bank_strings, args.ui_i18n,
+                   args.display_names, *args.town_sample, *args.town_i18n]
+    receipt["inputs_sha256"] = {
+        path: hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+        for path in dict.fromkeys(p for p in input_paths if p)
+    }
+    receipt["width_contract"] = "字距與 internal/font.Font.advance 一致；空白不畫墨但仍按 manifest 前進"
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n")

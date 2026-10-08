@@ -1,0 +1,226 @@
+{
+  "schema": "kol-cjk-longest-natural-battle-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "既有固定種子 1、正常六人招募與兩次自然戰鬥的 3,081 筆完整路徑；先選全母體最寬可見訊息，再重播相同前綴擷取畫格。不宣稱全遊戲最長內容。",
+  "source_receipt": "docs/verification/cjk-ui/natural-sign-20261001/receipt.json",
+  "selected_before_execution": true,
+  "selection": {
+    "scope": "既有固定種子 1、正常六人招募與兩次自然戰鬥的 3,081 筆完整路徑；先選全母體最寬可見訊息，再重播相同前綴擷取畫格。不宣稱全遊戲最長內容。",
+    "source": "docs/verification/cjk-ui/natural-sign-20261001/receipt.json",
+    "source_trace_sha256": "6d58e75f0a1217bce912423a68703e48ac5af38ed76e58b77cf7f6d5a574442f",
+    "candidate_count": 386,
+    "unique_messages": 150,
+    "maximum_width": 564,
+    "selected": [
+      {
+        "step": 2566,
+        "pixel_width": 564,
+        "text": "Fighting Bull 揮砍 他的戰錘，攻向獸人，對方以漂亮的招架擋開了攻擊！",
+        "lines": [
+          "Fighting Bull 揮砍 他的",
+          "戰錘，攻向",
+          "獸人，對方以漂亮的招架",
+          "擋開了攻擊！"
+        ]
+      },
+      {
+        "step": 545,
+        "pixel_width": 563,
+        "text": "懸崖巨魔 斬出 他的長矛，攻向Theodoric，對方以漂亮的招架擋開了攻擊！",
+        "lines": [
+          "懸崖巨魔 斬出 他的",
+          "長矛，攻向",
+          "Theodoric，對方以漂亮的招",
+          "架擋開了攻擊！"
+        ]
+      },
+      {
+        "step": 1287,
+        "pixel_width": 557,
+        "text": "懸崖巨魔 斬出 他的長矛，攻向Poontang，對方以漂亮的招架擋開了攻擊！",
+        "lines": [
+          "懸崖巨魔 斬出 他的",
+          "長矛，攻向",
+          "Poontang，對方以漂亮的招",
+          "架擋開了攻擊！"
+        ]
+      }
+    ],
+    "shot_steps": [
+      545,
+      1287,
+      2565,
+      2566,
+      2567
+    ],
+    "input_count": 2567,
+    "seed": 1,
+    "seed_method": "執行前 -seed 1",
+    "ambush_rolls": null,
+    "load": null,
+    "monsters": null,
+    "quest_sites": null,
+    "font_sha256": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d"
+  },
+  "identical_reference_states": 2568,
+  "geometry": {
+    "scroll": [
+      24,
+      492,
+      888,
+      96
+    ],
+    "text_start": [
+      72,
+      504
+    ],
+    "safe_width": 816,
+    "line_height": 18,
+    "max_lines": 4
+  },
+  "geometry_evidence": "internal/battle/message.go MessageBox／MessageArea 與 internal/ui/battle_cjk.go BattleFieldCJK 的原座標乘三；正式 renderer 不改。",
+  "checks": [
+    {
+      "step": 545,
+      "source_lines": [
+        "懸崖巨魔 斬出 他的",
+        "長矛，攻向",
+        "Theodoric，對方以漂亮的招",
+        "架擋開了攻擊！"
+      ],
+      "rendered_lines": [
+        "懸崖巨魔 斬出 他的長矛，攻向Theodoric，對方以漂亮的招架擋開了攻擊！"
+      ],
+      "widths": [
+        563
+      ],
+      "bottom": 522,
+      "scroll_bottom": 588,
+      "pixel_differences": 0,
+      "ink_pixels": 2323,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 1287,
+      "source_lines": [
+        "懸崖巨魔 斬出 他的",
+        "長矛，攻向",
+        "Poontang，對方以漂亮的招",
+        "架擋開了攻擊！"
+      ],
+      "rendered_lines": [
+        "懸崖巨魔 斬出 他的長矛，攻向Poontang，對方以漂亮的招架擋開了攻擊！"
+      ],
+      "widths": [
+        557
+      ],
+      "bottom": 522,
+      "scroll_bottom": 588,
+      "pixel_differences": 0,
+      "ink_pixels": 2335,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 2565,
+      "source_lines": [
+        "獸人 揮砍 他的",
+        "闊劍，攻向",
+        "Kenneth，對方以漂亮的招",
+        "架擋開了攻擊！"
+      ],
+      "rendered_lines": [
+        "獸人 揮砍 他的闊劍，攻向Kenneth，對方以漂亮的招架擋開了攻擊！"
+      ],
+      "widths": [
+        516
+      ],
+      "bottom": 522,
+      "scroll_bottom": 588,
+      "pixel_differences": 0,
+      "ink_pixels": 2154,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 2566,
+      "source_lines": [
+        "Fighting Bull 揮砍 他的",
+        "戰錘，攻向",
+        "獸人，對方以漂亮的招架",
+        "擋開了攻擊！"
+      ],
+      "rendered_lines": [
+        "Fighting Bull 揮砍 他的戰錘，攻向獸人，對方以漂亮的招架擋開了攻擊！"
+      ],
+      "widths": [
+        564
+      ],
+      "bottom": 522,
+      "scroll_bottom": 588,
+      "pixel_differences": 0,
+      "ink_pixels": 2322,
+      "single_missing_ink_pixel_rejected": true
+    },
+    {
+      "step": 2567,
+      "source_lines": [
+        "Theodoric 移動了！"
+      ],
+      "rendered_lines": [
+        "Theodoric 移動了！"
+      ],
+      "widths": [
+        163
+      ],
+      "bottom": 522,
+      "scroll_bottom": 588,
+      "pixel_differences": 0,
+      "ink_pixels": 485,
+      "single_missing_ink_pixel_rejected": true
+    }
+  ],
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "seed": {
+    "remake": 1,
+    "original": null,
+    "method": "執行前 -seed 1"
+  },
+  "inputs_sha256": {
+    "assets/original-derived-png/ega/MISCPICS/miscpics-001.png": "8b808451ee08b45e11521d4641558e029dfb2a5625ce17a89f1f459fa57d9186",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318",
+    "internal/ui/battle_cjk.go": "017df8e764002bcaad38e818b65a7efc795ae2c66d00a54cc6f2140b1f0eb6d5",
+    "internal/font/font.go": "14b951db9d2dd22aeeea103d54a3c36d60e8b3a95a45e93aa38f70d134e34b4f",
+    "docs/verification/cjk-ui/natural-sign-20261001/zh-Hant-trace.json": "6d58e75f0a1217bce912423a68703e48ac5af38ed76e58b77cf7f6d5a574442f",
+    "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f"
+  },
+  "toolchain": "eob-remake-go:1.26.7-ebiten2.9.9-audio；sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+  "rights": "重製執行畫面含原作衍生圖，沿用既有 private GitHub PNG 特例；沒有公開散布授權。",
+  "limitations": "全遊戲其他訊息／最長輸入與其他畫面仍未全覆蓋；#34／#40 不結案。原版、存檔與平台封包未驗。",
+  "visual_review": {
+    "status": "passed",
+    "files": [
+      "step-545.png",
+      "step-1287.png",
+      "step-2565.png",
+      "step-2566.png",
+      "step-2567.png"
+    ],
+    "date": "2026-10-01",
+    "method": "主代理逐張檢視五張完整畫格；黑字卷軸可讀、姓名與繁中句子完整，無缺字或文字裁切。"
+  },
+  "files": {
+    "selection.json": "a46adbc0fb44d38faee54a2fd3c664690f35eba0b1537de06da4bd30db92e92b",
+    "run.json": "bc594ccede85d573eba5442f124850a09f72e783c22623552eef0cd3d43a359c",
+    "engine.log": "11981eae9eeae3b7bd1ba94df855aea5341bb033de0a409ba2f78bcb67db7037",
+    "trace.json": "9736822e29d35aeb96e071fc24c224f2422c34890ed3e7f873b5a5e32a1f80a7",
+    "script.txt": "98960c4d4089ba5b99cf7398b240e3f11b55fdbbe5bdf368099a1c29b769f099",
+    "step-545.png": "b946b48b454cc29482cf74a2fac69102f77b512e7c66608596405a8d10bce597",
+    "step-1287.png": "1537610238b6cd110136a318cbed09efd6b8bf0e0560a7b6e89a0fe8eb3edd55",
+    "step-2565.png": "dfd147404cecd84a2612a2a310508decb0f7cd3c3eb708a3148f665fb9672abc",
+    "step-2566.png": "1daae8f046d26b455990bd5d29874ff77fc4bcd6d16edb7db112816da2d2c7e2",
+    "step-2567.png": "27a627de093f08bf20eb4092308abb5c04d596e94087284cf7ef6e7c851ffa91",
+    "kol_cjk_longest_battle_run.py": "9f09f6e8636b5e8aec3c5839a04dc342068b304c43d068277daccb33c8dc48a1",
+    "kol_cjk_longest_battle_verify.py": "de7d8fad8f3a980ceb7d4b1fd706849478811a8eef86c5b01518189ab68ed089"
+  }
+}

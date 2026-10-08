@@ -1,0 +1,42 @@
+{
+  "schema": "kol-ambush-placement-audit-v1",
+  "receipt_sha256": "0c8cc5d839eb2545c6ca61b5aa71ef4fa654a31ee73fa72c59741abd59f3eadb",
+  "attachments": 1557,
+  "recalculated_result": true,
+  "deep_parent_passed": true,
+  "parent_attachments": 2317,
+  "owners": [
+    [
+      1000,
+      1000
+    ]
+  ],
+  "root_owned_or_md_directories": 0,
+  "head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+  "initial_dirty": 406,
+  "final_dirty": 410,
+  "all_initial_paths_retained": true,
+  "staged": [],
+  "diff_check_exit_code": 0,
+  "project_containers": [],
+  "other_project_container_records": 17,
+  "worklist": {
+    "incomplete": 22,
+    "complete": 84,
+    "unclaimed": 0
+  },
+  "production_inputs": 319,
+  "changed_inputs": [
+    "cmd/kol/main.go",
+    "internal/battle/ambush.go",
+    "internal/battle/ambush_test.go",
+    "internal/battle/state.go"
+  ],
+  "private_local_outputs": "原版遊戲副本、PNG、原始追蹤及候選程式只留本機workplace；容器內/tmp隨--rm移除",
+  "goal_status": "active",
+  "commit": false,
+  "push": false,
+  "remote_issue_write": false,
+  "package": false,
+  "release": false
+}

@@ -1,6 +1,6 @@
 {
   "name": "quest-chain-reload",
-  "description": "接著 `quest-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場。隊伍六人的地點 6 旗標（回報過）、已回報數 1 與 Theodoric 手上的 Treasure Map 都從存檔帶回；進門開 MIRROR 看 Theodoric 的資料頁，再出門。與 `quest-chain` 合起來把「接任務 → 撿物逃走 → 交付 → 存檔 → 離開 → 重載」閉起來。",
+  "description": "接著 `quest-chain` 跑：讀那一份住宿寫出來的存檔，在半途之家門口開場。隊伍六人的地點 6 旗標（回報過）、已回報數 1 與 Theodoric 手上的 Treasure Map 都從存檔帶回；進門開 MIRROR 看 Theodoric 的資料頁，再出門。與 `quest-chain` 合起來把「接任務 → 撿物逃走 → 交付 → 存檔 → 離開 → 重載」閉起來。 2026-10-01 讀本輪任務新存檔重驗：只有隊伍傷勢繼承值不同，差額逐員等於母存檔變化；訊息、階段、操作結果、金幣、物品、任務／回報與全部畫格一致。原按鍵不變，舊收據保留。",
   "seed": 1,
   "scene": "play",
   "load": "workplace/saves/quest-chain.json",
@@ -18,12 +18,12 @@
       "town": {
         "mode": 0,
         "party": [
-          "Theodoric gold=953 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=10",
-          "Poontang gold=214 wounds=15 reported=1 quests=0,52,0,0,0,0 carried=10",
-          "Olear gold=1777 wounds=15 reported=1 quests=0,48,0,0,0,0 carried=11",
-          "Moraine gold=2149 wounds=6 reported=1 quests=0,48,0,0,0,0 carried=13",
+          "Theodoric gold=953 wounds=3 reported=1 quests=0,48,0,0,0,0 carried=5",
+          "Poontang gold=214 wounds=16 reported=1 quests=0,52,0,0,0,0 carried=8",
+          "Olear gold=1777 wounds=9 reported=1 quests=0,48,0,0,0,0 carried=11",
+          "Moraine gold=2149 wounds=2 reported=1 quests=0,48,0,0,0,0 carried=12",
           "Fighting Bull gold=442 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=14",
-          "Kenneth gold=815 wounds=19 reported=1 quests=0,48,0,0,0,0 carried=12"
+          "Kenneth gold=815 wounds=0 reported=1 quests=0,48,0,0,0,0 carried=11"
         ]
       },
       "note": "讀檔：六人地點 6 旗標（回報過）、已回報數 1、Theodoric 住宿後 953 枚金幣，與 `quest-chain` 住宿那一步的隊伍列逐字相同"

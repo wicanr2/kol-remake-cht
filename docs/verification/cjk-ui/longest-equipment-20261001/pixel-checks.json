@@ -1,0 +1,2984 @@
+{
+  "schema": "kol-cjk-equipment-pixel-check-v1",
+  "checks": [
+    {
+      "source_step": 160,
+      "step": 161,
+      "actor": "Fighting Bull",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "FIGHTING BULL",
+          "position": [
+            72,
+            21
+          ],
+          "width": 134,
+          "right": 206,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "戰錘",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲護腿",
+          "position": [
+            144,
+            126
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "圓盾",
+          "position": [
+            144,
+            144
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 162,
+          "safe_right": 408
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 160,
+      "restored_step": 162
+    },
+    {
+      "source_step": 176,
+      "step": 179,
+      "actor": "Kenneth",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "KENNETH",
+          "position": [
+            72,
+            21
+          ],
+          "width": 76,
+          "right": 148,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "戰斧",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲衫",
+          "position": [
+            144,
+            108
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲褲",
+          "position": [
+            144,
+            126
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "鳶盾",
+          "position": [
+            144,
+            144
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 162,
+          "safe_right": 408
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 178,
+      "restored_step": 180
+    },
+    {
+      "source_step": 192,
+      "step": 197,
+      "actor": "Poontang",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "POONTANG",
+          "position": [
+            72,
+            21
+          ],
+          "width": 90,
+          "right": 162,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "長矛",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "鱗甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "鱗甲褲",
+          "position": [
+            144,
+            126
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 196,
+      "restored_step": 198
+    },
+    {
+      "source_step": 208,
+      "step": 215,
+      "actor": "Olear",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "OLEAR",
+          "position": [
+            72,
+            21
+          ],
+          "width": 54,
+          "right": 126,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "精靈弓",
+          "position": [
+            144,
+            72
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲兜帽",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲衫",
+          "position": [
+            144,
+            108
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲褲",
+          "position": [
+            144,
+            126
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        },
+        {
+          "text": "箭：20",
+          "position": [
+            72,
+            180
+          ],
+          "width": 52,
+          "right": 124,
+          "bottom": 198,
+          "safe_right": 408
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 214,
+      "restored_step": 216
+    },
+    {
+      "source_step": 241,
+      "step": 250,
+      "actor": "Moraine",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "MORAINE",
+          "position": [
+            72,
+            21
+          ],
+          "width": 73,
+          "right": 145,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "闊劍",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲兜帽",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "布里甘丁護腿",
+          "position": [
+            144,
+            126
+          ],
+          "width": 96,
+          "right": 240,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "圓盾",
+          "position": [
+            144,
+            144
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 162,
+          "safe_right": 408
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": true,
+      "before_step": 249,
+      "restored_step": 251
+    },
+    {
+      "source_step": 257,
+      "step": 268,
+      "actor": "Theodoric",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "THEODORIC",
+          "position": [
+            72,
+            21
+          ],
+          "width": 96,
+          "right": 168,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲護腿",
+          "position": [
+            144,
+            126
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        },
+        {
+          "text": "巨劍",
+          "position": [
+            144,
+            162
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 180,
+          "safe_right": 408
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 267,
+      "restored_step": 269
+    }
+  ],
+  "selection": {
+    "schema": "kol-cjk-equipment-selection-v1",
+    "selected_before_execution": true,
+    "scope": "七城可販售及14名占用初始角色的頭／軀幹／腿／盾護甲名稱；不含怪物、動態改名或戰利品",
+    "population": [
+      {
+        "name": "Fur Cap",
+        "zh": "毛皮帽",
+        "width": 48,
+        "source": "城1/門9/商品0",
+        "position": 0
+      },
+      {
+        "name": "Fur Shirt",
+        "zh": "毛皮上衣",
+        "width": 64,
+        "source": "城1/門9/商品1",
+        "position": 1
+      },
+      {
+        "name": "Fur Pants",
+        "zh": "毛皮褲",
+        "width": 48,
+        "source": "城1/門9/商品2",
+        "position": 2
+      },
+      {
+        "name": "Cloth Hood",
+        "zh": "布兜帽",
+        "width": 48,
+        "source": "城1/門9/商品3",
+        "position": 0
+      },
+      {
+        "name": "Cloth Aketon",
+        "zh": "棉布襯甲",
+        "width": 64,
+        "source": "城1/門9/商品4",
+        "position": 1
+      },
+      {
+        "name": "Cloth Pants",
+        "zh": "布褲",
+        "width": 32,
+        "source": "城1/門9/商品5",
+        "position": 2
+      },
+      {
+        "name": "Leather Hood",
+        "zh": "皮兜帽",
+        "width": 48,
+        "source": "城1/門9/商品6",
+        "position": 0
+      },
+      {
+        "name": "Jerkin",
+        "zh": "皮背心",
+        "width": 48,
+        "source": "城1/門9/商品7",
+        "position": 1
+      },
+      {
+        "name": "Leather Pant",
+        "zh": "皮褲",
+        "width": 32,
+        "source": "城1/門9/商品8",
+        "position": 2
+      },
+      {
+        "name": "Cuirbolli H",
+        "zh": "硬革頭盔",
+        "width": 64,
+        "source": "城1/門9/商品9",
+        "position": 0
+      },
+      {
+        "name": "Cuirbolli T",
+        "zh": "硬革上衣",
+        "width": 64,
+        "source": "城1/門9/商品10",
+        "position": 1
+      },
+      {
+        "name": "Cuirbolli L",
+        "zh": "硬革護腿",
+        "width": 64,
+        "source": "城1/門9/商品11",
+        "position": 2
+      },
+      {
+        "name": "Conical Helm",
+        "zh": "錐形盔",
+        "width": 48,
+        "source": "城1/門9/商品12",
+        "position": 0
+      },
+      {
+        "name": "Ring Byrnie",
+        "zh": "環甲短衫",
+        "width": 64,
+        "source": "城1/門9/商品13",
+        "position": 1
+      },
+      {
+        "name": "Ring Pants",
+        "zh": "環甲褲",
+        "width": 48,
+        "source": "城1/門9/商品14",
+        "position": 2
+      },
+      {
+        "name": "Pot Helm",
+        "zh": "鍋形盔",
+        "width": 48,
+        "source": "城1/門9/商品15",
+        "position": 0
+      },
+      {
+        "name": "Scale Amine",
+        "zh": "鱗甲上衣",
+        "width": 64,
+        "source": "城1/門9/商品16",
+        "position": 1
+      },
+      {
+        "name": "Scale Pants",
+        "zh": "鱗甲褲",
+        "width": 48,
+        "source": "城1/門9/商品17",
+        "position": 2
+      },
+      {
+        "name": "Basinet",
+        "zh": "巴西奈盔",
+        "width": 64,
+        "source": "城1/門9/商品18",
+        "position": 0
+      },
+      {
+        "name": "Brigandine T",
+        "zh": "布里甘丁上衣",
+        "width": 96,
+        "source": "城1/門9/商品19",
+        "position": 1
+      },
+      {
+        "name": "Brigandine L",
+        "zh": "布里甘丁護腿",
+        "width": 96,
+        "source": "城1/門9/商品20",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "城1/門9/商品21",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "城1/門9/商品22",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "城1/門9/商品23",
+        "position": 2
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "城1/門9/商品24",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "城1/門9/商品25",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "城1/門9/商品26",
+        "position": 2
+      },
+      {
+        "name": "Buckler",
+        "zh": "小圓盾",
+        "width": 48,
+        "source": "城1/門9/商品27",
+        "position": 6
+      },
+      {
+        "name": "Target Shld",
+        "zh": "圓盾",
+        "width": 32,
+        "source": "城1/門9/商品28",
+        "position": 6
+      },
+      {
+        "name": "Kite Shield",
+        "zh": "鳶盾",
+        "width": 32,
+        "source": "城1/門9/商品29",
+        "position": 6
+      },
+      {
+        "name": "Scale Amine",
+        "zh": "鱗甲上衣",
+        "width": 64,
+        "source": "城3/門2/商品19",
+        "position": 1
+      },
+      {
+        "name": "Scale Pants",
+        "zh": "鱗甲褲",
+        "width": 48,
+        "source": "城3/門2/商品20",
+        "position": 2
+      },
+      {
+        "name": "Basinet",
+        "zh": "巴西奈盔",
+        "width": 64,
+        "source": "城3/門2/商品21",
+        "position": 0
+      },
+      {
+        "name": "Brigandine T",
+        "zh": "布里甘丁上衣",
+        "width": 96,
+        "source": "城3/門2/商品22",
+        "position": 1
+      },
+      {
+        "name": "Brigandine L",
+        "zh": "布里甘丁護腿",
+        "width": 96,
+        "source": "城3/門2/商品23",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "城3/門2/商品24",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "城3/門2/商品25",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "城3/門2/商品26",
+        "position": 2
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "城3/門2/商品27",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "城3/門2/商品28",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "城3/門2/商品29",
+        "position": 2
+      },
+      {
+        "name": "Kite Shield",
+        "zh": "鳶盾",
+        "width": 32,
+        "source": "城3/門2/商品30",
+        "position": 6
+      },
+      {
+        "name": "Parade Helm",
+        "zh": "儀仗盔",
+        "width": 48,
+        "source": "城4/門1/商品20",
+        "position": 0
+      },
+      {
+        "name": "Fur Cap",
+        "zh": "毛皮帽",
+        "width": 48,
+        "source": "城5/門13/商品0",
+        "position": 0
+      },
+      {
+        "name": "Fur Shirt",
+        "zh": "毛皮上衣",
+        "width": 64,
+        "source": "城5/門13/商品1",
+        "position": 1
+      },
+      {
+        "name": "Fur Pants",
+        "zh": "毛皮褲",
+        "width": 48,
+        "source": "城5/門13/商品2",
+        "position": 2
+      },
+      {
+        "name": "Cloth Hood",
+        "zh": "布兜帽",
+        "width": 48,
+        "source": "城5/門13/商品5",
+        "position": 0
+      },
+      {
+        "name": "Cloth Aketon",
+        "zh": "棉布襯甲",
+        "width": 64,
+        "source": "城5/門13/商品6",
+        "position": 1
+      },
+      {
+        "name": "Cloth Pants",
+        "zh": "布褲",
+        "width": 32,
+        "source": "城5/門13/商品7",
+        "position": 2
+      },
+      {
+        "name": "Leather Hood",
+        "zh": "皮兜帽",
+        "width": 48,
+        "source": "城5/門13/商品8",
+        "position": 0
+      },
+      {
+        "name": "Jerkin",
+        "zh": "皮背心",
+        "width": 48,
+        "source": "城5/門13/商品9",
+        "position": 1
+      },
+      {
+        "name": "Leather Pant",
+        "zh": "皮褲",
+        "width": 32,
+        "source": "城5/門13/商品10",
+        "position": 2
+      },
+      {
+        "name": "Leather Helm",
+        "zh": "皮盔",
+        "width": 32,
+        "source": "城5/門13/商品12",
+        "position": 0
+      },
+      {
+        "name": "Cuirbolli T",
+        "zh": "硬革上衣",
+        "width": 64,
+        "source": "城5/門13/商品13",
+        "position": 1
+      },
+      {
+        "name": "Cuirbolli L",
+        "zh": "硬革護腿",
+        "width": 64,
+        "source": "城5/門13/商品14",
+        "position": 2
+      },
+      {
+        "name": "Conical Helm",
+        "zh": "錐形盔",
+        "width": 48,
+        "source": "城5/門13/商品15",
+        "position": 0
+      },
+      {
+        "name": "Ring Byrnie",
+        "zh": "環甲短衫",
+        "width": 64,
+        "source": "城5/門13/商品16",
+        "position": 1
+      },
+      {
+        "name": "Ring Pants",
+        "zh": "環甲褲",
+        "width": 48,
+        "source": "城5/門13/商品17",
+        "position": 2
+      },
+      {
+        "name": "Scale Helm",
+        "zh": "鱗甲盔",
+        "width": 48,
+        "source": "城5/門13/商品18",
+        "position": 0
+      },
+      {
+        "name": "Scale Amine",
+        "zh": "鱗甲上衣",
+        "width": 64,
+        "source": "城5/門13/商品19",
+        "position": 1
+      },
+      {
+        "name": "Scale Pants",
+        "zh": "鱗甲褲",
+        "width": 48,
+        "source": "城5/門13/商品20",
+        "position": 2
+      },
+      {
+        "name": "Basinet",
+        "zh": "巴西奈盔",
+        "width": 64,
+        "source": "城5/門13/商品21",
+        "position": 0
+      },
+      {
+        "name": "Brigandine T",
+        "zh": "布里甘丁上衣",
+        "width": 96,
+        "source": "城5/門13/商品22",
+        "position": 1
+      },
+      {
+        "name": "Brigandine L",
+        "zh": "布里甘丁護腿",
+        "width": 96,
+        "source": "城5/門13/商品23",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "城5/門13/商品24",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "城5/門13/商品25",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "城5/門13/商品26",
+        "position": 2
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "城5/門13/商品27",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "城5/門13/商品28",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "城5/門13/商品29",
+        "position": 2
+      },
+      {
+        "name": "Target Shld",
+        "zh": "圓盾",
+        "width": 32,
+        "source": "城5/門13/商品30",
+        "position": 6
+      },
+      {
+        "name": "Kite Shield",
+        "zh": "鳶盾",
+        "width": 32,
+        "source": "城5/門13/商品31",
+        "position": 6
+      },
+      {
+        "name": "Cloth Hood",
+        "zh": "布兜帽",
+        "width": 48,
+        "source": "城6/門1/商品0",
+        "position": 0
+      },
+      {
+        "name": "Cloth Aketon",
+        "zh": "棉布襯甲",
+        "width": 64,
+        "source": "城6/門1/商品1",
+        "position": 1
+      },
+      {
+        "name": "Cloth Pants",
+        "zh": "布褲",
+        "width": 32,
+        "source": "城6/門1/商品2",
+        "position": 2
+      },
+      {
+        "name": "Leather Hood",
+        "zh": "皮兜帽",
+        "width": 48,
+        "source": "城6/門1/商品3",
+        "position": 0
+      },
+      {
+        "name": "Jerkin",
+        "zh": "皮背心",
+        "width": 48,
+        "source": "城6/門1/商品4",
+        "position": 1
+      },
+      {
+        "name": "Leather Pant",
+        "zh": "皮褲",
+        "width": 32,
+        "source": "城6/門1/商品5",
+        "position": 2
+      },
+      {
+        "name": "Leather Helm",
+        "zh": "皮盔",
+        "width": 32,
+        "source": "城6/門1/商品7",
+        "position": 0
+      },
+      {
+        "name": "Cuirbolli T",
+        "zh": "硬革上衣",
+        "width": 64,
+        "source": "城6/門1/商品8",
+        "position": 1
+      },
+      {
+        "name": "Cuirbolli L",
+        "zh": "硬革護腿",
+        "width": 64,
+        "source": "城6/門1/商品9",
+        "position": 2
+      },
+      {
+        "name": "Conical Helm",
+        "zh": "錐形盔",
+        "width": 48,
+        "source": "城6/門1/商品10",
+        "position": 0
+      },
+      {
+        "name": "Ring Byrnie",
+        "zh": "環甲短衫",
+        "width": 64,
+        "source": "城6/門1/商品11",
+        "position": 1
+      },
+      {
+        "name": "Ring Pants",
+        "zh": "環甲褲",
+        "width": 48,
+        "source": "城6/門1/商品12",
+        "position": 2
+      },
+      {
+        "name": "Scale Amine",
+        "zh": "鱗甲上衣",
+        "width": 64,
+        "source": "城6/門1/商品13",
+        "position": 1
+      },
+      {
+        "name": "Scale Pants",
+        "zh": "鱗甲褲",
+        "width": 48,
+        "source": "城6/門1/商品14",
+        "position": 2
+      },
+      {
+        "name": "Brigandine T",
+        "zh": "布里甘丁上衣",
+        "width": 96,
+        "source": "城6/門1/商品15",
+        "position": 1
+      },
+      {
+        "name": "Brigandine L",
+        "zh": "布里甘丁護腿",
+        "width": 96,
+        "source": "城6/門1/商品16",
+        "position": 2
+      },
+      {
+        "name": "Kite Shield",
+        "zh": "鳶盾",
+        "width": 32,
+        "source": "城6/門1/商品17",
+        "position": 6
+      },
+      {
+        "name": "Scale Helm",
+        "zh": "鱗甲盔",
+        "width": 48,
+        "source": "城6/門1/商品26",
+        "position": 0
+      },
+      {
+        "name": "Buckler",
+        "zh": "小圓盾",
+        "width": 48,
+        "source": "城6/門8/商品12",
+        "position": 6
+      },
+      {
+        "name": "Fancy Boots",
+        "zh": "華麗靴",
+        "width": 48,
+        "source": "城6/門8/商品15",
+        "position": 0
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "城7/門12/商品4",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "城7/門12/商品5",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "城7/門12/商品6",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "城7/門12/商品7",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "城7/門12/商品8",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "城7/門12/商品9",
+        "position": 2
+      },
+      {
+        "name": "Ring Byrnie",
+        "zh": "環甲短衫",
+        "width": 64,
+        "source": "城7/門12/商品10",
+        "position": 1
+      },
+      {
+        "name": "Scale",
+        "zh": "鱗片",
+        "width": 32,
+        "source": "城7/門20/商品0",
+        "position": 6
+      },
+      {
+        "name": "Small Scale",
+        "zh": "小鱗片",
+        "width": 48,
+        "source": "城7/門20/商品1",
+        "position": 6
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽0/Theodoric/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "初始槽0/Theodoric/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "初始槽0/Theodoric/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽1/Poontang/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Scale Amine",
+        "zh": "鱗甲上衣",
+        "width": 64,
+        "source": "初始槽1/Poontang/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Scale Pants",
+        "zh": "鱗甲褲",
+        "width": 48,
+        "source": "初始槽1/Poontang/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "初始槽2/Olear/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "初始槽2/Olear/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "初始槽2/Olear/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "初始槽3/Moraine/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "初始槽3/Moraine/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Brigandine L",
+        "zh": "布里甘丁護腿",
+        "width": 96,
+        "source": "初始槽3/Moraine/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Target Shld",
+        "zh": "圓盾",
+        "width": 32,
+        "source": "初始槽3/Moraine/穿戴6",
+        "position": 6
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽4/Fighting Bull/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "初始槽4/Fighting Bull/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "初始槽4/Fighting Bull/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Target Shld",
+        "zh": "圓盾",
+        "width": 32,
+        "source": "初始槽4/Fighting Bull/穿戴6",
+        "position": 6
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽5/Kenneth/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "初始槽5/Kenneth/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "初始槽5/Kenneth/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Kite Shield",
+        "zh": "鳶盾",
+        "width": 32,
+        "source": "初始槽5/Kenneth/穿戴6",
+        "position": 6
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽6/Jax/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "初始槽6/Jax/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "初始槽6/Jax/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽7/Sharakan/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "初始槽7/Sharakan/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "初始槽7/Sharakan/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "初始槽8/Warder/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Brigandine T",
+        "zh": "布里甘丁上衣",
+        "width": 96,
+        "source": "初始槽8/Warder/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Brigandine L",
+        "zh": "布里甘丁護腿",
+        "width": 96,
+        "source": "初始槽8/Warder/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Chain Coif",
+        "zh": "鎖甲兜帽",
+        "width": 64,
+        "source": "初始槽9/Shyla/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "初始槽9/Shyla/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "初始槽9/Shyla/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽10/Aventhalas/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Platemail T",
+        "zh": "板甲上衣",
+        "width": 64,
+        "source": "初始槽10/Aventhalas/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Platemail L",
+        "zh": "板甲護腿",
+        "width": 64,
+        "source": "初始槽10/Aventhalas/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Kite Shield",
+        "zh": "鳶盾",
+        "width": 32,
+        "source": "初始槽10/Aventhalas/穿戴6",
+        "position": 6
+      },
+      {
+        "name": "Barbut Helm",
+        "zh": "巴布塔盔",
+        "width": 64,
+        "source": "初始槽11/One tooth/穿戴0",
+        "position": 0
+      },
+      {
+        "name": "Chain Shirt",
+        "zh": "鎖甲衫",
+        "width": 48,
+        "source": "初始槽11/One tooth/穿戴1",
+        "position": 1
+      },
+      {
+        "name": "Chain Pants",
+        "zh": "鎖甲褲",
+        "width": 48,
+        "source": "初始槽11/One tooth/穿戴2",
+        "position": 2
+      },
+      {
+        "name": "Target Shld",
+        "zh": "圓盾",
+        "width": 32,
+        "source": "初始槽11/One tooth/穿戴6",
+        "position": 6
+      }
+    ],
+    "population_count": 142,
+    "maximum_width": 96,
+    "selected": {
+      "name": "Brigandine L",
+      "zh": "布里甘丁護腿",
+      "width": 96,
+      "source": "初始槽3/Moraine/穿戴2",
+      "position": 2
+    },
+    "source_prefix_inputs": 166,
+    "seed": 1,
+    "load": null,
+    "ambush_rolls": null,
+    "monsters": null,
+    "quest_sites": null,
+    "inputs_sha256": {
+      "docs/verification/cjk-ui/natural-sign-20261001/receipt.json": "493b871d01ab844123d6117c7afa458692c3db7a49a50abe44623f1277327263",
+      "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f",
+      "docs/verification/cjk-ui/natural-sign-20261001/en-trace.json": "d199baf13b1517c799787f9ebb0e5f26adca17bd503661785c5a7dcbb57ff6c1",
+      "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+      "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+      "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+      "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+      "internal/ui/battle_cjk.go": "24ab72efd7aa173d36a627abdc4b4c513980ca690ec1d3338f5c6b5943522d25",
+      "internal/battle/equipment_panel.go": "1d1b4ffb8317c3cfd10e2cfe4e8c4ba223249ff1aa1a4e46023ee85f4fb5e040",
+      "docs/i18n/newchar-zh-Hant.json": "e7a4c37d800931904e97ade517f6293f52b3692fbecb371ec39912d175610675",
+      "docs/i18n/ui-zh-Hant.json": "9e125e5416fe036c651b5f3162a18d3c01861c1375c1732d9f066f6accdd7c82"
+    },
+    "checkpoints": [
+      {
+        "source_step": 160,
+        "before": 160,
+        "equipment": 161,
+        "restored": 162
+      },
+      {
+        "source_step": 176,
+        "before": 178,
+        "equipment": 179,
+        "restored": 180
+      },
+      {
+        "source_step": 192,
+        "before": 196,
+        "equipment": 197,
+        "restored": 198
+      },
+      {
+        "source_step": 208,
+        "before": 214,
+        "equipment": 215,
+        "restored": 216
+      },
+      {
+        "source_step": 241,
+        "before": 249,
+        "equipment": 250,
+        "restored": 251
+      },
+      {
+        "source_step": 257,
+        "before": 267,
+        "equipment": 268,
+        "restored": 269
+      }
+    ],
+    "source_state_mapping": [
+      {
+        "source_step": 1,
+        "replay_step": 1
+      },
+      {
+        "source_step": 2,
+        "replay_step": 2
+      },
+      {
+        "source_step": 3,
+        "replay_step": 3
+      },
+      {
+        "source_step": 4,
+        "replay_step": 4
+      },
+      {
+        "source_step": 5,
+        "replay_step": 5
+      },
+      {
+        "source_step": 6,
+        "replay_step": 6
+      },
+      {
+        "source_step": 7,
+        "replay_step": 7
+      },
+      {
+        "source_step": 8,
+        "replay_step": 8
+      },
+      {
+        "source_step": 9,
+        "replay_step": 9
+      },
+      {
+        "source_step": 10,
+        "replay_step": 10
+      },
+      {
+        "source_step": 11,
+        "replay_step": 11
+      },
+      {
+        "source_step": 12,
+        "replay_step": 12
+      },
+      {
+        "source_step": 13,
+        "replay_step": 13
+      },
+      {
+        "source_step": 14,
+        "replay_step": 14
+      },
+      {
+        "source_step": 15,
+        "replay_step": 15
+      },
+      {
+        "source_step": 16,
+        "replay_step": 16
+      },
+      {
+        "source_step": 17,
+        "replay_step": 17
+      },
+      {
+        "source_step": 18,
+        "replay_step": 18
+      },
+      {
+        "source_step": 19,
+        "replay_step": 19
+      },
+      {
+        "source_step": 20,
+        "replay_step": 20
+      },
+      {
+        "source_step": 21,
+        "replay_step": 21
+      },
+      {
+        "source_step": 22,
+        "replay_step": 22
+      },
+      {
+        "source_step": 23,
+        "replay_step": 23
+      },
+      {
+        "source_step": 24,
+        "replay_step": 24
+      },
+      {
+        "source_step": 25,
+        "replay_step": 25
+      },
+      {
+        "source_step": 26,
+        "replay_step": 26
+      },
+      {
+        "source_step": 27,
+        "replay_step": 27
+      },
+      {
+        "source_step": 28,
+        "replay_step": 28
+      },
+      {
+        "source_step": 29,
+        "replay_step": 29
+      },
+      {
+        "source_step": 30,
+        "replay_step": 30
+      },
+      {
+        "source_step": 31,
+        "replay_step": 31
+      },
+      {
+        "source_step": 32,
+        "replay_step": 32
+      },
+      {
+        "source_step": 33,
+        "replay_step": 33
+      },
+      {
+        "source_step": 34,
+        "replay_step": 34
+      },
+      {
+        "source_step": 35,
+        "replay_step": 35
+      },
+      {
+        "source_step": 36,
+        "replay_step": 36
+      },
+      {
+        "source_step": 37,
+        "replay_step": 37
+      },
+      {
+        "source_step": 38,
+        "replay_step": 38
+      },
+      {
+        "source_step": 39,
+        "replay_step": 39
+      },
+      {
+        "source_step": 40,
+        "replay_step": 40
+      },
+      {
+        "source_step": 41,
+        "replay_step": 41
+      },
+      {
+        "source_step": 42,
+        "replay_step": 42
+      },
+      {
+        "source_step": 43,
+        "replay_step": 43
+      },
+      {
+        "source_step": 44,
+        "replay_step": 44
+      },
+      {
+        "source_step": 45,
+        "replay_step": 45
+      },
+      {
+        "source_step": 46,
+        "replay_step": 46
+      },
+      {
+        "source_step": 47,
+        "replay_step": 47
+      },
+      {
+        "source_step": 48,
+        "replay_step": 48
+      },
+      {
+        "source_step": 49,
+        "replay_step": 49
+      },
+      {
+        "source_step": 50,
+        "replay_step": 50
+      },
+      {
+        "source_step": 51,
+        "replay_step": 51
+      },
+      {
+        "source_step": 52,
+        "replay_step": 52
+      },
+      {
+        "source_step": 53,
+        "replay_step": 53
+      },
+      {
+        "source_step": 54,
+        "replay_step": 54
+      },
+      {
+        "source_step": 55,
+        "replay_step": 55
+      },
+      {
+        "source_step": 56,
+        "replay_step": 56
+      },
+      {
+        "source_step": 57,
+        "replay_step": 57
+      },
+      {
+        "source_step": 58,
+        "replay_step": 58
+      },
+      {
+        "source_step": 59,
+        "replay_step": 59
+      },
+      {
+        "source_step": 60,
+        "replay_step": 60
+      },
+      {
+        "source_step": 61,
+        "replay_step": 61
+      },
+      {
+        "source_step": 62,
+        "replay_step": 62
+      },
+      {
+        "source_step": 63,
+        "replay_step": 63
+      },
+      {
+        "source_step": 64,
+        "replay_step": 64
+      },
+      {
+        "source_step": 65,
+        "replay_step": 65
+      },
+      {
+        "source_step": 66,
+        "replay_step": 66
+      },
+      {
+        "source_step": 67,
+        "replay_step": 67
+      },
+      {
+        "source_step": 68,
+        "replay_step": 68
+      },
+      {
+        "source_step": 69,
+        "replay_step": 69
+      },
+      {
+        "source_step": 70,
+        "replay_step": 70
+      },
+      {
+        "source_step": 71,
+        "replay_step": 71
+      },
+      {
+        "source_step": 72,
+        "replay_step": 72
+      },
+      {
+        "source_step": 73,
+        "replay_step": 73
+      },
+      {
+        "source_step": 74,
+        "replay_step": 74
+      },
+      {
+        "source_step": 75,
+        "replay_step": 75
+      },
+      {
+        "source_step": 76,
+        "replay_step": 76
+      },
+      {
+        "source_step": 77,
+        "replay_step": 77
+      },
+      {
+        "source_step": 78,
+        "replay_step": 78
+      },
+      {
+        "source_step": 79,
+        "replay_step": 79
+      },
+      {
+        "source_step": 80,
+        "replay_step": 80
+      },
+      {
+        "source_step": 81,
+        "replay_step": 81
+      },
+      {
+        "source_step": 82,
+        "replay_step": 82
+      },
+      {
+        "source_step": 83,
+        "replay_step": 83
+      },
+      {
+        "source_step": 84,
+        "replay_step": 84
+      },
+      {
+        "source_step": 85,
+        "replay_step": 85
+      },
+      {
+        "source_step": 86,
+        "replay_step": 86
+      },
+      {
+        "source_step": 87,
+        "replay_step": 87
+      },
+      {
+        "source_step": 88,
+        "replay_step": 88
+      },
+      {
+        "source_step": 89,
+        "replay_step": 89
+      },
+      {
+        "source_step": 90,
+        "replay_step": 90
+      },
+      {
+        "source_step": 91,
+        "replay_step": 91
+      },
+      {
+        "source_step": 92,
+        "replay_step": 92
+      },
+      {
+        "source_step": 93,
+        "replay_step": 93
+      },
+      {
+        "source_step": 94,
+        "replay_step": 94
+      },
+      {
+        "source_step": 95,
+        "replay_step": 95
+      },
+      {
+        "source_step": 96,
+        "replay_step": 96
+      },
+      {
+        "source_step": 97,
+        "replay_step": 97
+      },
+      {
+        "source_step": 98,
+        "replay_step": 98
+      },
+      {
+        "source_step": 99,
+        "replay_step": 99
+      },
+      {
+        "source_step": 100,
+        "replay_step": 100
+      },
+      {
+        "source_step": 101,
+        "replay_step": 101
+      },
+      {
+        "source_step": 102,
+        "replay_step": 102
+      },
+      {
+        "source_step": 103,
+        "replay_step": 103
+      },
+      {
+        "source_step": 104,
+        "replay_step": 104
+      },
+      {
+        "source_step": 105,
+        "replay_step": 105
+      },
+      {
+        "source_step": 106,
+        "replay_step": 106
+      },
+      {
+        "source_step": 107,
+        "replay_step": 107
+      },
+      {
+        "source_step": 108,
+        "replay_step": 108
+      },
+      {
+        "source_step": 109,
+        "replay_step": 109
+      },
+      {
+        "source_step": 110,
+        "replay_step": 110
+      },
+      {
+        "source_step": 111,
+        "replay_step": 111
+      },
+      {
+        "source_step": 112,
+        "replay_step": 112
+      },
+      {
+        "source_step": 113,
+        "replay_step": 113
+      },
+      {
+        "source_step": 114,
+        "replay_step": 114
+      },
+      {
+        "source_step": 115,
+        "replay_step": 115
+      },
+      {
+        "source_step": 116,
+        "replay_step": 116
+      },
+      {
+        "source_step": 117,
+        "replay_step": 117
+      },
+      {
+        "source_step": 118,
+        "replay_step": 118
+      },
+      {
+        "source_step": 119,
+        "replay_step": 119
+      },
+      {
+        "source_step": 120,
+        "replay_step": 120
+      },
+      {
+        "source_step": 121,
+        "replay_step": 121
+      },
+      {
+        "source_step": 122,
+        "replay_step": 122
+      },
+      {
+        "source_step": 123,
+        "replay_step": 123
+      },
+      {
+        "source_step": 124,
+        "replay_step": 124
+      },
+      {
+        "source_step": 125,
+        "replay_step": 125
+      },
+      {
+        "source_step": 126,
+        "replay_step": 126
+      },
+      {
+        "source_step": 127,
+        "replay_step": 127
+      },
+      {
+        "source_step": 128,
+        "replay_step": 128
+      },
+      {
+        "source_step": 129,
+        "replay_step": 129
+      },
+      {
+        "source_step": 130,
+        "replay_step": 130
+      },
+      {
+        "source_step": 131,
+        "replay_step": 131
+      },
+      {
+        "source_step": 132,
+        "replay_step": 132
+      },
+      {
+        "source_step": 133,
+        "replay_step": 133
+      },
+      {
+        "source_step": 134,
+        "replay_step": 134
+      },
+      {
+        "source_step": 135,
+        "replay_step": 135
+      },
+      {
+        "source_step": 136,
+        "replay_step": 136
+      },
+      {
+        "source_step": 137,
+        "replay_step": 137
+      },
+      {
+        "source_step": 138,
+        "replay_step": 138
+      },
+      {
+        "source_step": 139,
+        "replay_step": 139
+      },
+      {
+        "source_step": 140,
+        "replay_step": 140
+      },
+      {
+        "source_step": 141,
+        "replay_step": 141
+      },
+      {
+        "source_step": 142,
+        "replay_step": 142
+      },
+      {
+        "source_step": 143,
+        "replay_step": 143
+      },
+      {
+        "source_step": 144,
+        "replay_step": 144
+      },
+      {
+        "source_step": 145,
+        "replay_step": 145
+      },
+      {
+        "source_step": 146,
+        "replay_step": 146
+      },
+      {
+        "source_step": 147,
+        "replay_step": 147
+      },
+      {
+        "source_step": 148,
+        "replay_step": 148
+      },
+      {
+        "source_step": 149,
+        "replay_step": 149
+      },
+      {
+        "source_step": 150,
+        "replay_step": 150
+      },
+      {
+        "source_step": 151,
+        "replay_step": 151
+      },
+      {
+        "source_step": 152,
+        "replay_step": 152
+      },
+      {
+        "source_step": 153,
+        "replay_step": 153
+      },
+      {
+        "source_step": 154,
+        "replay_step": 154
+      },
+      {
+        "source_step": 155,
+        "replay_step": 155
+      },
+      {
+        "source_step": 156,
+        "replay_step": 156
+      },
+      {
+        "source_step": 157,
+        "replay_step": 157
+      },
+      {
+        "source_step": 158,
+        "replay_step": 158
+      },
+      {
+        "source_step": 159,
+        "replay_step": 159
+      },
+      {
+        "source_step": 160,
+        "replay_step": 160
+      },
+      {
+        "source_step": 161,
+        "replay_step": 163
+      },
+      {
+        "source_step": 162,
+        "replay_step": 164
+      },
+      {
+        "source_step": 163,
+        "replay_step": 165
+      },
+      {
+        "source_step": 164,
+        "replay_step": 166
+      },
+      {
+        "source_step": 165,
+        "replay_step": 167
+      },
+      {
+        "source_step": 166,
+        "replay_step": 168
+      },
+      {
+        "source_step": 167,
+        "replay_step": 169
+      },
+      {
+        "source_step": 168,
+        "replay_step": 170
+      },
+      {
+        "source_step": 169,
+        "replay_step": 171
+      },
+      {
+        "source_step": 170,
+        "replay_step": 172
+      },
+      {
+        "source_step": 171,
+        "replay_step": 173
+      },
+      {
+        "source_step": 172,
+        "replay_step": 174
+      },
+      {
+        "source_step": 173,
+        "replay_step": 175
+      },
+      {
+        "source_step": 174,
+        "replay_step": 176
+      },
+      {
+        "source_step": 175,
+        "replay_step": 177
+      },
+      {
+        "source_step": 176,
+        "replay_step": 178
+      },
+      {
+        "source_step": 177,
+        "replay_step": 181
+      },
+      {
+        "source_step": 178,
+        "replay_step": 182
+      },
+      {
+        "source_step": 179,
+        "replay_step": 183
+      },
+      {
+        "source_step": 180,
+        "replay_step": 184
+      },
+      {
+        "source_step": 181,
+        "replay_step": 185
+      },
+      {
+        "source_step": 182,
+        "replay_step": 186
+      },
+      {
+        "source_step": 183,
+        "replay_step": 187
+      },
+      {
+        "source_step": 184,
+        "replay_step": 188
+      },
+      {
+        "source_step": 185,
+        "replay_step": 189
+      },
+      {
+        "source_step": 186,
+        "replay_step": 190
+      },
+      {
+        "source_step": 187,
+        "replay_step": 191
+      },
+      {
+        "source_step": 188,
+        "replay_step": 192
+      },
+      {
+        "source_step": 189,
+        "replay_step": 193
+      },
+      {
+        "source_step": 190,
+        "replay_step": 194
+      },
+      {
+        "source_step": 191,
+        "replay_step": 195
+      },
+      {
+        "source_step": 192,
+        "replay_step": 196
+      },
+      {
+        "source_step": 193,
+        "replay_step": 199
+      },
+      {
+        "source_step": 194,
+        "replay_step": 200
+      },
+      {
+        "source_step": 195,
+        "replay_step": 201
+      },
+      {
+        "source_step": 196,
+        "replay_step": 202
+      },
+      {
+        "source_step": 197,
+        "replay_step": 203
+      },
+      {
+        "source_step": 198,
+        "replay_step": 204
+      },
+      {
+        "source_step": 199,
+        "replay_step": 205
+      },
+      {
+        "source_step": 200,
+        "replay_step": 206
+      },
+      {
+        "source_step": 201,
+        "replay_step": 207
+      },
+      {
+        "source_step": 202,
+        "replay_step": 208
+      },
+      {
+        "source_step": 203,
+        "replay_step": 209
+      },
+      {
+        "source_step": 204,
+        "replay_step": 210
+      },
+      {
+        "source_step": 205,
+        "replay_step": 211
+      },
+      {
+        "source_step": 206,
+        "replay_step": 212
+      },
+      {
+        "source_step": 207,
+        "replay_step": 213
+      },
+      {
+        "source_step": 208,
+        "replay_step": 214
+      },
+      {
+        "source_step": 209,
+        "replay_step": 217
+      },
+      {
+        "source_step": 210,
+        "replay_step": 218
+      },
+      {
+        "source_step": 211,
+        "replay_step": 219
+      },
+      {
+        "source_step": 212,
+        "replay_step": 220
+      },
+      {
+        "source_step": 213,
+        "replay_step": 221
+      },
+      {
+        "source_step": 214,
+        "replay_step": 222
+      },
+      {
+        "source_step": 215,
+        "replay_step": 223
+      },
+      {
+        "source_step": 216,
+        "replay_step": 224
+      },
+      {
+        "source_step": 217,
+        "replay_step": 225
+      },
+      {
+        "source_step": 218,
+        "replay_step": 226
+      },
+      {
+        "source_step": 219,
+        "replay_step": 227
+      },
+      {
+        "source_step": 220,
+        "replay_step": 228
+      },
+      {
+        "source_step": 221,
+        "replay_step": 229
+      },
+      {
+        "source_step": 222,
+        "replay_step": 230
+      },
+      {
+        "source_step": 223,
+        "replay_step": 231
+      },
+      {
+        "source_step": 224,
+        "replay_step": 232
+      },
+      {
+        "source_step": 225,
+        "replay_step": 233
+      },
+      {
+        "source_step": 226,
+        "replay_step": 234
+      },
+      {
+        "source_step": 227,
+        "replay_step": 235
+      },
+      {
+        "source_step": 228,
+        "replay_step": 236
+      },
+      {
+        "source_step": 229,
+        "replay_step": 237
+      },
+      {
+        "source_step": 230,
+        "replay_step": 238
+      },
+      {
+        "source_step": 231,
+        "replay_step": 239
+      },
+      {
+        "source_step": 232,
+        "replay_step": 240
+      },
+      {
+        "source_step": 233,
+        "replay_step": 241
+      },
+      {
+        "source_step": 234,
+        "replay_step": 242
+      },
+      {
+        "source_step": 235,
+        "replay_step": 243
+      },
+      {
+        "source_step": 236,
+        "replay_step": 244
+      },
+      {
+        "source_step": 237,
+        "replay_step": 245
+      },
+      {
+        "source_step": 238,
+        "replay_step": 246
+      },
+      {
+        "source_step": 239,
+        "replay_step": 247
+      },
+      {
+        "source_step": 240,
+        "replay_step": 248
+      },
+      {
+        "source_step": 241,
+        "replay_step": 249
+      },
+      {
+        "source_step": 242,
+        "replay_step": 252
+      },
+      {
+        "source_step": 243,
+        "replay_step": 253
+      },
+      {
+        "source_step": 244,
+        "replay_step": 254
+      },
+      {
+        "source_step": 245,
+        "replay_step": 255
+      },
+      {
+        "source_step": 246,
+        "replay_step": 256
+      },
+      {
+        "source_step": 247,
+        "replay_step": 257
+      },
+      {
+        "source_step": 248,
+        "replay_step": 258
+      },
+      {
+        "source_step": 249,
+        "replay_step": 259
+      },
+      {
+        "source_step": 250,
+        "replay_step": 260
+      },
+      {
+        "source_step": 251,
+        "replay_step": 261
+      },
+      {
+        "source_step": 252,
+        "replay_step": 262
+      },
+      {
+        "source_step": 253,
+        "replay_step": 263
+      },
+      {
+        "source_step": 254,
+        "replay_step": 264
+      },
+      {
+        "source_step": 255,
+        "replay_step": 265
+      },
+      {
+        "source_step": 256,
+        "replay_step": 266
+      },
+      {
+        "source_step": 257,
+        "replay_step": 267
+      }
+    ],
+    "prefix_inputs": 269,
+    "trace_snapshot_contract": "cmd/kol/main.go 只在stage改變時匯出battle.roster；相鄰切換驗證以該階段快照補齊省略值，其餘欄位逐欄相同。另以像素驗切換後復原。"
+  },
+  "narrow_95_pixel_armour_rejected": true,
+  "independent_basis": "固定初始角色實際物品、外部譯表、正式字模與SPEC-019版面座標；未呼叫正式renderer。"
+}

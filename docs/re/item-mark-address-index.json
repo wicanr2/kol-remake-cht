@@ -1,0 +1,16 @@
+{
+  "schema": "kol-item-mark-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x16eb2": {"semantic": "骰式文字字格欄為框X除以8加1；這個加1不適用後續技能列號。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-177；sub_16D0B:0x16EA9..0x16EB5原始資料流。"},
+    "0x16f14": {"semantic": "第n列武器技能的記錄位移為0x52+13*n，取角色共用記錄的首byte。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-177；0x16F0E..0x16F1E乘13、加52h及原角色基址。"},
+    "0x16f24": {"semantic": "武器技能列的首byte與暫存物品記錄+0x0D的完整類別byte比較；首個匹配才顯示列號。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-177；0x16EC5..0x16EEA複製16 bytes至DGROUP9E28，0x16F21讀byte_37D05及本列CMP。"},
+    "0x16f36": {"semantic": "技能列號字格欄為框X以IDIV除以8再加8，沒有文字起點的額外加1。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-177；0x16F2D..0x16F36；框X110時字格欄21、像素x168。"},
+    "0x16f39": {"semantic": "將技能列號字格欄寫到word_2DF14，供後續單字元輸出使用。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-177；0x16F36之AX及本列A34400，0x16F43呼叫sub_1C2DA。"},
+    "0x16f3f": {"semantic": "匹配列索引n加ASCII的1（0x31），輸出一個技能列號字元；輸出後跳出搜尋。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-177；0x16F3C..0x16F4B及固定正常三張手持框的類別87／第一列87。"},
+    "0x16f52": {"semantic": "武器技能匹配迴圈只搜尋四列（n=0..3），找不到不輸出列號。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-177；0x16F4E加1、本列CMP4及0x16F56..0x16F58分支。"}
+  }
+}

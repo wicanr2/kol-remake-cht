@@ -1,0 +1,66 @@
+{
+  "method": "以真正舊版與修正版檢查器執行相同人工 TSV；正式翻譯與版面輸入不改。",
+  "fixture": "人工 A＋16 個半形空白＋A，不宣稱玩家可達；隔離字距界限。",
+  "baseline_git_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+  "baseline_width": 150,
+  "runtime_width": 278,
+  "right_limit": 264,
+  "runs": {
+    "before": {
+      "command": [
+        "python3",
+        "workplace/font-space-20261001/baseline-verify-text-fit.py",
+        "--layout",
+        "workplace/cjk-layout.json",
+        "--font",
+        "assets/ui-font/manifest.json",
+        "--strings",
+        "docs/i18n/newchar-zh-Hant.json",
+        "--bank-strings",
+        "docs/i18n/ui-zh-Hant.json",
+        "--data",
+        "assets/original-derived-data/character-creation.json",
+        "--town-i18n",
+        "docs/i18n/town-zh-Hant.json",
+        "--ui-i18n",
+        "docs/i18n/ui-zh-Hant.json",
+        "--display-names",
+        "workplace/font-space-20261001/space-boundary.tsv",
+        "--out",
+        "workplace/font-space-20261001/negative-before.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"checked\": 7438, \"failed\": 0}\n",
+      "stderr": "",
+      "failed": 0
+    },
+    "after": {
+      "command": [
+        "python3",
+        "tools/verify_text_fit.py",
+        "--layout",
+        "workplace/cjk-layout.json",
+        "--font",
+        "assets/ui-font/manifest.json",
+        "--strings",
+        "docs/i18n/newchar-zh-Hant.json",
+        "--bank-strings",
+        "docs/i18n/ui-zh-Hant.json",
+        "--data",
+        "assets/original-derived-data/character-creation.json",
+        "--town-i18n",
+        "docs/i18n/town-zh-Hant.json",
+        "--ui-i18n",
+        "docs/i18n/ui-zh-Hant.json",
+        "--display-names",
+        "workplace/font-space-20261001/space-boundary.tsv",
+        "--out",
+        "workplace/font-space-20261001/negative-after.json"
+      ],
+      "returncode": 1,
+      "stdout": "{\"checked\": 7438, \"failed\": 1}\n",
+      "stderr": "",
+      "failed": 1
+    }
+  }
+}

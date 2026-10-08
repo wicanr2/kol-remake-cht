@@ -1,0 +1,124 @@
+{
+  "scope": "正式 town-title 204行全母體最寬之一；標題、正常六人招募、自然旅行、入第五城住宅，再正常離店步行到商行。不宣稱原版或其他動態欄位完成。",
+  "population_count": 204,
+  "maximum_width": 160,
+  "all_maximum_candidates": [
+    {
+      "kind": "town-title",
+      "en": "docs/i18n/town-zh-Hant.json 城1 門12 person",
+      "zh": "阿斯提米亞·艾克哈特",
+      "x": 518,
+      "width": 160,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-title",
+      "en": "docs/i18n/town-zh-Hant.json 城1 門15 person",
+      "zh": "史蒂芬妮·潘德葛拉斯",
+      "x": 518,
+      "width": 160,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-title",
+      "en": "docs/i18n/town-zh-Hant.json 城2 門4 person",
+      "zh": "梅納德·塞法里歐修士",
+      "x": 518,
+      "width": 160,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-title",
+      "en": "docs/i18n/town-zh-Hant.json 城3 門1 person",
+      "zh": "賽爾瑪·史提夫納克斯",
+      "x": 518,
+      "width": 160,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-title",
+      "en": "docs/i18n/town-zh-Hant.json 城4 門5 person",
+      "zh": "克里斯多福·卡文迪什",
+      "x": 518,
+      "width": 160,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    },
+    {
+      "kind": "town-title",
+      "en": "docs/i18n/town-zh-Hant.json 城5 門9 person",
+      "zh": "伊格納茲·克蘭弗魯普",
+      "x": 518,
+      "width": 160,
+      "right_limit": 890,
+      "overflow": 0,
+      "missing_glyphs": [],
+      "pass": true,
+      "overflow_policy": "reject"
+    }
+  ],
+  "selected": {
+    "kind": "town-title",
+    "en": "docs/i18n/town-zh-Hant.json 城5 門9 person",
+    "zh": "伊格納茲·克蘭弗魯普",
+    "x": 518,
+    "width": 160,
+    "right_limit": 890,
+    "overflow": 0,
+    "missing_glyphs": [],
+    "pass": true,
+    "overflow_policy": "reject"
+  },
+  "town": 5,
+  "door": 9,
+  "position": [
+    41,
+    24
+  ],
+  "door_name": "Journeys' End Stores",
+  "person": "Ignatz Kramfrupples",
+  "picture": 21,
+  "portrait": 20,
+  "mother_last_step": 3080,
+  "left_step": 3083,
+  "door_step": 3089,
+  "inside_step": 3090,
+  "shot_steps": [
+    3080,
+    3083,
+    3089,
+    3090
+  ],
+  "walk_moves_after_residence": 6,
+  "seed": 1,
+  "seed_method": "執行前 -seed 1",
+  "load": null,
+  "monsters": null,
+  "ambush_rolls": null,
+  "inputs_sha256": {
+    "docs/verification/cjk-ui/natural-sign-20261001/receipt.json": "493b871d01ab844123d6117c7afa458692c3db7a49a50abe44623f1277327263",
+    "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f",
+    "docs/verification/cjk-text-fit.json": "89f888a8f582169a45c9d83b557a0bf4d5c1660acff8f7fae1c8c3eaaa331ec6",
+    "assets/original-derived-png/ega/TOWN5/town5-map.png": "df7ee9dc09204f0f26d588e0a8fd4758de7527e788a4becde04e1996a56e019c",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f"
+  }
+}

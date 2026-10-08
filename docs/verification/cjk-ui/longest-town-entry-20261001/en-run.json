@@ -1,0 +1,22 @@
+{
+  "command": [
+    "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "-scene",
+    "flow",
+    "-seed",
+    "1",
+    "-lang",
+    "en",
+    "-flow-script",
+    "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE R R D D D D D D L L L L L L D L L L L L L L L L L L L L L L L L L L L L L L L L L L L L D D D D D D D D D D D D D D > RET D D D D D D D D L D D D L L L U U U U RET",
+    "-shot-dir",
+    "workplace/cjk-longest-town-20261001/en",
+    "-shot-steps",
+    "139,140",
+    "-trace",
+    "workplace/cjk-longest-town-20261001/en/trace.json"
+  ],
+  "returncode": 0,
+  "seconds": 3.874774863012135,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4"
+}

@@ -1,0 +1,1431 @@
+{
+  "schema": "kol-cjk-longest-normal-equipment-v1",
+  "date": "2026-10-01",
+  "status": "normal-player-path-pixel-and-visual-confirmed",
+  "scope": "七城可販售及14名占用初始角色的頭／軀幹／腿／盾護甲名稱；不含怪物、動態改名或戰利品",
+  "source_receipt": "docs/verification/cjk-ui/natural-sign-20261001/receipt.json",
+  "selection": "selection.json",
+  "selected_before_execution": true,
+  "population_count": 142,
+  "maximum_width": 96,
+  "states_per_language": 270,
+  "mother_states_checked_per_language": 258,
+  "language_differences": {
+    "count": 1,
+    "step": 159,
+    "field": "battle.encounter_text",
+    "basis": "原母路徑同一筆已登記的顯示譯文"
+  },
+  "normal_path": "標題、名冊、旅店六人正常招募、城門與自然遭遇；六人主指令空白切換裝備、再次空白復原",
+  "seed": {
+    "remake": 1,
+    "method": "執行前-seed 1；無load、指定遭遇、受控骰值或座標注入",
+    "original": null
+  },
+  "binary": {
+    "path": "workplace/cjk-edge-20261001/kol-edge-fixed",
+    "sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+    "rebuilt": false
+  },
+  "toolchain": "eob-remake-go:1.26.7-ebiten2.9.9-audio；sha256:3e89464c6f9740e28b90b2fec3627bf235e38ba4d5892b28d676653c2a4902fa",
+  "geometry": {
+    "panel": [
+      48,
+      6,
+      363,
+      225
+    ],
+    "label_origin": [
+      72,
+      72
+    ],
+    "value_origin": [
+      144,
+      72
+    ],
+    "line_height": 18,
+    "value_safe_width": 264
+  },
+  "checks": [
+    {
+      "source_step": 160,
+      "step": 161,
+      "actor": "Fighting Bull",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "FIGHTING BULL",
+          "position": [
+            72,
+            21
+          ],
+          "width": 134,
+          "right": 206,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "戰錘",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲護腿",
+          "position": [
+            144,
+            126
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "圓盾",
+          "position": [
+            144,
+            144
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 162,
+          "safe_right": 408
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 160,
+      "restored_step": 162
+    },
+    {
+      "source_step": 176,
+      "step": 179,
+      "actor": "Kenneth",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "KENNETH",
+          "position": [
+            72,
+            21
+          ],
+          "width": 76,
+          "right": 148,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "戰斧",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲衫",
+          "position": [
+            144,
+            108
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲褲",
+          "position": [
+            144,
+            126
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "鳶盾",
+          "position": [
+            144,
+            144
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 162,
+          "safe_right": 408
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 178,
+      "restored_step": 180
+    },
+    {
+      "source_step": 192,
+      "step": 197,
+      "actor": "Poontang",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "POONTANG",
+          "position": [
+            72,
+            21
+          ],
+          "width": 90,
+          "right": 162,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "長矛",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "鱗甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "鱗甲褲",
+          "position": [
+            144,
+            126
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 196,
+      "restored_step": 198
+    },
+    {
+      "source_step": 208,
+      "step": 215,
+      "actor": "Olear",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "OLEAR",
+          "position": [
+            72,
+            21
+          ],
+          "width": 54,
+          "right": 126,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "精靈弓",
+          "position": [
+            144,
+            72
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲兜帽",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲衫",
+          "position": [
+            144,
+            108
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲褲",
+          "position": [
+            144,
+            126
+          ],
+          "width": 48,
+          "right": 192,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        },
+        {
+          "text": "箭：20",
+          "position": [
+            72,
+            180
+          ],
+          "width": 52,
+          "right": 124,
+          "bottom": 198,
+          "safe_right": 408
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 214,
+      "restored_step": 216
+    },
+    {
+      "source_step": 241,
+      "step": 250,
+      "actor": "Moraine",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "MORAINE",
+          "position": [
+            72,
+            21
+          ],
+          "width": 73,
+          "right": 145,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "闊劍",
+          "position": [
+            144,
+            72
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 90,
+          "safe_right": 408
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "鎖甲兜帽",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "布里甘丁護腿",
+          "position": [
+            144,
+            126
+          ],
+          "width": 96,
+          "right": 240,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "圓盾",
+          "position": [
+            144,
+            144
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 162,
+          "safe_right": 408
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": true,
+      "before_step": 249,
+      "restored_step": 251
+    },
+    {
+      "source_step": 257,
+      "step": 268,
+      "actor": "Theodoric",
+      "panel": [
+        48,
+        6,
+        363,
+        225
+      ],
+      "lines": [
+        {
+          "text": "THEODORIC",
+          "position": [
+            72,
+            21
+          ],
+          "width": 96,
+          "right": 168,
+          "bottom": 39,
+          "safe_right": 408
+        },
+        {
+          "text": "武器：",
+          "position": [
+            72,
+            72
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 90,
+          "safe_right": 144
+        },
+        {
+          "text": "頭部：",
+          "position": [
+            72,
+            90
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 108,
+          "safe_right": 144
+        },
+        {
+          "text": "巴布塔盔",
+          "position": [
+            144,
+            90
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 108,
+          "safe_right": 408
+        },
+        {
+          "text": "軀幹：",
+          "position": [
+            72,
+            108
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 126,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲上衣",
+          "position": [
+            144,
+            108
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 126,
+          "safe_right": 408
+        },
+        {
+          "text": "腿部：",
+          "position": [
+            72,
+            126
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 144,
+          "safe_right": 144
+        },
+        {
+          "text": "板甲護腿",
+          "position": [
+            144,
+            126
+          ],
+          "width": 64,
+          "right": 208,
+          "bottom": 144,
+          "safe_right": 408
+        },
+        {
+          "text": "盾牌：",
+          "position": [
+            72,
+            144
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 162,
+          "safe_right": 144
+        },
+        {
+          "text": "腰帶：",
+          "position": [
+            72,
+            162
+          ],
+          "width": 48,
+          "right": 120,
+          "bottom": 180,
+          "safe_right": 144
+        },
+        {
+          "text": "巨劍",
+          "position": [
+            144,
+            162
+          ],
+          "width": 32,
+          "right": 176,
+          "bottom": 180,
+          "safe_right": 408
+        }
+      ],
+      "pixel_differences": 0,
+      "single_missing_ink_pixel_rejected": true,
+      "wide_armour_present": false,
+      "before_step": 267,
+      "restored_step": 269
+    }
+  ],
+  "negative_controls": {
+    "single_ink_pixel_rejected": 6,
+    "narrow_95_pixel_armour_rejected": true
+  },
+  "restoration": "12次英中切換後全圖逐像素復原",
+  "belt_label": {
+    "old": "身體：",
+    "new": "腰帶：",
+    "record": "KOLDATA.0/257；保留B:鍵",
+    "evidence": "SPEC-019+0x190／SPEC-010／RE-094及術語表",
+    "before_after": "before-after-pixels.json"
+  },
+  "current_inputs_sha256": {
+    "docs/verification/cjk-ui/natural-sign-20261001/receipt.json": "493b871d01ab844123d6117c7afa458692c3db7a49a50abe44623f1277327263",
+    "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f",
+    "docs/verification/cjk-ui/natural-sign-20261001/en-trace.json": "d199baf13b1517c799787f9ebb0e5f26adca17bd503661785c5a7dcbb57ff6c1",
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "internal/ui/battle_cjk.go": "24ab72efd7aa173d36a627abdc4b4c513980ca690ec1d3338f5c6b5943522d25",
+    "internal/battle/equipment_panel.go": "1d1b4ffb8317c3cfd10e2cfe4e8c4ba223249ff1aa1a4e46023ee85f4fb5e040",
+    "docs/i18n/newchar-zh-Hant.json": "e7a4c37d800931904e97ade517f6293f52b3692fbecb371ec39912d175610675",
+    "docs/i18n/ui-zh-Hant.json": "af3ac4b95945b442b8ba4ae861a37b377856ed3f7637b4ae23cfdbf36bf03c17",
+    "docs/spec/019-battle-equipment-panel.md": "46ee09c1184465070fb72548db1432534773d6fc52e659ecbb46150fdbe07f1f",
+    "docs/spec/010-combat-commands.md": "43cb7596dbd3d3cac2582e7257b3acfbaa0e0ad556978d3f8f4cf4471daa63a7",
+    "docs/manual/glossary.md": "eccb0ad68655f7157df3959baf83ba8608d2f10537cb407144feddffaa04909d",
+    "docs/verification/cjk-text-fit.json": "1385aafffcdfca376cd17e69628dacf4caf76668b08f246f477b3eb6e678619f",
+    "internal/ui/itempage_cjk.go": "52f5e540d3c1a22ae36fd78522f61c659ef404c063d20ac25266ecd0024ff798",
+    "internal/font/font.go": "14b951db9d2dd22aeeea103d54a3c36d60e8b3a95a45e93aa38f70d134e34b4f",
+    "assets/ui-font/zh-hant-16.png": "89ecfc9d7d1cbf9b953ac08fb2ba556c3d3904c985d963499e17b4a89fd03318"
+  },
+  "execution_inputs_sha256": {
+    "docs/verification/cjk-ui/natural-sign-20261001/receipt.json": "493b871d01ab844123d6117c7afa458692c3db7a49a50abe44623f1277327263",
+    "docs/verification/cjk-ui/natural-sign-20261001/script.txt": "d5ba1dbceeeefb044681263750f2ea0ce1616c2257c150724569062561b7b72f",
+    "docs/verification/cjk-ui/natural-sign-20261001/en-trace.json": "d199baf13b1517c799787f9ebb0e5f26adca17bd503661785c5a7dcbb57ff6c1",
+    "assets/original-derived-data/character-roster.json": "d2b3666b606f7281845f9032673d80333132a65f938f7a5e1298a66ee2eb5413",
+    "assets/original-derived-data/town-buildings.json": "d6d86b36008224435e31de93404269232a01416211c6e29e1295880c4c92008f",
+    "assets/ui-font/manifest.json": "8527dbf9abee84636004e269bc980e5ac9ef141cc37fead77258f7720cd12c7d",
+    "docs/i18n/display-names-zh-Hant.tsv": "0811da5f01ea67f1d734dc23a6226b82907054ed63586cdd409b560a706b4756",
+    "internal/ui/battle_cjk.go": "24ab72efd7aa173d36a627abdc4b4c513980ca690ec1d3338f5c6b5943522d25",
+    "internal/battle/equipment_panel.go": "1d1b4ffb8317c3cfd10e2cfe4e8c4ba223249ff1aa1a4e46023ee85f4fb5e040",
+    "docs/i18n/newchar-zh-Hant.json": "e7a4c37d800931904e97ade517f6293f52b3692fbecb371ec39912d175610675",
+    "docs/i18n/ui-zh-Hant.json": "9e125e5416fe036c651b5f3162a18d3c01861c1375c1732d9f066f6accdd7c82"
+  },
+  "format_equivalence": {
+    "report": "format-equivalence.json",
+    "executed_snapshot": "executed-ui-translation.json",
+    "parsed_json_identical": true
+  },
+  "static_checks": [
+    {
+      "name": "text-fit",
+      "command": [
+        "python3",
+        "tools/verify_text_fit.py",
+        "--layout",
+        "workplace/cjk-layout.json",
+        "--font",
+        "assets/ui-font/manifest.json",
+        "--strings",
+        "docs/i18n/newchar-zh-Hant.json",
+        "--data",
+        "assets/original-derived-data/character-creation.json",
+        "--bank-strings",
+        "docs/i18n/ui-zh-Hant.json",
+        "--ui-i18n",
+        "docs/i18n/ui-zh-Hant.json",
+        "--display-names",
+        "docs/i18n/display-names-zh-Hant.tsv",
+        "--town-i18n",
+        "docs/i18n/town-zh-Hant.json",
+        "--out",
+        "workplace/cjk-equipment-20261001/text-fit.json"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "runtime-translation",
+      "command": [
+        "python3",
+        "tools/verify_runtime_translation.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "ui-translation",
+      "command": [
+        "python3",
+        "tools/verify_ui_translation.py"
+      ],
+      "returncode": 0
+    }
+  ],
+  "visual_review": {
+    "status": "confirmed",
+    "files": [
+      "zh-Hant-step-161.png",
+      "zh-Hant-step-179.png",
+      "zh-Hant-step-197.png",
+      "zh-Hant-step-215.png",
+      "zh-Hant-step-250.png",
+      "zh-Hant-step-268.png"
+    ],
+    "portrait_files": [
+      "zh-Hant-step-160.png",
+      "zh-Hant-step-178.png",
+      "zh-Hant-step-196.png",
+      "zh-Hant-step-214.png",
+      "zh-Hant-step-249.png",
+      "zh-Hant-step-267.png"
+    ],
+    "english_equipment_files": [
+      "en-step-161.png",
+      "en-step-179.png",
+      "en-step-197.png",
+      "en-step-215.png",
+      "en-step-250.png",
+      "en-step-268.png"
+    ],
+    "restored": "全圖逐像素等於相應切換前畫格；中文六張切換前已目視，英文全部與修正前相同"
+  },
+  "rights": "含原作衍生PNG，僅沿用既有private GitHub特例；沒有公開散布授權。名冊原始資料只留本機。",
+  "limitations": [
+    "沒有新增原版動態同狀態對拍或平台驗收",
+    "護甲母體不涵蓋怪物、武器、改名或戰利品其他樣本",
+    "本輪未驗保存；舊保存及物品規則不變",
+    "普通trace只保留stage快照，未宣稱完整逐步actor資料；切換規則及像素復原另核",
+    "姓名名牌與住宅告示仍待已提出的使用者決定，#34／#35／#40不結案"
+  ],
+  "local_evidence_sha256": {
+    "workplace/cjk-equipment-20261001/before-cjk-text-fit.json": "89f888a8f582169a45c9d83b557a0bf4d5c1660acff8f7fae1c8c3eaaa331ec6",
+    "workplace/cjk-equipment-20261001/selection-before-consumer-review.json": "c8ecb25517e312f0ca3c6371ff331ab6a2ad6c972ab5411fe1098cf1e53dd05f",
+    "workplace/cjk-equipment-20261001/en/trace.json": "dca6135cefe60dfe26d069aed1bb757461ebf07a7fcad6071ebce7d3fb91a706",
+    "workplace/cjk-equipment-20261001/en-final/trace.json": "dca6135cefe60dfe26d069aed1bb757461ebf07a7fcad6071ebce7d3fb91a706",
+    "workplace/cjk-equipment-20261001/zh-Hant-final/trace.json": "c3be506d2be4ca83453f37a445f4bd44ed93085699a1c1c30886566b0c52cab6",
+    "workplace/cjk-equipment-20261001/final-audit.json": "c68d06b088a81652f55ea1dc68e6413bd15691c220f5f40e00f5b2d131205929"
+  },
+  "files": {
+    "before-after-pixels.json": "05fba6561d6f5dd5407fea84c3416b8e99bfba7613471a5913b11ab1a53d5c60",
+    "before-newchar-zh-Hant.json": "5d29c2c65b57921d6d0e2573f00e34c7ed58989eac8f7f1565dbffad0be7e7c2",
+    "before-ui-zh-Hant.json": "3dec02c25fbca4b3b537041121a3cdd62c03333ac9379cbe059e1582d8c71003",
+    "en-engine.log": "11281323e635cb1d3cc7ac395e98f14d7138b769d07a8be5767872de88c076ce",
+    "en-run.json": "0dd63e67e5fd6d69f8934ed80f77ebaf0640f3a9035a1f3f53cfbc9ea6ea58be",
+    "en-step-160.png": "2a816d205210cd59f070ac6fe3d2e5ef3c77ff79f19ee7b44fc4c7cafedce08c",
+    "en-step-161.png": "f58f01f9b4bdf11eb2cf2c4e852791fe86481bfcbf41caee590b9cd3b22e078e",
+    "en-step-162.png": "2a816d205210cd59f070ac6fe3d2e5ef3c77ff79f19ee7b44fc4c7cafedce08c",
+    "en-step-178.png": "d007d8a192c28a2e742afc0464482fb03a45185d22a7f794712b9dae499996a9",
+    "en-step-179.png": "67db660b61cd6c86317b130f0adc7a0274a76def93f4ca727fe453a7b56f420b",
+    "en-step-180.png": "d007d8a192c28a2e742afc0464482fb03a45185d22a7f794712b9dae499996a9",
+    "en-step-196.png": "15152d34d7499270448a75ac9c8a9b749b14afe62b1b07169e453fec2ef647ea",
+    "en-step-197.png": "f156461ff103f400970cc463791afe9bfe7098fea4c94b77c099e43a5bbddf47",
+    "en-step-198.png": "15152d34d7499270448a75ac9c8a9b749b14afe62b1b07169e453fec2ef647ea",
+    "en-step-214.png": "44d02f5a1bd7d8c4de74f36241949c7355dfc2592b5998d3930c9007130fe96f",
+    "en-step-215.png": "937504d375d0ef3d7b33d676bed2074acddb4d8ea03c654300b8fc13e57b7e7d",
+    "en-step-216.png": "44d02f5a1bd7d8c4de74f36241949c7355dfc2592b5998d3930c9007130fe96f",
+    "en-step-249.png": "0038fb7274252d59802884f7dfb39bf4c9c8415a27a9110cd258362b2e4a42e9",
+    "en-step-250.png": "9610d57638fefe0148d703b5cc572f1d55f47fcb1ba4a669c5709066b75632ab",
+    "en-step-251.png": "0038fb7274252d59802884f7dfb39bf4c9c8415a27a9110cd258362b2e4a42e9",
+    "en-step-267.png": "acb95c247a0516f5434e68f832ea2a9e3fd696467ebf54d6ed1a2ebaa2d5c313",
+    "en-step-268.png": "643fec70ba7d155f42f1be13faf3608d05d60db755cfce92dd3885cc9f5e7673",
+    "en-step-269.png": "acb95c247a0516f5434e68f832ea2a9e3fd696467ebf54d6ed1a2ebaa2d5c313",
+    "en-trace.json": "dca6135cefe60dfe26d069aed1bb757461ebf07a7fcad6071ebce7d3fb91a706",
+    "executed-ui-translation.json": "9e125e5416fe036c651b5f3162a18d3c01861c1375c1732d9f066f6accdd7c82",
+    "format-equivalence.json": "762f661fd01a5cac6637e2a38c3869b28a7263571b391e7fc36fc1a8aab6965b",
+    "kol_cjk_equipment_fix_labels.py": "d9dbadbfced7741073ecc586a4441a7a502ad60bcbcb0cc14abb2e57c073dd3a",
+    "kol_cjk_equipment_prepare.py": "4f8667190b0ad390f37ad4646c3bcc86a4b8fa36812982a20fca587104cfa2b4",
+    "kol_cjk_equipment_run.py": "c7f1c21030f8b082e938052e45f0321feedb7b550e56db2d3b7f97a6bfe617e0",
+    "kol_cjk_equipment_verify.py": "996259b81a735ce7e23612a5d2cd4d1fb24571e76594a836c918c622c87a79e7",
+    "label-change.json": "402b67f7d9233e82a4b474afb6cbeef1a2be480b672285d961896bb85fb31d01",
+    "pixel-checks.json": "c53406bbbf062ee4e18b951b66c1f922bbb62fe4962ae1be275f5f71bad7d3f8",
+    "runtime-translation.log": "8b6fcac90d888bd44f410bf3136cc9b58ba9dde61b09195a6ff84eb0d57dee22",
+    "script.txt": "8c26bc117322ea1ff824121863aff1917228aae3846bec6dbfe8251f6a97c95f",
+    "selection.json": "c64f643f680a70f71dce13e749920b552ac834b7303e2b955e25224b50098fd2",
+    "static-checks.json": "1802157f7359b72bdb6ef4065d6416064a209c89fc9f4e11e15eed43e3a4d6eb",
+    "text-fit.json": "1385aafffcdfca376cd17e69628dacf4caf76668b08f246f477b3eb6e678619f",
+    "text-fit.log": "db45eeeccccbe4959a2ed9eb087f482f1bde4af5f1ca8a01a5ea7743afced655",
+    "ui-translation.log": "fc504df5cb9b2822b7068a5d913e4d8b5a39f60e2a53e211839857b8d457bc9e",
+    "zh-Hant-engine.log": "2ecf546c8a9f01f16f42718d61da6b5bbee61c587e4eaad44a3308d50f2fe47b",
+    "zh-Hant-run.json": "ffea62d090af3cb51709462eb6ead392fd99e3cfcca3ae7eca9b5a2607a52ebb",
+    "zh-Hant-step-160.png": "2bc8b293ae154e1a5554320e31460ad3c6b76f5ea535963790e0198c54293cc5",
+    "zh-Hant-step-161.png": "6b6aa6c6b477187adfd0d0d56fdb184e59766edd2b4ea1cce181fa974d34e1a8",
+    "zh-Hant-step-162.png": "2bc8b293ae154e1a5554320e31460ad3c6b76f5ea535963790e0198c54293cc5",
+    "zh-Hant-step-178.png": "7de1eb4f5f7b017abf91b1875d563d6614a662855e5595fc3ac3b4a8cea4c0a0",
+    "zh-Hant-step-179.png": "21bc272ef7b7c24542e5b6873141c2056f301cc96344197fe00a5356b099ed18",
+    "zh-Hant-step-180.png": "7de1eb4f5f7b017abf91b1875d563d6614a662855e5595fc3ac3b4a8cea4c0a0",
+    "zh-Hant-step-196.png": "b4a6c0433db6c1f8f8e0609d87b9d2634058889dd282ffa7100ae37269a8e2bb",
+    "zh-Hant-step-197.png": "4da6976b825e7bcb00f4b7a339cb0d941a06517ae1f11ff0ca5bf463dc0e5583",
+    "zh-Hant-step-198.png": "b4a6c0433db6c1f8f8e0609d87b9d2634058889dd282ffa7100ae37269a8e2bb",
+    "zh-Hant-step-214.png": "3aab1132a2ee37cbf739b70a68778f0d822a87726050ee00c15f61fae0f65b4a",
+    "zh-Hant-step-215.png": "989d9d8309f36785867b0b1212ca02844a75d3b23d018991e326dcbbb4077456",
+    "zh-Hant-step-216.png": "3aab1132a2ee37cbf739b70a68778f0d822a87726050ee00c15f61fae0f65b4a",
+    "zh-Hant-step-249.png": "7ed270a847f587da9ffc67548d996047595a54fbc1bfb122d1a73a1f1bbbb461",
+    "zh-Hant-step-250.png": "1f359a175b456777eab3647b2eb7ee0f501b9df9eac53ea4647cd6a1c3da3b77",
+    "zh-Hant-step-251.png": "7ed270a847f587da9ffc67548d996047595a54fbc1bfb122d1a73a1f1bbbb461",
+    "zh-Hant-step-267.png": "f4f4f5786aebbdf2a9821a50d9082173e46283c69e5fb3c492aaeeb21362b9dd",
+    "zh-Hant-step-268.png": "743d6b24a2bc06192765576dd2b095fcb4819ca8ea1b9421a1c41d29097bad6e",
+    "zh-Hant-step-269.png": "f4f4f5786aebbdf2a9821a50d9082173e46283c69e5fb3c492aaeeb21362b9dd",
+    "zh-Hant-trace.json": "c3be506d2be4ca83453f37a445f4bd44ed93085699a1c1c30886566b0c52cab6"
+  },
+  "source_assets": {
+    "source_file": "Knights-of-legend.zip",
+    "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "png_manifests_sha256": {
+      "assets/original-derived-png/ega/manifest.json": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+      "assets/original-derived-png/ega/BATTLE/manifest.json": "bf931ccff3000130932a522b40d219e24227a092b4c90a68bc2bd31001cb7f48",
+      "assets/original-derived-png/contact-sheets/manifest.json": "3d568cfb77e85aad983fbdf7c34a071affe832e7aa9e1b0f93e84de8c251def6"
+    },
+    "generator": "Go1.26.7／Ebitengine2.9.9正常重製畫格；f969a63f，完整版本與按鍵見en-run.json／zh-Hant-run.json",
+    "base_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "dirty_worktree": true
+  },
+  "png_frames": [
+    {
+      "file": "en-step-160.png",
+      "frame": 160,
+      "sha256": "2a816d205210cd59f070ac6fe3d2e5ef3c77ff79f19ee7b44fc4c7cafedce08c",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-161.png",
+      "frame": 161,
+      "sha256": "f58f01f9b4bdf11eb2cf2c4e852791fe86481bfcbf41caee590b9cd3b22e078e",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-162.png",
+      "frame": 162,
+      "sha256": "2a816d205210cd59f070ac6fe3d2e5ef3c77ff79f19ee7b44fc4c7cafedce08c",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-178.png",
+      "frame": 178,
+      "sha256": "d007d8a192c28a2e742afc0464482fb03a45185d22a7f794712b9dae499996a9",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-179.png",
+      "frame": 179,
+      "sha256": "67db660b61cd6c86317b130f0adc7a0274a76def93f4ca727fe453a7b56f420b",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-180.png",
+      "frame": 180,
+      "sha256": "d007d8a192c28a2e742afc0464482fb03a45185d22a7f794712b9dae499996a9",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-196.png",
+      "frame": 196,
+      "sha256": "15152d34d7499270448a75ac9c8a9b749b14afe62b1b07169e453fec2ef647ea",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-197.png",
+      "frame": 197,
+      "sha256": "f156461ff103f400970cc463791afe9bfe7098fea4c94b77c099e43a5bbddf47",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-198.png",
+      "frame": 198,
+      "sha256": "15152d34d7499270448a75ac9c8a9b749b14afe62b1b07169e453fec2ef647ea",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-214.png",
+      "frame": 214,
+      "sha256": "44d02f5a1bd7d8c4de74f36241949c7355dfc2592b5998d3930c9007130fe96f",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-215.png",
+      "frame": 215,
+      "sha256": "937504d375d0ef3d7b33d676bed2074acddb4d8ea03c654300b8fc13e57b7e7d",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-216.png",
+      "frame": 216,
+      "sha256": "44d02f5a1bd7d8c4de74f36241949c7355dfc2592b5998d3930c9007130fe96f",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-249.png",
+      "frame": 249,
+      "sha256": "0038fb7274252d59802884f7dfb39bf4c9c8415a27a9110cd258362b2e4a42e9",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-250.png",
+      "frame": 250,
+      "sha256": "9610d57638fefe0148d703b5cc572f1d55f47fcb1ba4a669c5709066b75632ab",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-251.png",
+      "frame": 251,
+      "sha256": "0038fb7274252d59802884f7dfb39bf4c9c8415a27a9110cd258362b2e4a42e9",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-267.png",
+      "frame": 267,
+      "sha256": "acb95c247a0516f5434e68f832ea2a9e3fd696467ebf54d6ed1a2ebaa2d5c313",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-268.png",
+      "frame": 268,
+      "sha256": "643fec70ba7d155f42f1be13faf3608d05d60db755cfce92dd3885cc9f5e7673",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "en-step-269.png",
+      "frame": 269,
+      "sha256": "acb95c247a0516f5434e68f832ea2a9e3fd696467ebf54d6ed1a2ebaa2d5c313",
+      "generator_run": "en-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-160.png",
+      "frame": 160,
+      "sha256": "2bc8b293ae154e1a5554320e31460ad3c6b76f5ea535963790e0198c54293cc5",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-161.png",
+      "frame": 161,
+      "sha256": "6b6aa6c6b477187adfd0d0d56fdb184e59766edd2b4ea1cce181fa974d34e1a8",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-162.png",
+      "frame": 162,
+      "sha256": "2bc8b293ae154e1a5554320e31460ad3c6b76f5ea535963790e0198c54293cc5",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-178.png",
+      "frame": 178,
+      "sha256": "7de1eb4f5f7b017abf91b1875d563d6614a662855e5595fc3ac3b4a8cea4c0a0",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-179.png",
+      "frame": 179,
+      "sha256": "21bc272ef7b7c24542e5b6873141c2056f301cc96344197fe00a5356b099ed18",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-180.png",
+      "frame": 180,
+      "sha256": "7de1eb4f5f7b017abf91b1875d563d6614a662855e5595fc3ac3b4a8cea4c0a0",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-196.png",
+      "frame": 196,
+      "sha256": "b4a6c0433db6c1f8f8e0609d87b9d2634058889dd282ffa7100ae37269a8e2bb",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-197.png",
+      "frame": 197,
+      "sha256": "4da6976b825e7bcb00f4b7a339cb0d941a06517ae1f11ff0ca5bf463dc0e5583",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-198.png",
+      "frame": 198,
+      "sha256": "b4a6c0433db6c1f8f8e0609d87b9d2634058889dd282ffa7100ae37269a8e2bb",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-214.png",
+      "frame": 214,
+      "sha256": "3aab1132a2ee37cbf739b70a68778f0d822a87726050ee00c15f61fae0f65b4a",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-215.png",
+      "frame": 215,
+      "sha256": "989d9d8309f36785867b0b1212ca02844a75d3b23d018991e326dcbbb4077456",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-216.png",
+      "frame": 216,
+      "sha256": "3aab1132a2ee37cbf739b70a68778f0d822a87726050ee00c15f61fae0f65b4a",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-249.png",
+      "frame": 249,
+      "sha256": "7ed270a847f587da9ffc67548d996047595a54fbc1bfb122d1a73a1f1bbbb461",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-250.png",
+      "frame": 250,
+      "sha256": "1f359a175b456777eab3647b2eb7ee0f501b9df9eac53ea4647cd6a1c3da3b77",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-251.png",
+      "frame": 251,
+      "sha256": "7ed270a847f587da9ffc67548d996047595a54fbc1bfb122d1a73a1f1bbbb461",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-267.png",
+      "frame": 267,
+      "sha256": "f4f4f5786aebbdf2a9821a50d9082173e46283c69e5fb3c492aaeeb21362b9dd",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-268.png",
+      "frame": 268,
+      "sha256": "743d6b24a2bc06192765576dd2b095fcb4819ca8ea1b9421a1c41d29097bad6e",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    },
+    {
+      "file": "zh-Hant-step-269.png",
+      "frame": 269,
+      "sha256": "f4f4f5786aebbdf2a9821a50d9082173e46283c69e5fb3c492aaeeb21362b9dd",
+      "generator_run": "zh-Hant-run.json",
+      "rights_classification": "private GitHub可保存，禁止公開散布",
+      "evidence": "六組正常裝備切換：字模與前後像素核對；目視範圍見visual_review"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "kol-normal-spell-return-audit-v1",
+  "receipt_sha256": "2c4589374e446a7259fc9d07ba7862b6f4dc22c9497705f3270efb8599c8e2ba",
+  "attachments": 3094,
+  "full_readonly_verification": "passed",
+  "host_control": {
+    "schema": "kol-normal-spell-return-host-control-v1",
+    "observed_utc": "2026-10-02 13:06:20 UTC",
+    "git_head": "1384e508f70e8a5d81bc050ea79f66d3f0d38fe6",
+    "git_diff_check": "passed",
+    "git_staged": [],
+    "project_containers": [],
+    "other_project_containers_preserved": true,
+    "temporary_artifacts": "三版原版副本、正常／失敗畫格及完整payload僅本機；沒有新正式程式或交付包。"
+  },
+  "root_owned_files": [],
+  "md_directories": [],
+  "artifact_uid_gid": [
+    1000,
+    1000
+  ],
+  "production_unchanged": true
+}

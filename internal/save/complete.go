@@ -32,7 +32,9 @@ func (c *Clock) Validate() error {
 			break
 		}
 	}
-	if c.Part != part {
+	// RE-151：時段在扣時刻之前更新，合法保存可能仍保留上一時段。
+	// 保存原值，讓重載後的正常 UpdatePart 處理尚未發生的變換。
+	if c.Part < 0 || c.Part > part {
 		return fmt.Errorf("世界時段與剩餘時刻不一致")
 	}
 	return nil

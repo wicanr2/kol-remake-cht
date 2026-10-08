@@ -1,0 +1,40 @@
+{
+  "schema": "kol-world-cost-resume-final-audit-v1",
+  "receipt_sha256": "d24896e2bb6b7d3a0ac768cca2a2a3f5d0f68a2467fb5a7e66b10d41e0660271",
+  "attachments": 3961,
+  "initial_receipt_preserved": true,
+  "full_readonly_verification": "passed",
+  "host_control": {
+    "timestamp_utc": "2026-10-02 17:19:49 UTC",
+    "git_diff_check": "passed",
+    "git_staged": [],
+    "project_containers": [],
+    "other_project_containers_preserved": [
+      "wiz7-r855-paired-route",
+      "vigilant_elgamal",
+      "sharp_cohen",
+      "dinbando_web_dev",
+      "supabase_studio_dinbando",
+      "supabase_pg_meta_dinbando",
+      "supabase_edge_runtime_dinbando",
+      "supabase_storage_dinbando",
+      "supabase_rest_dinbando",
+      "supabase_realtime_dinbando",
+      "supabase_inbucket_dinbando",
+      "supabase_auth_dinbando",
+      "supabase_kong_dinbando",
+      "supabase_db_dinbando",
+      "focoria-local",
+      "admiring_kowalevski",
+      "agentacc-test-web",
+      "agentacc-test-pg",
+      "cool_bose"
+    ]
+  },
+  "root_owned_files": [],
+  "md_directories": [],
+  "artifact_uid_gid": [
+    1000,
+    1000
+  ]
+}

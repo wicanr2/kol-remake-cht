@@ -7,7 +7,7 @@
  "ambush_rolls": "1,100,23",
  "token_count": 2317,
  "trace": "docs/verification/player-path/full-chain/trace.json",
- "trace_sha256": "8e32198845c3a6b08ba78cf37bd0457b13b7e4bd9142bdc62ff2552c065d39e0",
+ "trace_sha256": "a84af3b6901a63e800672e7a5d5c76f8c47598f1596c0e726c240d97ddd1461d",
  "milestones": [
   {
    "step": 0,
@@ -225,6 +225,14 @@
    "town": {
     "left_town": true,
     "mode": 0,
+    "party": [
+     "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=8",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+     "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=9",
+     "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+    ],
     "town": 7,
     "x": 59,
     "y": 0
@@ -318,11 +326,11 @@
     "left_town": false,
     "mode": 2,
     "party": [
-     "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10",
-     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+     "Poontang gold=158 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=8",
+     "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
      "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
-     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
-     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+     "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11",
+     "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=9",
      "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
     ],
     "town": 7,
@@ -389,7 +397,7 @@
  ],
  "save": {
   "file": "workplace/saves/full-chain.json",
-  "sha256_without_saved_at": "b1b587e5c34b24aa226c854c7d2267cea5d2e2f82158471239c3d43fcf27025b",
+  "sha256_without_saved_at": "5732b8cac34907bf262dd978003aef67162fe91c6b5e99adfb72c974b943dc77",
   "fields": {
    "schema": "kol-save-v3",
    "location.kind": "town",

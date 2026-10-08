@@ -1,0 +1,18 @@
+{
+  "schema": "kol-item-edge-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x169aa": {"semantic": "將word_30C8A指定的快取segment設為繪圖目標；隨後完整背景、木屋背板及立繪寫入快取。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；169A7..16A08資料流與gui-edge2正常呼叫的target_segment。"},
+    "0x16a25": {"semantic": "把word_30C8A作為完整清單背景複製來源，矩形byte欄0..40、列0..200；呼叫返回定位16A2A。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；16A11..16A25與正常畫格3／15／100的sub_19E9D引數。"},
+    "0x16aab": {"semantic": "EGA模式快取修改從byte位移1的最低bit開始，即x15；四段迴圈各156列、每列前進40 bytes，前兩段OR1，後兩段AND FEh。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；16AA7..16AF0與首次完整複製／首次小框之間的800-byte唯讀欄快照，436個實際byte改變完全符合。"},
+    "0x16abc": {"semantic": "第一段156*40後再加780h，累計步長8160；第二段因此在實際8000-byte平面的第4列開始。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；16AB7..16AC0；正常快取差分與8000步長反例。"},
+    "0x16ace": {"semantic": "第二段後再次加780h，第三段從第二平面的第8列開始，清最低bit。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；16AC9..16ADA及正常四平面欄快照。"},
+    "0x16ae0": {"semantic": "第三段後再次加780h，第四段從第三平面的第12列開始，清最低bit至第167列。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；16ADB..16AF0及正常四平面欄快照；末四列再由圖示底板覆蓋。"},
+    "0x16d82": {"semantic": "小框換列先呼叫sub_1C485，來源word_30C8A，舊框byte欄floor(X/8)..floor((X+109)/8)，列slot_marks[舊列]..+26；再畫新框。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；16D25..16D82、16D8A..16DDA；正常0→1換列及78張清單的完整曝光模型。"},
+    "0x16cff": {"semantic": "重建旗標非零時跳回16995，重新合成快取並將選中欄清零。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-174及RE-178；16CEC..16CFF及正常動作返回首欄畫格15／28／42／56／72／88。"},
+    "0x16d02": {"semantic": "未要求重建時跳回16A11，沿用已修改的快取重新複製完整清單；空武器確認返回保持第10欄。", "confidence": "已證實", "evidence": "docs/re/20261001-item-detail.md RE-178；16CEC..16D02與正常畫格99→100的呼叫及八個曝光像素。"}
+  }
+}

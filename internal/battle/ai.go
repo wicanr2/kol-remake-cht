@@ -65,6 +65,7 @@ var levelDivisor = [8]int{1, 1, 2, 4, 8, 16, 32, 64}
 // 正規化那一步原版分兩條路避免 32-bit 溢位：總和超過 16 bit 就先把總和除以 255、
 // 每一項直接除；否則每一項先乘 255 再除總和（`0x25BBF`…`0x25C92`）。兩條路的
 // 語意相同，這裡照抄，因為溢位與否會影響取整的結果。
+// RE-237：每次乘、加、減保留32位元，有號除法向零截斷。
 func WeightedPick(base, context []int, level int, rng Rand) int {
 	n := len(base)
 	if n == 0 || len(context) < n {
@@ -76,16 +77,16 @@ func WeightedPick(base, context []int, level int, rng Rand) int {
 	if level >= len(levelDivisor) {
 		level = len(levelDivisor) - 1
 	}
-	acc := make([]int64, n)
+	acc := make([]int32, n)
 	for i := 0; i < n; i++ {
-		w := int64(1)
+		w := int32(1)
 		for k := 0; k < level; k++ {
-			w *= int64(context[i])
+			w *= int32(context[i])
 		}
-		w /= int64(levelDivisor[level])
-		acc[i] = w * int64(base[i])
+		w /= int32(levelDivisor[level])
+		acc[i] = w * int32(base[i])
 	}
-	var total int64
+	var total int32
 	for _, v := range acc {
 		total += v
 	}
@@ -105,7 +106,7 @@ func WeightedPick(base, context []int, level int, rng Rand) int {
 		}
 		acc[i] /= total
 	}
-	r := int64(rng.Roll(256) - 1)
+	r := int32(rng.Roll(256) - 1)
 	for i := range acc {
 		r -= acc[i]
 		if r < 0 {
@@ -159,22 +160,45 @@ func EnemyStyle(a Actor, w AIWeights, guard, weaponBits int, tail [2]int, rng Ra
 //
 // **額度用的是這一手完整的那一份**（`0x2596C` 先把 `word_30D06` 設回
 // `word_2FBB6`），不是花剩的。
+
+// RE-237：原版高移動選項的七格位元組，見 SPEC-008 第8節勘誤。
+var moveLocationContext = [3][7]int{
+	{3, 4, 5, 0, 0, 0, 0},
+	{2, 3, 2, 3, 4, 0, 96},
+	{91, 96, 110, 116, 78, 97, 91},
+}
+
 func EnemyLocation(a Actor, w AIWeights, style int, rng Rand) int {
-	if style < 0 || style >= len(ContextWeights) {
-		style = 0
+	var context []int
+	if style >= IconMoveWalk && style <= IconMoveFast {
+		context = moveLocationContext[style-IconMoveWalk][:]
+	} else {
+		if style < 0 || style >= len(ContextWeights) {
+			style = 0
+		}
+		context = ContextWeights[style][:]
 	}
 	base := make([]int, len(w.Location))
 	ctx := make([]int, len(w.Location))
 	for i := range base {
 		base[i] = w.Location[i]
-		ctx[i] = ContextWeights[style][i]
+		ctx[i] = context[i]
 	}
-	cost := ActionCost(a, commandTime[style&(len(commandTime)-1)], 2)
+	// 矩陣列用傳入的舊選項，花費卻查行動者寫回之前的 +0x23
+	// （sub_2590F:0x25984..0x25994，RE-168）。
+	time := 0
+	if a.Style >= 0 && a.Style < len(commandTime) {
+		time = commandTime[a.Style]
+	} else if a.Style >= IconMoveWalk && a.Style <= IconMoveFast {
+		// 原版查到 16 格表外：移動三式 60、61、62 讀出 0、0、250。
+		time = [3]int{0, 0, 250}[a.Style-IconMoveWalk]
+	}
+	cost := ActionCost(a, time, 2)
 	num, den := ClampEffort(a.TimeAllowance(), cost)
 	if num != 0 {
 		for _, i := range LocationEffortSlots {
 			if i < len(ctx) {
-				ctx[i] = ctx[i] * den / num
+				ctx[i] = ctx[i] * den / num & 0xFF
 			}
 		}
 	}
@@ -194,13 +218,14 @@ const MoveFormEffortTime = 6
 //
 // 基礎權重（`AIWeights.Move`）只調衝刺那一項：兩腿都還在（`< 0x80`）而且環號 < 7 就歸零；
 // 否則環號 < 2 減半、疲勞比 > 0x31 減半，再乘兩次「額度 ÷ 花費」（花費
-// `sub_251B0(6, 0)`，比值由 `sub_2526C` 夾在 1/3…1）。乘除都在 16 位元裡做。
+// `sub_251B0` 原始推入 6、0，實際花費是負重乘 6（RE-168），
+// 比值由 `sub_2526C` 夾在 1/3…1）。乘除都在 16 位元裡做。
 //
 // 正規化只做索引 2 與 1（迴圈從 2 往下、到 0 就停），索引 0 維持原值；抽樣擲
 // `rand(256) − 1` 從索引 0 起逐項扣，扣成負的就選中。沒有等級加權。
 func EnemyMoveForm(a Actor, weights AIWeights, ring int, rng Rand) int {
 	w := weights.Move
-	if a.RightLeg < PartLost && a.LeftLeg < PartLost && ring < RingCount {
+	if !partLost(a.RightLeg) && !partLost(a.LeftLeg) && ring < RingCount {
 		w[2] = 0
 	} else {
 		if ring < 2 {
@@ -209,7 +234,7 @@ func EnemyMoveForm(a Actor, weights AIWeights, ring int, rng Rand) int {
 		if a.FatigueRatio() > 0x31 {
 			w[2] /= 2
 		}
-		num, den := ClampEffort(a.TimeAllowance(), ActionCost(a, MoveFormEffortTime, 0))
+		num, den := ClampEffort(a.TimeAllowance(), ActionCost(a, 0, MoveFormEffortTime))
 		if den != 0 {
 			v := (w[2] * num & 0xFFFF) / den
 			v = (v * num & 0xFFFF) / den
@@ -268,54 +293,80 @@ type EnemyDecision struct {
 // PlanEnemy 決定第 i 名敵人這一回合的一手，並寫進它的參戰者記錄。
 //
 // 原版把結果放進三個全域再由呼叫端寫回（`0x1F104`），remake 直接寫——兩邊的可觀察
-// 行為相同，中間那三個全域沒有別的讀者。
+// 行為相同。決策樹照 `sub_2374C` 的標籤逐段翻（RE-168，擾動對拍逐項核過）：
 //
-// 主幹（`0x23C1A`…`0x24030`）：
-//
-//	環 0（八個相鄰格）找隊員 → 找到就攻擊，`+0x00` 非零的有 1/3 機率改成移動
-//	環 0 沒人 → 往外掃環 1…6
-//	    線通不到就換一個目標（`0x23EAB` 的 `sub_25D0F`）
-//	    環號 < 4、種類非零又有右臂 → 射擊（`0x23F15`，RE-104）
-//	    否則 → 朝目標走一步
-//	七環都沒人 → 隨機挑一個站得下的方向移動
+//	0x237C7  兩臂都廢            → 逃（`enemyFlee`）
+//	0x237F5  傷勢比 FleeRecover／FleeAt 低 → 正常決策（`planTactics`）
+//	0x23844  八個相鄰格有隊員貼著 → 傷勢達 FleeAt 逃，否則正常決策
+//	0x23886  沒人貼著            → 在撤退而且上一手挨打才逃，否則原地喘息
 func (s *State) PlanEnemy(i int, rng Rand) EnemyDecision {
 	if i < 0 || i >= len(s.Actors) {
 		return EnemyDecision{Target: -1}
 	}
 	a := &s.Actors[i]
+	// `word_34A08` 是一次規劃之內的計數，`sub_2374C` 開頭歸零（RE-117）。
+	a.Stuck = 0
 	// AI 一進來就擲一次（`0x237A6` → `word_3AC5E`），在手臂與撤退判斷之前，不論後面用不用
 	// 得到。找目標的篩選遮罩 0x10（Shade Ring）用的是這一次（`hiddenFrom`，RE-159）。
 	s.aiRoll = rng.Roll(100)
+	ratio := a.FatigueRatio()
 
-	// 兩隻手臂都廢就只能移動（`0x237E9`）。
-	if a.RightArm <= 0 && a.LeftArm <= 0 {
-		return s.enemyMove(i, -1, -1, rng)
+	// 兩隻手臂都廢（`0x237B0`：兩臂記錄值都 ≥ 0x80）。
+	if partLost(a.RightArm) && partLost(a.LeftArm) {
+		return s.enemyFlee(i, rng)
 	}
+	if a.Retreating {
+		if ratio < a.FleeRecover {
+			a.Retreating = false
+			return s.planTactics(i, rng)
+		}
+	} else if ratio < a.FleeAt {
+		return s.planTactics(i, rng)
+	}
+	for _, c := range RingCells(0) {
+		if s.candidateAt(i, a.X+c.Row, a.Y+c.Col, maskMelee) >= 0 {
+			if ratio >= a.FleeAt {
+				return s.enemyFlee(i, rng)
+			}
+			return s.planTactics(i, rng)
+		}
+	}
+	return s.enemyCornered(i, rng)
+}
 
-	// 撤退（`0x237F5`…`0x238C1`）。傷勢是 `50 × 累積傷害 ÷ 昏迷門檻`，
-	// 兩個門檻來自怪物記錄的 +0x0D／+0x0E——不死系是 100／0，永遠走不進來。
-	if d, ok := s.enemyRetreat(i, rng); ok {
-		return d
+// enemyCornered 是 `0x23886`：沒有路可走時，已在撤退而且上一手挨了打就繼續逃，
+// 否則原地喘息並記下撤退狀態。
+func (s *State) enemyCornered(i int, rng Rand) EnemyDecision {
+	a := &s.Actors[i]
+	if a.Retreating && a.LastHurt != 0 {
+		return s.enemyFlee(i, rng)
 	}
-	// `word_34A08` 是一次規劃之內的計數（`sub_2374C` 開頭歸零，RE-117）。
-	a.Stuck = 0
-	return s.planTactics(i, rng)
+	return s.enemyRest(i)
+}
+
+// enemyRest 是 `0x238C1`：指令碼 5、兩個選項 0，並把撤退旗標設起來。
+func (s *State) enemyRest(i int) EnemyDecision {
+	a := &s.Actors[i]
+	a.Retreating = true
+	d := EnemyDecision{Command: CmdRest, Target: -1, Ring: -1, Facing: a.Facing}
+	s.applyEnemy(i, d)
+	return d
 }
 
 // planTactics 是決策樹從「手上有沒有武器」那個分岔起的整段（`0x23BC2`…`0x24030`）。
-// 抽出來是因為繞不出去的第三條退路會**回到這裡重跑**（RE-117）。
+// 繞不出去的退路會**回到這裡重跑**（RE-117）。
 func (s *State) planTactics(i int, rng Rand) EnemyDecision {
 	a := &s.Actors[i]
 	d := EnemyDecision{Target: -1, Ring: -1, Facing: a.Facing}
 
 	// 手上那一格空著（`0x23BC2`，RE-116）：先看參戰者記錄 +0x2B，非零就清掉改成
-	// 移動，否則出指令碼 0x26 去撿地上的東西，攻擊選項 0、防禦選項 2。
+	// 隨機走一步（`0x240B9`），否則出指令碼 0x26 去撿地上的東西，攻擊選項 0、防禦選項 2。
 	// **原版沒有任何地方把 +0x2B 設成非零**（兩個寫入點都寫 0），所以移動那一條
 	// 走不到；照著實作是為了讓這一段與原版逐條對得起來。
 	if a.Unarmed {
 		if a.PickedUp != 0 {
 			a.PickedUp = 0
-			return s.enemyMove(i, -1, -1, rng)
+			return s.enemyRandom(i, rng)
 		}
 		d.Command = CmdPickUp
 		d.Style = 0
@@ -328,35 +379,25 @@ func (s *State) planTactics(i int, rng Rand) EnemyDecision {
 	// 攻擊那一段，不再往外環找目標——抄來的攻擊選項會變成抽命中部位的列號。
 	if EnemyIntellectCheck(a.Intellect, a.Level, rng.Roll(100)) {
 		if prev, row, t, ok := s.counterScan(i, rng); ok {
-			if a.Kind != 0 && rng.Roll(3) == 1 {
-				return s.enemyMove(i, t, 0, rng)
-			}
-			d.Command = CmdWeapon
-			d.Target = t
-			d.Ring = 0
-			d.Facing = a.Facing
-			s.enemyStrike(&d, i, t, prev, row, rng)
-			s.applyEnemy(i, d)
-			return d
+			s.aiStyle, s.aiGuard = prev, row
+			return s.enemyAttack(i, t, prev, row, rng)
 		}
 	}
 
-	// 環 0：貼著的隊員直接打。種類（`+0x00`）非零的怪物有 1/3 機率放棄攻擊改成移動
-	// （`0x23CA7`）；種類為 0 的**不擲**這一骰（RE-159）。反制掃描有結論時也走這一關。
-	if t := s.findInRing(i, 0, rng); t >= 0 {
-		if a.Kind != 0 && rng.Roll(3) == 1 {
-			return s.enemyMove(i, t, 0, rng)
-		}
-		d.Command = CmdWeapon
-		d.Target = t
-		d.Ring = 0
-		d.Facing = s.facingToward(i, t)
-		s.enemyStrike(&d, i, t, EnemyNearStyle, EnemyNearGuard, rng)
-		s.applyEnemy(i, d)
-		return d
+	// 環 0：貼著的隊員直接打，方向就是那一格的方向，攻擊選項先填 0x0B、防禦選項 7。
+	if t, cell := s.findInRingCell(i, 0, maskMelee, rng, nil); t >= 0 {
+		a.Facing = cell
+		s.aiStyle, s.aiGuard = EnemyNearStyle, EnemyNearGuard
+		return s.enemyAttack(i, t, EnemyNearStyle, EnemyNearGuard, rng)
 	}
 
-	// 環 1…6：找得到就先看線通不通，通得到才考慮射擊，否則靠近。
+	// 環 1…6（`0x23D94`…`0x23E4C`，RE-168）。篩選遮罩看種類（`+0x00`）：
+	//
+	//	種類 0    遮罩 0x19，只打站在地上的隊員，掃一趟
+	//	種類非零  先擲 `rand(2)`：1 是遮罩 0x11（隊員，騎乘的也算）掃一趟；
+	//	          2 先掃一趟遮罩 0x31（只找正在施法或射擊的隊員），找不到再掃一趟 0x11
+	//
+	// 找得到就先看線通不通，通得到才考慮射擊，否則靠近。
 	foot := TileGround
 	if s.Field != nil {
 		foot = s.Field.At(a.X, a.Y)
@@ -364,19 +405,43 @@ func (s *State) planTactics(i int, rng Rand) EnemyDecision {
 	if a.Flag1E != 0 {
 		foot = MountedSight
 	}
-	for ring := 1; ring < RingCount; ring++ {
-		t := s.findInRingMatching(i, ring, rng, func(target int) bool {
-			return s.Field == nil || s.Field.LineOfSight(a.X, a.Y, s.Actors[target].X, s.Actors[target].Y, foot)
-		})
-		if t < 0 {
-			continue
+	mask, passes := maskMelee, 1
+	if a.Kind != 0 {
+		if rng.Roll(2) == 1 {
+			mask = maskAny
+		} else {
+			mask, passes = maskShooter, 2
 		}
-		if ring < EnemyShootRing && a.Kind != 0 && a.RightArm > 0 {
-			return s.enemyShoot(i, t, ring)
-		}
-		return s.enemyMove(i, t, ring, rng)
 	}
-	return s.enemyMove(i, -1, -1, rng)
+	for ; passes > 0; passes-- {
+		for ring := 1; ring < RingCount; ring++ {
+			t := s.findInRingMatching(i, ring, mask, rng, func(target int) bool {
+				return s.Field == nil || s.Field.LineOfSight(a.X, a.Y, s.Actors[target].X, s.Actors[target].Y, foot)
+			})
+			if t < 0 {
+				continue
+			}
+			if ring < EnemyShootRing && a.Kind != 0 && !partLost(a.RightArm) {
+				return s.enemyShoot(i, t, ring)
+			}
+			return s.enemyApproach(i, t, ring, rng)
+		}
+		mask = maskAny
+	}
+	return s.enemyRandom(i, rng)
+}
+
+// enemyAttack 是 `0x23CA7`…`0x23D8B`：找到貼身的目標之後，種類非零的有 1/3 機率改成逃
+// （`0x23CD3` 跳的是 `0x238E8`，不是朝目標走），否則填貼近打那一手。
+func (s *State) enemyAttack(i, target, prev, row int, rng Rand) EnemyDecision {
+	a := &s.Actors[i]
+	if a.Kind != 0 && rng.Roll(3) == 1 {
+		return s.enemyFlee(i, rng)
+	}
+	d := EnemyDecision{Command: CmdWeapon, Target: target, Ring: 0, Facing: a.Facing}
+	s.enemyStrike(&d, i, target, prev, row, rng)
+	s.applyEnemy(i, d)
+	return d
 }
 
 // EnemyIntellectCheck 是 `sub_252CB`：`值 × 等級 ÷ 3 > 門檻`。反制掃描前用它擲一次
@@ -428,8 +493,8 @@ func (s *State) counterScan(i int, rng Rand) (style, row, target int, ok bool) {
 	for k := 0; k < len(cells); k++ {
 		n := (start + k) % len(cells)
 		c := cells[n]
-		t := s.actorAt(a.X+c.Row, a.Y+c.Col)
-		if t < 0 || s.Actors[t].Side != SideParty || s.Actors[t].Down() || s.hiddenFrom(i, t, rng) {
+		t := s.candidateAt(i, a.X+c.Row, a.Y+c.Col, maskMelee)
+		if t < 0 {
 			continue
 		}
 		d := &s.Actors[t]
@@ -607,32 +672,27 @@ func (s *State) enemyStrike(d *EnemyDecision, i, target, prev, row int, rng Rand
 	}
 }
 
-// EnemyStuckRetries 是「八個方向都走不了」時重跑決策樹的上限。**原版沒有上限**
+// EnemyStuckRetries 是「走不出去」時重跑決策樹的上限。**原版沒有上限**
 // ——它靠那 1/3 的擲骰跳出去（期望三次，`0x2396E`）；remake 加一道保險，
 // 到頂就出指令碼 0（執行段印記錄 0x117「does nothing.」）。
 const EnemyStuckRetries = 8
 
-// enemyStuck 是繞不出去的三條退路（`0x2396E`…`0x23994`，RE-117）：
+// enemyBoxed 是走不出去的三條退路（`0x2396E`…`0x23994`，RE-117）：
 //
-//	傷勢還沒到撤退門檻 → 原地揮武器（貼近打那一段，式固定第 1 式）
-//	否則 rand(3) == 1  → 回撤退段
+//	傷勢還沒到撤退門檻 → 原地揮武器（貼近打那一段，進來時的攻擊選項與防禦選項是上一個決策
+//	                    留在全域的值，`s.aiStyle`／`s.aiGuard`）
+//	否則 rand(3) == 1  → 原地喘息
 //	否則               → `word_34A08` 加一，重跑決策樹
-func (s *State) enemyStuck(i int, rng Rand) EnemyDecision {
+func (s *State) enemyBoxed(i int, rng Rand) EnemyDecision {
 	a := &s.Actors[i]
 	if a.FatigueRatio() < a.FleeAt {
-		// 原地揮武器。目標是自己面前那一格，沒有實際目標時就打空氣——
-		// 原版跳的是 `0x23CD6`，也就是貼近打那一段的開頭。
-		d := EnemyDecision{Command: CmdWeapon, Target: -1, Ring: 0,
-			Facing: a.Facing}
-		s.enemyStrike(&d, i, i, EnemyNearStyle, a.Guard, rng)
+		d := EnemyDecision{Command: CmdWeapon, Target: -1, Ring: 0, Facing: a.Facing}
+		s.enemyStrike(&d, i, i, s.aiStyle, s.aiGuard, rng)
 		s.applyEnemy(i, d)
 		return d
 	}
 	if rng.Roll(3) == 1 {
-		a.Retreating = true
-		d := EnemyDecision{Command: CmdRest, Target: -1, Ring: -1, Facing: a.Facing}
-		s.applyEnemy(i, d)
-		return d
+		return s.enemyRest(i)
 	}
 	a.Stuck++
 	if a.Stuck > EnemyStuckRetries {
@@ -643,48 +703,100 @@ func (s *State) enemyStuck(i int, rng Rand) EnemyDecision {
 	return s.planTactics(i, rng)
 }
 
-// enemyRetreat 是傷得太重那一段（`0x237F5`…`0x238C1`）。第二個回傳值為 false
-// 表示這一手不走撤退，交回主幹繼續判。
-//
-//	已在撤退而且傷勢降到 FleeRecover 以下 → 清掉旗標，回正常判斷
-//	已在撤退，或傷勢達到 FleeAt →
-//	    八個方向有隊員貼著 → 往外逃（隨機挑一個站得下的方向）
-//	    八個方向都沒人 →
-//	        還沒進入撤退狀態，或上一手沒挨打 → 原地喘息，並記下撤退狀態
-//	        已在撤退而且上一手挨了打 → 繼續逃
-func (s *State) enemyRetreat(i int, rng Rand) (EnemyDecision, bool) {
-	a := &s.Actors[i]
-	hurt := a.FatigueRatio()
-	if a.Retreating && hurt < a.FleeRecover {
-		a.Retreating = false
-		return EnemyDecision{}, false
+// aiCellFree 是 AI 挑走向時「這個方向站得下」的兩道檢查：目的格沒有符合遮罩的參戰者
+// （`sub_24BB6(0, 方向, 遮罩)`），而且地形不擋路（`sub_24E2B`，只看步行位元圖，
+// 不看 +0x1E、也沒有邊界）。這**不是**執行段的 `moveBlocked`（RE-085），兩者不同（RE-168）。
+func (s *State) aiCellFree(i, dir, mask int) bool {
+	a := s.Actors[i]
+	c := RingCells(0)[dir]
+	x, y := a.X+c.Row, a.Y+c.Col
+	if s.candidateAt(i, x, y, mask) >= 0 {
+		return false
 	}
-	if !a.Retreating && hurt < a.FleeAt {
-		return EnemyDecision{}, false
-	}
-	if s.adjacentParty(i, rng) {
-		return s.enemyMove(i, -1, -1, rng), true
-	}
-	if !a.Retreating || a.LastHurt == 0 {
-		a.Retreating = true
-		d := EnemyDecision{Command: CmdRest, Target: -1, Ring: -1, Facing: a.Facing}
-		s.applyEnemy(i, d)
-		return d, true
-	}
-	return s.enemyMove(i, -1, -1, rng), true
+	return s.Field == nil || !BlocksMovement(s.Field.At(x, y))
 }
 
-// adjacentParty 回報八個相鄰格有沒有站著的隊員（`sub_24BB6(0, 方向, 0x19)`）。
-// 撤退那一段是按方向編號順序掃的，不像找目標那樣從隨機的一格起跳。
-func (s *State) adjacentParty(i int, rng Rand) bool {
-	a := s.Actors[i]
+// partyNear 是 `sub_24EF9`：以 (x, y) 為中心的八個相鄰格有沒有隊員（遮罩 0x11）。
+func (s *State) partyNear(i, x, y int) bool {
 	for _, c := range RingCells(0) {
-		if t := s.actorAt(a.X+c.Row, a.Y+c.Col); t >= 0 &&
-			s.Actors[t].Side == SideParty && !s.Actors[t].Down() && !s.hiddenFrom(i, t, rng) {
+		if s.candidateAt(i, x+c.Row, y+c.Col, maskAny) >= 0 {
 			return true
 		}
 	}
 	return false
+}
+
+// enemyFlee 是 `0x238E8`：從隨機方向起（`rand(8) − 1`）依方向編號遞增找第一個站得下、
+// 目的格沒人（遮罩 0x10）、而且目的格旁邊沒有隊員的方向。走法的環號是 0。
+// 八個方向都不行就走 `0x2396E`。
+func (s *State) enemyFlee(i int, rng Rand) EnemyDecision {
+	a := s.Actors[i]
+	start := rng.Roll(8) - 1
+	for k := 0; k < 8; k++ {
+		dir := (start + k) % 8
+		c := RingCells(0)[dir]
+		x, y := a.X+c.Row, a.Y+c.Col
+		if s.Field != nil && BlocksMovement(s.Field.At(x, y)) {
+			continue
+		}
+		if s.candidateAt(i, x, y, maskHidden) >= 0 || s.partyNear(i, x, y) {
+			continue
+		}
+		return s.enemyStep(i, dir, 0, -1, rng)
+	}
+	return s.enemyBoxed(i, rng)
+}
+
+// enemyApproach 是靠近目標那一步（`0x23F56`…`0x240B6`）：先沿視線走一格（模式 1 的第一步兩軸
+// 都走，所以就是兩軸偏移的正負號）換成方向，試這個方向、再試前一個、再試後一個，
+// 三個都站不下就隨機挑（`enemyRandom`）。占用的判斷用遮罩 0x18（只算站在地上的）。
+func (s *State) enemyApproach(i, target, ring int, rng Rand) EnemyDecision {
+	a := s.Actors[i]
+	t := s.Actors[target]
+	dx, dy := sign(t.X-a.X), sign(t.Y-a.Y)
+	base := 0
+	for f, c := range RingCells(0) {
+		if c.Row == dx && c.Col == dy {
+			base = f
+			break
+		}
+	}
+	for _, dir := range [3]int{base, (base + 7) % 8, (base + 1) % 8} {
+		if s.aiCellFree(i, dir, maskOnFoot|maskHidden) {
+			return s.enemyStep(i, dir, ring, target, rng)
+		}
+	}
+	return s.enemyRandom(i, rng)
+}
+
+// enemyRandom 是 `0x240B9`：從 `rand(8) − 1` 起依方向編號**遞減**找第一個站得下的方向
+// （遮罩 0x18 加地形），走法的環號是 7。八個方向都不行就走 `0x23886`。
+func (s *State) enemyRandom(i int, rng Rand) EnemyDecision {
+	start := rng.Roll(8) - 1
+	for k := 0; k < 8; k++ {
+		dir := ((start-k)%8 + 8) % 8
+		if s.aiCellFree(i, dir, maskOnFoot|maskHidden) {
+			return s.enemyStep(i, dir, 7, -1, rng)
+		}
+	}
+	return s.enemyCornered(i, rng)
+}
+
+// enemyStep 是 `0x2399C`：兩條腿都廢了走不動（記錄值都 ≥ 0x80）就走 `0x2396E`；
+// 否則方向寫進 +0x28，移動方式走三式的加權輪盤（`0x239D7`）。
+func (s *State) enemyStep(i, dir, ring, target int, rng Rand) EnemyDecision {
+	a := &s.Actors[i]
+	if partLost(a.RightLeg) && partLost(a.LeftLeg) {
+		return s.enemyBoxed(i, rng)
+	}
+	d := EnemyDecision{Command: CmdMove, Target: target, Ring: ring, Facing: dir}
+	form := EnemyMoveForm(*a, s.AIWeights(), ring, rng)
+	d.Style = IconMoveWalk + form
+	if form == 0 {
+		d.Guard = 2
+	}
+	s.applyEnemy(i, d)
+	return d
 }
 
 // enemyShoot 組出射擊那一手（`0x23F15`…`0x23F53`）：把目標那一格記進 Memo、
@@ -692,8 +804,8 @@ func (s *State) adjacentParty(i int, rng Rand) bool {
 // 裝填，原版就是這樣寫的。
 func (s *State) enemyShoot(i, target, ring int) EnemyDecision {
 	a := &s.Actors[i]
-	d := EnemyDecision{Command: CmdMissile, Target: target, Ring: ring,
-		Facing: s.facingToward(i, target)}
+	// 原版射擊那一手不動 +0x28（`0x23F15`…`0x23F53` 只寫目標格、+0x1D、指令與兩個選項）。
+	d := EnemyDecision{Command: CmdMissile, Target: target, Ring: ring, Facing: a.Facing}
 	a.Flag1D = 1
 	if s.Plan.Memo == nil {
 		s.Plan.Memo = map[int]Cell{}
@@ -703,60 +815,84 @@ func (s *State) enemyShoot(i, target, ring int) EnemyDecision {
 	return d
 }
 
-// enemyMove 組出移動那一手：方向朝目標（沒有目標就隨機挑一個站得下的），
-// 移動方式走三式的加權輪盤（`0x239D7`）。
-func (s *State) enemyMove(i, target, ring int, rng Rand) EnemyDecision {
-	a := &s.Actors[i]
-	facing := s.stepToward(i, target, rng)
-	if facing < 0 {
-		// 八個方向都站不下：走那三條退路（RE-117）。
-		return s.enemyStuck(i, rng)
-	}
-	d := EnemyDecision{Command: CmdMove, Target: target, Ring: ring}
-	d.Facing = facing
-	form := EnemyMoveForm(*a, s.AIWeights(), max(ring, 0), rng)
-	d.Style = IconMoveWalk + form
-	if form == 0 {
-		d.Guard = 2
-	}
-	s.applyEnemy(i, d)
-	return d
-}
-
 func (s *State) applyEnemy(i int, d EnemyDecision) {
 	a := &s.Actors[i]
 	a.Command, a.Style, a.Guard = d.Command, d.Style, d.Guard
+	// 原版每個出口都把兩個選項留在全域（`word_30A78`／`word_30916`），下一次 AI 進來就是舊值。
+	s.aiStyle, s.aiGuard = d.Style, d.Guard
 	s.LastCommand = d.Command
 	if d.Facing >= 0 {
 		a.Facing = d.Facing
 	}
 }
 
-// findInRing 在指定的環上找一名還站著的隊員，回傳索引；找不到回 -1。
+// 找目標的篩選遮罩（`sub_24C35`，RE-168）。
+const (
+	maskParty   = 0x01                                // 只看隊員
+	maskOnFoot  = 0x08                                // 目標的 +0x1E 必須是 0（騎乘的不算）
+	maskHidden  = 0x10                                // Shade Ring 的隱身判斷（`hiddenFrom`）
+	maskCaster  = 0x20                                // 目標的指令必須是施法（0x0D）或射擊（0x23）
+	maskMelee   = maskParty | maskOnFoot | maskHidden // 0x19：貼身打、反制掃描、撤退時看有沒有人貼著
+	maskAny     = maskParty | maskHidden              // 0x11
+	maskShooter = maskParty | maskHidden | maskCaster // 0x31
+)
+
+// candidateAt 是 `sub_24C35`：依索引順序找站在 (x, y) 而且通過全部條件的參戰者，沒有回 -1。
+// 空槽、自己與已經倒下的都不算；同一格上排在前面但沒通過的不會擋住後面的。
+func (s *State) candidateAt(i, x, y, mask int) int {
+	for t := range s.Actors {
+		o := s.Actors[t]
+		if o.Side == SideEmpty || t == i || o.X != x || o.Y != y || o.Down() {
+			continue
+		}
+		if mask&maskParty != 0 && o.Side != SideParty {
+			continue
+		}
+		if mask&maskOnFoot != 0 && o.Flag1E != 0 {
+			continue
+		}
+		if mask&maskHidden != 0 && s.hiddenFrom(i, t, nil) {
+			continue
+		}
+		if mask&maskCaster != 0 && o.Command != CmdCast && o.Command != CmdMissile {
+			continue
+		}
+		return t
+	}
+	return -1
+}
+
+// findInRing 是貼身那一圈的搜尋（遮罩 0x19）：在指定的環上找一名還站著的隊員，
+// 回傳索引；找不到回 -1。
 //
 // 起點是隨機的（`sub_2531C` 第一次傳 0xFFFF 時從 `rand(格數 − 1) − 1` 起跳），
 // 所以同樣的戰況不會總是選同一個目標。
 func (s *State) findInRing(i, ring int, rng Rand) int {
-	return s.findInRingMatching(i, ring, rng, nil)
+	return s.findInRingMatching(i, ring, maskMelee, rng, nil)
 }
 
 // 被擋住時延續同一圈與起點，不重擲（SPEC-013；原版 0x23EB8→0x23DEC）。
-func (s *State) findInRingMatching(i, ring int, rng Rand, accept func(int) bool) int {
+func (s *State) findInRingMatching(i, ring, mask int, rng Rand, accept func(int) bool) int {
+	t, _ := s.findInRingCell(i, ring, mask, rng, accept)
+	return t
+}
+
+// findInRingCell 同上，另外回傳找到的那一格在環上的編號（環 0 就是方向）。
+func (s *State) findInRingCell(i, ring, mask int, rng Rand, accept func(int) bool) (target, cell int) {
 	a := s.Actors[i]
 	cells := RingCells(ring)
 	if len(cells) == 0 {
-		return -1
+		return -1, -1
 	}
 	start := rng.Roll(len(cells)-1) - 1
 	for n := 0; n < len(cells); n++ {
-		c := cells[(start+n)%len(cells)]
-		if t := s.actorAt(a.X+c.Row, a.Y+c.Col); t >= 0 &&
-			s.Actors[t].Side == SideParty && !s.Actors[t].Down() && !s.hiddenFrom(i, t, rng) &&
-			(accept == nil || accept(t)) {
-			return t
+		idx := (start + n) % len(cells)
+		c := cells[idx]
+		if t := s.candidateAt(i, a.X+c.Row, a.Y+c.Col, mask); t >= 0 && (accept == nil || accept(t)) {
+			return t, idx
 		}
 	}
-	return -1
+	return -1, -1
 }
 
 // actorAt 回傳站在那一格上的參戰者索引；沒有人就回 -1。
@@ -787,45 +923,6 @@ func (s *State) facingToward(i, target int) int {
 		}
 	}
 	return a.Facing
-}
-
-// stepToward 是移動段挑方向那一段（`0x23F56`…`0x240B9` 與 `0x238E8`…`0x2394F`，
-// RE-117）：有目標就先試往目標那一步，不通再試左右各一格；三個都不通、或者根本
-// 沒有目標，就從**隨機**方向起繞八格。八格都站不下回 -1。
-func (s *State) stepToward(i, target int, rng Rand) int {
-	a := s.Actors[i]
-	if target >= 0 {
-		// 有目標（`0x23F56`…`0x240B9`）：先試往目標那一步，不通再試左右各一格。
-		t := s.Actors[target]
-		dx, dy := sign(t.X-a.X), sign(t.Y-a.Y)
-		base := -1
-		for f, c := range RingCells(0) {
-			if c.Row == dx && c.Col == dy {
-				base = f
-				break
-			}
-		}
-		if base >= 0 {
-			for _, f := range [3]int{base, (base + 7) % 8, (base + 1) % 8} {
-				c := RingCells(0)[f]
-				if !s.moveBlocked(i, a.X+c.Row, a.Y+c.Col) {
-					return f
-				}
-			}
-		}
-	}
-	// 沒有目標，或者那三個方向都不通（`0x240B9` 退回這一條）：從**隨機方向**起
-	// 繞一圈（`0x238E8` 的 `rand(8) − 1`）。八格都站不下就回 -1，由呼叫端走
-	// 三條退路。
-	start := rng.Roll(8) - 1
-	for k := 0; k < 8; k++ {
-		f := (start + k) % 8
-		c := RingCells(0)[f]
-		if !s.moveBlocked(i, a.X+c.Row, a.Y+c.Col) {
-			return f
-		}
-	}
-	return -1
 }
 
 func max(a, b int) int {

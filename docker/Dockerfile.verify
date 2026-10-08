@@ -1,0 +1,12 @@
+# 2026-10-07：缺失 eob-remake-go audio 映像的本專案驗證 revision。
+# 固定 Go／module；不取代正式包或改遊戲規則。
+FROM golang:1.26.7-bookworm@sha256:e8c859f5632dcfde7b32d2012b4351728f6437930887c2f6a91ea242459e5514
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc libc6-dev libgl1-mesa-dev libasound2-dev libx11-dev libxcursor-dev \
+    libxi-dev libxinerama-dev libxrandr-dev libxxf86vm-dev libgl1-mesa-dri \
+    pkg-config xvfb xauth python3 ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /src
+COPY go.mod go.sum ./
+ENV GOTOOLCHAIN=local
+RUN go mod download && dpkg-query -W > /opt/kol-verification-packages.tsv

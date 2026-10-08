@@ -20,7 +20,8 @@ func Inn(dst *ebiten.Image, sprites Sprites, small, large *font.Font, in *town.I
 	// 上格放角色圖像、下格放名字，兩格共用外框：上格外框的下緣就是下格的上緣。
 	// 整塊先填黑再畫圖像與名字——角色圖像只有 40 px 寬，左右各留一欄黑底，
 	// 名牌沒有字的地方也是黑的，不是讓紅磚透出來。
-	if err := drawPartySlots(dst, sprites, small, in.Party); err != nil {
+	party := sheetVisibleParty(in)
+	if err := drawPartySlots(dst, sprites, small, party); err != nil {
 		return err
 	}
 
@@ -247,7 +248,8 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		return err
 	}
 	drawScaled(dst, bg, 0, 0, l.Scale)
-	if err := drawCJKPartySlots(dst, sprites, f, in.Party); err != nil {
+	party := sheetVisibleParty(in)
+	if err := drawCJKPartySlots(dst, sprites, f, party); err != nil {
 		return err
 	}
 
@@ -269,7 +271,7 @@ func InnCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		}
 		switch {
 		case in.ItemPage != nil:
-			if err := drawItemPageCJK(dst, sprites, f, t, in.ItemPage, in.Wild); err != nil {
+			if err := drawItemPageCJK(dst, sprites, f, t, in.ItemPage, in.Party, in.Wild); err != nil {
 				return err
 			}
 		case len(in.PartyPage) > 0:
@@ -438,4 +440,19 @@ func drawIconBarCJK(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 		frame(dst, x, l.IconY, l.IconW, l.IconH, c)
 	}
 	return nil
+}
+
+// sheetVisibleParty 保留資料頁目前角色的肖像，放在左側第一格（RE-233）。
+// 物品與隊伍立繪另有換頁繪圖；其他建築畫面仍使用完整隊伍。
+func sheetVisibleParty(in *town.Inn) []town.Member {
+	party := in.Party
+	if in.Sheet == nil || in.ItemPage != nil || len(in.PartyPage) > 0 || len(party) == 0 {
+		return party
+	}
+	for i := range party {
+		if party[i].Speaker {
+			return party[i : i+1]
+		}
+	}
+	return party[:1]
 }

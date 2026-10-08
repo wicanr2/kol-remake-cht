@@ -1,0 +1,90 @@
+{
+  "schema": "kol-reviewed-address-index-v1",
+  "input": "KOLTOWN-unpacked.EXE",
+  "sha256": "01f6f9a95c4adf8e9da59fa83bae57aa282e5576767b41bfc2f23302aeb9d1d2",
+  "tool": "IDA Pro 9.4",
+  "address_space": "IDA linear",
+  "entries": {
+    "0x297fb": {
+      "original_name": "",
+      "original_operand": "call    sub_29987",
+      "bytes": "9a87090029",
+      "semantic": "步行扣時前呼叫sub_29987，正常觀察證實等待遭遇戰鬥返回",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x29803": {
+      "original_name": "",
+      "original_operand": "mov     bx, word_39A54",
+      "bytes": "8b1e84bb",
+      "semantic": "返回後讀取共用word_39A54；本例16，不是進場有號方向−1",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x2980a": {
+      "original_name": "",
+      "original_operand": "mov     al, [bx+12B8h]",
+      "bytes": "8a87b812",
+      "semantic": "保留原運算元[bx+12B8h]；本例BX16，取到byte30",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x2981f": {
+      "original_name": "",
+      "original_operand": "sub     word_2DF40, ax",
+      "bytes": "29067000",
+      "semantic": "將雙倍移動率加索引byte的耗時扣自word_2DF40；本例3360降3260",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x2a952": {
+      "original_name": "",
+      "original_operand": "mov     word_2DF36, 4",
+      "bytes": "c70666000400",
+      "semantic": "sub_1E3A8返回後將word_2DF36設為4",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x2a958": {
+      "original_name": "",
+      "original_operand": "mov     word_2DF38, 4",
+      "bytes": "c70668000400",
+      "semantic": "sub_1E3A8返回後將word_2DF38設為4",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x21801": {
+      "original_name": "loc_21801",
+      "original_operand": "mov     word_39A54, 0",
+      "bytes": "c70684bb0000",
+      "semantic": "清槽byte迴圈起始將共用word_39A54設0",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x2181c": {
+      "original_name": "",
+      "original_operand": "add     word_39A54, 1",
+      "bytes": "830684bb01",
+      "semantic": "清槽每byte令共用word_39A54加1",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    },
+    "0x21821": {
+      "original_name": "loc_21821",
+      "original_operand": "cmp     word_39A54, 10h",
+      "bytes": "833e84bb10",
+      "semantic": "清槽以16終止；432組常式案例及正常返回證實完成後留16",
+      "confidence": "已證實",
+      "evidence": "docs/re/20261002-battle-return.md；workplace/battle-return-20261002中的IDA原始匯出、正常world-return-private.json及432組常式來源",
+      "scope": "限定固定原版及本例返回／搜刮常式；其他整場出口暫存未知"
+    }
+  }
+}

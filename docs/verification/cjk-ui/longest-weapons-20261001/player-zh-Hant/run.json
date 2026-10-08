@@ -1,0 +1,25 @@
+{
+  "label": "player-zh-Hant",
+  "command": [
+    "workplace/platform-smoke-20261001/build/kol-linux",
+    "-scene",
+    "flow",
+    "-seed",
+    "1",
+    "-lang",
+    "zh-Hant",
+    "-trace-detail",
+    "-flow-script",
+    "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET > > > > > RET RET RET RET SPACE 5 > RET D D D D D D D D D D D D D RET > RET U U U RET RET > RET RET R R U U U U U U U U U RET Z Z Z D Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z D X X X X D D L D D D D D Z Z Z Z D X X X X X SPACE SPACE SPACE",
+    "-shot-dir",
+    "workplace/cjk-weapon-20261001/player-zh-Hant",
+    "-shot-steps",
+    "60,76,77,79,82,83,87,186,187,188,189",
+    "-trace",
+    "workplace/cjk-weapon-20261001/player-zh-Hant/trace.json"
+  ],
+  "exit_code": 0,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "expected_states": 190,
+  "seed": 1
+}

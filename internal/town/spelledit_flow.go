@@ -26,6 +26,11 @@ func (s *Session) SpellEditing() bool {
 	return s.scroll != nil && s.scroll.edit != nil
 }
 
+// SpellNameTyping 回報名稱欄位正接收文字；鍵盤方向鍵不應在此時變成字母。
+func (s *Session) SpellNameTyping() bool {
+	return s.SpellEditing() && s.scroll.edit.typing != nil
+}
+
 // showSpellPicker 是選單第 1 列：先列出這名隊員的法術，選一筆才進編輯頁
 // （`0x178FB`…`0x17A82`）。
 func (s *Session) showSpellPicker() {
@@ -147,7 +152,8 @@ func (s *Session) openSpellField() {
 	e := s.scroll.edit
 	switch e.field {
 	case SpellFieldName:
-		typed := e.draft.Name
+		// 原版sub_1B5C8有效輸入長度從0開始；副本仍保留舊名（RE-212）。
+		typed := ""
 		e.typing = &typed
 	case SpellFieldTargetFlag:
 		e.options = []string{s.uiRecord(SpellRangeRecord),
@@ -155,14 +161,8 @@ func (s *Session) openSpellField() {
 	default:
 		e.options = SpellFieldOptions(s.Magic, e.draft, e.field)
 	}
-	e.cursor = SpellFieldValue(s.Magic, e.draft, e.field)
-	if e.cursor >= len(e.options) {
-		e.cursor = 0
-	}
-	e.top = 0
-	if e.cursor >= ListRows {
-		e.top = e.cursor - ListRows + 1
-	}
+	// sub_1AAE8 在 IDA linear 0x1AB6E 清零選列，不採用欄位現值（RE-209）。
+	e.cursor, e.top = 0, 0
 	s.refreshSpellEdit()
 }
 
@@ -218,8 +218,7 @@ func (s *Session) spellDenied() {
 	s.scrollSay(lines, s.refreshSpellEdit)
 }
 
-// TypeSpellName 收名稱輸入的一個字。原版收滿 12 個字就不再收（`sub_1B5C8` 的
-// 第二個引數）。
+// TypeSpellName 收名稱輸入的一個字。原版收滿12字便確認並關閉輸入框（RE-212）。
 func (s *Session) TypeSpellName(r rune) {
 	if !s.SpellEditing() || s.scroll.edit.typing == nil {
 		return
@@ -230,6 +229,10 @@ func (s *Session) TypeSpellName(r rune) {
 	}
 	typed += string(r)
 	s.scroll.edit.typing = &typed
+	if len([]rune(typed)) == SpellNameMax {
+		s.commitSpellName()
+		return
+	}
 	s.refreshSpellEdit()
 }
 
@@ -255,7 +258,18 @@ func (s *Session) commitSpellName() {
 		return
 	}
 	if typed := strings.TrimSpace(*e.typing); typed != "" {
-		e.draft.Name = typed
+		// 原版5-bit名稱的顯示模式為各單字字首大寫，其餘小寫（RE-212）。
+		name := []rune(typed)
+		wordStart := true
+		for i, r := range name {
+			if r >= 'A' && r <= 'Z' && !wordStart {
+				name[i] = r + ('a' - 'A')
+			} else if r >= 'a' && r <= 'z' && wordStart {
+				name[i] = r - ('a' - 'A')
+			}
+			wordStart = r == ' '
+		}
+		e.draft.Name = string(name)
 	}
 	e.typing = nil
 	s.refreshSpellEdit()

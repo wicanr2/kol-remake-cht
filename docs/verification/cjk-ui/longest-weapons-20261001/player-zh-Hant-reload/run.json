@@ -1,0 +1,27 @@
+{
+  "label": "player-zh-Hant-reload",
+  "command": [
+    "workplace/platform-smoke-20261001/build/kol-linux",
+    "-scene",
+    "play",
+    "-seed",
+    "1",
+    "-lang",
+    "zh-Hant",
+    "-trace-detail",
+    "-play-script",
+    "5 > RET D D D D D D D D D D RET",
+    "-shot-dir",
+    "workplace/cjk-weapon-20261001/player-zh-Hant-reload",
+    "-shot-steps",
+    "0,13,14",
+    "-trace",
+    "workplace/cjk-weapon-20261001/player-zh-Hant-reload/trace.json",
+    "-load",
+    "workplace/cjk-weapon-20261001/player-zh-Hant-save.json"
+  ],
+  "exit_code": 0,
+  "binary_sha256": "f969a63f195f29561b32f8bef333d0933d4d4d69641025981249d127017891d4",
+  "expected_states": 15,
+  "seed": 1
+}

@@ -12,7 +12,7 @@
     },
     {
       "step": 12,
-      "identical_to": "docs/verification/remake-parity/shots/world/leave-brettle.png",
+      "identical_to": "docs/verification/inventory-empty-slots-20261001/weather-leave.png",
       "note": "選 DOOR 之後落到世界地圖，與已對拍的野外截圖逐 byte 相同"
     }
   ],
@@ -95,7 +95,7 @@
       "step": 12,
       "token": "RET",
       "file": "docs/verification/player-path/town-leave/step-012.png",
-      "sha256": "1da27da81685266d4716860b77bca6d1eac305e38d94a56b789050c540385102"
+      "sha256": "4ed3ea25007a96f33cfacb2ed6b4a947bc978a1fcbef338aead8797ae2e7e565"
     }
   ]
 }

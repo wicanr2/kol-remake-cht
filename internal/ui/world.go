@@ -250,6 +250,9 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 				return err
 			}
 			drawScaled(dst, pic, l.ViewX, l.ViewY, l.Scale)
+			if err := drawWorldPromptCJK(dst, f, t, sess); err != nil {
+				return err
+			}
 			return drawWorldIconsCJK(dst, sprites, s)
 		}
 	}
@@ -278,7 +281,70 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 			}
 		}
 	}
+	if err := drawWorldPromptCJK(dst, f, t, sess); err != nil {
+		return err
+	}
 	return drawWorldIconsCJK(dst, sprites, s)
+}
+
+// worldPromptParagraph 只把原始斷行接回顯示段落，不修改提示或資料。
+func worldPromptParagraph(t Translator, lines []string) string {
+	en := strings.Join(strings.Fields(strings.Join(lines, " ")), " ")
+	if p, ok := t.(interface{ Paragraph(string) string }); ok {
+		return p.Paragraph(en)
+	}
+	if t != nil {
+		return t.T(en)
+	}
+	return en
+}
+
+// worldPromptCJKLines 使用原提示框的內縮與倍率，依實際字模重新換行。
+// 正式 catalog 必須完整放入；拒絕溢出，不依賴畫布裁切吞掉敘述或問句。
+func worldPromptCJKLines(f *font.Font, t Translator, q *world.Prompt) ([]string, int, error) {
+	sc := world.CJK.Scale
+	b, p := world.PromptBox, world.PromptText
+	width := (b.X + b.Width - 8 - p.X) * sc
+	body := rewrapCJK(f, []string{worldPromptParagraph(t, q.Lines)}, plainTranslator{}, width)
+	if len(body) > 8 {
+		return nil, 0, fmt.Errorf("世界提示敘述超出八列")
+	}
+	lines := append([]string(nil), body...)
+	if q.Ask != "" {
+		lines = append(lines, "")
+		lines = append(lines, rewrapCJK(f, []string{worldPromptParagraph(t, []string{q.Ask})}, plainTranslator{}, width)...)
+	}
+	_, height := f.Measure("M")
+	bottom := (b.Y + b.Height - 8) * sc
+	for i, line := range lines {
+		w, _ := f.Measure(line)
+		if w > width || p.Y*sc+i*p.Step*sc+height > bottom {
+			return nil, 0, fmt.Errorf("世界提示文字超出安全矩形")
+		}
+	}
+	return lines, width, nil
+}
+
+type plainTranslator struct{}
+
+func (plainTranslator) T(text string) string { return text }
+
+func drawWorldPromptCJK(dst *ebiten.Image, f *font.Font, t Translator, sess *world.Session) error {
+	if sess == nil || sess.Prompt == nil {
+		return nil
+	}
+	lines, _, err := worldPromptCJKLines(f, t, sess.Prompt)
+	if err != nil {
+		return err
+	}
+	sc := world.CJK.Scale
+	b, p := world.PromptBox, world.PromptText
+	drawBattleBoxCJK(dst, b.X, b.Y, b.Width, b.Height, sc)
+	for i, line := range lines {
+		f.Draw(dst, p.X*sc, (p.Y+i*p.Step)*sc, line,
+			town.ColourText[0], town.ColourText[1], town.ColourText[2])
+	}
+	return nil
 }
 
 // iconFrameColour 是野外圖示列的框色：白框是目前這一格，被選過又離開的是青色，
