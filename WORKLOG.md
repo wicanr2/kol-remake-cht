@@ -10742,3 +10742,17 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 暫存区包含前輪收尾與驗證資料，完整檔案核對2233份、97087401 bytes；刪除與rename另由Git登記。1249張PNG的645個不同hash均有已索引JSON紀錄。原版ZIP／EXE／PDF、typed data、matching C／OBJ／DB、工具binary及本機封存證據均排除，沒有憑證或大型executable bytes匯出。
 - 舊十九套件與跨平台證據的342份正式程式輸入保持；本輪只重核工作表及matching獨立證據，沒有重跑遊戲對拍。檢查均在既有有界Docker、UID/GID1000:1000及來源唯讀掛載內執行；Git與GitHub控制面在主機。
 - 首次完整暫存差分顯示六處既有空白警告，位於歷史驗證腳本、CRLF夾具TSV及原始建置log；保留既有bytes，沒有為消除警告重寫證據。先前工作樹diff檢查不涵蓋當時未追蹤的新資料，與這次cached檢查範圍不同。暫存區沒有active Git hook。提交與推送結果於後續研究段追加。
+
+## 2026-10-08：EXEPACK完整檔案重建基準
+
+- 檢查點ff25f7a173150cb27209371e121cb3033047bcf7已提交並推送，origin/main實際SHA核對相同；原有1384e50一併推送，工作樹乾淨後才開始封裝研究。沿原工具鏈、MZ／OMF證據與文件職責路由，讀Microsoft C原始手冊的EXEPACK／EXEMOD介面；資料來源與確切工具版本分開登記。
+- 固定MS-DOS官方commit2d04cacc5322951f187bb17e017c12920ac8ebe2取回LINK3.65、EXEPACK4.06與EXEMOD4.02；QuickC2.01／LINK4.07沿原固定清冊。每檔核Git blob、大小與SHA；原版、封存輸入與執行中的工具唯讀，下載明示開網路，分析與重編無網路。既有5992e601工具image沿用，沒有建新映像或執行遊戲。
+- LINK4.07與LINK3.65內建/EXEPACK均不匹配。官方standalone EXEPACK4.06的壓縮資料、EXEPACK header與261byte stub匹配；首個剩餘差分為最小記憶體欄、relocation順序及81byte尾端0x1A。失敗候選與原始logs保留。
+- 勘誤：前輪固定解包器e_minalloc=2308是unexepack.c:384的fullSize/60占位；checksum、header與relocation表亦由工具生成。該完整MZ不作原版未封裝header的oracle，原始初始化映像及IDA定位維持。原版packed MZ已知最小載入量為ceil((133679-512)/16)+2883=11206 paragraphs，據此設定未封裝最小配置11206-8082=3124；不認定原始未封裝header或歷史工具版本。
+- C遠呼叫的relocation在原先ORIG+CSLOT順序排到末端；第一次prefix／C／suffix切分修正此筆，但原版DATA／CRT CODE交錯仍剩91筆序列差。粗粒度LEDATA排序不能表達交錯；每個兩byte原始relocation placeholder改由獨立LEDATA/FIXUPP供應，普通bytes只供應一次，按原始序列傳給native LINK。完整129312byte初始化映像及2281筆實體relocation的順序和目標相同，沒有post-link relocation改寫，原始OBJ切分仍未知。
+- EXEMOD4.02接受hex參數。最初/MIN的字串3124被讀為0x3124，欄位驗證拒絕；按原手冊改用同一已推導值C34後重跑，實際欄位3124。EXEPACK4.06產生133679byte核心，所有MZ欄位、壓縮資料、stub與壓縮relocation符合原版。128byte記錄與fill0x1A產生尾端81bytes；KOLBOOK／MAKEMODE也分別有55／63bytes同類填補，產生原因與原始工具未知。
+- 完整133760byte KOLTOWN.EXE逐byte及SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221符合原版。來源比例維持四C函式300bytes／原始未匹配129012bytes，沒有新增library或asm，也沒有宣稱完整C還原。完整C反編譯工作保持open，下一步逐函式擴展，維持全檔hash與來源覆蓋清冊。
+- 乾淨第二工作區由原版ZIP、C、固定工具與原始片段重建：QCL編譯、OMF適配、native LINK、EXEMOD、EXEPACK及外層序列化全部重跑。11項物件／MZ／MAP／packed產物逐byte相同；七個檔案區域相同，最小記憶體、壓縮byte、重定位byte與尾端填補四個損壞負例拒絕。兩次最終EXE再次靜態解包相同；獨立reader核對原位C、完整OMF初始化映像與2281筆重定位。正式342份程式輸入保持。
+- 封裝研究源檔、C、OMF、候選失敗與原生工具命令只留本機。新收據明列whole packed matching=true、full C decompilation=false；封存核對器讀原版與OMF並核對原生工具收據，完整重編入口為rebuild.py與固定DOS工具，支援範圍仍為四個函式。工作區清理及最終文件／容器核對於下文追加。
+- 封存557份檔案，35份可重生或固定commit重取的EXE只保留hash；17909645bytes縮為2349194bytes。全唯讀核對封存、full packed hashes、C與OMF來源、重定位及342份正式輸入通過，才精確刪除matching-pack-20261008。全專案find沒有root-owned檔案或.md目錄；其他工作區、原版輸入與工具image保持，專案容器清單為空。工作表render／verify／scan通過，19未完成／89完成／15人工保持，1954行自承全部認領；待完成的是C來源覆蓋。
+- 刪除後終檢再次通過，557份保存雜湊、原版ZIP／OMF來源與full packed收據、342份正式輸入及全部matching文件連結保持；終檢時1955行自承全部認領。新檢查點只包含八份現況、研究、保存與工作表文件／工具，原版EXE、C、OBJ、DB與候選工具繼續排除；依本次commit／push授權保存完整封裝基準。提交主題為「建立KOLTOWN完整封裝的混合來源重建基準」，確切SHA與遠端結果由Git紀錄及本輪交接提供。

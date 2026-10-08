@@ -20,6 +20,7 @@ NAMES = (
     'platform-quest-rng-20261007',
     'matching-pilot-20261008',
     'matching-link-20261008',
+    'matching-pack-20261008',
 )
 EXECUTABLE_MAGIC = (b'\x7fELF', b'MZ', bytes.fromhex('cafebabe'),
                     bytes.fromhex('cffaedfe'), bytes.fromhex('feedfacf'))

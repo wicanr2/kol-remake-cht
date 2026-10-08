@@ -1,6 +1,6 @@
 # 《武士傳說》逆向知識庫
 
-- [原版同位元組反編譯](matching-decompilation.md)：依使用者指令暫停對拍；四個純C函式300 bytes原位匹配，完整初始化映像與2281筆重定位核對，原始EXE尚未匹配。
+- [原版同位元組反編譯](matching-decompilation.md)：依使用者指令暫停對拍；原始packed EXE混合來源基準逐byte重生，四個純C函式300 bytes，129012 bytes仍待C匹配。
 
 - [RE-296：正常紮營的方向鍵與確認](20261006-camping-confirmation.md)：固定真保存、正常出城，查方向鍵及三種確認鍵；原型與正式規則分開。
 

@@ -1,6 +1,7 @@
-# 原版同位元組反編譯的可行性
+# 原版同位元組反編譯
 
-日期：2026-10-08。狀態：四個純C函式共300 bytes原位匹配通過；完整原始EXE仍待重建。
+日期：2026-10-08。狀態：完整packed KOLTOWN.EXE的混合來源基準逐byte重建通過，
+SHA-256符合原版；四個純C函式300 bytes，129012 bytes仍是原始未匹配片段。
 使用者要求暫停目前對拍，改以 matching decompilation 重建原版C程式，
 希望降低重製過程中反覆行為比對的成本。本入口保存查證與首個試點範圍；
 現有Go程式、規格、原版收據與未完成條件保留。
@@ -10,7 +11,7 @@
 | 項目 | 證據與等級 |
 |---|---|
 | KOLTOWN工具鏈 | Microsoft C runtime family已證實；精確compiler／linker未知，見[工具鏈證據](toolchain.md) |
-| 原版封裝 | Microsoft EXEPACK已證實；精確packer版本未知 |
+| 原版封裝 | Microsoft EXEPACK已證實；EXEPACK4.06能重生全部壓縮bytes與stub，精確歷史版本未知 |
 | 其他主程式 | KOL、KOLBOOK、MAKEMODE、TITLE的Quick C1.0／2.01、MSC5.1為FLIRT候選，強推論，不作精確版本 |
 | 本機工具 | MSVC1.0／1.52仍為未驗候選；本輪新增釘commit及hash的MSC5.10負例與QuickC2.01匹配候選 |
 | 對拍狀態 | 已按使用者指令暫停；現有專案容器清單為空 |
@@ -173,6 +174,94 @@ C、compiler OBJ、兩個增量OBJ、native MZ、MAP與重定位清冊七項逐b
 [保存清冊](../verification/local/matching-link-20261008/retention.json)為本輪入口。
 下一閘門是原始EXEPACK／MZ重建基準，再沿增量物件擴展C匹配；完整原版C仍未完成。
 
+使用者於2026-10-08要求先commit及push，再繼續。檢查點`ff25f7a`已推送並核對遠端main。
+本輪封裝工作區`workplace/matching-pack-20261008/`完成比較後封存、核對並清理，收據與重建入口如下。
+
+## 完整packed EXE的增量重建基準
+
+QuickC2.01的四個C函式、129012 bytes原始未匹配片段、已知段配置與重定位metadata，
+經LINK4.07、EXEMOD4.02、EXEPACK4.06與明列外層填補，重生133760-byte KOLTOWN.EXE。
+全部bytes及SHA-256符合原版：
+
+`c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。
+
+這是已證實的完整檔案重建基準。C範圍維持四函式300 bytes，沒有增加library或asm匹配；
+129012 bytes仍由原始片段供應，完整C反編譯尚未完成。
+後續替換必須同時保存來源覆蓋清冊與完整packed檔案hash。
+
+### 標頭來源勘誤
+
+先前表格的`e_minalloc=2308`來自固定CC0解包器`unexepack.c:384`的
+`fullSize / 60`占位計算。該工具同時重建header、清零checksum及重定位表。
+其完整MZ是工具衍生物，不能當作原版未封裝標頭的oracle；初始化映像及原始定位證據維持。
+先前native MZ與工具輸出不同的數值表保留，用此來源註記修正解讀。
+
+本輪改由原版packed MZ的已知loader契約推導配置：
+
+| 項目 | 已證實的值與來源 |
+|---|---|
+| 原版實際檔案／MZ宣告長度 | 133760／133679 bytes，原始ZIP entry |
+| packed header | 512 bytes，MZ `e_cparhdr=32` |
+| 最小載入記憶體 | `ceil((133679-512)/16)+2883=11206` paragraphs，原版MZ `e_minalloc=2883` |
+| 未封裝初始化映像 | 129312 bytes，8082 paragraphs |
+| 重建前置配置 | `11206-8082=3124` paragraphs，EXEMOD參數以hex寫為`/MIN C34` |
+
+EXEMOD4.02設定build metadata後由EXEPACK封裝，最終packed MZ與原版完全相同。
+這是重建loader契約，原始未封裝EXE與歷史建置命令仍未知。
+EXEMOD接受十六進位數值，依[Microsoft C使用者手冊第188頁](https://archive.computerhistory.org/resources/access/text/2024/05/102734492-05-0002-acc.pdf#page=104)。
+最初誤傳十進位字串`3124`的診斷保留，工具實際寫入`0x3124`；改為同一值的`C34`後核對欄位。
+
+### 重定位與封裝流程
+
+直接LINK的原始片段放在C物件之前時，C遠呼叫的relocation排到末端。
+原版metadata另把部分DATA relocation插在CRT CODE之間，因此單純按檔案偏移排序也不足。
+每個原始relocation word改由獨立LEDATA／FIXUPP記錄供應，按固定原版序列排列。
+普通原始bytes各供應一次，prefix、C、suffix物件交給native LINK後，
+完整初始化映像及2281筆實體relocation的順序與目標均符合原版。
+物件切分用於重建，不推定原作者的OBJ名稱與邊界。
+
+| 階段 | 實際工具與產物 |
+|---|---|
+| C與來源分類 | `rebuild.py`由乾淨`PILOT.C`生成compiler OBJ，再由既有OMF適配器生成C與原始物件 |
+| 原始序列 | `split-objects.py`生成`PRE.OBJ + CSLOT.OBJ + POST.OBJ`，來源bytes、fixup值與C指令保持 |
+| 連結 | QuickC LINK4.07 `/MAP`，原位解析全部引用 |
+| loader配置 | 官方EXEMOD4.02 `/MIN C34` |
+| 封裝 | 官方EXEPACK4.06，命令依[Microsoft C手冊第147頁](https://archive.computerhistory.org/resources/access/text/2024/05/102734492-05-0002-acc.pdf#page=82) |
+| 外層序列化 | `pad-record.py`以128-byte記錄與`0x1A`填補，產生81 bytes尾端 |
+
+原版KOLBOOK與MAKEMODE也分別含55／63 bytes的`0x1A`填補至128-byte邊界。
+來源與填補bytes已證實，原作者採用此序列化的原因與工具未知。
+LINK4.07及LINK3.65內建`/EXEPACK`的候選均未匹配，保留完整負例；
+官方standalone EXEPACK4.06的壓縮資料、18-byte EXEPACK header、261-byte stub及壓縮relocation全部對上。
+相容工具組已證實，原版精確compiler／linker／packer版本仍未知。
+
+### 重現與證明範圍
+
+乾淨第二工作區從唯讀ZIP、四函式C、固定工具與明列原始片段完整重建。
+11項native、排序物件、MZ、MAP、loader配置、packed core及最終EXE逐byte相同。
+最終檔案的header、壓縮資料、EXEPACK header、stub、錯誤字串、重定位與外層填補七區全部核對。
+改最小記憶體欄、壓縮byte、重定位byte或尾端填補四個負例均被拒絕。
+兩次最終EXE經固定解包器再次輸出相同衍生MZ；正式342份程式輸入保持。
+全程只執行compiler／linker／封裝工具，沒有執行原版或重製遊戲，也沒有恢復對拍。
+
+本機[收據](../verification/local/matching-pack-20261008/receipt.json)、
+[完整分區差分與重編](../verification/local/matching-pack-20261008/pack-review.json)、
+[loader配置契約](../verification/local/matching-pack-20261008/memory-contract.json)、
+[完整重建腳本](../verification/local/matching-pack-20261008/rebuild.py)、
+[封存核對器](../verification/local/matching-pack-20261008/verify.py)及
+[保存清冊](../verification/local/matching-pack-20261008/retention.json)保存證據。
+封存核對器解析OMF、檢查原位C與原始覆蓋，並核對原生工具完整重建收據；
+完整重編由`rebuild.py`與釘選DOS工具完成，兩者證明範圍分開。
+下一閘門是擴大C匹配，每次替換都重生並核對完整原版EXE，129012 bytes仍列未匹配。
+目前入口固定四函式與已審查的OMF記錄類型。新增函式須同步擴充來源清冊、外部binding與排序，
+再用相同完整packed hash核對；原版code、工具與匹配C仍只留本機。
+
+完整重編時，先依保存清冊解出輸入並按`fetch-tools.py`重取固定工具。
+建立乾淨可寫輸出，複製`rebuild.py`、`dos-run.py`、`split-objects.py`與`pad-record.py`；
+原版專案唯讀掛`/src`，解出的`baseline/`與`tools/`分別唯讀掛`/out/baseline`及`/out/tools`。
+輸出掛`/out`，UID/GID1000:1000、無網路、1GiB、1CPU、96程序及240秒外層逾時，執行
+`python3 -B /out/rebuild.py`。來源與所有掛載目錄先確認存在與擁有權。
+
 ## 工具與重生入口
 
 - IDA9.4使用既有`ida-pro-9.4-idapython:py312-v1`，UID1000:1000、正式DB唯讀、一次性副本可寫；
@@ -192,6 +281,7 @@ UID/GID1000:1000、無網路、1GiB、1CPU、96程序與120秒逾時，執行：
 ```sh
 python3 -B /out/matching-pilot-20261008/verify.py
 python3 -B /out/matching-link-20261008/verify.py
+python3 -B /out/matching-pack-20261008/verify.py
 ```
 
 需乾淨重編時按保存清冊抽出源檔、固定候選工具及命令到Docker暫存，來源唯讀、輸出可寫。
