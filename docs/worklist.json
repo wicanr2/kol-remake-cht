@@ -14,11 +14,11 @@
       "id": "matching-koltown-binary",
       "layer": "verification",
       "title": "以匹配反編譯重建原始KOLTOWN.EXE",
-      "body": "2026-10-08使用者要求先commit／push再繼續，ff25f7a已推送。四個純C函式300 bytes由QuickC2.01及LINK4.07原位匹配；按原始relocation順序生成OMF，EXEMOD4.02配置已知loader契約、EXEPACK4.06與128-byte外層0x1A填補，重生完整133760-byte packed KOLTOWN.EXE，SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221與原版相同。乾淨C到packed檔案重編、11項native產物及七區完整差分通過，四個損壞負例拒絕。固定解包器e_minalloc=fullSize/60是工具占位，來源勘誤已保存。129012 bytes仍使用原版片段，full C decompilation保持未完成；精確原版工具版本與OBJ邊界未知。下一步擴展C替換，維持完整packed hash及來源覆蓋。入口docs/re/matching-decompilation.md。Go程式及遊戲對拍暫停狀態保持。",
+      "body": "持續目標為完成kol matching decompilation，範圍按六支原始EXE清冊保存。KOLTOWN目前46個純C函式4309 bytes、8個固定library函式372 bytes，包含720-byte戰鬥記錄初始化、450-byte裝備種類與switch。全部原位指令、完整image與2281筆有序relocation核對；兩次乾淨C、OBJ、native、MAP與packed八項相同，完整133760-byte EXE hash保持原版c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221。指令來源另與compiler及真實LIB獨立核對，沒有ASM或original CODE blob塞入C。尚有117895 CODE bytes／284函式與其他五EXE未還原，6736-byte初始化DATA保持；full matching仍未完成。下一批沿來源清冊與已驗C繼續，不回退到四函式試點。入口docs/re/matching-decompilation.md，來源清冊與核對器在docs/verification/local/matching-c-20261008。Go程式與原完成條件保持，遊戲對拍暫停。",
       "acceptance": "固定原版KOLTOWN.EXE SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221由可重現建置重生；header、資料、段配置、relocation及EXEPACK全部逐byte相同。每個code範圍登記C編譯、library、assembly或原始未匹配bytes，不以原版blob包裝或未宣告fixtures稱為C還原。匹配工具、參數、源檔、objects及完整差分均有固定hash。",
       "verify": {
         "kind": "manual",
-        "note": "完整packed EXE混合來源基準已逐byte及hash匹配；四個C函式300 bytes，129012 bytes仍使用原版片段。C／library／asm來源覆蓋及剩餘anchor仍需證據審查，保持open；成品hash相同不能單獨證明完整C還原。"
+        "note": "46個C／4309 bytes與8library／372 bytes已原位與乾淨重建匹配；117895個CODE bytes、284函式及其他五EXE仍未還原。來源覆蓋保持open，C原始名稱與位址、真實library及剩餘anchor均需審查；全檔hash相同不能替代完整來源還原。"
       },
       "status": "open"
     },

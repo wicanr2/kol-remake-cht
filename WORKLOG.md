@@ -10756,3 +10756,18 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 封裝研究源檔、C、OMF、候選失敗與原生工具命令只留本機。新收據明列whole packed matching=true、full C decompilation=false；封存核對器讀原版與OMF並核對原生工具收據，完整重編入口為rebuild.py與固定DOS工具，支援範圍仍為四個函式。工作區清理及最終文件／容器核對於下文追加。
 - 封存557份檔案，35份可重生或固定commit重取的EXE只保留hash；17909645bytes縮為2349194bytes。全唯讀核對封存、full packed hashes、C與OMF來源、重定位及342份正式輸入通過，才精確刪除matching-pack-20261008。全專案find沒有root-owned檔案或.md目錄；其他工作區、原版輸入與工具image保持，專案容器清單為空。工作表render／verify／scan通過，19未完成／89完成／15人工保持，1954行自承全部認領；待完成的是C來源覆蓋。
 - 刪除後終檢再次通過，557份保存雜湊、原版ZIP／OMF來源與full packed收據、342份正式輸入及全部matching文件連結保持；終檢時1955行自承全部認領。新檢查點只包含八份現況、研究、保存與工作表文件／工具，原版EXE、C、OBJ、DB與候選工具繼續排除；依本次commit／push授權保存完整封裝基準。提交主題為「建立KOLTOWN完整封裝的混合來源重建基準」，確切SHA與遠端結果由Git紀錄及本輪交接提供。
+
+## 2026-10-08：持續目標的46個C與八個runtime來源還原
+
+- 前一goal turn屬progress：完整EXEPACK基準確實改變可重建證據，但當時僅四C函式，沒有完整C還原。開工核對工作樹乾淨、HEAD2d7bef520b71144f6b1a31dbd38bfd923ac4c4e8、專案容器清單為空；目標保持完成kol matching decompilation，六原始EXE與全部未還原CODE不縮小。
+- 命中工具鏈、MZ／IDA與文件職責路由，載入實際技能與references。沿原IDA9.4 image4ac62de、matching image5992e601；正式DB與ZIP唯讀，對一次性副本匯出全部338函式、原始chunks／xref、IDA載入bytes與檔案bytes的各自基準。原正式DB保持，沒有推測性改名。
+- 批次從4→18→25→34→46個純C函式，最後4309bytes完整native body符合原版。包括角色條件、word讀写、骰值欄位、字串、繪圖調度、720byte sub_21AC4初始化、450byte sub_21E0B裝備與183byte sub_21FCD switch。源码保持原sub名稱與位址，50byte記錄欄位以offset作導航；語意未分級者不改正式Go型別。
+- 解出固定工具後的空msc510目錄未被封存，下載器補明示mkdir後沿同hash重取。編譯／連結完成標記改用獨立目錄，已消失的完成compiler handle不重啟；新建置接續既有產物。以上是工作腳本環境問題，沒有當產品缺陷。
+- 實際compiler差分顯示舊式char參數、逗號初始化、一般加法與+=、運算順序、signed／unsigned prototype轉換及明列default改變布局。逐一由原始指令與compiler交叉讀取找原因，保留所有負例C；沒有加ASM、_emit或把非fixup指令改成原版。小模組尾端單一NOP另列compiler padding，不計入函式body。
+- 原位適配改讀真實PUBLIC／EXTERNAL，不再固定四函式。C與library地址欄位分開供應、backpatch依原始函式位置重生；每个原始byte只供應一次，2281筆原始relocation順序與目标由native LINK產生。獨立source reader核compiler／LIB裸指令與物件覆蓋，再解析fixup重生完整129312byte初始化映像，不從原版貼回C指令。
+- 固定davidly/dos_compilers commitda3f15ce查完整9035記錄tree，取QuickC medium MLIBC與MSC候選／headers，每檔核Git blob及SHA。QuickC MLIBC.LIB306物件全部checksum通過；五個無fixup string函式直接完整匹配，sprintf90、srand17、rand40以實際原位引用與seed初值另核，再native整合。相容來源372bytes已證實，不據此認定唯一原版工具或符號名。MSC候選crt0.asm的COMENT在檔案offset482 checksum不符，保持診斷，未降低檢查。
+- 兩次乾淨C、compiler OBJ、原位OBJ、native MZ、MAP、loader配置、packed core與完整EXE八項逐byte相同；原版packed SHA c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221保持。兩次來源物件分別獨立核對，負例指令／配置／尾端修改均被拒絕；正式342份程式輸入保持，沒有原版／remake執行或遊戲對拍。
+- 新唯一source-ledger涵蓋六EXE、338個KOLTOWN函式及來源类别；46C／4309bytes、8library／372bytes，尚有117895CODE bytes／284函式與其他五EXE未還原，6736byte DATA保留。完整goal、工作表與來源清冊保持未完成，下一批從此C與工具接續，不回退四函式試點；原始CODE不计为source progress。
+- 本批835附件收據与全唯讀驗證通過；原版、C、LIB、OBJ、DB、完整ASM／bytes匯出只留本機。完成比較的工作區按既有保存契約封存與清理，goal仍active；最終數據與核對於下文追加。
+- 封存805份檔案、31份可重建EXE只保留hash，37125058bytes保存為16841622bytes。封存後完全唯讀重生原版並獨立解析兩份compiler／LIB／OMF來源，全部已驗來源與完整packed hashes符合，六EXE與284個未完成函式清冊保持；才精確清理本批工作區。來源與文件抽查1000:1000，全專案find無root-owned檔或.md目錄，沒有本批容器殘留。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1957行自承全部認領，matching入口所有本機證據連結存在；正式342份程式輸入與原交付物保持。完整goal的completion audit不成立，原始CODE與其他EXE尚未還原，保持active並從此46C／8LIB來源繼續。沒有Issue寫入或發行；本機源碼及binary不提交。

@@ -9,17 +9,18 @@
 
 2026-10-08使用者要求暫停目前對拍，改研究原版C的matching decompilation。
 對拍維持暫停，沒有執行中的專案容器。新方向先做
-[原始工具鏈與KOLTOWN匹配試點](docs/re/matching-decompilation.md)，四個純C函式共300 bytes
-經QuickC2.01／LINK4.07原位匹配；EXEMOD4.02與EXEPACK4.06完成原版packed EXE的混合來源重建，
+[原始工具鏈與KOLTOWN匹配工作](docs/re/matching-decompilation.md)，46個純C函式共4309 bytes，
+八個固定library函式372 bytes，經QuickC2.01／LINK4.07原位匹配；EXEMOD4.02與EXEPACK4.06完成原版packed EXE重建，
 133760 bytes與原版SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221完全相同。
-乾淨C到packed EXE重編通過。129012 bytes仍是原版片段，完整C反編譯尚未完成。
+乾淨C到packed EXE重編通過。117895個CODE bytes與284個KOLTOWN函式仍未還原；原始6736-byte DATA保持。
+目前[來源清冊](docs/verification/local/matching-c-20261008/source-ledger.json)含原始六支EXE，完整反編譯尚未完成。
 現有Go程式、已完成證據及原完成條件保留；原版C重建與Go移植的證明範圍分開處理。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
-| 匹配原版C | [完整封裝重建基準](docs/re/matching-decompilation.md#完整packed-exe的增量重建基準)：四函式300 bytes；原始packed EXE全部133760 bytes與hash相同，完整C到封裝重編及11項產物逐byte相同 | 129012 bytes仍使用原版片段；原版精確工具版本／OBJ邊界未知，hash相同不代表完整C還原；下一閘門為擴展C替換 |
+| 匹配原版C | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：46C／4309 bytes、8library／372 bytes；全部原位指令與2281重定位核對，乾淨八項產物相同，完整packed hash維持原版 | 117895 CODE bytes／284函式及其他五EXE尚未還原，來源清冊保持未完成；原版精確工具版本／OBJ邊界未知 |
 | 正式來源 | 340份Go、342份程式輸入；[任務亂數接續](docs/verification/quest-rng-20261007.md)與[受阻打暈持物](docs/verification/blocked-stun-20261007.md)有限CONFORMED；RE-295出城移動率及RE-290移動呈現保持 | 最新只改main.go既有任務入口；舊H名稱、原始記錄未知欄位及整場末端仍未閉合 |
 | 最近測試 | 十九套件通過；雙語正式及觀察前綴3540狀態／108PNG，各753個原版戰鬥點零差；正常回城保存及新程序重載4236狀態／72PNG，完整v3核對通過 | 重播原前綴，不增加原版覆蓋；回城末端只驗remake |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |

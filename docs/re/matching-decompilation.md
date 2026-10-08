@@ -1,7 +1,7 @@
 # 原版同位元組反編譯
 
-日期：2026-10-08。狀態：完整packed KOLTOWN.EXE的混合來源基準逐byte重建通過，
-SHA-256符合原版；四個純C函式300 bytes，129012 bytes仍是原始未匹配片段。
+日期：2026-10-08。狀態：完整packed KOLTOWN.EXE持續逐byte匹配原版。
+目前46個純C函式4309 bytes、八個固定library函式372 bytes；117895個CODE bytes仍未還原。
 使用者要求暫停目前對拍，改以 matching decompilation 重建原版C程式，
 希望降低重製過程中反覆行為比對的成本。本入口保存查證與首個試點範圍；
 現有Go程式、規格、原版收據與未完成條件保留。
@@ -256,6 +256,53 @@ LINK4.07及LINK3.65內建`/EXEPACK`的候選均未匹配，保留完整負例；
 目前入口固定四函式與已審查的OMF記錄類型。新增函式須同步擴充來源清冊、外部binding與排序，
 再用相同完整packed hash核對；原版code、工具與匹配C仍只留本機。
 
+持續目標為完成《武士傳說》的matching decompilation。C擴展工作區為
+`workplace/matching-c-20261008/`，先取代KOLTOWN剩餘函式，再核對原版其他EXE的來源範圍。
+完整packed基準沿用；原始未匹配CODE不計為C、library或重寫asm的還原進度。
+
+## 持續C來源還原
+
+目前[來源清冊](../verification/local/matching-c-20261008/source-ledger.json)包含固定ZIP內六支EXE，
+以及IDA9.4匯出的全部338個KOLTOWN函式、原始名稱、線性位址、chunks與檔案偏移。
+KOLTOWN以外五支EXE的來源狀態仍為`not-restored`。歷史四函式基準保留，不能取代本節現況。
+
+| 目前初始化映像來源 | 數量／bytes | 已證實範圍 |
+|---|---|---|
+| 純C | 46函式／4309 bytes | compiler原始指令與回填值原位轉換，完整函式與原版零差 |
+| 固定library | 8函式／372 bytes | 從固定MLIBC.LIB物件取得，不從原版遊戲貼回；引用與seed初值另核 |
+| 原始未匹配CODE | 117895 bytes／284函式仍未還原 | 不計為源碼還原進度 |
+| 原始初始化DATA | 6736 bytes | 保留輸入資料來源；不計為C函式進度 |
+
+八個library供應函式為`_strcat`、`_strcpy`、`_strlen`、`_strchr`、`_strrchr`、`_sprintf`、`_srand`與`_rand`，
+原始IDA名稱與位址維持。來源`Microsoft QuickC v2/LIB/MLIBC.LIB`釘選commit
+`da3f15ce4912893a0dd9f8349dab29116a53ca59`，Git blob
+`a8c67bc9a9a8dbb7b7663c16bfb11f2bafa4e45d`，306個物件全部OMF checksum核對。
+這證明相容來源，原版精確工具版本與原始符號名稱仍未知。
+另一MSC候選的`crt0.asm` COMENT checksum不符，保持診斷，不放寬檢查或把它當匹配來源。
+
+本輪新增的C包含角色條件、骰值欄位、字串與繪圖調度；`sub_21AC4`的720-byte戰鬥記錄初始化、
+`sub_21E0B`的450-byte裝備種類掃描與`sub_21FCD`的183-byte switch均完整匹配。
+50-byte記錄的欄位依原始offset命名，欄位語意未分級時只作導航，不進正式Go資料格式。
+無原版CODE blob、`_asm`或`_emit`塞入C源；沒有修改非fixup指令來湊匹配。
+
+原位工具由四函式專用改為讀取實際compiler PUBLIC／EXTERNAL的批次適配。
+每個CODE byte只供應一次；地址欄位由native LINK回填，backpatch另按原始函式位置定位。
+一般C與library指令bytes分別與真實compiler／LIB物件核對，獨立reader重生完整初始化映像，
+2281筆relocation的順序與目標均符合原版。
+目前已驗最大C函式720 bytes；較長函式與其他OMF記錄類型仍須逐批實測，不推定全量已支持。
+
+兩次乾淨C、compiler OBJ、原位OBJ、native MZ、MAP、loader配置、packed core與最終EXE共八項逐byte相同。
+原版全檔hash維持`c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。
+本機[完整函式差分](../verification/local/matching-c-20261008/trial-46c-review.json)、
+[獨立來源核對](../verification/local/matching-c-20261008/trial-46c-source-proof.json)、
+[乾淨重建](../verification/local/matching-c-20261008/checkpoint-review.json)、
+[純C](../verification/local/matching-c-20261008/bulk.c)、
+[封存核對器](../verification/local/matching-c-20261008/verify.py)與
+[保存清冊](../verification/local/matching-c-20261008/retention.json)為本輪入口。
+已完成批次封存、核對後清理工作區；下一批從此源碼與清冊接續，不回退至四函式基準。
+正式342份程式輸入保持，遊戲對拍維持暫停。完整matching目標仍進行中，完成條件包含全部來源範圍，
+不能只以目前重建EXE的hash相同結案。
+
 完整重編時，先依保存清冊解出輸入並按`fetch-tools.py`重取固定工具。
 建立乾淨可寫輸出，複製`rebuild.py`、`dos-run.py`、`split-objects.py`與`pad-record.py`；
 原版專案唯讀掛`/src`，解出的`baseline/`與`tools/`分別唯讀掛`/out/baseline`及`/out/tools`。
@@ -282,6 +329,7 @@ UID/GID1000:1000、無網路、1GiB、1CPU、96程序與120秒逾時，執行：
 python3 -B /out/matching-pilot-20261008/verify.py
 python3 -B /out/matching-link-20261008/verify.py
 python3 -B /out/matching-pack-20261008/verify.py
+python3 -B /out/matching-c-20261008/verify.py
 ```
 
 需乾淨重編時按保存清冊抽出源檔、固定候選工具及命令到Docker暫存，來源唯讀、輸出可寫。

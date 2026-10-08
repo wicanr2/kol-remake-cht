@@ -16,6 +16,7 @@
 | 原版C首批matching試點 | [試點與C源檔](../re/matching-decompilation.md) | [保存清冊](local/matching-pilot-20261008/retention.json) |
 | 原版C增量連結與跨段呼叫 | [增量證據與C源檔](../re/matching-decompilation.md#增量連結與第四個函式) | [保存清冊](local/matching-link-20261008/retention.json) |
 | 完整原版EXEPACK重建基準 | [封裝與來源覆蓋](../re/matching-decompilation.md#完整packed-exe的增量重建基準) | [保存清冊](local/matching-pack-20261008/retention.json) |
+| 46個C與八個library來源替換 | [完整來源進度](../re/matching-decompilation.md#持續c來源還原) | [保存清冊](local/matching-c-20261008/retention.json) |
 
 各目錄的 `evidence.tar.xz` 保留完整狀態紀錄、圖片、保存、腳本、輸入清冊與原收據。
 執行檔屬可重建產物，移除位元組並保留原 SHA-256。原收據不改寫，內部路徑仍指向
@@ -36,7 +37,7 @@ python3 -B /src/tools/retain_verification.py verify \
   quest-entry-rng-prototype-20261006 quest-marker-phase-20261006 \
   move-message-visibility-20261006 blocked-stun-formal-20261007 \
   finish-platform-20261007 quest-rng-formal-20261007 platform-quest-rng-20261007 \
-  matching-pilot-20261008 matching-link-20261008 matching-pack-20261008
+  matching-pilot-20261008 matching-link-20261008 matching-pack-20261008 matching-c-20261008
 ```
 
 需重查大檔時，工具的 `extract` 可解到容器的暫存目錄。只抽出原證據，不產生新收據。
@@ -74,3 +75,8 @@ python3 -B /src/tools/retain_verification.py verify \
 17909645 bytes縮為2349194 bytes；封存、原版full-hash、完整OMF與342份正式輸入均經
 全唯讀核對後，才刪除`workplace/matching-pack-20261008/`。生成的完整packed EXE與原版相同，
 但129012 bytes仍是原版片段；匹配C、原始code與工具仍只留本機。
+
+持續C批次另保存805份檔案，31份可重建執行檔只保留hash；37125058 bytes保存為16841622 bytes。
+兩份獨立compiler／library來源核對、46C／4309 bytes、8library／372 bytes、原版packed hash、
+六EXE與284個未還原函式清冊均經全唯讀核對後，才清理`workplace/matching-c-20261008/`。
+完整目標仍active；下一批由此源碼接續，保留117895個未還原CODE bytes及其他五EXE。
