@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-10-08",
+  "updated": "2026-10-10",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -14,11 +14,11 @@
       "id": "matching-koltown-binary",
       "layer": "verification",
       "title": "以匹配反編譯重建原始KOLTOWN.EXE",
-      "body": "持續目標為完成六支原始EXE的kol matching decompilation。六支都有同位元組重建基準；KOL與TANDYPIN完整來源還原，其他四支仍部分來源。KOL的567-byte C與硬體ASM主程式、75個runtime函式及全部1235-byte初始化DATA均由C compiler、固定LIB initializer與宣告零填補供應，原始CODE／DATA blob為0；八項乾淨產物、八項反例及兩份完整來源核對通過。KOL完整11971-byte EXE與原版相同，原始76函式全部chunks有來源。局部符號、COMDEF與LIDATA literal fixup依實際OMF記錄解析，far pointer保留原始段框；兩個資料初值語意仍未知。累計60純C／5651 bytes、219函式庫函式／23682 bytes、KOL混合主程式567 bytes及TANDYPIN入口13 bytes。其餘四支尚518函式、169979 CODE bytes與12553 DATA bytes未還原，完整matching仍未完成。入口docs/re/matching-decompilation.md，來源清冊與核對器在docs/verification/local/matching-c5-20261008。正式342份程式輸入保持，遊戲對拍維持暫停。",
+      "body": "六支EXE有完整同位元組重建基準；KOL、TANDYPIN、MAKEMODE及TITLE來源完整。第三十四批新增圖像、人物選擇、事件與分頁四函式4203 bytes，分列3701 C／502 ASM，1453條原始指令匹配；六段硬體ASM預先明列，普通C沒有ASM補差異。Town258 compiler函式、十一個真實CODE物件、完整DATA與既有LIB保持，前十個CODE物件逐byte不變。36項乾淨產物、116反例、兩份獨立reader與完整packed雜湊通過。累計228純C74428、378 LIB44396、182混合75345 bytes；仍10函式／4999 CODE，DATA未還原0，Book五／Town5，四支完整來源。剩餘含41函式外CODE及部分CRT的1 byte。另12個C／版本／前綴試驗皆未取得完整匹配，獨立保存。原始唯一C宣告與未證實語意保持未知，遊戲對拍暫停。入口docs/re/matching-decompilation.md。",
       "acceptance": "固定原版KOLTOWN.EXE SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221由可重現建置重生；header、資料、段配置、relocation及EXEPACK全部逐byte相同。每個code範圍登記C編譯、library、assembly或原始未匹配bytes，不以原版blob包裝或未宣告fixtures稱為C還原。匹配工具、參數、源檔、objects及完整差分均有固定hash。",
       "verify": {
         "kind": "manual",
-        "note": "完整源碼範圍仍open：只有KOL與TANDYPIN完整來源，其餘四支尚518函式、169979 CODE bytes及12553 DATA bytes。純C、硬體ASM、固定LIB及生成填補分列；全部EXE hash相同不能代替剩餘來源還原。"
+        "note": "仍有10原始函式與4999 CODE bytes未還原；Book五與Town5，總量含41函式外bytes及部分CRT的1 byte。依matching-c34-20261010/seed-compiler-units.json保留全部真實CODE來源、純C／混合分類、DATA核對鏈與未匹配試驗。普通C差異不可用ASM補完。workplace/matching-c35-20261010/PLAN.json的五個先行候選與兩份pilot收據已保留，完整C34基準已恢復；另一次無號左值字型候選仍未匹配。依使用者要求先commit與push，目標暫停，來源完成量維持C34。"
       },
       "status": "open"
     },
@@ -938,7 +938,7 @@
       "id": "save-across-battle-and-clock",
       "layer": "gap",
       "title": "存檔跨事件與戰鬥階段恢復：戰鬥中途狀態與世界時間",
-      "body": "訂正原盤點的 v1／v3 混淆：正式 v3 已按 SPEC-023 保存 Ticks、Part、Day、Month、Year、Weather，buildCompleteSave／restoreWorld 已接入，完整角色保存測試也驗日期跨月。本輪 full-chain 新存檔包含 clock，重載後換日與自然事件里程碑通過。SPEC-023 明確排除露營提示與戰鬥中的暫態保存，故戰鬥中途存檔不是已核准格式能力；原條目的戰鬥中途要求仍待範圍決定，不得據此直接擴充正式格式。原完成條件保留，不在本輪改寫。 RE-213從正常啟動、招募、購買與修改法術，經自然遇敵逃離回旅館，取得原版CHARDATA實際寫檔。原版574狀態、4次正常逃離；從實際檔正常重載及招募7狀態。Olear法術N／Strength、護符與骰式、金冠601及冒險點數2486和雙語重製保存相符。營養欄原版10／重製8；原版三次CAMPING、重製兩次，每次實際+2。差異保留，不宣稱旅程同狀態。雙語正式／觀察各380保存與16重載狀態，1584PNG及可比trace相同；兩人34物品槽與14持久欄位重載相符。正常旅店招呼後seed1，世界、戰鬥與住宿不重設；原版4次遇敵，重製一次，不宣稱整段骰序、整場或整頁parity。正式325份Go／56bfb4c8不變，保存格式v3保持。原版payload只留本機。22未完成／84完成保持。繁中法術注解A／B、怪物四套資料格式及既有未決事項維持原閘門。入口docs/re/20261003-spell-edit-inn-save.md。 RE-226沿RE-225正式334 Go／336來源與候選，沒有規則修改。固定正常seed1且不在規劃重播種，原版十入口前綴369狀態、375前綴圖及5117呼叫保持，再一鍵正常戰敗返回世界。雙語378鍵／379狀態正式與唯讀觀察相符；兩人34完整物品槽、傷勢29／20、金冠987／1009、32搜刮骰與一顆天候骰相符，戰鬥至返回567骰，终seed4151719855、暫存16、世界42／9、次格4／4、時刻3340降3240。返回圖已目視核對。人物v3、怪物v2、封包與版號保持。下一步由實際42／9位置登記正常回旅店路線，再驗住宿保存與另起行程重載。耗盡後下一規劃未到達；射後Command34／35、完整50-byte終態、其他戰鬥及實機仍待驗。父規格与#6／#44保持開放。入口docs/re/20261004-defensive-battle-return.md及本機seal.py／verify.py。 2026-10-05 RE-235最新正式dbc465a3／338來源保持，雙語各7477任務狀態與13真正v3重載狀態通過。完整trace各自與RE-231保持，跨語言只排四種既定顯示文字欄位；完整保存只排saved_at保持。正常DROP、Moraine第80回合撿Ship Wheel、第114回合逃離、六人回報一次，只有Moraine支付56住宿，六人正常保存。32張前後完整PNG只兩張重載資料頁肖像區變動，正文及其他畫面相同。200個明示遭遇控制骰100沿既定plan，不稱自然全旅程或新增原版整場／全任務對拍。入口docs/re/20261005-quest-chain-formal.md，本項原完成條件維持。 RE-243沿RE-242正式2ba7018a及338來源，雙語14954任務＋26真正重載狀態通過，同一7476鍵、seed1與200控制遭遇骰保持。Moraine第80回合取物、第114回合逃離，六人回報、正常住宿保存只差saved_at。每語言12個命中首句傷害延後及兩個掉落延後，下一確認鍵與前輪結算相符，其餘trace欄位保持；完整trace不能稱全相同。Windows與macOS雙架構候選重建、結構通過，Wine9兩批共1000正常＋52重載及336PNG與Linux相同。完整原版對拍、HD、實機及交付仍沿原完成條件。入口docs/re/20261005-quest-chain-execution-review.md。",
+      "body": "訂正原盤點的 v1／v3 混淆：正式 v3 已按 SPEC-023 保存 Ticks、Part、Day、Month、Year、Weather，buildCompleteSave／restoreWorld 已接入，完整角色保存測試也驗日期跨月。本輪 full-chain 新存檔包含 clock，重載後換日與自然事件里程碑通過。SPEC-023 明確排除露營提示與戰鬥中的暫態保存，故戰鬥中途存檔不是已核准格式能力；原條目的戰鬥中途要求仍待範圍決定，不得據此直接擴充正式格式。原完成條件保留，不在本輪改寫。 RE-213從正常啟動、招募、購買與修改法術，經自然遇敵逃離回旅館，取得原版CHARDATA實際寫檔。原版574狀態、4次正常逃離；從實際檔正常重載及招募7狀態。Olear法術N／Strength、護符與骰式、金冠601及冒險點數2486和雙語重製保存相符。營養欄原版10／重製8；原版三次CAMPING、重製兩次，每次實際+2。差異保留，不宣稱旅程同狀態。雙語正式／觀察各380保存與16重載狀態，1584PNG及可比trace相同；兩人34物品槽與14持久欄位重載相符。正常旅店招呼後seed1，世界、戰鬥與住宿不重設；原版4次遇敵，重製一次，不宣稱整段骰序、整場或整頁parity。正式325份Go／56bfb4c8不變，保存格式v3保持。原版payload只留本機。22未完成／84完成保持。繁中法術注解A／B、怪物四套資料格式及既有未決事項維持原閘門。入口docs/re/20261003-spell-edit-inn-save.md。 RE-226沿RE-225正式334 Go／336來源與候選，沒有規則修改。固定正常seed1且不在規劃重播種，原版十入口前綴369狀態、375前綴圖及5117呼叫保持，再一鍵正常戰敗返回世界。雙語378鍵／379狀態正式與唯讀觀察相符；兩人34完整物品槽、傷勢29／20、金冠987／1009、32搜刮骰與一顆天候骰相符，戰鬥至返回567骰，终seed4151719855、暫存16、世界42／9、次格4／4、時刻3340降3240。返回圖已目視核對。人物v3、怪物v2、封包與版號保持。下一步由實際42／9位置登記正常回旅店路線，再驗住宿保存與另起行程重載。耗盡後下一規劃未到達；射後Command34／35、完整50-byte終態、其他戰鬥及實機仍待驗。父規格與#6／#44保持開放。入口docs/re/20261004-defensive-battle-return.md及本機seal.py／verify.py。 2026-10-05 RE-235最新正式dbc465a3／338來源保持，雙語各7477任務狀態與13真正v3重載狀態通過。完整trace各自與RE-231保持，跨語言只排四種既定顯示文字欄位；完整保存只排saved_at保持。正常DROP、Moraine第80回合撿Ship Wheel、第114回合逃離、六人回報一次，只有Moraine支付56住宿，六人正常保存。32張前後完整PNG只兩張重載資料頁肖像區變動，正文及其他畫面相同。200個明示遭遇控制骰100沿既定plan，不稱自然全旅程或新增原版整場／全任務對拍。入口docs/re/20261005-quest-chain-formal.md，本項原完成條件維持。 RE-243沿RE-242正式2ba7018a及338來源，雙語14954任務＋26真正重載狀態通過，同一7476鍵、seed1與200控制遭遇骰保持。Moraine第80回合取物、第114回合逃離，六人回報、正常住宿保存只差saved_at。每語言12個命中首句傷害延後及兩個掉落延後，下一確認鍵與前輪結算相符，其餘trace欄位保持；完整trace不能稱全相同。Windows與macOS雙架構候選重建、結構通過，Wine9兩批共1000正常＋52重載及336PNG與Linux相同。完整原版對拍、HD、實機及交付仍沿原完成條件。入口docs/re/20261005-quest-chain-execution-review.md。",
       "acceptance": "戰鬥中途存檔重載後接得回去；世界時間跨存讀檔一致，不會重複付款、任務或戰鬥結算。",
       "verify": {
         "kind": "manual",
@@ -2341,7 +2341,7 @@
     {
       "file": "docs/spec/030-cjk-character-sheet.md",
       "match": "^沒有新增正式規則或版面；無原版任務頁oracle，其他組、多頁、最長姓名、坐騎及HD仍未驗。$",
-      "why": "RE-285有限子頁抽樣的範圍限制；已回填既有ui-details-unverified、cjk-remaining-screens、text-layout-remaining-screens；最長姓名及HD由原有工作项認領。18原驗收項保持，沒有新獨立待辦或結案。"
+      "why": "RE-285有限子頁抽樣的範圍限制；已回填既有ui-details-unverified、cjk-remaining-screens、text-layout-remaining-screens；最長姓名及HD由原有工作項認領。18原驗收項保持，沒有新獨立待辦或結案。"
     },
     {
       "file": "docs/spec/008-combat-field.md",
@@ -2351,7 +2351,7 @@
     {
       "file": "docs/re/matching-decompilation.md",
       "match": "完整原始EXE仍待重建|完整原版header|far-pointer樣本仍不匹配|memory model|全程記憶體模型仍未知|原版全程記憶體模型",
-      "why": "本輪matching-koltown-binary逐项追完整EXE與尚未匹配原版工具／結構，不新增孤立待辦或降低證明標準。"
+      "why": "本輪matching-koltown-binary逐項追完整EXE與尚未匹配原版工具／結構，不新增孤立待辦或降低證明標準。"
     }
   ]
 }

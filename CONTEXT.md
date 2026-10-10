@@ -1,6 +1,6 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-10-08。正式來源含 SPEC-008 受阻打暈與任務入口亂數接續，
+更新日期：2026-10-10。正式來源含 SPEC-008 受阻打暈與任務入口亂數接續，
 正常購馬保存為 RE-293，HD 工作批次為 RE-294。完整重製尚未完成。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
@@ -8,26 +8,38 @@
 ## 目前作業方向
 
 2026-10-08使用者要求暫停目前對拍，改研究原版C的matching decompilation。
-對拍維持暫停，沒有執行中的專案容器。新方向先做
-[原始工具鏈與匹配工作](docs/re/matching-decompilation.md)，KOLTOWN的51個純C函式共5057 bytes，
-42個固定函式庫函式4214 bytes，經QuickC2.01／LINK4.07原位匹配；EXEMOD4.02與EXEPACK4.06完成原版packed EXE重建，
-133760 bytes與原版SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221完全相同。
-KOLBOOK另有九個C函式594 bytes、36個函式庫函式3705 bytes，完整40192-byte EXE與原版相同。
-KOL、TITLE、MAKEMODE另有101個固定函式庫函式10080 bytes，三支完整EXE均與原版相同。
-TANDYPIN由13-byte組合語言入口、3-byte連結填補與96-byte重複字串完整還原來源，原生重建624 bytes相同。
-KOL現已完整來源還原：567-byte C與硬體組合語言主程式、75個LIB函式、全部1235-byte初始化DATA均由明列來源供應。
-沒有使用原始CODE／DATA片段，兩次乾淨重編的11971-byte EXE與原版相同。
-合計60個純C函式5651 bytes、219個函式庫函式23682 bytes、一個混合主程式567 bytes及TANDYPIN組合語言入口13 bytes。
-本批八項乾淨產物、八項反例與兩份完整來源核對通過；KOL與TANDYPIN完整來源，其餘四支仍為部分來源。
-目前[來源清冊](docs/verification/local/matching-c5-20261008/source-ledger.json)保存全部799個原始函式，
-尚有518個函式、169979 CODE bytes與12553初始化DATA bytes未還原；完整反編譯尚未完成。
+對拍維持暫停，現行入口為[原始工具鏈與匹配工作](docs/re/matching-decompilation.md)。
+六支EXE均有完整同位元組重建基準，完整來源已完成KOL、TANDYPIN、MAKEMODE與TITLE。
+第三十四批新增圖像合成、人物選擇、事件與分頁四個完整函式，共 4203 bytes，分列 3701 C／502 ASM；1453 條原始指令全部匹配。
+三個純 C 共 3212 bytes，一個混合共 991 bytes。六段硬體 ASM 在編譯前明列，C 的求值順序與未使用結果保留。
+全部 254 個既有 compiler 函式保持；前十個 C／OBJ 與前批逐 byte 相同，新函式獨立編為 SUPPORT.C／SUPPORT.OBJ。
+Town 現有 174 純 C 64776、84 混合 47159 bytes，混合分列 40268 C／6891 ASM。
+十一個真實 CODE 物件各為 53366／13650／1707／3679／5221／6038／5554／6558／5611／6348／4203 bytes；111935-byte 合併只是分析視圖，各真實段均小於 64 KiB。
+每個 PUBLIC／fixup 保留物件、段與原始偏移。重建使用[編譯單元清單](docs/verification/local/matching-c34-20261010/seed-compiler-units.json)與 full-build.py；seed-CODE.c 只供閱讀／分類。
+三個字型候選與遠指標葉函式仍未匹配。
+另 12 個 C／版本／前綴試驗保存於[試驗清冊](docs/verification/local/matching-c34-20261010/probe-summary.json)，未計入還原量；正式工具鏈保持。
+Town 全部 6736 bytes 初始化 DATA 來源保持，原版 DATA 片段為 0。
+246 個 compiler 初值符號供應 5600 bytes；31 個 LIB 範圍供應 991 實際 bytes 與 88 宣告零 bytes，另 57 原生零 bytes。
+兩個近指標表與一個遠函式指標由 15 個真實 compiler fixup 重生；56 個 compiler 對齊零 bytes 另列。
+52 個完整 LIB CODE 模組、75 個原始函式保持，涵蓋 9632 實際來源與 13 宣告零 bytes。
+兩次乾淨重編的 36 項產物相同，116 反例拒絕；兩份獨立 reader 核全部 258 個 compiler 函式、真實 CODE 物件來源、CODE／DATA、fixup、回填與 2281 筆有序重定位。
+LINK／EXEMOD4.02／EXEPACK4.06 原生重生 133679-byte 核心，再生成 81 個 1Ah。
+兩次完整 133760-byte KOLTOWN.EXE 均與原版 SHA-256 相同；沒有手修指令、header 或複製原版 tail。
+Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持。
+累計 228 純 C 74428、378 LIB 44396 實際來源 bytes、182 混合 C／ASM 75345 bytes，函式外另列 271 C／258 ASM。
+目前[來源清冊](docs/verification/local/matching-c34-20261010/source-ledger.json)保持全部 799 個原始函式。
+全六支仍有 10 函式、4999 CODE bytes 未還原，未還原 DATA 為 0；四支完整來源。使用者要求先 commit 與 push，matching 目標及遊戲對拍均暫停。
+剩餘範圍另含 41 個函式外 CODE bytes；部分 CRT 函式有 235 bytes 已覆蓋、1 byte 未還原，均已納入總量。
+接續 [C35 工作計畫](workplace/matching-c35-20261010/PLAN.json)的五個未匹配先行候選與兩份收據已核對保留，完整 C34 基準已恢復至 C35。另一次無號左值字型候選的三個函式仍未匹配；尚未整合或計入目前來源，工作區保留供恢復。
+接續時保留 compiler_objects.py、seed-compiler-units.json、全部 CODE seed、CODE 分類與完整 DATA 鏈；恢復前一批不可只取 BULK.C／BULK.OBJ。
+原始唯一 C 宣告／文字、未證實語意及 Go parity 的證明限制保持。
 現有Go程式、已完成證據及原完成條件保留；原版C重建與Go移植的證明範圍分開處理。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
-| 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：60純C／5651 bytes、219個函式庫函式／23682 bytes、KOL混合主程式567 bytes與TANDYPIN入口13 bytes。KOL全部CODE、DATA與76函式的chunks有來源，八項乾淨產物及八項反例通過；兩支完整來源、四支部分來源 | 尚518函式、169979 CODE與12553 DATA bytes；其他混合基準的全檔相同不代表來源完成。兩個KOL初值語意、原始文字及精確工具版本仍未知 |
+| 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
 | 正式來源 | 340份Go、342份程式輸入；[任務亂數接續](docs/verification/quest-rng-20261007.md)與[受阻打暈持物](docs/verification/blocked-stun-20261007.md)有限CONFORMED；RE-295出城移動率及RE-290移動呈現保持 | 最新只改main.go既有任務入口；舊H名稱、原始記錄未知欄位及整場末端仍未閉合 |
 | 最近測試 | 十九套件通過；雙語正式及觀察前綴3540狀態／108PNG，各753個原版戰鬥點零差；正常回城保存及新程序重載4236狀態／72PNG，完整v3核對通過 | 重播原前綴，不增加原版覆蓋；回城末端只驗remake |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
@@ -85,11 +97,12 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
   未完成項的 verify 種類：`manual` 15、`present` 4。
 <!-- worklist:stats:end -->
 
-下表與十八個原條目逐項對應；不修改完成條件、verify、狀態或 Issue。
+下表與十九個現行條目逐項對應；不修改完成條件、verify、狀態或 Issue。
 精確契約及證據雜湊另見本輪 [逐項稽核](workplace/current-handoff-audit-20261006/gate-audit.json)。
 
 | 工作識別碼 | 下一閘門 |
 |---|---|
+| matching-koltown-binary | 接續Town5與Book五個CODE函式；依seed-compiler-units.json保留全部真實CODE物件與CODE／DATA獨立核對器，遊戲對拍暫停 |
 | g07-battle-speed-options | SPEC-028 細則確認及 READY；三選項控制、保存與可見原型驗收 |
 | v01-full-battle-parity | 受阻持物與任務亂數前綴已閉合；補正常整場結算與保存同狀態、舊H名稱及跨場H |
 | v02-appimage-platform-acceptance | 主機 FUSE、三平台與推廣影音收據 |
@@ -159,8 +172,11 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 
 遠端Issue最近於前輪2026-10-07以主機gh唯讀核對：private儲存庫，24 OPEN。
 本機18未完成與遠端尚未完全同步，本機計數不代替遠端現況。
-本輪已依授權提交與推送matching研究紀錄；沒有Issue寫入、版號、封包或發行。
+本次依使用者指示保存第六至三十四批 matching 異動與 C35 暫停交接。提交範圍限研究紀錄、工作清單與保存工具；本機原版輸入、衍生來源、工具與封存證據不納入 Git。
 Docker、擁有權與暫存終檢見本輪收據及 WORKLOG 末次紀錄。
+
+最新第三十四批來源證據與核對方法見[保存入口](docs/verification/retained-evidence.md)，
+來源、原始位址、乾淨重編與反例均由本機收據索引。
 
 ## 比較與工作區清理
 

@@ -10019,7 +10019,7 @@ worklist三行新限制最初未認領，已明確掛回開放的#44後重跑ren
 - 審查READY及ready-spec.md快照後，七個既有檔案正式更新。Linux2ba7018a517378487bcabc342deebe0f744e2b4befcfb387d00a4d02e3143ed3與V2逐byte相同，全部cmd／internal通過。正式雙語500狀態／162圖，與唯讀觀察一致，78英文戰場保持零差。全部原型與正式共2500正常狀態／810PNG，V1的1000不是完整呈現通過。
 - 78畫面seed零差、12欄射後指令別名保持，七AI入口／輸出、兩執行及後續規劃相符。實際旅店保存／退出／新程序載入238狀態、十圖、完整v3保持，只差saved_at；此短鏈沒有戰鬥，新來源全任務／戰後保存沒有重跑。
 - 八筆已解位址回填既有索引，2746A追加舊語意與勘誤；IDA匯出自動合併索引與未知警告。幾次檔名定位讀不到，依實際定義查找訂正，非產品缺陷。
-- 封存前置腳本錯用至少20個有測試套件，實際19個全部通過，無測試的五套件另列；改成核對完整19個名稱。清單將「格上還沒有圖示」誤判待辦，補精確行號語意認領，未刪檢查。這兩项屬驗證腳本問題，失敗收據保留。
+- 封存前置腳本錯用至少20個有測試套件，實際19個全部通過，無測試的五套件另列；改成核對完整19個名稱。清單將「格上還沒有圖示」誤判待辦，補精確行號語意認領，未刪檢查。這兩項屬驗證腳本問題，失敗收據保留。
 - SPEC-008此有限呈現切片CONFORMED；#11及18未完成／89完成／14人工保持。HD手繪、雷聲、v2／v3既有批准保持；HD比例、送禮版面、完整UI、其餘AI、整場、平台與交付仍開放。無提交、推送、Issue寫入、版本tag、封包、公開發布或新image。
 - V1、before／formal-source、DRAFT／READY、全部收據與原版PNG保留本機。附件／外部SHA、820PNG CRC／解碼、UID/GID1000、root-owned／md目錄自檢與專案容器清理見receipt.json／audit.json。
 
@@ -10068,7 +10068,7 @@ worklist三行新限制最初未認領，已明確掛回開放的#44後重跑ren
 - 準備器補丁多出加號，在執行前修正。讀取plan.go錯路徑屬查檔問題，改讀planning.go。完整重播wrapper初次以廣泛字串替換誤改formal-inputs檔名，遊戲未啟動；保留初版，改精確case路徑後乾淨重跑。產生器比較初次遞迴排除name，誤刪城門內層名稱而出假差異；保留初版，改只刪頂層截圖標籤後重算，保留所有內層名稱。圖片檢查初次誤把Xvfb桌面1280×800當來源PNG，改依已核實canvasFor的英文320×200／繁中960×600檢查。兩種檢查器初版與失敗日誌保留，只重算收據，沒有重跑已通過的遊戲。這些不列為產品缺陷。
 - 所有容器無網路、原輸入唯讀、1000:1000、有界資源與Xvfb trap；目前image沿用，沒有新建或清理其他專案資源。附件雜湊、PNG解碼、個別擁有權與本專案容器清理見receipt.json／audit.json。
 - 18未完成／89完成、14人工保持，沒有Git提交／推送、Issue寫入、版號、打包或發布。HD手繪已核准，比例及操作版面仍待既有問題回覆。
-- V01清單正文改為目前来源、有效有限證據與下一閘門，完成條件及Issue綁定保持。先前歷程留在RE-245文件快照、各RE與WORKLOG，不再讓舊「需重建任務操作」冒充目前待辦。
+- V01清單正文改為目前來源、有效有限證據與下一閘門，完成條件及Issue綁定保持。先前歷程留在RE-245文件快照、各RE與WORKLOG，不再讓舊「需重建任務操作」冒充目前待辦。
 
 ## 2026-10-05 RE-247 正常六人首場戰後返回與保存
 
@@ -10695,7 +10695,7 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 結構核對第一次自動審核逾時，未執行；按回應重試一次通過。文件patch首稿的行比對問題在執行前修正。這些屬工具或環境，不當產品缺陷。macOS未執行，Wine非Windows真機，FUSE、正式封包、HD及原完成條件保持。
 - WORKLIST只追加三條body及更新日期，所有acceptance、verify、status、Issue及acknowledged保持；render／verify／scan通過。CONTEXT更新唯一現況與可用工具入口，新驗收文件同輪掛入CONTEXT及保存索引。沒有提交、推送、Issue寫入、版號、封包、影片或發行。
 - 原控制器及新增Windows控制器在來源唯讀、輸出獨立可寫的有界Docker執行；UID/GID1000:1000、測試無網路，Xvfb與wineserver由trap回收。建置恢復明確開網路，有界CPU／RAM／nproc及外層逾時。兩個精確Wine前綴已在回放結束後移除，釋放1440804232 bytes。其他工作區及dist-all保持。根收據及唯讀核對均已通過，壓縮保存、引用與最終清理於本段追加。
-- 根證據保存1158份檔案及七份可重建執行檔雜湊，134757126 bytes縮為約6366771 bytes。完全唯讀重核來源／runtime、全部壓縮內容、8508狀態、完整v3及新連結通過後，才精確清理本次工作目錄。封存核對的JavaScript首稿語法錯誤未執行，修正shell引用後重跑通過；資料与來源保持。三個恢復revision及必要基底保留，懸空映像清單為空，沒有清理其他專案資源。
+- 根證據保存1158份檔案及七份可重建執行檔雜湊，134757126 bytes縮為約6366771 bytes。完全唯讀重核來源／runtime、全部壓縮內容、8508狀態、完整v3及新連結通過後，才精確清理本次工作目錄。封存核對的JavaScript首稿語法錯誤未執行，修正shell引用後重跑通過；資料與來源保持。三個恢復revision及必要基底保留，懸空映像清單為空，沒有清理其他專案資源。
 - 使用者暫停前，平台工作區刪除後的獨立唯讀核對通過；1939行自承全部認領，18未完成／89完成／14人工保持。全專案find無root-owned檔案或.md目錄，來源／工具檔／收據抽查1000:1000，kol容器無殘留，HEAD1384e508f70e8a5d81bc050ea79f66d3f0d38fe6，git diff --check通過。
 
 ## 2026-10-08：暫停對拍，查證原版C同位元組重建
@@ -10764,11 +10764,11 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 批次從4→18→25→34→46個純C函式，最後4309bytes完整native body符合原版。包括角色條件、word讀写、骰值欄位、字串、繪圖調度、720byte sub_21AC4初始化、450byte sub_21E0B裝備與183byte sub_21FCD switch。源码保持原sub名稱與位址，50byte記錄欄位以offset作導航；語意未分級者不改正式Go型別。
 - 解出固定工具後的空msc510目錄未被封存，下載器補明示mkdir後沿同hash重取。編譯／連結完成標記改用獨立目錄，已消失的完成compiler handle不重啟；新建置接續既有產物。以上是工作腳本環境問題，沒有當產品缺陷。
 - 實際compiler差分顯示舊式char參數、逗號初始化、一般加法與+=、運算順序、signed／unsigned prototype轉換及明列default改變布局。逐一由原始指令與compiler交叉讀取找原因，保留所有負例C；沒有加ASM、_emit或把非fixup指令改成原版。小模組尾端單一NOP另列compiler padding，不計入函式body。
-- 原位適配改讀真實PUBLIC／EXTERNAL，不再固定四函式。C與library地址欄位分開供應、backpatch依原始函式位置重生；每个原始byte只供應一次，2281筆原始relocation順序與目标由native LINK產生。獨立source reader核compiler／LIB裸指令與物件覆蓋，再解析fixup重生完整129312byte初始化映像，不從原版貼回C指令。
+- 原位適配改讀真實PUBLIC／EXTERNAL，不再固定四函式。C與library地址欄位分開供應、backpatch依原始函式位置重生；每個原始byte只供應一次，2281筆原始relocation順序與目標由native LINK產生。獨立source reader核compiler／LIB裸指令與物件覆蓋，再解析fixup重生完整129312byte初始化映像，不從原版貼回C指令。
 - 固定davidly/dos_compilers commitda3f15ce查完整9035記錄tree，取QuickC medium MLIBC與MSC候選／headers，每檔核Git blob及SHA。QuickC MLIBC.LIB306物件全部checksum通過；五個無fixup string函式直接完整匹配，sprintf90、srand17、rand40以實際原位引用與seed初值另核，再native整合。相容來源372bytes已證實，不據此認定唯一原版工具或符號名。MSC候選crt0.asm的COMENT在檔案offset482 checksum不符，保持診斷，未降低檢查。
 - 兩次乾淨C、compiler OBJ、原位OBJ、native MZ、MAP、loader配置、packed core與完整EXE八項逐byte相同；原版packed SHA c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221保持。兩次來源物件分別獨立核對，負例指令／配置／尾端修改均被拒絕；正式342份程式輸入保持，沒有原版／remake執行或遊戲對拍。
-- 新唯一source-ledger涵蓋六EXE、338個KOLTOWN函式及來源类别；46C／4309bytes、8library／372bytes，尚有117895CODE bytes／284函式與其他五EXE未還原，6736byte DATA保留。完整goal、工作表與來源清冊保持未完成，下一批從此C與工具接續，不回退四函式試點；原始CODE不计为source progress。
-- 本批835附件收據与全唯讀驗證通過；原版、C、LIB、OBJ、DB、完整ASM／bytes匯出只留本機。完成比較的工作區按既有保存契約封存與清理，goal仍active；最終數據與核對於下文追加。
+- 新唯一source-ledger涵蓋六EXE、338個KOLTOWN函式及來源类别；46C／4309bytes、8library／372bytes，尚有117895CODE bytes／284函式與其他五EXE未還原，6736byte DATA保留。完整goal、工作表與來源清冊保持未完成，下一批從此C與工具接續，不回退四函式試點；原始CODE不計為source progress。
+- 本批835附件收據與全唯讀驗證通過；原版、C、LIB、OBJ、DB、完整ASM／bytes匯出只留本機。完成比較的工作區按既有保存契約封存與清理，goal仍active；最終數據與核對於下文追加。
 - 封存805份檔案、31份可重建EXE只保留hash，37125058bytes保存為16841622bytes。封存後完全唯讀重生原版並獨立解析兩份compiler／LIB／OMF來源，全部已驗來源與完整packed hashes符合，六EXE與284個未完成函式清冊保持；才精確清理本批工作區。來源與文件抽查1000:1000，全專案find無root-owned檔或.md目錄，沒有本批容器殘留。
 - 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1957行自承全部認領，matching入口所有本機證據連結存在；正式342份程式輸入與原交付物保持。完整goal的completion audit不成立，原始CODE與其他EXE尚未還原，保持active並從此46C／8LIB來源繼續。沒有Issue寫入或發行；本機源碼及binary不提交。
 
@@ -10823,3 +10823,459 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 累計60純C／5651 bytes、219個LIB函式／23682 bytes、一個混合主程式567 bytes及TANDYPIN入口13 bytes。KOL與TANDYPIN完整來源，其餘四支仍有518函式、169979 CODE bytes與12553 DATA bytes。完整matching目標未完成；原版唯一文字、部分初值語意與精確歷史工具版本仍未知。
 - 封存1457份附件，保存1438份檔案，20份可重建執行檔只保留hash；91189586 bytes保存為9237881 bytes。全唯讀核對六原始輸入、兩次完整來源、全檔hash及Go後，精確清理第五批工作區。C、ASM、LIB、OBJ、DB與原版片段只留本機，不加入Git。
 - 工作表render／verify／scan通過，19未完成／89完成／15人工保持；研究與保存索引已更新，完整源碼範圍保持open。檔案擁有權、引用及Docker終檢於提交前核對；沒有Issue寫入、版號、封包或發行。
+
+## 2026-10-08：三支完整runtime模組與四個Maker純C函式
+
+- 前輪屬進度：KOL完整CODE／DATA來源通過並推送c56adbe7。本輪重查工作樹乾淨、main與origin/main同步、專案容器清單為空。沿工具鏈、MZ／IDA與文件職責入口，完整目標保持六支；matching-c6-20261008工作區先掛入逆向入口，固定ZIP及前批證據唯讀。
+- 從第五批已驗LOCAL符號、COMDEF、LIDATA與整CODE模組方法接續。TITLE／MAKEMODE／KOLBOOK分別52／36／52完整模組，覆蓋82／64／82個原始函式的所有chunks與共享tail，新增126個完整LIB函式，沒有改IDA邊界。LIB實際CODE bytes與13／0／13個宣告零byte分列。
+- 實際near lmul物件的後LEDATA以C2 0800覆蓋C3，加入此明列近返回規則；未支援overwrite仍拒絕。子目錄module搜尋路徑缺項與舊reader要求所有宣告byte都由LEDATA供應造成失敗，依KOL相同zero-fill契約修正後，用同image乾淨重跑，分類工具問題。
+- MAKEMODE新增_main968、sub_11199 160、sub_1142C 107、sub_11497 93，四個純C共1328 bytes完整native匹配。兩個不返回call後的各九byte epilogue另供應，18 bytes不修改原始函式邊界、不計新函式。未符原版的sub_103E1算式候選保留而未計進度。
+- 實際QuickC對已定義同TU函式預算relative call，不產生可搬移FIXUPP；改用獨立TU，真正compiler生成外部near-call由LINK回填，沒有改普通call bytes。signed／unsigned prototype按MOV／PUSH差異核對。來源擷取誤取prototype後的main已修正，正確exit物件另建，不沿用錯誤物件。
+- KOLBOOK原已驗九個純C保持真實compiler供應，沒有因新LIB批次退回原始片段。三支完整EXE、header、checksum、初始化image與四筆有序relocation符合原版；Book55與Maker63-byte填補保持。六份獨立reader重算compiler、原始LIB與backpatch，完整source區間只有一個供應者。
+- TITLE四項、Maker十二項、Book六項，共22項乾淨source、OBJ、MZ、MAP與完整EXE逐byte相同。八項反例實際拒絕三個LIB指令、兩個compiler指令與三個checksum修改；有效OMF checksum下的source錯誤確實被reader拒絕。
+- 累計64純C／6979 bytes、345個LIB函式／38978實際來源bytes、KOL混合主程式567與TANDYPIN入口13 bytes。兩支完整、四支部分來源；尚388函式、153311 CODE及12553 DATA bytes未還原，完整goal保持active。正式342份程式輸入不變，沒有遊戲執行或恢復對拍。
+- 封存1734份附件，保存1706份檔案，29份可重建EXE只保留hash；115356323 bytes保存為9779916 bytes。全唯讀核原始六EXE、三支新全檔、六份source proof與Go後精確清理本批工作區。C、ASM、LIB、OBJ、DB及原版片段只留本機。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，新增來源入口已索引。檔案擁有權、引用與Docker终檢於提交前核對；沒有Issue寫入、版號、封包或發行。
+
+## 2026-10-09：MAKEMODE九個完整C／ASM函式
+
+- 接續原版C matching，遊戲對拍維持暫停。開工HEAD為c56adbe7，既有第六批八檔異動保留。載入逆向重製、文件職責及工具鏈指紋入口，唯讀重算第六批六原始輸入、三支全檔與六份來源證明後，建立已索引的matching-c7-20261009工作區。
+- MAKEMODE新增sub_103E1、sub_11242、sub_11318、sub_1135B、sub_113BF、sub_114F4、sub_116E4、sub_11734、sub_118A8，共1757 bytes。全部原始IDA Pro 9.4位址、file offset、chunks及bytes保持；一個純C131 bytes、八個混合C／ASM1626 bytes分列，後者含931個C產生bytes與695個明列ASM bytes。原作者inline ASM形式未知，不用原始指令blob或ASM補普通C差異。
+- 勘誤sub_103E1的舊整數候選：DS+42h為六筆十byte磁片名，DS+7Eh為兩筆十byte模式名，DS+7A0h的printf格式含兩個%s。改用真實字串表加步距的near pointer，compiler原生MOV CX／ADD／PUSH完整匹配；兩個整數失敗候選保留。sub_114F4的一byte差異由實際byte局部變數修正。
+- 固定QuickC2.01與LINK4.07按原commit、Git blob及SHA-256重取，沿既有kol-matching-dos:bookworm-20261008-r1、UID/GID1000:1000、有界無網路容器編譯與連結；只有工具重取需要網路。ASM參數名與保留字衝突已修正，byte BAKPAT沿第五批契約處理。準備腳本換行、註解token誤判及跨批次計數欄位假設修正後，用相同輸入與image重跑，屬研究腳本問題，不記成產品缺陷。
+- 十三份C於兩個空白目錄重編，32項源檔、OBJ、清冊、原位OBJ、MAP、native MZ及完整15744-byte EXE相同，原版SHA-256保持3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56。兩份獨立reader重算完整初始化映像、四筆有序重定位、所有compiler fixup與byte／word回填。
+- 十項反例實際拒絕：修改C再編譯、修改ASM再編譯、純C指令、混合C產生指令、ASM指令、LIB指令、byte回填、near-call目標、ASM誤列純C及header checksum。六項OMF修改保持合法checksum。342份正式程式輸入雜湊未變；沒有執行遊戲或恢復對拍。
+- 累計65純C／7110 bytes、345個LIB函式／38978實際來源bytes、九個混合C／ASM函式2193 bytes及TANDYPIN入口13 bytes。兩支完整來源、四支部分來源；剩379函式、151554 CODE bytes及12553 DATA bytes。MAKEMODE下一項sub_10464為3381 bytes，另有27函式外CODE bytes及2353 DATA bytes；完整matching仍未完成。
+- 封存2387份附件，保存2365份檔案，23份可重建EXE只保留hash；133308658 bytes保存為10777487 bytes。全唯讀重核六原始EXE、32項乾淨產物、十項反例、兩份完整來源及Go後，精確清理本批工作區，約釋放117 MiB。入口見docs/re/matching-decompilation.md與docs/verification/retained-evidence.md。C、ASM、LIB、OBJ、DB及原版片段只留本機。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1973行自承全部有人認領。來源引用已核對，入口檢查先以第六批作正對照。Docker終檢無專案容器，find終檢無root-owned檔案或誤建Markdown目錄，更新檔UID/GID1000:1000；git diff --check通過。本批未提交、未推送，沒有Issue寫入、版號、封包或發行。
+
+## 2026-10-09：MAKEMODE完整CODE與初始化DATA來源
+
+- 前輪九函式還原屬實際進展，本輪接續完整六支matching目標。HEAD仍為c56adbe7，既有第六、七批八檔異動保留。路由沿reverse-engineer-retro-game-remake、verification-and-handoff及project-document-responsibilities；第七批先唯讀重核六原始輸入、兩份C／ASM／LIB來源及Go，建立已索引matching-c8-20261009工作區。
+- sub_10464的1002個IDA Pro 9.4原始指令與28個caller保持。3381-byte完整函式以23個C switch分支、typed記錄步距、文件讀寫、尺寸與溢位條件還原，3293個C產生bytes與五個明列ASM區塊88 bytes分列；IDA linear10464h..11199h、原始MZ偏移1636及原始邊界保持。高低byte算式次序、有號轉換、沒有default的分派與未定型呼叫prototype經真實QuickC差分修正，不以ASM補普通C差異，原作者實際型別與唯一寫法未知。
+- 原先未覆蓋的27 CODE bytes全部為零，改由段宣告與LINK供應，沒有LEDATA原始片段。完整Maker CODE為五純C1459、九混合C／ASM5007、18 compiler epilogue、64個LIB函式6305及27宣告零bytes，共12816 bytes；全部78個原始函式的所有chunks與shared tail有來源。
+- DATA由67個可讀C符號1495 bytes、固定LIB766個實際初值bytes及88個宣告零bytes、四個原生零bytes供應，共2353 bytes。名稱表、byte lookup與3／6／2-byte記錄表按consumer及stride建立；原位LIB來源與全部source fixup核對。compiler最後字串為奇數長度，最後一個對齊byte由LINK供應。外層63個1Ah由明列生成，不從原版tail拷入。
+- DS+4E2原始bytes為00 1F，未在固定LIB資料段找到。原始__cinit於11ADBh／11ADEh及11AE4h／11AE7h令SI／DI同為4E2h；sub_11B8A與sub_11B99均先CMP、JNB退出，空範圍不讀值。C初值0x1F00只供應已證實的觀察bytes；用途未知、原始C宣告為假說，不把g_4E2別名當語意證據。
+- 固定QuickC2.01／LINK4.07按既有commit、Git blob及SHA-256重取，沿kol-matching-dos:bookworm-20261008-r1、UID/GID1000:1000；工作無網路、有界資源與逾時，只有工具重取開放網路。前批腳本程式名稱／core邊界、Python模組路徑、DATA末端長度及反例far-pointer型fixup假設已按實際記錄修正後同image重跑，屬研究腳本問題。Maker DATA實際採segment fixup，本輪不製造不存在的far-pointer型反例。
+- 十五份來源於兩個空白目錄重編，36項源檔、OBJ、清冊、原位OBJ、MAP、native MZ及完整15744-byte EXE逐byte相同。兩次完整EXE均與原版SHA-2563051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56相同；header、checksum、全部15169-byte初始化映像及四筆有序重定位均核對。兩份獨立reader逐byte確認compiler CODE／DATA、LIB、零填補的唯一來源，原始CODE與DATA blob為0。
+- 十三項反例拒絕實際C／ASM／未知初值再編譯、純C指令、Core ASM、LIB CODE、compiler DATA、LIB DATA、byte回填、segment fixup目標、額外零區LEDATA、DATA清冊漏項及header checksum；八項OMF修改保持合法checksum。來源漏項即使保持全檔相同也不能通過。342份Go及模組輸入雜湊保持，沒有執行遊戲或恢復對拍。
+- MAKEMODE成為第三支完整來源程式，KOL與TANDYPIN原有結果保持。累計65純C／7110 bytes、345個LIB函式／38978實際來源bytes、十個混合C／ASM5574 bytes及TANDYPIN入口13 bytes；混合來源含4550個C與1024個ASM bytes。TITLE、KOLBOOK與KOLTOWN仍有378函式、148146 CODE及10200 DATA bytes未還原；完整goal維持active，下一批接續TITLE。
+- 封存3704份附件，保存3679份檔案，26份可重建EXE只保留hash；165621187 bytes保存為12273981 bytes，約釋放146 MiB。六原始輸入、所有附件、36項乾淨產物、十三反例、兩份完整來源及Go經全唯讀重算後，精確清理本批工作區。入口為docs/re/matching-decompilation.md與docs/verification/retained-evidence.md；C、ASM、LIB、OBJ、DB及原版衍生資料只留本機。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1977行自承全部有人認領。先以第七批作正對照，再核對十一個第八批來源連結及擁有權。Docker終檢無專案容器，find終檢無root-owned檔案或誤建Markdown目錄，更新檔UID/GID1000:1000；git diff --check通過。本批未提交、未推送，沒有Issue寫入、版號、封包或發行。
+
+## 2026-10-09：TITLE完整來源與未命名CODE範圍
+
+- 前輪MAKEMODE完整來源屬實際進展，本輪接續完整六支matching目標。HEAD仍為c56adbe7，既有八檔異動保留。載入reverse-engineer-retro-game-remake、文件職責、驗證交接及IDA工具入口；第八批完整來源先唯讀重核，再建立已登記matching-c9-20261009工作區。工具handle消失後核對容器與七個固定工具實檔SHA-256，沒有重啟已完成下載。
+- 原始TITLE的115函式中，82個LIB結果保持；新增十個純C1625 bytes與23個混合C／ASM5629 bytes。混合來源含4269個C產生bytes、1360個明列ASM bytes；十五個完整寄存器／硬體body由ASM重寫，普通C控制、解碼、資料步距、檔案及尺寸運算未補ASM。所有原始位址、名稱、chunks與caller保持。RND僅還原呼叫與機器碼，不執行亂數判斷；硬體busy-wait不作逐週期語意研究。
+- 小量差分由缺／多列呼叫、加法次序、局部變數順序、length保留字及prototype轉換修正。三十五份來源加TITLE.H於兩個空白目錄完整重編，77項源檔、OBJ、header、清冊、原位OBJ、MAP及完整18671-byte EXE逐byte相同。原版SHA-256保持8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6；原始唯一寫法與實際型別仍未知。
+- 原始110BDh..11133h額外118 CODE bytes以正式IDA DB的一次性副本核對，49個原始CODE items皆沒有函式歸屬，entry沒有xref。固定IDA Pro9.4／image4ac62de8、UID/GID1000:1000輸出schema、原始EXE SHA與115個原始函式數核實；正式DB雜湊不變。另列C範圍原生匹配118 bytes，不建立／改名函式，不增加全域799個原始函式。別名只作導覽，沒有當成原始符號或語意證據。
+- 完整16880 CODE bytes由1625純C、5629混合C／ASM、118另列C、9459實際LIB／13LIB宣告零bytes及36原生零bytes供應。1279初始化DATA由二十個C初值符號218 bytes、969實際LIB初值／88LIB宣告零bytes及四原生零bytes供應，原始CODE／DATA blob為0。三個五byte模式名、九個Hercules word記錄與十二個字串有consumer／shape來源；DS+2D6的0x227A及0x3E9E用途未知，原始C宣告為假說，觀察值與重建能力分開記錄。
+- 兩份獨立reader重算完整18159-byte初始化映像，核對所有compiler CODE／DATA、固定LIB、額外C及零填補唯一來源、全部fixup與byte／word backpatch、四筆有序重定位。十五項反例拒絕實際C／ASM／未知初值／額外C再編譯、C與ASM、CODE／DATA函式庫、compiler DATA、byte回填、segment目標、額外零區LEDATA、DATA或額外C來源漏項及header checksum；八項OMF修改保持合法checksum。
+- 沿既有kol-matching-dos:bookworm-20261008-r1與固定QuickC2.01／LINK4.07，原始ZIP、正式DB及前批來源唯讀；寫入UID/GID1000:1000，有界CPU／記憶體／PID及逾時，只有固定工具重取需要網路。額外CODE的ida_linear重複欄位及DATA218-byte／二十符號假設修正後同image重跑，屬研究工具問題，沒有修改正式Go或玩家流程。
+- TITLE成為第四支完整來源，原有KOL／TANDYPIN／MAKEMODE結果保持。累計75純C／8735 bytes、345個LIB函式／38978實際來源bytes、33個混合C／ASM11203 bytes；8819個C與2384個ASM分列，額外C118 bytes及TANDYPIN入口13 bytes不混入函式數。KOLBOOK與KOLTOWN仍有345函式、140738 CODE及8921 DATA bytes，完整goal維持active，下一批接續KOLBOOK。
+- 封存5943份附件，保存5918份檔案，26份可重建EXE只保留hash；195783496 bytes保存為14613501 bytes，約釋放173 MiB。全唯讀核對已印出全部PASS，但第一輪收尾碰到120秒外層逾時，分類環境／執行時限問題；延長至300秒，用同image、同命令乾淨重跑，不更改封存收據。來源及清理入口見docs/re/matching-decompilation.md與docs/verification/retained-evidence.md；本機原版衍生C、ASM、LIB、OBJ、DB及工具不加入Git。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1979行自承全部有人認領；以第八批作正對照後核對十個第九批來源連結。300秒重跑完成全部來源、DB與附件核對，退出0；封存收據未改。第九批工作區已清理，find終檢無root-owned檔案或誤建Markdown目錄，更新檔UID/GID1000:1000，Docker終檢無專案容器，git diff --check通過。342份Go及模組輸入保持，沒有遊戲執行、恢復對拍、Issue寫入、版號、封包或發行；本批未提交或推送。
+
+## 2026-10-09：KOLBOOK新增75個完整原始C／ASM來源函式
+
+- 前輪TITLE完整來源屬實際進展，本輪接續全六支matching目標。HEAD仍c56adbe7，既有八檔異動保留。沿復古逆向、文件職責與驗證交接入口，唯讀重核第九批來源後建立已索引matching-c10-20261009工作區。KOLBOOK原始191函式、九個C594 bytes與82個LIB9400實際來源bytes皆先核對；沒有依舊待辦重新研究已完成函式。
+- 新增75個完整原始函式8485 bytes，包含二十個純C2475 bytes、55個混合C／ASM6010 bytes。混合來源含1939個C產生bytes與4071個明列ASM bytes，ordinary C控制、前置條件、呼叫、圖像分派、解碼、檔案、字串、幾何交疊與色盤運算未補ASM。原始名稱、linear位址、file offset、chunks、bytes與caller保持；完整原位body與外部引用逐byte相同。原作者實際型別、唯一寫法及精確工具版本未知，不把別名當語意證據。
+- 三十五個完全寄存器BODY按原始指令明列ASM，後續條件／呼叫及局部C設定另列。小差分由失敗分支形狀、DS+1130解碼暫存區、stack argument offset修正；g_1234及g_13D4的陣列consumer與header宣告衝突已訂正。offset unk_1924B保持原運算元註解，以DS偏移別名綁定原值，不猜語意改名。這些失敗屬研究來源／腳本問題，同image乾淨重跑，不記為Go產品缺陷。
+- 原有九個C共享BOOK.OBJ，獨立reader按compiler PUBLIC offset及完整相接／非重疊來源區間覆蓋全594-byte OBJ，不把每筆宣告當獨立TU，也不把已驗C退回原版片段。Book現有29純C3069 bytes、55混合6010 bytes與82完整LIB函式；仍有25原始函式、18948 CODE與2185初始化DATA bytes。全檔相同仍為混合來源基準，Book尚未完整。
+- 七十六個C源檔與BOOK.H在兩個空白目錄重編，159項源檔、OBJ、header、清冊、原位OBJ、MAP、native MZ及完整40192-byte EXE逐byte相同。原版SHA-256保持2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832，55個1Ah外層填補、header、checksum、全部39625-byte初始化映像及四筆有序重定位均核對。
+- 兩份獨立reader核對84個完整compiler C／ASM函式、52個完整LIB模組及所有fixup／byte與word backpatch。九項反例拒絕實際C／ASM再編譯、新C／ASM／舊共享OBJ與LIB指令、byte回填、共享OBJ來源漏項及header checksum；五項OMF修改保持合法checksum。未還原CODE／DATA仍明列原版來源，不放寬完整目標。
+- 固定QuickC2.01／LINK4.07按同commit、Git blob及SHA-256重取，沿kol-matching-dos:bookworm-20261008-r1、UID/GID1000:1000。有界無網路工作，唯工具重取開網路；原始ZIP、programs、analysis與前批來源唯讀掛載。單次編譯每個真實源檔，沒有因九個共用OBJECT的宣告重複啟動compiler。來源驗證逐檔重算SHA-256後快取必要archive檔案，避免反覆xz定位；沒有更改既有不可變收據或驗收條件。
+- 累計95純C11210 bytes、345個LIB函式38978實際來源bytes、88個混合C／ASM17213 bytes；10758個C與6455個ASM分列，額外C CODE118 bytes、TANDYPIN入口13 bytes與18個epilogue bytes保持。全域799個原始函式不變。Book25及Town245共270函式、132253 CODE與8921 DATA bytes未還原，四支完整來源保持，full goal維持active；下一批接續Book剩餘25原始函式與DATA。
+- 封存8915份附件，保存8893份檔案，23份可重建EXE只保留hash；221612068 bytes保存為18252743 bytes，約釋放194 MiB。全唯讀封存重算六原始輸入、159項產物、九反例、兩份完整原位來源及342份Go／模組輸入後退出0，才精確清理本批工作區。C、ASM、LIB、OBJ、DB、工具及原版衍生資料只留本機；入口docs/re/matching-decompilation.md與docs/verification/retained-evidence.md。
+- 工作表render／verify／scan通過，19未完成／89完成／15人工保持，1979行自承全部有人認領。以第九批入口作正對照後核對十個第十批來源連結及擁有權。find終檢無root-owned檔案或誤建Markdown目錄，更新檔UID/GID1000:1000，Docker終檢無專案容器，git diff --check通過；本批未提交或推送。沒有遊戲執行、RND結果對拍、硬體逐週期研究、Go變更、Issue寫入、版號、封包或發行。
+
+## 2026-10-09：KOLBOOK新增18個完整原始來源函式
+
+- 沿已索引的matching-c11-20261009工作區接續全六支目標。路由重核復古逆向、IDA及文件職責，既有八檔異動保留。先核對C10唯一來源清冊與原始191個Book函式；沒有重新開啟四支完整來源或遊戲對拍。
+- 新增18個完整原始函式6012 bytes：十個純C3499、八個混合C／ASM2513 bytes，混合來源含2116個C與397個ASM bytes。磁碟提示、選單、輸入、檔案、字串、動畫與幾何來源按原始指令及compiler逐byte核對。sub_146CE完整1302 bytes，三段滑鼠／鍵盤ASM45 bytes，其餘1257 bytes由C產生；普通C差異不補ASM。
+- 四個候選仍未匹配：sub_14101置中式的型別／暫存器差異；三個繪字函式各有SUB／ADD差異。只取真正匹配的102個來源函式，四個候選不計進度，另三個大型Book函式尚未實作。28段LIB初始化資料已有固定來源與fixup核對，typed DATA建置未完成，2185 DATA bytes保持未還原。
+- IDA導航第一次讀取錯誤DB路徑，改從已封存Book DB建立新一次性副本；正式DB唯讀，SHA與191函式核對，未改名。Hex-Rays未提供偽碼，按原始指令繼續。反例腳本第一次定位到不存在的ASM運算元，保留失敗資料，修正為g_90C後用新反例目錄同image重跑。這些屬研究工具問題，沒有修改Go產品。
+- 九十四個C源檔加BOOK.H兩次從空白目錄重編，195項產物逐byte相同；兩份完整40192-byte EXE符合原版SHA-256。55-byte 1Ah外層、header、checksum、39625-byte初始化映像與四筆有序重定位保持。獨立reader核對102個完整C／ASM函式、52個LIB模組、共享BOOK.OBJ全部PUBLIC區間及fixup／byte與word backpatch。九項反例均拒絕，五項OMF修改仍有合法checksum。
+- Book現39純C6568、63混合8523、82個LIB9400實際來源bytes。累計105純C14709、345個LIB38978、96個混合19726 bytes；12874個C與6852個ASM分列。額外C118、Tandy入口13及epilogue18 bytes保持。Book七與Town245共252函式、126241 CODE及8921 DATA bytes未還原，799原始函式與四支完整來源保持，完整goal仍active。
+- 沿既有kol-matching-dos:bookworm-20261008-r1與ida-pro-9.4-idapython:py312-v1，UID/GID1000:1000、有界CPU／記憶體／PID／逾時；原始programs、analysis及前批來源唯讀。固定工具重取才開網路。342份Go／模組輸入保持，沒有遊戲執行、RND對拍、硬體時序考古、Issue寫入、版號、封包或發行；未提交或推送。
+- 封存14512份附件，保存14488份檔案；25份可重建EXE只保留hash。255367655 bytes保存為20822756 bytes，約釋放224 MiB。全唯讀重驗六原始輸入、195項產物、九反例、兩份來源證明與342份正式輸入後退出0，才精確刪除第十一批工作目錄。以第十批八個入口作正對照，核對第十一批九個入口及更新檔擁有權。工作表render／verify／scan通過，19未完成、89完成、15人工保持；1984行自承全部有人認領。find終檢無root-owned檔案或Markdown目錄，Docker清單為空，git diff --check通過。下一批由本機封存接續Book七函式與DATA，完整目標保持active。
+
+## 2026-10-09：KOLBOOK主函式與全部初始化DATA來源
+
+- 前輪C11增加18個函式，本輪先全唯讀重核其清冊、102個既有來源函式與342份正式輸入，再建立已索引C12工作區。沿復古逆向、IDA、工具鏈考證與文件職責入口，既有異動保留；全六支目標不縮小，遊戲對拍未恢復。
+- _main完整4789 bytes由4562 C與227硬體ASM供應，十一個寄存器／複製區塊分列。原始16-byte函式外尾碼也由同一MAIN.OBJ供應：清理呼叫十bytes、真正尾聲六bytes。未猜出使用者變數；for逗號初始化自行產生BP-2暫存。原始名稱、位址、chunks、bytes與191／799原始函式數保持。診斷改用真實PUBLIC／OBJ結尾求完整尺寸，較長候選不被截短。
+- 全2185 DATA由78個typed C初值／1123 bytes、28個LIB初始化區段加PAD／EPAD共1057 bytes及五個原生零bytes供應。表格步幅、固定寬度字串、word、調色盤與游標遮罩經consumer／原始值及compiler物件核對。DS+57A兩word為72FA／8F1E，值與位置已證實，用途未知，原始C宣告為假說；不讓名字取代證據。
+- 第一次DB副本無法取輸入SHA，閘門拒絕；改用C11已核對的副本後SHA及191函式通過，正式DB唯讀。DATA最末對齊由LINK供應，compiler物件實際1123而非猜出的1124 bytes；修正後同image重跑。首次乾淨建置重複啟動同一DOS case被DONE閘門拒絕，將DATA與CODE合併為單次有界編譯，在新空白目錄重跑。失敗分類為研究工具／來源問題，保留資料，未改Go產品。
+- 原位建置與獨立reader分別核對資料完成及程式碼完成。108個資料來源區段覆蓋全部DATA；Code仍8085 bytes，46個獨立零區由LINK生成。偽造Code完成、移除DATA來源及關閉資料完成旗標都拒絕，full_source_restoration仍false。未匹配圖像編輯器與置中／三個繪字函式保留探針，不計進度，普通C差異不補ASM。
+- 95個CODE源檔加DATA.C／BOOK.H兩次從空白目錄重編，201項產物逐byte相同；完整40192-byte EXE符合原版SHA-256，55-byte外層、header、checksum、39625-byte映像與四筆有序重定位保持。兩份獨立reader核對103個compiler函式、52個LIB模組、全部typed DATA及fixup／byte／word回填。十五反例全拒絕，八項OMF改動保持合法checksum。
+- Book現39純C6568、64混合13312、82個LIB9400實際來源bytes；混合含8617 C／4695 ASM。累計105純C14709、345個LIB38978、97混合24515 bytes，17436 C／7079 ASM分列。Book六與Town245共251函式、121390 CODE與6736 DATA bytes未還原，四支完整來源保持，完整goal active。
+- 沿既有匹配與IDA image，UID/GID1000:1000、有限CPU／記憶體／PID／逾時，原始ZIP、programs、analysis、前批來源唯讀，僅固定工具重取開網路。342份Go／模組輸入保持；沒有遊戲執行、RND結果對拍、硬體時序考古、Issue寫入、版號、封包或發行，未提交或推送。
+- 封存20073份附件，保存20049份檔案，25份可重建EXE只留hash；297887791 bytes保存為23667775 bytes，約釋放262 MiB。全唯讀重驗六原始輸入、201項產物、十五反例、兩份來源證明與342份正式輸入後退出0，才精確清理本批工作區。第十一批九個入口作正對照，第十二批九個入口及更新檔擁有權通過。工作表render／verify／scan通過，19未完成、89完成、15人工保持，1985行自承全部有人認領。最後統計小腳本誤把舊JSON可選status當必要欄位，改按既有產生區塊核對後通過，未改完成條件。find無root-owned檔案或Markdown目錄，Docker清單為空，git diff --check通過。下一批接續Book六函式及函式外CODE；完整目標active。
+
+## 2026-10-09：角色建立與411個額外CODE bytes
+
+- 前輪主函式與DATA屬實際進展。本輪全唯讀重核C12封存、103個來源函式、六原始輸入及342份正式輸入，沿復古逆向、IDA、工具鏈及文件職責入口建立已索引C13工作區，既有異動保留。完整六支目標與對拍暫停保持。
+- 角色建立完整3671 bytes匹配，3646 C與25複製ASM另列，涵蓋名稱、選項、取消、重擲、肖像、記錄與保存。十一個C局部變數與三個compiler暫存符合原始28-byte stack，未在程式或測試猜補規則；只編譯與link，不執行遊戲或RND結果對拍。第一次暫存名字offset撞MASM保留字，改position後完整BODY相符，原始IDA名稱不改。
+- 原本未歸函式的411 CODE bytes按原始prologue及IDA指令拆成79／273／59三段。初次中段邊界猜為15133，decode閘門拒絕；以raw prologue核對1513A後在新DB副本重跑。191函式、輸入SHA及每一instruction raw bytes保持，沒有新增或改名IDA函式。兩段純C138 bytes，中段258 ASM＋15 C wrapper，共153 C／258 ASM；用途只限這些區段資料流，不深挖無caller helper。
+- 原位builder將額外mixed區段從原始函式數排除，新增extra_source_CODE／extra_explicit_assembly欄位；原始799函式不變。Book現104個原始C／ASM來源與三個額外區段，剩4003 CODE正好五個原始函式，沒有函式外未還原區段。Source分類、BODY、fixup與完整覆蓋均核對，普通C差異不補ASM。
+- QuickC2.01的context、指標、成員存取探針未解出其餘差異。工具清冊首次遞迴下載超過界限，縮到固定commit根tree後完整保存；按Git blob及SHA核QuickC1／2.51候選。QuickC1純C prologue／配置不同，_asm不支持；2.51置中／繪字仍不符，編輯器有未支援thread FIXUPP，保留未驗而不擴寫reader掩蓋差異。CLI help未輸出文字，診斷腳本模組路徑修正後保存已生成兩份比較；工具存在不作原版版本證據。
+- 99個CODE源檔加DATA.C／BOOK.H兩次乾淨重編，209項產物逐byte相同；17反例拒絕，九項OMF修改checksum仍合法。兩份獨立reader核104原始來源函式、三額外區段、52 LIB模組、全部DATA、fixup與byte／word回填。40192-byte EXE兩次符合原版SHA-256，55外層、header、checksum、39625-byte映像及四筆有序重定位保持。
+- 累計105純C14709、345 LIB38978、98混合28186 bytes，21082 C／7104 ASM分列。額外C由118加153為271，額外ASM258與Tandy入口13另列。Book五／Town245共250函式、117308 CODE及6736 DATA bytes未還原，四支完整來源及完整goal active保持，原版唯一文字／型別、精確工具及Go parity限制不變。
+- 沿既有image、UID/GID1000:1000、有界CPU／記憶體／PID／逾時，原始ZIP、programs、analysis及前批來源唯讀，固定工具下載才開網路。原版衍生來源、DB、OBJ及工具只留本機，不加入Git。342份正式輸入保持，無遊戲執行、硬體時序研究、Issue寫入、版號、封包或發行，未提交或推送。
+- 封存25247份附件，保存25224份檔案，24份可重建EXE只留hash；341055815 bytes保存為27165226 bytes，約釋放299 MiB。全唯讀重驗六原始輸入、209項產物、十七反例、兩份來源證明與342份正式輸入後退出0，才精確清理本批工作區。第十二批九個入口作正對照，第十三批九個入口及更新檔擁有權通過。工作表render／verify／scan通過，19未完成、89完成、15人工保持，1991行自承全部有人認領。find無root-owned檔案或Markdown目錄，Docker清單為空，git diff --check通過。下一批接續Book五函式，完整六支目標active，未提交或推送。
+
+## 2026-10-09：KOLTOWN完整LIB模組與33個原始函式
+
+- 前輪角色建立與額外CODE屬實際進展。本輪先全唯讀核C13來源、六原始EXE與342份正式輸入，沿復古逆向、原作工具鏈、文件職責與既有module解析入口建立C14工作區，八檔既有異動保留。Book旗標探針不匹配，保留未完成，不補ASM或縮小全六支目標。
+- 接手Town原有51純C與42 LIB，固定ZIP重生KOLTOWNU SHA01f6f9a...；MLIBC／MLIBFP／LIBH檔bytes及SHA保持。按完整segment、修正fixup、原生零與共享PUB約束擴展模組；早期清冊沒有LEXTDEF／local符號使output.c越界，套用已驗parser後完整原位2394-byte模組核對。local以module SHA及原名稱分開，不混同名符號；closeall同型候選因__iob差40拒絕。
+- 52完整CODE模組供應75原始函式，新增33；共有尾碼的DOS helper核全部原始chunks。來源範圍9645，實際LIB9632與宣告零13另列。沒有重疊既有51 C，也沒有把先前C退回blob。CODE新增5431範圍bytes、實際新LIB5418。所有原始名稱、位址、bytes及338／全域799函式數保持。
+- 兩空白目錄/AM /Od /Gs /Zl /G0重編，LINK4.07完整映像差0，51 C保持5057 bytes。獨立reader加入完整來源範圍計數、原始fixup與word回填比對，129312映像與2281重定位全符。EXEMOD4.02 /MIN C34及EXEPACK4.06重生核心133679；首次全檔差僅既有81外層1Ah，依MZ EOF生成常數而不複製tail。兩次完整133760 EXE hash等於原版c2442c84...，header／checksum／payload未手修。
+- 十項C、OBJ、清冊、MAP、native與packed全檔逐byte相同。十一反例拒絕實際C再編譯、C與新舊LIB指令、word回填、output或共享C漏項、本機fixup目標，及packed header／core／外層；四OMF修改checksum合法。最初模組腳本搜尋路徑、非CODE無陣列、反例文字重複屬驗證工具問題，保留失敗，在同image修正並乾淨重跑，不寫成Go產品缺陷。
+- Town現75 LIB、212未還原原始函式107874 CODE與6736 DATA，完整來源仍false。Book五函式4003 bytes不變。合計217未還原函式111877 CODE／6736 DATA；105純C14709、378 LIB44396實際bytes、98混合28186及額外271 C／258 ASM分列，四支完整來源與完整goal active保持。
+- 沿原有image、UID/GID1000:1000、有限CPU／記憶體／PID／逾時、原始ZIP／programs／analysis／前批來源唯讀，固定工具下載才開網路。原版衍生C、LIB、OBJ、DB與工具僅本機，沒有Go、玩家路徑、RND對拍、硬體時序研究、Issue、版號、封包或發行，未提交或推送。
+- 封存25702份附件，保存25680份檔案，23份可重建執行檔只留hash；382660051 bytes保存為28480804 bytes，約釋放338 MiB。全唯讀重驗六原始輸入、兩份完整模組來源、2281重定位、十項乾淨產物、十一反例與342正式輸入後退出0，才精確清理本批工作區。前批九個入口作正對照，本批九個入口及擁有權通過；render／verify／scan通過，19未完成／89完成／15人工保持，1994行自承全有人認領。find無root-owned檔或Markdown目錄，Docker清單空、git diff --check通過。下一批Town玩家CODE與資料，Book五函式仍未完成，全六支目標active，未提交或推送。
+
+## 2026-10-09：KOLTOWN新增30個純C原始函式
+
+- 接續既有C15工作區與原版C匹配方向，遊戲對拍維持暫停。開工HEAD為c56adbe7，八檔既有異動保留。載入復古逆向、文件職責、IDA與驗證交接入口；C14封存的25680份來源逐檔重核，六支原始EXE與七個固定工具的大小、SHA-256及Git blob均核對，沒有另建工具image或重新下載。
+- Town新增30個完整純C原始函式3203 bytes，現81純C8260 bytes。原有51純C5057 bytes與52個LIB模組、75個LIB原始函式保持；LIB實際9632、宣告零13、範圍9645分列。全部原始名稱、IDA Pro9.4位址、固定解壓MZ偏移、完整chunks及bytes有逐函式索引，原始338／全域799函式數不變。
+- 初始C差異由條件方向、連鎖賦值、運算次序、整數／指標表示與compiler暫存核清。sub_252CB手動多列暫存會多六bytes，改讓QuickC依有號參數及無號運算生成暫存後完整81 bytes匹配。這只證實有效匹配表達，不推定原作者的唯一宣告或型別；沒有以ASM、原始指令blob、遮罩或手修bytes補普通C差異。
+- EXTDEF超過單筆OMF長度上限，改為依原順序分筆；封裝報告沿用51個C的舊固定計數，改由實際清冊取得。診斷腳本換行及compiler helper路由修正後，同image重跑；舊候選與失敗保留，分類研究來源或驗證工具問題，不記作Go產品缺陷。
+- 沿kol-matching-dos:bookworm-20261008-r1、UID/GID1000:1000、有界CPU／記憶體／PID／逾時及無網路容器，原版ZIP、programs、解壓oracle、LIB與前批來源唯讀。trial.py clean-first及clean-repeat從兩個空白目錄執行QuickC2.01 /AM /Od /Gs /Zl /G0、LINK4.07、EXEMOD4.02及EXEPACK4.06；十項源檔、OBJ、來源清冊、MAP、native MZ與packed全檔逐byte相同。
+- 兩份獨立reader重算全部compiler／LIB來源、fixup、word回填、129312-byte映像及2281筆有序重定位。兩次原生packed核心133679 bytes相同，再由常數生成81個1Ah；完整133760-byte KOLTOWN.EXE均符合原版SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221。沒有手改header、checksum、壓縮payload或複製原版tail。
+- 十三反例拒絕新C實際再編譯、新舊C與LIB指令、word回填、新C呼叫目標、新舊C或output模組漏項、local目標，以及packed header、core與外層填補；五項OMF修改保持合法checksum。來源漏項不能因全檔bytes相同而通過。
+- 累計135純C17912、378 LIB44396實際bytes、98混合C／ASM28186 bytes，額外271 C／258 ASM與Tandy入口13分列。Town182函式104671 CODE與6736 DATA、Book五函式4003 CODE仍未還原；全六支187函式108674 CODE／6736 DATA未完成，四支完整來源保持。342份正式Go及模組輸入雜湊不變，沒有執行遊戲、恢復對拍或開啟硬體時序研究。
+- 封存25949份檔案，35份可重建執行檔只保留hash；418724543 bytes保存為28225759 bytes，約釋放372 MiB。六原始輸入、全部附件、兩份來源證明、十項乾淨產物、十三反例與342正式輸入從壓縮證據全唯讀重驗退出0後，精確刪除C15工作區。原版衍生C、LIB、OBJ、DB及工具僅本機；來源與重現入口見docs/re/matching-decompilation.md及docs/verification/retained-evidence.md。
+- 權威工作表只更新進度及verify說明，完成條件、狀態與Issue保持。render／verify／scan通過，19未完成／89完成／15人工保持。C14九個入口作正對照，C15九個入口與擁有權通過；find無root-owned檔案或誤建Markdown目錄，Docker終檢無專案容器，git diff --check通過。下一批接Town玩家CODE與初始化DATA，Book五函式保持未還原；本批未提交或推送，沒有Issue寫入、版號、封包或發行。
+
+## 2026-10-09：KOLTOWN新增25個純C原始函式
+
+- 前輪C15新增30個原始函式屬實際進展；本輪依active goal接續完整六支matching，沒有縮小成功條件。開工HEAD為c56adbe7，八檔既有異動保留。沿復古逆向、文件職責、compiler指紋及驗證交接入口，建立已索引C16工作區；C15保存的25949份來源逐檔重核，固定七個工具按原commit重取並驗大小、SHA-256及Git blob。
+- 新增Town25個完整純C原始函式5595 bytes，涵蓋選單、文字與資料頁、角色狀態、排序、位置判斷與戰鬥數值。Town現106純C13855 bytes；既有81純C8260 bytes、52個LIB模組與75個LIB原始函式保持。原始338／全域799函式、完整chunks、IDA Pro9.4 linear、固定解壓MZ偏移及bytes雜湊均保存。
+- 新compiler import __aFlmul綁定原始sub_2DE8C，由sub_2198A／sub_2590F caller、52-byte完整LIBH lmul.asm與實際生成ABI核對；此模組已列前批LIB來源，不重複計進度。compiler helper的來源狀態改按實際LIB覆蓋判斷，原始位址與模組hash保持。
+- C候選差異由求值次序、連鎖賦值、參數轉換、16-byte記錄步距及近指標表示修正。sub_166CC差兩bytes，以固定compiler／旗標比較七個C表達式；無號word位移使完整269-byte函式匹配。原作者唯一文字、型別與變數宣告仍未知，不用ASM、原始指令blob或手修bytes補普通C。生成核對器的集合欄位比對漏右括號，修正後同image重跑，分類研究工具問題。
+- 沿kol-matching-dos:bookworm-20261008-r1、UID/GID1000:1000、有界CPU／記憶體／PID與外層逾時，除固定工具重取外均無網路。原版ZIP、programs、解壓oracle、LIB與前批來源唯讀。trial.py clean-first及clean-repeat從兩個空白目錄執行QuickC2.01 /AM /Od /Gs /Zl /G0、LINK4.07、EXEMOD4.02及EXEPACK4.06，十項來源、OBJ、清冊、MAP、native MZ與packed全檔逐byte相同。
+- 兩份獨立reader核全部compiler／LIB來源、fixup與word回填，重生129312-byte映像及2281筆有序重定位。兩次原生133679-byte核心加常數生成的81個1Ah，完整133760-byte KOLTOWN.EXE均符合原版SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221，沒有手改header、checksum、壓縮payload或複製tail。
+- 十四反例實際拒絕新C再編譯、新舊C與LIB指令、word回填、新C遠呼叫、乘法helper PUBLIC綁定、新舊C或LIB漏項、local目標與packed三區；六項OMF修改保持合法checksum。342份正式Go與模組輸入雜湊不變，沒有執行遊戲、恢復對拍或硬體時序研究。
+- 累計160純C23507、378 LIB44396實際bytes、98混合C／ASM28186 bytes，額外271 C／258 ASM與Tandy入口13分列。Town157函式99076 CODE與6736 DATA、Book五函式4003 CODE仍未還原；全六支162函式103079 CODE／6736 DATA未完成，四支完整來源與完整goal active保持。
+- 封存26206份檔案，23份可重建執行檔只保留hash；451089376 bytes保存為29925298 bytes，約釋放402 MiB。六原始輸入、全部附件、兩份來源證明、十項乾淨產物、十四反例與342正式輸入從壓縮證據全唯讀重驗退出0後，精確刪除C16工作區。準備腳本已保存，外部暫存副本刪除；原版衍生C、LIB、OBJ、DB及工具僅本機。入口docs/re/matching-decompilation.md及docs/verification/retained-evidence.md。
+- 權威工作表只更新進度與verify說明，完成條件、狀態及Issue保持。render／verify／scan通過，19未完成／89完成／15人工保持。C15九個入口作正對照，C16九個入口與擁有權通過；find無root-owned檔案或誤建Markdown目錄，Docker終檢無專案容器，git diff --check通過。下一批接Town玩家CODE與初始化DATA，Book五函式仍未完成；本批未提交或推送，沒有Issue寫入、版號、封包或發行。
+
+## 2026-10-09：KOLTOWN新增12純C與31明列C／ASM函式
+
+- 前輪C16新增25個純C函式屬實際進展；本輪接續完整六支matching goal。開工HEAD為c56adbe7，八檔既有異動保留。沿復古逆向、文件職責、compiler指紋及驗證交接入口，建立已索引C17工作區；C16保存的26206份來源逐檔重核，固定七個工具依原commit重取並驗大小、SHA-256及Git blob。
+- 新增Town43個完整原始來源函式4170 bytes，包含12純C1905與31明列C／ASM2265 bytes。31混合函式由compiler產生465個C框架bytes，1800個ASM bytes按原始完整暫存器、segment、port、字串與位元編解碼區塊另列。零局部frame函式均保留原始9-byte序言與6-byte尾碼；全部原名、IDA Pro9.4 linear、固定解壓MZ偏移、完整chunks與bytes雜湊保持。
+- 上層分派、邊界控制、行索引及文字換行保持普通C。g_6710／g_670A的無號word表達、局部有號值與未定型遠呼叫宣告順序重生原始比較、減法及除法序列，既有106個C的全部機器碼保持。沒有以ASM補普通C差異，未匹配的普通far-pointer候選仍開放；原作者唯一型別、C文字、translation unit與原始inline ASM形式未知。
+- 來源分類器核106個既有C、12個新C與31個明列ASM的集合、數量、原始hash及範圍。compiler源與ASM框架／body分列，拒絕混合誤列純C、範圍偏移、來源漏項與普通C插入ASM。函式擷取器誤排除內文分號、ASM反例定位撞到extern宣告，修正後在新目錄同image重跑，失敗保留並分類研究工具問題。
+- 沿kol-matching-dos:bookworm-20261008-r1、UID/GID1000:1000、有界CPU／記憶體／PID及逾時，除固定工具重取外均無網路；原版ZIP、programs、解壓oracle、LIB與前批來源唯讀。兩空白目錄以QuickC2.01 /AM /Od /Gs /Zl /G0、LINK4.07、EXEMOD4.02及EXEPACK4.06重編，十項源檔、OBJ、清冊、MAP、native MZ及packed全檔逐byte相同。
+- 兩份獨立reader直接解析149個compiler函式與52個完整LIB模組，核全部fixup、word回填、129312-byte映像與2281筆有序重定位。兩次原生133679-byte核心加常數生成81個1Ah，完整133760-byte KOLTOWN.EXE均符合原版SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221。沒有手改指令、header、checksum、壓縮payload或複製tail。
+- 21反例實際拒絕C與ASM再編譯、新舊C、ASM及C框架指令、LIB、word回填、遠呼叫、helper PUBLIC綁定、來源漏項、local目標、ASM誤列純C、錯誤ASM範圍、普通C插入ASM與packed三區；八項OMF修改保留合法checksum。342份正式Go與模組輸入雜湊不變；沒有遊戲執行、恢復對拍或硬體時序實驗。
+- Town現118純C15760、31混合2265及75個LIB原始函式9632實際bytes，52模組與13宣告零bytes保持。累計172純C25412、378 LIB44396、129混合30451 bytes；混合分列21547 C與8904 ASM，函式外271 C／258 ASM及Tandy入口13另列。Town114函式94906 CODE與6736 DATA、Book五函式4003 CODE未還原；全六支119函式98909 CODE／6736 DATA未完成，原始799函式、四支完整來源與goal active保持。
+- 封存26561份檔案，31份可重建執行檔只留hash；512598542 bytes保存為31852025 bytes，約釋放458 MiB。六原始輸入、全部附件、兩份完整來源、來源分類、十項乾淨產物、21反例與342正式輸入從壓縮證據全唯讀重驗退出0後，精確刪除C17工作區。準備腳本已保存，外部暫存bootstrap刪除；原版衍生C、ASM、LIB、OBJ、DB及工具只留本機。入口docs/re/matching-decompilation.md及docs/verification/retained-evidence.md。
+- 權威工作表只更新進度與verify說明，原完成條件、狀態及Issue保持。render／verify／scan通過，19未完成／89完成／15人工保持。C16九個入口作正對照，C17十一入口、分類計數與擁有權通過；find無root-owned檔案或誤建Markdown目錄，Docker終檢無專案容器，git diff --check通過。接續需保留source_categories.py及分類基準，再擴充Town114個函式與初始化DATA；Book五函式保持。未提交或推送，沒有Issue寫入、版號、封包或發行。
+
+## 2026-10-09：KOLTOWN全部初始化DATA來源完成
+
+- 前輪C17新增43個來源函式屬實際進展；本輪接續完整六支matching goal，先閉合Town尚未還原的6736 DATA bytes。HEAD為c56adbe7，八檔既有異動保留。沿復古逆向、文件職責、IDA9.4及驗證交接入口建立已索引C18工作區；C17保存的26561份來源逐檔重核，七個固定工具按原commit重取並核大小、SHA-256及Git blob。
+- 從既有完整LIB CODE binding、實際MLIBC／MLIBFP／LIBH資料與DATA-only模組定位31個初值範圍，包含XP、MSG、PAD與EPAD。991個實際LIB初值bytes與88個宣告零bytes分列；沒有把DATA-only模組當成新增CODE函式，也沒有將未匹配_rmtmp候選猜補進來源。
+- 246個具名compiler初值供應5600 bytes，數值／位元表、逐個ASCII字串、兩個七筆近指標表與遠函式指標分列。DATA.C與PTRS.C使用不同translation unit，保留15筆真正external FIXUPP；LINK依原始DS及CODE位置解析，不手改指標值。原始C宣告標hypothesis，未證實語意保持unknown；遠指標sub_2DB42／LIB _execve的值與定位已核，資料記錄用途仍未知。
+- 使用既有ida-pro-9.4-idapython:py312-v1、UID/GID1000:1000、無網路及有界資源，從固定解壓MZ建立一次性DB。初次CLI載入paragraph單位錯誤、次輪API命名空間錯誤，查安裝介面後以新副本修正；最終338函式、八段幾何、271個DATA項目與1359直接xref通過，input SHA與原始raw file bytes一致。DB SHA fd6fe282d1d21fdcd8b269252bc94bd15316185e9f616ab159954ac61adb0873。沒有修改正式DB或原始輸入，載入後bytes與file bytes的位址基準各列。
+- CPP DATA讀取器沿已觀察QuickC thread preamble契約處理，真正指標fixup只接受已觀察的明列external形式。原生合併後的external index另作命名空間對應，來源比較按原始symbol與fixup核對。第一次獨立reader因輸出index欄位差異拒絕，修正正規化後同image重跑；這些屬研究工具問題，不記作遊戲缺陷。
+- 全部6736 DATA分成5600 compiler初值、991 LIB實際初值、88 LIB宣告零與57原生零bytes；56個額外compiler對齊零bytes另列而不拷入原位，原版DATA片段0。兩空白目錄以QuickC2.01 /AM /Od /Gs /Zl /G0、LINK4.07、EXEMOD4.02、EXEPACK4.06重編，15項C、OBJ、來源清單、MAP、native MZ及packed全檔逐byte相同。
+- 兩份獨立reader從真實compiler DATA物件與固定LIB bytes重算初值、PUBLIC、LIDATA、fixup、宣告零與原生零，連同149個既有compiler函式、52個LIB CODE模組，完整129312-byte映像、2281有序重定位及九個DATA relocation保持。兩次原生133679-byte核心加常數生成81個1Ah，完整133760-byte KOLTOWN.EXE均符合原版SHA c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221；沒有手改指令、header、checksum或壓縮payload。
+- 31反例包含原有21項CODE／C／ASM／LIB／分類控制，以及實際DATA C與近指標再編譯、C／LIB資料bytes、近／遠指標目標、C／LIB初值漏項、額外零LEDATA與compiler對齊修改。14項OMF修改保持合法checksum；來源缺漏與多加零LEDATA不能因全檔值相同而通過。
+- CODE計數保持172純C25412、378 LIB44396實際bytes、129混合30451 bytes，函式外271 C／258 ASM及Tandy入口13另列。原始799函式、四支完整來源與Book五函式4003 CODE保持；Town114函式94906 CODE、全六支119函式98909 CODE仍未還原，未還原DATA為0。原始唯一C文字／型別及__aDBdoswp原始symbol定義限制保留。342正式輸入hash不變，沒有遊戲執行、恢復Go對拍、硬體時序實驗、Issue寫入、版號、封包或發行。
+- 封存27053份檔案，27份可重建執行檔只留hash；610853612 bytes保存為35088749 bytes，約釋放549 MiB。六原始輸入、完整CODE／DATA來源、IDA原始引用、15項乾淨產物、31反例與342正式輸入從壓縮證據全唯讀重驗退出0後，精確清理C18工作區與外部暫存bootstrap。原版衍生C、資料、ASM、LIB、OBJ、DB及工具僅本機；來源與核對入口見docs/re/matching-decompilation.md及docs/verification/retained-evidence.md。
+- 權威工作表只回填DATA來源完成與下一CODE閘門，原完成條件、狀態及Issue保持。render／verify／scan通過，19未完成／89完成／15人工保持。C17十一入口作正對照，C18十二入口、DATA計數與擁有權通過；find無root-owned檔案或誤建Markdown目錄，Docker終檢無專案容器，git diff --check通過。下一批接Town114與Book五個CODE函式，保留full-build.py、data_objects.py、data_proof.py及classification-baseline.json；完整goal active，未提交或推送。
+
+## 2026-10-10：KOLTOWN新增24個CODE來源函式
+
+- 前輪完成6736 DATA來源屬實際進展；本輪接續完整六支matching goal。開工HEAD為c56adbe7，八檔既有異動保留。沿復古逆向、文件職責、compiler指紋及驗證交接入口，建立C19工作區；跨日後沿用起始日命名matching-c19-20261009，完成收據與目前狀態用2026-10-10。C18保存的27053份來源逐檔重核，七個固定工具按原commit重取並驗大小、SHA-256及Git blob。
+- 新增Town24個完整原始CODE函式4337 bytes，包含3純C466與21明列C／ASM3871 bytes；混合分列1438 C設定／控制與2433 ASM。Book已驗來源只作候選，Town原始指令、常數、全域位置、callee與ASM邊界各別核對；只有完整native函式匹配才計進度。普通far-pointer候選sub_1A4E4保持開放，沒有以ASM補普通C差異。
+- 新來源包含兩個解碼器的C控制、文字行處理、DOS讀寫檔重試，以及圖形拷貝、遮罩與游標暫存器程式。字典far pointer、byte／word陣列依既有header及Town consumer核對。sub_1A26B回傳值與near pointer參數、DOS寫入與關閉介面的型別按原始PUSH序列修正；全部149個既有compiler函式機器碼保持，原作者唯一型別、C文字與inline ASM形式仍未知。
+- 轉換器移除0Fh／0A000h的必要前導0，造成C2094未定義標籤；錯誤碼核對Microsoft官方文件後保留合法十六進位語法，以同compiler／旗標乾淨重跑。驗證器局部變數遮蔽案例路徑、反例將函式本體延伸到檔尾，均修正並用新反例目錄重跑。失敗保留且分類研究工具問題，沒有改遊戲規則或放寬byte比較。
+- 沿kol-matching-dos:bookworm-20261008-r1、UID/GID1000:1000、有界CPU／記憶體／PID／外層逾時，固定工具重取以外均無網路；原版ZIP、programs、解壓oracle、LIB與前批來源唯讀。兩空白目錄重編173個compiler函式及完整DATA，15項C、OBJ、清冊、MAP、native MZ與packed全檔逐byte相同。
+- 兩份獨立reader核121純C16226、52混合6136、52個LIB CODE模組／75原始函式，連同全部6736 DATA，完整129312-byte映像、2281有序重定位及九個DATA relocation保持。LINK4.07、EXEMOD4.02、EXEPACK4.06兩次原生133679-byte核心加常數生成81個1Ah，完整133760-byte KOLTOWN.EXE均符合原版SHA c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221，沒有手改指令、header、checksum、壓縮payload或複製tail。
+- 35反例保留原有31項CODE／DATA／LIB／來源分類控制，新增解碼C實際再編譯、新kernel ASM指令、新純C來源漏項與新ASM範圍修改；15項OMF修改保持合法checksum。全部DATA來源、246個初值符號、31個LIB初值範圍與CODE／DATA分離計數保持。
+- 累計175純C25878、378 LIB44396實際bytes、150混合34322 bytes，混合分列22985 C／11337 ASM，函式外271 C／258 ASM及Tandy入口13另列。Town90函式90569 CODE、Book五函式4003 CODE仍未還原；全六支95函式94572 CODE、未還原DATA0，原始799函式與四支完整來源保持。342正式輸入hash不變，沒有遊戲執行、恢復Go對拍、硬體時序實驗、Issue寫入、版號、封包或發行。
+- 封存27719份檔案，23份可重建執行檔只留hash；741855232 bytes保存為37318330 bytes，約釋放672 MiB。六原始輸入、24個新CODE、全部既有CODE／DATA、15項乾淨產物、35反例及342正式輸入從壓縮證據全唯讀重驗退出0後，精確清理C19工作區及外部暫存bootstrap。原版衍生C、ASM、LIB、OBJ、DB與工具只留本機；入口docs/re/matching-decompilation.md及docs/verification/retained-evidence.md。
+- 權威工作表只更新進度與下一CODE閘門，原完成條件、狀態及Issue保持。render／verify／scan通過，19未完成／89完成／15人工保持。C18十二入口作正對照，C19九入口、CODE／DATA計數與擁有權通過；find無root-owned檔案或誤建Markdown目錄，Docker終檢無專案容器，git diff --check通過。下一批接Town90與Book五個CODE函式，保留seed-CODE.c、full-build.py、來源分類及完整DATA鏈；完整goal active，未提交或推送。
+
+
+## 2026-10-10：KOLTOWN 新增 16 個 CODE 來源函式
+
+- 路由命中原作工具鏈與執行期指紋，載入對應入口及逆向技能；沿用文件職責與來源證據契約。
+- 從第十九批壓縮證據逐檔核雜湊恢復，保留全部 173 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增 16 個完整原始函式，共 3823 bytes。`sub_1B5C8` 為純 C 276 bytes；其餘 15 混合函式分列 3086 C／461 ASM bytes。
+- C 還原圖像載入、地圖取樣、顯示控制、鍵盤清除與文字輸入。近指標及運算順序按原始指令／QuickC 結果核對；直接 ES／DS／BIOS／解碼區塊明列範圍。
+- 三個字型 C 候選仍有指令差異，未用 ASM 補差異。保留試驗失敗，不計來源完成；`sub_1A4E4` 保持未知。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1`，固定 QuickC2.01 的 `/AM /Od /Gs /Zl /G0`；只跑編譯、連結及核對，遊戲與 Go 對拍維持暫停。
+- 兩個空白案例由 `full-build.py` 重編 189 函式與兩份 DATA 來源，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06。15 項產物逐 byte 相同，完整 133760-byte KOLTOWN 的 SHA-256 兩次均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。
+- 39 反例拒絕，其中 15 項 OMF 修改具有合法 checksum。新增反例實際重編輸入 C 與 BIOS ASM，並核漏函式與錯誤範圍。
+- 驗證腳本誤選前置宣告及變數遮蔽造成兩次腳本失敗；修正後同容器、同命令於新案例乾淨重跑。未修改產品或比較條件。
+- 封存後全唯讀重新核六個原始輸入、全部附件、兩份獨立 CODE／DATA 來源、fixup／回填、2281 有序重定位與 342 份正式 Go／module 輸入。
+- 保存入口為 [第二十批收據](docs/verification/local/matching-c20-20261010/receipt.json) 與 [來源清冊](docs/verification/local/matching-c20-20261010/source-ledger.json)。29104 份檔案已保存，23 份可重建 EXE 只留 hash；本批工作區刪除，約釋放 944 MiB。
+- 封存 SHA-256：`7439c53f5a023a513722810939797d6a6c51577d1f1563692f33132c998f4932`。原版衍生來源維持僅本機，未提交、推送、寫 Issue 或發行。
+- 現有 176 純 C／26154 bytes、378 LIB／44396 實際 bytes、165 混合／37869 bytes。Town 仍 74 函式／86746 CODE，Book 五／4003；全六支 79 函式／90749 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單；原驗收條件及開放狀態保持。工作清單核對為 19 開放、89 已核實完成；掃描 2010 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建的 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 新增 14 個純 C 來源函式
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出及文件職責契約。
+- 從第二十批壓縮證據逐檔核雜湊恢復，保留全部 189 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增 14 個純 C 原始函式，共 5268 bytes，沒有新增 ASM。包含共用文字控制 `sub_1A8FD`、畫面控制 `sub_1103F`／`sub_11390`、命令選擇 `sub_11722`，以及記錄交換、顯示、圖像包裝、地圖範圍／取樣、方向與日期計算。
+- C 表達保留 signed／unsigned 比較、近指標順序、低 16-bit 乘除及遠呼叫的實際 stack words。導航型別 `g_005C`／`g_006C` 與 `sub_1C94E` 回傳值調整後，全部既有函式機器碼保持；原始唯一宣告仍未知。
+- 編譯失敗為舊 far 函式指標語法，修正後同 QuickC／旗標重跑。比較差異由 C 型別、運算順序、連鎖指派及 C 標籤修正，未加 ASM、手修指令或放寬比對。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1`，QuickC2.01 的 `/AM /Od /Gs /Zl /G0`。兩個空白案例由 `full-build.py` 重編 203 函式及 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；最後 compiler 無警告。
+- 15 項產物逐 byte 相同；兩份獨立 reader 核 CODE／DATA、fixup／回填、129312-byte 映像、2281 有序重定位與九個 DATA relocation。15 個 compiler 指標 fixup 與 56 個獨立 compiler 對齊零 bytes 保持。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。43 反例全部拒絕，其中 15 項 OMF 修改具有合法 checksum；新增文字控制／命令回傳的實際 C 重編、來源漏項與純 C 插入 ASM。
+- [第二十一批收據](docs/verification/local/matching-c21-20261010/receipt.json) 與 [來源清冊](docs/verification/local/matching-c21-20261010/source-ledger.json)已從壓縮證據全唯讀重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入。
+- 保存 29814 份檔案，23 份可重建 EXE 只留 hash；壓縮證據 SHA-256 為 `96cbc85b7fd2930b601ed8c71c8e97bc489b9a4dd9c4ab56cc27f015f697833c`。刪除本批已保存工作區，約釋放 1070 MiB；來源維持僅本機。
+- 現有 190 純 C／31422 bytes、378 LIB／44396 實際 bytes、165 混合／37869 bytes。Town 仍 60 函式／81478 CODE，Book 五／4003；全六支 65 函式／85481 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。未提交、推送、寫 Issue、打包、發行或恢復 Go 對拍。工作清單為 19 開放、89 已核實完成，掃描 2012 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 新增 14 個角色與戰鬥控制來源函式
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出及文件職責契約。
+- 從第二十一批壓縮證據逐檔核雜湊恢復，保留全部 203 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增 14 個完整原始函式，共 6851 bytes。12 純 C 5944 bytes 涵蓋角色選擇、旗標、路徑步進、移動判定、文字替換及顯示控制；功能名稱只作導航，唯一原始宣告及未證實語意保持未知。
+- `sub_25F8A` 分列 452 C／30 ASM bytes，只有兩處 ES 地圖讀取列 ASM；`sub_2A18E` 分列 41 C／384 ASM bytes，三個顯示暫存器區段明列範圍。沒有用 ASM 補普通 C 差異。
+- 按原始參數順序修正長整數除法方向；同長度的錯誤候選未計成功。共用出口、switch、陣列、近指標、signed／unsigned 及 stack words 以完整 compiler 差分核對。
+- 前置宣告與定義衝突造成一次編譯失敗，修正後同 compiler／旗標重跑；最後無警告。`g_008A` 導航型別調整後，全部 203 個既有函式機器碼保持。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。兩個空白案例由 `full-build.py` 重編 217 函式及 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；15 項產物逐 byte 相同。
+- 兩份獨立 reader 核 CODE／DATA、fixup／回填、129312-byte 映像、2281 有序重定位與九個 DATA relocation。15 個 compiler 指標 fixup、56 個獨立 compiler 對齊零 bytes 保持。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。47 反例全部拒絕，其中 15 項 OMF 修改具有合法 checksum；新增路徑 C／地圖 ASM 的實際再編譯、漏純 C 與錯誤顯示 ASM 範圍。
+- [第二十二批收據](docs/verification/local/matching-c22-20261010/receipt.json) 與 [來源清冊](docs/verification/local/matching-c22-20261010/source-ledger.json)已從壓縮證據全唯讀重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入。
+- 保存 30519 份檔案，23 份可重建 EXE 只留 hash；壓縮證據 SHA-256 為 `fe3a445ede9561f0c2f223043d5379d4078b03b9dc212d134732a96e1dab3f4f`。刪除本批已保存工作區，約釋放 1212 MiB；衍生來源維持僅本機。
+- 現有 202 純 C／37366 bytes、378 LIB／44396 實際 bytes、167 混合／38776 bytes。Town 仍 46 函式／74627 CODE，Book 五／4003；全六支 51 函式／78630 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。未提交、推送、寫 Issue、打包、發行或恢復 Go 對拍。工作清單為 19 開放、89 已核實完成，掃描 2014 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 主函式、選單與輸入來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出及文件職責契約。
+- 從第二十二批壓縮證據逐檔核雜湊恢復，保留全部 217 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- `sub_10000` 完整 3548 bytes 已有來源，分列 3388 C／160 ASM。1095 條原始指令的初始化、載入、輸入控制、世界／選單切換與退出分支均匹配；六個 BIOS／DOS／顯示區段明列範圍。
+- `sub_1AAE8` 為純 C 1355 bytes；`sub_1B100` 為 1145 C／47 ASM，共 1192 bytes。選單的文字掃描、選擇、捲動、滑鼠及命令控制，以及完整底層輸入均有匹配來源。
+- 三個函式合計 6095 bytes，包含 1 純 C 與 2 混合來源。九個 ASM 區段限 BIOS／DOS／顯示／滑鼠暫存器；沒有用 ASM 補普通 C 差異，前批未知候選保持開放。
+- 主函式以 near-word 視圖讀寫既有 far pointer，選單兩處相等比較使用 unsigned word 視圖，其餘 signed 運算保留。陣列誤作 scalar 指派造成一次編譯失敗，改為第一元素後同工具與旗標重跑；最後無警告。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。兩個空白案例由 `full-build.py` 重編 220 函式及 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；15 項產物逐 byte 相同。
+- 兩份獨立 reader 核 CODE／DATA、fixup／回填、129312-byte 映像、2281 有序重定位與九個 DATA relocation。15 個 compiler 指標 fixup、56 個獨立 compiler 對齊零 bytes 保持。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。51 反例全部拒絕，其中 15 項 OMF 修改具有合法 checksum；新增主函式 C／ASM 的實際再編譯、漏選單純 C 與錯誤輸入 ASM 範圍。
+- [第二十三批收據](docs/verification/local/matching-c23-20261010/receipt.json) 與 [來源清冊](docs/verification/local/matching-c23-20261010/source-ledger.json)已從壓縮證據全唯讀重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入。
+- 保存 31276 份檔案，23 份可重建 EXE 只留 hash；壓縮證據 SHA-256 為 `4a31cc8c4e8642ca0c9dd55e514b1624dcb3c8862075cf7754d9b3058ccc9a37`。刪除本批已保存工作區，約釋放 1373 MiB；衍生來源維持僅本機。
+- 現有 203 純 C／38721 bytes、378 LIB／44396 實際 bytes、169 混合／43516 bytes。Town 仍 43 函式／68532 CODE，Book 五／4003；全六支 48 函式／72535 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。未提交、推送、寫 Issue、打包、發行或恢復 Go 對拍。工作清單為 19 開放、89 已核實完成，掃描 2016 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 完整城鎮互動控制來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。
+- 從第二十三批壓縮證據逐檔核雜湊恢復，保留全部 220 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增完整 `sub_11A93`，8967 bytes 分列 8939 C／28 ASM。2874 條原始指令的角色檢查、對話／服務選單、交易、物品與訓練控制均匹配；功能名稱只作導航，唯一原始宣告及未證實語意仍未知。
+- 唯一 ASM 為 IDA linear 半開範圍 `[0x12CF2,0x12D0E)` 的 ES 圖像搬移，其他全部由 C 產生。普通 C 未匹配候選保持開放，沒有新增 ASM 補差異。
+- 候選差異包括多出的提示呼叫、冗餘回跳、指標／長整數求值順序及 unsigned word 比較。逐項按原始指令與真實 compiler 差分修正；最後無警告，全部 221 函式匹配。
+- objdump 只作 compiler OMF 交叉檢查，輸入 hash、工具版本與函式相對位址另存；未回填 word backpatch 的局部跳轉不作 native 控制流證據。原版定位仍以固定 IDA 匯出及 raw bytes 為準。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。兩個空白案例由 `full-build.py` 重編全部來源與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；15 項產物逐 byte 相同。
+- 兩份獨立 reader 核 CODE／DATA、fixup／回填、129312-byte 映像、2281 有序重定位與九個 DATA relocation。15 個 compiler 指標 fixup、56 個獨立 compiler 對齊零 bytes 保持。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。55 反例全部拒絕，其中 15 項 OMF 修改具有合法 checksum；新增交易金額 C／圖像搬移 ASM 的實際再編譯、漏控制函式與錯誤 ASM 範圍。
+- [第二十四批收據](docs/verification/local/matching-c24-20261010/receipt.json) 與 [來源清冊](docs/verification/local/matching-c24-20261010/source-ledger.json)已從壓縮證據全唯讀重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入。
+- 保存 32070 份檔案，23 份可重建 EXE 只留 hash；壓縮證據 SHA-256 為 `d5c2b8a894c00059b6b1fb611f9e93d4bd24dc1e42bcc81115ec0bb26e654778`。刪除本批已保存工作區，約釋放 1555 MiB；衍生來源維持僅本機。
+- 現有 203 純 C／38721 bytes、378 LIB／44396 實際 bytes、170 混合／52483 bytes。Town 仍 42 函式／59565 CODE，Book 五／4003；全六支 47 函式／63568 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。未提交、推送、寫 Issue、打包、發行或恢復 Go 對拍。工作清單為 19 開放、89 已核實完成，掃描 2018 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 完整戰鬥控制來源匹配與多 CODE 編譯單元
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。
+- 從第二十四批壓縮證據逐檔核雜湊恢復，保留全部 221 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增完整 `sub_1E3A8`，13650 bytes 分列 13634 C／16 ASM；原始 4389 條指令匹配。唯一 ASM 為 IDA linear 半開範圍 `[0x1EB0D,0x1EB1D)` 的 ES／SI 地圖讀取；普通 C 沒有以 ASM 補差異。
+- 以明列 far pointer、50-byte 角色及 128-byte 怪物視圖產生原始欄位存取。保留重複條件及未指派的除法式；原始 C 宣告、型別與來源形式仍未知，功能名稱只作導航。
+- 候選修正依原始指令核對全域位址、角色欄位、亂數布林條件及多敘述等待巨集的條件範圍；最後獨立候選無警告並逐 byte 匹配。
+- 原單一編譯單元達 67016 CODE bytes，實際編譯報 C1028。固定來源的 C1.ERR 與 CL.ERR 已保存雜湊及下載來源，C1.ERR 明列 64KiB 段配置限制；錯誤不是產品缺陷。
+- 沿用既有 image、QuickC2.01 `/AM /Od /Gs /Zl /G0` 與原記憶體模型。改為實際 `BULK.C/BULK.OBJ` 53366 bytes 及 `BATTLE.C/BATTLE.OBJ` 13650 bytes，各自低於 64KiB；前者來源與物件均和第二十四批逐 byte 相同。
+- `seed-compiler-units.json` 定義真正的來源編譯入口。`seed-CODE.c` 與 67016-byte 合併座標只供閱讀及分類，不是 compiler 輸入，也未製造超過 64KiB 的 OMF CODE 段。準備工具會保留每個實際來源／物件。
+- 兩份獨立 reader 從實際物件驗證各自 PUBLIC、段、offset、fixup／回填及有序清冊雜湊，另保留合併座標。核對 129312-byte 映像、2281 有序重定位、九個 DATA relocation 與完整 DATA 鏈。
+- 兩個空白案例由 `full-build.py` 重編全部 222 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；18 項乾淨產物逐 byte 相同。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。62 反例全部拒絕，其中 16 項 OMF 修改具有合法 checksum；新增實際戰鬥 C／ASM 再編譯、缺編譯單元、錯來源位置／順序、BATTLE PUBLIC 及實際 C1028 容量反例。
+- [第二十五批收據](docs/verification/local/matching-c25-20261010/receipt.json) 與 [來源清冊](docs/verification/local/matching-c25-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入。沒有執行遊戲。
+- 保存 33149 份檔案，23 份可重建 EXE 只留 hash；壓縮證據 53385800 bytes，SHA-256 為 `47789f97f6ed157c15f3580828b39f1e9db0cad50a9941400b9cee87eae397b5`。只刪除本批已保存工作區，約釋放 1806 MiB；衍生來源維持僅本機。
+- 現有 203 純 C／38721 bytes、378 LIB／44396 實際 bytes、171 混合／66133 bytes。Town 仍 41 函式／45915 CODE，Book 五／4003；全六支 46 函式／49918 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。未提交、推送、寫 Issue、打包、發行或恢復 Go 對拍。
+- 工作清單為 19 開放、89 已核實完成，掃描 2020 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 圖像、文字與磁碟控制四函式來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第二十五批封存逐檔核雜湊恢復，保留兩個真實 CODE 編譯單元、全部 222 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增四個完整函式共 1707 bytes，分列 1012 C／695 ASM：`sub_19B29` 454 為 209 C／245 ASM，`sub_19E9D` 433 為 253 C／180 ASM，`sub_1B94F` 273 為 15 C／258 ASM，`sub_1CBA9` 547 為 535 C／12 ASM。
+- 圖像轉換的普通 C 遠指標讀寫、unsigned 除法及 signed 迴圈比較，矩形顯示調度，以及磁碟重試、13 個區域 word 與狀態還原均由 C 產生。七個 ASM 範圍限文字／圖像 codec、顯示搬移與 DOS 切換磁碟；沒有用 ASM 補普通 C 差異。
+- 磁碟重試的 `continue` 與原始跳轉核對。候選中參數名稱碰到 MASM 的 SEG／LENGTH 保留字，改為一般識別字後同工具重跑；最後四函式無警告且逐 byte 匹配。
+- 三個字型候選的普通 C 減法仍有指令差異，保持未核准；候選及完整差分保存，不擴張 ASM 範圍吞入該差異。遠指標葉函式 `sub_1A4E4` 的 `_segment／_based` 候選報 C2061，該語法支援未證實，也保持未還原。
+- 原始定位保留 IDA linear、解壓 MZ file offset、bytes 與 chunks；功能名稱只作導航。原始唯一 C 宣告、來源文字、ASM 來源形式及未證實語意仍未知。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。新增實際 `CONTROL.C/CONTROL.OBJ` 1707 bytes，既有 BULK 53366 及 BATTLE 13650 的 C／OBJ 均與前批逐 byte 相同；三個真實段各自低於 64KiB。
+- `seed-compiler-units.json` 定義三個真正來源單元。68723-byte 合併只供閱讀與分類；`seed-CODE.c` 不是單一 compiler 輸入。每個 PUBLIC、段、offset、fixup／回填保留實際物件來源與合併座標，沒有合成超過 64KiB 的 OMF CODE 段。
+- 兩個空白案例由 `full-build.py` 重編全部 226 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；20 項乾淨產物逐 byte 相同。兩份獨立 reader 核完整 CODE／DATA、129312-byte 映像與 2281 有序重定位；九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。68 反例全部拒絕，包含前批全部 62 項與新轉換 C、磁碟 C、codec ASM 實際再編譯、漏控制函式、錯 ASM 邊界及實際 CONTROL PUBLIC；17 項 OMF 修改具有合法 checksum。
+- [第二十六批收據](docs/verification/local/matching-c26-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c26-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入；沒有執行遊戲。
+- 保存 34481 份檔案，23 份可重建 EXE 只留 hash；原始證據 2279245607 bytes，壓縮為 75755036 bytes，SHA-256 為 `490f9cdbf70c1552925a88327ded087d666760f32cf1c7cd10da003d05090478`。只刪除本批已保存工作區，約釋放 2084 MiB；衍生來源維持僅本機。
+- 現有 203 純 C／38721 bytes、378 LIB／44396 實際 bytes、175 混合／67840 bytes。Town 仍 37 函式／44208 CODE，Book 五／4003；全六支 42 函式／48211 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。接續需保留三個 seed 編譯單元與完整 DATA 鏈。未提交、推送、寫 Issue、打包、發行或恢復 Go 對拍。
+- 工作清單為 19 開放、89 已核實完成，掃描 2022 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 選項、物品與圖像四個純 C 函式來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第二十六批封存逐檔核雜湊恢復，保留全部三個 CODE 編譯單元、226 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增四個完整純 C 函式共 3679 bytes，1236 條原始指令全部匹配，沒有新增 ASM。`sub_16D0B` 667 bytes／231 指令，`sub_196A9` 990／331，`sub_18857` 1150／374，`sub_1A4FE` 872／300。
+- 選項重繪、文字分頁與輸入選擇、物品命令完整 switch、預載／檔案圖像來源及重試分支均有匹配來源。功能名稱只作導航，原始唯一 C 宣告、文字、型別與未證實語意仍未知。
+- 差異按實際 compiler 與原始指令核對：二維 17-byte 表格、unsigned offset 表、stack word 視圖、整數比較與求值順序，以及遠指標的兩個 word 組成。原版比較式、未用區域變數及重複調度保持；最後四函式無警告且逐 byte 相同。
+- 沒有貼回指令、使用 `_emit` 或 ASM 補普通 C 差異。既有三個字型候選與遠指標葉函式保持未還原，本批沒有將它們改列完成。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。新增實際 `MENU.C/MENU.OBJ` 3679 bytes；既有 BULK 53366、BATTLE 13650、CONTROL 1707 的 C／OBJ 均與前批逐 byte 相同，四個真實段各自低於 64KiB。
+- `seed-compiler-units.json` 定義四個真正來源單元，bootstrap 依前批清單逐一恢復全部 seed。72402-byte 合併只供閱讀與分類，`seed-CODE.c` 不是單一 compiler 輸入。每個 PUBLIC、段、offset、fixup／回填保留實際物件來源與合併座標。
+- 兩個空白案例由 `full-build.py` 重編全部 230 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；22 項乾淨產物逐 byte 相同。兩份獨立 reader 核完整 CODE／DATA、129312-byte 映像與 2281 有序重定位；九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 反例腳本首次在偽造 ASM 分類案例報 `KeyError: 'C_generated_bytes'`，因純 C 清冊省略此可選欄位。修正 fixture 由 `size` 派生該欄位；保存原失敗腳本與 69 個案例，見[腳本勘誤](docs/verification/local/matching-c27-20261010/checkpoint-failure.json)。使用相同 image／同一命令從空白反例案例乾淨重跑，兩個正例未改；此項分類為驗證腳本缺陷。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。74 反例全部拒絕，包含前批全部 68 項與新選擇 C、圖像 C 的實際再編譯、漏新純 C、偽造 ASM 分類、錯來源物件及實際 MENU PUBLIC；18 項 OMF 修改具有合法 checksum。
+- [第二十七批收據](docs/verification/local/matching-c27-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c27-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入；沒有執行遊戲。
+- 保存 37324 份檔案，23 份可重建 EXE 只留 hash；原始證據 2929551494 bytes，壓縮為 123774040 bytes，SHA-256 為 `5cc4873442c4f9bc2f6230a2630d03cd9f7d1899fca5cee9ec2d672ccbd524ce`。只刪除本批已保存工作區，約釋放 2657 MiB；衍生來源維持僅本機。
+- 現有 207 純 C／42400 bytes、378 LIB／44396 實際 bytes、175 混合／67840 bytes。Town 仍 33 函式／40529 CODE，Book 五／4003；全六支 38 函式／44532 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。接續需保留四個 seed 編譯單元、47 個後續純 C／77 混合分類、106 純 C 基準與完整 DATA 鏈。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 工作清單為 19 開放、89 已核實完成，掃描 2024 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 名冊、保存與資料頁四函式來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第二十七批封存逐檔核雜湊恢復，保留全部四個 CODE 編譯單元、230 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增四個完整函式共 5221 bytes，1756 條原始指令全部匹配，分列 5033 C／188 ASM。`sub_147DD` 1266 為 1202 C／64 ASM，`sub_14DB1` 1301 為 1177 C／124 ASM，`sub_153FF` 801 與 `sub_15ABF` 1853 為純 C。
+- 兩個混合函式的 13 個 ASM 範圍在編譯前按原始 DOS 中斷與 ES 搬移列出。名冊比對、選擇、金額、保存槽、記錄回填、物品明細及資料頁控制由 C 產生；沒有用 ASM 補普通 C 差異。
+- 值轉型與 word 視圖分開處理，保留求值順序、unsigned 除法／右移與 signed 傳參。原版重複讀寫、未用區域變數、磁碟還原、取消分支與唯一原始定位保持；功能名稱只作導航，原始唯一 C／ASM 來源形式與未證實語意仍未知。
+- 候選最初 C2094 為 ASM 別名未宣告，改用既有 pool 綁定。固定 C1.ERR／CL.ERR 複製到候選案例以保存可讀診斷；編譯器及旗標保持，最後四函式無警告且逐 byte 相同。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。新增實際 `ROSTER.C/ROSTER.OBJ` 5221 bytes；BULK 53366、BATTLE 13650、CONTROL 1707、MENU 3679 的 C／OBJ 均與前批逐 byte 相同，五個真實段各自低於 64KiB。
+- `seed-compiler-units.json` 定義五個真正來源單元，bootstrap 依前批清單逐一恢復。77623-byte 合併只供閱讀與分類，`seed-CODE.c` 不是單一 compiler 輸入；每個 PUBLIC、段、offset、fixup／回填保留實際物件來源與合併座標。
+- 兩個空白案例由 `full-build.py` 重編全部 234 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；24 項乾淨產物逐 byte 相同。兩份獨立 reader 核完整 CODE／DATA、129312-byte 映像與 2281 有序重定位；九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 物品明細反例把 128 改成 127，真實 compiler 函式由 801 縮為 800 bytes，轉接器正確拒絕長度不符；原腳本只預期較後的獨立來源核對拒絕，因此中止。明確登記此反例必須在原生轉接長度閘門拒絕，保存失敗腳本與 73 個案例，見[驗證階段勘誤](docs/verification/local/matching-c28-20261010/checkpoint-failure.json)。同 image／同命令從空白反例案例重跑，原生正例未改；此項分類為驗證腳本階段假設缺口。
+- 80 反例全部拒絕，包含前批全部 74 項及新名冊 C、物品明細 C、記錄搬移 ASM 再編譯、漏資料頁、錯 DOS 範圍與實際 ROSTER PUBLIC；19 項 OMF 修改具有合法 checksum。封存核對器另解析正負真實物件，證實 `sub_153FF` 801／800 bytes，並核對兩批歷史失敗紀錄。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[第二十八批收據](docs/verification/local/matching-c28-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c28-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入；沒有執行遊戲。
+- 保存 40676 份檔案，23 份可重建 EXE 只留 hash；原始證據 3655820291 bytes，壓縮為 179009348 bytes，SHA-256 為 `15cff0a2a9687006e79c983d13c2b1b44d3ac385ba34472410ef06fe4ad58de3`。只刪除本批已保存工作區，約釋放 3295 MiB；衍生來源維持僅本機。
+- 現有 209 純 C／45054 bytes、378 LIB／44396 實際 bytes、177 混合／70407 bytes。Town 仍 29 函式／35308 CODE，Book 五／4003；全六支 34 函式／39311 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。接續需保留五個 seed 編譯單元、49 個後續純 C／79 混合分類、106 純 C 基準與完整 DATA 鏈。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 工作清單為 19 開放、89 已核實完成，掃描 2026 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 角色、選單與欄位編輯四函式來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第二十八批封存逐檔核雜湊恢復，保留五個 CODE 編譯單元、234 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增四個完整函式共 6038 bytes，2023 條原始指令全部匹配，分列 5911 C／127 ASM。`sub_16239` 1171 為 1166 C／5 ASM，`sub_16986` 901 為 779 C／122 ASM，`sub_17318` 1480 與 `sub_178E0` 2486 為純 C。
+- 四個 DS／ES ASM 範圍在編譯前明列。角色摘要、物品選單、既有／可購項目、欄位編輯、價格與記錄回填均有完整來源；沒有用 ASM 補普通 C 差異。
+- word 視圖修正 signed 傳參，混合 signed／unsigned 索引的求值順序亦閉合。原始多餘實參、未初始化讀取、壓棧／清理、重試與取消分支保持。`sub_16986` 的 IDA linear `0x16B7F`／`0x16A95` 分別傳七個／五個實參，清理 14／10 bytes；不據此推定唯一 prototype。
+- 初次 C2086 為候選工具預設 int 宣告與新 void 定義衝突，補明示宣告後同工具重跑。最後四函式無警告且逐 byte 相同。原始函式名、位址、chunks、raw bytes 與未證實語意保留；功能名稱只作導航。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。七個工具與兩個錯誤資源皆核固定 hash。新增 `CHAR.C/CHAR.OBJ` 6038 bytes，前五個 C／OBJ 與前批逐 byte 相同，六個真實段各自低於 64KiB。
+- `seed-compiler-units.json` 定義全部六個來源單元。83661-byte 合併只供閱讀與分類，`seed-CODE.c` 不是單一 compiler 輸入；每個 PUBLIC、段、offset、fixup／回填保留實際物件來源與合併座標。
+- 兩個空白案例由 `full-build.py` 重編全部 238 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；26 項乾淨產物逐 byte 相同。兩份 reader 核完整 CODE／DATA、129312-byte 映像與 2281 有序重定位；九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 86 反例全部拒絕，包含全部前批 80 項及新摘要 C、欄位編輯 C、選單 ASM 再編譯、漏純 C、錯 DS 範圍與實際 CHAR PUBLIC；20 項 OMF 修改具有合法 checksum。前批真實物件 801／800 長度閘門與兩批失敗紀錄保持獨立核對，本批沒有新增驗證腳本失敗。
+- 首次封存命令的自動權限審查逾時，命令未啟動。依工具指示重試一次獲准完成，沒有更換工具鏈或放寬隔離。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[第二十九批收據](docs/verification/local/matching-c29-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c29-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入；沒有執行遊戲。
+- 保存 42812 份檔案，23 份可重建 EXE 只留 hash；原始證據 4094764232 bytes，壓縮為 213044472 bytes，SHA-256 為 `4edce41204ecc7777c284934e248fde87bf1b9e13677d33155523c5b997260a3`。只刪除本批已保存工作區，約釋放 3680 MiB；衍生來源維持僅本機。
+- 現有 211 純 C／49020 bytes、378 LIB／44396 實際 bytes、179 混合／72479 bytes。Town 仍 25 函式／29270 CODE，Book 五／4003；全六支 30 函式／33273 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。接續需保留六個 seed 編譯單元、51 個後續純 C／81 混合分類、106 純 C 基準與完整 DATA 鏈。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 工作清單為 19 開放、89 已核實完成，掃描 2028 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 欄位、圖像與戰鬥四函式來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第二十九批封存逐檔核雜湊恢復，保留六個 CODE 編譯單元、238 個 compiler 函式、52 個 LIB CODE 模組及 6736 初始化 DATA。
+- 新增四個完整函式共 5554 bytes，1864 條原始指令全部匹配，分列 5539 C／15 ASM。`sub_18350` 1022、`sub_18F3A` 1903 與 `sub_228B7` 1605 為純 C；`sub_223C0` 1024 為 1009 C／15 ASM。
+- 唯一 ASM 為候選編譯前已明列的 IDA linear 半開範圍 `[0x2254E,0x2255D)` ES／SI 讀取。欄位顯示、數值彙總、分層圖像、九乘九格點、狀態與命令控制均有完整來源；沒有用 ASM 補普通 C 差異。
+- 二維／三維 byte 視圖、word 視圖、unsigned 運算及加法的求值順序按原始指令閉合。候選 break 分支按原始跳轉修正，原版夾限、重複運算、狀態回填與取消保持。原始唯一 C／ASM 來源形式與未證實語意仍未知；功能名稱只作導航。
+- 初次工具引用前批轉換器的層級多一層，另有 `g_9E35`／`g_1CE2` 缺項宣告。修正後同 image／同命令從空白案例重跑；最後四函式無警告且逐 byte 相同。這些失敗分類為研究工具／候選宣告問題。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`。七個工具與兩個錯誤資源皆核固定 hash。新增 `TACTIC.C/TACTIC.OBJ` 5554 bytes，前六個 C／OBJ 與前批逐 byte 相同，七個真實段各自低於 64KiB。
+- `seed-compiler-units.json` 定義全部七個來源單元。89215-byte 合併只供閱讀與分類，`seed-CODE.c` 不是單一 compiler 輸入；每個 PUBLIC、段、offset、fixup／回填保留實際物件來源與合併座標。
+- 兩個空白案例由 `full-build.py` 重編全部 242 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；28 項乾淨產物逐 byte 相同。兩份 reader 核完整 CODE／DATA、129312-byte 映像與 2281 有序重定位；九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 92 反例全部拒絕，包含全部前批 86 項及新欄位 C、命令 C、格點 ASM 再編譯、漏圖像 C、錯 ES／SI 範圍與實際 TACTIC PUBLIC；21 項 OMF 修改具有合法 checksum。前批真實物件 801／800 長度閘門與兩批失敗紀錄保持獨立核對，本批沒有新增驗證腳本失敗。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[第三十批收據](docs/verification/local/matching-c30-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c30-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份正式 Go／module 輸入；沒有執行遊戲。
+- 保存 45279 份檔案，23 份可重建 EXE 只留 hash；原始證據 4581218518 bytes，壓縮為 251167288 bytes，SHA-256 為 `5efa472e33b8f116deaa750d836ff183c1369fe9745029f3f68fd4fe3f48153a`。只刪除本批已保存工作區，約釋放 4107 MiB；衍生來源維持僅本機。
+- 現有 214 純 C／53550 bytes、378 LIB／44396 實際 bytes、180 混合／73503 bytes。Town 仍 21 函式／23716 CODE，Book 五／4003；全六支 26 函式／27719 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件及開放狀態保持。接續需保留七個 seed 編譯單元、54 個後續純 C／82 混合分類、106 純 C 基準與完整 DATA 鏈。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 工作清單為 19 開放、89 已核實完成，掃描 2030 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+
+## 2026-10-10：KOLTOWN 戰鬥顯示、選擇與目標輸入四函式來源匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第三十批封存逐檔核雜湊恢復，保留七個 CODE 單元、242 個 compiler 函式、52 個 LIB CODE 模組與 6736 初始化 DATA。
+- 新增四個完整函式共 6558 bytes，2182 條原始指令全部匹配，分列 6553 C／5 ASM。`sub_22EFC` 851 為 846 C／5 ASM；`sub_2324F` 1001、`sub_2374C` 2533 與 `sub_24131` 2173 為純 C。
+- 唯一 ASM 為候選編譯前明列的 IDA linear 半開範圍 `[0x230D2,0x230D7)` DS 讀取。戰鬥文字／圖像、32-bit 比例、權重、方向搜尋、重試、目標輸入、夾限與返回控制皆有完整來源；沒有以 ASM 補普通 C 差異。
+- 128-byte 視圖、unsigned offset 表、post-condition 迴圈、加法求值順序與 chained assignment 按原始指令閉合。原版重複判定、跳過的程式區段與取消保持；原始唯一 C／ASM 寫法與未證實語意仍未知，功能名稱只作導航。
+- 最後方向差異回查完整 IDA 匯出與 raw bytes：`0x2406A` 的 `8b46fa8946fc` 先恢復基準，`0x24070` 的 `8346fc01` 再加一。截斷輸出的推測已撤回，未進核准來源；完整差分保留。候選缺項宣告與近指標陣列語法亦經同工具從空白案例重跑，最後四函式無警告。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`，九項工具／錯誤資源固定 hash 保持。新增 `DECIDE.C/DECIDE.OBJ` 6558 bytes，前七個 C／OBJ 與前批逐 byte 相同，八個真實段各自低於 64KiB。
+- `seed-compiler-units.json` 定義八個來源單元。95773-byte 合併只供閱讀與分類，`seed-CODE.c` 不是單一 compiler 輸入；PUBLIC、段、offset、fixup／回填均保留實際物件與合併座標。
+- 兩個空白案例由 `full-build.py` 重編全部 246 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；30 項乾淨產物逐 byte 相同。兩份 reader 核 CODE／DATA、129312-byte 映像與 2281 有序重定位，九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 98 反例全部拒絕，包含全部前批 92 項與新顯示 C、戰鬥選擇 C、DS ASM 再編譯、漏目標輸入 C、錯 DS 範圍與實際 DECIDE PUBLIC；22 項 OMF 修改具有合法 checksum。前批 801／800 長度閘門與兩批失敗紀錄保持獨立核對，本批沒有新增驗證腳本失敗。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[第三十一批收據](docs/verification/local/matching-c31-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c31-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份 Go／module 輸入；沒有執行遊戲。
+- 保存 48117 份檔案，23 份可重建 EXE 只留 hash；原始證據 5120704523 bytes，壓縮為 293534172 bytes，SHA-256 為 `a08959c8db2c45e551eee28038473b0bed673a1fd0382d64890cb2844bde779a`。只刪除本批已保存工作區，約釋放 4579 MiB；衍生來源維持僅本機。
+- 現有 217 純 C／59257 bytes、378 LIB／44396 實際 bytes、181 混合／74354 bytes。Town 仍 17 函式／17158 CODE，Book 五／4003；全六支 22 函式／21161 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件與開放狀態保持。接續需保留八個 seed、57 個後續純 C／83 混合分類、106 純 C 基準與完整 DATA 鏈。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 工作清單為 19 開放、89 已核實完成，掃描 2032 行全部有入口。Docker 容器清單為空，UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；三份主機暫存腳本已刪除，`git diff --check` 通過。
+
+## 2026-10-10：KOLTOWN 目標、權重、攻擊與傷害四純 C 函式匹配
+
+- 路由命中原作工具鏈與執行期指紋；沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第三十一批封存逐檔核雜湊恢復，保留八個 CODE 單元、246 個 compiler 函式、52 個 LIB CODE 模組與 6736 初始化 DATA。
+- 新增四個完整純 C 函式共 5611 bytes，1891 條原始指令全部匹配。`sub_253E7` 620、`sub_25A3A` 725、`sub_26D76` 2686 與 `sub_277F4` 1580；沒有新增 ASM 或原始函式數量。
+- 目標候選、32-bit 權重與正規化、攻擊／防禦、損傷、部位狀態與位移均有完整來源。首輪一個函式匹配，依原始 bytes 調整 chained assignment、運算元求值順序與跳轉結構，第三輪四個函式全部無警告匹配。原版覆寫權重、未用到的機率運算與重複跳轉保持，未按推測修正玩法。
+- 原始名稱、線性位址、chunks、operand 與 raw bytes 保持。功能名稱只作導航；固定工具產生相同機器碼已證實，原始唯一 C 宣告、型別與未證實語意仍未知。三個字型候選與遠指標葉函式保持未匹配，未以 ASM 補普通 C 差異。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1` 與 QuickC2.01 `/AM /Od /Gs /Zl /G0`，九項工具／錯誤資源固定 hash 保持。新增 `ATTACK.C/ATTACK.OBJ` 5611 bytes；前八個 C／OBJ 與前批逐 byte 相同，九個真實 CODE 段各自低於 64KiB。
+- `seed-compiler-units.json` 定義九個來源單元。101384-byte 合併只供閱讀與分類；PUBLIC、段、offset、fixup／回填保留實際物件與合併座標，沒有編譯大於 64KiB 的合併物件。
+- 兩個空白案例由 `full-build.py` 重編全部 250 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；32 項乾淨產物逐 byte 相同。兩份 reader 核 CODE／DATA、129312-byte 映像與 2281 有序重定位，九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 104 反例全部拒絕，包含前批 98 項與新權重／攻擊 C 再編譯、漏傷害 C、偽造 ASM 分類、錯誤物件來源與實際 ATTACK PUBLIC；23 項 OMF 修改具有合法 checksum。前批 801／800 長度閘門與兩批失敗紀錄保持獨立核對，本批沒有新增驗證腳本失敗。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[第三十二批收據](docs/verification/local/matching-c32-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c32-20261010/source-ledger.json)已從壓縮證據全唯讀獨立重驗通過，包含六個原始輸入、全部附件與 342 份 Go／module 輸入；沒有執行遊戲。
+- 現有 221 純 C／64868 bytes、378 LIB／44396 實際 bytes、181 混合／74354 bytes。Town 仍 13 函式／11547 CODE，Book 五／4003；全六支 18 函式／15550 CODE 未還原，DATA 未還原為 0，完整目標未完成。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件與開放狀態保持。接續需保留九個 seed、61 個後續純 C／83 混合分類、106 純 C 基準與完整 DATA 鏈。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 保存 51296 份檔案，23 份可重建 EXE 只留 hash；原始證據 5713959497 bytes，壓縮為 340051632 bytes，SHA-256 為 `c058068d8fc9e24b89411a3b4f39802ce6fddc9114bccd58c6a504395dc7e0c9`。只刪除本批已保存工作區，約釋放 5099 MiB；衍生來源維持僅本機。
+- 工作清單為 19 開放、89 已核實完成，掃描 2034 行全部有入口。本專案容器清單為空，其他專案容器保持；UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄。四份主機暫存腳本已刪除，`git diff --check` 通過。
+
+## 2026-10-10：KOLTOWN 戰鬥效果、掉物、世界與遭遇四純 C 函式匹配
+
+- 上一輪為實際進展。路由命中原作工具鏈與執行期指紋，沿用逆向技能、IDA Pro9.4 原始匯出與文件職責契約。從第三十二批封存逐檔核雜湊恢復，保留九個 CODE 單元、250 個 compiler 函式、52 個 LIB CODE 模組及全部初始化 DATA。
+- 新增四個完整純 C 函式共 6348 bytes，2048 條原始指令全部匹配：`sub_2818D` 1759、`sub_289EE` 1391、`sub_29004` 2030、`sub_2A4E5` 1168。沒有新增 ASM 或原始函式數量。
+- 初輪一個、次輪兩個、第三輪四個函式匹配，三輪皆無 compiler 警告。原始條件方向、逗號運算子初始化、前置加減的條件值、有號字組視圖與求值順序均由完整原始 bytes 閉合。遠指標讀取及三處 DS 轉換由 C 產生，沒有用 ASM 補普通 C 差異。
+- 原版陣列基址比較、被跳過的按鍵分支、清理返回與取消後重試保持。唯一 C 宣告／型別、未證實語意仍未知；功能名稱只作導航，原始函式名、位址、chunks、operand 與 bytes 保持。
+- 新增[剩餘範圍核對](docs/verification/local/matching-c33-20261010/remaining-coverage-review.json)。C32 的 13 個未完成函式完整長度合計 11741 bytes，但 `sub_2B9BE` 已有 235／236 bytes 由兩個 CRT 模組覆蓋；另有 41 未還原 CODE bytes 位於函式外，實際未還原量為 11547。四個新目標與既有來源無重疊；本批後實際剩餘 5199，部分 CRT 與函式外範圍保持，兩份核對器獨立重算。
+- 沿用 `kol-matching-dos:bookworm-20261008-r1`、QuickC2.01 `/AM /Od /Gs /Zl /G0` 與九項固定工具／錯誤資源。image Entrypoint 查詢的 template 缺鍵只屬控制面查詢失敗；沿用相同 image，ID 核對一致，沒有另建工具鏈。
+- 新增 `WORLD.C/WORLD.OBJ` 6348 bytes，前九個 C／OBJ 與前批逐 byte 相同。十個真實 CODE 段各自小於 64KiB，107732-byte 合併只供閱讀與分類；每筆 PUBLIC、fixup／回填保留實際物件、段、offset 與分析座標。
+- 兩個空白案例由 `full-build.py` 重編全部 254 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06。34 項乾淨產物逐 byte 相同，兩份 reader 核全部 CODE／DATA、129312-byte 映像與 2281 有序重定位；九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes 保持。
+- 110 反例全部拒絕，包含前批 104 項與新效果 C、世界 C 再編譯、漏掉物 C、偽造 ASM 分類、錯誤物件來源與實際 WORLD PUBLIC；24 項 OMF 修改有合法 checksum。前批 801／800 長度閘門與兩批失敗紀錄保持獨立核對，本批沒有新增驗證腳本失敗。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[第三十三批收據](docs/verification/local/matching-c33-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c33-20261010/source-ledger.json)已由壓縮證據全唯讀獨立核對，涵蓋六個原始輸入、全部附件與 342 份 Go／module 輸入；沒有執行遊戲。
+- 累計 225 純 C／71216 bytes、378 LIB／44396 實際 bytes、181 混合／74354 bytes。Town 尚 9 函式／5199 CODE，Book 五／4003；全六支 14 函式／9202 CODE 未還原，DATA 未還原為 0。完整目標仍開放，不以 34 項一致產物代替剩餘來源還原。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件與開放狀態保持。接續保留十個 seed、65 個後續純 C／83 混合分類、106 純 C 基準、全部 DATA 鏈與剩餘範圍核對。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 封存期間唯讀回查 [C26 排除清冊](docs/verification/local/matching-c26-20261010/excluded-font-inputs.json)。其壓縮檔的 `units/KOLTOWN/controls-unit-03/BULK.C` 與 `diagnostic.json` 顯示 `x=x-32` 只差 ADD／SUB；04 的無號轉型與 05 的 `volatile` 亦未匹配。指標型參數或近指標差能否保留 SUB 仍屬假說，尚未編譯，不列進度。`based-probe-01` 的 C2061 只證明該 `_segment` 宣告失敗，不推定所有 `_based` 語法都不支援。
+- 保存 54871 份檔案，23 份可重建 EXE 只留 hash；原始證據 6368282319 bytes，壓縮為 391374076 bytes，SHA-256 為 `04efa2a5a4b0382229d72e95b03a9d5f697a3e3f5c27e6c9d06e6b4ca624f76a`。只刪除本批已保存工作區，約釋放 5673 MiB；衍生來源維持僅本機。
+- 工作清單為 19 開放、89 已核實完成，掃描 2037 行全部有入口。本專案容器清單為空；同 image 的 `hungry_wing` 經掛載核對屬 `fd2`，予以保留。UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄。六份主機暫存腳本已刪除，`git diff --check` 通過。
+
+## 2026-10-10：KOLTOWN 圖像、人物選擇、事件與分頁四函式匹配
+
+- 上一輪為實際進展。路由命中原作工具鏈與執行期指紋，載入單一入口與文件職責契約。逐檔核 C33 封存後恢復全部十個 CODE 單元、254 個 compiler 函式、52 個 LIB 模組及 6736 初始化 DATA，保留原版六支 EXE 與 342 份 Go／module 輸入。
+- 新增四個完整函式共 4203 bytes，1453 條原始指令匹配，分列 3701 C／502 ASM。`sub_1BD17` 991 為 489 C／502 ASM，`sub_2AAA8` 1623、`sub_2B0FF` 722、`sub_2B4A7` 867 為純 C。
+- 圖像常式的六段硬體 ASM 在編譯前明列；DS／ES、複製、位元合成與暫存原始運算元由 IDA9.4 匯出轉成可回查的來源，C 控制在範圍外。沒有用 ASM 補普通 C 差異。
+- 首輪一個函式匹配，依原始 bytes 修正有號常數、布林求值順序、條件方向、近指標表達與未使用的運算式結果，第二輪四個函式全部無警告匹配。原始函式名、線性位址、chunks、offset、bytes 與未證實語意保持；功能名稱只作導航，原始唯一 C／ASM 寫法仍未知。
+- 另保存[12 個受控試驗](docs/verification/local/matching-c34-20261010/probe-summary.json)，沒有增加匹配函式數。近指標差、長整數、無號常數、參數型別與運算式求值仍未閉合三個字型函式的 ADD／SUB 差異。這是上一輪假說的實測結果，原假說歷史保留。
+- 同一固定工具 repo commit 的 QuickC1 與 QuickC251 候選另核八份檔案的 Git blob／SHA-256。QuickC1 拒絕本次 `_asm` 源碼，純 C 前綴的保存順序與指令也不同；不把省略硬體的前綴稱為完整匹配。QuickC251 接受本次 `_segment`／`_based` 轉型，完整葉函式為 29／26 bytes；舊式參數宣告（K&R）候選為 21 bytes，索引候選報 C2147。只證實各次源碼／參數結果，不推定所有寫法不支援或不可能。
+- 正式工具仍為 QuickC2.01 `/AM /Od /Gs /Zl /G0` 與原九項工具／錯誤資源。新增 `SUPPORT.C/SUPPORT.OBJ` 4203 bytes，前十個 C／OBJ 與前批逐 byte 相同；十一個真實段各低於 64KiB，111935-byte 合併只作閱讀／分類。PUBLIC、fixup／回填保留實際物件、段、offset 與分析座標。
+- 兩個空白案例重編全部 258 個 compiler 函式與 DATA，再經 LINK4.07／EXEMOD4.02／EXEPACK4.06；36 項乾淨產物逐 byte 相同。兩份 reader 核 CODE／DATA、129312-byte 映像、2281 有序重定位、九個 DATA relocation、15 個 compiler 指標 fixup 與 56 個對齊零 bytes。
+- 116 反例全部拒絕，包含前批 110 項及新裁切 C、人物選擇 C、圖像 ASM 再編譯、漏分頁 C、錯硬體 ASM 範圍與實際 SUPPORT PUBLIC；25 項 OMF 修改保持合法 checksum。前批 801／800 長度閘門與兩批失敗紀錄保持獨立核對，本批沒有新增驗證腳本失敗。
+- [剩餘範圍](docs/verification/local/matching-c34-20261010/remaining-coverage-review.json)重算後，Town 尚 5 函式／996 CODE，包含 41 個函式外 bytes 與部分 CRT 的 1 byte；235 個已覆蓋 CRT bytes 不重複計數。Book 五／4003、所有初始化 DATA、799 個原始函式與四支完整來源保持。
+- 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[C34 收據](docs/verification/local/matching-c34-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c34-20261010/source-ledger.json)已從壓縮證據全唯讀獨立核對，另核所有試驗、替代工具雜湊與正式輸入；沒有執行遊戲。
+- 累計 228 純 C／74428 bytes、378 LIB／44396 實際 bytes、182 混合／75345 bytes，混合分列 61350 C／13995 ASM。全六支仍 10 函式／4999 CODE 未還原，DATA 未還原為 0，完整目標仍開放。
+- 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件與開放狀態保持。接續保留十一個 seed、68 個後續純 C／84 混合分類、106 純 C 基準、完整 DATA 鏈、剩餘範圍與試驗清冊。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
+- 封存期間另開始 [C35 先行工作](workplace/matching-c35-20261010/PLAN.json)，以 C34 唯讀輸入與容器暫存檔案系統跑五個 C 候選，兩份收據及來源／物件／命令已保存。逗號運算式恢復遠指標讀取後為 26 bytes，仍只差載入順序；其餘候選也未匹配。C35 批次尚未整合，工作區保留供接續；目前來源計數仍以 C34 為準。恢復完整 C35 前先核兩份 pilot 收據，保留既有 pilot 與 PLAN.json。
+- 保存 59003 份檔案，26 份可重建或按固定 Git blob 重取的執行檔只留 hash；原始證據 7077133575 bytes，壓縮為 446953976 bytes，SHA-256 為 `b89bcf54287983fae8b5580eb11919307d6f38e806a565eea72d2fc63063852c`。只刪除本批已保存工作區，約釋放 6293 MiB；衍生來源與工具仍僅本機保存。
+- 工作清單為 19 開放、89 已核實完成，掃描 2041 行全部有入口。C34 工作區已刪除，C35 的 pilot 與兩份收據保留且雜湊已核對；本專案容器清單為空，其他專案資源未動。UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；九份主機暫存腳本已刪除，`git diff --check` 通過。
+
+## 2026-10-10：暫停 matching，保存與推送研究進度
+
+- 依使用者「先 commit + push」指示暫停 matching 目標，不繼續來源研究。目標狀態已確認為 paused；目前仍 10 函式／4999 CODE bytes 未還原，DATA 來源完整。
+- C35 已逐檔核 C34 封存並恢復十一個 CODE 單元與完整 DATA 鏈。既有五個先行候選、兩份 pilot 收據與 PLAN.json 保留；正式九項工具 pins 已核對。新增無號左值字型候選三函式仍未匹配，沒有整合、增加來源完成量或執行完整 C35 驗證。
+- 接續入口為 `workplace/matching-c35-20261010/PLAN.json`、`plan.json`、`bootstrap.py` 與 `units/KOLTOWN/font-lvalue-unsigned/`。未完成工作區保留；恢復時以 C34 來源清冊與全部真實 CODE 單元為基準。
+- 本次保存第六至三十四批研究紀錄、來源清冊索引、工作清單與證據保存工具。提交範圍限八個既有文字檔；原版輸入、C／ASM／OBJ／LIB、工具與本機壓縮證據均不納入 Git。
+- 提交前以既有隔離 image 核對保存工具語法與擁有權。UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；本專案容器清單為空，其他專案容器保持。
+- 工作清單 render、verify 與 scan 均通過：19 開放、89 已核實完成，2042 行自承全部有條目認領。C35 bootstrap 暫存腳本已刪除，工作區內保存副本保留。

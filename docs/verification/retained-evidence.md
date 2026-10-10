@@ -20,7 +20,36 @@
 | 第二批52個C與42個函式庫函式來源替換 | [第二批紀錄](../re/matching-decompilation.md#第二批c與函式庫還原紀錄) | [保存清冊](local/matching-c2-20261008/retention.json) |
 | 第三批KOLBOOK九個C與36個函式庫函式 | [第三批紀錄](../re/matching-decompilation.md#第三批kolbook來源還原紀錄) | [保存清冊](local/matching-c3-20261008/retention.json) |
 | 第四批TANDYPIN完整來源及三支函式庫替換 | [第四批紀錄](../re/matching-decompilation.md#第四批六支程式來源基準紀錄) | [保存清冊](local/matching-c4-20261008/retention.json) |
-| 第五批KOL完整來源還原 | [目前來源進度](../re/matching-decompilation.md#持續c來源還原) | [保存清冊](local/matching-c5-20261008/retention.json) |
+| 第五批KOL完整來源還原 | [第五批紀錄](../re/matching-decompilation.md#第五批kol完整來源還原紀錄) | [保存清冊](local/matching-c5-20261008/retention.json) |
+| 第六批三支runtime及四個Maker C | [第六批來源](../re/matching-decompilation.md#第六批來源還原紀錄) | [保存清冊](local/matching-c6-20261008/retention.json) |
+| 第七批Maker九個C／ASM函式 | [第七批來源](../re/matching-decompilation.md#第七批來源還原紀錄) | [保存清冊](local/matching-c7-20261009/retention.json) |
+| 第八批MAKEMODE完整CODE／DATA來源 | [第八批來源](../re/matching-decompilation.md#第八批來源還原紀錄) | [保存清冊](local/matching-c8-20261009/retention.json) |
+| 第九批TITLE完整來源及未命名CODE | [第九批來源](../re/matching-decompilation.md#第九批來源還原紀錄) | [保存清冊](local/matching-c9-20261009/retention.json) |
+| 第十批KOLBOOK新增75個原始來源函式 | [第十批來源](../re/matching-decompilation.md#第十批來源還原紀錄) | [保存清冊](local/matching-c10-20261009/retention.json) |
+| 第十一批KOLBOOK新增18個原始來源函式 | [第十一批來源](../re/matching-decompilation.md#第十一批來源還原紀錄) | [保存清冊](local/matching-c11-20261009/retention.json) |
+| 第十二批KOLBOOK主函式及全部初始化DATA | [第十二批來源](../re/matching-decompilation.md#第十二批來源還原紀錄) | [保存清冊](local/matching-c12-20261009/retention.json) |
+| 第十三批角色建立與411個額外CODE bytes | [第十三批來源](../re/matching-decompilation.md#第十三批來源還原紀錄) | [保存清冊](local/matching-c13-20261009/retention.json) |
+| 第十四批KOLTOWN完整LIB模組與33原始函式 | [第十四批來源](../re/matching-decompilation.md#第十四批來源還原紀錄) | [保存清冊](local/matching-c14-20261009/retention.json) |
+| 第十五批KOLTOWN新增30個純C原始函式 | [第十五批來源](../re/matching-decompilation.md#第十五批來源還原紀錄) | [保存清冊](local/matching-c15-20261009/retention.json) |
+| 第十六批KOLTOWN新增25個純C原始函式 | [第十六批來源](../re/matching-decompilation.md#第十六批來源還原紀錄) | [保存清冊](local/matching-c16-20261009/retention.json) |
+| 第十七批KOLTOWN新增12純C與31明列C／ASM | [第十七批來源](../re/matching-decompilation.md#第十七批來源還原紀錄) | [保存清冊](local/matching-c17-20261009/retention.json) |
+| 第十八批KOLTOWN全部初始化DATA來源 | [第十八批來源](../re/matching-decompilation.md#第十八批來源還原紀錄) | [保存清冊](local/matching-c18-20261009/retention.json) |
+| 第十九批KOLTOWN新增24個CODE函式 | [第十九批來源](../re/matching-decompilation.md#第十九批來源還原紀錄) | [保存清冊](local/matching-c19-20261009/retention.json) |
+| 第二十批KOLTOWN新增16個CODE函式 | [第二十批來源](../re/matching-decompilation.md#第二十批來源還原紀錄) | [保存清冊](local/matching-c20-20261010/retention.json) |
+| 第二十一批KOLTOWN新增14個純C函式 | [第二十一批來源](../re/matching-decompilation.md#第二十一批來源還原紀錄) | [保存清冊](local/matching-c21-20261010/retention.json) |
+| 第二十二批KOLTOWN新增14個來源函式 | [第二十二批來源](../re/matching-decompilation.md#第二十二批來源還原紀錄) | [保存清冊](local/matching-c22-20261010/retention.json) |
+| 第二十三批KOLTOWN主函式、選單與輸入 | [第二十三批來源](../re/matching-decompilation.md#第二十三批來源還原紀錄) | [保存清冊](local/matching-c23-20261010/retention.json) |
+| 第二十四批KOLTOWN完整城鎮互動控制函式 | [第二十四批來源](../re/matching-decompilation.md#第二十四批來源還原紀錄) | [保存清冊](local/matching-c24-20261010/retention.json) |
+| 第二十五批KOLTOWN完整戰鬥主控制與多CODE物件 | [第二十五批來源](../re/matching-decompilation.md#第二十五批來源還原紀錄) | [保存清冊](local/matching-c25-20261010/retention.json) |
+| 第二十六批KOLTOWN圖像／文字／磁碟四函式 | [第二十六批來源](../re/matching-decompilation.md#第二十六批來源還原紀錄) | [保存清冊](local/matching-c26-20261010/retention.json) |
+| 第二十七批KOLTOWN選項／物品／圖像四純C函式 | [第二十七批來源](../re/matching-decompilation.md#第二十七批來源還原紀錄) | [保存清冊](local/matching-c27-20261010/retention.json) |
+| 第二十八批KOLTOWN名冊／保存／資料頁四函式 | [第二十八批來源](../re/matching-decompilation.md#第二十八批來源還原紀錄) | [保存清冊](local/matching-c28-20261010/retention.json) |
+| 第二十九批KOLTOWN角色／選單／欄位編輯四函式 | [第二十九批來源](../re/matching-decompilation.md#第二十九批來源還原紀錄) | [保存清冊](local/matching-c29-20261010/retention.json) |
+| 第三十批KOLTOWN欄位／圖像／戰鬥四函式 | [第三十批來源](../re/matching-decompilation.md#第三十批來源還原紀錄) | [保存清冊](local/matching-c30-20261010/retention.json) |
+| 第三十一批KOLTOWN戰鬥顯示／選擇／輸入四函式 | [第三十一批來源](../re/matching-decompilation.md#第三十一批來源還原紀錄) | [保存清冊](local/matching-c31-20261010/retention.json) |
+| 第三十二批KOLTOWN目標／權重／攻擊／傷害四純C函式 | [第三十二批來源](../re/matching-decompilation.md#第三十二批來源還原紀錄) | [保存清冊](local/matching-c32-20261010/retention.json) |
+| 第三十三批KOLTOWN效果／掉物／世界／遭遇四純C函式 | [第三十三批來源](../re/matching-decompilation.md#第三十三批來源還原紀錄) | [保存清冊](local/matching-c33-20261010/retention.json) |
+| 第三十四批KOLTOWN圖像／人物選擇／事件／分頁四函式 | [目前來源進度](../re/matching-decompilation.md#持續c來源還原) | [保存清冊](local/matching-c34-20261010/retention.json) |
 
 各目錄的 `evidence.tar.xz` 保留完整狀態紀錄、圖片、保存、腳本、輸入清冊與原收據。
 執行檔屬可重建產物，移除位元組並保留原 SHA-256。原收據不改寫，內部路徑仍指向
@@ -42,7 +71,7 @@ python3 -B /src/tools/retain_verification.py verify \
   move-message-visibility-20261006 blocked-stun-formal-20261007 \
   finish-platform-20261007 quest-rng-formal-20261007 platform-quest-rng-20261007 \
   matching-pilot-20261008 matching-link-20261008 matching-pack-20261008 matching-c-20261008 \
-  matching-c2-20261008 matching-c3-20261008 matching-c4-20261008 matching-c5-20261008
+  matching-c2-20261008 matching-c3-20261008 matching-c4-20261008 matching-c5-20261008 matching-c6-20261008 matching-c7-20261009 matching-c8-20261009 matching-c9-20261009 matching-c10-20261009 matching-c11-20261009 matching-c12-20261009 matching-c13-20261009 matching-c14-20261009 matching-c15-20261009 matching-c16-20261009 matching-c17-20261009 matching-c18-20261009 matching-c19-20261009 matching-c20-20261010 matching-c21-20261010 matching-c22-20261010 matching-c23-20261010 matching-c24-20261010 matching-c25-20261010 matching-c26-20261010 matching-c27-20261010 matching-c28-20261010 matching-c29-20261010 matching-c30-20261010 matching-c31-20261010 matching-c32-20261010 matching-c33-20261010 matching-c34-20261010
 ```
 
 需重查大檔時，工具的 `extract` 可解到容器的暫存目錄。只抽出原證據，不產生新收據。
@@ -107,3 +136,205 @@ TANDYPIN完整來源與KOL／TITLE／MAKEMODE新增101個函式庫函式，16項
 KOL全部76函式、CODE與DATA來源、兩次完整EXE、八項乾淨產物及八項反例均通過，
 全唯讀封存再次重算兩份完整來源與正式342份輸入後，才清理`workplace/matching-c5-20261008/`。
 KOL與TANDYPIN完整來源，其餘四支仍尚518函式、169979 CODE bytes及12553 DATA bytes未還原。
+
+第六批保存1706份檔案，29份可重建執行檔只保留hash；115356323 bytes保存為9779916 bytes。
+三支完整runtime來源、四個Maker純C、22項乾淨產物、八項反例及六份來源核對通過，
+全唯讀封存再次重算六份source proof與正式342份程式輸入後，才清理`workplace/matching-c6-20261008/`。
+完整目標仍有四支部分來源、388函式、153311 CODE bytes及12553 DATA bytes未還原。
+
+2026-10-09第七批保存2365份檔案，23份可重建執行檔只保留hash；
+133308658 bytes保存為10777487 bytes。Maker新增一個純C與八個明列C／ASM函式，
+32項乾淨產物、十項反例與兩份完整來源核對通過；六原始輸入、所有附件及342份Go輸入
+經全唯讀封存重算後，清理範圍限`workplace/matching-c7-20261009/`。
+目前379函式、151554 CODE及12553 DATA bytes未還原；完整matching目標維持未完成。
+
+同日第八批保存3679份檔案，26份可重建執行檔只保留hash；
+165621187 bytes保存為12273981 bytes。MAKEMODE全部78函式、12816 CODE及2353初始化DATA bytes
+有明列來源，原始CODE／DATA片段均為0。36項乾淨產物、十三項反例與兩份完整來源核對通過，
+六原始輸入、全部附件與342份Go輸入經全唯讀封存重算後，清理範圍限`workplace/matching-c8-20261009/`。
+剩餘三支部分來源、378函式、148146 CODE及10200 DATA bytes；完整目標保持active。
+DS+4E2的0x1F00初值用途未知，原始C宣告為假說，限制隨來源清冊保持。
+
+第九批保存5918份檔案，26份可重建執行檔只保留hash；
+195783496 bytes保存為14613501 bytes。TITLE全部115個原始函式、另列118個C CODE bytes、
+16880 CODE與1279初始化DATA bytes均有來源，原始CODE／DATA片段為0。
+77項乾淨產物、十五項反例、原始IDA DB關係及兩份完整來源經全唯讀封存重算後，
+清理範圍限`workplace/matching-c9-20261009/`。原始799函式不變，兩個初值用途未知。
+KOLBOOK與KOLTOWN仍有345函式、140738 CODE及8921 DATA bytes未還原，完整目標保持active。
+
+第十批保存8893份檔案，23份可重建執行檔只保留hash；
+221612068 bytes保存為18252743 bytes。KOLBOOK新增75個完整原始函式來源8485 bytes，
+二十個新純C與55個混合C／ASM分列；原有九個C及共享OBJ保持。
+159項乾淨產物、九項反例、兩份獨立來源及342份Go輸入經全唯讀封存重算後，
+清理範圍限`workplace/matching-c10-20261009/`。四支完整來源保持，
+Book25函式與2185 DATA bytes仍未完成；全六支剩270函式、132253 CODE及8921 DATA bytes，goal維持active。
+
+同日第十一批保存14488份檔案，25份可重建EXE只保留hash；255367655 bytes保存為20822756 bytes。
+Book新增18個完整原始函式6012 bytes，195項乾淨產物、九反例與兩份來源證明通過。
+六原始輸入、所有附件及342份正式輸入經全唯讀封存重算退出0後，才清理本批工作區。
+四個未匹配候選與DATA來源候選不計完成；全六支仍有252函式、126241 CODE及8921 DATA bytes，完整目標保持active。
+
+同日第十二批保存20049份檔案，25份可重建EXE只留hash；297887791 bytes保存為23667775 bytes。
+Book完整主函式4789 bytes與16-byte尾碼、全部2185初始化DATA來源均已核對。
+201項乾淨產物、十五反例、兩份獨立來源及六原始輸入、342份Go輸入經全唯讀重驗退出0後，才清理本批工作區。
+DATA完成與CODE完成分開核對；Book六函式及8085 CODE bytes仍待還原，全六支仍251函式、121390 CODE與6736 DATA bytes。
+
+同日第十三批保存25224份檔案，24份可重建EXE只留hash；341055815 bytes保存為27165226 bytes。
+角色建立3671 bytes及三個額外區段411 bytes有完整來源，209項乾淨產物、十七反例與兩份來源證明通過。
+六原始輸入、全部附件與342份正式輸入經全唯讀重驗退出0後，才精確清理本批工作區。
+原始191／799函式數保持；Book五函式4003 CODE bytes、全六支250函式117308 CODE及6736 DATA bytes仍待還原，完整目標active。
+
+同日第十四批保存25680份檔案，23份可重建執行檔只留hash；382660051 bytes保存為28480804 bytes。
+Town52個完整LIB模組覆蓋75原始函式，新增33；全部51個C保持，十項乾淨產物及十一反例通過。
+六原始輸入、兩份獨立來源、2281重定位及完整packed雜湊、342正式輸入經全唯讀重驗退出0後，才精確清理本批工作區。
+Book五／Town212仍217函式、111877 CODE及6736 DATA bytes未還原，完整目標active。
+
+同日第十五批保存25949份檔案，35份可重建執行檔只留hash；418724543 bytes保存為28225759 bytes。
+Town新增30個純C原始函式3203 bytes，現81純C8260 bytes；原有75個LIB原始函式與52模組保持。
+十項乾淨產物、十三反例、六原始輸入、兩份完整來源、2281重定位與342正式輸入，
+均已從壓縮證據全唯讀重驗通過。清理範圍限`workplace/matching-c15-20261009/`，約釋放372 MiB。
+Book五／Town182共187函式、108674 CODE及6736 DATA bytes未還原，完整目標保持進行中。
+
+同日第十六批保存26206份檔案，23份可重建執行檔只留hash；451089376 bytes保存為29925298 bytes。
+Town新增25個純C原始函式5595 bytes，現106純C13855 bytes；81個既有C與75個LIB原始函式保持。
+十項乾淨產物、十四反例、六原始輸入、兩份完整來源、2281重定位與342正式輸入，
+均已從壓縮證據全唯讀重驗通過。清理範圍限`workplace/matching-c16-20261009/`，約釋放402 MiB。
+Book五／Town157共162函式、103079 CODE及6736 DATA bytes未還原，完整目標保持進行中。
+
+同日第十七批保存26561份檔案，31份可重建執行檔只留hash；512598542 bytes保存為31852025 bytes。
+Town新增12純C1905及31明列C／ASM2265 bytes，共43個原始函式4170 bytes。
+31混合函式分列465個C框架與1800個ASM bytes，來源分類器拒絕錯誤分類、範圍與普通C插入ASM。
+十項乾淨產物、21反例、六原始輸入、兩份完整來源、2281重定位及342正式輸入，
+均從壓縮證據全唯讀重驗通過。清理範圍限`workplace/matching-c17-20261009/`，約釋放458 MiB。
+Book五／Town114共119函式、98909 CODE及6736 DATA bytes未還原，完整目標保持進行中。
+
+同日第十八批保存27053份檔案，27份可重建執行檔只留hash；610853612 bytes保存為35088749 bytes。
+Town全部6736初始化DATA已具來源：5600 compiler初值、991 LIB實際初值、88 LIB宣告零與57原生零bytes。
+246個C符號、31個LIB範圍、原始DATA片段0、15項乾淨產物、31反例與兩份完整來源均已核對。
+六原始輸入、338函式／271項DATA／1359筆IDA直接引用、2281重定位與342正式輸入，
+均從壓縮證據全唯讀重驗通過。清理範圍限`workplace/matching-c18-20261009/`，約釋放549 MiB。
+Book五／Town114仍119函式、98909 CODE bytes未還原；未還原DATA為0，完整目標保持進行中。
+
+2026-10-10第十九批保存27719份檔案，23份可重建執行檔只留hash；741855232 bytes保存為37318330 bytes。
+Town新增24個原始CODE函式4337 bytes，包含3純C466與21明列混合3871 bytes。
+全部149個既有compiler函式與6736 DATA來源保持；15項乾淨產物、35反例與兩份完整來源通過。
+六原始輸入、173 compiler函式、2281重定位、九個DATA relocation與342正式輸入，
+均從壓縮證據全唯讀重驗通過。清理範圍限`workplace/matching-c19-20261009/`，約釋放672 MiB。
+Book五／Town90仍95函式、94572 CODE bytes未還原；DATA來源保持，完整目標仍進行中。
+
+
+2026-10-10 第二十批保存 29104 份檔案，23 份可重建執行檔只留 hash；1029842224 bytes 保存為 39736863 bytes。
+Town 新增 16 個原始 CODE 函式，共 3823 bytes，包含 1 純 C 276 與 15 混合 C／ASM 3547 bytes。
+全部 173 個既有 compiler 函式與 6736 DATA 來源保持；15 項乾淨產物、39 反例及兩份完整來源核對通過。
+六原始輸入、189 compiler 函式、2281 重定位、九個 DATA relocation 與 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。清理範圍限 `workplace/matching-c20-20261010/`，約釋放 944 MiB。
+Book 五／Town 74 仍有 79 函式、90749 CODE bytes 未還原；DATA 來源保持，完整目標繼續進行。
+
+
+2026-10-10 第二十一批保存 29814 份檔案，23 份可重建執行檔只留 hash；1164323031 bytes 保存為 41950914 bytes。
+Town 新增 14 個純 C 原始函式，共 5268 bytes，沒有新增 ASM。全部 189 個既有 compiler 函式與完整 DATA 鏈保持。
+15 項乾淨產物、43 反例、兩份獨立來源核對、六原始輸入、203 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。只刪除 `workplace/matching-c21-20261010/`，約釋放 1070 MiB。
+Book 五／Town 60 仍有 65 函式、85481 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十二批保存 30519 份檔案，23 份可重建執行檔只留 hash；1315556443 bytes 保存為 44247523 bytes。
+Town 新增 14 個原始來源函式，共 6851 bytes，包含 12 純 C 5944 與 2 混合 907 bytes，混合分列 493 C／414 ASM。
+全部 203 個既有 compiler 函式與完整 DATA 鏈保持；15 項乾淨產物、47 反例、兩份獨立來源核對、六原始輸入、217 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。只刪除 `workplace/matching-c22-20261010/`，約釋放 1212 MiB。
+Book 五／Town 46 仍有 51 函式、78630 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十三批保存 31276 份檔案，23 份可重建執行檔只留 hash；1486813342 bytes 保存為 46609859 bytes。
+Town 主函式、選單與輸入新增三個完整來源函式，共 6095 bytes，包含 1 純 C 1355 與 2 混合 4740 bytes，混合分列 4533 C／207 ASM。
+全部 217 個既有 compiler 函式與完整 DATA 鏈保持；15 項乾淨產物、51 反例、兩份獨立來源核對、六原始輸入、220 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。只刪除 `workplace/matching-c23-20261010/`，約釋放 1373 MiB。
+Book 五／Town 43 仍有 48 函式、72535 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十四批保存 32070 份檔案，23 份可重建執行檔只留 hash；1680414770 bytes 保存為 49143160 bytes。
+Town 完整城鎮互動控制 `sub_11A93` 新增 8967 bytes，分列 8939 C／28 ASM；原始 2874 條指令及全部 220 個既有 compiler 函式保持。
+15 項乾淨產物、55 反例、兩份獨立來源核對、六原始輸入、221 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。只刪除 `workplace/matching-c24-20261010/`，約釋放 1555 MiB。
+Book 五／Town 42 仍有 47 函式、63568 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十五批保存 33149 份檔案，23 份可重建執行檔只留 hash；1964222568 bytes 保存為 53385800 bytes。
+Town 完整戰鬥控制 `sub_1E3A8` 新增 13650 bytes，分列 13634 C／16 ASM；原始 4389 條指令及全部 221 個既有 compiler 函式保持。
+實際兩個 CODE 編譯物件分別為 53366 與 13650 bytes；合併 67016-byte 視圖不作 compiler 輸入，保留每個物件的來源與 PUBLIC 位置。
+18 項乾淨產物、62 反例、兩份獨立來源核對、六原始輸入、222 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。只刪除 `workplace/matching-c25-20261010/`，約釋放 1806 MiB。
+壓縮證據 SHA-256 為 `47789f97f6ed157c15f3580828b39f1e9db0cad50a9941400b9cee87eae397b5`。
+Book 五／Town 41 仍有 46 函式、49918 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十六批保存 34481 份檔案，23 份可重建執行檔只留 hash；2279245607 bytes 保存為 75755036 bytes。
+Town 圖像轉換、矩形搬移、文字 codec 與磁碟重試新增四個完整來源函式，共 1707 bytes，分列 1012 C／695 ASM。
+全部 222 個既有 compiler 函式、兩個既有 CODE 來源／物件及完整 DATA 保持；新增第三個 CONTROL 物件 1707 bytes。
+20 項乾淨產物、68 反例、兩份獨立來源核對、六原始輸入、226 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。只刪除 `workplace/matching-c26-20261010/`，約釋放 2084 MiB。
+壓縮證據 SHA-256 為 `490f9cdbf70c1552925a88327ded087d666760f32cf1c7cd10da003d05090478`。
+Book 五／Town 37 仍有 42 函式、48211 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十七批保存 37324 份檔案，23 份可重建執行檔只留 hash；2929551494 bytes 保存為 123774040 bytes。
+Town 選項重繪、文字選擇、物品命令與圖像載入新增四個完整純 C 函式，共 3679 bytes，1236 條原始指令匹配，沒有新增 ASM。
+全部 226 個既有 compiler 函式、三個既有 CODE 來源／物件及完整 DATA 保持；新增第四個 MENU 物件 3679 bytes。
+22 項乾淨產物、74 反例、兩份獨立來源核對、六原始輸入、230 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。原反例腳本失敗、69 個案例及欄位取值修正也保留；只刪除 `workplace/matching-c27-20261010/`，約釋放 2657 MiB。
+壓縮證據 SHA-256 為 `5cc4873442c4f9bc2f6230a2630d03cd9f7d1899fca5cee9ec2d672ccbd524ce`。
+Book 五／Town 33 仍有 38 函式、44532 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十八批保存 40676 份檔案，23 份可重建執行檔只留 hash；3655820291 bytes 保存為 179009348 bytes。
+Town 名冊、保存、物品明細與角色資料頁新增四個完整來源函式，共 5221 bytes，分列 5033 C／188 ASM，1756 條原始指令匹配。
+兩個純 C 2654 與兩個混合 2567 bytes；13 個 DOS／ES 範圍預先明列。全部 230 個既有 compiler 函式、四個既有 CODE 來源／物件及完整 DATA 保持。
+24 項乾淨產物、80 反例、兩份獨立來源核對、六原始輸入、234 compiler 函式、2281 重定位及 342 正式輸入，
+均從壓縮證據全唯讀重驗通過。長度反例的 801／800 由真實物件另核；原失敗腳本與 73 個案例保留。只刪除 `workplace/matching-c28-20261010/`，約釋放 3295 MiB。
+壓縮證據 SHA-256 為 `15cff0a2a9687006e79c983d13c2b1b44d3ac385ba34472410ef06fe4ad58de3`。
+Book 五／Town 29 仍有 34 函式、39311 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第二十九批保存 42812 份檔案，23 份可重建執行檔只留 hash；4094764232 bytes 保存為 213044472 bytes。
+Town 角色摘要、物品選單、購買與欄位編輯新增四個完整來源函式，共 6038 bytes，分列 5911 C／127 ASM，2023 條原始指令匹配。
+兩個純 C 3966 與兩個混合 2072 bytes；四個 DS／ES 範圍預先明列。全部 234 個既有 compiler 函式、五個既有 CODE 來源／物件及完整 DATA 保持。
+26 項乾淨產物、86 反例、兩份獨立來源核對、六原始輸入、238 compiler 函式、2281 重定位及 342 正式輸入，均從壓縮證據全唯讀重驗通過。
+前批 801／800 長度反例與兩批失敗紀錄保持；只刪除 `workplace/matching-c29-20261010/`，約釋放 3680 MiB。
+壓縮證據 SHA-256 為 `4edce41204ecc7777c284934e248fde87bf1b9e13677d33155523c5b997260a3`。
+Book 五／Town 25 仍有 30 函式、33273 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第三十批保存 45279 份檔案，23 份可重建執行檔只留 hash；4581218518 bytes 保存為 251167288 bytes。
+Town 欄位、圖像、格點與戰鬥命令新增四個完整來源函式，共 5554 bytes，分列 5539 C／15 ASM，1864 條原始指令匹配。
+三個純 C 4530 與一個混合 1024 bytes；唯一 ES／SI 範圍預先明列。全部 238 個既有 compiler 函式、六個既有 CODE 來源／物件與完整 DATA 保持。
+28 項乾淨產物、92 反例、兩份獨立來源核對、六原始輸入、242 compiler 函式、2281 重定位與 342 正式輸入，均從壓縮證據全唯讀重驗通過。
+前批 801／800 長度反例與兩批失敗紀錄保持；只刪除 `workplace/matching-c30-20261010/`，約釋放 4107 MiB。
+壓縮證據 SHA-256 為 `5efa472e33b8f116deaa750d836ff183c1369fe9745029f3f68fd4fe3f48153a`。
+Book 五／Town 21 仍有 26 函式、27719 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+
+2026-10-10 第三十一批保存 48117 份檔案，23 份可重建執行檔只留 hash；5120704523 bytes 保存為 293534172 bytes。
+Town 戰鬥顯示、狀態數值、戰鬥選擇與目標輸入新增四個完整函式，共 6558 bytes，分列 6553 C／5 ASM，2182 條原始指令匹配。
+三個純 C 5707 與一個混合 851 bytes；唯一 DS 範圍預先明列。全部 242 個既有 compiler 函式、七個既有 CODE 來源／物件與完整 DATA 保持。
+30 項乾淨產物、98 反例、兩份獨立來源核對、六原始輸入、246 compiler 函式、2281 重定位與 342 Go／module 輸入均從壓縮證據全唯讀重驗通過。
+前批 801／800 長度反例與兩批失敗紀錄保持；只刪除 `workplace/matching-c31-20261010/`，約釋放 4579 MiB。
+壓縮證據 SHA-256 為 `a08959c8db2c45e551eee28038473b0bed673a1fd0382d64890cb2844bde779a`。
+Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源保持完整，目標繼續進行。
+
+第三十二批另保存 51296 份檔案，23 份可重建 EXE 只留 hash。
+5713959497 bytes 壓縮為 340051632 bytes，SHA-256 為 `c058068d8fc9e24b89411a3b4f39802ce6fddc9114bccd58c6a504395dc7e0c9`。
+四個純 C 函式 5611 bytes、九個真實 CODE 物件、完整 DATA、32 項乾淨產物與 104 反例，
+已由壓縮檔全唯讀獨立核對。新入口核對後只刪除本批工作區，約釋放 5099 MiB。
+剩餘 18 函式／15550 CODE bytes，未還原 DATA 為 0，完整目標仍開放。
+
+第三十三批另保存 54871 份檔案，23 份可重建 EXE 只留 hash。
+6368282319 bytes 壓縮為 391374076 bytes，SHA-256 為 `04efa2a5a4b0382229d72e95b03a9d5f697a3e3f5c27e6c9d06e6b4ca624f76a`。
+四個純 C 函式 6348 bytes、十個真實 CODE 物件、完整 DATA、34 項乾淨產物與 110 反例，
+已由壓縮檔全唯讀獨立核對，另重算部分 CRT 與 41 個函式外未還原 bytes。
+新入口核對後只刪除本批工作區，約釋放 5673 MiB。剩餘 14 函式／9202 CODE bytes，DATA 未還原為 0，完整目標仍開放。
+
+第三十四批另保存 59003 份檔案，26 份可重建或按固定 Git blob 重取的執行檔只留 hash。
+7077133575 bytes 壓縮為 446953976 bytes，SHA-256 為 `b89bcf54287983fae8b5580eb11919307d6f38e806a565eea72d2fc63063852c`。
+四函式 4203 bytes、十一個真實 CODE 物件、完整 DATA、36 項乾淨產物與 116 反例，
+已從壓縮檔全唯讀獨立核對；12 個未匹配試驗與八份替代工具／資源的 pins 另核。
+新入口核對後只刪除本批工作區，約釋放 6293 MiB。剩餘 10 函式／4999 CODE bytes，DATA 未還原為 0，完整目標仍開放。
