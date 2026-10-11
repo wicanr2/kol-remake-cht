@@ -1,6 +1,6 @@
 # 三平台 HD 更新交付
 
-版本：`v.1.0.1-20261012`。狀態：本機交付驗收通過；GitHub 上傳待目的地授權確認。
+版本：`v.1.0.1-20261012`。狀態：本機交付驗收通過；private GitHub Release 已發布。
 
 本版依使用者指令重建三平台完整版、Release 引擎包與推廣影片，包含中文修正、
 首批 HD 及遊戲內 EGA／HD 切換。正式程式固定為 `343c0f87` 的 356 份 Go／module 輸入，
@@ -62,7 +62,21 @@ Xvfb 須等待就緒，並由擁有程序的退出 trap 回收。
 Windows為 `4291e093aba63f84f5a61e3ee92fac725235de7dfc5a782b90a802db745c3598`。
 原版輸入、完整版、推廣影片及生成二進位均未加入Git。
 
-發行來源已提交並推送為 `6d98fb00`。自動核准審查拒絕 `gh release create`，
-理由是本輪未明示授權 `wicanr2/kol-remake-cht` 的 GitHub 目的地與外部上傳副作用。
-命令未執行，沒有遠端 Release 或 tag；已請使用者確認。
-本機完整版、引擎包、影片及校驗碼均已完成，不受此上傳閘門影響。
+使用者於2026-10-12明確同意將三個引擎包與 `SHA256SUMS.txt` 上傳至
+`wicanr2/kol-remake-cht` 並發布 Release。正式入口為
+[v.1.0.1-20261012](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012)。
+發布後讀回確認 `draft=false`、`prerelease=false`，儲存庫維持 private。
+遠端 tag 已取回，指向 `6d98fb0002029ab834f74f3297c6b03a8d9b8f9b`。
+原先核准審查與後續授權歷程保存在 [WORKLOG.md](../../WORKLOG.md)。
+
+四個附件的本機 SHA-256 及大小先重新核對，再與 GitHub 回傳的 `digest`、`size`
+逐項比對，全部相符；附件狀態均為 `uploaded`，沒有其他附件。
+
+| 附件 | bytes | SHA-256 |
+|---|---:|---|
+| `kol-v.1.0.1-20261012-release-linux-x86_64.AppImage` | 8874488 | `3115f4bd1f0076deab6a8f2b5d52261947d2396f84d644b031af18abe40574f0` |
+| `kol-v.1.0.1-20261012-release-windows-amd64.zip` | 7932941 | `eb8470ec3631acd2a8fcac06739a6fcd7f5cb110761cd3ce4d616935c1c1174a` |
+| `kol-v.1.0.1-20261012-release-macos-universal.zip` | 14825233 | `9170c7c7ee52702013a31c927b1afd438c6a9e212c138ea932097696be82dc6f` |
+| `SHA256SUMS.txt` | 345 | `021fd51dba261899cde1fa8004d9d0ca6e0bc4454b2a8c3ebb9dff15c0c07235` |
+
+完整版、完整手冊譯文與推廣影片留本機。這次只完成既有產物的上傳及發布，沒有重跑遊戲抽樣。

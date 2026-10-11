@@ -4,6 +4,8 @@
 
 2026-10-12 使用者要求三平台完整版、release 與推廣影片。GitHub 已核對仍為 private，
 本次不改可見度。新交付與完整驗收見[本版收據](verification/release-v1.0.1-20261012.md)。
+同日使用者明確同意指定儲存庫的上傳與發布，已完成 private GitHub Release，
+附件僅三個引擎包及 `SHA256SUMS.txt`；遠端完整性與 tag 已核對。
 
 | 內容 | 本版處理 |
 |---|---|

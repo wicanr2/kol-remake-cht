@@ -16,7 +16,8 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 [SPEC-039設定契約](docs/spec/039-hd-art-ui.md#遊戲內畫面設定)升有限CONFORMED；整體HD仍為DRAFT。
 最新交付為 `v.1.0.1-20261012`，三平台完整版已包含此功能，前版保持。
 六包與76秒影片已通過[本版驗收](docs/verification/release-v1.0.1-20261012.md)，發行來源6d98fb00已推送。
-GitHub上傳被自動核准審查拒絕，待確認目的地與上傳授權，尚無Release或tag。
+使用者已明確授權指定目的地與四個附件，[GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012)已發布。
+四個遠端附件的大小與SHA-256相符，tag指向6d98fb00；儲存庫維持private，完整版與影片留本機。
 
 使用者明確修改驗收規則：允許鎖血、提高攻擊與準備場景，重製版抵達對應場景，
 確認中文與畫面正確就通過。依 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)，
@@ -44,7 +45,7 @@ Windows實際ZIP的full／匯入後release繪圖及F10切換通過，十組中�
 macOS雙架構、最低11.0、ARM64簽章及系統相依通過，尚未執行。
 六包與76秒1080p影片完成，十幕目視、影音與來源檢查通過。
 完整版與影片留本機；Release只提供三平台引擎包及其SHA-256，不含素材或完整手冊譯文。
-本版權利審查已更新，GitHub維持private；自動核准審查拒絕上傳，等待使用者確認目的地授權。
+本版權利審查已更新，使用者已明確核准private GitHub Release；正式發布與附件完整性核對完成。
 前版[交付收據](docs/verification/release-v1.0.0-20261011.md)及產物保持，matching維持暫停。
 
 2026-10-08使用者要求暫停目前對拍，改研究原版C的matching decompilation。
@@ -96,7 +97,7 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
 | HD | [首批遊戲接入](docs/verification/hd-runtime-20261011.md)涵蓋旅店門面、六人肖像及戰鬥資訊框；[遊戲內切換](docs/verification/display-switch-runtime-20261012.md)已接入，三張核准畫面、真實鍵鼠、切換後住宿及重載通過 | 首批及設定有限CONFORMED；其他圖層、人物裝備、傷勢遮罩及美術依原批次審查；資料PNG不重繪 |
-| 交付 | `v.1.0.1-20261012`：三平台full／release、76秒1080p影片，入口[本版收據](docs/verification/release-v1.0.1-20261012.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；GitHub待發布；無真機驗收 |
+| 交付 | `v.1.0.1-20261012`：三平台full／release、76秒1080p影片；private GitHub Release已發布，四附件完整性與tag核對通過，入口[本版收據](docs/verification/release-v1.0.1-20261012.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：
 `2a885b9a37e884d1830010f7ccb1051b030fe4b14c678fbb71a25955a745fd66`。
@@ -134,14 +135,14 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **17 條未完成**（13 條沒有機器訊號、標 `manual`），
-  另有 91 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`manual` 13、`present` 4。
+- 目前 **16 條未完成**（12 條沒有機器訊號、標 `manual`），
+  另有 92 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`manual` 12、`present` 4。
 <!-- worklist:stats:end -->
 
-下表列出仍開放的十八個條目。本機封包項已依本版收據結案，其餘完成條件保持。
+下表列出仍開放的工作。本機封包、登記中文場景及GitHub Release已依各自收據結案。
 前版逐項契約見 [逐項稽核](workplace/current-handoff-audit-20261006/gate-audit.json)，
-本輪只新增[本機交付收據](docs/verification/release-v1.0.0-20261011.md)。
+本版交付與發布見[交付收據](docs/verification/release-v1.0.1-20261012.md)。
 
 | 工作識別碼 | 下一閘門 |
 |---|---|
@@ -152,30 +153,26 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 | dosgolem-gui-ai-acceptance | 取得成功怪物拾取的正常原版 GUI；有限反制／側翼／撤退不結案整項 |
 | asset-inventory-format-spec | 三格式原條件保留開放；CGA／Hercules 後續再處理，EGA 首版已完成 |
 | text-layout-remaining-screens | 補未訪城鎮、世界、戰鬥的 CJK 安全矩形 |
-| cjk-remaining-screens | 已按SPEC-040完成登記畫面；其他動態最長文字研究不作HD開工門檻 |
 | cross-platform-build-smoke | 最新來源三平台已重建，Linux／Wine雙語正常鏈及任務保存通過；補macOS執行與平台真機 |
 | longest-cjk-visual-regression | 補其他最長字串的正常路徑、畫面與輸入收據 |
 | windows-macos-real-machine | Windows／macOS 真機啟動並走正常玩家路徑 |
-| github-release | 公開方式及外部發布決定，再依原條件發布 |
 | v01-remaining-battle-chain | 保持 v01-full-battle-parity 的完整裝備、指令、結算及戰後保存條件 |
 | save-across-battle-and-clock | 決定戰鬥中途保存是否新增；世界時間 v3 保存已完成 |
 | ui-details-unverified | 補五處UI未驗邊界及RE-295紮營確認；送禮選人版面、空白法術名、類型0明細與[馬廄確認原型](workplace/steed-trade-normal-20261006/review.html)仍待原問題回答 |
 | mouse-original-semantics | 回答兩次點擊、右鍵、世界點擊三處原有取捨，依選擇實作與驗收 |
 | character-creation-boundary-parity | 重名政策及滿槽／名稱邊界確認，SPEC-005／023 審查後正式修正 |
-| hd-art-ui | 比較既有 [解析度與版面原型](workplace/hd-art-ui-20261004/layout-review.html)；再核對造型、構圖、素材契約、中文、命中區、動畫與各平台封包 |
+| hd-art-ui | 1920×1200、首批門面與六人肖像、遊戲內切換已核准並接入三平台完整版；依[SPEC-039](docs/spec/039-hd-art-ui.md)逐批審查後續素材及動畫 |
 
-已備的 HD 版面比較為 1920×1200 保留 16:10 與 1920×1080 重新配置。
-[手繪樣張](workplace/hd-art-ui-20261004/review.html) 的媒材已核准，整張生成圖未定版。
-[HD工作批次](workplace/hd-art-dependencies-20261006/review.html) 已列圖片與操作畫面的現行依賴；版面原問題保持。
-原有待回答問題保持，不因「GO」新增未展示的產品決定。
-其他版面原型包括 [送禮選人](workplace/gift-recipient-layout-20261005/review.html)
-與 [住宅告示](docs/re/20261006-residence-sign-prototype.md)，仍按各自 DRAFT 閘門處理。
+HD 採已核准的1920×1200原比例。首批及畫面設定已有限CONFORMED，其他批次維持DRAFT，
+後續依[SPEC-039](docs/spec/039-hd-art-ui.md)確認造型與素材，不重新開啟已確認選項。
+[送禮選人](workplace/gift-recipient-layout-20261005/review.html)仍依原DRAFT閘門處理；
+[住宅告示](docs/re/20261006-residence-sign-prototype.md)的兩行「請勿／踐踏草坪」已核准並接入本版。
 
 ## 有效共同決策
 
 | 日期 | 議題 | 已確認決定 |
 |---|---|---|
-| 2026-10-12 | 新版交付 | 三平台完整版、Release與推廣影片；v.1.0.1-20261012包含首批HD及切換，舊版保持；GitHub只上傳引擎包，完整版與影片留本機 |
+| 2026-10-12 | 新版交付及發布 | 三平台完整版、Release與推廣影片；v.1.0.1-20261012包含首批HD及切換，舊版保持；使用者明確核准wicanr2/kol-remake-cht的private Release，只上傳三個引擎包與SHA256SUMS.txt，完整版與影片留本機 |
 | 2026-10-11 | 本機收尾交付 | 使用者授權判斷目前狀況、最多一次抽樣後打包v1.0.0；依規則採v.1.0.0-20261011，保留既有未驗項，不外部發布 |
 | 2026-10-07 | 任務亂數 | 採比較頁已展示的原版共用世界來源；SPEC-008窄切片正式有限CONFORMED |
 | 2026-10-07 | 受阻打暈 | 採原版保留完整持物；成功擊退仍掉物。SPEC-008窄契約已正式有限CONFORMED |

@@ -849,15 +849,21 @@
       "id": "github-release",
       "layer": "release",
       "title": "發 GitHub Release",
-      "body": "v.1.0.1-20261012本機六包、76秒影片及權利審查完成，來源6d98fb00已推送。GitHub維持private；僅預備上傳三個引擎包及SHA256SUMS.txt，完整手冊譯文、完整版與影片不外傳。自動核准審查拒絕gh release create，理由為未明示授權wicanr2/kol-remake-cht目的地與外部上傳；命令未執行，沒有新增Release或tag。已請使用者明確確認，入口docs/verification/release-v1.0.1-20261012.md。",
-      "acceptance": "兩件都決定，Release 發出去。",
+      "body": "v.1.0.1-20261012本機六包、76秒影片與權利審查完成。使用者已明確核准指定private儲存庫wicanr2/kol-remake-cht的上傳及發布；GitHub Release已正式發布，僅三平台引擎包與SHA256SUMS.txt。完整版、完整手冊譯文與影片留本機。四個遠端附件大小及SHA-256全部相符，tag指向6d98fb0002029ab834f74f3297c6b03a8d9b8f9b，入口docs/verification/release-v1.0.1-20261012.md。",
+      "acceptance": "明確核准目的地與附件範圍，正式Release發布，四附件完整性與tag來源核對通過。",
       "verify": {
-        "kind": "manual",
-        "note": "對外動作要使用者點頭，不該由 verify 判。"
+        "kind": "required_in_all",
+        "paths": [
+          "README.md",
+          "docs/verification/release-v1.0.1-20261012.md"
+        ],
+        "pattern": "https://github\\.com/wicanr2/kol-remake-cht/releases/tag/v\\.1\\.0\\.1-20261012",
+        "note": "已發布並讀回遠端狀態、附件digest及tag；本機回歸訊號只保護入口與證據，不代替GitHub現況查詢。"
       },
       "issue": 43,
       "blocking_for_current_closeout": false,
-      "blocked_by": "自動核准審查拒絕外部上傳，待使用者明示GitHub目的地授權"
+      "status": "done",
+      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。"
     },
     {
       "id": "v01-remaining-battle-chain",

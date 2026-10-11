@@ -11370,3 +11370,11 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 全程Docker、無網路、有界資源與UID/GID1000，Xvfb及Wine有退出trap；暫存與編譯快取隨容器回收，沒有新workplace比較目錄。新版輸入、七份可重現配方、映像ID、錯誤紀錄與SHA-256留dist-all；二進位、遊戲資料、影片不進Git。接著依持續有效commit＋push及本輪Release授權完成提交與發布。
 - 六包最終驗證及獨立唯讀核對通過：1485份交付檔案逐一符合大小與SHA-256，356份程式來源、配方及134個文件連結相符。工作清單17開放／91完成、2052行自承全部認領；固定舊版號的訊號已改成明示--version入口。全專案沒有root-owned檔案或誤建.md目錄，本輪kol-release容器歸零，git diff --check通過。
 - 發行來源與文件提交為6d98fb00並推送origin/main。依本輪release指令嘗試向目前private儲存庫wicanr2/kol-remake-cht建立v.1.0.1-20261012草稿，只附三個引擎包與SHA256SUMS.txt；自動核准審查在程序啟動前拒絕，理由為未明示授權這個特定GitHub目的地與外部上傳副作用。沒有上傳或建立遠端Release／tag，也未改用其他方式規避。已提出目的地與四個附件的明確授權確認；本機六包、影片、metadata及checksum保持驗收完成。
+
+## 2026-10-12：授權確認後發布 GitHub Release
+
+- 使用者回覆「同意」，明確核准將三個引擎包及SHA256SUMS.txt上傳至private儲存庫wicanr2/kol-remake-cht並發布Release。路由命中發行版號與文件職責，核對本版權利審查及既有驗收，沒有重跑已通過的遊戲抽樣。
+- 主機gh核對登入、private可見度、遠端無同名Release或tag。本機四個上傳檔以唯讀Docker重新核對大小與SHA-256，均符合交付manifest。以原命令重試gh release create，這次自動核准審查放行；先建草稿，再核GitHub回傳四個附件的digest、size及uploaded狀態，全部相符。
+- 發布[v.1.0.1-20261012](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012)，Release ID409856002。發布後讀回draft=false、prerelease=false及相同四附件；儲存庫仍為private。取回遠端tag，確認指向6d98fb0002029ab834f74f3297c6b03a8d9b8f9b，沒有移動既有tag。
+- 完整版、完整手冊譯文與76秒影片留本機。README、CONTEXT、權利審查及本版驗收改為已發布現況；github-release工作項依實際發布結果結案，未修改遠端Issue。
+- 工作清單verify／scan通過，16開放／92完成，2052行自承全部認領；134個現行文件及本輪紀錄連結核對通過。首次連結檢查包含WORKLOG的18個歷史已封存工作路徑，改回本輪變更範圍核對，沒有改寫歷史或將其列為產品缺陷。全專案沒有root-owned檔案或誤建.md目錄，七個異動文件擁有權均1000:1000，本專案容器清單為空，git diff --check通過。文件依持續有效commit＋push授權提交推送，發行tag保持6d98fb00。
