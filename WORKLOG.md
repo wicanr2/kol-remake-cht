@@ -11357,3 +11357,15 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 89份證據封存至docs/verification/local/display-switch-runtime-20261012，兩份可重建執行檔只留hash。原工作區35800443 bytes，壓縮檔3181256 bytes，SHA-256為2b5362584b6e6cf7065e069c99afc5e1659a88b1540d6cf01b60dfb2f4a4e83d。唯讀容器核對356份Go／module來源、7份工具與素材入口、3PNG及346個文件連結。確認後只刪本輪比較工作區及專用Go快取。
 - 開發程式保留於build/kol-hd，SHA-256為ee40bdc59d8bf970eac5192a483c90807c38308727ae535558e689f52cf37e83，可直接在遊戲內切換。正式v1封包、推廣片、tag及原版研究保持。沿持續有效commit＋push授權提交推送。
 - 全程既有鎖定Docker image、無網路、有界資源、UID/GID1000及Xvfb退出trap。擁有權與容器清理核對通過，沒有root-owned檔案或誤建.md目錄；其他專案與研究工作區未動。工作清單verify／scan及git diff --check通過。
+
+## 2026-10-12：三平台含HD完整版、Release與推廣影片
+
+- 使用者要求打包三平台完整版、release及推廣影片。路由命中remake打包、版號、dist-all、影片、文件與README入口，沿既有重製技能。採v.1.0.1-20261012，舊版不覆寫，玩法、v3與後續HD批次不改。主機gh確認登入及private可見度，沒有既有Release；執行check_repo_visibility.sh通過。
+- 356份Go／module輸入與343c0f87已核准設定版本相符。closeout_release.py改為必填完整版本、依最近收據核來源、帶入assets/hd，macOS版本由完整版號導出。Release不帶完整手冊譯文或任何素材；全資料匯入先核雜湊。權利審查與新版驗收同輪索引，完整版與影片僅本機，GitHub只預備三個引擎包及checksum。
+- 沿既有kol-package與kol-osxcross-go建置Linux AMD64、Windows AMD64、macOS ARM64／Intel universal，六個正式包完成。正式套件通過，vet僅兩則既有未具名book.Label警示。macOS最低11.0、ARM64 ad-hoc簽章及系統相依通過；未執行macOS或平台真機。
+- 本版AppImage唯一正常抽樣seed1，1046狀態、40PNG及13新程序重載狀態、3PNG與前版完整trace相同，v3只差saved_at。預登記只豁免兩個戰鬥顯示清單，實際沒有使用豁免。未重跑抽樣或新增原版oracle。
+- 新增verify_release_runtime.py。實際AppImage的Release匯入、錯誤來源寫入前拒絕、繁中EGA／HD啟動通過；正式GUI工具另驗十五個設定事件、鍵鼠、縮放、缺件回退及切HD後正常住宿，三張核准畫面保持。Wine使用已有eob-remake-wine-verify映像，因本專案Wine映像缺xdotool；實際ZIP的full／匯入後release均可切HD再回EGA，十組中文畫格逐像素相同，旅店與肖像目視通過。
+- Wine前綴父目錄擁有權及未映射視窗焦點屬環境錯誤；保留首輪紀錄，修正隔離目錄及onlyvisible等待後重跑。Linux版本stdout與XGB stderr合併導致假差異，改分開擷取，正常抽樣不重跑。目視發現Windows批次誤用建角script，依既有正式命令改為scene play／play-script，錯頁完整保留，重跑後確認真正旅店及HD人物。正式遊戲程式未因這些腳本錯誤修改。
+- 影片以本版正常抽樣及實際切換的新畫格合成76秒1920×1080、25fps、H.264／AAC。十幕中心及字幕目視通過，峰值-9.8dB、無達門檻黑幀；5至10秒停格與雷聲外靜音依分鏡，不稱連續實機錄影。素材來源、配方、FFprobe與影音檢查隨片保存。
+- 全程Docker、無網路、有界資源與UID/GID1000，Xvfb及Wine有退出trap；暫存與編譯快取隨容器回收，沒有新workplace比較目錄。新版輸入、七份可重現配方、映像ID、錯誤紀錄與SHA-256留dist-all；二進位、遊戲資料、影片不進Git。接著依持續有效commit＋push及本輪Release授權完成提交與發布。
+- 六包最終驗證及獨立唯讀核對通過：1485份交付檔案逐一符合大小與SHA-256，356份程式來源、配方及134個文件連結相符。工作清單17開放／91完成、2052行自承全部認領；固定舊版號的訊號已改成明示--version入口。全專案沒有root-owned檔案或誤建.md目錄，本輪kol-release容器歸零，git diff --check通過。

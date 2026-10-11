@@ -15,15 +15,17 @@ import tempfile
 import zipfile
 
 SRC, OUT = Path('/src'), Path('/out')
-VERSION = 'v.1.0.0-20261011'
-LIMITS = '''這次交付沿現有 EGA／Go 重製版，不是完整原版 parity 的完成聲明。
+VERSION = None  # 必須由 --version 指定，拒絕覆寫既有版本。
+LIMITS = '''本版包含首批 HD 與遊戲內 EGA／HD 切換，不是完整原版 parity 的完成聲明。
 完整戰鬥與全程通關的原版同狀態仍未驗完。
-部分圖片英文、最長中文欄位與建角／滑鼠操作邊界仍有未驗項。
-三項加速細則、戰鬥中途保存與 HD 美術仍未定版。
+已登記場景按 SPEC-040 通過中文與畫面驗收，其他動態分支仍有未驗項。
+HD 首批涵蓋旅店、六人肖像及戰鬥資訊框；其他美術沿 EGA。
+三項加速細則、戰鬥中途保存與後續 HD 美術仍未定版。
 Windows 僅容器 Wine 驗證；macOS 僅交叉編譯與結構驗證，均無真機驗收。
 Linux 容器以 AppImage 解包執行驗證，主機 FUSE 未驗。
 原版 C matching 工作暫停，未納入本次封包。
-完整版、遊戲資料與含原作畫面的推廣影片僅本機保存；沒有公開發布。
+完整版、遊戲資料與含原作畫面的推廣影片僅本機保存。
+GitHub Release 只提供需自行匯入合法資料的引擎包；不改儲存庫可見度。
 '''
 
 
@@ -65,18 +67,22 @@ def prepare():
     program = {str(p.relative_to(SRC)): sha(p) for n in ('cmd', 'internal')
                for p in sorted((SRC / n).rglob('*.go'))}
     program.update({n: sha(SRC / n) for n in ('go.mod', 'go.sum')})
-    old = read(SRC / 'docs/verification/local/platform-quest-rng-20261007/receipt.json')
-    assert program == old['program_inputs'], '現行正式程式與最近驗收不符'
+    accepted = SRC / 'docs/verification/local/display-switch-runtime-20261012'
+    with tarfile.open(accepted / 'evidence.tar.xz') as archive:
+        expected = json.load(archive.extractfile('source-inputs.json'))
+    assert program == expected, '現行正式程式與最近畫面切換驗收不符'
     resources = []
     for bundle in ('full', 'release'):
         base = OUT / bundle
-        for n in ('LICENSE', 'docs/manual', 'docs/i18n', 'docs/re/title-sequence.json',
+        for n in ('LICENSE', 'docs/i18n', 'docs/re/title-sequence.json',
                   'docs/re/town-inn-sample.json', 'docs/re/town-outdoor-sample.json',
                   'docs/re/ida-fingerprints/KOLBOOK-character-writer-summary.json'):
             copy(SRC / n, base / n)
         (base / 'VERSION').write_text(VERSION + '\n')
         (base / 'KNOWN-LIMITATIONS.txt').write_text(LIMITS)
-    for n in ('original-derived-png', 'original-derived-data', 'ui-font', 'audio'):
+    # 說明書完整譯文只留本機完整版，不延伸為 Release 散布授權。
+    copy(SRC / 'docs/manual', OUT / 'full/docs/manual')
+    for n in ('original-derived-png', 'original-derived-data', 'ui-font', 'audio', 'hd'):
         copy(SRC / 'assets' / n, OUT / 'full/assets' / n)
     # runtime 不帶研究 README、反組譯或原版可執行檔；保存既有來源 manifest。
     for p in sorted((OUT / 'full/assets').rglob('*')):
@@ -113,6 +119,8 @@ Linux AppImage 請先 --appimage-extract，從 squashfs-root/tools 匯入至新�
 方向鍵移動；A S Z X 斜走；逗號、句號選下方圖示；Enter 執行；Esc 返回。
 滑鼠點選、右鍵返回、滾輪移動游標。Ctrl+Q 離開。
 介面預設繁中，-lang en 切英文。住宿會保存。
+按 F10 或下緣「畫面」開啟設定，即時切換 EGA／HD；Esc 返回原場景。
+HD 為 1920×1200 首批手繪素材，其他場景沿原畫；切換不改存檔。
 Linux：~/.config/kol-remake-cht/save.dat
 Windows：%AppData%\\kol-remake-cht\\save.dat
 macOS：~/Library/Application Support/kol-remake-cht/save.dat
@@ -121,7 +129,7 @@ macOS：~/Library/Application Support/kol-remake-cht/save.dat
 macOS 未經 Apple 公證，首次開啟可能須於系統設定的隱私權與安全性選仍要打開。
 平台及忠實度限制見 KNOWN-LIMITATIONS.txt。
 程式授權見 LICENSE；原版素材及翻譯不因此取得公開散布權。
-本次只製作本機交付，沒有上傳 GitHub Release 或影片平台。
+完整版與影片只留本機；GitHub Release 僅提供需匯入資料的引擎包。
 '''.format(version=VERSION)
     for bundle in ('full', 'release'):
         (OUT / bundle / 'README.txt').write_bytes(b'\xef\xbb\xbf' + instructions.replace('\n', '\r\n').encode())
@@ -137,21 +145,23 @@ macOS 未經 Apple 公證，首次開啟可能須於系統設定的隱私權與�
         dest = OUT / 'smoke/baseline/formal-save-zh-Hant/complete.json'
         dest.write_bytes(archive.extractfile('formal-save-zh-Hant/complete.json').read())
     write(OUT / 'build-inputs.json', dict(version=VERSION, git_head=args.git_head,
-          program_inputs=program, resources=resources, source_clean_before_packaging=True,
+          program_inputs=program, resources=resources, program_matches_accepted_receipt=True,
           packaging_tools={str(p.relative_to(SRC)): sha(p) for p in
             [SRC / 'tools/closeout_release.py', SRC / 'tools/import_game_data.py', SRC / 'docker/Dockerfile.package']},
           visibility='private; verified by host gh',
+          accepted_source_receipt_sha256=sha(accepted / 'receipt.json'),
+          accepted_source_archive_sha256=sha(accepted / 'evidence.tar.xz'),
           previous_receipt_sha256=sha(baseline / 'receipt.json'),
           previous_archive_sha256=sha(baseline / 'evidence.tar.xz')))
     write(OUT / 'smoke/predeclared.json', dict(version=VERSION, scenario_count=1,
           seed=1, seed_setup='程序啟動前 -seed 1，與保留原版前綴同種子；不重擲',
           route='標題、書本、選隊、任務5戰鬥、逃離、自然ORC遭遇、回城住宿保存、新程序重載',
-          comparator='現行已驗證正式程式的 trace、完整 v3 除 saved_at；不新增原版覆蓋',
+          comparator='前版正常路徑語意 trace、完整 v3 除 saved_at；僅 battle.exec_text 與 battle.encounter_text 允許中文修正；不新增原版覆蓋',
           failure='崩潰、卡住、狀態差異、保存損壞任一項即停止交付',
           baseline_receipt='docs/verification/local/quest-rng-formal-20261007/receipt.json',
           no_forced_win=True, no_state_injection=True, no_ambush_override=True,
           original_execution=False, macos_execution=False, real_machine=False))
-    print('PREPARE PASS: 342 program inputs unchanged; one scenario predeclared', flush=True)
+    print('PREPARE PASS:', len(program), 'accepted program inputs; one scenario predeclared', flush=True)
 
 
 def native():
@@ -251,8 +261,8 @@ exec "$HERE/usr/bin/kol" "$@"
                 run(['convert', str(icon), str(res / 'kol.icns')])
                 (mac / 'Info.plist').write_bytes(plistlib.dumps(dict(
                     CFBundleName='武士傳說', CFBundleDisplayName='武士傳說', CFBundleExecutable='kol',
-                    CFBundleIdentifier='tw.wicanr2.kol-remake-cht', CFBundleVersion='1.0.0',
-                    CFBundleShortVersionString='1.0.0', KOLReleaseVersion=VERSION,
+                    CFBundleIdentifier='tw.wicanr2.kol-remake-cht', CFBundleVersion=VERSION[2:].split('-')[0],
+                    CFBundleShortVersionString=VERSION[2:].split('-')[0], KOLReleaseVersion=VERSION,
                     CFBundlePackageType='APPL', CFBundleIconFile='kol',
                     LSMinimumSystemVersion='11.0', NSHighResolutionCapable=True)))
                 copy(base / 'README.txt', staged / 'README.txt')
@@ -287,7 +297,15 @@ def sample():
         before = sha(smoke / 'save.dat') if purpose == 'reload' else None
         run(cmd, cwd=Path('/tmp'), log=dest / 'run.log', timeout=300)
         actual, expected = read(dest / 'trace.json'), read(reference / 'trace.json')
-        assert actual == expected, purpose + ' trace changed'
+        exact = actual == expected
+        def semantic(trace):
+            trace = json.loads(json.dumps(trace))
+            for step in trace['steps']:
+                for field in ('exec_text', 'encounter_text'):
+                    if 'battle' in step:
+                        step['battle'].pop(field, None)
+            return trace
+        assert semantic(actual) == semantic(expected), purpose + ' semantic trace changed'
         if purpose == 'normal':
             a, b = read(smoke / 'save.dat'), read(base / 'complete.json')
             assert a['schema'] == 'kol-save-v3'
@@ -296,7 +314,7 @@ def sample():
         else:
             assert sha(smoke / 'save.dat') == before, 'reload modified input save'
         report.append(dict(purpose=purpose, states=len(actual['steps']),
-                           pngs=len(list(dest.glob('*.png'))), trace_equal=True))
+                           pngs=len(list(dest.glob('*.png'))), trace_equal=exact, semantic_trace_equal=True))
     write(smoke / 'sampling.json', dict(status='PASS', scenario_count=1, seed=1, runs=report,
           appimage_sha256=sha(image), save_sha256=sha(smoke / 'save.dat'),
           full_v3_equal_except_saved_at=True, original_new_execution=False,
@@ -324,6 +342,11 @@ def verify():
                     assert sha(extracted / row['path']) == row['sha256']
             else:
                 assert not (extracted / 'assets').exists()
+                assert not (extracted / 'docs/manual').exists()
+                forbidden = {'.png', '.ogg', '.pdf', '.jpg', '.jpeg', '.icns', '.zip'}
+                assert not [p for p in extracted.rglob('*') if p.is_file()
+                            and p.suffix.lower() in forbidden
+                            and p.name not in ('kol.png', '.DirIcon', 'kol.icns')]
                 assert (extracted / 'tools/import_game_data.py').is_file()
             report.append(dict(bundle=bundle, platform='linux-x86_64', status='PASS',
                                full_payload_hashes_checked=bundle == 'full'))
@@ -350,6 +373,10 @@ def verify():
                     assert plist['KOLReleaseVersion'] == VERSION
                 if bundle == 'release':
                     assert not any('/assets/' in n for n in names), 'release leaked assets'
+                    assert not any('/docs/manual/' in n for n in names), 'release leaked manual'
+                    assert not [n for n in names if Path(n).suffix.lower() in
+                                ('.png', '.ogg', '.pdf', '.jpg', '.jpeg', '.icns', '.zip')
+                                and Path(n).name not in ('kol.png', '.DirIcon', 'kol.icns')]
                 else:
                     for row in required:
                         n = next(n for n in names if n.endswith('/' + row['path']))
@@ -361,11 +388,14 @@ def verify():
                  for p in sorted((OUT / bundle).rglob('*'))
                  if p.is_file() and p != OUT / bundle / 'manifest.json']
         write(OUT / bundle / 'manifest.json', dict(schema='kol-dist-manifest-v1', version=VERSION,
-              bundle=bundle, rights='僅本機；公開發布另行審查',
+              bundle=bundle, rights=('引擎包；可上傳目前private GitHub；公開散布另行審查'
+                                     if bundle == 'release' else '僅本機；不得上傳或公開散布'),
               platform=['linux/amd64','windows/amd64','darwin/amd64','darwin/arm64'],
               file_count=len(files), files=files))
     for name in ('sampling', 'structures', 'release-smoke', 'windows-smoke'):
         assert read(OUT / 'smoke' / (name + '.json'))['status'] == 'PASS'
+    assert read(OUT / 'smoke/linux-gui/gui-check.json')['passed'] is True
+    assert read(OUT / 'smoke/windows-pixels.json')['status'] == 'PASS'
     assert read(OUT / 'smoke/checks.json')['tests'] == 'PASS'
     assert read(OUT / 'promo/sources.json')['visual_review'] == 'PASS'
     inputs = read(OUT / 'build-inputs.json')
@@ -373,6 +403,8 @@ def verify():
     inputs['final_packaging_tools'] = {str(p.relative_to(SRC)): sha(p) for p in
         [SRC/'tools/closeout_release.py', SRC/'tools/import_game_data.py',
          SRC/'tools/compose_release_promo.py', SRC/'docker/Dockerfile.package']}
+    inputs['runtime_verification_tools'] = {str(p.relative_to(SRC)): sha(p) for p in
+        [SRC/'tools/verify_release_runtime.py', SRC/'tools/verify_display_switch.py']}
     write(OUT / 'build-inputs.json', inputs)
     write(OUT / 'smoke/packages.json', dict(status='PASS', packages=report,
           windows_real_machine=False, macos_execution=False, host_fuse=False))
@@ -387,7 +419,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('phase', choices=('prepare', 'native', 'tests', 'assemble', 'sample', 'verify'))
     parser.add_argument('--git-head', default='')
+    parser.add_argument('--version', required=True)
     args = parser.parse_args()
+    assert re.fullmatch(r'v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}', args.version), '版號格式錯誤'
+    VERSION = args.version
     assert Path('/.dockerenv').exists() and OUT.is_dir()
     assert (OUT.stat().st_uid, OUT.stat().st_gid) == (os.getuid(), os.getgid())
     globals()[args.phase]()

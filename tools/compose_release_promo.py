@@ -13,7 +13,8 @@ from png_io import write_png_rgb
 ROOT, OUT = Path('/src'), Path('/out')
 P = OUT / 'promo'
 W, H, FPS = 1920, 1080, 25
-VERSION = 'v.1.0.0-20261011'
+VERSION = json.loads((OUT / 'build-inputs.json').read_text())['version']
+assert re.fullmatch(r'v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}', VERSION)
 FONT = json.loads((ROOT / 'assets/ui-font/manifest.json').read_text())['fonts'][0]
 GLYPHS = {g['character']: g for g in FONT['glyphs']}
 
@@ -66,6 +67,8 @@ def main():
              caption='繁體中文重製', seconds=6),
         dict(kind='shot', step=3, caption='選擇隊員，開始冒險', seconds=7),
         dict(kind='shot', step=30, caption='組成隊伍，從旅店出發', seconds=7),
+        dict(kind='runtime', file='smoke/linux-gui/game-menu-ega.png', caption='遊戲內開啟畫面設定', seconds=5),
+        dict(kind='runtime', file='smoke/linux-gui/game-menu-hd.png', caption='即時切換 HD，冒險接著走', seconds=7),
         dict(kind='shot', step=125, caption='探索城鎮與野外', seconds=8),
         dict(kind='shot', step=300, caption='逐人規劃，逐手結算', seconds=9),
         dict(kind='shot', step=600, caption='武器、體力與傷勢，決定每一手', seconds=9),
@@ -74,7 +77,7 @@ def main():
              caption='Linux  Windows  macOS', seconds=10),
     ]
     total = sum(s['seconds'] for s in scenes)
-    assert total == 64
+    assert total == 76
     reuse = '--review-existing' in sys.argv
     sources, concat, t = [], [], 0
     for i, scene in enumerate(scenes):
@@ -93,7 +96,7 @@ def main():
                 d = label('需自備合法遊戲資料', 2, (240, 230, 207), name + '-data')
                 command += [str(d), '-geometry', '+0+310', '-composite']
         else:
-            shot = OUT / 'smoke/normal' / f'step-{scene["step"]:03d}.png'
+            shot = OUT / scene['file'] if scene['kind'] == 'runtime' else OUT / 'smoke/normal' / f'step-{scene["step"]:03d}.png'
             assert shot.exists(), shot
             fitted = tmp / f'fit-{i}.png'
             run(['convert', str(shot), '-filter', 'point', '-resize', '1536x800',
@@ -103,7 +106,7 @@ def main():
                         str(a), '-gravity', 'south', '-geometry', '+0+100', '-composite']
             scene['source'] = str(shot.relative_to(OUT))
             scene['source_sha256'] = sha(shot)
-            scene['trace_state'] = trace[scene['step']]['scene']
+            scene['trace_state'] = trace[scene['step']]['scene'] if 'step' in scene else '正式封包，遊戲內畫面設定'
         command += ['-type', 'TrueColor', str(canvas)]
         run(command)
         clip = tmp / f'{i:02d}.mp4'
@@ -154,16 +157,16 @@ def main():
              '-frames:v', '1', '-threads', '2', str(f)])
         frames.append(str(f))
     run(['ffmpeg', '-y', '-v', 'error', '-framerate', '1', '-i', str(P / 'frame-%02d.png'),
-         '-vf', 'scale=640:360,tile=2x4:nb_frames=8:padding=8:margin=8',
+         '-vf', 'scale=640:360,tile=2x5:nb_frames=10:padding=8:margin=8',
          '-frames:v', '1', '-threads', '2', str(P / 'contact-sheet.png')])
     metadata = dict(schema='kol-promo/2', version=VERSION, seconds=total, fps=FPS,
        dimensions=[W,H], video_sha256=sha(video), sources=sources,
-       picture_policy='本版本AppImage唯一正常重播的新截圖與自製文字卡；沒有舊幀、原版對照或假遊玩。',
+       picture_policy='本版AppImage唯一正常重播及遊戲內切換驗證的新截圖與自製文字卡；沒有舊幀、原版對照或假遊玩。',
        audio_source='assets/audio/title-thunder.ogg', audio_sha256=sha(cue),
        audio_policy='只有使用者已接受的遊戲雷聲。沒有配樂；其餘靜音是刻意留白。',
        font_source='assets/ui-font/manifest.json', font_sha256=sha(ROOT/'assets/ui-font/manifest.json'),
        theme='赤石與遊戲點陣字模',
-       freeze_policy='截圖剪輯，各幕6至10秒停留是分鏡；freezedetect逐段保留，不宣稱連續實機錄影。',
+       freeze_policy='截圖剪輯，各幕5至10秒停留是分鏡；freezedetect逐段保留，不宣稱連續實機錄影。',
        volume_peak_db=peak, black_detect='PASS: no interval >=0.3 seconds at specified thresholds',
        rights='原作衍生畫面，僅本機保存，不得當成已取得公開素材權利。',
        visual_review='pending')

@@ -14,8 +14,8 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 
 目前狀態與現行交接見 `CONTEXT.md` 頂部。2026-10-11 使用者授權判斷收尾，
 最多補一次抽樣後製作 v1.0.0 完整版、release 與推廣影片。
-本次交付入口為 `dist-all/v.1.0.0-20261011/`，驗收範圍見
-[本版收據](docs/verification/release-v1.0.0-20261011.md)。
+最新交付入口為 `dist-all/v.1.0.1-20261012/`，包含首批HD與遊戲內切換，驗收範圍見
+[本版收據](docs/verification/release-v1.0.1-20261012.md)。前版保持。
 目前收尾改採 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血、提高攻擊及準備場景，
 抵達後確認中文與畫面即可。登記場景[已通過](docs/verification/controlled-scenes-20261011.md)。
 嚴格原版 parity 與真機仍列後續，保留證據，不作HD開工門檻。
@@ -71,9 +71,9 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：要人判——要人判：操作手感取捨。決定後照原版的項目會有對應的輸入 token 與測試，再改成 absent 或 required_in_all 綁它。
 
 - **hd-art-ui** — 遊戲圖片與操作畫面HD化
-  手繪、1920×1200原比例與首批原型已核准。門面1774×887、六人圖集1536×1024已按實際RGB指紋接入遊戲；-graphics hd啟用。八條路徑98個HD狀態與EGA相同，中文紀錄相同；65張既有EGA圖保持，實際住宿存讀檔、舊v3、自訂圖回退及兩種視窗點選通過。入口docs/verification/hd-runtime-20261011.md。SPEC-039首批有限CONFORMED；其他人物裝備、傷勢遮罩、外框、圖示、地圖與後續批次仍依原計畫審查及驗收。 遊戲內「畫面 F10」切換已核准並接入正式入口。三張設定畫面與核准樣張逐像素相同；鍵鼠、兩種視窗、缺素材中文提示及切換後正常住宿存讀檔通過。入口docs/verification/display-switch-runtime-20261012.md。其他HD批次保持開放。
+  手繪、1920×1200原比例與首批原型已核准。門面1774×887、六人圖集1536×1024已按實際RGB指紋接入遊戲；-graphics hd啟用。八條路徑98個HD狀態與EGA相同，中文紀錄相同；65張既有EGA圖保持，實際住宿存讀檔、舊v3、自訂圖回退及兩種視窗點選通過。入口docs/verification/hd-runtime-20261011.md。SPEC-039首批有限CONFORMED；其他人物裝備、傷勢遮罩、外框、圖示、地圖與後續批次仍依原計畫審查及驗收。 遊戲內「畫面 F10」切換已核准並接入正式入口。三張設定畫面與核准樣張逐像素相同；鍵鼠、兩種視窗、缺素材中文提示及切換後正常住宿存讀檔通過。入口docs/verification/display-switch-runtime-20261012.md。其他HD批次保持開放。 v.1.0.1-20261012三平台封包已包含首批與遊戲內切換；Linux實際AppImage及Wine實際ZIP的EGA／HD與切換通過，macOS只完成universal結構驗證，真機仍未驗。入口docs/verification/release-v1.0.1-20261012.md。
   完成條件：使用者確認樣張及素材契約；圖片來源、權利、尺寸及索引可追溯；依SPEC-040抵達對應HD場景，中文與畫面正確，鍵鼠可用，既有v3可讀；另驗各平台封包。
-  核實：要人判——首批造型、素材尺寸與接入已核准並通過；其他批次的圖層、傷勢遮罩、美術及跨平台封包由本開放項追蹤。
+  核實：要人判——首批及遊戲內切換已核准並通過；三平台封包已重建。其他圖層、傷勢遮罩、後續美術及平台真機仍由本開放項追蹤。
 
 
 ### 接了但沒驗過
@@ -169,10 +169,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：`tools/verify_dist.sh` 找得到 `macOS 要真機` 就是還沒完
 
 - **github-release**（#43） — 發 GitHub Release
-  權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。
-
-  2026-10-11：使用者本次只要求製作封包與影片，已完成本機v.1.0.0-20261011交付，沒有GitHub Release、tag或外部上傳。譯文與影片公開方式仍按既有問題處理。
-  卡在：等使用者決定
+  2026-10-12使用者要求三平台完整版、release與推廣影片。本版v.1.0.1-20261012已完成六包、76秒影片與權利審查。GitHub維持private，僅上傳三個引擎包及SHA-256；完整手冊譯文不放release，完整版與影片只留本機。發行待本輪最後發布步驟，入口docs/verification/release-v1.0.1-20261012.md。
   完成條件：兩件都決定，Release 發出去。
   核實：要人判——對外動作要使用者點頭，不該由 verify 判。
 
@@ -218,7 +215,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
-- **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號：2026-10-11 本機交付驗收通過；不關閉原版parity、真機或GitHub Release項。
+- **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號：2026-10-12本機新版驗收通過；不關閉原版parity或真機項。
 - **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。

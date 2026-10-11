@@ -849,9 +849,8 @@
       "id": "github-release",
       "layer": "release",
       "title": "發 GitHub Release",
-      "body": "權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。\n\n2026-10-11：使用者本次只要求製作封包與影片，已完成本機v.1.0.0-20261011交付，沒有GitHub Release、tag或外部上傳。譯文與影片公開方式仍按既有問題處理。",
+      "body": "2026-10-12使用者要求三平台完整版、release與推廣影片。本版v.1.0.1-20261012已完成六包、76秒影片與權利審查。GitHub維持private，僅上傳三個引擎包及SHA-256；完整手冊譯文不放release，完整版與影片只留本機。發行待本輪最後發布步驟，入口docs/verification/release-v1.0.1-20261012.md。",
       "acceptance": "兩件都決定，Release 發出去。",
-      "blocked_by": "等使用者決定",
       "verify": {
         "kind": "manual",
         "note": "對外動作要使用者點頭，不該由 verify 判。"
@@ -970,20 +969,20 @@
       "id": "dist-rebuild-version-number",
       "layer": "release",
       "title": "由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號",
-      "body": "2026-10-11 使用者授權最多一次抽樣後打包 v1.0.0。本機 v.1.0.0-20261011 已從342份不變正式輸入重建 Linux、Windows AMD64、macOS universal 的 full／release，共六包，另完成64秒1080p影片。十九套件、唯一1046正常／13重載、Linux與Wine實際封包啟動、完整資料與ZIP驗證通過；三包manifest逐檔SHA-256及大小獨立重算。入口 docs/verification/release-v1.0.0-20261011.md。原版parity、真機及公開發布依各原工作項保持。",
+      "body": "v.1.0.1-20261012已從356份核准Go／module輸入重建三平台full／release六包及76秒1080p影片，含中文修正、首批HD與遊戲內切換。正式套件、唯一1046正常／13重載、實際AppImage與Wine ZIP、資料匯入及全部manifest／SHA-256通過。入口docs/verification/release-v1.0.1-20261012.md。前版保持；真機與原版parity由原項追蹤。",
       "acceptance": "版本號定案，用它重建一次並驗收。",
       "verify": {
         "kind": "required_in_all",
         "paths": [
           "tools/closeout_release.py",
-          "docs/verification/release-v1.0.0-20261011.md"
+          "docs/verification/release-v1.0.1-20261012.md"
         ],
-        "pattern": "v\\.1\\.0\\.0-20261011",
-        "note": "本機版號與可重現交付入口回歸；逐檔雜湊另由交付SHA256SUMS.json及三包manifest驗證。"
+        "pattern": "--version",
+        "note": "工具與驗收入口均要求明示--version；完整regex與拒絕覆寫由發行腳本檢查。產物雜湊由SHA256SUMS.json與bundle manifest獨立核對。"
       },
       "issue": 48,
       "status": "done",
-      "resolved": "2026-10-11 本機交付驗收通過；不關閉原版parity、真機或GitHub Release項。"
+      "resolved": "2026-10-12本機新版驗收通過；不關閉原版parity或真機項。"
     },
     {
       "id": "dist-package-sha256-verification",
@@ -1964,11 +1963,11 @@
       "id": "hd-art-ui",
       "layer": "gap",
       "title": "遊戲圖片與操作畫面HD化",
-      "body": "手繪、1920×1200原比例與首批原型已核准。門面1774×887、六人圖集1536×1024已按實際RGB指紋接入遊戲；-graphics hd啟用。八條路徑98個HD狀態與EGA相同，中文紀錄相同；65張既有EGA圖保持，實際住宿存讀檔、舊v3、自訂圖回退及兩種視窗點選通過。入口docs/verification/hd-runtime-20261011.md。SPEC-039首批有限CONFORMED；其他人物裝備、傷勢遮罩、外框、圖示、地圖與後續批次仍依原計畫審查及驗收。 遊戲內「畫面 F10」切換已核准並接入正式入口。三張設定畫面與核准樣張逐像素相同；鍵鼠、兩種視窗、缺素材中文提示及切換後正常住宿存讀檔通過。入口docs/verification/display-switch-runtime-20261012.md。其他HD批次保持開放。",
+      "body": "手繪、1920×1200原比例與首批原型已核准。門面1774×887、六人圖集1536×1024已按實際RGB指紋接入遊戲；-graphics hd啟用。八條路徑98個HD狀態與EGA相同，中文紀錄相同；65張既有EGA圖保持，實際住宿存讀檔、舊v3、自訂圖回退及兩種視窗點選通過。入口docs/verification/hd-runtime-20261011.md。SPEC-039首批有限CONFORMED；其他人物裝備、傷勢遮罩、外框、圖示、地圖與後續批次仍依原計畫審查及驗收。 遊戲內「畫面 F10」切換已核准並接入正式入口。三張設定畫面與核准樣張逐像素相同；鍵鼠、兩種視窗、缺素材中文提示及切換後正常住宿存讀檔通過。入口docs/verification/display-switch-runtime-20261012.md。其他HD批次保持開放。 v.1.0.1-20261012三平台封包已包含首批與遊戲內切換；Linux實際AppImage及Wine實際ZIP的EGA／HD與切換通過，macOS只完成universal結構驗證，真機仍未驗。入口docs/verification/release-v1.0.1-20261012.md。",
       "acceptance": "使用者確認樣張及素材契約；圖片來源、權利、尺寸及索引可追溯；依SPEC-040抵達對應HD場景，中文與畫面正確，鍵鼠可用，既有v3可讀；另驗各平台封包。",
       "verify": {
         "kind": "manual",
-        "note": "首批造型、素材尺寸與接入已核准並通過；其他批次的圖層、傷勢遮罩、美術及跨平台封包由本開放項追蹤。"
+        "note": "首批及遊戲內切換已核准並通過；三平台封包已重建。其他圖層、傷勢遮罩、後續美術及平台真機仍由本開放項追蹤。"
       },
       "blocking_for_current_closeout": false
     }
@@ -2385,8 +2384,8 @@
     },
     {
       "file": "tools/closeout_release.py",
-      "match": "完整戰鬥與全程通關的原版同狀態仍未驗完|部分圖片英文、最長中文欄位與建角／滑鼠操作邊界仍有未驗項|主機 FUSE 未驗|戰鬥中途保存尚未提供",
-      "why": "交付說明沿用既有未驗限制。完整戰鬥由v01-full-battle-parity與v01-remaining-battle-chain追蹤；文字與操作由cjk-remaining-screens、text-layout-remaining-screens及ui-details-unverified追蹤；FUSE由v02-appimage-platform-acceptance追蹤；戰鬥保存由save-across-battle-and-clock追蹤。沒有新增獨立待辦或降低原完成條件。"
+      "match": "完整戰鬥與全程通關的原版同狀態仍未驗完|部分圖片英文、最長中文欄位與建角／滑鼠操作邊界仍有未驗項|主機 FUSE 未驗|戰鬥中途保存尚未提供|其他動態分支仍有未驗項",
+      "why": "交付說明沿用既有未驗限制。完整戰鬥由v01-full-battle-parity與v01-remaining-battle-chain追蹤；文字與操作由cjk-remaining-screens、text-layout-remaining-screens及ui-details-unverified追蹤；FUSE由v02-appimage-platform-acceptance追蹤；戰鬥保存由save-across-battle-and-clock追蹤。沒有新增獨立待辦或降低原完成條件。 動態中文與操作分支由text-layout-remaining-screens及ui-details-unverified認領，後續HD由hd-art-ui認領。"
     },
     {
       "file": "tools/verify_cjk_closeout.py",

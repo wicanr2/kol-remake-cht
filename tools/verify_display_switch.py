@@ -8,7 +8,9 @@ root=Path('/src'); out=Path('/out')
 assert Path('/.dockerenv').exists()
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--binary',type=Path,default=out/'kol')
+parser.add_argument('--output',type=Path,default=out)
 args=parser.parse_args()
+out=args.output
 events=[]
 def xdo(*args):
     events.append(['xdotool',*map(str,args)])
