@@ -1,0 +1,20 @@
+{
+  "tool": "image_gen.imagegen（內建工具）",
+  "model_version": "工具未提供，不推定版本",
+  "date": "2026-10-11",
+  "scope": "可丟棄試作；正式造型與素材契約未核准",
+  "inn": {
+    "references": ["docs/screenshots/zh-town-door.png"],
+    "prompt": "Use case: style-transfer. Asset type: disposable HD hand-painted inn facade for a Knights of Legend Traditional Chinese remake. Input image is a reference screenshot; redraw ONLY the rectangular inn facade viewport on the right, excluding ALL surrounding UI, portrait, coat of arms, date, frame and buttons. Produce a standalone landscape illustration at 1920 by 960 if possible, exactly 2:1 aspect ratio. Preserve the reference facade geometry, centered closed wooden door, red tiled roof, white plaster walls, dark timber framing, left open dark window, right lattice window, shrubs at lower left, gray stone edge at right and flat straight-on camera. Preserve object count and original color identities; no new people, signs, lettering, lamps or fantasy ornaments. Carefully hand-painted 2D game artwork with restrained ink contours, readable brush shading, detailed wood grain, stone and roof tiles, crisp natural edges. Match the already chosen serious early DOS fantasy hand-painted remaster direction. No pixelation, photorealism, depth-of-field, blur, watermark or text. This image is a reversible prototype only; do not redesign the building.",
+    "output": "inn-painted-v1.png",
+    "observed_size": [1774, 887],
+    "limits": "未達 1920×960 目標尺寸；構圖與門窗比例需評審，不作正式替換"
+  },
+  "party": {
+    "references": ["docs/verification/cjk-closeout-20261011/zh-party.png", "workplace/hd-art-ui-20261004/painted-direction.png"],
+    "prompt": "Use case: style-transfer. Asset type: disposable six-character HD portrait asset sheet for a Knights of Legend remake. Reference image 1 is the six-party screenshot: use ONLY the six existing full-body character pictures in its top row, in precisely the same left-to-right order and poses. Reference image 2 is the already selected hand-painted direction board, use it ONLY as a rendering-style guide. Make ONE sprite contact sheet, 1536x1024, exactly THREE columns and TWO rows of equal 512x512 square black-background cells, no gutters, no frames and NO TEXT. Cells 1,2,3 follow the first three characters of image 1; cells 4,5,6 follow the remaining three. Preserve each identity, equipment silhouettes, weapons, facing and palette: first silver armored winged figure with shield, second silver and dark-blue armored swordsman with red cape, third turquoise-clad archer aiming bow to the right, fourth black/silver armored fighter with sword and round shield, fifth silver/red armored short figure with raised sword and shield, sixth royal-blue-clad swordsman with curved sword and round shield. Keep full bodies and feet inside each square with at least 6% black padding. Redraw in controlled hand-painted 2D fantasy style with restrained ink contours, readable metal and fabric brush shading, matching existing reference 2. No added weapons, anatomy, scenery, UI, titles, labels, text, watermark or perspective changes. Prototype only; no final character redesign approval is implied.",
+    "output": "party-painted-v1.png",
+    "observed_size": [1536, 1024],
+    "limits": "第一格改成雙臂交叉且盾牌不明；其餘盔甲細節亦有生成變化。需人物造型評審，不作原版外形一致或正式裝備圖層聲明"
+  }
+}

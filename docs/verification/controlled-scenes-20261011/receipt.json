@@ -1,0 +1,959 @@
+{
+  "schema": "kol-controlled-scenes/1",
+  "date": "2026-10-11",
+  "controlled_scene_acceptance": true,
+  "scope": "SPEC-040 指定場景與中文畫面",
+  "original_parity_claimed": false,
+  "seed": 1,
+  "lock_hp": true,
+  "party_damage_multiplier": 20,
+  "states_per_language": 33,
+  "non_display_differences": [],
+  "party_head_chest_values": [
+    [
+      "16",
+      "16"
+    ],
+    [
+      "16",
+      "16"
+    ],
+    [
+      "16",
+      "16"
+    ],
+    [
+      "16",
+      "16"
+    ],
+    [
+      "16",
+      "16"
+    ]
+  ],
+  "english_render_unchanged_frames": 33,
+  "ending_panels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "capture_results": [
+    {
+      "name": "town-shop",
+      "states": 14,
+      "command": [
+        "/out/kol-sceneverify",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "L RET SPACE > > > > RET D U RET RET SPACE",
+        "-shot-dir",
+        "/out/scenes/town-shop",
+        "-trace",
+        "/out/scenes/town-shop/trace.json",
+        "-text-log",
+        "/out/scenes/town-shop/text.jsonl",
+        "-verify-scenes",
+        "-verify-lock-hp",
+        "-verify-attack",
+        "20",
+        "-load",
+        "/out/inputs/shop.json"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-013",
+        "scene": "play",
+        "step": 13,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 9,
+            "name": "Ludeman Armorers"
+          },
+          "left_town": false,
+          "mode": 2,
+          "town": 1,
+          "x": 23,
+          "y": 52
+        },
+        "verification": {
+          "lock_hp": true,
+          "original_parity_claimed": false,
+          "party_damage_multiplier": 20,
+          "scope": "controlled-scene-ui",
+          "world_start": ""
+        }
+      },
+      "screenshots": 14
+    },
+    {
+      "name": "town-train",
+      "states": 15,
+      "command": [
+        "/out/kol-sceneverify",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "D RET SPACE > > > > RET RET SPACE RET RET 1 RET",
+        "-shot-dir",
+        "/out/scenes/town-train",
+        "-trace",
+        "/out/scenes/town-train/trace.json",
+        "-text-log",
+        "/out/scenes/town-train/text.jsonl",
+        "-verify-scenes",
+        "-verify-lock-hp",
+        "-verify-attack",
+        "20",
+        "-load",
+        "/out/inputs/train.json"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-014",
+        "scene": "play",
+        "step": 14,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 5,
+            "name": "Fortress of Brettle"
+          },
+          "left_town": false,
+          "mode": 2,
+          "town": 1,
+          "x": 53,
+          "y": 53
+        },
+        "verification": {
+          "lock_hp": true,
+          "original_parity_claimed": false,
+          "party_damage_multiplier": 20,
+          "scope": "controlled-scene-ui",
+          "world_start": ""
+        }
+      },
+      "screenshots": 15
+    },
+    {
+      "name": "town-stable",
+      "states": 17,
+      "command": [
+        "/out/kol-sceneverify",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "U RET SPACE > > > > RET D RET RET SPACE > RET > RET",
+        "-shot-dir",
+        "/out/scenes/town-stable",
+        "-trace",
+        "/out/scenes/town-stable/trace.json",
+        "-text-log",
+        "/out/scenes/town-stable/text.jsonl",
+        "-verify-scenes",
+        "-verify-lock-hp",
+        "-verify-attack",
+        "20",
+        "-load",
+        "/out/inputs/stable.json"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-016",
+        "scene": "play",
+        "step": 16,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 8,
+            "name": "Holcroft Stables"
+          },
+          "left_town": false,
+          "mode": 2,
+          "town": 1,
+          "x": 41,
+          "y": 54
+        },
+        "verification": {
+          "lock_hp": true,
+          "original_parity_claimed": false,
+          "party_damage_multiplier": 20,
+          "scope": "controlled-scene-ui",
+          "world_start": ""
+        }
+      },
+      "screenshots": 17
+    },
+    {
+      "name": "town-scroll",
+      "states": 21,
+      "command": [
+        "/out/kol-sceneverify",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "U RET SPACE > > > > RET RET SPACE RET D RET RET > RET > > > RET",
+        "-shot-dir",
+        "/out/scenes/town-scroll",
+        "-trace",
+        "/out/scenes/town-scroll/trace.json",
+        "-text-log",
+        "/out/scenes/town-scroll/text.jsonl",
+        "-verify-scenes",
+        "-verify-lock-hp",
+        "-verify-attack",
+        "20",
+        "-load",
+        "/out/inputs/hostel.json"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-020",
+        "scene": "play",
+        "step": 20,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 17,
+            "name": "The Hostel"
+          },
+          "left_town": false,
+          "mode": 2,
+          "town": 7,
+          "x": 59,
+          "y": 28
+        },
+        "verification": {
+          "lock_hp": true,
+          "original_parity_claimed": false,
+          "party_damage_multiplier": 20,
+          "scope": "controlled-scene-ui",
+          "world_start": ""
+        }
+      },
+      "screenshots": 21
+    },
+    {
+      "name": "quest-take",
+      "states": 17,
+      "command": [
+        "/out/kol-sceneverify",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "U RET SPACE 1 > > > RET n o b j RET SPACE SPACE RET",
+        "-shot-dir",
+        "/out/scenes/quest-take",
+        "-trace",
+        "/out/scenes/quest-take/trace.json",
+        "-text-log",
+        "/out/scenes/quest-take/text.jsonl",
+        "-verify-scenes",
+        "-verify-lock-hp",
+        "-verify-attack",
+        "20",
+        "-load",
+        "/out/inputs/quest-take.json"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-016",
+        "scene": "play",
+        "step": 16,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 7,
+            "name": "Residence",
+            "quest_final": false,
+            "quest_site": 6,
+            "quest_wants": "Ship Wheel"
+          },
+          "left_town": false,
+          "mode": 2,
+          "party": [
+            "Poontang gold=214 wounds=1 reported=0 quests=0,20,0,0,0,0 carried=10",
+            "Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13",
+            "Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14",
+            "Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12",
+            "Sharakan gold=1943 wounds=0 reported=0 quests=1,0,0,0,0,0 carried=10",
+            "Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11"
+          ],
+          "took_quest": {
+            "final": false,
+            "member": 0,
+            "site": 6
+          },
+          "town": 7,
+          "x": 9,
+          "y": 23
+        },
+        "verification": {
+          "lock_hp": true,
+          "original_parity_claimed": false,
+          "party_damage_multiplier": 20,
+          "scope": "controlled-scene-ui",
+          "world_start": ""
+        }
+      },
+      "screenshots": 17
+    },
+    {
+      "name": "quest-list",
+      "states": 12,
+      "command": [
+        "/out/kol-sceneverify",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "U RET SPACE 1 > RET > > > RET SPACE",
+        "-shot-dir",
+        "/out/scenes/quest-list",
+        "-trace",
+        "/out/scenes/quest-list/trace.json",
+        "-text-log",
+        "/out/scenes/quest-list/text.jsonl",
+        "-verify-scenes",
+        "-verify-lock-hp",
+        "-verify-attack",
+        "20",
+        "-load",
+        "/out/inputs/quest-list.json"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-011",
+        "scene": "play",
+        "step": 11,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 7,
+            "name": "Residence",
+            "quest_final": false,
+            "quest_site": 6,
+            "quest_wants": "Ship Wheel"
+          },
+          "left_town": false,
+          "mode": 2,
+          "town": 7,
+          "x": 9,
+          "y": 23
+        },
+        "verification": {
+          "lock_hp": true,
+          "original_parity_claimed": false,
+          "party_damage_multiplier": 20,
+          "scope": "controlled-scene-ui",
+          "world_start": ""
+        }
+      },
+      "screenshots": 12
+    },
+    {
+      "name": "full",
+      "states": 27,
+      "command": [
+        "/out/kol-normal",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "flow",
+        "-flow-script",
+        "SPACE SPACE 5 D RET ESC D RET ESC D D D RET SPACE ESC 6 RET RET RET L R RET RET RET R D",
+        "-shot-dir",
+        "/out/scenes/full",
+        "-trace",
+        "/out/scenes/full/trace.json",
+        "-text-log",
+        "/out/scenes/full/text.jsonl"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-026",
+        "scene": "flow:town",
+        "step": 26,
+        "town": {
+          "door": {
+            "index": 5,
+            "name": "Halfway House"
+          },
+          "left_town": false,
+          "mode": 0,
+          "town": 7,
+          "x": 58,
+          "y": 9
+        }
+      },
+      "screenshots": 27
+    },
+    {
+      "name": "town-mirror",
+      "states": 10,
+      "command": [
+        "/out/kol-normal",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "L R RET SPACE > RET > < RET",
+        "-shot-dir",
+        "/out/scenes/town-mirror",
+        "-trace",
+        "/out/scenes/town-mirror/trace.json",
+        "-text-log",
+        "/out/scenes/town-mirror/text.jsonl"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-009",
+        "scene": "play",
+        "step": 9,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 5,
+            "name": "Halfway House"
+          },
+          "left_town": false,
+          "mode": 2,
+          "town": 7,
+          "x": 57,
+          "y": 8
+        }
+      },
+      "screenshots": 10
+    },
+    {
+      "name": "town-recruit",
+      "states": 15,
+      "command": [
+        "/out/kol-normal",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "L R RET SPACE > > > > > RET RET D U RET",
+        "-shot-dir",
+        "/out/scenes/town-recruit",
+        "-trace",
+        "/out/scenes/town-recruit/trace.json",
+        "-text-log",
+        "/out/scenes/town-recruit/text.jsonl"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-014",
+        "scene": "play",
+        "step": 14,
+        "town": {
+          "at_door": true,
+          "door": {
+            "index": 5,
+            "name": "Halfway House"
+          },
+          "left_town": false,
+          "mode": 2,
+          "party": [
+            "Theodoric gold=1009 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=9",
+            "Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10"
+          ],
+          "town": 7,
+          "x": 57,
+          "y": 8
+        }
+      },
+      "screenshots": 15
+    },
+    {
+      "name": "town-round-trip",
+      "states": 20,
+      "command": [
+        "/out/kol-normal",
+        "-lang",
+        "zh-Hant",
+        "-seed",
+        "1",
+        "-scene",
+        "play",
+        "-play-script",
+        "R R U U U U U U U U U RET R R R R R L RET",
+        "-shot-dir",
+        "/out/scenes/town-round-trip",
+        "-trace",
+        "/out/scenes/town-round-trip/trace.json",
+        "-text-log",
+        "/out/scenes/town-round-trip/text.jsonl"
+      ],
+      "final": {
+        "ending": {
+          "armed": false,
+          "panel": 0
+        },
+        "name": "step-019",
+        "scene": "play",
+        "step": 19,
+        "town": {
+          "left_town": false,
+          "mode": 0,
+          "town": 7,
+          "x": 56,
+          "y": 2
+        }
+      },
+      "screenshots": 20
+    }
+  ],
+  "reused_fixed_scenes": "docs/verification/cjk-closeout-20261011.md：148張展示／建築及正常初次規劃",
+  "reviewed_pngs": [
+    {
+      "file": "shop.png",
+      "sha256": "55436f40f80b1f8c9d187227e2ce9599b5fa98a32ef1a7469d6ba3b2df5b42d1",
+      "frame": "scenes/town-shop/step-010.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "train.png",
+      "sha256": "24bae4ebea74f78ff878b68cbc0a2910214f41f68f90cd3653e284d6af345f32",
+      "frame": "scenes/town-train/step-012.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "stable.png",
+      "sha256": "19669332b6cbb5a45002573a7b4683a6f3cda2ed53d86f24a2cd8242fa0ce6a9",
+      "frame": "scenes/town-stable/step-008.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "spells.png",
+      "sha256": "ee816a09fc301d39ce5d2e2d9eb7e1c7f0f8c6f246dd5da7578114b2a07ab7f7",
+      "frame": "scenes/town-scroll/step-020.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "quest-take.png",
+      "sha256": "86ff4460fdadf057b357280799650e4cacc07d0902013578ed4d1520db7b5304",
+      "frame": "scenes/quest-take/step-013.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "quest-list.png",
+      "sha256": "3f500236ad0d64863c69be293801f4a2d7f8f97f2de33d946a656d61cfb0c80b",
+      "frame": "scenes/quest-list/step-010.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "world-quest.png",
+      "sha256": "ffdd3c604121ffe6267a014b289282783f082145c745eb659015d15745d01f7c",
+      "frame": "battle/zh-Hant/step-000.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "encounter.png",
+      "sha256": "c01c5170228a1864f643b5a6ab94ccc3dedd5e5fcba776818b6eb50b1b5c01ce",
+      "frame": "battle/zh-Hant/step-001.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "planning.png",
+      "sha256": "b68aeb2f497d8833d10ba79cf5a7974131f58b86efcd08d4855879e832c20e42",
+      "frame": "battle/zh-Hant/step-002.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "spoils.png",
+      "sha256": "778ccc92071fa12f927f9dfb60929e722352bff0097679aa52e0fc899a12716e",
+      "frame": "battle/zh-Hant/step-021.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "ending-0.png",
+      "sha256": "e978d511e681644ac9c282eb36cf3eac918ea6c65172f5157777dac844e49b17",
+      "frame": "battle/zh-Hant/step-025.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "ending-1.png",
+      "sha256": "06de6ae2295d5c4210875dc215e901907b740d4776684f79dcbf11ed517ffb39",
+      "frame": "battle/zh-Hant/step-026.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "ending-2.png",
+      "sha256": "f4a8e2c152fae30aa7eb67755d03e4ead34b5efdb61d8c7cff2dc9eee2a95bae",
+      "frame": "battle/zh-Hant/step-027.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "ending-3.png",
+      "sha256": "0d0af7061e9870e8ccb2e2e235a15e1acc28c6ab9e8f86813186eea1a90fd9a0",
+      "frame": "battle/zh-Hant/step-028.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "ending-4.png",
+      "sha256": "387c1bfc223791adc7c1ddf0561a395654cdbffba9a2935f3b1d5d9a66be5ba8",
+      "frame": "battle/zh-Hant/step-029.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "ending-5.png",
+      "sha256": "1211dcb9700541d4497279a18371b0606b787f3d62af9650693f48e4a132127c",
+      "frame": "battle/zh-Hant/step-030.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    },
+    {
+      "file": "ending-6.png",
+      "sha256": "d4d30949b609c50727c1479995abba43f65adc0f4adf6bba7ec7ce9e605166bc",
+      "frame": "battle/zh-Hant/step-031.png",
+      "tool": "kol sceneverify / SPEC-040",
+      "reviewed": true,
+      "rights": "private GitHub 可保存；無公開散布權",
+      "source_entry": "Knights-of-legend.zip 原版角色匯入＋已驗證 PNG 素材",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+    }
+  ],
+  "program_inputs": {
+    "cmd/kol/battle_inventory.go": "782e187b924a29d2f80457a53073ae72312144920d36fcb4d025a3323b8f3b61",
+    "cmd/kol/battle_render.go": "62ddf30b6c5b961d87afe9a94d40ea3598b03e72428eb6713f2e93c347ea4c11",
+    "cmd/kol/bitmap_edit.go": "ffde4033078d7c95e18df3d817b2611c81063b3cfb2e8f818acce83e79f2a69c",
+    "cmd/kol/complete_save.go": "61606227843f422a1e4dd8beb7fa64050e8bff369a3b736045ab001a2e1a7e4d",
+    "cmd/kol/creation_commit.go": "2fd6ca6da6738896be13790a01ea2eb368e429376e49dbf30e8a687966708a6a",
+    "cmd/kol/input.go": "547966ee8adecc16824bc625b5055016b5ff7a3f5723ad9cb01476f9ddd9e01d",
+    "cmd/kol/main.go": "054c690ef0121c15912b6d2fb21dd0315d33675176ff6af1d5f63297a9573baf",
+    "cmd/kol/save_notice.go": "d3b2b9c42d64ed97937af30acaf724ce3a1fd58e51aa1ec36b98f177a79e6639",
+    "cmd/kol/scene_verification_disabled.go": "5da763ecdbce418753730cc82ad7dbb3e99dfe4f5f21b685169dbff2ac56212a",
+    "cmd/kol/scene_verification_enabled.go": "810038ae675dea55b3abf30620f5fe90a25415bbca025a7943b51d9dc61e8c72",
+    "cmd/kol/scripted_rolls.go": "b08279b7ac7b23db41c0f732516a659c71bd7b871e6a155e5b26fa28978671e1",
+    "cmd/kol/title_audio.go": "aa347f9669d9167fa53e05947d87aac326f8eacb54f7d2532ddaac2bc1658df9",
+    "cmd/kol/title_subtitles.go": "17aff7d058f650c283181b9ace871fbda2ffb46032dc45b186742d5c4fa1c65a",
+    "internal/assets/assets.go": "c688ecad99fca6ae69bca106b74ab091eaeccade4044dff10c33492351169873",
+    "internal/battle/ai.go": "c2b397e87c56802adf7371f82bc3905b820770aca60b5f633ffb77d474602346",
+    "internal/battle/ambush.go": "28c190076bc8e1ffe764c04d1370465fd1163c5dbb103238733e75552290bfc4",
+    "internal/battle/arena.go": "0ca52ce8fc80b9fdcbb52ef11f5452479a5c65ad9ba2cbca1d04abb72c85e171",
+    "internal/battle/armour.go": "00c84bae5d96783b8f0a6f5af8df18dddc9f48cfa3f3eee04c45a27e5aa70952",
+    "internal/battle/attack.go": "38a619921c8610ba08171a96981f5b0be2014aa69208fe32d648d4c170ba73bd",
+    "internal/battle/battle.go": "050a6e3e3523e09d0012a5cf0b30dc2c423e0b6c3952b406d8e131bc63badd33",
+    "internal/battle/body_panel.go": "2d98127bdc724fd956defe7fc5f077d23fd6f38cd4fd7db61b9110dca45a4a66",
+    "internal/battle/command_panel.go": "9c45d680574338d5a9a355ac593be68edea8fa27a35c5fc5819500fae44d3be4",
+    "internal/battle/commands.go": "f19e2be27091a08314452bca1ce246d23a8418fd8923c4124221c7ca11e37a0a",
+    "internal/battle/cursor.go": "ac24436607c413b2c171613c02aa85823821baca283a12435c4c8220001f3a1a",
+    "internal/battle/equipment_panel.go": "5aec7f129e1814466ade9bfbf6bdfb5a1447bfc35d98b14be891652cf70d627f",
+    "internal/battle/execution.go": "6fe000f7e8057ca89effe710e813ddbf3c69072987be128b9217757f54c76a7e",
+    "internal/battle/exit.go": "578b48d496e5fc89759d766baa8c00a0331eecfe6922298388a65921802856b9",
+    "internal/battle/fatigue.go": "5f28770cbe1a6aedf8cc3a8f10538fed1f57ff3e9963a38b521b8465be2e0970",
+    "internal/battle/field.go": "79b11b5195609d7b678b8f8e42be0330be8c8d085d5ded03b6172dcfdf7d6f56",
+    "internal/battle/flee.go": "c8cd588fefea86456e4f2aecab094e71403e79d355401055926f791dd5070032",
+    "internal/battle/items.go": "1abe22d36e74935d0447e2b563afda31e894ddea54552a67397180177894c06d",
+    "internal/battle/knockback.go": "faaedcd38db9b7d5a75c156c6606262f2f1c3f7ed3de6ed110617650d4bc0f3f",
+    "internal/battle/loot.go": "b4fdb69f7e2b00a00893eb0279d43aea512dfa5e3d877923d9f51abe9ea75a95",
+    "internal/battle/message.go": "77ebb5f7a2ef3a5c2d0eda6cdf2ce5dbb0dda0600dd2814756b813e506c7d726",
+    "internal/battle/missile.go": "9a875fbb548e0b29791d068fe7c23565a3804ec3a50332a9842930822bcd9da5",
+    "internal/battle/monster.go": "4a8a43f21d9639b612c47ab6f7542f4d90c04585f1fbe4855b2ffab250fcf274",
+    "internal/battle/monster_equipment.go": "39e7b651e841ed66b024ba4e2df2466d30100b840a3efc16cfe954fce2b1cf4b",
+    "internal/battle/monster_ranged.go": "2b5d219aebddf461d8bdd57e5a8aacec1182168a37ae2aa0a1f29fb7101d82d7",
+    "internal/battle/monster_reload_memory.go": "4936ce6672e1259ba2fd1be5c5bc0afcf111bc8fae977ba787c47ed14c0481b2",
+    "internal/battle/planning.go": "0b1093874e8ee7d33b873bce95cece9217a9a810703d2f493a1bbfbd2e8ea0dd",
+    "internal/battle/quest_item.go": "a3085bc6518feb585d51faac12fd071adc1fb889fc4b79d812caf15037908773",
+    "internal/battle/result.go": "05c7bd8832b16c58a56364a92f3c32833465320265f3b0393739cd661d045a46",
+    "internal/battle/return_scratch.go": "9f1201f51b089948813aa8de9f289640dc9afb0b662a725db11776e403b93c18",
+    "internal/battle/rings.go": "dc0d412c99b415ab81362c3e7af36b7072230ddfa7ff0940b2f8a507e9fa16bc",
+    "internal/battle/round.go": "1db3a75408bd2b78c9e3d685655ce6ef5f2c3563e751a4ae60b8fac5f2f4e2d4",
+    "internal/battle/scene_verification_disabled.go": "00525b627a68975fdb3b1fdab6e0457bf27c20790ba5cc09e3a8a5e70b9b17e2",
+    "internal/battle/scene_verification_enabled.go": "d61ea620948801bd9a3ed2f1a8241c7f6e868f75aa4b0dcef44c74be8e01a41e",
+    "internal/battle/scenes.go": "762d5834a84348f8cd3888f797ccc0df4b899e034f946fcf56074815c28e7c0c",
+    "internal/battle/sight.go": "e0a4ccf51e2864dfed36b4403e9deb0346c9b283e24193abca8c4364990d2b24",
+    "internal/battle/spell.go": "06d7440b58702b26b7f668886f656ca86151ef043df430f706e041c52ba355ea",
+    "internal/battle/spoils.go": "23dbe7b91f6697b7c57dddf17df2526b8259b4f2f8dc67b9c88baa18a2afb7fd",
+    "internal/battle/state.go": "b9f1a35bd7331cd84fc47dfcea713c942e644ef904e1c618042ad401a22960f5",
+    "internal/battle/victory.go": "a8c7982b4501f5f4b9227a6d44472c01c8d15d9698d789aeaa0e50fd4929554f",
+    "internal/bitmapedit/bitmapedit.go": "67b10633195d234a6d298359acaa95bfe4ae95b870e385f61848e7b2743cd92b",
+    "internal/book/animation.go": "308b61b4a4fd7d4d73ef15d2059350a578f7fbdfc0d318e4d595623e119bf41b",
+    "internal/book/book.go": "33d29ef9c167f27d70375cfea3d879932bda9d6cf7bd4826c5481c54a016a48a",
+    "internal/book/layout.go": "1c7061f26b306a4b4007c149b46b1fb8923bb025a7d625759ea19ea26a84103c",
+    "internal/book/layout_cjk.go": "723b21c8d028afa2156b93c4324380bdcf2b70c472fe337bc48bbd7b20a44893",
+    "internal/charcreate/charcreate.go": "e25834ff6f18d1ac12571994acabd5518bb6d829319d7978c6d600c02028e313",
+    "internal/chardata/chardata.go": "740df7a665035a64d47586fd12732070c0c89e934784e8243995526c6af23ab1",
+    "internal/chardata/delete.go": "3d8718f91ae33881916d9907523ee7a14293c2ad904d06a4032a312832a23ae6",
+    "internal/chardata/writer.go": "d8b294c97f1f94d00b5389ec49e8d2ebe4502f1ea86223c95da8971ab54ec081",
+    "internal/ending/ending.go": "b6b989d82796fc6ca23f061fd9d50bd78aed5cfb2f1a818f0b12f7df513aaa83",
+    "internal/flow/flow.go": "0c6a294b67e100169ec64fa92c5751de485d32817cbf9664748f2fe38ff5fb9a",
+    "internal/font/font.go": "14b951db9d2dd22aeeea103d54a3c36d60e8b3a95a45e93aa38f70d134e34b4f",
+    "internal/i18n/i18n.go": "7c94b09a13724cb50577738f5401516cf74d6140719c659297dcdb5c12f38337",
+    "internal/i18n/paragraphs.go": "fe8b89cd0d0a7107629fe54b45f8cd399d99e33f18236bfd24d31ebfb53d9975",
+    "internal/input/input.go": "f6dfadc2938c256a858ba9059a793253fc23aff81b6412d562b560cb86823127",
+    "internal/magic/magic.go": "1b3e37ca2f6aaa070397ac0b0ab7b063f95c631137021cf635c04ac6cf1b64b2",
+    "internal/magic/word.go": "5fc5a32d15e4de0529680f6bee08cbc0bd92023c6df7dea61735c5df24579726",
+    "internal/oracle/doc.go": "f71c15d5a6a1342af288e1fafc517caff21b67561e46584850e34b44c91b10ee",
+    "internal/oracle/terrain.go": "37783f94a480256244bc55d866ee6ee4149c132b01d4bd05dfdb6a908b003c84",
+    "internal/portrait/layout.go": "dcae1c3939cd70c9688aba08f5e878714194f2d1c2d6507b3164cd8230508e8e",
+    "internal/portrait/portrait.go": "732917d3917d2325c2058773f7d8c8bd4901db97af7da325e28a11d7fca620d0",
+    "internal/rng/rng.go": "166467cb268924581ab00f181cbdefa40c8f66084764c5328a0a94bf9846b7c6",
+    "internal/roster/delete.go": "fe1a74171c6bdfa3d3db1d78300eeddaaaca135f4fbee6d4737143baf750c8b4",
+    "internal/roster/roster.go": "a143f13efa0de2e5761a3bd87ba90b6de7b726c8d0d32606b338cd6f004431c4",
+    "internal/save/characters.go": "7e3ca10531f11219f3c1fe526d0ae9a68560bf7144325c93e5a29af632441db7",
+    "internal/save/complete.go": "3e09684270d293b4521a150b591d20b163c293064734080782989ed27f1c3b0d",
+    "internal/save/save.go": "28b9f8fabb131b4cf49cb9aced0583ff094fd9ee50e0f1ea350e1e8e138795eb",
+    "internal/screen/screen.go": "1f9a68e58e798c07567b2edb549168dea7caafab8a19ea3e58521b92bef62f20",
+    "internal/title/title.go": "59c66025a806f63a22f1d582458239be9d530f74501528283c5339a93e9e9395",
+    "internal/town/arena.go": "01362d1e8e07b8ed157a915380b50ae8addfbf3aa23ef0c4069fb27b4112839a",
+    "internal/town/buildings.go": "f593af1ecf5d45c64a3ccf51a74ecd50ee9bfdc64fb108725d6e960ca6f9581b",
+    "internal/town/enter.go": "9cbea9b45893d1efae0f742e957694fc0fe6ff37b392faebcd76b416f1af2ead",
+    "internal/town/greet.go": "a49d2345ebe122df24855bdc2ce51ec44d0116802387c50d3e6322cecbcba5db",
+    "internal/town/healing.go": "410e927607d5c8dfff953a9eff9db440dc545b2c266bd8326e928d974881042e",
+    "internal/town/i18n.go": "4addb26ceb0e34ef07b4cd8bc2ab6800c4b9631342f3e7e2bc57ebff27d1910b",
+    "internal/town/inn.go": "5c3c509be956f353824774f46101533c6eab74aae6bd89a426da4d138b495c4e",
+    "internal/town/interior.go": "123d644160942e15964b12f5f0d306c51802266a3522f54d562403ea08bfe46a",
+    "internal/town/inventory.go": "3d0947d925074e960496a8213512531c3983b591c776250b8c99e5d8e69ccbba",
+    "internal/town/itempage.go": "592e07ab3993a32e8713a49c1ab6249f597d4e34a88c177414769446ce67ebad",
+    "internal/town/keys.go": "39156330c9825adfb039203c0781c8222cbe26545a5f3e479c229188fc570d04",
+    "internal/town/layout.go": "d2eaeb2aba41444e26f3218ce3bae0cfb693c14d5043b989db09e2b5f93435b0",
+    "internal/town/marker.go": "7f649c431fb2bb62a0b3090e19186ce25614b3add684d8f086cb412488bbe558",
+    "internal/town/member_snapshot.go": "025e7b842deeb08b5f363ba7f97217ed52180aa520ba4f4a79bb7d1783bc43b1",
+    "internal/town/mouth.go": "1af0f23b6d03e75d3521ff14dd2f5424561f4e8288d2f0af0e4ae1fb7188e9fd",
+    "internal/town/outdoor.go": "896058b46fa98880812d85c528e0a2f965066f8d12690138b3e6b6e4772a7ef3",
+    "internal/town/portrait.go": "5d8cb964af8e793232b6c0e652b677352e4e8a4f0cfcef6216dc9f6c766b8341",
+    "internal/town/quest.go": "ed0e766a58ae2c97ee1cdb92c9257495d3caa9b8a3e7a4b65af86871b480e2a1",
+    "internal/town/quest_offer.go": "679f49066a33905825efd97d4173e1ab125a87a05388714797a2fbb892da0870",
+    "internal/town/questlist.go": "acb3dc5b6fab437bd8c5ceffb5d5b8ad5d18035d72b1097c7fce5f4e9cf12274",
+    "internal/town/recruit.go": "bbf6050637f5874bbf201a9ca078d30a17320f8740a2b6cd045d98327a48136a",
+    "internal/town/rest.go": "5e7360454d9242ce3c19be3c1cb42a0c9a4e70ba39a8e40d962c203e9b5eef41",
+    "internal/town/route.go": "0b0211c6df3519fed64155057f009e008c4891c9e0a4c537f66386f5a0e7a90c",
+    "internal/town/scroll.go": "5190021a82f74e3452f5195b682b6854e0db2505d3f4c7d7d5e7630f5aab54ff",
+    "internal/town/session.go": "045190c19beff9cada7799bf119189bc6766127a7fcb2d38634b5dcf075665d3",
+    "internal/town/sheet.go": "c5b2d1d01518a183289deac80bc2e84c7b35c3c331bb5ca17391ef838403cc8b",
+    "internal/town/sheet_outside.go": "4e1a58579ac2f7604dd795f1fe01e1dc8f5187eb13db4f884ce6a669872d9d57",
+    "internal/town/shop.go": "4c19ef18abec35d1e026bf713bb4b09dd5c7857d59d8b4cb8ab7e183c7e5f181",
+    "internal/town/spelledit.go": "6f6eba4eb075b48d28a6dd5c6b670fb4b13461f96f70515755dc692aa540465e",
+    "internal/town/spelledit_flow.go": "3793aef0a7b6089b40c67e8b640695c2b38b9cc8c0e73873d1d0357d97e028f2",
+    "internal/town/spelledit_page.go": "3de898ee419931a1164d00e907e0df685fb126dbad7251599faa6bb585545e17",
+    "internal/town/spelllist.go": "4cbbaf7f9af2996bf3985e116e4c41fa43184337a34b69f377f65b8025e55973",
+    "internal/town/text.go": "5354a120fbc3d4331a0a4dc13950dca1ac2c11a7a2bf5be208602362fefe96bd",
+    "internal/town/topics.go": "b7ac43fd31adec84d52fc724b0f5a5986772449a7e1299db6762a308e1001828",
+    "internal/town/train.go": "8811f07bdd86782a8e6bd50adf2c34715473b6ea9480638dcc776838a6df220d",
+    "internal/town/uitext.go": "439e3dd562716fd87b8a7545f3cdea00a35423d9e1d87b36e82d195896d68651",
+    "internal/ui/battle.go": "4c0c8769b830668794461263a3f5b3255c246a8cf12797c4dde22b2d622d8093",
+    "internal/ui/battle_body.go": "d368adbb714a87a1a160b701762632334d7c03b06f68bd2e2709a176e88dc4a0",
+    "internal/ui/battle_cjk.go": "0e1cfd8a4324308f31c9c4db7c446d7c1090c180cc87f4a3d7efe4d20ac700ff",
+    "internal/ui/battle_commands.go": "125b9512b50748031d2bf8d64f135d24081f8fb8d2f45a52c7281f7429f56874",
+    "internal/ui/battle_sheet.go": "4d7b28e68e76a1360c9a86e7d16e2d74bfc13770972b2512fb18b4a7e949901e",
+    "internal/ui/battletiles.go": "0603e06c856398c96c5f9849e379ab24823cbf0b623e32aca8dde7856a26f358",
+    "internal/ui/bitmap_editor.go": "605c1f97b4f8ea76444abd0f962b59006810f7b22c0ad040a0db77183ab5ee5b",
+    "internal/ui/custom_bitmap.go": "03981dab48277d888d4fe27d171a58a1fbaf42092e3d3fc7b444b77d3db66f10",
+    "internal/ui/delete.go": "38c3c9c8511fd97d73efff2ab88dd4718c149f07fdbe1bb816006cffca559fd2",
+    "internal/ui/display_name.go": "c06f2aa71b6eef5c1ca7e1d1b13338dbd06b4664ca9141c6e99c836b2ef2dc94",
+    "internal/ui/ending.go": "22aca4ced7fcf789bb04b38b79bba70dfb1338a85c4092570c24e6f77d9b71fb",
+    "internal/ui/harbor.go": "aa89e89d669ac94e80d35fb37d37c62e8c8a0c5753a7e7cf9a516e40c2118ec6",
+    "internal/ui/itempage.go": "da75e8a5ad86d67663cce8c8ba1a58a4a31bd3c6a4eac21ff4d0bb2e73fb16f4",
+    "internal/ui/itempage_cjk.go": "9a1dd8fa3fef2330a93a84b2bd78e2e9ed5f206346fe3dd1f1877bc4da349a59",
+    "internal/ui/itempage_edge.go": "e8cb033bb715cf82d7814441452435db34260bc943bd03552f4ad265aaf9b07d",
+    "internal/ui/menu.go": "83c2697f88d6792d5091b6d755094c86db960e489069117eb3891e1d65e31357",
+    "internal/ui/newcharacter.go": "25d79a7931fc8d29f366e841b980b09c39717b2cdf38d4ddcd43197d4fc08019",
+    "internal/ui/newcharacter_cjk.go": "5065ecabf7af03eb7bb9ad8e2a96003d414f0d98c1d9a7beabc4213fca36236e",
+    "internal/ui/outdoor.go": "4bc6410fb82b150d715f1bd7864679332ee41c552d8c6c5b6689a976e24faab3",
+    "internal/ui/roster.go": "bccf50eba08000b5bf15b680eb2c2b498dc896577362edca2a6b8c25c05e4378",
+    "internal/ui/sheet.go": "905e8cdbd820c50b9f1170b831df531216d291c4b7035fde0ce99326cf7abade",
+    "internal/ui/sheet_cjk.go": "7d9cec86a27419f04e5efd1e9387cfcf1333de5368d72508aa5d191f7c15e584",
+    "internal/ui/spelledit.go": "e2a2e5a7bc249072d7b79a539b3bbed5a7a8049f0a3dc95982989b035f939188",
+    "internal/ui/spelledit_cjk.go": "9f707808fd93fc0dec102c6f33c7d919f231522572d692766c4fe99d1a37683b",
+    "internal/ui/town.go": "59d3438d3319ce47c0b1c10691ab8dc494ecf317dd900b7bd8d4baa677dd7554",
+    "internal/ui/world.go": "04b19bf5b2630e257a39dcf36e07135fbda58bc33f71be59f1bd2c1fabd6bb42",
+    "internal/world/cjk.go": "2f91edc68dc2eef1eecf5caf154856c0806f6337ee7f24ad90c0f5e1397d3e3e",
+    "internal/world/clock.go": "a41808edda2e42280833d2e23f7aa78462d9a5711b0977a9afd286f5af2ee8dd",
+    "internal/world/marker.go": "ffc8ad0bbc0fde960d58c5a660d9cd26ad8a4b3e31b6cd5182637fa7ae7c5a44",
+    "internal/world/names.go": "02a741a4ccaed322a95bef1d7cb7298bc11008382e8d88096040639dd7c1a2bf",
+    "internal/world/return_cost.go": "c2341f21914cdb896064a219d0d733a9b9ebe28c4f5c9c172643f7533ca115e2",
+    "internal/world/road.go": "956369ff478f26fa80a5db2e47baaa3e7047a3fa753471c3710df5f5984fe780",
+    "internal/world/screen.go": "e4a29c473ee5a84be7717cd07367640520603a6d284fe410391b497211a8ea70",
+    "internal/world/session.go": "9d1aa609bdf92439c492766674eff6d3f60de3f4775f9f4906405ff12d8b9315",
+    "internal/world/travel.go": "1add402c229f0ac5c44dfd324412508d7ab6af9a81cac35a3e83e16f4f42a79e",
+    "internal/world/weather.go": "fcbf0ba2bffc06f61f2618abae0ff10e4e3bbbb8ba5c3cb3df04bdf8fc5729d2",
+    "internal/world/world.go": "1b3fecff0b020db2ceca10cc627e7bbc4ad47fd5e6e576cd6600d99c0be03364",
+    "go.mod": "cc34c8b89a45654ece4d044a6c0885a2e253e47a59964f4f05518305ea6a8f2f",
+    "go.sum": "a41876a7ff74fb0563e9c778f91ed08b9c6e92746e0d8bc3ece9adbba4f82e89",
+    "docs/i18n/ui-zh-Hant.json": "c9ff3eddb87ece5c1e10fcd7be050fd72232014f7ea97f33459c5756fff78ed7"
+  },
+  "verification_tool_sha256": "20e3e810a538e1444ef3bab28d47c0c2c26483d8f9af075666c3ebd9ca36e952",
+  "binaries": {
+    "kol-normal": "06db4260840936f0aab1b127e8889b187b051eb092643749e4ec6361c4b8e0ad",
+    "kol-sceneverify": "8551fb346c74d78ed7e9dc9933b360b75127dfc5eff0334a247faa89554bc304"
+  },
+  "tests": [
+    "go test ./cmd/... ./internal/...",
+    "go test -tags sceneverify ./cmd/kol ./internal/battle",
+    "go test ./internal/ui -run TestCJKEndingTextOutsidePictures -count=1"
+  ],
+  "cli_guard_checks": [
+    {
+      "name": "formal-rejects-verification",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "name": "helper-needs-mode",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "name": "verification-rejects-save",
+      "exit_code": 2,
+      "passed": true
+    },
+    {
+      "name": "verification-rejects-range",
+      "exit_code": 2,
+      "passed": true
+    }
+  ],
+  "hd_browser_checks": [
+    {
+      "scene": "inn",
+      "checks": 44,
+      "passed": true,
+      "screenshot": "inn-preview.png",
+      "screenshot_sha256": "7aa893b8d14edac9708eb1842a30225eed4de73c376a91c52eeb81be66ecdfdd"
+    },
+    {
+      "scene": "battle",
+      "checks": 44,
+      "passed": true,
+      "screenshot": "battle-preview.png",
+      "screenshot_sha256": "ce1ffcad69a3153056fcec4530155c25999ef4b2dd00b01af18584e5663d725d"
+    }
+  ],
+  "formal_save_written": false,
+  "limits": [
+    "姓名、玩家輸入及精靈語法術名依現行契約保留",
+    "終端結局完成後空白畫格不列場景通過",
+    "不宣稱所有亂數分支、正常全旅程或原版整場parity",
+    "既有v1封包未重包"
+  ]
+}

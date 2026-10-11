@@ -20,7 +20,8 @@
         "kind": "manual",
         "note": "仍有10原始函式與4999 CODE bytes未還原；Book五與Town5，總量含41函式外bytes及部分CRT的1 byte。依matching-c34-20261010/seed-compiler-units.json保留全部真實CODE來源、純C／混合分類、DATA核對鏈與未匹配試驗。普通C差異不可用ASM補完。workplace/matching-c35-20261010/PLAN.json的五個先行候選與兩份pilot收據已保留，完整C34基準已恢復；另一次無號左值字型候選仍未匹配。依使用者要求先commit與push，目標暫停，來源完成量維持C34。"
       },
-      "status": "open"
+      "status": "open",
+      "blocking_for_current_closeout": false
     },
     {
       "id": "g01-cjk-sheet-pages",
@@ -112,7 +113,8 @@
         "pattern": "狀態：\\*\\*DRAFT\\*\\*|未接敵|尚未回答而替使用者核准|三個已知設定及 UI 控制未接",
         "note": "SPEC-028 的狀態行加它列的三個未決項（未接敵的定義、停止條件、設定保存）；升 READY 並接上時會一起改。"
       },
-      "issue": 5
+      "issue": 5,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "v01-full-battle-parity",
@@ -124,7 +126,8 @@
         "kind": "manual",
         "note": "RE-278正常MOVE464個對齊畫格具有限穩定同相位呈現證據；十張字型已修。受阻規則與舊H候選仍DRAFT，其他戰局、操作、末端隊伍、完整原始記錄及原完成條件保持。新來源長任務／平台由既有回歸工作追蹤。"
       },
-      "issue": 6
+      "issue": 6,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "planning-yes-confirm",
@@ -175,7 +178,8 @@
         "kind": "manual",
         "note": "跨平台驗收沒有本機訊號。與 windows-macos-real-machine 相鄰但不同：那一條是真機，這一條含 FUSE 與推廣。"
       },
-      "issue": 7
+      "issue": 7,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "d01-spec-stale-clauses",
@@ -261,7 +265,8 @@
         "kind": "manual",
         "note": "正常靠近與貼身攻擊、限定舊選項的 300 組局部比較已通過；原來三組差異保留。常式擾動不能取代其餘四種行為的自然戰鬥 GUI 收據。 RE-236僅記正常案例與觀察不干擾；原版同狀態及玩家可見效果仍待驗。 RE-237高列與32位元局部已補，但不得以900組擾動取代正常GUI。 RE-238正常原版起點與兩回合已備妥；未核後續AI，不以局部進場符合取代本項完成。 RE-239兩回合AI輸出局部符合，但跨回合指令與射擊訊息等待資料仍有差異；成功反制、撤退、側翼與撿武器正常GUI尚未完成。 RE-240僅指令清零子切片有限CONFORMED；射擊收尾／傷害等待與成功反制、撤退、側翼、撿武器仍未完成。 RE-241只完成命中與傷害等待時點；12欄指令別名、戰場顯示區與整場仍開放。 RE-242只完成此正常路徑78英文戰場；完整UI、射後別名及整場保持開放。 RE-272固定seed1及385鍵的新原版383狀態、5337骰與269PNG符合父收據。現行341來源雙語39次規劃、11次掃描的40語意欄位與種子零差，第9、11回合兩次成功選中Moraine，後續攻擊與傷害九組英文頁只差既有滑鼠67像素。正常反制掃描本場有限通過；撤退、側翼與成功撿武器仍未驗，整場及完整原始記錄不結案。入口docs/re/20261006-ai-counter-normal.md。 RE-273正常移動首場632原版狀態、5223骰揭露同格倒地Olear遮住站立Moraine的射擊查找。DRAFT候選、READY後修正單一備用查找，340Go／342來源、Linux03509ac1與候選相同。十九套件、正式4474正常／保存／重載狀態及180PNG通過，完整v3只差saved_at；每語言461戰鬥狀態／4149記錄的40語意欄位及seed零差，33規劃／15掃描／4側翼呼叫相符。四次均沒有轉向，成功側翼未驗；35組英文26組除滑鼠相同，9組其他差異保留。新版長任務及平台待回歸，不借RE-270舊341來源；完整原始記錄、撤退及撿武器等原完成條件保持。入口docs/re/20261006-ai-flank-normal.md。"
       },
-      "issue": 11
+      "issue": 11,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "appimage-parity-continuation",
@@ -465,7 +470,8 @@
         "kind": "manual",
         "note": "首版EGA母體已完成；PCGA／HERC尚未驗，為已定案的後續選項。原條目保留開放；不得把它視為首版EGA交付阻塞。三格式擴充需另立母體與gate。"
       },
-      "issue": 22
+      "issue": 22,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "atlas-and-contact-tables",
@@ -701,20 +707,28 @@
         "kind": "manual",
         "note": "版面量測的產物是 JSON 與收據。三份版面表落地時改成 json_len 綁它們的項數。"
       },
-      "issue": 34
+      "issue": 34,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "cjk-remaining-screens",
       "layer": "gap",
-      "title": "城鎮、世界、戰鬥畫面的中文化與職業名暫譯的交叉確認",
-      "body": "顯示名稱、世界提示、資料子頁與戰鬥清單已有局部收據。本輪住宅告示A與中文目錄已接，七項靜態檢查通過；148展示／建築圖已擷取，14條英中路徑各4688狀態相同。競技場76個舊里程碑欄位不同，另14條缺輸入、一條工具逾時。翻書動畫、其餘圖片文字、未訪動態分支與職業／專名仍需核對，不稱全中文完成。來源與限制見docs/verification/cjk-closeout-20261011.md；原有有限正常名稱與最長字串證據保持。",
-      "acceptance": "三種畫面的中文都上得去且不溢出，職業名譯法定案。",
-      "blocked_by": "尚未涵蓋玩家分支、原版圖片內英文與職業／專名交叉確認",
+      "title": "指定場景的繁體中文與畫面驗收",
+      "body": "依使用者2026-10-11決定改採SPEC-040。七城固定建築、書本與建角沿前批收據；本輪新建輸入補商店、訓練、馬廄、法術、任務、戰鬥結算與七段結局。英中受控戰鬥各33狀態零非顯示差異；17張保留PNG目視確認。結局三倍畫布及兩處段落定位已修，七段真實譯文不越界、不碰圖、不互疊。來源docs/verification/controlled-scenes-20261011.md。其他動態最長文字與原版研究由既有工作項保留，非目前收尾門檻。",
+      "acceptance": "SPEC-040已登記場景可用受控條件抵達，中文可辨讀且對應畫面正確。",
       "verify": {
-        "kind": "manual",
-        "note": "要人判：靜態譯表與文字安全矩形只能證明局部覆蓋；完整玩家路徑與動態名稱仍需收據。"
+        "kind": "required_in_all",
+        "paths": [
+          "docs/verification/controlled-scenes-20261011/receipt.json"
+        ],
+        "pattern": "\"controlled_scene_acceptance\": true",
+        "note": "限SPEC-040場景；嚴格原版研究及其他未列出的動態分支不包含在完成聲明。"
       },
-      "issue": 35
+      "issue": 35,
+      "blocking_for_current_closeout": false,
+      "previous_acceptance": "三種畫面的中文都上得去且不溢出，職業名譯法定案。",
+      "status": "done",
+      "resolved": "2026-10-11：依使用者新版場景標準完成，沒有將受控驗收升格為原版parity。"
     },
     {
       "id": "title-thunder-audio-hookup",
@@ -744,7 +758,8 @@
         "kind": "manual",
         "note": "Windows／macOS 的啟動要在那些平台上跑，本機沒有訊號。與 windows-macos-real-machine 相接：那一條是完整驗收，這一條只要求最小啟動。 RE-273正常移動首場632原版狀態、5223骰揭露同格倒地Olear遮住站立Moraine的射擊查找。DRAFT候選、READY後修正單一備用查找，340Go／342來源、Linux03509ac1與候選相同。十九套件、正式4474正常／保存／重載狀態及180PNG通過，完整v3只差saved_at；每語言461戰鬥狀態／4149記錄的40語意欄位及seed零差，33規劃／15掃描／4側翼呼叫相符。四次均沒有轉向，成功側翼未驗；35組英文26組除滑鼠相同，9組其他差異保留。新版長任務及平台待回歸，不借RE-270舊341來源；完整原始記錄、撤退及撿武器等原完成條件保持。入口docs/re/20261006-ai-flank-normal.md。"
       },
-      "issue": 37
+      "issue": 37,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "spec-ready-before-implement",
@@ -792,7 +807,8 @@
         "kind": "manual",
         "note": "視覺回歸的產物是收據。那份收據落地時改綁它。"
       },
-      "issue": 40
+      "issue": 40,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "parity-sampling-registry",
@@ -826,7 +842,8 @@
         "pattern": "macOS 要真機",
         "note": "驗收腳本自己寫明這一段還沒做；真機驗收接上時會改寫。"
       },
-      "issue": 42
+      "issue": 42,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "github-release",
@@ -839,7 +856,8 @@
         "kind": "manual",
         "note": "對外動作要使用者點頭，不該由 verify 判。"
       },
-      "issue": 43
+      "issue": 43,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "v01-remaining-battle-chain",
@@ -894,7 +912,8 @@
         "pattern": "世界時刻及其他戰鬥分支尚未閉合|本子切片的扣時刻／亂數部分尚未授權進正式路徑|完整世界／戰鬥亂數接續尚未驗|正常施法返回仍待驗|正式返回成本追蹤仍待READY審查|追蹤契約仍待完整階段|返回階段觀察尚未通過正式垂直鏈|正常非零攜帶案例仍待抽驗|其他索引及無法讀取State的亂數來源尚未實作|沒有正常表外返回|完整表外別名|未解出的別名回報 false|UnresolvedReturnIndex 記錄仍未實作的表外讀取|該分支保留既有方向成本|上述LastHurt差異仍未完成|父規格保持READY，未驗分支不升格|其他信物正常GUI尚未抽驗|本次進場位置及seed仍有差異|完整首次規劃及怪物裝備變體仍未完成|正常鍵序尚未對齊|繁中法術圖示可視性尚未完成|傷害結果仍印通用效果訊息|多法術捲動|顯示閘門的自然值仍未驗|正常玩家多回合法術鏈仍須獨立驗收|原版正常多回合與自然視野閘門未驗|正常持續法術多回合失效|修改後住宿保存與整體SPEC-035仍待驗|正常名稱輸入.*未完成|原版住宿保存.*未驗|原版名稱.*同狀態仍未知|不涵蓋尚未接線的四套怪物資料|實際射擊及未驗戰鬥入口|50-byte全記錄、原版|完整50-byte、其他裝備|完整資料來源仍未閉合|完整別名讀取來源仍未知|完整射擊仍待驗|正式缺口|後續耗盡未實作|來源尚未閉合，怪物增補保持DRAFT|正常耗盡仍待驗|完整射後裝填別名|原版50-byte全部欄位|八回合閘門未通過|未發生正常耗盡|本切片不能代替整場射擊|完整八回合閘門仍失敗|正常耗盡尚未發生|其他戰鬥仍待驗|父規格保持 READY|正常投石耗盡未發生|正常耗盡未發生|戰後保存仍待驗|整條路徑仍失敗|戰後保存閘門維持|整場戰後保存仍待驗|戰後回城、保存與重載同狀態鏈|返回成本與此新分支戰後保存未驗|原型保持DRAFT，正式受阻規則待使用者確認與READY審查|末端隊伍、完整UI、42別名及全50-byte仍未過|原型保持DRAFT，正式受阻規則待使用者確認與READY審查|末端隊伍、完整UI、42別名及全50-byte仍未過|勝利S結尾正常原版GUI及遭遇原版完整畫格尚未取得|完整UI／滑鼠與勝利S結尾正常GUI仍待驗|受阻原型仍DRAFT|跨場H及戰鬥中途保存保持未知|餘八頁圓環尚待查",
         "note": "RE-254 seed2正常原版與候選返回、六人各17個原始carried槽與持久欄保存重載通過。受阻規則DRAFT待確認，舊H、複數、操作、末端隊伍、全50-byte及其他戰鬥仍待核。"
       },
-      "issue": 44
+      "issue": 44,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "appimage-rebuild-latest-fixes",
@@ -944,7 +963,8 @@
         "kind": "manual",
         "note": "世界時間已由 SPEC-023 的正式 v3 契約保存；戰鬥中途狀態明確排除於該契約。須先釐清原條目是否要新增此功能，再決定規格與驗收；不能把世界時間已完成誤判成整項完成。 RE-213從正常啟動、招募、購買與修改法術，經自然遇敵逃離回旅館，取得原版CHARDATA實際寫檔。原版574狀態、4次正常逃離；從實際檔正常重載及招募7狀態。Olear法術N／Strength、護符與骰式、金冠601及冒險點數2486和雙語重製保存相符。營養欄原版10／重製8；原版三次CAMPING、重製兩次，每次實際+2。差異保留，不宣稱旅程同狀態。雙語正式／觀察各380保存與16重載狀態，1584PNG及可比trace相同；兩人34物品槽與14持久欄位重載相符。正常旅店招呼後seed1，世界、戰鬥與住宿不重設；原版4次遇敵，重製一次，不宣稱整段骰序、整場或整頁parity。正式325份Go／56bfb4c8不變，保存格式v3保持。原版payload只留本機。22未完成／84完成保持。繁中法術注解A／B、怪物四套資料格式及既有未決事項維持原閘門。入口docs/re/20261003-spell-edit-inn-save.md。 本項保持開放。"
       },
-      "issue": 47
+      "issue": 47,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "dist-rebuild-version-number",
@@ -1301,7 +1321,8 @@
         "pattern": "還沒對拍|還沒讀|的畫面還沒對|原版外觀尚未完全對拍|完整清單續畫仍未通過|手持小框.*尚未解|不能宣稱繁中立繪完成|英文清單快取還原.*尚未實作|70張差異尚未改|正常名稱輸入尚未完成|原版名稱輸入嚴格同狀態仍未驗|原版字元接受集及大小寫嚴格同狀態尚未驗|框外差異未豁免|其他字元／空白邊界|整體SPEC-035保持READY|人物頁另有第六名肖像殘留|送禮候選清單的原版版面差異仍未解|法術／任務子頁、坐騎|選收件人版面比較（DRAFT|滑鼠語意仍由原有分支追蹤|滿背包、內層取消、其他物品|新原版引用、原型與所有輸出|新版面是否移除完整姓名清單",
         "note": "鏡像殘留、繁中立繪、手持列號及Theodoric兩條正常清單的x15還原已完成；其他技能列／造型／動作與法術／戰利品仍追蹤，不以歷史差異重新開案。"
       },
-      "issue": 64
+      "issue": 64,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "world-clock-threshold-mechanism",
@@ -1924,7 +1945,8 @@
         "kind": "manual",
         "note": "要人判：操作手感取捨。決定後照原版的項目會有對應的輸入 token 與測試，再改成 absent 或 required_in_all 綁它。"
       },
-      "issue": 106
+      "issue": 106,
+      "blocking_for_current_closeout": false
     },
     {
       "id": "character-creation-boundary-parity",
@@ -1935,18 +1957,20 @@
       "verify": {
         "kind": "manual",
         "note": "keyboardTokens、MenuCreate、commitCreated 尚有三項差異；等待重名政策後審查規格並關閉，不能拿 probe PASS 代替產品完成。"
-      }
+      },
+      "blocking_for_current_closeout": false
     },
     {
       "id": "hd-art-ui",
       "layer": "gap",
       "title": "遊戲圖片與操作畫面HD化",
-      "body": "使用者已選手繪與A：1920×1200保持原比例。RE-229方向及版面原型、RE-294現行804張PNG／43圖組／八批依賴保持。SPEC-039 DRAFT安排旅店、六人肖像、戰鬥規劃的可操作切片與驗收閘門；下一步確認造型、圖層、素材契約及文字／滑鼠。資料PNG與結構遮罩另列，舊v3自訂40×38圖需先展示HD呈現方式。不接正式路徑，未核准造型及素材契約。",
-      "acceptance": "使用者確認樣張及HD範圍；圖片來源與權利、尺寸及索引可追溯；正常玩家路徑的介面、中文最長字串、滑鼠命中區、動畫與存讀檔驗收通過，另驗各平台封包。",
+      "body": "手繪、1920×1200原比例已核准。第一批可操作原型已製作旅店門面1774×887、六人圖集1536×1024、城鎮與戰鬥比較頁；保留來源、完整生成提示與雜湊。Chromium實際載入兩頁，44項鍵鼠／四種比例命中檢查通過。人物第一格手臂及盾牌偏差、門面尺寸、分層裝備與傷勢遮罩待評審，不接正式玩家路徑。入口docs/verification/hd-first-slice-20261011/review.html；SPEC-039整體保持DRAFT。",
+      "acceptance": "使用者確認樣張及素材契約；圖片來源、權利、尺寸及索引可追溯；依SPEC-040抵達對應HD場景，中文與畫面正確，鍵鼠可用，既有v3可讀；另驗各平台封包。",
       "verify": {
         "kind": "manual",
-        "note": "手繪及1920×1200原比例已確認；造型、素材契約與可操作原型未完成，見SPEC-039。"
-      }
+        "note": "第一批可操作原型已開始；正式人物造型、素材尺寸、圖層與傷勢遮罩仍需評審。"
+      },
+      "blocking_for_current_closeout": false
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",
@@ -2378,6 +2402,37 @@
       "file": "docs/spec/039-hd-art-ui.md",
       "match": "人物造型、構圖及正式素材契約尚未確認|此決定不包含尚未展示的造型或素材契約",
       "why": "hd-art-ui已認領，使用者只選媒材與解析度，不擴大成正式美術核准。"
+    },
+    {
+      "file": "docs/verification/hd-first-slice-20261011/review.html",
+      "match": "尚未全數重繪|尚未達目標素材尺寸",
+      "why": "hd-art-ui認領的第一批原型限制，不阻擋已通過的SPEC-040 EGA場景。"
+    },
+    {
+      "file": "docs/verification/hd-first-slice-20261011/prompts.json",
+      "match": "未達 1920×960 目標素材尺寸",
+      "why": "hd-art-ui第一批素材尺寸評審，生成原檔及提示完整保存。"
+    },
+    {
+      "file": "docs/spec/039-hd-art-ui.md",
+      "match": "人物造型、構圖及正式素材契約尚未確認|本計畫升 READY 前不進正式玩家路徑",
+      "why": "hd-art-ui的既有正式接線閘門；本輪只完成可丟棄第一批原型。"
+    },
+    {
+      "file": "tools/verify_controlled_scenes.py",
+      "match": "結局七段尚未全部抵達",
+      "why": "SPEC-040 的失敗斷言。實際七段已全部抵達，收據已核實；斷言本身不是待辦。"
+    },
+    {
+      "file": "tools/verify_controlled_scenes.py",
+      "match": "門面1774×887尚未達目標素材尺寸|外框、NPC、圖示、地圖及傷勢人形尚未HD重繪",
+      "why": "HD 試作的尺寸與未繪範圍，由既有 hd-art-ui 開放項追蹤，不宣稱正式 HD 完成。"
+    },
+    {
+      "file": "docs/spec/040-controlled-scene-acceptance.md",
+      "match": "^無法抵達或畫面有問題的項目保持失敗／未驗，不因降低門檻自動通過。$",
+      "why": "使用者新驗收規則的失敗判準，並非已發生或待修缺陷。"
     }
-  ]
+  ],
+  "current_acceptance": "SPEC-040：受控場景，中文與畫面正確即可；完整原版對拍不阻擋HD。"
 }

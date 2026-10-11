@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>武士傳說 HD 第一批原型</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101014;color:#ece5d9;font:16px/1.6 system-ui,"Noto Sans CJK TC",sans-serif}main{max-width:1320px;margin:auto;padding:24px}h1{font-size:24px;margin:0 0 8px}p{margin:8px 0}a{color:#a5d6f7}button{font:inherit;background:#30272b;color:inherit;border:1px solid #8e6b63;border-radius:4px;padding:6px 14px;cursor:pointer}button[aria-pressed=true]{background:#863d32}nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.stage{width:100%;aspect-ratio:16/10;background:black;position:relative}canvas{display:block;width:100%;height:100%}output{display:block;min-height:32px;margin-top:8px}details{margin:16px 0}code{color:#d5baa4}.capture main{padding:0;max-width:none}.capture h1,.capture p,.capture nav,.capture output,.capture details{display:none}.capture .stage{width:100vw;height:100vh;aspect-ratio:auto}.capture canvas{object-fit:contain}
+</style>
+<main>
+<h1>武士傳說 HD 第一批原型</h1>
+<p>1920×1200，保持原比例。這一批確認旅店門面、六人肖像及戰鬥區域。可切換原畫，點選隊員及操作列。</p>
+<nav aria-label="原型場景">
+<button data-scene="inn" aria-pressed="true">旅店門面</button>
+<button data-scene="party" aria-pressed="false">六人肖像</button>
+<button data-scene="battle" aria-pressed="false">戰鬥規劃</button>
+<button id="toggle" aria-pressed="false">顯示 EGA 對照</button>
+<button id="regions" aria-pressed="false">顯示文字與操作區</button>
+</nav>
+<div class="stage"><canvas width="1920" height="1200" tabindex="0" aria-label="HD 場景比較；按數字一至六選隊員，左右鍵選操作，Enter 確認"></canvas></div>
+<output aria-live="polite">原型載入中。</output>
+<details><summary>本批範圍與限制</summary><p>旅店門面及六人肖像為新手繪試作。紅色外框、NPC、圖示、傷勢人形及戰場仍引用 EGA，尚未全數重繪。操作只切換原型狀態，不執行遊戲規則。傷勢遮罩、組合裝備與舊存檔肖像另作下一批。</p><p>門面來源實際 1774×887，六人圖集 1536×1024。前者尚未達目標素材尺寸，不把畫布放大稱為正式 HD 資產。人物細節與姿勢需對照確認，尤其首位的雙臂與盾牌。</p></details>
+<p><a href="../../spec/039-hd-art-ui.md">HD 工作計畫</a> · <a href="manifest.json">圖片來源與雜湊</a> · <a href="prompts.json">生成提示</a></p>
+</main>
+<script>
+'use strict';
+const params=new URLSearchParams(location.search);
+if(params.has('capture'))document.body.classList.add('capture');
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),output=document.querySelector('output');
+const sources={inn:'../../screenshots/zh-town-door.png',party:'../cjk-closeout-20261011/zh-party.png',battle:'../cjk-closeout-20261011/zh-battle.png',paintedInn:'inn-painted-v1.png',paintedParty:'party-painted-v1.png',direction:'approved-direction.png'};
+const images={},state={scene:params.get('scene')||'inn',ega:false,regions:false,member:0,command:0};
+const names=['Theod','Poont','Olear','Morai','Fight','Kenne'];
+const commands={inn:['進門','返回'],party:['進門','組隊','聆聽','交談','休息'],battle:['圖示 1','射擊','圖示 3','圖示 4','移動','休息']};
+// 原型座標由 960×600 畫格乘二。正式唯一座標契約仍須接回 Go 呈現層。
+const partyRects=names.map((_,i)=>[84+i*288,6,256,288]);
+const commandRects=Array.from({length:7},(_,i)=>[192+i*192,1020,144,136]);
+const textRects={inn:[620,350,1152,576],party:[620,510,1152,400],battle:[104,48,748,160]};
+function inside(x,y,r){return x>=r[0]&&y>=r[1]&&x<r[0]+r[2]&&y<r[1]+r[3]}
+function toLogical(clientX,clientY,b=canvas.getBoundingClientRect()){
+ const scale=Math.min(b.width/1920,b.height/1200),ox=(b.width-1920*scale)/2,oy=(b.height-1200*scale)/2;
+ return [(clientX-b.left-ox)/scale,(clientY-b.top-oy)/scale];
+}
+function hit(x,y){
+ if(state.scene!=='battle')for(let i=0;i<partyRects.length;i++)if(inside(x,y,partyRects[i]))return {kind:'member',index:i};
+ for(let i=0;i<commands[state.scene].length;i++)if(inside(x,y,commandRects[i]))return {kind:'command',index:i};
+ return null;
+}
+function outline(r,color){ctx.strokeStyle=color;ctx.lineWidth=4;ctx.strokeRect(...r)}
+function render(){
+ ctx.fillStyle='#000';ctx.fillRect(0,0,1920,1200);ctx.imageSmoothingEnabled=false;
+ ctx.drawImage(images[state.scene],0,0,1920,1200);
+ if(!state.ega){
+  ctx.imageSmoothingEnabled=true;
+  if(state.scene==='inn')ctx.drawImage(images.paintedInn,624,348,1152,576);
+  if(state.scene==='inn'||state.scene==='party'){
+   ctx.imageSmoothingEnabled=false;ctx.drawImage(images.party,0,0,960,150,0,0,1920,300);ctx.imageSmoothingEnabled=true;
+   partyRects.forEach((r,i)=>ctx.drawImage(images.paintedParty,(i%3)*512,Math.floor(i/3)*512,512,512,r[0]+4,r[1]+4,r[2]-8,232));
+  }
+  if(state.scene==='battle'){
+   // 只替換 Olear 的試作立繪。戰場、隊員及敵人位置、傷勢人形與六格指令全部保留原畫。
+   ctx.fillStyle='#000';ctx.fillRect(100,70,716,384);
+   ctx.drawImage(images.paintedParty,1024,0,512,512,260,80,368,368);
+  }
+ }
+ if(state.scene!=='battle')outline(partyRects[state.member],'#ffffff');
+ outline(commandRects[state.command],'#ffffff');
+ if(state.regions){partyRects.forEach(r=>outline(r,'#72dbaf'));commands[state.scene].forEach((_,i)=>outline(commandRects[i],'#69b5ff'));outline(textRects[state.scene],'#ffe08b')}
+ output.textContent=`${state.ega?'EGA 對照':'手繪試作'} · ${state.scene==='inn'?'旅店門面':state.scene==='party'?'六人肖像':'戰鬥規劃'} · ${state.scene==='battle'?'Olear':names[state.member]} · ${commands[state.scene][state.command]}`;
+ document.querySelectorAll('[data-scene]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scene===state.scene)));
+}
+function select(h){if(!h)return;if(h.kind==='member')state.member=h.index;else state.command=h.index;render()}
+canvas.addEventListener('click',e=>select(hit(...toLogical(e.clientX,e.clientY))));
+canvas.addEventListener('keydown',e=>{
+ if(/^[1-6]$/.test(e.key))select({kind:'member',index:Number(e.key)-1});
+ else if(e.key==='ArrowRight'||e.key==='ArrowLeft'){state.command=(state.command+(e.key==='ArrowRight'?1:-1)+commands[state.scene].length)%commands[state.scene].length;render();e.preventDefault()}
+ else if(e.key==='Enter'){output.textContent=`已確認：${commands[state.scene][state.command]}。這是介面原型。`;e.preventDefault()}
+});
+document.querySelectorAll('[data-scene]').forEach(b=>b.onclick=()=>{state.scene=b.dataset.scene;state.command=0;render()});
+document.querySelector('#toggle').onclick=e=>{state.ega=!state.ega;e.currentTarget.setAttribute('aria-pressed',String(state.ega));render()};
+document.querySelector('#regions').onclick=e=>{state.regions=!state.regions;e.currentTarget.setAttribute('aria-pressed',String(state.regions));render()};
+function selftest(){
+ const checks=[];const save={...state};
+ for(const [w,h] of [[1920,1200],[1920,1080],[960,600],[1280,800]]){
+  const b={left:13,top:17,width:w,height:h},sc=Math.min(w/1920,h/1200),ox=(w-1920*sc)/2,oy=(h-1200*sc)/2;
+  for(let i=0;i<6;i++){state.scene='party';const r=partyRects[i],x=r[0]+r[2]/2,y=r[1]+r[3]/2;
+   const p=toLogical(b.left+ox+x*sc,b.top+oy+y*sc,b),got=hit(...p);checks.push(got?.kind==='member'&&got.index===i)}
+ }
+ for(const scene of Object.keys(commands)){state.scene=scene;commands[scene].forEach((_,i)=>{const r=commandRects[i];const got=hit(r[0]+5,r[1]+5);checks.push(got?.kind==='command'&&got.index===i)})}
+ ctx.font='32px "Noto Sans CJK TC",sans-serif';for(const label of ['請勿踐踏草坪','開始下一回合？','繁體中文介面驗收'])checks.push(ctx.measureText(label).width<600);
+ state.scene='party';state.command=0;const b=canvas.getBoundingClientRect(),r=partyRects[2],sc=Math.min(b.width/1920,b.height/1200);
+ canvas.dispatchEvent(new MouseEvent('click',{clientX:b.left+(b.width-1920*sc)/2+(r[0]+10)*sc,clientY:b.top+(b.height-1200*sc)/2+(r[1]+10)*sc}));checks.push(state.member===2);
+ canvas.dispatchEvent(new KeyboardEvent('keydown',{key:'6'}));checks.push(state.member===5);
+ canvas.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight'}));checks.push(state.command===1);
+ canvas.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter'}));checks.push(output.textContent.includes('已確認'));
+ Object.assign(state,save);render();
+ document.body.dataset.tests=checks.every(Boolean)?'PASS':'FAIL';document.body.dataset.checkCount=checks.length;
+ document.body.dataset.assets=Object.keys(images).length;window.hdPrototype={state,hit,toLogical,checks};
+}
+Promise.all(Object.entries(sources).map(([key,url])=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{images[key]=img;resolve()};img.onerror=()=>reject(Error(url));img.src=url})))
+ .then(()=>{selftest();document.body.dataset.ready='true'})
+ .catch(err=>{output.textContent='原型素材無法載入：'+err.message;document.body.dataset.tests='FAIL'});
+</script>
+</html>

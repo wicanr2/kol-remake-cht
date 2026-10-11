@@ -1,22 +1,26 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-10-11。開發來源新增住宅告示 A 與中文目錄，既有 v1.0.0 封包保持。
-HD 已選手繪、1920×1200 原比例，計畫為 SPEC-039 DRAFT。完整重製尚未完成。
+更新日期：2026-10-11。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
+HD 已選手繪、1920×1200 原比例，第一批可操作原型已開始；正式美術契約仍為 DRAFT。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
 ## 目前作業方向
 
-使用者後續授權 commit／push、再一批功能與中文核查、README 新截圖與背景，以及 HD 規劃。
-既有收尾已以 `f1944666` 推送。新核查見[本輪收據](docs/verification/cjk-closeout-20261011.md)：
-最終 Go 回歸及七項中文靜態檢查通過，148 張展示／建築圖成功；14 條英中路徑各 4,688 狀態
-的非顯示資料相同。固定原版正常六人路徑重跑成功；114 個旅行比較點及首次戰鬥有限欄位／視窗相符。
-競技場舊路徑有 76 個里程碑欄位差異，不列為功能通過；另 14 條缺歷史輸入，一條長任務工具逾時。
-住宅告示三區符合使用者核准 A，英文及區外零差；正常住宅長路徑本輪未到原終點。
-中文目錄正常進出、字模及英文不變已驗，翻書動畫及未訪分支仍未全覆蓋。
-README 已改用本輪畫格並加入手冊來源的遊戲背景。所有新 PNG 仍限目前 private GitHub。
-使用者已選 HD 版面 A；[SPEC-039](docs/spec/039-hd-art-ui.md)規劃最小可操作切片、八批素材與驗收閘門，
-造型及素材契約仍待原型確認，尚未接入正式 HD。原版 C matching 維持暫停。
+使用者明確修改驗收規則：允許鎖血、提高攻擊與準備場景，重製版抵達對應場景，
+確認中文與畫面正確就通過。依 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)，
+[受控收據](docs/verification/controlled-scenes-20261011.md)已確認六種服務／任務頁、
+戰鬥規劃、執行、勝利、戰利品及七段結局；書本、建角、七城建築重用前批固定畫面。
+新戰鬥採 seed1、隊伍鎖血、命中後傷害20倍，英中各33狀態非顯示差異0，英文33張圖不變。
+結局中文原版小座標及兩處段落行數造成的重疊已修，七段真實譯文的畫布／圖框／文字檢查通過。
+舊缺輸入、長流程逾時與競技場里程碑差異保留在[前批收據](docs/verification/cjk-closeout-20261011.md)，
+不再作本輪收尾或 HD 開工門檻，不將它們改寫成原版對拍通過。
+
+HD 第一批[比較原型](docs/verification/hd-first-slice-20261011/review.html)已提供手繪旅店、六人肖像，
+以及替換 Olear 立繪的戰鬥頁。1920×1200 預覽、四種比例座標與實際鍵鼠事件共44項檢查通過。
+首位姿勢／盾牌及門面素材尺寸尚需評審；外框、圖示、戰場與傷勢遮罩尚未重繪。
+正式素材仍依 [SPEC-039](docs/spec/039-hd-art-ui.md)審查。所有 PNG 限目前 private GitHub。
+原版 C matching 維持暫停；既有 `v.1.0.0-20261011` 封包不覆寫。
 
 2026-10-11 使用者授權判斷收尾狀況，最多補一次抽樣，打包 v1.0.0 完整版、release 與推廣影片。
 目前採 `v.1.0.0-20261011`，沿現行 EGA／Go 正式來源。既有正常路徑與跨平台回歸足以開始本次打包；
@@ -61,8 +65,8 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 340份Go、342份程式輸入；最新只改中文住宅告示與靜態目錄呈現，既有規則／v3保持；[中文核查](docs/verification/cjk-closeout-20261011.md)另記來源及兩階段候選 | v1.0.0已交付包未包含這兩項修正；原始記錄未知欄位及整場末端仍未閉合 |
-| 最近測試 | v1.0.0 十九套件通過；唯一繁中封包抽樣1046正常狀態、13新程序重載、43PNG，完整trace及v3除saved_at符合前版 | 不增加原版覆蓋；兩則既有go vet未具名欄位警示保留；末端只驗remake |
+| 正式來源 | 346份Go；新增獨立 sceneverify 建置及中文結局呈現修正；[受控收據](docs/verification/controlled-scenes-20261011/receipt.json)保存程式與輸入雜湊 | 正式建置不含輔助旗標；v1.0.0已交付包未包含後續中文修正 |
+| 最近測試 | 正式套件、sceneverify 戰鬥與適配器通過；七段真實結局譯文不越界、不碰圖框、不互疊；英中受控戰鬥33狀態零非顯示差異 | 場景驗收，不新增原版整場parity；平台真機未新增 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
 | 跨平台 | [前版回歸](docs/verification/platform-quest-rng-20261007.md)：現行來源Linux逐byte重生、Windows AMD64及macOS兩架構／universal建置通過；Linux／Wine原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG符合基準；本版六個封包另見[交付驗收](docs/verification/release-v1.0.0-20261011.md) | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
@@ -73,9 +77,9 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 送禮 | [SPEC-031 第17節](docs/spec/031-item-detail-page.md) ENTER／SPACE 確認與完整物品搬移已正式驗收；六人確認畫面漏繪已修 | 選收件人版面、滿背包、內層取消及類型 0 明細仍有 DRAFT 分支 |
 | 標題音訊 | 使用者已聆聽接受；[SPEC-004](docs/spec/004-ogg-audio-catalog.md) 與 [RE-228](docs/re/20261004-title-audio-runtime.md) 已完成有限正式 OGG 播放驗收 | 硬體時序為規格近似，不宣稱逐波形或實機時鐘一致 |
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
-| 中文與版面 | [RE-261](docs/re/20261006-cjk-v2-name-population.md) 名稱字寬核對與 [RE-286](docs/re/20261006-world-prompt-longest.md) 正常最長世界提示證據保留；[RE-285](docs/re/20261006-sheet-subpages.md) 法術／任務子頁已有限抽驗 | 未訪畫面、圖片內英文、其他最長字串、職業／專名及完整名牌仍需核對 |
+| 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | 使用者選定手繪、1920×1200原比例；[SPEC-039](docs/spec/039-hd-art-ui.md)規劃最小完整切片與八批繪圖依賴；原804張PNG、43圖組保持 | 造型、構圖、素材契約與正式整合尚未核准；資料PNG與結構遮罩另列 |
+| HD | [第一批可操作原型](docs/verification/hd-first-slice-20261011/review.html)：旅店、六人肖像、戰鬥；手繪1920×1200畫布；44項鍵鼠與縮放檢查通過 | 門面原圖1774×887；造型、圖層、傷勢遮罩及正式接線待評審；資料PNG不重繪 |
 | 交付 | `v.1.0.0-20261011`：三平台full／release、64秒1080p影片，入口[本版收據](docs/verification/release-v1.0.0-20261011.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；沒有外部發布、tag或真機驗收 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：
@@ -86,12 +90,13 @@ Windows／macOS最新來源已重建；完整雜湊及限制見[平台回歸](do
 
 ## 完成標準與證據限制
 
-使用者要求全部玩家可見文字有繁體中文，手冊功能與機制須逐項核對原版。
-尚未通過全部閘門，既有候選不能稱為完整重製或全中文完成。
+目前收尾以使用者 2026-10-11 指定的 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)為準。
+已登記場景的中文與畫面驗收通過，即可進 HD。舊正常長流程與嚴格原版對拍不再阻擋。
+本結論只涵蓋收據中的場景；不宣稱所有亂數分支、正常全旅程或嚴格原版一致。
 
 2026-09-26 已決定驗收機制一致：場景、座標、遭遇、訊息記錄、勝負及保存欄位。
 截圖作視覺核對，不要求整張畫面逐位元相同。不同旅程或亂數條件不能冒充同狀態。
-測試通過只支持該收據範圍；局部呈現、常式與觀察副本不能取代正常玩家路徑。
+這是歷史原版研究的判準。研究收據保留原等級，與目前受控場景完成條件分開。
 
 | 分類 | 判定 |
 |---|---|
@@ -113,9 +118,9 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **18 條未完成**（14 條沒有機器訊號、標 `manual`），
-  另有 90 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`manual` 14、`present` 4。
+- 目前 **17 條未完成**（13 條沒有機器訊號、標 `manual`），
+  另有 91 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`manual` 13、`present` 4。
 <!-- worklist:stats:end -->
 
 下表列出仍開放的十八個條目。本機封包項已依本版收據結案，其餘完成條件保持。
@@ -131,7 +136,7 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 | dosgolem-gui-ai-acceptance | 取得成功怪物拾取的正常原版 GUI；有限反制／側翼／撤退不結案整項 |
 | asset-inventory-format-spec | 三格式原條件保留開放；CGA／Hercules 後續再處理，EGA 首版已完成 |
 | text-layout-remaining-screens | 補未訪城鎮、世界、戰鬥的 CJK 安全矩形 |
-| cjk-remaining-screens | 補全部玩家中文路徑，核對職業／專名與動態名稱 |
+| cjk-remaining-screens | 已按SPEC-040完成登記畫面；其他動態最長文字研究不作HD開工門檻 |
 | cross-platform-build-smoke | 最新來源三平台已重建，Linux／Wine雙語正常鏈及任務保存通過；補macOS執行與平台真機 |
 | longest-cjk-visual-regression | 補其他最長字串的正常路徑、畫面與輸入收據 |
 | windows-macos-real-machine | Windows／macOS 真機啟動並走正常玩家路徑 |

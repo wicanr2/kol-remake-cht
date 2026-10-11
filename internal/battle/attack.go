@@ -452,9 +452,14 @@ func finishDamage(a *Actor, d *Actor, style, margin int, rng Rand) Outcome {
 	location := HitLocation(locationStyle, rng.Roll(AttackRoll))
 	rawDamage := damage
 	damage = d.AbsorbArmour(damage, location, rng)
+	absorbed := rawDamage - damage
+	damage = sceneVerificationDamage(a, damage)
+	if sceneVerificationLocked(d) {
+		damage = 0
+	}
 	out := Outcome{Damage: damage, Location: location, OverCap: over}
 	out.Down, out.Limb = d.Take(damage, location)
-	d.Hurt += rawDamage - damage
+	d.Hurt += absorbed
 	return out
 }
 
@@ -498,6 +503,9 @@ func checkMissile(d *Actor, attack int, stray bool, rng Rand) (Outcome, int) {
 // 排好的那一手作廢；腿（部位 > 3）再把 `+0x03` 清成 0，移動方式少掉 0x3E
 // 以後那幾格（`sub_277F4:loc_27A5B`，RE-148）。
 func (a *Actor) Take(damage, location int) (down, limb bool) {
+	if sceneVerificationLocked(a) {
+		return false, false
+	}
 	shieldBefore := a.EffectiveShieldGrade()
 	a.Damage += damage
 	if a.Damage > 0x7F {

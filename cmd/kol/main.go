@@ -1160,6 +1160,9 @@ var (
 // 場景、城鎮座標、世界座標與時刻、戰鬥階段、結局段號。
 func (g *game) snapshot() map[string]any {
 	row := map[string]any{}
+	if verification := sceneVerificationSnapshot(); verification != nil {
+		row["verification"] = verification
+	}
 	switch {
 	case g.endingReached():
 		row["scene"] = string(sceneEnding)
@@ -1623,12 +1626,10 @@ func (g *game) render() error {
 			}
 			segs = town.JoinedSegments(g.endBank, tr, ending.Bank, p.Records)
 		}
-		// 英文模式沒有 CJK 字型，敘事用小字型畫。
-		f := g.small
 		if g.cjk != nil {
-			f = g.cjk
+			return ui.EndingCJK(g.canvas.Image(), g.sprites, g.cjk, g.ending, segs)
 		}
-		return ui.Ending(g.canvas.Image(), g.sprites, f, g.ending, segs)
+		return ui.Ending(g.canvas.Image(), g.sprites, g.small, g.ending, segs)
 	case sceneTitle:
 		bg, err := g.sprites.Get("BACKPICS", g.frame.Back)
 		if err != nil {
@@ -2860,6 +2861,10 @@ func main() {
 	logInput := flag.Bool("log-input", false,
 		"互動遊玩時把每個輸入 token 與當時的畫面印到 stderr，供輸入驗收判讀")
 	flag.Parse()
+	if err := validateSceneVerification(); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(2)
+	}
 	if *showVersion {
 		fmt.Println(buildVersion)
 		return
@@ -3620,6 +3625,10 @@ func main() {
 		}
 		// 住宿存檔（SPEC-006）。沒有給 -save 就不寫檔，流程其餘部分照跑——
 		// 截圖與對拍不需要真的產生存檔。
+		if sceneVerificationSnapshot() != nil {
+			// v1 匯入也會自行選保存目的地；驗收模式一併禁止這條寫入。
+			*savePath = ""
+		}
 		if loaded != nil {
 			requestedFaithful := *faithfulInn
 			*faithfulInn = loaded.Settings.FaithfulInnStay
@@ -4108,6 +4117,10 @@ func main() {
 			playSession.Roster = kept
 			return nil
 		}
+	}
+	if err := prepareSceneVerification(g); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(2)
 	}
 	attachCreation := func(f *flow.Flow) {
 		if playSession != nil {

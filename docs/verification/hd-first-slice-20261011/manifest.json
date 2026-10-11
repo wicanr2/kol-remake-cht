@@ -1,0 +1,93 @@
+{
+  "schema": "kol-hd-prototype/1",
+  "resolution": [
+    1920,
+    1200
+  ],
+  "stage": "disposable-prototype",
+  "rights": "private GitHub 可保存；原版參考衍生，無公開散布權",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "tool": "內建 image_gen.imagegen；canvas 原型；Chromium 154.0.8037.92",
+  "prompts": "prompts.json",
+  "sources": {
+    "docs/screenshots/zh-town-door.png": "1b0d294b00e44de62caf35b9b714f50d76c2945c832b03b3a78605dbf39cf9a4",
+    "docs/verification/cjk-closeout-20261011/zh-party.png": "6fba3dfa84f1efbfbaf0a5f912e0183b15487c599f4096b6e0362bc93c09e5df",
+    "docs/verification/cjk-closeout-20261011/zh-battle.png": "ce205898d90773a7e142af9e29ae10078335c83b46d0f4889e775ed09bc5396f",
+    "workplace/hd-art-ui-20261004/painted-direction.png": "ed590059b3fc51367988404f1f1b5eeb6252edd4c27f178358f027a8340cb393"
+  },
+  "assets": [
+    {
+      "file": "approved-direction.png",
+      "sha256": "ed590059b3fc51367988404f1f1b5eeb6252edd4c27f178358f027a8340cb393",
+      "size": [
+        1122,
+        1402
+      ],
+      "source_entry": "既有核准風格參考或本輪原型畫格",
+      "evidence": "prototype only; not final art approval"
+    },
+    {
+      "file": "battle-preview.png",
+      "sha256": "ce1ffcad69a3153056fcec4530155c25999ef4b2dd00b01af18584e5663d725d",
+      "size": [
+        1920,
+        1200
+      ],
+      "source_entry": "既有核准風格參考或本輪原型畫格",
+      "evidence": "prototype only; not final art approval"
+    },
+    {
+      "file": "inn-painted-v1.png",
+      "sha256": "0ec14587368570c7c84aa20b695335b022c7da8ef1b8f3a07255b1b73adb2b9c",
+      "size": [
+        1774,
+        887
+      ],
+      "source_entry": "prompts.json 對應生成輸出",
+      "evidence": "prototype only; not final art approval"
+    },
+    {
+      "file": "inn-preview.png",
+      "sha256": "7aa893b8d14edac9708eb1842a30225eed4de73c376a91c52eeb81be66ecdfdd",
+      "size": [
+        1920,
+        1200
+      ],
+      "source_entry": "既有核准風格參考或本輪原型畫格",
+      "evidence": "prototype only; not final art approval"
+    },
+    {
+      "file": "party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016",
+      "size": [
+        1536,
+        1024
+      ],
+      "source_entry": "prompts.json 對應生成輸出",
+      "evidence": "prototype only; not final art approval"
+    }
+  ],
+  "browser_checks": [
+    {
+      "scene": "inn",
+      "checks": 44,
+      "passed": true,
+      "screenshot": "inn-preview.png",
+      "screenshot_sha256": "7aa893b8d14edac9708eb1842a30225eed4de73c376a91c52eeb81be66ecdfdd"
+    },
+    {
+      "scene": "battle",
+      "checks": 44,
+      "passed": true,
+      "screenshot": "battle-preview.png",
+      "screenshot_sha256": "ce1ffcad69a3153056fcec4530155c25999ef4b2dd00b01af18584e5663d725d"
+    }
+  ],
+  "review_html_sha256": "19872e4321afb097550444027145334d7401f250407e0e497cfa345d8210a0a7",
+  "limits": [
+    "門面1774×887尚未達目標素材尺寸",
+    "首位人物手臂及盾牌有生成偏差",
+    "外框、NPC、圖示、地圖及傷勢人形尚未HD重繪",
+    "原型不執行遊戲規則，不改v3"
+  ]
+}

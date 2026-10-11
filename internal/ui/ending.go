@@ -5,6 +5,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 
+	"github.com/wicanr2/kol-remake-cht/internal/book"
 	"github.com/wicanr2/kol-remake-cht/internal/ending"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
@@ -20,6 +21,18 @@ import (
 // 這一層不知道那幾筆是英文還是中文。
 func Ending(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	s *ending.State, segments []town.Segment) error {
+	return drawEnding(dst, sprites, f, s, segments, 1)
+}
+
+// EndingCJK 沿同一份結局圖框及文字定位套用中文畫布倍率。
+// 原版每行高六像素；三倍後才容得下高十八像素的中文字模。
+func EndingCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	s *ending.State, segments []town.Segment) error {
+	return drawEnding(dst, sprites, f, s, segments, book.CJKScale)
+}
+
+func drawEnding(dst *ebiten.Image, sprites Sprites, f *font.Font,
+	s *ending.State, segments []town.Segment, scale int) error {
 	panel := s.Current()
 	if panel == nil {
 		return nil
@@ -30,10 +43,10 @@ func Ending(dst *ebiten.Image, sprites Sprites, f *font.Font,
 	if err != nil {
 		return err
 	}
-	draw(dst, pic, panel.Box.X(), panel.Box.Y())
+	drawScaled(dst, pic, panel.Box.X()*scale, panel.Box.Y()*scale, scale)
 	for _, seg := range segments {
 		// 原版的敘事是大寫畫上去的，與訊息區同一種處理（RE-074）。
-		f.Draw(dst, seg.Col*8, seg.Row, strings.ToUpper(seg.Text),
+		f.Draw(dst, seg.Col*8*scale, seg.Row*scale, strings.ToUpper(seg.Text),
 			EndingInk[0], EndingInk[1], EndingInk[2])
 	}
 	return nil

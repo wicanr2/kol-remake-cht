@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'controlled-scenes-20261011',
     'cjk-closeout-20261011',
     'quest-entry-rng-prototype-20261006',
     'quest-marker-phase-20261006',
