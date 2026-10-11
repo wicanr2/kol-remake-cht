@@ -12,18 +12,29 @@ import (
 )
 
 func (g *game) enableHD(mode, dir, lang string) error {
+	g.hdDir, g.hdLanguage = dir, lang
+	return g.setGraphics(mode)
+}
+
+// setGraphics 完整載入成功後才換呈現；只交換畫布，不重建遊戲或觸碰保存。
+func (g *game) setGraphics(mode string) error {
 	if mode == "ega" {
+		g.hd, g.presentation = nil, nil
 		return nil
 	}
-	if mode != "hd" || lang != "zh-Hant" {
+	if mode != "hd" || g.hdLanguage != "zh-Hant" {
 		return fmt.Errorf("graphics須為ega或hd；HD首批只支援zh-Hant")
 	}
-	lib, err := assets.LoadHD(dir)
-	if err != nil {
-		return fmt.Errorf("HD素材載入失敗：%w", err)
+	if g.hdCache == nil {
+		lib, err := assets.LoadHD(g.hdDir)
+		if err != nil {
+			return fmt.Errorf("HD素材載入失敗：%w", err)
+		}
+		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
+		canvas := screen.NewCanvasScaled(6)
+		g.hdCache, g.hdCanvas = hd, canvas
 	}
-	g.hd = ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
-	g.presentation = screen.NewCanvasScaled(6)
+	g.hd, g.presentation = g.hdCache, g.hdCanvas
 	return nil
 }
 

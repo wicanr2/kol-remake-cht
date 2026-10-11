@@ -89,6 +89,7 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 開發版加 `-graphics hd -lang zh-Hant` 啟用，預設仍使用 EGA。
 角色按實際圖像匹配，自訂肖像沿用原圖；戰鬥資訊框顯示目前選中的人物。
 中文、滑鼠點選、舊 v3 與住宿存讀檔已通過[首批驗收](docs/verification/hd-runtime-20261011.md)。
+遊戲內「畫面 F10」切換已完成[可操作候選](docs/verification/display-switch-20261011.md)，版面確認後接入正式入口。
 
 | 實際旅店門面與六人肖像 | 實際戰鬥資訊框 |
 |---|---|

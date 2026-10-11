@@ -1,0 +1,46 @@
+{
+  "schema": "kol-display-switch-png/1",
+  "entries": [
+    {
+      "file": "prototype-hd.png",
+      "sha256": "dbfc21a3f9d8b51f59c567c1be5f24d4094051aea1ccd9ea5414b9953f54ba91",
+      "source_entry": "實際遊戲候選；已核准HD素材及既有EGA PNG",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "prototype-hd.png",
+      "tool": "Go1.26.7/Ebitengine2.9.9/Xvfb/ffmpeg；verify-candidate.py或verify-prototype.py",
+      "evidence": "可操作候選已驗；版面尚待確認",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "file": "game-menu-ega.png",
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24",
+      "source_entry": "實際遊戲候選；已核准HD素材及既有EGA PNG",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "game-menu-ega.png",
+      "tool": "Go1.26.7/Ebitengine2.9.9/Xvfb/ffmpeg；verify-candidate.py或verify-prototype.py",
+      "evidence": "可操作候選已驗；版面尚待確認",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "file": "game-menu-hd.png",
+      "sha256": "fd1efd5bfd4bae7d7dabf68050949838fa91a3c84a0c65d06d6d635670a6fc03",
+      "source_entry": "實際遊戲候選；已核准HD素材及既有EGA PNG",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "game-menu-hd.png",
+      "tool": "Go1.26.7/Ebitengine2.9.9/Xvfb/ffmpeg；verify-candidate.py或verify-prototype.py",
+      "evidence": "可操作候選已驗；版面尚待確認",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "file": "missing-menu-hd.png",
+      "sha256": "80c515fb4070740e1dab8fdcbf5853cb479f76bd82013a21251a8755b5ac9c6f",
+      "source_entry": "實際遊戲候選；已核准HD素材及既有EGA PNG",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "missing-menu-hd.png",
+      "tool": "Go1.26.7/Ebitengine2.9.9/Xvfb/ffmpeg；verify-candidate.py或verify-prototype.py",
+      "evidence": "可操作候選已驗；版面尚待確認",
+      "rights": "private GitHub 可保存；無公開散布權"
+    }
+  ],
+  "candidate_sha256": "4abb22eac6ad1ea246a9662016dd6abb0bbd74407d1dd5a3f3af6db79c4dff8e"
+}

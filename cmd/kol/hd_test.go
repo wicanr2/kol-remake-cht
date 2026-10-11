@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/wicanr2/kol-remake-cht/internal/input"
+	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
 )
 
@@ -27,5 +28,38 @@ func TestHDInputKeepsTargets(t *testing.T) {
 	plain := game{}
 	if x, y := plain.logicalPoint(42, 3); x != 42 || y != 3 {
 		t.Fatal("EGA命中區不得改動")
+	}
+}
+
+func TestGraphicsSwitchIsAtomicAndReusesPack(t *testing.T) {
+	g := game{canvas: screen.NewCanvasScaled(3)}
+	if err := g.enableHD("ega", "../../assets/hd/first-slice", "zh-Hant"); err != nil {
+		t.Fatal(err)
+	}
+	base := g.outputCanvas()
+	if err := g.setGraphics("hd"); err != nil {
+		t.Fatal(err)
+	}
+	hd, canvas := g.hd, g.outputCanvas()
+	if canvas.Image().Bounds() != image.Rect(0, 0, 1920, 1200) {
+		t.Fatal("HD畫布尺寸錯誤")
+	}
+	if err := g.setGraphics("invalid"); err == nil || g.hd != hd || g.outputCanvas() != canvas {
+		t.Fatal("錯誤選項破壞既有呈現")
+	}
+	if err := g.setGraphics("ega"); err != nil || g.hd != nil || g.outputCanvas() != base {
+		t.Fatal("回到EGA未沿用原畫布")
+	}
+	// 已驗過的完整素材包常駐；磁碟路徑不再可用也不重新讀半套素材。
+	g.hdDir = t.TempDir()
+	if err := g.setGraphics("hd"); err != nil || g.hd != hd || g.outputCanvas() != canvas {
+		t.Fatal("切換重複載入素材或重建畫布")
+	}
+	broken := game{canvas: base}
+	if err := broken.enableHD("ega", t.TempDir(), "zh-Hant"); err != nil {
+		t.Fatal(err)
+	}
+	if err := broken.setGraphics("hd"); err == nil || broken.hd != nil || broken.outputCanvas() != base {
+		t.Fatal("缺失素材包不得改變EGA")
 	}
 }

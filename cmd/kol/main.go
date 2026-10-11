@@ -1076,6 +1076,10 @@ type game struct {
 	canvas     *screen.Canvas
 	// hd只控制最後呈現；規則、文字及保存沿既有畫布。
 	hd             *ui.HD
+	hdCache        *ui.HD
+	hdCanvas       *screen.Canvas
+	hdDir          string
+	hdLanguage     string
 	presentation   *screen.Canvas
 	noticeCanvas   *screen.Canvas
 	state          *charcreate.State

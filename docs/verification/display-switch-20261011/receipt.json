@@ -1,0 +1,351 @@
+{
+  "schema": "kol-display-switch-candidate/1",
+  "date": "2026-10-11",
+  "base_commit": "f74c7108",
+  "status": "prototype verified; layout approval pending; production entry unchanged",
+  "approved_scope": "重做畫面設定與遊戲內切換，保留已核准美術",
+  "checks": [
+    "prototype-check.json",
+    "candidate-check.json",
+    "font-check.json",
+    "regression-check.json",
+    "go-test.log",
+    "ui-test.log",
+    "sceneverify-test.log"
+  ],
+  "candidate_sha256": "4abb22eac6ad1ea246a9662016dd6abb0bbd74407d1dd5a3f3af6db79c4dff8e",
+  "observed_trace_changed": false,
+  "seed": 1,
+  "save_written": false,
+  "original_parity_claimed": false,
+  "attachments": {
+    "candidate/battle_inventory.go": {
+      "size": 3170,
+      "sha256": "782e187b924a29d2f80457a53073ae72312144920d36fcb4d025a3323b8f3b61"
+    },
+    "candidate/battle_render.go": {
+      "size": 5169,
+      "sha256": "62ddf30b6c5b961d87afe9a94d40ea3598b03e72428eb6713f2e93c347ea4c11"
+    },
+    "candidate/bitmap_edit.go": {
+      "size": 4908,
+      "sha256": "1185bfce5cf9d421d93917b1f3a3325c9744c79978902dbdcc419d2f9b7a150f"
+    },
+    "candidate/complete_save.go": {
+      "size": 4114,
+      "sha256": "61606227843f422a1e4dd8beb7fa64050e8bff369a3b736045ab001a2e1a7e4d"
+    },
+    "candidate/creation_commit.go": {
+      "size": 3492,
+      "sha256": "2fd6ca6da6738896be13790a01ea2eb368e429376e49dbf30e8a687966708a6a"
+    },
+    "candidate/display_settings.go": {
+      "size": 3395,
+      "sha256": "26a6fede15bc3ba8fd451dc56f48d4d8d314264890bc7152b5b77cd26036f2c2"
+    },
+    "candidate/hd.go": {
+      "size": 3074,
+      "sha256": "f36a5cfb230a4828fa0b88d287c39f9383a8080eb039792a9d917fdb65bb5be1"
+    },
+    "candidate/input.go": {
+      "size": 14452,
+      "sha256": "a4fb4138f3c9ed2013e4ca7e37a46e40d913e6ac233733a3f62730be2b44e7b9"
+    },
+    "candidate/main.go": {
+      "size": 156341,
+      "sha256": "a02fd56e2a52108369e2e6cd4c9e477ba1b394203df808afd5632b3f4f433d4d"
+    },
+    "candidate/save_notice.go": {
+      "size": 2203,
+      "sha256": "d3b2b9c42d64ed97937af30acaf724ce3a1fd58e51aa1ec36b98f177a79e6639"
+    },
+    "candidate/scene_verification_disabled.go": {
+      "size": 219,
+      "sha256": "5da763ecdbce418753730cc82ad7dbb3e99dfe4f5f21b685169dbff2ac56212a"
+    },
+    "candidate/scene_verification_enabled.go": {
+      "size": 2364,
+      "sha256": "810038ae675dea55b3abf30620f5fe90a25415bbca025a7943b51d9dc61e8c72"
+    },
+    "candidate/scripted_rolls.go": {
+      "size": 1329,
+      "sha256": "b08279b7ac7b23db41c0f732516a659c71bd7b871e6a155e5b26fa28978671e1"
+    },
+    "candidate/title_audio.go": {
+      "size": 4700,
+      "sha256": "aa347f9669d9167fa53e05947d87aac326f8eacb54f7d2532ddaac2bc1658df9"
+    },
+    "candidate/title_subtitles.go": {
+      "size": 3381,
+      "sha256": "17aff7d058f650c283181b9ace871fbda2ffb46032dc45b186742d5c4fa1c65a"
+    },
+    "candidate-check.json": {
+      "size": 8272,
+      "sha256": "862a7cb7ae8fd7616c0004e5ed79c9c225b5631819386625b4ab7a947041f1cc"
+    },
+    "ega.png": {
+      "size": 21826,
+      "sha256": "5aa32d97ce63841f67bf52260480dd701c43533ff59ea076d1ffc7a4b86ce0b2"
+    },
+    "first-candidate-attempt/game-closed.png": {
+      "size": 467409,
+      "sha256": "880028b2fa62393004c2331669f06ce6d720c9144f8249b772f8677730cb6538"
+    },
+    "first-candidate-attempt/game-ega.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "first-candidate-attempt/game-keyboard-ega.png": {
+      "size": 424394,
+      "sha256": "35df0b2f6d3e8812d386c95d6e20866772a08bb7dcb8cef5797aa2837c5d0932"
+    },
+    "first-candidate-attempt/game-menu-ega.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "first-candidate-attempt/game-menu-hd.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "first-candidate-attempt/game-resized.png": {
+      "size": 18820,
+      "sha256": "cee1755057a1c28890c8d6c4457be80dfa0aac7969e51fc105746b529bf4489b"
+    },
+    "first-candidate-attempt/game-text.jsonl": {
+      "size": 3161,
+      "sha256": "ec7f92ac646c105e13e4a9792f90ea499bdc870f7e1bd7bd9f6716fc057a3b59"
+    },
+    "first-candidate-attempt/game.log": {
+      "size": 1478,
+      "sha256": "785bba5430626e2926263b84422c7d821f904c7492b8c973b4d9d3f7f0c08d5f"
+    },
+    "font-check.json": {
+      "size": 1071,
+      "sha256": "894a081de252666946842cf83c059d5102630bcf0e6d870b79993a7b1bff9a91"
+    },
+    "font-manifest-before.json": {
+      "size": 679949,
+      "sha256": "12534d66bb1baede1cd8da5128de1ea98c96a8d3a91a8300fe53f4a5fe3ac8ae"
+    },
+    "game-closed.png": {
+      "size": 467420,
+      "sha256": "97259a84b2230ea28f6a3185302060d84d3637b7c71454648ca86574e28a4ff6"
+    },
+    "game-ega.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "game-keyboard-ega.png": {
+      "size": 76167,
+      "sha256": "f489f1c99bde45175c0c16d7ecf531fa6ec7419ce03da00ebbfbd8e6632f0eae"
+    },
+    "game-menu-ega.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "game-menu-hd.png": {
+      "size": 418780,
+      "sha256": "fd1efd5bfd4bae7d7dabf68050949838fa91a3c84a0c65d06d6d635670a6fc03"
+    },
+    "game-resized.png": {
+      "size": 124061,
+      "sha256": "b99e929c9de517e02279fa6256b419e5832e091d955c186f39f2959632b6e54c"
+    },
+    "game-text.jsonl": {
+      "size": 1754,
+      "sha256": "800348583f7a2bb0e1b3e0c17fdede0f40f2d3efddf554609054fe4c22a10ebf"
+    },
+    "game.log": {
+      "size": 2256,
+      "sha256": "02346b932bba60ed4d51f14d97dcc227449b1b7b92456afcdacae9b7484c1755"
+    },
+    "go-test.log": {
+      "size": 1514,
+      "sha256": "0a90a35503a77160b58f4188aa3d7ade58d81dbbc3b7752884a1136900332738"
+    },
+    "inputs/party6.json": {
+      "size": 2215,
+      "sha256": "f3e21804ece29124d20df6d56beecfbcdd3beef297362143b00e48ff9f2c2e36"
+    },
+    "inputs/party6.json.v2.json": {
+      "size": 89607,
+      "sha256": "d4328e210e31478f065e8f4e3c7b21eec93a3b2e5f2392dd53e61e560890e25e"
+    },
+    "inputs/save.json": {
+      "size": 89607,
+      "sha256": "270afc359e9e282d34632f0e2a86b0edcdb726993e0f6d33b7e4cb551099a0d3"
+    },
+    "kol-display-candidate": {
+      "size": 14067168,
+      "sha256": "4abb22eac6ad1ea246a9662016dd6abb0bbd74407d1dd5a3f3af6db79c4dff8e"
+    },
+    "kol-display-prototype": {
+      "size": 11329264,
+      "sha256": "b2ee5f439d3840af7b1f6f007f4e20387cbac881dbdf6a83438fa8cc14924594"
+    },
+    "missing-closed.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "missing-ega.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "missing-menu-ega.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "missing-menu-hd.png": {
+      "size": 71062,
+      "sha256": "80c515fb4070740e1dab8fdcbf5853cb479f76bd82013a21251a8755b5ac9c6f"
+    },
+    "missing-text.jsonl": {
+      "size": 1556,
+      "sha256": "8d30e0382147c45e210e233b5c36a9ff1a1fd2cd8f60ef09d321233e04d00a3d"
+    },
+    "missing.log": {
+      "size": 1132,
+      "sha256": "21c6a8a1efc51893ccef9d5ed80248d7465dd9396cdfb48c5630286b4b8d1d9d"
+    },
+    "prototype/main.go": {
+      "size": 3107,
+      "sha256": "e5c4e8b661c67cb865003e70315a65412638d7efd77288621bd1b32e1e9d7a06"
+    },
+    "prototype-check.json": {
+      "size": 126,
+      "sha256": "3a2edb0c0cf12f1ff2e4d7d86bdd73f86aeed46f4442243f419b922d846670ff"
+    },
+    "prototype-click-ega.png": {
+      "size": 75740,
+      "sha256": "6a55aede5c25392888c13d884d1adbbd56910f857075fbc19921dc7cc53ae6c3"
+    },
+    "prototype-click-hd.png": {
+      "size": 1084237,
+      "sha256": "667f91c9444fb9bcc051a126e72e49a8f2aefea746716ed0293ae9e8d60175f2"
+    },
+    "prototype-closed.png": {
+      "size": 2205389,
+      "sha256": "c9a3743fc64c41cbddf9121686fc1fdf088b21076494eb06b27c32d9dc431b19"
+    },
+    "prototype-ega.png": {
+      "size": 35756,
+      "sha256": "a785ef8c8b76a4521ab2e3cf288af49d7872b5f4c50405a6b0b153ddfacf27cb"
+    },
+    "prototype-hd.png": {
+      "size": 864348,
+      "sha256": "dbfc21a3f9d8b51f59c567c1be5f24d4094051aea1ccd9ea5414b9953f54ba91"
+    },
+    "prototype-input.log": {
+      "size": 332,
+      "sha256": "9b66254fc9360c0a2e5f5be22edacfdc6dbb8c711fab82b9718427a1668d3ffb"
+    },
+    "prototype-reopened.png": {
+      "size": 1084237,
+      "sha256": "667f91c9444fb9bcc051a126e72e49a8f2aefea746716ed0293ae9e8d60175f2"
+    },
+    "regression/ega/step-000.png": {
+      "size": 27342,
+      "sha256": "b5a834ea22bb27a1d0fe69f2c985741042b3730ae304c2f6d698bca3f437068d"
+    },
+    "regression/ega/step-001.png": {
+      "size": 27088,
+      "sha256": "4073c5f1451dba21c531ea19558c45b353b84aeb6c0bb542e40869143caad4aa"
+    },
+    "regression/ega/step-002.png": {
+      "size": 21826,
+      "sha256": "5aa32d97ce63841f67bf52260480dd701c43533ff59ea076d1ffc7a4b86ce0b2"
+    },
+    "regression/ega/step-003.png": {
+      "size": 21251,
+      "sha256": "06f4ea4ed4671755861322d27ab2f015f44efdd5817f4158b19c6ba3004a17d9"
+    },
+    "regression/ega/step-004.png": {
+      "size": 19798,
+      "sha256": "1bc6c07019294d05ed561a3dc89358eefef749c8a3e1f312b186cf7470feac54"
+    },
+    "regression/ega/trace.json": {
+      "size": 1312,
+      "sha256": "16eac4cae6952eab41d2154c82bd4661c3aa93f1e03578873eac33d4b8507161"
+    },
+    "regression/hd/step-000.png": {
+      "size": 408334,
+      "sha256": "f324350928dbd057124534cc6247bb5fb9f3891aed606e73a157a57b8d9dda19"
+    },
+    "regression/hd/step-001.png": {
+      "size": 407860,
+      "sha256": "e8a8aac7dd1042b8497cbce3602dae127ad2e5f909c49bb45bf94526a8ae1151"
+    },
+    "regression/hd/step-002.png": {
+      "size": 1657337,
+      "sha256": "5d9390e882133544808212cafb1cf60e4d065dbc1a8563769ea1cb2152d0f68f"
+    },
+    "regression/hd/step-003.png": {
+      "size": 401184,
+      "sha256": "afe887984a45ab0c5278f83531acc301cea5689deaa9ce2dafa84cd4181e565c"
+    },
+    "regression/hd/step-004.png": {
+      "size": 399529,
+      "sha256": "4df4c3b3f864b80633512806412eb7a4e09fb99a8ac1d5cb1c6029007174eac8"
+    },
+    "regression/hd/trace.json": {
+      "size": 1312,
+      "sha256": "16eac4cae6952eab41d2154c82bd4661c3aa93f1e03578873eac33d4b8507161"
+    },
+    "regression-check.json": {
+      "size": 395,
+      "sha256": "4a57203e05e2e997cd87efad61be9a97719a8742b43c17813774b8c416189368"
+    },
+    "regression-ega.log": {
+      "size": 925,
+      "sha256": "ac4ec364214abfbce9d22ae45de9da75f1743a2a647a9905ef09a4ce5fec49d7"
+    },
+    "regression-hd.log": {
+      "size": 920,
+      "sha256": "15d357be97bcb69613af2b304b5f9f99a30d615ca3b652415dc77674e2062861"
+    },
+    "sceneverify-test.log": {
+      "size": 116,
+      "sha256": "67dcac00172678a81ee6aeaa3d664a546d7183abeeb60a07d09762bd59745aa4"
+    },
+    "seal-preview.py": {
+      "size": 2509,
+      "sha256": "a1706c3ef73481c0bb35b8778ccc3ac5edf836877e7926c468f726fc67ae5dd6"
+    },
+    "source-inputs.json": {
+      "size": 36717,
+      "sha256": "42f7bac37bca8746dbb9ed91b3386b38103a4002b927514e38d7597c918a24b8"
+    },
+    "ui-test.log": {
+      "size": 58,
+      "sha256": "d40c1a4fa30dfb85693dd37795efad78ae31b2d5748fae8fac01d77d0ed58b63"
+    },
+    "verify-candidate.py": {
+      "size": 6018,
+      "sha256": "ac78ca5463f51a966416aa0b7177a2fc2287a88f1f650c97bf6976c5b5ab0d85"
+    },
+    "verify-prototype.py": {
+      "size": 3526,
+      "sha256": "9d2bddc86508907c3836704e3a710520381cf736f20ce4c58a3a127627967b68"
+    },
+    "xvfb-candidate.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "xvfb-layout.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "xvfb-prototype.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "xvfb-regression.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "xvfb-tests.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    }
+  }
+}
