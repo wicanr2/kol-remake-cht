@@ -11279,3 +11279,18 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 本次保存第六至三十四批研究紀錄、來源清冊索引、工作清單與證據保存工具。提交範圍限八個既有文字檔；原版輸入、C／ASM／OBJ／LIB、工具與本機壓縮證據均不納入 Git。
 - 提交前以既有隔離 image 核對保存工具語法與擁有權。UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；本專案容器清單為空，其他專案容器保持。
 - 工作清單 render、verify 與 scan 均通過：19 開放、89 已核實完成，2042 行自承全部有條目認領。C35 bootstrap 暫存腳本已刪除，工作區內保存副本保留。
+
+## 2026-10-11：v1.0.0 本機收尾、完整版、release 與推廣影片
+
+- 依使用者授權判斷收尾，最多補一次抽樣並打包。路由命中收尾驗證、版號、交付結構與影音合成，載入對應單一入口及必要 reference；沿專案 `full/`、`release/`、`promo/` 契約。完整版號為 `v.1.0.0-20261011`，交付與收據入口見 [本輪驗收](docs/verification/release-v1.0.0-20261011.md)。
+- 正式來源 342 份 Go／module 輸入與最近平台驗收逐項相同，沒有改規則、中文排版、保存格式或加速設定。matching 保持暫停，既有 C35 先行工作區與證據未動；本輪沒有重開原版研究或增加原版同狀態覆蓋。
+- 先登記 seed1、正常鍵序、完整 trace、v3 保存比較與失敗條件，再執行唯一正常抽樣。標題、書本、六人招募、任務5戰鬥、逃離、自然 ORC 遭遇、回城住宿保存共1046狀態／40 PNG；同一鏈新程序重載13狀態／3 PNG。trace 與最近正式版相同，完整保存只差 saved_at，重載沒有改輸入存檔。沒有重擲、注入狀態、遭遇覆寫或強制勝利；不宣稱任務5完成或全程通關。
+- 正式十九套件測試通過。`go vet` 保留兩則既有 `book.Label` 未具名欄位警示，位於 `internal/ui/bitmap_editor.go` 第56、57行；原文與退出碼保存於交付 `smoke/`，不宣稱靜態檢查全綠。
+- 沿既有 Go1.26.7／Ebitengine2.9.9、osxcross 與 Wine9 工具鏈。既有 package image 不存在，修正 `docker/Dockerfile.package` 並建立 `kol-package:1.26.7-ebiten2.9.9-20261011-r1`；固定基底與 AppImage runtime 雜湊，核對同為 Debian12。首輪 apt 安裝逾時及缺 liblzo2 的建置均屬工具環境問題，改用既有固定 image 並補同系統相依後乾淨建置通過，未掛入主機 runtime。
+- `full/` 與 `release/` 各有 Linux AppImage、Windows AMD64 ZIP、macOS universal ZIP。逐包解開驗證執行檔、版號、完整素材雜湊、條款、ZIP UTF-8、中文說明 BOM 與 macOS 執行權限。release 不含原版素材，提供先核全部 SHA-256 才寫入的合法資料匯入工具；錯誤雜湊負例在寫入前拒絕。
+- Linux 實際完整版及匯入後 release 以 AppImage 解包模式啟動。Windows 實際 ZIP 解壓後，full 與合法匯入後 release 的版號及中文封面相同。macOS 雙架構、最低版本11.0、ARM64 ad-hoc 簽章與系統相依通過；沒有執行或真機驗收。Linux 主機 FUSE、Windows／macOS 真機與完整原版 parity 保持既有未驗限制。
+- Xvfb 就緒等待與 Wine 的暫存 HOME 擁有權失敗均發生於遊戲啟動前，修正隔離環境後重跑原命令。正常抽樣只啟動一次；版本與封面檢查不另開玩家情境。ImageMagick 的接觸表程序兩次 SIGABRT，最小兩圖案例亦相同，改用 FFmpeg tile 完成，不記為遊戲缺陷。
+- 推廣影片為本版43張畫格中選取的截圖剪輯，共64秒、1920×1080、25fps、H.264／AAC。八幕中心與完整字幕逐幕目視通過；峰值 -9.8dB，沒有達門檻的黑幀。只用已接受的遊戲雷聲；其他靜音與6至10秒停格依分鏡保留，不稱連續實機錄影。來源、配方、逐幕索引與影音檢查均隨影片保存。
+- 六個封包內容檢查通過；既有獨立驗證器重算 full／release／promo 的951／290／40筆 manifest，包含巢狀來源 manifest。根目錄 `SHA256SUMS.json` 記錄所有輸出，`build-inputs.json` 保存正式來源與最終打包工具雜湊。完整版及含原作畫面的影片僅本機；release 中翻譯的公開權利仍有限制。本輪沒有公開發布、建立 tag、上傳影片或修改遠端 Issue。
+- 更新唯一目前狀態、README 交付入口與工作清單，僅完成本輪封包重建項；其餘18開放項的驗收條件保持。生成二進位、遊戲資料及影片均留在被忽略的 `dist-all/`，本輪未提交或推送。工作清單核對通過，2046行自承全部有條目認領；根目錄1382份輸出的大小與SHA-256獨立重算相符。
+- 容器暫存隨 `--rm` 回收，沒有新增比較工作區；本專案容器清單為空，全部交付擁有權為1000:1000，專案沒有root-owned檔案或誤建 `.md` 目錄，`git diff --check` 通過。目前五個專案工具image保留；懸空查詢列出的 `4ac62de83339` 經inspect為既有具名IDA9.4共用image，未刪除，沒有本輪待清工具image。

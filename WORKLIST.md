@@ -1,6 +1,6 @@
 # 《武士傳說》重製工作清單
 
-更新日期：2026-10-10
+更新日期：2026-10-11
 
 ## 這份檔案怎麼讀
 
@@ -12,12 +12,12 @@
 tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期斷言
 ```
 
-目前狀態與現行交接見 `CONTEXT.md` 頂部。使用者先選本機可玩版，隨後提高為
-「所有玩家文字繁中、手冊功能與原版逐項一致」的完成閘門。先前
-`v.0.2.3-20260923` AppImage 是此閘門前的本機候選包，敗北後回城保存／重載
-已抽驗；重製版觀察用資料的正常按鍵勝利與繁中戰利品畫格已補收據，
-但正式封包自然資料的勝利、完整戰鬥原版對拍及其他手冊功能尚待驗，不能改稱完成。
-詳細缺口見 `docs/verification/manual-fidelity-audit-20260923.md`。公開發行另行審查。
+目前狀態與現行交接見 `CONTEXT.md` 頂部。2026-10-11 使用者授權判斷收尾，
+最多補一次抽樣後製作 v1.0.0 完整版、release 與推廣影片。
+本次交付入口為 `dist-all/v.1.0.0-20261011/`，驗收範圍見
+[本版收據](docs/verification/release-v1.0.0-20261011.md)。
+完整原版 parity、其餘中文字版面及真機驗收的原條件保留，不因封包版號改成完成。
+matching 維持暫停。公開發行另行審查。
 
 涉及未決設計的分支等待使用者確認，不自行視為同意。
 
@@ -153,6 +153,8 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 - **v02-appimage-platform-acceptance**（#7） — V02：主機 FUSE、其他平台與推廣交付的驗收
   Linux AppImage v.0.2.2-20260908 已重建：封包內版號、849 筆必要素材與文件、98 次正常建角／保存操作通過；另完成 XDG_CONFIG_HOME 與 HOME/.config 兩組各 95 次不指定 -save 的保存／重載（docs/verification/appimage-v.0.2.2-20260908.md）。主機 FUSE、其他平台與推廣交付仍待驗。 2026-10-01 現行工作樹三平台中間建置續核：Linux／Windows各編譯兩次雜湊一致，Linux仍f969a63f；Windows304890ea在Wine9實際啟動，預設繁中與APPDATA保存、正常標題／六人招募／購買／住宿198個互動按鍵及重載15鍵通過。兩平台199／16筆批次狀態與既有收據完全相同，40組整圖比較0差；保存除saved_at外一致、重載未改檔。macOS universal兩架構、最低11.0、arm64簽章區塊與系統相依核實通過，但尚未實際啟動；Wine不是Windows真機。收據docs/verification/platform-smoke-20261001/receipt.json。只驗當前source資源入口，未建正式封包或版號，本項不結案。
+
+  2026-10-11：v.1.0.0-20261011 三平台六個正式包與64秒1080p影片完成。Linux AppImage及Windows實際ZIP的full／資料匯入release啟動通過；macOS雙架構與結構通過但未執行，主機FUSE與真機保持未驗。本項不結案，入口docs/verification/release-v1.0.0-20261011.md。
   完成條件：三平台各自驗收通過，推廣交付有影音驗收收據。
   核實：要人判——跨平台驗收沒有本機訊號。與 windows-macos-real-machine 相鄰但不同：那一條是真機，這一條含 FUSE 與推廣。
 
@@ -162,6 +164,8 @@ tools/run_python_tool.sh tools/worklist.py verify
   2026-10-07任務亂數正式接線後，最新Linux來源已驗雙語正常保存重載；前版平台收據沿受阻打暈來源，Windows／macOS須按最新來源重建。真機及原完成條件保持。入口docs/verification/quest-rng-20261007.md。
 
   2026-10-08：最新任務亂數來源342輸入／340Go已完成Linux逐byte重生、WindowsAMD64及macOS兩架構／universal建置。Linux／Wine9雙語原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG通過；完整v3與新程序重載符合現行Linux。Go1.26.7／Ebitengine2.9.9及十九套件再次核對。Wine非真機、macOS未執行，原完成條件保持。舊映像均無法啟動，已以可重現本專案revision恢復並保存映像ID及套件清冊。入口docs/verification/platform-quest-rng-20261007.md。
+
+  2026-10-11：v.1.0.0-20261011 三平台六個正式包與64秒1080p影片完成。Linux AppImage及Windows實際ZIP的full／資料匯入release啟動通過；macOS雙架構與結構通過但未執行，主機FUSE與真機保持未驗。本項不結案，入口docs/verification/release-v1.0.0-20261011.md。
   完成條件：三平台各有一次真的把程式跑起來的 smoke。
   核實：要人判——Windows／macOS 的啟動要在那些平台上跑，本機沒有訊號。與 windows-macos-real-machine 相接：那一條是完整驗收，這一條只要求最小啟動。 RE-273正常移動首場632原版狀態、5223骰揭露同格倒地Olear遮住站立Moraine的射擊查找。DRAFT候選、READY後修正單一備用查找，340Go／342來源、Linux03509ac1與候選相同。十九套件、正式4474正常／保存／重載狀態及180PNG通過，完整v3只差saved_at；每語言461戰鬥狀態／4149記錄的40語意欄位及seed零差，33規劃／15掃描／4側翼呼叫相符。四次均沒有轉向，成功側翼未驗；35組英文26組除滑鼠相同，9組其他差異保留。新版長任務及平台待回歸，不借RE-270舊341來源；完整原始記錄、撤退及撿武器等原完成條件保持。入口docs/re/20261006-ai-flank-normal.md。
 
@@ -172,15 +176,11 @@ tools/run_python_tool.sh tools/worklist.py verify
 
 - **github-release**（#43） — 發 GitHub Release
   權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。
+
+  2026-10-11：使用者本次只要求製作封包與影片，已完成本機v.1.0.0-20261011交付，沒有GitHub Release、tag或外部上傳。譯文與影片公開方式仍按既有問題處理。
   卡在：等使用者決定
   完成條件：兩件都決定，Release 發出去。
   核實：要人判——對外動作要使用者點頭，不該由 verify 判。
-
-- **dist-rebuild-version-number**（#48） — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號
-  正式打包入口已拒絕非完整版號並保留既有版本／封包目錄，各平台傳遞同一完整版號。檔案組裝、內容驗收及推廣來源複製已移入容器；16項隔離回歸、936份現行資料逐檔組裝及清單驗收通過，見 workplace/release-docker-pipeline-20261004/receipt.json。凍結Linux候選仍是development，真實版號比對正確拒絕；診斷啟動只驗封面、結局及Xvfb清理。未定正式版號、未重建平台封包或影片；跨平台真機、素材權利與推廣片仍依各自閘門驗收。
-  卡在：版本號要使用者決定
-  完成條件：版本號定案，用它重建一次並驗收。
-  核實：要人判——版本號是決策不是程式狀態。`build_dist.sh` 把版本當參數收，綁不到也不該綁。
 
 
 ### 本輪核實為已完成（原本掛在未完成清單上）
@@ -223,6 +223,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣：已完成
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
+- **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號：2026-10-11 本機交付驗收通過；不關閉原版parity、真機或GitHub Release項。
 - **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。

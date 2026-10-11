@@ -1,11 +1,20 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-10-10。正式來源含 SPEC-008 受阻打暈與任務入口亂數接續，
+更新日期：2026-10-11。正式來源含 SPEC-008 受阻打暈與任務入口亂數接續，
 正常購馬保存為 RE-293，HD 工作批次為 RE-294。完整重製尚未完成。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
 ## 目前作業方向
+
+2026-10-11 使用者授權判斷收尾狀況，最多補一次抽樣，打包 v1.0.0 完整版、release 與推廣影片。
+目前採 `v.1.0.0-20261011`，沿現行 EGA／Go 正式來源。既有正常路徑與跨平台回歸足以開始本次打包；
+唯一新增抽樣為固定 seed1 的繁中任務戰鬥逃離、自然遭遇、回城住宿保存及新程序重載。
+本機交付已驗收通過，見[本版收據](docs/verification/release-v1.0.0-20261011.md)。
+唯一抽樣1046正常狀態與13新程序重載相符；六包及64秒1080p影片已完成。
+封包仍明示完整原版 parity、全部中文畫面與平台真機未驗；不把版號當成這些閘門已完成。
+完整版及影片留本機，release 不含原版遊戲素材，附合法資料匯入工具。沒有外部發布授權。
+matching 工作維持暫停。現行交付與收據入口已登記於 README 及 WORKLOG。
 
 2026-10-08使用者要求暫停目前對拍，改研究原版C的matching decompilation。
 對拍維持暫停，現行入口為[原始工具鏈與匹配工作](docs/re/matching-decompilation.md)。
@@ -41,10 +50,10 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
 | 正式來源 | 340份Go、342份程式輸入；[任務亂數接續](docs/verification/quest-rng-20261007.md)與[受阻打暈持物](docs/verification/blocked-stun-20261007.md)有限CONFORMED；RE-295出城移動率及RE-290移動呈現保持 | 最新只改main.go既有任務入口；舊H名稱、原始記錄未知欄位及整場末端仍未閉合 |
-| 最近測試 | 十九套件通過；雙語正式及觀察前綴3540狀態／108PNG，各753個原版戰鬥點零差；正常回城保存及新程序重載4236狀態／72PNG，完整v3核對通過 | 重播原前綴，不增加原版覆蓋；回城末端只驗remake |
+| 最近測試 | v1.0.0 十九套件通過；唯一繁中封包抽樣1046正常狀態、13新程序重載、43PNG，完整trace及v3除saved_at符合前版 | 不增加原版覆蓋；兩則既有go vet未具名欄位警示保留；末端只驗remake |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
-| 跨平台 | [最新回歸](docs/verification/platform-quest-rng-20261007.md)：現行來源Linux逐byte重生、Windows AMD64及macOS兩架構／universal建置通過；Linux／Wine原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG符合基準；完整v3與新程序重載通過 | macOS未執行，Wine不是真機；真機、FUSE、正式封包與原完成條件保持 |
+| 跨平台 | [前版回歸](docs/verification/platform-quest-rng-20261007.md)：現行來源Linux逐byte重生、Windows AMD64及macOS兩架構／universal建置通過；Linux／Wine原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG符合基準；本版六個封包另見[交付驗收](docs/verification/release-v1.0.0-20261011.md) | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
 | 正常 AI 抽樣 | [反制掃描](docs/re/20261006-ai-counter-normal.md)、[成功側翼](docs/re/20261006-clockwise-flank-normal.md)、[成功撤退](docs/re/20261006-flee-normal.md) 已有有限正常案例 | 其他戰局、困住撤退及成功怪物拾取仍開放 |
 | 最新原版試驗 | RE-295 真保存角色正常出城，seed1、169延伸鍵、170狀態；與現行首次紮營及111個同期世界標籤／日期框相符 | 本上限內沒有自然騎走問答；紮營後26個方向鍵原版忽略、現行換日，完整野外對拍未通過 |
 | 怪物拾取證據 | [RE-292](docs/re/20261006-monster-pickup-low-strike.md)：883狀態、10回合、2264次自然亂數；完整16-byte掉物1筆 | 未取得站立空手怪物或成功拾取，不延長同場挑結果 |
@@ -55,9 +64,9 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 中文與版面 | [RE-261](docs/re/20261006-cjk-v2-name-population.md) 名稱字寬核對與 [RE-286](docs/re/20261006-world-prompt-longest.md) 正常最長世界提示證據保留；[RE-285](docs/re/20261006-sheet-subpages.md) 法術／任務子頁已有限抽驗 | 未訪畫面、圖片內英文、其他最長字串、職業／專名及完整名牌仍需核對 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
 | HD | 使用者選定手繪重繪；[RE-229](docs/re/20261004-hd-art-ui-prototype.md) 完成方向樣張；[RE-294](docs/re/20261006-hd-render-dependencies.md) 核對現行804張PNG、43圖組與八批繪圖依賴 | 只核准媒材；解析度、版面、造型、構圖、素材契約與正式整合尚未核准；資料PNG與結構遮罩另列 |
-| 交付 | 打包防護與資料組裝已驗，入口 [tools/build_dist.sh](tools/build_dist.sh) | 正式版號與外部發行未定；本輪沒有封包、影片或 Release |
+| 交付 | `v.1.0.0-20261011`：三平台full／release、64秒1080p影片，入口[本版收據](docs/verification/release-v1.0.0-20261011.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；沒有外部發布、tag或真機驗收 |
 
-現行 Linux 執行檔 SHA-256：
+上一輪開發候選 Linux 執行檔 SHA-256：
 `2a885b9a37e884d1830010f7ccb1051b030fe4b14c678fbb71a25955a745fd66`。
 這是驗收時建置的開發候選雜湊。執行檔屬可重建產物，清理後不保留位元組；
 Windows／macOS最新來源已重建；完整雜湊及限制見[平台回歸](docs/verification/platform-quest-rng-20261007.md)。
@@ -92,20 +101,21 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **19 條未完成**（15 條沒有機器訊號、標 `manual`），
-  另有 89 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`manual` 15、`present` 4。
+- 目前 **18 條未完成**（14 條沒有機器訊號、標 `manual`），
+  另有 90 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`manual` 14、`present` 4。
 <!-- worklist:stats:end -->
 
-下表與十九個現行條目逐項對應；不修改完成條件、verify、狀態或 Issue。
-精確契約及證據雜湊另見本輪 [逐項稽核](workplace/current-handoff-audit-20261006/gate-audit.json)。
+下表列出仍開放的十八個條目。本機封包項已依本版收據結案，其餘完成條件保持。
+前版逐項契約見 [逐項稽核](workplace/current-handoff-audit-20261006/gate-audit.json)，
+本輪只新增[本機交付收據](docs/verification/release-v1.0.0-20261011.md)。
 
 | 工作識別碼 | 下一閘門 |
 |---|---|
 | matching-koltown-binary | 接續Town5與Book五個CODE函式；依seed-compiler-units.json保留全部真實CODE物件與CODE／DATA獨立核對器，遊戲對拍暫停 |
 | g07-battle-speed-options | SPEC-028 細則確認及 READY；三選項控制、保存與可見原型驗收 |
 | v01-full-battle-parity | 受阻持物與任務亂數前綴已閉合；補正常整場結算與保存同狀態、舊H名稱及跨場H |
-| v02-appimage-platform-acceptance | 主機 FUSE、三平台與推廣影音收據 |
+| v02-appimage-platform-acceptance | 主機 FUSE 與平台真機；本輪六包與推廣影音收據已完成 |
 | dosgolem-gui-ai-acceptance | 取得成功怪物拾取的正常原版 GUI；有限反制／側翼／撤退不結案整項 |
 | asset-inventory-format-spec | 三格式原條件保留開放；CGA／Hercules 後續再處理，EGA 首版已完成 |
 | text-layout-remaining-screens | 補未訪城鎮、世界、戰鬥的 CJK 安全矩形 |
@@ -116,7 +126,6 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 | github-release | 公開方式及外部發布決定，再依原條件發布 |
 | v01-remaining-battle-chain | 保持 v01-full-battle-parity 的完整裝備、指令、結算及戰後保存條件 |
 | save-across-battle-and-clock | 決定戰鬥中途保存是否新增；世界時間 v3 保存已完成 |
-| dist-rebuild-version-number | 正式版號定案後乾淨重建與驗收 dist-all |
 | ui-details-unverified | 補五處UI未驗邊界及RE-295紮營確認；送禮選人版面、空白法術名、類型0明細與[馬廄確認原型](workplace/steed-trade-normal-20261006/review.html)仍待原問題回答 |
 | mouse-original-semantics | 回答兩次點擊、右鍵、世界點擊三處原有取捨，依選擇實作與驗收 |
 | character-creation-boundary-parity | 重名政策及滿槽／名稱邊界確認，SPEC-005／023 審查後正式修正 |
@@ -133,6 +142,7 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 
 | 日期 | 議題 | 已確認決定 |
 |---|---|---|
+| 2026-10-11 | 本機收尾交付 | 使用者授權判斷目前狀況、最多一次抽樣後打包v1.0.0；依規則採v.1.0.0-20261011，保留既有未驗項，不外部發布 |
 | 2026-10-07 | 任務亂數 | 採比較頁已展示的原版共用世界來源；SPEC-008窄切片正式有限CONFORMED |
 | 2026-10-07 | 受阻打暈 | 採原版保留完整持物；成功擊退仍掉物。SPEC-008窄契約已正式有限CONFORMED |
 | 2026-10-05 | HD 美術 | 採用手繪重繪媒材；構圖、造型、解析度與介面另行確認 |

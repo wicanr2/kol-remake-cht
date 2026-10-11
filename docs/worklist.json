@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-10-10",
+  "updated": "2026-10-11",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -169,7 +169,7 @@
       "id": "v02-appimage-platform-acceptance",
       "layer": "release",
       "title": "V02：主機 FUSE、其他平台與推廣交付的驗收",
-      "body": "Linux AppImage v.0.2.2-20260908 已重建：封包內版號、849 筆必要素材與文件、98 次正常建角／保存操作通過；另完成 XDG_CONFIG_HOME 與 HOME/.config 兩組各 95 次不指定 -save 的保存／重載（docs/verification/appimage-v.0.2.2-20260908.md）。主機 FUSE、其他平台與推廣交付仍待驗。 2026-10-01 現行工作樹三平台中間建置續核：Linux／Windows各編譯兩次雜湊一致，Linux仍f969a63f；Windows304890ea在Wine9實際啟動，預設繁中與APPDATA保存、正常標題／六人招募／購買／住宿198個互動按鍵及重載15鍵通過。兩平台199／16筆批次狀態與既有收據完全相同，40組整圖比較0差；保存除saved_at外一致、重載未改檔。macOS universal兩架構、最低11.0、arm64簽章區塊與系統相依核實通過，但尚未實際啟動；Wine不是Windows真機。收據docs/verification/platform-smoke-20261001/receipt.json。只驗當前source資源入口，未建正式封包或版號，本項不結案。",
+      "body": "Linux AppImage v.0.2.2-20260908 已重建：封包內版號、849 筆必要素材與文件、98 次正常建角／保存操作通過；另完成 XDG_CONFIG_HOME 與 HOME/.config 兩組各 95 次不指定 -save 的保存／重載（docs/verification/appimage-v.0.2.2-20260908.md）。主機 FUSE、其他平台與推廣交付仍待驗。 2026-10-01 現行工作樹三平台中間建置續核：Linux／Windows各編譯兩次雜湊一致，Linux仍f969a63f；Windows304890ea在Wine9實際啟動，預設繁中與APPDATA保存、正常標題／六人招募／購買／住宿198個互動按鍵及重載15鍵通過。兩平台199／16筆批次狀態與既有收據完全相同，40組整圖比較0差；保存除saved_at外一致、重載未改檔。macOS universal兩架構、最低11.0、arm64簽章區塊與系統相依核實通過，但尚未實際啟動；Wine不是Windows真機。收據docs/verification/platform-smoke-20261001/receipt.json。只驗當前source資源入口，未建正式封包或版號，本項不結案。\n\n2026-10-11：v.1.0.0-20261011 三平台六個正式包與64秒1080p影片完成。Linux AppImage及Windows實際ZIP的full／資料匯入release啟動通過；macOS雙架構與結構通過但未執行，主機FUSE與真機保持未驗。本項不結案，入口docs/verification/release-v1.0.0-20261011.md。",
       "acceptance": "三平台各自驗收通過，推廣交付有影音驗收收據。",
       "verify": {
         "kind": "manual",
@@ -738,7 +738,7 @@
       "id": "cross-platform-build-smoke",
       "layer": "release",
       "title": "Linux／Windows／macOS 可重現編譯與最小啟動 smoke",
-      "body": "RE-255現行336Go／338輸入與Linuxc8764592保持。同來源Windows AMD64、macOS ARM64／AMD64／universal離線重建、架構、macOS最低11.0及音訊依賴通過。Wine9雙語正常十三回合772狀態、實際v3新程序重載26狀態及22組完整PNG與各自Linux控制相同。保存檔未改，收據路徑與缺四張控制圖的工具問題修正後同映像乾淨重跑。歷史RE-230音訊平台證據保持其原來源範圍。Windows真機、macOS實際啟動及最新正式封包仍待驗；原完成條件保持。入口docs/re/20261005-current-quest-regression.md。 RE-256（2026-10-06）正式Linux420e0e47／338來源，199條bytes證實英文末S先退欄。1744前版／候選正常狀態只差遭遇與戰敗兩個名稱欄，原版戰敗訊息區零差；十九套件、1136真實保存／26重載與正式872正常／26重載通過。原版遭遇整頁與勝利S結尾正常GUI仍待驗，新長任務與平台待回歸。受阻原型DRAFT與原完成條件保持，入口docs/re/20261005-monster-plural-ending.md。 RE-257（2026-10-06）現行Linux420e0e47／338來源有限回歸通過。雙語11944長任務／26真實重載、40PNG與RE-255完整相同，完整v3只差saved_at。Windows及macOS雙架構／universal建置通過；Wine9雙語872正常／26重載、22PNG符合現行Linux，保存檔未改。200明示遭遇骰沿既定計畫，不當自然完整旅程或原版整條任務。真機、macOS執行、正式封包與原完成條件保持，入口docs/re/20261006-plural-current-regression.md。 RE-258現行Linux1f31007c／338來源，正常原版198個狀態與前綴相同，199道bytes與E7／E8核實。英文伏擊名稱另起y24，訊息328差異降0，整頁仍差滑鼠67像素。十九套件、候選872正常／1136實際保存／26重載與正式872／26及22PNG通過。繁中及完整v3保持；新長任務與平台未重跑，其他原版分支及原完成條件保持。入口docs/re/20261006-ambush-name-frame.md。 RE-259現行Linux1f31007c／338來源有限回歸通過，11944長任務／26真實重載，雙語完整trace與RE-257相同，40／40張PNG與RE-257逐byte相同，完整v3只差saved_at。Windows／macOS雙架構與universal建置通過，Wine9雙語872正常／26重載、22PNG符合現行Linux；保存未改。明示控制遭遇與原完成條件保持，真機及正式交付仍待驗。入口docs/re/20261006-ambush-current-regression.md。 RE-268現行Linuxdba813be／339來源有限回歸通過，11944長任務／26新程序重載，完整trace與RE-259及40PNG相同，完整v3只差saved_at。Windows／macOS雙架構與universal建置通過，Wine9雙語772正常／26重載、18PNG符合現行Linux，保存未改。控制遭遇與原完成條件保持，真機及正式交付仍待驗。入口docs/re/20261006-monster-reload-current-regression.md。 RE-270現行Linux340c8492／341來源有限回歸通過，11944長任務／26新程序重載，完整trace與RE-268及40PNG相同，完整v3只差saved_at。Windows／macOS雙架構與universal建置通過，Wine9正常772／重載26狀態、18PNG符合現行Linux，保存未改。明示控制遭遇及原完成條件保持，真機及正式封包待驗。入口docs/re/20261006-second-reload-current-regression.md。 RE-273正常移動首場632原版狀態、5223骰揭露同格倒地Olear遮住站立Moraine的射擊查找。DRAFT候選、READY後修正單一備用查找，340Go／342來源、Linux03509ac1與候選相同。十九套件、正式4474正常／保存／重載狀態及180PNG通過，完整v3只差saved_at；每語言461戰鬥狀態／4149記錄的40語意欄位及seed零差，33規劃／15掃描／4側翼呼叫相符。四次均沒有轉向，成功側翼未驗；35組英文26組除滑鼠相同，9組其他差異保留。新版長任務及平台待回歸，不借RE-270舊341來源；完整原始記錄、撤退及撿武器等原完成條件保持。入口docs/re/20261006-ai-flank-normal.md。 RE-274現行342來源／Linux03509ac1有限回歸通過。11944長任務／26真實重載、完整trace與RE-270及40PNG相同，完整v3只差saved_at。Windows／macOS雙架構及universal建置、Wine9正常772／重載26狀態與18PNG通過。原完成條件與明示遭遇控制保持，真機、macOS執行與正式封包待驗。入口docs/re/20261006-missile-current-regression.md。 2026-10-07：現行受阻持物修正來源342輸入／340Go已重建Linux、Windows AMD64、macOS AMD64／ARM64／universal。Linux重建與十九套件所驗二進位相同；Linux及Wine9各雙語2310正常／保存／重載狀態、404PNG的完整trace、PNG及只排saved_at的v3符合RE-295登記基準。macOS最低11.0、系統依賴與ARM64簽章通過；macOS未執行，Wine不取代Windows真機，本項不結案。入口docs/verification/local/finish-platform-20261007/receipt.json。\n\n2026-10-07任務亂數正式接線後，最新Linux來源已驗雙語正常保存重載；前版平台收據沿受阻打暈來源，Windows／macOS須按最新來源重建。真機及原完成條件保持。入口docs/verification/quest-rng-20261007.md。\n\n2026-10-08：最新任務亂數來源342輸入／340Go已完成Linux逐byte重生、WindowsAMD64及macOS兩架構／universal建置。Linux／Wine9雙語原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG通過；完整v3與新程序重載符合現行Linux。Go1.26.7／Ebitengine2.9.9及十九套件再次核對。Wine非真機、macOS未執行，原完成條件保持。舊映像均無法啟動，已以可重現本專案revision恢復並保存映像ID及套件清冊。入口docs/verification/platform-quest-rng-20261007.md。",
+      "body": "RE-255現行336Go／338輸入與Linuxc8764592保持。同來源Windows AMD64、macOS ARM64／AMD64／universal離線重建、架構、macOS最低11.0及音訊依賴通過。Wine9雙語正常十三回合772狀態、實際v3新程序重載26狀態及22組完整PNG與各自Linux控制相同。保存檔未改，收據路徑與缺四張控制圖的工具問題修正後同映像乾淨重跑。歷史RE-230音訊平台證據保持其原來源範圍。Windows真機、macOS實際啟動及最新正式封包仍待驗；原完成條件保持。入口docs/re/20261005-current-quest-regression.md。 RE-256（2026-10-06）正式Linux420e0e47／338來源，199條bytes證實英文末S先退欄。1744前版／候選正常狀態只差遭遇與戰敗兩個名稱欄，原版戰敗訊息區零差；十九套件、1136真實保存／26重載與正式872正常／26重載通過。原版遭遇整頁與勝利S結尾正常GUI仍待驗，新長任務與平台待回歸。受阻原型DRAFT與原完成條件保持，入口docs/re/20261005-monster-plural-ending.md。 RE-257（2026-10-06）現行Linux420e0e47／338來源有限回歸通過。雙語11944長任務／26真實重載、40PNG與RE-255完整相同，完整v3只差saved_at。Windows及macOS雙架構／universal建置通過；Wine9雙語872正常／26重載、22PNG符合現行Linux，保存檔未改。200明示遭遇骰沿既定計畫，不當自然完整旅程或原版整條任務。真機、macOS執行、正式封包與原完成條件保持，入口docs/re/20261006-plural-current-regression.md。 RE-258現行Linux1f31007c／338來源，正常原版198個狀態與前綴相同，199道bytes與E7／E8核實。英文伏擊名稱另起y24，訊息328差異降0，整頁仍差滑鼠67像素。十九套件、候選872正常／1136實際保存／26重載與正式872／26及22PNG通過。繁中及完整v3保持；新長任務與平台未重跑，其他原版分支及原完成條件保持。入口docs/re/20261006-ambush-name-frame.md。 RE-259現行Linux1f31007c／338來源有限回歸通過，11944長任務／26真實重載，雙語完整trace與RE-257相同，40／40張PNG與RE-257逐byte相同，完整v3只差saved_at。Windows／macOS雙架構與universal建置通過，Wine9雙語872正常／26重載、22PNG符合現行Linux；保存未改。明示控制遭遇與原完成條件保持，真機及正式交付仍待驗。入口docs/re/20261006-ambush-current-regression.md。 RE-268現行Linuxdba813be／339來源有限回歸通過，11944長任務／26新程序重載，完整trace與RE-259及40PNG相同，完整v3只差saved_at。Windows／macOS雙架構與universal建置通過，Wine9雙語772正常／26重載、18PNG符合現行Linux，保存未改。控制遭遇與原完成條件保持，真機及正式交付仍待驗。入口docs/re/20261006-monster-reload-current-regression.md。 RE-270現行Linux340c8492／341來源有限回歸通過，11944長任務／26新程序重載，完整trace與RE-268及40PNG相同，完整v3只差saved_at。Windows／macOS雙架構與universal建置通過，Wine9正常772／重載26狀態、18PNG符合現行Linux，保存未改。明示控制遭遇及原完成條件保持，真機及正式封包待驗。入口docs/re/20261006-second-reload-current-regression.md。 RE-273正常移動首場632原版狀態、5223骰揭露同格倒地Olear遮住站立Moraine的射擊查找。DRAFT候選、READY後修正單一備用查找，340Go／342來源、Linux03509ac1與候選相同。十九套件、正式4474正常／保存／重載狀態及180PNG通過，完整v3只差saved_at；每語言461戰鬥狀態／4149記錄的40語意欄位及seed零差，33規劃／15掃描／4側翼呼叫相符。四次均沒有轉向，成功側翼未驗；35組英文26組除滑鼠相同，9組其他差異保留。新版長任務及平台待回歸，不借RE-270舊341來源；完整原始記錄、撤退及撿武器等原完成條件保持。入口docs/re/20261006-ai-flank-normal.md。 RE-274現行342來源／Linux03509ac1有限回歸通過。11944長任務／26真實重載、完整trace與RE-270及40PNG相同，完整v3只差saved_at。Windows／macOS雙架構及universal建置、Wine9正常772／重載26狀態與18PNG通過。原完成條件與明示遭遇控制保持，真機、macOS執行與正式封包待驗。入口docs/re/20261006-missile-current-regression.md。 2026-10-07：現行受阻持物修正來源342輸入／340Go已重建Linux、Windows AMD64、macOS AMD64／ARM64／universal。Linux重建與十九套件所驗二進位相同；Linux及Wine9各雙語2310正常／保存／重載狀態、404PNG的完整trace、PNG及只排saved_at的v3符合RE-295登記基準。macOS最低11.0、系統依賴與ARM64簽章通過；macOS未執行，Wine不取代Windows真機，本項不結案。入口docs/verification/local/finish-platform-20261007/receipt.json。\n\n2026-10-07任務亂數正式接線後，最新Linux來源已驗雙語正常保存重載；前版平台收據沿受阻打暈來源，Windows／macOS須按最新來源重建。真機及原完成條件保持。入口docs/verification/quest-rng-20261007.md。\n\n2026-10-08：最新任務亂數來源342輸入／340Go已完成Linux逐byte重生、WindowsAMD64及macOS兩架構／universal建置。Linux／Wine9雙語原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG通過；完整v3與新程序重載符合現行Linux。Go1.26.7／Ebitengine2.9.9及十九套件再次核對。Wine非真機、macOS未執行，原完成條件保持。舊映像均無法啟動，已以可重現本專案revision恢復並保存映像ID及套件清冊。入口docs/verification/platform-quest-rng-20261007.md。\n\n2026-10-11：v.1.0.0-20261011 三平台六個正式包與64秒1080p影片完成。Linux AppImage及Windows實際ZIP的full／資料匯入release啟動通過；macOS雙架構與結構通過但未執行，主機FUSE與真機保持未驗。本項不結案，入口docs/verification/release-v1.0.0-20261011.md。",
       "acceptance": "三平台各有一次真的把程式跑起來的 smoke。",
       "verify": {
         "kind": "manual",
@@ -832,7 +832,7 @@
       "id": "github-release",
       "layer": "release",
       "title": "發 GitHub Release",
-      "body": "權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。",
+      "body": "權利審查已做完（docs/RELEASE-RIGHTS-REVIEW.md），結論是 release/ 可以公開、full/ 不可以。還缺兩件：說明書譯文要不要進 release/，以及使用者對「建立第一個 Release」這個對外動作的明確同意。\n\n2026-10-11：使用者本次只要求製作封包與影片，已完成本機v.1.0.0-20261011交付，沒有GitHub Release、tag或外部上傳。譯文與影片公開方式仍按既有問題處理。",
       "acceptance": "兩件都決定，Release 發出去。",
       "blocked_by": "等使用者決定",
       "verify": {
@@ -950,14 +950,20 @@
       "id": "dist-rebuild-version-number",
       "layer": "release",
       "title": "由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號",
-      "body": "正式打包入口已拒絕非完整版號並保留既有版本／封包目錄，各平台傳遞同一完整版號。檔案組裝、內容驗收及推廣來源複製已移入容器；16項隔離回歸、936份現行資料逐檔組裝及清單驗收通過，見 workplace/release-docker-pipeline-20261004/receipt.json。凍結Linux候選仍是development，真實版號比對正確拒絕；診斷啟動只驗封面、結局及Xvfb清理。未定正式版號、未重建平台封包或影片；跨平台真機、素材權利與推廣片仍依各自閘門驗收。",
-      "blocked_by": "版本號要使用者決定",
+      "body": "2026-10-11 使用者授權最多一次抽樣後打包 v1.0.0。本機 v.1.0.0-20261011 已從342份不變正式輸入重建 Linux、Windows AMD64、macOS universal 的 full／release，共六包，另完成64秒1080p影片。十九套件、唯一1046正常／13重載、Linux與Wine實際封包啟動、完整資料與ZIP驗證通過；三包manifest逐檔SHA-256及大小獨立重算。入口 docs/verification/release-v1.0.0-20261011.md。原版parity、真機及公開發布依各原工作項保持。",
       "acceptance": "版本號定案，用它重建一次並驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "版本號是決策不是程式狀態。`build_dist.sh` 把版本當參數收，綁不到也不該綁。"
+        "kind": "required_in_all",
+        "paths": [
+          "tools/closeout_release.py",
+          "docs/verification/release-v1.0.0-20261011.md"
+        ],
+        "pattern": "v\\.1\\.0\\.0-20261011",
+        "note": "本機版號與可重現交付入口回歸；逐檔雜湊另由交付SHA256SUMS.json及三包manifest驗證。"
       },
-      "issue": 48
+      "issue": 48,
+      "status": "done",
+      "resolved": "2026-10-11 本機交付驗收通過；不關閉原版parity、真機或GitHub Release項。"
     },
     {
       "id": "dist-package-sha256-verification",
@@ -2352,6 +2358,11 @@
       "file": "docs/re/matching-decompilation.md",
       "match": "完整原始EXE仍待重建|完整原版header|far-pointer樣本仍不匹配|memory model|全程記憶體模型仍未知|原版全程記憶體模型",
       "why": "本輪matching-koltown-binary逐項追完整EXE與尚未匹配原版工具／結構，不新增孤立待辦或降低證明標準。"
+    },
+    {
+      "file": "tools/closeout_release.py",
+      "match": "完整戰鬥與全程通關的原版同狀態仍未驗完|部分圖片英文、最長中文欄位與建角／滑鼠操作邊界仍有未驗項|主機 FUSE 未驗|戰鬥中途保存尚未提供",
+      "why": "交付說明沿用既有未驗限制。完整戰鬥由v01-full-battle-parity與v01-remaining-battle-chain追蹤；文字與操作由cjk-remaining-screens、text-layout-remaining-screens及ui-details-unverified追蹤；FUSE由v02-appimage-platform-acceptance追蹤；戰鬥保存由save-across-battle-and-clock追蹤。沒有新增獨立待辦或降低原完成條件。"
     }
   ]
 }
