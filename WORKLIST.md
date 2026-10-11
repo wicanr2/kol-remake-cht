@@ -169,7 +169,8 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：`tools/verify_dist.sh` 找得到 `macOS 要真機` 就是還沒完
 
 - **github-release**（#43） — 發 GitHub Release
-  2026-10-12使用者要求三平台完整版、release與推廣影片。本版v.1.0.1-20261012已完成六包、76秒影片與權利審查。GitHub維持private，僅上傳三個引擎包及SHA-256；完整手冊譯文不放release，完整版與影片只留本機。發行待本輪最後發布步驟，入口docs/verification/release-v1.0.1-20261012.md。
+  v.1.0.1-20261012本機六包、76秒影片及權利審查完成，來源6d98fb00已推送。GitHub維持private；僅預備上傳三個引擎包及SHA256SUMS.txt，完整手冊譯文、完整版與影片不外傳。自動核准審查拒絕gh release create，理由為未明示授權wicanr2/kol-remake-cht目的地與外部上傳；命令未執行，沒有新增Release或tag。已請使用者明確確認，入口docs/verification/release-v1.0.1-20261012.md。
+  卡在：自動核准審查拒絕外部上傳，待使用者明示GitHub目的地授權
   完成條件：兩件都決定，Release 發出去。
   核實：要人判——對外動作要使用者點頭，不該由 verify 判。
 

@@ -11369,3 +11369,4 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 影片以本版正常抽樣及實際切換的新畫格合成76秒1920×1080、25fps、H.264／AAC。十幕中心及字幕目視通過，峰值-9.8dB、無達門檻黑幀；5至10秒停格與雷聲外靜音依分鏡，不稱連續實機錄影。素材來源、配方、FFprobe與影音檢查隨片保存。
 - 全程Docker、無網路、有界資源與UID/GID1000，Xvfb及Wine有退出trap；暫存與編譯快取隨容器回收，沒有新workplace比較目錄。新版輸入、七份可重現配方、映像ID、錯誤紀錄與SHA-256留dist-all；二進位、遊戲資料、影片不進Git。接著依持續有效commit＋push及本輪Release授權完成提交與發布。
 - 六包最終驗證及獨立唯讀核對通過：1485份交付檔案逐一符合大小與SHA-256，356份程式來源、配方及134個文件連結相符。工作清單17開放／91完成、2052行自承全部認領；固定舊版號的訊號已改成明示--version入口。全專案沒有root-owned檔案或誤建.md目錄，本輪kol-release容器歸零，git diff --check通過。
+- 發行來源與文件提交為6d98fb00並推送origin/main。依本輪release指令嘗試向目前private儲存庫wicanr2/kol-remake-cht建立v.1.0.1-20261012草稿，只附三個引擎包與SHA256SUMS.txt；自動核准審查在程序啟動前拒絕，理由為未明示授權這個特定GitHub目的地與外部上傳副作用。沒有上傳或建立遠端Release／tag，也未改用其他方式規避。已提出目的地與四個附件的明確授權確認；本機六包、影片、metadata及checksum保持驗收完成。

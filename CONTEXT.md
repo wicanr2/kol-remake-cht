@@ -15,7 +15,8 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 切換後正常住宿的完整v3除saved_at與未切換相同，新程序重載的七個狀態及畫面相同。
 [SPEC-039設定契約](docs/spec/039-hd-art-ui.md#遊戲內畫面設定)升有限CONFORMED；整體HD仍為DRAFT。
 最新交付為 `v.1.0.1-20261012`，三平台完整版已包含此功能，前版保持。
-六包與76秒影片已通過[本版驗收](docs/verification/release-v1.0.1-20261012.md)，準備 GitHub Release。
+六包與76秒影片已通過[本版驗收](docs/verification/release-v1.0.1-20261012.md)，發行來源6d98fb00已推送。
+GitHub上傳被自動核准審查拒絕，待確認目的地與上傳授權，尚無Release或tag。
 
 使用者明確修改驗收規則：允許鎖血、提高攻擊與準備場景，重製版抵達對應場景，
 確認中文與畫面正確就通過。依 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)，
@@ -43,7 +44,7 @@ Windows實際ZIP的full／匯入後release繪圖及F10切換通過，十組中�
 macOS雙架構、最低11.0、ARM64簽章及系統相依通過，尚未執行。
 六包與76秒1080p影片完成，十幕目視、影音與來源檢查通過。
 完整版與影片留本機；Release只提供三平台引擎包及其SHA-256，不含素材或完整手冊譯文。
-本版權利審查已更新，GitHub維持private，正式發布尚待本輪最後步驟。
+本版權利審查已更新，GitHub維持private；自動核准審查拒絕上傳，等待使用者確認目的地授權。
 前版[交付收據](docs/verification/release-v1.0.0-20261011.md)及產物保持，matching維持暫停。
 
 2026-10-08使用者要求暫停目前對拍，改研究原版C的matching decompilation。
