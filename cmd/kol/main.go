@@ -1075,24 +1075,27 @@ type game struct {
 	markerStep int
 	canvas     *screen.Canvas
 	// hd只控制最後呈現；規則、文字及保存沿既有畫布。
-	hd             *ui.HD
-	hdCache        *ui.HD
-	hdCanvas       *screen.Canvas
-	hdDir          string
-	hdLanguage     string
-	presentation   *screen.Canvas
-	noticeCanvas   *screen.Canvas
-	state          *charcreate.State
-	sequence       *title.Sequence
-	player         *title.Player
-	titleSound     *titleSound
-	titleAudioPath string
-	book           *book.OpenPlayer
-	bookAnim       *book.OpenAnimation
-	bookWait       float64
-	bookFrom       string // 動畫的起始畫面
-	bookTarget     string // 動畫的目標畫面
-	bookLib        *assets.Library
+	hd                *ui.HD
+	hdCache           *ui.HD
+	hdCanvas          *screen.Canvas
+	hdDir             string
+	hdLanguage        string
+	displaySettings   ui.DisplaySettings
+	displayCanvas     *screen.Canvas
+	displayAwaitFrame bool
+	presentation      *screen.Canvas
+	noticeCanvas      *screen.Canvas
+	state             *charcreate.State
+	sequence          *title.Sequence
+	player            *title.Player
+	titleSound        *titleSound
+	titleAudioPath    string
+	book              *book.OpenPlayer
+	bookAnim          *book.OpenAnimation
+	bookWait          float64
+	bookFrom          string // 動畫的起始畫面
+	bookTarget        string // 動畫的目標畫面
+	bookLib           *assets.Library
 
 	// ending 是結局播到第幾段（RE-106）；endBank／endTrans 是敘事的文字庫與譯文。
 	ending   *ending.State
@@ -1756,6 +1759,15 @@ func (g *game) Update() error {
 		return nil
 	}
 	if g.interactive {
+		// Ctrl+Q 在設定面板開啟時也能退出；其餘按鍵先交給面板。
+		if (ebiten.IsKeyPressed(ebiten.KeyControlLeft) ||
+			ebiten.IsKeyPressed(ebiten.KeyControlRight)) &&
+			inpututil.IsKeyJustPressed(ebiten.KeyQ) {
+			return ebiten.Termination
+		}
+		if g.updateDisplaySettings() {
+			return nil
+		}
 		g.advanceBattleMarker()
 		return g.updateInteractive()
 	}
@@ -1913,11 +1925,7 @@ func (g *game) updateInteractive() error {
 	// （RE-073）；remake 那一條接的是回目錄頁，收據見
 	// `internal/flow` 的 `TestInnDisbandReturnsToContents`。
 	// 留著 Ctrl+Q 是因為人不一定停在旅店裡，而視窗總得關得掉。
-	if (ebiten.IsKeyPressed(ebiten.KeyControlLeft) ||
-		ebiten.IsKeyPressed(ebiten.KeyControlRight)) &&
-		inpututil.IsKeyJustPressed(ebiten.KeyQ) {
-		return ebiten.Termination
-	}
+	// Ctrl+Q 的攔截位於 Update，設定面板開啟時同樣有效。
 	// 標題序列自己會播，按任何鍵才離開（RE-047）。
 	if g.flow.Scene == flow.SceneTitle && g.player != nil {
 		if err := g.advanceTitleAudio(); err != nil {
@@ -2604,6 +2612,10 @@ func (g *game) Draw(dst *ebiten.Image) {
 	dst.DrawImage(g.outputCanvas().Image(), op)
 	if len(g.notice) > 0 {
 		g.drawPresentationNotice(dst)
+	}
+	if err := g.drawDisplaySettings(dst); err != nil {
+		g.drawErr = err
+		return
 	}
 	g.drawn = true
 }

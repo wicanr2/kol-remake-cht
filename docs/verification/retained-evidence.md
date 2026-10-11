@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| 正式遊戲內HD／EGA切換與住宿存讀檔 | [正式驗收](display-switch-runtime-20261012.md) | [保存清冊](local/display-switch-runtime-20261012/retention.json) |
 | 遊戲內畫面設定與切換候選 | [候選驗證](display-switch-20261011.md) | [保存清冊](local/display-switch-20261011/retention.json) |
 | 首批HD正式接入、EGA回歸、點選及存讀檔 | [首批驗收](hd-runtime-20261011.md) | [保存清冊](local/hd-runtime-20261011/retention.json) |
 | 受控場景、中文結局及HD第一批原型 | [目前驗收](controlled-scenes-20261011.md)與[HD原型](hd-first-slice-20261011/review.html) | [保存清冊](local/controlled-scenes-20261011/retention.json) |

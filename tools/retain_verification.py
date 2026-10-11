@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'display-switch-runtime-20261012',
     'display-switch-20261011',
     'hd-runtime-20261011',
     'controlled-scenes-20261011',

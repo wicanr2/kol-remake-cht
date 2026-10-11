@@ -1,0 +1,390 @@
+{
+  "schema": "kol-display-switch-runtime/1",
+  "date": "2026-10-12",
+  "base_commit": "88ce0dc9",
+  "status": "CONFORMED within SPEC-039 display settings scope",
+  "approval": {
+    "answer": "同意，開始吧",
+    "date": "2026-10-12",
+    "prototype": "docs/verification/display-switch-20261011/game-menu-hd.png",
+    "sha256": "fd1efd5bfd4bae7d7dabf68050949838fa91a3c84a0c65d06d6d635670a6fc03"
+  },
+  "program_sha256": "ee40bdc59d8bf970eac5192a483c90807c38308727ae535558e689f52cf37e83",
+  "seed": 1,
+  "go_files": 354,
+  "checks": [
+    "go-test.log",
+    "sceneverify-test.log",
+    "gui-check.json",
+    "regression-check.json"
+  ],
+  "observed_scene_and_party_trace_changed": false,
+  "stay_v3_equal_except_saved_at": true,
+  "approved_pixels_equal": 3,
+  "original_parity_claimed": false,
+  "platforms_executed": [
+    "Linux Xvfb"
+  ],
+  "attachments": {
+    "cmd-test": {
+      "size": 14401016,
+      "sha256": "07c7e505d08f67114f95aee56a307e74b52ebc67c7692d0cc9a5994514136c18"
+    },
+    "first-gui-attempt/game-closed.png": {
+      "size": 467420,
+      "sha256": "97259a84b2230ea28f6a3185302060d84d3637b7c71454648ca86574e28a4ff6"
+    },
+    "first-gui-attempt/game-ega.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "first-gui-attempt/game-keyboard-ega.png": {
+      "size": 76167,
+      "sha256": "f489f1c99bde45175c0c16d7ecf531fa6ec7419ce03da00ebbfbd8e6632f0eae"
+    },
+    "first-gui-attempt/game-menu-ega.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "first-gui-attempt/game-menu-hd.png": {
+      "size": 418780,
+      "sha256": "fd1efd5bfd4bae7d7dabf68050949838fa91a3c84a0c65d06d6d635670a6fc03"
+    },
+    "first-gui-attempt/game-resized.png": {
+      "size": 124061,
+      "sha256": "b99e929c9de517e02279fa6256b419e5832e091d955c186f39f2959632b6e54c"
+    },
+    "first-gui-attempt/game-text.jsonl": {
+      "size": 1754,
+      "sha256": "800348583f7a2bb0e1b3e0c17fdede0f40f2d3efddf554609054fe4c22a10ebf"
+    },
+    "first-gui-attempt/game.log": {
+      "size": 2824,
+      "sha256": "3677f6b014d537120a428d425990cf701e5ad1c7abfecc437011d9487c9868d6"
+    },
+    "first-gui-attempt/gui-verification.log": {
+      "size": 1633,
+      "sha256": "b8107d18fa6aee4cc0bef507d1aafceea2ea05b580fbc2cf4fc2d49c3ae61469"
+    },
+    "first-gui-attempt/missing-closed.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "first-gui-attempt/missing-ega.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "first-gui-attempt/missing-menu-ega.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "first-gui-attempt/missing-menu-hd.png": {
+      "size": 71062,
+      "sha256": "80c515fb4070740e1dab8fdcbf5853cb479f76bd82013a21251a8755b5ac9c6f"
+    },
+    "first-gui-attempt/missing-text.jsonl": {
+      "size": 1556,
+      "sha256": "8d30e0382147c45e210e233b5c36a9ff1a1fd2cd8f60ef09d321233e04d00a3d"
+    },
+    "first-gui-attempt/missing.log": {
+      "size": 1098,
+      "sha256": "574497216773f308e8cc754f0bc46f6a910d73eaeb0e6eb5e80bb0ac7f8c91ca"
+    },
+    "first-gui-attempt/stay-baseline.json": {
+      "size": 89424,
+      "sha256": "8cde25bc0ddd2fa0515d412f7f6546c0642052848125a4fe9d081f8a3b3608f7"
+    },
+    "first-gui-attempt/stay-baseline.log": {
+      "size": 962,
+      "sha256": "51d2fca1eb5ad14eb68af1e739a19e493db5cfc620a6bf9a8ffe819142b43352"
+    },
+    "first-gui-attempt/stay-switched.log": {
+      "size": 1323,
+      "sha256": "c67e3571e49eb6426540cd307150fb9fa37d96669153c76e1105cd98be3b66ae"
+    },
+    "first-gui-attempt/xvfb-gui.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "game-closed.png": {
+      "size": 467420,
+      "sha256": "97259a84b2230ea28f6a3185302060d84d3637b7c71454648ca86574e28a4ff6"
+    },
+    "game-ega.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "game-keyboard-ega.png": {
+      "size": 76167,
+      "sha256": "f489f1c99bde45175c0c16d7ecf531fa6ec7419ce03da00ebbfbd8e6632f0eae"
+    },
+    "game-menu-ega.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "game-menu-hd.png": {
+      "size": 418780,
+      "sha256": "fd1efd5bfd4bae7d7dabf68050949838fa91a3c84a0c65d06d6d635670a6fc03"
+    },
+    "game-resized.png": {
+      "size": 124061,
+      "sha256": "b99e929c9de517e02279fa6256b419e5832e091d955c186f39f2959632b6e54c"
+    },
+    "game-text.jsonl": {
+      "size": 1754,
+      "sha256": "800348583f7a2bb0e1b3e0c17fdede0f40f2d3efddf554609054fe4c22a10ebf"
+    },
+    "game.log": {
+      "size": 2824,
+      "sha256": "3677f6b014d537120a428d425990cf701e5ad1c7abfecc437011d9487c9868d6"
+    },
+    "go-test.log": {
+      "size": 1514,
+      "sha256": "311f3b5df54ff5f177b5598f27451596df65fcf144c8aadb4767af2fb9aa6ba4"
+    },
+    "gui-check.json": {
+      "size": 16973,
+      "sha256": "1163130ce361523c5f915ba455d3e572dc14cfe74bba0d29772c0bcfbd8ba0c3"
+    },
+    "gui-verification.log": {
+      "size": 151,
+      "sha256": "f647a7c584d6c9d07a760ebf33c29f6446e67b1ecbe77cb1e6c9cb4e486fb3ee"
+    },
+    "inputs/party6.json": {
+      "size": 2215,
+      "sha256": "f3e21804ece29124d20df6d56beecfbcdd3beef297362143b00e48ff9f2c2e36"
+    },
+    "inputs/party6.json.v2.json": {
+      "size": 89607,
+      "sha256": "333fd17498b7feb0793bbd8dce3f552951c629f13a85929ede20aa7089bf2f13"
+    },
+    "inputs/save.json": {
+      "size": 89607,
+      "sha256": "270afc359e9e282d34632f0e2a86b0edcdb726993e0f6d33b7e4cb551099a0d3"
+    },
+    "inputs/stay-v3.json": {
+      "size": 89424,
+      "sha256": "5eb0fc30afe748d1183486cf1d723e9e51c781a84afa030fd560fed1ba455c9f"
+    },
+    "kol": {
+      "size": 14066968,
+      "sha256": "ee40bdc59d8bf970eac5192a483c90807c38308727ae535558e689f52cf37e83"
+    },
+    "missing-closed.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "missing-ega.png": {
+      "size": 70841,
+      "sha256": "03d2d32cbe2240f5a59f4ad6087e10ae9e0468b0ae9b7e32836b8674cefa23a3"
+    },
+    "missing-menu-ega.png": {
+      "size": 70069,
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24"
+    },
+    "missing-menu-hd.png": {
+      "size": 71062,
+      "sha256": "80c515fb4070740e1dab8fdcbf5853cb479f76bd82013a21251a8755b5ac9c6f"
+    },
+    "missing-text.jsonl": {
+      "size": 1556,
+      "sha256": "8d30e0382147c45e210e233b5c36a9ff1a1fd2cd8f60ef09d321233e04d00a3d"
+    },
+    "missing.log": {
+      "size": 1098,
+      "sha256": "574497216773f308e8cc754f0bc46f6a910d73eaeb0e6eb5e80bb0ac7f8c91ca"
+    },
+    "regression-check.json": {
+      "size": 508,
+      "sha256": "15522fff82878959878c2004ce8b6c2d15a53435f2a24578a415718013e2a0b3"
+    },
+    "regression-verification.log": {
+      "size": 78,
+      "sha256": "16c8a67952e0955771eff33b90f029c660a469b9af4faea7de7c758c57db356c"
+    },
+    "reload-baseline/step-000.png": {
+      "size": 23242,
+      "sha256": "849386ae065989d619121ee713a93464948dccf167d5087f773b777e31ea21be"
+    },
+    "reload-baseline/step-001.png": {
+      "size": 22984,
+      "sha256": "0f6ddbf3dd8dd817892219029a2ab36ec6d0d7bf10ed0b5449f38d06d033a7fd"
+    },
+    "reload-baseline/step-002.png": {
+      "size": 17522,
+      "sha256": "1b0d294b00e44de62caf35b9b714f50d76c2945c832b03b3a78605dbf39cf9a4"
+    },
+    "reload-baseline/step-003.png": {
+      "size": 16919,
+      "sha256": "2ec427b2ddee12097af7b853a6ebd19c6d0196b0f4113fb8c0b7532ed77dbdef"
+    },
+    "reload-baseline/step-004.png": {
+      "size": 17233,
+      "sha256": "fccd83edae8b1edd285213735cb7de5bcd3bcb9491e52f2dc930f37ce167b005"
+    },
+    "reload-baseline/step-005.png": {
+      "size": 17244,
+      "sha256": "b5e68e493cd5d6ac538410e225ec7ad2dab2b656be55faf904d3ce207f494839"
+    },
+    "reload-baseline/step-006.png": {
+      "size": 15485,
+      "sha256": "5fd41f9d566952eb612a6e50d3d90bd6f28357c98174506de65d55b1eff333b5"
+    },
+    "reload-baseline/trace.json": {
+      "size": 1353,
+      "sha256": "562294640b610c538a0fa7667082ad1517ea0ab302f249e8e10aa255193b266f"
+    },
+    "reload-baseline.log": {
+      "size": 633,
+      "sha256": "603b6477b3d3283af939412ea2fbd6c526e27519b0442cc07d0d2928db17f134"
+    },
+    "reload-switched/step-000.png": {
+      "size": 23242,
+      "sha256": "849386ae065989d619121ee713a93464948dccf167d5087f773b777e31ea21be"
+    },
+    "reload-switched/step-001.png": {
+      "size": 22984,
+      "sha256": "0f6ddbf3dd8dd817892219029a2ab36ec6d0d7bf10ed0b5449f38d06d033a7fd"
+    },
+    "reload-switched/step-002.png": {
+      "size": 17522,
+      "sha256": "1b0d294b00e44de62caf35b9b714f50d76c2945c832b03b3a78605dbf39cf9a4"
+    },
+    "reload-switched/step-003.png": {
+      "size": 16919,
+      "sha256": "2ec427b2ddee12097af7b853a6ebd19c6d0196b0f4113fb8c0b7532ed77dbdef"
+    },
+    "reload-switched/step-004.png": {
+      "size": 17233,
+      "sha256": "fccd83edae8b1edd285213735cb7de5bcd3bcb9491e52f2dc930f37ce167b005"
+    },
+    "reload-switched/step-005.png": {
+      "size": 17244,
+      "sha256": "b5e68e493cd5d6ac538410e225ec7ad2dab2b656be55faf904d3ce207f494839"
+    },
+    "reload-switched/step-006.png": {
+      "size": 15485,
+      "sha256": "5fd41f9d566952eb612a6e50d3d90bd6f28357c98174506de65d55b1eff333b5"
+    },
+    "reload-switched/trace.json": {
+      "size": 1353,
+      "sha256": "562294640b610c538a0fa7667082ad1517ea0ab302f249e8e10aa255193b266f"
+    },
+    "reload-switched.log": {
+      "size": 633,
+      "sha256": "bdafc83b6ddc1097124185053d8b6604a8f0a609d329c294bd98487ddea55d9a"
+    },
+    "sceneverify-test.log": {
+      "size": 116,
+      "sha256": "95928a2b531842a1c86e0289c1e6a22cf637740278b23620882a2c947b237a2a"
+    },
+    "seal-runtime.py": {
+      "size": 2886,
+      "sha256": "ec2a1860b259ac25de4ba27550c565ea158b434471ce35de740a4a1f8c67cbf1"
+    },
+    "six/ega/step-000.png": {
+      "size": 27342,
+      "sha256": "b5a834ea22bb27a1d0fe69f2c985741042b3730ae304c2f6d698bca3f437068d"
+    },
+    "six/ega/step-001.png": {
+      "size": 27088,
+      "sha256": "4073c5f1451dba21c531ea19558c45b353b84aeb6c0bb542e40869143caad4aa"
+    },
+    "six/ega/step-002.png": {
+      "size": 21826,
+      "sha256": "5aa32d97ce63841f67bf52260480dd701c43533ff59ea076d1ffc7a4b86ce0b2"
+    },
+    "six/ega/step-003.png": {
+      "size": 21251,
+      "sha256": "06f4ea4ed4671755861322d27ab2f015f44efdd5817f4158b19c6ba3004a17d9"
+    },
+    "six/ega/step-004.png": {
+      "size": 19798,
+      "sha256": "1bc6c07019294d05ed561a3dc89358eefef749c8a3e1f312b186cf7470feac54"
+    },
+    "six/ega/trace.json": {
+      "size": 1312,
+      "sha256": "16eac4cae6952eab41d2154c82bd4661c3aa93f1e03578873eac33d4b8507161"
+    },
+    "six/hd/step-000.png": {
+      "size": 408334,
+      "sha256": "f324350928dbd057124534cc6247bb5fb9f3891aed606e73a157a57b8d9dda19"
+    },
+    "six/hd/step-001.png": {
+      "size": 407860,
+      "sha256": "e8a8aac7dd1042b8497cbce3602dae127ad2e5f909c49bb45bf94526a8ae1151"
+    },
+    "six/hd/step-002.png": {
+      "size": 1657337,
+      "sha256": "5d9390e882133544808212cafb1cf60e4d065dbc1a8563769ea1cb2152d0f68f"
+    },
+    "six/hd/step-003.png": {
+      "size": 401184,
+      "sha256": "afe887984a45ab0c5278f83531acc301cea5689deaa9ce2dafa84cd4181e565c"
+    },
+    "six/hd/step-004.png": {
+      "size": 399529,
+      "sha256": "4df4c3b3f864b80633512806412eb7a4e09fb99a8ac1d5cb1c6029007174eac8"
+    },
+    "six/hd/trace.json": {
+      "size": 1312,
+      "sha256": "16eac4cae6952eab41d2154c82bd4661c3aa93f1e03578873eac33d4b8507161"
+    },
+    "six-ega.log": {
+      "size": 716,
+      "sha256": "c0b59de2a2c6c528d813d94aeb67cec4012c0dc17f5d8d83016c10f7217aac76"
+    },
+    "six-hd.log": {
+      "size": 711,
+      "sha256": "33f4ecb5799c60cf08c2af301aafc5acd9df30998af5fb417a741b8827e53d79"
+    },
+    "source-inputs.json": {
+      "size": 36818,
+      "sha256": "a548741b91666b6145f85e277aea098403e706225213acf2f4eaaae1a81fa730"
+    },
+    "stay-baseline.json": {
+      "size": 89424,
+      "sha256": "499da3ed72f12acd2ca839da74d0476aff7cac1c19fb388ab88de741a517b8de"
+    },
+    "stay-baseline.log": {
+      "size": 962,
+      "sha256": "51d2fca1eb5ad14eb68af1e739a19e493db5cfc620a6bf9a8ffe819142b43352"
+    },
+    "stay-switched.json": {
+      "size": 89424,
+      "sha256": "aed6090d415177f7466368216eaf613379bbc50e0dd19ff3c81252d17a869513"
+    },
+    "stay-switched.log": {
+      "size": 1385,
+      "sha256": "031f3242ebf9ed7ca423b635020e7fd7634599abe24610db8de54242dcaa883e"
+    },
+    "tool-inputs.json": {
+      "size": 732,
+      "sha256": "1df17ed9fa2400ccacbbc201008ae9800f2ccbdea2bd8be2a6d666a99e83cc83"
+    },
+    "verify-candidate-before.py": {
+      "size": 6018,
+      "sha256": "ac78ca5463f51a966416aa0b7177a2fc2287a88f1f650c97bf6976c5b5ab0d85"
+    },
+    "verify-regression.py": {
+      "size": 2338,
+      "sha256": "1754b0eadfffe3cdf720e10231c2764a6636a0b6a063a28f99a7ea3b5b78350c"
+    },
+    "verify_display_switch.py": {
+      "size": 9255,
+      "sha256": "dd526d60e4d09f64b5aa50891c807812a96ba466e03e61ff064f3e8828494864"
+    },
+    "xvfb-gui.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "xvfb-regression.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "xvfb-tests.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    }
+  }
+}

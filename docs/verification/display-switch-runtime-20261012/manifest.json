@@ -1,0 +1,38 @@
+{
+  "schema": "kol-display-switch-runtime-png/1",
+  "entries": [
+    {
+      "file": "game-menu-ega.png",
+      "sha256": "aabd4b984bf884b1a4f3b3cfe889abd52cdc776892d43b729dbbe0e184a33c24",
+      "frame": "game-menu-ega.png",
+      "source_entry": "正式遊戲六人旅店；核准HD素材及已驗EGA PNG",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "tool": "Go1.26.7/Ebitengine2.9.9/Xvfb/ffmpeg；tools/verify_display_switch.py",
+      "program_sha256": "ee40bdc59d8bf970eac5192a483c90807c38308727ae535558e689f52cf37e83",
+      "evidence": "正式畫面設定驗收；與核准原型逐像素相同",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "file": "game-menu-hd.png",
+      "sha256": "fd1efd5bfd4bae7d7dabf68050949838fa91a3c84a0c65d06d6d635670a6fc03",
+      "frame": "game-menu-hd.png",
+      "source_entry": "正式遊戲六人旅店；核准HD素材及已驗EGA PNG",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "tool": "Go1.26.7/Ebitengine2.9.9/Xvfb/ffmpeg；tools/verify_display_switch.py",
+      "program_sha256": "ee40bdc59d8bf970eac5192a483c90807c38308727ae535558e689f52cf37e83",
+      "evidence": "正式畫面設定驗收；與核准原型逐像素相同",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "file": "missing-menu-hd.png",
+      "sha256": "80c515fb4070740e1dab8fdcbf5853cb479f76bd82013a21251a8755b5ac9c6f",
+      "frame": "missing-menu-hd.png",
+      "source_entry": "正式遊戲六人旅店；核准HD素材及已驗EGA PNG",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "tool": "Go1.26.7/Ebitengine2.9.9/Xvfb/ffmpeg；tools/verify_display_switch.py",
+      "program_sha256": "ee40bdc59d8bf970eac5192a483c90807c38308727ae535558e689f52cf37e83",
+      "evidence": "正式畫面設定驗收；與核准原型逐像素相同",
+      "rights": "private GitHub 可保存；無公開散布權"
+    }
+  ]
+}

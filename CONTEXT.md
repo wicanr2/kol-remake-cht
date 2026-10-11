@@ -2,17 +2,19 @@
 
 更新日期：2026-10-12。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
 HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限CONFORMED；其他批次維持DRAFT。
-遊戲內「畫面 F10」設定已完成實際遊戲候選與輸入、畫面、缺件驗證；版面確認尚待回覆。
+遊戲內「畫面 F10」設定已核准並接入正式遊戲，切換與正常住宿存讀檔驗收通過。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
 ## 目前作業方向
 
-最新使用者選定 A：重做畫面設定與遊戲內切換，同場景立即比較，保留已核准美術。
-[畫面設定候選](docs/verification/display-switch-20261011.md)已用實際遊戲驗證按鈕、F10、鍵盤、
-縮小視窗、中文錯誤與無存檔寫入；六人肖像確實替換，所驗旅店場景及文字區保持。
-版面確認問題仍待回覆，[SPEC-039候選契約](docs/spec/039-hd-art-ui.md#遊戲內畫面設定候選)維持DRAFT。
-正式玩家入口未接入面板，開發版仍以命令列選HD；候選可由下方收據入口啟動及重建。
+使用者於2026-10-12核准已展示版面並要求開始，遊戲內畫面設定已接入正式入口。
+點「畫面 F10」或按F10，選EGA／HD立即預覽，Esc或返回按鈕留在原場景。
+[正式驗收](docs/verification/display-switch-runtime-20261012.md)確認三張畫面與核准樣張逐像素相同，
+滑鼠、鍵盤、右鍵、兩種視窗與缺素材中文提示通過。十五個切換事件的場景及隊伍trace保持，
+切換後正常住宿的完整v3除saved_at與未切換相同，新程序重載的七個狀態及畫面相同。
+[SPEC-039設定契約](docs/spec/039-hd-art-ui.md#遊戲內畫面設定)升有限CONFORMED；整體HD仍為DRAFT。
+本機開發執行檔為build/kol-hd；既有v1封包保持原版本。
 
 使用者明確修改驗收規則：允許鎖血、提高攻擊與準備場景，重製版抵達對應場景，
 確認中文與畫面正確就通過。依 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)，
@@ -24,7 +26,7 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 不再作本輪收尾或 HD 開工門檻，不將它們改寫成原版對拍通過。
 
 使用者於2026-10-11核准首批[比較原型](docs/verification/hd-first-slice-20261011/review.html)並要求開始。
-門面1774×887與六人圖集1536×1024原樣接入，以 `-graphics hd -lang zh-Hant` 啟用1920×1200呈現。
+門面1774×887與六人圖集1536×1024原樣接入，可由遊戲內畫面設定啟用1920×1200呈現，亦保留`-graphics hd -lang zh-Hant`啟動選項。
 按實際肖像RGB指紋匹配，不依姓名或隊伍位置；其他人物及自訂圖回退EGA，保存格式不變。
 [首批接入驗收](docs/verification/hd-runtime-20261011.md)完成八條路徑98個HD狀態，與EGA狀態及中文紀錄相同；
 修改前65張EGA畫格保持，實際住宿保存除saved_at相同，舊v3重載與原尺寸／縮小視窗點選通過。
@@ -75,8 +77,8 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 353份Go及2份module；首批HD、畫面設定呈現器及測試已保存；[候選收據](docs/verification/display-switch-20261011/receipt.json)索引本輪來源清冊 | 正式入口未接入設定面板；v1.0.0已交付包未包含後續中文修正及HD |
-| 最近測試 | 正式套件、sceneverify 戰鬥與適配器通過；七段真實結局譯文不越界、不碰圖框、不互疊；英中受控戰鬥33狀態零非顯示差異 | 場景驗收，不新增原版整場parity；平台真機未新增 |
+| 正式來源 | 354份Go及2份module；畫面設定已接入正式Update及Draw；[正式收據](docs/verification/display-switch-runtime-20261012/receipt.json)索引本輪來源清冊 | v1.0.0已交付包未包含後續中文修正及HD |
+| 最近測試 | 正式套件與sceneverify通過；三張設定畫面與核准樣張相同，切換後正常住宿v3只差saved_at，七個重載狀態及PNG相同；十張既有EGA／HD畫格保持 | 本輪GUI實測旅店設定與保存路徑；原版整場parity及平台真機未新增 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
 | 跨平台 | [前版回歸](docs/verification/platform-quest-rng-20261007.md)：現行來源Linux逐byte重生、Windows AMD64及macOS兩架構／universal建置通過；Linux／Wine原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG符合基準；本版六個封包另見[交付驗收](docs/verification/release-v1.0.0-20261011.md) | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
@@ -89,7 +91,7 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | [首批遊戲接入](docs/verification/hd-runtime-20261011.md)：旅店門面、六人肖像及戰鬥資訊框，1920×1200；98狀態、存讀檔及真實點選通過 | 首批有限CONFORMED；其他圖層、人物裝備、傷勢遮罩及美術依原批次審查；資料PNG不重繪 |
+| HD | [首批遊戲接入](docs/verification/hd-runtime-20261011.md)涵蓋旅店門面、六人肖像及戰鬥資訊框；[遊戲內切換](docs/verification/display-switch-runtime-20261012.md)已接入，三張核准畫面、真實鍵鼠、切換後住宿及重載通過 | 首批及設定有限CONFORMED；其他圖層、人物裝備、傷勢遮罩及美術依原批次審查；資料PNG不重繪 |
 | 交付 | `v.1.0.0-20261011`：三平台full／release、64秒1080p影片，入口[本版收據](docs/verification/release-v1.0.0-20261011.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；沒有外部發布、tag或真機驗收 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：

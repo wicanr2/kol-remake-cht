@@ -10,7 +10,8 @@
 素材來源、完整生成提示及雜湊沿[核准原型](hd-first-slice-20261011/manifest.json)，
 接入清冊為[manifest.json](../../assets/hd/first-slice/manifest.json)。
 
-本機測試執行檔為[build/kol-hd](../../build/kol-hd)，與收據的`kol`雜湊相同。
+本批測試程式雜湊保存在收據；[build/kol-hd](../../build/kol-hd)目前為包含
+[遊戲內切換](display-switch-runtime-20261012.md)的最新開發版。
 可在專案根目錄以`build/kol-hd -graphics hd -lang zh-Hant`遊玩。
 它是開發中間產物；正式交付入口仍為README所列的`dist-all/`。
 重建沿[go_docker.sh](../../tools/go_docker.sh)：

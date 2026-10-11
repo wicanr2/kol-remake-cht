@@ -11345,3 +11345,15 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - [候選驗收](docs/verification/display-switch-20261011.md)與四張PNG同輪掛入README、CONTEXT、SPEC-039、工作清單及保存索引。正式來源353份Go加2份module、四PNG及244個文件連結已唯讀核對。工作清單17開放／91完成，2058行自承全部認領；整體HD仍由hd-art-ui追蹤。正式v1封包、原版研究及既有HD美術不變。
 - 81份證據保存於docs/verification/local/display-switch-20261011，兩份可重建執行檔只留hash。原工作區37957342 bytes，壓縮檔9285248 bytes，SHA-256為14a42270d3b9bf8a249425a4b2a486e6c361cc1cfc446f3531a5888d1ff679c9。核對後只清理本輪比較工作區及專用Go快取；本機候選build/kol-display-preview保留，SHA-256為4abb22eac6ad1ea246a9662016dd6abb0bbd74407d1dd5a3f3af6db79c4dff8e。
 - 全程Docker、無網路、有界資源、UID/GID1000與Xvfb退出trap。沒有root-owned檔案或誤建.md目錄，本專案容器清理；其他專案資源未動。提交及推送沿持續有效授權，本次保存可評審候選，沒有公開發布或改tag。
+
+## 2026-10-12：核准畫面設定接入正式遊戲
+
+- 使用者回覆「同意 開始吧」，核准前輪已展示的畫面設定版面。路由命中規格閘門、文件職責及README現況標準；沿已載入契約將SPEC-039設定子項先升READY，再接入正式Update及Draw，驗收後升有限CONFORMED。其他HD批次保持DRAFT，沒有重新詢問已確認決策。
+- 從核對過的候選封存取回輸入程式；正式面板沿用同一呈現器、矩形、十二字串、配色與核准美術。F10或下緣按鈕開啟，點EGA／HD立即比較，鍵盤亦可選；Esc、右鍵、F10或返回關閉並留在原場景。Ctrl+Q攔截移至面板之前；批次畫布不加設定層，v3不加新欄位。
+- 正式套件及sceneverify適配器／戰鬥測試通過。新增tools/verify_display_switch.py，實際Xvfb＋xdotool驗六人正常進旅店、十五個設定事件、鍵鼠返回及1920×1200／960×600點選。場景及隊伍trace保持，三張正式設定畫面與核准原型逐像素相同；六人均換HD，其他場景與文字區保持。缺素材包保留EGA並顯示中文，返回後整張畫面相同。
+- 同一前批單人v3分別以EGA及遊戲內切HD後正常住宿，兩次均953→897，完整保存除saved_at相同；兩份保存各以新程序重載，七個狀態及七張PNG相同。前批六人腳本五張EGA、五張HD及兩份trace逐檔保持。未新增原版oracle或平台真機聲明。
+- 首輪HD住宿自動化漏收四個period中的一個，log確認只收到三個，導致未到REST；失敗紀錄完整保留。鍵盤改成明確keydown、keyup各跨數個更新幀後，以同一image及命令重跑通過。產品程式沒有因腳本時序問題修改，不放寬中文、保存或畫面門檻。
+- [正式驗收](docs/verification/display-switch-runtime-20261012.md)、三張PNG、收據及來源清冊同輪掛入README、CONTEXT、SPEC-039、規格索引及保存索引。工作清單17開放／91完成；其他美術與平台由既有HD工作追蹤。README提供遊戲內入口；前批收據保留歷史結果，修正其build/kol-hd指向最新程式的說明。
+- 89份證據封存至docs/verification/local/display-switch-runtime-20261012，兩份可重建執行檔只留hash。原工作區35800443 bytes，壓縮檔3181256 bytes，SHA-256為2b5362584b6e6cf7065e069c99afc5e1659a88b1540d6cf01b60dfb2f4a4e83d。唯讀容器核對356份Go／module來源、7份工具與素材入口、3PNG及346個文件連結。確認後只刪本輪比較工作區及專用Go快取。
+- 開發程式保留於build/kol-hd，SHA-256為ee40bdc59d8bf970eac5192a483c90807c38308727ae535558e689f52cf37e83，可直接在遊戲內切換。正式v1封包、推廣片、tag及原版研究保持。沿持續有效commit＋push授權提交推送。
+- 全程既有鎖定Docker image、無網路、有界資源、UID/GID1000及Xvfb退出trap。擁有權與容器清理核對通過，沒有root-owned檔案或誤建.md目錄；其他專案與研究工作區未動。工作清單verify／scan及git diff --check通過。
