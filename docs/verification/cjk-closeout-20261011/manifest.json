@@ -1,0 +1,221 @@
+{
+  "schema": "kol-cjk-screenshots/1",
+  "tool": "tools/verify_cjk_closeout.py report",
+  "tool_sha256": "6ea4da8430d18042f994bef572d1f2dbdab7d1a45e85f4150cf62a7a029dc0b5",
+  "source_zip": {
+    "name": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_entries": {
+    "Knights-of-legend/AWD1HERC.0": "9c6b05c11cf7efaac7a701c761c7bdcd82abdeba99172e431049741f90ba4977",
+    "Knights-of-legend/AWD1PCGA.0": "3196cd7bdf3daa7530ee97b53ec8cd28cd9e99a31c1c3fb102ab723976854b0d",
+    "Knights-of-legend/AWD1PICS.0": "01b8461fb6bf1d697662ef4358284628287deabd5db65dd043247d1be41e5f8f",
+    "Knights-of-legend/BACKPICS.0": "24c0283b9c6d719053b98ee34b04ff4d8ec342ba499546eafdb7666d8176c8b6",
+    "Knights-of-legend/BOOKDATA.0": "d63a8b5b5e28e3b47dfd17bee1315ad5a9c3578856e84790b36d9c633ae2353b",
+    "Knights-of-legend/BOOKPICS.0": "ef3aff1d003d44d7828290b8e80217606b8fecd05a90ee6b6c2dac2a4a92be39",
+    "Knights-of-legend/CHARDATA": "307ae9e2735b9f1d3d8008bcf018ed9125820af4e1ffadf078bc918be16f394e",
+    "Knights-of-legend/CHARPICS": "d3875a6c84c75d8597a0a3053662483acb3fef66bf1b10eefb88c24093b646c7",
+    "Knights-of-legend/CHARPICS.0": "21ff648157f5ba12e1687d3fdc09ed5044db3ffab980be9a815eff84df278b17",
+    "Knights-of-legend/COMBPICS.0": "03bfa87ba848483eb091f4197946824c915aed5814ea96a25c0a1135ed273895",
+    "Knights-of-legend/DISKA0": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+    "Knights-of-legend/DISKA1": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+    "Knights-of-legend/DISKA2": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+    "Knights-of-legend/DISKA3": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+    "Knights-of-legend/DISKA4": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+    "Knights-of-legend/DISKA5": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+    "Knights-of-legend/ENDPICS.0": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+    "Knights-of-legend/ENDTXT.0": "ccd8a8d69b0a257fc33574c51e401988dc65dad891d863d41c28f2e918e22b7a",
+    "Knights-of-legend/FACEPICS.0": "73e4cc6e9c3481235be0e06477a25f10cb1308cfa62df2de0bb4eef305577951",
+    "Knights-of-legend/HANDPICS.0": "cfd10a817e2e31c5ddd233385da9231f29d9f3b8e4937ace8481913b342b16e6",
+    "Knights-of-legend/HEADPICS.0": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+    "Knights-of-legend/INSTALL.BAT": "63aa5c529b45940143a46170ff15f59c507cde6b900ed4fd19e9923fca13f9bc",
+    "Knights-of-legend/INSUB.BAT": "7255f2083aef794170d3c8fd7dbe114f2b4d24b47b9d6853fc4c12f5e96d01dd",
+    "Knights-of-legend/ITEM.LST": "1fc3d8f83eb796d01154efb3b5d33977bf43c146daf76d300a07713fe05c3e80",
+    "Knights-of-legend/KOL.EXE": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71",
+    "Knights-of-legend/KOLBOOK.EXE": "2cada02856d3cf5c3bec948ef3736be6f4bd47e3abce94ddf835c1678e0e5832",
+    "Knights-of-legend/KOLDATA.0": "25bd997fcaaeb22ccfa9a2f832f4d86a321a2b18a56b404134b83bc66bae9cb6",
+    "Knights-of-legend/KOLMPICS.0": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d",
+    "Knights-of-legend/KOLPICS.0": "502367c613109eb326e57c54a727c8e3e414c1f8c3d73c9ad16497c453b8b402",
+    "Knights-of-legend/KOLTOWN.EXE": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+    "Knights-of-legend/LEGSPICS.0": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f",
+    "Knights-of-legend/MAGIC.0": "2fb9389f6ccf3a79fbdcac7d702469641f0698b608739a75bc5b2ce7ca2c08b2",
+    "Knights-of-legend/MAKEMODE.EXE": "3051cc981e2cbf62237c1cbb788f4d10b84c8dea4dcd6c2aad67171cd2196c56",
+    "Knights-of-legend/MISCPICS.0": "39664ad806ee26df8ca588ce0eff633e916486ac4e313984b582b06703efea7c",
+    "Knights-of-legend/MONPICS.0": "b97aa9299e6fe62ca6f54b35b6cc8cb94779700c8535ff960d18ca66bebeb6a9",
+    "Knights-of-legend/PERPICS.0": "a164492edc146880b5ba809d0898a19c4758fc1ea1e1c3966a7dce96871fb5bc",
+    "Knights-of-legend/REGION0.DAT": "21d1291a41792688268af02bbeabcf56a5402c614d3c0d86da2adbe55a9e6ca4",
+    "Knights-of-legend/SET0PICS.0": "d565cd010f3caab65a60a1277c5067bdf765873ca3ff923331211813211ead56",
+    "Knights-of-legend/SET1PICS.0": "3ada5b50c2137be3b4630b861e958d933f566509b8435756e832a5ebf60d38ea",
+    "Knights-of-legend/SET2PICS.0": "b32d70b876a8eb1dc65eabe8bab9a0ef65cd25c2568bc5fb1ab3101ff36b9f5f",
+    "Knights-of-legend/SHLDPICS": "e8e7e42d2cdc91c40e611f06fc9dbad9f065b7dbbd9ea12f9d539abb376c24cd",
+    "Knights-of-legend/SHLDPICS.0": "95f089d3c0d7b276c61676dfbd0ed577dce180d541b6603963060dd60e793190",
+    "Knights-of-legend/STEEDPIC": "1bac851d19b4320f747f3ae85c8f467cc886e73b7fdcf1efc3ef9f6d58307b1a",
+    "Knights-of-legend/STEEDS.0": "a4df9f866323a7661312f735bf4e01b86a3723a6a18a7a8857d20589f0d60206",
+    "Knights-of-legend/TANDYPIN.EXE": "036c39f330a4fe09bc2729756816b869f1154515bf4befba190e767d4e3cdce3",
+    "Knights-of-legend/TITLE.EXE": "8a2879d924d9a9cb01e000bd548c348022c0f922288565015f7560ab8fc6fad6",
+    "Knights-of-legend/TORPICS.0": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+    "Knights-of-legend/TOWN0.0": "73097c17543124c91cd4a8eca71d3926112cda0a8de68c0224116c460098f8ea",
+    "Knights-of-legend/TOWN1.0": "5177e54b55750653827d46f7680280be7c0b38bdf7b0a55b2309a6bd234915be",
+    "Knights-of-legend/TOWN2.0": "07876099e66384a011ab1b0306b813e613fcf5872634410bbafc3c431d29916d",
+    "Knights-of-legend/TOWN3.0": "5a0f38720a91d538b8e99eaacd8bfba22587398cf7f67370e34356e6a23e76b9",
+    "Knights-of-legend/TOWN4.0": "10762cfecfa8b889d37da3e70e8c4b720a8ca04f7fcb823911e01b2f3d54dfd3",
+    "Knights-of-legend/TOWN5.0": "cae3ca9c6277fbffb28b07d4898d22d133143241b8851e7fff1628959ae87d69",
+    "Knights-of-legend/TOWN6.0": "a8f01ef46614295fd3e15a4b730184e2968d036e5f323c99a88dd54e7a2aecf4",
+    "Knights-of-legend/TOWN7.0": "3eae92a02e2c719d04a03490a6fa2eb4e7453044eb99b50605c61a25bcaabb93",
+    "Knights-of-legend/TOWN7.1": "700b16704a3f48a22b2a28a28179e664301bc156140b8e591c01cc036fbe70c4",
+    "Knights-of-legend/TWN0PICS.0": "ba754f43423a5aa9ab2cac9cbe538a06a2f11b5b4a8c4e77d089d496e782b320",
+    "Knights-of-legend/TWN0PICS.1": "ee4d5ffe9d17d49b634fb16376087385db5eb65d7186d404ccf950019ccc5e0f",
+    "Knights-of-legend/TWN1PICS.0": "fe4e6824266d5f894c4eb9fb21d70e9ea717b0200dd91ce233945b6946dd546e",
+    "Knights-of-legend/TWN1PICS.1": "7f1a2b1a0098c732a5491529726da39fa432c30f8a06c8e75b5ae3660a82f2e9",
+    "Knights-of-legend/TWN2PICS.0": "d49348171855f6702ac757535812ab8474871a2d5c6032eac7de10c917a47a32",
+    "Knights-of-legend/TWN2PICS.1": "05061f63af054ed2b017c421e71570d08f87baab983b31c4e0642ec939f15f42",
+    "Knights-of-legend/TWN3PICS.0": "09de032a9bc683c7411765d60caf0416e8df88154737904b25c974de6c4043d8",
+    "Knights-of-legend/TWN3PICS.1": "6944fd0f409eb617c4cf45917a61c9124358b19b9968a753daf7bb72a7195407",
+    "Knights-of-legend/TWN4PICS.0": "db2c1e0962ce0c2b09cb98cb1a8bf00b1765d39a25adc89c24531313bb89f307",
+    "Knights-of-legend/TWN4PICS.1": "40ffb621eeb9d4684cf3885ce5ef8b868c0214756ea533c635ee71d8db947836",
+    "Knights-of-legend/TWN5PICS.0": "e9c5da9168231157ca40eeb0b55795f6208fca599347f52fd002dc037f804cc6",
+    "Knights-of-legend/TWN5PICS.1": "c679660617a416c53913aef0d69a9bcf64924c2f3d0018e8745ddff24e40449a",
+    "Knights-of-legend/TWN6PICS.0": "24114b9586b2e8d5f5b0ddc2b602675eafa60be24dc10bbf8b67b7be66de547d",
+    "Knights-of-legend/TWN6PICS.1": "10cf1124761d6b695ba85d76c47b44353c695cd4588f05bd6288a211c1061930",
+    "Knights-of-legend/TWN7PICS.0": "752e282fdacba251b553ff25b6892e16563d6c9afa334b42c11abdbfec82d137",
+    "Knights-of-legend/TWN7PICS.1": "cfb438af726d17dd42d49a7b777f69dee8a5b55b30053eb371506792021c5156",
+    "Knights-of-legend/TWN7PICS.2": "0a015b61e7e3c1a854386dc47d4d7831cc8a25aa12a66382f782f15814505096",
+    "Knights-of-legend/WEAPPICS.0": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+    "Knights-of-legend/WEATPICS.0": "7c6b481a65d4cb294fe98d759e7241ffba32532eef02a7d0254cb0a8b0dad042"
+  },
+  "asset_manifests": {
+    "assets/original-derived-png/ega/manifest.json": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+    "assets/original-derived-png/ega/BATTLE/manifest.json": "bf931ccff3000130932a522b40d219e24227a092b4c90a68bc2bd31001cb7f48",
+    "assets/original-derived-png/bookdata/manifest.json": "29b8b62b9be14ef7e32ab191ded893b913f94a92bfac64d19a27f2d83b39b58a",
+    "assets/original-derived-png/fonts/manifest.json": "5db3baecce7a0ca28559688f08f98b7c0648765bbf82348de8c490243079f393",
+    "assets/ui-font/manifest.json": "12534d66bb1baede1cd8da5128de1ea98c96a8d3a91a8300fe53f4a5fe3ac8ae"
+  },
+  "docker_image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+  "docker_image_id": "0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f",
+  "go": "1.26.7",
+  "ebiten": "2.9.9",
+  "python": "3.11",
+  "seed": 1,
+  "commands": "完整命令、trace、原版 seed 設定與輸入保存在 ../local/cjk-closeout-20261011/evidence.tar.xz",
+  "files": [
+    {
+      "file": "zh-contents.png",
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source_path": "/out/contents-normal-zh/step-002.png",
+      "source_sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd",
+      "frame": "正常入口／目錄 step2",
+      "producer": "kol-cjk-final",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    },
+    {
+      "file": "zh-newchar.png",
+      "sha256": "2614d76d0929f9ea3b57d28e1ccb8c04ced93a84d7901360a31d53a9cde52b52",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source_path": "/out/gallery/zh-newchar-picture.png",
+      "source_sha256": "2614d76d0929f9ea3b57d28e1ccb8c04ced93a84d7901360a31d53a9cde52b52",
+      "frame": "展示入口／建角",
+      "producer": "v.1.0.0-20261011",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    },
+    {
+      "file": "zh-party.png",
+      "sha256": "6fba3dfa84f1efbfbaf0a5f912e0183b15487c599f4096b6e0362bc93c09e5df",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source_path": "/out/candidate/normal-six/zh-Hant/step-045.png",
+      "source_sha256": "6fba3dfa84f1efbfbaf0a5f912e0183b15487c599f4096b6e0362bc93c09e5df",
+      "frame": "正常入口／六人 step45",
+      "producer": "kol-cjk",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    },
+    {
+      "file": "zh-battle.png",
+      "sha256": "ce205898d90773a7e142af9e29ae10078335c83b46d0f4889e775ed09bc5396f",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source_path": "/out/candidate/normal-six/zh-Hant/step-172.png",
+      "source_sha256": "ce205898d90773a7e142af9e29ae10078335c83b46d0f4889e775ed09bc5396f",
+      "frame": "正常入口／戰鬥 step172",
+      "producer": "kol-cjk",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    },
+    {
+      "file": "en-battle.png",
+      "sha256": "c325bef9bc824c05931c2f89bed1daa3464f2d735013f1b180c3de649c8dc733",
+      "dimensions": [
+        320,
+        200
+      ],
+      "source_path": "/out/candidate/normal-six/en/step-172.png",
+      "source_sha256": "c325bef9bc824c05931c2f89bed1daa3464f2d735013f1b180c3de649c8dc733",
+      "frame": "正常入口／戰鬥 step172",
+      "producer": "kol-cjk",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    },
+    {
+      "file": "original-battle.png",
+      "sha256": "c68c8a2687b0a8063cbc9e35096a5e7634dbaf45c66f5595ccfd8b8665f19ef3",
+      "dimensions": [
+        320,
+        200
+      ],
+      "source_path": "/out/fresh-pinned/normal-169.png",
+      "source_sha256": "c68c8a2687b0a8063cbc9e35096a5e7634dbaf45c66f5595ccfd8b8665f19ef3",
+      "frame": "dosgolem 正常入口／normal169",
+      "producer": "dosgolem 968ca774705853276ae55c8d1163c369481ac71f",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    },
+    {
+      "file": "zh-residence.png",
+      "sha256": "03bd11cfb2c91a3a37b2df84bfbcdd4a775539b74f58a70acda1f20c8d2272de",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source_path": "/out/sign/after/zh-Hant/door.png",
+      "source_sha256": "03bd11cfb2c91a3a37b2df84bfbcdd4a775539b74f58a70acda1f20c8d2272de",
+      "frame": "觀察入口／告示",
+      "producer": "kol-cjk",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    },
+    {
+      "file": "approved-sign-A.png",
+      "sha256": "f382926430a4bff1b291cce0729ffac5ae16ef1ae65b1663fc6ffe19bdc82769",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source_path": "/src/workplace/cjk-residence-sign-prototype-20261006/A.png",
+      "source_sha256": "f382926430a4bff1b291cce0729ffac5ae16ef1ae65b1663fc6ffe19bdc82769",
+      "frame": "使用者核准原型 A；歷史正常畫格衍生",
+      "producer": "RE-271",
+      "evidence": "已核對格式、雜湊與目視；正常／觀察範圍依 frame 分類",
+      "rights": "private-repo 可保存；不得公開散布"
+    }
+  ],
+  "all_chinese": false,
+  "limits": [
+    "14條歷史計畫缺輸入",
+    "長任務工具逾時",
+    "翻書動畫、其他圖片文字與未訪動態分支未全覆蓋",
+    "原作標誌、角色名、法術音節及按鍵名不以英文字母出現即判缺譯"
+  ]
+}

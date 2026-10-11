@@ -51,6 +51,10 @@
 | 第三十三批KOLTOWN效果／掉物／世界／遭遇四純C函式 | [第三十三批來源](../re/matching-decompilation.md#第三十三批來源還原紀錄) | [保存清冊](local/matching-c33-20261010/retention.json) |
 | 第三十四批KOLTOWN圖像／人物選擇／事件／分頁四函式 | [目前來源進度](../re/matching-decompilation.md#持續c來源還原) | [保存清冊](local/matching-c34-20261010/retention.json) |
 
+2026-10-11 的[中文與功能有限核查](cjk-closeout-20261011.md)另保存於
+[本機清冊](local/cjk-closeout-20261011/retention.json)。包含通過、缺輸入、逾時及舊里程碑差異，
+核對名稱為 `cjk-closeout-20261011`，同用下方工具的 `verify`。
+
 各目錄的 `evidence.tar.xz` 保留完整狀態紀錄、圖片、保存、腳本、輸入清冊與原收據。
 執行檔屬可重建產物，移除位元組並保留原 SHA-256。原收據不改寫，內部路徑仍指向
 當時的工作區；`retention.json` 記錄每個舊路徑在壓縮檔中的相對位置及雜湊。

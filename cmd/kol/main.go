@@ -1474,8 +1474,7 @@ func (g *game) renderScene(sc scene) error {
 // drawPage 畫一張整頁美術。中文模式的畫布是原版的 `book.CJKScale` 倍，所以美術要
 // 以最近鄰放大同樣的倍率，座標也跟著乘——否則只會畫在左上角那一塊原版大小的區域。
 //
-// 這幾張（封面、目錄頁、攤開的書頁、角色立繪）是**純美術**，沒有文字要換，所以
-// 沒有各自的 CJK 版本；其餘畫面都有自己的 `…CJK` 繪製函式，那些自己處理倍率。
+// 封面、空白書頁與角色立繪在這裡縮放；圖片內的目錄英文由 ContentsCJK 另行替換。
 func (g *game) drawPage(img *ebiten.Image, x, y int) {
 	if g.strings == nil {
 		g.canvas.DrawAt(img, x, y)
@@ -1492,6 +1491,9 @@ func (g *game) render() error {
 	g.canvas.Clear()
 	switch g.scene {
 	case sceneCover, sceneContents, sceneOpenSpread:
+		if g.scene == sceneContents && g.strings != nil {
+			return ui.ContentsCJK(g.canvas.Image(), g.sprites, g.cjk, g.strings)
+		}
 		index := map[scene]int{
 			sceneCover: book.Cover, sceneContents: book.Contents,
 			sceneOpenSpread: book.OpenSpread,

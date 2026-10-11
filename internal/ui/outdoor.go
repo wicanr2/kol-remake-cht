@@ -219,6 +219,9 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 			return err
 		}
 		drawScaled(dst, pic, l.ViewX, l.ViewY, l.Scale)
+		if out.CrestArchive() == "TWN5PICS" && door.Picture == 19 {
+			drawResidenceSignCJK(dst, f)
+		}
 		return drawOutdoorIconsCJK(dst, sprites, out)
 	}
 	atlas, err := sprites.Get(out.Archive(), town.TileAtlas.Index)
@@ -254,6 +257,29 @@ func OutdoorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	}
 
 	return drawOutdoorIconsCJK(dst, sprites, out)
+}
+
+// drawResidenceSignCJK 沿 SPEC-016／RE-271 的 A，僅在繁中門面覆寫告示。
+// 中央邊界已證實；側面隱藏起點及重複句子是強推論，保留原型的局部可見效果。
+func drawResidenceSignCJK(dst *ebiten.Image, f *font.Font) {
+	l := town.CJKOutdoor
+	boards := []struct{ full, clip image.Rectangle }{
+		{image.Rect(87, 61, 126, 75), image.Rect(87, 61, 126, 75)},
+		{image.Rect(-24, 72, 15, 87), image.Rect(2, 72, 15, 87)},
+		{image.Rect(184, 59, 223, 73), image.Rect(184, 59, 190, 73)},
+	}
+	for _, b := range boards {
+		clip := image.Rect(l.ViewX+b.clip.Min.X*l.Scale, l.ViewY+b.clip.Min.Y*l.Scale,
+			l.ViewX+b.clip.Max.X*l.Scale, l.ViewY+b.clip.Max.Y*l.Scale)
+		panel := dst.SubImage(clip).(*ebiten.Image)
+		fill(panel, clip.Min.X, clip.Min.Y, clip.Dx(), clip.Dy(), [3]uint8{255, 255, 255})
+		y := l.ViewY + b.full.Min.Y*l.Scale + (b.full.Dy()*l.Scale-2*f.Height())/2
+		for i, line := range []string{"請勿", "踐踏草坪"} {
+			w, _ := f.Measure(line)
+			x := l.ViewX + b.full.Min.X*l.Scale + (b.full.Dx()*l.Scale-w)/2
+			f.Draw(panel, x, y+i*f.Height(), line, 85, 85, 85)
+		}
+	}
 }
 
 // drawOutdoorIconsCJK 是中文模式的圖示列，內容與英文模式相同，只是放大三倍。

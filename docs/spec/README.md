@@ -1,6 +1,6 @@
 # 規格索引
 
-目前共有 38 個 ID、39 份規格，SPEC-002 分為抽取契約與 EGA 集合。
+目前共有 39 個 ID、40 份規格，SPEC-002 分為抽取契約與 EGA 集合。
 目前程式、驗收範圍及待決事項見 [CONTEXT](../../CONTEXT.md)，
 未完成工作的完成條件見 [WORKLIST](../../WORKLIST.md)。
 任務入口共用亂數的最新有限正式驗收見[驗收入口](../verification/quest-rng-20261007.md)。
@@ -19,6 +19,7 @@
 
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
+| SPEC-039 | [HD 手繪美術與介面工作計畫](039-hd-art-ui.md) | DRAFT | 手繪及 1920×1200 原比例已選；造型、素材契約及正式整合仍待確認 |
 | SPEC-038 | [套件邊界、固定步進與注入點](038-package-boundaries.md) | READY | remake 工程契約；`internal/layers` 四項守門測試擋依賴方向、Ebitengine 越界、規則層讀時鐘與全域亂數 |
 | SPEC-037 | [建築進門後的發言者選擇與好惡](037-building-greeting.md) | READY | 多人隊伍先選發言者、被討厭與被欣賞的訊息、全隊被趕、SCROLL 教派；原版關鍵點三組共 36,176 組一致；滑鼠點肖像見 RE-167 |
 | SPEC-036 | [圖像與盾牌編輯器](036-picture-shield-editor.md) | CONFORMED | 點陣圖編輯器已實作；鍵盤路徑與原版同狀態逐 byte 一致，滑鼠路徑依靜態讀碼、未與原版實跑比較 |
