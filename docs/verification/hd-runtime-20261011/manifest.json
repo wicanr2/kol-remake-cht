@@ -1,0 +1,90 @@
+{
+  "schema": "kol-hd-runtime-png/1",
+  "entries": [
+    {
+      "file": "full.png",
+      "sha256": "4b8afc0366c2bca2371f280b78c4711a67db551fa284784fddb975cafcc3a565",
+      "frame": "full/hd/step-026.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "inn-door.png",
+      "sha256": "5d9390e882133544808212cafb1cf60e4d065dbc1a8563769ea1cb2152d0f68f",
+      "frame": "six/hd/step-002.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "six.png",
+      "sha256": "4df4c3b3f864b80633512806412eb7a4e09fb99a8ac1d5cb1c6029007174eac8",
+      "frame": "six/hd/step-004.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "mirror.png",
+      "sha256": "401bfd8923d1fdf66b85e1e89e7b87f751e7d6e90a3e1790e43c6091afb2a15a",
+      "frame": "mirror/hd/step-009.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "custom.png",
+      "sha256": "1785b2af8f9e0151e27054dbbf234e78f7dc995c998ecbf9bfa63d3a9457528e",
+      "frame": "custom/hd/step-002.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "reload-v3.png",
+      "sha256": "f324350928dbd057124534cc6247bb5fb9f3891aed606e73a157a57b8d9dda19",
+      "frame": "reload-v3/hd/step-001.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "stay.png",
+      "sha256": "3b5212475d7438197d828cc335ff21a58f1a86d2add90b86099401eccd1968f1",
+      "frame": "stay/hd/step-010.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "stay-reload.png",
+      "sha256": "548411e63b3e1dd46317fb5239cce11a4db98135b4d8227cfd4f9841608983bf",
+      "frame": "stay-reload/hd/step-006.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    },
+    {
+      "file": "battle.png",
+      "sha256": "bc5e53e2bee5ede5aad4db58955497b4203d5d24b7bcbf9634e2e4876bc1543f",
+      "frame": "battle/hd/step-013.png",
+      "source_entry": "SPEC-039 runtime，核准素材＋既有EGA畫面",
+      "source_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub 可保存；無公開散布權",
+      "evidence": "受控場景驗收"
+    }
+  ],
+  "toolchain": "kol-package:1.26.7-ebiten2.9.9-20261011-r1 / Go1.26.7 / Ebitengine2.9.9 / Xvfb / xdotool",
+  "runtime_sha256": "8fe28268f9036103144bc23f5525ab09106a2717313479d4abe110d53cd1f288",
+  "receipt": "receipt.json",
+  "approved_assets": "../../../assets/hd/first-slice/manifest.json"
+}

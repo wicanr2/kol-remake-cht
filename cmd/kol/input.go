@@ -86,7 +86,7 @@ func keyboardTokens(typingName ...bool) []string {
 // mouseTokens 讀這一幀的滑鼠。左鍵點中可點區域就送那一格的 token，點在別處
 // 送 fallback；右鍵是 ESC，滾輪是上下。全部翻成既有的鍵盤 token，所以滑鼠與
 // 鍵盤走的是同一條路徑。
-func mouseTokens(targets []input.Target, fallback string) []string {
+func (g *game) mouseTokens(targets []input.Target, fallback string) []string {
 	var out []string
 	if _, dy := ebiten.Wheel(); dy != 0 {
 		if dy > 0 {
@@ -99,9 +99,8 @@ func mouseTokens(targets []input.Target, fallback string) []string {
 		out = append(out, "ESC")
 	}
 	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
-		// CursorPosition 回的是 logical 座標，已經考慮視窗縮放，所以直接拿來
-		// 比對版面常數。
-		x, y := ebiten.CursorPosition()
+		// 視窗縮放由Ebitengine處理；HD呈現的二倍座標換回既有文字畫布。
+		x, y := g.cursorPosition()
 		out = append(out, input.Hit(targets, x, y, fallback)...)
 	}
 	return out

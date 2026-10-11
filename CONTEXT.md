@@ -1,7 +1,7 @@
 # 《武士傳說》重製目前狀態
 
 更新日期：2026-10-11。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
-HD 已選手繪、1920×1200 原比例，第一批可操作原型已開始；正式美術契約仍為 DRAFT。
+HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限CONFORMED；其他批次維持DRAFT。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
@@ -16,10 +16,13 @@ HD 已選手繪、1920×1200 原比例，第一批可操作原型已開始；正
 舊缺輸入、長流程逾時與競技場里程碑差異保留在[前批收據](docs/verification/cjk-closeout-20261011.md)，
 不再作本輪收尾或 HD 開工門檻，不將它們改寫成原版對拍通過。
 
-HD 第一批[比較原型](docs/verification/hd-first-slice-20261011/review.html)已提供手繪旅店、六人肖像，
-以及替換 Olear 立繪的戰鬥頁。1920×1200 預覽、四種比例座標與實際鍵鼠事件共44項檢查通過。
-首位姿勢／盾牌及門面素材尺寸尚需評審；外框、圖示、戰場與傷勢遮罩尚未重繪。
-正式素材仍依 [SPEC-039](docs/spec/039-hd-art-ui.md)審查。所有 PNG 限目前 private GitHub。
+使用者於2026-10-11核准首批[比較原型](docs/verification/hd-first-slice-20261011/review.html)並要求開始。
+門面1774×887與六人圖集1536×1024原樣接入，以 `-graphics hd -lang zh-Hant` 啟用1920×1200呈現。
+按實際肖像RGB指紋匹配，不依姓名或隊伍位置；其他人物及自訂圖回退EGA，保存格式不變。
+[首批接入驗收](docs/verification/hd-runtime-20261011.md)完成八條路徑98個HD狀態，與EGA狀態及中文紀錄相同；
+修改前65張EGA畫格保持，實際住宿保存除saved_at相同，舊v3重載與原尺寸／縮小視窗點選通過。
+首位姿勢／盾牌及門面現有尺寸納入此次核准；外框、圖示、戰場與傷勢遮罩尚未重繪。
+[SPEC-039](docs/spec/039-hd-art-ui.md)首批有限CONFORMED，整體DRAFT。所有 PNG 限目前 private GitHub。
 原版 C matching 維持暫停；既有 `v.1.0.0-20261011` 封包不覆寫。
 
 2026-10-11 使用者授權判斷收尾狀況，最多補一次抽樣，打包 v1.0.0 完整版、release 與推廣影片。
@@ -79,7 +82,7 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | [第一批可操作原型](docs/verification/hd-first-slice-20261011/review.html)：旅店、六人肖像、戰鬥；手繪1920×1200畫布；44項鍵鼠與縮放檢查通過 | 門面原圖1774×887；造型、圖層、傷勢遮罩及正式接線待評審；資料PNG不重繪 |
+| HD | [首批遊戲接入](docs/verification/hd-runtime-20261011.md)：旅店門面、六人肖像及戰鬥資訊框，1920×1200；98狀態、存讀檔及真實點選通過 | 首批有限CONFORMED；其他圖層、人物裝備、傷勢遮罩及美術依原批次審查；資料PNG不重繪 |
 | 交付 | `v.1.0.0-20261011`：三平台full／release、64秒1080p影片，入口[本版收據](docs/verification/release-v1.0.0-20261011.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；沒有外部發布、tag或真機驗收 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：

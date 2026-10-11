@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| 首批HD正式接入、EGA回歸、點選及存讀檔 | [首批驗收](hd-runtime-20261011.md) | [保存清冊](local/hd-runtime-20261011/retention.json) |
 | 受控場景、中文結局及HD第一批原型 | [目前驗收](controlled-scenes-20261011.md)與[HD原型](hd-first-slice-20261011/review.html) | [保存清冊](local/controlled-scenes-20261011/retention.json) |
 | 任務亂數原型與圓環 | [比較頁](local/quest-entry-rng-prototype-20261006/review.html) | [原型保存清冊](local/quest-entry-rng-prototype-20261006/retention.json) |
 | 圓環捕捉相位 | [比較頁的相位證據](local/quest-entry-rng-prototype-20261006/review.html#markers) | [相位保存清冊](local/quest-marker-phase-20261006/retention.json) |

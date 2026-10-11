@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-runtime-20261011',
     'controlled-scenes-20261011',
     'cjk-closeout-20261011',
     'quest-entry-rng-prototype-20261006',

@@ -131,7 +131,7 @@ func (g *game) editorTokens() []string {
 			out = append(out, k.token)
 		}
 	}
-	x, y := ebiten.CursorPosition()
+	x, y := g.cursorPosition()
 	if g.strings != nil {
 		x, y = x/3, y/3
 	}

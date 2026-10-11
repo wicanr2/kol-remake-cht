@@ -1,0 +1,46 @@
+{
+  "schema": "kol-hd-first-slice/1",
+  "rights": "private GitHub 可保存；無公開散布權",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "decision": "2026-10-11：同意囉，開始吧；首批原型接入，其他批次未核准",
+  "files": {
+    "inn-painted-v1.png": {
+      "sha256": "0ec14587368570c7c84aa20b695335b022c7da8ef1b8f3a07255b1b73adb2b9c",
+      "width": 1774,
+      "height": 887,
+      "source_entry": "docs/verification/hd-first-slice-20261011/inn-painted-v1.png",
+      "evidence": "使用者2026-10-11核准原型；原樣接入",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    "party-painted-v1.png": {
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016",
+      "width": 1536,
+      "height": 1024,
+      "source_entry": "docs/verification/hd-first-slice-20261011/party-painted-v1.png",
+      "evidence": "使用者2026-10-11核准原型；原樣接入",
+      "rights": "private GitHub 可保存；無公開散布權"
+    }
+  },
+  "facade_rgb_sha256": "fa303932f603303f694eb27795d2abaaccc8c15c252c57dd670b175ce1dd438a",
+  "portrait_rgb_sha256": [
+    "80ffbb225c2cbf86721590e0dc314c8876e597cb8af80140219b230b8a72d347",
+    "36078e0c287b93a363708a8f6aab01ab983e3f459b8bd44d8f12290935bf7429",
+    "5b445f26a061d96cb40914d4bc34e292d8d9a5d4cfc7cde70be776c574d9e0b7",
+    "6607cf4f035724ab8b7f6e4371429c092b57ecd21096cb66812ad471cf5ac45c",
+    "accce9235d56b5676c0ec74b727af776f75f1e3fd19761f20e1fc5aeda1ceda0",
+    "b9d7bb6a877314058461f09bc3ea2f6120496575386941c0b0ec46336b1fdcb1"
+  ],
+  "sources": {
+    "docs/screenshots/zh-town-door.png": "1b0d294b00e44de62caf35b9b714f50d76c2945c832b03b3a78605dbf39cf9a4",
+    "docs/verification/cjk-closeout-20261011/zh-party.png": "6fba3dfa84f1efbfbaf0a5f912e0183b15487c599f4096b6e0362bc93c09e5df"
+  },
+  "approved_manifest_sha256": "d284b8e3827ff85919013709e4a349e1b386b424cbead2a4c8ef5ca8b5b633cf",
+  "prompts_sha256": "5970163a31ccb4701a1967439fed4830a7e667e5076a1d84bc2891d2d4856b27",
+  "tool": "tools/build_hd_first_slice.py / Pillow；RGB逐像素指紋，不轉檔",
+  "matching": "依960×600畫格中的3倍原圖逐像素取樣；角色名與隊伍位置不作runtime鍵",
+  "resolution": [
+    1920,
+    1200
+  ],
+  "spec": "docs/spec/039-hd-art-ui.md#首批接入契約"
+}

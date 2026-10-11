@@ -7,7 +7,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 現行交付為 `v.1.0.0-20261011`，含三平台完整版、需匯入合法資料的 release 與本機推廣影片。
 目前採[受控場景驗收](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血與提高攻擊，
 抵達指定場景後確認中文與畫面。登記場景已通過，結果見[驗收收據](docs/verification/controlled-scenes-20261011.md)。
-住宅告示、中文目錄及結局排版修正位於開發版，既有封包尚未包含。
+住宅告示、中文目錄、結局排版修正與首批 HD 位於開發版，既有封包尚未包含。
 
 ## 遊戲背景
 
@@ -85,13 +85,19 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 ## HD 化計畫
 
-已選定手繪重繪與 1920×1200 原比例版面。先做旅店、六人肖像及戰鬥規劃的可操作原型，
-再分批處理書本、人物裝備、城鎮、戰鬥與天候。地圖資料與結構遮罩保留其規則用途。
-第一批[可操作比較原型](docs/verification/hd-first-slice-20261011/review.html)已提供旅店、六人肖像與戰鬥頁，
-可切換 EGA 對照及測試點選。批次、相依關係與正式素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
-目前為試作，外框、圖示及戰場尚未重繪。
+首批手繪旅店門面與六人肖像已接入實際遊戲，採 1920×1200 原比例。
+開發版加 `-graphics hd -lang zh-Hant` 啟用，預設仍使用 EGA。
+角色按實際圖像匹配，自訂肖像沿用原圖；戰鬥資訊框顯示目前選中的人物。
+中文、滑鼠點選、舊 v3 與住宿存讀檔已通過[首批驗收](docs/verification/hd-runtime-20261011.md)。
 
-![HD 旅店門面與六人肖像試作](docs/verification/hd-first-slice-20261011/inn-preview.png)
+| 實際旅店門面與六人肖像 | 實際戰鬥資訊框 |
+|---|---|
+| ![HD 旅店與六人](docs/verification/hd-runtime-20261011/inn-door.png) | ![HD 戰鬥人物](docs/verification/hd-runtime-20261011/battle.png) |
+
+首批素材位於 [assets/hd/first-slice/manifest.json](assets/hd/first-slice/manifest.json)，
+核准樣張保存在[比較原型](docs/verification/hd-first-slice-20261011/review.html)。
+接續分批處理書本、人物裝備、城鎮、戰鬥與天候；外框、圖示、戰場及傷勢遮罩仍使用 EGA。
+批次與素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
 
 ## 專案起源
 

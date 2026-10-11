@@ -1063,17 +1063,21 @@ type game struct {
 	large     *font.Font
 	cjk       *font.Font
 	// titleSubs 是中文模式的開場字幕與封面副標；英文模式為 nil。
-	titleSubs      *titleSubtitles
-	strings        *i18n.Table
-	roster         *roster.Roster
-	remove         *roster.DeleteFlow
-	inn            *town.Inn
-	outdoor        *town.Outdoor
-	play           *town.Session
-	flow           *flow.Flow
-	walkTick       int
-	markerStep     int
-	canvas         *screen.Canvas
+	titleSubs  *titleSubtitles
+	strings    *i18n.Table
+	roster     *roster.Roster
+	remove     *roster.DeleteFlow
+	inn        *town.Inn
+	outdoor    *town.Outdoor
+	play       *town.Session
+	flow       *flow.Flow
+	walkTick   int
+	markerStep int
+	canvas     *screen.Canvas
+	// hd只控制最後呈現；規則、文字及保存沿既有畫布。
+	hd             *ui.HD
+	presentation   *screen.Canvas
+	noticeCanvas   *screen.Canvas
 	state          *charcreate.State
 	sequence       *title.Sequence
 	player         *title.Player
@@ -1725,7 +1729,7 @@ func (g *game) Update() error {
 		}
 		job := g.jobs[g.jobAt]
 		if !job.skip {
-			if err := g.canvas.WritePNG(job.path); err != nil {
+			if err := g.outputCanvas().WritePNG(job.path); err != nil {
 				return err
 			}
 			fmt.Printf("%s %s\n", job.name, job.path)
@@ -1939,7 +1943,7 @@ func (g *game) updateInteractive() error {
 	if typingSpellName {
 		typingName = true
 	}
-	tokens := append(keyboardTokens(typingName, typingSpellName), mouseTokens(targets, "RET")...)
+	tokens := append(keyboardTokens(typingName, typingSpellName), g.mouseTokens(targets, "RET")...)
 	if g.flow.Scene == flow.SceneEditor {
 		g.editBlink++
 		tokens = g.editorTokens()
@@ -1954,7 +1958,7 @@ func (g *game) updateInteractive() error {
 		return nil
 	}
 	if g.logInput && len(tokens) > 0 {
-		mx, my := ebiten.CursorPosition()
+		mx, my := g.cursorPosition()
 		fmt.Fprintf(os.Stderr, "input scene=%s cursor=%d 游標=(%d,%d) 可點=%d token=%v\n",
 			g.flow.Scene, g.flow.MenuCursor, mx, my, len(targets), tokens)
 	}
@@ -2587,17 +2591,21 @@ func (g *game) Draw(dst *ebiten.Image) {
 		g.drawErr = err
 		return
 	}
+	if err := g.presentHD(); err != nil {
+		g.drawErr = err
+		return
+	}
 	op := &ebiten.DrawImageOptions{}
 	op.Filter = ebiten.FilterNearest
-	dst.DrawImage(g.canvas.Image(), op)
+	dst.DrawImage(g.outputCanvas().Image(), op)
 	if len(g.notice) > 0 {
-		g.drawNotice(dst)
+		g.drawPresentationNotice(dst)
 	}
 	g.drawn = true
 }
 
 func (g *game) Layout(int, int) (int, int) {
-	b := g.canvas.Image().Bounds()
+	b := g.outputCanvas().Image().Bounds()
 	return b.Dx(), b.Dy()
 }
 
@@ -2708,6 +2716,8 @@ func defaultSavePath() (string, error) {
 var buildVersion = "development"
 
 func main() {
+	graphics := flag.String("graphics", "ega", "圖像模式：ega或hd；HD首批採1920×1200繁中版面")
+	hdAssets := flag.String("hd-assets", "assets/hd/first-slice", "SPEC-039首批HD素材目錄")
 	var monsterReloadMemory battle.MonsterReloadMemory
 	showVersion := flag.Bool("version", false, "顯示程式版本後結束")
 	assetRoot := flag.String("assets", "assets/original-derived-png/ega", "抽取資產根目錄")
@@ -4072,6 +4082,10 @@ func main() {
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
 	}
+	if err := g.enableHD(*graphics, *hdAssets, *lang); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(2)
+	}
 	if importedLegacy {
 		g.notice = g.saveNotice("import")
 	}
@@ -4510,7 +4524,7 @@ func main() {
 		g.jobs = []shotJob{{name: *sceneName, path: *shot}}
 	}
 
-	bounds := g.canvas.Image().Bounds()
+	bounds := g.outputCanvas().Image().Bounds()
 	ebiten.SetWindowSize(bounds.Dx()**scaleFlag, bounds.Dy()**scaleFlag)
 	ebiten.SetWindowTitle("武士傳說")
 	err = ebiten.RunGame(g)

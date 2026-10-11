@@ -38,6 +38,7 @@ HD 第一批已開始，見[可操作比較頁](hd-first-slice-20261011/review.h
 內建 image_gen 產生旅店門面與六人圖集，Chromium 154.0.8037.92 在既有
 `logh3-hd-preview:20261011-r1`容器擷取1920×1200預覽。兩頁各44項素材、縮放、命中與鍵鼠事件檢查通過。
 這是原型，人物首格姿勢與盾牌、素材尺寸及正式圖層契約仍待評審。
+此段記錄試作階段；後續使用者已核准首批樣張，接入結果見[首批HD驗收](hd-runtime-20261011.md)。
 
 完整證據、修正前畫格與工具輸入錯誤紀錄保存於[本機清冊](local/controlled-scenes-20261011/retention.json)。
 按[證據保留流程](retained-evidence.md)核對後清理本輪`workplace/`，其他研究資料保持。
