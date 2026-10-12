@@ -70,6 +70,25 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 ## 目前畫面
 
+### HD 畫面
+
+首批 HD 採 1920×1200 原比例，已接入旅店門面、六人肖像與戰鬥資訊框。
+下圖為重製版實際遊戲畫面；外框、圖示、戰場與其他人物仍沿用 EGA 美術。
+
+手繪旅店門面與六人隊伍：
+
+![HD 旅店門面與六人肖像，1920×1200](docs/verification/hd-runtime-20261011/inn-door.png)
+
+| 戰鬥資訊框的 HD 人物 | 遊戲內 HD 畫面設定 |
+|---|---|
+| ![戰鬥資訊框顯示 HD 騎士肖像](docs/verification/hd-runtime-20261011/battle.png) | ![遊戲內畫面設定，HD 手繪使用中](docs/verification/display-switch-runtime-20261012/game-menu-hd.png) |
+
+按 F10 或點下緣「畫面 F10」，即可在同一場景切換 EGA／HD；Esc 返回遊戲。
+圖片來源、畫格、SHA-256 與權利分類見[首批 HD 截圖清冊](docs/verification/hd-runtime-20261011/manifest.json)
+及[畫面設定截圖清冊](docs/verification/display-switch-runtime-20261012/manifest.json)。
+
+### EGA 畫面
+
 以下畫面由鎖定的 Docker 工具鏈重新擷取。繁中畫面為 960×600，使用 16×18 字模格。
 圖片來源、輸入、畫格編號、SHA-256 與權利分類見[截圖清冊](docs/verification/cjk-closeout-20261011/manifest.json)。
 城鎮及戰鬥來自正常標題、六人組隊與自然遭遇；建角畫面為展示入口。
@@ -93,10 +112,6 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 角色按實際圖像匹配，自訂肖像沿用原圖；戰鬥資訊框顯示目前選中的人物。
 中文、滑鼠點選、舊 v3 與住宿存讀檔已通過[首批驗收](docs/verification/hd-runtime-20261011.md)。
 遊戲內切換的核准版面、中文、鍵鼠、縮放及正常住宿存讀檔已通過[正式驗收](docs/verification/display-switch-runtime-20261012.md)。
-
-| 實際旅店門面與六人肖像 | 實際戰鬥資訊框 |
-|---|---|
-| ![HD 旅店與六人](docs/verification/hd-runtime-20261011/inn-door.png) | ![HD 戰鬥人物](docs/verification/hd-runtime-20261011/battle.png) |
 
 首批素材位於 [assets/hd/first-slice/manifest.json](assets/hd/first-slice/manifest.json)，
 核准樣張保存在[比較原型](docs/verification/hd-first-slice-20261011/review.html)。

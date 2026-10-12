@@ -11378,3 +11378,9 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 發布[v.1.0.1-20261012](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012)，Release ID409856002。發布後讀回draft=false、prerelease=false及相同四附件；儲存庫仍為private。取回遠端tag，確認指向6d98fb0002029ab834f74f3297c6b03a8d9b8f9b，沒有移動既有tag。
 - 完整版、完整手冊譯文與76秒影片留本機。README、CONTEXT、權利審查及本版驗收改為已發布現況；github-release工作項依實際發布結果結案，未修改遠端Issue。
 - 工作清單verify／scan通過，16開放／92完成，2052行自承全部認領；134個現行文件及本輪紀錄連結核對通過。首次連結檢查包含WORKLOG的18個歷史已封存工作路徑，改回本輪變更範圍核對，沒有改寫歷史或將其列為產品缺陷。全專案沒有root-owned檔案或誤建.md目錄，七個異動文件擁有權均1000:1000，本專案容器清單為空，git diff --check通過。文件依持續有效commit＋push授權提交推送，發行tag保持6d98fb00。
+
+## 2026-10-12：README 加入 HD 畫面展示
+
+- 依使用者要求更新README，路由命中復古重製README標準與文件職責，實際載入兩份契約。將已驗收旅店門面與六人肖像、戰鬥人物移到「目前畫面」前段，補上正式遊戲內HD設定截圖；原EGA截圖保持，移除計畫段落重複展示。
+- 圖說明示首批1920×1200、尚沿用EGA的圖層與F10操作，附兩份既有來源清冊。沿用已入Git的三張PNG，沒有重抓畫面或更改素材、程式、封包、影片與發行tag。
+- 唯讀Docker核對三張PNG的SHA-256、1920×1200尺寸、解碼及來源欄位，均通過；README的44個本機連結與7張本機圖片核對通過。全專案沒有root-owned檔案或誤建.md目錄，異動文件擁有權1000:1000，沒有新增暫存產物，本專案容器清單為空，git diff --check通過。沿持續有效commit＋push授權提交推送。
