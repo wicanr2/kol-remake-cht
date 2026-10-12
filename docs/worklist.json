@@ -1970,11 +1970,11 @@
       "id": "hd-art-ui",
       "layer": "gap",
       "title": "遊戲圖片與操作畫面HD化",
-      "body": "手繪、1920×1200原比例與首批原型已核准。門面1774×887、六人圖集1536×1024已按實際RGB指紋接入遊戲；-graphics hd啟用。八條路徑98個HD狀態與EGA相同，中文紀錄相同；65張既有EGA圖保持，實際住宿存讀檔、舊v3、自訂圖回退及兩種視窗點選通過。入口docs/verification/hd-runtime-20261011.md。SPEC-039首批有限CONFORMED；其他人物裝備、傷勢遮罩、外框、圖示、地圖與後續批次仍依原計畫審查及驗收。 遊戲內「畫面 F10」切換已核准並接入正式入口。三張設定畫面與核准樣張逐像素相同；鍵鼠、兩種視窗、缺素材中文提示及切換後正常住宿存讀檔通過。入口docs/verification/display-switch-runtime-20261012.md。其他HD批次保持開放。 v.1.0.1-20261012三平台封包已包含首批與遊戲內切換；Linux實際AppImage及Wine實際ZIP的EGA／HD與切換通過，macOS只完成universal結構驗證，真機仍未驗。入口docs/verification/release-v1.0.1-20261012.md。",
+      "body": "手繪、1920×1200原比例與首批原型已核准。門面1774×887、六人圖集1536×1024已按實際RGB指紋接入遊戲；-graphics hd啟用。八條路徑98個HD狀態與EGA相同，中文紀錄相同；65張既有EGA圖保持，實際住宿存讀檔、舊v3、自訂圖回退及兩種視窗點選通過。入口docs/verification/hd-runtime-20261011.md。SPEC-039首批有限CONFORMED；其他人物裝備、傷勢遮罩、外框、圖示、地圖與後續批次仍依原計畫審查及驗收。 遊戲內「畫面 F10」切換已核准並接入正式入口。三張設定畫面與核准樣張逐像素相同；鍵鼠、兩種視窗、缺素材中文提示及切換後正常住宿存讀檔通過。入口docs/verification/display-switch-runtime-20261012.md。其他HD批次保持開放。 v.1.0.1-20261012三平台封包已包含首批與遊戲內切換；Linux實際AppImage及Wine實際ZIP的EGA／HD與切換通過，macOS只完成universal結構驗證，真機仍未驗。入口docs/verification/release-v1.0.1-20261012.md。 使用者要求介面與人物頭像HD化、同主題對比及遊戲中切換。三場景可操作候選與八張對比／設定截圖已保存於docs/verification/hd-ui-theme-20261012/review.html；42項瀏覽器實際操作與四尺寸切換通過，六人及門面沿核准素材，新增旅店NPC、HD中文字與共用操作介面。外觀待核准，SPEC-039此批仍DRAFT；未接正式程式、未重抽遊戲或重建交付。",
       "acceptance": "使用者確認樣張及素材契約；圖片來源、權利、尺寸及索引可追溯；依SPEC-040抵達對應HD場景，中文與畫面正確，鍵鼠可用，既有v3可讀；另驗各平台封包。",
       "verify": {
         "kind": "manual",
-        "note": "首批及遊戲內切換已核准並通過；三平台封包已重建。其他圖層、傷勢遮罩、後續美術及平台真機仍由本開放項追蹤。"
+        "note": "首批及遊戲內切換已核准並通過；三平台封包已重建。介面與NPC同主題候選已可評審，外觀待核准；其他圖層、傷勢遮罩、後續美術及平台真機仍由本開放項追蹤。"
       },
       "blocking_for_current_closeout": false
     }
@@ -2421,8 +2421,8 @@
     },
     {
       "file": "docs/spec/039-hd-art-ui.md",
-      "match": "其他批次升 READY 前不進正式玩家路徑",
-      "why": "hd-art-ui認領其餘美術的實作閘門；首批已核准並接入，不將首批結果延伸為全804張完成。"
+      "match": "其他批次升 READY 前不進正式玩家路徑|健康人形只是外觀示意",
+      "why": "hd-art-ui認領其餘美術的實作閘門；首批已核准並接入，不將首批結果延伸為全804張完成。 此批操作介面與NPC候選、健康示意人形及未驗傷勢遮罩亦由同一hd-art-ui項認領，候選不直接進正式玩家路徑。"
     },
     {
       "file": "tools/verify_controlled_scenes.py",

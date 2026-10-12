@@ -1,0 +1,105 @@
+{
+  "door": {
+    "file": "door-ega.png",
+    "sha256": "5aa32d97ce63841f67bf52260480dd701c43533ff59ea076d1ffc7a4b86ce0b2",
+    "source_archive": "docs/verification/local/hd-runtime-20261011/evidence.tar.xz",
+    "source_archive_sha256": "1be07393da55e7973ee2ace3c9c660becbe034f63c4385e66342c22818947625",
+    "frame": "six/ega/step-002.png",
+    "state": {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-002",
+      "scene": "play",
+      "step": 2,
+      "town": {
+        "at_door": true,
+        "left_town": false,
+        "mode": 1,
+        "town": 7,
+        "x": 57,
+        "y": 8
+      }
+    }
+  },
+  "inn": {
+    "file": "inn-ega.png",
+    "sha256": "1bc6c07019294d05ed561a3dc89358eefef749c8a3e1f312b186cf7470feac54",
+    "source_archive": "docs/verification/local/hd-runtime-20261011/evidence.tar.xz",
+    "source_archive_sha256": "1be07393da55e7973ee2ace3c9c660becbe034f63c4385e66342c22818947625",
+    "frame": "six/ega/step-004.png",
+    "state": {
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-004",
+      "scene": "play",
+      "step": 4,
+      "town": {
+        "at_door": true,
+        "door": {
+          "index": 5,
+          "name": "Halfway House"
+        },
+        "left_town": false,
+        "mode": 2,
+        "town": 7,
+        "x": 57,
+        "y": 8
+      }
+    }
+  },
+  "battle": {
+    "file": "battle-ega.png",
+    "sha256": "5c5ff4fcf215ff67f5c1bb615f708d7e55a4286e8d407703b734528d8ddd29d4",
+    "source_archive": "docs/verification/local/hd-runtime-20261011/evidence.tar.xz",
+    "source_archive_sha256": "1be07393da55e7973ee2ace3c9c660becbe034f63c4385e66342c22818947625",
+    "frame": "battle/ega/step-013.png",
+    "state": {
+      "battle": {
+        "monster": "CYCLOPS",
+        "prompt": 0,
+        "quest_done": 0,
+        "round": 1,
+        "site": 4,
+        "stage": 2,
+        "turn": 0,
+        "verdict": 0
+      },
+      "ending": {
+        "armed": false,
+        "panel": 0
+      },
+      "name": "step-013",
+      "scene": "play",
+      "step": 13,
+      "town": {
+        "left_town": true,
+        "mode": 0,
+        "town": 7,
+        "x": 57,
+        "y": 8
+      },
+      "verification": {
+        "lock_hp": true,
+        "original_parity_claimed": false,
+        "party_damage_multiplier": 20,
+        "scope": "controlled-scene-ui",
+        "world_start": "48,9"
+      },
+      "world": {
+        "day": 1,
+        "mode": 0,
+        "month": 4,
+        "sub_x": 4,
+        "sub_y": 4,
+        "ticks": 4200,
+        "time_index": 0,
+        "x": 48,
+        "y": 9
+      }
+    }
+  }
+}

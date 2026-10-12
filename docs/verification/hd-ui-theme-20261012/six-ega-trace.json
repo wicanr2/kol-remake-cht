@@ -1,0 +1,10 @@
+{
+ "schema": "kol-play-trace-v1",
+ "steps": [
+  {"ending":{"armed":false,"panel":0},"name":"step-000","scene":"play","step":0,"town":{"left_town":false,"mode":0,"party":["Theodoric gold=1009 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=9","Poontang gold=214 wounds=1 reported=0 quests=0,4,0,0,0,0 carried=10","Olear gold=1777 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=11","Moraine gold=2149 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=13","Fighting Bull gold=442 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=14","Kenneth gold=815 wounds=0 reported=0 quests=0,0,0,0,0,0 carried=12"],"town":7,"x":57,"y":8}},
+  {"ending":{"armed":false,"panel":0},"name":"step-001","scene":"play","step":1,"town":{"left_town":false,"mode":0,"town":7,"x":56,"y":8}},
+  {"ending":{"armed":false,"panel":0},"name":"step-002","scene":"play","step":2,"town":{"at_door":true,"left_town":false,"mode":1,"town":7,"x":57,"y":8}},
+  {"ending":{"armed":false,"panel":0},"name":"step-003","scene":"play","step":3,"town":{"at_door":true,"door":{"index":5,"name":"Halfway House"},"left_town":false,"mode":2,"town":7,"x":57,"y":8}},
+  {"ending":{"armed":false,"panel":0},"name":"step-004","scene":"play","step":4,"town":{"at_door":true,"door":{"index":5,"name":"Halfway House"},"left_town":false,"mode":2,"town":7,"x":57,"y":8}}
+ ]
+}

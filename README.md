@@ -115,6 +115,8 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 首批素材位於 [assets/hd/first-slice/manifest.json](assets/hd/first-slice/manifest.json)，
 核准樣張保存在[比較原型](docs/verification/hd-first-slice-20261011/review.html)。
+操作介面與旅店 NPC 的下一批外觀見[可操作候選與同場景對比](docs/verification/hd-ui-theme-20261012/review.html)，
+沿用相同手繪人物與門面，示範 HD 中文、外框、圖示及 F10 整套切換；候選尚待定版與正式接入。
 接續分批處理書本、人物裝備、城鎮、戰鬥與天候；外框、圖示、戰場及傷勢遮罩仍使用 EGA。
 批次與素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
 

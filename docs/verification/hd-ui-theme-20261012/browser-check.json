@@ -1,0 +1,202 @@
+{
+  "schema": "kol-hd-ui-browser-review/1",
+  "status": "PASS",
+  "production_changed": false,
+  "tool": "Chrome/154.0.8037.92",
+  "input": "Chrome DevTools Protocol Input.dispatchKeyEvent / Input.dispatchMouseEvent",
+  "checks": [
+    {
+      "name": "browser selftest capture=single&scene=inn",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "real key selects sixth party member",
+      "passed": true
+    },
+    {
+      "name": "real F10 opens settings",
+      "passed": true
+    },
+    {
+      "name": "real keyboard selects EGA",
+      "passed": true
+    },
+    {
+      "name": "real keyboard returns HD and closes settings",
+      "passed": true
+    },
+    {
+      "name": "real theme roundtrip keeps scene party command",
+      "passed": true
+    },
+    {
+      "name": "mouse opens settings 1920",
+      "passed": true
+    },
+    {
+      "name": "mouse selects EGA 1920",
+      "passed": true
+    },
+    {
+      "name": "mouse selects HD 1920",
+      "passed": true
+    },
+    {
+      "name": "mouse closes settings 1920",
+      "passed": true
+    },
+    {
+      "name": "mouse selects third member 1920",
+      "passed": true
+    },
+    {
+      "name": "mouse opens settings 1280",
+      "passed": true
+    },
+    {
+      "name": "mouse selects EGA 1280",
+      "passed": true
+    },
+    {
+      "name": "mouse selects HD 1280",
+      "passed": true
+    },
+    {
+      "name": "mouse closes settings 1280",
+      "passed": true
+    },
+    {
+      "name": "mouse selects third member 1280",
+      "passed": true
+    },
+    {
+      "name": "mouse opens settings 960",
+      "passed": true
+    },
+    {
+      "name": "mouse selects EGA 960",
+      "passed": true
+    },
+    {
+      "name": "mouse selects HD 960",
+      "passed": true
+    },
+    {
+      "name": "mouse closes settings 960",
+      "passed": true
+    },
+    {
+      "name": "mouse selects third member 960",
+      "passed": true
+    },
+    {
+      "name": "mouse opens settings 640",
+      "passed": true
+    },
+    {
+      "name": "mouse selects EGA 640",
+      "passed": true
+    },
+    {
+      "name": "mouse selects HD 640",
+      "passed": true
+    },
+    {
+      "name": "mouse closes settings 640",
+      "passed": true
+    },
+    {
+      "name": "mouse selects third member 640",
+      "passed": true
+    },
+    {
+      "name": "browser selftest capture=single&scene=battle",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "real command click 0",
+      "passed": true
+    },
+    {
+      "name": "real command click 1",
+      "passed": true
+    },
+    {
+      "name": "real command click 2",
+      "passed": true
+    },
+    {
+      "name": "real command click 3",
+      "passed": true
+    },
+    {
+      "name": "real command click 4",
+      "passed": true
+    },
+    {
+      "name": "real command click 5",
+      "passed": true
+    },
+    {
+      "name": "real command click 6",
+      "passed": true
+    },
+    {
+      "name": "browser selftest capture=single&scene=inn",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "browser selftest capture=pair&scene=inn",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "browser selftest capture=single&scene=door",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "browser selftest capture=pair&scene=door",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "browser selftest capture=single&scene=battle",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "browser selftest capture=pair&scene=battle",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "browser selftest capture=single&scene=inn&menu=1",
+      "passed": true,
+      "checks": 48
+    },
+    {
+      "name": "browser selftest capture=pair&scene=inn&baseline=ega",
+      "passed": true,
+      "checks": 48
+    }
+  ],
+  "screenshots": {
+    "inn-hd.png": "75e2dcd1335c8e4b6d89d88416ee4a6739de05ea56a0b4aa11f490c25b42392e",
+    "inn-compare.png": "86169fc730df30fa38bbc634ceb5b521daedeaba9216f1a7a3343779942b06c4",
+    "door-hd.png": "3680d330cc3199e81c6df4ca80cb42b5da49570c7aa432a1c98579080a81e515",
+    "door-compare.png": "0c2cc727e6b493eaf6c5e91bb4806c7f4027b750b1744179f65aa8616772fcde",
+    "battle-hd.png": "2a99f232474ec4a7120a3c26e42331fb6a06bffda35f4040591aaeb12a8d7cf3",
+    "battle-compare.png": "f29a157c1d03b943876319670bc3460b3934121eb2778012763aa35e8c0d7105",
+    "inn-hd-menu.png": "c7cd88e964d7fcb390be85c076aa2bf7275c526248baea9337a75e1a234a39fa",
+    "inn-ega-compare.png": "296abfda196edaba3fabd0bc6643b883d3cef50b42370a78a51aa09dd0b363be"
+  },
+  "limits": [
+    "Disposable browser prototype only; not gameplay or production HUD acceptance.",
+    "Healthy body silhouette has no validated injury mask.",
+    "No save file or RNG is created or changed."
+  ]
+}

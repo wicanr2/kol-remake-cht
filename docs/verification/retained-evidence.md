@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| HD操作介面、人物頭像與同主題對比候選 | [可操作原型](hd-ui-theme-20261012/review.html) | 小型原型直接保存於同目錄，[來源及逐檔雜湊](hd-ui-theme-20261012/manifest.json)；尚待外觀核准 |
 | 正式遊戲內HD／EGA切換與住宿存讀檔 | [正式驗收](display-switch-runtime-20261012.md) | [保存清冊](local/display-switch-runtime-20261012/retention.json) |
 | 遊戲內畫面設定與切換候選 | [候選驗證](display-switch-20261011.md) | [保存清冊](local/display-switch-20261011/retention.json) |
 | 首批HD正式接入、EGA回歸、點選及存讀檔 | [首批驗收](hd-runtime-20261011.md) | [保存清冊](local/hd-runtime-20261011/retention.json) |

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>武士傳說｜HD 操作介面與人物對比</title>
+<link rel="stylesheet" href="review.css">
+<main>
+<header><span class="eyebrow">武士傳說 · 介面與人物候選</span><h1>人物與介面，沿用同一套手繪風格。</h1>
+<p>沿用已核准的六人與旅店，補上外框、操作圖示、中文文字與 NPC 頭像。1920×1200，保留原區域位置。</p></header>
+<nav aria-label="比較場景"><button data-scene="inn">旅店與 NPC</button><button data-scene="door">門面與隊伍</button><button data-scene="battle">戰鬥介面</button><span class="divider"></span><button id="compare">並排對比</button><button id="baseline">對比：目前 HD／候選</button></nav>
+<p class="notice">這是可操作原型，尚未接入正式遊戲。對比兩側取自相同場景及固定狀態；戰鬥沿用已驗的受控場景。</p>
+<section class="screens" aria-label="同狀態畫面對比">
+<article id="before"><h2 id="before-title">目前 HD 首批</h2><canvas id="base" width="1920" height="1200" aria-label="同狀態的目前畫面"></canvas></article>
+<article id="after"><h2 id="after-title">HD 操作介面候選</h2><canvas id="candidate" width="1920" height="1200" tabindex="0" aria-label="操作原型，F10切換主題；一至六選隊員；逗號、句號及Enter操作"></canvas></article>
+</section>
+<output aria-live="polite">載入中。</output>
+<div class="help"><p><kbd>F10</kbd> 畫面設定　<kbd>1–6</kbd> 選隊員　<kbd>,</kbd> <kbd>.</kbd> 選操作　<kbd>Enter</kbd> 確認　<kbd>Esc</kbd> 返回</p><p>可用滑鼠點選隊員與按鈕。切換 EGA／HD 保留同一場景、隊員與操作游標；原型不執行遊戲規則或寫入存檔。</p></div>
+<details><summary>範圍、來源與後續驗收</summary><p>同主題對比以目前已接入的 HD 畫面作左側，右側沿用相同六人圖集與門面，加入一致的介面與 NPC 畫風。也可切換為 EGA／HD 對比。三組畫格沿既有封存，不重新抽樣。</p><p>本候選示範共用外框、隊伍卡、操作列、對話、設定與一位旅店 NPC。其他 NPC、人物裝備組合、書本、地圖與傷勢遮罩依後續批次處理；戰鬥人形只是健康狀態外觀示意，尚未驗傷勢遮罩。</p><p>正式版的 F10 切換已通過驗收；本候選只驗介面原型。接入前須核准樣式，再驗正常場景、中文、鍵鼠、缺件回退及 v3 保存，不能把此頁當成正式遊戲驗收。</p><p><a href="manifest.json">來源、狀態與 SHA-256</a> · <a href="prompts.json">NPC 生成提示</a> · <a href="browser-check.json">原型操作檢查</a></p></details>
+</main><script src="review.js"></script>
+</html>

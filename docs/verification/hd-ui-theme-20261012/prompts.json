@@ -1,0 +1,15 @@
+{
+  "schema": "kol-hd-ui-prompts/1",
+  "tool": "built-in image_gen.imagegen",
+  "intent": "generate single NPC portrait; references only",
+  "prompt": "Use case: stylized-concept. Asset type: single NPC portrait for a disposable Knights of Legend HD interface prototype. Input image 1 is the already approved party atlas, STYLE REFERENCE ONLY; do not redraw or alter those six characters. Input image 2 is a game screenshot, IDENTITY REFERENCE ONLY: redraw only the innkeeper visible in the large left portrait panel (silver/white short wavy hair, pale face, prominent nose, slightly crooked genial smile, clean-shaven face, blue and teal clothes). Create one centered head-and-shoulders painted portrait of that same older innkeeper, matching the approved party atlas's classic hand-painted fantasy game illustration, confident fine outlines, rich but restrained colors and clear dimensional shading. Keep the source's hair shape, age, smile, face proportions and blue/teal clothing cues; do not add a crown, hat, weapons or new props. Frontal three-quarter close portrait, entire hair silhouette and shoulders inside a square image with comfortable margin. Matte black background, subtle warm light. No interface, no lettering, no logo, no watermark, no frame, no pixel art, no photorealism. This is prototype artwork for private project review, not a full game screenshot. Output square about 1024 by 1024.",
+  "transparent_background": false,
+  "references": [
+    "assets/hd/first-slice/party-painted-v1.png",
+    "docs/verification/display-switch-runtime-20261012/game-menu-hd.png"
+  ],
+  "generated_source": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-e1bb69cd-5e7a-4641-a8be-fb60ff6bf051.png",
+  "output": "innkeeper-painted-v1.png",
+  "stage": "disposable-prototype; awaiting user review",
+  "rights": "private GitHub 可保存；原版參考衍生，無公開散布權"
+}
