@@ -3,7 +3,8 @@
 更新日期：2026-10-12。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
 HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限CONFORMED；其他批次維持DRAFT。
 遊戲內「畫面 F10」設定已核准並接入正式遊戲，切換與正常住宿存讀檔驗收通過。
-操作介面及人物頭像的下一批[同主題候選](docs/verification/hd-ui-theme-20261012/review.html)已完成原型，外觀待核准；正式程式仍為已發行版本。
+操作介面及人物頭像已獲使用者「ok 同意開工」核准並[接入正式Go呈現](docs/verification/hd-interface-runtime-20261012.md)，SPEC-039此批有限CONFORMED。此批為開發版，既有Release保持。
+HD配樂已選A中世紀室內樂；[標題與旅店試聽](docs/verification/hd-music-20261012/review.html)已產生原創MIDI及OGG、分軌與技術收據，人耳待確認，尚未啟用正式播放。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
@@ -14,8 +15,11 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 提供旅店、門面、戰鬥三組目前 HD／候選對比，亦可看 EGA／HD；兩側來源場景及封存 trace 相同。
 [瀏覽器檢查](docs/verification/hd-ui-theme-20261012/browser-check.json)通過42項實際操作檢查，含四尺寸切換、鍵鼠及中文安全矩形自檢。
 這是可丟棄原型，未執行規則或寫保存；其他 NPC、組合裝備、書本、地圖及傷勢遮罩未完成。
-下一閘門是核准此候選外觀，再依[SPEC-039候選契約](docs/spec/039-hd-art-ui.md#操作介面與人物頭像候選)審查READY並接入正式呈現。
-既有 F10 切換決定有效，不重新詢問是否允許切換；本次未重新抽樣遊戲或重建交付。
+本批已依[SPEC-039契約](docs/spec/039-hd-art-ui.md#操作介面與人物頭像候選)接入原生HD字型、面板、操作列與旅店頭像。
+七路徑71狀態與中文紀錄相同，EGA畫格保持；15個實際F10事件、鍵鼠、兩視窗及缺件回退通過。
+正常住宿v3只差saved_at，另起程序重載7狀態相同。原型250字模與正式字集像素、字距相同，現行2608字完整涵蓋。
+下一閘門為[兩首原創室內樂](docs/verification/hd-music-20261012/review.html)聽感確認，之後才定配樂控制與後續曲目。
+既有F10決定有效；本輪重播封存輸入，沒有新增原版抽樣或重建交付。比較證據已[封存](docs/verification/local/hd-interface-runtime-20261012/retention.json)，工作區已核對後清理。
 
 使用者於2026-10-12核准已展示版面並要求開始，遊戲內畫面設定已接入正式入口。
 點「畫面 F10」或按F10，選EGA／HD立即預覽，Esc或返回按鈕留在原場景。
@@ -105,7 +109,7 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | [首批遊戲接入](docs/verification/hd-runtime-20261011.md)涵蓋旅店門面、六人肖像及戰鬥資訊框；[遊戲內切換](docs/verification/display-switch-runtime-20261012.md)已接入並驗收；[介面與NPC候選](docs/verification/hd-ui-theme-20261012/review.html)已可操作比較 | 首批及設定有限CONFORMED；新候選外觀待核准，其他人物、裝備、地圖及傷勢遮罩未完成；資料PNG不重繪 |
+| HD | [首批遊戲接入](docs/verification/hd-runtime-20261011.md)、[遊戲內切換](docs/verification/display-switch-runtime-20261012.md)及[操作介面與NPC頭像](docs/verification/hd-interface-runtime-20261012.md)已有限驗收；[室內樂試聽](docs/verification/hd-music-20261012/review.html)技術通過 | 介面最新批次為開發版；配樂人耳待確認。其他人物、裝備、地圖及傷勢遮罩未完成；資料PNG不重繪 |
 | 交付 | `v.1.0.1-20261012`：三平台full／release、76秒1080p影片；private GitHub Release已發布，四附件完整性與tag核對通過，入口[本版收據](docs/verification/release-v1.0.1-20261012.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：
@@ -170,7 +174,7 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 | ui-details-unverified | 補五處UI未驗邊界及RE-295紮營確認；送禮選人版面、空白法術名、類型0明細與[馬廄確認原型](workplace/steed-trade-normal-20261006/review.html)仍待原問題回答 |
 | mouse-original-semantics | 回答兩次點擊、右鍵、世界點擊三處原有取捨，依選擇實作與驗收 |
 | character-creation-boundary-parity | 重名政策及滿槽／名稱邊界確認，SPEC-005／023 審查後正式修正 |
-| hd-art-ui | 1920×1200、首批人物與遊戲內切換已接入；核准[操作介面與NPC同主題候選](docs/verification/hd-ui-theme-20261012/review.html)，再依[SPEC-039](docs/spec/039-hd-art-ui.md)審查接入與驗收 |
+| hd-art-ui | 操作介面與NPC已接入開發版並有限驗收；確認[室內樂試聽](docs/verification/hd-music-20261012/review.html)聽感，再接續配樂控制與探索／戰鬥曲；其他圖層依[SPEC-039](docs/spec/039-hd-art-ui.md)分批 |
 
 HD 採已核准的1920×1200原比例。首批及畫面設定已有限CONFORMED，其他批次維持DRAFT，
 後續依[SPEC-039](docs/spec/039-hd-art-ui.md)確認造型與素材，不重新開啟已確認選項。

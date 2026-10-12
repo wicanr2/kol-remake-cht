@@ -1,0 +1,216 @@
+{
+  "schema": "kol-hd-music-candidate/1",
+  "status": "TECHNICAL_PASS_LISTENING_PENDING",
+  "music_identity": "new-remake-original",
+  "source_melody": "project-authored MIDI; no original melody sampled",
+  "soundfont": {
+    "path": "/usr/share/sounds/sf2/FluidR3_GM.sf2",
+    "sha256": "74594e8f4250680adf590507a306655a299935343583256f3b722c48a1bc1cb0",
+    "package": "fluid-soundfont-gm 3.1-5.3",
+    "license": "MIT; see soundfont-LICENSE.txt"
+  },
+  "synth": "TiMidity++ 2.14.0-8.1",
+  "codec": "Ogg Vorbis q6; 44100Hz stereo",
+  "tracks": {
+    "title": {
+      "bpm": 80,
+      "bars": 24,
+      "duration": 72.0,
+      "midi_sha256": "2413c2f2375baf7c420fae4695756c9039cb44c3cd436fd0aeca0de04e2da01a",
+      "allowed_stem_combinations": "all seven nonempty subsets; same gain/grid; verified unclipped"
+    },
+    "inn": {
+      "bpm": 72,
+      "bars": 24,
+      "duration": 80.0,
+      "midi_sha256": "0968fbcf93c5b1506628d26b8a908ba9631b52724f56f604a2da85058a91e915",
+      "allowed_stem_combinations": "all seven nonempty subsets; same gain/grid; verified unclipped"
+    }
+  },
+  "checks": [
+    {
+      "path": "title.ogg",
+      "sha256": "45f84293d4fb2d81a73a2f2da6e1bb3578e2279085b7592ebbcd5fea64e462ec",
+      "duration": 72.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.5075799822807312,
+      "rms": 0.06333298981189728,
+      "boundary_delta": 0.0001886241661850363
+    },
+    {
+      "path": "title-lead.ogg",
+      "sha256": "364b7f4738788e276b3bbe387a1d749379e82e2f2cf5aea5092f0f40d7715844",
+      "duration": 72.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.2583576440811157,
+      "rms": 0.03435713052749634,
+      "boundary_delta": 1.0285511962138116e-05
+    },
+    {
+      "path": "title-harmony.ogg",
+      "sha256": "5a588955ff4647d22723a14a4f8ef30a64a1a80bb4a1916cb79990ba8a7f5d85",
+      "duration": 72.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.2956153452396393,
+      "rms": 0.04330229386687279,
+      "boundary_delta": 0.00019867520313709974
+    },
+    {
+      "path": "title-pulse.ogg",
+      "sha256": "aa661a43b947aba2457697edebaecabe1617c77f9857e3fe68ed0e6fd758c27c",
+      "duration": 72.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.29044109582901,
+      "rms": 0.030081169679760933,
+      "boundary_delta": 0.0001774922857293859
+    },
+    {
+      "path": "inn.ogg",
+      "sha256": "d4743aafeff42a31a90c6b75953250894a35d0b3c46ae41862af0d2166a35a24",
+      "duration": 80.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.48626282811164856,
+      "rms": 0.06330794841051102,
+      "boundary_delta": 0.00012355597573332489
+    },
+    {
+      "path": "inn-lead.ogg",
+      "sha256": "aaaf6fe2632386508ace372aebeef291b8f2fb27d46a6f6db5ae1f57ef39bdd5",
+      "duration": 80.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.24872660636901855,
+      "rms": 0.030403658747673035,
+      "boundary_delta": 3.4414226774970302e-06
+    },
+    {
+      "path": "inn-harmony.ogg",
+      "sha256": "4aafefe1e8c3b6e514203cd85de1826026bc8bf0c9e47a141fa8c3d7a9696f46",
+      "duration": 80.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.302991658449173,
+      "rms": 0.040052011609077454,
+      "boundary_delta": 0.00023329569376073778
+    },
+    {
+      "path": "inn-pulse.ogg",
+      "sha256": "a57b015b2cea6ba20d6d0430ce33f85793aa3211053f1d22ebe6038370109d21",
+      "duration": 80.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.31411516666412354,
+      "rms": 0.03902536630630493,
+      "boundary_delta": 0.00021343106345739216
+    }
+  ],
+  "production_enabled": false,
+  "toolchain": "kol-music:timidity2.14-fluid3.1-r1 / sha256:9520e9a4f3341495b3bcb6108cd2e6d7ba835647aaf349381c60a921ae7b927b",
+  "composition_tool": "../../../tools/compose_hd_music.py",
+  "external_generation_service": null,
+  "randomness": "No RNG; deterministic authored note events.",
+  "files": {
+    "browser-check.json": {
+      "sha256": "1c383945d24fa9b911b9169ff36afd4ef22f42686138bc794ae74fde0bc05c21",
+      "size": 824
+    },
+    "browser.log.gz": {
+      "sha256": "2daa6a8f8f2e3a77b28f21fd0b167dc94fe96ebcaffd05981ad13d750cdfe4a6",
+      "size": 944
+    },
+    "inn-harmony.ogg": {
+      "sha256": "4aafefe1e8c3b6e514203cd85de1826026bc8bf0c9e47a141fa8c3d7a9696f46",
+      "size": 1768688
+    },
+    "inn-lead.ogg": {
+      "sha256": "aaaf6fe2632386508ace372aebeef291b8f2fb27d46a6f6db5ae1f57ef39bdd5",
+      "size": 935586
+    },
+    "inn-loudness.log.gz": {
+      "sha256": "0fe53f7b1e5333d5301dfe49bb37f701e6908888dd18400ce6e01556ca8a58fe",
+      "size": 11626
+    },
+    "inn-pulse.ogg": {
+      "sha256": "a57b015b2cea6ba20d6d0430ce33f85793aa3211053f1d22ebe6038370109d21",
+      "size": 1901048
+    },
+    "inn-score.json": {
+      "sha256": "d576cf6b0b20e2c2d9715bbca9a979768528e607c04c084961202ecfbaa355aa",
+      "size": 18918
+    },
+    "inn-three-loops.ogg": {
+      "sha256": "93b964aac0b3103cafda6240da15c1f382946403aaa644f3054e18196a1abdc8",
+      "size": 5194832
+    },
+    "inn.mid": {
+      "sha256": "0968fbcf93c5b1506628d26b8a908ba9631b52724f56f604a2da85058a91e915",
+      "size": 1436
+    },
+    "inn.ogg": {
+      "sha256": "d4743aafeff42a31a90c6b75953250894a35d0b3c46ae41862af0d2166a35a24",
+      "size": 1851873
+    },
+    "review.html": {
+      "sha256": "ec48b478589c1a56a873675aa127a8651fe9265bd434857e923d58546ca39e59",
+      "size": 3267
+    },
+    "soundfont-LICENSE.txt": {
+      "sha256": "f2f5e6358fc7c1fe62aafc6c8229c4c5898e5afb0d4ce1322b15362a8cbd600e",
+      "size": 2132
+    },
+    "technical-check.json": {
+      "sha256": "acec4fecb3efc2c47fa50f313f19321d00201a2a55134cbb6d3e690074290987",
+      "size": 3128
+    },
+    "title-harmony.ogg": {
+      "sha256": "5a588955ff4647d22723a14a4f8ef30a64a1a80bb4a1916cb79990ba8a7f5d85",
+      "size": 1587829
+    },
+    "title-lead.ogg": {
+      "sha256": "364b7f4738788e276b3bbe387a1d749379e82e2f2cf5aea5092f0f40d7715844",
+      "size": 863489
+    },
+    "title-loudness.log.gz": {
+      "sha256": "c06f7c59dd7e072999eedd0630e4fa1d0533f01cf9cc8026126daf190f85126d",
+      "size": 10920
+    },
+    "title-pulse.ogg": {
+      "sha256": "aa661a43b947aba2457697edebaecabe1617c77f9857e3fe68ed0e6fd758c27c",
+      "size": 1651249
+    },
+    "title-score.json": {
+      "sha256": "88e7400c48186c31bb2c4f7f3f6468677e96b66817fcfe11cc13358ae42fc1db",
+      "size": 17397
+    },
+    "title-three-loops.ogg": {
+      "sha256": "5a0caad1d81ef3c4eafde2c331a6e8b61ee0212b0991a4dfb8a03ca1f0347072",
+      "size": 4789469
+    },
+    "title-with-thunder.ogg": {
+      "sha256": "d8e966ae46c6dd0148f54e2fdc0d0f68467ca3973e325f72b122ddaee0d14d0f",
+      "size": 1474286
+    },
+    "title.mid": {
+      "sha256": "2413c2f2375baf7c420fae4695756c9039cb44c3cd436fd0aeca0de04e2da01a",
+      "size": 1314
+    },
+    "title.ogg": {
+      "sha256": "45f84293d4fb2d81a73a2f2da6e1bb3578e2279085b7592ebbcd5fea64e462ec",
+      "size": 1655887
+    }
+  },
+  "qa": "technical-check.json",
+  "browser_qa": "browser-check.json",
+  "rights": "Project-authored MIDI and rendered OGG: repository LICENSE (RRSAL-1.0); FluidR3 GM MIT attribution retained. No original game audio sampled.",
+  "tools": {
+    "tools/compose_hd_music.py": "5679dc7f714499e9e10a4281745c4c85d03dfa25257ae64a85a31c215727956f",
+    "tools/verify_hd_music.py": "035046e97fe4d344b14cd1cd4d4adc84a3614fe34ce1abc3b659dd47279c8515",
+    "tools/verify_hd_music_browser.py": "d672ae24642448e7e9b1f607a08469f198330574744a74f06454dbd08c837f4d",
+    "tools/Dockerfile.music": "cdf8fab8601879a5c1d77f03dd0d01ae2ca8bc6dbf59e795e952aa9bb98fedf6"
+  }
+}

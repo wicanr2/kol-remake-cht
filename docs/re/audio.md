@@ -82,17 +82,16 @@ executable 裡只有 `TITLE.EXE` 碰得到音訊硬體，而它發出的是標�
 sample duration 與「播放完成」的控制流閘門，標記為 `hardware-spec approximation`。
 玩家看得見的 cue 與等待播放完成的行為證實之後就停止深挖。
 
-## 現況與還沒過的閘門
+## 目前狀態
 
-**遊戲裡目前一個音都沒有。**SPEC-004 仍是 DRAFT，因此還沒建立 Ebitengine 的音訊
-路徑——規格沒到 READY 就不接進 runtime，這是專案的硬規則。
+標題雷聲已獲使用者聆聽接受，並於2026-10-04接入正式OGG播放。
+[SPEC-004](../spec/004-ogg-audio-catalog.md)為有限CONFORMED，來源與cue驗證見
+[RE-228](20261004-title-audio-runtime.md)及[音訊驗收](../verification/audio/README.md)。
+先前本節的「沒有音訊、規格DRAFT、人耳未驗」是過期摘要，不能覆蓋現行收據；歷史輸入與硬體近似限制保持。
 
-擋在 READY 前面的是一件事：**人耳驗收還沒做**，需要使用者實際聽過
-`assets/audio/title-thunder.ogg`。技術上解得開、不是靜音、時長對得上，都不代表
-聽起來像那一聲雷。
-
-驗收通過之後要做的：升 SPEC-004 為 READY → 建立 OGG 轉換／合成管線的驗證收據 →
-接上 Ebitengine 的播放路徑 → 在標題序列的三個呼叫點觸發。
+使用者另選定中世紀室內樂的HD新配樂方向。[標題與旅店試聽](../verification/hd-music-20261012/review.html)
+是重製版原創MIDI及授權音色合成，技術檢查已通過，人耳待確認，尚未接正式播放。
+沒有已證實原作背景旋律，不把新作標成原版配樂修復。
 
 ## 相關
 

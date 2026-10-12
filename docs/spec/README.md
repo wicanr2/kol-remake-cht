@@ -21,7 +21,7 @@
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
 | SPEC-040 | [受控場景與中文畫面驗收](040-controlled-scene-acceptance.md) | CONFORMED | 本輪收尾改採受控場景；指定畫面、獨立驗收模式及中文結局排版已驗 |
-| SPEC-039 | [HD 手繪美術與介面工作計畫](039-hd-art-ui.md) | 整體DRAFT；首批及設定有限CONFORMED | 核准門面、六人圖集及遊戲內畫面切換已接入；[設定、鍵鼠及存讀檔已驗](../verification/display-switch-runtime-20261012.md)，其他批次依原閘門 |
+| SPEC-039 | [HD 手繪美術與介面工作計畫](039-hd-art-ui.md) | 整體DRAFT；首批、設定及介面／頭像有限CONFORMED | [核准HD介面及NPC已接開發版](../verification/hd-interface-runtime-20261012.md)，F10與存讀檔已驗；其他圖層依原閘門，配樂見SPEC-004試聽 |
 | SPEC-038 | [套件邊界、固定步進與注入點](038-package-boundaries.md) | READY | remake 工程契約；`internal/layers` 四項守門測試擋依賴方向、Ebitengine 越界、規則層讀時鐘與全域亂數 |
 | SPEC-037 | [建築進門後的發言者選擇與好惡](037-building-greeting.md) | READY | 多人隊伍先選發言者、被討厭與被欣賞的訊息、全隊被趕、SCROLL 教派；原版關鍵點三組共 36,176 組一致；滑鼠點肖像見 RE-167 |
 | SPEC-036 | [圖像與盾牌編輯器](036-picture-shield-editor.md) | CONFORMED | 點陣圖編輯器已實作；鍵盤路徑與原版同狀態逐 byte 一致，滑鼠路徑依靜態讀碼、未與原版實跑比較 |
@@ -42,7 +42,7 @@
 | SPEC-002 | [PNG 素材抽取契約](002-png-asset-extraction.md) | READY | 僅授權已關閉像素格式的抽取器，其他 archive 仍須逐批驗證 |
 | SPEC-002 | [EGA 抽取集合](002-ega-extraction-set.md) | READY | 僅授權本集合的 PNG 抽取與驗證 |
 | SPEC-003 | [繁中說明書翻譯與校對契約](003-manual-translation.md) | CONFORMED | 僅授權文件翻譯，不授權玩法／runtime |
-| SPEC-004 | [OGG 音訊目錄與執行期契約](004-ogg-audio-catalog.md) | CONFORMED | 是；限RE-228標題OGG、23次cue及正式播放 |
+| SPEC-004 | [OGG 音訊目錄與執行期契約](004-ogg-audio-catalog.md) | 標題有限CONFORMED；HD配樂DRAFT | 原雷聲正式播放已驗；[原創室內樂試聽](../verification/hd-music-20261012/review.html)技術通過，人耳待確認 |
 | SPEC-005 | [角色建立與角色儲存區](005-character-creation.md) | READY | 建角、刪除、穩定槽位與保存已接；[RE-169](../re/character-creation.md#2026-10-01-名冊邊界正常-ui-訂正re-169)已證實原版滿槽時點、重名及字元集合；正式差異待決，圖像編輯另見SPEC-036 |
 | SPEC-006 | [住宿、治療與存檔格式](006-rest-and-save.md) | READY | 僅授權 REST 三條路、remake 存檔讀寫與離線匯入 |
 | SPEC-007 | [野外的時刻、日曆與天候](007-wilderness-time.md) | READY | 僅授權時刻、日曆、天候與紮營畫面；遭遇見 SPEC-011 |

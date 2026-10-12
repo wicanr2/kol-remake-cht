@@ -11,13 +11,14 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
 
-// HD 只在最後1920×1200畫布替換已核准圖片，不改動舊畫布、字型與狀態。
+// HD 在最後1920×1200畫布呈現核准圖片與介面，不改動原畫布、字型與規則狀態。
 type HD struct {
 	facade    *ebiten.Image
 	portraits [6]*ebiten.Image
 	matching  map[string]int
 	facadeKey string
 	keys      map[*ebiten.Image]string
+	style     *hdInterface
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {
@@ -78,12 +79,18 @@ func (h *HD) Inn(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 	if in == nil || in.SpellEdit != nil {
 		return nil
 	}
+	if h.style != nil && in.Sheet == nil && in.List == nil && in.Steed == nil && len(in.Detail) == 0 && in.DialogRow == 0 {
+		return h.innHD(dst, sprites, in)
+	}
 	return h.party(dst, sprites, sheetVisibleParty(in))
 }
 
 func (h *HD) Outdoor(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) error {
 	if out == nil {
 		return nil
+	}
+	if h.style != nil {
+		return h.outdoorHD(dst, sprites, out)
 	}
 	if err := h.party(dst, sprites, out.Party); err != nil {
 		return err
@@ -108,6 +115,9 @@ func (h *HD) Battle(dst *ebiten.Image, sprites Sprites, s *battle.State) error {
 	d, shown := s.EquipmentPanel()
 	if !shown || d.Monster || d.Equipment {
 		return nil
+	}
+	if h.style != nil && s.Stage == battle.StageField && s.Plan.Prompt == battle.PromptCommand && len(s.Plan.Bar) > 0 {
+		return h.battleHD(dst, sprites, s)
 	}
 	pic, err := memberPortrait(sprites, d.Portrait, d.Picture)
 	if err != nil {

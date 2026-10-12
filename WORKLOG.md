@@ -11396,3 +11396,21 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 33份候選、來源與證據約12.5 MiB先保存至docs/verification/hd-ui-theme-20261012，再以獨立容器核全部附件、正式來源、素材及原圖雜湊，才刪本次workplace目錄。保存後頁面以唯讀掛載通過48項自檢，所有相對素材可載入。新增入口同輪掛README、CONTEXT、SPEC-039、工作清單與證據索引；253個現行文件連結及索引正對照通過。
 - 原始Chromium log含尾端空白，暫存後的git diff --check因此示警。四份log改用無損gzip保存，逐份解壓與原bytes相同，清冊保留壓縮及原始SHA-256；重跑格式檢查通過，沒有改寫原log內容。
 - 全程Docker、無網路、有界資源與UID/GID1000，瀏覽器有退出與回收。沒有新建或替換工具映像，沒有root-owned檔案或誤建.md目錄，本輪容器清理完成，其他專案與研究工作區未動。主機gh核對目的地仍為private；本輪候選只依既有commit＋push授權保存到目前儲存庫，不建立新發行。
+
+
+## 2026-10-12 核准HD介面正式接入與原創室內樂試聽
+
+使用者核准操作介面／頭像同主題原型並要求開工，另選A中世紀室內樂。依重製規格閘門與配樂技能執行。SPEC-039此切片先升READY，完成後有限CONFORMED；整體HD與SPEC-004新配樂仍保留原範圍。
+
+- 由核准Canvas函式重生43張介面PNG；完整2610字HD字模涵蓋現行2608字，原型250字像素與字距完全相同。六人及門面原檔保持，新增NPC按原圖RGB匹配。UI僅收外層注入的已驗資料，不依賴assets載入器。
+- Go正式全回歸與sceneverify通過；最後修改重跑cmd／UI／assets／layers及場景工具。七條封存路徑71個狀態與中文相同，既有EGA畫格保持；實際15次F10切換、鍵鼠、兩視窗、缺件回退、正常住宿v3及新程序重載7狀態通過。完整命令、輸入、程式雜湊與畫格見docs/verification/hd-interface-runtime-20261012.md。
+- 原創室內樂為專案自寫MIDI，不採原作旋律或錄音。標題72秒80BPM、旅店80秒72BPM，均含三分軌、音符及三輪OGG；14個解碼分軌組合、非靜音、峰值、循環時長、雷聲混音與瀏覽器真實播放／停止通過。標題−21.2LUFS／−5.9dBTP，旅店−21.4LUFS／−6.3dBTP。人耳辨識、第三輪疲勞與音效清晰度待使用者聽，不接正式播放。
+- 新增必要的獨立音樂工具鏈kol-music:timidity2.14-fluid3.1-r1，base沿kol-package現有固定image，鎖TiMidity++2.14.0-8.1與FluidR3GM3.1-5.3。映像ID9520e9a4f3341495b3bcb6108cd2e6d7ba835647aaf349381c60a921ae7b927b；保留MIT全文及音色SHA，未散布SoundFont、合成器或原版音訊。
+- 驗證腳本修正：分層守門抓到UI直接依賴assets，改由cmd注入，未放寬規則。封存時誤將多住一晚的GUI保存與原headless保存比較，差56金冠；改比同輸入的兩份GUI保存與獨立重載。三輪OGG用stream_loop出現重複時間戳，改以aloop循環解碼樣本並重驗，最終無該警告。
+- 追加勘誤：docs/re/audio.md舊摘要仍稱遊戲無音訊／SPEC-004 DRAFT，與RE-228及正式收據矛盾。已改回有限CONFORMED標題雷聲；原始硬體證據、近似限制與歷史不改。
+- README換為正式開發版HD畫格及三組同主題比較，明示既有Release仍是首批；配樂試聽入口及工作清單已更新。GitHub唯讀核對仍PRIVATE，沿既有commit＋push授權保存，不發布／覆寫Release。
+- 本機壓縮證據：4d4313d58003ad3a2b1b4331a996a9c604a6e2feebef1c648ae891246b64b3a8，302個檔案已逐檔由壓縮包重驗。二進位僅留hash與重建入口，gocache排除。Docker與UID／暫存清理收尾另記。
+
+清理：302份證據與本機壓縮包再次核對後，只刪workplace/hd-interface-runtime-20261012，釋放293730107 bytes。新素材、畫格、音訊與證據目錄UID均為1000，沒有root-owned檔或誤建.md目錄。所有本輪Go／Xvfb／瀏覽器／音樂容器均以--rm結束；現行音樂工具image保留，沒有替換其他專案映像。提交與推送結果另追加。
+
+第三方SoundFont授權快照逐位元保留原文；.gitattributes只排除此檔原有的行尾空白檢查，不更動授權文字與SHA。工作清單verify維持16未完成／92已核實完成，生成區塊同步。

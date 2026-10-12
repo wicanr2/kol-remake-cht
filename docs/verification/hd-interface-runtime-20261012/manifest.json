@@ -1,0 +1,90 @@
+{
+  "schema": "kol-hd-interface-png/1",
+  "entries": {
+    "door-hd.png": {
+      "sha256": "91fdb10f73d542294bd2f64119e47bcdfed0b0338fa6672d071b3c740f748f67",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "six/hd/step-002.png",
+      "comparison": null
+    },
+    "inn-hd.png": {
+      "sha256": "226772e6505ba64f661e07b9ec51968d34d734bc41cdc272ee612a1e0ccf2e5e",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "six/hd/step-004.png",
+      "comparison": null
+    },
+    "battle-hd.png": {
+      "sha256": "f37348f2136e9a04fba7a7519db585d3750a035a20655f4834ae155f1a605106",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "battle/hd/step-013.png",
+      "comparison": null
+    },
+    "door-compare.png": {
+      "sha256": "29dd1800184d1acd2a238beb5617530f881975a13916640c623bfe414000c025",
+      "width": 3840,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "six/hd/step-002.png",
+      "comparison": "previous HD / current HD, same retained state"
+    },
+    "inn-compare.png": {
+      "sha256": "27e31ec8522d3a49951adae0868e60fe249670f67c8a5b850d6866434188df1b",
+      "width": 3840,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "six/hd/step-004.png",
+      "comparison": "previous HD / current HD, same retained state"
+    },
+    "battle-compare.png": {
+      "sha256": "6cf88d8cc01602bf0206ddfb25fea60bc9cc5f52f7da4b700e05e13722a31b54",
+      "width": 3840,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "battle/hd/step-013.png",
+      "comparison": "previous HD / current HD, same retained state"
+    },
+    "game-menu-hd.png": {
+      "sha256": "ea048dda71e8f242bea69ccd6a5afcd04349e60e8c1b70ef30992af37f37cf3e",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "game-menu-hd.png",
+      "comparison": null
+    },
+    "game-resized.png": {
+      "sha256": "d24ed408842fdb1328df10397042eab4fabe6e127c5fef74b7276c770d22f5d8",
+      "width": 960,
+      "height": 600,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "game-resized.png",
+      "comparison": null
+    },
+    "game-closed.png": {
+      "sha256": "f136d9ab76da062d0b71ada7be31bdd24727ec4ef638a3dce4af787064d50c60",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "game-closed.png",
+      "comparison": null
+    }
+  },
+  "receipt": "receipt.json",
+  "runtime_sha256": "637eb1ae1e455210c19dee2b3d08d97559fdc2aa9eade17962003389b575d602",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "toolchain": "kol-package:1.26.7-ebiten2.9.9-20261011-r1"
+}

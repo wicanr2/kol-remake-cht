@@ -72,20 +72,22 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 ### HD 畫面
 
-首批 HD 採 1920×1200 原比例，已接入旅店門面、六人肖像與戰鬥資訊框。
-下圖為重製版實際遊戲畫面；外框、圖示、戰場與其他人物仍沿用 EGA 美術。
+HD 採1920×1200原比例。開發版已接入核准的操作介面、原生中文字、六人肖像與旅店老闆頭像。
+下圖為開發版實際遊戲畫面；戰場、傷勢圖及未展示子頁仍沿現有顯示。現行發行包保留首批HD。
 
 手繪旅店門面與六人隊伍：
 
-![HD 旅店門面與六人肖像，1920×1200](docs/verification/hd-runtime-20261011/inn-door.png)
+![HD 旅店門面、六人肖像與操作介面，1920×1200](docs/verification/hd-interface-runtime-20261012/door-hd.png)
+
+![HD 旅店老闆頭像與原生中文字](docs/verification/hd-interface-runtime-20261012/inn-hd.png)
 
 | 戰鬥資訊框的 HD 人物 | 遊戲內 HD 畫面設定 |
 |---|---|
-| ![戰鬥資訊框顯示 HD 騎士肖像](docs/verification/hd-runtime-20261011/battle.png) | ![遊戲內畫面設定，HD 手繪使用中](docs/verification/display-switch-runtime-20261012/game-menu-hd.png) |
+| ![戰鬥資訊框與七個HD指令](docs/verification/hd-interface-runtime-20261012/battle-hd.png) | ![遊戲內HD畫面設定](docs/verification/hd-interface-runtime-20261012/game-menu-hd.png) |
 
 按 F10 或點下緣「畫面 F10」，即可在同一場景切換 EGA／HD；Esc 返回遊戲。
-圖片來源、畫格、SHA-256 與權利分類見[首批 HD 截圖清冊](docs/verification/hd-runtime-20261011/manifest.json)
-及[畫面設定截圖清冊](docs/verification/display-switch-runtime-20261012/manifest.json)。
+三組[同主題、同場景比較](docs/verification/hd-interface-runtime-20261012.md#同主題比較)沿用相同人物與門面。
+圖片來源、畫格、SHA-256與權利分類見[正式介面截圖清冊](docs/verification/hd-interface-runtime-20261012/manifest.json)。
 
 ### EGA 畫面
 
@@ -106,6 +108,9 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 ## HD 化計畫
 
+配樂採中世紀室內樂，標題與旅店已有[原創 MIDI 試聽稿](docs/verification/hd-music-20261012/review.html)，
+附OGG、分軌、三輪循環與來源授權。技術檢查已通過，待試聽後接入；目前發行包仍沿用已驗收雷聲。
+
 首批手繪旅店門面與六人肖像已接入實際遊戲，採 1920×1200 原比例。
 點下緣「畫面 F10」或按 F10，選擇 EGA／HD 即可在同一場景比較；Esc 返回遊戲。
 預設使用 EGA，切換在本次遊玩有效。三平台完整版已含首批素材。
@@ -115,9 +120,9 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 首批素材位於 [assets/hd/first-slice/manifest.json](assets/hd/first-slice/manifest.json)，
 核准樣張保存在[比較原型](docs/verification/hd-first-slice-20261011/review.html)。
-操作介面與旅店 NPC 的下一批外觀見[可操作候選與同場景對比](docs/verification/hd-ui-theme-20261012/review.html)，
-沿用相同手繪人物與門面，示範 HD 中文、外框、圖示及 F10 整套切換；候選尚待定版與正式接入。
-接續分批處理書本、人物裝備、城鎮、戰鬥與天候；外框、圖示、戰場及傷勢遮罩仍使用 EGA。
+核准的[操作介面與NPC原型](docs/verification/hd-ui-theme-20261012/review.html)已接入開發版，
+[正式驗收](docs/verification/hd-interface-runtime-20261012.md)包含HD中文、面板、操作列、頭像、F10及正常住宿存讀檔。
+接續分批處理書本、其他人物裝備、城鎮、戰鬥與天候；地圖、傷勢及未繪分支保持現有顯示。
 批次與素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
 
 ## 專案起源
@@ -191,7 +196,7 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
   原版執行畫面截圖、譯文中保留的原版英文字串，以及由原版量測得出的位址與數值表，
   其中屬於原版的部分仍屬原權利人；條款第 2 條逐項寫明了界線。
 - 第三方元件依各自授權：中文點陣字模烘製自 **Noto Sans CJK TC**（SIL Open Font
-  License 1.1），執行期使用 **Ebitengine** 及其相依套件。
+  License 1.1），HD字模使用Noto Serif CJK TC；配樂試聽使用FluidR3 GM音色庫（MIT）。執行期使用 **Ebitengine** 及其相依套件。
 
 原版執行檔、資料、美術、地圖、音樂、音效與轉換後素材均受獨立權利限制；
 程式碼授權不代表可散布這些內容。

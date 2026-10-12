@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/wicanr2/kol-remake-cht/internal/assets"
@@ -30,7 +31,16 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD素材載入失敗：%w", err)
 		}
+		controls, err := assets.LoadHDInterface(filepath.Join(g.hdDir, "interface"))
+		if err != nil {
+			return fmt.Errorf("HD介面載入失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
+		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
+		for ch, g := range controls.Font.Glyphs {
+			glyphs[ch] = ui.HDGlyph{X: g.X, Y: g.Y, Advance: g.Advance}
+		}
+		hd.AttachInterface(controls.Images, glyphs, controls.NPCKey, controls.CrestKey, g.strings)
 		canvas := screen.NewCanvasScaled(6)
 		g.hdCache, g.hdCanvas = hd, canvas
 	}

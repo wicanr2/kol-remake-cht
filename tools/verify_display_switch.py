@@ -9,6 +9,7 @@ assert Path('/.dockerenv').exists()
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--binary',type=Path,default=out/'kol')
 parser.add_argument('--output',type=Path,default=out)
+parser.add_argument('--hd-interface',action='store_true',help='SPEC-039已核准的新HD介面；保留EGA、狀態與保存檢查')
 args=parser.parse_args()
 out=args.output
 events=[]
@@ -108,7 +109,10 @@ def execute(name,missing=False):
         for i in range(6):
             r=(88+i*288,10,336+i*288,242)
             assert ImageChops.difference(a.crop(r),b.crop(r)).getbbox(),('missing HD portrait',i)
-        assert not ImageChops.difference(a.crop((0,245,1920,1150)),b.crop((0,245,1920,1150))).getbbox(),'switch changed scene or text outside portraits'
+        if args.hd_interface:
+            assert ImageChops.difference(a.crop((612,350,1778,910)),b.crop((612,350,1778,910))).getbbox(),'HD interface not presented'
+        else:
+            assert not ImageChops.difference(a.crop((0,245,1920,1150)),b.crop((0,245,1920,1150))).getbbox(),'switch changed scene or text outside portraits'
     return dict(command=argv,display_events=rows,passed=True)
 
 def stay(switched):
@@ -152,9 +156,9 @@ stay_commands=[stay(False),stay(True)]
 saved=[json.loads((out/(n+'.json')).read_text()) for n in ('stay-baseline','stay-switched')]
 for data in saved:data.pop('saved_at',None)
 assert saved[0]==saved[1],'switching changed persisted game data'
-for name in ('game-menu-ega.png','game-menu-hd.png','missing-menu-hd.png'):
+for name in (('game-menu-ega.png','missing-menu-hd.png') if args.hd_interface else ('game-menu-ega.png','game-menu-hd.png','missing-menu-hd.png')):
     before=Image.open(root/'docs/verification/display-switch-20261011'/name).convert('RGB')
     actual=Image.open(out/name).convert('RGB')
     assert not ImageChops.difference(before,actual).getbbox(),('approved prototype changed',name)
-(out/'gui-check.json').write_text(json.dumps(dict(passed=True,checks=checks,events=events,stay_commands=stay_commands,stay_v3_equal_except_saved_at=True,approved_screens_unchanged=3,limits='正式程式的畫面設定驗收；未新增原版parity或平台真機證據'),ensure_ascii=False,indent=2)+'\n')
-print('GUI PASS: mouse, F10, keyboard, resized click, right-click, no observed state or save changes, missing-pack fallback, three approved screens unchanged',flush=True)
+(out/'gui-check.json').write_text(json.dumps(dict(passed=True,checks=checks,events=events,stay_commands=stay_commands,stay_v3_equal_except_saved_at=True,approved_ega_screens_unchanged=2,hd_interface=args.hd_interface,limits='正式程式的畫面設定驗收；未新增原版parity或平台真機證據'),ensure_ascii=False,indent=2)+'\n')
+print('GUI PASS: mouse, F10, keyboard, resized click, right-click, unchanged state/save, missing-pack fallback; approved EGA screens unchanged'+('; new approved HD interface' if args.hd_interface else '; approved HD screen unchanged'),flush=True)

@@ -1,0 +1,178 @@
+{
+  "schema": "kol-hd-music-qa/1",
+  "status": "TECHNICAL_PASS_LISTENING_PENDING",
+  "checks": [
+    {
+      "track": "title",
+      "stems": [
+        0,
+        0,
+        1
+      ],
+      "peak": 0.29044109582901,
+      "seconds": 72,
+      "decoded_ogg": true
+    },
+    {
+      "track": "title",
+      "stems": [
+        0,
+        1,
+        0
+      ],
+      "peak": 0.2956153452396393,
+      "seconds": 72,
+      "decoded_ogg": true
+    },
+    {
+      "track": "title",
+      "stems": [
+        0,
+        1,
+        1
+      ],
+      "peak": 0.3481559455394745,
+      "seconds": 72,
+      "decoded_ogg": true
+    },
+    {
+      "track": "title",
+      "stems": [
+        1,
+        0,
+        0
+      ],
+      "peak": 0.2583576440811157,
+      "seconds": 72,
+      "decoded_ogg": true
+    },
+    {
+      "track": "title",
+      "stems": [
+        1,
+        0,
+        1
+      ],
+      "peak": 0.4213320016860962,
+      "seconds": 72,
+      "decoded_ogg": true
+    },
+    {
+      "track": "title",
+      "stems": [
+        1,
+        1,
+        0
+      ],
+      "peak": 0.38208895921707153,
+      "seconds": 72,
+      "decoded_ogg": true
+    },
+    {
+      "track": "title",
+      "stems": [
+        1,
+        1,
+        1
+      ],
+      "peak": 0.5058810114860535,
+      "seconds": 72,
+      "decoded_ogg": true
+    },
+    {
+      "track": "inn",
+      "stems": [
+        0,
+        0,
+        1
+      ],
+      "peak": 0.31411516666412354,
+      "seconds": 80,
+      "decoded_ogg": true
+    },
+    {
+      "track": "inn",
+      "stems": [
+        0,
+        1,
+        0
+      ],
+      "peak": 0.302991658449173,
+      "seconds": 80,
+      "decoded_ogg": true
+    },
+    {
+      "track": "inn",
+      "stems": [
+        0,
+        1,
+        1
+      ],
+      "peak": 0.4233240485191345,
+      "seconds": 80,
+      "decoded_ogg": true
+    },
+    {
+      "track": "inn",
+      "stems": [
+        1,
+        0,
+        0
+      ],
+      "peak": 0.24872660636901855,
+      "seconds": 80,
+      "decoded_ogg": true
+    },
+    {
+      "track": "inn",
+      "stems": [
+        1,
+        0,
+        1
+      ],
+      "peak": 0.42366552352905273,
+      "seconds": 80,
+      "decoded_ogg": true
+    },
+    {
+      "track": "inn",
+      "stems": [
+        1,
+        1,
+        0
+      ],
+      "peak": 0.37113773822784424,
+      "seconds": 80,
+      "decoded_ogg": true
+    },
+    {
+      "track": "inn",
+      "stems": [
+        1,
+        1,
+        1
+      ],
+      "peak": 0.4864969849586487,
+      "seconds": 80,
+      "decoded_ogg": true
+    }
+  ],
+  "three_loops_seconds": {
+    "title": 216,
+    "inn": 240
+  },
+  "sfx_preview": {
+    "file": "title-with-thunder.ogg",
+    "sha256": "d8e966ae46c6dd0148f54e2fdc0d0f68467ca3973e325f72b122ddaee0d14d0f",
+    "peak": 0.7037767767906189,
+    "source": "assets/audio/title-thunder.ogg",
+    "source_sha256": "0e95e887d2513161a4f07d85fad3c64d7fc538d3b61864256f787d98db85d362",
+    "delay_seconds": 3
+  },
+  "listening": {
+    "identity_blind_test": "pending",
+    "third_loop_fatigue": "pending",
+    "dialogue_and_sfx_audibility": "pending"
+  },
+  "production_enabled": false
+}

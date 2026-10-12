@@ -89,17 +89,16 @@ func (g *game) drawDisplaySettings(dst *ebiten.Image) error {
 		return nil
 	}
 	if g.displayCanvas == nil {
-		g.displayCanvas = screen.NewCanvasScaled(3)
+		g.displayCanvas = screen.NewCanvasScaled(6)
 	}
 	g.displayCanvas.Clear()
 	g.displaySettings.HD = g.hd != nil
-	if err := ui.DrawDisplaySettings(g.displayCanvas.Image(), g.cjk, g.strings, g.displaySettings); err != nil {
+	if g.hd != nil {
+		g.hd.DrawDisplaySettings(g.displayCanvas.Image(), g.displaySettings)
+	} else if err := ui.DrawDisplaySettings(g.displayCanvas.Image(), g.cjk, g.strings, g.displaySettings); err != nil {
 		return err
 	}
 	var op ebiten.DrawImageOptions
-	if g.hd != nil {
-		op.GeoM.Scale(2, 2)
-	}
 	op.Filter = ebiten.FilterNearest
 	dst.DrawImage(g.displayCanvas.Image(), &op)
 	if g.displayAwaitFrame {

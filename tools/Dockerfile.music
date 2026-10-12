@@ -1,0 +1,6 @@
+# 建置前核對base image ID：sha256:0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f
+FROM kol-package:1.26.7-ebiten2.9.9-20261011-r1
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends timidity=2.14.0-8.1 fluid-soundfont-gm=3.1-5.3 && rm -rf /var/lib/apt/lists/*
+USER 1000:1000
+ENV HOME=/tmp

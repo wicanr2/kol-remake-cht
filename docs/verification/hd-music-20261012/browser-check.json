@@ -1,0 +1,48 @@
+{
+  "schema": "kol-hd-music-browser/1",
+  "status": "PASS",
+  "browser": "Chrome/154.0.8037.92",
+  "metadata": [
+    {
+      "id": "title",
+      "ready": 4,
+      "duration": 72.002902,
+      "error": null
+    },
+    {
+      "id": "thunder",
+      "ready": 4,
+      "duration": 0.964354,
+      "error": null
+    },
+    {
+      "id": "inn",
+      "ready": 4,
+      "duration": 80.002902,
+      "error": null
+    }
+  ],
+  "real_click_playback": [
+    {
+      "id": "title",
+      "time": 3.362499,
+      "paused": false,
+      "error": null
+    },
+    {
+      "id": "thunder",
+      "time": 0.343951,
+      "paused": false,
+      "error": null
+    },
+    {
+      "id": "inn",
+      "time": 0,
+      "paused": true,
+      "error": null
+    }
+  ],
+  "stop_all": true,
+  "human_listening": false,
+  "audio_output_muted": true
+}
