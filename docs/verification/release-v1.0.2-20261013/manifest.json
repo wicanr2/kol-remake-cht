@@ -1,0 +1,87 @@
+{
+  "schema": "kol-release-visual-comparison/1",
+  "version": "v.1.0.2-20261013",
+  "same_theme": true,
+  "same_seed": 1,
+  "same_script": "L R RET SPACE",
+  "fixture_sha256": "270afc359e9e282d34632f0e2a86b0edcdb726993e0f6d33b7e4cb551099a0d3",
+  "max_channel_delta": 2,
+  "different_pixels": 135330,
+  "predeclared_numeric_bound": 1,
+  "predeclared_numeric_result": "UNMET",
+  "original_parity_claimed": false,
+  "entries": {
+    "linux-hd.png": {
+      "sha256": "0f6a66ae8cf6a70f0156f14fbf6931180b592371ceab4cb004088745f8dc0bae",
+      "size": 937926,
+      "width": 1920,
+      "height": 1200,
+      "frame": "step-004",
+      "source": "smoke/linux-reference-hd/step-004.png",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub PNG exception; remake actual package capture; no public distribution grant"
+    },
+    "windows-hd.png": {
+      "sha256": "33fc9f274b1623078d7abdc9df12efc06716e7d93c5f89867786360f44d8fe7d",
+      "size": 938662,
+      "width": 1920,
+      "height": 1200,
+      "frame": "step-004",
+      "source": "smoke/wine-full-hd/step-004.png",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "rights": "private GitHub PNG exception; remake actual package capture; no public distribution grant"
+    },
+    "same-hd-comparison.png": {
+      "sha256": "1f4dd7a0c8ac339ca12868fe503633838c6ea867813688635806ea176605aae9",
+      "width": 3840,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; composed from listed captures",
+      "sources": [
+        "linux-hd.png",
+        "windows-hd.png"
+      ]
+    }
+  },
+  "precision_comparison": {
+    "file": "fixed-sampling-comparison.png",
+    "sha256": "36db22771acaa63a4c421252f8884865c4d8640cd3f555764ec9e52aad0491e5",
+    "sources": [
+      "formal-linux-debian-hd/step-004.png",
+      "formal-windows-ubuntu-hd/step-004.png"
+    ],
+    "source_sha256": [
+      "1cad71355d47fe9a5026b4d8361d43a1dbb6f7376158e1b0e09dd675d94bf3f4",
+      "74df677006ce686123ad5ccb0f7c9fb64b2dc4f4a045f380ac194d14d2467d32"
+    ],
+    "evidence": "precision-fix.json",
+    "rights": "private GitHub可保存；無公開散布權",
+    "production_candidate": true,
+    "max_channel_delta": 1
+  },
+  "current_package_captures": {
+    "inn-hd-controls.png": {
+      "sha256": "31370daa8543c0dd32b0c4b580801f6b75d65056839f542eb5d044fee192699d",
+      "source": "smoke/linux-full-controls/inn-hd.png",
+      "package_sha256": "b19e24b242e6460d5b14b71033e20f6124783499197012ca9e7423d83d4a6afb",
+      "version": "v.1.0.2-20261013",
+      "tool": "verify_package_controls.py / Xvfb x11grab",
+      "rights": "private GitHub可保存；無公開散布權"
+    },
+    "game-menu-hd.png": {
+      "sha256": "af2dcd4bbc9e44db015b47d5589e03f476d98a58f0887e266650e088221b0f32",
+      "source": "smoke/linux-full-controls/menu-hd.png",
+      "package_sha256": "b19e24b242e6460d5b14b71033e20f6124783499197012ca9e7423d83d4a6afb",
+      "version": "v.1.0.2-20261013",
+      "tool": "verify_package_controls.py / Xvfb x11grab",
+      "rights": "private GitHub可保存；無公開散布權"
+    }
+  },
+  "first_candidate_package_sha256": {
+    "full/kol-v.1.0.2-20261013-full-linux-x86_64.AppImage": "547055ef1f9ab0ee21e6dc4b03056565a1f6a5f890d3e303c3196dcb8ae7eec7",
+    "full/kol-v.1.0.2-20261013-full-windows-amd64.zip": "ca8a9c9d9c931e186b107ea318c9503ae07f5a9e69de98f106efe0d486dabe9d"
+  },
+  "retention_index": "../local/hd-pixel-consistency-20261013/retention.json",
+  "comparison_stage": "first-unpublished-candidate",
+  "current_numeric_result": "PASS; EGA 0, HD <= 1; see receipt.json",
+  "source_zip_description": "Knights-of-legend.zip，固定原作輸入；實際重製封包另由first_candidate_package_sha256及current_package_captures記錄。"
+}

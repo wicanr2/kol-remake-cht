@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""容器內驗證三平台封包；入口見 docs/verification/release-v1.0.1-20261012.md。"""
+"""容器內驗證三平台封包；入口見 docs/verification/release-v1.0.2-20261013.md。"""
 import argparse
 import hashlib
 import json
+import re
 import os
 from pathlib import Path
 import shutil
@@ -94,6 +95,8 @@ def linux():
     wrapper.chmod(0o755)
     write(base / 'release-smoke.json', dict(status='PASS', version=VERSION, imported_files=len(required),
           source=sha(image), invalid_import_rejected_before_writing=True, ega_hd_startup=True))
+    # 同一容器內使用剛匯入的引擎包，錄製full／release的實際音訊與控制。
+    run(['python3', ROOT/'tools/verify_package_controls.py'], ROOT, base/'linux-controls.log', timeout=180)
 
 
 def winpath(path):
@@ -156,6 +159,12 @@ def windows():
                 else:
                     raise AssertionError(log.read_text())
                 subprocess.run(['xdotool', 'windowfocus', '--sync', window], check=True, timeout=10)
+                for token in ('Left','Right','Return','space'):
+                    key(token)
+                wait_for('music cue=inn enabled=true')
+                time.sleep(1.5)
+                key('F9'); wait_for('display action=music-false')
+                key('F9'); wait_for('display action=music-true')
                 key('F10'); wait_for('display-frame hd=false open=true')
                 key('Down'); key('Return'); wait_for('display-frame hd=true open=true')
                 key('Escape'); wait_for('display-frame hd=true open=false')
@@ -169,17 +178,54 @@ def windows():
                 if proc.poll() is None:
                     proc.terminate(); proc.wait(timeout=10)
         assert not (Path('/tmp') / f'{bundle}-gui-save.json').exists()
+        events=re.findall(r'display action=\S+ hd=\S+ state=([0-9a-f]+)',log.read_text())
+        assert len(events)>=7 and len(set(events))==1,'F9/F10 altered game state'
+        positions=re.findall(r'music-position cue=inn enabled=true title_ms=\d+ inn_ms=(\d+)',log.read_text())
+        assert positions and max(map(int,positions))>0,'Wine music player did not advance'
         checks.append(dict(bundle=bundle, package_sha256=sha(package),
-                           ega_hd_rendered=True, in_game_switch=True, save_unchanged=True))
+                           ega_hd_rendered=True, in_game_switch=True, f9=True, music_default_on=True, normal_inn_music=True, save_unchanged=True))
     write(base / 'windows-smoke.json', dict(status='PASS', version=VERSION, checks=checks,
           windows_real_machine=False, runtime='Wine9 / Xvfb'))
 
 
+def pixels():
+    import numpy as np
+    from PIL import Image
+    import wave
+    base=OUT/'smoke';fixture=base/'linux-gui/inputs/save.json'
+    image=OUT/'full'/f'kol-{VERSION}-full-linux-x86_64.AppImage'
+    comparisons=[]
+    for graphics in ('ega','hd'):
+        dest=base/('linux-reference-'+graphics);dest.mkdir()
+        argv=[image,'--appimage-extract-and-run','-scene','play','-lang','zh-Hant','-graphics',graphics,
+              '-load',fixture,'-seed','1','-play-script','L R RET SPACE','-shot-steps','0,1,2,3,4','-shot-dir',dest]
+        write(dest/'command.json',list(map(str,argv)));run(argv,Path('/tmp'),dest/'run.log')
+        for bundle in ('full','release'):
+            for p in sorted(dest.glob('step-*.png')):
+                a=np.asarray(Image.open(p).convert('RGB')).astype(np.int16)
+                b=np.asarray(Image.open(base/f'wine-{bundle}-{graphics}'/p.name).convert('RGB')).astype(np.int16)
+                assert a.shape==b.shape
+                diff=np.abs(a-b);maximum=int(diff.max());count=int(np.count_nonzero(diff.max(2)))
+                comparisons.append(dict(bundle=bundle,graphics=graphics,frame=p.name,max_channel_delta=maximum,different_pixels=count,
+                                        predeclared_numeric_bound_met=maximum <= (0 if graphics=='ega' else 1)))
+    with wave.open(str(base/'windows-audio.wav'),'rb') as wav:
+        assert wav.getnchannels()==2 and wav.getframerate()==44100 and wav.getsampwidth()==2
+        samples=np.frombuffer(wav.readframes(wav.getnframes()),dtype='<i2').astype(np.int32)
+    peak=int(np.max(np.abs(samples)));tail=int(np.max(np.abs(samples[-88200:])))
+    assert 100<peak<32767 and tail==0,(peak,tail)
+    status='PASS' if all(r['predeclared_numeric_bound_met'] for r in comparisons) else 'NUMERIC_BOUND_UNMET'
+    write(base/'windows-pixels.json',dict(status=status,comparisons=comparisons,reference_appimage_sha256=sha(image),
+          audio=dict(device='isolated PulseAudio null sink; actual Windows PE via Wine9',sha256=sha(base/'windows-audio.wav'),peak=peak,last_second_peak=tail),windows_real_machine=False))
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('phase', choices=('structures', 'linux', 'windows'))
+    parser.add_argument('phase', choices=('structures', 'linux', 'windows', 'pixels'))
     args = parser.parse_args()
     assert Path('/.dockerenv').exists()
     VERSION = json.loads((OUT / 'build-inputs.json').read_text())['version']
     globals()[args.phase]()
-    print(args.phase, 'PASS', flush=True)
+    if args.phase=='pixels':
+        print('pixels',json.loads((OUT/'smoke/windows-pixels.json').read_text())['status'],flush=True)
+    else:
+        print(args.phase, 'PASS', flush=True)

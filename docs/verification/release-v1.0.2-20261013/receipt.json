@@ -1,0 +1,701 @@
+{
+  "schema": "kol-release-closeout/1",
+  "version": "v.1.0.2-20261013",
+  "verified_on": "2026-10-13",
+  "technical_status": "PASS",
+  "publication_status": "DEFERRED_BY_USER",
+  "publication_authorized": false,
+  "original_parity": false,
+  "windows_real_machine": false,
+  "macos_execution": false,
+  "host_fuse": false,
+  "source_base_commit": "670ba55b392a3be548780bb807184e67514c0fb5",
+  "program_input_count": 363,
+  "precision_receipt": {
+    "path": "precision-fix.json",
+    "sha256": "618abf7ea8205a6c525dbee4d2b0995857abd495c1e7f5588bd377ef8ee04b80"
+  },
+  "build_inputs_sha256": "761520be63fd3a43de35afec96e5c38adc3b58cbfd72b6eb97034c1b3d4531d7",
+  "evidence": {
+    "smoke/sampling.json": {
+      "sha256": "9f812ed77eaee7d36f5115a31c6dceb3f4465fd6366730a67e82a83e8c176fd4",
+      "result": {
+        "status": "PASS",
+        "scenario_count": 1,
+        "seed": 1,
+        "runs": [
+          {
+            "purpose": "normal",
+            "states": 1046,
+            "pngs": 40,
+            "trace_equal": true,
+            "semantic_trace_equal": true
+          },
+          {
+            "purpose": "reload",
+            "states": 13,
+            "pngs": 3,
+            "trace_equal": true,
+            "semantic_trace_equal": true
+          }
+        ],
+        "appimage_sha256": "b19e24b242e6460d5b14b71033e20f6124783499197012ca9e7423d83d4a6afb",
+        "save_sha256": "0f2997a4194c49ec51523263878697737ca198e2603da292707252a9dd7ff74a",
+        "full_v3_equal_except_saved_at": true,
+        "original_new_execution": false,
+        "whole_game_parity": false
+      }
+    },
+    "smoke/checks.json": {
+      "sha256": "bc788dbbee90dfeba157b8c8a0b1177c520987d435584b80bf4914b0222f4b11",
+      "result": {
+        "tests": "PASS",
+        "vet_exit": 1,
+        "vet_warnings": [
+          "internal/ui/bitmap_editor.go:56:4: github.com/wicanr2/kol-remake-cht/internal/book.Label struct literal uses unkeyed fields",
+          "internal/ui/bitmap_editor.go:57:4: github.com/wicanr2/kol-remake-cht/internal/book.Label struct literal uses unkeyed fields"
+        ],
+        "classification": "既有未具名欄位警示；保留正式來源，不宣稱 vet 全綠"
+      }
+    },
+    "smoke/structures.json": {
+      "sha256": "e225671f76828590755730d4f24e9cd7e7332518fc2f2476b10ad2e42627743c",
+      "result": {
+        "status": "PASS",
+        "linux": "ELF64",
+        "windows": "AMD64 PE",
+        "macos": [
+          "arm64",
+          "x86_64"
+        ],
+        "arm64_ad_hoc_signature": true,
+        "macos_execution": false
+      }
+    },
+    "smoke/release-smoke.json": {
+      "sha256": "7709b65955b26417a66677bc94fd7e8b926357f539b4f290ee651fe26b0991d7",
+      "result": {
+        "status": "PASS",
+        "version": "v.1.0.2-20261013",
+        "imported_files": 961,
+        "source": "0deb8b0b1de4ee831ae69dd443e719722c4cf9d258fb3ea3b0c8157b629bd6e0",
+        "invalid_import_rejected_before_writing": true,
+        "ega_hd_startup": true
+      }
+    },
+    "smoke/linux-controls.json": {
+      "sha256": "e5731475b23eef37ccab725ed7294cc5da4c7b26891b84708483bb7cd8222293",
+      "result": {
+        "status": "PASS",
+        "version": "v.1.0.2-20261013",
+        "runs": [
+          {
+            "name": "package-full",
+            "command": [
+              "/out/smoke/linux-full-controls/kol",
+              "-scene",
+              "game",
+              "-lang",
+              "zh-Hant",
+              "-graphics",
+              "hd",
+              "-scale",
+              "1",
+              "-seed",
+              "1",
+              "-log-input",
+              "-text-log",
+              "/out/smoke/linux-full-controls/package-full-text.jsonl",
+              "-save",
+              "/out/smoke/linux-full-controls/package-full-save.json",
+              "-load",
+              "/out/smoke/linux-full-controls/inputs/save.json"
+            ],
+            "markers": [
+              {
+                "default_music_on": true,
+                "normal_inn": true,
+                "f9": true,
+                "f10": true,
+                "resized_mouse": true,
+                "state_sha256": "881faa0d2a44c4fb0cddac5a6242ca1f3da0c91b38892ccdf084e091e2d6305b",
+                "original_parity_claimed": false
+              }
+            ],
+            "seconds": 26.416190476190476,
+            "peak": 13018,
+            "sha256": "fbeb11b8445a00989d8d25858fa40494ff4cfe9753323042372df937e6f7f233",
+            "no_save_written": true,
+            "status": "PASS",
+            "bundle": "full",
+            "version": "v.1.0.2-20261013"
+          },
+          {
+            "name": "package-release",
+            "command": [
+              "/out/smoke/linux-release-controls/kol",
+              "-scene",
+              "game",
+              "-lang",
+              "zh-Hant",
+              "-graphics",
+              "hd",
+              "-scale",
+              "1",
+              "-seed",
+              "1",
+              "-log-input",
+              "-text-log",
+              "/out/smoke/linux-release-controls/package-release-text.jsonl",
+              "-save",
+              "/out/smoke/linux-release-controls/package-release-save.json",
+              "-load",
+              "/out/smoke/linux-release-controls/inputs/save.json"
+            ],
+            "markers": [
+              {
+                "default_music_on": true,
+                "normal_inn": true,
+                "f9": true,
+                "f10": true,
+                "resized_mouse": true,
+                "state_sha256": "881faa0d2a44c4fb0cddac5a6242ca1f3da0c91b38892ccdf084e091e2d6305b",
+                "original_parity_claimed": false
+              }
+            ],
+            "seconds": 25.995419501133785,
+            "peak": 13784,
+            "sha256": "57adf6b3b39113b5a14687965c824093d836be0410438fb04e12296ccd29d9d3",
+            "no_save_written": true,
+            "status": "PASS",
+            "bundle": "release",
+            "version": "v.1.0.2-20261013"
+          }
+        ],
+        "host_fuse": false,
+        "device": "PulseAudio null sink monitor; actual package Ebitengine/Oto output"
+      }
+    },
+    "smoke/windows-smoke.json": {
+      "sha256": "370f60bc9173e17aa967c25b59af062697c1dc47adc6ae0d8c143cfaa1df8db8",
+      "result": {
+        "status": "PASS",
+        "version": "v.1.0.2-20261013",
+        "checks": [
+          {
+            "bundle": "full",
+            "package_sha256": "9a1b7a4f90777693fe48fe8950852813be0104a13ac3e29d2428ddcede5eccef",
+            "ega_hd_rendered": true,
+            "in_game_switch": true,
+            "f9": true,
+            "music_default_on": true,
+            "normal_inn_music": true,
+            "save_unchanged": true
+          },
+          {
+            "bundle": "release",
+            "package_sha256": "e3a71ecede8af39f4ac74297010f50665a3ed46f67eda06120b51f7ec5781838",
+            "ega_hd_rendered": true,
+            "in_game_switch": true,
+            "f9": true,
+            "music_default_on": true,
+            "normal_inn_music": true,
+            "save_unchanged": true
+          }
+        ],
+        "windows_real_machine": false,
+        "runtime": "Wine9 / Xvfb"
+      }
+    },
+    "smoke/windows-pixels.json": {
+      "sha256": "e3057ec173beaba78fc1acf04df9014cc8b0e9d35c04aec281f492acf74c1c30",
+      "result": {
+        "status": "PASS",
+        "comparisons": [
+          {
+            "bundle": "full",
+            "graphics": "ega",
+            "frame": "step-000.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "ega",
+            "frame": "step-001.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "ega",
+            "frame": "step-002.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "ega",
+            "frame": "step-003.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "ega",
+            "frame": "step-004.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "ega",
+            "frame": "step-000.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "ega",
+            "frame": "step-001.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "ega",
+            "frame": "step-002.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "ega",
+            "frame": "step-003.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "ega",
+            "frame": "step-004.png",
+            "max_channel_delta": 0,
+            "different_pixels": 0,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "hd",
+            "frame": "step-000.png",
+            "max_channel_delta": 1,
+            "different_pixels": 1701,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "hd",
+            "frame": "step-001.png",
+            "max_channel_delta": 1,
+            "different_pixels": 1701,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "hd",
+            "frame": "step-002.png",
+            "max_channel_delta": 1,
+            "different_pixels": 2087,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "hd",
+            "frame": "step-003.png",
+            "max_channel_delta": 1,
+            "different_pixels": 3426,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "full",
+            "graphics": "hd",
+            "frame": "step-004.png",
+            "max_channel_delta": 1,
+            "different_pixels": 2638,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "hd",
+            "frame": "step-000.png",
+            "max_channel_delta": 1,
+            "different_pixels": 1701,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "hd",
+            "frame": "step-001.png",
+            "max_channel_delta": 1,
+            "different_pixels": 1701,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "hd",
+            "frame": "step-002.png",
+            "max_channel_delta": 1,
+            "different_pixels": 2087,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "hd",
+            "frame": "step-003.png",
+            "max_channel_delta": 1,
+            "different_pixels": 3265,
+            "predeclared_numeric_bound_met": true
+          },
+          {
+            "bundle": "release",
+            "graphics": "hd",
+            "frame": "step-004.png",
+            "max_channel_delta": 1,
+            "different_pixels": 2512,
+            "predeclared_numeric_bound_met": true
+          }
+        ],
+        "reference_appimage_sha256": "b19e24b242e6460d5b14b71033e20f6124783499197012ca9e7423d83d4a6afb",
+        "audio": {
+          "device": "isolated PulseAudio null sink; actual Windows PE via Wine9",
+          "sha256": "61ae5657f1c75cc7c4a9e60f16e15a293e94aeaee8c35a63f59b5a829f933c43",
+          "peak": 12894,
+          "last_second_peak": 0
+        },
+        "windows_real_machine": false
+      }
+    },
+    "smoke/packages.json": {
+      "sha256": "6840e7d59e26dfe24d03a5c9ed6df0409b2627d5734e098282cd8e27a17ad4c8",
+      "result": {
+        "status": "PASS",
+        "packages": [
+          {
+            "bundle": "full",
+            "platform": "linux-x86_64",
+            "status": "PASS",
+            "full_payload_hashes_checked": true
+          },
+          {
+            "bundle": "full",
+            "platform": "windows-amd64",
+            "entries": 1061,
+            "status": "PASS"
+          },
+          {
+            "bundle": "full",
+            "platform": "macos-universal",
+            "entries": 1069,
+            "status": "PASS"
+          },
+          {
+            "bundle": "release",
+            "platform": "linux-x86_64",
+            "status": "PASS",
+            "full_payload_hashes_checked": false
+          },
+          {
+            "bundle": "release",
+            "platform": "windows-amd64",
+            "entries": 294,
+            "status": "PASS"
+          },
+          {
+            "bundle": "release",
+            "platform": "macos-universal",
+            "entries": 302,
+            "status": "PASS"
+          }
+        ],
+        "windows_real_machine": false,
+        "macos_execution": false,
+        "host_fuse": false,
+        "cross_platform_numeric_status": "PASS",
+        "numeric_gate_met": true,
+        "technical_gate_met": true,
+        "publication_authorized": false,
+        "ready_for_publication": false
+      }
+    },
+    "promo/sources.json": {
+      "sha256": "a3cc39534ee4754503be4aa6d5add4061ca4c611b2283039e85d0ca5ec90729a",
+      "result": {
+        "schema": "kol-promo/2",
+        "version": "v.1.0.2-20261013",
+        "seconds": 76,
+        "fps": 25,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "video_sha256": "c90ee2e0356273377e950e5aa4e9c1fb137bf1b376697884f821420efe7535f5",
+        "sources": [
+          {
+            "kind": "card",
+            "title": "武士傳說",
+            "sub": "Knights of Legend",
+            "caption": "繁體中文重製",
+            "seconds": 6,
+            "start": 0,
+            "end": 6,
+            "center": 3.0,
+            "composition_sha256": "692c2d4aa277d93bde52daf63f9bc1501621e8f22df760309a6171d8c249bf2a"
+          },
+          {
+            "kind": "shot",
+            "step": 3,
+            "caption": "選擇隊員，開始冒險",
+            "seconds": 7,
+            "source": "smoke/normal/step-003.png",
+            "source_sha256": "2cb88648d8e57f36d5f46bc7162026b5b95866dd0eadc94f81b97c1eadf159b2",
+            "trace_state": "flow:select",
+            "start": 6,
+            "end": 13,
+            "center": 9.5,
+            "composition_sha256": "f3a4f92842ff11cf53244a76b24dccb4d95ac83faab1b68dc16bfbd850723155"
+          },
+          {
+            "kind": "runtime",
+            "file": "smoke/linux-full-controls/inn-hd.png",
+            "caption": "HD介面與人物，從旅店出發",
+            "seconds": 7,
+            "source": "smoke/linux-full-controls/inn-hd.png",
+            "source_sha256": "31370daa8543c0dd32b0c4b580801f6b75d65056839f542eb5d044fee192699d",
+            "trace_state": "正式封包，遊戲內畫面設定",
+            "start": 13,
+            "end": 20,
+            "center": 16.5,
+            "composition_sha256": "f65a845a20057493471921ef80bf3d0c9120b6dc4c6227b4ee9098c09272e2f3"
+          },
+          {
+            "kind": "runtime",
+            "file": "smoke/linux-full-controls/menu-ega.png",
+            "caption": "配樂獨立開關，畫面即時切換",
+            "seconds": 5,
+            "source": "smoke/linux-full-controls/menu-ega.png",
+            "source_sha256": "bb57726eac0019ee4c5ae3abb24de8bc0f8dfae3d238650d5f41bc6dec9343ac",
+            "trace_state": "正式封包，遊戲內畫面設定",
+            "start": 20,
+            "end": 25,
+            "center": 22.5,
+            "composition_sha256": "a57355d914e1341135d0d4bd26293729761fd651a0c44371e93a576ad23d0317"
+          },
+          {
+            "kind": "runtime",
+            "file": "smoke/linux-full-controls/menu-hd.png",
+            "caption": "四首原創室內樂，陪伴冒險",
+            "seconds": 7,
+            "source": "smoke/linux-full-controls/menu-hd.png",
+            "source_sha256": "af2dcd4bbc9e44db015b47d5589e03f476d98a58f0887e266650e088221b0f32",
+            "trace_state": "正式封包，遊戲內畫面設定",
+            "start": 25,
+            "end": 32,
+            "center": 28.5,
+            "composition_sha256": "f160b618a8f0c2725efaefa8ff5edf84a2b3b9b6aba88295c0dfb79e46dceb11"
+          },
+          {
+            "kind": "shot",
+            "step": 125,
+            "caption": "探索城鎮與野外",
+            "seconds": 8,
+            "source": "smoke/normal/step-125.png",
+            "source_sha256": "033dfcc5a10667154dc087f7bde9378eef7193fc3741e08f3003c7be75507ce3",
+            "trace_state": "flow:town",
+            "start": 32,
+            "end": 40,
+            "center": 36.0,
+            "composition_sha256": "a53097740bb1dc2f00c48ddbd3fc0df25783caf1605d665fb5457624807288c0"
+          },
+          {
+            "kind": "shot",
+            "step": 300,
+            "caption": "逐人規劃，逐手結算",
+            "seconds": 9,
+            "source": "smoke/normal/step-300.png",
+            "source_sha256": "47d587806e3704cff4612d78bfdc82da7439628be2ff0c3de0aedebf818aaa41",
+            "trace_state": "flow:town",
+            "start": 40,
+            "end": 49,
+            "center": 44.5,
+            "composition_sha256": "d4303c4084060f63e4cae6f8a7ced0595b27f3555b82f480c40a960e407f632b"
+          },
+          {
+            "kind": "shot",
+            "step": 600,
+            "caption": "武器、體力與傷勢，決定每一手",
+            "seconds": 9,
+            "source": "smoke/normal/step-600.png",
+            "source_sha256": "e0573eaf45a5f146333d20109e7f79dfd9881c95c7fba6fa0109dd9825089880",
+            "trace_state": "flow:town",
+            "start": 49,
+            "end": 58,
+            "center": 53.5,
+            "composition_sha256": "34245e1abe6954573ecd44373beadd7729c2db018e0c5d6979decde6d5d2623c"
+          },
+          {
+            "kind": "shot",
+            "step": 1045,
+            "caption": "回城住宿，保存冒險進度",
+            "seconds": 8,
+            "source": "smoke/normal/step-1045.png",
+            "source_sha256": "d9f266065a41fb91dc4c39ad4b9372eafffae226aa248d7a110a60ad2f956b06",
+            "trace_state": "flow:town",
+            "start": 58,
+            "end": 66,
+            "center": 62.0,
+            "composition_sha256": "fa9d8d8e894db7bc4e4cbdad36bf21392884b44aa95621a9beb22d340e078902"
+          },
+          {
+            "kind": "card",
+            "title": "武士傳說",
+            "sub": "v.1.0.2-20261013",
+            "caption": "Linux  Windows  macOS",
+            "seconds": 10,
+            "start": 66,
+            "end": 76,
+            "center": 71.0,
+            "composition_sha256": "775cf3909c89945b6a06cea5d378013062198be10dd9a473ae4ad4d90a55b642"
+          }
+        ],
+        "picture_policy": "本版AppImage唯一正常重播及遊戲內切換驗證的新截圖與自製文字卡；沒有舊幀、原版對照或假遊玩。",
+        "audio_source": "assets/audio/title-thunder.ogg",
+        "audio_sha256": "0e95e887d2513161a4f07d85fad3c64d7fc538d3b61864256f787d98db85d362",
+        "audio_policy": "已核准的四首重製版原創室內樂與雷聲，依分鏡節錄並淡入淡出；沒有原版音樂取樣。",
+        "music_sources": {
+          "title": {
+            "path": "assets/audio/hd/title-chamber.ogg",
+            "sha256": "45f84293d4fb2d81a73a2f2da6e1bb3578e2279085b7592ebbcd5fea64e462ec"
+          },
+          "inn": {
+            "path": "assets/audio/hd/inn-chamber.ogg",
+            "sha256": "d4743aafeff42a31a90c6b75953250894a35d0b3c46ae41862af0d2166a35a24"
+          },
+          "exploration": {
+            "path": "assets/audio/hd/exploration-chamber.ogg",
+            "sha256": "0695b2f91be0005fb7a0e6b1b4e7aab49a778c39395439bf10ef9b3b04718dec"
+          },
+          "combat": {
+            "path": "assets/audio/hd/combat-chamber.ogg",
+            "sha256": "26af77efbda1046b1e1988964e93e4e4c9cf5dca7d3f73b6670989ae3c0380a3"
+          }
+        },
+        "music_sections": [
+          {
+            "track": "title",
+            "start": 0,
+            "seconds": 13
+          },
+          {
+            "track": "inn",
+            "start": 13,
+            "seconds": 19
+          },
+          {
+            "track": "exploration",
+            "start": 32,
+            "seconds": 8
+          },
+          {
+            "track": "combat",
+            "start": 40,
+            "seconds": 18
+          },
+          {
+            "track": "inn",
+            "start": 58,
+            "seconds": 8
+          },
+          {
+            "track": "title",
+            "start": 66,
+            "seconds": 10
+          }
+        ],
+        "font_source": "assets/ui-font/manifest.json",
+        "font_sha256": "2a526c5b1d59d0689bfe3d6b3378f78ef7a6b6e32898d0c9504fe5e152fb690c",
+        "theme": "赤石與遊戲點陣字模",
+        "freeze_policy": "截圖剪輯，各幕5至10秒停留是分鏡；freezedetect逐段保留，不宣稱連續實機錄影。",
+        "volume_peak_db": -5.6,
+        "black_detect": "PASS: no interval >=0.3 seconds at specified thresholds",
+        "rights": "原作衍生畫面，僅本機保存，不得當成已取得公開素材權利。",
+        "visual_review": "PASS",
+        "visual_review_note": "十幕中文完整、比例與安全邊界正常；修正後封包新畫格；截圖剪輯不宣稱連續實機錄影。"
+      }
+    },
+    "smoke/tool-images.json": {
+      "sha256": "20772423ca9f0fc9e2b2b5425316e0cfd7d644bd809dcdf043fe3f15cf6caf80",
+      "result": {
+        "kol-package:1.26.7-ebiten2.9.9-20261011-r1": "sha256:0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f",
+        "kol-osxcross-go:20261007-r1": "sha256:27a0d789783b1f88670b5023b42ec7f7471b973c5fb0b560fb99f89ef052f6ea",
+        "eob-remake-wine-verify:ubuntu-noble-20261008-r2": "sha256:c047a6a259a1fc9a90babf7c937310fa9df4b3465bf75f3fcaad1bc640099c2f",
+        "eob-audio-capture:20261009-r3": "sha256:d831720f8dfa388af8ad175fa8adeae8f2814dd4637be1e3db6a43274b26f36c",
+        "kol-music:timidity2.14-fluid3.1-r1": "sha256:9520e9a4f3341495b3bcb6108cd2e6d7ba835647aaf349381c60a921ae7b927b"
+      }
+    }
+  },
+  "packages": [
+    {
+      "path": "full/kol-v.1.0.2-20261013-full-linux-x86_64.AppImage",
+      "bytes": 32102904,
+      "sha256": "b19e24b242e6460d5b14b71033e20f6124783499197012ca9e7423d83d4a6afb"
+    },
+    {
+      "path": "full/kol-v.1.0.2-20261013-full-macos-universal.zip",
+      "bytes": 38313119,
+      "sha256": "ffcb4c2b85692eb828af97d7d1c7298b828d5376260bc3557e8c3100e9e4c3d5"
+    },
+    {
+      "path": "full/kol-v.1.0.2-20261013-full-windows-amd64.zip",
+      "bytes": 31205050,
+      "sha256": "9a1b7a4f90777693fe48fe8950852813be0104a13ac3e29d2428ddcede5eccef"
+    },
+    {
+      "path": "release/kol-v.1.0.2-20261013-release-linux-x86_64.AppImage",
+      "bytes": 9067000,
+      "sha256": "0deb8b0b1de4ee831ae69dd443e719722c4cf9d258fb3ea3b0c8157b629bd6e0"
+    },
+    {
+      "path": "release/kol-v.1.0.2-20261013-release-macos-universal.zip",
+      "bytes": 15192781,
+      "sha256": "31de977a353bbfdc1399b14ee6ec18990a525cd3de60fc30dd10b79b2a3edc80"
+    },
+    {
+      "path": "release/kol-v.1.0.2-20261013-release-windows-amd64.zip",
+      "bytes": 8142956,
+      "sha256": "e3a71ecede8af39f4ac74297010f50665a3ed46f67eda06120b51f7ec5781838"
+    }
+  ],
+  "promo": {
+    "path": "promo/kol-v.1.0.2-20261013-promo.mp4",
+    "sha256": "c90ee2e0356273377e950e5aa4e9c1fb137bf1b376697884f821420efe7535f5"
+  },
+  "retained_first_candidate": "docs/verification/local/hd-pixel-consistency-20261013/retention.json",
+  "rights": "private GitHub保存小型收據及經驗證PNG；完整版、原始保存、WAV與影片僅本機。",
+  "retained_evidence": {
+    "index_sha256": "3eeee6dcade493e85a72a9ff3d4bdd270d1897282af5e74812d7ccbd01ab9651",
+    "archive": {
+      "size": 180863776,
+      "sha256": "0cc818a6a541726d9cc0555ef2ebc228c7ce2e186387c752b90bf83f6f58a00c"
+    },
+    "files": 1667,
+    "rebuildable_executables_omitted": 12
+  }
+}

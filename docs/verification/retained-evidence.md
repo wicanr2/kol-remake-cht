@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| HD跨平台一色階修正、首次失敗與取樣原型 | [交付與精度修正](release-v1.0.2-20261013.md) | [保存清冊](local/hd-pixel-consistency-20261013/retention.json)，1667檔與12份可重建執行檔雜湊；首次候選保留 |
 | HD操作介面、人物頭像與同主題對比候選 | [可操作原型](hd-ui-theme-20261012/review.html) | 小型原型直接保存於同目錄，[來源及逐檔雜湊](hd-ui-theme-20261012/manifest.json)；已核准接入 |
 | HD介面、旅店頭像及正常切換存讀檔 | [正式驗收](hd-interface-runtime-20261012.md) | [保存清冊](local/hd-interface-runtime-20261012/retention.json) |
 | 原創室內樂標題與旅店試聽 | [試聽頁](hd-music-20261012/review.html) | MIDI、OGG、音符及[雜湊清冊](hd-music-20261012/manifest.json)直接保存；人耳待確認 |

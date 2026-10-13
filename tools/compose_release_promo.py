@@ -66,9 +66,9 @@ def main():
         dict(kind='card', title='武士傳說', sub='Knights of Legend',
              caption='繁體中文重製', seconds=6),
         dict(kind='shot', step=3, caption='選擇隊員，開始冒險', seconds=7),
-        dict(kind='shot', step=30, caption='組成隊伍，從旅店出發', seconds=7),
-        dict(kind='runtime', file='smoke/linux-gui/game-menu-ega.png', caption='遊戲內開啟畫面設定', seconds=5),
-        dict(kind='runtime', file='smoke/linux-gui/game-menu-hd.png', caption='即時切換 HD，冒險接著走', seconds=7),
+        dict(kind='runtime', file='smoke/linux-full-controls/inn-hd.png', caption='HD介面與人物，從旅店出發', seconds=7),
+        dict(kind='runtime', file='smoke/linux-full-controls/menu-ega.png', caption='配樂獨立開關，畫面即時切換', seconds=5),
+        dict(kind='runtime', file='smoke/linux-full-controls/menu-hd.png', caption='四首原創室內樂，陪伴冒險', seconds=7),
         dict(kind='shot', step=125, caption='探索城鎮與野外', seconds=8),
         dict(kind='shot', step=300, caption='逐人規劃，逐手結算', seconds=9),
         dict(kind='shot', step=600, caption='武器、體力與傷勢，決定每一手', seconds=9),
@@ -126,12 +126,25 @@ def main():
         run(['ffmpeg', '-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', str(listing),
              '-c', 'copy', str(silent)])
     cue = ROOT / 'assets/audio/title-thunder.ogg'
+    music = {name:ROOT/'assets/audio/hd'/(name+'-chamber.ogg') for name in ('title','inn','exploration','combat')}
+    music_sections=[dict(track='title',start=0,seconds=13),dict(track='inn',start=13,seconds=19),
+                    dict(track='exploration',start=32,seconds=8),dict(track='combat',start=40,seconds=18),
+                    dict(track='inn',start=58,seconds=8),dict(track='title',start=66,seconds=10)]
     video = P / f'kol-{VERSION}-promo.mp4'
     if not reuse:
         run(['ffmpeg', '-y', '-v', 'error', '-i', str(silent), '-i', str(cue),
+         *sum((['-i',str(path)] for path in music.values()),[]),
          '-f', 'lavfi', '-t', str(total), '-i', 'anullsrc=r=44100:cl=stereo',
          '-filter_complex', '[1:a]asplit=2[x][y];[x]adelay=900|900,volume=0.7[a];'
-         '[y]adelay=33800|33800,volume=0.5[b];[a][b][2:a]amix=inputs=3:duration=longest:normalize=0[s]',
+         '[y]adelay=33800|33800,volume=0.5[b];'
+         '[2:a]asplit=2[t0][t1];[3:a]asplit=2[i0][i1];'
+         '[t0]atrim=duration=13,asetpts=PTS-STARTPTS,volume=0.8,afade=t=in:d=0.3,afade=t=out:st=12.7:d=0.3[ta];'
+         '[i0]atrim=duration=19,asetpts=PTS-STARTPTS,volume=0.8,afade=t=in:d=0.3,afade=t=out:st=18.7:d=0.3,adelay=13000|13000[ia];'
+         '[4:a]atrim=duration=8,asetpts=PTS-STARTPTS,volume=0.8,afade=t=in:d=0.3,afade=t=out:st=7.7:d=0.3,adelay=32000|32000[ea];'
+         '[5:a]atrim=duration=18,asetpts=PTS-STARTPTS,volume=0.8,afade=t=in:d=0.3,afade=t=out:st=17.7:d=0.3,adelay=40000|40000[ca];'
+         '[i1]atrim=duration=8,asetpts=PTS-STARTPTS,volume=0.8,afade=t=in:d=0.3,afade=t=out:st=7.7:d=0.3,adelay=58000|58000[ib];'
+         '[t1]atrim=duration=10,asetpts=PTS-STARTPTS,volume=0.8,afade=t=in:d=0.3,afade=t=out:st=9.2:d=0.8,adelay=66000|66000[tb];'
+         '[a][b][ta][ia][ea][ca][ib][tb][6:a]amix=inputs=9:duration=longest:normalize=0[s]',
          '-map', '0:v', '-map', '[s]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k',
              '-t', str(total), '-movflags', '+faststart', str(video)])
     probe = json.loads(run(['ffprobe', '-v', 'error', '-show_streams', '-show_format', '-of', 'json', str(video)]))
@@ -150,6 +163,7 @@ def main():
     peak = float(re.search(r'max_volume: ([-\d.]+) dB', loud)[1])
     assert -30 < peak < -0.1, peak
     assert 'black_start:' not in (P / 'black.log').read_text()
+    assert 'silence_duration:' not in (P/'silence.log').read_text(),'unexpected interval >=1 second below -45dB'
     frames = []
     for i, scene in enumerate(sources):
         f = P / f'frame-{i:02d}.png'
@@ -163,7 +177,9 @@ def main():
        dimensions=[W,H], video_sha256=sha(video), sources=sources,
        picture_policy='本版AppImage唯一正常重播及遊戲內切換驗證的新截圖與自製文字卡；沒有舊幀、原版對照或假遊玩。',
        audio_source='assets/audio/title-thunder.ogg', audio_sha256=sha(cue),
-       audio_policy='只有使用者已接受的遊戲雷聲。沒有配樂；其餘靜音是刻意留白。',
+       audio_policy='已核准的四首重製版原創室內樂與雷聲，依分鏡節錄並淡入淡出；沒有原版音樂取樣。',
+       music_sources={name:dict(path=str(path.relative_to(ROOT)),sha256=sha(path)) for name,path in music.items()},
+       music_sections=music_sections,
        font_source='assets/ui-font/manifest.json', font_sha256=sha(ROOT/'assets/ui-font/manifest.json'),
        theme='赤石與遊戲點陣字模',
        freeze_policy='截圖剪輯，各幕5至10秒停留是分鏡；freezedetect逐段保留，不宣稱連續實機錄影。',

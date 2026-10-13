@@ -38,6 +38,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 `full` 已含遊戲與首批 HD 必要資料，只留本機。[release](dist-all/v.1.0.1-20261012/release/) 是三平台引擎包，
 需先以包內工具匯入合法持有、已抽取且符合雜湊的資料；說明見各包 `README.txt`。
 三平台引擎包及校驗碼已發布至 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012)，儲存庫維持 private。
+含HD操作介面、旅店頭像、四首原創配樂及F9的[新版候選](docs/verification/release-v1.0.2-20261013.md)另作本機驗收，尚未發布。現行Release保持。
 [76 秒推廣影片](dist-all/v.1.0.1-20261012/promo/kol-v.1.0.1-20261012-promo.mp4)
 使用本版抽樣與遊戲內切換的新畫格，也只留本機。檔案與 SHA-256 見交付根目錄的 `SHA256SUMS.json`。
 嚴格原版一致性與平台真機驗收另列後續研究，
@@ -52,7 +53,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 | `,` `.` | 移動畫面下方圖示列的白框 |
 | Enter | 執行 |
 | Esc | 回上一頁 |
-| F9 | 獨立開關配樂，預設開啟 |
+| F9 | 開發版及新版候選的獨立配樂開關，預設開啟 |
 | F10 | 開啟畫面設定，切換 EGA／HD |
 | Ctrl+Q | 離開 |
 
@@ -80,15 +81,16 @@ HD 採1920×1200原比例。開發版已接入核准的操作介面、原生中�
 
 ![HD 旅店門面、六人肖像與操作介面，1920×1200](docs/verification/hd-interface-runtime-20261012/door-hd.png)
 
-![HD 旅店老闆頭像、原生中文字與配樂控制](docs/verification/hd-music-runtime-20261013/inn-controls-hd.png)
+![新版候選的HD旅店頭像、原生中文字與配樂控制](docs/verification/release-v1.0.2-20261013/inn-hd-controls.png)
 
 | 戰鬥資訊框的 HD 人物 | 遊戲內 HD 畫面設定 |
 |---|---|
-| ![戰鬥資訊框與七個HD指令](docs/verification/hd-interface-runtime-20261012/battle-hd.png) | ![遊戲內HD畫面設定](docs/verification/hd-interface-runtime-20261012/game-menu-hd.png) |
+| ![戰鬥資訊框與七個HD指令](docs/verification/hd-interface-runtime-20261012/battle-hd.png) | ![新版候選的遊戲內HD畫面設定](docs/verification/release-v1.0.2-20261013/game-menu-hd.png) |
 
 按 F10 或點下緣「畫面 F10」，即可在同一場景切換 EGA／HD；Esc 返回遊戲。
 三組[同主題、同場景比較](docs/verification/hd-interface-runtime-20261012.md#同主題比較)沿用相同人物與門面。
 圖片來源、畫格、SHA-256與權利分類見[正式介面截圖清冊](docs/verification/hd-interface-runtime-20261012/manifest.json)。
+新版旅店及設定畫面來自實際AppImage，來源見[新版截圖清冊](docs/verification/release-v1.0.2-20261013/manifest.json)。
 
 ### EGA 畫面
 

@@ -11432,3 +11432,18 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - GitHub主機gh auth及repo view核對private。既有commit／push授權沿用；本輪提交／推送結果接續記錄。既有v.1.0.1-20261012、封包與影片保持。
 - 提交前連結檢查修正PNG清冊路由至original-derived-png/ega/manifest.json；公開收據追加metadata_correction及可重建的前後工具雜湊，原壓縮證據與原收據保持。
 - 程式、音樂與收據已提交03987717並推送origin/main。收尾再次核對82份封存雜湊、工作清單同步與新檔擁有權，全部通過；本輪Docker容器已清除，工作樹於推送後乾淨。本行另以文件提交保存。
+
+## 2026-10-13：三平台HD介面與配樂交付、一色階修正
+
+- 路由命中重製收尾、版號、dist-all、文件職責與驗證交接，沿既有逆向重製及grilling技能。開工來源為670ba55b，工作樹乾淨；361份Go／module與已核准配樂收據相符。採v.1.0.2-20261013，前版tag與Release不動。按專案AGENTS沿用full／release／promo／smoke。
+- 首次乾淨候選完成六包與76秒影片。正式測試、正常1046狀態及另起程序13狀態重載、完整v3只排saved_at、Linux及Wine的F9／F10與實際音訊通過。EGA十組零差，HD十組最高兩色階，保留NUMERIC_BOUND_UNMET；未以目視通過覆蓋數值失敗。
+- 使用者明確選「維持一色階標準，暫緩發布」。之後go沿已展示修正方向繼續，不自行解除發布暫停。沒有建立新版tag、Release或上傳附件。GitHub主機gh auth及repo view核對目的地仍private。
+- 同一PE的auto／OpenGL及同一Linux程式跨環境診斷：Debian Mesa22.3.6與Ubuntu Mesa25.2.8間有兩色階差，同Mesa的Linux／Windows最多一色階。跨環境差已證實；驅動內部取樣捨入屬強推論。強制DirectX探針-9且無畫格，原因未知，不稱為產品缺陷或成功證據。
+- 固定整數雙線性取樣先做隔離原型，再依SPEC-039此切片READY接正式呈現。目的與來源像素中心對齊，以64位整數有理數權重一次捨入，保留預乘RGBA及邊界。圖片與位置不改，取樣結果按素材組快取，旅店頭像裁切只建一次。字型、GPU後端選擇、操作、規則、v3及OGG保持。
+- 原型及正式程式各三十組跨Debian Linux／Ubuntu Linux／Windows Wine比較，EGA零差、HD最多一色階。正式套件、sceneverify及中心／邊界／子圖stride／預乘透明度測試通過。正式Linux與Windows的獨立建置SHA分別為6c4c2b4b15dda5e552ed970dc0069d5b499fefc65e26fa7d6b24ebfdf7f83680、298581a25be4ac6fe9423dd27e6914cab5bb31c84ad7c57dc3507f0f6d90b47c，與交付重建完全相同。共363份輸入，只變兩份HD檔及新增取樣／測試。
+- 首次未發布候選先保存至本輪工作區，再從空的dist-all版本根目錄重建六包。相同唯一seed1鍵序作修正後回歸，1046狀態／40PNG及13重載／3PNG相同，完整v3除saved_at保持；沒有新增原版oracle或新情境。實際AppImage／Windows兩包二十組再驗EGA零差、HD最多一色階。流水線對未達一色階直接失敗，另核對收據的封包SHA，無目視例外。
+- Linux full及匯入後release驗正常旅店、預設音樂、F9、F10、鍵鼠與960×600縮放、狀態保持及實際聲音後靜音。Windows兩個ZIP在Wine9驗同流程與實際PE音訊，峰值12894、最後一秒0。macOS universal、最低11.0、ARM ad-hoc簽章、系統相依通過，未執行。Linux主機FUSE及Windows／macOS真機仍未驗。vet保留bitmap_editor.go56／57兩則既有未具名欄位警示。
+- 影片以本次修正後封包新畫格重新合成，76秒1080p／25fps、H.264／AAC。四首核准室內樂及雷聲保持，峰值−5.6dB，無指定閾值長黑／長靜音；十幕中文字幕與比例目視通過。截圖停留是分鏡，不宣稱連續實機錄影。SHA為c90ee2e0356273377e950e5aa4e9c1fb137bf1b376697884f821420efe7535f5。完整版、影片、WAV與原始保存只留本機，三個無素材引擎包與checksum仍未發布。
+- 環境／工具失敗另存：macOS image無python，改讀VERSION；Wine使用UID1000 HOME及prefix；xvfb-run握手未啟動遊戲，改明確Xvfb就緒；診斷image缺xdpyinfo及libglapi-mesa，改用已確認工具與套件。一次Wine3GiB批次在release HD被SIGKILL，原因未知；完整失敗批次保留，同image／命令以5GiB上限乾淨重跑通過，cgroup peak2925047808、oom及oom_kill均0。不將這些寫成遊戲邏輯缺陷。
+- 六包內容、平台、版號、UTF-8、必要素材、deny-list及SHA通過。最終1571份交付檔逐檔核對。README改用實際新AppImage的HD旅店及設定截圖，保留現行v.1.0.1發行入口；新版入口、規格、權利及唯一工作清單同步，16開放／92已核實保持。
+- 首次失敗、未發布候選及修正原型保存1667檔，12份可重建執行檔只留雜湊；壓縮SHA為0cc818a6a541726d9cc0555ef2ebc228c7ce2e186387c752b90bf83f6f58a00c。逐檔核對後只刪workplace/hd-pixel-consistency-20261013，入口見docs/verification/retained-evidence.md。本輪Docker容器均--rm回收，其他專案容器保持，沒有新建image或全域清理。新交付、公開PNG／收據及本機證據UID/GID1000，無擁有權異常。提交及推送結果接續記錄。

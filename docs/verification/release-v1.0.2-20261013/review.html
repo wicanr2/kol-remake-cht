@@ -1,0 +1,9 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>武士傳說 · 三平台HD新版審查</title>
+<style>body{margin:28px auto;padding:0 20px;max-width:1200px;background:#201414;color:#eee1ca;font:18px/1.7 system-ui}button{font:inherit;padding:8px 16px;background:#64232a;color:#eee1ca;border:1px solid #c8992e;cursor:pointer}a{color:#d4b070}img{width:100%;height:auto;border:1px solid #96764b}output{margin-left:16px}h1{color:#d4b070}</style>
+<h1>v.1.0.2-20261013 · 同主題、同輸入對比</h1>
+<p>相同HD素材、同一份存檔、seed1、相同L R RET SPACE。左為Linux，右為Windows於Wine9繪製，沒有原版parity聲明。</p>
+<p>固定整數雙線性取樣已接入。原型及正式程式各三十組、修正後實際封包二十組，EGA零差，HD逐通道最多一色階。首次候選的兩色階失敗保留，可按下方切換查看。新版依使用者決定暫緩發布。</p>
+<p><button data-file="fixed-sampling-comparison.png">修正後同主題對比</button> <button data-file="same-hd-comparison.png">首次候選對比</button> <button data-file="linux-hd.png">首次Linux</button> <button data-file="windows-hd.png">首次Windows／Wine</button><output>修正後同主題對比</output></p>
+<img src="fixed-sampling-comparison.png" alt="固定整數取樣後，同HD主題的Linux及Windows旅店畫面">
+<p><a href="../release-v1.0.2-20261013.md">六包與影片驗收</a> · <a href="manifest.json">來源、SHA-256及權利清冊</a> · <a href="../../../dist-all/v.1.0.2-20261013/promo/kol-v.1.0.2-20261013-promo.mp4">76秒新版影片</a></p>
+<script>for(const b of document.querySelectorAll('button'))b.onclick=()=>{document.querySelector('img').src=b.dataset.file;document.querySelector('output').textContent=b.textContent};</script></html>

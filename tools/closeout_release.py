@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v1 收尾流水線。容器執行方法與限制見 docs/verification/release-v1.0.0-20261011.md。"""
+"""v1 收尾流水線。容器執行方法與限制見 docs/verification/release-v1.0.2-20261013.md。"""
 import argparse
 import hashlib
 import json
@@ -16,10 +16,12 @@ import zipfile
 
 SRC, OUT = Path('/src'), Path('/out')
 VERSION = None  # 必須由 --version 指定，拒絕覆寫既有版本。
-LIMITS = '''本版包含首批 HD 與遊戲內 EGA／HD 切換，不是完整原版 parity 的完成聲明。
+LIMITS = '''本版包含已核准 HD 介面、頭像、四首原創配樂及遊戲內 EGA／HD 切換。
+這是有限場景驗收，不宣稱完整原版 parity。
 完整戰鬥與全程通關的原版同狀態仍未驗完。
 已登記場景按 SPEC-040 通過中文與畫面驗收，其他動態分支仍有未驗項。
-HD 首批涵蓋旅店、六人肖像及戰鬥資訊框；其他美術沿 EGA。
+HD 涵蓋旅店、六人肖像、旅店頭像、中文字、面板及已核准操作列；其他美術沿 EGA。
+配樂預設開啟，F9獨立切換；換EGA／HD持續播放，開關只在本次遊玩有效。
 三項加速細則、戰鬥中途保存與後續 HD 美術仍未定版。
 Windows 僅容器 Wine 驗證；macOS 僅交叉編譯與結構驗證，均無真機驗收。
 Linux 容器以 AppImage 解包執行驗證，主機 FUSE 未驗。
@@ -62,15 +64,27 @@ def copy(src, dst):
 
 def prepare():
     assert not any(OUT.iterdir()), '拒絕覆寫既有交付'
-    for n in ('full', 'release', 'promo', 'smoke'):
-        (OUT / n).mkdir()
     program = {str(p.relative_to(SRC)): sha(p) for n in ('cmd', 'internal')
                for p in sorted((SRC / n).rglob('*.go'))}
     program.update({n: sha(SRC / n) for n in ('go.mod', 'go.sum')})
-    accepted = SRC / 'docs/verification/local/display-switch-runtime-20261012'
-    with tarfile.open(accepted / 'evidence.tar.xz') as archive:
-        expected = json.load(archive.extractfile('source-inputs.json'))
-    assert program == expected, '現行正式程式與最近畫面切換驗收不符'
+    accepted = SRC / 'docs/verification/hd-music-runtime-20261013'
+    acceptance = read(accepted / 'receipt.json')
+    assert acceptance['status'] == 'PASS'
+    matches_music = program == acceptance['program_inputs']
+    precision_path = SRC / 'docs/verification' / ('release-' + VERSION.replace('v.', 'v', 1)) / 'precision-fix.json'
+    precision = None
+    if not matches_music:
+        precision = read(precision_path)
+        assert precision['status'] == 'PASS' and precision['production'] is True
+        assert precision['base_music_receipt_sha256'] == sha(accepted / 'receipt.json')
+        assert precision['program_inputs'] == program
+        delta = {n for n in set(program) | set(acceptance['program_inputs'])
+                 if program.get(n) != acceptance['program_inputs'].get(n)}
+        assert delta == {'internal/ui/hd.go', 'internal/ui/hd_interface.go',
+                         'internal/ui/hd_sampling.go', 'internal/ui/hd_sampling_test.go'}, delta
+    assert sha(SRC / 'assets/audio/hd/manifest.json') == acceptance['catalog_sha256']
+    for n in ('full', 'release', 'promo', 'smoke'):
+        (OUT / n).mkdir()
     resources = []
     for bundle in ('full', 'release'):
         base = OUT / bundle
@@ -120,7 +134,8 @@ Linux AppImage 請先 --appimage-extract，從 squashfs-root/tools 匯入至新�
 滑鼠點選、右鍵返回、滾輪移動游標。Ctrl+Q 離開。
 介面預設繁中，-lang en 切英文。住宿會保存。
 按 F10 或下緣「畫面」開啟設定，即時切換 EGA／HD；Esc 返回原場景。
-HD 為 1920×1200 首批手繪素材，其他場景沿原畫；切換不改存檔。
+HD 為 1920×1200，含已核准介面與人物頭像，其他場景沿原畫；切換不改存檔。
+四首原創室內樂預設開啟。按F9或下緣「配樂」獨立切換，換EGA／HD持續播放。
 Linux：~/.config/kol-remake-cht/save.dat
 Windows：%AppData%\\kol-remake-cht\\save.dat
 macOS：~/Library/Application Support/kol-remake-cht/save.dat
@@ -135,6 +150,7 @@ macOS 未經 Apple 公證，首次開啟可能須於系統設定的隱私權與�
         (OUT / bundle / 'README.txt').write_bytes(b'\xef\xbb\xbf' + instructions.replace('\n', '\r\n').encode())
     baseline = SRC / 'docs/verification/local/quest-rng-formal-20261007'
     retained = read(baseline / 'retention.json')
+    assert sha(baseline / 'evidence.tar.xz') == retained['archive']['sha256']
     # 唯一一次正常抽樣及新程序重載，在執行前固定 seed、鍵序、比較與失敗判準。
     with tarfile.open(baseline / 'evidence.tar.xz') as archive:
         for folder in ('formal-save-zh-Hant', 'formal-save-zh-Hant/reload'):
@@ -145,12 +161,14 @@ macOS 未經 Apple 公證，首次開啟可能須於系統設定的隱私權與�
         dest = OUT / 'smoke/baseline/formal-save-zh-Hant/complete.json'
         dest.write_bytes(archive.extractfile('formal-save-zh-Hant/complete.json').read())
     write(OUT / 'build-inputs.json', dict(version=VERSION, git_head=args.git_head,
-          program_inputs=program, resources=resources, program_matches_accepted_receipt=True,
+          program_inputs=program, resources=resources, program_matches_accepted_receipt=matches_music,
+          precision_source_receipt_sha256=sha(precision_path) if precision else None,
+          program_matches_precision_receipt=precision is not None,
           packaging_tools={str(p.relative_to(SRC)): sha(p) for p in
             [SRC / 'tools/closeout_release.py', SRC / 'tools/import_game_data.py', SRC / 'docker/Dockerfile.package']},
           visibility='private; verified by host gh',
           accepted_source_receipt_sha256=sha(accepted / 'receipt.json'),
-          accepted_source_archive_sha256=sha(accepted / 'evidence.tar.xz'),
+          accepted_source_archive_sha256=sha(SRC / 'docs/verification/local/hd-music-runtime-20261013/evidence.tar.xz'),
           previous_receipt_sha256=sha(baseline / 'receipt.json'),
           previous_archive_sha256=sha(baseline / 'evidence.tar.xz')))
     write(OUT / 'smoke/predeclared.json', dict(version=VERSION, scenario_count=1,
@@ -187,7 +205,7 @@ def formal_checks(env):
                             cwd=SRC, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                             timeout=600)
     (OUT / 'smoke/vet.log').write_bytes(result.stdout)
-    warnings = result.stdout.decode().splitlines()
+    warnings = [line for line in result.stdout.decode().splitlines() if not line.startswith('# ')]
     expected = ['internal/ui/bitmap_editor.go:56:4: github.com/wicanr2/kol-remake-cht/internal/book.Label struct literal uses unkeyed fields',
                 'internal/ui/bitmap_editor.go:57:4: github.com/wicanr2/kol-remake-cht/internal/book.Label struct literal uses unkeyed fields']
     assert result.returncode == 0 or (result.returncode == 1 and warnings == expected), warnings
@@ -394,8 +412,17 @@ def verify():
               file_count=len(files), files=files))
     for name in ('sampling', 'structures', 'release-smoke', 'windows-smoke'):
         assert read(OUT / 'smoke' / (name + '.json'))['status'] == 'PASS'
-    assert read(OUT / 'smoke/linux-gui/gui-check.json')['passed'] is True
-    assert read(OUT / 'smoke/windows-pixels.json')['status'] == 'PASS'
+    assert read(OUT / 'smoke/linux-controls.json')['status'] == 'PASS'
+    pixel_check=read(OUT / 'smoke/windows-pixels.json')
+    assert pixel_check['status'] == 'PASS', 'HD一色階閘門未通過，拒絕完成交付驗證'
+    full_image=OUT/'full'/f'kol-{VERSION}-full-linux-x86_64.AppImage'
+    assert pixel_check['reference_appimage_sha256']==sha(full_image)
+    assert read(OUT/'smoke/sampling.json')['appimage_sha256']==sha(full_image)
+    for check in read(OUT/'smoke/windows-smoke.json')['checks']:
+        package=OUT/check['bundle']/f"kol-{VERSION}-{check['bundle']}-windows-amd64.zip"
+        assert check['package_sha256']==sha(package)
+    # 使用者維持一色階標準；目視接受不能覆蓋數值失敗。
+    numeric_gate_met=pixel_check['status']=='PASS'
     assert read(OUT / 'smoke/checks.json')['tests'] == 'PASS'
     assert read(OUT / 'promo/sources.json')['visual_review'] == 'PASS'
     inputs = read(OUT / 'build-inputs.json')
@@ -404,10 +431,15 @@ def verify():
         [SRC/'tools/closeout_release.py', SRC/'tools/import_game_data.py',
          SRC/'tools/compose_release_promo.py', SRC/'docker/Dockerfile.package']}
     inputs['runtime_verification_tools'] = {str(p.relative_to(SRC)): sha(p) for p in
-        [SRC/'tools/verify_release_runtime.py', SRC/'tools/verify_display_switch.py']}
+        [SRC/'tools'/n for n in ('verify_release_runtime.py','verify_package_controls.py','verify_music_runtime.py',
+         'closeout_macos.sh','run_release_linux.sh','run_release_wine.sh','run_release_sample.sh','capture_wine_audio.sh',
+         'diagnose_release_pixels.py')]}
+    inputs['staged_release_tool_snapshots']={str(p.relative_to(OUT/'release')):sha(p) for p in sorted((OUT/'release/tools').glob('*.py'))}
     write(OUT / 'build-inputs.json', inputs)
     write(OUT / 'smoke/packages.json', dict(status='PASS', packages=report,
-          windows_real_machine=False, macos_execution=False, host_fuse=False))
+          windows_real_machine=False, macos_execution=False, host_fuse=False,
+          cross_platform_numeric_status=pixel_check['status'],numeric_gate_met=numeric_gate_met,
+          technical_gate_met=numeric_gate_met,publication_authorized=False,ready_for_publication=False))
     allfiles = [dict(path=str(p.relative_to(OUT)), bytes=p.stat().st_size, sha256=sha(p))
                 for p in sorted(OUT.rglob('*')) if p.is_file() and p.name != 'SHA256SUMS.json']
     write(OUT / 'SHA256SUMS.json', dict(version=VERSION, files=allfiles))

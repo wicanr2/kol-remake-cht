@@ -35,6 +35,7 @@ func (h *HD) AttachInterface(images map[string]image.Image, glyphs map[string]HD
 	for n, img := range images {
 		s.images[n] = ebiten.NewImageFromImage(img)
 	}
+	s.images["innkeeper-cropped.png"] = s.images["innkeeper-painted-v1.png"].SubImage(image.Rect(0, 90, 1254, 1084)).(*ebiten.Image)
 	h.style = s
 }
 func (s *hdInterface) word(text string) string {
@@ -125,7 +126,7 @@ func (h *HD) partyHD(dst *ebiten.Image, sprites Sprites, members []town.Member) 
 		if index, ok := h.matching[h.fingerprint(pic)]; ok {
 			pic = h.portraits[index]
 		}
-		drawHD(dst, pic, hdRect(r.Min.X+8, r.Min.Y+8, 240, 230))
+		h.drawHD(dst, pic, hdRect(r.Min.X+8, r.Min.Y+8, 240, 230))
 		ink := hdInk
 		if m.Speaker {
 			ink = hdGold
@@ -184,13 +185,13 @@ func (h *HD) toolbarHD(dst *ebiten.Image, sprites Sprites, indices []int, select
 			command.title = "返回"
 		}
 		if command.key != "" {
-			drawHD(dst, s.images["icon-"+command.key+".png"], hdRect(r.Min.X+35, r.Min.Y+12, 74, 74))
+			h.drawHD(dst, s.images["icon-"+command.key+".png"], hdRect(r.Min.X+35, r.Min.Y+12, 74, 74))
 		} else {
 			pic, err := sprites.Get("KOLMPICS", index)
 			if err != nil {
 				return err
 			}
-			drawHD(dst, pic, hdRect(r.Min.X+24, r.Min.Y+8, 96, 80))
+			h.drawHD(dst, pic, hdRect(r.Min.X+24, r.Min.Y+8, 96, 80))
 		}
 		s.label(dst, command.title, hdRect(r.Min.X+10, r.Min.Y+96, 124, 30), 26, hdInk, true)
 	}
@@ -222,9 +223,9 @@ func (h *HD) innHD(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 			return err
 		}
 		if h.fingerprint(pic) == s.npcKey {
-			pic = s.images["innkeeper-painted-v1.png"].SubImage(image.Rect(0, 90, 1254, 1084)).(*ebiten.Image)
+			pic = s.images["innkeeper-cropped.png"]
 		}
-		drawHD(dst, pic, hdRect(62, 398, 498, 356))
+		h.drawHD(dst, pic, hdRect(62, 398, 498, 356))
 	}
 	s.panel(dst, hdRect(612, 350, 1166, 118), false)
 	for i, line := range in.Title {
@@ -276,7 +277,7 @@ func (h *HD) outdoorHD(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) er
 		return err
 	}
 	if h.fingerprint(crest) == s.crestKey {
-		drawHD(dst, s.images["crest.png"], hdRect(130, 502, 320, 320))
+		h.drawHD(dst, s.images["crest.png"], hdRect(130, 502, 320, 320))
 	} else {
 		s.preserve(dst, hdRect(120, 490, 430, 450))
 	}
@@ -288,7 +289,7 @@ func (h *HD) outdoorHD(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) er
 			return err
 		}
 		if h.fingerprint(pic) == h.facadeKey {
-			drawHD(dst, h.facade, hdRect(624, 348, 1152, 576))
+			h.drawHD(dst, h.facade, hdRect(624, 348, 1152, 576))
 		}
 	}
 	icons, sel := out.IconRow()
@@ -307,7 +308,7 @@ func (h *HD) battleHD(dst *ebiten.Image, sprites Sprites, state *battle.State) e
 	if i, ok := h.matching[h.fingerprint(pic)]; ok {
 		pic = h.portraits[i]
 	}
-	drawHD(dst, pic, hdRect(260, 80, 368, 368))
+	h.drawHD(dst, pic, hdRect(260, 80, 368, 368))
 	s.panel(dst, hdRect(48, 492, 808, 456), false)
 	s.panel(dst, hdRect(906, 42, 878, 882), false)
 	s.preserve(dst, hdRect(906, 42, 878, 882))

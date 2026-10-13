@@ -19,6 +19,7 @@ type HD struct {
 	facadeKey string
 	keys      map[*ebiten.Image]string
 	style     *hdInterface
+	samples   map[hdSampleKey]*ebiten.Image
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {
@@ -50,12 +51,12 @@ func (h *HD) fingerprint(img *ebiten.Image) string {
 	return key
 }
 
-func drawHD(dst, src *ebiten.Image, rect image.Rectangle) {
+func (h *HD) drawHD(dst, src *ebiten.Image, rect image.Rectangle) {
+	sampled := h.sampledHD(src, rect.Dx(), rect.Dy())
 	var op ebiten.DrawImageOptions
-	op.GeoM.Scale(float64(rect.Dx())/float64(src.Bounds().Dx()), float64(rect.Dy())/float64(src.Bounds().Dy()))
 	op.GeoM.Translate(float64(rect.Min.X), float64(rect.Min.Y))
-	op.Filter = ebiten.FilterLinear
-	dst.DrawImage(src, &op)
+	op.Filter = ebiten.FilterNearest
+	dst.DrawImage(sampled, &op)
 }
 
 func (h *HD) party(dst *ebiten.Image, sprites Sprites, members []town.Member) error {
@@ -70,7 +71,7 @@ func (h *HD) party(dst *ebiten.Image, sprites Sprites, members []town.Member) er
 			continue
 		}
 		x, y := (l.PartyX+i*l.PartyStep)*2+4, l.PartyY*2+4
-		drawHD(dst, h.portraits[index], image.Rect(x, y, x+(l.PartyWidth-1)*2-8, y+l.PortraitBoxHeight*2-8))
+		h.drawHD(dst, h.portraits[index], image.Rect(x, y, x+(l.PartyWidth-1)*2-8, y+l.PortraitBoxHeight*2-8))
 	}
 	return nil
 }
@@ -102,7 +103,7 @@ func (h *HD) Outdoor(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) erro
 		}
 		if pic.Bounds().Dx() == 192 && pic.Bounds().Dy() == 96 && h.fingerprint(pic) == h.facadeKey {
 			l := town.CJKOutdoor
-			drawHD(dst, h.facade, image.Rect(l.ViewX*2, l.ViewY*2, (l.ViewX+192*l.Scale)*2, (l.ViewY+96*l.Scale)*2))
+			h.drawHD(dst, h.facade, image.Rect(l.ViewX*2, l.ViewY*2, (l.ViewX+192*l.Scale)*2, (l.ViewY+96*l.Scale)*2))
 		}
 	}
 	return nil
@@ -129,6 +130,6 @@ func (h *HD) Battle(dst *ebiten.Image, sprites Sprites, s *battle.State) error {
 	}
 	// 姓名底緣為78。清除舊立繪時保留完整文字，不沿原型的70像素切線。
 	dst.SubImage(image.Rect(100, 80, 816, 454)).(*ebiten.Image).Fill(color.Black)
-	drawHD(dst, h.portraits[i], image.Rect(260, 80, 628, 448))
+	h.drawHD(dst, h.portraits[i], image.Rect(260, 80, 628, 448))
 	return nil
 }
