@@ -15,7 +15,7 @@
     "path": "precision-fix.json",
     "sha256": "618abf7ea8205a6c525dbee4d2b0995857abd495c1e7f5588bd377ef8ee04b80"
   },
-  "build_inputs_sha256": "761520be63fd3a43de35afec96e5c38adc3b58cbfd72b6eb97034c1b3d4531d7",
+  "build_inputs_sha256": "7a13aa1c826fe70587a08f086058db4e6c9d27db2a6d8d19b6f007ff9451bd98",
   "evidence": {
     "smoke/sampling.json": {
       "sha256": "9f812ed77eaee7d36f5115a31c6dceb3f4465fd6366730a67e82a83e8c176fd4",
@@ -697,5 +697,6 @@
     },
     "files": 1667,
     "rebuildable_executables_omitted": 12
-  }
+  },
+  "source_commit": "39c1b6ee1ebfcda529f4fb8ddb1f4ae433d3aec6"
 }

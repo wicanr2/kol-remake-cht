@@ -11447,3 +11447,4 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 環境／工具失敗另存：macOS image無python，改讀VERSION；Wine使用UID1000 HOME及prefix；xvfb-run握手未啟動遊戲，改明確Xvfb就緒；診斷image缺xdpyinfo及libglapi-mesa，改用已確認工具與套件。一次Wine3GiB批次在release HD被SIGKILL，原因未知；完整失敗批次保留，同image／命令以5GiB上限乾淨重跑通過，cgroup peak2925047808、oom及oom_kill均0。不將這些寫成遊戲邏輯缺陷。
 - 六包內容、平台、版號、UTF-8、必要素材、deny-list及SHA通過。最終1571份交付檔逐檔核對。README改用實際新AppImage的HD旅店及設定截圖，保留現行v.1.0.1發行入口；新版入口、規格、權利及唯一工作清單同步，16開放／92已核實保持。
 - 首次失敗、未發布候選及修正原型保存1667檔，12份可重建執行檔只留雜湊；壓縮SHA為0cc818a6a541726d9cc0555ef2ebc228c7ce2e186387c752b90bf83f6f58a00c。逐檔核對後只刪workplace/hd-pixel-consistency-20261013，入口見docs/verification/retained-evidence.md。本輪Docker容器均--rm回收，其他專案容器保持，沒有新建image或全域清理。新交付、公開PNG／收據及本機證據UID/GID1000，無擁有權異常。提交及推送結果接續記錄。
+- 精度修正、封包流水線、README新HD截圖與收據已提交39c1b6ee並推送origin/main，提交後工作樹乾淨。交付清冊已記錄完整source_commit，363份來源與正式建置相符；312個現行文件連結、索引正對照、Python語法及工作清單同步通過。僅最後的解除發布暫停確認仍待使用者回覆，本行與來源commit清冊另以文件提交保存。
