@@ -11448,3 +11448,4 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 六包內容、平台、版號、UTF-8、必要素材、deny-list及SHA通過。最終1571份交付檔逐檔核對。README改用實際新AppImage的HD旅店及設定截圖，保留現行v.1.0.1發行入口；新版入口、規格、權利及唯一工作清單同步，16開放／92已核實保持。
 - 首次失敗、未發布候選及修正原型保存1667檔，12份可重建執行檔只留雜湊；壓縮SHA為0cc818a6a541726d9cc0555ef2ebc228c7ce2e186387c752b90bf83f6f58a00c。逐檔核對後只刪workplace/hd-pixel-consistency-20261013，入口見docs/verification/retained-evidence.md。本輪Docker容器均--rm回收，其他專案容器保持，沒有新建image或全域清理。新交付、公開PNG／收據及本機證據UID/GID1000，無擁有權異常。提交及推送結果接續記錄。
 - 精度修正、封包流水線、README新HD截圖與收據已提交39c1b6ee並推送origin/main，提交後工作樹乾淨。交付清冊已記錄完整source_commit，363份來源與正式建置相符；312個現行文件連結、索引正對照、Python語法及工作清單同步通過。僅最後的解除發布暫停確認仍待使用者回覆，本行與來源commit清冊另以文件提交保存。
+- 文件交接feab7fe0已推送。使用者在已展示新版、目的地、三個引擎包及SHA256SUMS.txt的最後確認後連續回覆go，明確解除先前暫緩。記錄四附件精確SHA授權，流水線要求一色階通過及附件一致才標記ready。原完整包與影片留本機，舊tag／Release不動；新版發布及遠端核對接續記錄。

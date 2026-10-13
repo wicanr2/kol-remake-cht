@@ -3,8 +3,8 @@
   "version": "v.1.0.2-20261013",
   "verified_on": "2026-10-13",
   "technical_status": "PASS",
-  "publication_status": "DEFERRED_BY_USER",
-  "publication_authorized": false,
+  "publication_status": "AUTHORIZED_PENDING_PUBLICATION",
+  "publication_authorized": true,
   "original_parity": false,
   "windows_real_machine": false,
   "macos_execution": false,
@@ -15,7 +15,7 @@
     "path": "precision-fix.json",
     "sha256": "618abf7ea8205a6c525dbee4d2b0995857abd495c1e7f5588bd377ef8ee04b80"
   },
-  "build_inputs_sha256": "7a13aa1c826fe70587a08f086058db4e6c9d27db2a6d8d19b6f007ff9451bd98",
+  "build_inputs_sha256": "16ef8a3106fc7761448e8bcaa786e2bacb234fbbd3f1f531690571ec9e5e6746",
   "evidence": {
     "smoke/sampling.json": {
       "sha256": "9f812ed77eaee7d36f5115a31c6dceb3f4465fd6366730a67e82a83e8c176fd4",
@@ -384,7 +384,7 @@
       }
     },
     "smoke/packages.json": {
-      "sha256": "6840e7d59e26dfe24d03a5c9ed6df0409b2627d5734e098282cd8e27a17ad4c8",
+      "sha256": "a742c2c1074d7cd96ea92ba4a5b49925836c7c317c15d5e98a9deb3003c19b40",
       "result": {
         "status": "PASS",
         "packages": [
@@ -431,8 +431,8 @@
         "cross_platform_numeric_status": "PASS",
         "numeric_gate_met": true,
         "technical_gate_met": true,
-        "publication_authorized": false,
-        "ready_for_publication": false
+        "publication_authorized": true,
+        "ready_for_publication": true
       }
     },
     "promo/sources.json": {
@@ -698,5 +698,22 @@
     "files": 1667,
     "rebuildable_executables_omitted": 12
   },
-  "source_commit": "39c1b6ee1ebfcda529f4fb8ddb1f4ae433d3aec6"
+  "source_commit": "39c1b6ee1ebfcda529f4fb8ddb1f4ae433d3aec6",
+  "publication_authorization": {
+    "schema": "kol-release-authorization/1",
+    "version": "v.1.0.2-20261013",
+    "destination": "wicanr2/kol-remake-cht",
+    "visibility": "private",
+    "approved": true,
+    "user_reply": "go; go",
+    "decision": "解除先前暫緩；一色階修正通過後發布三個引擎包與校驗碼",
+    "attachments": {
+      "kol-v.1.0.2-20261013-release-linux-x86_64.AppImage": "0deb8b0b1de4ee831ae69dd443e719722c4cf9d258fb3ea3b0c8157b629bd6e0",
+      "kol-v.1.0.2-20261013-release-windows-amd64.zip": "e3a71ecede8af39f4ac74297010f50665a3ed46f67eda06120b51f7ec5781838",
+      "kol-v.1.0.2-20261013-release-macos-universal.zip": "31de977a353bbfdc1399b14ee6ec18990a525cd3de60fc30dd10b79b2a3edc80",
+      "SHA256SUMS.txt": "6169edf9c0da253ba00dc25c7243606d5a1601987dd53e627b5fabdd4396df13"
+    },
+    "full_and_promo_upload": false,
+    "approved_on": "2026-10-13"
+  }
 }

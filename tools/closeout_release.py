@@ -423,6 +423,17 @@ def verify():
         assert check['package_sha256']==sha(package)
     # 使用者維持一色階標準；目視接受不能覆蓋數值失敗。
     numeric_gate_met=pixel_check['status']=='PASS'
+    publication_authorized=False
+    authorization_path=OUT/'smoke/publication-authorization.json'
+    if authorization_path.exists():
+        authorization=read(authorization_path)
+        assert authorization['approved'] is True and authorization['version']==VERSION
+        assert authorization['destination']=='wicanr2/kol-remake-cht'
+        attachments=[OUT/'release'/f'kol-{VERSION}-release-{platform}{extension}'
+            for platform,extension in (('linux-x86_64','.AppImage'),('windows-amd64','.zip'),('macos-universal','.zip'))]
+        attachments.append(OUT/'release/SHA256SUMS.txt')
+        assert authorization['attachments']=={p.name:sha(p) for p in attachments}
+        publication_authorized=True
     assert read(OUT / 'smoke/checks.json')['tests'] == 'PASS'
     assert read(OUT / 'promo/sources.json')['visual_review'] == 'PASS'
     inputs = read(OUT / 'build-inputs.json')
@@ -439,7 +450,8 @@ def verify():
     write(OUT / 'smoke/packages.json', dict(status='PASS', packages=report,
           windows_real_machine=False, macos_execution=False, host_fuse=False,
           cross_platform_numeric_status=pixel_check['status'],numeric_gate_met=numeric_gate_met,
-          technical_gate_met=numeric_gate_met,publication_authorized=False,ready_for_publication=False))
+          technical_gate_met=numeric_gate_met,publication_authorized=publication_authorized,
+          ready_for_publication=numeric_gate_met and publication_authorized))
     allfiles = [dict(path=str(p.relative_to(OUT)), bytes=p.stat().st_size, sha256=sha(p))
                 for p in sorted(OUT.rglob('*')) if p.is_file() and p.name != 'SHA256SUMS.json']
     write(OUT / 'SHA256SUMS.json', dict(version=VERSION, files=allfiles))

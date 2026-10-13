@@ -1,6 +1,6 @@
 # 三平台 HD 介面與配樂更新
 
-版本：`v.1.0.2-20261013`，發行時區Asia/Taipei。狀態：六包、76秒影片及原定一色階閘門全部通過；依使用者決定暫緩發布。正式結果見[完整收據](release-v1.0.2-20261013/receipt.json)。
+版本：`v.1.0.2-20261013`，發行時區Asia/Taipei。狀態：六包、76秒影片及原定一色階閘門全部通過；使用者最終以go解除暫緩，已授權指定private Release的四個附件，發布與遠端核對中。正式結果見[完整收據](release-v1.0.2-20261013/receipt.json)。
 
 本版接續已核准的HD操作介面、人物頭像與四首室內樂，提供三平台完整版、引擎包及新版推廣片。前版保持，不修改玩法、v3格式或未核准的美術。以[配樂接入收據](hd-music-runtime-20261013/receipt.json)的361份Go／module為基準，只修改兩份HD呈現檔並新增整數取樣與測試，共363份。來源與正式三環境結果見[精度修正收據](release-v1.0.2-20261013/precision-fix.json)。
 
@@ -39,7 +39,7 @@ Windows／Linux的[同主題實際封包對比](release-v1.0.2-20261013/review.h
 | Windows實際封包 | full及release ZIP於Wine9啟動、正常旅店、預設配樂、F9、F10、狀態保持通過；實際PE音訊峰值12894，最後一秒為0 |
 | 最終跨環境像素 | Debian Mesa22.3.6實際AppImage對Ubuntu Mesa25.2.8的兩個Windows ZIP，共二十組；EGA十組零差，HD十組逐通道最大1／255，未放寬閘門 |
 | macOS | Intel／ARM universal、最低11.0、ARM ad-hoc簽章、app執行位元及僅系統動態相依通過，沒有執行或真機聲明 |
-| 六包 | 逐包平台、版號、內容、素材、UTF-8、manifest、SHA-256及素材deny-list通過；發布授權及ready_for_publication仍為false |
+| 六包 | 逐包平台、版號、內容、素材、UTF-8、manifest、SHA-256及素材deny-list通過；使用者解除暫緩，四附件雜湊與授權相符，ready_for_publication為true |
 | 影片 | 76秒、1920×1080、25fps、H.264／AAC；四首核准室內樂與雷聲，峰值−5.6dB，無指定閾值的長黑或長靜音；十幕中文及畫面比例目視通過 |
 
 | 平台 | 本機完整版 | 需匯入資料的引擎包 |
