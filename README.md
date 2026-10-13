@@ -52,6 +52,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 | `,` `.` | 移動畫面下方圖示列的白框 |
 | Enter | 執行 |
 | Esc | 回上一頁 |
+| F9 | 獨立開關配樂，預設開啟 |
 | F10 | 開啟畫面設定，切換 EGA／HD |
 | Ctrl+Q | 離開 |
 
@@ -79,7 +80,7 @@ HD 採1920×1200原比例。開發版已接入核准的操作介面、原生中�
 
 ![HD 旅店門面、六人肖像與操作介面，1920×1200](docs/verification/hd-interface-runtime-20261012/door-hd.png)
 
-![HD 旅店老闆頭像與原生中文字](docs/verification/hd-interface-runtime-20261012/inn-hd.png)
+![HD 旅店老闆頭像、原生中文字與配樂控制](docs/verification/hd-music-runtime-20261013/inn-controls-hd.png)
 
 | 戰鬥資訊框的 HD 人物 | 遊戲內 HD 畫面設定 |
 |---|---|
@@ -108,8 +109,10 @@ HD 採1920×1200原比例。開發版已接入核准的操作介面、原生中�
 
 ## HD 化計畫
 
-配樂採中世紀室內樂，標題與旅店已有[原創 MIDI 試聽稿](docs/verification/hd-music-20261012/review.html)，
-附OGG、分軌、三輪循環與來源授權。技術檢查已通過，待試聽後接入；目前發行包仍沿用已驗收雷聲。
+開發版已接入核准的四首原創中世紀室內樂：[標題與旅店](docs/verification/hd-music-20261012/review.html)、
+[探索與戰鬥](docs/verification/hd-adventure-music-20261013/review.html)。試聽頁附OGG、分軌、三輪循環與來源授權。
+配樂預設開啟，按F9或點下緣「配樂」獨立切換；切換EGA／HD時持續播放，開關只在本次遊玩有效。
+接入與驗證見[配樂收據](docs/verification/hd-music-runtime-20261013.md)。現行發行包仍沿用已驗收雷聲。
 
 首批手繪旅店門面與六人肖像已接入實際遊戲，採 1920×1200 原比例。
 點下緣「畫面 F10」或按 F10，選擇 EGA／HD 即可在同一場景比較；Esc 返回遊戲。

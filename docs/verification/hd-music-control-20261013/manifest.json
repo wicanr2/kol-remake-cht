@@ -1,0 +1,33 @@
+{
+  "schema": "kol-music-control-prototype/1",
+  "decision": "A：配樂獨立開關，預設開啟",
+  "date": "2026-10-13",
+  "source": "../hd-interface-runtime-20261012/manifest.json; archived display-switch-runtime-20261012/game-ega.png",
+  "rights": "private-github-allowed verified original-derived PNG; project authored HTML; no public distribution",
+  "files": {
+    "a-ega.png": {
+      "size": 32456,
+      "sha256": "42f9a4a41d16cf896909ce1871feaef5e38530836c4245389bcc299ef36786cb"
+    },
+    "review.html": {
+      "size": 5401,
+      "sha256": "c550f8ac7462aea828a36a6b88e55a7dc6127b508484e0956f0127dbec796280"
+    },
+    "a-hd.png": {
+      "size": 974795,
+      "sha256": "f0237d3494553a22ba545065bc72c0213d40ce7499d59fa6826bd5aa0e834c20"
+    },
+    "browser-check.json": {
+      "size": 954,
+      "sha256": "80249cee8debc816434dc3fdae01c38139b51069b3b7f1b5f10263ff6f985fcc"
+    },
+    "browser.log.gz": {
+      "size": 910,
+      "sha256": "e4d9b1c35bb1cabe9ce5dc198743fb5e5665c9595acb62ccf506608f8798b8bc"
+    },
+    "b-hd.png": {
+      "size": 975321,
+      "sha256": "906eefa675ba5a6e9458d9fe218d55501f7d5a35f5b0b939da88af8cdee46d7e"
+    }
+  }
+}

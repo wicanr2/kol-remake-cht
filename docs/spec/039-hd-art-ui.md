@@ -166,4 +166,4 @@ F10命中區、原子載入、v3與規則不變；HD設定層採核准字型與�
 正式全回歸、素材負例、真實鍵鼠、15次切換、兩視窗及住宿保存通過；獨立程序重載7狀態相同。
 同主題正式比較、PNG來源／權利與完整範圍見[收據](../verification/hd-interface-runtime-20261012/receipt.json)。
 此批為開發版，其他人物、組合裝備、地圖、傷勢遮罩及封包／真機沿原開放項追蹤。
-使用者已選定中世紀室內樂，[HD配樂候選](004-ogg-audio-catalog.md#hd原創配樂試聽)另待聆聽，不併入本次CONFORMED。
+使用者已接受四首中世紀室內樂及獨立F9控制，接入與驗收另由[SPEC-004](004-ogg-audio-catalog.md#遊戲內配樂接入)及[配樂收據](../verification/hd-music-runtime-20261013.md)追蹤。

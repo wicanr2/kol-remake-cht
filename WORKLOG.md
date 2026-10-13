@@ -11417,3 +11417,17 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 
 本輪程式、素材、試聽與文件已提交`22228fa3`並成功推送private `origin/main`，工作樹核對乾淨。
 交接紀錄另以文件提交保存；既有tag與Release未移動或覆寫。配樂的實際聆聽確認仍待使用者回覆。
+
+## 2026-10-13：四首HD室內樂與獨立配樂控制
+
+- 路由：OGG正式音訊、spec閘門、README與文件職責；沿compose-rpg-remake-music及grilling，沒有重問已核准選項。使用者接受標題／旅店，再選A獨立開關，最後接受探索／戰鬥並指示接入。
+- 原檔接入assets/audio/hd，保持OGG位元組；四首72／80／90／60秒、44.1kHz立體聲，完整SHA／實際格式驗證後一次啟用。原創MIDI與FluidR3 GM MIT來源保持，沒有新增原版音訊或硬體逆向。
+- 正式Update／Draw接F9與下緣按鈕，預設開啟、換EGA／HD持續播放、本次遊玩有效；場景淡入淡出，原標題雷聲與v3保持。實際遊玩發現中文Apply改寫旅店Title造成漏播，已改用TWN7PICS圖號12並補中文場景測試。
+- Go固定1.26.7／Ebitengine2.9.9；kol-package:1.26.7-ebiten2.9.9-20261011-r1內go test ./cmd/... ./internal/...與go test -tags sceneverify ./cmd/kol通過。四首真實解碼跨兩輪PCM相同，七種負例拒絕整包，場景與獨立靜音測試通過。
+- eob-audio-capture:20261009-r3隔離PulseAudio＋Xvfb錄實際Ebitengine／Oto輸出：標題首輪23雷聲與72秒循環、旅店80秒循環、鍵鼠兩種視窗及F9／F10、缺件及離開靜音通過。世界／戰鬥用已登記受控任務的準備存檔，再以正常Right、Return、Space進場；不宣稱自然全旅程或原版parity。
+- 同版正常住宿兩份v3除saved_at完全相同，新程序重載7狀態及中文相同；HD線性過濾字緣最多1色階的GPU舍入另列。瀏覽器控制樣張與遊戲標籤座標相同，字緣有線性取樣色差，幾何在1像素內，沒有宣稱逐像素一致。
+- 工具失敗分類：視窗尚未建立、離開後對已銷毀視窗放鍵、世界批次SPACE無效、以牆鐘預估音訊循環及淡出佇列，均已修正並重跑對應驗證；前次通過的同版住宿保存保留重用。HD軟體渲染會延後播放位置，以實際位置及最後一秒零輸出判斷。
+- README新增F9、四首試聽與新HD截圖；SPEC-004此批有限CONFORMED，CONTEXT／唯一工作清單同步，16開放／92已核實保持。WORKLIST verify通過；後續美術、曲目、平台封包與真機沿原項追蹤。
+- 核對後本機保存82檔，壓縮SHA-256 60e73d18327825b625ca6cd7c146f05a35b0658fed39f7b21c52158be0240149；只刪本輪工作區。原始WAV、準備存檔及完整證據不進Git，六張GUI PNG有來源／權利清冊。新檔UID/GID1000，容器均--rm；共用預覽容器已查為其他專案，保持。
+- GitHub主機gh auth及repo view核對private。既有commit／push授權沿用；本輪提交／推送結果接續記錄。既有v.1.0.1-20261012、封包與影片保持。
+- 提交前連結檢查修正PNG清冊路由至original-derived-png/ega/manifest.json；公開收據追加metadata_correction及可重建的前後工具雜湊，原壓縮證據與原收據保持。

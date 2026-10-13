@@ -325,6 +325,12 @@ func (h *HD) battleHD(dst *ebiten.Image, sprites Sprites, state *battle.State) e
 	return h.toolbarHD(dst, sprites, indices, state.Plan.Selected, true, false)
 }
 
+func (h *HD) DrawMusicControl(dst *ebiten.Image, enabled bool) {
+	s := h.style
+	s.panel(dst, hdRect(1488, 1152, 192, 48), false)
+	s.label(dst, MusicControlLabel(enabled), hdRect(1500, 1158, 168, 36), 26, color.RGBA{255, 255, 255, 255}, true)
+}
+
 func (h *HD) DrawDisplaySettings(dst *ebiten.Image, state DisplaySettings) {
 	s := h.style
 	s.panel(dst, hdRect(1704, 1152, 192, 48), false)

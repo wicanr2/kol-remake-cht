@@ -1,0 +1,337 @@
+{
+  "schema": "kol-hd-music-candidate/1",
+  "status": "ACCEPTED_RUNTIME_ENABLED",
+  "music_identity": "new-remake-original",
+  "source_melody": "project-authored MIDI; no original melody sampled",
+  "soundfont": {
+    "path": "/usr/share/sounds/sf2/FluidR3_GM.sf2",
+    "sha256": "74594e8f4250680adf590507a306655a299935343583256f3b722c48a1bc1cb0",
+    "package": "fluid-soundfont-gm 3.1-5.3",
+    "license": "MIT; see soundfont-LICENSE.txt"
+  },
+  "synth": "TiMidity++ 2.14.0-8.1",
+  "codec": "Ogg Vorbis q6; 44100Hz stereo",
+  "tracks": {
+    "exploration": {
+      "bpm": 64,
+      "bars": 24,
+      "duration": 90.0,
+      "midi_sha256": "2220a70b39cf3a3b71a8aec037cd526f080d80f65267bd6916fe05c69deba25d",
+      "allowed_stem_combinations": "all seven nonempty subsets; same gain/grid; verified unclipped"
+    },
+    "combat": {
+      "bpm": 96,
+      "bars": 24,
+      "duration": 60.0,
+      "midi_sha256": "b1ffbbbbf398f80601c75661cee7f5fa1599153f63d799d4012a765d76678f2f",
+      "allowed_stem_combinations": "all seven nonempty subsets; same gain/grid; verified unclipped"
+    }
+  },
+  "checks": [
+    {
+      "path": "exploration.ogg",
+      "sha256": "0695b2f91be0005fb7a0e6b1b4e7aab49a778c39395439bf10ef9b3b04718dec",
+      "duration": 90.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.4180331230163574,
+      "rms": 0.06329798698425293,
+      "boundary_delta": 2.054121796390973e-05
+    },
+    {
+      "path": "exploration-lead.ogg",
+      "sha256": "284d937d47bacf55fb14fd1d29cdb066ac7f3b86b5f109adda1700ae4ca59ffe",
+      "duration": 90.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.2527897357940674,
+      "rms": 0.03965562582015991,
+      "boundary_delta": 6.541008133353898e-06
+    },
+    {
+      "path": "exploration-harmony.ogg",
+      "sha256": "8a3b1fc756e0a0556f1b76abbe98fd2397f4852a874aeca7a9388dc3cf806194",
+      "duration": 90.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.23913677036762238,
+      "rms": 0.04556417092680931,
+      "boundary_delta": 8.845866250339895e-05
+    },
+    {
+      "path": "exploration-pulse.ogg",
+      "sha256": "2457f6326f96da2828b8030caae9cf29028a46f620666a21e2c8b7e5002cabfe",
+      "duration": 90.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.2300724983215332,
+      "rms": 0.016769323498010635,
+      "boundary_delta": 5.8857931435341015e-06
+    },
+    {
+      "path": "combat.ogg",
+      "sha256": "26af77efbda1046b1e1988964e93e4e4c9cf5dca7d3f73b6670989ae3c0380a3",
+      "duration": 60.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.5670244693756104,
+      "rms": 0.0632823258638382,
+      "boundary_delta": 0.0001583955599926412
+    },
+    {
+      "path": "combat-lead.ogg",
+      "sha256": "e8c4a1813e4651163fc173bc52df5ffcabf2c93b30d5d9c54e4053a55510c963",
+      "duration": 60.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.2855643033981323,
+      "rms": 0.02851741760969162,
+      "boundary_delta": 1.0437160199217033e-05
+    },
+    {
+      "path": "combat-harmony.ogg",
+      "sha256": "97e57757ce9fd9f72815f920df74cbdcb0ab5c1e76d27878a4aaad6f75f89a9a",
+      "duration": 60.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.3052041232585907,
+      "rms": 0.04795960709452629,
+      "boundary_delta": 0.00018971614190377295
+    },
+    {
+      "path": "combat-pulse.ogg",
+      "sha256": "ad85ac70c4e3f55e42d8e9d6db1adaff5de5a898ac33f7511d09c24eb3dd182c",
+      "duration": 60.0,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.31547218561172485,
+      "rms": 0.02962806262075901,
+      "boundary_delta": 0.0004077785415574908
+    }
+  ],
+  "production_enabled": true,
+  "toolchain": "kol-music:timidity2.14-fluid3.1-r1",
+  "technical_qa": {
+    "status": "PASS",
+    "decoded_stem_combinations": [
+      {
+        "track": "exploration",
+        "stems": [
+          0,
+          0,
+          1
+        ],
+        "peak": 0.2300724983215332,
+        "loop_boundary_delta": 5.8857931435341015e-06
+      },
+      {
+        "track": "exploration",
+        "stems": [
+          0,
+          1,
+          0
+        ],
+        "peak": 0.23913677036762238,
+        "loop_boundary_delta": 8.845866250339895e-05
+      },
+      {
+        "track": "exploration",
+        "stems": [
+          0,
+          1,
+          1
+        ],
+        "peak": 0.3086249828338623,
+        "loop_boundary_delta": 8.797453483566642e-05
+      },
+      {
+        "track": "exploration",
+        "stems": [
+          1,
+          0,
+          0
+        ],
+        "peak": 0.2527897357940674,
+        "loop_boundary_delta": 6.541008133353898e-06
+      },
+      {
+        "track": "exploration",
+        "stems": [
+          1,
+          0,
+          1
+        ],
+        "peak": 0.3600342869758606,
+        "loop_boundary_delta": 1.41511668516614e-06
+      },
+      {
+        "track": "exploration",
+        "stems": [
+          1,
+          1,
+          0
+        ],
+        "peak": 0.41257309913635254,
+        "loop_boundary_delta": 8.752767462283373e-05
+      },
+      {
+        "track": "exploration",
+        "stems": [
+          1,
+          1,
+          1
+        ],
+        "peak": 0.4146273732185364,
+        "loop_boundary_delta": 8.704354695510119e-05
+      },
+      {
+        "track": "combat",
+        "stems": [
+          0,
+          0,
+          1
+        ],
+        "peak": 0.31547218561172485,
+        "loop_boundary_delta": 0.0004077785415574908
+      },
+      {
+        "track": "combat",
+        "stems": [
+          0,
+          1,
+          0
+        ],
+        "peak": 0.3052041232585907,
+        "loop_boundary_delta": 0.00018971614190377295
+      },
+      {
+        "track": "combat",
+        "stems": [
+          0,
+          1,
+          1
+        ],
+        "peak": 0.4622587263584137,
+        "loop_boundary_delta": 0.0004818420566152781
+      },
+      {
+        "track": "combat",
+        "stems": [
+          1,
+          0,
+          0
+        ],
+        "peak": 0.2855643033981323,
+        "loop_boundary_delta": 1.0437160199217033e-05
+      },
+      {
+        "track": "combat",
+        "stems": [
+          1,
+          0,
+          1
+        ],
+        "peak": 0.42701202630996704,
+        "loop_boundary_delta": 0.0004159319505561143
+      },
+      {
+        "track": "combat",
+        "stems": [
+          1,
+          1,
+          0
+        ],
+        "peak": 0.45121029019355774,
+        "loop_boundary_delta": 0.00020015329937450588
+      },
+      {
+        "track": "combat",
+        "stems": [
+          1,
+          1,
+          1
+        ],
+        "peak": 0.566519021987915,
+        "loop_boundary_delta": 0.0004899954656139016
+      }
+    ],
+    "three_loops_pass": true,
+    "no_decoder_warnings": true
+  },
+  "human_listening": "已驗收：2026-10-13 使用者：兩首都可接受，接入遊戲",
+  "files": {
+    "combat-harmony.ogg": {
+      "sha256": "97e57757ce9fd9f72815f920df74cbdcb0ab5c1e76d27878a4aaad6f75f89a9a",
+      "size": 1315703
+    },
+    "combat-lead.ogg": {
+      "sha256": "e8c4a1813e4651163fc173bc52df5ffcabf2c93b30d5d9c54e4053a55510c963",
+      "size": 789111
+    },
+    "combat-loudness.log.gz": {
+      "sha256": "da3bddfddf06c785b81a2081f8fbd5036982db2f92595c17d8018593d3faa468",
+      "size": 9349
+    },
+    "combat-pulse.ogg": {
+      "sha256": "ad85ac70c4e3f55e42d8e9d6db1adaff5de5a898ac33f7511d09c24eb3dd182c",
+      "size": 1422693
+    },
+    "combat-score.json": {
+      "sha256": "9d769cc7c9e0efd7743388f9f79efdf77d3192b7ae39aede166c61b99fc84418",
+      "size": 30580
+    },
+    "combat-three-loops.ogg": {
+      "sha256": "53ff1a771f26164e53c771eb4f621061679fc41f7cdeb1f44fb3d786f9785ba9",
+      "size": 4034532
+    },
+    "combat.mid": {
+      "sha256": "b1ffbbbbf398f80601c75661cee7f5fa1599153f63d799d4012a765d76678f2f",
+      "size": 2150
+    },
+    "combat.ogg": {
+      "sha256": "26af77efbda1046b1e1988964e93e4e4c9cf5dca7d3f73b6670989ae3c0380a3",
+      "size": 1386685
+    },
+    "exploration-harmony.ogg": {
+      "sha256": "8a3b1fc756e0a0556f1b76abbe98fd2397f4852a874aeca7a9388dc3cf806194",
+      "size": 2027324
+    },
+    "exploration-lead.ogg": {
+      "sha256": "284d937d47bacf55fb14fd1d29cdb066ac7f3b86b5f109adda1700ae4ca59ffe",
+      "size": 1530859
+    },
+    "exploration-loudness.log.gz": {
+      "sha256": "e38428c7e1913c36ed07f3308c477ffceaa34a4e0cae9619bd52073e9fb1ed60",
+      "size": 12741
+    },
+    "exploration-pulse.ogg": {
+      "sha256": "2457f6326f96da2828b8030caae9cf29028a46f620666a21e2c8b7e5002cabfe",
+      "size": 1777906
+    },
+    "exploration-score.json": {
+      "sha256": "3991af0dcbcb5b730156e69fb0442e4478cd106fe0e1c6cb709493f1fc53dfb3",
+      "size": 9001
+    },
+    "exploration-three-loops.ogg": {
+      "sha256": "7812f63af8e3cb6593e55c816b9b53fb468197fa1c11f94eecf4162fe1c722c1",
+      "size": 6057504
+    },
+    "exploration.mid": {
+      "sha256": "2220a70b39cf3a3b71a8aec037cd526f080d80f65267bd6916fe05c69deba25d",
+      "size": 761
+    },
+    "exploration.ogg": {
+      "sha256": "0695b2f91be0005fb7a0e6b1b4e7aab49a778c39395439bf10ef9b3b04718dec",
+      "size": 2094939
+    },
+    "review.html": {
+      "sha256": "3c300ef575c6170289cc2c2a51cae9aec9182e794668e9ed9cd03ece1bd22c2f",
+      "size": 2395
+    },
+    "soundfont-LICENSE.txt": {
+      "sha256": "f2f5e6358fc7c1fe62aafc6c8229c4c5898e5afb0d4ce1322b15362a8cbd600e",
+      "size": 2132
+    }
+  },
+  "runtime_catalog": "../../../assets/audio/hd/manifest.json"
+}

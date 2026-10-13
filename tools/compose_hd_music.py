@@ -22,6 +22,8 @@ def midi(path,notes,bpm,bars):
     path.write_bytes(b'MThd'+struct.pack('>IHHH',6,0,1,TPQ)+b'MTrk'+struct.pack('>I',len(track))+track)
 
 def score(kind):
+    if kind in ('exploration','combat'):
+        return adventure_score(kind)
     title=kind=='title';bpm=80 if title else 72;bars=24
     # D Aeolian，借用E作柔和懸念。三個八小節段落，每段呼吸四小節。
     chords=[(50,57,65),(48,55,64),(46,53,62),(48,55,64),(50,57,65),(53,60,69),(43,50,58),(45,52,60)]*3
@@ -52,14 +54,44 @@ def score(kind):
                 add(1,p,start*4+19+j*1.5,1.1,38 if title else 31)
     return bpm,bars,notes
 
+def adventure_score(kind):
+    combat=kind=='combat';bpm=96 if combat else 64;bars=24;notes=[]
+    chords=[(50,57,65),(50,57,65),(48,55,64),(48,55,64),(43,50,58),(45,52,60),(50,57,65),(53,60,69),(46,53,62),(43,50,58),(48,55,64),(45,52,60)]
+    def add(ch,p,beat,dur,v):notes.append((ch,p,beat,dur,v))
+    for bar in range(bars):
+        chord=chords[bar//2];beat=bar*4
+        if combat:
+            quiet=8<=bar<16
+            for offset in (0,2):add(2,chord[0]-12,beat+offset+.03,1.6,41 if quiet else 47)
+            for offset,dur in ((.1,1.1),(1.6,.8),(3.1,.6)):add(1,chord[1],beat+offset,dur,34 if quiet else 41)
+            for offset in (1,3):add(3,chord[2],beat+offset+.04,.45,29 if quiet else 34)
+            add(9,63,beat+.02,.15,27 if quiet else 34)
+            if not quiet and bar%2==0:add(9,62,beat+2.5,.12,25)
+        elif bar%2==0:
+            add(2,chord[0]-12,beat+.03,6.8,32);add(1,chord[1],beat+.12,6.4,27)
+            add(3,chord[2],beat+.3,1.1,25);add(3,chord[1],beat+3.2,.9,21)
+            if bar in (12,16,20):add(9,63,beat+.12,.15,17)
+    motif=[62,69,60,58,64,62]
+    if combat:
+        rhythm=[(0,.5),(.75,.5),(1.5,.5),(2.25,.5),(3,.25),(3.5,.4)]
+        for bar in (0,4,8,12,16,20):
+            pitches=motif if bar not in (8,12) else [65,69,67,64,60,62]
+            for p,(offset,dur) in zip(pitches,rhythm):add(0,p+12,bar*4+offset,dur,47 if bar not in (8,12) else 40)
+    else:
+        rhythm=[(0,2.5),(4,2),(7,3),(11,2),(14,2),(17,2.75)]
+        for bar in (0,8,16):
+            pitches=motif if bar!=8 else [65,69,67,64,60,62]
+            for p,(offset,dur) in zip(pitches,rhythm):add(0,p,bar*4+2+offset,dur,39)
+    return bpm,bars,notes
+
 def run(argv):return subprocess.run(list(map(str,argv)),check=True,capture_output=True,text=True,timeout=120)
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--out',type=Path,required=True);a=ap.parse_args();a.out.mkdir(exist_ok=True)
+    ap=argparse.ArgumentParser();ap.add_argument('--out',type=Path,required=True);ap.add_argument('--tracks',nargs='+',choices=['title','inn','exploration','combat'],default=['title','inn']);a=ap.parse_args();a.out.mkdir(exist_ok=True)
     font=Path('/usr/share/sounds/sf2/FluidR3_GM.sf2');assert font.is_file()
     config=a.out/'timidity.cfg';config.write_text('soundfont '+str(font)+'\n')
     licensepath=Path('/usr/share/doc/fluid-soundfont-gm/copyright');(a.out/'soundfont-LICENSE.txt').write_bytes(licensepath.read_bytes())
     checks=[];catalog={}
-    for kind in ('title','inn'):
+    for kind in a.tracks:
         bpm,bars,notes=score(kind);duration=bars*4*60/bpm;frames=round(duration*RATE);stems=[]
         midi(a.out/(kind+'.mid'),notes,bpm,bars)
         scoredata=dict(label='重製版原創室內樂 MIDI 試聽稿',bpm=bpm,bars=bars,time_signature='4/4',motif=['D5','A5','C5','Bb4','E5','D5'],notes=[dict(channel=ch,pitch=p,start_beat=s,duration_beats=d,velocity=v) for ch,p,s,d,v in notes])

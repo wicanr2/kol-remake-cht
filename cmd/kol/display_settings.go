@@ -21,6 +21,7 @@ func (g *game) displayEvent(action string) {
 		data, _ := json.Marshal(g.snapshot())
 		g.lastParty, g.lastStage, g.wallsFor, g.traceDetail = party, stage, walls, detail
 		fmt.Printf("display action=%s hd=%t state=%x\n", action, g.hd != nil, sha256.Sum256(data))
+		g.musicDiagnostics()
 		g.displayAwaitFrame = true
 	}
 }
@@ -95,7 +96,10 @@ func (g *game) drawDisplaySettings(dst *ebiten.Image) error {
 	g.displaySettings.HD = g.hd != nil
 	if g.hd != nil {
 		g.hd.DrawDisplaySettings(g.displayCanvas.Image(), g.displaySettings)
+		g.hd.DrawMusicControl(g.displayCanvas.Image(), g.musicEnabled)
 	} else if err := ui.DrawDisplaySettings(g.displayCanvas.Image(), g.cjk, g.strings, g.displaySettings); err != nil {
+		return err
+	} else if err := ui.DrawMusicControl(g.displayCanvas.Image(), g.cjk, g.musicEnabled); err != nil {
 		return err
 	}
 	var op ebiten.DrawImageOptions

@@ -28,6 +28,28 @@ type DisplaySettings struct {
 	Problem bool
 }
 
+var MusicControl = image.Rect(744, 576, 840, 600)
+
+func MusicControlLabel(enabled bool) string {
+	if enabled {
+		return "配樂 開F9"
+	}
+	return "配樂 關F9"
+}
+
+func DrawMusicControl(dst *ebiten.Image, f *font.Font, enabled bool) error {
+	r := MusicControl
+	dst.SubImage(r).(*ebiten.Image).Fill(color.RGBA{214, 183, 112, 255})
+	dst.SubImage(r.Inset(1)).(*ebiten.Image).Fill(color.RGBA{18, 26, 34, 255})
+	text := MusicControlLabel(enabled)
+	w, h := f.Measure(text)
+	if w > r.Dx()-4 || h > r.Dy()-4 {
+		return fmt.Errorf("配樂控制文字超界")
+	}
+	f.Draw(dst, r.Min.X+(r.Dx()-w)/2, r.Min.Y+(r.Dy()-h)/2, text, 255, 255, 255)
+	return nil
+}
+
 // DrawDisplaySettings 是互動螢幕的獨立透明層，不寫進場景截圖或遊戲資料。
 func DrawDisplaySettings(dst *ebiten.Image, f *font.Font, t Translator, s DisplaySettings) error {
 	gold := color.RGBA{214, 183, 112, 255}

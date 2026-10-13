@@ -1090,6 +1090,9 @@ type game struct {
 	player            *title.Player
 	titleSound        *titleSound
 	titleAudioPath    string
+	music             *musicSound
+	musicPath         string
+	musicEnabled      bool
 	book              *book.OpenPlayer
 	bookAnim          *book.OpenAnimation
 	bookWait          float64
@@ -1759,11 +1762,17 @@ func (g *game) Update() error {
 		return nil
 	}
 	if g.interactive {
+		if err := g.advanceMusic(); err != nil {
+			return err
+		}
 		// Ctrl+Q 在設定面板開啟時也能退出；其餘按鍵先交給面板。
 		if (ebiten.IsKeyPressed(ebiten.KeyControlLeft) ||
 			ebiten.IsKeyPressed(ebiten.KeyControlRight)) &&
 			inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 			return ebiten.Termination
+		}
+		if g.updateMusicControls() {
+			return nil
 		}
 		if g.updateDisplaySettings() {
 			return nil
@@ -2734,6 +2743,8 @@ var buildVersion = "development"
 func main() {
 	graphics := flag.String("graphics", "ega", "圖像模式：ega或hd；HD首批採1920×1200繁中版面")
 	hdAssets := flag.String("hd-assets", "assets/hd/first-slice", "SPEC-039首批HD素材目錄")
+	musicMode := flag.String("music", "hd", "背景配樂：hd或off；互動時以F9獨立切換")
+	musicPath := flag.String("music-assets", "assets/audio/hd/manifest.json", "已驗收的原創室內樂OGG目錄")
 	var monsterReloadMemory battle.MonsterReloadMemory
 	showVersion := flag.Bool("version", false, "顯示程式版本後結束")
 	assetRoot := flag.String("assets", "assets/original-derived-png/ega", "抽取資產根目錄")
@@ -4069,6 +4080,7 @@ func main() {
 		sprites:             &spriteCache{lib: lib, m: map[string]*ebiten.Image{}},
 		sequence:            sequence,
 		titleAudioPath:      *titleAudioPath,
+		musicPath:           *musicPath,
 		small:               small,
 		large:               large,
 		cjk:                 cjk,
@@ -4101,6 +4113,14 @@ func main() {
 	if err := g.enableHD(*graphics, *hdAssets, *lang); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(2)
+	}
+	if *musicMode != "off" && *musicMode != "hd" {
+		fmt.Fprintln(os.Stderr, "music須為off或hd")
+		os.Exit(2)
+	}
+	if err := g.setMusic(*musicMode == "hd"); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		g.musicUnavailableNotice()
 	}
 	if importedLegacy {
 		g.notice = g.saveNotice("import")
@@ -4544,6 +4564,9 @@ func main() {
 	ebiten.SetWindowSize(bounds.Dx()**scaleFlag, bounds.Dy()**scaleFlag)
 	ebiten.SetWindowTitle("武士傳說")
 	err = ebiten.RunGame(g)
+	if g.music != nil {
+		g.music.close()
+	}
 	if g.titleSound != nil {
 		g.titleSound.stop()
 	}

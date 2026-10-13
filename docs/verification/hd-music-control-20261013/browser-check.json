@@ -1,0 +1,43 @@
+{
+  "schema": "kol-music-control-prototype/1",
+  "status": "PASS",
+  "production_changed": false,
+  "checks": [
+    {
+      "name": "actual audio plays",
+      "passed": true
+    },
+    {
+      "name": "A EGA keeps audio",
+      "passed": true
+    },
+    {
+      "name": "F9 off",
+      "passed": true
+    },
+    {
+      "name": "F9 resumes",
+      "passed": true
+    },
+    {
+      "name": "B EGA silent",
+      "passed": true
+    },
+    {
+      "name": "B HD plays",
+      "passed": true
+    },
+    {
+      "name": "scene identity retained",
+      "passed": true
+    }
+  ],
+  "screenshots": {
+    "a-hd.png": "f0237d3494553a22ba545065bc72c0213d40ce7499d59fa6826bd5aa0e834c20",
+    "a-ega.png": "42f9a4a41d16cf896909ce1871feaef5e38530836c4245389bcc299ef36786cb",
+    "b-hd.png": "906eefa675ba5a6e9458d9fe218d55501f7d5a35f5b0b939da88af8cdee46d7e"
+  },
+  "browser": "Chrome/154.0.8037.92",
+  "human_listening": false,
+  "original_parity_claimed": false
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "kol-hd-music-runtime-png/1",
+  "entries": {
+    "inn-controls-hd.png": {
+      "sha256": "7029522b6b6df52c21aa334515e5426720bac30a46548ceb6ceceb45949c0289",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "inn-controls-hd.png",
+      "extractor": "ffmpeg x11grab; tools/verify_music_runtime.py and tools/verify_music_player_paths.py",
+      "evidence": "remake actual GUI capture; world/combat use prepared world save; not original parity"
+    },
+    "inn-controls-small.png": {
+      "sha256": "a1888e83ac757503a7f81b763ee496467f8b50bad4c7215db0c5284d4ded0161",
+      "width": 960,
+      "height": 600,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "inn-controls-small.png",
+      "extractor": "ffmpeg x11grab; tools/verify_music_runtime.py and tools/verify_music_player_paths.py",
+      "evidence": "remake actual GUI capture; world/combat use prepared world save; not original parity"
+    },
+    "world-music-hd.png": {
+      "sha256": "e28134d0625a63101e3238104b80acfa609f796a6c76085fec087571dd75fd69",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "world-music-hd.png",
+      "extractor": "ffmpeg x11grab; tools/verify_music_runtime.py and tools/verify_music_player_paths.py",
+      "evidence": "remake actual GUI capture; world/combat use prepared world save; not original parity"
+    },
+    "combat-music-hd.png": {
+      "sha256": "ae23d6ed7f86a388db39335c320b78b59727e4ebbd338b249494053d2a1891c1",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "combat-music-hd.png",
+      "extractor": "ffmpeg x11grab; tools/verify_music_runtime.py and tools/verify_music_player_paths.py",
+      "evidence": "remake actual GUI capture; world/combat use prepared world save; not original parity"
+    },
+    "missing-music.png": {
+      "sha256": "bbb57bafa677f76a040cd3addf67b80896f68f18ea405344d34463d73d9265ab",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "missing-music.png",
+      "extractor": "ffmpeg x11grab; tools/verify_music_runtime.py and tools/verify_music_player_paths.py",
+      "evidence": "remake actual GUI capture; world/combat use prepared world save; not original parity"
+    },
+    "music-contact-sheet.png": {
+      "sha256": "86b102f3c2e7605d082fecb66b1c4eca69d0018f3601cbe099775036342581d0",
+      "width": 1920,
+      "height": 1200,
+      "rights": "private GitHub PNG exception; local remake capture; no public distribution grant",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "frame": "music-contact-sheet.png",
+      "extractor": "ffmpeg x11grab; tools/verify_music_runtime.py and tools/verify_music_player_paths.py",
+      "evidence": "remake actual GUI capture; world/combat use prepared world save; not original parity"
+    }
+  },
+  "source_manifests": [
+    "../hd-interface-runtime-20261012/manifest.json",
+    "../../../assets/hd/first-slice/manifest.json",
+    "../../../assets/original-derived-png/ega/manifest.json"
+  ],
+  "control_prototype": {
+    "max_channel_delta": 45,
+    "different_pixels": 1598,
+    "interior_max_channel_delta": 45,
+    "glyph_pixels_outside_one_pixel_neighborhood": 0,
+    "interpretation": "相同字模、標籤、座標與樣式；瀏覽器Canvas和Ebitengine線性取樣有字緣色差，幾何落在一像素內，不宣稱逐像素相同。"
+  }
+}

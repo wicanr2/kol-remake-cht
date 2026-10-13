@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-10-12",
+  "updated": "2026-10-13",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -1970,11 +1970,11 @@
       "id": "hd-art-ui",
       "layer": "gap",
       "title": "遊戲圖片與操作畫面HD化",
-      "body": "手繪與1920×1200已核准。首批門面、六人與遊戲內F10已交付於v.1.0.1-20261012，入口docs/verification/release-v1.0.1-20261012.md。使用者另核准同主題的操作介面與NPC頭像；原生HD字模、面板、七個戰鬥指令、旅店頭像已接開發版並有限CONFORMED。七路徑71狀態與中文紀錄相同，封存EGA圖保持；原型250字模像素／字距相同，現行2608字完整涵蓋；真實鍵鼠、15個切換事件、兩視窗、缺件回退及正常住宿保存與新程序重載7狀態通過。入口docs/verification/hd-interface-runtime-20261012.md。HD配樂已選中世紀室內樂，標題72秒與旅店80秒原創MIDI／OGG、分軌及三輪試聽已完成技術檢查，14個最終OGG分軌組合、雷聲混音與瀏覽器播放通過；人耳待確認，未啟用正式配樂，入口docs/verification/hd-music-20261012/review.html。其他NPC、組合裝備、書本、地圖、傷勢遮罩、後續圖示與新批次的平台封包／真機仍開放；本輪沒有新增原版抽樣或重建Release。",
+      "body": "手繪與1920×1200已核准。首批門面、六人與遊戲內F10已交付於v.1.0.1-20261012，入口docs/verification/release-v1.0.1-20261012.md。使用者另核准同主題的操作介面與NPC頭像；原生HD字模、面板、七個戰鬥指令、旅店頭像已接開發版並有限CONFORMED。七路徑71狀態與中文紀錄相同，封存EGA圖保持；原型250字模像素／字距相同，現行2608字完整涵蓋；真實鍵鼠、15個切換事件、兩視窗、缺件回退及正常住宿保存與新程序重載7狀態通過。入口docs/verification/hd-interface-runtime-20261012.md。四首原創室內樂已聆聽核准並接入開發版，A獨立F9／按鈕、預設開啟、EGA／HD切換持續播放。正式OGG解碼／跨輪PCM、實際標題23雷聲與72秒循環、旅店80秒循環、鍵鼠縮放、缺件、準備世界至戰鬥及正常住宿存讀檔通過。七個新程序重載狀態與文字相同，HD字緣舍入差另列。入口docs/verification/hd-music-runtime-20261013.md。其他NPC、組合裝備、書本、地圖、傷勢遮罩、後續圖示與新批次的平台封包／真機仍開放；本輪沒有新增原版抽樣或重建Release。",
       "acceptance": "使用者確認樣張及素材契約；圖片來源、權利、尺寸及索引可追溯；依SPEC-040抵達對應HD場景，中文與畫面正確，鍵鼠可用，既有v3可讀；另驗各平台封包。",
       "verify": {
         "kind": "manual",
-        "note": "首批與F10已交付。核准的HD介面與NPC已接開發版並有限驗收；室內樂試聽待人耳確認。後續美術、傷勢遮罩、配樂控制／曲目及平台封包／真機由本開放項追蹤。"
+        "note": "首批與F10已交付。HD介面、NPC與四首原創配樂及獨立F9已接開發版並有限驗收；後續美術、傷勢遮罩、其他曲目及平台封包／真機仍開放。"
       },
       "blocking_for_current_closeout": false
     }
@@ -2438,6 +2438,11 @@
       "file": "docs/spec/040-controlled-scene-acceptance.md",
       "match": "^無法抵達或畫面有問題的項目保持失敗／未驗，不因降低門檻自動通過。$",
       "why": "使用者新驗收規則的失敗判準，並非已發生或待修缺陷。"
+    },
+    {
+      "file": "tools/seal_hd_music.py",
+      "match": "準備存檔開始",
+      "why": "配樂收據的證明範圍，不新增玩法缺口；自然全旅程、原版整場與平台真機沿v01-full-battle-parity及windows-macos-real-machine，其他HD範圍沿hd-art-ui。"
     }
   ],
   "current_acceptance": "SPEC-040：受控場景，中文與畫面正確即可；完整原版對拍不阻擋HD。"

@@ -349,3 +349,11 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 四函式 4203 bytes、十一個真實 CODE 物件、完整 DATA、36 項乾淨產物與 116 反例，
 已從壓縮檔全唯讀獨立核對；12 個未匹配試驗與八份替代工具／資源的 pins 另核。
 新入口核對後只刪除本批工作區，約釋放 6293 MiB。剩餘 10 函式／4999 CODE bytes，DATA 未還原為 0，完整目標仍開放。
+
+## HD配樂正式接入
+
+[正式驗收](hd-music-runtime-20261013.md)與[本機保存清冊](local/hd-music-runtime-20261013/retention.json)保存2026-10-13的四首室內樂、獨立F9與實際音訊收據。
+本輪保存82份檔案；可重建遊戲程式只留SHA-256，Go快取及已核對的重複音樂中間檔已移除。
+壓縮檔23568120 bytes，SHA-256 `60e73d18327825b625ca6cd7c146f05a35b0658fed39f7b21c52158be0240149`。原始WAV、正常住宿v3、七狀態重載、準備世界輸入與日誌僅本機保留。
+核對使用`tools/retain_verification.py verify hd-music-runtime-20261013`；在上述Docker條件下將專案唯讀掛`/src`、`docs/verification/local/`唯讀掛`/out`。還原用同工具`extract`及不存在的絕對`--destination`，輸出另給可寫掛載。
+全部封存雜湊重驗後，只刪除`workplace/hd-music-runtime-20261013/`；其他工作區保持。

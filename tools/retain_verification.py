@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-music-runtime-20261013',
     'display-switch-runtime-20261012',
     'display-switch-20261011',
     'hd-runtime-20261011',

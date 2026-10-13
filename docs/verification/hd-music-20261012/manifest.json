@@ -1,6 +1,6 @@
 {
   "schema": "kol-hd-music-candidate/1",
-  "status": "TECHNICAL_PASS_LISTENING_PENDING",
+  "status": "ACCEPTED_RUNTIME_ENABLED",
   "music_identity": "new-remake-original",
   "source_melody": "project-authored MIDI; no original melody sampled",
   "soundfont": {
@@ -109,7 +109,7 @@
       "boundary_delta": 0.00021343106345739216
     }
   ],
-  "production_enabled": false,
+  "production_enabled": true,
   "toolchain": "kol-music:timidity2.14-fluid3.1-r1 / sha256:9520e9a4f3341495b3bcb6108cd2e6d7ba835647aaf349381c60a921ae7b927b",
   "composition_tool": "../../../tools/compose_hd_music.py",
   "external_generation_service": null,
@@ -156,8 +156,8 @@
       "size": 1851873
     },
     "review.html": {
-      "sha256": "ec48b478589c1a56a873675aa127a8651fe9265bd434857e923d58546ca39e59",
-      "size": 3267
+      "sha256": "f0312f6c09c4dd27ac5eb34cbeca5bb168caabb2008ba985e0cb03362a12682a",
+      "size": 3285
     },
     "soundfont-LICENSE.txt": {
       "sha256": "f2f5e6358fc7c1fe62aafc6c8229c4c5898e5afb0d4ce1322b15362a8cbd600e",
@@ -212,5 +212,7 @@
     "tools/verify_hd_music.py": "035046e97fe4d344b14cd1cd4d4adc84a3614fe34ce1abc3b659dd47279c8515",
     "tools/verify_hd_music_browser.py": "d672ae24642448e7e9b1f607a08469f198330574744a74f06454dbd08c837f4d",
     "tools/Dockerfile.music": "cdf8fab8601879a5c1d77f03dd0d01ae2ca8bc6dbf59e795e952aa9bb98fedf6"
-  }
+  },
+  "human_listening": "已驗收：2026-10-13 使用者：這樣ok 那就繼續",
+  "runtime_catalog": "../../../assets/audio/hd/manifest.json"
 }

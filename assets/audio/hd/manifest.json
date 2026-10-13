@@ -1,0 +1,50 @@
+{
+  "schema": "kol-hd-music/1",
+  "rights": "Project-authored MIDI/rendered OGG: RRSAL-1.0; FluidR3 GM MIT attribution in soundfont-LICENSE.txt. No original game music sampled.",
+  "tracks": [
+    {
+      "id": "title",
+      "file": "title-chamber.ogg",
+      "sha256": "45f84293d4fb2d81a73a2f2da6e1bb3578e2279085b7592ebbcd5fea64e462ec",
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration": 72,
+      "loop": true,
+      "human_listening": "已驗收：2026-10-13 使用者：這樣ok 那就繼續",
+      "source": "../../../docs/verification/hd-music-20261012/manifest.json"
+    },
+    {
+      "id": "inn",
+      "file": "inn-chamber.ogg",
+      "sha256": "d4743aafeff42a31a90c6b75953250894a35d0b3c46ae41862af0d2166a35a24",
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration": 80,
+      "loop": true,
+      "human_listening": "已驗收：2026-10-13 使用者：這樣ok 那就繼續",
+      "source": "../../../docs/verification/hd-music-20261012/manifest.json"
+    },
+    {
+      "id": "exploration",
+      "file": "exploration-chamber.ogg",
+      "sha256": "0695b2f91be0005fb7a0e6b1b4e7aab49a778c39395439bf10ef9b3b04718dec",
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration": 90,
+      "loop": true,
+      "human_listening": "已驗收：2026-10-13 使用者：兩首都可接受，接入遊戲",
+      "source": "../../../docs/verification/hd-adventure-music-20261013/manifest.json"
+    },
+    {
+      "id": "combat",
+      "file": "combat-chamber.ogg",
+      "sha256": "26af77efbda1046b1e1988964e93e4e4c9cf5dca7d3f73b6670989ae3c0380a3",
+      "sample_rate": 44100,
+      "channels": 2,
+      "duration": 60,
+      "loop": true,
+      "human_listening": "已驗收：2026-10-13 使用者：兩首都可接受，接入遊戲",
+      "source": "../../../docs/verification/hd-adventure-music-20261013/manifest.json"
+    }
+  ]
+}
