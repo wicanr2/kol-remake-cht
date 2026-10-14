@@ -11485,3 +11485,5 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 本批容器均已移除，全專案find未見root-owned檔案或誤建的*.md目錄。其他工作區、容器與產物保持。
 
 目前入口：[全畫面盤點與事件候選](docs/verification/hd-completion-20261014.md)。
+
+交付記錄：主變更 `abbdc9aa` 已推送 `origin/main`，工作樹當時乾淨；原發行tag仍指向 `46a01f11`。本筆只補提交與推送紀錄，事件候選確認仍待回覆。
