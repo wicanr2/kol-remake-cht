@@ -1,0 +1,408 @@
+{
+  "schema": "kol-hd-equipment-props-review/1",
+  "status": "DRAFT",
+  "baseline_code_commit": "346723faed360912436d0122e85aadb3bac3c192",
+  "production_runtime_source_count": 380,
+  "production_audited_inputs": 385,
+  "production_hd_asset_files": 88,
+  "production_inputs_unchanged": true,
+  "prototype_runtime_source_count": 381,
+  "docker_image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+  "docker_image_id": "sha256:0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f",
+  "source_zip": {
+    "name": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_entries": "source-entries.json",
+  "generation": "props-generation.json",
+  "props_manifest": "props-manifest.json",
+  "remake_seed": 1,
+  "original_oracle": "not run; remake presentation and source-art identity only",
+  "scope": {
+    "painted_weapons": 28,
+    "painted_shields": 4,
+    "weapon_atlases": 9,
+    "all_crops_at_least_6x_source_paint_dimensions": true,
+    "runtime_body_builds": [
+      0
+    ],
+    "personal_shield_content": "preserved literal bitmap; not regenerated"
+  },
+  "paths_v5_before_hand_crop_refinement": [
+    {
+      "case": "human-detail",
+      "states": 18,
+      "ega_exact_frames": 18,
+      "equal_text_records": 110,
+      "trace_sha256": "337464afaa7cf64b919ebd856772b373aac96d5fd7933d9785ab56c40490bc3a",
+      "text_sha256": "51b1394b2f909693c4174208275d30b21b3e1aa0638ee87652c3bc47c92eccc4"
+    },
+    {
+      "case": "human-party",
+      "states": 17,
+      "ega_exact_frames": 17,
+      "equal_text_records": 84,
+      "trace_sha256": "d8351d77362cfcc1321fd818fbdf63c6d96eee5088d1bcb767897e82097720c4",
+      "text_sha256": "b6e078fbc9d952e34b197e8c2c73b9f7dbeda3624359cbe3f355a67fca024282"
+    },
+    {
+      "case": "human-slots",
+      "states": 31,
+      "ega_exact_frames": 31,
+      "equal_text_records": 137,
+      "trace_sha256": "fd9d3b146481972f3974df5f6965df0158b6b972d9bc1b6caeee4aace6e706d5",
+      "text_sha256": "2854e3e660a16b9e9fce990b1d160bfd3b7872ce71a913724e1d5050dcc52825"
+    },
+    {
+      "case": "winged-regression",
+      "states": 10,
+      "ega_exact_frames": 10,
+      "equal_text_records": 68,
+      "trace_sha256": "94f7d457cda842cfc3dc216dfde47534513aaf1ab15907a5914fddbb8adf1759",
+      "text_sha256": "54119e96747db35decf81b1a15a30e2a77bc1865be9763ed6ce22feeabd54ace"
+    },
+    {
+      "case": "human-belt",
+      "states": 17,
+      "ega_exact_frames": 17,
+      "equal_text_records": 101,
+      "trace_sha256": "c64be355b932694eb67f6b7abe3c7e836214a46a3b6655b6eaa4cb884366dda2",
+      "text_sha256": "57645449560f26dfedd6e380c55aeebb1faa7c9c58d930e2857000b6cd71d715"
+    },
+    {
+      "case": "human-two-hand",
+      "states": 18,
+      "ega_exact_frames": 18,
+      "equal_text_records": 103,
+      "trace_sha256": "8bbf21d3e2f959c6e649faee2cb8932d8ed1029510682e51702a362474dcf6be",
+      "text_sha256": "7bc5d99967360b72d6a215c7f5ce4e7c8157d37e5ff6420e310e4d420fb0f886"
+    }
+  ],
+  "paths_v6_final": [
+    {
+      "case": "human-belt",
+      "states": 17,
+      "ega_exact_frames": 17,
+      "equal_text_records": 101,
+      "trace_sha256": "c64be355b932694eb67f6b7abe3c7e836214a46a3b6655b6eaa4cb884366dda2",
+      "text_sha256": "57645449560f26dfedd6e380c55aeebb1faa7c9c58d930e2857000b6cd71d715"
+    },
+    {
+      "case": "human-party",
+      "states": 17,
+      "ega_exact_frames": 17,
+      "equal_text_records": 84,
+      "trace_sha256": "d8351d77362cfcc1321fd818fbdf63c6d96eee5088d1bcb767897e82097720c4",
+      "text_sha256": "b6e078fbc9d952e34b197e8c2c73b9f7dbeda3624359cbe3f355a67fca024282"
+    },
+    {
+      "case": "human-slots",
+      "states": 31,
+      "ega_exact_frames": 31,
+      "equal_text_records": 137,
+      "trace_sha256": "fd9d3b146481972f3974df5f6965df0158b6b972d9bc1b6caeee4aace6e706d5",
+      "text_sha256": "2854e3e660a16b9e9fce990b1d160bfd3b7872ce71a913724e1d5050dcc52825"
+    },
+    {
+      "case": "human-two-hand",
+      "states": 18,
+      "ega_exact_frames": 18,
+      "equal_text_records": 103,
+      "trace_sha256": "8bbf21d3e2f959c6e649faee2cb8932d8ed1029510682e51702a362474dcf6be",
+      "text_sha256": "7bc5d99967360b72d6a215c7f5ce4e7c8157d37e5ff6420e310e4d420fb0f886"
+    }
+  ],
+  "gui_final": [
+    {
+      "local_directory": "gui-prototype-v6",
+      "status": "DRAFT",
+      "character": "Kenneth",
+      "rounds": [
+        {
+          "scene": "items-large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "e0b313900c4633ed77df92d8af9b87e471078e5a29b4da7228da11e42f35fbc5",
+          "files": [
+            "items-large-before.png",
+            "items-large-ega.png",
+            "items-large-restored.png"
+          ]
+        },
+        {
+          "scene": "items-small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "e0b313900c4633ed77df92d8af9b87e471078e5a29b4da7228da11e42f35fbc5",
+          "files": [
+            "items-small-before.png",
+            "items-small-ega.png",
+            "items-small-restored.png"
+          ]
+        },
+        {
+          "scene": "party-large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "c21ac1009fc3b212373a6f0dc1399d01f34469359ee3476124274d4868955b1b",
+          "files": [
+            "party-large-before.png",
+            "party-large-ega.png",
+            "party-large-restored.png"
+          ]
+        },
+        {
+          "scene": "party-small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "c21ac1009fc3b212373a6f0dc1399d01f34469359ee3476124274d4868955b1b",
+          "files": [
+            "party-small-before.png",
+            "party-small-ega.png",
+            "party-small-restored.png"
+          ]
+        }
+      ],
+      "display_events": [
+        "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+        "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38"
+      ],
+      "save_before": null,
+      "save_after": null,
+      "exit_code": 0
+    },
+    {
+      "local_directory": "gui-prototype-v6-twohand",
+      "status": "DRAFT",
+      "character": "Sharakan",
+      "rounds": [
+        {
+          "scene": "items-large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "2ea304ad3aaf518b631eaf8f7fb437972a46f69563e97dc47967bc241e3c2c58",
+          "files": [
+            "items-large-before.png",
+            "items-large-ega.png",
+            "items-large-restored.png"
+          ]
+        },
+        {
+          "scene": "items-small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "2ea304ad3aaf518b631eaf8f7fb437972a46f69563e97dc47967bc241e3c2c58",
+          "files": [
+            "items-small-before.png",
+            "items-small-ega.png",
+            "items-small-restored.png"
+          ]
+        }
+      ],
+      "display_events": [
+        "display action=toggle hd=true state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=ega hd=false state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=back hd=false state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=toggle hd=false state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=hd hd=true state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=back hd=true state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=toggle hd=true state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=ega hd=false state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=back hd=false state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=toggle hd=false state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=hd hd=true state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d",
+        "display action=back hd=true state=092799a41df3e577309fc4ea3fa834fb3fa57380f96f2bf7157a2284a2d0271d"
+      ],
+      "save_before": null,
+      "save_after": null,
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "v5_ui_cmd": "passed",
+    "v5_sceneverify": "passed",
+    "v6_ui_cmd": "passed",
+    "v6_sceneverify": "passed"
+  },
+  "programs": {
+    "baseline": "2d31dc2cc746346909626b31bf2921ec03f053997fedfd1019b7b66ffd66d8ef",
+    "prototype-v4": "89fad09c414597f7485b284ab4e0cb4c41ce56bc8fd29d33ab4450af5134fbff",
+    "prototype-v5": "daaf8e5c106960ebf7c82f46c40337fad809b88f137e87c5dc23850c8e005be9",
+    "prototype": "4e2def117d153ea474e2cb936bf179fb7a7a03be691e89ec7176dacb54c40466",
+    "gui-prototype-v5": "38d7315235fe2896f17ae5bc1574f637454ae61ac17fbec67e27a6dfc06bbd7e",
+    "gui-prototype": "18acf3d6b096374129b10da62731b41dde9b47b9fa19acc3b31b45d25a37f5e2"
+  },
+  "pictures": [
+    {
+      "file": "props-items-ega.png",
+      "sha256": "0507ea367c9241a35e2ff375cfb0acf55a74dfaf7e095914608fca5131663868",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "Kenneth物品頁",
+      "theme": "ega",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-items-hd.png",
+      "sha256": "aa09c8801c93e45e2ff86ffb50fd829ede848573559d8cc4ae0a81347e7cbe3a",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "Kenneth物品頁",
+      "theme": "hd",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-items-small-hd.png",
+      "sha256": "2c0168de7c692a1db0c62e443f731bbc926aaead602d21224c051c100551a15f",
+      "width": 960,
+      "height": 600,
+      "kind": "actual X11 game screenshot",
+      "scene": "Kenneth物品頁小視窗",
+      "theme": "hd",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-party-ega.png",
+      "sha256": "88d64940ef9bf8ad83fd66bfd0cf2d8b91f306470c90a81f6c20698a9943e32a",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "Kenneth隊伍頁",
+      "theme": "ega",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-party-hd.png",
+      "sha256": "edd266cf68cf80886435851b56178931e2de50830ce8dfdd7c8a05f7bcfa0624",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "Kenneth隊伍頁",
+      "theme": "hd",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-party-small-hd.png",
+      "sha256": "7a76dd4f8ac9039bdd349022118c408290c4b1a00d83f14ebda6302657e5bfb1",
+      "width": 960,
+      "height": 600,
+      "kind": "actual X11 game screenshot",
+      "scene": "Kenneth隊伍頁小視窗",
+      "theme": "hd",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-twohand-ega.png",
+      "sha256": "64588c904436f9549611ecc35a85d52b5db3de5367fe7506f0c20abc911063e6",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "Sharakan雙手劍物品頁",
+      "theme": "ega",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-belt-ega.png",
+      "sha256": "5c03a22c8ce5eb6fc69bf26d231e72f20849e5b217054bb341b8572aa5872f7b",
+      "width": 960,
+      "height": 600,
+      "kind": "normal flow controller renderer screenshot; no scene injection",
+      "scene": "Jax腰帶戰斧物品頁",
+      "theme": "ega",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-twohand-hd.png",
+      "sha256": "a2257132155eaa7f600a4a8ccb20108e99d0e6dcb84a69996abc69befde912d6",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "Sharakan雙手劍物品頁",
+      "theme": "hd",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-belt-hd.png",
+      "sha256": "9bc810f8cc166df6d1e89f3fef375ac3cc16d67280afab54bd3dfb988c027601",
+      "width": 1920,
+      "height": 1200,
+      "kind": "normal flow controller renderer screenshot; no scene injection",
+      "scene": "Jax腰帶戰斧物品頁",
+      "theme": "hd",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    },
+    {
+      "file": "props-source-hd-contact.png",
+      "sha256": "24206e0d60e2fc1c2cc82ebdad3f48b93ec2ac807a580271443d7902c0aa5c0b",
+      "width": 1400,
+      "height": 1960,
+      "kind": "source and generated asset contact sheet; not a game screenshot",
+      "scene": "28武器及4盾",
+      "theme": "source/hd",
+      "rights": "verified PNG; current private GitHub exception only; no public redistribution"
+    }
+  ],
+  "metadata_hashes": {
+    "props-generation.json": "fd7c5f7bf1c403be4ed9bf06dac05011583fda664d8852f95e6a9d60a2efc33f",
+    "props-manifest.json": "09ff248d691e991bdefb295c403cb9c004ba1c7bf07cdabe4694556d19c61359",
+    "prototype-inputs-v5.json": "eb528a3ed1b0a0605170369d4f9d461270e7e8610615d7017e3508a1e45a2a2d",
+    "prototype-inputs-v6.json": "f707bfd71184cad724303e1eeb71f4d7685c725e2c1bce17cfe43ed443bb8a79"
+  },
+  "limits": [
+    "Isolated DRAFT; no production integration or new release",
+    "Other five body builds and all equipment/absence combinations remain open",
+    "32 assets inventoried; normal runtime samples are shield2, weapon16, weapon13 and belt16",
+    "All item-action icons and strict atomic asset loader remain open",
+    "No new v3 stay/reload, original strict parity, natural completion, hardware or hearing claim",
+    "GUI uses ALSA null; full raw models and saves remain local"
+  ],
+  "local_workspace": "workplace/hd-equipment-pages-20261015/"
+}

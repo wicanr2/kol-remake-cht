@@ -11593,3 +11593,15 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 正式Go及module的385份稽核輸入保持，其中runtime範圍380份；基底程式SHA仍為2d31dc2cc746346909626b31bf2921ec03f053997fedfd1019b7b66ffd66d8ef。比較文件只輸出8張PNG、14份提示、雜湊及精簡結果；完整角色模型與存檔留本機。比較收據附來源單元、生成提示及最終圖片雜湊。
 - README加入明確標示DRAFT的實際遊戲內EGA／HD比較，舊七段原版事件比較保持。主機gh auth成功，遠端仍PRIVATE；沿先前commit＋push授權保存本批文件，結果收據放workplace/hd-equipment-pages-20261015/git-closeout.json。正式程式、v.1.0.2-20261013 tag與Release保持。工作區仍供未完成裝備續作，未提前封存或清理。
 - 最後核對385份Go／module與88份現行HD資產保持，8張比較PNG及14份提示雜湊通過；347個文件連結沒有新增失效，18個既有WORKLOG歷史連結保持。新比較文件未複製完整原始模型／存檔，全部輸出為1000:1000。全專案find沒有root-owned檔案或誤建*.md目錄，本批Docker容器已回收，沒有建立新image。
+
+### 2026-10-15 武器與盾牌原型續作
+
+- 沿488b4384的裝備DRAFT續作，路由命中remake資產、正常玩家路徑與文件職責；沿用重製技能、imagegen、SPEC-039及既有Docker工具鏈。全畫面HD保持active，沒有重新開啟已完成切片。
+- 28款武器依來源PNG分九張單欄透明圖集，由內建image_gen生成，保留水平朝向、刀刃、弓弦及單球／三球鏈枷數量。與四盾按實際alpha空白分隔裁取，所有32件原生尺寸涵蓋原著色範圍六倍顯示。四盾初版等分裁取混入下一列碎片，原圖與初版清冊保留；改量測實際空白，不重畫或改色PNG。
+- 隔離原型依既有typed座標呈現武器、盾與腰帶；個人盾面仍用玩家原點陣。初次測試缺少唯讀assets／docs掛載，第二次誤把既有掛載點當符號連結，重查路由與目錄後補正唯讀掛載。同一工具鏈乾淨通過UI、入口及sceneverify，未改正式程式。
+- v5六條路徑每側111狀態及中文紀錄、EGA完整畫格保持。實際Kenneth GUI完成24個設定事件與退出0後，外層240秒期限在收尾時到期；保留結果及環境分類，未把外層124記為乾淨完成。檢視持握畫面另發現全手部矩形帶入旁邊衣甲，保存v5來源、程式與圖集清冊後，縮至原HANDPICS非黑著色邊界。
+- 最終v6的UI、入口及sceneverify通過；物品17槽、隊伍、Sharakan雙手劍與Jax腰帶四條正常路徑每側83狀態、中文紀錄及83張EGA完整畫格保持。Kenneth四組、Sharakan兩組共36個實際F10設定事件、兩視窗鍵鼠、完整Inn及隊伍狀態保持，六組完整HD往返色差0，遊戲與最終Docker命令退出0。沒有新增存檔或本批v3保存重載聲明。
+- 保存收據時初用386份廣域檔案清冊，混入五份獨立工具／oracle fixture。依既有v4清冊取381份執行來源，廣域v5快照保留；已輸出的PNG、提示及metadata逐檔核對相同後續寫，未覆寫未知內容。固定ZIP及八個archive entry重新核對雜湊；清冊來源檔名使用實際Knights-of-legend.zip，舊工作區alias不當新輸入。
+- [新比較](docs/verification/hd-equipment-pages-20261015/props-review.html)保存11張PNG、九份武器提示與精簡收據，前版14份生成紀錄及收據保持。完整GUI模型、角色typed data、存檔與生成原檔留本機；32件盤點不等於32條正常遊玩驗收。README、CONTEXT、SPEC、覆蓋表及工作清單已更新，整批仍DRAFT。
+- 本機入口仍為workplace/hd-equipment-pages-20261015；prepare-weapon-references.py、assemble-props-prototype.py、prepare-props-v6.py、run-props-build.sh、run-page-prototype.py、run-gui-prototype.py及publish-props-review.py保存來源、建置、正常操作與對比流程。下一批續作其餘五種體型135款部件、完整握持／卸裝、動作圖示、正式載入及v3。工作區仍使用中，不提前封存或刪除。
+- 最終稽核385份正式Go／module與88份HD資產保持；前版8張及新增11張PNG、14加9份提示、381份隔離執行來源與359個文件連結通過，原18個WORKLOG歷史失效連結保持，沒有新增失效。主機gh auth成功，遠端仍PRIVATE；沿既有commit＋push授權保存本批，實際結果另存工作區git-closeout-props.json。全專案find無root-owned檔案或誤建*.md目錄，本批所有Docker容器已回收，沒有建立新image。

@@ -1,0 +1,1137 @@
+[
+  {
+    "id": "weapons-bows",
+    "file": "weapons-bows-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-bows.txt",
+    "status": "DRAFT",
+    "sha256": "99d4c563369198fe560a292cf6ff0303299b11781b89883cc6902f7d5160d674",
+    "size": [
+      1526,
+      1030
+    ],
+    "prompt_sha256": "21701f58d5e8443282f62cebb662cc9925255872155059c179b6b54476025c23",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      46,
+      107,
+      1482,
+      898
+    ],
+    "original_output": "exec-1cb2b10e-afe8-43db-b300-1b61801aa7f6.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 0,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-000.png",
+        "size": [
+          104,
+          12
+        ],
+        "bbox": [
+          1,
+          0,
+          104,
+          12
+        ],
+        "png_sha256": "46c32772edd572268ad76477258d73dba3ab9fe18fa7313c87b2e6a9e20d9a1b",
+        "rgb_sha256": "d9c791da8849496a41dfb2b8304838264634c80b5aa5fe371ce5d7d5d5503b70",
+        "rgba_sha256": "358bfcc9fc30d816e2993b6249430a50d3c33bef74564a310c7b41781d14e028",
+        "source_payloads": [
+          {
+            "image_index": 0,
+            "role": "color"
+          },
+          {
+            "image_index": 1,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 1,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-001.png",
+        "size": [
+          136,
+          12
+        ],
+        "bbox": [
+          0,
+          0,
+          130,
+          12
+        ],
+        "png_sha256": "a0fcd059b8aa9bd4c24d22b1d8a2725dc3fa2154fdd3be5bfadfc2e6cc7bafe6",
+        "rgb_sha256": "467d2de21b9c7ba9639fc93bcdb0dfb320ec993fc44a6d770c0079f481dcebf8",
+        "rgba_sha256": "dc4c5d842df5cdf15e3493d9d2a724602d9ee6adb00f182e84ec54b7bd96e6a6",
+        "source_payloads": [
+          {
+            "image_index": 2,
+            "role": "color"
+          },
+          {
+            "image_index": 3,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 2,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-002.png",
+        "size": [
+          136,
+          13
+        ],
+        "bbox": [
+          0,
+          0,
+          134,
+          13
+        ],
+        "png_sha256": "0d9c996f6f3db9f464fa3a4c6eae1546d64a58ff5c9c51b95c760fb49e626b1f",
+        "rgb_sha256": "c29d46e1be71682d11d8dfc6b958d25a8eb3c658a3ac363f3c594378d6434985",
+        "rgba_sha256": "5c700e0e8d4edcbb6a2321005876bd21dff71977234f0e43db2fa9169eaa45ce",
+        "source_payloads": [
+          {
+            "image_index": 4,
+            "role": "color"
+          },
+          {
+            "image_index": 5,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-bows-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-crossbows",
+    "file": "weapons-crossbows-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-crossbows.txt",
+    "status": "DRAFT",
+    "sha256": "7abd5534ea3e6efb4ae09485201bf8b2bcb1ab3a60b58afc920175b82fedf4fe",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "d526b9c0943567ba8a175dc5b23cb13dea79a553489302dc73810f1e7c54840a",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      194,
+      67,
+      1107,
+      1203
+    ],
+    "original_output": "exec-ce15b8f7-32e1-4f4b-8832-90c625ec9707.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 3,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-003.png",
+        "size": [
+          80,
+          47
+        ],
+        "bbox": [
+          1,
+          0,
+          79,
+          47
+        ],
+        "png_sha256": "6204f1fbfd3aed0da7e999d05ceedbc46170f99aac0f63d628b5921d19efcc0b",
+        "rgb_sha256": "57678a92b504fb020d7c1941334181765e43feba0555bc9991b3fa286afc967c",
+        "rgba_sha256": "a4cd70c927a24a86079bc90f5da26ce904b77e617b88449c53a40d36c48d8588",
+        "source_payloads": [
+          {
+            "image_index": 6,
+            "role": "color"
+          },
+          {
+            "image_index": 7,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 4,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-004.png",
+        "size": [
+          96,
+          63
+        ],
+        "bbox": [
+          1,
+          0,
+          95,
+          63
+        ],
+        "png_sha256": "2244c46f6a3961a3bc8c4306eb1b0ebee9d9294fae8bc7612e66ebe1f2614347",
+        "rgb_sha256": "8a49e141b6e89a83aaf6481c8ba236c11556cae75e39a4a46e19a79396e0545d",
+        "rgba_sha256": "cf6b060c925f45c5f450c7295b759d3ae460cb35f0599b17bee12c11523bb378",
+        "source_payloads": [
+          {
+            "image_index": 8,
+            "role": "color"
+          },
+          {
+            "image_index": 9,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-crossbows-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-club-mace-dagger",
+    "file": "weapons-club-mace-dagger-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-club-mace-dagger.txt",
+    "status": "DRAFT",
+    "sha256": "e4e0d908ac4467d2ad3ffcd3f16cdd73dc4c185908ec99f1f83bc3070f721652",
+    "size": [
+      1478,
+      1064
+    ],
+    "prompt_sha256": "4960d3c5ba28e414619e11d8a2c354f528dafce117c9ebd35d683c71a38bc55b",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      221,
+      219,
+      1264,
+      947
+    ],
+    "original_output": "exec-1eef8a75-5a9c-480f-a1f2-0bf16de670d6.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 5,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-005.png",
+        "size": [
+          88,
+          16
+        ],
+        "bbox": [
+          4,
+          0,
+          86,
+          16
+        ],
+        "png_sha256": "d45042f3d6629e52e07d330786357ff37ed9f955b6e63c6bcee629b1a6ff01db",
+        "rgb_sha256": "763f2a1f0f029d5b3749a194659e37d45b8fae2f95e4b679844c943547803502",
+        "rgba_sha256": "82c1bb0ce97b360213a17e26c84f13b216cccce3373afcf6d5f0861f0dda0aa4",
+        "source_payloads": [
+          {
+            "image_index": 10,
+            "role": "color"
+          },
+          {
+            "image_index": 11,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 6,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-006.png",
+        "size": [
+          104,
+          13
+        ],
+        "bbox": [
+          2,
+          0,
+          99,
+          13
+        ],
+        "png_sha256": "8485dba6d5c75f2ece024977c27f4af05db299429cfe1d473f4059ac308e9340",
+        "rgb_sha256": "1898a8edf8daedfe8c5941ccbcbe378e8ca6804f58924a095154e349c310f4aa",
+        "rgba_sha256": "8e32313923e730d1cae0dac8cf83c17e1c0cadde51cdf9a547cd008e2952191d",
+        "source_payloads": [
+          {
+            "image_index": 12,
+            "role": "color"
+          },
+          {
+            "image_index": 13,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 7,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-007.png",
+        "size": [
+          48,
+          9
+        ],
+        "bbox": [
+          5,
+          0,
+          45,
+          9
+        ],
+        "png_sha256": "a160c2ba238bc1de16473861947e7013e2f8491518c1795b7cc436d7a227442c",
+        "rgb_sha256": "6a650c5aa37313b24818e88e334b5a9509816d1d2ad48915680296957901753d",
+        "rgba_sha256": "7373438e9e42bf9e40a4fdb468a2fd612205236ce4e2f78204e600b0155eff07",
+        "source_payloads": [
+          {
+            "image_index": 14,
+            "role": "color"
+          },
+          {
+            "image_index": 15,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-club-mace-dagger-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-swords",
+    "file": "weapons-swords-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-swords.txt",
+    "status": "DRAFT",
+    "sha256": "6b50a8aa2a4800676c5b932f98ec3325e99d027753af67bcc7116d8902785b0f",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "81cc35c587fe0e909b653257935dbe2b9a9b414a745526eb4303dc0f80d732eb",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      76,
+      96,
+      1202,
+      1172
+    ],
+    "original_output": "exec-cb41d313-beb0-45c8-a722-0535a27c74f2.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 8,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-008.png",
+        "size": [
+          80,
+          15
+        ],
+        "bbox": [
+          3,
+          0,
+          77,
+          15
+        ],
+        "png_sha256": "6f4952f6ff2b0b82eff977cb09eff08924e3902aa94a90083143fe245a2eac4e",
+        "rgb_sha256": "9bddf71f1287121715349cce27847717ddacfcfc1e8099924fe2b31110535870",
+        "rgba_sha256": "897279c5145ea1de677026d5a0ca74e2c56597091a4f57a09290291b98d05ca4",
+        "source_payloads": [
+          {
+            "image_index": 16,
+            "role": "color"
+          },
+          {
+            "image_index": 17,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 9,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-009.png",
+        "size": [
+          96,
+          19
+        ],
+        "bbox": [
+          3,
+          0,
+          95,
+          19
+        ],
+        "png_sha256": "b18493afddbd58c78c9aa66a940f731dc39b0336bd06e2b9eea039b71ee40035",
+        "rgb_sha256": "ae31a8432786b9c2f9fcbd3be87c52e9bdd93c529e0afcb3ee8afe2c1e3463df",
+        "rgba_sha256": "ad1c04fd874287fe05ae8c97018d0b17b474e78e5fb497e1e8b9a41ff4ef3bbe",
+        "source_payloads": [
+          {
+            "image_index": 18,
+            "role": "color"
+          },
+          {
+            "image_index": 19,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 10,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-010.png",
+        "size": [
+          104,
+          17
+        ],
+        "bbox": [
+          3,
+          0,
+          101,
+          17
+        ],
+        "png_sha256": "6f18ac64c21de4e743a223008ab83f47341b6212ebb08d73361da00e5cf5fa04",
+        "rgb_sha256": "66571c7517b4bf648049b8320ed9538f49c66d34d7802d52e7f3972d20e4c8de",
+        "rgba_sha256": "dd64b94ae12b13380a16f147b2025545c879d3a170efa02030e0f4e38d7f6588",
+        "source_payloads": [
+          {
+            "image_index": 20,
+            "role": "color"
+          },
+          {
+            "image_index": 21,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 11,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-011.png",
+        "size": [
+          96,
+          17
+        ],
+        "bbox": [
+          2,
+          0,
+          95,
+          17
+        ],
+        "png_sha256": "3c9ede41c043800ca0fd7cce5a70ef5be84c3171fe80ffe15f09075c03ed6ef6",
+        "rgb_sha256": "f857b6ef1216f4f64a071af133f5b425646c8b824f8a7f2c8b0dc45be680cf31",
+        "rgba_sha256": "31bc5d6b44563ca06e33c4798d663dd0d08957f3a6d59eb7287cb7eba95a6b61",
+        "source_payloads": [
+          {
+            "image_index": 22,
+            "role": "color"
+          },
+          {
+            "image_index": 23,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-swords-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-swords-axes",
+    "file": "weapons-swords-axes-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-swords-axes.txt",
+    "status": "DRAFT",
+    "sha256": "79bffdd033434d4c6fefb98f592373323a8bb3993dd8bc442474da79892e4737",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "65efb1c0396e92cfcf12a79d4617deaf0b5e39d7b543e4803529455539fea69f",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      31,
+      79,
+      1225,
+      1195
+    ],
+    "original_output": "exec-b9c8b8ee-38f8-489c-b1a2-6c856284cfeb.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 12,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-012.png",
+        "size": [
+          120,
+          25
+        ],
+        "bbox": [
+          1,
+          0,
+          120,
+          25
+        ],
+        "png_sha256": "e8a5a74f4e603ef33751c33c8bb97be9614609375e9881cf0e2591e014e9c078",
+        "rgb_sha256": "c91b9721ce9414620a4075c8e15e6f7ab5b6f990b62d1279d80e11b23f245f3d",
+        "rgba_sha256": "78f2e9b279f03d357d06a4764838e7ce5c538f8c692b9fcaadb41c945838dec7",
+        "source_payloads": [
+          {
+            "image_index": 24,
+            "role": "color"
+          },
+          {
+            "image_index": 25,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 13,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-013.png",
+        "size": [
+          136,
+          29
+        ],
+        "bbox": [
+          1,
+          0,
+          134,
+          29
+        ],
+        "png_sha256": "0228c4ff9dcaaf8516936bf5c1c6bf8a7c560ad5c41fe06dac03585d6b033a32",
+        "rgb_sha256": "cf5418011a33fabb180da8e6d2a106e86000a09159bb03d8d90201f3a7c42394",
+        "rgba_sha256": "07947ccd186affd966d8fce9b95d981fcf96152150a7bdd64ee5e5b7d8906613",
+        "source_payloads": [
+          {
+            "image_index": 26,
+            "role": "color"
+          },
+          {
+            "image_index": 27,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 14,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-014.png",
+        "size": [
+          88,
+          20
+        ],
+        "bbox": [
+          1,
+          0,
+          82,
+          20
+        ],
+        "png_sha256": "ca7868f86f0b3c6fd3116f3b9b6fd3052f967da93bed75b7f3ffbe1cb5d9198c",
+        "rgb_sha256": "95e296d4357cd109a6635fa725890b7e148fb09151ae13188f90aed9e70e073e",
+        "rgba_sha256": "8883ae962cf0da35d663974bbdec57e66372887b03e4176f3064df9d592a939d",
+        "source_payloads": [
+          {
+            "image_index": 28,
+            "role": "color"
+          },
+          {
+            "image_index": 29,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 15,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-015.png",
+        "size": [
+          104,
+          22
+        ],
+        "bbox": [
+          1,
+          0,
+          103,
+          22
+        ],
+        "png_sha256": "50265d35cd7cea1c2a0faae0f82e53de7abef3a064c1f24323011a18b17871b2",
+        "rgb_sha256": "a811a5496ffd10ba969ae14fbfd0a9b8c22d74cbfe218dc79cf763d283442e0b",
+        "rgba_sha256": "99b96224fe8cb2a535b7b0c280a3e41252c569b49e3f0f2b834844a4eb97d889",
+        "source_payloads": [
+          {
+            "image_index": 30,
+            "role": "color"
+          },
+          {
+            "image_index": 31,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-swords-axes-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-poleaxes-spear",
+    "file": "weapons-poleaxes-spear-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-poleaxes-spear.txt",
+    "status": "DRAFT",
+    "sha256": "1beb7855ef4cc29a237e8a3283b05ae3ea50d0194f797316067a493e0b8d5e84",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "badaf8d97ad389271e2ea49dec98fad15341ca00085735370aa37c00ee102f0d",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      56,
+      55,
+      1219,
+      1186
+    ],
+    "original_output": "exec-011c14cc-ad1d-4027-bcf6-782855cd9cb0.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 16,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-016.png",
+        "size": [
+          112,
+          33
+        ],
+        "bbox": [
+          1,
+          0,
+          111,
+          33
+        ],
+        "png_sha256": "4f1cd47c522db4b3ce73ab232ba761dbcb9335922e705307cc23390bc278354c",
+        "rgb_sha256": "1d00db3264245cdd502b6f457e91bbd47362e0e3cda1737d4cd2d00be0766fd7",
+        "rgba_sha256": "a7023c14964396c13bbc3899d2c45a4ba2d72356af8ccb00e39c601b726923c8",
+        "source_payloads": [
+          {
+            "image_index": 32,
+            "role": "color"
+          },
+          {
+            "image_index": 33,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 17,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-017.png",
+        "size": [
+          144,
+          35
+        ],
+        "bbox": [
+          1,
+          0,
+          142,
+          35
+        ],
+        "png_sha256": "4ab19ef4bff4ed60c0cb3e1f833c862a754fc50bbcb25ba2d200807318a71f7a",
+        "rgb_sha256": "efef56af283ab9fe8e3b3dc54bfb6a1b90512c41d488bfa9d976a422c243b88c",
+        "rgba_sha256": "87918305f29271636fdf44dc776442250b0776832e2d76ce1ca045b1986c1050",
+        "source_payloads": [
+          {
+            "image_index": 34,
+            "role": "color"
+          },
+          {
+            "image_index": 35,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 18,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-018.png",
+        "size": [
+          152,
+          31
+        ],
+        "bbox": [
+          1,
+          0,
+          146,
+          31
+        ],
+        "png_sha256": "98455657bed7bcd499a480692837eb2e3bc8e1112d54d4911470df8c7232f0ca",
+        "rgb_sha256": "86ddc35b8bc367cf1c955c29d696971b22d1c78667109cb51407d986ce78a5c4",
+        "rgba_sha256": "74779b8480891f76440648a25bdb4ea4eaa64b927f1831440bc6d68019d48a52",
+        "source_payloads": [
+          {
+            "image_index": 36,
+            "role": "color"
+          },
+          {
+            "image_index": 37,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 19,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-019.png",
+        "size": [
+          120,
+          7
+        ],
+        "bbox": [
+          2,
+          0,
+          115,
+          7
+        ],
+        "png_sha256": "164057302dd6cc92a414e3865a8989d7e1951ecda03dba1c4515f048ee4c624c",
+        "rgb_sha256": "10188a6f5b0ff73d7cdf49f3211fb4914aec4130ac991af8c010d616f022378f",
+        "rgba_sha256": "839fb2c0cb2b6cf675db88f0fb627befb7b6bdf037226e011195e369e6f47a93",
+        "source_payloads": [
+          {
+            "image_index": 38,
+            "role": "color"
+          },
+          {
+            "image_index": 39,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-poleaxes-spear-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-long-shafts",
+    "file": "weapons-long-shafts-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-long-shafts.txt",
+    "status": "DRAFT",
+    "sha256": "7e7f07207013d9cd35f30a441d24941fd43eceaa2e15557769852ec876b29970",
+    "size": [
+      1724,
+      912
+    ],
+    "prompt_sha256": "92535cd4464e4be5968cd1c108b0836a057ae5afc080e1953a1d1a3a34ebfba3",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      37,
+      257,
+      1688,
+      642
+    ],
+    "original_output": "exec-809cae85-80d7-4199-8a3b-e27cf70b3051.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 20,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-020.png",
+        "size": [
+          192,
+          7
+        ],
+        "bbox": [
+          2,
+          0,
+          188,
+          7
+        ],
+        "png_sha256": "7950f951d78306335aca95cee692579578a598def3b6184d4b960684425d51fb",
+        "rgb_sha256": "8058af419841046fbaf5e981a82c340b4460dcfb641ffd54996b7d3338f6877c",
+        "rgba_sha256": "3ef41f5c8f23118c0c36b18532922890409e88959b368182de638663d9968787",
+        "source_payloads": [
+          {
+            "image_index": 40,
+            "role": "color"
+          },
+          {
+            "image_index": 41,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 25,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-025.png",
+        "size": [
+          160,
+          5
+        ],
+        "bbox": [
+          1,
+          0,
+          156,
+          5
+        ],
+        "png_sha256": "b41bc8b31c0b55e2e664af7affaaff4530e5790bdd395cf62216cb0c27be2caa",
+        "rgb_sha256": "c8fde03530ff3f85a437e8128ae17a646cca871e061761aad47fb877bc2c3bda",
+        "rgba_sha256": "f454169e5409bb728345037b564e17ac5c4ff4bfc3bd671c9dc573edf8616242",
+        "source_payloads": [
+          {
+            "image_index": 50,
+            "role": "color"
+          },
+          {
+            "image_index": 51,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-long-shafts-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-hammers",
+    "file": "weapons-hammers-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-hammers.txt",
+    "status": "DRAFT",
+    "sha256": "9c6ff3eed543113ef84790c57f6a07237de86495c85a0f384e0470944c612c73",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "68ed8f4b16dbfa290bff0c5554544f78edc15504234291dbe5664f118a84eacd",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      65,
+      55,
+      1188,
+      1214
+    ],
+    "original_output": "exec-66585325-90c6-4d53-ad28-c86806e89f10.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 21,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-021.png",
+        "size": [
+          104,
+          23
+        ],
+        "bbox": [
+          1,
+          0,
+          97,
+          23
+        ],
+        "png_sha256": "d13988ed58ca6f3022127a1608eedbcbcd56d26fb9685757100e4bb6f72a1a8f",
+        "rgb_sha256": "65f6afff54b65a66c858f37d1481f23370ebbe5f714ca62bece769466369b74c",
+        "rgba_sha256": "4ea93c6b9d1a2bccd2a3c1012023636f4b8677342d7e933c2710849c3df5fe9d",
+        "source_payloads": [
+          {
+            "image_index": 42,
+            "role": "color"
+          },
+          {
+            "image_index": 43,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 22,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-022.png",
+        "size": [
+          104,
+          37
+        ],
+        "bbox": [
+          1,
+          0,
+          97,
+          37
+        ],
+        "png_sha256": "4cc675ff4e105265b3aadb6067c6f98bb9993388a8990c0d1c878051d6f489e2",
+        "rgb_sha256": "f7f9fc9f099d763397ec7ddb2d4247006951296a737ffeea48464b175474fd35",
+        "rgba_sha256": "b7f5a7a3f089ebaca9135af8709842d85c72a96ac56d834f98b67c5730586177",
+        "source_payloads": [
+          {
+            "image_index": 44,
+            "role": "color"
+          },
+          {
+            "image_index": 45,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 23,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-023.png",
+        "size": [
+          120,
+          27
+        ],
+        "bbox": [
+          1,
+          0,
+          119,
+          27
+        ],
+        "png_sha256": "37a74babe21d7f84cdb1147abfec2d6b735e6dec3adca2d08b5dd770206041de",
+        "rgb_sha256": "1a542cba647264ead5fdc457923b58936e5982f10c9fb78805af99e9f3cd109a",
+        "rgba_sha256": "843fb16574ec5aceda15e0c0bb94abf645658d8f098cb7838c34223a4ecef307",
+        "source_payloads": [
+          {
+            "image_index": 46,
+            "role": "color"
+          },
+          {
+            "image_index": 47,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 24,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-024.png",
+        "size": [
+          144,
+          37
+        ],
+        "bbox": [
+          1,
+          0,
+          143,
+          37
+        ],
+        "png_sha256": "d65cf1dcc70452e9979afd78aa53d2ed1722aa2a24273597f8f4a1a4fc2dab73",
+        "rgb_sha256": "6c28923339f56fdb841009c46e24464d8a3ad252f58b7566e4279022fed51447",
+        "rgba_sha256": "8432c945e6ec389d50fcf29e535e6307c0a65d5978c7ef32b6657c266841d040",
+        "source_payloads": [
+          {
+            "image_index": 48,
+            "role": "color"
+          },
+          {
+            "image_index": 49,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-hammers-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "weapons-flails",
+    "file": "weapons-flails-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/weapons-flails.txt",
+    "status": "DRAFT",
+    "sha256": "09b825ce3d859df1500b66890116ef3e32170dd2dfb9de3a0dde5ad2eb6964d2",
+    "size": [
+      1635,
+      962
+    ],
+    "prompt_sha256": "cfe71da812e42393ade772d7da66589d2436a28624e8a2707a35760b5baf76d5",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      117,
+      91,
+      1549,
+      906
+    ],
+    "original_output": "exec-14807710-dac5-40ab-9e96-c0203bfd138c.png",
+    "source_entry": {
+      "entry": "Knights-of-legend/WEAPPICS.0",
+      "size": 9169,
+      "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+      "payload_count_from_verified_manifest": 56
+    },
+    "source_pngs": [
+      {
+        "archive": "WEAPPICS",
+        "index": 26,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-026.png",
+        "size": [
+          80,
+          41
+        ],
+        "bbox": [
+          0,
+          0,
+          80,
+          41
+        ],
+        "png_sha256": "59ddeb3f51fa5a5e56768c8fe0b8d8fb657ebc80c12d4da0199060b9df4e442f",
+        "rgb_sha256": "59f636087c08e2a91b8185ca11ba1b6a6e338368a42e854a89dec462e2981e7e",
+        "rgba_sha256": "d0cc26c96d47468e4a2b96fc9e55278f2c853916c1bfb7549c756b0fc28f4112",
+        "source_payloads": [
+          {
+            "image_index": 52,
+            "role": "color"
+          },
+          {
+            "image_index": 53,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "WEAPPICS",
+        "index": 27,
+        "file": "assets/original-derived-png/ega/WEAPPICS/weappics-027.png",
+        "size": [
+          152,
+          42
+        ],
+        "bbox": [
+          1,
+          0,
+          151,
+          42
+        ],
+        "png_sha256": "fd0c7255594fdf4490676327169ec4a3f141391fd990ee16f4c59668d1327232",
+        "rgb_sha256": "04797fe547e04f8e275f6cbdb83918cfd5fa4ed846bd2dc201796c4087f17c61",
+        "rgba_sha256": "91e4f5d2085f11bfd16f0552fd78bd39812fd47b7cf1be0956e8c951a9c09b45",
+        "source_payloads": [
+          {
+            "image_index": 54,
+            "role": "color"
+          },
+          {
+            "image_index": 55,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "layout": "one column, source order top to bottom",
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/weapons-flails-painted.png",
+    "style_reference": {
+      "file": "assets/hd/first-slice/party-painted-v1.png",
+      "sha256": "77e3d3e3a00dfe6144fe278eeda6c2b28b414e470f9ffb2033dfedc8c97cf016"
+    },
+    "rights": "source-derived generated PNG; current private repository only"
+  }
+]

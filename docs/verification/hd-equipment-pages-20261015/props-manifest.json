@@ -1,0 +1,1556 @@
+{
+  "schema": "kol-hd-equipment-props-prototype/1",
+  "status": "DRAFT",
+  "method": "Measured alpha >=8 crops; native PNGs unchanged; original nonblack paint bounds and typed piece anchors; hand redraw is clipped to original nonblack paint bounds, not the full eraser rectangle",
+  "rights": "private GitHub PNG only; original inputs and typed data local only",
+  "source_zip": {
+    "name": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_inventory_sha256": "e71aa19e04855c1f3cc6a42f762b6f9e58a0bb10fa5a1359c00e5f704edcd87d",
+  "files": {
+    "weapons-bows-painted.png": {
+      "sha256": "99d4c563369198fe560a292cf6ff0303299b11781b89883cc6902f7d5160d674",
+      "size": [
+        1526,
+        1030
+      ],
+      "generation_id": "weapons-bows"
+    },
+    "weapons-crossbows-painted.png": {
+      "sha256": "7abd5534ea3e6efb4ae09485201bf8b2bcb1ab3a60b58afc920175b82fedf4fe",
+      "size": [
+        1254,
+        1254
+      ],
+      "generation_id": "weapons-crossbows"
+    },
+    "weapons-club-mace-dagger-painted.png": {
+      "sha256": "e4e0d908ac4467d2ad3ffcd3f16cdd73dc4c185908ec99f1f83bc3070f721652",
+      "size": [
+        1478,
+        1064
+      ],
+      "generation_id": "weapons-club-mace-dagger"
+    },
+    "weapons-swords-painted.png": {
+      "sha256": "6b50a8aa2a4800676c5b932f98ec3325e99d027753af67bcc7116d8902785b0f",
+      "size": [
+        1254,
+        1254
+      ],
+      "generation_id": "weapons-swords"
+    },
+    "weapons-swords-axes-painted.png": {
+      "sha256": "79bffdd033434d4c6fefb98f592373323a8bb3993dd8bc442474da79892e4737",
+      "size": [
+        1254,
+        1254
+      ],
+      "generation_id": "weapons-swords-axes"
+    },
+    "weapons-poleaxes-spear-painted.png": {
+      "sha256": "1beb7855ef4cc29a237e8a3283b05ae3ea50d0194f797316067a493e0b8d5e84",
+      "size": [
+        1254,
+        1254
+      ],
+      "generation_id": "weapons-poleaxes-spear"
+    },
+    "weapons-long-shafts-painted.png": {
+      "sha256": "7e7f07207013d9cd35f30a441d24941fd43eceaa2e15557769852ec876b29970",
+      "size": [
+        1724,
+        912
+      ],
+      "generation_id": "weapons-long-shafts"
+    },
+    "weapons-hammers-painted.png": {
+      "sha256": "9c6ff3eed543113ef84790c57f6a07237de86495c85a0f384e0470944c612c73",
+      "size": [
+        1254,
+        1254
+      ],
+      "generation_id": "weapons-hammers"
+    },
+    "weapons-flails-painted.png": {
+      "sha256": "09b825ce3d859df1500b66890116ef3e32170dd2dfb9de3a0dde5ad2eb6964d2",
+      "size": [
+        1635,
+        962
+      ],
+      "generation_id": "weapons-flails"
+    },
+    "shldpics-painted.png": {
+      "sha256": "20348ff763b75f999d0b8620c1b93cd2c965b1b869ee835a7c90a99bac82ffa0",
+      "size": [
+        1254,
+        1254
+      ],
+      "generation_id": "shields"
+    }
+  },
+  "props": {
+    "WEAPPICS:0": {
+      "file": "weapons-bows-painted.png",
+      "rect": [
+        165,
+        107,
+        1363,
+        255
+      ],
+      "paint": [
+        2,
+        1,
+        102,
+        11
+      ],
+      "source_size": [
+        104,
+        12
+      ],
+      "source_png_sha256": "46c32772edd572268ad76477258d73dba3ab9fe18fa7313c87b2e6a9e20d9a1b",
+      "cell": [
+        0,
+        0,
+        1526,
+        338
+      ],
+      "native_size": [
+        1198,
+        148
+      ],
+      "maximum_display_size": [
+        600,
+        60
+      ]
+    },
+    "WEAPPICS:1": {
+      "file": "weapons-bows-painted.png",
+      "rect": [
+        46,
+        421,
+        1482,
+        573
+      ],
+      "paint": [
+        1,
+        1,
+        129,
+        11
+      ],
+      "source_size": [
+        136,
+        12
+      ],
+      "source_png_sha256": "a0fcd059b8aa9bd4c24d22b1d8a2725dc3fa2154fdd3be5bfadfc2e6cc7bafe6",
+      "cell": [
+        0,
+        338,
+        1526,
+        649
+      ],
+      "native_size": [
+        1436,
+        152
+      ],
+      "maximum_display_size": [
+        768,
+        60
+      ]
+    },
+    "WEAPPICS:2": {
+      "file": "weapons-bows-painted.png",
+      "rect": [
+        47,
+        726,
+        1481,
+        898
+      ],
+      "paint": [
+        1,
+        1,
+        133,
+        12
+      ],
+      "source_size": [
+        136,
+        13
+      ],
+      "source_png_sha256": "0d9c996f6f3db9f464fa3a4c6eae1546d64a58ff5c9c51b95c760fb49e626b1f",
+      "cell": [
+        0,
+        649,
+        1526,
+        1030
+      ],
+      "native_size": [
+        1434,
+        172
+      ],
+      "maximum_display_size": [
+        792,
+        66
+      ]
+    },
+    "WEAPPICS:3": {
+      "file": "weapons-crossbows-painted.png",
+      "rect": [
+        312,
+        67,
+        1023,
+        499
+      ],
+      "paint": [
+        2,
+        1,
+        78,
+        46
+      ],
+      "source_size": [
+        80,
+        47
+      ],
+      "source_png_sha256": "6204f1fbfd3aed0da7e999d05ceedbc46170f99aac0f63d628b5921d19efcc0b",
+      "cell": [
+        0,
+        0,
+        1254,
+        563
+      ],
+      "native_size": [
+        711,
+        432
+      ],
+      "maximum_display_size": [
+        456,
+        270
+      ]
+    },
+    "WEAPPICS:4": {
+      "file": "weapons-crossbows-painted.png",
+      "rect": [
+        194,
+        627,
+        1107,
+        1203
+      ],
+      "paint": [
+        3,
+        1,
+        94,
+        62
+      ],
+      "source_size": [
+        96,
+        63
+      ],
+      "source_png_sha256": "2244c46f6a3961a3bc8c4306eb1b0ebee9d9294fae8bc7612e66ebe1f2614347",
+      "cell": [
+        0,
+        563,
+        1254,
+        1254
+      ],
+      "native_size": [
+        913,
+        576
+      ],
+      "maximum_display_size": [
+        546,
+        366
+      ]
+    },
+    "WEAPPICS:5": {
+      "file": "weapons-club-mace-dagger-painted.png",
+      "rect": [
+        235,
+        219,
+        1241,
+        414
+      ],
+      "paint": [
+        5,
+        1,
+        85,
+        15
+      ],
+      "source_size": [
+        88,
+        16
+      ],
+      "source_png_sha256": "d45042f3d6629e52e07d330786357ff37ed9f955b6e63c6bcee629b1a6ff01db",
+      "cell": [
+        0,
+        0,
+        1478,
+        489
+      ],
+      "native_size": [
+        1006,
+        195
+      ],
+      "maximum_display_size": [
+        480,
+        84
+      ]
+    },
+    "WEAPPICS:6": {
+      "file": "weapons-club-mace-dagger-painted.png",
+      "rect": [
+        221,
+        564,
+        1264,
+        692
+      ],
+      "paint": [
+        3,
+        1,
+        97,
+        12
+      ],
+      "source_size": [
+        104,
+        13
+      ],
+      "source_png_sha256": "8485dba6d5c75f2ece024977c27f4af05db299429cfe1d473f4059ac308e9340",
+      "cell": [
+        0,
+        489,
+        1478,
+        752
+      ],
+      "native_size": [
+        1043,
+        128
+      ],
+      "maximum_display_size": [
+        564,
+        66
+      ]
+    },
+    "WEAPPICS:7": {
+      "file": "weapons-club-mace-dagger-painted.png",
+      "rect": [
+        463,
+        813,
+        1022,
+        947
+      ],
+      "paint": [
+        6,
+        1,
+        44,
+        8
+      ],
+      "source_size": [
+        48,
+        9
+      ],
+      "source_png_sha256": "a160c2ba238bc1de16473861947e7013e2f8491518c1795b7cc436d7a227442c",
+      "cell": [
+        0,
+        752,
+        1478,
+        1064
+      ],
+      "native_size": [
+        559,
+        134
+      ],
+      "maximum_display_size": [
+        228,
+        42
+      ]
+    },
+    "WEAPPICS:8": {
+      "file": "weapons-swords-painted.png",
+      "rect": [
+        213,
+        96,
+        965,
+        254
+      ],
+      "paint": [
+        4,
+        1,
+        76,
+        14
+      ],
+      "source_size": [
+        80,
+        15
+      ],
+      "source_png_sha256": "6f4952f6ff2b0b82eff977cb09eff08924e3902aa94a90083143fe245a2eac4e",
+      "cell": [
+        0,
+        0,
+        1254,
+        320
+      ],
+      "native_size": [
+        752,
+        158
+      ],
+      "maximum_display_size": [
+        432,
+        78
+      ]
+    },
+    "WEAPPICS:9": {
+      "file": "weapons-swords-painted.png",
+      "rect": [
+        204,
+        387,
+        1126,
+        580
+      ],
+      "paint": [
+        4,
+        1,
+        94,
+        18
+      ],
+      "source_size": [
+        96,
+        19
+      ],
+      "source_png_sha256": "b18493afddbd58c78c9aa66a940f731dc39b0336bd06e2b9eea039b71ee40035",
+      "cell": [
+        0,
+        320,
+        1254,
+        643
+      ],
+      "native_size": [
+        922,
+        193
+      ],
+      "maximum_display_size": [
+        540,
+        102
+      ]
+    },
+    "WEAPPICS:10": {
+      "file": "weapons-swords-painted.png",
+      "rect": [
+        76,
+        707,
+        1202,
+        886
+      ],
+      "paint": [
+        4,
+        1,
+        99,
+        16
+      ],
+      "source_size": [
+        104,
+        17
+      ],
+      "source_png_sha256": "6f18ac64c21de4e743a223008ab83f47341b6212ebb08d73361da00e5cf5fa04",
+      "cell": [
+        0,
+        643,
+        1254,
+        932
+      ],
+      "native_size": [
+        1126,
+        179
+      ],
+      "maximum_display_size": [
+        570,
+        90
+      ]
+    },
+    "WEAPPICS:11": {
+      "file": "weapons-swords-painted.png",
+      "rect": [
+        145,
+        978,
+        1116,
+        1172
+      ],
+      "paint": [
+        4,
+        1,
+        94,
+        16
+      ],
+      "source_size": [
+        96,
+        17
+      ],
+      "source_png_sha256": "3c9ede41c043800ca0fd7cce5a70ef5be84c3171fe80ffe15f09075c03ed6ef6",
+      "cell": [
+        0,
+        932,
+        1254,
+        1254
+      ],
+      "native_size": [
+        971,
+        194
+      ],
+      "maximum_display_size": [
+        540,
+        90
+      ]
+    },
+    "WEAPPICS:12": {
+      "file": "weapons-swords-axes-painted.png",
+      "rect": [
+        40,
+        79,
+        1210,
+        311
+      ],
+      "paint": [
+        2,
+        1,
+        119,
+        24
+      ],
+      "source_size": [
+        120,
+        25
+      ],
+      "source_png_sha256": "e8a5a74f4e603ef33751c33c8bb97be9614609375e9881cf0e2591e014e9c078",
+      "cell": [
+        0,
+        0,
+        1254,
+        350
+      ],
+      "native_size": [
+        1170,
+        232
+      ],
+      "maximum_display_size": [
+        702,
+        138
+      ]
+    },
+    "WEAPPICS:13": {
+      "file": "weapons-swords-axes-painted.png",
+      "rect": [
+        31,
+        389,
+        1225,
+        627
+      ],
+      "paint": [
+        2,
+        1,
+        133,
+        28
+      ],
+      "source_size": [
+        136,
+        29
+      ],
+      "source_png_sha256": "0228c4ff9dcaaf8516936bf5c1c6bf8a7c560ad5c41fe06dac03585d6b033a32",
+      "cell": [
+        0,
+        350,
+        1254,
+        675
+      ],
+      "native_size": [
+        1194,
+        238
+      ],
+      "maximum_display_size": [
+        786,
+        162
+      ]
+    },
+    "WEAPPICS:14": {
+      "file": "weapons-swords-axes-painted.png",
+      "rect": [
+        251,
+        723,
+        967,
+        903
+      ],
+      "paint": [
+        2,
+        1,
+        81,
+        19
+      ],
+      "source_size": [
+        88,
+        20
+      ],
+      "source_png_sha256": "ca7868f86f0b3c6fd3116f3b9b6fd3052f967da93bed75b7f3ffbe1cb5d9198c",
+      "cell": [
+        0,
+        675,
+        1254,
+        945
+      ],
+      "native_size": [
+        716,
+        180
+      ],
+      "maximum_display_size": [
+        474,
+        108
+      ]
+    },
+    "WEAPPICS:15": {
+      "file": "weapons-swords-axes-painted.png",
+      "rect": [
+        167,
+        986,
+        1150,
+        1195
+      ],
+      "paint": [
+        2,
+        1,
+        102,
+        21
+      ],
+      "source_size": [
+        104,
+        22
+      ],
+      "source_png_sha256": "50265d35cd7cea1c2a0faae0f82e53de7abef3a064c1f24323011a18b17871b2",
+      "cell": [
+        0,
+        945,
+        1254,
+        1254
+      ],
+      "native_size": [
+        983,
+        209
+      ],
+      "maximum_display_size": [
+        600,
+        120
+      ]
+    },
+    "WEAPPICS:16": {
+      "file": "weapons-poleaxes-spear-painted.png",
+      "rect": [
+        122,
+        55,
+        1166,
+        307
+      ],
+      "paint": [
+        2,
+        1,
+        109,
+        32
+      ],
+      "source_size": [
+        112,
+        33
+      ],
+      "source_png_sha256": "4f1cd47c522db4b3ce73ab232ba761dbcb9335922e705307cc23390bc278354c",
+      "cell": [
+        0,
+        0,
+        1254,
+        337
+      ],
+      "native_size": [
+        1044,
+        252
+      ],
+      "maximum_display_size": [
+        642,
+        186
+      ]
+    },
+    "WEAPPICS:17": {
+      "file": "weapons-poleaxes-spear-painted.png",
+      "rect": [
+        57,
+        367,
+        1219,
+        656
+      ],
+      "paint": [
+        2,
+        1,
+        141,
+        34
+      ],
+      "source_size": [
+        144,
+        35
+      ],
+      "source_png_sha256": "4ab19ef4bff4ed60c0cb3e1f833c862a754fc50bbcb25ba2d200807318a71f7a",
+      "cell": [
+        0,
+        337,
+        1254,
+        699
+      ],
+      "native_size": [
+        1162,
+        289
+      ],
+      "maximum_display_size": [
+        834,
+        198
+      ]
+    },
+    "WEAPPICS:18": {
+      "file": "weapons-poleaxes-spear-painted.png",
+      "rect": [
+        56,
+        742,
+        1195,
+        1030
+      ],
+      "paint": [
+        2,
+        1,
+        145,
+        30
+      ],
+      "source_size": [
+        152,
+        31
+      ],
+      "source_png_sha256": "98455657bed7bcd499a480692837eb2e3bc8e1112d54d4911470df8c7232f0ca",
+      "cell": [
+        0,
+        699,
+        1254,
+        1070
+      ],
+      "native_size": [
+        1139,
+        288
+      ],
+      "maximum_display_size": [
+        858,
+        174
+      ]
+    },
+    "WEAPPICS:19": {
+      "file": "weapons-poleaxes-spear-painted.png",
+      "rect": [
+        191,
+        1110,
+        1089,
+        1186
+      ],
+      "paint": [
+        3,
+        1,
+        114,
+        6
+      ],
+      "source_size": [
+        120,
+        7
+      ],
+      "source_png_sha256": "164057302dd6cc92a414e3865a8989d7e1951ecda03dba1c4515f048ee4c624c",
+      "cell": [
+        0,
+        1070,
+        1254,
+        1254
+      ],
+      "native_size": [
+        898,
+        76
+      ],
+      "maximum_display_size": [
+        666,
+        30
+      ]
+    },
+    "WEAPPICS:20": {
+      "file": "weapons-long-shafts-painted.png",
+      "rect": [
+        37,
+        257,
+        1688,
+        317
+      ],
+      "paint": [
+        3,
+        1,
+        187,
+        6
+      ],
+      "source_size": [
+        192,
+        7
+      ],
+      "source_png_sha256": "7950f951d78306335aca95cee692579578a598def3b6184d4b960684425d51fb",
+      "cell": [
+        0,
+        0,
+        1724,
+        458
+      ],
+      "native_size": [
+        1651,
+        60
+      ],
+      "maximum_display_size": [
+        1104,
+        30
+      ]
+    },
+    "WEAPPICS:25": {
+      "file": "weapons-long-shafts-painted.png",
+      "rect": [
+        168,
+        600,
+        1559,
+        642
+      ],
+      "paint": [
+        2,
+        1,
+        155,
+        4
+      ],
+      "source_size": [
+        160,
+        5
+      ],
+      "source_png_sha256": "b41bc8b31c0b55e2e664af7affaaff4530e5790bdd395cf62216cb0c27be2caa",
+      "cell": [
+        0,
+        458,
+        1724,
+        912
+      ],
+      "native_size": [
+        1391,
+        42
+      ],
+      "maximum_display_size": [
+        918,
+        18
+      ]
+    },
+    "WEAPPICS:21": {
+      "file": "weapons-hammers-painted.png",
+      "rect": [
+        181,
+        55,
+        1115,
+        286
+      ],
+      "paint": [
+        2,
+        1,
+        96,
+        22
+      ],
+      "source_size": [
+        104,
+        23
+      ],
+      "source_png_sha256": "d13988ed58ca6f3022127a1608eedbcbcd56d26fb9685757100e4bb6f72a1a8f",
+      "cell": [
+        0,
+        0,
+        1254,
+        303
+      ],
+      "native_size": [
+        934,
+        231
+      ],
+      "maximum_display_size": [
+        564,
+        126
+      ]
+    },
+    "WEAPPICS:22": {
+      "file": "weapons-hammers-painted.png",
+      "rect": [
+        208,
+        321,
+        1028,
+        616
+      ],
+      "paint": [
+        2,
+        1,
+        96,
+        36
+      ],
+      "source_size": [
+        104,
+        37
+      ],
+      "source_png_sha256": "4cc675ff4e105265b3aadb6067c6f98bb9993388a8990c0d1c878051d6f489e2",
+      "cell": [
+        0,
+        303,
+        1254,
+        631
+      ],
+      "native_size": [
+        820,
+        295
+      ],
+      "maximum_display_size": [
+        564,
+        210
+      ]
+    },
+    "WEAPPICS:23": {
+      "file": "weapons-hammers-painted.png",
+      "rect": [
+        65,
+        646,
+        1188,
+        900
+      ],
+      "paint": [
+        2,
+        1,
+        118,
+        26
+      ],
+      "source_size": [
+        120,
+        27
+      ],
+      "source_png_sha256": "37a74babe21d7f84cdb1147abfec2d6b735e6dec3adca2d08b5dd770206041de",
+      "cell": [
+        0,
+        631,
+        1254,
+        911
+      ],
+      "native_size": [
+        1123,
+        254
+      ],
+      "maximum_display_size": [
+        696,
+        150
+      ]
+    },
+    "WEAPPICS:24": {
+      "file": "weapons-hammers-painted.png",
+      "rect": [
+        65,
+        922,
+        1188,
+        1214
+      ],
+      "paint": [
+        2,
+        1,
+        142,
+        36
+      ],
+      "source_size": [
+        144,
+        37
+      ],
+      "source_png_sha256": "d65cf1dcc70452e9979afd78aa53d2ed1722aa2a24273597f8f4a1a4fc2dab73",
+      "cell": [
+        0,
+        911,
+        1254,
+        1254
+      ],
+      "native_size": [
+        1123,
+        292
+      ],
+      "maximum_display_size": [
+        840,
+        210
+      ]
+    },
+    "WEAPPICS:26": {
+      "file": "weapons-flails-painted.png",
+      "rect": [
+        526,
+        91,
+        1173,
+        459
+      ],
+      "paint": [
+        1,
+        1,
+        79,
+        40
+      ],
+      "source_size": [
+        80,
+        41
+      ],
+      "source_png_sha256": "59ddeb3f51fa5a5e56768c8fe0b8d8fb657ebc80c12d4da0199060b9df4e442f",
+      "cell": [
+        0,
+        0,
+        1635,
+        494
+      ],
+      "native_size": [
+        647,
+        368
+      ],
+      "maximum_display_size": [
+        468,
+        234
+      ]
+    },
+    "WEAPPICS:27": {
+      "file": "weapons-flails-painted.png",
+      "rect": [
+        117,
+        532,
+        1549,
+        906
+      ],
+      "paint": [
+        2,
+        1,
+        150,
+        41
+      ],
+      "source_size": [
+        152,
+        42
+      ],
+      "source_png_sha256": "fd0c7255594fdf4490676327169ec4a3f141391fd990ee16f4c59668d1327232",
+      "cell": [
+        0,
+        494,
+        1635,
+        962
+      ],
+      "native_size": [
+        1432,
+        374
+      ],
+      "maximum_display_size": [
+        888,
+        240
+      ]
+    },
+    "SHLDPICS:0": {
+      "file": "shldpics-painted.png",
+      "rect": [
+        77,
+        145,
+        561,
+        475
+      ],
+      "paint": [
+        1,
+        1,
+        34,
+        28
+      ],
+      "source_size": [
+        40,
+        29
+      ],
+      "source_png_sha256": "8c49f8d6fe83637cb60731e64488f71715f155a5385722f3b4e7efe366525398",
+      "cell": [
+        0,
+        0,
+        627,
+        568
+      ],
+      "native_size": [
+        484,
+        330
+      ],
+      "maximum_display_size": [
+        198,
+        162
+      ]
+    },
+    "SHLDPICS:1": {
+      "file": "shldpics-painted.png",
+      "rect": [
+        674,
+        66,
+        1195,
+        547
+      ],
+      "paint": [
+        5,
+        1,
+        55,
+        44
+      ],
+      "source_size": [
+        56,
+        45
+      ],
+      "source_png_sha256": "86f3f9d19087819cdb0d5cbc04b43f1cd6c4e82c85e870f39676312cb3aa4148",
+      "cell": [
+        627,
+        0,
+        1254,
+        568
+      ],
+      "native_size": [
+        521,
+        481
+      ],
+      "maximum_display_size": [
+        300,
+        258
+      ]
+    },
+    "SHLDPICS:2": {
+      "file": "shldpics-painted.png",
+      "rect": [
+        88,
+        589,
+        574,
+        1184
+      ],
+      "paint": [
+        3,
+        1,
+        47,
+        62
+      ],
+      "source_size": [
+        48,
+        63
+      ],
+      "source_png_sha256": "1277681a02981d30744985979ae2c0e266e48b0f4532d7cfd1701a7e7def21c8",
+      "cell": [
+        0,
+        568,
+        627,
+        1254
+      ],
+      "native_size": [
+        486,
+        595
+      ],
+      "maximum_display_size": [
+        264,
+        366
+      ]
+    },
+    "SHLDPICS:3": {
+      "file": "shldpics-painted.png",
+      "rect": [
+        698,
+        603,
+        1166,
+        1187
+      ],
+      "paint": [
+        0,
+        1,
+        42,
+        60
+      ],
+      "source_size": [
+        48,
+        61
+      ],
+      "source_png_sha256": "c4da0088cc979fa0523e39b6c898959713a5ebcaf9affc1d245b8845b6f63f67",
+      "cell": [
+        627,
+        568,
+        1254,
+        1254
+      ],
+      "native_size": [
+        468,
+        584
+      ],
+      "maximum_display_size": [
+        252,
+        354
+      ]
+    }
+  },
+  "weapon_groups": [
+    {
+      "name": "bows",
+      "indices": [
+        0,
+        1,
+        2
+      ],
+      "alpha_support_rows": [
+        [
+          107,
+          255
+        ],
+        [
+          421,
+          573
+        ],
+        [
+          726,
+          898
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        338,
+        649,
+        1030
+      ],
+      "reference": "references/weapons-bows-reference.png",
+      "reference_sha256": "c5c4e9187f2b083801f7dcdfef82a8a3979645d9a3161461471503ef4093ac1a"
+    },
+    {
+      "name": "crossbows",
+      "indices": [
+        3,
+        4
+      ],
+      "alpha_support_rows": [
+        [
+          67,
+          499
+        ],
+        [
+          627,
+          1203
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        563,
+        1254
+      ],
+      "reference": "references/weapons-crossbows-reference.png",
+      "reference_sha256": "bce6f0de19031d7979abcf83570c67c2904edd2405c0299ea655b8428f675509"
+    },
+    {
+      "name": "club-mace-dagger",
+      "indices": [
+        5,
+        6,
+        7
+      ],
+      "alpha_support_rows": [
+        [
+          219,
+          414
+        ],
+        [
+          564,
+          692
+        ],
+        [
+          813,
+          947
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        489,
+        752,
+        1064
+      ],
+      "reference": "references/weapons-club-mace-dagger-reference.png",
+      "reference_sha256": "69bc6e4258fc7fce72eca33ae51d85e7d621abe7f91d5d81f9137a82f31d4f2f"
+    },
+    {
+      "name": "swords",
+      "indices": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "alpha_support_rows": [
+        [
+          96,
+          254
+        ],
+        [
+          387,
+          580
+        ],
+        [
+          707,
+          886
+        ],
+        [
+          978,
+          1172
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        320,
+        643,
+        932,
+        1254
+      ],
+      "reference": "references/weapons-swords-reference.png",
+      "reference_sha256": "ce0c5adf0646a34eef6492567ed83ac579931d846a36ec7f8713196feea33ec3"
+    },
+    {
+      "name": "swords-axes",
+      "indices": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "alpha_support_rows": [
+        [
+          79,
+          311
+        ],
+        [
+          389,
+          627
+        ],
+        [
+          723,
+          903
+        ],
+        [
+          987,
+          1195
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        350,
+        675,
+        945,
+        1254
+      ],
+      "reference": "references/weapons-swords-axes-reference.png",
+      "reference_sha256": "0fc471e1f10d006782745761c5acb636620b3aa03051a03cf4ab73d84968701b"
+    },
+    {
+      "name": "poleaxes-spear",
+      "indices": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "alpha_support_rows": [
+        [
+          55,
+          307
+        ],
+        [
+          368,
+          656
+        ],
+        [
+          742,
+          1030
+        ],
+        [
+          1110,
+          1185
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        337,
+        699,
+        1070,
+        1254
+      ],
+      "reference": "references/weapons-poleaxes-spear-reference.png",
+      "reference_sha256": "224af8b9e9d8e886e3d201db0ff0cd5492783fb769684ec72f3193ba3f387434"
+    },
+    {
+      "name": "long-shafts",
+      "indices": [
+        20,
+        25
+      ],
+      "alpha_support_rows": [
+        [
+          257,
+          317
+        ],
+        [
+          600,
+          641
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        458,
+        912
+      ],
+      "reference": "references/weapons-long-shafts-reference.png",
+      "reference_sha256": "7ddd5fbda98cd3bf06e6fd24a704b1c29be7c1c987a718e825931cf47356a407"
+    },
+    {
+      "name": "hammers",
+      "indices": [
+        21,
+        22,
+        23,
+        24
+      ],
+      "alpha_support_rows": [
+        [
+          55,
+          286
+        ],
+        [
+          321,
+          616
+        ],
+        [
+          646,
+          900
+        ],
+        [
+          923,
+          1214
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        303,
+        631,
+        911,
+        1254
+      ],
+      "reference": "references/weapons-hammers-reference.png",
+      "reference_sha256": "28bba5370ee39e3b7f420525b4413675538ff1e7881a21a503b175d2129c86a9"
+    },
+    {
+      "name": "flails",
+      "indices": [
+        26,
+        27
+      ],
+      "alpha_support_rows": [
+        [
+          91,
+          457
+        ],
+        [
+          532,
+          905
+        ]
+      ],
+      "crop_row_boundaries": [
+        0,
+        494,
+        962
+      ],
+      "reference": "references/weapons-flails-reference.png",
+      "reference_sha256": "0f2722acd6b57f2738d4e66db533dd19aa29eca5ed9aea39807d1980fdbcf245"
+    }
+  ],
+  "shield_alpha_support_rows": [
+    [
+      66,
+      547
+    ],
+    [
+      589,
+      1187
+    ]
+  ],
+  "shield_crop_row_boundaries": [
+    0,
+    568,
+    1254
+  ],
+  "limitations": [
+    "Isolated prototype only",
+    "All six build coordinates come from existing typed layout",
+    "Default/personal shield bitmap keeps original player content",
+    "Human male paper-doll runtime only until remaining builds are complete"
+  ],
+  "hand_paint": {
+    "0": [
+      1,
+      0,
+      12,
+      7
+    ],
+    "1": [
+      3,
+      0,
+      14,
+      7
+    ],
+    "2": [
+      3,
+      0,
+      12,
+      7
+    ],
+    "3": [
+      3,
+      0,
+      12,
+      7
+    ],
+    "4": [
+      3,
+      0,
+      14,
+      5
+    ],
+    "5": [
+      1,
+      0,
+      12,
+      5
+    ],
+    "6": [
+      8,
+      0,
+      21,
+      7
+    ],
+    "7": [
+      3,
+      0,
+      16,
+      7
+    ],
+    "8": [
+      8,
+      0,
+      16,
+      5
+    ],
+    "9": [
+      8,
+      0,
+      16,
+      5
+    ],
+    "10": [
+      2,
+      0,
+      10,
+      7
+    ],
+    "11": [
+      6,
+      0,
+      14,
+      7
+    ]
+  }
+}
