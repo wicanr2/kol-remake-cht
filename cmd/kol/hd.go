@@ -44,6 +44,10 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD頁面載入失敗：%w", err)
 		}
+		scroll, err := assets.LoadHDScroll(filepath.Join(g.hdDir, "scroll"))
+		if err != nil {
+			return fmt.Errorf("HD法術卷軸載入失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -60,6 +64,8 @@ func (g *game) setGraphics(mode string) error {
 			pageSources = append(pageSources, ui.HDPageSource{Archive: source.Archive, Index: source.Index, RGB: source.SourceRGB})
 		}
 		hd.AttachPages(pages.Book, pages.Portraits, bookKeys, pages.Manifest.Background.SourceRGB, pageSources)
+		source := scroll.Manifest.Source
+		hd.AttachScroll(scroll.Image, ui.HDPageSource{Archive: source.Archive, Index: source.Index, RGB: source.SourceRGB})
 		canvas := screen.NewCanvasScaled(6)
 		g.hdCache, g.hdCanvas = hd, canvas
 	}

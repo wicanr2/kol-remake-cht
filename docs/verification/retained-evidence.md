@@ -386,3 +386,21 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 壓縮SHA-256為`08498b066fcc4599af9902bb4448c456f23537c31003af4343c9ca13786bfced`。
 核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-native-ui-runtime-20261014`；
 `delete hd-native-ui-runtime-20261014`再核原工作區後只清理該批，其他工作保持。
+
+## 法術卷軸HD原型
+
+[原型驗收](hd-spell-scroll-20261014.md)與[本機清冊](local/hd-spell-scroll-20261014/retention.json)
+保存四組每側107狀態、十八個F10事件、生成前後及工具失敗紀錄。
+395份檔案壓縮為86121424 bytes，三份可重建程式只留雜湊。
+壓縮SHA-256為`dc3186b9d3ff46873b87ba20c3dc9960f4d18e740f2a8222bb5fbf85e85011b7`。
+核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-spell-scroll-20261014`；
+`delete hd-spell-scroll-20261014`再核原工作區後精確清理，正式接入由[後續收據](hd-spell-scroll-runtime-20261014.md)追蹤。
+
+## 法術卷軸HD正式接入
+
+[正式驗收](hd-spell-scroll-runtime-20261014.md)與[本機清冊](local/hd-spell-scroll-runtime-20261014/retention.json)
+保存376份來源、四組107狀態、十八個F10事件、正常住宿與重載，以及完整型別頁面和存檔。
+527份檔案壓縮為84581860 bytes，三份可重建程式只留雜湊。
+壓縮SHA-256為`960e88c7fc0beb73b1bae8392b401100e4b7eda201499264e7a08206e55e0cd5`。
+核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-spell-scroll-runtime-20261014`；
+`delete hd-spell-scroll-runtime-20261014`核對原工作區後精確清理。完整型別資料只留本機，Git收據只保存雜湊與檢查結果。

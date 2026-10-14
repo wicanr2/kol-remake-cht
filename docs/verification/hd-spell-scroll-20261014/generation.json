@@ -1,0 +1,21 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-14",
+  "prompt": "Create ONE painted HD background asset for the Traditional Chinese Knights of Legend remake. Reference 1 is the actual 320x200 EGA spell editor background KOLPICS[1] and is the strict composition guide. Reference 2 is our approved painted parchment/book treatment. Reference 3 is our approved hand-painted fantasy art brushwork. Repaint the ENTIRE first background as a polished 1920x1200 16:10 game UI background, preserving exact relative placement and scale of all major shapes. Top-down flat game screen, no perspective tilt. A broad blank warm ivory parchment scroll occupies x=12.5%..85%, with its top roller at y=3%..13%, large clean flat writing area x=15%..83%, y=18%..62%, bottom roller y=64%..75%. Deep red-brown leather and dark wood visible around the scroll. Keep the thin red handles at both ends of each horizontal roller. Keep blue jewel in gold mount at upper left, red quill at upper right, curled golden parchment ribbon and green jewel along the right edge, and the long empty red-brown lower panel x=2%..98%, y=82%..98% with subtle copper rivets. Do not add writing, symbols, letters, numbers, runes, grid lines, dividers, decorative center images, logos, or watermarks. All writing areas completely blank with restrained low-contrast paper grain for readable Chinese typesetting added by code. Match the rich hand-painted medieval RPG style of approved references, crisp painted edges, ivory parchment, red-black-copper theme, no pixel art, no blur, no photorealism. Preserve original screen composition so the existing spell fields fit. Output a single complete opaque background.",
+  "references": [
+    "assets/original-derived-png/ega/KOLPICS/kolpics-001.png",
+    "assets/hd/first-slice/pages/book-open-painted.png",
+    "assets/hd/first-slice/interface/innkeeper-painted-v1.png"
+  ],
+  "generated_source": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-bfb8c1b2-5980-4410-9537-f701f661f74d.png",
+  "rights": "current private repository and local full only",
+  "stage": "DRAFT isolated prototype",
+  "output": {
+    "file": "spell-scroll-painted.png",
+    "dimensions": [
+      1586,
+      992
+    ],
+    "sha256": "024d69efb57020dffd0e6686775402304438d416599d1ba5686884dbdf6ec6cb"
+  }
+}

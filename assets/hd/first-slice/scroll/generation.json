@@ -1,0 +1,52 @@
+{
+  "tool": "image_gen.imagegen",
+  "initial": {
+    "tool": "image_gen.imagegen",
+    "date": "2026-10-14",
+    "prompt": "Create ONE painted HD background asset for the Traditional Chinese Knights of Legend remake. Reference 1 is the actual 320x200 EGA spell editor background KOLPICS[1] and is the strict composition guide. Reference 2 is our approved painted parchment/book treatment. Reference 3 is our approved hand-painted fantasy art brushwork. Repaint the ENTIRE first background as a polished 1920x1200 16:10 game UI background, preserving exact relative placement and scale of all major shapes. Top-down flat game screen, no perspective tilt. A broad blank warm ivory parchment scroll occupies x=12.5%..85%, with its top roller at y=3%..13%, large clean flat writing area x=15%..83%, y=18%..62%, bottom roller y=64%..75%. Deep red-brown leather and dark wood visible around the scroll. Keep the thin red handles at both ends of each horizontal roller. Keep blue jewel in gold mount at upper left, red quill at upper right, curled golden parchment ribbon and green jewel along the right edge, and the long empty red-brown lower panel x=2%..98%, y=82%..98% with subtle copper rivets. Do not add writing, symbols, letters, numbers, runes, grid lines, dividers, decorative center images, logos, or watermarks. All writing areas completely blank with restrained low-contrast paper grain for readable Chinese typesetting added by code. Match the rich hand-painted medieval RPG style of approved references, crisp painted edges, ivory parchment, red-black-copper theme, no pixel art, no blur, no photorealism. Preserve original screen composition so the existing spell fields fit. Output a single complete opaque background.",
+    "references": [
+      "assets/original-derived-png/ega/KOLPICS/kolpics-001.png",
+      "assets/hd/first-slice/pages/book-open-painted.png",
+      "assets/hd/first-slice/interface/innkeeper-painted-v1.png"
+    ],
+    "generated_source": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-bfb8c1b2-5980-4410-9537-f701f661f74d.png",
+    "rights": "current private repository and local full only",
+    "stage": "DRAFT isolated prototype",
+    "output": {
+      "file": "spell-scroll-painted.png",
+      "dimensions": [
+        1586,
+        992
+      ],
+      "sha256": "024d69efb57020dffd0e6686775402304438d416599d1ba5686884dbdf6ec6cb"
+    }
+  },
+  "readability_edit": {
+    "tool": "image_gen.imagegen",
+    "date": "2026-10-14",
+    "prompt": "Edit this painted game UI background, preserving its exact composition, rich hand-painted red-black-copper style, all jewels, quill, upper roller, blank main parchment, and lower control panel. The only requested change is the LOWER parchment roller and its immediate shadow: extend the roller downward so its bottom edge is at 76% of full image height instead of roughly 72%. Make its entire writing-facing surface from y=64% through y=74% a LIGHT IVORY, low-contrast, gently curved paper surface. It must provide a consistently light clean blank surface for TWO rows of dark Chinese labels at y=65% and y=69%, with glyphs extending through y=72%. No dark shading, brown band, cracks or shadow may pass through those text rows. Keep the horizontal red handles, but shift/enlarge the bottom roller's end pieces together with this small extension. Its bottom shadow begins below y=76%. Keep the lower leather control panel starting y=82% exactly as now. Do not add text, letters, symbols, dividers, numbers, watermarks, or extra decorations. Output one complete opaque image with the same 16:10 aspect ratio, at least the same resolution. This is a narrowly scoped readability correction, not a new layout.",
+    "reference": "workplace/hd-spell-scroll-20261014/spell-scroll-painted-v1.png",
+    "generated_source": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-99d71583-afb8-43db-8309-bc35221af01d.png",
+    "reason": "原型第二行造價落到下卷軸陰影，延長明亮紙面；欄位位置與規則保持。",
+    "rights": "current private repository and local full only",
+    "stage": "DRAFT isolated prototype",
+    "output": {
+      "file": "spell-scroll-painted.png",
+      "dimensions": [
+        1586,
+        992
+      ],
+      "sha256": "8e9918a1675bbe5cfd8e21750d55b8c7275ee0126edb440e99087005203fd189"
+    }
+  },
+  "retained_initial_image": "docs/verification/local/hd-spell-scroll-20261014/evidence.tar.xz::spell-scroll-painted-v1.png",
+  "source": {
+    "archive": "KOLPICS",
+    "index": 1,
+    "source_png_sha256": "44d92fa8eb399ba73df0b152ade737d72f691153c582cc6e68911f61177a7cd2",
+    "source_rgb_sha256": "9a23b8b4c358020c00150f807c38266f6d264193b05d671292a4b7bf86ca97fc"
+  },
+  "source_archive_entry": "Knights-of-legend/KOLPICS.0",
+  "source_archive_sha256": "502367c613109eb326e57c54a727c8e3e414c1f8c3d73c9ad16497c453b8b402",
+  "rights": "AI-painted original-derived PNG; current private repository and local full only; no public distribution"
+}

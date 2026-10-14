@@ -1,0 +1,37 @@
+{
+  "schema": "kol-hd-scroll-gui/1",
+  "display_events": 18,
+  "state_preserved": true,
+  "roundtrip": [
+    {
+      "scene": "editor",
+      "max_channel_delta": 0
+    },
+    {
+      "scene": "typing",
+      "max_channel_delta": 0
+    },
+    {
+      "scene": "field-menu-small",
+      "max_channel_delta": 0
+    }
+  ],
+  "windows": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "typing_buffer_preserved": true,
+  "mouse_none_choice_passed": true,
+  "startup_migration_equal_except_saved_at": true,
+  "uncommitted_spell_draft_not_saved": true,
+  "exit_code": 0,
+  "executed_script_sha256": "66ec3ee2f72b77e0cb3f6cd45cbdb6f5ff68e09b30c21ec626c6c5fdfaa8ddfc",
+  "validation_correction": "Completed GUI reached final incorrect no-file assertion. Source main.go4011 converts legacy save before input; independent no-input base374 conversion control equals GUI file except saved_at. All18 events and screenshots rechecked without replaying GUI.",
+  "capture_method": "X11 import PPM followed by lossless Pillow PNG level1"
+}

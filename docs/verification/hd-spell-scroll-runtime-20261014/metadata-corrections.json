@@ -1,0 +1,18 @@
+[
+  {
+    "path": "assets/hd/first-slice/pages/manifest.json",
+    "before_sha256": "2fb5265b9ed5e72b5da492a834168ce0fc50d0eab28d141ed1d31a291ff5a866",
+    "after_sha256": "477da9e0e1d525f82f90fdd923c8bdfc39cec8c169b8e9c5246eb3862273b317",
+    "old_status": "READY; approved theme and displayed art; production integration in progress",
+    "new_status": "CONFORMED; limited book/service/editor scope; see docs/verification/hd-native-ui-runtime-20261014.md",
+    "scope": "status-only metadata; typed loaders do not read status; all runtime/source/image fields unchanged; no game rerun"
+  },
+  {
+    "path": "assets/hd/first-slice/scroll/manifest.json",
+    "before_sha256": "2ef7f983f95181c6dfa5e2330bae4d56b13c4fe348171330be32250a4b65bfb8",
+    "after_sha256": "22fe5242b118ea17f69207659aefd9cfe9de69c20d1cbe7af2aedbfd16804049",
+    "old_status": "READY; existing approved style and original field positions; integration in progress",
+    "new_status": "CONFORMED; limited spell editor/menu scope; see docs/verification/hd-spell-scroll-runtime-20261014.md",
+    "scope": "status-only metadata; typed loaders do not read status; all runtime/source/image fields unchanged; no game rerun"
+  }
+]

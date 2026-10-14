@@ -1,0 +1,18 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-14",
+  "prompt": "Edit this painted game UI background, preserving its exact composition, rich hand-painted red-black-copper style, all jewels, quill, upper roller, blank main parchment, and lower control panel. The only requested change is the LOWER parchment roller and its immediate shadow: extend the roller downward so its bottom edge is at 76% of full image height instead of roughly 72%. Make its entire writing-facing surface from y=64% through y=74% a LIGHT IVORY, low-contrast, gently curved paper surface. It must provide a consistently light clean blank surface for TWO rows of dark Chinese labels at y=65% and y=69%, with glyphs extending through y=72%. No dark shading, brown band, cracks or shadow may pass through those text rows. Keep the horizontal red handles, but shift/enlarge the bottom roller's end pieces together with this small extension. Its bottom shadow begins below y=76%. Keep the lower leather control panel starting y=82% exactly as now. Do not add text, letters, symbols, dividers, numbers, watermarks, or extra decorations. Output one complete opaque image with the same 16:10 aspect ratio, at least the same resolution. This is a narrowly scoped readability correction, not a new layout.",
+  "reference": "workplace/hd-spell-scroll-20261014/spell-scroll-painted-v1.png",
+  "generated_source": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-99d71583-afb8-43db-8309-bc35221af01d.png",
+  "reason": "原型第二行造價落到下卷軸陰影，延長明亮紙面；欄位位置與規則保持。",
+  "rights": "current private repository and local full only",
+  "stage": "DRAFT isolated prototype",
+  "output": {
+    "file": "spell-scroll-painted.png",
+    "dimensions": [
+      1586,
+      992
+    ],
+    "sha256": "8e9918a1675bbe5cfd8e21750d55b8c7275ee0126edb440e99087005203fd189"
+  }
+}

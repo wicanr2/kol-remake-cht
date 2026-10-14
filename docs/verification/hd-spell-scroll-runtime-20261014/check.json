@@ -1,0 +1,44 @@
+{
+  "schema": "kol-hd-scroll-runtime-check/1",
+  "formal_inputs": 376,
+  "cases": [
+    {
+      "name": "editor",
+      "states": 23,
+      "trace_equal": true,
+      "ega_unchanged": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/editor-hd/step-022.png"
+    },
+    {
+      "name": "name-input",
+      "states": 30,
+      "trace_equal": true,
+      "ega_unchanged": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/name-input-hd/step-029.png"
+    },
+    {
+      "name": "field-menu",
+      "states": 25,
+      "trace_equal": true,
+      "ega_unchanged": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/field-menu-hd/step-024.png"
+    },
+    {
+      "name": "left-menu",
+      "states": 29,
+      "trace_equal": true,
+      "ega_unchanged": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/left-menu-hd/step-028.png"
+    }
+  ],
+  "return_to_building_max_channel_delta": 1,
+  "normal_save_equal_except_saved_at": true,
+  "rest_states": 11,
+  "reload_states": 5,
+  "reload_file_unchanged": true,
+  "limits": "Linux container scope only; no new original oracle, all-HD, release or natural completion claim"
+}

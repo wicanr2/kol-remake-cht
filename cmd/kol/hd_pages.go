@@ -53,7 +53,13 @@ func (g *game) nativeUIPage() bool {
 }
 
 func nativeInnPage(in *town.Inn) bool {
-	if in == nil || in.SpellEdit != nil || in.ItemPage != nil || len(in.PartyPage) > 0 {
+	if in == nil {
+		return false
+	}
+	if in.SpellEdit != nil {
+		return true
+	}
+	if in.ItemPage != nil || len(in.PartyPage) > 0 {
 		return false
 	}
 	if in.Sheet != nil || in.List != nil || in.Steed != nil || len(in.Detail) > 0 || in.DialogRow != 0 {

@@ -19,7 +19,9 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 依[SPEC-039原生HD契約](docs/spec/039-hd-art-ui.md#其他操作頁的原生hd呈現)接入正式程式，目前374份Go／module，全套及sceneverify測試通過。CJKConfirm兩行文字移回框內，英文保持。
 正式十五組每側145狀態、EGA及既有HD回歸、真實視窗30個F10事件、鍵鼠及兩視窗通過；完整畫格最多一色階。標題27、住宿11及重載5狀態相同，完整v3只差saved_at，重載原檔保持。本批有限CONFORMED，入口[接入收據](docs/verification/hd-native-ui-runtime-20261014.md)。
 第六輪原型的通用白底修正曾改到商店邊框，已限定中文確認視窗後固定來源通過。重載腳本不支援ESC的失敗另存，只續驗未完成流程。書本／服務／編輯器正式截圖已加入README。
-下一批法術卷軸的空白手繪已生成，沿同一主題；隔離工作區`workplace/hd-spell-scroll-20261014/`及[SPEC-039入口](docs/spec/039-hd-art-ui.md#法術卷軸後續原型)為DRAFT，先驗真實欄位、名稱輸入與選單，不進未驗正式路徑。完整物品頁及其他人物、圖形仍開放。
+法術卷軸已沿同一主題與原欄位接入，正式376份來源、全套及sceneverify通過。四組107狀態、EGA保持，HD與原型／返回建築最多一色階；十八個F10事件保持輸入緩衝與狀態，三組完整畫格往返零差。舊v1啟動轉換的v3 SHA保持，住宿11與重載5狀態及v3除saved_at相同。入口[正式卷軸收據](docs/verification/hd-spell-scroll-runtime-20261014.md)，本切片有限CONFORMED；README已加正式對比。
+前置原型395份證據已封存核對後清理；原型的提示、抓圖與錯誤ESC／保存期望均保留，正式GUI乾淨執行通過。完整物品頁、角色模板與其他圖形繼續，全畫面HD保持active，舊Release不改。
+下一批[角色模板DRAFT](docs/spec/039-hd-art-ui.md#角色模板續作)工作區為`workplace/hd-character-templates-20261014/`。實際80張40×38來源各有不同指紋，既核准六張為47、43、21、32、35、54，保留原樣；其餘74張按既有畫風續作，先核對圖集分格及武器／姿勢。
 
 使用者要求全部操作介面、圖形與事件 HD 化，並在 README 放原版／HD 事件截圖。
 [本批盤點與候選](docs/verification/hd-completion-20261014.md)確認13類畫面仍有缺口，804張輸入 PNG 已重核；現行版本不能宣稱全畫面 HD。

@@ -108,10 +108,12 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 |---|---|
 | ![EGA角色選項](docs/verification/hd-native-ui-runtime-20261014/menu-ega.png) | ![HD手繪書頁與角色選項](docs/verification/hd-native-ui-runtime-20261014/menu-hd.png) |
 | ![EGA甲冑店清單](docs/verification/hd-native-ui-runtime-20261014/town-shop-ega.png) | ![HD甲冑店兄弟與清單](docs/verification/hd-native-ui-runtime-20261014/town-shop-hd.png) |
+| ![EGA法術編輯頁](docs/verification/hd-spell-scroll-runtime-20261014/editor-ega.png) | ![HD法術卷軸與十三欄編輯](docs/verification/hd-spell-scroll-runtime-20261014/editor-hd.png) |
 
 [十五組比較頁](docs/verification/hd-native-ui-runtime-20261014/review.html)另含建角、編輯器、訓練、馬廄、法術與任務清單。
 遊戲內F10切換、鍵鼠、兩種視窗與存讀檔已驗證。自訂點陣圖保留內容與色值；其他人物、坐騎、裝備及未重繪圖示仍待HD，
 範圍及來源見[正式驗收](docs/verification/hd-native-ui-runtime-20261014.md)。
+法術編輯頁亦已[接入並驗證](docs/verification/hd-spell-scroll-runtime-20261014.md)，名稱輸入、左右選單與遊戲內F10切換保持狀態。
 
 ### 事件畫面：原版與 HD
 
@@ -176,7 +178,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 全畫面 HD 續作涵蓋書本、建角、商店與其他服務子頁、人物裝備、城鎮／世界地圖、戰鬥、傷勢、天候及事件。
 [13類畫面盤點](docs/verification/hd-completion-20261014.md#目前覆蓋)逐項列出缺口與驗收條件；放大原版素材不列為手繪 HD 完成。
 七段結局已依核准樣張接入開發版；其他事件及介面按清單續作，均須驗中文、畫面、鍵鼠及遊戲內 F10。
-書頁、服務面板、三個服務頭像及編輯器已完成[正式原生HD比較](docs/verification/hd-native-ui-runtime-20261014/review.html)與有限接入驗收；法術卷軸與其餘圖形續作。
+書頁、服務面板、三個服務頭像及編輯器已完成[正式原生HD比較](docs/verification/hd-native-ui-runtime-20261014/review.html)；[法術卷軸](docs/verification/hd-spell-scroll-runtime-20261014/review.html)亦已接入。其餘圖形續作。
 批次與素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
 
 ## 專案起源

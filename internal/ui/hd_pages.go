@@ -19,6 +19,8 @@ type HDPageSource struct {
 }
 type hdPages struct {
 	book         *ebiten.Image
+	scroll       *ebiten.Image
+	scrollKey    string
 	portraits    map[string]*ebiten.Image
 	books        map[string]int
 	background   string
@@ -29,10 +31,11 @@ type hdPages struct {
 	editorPixels bitmapedit.Bitmap
 }
 type hdNativeRender struct {
-	h    *HD
-	dst  *ebiten.Image
-	book bool
-	err  error
+	h     *HD
+	dst   *ebiten.Image
+	book  bool
+	paper bool
+	err   error
 }
 
 var activeHDUI *hdNativeRender
@@ -43,6 +46,13 @@ func (h *HD) AttachPages(book image.Image, portraits map[string]image.Image, boo
 		p.portraits[key] = ebiten.NewImageFromImage(pic)
 	}
 	h.pages = p
+}
+
+func (h *HD) AttachScroll(pic image.Image, source HDPageSource) {
+	h.pages.scroll = ebiten.NewImageFromImage(pic)
+	h.pages.scrollKey = source.RGB
+	h.pages.sources = append(h.pages.sources, source)
+	h.pages.validated = false
 }
 
 // ValidatePageSources 在繪圖環境就緒後，先核對實際PNG圖號及RGB指紋。
@@ -141,6 +151,11 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 		return true
 	}
 	key := h.fingerprint(src)
+	if h.pages.scroll != nil && key == h.pages.scrollKey {
+		n.paper = true
+		h.drawHD(dst, h.pages.scroll, image.Rect(0, 0, 1920, 1200))
+		return true
+	}
 	if key == h.pages.background {
 		dst.DrawImage(h.style.images["background.png"], nil)
 		return true
@@ -201,7 +216,7 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 	case [3]uint8{255, 85, 85}, [3]uint8{170, 0, 0}:
 		ink = color.RGBA{255, 133, 125, 255}
 	}
-	if n.book {
+	if n.book || n.paper {
 		ink = color.RGBA{48, 36, 29, 255}
 		switch [3]uint8{r, g, b} {
 		case [3]uint8{0, 170, 170}:

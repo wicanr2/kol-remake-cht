@@ -1,0 +1,26 @@
+{
+  "schema": "kol-hd-scroll/1",
+  "rights": "AI-painted original-derived PNG; current private repository and local full only; no public distribution",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "source_archive_entry": "Knights-of-legend/KOLPICS.0",
+  "source_archive_sha256": "502367c613109eb326e57c54a727c8e3e414c1f8c3d73c9ad16497c453b8b402",
+  "source_payload_count": 14,
+  "source_png_count": 8,
+  "image": "spell-scroll-painted.png",
+  "source": {
+    "archive": "KOLPICS",
+    "index": 1,
+    "source_png_sha256": "44d92fa8eb399ba73df0b152ade737d72f691153c582cc6e68911f61177a7cd2",
+    "source_rgb_sha256": "9a23b8b4c358020c00150f807c38266f6d264193b05d671292a4b7bf86ca97fc"
+  },
+  "files": {
+    "spell-scroll-painted.png": {
+      "sha256": "8e9918a1675bbe5cfd8e21750d55b8c7275ee0126edb440e99087005203fd189",
+      "width": 1586,
+      "height": 992
+    }
+  },
+  "generation": "generation.json",
+  "verification": "docs/verification/hd-spell-scroll-runtime-20261014.md",
+  "status": "CONFORMED; limited spell editor/menu scope; see docs/verification/hd-spell-scroll-runtime-20261014.md"
+}

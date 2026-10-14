@@ -21,7 +21,7 @@ func TestNativeInnPageLimits(t *testing.T) {
 		{"unvisited long input", &town.Inn{Dialog: []string{town.TextCaret}, DialogZh: long}, false},
 		{"character sheet", &town.Inn{Sheet: &town.SheetPage{}}, true},
 		{"service list", &town.Inn{List: &town.InnList{}}, true},
-		{"unvisited spell editor", &town.Inn{SpellEdit: &town.SpellEditPage{}}, false},
+		{"spell editor", &town.Inn{SpellEdit: &town.SpellEditPage{}}, true},
 		{"unvisited item page", &town.Inn{ItemPage: &town.ItemPage{}}, false},
 	} {
 		t.Run(tc.name, func(t *testing.T) {

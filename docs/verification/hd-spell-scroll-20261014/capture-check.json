@@ -1,0 +1,31 @@
+{
+  "schema": "kol-hd-scroll-prototype-check/1",
+  "cases": [
+    {
+      "name": "editor",
+      "states": 23,
+      "trace_equal": true,
+      "text_set_equal": true
+    },
+    {
+      "name": "name-input",
+      "states": 30,
+      "trace_equal": true,
+      "text_set_equal": true
+    },
+    {
+      "name": "field-menu",
+      "states": 25,
+      "trace_equal": true,
+      "text_set_equal": true
+    },
+    {
+      "name": "left-menu",
+      "states": 29,
+      "trace_equal": true,
+      "text_set_equal": true
+    }
+  ],
+  "formal374_unchanged": true,
+  "limits": "isolated visual prototype using registered prepared save; not production integration or original parity"
+}

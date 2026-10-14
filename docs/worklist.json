@@ -1974,7 +1974,7 @@
       "id": "hd-art-ui",
       "layer": "gap",
       "title": "遊戲圖片與操作畫面HD化",
-      "body": "v.1.0.2-20261013保持。開發版七段結局已有限CONFORMED，README有原版／HD截圖。本批374份來源新增書頁、三個服務頭像、原生字模、面板與編輯器；十五組每側145狀態、EGA與既有HD回歸、兩視窗30個F10事件及鍵鼠通過，完整畫格最多一色階。標題27、住宿11、重載5狀態與v3除saved_at相同，README加入正式比較。法術卷軸下一批DRAFT已生成，未接正式。13類全HD仍開放：法術編輯、完整物品頁、其他人物／坐騎／組合裝備、城鎮／世界地圖、戰場、傷勢、天候、翻書與其餘事件。入口docs/verification/hd-native-ui-runtime-20261014.md、docs/spec/039-hd-art-ui.md及docs/verification/hd-completion-20261014.md。",
+      "body": "v.1.0.2-20261013保持。開發版七段結局、書頁／服務／編輯器及法術卷軸均有限CONFORMED，README有正式EGA／HD與七段原版對比。本批376份來源：法術四組107狀態及EGA保持、HD與原型最多一色階；兩視窗18個F10事件、輸入緩衝、滑鼠及初始v3 SHA保持，住宿11／重載5與完整v3除saved_at相同。CHARPICS實際80個唯一模板，六個既核准保留，74個續作DRAFT。13類全HD仍開放：完整物品與隊伍頁、其餘角色／NPC／坐騎／組合裝備、城鎮／世界地圖、戰場、傷勢、天候、翻書與其餘事件。入口docs/verification/hd-spell-scroll-runtime-20261014.md、docs/spec/039-hd-art-ui.md及docs/verification/hd-completion-20261014.md。",
       "acceptance": "所有13類操作介面及可見圖形逐項完成HD，不以放大EGA或靜默回退算完成。各批樣張與素材契約確認並升READY；來源、權利、尺寸、索引及遮罩可追溯；依SPEC-040取得對應場景中文與正確畫格，鍵鼠及F10切換保持狀態，舊v3可讀；事件原版／HD截圖放README；最後驗各平台封包。",
       "verify": {
         "kind": "manual",
@@ -2460,7 +2460,7 @@
     },
     {
       "file": "docs/spec/039-hd-art-ui.md",
-      "match": "未驗法術編輯器|完整範圍及未完成圖形|原型未驗前不進正式入口",
+      "match": "未驗法術編輯器|完整範圍及未完成圖形|原型未驗前不進正式入口|候選未驗前不進正式路徑",
       "why": "既有hd-art-ui手動項認領法術、物品及其餘圖形，沿同一READY閘門續作，不新增重複項。"
     }
   ],

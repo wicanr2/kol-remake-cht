@@ -71,6 +71,11 @@ func drawSpellEditCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transl
 
 // drawSpellMenuCJK 把欄位選單畫成黑底清單框，左上角在 (x, y)。
 func drawSpellMenuCJK(dst *ebiten.Image, f *font.Font, t Translator, m *town.InnList, x, y int) {
+	if n := activeHDUI; n != nil && n.dst == dst {
+		paper := n.paper
+		n.paper = false
+		defer func() { n.paper = paper }()
+	}
 	const w, rowH, pad = 280, 18, 12
 	h := town.ListRows*rowH + 2*pad
 	shadow(dst, x, y, w, h)

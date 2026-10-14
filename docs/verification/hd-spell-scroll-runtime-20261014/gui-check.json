@@ -1,0 +1,95 @@
+{
+  "schema": "kol-hd-scroll-gui/1",
+  "display_events": 18,
+  "state_preserved": true,
+  "roundtrip": [
+    {
+      "scene": "editor",
+      "max_channel_delta": 0,
+      "spell_page_sha256": "beb6af19160aa30ca616a82f7d5f2e5e1d33c1e8acb1489dd3007a9bd82521de",
+      "field_count": 13
+    },
+    {
+      "scene": "typing",
+      "max_channel_delta": 0,
+      "spell_page_sha256": "f42b6e1950162cbba462a09f096f27a2479e4becdbf87121dde4325e45238f78",
+      "field_count": 13
+    },
+    {
+      "scene": "field-menu-small",
+      "max_channel_delta": 0,
+      "spell_page_sha256": "f6e2047ff2d2bad256b9054142b8d9e1631ef0f46a42f8c352702f67405b6efd",
+      "field_count": 13
+    }
+  ],
+  "windows": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "typing_buffer_preserved": true,
+  "mouse_none_choice_passed": true,
+  "startup_migration_file_unchanged": true,
+  "save_sha256": "9fb469e43bc0e877d3d61f0d5b2287b3c858eac5e2d8a34b6bf65aedb8eda500",
+  "uncommitted_spell_draft_not_saved": true,
+  "exit_code": 0,
+  "capture_times": [
+    {
+      "name": "editor-before",
+      "capture_seconds": 0.11603037896566093,
+      "png_seconds": 14.502180964918807
+    },
+    {
+      "name": "editor-ega",
+      "capture_seconds": 0.1498499868903309,
+      "png_seconds": 12.46975432918407
+    },
+    {
+      "name": "editor-after",
+      "capture_seconds": 0.23903773096390069,
+      "png_seconds": 15.606718288036063
+    },
+    {
+      "name": "typing-before",
+      "capture_seconds": 0.14984428114257753,
+      "png_seconds": 15.960637429030612
+    },
+    {
+      "name": "typing-ega",
+      "capture_seconds": 0.16968134907074273,
+      "png_seconds": 13.077466316055506
+    },
+    {
+      "name": "typing-after",
+      "capture_seconds": 0.33918705419637263,
+      "png_seconds": 15.505701846908778
+    },
+    {
+      "name": "field-menu-small-before",
+      "capture_seconds": 0.03645770298317075,
+      "png_seconds": 4.0807314610574394
+    },
+    {
+      "name": "field-menu-small-ega",
+      "capture_seconds": 0.032287083799019456,
+      "png_seconds": 3.1692882601637393
+    },
+    {
+      "name": "field-menu-small-after",
+      "capture_seconds": 0.03770503192208707,
+      "png_seconds": 4.279698119964451
+    },
+    {
+      "name": "mouse-choice-small",
+      "capture_seconds": 0.03684654482640326,
+      "png_seconds": 4.274200549116358
+    }
+  ],
+  "capture_method": "X11 import PPM followed by lossless Pillow PNG level1; unchanged full-frame pixel comparison",
+  "privacy": "Full typed page snapshots and saves retained only in local archive; public receipt contains hashes and check outcomes."
+}
