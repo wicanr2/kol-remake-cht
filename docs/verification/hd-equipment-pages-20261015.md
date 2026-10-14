@@ -21,6 +21,10 @@
 
 詳見[候選收據](hd-equipment-pages-20261015/body-receipt.json)、[來源與生成紀錄](hd-equipment-pages-20261015/body-generation.json)及[裁取清冊](hd-equipment-pages-20261015/body-atlas-plan.json)。typed錨點、完整角色模型、生成原檔及工具留在既有本機工作區。
 
+後續完整人物合成另見[診斷摘要](hd-equipment-pages-20261015/fit-checkpoint.json)。三輪各產生115組CPU示意供檢查，並非115項驗收通過。另生成分離翼部／身體及第36款皮甲腰線修正版；兩張新PNG與合成畫格尚未通過完整視覺驗收，只留本機。第三輪仍有17項原生尺寸不足、無上衣配頭甲的接縫、部分腰線及握持校準待完成；女性精靈分段縮放使拳頭變扁，不能沿用為正式幾何。
+
+本機`compose-other-bodies-v1.py`、`compose-other-bodies-v2.py`與`prepare-body-fit-v3.py`保存合成及訂正方式，各輪`body-fit-study-v*.json`及`composition/body-fit-v*-build*-*.png`保留。原typed資料及生成原PNG保持；後續先補足原生尺寸並校準完整部件與實際握點，再進隔離遊戲。正式來源、88份HD資產與381份v6原型保持，這批沒有新增GUI或保存驗收。
+
 ## 武器與盾牌接入原型
 
 [新比較頁](hd-equipment-pages-20261015/props-review.html)保存同一角色狀態的實際F10往返，另附雙手劍、腰帶及32件來源圖集。這些是重製程式的呈現驗證，並非原版DOS對拍。

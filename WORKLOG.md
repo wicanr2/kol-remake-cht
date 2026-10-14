@@ -11616,3 +11616,13 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 全批仍DRAFT，既有裝備工作區尚在使用，不提前封存或刪除。下一步沿本機錨點校準完整人物接縫、握持與翅膀，再接隔離原型。正式380份runtime來源、385份稽核輸入、88份HD資產與v.1.0.2-20261013 Release保持。
 - 最終核對五張候選PNG、21份提示、135來源對應、385份正式輸入、88份HD資產及381份v6隔離來源通過；369個文件連結沒有新增失效，18個既有WORKLOG歷史連結保持。首次HTML連結檢查誤抓JavaScript動態字串，改以HTMLParser核對實際屬性及五張切換圖片後同容器乾淨通過。主機gh auth成功，遠端仍PRIVATE；沿既有commit＋push授權保存，結果另存工作區git-closeout-bodies.json。全專案find無root-owned檔案或誤建*.md目錄，本批Docker容器已回收，未新增image。
 
+### 2026-10-15 完整人物合成診斷
+
+- 候選檢查點9c1dce75已推送origin/main，實際結果保存git-closeout-bodies.json。該次diff檢查指出WORKLOG尾端空白行，但後續提交仍執行；本次收斂尾端空白，提交前須確認diff檢查退出0，不改已發布commit。
+- compose-other-bodies-v1.py沿本機原錨點產生五種體型各23組CPU示意。成套圖顯示基本組合，卸裝暴露水平裁切切斷前臂、翼根截斷及皮甲腰側多餘皮膚；這些示意不作驗收通過。兩張修正版由內建image_gen生成，翼部與身體分離、皮甲36縮至曲線腰緣；原檔、完整提示及SHA保留，未以程式重畫美術。
+- 第二輪使用分離翼部、實際alpha列分開手臂與腿部，另以腰帶分段呈現。連續合成仍有腰線問題，依規則重查knowledge-router的remake／畫面幾何列，載入retro-remake-tactical-parity.md及重製技能入口，不放寬尺寸或完整HD一色階門檻。
+- 查明第二輪女性精靈的首個藍色群組是上衣下緣，誤當腰帶使基準82.745；實際褲腰群組對應90.825。第三輪改用最後的褲腰群組，局部護脛另量測原生圖內的裸腹及褲腰，頭部改按區域保留肩膀。三輪各115組CPU畫格及JSON均保存，原生成像素與typed座標保持。
+- 第三輪仍有17項原生尺寸不足及頭／腰接縫，女性精靈的下半段手臂縮放使拳頭變扁，該網格不能視為正確修法。下一步補足素材尺寸，按完整部件邊界及實際握點校準，避免用裁切或縮小矩形掩蓋問題。武器的HD呈現可校準，原typed錨點、玩法及v3保持。
+- publish-body-fit-checkpoint.py只輸出診斷摘要與兩份提示；新生成PNG與未驗收合成只留本機。README既有獨立候選圖集與先前收據保持，CONTEXT、SPEC、驗收入口與工作清單更新，不把115個示意記成通過。本階段未建置遊戲，正式385份稽核來源、380份runtime、88份HD資產與381份v6隔離來源保持；全畫面HD仍active，現行Release與tag保持。
+- 最後以audit-body-fit-checkpoint.py核對固定ZIP、兩份新提示、原生成檔、候選收據及正式／v6來源通過；372個文件連結沒有新增失效，原18個歷史失效連結保持，沒有未驗收合成PNG進Git。工作清單保持16開放／92完成。所有本批輸出為1000:1000，全專案find無root-owned檔案或誤建*.md目錄，相關Docker容器已回收。提交前diff檢查退出0；提交推送實際結果另存本機git-closeout-fit.json。
+

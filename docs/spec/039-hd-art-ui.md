@@ -292,6 +292,8 @@ READY接入契約：
 
 135款候選已完成來源對應與透明裁取，仍為DRAFT，見[部件檢視頁](../verification/hd-equipment-pages-20261015/body-review.html)、[收據](../verification/hd-equipment-pages-20261015/body-receipt.json)及[裁取清冊](../verification/hd-equipment-pages-20261015/body-atlas-plan.json)。工作區`preflight-body-atlases.py`按實際alpha空隙量測17張圖集及第37款裸手修正版；15款低於原著色六倍尺寸參考，須在最終解剖矩形複核。`prepare-body-source-anchors.py`保存原typed錨點與著色邊界至本機`body-source-anchors.json`，SHA-256為`9e5ce7da5a8771467e193d6a44d0bf4f91691e56054e988afee080637e9663ef`；原資料不進Git。完整合成、握持／翅膀、混搭／卸裝及遊戲接入尚未驗收，不能延伸人類男性原型的F10結果。
 
+完整人物合成仍DRAFT，見[診斷摘要](../verification/hd-equipment-pages-20261015/fit-checkpoint.json)。三輪各115組CPU示意不列為通過；第三輪有17項最終呈現尺寸不足，以及頭／腰接縫及拳頭變形。分離翼部與皮甲修正版、完整合成與各輪幾何僅本機。後續使用部件實際邊界及握點校準，不能以水平裁切、拉扁拳頭或縮小呈現矩形來掩蓋素材尺寸缺口；武器與盾牌的HD呈現校準不得寫回typed座標、玩法或v3。
+
 ### 角色模板續作
 
 狀態：有限CONFORMED。實際`CHARPICS`有80張40×38模板，80個RGB指紋皆不同；已核准六張對應47、43、21、32、35、54，原圖與匹配優先序保持。

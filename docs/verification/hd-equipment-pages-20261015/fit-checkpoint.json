@@ -1,0 +1,273 @@
+{
+  "schema": "kol-hd-body-fit-checkpoint/1",
+  "status": "DRAFT",
+  "source_zip": {
+    "name": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "prior_body_candidate_receipt_sha256": "15cc860e54f21de81c1e874ba58115e1cafdf553aca9473beda02acf8cbe21e6",
+  "source_anchors_sha256": "9e5ce7da5a8771467e193d6a44d0bf4f91691e56054e988afee080637e9663ef",
+  "generated": [
+    {
+      "id": "perpics-003-separate-layers",
+      "file_local_only": "perpics-003-separate-layers-painted.png",
+      "sha256": "b1a4bfd4747dc5075058ea1a9e76ffae59b4ca1f986149d7328b3478eec80e49",
+      "size": [
+        1411,
+        1114
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "prompts/perpics-003-separate-layers.txt",
+      "prompt_sha256": "6ca0fdccd0e268196eab406074754576f4091d62fafca565b5fdfb9578c26b13",
+      "original_tool_file": "exec-cbf6a7fe-5b77-42a8-928e-9ef450e3bc19.png",
+      "source_archive": "PERPICS",
+      "source_index": 3,
+      "source_png": "assets/original-derived-png/ega/PERPICS/perpics-003.png",
+      "source_png_sha256": "aea716ae07bc8e82eae0c0192a3d8a3daf9915e119dac30dd041c8b425109b86",
+      "status": "DRAFT; full anatomical fit not accepted; PNG remains local"
+    },
+    {
+      "id": "torpics-036-waist-seam",
+      "file_local_only": "torpics-036-waist-seam-painted.png",
+      "sha256": "35e2a205e3f1679dba1120acf4bd3bb8e7e859bb89f50a64a0b5672475c4eccd",
+      "size": [
+        1402,
+        1122
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "prompts/torpics-036-waist-seam.txt",
+      "prompt_sha256": "070dcf9d1d6faf9d2a90a0563d5d5f5cd22ea90c9f8db4fc76dda7675ccc31ee",
+      "original_tool_file": "exec-638eb6f5-0e61-431a-bb67-6ca120aed90e.png",
+      "source_archive": "TORPICS",
+      "source_index": 36,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-036.png",
+      "source_png_sha256": "dba0bfa830c755b24e5bde306897466408e722b6c3c24ff75641009858f72c00",
+      "status": "DRAFT; full anatomical fit not accepted; PNG remains local"
+    }
+  ],
+  "generated_pngs_total_local": 46,
+  "fit_cpu_cases_per_revision": 115,
+  "revisions": 3,
+  "final_fit_receipt_local": "body-fit-study-v3.json",
+  "final_fit_receipt_sha256": "332926cd4a4aeccc19b53537662c988c376d93b54b9bbba15df79e1e9460470d",
+  "native_resolution_observations": [
+    {
+      "key": "LEGSPICS:27",
+      "native": [
+        278,
+        520
+      ],
+      "destination": [
+        276,
+        545
+      ]
+    },
+    {
+      "key": "TORPICS:27",
+      "native": [
+        362,
+        388
+      ],
+      "destination": [
+        402,
+        414
+      ]
+    },
+    {
+      "key": "LEGSPICS:28",
+      "native": [
+        274,
+        519
+      ],
+      "destination": [
+        264,
+        530
+      ]
+    },
+    {
+      "key": "TORPICS:28",
+      "native": [
+        380,
+        390
+      ],
+      "destination": [
+        408,
+        390
+      ]
+    },
+    {
+      "key": "LEGSPICS:29",
+      "native": [
+        277,
+        519
+      ],
+      "destination": [
+        294,
+        530
+      ]
+    },
+    {
+      "key": "TORPICS:29",
+      "native": [
+        366,
+        390
+      ],
+      "destination": [
+        408,
+        402
+      ]
+    },
+    {
+      "key": "LEGSPICS:30",
+      "native": [
+        290,
+        533
+      ],
+      "destination": [
+        294,
+        530
+      ]
+    },
+    {
+      "key": "TORPICS:30",
+      "native": [
+        362,
+        382
+      ],
+      "destination": [
+        420,
+        408
+      ]
+    },
+    {
+      "key": "TORPICS:31",
+      "native": [
+        379,
+        374
+      ],
+      "destination": [
+        408,
+        390
+      ]
+    },
+    {
+      "key": "TORPICS:32",
+      "native": [
+        368,
+        377
+      ],
+      "destination": [
+        408,
+        390
+      ]
+    },
+    {
+      "key": "TORPICS:33",
+      "native": [
+        365,
+        371
+      ],
+      "destination": [
+        408,
+        390
+      ]
+    },
+    {
+      "key": "TORPICS:34",
+      "native": [
+        380,
+        372
+      ],
+      "destination": [
+        408,
+        390
+      ]
+    },
+    {
+      "key": "LEGSPICS:35",
+      "native": [
+        282,
+        540
+      ],
+      "destination": [
+        294,
+        530
+      ]
+    },
+    {
+      "key": "TORPICS:35",
+      "native": [
+        383,
+        371
+      ],
+      "destination": [
+        420,
+        408
+      ]
+    },
+    {
+      "key": "LEGSPICS:45",
+      "native": [
+        269,
+        446
+      ],
+      "destination": [
+        288,
+        413
+      ]
+    },
+    {
+      "key": "LEGSPICS:51",
+      "native": [
+        267,
+        440
+      ],
+      "destination": [
+        300,
+        413
+      ]
+    },
+    {
+      "key": "LEGSPICS:53",
+      "native": [
+        273,
+        437
+      ],
+      "destination": [
+        276,
+        424
+      ]
+    }
+  ],
+  "visual_status": "not accepted; cases generated for inspection, not 115 passes",
+  "unresolved": [
+    "17 native resolution observations before READY",
+    "head/neck seams in helmet without upper armor",
+    "waist width and curve in mixed/partial slots",
+    "V3 mesh flattened female-elf fists; do not use as accepted runtime geometry",
+    "native grip locations and weapons/shields across six builds",
+    "wing atlas outer-edge contacts"
+  ],
+  "diagnoses": [
+    "V1 rectangular wing clipping loses roots; independent generated body/wings retained locally",
+    "V2 selected bra band instead of briefs on build5; V3 uses last measured blue band",
+    "V3 measures exposed waist above partial leg armor and separates arms from legs",
+    "Flat horizontal/rectangular anatomical cuts and independent axis scaling are not accepted fixes"
+  ],
+  "frozen": {
+    "production_audited_inputs": 385,
+    "production_runtime_inputs": 380,
+    "production_hd_asset_files": 88,
+    "prototype_v6_runtime_inputs": 381
+  },
+  "no_new_runtime_build_or_gui": true,
+  "no_new_f10_or_v3_claim": true,
+  "rights": "new prompts and summary only; new generated PNGs and diagnostic compositions stay local until visual acceptance",
+  "local_workspace": "workplace/hd-equipment-pages-20261015/"
+}
