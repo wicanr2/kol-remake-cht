@@ -1,0 +1,312 @@
+{
+  "schema": "kol-github-closeout/1",
+  "checked_on": "2026-10-14",
+  "repository": "wicanr2/kol-remake-cht",
+  "visibility": "private",
+  "user_authorized_issue_closure": true,
+  "before_open_count": 24,
+  "closed": [
+    {
+      "number": 2,
+      "title": "G03：競技場正常取得資格與完整垂直鏈",
+      "worklist_id": "g03-arena-vertical-chain",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:04:19Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/2",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/2#issuecomment-6160625116",
+      "completion_evidence": [
+        "docs/verification/player-path/arena.json",
+        "docs/verification/arena-natural-20261004/receipt.json"
+      ],
+      "before_detail_sha256": "073c322e3bbfdb318ebfb578786d1ac362dc01e8c9d02ab189715a56c5052d10",
+      "closing_text_sha256": "f11c44eaea141a9a85df1d145b6747d279c6ae3ea5105bc2505611b7c7d0b981"
+    },
+    {
+      "number": 4,
+      "title": "G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放",
+      "worklist_id": "g06-audio-listening-gate",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:04:30Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/4",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/4#issuecomment-6160627178",
+      "completion_evidence": [
+        "docs/spec/004-ogg-audio-catalog.md",
+        "docs/verification/audio/title-runtime.json"
+      ],
+      "before_detail_sha256": "1259e19c32f019eb65da52d87af883621cb65f0f6cac4e2e69d0622831b6bca3",
+      "closing_text_sha256": "44a32707292595ac2b879d3a498baaf4ca9057d5bfa66c08b41d85aa2a7d5567"
+    },
+    {
+      "number": 23,
+      "title": "生成 atlas／接觸表並逐批人工檢查",
+      "worklist_id": "atlas-and-contact-tables",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:04:41Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/23",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/23#issuecomment-6160628858",
+      "completion_evidence": [
+        "assets/original-derived-png/contact-sheets/manifest.json",
+        "tools/build_asset_contact_sheets.py",
+        "tools/verify_asset_contact_sheets.py",
+        "docs/spec/002-png-asset-extraction.md"
+      ],
+      "before_detail_sha256": "388ddb6c751095d1b013ceed2e7b9b245750727a250f31acb5439d163039c5bb",
+      "closing_text_sha256": "410a69b247ac9bcf274f41d1a8d52c6deb5ecc9192a96c3e33156936669183e3"
+    },
+    {
+      "number": 24,
+      "title": "實作 PIT 方波合成器並完成人耳驗收",
+      "worklist_id": "pit-square-wave-synth",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:04:52Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/24",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/24#issuecomment-6160631229",
+      "completion_evidence": [
+        "docs/spec/004-ogg-audio-catalog.md",
+        "docs/verification/audio/title-runtime.json"
+      ],
+      "before_detail_sha256": "3287e0f0859a9196f51eebc1c14463b434c1374265b896c86eee301c77ee44ca",
+      "closing_text_sha256": "5f3c26eb1c44a82726cca0548c62eb0bd1600afdcb82cd2d8cbdf3a070b096a3"
+    },
+    {
+      "number": 25,
+      "title": "SPEC-004 升 READY 後建立 OGG 轉換管線",
+      "worklist_id": "ogg-conversion-pipeline",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:05:01Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/25",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/25#issuecomment-6160632964",
+      "completion_evidence": [
+        "docs/spec/004-ogg-audio-catalog.md",
+        "docs/verification/audio/title-runtime.json"
+      ],
+      "before_detail_sha256": "334a1b77480a9e1481ed32b3a2b4ca6b4fcdb1cf298cf2f47f11df1d9c03d312",
+      "closing_text_sha256": "2b8ed16f981bae468b1999aeda9e9f073475caa062374d24de5bb16d14d530cb"
+    },
+    {
+      "number": 28,
+      "title": "補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle",
+      "worklist_id": "roster-full-ui-oracle",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:05:13Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/28",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/28#issuecomment-6160634829",
+      "completion_evidence": [
+        "docs/verification/character-ui/roster-boundaries-20261001/full-receipt.json",
+        "docs/verification/character-ui/roster-boundaries-20261001/duplicate-receipt.json",
+        "docs/verification/character-ui/roster-boundaries-20261001/charset-receipt.json"
+      ],
+      "before_detail_sha256": "f41ec60394330b46d691c9cb0b9edbb1d8673c9318f49d22449be44f2f23602a",
+      "closing_text_sha256": "dfee028eaa49d80172482f1e30304da5de84b35cc4ea0a85bbf7fff86a9ad3a2"
+    },
+    {
+      "number": 33,
+      "title": "攻擊式那一列（frame-899）與選目標格畫面的對拍",
+      "worklist_id": "attack-row-and-target-cursor",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:05:24Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/33",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/33#issuecomment-6160636969",
+      "completion_evidence": [
+        "internal/ui/battle.go",
+        "internal/ui/battle_cjk.go",
+        "docs/verification/battle-target-cursor-20261001/attack-row-receipt.json",
+        "docs/verification/battle-target-cursor-20261001/remake-receipt.json"
+      ],
+      "before_detail_sha256": "94d3aeccabbdbb0d8a6a6dbae8c9d090ddfc16b5fc246f1eb6ceff12b5f98f6e",
+      "closing_text_sha256": "2e7d8f5f3c44aad8167ece13290af4614f29b27b20ce6b959b2b54865fe74a4e"
+    },
+    {
+      "number": 35,
+      "title": "城鎮、世界、戰鬥畫面的中文化與職業名暫譯的交叉確認",
+      "worklist_id": "cjk-remaining-screens",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:05:41Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/35",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/35#issuecomment-6160639445",
+      "completion_evidence": [
+        "docs/verification/controlled-scenes-20261011/receipt.json"
+      ],
+      "before_detail_sha256": "0de4a5d2a4e5ca4014261cf3646aee96064199cf702a96489451c8eccefcc252",
+      "closing_text_sha256": "6e03fbc00bf4de7cb4095c47e1bf9d1aa53d48507be3c3286fb730d64d0a23ce"
+    },
+    {
+      "number": 36,
+      "title": "標題序列的雷聲播放接上 Ebitengine 音訊路徑",
+      "worklist_id": "title-thunder-audio-hookup",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:05:53Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/36",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/36#issuecomment-6160642167",
+      "completion_evidence": [
+        "docs/spec/004-ogg-audio-catalog.md",
+        "docs/verification/audio/title-runtime.json"
+      ],
+      "before_detail_sha256": "d2fe0412189ccc90c6772ad99cee5c1740372776c261f2777d95465dba81bbbf",
+      "closing_text_sha256": "d6826e92b1e5cc6075a76258ab5c1bf94b2beb11d09293f24e591736f737c18d"
+    },
+    {
+      "number": 43,
+      "title": "發 GitHub Release",
+      "worklist_id": "github-release",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:06:04Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/43",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/43#issuecomment-6160644311",
+      "completion_evidence": [
+        "README.md",
+        "docs/verification/release-v1.0.2-20261013.md"
+      ],
+      "before_detail_sha256": "c960f26bf90818c42f47036fcfdd8aa1be521f7276d8a2795b0fc8bb7d3e7323",
+      "closing_text_sha256": "709d89527b3f83922be880065b471a78180982e79061bc4caea59a9274ebbfc8"
+    },
+    {
+      "number": 48,
+      "title": "由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號",
+      "worklist_id": "dist-rebuild-version-number",
+      "before": "open",
+      "after": "closed",
+      "reason": "completed",
+      "closed_at": "2026-10-14T04:06:18Z",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/48",
+      "closing_comment": "https://github.com/wicanr2/kol-remake-cht/issues/48#issuecomment-6160647278",
+      "completion_evidence": [
+        "tools/closeout_release.py",
+        "docs/verification/release-v1.0.1-20261012.md"
+      ],
+      "before_detail_sha256": "e743de60c0cf89ba2ac6ce035c91bdc093e1551f3f6b8732f49be0c5615eee1a",
+      "closing_text_sha256": "5975dfbbb3aed60eb8e28245560cf72e9f996591bf9c18b16aca45d97254eda7"
+    }
+  ],
+  "after_open": [
+    {
+      "number": 106,
+      "title": "滑鼠語意與原版 sub_1B100 的三處差異（待使用者決定）",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/106"
+    },
+    {
+      "number": 64,
+      "title": "五處 UI 細節還沒對拍",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/64"
+    },
+    {
+      "number": 47,
+      "title": "存檔跨事件與戰鬥階段恢復：戰鬥中途狀態與世界時間",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/47"
+    },
+    {
+      "number": 44,
+      "title": "V01 剩餘：完整裝備、地形、指令及攻擊結算、正常 GUI 戰後保存鏈",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/44"
+    },
+    {
+      "number": 42,
+      "title": "Windows／macOS 真機驗收",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/42"
+    },
+    {
+      "number": 40,
+      "title": "最長繁中內容的視覺回歸、正常路徑截圖與輸入測試",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/40"
+    },
+    {
+      "number": 37,
+      "title": "Linux／Windows／macOS 可重現編譯與最小啟動 smoke",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/37"
+    },
+    {
+      "number": 34,
+      "title": "量測城鎮、世界、戰鬥畫面的文字版面",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/34"
+    },
+    {
+      "number": 22,
+      "title": "唯讀輸入的資產 inventory 與格式規格",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/22"
+    },
+    {
+      "number": 11,
+      "title": "補新版正常 GUI 與玩家可見 AI 行為驗收",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/11"
+    },
+    {
+      "number": 7,
+      "title": "V02：主機 FUSE、其他平台與推廣交付的驗收",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/7"
+    },
+    {
+      "number": 6,
+      "title": "V01：完整戰鬥同狀態結算、武器／護甲與保存的正常垂直鏈",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/6"
+    },
+    {
+      "number": 5,
+      "title": "G07：三個加速選項的詳細規格、控制與保存",
+      "url": "https://github.com/wicanr2/kol-remake-cht/issues/5"
+    }
+  ],
+  "remote_checks": "host gh auth status, issue view including comments, API state_reason and release assets",
+  "release": {
+    "assets": [
+      {
+        "digest": "sha256:0deb8b0b1de4ee831ae69dd443e719722c4cf9d258fb3ea3b0c8157b629bd6e0",
+        "id": 637230853,
+        "name": "kol-v.1.0.2-20261013-release-linux-x86_64.AppImage",
+        "size": 9067000
+      },
+      {
+        "digest": "sha256:31de977a353bbfdc1399b14ee6ec18990a525cd3de60fc30dd10b79b2a3edc80",
+        "id": 637230852,
+        "name": "kol-v.1.0.2-20261013-release-macos-universal.zip",
+        "size": 15192781
+      },
+      {
+        "digest": "sha256:e3a71ecede8af39f4ac74297010f50665a3ed46f67eda06120b51f7ec5781838",
+        "id": 637230848,
+        "name": "kol-v.1.0.2-20261013-release-windows-amd64.zip",
+        "size": 8142956
+      },
+      {
+        "digest": "sha256:6169edf9c0da253ba00dc25c7243606d5a1601987dd53e627b5fabdd4396df13",
+        "id": 637230847,
+        "name": "SHA256SUMS.txt",
+        "size": 345
+      }
+    ],
+    "draft": false,
+    "html_url": "https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013",
+    "id": 411748020,
+    "prerelease": false,
+    "published_at": "2026-10-13T14:10:05Z",
+    "tag_name": "v.1.0.2-20261013"
+  },
+  "local_release_hashes_match_remote": true,
+  "program_input_count": 363,
+  "program_inputs_unchanged": true,
+  "release_delivery": "existing verified build and upload v.1.0.2-20261013; immutable published artifacts reused",
+  "raw_snapshot_sha256": {
+    "kol-open-issues-20261014.json": "9f3cc4b82f19fd21eaaee3f0ed53c6e184a3625fcc623c28456ab53972747a24",
+    "kol-issues-after-20261014.json": "1e6cb86315ce9d2ba7694693ce5090fb4beac27b549c3397eb70957dc87ea667",
+    "kol-release-after-20261014.json": "361bce338b45b67a8de87e9269ef6ce3f0908a3c11b42b89b4d5e137175ddbdb"
+  }
+}

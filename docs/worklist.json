@@ -60,7 +60,7 @@
       },
       "issue": 2,
       "status": "done",
-      "resolved": "2026-10-04：docs/verification/arena-natural-20261004/receipt.json 與 verify.py；正常訓練位階1≠2、兩筆賭金189／452及完整v3保存通過。"
+      "resolved": "2026-10-04：docs/verification/arena-natural-20261004/receipt.json 與 verify.py；正常訓練位階1≠2、兩筆賭金189／452及完整v3保存通過。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "g05-picture-shield-editor-spec",
@@ -85,7 +85,7 @@
       "id": "g06-audio-listening-gate",
       "layer": "asset",
       "title": "G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放",
-      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；舊封包未更新。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
+      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；已包含於v.1.0.2-20261013完整版，三平台引擎包與校驗碼已上傳。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
       "acceptance": "人耳驗收完成、SPEC-004 升 READY，正式播放路徑接上。",
       "verify": {
         "kind": "required_in_all",
@@ -97,7 +97,8 @@
         "note": "RE-228正式雙語輸出、來源雜湊與回歸證據；封存verify.py另驗全部附件及有效聲長。"
       },
       "issue": 4,
-      "status": "done"
+      "status": "done",
+      "resolved": " 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "g07-battle-speed-options",
@@ -492,13 +493,13 @@
       },
       "issue": 23,
       "status": "done",
-      "resolved": "2026-10-01 77 頁正式圖集／manifest、兩支工具與 SPEC-002 索引以獨立本機 commit 1384e50 保存；803 張全母體、逐頁目視／逐像素及兩項反面對照通過。遠端 #23 尚未關閉。"
+      "resolved": "2026-10-01 77 頁正式圖集／manifest、兩支工具與 SPEC-002 索引以獨立本機 commit 1384e50 保存；803 張全母體、逐頁目視／逐像素及兩項反面對照通過。遠端 #23 尚未關閉。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "pit-square-wave-synth",
       "layer": "asset",
       "title": "實作 PIT 方波合成器並完成人耳驗收",
-      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；舊封包未更新。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
+      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；已包含於v.1.0.2-20261013完整版，三平台引擎包與校驗碼已上傳。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
       "acceptance": "合成器實作完成，段落結構比對通過，人耳驗收過。",
       "verify": {
         "kind": "required_in_all",
@@ -510,13 +511,14 @@
         "note": "RE-228正式雙語輸出、來源雜湊與回歸證據；封存verify.py另驗全部附件及有效聲長。"
       },
       "issue": 24,
-      "status": "done"
+      "status": "done",
+      "resolved": " 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "ogg-conversion-pipeline",
       "layer": "asset",
       "title": "SPEC-004 升 READY 後建立 OGG 轉換管線",
-      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；舊封包未更新。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
+      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；已包含於v.1.0.2-20261013完整版，三平台引擎包與校驗碼已上傳。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
       "acceptance": "管線可重跑，每批 OGG 有來源、參數與 SHA-256 收據。",
       "verify": {
         "kind": "required_in_all",
@@ -528,7 +530,8 @@
         "note": "RE-228正式雙語輸出、來源雜湊與回歸證據；封存verify.py另驗全部附件及有效聲長。"
       },
       "issue": 25,
-      "status": "done"
+      "status": "done",
+      "resolved": " 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "runtime-format-guard-test",
@@ -582,7 +585,7 @@
       },
       "issue": 28,
       "status": "done",
-      "resolved": "2026-10-01 三情境正常入口、固定 seed 1、目視 PNG 與實際三檔差分通過。只關閉原版證據 gate，正式差異另列 character-creation-boundary-parity。遠端 #28 尚未改寫。"
+      "resolved": "2026-10-01 三情境正常入口、固定 seed 1、目視 PNG 與實際三檔差分通過。只關閉原版證據 gate，正式差異另列 character-creation-boundary-parity。遠端 #28 尚未改寫。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "package-boundaries-and-injection",
@@ -678,7 +681,7 @@
       },
       "issue": 33,
       "status": "done",
-      "resolved": "2026-10-01完成原始攻擊式列與目標游標兩塊逐畫面條件；完整列包含六武器／八防禦選取與繞回，圓環包含空／有人、子選單、取消／摘要及遠程列出的狀態。完整戰鬥不由此結案；其他等待層由#64與V01追蹤。遠端尚未寫入。"
+      "resolved": "2026-10-01完成原始攻擊式列與目標游標兩塊逐畫面條件；完整列包含六武器／八防禦選取與繞回，圓環包含空／有人、子選單、取消／摘要及遠程列出的狀態。完整戰鬥不由此結案；其他等待層由#64與V01追蹤。遠端尚未寫入。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "target-mode-icon-bar-mouse",
@@ -728,13 +731,13 @@
       "blocking_for_current_closeout": false,
       "previous_acceptance": "三種畫面的中文都上得去且不溢出，職業名譯法定案。",
       "status": "done",
-      "resolved": "2026-10-11：依使用者新版場景標準完成，沒有將受控驗收升格為原版parity。"
+      "resolved": "2026-10-11：依使用者新版場景標準完成，沒有將受控驗收升格為原版parity。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "title-thunder-audio-hookup",
       "layer": "asset",
       "title": "標題序列的雷聲播放接上 Ebitengine 音訊路徑",
-      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；舊封包未更新。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
+      "body": "RE-228：使用者實際聆聽核准；原OGG保持。23次cue接正式播放器，雙語正常啟動、播放中SPACE離開與實際輸出通過。硬體時序為近似；已包含於v.1.0.2-20261013完整版，三平台引擎包與校驗碼已上傳。轉檔兩次相同雜湊、與已聆聽候選解碼相同，來源與參數可追溯。",
       "acceptance": "正常啟動時聽得到雷聲，且與畫面同步。",
       "verify": {
         "kind": "required_in_all",
@@ -746,7 +749,8 @@
         "note": "RE-228正式雙語輸出、來源雜湊與回歸證據；封存verify.py另驗全部附件及有效聲長。"
       },
       "issue": 36,
-      "status": "done"
+      "status": "done",
+      "resolved": " 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "cross-platform-build-smoke",
@@ -863,7 +867,7 @@
       "issue": 43,
       "blocking_for_current_closeout": false,
       "status": "done",
-      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。"
+      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "v01-remaining-battle-chain",
@@ -976,20 +980,20 @@
       "id": "dist-rebuild-version-number",
       "layer": "release",
       "title": "由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號",
-      "body": "v.1.0.1-20261012已從356份核准Go／module輸入重建三平台full／release六包及76秒1080p影片，含中文修正、首批HD與遊戲內切換。正式套件、唯一1046正常／13重載、實際AppImage與Wine ZIP、資料匯入及全部manifest／SHA-256通過。入口docs/verification/release-v1.0.1-20261012.md。前版保持；真機與原版parity由原項追蹤。",
+      "body": "v.1.0.2-20261013已從363份核對Go／module輸入乾淨重建三平台full／release六包及76秒1080p影片，含HD介面、頭像、四首配樂及F9／F10。正式套件、1046正常／13重載、實際AppImage與Wine ZIP、資料匯入、HD一色階及全部manifest／SHA-256通過。入口docs/verification/release-v1.0.2-20261013.md。四個遠端附件重新核對相符；真機與原版parity由原項追蹤。",
       "acceptance": "版本號定案，用它重建一次並驗收。",
       "verify": {
         "kind": "required_in_all",
         "paths": [
           "tools/closeout_release.py",
-          "docs/verification/release-v1.0.1-20261012.md"
+          "docs/verification/release-v1.0.2-20261013.md"
         ],
         "pattern": "--version",
         "note": "工具與驗收入口均要求明示--version；完整regex與拒絕覆寫由發行腳本檢查。產物雜湊由SHA256SUMS.json與bundle manifest獨立核對。"
       },
       "issue": 48,
       "status": "done",
-      "resolved": "2026-10-12本機新版驗收通過；不關閉原版parity或真機項。"
+      "resolved": "2026-10-12本機新版驗收通過；不關閉原版parity或真機項。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
     },
     {
       "id": "dist-package-sha256-verification",

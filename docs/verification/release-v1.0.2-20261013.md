@@ -19,6 +19,7 @@
 | 外部發布 | 僅指定private儲存庫的三個引擎包及checksum；完整版、原始資料及影片不上傳，舊tag／Release保持 |
 
 來源工具：[交付流水線](../../tools/closeout_release.py)、[封包啟動](../../tools/verify_release_runtime.py)、[封包控制](../../tools/verify_package_controls.py)、[影片合成](../../tools/compose_release_promo.py)。全程在有界Docker內執行，原始來源唯讀，輸出UID/GID1000。建置、驗證與失敗分類追加至[WORKLOG](../../WORKLOG.md)。
+交付流水線需明示`--version v.1.0.2-20261013`，拒絕裸日期及缺少版本參數；既有發布版本不覆寫。容器內以`/src`唯讀來源、`/out`交付根目錄執行，現行工具映像與腳本快照見交付的`smoke/tool-images.json`及`smoke/recipe/`。
 
 Windows／Linux的[同主題實際封包對比](release-v1.0.2-20261013/review.html)與[來源清冊](release-v1.0.2-20261013/manifest.json)已保存。首次候選EGA十組逐像素相同，HD十組逐通道最大差2／255；未達預登記的一色階數值標準，原結果保留。中文、幾何與畫面目視相同。使用者當時選擇「維持一色階標準，暫緩發布」，首次候選未建立tag或Release，不把結構驗證當成發行就緒。下方修正後完整重建並通過數值閘門，使用者才在最後確認解除暫緩。
 
@@ -51,3 +52,9 @@ Windows／Linux的[同主題實際封包對比](release-v1.0.2-20261013/review.h
 [76秒推廣影片](../../dist-all/v.1.0.2-20261013/promo/kol-v.1.0.2-20261013-promo.mp4)、[十幕檢查圖](../../dist-all/v.1.0.2-20261013/promo/contact-sheet.png)、[引擎包校驗碼](../../dist-all/v.1.0.2-20261013/release/SHA256SUMS.txt)及[完整交付雜湊](../../dist-all/v.1.0.2-20261013/SHA256SUMS.json)均已保存。完整遊戲、影片與原始音訊捕捉僅本機；公開收據不含原始保存或WAV。
 
 首次候選及三環境修正的完整證據由[本機保存清冊](local/hd-pixel-consistency-20261013/retention.json)索引，原失敗及原雜湊保持。Linux僅解包執行，未驗主機FUSE；Windows僅Wine，macOS未執行。此結果不涵蓋所有GPU、完整正常通關或新增原版parity。
+
+## GitHub Issue 收尾
+
+2026-10-14依使用者指示核對遠端全文、留言與完成收據，關閉#2、#4、#23、#24、#25、#28、#33、#35、#36、#43、#48。十一項均回讀為closed／completed，各附上範圍與證據；其餘十三個遠端Issue保留。結果及逐附件重核見[Issue與Release收尾收據](release-v1.0.2-20261013/issue-closeout-20261014.json)。
+
+現行三平台引擎包與校驗碼已打包上傳，本次再次核對遠端大小及SHA-256一致；363份正式程式輸入保持，沿用已驗收的v.1.0.2-20261013。

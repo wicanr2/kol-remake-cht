@@ -28,6 +28,7 @@ HD 已選手繪及 1920×1200 原比例，[第一批已接入](docs/verification
 核准的[HD操作介面與旅店頭像](docs/verification/hd-interface-runtime-20261012.md)已接開發版並有限驗收。
 四首中世紀室內樂及獨立F9已核准並[接入驗收](docs/verification/hd-music-runtime-20261013.md)。已完成[三平台新版交付](docs/verification/release-v1.0.2-20261013.md)，既有版本保持。
 使用者維持HD一色階標準，修正後三環境三十組及實際封包二十組通過；六包、保存重載及76秒影片完成。使用者最終go解除暫緩，private Release四附件及tag已核對，原兩色階失敗保留。
+GitHub十一個已完成Issue已關閉並回讀為completed，遠端十三項保持開放，見[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json)。
 
 涉及未決設計的分支等待使用者確認，不自行視為同意。
 
@@ -175,9 +176,9 @@ tools/run_python_tool.sh tools/worklist.py verify
 ### 本輪核實為已完成（原本掛在未完成清單上）
 
 - **g01-cjk-sheet-pages** — G01：繁中資料頁與 MIRROR／物品／隊伍／法術／任務入口：2026-09-11 接上：中文模式的角色資料頁開得起來，而且**版面直接用 `town.SheetLayout × book.CJKScale`，沒有第二份座標表**。倍率從 2 改成 3（畫布 960×600）是算出來的：中文字模格高 18，原版最小行距 6，`6 × 3` 剛好；兩倍只給得起 12，那才是原本要重排、要把抬頭六列併成四列的原因。三倍之後抬頭六列、屬性八列、武器四列、金幣三列與兩條長條全部留在原位。標籤取記錄 0x73 那十四段的譯文（早就翻好了）。畫面在 docs/screenshots/zh-town-sheet.png，倍率判準的測試在 internal/ui/sheet_cjk_test.go（帶反面對照：兩倍要放不下），verify_text_fit 6,937 項全過。
-- **g03-arena-vertical-chain** — G03：競技場正常取得資格與完整垂直鏈：2026-10-04：docs/verification/arena-natural-20261004/receipt.json 與 verify.py；正常訓練位階1≠2、兩筆賭金189／452及完整v3保存通過。
+- **g03-arena-vertical-chain** — G03：競技場正常取得資格與完整垂直鏈：2026-10-04：docs/verification/arena-natural-20261004/receipt.json 與 verify.py；正常訓練位階1≠2、兩筆賭金189／452及完整v3保存通過。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **g05-picture-shield-editor-spec** — G05：圖像／盾牌編輯另立規格：已完成
-- **g06-audio-listening-gate** — G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放：已完成
+- **g06-audio-listening-gate** — G06：音訊候選人耳驗收、SPEC-004 升 READY 後接正式播放： 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **planning-yes-confirm** — 規劃段選完指令要按 YES 才換人（原版流程）：使用者 2026-09-29 決定照原版流程。寫回後停在同一名、白框在 YES，按 YES 才換人；+0x25 跨回合保留，新回合直接按 YES 即沿用。指令列重畫時依 word_31122 標出目標格（RE-160）。戰鬥驅動器同步改為下完指令後按 RET 確認，收據依新按鍵重生。
 - **ai-style-mask-tail** — 敵人攻擊式遮罩第 8、9 筆照原版讀名冊清單殘值：使用者 2026-09-29 選照原版模擬。town.Session.RosterListTail 在開名冊清單時記下第 8、9 名的槽號，三種戰鬥建立時帶進 State.StyleMaskTail；只存在記憶體、程式啟動為 0。靜態盤點確認一般遊玩中只有名冊清單會寫那兩格（RE-159）。住宿後隊伍空了答 NO 改為進名冊流程，與原版 0x128A5 相同。
 - **d01-spec-stale-clauses** — D01：逐項清除 SPEC-005、008、010～015 的過時禁作與未決條款：已完成
@@ -194,27 +195,27 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **spec-backfill-stale-clauses** — 回填 SPEC-008／010／011／012／014／015 的過時禁作條款與現況：已完成
 - **weather-animation-and-speed** — 接正式天候動畫（加速選項併入 g07-battle-speed-options）：已完成
 - **spec-manual-page-links** — 讓規則 spec 連回說明書頁碼：2026-09-26 25 份規則規格（005～029）末尾加「說明書對照」表，逐段列出 PDF 頁、印刷頁與 docs/manual/chapters/ 章節連結，並寫明說明書沒寫、改以原版證據為準的部分；015、028、029 明示說明書無對應。001～004（工具與素材契約）與 030～035（中文版面）不屬規則規格。連結全數可解析。
-- **atlas-and-contact-tables** — 生成 atlas／接觸表並逐批人工檢查：2026-10-01 77 頁正式圖集／manifest、兩支工具與 SPEC-002 索引以獨立本機 commit 1384e50 保存；803 張全母體、逐頁目視／逐像素及兩項反面對照通過。遠端 #23 尚未關閉。
-- **pit-square-wave-synth** — 實作 PIT 方波合成器並完成人耳驗收：已完成
-- **ogg-conversion-pipeline** — SPEC-004 升 READY 後建立 OGG 轉換管線：已完成
+- **atlas-and-contact-tables** — 生成 atlas／接觸表並逐批人工檢查：2026-10-01 77 頁正式圖集／manifest、兩支工具與 SPEC-002 索引以獨立本機 commit 1384e50 保存；803 張全母體、逐頁目視／逐像素及兩項反面對照通過。遠端 #23 尚未關閉。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
+- **pit-square-wave-synth** — 實作 PIT 方波合成器並完成人耳驗收： 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
+- **ogg-conversion-pipeline** — SPEC-004 升 READY 後建立 OGG 轉換管線： 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **runtime-format-guard-test** — 建立測試，保證 runtime 只會讀 PNG 與 OGG：2026-09-26 靜態守門（容器沒有 strace、Go 不經 libc）：main.go 旗標預設路徑須在 assets/ 或 docs/ 且為 PNG／JSON／TSV／OGG 或目錄；cmd 與 internal 非測試程式碼不得有像原版檔名的字面值；assets.Decode 拒絕非 PNG、逃出目錄與內容非 PNG。自我負例與把旗標改成原版封裝的真實負例皆失敗。
 - **release-asset-separation** — 分離本機、private-repo PNG 與可公開輸出：已完成
-- **roster-full-ui-oracle** — 補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle：2026-10-01 三情境正常入口、固定 seed 1、目視 PNG 與實際三檔差分通過。只關閉原版證據 gate，正式差異另列 character-creation-boundary-parity。遠端 #28 尚未改寫。
+- **roster-full-ui-oracle** — 補 16 槽全滿、重名與名字欄字元集合的正常 UI oracle：2026-10-01 三情境正常入口、固定 seed 1、目視 PNG 與實際三檔差分通過。只關閉原版證據 gate，正式差異另列 character-creation-boundary-parity。遠端 #28 尚未改寫。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **package-boundaries-and-injection** — 定義 package 邊界、固定 timestep、可注入 RNG／clock／input 與存檔 schema 草案：已完成
 - **minimal-player-chain** — 選一條最小玩家鏈：PNG → typed data → 一個互動 → UI → 存讀檔：已完成
 - **picture-shield-bitmap-editor** — EDIT PICTURE／EDIT SHIELD 的點陣圖編輯器：2026-09-29 依使用者決定實作（SPEC-036 CONFORMED）：internal/bitmapedit 照 sub_1293E／sub_146CE 的按鍵與滑鼠規則，書本 EDIT PICTURE／EDIT SHIELD 經選角清單進入、存檔後回清單；自訂圖存進 kol-save-v3 的 picture／shield；圖像畫在城鎮隊伍格、資料頁抬頭與戰鬥資訊框，個人盾牌在資料頁立繪型別 3 時貼上（RE-161）。原版同狀態：同一串鍵存檔結果 760 byte 相同、進場畫格除滑鼠指標外逐像素相同。滑鼠路徑未與原版實跑比較。
 - **building-followup-dialogue** — 建築進門後的發言者選擇、好惡與教派（訊息 14、15、16）：已完成
-- **attack-row-and-target-cursor** — 攻擊式那一列（frame-899）與選目標格畫面的對拍：2026-10-01完成原始攻擊式列與目標游標兩塊逐畫面條件；完整列包含六武器／八防禦選取與繞回，圓環包含空／有人、子選單、取消／摘要及遠程列出的狀態。完整戰鬥不由此結案；其他等待層由#64與V01追蹤。遠端尚未寫入。
+- **attack-row-and-target-cursor** — 攻擊式那一列（frame-899）與選目標格畫面的對拍：2026-10-01完成原始攻擊式列與目標游標兩塊逐畫面條件；完整列包含六武器／八防禦選取與繞回，圓環包含空／有人、子選單、取消／摘要及遠程列出的狀態。完整戰鬥不由此結案；其他等待層由#64與V01追蹤。遠端尚未寫入。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **target-mode-icon-bar-mouse** — 選目標格那一層的圖示列怎麼接滑鼠：已完成
-- **cjk-remaining-screens** — 指定場景的繁體中文與畫面驗收：2026-10-11：依使用者新版場景標準完成，沒有將受控驗收升格為原版parity。
-- **title-thunder-audio-hookup** — 標題序列的雷聲播放接上 Ebitengine 音訊路徑：已完成
+- **cjk-remaining-screens** — 指定場景的繁體中文與畫面驗收：2026-10-11：依使用者新版場景標準完成，沒有將受控驗收升格為原版parity。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
+- **title-thunder-audio-hookup** — 標題序列的雷聲播放接上 Ebitengine 音訊路徑： 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **spec-ready-before-implement** — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣：已完成
-- **github-release** — 發 GitHub Release：2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。
+- **github-release** — 發 GitHub Release：2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
-- **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號：2026-10-12本機新版驗收通過；不關閉原版parity或真機項。
+- **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號：2026-10-12本機新版驗收通過；不關閉原版parity或真機項。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。
 - **dist-package-sha256-verification** — 發行包的 SHA-256 驗收：2026-09-26 verify_packages.py 新增 check_manifest：三包逐檔重算 SHA-256 與大小，並抓清單外的多餘檔與清單列了卻不存在的檔；verify_dist.sh 經由它執行，本機 AppImage 驗收也呼叫 --manifests-only。v.0.2.5 三包通過；竄改、多檔、少檔三個負例皆失敗。舊版 0.2.1 的 full 因 2026-09-04 打包工具排除所有 manifest.json，漏列 assets/ui-font/manifest.json，新檢查會報出，舊交付未改。
 - **world-battle-click-regions** — 野外與戰鬥兩層的滑鼠可點區域：2026-09-11 接上：野外的圖示列、戰鬥規劃段的指令列、戰利品畫面的兩張清單與圖示列都走既有的 iconTargets／input.Row，token 與鍵盤同一套。驗收在 cmd/kol/world_battle_mouse_test.go（四支），正反對照過——拆掉「露營時不列」與「選目標格不列」兩道閘門測試會開口。**選目標格那一層故意不列**：原版那裡收的是座標直接指格（SPEC-010 §3 的 X 0x130…0x250、Y 8…0x98），語意是「指這一格」不是「搬白框幾步」，用 token 序列表達會變成另一回事；另立 battle-target-cursor-click 追。
 - **inn-disband-exit** — 正式的離開遊戲：在旅店把人解散：2026-09-11 核實：town 與 flow 兩層都已接上——住宿即存檔即離隊、隊伍空了問記錄 0x36、答 YES 由 flow 轉回書本目錄（對應原版的 sub_2DB2A("kolbook.exe", 0)）。town 那一側原本就有 TestInnStayQuitsWhenPartyEmpties，這一輪補上 flow 的銜接測試 TestInnDisbandReturnsToContents（含反面對照：quit 只能取走一次）。Ctrl+Q 留著當額外退路——人不一定停在旅店裡。

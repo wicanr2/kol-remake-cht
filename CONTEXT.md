@@ -96,11 +96,11 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 359份Go及2份module；四首配樂與獨立F9已接入正式Update／Draw；[來源收據](docs/verification/hd-music-runtime-20261013/receipt.json) | 開發版接入；現行v.1.0.1-20261012保持 |
-| 最近測試 | cmd／internal與sceneverify通過；四首OGG、實際標題／旅店跨輪、F9／F10及缺件通過；正常住宿v3除saved_at相同，新程序重載7狀態與中文相同 | HD重載字緣最多1色階的GPU舍入另列；探索／戰鬥採準備存檔，原版整場parity及平台真機未新增 |
+| 正式來源 | 361份Go及2份module；四首配樂、F9及固定整數HD取樣已納入v.1.0.2-20261013；[來源與交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 來源commit39c1b6ee，發行tag固定指向46a01f11；後續文件提交不改正式程式 |
+| 最近測試 | cmd／internal與sceneverify通過；固定正常1046狀態及13新程序重載、完整v3除saved_at保持；實際封包F9／F10與音訊通過，二十組EGA零差／HD最多一色階 | 首次兩色階失敗保留；探索／戰鬥配樂採準備存檔，原版整場parity及平台真機未新增 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
-| 跨平台 | [前版回歸](docs/verification/platform-quest-rng-20261007.md)：現行來源Linux逐byte重生、Windows AMD64及macOS兩架構／universal建置通過；Linux／Wine原正常鏈4620狀態、808PNG及Windows最新任務3888狀態、90PNG符合基準；本版六個封包另見[交付驗收](docs/verification/release-v1.0.0-20261011.md) | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
+| 跨平台 | [現行交付驗收](docs/verification/release-v1.0.2-20261013.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal六包通過；實際AppImage及Wine兩個ZIP啟動、F9／F10與音訊通過，遠端四附件大小及SHA相符 | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
 | 正常 AI 抽樣 | [反制掃描](docs/re/20261006-ai-counter-normal.md)、[成功側翼](docs/re/20261006-clockwise-flank-normal.md)、[成功撤退](docs/re/20261006-flee-normal.md) 已有有限正常案例 | 其他戰局、困住撤退及成功怪物拾取仍開放 |
 | 最新原版試驗 | RE-295 真保存角色正常出城，seed1、169延伸鍵、170狀態；與現行首次紮營及111個同期世界標籤／日期框相符 | 本上限內沒有自然騎走問答；紮營後26個方向鍵原版忽略、現行換日，完整野外對拍未通過 |
 | 怪物拾取證據 | [RE-292](docs/re/20261006-monster-pickup-low-strike.md)：883狀態、10回合、2264次自然亂數；完整16-byte掉物1筆 | 未取得站立空手怪物或成功拾取，不延長同場挑結果 |
@@ -110,8 +110,9 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | [首批遊戲接入](docs/verification/hd-runtime-20261011.md)、[遊戲內切換](docs/verification/display-switch-runtime-20261012.md)及[操作介面與NPC頭像](docs/verification/hd-interface-runtime-20261012.md)已有限驗收；[室內樂試聽](docs/verification/hd-music-20261012/review.html)技術通過 | 介面最新批次為開發版；配樂人耳待確認。其他人物、裝備、地圖及傷勢遮罩未完成；資料PNG不重繪 |
-| 交付 | `v.1.0.1-20261012`：三平台full／release、76秒1080p影片；private GitHub Release已發布，四附件完整性與tag核對通過，入口[本版收據](docs/verification/release-v1.0.1-20261012.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
+| HD | 首批門面、六人肖像、旅店頭像、中文字與操作介面、遊戲內F10及四首已聆聽核准的原創配樂／F9均已隨v.1.0.2交付；[本版收據](docs/verification/release-v1.0.2-20261013.md) | 其他人物、裝備、地圖及傷勢遮罩未完成；資料PNG不重繪 |
+| 交付 | `v.1.0.2-20261013`：三平台full／release、76秒1080p影片；private Release已發布，四附件完整性與46a01f11 tag核對通過，入口[本版收據](docs/verification/release-v1.0.2-20261013.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
+| GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，16開放／92已核實完成不變 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：
 `2a885b9a37e884d1830010f7ccb1051b030fe4b14c678fbb71a25955a745fd66`。
