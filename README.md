@@ -127,6 +127,19 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [五組對比](docs/verification/hd-character-templates-20261014/review.html)另含弓手與矮人。遊戲內F10可切換，16字元姓名完整縮放於原框；新增角色的頭像可隨v3保存重載。
 人物裝備合成及其他NPC仍待HD，範圍、來源與限制見[本批驗收](docs/verification/hd-character-templates-20261014.md)。
 
+### 原型：完整物品與隊伍頁
+
+隔離原型已加入城鎮／野外手繪背板、人類男性裝備部件及原生中文。下圖是在同一角色狀態下用遊戲內F10切換的實際視窗。
+這批尚未接入正式版；武器、盾牌及其他體型仍待HD，不能視為全畫面完成。
+
+| 重製中文 EGA | 隔離 HD 原型 |
+|---|---|
+| ![物品頁EGA](docs/verification/hd-equipment-pages-20261015/items-ega.png) | ![物品頁HD原型](docs/verification/hd-equipment-pages-20261015/items-hd.png) |
+| ![隊伍頁EGA](docs/verification/hd-equipment-pages-20261015/party-ega.png) | ![隊伍頁HD原型](docs/verification/hd-equipment-pages-20261015/party-hd.png) |
+
+[比較頁](docs/verification/hd-equipment-pages-20261015/review.html)另含小視窗、九款部件及四盾候選。
+物品／隊伍狀態與兩種視窗的鍵鼠切換已核對，範圍見[原型紀錄](docs/verification/hd-equipment-pages-20261015.md)。
+
 ### 事件畫面：原版與 HD
 
 七段結局已接入開發版，沿用手繪、紅黑銅框與原生 HD 中文。現行 `v.1.0.2-20261013` 發行包保持，尚未包含本批。

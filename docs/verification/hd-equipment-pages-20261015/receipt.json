@@ -1,0 +1,295 @@
+{
+  "schema": "kol-hd-equipment-pages-prototype/1",
+  "status": "DRAFT",
+  "baseline_commit": "346723faed360912436d0122e85aadb3bac3c192",
+  "production_go_and_module_unchanged": true,
+  "production_runtime_source_count": 380,
+  "baseline_audit_count": 385,
+  "prototype_runtime_source_count": 381,
+  "source_zip": {
+    "name": "kol.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_layout_sha256": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df",
+  "input_maps": [
+    "baseline-inputs.json",
+    "prototype-inputs-v3.json",
+    "prototype-inputs-v4.json"
+  ],
+  "programs": {
+    "prototype-initial": "9327fba73b0dab42e62a4fc5581e462e32eb7a4b8be95e741edf8996a3b1e577",
+    "gui-prototype": "0868aa28d3ea03ce87acc71d5337f22598515ad8d3a12b4580c972b5f60dfe50",
+    "prototype": "89fad09c414597f7485b284ab4e0cb4c41ce56bc8fd29d33ab4450af5134fbff",
+    "baseline": "2d31dc2cc746346909626b31bf2921ec03f053997fedfd1019b7b66ffd66d8ef"
+  },
+  "docker_image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+  "remake_seed": 1,
+  "original_oracle": "not used; this is a remake presentation test",
+  "scope": {
+    "original_equipment_pngs": 212,
+    "original_equipment_archives": 7,
+    "generated_pngs_including_superseded": 14,
+    "base_body_candidates": 6,
+    "male_human_head_torso_leg_styles": 27,
+    "painted_backdrops": 2,
+    "shield_candidates_not_integrated": 4,
+    "native_control_sources": [
+      "KOLMPICS:12",
+      "KOLMPICS:4"
+    ]
+  },
+  "source_entries": "source-entries.json",
+  "generation": "generation.json",
+  "previous_v3_control_paths": {
+    "status": "DRAFT",
+    "cases": [
+      {
+        "case": "human-slots",
+        "states": 31,
+        "ega_exact_frames": 31,
+        "text_records": 137
+      },
+      {
+        "case": "human-detail",
+        "states": 18,
+        "ega_exact_frames": 18,
+        "text_records": 110
+      },
+      {
+        "case": "human-party",
+        "states": 17,
+        "ega_exact_frames": 17,
+        "text_records": 84
+      },
+      {
+        "case": "winged-regression",
+        "states": 10,
+        "ega_exact_frames": 10
+      }
+    ],
+    "total_states": 76
+  },
+  "final_v4_binding_path": {
+    "scene": "human-slots",
+    "states": 31,
+    "variants": [
+      "baseline-ega",
+      "prototype-ega",
+      "prototype-hd",
+      "baseline-hd"
+    ],
+    "ega_exact_frames": 31,
+    "equal_text_records": 137
+  },
+  "tests": {
+    "v3_full": "passed",
+    "v3_sceneverify": "passed",
+    "v4_ui_and_cmd": "passed",
+    "v4_sceneverify": "passed"
+  },
+  "gui": {
+    "status": "DRAFT",
+    "rounds": [
+      {
+        "scene": "items-large",
+        "mouse": false,
+        "size": [
+          1920,
+          1200
+        ],
+        "hd_max_channel_delta": 0,
+        "state_sha256": "e0b313900c4633ed77df92d8af9b87e471078e5a29b4da7228da11e42f35fbc5",
+        "files": [
+          "items-large-before.png",
+          "items-large-ega.png",
+          "items-large-restored.png"
+        ]
+      },
+      {
+        "scene": "items-small",
+        "mouse": true,
+        "size": [
+          960,
+          600
+        ],
+        "hd_max_channel_delta": 0,
+        "state_sha256": "e0b313900c4633ed77df92d8af9b87e471078e5a29b4da7228da11e42f35fbc5",
+        "files": [
+          "items-small-before.png",
+          "items-small-ega.png",
+          "items-small-restored.png"
+        ]
+      },
+      {
+        "scene": "party-large",
+        "mouse": false,
+        "size": [
+          1920,
+          1200
+        ],
+        "hd_max_channel_delta": 0,
+        "state_sha256": "c21ac1009fc3b212373a6f0dc1399d01f34469359ee3476124274d4868955b1b",
+        "files": [
+          "party-large-before.png",
+          "party-large-ega.png",
+          "party-large-restored.png"
+        ]
+      },
+      {
+        "scene": "party-small",
+        "mouse": true,
+        "size": [
+          960,
+          600
+        ],
+        "hd_max_channel_delta": 0,
+        "state_sha256": "c21ac1009fc3b212373a6f0dc1399d01f34469359ee3476124274d4868955b1b",
+        "files": [
+          "party-small-before.png",
+          "party-small-ega.png",
+          "party-small-restored.png"
+        ]
+      }
+    ],
+    "display_events": [
+      "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=toggle hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=ega hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=toggle hd=false state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=hd hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38",
+      "display action=back hd=true state=e3ecd887f380e8db2474e316020bada8484c6be3c494cd6932708ce9d8c6ff38"
+    ],
+    "save_before": null,
+    "save_after": null,
+    "exit_code": 0
+  },
+  "pictures": [
+    {
+      "file": "items-ega.png",
+      "sha256": "0507ea367c9241a35e2ff375cfb0acf55a74dfaf7e095914608fca5131663868",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "完整物品頁",
+      "theme": "EGA",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    },
+    {
+      "file": "items-hd.png",
+      "sha256": "b511d4dedc29e7f180b5188473c4cc05b2bded8ba506b6b6a0e95156e2715de1",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "完整物品頁",
+      "theme": "HD prototype",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    },
+    {
+      "file": "items-small-hd.png",
+      "sha256": "4c68e28d73c62b27922d4b41c01282edabeed0684d244022abfa431e8d2bdcbf",
+      "width": 960,
+      "height": 600,
+      "kind": "actual X11 game screenshot",
+      "scene": "完整物品頁",
+      "theme": "HD prototype",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    },
+    {
+      "file": "party-ega.png",
+      "sha256": "88d64940ef9bf8ad83fd66bfd0cf2d8b91f306470c90a81f6c20698a9943e32a",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "隊伍頁",
+      "theme": "EGA",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    },
+    {
+      "file": "party-hd.png",
+      "sha256": "501edacdb933657a1a1bc868af37e3022148bdacb1948ce302f881209db26014",
+      "width": 1920,
+      "height": 1200,
+      "kind": "actual X11 game screenshot",
+      "scene": "隊伍頁",
+      "theme": "HD prototype",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    },
+    {
+      "file": "party-small-hd.png",
+      "sha256": "0ec7f7a959e279a3acb24c0957aafc038c4be0d0aa04be17e77fb5d2b85b1b31",
+      "width": 960,
+      "height": 600,
+      "kind": "actual X11 game screenshot",
+      "scene": "隊伍頁",
+      "theme": "HD prototype",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    },
+    {
+      "file": "outfits-candidate.png",
+      "sha256": "cb5dd43494d9994ede834d897ad350d0c0f64a5a5c8d0be4da3efccd20e3f08f",
+      "width": 1500,
+      "height": 1980,
+      "kind": "CPU composition study, not a game screenshot",
+      "scene": "人類男性九款部件",
+      "theme": "HD candidate",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    },
+    {
+      "file": "shields-candidate.png",
+      "sha256": "20348ff763b75f999d0b8620c1b93cd2c965b1b869ee835a7c90a99bac82ffa0",
+      "width": 1254,
+      "height": 1254,
+      "kind": "generated asset not yet integrated",
+      "scene": "四盾候選",
+      "theme": "HD candidate",
+      "rights": "private GitHub PNG exception; no public redistribution"
+    }
+  ],
+  "limitations": [
+    "DRAFT prototype, no production code integration",
+    "weapons and shields still original in game; new shields not integrated",
+    "only male-human equipment composition integrated in prototype",
+    "other builds, all item-action icons, two-hand and party occlusion still open",
+    "no new v3 stay/reload, original parity, full completion or hardware claims",
+    "ALSA null sink for GUI; no listening claim"
+  ],
+  "local_workspace": "workplace/hd-equipment-pages-20261015/",
+  "raw_models_and_saves": "local only; not copied here",
+  "source_inventory": "source-inventory.json",
+  "baseline_hd_assets": "baseline-hd-assets.json",
+  "previous_v3_program_sha256": "b93d502520361970df1fcea6b4f3b9e3b6fe240ba8bba3db522d64db2edc1124",
+  "metadata_hashes": {
+    "generation.json": "50d3c062a9d7a2952f48df9006e211a1dd0471993f96ebb83040295b22d6a9d3",
+    "source-entries.json": "fc66c285c77c5a4ba93735081721a5d6077838b9a95fd452835b938b19183ec5",
+    "source-inventory.json": "e71aa19e04855c1f3cc6a42f762b6f9e58a0bb10fa5a1359c00e5f704edcd87d",
+    "baseline-hd-assets.json": "53b5327fa6daedd2b5e5e3df1c7fa88401138cdc874a78254f2697f4140124d1",
+    "baseline-inputs.json": "0d742c07a3e6300aa4223c91a02997b72fd23a2979466b36930821d5c7769c4d",
+    "prototype-inputs-v3.json": "e5b93ea4d2da1accabd9af577d1784840e9bad1f2f61816102af8de63dbf7679",
+    "prototype-inputs-v4.json": "0c6da94eb15803f1b9db49dbeeaae7cfbcf77c7ba2e13e00b0f8a62aed357dac"
+  },
+  "tool_versions": {
+    "python": "3.11.2",
+    "pillow": "9.4.0",
+    "go": "go version go1.26.7 linux/amd64",
+    "ebitengine": "v2.9.9"
+  },
+  "docker_image_id": "sha256:0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f"
+}
