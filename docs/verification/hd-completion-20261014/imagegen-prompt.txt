@@ -1,0 +1,10 @@
+Use case: illustration-story
+Asset type: HD hand-painted event illustration candidate for the traditional Chinese Knights of Legend remake, ending panel 0. This is artwork only, not a UI screenshot.
+Input images: Image 1 is a composition and story reference (the original EGA ENDPICS panel 0, a small armored companion and a tall red-cloaked knight seen from behind facing an enormous inset stone door). Image 2 is the approved remake hand-painted inn facade and is a style/material reference only. Do not insert the inn or its roof/windows.
+Primary request: Repaint the exact narrative content of Image 1 as a high-detail hand-painted fantasy illustration, matching Image 2's brushwork, restrained warm copper/red palette, readable stone and cloth textures. Preserve the rear-facing tall knight in a steel helmet, chainmail and long red cloak near center-left, the shorter armored companion at lower left, the towering dark grey cliff and monumental rectangular stone door at right, and sparse green plants at the base. The knight is cautiously fitting a small key into the stone door's mechanism. Preserve the sense of the original composition and relative scale, not its pixel grid. Frame the entire stone doorway and both figures fully. No extra characters, new monsters, swords in hand or story beats. Soft torchlike warm reflected light near the figures, cool dark cliff stone, quiet cautious mood.
+Composition: landscape 4:3, approximately 1536x1152; no borders, no UI, no text, no watermarks. Original painted raster detail, not filtered enlargement or pixel art.
+
+Route: built-in image_gen.imagegen; model identifier not exposed by tool.
+Generated source: /home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-065d2d1a-0156-4217-b602-50faf8915fde.png
+Saved candidate: docs/verification/hd-completion-20261014/ending-0-painted-candidate.png
+Status: disposable candidate, not an approved runtime asset.

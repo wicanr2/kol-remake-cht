@@ -8,13 +8,22 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 目前採[受控場景驗收](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血與提高攻擊，
 抵達指定場景後確認中文與畫面。登記場景已通過，結果見[驗收收據](docs/verification/controlled-scenes-20261011.md)。
 本版包含住宅告示、中文目錄、結局排版修正、HD介面與頭像、四首原創室內樂，以及遊戲內F9配樂與F10畫面切換。
+建立隊伍與[商店購買](docs/verification/player-path/town-shop-receipt.json)已有操作收據；七段結局已通過受控展示，
+從新開局正常完成全部任務至結局仍未驗證。HD 目前只完成部分介面與美術，完整範圍見下方計畫。
 
 ## 遊戲背景
 
-故事發生在阿什塔拉瑞亞半島。人類、精靈與矮人在此建立聚落，卻曾遭巫師 Pildar
-的大軍侵襲。騎士 Seggallion 與盟軍終結黑暗戰爭後，各地重建了十五年；如今英雄
-失蹤，森林裡的怪物再度增多。玩家帶領冒險隊走訪城鎮、打聽消息與接取任務，
-逐步揭開危機。背景依原版手冊的[阿什塔拉瑞亞王國](docs/manual/chapters/08-realm-of-ashtalarea.md)整理。
+故事發生在阿什塔拉瑞亞半島。人類、精靈與矮人原本各有聚落，巫師 Pildar 卻帶領
+獸人、巨魔與食人魔大軍發動黑暗戰爭。矮人的要塞陷落，Shellernoon 遭到長年圍攻，
+各族為守住家園付出慘重代價。
+
+騎士 Seggallion 聯合人類、精靈與歸來的矮人軍隊，終於解除了圍城。Pildar 帶著殘部
+退往湖中島嶼的黑塔。戰後十五年，各地修築道路、恢復貿易，逐漸重建生活。
+
+如今 Seggallion 失蹤，北方襲擊不斷，森林裡的怪物也再度增多。玩家建立最多六人的
+冒險隊，從旅店出發，在城鎮打聽消息、接取委託，再深入荒野與遺跡，為這片尚未恢復
+安寧的土地尋找出路。背景依原版手冊的[阿什塔拉瑞亞王國](docs/manual/chapters/08-realm-of-ashtalarea.md#黑暗戰爭)
+整理；隊伍與冒險流程見[開始冒險](docs/manual/chapters/01-getting-started.md)。
 
 本作著重隊伍編成與回合規劃。玩家替每位隊員安排移動、攻擊與防禦，再觀看雙方行動；
 裝備、傷勢和疲勞都會影響決策。回城後可治療、訓練、買賣裝備，並在旅店住宿保存。
@@ -26,7 +35,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 ## 開始遊玩
 
 現行版本為 `v.1.0.2-20261013`，包含HD操作介面與頭像、四首原創室內樂、F9配樂及F10畫面切換。
-封包與限制見 [交付收據](docs/verification/release-v1.0.1-20261012.md)。
+封包與限制見 [交付收據](docs/verification/release-v1.0.2-20261013.md)。
 正式交付根目錄為 [dist-all/v.1.0.2-20261013/](dist-all/v.1.0.2-20261013/)：
 
 | 平台 | 檔案 | 開啟方式 |
@@ -91,6 +100,20 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 圖片來源、畫格、SHA-256與權利分類見[正式介面截圖清冊](docs/verification/hd-interface-runtime-20261012/manifest.json)。
 新版旅店及設定畫面來自實際AppImage，來源見[新版截圖清冊](docs/verification/release-v1.0.2-20261013/manifest.json)。
 
+### 事件畫面：原版與 HD 候選
+
+以下為結局第0段，包含結局內容。左側由 dosgolem 執行原版程式受控擷取；右側來自隔離重製候選，
+沿用手繪與現有介面主題，中文使用原生 HD 字模。**HD 候選尚未接入正式版本**，其餘事件仍待完成。
+
+| 原版 DOS 事件，320×200 | HD 事件候選，1920×1200 |
+|---|---|
+| ![原版 DOS 結局事件：巨石門](docs/verification/hd-completion-20261014/original-ending-0.png) | ![HD 候選結局事件：巨石門與原生繁體中文](docs/verification/hd-completion-20261014/ending-0-hd-candidate.png) |
+
+[現行繁中 EGA 對照](docs/verification/hd-completion-20261014/ending-0-ega-zh.png)與
+[完整比較頁](docs/verification/hd-completion-20261014/review.html)另列。
+原版七段圖片矩形已核對；候選中文、兩種視窗及十二個實際 F10 設定事件通過，切換保留事件段號與狀態。
+這是受控事件展示，不代表正常通關或整頁原版一致。來源、畫格、權利與雜湊見[事件清冊](docs/verification/hd-completion-20261014/manifest.json)。
+
 ### EGA 畫面
 
 以下畫面由鎖定的 Docker 工具鏈重新擷取。繁中畫面為 960×600，使用 16×18 字模格。
@@ -113,7 +136,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 開發版已接入核准的四首原創中世紀室內樂：[標題與旅店](docs/verification/hd-music-20261012/review.html)、
 [探索與戰鬥](docs/verification/hd-adventure-music-20261013/review.html)。試聽頁附OGG、分軌、三輪循環與來源授權。
 配樂預設開啟，按F9或點下緣「配樂」獨立切換；切換EGA／HD時持續播放，開關只在本次遊玩有效。
-接入與驗證見[配樂收據](docs/verification/hd-music-runtime-20261013.md)。現行發行包仍沿用已驗收雷聲。
+接入與驗證見[配樂收據](docs/verification/hd-music-runtime-20261013.md)。現行發行包包含四首配樂及已驗收雷聲。
 
 首批手繪旅店門面與六人肖像已接入實際遊戲，採 1920×1200 原比例。
 點下緣「畫面 F10」或按 F10，選擇 EGA／HD 即可在同一場景比較；Esc 返回遊戲。
@@ -126,7 +149,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 核准樣張保存在[比較原型](docs/verification/hd-first-slice-20261011/review.html)。
 核准的[操作介面與NPC原型](docs/verification/hd-ui-theme-20261012/review.html)已接入開發版，
 [正式驗收](docs/verification/hd-interface-runtime-20261012.md)包含HD中文、面板、操作列、頭像、F10及正常住宿存讀檔。
-接續分批處理書本、其他人物裝備、城鎮、戰鬥與天候；地圖、傷勢及未繪分支保持現有顯示。
+全畫面 HD 續作涵蓋書本、建角、商店與其他服務子頁、人物裝備、城鎮／世界地圖、戰鬥、傷勢、天候及事件。
+[13類畫面盤點](docs/verification/hd-completion-20261014.md#目前覆蓋)逐項列出缺口與驗收條件；放大原版素材不列為手繪 HD 完成。
+事件先提供上方候選；每批確認樣張與素材契約後接入，均須驗中文、畫面、鍵鼠及遊戲內 F10。
 批次與素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
 
 ## 專案起源

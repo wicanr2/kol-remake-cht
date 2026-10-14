@@ -1,0 +1,68 @@
+{
+  "call_error": "\u003cnil\u003e",
+  "frames": [
+    {
+      "caller_ida": "0x2B556",
+      "image": "original-ending-0.png",
+      "panel": 0,
+      "seed": 1,
+      "steps": 726413937
+    },
+    {
+      "caller_ida": "0x2B5AE",
+      "image": "original-ending-1.png",
+      "panel": 1,
+      "seed": 1,
+      "steps": 727744989
+    },
+    {
+      "caller_ida": "0x2B606",
+      "image": "original-ending-2.png",
+      "panel": 2,
+      "seed": 1,
+      "steps": 729518572
+    },
+    {
+      "caller_ida": "0x2B66E",
+      "image": "original-ending-3.png",
+      "panel": 3,
+      "seed": 1,
+      "steps": 730595366
+    },
+    {
+      "caller_ida": "0x2B6C6",
+      "image": "original-ending-4.png",
+      "panel": 4,
+      "seed": 1,
+      "steps": 731717894
+    },
+    {
+      "caller_ida": "0x2B72E",
+      "image": "original-ending-5.png",
+      "panel": 5,
+      "seed": 1,
+      "steps": 732642372
+    },
+    {
+      "caller_ida": "0x2B796",
+      "image": "original-ending-6.png",
+      "panel": 6,
+      "seed": 1,
+      "steps": 733571585
+    }
+  ],
+  "method": "normal KOL.EXE startup to inn, controlled direct call of original sub_2B4A7; original keyboard wait retained, Space sent at each wait entry",
+  "missing": [
+    "region1.dat",
+    "region2.dat",
+    "region3.dat",
+    "region4.dat"
+  ],
+  "normal_completion": false,
+  "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+  "random_calls": 0,
+  "schema": "kol-original-ending-capture/1",
+  "seed_setup": "before call DS:1600=1 DS:1602=0",
+  "unimplemented": [],
+  "wait_stub": false
+}

@@ -1,0 +1,405 @@
+{
+  "schema": "kol-hd-event-review/1",
+  "date": "2026-10-14",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "sources": {
+    "Knights-of-legend.zip": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "assets/original-derived-png/ega/manifest.json": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+    "assets/original-derived-png/ega/ENDPICS/endpics-000.png": "4d15f8f2709b9edde83e725ca58f55589bc2975429e20ca9bfce2a407fb56f0b",
+    "assets/hd/first-slice/inn-painted-v1.png": "0ec14587368570c7c84aa20b695335b022c7da8ef1b8f3a07255b1b73adb2b9c",
+    "assets/hd/first-slice/interface/manifest.json": "d0213c4ee1998b608881178045bf2fad2ae9a4836cfb926c934adaf8ac928a7c",
+    "docs/i18n/ui-zh-Hant.json": "c9ff3eddb87ece5c1e10fcd7be050fd72232014f7ea97f33459c5756fff78ed7",
+    "docs/i18n/town-zh-Hant.json": "5554248cef962e0b91948407486890a6020f1c54ceee9edc4e795461545a8638"
+  },
+  "source_runtime": {
+    "/tmp/game/ENDPICS.0": {
+      "size": 24327,
+      "sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e"
+    },
+    "/tmp/game/ENDTXT.0": {
+      "size": 2277,
+      "sha256": "ccd8a8d69b0a257fc33574c51e401988dc65dad891d863d41c28f2e918e22b7a"
+    },
+    "/tmp/game/KOL.EXE": {
+      "size": 11971,
+      "sha256": "4f798b078db889b6166b92c0f0bae1febe3efb3535ad67800b2e0aaed94d7b71"
+    },
+    "/tmp/game/KOLTOWN.EXE": {
+      "size": 133760,
+      "sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221"
+    }
+  },
+  "files": {
+    "candidate-check.json": {
+      "sha256": "2e846a0b926c665c7170e6c5e2818e9352a3ca50c348121ed064722868952057",
+      "size": 5117
+    },
+    "coverage.json": {
+      "sha256": "325389208e2ba608a20cf0a2cd59290d5c5f48f8956d0e04ee43f20e2c537090",
+      "size": 291257
+    },
+    "ending-0-ega-zh.png": {
+      "sha256": "e978d511e681644ac9c282eb36cf3eac918ea6c65172f5157777dac844e49b17",
+      "size": 16409,
+      "dimensions": [
+        960,
+        600
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "remake EGA screenshot",
+      "panel": 0,
+      "evidence": "controlled entry; Chinese picture layout and existing F10 tested; not natural completion",
+      "candidate_binary_sha256": "92c300c3b0b0d3e7ac8c13c4329b856be1a7457ba95671ea88cfff0f4744219f"
+    },
+    "ending-0-hd-candidate.png": {
+      "sha256": "0ac66786f046d5549c5622b72501afee414281a6a366e36ac78d18da510e403f",
+      "size": 1634885,
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "isolated remake HD candidate screenshot",
+      "panel": 0,
+      "evidence": "controlled entry; Chinese picture layout and existing F10 tested; not natural completion",
+      "candidate_binary_sha256": "92c300c3b0b0d3e7ac8c13c4329b856be1a7457ba95671ea88cfff0f4744219f"
+    },
+    "ending-0-hd-menu.png": {
+      "sha256": "dbf75ce42a4f9410562df66337c779d63b6a1f6b8296b646d5dad1ef68af5844",
+      "size": 1377635,
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "isolated remake HD candidate screenshot",
+      "panel": 0,
+      "evidence": "controlled entry; Chinese picture layout and existing F10 tested; not natural completion",
+      "candidate_binary_sha256": "92c300c3b0b0d3e7ac8c13c4329b856be1a7457ba95671ea88cfff0f4744219f"
+    },
+    "ending-0-hd-small.png": {
+      "sha256": "0b127d7cbffd3cda1ea6568bd832a38657da3dc8c90ba568da4424b1207d4659",
+      "size": 452701,
+      "dimensions": [
+        960,
+        600
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "isolated remake HD candidate screenshot",
+      "panel": 0,
+      "evidence": "controlled entry; Chinese picture layout and existing F10 tested; not natural completion",
+      "candidate_binary_sha256": "92c300c3b0b0d3e7ac8c13c4329b856be1a7457ba95671ea88cfff0f4744219f"
+    },
+    "ending-0-painted-candidate.png": {
+      "sha256": "9eb52c512b08205b485d03e4e71c4fb7b723d3f38adc43454242ba4ddfc463fc",
+      "size": 3387830,
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "AI hand-painted candidate",
+      "tool": "built-in image_gen.imagegen",
+      "model": "not exposed by tool",
+      "prompt": "imagegen-prompt.txt",
+      "evidence": "visual candidate; no production approval"
+    },
+    "imagegen-prompt.txt": {
+      "sha256": "933b2b202b4b17df2171409544cda02b6918c562b42b4fefba30b3cf1eea5df2",
+      "size": 1933
+    },
+    "original-ending-0.png": {
+      "sha256": "6091e62a605cf63f1345961f6575e2a4b40235ca2dcca6882687e1c53224b7f1",
+      "size": 8126,
+      "dimensions": [
+        320,
+        200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "original DOS runtime screenshot",
+      "panel": 0,
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "archive": "Knights-of-legend/ENDPICS.0",
+      "archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+      "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+      "frame": {
+        "original_size": [
+          320,
+          200
+        ],
+        "remake_en_size": [
+          320,
+          200
+        ],
+        "whole_frame_equal_rgb": false,
+        "original_picture_matches_decoded_png": true,
+        "original_background_rgb": [
+          255,
+          255,
+          255
+        ],
+        "remake_background_rgb": [
+          0,
+          0,
+          0
+        ]
+      },
+      "evidence": "confirmed runtime picture identity; controlled direct call; natural ending entry state unknown"
+    },
+    "original-ending-1.png": {
+      "sha256": "bc2d46b4862f4d45f1016dd4bfe232fab100395aa60d5d909eaa4cbfafc2aa77",
+      "size": 9793,
+      "dimensions": [
+        320,
+        200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "original DOS runtime screenshot",
+      "panel": 1,
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "archive": "Knights-of-legend/ENDPICS.0",
+      "archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+      "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+      "frame": {
+        "original_size": [
+          320,
+          200
+        ],
+        "remake_en_size": [
+          320,
+          200
+        ],
+        "whole_frame_equal_rgb": false,
+        "original_picture_matches_decoded_png": true,
+        "original_background_rgb": [
+          255,
+          255,
+          255
+        ],
+        "remake_background_rgb": [
+          0,
+          0,
+          0
+        ]
+      },
+      "evidence": "confirmed runtime picture identity; controlled direct call; natural ending entry state unknown"
+    },
+    "original-ending-2.png": {
+      "sha256": "d02b1e1e920126035393d3fcf3899da8b6b02eefcec87c2766efda1cb4978b3c",
+      "size": 10901,
+      "dimensions": [
+        320,
+        200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "original DOS runtime screenshot",
+      "panel": 2,
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "archive": "Knights-of-legend/ENDPICS.0",
+      "archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+      "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+      "frame": {
+        "original_size": [
+          320,
+          200
+        ],
+        "remake_en_size": [
+          320,
+          200
+        ],
+        "whole_frame_equal_rgb": false,
+        "original_picture_matches_decoded_png": true,
+        "original_background_rgb": [
+          255,
+          255,
+          255
+        ],
+        "remake_background_rgb": [
+          0,
+          0,
+          0
+        ]
+      },
+      "evidence": "confirmed runtime picture identity; controlled direct call; natural ending entry state unknown"
+    },
+    "original-ending-3.png": {
+      "sha256": "1471ed075c6a37d0666cd1382de29ca8b7ae050e0a482dbc5e6532b7d1b6b11e",
+      "size": 8434,
+      "dimensions": [
+        320,
+        200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "original DOS runtime screenshot",
+      "panel": 3,
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "archive": "Knights-of-legend/ENDPICS.0",
+      "archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+      "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+      "frame": {
+        "original_size": [
+          320,
+          200
+        ],
+        "remake_en_size": [
+          320,
+          200
+        ],
+        "whole_frame_equal_rgb": false,
+        "original_picture_matches_decoded_png": true,
+        "original_background_rgb": [
+          255,
+          255,
+          255
+        ],
+        "remake_background_rgb": [
+          0,
+          0,
+          0
+        ]
+      },
+      "evidence": "confirmed runtime picture identity; controlled direct call; natural ending entry state unknown"
+    },
+    "original-ending-4.png": {
+      "sha256": "a0de624b3aa8f25959b8a359fd63902bf44a8d53d8cf18f0ffa89f21208586ad",
+      "size": 8117,
+      "dimensions": [
+        320,
+        200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "original DOS runtime screenshot",
+      "panel": 4,
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "archive": "Knights-of-legend/ENDPICS.0",
+      "archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+      "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+      "frame": {
+        "original_size": [
+          320,
+          200
+        ],
+        "remake_en_size": [
+          320,
+          200
+        ],
+        "whole_frame_equal_rgb": false,
+        "original_picture_matches_decoded_png": true,
+        "original_background_rgb": [
+          255,
+          255,
+          255
+        ],
+        "remake_background_rgb": [
+          0,
+          0,
+          0
+        ]
+      },
+      "evidence": "confirmed runtime picture identity; controlled direct call; natural ending entry state unknown"
+    },
+    "original-ending-5.png": {
+      "sha256": "33eda5f040331a003e018a0347acb383799880c7b748b368310662ba2a028a41",
+      "size": 6967,
+      "dimensions": [
+        320,
+        200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "original DOS runtime screenshot",
+      "panel": 5,
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "archive": "Knights-of-legend/ENDPICS.0",
+      "archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+      "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+      "frame": {
+        "original_size": [
+          320,
+          200
+        ],
+        "remake_en_size": [
+          320,
+          200
+        ],
+        "whole_frame_equal_rgb": false,
+        "original_picture_matches_decoded_png": true,
+        "original_background_rgb": [
+          255,
+          255,
+          255
+        ],
+        "remake_background_rgb": [
+          0,
+          0,
+          0
+        ]
+      },
+      "evidence": "confirmed runtime picture identity; controlled direct call; natural ending entry state unknown"
+    },
+    "original-ending-6.png": {
+      "sha256": "4bf1d9782f2662b699ef83c6477bf1e84011927aa3746cf32424ad793610010a",
+      "size": 6530,
+      "dimensions": [
+        320,
+        200
+      ],
+      "rights": "private GitHub review PNG only; no public distribution or release asset grant",
+      "kind": "original DOS runtime screenshot",
+      "panel": 6,
+      "source_entry": "Knights-of-legend/KOLTOWN.EXE",
+      "source_sha256": "c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221",
+      "archive": "Knights-of-legend/ENDPICS.0",
+      "archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+      "oracle_revision": "968ca774705853276ae55c8d1163c369481ac71f",
+      "frame": {
+        "original_size": [
+          320,
+          200
+        ],
+        "remake_en_size": [
+          320,
+          200
+        ],
+        "whole_frame_equal_rgb": false,
+        "original_picture_matches_decoded_png": true,
+        "original_background_rgb": [
+          255,
+          255,
+          255
+        ],
+        "remake_background_rgb": [
+          0,
+          0,
+          0
+        ]
+      },
+      "evidence": "confirmed runtime picture identity; controlled direct call; natural ending entry state unknown"
+    },
+    "original-receipt.json": {
+      "sha256": "4054e0b0c217b81a33c734cc6c559bfac1ff93c583d1e4968447ead8900d16f6",
+      "size": 1571
+    },
+    "production-inputs.json": {
+      "sha256": "334e4062ab6eba072ecd9b6f5afcf5caa16ebb7541e22c857e546601add1a442",
+      "size": 37524
+    },
+    "review.html": {
+      "sha256": "164a67aab506d35271ce2cff80437d7cc059d8696bf132ee479dfa0f41564c3f",
+      "size": 4074
+    }
+  },
+  "production_363_inputs_unchanged": true,
+  "candidate_binary_sha256": "92c300c3b0b0d3e7ac8c13c4329b856be1a7457ba95671ea88cfff0f4744219f",
+  "current_binary_sha256": "5fec57dde53a284993d81dccfbf7fe1fe25a3e344256687549d39b8dbc0fa126",
+  "only_panel_0_hd_painted": true,
+  "normal_completion_claimed": false,
+  "original_whole_frame_parity_claimed": false,
+  "rights": "Verified runtime PNG permitted only in current private repository; generated derivative is candidate only. Original archive/executable/audio remain local and are excluded.",
+  "production_git_base": "873284a8"
+}
