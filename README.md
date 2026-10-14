@@ -139,6 +139,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [比較頁](docs/verification/hd-equipment-pages-20261015/props-review.html)另含雙手劍、腰帶戰斧、小視窗及32件裝備的來源對照。
 物品／隊伍狀態與兩種視窗的鍵鼠切換已核對，範圍見[原型紀錄](docs/verification/hd-equipment-pages-20261015.md)。
+其餘五種體型的135款頭／上身／腿部已完成候選與裁取核對，見[部件檢視頁](docs/verification/hd-equipment-pages-20261015/body-review.html)。完整人物接縫、握持與翅膀遮擋尚待合成驗證，這批候選尚未接入遊戲。
 
 ### 事件畫面：原版與 HD
 

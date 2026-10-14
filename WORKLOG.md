@@ -11605,3 +11605,14 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - [新比較](docs/verification/hd-equipment-pages-20261015/props-review.html)保存11張PNG、九份武器提示與精簡收據，前版14份生成紀錄及收據保持。完整GUI模型、角色typed data、存檔與生成原檔留本機；32件盤點不等於32條正常遊玩驗收。README、CONTEXT、SPEC、覆蓋表及工作清單已更新，整批仍DRAFT。
 - 本機入口仍為workplace/hd-equipment-pages-20261015；prepare-weapon-references.py、assemble-props-prototype.py、prepare-props-v6.py、run-props-build.sh、run-page-prototype.py、run-gui-prototype.py及publish-props-review.py保存來源、建置、正常操作與對比流程。下一批續作其餘五種體型135款部件、完整握持／卸裝、動作圖示、正式載入及v3。工作區仍使用中，不提前封存或刪除。
 - 最終稽核385份正式Go／module與88份HD資產保持；前版8張及新增11張PNG、14加9份提示、381份隔離執行來源與359個文件連結通過，原18個WORKLOG歷史失效連結保持，沒有新增失效。主機gh auth成功，遠端仍PRIVATE；沿既有commit＋push授權保存本批，實際結果另存工作區git-closeout-props.json。全專案find無root-owned檔案或誤建*.md目錄，本批所有Docker容器已回收，沒有建立新image。
+### 2026-10-15 其餘五種體型裝備候選
+
+- 沿既有全畫面HD與同畫風授權續作，路由命中remake資產、文件職責與README標準；沿重製技能、imagegen、SPEC-039及既有鎖版Docker工具鏈。沒有重新開啟已確認的版面或玩法決策。
+- 其餘五種體型共135款頭／上身／腿部由內建image_gen生成，本階段21張PNG中三張已被替代。男性精靈頭部另產分隔修正版，第37款上身改回裸手；女性精靈上身清除腰下多餘皮膚並補原胸部底衣，九格版本拳頭接觸而無透明直線分隔，改產三張單排圖集。所有原檔、完整提示及雜湊保留，未改色或以程式繪製美術。
+- 女性精靈腿部預覽顯示背景，最初被誤記為不透明。實際PNG背景alpha為0、前景最高254，合成核對確認透明；原PNG逐位元保持，初始判斷與訂正均保存。未執行去背或未使用的v2提示，也未放寬完整HD最多一色階閘門。
+- preflight-body-atlases.py依alpha>=8的實際空白掃描線裁取17張圖集，另套用第37款裸手修正版。135個來源PNG、圖號及裁取RGBA皆核對，無空圖或重複；15款低於原著色六倍尺寸參考，最終解剖矩形與外緣接觸仍待合成複核。完整人物、握持／翅膀、混搭／卸裝及遊戲接入沒有完成聲明。
+- prepare-body-source-anchors.py核對既有portrait-layout.json及原PNG，保存六種體型typed錨點、著色邊界與世界座標至本機body-source-anchors.json，SHA為9e5ce7da5a8771467e193d6a44d0bf4f91691e56054e988afee080637e9663ef。原typed資料、角色模型、生成原檔及工具不入Git。
+- publish-body-candidates.py重新核對固定ZIP及八個archive entry，輸出五張獨立部件接觸圖、21份已使用提示、來源／裁取／生成清冊與精簡收據。README、CONTEXT、SPEC、13類覆蓋與工作清單更新；候選由既有驗收入口索引。381份v6隔離來源保持且仍只接入人類男性，本階段沒有新建置、正常遊玩、GUI、F10、v3、平台或聆聽聲明。
+- 全批仍DRAFT，既有裝備工作區尚在使用，不提前封存或刪除。下一步沿本機錨點校準完整人物接縫、握持與翅膀，再接隔離原型。正式380份runtime來源、385份稽核輸入、88份HD資產與v.1.0.2-20261013 Release保持。
+- 最終核對五張候選PNG、21份提示、135來源對應、385份正式輸入、88份HD資產及381份v6隔離來源通過；369個文件連結沒有新增失效，18個既有WORKLOG歷史連結保持。首次HTML連結檢查誤抓JavaScript動態字串，改以HTMLParser核對實際屬性及五張切換圖片後同容器乾淨通過。主機gh auth成功，遠端仍PRIVATE；沿既有commit＋push授權保存，結果另存工作區git-closeout-bodies.json。全專案find無root-owned檔案或誤建*.md目錄，本批Docker容器已回收，未新增image。
+

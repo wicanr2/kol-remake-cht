@@ -1,0 +1,16 @@
+Use case: style-transfer. Asset type: transparent HD male elf complete LEGS atlas, LEGSPICS 9 to 17.
+Image 1 supplies nine original armor designs, color, silhouettes and row order. Ignore labels/background/dither. Image 2 supplies the same adult male elf anatomy, frontal stance, long legs, warm skin and bare feet.
+Create a 3x3 atlas, nine separate COMPLETE LOWER-BODY segments from waist/hips to the tips of BOTH BARE FEET, no upper torso or arms. Keep the original frontal stance, both legs separated, toes pointing slightly outward. Include exposed thighs, knees or ankles where source armor is absent. Every segment must form a complete body section suitable to join an upper-body part at the waist; do not output isolated empty greaves or cut off the feet.
+Reading order:
+9 top-left: brown leather wrapped greaves on lower calves only, leather bands and lacing, bare thighs/knees, plain modest brown briefs at the hips, BARE FEET. Keep the original short greave design.
+10 top-middle: pale icy silver plate leggings from hips through knees/shins, segmented knees and small blue/cyan trim, bare ankles/feet exactly as source.
+11 top-right: RED full armor leggings, red cuisses and articulated red knee/shin plates, bare feet.
+12 middle-left: separate RED knee-and-calf greaves, original round red knee caps and long red shin guards, exposed thighs, plain modest brown briefs, bare feet. No full red thigh plates.
+13 middle-middle: dark red-brown lamellar trousers with horizontal rectangular plates down both legs, original fine silver edges, bare feet.
+14 middle-right: silver overlapping scale leggings, layered calf covering and small exposed ankle areas, bare feet.
+15 bottom-left: pale silver studded armor trousers with fine dark rivets, broad lower-calf guards, bare feet.
+16 bottom-middle: dark iron chainmail trousers down to ankles, tiny linked mesh and simple waist edge, bare feet.
+17 bottom-right: articulated silver plate cuisses, original flared thigh/knee edges and segmented shin guards, connected by understated dark underlayers, bare feet.
+Hand-painted classic fantasy RPG style, warm pale flesh matching image 2, cool metal upper-left highlights, crisp thin dark contour, restrained red/brown leather, smooth alpha. Same leg length/hip width/foot size and pose across cells. Preserve which parts are bare and the nine original material differences.
+Large native portrait or square 3x3 atlas with generous transparent gutters and margins. Each complete pair of legs approximately 390 native pixels tall or more, no cropping and no contact between cells.
+No upper body, arms, head, weapons, shields, boots covering the original bare feet, full character, text, numbers, labels, background, floor shadows, frames, magic or watermark. Actual transparent RGBA background.

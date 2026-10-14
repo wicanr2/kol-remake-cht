@@ -1,0 +1,2717 @@
+{
+  "schema": "kol-hd-body-candidates/1",
+  "status": "DRAFT",
+  "baseline_commit": "077af9f2904a6aeef734dbe3e5bbe41dcf2a688d",
+  "source_zip": {
+    "name": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_entries": "source-entries.json",
+  "source_inventory_sha256": "e71aa19e04855c1f3cc6a42f762b6f9e58a0bb10fa5a1359c00e5f704edcd87d",
+  "source_layout_sha256": "23ff63ee3bf17be432cb17fefeb308f31c838f3e8fb796f164ea0186fc30d8df",
+  "candidate_plan": "body-atlas-plan.json",
+  "generation": "body-generation.json",
+  "source_builds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "source_families": 15,
+  "source_parts": 135,
+  "candidate_atlases": 17,
+  "single_part_override": 37,
+  "generated_pngs_this_phase": 21,
+  "superseded_pngs": 3,
+  "source_bindings_unique": true,
+  "native_crop_rgba_unique": 135,
+  "crop_status": "135 nonempty bounded crops separated by actual alpha>=8 empty scanlines; generated PNGs unchanged",
+  "parts_validation": [
+    {
+      "archive": "HEADPICS",
+      "index": 9,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        89,
+        50,
+        350,
+        403
+      ],
+      "crop_rgba_sha256": "073abd0a8854a73ae6e76a06a94d0daee281eea277fc72709ed5acfe69a31873",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 12,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        89,
+        462,
+        341,
+        788
+      ],
+      "crop_rgba_sha256": "93fa17925aa87c26d55474638c1f4968b6cba178498dd5829ffab043f452ffa6",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 15,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        89,
+        859,
+        333,
+        1168
+      ],
+      "crop_rgba_sha256": "4b9d500d876ec7b29bb8bfda37ed9a38912c951f0f6307abdab7b74cf17d5cbd",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 10,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        495,
+        68,
+        748,
+        370
+      ],
+      "crop_rgba_sha256": "14c6e4916b8ecea67d893be415459de9b9711d24cbe5cb5ba7b81f3e15b8179a",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 13,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        496,
+        460,
+        757,
+        787
+      ],
+      "crop_rgba_sha256": "58cd9af55223918b920349ad470643714079d3a913330bd7196106944d0b2a65",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 16,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        451,
+        845,
+        799,
+        1160
+      ],
+      "crop_rgba_sha256": "1bfeacd70368e5d825058d0c44e7b419f0a8794673a7a0734669bc2c1ded9723",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 11,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        903,
+        67,
+        1157,
+        377
+      ],
+      "crop_rgba_sha256": "17f0921287984bc0abb78f0ff821cad3931269f532141ad595d0f7400f8de458",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 14,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        862,
+        454,
+        1206,
+        786
+      ],
+      "crop_rgba_sha256": "d9d17c03e3b7d8164be688bdb4e6869817893e256e005bd09f98c1c126225bed",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 17,
+      "native_file": "headpics-build1-painted.png",
+      "rect": [
+        853,
+        856,
+        1220,
+        1165
+      ],
+      "crop_rgba_sha256": "181edbf687898a9c927076fa714a13f8bdc6e3af9b78fab3485de937adc51ec9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 9,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        18,
+        21,
+        415,
+        405
+      ],
+      "crop_rgba_sha256": "e7568501d8fc5472f1b301a72d730e4d2900ef8b0441a9346c1b3b41956ce4ae",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 12,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        19,
+        427,
+        416,
+        796
+      ],
+      "crop_rgba_sha256": "6cdfc96697930c0c1c17adf10205e9d92615632eb3f3dceaf6f3d68b3103cf8f",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 15,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        18,
+        830,
+        416,
+        1219
+      ],
+      "crop_rgba_sha256": "25474b13c31be5b457d99cb4ad49a4644202cced593875c33c7c55ba5e13f45e",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 10,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        432,
+        20,
+        824,
+        413
+      ],
+      "crop_rgba_sha256": "759fea16e5ce4daa39b35f73008b288b4339f8f6a22e96019c14e457c19c68b5",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 13,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        431,
+        428,
+        824,
+        803
+      ],
+      "crop_rgba_sha256": "9304f672091e4223c64544c0c9530edc2e0753e11feb9a63eb0eb76947a52fc7",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 16,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        430,
+        833,
+        824,
+        1202
+      ],
+      "crop_rgba_sha256": "9a4bfed8c9364a8c9c19ae62e6cc3d2272f417b6f958cf52b0195f64f2ea4322",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 11,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        848,
+        26,
+        1240,
+        407
+      ],
+      "crop_rgba_sha256": "ac33d5e3196b78c7a3b264b42bf88eb834735c373593ad5f9e30249891a8f0c9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 14,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        845,
+        429,
+        1242,
+        799
+      ],
+      "crop_rgba_sha256": "cb53f0aedb1e38488eb7a077040b5f1b9f32db00b4d1d7359198cccbfa10d991",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 17,
+      "native_file": "torpics-build1-complete-painted.png",
+      "rect": [
+        839,
+        830,
+        1242,
+        1201
+      ],
+      "crop_rgba_sha256": "5258f7ff75663fb65ae0105641d7d15111dd46203695d76cd7db842120831f7e",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 9,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        52,
+        8,
+        367,
+        397
+      ],
+      "crop_rgba_sha256": "9e00eaf0a173ed211986ff05f68bbcd01235da6f36c01f27e3280dd3eed488ac",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 12,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        51,
+        453,
+        367,
+        858
+      ],
+      "crop_rgba_sha256": "41f1059212d763683991d27b1de740bb9827bb3c10781ee6b4ec82acc59f040b",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 15,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        51,
+        896,
+        366,
+        1300
+      ],
+      "crop_rgba_sha256": "bbef3f9d42a19441e5172e0fdcb7aef95e5b4c15eab21ddbafc9a33285aab993",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 10,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        447,
+        9,
+        736,
+        397
+      ],
+      "crop_rgba_sha256": "50b2e685338380305df90095137cacb6792ae07a200750a9bd3d3c04d785b89d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 13,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        434,
+        453,
+        748,
+        858
+      ],
+      "crop_rgba_sha256": "3fa480dcfcfacb242f7616de6897a72f620d1f74203e67bcb40fee4b84d567c0",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 16,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        437,
+        895,
+        745,
+        1299
+      ],
+      "crop_rgba_sha256": "81aae2b64113e001e2aeb040c9bdf63b750cf1894df5e5dc8f86c6c001daa0f9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 11,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        819,
+        9,
+        1117,
+        397
+      ],
+      "crop_rgba_sha256": "22ab2d9fdd714acfa7c3471a6ebe23f0650840f7ea829b590e52e8b691c2ec0c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 14,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        811,
+        454,
+        1124,
+        858
+      ],
+      "crop_rgba_sha256": "47fdd4101317ff3bf93e9fa89693ea5b27143527de74388bbce131c03bd784e7",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 17,
+      "native_file": "legspics-build1-complete-painted.png",
+      "rect": [
+        811,
+        895,
+        1124,
+        1298
+      ],
+      "crop_rgba_sha256": "9b9faadaa10d27b4af626de80141acc795afbf575f8a16c89a590570b3131fed",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 18,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        49,
+        78,
+        368,
+        395
+      ],
+      "crop_rgba_sha256": "c39d3d4f8eef5abfe3d44b68e2ab683c67a97973a96bd2de36605f7e7b83b35e",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 21,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        50,
+        456,
+        367,
+        800
+      ],
+      "crop_rgba_sha256": "2a2ddbeae67a22f1e5f6a7b8ecf65301bcce5658e6d880d62f8cceb59c807ce2",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 24,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        33,
+        859,
+        383,
+        1216
+      ],
+      "crop_rgba_sha256": "8749fe21cfa788779ba25b3701bd81a337846cbb08a0b5cd3e34dcd58f1ab383",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 19,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        444,
+        75,
+        808,
+        396
+      ],
+      "crop_rgba_sha256": "2eb3899677d5729e2c1c395e2011ed9a479c69a1c45ca997fa65401b6ab2015d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 22,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        442,
+        458,
+        812,
+        800
+      ],
+      "crop_rgba_sha256": "988ce94b40473b24fdca46181f4e38f4c83006e2caa3e5de9d7b8395d7c98336",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 25,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        444,
+        884,
+        810,
+        1214
+      ],
+      "crop_rgba_sha256": "1261ff4d034daa7088e823931a9a23ac5f223f8fadc3d08f71a810e08b2778d9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 20,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        869,
+        76,
+        1224,
+        395
+      ],
+      "crop_rgba_sha256": "5282d7657ea262e9c1a651dedb76713fb8ba52dbf2aca2e59a54092b03c264ef",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 23,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        869,
+        462,
+        1222,
+        800
+      ],
+      "crop_rgba_sha256": "dc2757d295cd3249a917b993609ddd8df05c6f66b75562848aa76c7f2528d23c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 26,
+      "native_file": "headpics-build2-painted.png",
+      "rect": [
+        918,
+        801,
+        1173,
+        1235
+      ],
+      "crop_rgba_sha256": "cfe7d8aae7a93793267819fe6ebe161fab5a166259a62dbc5d604868b3d5e9e8",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 18,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        22,
+        35,
+        486,
+        336
+      ],
+      "crop_rgba_sha256": "fdef907cecaa996ae38fcd3f0074f7ce89aac45deee7eede7712f09c3289a870",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 21,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        18,
+        361,
+        486,
+        657
+      ],
+      "crop_rgba_sha256": "57b011c0eb9a3d1fdae037b75562901ddf8db59d68365ee9840cdd4665b41996",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 24,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        18,
+        693,
+        486,
+        994
+      ],
+      "crop_rgba_sha256": "d3e084f4fcbcd2513f718affb7e782ca10ce291a6c9ed9be33cd4e5ee6d599de",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 19,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        517,
+        34,
+        973,
+        328
+      ],
+      "crop_rgba_sha256": "dff4b96de150cacf7bc30b99a311da043ac276386fa3b7dd5a925210d6ee4636",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 22,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        515,
+        362,
+        973,
+        655
+      ],
+      "crop_rgba_sha256": "5559256e01f96781bd1974e5f447058b40a00e200fdee6e7659bfc1e0368a1f4",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 25,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        511,
+        693,
+        973,
+        994
+      ],
+      "crop_rgba_sha256": "e465a0658e132787975c83bfa1b69bffaf419ef4caeeca4cfb9f8f3e083543d9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 20,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        1001,
+        36,
+        1462,
+        329
+      ],
+      "crop_rgba_sha256": "5c798995d9ede930aff6bee7bdd02f0a70633d66e6dbc2aeec970968198188f3",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 23,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        1003,
+        361,
+        1464,
+        657
+      ],
+      "crop_rgba_sha256": "bb69f5c5de38122a3ae96ed8ba6f8bcd317dac86cf735bff542caed4b752b31c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 26,
+      "native_file": "torpics-build2-complete-painted.png",
+      "rect": [
+        994,
+        684,
+        1467,
+        998
+      ],
+      "crop_rgba_sha256": "cbff1dfd3d90bdf4a2e2f93ed1b07258ea1f5f9d2d3164559ef484d19389d43d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 18,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        30,
+        28,
+        455,
+        337
+      ],
+      "crop_rgba_sha256": "9dd3342c888014fda89ab163fdeebc2fa270815068f2c1b52d0d3bfd5c36dfbe",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 21,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        29,
+        390,
+        455,
+        722
+      ],
+      "crop_rgba_sha256": "4e508d07c5967296ce7fb106aa7ebc7b4e45757e71cf5142ef457e9aa8d6c21d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 24,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        19,
+        761,
+        447,
+        1092
+      ],
+      "crop_rgba_sha256": "9a83a56ed2d77d97a0f48f109c6d75d5c06f502d73e50ac614935966643424b9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 19,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        476,
+        28,
+        878,
+        337
+      ],
+      "crop_rgba_sha256": "fedacef3f987ec088f201f0c1a00d4acfa7744565b7e02238409b7cc9b8e6c11",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 22,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        473,
+        392,
+        883,
+        722
+      ],
+      "crop_rgba_sha256": "2ef1923ab8d6246f12d603fb439875e906956cd057ac8dd9e3c3105c7ebecf67",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 25,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        474,
+        760,
+        885,
+        1093
+      ],
+      "crop_rgba_sha256": "659b38f0d62737a68620a1b142b05aba48a51fed04e7d92591221bba8cea9e74",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 20,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        906,
+        28,
+        1320,
+        337
+      ],
+      "crop_rgba_sha256": "16b74a7df1e1028eeb736d8967271ce23bbb26abb74b1f74e5edd28735551887",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 23,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        906,
+        402,
+        1320,
+        722
+      ],
+      "crop_rgba_sha256": "28d706d5a7cc1310f8fa5677fe060dfdcb497f761c6c7122d33bc99e6ed59d5d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 26,
+      "native_file": "legspics-build2-complete-painted.png",
+      "rect": [
+        906,
+        760,
+        1328,
+        1094
+      ],
+      "crop_rgba_sha256": "95cde7ab6e0306a3b3f693ea56d899f3788124d8d5c32978344225aec1e7fc0c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 27,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        45,
+        77,
+        367,
+        409
+      ],
+      "crop_rgba_sha256": "3d5524ecbbd85ef47c573080c01b6bde19c3a1a754198f039f358dab2cdee531",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 30,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        106,
+        500,
+        304,
+        770
+      ],
+      "crop_rgba_sha256": "b01cb334212242e07fe62b2bc23834a69d84b58fca0682e3685fc9c45cf89c10",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 33,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        56,
+        845,
+        355,
+        1206
+      ],
+      "crop_rgba_sha256": "df9503bd981e2a3f2d72402e0f57d8ff0ef7cbaf71fdc7bb767d30953baf4c51",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 28,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        477,
+        57,
+        762,
+        411
+      ],
+      "crop_rgba_sha256": "533414d557004ce6f2fc5492f465fe0fef3a79392a3021d64c0ff1fa39250f92",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 31,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        468,
+        463,
+        772,
+        814
+      ],
+      "crop_rgba_sha256": "65cc27f3ae03f928767342873f6a70a90951042c6889a6c2294522d3ca7e8e1e",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 34,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        470,
+        852,
+        773,
+        1212
+      ],
+      "crop_rgba_sha256": "ebb3797130cfbd8fa98d0e81f5abb6a40a59dbd8634af131e7f8dd170e4d4a4d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 29,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        890,
+        26,
+        1185,
+        432
+      ],
+      "crop_rgba_sha256": "a063fbbabe1636717b1d0c6f5612653e11e83c4a56d78c0f29fc76c9ec723536",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 32,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        896,
+        472,
+        1191,
+        818
+      ],
+      "crop_rgba_sha256": "d1594d3b746ea8f2678cd4b9ee4a5522b97f2cc8f38698e0f448cd708c793a53",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 35,
+      "native_file": "headpics-build3-painted.png",
+      "rect": [
+        936,
+        860,
+        1140,
+        1154
+      ],
+      "crop_rgba_sha256": "7b9be25ac779014f1ce42fb24f0e69e5faa4a2d50e26066b8ff39f0b96b771bd",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 27,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        24,
+        21,
+        386,
+        409
+      ],
+      "crop_rgba_sha256": "2f42557301ed4e34b5d489c2bee75a19296c80c3fd6dd9e6d6f0774607b26f7d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 30,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        24,
+        434,
+        386,
+        816
+      ],
+      "crop_rgba_sha256": "ba892ba7866cc4a1474b836c3c2f12703b017df082d554070a91f6e3f8983bcd",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 33,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        24,
+        837,
+        389,
+        1208
+      ],
+      "crop_rgba_sha256": "4b0bd51de81278bc2f48af354b0a2670319f68532476ca5f4ee154a5dccf81d2",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 28,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        437,
+        17,
+        817,
+        407
+      ],
+      "crop_rgba_sha256": "108d8ee46798e012dd01e797c1b5868b3ee95a4abebe2aeb83259fdcc27c31b2",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 31,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        438,
+        433,
+        817,
+        807
+      ],
+      "crop_rgba_sha256": "d2591e429c4866040459ba8cf9cae9ae220a5727bcc79d3d68890b8d9c0fdfff",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 34,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        437,
+        836,
+        817,
+        1208
+      ],
+      "crop_rgba_sha256": "3d66ec7b211fed9bd06555194229826c3f0a139bed48d47393147ff01a6ac729",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 29,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        863,
+        17,
+        1229,
+        407
+      ],
+      "crop_rgba_sha256": "2552e4c2c098ed076e1d040e071fa6229659de5961afd1b527445e1ebd237045",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 32,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        861,
+        430,
+        1229,
+        807
+      ],
+      "crop_rgba_sha256": "d2ba8570101eafab42a9535097d1582c43c81627e941da4afeabae13ef2cf4fd",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 35,
+      "native_file": "torpics-build3-complete-painted.png",
+      "rect": [
+        853,
+        842,
+        1236,
+        1213
+      ],
+      "crop_rgba_sha256": "0a8a7ea8502fc6d273409601f531fd63e605e2d476df98b63caf39f999f2351c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 27,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        39,
+        3,
+        317,
+        523
+      ],
+      "crop_rgba_sha256": "83db9b9117318426a7bca00051558e1a99aefb159c79672b1a2fe632025502fe",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 30,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        34,
+        531,
+        324,
+        1064
+      ],
+      "crop_rgba_sha256": "8159615bd2ed3a09cb321cbe1c5a96b79125aa6c1db2d1575af63222de217aff",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 33,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        39,
+        1073,
+        320,
+        1609
+      ],
+      "crop_rgba_sha256": "9d18e8506f38b8cbe6e6dbf50be9e774cd9c25808a08a30ac11495d12ec88f6d",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 28,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        343,
+        2,
+        617,
+        521
+      ],
+      "crop_rgba_sha256": "de6ffaf9341eb160156e796639e8c782b8cb942de52dedf984540229b223b769",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 31,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        342,
+        531,
+        622,
+        1063
+      ],
+      "crop_rgba_sha256": "6996688a325b8107b1f794449e143330a52a42f8ae423bba0aacbf3d48d1c8e9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 34,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        348,
+        1073,
+        621,
+        1611
+      ],
+      "crop_rgba_sha256": "7971dfb2f2e2e874b1f86f31b19d977f041168f83287282f6ad61f94a0d8f5ad",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 29,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        647,
+        2,
+        924,
+        521
+      ],
+      "crop_rgba_sha256": "756c64c6b94469b95151189967412746a293641723015af9ccc40716cb569cad",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 32,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        651,
+        530,
+        928,
+        1065
+      ],
+      "crop_rgba_sha256": "a73124577358f41d9e4f8a2fb10371274f2a46169c4e5617a8f6224fb78c00ae",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 35,
+      "native_file": "legspics-build3-complete-painted.png",
+      "rect": [
+        653,
+        1073,
+        935,
+        1613
+      ],
+      "crop_rgba_sha256": "92623b00dbfb46994ae0b44f6ce35fcb06a8ec3427e26e6cacc881d78e222058",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 36,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        51,
+        66,
+        385,
+        386
+      ],
+      "crop_rgba_sha256": "92f0bfdf78a474e13b8d40a575408b37445802f4c551558752492c1df7a1f66c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 39,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        76,
+        467,
+        365,
+        767
+      ],
+      "crop_rgba_sha256": "f129ff8c7b23e8d7baef3f053fac0b06065ab6b0c5643d6bd2038f4f00374728",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 42,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        53,
+        836,
+        386,
+        1220
+      ],
+      "crop_rgba_sha256": "a05d8d5e27be62e32f5b0f0662389b49f6be0cf2be0150a1ad5a40873d63171b",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 37,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        454,
+        44,
+        802,
+        423
+      ],
+      "crop_rgba_sha256": "dc5f865b0f5a65b269ea5dea6373ca962fcf3a92a618634897d699090ec91bd6",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 40,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        469,
+        448,
+        786,
+        808
+      ],
+      "crop_rgba_sha256": "82afd7de1842876e6b0e0cf9040942c6825263b9797d607b5d4a7cfeb6090231",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 43,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        471,
+        835,
+        785,
+        1213
+      ],
+      "crop_rgba_sha256": "be3e201f8451a5368427a1d41be94ddaec36723356cb920d251b2608c4d67187",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 38,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        871,
+        48,
+        1206,
+        423
+      ],
+      "crop_rgba_sha256": "525f671088622f8dbfd80b9a78ee8db33bea463b8cc61452452dcf38f3bff252",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 41,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        883,
+        447,
+        1198,
+        812
+      ],
+      "crop_rgba_sha256": "22e90096410c45b01d61d89bbddfa5377cf8e9f21ce8f90ea39b8630e5926331",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 44,
+      "native_file": "headpics-build4-painted.png",
+      "rect": [
+        916,
+        836,
+        1162,
+        1184
+      ],
+      "crop_rgba_sha256": "45c01e9b7ef87bdb889c3964e0843b8edef42b70d9dea521eee4036bcd9037bf",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 36,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        29,
+        47,
+        454,
+        387
+      ],
+      "crop_rgba_sha256": "554cb85a7f406083a0fa44cccc3709483464996056f63cd8dd86a8f71fddcd58",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 39,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        27,
+        414,
+        456,
+        749
+      ],
+      "crop_rgba_sha256": "5a5b59d35b15cafe2e75e49b793da35fe8c35c825886d527c971102f8de186f4",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 42,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        27,
+        774,
+        456,
+        1106
+      ],
+      "crop_rgba_sha256": "70bf088a123df5deda194ffaf2c2d6928c6f11ec372ddd2eb3bab8bf3a29963c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 37,
+      "native_file": "torpics-037-skin-hands-painted.png",
+      "rect": [
+        77,
+        121,
+        1276,
+        1117
+      ],
+      "crop_rgba_sha256": "c707dff29bf1f279975ae5f1e214abef9210a03862ebedb7992df4bcc3c39db7",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 40,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        469,
+        414,
+        890,
+        750
+      ],
+      "crop_rgba_sha256": "a033d24ea42e1d71cd4626c5a9227a9daa84266abe37425cc785a17fccf7e4bb",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 43,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        469,
+        774,
+        890,
+        1106
+      ],
+      "crop_rgba_sha256": "656e8b1682cb72a2bdab82d5c388064a38b406b4c86036518420d4327e73b366",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 38,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        910,
+        47,
+        1335,
+        387
+      ],
+      "crop_rgba_sha256": "90688983bfa3688ae7e252e6d47885a11c9ce5ae2d286cfb67f3e80d23cb4700",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 41,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        909,
+        414,
+        1336,
+        746
+      ],
+      "crop_rgba_sha256": "95d716dab06285864c6146e314c2c8a59ca5d7e24fbdd9ea88ee6cc1ff531af7",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 44,
+      "native_file": "torpics-build4-complete-painted.png",
+      "rect": [
+        907,
+        769,
+        1336,
+        1112
+      ],
+      "crop_rgba_sha256": "20893547730faf7d049fd489d6a0930c4ee4fba7cd6e57fb188e15097f1356cc",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 36,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        56,
+        5,
+        369,
+        412
+      ],
+      "crop_rgba_sha256": "d1103b96b9d21a38c0fcb3a87edadc252ddead7da627f90dfe66a6b743284be9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 39,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        52,
+        432,
+        374,
+        853
+      ],
+      "crop_rgba_sha256": "e0b36a1cef642295e25314822da84325e62082c99de335620bfe91e3d0120437",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 42,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        51,
+        870,
+        375,
+        1300
+      ],
+      "crop_rgba_sha256": "e45a2c5df95a9b2de63cfb7d4fe514e67acd7d8350aafc21df96103b71dc7293",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 37,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        428,
+        5,
+        736,
+        412
+      ],
+      "crop_rgba_sha256": "f839fd6d619b9107c631b4b9c3edf7ff153f883a4a5dafe8ea3b2e119083dc5f",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 40,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        423,
+        432,
+        741,
+        854
+      ],
+      "crop_rgba_sha256": "b2756a061b2d8f85183fef4f4ba3a76e75e626c0c4bd0638fb0b929e868a78e2",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 43,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        420,
+        870,
+        744,
+        1299
+      ],
+      "crop_rgba_sha256": "391f3b65ec42ad51b06364ea131712db0f16bb61190aff66a3b0f850b97afe54",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 38,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        796,
+        0,
+        1107,
+        413
+      ],
+      "crop_rgba_sha256": "afb4b4ba2cdcb8c2dc75cdf635fd2c48fce33039c6d11c02fb4175f34af01b66",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": true,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 41,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        791,
+        432,
+        1114,
+        854
+      ],
+      "crop_rgba_sha256": "42865415ec20b88590d94fc448d65405c91871e919628383044d7c0d5813ef41",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 44,
+      "native_file": "legspics-build4-complete-painted.png",
+      "rect": [
+        790,
+        870,
+        1113,
+        1300
+      ],
+      "crop_rgba_sha256": "57c8ee8f14701935d237a076ea2558e62e19794cceba9a88abfbfeadaff50fb9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 45,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        55,
+        52,
+        370,
+        417
+      ],
+      "crop_rgba_sha256": "a990ec4e881d75ac9a101fa6c18439ded559e39c938c8d5f7efc774c3504501c",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 48,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        61,
+        465,
+        369,
+        772
+      ],
+      "crop_rgba_sha256": "84d26ed64dfb1948b6072c25559b65e985241df825b935dfdc9cfd338cf96ad9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 51,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        57,
+        862,
+        371,
+        1173
+      ],
+      "crop_rgba_sha256": "ce1b17186594c6153a1743aa574dc7c4d55af026054bc971754d51ec9b57ccd0",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 46,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        481,
+        69,
+        782,
+        371
+      ],
+      "crop_rgba_sha256": "c8548882c1cc6254896f05794ed89bed4ada5ac72b0a6e1dd6e1692ab13c1e81",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 49,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        470,
+        462,
+        784,
+        773
+      ],
+      "crop_rgba_sha256": "b12d9329c05fc00e2844d0e119b12624ce768f3023cee6f0b15b37ad659cb901",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 52,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        476,
+        866,
+        774,
+        1168
+      ],
+      "crop_rgba_sha256": "659258ce3c1f927d740d00f86790050d922ec7364b7daeb8fddc799ca374edd6",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 47,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        884,
+        69,
+        1201,
+        373
+      ],
+      "crop_rgba_sha256": "967f10e8ec95d5143e3abf9c1c23f6afb438d1c64ffc5e3780fff9fb08cfb262",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 50,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        888,
+        463,
+        1201,
+        772
+      ],
+      "crop_rgba_sha256": "d1cd961bf0defb8e23fd66874130b7ef511515d44800832415f5ef2a8832c529",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "HEADPICS",
+      "index": 53,
+      "native_file": "headpics-build5-painted.png",
+      "rect": [
+        857,
+        854,
+        1228,
+        1174
+      ],
+      "crop_rgba_sha256": "7622f6ffb3ab1b497dba976bd5d50756ddc431dff686b741aa5141b5e2015ca5",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 45,
+      "native_file": "torpics-build5-row0-painted.png",
+      "rect": [
+        41,
+        33,
+        724,
+        703
+      ],
+      "crop_rgba_sha256": "adf7a5b784cb163b9770762cd7d80630ea50a8dc96ea7857bd23d1102e16bd3f",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 46,
+      "native_file": "torpics-build5-row0-painted.png",
+      "rect": [
+        738,
+        33,
+        1430,
+        694
+      ],
+      "crop_rgba_sha256": "84873a4a400e1cd1208ad4d9f6d0f6530f94a5d226a9ef1bacda0100ec40b108",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 47,
+      "native_file": "torpics-build5-row0-painted.png",
+      "rect": [
+        1444,
+        33,
+        2131,
+        695
+      ],
+      "crop_rgba_sha256": "73d0181fc3ef6f2e69f9fa50541fd06870ebadf178683781cda149b030d4d4e5",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 48,
+      "native_file": "torpics-build5-row1-painted.png",
+      "rect": [
+        40,
+        46,
+        698,
+        669
+      ],
+      "crop_rgba_sha256": "7011df05628b799ec917649f5717d0e445042e290bb1b5684a4df72af924cc00",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 49,
+      "native_file": "torpics-build5-row1-painted.png",
+      "rect": [
+        755,
+        46,
+        1413,
+        673
+      ],
+      "crop_rgba_sha256": "4711286087ff7eadde11fc2e6c89ffd8d2002157e60dca61e54d64a671803b9b",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 50,
+      "native_file": "torpics-build5-row1-painted.png",
+      "rect": [
+        1469,
+        45,
+        2130,
+        653
+      ],
+      "crop_rgba_sha256": "d0153ffa07dd5af3928aa17b63fa266776696a85145870518722f19ff0c60218",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 51,
+      "native_file": "torpics-build5-row2-painted.png",
+      "rect": [
+        59,
+        52,
+        706,
+        680
+      ],
+      "crop_rgba_sha256": "23d432621f55b9209bce5a6acfd2f2aa99a9df370d4c3247c984ead8e2bf37ea",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 52,
+      "native_file": "torpics-build5-row2-painted.png",
+      "rect": [
+        742,
+        55,
+        1387,
+        683
+      ],
+      "crop_rgba_sha256": "cb6737e883b397ca3e91bf82d34a9366d749d210c508fbccac84efabcc911738",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "TORPICS",
+      "index": 53,
+      "native_file": "torpics-build5-row2-painted.png",
+      "rect": [
+        1461,
+        57,
+        2112,
+        686
+      ],
+      "crop_rgba_sha256": "6c6508fcebe70617745166b2fdc6cb4daabacc938c0448d44659cff7f46a20bf",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 45,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        54,
+        7,
+        323,
+        453
+      ],
+      "crop_rgba_sha256": "db09e7609d78ca6f7909bbeddbd6843e7b764a9bc95c83fe09559a8166871823",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 48,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        55,
+        499,
+        324,
+        944
+      ],
+      "crop_rgba_sha256": "8edb2088dd2730d6e2ed37d46c9b0acba3727bee7da8558d17625cd071f53fce",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 51,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        57,
+        988,
+        324,
+        1428
+      ],
+      "crop_rgba_sha256": "49a045c54043ee927053400c425bfa4c743e75db30e9ce959d444d586df6ba80",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 46,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        377,
+        8,
+        647,
+        452
+      ],
+      "crop_rgba_sha256": "db25ffd16637fcbe23e6935f12e979e051292a942c4bb10a53be0ceffadbf89f",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 49,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        377,
+        499,
+        647,
+        944
+      ],
+      "crop_rgba_sha256": "5892fce1c6b75cffb53e01d1637ffe58ef36b508693f6455a1d2ae476ddfe2e9",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 52,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        375,
+        990,
+        649,
+        1427
+      ],
+      "crop_rgba_sha256": "b43fa9b7a43c79fbfe33825e5fc76830fcd6de3b569d98d2d1290eb910e47baf",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 47,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        701,
+        8,
+        970,
+        452
+      ],
+      "crop_rgba_sha256": "95a45473644aecbfd17c588bd55bc5943218fc269a2f3ed97757b7335c16fb18",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 50,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        701,
+        500,
+        970,
+        944
+      ],
+      "crop_rgba_sha256": "43a0d26071ced1cd83591e972d94a37787f186f7c73e9d3e41d222c1d0888899",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 53,
+      "native_file": "legspics-build5-complete-initial-painted.png",
+      "rect": [
+        699,
+        989,
+        972,
+        1426
+      ],
+      "crop_rgba_sha256": "a6ab2096dc9a937d22e67ee33de23477dc03391ab4cdb7713df683af52fd4bca",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      }
+    }
+  ],
+  "original_paint_6x_reference_shortfalls": [
+    {
+      "archive": "TORPICS",
+      "index": 27,
+      "native_size": [
+        362,
+        388
+      ],
+      "reference_size": [
+        402,
+        408
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 30,
+      "native_size": [
+        362,
+        382
+      ],
+      "reference_size": [
+        420,
+        408
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 33,
+      "native_size": [
+        365,
+        371
+      ],
+      "reference_size": [
+        408,
+        390
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 28,
+      "native_size": [
+        380,
+        390
+      ],
+      "reference_size": [
+        408,
+        390
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 31,
+      "native_size": [
+        379,
+        374
+      ],
+      "reference_size": [
+        408,
+        390
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 34,
+      "native_size": [
+        380,
+        372
+      ],
+      "reference_size": [
+        408,
+        390
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 29,
+      "native_size": [
+        366,
+        390
+      ],
+      "reference_size": [
+        408,
+        414
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 32,
+      "native_size": [
+        368,
+        377
+      ],
+      "reference_size": [
+        408,
+        390
+      ]
+    },
+    {
+      "archive": "TORPICS",
+      "index": 35,
+      "native_size": [
+        383,
+        371
+      ],
+      "reference_size": [
+        420,
+        408
+      ]
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 30,
+      "native_size": [
+        290,
+        533
+      ],
+      "reference_size": [
+        294,
+        486
+      ]
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 29,
+      "native_size": [
+        277,
+        519
+      ],
+      "reference_size": [
+        294,
+        474
+      ]
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 35,
+      "native_size": [
+        282,
+        540
+      ],
+      "reference_size": [
+        294,
+        474
+      ]
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 45,
+      "native_size": [
+        269,
+        446
+      ],
+      "reference_size": [
+        288,
+        156
+      ]
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 51,
+      "native_size": [
+        267,
+        440
+      ],
+      "reference_size": [
+        300,
+        270
+      ]
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 53,
+      "native_size": [
+        273,
+        437
+      ],
+      "reference_size": [
+        276,
+        354
+      ]
+    }
+  ],
+  "note_on_size": "Original paint*6 is a reference, not the final anatomical destination. Review 15 entries during fit calibration; no final resolution gate is claimed.",
+  "note_on_alpha": "LEGSPICS build5 PNG has alpha0..254; actual compositing verified transparent background despite preview RGB. Original pixels preserved.",
+  "production_runtime_source_count": 380,
+  "production_audited_inputs_frozen": 385,
+  "production_hd_asset_files_frozen": 88,
+  "prototype_v6_runtime_inputs_unchanged": 381,
+  "prototype_v6_still_integrates_builds": [
+    0
+  ],
+  "docker_image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+  "docker_image_id": "sha256:0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f",
+  "original_oracle": "source PNG identity only; no new executable comparison",
+  "remake_execution": "not run for these new body parts",
+  "pictures": [
+    {
+      "file": "body-build1-candidates.png",
+      "sha256": "612077f26653b7a046f85e995759a1439ef4b84e4657225de46c4456f3318015",
+      "width": 1500,
+      "height": 980,
+      "scene": "男性精靈27款獨立部件",
+      "kind": "candidate contact sheet; not assembled character or runtime screenshot",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "body-build2-candidates.png",
+      "sha256": "7aae4df29669fe31c8ff3dbd4a9906d54ec293d9ebb1bae4961bd9dc25c37d5d",
+      "width": 1500,
+      "height": 980,
+      "scene": "矮人27款獨立部件",
+      "kind": "candidate contact sheet; not assembled character or runtime screenshot",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "body-build3-candidates.png",
+      "sha256": "a0973223aceb7272545cbb796b95aa97ee87b979decebe60ab47adcef5551f61",
+      "width": 1500,
+      "height": 980,
+      "scene": "有翼人物27款獨立部件",
+      "kind": "candidate contact sheet; not assembled character or runtime screenshot",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "body-build4-candidates.png",
+      "sha256": "2e9509be9b993c98a08e85db6bc71f5331560dedbbb1080663488fdd4656ba6c",
+      "width": 1500,
+      "height": 980,
+      "scene": "女性人類27款獨立部件",
+      "kind": "candidate contact sheet; not assembled character or runtime screenshot",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "body-build5-candidates.png",
+      "sha256": "e4eb399a31a40a41103025ae6d336d0c9e4238de05552463ab69a4ec878897c9",
+      "width": 1500,
+      "height": 980,
+      "scene": "女性精靈27款獨立部件",
+      "kind": "candidate contact sheet; not assembled character or runtime screenshot",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    }
+  ],
+  "metadata_hashes": {
+    "body-atlas-plan.json": "36a957ecd56f828d42d84c40a2e97065458dc3898113b3c0f8ec0995ef7c7be4",
+    "body-generation.json": "64ccbeb1f77397d3db6ad70933ba8343d3f95b731d33856718cbb87f980a11db"
+  },
+  "local_source_anchors_sha256": "9e5ce7da5a8771467e193d6a44d0bf4f91691e56054e988afee080637e9663ef",
+  "limitations": [
+    "Candidates only; not production or runtime integration",
+    "Full anatomical joins, partial/unarmored combinations, waist ownership, hands/weapons/shields and wing occlusion remain open",
+    "Outer canvas contacts recorded for fit review; contact sheets do not prove absence of clipping in every final pose",
+    "No new normal-player path, F10, save/reload, platform, audio or natural-completion claim"
+  ],
+  "local_workspace": "workplace/hd-equipment-pages-20261015/",
+  "raw_typed_anchors_and_models": "local only; never copied here"
+}

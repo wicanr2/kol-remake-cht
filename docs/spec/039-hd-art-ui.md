@@ -288,6 +288,10 @@ READY接入契約：
 28款武器與四盾已接入人類男性隔離原型，[武器盾牌比較](../verification/hd-equipment-pages-20261015/props-review.html)及[精簡收據](../verification/hd-equipment-pages-20261015/props-receipt.json)由本節索引。九張武器圖集依實際alpha分隔裁取，四盾亦按實際空白分隔，不能假設生成圖等分；所有裁取原生尺寸均涵蓋原著色範圍六倍顯示。手部回貼限原HANDPICS非黑著色矩形，避免帶入旁邊衣甲；生成PNG不改色或重繪。個人盾牌仍走既有原始點陣內容，不能由生成盾面覆蓋。
 修正後381份隔離來源的UI、入口及sceneverify通過；四條正常控制器路徑每側83狀態、中文紀錄與EGA完整畫格保持。Kenneth戰斧盾牌、Sharakan雙手劍與Jax腰帶戰斧已抽樣，六組36個實際F10設定事件、兩視窗鍵鼠、完整Inn與隊伍狀態保持，完整HD往返最大色差0。只驗上述持握樣本，不將32件圖集盤點當作32條正常遊玩路徑。其他五種體型、完整組合、所有動作圖示、嚴格素材載入與正式v3仍開放，整批維持DRAFT。
 
+其餘五種體型沿相同工作區續作135款頭／上身／腿部。生成前逐款核對原著色尺寸與既有身體底圖；完整部件保留露出皮膚、拳頭及足部，原圖只含局部護具時補足對應身體呈現，不能直接壓縮整張臉或整雙腿到局部護具矩形。候選實際尺寸、透明分隔及錨點逐款量測，必要時減少每張圖集的部件數；原typed座標、圖號、玩法及v3保持。
+
+135款候選已完成來源對應與透明裁取，仍為DRAFT，見[部件檢視頁](../verification/hd-equipment-pages-20261015/body-review.html)、[收據](../verification/hd-equipment-pages-20261015/body-receipt.json)及[裁取清冊](../verification/hd-equipment-pages-20261015/body-atlas-plan.json)。工作區`preflight-body-atlases.py`按實際alpha空隙量測17張圖集及第37款裸手修正版；15款低於原著色六倍尺寸參考，須在最終解剖矩形複核。`prepare-body-source-anchors.py`保存原typed錨點與著色邊界至本機`body-source-anchors.json`，SHA-256為`9e5ce7da5a8771467e193d6a44d0bf4f91691e56054e988afee080637e9663ef`；原資料不進Git。完整合成、握持／翅膀、混搭／卸裝及遊戲接入尚未驗收，不能延伸人類男性原型的F10結果。
+
 ### 角色模板續作
 
 狀態：有限CONFORMED。實際`CHARPICS`有80張40×38模板，80個RGB指紋皆不同；已核准六張對應47、43、21、32、35、54，原圖與匹配優先序保持。

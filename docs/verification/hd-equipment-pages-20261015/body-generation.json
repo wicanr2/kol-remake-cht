@@ -1,0 +1,5503 @@
+[
+  {
+    "id": "torpics-build1-complete",
+    "file": "torpics-build1-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build1-complete.txt",
+    "status": "DRAFT",
+    "sha256": "f80452e29d0a068cd398c939ba609adc325e562b6bfd7409ec45fa2544c7ffc5",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "b0bb5a26f3d3e781627c86122d92156e11522334f80f456b476cc9789234791f",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      18,
+      20,
+      1242,
+      1219
+    ],
+    "original_output": "exec-cb9aa23d-7287-4b51-aa0d-d21e376021ea.png",
+    "source_indices": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 9,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-009.png",
+        "size": [
+          64,
+          56
+        ],
+        "bbox": [
+          1,
+          0,
+          62,
+          56
+        ],
+        "png_sha256": "818077e5ae9629d2450bf0acf2f690154e4824cf2aead941862af7644a92bdaa",
+        "rgb_sha256": "514099ad7c2068a38304a41b5c07f4176a94b751fd6c9699edff01786df4eddf",
+        "rgba_sha256": "5d521d2d7ff0d298fbc8fd7ae25ac0e03c5184b0bbe17d64ba0a46ab73a5bac5",
+        "source_payloads": [
+          {
+            "image_index": 18,
+            "role": "color"
+          },
+          {
+            "image_index": 19,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 10,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-010.png",
+        "size": [
+          72,
+          59
+        ],
+        "bbox": [
+          7,
+          0,
+          72,
+          59
+        ],
+        "png_sha256": "00aafb23889028378bc93bd27ec6af1e6f7f4f86a5df857440559b037257df79",
+        "rgb_sha256": "dc17e6c4c020417f6dc5b6272af3a910c8760e377a158d613f8556ed625eb6a0",
+        "rgba_sha256": "a2833b1dc6c47b76a26c866863c8139a8caf866c31edc699522f72bea31da634",
+        "source_payloads": [
+          {
+            "image_index": 20,
+            "role": "color"
+          },
+          {
+            "image_index": 21,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 11,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-011.png",
+        "size": [
+          72,
+          58
+        ],
+        "bbox": [
+          7,
+          0,
+          72,
+          58
+        ],
+        "png_sha256": "97419dfbf5d349b411d32f04c8fc84a94b9220a7d8a988a3aea5fb1462911a01",
+        "rgb_sha256": "1ee0bcfba52d2ad563dc1da569d9052adbfc7e6bc4ccb13ef188a120556006ca",
+        "rgba_sha256": "b1bb72d076262c9e8deb2083e61cb3a46aee61ed9ce7fdf476f17fcbfbf61099",
+        "source_payloads": [
+          {
+            "image_index": 22,
+            "role": "color"
+          },
+          {
+            "image_index": 23,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 12,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-012.png",
+        "size": [
+          64,
+          59
+        ],
+        "bbox": [
+          1,
+          0,
+          61,
+          59
+        ],
+        "png_sha256": "9af7f77dd66130ca41762e582cb4d9a586a19a73542948e493d37ccd4835a7a0",
+        "rgb_sha256": "2d85769cec3b665bf417d95bbb74587a1be306e1c4f0dbc9d62900cacab00d35",
+        "rgba_sha256": "0425673a9436c92cba280bd2624beb0d4fcc03f39902c52bd6d13bcf5ada8541",
+        "source_payloads": [
+          {
+            "image_index": 24,
+            "role": "color"
+          },
+          {
+            "image_index": 25,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 13,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-013.png",
+        "size": [
+          72,
+          60
+        ],
+        "bbox": [
+          7,
+          0,
+          71,
+          60
+        ],
+        "png_sha256": "a11fb5ec857588acc21ef7322b7ed87aac5d58f7ee11146e38675595d07cc498",
+        "rgb_sha256": "6255deeeaf27620d2835f979a69c352b73a61efb6c4a691cba23b235fc0b780b",
+        "rgba_sha256": "67a26e0f789aa2aea30102485ec72d63b8e6da29de759aebdb5fafd1757329c9",
+        "source_payloads": [
+          {
+            "image_index": 26,
+            "role": "color"
+          },
+          {
+            "image_index": 27,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 14,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-014.png",
+        "size": [
+          72,
+          58
+        ],
+        "bbox": [
+          7,
+          0,
+          72,
+          58
+        ],
+        "png_sha256": "2f83cc668d55f03824b2a39404deb2a387491e00737094fac7a7aa2a7e660591",
+        "rgb_sha256": "c7df437859328b60f9090d6db563de6c3b74b03b91def66259e84178d5be2542",
+        "rgba_sha256": "8e379caf169cf67b9fef12895c8f94b1a0f02c475411f1849c95b97316329c03",
+        "source_payloads": [
+          {
+            "image_index": 28,
+            "role": "color"
+          },
+          {
+            "image_index": 29,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 15,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-015.png",
+        "size": [
+          72,
+          58
+        ],
+        "bbox": [
+          7,
+          0,
+          71,
+          58
+        ],
+        "png_sha256": "86d071855ed76182d637c899e90e0abd8be1d7f3e259fdfc4d0c7cb189857317",
+        "rgb_sha256": "0d58dca25f25677631449d838f77bf911cfaebe47dd5f76975dd63feb8372e31",
+        "rgba_sha256": "0d99e09753bb966e7f0b5f3913b40cc95467f1997e797c4021d94573c561ff55",
+        "source_payloads": [
+          {
+            "image_index": 30,
+            "role": "color"
+          },
+          {
+            "image_index": 31,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 16,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-016.png",
+        "size": [
+          72,
+          59
+        ],
+        "bbox": [
+          7,
+          0,
+          70,
+          59
+        ],
+        "png_sha256": "610e98bf01496ad4af6f90813a49cb52e269310ad0e8bcfad376347336d3afdb",
+        "rgb_sha256": "8f13411d29cbd5cc0ccda5c811f0af7a1e48ee5e0490c9eea8bb6132c1a8e9d8",
+        "rgba_sha256": "6db796f5afd3f175c23291d44bec4805e6e58f985557657da2a6438504fc1451",
+        "source_payloads": [
+          {
+            "image_index": 32,
+            "role": "color"
+          },
+          {
+            "image_index": 33,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 17,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-017.png",
+        "size": [
+          72,
+          58
+        ],
+        "bbox": [
+          7,
+          0,
+          72,
+          58
+        ],
+        "png_sha256": "aeda5d4977f86123630509ef3aed8338214cbe921a6e6077ed942ac0b14672cf",
+        "rgb_sha256": "8b52bf95505e0f45b1d11ffe53984c22161dc77556d93ce0f3988d8977631455",
+        "rgba_sha256": "bafc9730fd10bbf71a4886f9a0d85c74f8eebd5ec3fdf036e917af8889782d35",
+        "source_payloads": [
+          {
+            "image_index": 34,
+            "role": "color"
+          },
+          {
+            "image_index": 35,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build1-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "headpics-build1-initial",
+    "file": "headpics-build1-initial-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/headpics-build1.txt",
+    "status": "DRAFT",
+    "sha256": "a4b1f2298fc54b667b9c325cbb8214b07b1651341fd4b73072a0d240baaa3010",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "4c1ebab7f685845bd43cc33ac0ee90deaf7c7f81fa22ffd0d87a1165df016eae",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      65,
+      7,
+      1250,
+      1190
+    ],
+    "original_output": "exec-a72f8ddb-f55e-44d4-8f2c-f61170b2a931.png",
+    "source_indices": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "source_pngs": [
+      {
+        "archive": "HEADPICS",
+        "index": 9,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-009.png",
+        "size": [
+          32,
+          37
+        ],
+        "bbox": [
+          3,
+          0,
+          27,
+          37
+        ],
+        "png_sha256": "c9de21833c0b48fa4095ddcd82532137009c72bc2c3b75b82c66487a7c0d4abb",
+        "rgb_sha256": "9d81edf61c2b750d7cca1ab1f3bdaf37e8e58ed5ff446a1e4793a3ac07900cf2",
+        "rgba_sha256": "19d16c3f4abe182a537b0418191b460645f576c5783fa766c1e20bce9129f89b",
+        "source_payloads": [
+          {
+            "image_index": 18,
+            "role": "color"
+          },
+          {
+            "image_index": 19,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 10,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-010.png",
+        "size": [
+          24,
+          16
+        ],
+        "bbox": [
+          6,
+          0,
+          24,
+          16
+        ],
+        "png_sha256": "d2a997bf30b2c3ee5fcdb37b412d39c71b6b4a761d563eff48b96b751a27b290",
+        "rgb_sha256": "f248f1bdabab5b492b366b818427b0316718526ff9cb7bfdb4487ba1cbe2546c",
+        "rgba_sha256": "87cf1aa9dace5fdf4b6728f1430ecab6686cbb3d4e52eb8c00bd93631057fa3d",
+        "source_payloads": [
+          {
+            "image_index": 20,
+            "role": "color"
+          },
+          {
+            "image_index": 21,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 11,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-011.png",
+        "size": [
+          32,
+          17
+        ],
+        "bbox": [
+          5,
+          0,
+          25,
+          17
+        ],
+        "png_sha256": "24b3dd66254993cfcd74a740f68827aa67de31f00ea68dfcae00957e53137772",
+        "rgb_sha256": "fc75dc8dde5d9c3cf44f13bf836f905e921ea7b16f64933c0902e6728f5fd181",
+        "rgba_sha256": "b8c3421ba9f40ec53ff10bbce956dea6ec93a93bef43c0dc4a74faaaa8291cd5",
+        "source_payloads": [
+          {
+            "image_index": 22,
+            "role": "color"
+          },
+          {
+            "image_index": 23,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 12,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-012.png",
+        "size": [
+          32,
+          16
+        ],
+        "bbox": [
+          5,
+          0,
+          25,
+          16
+        ],
+        "png_sha256": "2b3e55b2029e94a37338c7c66896eae1e8d41c682b5d4dfe45278db774610ac4",
+        "rgb_sha256": "0586937a3081a3792851be34a109f965dbd023ad64b193f3b83522214e0d8a09",
+        "rgba_sha256": "50509250d29a0eba4e8dac370d52bdb5f9ec23711e9c31bb927c144034d627f9",
+        "source_payloads": [
+          {
+            "image_index": 24,
+            "role": "color"
+          },
+          {
+            "image_index": 25,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 13,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-013.png",
+        "size": [
+          32,
+          19
+        ],
+        "bbox": [
+          5,
+          0,
+          25,
+          19
+        ],
+        "png_sha256": "f95e772ebcce99d092214a451ccd403d9e72d45f931a0739f2a929d787992428",
+        "rgb_sha256": "6dda52878945bc9b0e7dba16a4d9dca76822eebb4043319082d57551ddd9849d",
+        "rgba_sha256": "f929636e5be5fd5e78cfa21a1d41669aedaafa3e958866a05925e0d478084cc2",
+        "source_payloads": [
+          {
+            "image_index": 26,
+            "role": "color"
+          },
+          {
+            "image_index": 27,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 14,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-014.png",
+        "size": [
+          32,
+          19
+        ],
+        "bbox": [
+          0,
+          0,
+          30,
+          19
+        ],
+        "png_sha256": "e5abb7510f1a6bcfeb0a27e84fd4d8e2a7812aea535906824e8a7f309393c57f",
+        "rgb_sha256": "c4aa2f65624540c049269461c2c4602833690f7e00f23948b80d989474823566",
+        "rgba_sha256": "58410329b4820b8dd397fc14ea5fffde1591d13ecd78b6caeb86bf64eb4e0886",
+        "source_payloads": [
+          {
+            "image_index": 28,
+            "role": "color"
+          },
+          {
+            "image_index": 29,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 15,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-015.png",
+        "size": [
+          24,
+          14
+        ],
+        "bbox": [
+          7,
+          0,
+          23,
+          14
+        ],
+        "png_sha256": "9c4f10f991f493988533a34cffd4bd3c4d0196af34b91ef8e11b9a69aadd70a8",
+        "rgb_sha256": "52be6be20020a8446360c8a1b9bd6d33602aec4a397adf19626d48a30919b888",
+        "rgba_sha256": "6104c4444fb71863fe211b22bfe9316d9ebc7364114c7256f6a0ed6f40d1527f",
+        "source_payloads": [
+          {
+            "image_index": 30,
+            "role": "color"
+          },
+          {
+            "image_index": 31,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 16,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-016.png",
+        "size": [
+          32,
+          20
+        ],
+        "bbox": [
+          1,
+          0,
+          30,
+          20
+        ],
+        "png_sha256": "d0a0352d0b5b249a1c0aa8943ef787b15e472c9fff9f31149d16050548293861",
+        "rgb_sha256": "4db0c46df15a64d5b712e43ab7ab614b3c0254c9d124a61a025dbf4794ebadae",
+        "rgba_sha256": "ca25cfd55b2d9bc2d0afc21e5e5d54d0f029bc94868d7ad3b10d4ffdc3541644",
+        "source_payloads": [
+          {
+            "image_index": 32,
+            "role": "color"
+          },
+          {
+            "image_index": 33,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 17,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-017.png",
+        "size": [
+          48,
+          21
+        ],
+        "bbox": [
+          1,
+          0,
+          44,
+          21
+        ],
+        "png_sha256": "184b389b470cae69cbc6bf8823c388dce8e97acfb7d27f07abf3b2c31a24938c",
+        "rgb_sha256": "e10a157e38d5093b694d9761bd650ccb7f1feefe756633e441277b40cda07191",
+        "rgba_sha256": "92d9587088a267b24a88f5f1715157c7b4309eb704d06ca7b4ce5c7cfe4e9015",
+        "source_payloads": [
+          {
+            "image_index": 34,
+            "role": "color"
+          },
+          {
+            "image_index": 35,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/HEADPICS.0",
+      "size": 17354,
+      "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": true,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/headpics-build1-initial-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "legspics-build1-complete",
+    "file": "legspics-build1-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/legspics-build1-complete.txt",
+    "status": "DRAFT",
+    "sha256": "6836ad382f4be1fd39eddcb580056e3b1170e6a590124a113468a680897d62d0",
+    "size": [
+      1173,
+      1341
+    ],
+    "prompt_sha256": "9bbc1d289ceec0a53888040570ab52197314be3996280fe7516a9b451bcbab7b",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      51,
+      8,
+      1124,
+      1300
+    ],
+    "original_output": "exec-67e780a3-a9a4-444a-a998-580bf5553c6b.png",
+    "source_indices": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "source_pngs": [
+      {
+        "archive": "LEGSPICS",
+        "index": 9,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-009.png",
+        "size": [
+          48,
+          33
+        ],
+        "bbox": [
+          0,
+          0,
+          47,
+          33
+        ],
+        "png_sha256": "3568eaaec9ffa5231b1b4ef1f4167b796637d11003b574d3e78d9d42c968211e",
+        "rgb_sha256": "748d96f77f95b6b4fc905867e5e68752df1bbb55bfd9bc90993fd2ea92567aae",
+        "rgba_sha256": "3a3f01c740d79d47181b2ad99e834643381c1aa03a1a33430a6c1cfcff5177b2",
+        "source_payloads": [
+          {
+            "image_index": 18,
+            "role": "color"
+          },
+          {
+            "image_index": 19,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 10,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-010.png",
+        "size": [
+          56,
+          64
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          64
+        ],
+        "png_sha256": "993a891b0a3f24e0c8dad0c43dbe5b3d5f479f27d919de492e938f1a8d1b135a",
+        "rgb_sha256": "5aa38bdf6a937627abd4f2d932011447d4dd6850013df5984b75ba46d6958c00",
+        "rgba_sha256": "8f08dbca019e543a22ece258e1eba4e923a6e8aefc6c42ffcc74139f32f1cdf5",
+        "source_payloads": [
+          {
+            "image_index": 20,
+            "role": "color"
+          },
+          {
+            "image_index": 21,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 11,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-011.png",
+        "size": [
+          56,
+          63
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          63
+        ],
+        "png_sha256": "47831d7e51a7789ad8e2e1f89be39e4b014b9193cc3b7d13bb19594aa37065c0",
+        "rgb_sha256": "e3d33cd2b4f4e4fa757bf244b3f34531d073591ff91f1138bee934a2626fcbb9",
+        "rgba_sha256": "e5ce13ede81f97b8102036f0fd8170fd542bd2c1e205a680add41d363e0f1416",
+        "source_payloads": [
+          {
+            "image_index": 22,
+            "role": "color"
+          },
+          {
+            "image_index": 23,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 12,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-012.png",
+        "size": [
+          56,
+          39
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          39
+        ],
+        "png_sha256": "2a42750222728917d739bb18521d9ea3165d2250ad395e7fc90e7e0683920ae9",
+        "rgb_sha256": "fe144f7de4fe5c18973f4f7f2460c156a7f96b5a7d63f327c1a675ca270c0e23",
+        "rgba_sha256": "90b8815dba094f521a81b7236a2c7f467ffade1af7bd6c00405da149cffadeeb",
+        "source_payloads": [
+          {
+            "image_index": 24,
+            "role": "color"
+          },
+          {
+            "image_index": 25,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 13,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-013.png",
+        "size": [
+          56,
+          63
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          63
+        ],
+        "png_sha256": "19648b67d50a61591b27c92f041978794ab14c2ac9d27799562caccae238532e",
+        "rgb_sha256": "841e58b53f4fffebcdd09c5619587752b2a4c882d83f45107778feb9cfa7366f",
+        "rgba_sha256": "32958cceed2f1881c7711c80ea456327ac3a63180a8298d160ff36e77b27cc9d",
+        "source_payloads": [
+          {
+            "image_index": 26,
+            "role": "color"
+          },
+          {
+            "image_index": 27,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 14,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-014.png",
+        "size": [
+          56,
+          63
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          63
+        ],
+        "png_sha256": "275654f1bcac47faa9f67b908126ee5900969322789dfa85eee4aeb1b45ae627",
+        "rgb_sha256": "54e203fd08060cdcfd51e092a6cfa5d17bb3b6ad1f141ed06febe52db7542703",
+        "rgba_sha256": "1e7b2491f9c92197138cef542dc28cd8b03b2cbb89a46381f975d76077652fde",
+        "source_payloads": [
+          {
+            "image_index": 28,
+            "role": "color"
+          },
+          {
+            "image_index": 29,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 15,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-015.png",
+        "size": [
+          56,
+          64
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          64
+        ],
+        "png_sha256": "288c25737e46e84893ab0e2a5c53d092af072cebd22a39e04a46bfb4e6e12fba",
+        "rgb_sha256": "b05cc8a662f69179bf8fc217cdab75afbfc694a2aa93170c112c681efe29a686",
+        "rgba_sha256": "25f263079d9a91dae46c292fa8e39f90d2c6b12819d228c5775369c6a1a07d33",
+        "source_payloads": [
+          {
+            "image_index": 30,
+            "role": "color"
+          },
+          {
+            "image_index": 31,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 16,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-016.png",
+        "size": [
+          56,
+          64
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          64
+        ],
+        "png_sha256": "10d20c0c2f7c3ccb59b6e208a5634769c63a5fb572cf0017456181cb04df3f6e",
+        "rgb_sha256": "c21676dc84568773ea37f02e05a03611753245c2aa74f6f102f092ee3f4dfc22",
+        "rgba_sha256": "1f31a73631c2bc88f627b10b31001f26c538d59b58e4e3dd5b306a70dae5137b",
+        "source_payloads": [
+          {
+            "image_index": 32,
+            "role": "color"
+          },
+          {
+            "image_index": 33,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 17,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-017.png",
+        "size": [
+          56,
+          57
+        ],
+        "bbox": [
+          6,
+          0,
+          55,
+          57
+        ],
+        "png_sha256": "d234d5e1f895dd8fed0c51957e63d799b59f3b44769a4bd780524b155cae93bd",
+        "rgb_sha256": "d63043adc7288892e04f972f0cc98e3b95fc5798a160d07ff8e96ee3967649f8",
+        "rgba_sha256": "4a7c9c03a354fef6c56fe6da17b0901e9b1cc73552da1e220a20306ef8a1c72e",
+        "source_payloads": [
+          {
+            "image_index": 34,
+            "role": "color"
+          },
+          {
+            "image_index": 35,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/LEGSPICS.0",
+      "size": 39694,
+      "sha256": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/legspics-build1-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "headpics-build1",
+    "file": "headpics-build1-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/headpics-build1-v2.txt",
+    "status": "DRAFT",
+    "sha256": "864f9cb14a68fc890b9661657b4976169abaabeb1397af7f0315bc30794dfbce",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "3ee1d1eeb415724fceb18b4546b5d23a2bfa1897ce713fc38b95c5399d04006c",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      89,
+      50,
+      1220,
+      1168
+    ],
+    "original_output": "exec-42c14e5e-5be9-40ef-824b-39a652f827a8.png",
+    "source_indices": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "source_pngs": [
+      {
+        "archive": "HEADPICS",
+        "index": 9,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-009.png",
+        "size": [
+          32,
+          37
+        ],
+        "bbox": [
+          3,
+          0,
+          27,
+          37
+        ],
+        "png_sha256": "c9de21833c0b48fa4095ddcd82532137009c72bc2c3b75b82c66487a7c0d4abb",
+        "rgb_sha256": "9d81edf61c2b750d7cca1ab1f3bdaf37e8e58ed5ff446a1e4793a3ac07900cf2",
+        "rgba_sha256": "19d16c3f4abe182a537b0418191b460645f576c5783fa766c1e20bce9129f89b",
+        "source_payloads": [
+          {
+            "image_index": 18,
+            "role": "color"
+          },
+          {
+            "image_index": 19,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 10,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-010.png",
+        "size": [
+          24,
+          16
+        ],
+        "bbox": [
+          6,
+          0,
+          24,
+          16
+        ],
+        "png_sha256": "d2a997bf30b2c3ee5fcdb37b412d39c71b6b4a761d563eff48b96b751a27b290",
+        "rgb_sha256": "f248f1bdabab5b492b366b818427b0316718526ff9cb7bfdb4487ba1cbe2546c",
+        "rgba_sha256": "87cf1aa9dace5fdf4b6728f1430ecab6686cbb3d4e52eb8c00bd93631057fa3d",
+        "source_payloads": [
+          {
+            "image_index": 20,
+            "role": "color"
+          },
+          {
+            "image_index": 21,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 11,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-011.png",
+        "size": [
+          32,
+          17
+        ],
+        "bbox": [
+          5,
+          0,
+          25,
+          17
+        ],
+        "png_sha256": "24b3dd66254993cfcd74a740f68827aa67de31f00ea68dfcae00957e53137772",
+        "rgb_sha256": "fc75dc8dde5d9c3cf44f13bf836f905e921ea7b16f64933c0902e6728f5fd181",
+        "rgba_sha256": "b8c3421ba9f40ec53ff10bbce956dea6ec93a93bef43c0dc4a74faaaa8291cd5",
+        "source_payloads": [
+          {
+            "image_index": 22,
+            "role": "color"
+          },
+          {
+            "image_index": 23,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 12,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-012.png",
+        "size": [
+          32,
+          16
+        ],
+        "bbox": [
+          5,
+          0,
+          25,
+          16
+        ],
+        "png_sha256": "2b3e55b2029e94a37338c7c66896eae1e8d41c682b5d4dfe45278db774610ac4",
+        "rgb_sha256": "0586937a3081a3792851be34a109f965dbd023ad64b193f3b83522214e0d8a09",
+        "rgba_sha256": "50509250d29a0eba4e8dac370d52bdb5f9ec23711e9c31bb927c144034d627f9",
+        "source_payloads": [
+          {
+            "image_index": 24,
+            "role": "color"
+          },
+          {
+            "image_index": 25,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 13,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-013.png",
+        "size": [
+          32,
+          19
+        ],
+        "bbox": [
+          5,
+          0,
+          25,
+          19
+        ],
+        "png_sha256": "f95e772ebcce99d092214a451ccd403d9e72d45f931a0739f2a929d787992428",
+        "rgb_sha256": "6dda52878945bc9b0e7dba16a4d9dca76822eebb4043319082d57551ddd9849d",
+        "rgba_sha256": "f929636e5be5fd5e78cfa21a1d41669aedaafa3e958866a05925e0d478084cc2",
+        "source_payloads": [
+          {
+            "image_index": 26,
+            "role": "color"
+          },
+          {
+            "image_index": 27,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 14,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-014.png",
+        "size": [
+          32,
+          19
+        ],
+        "bbox": [
+          0,
+          0,
+          30,
+          19
+        ],
+        "png_sha256": "e5abb7510f1a6bcfeb0a27e84fd4d8e2a7812aea535906824e8a7f309393c57f",
+        "rgb_sha256": "c4aa2f65624540c049269461c2c4602833690f7e00f23948b80d989474823566",
+        "rgba_sha256": "58410329b4820b8dd397fc14ea5fffde1591d13ecd78b6caeb86bf64eb4e0886",
+        "source_payloads": [
+          {
+            "image_index": 28,
+            "role": "color"
+          },
+          {
+            "image_index": 29,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 15,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-015.png",
+        "size": [
+          24,
+          14
+        ],
+        "bbox": [
+          7,
+          0,
+          23,
+          14
+        ],
+        "png_sha256": "9c4f10f991f493988533a34cffd4bd3c4d0196af34b91ef8e11b9a69aadd70a8",
+        "rgb_sha256": "52be6be20020a8446360c8a1b9bd6d33602aec4a397adf19626d48a30919b888",
+        "rgba_sha256": "6104c4444fb71863fe211b22bfe9316d9ebc7364114c7256f6a0ed6f40d1527f",
+        "source_payloads": [
+          {
+            "image_index": 30,
+            "role": "color"
+          },
+          {
+            "image_index": 31,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 16,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-016.png",
+        "size": [
+          32,
+          20
+        ],
+        "bbox": [
+          1,
+          0,
+          30,
+          20
+        ],
+        "png_sha256": "d0a0352d0b5b249a1c0aa8943ef787b15e472c9fff9f31149d16050548293861",
+        "rgb_sha256": "4db0c46df15a64d5b712e43ab7ab614b3c0254c9d124a61a025dbf4794ebadae",
+        "rgba_sha256": "ca25cfd55b2d9bc2d0afc21e5e5d54d0f029bc94868d7ad3b10d4ffdc3541644",
+        "source_payloads": [
+          {
+            "image_index": 32,
+            "role": "color"
+          },
+          {
+            "image_index": 33,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 17,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-017.png",
+        "size": [
+          48,
+          21
+        ],
+        "bbox": [
+          1,
+          0,
+          44,
+          21
+        ],
+        "png_sha256": "184b389b470cae69cbc6bf8823c388dce8e97acfb7d27f07abf3b2c31a24938c",
+        "rgb_sha256": "e10a157e38d5093b694d9761bd650ccb7f1feefe756633e441277b40cda07191",
+        "rgba_sha256": "92d9587088a267b24a88f5f1715157c7b4309eb704d06ca7b4ce5c7cfe4e9015",
+        "source_payloads": [
+          {
+            "image_index": 34,
+            "role": "color"
+          },
+          {
+            "image_index": 35,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/HEADPICS.0",
+      "size": 17354,
+      "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/headpics-build1-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build2-complete",
+    "file": "torpics-build2-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build2-complete.txt",
+    "status": "DRAFT",
+    "sha256": "31fd3edfac23262fd564b6bda70ea0f74bb8e2ef6603ba4ada26a11188e220a4",
+    "size": [
+      1484,
+      1060
+    ],
+    "prompt_sha256": "91ef49fdf4f9071d6fa0c3a84c7256018172a826fc0cdff8f8661baf03f02d82",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      18,
+      34,
+      1467,
+      998
+    ],
+    "original_output": "exec-73536272-c6f9-43c1-a088-ab7ec43c181e.png",
+    "source_indices": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 18,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-018.png",
+        "size": [
+          80,
+          40
+        ],
+        "bbox": [
+          6,
+          0,
+          80,
+          40
+        ],
+        "png_sha256": "224b55c57896e690110e6a828bddb37e1b94dfcc5b5d48ff1319890b0af817d4",
+        "rgb_sha256": "81abf7c03b67fe321cc834370725275f87a5afd7c03230e9cfff171b1c5e960c",
+        "rgba_sha256": "18aa4102358ac038cc1862128ac90b2f17b470185b60d2fa8d1b04e324cc2870",
+        "source_payloads": [
+          {
+            "image_index": 36,
+            "role": "color"
+          },
+          {
+            "image_index": 37,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 19,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-019.png",
+        "size": [
+          80,
+          35
+        ],
+        "bbox": [
+          7,
+          0,
+          80,
+          35
+        ],
+        "png_sha256": "f6c1bf6200c4eecf06cf1fbe0a4ed5316b55545997fb4e9995caa30f9cd8964e",
+        "rgb_sha256": "51d6b002154f59dbf7cbb400943210568c8a2e75cc580d98ac9474f54cbebd25",
+        "rgba_sha256": "9776fc36db4d135ca1e069f0dcf62c92a229c8ac0ef25f7e06488efb085bf803",
+        "source_payloads": [
+          {
+            "image_index": 38,
+            "role": "color"
+          },
+          {
+            "image_index": 39,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 20,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-020.png",
+        "size": [
+          88,
+          36
+        ],
+        "bbox": [
+          5,
+          0,
+          82,
+          36
+        ],
+        "png_sha256": "a6bdc2b1a0f3293ee76a89780d550575b7cbfb58ab5b77d5858fa6afd1762080",
+        "rgb_sha256": "b0ef0d901f6d7ea68dc1106a9b3eebd42f6ece0814f8214bd0c5900fad7d67b7",
+        "rgba_sha256": "4a6f98736550453ed6ed81382cba7e7ef6644c2709bb6a2d9c7f3767a1860507",
+        "source_payloads": [
+          {
+            "image_index": 40,
+            "role": "color"
+          },
+          {
+            "image_index": 41,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 21,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-021.png",
+        "size": [
+          72,
+          37
+        ],
+        "bbox": [
+          0,
+          0,
+          71,
+          37
+        ],
+        "png_sha256": "9ae09afbece0e9c79223e62615ecc6b6e95ad10a5d052e693aed37aa046e159c",
+        "rgb_sha256": "66733142be23ade3ba96d107a2767b8c6ead601c5ebc40cec2378587ef1e3e26",
+        "rgba_sha256": "bb74e20f8dc82e6265835e6b9a32edaafaeef016645f412aa862fba77d6a63ac",
+        "source_payloads": [
+          {
+            "image_index": 42,
+            "role": "color"
+          },
+          {
+            "image_index": 43,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 22,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-022.png",
+        "size": [
+          80,
+          35
+        ],
+        "bbox": [
+          7,
+          0,
+          80,
+          35
+        ],
+        "png_sha256": "46599e62cb2045d9b9884483240303271482f423226afaedeffb136fcc18f3fb",
+        "rgb_sha256": "a363792a1612f8476c63287a547ee3ff20c212d76b824bef8814a39e57f5956d",
+        "rgba_sha256": "33352745768ab88abff22688c4891e4760a4d295527d398485c007972d5ea1f3",
+        "source_payloads": [
+          {
+            "image_index": 44,
+            "role": "color"
+          },
+          {
+            "image_index": 45,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 23,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-023.png",
+        "size": [
+          80,
+          35
+        ],
+        "bbox": [
+          7,
+          0,
+          80,
+          35
+        ],
+        "png_sha256": "5285d89cadadd6e70479b73750bd59b19fd44c17333f9bc326c1853da1639ab0",
+        "rgb_sha256": "40908101f6509ca09b4bb8c06ba080dbffbcfda8f04cc9d2ca42ca71d0a4b855",
+        "rgba_sha256": "54d5f62b782971542a577d223c6a2f01598ca159e7656e8d386b5db95211ad69",
+        "source_payloads": [
+          {
+            "image_index": 46,
+            "role": "color"
+          },
+          {
+            "image_index": 47,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 24,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-024.png",
+        "size": [
+          80,
+          35
+        ],
+        "bbox": [
+          7,
+          0,
+          80,
+          35
+        ],
+        "png_sha256": "b4722909a3cd57c89e945db4a70fa900e3aa7f3248e485f177fae60c94170240",
+        "rgb_sha256": "7820ff65bcbe9f3c4fec3cb6d42811eee1be52a704bf8f27029576e4daa6331d",
+        "rgba_sha256": "8199e1ce92194ff224c6692b0845566da4098471231e7bc17b4fa02cb003ff5e",
+        "source_payloads": [
+          {
+            "image_index": 48,
+            "role": "color"
+          },
+          {
+            "image_index": 49,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 25,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-025.png",
+        "size": [
+          80,
+          35
+        ],
+        "bbox": [
+          7,
+          0,
+          80,
+          35
+        ],
+        "png_sha256": "fac4de6596e35b86e7248135f3cc6a628843824b298de277287f32a9848c58f0",
+        "rgb_sha256": "643ab1a1e970ff2f172f856dcf85d270a150a9d80318b0c94fcafe7ae888a0b2",
+        "rgba_sha256": "dd27d6192c4f91f58cb38a75063f4a4f97d89cf5eebd6af3097404c1558c8e4f",
+        "source_payloads": [
+          {
+            "image_index": 50,
+            "role": "color"
+          },
+          {
+            "image_index": 51,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 26,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-026.png",
+        "size": [
+          80,
+          43
+        ],
+        "bbox": [
+          6,
+          0,
+          80,
+          43
+        ],
+        "png_sha256": "5c37f53762be8b4c479cbf4435436a9ab040c1023344afe428f1540a95f5a15d",
+        "rgb_sha256": "f2e2040f2f9cd706392c219e9addf21e45e86cbe966ac0eeca240f98fe883c98",
+        "rgba_sha256": "b8ec0e9b70fd77b3c3ed3e4fb93449624034db323783cf6a73e94315ec26bf54",
+        "source_payloads": [
+          {
+            "image_index": 52,
+            "role": "color"
+          },
+          {
+            "image_index": 53,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build2-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "headpics-build2",
+    "file": "headpics-build2-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/headpics-build2.txt",
+    "status": "DRAFT",
+    "sha256": "f67e5d5a21b6ba1063a8fdd2ad4582063527aa9900526d8f3d84596d9786bfaf",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "bfa7e5c9b93cb2212aec42c12d8edd1478ae7276d614a08dcc5f3cf003b1110f",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      33,
+      75,
+      1224,
+      1235
+    ],
+    "original_output": "exec-15781450-a89e-4045-9462-a2d230e94c31.png",
+    "source_indices": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "source_pngs": [
+      {
+        "archive": "HEADPICS",
+        "index": 18,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-018.png",
+        "size": [
+          40,
+          32
+        ],
+        "bbox": [
+          2,
+          0,
+          37,
+          32
+        ],
+        "png_sha256": "50667e26a2a56f474b6e2aafa5a64021a0854f66fe65a416998689f8499150b0",
+        "rgb_sha256": "1390879370010d9bd9e0623d65034b8748c1cd5289cf5cbe8aadd535e1b07716",
+        "rgba_sha256": "7cfb66f05be2e181cab605acd493f0fa5d192f02ad42a2ed3cc96eab2d95f0f7",
+        "source_payloads": [
+          {
+            "image_index": 36,
+            "role": "color"
+          },
+          {
+            "image_index": 37,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 19,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-019.png",
+        "size": [
+          48,
+          25
+        ],
+        "bbox": [
+          5,
+          0,
+          48,
+          25
+        ],
+        "png_sha256": "9a4d2adfac2a1f6b73b0f449d682359669ee4c0f9373c0e62b300d87bee692a2",
+        "rgb_sha256": "4cb4c3d6a0dffa59f521acfc6fbe547e5a27d73581398c1dd638f2ecd1d039d8",
+        "rgba_sha256": "28fa55fddcb206f6189b8ac69e7ebbd0a00851b913cc9e6498de984fd2ed39c2",
+        "source_payloads": [
+          {
+            "image_index": 38,
+            "role": "color"
+          },
+          {
+            "image_index": 39,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 20,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-020.png",
+        "size": [
+          56,
+          26
+        ],
+        "bbox": [
+          7,
+          0,
+          49,
+          26
+        ],
+        "png_sha256": "a5d7088f7ebd3150530a1caa28af8f122eaadaa0f3918e3f03e473202bf7240b",
+        "rgb_sha256": "0ba63b070af38e660cddf2bae5542fb6206fcadbbbbb017feb7d6af6d4ba6db8",
+        "rgba_sha256": "ab00fe885b1eb92bdfa57195adb62a3cd053d636d31c2afec1eef8c096077d16",
+        "source_payloads": [
+          {
+            "image_index": 40,
+            "role": "color"
+          },
+          {
+            "image_index": 41,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 21,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-021.png",
+        "size": [
+          40,
+          27
+        ],
+        "bbox": [
+          3,
+          0,
+          36,
+          27
+        ],
+        "png_sha256": "a4b516ae84ebbf8c2be297ce8e45243111b9b61e76fe11a2352b92ba3802b0f2",
+        "rgb_sha256": "68cbe0e4bec6a2c1327833942e14fa3857dbf9db9f481c491e0b15afc6c9b688",
+        "rgba_sha256": "922bc750ae20cfeaf0df01facb241fe8d337f1812f7f54ee251f5494a5c64507",
+        "source_payloads": [
+          {
+            "image_index": 42,
+            "role": "color"
+          },
+          {
+            "image_index": 43,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 22,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-022.png",
+        "size": [
+          48,
+          26
+        ],
+        "bbox": [
+          5,
+          0,
+          48,
+          26
+        ],
+        "png_sha256": "2081a6de1b86f83dbfc49ecfaa7682faa7746f40d7b356d41267ed483d476e63",
+        "rgb_sha256": "aff606eb603944b1adf09eb8ffb76eefb178518051e8e298d6db459721041c6d",
+        "rgba_sha256": "a89170f0404507718896dee2d5aafdd24e11755a60a649cc031c9296eb43d57b",
+        "source_payloads": [
+          {
+            "image_index": 44,
+            "role": "color"
+          },
+          {
+            "image_index": 45,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 23,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-023.png",
+        "size": [
+          48,
+          26
+        ],
+        "bbox": [
+          5,
+          0,
+          48,
+          26
+        ],
+        "png_sha256": "679259879cb030f96087bf3ef0aac2c05dfceb2194f0ddaeb0dd182db2784f03",
+        "rgb_sha256": "041c7ce0933cf37b421e3bf37bb621de4964df787179b4d149c1e4ec94ffad02",
+        "rgba_sha256": "a09fe7197847e2fccac39b547fd6a8f72ff8de29fb6840bf3a6c65f290d1f483",
+        "source_payloads": [
+          {
+            "image_index": 46,
+            "role": "color"
+          },
+          {
+            "image_index": 47,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 24,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-024.png",
+        "size": [
+          40,
+          31
+        ],
+        "bbox": [
+          2,
+          0,
+          37,
+          31
+        ],
+        "png_sha256": "88f24cb591051f8ead004833a2e9268f3f1c3c43bd48fabbe0f587db306777bf",
+        "rgb_sha256": "6f1ceffa30eee44deaee9447be36dd7b72cafbed9882e9bf1a007882aa99c687",
+        "rgba_sha256": "f47d49939851fa7bd75ffeadbf5d2b93de870aef3715208c1ec58959715cb18f",
+        "source_payloads": [
+          {
+            "image_index": 48,
+            "role": "color"
+          },
+          {
+            "image_index": 49,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 25,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-025.png",
+        "size": [
+          48,
+          26
+        ],
+        "bbox": [
+          5,
+          0,
+          48,
+          26
+        ],
+        "png_sha256": "b7952395ae691be9ac04abc9ab4e778641d5cc49010bcf930f9879802e60c049",
+        "rgb_sha256": "f9239c144b87f4a0bedc76ea70f3793ca7d22f46f71001bdeeccfd00b7d57842",
+        "rgba_sha256": "c4da54dc5af555bc61b2698387b58b657b1d701274b54d66401b6ed382ac5f28",
+        "source_payloads": [
+          {
+            "image_index": 50,
+            "role": "color"
+          },
+          {
+            "image_index": 51,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 26,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-026.png",
+        "size": [
+          40,
+          52
+        ],
+        "bbox": [
+          2,
+          0,
+          37,
+          52
+        ],
+        "png_sha256": "2bd4c137c1d6d9f7237099dc28ad124d21a9191f111ea9b487fe1fc90cbd9844",
+        "rgb_sha256": "dc261bbf59b1098400303e1c341536fa07b2d6e5f9d8a62703236673381f6ef2",
+        "rgba_sha256": "8fab8cdcea8fb39c17aaa57e07da70e7de44725b90a32f5a4c78ed06e0f29de9",
+        "source_payloads": [
+          {
+            "image_index": 52,
+            "role": "color"
+          },
+          {
+            "image_index": 53,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/HEADPICS.0",
+      "size": 17354,
+      "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/headpics-build2-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "legspics-build2-complete",
+    "file": "legspics-build2-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/legspics-build2-complete.txt",
+    "status": "DRAFT",
+    "sha256": "caab8230fd8f31ebe5708931eb35f53f000f029799212bb6779e33aba7b44e4d",
+    "size": [
+      1355,
+      1161
+    ],
+    "prompt_sha256": "dc1e8d2b7527da9b77431e706269b1a0a02c2653bd1528296f2bf0dcbb17938c",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      19,
+      28,
+      1328,
+      1094
+    ],
+    "original_output": "exec-a1334793-9a65-4208-8c4c-82c4e4fc0779.png",
+    "source_indices": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "source_pngs": [
+      {
+        "archive": "LEGSPICS",
+        "index": 18,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-018.png",
+        "size": [
+          56,
+          13
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          13
+        ],
+        "png_sha256": "2b870a0ab5eaa87cd99fbcbea81e73632a0550dba7b26a8f7b67500c940746ce",
+        "rgb_sha256": "16a7417b28e3a34319bdfa5d97660663615c7536fb9df9ccd77f5f3bb44940bf",
+        "rgba_sha256": "d04c88a6e5ba53add6dc3368308f1bbac391e89b5543ec2c8cb26c19da376f86",
+        "source_payloads": [
+          {
+            "image_index": 36,
+            "role": "color"
+          },
+          {
+            "image_index": 37,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 19,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-019.png",
+        "size": [
+          56,
+          26
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          26
+        ],
+        "png_sha256": "2819678ccd0c8562c5cdee788d46a6f2b800d88f7ed248aa449c4853e9f0e17a",
+        "rgb_sha256": "abed078bb030e24f7da97a24d7d4ae206e44075c3ac0e6ad58b5ba36266b841a",
+        "rgba_sha256": "328a737e08ff3931fb5c99ea44e1c9b6ddf4b9e8f42b8f3b6e3e553840f70a4e",
+        "source_payloads": [
+          {
+            "image_index": 38,
+            "role": "color"
+          },
+          {
+            "image_index": 39,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 20,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-020.png",
+        "size": [
+          56,
+          29
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          29
+        ],
+        "png_sha256": "62b8b82b1529e27d0f52c4edcf8b5c07088bbc294139be85054b950ae439551e",
+        "rgb_sha256": "41a4f20449474678e3c12556c42cee5a09c762b47b0455038566c196f6550868",
+        "rgba_sha256": "88d5fe8af7ffed8f71f2030dc95dfd8893a3403506267f3f756125a20b89b5e7",
+        "source_payloads": [
+          {
+            "image_index": 40,
+            "role": "color"
+          },
+          {
+            "image_index": 41,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 21,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-021.png",
+        "size": [
+          56,
+          30
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          30
+        ],
+        "png_sha256": "d37e14854304b1f4364a642be4f79e6d21e1020a944a4a4b84ce0c143988ab32",
+        "rgb_sha256": "4d512478276446712ba55c4c0c63cdce4d854a4e27bb7f77bfc02317962410f9",
+        "rgba_sha256": "8cf78fd6ffccd27d3180f2150c2ab4474936ab47eb5d831f97dc6a70209cda03",
+        "source_payloads": [
+          {
+            "image_index": 42,
+            "role": "color"
+          },
+          {
+            "image_index": 43,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 22,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-022.png",
+        "size": [
+          56,
+          26
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          26
+        ],
+        "png_sha256": "1b5ddf6cf8c98815d237a90fc57867ef0f1c71160efa42480dfec9aa5c117ee3",
+        "rgb_sha256": "8208cb9246a805fb84f26975705e5e7432a8023546a843108474b18959e44445",
+        "rgba_sha256": "5cb7ee8b8d2341de8b616ca10604eedff1f964a9ea13da139e1744ec15040077",
+        "source_payloads": [
+          {
+            "image_index": 44,
+            "role": "color"
+          },
+          {
+            "image_index": 45,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 23,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-023.png",
+        "size": [
+          56,
+          26
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          26
+        ],
+        "png_sha256": "3897f4242374212f9ce1f3244b4028d9bdefb7cd4ce66d5d29676a7fc479a235",
+        "rgb_sha256": "288d8ed5734f900845c1b1842bede0f1e88fc0d1c05a28b4aacc30682b3626dc",
+        "rgba_sha256": "33baef7bbe0c40aaeb57db60456e6927e75458a440379a6a8362667a4fbe7de5",
+        "source_payloads": [
+          {
+            "image_index": 46,
+            "role": "color"
+          },
+          {
+            "image_index": 47,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 24,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-024.png",
+        "size": [
+          56,
+          26
+        ],
+        "bbox": [
+          1,
+          0,
+          52,
+          26
+        ],
+        "png_sha256": "c29ada66980ed3816b1df62f6b1a01d2e0c49536101d7b417bfcfeda5aba0822",
+        "rgb_sha256": "6d7254a6c7b108ca35b2c3a2fd7b7daaaa62660b96e88fcf11a32fa716ccb581",
+        "rgba_sha256": "b72660b284bdb91f7f89d9564997002875b1265c1869af07138c8c9de1b5842b",
+        "source_payloads": [
+          {
+            "image_index": 48,
+            "role": "color"
+          },
+          {
+            "image_index": 49,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 25,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-025.png",
+        "size": [
+          56,
+          26
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          26
+        ],
+        "png_sha256": "cb465ad3b1c2028273fd38ff01e340998dca0d138b3266961561dd646a7d666b",
+        "rgb_sha256": "d68b9855c77a03d77e1a30bdd51d0f90a5628eafe34476f8f9b3686d953e446a",
+        "rgba_sha256": "795c1d607d5c863c2a6a2169da8b700456c072fb9d8f55977090b83840f2a1e5",
+        "source_payloads": [
+          {
+            "image_index": 50,
+            "role": "color"
+          },
+          {
+            "image_index": 51,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 26,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-026.png",
+        "size": [
+          56,
+          28
+        ],
+        "bbox": [
+          2,
+          0,
+          53,
+          28
+        ],
+        "png_sha256": "f94defd081696bf2ad6f4ac97197d9f7164fca2057fc8f52ada2659af3460467",
+        "rgb_sha256": "2f0811860c9fd86e54949c196ab2401c0fcbb0e4ff88545e711bdc11b68ad219",
+        "rgba_sha256": "190d6509cdc4cd7b05da0c27abe9970f98a6847b14a2a49741a5f0ae091ffa9f",
+        "source_payloads": [
+          {
+            "image_index": 52,
+            "role": "color"
+          },
+          {
+            "image_index": 53,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/LEGSPICS.0",
+      "size": 39694,
+      "sha256": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/legspics-build2-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build3-complete",
+    "file": "torpics-build3-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build3-complete.txt",
+    "status": "DRAFT",
+    "sha256": "1380923082606d38470a345132f510eb0e271f727a4b18d0f6d0f562963fc629",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "71eb3b71c1422f7acf768e23ac32e22b03686e442e2d059649b20578ebc86b45",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      24,
+      17,
+      1236,
+      1213
+    ],
+    "original_output": "exec-83109b3e-ad72-4c9d-91ea-09b87bdb8bcb.png",
+    "source_indices": [
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 27,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-027.png",
+        "size": [
+          80,
+          70
+        ],
+        "bbox": [
+          5,
+          0,
+          74,
+          70
+        ],
+        "png_sha256": "6e1ddc45730a4c4a86606f74635255ee16298831f4187fd40bc641deb54b781a",
+        "rgb_sha256": "f5ad442fa9fd2ace8e44c43f96ee32b22e981a40bd0d076e484e9c331a710fbc",
+        "rgba_sha256": "b12d8b1ea38a22ef73cee8639c937dae5651ece3823f129cbe82a1618ade87fc",
+        "source_payloads": [
+          {
+            "image_index": 54,
+            "role": "color"
+          },
+          {
+            "image_index": 55,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 28,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-028.png",
+        "size": [
+          80,
+          67
+        ],
+        "bbox": [
+          5,
+          0,
+          75,
+          67
+        ],
+        "png_sha256": "f510c3acdfbd53e1588989e4a2d11543de8b55d6595ed419a2041d13b02c4913",
+        "rgb_sha256": "d840cf037f1cc7a99b0a4e3f238af5d23c04dfd7b23b5636c6d33ced996a26ba",
+        "rgba_sha256": "f25d5539be0bd407f1b9f1f66a0061b88e3c637d76c22b116e3f6dc04df67a9d",
+        "source_payloads": [
+          {
+            "image_index": 56,
+            "role": "color"
+          },
+          {
+            "image_index": 57,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 29,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-029.png",
+        "size": [
+          80,
+          71
+        ],
+        "bbox": [
+          5,
+          0,
+          75,
+          71
+        ],
+        "png_sha256": "18677f9f47dcfa598d6e4b62167b6a6d68dc56cab83d5c4e4bee8d2d8ebc421e",
+        "rgb_sha256": "8088e69a4a38f573e0c53ffb8085a6e337126da4ca4219194c1c12fd1a596d1a",
+        "rgba_sha256": "37cef224cee998c4d3e35b0652ca45ad58bb3963c12b09d7fbac9352c7ad3981",
+        "source_payloads": [
+          {
+            "image_index": 58,
+            "role": "color"
+          },
+          {
+            "image_index": 59,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 30,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-030.png",
+        "size": [
+          80,
+          70
+        ],
+        "bbox": [
+          4,
+          0,
+          76,
+          70
+        ],
+        "png_sha256": "e42434a7af06bcbb046da8bd2a5e3d84b8d9bbb20ba73d2291dcd16ecd2756a8",
+        "rgb_sha256": "8cec3d5849bad0b2ac0f7766b31d8874023d1a2b8419ae3c5395e6f74942bdd2",
+        "rgba_sha256": "a5b8037325f0a8cecb7f9746eedf09032cb386768f4285bb48852ca737cafcf8",
+        "source_payloads": [
+          {
+            "image_index": 60,
+            "role": "color"
+          },
+          {
+            "image_index": 61,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 31,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-031.png",
+        "size": [
+          80,
+          67
+        ],
+        "bbox": [
+          5,
+          0,
+          75,
+          67
+        ],
+        "png_sha256": "285904be8df895bc614e684b3c69496b5d31c786dbca711b14c30d9cdab584cf",
+        "rgb_sha256": "d078b27508632464fda2b917badd256f2b8b5804642293aad100d054b77db48a",
+        "rgba_sha256": "3662ae631e579531fb7cc4680ed1f65eef513967687032113288708ae8ec78f9",
+        "source_payloads": [
+          {
+            "image_index": 62,
+            "role": "color"
+          },
+          {
+            "image_index": 63,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 32,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-032.png",
+        "size": [
+          80,
+          67
+        ],
+        "bbox": [
+          5,
+          0,
+          75,
+          67
+        ],
+        "png_sha256": "d314c9d097744513ac63c1627529786bf38b23d7a1238070f9d679a609a8f8d1",
+        "rgb_sha256": "a662bb9b20d3f54dc6fa0be3659dce158ca34e559eb5e4d329075cdc9d537bd6",
+        "rgba_sha256": "f4c4a370bf2e4db9a2247a44667a7678e86150a1989a473490ec55a73c66f1cf",
+        "source_payloads": [
+          {
+            "image_index": 64,
+            "role": "color"
+          },
+          {
+            "image_index": 65,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 33,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-033.png",
+        "size": [
+          80,
+          67
+        ],
+        "bbox": [
+          5,
+          0,
+          75,
+          67
+        ],
+        "png_sha256": "4b26378dfbb7ce7f3aef5386fcac271c7842e85453808409bb27c0619075ee78",
+        "rgb_sha256": "2c3d0584f00dc3e316354510c496fea137165a52f2fe48b96febb856fa4cf807",
+        "rgba_sha256": "230972bf4197fd91e6ed36d72ae48c0203ffbc766bd7bc1af801ca075caf59ac",
+        "source_payloads": [
+          {
+            "image_index": 66,
+            "role": "color"
+          },
+          {
+            "image_index": 67,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 34,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-034.png",
+        "size": [
+          80,
+          67
+        ],
+        "bbox": [
+          5,
+          0,
+          75,
+          67
+        ],
+        "png_sha256": "d06c17a13daa8e17bf6d2d64704058dbf1d3a554cbab829dab741e6f3b93b386",
+        "rgb_sha256": "f9e612d88e553b8c521bcd2d4dcea2f5c28dad188c45315b3b6548c4815e2578",
+        "rgba_sha256": "9e619490e79a00107a8f2a98eb004db5e4a0593339de42147cf8b28e264c5e3c",
+        "source_payloads": [
+          {
+            "image_index": 68,
+            "role": "color"
+          },
+          {
+            "image_index": 69,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 35,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-035.png",
+        "size": [
+          80,
+          70
+        ],
+        "bbox": [
+          4,
+          0,
+          77,
+          70
+        ],
+        "png_sha256": "64ddb342c7ac8a4912a28da65b02a4aa225507c2a2d646156a7c6c6f73fa07ad",
+        "rgb_sha256": "76ff40c0a9d814cd6886f308841255e292fbb5f9fb3f982d760ecf62ad9c2612",
+        "rgba_sha256": "3521b41845149cc4123cce624739bb21b917ad14ea18b864b50fd1084999a165",
+        "source_payloads": [
+          {
+            "image_index": 70,
+            "role": "color"
+          },
+          {
+            "image_index": 71,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build3-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "headpics-build3",
+    "file": "headpics-build3-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/headpics-build3.txt",
+    "status": "DRAFT",
+    "sha256": "cc7ae5cc1dee9c6824ca394963dee37cecc5e049c14f74c5f3a46d00d11f1e9a",
+    "size": [
+      1245,
+      1263
+    ],
+    "prompt_sha256": "63506065c0f8eb28fca9e8da3445ad82eaad0d184ea7160c4fe0abccda6df4fd",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      45,
+      26,
+      1191,
+      1212
+    ],
+    "original_output": "exec-232b476c-214e-41f9-9217-4e019d3d9f2c.png",
+    "source_indices": [
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "source_pngs": [
+      {
+        "archive": "HEADPICS",
+        "index": 27,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-027.png",
+        "size": [
+          32,
+          30
+        ],
+        "bbox": [
+          0,
+          0,
+          32,
+          30
+        ],
+        "png_sha256": "be196e319b30d54378644cdf17fe04388370ec58930317a895136d8707c530e6",
+        "rgb_sha256": "85830fc8b773c5c70b904dee04543cf4d4d07bc9ea54a850f5571f916c7af285",
+        "rgba_sha256": "bbac9f625c473dee07e6a8540edd80cb83e554e1299f33fd3e7e6ddc69fda41d",
+        "source_payloads": [
+          {
+            "image_index": 54,
+            "role": "color"
+          },
+          {
+            "image_index": 55,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 28,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-028.png",
+        "size": [
+          32,
+          32
+        ],
+        "bbox": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "png_sha256": "94f8aefe7e63eb3bdb707d5f5db6bc4fa1df5e0d9d1be47d6fe5abe195737200",
+        "rgb_sha256": "f550f63e03919f7204edc50c3ba7bf13e11742107302636b6c08732ab6f80fa0",
+        "rgba_sha256": "605d7a73e68b37fb3cff62eebd9182995c3d3d509a8c1222fcf0e0f9dee0d21d",
+        "source_payloads": [
+          {
+            "image_index": 56,
+            "role": "color"
+          },
+          {
+            "image_index": 57,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 29,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-029.png",
+        "size": [
+          32,
+          36
+        ],
+        "bbox": [
+          0,
+          0,
+          32,
+          36
+        ],
+        "png_sha256": "a71f82596ace151f2eb0cb55bd9c47849c442bd9ff38ae297a9af300cbce32ee",
+        "rgb_sha256": "77c1a8570ae064c4c6278cdfd8d0016e06c7421e80d9a121ea12d8b9d0661a96",
+        "rgba_sha256": "f4f529562303a6919188db613e7e1a90b02392bf88d729f72261d824db5857a5",
+        "source_payloads": [
+          {
+            "image_index": 58,
+            "role": "color"
+          },
+          {
+            "image_index": 59,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 30,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-030.png",
+        "size": [
+          32,
+          21
+        ],
+        "bbox": [
+          6,
+          0,
+          26,
+          21
+        ],
+        "png_sha256": "95e7d61d947e5da6ce4804cca7bdae70d1b10bf230d75cc99d890f231bedead9",
+        "rgb_sha256": "0d82b8fe6c3803927d5204acc9457b0b67afca22934034756b6e626ed3e3c52f",
+        "rgba_sha256": "129aab456167f92a17ef1e961a1b95f1175ab04c20ae8fa2964132dad482e193",
+        "source_payloads": [
+          {
+            "image_index": 60,
+            "role": "color"
+          },
+          {
+            "image_index": 61,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 31,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-031.png",
+        "size": [
+          32,
+          32
+        ],
+        "bbox": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "png_sha256": "115721330beb7f4f5f98ada93ab7d2c9965307f05ba4bff4a892a55c8e9998ed",
+        "rgb_sha256": "b166462a8661963498d44473d3e74a663c66ddac1f747211f98c5a3525e25ff8",
+        "rgba_sha256": "8c93f30f68a4b516e6e3f31b62fb4b1abb938149eb4b5d82355d32808524d594",
+        "source_payloads": [
+          {
+            "image_index": 62,
+            "role": "color"
+          },
+          {
+            "image_index": 63,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 32,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-032.png",
+        "size": [
+          32,
+          32
+        ],
+        "bbox": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "png_sha256": "f83e5b2efe864105b61574d0558bd35fd0603a885986702d28480e484c312e94",
+        "rgb_sha256": "2267d68d2329f661de6630118d8ed93009569dd888d737c16865649915688d36",
+        "rgba_sha256": "291d35e9719a1a24ce7da2f02a11c324aa0a33a256ef0776c279795adcad8b56",
+        "source_payloads": [
+          {
+            "image_index": 64,
+            "role": "color"
+          },
+          {
+            "image_index": 65,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 33,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-033.png",
+        "size": [
+          32,
+          32
+        ],
+        "bbox": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "png_sha256": "af0c6dbd097c8ead1ac1fd43d8cdc2a502e5b8d7eab224f7f5e0c53018d2288b",
+        "rgb_sha256": "64935c7aed392265e617d9beb1f5c971e46aee2eda02593719822b57c0dba970",
+        "rgba_sha256": "7e80e4c1deabeb8ce7a79bf9796cfd2cf8de5f22b29d5835b217b75370252f19",
+        "source_payloads": [
+          {
+            "image_index": 66,
+            "role": "color"
+          },
+          {
+            "image_index": 67,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 34,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-034.png",
+        "size": [
+          32,
+          32
+        ],
+        "bbox": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "png_sha256": "0a0305f68bd93c75d59539d371604977a88a9916b6c5da0b67379e43a5ca3447",
+        "rgb_sha256": "2e2cb9b27b2a4db5a0bc27f0ceac5ac9d8dd0023fa2524555013bdaba95e7fe2",
+        "rgba_sha256": "df98a4a1dcf45bd50b47ef07a7ee7f061fa37f17d247fff4ea05230e514ee8d0",
+        "source_payloads": [
+          {
+            "image_index": 68,
+            "role": "color"
+          },
+          {
+            "image_index": 69,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 35,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-035.png",
+        "size": [
+          32,
+          29
+        ],
+        "bbox": [
+          4,
+          0,
+          28,
+          29
+        ],
+        "png_sha256": "cbeba11cee932545ecdf199fcd4de6a4521b23ce60c2f7c4ca36ce6859bf17dd",
+        "rgb_sha256": "e05f4bee022d106d46357cd1168700e0b957455bd04140421a9058df183d6c2a",
+        "rgba_sha256": "874fbe9a899fef372d7ee9ce8e056dcaf6851bc20df536af2b9d2f7307a5bae7",
+        "source_payloads": [
+          {
+            "image_index": 70,
+            "role": "color"
+          },
+          {
+            "image_index": 71,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/HEADPICS.0",
+      "size": 17354,
+      "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/headpics-build3-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "legspics-build3-complete",
+    "file": "legspics-build3-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/legspics-build3-complete.txt",
+    "status": "DRAFT",
+    "sha256": "c2f3c1480de2175b647962fc33f4d169ac80e11bc19e3a863e4992a77f752ff5",
+    "size": [
+      960,
+      1639
+    ],
+    "prompt_sha256": "86009ed50d1d4257e54f1a231c0d4534a6e17c62edbe63e73204765652619792",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      34,
+      2,
+      935,
+      1613
+    ],
+    "original_output": "exec-e369611b-b43a-46d0-bece-1ddc47ad9b30.png",
+    "source_indices": [
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "source_pngs": [
+      {
+        "archive": "LEGSPICS",
+        "index": 27,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-027.png",
+        "size": [
+          56,
+          44
+        ],
+        "bbox": [
+          7,
+          0,
+          56,
+          44
+        ],
+        "png_sha256": "5b473ac177172b88e7f261432add80aa11debbd130ab6bc2f5a91ac98c71ef99",
+        "rgb_sha256": "dcff6c692fc3f35ac2e5b0fb7496862da7ed9b534f36844a9f058caeb4fb7de8",
+        "rgba_sha256": "687aa0058eb2b40f1f05678e2407d74cad4586fe49ff19e1e2f586b24ce6f3c5",
+        "source_payloads": [
+          {
+            "image_index": 54,
+            "role": "color"
+          },
+          {
+            "image_index": 55,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 28,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-028.png",
+        "size": [
+          48,
+          84
+        ],
+        "bbox": [
+          1,
+          0,
+          47,
+          84
+        ],
+        "png_sha256": "7869aa87df3c0a2ab61f6a83de1938076e43341b12d0b65b6c9124cb3bad8d90",
+        "rgb_sha256": "ed8ddbc684d4a6d6e02aab742cabaf4ad782011c317129f4585d2f2a78b2bd1c",
+        "rgba_sha256": "b5786d136605bb641f541e01671a2d22b29e2d6361900283a2c7abf8af912b8d",
+        "source_payloads": [
+          {
+            "image_index": 56,
+            "role": "color"
+          },
+          {
+            "image_index": 57,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 29,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-029.png",
+        "size": [
+          56,
+          81
+        ],
+        "bbox": [
+          6,
+          0,
+          56,
+          81
+        ],
+        "png_sha256": "a8f92862ef723fbc2a90e4656862cba71c437c20cae06bc1c7976ca3b3283dc7",
+        "rgb_sha256": "8f03fafd84072b18ea1e99753384b1e7e230b48c3f5855726c03d82fcfb070a3",
+        "rgba_sha256": "1b6e788cde5793a6e58ab2e963e64285fa19753876228d54f265d8744e9e24d2",
+        "source_payloads": [
+          {
+            "image_index": 58,
+            "role": "color"
+          },
+          {
+            "image_index": 59,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 30,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-030.png",
+        "size": [
+          56,
+          83
+        ],
+        "bbox": [
+          6,
+          0,
+          56,
+          83
+        ],
+        "png_sha256": "5edf3960b8bca09977494106db4b14838085eb48e118cdf336c8569aaa346020",
+        "rgb_sha256": "c8e7027da5caa9db326c348a8eb68cedf5348b724a10a24d177759c546168bc3",
+        "rgba_sha256": "bbe98e786fb5960f91e65bd0d3131599471f293a74c6f879b0d3b326155b7a57",
+        "source_payloads": [
+          {
+            "image_index": 60,
+            "role": "color"
+          },
+          {
+            "image_index": 61,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 31,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-031.png",
+        "size": [
+          48,
+          84
+        ],
+        "bbox": [
+          1,
+          0,
+          47,
+          84
+        ],
+        "png_sha256": "6f81cf60a1d8083fd3cec407dbeff22a65a988aa66a0ce95b6f88eea992b9be7",
+        "rgb_sha256": "411121fc0a742572a39b63a2035ea009b7d98aacced5648d879ea47b551c587a",
+        "rgba_sha256": "91d9e153a011fdf873cd56a7d5cad6cfecca2ee3cf1cc8eee83a4e1b4abed53a",
+        "source_payloads": [
+          {
+            "image_index": 62,
+            "role": "color"
+          },
+          {
+            "image_index": 63,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 32,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-032.png",
+        "size": [
+          48,
+          84
+        ],
+        "bbox": [
+          1,
+          0,
+          47,
+          84
+        ],
+        "png_sha256": "20a25d48466ad5cf1db9b8876a4294464209fe8f1537522c9cf72b3c27522dcd",
+        "rgb_sha256": "bb55c0e7985863bfa00b3ecb9f4e18dae415743f52c37c3984d8d5f3ef4e61af",
+        "rgba_sha256": "e81c09e55dc3772269d39f806d683628224619c6be3ccdfacd40778a4f3227ee",
+        "source_payloads": [
+          {
+            "image_index": 64,
+            "role": "color"
+          },
+          {
+            "image_index": 65,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 33,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-033.png",
+        "size": [
+          48,
+          84
+        ],
+        "bbox": [
+          1,
+          0,
+          47,
+          84
+        ],
+        "png_sha256": "3c33871f1751013f61d36f1eb33be8f5d11e1d50d9df4a02a2c5d397fbf0fa4b",
+        "rgb_sha256": "c9609d217ca652d6e6a8088d6b7bb9823aa8249c1f931b078d31ab071da0a475",
+        "rgba_sha256": "7f20ed88ae8dc71be2759f391fea9df793bc56d810e01453d698a8d2666acb2f",
+        "source_payloads": [
+          {
+            "image_index": 66,
+            "role": "color"
+          },
+          {
+            "image_index": 67,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 34,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-034.png",
+        "size": [
+          48,
+          84
+        ],
+        "bbox": [
+          1,
+          0,
+          47,
+          84
+        ],
+        "png_sha256": "f22d4d5f33ca331dcedb89774e35289d4369f6efdafd11e810e7d0f7a07f716f",
+        "rgb_sha256": "0628edda3387425dd1cbbcf5ab8e6d358c3675f816e9ee43a085ce53b10b35ed",
+        "rgba_sha256": "c1bd88b5fdcddcd2aec797dc511dd64bee42b1fd6cece4d9f437f00094f34db6",
+        "source_payloads": [
+          {
+            "image_index": 68,
+            "role": "color"
+          },
+          {
+            "image_index": 69,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 35,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-035.png",
+        "size": [
+          56,
+          81
+        ],
+        "bbox": [
+          6,
+          0,
+          56,
+          81
+        ],
+        "png_sha256": "2b9499d8daec782f63eb84d8a545fa89a1a8fa6551bbce03cff7d2743db10a66",
+        "rgb_sha256": "8de7394c0722215649aeed0e4a185d56481b7a9d36662019f916381aade04e0f",
+        "rgba_sha256": "cddebfa4eec2231d323c4c956912dd04ba13b6434bed1063dbb3eb9d81bd2499",
+        "source_payloads": [
+          {
+            "image_index": 70,
+            "role": "color"
+          },
+          {
+            "image_index": 71,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/LEGSPICS.0",
+      "size": 39694,
+      "sha256": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/legspics-build3-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build4-complete",
+    "file": "torpics-build4-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build4-complete.txt",
+    "status": "DRAFT",
+    "sha256": "10bdb065396f57bad439ac66613e71a17235180c57292d0b37f07e02f8f41615",
+    "size": [
+      1355,
+      1161
+    ],
+    "prompt_sha256": "65d0d5f4b9098b9f86997250fc5154b1f5ac73cf0595337edaa36a5c55232c62",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      27,
+      47,
+      1336,
+      1112
+    ],
+    "original_output": "exec-9500a332-ba6a-42e9-8725-a4910d025c8e.png",
+    "source_indices": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 36,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-036.png",
+        "size": [
+          72,
+          28
+        ],
+        "bbox": [
+          5,
+          0,
+          67,
+          28
+        ],
+        "png_sha256": "dba0bfa830c755b24e5bde306897466408e722b6c3c24ff75641009858f72c00",
+        "rgb_sha256": "2ed052529be1f64c9a1dc53f5d535f15cb341d874cd9ce363e3551219e936c86",
+        "rgba_sha256": "21dc5a39ce83a116bf35239a74b689d91a360a0a6deb82509e9fe960532c742c",
+        "source_payloads": [
+          {
+            "image_index": 72,
+            "role": "color"
+          },
+          {
+            "image_index": 73,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 37,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-037.png",
+        "size": [
+          72,
+          46
+        ],
+        "bbox": [
+          6,
+          0,
+          66,
+          46
+        ],
+        "png_sha256": "de108fdb443e405054b538942be78cf3a6ef9ec6a5436a6f128a97d560b5d233",
+        "rgb_sha256": "1b3c78fa7eec3a7ae90fde99f780aff45b40da1208f9eabe6241b2cf4a9c0d65",
+        "rgba_sha256": "51a0e68a9e616a63116adeff51f218e1be7132a0c5f609ceac141c1e1ce194cc",
+        "source_payloads": [
+          {
+            "image_index": 74,
+            "role": "color"
+          },
+          {
+            "image_index": 75,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 38,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-038.png",
+        "size": [
+          72,
+          45
+        ],
+        "bbox": [
+          5,
+          0,
+          67,
+          45
+        ],
+        "png_sha256": "0fb868a8fcaf5792c549c867c6e69f51308a631543ec659582928fac36a47219",
+        "rgb_sha256": "5f5da0d5776208ba1b1284fbbd9dedde0e0edba59cc0a4c79feb5125afdbe76a",
+        "rgba_sha256": "735c2fd1e586046629fd8af8d5d178bdacd4a45dbc6268f1094f8014c2e157d6",
+        "source_payloads": [
+          {
+            "image_index": 76,
+            "role": "color"
+          },
+          {
+            "image_index": 77,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 39,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-039.png",
+        "size": [
+          72,
+          46
+        ],
+        "bbox": [
+          7,
+          0,
+          65,
+          46
+        ],
+        "png_sha256": "c1604f362e628eb85b504cd6395ad994696e04621be2fa7ec667c6e71211064a",
+        "rgb_sha256": "241617a116e84cf5f8889463b5db5823f5dcdc90c284cf2f3d181da4940fa5e2",
+        "rgba_sha256": "166cf328dbef730523278c2a50012435ae6ca5099effdd6bbcb0da160c09245c",
+        "source_payloads": [
+          {
+            "image_index": 78,
+            "role": "color"
+          },
+          {
+            "image_index": 79,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 40,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-040.png",
+        "size": [
+          72,
+          47
+        ],
+        "bbox": [
+          6,
+          0,
+          66,
+          47
+        ],
+        "png_sha256": "3251b0488eafe3f63cb10125b84b6f6a2f3e65f7f756ecafd8bbc799cf363f42",
+        "rgb_sha256": "4be06245cb19c5393bcd45577a81c10090b1c8878c2117f494eab11fa76d0456",
+        "rgba_sha256": "54f4dad68f663c22ed33a8c0a7c09df8f10312c9e4b75e01d102fec5f610ce65",
+        "source_payloads": [
+          {
+            "image_index": 80,
+            "role": "color"
+          },
+          {
+            "image_index": 81,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 41,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-041.png",
+        "size": [
+          72,
+          45
+        ],
+        "bbox": [
+          7,
+          0,
+          65,
+          45
+        ],
+        "png_sha256": "2114b90692bd7652a6321b90d728deff3e8245954be3d50664b6398cbb00323a",
+        "rgb_sha256": "2f2a646ffe1824938c354ea6fa41b702aa00b40b09e31338600974bbe4df3edb",
+        "rgba_sha256": "843932bde48e73e5c2bc685a5773848473bd52a498ca48ded5a67b3762cbe21c",
+        "source_payloads": [
+          {
+            "image_index": 82,
+            "role": "color"
+          },
+          {
+            "image_index": 83,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 42,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-042.png",
+        "size": [
+          72,
+          44
+        ],
+        "bbox": [
+          7,
+          0,
+          65,
+          44
+        ],
+        "png_sha256": "83eb84874c4858c3c46ff4364ade032b2b3505eb47f0896d77b0b4bb54cdc52c",
+        "rgb_sha256": "a2fe58ca3997aa97b65c9746638f472b41fa07f2d30f5cac2c9d70ececc557af",
+        "rgba_sha256": "38d22e6113fe39b6d3f3b45049b6bef9541d48e04380f0d524296fa2ad281125",
+        "source_payloads": [
+          {
+            "image_index": 84,
+            "role": "color"
+          },
+          {
+            "image_index": 85,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 43,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-043.png",
+        "size": [
+          72,
+          43
+        ],
+        "bbox": [
+          8,
+          0,
+          66,
+          43
+        ],
+        "png_sha256": "7d3be327799368c9df2243e51314a1c1fc6762ad6583dc0bcdfcfc81a062b7ca",
+        "rgb_sha256": "823e5d2fa9b396434adaf22b829b316c5d78659126a43e087e0ea2dfa7d970f7",
+        "rgba_sha256": "feb52828bc0c0409706fc208327b0d8ca82e656c0ff13ad074f9b26f86e4f3be",
+        "source_payloads": [
+          {
+            "image_index": 86,
+            "role": "color"
+          },
+          {
+            "image_index": 87,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 44,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-044.png",
+        "size": [
+          72,
+          49
+        ],
+        "bbox": [
+          4,
+          0,
+          68,
+          49
+        ],
+        "png_sha256": "c0b46619ed49089e15717657949833504d557a2f3b2f58e7e309accd6ecc0461",
+        "rgb_sha256": "b1e6580fab40acc14279c3be8a2392a1f36fc716dd67640b0ce4fd6746681711",
+        "rgba_sha256": "dc86186639deb630533f8eaa29d0e6cf8609c4c67bc35691e6acd0498c97e21f",
+        "source_payloads": [
+          {
+            "image_index": 88,
+            "role": "color"
+          },
+          {
+            "image_index": 89,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build4-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "headpics-build4",
+    "file": "headpics-build4-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/headpics-build4.txt",
+    "status": "DRAFT",
+    "sha256": "73d6c1347e2822e75296806d3e2e14915c637fe83b215a7c7db6ec49f90cb060",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "3127a6c0a0635c8281fee83a4fa3b9c1e66c672e3571ede85a1e76d78b3e7757",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      51,
+      44,
+      1206,
+      1220
+    ],
+    "original_output": "exec-a13a9f67-4f3c-41ec-a4ba-6e00a833a487.png",
+    "source_indices": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "source_pngs": [
+      {
+        "archive": "HEADPICS",
+        "index": 36,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-036.png",
+        "size": [
+          40,
+          8
+        ],
+        "bbox": [
+          4,
+          0,
+          36,
+          8
+        ],
+        "png_sha256": "a63bf739271b5bd96384fcaecff90803e940060558466604f9df60ca186f8fdc",
+        "rgb_sha256": "cd6b17935831273d73f1f0c1e52df99470d73d92d89f0ca2cf34ad1efc2cce3a",
+        "rgba_sha256": "9a507a411155fda5a9fcd630ccfc293a7ecfeb70a1d34b024182fc06ce20e23a",
+        "source_payloads": [
+          {
+            "image_index": 72,
+            "role": "color"
+          },
+          {
+            "image_index": 73,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 37,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-037.png",
+        "size": [
+          40,
+          28
+        ],
+        "bbox": [
+          5,
+          0,
+          35,
+          28
+        ],
+        "png_sha256": "d9c8c949b2d8bfdb975939ec81e1af8e591e5c4607c29ba4102f54da21e4416c",
+        "rgb_sha256": "2a432b763a2272874bd5ef9e7272adc8353142e4213932a63067b44b139c0966",
+        "rgba_sha256": "4ab87b9575226c43d90f610989cf328b87eb03c4729229a66a97abd298bb0c7f",
+        "source_payloads": [
+          {
+            "image_index": 74,
+            "role": "color"
+          },
+          {
+            "image_index": 75,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 38,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-038.png",
+        "size": [
+          40,
+          28
+        ],
+        "bbox": [
+          5,
+          0,
+          35,
+          28
+        ],
+        "png_sha256": "b710ef31bf8b576f8c29a895d461a49b9dbf6f93eef57f93919474d9ecaf6349",
+        "rgb_sha256": "76a54d19f59e8d02ae7d5b89caf39455955ff8054f8f892c05a6b36d6cfe9a0b",
+        "rgba_sha256": "5a3ec5684706ccd24bd955a6184f63526ffbb066a9240dcc77ae1b5e41dfabe0",
+        "source_payloads": [
+          {
+            "image_index": 76,
+            "role": "color"
+          },
+          {
+            "image_index": 77,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 39,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-039.png",
+        "size": [
+          24,
+          15
+        ],
+        "bbox": [
+          2,
+          0,
+          22,
+          15
+        ],
+        "png_sha256": "a550ec5e262b7e12a89ff65683f0c2ecb2aa29b1bf4f4c39481437ff0a22a8ec",
+        "rgb_sha256": "513c986eaa78ede15a05682cc0868c99bb24009014bb5155c5a1f9595b4b0c00",
+        "rgba_sha256": "4de4831386e878abed3172ed034f95fb869b74b15ec24bfaca23ef10f1a3ec27",
+        "source_payloads": [
+          {
+            "image_index": 78,
+            "role": "color"
+          },
+          {
+            "image_index": 79,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 40,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-040.png",
+        "size": [
+          40,
+          28
+        ],
+        "bbox": [
+          5,
+          0,
+          35,
+          28
+        ],
+        "png_sha256": "f5da59060a9d355b3a9e455497d741b1bc20de853831b0f206cd66b5419de6e1",
+        "rgb_sha256": "6c3ef3bb24d8754fc20e4b25cee9425d8a44e6d3551741fe3916fb894c09d8e2",
+        "rgba_sha256": "25288287364c5a4ebfa729320c99c064590ecb3d63b84be119920e440b87cbe1",
+        "source_payloads": [
+          {
+            "image_index": 80,
+            "role": "color"
+          },
+          {
+            "image_index": 81,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 41,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-041.png",
+        "size": [
+          40,
+          28
+        ],
+        "bbox": [
+          5,
+          0,
+          35,
+          28
+        ],
+        "png_sha256": "00a4bc083c1c0a862a7939b726ec2da7977123a7fe38466160958915c381820f",
+        "rgb_sha256": "c9a040e95512726dd0e4790d8c324116be8b2d473418434836917695f1887525",
+        "rgba_sha256": "eaf928e029fb14c087915398326db824b1560a4050212f6346c9bbe62377d830",
+        "source_payloads": [
+          {
+            "image_index": 82,
+            "role": "color"
+          },
+          {
+            "image_index": 83,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 42,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-042.png",
+        "size": [
+          40,
+          28
+        ],
+        "bbox": [
+          5,
+          0,
+          35,
+          28
+        ],
+        "png_sha256": "fe0309d4e485b9290aadac1160da77c3e91445d4ab6b7d81bb181061b6ceae1a",
+        "rgb_sha256": "6b41edabcbaa1d15f9ac46aee7cf36209ddd5fb509481844c143d58c6e267ad7",
+        "rgba_sha256": "9ed815ce7b96436833ba5575b244a7f38466290463354a85a2d72d1c51d33e1c",
+        "source_payloads": [
+          {
+            "image_index": 84,
+            "role": "color"
+          },
+          {
+            "image_index": 85,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 43,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-043.png",
+        "size": [
+          40,
+          28
+        ],
+        "bbox": [
+          6,
+          0,
+          33,
+          28
+        ],
+        "png_sha256": "65be9501ef8149cfbe6b275f2655568d19b6e5ae7a5034d46e5bdeb53db15533",
+        "rgb_sha256": "595ac6e0a279fa2787ad9544834eca7cac2f651ce8408d4828479c4a4d440664",
+        "rgba_sha256": "de2c86408179a834153254852abd3a2009acb7adbb23ba7bd58c97942f3d4139",
+        "source_payloads": [
+          {
+            "image_index": 86,
+            "role": "color"
+          },
+          {
+            "image_index": 87,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 44,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-044.png",
+        "size": [
+          24,
+          21
+        ],
+        "bbox": [
+          3,
+          0,
+          21,
+          21
+        ],
+        "png_sha256": "9883fabeef086f5f19d6d1c8168c5bead2d9b7bbe417c9778e36aabb504fc68c",
+        "rgb_sha256": "41878c784f813501a323366ed96998fcbaded11ae57a121c1b768a7c5fea20b1",
+        "rgba_sha256": "45ab95f507756a6cc98d6d996e6311673763adfcca9b3438dcdb1528d05338bd",
+        "source_payloads": [
+          {
+            "image_index": 88,
+            "role": "color"
+          },
+          {
+            "image_index": 89,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/HEADPICS.0",
+      "size": 17354,
+      "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/headpics-build4-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "legspics-build4-complete",
+    "file": "legspics-build4-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/legspics-build4-complete.txt",
+    "status": "DRAFT",
+    "sha256": "32d9c89e6346891bb80683b5f3c6f99ef44f36a893893a4d3431c13065fe4bdb",
+    "size": [
+      1163,
+      1353
+    ],
+    "prompt_sha256": "b59998542acdaa3ea79baca1acd2340169c33282dc4b8f8b771be267c1a09ea1",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      51,
+      0,
+      1114,
+      1300
+    ],
+    "original_output": "exec-356caab9-9683-4af5-a08d-f015ad7446d1.png",
+    "source_indices": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "source_pngs": [
+      {
+        "archive": "LEGSPICS",
+        "index": 36,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-036.png",
+        "size": [
+          56,
+          57
+        ],
+        "bbox": [
+          5,
+          0,
+          51,
+          57
+        ],
+        "png_sha256": "971742e98ac1043337a2910a756d177669245ad7e844698b17b512926dfa859b",
+        "rgb_sha256": "03510f37a7d7d2216f24162134ec15c11d799872cd68d874ef3edf5d4e161403",
+        "rgba_sha256": "800f975a9e8c2bc024cd05e99815faefe6fdfe3de817550663137fecfe231804",
+        "source_payloads": [
+          {
+            "image_index": 72,
+            "role": "color"
+          },
+          {
+            "image_index": 73,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 37,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-037.png",
+        "size": [
+          56,
+          59
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          59
+        ],
+        "png_sha256": "7463660b07694af6f46722cf9d7e4ab5252501d32e4533fe53ac008bb4402f80",
+        "rgb_sha256": "790bce28710a12b046b99497a902b03cee73cad3103e8dcb424d3e91a4c561c6",
+        "rgba_sha256": "3666bbfdd79a641486e0f5b1216f8caf63f190b92fb406ee2ddbc1594d5eb06a",
+        "source_payloads": [
+          {
+            "image_index": 74,
+            "role": "color"
+          },
+          {
+            "image_index": 75,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 38,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-038.png",
+        "size": [
+          56,
+          59
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          59
+        ],
+        "png_sha256": "54dfb77056b0ca70a8283c6c692f05f2a2f2bc784af721fd1da70f20f963c214",
+        "rgb_sha256": "4326e404c94304c9cb956294f0a69782cbc50162aa147d16ad785bb64f83f1d7",
+        "rgba_sha256": "f5e1598c7cdf894292ab4ad28a5088cedc63253773c245211427630d21760792",
+        "source_payloads": [
+          {
+            "image_index": 76,
+            "role": "color"
+          },
+          {
+            "image_index": 77,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 39,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-039.png",
+        "size": [
+          56,
+          35
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          35
+        ],
+        "png_sha256": "9ce0cf3a5635acd15b2b4cdba1df1b1be278fe7275e85c7094f4350513bee023",
+        "rgb_sha256": "ab912cfe0b0302fafc55f455386bcfd518ccd4a3ea8230b363fd63be3c7b0fad",
+        "rgba_sha256": "62865f3e039257968a8235eb5616cc67b5d3e63b30ab93d52ad65bdb2aa2823f",
+        "source_payloads": [
+          {
+            "image_index": 78,
+            "role": "color"
+          },
+          {
+            "image_index": 79,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 40,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-040.png",
+        "size": [
+          56,
+          59
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          59
+        ],
+        "png_sha256": "d1d3b37822d3a3df90bdabc6057ba11ec03c10d6791e944cb59e35ef589e27c1",
+        "rgb_sha256": "aea87f62b3371e5c018ef33780acba58b09d4ebfe3dd462efd6b1a4d3541668e",
+        "rgba_sha256": "441d296f496bbd8d3c6e653b876fc557a15a6ae1edf385dea6b6295b97058b4c",
+        "source_payloads": [
+          {
+            "image_index": 80,
+            "role": "color"
+          },
+          {
+            "image_index": 81,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 41,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-041.png",
+        "size": [
+          56,
+          37
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          37
+        ],
+        "png_sha256": "8f51f2ba24473ae2543b3c8c4e01f3d3607e088662a6f93c2d0bf4df85ada5e0",
+        "rgb_sha256": "5af011ff5900c4be3fa5f2e80862d6b2f6626465c1f60a0945b2743726f10d49",
+        "rgba_sha256": "4c0d917e84a36d6c1eba8870c0ce32e2fad35769cf58fc4c137bd8dc01cdf45c",
+        "source_payloads": [
+          {
+            "image_index": 82,
+            "role": "color"
+          },
+          {
+            "image_index": 83,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 42,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-042.png",
+        "size": [
+          56,
+          57
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          57
+        ],
+        "png_sha256": "fddebb2bc5c438cef907989735846ddca6efa46eab2fdbbc267425fb624d420b",
+        "rgb_sha256": "59cb170d5eee8ccd10ddb373a6200d6dcd2eb920bebec46e5be3f22e771d853d",
+        "rgba_sha256": "8a11f70ad7d2138d54290f381203fdaa280750bdcc2fb55f3444f01ec54ca146",
+        "source_payloads": [
+          {
+            "image_index": 84,
+            "role": "color"
+          },
+          {
+            "image_index": 85,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 43,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-043.png",
+        "size": [
+          56,
+          58
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          58
+        ],
+        "png_sha256": "5195004c8acf7a5aad1fec34aa48523a09a34956514f7706861cf1950b09f55b",
+        "rgb_sha256": "842cc6eeefc250012b61f9cae0bb4be8763c445251a782e5506bf4c5925b5b14",
+        "rgba_sha256": "283df7ca26d7da7168abdf43a0c94a7974b9f9dce860de2bdd4d064924677176",
+        "source_payloads": [
+          {
+            "image_index": 86,
+            "role": "color"
+          },
+          {
+            "image_index": 87,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 44,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-044.png",
+        "size": [
+          56,
+          59
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          59
+        ],
+        "png_sha256": "d47b205917c8cb562d0fd00b27661194d0252520666ecc5a1a59b524aa50a6cd",
+        "rgb_sha256": "d284e3939c2a298ab054d355d38d1b8cd03876f74ddba2dc1dadb392f3ddedd2",
+        "rgba_sha256": "2eabd6b495d79a3d1539d8660c15355284a1ff121da3a23e3f0fc33e285a3eff",
+        "source_payloads": [
+          {
+            "image_index": 88,
+            "role": "color"
+          },
+          {
+            "image_index": 89,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/LEGSPICS.0",
+      "size": 39694,
+      "sha256": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/legspics-build4-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build5-complete-initial",
+    "file": "torpics-build5-complete-initial-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build5-complete.txt",
+    "status": "DRAFT",
+    "sha256": "b416b1f926a0a562f7d11d7f7fd4766dc507088e1365cd0042085281bf6734df",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "648b76414651781244b6cfa8e769719ced5e9a9981335fc3c1f19822d2d2bea0",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      33,
+      14,
+      1222,
+      1210
+    ],
+    "original_output": "exec-cd1461d1-023c-4932-8379-17e97eee20fd.png",
+    "source_indices": [
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 45,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-045.png",
+        "size": [
+          64,
+          49
+        ],
+        "bbox": [
+          8,
+          0,
+          64,
+          49
+        ],
+        "png_sha256": "979140e2e81de92b6553145b75e898125198fa79e98a6a6a89937b7887d4dfd6",
+        "rgb_sha256": "06cf49471fe8a0ba6cf3359e848c8a5f6c96f651619702f54d965c122c82cac0",
+        "rgba_sha256": "25c157666cf8a8ac99dc4ab2653239164e6ddda687d111be8ffa2f5e8000becb",
+        "source_payloads": [
+          {
+            "image_index": 90,
+            "role": "color"
+          },
+          {
+            "image_index": 91,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 46,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-046.png",
+        "size": [
+          56,
+          63
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          63
+        ],
+        "png_sha256": "ec3133eefb4ddd4439601d5afab65c2521ea6626d7f6f7cd4c0d8cd713766f73",
+        "rgb_sha256": "da3ba666f014a5275b63f76e31a3fb5d6d98d210f1a64f30480153386ce81404",
+        "rgba_sha256": "58f8647fe4b18f2bad14e2bcf318dd50434e65d5e1aaa7fc7d74c3bac0697a68",
+        "source_payloads": [
+          {
+            "image_index": 92,
+            "role": "color"
+          },
+          {
+            "image_index": 93,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 47,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-047.png",
+        "size": [
+          56,
+          58
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          58
+        ],
+        "png_sha256": "a11c6e47d466effa8d8bebf46cd1d4a387cef7d1f44b564000150300f0ec9eb9",
+        "rgb_sha256": "a106d4c53f8ce18053f600306309c3aaae79c70edb24153ac057d5fdc012c96f",
+        "rgba_sha256": "1015fe9573779fad2728eafc56233f5b9c71db32bf3926de84f8959d17360cd5",
+        "source_payloads": [
+          {
+            "image_index": 94,
+            "role": "color"
+          },
+          {
+            "image_index": 95,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 48,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-048.png",
+        "size": [
+          56,
+          59
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          59
+        ],
+        "png_sha256": "a81b0313b26c6462d83315d5a8b5eca61f008db230795d570e7eaca2874f07a7",
+        "rgb_sha256": "9a5e26f5ad5b1768ac4ca2f56e1853ef3b7684dff7072416d9b0c4ee15fbc04e",
+        "rgba_sha256": "fcde18506d6d8cb4198eb7ae0d3965dfac7e2509251380922524b9ba0278fe70",
+        "source_payloads": [
+          {
+            "image_index": 96,
+            "role": "color"
+          },
+          {
+            "image_index": 97,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 49,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-049.png",
+        "size": [
+          56,
+          55
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          55
+        ],
+        "png_sha256": "ec3325e3335711e3b86d346c26360bc90024588d4f38e247cf1964297d05a17b",
+        "rgb_sha256": "ee63ffcd8920fcc379e4a6397957cde35229a5390da7c7318dbe7a9314df19d9",
+        "rgba_sha256": "b75cda7cf70be82f1528657e88921baa509253f49b41b7fc681279f6f3af1966",
+        "source_payloads": [
+          {
+            "image_index": 98,
+            "role": "color"
+          },
+          {
+            "image_index": 99,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 50,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-050.png",
+        "size": [
+          56,
+          51
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          51
+        ],
+        "png_sha256": "fd5f070d81b55049229ee9f6c3d50704ae413ea92278d7583a67663c17281bf8",
+        "rgb_sha256": "8075fb3b481d7b629717a627abb4b6355b4a1803fcc9765aa6e189b412db6ee6",
+        "rgba_sha256": "aa167b06744a7e02ee0595e7599e27f6654dc9760ff51a2300b13cb965187a75",
+        "source_payloads": [
+          {
+            "image_index": 100,
+            "role": "color"
+          },
+          {
+            "image_index": 101,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 51,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-051.png",
+        "size": [
+          64,
+          65
+        ],
+        "bbox": [
+          7,
+          0,
+          64,
+          65
+        ],
+        "png_sha256": "8d1b9a883d87f61fc149c33359cc2c77181eb6d1406b7f4f73544bbc94597b8c",
+        "rgb_sha256": "e371b73b79aa91323c83dc2807ce5bc42ce18e37acb3394d3be8e694bf0073ea",
+        "rgba_sha256": "b9fb8860c9c809fc63babbf1720dcfb2cce8c6219e46bf425c1c8545634deb9c",
+        "source_payloads": [
+          {
+            "image_index": 102,
+            "role": "color"
+          },
+          {
+            "image_index": 103,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 52,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-052.png",
+        "size": [
+          56,
+          55
+        ],
+        "bbox": [
+          1,
+          0,
+          55,
+          55
+        ],
+        "png_sha256": "14ffba012bca73493ff46335a28cc36c2a95d79da76a3fda34c3b90bb5b61ccb",
+        "rgb_sha256": "78db2696cd0b23e4c610547f8318b38182336912f2423b52798c094155175def",
+        "rgba_sha256": "1748477f31ce4c37b48cca3113c11fd9ae327580117ab478f10dcbd1cbd96734",
+        "source_payloads": [
+          {
+            "image_index": 104,
+            "role": "color"
+          },
+          {
+            "image_index": 105,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 53,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-053.png",
+        "size": [
+          72,
+          57
+        ],
+        "bbox": [
+          6,
+          0,
+          66,
+          57
+        ],
+        "png_sha256": "de5965dab6079e892d714beef45a5512f084241dbd9612a77155ccc3e128c05a",
+        "rgb_sha256": "010fe7b6530c4ecf9df6b5b07753854ccdf16197dd58fd5eb48b5426637ed6ec",
+        "rgba_sha256": "4661e925ea65d0dd17114f86910e557879de825ed93e7ddb6d16b22491e24460",
+        "source_payloads": [
+          {
+            "image_index": 106,
+            "role": "color"
+          },
+          {
+            "image_index": 107,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": true,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build5-complete-initial-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build5-complete",
+    "file": "torpics-build5-complete-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build5-complete-v2.txt",
+    "status": "DRAFT",
+    "sha256": "9232d2829ca20c6421fd653caa516d850ccf85e497cff213d8c7e17be116eff7",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "88516f54336c2ffcddf9cad1dcdaa0d52651f3c82fa774650a9243fe987dfcfe",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      30,
+      11,
+      1226,
+      1211
+    ],
+    "original_output": "exec-b4053d64-d353-4b42-b3d0-54eca050e425.png",
+    "source_indices": [
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 45,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-045.png",
+        "size": [
+          64,
+          49
+        ],
+        "bbox": [
+          8,
+          0,
+          64,
+          49
+        ],
+        "png_sha256": "979140e2e81de92b6553145b75e898125198fa79e98a6a6a89937b7887d4dfd6",
+        "rgb_sha256": "06cf49471fe8a0ba6cf3359e848c8a5f6c96f651619702f54d965c122c82cac0",
+        "rgba_sha256": "25c157666cf8a8ac99dc4ab2653239164e6ddda687d111be8ffa2f5e8000becb",
+        "source_payloads": [
+          {
+            "image_index": 90,
+            "role": "color"
+          },
+          {
+            "image_index": 91,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 46,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-046.png",
+        "size": [
+          56,
+          63
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          63
+        ],
+        "png_sha256": "ec3133eefb4ddd4439601d5afab65c2521ea6626d7f6f7cd4c0d8cd713766f73",
+        "rgb_sha256": "da3ba666f014a5275b63f76e31a3fb5d6d98d210f1a64f30480153386ce81404",
+        "rgba_sha256": "58f8647fe4b18f2bad14e2bcf318dd50434e65d5e1aaa7fc7d74c3bac0697a68",
+        "source_payloads": [
+          {
+            "image_index": 92,
+            "role": "color"
+          },
+          {
+            "image_index": 93,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 47,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-047.png",
+        "size": [
+          56,
+          58
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          58
+        ],
+        "png_sha256": "a11c6e47d466effa8d8bebf46cd1d4a387cef7d1f44b564000150300f0ec9eb9",
+        "rgb_sha256": "a106d4c53f8ce18053f600306309c3aaae79c70edb24153ac057d5fdc012c96f",
+        "rgba_sha256": "1015fe9573779fad2728eafc56233f5b9c71db32bf3926de84f8959d17360cd5",
+        "source_payloads": [
+          {
+            "image_index": 94,
+            "role": "color"
+          },
+          {
+            "image_index": 95,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 48,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-048.png",
+        "size": [
+          56,
+          59
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          59
+        ],
+        "png_sha256": "a81b0313b26c6462d83315d5a8b5eca61f008db230795d570e7eaca2874f07a7",
+        "rgb_sha256": "9a5e26f5ad5b1768ac4ca2f56e1853ef3b7684dff7072416d9b0c4ee15fbc04e",
+        "rgba_sha256": "fcde18506d6d8cb4198eb7ae0d3965dfac7e2509251380922524b9ba0278fe70",
+        "source_payloads": [
+          {
+            "image_index": 96,
+            "role": "color"
+          },
+          {
+            "image_index": 97,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 49,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-049.png",
+        "size": [
+          56,
+          55
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          55
+        ],
+        "png_sha256": "ec3325e3335711e3b86d346c26360bc90024588d4f38e247cf1964297d05a17b",
+        "rgb_sha256": "ee63ffcd8920fcc379e4a6397957cde35229a5390da7c7318dbe7a9314df19d9",
+        "rgba_sha256": "b75cda7cf70be82f1528657e88921baa509253f49b41b7fc681279f6f3af1966",
+        "source_payloads": [
+          {
+            "image_index": 98,
+            "role": "color"
+          },
+          {
+            "image_index": 99,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 50,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-050.png",
+        "size": [
+          56,
+          51
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          51
+        ],
+        "png_sha256": "fd5f070d81b55049229ee9f6c3d50704ae413ea92278d7583a67663c17281bf8",
+        "rgb_sha256": "8075fb3b481d7b629717a627abb4b6355b4a1803fcc9765aa6e189b412db6ee6",
+        "rgba_sha256": "aa167b06744a7e02ee0595e7599e27f6654dc9760ff51a2300b13cb965187a75",
+        "source_payloads": [
+          {
+            "image_index": 100,
+            "role": "color"
+          },
+          {
+            "image_index": 101,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 51,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-051.png",
+        "size": [
+          64,
+          65
+        ],
+        "bbox": [
+          7,
+          0,
+          64,
+          65
+        ],
+        "png_sha256": "8d1b9a883d87f61fc149c33359cc2c77181eb6d1406b7f4f73544bbc94597b8c",
+        "rgb_sha256": "e371b73b79aa91323c83dc2807ce5bc42ce18e37acb3394d3be8e694bf0073ea",
+        "rgba_sha256": "b9fb8860c9c809fc63babbf1720dcfb2cce8c6219e46bf425c1c8545634deb9c",
+        "source_payloads": [
+          {
+            "image_index": 102,
+            "role": "color"
+          },
+          {
+            "image_index": 103,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 52,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-052.png",
+        "size": [
+          56,
+          55
+        ],
+        "bbox": [
+          1,
+          0,
+          55,
+          55
+        ],
+        "png_sha256": "14ffba012bca73493ff46335a28cc36c2a95d79da76a3fda34c3b90bb5b61ccb",
+        "rgb_sha256": "78db2696cd0b23e4c610547f8318b38182336912f2423b52798c094155175def",
+        "rgba_sha256": "1748477f31ce4c37b48cca3113c11fd9ae327580117ab478f10dcbd1cbd96734",
+        "source_payloads": [
+          {
+            "image_index": 104,
+            "role": "color"
+          },
+          {
+            "image_index": 105,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 53,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-053.png",
+        "size": [
+          72,
+          57
+        ],
+        "bbox": [
+          6,
+          0,
+          66,
+          57
+        ],
+        "png_sha256": "de5965dab6079e892d714beef45a5512f084241dbd9612a77155ccc3e128c05a",
+        "rgb_sha256": "010fe7b6530c4ecf9df6b5b07753854ccdf16197dd58fd5eb48b5426637ed6ec",
+        "rgba_sha256": "4661e925ea65d0dd17114f86910e557879de825ed93e7ddb6d16b22491e24460",
+        "source_payloads": [
+          {
+            "image_index": 106,
+            "role": "color"
+          },
+          {
+            "image_index": 107,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": true,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build5-complete-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "headpics-build5",
+    "file": "headpics-build5-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/headpics-build5.txt",
+    "status": "DRAFT",
+    "sha256": "71ce34be78810e2b6586ca341e3ce8a880ade495c63e126afec718dae5a8081e",
+    "size": [
+      1254,
+      1254
+    ],
+    "prompt_sha256": "bec552fe566f502c0005f05b4aa1d2f97e699dc1d08881c4a0f27e7724a959b2",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      55,
+      52,
+      1228,
+      1174
+    ],
+    "original_output": "exec-8ea7a277-4da8-411a-b683-193156e837f5.png",
+    "source_indices": [
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "source_pngs": [
+      {
+        "archive": "HEADPICS",
+        "index": 45,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-045.png",
+        "size": [
+          32,
+          28
+        ],
+        "bbox": [
+          2,
+          0,
+          32,
+          28
+        ],
+        "png_sha256": "05ef2126ad39b13073910d7087db9fdd3a8d6221c3eb3b1c592cbd14f310deab",
+        "rgb_sha256": "7b0d6cd5aa28917ce140b66a003eafc92adbefca28812f6e6f06d5053677fd1e",
+        "rgba_sha256": "1c0265f9ec43a29d7f4a543f3971357b0be12551727fd1f3b4b8e251700445ec",
+        "source_payloads": [
+          {
+            "image_index": 90,
+            "role": "color"
+          },
+          {
+            "image_index": 91,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 46,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-046.png",
+        "size": [
+          32,
+          20
+        ],
+        "bbox": [
+          6,
+          0,
+          32,
+          20
+        ],
+        "png_sha256": "f1a40f38a4568632cc79251e131bcc81391484c3898a62899a23629eeef7f91b",
+        "rgb_sha256": "83d26dc14ae385561401f3802184505e45a8bfbb3f272007c73b2ebec7c7a037",
+        "rgba_sha256": "cc09f975a0f9ea00da5bc4a011db189e5b71838072e99d822628a3039eac5f9e",
+        "source_payloads": [
+          {
+            "image_index": 92,
+            "role": "color"
+          },
+          {
+            "image_index": 93,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 47,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-047.png",
+        "size": [
+          32,
+          17
+        ],
+        "bbox": [
+          7,
+          0,
+          32,
+          17
+        ],
+        "png_sha256": "3ccaefea2aa8b57e6a8be47703335f0df93d2f33a175eb6495d26df87c356532",
+        "rgb_sha256": "e16f2e144f9f3933f6f23824a9266d549e4979592ad67324b26304f681272ebe",
+        "rgba_sha256": "a83bb9fced6e8f61c471c63cccafc4dc299e426684bae12b416abae0894d969c",
+        "source_payloads": [
+          {
+            "image_index": 94,
+            "role": "color"
+          },
+          {
+            "image_index": 95,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 48,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-048.png",
+        "size": [
+          24,
+          18
+        ],
+        "bbox": [
+          0,
+          0,
+          24,
+          18
+        ],
+        "png_sha256": "b35e18fa79c84f79a5a8607b42f438bbd0db2b33e0e5fe3e3c3b9fbd6c2c9359",
+        "rgb_sha256": "9181fd48a49ceebc296f7711b772051988ebf6e58c9f3c90195d39424a666722",
+        "rgba_sha256": "0e7c3855228293d59dd5c5f2c0d745da5f55dba1160cb4aaa92821a8b974fd46",
+        "source_payloads": [
+          {
+            "image_index": 96,
+            "role": "color"
+          },
+          {
+            "image_index": 97,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 49,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-049.png",
+        "size": [
+          40,
+          20
+        ],
+        "bbox": [
+          6,
+          0,
+          34,
+          20
+        ],
+        "png_sha256": "1ce5398c4b7cb12f4a9d63e66906ba4f4e67a01c840755b3ae9e8f5d363053cd",
+        "rgb_sha256": "175f225f20d319cfbbf31917bf057975a273eb8ba33880fe61bc422e7acfdfca",
+        "rgba_sha256": "760b40d1fccaa784bfbe58e4d520e33e8795cb5c15148849d7cee136b1d45e7d",
+        "source_payloads": [
+          {
+            "image_index": 98,
+            "role": "color"
+          },
+          {
+            "image_index": 99,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 50,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-050.png",
+        "size": [
+          40,
+          20
+        ],
+        "bbox": [
+          6,
+          0,
+          34,
+          20
+        ],
+        "png_sha256": "a224be1bf91a7914dbc5ceb37d978eaaa3066eed48794d98178a1bf60e47fe62",
+        "rgb_sha256": "fda495984d66e10f2a35e48a82cf805bc783bb8f4e33e42af3eccf76d965646e",
+        "rgba_sha256": "63654e90738e7dfb3208a638f1d3167342ac4a6bcab6af6dbcf0518d303acc64",
+        "source_payloads": [
+          {
+            "image_index": 100,
+            "role": "color"
+          },
+          {
+            "image_index": 101,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 51,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-051.png",
+        "size": [
+          40,
+          19
+        ],
+        "bbox": [
+          6,
+          0,
+          34,
+          19
+        ],
+        "png_sha256": "39be1dcbe558fade27eed1dae6595e42f9043f74c6638dd68c67d443caed67f6",
+        "rgb_sha256": "8b6655bae1090431009f1d5595cc330aa0a1860015b0134c0a9ee79ae67f3287",
+        "rgba_sha256": "ace62adee9b5a14aaf5dc995cb119d1579d3acdeba7a0ed9e23c645b8a1e36dc",
+        "source_payloads": [
+          {
+            "image_index": 102,
+            "role": "color"
+          },
+          {
+            "image_index": 103,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 52,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-052.png",
+        "size": [
+          24,
+          17
+        ],
+        "bbox": [
+          0,
+          0,
+          24,
+          17
+        ],
+        "png_sha256": "c7fd362720189640d4d30a5b59fb0f576a8937652b147b3b40d5808d7c4a66d9",
+        "rgb_sha256": "4013824a5336c6483c75acd167d1ec30be666c7fb4ea17b7f99ee1a2e257b059",
+        "rgba_sha256": "48ed5089e23bfdb174e1b1fc2a0fa74fdfc73f7073099af432f5dbdaa557b319",
+        "source_payloads": [
+          {
+            "image_index": 104,
+            "role": "color"
+          },
+          {
+            "image_index": 105,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "HEADPICS",
+        "index": 53,
+        "file": "assets/original-derived-png/ega/HEADPICS/headpics-053.png",
+        "size": [
+          40,
+          22
+        ],
+        "bbox": [
+          6,
+          0,
+          34,
+          22
+        ],
+        "png_sha256": "33fe33b9d34fbf9b0360f659673557f5ba0ef25661e948a6f86840024fd3ad79",
+        "rgb_sha256": "bc00a60e0f278a5a1cfab928483722c9a937ec712b80e7291de9a790a5f90e3c",
+        "rgba_sha256": "3478a6803ba522e1c1e47b177baecbb5275e799d9f63587e0a625509af218f8a",
+        "source_payloads": [
+          {
+            "image_index": 106,
+            "role": "color"
+          },
+          {
+            "image_index": 107,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/HEADPICS.0",
+      "size": 17354,
+      "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/headpics-build5-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "legspics-build5-complete-initial",
+    "file": "legspics-build5-complete-initial-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/legspics-build5-complete.txt",
+    "status": "DRAFT",
+    "sha256": "71175895dabc71386777998a0b09c2caa0eddb9bad955a070e463b0715d88719",
+    "size": [
+      1024,
+      1536
+    ],
+    "prompt_sha256": "aca9d97ce132d9981b49a966e152f8582eb90356973b524a74700dff652527c5",
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "review": "Actual background samples alpha=0 and full RGB compositing check passed; preview displayed RGB of transparent pixels. Foreground alpha 253..254 is preserved unchanged; no background extraction needed.",
+    "alpha_composite_check_sha256": "856c7055f8a1ef30b065fdd2ab5a7d516c660ca9aec21e3f658f77ecff931b22",
+    "original_output": "exec-dfd3b26e-b9c9-4ab9-8c83-d94332724ae4.png",
+    "source_indices": [
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "source_pngs": [
+      {
+        "archive": "LEGSPICS",
+        "index": 45,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-045.png",
+        "size": [
+          56,
+          28
+        ],
+        "bbox": [
+          3,
+          0,
+          53,
+          28
+        ],
+        "png_sha256": "e1fca84fdb3a2d313e952c355bc526afd0fab298ff533e0ae29350d3c5d3eafb",
+        "rgb_sha256": "6a580080faf54b74352601fdd164135cc22aa8059a1cc63e7843a88867b83c4a",
+        "rgba_sha256": "10ae9c407a99b3feee8483d356ab4615ec0c47fb80fe3f886d9250d91bae85ff",
+        "source_payloads": [
+          {
+            "image_index": 90,
+            "role": "color"
+          },
+          {
+            "image_index": 91,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 46,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-046.png",
+        "size": [
+          56,
+          31
+        ],
+        "bbox": [
+          5,
+          0,
+          51,
+          31
+        ],
+        "png_sha256": "e5d53f250947c3c278d89f9e4d5a08879a0f15ac36541d8c34ba0b4a9308cae8",
+        "rgb_sha256": "15cbae6d533bc994fa8a1aec83eadf0856f09238a0e08f87704dbe4e4a78c773",
+        "rgba_sha256": "ef22f143e489ea2a1b65c47011bb91e23688827229deb5877116282b04c311d8",
+        "source_payloads": [
+          {
+            "image_index": 92,
+            "role": "color"
+          },
+          {
+            "image_index": 93,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 47,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-047.png",
+        "size": [
+          56,
+          45
+        ],
+        "bbox": [
+          5,
+          0,
+          51,
+          45
+        ],
+        "png_sha256": "d02ef9cc8367b7695e3596d06794db53f74bfe97c456a4e070c5d131ab1f400e",
+        "rgb_sha256": "c798b3700bd03ff4e11c5a402aa6b3a256147c78b983d162d1bb5acbe500380a",
+        "rgba_sha256": "221634d319d9e7438b3494cba1800c2c287715e8ebdb030b78ad6076588deec9",
+        "source_payloads": [
+          {
+            "image_index": 94,
+            "role": "color"
+          },
+          {
+            "image_index": 95,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 48,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-048.png",
+        "size": [
+          56,
+          50
+        ],
+        "bbox": [
+          5,
+          0,
+          51,
+          50
+        ],
+        "png_sha256": "72e22c14742cc4aab956add29879dbab74ecb5ff986b662f7a1214717b8e5350",
+        "rgb_sha256": "9e15a62a9dccab703248c292929c15ee61b2ccc75750434cb49f336eba8a3a83",
+        "rgba_sha256": "58bbfdadc019661e8963eb51fe937a102124c38730a21650e9451aed198a5ecc",
+        "source_payloads": [
+          {
+            "image_index": 96,
+            "role": "color"
+          },
+          {
+            "image_index": 97,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 49,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-049.png",
+        "size": [
+          56,
+          47
+        ],
+        "bbox": [
+          6,
+          0,
+          52,
+          47
+        ],
+        "png_sha256": "8c65171ba7bfc565590b5307627e11bd75f201256588f1bfca0181f7d4fecb97",
+        "rgb_sha256": "438072df76f07ee244acc38e4a7a2e14dd021e7dc6a8f9820d81e80b2c47f0b2",
+        "rgba_sha256": "c412b059b200f4c2a6437c3c1ce9fa416cd658b5f9b7bff755e03a3dd8904b7c",
+        "source_payloads": [
+          {
+            "image_index": 98,
+            "role": "color"
+          },
+          {
+            "image_index": 99,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 50,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-050.png",
+        "size": [
+          56,
+          37
+        ],
+        "bbox": [
+          5,
+          0,
+          51,
+          37
+        ],
+        "png_sha256": "4e6edf1146e2057fbdf7c012655d68e9d42de919a2db712a5872a01beda82ba1",
+        "rgb_sha256": "2e3e622a5f62c2f17ed39ad091f2f68d0334d41c03345d79a5d023f010a5561e",
+        "rgba_sha256": "1b92051ec639f3f2266f69853a5e84ab848696610b38f8992e22446c96f0963b",
+        "source_payloads": [
+          {
+            "image_index": 100,
+            "role": "color"
+          },
+          {
+            "image_index": 101,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 51,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-051.png",
+        "size": [
+          56,
+          47
+        ],
+        "bbox": [
+          2,
+          0,
+          54,
+          47
+        ],
+        "png_sha256": "3d633eaeb827909cf54ab983fb4645778266a8b2c7b84ca2e30ad97214b14dd3",
+        "rgb_sha256": "d36aeecc0cedd4ca7c7a75e65b3a1518f66e3005359a18722364481ab7c88732",
+        "rgba_sha256": "e0c99d7a9c358b373a59a61530bc2acf1bbbd70d1bb731c13adb6b7fd9af4bc0",
+        "source_payloads": [
+          {
+            "image_index": 102,
+            "role": "color"
+          },
+          {
+            "image_index": 103,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 52,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-052.png",
+        "size": [
+          56,
+          42
+        ],
+        "bbox": [
+          5,
+          0,
+          51,
+          42
+        ],
+        "png_sha256": "a877e03b95a111f94f271455723775ec46eb60b82e9640c91974cd731eeea4e7",
+        "rgb_sha256": "dea2c36438ee75908318d899bdf3efbecee5a0623a8daa28add12f889c9d4e02",
+        "rgba_sha256": "d775c760cf18ce7474cd75e56662054a285112b880253bf9a41b29f58e44e61a",
+        "source_payloads": [
+          {
+            "image_index": 104,
+            "role": "color"
+          },
+          {
+            "image_index": 105,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "LEGSPICS",
+        "index": 53,
+        "file": "assets/original-derived-png/ega/LEGSPICS/legspics-053.png",
+        "size": [
+          56,
+          60
+        ],
+        "bbox": [
+          4,
+          0,
+          52,
+          60
+        ],
+        "png_sha256": "b1f7af82a2df43b172ad93513c83eac22d424e2b99c29cb43a861d482e11a918",
+        "rgb_sha256": "6abe0b5f6d38275da5ae8a272a7ec1ebb5519d6a3b62cd00a39068a89229b6d3",
+        "rgba_sha256": "728410ca485b78918e50abda4a1153952c0f3cfb6742c0b204c279574169a65c",
+        "source_payloads": [
+          {
+            "image_index": 106,
+            "role": "color"
+          },
+          {
+            "image_index": 107,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/LEGSPICS.0",
+      "size": 39694,
+      "sha256": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/legspics-build5-complete-initial-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-037-skin-hands",
+    "file": "torpics-037-skin-hands-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-037-skin-hands.txt",
+    "status": "DRAFT",
+    "sha256": "ee96391ae0c66958eab5fa41fef9029a7af1200f8df108b13948396c682d8a11",
+    "size": [
+      1355,
+      1160
+    ],
+    "prompt_sha256": "caa2f6da225d6822d3d589d0149162387a1fca54249e683faf09e9aa86cb94e4",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      77,
+      121,
+      1276,
+      1117
+    ],
+    "original_output": "exec-5119b1b1-bead-435d-9c42-d67f8758e59f.png",
+    "source_indices": [
+      37
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 37,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-037.png",
+        "size": [
+          72,
+          46
+        ],
+        "bbox": [
+          6,
+          0,
+          66,
+          46
+        ],
+        "png_sha256": "de108fdb443e405054b538942be78cf3a6ef9ec6a5436a6f128a97d560b5d233",
+        "rgb_sha256": "1b3c78fa7eec3a7ae90fde99f780aff45b40da1208f9eabe6241b2cf4a9c0d65",
+        "rgba_sha256": "51a0e68a9e616a63116adeff51f218e1be7132a0c5f609ceac141c1e1ce194cc",
+        "source_payloads": [
+          {
+            "image_index": 74,
+            "role": "color"
+          },
+          {
+            "image_index": 75,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-037-skin-hands-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build5-row0",
+    "file": "torpics-build5-row0-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build5-row0.txt",
+    "status": "DRAFT",
+    "sha256": "e59cd199b9b2f54c9cb3edeadae4c54cb0dffc0afed59353602deeabf1d0b68c",
+    "size": [
+      2172,
+      724
+    ],
+    "prompt_sha256": "10a9ded707927f21619d6fa42538464c0ee030e36562a6845fb0675c57d51bbb",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      41,
+      33,
+      2131,
+      703
+    ],
+    "original_output": "exec-a587052f-6bfc-49e5-b352-086967ad8580.png",
+    "source_indices": [
+      45,
+      46,
+      47
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 45,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-045.png",
+        "size": [
+          64,
+          49
+        ],
+        "bbox": [
+          8,
+          0,
+          64,
+          49
+        ],
+        "png_sha256": "979140e2e81de92b6553145b75e898125198fa79e98a6a6a89937b7887d4dfd6",
+        "rgb_sha256": "06cf49471fe8a0ba6cf3359e848c8a5f6c96f651619702f54d965c122c82cac0",
+        "rgba_sha256": "25c157666cf8a8ac99dc4ab2653239164e6ddda687d111be8ffa2f5e8000becb",
+        "source_payloads": [
+          {
+            "image_index": 90,
+            "role": "color"
+          },
+          {
+            "image_index": 91,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 46,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-046.png",
+        "size": [
+          56,
+          63
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          63
+        ],
+        "png_sha256": "ec3133eefb4ddd4439601d5afab65c2521ea6626d7f6f7cd4c0d8cd713766f73",
+        "rgb_sha256": "da3ba666f014a5275b63f76e31a3fb5d6d98d210f1a64f30480153386ce81404",
+        "rgba_sha256": "58f8647fe4b18f2bad14e2bcf318dd50434e65d5e1aaa7fc7d74c3bac0697a68",
+        "source_payloads": [
+          {
+            "image_index": 92,
+            "role": "color"
+          },
+          {
+            "image_index": 93,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 47,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-047.png",
+        "size": [
+          56,
+          58
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          58
+        ],
+        "png_sha256": "a11c6e47d466effa8d8bebf46cd1d4a387cef7d1f44b564000150300f0ec9eb9",
+        "rgb_sha256": "a106d4c53f8ce18053f600306309c3aaae79c70edb24153ac057d5fdc012c96f",
+        "rgba_sha256": "1015fe9573779fad2728eafc56233f5b9c71db32bf3926de84f8959d17360cd5",
+        "source_payloads": [
+          {
+            "image_index": 94,
+            "role": "color"
+          },
+          {
+            "image_index": 95,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build5-row0-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build5-row1",
+    "file": "torpics-build5-row1-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build5-row1.txt",
+    "status": "DRAFT",
+    "sha256": "2a507c9482add13f354d78870fc0434902fd9dc190b2882a4ed59ec403a77f57",
+    "size": [
+      2172,
+      724
+    ],
+    "prompt_sha256": "84b42536b6af1799b6f8dfccbc9b2224aec2fa98bed38ee5a1bee0249a85420f",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      40,
+      45,
+      2130,
+      673
+    ],
+    "original_output": "exec-cc213b4d-30d1-4a4e-9133-d2fa7032fa67.png",
+    "source_indices": [
+      48,
+      49,
+      50
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 48,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-048.png",
+        "size": [
+          56,
+          59
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          59
+        ],
+        "png_sha256": "a81b0313b26c6462d83315d5a8b5eca61f008db230795d570e7eaca2874f07a7",
+        "rgb_sha256": "9a5e26f5ad5b1768ac4ca2f56e1853ef3b7684dff7072416d9b0c4ee15fbc04e",
+        "rgba_sha256": "fcde18506d6d8cb4198eb7ae0d3965dfac7e2509251380922524b9ba0278fe70",
+        "source_payloads": [
+          {
+            "image_index": 96,
+            "role": "color"
+          },
+          {
+            "image_index": 97,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 49,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-049.png",
+        "size": [
+          56,
+          55
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          55
+        ],
+        "png_sha256": "ec3325e3335711e3b86d346c26360bc90024588d4f38e247cf1964297d05a17b",
+        "rgb_sha256": "ee63ffcd8920fcc379e4a6397957cde35229a5390da7c7318dbe7a9314df19d9",
+        "rgba_sha256": "b75cda7cf70be82f1528657e88921baa509253f49b41b7fc681279f6f3af1966",
+        "source_payloads": [
+          {
+            "image_index": 98,
+            "role": "color"
+          },
+          {
+            "image_index": 99,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 50,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-050.png",
+        "size": [
+          56,
+          51
+        ],
+        "bbox": [
+          0,
+          0,
+          56,
+          51
+        ],
+        "png_sha256": "fd5f070d81b55049229ee9f6c3d50704ae413ea92278d7583a67663c17281bf8",
+        "rgb_sha256": "8075fb3b481d7b629717a627abb4b6355b4a1803fcc9765aa6e189b412db6ee6",
+        "rgba_sha256": "aa167b06744a7e02ee0595e7599e27f6654dc9760ff51a2300b13cb965187a75",
+        "source_payloads": [
+          {
+            "image_index": 100,
+            "role": "color"
+          },
+          {
+            "image_index": 101,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build5-row1-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  },
+  {
+    "id": "torpics-build5-row2",
+    "file": "torpics-build5-row2-painted.png",
+    "tool": "built-in image_gen",
+    "prompt": "prompts/torpics-build5-row2.txt",
+    "status": "DRAFT",
+    "sha256": "e9191bf432ff32901eb12aabebc6a8c63d130c3e6cff1a89629cff1939de6d13",
+    "size": [
+      2172,
+      724
+    ],
+    "prompt_sha256": "d4d3818cfd9bc3d1950f3c9ceb5429d324db5a4e293c80112bef19dc3bb0fe42",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bbox_8": [
+      59,
+      52,
+      2112,
+      686
+    ],
+    "original_output": "exec-bf46cf9c-f7ec-460a-8026-c127c6514dd8.png",
+    "source_indices": [
+      51,
+      52,
+      53
+    ],
+    "source_pngs": [
+      {
+        "archive": "TORPICS",
+        "index": 51,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-051.png",
+        "size": [
+          64,
+          65
+        ],
+        "bbox": [
+          7,
+          0,
+          64,
+          65
+        ],
+        "png_sha256": "8d1b9a883d87f61fc149c33359cc2c77181eb6d1406b7f4f73544bbc94597b8c",
+        "rgb_sha256": "e371b73b79aa91323c83dc2807ce5bc42ce18e37acb3394d3be8e694bf0073ea",
+        "rgba_sha256": "b9fb8860c9c809fc63babbf1720dcfb2cce8c6219e46bf425c1c8545634deb9c",
+        "source_payloads": [
+          {
+            "image_index": 102,
+            "role": "color"
+          },
+          {
+            "image_index": 103,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 52,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-052.png",
+        "size": [
+          56,
+          55
+        ],
+        "bbox": [
+          1,
+          0,
+          55,
+          55
+        ],
+        "png_sha256": "14ffba012bca73493ff46335a28cc36c2a95d79da76a3fda34c3b90bb5b61ccb",
+        "rgb_sha256": "78db2696cd0b23e4c610547f8318b38182336912f2423b52798c094155175def",
+        "rgba_sha256": "1748477f31ce4c37b48cca3113c11fd9ae327580117ab478f10dcbd1cbd96734",
+        "source_payloads": [
+          {
+            "image_index": 104,
+            "role": "color"
+          },
+          {
+            "image_index": 105,
+            "role": "and_mask"
+          }
+        ]
+      },
+      {
+        "archive": "TORPICS",
+        "index": 53,
+        "file": "assets/original-derived-png/ega/TORPICS/torpics-053.png",
+        "size": [
+          72,
+          57
+        ],
+        "bbox": [
+          6,
+          0,
+          66,
+          57
+        ],
+        "png_sha256": "de5965dab6079e892d714beef45a5512f084241dbd9612a77155ccc3e128c05a",
+        "rgb_sha256": "010fe7b6530c4ecf9df6b5b07753854ccdf16197dd58fd5eb48b5426637ed6ec",
+        "rgba_sha256": "4661e925ea65d0dd17114f86910e557879de825ed93e7ddb6d16b22491e24460",
+        "source_payloads": [
+          {
+            "image_index": 106,
+            "role": "color"
+          },
+          {
+            "image_index": 107,
+            "role": "and_mask"
+          }
+        ]
+      }
+    ],
+    "source_entry": {
+      "entry": "Knights-of-legend/TORPICS.0",
+      "size": 56394,
+      "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+      "payload_count_from_verified_manifest": 108
+    },
+    "superseded": false,
+    "local_candidate": "workplace/hd-equipment-pages-20261015/generated/torpics-build5-row2-painted.png",
+    "rights": "source-derived generated PNG; current private repository only"
+  }
+]
