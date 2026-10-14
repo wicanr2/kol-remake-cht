@@ -1,0 +1,16 @@
+{
+  "schema": "kol-hd-template-namefit-check/1",
+  "source_inputs": 380,
+  "full_name_length": 16,
+  "full_name_text_preserved": true,
+  "nameplate_rect": [
+    1248,
+    876,
+    1488,
+    912
+  ],
+  "outside_name_fields_max_channel_delta": 0,
+  "short_name_unchanged": true,
+  "fit": "uniform glyph and advance scaling only when measured text exceeds240px; font measure and game data unchanged",
+  "intended_difference": "HD nameplate text fits its original rectangle; original EGA remains its existing rendering"
+}

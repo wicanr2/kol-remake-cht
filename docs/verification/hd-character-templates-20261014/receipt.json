@@ -1,0 +1,31 @@
+{
+  "schema": "kol-hd-character-runtime/1",
+  "date": "2026-10-14",
+  "status": "limited CONFORMED",
+  "source_inputs": 380,
+  "source_indices": 80,
+  "new_painted_frames": 74,
+  "preserved_indices": [
+    47,
+    43,
+    21,
+    32,
+    35,
+    54
+  ],
+  "formal_binary_identical_to_final_prototype": true,
+  "prototype_all80": "prototype-all80.json",
+  "formal": "formal-check.json",
+  "gui": "formal-gui.json",
+  "prototype_long_gui": "prototype-long-gui.json",
+  "namefit": "prototype-namefit.json",
+  "asset_manifest_sha256": "5fe92d61fa1f8c6d7f6aaa3bd501fdbd7662e74fae534dd7c7fd3718a04ddd90",
+  "formal_binary_sha256": "2d31dc2cc746346909626b31bf2921ec03f053997fedfd1019b7b66ffd66d8ef",
+  "image_manifest": "manifest.json",
+  "full_tests": true,
+  "sceneverify_tests": true,
+  "rights": "private GitHub 可保存；無公開散布權",
+  "raw_typed_data_and_save_local_only": true,
+  "release_changed": false,
+  "limits": "Linux Docker驗收；只完成80張角色模板，人物裝備合成及其餘圖形仍待HD。沒有自然通關、原版RNG或跨平台真機聲明。"
+}

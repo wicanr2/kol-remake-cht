@@ -1,0 +1,16 @@
+{
+  "schema": "kol-hd-character-creation-save-check/1",
+  "normal_creation_states": 98,
+  "new_portrait_index": 79,
+  "v3": true,
+  "persisted_record_paths": [
+    "$.characters[14]"
+  ],
+  "new_save_sha256": "1cc8849e00efdd78fb89ff3570d647bb1eb24db37ec579fc5ee06663457c844c",
+  "reload_states": 5,
+  "reload_equal": true,
+  "original_save_sha256_unchanged": true,
+  "source_inputs": 380,
+  "seed": 1,
+  "limits": "One fresh normal creation is persisted and the same v3 is reloaded by both engines; no cross-run comparison of random UUIDs and no original-game save-format claim."
+}

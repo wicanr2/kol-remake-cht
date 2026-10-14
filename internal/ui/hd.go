@@ -14,7 +14,8 @@ import (
 // HD 在最後1920×1200畫布呈現核准圖片與介面，不改動原畫布、字型與規則狀態。
 type HD struct {
 	facade       *ebiten.Image
-	portraits    [6]*ebiten.Image
+	portraits    [80]*ebiten.Image
+	portraitFit  map[*ebiten.Image]bool
 	matching     map[string]int
 	facadeKey    string
 	keys         map[*ebiten.Image]string
@@ -55,6 +56,10 @@ func (h *HD) fingerprint(img *ebiten.Image) string {
 }
 
 func (h *HD) drawHD(dst, src *ebiten.Image, rect image.Rectangle) {
+	if h.portraitFit[src] {
+		dst.SubImage(rect).(*ebiten.Image).Fill(color.Black)
+		rect = fitHDPortrait(src.Bounds(), rect)
+	}
 	sampled := h.sampledHD(src, rect.Dx(), rect.Dy())
 	var op ebiten.DrawImageOptions
 	op.GeoM.Translate(float64(rect.Min.X), float64(rect.Min.Y))

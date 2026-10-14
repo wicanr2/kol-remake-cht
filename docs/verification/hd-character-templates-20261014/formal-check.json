@@ -1,0 +1,339 @@
+{
+  "schema": "kol-hd-character-formal-check/1",
+  "source_inputs": 380,
+  "prototype_source_identical": true,
+  "all80_cpu_checks_inherited_with_identical_artwork": true,
+  "states_per_cycle": 98,
+  "formal_cycle_screens": 52,
+  "checks": [
+    {
+      "mode": "ega",
+      "step": 17,
+      "index": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 21,
+      "index": 4,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 25,
+      "index": 8,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 29,
+      "index": 12,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 33,
+      "index": 16,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 37,
+      "index": 20,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 38,
+      "index": 21,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 41,
+      "index": 24,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 45,
+      "index": 28,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 49,
+      "index": 32,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 52,
+      "index": 35,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 53,
+      "index": 36,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 57,
+      "index": 40,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 60,
+      "index": 43,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 61,
+      "index": 44,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 64,
+      "index": 47,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 65,
+      "index": 48,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 69,
+      "index": 52,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 71,
+      "index": 54,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 73,
+      "index": 56,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 77,
+      "index": 60,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 81,
+      "index": 64,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 85,
+      "index": 68,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 89,
+      "index": 72,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 93,
+      "index": 76,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "ega",
+      "step": 97,
+      "index": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "mode": "hd",
+      "step": 17,
+      "index": 0,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 21,
+      "index": 4,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 25,
+      "index": 8,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 29,
+      "index": 12,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 33,
+      "index": 16,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 37,
+      "index": 20,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 38,
+      "index": 21,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 41,
+      "index": 24,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 45,
+      "index": 28,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 49,
+      "index": 32,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 52,
+      "index": 35,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 53,
+      "index": 36,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 57,
+      "index": 40,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 60,
+      "index": 43,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 61,
+      "index": 44,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 64,
+      "index": 47,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 65,
+      "index": 48,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 69,
+      "index": 52,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 71,
+      "index": 54,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 73,
+      "index": 56,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 77,
+      "index": 60,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 81,
+      "index": 64,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 85,
+      "index": 68,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 89,
+      "index": 72,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 93,
+      "index": 76,
+      "max_channel_delta": 1
+    },
+    {
+      "mode": "hd",
+      "step": 97,
+      "index": 0,
+      "max_channel_delta": 1
+    },
+    {
+      "scene": "inn",
+      "legacy_hd_max_channel_delta": 1
+    },
+    {
+      "scene": "outdoor",
+      "legacy_hd_max_channel_delta": 0
+    }
+  ],
+  "long_name_exact_to_checked_prototype": true,
+  "normal_creation_states": 98,
+  "v3_portrait": 79,
+  "reload_states": 5,
+  "reload_equal": true,
+  "save_sha256_unchanged": true,
+  "save_sha256": "c3ca979c8d75fe6e138c6d5b58575b7cd99d78b3ffa97cdce346aa8336bc3744",
+  "formal_binary_sha256": "2d31dc2cc746346909626b31bf2921ec03f053997fedfd1019b7b66ffd66d8ef",
+  "limits": "Linux Docker scope. Formal samples cover20 four-person groups and approved six; prototype all80 pixel checks share identical source/artwork. No natural full-game or original RNG claim."
+}

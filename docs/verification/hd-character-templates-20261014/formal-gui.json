@@ -1,0 +1,57 @@
+{
+  "schema": "kol-hd-templates-gui-check/1",
+  "display_events": 24,
+  "checks": [
+    {
+      "scene": "name-buffer",
+      "creation_sha256": "a258da8e65ad288448fb7eabc5a69c17279a19309646c452cd1e40607ea5c5a4",
+      "window": [
+        1920,
+        1200
+      ],
+      "mouse": false,
+      "whole_frame_comparison": "not applied to blinking name-entry caret"
+    },
+    {
+      "scene": "portrait-0",
+      "creation_sha256": "3b1196c3aa3ef93b6785666847b95f832baea7485fd18f4aefcedcc262680afb",
+      "window": [
+        1920,
+        1200
+      ],
+      "mouse": false,
+      "whole_frame_max_channel_delta": 0
+    },
+    {
+      "scene": "approved-21",
+      "creation_sha256": "0a9e09aa7eb3db8e6cf3704fe9855866cd938f244daf330ee280c4cd8db515af",
+      "window": [
+        1920,
+        1200
+      ],
+      "mouse": false,
+      "whole_frame_max_channel_delta": 0
+    },
+    {
+      "scene": "portrait-79-small",
+      "creation_sha256": "9189c7ffb948011e64f1dbae1f8c7e25991ba8105f27e7dd21d728ad98b5e155",
+      "window": [
+        960,
+        600
+      ],
+      "mouse": true,
+      "whole_frame_max_channel_delta": 0
+    }
+  ],
+  "creation_fields_unchanged": true,
+  "nameplate_contrast_passed": true,
+  "full_name_length": 16,
+  "no_save_written": true,
+  "exit_code": 0,
+  "original_main_unchanged": true,
+  "diagnostic_main_sha256": "3082c1205a624e4ecce296ea001d1c806fcc79ee787860792506d536ad801814",
+  "diagnostic_binary_sha256": "1a4654ae1fc195e103e3b559eafd0e11b51719446d0feeca97cd217e9b927e1f",
+  "source_inputs": 380,
+  "formal_worktree": true,
+  "limits": "Creation state is checked independently because the normal display-event snapshot omits creation fields. Name-entry caret excluded from whole-frame comparison; three static scenes retain <=1."
+}

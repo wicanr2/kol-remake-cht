@@ -1,0 +1,428 @@
+{
+  "schema": "kol-hd-template-nameplate-check/1",
+  "source_inputs": 380,
+  "only_source_change": [
+    "internal/ui/hd_pages.go"
+  ],
+  "original_source_reconstructed_and_hash_verified": true,
+  "states": 98,
+  "ega_exact_screens": 81,
+  "hd_screens": 81,
+  "portrait_pixels_unchanged": true,
+  "checks": [
+    {
+      "index": 0,
+      "step": 17,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 1,
+      "step": 18,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 2,
+      "step": 19,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 3,
+      "step": 20,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 4,
+      "step": 21,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 5,
+      "step": 22,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 6,
+      "step": 23,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 7,
+      "step": 24,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 8,
+      "step": 25,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 9,
+      "step": 26,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 10,
+      "step": 27,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 11,
+      "step": 28,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 12,
+      "step": 29,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 13,
+      "step": 30,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 14,
+      "step": 31,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 15,
+      "step": 32,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 16,
+      "step": 33,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 17,
+      "step": 34,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 18,
+      "step": 35,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 19,
+      "step": 36,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 20,
+      "step": 37,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 21,
+      "step": 38,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 22,
+      "step": 39,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 23,
+      "step": 40,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 24,
+      "step": 41,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 25,
+      "step": 42,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 26,
+      "step": 43,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 27,
+      "step": 44,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 28,
+      "step": 45,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 29,
+      "step": 46,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 30,
+      "step": 47,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 31,
+      "step": 48,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 32,
+      "step": 49,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 33,
+      "step": 50,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 34,
+      "step": 51,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 35,
+      "step": 52,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 36,
+      "step": 53,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 37,
+      "step": 54,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 38,
+      "step": 55,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 39,
+      "step": 56,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 40,
+      "step": 57,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 41,
+      "step": 58,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 42,
+      "step": 59,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 43,
+      "step": 60,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 44,
+      "step": 61,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 45,
+      "step": 62,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 46,
+      "step": 63,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 47,
+      "step": 64,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 48,
+      "step": 65,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 49,
+      "step": 66,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 50,
+      "step": 67,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 51,
+      "step": 68,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 52,
+      "step": 69,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 53,
+      "step": 70,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 54,
+      "step": 71,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 55,
+      "step": 72,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 56,
+      "step": 73,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 57,
+      "step": 74,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 58,
+      "step": 75,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 59,
+      "step": 76,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 60,
+      "step": 77,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 61,
+      "step": 78,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 62,
+      "step": 79,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 63,
+      "step": 80,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 64,
+      "step": 81,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 65,
+      "step": 82,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 66,
+      "step": 83,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 67,
+      "step": 84,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 68,
+      "step": 85,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 69,
+      "step": 86,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 70,
+      "step": 87,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 71,
+      "step": 88,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 72,
+      "step": 89,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 73,
+      "step": 90,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 74,
+      "step": 91,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 75,
+      "step": 92,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 76,
+      "step": 93,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 77,
+      "step": 94,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 78,
+      "step": 95,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 79,
+      "step": 96,
+      "outside_nameplate_max_channel_delta": 1
+    },
+    {
+      "index": 0,
+      "step": 97,
+      "outside_nameplate_max_channel_delta": 1
+    }
+  ],
+  "nameplate_light_text_passed": true,
+  "no_save_written": true,
+  "intended_difference_rect": [
+    1248,
+    876,
+    1488,
+    912
+  ],
+  "limits": "Only the registered HD nameplate text color changes; F10 whole-frame maximum remains1. Previous all80 CPU portrait checks remain valid."
+}

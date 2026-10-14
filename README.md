@@ -111,9 +111,21 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 | ![EGA法術編輯頁](docs/verification/hd-spell-scroll-runtime-20261014/editor-ega.png) | ![HD法術卷軸與十三欄編輯](docs/verification/hd-spell-scroll-runtime-20261014/editor-hd.png) |
 
 [十五組比較頁](docs/verification/hd-native-ui-runtime-20261014/review.html)另含建角、編輯器、訓練、馬廄、法術與任務清單。
-遊戲內F10切換、鍵鼠、兩種視窗與存讀檔已驗證。自訂點陣圖保留內容與色值；其他人物、坐騎、裝備及未重繪圖示仍待HD，
+遊戲內F10切換、鍵鼠、兩種視窗與存讀檔已驗證。自訂點陣圖保留內容與色值；其他NPC、坐騎、裝備及未重繪圖示仍待HD，
 範圍及來源見[正式驗收](docs/verification/hd-native-ui-runtime-20261014.md)。
 法術編輯頁亦已[接入並驗證](docs/verification/hd-spell-scroll-runtime-20261014.md)，名稱輸入、左右選單與遊戲內F10切換保持狀態。
+
+### 開發版：八十張角色頭像
+
+八十張角色模板已補齊手繪HD，原核准六圖保留。以下為正式重製程式在同一角色狀態下的比較，尚未納入現行發行包。
+
+| 重製中文 EGA | 手繪 HD |
+|---|---|
+| ![EGA建立角色頭像](docs/verification/hd-character-templates-20261014/portrait-000-ega.png) | ![HD建立角色頭像](docs/verification/hd-character-templates-20261014/portrait-000-hd.png) |
+| ![EGA有翼角色頭像](docs/verification/hd-character-templates-20261014/portrait-044-ega.png) | ![HD有翼角色頭像](docs/verification/hd-character-templates-20261014/portrait-044-hd.png) |
+
+[五組對比](docs/verification/hd-character-templates-20261014/review.html)另含弓手與矮人。遊戲內F10可切換，16字元姓名完整縮放於原框；新增角色的頭像可隨v3保存重載。
+人物裝備合成及其他NPC仍待HD，範圍、來源與限制見[本批驗收](docs/verification/hd-character-templates-20261014.md)。
 
 ### 事件畫面：原版與 HD
 
@@ -178,7 +190,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 全畫面 HD 續作涵蓋書本、建角、商店與其他服務子頁、人物裝備、城鎮／世界地圖、戰鬥、傷勢、天候及事件。
 [13類畫面盤點](docs/verification/hd-completion-20261014.md#目前覆蓋)逐項列出缺口與驗收條件；放大原版素材不列為手繪 HD 完成。
 七段結局已依核准樣張接入開發版；其他事件及介面按清單續作，均須驗中文、畫面、鍵鼠及遊戲內 F10。
-書頁、服務面板、三個服務頭像及編輯器已完成[正式原生HD比較](docs/verification/hd-native-ui-runtime-20261014/review.html)；[法術卷軸](docs/verification/hd-spell-scroll-runtime-20261014/review.html)亦已接入。其餘圖形續作。
+書頁、服務面板、三個服務頭像及編輯器已完成[正式原生HD比較](docs/verification/hd-native-ui-runtime-20261014/review.html)；[法術卷軸](docs/verification/hd-spell-scroll-runtime-20261014/review.html)及[八十張角色模板](docs/verification/hd-character-templates-20261014/review.html)亦已接入。其餘圖形續作。
 批次與素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
 
 ## 專案起源

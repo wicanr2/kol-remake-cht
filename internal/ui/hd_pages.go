@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -68,6 +69,9 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 		}
 		if h.fingerprint(pic) != source.RGB {
 			return fmt.Errorf("HD頁面來源%s第%d圖指紋不符", source.Archive, source.Index)
+		}
+		if source.Archive == "CHARPICS" && (pic.Bounds().Dx() != 40 || pic.Bounds().Dy() != 38) {
+			return fmt.Errorf("HD角色來源第%d圖須為40×38", source.Index)
 		}
 	}
 	for i := 3; i < 71; i++ {
@@ -227,9 +231,19 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 			ink = color.RGBA{169, 36, 31, 255}
 		}
 	}
-	pen, drawn := x*2, 0
+	// 選圖頁姓名位於深色名牌，沿書頁深墨色會失去對比。
+	nameplate := n.book && x == book.CJKLayout.PortraitNameX && y == book.CJKLayout.PortraitNameY
+	textScale := 1.0
+	if nameplate {
+		ink = hdInk
+		width, _ := f.Measure(text)
+		if width*2 > 240 {
+			textScale = 240 / float64(width*2)
+		}
+	}
+	pen, drawn := float64(x*2), 0
 	for _, ch := range text {
-		advance := f.RuneAdvance(ch) * 2
+		advance := float64(f.RuneAdvance(ch)*2) * textScale
 		glyph, ok := n.h.style.glyphs[string(ch)]
 		if !ok {
 			n.err = fmt.Errorf("HD介面缺字：%c", ch)
@@ -237,17 +251,24 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 			continue
 		}
 		if ch != ' ' {
-			cell := image.Rect(pen, y*2, pen+advance, (y+f.Height())*2)
+			cell := image.Rect(int(math.Floor(pen)), y*2, int(math.Ceil(pen+advance)), (y+f.Height())*2)
+			if nameplate {
+				cell = cell.Intersect(image.Rect(x*2, y*2, x*2+240, (y+f.Height())*2))
+			}
 			if !cell.In(dst.Bounds()) {
 				n.err = fmt.Errorf("HD介面文字超界：%q at %v", text, cell)
 			}
-			scaleX := .5
-			if glyph.Advance*scaleX > float64(advance) {
-				scaleX = float64(advance) / glyph.Advance
+			scaleX := .5 * textScale
+			if glyph.Advance*scaleX > advance {
+				scaleX = advance / glyph.Advance
 			}
 			var op ebiten.DrawImageOptions
-			op.GeoM.Scale(scaleX, .5)
-			op.GeoM.Translate(float64(pen)-10*scaleX, float64(y*2)+32-76*.5)
+			op.GeoM.Scale(scaleX, .5*textScale)
+			baseline := float64(y*2) + 32
+			if textScale < 1 {
+				baseline = float64(y*2) + (float64(f.Height()*2)+32*textScale)/2
+			}
+			op.GeoM.Translate(pen-10*scaleX, baseline-76*.5*textScale)
 			op.ColorScale.ScaleWithColor(ink)
 			op.Filter = ebiten.FilterLinear
 			dst.SubImage(cell).(*ebiten.Image).DrawImage(n.h.style.images["font-atlas.png"].SubImage(hdRect(glyph.X, glyph.Y, 96, 96)).(*ebiten.Image), &op)

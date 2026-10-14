@@ -404,3 +404,14 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 壓縮SHA-256為`960e88c7fc0beb73b1bae8392b401100e4b7eda201499264e7a08206e55e0cd5`。
 核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-spell-scroll-runtime-20261014`；
 `delete hd-spell-scroll-runtime-20261014`核對原工作區後精確清理。完整型別資料只留本機，Git收據只保存雜湊與檢查結果。
+
+## 八十張角色模板HD
+
+[正式驗收](hd-character-templates-20261014.md)與[本機清冊](local/hd-character-templates-20261014/retention.json)
+保存二十組生成與修正版、80張像素核對、380份來源、正式52張畫格、最長姓名、24個F10事件及新角色保存重載。
+1325份檔案已保留，七份可重建程式只留雜湊；壓縮檔460399808 bytes，SHA-256為`bb4874024c7cd14c97338e077cb55c8747f37f0a8745720d393e1846d84dd534`。原工作區逐檔核對後已清理。
+完整建角JSON、v3存檔與原始失敗輸出僅本機；Git只保存PNG、來源及精簡結果。
+核對沿本頁既有Docker掛載執行`tools/retain_verification.py verify hd-character-templates-20261014`；
+`delete hd-character-templates-20261014`逐檔核對後只清理該工作區。
+原型fixture符號連結已另記於`fixture-links.json`，封存前只移除連結本身；來源未刪除。
+不同姓名牌修正階段的來源雜湊與替代單檔索引保存在`source-input-map.json`。

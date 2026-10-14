@@ -1,8 +1,8 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-10-14。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
+更新日期：2026-10-15。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
 現行交付為`v.1.0.2-20261013`，三平台六包與76秒影片完成，[private GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)已發布。使用者維持一色階，固定整數雙線性取樣修正後，正式三環境三十組及實際封包二十組皆EGA零差、HD最多一色階。正常1046狀態及13新程序重載、F9／F10、實際音訊與六包完整性通過。使用者最終以go解除暫緩，四個遠端附件大小及SHA-256相符；tag固定指向46a01f11。首次兩色階失敗保留，完整版與影片留本機。入口：[交付收據](docs/verification/release-v1.0.2-20261013.md)。
-HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限CONFORMED；其他批次維持DRAFT。
+HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限CONFORMED；尚未接入的美術維持DRAFT。
 遊戲內「畫面 F10」設定已核准並接入正式遊戲，切換與正常住宿存讀檔驗收通過。
 操作介面及人物頭像已獲使用者「ok 同意開工」核准並[接入正式Go呈現](docs/verification/hd-interface-runtime-20261012.md)，SPEC-039此批有限CONFORMED。此批已隨v.1.0.2-20261013交付，前版保持。
 四首原創室內樂已由使用者接受並接入開發版；[配樂收據](docs/verification/hd-music-runtime-20261013.md)為有限CONFORMED。配樂預設開啟，F9及下緣按鈕獨立切換，換EGA／HD持續播放；本次遊玩有效，不改v3。標題／旅店跨輪、準備世界至戰鬥、缺件、正常住宿保存及七狀態重載通過。已隨v.1.0.2-20261013交付。
@@ -11,112 +11,23 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 
 ## 目前作業方向
 
-目前目標：**完成全畫面HD**，狀態active。使用者於2026-10-14以「ok 同意」核准巨石門事件候選及同畫風續作，後續「go」授權繼續已確認分支。
-七段結局插畫已保存至`assets/hd/first-slice/events/`，載入與呈現依SPEC-039接入並有限CONFORMED。開發來源366份Go／module，全套及sceneverify測試通過；七段HD擷取、14張EGA保持及首張核准圖相同。正常1046狀態、13新程序重載與v3除saved_at相同；48個F10設定事件保持七段狀態，兩種視窗及HD往返最多一色階通過。初次200秒預算不足的輸出保留，同一輸入以600秒乾淨重跑通過。
-[七段接入工作](docs/verification/hd-ending-runtime-20261014.md)為目前批次；下一批為書本、建角、商店與人物子頁的原生HD呈現。整體13類尚未完成，v.1.0.2-20261013交付與tag保持。
+目前目標：**完成全畫面HD**，狀態active。沿使用者已核准的手繪、1920×1200、紅黑銅框及原有位置續作，不重新開啟已確認的分支。
 
-七段已提交0943d9f8並推送origin/main。書頁、三個服務頭像、原生字模、服務面板與HD編輯器的[隔離原型](docs/verification/hd-native-ui-20261014.md)完成十五組每側145狀態及真實視窗30個F10事件；自訂圖像素與保存語意保持。
-依[SPEC-039原生HD契約](docs/spec/039-hd-art-ui.md#其他操作頁的原生hd呈現)接入正式程式，目前374份Go／module，全套及sceneverify測試通過。CJKConfirm兩行文字移回框內，英文保持。
-正式十五組每側145狀態、EGA及既有HD回歸、真實視窗30個F10事件、鍵鼠及兩視窗通過；完整畫格最多一色階。標題27、住宿11及重載5狀態相同，完整v3只差saved_at，重載原檔保持。本批有限CONFORMED，入口[接入收據](docs/verification/hd-native-ui-runtime-20261014.md)。
-第六輪原型的通用白底修正曾改到商店邊框，已限定中文確認視窗後固定來源通過。重載腳本不支援ESC的失敗另存，只續驗未完成流程。書本／服務／編輯器正式截圖已加入README。
-法術卷軸已沿同一主題與原欄位接入，正式376份來源、全套及sceneverify通過。四組107狀態、EGA保持，HD與原型／返回建築最多一色階；十八個F10事件保持輸入緩衝與狀態，三組完整畫格往返零差。舊v1啟動轉換的v3 SHA保持，住宿11與重載5狀態及v3除saved_at相同。入口[正式卷軸收據](docs/verification/hd-spell-scroll-runtime-20261014.md)，本切片有限CONFORMED；README已加正式對比。
-前置原型395份證據已封存核對後清理；原型的提示、抓圖與錯誤ESC／保存期望均保留，正式GUI乾淨執行通過。完整物品頁、角色模板與其他圖形繼續，全畫面HD保持active，舊Release不改。
-下一批[角色模板DRAFT](docs/spec/039-hd-art-ui.md#角色模板續作)工作區為`workplace/hd-character-templates-20261014/`。實際80張40×38來源各有不同指紋，既核准六張為47、43、21、32、35、54，保留原樣；其餘74張按既有畫風續作，先核對圖集分格及武器／姿勢。
+開發版已接入七段結局、原生書頁／服務／編輯器、法術卷軸與八十張角色模板，均為限定範圍CONFORMED。最新來源、測試及限制以本頁「目前狀態表」與[角色模板驗收](docs/verification/hd-character-templates-20261014.md)為準；完整歷程保存在[WORKLOG](WORKLOG.md)。
 
-使用者要求全部操作介面、圖形與事件 HD 化，並在 README 放原版／HD 事件截圖。
-[本批盤點與候選](docs/verification/hd-completion-20261014.md)確認13類畫面仍有缺口，804張輸入 PNG 已重核；現行版本不能宣稱全畫面 HD。
-新增結局第0段手繪與原生 HD 中文隔離候選。dosgolem 受控擷取原版七段，圖片矩形皆符合原始解碼圖；全頁配色與自然結局入口未作 parity 聲明。
-候選兩視窗、四次 EGA／HD 切換共十二個設定事件保持同一狀態，HD 往返完整畫格最多一色階；正式363份輸入保持。
-前批候選已於2026-10-14核准；七段接入已驗收，其他介面與美術按清冊進行。README 已補遊戲故事、現況限制與七段原版／HD事件對照。
-組隊與商店購買已有操作證據，受控七段結局能顯示；新開局正常完成全部任務至結局仍未驗證。
+本批新增74張手繪圖，原核准六張47、43、21、32、35、54保留。姓名牌保持完整16字元，F10在姓名輸入與選圖時保留完整建角欄位；自訂40×38點陣內容及v3格式保持。正式對比已加入README。完整建角JSON與存檔僅本機，完成證據依[保存入口](docs/verification/retained-evidence.md)封存清理。
 
-使用者要求操作介面與人物頭像 HD 化、同一主題的對比圖，以及遊戲中切換主題。
-[候選比較頁](docs/verification/hd-ui-theme-20261012/review.html)沿核准六人與門面，加入紅黑底、銅框、HD 中文、操作圖示與旅店老闆頭像。
-提供旅店、門面、戰鬥三組目前 HD／候選對比，亦可看 EGA／HD；兩側來源場景及封存 trace 相同。
-[瀏覽器檢查](docs/verification/hd-ui-theme-20261012/browser-check.json)通過42項實際操作檢查，含四尺寸切換、鍵鼠及中文安全矩形自檢。
-這是可丟棄原型，未執行規則或寫保存；其他 NPC、組合裝備、書本、地圖及傷勢遮罩未完成。
-本批已依[SPEC-039契約](docs/spec/039-hd-art-ui.md#操作介面與人物頭像候選)接入原生HD字型、面板、操作列與旅店頭像。
-七路徑71狀態與中文紀錄相同，EGA畫格保持；15個實際F10事件、鍵鼠、兩視窗及缺件回退通過。
-正常住宿v3只差saved_at，另起程序重載7狀態相同。原型250字模與正式字集像素、字距相同，現行2608字完整涵蓋。
-四首原創室內樂及獨立F9控制已核准並接入，見[配樂驗收](docs/verification/hd-music-runtime-20261013.md)。已完成[三平台新版交付](docs/verification/release-v1.0.2-20261013.md)，舊版保持；完整版與影片留本機。
-既有F10決定有效；介面接入時重播封存輸入，後續新版交付已完成，沒有新增原版抽樣。比較證據已[封存](docs/verification/local/hd-interface-runtime-20261012/retention.json)，工作區已核對後清理。
+下一批為完整物品／隊伍頁與裝備合成。其他NPC、怪物、坐騎、城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件繼續，依[13類覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)及[SPEC-039](docs/spec/039-hd-art-ui.md)執行。全畫面HD尚未完成。
 
-使用者於2026-10-12核准已展示版面並要求開始，遊戲內畫面設定已接入正式入口。
-點「畫面 F10」或按F10，選EGA／HD立即預覽，Esc或返回按鈕留在原場景。
-[正式驗收](docs/verification/display-switch-runtime-20261012.md)確認三張畫面與核准樣張逐像素相同，
-滑鼠、鍵盤、右鍵、兩種視窗與缺素材中文提示通過。十五個切換事件的場景及隊伍trace保持，
-切換後正常住宿的完整v3除saved_at與未切換相同，新程序重載的七個狀態及畫面相同。
-[SPEC-039設定契約](docs/spec/039-hd-art-ui.md#遊戲內畫面設定)升有限CONFORMED；整體HD仍為DRAFT。
-前版交付為 `v.1.0.1-20261012`，三平台完整版已包含此功能，前版保持。
-六包與76秒影片已通過[本版驗收](docs/verification/release-v1.0.1-20261012.md)，發行來源6d98fb00已推送。
-使用者已明確授權指定目的地與四個附件，[GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012)已發布。
-四個遠端附件的大小與SHA-256相符，tag指向6d98fb00；儲存庫維持private，完整版與影片留本機。
-
-使用者明確修改驗收規則：允許鎖血、提高攻擊與準備場景，重製版抵達對應場景，
-確認中文與畫面正確就通過。依 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)，
-[受控收據](docs/verification/controlled-scenes-20261011.md)已確認六種服務／任務頁、
-戰鬥規劃、執行、勝利、戰利品及七段結局；書本、建角、七城建築重用前批固定畫面。
-新戰鬥採 seed1、隊伍鎖血、命中後傷害20倍，英中各33狀態非顯示差異0，英文33張圖不變。
-結局中文原版小座標及兩處段落行數造成的重疊已修，七段真實譯文的畫布／圖框／文字檢查通過。
-舊缺輸入、長流程逾時與競技場里程碑差異保留在[前批收據](docs/verification/cjk-closeout-20261011.md)，
-不再作本輪收尾或 HD 開工門檻，不將它們改寫成原版對拍通過。
-
-使用者於2026-10-11核准首批[比較原型](docs/verification/hd-first-slice-20261011/review.html)並要求開始。
-門面1774×887與六人圖集1536×1024原樣接入，可由遊戲內畫面設定啟用1920×1200呈現，亦保留`-graphics hd -lang zh-Hant`啟動選項。
-按實際肖像RGB指紋匹配，不依姓名或隊伍位置；其他人物及自訂圖回退EGA，保存格式不變。
-[首批接入驗收](docs/verification/hd-runtime-20261011.md)完成八條路徑98個HD狀態，與EGA狀態及中文紀錄相同；
-修改前65張EGA畫格保持，實際住宿保存除saved_at相同，舊v3重載與原尺寸／縮小視窗點選通過。
-首位姿勢／盾牌及門面現有尺寸納入此次核准；外框、圖示、戰場與傷勢遮罩尚未重繪。
-[SPEC-039](docs/spec/039-hd-art-ui.md)首批有限CONFORMED，整體DRAFT。所有 PNG 限目前 private GitHub。
-原版 C matching 維持暫停；既有 `v.1.0.0-20261011` 封包不覆寫。
-
-2026-10-12 使用者再次要求三平台完整版、release 與推廣影片，採 `v.1.0.1-20261012`。
-與最近已核准畫面切換版本的356份Go／module輸入相同。正式套件通過，vet保留兩則既有警示。
-固定seed1的唯一正常抽樣1046狀態與13新程序重載完全相同，完整v3只差saved_at。
-實際AppImage的十五個設定事件、三張核准畫面、縮放、鍵鼠及切換後住宿保存通過。
-Windows實際ZIP的full／匯入後release繪圖及F10切換通過，十組中文EGA／HD畫格逐像素相同。
-macOS雙架構、最低11.0、ARM64簽章及系統相依通過，尚未執行。
-六包與76秒1080p影片完成，十幕目視、影音與來源檢查通過。
-完整版與影片留本機；Release只提供三平台引擎包及其SHA-256，不含素材或完整手冊譯文。
-本版權利審查已更新，使用者已明確核准private GitHub Release；正式發布與附件完整性核對完成。
-前版[交付收據](docs/verification/release-v1.0.0-20261011.md)及產物保持，matching維持暫停。
-
-2026-10-08使用者要求暫停目前對拍，改研究原版C的matching decompilation。
-當時對拍暫停；本輪只依後續指令執行上述一次核查，原版 C matching 保持暫停。
-matching 入口為[原始工具鏈與匹配工作](docs/re/matching-decompilation.md)。
-六支EXE均有完整同位元組重建基準，完整來源已完成KOL、TANDYPIN、MAKEMODE與TITLE。
-第三十四批新增圖像合成、人物選擇、事件與分頁四個完整函式，共 4203 bytes，分列 3701 C／502 ASM；1453 條原始指令全部匹配。
-三個純 C 共 3212 bytes，一個混合共 991 bytes。六段硬體 ASM 在編譯前明列，C 的求值順序與未使用結果保留。
-全部 254 個既有 compiler 函式保持；前十個 C／OBJ 與前批逐 byte 相同，新函式獨立編為 SUPPORT.C／SUPPORT.OBJ。
-Town 現有 174 純 C 64776、84 混合 47159 bytes，混合分列 40268 C／6891 ASM。
-十一個真實 CODE 物件各為 53366／13650／1707／3679／5221／6038／5554／6558／5611／6348／4203 bytes；111935-byte 合併只是分析視圖，各真實段均小於 64 KiB。
-每個 PUBLIC／fixup 保留物件、段與原始偏移。重建使用[編譯單元清單](docs/verification/local/matching-c34-20261010/seed-compiler-units.json)與 full-build.py；seed-CODE.c 只供閱讀／分類。
-三個字型候選與遠指標葉函式仍未匹配。
-另 12 個 C／版本／前綴試驗保存於[試驗清冊](docs/verification/local/matching-c34-20261010/probe-summary.json)，未計入還原量；正式工具鏈保持。
-Town 全部 6736 bytes 初始化 DATA 來源保持，原版 DATA 片段為 0。
-246 個 compiler 初值符號供應 5600 bytes；31 個 LIB 範圍供應 991 實際 bytes 與 88 宣告零 bytes，另 57 原生零 bytes。
-兩個近指標表與一個遠函式指標由 15 個真實 compiler fixup 重生；56 個 compiler 對齊零 bytes 另列。
-52 個完整 LIB CODE 模組、75 個原始函式保持，涵蓋 9632 實際來源與 13 宣告零 bytes。
-兩次乾淨重編的 36 項產物相同，116 反例拒絕；兩份獨立 reader 核全部 258 個 compiler 函式、真實 CODE 物件來源、CODE／DATA、fixup、回填與 2281 筆有序重定位。
-LINK／EXEMOD4.02／EXEPACK4.06 原生重生 133679-byte 核心，再生成 81 個 1Ah。
-兩次完整 133760-byte KOLTOWN.EXE 均與原版 SHA-256 相同；沒有手修指令、header 或複製原版 tail。
-Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持。
-累計 228 純 C 74428、378 LIB 44396 實際來源 bytes、182 混合 C／ASM 75345 bytes，函式外另列 271 C／258 ASM。
-目前[來源清冊](docs/verification/local/matching-c34-20261010/source-ledger.json)保持全部 799 個原始函式。
-全六支仍有 10 函式、4999 CODE bytes 未還原，未還原 DATA 為 0；四支完整來源。使用者要求先 commit 與 push，matching 目標及遊戲對拍均暫停。
-剩餘範圍另含 41 個函式外 CODE bytes；部分 CRT 函式有 235 bytes 已覆蓋、1 byte 未還原，均已納入總量。
-接續 [C35 工作計畫](workplace/matching-c35-20261010/PLAN.json)的五個未匹配先行候選與兩份收據已核對保留，完整 C34 基準已恢復至 C35。另一次無號左值字型候選的三個函式仍未匹配；尚未整合或計入目前來源，工作區保留供恢復。
-接續時保留 compiler_objects.py、seed-compiler-units.json、全部 CODE seed、CODE 分類與完整 DATA 鏈；恢復前一批不可只取 BULK.C／BULK.OBJ。
-原始唯一 C 宣告／文字、未證實語意及 Go parity 的證明限制保持。
-現有Go程式、已完成證據及原完成條件保留；原版C重建與Go移植的證明範圍分開處理。
+現行交付與tag保持`v.1.0.2-20261013`，本批尚未進發行包。組隊與商店已有操作證據，受控七段結局能顯示；從新開局正常完成全部任務至結局仍未驗證。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 361份Go及2份module；四首配樂、F9及固定整數HD取樣已納入v.1.0.2-20261013；[來源與交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 來源commit39c1b6ee，發行tag固定指向46a01f11；後續文件提交不改正式程式 |
-| 最近測試 | cmd／internal與sceneverify通過；固定正常1046狀態及13新程序重載、完整v3除saved_at保持；實際封包F9／F10與音訊通過，二十組EGA零差／HD最多一色階 | 首次兩色階失敗保留；探索／戰鬥配樂採準備存檔，原版整場parity及平台真機未新增 |
+| 正式來源 | 開發版380份Go／module；[角色模板來源與收據](docs/verification/hd-character-templates-20261014/receipt.json)。現行v.1.0.2來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 本批程式與最終原型逐位元相同；發行tag仍固定46a01f11，尚未重建新版封包 |
+| 最近測試 | 全套及sceneverify通過；原型80張頭像像素／回捲、正式每側98狀態及52畫格、16字元姓名、既有旅店／戶外、新角色第79張頭像v3保存與5狀態重載、24個正式F10事件通過；EGA保持，HD最多一色階 | Linux Docker範圍；資料與原版RNG／自然通關不作新聲明；正式完整建角欄位另由GUI診斷核對 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
 | 跨平台 | [現行交付驗收](docs/verification/release-v1.0.2-20261013.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal六包通過；實際AppImage及Wine兩個ZIP啟動、F9／F10與音訊通過，遠端四附件大小及SHA相符 | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
@@ -129,7 +40,7 @@ Town 尚有 5 函式、996 CODE bytes；Book 五函式、4003 CODE bytes 保持�
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | 首批門面、六人肖像、旅店頭像、中文字與操作介面、遊戲內F10及四首已聆聽核准的原創配樂／F9均已隨v.1.0.2交付；[本版收據](docs/verification/release-v1.0.2-20261013.md) | 其他人物、裝備、地圖及傷勢遮罩未完成；資料PNG不重繪 |
+| HD | 現行發行含首批門面、六人、操作介面、F10及四首配樂／F9；開發版另完成七段結局、原生書頁／服務／編輯器、卷軸與80張角色模板，見[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋) | 完整物品／隊伍頁、其他NPC／怪物／坐騎／裝備、地圖、戰場、傷勢、天候、片頭及其餘事件仍開放；資料PNG不重繪 |
 | 交付 | `v.1.0.2-20261013`：三平台full／release、76秒1080p影片；private Release已發布，四附件完整性與46a01f11 tag核對通過，入口[本版收據](docs/verification/release-v1.0.2-20261013.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
 | GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，16開放／92已核實完成不變 |
 

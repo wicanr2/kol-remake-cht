@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"image"
 	"path/filepath"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -48,6 +49,10 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD法術卷軸載入失敗：%w", err)
 		}
+		templates, err := assets.LoadHDTemplates(filepath.Join(g.hdDir, "templates"))
+		if err != nil {
+			return fmt.Errorf("HD角色模板載入失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -66,6 +71,17 @@ func (g *game) setGraphics(mode string) error {
 		hd.AttachPages(pages.Book, pages.Portraits, bookKeys, pages.Manifest.Background.SourceRGB, pageSources)
 		source := scroll.Manifest.Source
 		hd.AttachScroll(scroll.Image, ui.HDPageSource{Archive: source.Archive, Index: source.Index, RGB: source.SourceRGB})
+		var preserved []ui.HDPageSource
+		for _, p := range templates.Manifest.Preserved {
+			preserved = append(preserved, ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB})
+		}
+		var portraitFrames []ui.HDTemplatePortrait
+		for _, p := range templates.Manifest.Portraits {
+			portraitFrames = append(portraitFrames, ui.HDTemplatePortrait{HDPageSource: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, File: p.File, Rect: image.Rect(p.Rect[0], p.Rect[1], p.Rect[2], p.Rect[3])})
+		}
+		if err := hd.AttachTemplates(templates.Images, preserved, portraitFrames); err != nil {
+			return err
+		}
 		canvas := screen.NewCanvasScaled(6)
 		g.hdCache, g.hdCanvas = hd, canvas
 	}
