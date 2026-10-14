@@ -1,6 +1,6 @@
 # 三平台 HD 介面與配樂更新
 
-版本：`v.1.0.2-20261013`，發行時區Asia/Taipei。狀態：六包、76秒影片及原定一色階閘門全部通過；使用者最終以go解除暫緩，已授權指定private Release的四個附件，發布與遠端核對中。正式結果見[完整收據](release-v1.0.2-20261013/receipt.json)。
+版本：`v.1.0.2-20261013`，發行時區Asia/Taipei。狀態：六包、76秒影片及原定一色階閘門全部通過；使用者最終以go解除暫緩，[private Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)已發布，四個遠端附件大小及SHA-256相符。tag固定指向`46a01f116f579806187bd7fbbfa6d0a5f7f6ce7d`，後續文件提交不移動tag。正式結果見[完整收據](release-v1.0.2-20261013/receipt.json)。
 
 本版接續已核准的HD操作介面、人物頭像與四首室內樂，提供三平台完整版、引擎包及新版推廣片。前版保持，不修改玩法、v3格式或未核准的美術。以[配樂接入收據](hd-music-runtime-20261013/receipt.json)的361份Go／module為基準，只修改兩份HD呈現檔並新增整數取樣與測試，共363份。來源與正式三環境結果見[精度修正收據](release-v1.0.2-20261013/precision-fix.json)。
 
@@ -20,7 +20,7 @@
 
 來源工具：[交付流水線](../../tools/closeout_release.py)、[封包啟動](../../tools/verify_release_runtime.py)、[封包控制](../../tools/verify_package_controls.py)、[影片合成](../../tools/compose_release_promo.py)。全程在有界Docker內執行，原始來源唯讀，輸出UID/GID1000。建置、驗證與失敗分類追加至[WORKLOG](../../WORKLOG.md)。
 
-Windows／Linux的[同主題實際封包對比](release-v1.0.2-20261013/review.html)與[來源清冊](release-v1.0.2-20261013/manifest.json)已保存。EGA十組逐像素相同，HD十組逐通道最大差2／255；未達預登記的一色階數值標準，原結果保留。中文、幾何與畫面目視相同。使用者選擇「維持一色階標準，暫緩發布」，因此不建立新版tag或Release，不把結構驗證通過當成發行就緒。
+Windows／Linux的[同主題實際封包對比](release-v1.0.2-20261013/review.html)與[來源清冊](release-v1.0.2-20261013/manifest.json)已保存。首次候選EGA十組逐像素相同，HD十組逐通道最大差2／255；未達預登記的一色階數值標準，原結果保留。中文、幾何與畫面目視相同。使用者當時選擇「維持一色階標準，暫緩發布」，首次候選未建立tag或Release，不把結構驗證當成發行就緒。下方修正後完整重建並通過數值閘門，使用者才在最後確認解除暫緩。
 
 色差診斷沿用同一正式Windows PE、seed1、保存及五狀態鍵序，由[診斷工具](../../tools/diagnose_release_pixels.py)在Wine9內指定auto、DirectX及OpenGL後端。輸出保存於`dist-all/v.1.0.2-20261013/smoke/pixel-diagnosis/`；屬可撤回診斷，不變更正式渲染設定或原有數值閘門。
 

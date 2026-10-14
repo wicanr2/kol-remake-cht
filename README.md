@@ -4,10 +4,10 @@
 Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用 Ogg Vorbis。標題雷聲已通過人耳驗收與[正常播放驗證](docs/verification/audio/README.md)。
 
 目前提供書本與建角、組隊、城鎮與世界探索、戰鬥、任務、結局及 kol-save-v3 保存。
-現行交付為 `v.1.0.1-20261012`，含三平台完整版、需匯入合法資料的 release 與本機推廣影片。
+現行交付為 `v.1.0.2-20261013`，含三平台完整版、需匯入合法資料的 release 與本機推廣影片。
 目前採[受控場景驗收](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血與提高攻擊，
 抵達指定場景後確認中文與畫面。登記場景已通過，結果見[驗收收據](docs/verification/controlled-scenes-20261011.md)。
-本版已包含住宅告示、中文目錄、結局排版修正、首批 HD 與遊戲內畫面切換。
+本版包含住宅告示、中文目錄、結局排版修正、HD介面與頭像、四首原創室內樂，以及遊戲內F9配樂與F10畫面切換。
 
 ## 遊戲背景
 
@@ -25,21 +25,20 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 
 ## 開始遊玩
 
-現行版本為 `v.1.0.1-20261012`，包含已驗收雷聲、中文修正、首批 HD 與遊戲內切換。
+現行版本為 `v.1.0.2-20261013`，包含HD操作介面與頭像、四首原創室內樂、F9配樂及F10畫面切換。
 封包與限制見 [交付收據](docs/verification/release-v1.0.1-20261012.md)。
-正式交付根目錄為 [dist-all/v.1.0.1-20261012/](dist-all/v.1.0.1-20261012/)：
+正式交付根目錄為 [dist-all/v.1.0.2-20261013/](dist-all/v.1.0.2-20261013/)：
 
 | 平台 | 檔案 | 開啟方式 |
 |---|---|---|
-| Linux | [完整版 AppImage](dist-all/v.1.0.1-20261012/full/kol-v.1.0.1-20261012-full-linux-x86_64.AppImage) | `chmod +x` 後執行；沒有 FUSE 可加 `--appimage-extract-and-run` |
-| Windows AMD64 | [完整版 ZIP](dist-all/v.1.0.1-20261012/full/kol-v.1.0.1-20261012-full-windows-amd64.zip) | 解壓後開啟 `kol.exe`；已通過 Wine 啟動與切換 |
-| macOS ARM64／Intel | [完整版 universal ZIP](dist-all/v.1.0.1-20261012/full/kol-v.1.0.1-20261012-full-macos-universal.zip) | 開啟 `武士傳說.app`；只完成建置與結構驗收 |
+| Linux | [完整版 AppImage](dist-all/v.1.0.2-20261013/full/kol-v.1.0.2-20261013-full-linux-x86_64.AppImage) | `chmod +x` 後執行；沒有 FUSE 可加 `--appimage-extract-and-run` |
+| Windows AMD64 | [完整版 ZIP](dist-all/v.1.0.2-20261013/full/kol-v.1.0.2-20261013-full-windows-amd64.zip) | 解壓後開啟 `kol.exe`；已通過 Wine 啟動與切換 |
+| macOS ARM64／Intel | [完整版 universal ZIP](dist-all/v.1.0.2-20261013/full/kol-v.1.0.2-20261013-full-macos-universal.zip) | 開啟 `武士傳說.app`；只完成建置與結構驗收 |
 
-`full` 已含遊戲與首批 HD 必要資料，只留本機。[release](dist-all/v.1.0.1-20261012/release/) 是三平台引擎包，
+`full` 已含遊戲、HD介面與配樂必要資料，只留本機。[release](dist-all/v.1.0.2-20261013/release/) 是三平台引擎包，
 需先以包內工具匯入合法持有、已抽取且符合雜湊的資料；說明見各包 `README.txt`。
-三平台引擎包及校驗碼已發布至 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012)，儲存庫維持 private。
-含HD操作介面、旅店頭像、四首原創配樂及F9的[新版候選](docs/verification/release-v1.0.2-20261013.md)另作本機驗收，尚未發布。現行Release保持。
-[76 秒推廣影片](dist-all/v.1.0.1-20261012/promo/kol-v.1.0.1-20261012-promo.mp4)
+三平台引擎包及校驗碼已發布至 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)，儲存庫維持 private。
+[76 秒推廣影片](dist-all/v.1.0.2-20261013/promo/kol-v.1.0.2-20261013-promo.mp4)
 使用本版抽樣與遊戲內切換的新畫格，也只留本機。檔案與 SHA-256 見交付根目錄的 `SHA256SUMS.json`。
 嚴格原版一致性與平台真機驗收另列後續研究，
 目前狀態以 [CONTEXT.md](CONTEXT.md) 與 [工作清單](WORKLIST.md) 為準。
@@ -53,7 +52,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 | `,` `.` | 移動畫面下方圖示列的白框 |
 | Enter | 執行 |
 | Esc | 回上一頁 |
-| F9 | 開發版及新版候選的獨立配樂開關，預設開啟 |
+| F9 | 獨立開關配樂，預設開啟 |
 | F10 | 開啟畫面設定，切換 EGA／HD |
 | Ctrl+Q | 離開 |
 
@@ -74,18 +73,18 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 ### HD 畫面
 
-HD 採1920×1200原比例。開發版已接入核准的操作介面、原生中文字、六人肖像與旅店老闆頭像。
-下圖為開發版實際遊戲畫面；戰場、傷勢圖及未展示子頁仍沿現有顯示。現行發行包保留首批HD。
+HD採1920×1200原比例，包含核准的操作介面、原生中文字、六人肖像與旅店老闆頭像。
+下方保留已核准門面及戰鬥畫格，旅店與設定來自本版實際封包；戰場、傷勢圖及未展示子頁仍沿現有顯示。
 
 手繪旅店門面與六人隊伍：
 
 ![HD 旅店門面、六人肖像與操作介面，1920×1200](docs/verification/hd-interface-runtime-20261012/door-hd.png)
 
-![新版候選的HD旅店頭像、原生中文字與配樂控制](docs/verification/release-v1.0.2-20261013/inn-hd-controls.png)
+![本版HD旅店頭像、原生中文字與配樂控制](docs/verification/release-v1.0.2-20261013/inn-hd-controls.png)
 
 | 戰鬥資訊框的 HD 人物 | 遊戲內 HD 畫面設定 |
 |---|---|
-| ![戰鬥資訊框與七個HD指令](docs/verification/hd-interface-runtime-20261012/battle-hd.png) | ![新版候選的遊戲內HD畫面設定](docs/verification/release-v1.0.2-20261013/game-menu-hd.png) |
+| ![戰鬥資訊框與七個HD指令](docs/verification/hd-interface-runtime-20261012/battle-hd.png) | ![本版遊戲內HD畫面設定](docs/verification/release-v1.0.2-20261013/game-menu-hd.png) |
 
 按 F10 或點下緣「畫面 F10」，即可在同一場景切換 EGA／HD；Esc 返回遊戲。
 三組[同主題、同場景比較](docs/verification/hd-interface-runtime-20261012.md#同主題比較)沿用相同人物與門面。

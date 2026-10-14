@@ -11449,3 +11449,11 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 首次失敗、未發布候選及修正原型保存1667檔，12份可重建執行檔只留雜湊；壓縮SHA為0cc818a6a541726d9cc0555ef2ebc228c7ce2e186387c752b90bf83f6f58a00c。逐檔核對後只刪workplace/hd-pixel-consistency-20261013，入口見docs/verification/retained-evidence.md。本輪Docker容器均--rm回收，其他專案容器保持，沒有新建image或全域清理。新交付、公開PNG／收據及本機證據UID/GID1000，無擁有權異常。提交及推送結果接續記錄。
 - 精度修正、封包流水線、README新HD截圖與收據已提交39c1b6ee並推送origin/main，提交後工作樹乾淨。交付清冊已記錄完整source_commit，363份來源與正式建置相符；312個現行文件連結、索引正對照、Python語法及工作清單同步通過。僅最後的解除發布暫停確認仍待使用者回覆，本行與來源commit清冊另以文件提交保存。
 - 文件交接feab7fe0已推送。使用者在已展示新版、目的地、三個引擎包及SHA256SUMS.txt的最後確認後連續回覆go，明確解除先前暫緩。記錄四附件精確SHA授權，流水線要求一色階通過及附件一致才標記ready。原完整包與影片留本機，舊tag／Release不動；新版發布及遠端核對接續記錄。
+- 發行來源46a01f11已推送，annotated tag v.1.0.2-20261013固定指向46a01f116f579806187bd7fbbfa6d0a5f7f6ce7d，tag物件e0b03e2d12d8846ed7e12c1d1efe3fb26e921d8a。首次sandbox建立tag暫存物件受唯讀限制，改用已授權主機Git權限成功，不是產品問題，沒有移動舊tag。
+- private GitHub Release已發布，ID411748020；四個附件的名稱、大小及GitHub digest與本機逐一相符，沒有完整版或影片。收據保存於dist-all/v.1.0.2-20261013/smoke/github-release.json及github-release-verified.json；公開精簡收據同步。README已改新版三平台下載與影片入口，F9／F10及HD畫面說明同版，現況與權利審查同步。後續文件提交不移動發行tag。
+
+## 2026-10-14：發布後文件與交接收尾
+
+- 發行版號及tag維持v.1.0.2-20261013。README改新版後，工作清單github-release的固定舊URL訊號消失；已將資料綁定改為新版README與新版收據，保留前版發布歷史。這是台帳過期，不是發布或遊戲故障，未修改遠端Issue。
+- 相同最終檢查乾淨重跑通過：1575份交付檔SHA、363份正式來源、311個現行文件連結、唯一工作清單與擁有權。16開放／92已核實保持，後續HD美術與真機仍沿原項追蹤。發布、tag、四附件驗證及本機完整包／影片均已完成；新PNG與本機證據無root-owned檔或誤建.md目錄，本輪容器清除，其他專案保持。
+- 最後文件同步沿既有commit＋push授權保存，不移動發行tag；正式程式及六包位元組保持已驗證版本。

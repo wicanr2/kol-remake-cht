@@ -3,7 +3,7 @@
   "version": "v.1.0.2-20261013",
   "verified_on": "2026-10-13",
   "technical_status": "PASS",
-  "publication_status": "AUTHORIZED_PENDING_PUBLICATION",
+  "publication_status": "PUBLISHED",
   "publication_authorized": true,
   "original_parity": false,
   "windows_real_machine": false,
@@ -715,5 +715,50 @@
     },
     "full_and_promo_upload": false,
     "approved_on": "2026-10-13"
+  },
+  "github_release": {
+    "assets": [
+      {
+        "browser_download_url": "https://github.com/wicanr2/kol-remake-cht/releases/download/v.1.0.2-20261013/kol-v.1.0.2-20261013-release-linux-x86_64.AppImage",
+        "digest": "sha256:0deb8b0b1de4ee831ae69dd443e719722c4cf9d258fb3ea3b0c8157b629bd6e0",
+        "id": 637230853,
+        "name": "kol-v.1.0.2-20261013-release-linux-x86_64.AppImage",
+        "size": 9067000
+      },
+      {
+        "browser_download_url": "https://github.com/wicanr2/kol-remake-cht/releases/download/v.1.0.2-20261013/kol-v.1.0.2-20261013-release-macos-universal.zip",
+        "digest": "sha256:31de977a353bbfdc1399b14ee6ec18990a525cd3de60fc30dd10b79b2a3edc80",
+        "id": 637230852,
+        "name": "kol-v.1.0.2-20261013-release-macos-universal.zip",
+        "size": 15192781
+      },
+      {
+        "browser_download_url": "https://github.com/wicanr2/kol-remake-cht/releases/download/v.1.0.2-20261013/kol-v.1.0.2-20261013-release-windows-amd64.zip",
+        "digest": "sha256:e3a71ecede8af39f4ac74297010f50665a3ed46f67eda06120b51f7ec5781838",
+        "id": 637230848,
+        "name": "kol-v.1.0.2-20261013-release-windows-amd64.zip",
+        "size": 8142956
+      },
+      {
+        "browser_download_url": "https://github.com/wicanr2/kol-remake-cht/releases/download/v.1.0.2-20261013/SHA256SUMS.txt",
+        "digest": "sha256:6169edf9c0da253ba00dc25c7243606d5a1601987dd53e627b5fabdd4396df13",
+        "id": 637230847,
+        "name": "SHA256SUMS.txt",
+        "size": 345
+      }
+    ],
+    "draft": false,
+    "html_url": "https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013",
+    "id": 411748020,
+    "prerelease": false,
+    "published_at": "2026-10-13T14:10:05Z",
+    "tag_name": "v.1.0.2-20261013",
+    "target_commitish": "main",
+    "status": "PASS",
+    "private": true,
+    "tag_object": "e0b03e2d12d8846ed7e12c1d1efe3fb26e921d8a",
+    "tag_commit": "46a01f116f579806187bd7fbbfa6d0a5f7f6ce7d",
+    "four_assets_verified": true,
+    "full_and_promo_uploaded": false
   }
 }

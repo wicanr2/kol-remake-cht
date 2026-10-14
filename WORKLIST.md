@@ -1,6 +1,6 @@
 # 《武士傳說》重製工作清單
 
-更新日期：2026-10-13
+更新日期：2026-10-14
 
 ## 這份檔案怎麼讀
 
@@ -14,8 +14,8 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 
 目前狀態與現行交接見 `CONTEXT.md` 頂部。2026-10-11 使用者授權判斷收尾，
 最多補一次抽樣後製作 v1.0.0 完整版、release 與推廣影片。
-最新交付入口為 `dist-all/v.1.0.1-20261012/`，包含首批HD與遊戲內切換，驗收範圍見
-[本版收據](docs/verification/release-v1.0.1-20261012.md)。前版保持。
+最新交付入口為 `dist-all/v.1.0.2-20261013/`，包含HD介面、頭像、四首配樂及F9／F10，驗收範圍見
+[本版收據](docs/verification/release-v1.0.2-20261013.md)。前版保持。
 目前收尾改採 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血、提高攻擊及準備場景，
 抵達後確認中文與畫面即可。登記場景[已通過](docs/verification/controlled-scenes-20261011.md)。
 嚴格原版 parity 與真機仍列後續，保留證據，不作HD開工門檻。
@@ -26,8 +26,8 @@ matching 維持暫停。公開發行另行審查。
 HD 已選手繪及 1920×1200 原比例，[第一批已接入](docs/verification/hd-runtime-20261011.md)。
 遊戲內切換已核准並[接入正式遊戲](docs/verification/display-switch-runtime-20261012.md)，鍵鼠、畫面及住宿存讀檔通過。
 核准的[HD操作介面與旅店頭像](docs/verification/hd-interface-runtime-20261012.md)已接開發版並有限驗收。
-四首中世紀室內樂及獨立F9已核准並[接入驗收](docs/verification/hd-music-runtime-20261013.md)。目前接續[三平台新版交付](docs/verification/release-v1.0.2-20261013.md)，既有版本保持。
-使用者維持HD一色階標準並暫緩新版發布。整數取樣修正的三環境三十組及實際封包二十組通過；六包、正常保存重載及76秒影片已驗收。原兩色階失敗保留，發布暫停不自動解除。
+四首中世紀室內樂及獨立F9已核准並[接入驗收](docs/verification/hd-music-runtime-20261013.md)。已完成[三平台新版交付](docs/verification/release-v1.0.2-20261013.md)，既有版本保持。
+使用者維持HD一色階標準，修正後三環境三十組及實際封包二十組通過；六包、保存重載及76秒影片完成。使用者最終go解除暫緩，private Release四附件及tag已核對，原兩色階失敗保留。
 
 涉及未決設計的分支等待使用者確認，不自行視為同意。
 
@@ -74,9 +74,9 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：要人判——要人判：操作手感取捨。決定後照原版的項目會有對應的輸入 token 與測試，再改成 absent 或 required_in_all 綁它。
 
 - **hd-art-ui** — 遊戲圖片與操作畫面HD化
-  手繪與1920×1200已核准。首批門面、六人與遊戲內F10已交付於v.1.0.1-20261012，入口docs/verification/release-v1.0.1-20261012.md。使用者另核准同主題的操作介面與NPC頭像；原生HD字模、面板、七個戰鬥指令、旅店頭像已接開發版並有限CONFORMED。七路徑71狀態與中文紀錄相同，封存EGA圖保持；原型250字模像素／字距相同，現行2608字完整涵蓋；真實鍵鼠、15個切換事件、兩視窗、缺件回退及正常住宿保存與新程序重載7狀態通過。入口docs/verification/hd-interface-runtime-20261012.md。四首原創室內樂已聆聽核准並接入開發版，A獨立F9／按鈕、預設開啟、EGA／HD切換持續播放。正式OGG解碼／跨輪PCM、實際標題23雷聲與72秒循環、旅店80秒循環、鍵鼠縮放、缺件、準備世界至戰鬥及正常住宿存讀檔通過。七個新程序重載狀態與文字相同，HD字緣舍入差另列。入口docs/verification/hd-music-runtime-20261013.md。v.1.0.2-20261013本機六包及76秒影片已製作，首次HD跨Mesa最高兩色階未過，使用者維持一色階並暫緩發布。固定整數取樣已接正式呈現器，三環境三十組EGA零差／HD最多一色階；六包乾淨重建，實際封包二十組亦EGA零差／HD最多一色階，正常1046狀態及13重載、F9／F10、實際音訊與76秒影片通過。入口docs/verification/release-v1.0.2-20261013.md。原失敗保留，無新tag或Release。其他NPC、組合裝備、書本、地圖、傷勢遮罩、後續圖示與真機仍開放；沒有新增原版oracle。
+  手繪與1920×1200已核准。首批門面、六人與遊戲內F10已交付於v.1.0.1-20261012，入口docs/verification/release-v1.0.1-20261012.md。使用者另核准同主題的操作介面與NPC頭像；原生HD字模、面板、七個戰鬥指令、旅店頭像已接開發版並有限CONFORMED。七路徑71狀態與中文紀錄相同，封存EGA圖保持；原型250字模像素／字距相同，現行2608字完整涵蓋；真實鍵鼠、15個切換事件、兩視窗、缺件回退及正常住宿保存與新程序重載7狀態通過。入口docs/verification/hd-interface-runtime-20261012.md。四首原創室內樂已聆聽核准並接入開發版，A獨立F9／按鈕、預設開啟、EGA／HD切換持續播放。正式OGG解碼／跨輪PCM、實際標題23雷聲與72秒循環、旅店80秒循環、鍵鼠縮放、缺件、準備世界至戰鬥及正常住宿存讀檔通過。七個新程序重載狀態與文字相同，HD字緣舍入差另列。入口docs/verification/hd-music-runtime-20261013.md。v.1.0.2-20261013本機六包及76秒影片已製作，首次HD跨Mesa最高兩色階未過，使用者維持一色階並暫緩發布。固定整數取樣已接正式呈現器，三環境三十組EGA零差／HD最多一色階；六包乾淨重建，實際封包二十組亦EGA零差／HD最多一色階，正常1046狀態及13重載、F9／F10、實際音訊與76秒影片通過。入口docs/verification/release-v1.0.2-20261013.md。使用者最終go解除暫緩，private Release已發布，四個遠端附件及tag通過；原失敗保留。其他NPC、組合裝備、書本、地圖、傷勢遮罩、後續圖示與真機仍開放；沒有新增原版oracle。
   完成條件：使用者確認樣張及素材契約；圖片來源、權利、尺寸及索引可追溯；依SPEC-040抵達對應HD場景，中文與畫面正確，鍵鼠可用，既有v3可讀；另驗各平台封包。
-  核實：要人判——首批與F10已交付。HD介面、NPC、四首原創配樂、F9及整數取樣已接入；新版六包與影片驗收通過，使用者暫緩發布。後續美術、傷勢遮罩、其他曲目及真機仍開放。
+  核實：要人判——HD介面、NPC、四首原創配樂、F9及整數取樣已隨v.1.0.2-20261013交付；六包及影片通過，private Release四附件已核對。後續美術、傷勢遮罩、其他曲目及真機仍開放。
 
 
 ### 接了但沒驗過
@@ -211,7 +211,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **spec-ready-before-implement** — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣：已完成
-- **github-release** — 發 GitHub Release：2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。
+- **github-release** — 發 GitHub Release：2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
 - **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號：2026-10-12本機新版驗收通過；不關閉原版parity或真機項。
