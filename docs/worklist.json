@@ -1974,7 +1974,7 @@
       "id": "hd-art-ui",
       "layer": "gap",
       "title": "遊戲圖片與操作畫面HD化",
-      "body": "v.1.0.2-20261013已交付首批門面、六人肖像、旅店頭像、部分原生HD介面與F9／F10。使用者已核准巨石門候選及同畫風續作，目前目標完成全畫面HD。開發版七段結局已接入並有限CONFORMED：七段中文、14張EGA保持、首張核准圖相同、正常1046狀態及13重載、完整v3除saved_at相同；兩視窗48個F10設定事件保持段落狀態，HD往返最多一色階。README已放七段原版／HD截圖。13類盤點與804來源PNG保持；書本、建角、商店／人物／法術子頁、其他NPC與組合裝備、地圖、戰場、傷勢、天候及其餘事件仍未完成。入口docs/verification/hd-ending-runtime-20261014.md及docs/verification/hd-completion-20261014.md。",
+      "body": "v.1.0.2-20261013保持。開發版七段結局已有限CONFORMED，README有原版／HD截圖。本批374份來源新增書頁、三個服務頭像、原生字模、面板與編輯器；十五組每側145狀態、EGA與既有HD回歸、兩視窗30個F10事件及鍵鼠通過，完整畫格最多一色階。標題27、住宿11、重載5狀態與v3除saved_at相同，README加入正式比較。法術卷軸下一批DRAFT已生成，未接正式。13類全HD仍開放：法術編輯、完整物品頁、其他人物／坐騎／組合裝備、城鎮／世界地圖、戰場、傷勢、天候、翻書與其餘事件。入口docs/verification/hd-native-ui-runtime-20261014.md、docs/spec/039-hd-art-ui.md及docs/verification/hd-completion-20261014.md。",
       "acceptance": "所有13類操作介面及可見圖形逐項完成HD，不以放大EGA或靜默回退算完成。各批樣張與素材契約確認並升READY；來源、權利、尺寸、索引及遮罩可追溯；依SPEC-040取得對應場景中文與正確畫格，鍵鼠及F10切換保持狀態，舊v3可讀；事件原版／HD截圖放README；最後驗各平台封包。",
       "verify": {
         "kind": "manual",
@@ -2447,6 +2447,21 @@
       "file": "tools/seal_hd_music.py",
       "match": "準備存檔開始",
       "why": "配樂收據的證明範圍，不新增玩法缺口；自然全旅程、原版整場與平台真機沿v01-full-battle-parity及windows-macos-real-machine，其他HD範圍沿hd-art-ui。"
+    },
+    {
+      "file": "cmd/kol/hd_pages.go",
+      "match": "多行及其他標題版面仍待獨立驗收",
+      "why": "現有hd-art-ui手動項認領未訪長對話的HD分支，保持原呈現；不是另一項遊戲規則缺口。"
+    },
+    {
+      "file": "internal/ui/hd_pages.go",
+      "match": "HD頁面素材尚未完整核對",
+      "why": "完整載入與實際來源指紋防護的錯誤訊息，已有拒絕路徑測試；不是未完成實作。"
+    },
+    {
+      "file": "docs/spec/039-hd-art-ui.md",
+      "match": "未驗法術編輯器|完整範圍及未完成圖形|原型未驗前不進正式入口",
+      "why": "既有hd-art-ui手動項認領法術、物品及其餘圖形，沿同一READY閘門續作，不新增重複項。"
     }
   ],
   "current_acceptance": "SPEC-040：受控場景，中文與畫面正確即可；完整原版對拍不阻擋HD。"

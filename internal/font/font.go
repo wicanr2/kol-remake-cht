@@ -166,6 +166,15 @@ func (f *Font) glyph(r rune) (*ebiten.Image, bool) {
 // 斑點，這一點由原版畫面逐像素比對確認。
 func (f *Font) DrawOpaque(dst *ebiten.Image, x, y int, text string,
 	r, g, b uint8, bgR, bgG, bgB uint8) int {
+	if painter != nil {
+		bg := color.RGBA{bgR, bgG, bgB, 255}
+		if count, handled := painter.DrawFont(dst, f, x, y, text, color.RGBA{r, g, b, 255}, &bg); handled {
+			if DrawObserver != nil {
+				DrawObserver(f.meta.Name, text)
+			}
+			return count
+		}
+	}
 	ch := f.meta.Cell.Height
 	drawn, pen := 0, x
 	for _, r0 := range []rune(text) {
@@ -192,6 +201,11 @@ func (f *Font) DrawOpaque(dst *ebiten.Image, x, y int, text string,
 func (f *Font) Draw(dst *ebiten.Image, x, y int, text string, r, g, b uint8) int {
 	if DrawObserver != nil {
 		DrawObserver(f.meta.Name, text)
+	}
+	if painter != nil {
+		if count, handled := painter.DrawFont(dst, f, x, y, text, color.RGBA{r, g, b, 255}, nil); handled {
+			return count
+		}
 	}
 	drawn, pen := 0, x
 	for _, ch := range []rune(text) {

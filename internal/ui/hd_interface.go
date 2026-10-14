@@ -224,6 +224,8 @@ func (h *HD) innHD(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 		}
 		if h.fingerprint(pic) == s.npcKey {
 			pic = s.images["innkeeper-cropped.png"]
+		} else if painted, ok := h.pagePortrait(pic); ok {
+			pic = painted
 		}
 		h.drawHD(dst, pic, hdRect(62, 398, 498, 356))
 	}

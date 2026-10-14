@@ -81,7 +81,7 @@ var CJKConfirm = struct {
 }{
 	X: 282, Y: 174, Width: 396, Height: 84,
 	ShadowOffset: 12, ShadowThickness: 12,
-	Line1X: 264, Line1Y: 124, Line2X: 296, Line2Y: 148,
+	Line1X: 312, Line1Y: 192, Line2X: 384, Line2Y: 216,
 }
 
 // CJKPictureInstructions 是圖像層右頁說明的中文版。原版把一句話拆成五行是英文字距下的

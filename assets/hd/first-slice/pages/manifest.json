@@ -1,0 +1,79 @@
+{
+  "schema": "kol-hd-pages/1",
+  "rights": "AI-painted original-derived PNG; current private repository and local full only; no public distribution",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "source_archives": {
+    "BOOKPICS.0": "ef3aff1d003d44d7828290b8e80217606b8fecd05a90ee6b6c2dac2a4a92be39",
+    "TWN1PICS.0": "fe4e6824266d5f894c4eb9fb21d70e9ea717b0200dd91ce233945b6946dd546e",
+    "KOLMPICS.0": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d"
+  },
+  "files": {
+    "book-open-painted.png": {
+      "sha256": "975327af3c2ce514358f8144a9af0d02d2772668e739b420f73934dd02799e06",
+      "width": 1586,
+      "height": 992
+    },
+    "twn1pics-012-painted.png": {
+      "sha256": "ed5966b0508182501c44ceb23ca3bbe990eefe2194dd8532f1032cfc57cd2d4f",
+      "width": 1470,
+      "height": 1070
+    },
+    "twn1pics-018-painted.png": {
+      "sha256": "095220b8023aeb05185ce907c9cb807b2d967f03b84981a6567241dd8818b92f",
+      "width": 1470,
+      "height": 1070
+    },
+    "twn1pics-020-painted.png": {
+      "sha256": "07c7b11725af9224de90c33980153a0fd0e9a81bdc01fe8a48e594a871cbcd84",
+      "width": 1470,
+      "height": 1070
+    }
+  },
+  "book": "book-open-painted.png",
+  "books": [
+    {
+      "archive": "BOOKPICS",
+      "index": 1,
+      "source_png_sha256": "52cc9b7749cf7c96a90435102beb7575ae34a2b56f30e0a672f76b469a3c341c",
+      "source_rgb_sha256": "94dd4ee2d012c75b608610e303b43ed978ec795364cce9ced252d51ae085cecc"
+    },
+    {
+      "archive": "BOOKPICS",
+      "index": 2,
+      "source_png_sha256": "b2660a921d6e5d3bd4877e421b5720a3c540ec9bd26eacc95564c1d1cdcc7c46",
+      "source_rgb_sha256": "79af5a5c90df55d97c2e987d584f22c378f49cc92479bda61c2e2907be07a495"
+    }
+  ],
+  "portraits": [
+    {
+      "archive": "TWN1PICS",
+      "index": 12,
+      "source_png_sha256": "4918e00114551b92a984f57fb8b491eb36ece709ecd6ecc0fa29a8be1eb98734",
+      "source_rgb_sha256": "890d8ed8d47a252bead9e8059674bcf4800d53117231c6b64391b5464a149f07",
+      "file": "twn1pics-012-painted.png"
+    },
+    {
+      "archive": "TWN1PICS",
+      "index": 18,
+      "source_png_sha256": "50949c01bbd36218af2822edb9a242235367441d1ee348ac8c6505b18dcb6456",
+      "source_rgb_sha256": "09dd356b866dc0d11916e0afd5c249d0e68db91c11afb44ed8519cdd16346c41",
+      "file": "twn1pics-018-painted.png"
+    },
+    {
+      "archive": "TWN1PICS",
+      "index": 20,
+      "source_png_sha256": "86ca99c6de02b93db980223b376ae0117958df44fd2035aa096aef8f6a9594c2",
+      "source_rgb_sha256": "879fb416e86c5a81ccb9fe6779098dc4d1956cdce84b20047beb84cad8ec98fc",
+      "file": "twn1pics-020-painted.png"
+    }
+  ],
+  "generation": "generation.json",
+  "verification": "docs/verification/hd-native-ui-runtime-20261014.md",
+  "status": "READY; approved theme and displayed art; production integration in progress",
+  "background": {
+    "archive": "KOLMPICS",
+    "index": 0,
+    "source_png_sha256": "83e871ebda65178468f54e5729cb64c3f66b599cc643e6e65ac87d5267fffe73",
+    "source_rgb_sha256": "8369fd846e01a1ba3377d8d65716f74c5dd09699fbbbf8c055a02f6ab3f138f4"
+  }
+}

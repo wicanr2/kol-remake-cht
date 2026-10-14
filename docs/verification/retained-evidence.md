@@ -367,3 +367,22 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 223份檔案已封存並逐項核對，三份可重建執行檔只留雜湊；原始比較工作區已清理。
 核對使用既有Docker工具鏈執行 `tools/retain_verification.py verify hd-ending-runtime-20261014`；
 掛載與解開方法沿本頁通用入口。初次200秒正常HD流程逾時保留，同輸入600秒重跑通過。
+
+## 書本與操作子頁HD原型
+
+[原型驗收](hd-native-ui-20261014.md)及[本機保存清冊](local/hd-native-ui-20261014/retention.json)
+保存十五組每側145狀態、38張比較圖、30個F10事件與鍵鼠收據。
+2190份檔案壓縮為349451720 bytes，八份可重建程式只留雜湊。
+壓縮SHA-256為`c85df11dd1eed2e6e82734a28636fbd09cf7f4d3b976b16bec952fbec9ca20f6`。
+在本頁既有Docker工具鏈與掛載下，執行`tools/retain_verification.py verify hd-native-ui-20261014`核對；
+`delete hd-native-ui-20261014`另核原工作區逐檔雜湊後才精確刪除。
+第五輪一般畫面與第六輪兩個中文問句分開保存。正式接入另見[本批收據](hd-native-ui-runtime-20261014.md)。
+
+## 書本與操作子頁HD正式接入
+
+[正式驗收](hd-native-ui-runtime-20261014.md)及[本機清冊](local/hd-native-ui-runtime-20261014/retention.json)
+保存374份正式來源、十五組每側145狀態、30個F10事件、正常住宿與重載，以及邊框／腳本失敗輸出。
+1195份檔案壓縮為267176440 bytes，三份可重建程式只留雜湊。
+壓縮SHA-256為`08498b066fcc4599af9902bb4448c456f23537c31003af4343c9ca13786bfced`。
+核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-native-ui-runtime-20261014`；
+`delete hd-native-ui-runtime-20261014`再核原工作區後只清理該批，其他工作保持。

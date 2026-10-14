@@ -1,0 +1,182 @@
+{
+  "schema": "kol-hd-native-ui-prototype-check/1",
+  "date": "2026-10-14",
+  "formal_inputs": 366,
+  "formal_inputs_unchanged": true,
+  "cases": [
+    {
+      "name": "contents",
+      "states": 1,
+      "trace_equal": true,
+      "selected": {
+        "ega": "contents-ega.png",
+        "native": "contents-native.png"
+      }
+    },
+    {
+      "name": "menu",
+      "states": 1,
+      "trace_equal": true,
+      "selected": {
+        "ega": "menu-ega.png",
+        "native": "menu-native.png"
+      }
+    },
+    {
+      "name": "roster",
+      "states": 1,
+      "trace_equal": true,
+      "selected": {
+        "ega": "roster-ega.png",
+        "native": "roster-native.png"
+      }
+    },
+    {
+      "name": "harbor",
+      "states": 1,
+      "trace_equal": true,
+      "selected": {
+        "ega": "harbor-ega.png",
+        "native": "harbor-native.png"
+      }
+    },
+    {
+      "name": "creation",
+      "states": 12,
+      "trace_equal": true,
+      "selected": {
+        "ega": "creation-ega.png",
+        "native": "creation-native.png"
+      }
+    },
+    {
+      "name": "portrait-editor",
+      "states": 9,
+      "trace_equal": true,
+      "selected": {
+        "ega": "portrait-editor-ega.png",
+        "native": "portrait-editor-native.png"
+      }
+    },
+    {
+      "name": "shield-editor",
+      "states": 10,
+      "trace_equal": true,
+      "selected": {
+        "ega": "shield-editor-ega.png",
+        "native": "shield-editor-native.png"
+      }
+    },
+    {
+      "name": "editor-save-question",
+      "states": 13,
+      "trace_equal": true,
+      "selected": {
+        "ega": "editor-save-question-ega.png",
+        "native": "editor-save-question-native.png"
+      }
+    },
+    {
+      "name": "town-shop",
+      "states": 14,
+      "trace_equal": true,
+      "selected": {
+        "ega": "town-shop-ega.png",
+        "native": "town-shop-native.png"
+      }
+    },
+    {
+      "name": "town-train",
+      "states": 15,
+      "trace_equal": true,
+      "selected": {
+        "ega": "town-train-ega.png",
+        "native": "town-train-native.png"
+      }
+    },
+    {
+      "name": "town-stable",
+      "states": 17,
+      "trace_equal": true,
+      "selected": {
+        "ega": "town-stable-ega.png",
+        "native": "town-stable-native.png"
+      }
+    },
+    {
+      "name": "town-scroll",
+      "states": 21,
+      "trace_equal": true,
+      "selected": {
+        "ega": "town-scroll-ega.png",
+        "native": "town-scroll-native.png"
+      }
+    },
+    {
+      "name": "quest-list",
+      "states": 12,
+      "trace_equal": true,
+      "selected": {
+        "ega": "quest-list-ega.png",
+        "native": "quest-list-native.png"
+      }
+    },
+    {
+      "name": "town-mirror",
+      "states": 10,
+      "trace_equal": true,
+      "selected": {
+        "ega": "town-mirror-ega.png",
+        "native": "town-mirror-native.png"
+      }
+    },
+    {
+      "name": "delete-confirm",
+      "states": 8,
+      "trace_equal": true,
+      "selected": {
+        "ega": "delete-confirm-ega.png",
+        "native": "delete-confirm-native.png"
+      }
+    }
+  ],
+  "gui": {
+    "schema": "kol-hd-native-ui-gui/1",
+    "display_events": 30,
+    "state_preserved": true,
+    "mouse_palette_and_pixel_passed": true,
+    "custom_bitmap_pixels_equal": true,
+    "windows": [
+      [
+        1920,
+        1200
+      ],
+      [
+        960,
+        600
+      ]
+    ],
+    "hd_roundtrip": [
+      {
+        "scene": "menu",
+        "max_channel_delta": 0
+      },
+      {
+        "scene": "portrait-editor",
+        "max_channel_delta": 0
+      },
+      {
+        "scene": "save-question",
+        "max_channel_delta": 0
+      },
+      {
+        "scene": "select-small",
+        "max_channel_delta": 0
+      }
+    ],
+    "no_save_written": true,
+    "exit_code": 0
+  },
+  "visual_review": "15 selected cases and actual GUI; CJK confirmation geometry defect fixed in prototype; remaining EGA graphics explicitly not completed",
+  "limits": "Linux container prototype only; no production integration, all-HD, platform or natural completion claim"
+}

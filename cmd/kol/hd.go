@@ -40,6 +40,10 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD結局載入失敗：%w", err)
 		}
+		pages, err := assets.LoadHDPages(filepath.Join(g.hdDir, "pages"))
+		if err != nil {
+			return fmt.Errorf("HD頁面載入失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -47,6 +51,15 @@ func (g *game) setGraphics(mode string) error {
 		}
 		hd.AttachInterface(controls.Images, glyphs, controls.NPCKey, controls.CrestKey, g.strings)
 		hd.AttachEnding(events.Images, events.SourceRGB)
+		bookKeys := make(map[string]int, len(pages.Manifest.Books))
+		for _, source := range pages.Manifest.Books {
+			bookKeys[source.SourceRGB] = source.Index
+		}
+		var pageSources []ui.HDPageSource
+		for _, source := range pages.Sources() {
+			pageSources = append(pageSources, ui.HDPageSource{Archive: source.Archive, Index: source.Index, RGB: source.SourceRGB})
+		}
+		hd.AttachPages(pages.Book, pages.Portraits, bookKeys, pages.Manifest.Background.SourceRGB, pageSources)
 		canvas := screen.NewCanvasScaled(6)
 		g.hdCache, g.hdCanvas = hd, canvas
 	}
@@ -80,6 +93,12 @@ func (g *game) presentHD() error {
 	g.presentation.Clear()
 	g.presentation.DrawScaled(g.canvas.Image(), 0, 0, 2)
 	dst := g.presentation.Image()
+	if err := g.hd.ValidatePageSources(g.sprites); err != nil {
+		return err
+	}
+	if g.nativeUIPage() {
+		return g.renderNativeUI()
+	}
 	if g.endingReached() || g.scene == sceneEnding {
 		var segments []town.Segment
 		if g.ending != nil && g.ending.Current() != nil {

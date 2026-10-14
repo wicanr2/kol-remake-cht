@@ -154,6 +154,9 @@ func NewCharacterCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 func TranslatorFromTable(t *i18n.Table) Translator { return t }
 
 func drawScaled(dst, src *ebiten.Image, x, y, scale int) {
+	if drawHDUI(dst, src, x, y, scale) {
+		return
+	}
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(float64(scale), float64(scale))
 	op.GeoM.Translate(float64(x), float64(y))

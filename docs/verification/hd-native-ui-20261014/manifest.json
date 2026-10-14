@@ -1,0 +1,581 @@
+{
+  "schema": "kol-hd-native-ui-screenshots/1",
+  "source_base": "0943d9f8",
+  "source_inputs_sha256": "b5fc6f7ffb7760ead62ed02e9d73141685836f472bb641491f5f32be40699e4b",
+  "tool": "kol-package:1.26.7-ebiten2.9.9-20261011-r1; Go1.26.7/Ebitengine2.9.9",
+  "files": {
+    "contents-ega.png": {
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/contents/ega/screen.png",
+      "frame": "screen",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "contents-native.png": {
+      "sha256": "c228e27e7874a8272edf01a053941f4c01ba332a07a7381cebf7b01b9dc83d8e",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/contents/native/screen.png",
+      "frame": "screen",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "menu-ega.png": {
+      "sha256": "bd99c42bc62b5105ca04b9c700f4bc1125cc74c8efbf9cbb795e543bca9e9f27",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/menu/ega/screen.png",
+      "frame": "screen",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "menu-native.png": {
+      "sha256": "9f8e1842b0e85e5a8a50343bf1e8ab84d9af8da389dd8d20747dd48539eec80a",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/menu/native/screen.png",
+      "frame": "screen",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "roster-ega.png": {
+      "sha256": "b22877a289a3ba0d7b922a845a4caf7689c3b11d396a87ff59b0bf67bc1697a9",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/roster/ega/screen.png",
+      "frame": "screen",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "roster-native.png": {
+      "sha256": "2b08d7cf8f92e88e127ebff40f3c85a84c6d5686f6b1210d094221f53597fb73",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/roster/native/screen.png",
+      "frame": "screen",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "harbor-ega.png": {
+      "sha256": "1f7182feeeb0350c1a5b4acebfdb26e895eaf3059c614eeacfe5df1c4c009ef1",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/harbor/ega/screen.png",
+      "frame": "screen",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "harbor-native.png": {
+      "sha256": "064e55edd40b116d6bfb11d846f5f8fa8c64b40bfba79fc9b57dba5acb86eb55",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/harbor/native/screen.png",
+      "frame": "screen",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "creation-ega.png": {
+      "sha256": "a54ce31d85a9e3c5de889ca7fa1a559a1846663679e2f94b1566bee4d007ad5a",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/creation/ega/step-011.png",
+      "frame": "step-011",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "creation-native.png": {
+      "sha256": "57667b8f7b2ffba62663459ba63b9b33cbf7c0a83babf28832439670a8fc463e",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/creation/native/step-011.png",
+      "frame": "step-011",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "portrait-editor-ega.png": {
+      "sha256": "0c408beb716b9e963a22735bd79bc7880c6ce870b72d76b44eabb5d80485f938",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/portrait-editor/ega/step-008.png",
+      "frame": "step-008",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "portrait-editor-native.png": {
+      "sha256": "59cd1a3985f83ff56bc977d6c093f20898cb6849be4288f203154f9debb67669",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/portrait-editor/native/step-008.png",
+      "frame": "step-008",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "shield-editor-ega.png": {
+      "sha256": "4d3c77e6b0ff337c18236891eec7b5b8e39565661ebd8919cefef2c4fedc173f",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/shield-editor/ega/step-009.png",
+      "frame": "step-009",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "shield-editor-native.png": {
+      "sha256": "53ce87941421af6f146c58c0b53af0c19d1fc670dd2835134dc1dc6e223b4df9",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/shield-editor/native/step-009.png",
+      "frame": "step-009",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "editor-save-question-ega.png": {
+      "sha256": "d213fc556d9c90a9e7a6828e532236a53e3a04502a339f6a13086da085d7b1e1",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures/editor-save-question/ega/step-012.png",
+      "frame": "step-012",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "editor-save-question-native.png": {
+      "sha256": "389045ecacca55f079a4b7a61a7ada62d27e10813eed033f271cc12d5847be4a",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures/editor-save-question/native/step-012.png",
+      "frame": "step-012",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-shop-ega.png": {
+      "sha256": "55436f40f80b1f8c9d187227e2ce9599b5fa98a32ef1a7469d6ba3b2df5b42d1",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-shop/ega/step-010.png",
+      "frame": "step-010",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-shop-native.png": {
+      "sha256": "0fe69381362542b8fc8c25d6eebe3e1acebed7aa487e10b3c2a41e5041d70de1",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-shop/native/step-010.png",
+      "frame": "step-010",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-train-ega.png": {
+      "sha256": "24bae4ebea74f78ff878b68cbc0a2910214f41f68f90cd3653e284d6af345f32",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-train/ega/step-012.png",
+      "frame": "step-012",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-train-native.png": {
+      "sha256": "018d80f785c76af873ee7a44a1346dda5cefd885874f7d591c758082d35df636",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-train/native/step-012.png",
+      "frame": "step-012",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-stable-ega.png": {
+      "sha256": "f0dc1c20113d6ac5529123f09664e157ebbc2947391f9ce92701145d65212fd1",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-stable/ega/step-010.png",
+      "frame": "step-010",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-stable-native.png": {
+      "sha256": "92a1edbecb624037801449246de557dab556d1be89b51603c0ca42551d5a636a",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-stable/native/step-010.png",
+      "frame": "step-010",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-scroll-ega.png": {
+      "sha256": "ee816a09fc301d39ce5d2e2d9eb7e1c7f0f8c6f246dd5da7578114b2a07ab7f7",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-scroll/ega/step-020.png",
+      "frame": "step-020",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-scroll-native.png": {
+      "sha256": "060a61274001ab54be5c0a1c2a9bd6401f8604cc4d3c4be11cdc558e7ec7d62b",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-scroll/native/step-020.png",
+      "frame": "step-020",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "quest-list-ega.png": {
+      "sha256": "3f500236ad0d64863c69be293801f4a2d7f8f97f2de33d946a656d61cfb0c80b",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/quest-list/ega/step-010.png",
+      "frame": "step-010",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "quest-list-native.png": {
+      "sha256": "b9c0ba6d711a589a8eed0076d6f84e395df64eaaa68cf961fceb6fbda5f06e75",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/quest-list/native/step-010.png",
+      "frame": "step-010",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-mirror-ega.png": {
+      "sha256": "677336aed9020672e14931b3babdec2ad81db0adbcdb328fa70796279bd3de38",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-mirror/ega/step-006.png",
+      "frame": "step-006",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "town-mirror-native.png": {
+      "sha256": "9985fc5af1b1d10c52b1bd092f098c391a6ecac17eaaf54c740880961b3451c0",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures-v5/town-mirror/native/step-006.png",
+      "frame": "step-006",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "delete-confirm-ega.png": {
+      "sha256": "2302f66f9eab5c0d22889ab8c116039263490e6d005a2e17977c93ef75782690",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures/delete-confirm/ega/step-007.png",
+      "frame": "step-007",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "delete-confirm-native.png": {
+      "sha256": "e8b50cd4bba505f5792e838d2c72669d7ea8b71baa2cf8a9b51552e3d14a631c",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/captures/delete-confirm/native/step-007.png",
+      "frame": "step-007",
+      "theme": "native",
+      "language": "zh-Hant",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "isolated prototype; fixed-input remake comparison; not original DOS parity",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-menu-ega.png": {
+      "sha256": "070fd8657ae90ab3ac0d1af0ef71f8c90ccd00e30886fc8f150e62542ec0598a",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/menu-ega.png",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "frame": "menu",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-menu-hd.png": {
+      "sha256": "c3c016f2b8f5e4b1987d92bc974d896bddfc2422d96396285b7344cab714ed2d",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/menu-after.png",
+      "theme": "hd",
+      "language": "zh-Hant",
+      "frame": "menu",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-portrait-editor-ega.png": {
+      "sha256": "58a8ff2c87987cd8c68dd27e8d7c721da651b2bf25af6ec7eb7400a97e73a7c3",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/portrait-editor-ega.png",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "frame": "portrait-editor",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-portrait-editor-hd.png": {
+      "sha256": "49b988fc0b7155fdf2c8ffbb8f6a1e715bf29ba19ea8aaf6a457142f3192f07b",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/portrait-editor-after.png",
+      "theme": "hd",
+      "language": "zh-Hant",
+      "frame": "portrait-editor",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-save-question-ega.png": {
+      "sha256": "166cc54df9aa2c7f2a9eadb1f26ca4e4e43b891f685a59ffa1886e6746eb5bcd",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/save-question-ega.png",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "frame": "save-question",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-save-question-hd.png": {
+      "sha256": "34cd687c0ac0e35a66653a7cc5d220be81463558d05e7a5695d5fad68f28a7d0",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/save-question-after.png",
+      "theme": "hd",
+      "language": "zh-Hant",
+      "frame": "save-question",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-select-small-ega.png": {
+      "sha256": "e084ced73f33740c9d58b78f603ce26fc21bfb954da35ed7b513c03cdb11aeb5",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/select-small-ega.png",
+      "theme": "ega",
+      "language": "zh-Hant",
+      "frame": "select-small",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    },
+    "gui-select-small-hd.png": {
+      "sha256": "fa878d4fc90b09fb9e1d8c8885c89b6fe5a4424c7c0d1cc356e6ff96616b9671",
+      "dimensions": [
+        960,
+        600
+      ],
+      "source": "workplace/hd-native-ui-20261014/gui/select-small-after.png",
+      "theme": "hd",
+      "language": "zh-Hant",
+      "frame": "select-small",
+      "seed": 1,
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "evidence": "actual interactive prototype, same state per F10 roundtrip; candidate includes Chinese confirmation fix in both themes",
+      "rights": "current private repository only; original-derived screenshot"
+    }
+  },
+  "art": "../../../assets/hd/first-slice/pages/manifest.json",
+  "generation": "../../../assets/hd/first-slice/pages/generation.json",
+  "stage": "DRAFT isolated presentation prototype"
+}

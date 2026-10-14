@@ -11,6 +11,8 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-native-ui-runtime-20261014',
+    'hd-native-ui-20261014',
     'hd-ending-runtime-20261014',
     'hd-completion-20261014',
     'hd-pixel-consistency-20261013',

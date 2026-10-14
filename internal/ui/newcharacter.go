@@ -159,6 +159,9 @@ func NewCharacter(dst *ebiten.Image, sprites Sprites, small, large *font.Font,
 }
 
 func fill(dst *ebiten.Image, x, y, w, h int, c [3]uint8) {
+	if fillHDUI(dst, x, y, w, h, c) {
+		return
+	}
 	if w <= 0 || h <= 0 {
 		// 非正尺寸沿用既有流程，包括拒絕行為與負尺寸的正規化。
 		rect := ebiten.NewImage(w, h)
@@ -174,6 +177,9 @@ func fill(dst *ebiten.Image, x, y, w, h int, c [3]uint8) {
 }
 
 func draw(dst, src *ebiten.Image, x, y int) {
+	if drawHDUI(dst, src, x, y, 1) {
+		return
+	}
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(float64(x), float64(y))
 	op.Filter = ebiten.FilterNearest

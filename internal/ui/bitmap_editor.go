@@ -63,11 +63,17 @@ func BitmapEditor(dst *ebiten.Image, sprites Sprites, small *font.Font, e *bitma
 // BitmapEditorCJK 是中文模式：編輯區照原版版面放大三倍，只有存檔問句改成中文視窗。
 func BitmapEditorCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	e *bitmapedit.Editor, blink bool) error {
-	canvas := ebiten.NewImage(320, 200)
-	if err := drawBitmapEditor(canvas, sprites, e, blink); err != nil {
-		return err
+	if activeHDUI != nil && activeHDUI.dst == dst {
+		if err := activeHDUI.drawEditor(e, blink); err != nil {
+			return err
+		}
+	} else {
+		canvas := ebiten.NewImage(320, 200)
+		if err := drawBitmapEditor(canvas, sprites, e, blink); err != nil {
+			return err
+		}
+		drawScaled(dst, canvas, 0, 0, book.CJKScale)
 	}
-	drawScaled(dst, canvas, 0, 0, book.CJKScale)
 	if e.Asking {
 		w := book.CJKConfirm
 		fill(dst, w.X+w.Width, w.Y+w.ShadowOffset, w.ShadowThickness, w.Height, book.ColourValue)

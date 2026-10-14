@@ -1,0 +1,37 @@
+{
+  "schema": "kol-hd-native-ui-gui/1",
+  "display_events": 30,
+  "state_preserved": true,
+  "mouse_palette_and_pixel_passed": true,
+  "custom_bitmap_pixels_equal": true,
+  "windows": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "hd_roundtrip": [
+    {
+      "scene": "menu",
+      "max_channel_delta": 0
+    },
+    {
+      "scene": "portrait-editor",
+      "max_channel_delta": 0
+    },
+    {
+      "scene": "save-question",
+      "max_channel_delta": 0
+    },
+    {
+      "scene": "select-small",
+      "max_channel_delta": 0
+    }
+  ],
+  "no_save_written": true,
+  "exit_code": 0
+}

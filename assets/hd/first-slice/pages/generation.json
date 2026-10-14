@@ -1,0 +1,66 @@
+{
+  "schema": "kol-hd-pages-generation/1",
+  "route": "built-in image_gen.imagegen",
+  "book": {
+    "schema": "kol-hd-book-generation/1",
+    "route": "built-in image_gen.imagegen",
+    "prompt": "Use case: stylized-concept. Asset type: a single hand-painted open-book background for Knights of Legend Traditional Chinese remake UI. Reference image 1 (old 320x200 empty book) supplies the EXACT flat overhead composition and page extents, NOT its pixel style. Reference image 2 (approved painted medieval inn) supplies painterly brushwork and believable worn materials only; do NOT put the inn in the image. Paint a handsome medieval codex opened fully flat on an oxblood dark red wooden surface, blank aged warm ivory vellum pages, dark central gutter and worn red leather binding with restrained antique copper corner fittings. Preserve the almost rectangular pages, camera straight down, no perspective tilt. Landscape aspect 8:5. The two blank page writing fields must remain unbroken and low contrast from x=6% to48% and52% to94%, y=5% to94%; center gutter at50%. Leave these fields completely empty, with only subtle parchment grain; no illustrations or decorative stains inside writing fields. Red-black and antique copper around the outer edges to match the approved game theme. Detailed painted paper edges and stitching confined outside writing fields. No text, letters, numbers, logo, symbols, characters, hands, props or watermark. This is production-bound art for a disposable UI prototype; UI typography is rendered separately. Do not reproduce old dithering or pixel edges.",
+    "source": "assets/original-derived-png/ega/BOOKPICS/bookpics-002.png",
+    "style_reference": "assets/hd/first-slice/inn-painted-v1.png",
+    "output": "book-open-painted.png",
+    "sha256": "975327af3c2ce514358f8144a9af0d02d2772668e739b420f73934dd02799e06",
+    "dimensions": [
+      1586,
+      992
+    ],
+    "rights": "AI-painted original-derived prototype; private repository review and local full only",
+    "status": "disposable prototype; not approved or production-integrated"
+  },
+  "portraits": {
+    "schema": "kol-hd-npc-generation/1",
+    "route": "built-in image_gen.imagegen",
+    "style_reference": "assets/hd/first-slice/interface/innkeeper-painted-v1.png",
+    "source_archive": "TWN1PICS.0",
+    "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "panels": [
+      {
+        "index": 12,
+        "prompt": "Use case: stylized-concept. Asset type: hand-painted NPC dialogue portrait for Knights of Legend Traditional Chinese remake. Reference image1 is the ORIGINAL Hvrad Myth training master portrait from Fortress of Brettle; preserve the single broad-faced middle-aged man, his short dark hair with slightly longer sides, prominent cheekbones, firm faint smile, clean-shaven face, and white collar over simple dark clothing. Reference image2 is the APPROVED remake innkeeper portrait: match its expressive painted brushwork, detailed hair, warm skin rendering, and friendly readable stylization, but do not copy that innkeeper's face, curly gray hair, clothes or scarf. Frame upper chest and complete head in a landscape 11:8 portrait, matching the source, with no cropping of hair or chin. Keep a subdued blue background reminiscent of the source, no setting details, no added armor or weapons. Medieval trainer, not a modern military officer. New high-resolution brush details, no old pixels or dithering. No border, no text, no logo, no watermark; copper frame supplied by UI.",
+        "file": "twn1pics-012-painted.png",
+        "sha256": "ed5966b0508182501c44ceb23ca3bbe990eefe2194dd8532f1032cfc57cd2d4f",
+        "dimensions": [
+          1470,
+          1070
+        ],
+        "source_png_sha256": "4918e00114551b92a984f57fb8b491eb36ece709ecd6ecc0fa29a8be1eb98734",
+        "source_rgb_sha256": "890d8ed8d47a252bead9e8059674bcf4800d53117231c6b64391b5464a149f07"
+      },
+      {
+        "index": 18,
+        "prompt": "Use case: stylized-concept. Asset type: hand-painted NPC dialogue portrait for Knights of Legend Traditional Chinese remake. Reference image1 is the ORIGINAL Brandon Holcroft stable owner portrait. Preserve this single middle-aged man with dark slightly receding hair, a long prominent nose, thick dark moustache that curls downward at the corners, clean-shaven chin, reserved friendly expression, blue medieval tunic and white collar. Keep the source's green simple backdrop. Reference image2 is the APPROVED remake innkeeper portrait; match expressive painted brushwork, warm skin shading, detailed hair and readable stylization, but keep Brandon's distinct face, moustache, hair, and clothes instead of copying the innkeeper. Landscape11:8, complete head and upper chest visible, shoulders filling bottom. Actual high-resolution hand-painted detail, no source pixels or dithering. No added horses, tools, weapons, props or scene. No border, no text, no logo, no watermark. Copper frame supplied separately by game UI.",
+        "file": "twn1pics-018-painted.png",
+        "sha256": "095220b8023aeb05185ce907c9cb807b2d967f03b84981a6567241dd8818b92f",
+        "dimensions": [
+          1470,
+          1070
+        ],
+        "source_png_sha256": "50949c01bbd36218af2822edb9a242235367441d1ee348ac8c6505b18dcb6456",
+        "source_rgb_sha256": "09dd356b866dc0d11916e0afd5c249d0e68db91c11afb44ed8519cdd16346c41"
+      },
+      {
+        "index": 20,
+        "prompt": "Use case: stylized-concept. Asset type: hand-painted NPC dialogue portrait for Knights of Legend Traditional Chinese remake. Reference image1 is the ORIGINAL Ludeman Brothers portrait (two brothers); preserve TWO MEN, their close side-by-side composition, dark brown wavy hair, broad cheeks, friendly broad smiles, blue tunics, and red/blue cloth tones. Reference image2 is the APPROVED remake innkeeper portrait; match its expressive traditional painted brush strokes, warm skin shading, detailed hair and clean readable silhouette, rather than photorealistic cinema or anime. Paint both brothers from upper chest up, both fully visible with no clipping, shoulders filling a landscape 11:8 portrait. The left brother faces slightly right; the right brother faces slightly left or forward, matching the source. Dark nearly black simple background. Medieval armor merchants, no modern clothes, no weapons added. No border, no text, no logo, no watermark. Preserve the original identifiable character features and number of faces while producing actual new high-resolution painted detail. The UI supplies the copper frame separately.",
+        "file": "twn1pics-020-painted.png",
+        "sha256": "07c7b11725af9224de90c33980153a0fd0e9a81bdc01fe8a48e594a871cbcd84",
+        "dimensions": [
+          1470,
+          1070
+        ],
+        "source_png_sha256": "86ca99c6de02b93db980223b376ae0117958df44fd2035aa096aef8f6a9594c2",
+        "source_rgb_sha256": "879fb416e86c5a81ccb9fe6779098dc4d1956cdce84b20047beb84cad8ec98fc"
+      }
+    ],
+    "rights": "AI-painted original-derived prototype; current private review and local full only",
+    "status": "disposable prototype; not production integrated"
+  }
+}

@@ -75,7 +75,7 @@ tools/run_python_tool.sh tools/worklist.py verify
   核實：要人判——要人判：操作手感取捨。決定後照原版的項目會有對應的輸入 token 與測試，再改成 absent 或 required_in_all 綁它。
 
 - **hd-art-ui** — 遊戲圖片與操作畫面HD化
-  v.1.0.2-20261013已交付首批門面、六人肖像、旅店頭像、部分原生HD介面與F9／F10。使用者已核准巨石門候選及同畫風續作，目前目標完成全畫面HD。開發版七段結局已接入並有限CONFORMED：七段中文、14張EGA保持、首張核准圖相同、正常1046狀態及13重載、完整v3除saved_at相同；兩視窗48個F10設定事件保持段落狀態，HD往返最多一色階。README已放七段原版／HD截圖。13類盤點與804來源PNG保持；書本、建角、商店／人物／法術子頁、其他NPC與組合裝備、地圖、戰場、傷勢、天候及其餘事件仍未完成。入口docs/verification/hd-ending-runtime-20261014.md及docs/verification/hd-completion-20261014.md。
+  v.1.0.2-20261013保持。開發版七段結局已有限CONFORMED，README有原版／HD截圖。本批374份來源新增書頁、三個服務頭像、原生字模、面板與編輯器；十五組每側145狀態、EGA與既有HD回歸、兩視窗30個F10事件及鍵鼠通過，完整畫格最多一色階。標題27、住宿11、重載5狀態與v3除saved_at相同，README加入正式比較。法術卷軸下一批DRAFT已生成，未接正式。13類全HD仍開放：法術編輯、完整物品頁、其他人物／坐騎／組合裝備、城鎮／世界地圖、戰場、傷勢、天候、翻書與其餘事件。入口docs/verification/hd-native-ui-runtime-20261014.md、docs/spec/039-hd-art-ui.md及docs/verification/hd-completion-20261014.md。
   完成條件：所有13類操作介面及可見圖形逐項完成HD，不以放大EGA或靜默回退算完成。各批樣張與素材契約確認並升READY；來源、權利、尺寸、索引及遮罩可追溯；依SPEC-040取得對應場景中文與正確畫格，鍵鼠及F10切換保持狀態，舊v3可讀；事件原版／HD截圖放README；最後驗各平台封包。
   核實：要人判——全部HD仍開放；七段結局已正式接入開發版並有限驗收，其餘依13類清單續作，不宣稱全部完成或正常通關。
 

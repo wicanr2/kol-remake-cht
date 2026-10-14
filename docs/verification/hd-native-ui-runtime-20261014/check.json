@@ -1,0 +1,123 @@
+{
+  "schema": "kol-hd-native-ui-runtime-check/1",
+  "formal_inputs": 374,
+  "cases": [
+    {
+      "name": "contents",
+      "states": 1,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/contents-hd/screen.png"
+    },
+    {
+      "name": "menu",
+      "states": 1,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/menu-hd/screen.png"
+    },
+    {
+      "name": "roster",
+      "states": 1,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/roster-hd/screen.png"
+    },
+    {
+      "name": "harbor",
+      "states": 1,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/harbor-hd/screen.png"
+    },
+    {
+      "name": "creation",
+      "states": 12,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/creation-hd/step-011.png"
+    },
+    {
+      "name": "portrait-editor",
+      "states": 9,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/portrait-editor-hd/step-008.png"
+    },
+    {
+      "name": "shield-editor",
+      "states": 10,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/shield-editor-hd/step-009.png"
+    },
+    {
+      "name": "editor-save-question",
+      "states": 13,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/editor-save-question-hd/step-012.png"
+    },
+    {
+      "name": "town-shop",
+      "states": 14,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/town-shop-hd/step-010.png"
+    },
+    {
+      "name": "town-train",
+      "states": 15,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/town-train-hd/step-012.png"
+    },
+    {
+      "name": "town-stable",
+      "states": 17,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/town-stable-hd/step-010.png"
+    },
+    {
+      "name": "town-scroll",
+      "states": 21,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/town-scroll-hd/step-020.png"
+    },
+    {
+      "name": "quest-list",
+      "states": 12,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 1,
+      "selected": "captures/quest-list-hd/step-010.png"
+    },
+    {
+      "name": "town-mirror",
+      "states": 10,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/town-mirror-hd/step-006.png"
+    },
+    {
+      "name": "delete-confirm",
+      "states": 8,
+      "ega_unchanged_except_confirm_text": true,
+      "prototype_max_channel_delta": 0,
+      "selected": "captures/delete-confirm-hd/step-007.png"
+    }
+  ],
+  "english_confirm_unchanged": true,
+  "legacy_hd_unchanged": true,
+  "normal_title_path_equal": true,
+  "save_equal_except_saved_at": true,
+  "reload_equal": true,
+  "normal_state_counts": {
+    "full": 27,
+    "rest": 11,
+    "reload": 5
+  },
+  "reused_checked_captures": true,
+  "limits": "Linux container scope only; unvisited artwork remains incomplete; no natural full completion claim"
+}
