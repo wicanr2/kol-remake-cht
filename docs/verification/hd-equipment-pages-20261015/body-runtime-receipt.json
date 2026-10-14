@@ -1,0 +1,603 @@
+{
+  "schema": "kol-hd-equipment-body-runtime/1",
+  "status": "DRAFT",
+  "source_zip": {
+    "name": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_entries_manifest_sha256": "fc66c285c77c5a4ba93735081721a5d6077838b9a95fd452835b938b19183ec5",
+  "source_bindings": [
+    {
+      "archive": "TORPICS",
+      "index": 27,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-027.png",
+      "source_png_sha256": "6e1ddc45730a4c4a86606f74635255ee16298831f4187fd40bc641deb54b781a"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 28,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-028.png",
+      "source_png_sha256": "f510c3acdfbd53e1588989e4a2d11543de8b55d6595ed419a2041d13b02c4913"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 29,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-029.png",
+      "source_png_sha256": "18677f9f47dcfa598d6e4b62167b6a6d68dc56cab83d5c4e4bee8d2d8ebc421e"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 30,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-030.png",
+      "source_png_sha256": "e42434a7af06bcbb046da8bd2a5e3d84b8d9bbb20ba73d2291dcd16ecd2756a8"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 31,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-031.png",
+      "source_png_sha256": "285904be8df895bc614e684b3c69496b5d31c786dbca711b14c30d9cdab584cf"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 32,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-032.png",
+      "source_png_sha256": "d314c9d097744513ac63c1627529786bf38b23d7a1238070f9d679a609a8f8d1"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 33,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-033.png",
+      "source_png_sha256": "4b26378dfbb7ce7f3aef5386fcac271c7842e85453808409bb27c0619075ee78"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 34,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-034.png",
+      "source_png_sha256": "d06c17a13daa8e17bf6d2d64704058dbf1d3a554cbab829dab741e6f3b93b386"
+    },
+    {
+      "archive": "TORPICS",
+      "index": 35,
+      "source_png": "assets/original-derived-png/ega/TORPICS/torpics-035.png",
+      "source_png_sha256": "64ddb342c7ac8a4912a28da65b02a4aa225507c2a2d646156a7c6c6f73fa07ad"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 27,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-027.png",
+      "source_png_sha256": "5b473ac177172b88e7f261432add80aa11debbd130ab6bc2f5a91ac98c71ef99"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 28,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-028.png",
+      "source_png_sha256": "7869aa87df3c0a2ab61f6a83de1938076e43341b12d0b65b6c9124cb3bad8d90"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 29,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-029.png",
+      "source_png_sha256": "a8f92862ef723fbc2a90e4656862cba71c437c20cae06bc1c7976ca3b3283dc7"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 30,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-030.png",
+      "source_png_sha256": "5edf3960b8bca09977494106db4b14838085eb48e118cdf336c8569aaa346020"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 31,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-031.png",
+      "source_png_sha256": "6f81cf60a1d8083fd3cec407dbeff22a65a988aa66a0ce95b6f88eea992b9be7"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 32,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-032.png",
+      "source_png_sha256": "20a25d48466ad5cf1db9b8876a4294464209fe8f1537522c9cf72b3c27522dcd"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 33,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-033.png",
+      "source_png_sha256": "3c33871f1751013f61d36f1eb33be8f5d11e1d50d9df4a02a2c5d397fbf0fa4b"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 34,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-034.png",
+      "source_png_sha256": "f22d4d5f33ca331dcedb89774e35289d4369f6efdafd11e810e7d0f7a07f716f"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 35,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-035.png",
+      "source_png_sha256": "2b9499d8daec782f63eb84d8a545fa89a1a8fa6551bbce03cff7d2743db10a66"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 45,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-045.png",
+      "source_png_sha256": "e1fca84fdb3a2d313e952c355bc526afd0fab298ff533e0ae29350d3c5d3eafb"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 51,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-051.png",
+      "source_png_sha256": "3d633eaeb827909cf54ab983fb4645778266a8b2c7b84ca2e30ad97214b14dd3"
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 53,
+      "source_png": "assets/original-derived-png/ega/LEGSPICS/legspics-053.png",
+      "source_png_sha256": "b1f7af82a2df43b172ad93513c83eac22d424e2b99c29cb43a861d482e11a918"
+    }
+  ],
+  "baseline_commit": "1d980b9a13dd9e2d7e99f326fcd0a3bc9b307ece",
+  "production_runtime_inputs_frozen": 380,
+  "production_audited_inputs_frozen": 385,
+  "production_hd_asset_files_frozen": 88,
+  "prototype_runtime_inputs": 381,
+  "prototype_v6_frozen": true,
+  "binary_sha256": "a6645f38b047d0a789a24755b4df27c936750e40bb3c8ba7d64f248a9b644ae1",
+  "gui_binary_sha256": "96148e68d0381ee6f897f96797cc24ed13826b5533debd06ed98f6718a9aefcb",
+  "metadata_hashes": {
+    "body-runtime-inputs-v7.json": "65d1b8eca69ff24aacc1e142ae926e4490b155a12bbe7944c631e1de06d48f3b",
+    "body-runtime-native-plan.json": "2fd12b68c4d29833d42a54a2a066ea79f8e60b2b10e0395d6f8a1fa897eac065",
+    "body-runtime-generation.json": "24d2a66fdc2b339c2ec55f44513b04eaafbc0a86605bcd0a53b800b25a49962f"
+  },
+  "runtime_parts": 169,
+  "source_armor_parts": 162,
+  "native_grip_pairs": 50,
+  "normal_cases": [
+    {
+      "case": "body3-slots",
+      "local_directory": "player-pages-v7-first/body3-slots",
+      "states": 26,
+      "equal_text_records": 114,
+      "ega_exact_frames": 26,
+      "trace_sha256": "26a6ddb030408c914b8b31021243acc84da88c9c9b656c93feed236301fb52bf",
+      "text_sha256": "973ea6c4e6ceaf2e31ace03ef6a95b1ceefbe0b27b7faa60a06536b34d47baf2"
+    },
+    {
+      "case": "body5-slots",
+      "local_directory": "player-pages-v7-first/body5-slots",
+      "states": 35,
+      "equal_text_records": 119,
+      "ega_exact_frames": 35,
+      "trace_sha256": "d83f2ac48c6cb4f053eea9bb799ec23890e970a9f671ae01660e1cf6b58e579b",
+      "text_sha256": "e3ead692c1a894a4bdc6cdc8e133208b6c993d0939eb6ca229f2dfee69bbee2e"
+    },
+    {
+      "case": "body1-slots",
+      "local_directory": "player-pages-v7-rest/body1-slots",
+      "states": 28,
+      "equal_text_records": 128,
+      "ega_exact_frames": 28,
+      "trace_sha256": "ea858e1267cbaa60e313727e041a8d3ff716f2b748f843152a394a2780daa0f3",
+      "text_sha256": "7019195c73bcb6a4d800c14b15b656985c5e33cd685895b769f0ee2aecf6c7ce"
+    },
+    {
+      "case": "body2-slots",
+      "local_directory": "player-pages-v7-rest/body2-slots",
+      "states": 30,
+      "equal_text_records": 138,
+      "ega_exact_frames": 30,
+      "trace_sha256": "f9a4bafe673152fdb6cf939d91c9e2cb2d113404466709bc5dd3b148616a8043",
+      "text_sha256": "548400d7b823295b596399588c6cbbfaedf472ed33356e650edb1cff7069facb"
+    },
+    {
+      "case": "body4-slots",
+      "local_directory": "player-pages-v7-rest/body4-slots",
+      "states": 29,
+      "equal_text_records": 136,
+      "ega_exact_frames": 29,
+      "trace_sha256": "9dc9a1451c652089d208b69c32840a37767aa3989cc9464f337caf331e27ec6b",
+      "text_sha256": "71dfc49d5f6286cc565e57830b49312d521d9074c46c0e576129a093f5e4d65b"
+    },
+    {
+      "case": "human-slots",
+      "local_directory": "player-pages-v7-rest/human-slots",
+      "states": 31,
+      "equal_text_records": 137,
+      "ega_exact_frames": 31,
+      "trace_sha256": "fd9d3b146481972f3974df5f6965df0158b6b972d9bc1b6caeee4aace6e706d5",
+      "text_sha256": "2854e3e660a16b9e9fce990b1d160bfd3b7872ce71a913724e1d5050dcc52825"
+    },
+    {
+      "case": "six-build-party",
+      "local_directory": "player-pages-v7-rest/six-build-party",
+      "states": 40,
+      "equal_text_records": 90,
+      "ega_exact_frames": 40,
+      "trace_sha256": "5de24b27698db4b05af4a511e70d52266a6efd9a5b298ce1f6494575b77f473e",
+      "text_sha256": "814225b648213eae37c6eac873560ff16f34c01eb496f2abe4b302dbfd2a46fc"
+    }
+  ],
+  "states_per_variant": 219,
+  "ega_rgb_exact_frames": 219,
+  "ega_alpha_exact_frames": 219,
+  "chinese_text_records_equal": true,
+  "male_human_v6_hd_regression_frames": 31,
+  "male_human_v6_hd_max_delta": 1,
+  "normal_receipt_sha256": "93e1ce20bd8fa2c43381f6cbd7025b95f51f34a768789805a2b18bc261b6e9dd",
+  "rgb_receipt_sha256": "3ca71e36a84a041a523cd605b816eefc43f59394076f470e6760904ee32e8934",
+  "gui": [
+    {
+      "case": "shyla",
+      "rounds": [
+        {
+          "scene": "items-large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "e50c581227bcf35ff3da01ea503a29d7b180b114d8df9f571888377c164770a3",
+          "files": [
+            "items-large-before.png",
+            "items-large-ega.png",
+            "items-large-restored.png"
+          ]
+        },
+        {
+          "scene": "items-small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "e50c581227bcf35ff3da01ea503a29d7b180b114d8df9f571888377c164770a3",
+          "files": [
+            "items-small-before.png",
+            "items-small-ega.png",
+            "items-small-restored.png"
+          ]
+        },
+        {
+          "scene": "party-large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "012a3172e60662bc69125323b60e5ca856f7675b9f44b8292f7ccb2da33c1646",
+          "files": [
+            "party-large-before.png",
+            "party-large-ega.png",
+            "party-large-restored.png"
+          ]
+        },
+        {
+          "scene": "party-small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "012a3172e60662bc69125323b60e5ca856f7675b9f44b8292f7ccb2da33c1646",
+          "files": [
+            "party-small-before.png",
+            "party-small-ega.png",
+            "party-small-restored.png"
+          ]
+        }
+      ],
+      "display_events_count": 24,
+      "save_unchanged": true,
+      "exit_code": 0,
+      "local_receipt_sha256": "289df42687ca1437fc91ff22ebb105bcf56189ed98126c050fdddd9216edb5b6"
+    },
+    {
+      "case": "six-party",
+      "rounds": [
+        {
+          "scene": "items-large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "94edd5e7a44ff91e4973b1189f9f090be7e873133fd2519d08b3871d2654d816",
+          "files": [
+            "items-large-before.png",
+            "items-large-ega.png",
+            "items-large-restored.png"
+          ]
+        },
+        {
+          "scene": "items-small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "94edd5e7a44ff91e4973b1189f9f090be7e873133fd2519d08b3871d2654d816",
+          "files": [
+            "items-small-before.png",
+            "items-small-ega.png",
+            "items-small-restored.png"
+          ]
+        },
+        {
+          "scene": "party-large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "bc596c8b7bee0b2c206f13cd48ad90e4e7f6f315d6b9ff6443f17feb6d55c62c",
+          "files": [
+            "party-large-before.png",
+            "party-large-ega.png",
+            "party-large-restored.png"
+          ]
+        },
+        {
+          "scene": "party-small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "bc596c8b7bee0b2c206f13cd48ad90e4e7f6f315d6b9ff6443f17feb6d55c62c",
+          "files": [
+            "party-small-before.png",
+            "party-small-ega.png",
+            "party-small-restored.png"
+          ]
+        }
+      ],
+      "display_events_count": 24,
+      "save_unchanged": true,
+      "exit_code": 0,
+      "local_receipt_sha256": "7a4ea335e7519dc479639ddbf74e0caf1cd8057903ed361302db8bafaa2115d2"
+    }
+  ],
+  "accepted_gui_display_events": 48,
+  "accepted_gui_max_hd_delta": 0,
+  "initial_combined_gui_outer_exit": 124,
+  "initial_gui_result": "both child gameplay tests completed; cumulative outer timeout during cleanup; original result retained",
+  "independent_six_gui_container_exit": 0,
+  "native_resolution_candidate_parts": 21,
+  "native_resolution_candidate_groups": 7,
+  "new_generated_pngs": 8,
+  "superseded_new_pngs": 1,
+  "note_on_alpha": "actual partial opacity 0..254 retained; provenance helper now captures actual alpha; formal frame gate unchanged",
+  "note_on_feet": "original body3 + LEGSPICS27..35 keeps red bare feet and three ivory claws; former armored toes superseded",
+  "note_on_fists": "F5 outer arm quarters use uniform scale; body center calibrated at waist; weapon/shield presentation follows measured native grips; no typed or v3 mutation",
+  "note_on_armor_only": "three equipment-only overlays use existing native body; source coverage still DRAFT and not visited by these normal roster samples",
+  "no_new_save_file": true,
+  "save_reload_claim": false,
+  "original_oracle": "source PNG identity and foot-layer composition only; no new original executable parity",
+  "platform": "Linux Docker / Xvfb; ALSA null output; no new hearing or Windows/macOS hardware claim",
+  "limitations": [
+    "All sets/mixed/unarmored combinations and armor-only coverage still require targeted runtime verification",
+    "Complete action icons and strict atomic asset loading remain open",
+    "Production integration and new v3 save/reload remain open",
+    "No claim of all HD categories, natural full completion or a new release"
+  ],
+  "pictures": [
+    {
+      "file": "runtime-body0-ega.png",
+      "sha256": "24ad1b4ae889b858e1036bebacc5f2125d889ac5d60de990d5f37062ed2b1970",
+      "width": 960,
+      "height": 600,
+      "scene": "人類男性正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/human-slots/prototype-ega/shots/step-030.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body0-hd.png",
+      "sha256": "b494a10cef021731a18580945c6f2b7020133ba936aa10171454eb0b39f7c3f2",
+      "width": 1920,
+      "height": 1200,
+      "scene": "人類男性正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/human-slots/prototype-hd/shots/step-030.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body1-ega.png",
+      "sha256": "588019af42aea2956a43a02f876fa882055f300e6c649bd7d082fbf9b486d90c",
+      "width": 960,
+      "height": 600,
+      "scene": "男性精靈正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/body1-slots/prototype-ega/shots/step-027.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body1-hd.png",
+      "sha256": "49152182b5c9f7b547dcffe45b5e38db6a952c9dd00ecb7104c6b1e6f5fef834",
+      "width": 1920,
+      "height": 1200,
+      "scene": "男性精靈正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/body1-slots/prototype-hd/shots/step-027.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body2-ega.png",
+      "sha256": "82cadc5be789c32a8ed9a8bc522dbe4708c4eec890aaa8ee922e4d0627e0586c",
+      "width": 960,
+      "height": 600,
+      "scene": "矮人正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/body2-slots/prototype-ega/shots/step-029.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body2-hd.png",
+      "sha256": "4f51aceee11ce2818bb99db2ba5e38264583eeb76c3b9ee48c97b1418722d977",
+      "width": 1920,
+      "height": 1200,
+      "scene": "矮人正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/body2-slots/prototype-hd/shots/step-029.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body3-ega.png",
+      "sha256": "b0e1bb13bd983c8532f2c2d3b77fe8d495a6f8d71ea93795fe8613fbd1f8cace",
+      "width": 960,
+      "height": 600,
+      "scene": "有翼人物正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-first/body3-slots/prototype-ega/shots/step-025.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body3-hd.png",
+      "sha256": "3c7db6e1ab4e4e9c13a723ea983dae7adba5f0ae1185586976c763ef5a884df9",
+      "width": 1920,
+      "height": 1200,
+      "scene": "有翼人物正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-first/body3-slots/prototype-hd/shots/step-025.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body4-ega.png",
+      "sha256": "2cb3c8631670fe4487da26ace179a51bec2f1549392312c27ff7bdf35ab541a5",
+      "width": 960,
+      "height": 600,
+      "scene": "女性人類正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/body4-slots/prototype-ega/shots/step-028.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body4-hd.png",
+      "sha256": "faa5c6e948c84301789616986dee941605963633f09014b5cf390c204da8ca4c",
+      "width": 1920,
+      "height": 1200,
+      "scene": "女性人類正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-rest/body4-slots/prototype-hd/shots/step-028.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body5-ega.png",
+      "sha256": "6e64437a26843b2db0616a09be09bf165c95bd6a00217168fff050ccd68b8405",
+      "width": 960,
+      "height": 600,
+      "scene": "女性精靈正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-first/body5-slots/prototype-ega/shots/step-034.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-body5-hd.png",
+      "sha256": "b2da84de3da45da9f64c6fc391d15a52e1befda0467db3ab31e44ff74004ff18",
+      "width": 1920,
+      "height": 1200,
+      "scene": "女性精靈正常物品頁",
+      "kind": "normal flow controller screenshot; not original DOS or live-window capture",
+      "local_source": "player-pages-v7-first/body5-slots/prototype-hd/shots/step-034.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-shyla-large-ega.png",
+      "sha256": "dd42b7af06519485919e5946b00b397e4e1911874b7d9f3f92b24f95e80fea9f",
+      "width": 1920,
+      "height": 1200,
+      "scene": "shyla large",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-shyla/items-large-ega.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-shyla-large-hd.png",
+      "sha256": "87f8cf0b056d194899805bd98833cccd5398ab039e4c4c480f1bfb3960d45d2e",
+      "width": 1920,
+      "height": 1200,
+      "scene": "shyla large",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-shyla/items-large-before.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-shyla-small-ega.png",
+      "sha256": "b9d851e2c67e61b7a66614305ccf9cf74d82a46838b7a7d98deb6295baa3e753",
+      "width": 960,
+      "height": 600,
+      "scene": "shyla small",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-shyla/items-small-ega.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-shyla-small-hd.png",
+      "sha256": "fe7a3e4c721308c560defbb7892b476d696a8af08033169812fca6012ade55b4",
+      "width": 960,
+      "height": 600,
+      "scene": "shyla small",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-shyla/items-small-before.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-six-party-large-ega.png",
+      "sha256": "55cf9ff65476bd5925c6dfd206cc017dc3cf16ccf161d81bedda21d608e39d71",
+      "width": 1920,
+      "height": 1200,
+      "scene": "six-party large",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-six-clean/party-large-ega.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-six-party-large-hd.png",
+      "sha256": "26a151dabab6f5ec6980db0de5de7591d99c3d63d093b10425e79ae3f59c5866",
+      "width": 1920,
+      "height": 1200,
+      "scene": "six-party large",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-six-clean/party-large-before.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-six-party-small-ega.png",
+      "sha256": "7784dd3f7de63d76d5aa401632edc40c48102e155815cdece3a17480789c6a93",
+      "width": 960,
+      "height": 600,
+      "scene": "six-party small",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-six-clean/party-small-ega.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-six-party-small-hd.png",
+      "sha256": "2f7e09dbb2ad98280bd6b125215afc0927741153c368a8f04cdf0404b3834a2a",
+      "width": 960,
+      "height": 600,
+      "scene": "six-party small",
+      "kind": "actual game window; same-state F10 comparison",
+      "local_source": "gui-prototype-v7-six-clean/party-small-before.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    },
+    {
+      "file": "runtime-native-contact.png",
+      "sha256": "45ce085334227f30ba58d39ab9138f4cf3858b5bfca3154348f0fd4aaad7f8a7",
+      "width": 1500,
+      "height": 2240,
+      "scene": "21款原生尺寸補作部件",
+      "kind": "candidate contact sheet; not gameplay",
+      "local_source": "composition/runtime-native-contact.png",
+      "rights": "verified source-bound PNG; private GitHub only; no public redistribution"
+    }
+  ],
+  "local_workspace": "workplace/hd-equipment-pages-20261015/",
+  "raw_models_and_saves": "local only; no original typed anchors, GUI models or saves copied"
+}

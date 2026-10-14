@@ -11626,3 +11626,17 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - publish-body-fit-checkpoint.py只輸出診斷摘要與兩份提示；新生成PNG與未驗收合成只留本機。README既有獨立候選圖集與先前收據保持，CONTEXT、SPEC、驗收入口與工作清單更新，不把115個示意記成通過。本階段未建置遊戲，正式385份稽核來源、380份runtime、88份HD資產與381份v6隔離來源保持；全畫面HD仍active，現行Release與tag保持。
 - 最後以audit-body-fit-checkpoint.py核對固定ZIP、兩份新提示、原生成檔、候選收據及正式／v6來源通過；372個文件連結沒有新增失效，原18個歷史失效連結保持，沒有未驗收合成PNG進Git。工作清單保持16開放／92完成。所有本批輸出為1000:1000，全專案find無root-owned檔案或誤建*.md目錄，相關Docker容器已回收。提交前diff檢查退出0；提交推送實際結果另存本機git-closeout-fit.json。
 
+### 2026-10-15 六種體型接入隔離遊戲
+
+- 前輪為實際進展：1d980b9a已推送，135款候選及三輪合成診斷保存。本輪先核對乾淨工作樹、AGENTS、WORKLIST及CONTEXT，命中remake／畫面幾何／README路由，載入重製技能、imagegen、retro-remake-tactical-parity、README標準與文件職責。鎖版Docker image ID仍0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f。
+- prepare-resolution-references.py為尺寸不足的部件建立七組較少部件的參考。內建image_gen共產生八張PNG，其中初次翼族腿部足甲候選被替代；另一次完整女性精靈腿部輸出被工具拒絕，沒有PNG。後續改為只生成三對無人物的獨立護具，沿既有手繪身體呈現，不改玩家可見裝備內容；提示、來源、原檔及雜湊保存，失敗與後續方法見本機body-v7-attempts.json。
+- 原版PERPICS3加九款LEGSPICS合成證實紅色裸足與白爪保留，早期候選把爪趾畫成足甲不符來源。correct-wing-feet-brief.py保留原計畫與已用提示，九款腿甲改為裸足三爪；來源合成圖只留本機。透明預覽又顯示背景，實際alpha0..254與合成確認透明；保存器錯誤要求前景255，已改成記錄實際部分透明度，與原檔SHA相符才允許續存，正式色差與尺寸閘門保持。
+- preflight-resolution-atlases.py按alpha>=8的實際空白分隔七張圖集，21款裁取無外緣接觸，原生尺寸涵蓋本批參考呈現。先前17項尺寸缺口已有對應素材。獨立護具先按不含裸足的原覆蓋範圍作DRAFT矩形，實際混搭仍待驗，不以圖集檢查當遊玩通過。
+- assemble-body-rig-v7.py建立169個部件與50組完整拳頭候選。女性精靈中央腰線校準，外側四分之一手臂等比，GPU呈現保留完整拳頭；武器／盾牌依原手部與實際握點校準。原typed座標、規則與v3保持，資料及完整模型只留本機。
+- prepare-body-runtime-v7.py建立獨立prototype-source-v7，原381份v6保持。首輪複製誤用ignore_patterns而略過internal/assets；逐檔確認部分副本與v6相同後補回，不重設未知異動。381份v7僅hd_equipment_prototype.go不同，UI、入口及sceneverify通過。程式SHA為a6645f38b047d0a789a24755b4df27c936750e40bb3c8ba7d64f248a9b644ae1，GUI overlay程式為96148e68d0381ee6f897f96797cc24ed13826b5533debd06ed98f6718a9aefcb。
+- 正常名冊分別選Kenneth、Olear、Fighting Bull、Theodoric、Moraine及Shyla走17槽，再由旅店依原招募清單組成六型隊伍。七條路徑每側219狀態及中文紀錄保持。首次RGBA差分getbbox可能只看透明通道，原收據保留，verify-body-v7-rgb.py另驗219張RGB逐通道及alpha均零差；人類男性31張HD相對v6最多一色階。
+- GUI工具的副本起初仍指向v6程式，執行前已核對並訂正為gui-prototype-v7，未把舊程式結果算新驗證。女性精靈與六人、物品／隊伍、1920×1200及960×600、鍵鼠八組共48個設定事件，完整Inn與隊伍保持，完整HD往返色差0，遊戲退出0。合併兩個驗證的300秒外層期限於收尾到期，原兩份結果保存；六人同程式獨立360秒期限乾淨重跑，容器退出0，不重跑已通過且先退出0的女性精靈子驗證。
+- publish-body-runtime-v7.py輸出21張已核對PNG、八份成功生成提示、六型來源／生成／裁取／精簡收據與互動比較頁。README換上女性精靈及正常六人隊伍的同視窗EGA／HD；早期候選頁追加足部訂正與最新入口，原PNG與收據保持。CONTEXT、SPEC、13類覆蓋與工作清單同步，不把有限抽樣延伸成全裝備組合、原版parity、自然通關或平台真機聲明。
+- 本批仍DRAFT，完整成套／混搭／卸裝、三款獨立護具覆蓋、自訂盾面抽樣、所有動作圖示、正式原子載入與v3仍開放；正式380份runtime／385份稽核輸入、88份HD資產與現行Release保持。原型絕對路徑、原錨點、完整模型與診斷overlay不進production。工作區仍供續作用，不提前封存或清理，全畫面HD保持active。
+- audit-body-runtime-v7.py核對45張PNG、54份提示、21款原生裁取、381份v7來源、原正式／v6來源與固定收據通過。377個文件連結沒有新增失效，原18個歷史失效連結保持。所有輸出為1000:1000，全專案沒有root-owned檔案或誤建*.md目錄；相關Docker容器已回收，其他專案容器保持。主機gh憑證與private儲存庫已核對，提交前diff檢查退出0。提交推送實際結果另存本機git-closeout-body-runtime-v7.json。
+

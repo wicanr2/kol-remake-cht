@@ -129,17 +129,16 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 ### 原型：完整物品與隊伍頁
 
-隔離原型已加入城鎮／野外手繪背板、人類男性裝備部件、28款武器、四盾及原生中文。下圖是在同一角色狀態下用遊戲內F10切換的實際視窗。
-這批尚未接入正式版；其餘五種體型與完整裝備組合仍在續作。
+隔離原型已加入六種體型、城鎮／野外手繪背板、28款武器、四盾及原生中文。下圖是在同一角色與隊伍狀態下用遊戲內F10切換的實際視窗；六人由旅店正常招募。
+這批尚未接入正式版。完整混搭／卸裝、獨立護具覆蓋、動作圖示、嚴格素材載入與v3仍在續作。
 
 | 重製中文 EGA | 隔離 HD 原型 |
 |---|---|
-| ![物品頁EGA](docs/verification/hd-equipment-pages-20261015/props-items-ega.png) | ![物品頁HD武器盾牌原型](docs/verification/hd-equipment-pages-20261015/props-items-hd.png) |
-| ![隊伍頁EGA](docs/verification/hd-equipment-pages-20261015/props-party-ega.png) | ![隊伍頁HD武器盾牌原型](docs/verification/hd-equipment-pages-20261015/props-party-hd.png) |
+| ![女性精靈物品頁EGA](docs/verification/hd-equipment-pages-20261015/runtime-shyla-large-ega.png) | ![女性精靈物品頁HD原型與遊戲內畫面控制](docs/verification/hd-equipment-pages-20261015/runtime-shyla-large-hd.png) |
+| ![正常招募六人隊伍EGA](docs/verification/hd-equipment-pages-20261015/runtime-six-party-large-ega.png) | ![六種體型與六人隊伍HD原型](docs/verification/hd-equipment-pages-20261015/runtime-six-party-large-hd.png) |
 
-[比較頁](docs/verification/hd-equipment-pages-20261015/props-review.html)另含雙手劍、腰帶戰斧、小視窗及32件裝備的來源對照。
-物品／隊伍狀態與兩種視窗的鍵鼠切換已核對，範圍見[原型紀錄](docs/verification/hd-equipment-pages-20261015.md)。
-其餘五種體型的135款頭／上身／腿部已完成候選與裁取核對，見[部件檢視頁](docs/verification/hd-equipment-pages-20261015/body-review.html)。完整人物接縫、握持與翅膀遮擋尚待合成驗證，這批候選尚未接入遊戲。
+[比較頁](docs/verification/hd-equipment-pages-20261015/body-runtime-review.html)另含六種體型的正常物品頁與小視窗切換。中文、控制器狀態、EGA畫格及兩種視窗的鍵鼠F10往返已核對，範圍見[原型紀錄](docs/verification/hd-equipment-pages-20261015.md)。
+翼族足部沿原圖保留紅色裸足與白爪，持握依實際手繪拳頭校準；角色資料與保存格式保持。
 
 ### 事件畫面：原版與 HD
 

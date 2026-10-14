@@ -1,0 +1,781 @@
+{
+  "status": "DRAFT",
+  "groups": [
+    {
+      "id": "torpics-build3-detail-row0",
+      "file": "torpics-build3-detail-row0-painted.png",
+      "sha256": "92055429376b768a139cc92607a26bba248a6a0d0b617ebd6d71b9c001b19a56",
+      "size": [
+        2004,
+        785
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "cuts": [
+        0,
+        668,
+        1336,
+        2004
+      ],
+      "source_indices": [
+        27,
+        28,
+        29
+      ],
+      "prompt": "prompts/torpics-build3-detail-row0.txt",
+      "prompt_sha256": "d68f5b42a8f3c072e4941e4967b81e1e7c6c5f14c5ba35601e94d40abc3d3189"
+    },
+    {
+      "id": "torpics-build3-detail-row1",
+      "file": "torpics-build3-detail-row1-painted.png",
+      "sha256": "5e52df7bd73dcec80ed3d544811b2e9c6b83443fe11a13281477f38f68d900b8",
+      "size": [
+        2004,
+        785
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "cuts": [
+        0,
+        668,
+        1336,
+        2004
+      ],
+      "source_indices": [
+        30,
+        31,
+        32
+      ],
+      "prompt": "prompts/torpics-build3-detail-row1.txt",
+      "prompt_sha256": "91f30579a36363d2f82c9c83820b06f308ae14da3bf3d5a155418a098e4bf173"
+    },
+    {
+      "id": "torpics-build3-detail-row2",
+      "file": "torpics-build3-detail-row2-painted.png",
+      "sha256": "805dd540c609b8d715c70cdab13dbb4ff740c377d6d39b7b08df814ceb3e7a6f",
+      "size": [
+        2004,
+        785
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "cuts": [
+        0,
+        668,
+        1336,
+        2004
+      ],
+      "source_indices": [
+        33,
+        34,
+        35
+      ],
+      "prompt": "prompts/torpics-build3-detail-row2.txt",
+      "prompt_sha256": "2358d31a9e477736c147bceab20cd0766dedb9273d2cc6e026af38cf6cec3760"
+    },
+    {
+      "id": "legspics-build3-detail-row0-bare-feet",
+      "file": "legspics-build3-detail-row0-bare-feet-painted.png",
+      "sha256": "80a3923dbf2599de334332bc13084a28e54ed1b1026f535aea8b29e7b565e7a1",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha_range": [
+        0,
+        254
+      ],
+      "cuts": [
+        0,
+        527,
+        1024,
+        1536
+      ],
+      "source_indices": [
+        27,
+        28,
+        29
+      ],
+      "prompt": "prompts/legspics-build3-detail-row0-bare-feet.txt",
+      "prompt_sha256": "1ef173a89ea0291ee4b17132bdde9cafa54fdb6709626ba23fdf01c88cdb3c10"
+    },
+    {
+      "id": "legspics-build3-detail-row1",
+      "file": "legspics-build3-detail-row1-painted.png",
+      "sha256": "46414508f605cccf7e324741719b979e816702bd1225d3f9f1932a1bdb468eaf",
+      "size": [
+        1619,
+        971
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "cuts": [
+        0,
+        540,
+        1079,
+        1619
+      ],
+      "source_indices": [
+        30,
+        31,
+        32
+      ],
+      "prompt": "prompts/legspics-build3-detail-row1.txt",
+      "prompt_sha256": "cbfda85e4831a43e2338a41858547a361c967d40cb2b9c043d11f75aa292c78f"
+    },
+    {
+      "id": "legspics-build3-detail-row2",
+      "file": "legspics-build3-detail-row2-painted.png",
+      "sha256": "c3f23d628f53e7a2c5aeaa7f98ea802a32ac91a398ca28ca0a125f2e5b391900",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha_range": [
+        0,
+        254
+      ],
+      "cuts": [
+        0,
+        512,
+        1024,
+        1536
+      ],
+      "source_indices": [
+        33,
+        34,
+        35
+      ],
+      "prompt": "prompts/legspics-build3-detail-row2.txt",
+      "prompt_sha256": "c8cd60b6c9f5999a21a18762f1164032b633be15c3ee897f88c80e28da373863"
+    },
+    {
+      "id": "legspics-build5-armor-only",
+      "file": "legspics-build5-armor-only-painted.png",
+      "sha256": "ce0db9036e70838f2ecdd60c3e8fe7017f844142f81d9c5fb8d37fcb7fc7f072",
+      "size": [
+        1499,
+        1049
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "cuts": [
+        0,
+        480,
+        999,
+        1499
+      ],
+      "source_indices": [
+        45,
+        51,
+        53
+      ],
+      "prompt": "prompts/legspics-build5-armor-only.txt",
+      "prompt_sha256": "0daaf5ff1b01edd868f95524b4d0153ff26855109eede78b71eac51e45bfa74d"
+    }
+  ],
+  "parts": [
+    {
+      "key": "TORPICS:27",
+      "index": 27,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row0-painted.png",
+      "rect": [
+        33,
+        62,
+        641,
+        724
+      ],
+      "native_size": [
+        608,
+        662
+      ],
+      "reference_destination": [
+        402,
+        414
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "a85043ea97f92a27044026782a50d00eb7ac464ccaaac7c1ef7dc104bcf46ac1"
+    },
+    {
+      "key": "TORPICS:28",
+      "index": 28,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row0-painted.png",
+      "rect": [
+        695,
+        64,
+        1312,
+        711
+      ],
+      "native_size": [
+        617,
+        647
+      ],
+      "reference_destination": [
+        408,
+        390
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "3777cc36de3c4b75f6d835526c3e41ba868577433b0198b16ab88152cd61134a"
+    },
+    {
+      "key": "TORPICS:29",
+      "index": 29,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row0-painted.png",
+      "rect": [
+        1369,
+        61,
+        1973,
+        711
+      ],
+      "native_size": [
+        604,
+        650
+      ],
+      "reference_destination": [
+        408,
+        402
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "1cf7e76408bdcbcbbfc5686d147e3d96a176650523122f06599e6d253cb9795c"
+    },
+    {
+      "key": "TORPICS:30",
+      "index": 30,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row1-painted.png",
+      "rect": [
+        28,
+        70,
+        613,
+        692
+      ],
+      "native_size": [
+        585,
+        622
+      ],
+      "reference_destination": [
+        420,
+        408
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "f4addb7f07a97b2344c11e67b1fa0a8f5525a28a5be536c24c1ae4e1188dfd5f"
+    },
+    {
+      "key": "TORPICS:31",
+      "index": 31,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row1-painted.png",
+      "rect": [
+        693,
+        68,
+        1302,
+        687
+      ],
+      "native_size": [
+        609,
+        619
+      ],
+      "reference_destination": [
+        408,
+        390
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "eb9981a5e3179a81e54c78219c10946d2706f3a6109e15545c668ed49b249b57"
+    },
+    {
+      "key": "TORPICS:32",
+      "index": 32,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row1-painted.png",
+      "rect": [
+        1378,
+        69,
+        1967,
+        685
+      ],
+      "native_size": [
+        589,
+        616
+      ],
+      "reference_destination": [
+        408,
+        390
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "3234f3419f7c68ed54ad149fc1b224789ce7fac990513f6e970618cfa692a776"
+    },
+    {
+      "key": "TORPICS:33",
+      "index": 33,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row2-painted.png",
+      "rect": [
+        37,
+        71,
+        620,
+        663
+      ],
+      "native_size": [
+        583,
+        592
+      ],
+      "reference_destination": [
+        408,
+        390
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "8212aee2e6ce456b4fa800e6665069688b195eb2087525ff409b9d75ebadf6fb"
+    },
+    {
+      "key": "TORPICS:34",
+      "index": 34,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row2-painted.png",
+      "rect": [
+        705,
+        69,
+        1310,
+        666
+      ],
+      "native_size": [
+        605,
+        597
+      ],
+      "reference_destination": [
+        408,
+        390
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "a74752d5e61cc11f5db3ed8a31fc730b6d1751431b65f830927bb8ea581a1912"
+    },
+    {
+      "key": "TORPICS:35",
+      "index": 35,
+      "archive": "TORPICS",
+      "file": "torpics-build3-detail-row2-painted.png",
+      "rect": [
+        1361,
+        73,
+        1958,
+        663
+      ],
+      "native_size": [
+        597,
+        590
+      ],
+      "reference_destination": [
+        420,
+        408
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "bc96bc85f8a19102a2f828a51d38396e0f426a05db88f03a94688f3480ed91fc"
+    },
+    {
+      "key": "LEGSPICS:27",
+      "index": 27,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row0-bare-feet-painted.png",
+      "rect": [
+        14,
+        36,
+        527,
+        952
+      ],
+      "native_size": [
+        513,
+        916
+      ],
+      "reference_destination": [
+        276,
+        545
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "1296a68cb202becf2b6c5d187fc7597d22d46e6f3e6564b7d4f63a779075f822"
+    },
+    {
+      "key": "LEGSPICS:28",
+      "index": 28,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row0-bare-feet-painted.png",
+      "rect": [
+        533,
+        42,
+        1008,
+        952
+      ],
+      "native_size": [
+        475,
+        910
+      ],
+      "reference_destination": [
+        264,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "faa83f7bf86af1fce96b8a42e46a56df1c1bef52420cb4865821b0ae509a9567"
+    },
+    {
+      "key": "LEGSPICS:29",
+      "index": 29,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row0-bare-feet-painted.png",
+      "rect": [
+        1040,
+        39,
+        1523,
+        952
+      ],
+      "native_size": [
+        483,
+        913
+      ],
+      "reference_destination": [
+        294,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "c819bf238d1ab934b0d1a95e0c204a8eb97c2e87f64970244d543cb1ea110ddb"
+    },
+    {
+      "key": "LEGSPICS:30",
+      "index": 30,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row1-painted.png",
+      "rect": [
+        43,
+        57,
+        516,
+        909
+      ],
+      "native_size": [
+        473,
+        852
+      ],
+      "reference_destination": [
+        294,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "e43bf2834c6b646657b53ce1182ab8cf2c67e3900ef091eece6cffb466dbba1c"
+    },
+    {
+      "key": "LEGSPICS:31",
+      "index": 31,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row1-painted.png",
+      "rect": [
+        591,
+        56,
+        1059,
+        909
+      ],
+      "native_size": [
+        468,
+        853
+      ],
+      "reference_destination": [
+        264,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "8081e73f44ee5c14c0605a1bdce9df677e446dd24aba16dec99e172cd25bc8e0"
+    },
+    {
+      "key": "LEGSPICS:32",
+      "index": 32,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row1-painted.png",
+      "rect": [
+        1153,
+        54,
+        1590,
+        909
+      ],
+      "native_size": [
+        437,
+        855
+      ],
+      "reference_destination": [
+        264,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "8ac6388b892fd1ce67160ebeb552acc2150f04e62a43916054e8c2cf4122de1c"
+    },
+    {
+      "key": "LEGSPICS:33",
+      "index": 33,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row2-painted.png",
+      "rect": [
+        27,
+        56,
+        493,
+        972
+      ],
+      "native_size": [
+        466,
+        916
+      ],
+      "reference_destination": [
+        264,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "6bc4acdc79d6a760e2b69017b22507ff2038f7c6695609f9bcadbea12c86ae12"
+    },
+    {
+      "key": "LEGSPICS:34",
+      "index": 34,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row2-painted.png",
+      "rect": [
+        538,
+        56,
+        1000,
+        972
+      ],
+      "native_size": [
+        462,
+        916
+      ],
+      "reference_destination": [
+        264,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "c164a9ce20c299cc92365f91b036d9678f3c3cc5e125dadc3fd359341133772f"
+    },
+    {
+      "key": "LEGSPICS:35",
+      "index": 35,
+      "archive": "LEGSPICS",
+      "file": "legspics-build3-detail-row2-painted.png",
+      "rect": [
+        1044,
+        56,
+        1517,
+        971
+      ],
+      "native_size": [
+        473,
+        915
+      ],
+      "reference_destination": [
+        294,
+        530
+      ],
+      "kind": "complete anatomical segment",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "bb464dedfbefcd077fe6ec17644c7cb714fa541d0b904af90d21113fd6d50304"
+    },
+    {
+      "key": "LEGSPICS:45",
+      "index": 45,
+      "archive": "LEGSPICS",
+      "file": "legspics-build5-armor-only-painted.png",
+      "rect": [
+        50,
+        331,
+        434,
+        797
+      ],
+      "native_size": [
+        384,
+        466
+      ],
+      "reference_destination": [
+        288,
+        156
+      ],
+      "kind": "armor-only overlay; anatomy from existing native body",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "c86e16283e651b6520b5d7c0c6bc4503106a2791928ad6556ba48d1c8203032d"
+    },
+    {
+      "key": "LEGSPICS:51",
+      "index": 51,
+      "archive": "LEGSPICS",
+      "file": "legspics-build5-armor-only-painted.png",
+      "rect": [
+        481,
+        163,
+        988,
+        821
+      ],
+      "native_size": [
+        507,
+        658
+      ],
+      "reference_destination": [
+        300,
+        270
+      ],
+      "kind": "armor-only overlay; anatomy from existing native body",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "e88846366ef19ff17d3cf7baf4a6d6ab5bfe287cd2eb4f520e3821ca87b2ea9b"
+    },
+    {
+      "key": "LEGSPICS:53",
+      "index": 53,
+      "archive": "LEGSPICS",
+      "file": "legspics-build5-armor-only-painted.png",
+      "rect": [
+        1008,
+        108,
+        1485,
+        860
+      ],
+      "native_size": [
+        477,
+        752
+      ],
+      "reference_destination": [
+        276,
+        354
+      ],
+      "kind": "armor-only overlay; anatomy from existing native body",
+      "outer_canvas_contact": {
+        "left": false,
+        "top": false,
+        "right": false,
+        "bottom": false
+      },
+      "crop_rgba_sha256": "9c3448d53a8c6001352edb6822d5310aff9f213cb9f247ab298408631d41150e"
+    }
+  ],
+  "issues": [],
+  "expected_parts": 21,
+  "source_foot_correction": "winged LEGSPICS27..35 leaves bare red feet with three ivory claws",
+  "current_runtime_unchanged": true
+}

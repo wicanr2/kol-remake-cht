@@ -281,7 +281,7 @@ READY接入契約：
 
 目前原型以完整身體部件處理衣物露出的皮膚，避免獨立手繪輪廓與底圖重疊成多餘肢體；完整裝備時不重畫同一段身體。原版不透明黑像素的遮蓋已核對，不能直接用放大的黑色遮罩抹掉HD底圖。
 人類男性27款及混搭／卸裝先作23組CPU示意，再從標題正常選Kenneth驗遊戲控制器。原型全套及sceneverify通過；圖示圖號訂正後受影響套件及31狀態窄驗通過。實際24個F10事件、兩視窗、鍵鼠、完整Inn與隊伍狀態、完整HD往返色差0及退出0通過。
-本批仍DRAFT：其他五種體型、武器、盾牌接入、雙手握持完整驗證、所有動作圖示、嚴格素材載入與正式v3保存重載尚待完成。原型中的絕對`/out`路徑及診斷overlay不進production。
+本批仍DRAFT：完整混搭／卸裝、雙手握持其餘組合、所有動作圖示、嚴格素材載入與正式v3保存重載尚待完成。原型中的絕對`/out`路徑及診斷overlay不進production。
 
 武器續作使用工作區的`weapon-atlas-plan.json`及`prepare-weapon-references.py`，28圖號分九組，每組單欄依原順序排列，讓長柄武器保有原生寬度。先沿原PNG的方向、刃部／弓弦／鏈球數量、比例與握點重繪，再與四盾一起驗透明度、部件遮擋及實際物品頁；圖集排法不改typed圖號、規則或保存格式。
 
@@ -293,6 +293,10 @@ READY接入契約：
 135款候選已完成來源對應與透明裁取，仍為DRAFT，見[部件檢視頁](../verification/hd-equipment-pages-20261015/body-review.html)、[收據](../verification/hd-equipment-pages-20261015/body-receipt.json)及[裁取清冊](../verification/hd-equipment-pages-20261015/body-atlas-plan.json)。工作區`preflight-body-atlases.py`按實際alpha空隙量測17張圖集及第37款裸手修正版；15款低於原著色六倍尺寸參考，須在最終解剖矩形複核。`prepare-body-source-anchors.py`保存原typed錨點與著色邊界至本機`body-source-anchors.json`，SHA-256為`9e5ce7da5a8771467e193d6a44d0bf4f91691e56054e988afee080637e9663ef`；原資料不進Git。完整合成、握持／翅膀、混搭／卸裝及遊戲接入尚未驗收，不能延伸人類男性原型的F10結果。
 
 完整人物合成仍DRAFT，見[診斷摘要](../verification/hd-equipment-pages-20261015/fit-checkpoint.json)。三輪各115組CPU示意不列為通過；第三輪有17項最終呈現尺寸不足，以及頭／腰接縫及拳頭變形。分離翼部與皮甲修正版、完整合成與各輪幾何僅本機。後續使用部件實際邊界及握點校準，不能以水平裁切、拉扁拳頭或縮小呈現矩形來掩蓋素材尺寸缺口；武器與盾牌的HD呈現校準不得寫回typed座標、玩法或v3。
+
+後續v7已接入六型隔離呈現，仍DRAFT，見[最新原型](../verification/hd-equipment-pages-20261015/body-runtime-review.html)及[收據](../verification/hd-equipment-pages-20261015/body-runtime-receipt.json)。七張圖集21款補作通過透明裁取與參考呈現尺寸；三款獨立護具由現有HD身體呈現露出皮膚。原PERPICS3與九款LEGSPICS確認足部保留紅色裸足及白爪，舊候選足甲不沿用，原證據保留。
+女性精靈上身中央只校準腰線，外側四分之一手臂等比呈現，拳頭不沿第三輪縱向壓縮；武器與盾牌依實際握點校準。`segment-prototype-v7.json`與原錨點只留本機，正式接入須改成既有分層內的素材／呈現契約，不搬入絕對路徑或GUI診斷。
+381份v7隔離來源的UI、入口及sceneverify通過；六型正常物品17槽及正常招募六人共七條路徑每側219狀態、中文紀錄及219張EGA RGB／alpha保持。人類男性31張HD相對v6最多一色階；女性精靈及六人、兩視窗鍵鼠共48個實際F10事件，完整Inn與隊伍保持，HD往返色差0，六人獨立容器退出0。此抽樣不延伸為全部裝備組合或正式v3完成。
 
 ### 角色模板續作
 
