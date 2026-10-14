@@ -21,7 +21,7 @@
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
 | SPEC-040 | [受控場景與中文畫面驗收](040-controlled-scene-acceptance.md) | CONFORMED | 本輪收尾改採受控場景；指定畫面、獨立驗收模式及中文結局排版已驗 |
-| SPEC-039 | [HD 手繪美術與介面工作計畫](039-hd-art-ui.md) | 整體DRAFT；首批、設定及介面／頭像有限CONFORMED | [核准HD介面及NPC已接開發版](../verification/hd-interface-runtime-20261012.md)，F10與存讀檔已驗；其他圖層依原閘門，配樂見SPEC-004試聽 |
+| SPEC-039 | [HD 手繪美術與介面工作計畫](039-hd-art-ui.md) | 整體DRAFT；首批、設定、介面／頭像及七段結局有限CONFORMED | [介面及NPC](../verification/hd-interface-runtime-20261012.md)、[七段結局](../verification/hd-ending-runtime-20261014.md)已接開發版，F10與存讀檔已驗；其他圖層依原閘門 |
 | SPEC-038 | [套件邊界、固定步進與注入點](038-package-boundaries.md) | READY | remake 工程契約；`internal/layers` 四項守門測試擋依賴方向、Ebitengine 越界、規則層讀時鐘與全域亂數 |
 | SPEC-037 | [建築進門後的發言者選擇與好惡](037-building-greeting.md) | READY | 多人隊伍先選發言者、被討厭與被欣賞的訊息、全隊被趕、SCROLL 教派；原版關鍵點三組共 36,176 組一致；滑鼠點肖像見 RE-167 |
 | SPEC-036 | [圖像與盾牌編輯器](036-picture-shield-editor.md) | CONFORMED | 點陣圖編輯器已實作；鍵盤路徑與原版同狀態逐 byte 一致，滑鼠路徑依靜態讀碼、未與原版實跑比較 |

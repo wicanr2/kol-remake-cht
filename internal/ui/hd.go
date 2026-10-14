@@ -13,13 +13,15 @@ import (
 
 // HD 在最後1920×1200畫布呈現核准圖片與介面，不改動原畫布、字型與規則狀態。
 type HD struct {
-	facade    *ebiten.Image
-	portraits [6]*ebiten.Image
-	matching  map[string]int
-	facadeKey string
-	keys      map[*ebiten.Image]string
-	style     *hdInterface
-	samples   map[hdSampleKey]*ebiten.Image
+	facade       *ebiten.Image
+	portraits    [6]*ebiten.Image
+	matching     map[string]int
+	facadeKey    string
+	keys         map[*ebiten.Image]string
+	style        *hdInterface
+	samples      map[hdSampleKey]*ebiten.Image
+	endingImages map[int]*ebiten.Image
+	endingKeys   map[int]string
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {

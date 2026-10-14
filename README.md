@@ -100,19 +100,30 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 圖片來源、畫格、SHA-256與權利分類見[正式介面截圖清冊](docs/verification/hd-interface-runtime-20261012/manifest.json)。
 新版旅店及設定畫面來自實際AppImage，來源見[新版截圖清冊](docs/verification/release-v1.0.2-20261013/manifest.json)。
 
-### 事件畫面：原版與 HD 候選
+### 事件畫面：原版與 HD
 
-以下為結局第0段，包含結局內容。左側由 dosgolem 執行原版程式受控擷取；右側來自隔離重製候選，
-沿用手繪與現有介面主題，中文使用原生 HD 字模。**HD 候選尚未接入正式版本**，其餘事件仍待完成。
+七段結局已接入開發版，沿用手繪、紅黑銅框與原生 HD 中文。現行 `v.1.0.2-20261013` 發行包保持，尚未包含本批。
+下方包含結局內容。原版由 dosgolem 受控執行擷取；HD 來自正式重製程式的受控場景入口。
 
-| 原版 DOS 事件，320×200 | HD 事件候選，1920×1200 |
+<details>
+<summary>展開七段結局的原版／HD 截圖</summary>
+
+| 原版 DOS，320×200 | 開發版 HD，1920×1200 |
 |---|---|
-| ![原版 DOS 結局事件：巨石門](docs/verification/hd-completion-20261014/original-ending-0.png) | ![HD 候選結局事件：巨石門與原生繁體中文](docs/verification/hd-completion-20261014/ending-0-hd-candidate.png) |
+| ![原版第0段：巨石門](docs/verification/hd-completion-20261014/original-ending-0.png) | ![HD第0段：巨石門](docs/verification/hd-ending-runtime-20261014/ending-0-hd.png) |
+| ![原版第1段：火炬洞窟](docs/verification/hd-completion-20261014/original-ending-1.png) | ![HD第1段：火炬洞窟](docs/verification/hd-ending-runtime-20261014/ending-1-hd.png) |
+| ![原版第2段：牢門](docs/verification/hd-completion-20261014/original-ending-2.png) | ![HD第2段：牢門](docs/verification/hd-ending-runtime-20261014/ending-2-hd.png) |
+| ![原版第3段：受囚的騎士](docs/verification/hd-completion-20261014/original-ending-3.png) | ![HD第3段：受囚的騎士](docs/verification/hd-ending-runtime-20261014/ending-3-hd.png) |
+| ![原版第4段：獲救](docs/verification/hd-completion-20261014/original-ending-4.png) | ![HD第4段：獲救](docs/verification/hd-ending-runtime-20261014/ending-4-hd.png) |
+| ![原版第5段：陰影](docs/verification/hd-completion-20261014/original-ending-5.png) | ![HD第5段：陰影](docs/verification/hd-ending-runtime-20261014/ending-5-hd.png) |
+| ![原版第6段：離開牢房](docs/verification/hd-completion-20261014/original-ending-6.png) | ![HD第6段：離開牢房](docs/verification/hd-ending-runtime-20261014/ending-6-hd.png) |
 
-[現行繁中 EGA 對照](docs/verification/hd-completion-20261014/ending-0-ega-zh.png)與
-[完整比較頁](docs/verification/hd-completion-20261014/review.html)另列。
-原版七段圖片矩形已核對；候選中文、兩種視窗及十二個實際 F10 設定事件通過，切換保留事件段號與狀態。
-這是受控事件展示，不代表正常通關或整頁原版一致。來源、畫格、權利與雜湊見[事件清冊](docs/verification/hd-completion-20261014/manifest.json)。
+</details>
+
+[完整比較頁](docs/verification/hd-ending-runtime-20261014/review.html)另附各段繁中 EGA。
+七段中文、兩種視窗及48個實際 F10 設定事件通過，切換保留段號與狀態，HD往返完整畫格最多一色階。
+正常住宿保存與新程序重載通過。本批不代表正常通關或整頁原版一致；
+來源、畫格、權利、雜湊與限制見[結局驗收](docs/verification/hd-ending-runtime-20261014.md)。
 
 ### EGA 畫面
 
@@ -151,7 +162,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [正式驗收](docs/verification/hd-interface-runtime-20261012.md)包含HD中文、面板、操作列、頭像、F10及正常住宿存讀檔。
 全畫面 HD 續作涵蓋書本、建角、商店與其他服務子頁、人物裝備、城鎮／世界地圖、戰鬥、傷勢、天候及事件。
 [13類畫面盤點](docs/verification/hd-completion-20261014.md#目前覆蓋)逐項列出缺口與驗收條件；放大原版素材不列為手繪 HD 完成。
-事件先提供上方候選；每批確認樣張與素材契約後接入，均須驗中文、畫面、鍵鼠及遊戲內 F10。
+七段結局已依核准樣張接入開發版；其他事件及介面按清單續作，均須驗中文、畫面、鍵鼠及遊戲內 F10。
 批次與素材閘門見[HD 工作計畫](docs/spec/039-hd-art-ui.md)。
 
 ## 專案起源

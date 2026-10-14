@@ -359,3 +359,11 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 壓縮檔23568120 bytes，SHA-256 `60e73d18327825b625ca6cd7c146f05a35b0658fed39f7b21c52158be0240149`。原始WAV、正常住宿v3、七狀態重載、準備世界輸入與日誌僅本機保留。
 核對使用`tools/retain_verification.py verify hd-music-runtime-20261013`；在上述Docker條件下將專案唯讀掛`/src`、`docs/verification/local/`唯讀掛`/out`。還原用同工具`extract`及不存在的絕對`--destination`，輸出另給可寫掛載。
 全部封存雜湊重驗後，只刪除`workplace/hd-music-runtime-20261013/`；其他工作區保持。
+
+## 七段結局HD正式接入
+
+[正式驗收](hd-ending-runtime-20261014.md)及[本機保存清冊](local/hd-ending-runtime-20261014/retention.json)
+保存七段中文、14張EGA保持、正常1046狀態、13狀態重載及48個F10設定事件。
+223份檔案已封存並逐項核對，三份可重建執行檔只留雜湊；原始比較工作區已清理。
+核對使用既有Docker工具鏈執行 `tools/retain_verification.py verify hd-ending-runtime-20261014`；
+掛載與解開方法沿本頁通用入口。初次200秒正常HD流程逾時保留，同輸入600秒重跑通過。

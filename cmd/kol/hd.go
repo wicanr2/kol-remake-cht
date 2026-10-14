@@ -6,6 +6,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/wicanr2/kol-remake-cht/internal/assets"
+	"github.com/wicanr2/kol-remake-cht/internal/ending"
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
@@ -35,12 +36,17 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD介面載入失敗：%w", err)
 		}
+		events, err := assets.LoadHDEnding(filepath.Join(g.hdDir, "events"))
+		if err != nil {
+			return fmt.Errorf("HD結局載入失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
 			glyphs[ch] = ui.HDGlyph{X: g.X, Y: g.Y, Advance: g.Advance}
 		}
 		hd.AttachInterface(controls.Images, glyphs, controls.NPCKey, controls.CrestKey, g.strings)
+		hd.AttachEnding(events.Images, events.SourceRGB)
 		canvas := screen.NewCanvasScaled(6)
 		g.hdCache, g.hdCanvas = hd, canvas
 	}
@@ -74,8 +80,12 @@ func (g *game) presentHD() error {
 	g.presentation.Clear()
 	g.presentation.DrawScaled(g.canvas.Image(), 0, 0, 2)
 	dst := g.presentation.Image()
-	if g.endingReached() {
-		return nil
+	if g.endingReached() || g.scene == sceneEnding {
+		var segments []town.Segment
+		if g.ending != nil && g.ending.Current() != nil {
+			segments = town.JoinedSegments(g.endBank, g.endTrans, ending.Bank, g.ending.Current().Records)
+		}
+		return g.hd.Ending(dst, g.sprites, g.ending, segments)
 	}
 	play := func(s *town.Session) error {
 		if s == nil {

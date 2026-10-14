@@ -1,0 +1,91 @@
+{
+  "schema": "kol-hd-ending/1",
+  "rights": "AI hand-painted remake derivative PNG; approved user style; private repository and local full package only; no original distribution rights granted.",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "source_archive": "Knights-of-legend/ENDPICS.0",
+  "source_archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+  "files": {
+    "endpics-000-painted.png": {
+      "sha256": "9eb52c512b08205b485d03e4e71c4fb7b723d3f38adc43454242ba4ddfc463fc",
+      "width": 1448,
+      "height": 1086
+    },
+    "endpics-001-painted.png": {
+      "sha256": "df573caf06257375fce08d095d0ae3464ee3faac256ebff3dcfe1996301a8fc3",
+      "width": 1672,
+      "height": 941
+    },
+    "endpics-002-painted.png": {
+      "sha256": "bd620df647aba24f85a2fdc0e580ca349e386a663c4078e1fb645f7a090cf72f",
+      "width": 2172,
+      "height": 724
+    },
+    "endpics-003-painted.png": {
+      "sha256": "d8b8f96b9b85fe1239e2c884c3f2a32efb2d223539868ba29a52552dcc463149",
+      "width": 1672,
+      "height": 941
+    },
+    "endpics-004-painted.png": {
+      "sha256": "4b61ab4d1ea0839dac18d56bec8a2607782e0fe1fb502e4f2d37672bcdca9d05",
+      "width": 1448,
+      "height": 1086
+    },
+    "endpics-005-painted.png": {
+      "sha256": "df14402324085e98a3a49d2d29f3fc6ae29e5d7f4dae334e2ad06ca956170342",
+      "width": 1774,
+      "height": 887
+    },
+    "endpics-006-painted.png": {
+      "sha256": "7b8abe7a97da391ddbb8e94a82cb6204944307f41c824c681b6b7e757aebdbce",
+      "width": 1774,
+      "height": 887
+    }
+  },
+  "panels": [
+    {
+      "index": 0,
+      "file": "endpics-000-painted.png",
+      "source_rgb_sha256": "34edd554a4d2a50490f8c1d2d40a7ee2de99183b789b2c4e7195b7dd48bfdf77",
+      "source_png_sha256": "4d15f8f2709b9edde83e725ca58f55589bc2975429e20ca9bfce2a407fb56f0b"
+    },
+    {
+      "index": 1,
+      "file": "endpics-001-painted.png",
+      "source_rgb_sha256": "559520e8ad010039eadcc350d5bb446af0d92a7a385f878d6bf497ac793c1000",
+      "source_png_sha256": "493dc69fc56a7bf868c3b03eac39aa67030cb39cfe0129197bf463fe705a3840"
+    },
+    {
+      "index": 2,
+      "file": "endpics-002-painted.png",
+      "source_rgb_sha256": "7158f91b740d84ffcb3a1606eb3973c8fed2756331465bb214de081466c94edd",
+      "source_png_sha256": "f58ceff45ca217473f26741f351f84be558960c41289310093899aad45e55c28"
+    },
+    {
+      "index": 3,
+      "file": "endpics-003-painted.png",
+      "source_rgb_sha256": "c54dcfd76b9e6c624bdc3222258ef0c11c5ce790ab70e6359386525dab28f053",
+      "source_png_sha256": "145e1586e2852dd693aeeb050aff34496def333b9a79d61eb87bccc86a979d18"
+    },
+    {
+      "index": 4,
+      "file": "endpics-004-painted.png",
+      "source_rgb_sha256": "726d187c3937fb828e2bda3b1b424c0bcd919e3d25970b0104c8bbff6ebda828",
+      "source_png_sha256": "d351013be3ae22a1973914219c36321f0e18b3b159792561e461fb5b9f78789c"
+    },
+    {
+      "index": 5,
+      "file": "endpics-005-painted.png",
+      "source_rgb_sha256": "8c7d44eb47d99ee16b7ac3769045ada016573f22f2968e6fbef718bd505fc404",
+      "source_png_sha256": "07ae261d6b883fb17041246f61f427493731e25fe6403ef0987195199428fac9"
+    },
+    {
+      "index": 6,
+      "file": "endpics-006-painted.png",
+      "source_rgb_sha256": "5d0f01065b4b8b74331b4c1cfa23b7dc13e923b96b3f7e00e3180f8998479eb9",
+      "source_png_sha256": "bffd4d61697bc6338a7fb9b66b245637b745531f1fea0c6c339d7d7d7c43c5cd"
+    }
+  ],
+  "generation": "generation.json",
+  "approval": "2026-10-14 user ok 同意 to approved panel0 and same-style continuation",
+  "verification": "docs/verification/hd-ending-runtime-20261014.md"
+}

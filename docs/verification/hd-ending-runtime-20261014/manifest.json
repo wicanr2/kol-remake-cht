@@ -1,0 +1,194 @@
+{
+  "schema": "kol-hd-ending-screenshots/1",
+  "date": "2026-10-14",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "source_archive_sha256": "7644948e4adb3ff45f54501f005de42c927f766c447404a5bc4bde8f6286896e",
+  "engine_source_base": "bd9a2045365ae86475fd7358bad940c501fe66af",
+  "engine_inputs": "formal-inputs.json",
+  "engine_inputs_sha256": "b5fc6f7ffb7760ead62ed02e9d73141685836f472bb641491f5f32be40699e4b",
+  "tool": "kol-package:1.26.7-ebiten2.9.9-20261011-r1; Go1.26.7/Ebitengine2.9.9",
+  "original_receipt": "../hd-completion-20261014/original-receipt.json",
+  "original_receipt_sha256": "4054e0b0c217b81a33c734cc6c559bfac1ff93c583d1e4968447ead8900d16f6",
+  "original_seed": {
+    "value": 1,
+    "setting": "DS:1600/1602 before original ending call",
+    "rng_calls": 0
+  },
+  "remake_seed": {
+    "value": 1,
+    "setting": "-seed 1 before execution",
+    "rng_in_ending": false
+  },
+  "scenario": "SPEC-040 controlled seven-panel ending; real production rendering and translation",
+  "evidence_status": "confirmed remake presentation; controlled original oracle; no full-frame parity or natural completion claim",
+  "files": {
+    "ending-0-hd.png": {
+      "sha256": "0ac66786f046d5549c5622b72501afee414281a6a366e36ac78d18da510e403f",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "frame": 0,
+      "theme": "hd",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-hd/panel-0.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-0-ega.png": {
+      "sha256": "e978d511e681644ac9c282eb36cf3eac918ea6c65172f5157777dac844e49b17",
+      "dimensions": [
+        960,
+        600
+      ],
+      "frame": 0,
+      "theme": "ega",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-formal-zh/panel-0.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-1-hd.png": {
+      "sha256": "2072f685a5fa22bc9d2218d40479044f6d714aecf30455cc52b448a669a41529",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "frame": 1,
+      "theme": "hd",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-hd/panel-1.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-1-ega.png": {
+      "sha256": "06de6ae2295d5c4210875dc215e901907b740d4776684f79dcbf11ed517ffb39",
+      "dimensions": [
+        960,
+        600
+      ],
+      "frame": 1,
+      "theme": "ega",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-formal-zh/panel-1.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-2-hd.png": {
+      "sha256": "6b005292dff52f3650fa56cda4fb3290aee9b10c641c76568d2145cb10a04b69",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "frame": 2,
+      "theme": "hd",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-hd/panel-2.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-2-ega.png": {
+      "sha256": "f4a8e2c152fae30aa7eb67755d03e4ead34b5efdb61d8c7cff2dc9eee2a95bae",
+      "dimensions": [
+        960,
+        600
+      ],
+      "frame": 2,
+      "theme": "ega",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-formal-zh/panel-2.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-3-hd.png": {
+      "sha256": "7388efe92b553df7057bf5fd7b64e8ab03d2458c439dad27877795210b3b9c57",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "frame": 3,
+      "theme": "hd",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-hd/panel-3.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-3-ega.png": {
+      "sha256": "0d0af7061e9870e8ccb2e2e235a15e1acc28c6ab9e8f86813186eea1a90fd9a0",
+      "dimensions": [
+        960,
+        600
+      ],
+      "frame": 3,
+      "theme": "ega",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-formal-zh/panel-3.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-4-hd.png": {
+      "sha256": "0aa09fcde00ce5fe68f1fddfdc76cd117600f4df67670187d1c4af70ef0004f8",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "frame": 4,
+      "theme": "hd",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-hd/panel-4.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-4-ega.png": {
+      "sha256": "387c1bfc223791adc7c1ddf0561a395654cdbffba9a2935f3b1d5d9a66be5ba8",
+      "dimensions": [
+        960,
+        600
+      ],
+      "frame": 4,
+      "theme": "ega",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-formal-zh/panel-4.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-5-hd.png": {
+      "sha256": "fe501665bd42a34d1d61d597cda95e3704e0fb8c8d0bdb62ad48e3571aeec586",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "frame": 5,
+      "theme": "hd",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-hd/panel-5.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-5-ega.png": {
+      "sha256": "1211dcb9700541d4497279a18371b0606b787f3d62af9650693f48e4a132127c",
+      "dimensions": [
+        960,
+        600
+      ],
+      "frame": 5,
+      "theme": "ega",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-formal-zh/panel-5.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-6-hd.png": {
+      "sha256": "ea6068f461d6dabb9f14eda1a292fd716ff6fe9ce1e6d07e7dbc9661885088dd",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "frame": 6,
+      "theme": "hd",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-hd/panel-6.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    },
+    "ending-6-ega.png": {
+      "sha256": "d4d30949b609c50727c1479995abba43f65adc0f4adf6bba7ec7ce9e605166bc",
+      "dimensions": [
+        960,
+        600
+      ],
+      "frame": 6,
+      "theme": "ega",
+      "language": "zh-Hant",
+      "source": "workplace/hd-ending-runtime-20261014/ending-formal-zh/panel-6.png",
+      "rights": "private-repository-only; original-derived screenshot; no public distribution"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "kol-hd-ending-runtime-check/1",
+  "date": "2026-10-14",
+  "ending_panels": 7,
+  "ega_unchanged_frames": 14,
+  "approved_panel0_equal": true,
+  "native_chinese_guards_passed": true,
+  "normal_trace_equal": true,
+  "reload_trace_equal": true,
+  "save_equal_except_saved_at": true,
+  "gui_display_events": 48,
+  "gui_panel_states_distinct": 7,
+  "gui_state_preserved_per_switch": true,
+  "gui_hd_max_channel_deltas": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "window_sizes": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "production_gui_driver_limit": "Only initial ending state is injected in an isolated copy of main.go; formal rendering, fonts, artwork, theme/input code are unchanged. Normal title-to-save/reload uses the actual production binary.",
+  "original_oracle_reused": "hd-completion-20261014 original seven panels",
+  "normal_full_completion_claimed": false
+}
