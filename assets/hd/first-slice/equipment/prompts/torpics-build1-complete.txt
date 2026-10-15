@@ -1,0 +1,17 @@
+Use case: style-transfer.
+Asset type: native HD paper-doll UPPER-BODY atlas for the male elf, TORPICS 9 through 17.
+Input 1 supplies the EXACT nine original armor designs and their reading order. Ignore source labels, background and pixel dither. Input 2 supplies the SAME male elf's skin tone, proportions, frontal pose, elbows and closed fists, and approved painted style.
+Create a 3 by 3 atlas of NINE COMPLETE UPPER-BODY segments, in source order left to right then top to bottom. Every segment is frontal, headless, from the base of the neck to the bottom of the tunic/hip armor, including BOTH entire arms and BOTH CLOSED FISTS at the original low outward hand positions. Include exposed skin wherever armor is absent. Do not output empty armor shells, detached hands or detached forearm guards. Preserve the slender-waisted, long-armed male elf proportions and pose of image 2; no legs, head, hair, weapons or shields.
+Nine designs:
+9 top-left: brown leather sleeveless cuirass with dark seams and lacing, raised brown leather shoulder edges, SILVER segmented forearm guards, visible upper arms, both bare fists, source long leather lower flap.
+10 top-middle: pale icy silver/cyan full plate with the original very high swept-out pointed shoulder/collar edges, blue waist belt and small gold buckle, silver hip flaps, both armored arms ending in bare fists.
+11 top-right: deep RED full-sleeved armor with raised pointed SILVER shoulder/collar trim, blue belt/gold buckle, long red hip flap and red bracers, bare fists.
+12 middle-left: red segmented sleeveless cuirass and high silver shoulder collar, visible bare upper arms and elbows, separate red forearm guards worn on the arms, blue belt/gold buckle, red lower flap, bare fists.
+13 middle-middle: rows of red-brown rectangular lamellar plates across torso and sleeves, white metal highlights, pointed silver collar, blue belt and gold buckle, lamellar hip flaps, bare fists.
+14 middle-right: silver overlapping scale armor on torso/arms/hip flaps, the original small gold round chest medallion, pointed silver shoulder collar, blue waist belt and gold buckle, bare fists.
+15 bottom-left: pale SILVER studded armor with fine dark rivets on torso and sleeves, silver collar, blue belt/gold buckle, silver hip panels, bare fists.
+16 bottom-middle: dark iron CHAINMAIL torso/sleeves/tunic, original pale crossed lacing/straps at the collar, blue belt/gold buckle, bare fists.
+17 bottom-right: articulated SILVER plate armor with layered shoulder plates, pointed high collar, molded chest, arm plates and segmented hip plates, blue belt/gold buckle, bare fists.
+Hand-painted classic fantasy RPG style, upper-left highlights, cool metal, restrained red/brown leather, crisp dark contour and smooth transparent alpha. Match image 2's warm pale skin on all necks, exposed arms and fists. Keep consistent body scale and hand positions across all nine cells.
+Native 2048 by 2048 square atlas, generous transparent gutters between nine subjects and no clipping. Each segment must retain at least 400 pixels of painted width and 370 pixels of painted height, for use on a 1920x1200 game canvas. All anatomical details and edges fully inside each cell.
+Actual transparent RGBA background. No extra objects, heads, legs, full figures, hands holding weapons, text, numbers, labels, logos, frames, ground shadows or watermark.

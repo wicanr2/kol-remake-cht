@@ -1,0 +1,86 @@
+{
+  "schema": "kol-hd-equipment-runtime/1",
+  "status": "limited CONFORMED",
+  "base_commit": "b23c3c064efc9bd732c1617832f2470663d751ba",
+  "go_module_inputs": 391,
+  "hd_asset_files": 185,
+  "native_equipment_pngs": 46,
+  "parts": 169,
+  "props": 32,
+  "original_sources": 216,
+  "native_parts_and_props_rgba_verified": 201,
+  "gpu_frames": 38,
+  "full_hd_max_channel_delta": 1,
+  "literal_shield_grids_exact": 12,
+  "default_copied_matches": 6,
+  "normal_states_per_variant": 106,
+  "normal_ega_rgb_alpha_exact": true,
+  "normal_chinese_records_equal": true,
+  "gui_events": 24,
+  "gui_roundtrip_delta": 0,
+  "normal_save_states": 11,
+  "reload_states": 5,
+  "old_v3_reloaded": true,
+  "source_original_png_and_raw_rgb_unchanged": true,
+  "rendered_source_fingerprint_separate": true,
+  "transient_geometry_not_serialized": true,
+  "tests": {
+    "go-test-equipment-formal.log": {
+      "sha256": "6ebb183297270ee4c01af368eceef4176434d33794c496a10c384db50942bba4",
+      "exit_code": 0
+    },
+    "sceneverify-equipment-formal.log": {
+      "sha256": "d9967e12d9e83943262254b94f374958e3d441fa3943fce2469b0e34e98a6e89",
+      "exit_code": 0
+    },
+    "go-test-equipment-origin-bind.log": {
+      "sha256": "a676940c9e91284fd53af24bb1c1732d8cd00c89d0f79d55c44a8ed8d07ce7e1",
+      "exit_code": 0
+    },
+    "run-equipment-formal-gallery.log": {
+      "sha256": "5d2011ca33daed0ab0608f101885a49b775f10075834515637b9578794d3def4",
+      "exit_code": 0
+    }
+  },
+  "binaries": {
+    "equipment-formal": "d5f09a07ff4f0b5d5c0f214266746938a2d1f3e682613a2e1a27070bbd66071c",
+    "equipment-formal-origin-bind": "6db73dcc6f3cd1c21bfee05bcdd1968334e4de1996976e89943a7a7f960771a3",
+    "equipment-formal-gallery.test": "5a3c93f2628786a493b26b5b306256c46fef6b75c43fdbeb8cc185e6bcdf555b",
+    "gui-equipment-formal": "6ec9cd3242452852947f96c646507def9ad2e8e141436d6f4c8ab6cb6b4ff71f"
+  },
+  "final_narrow_check": "origin-bind-check.json",
+  "full_check_source_map": "full-check-inputs-before-origin-bind.json",
+  "files": {
+    "asset-inputs.json": "407214def4a36538c84069f153424caf7bd687eefff4cfca0ca14cec37b9638f",
+    "belt-hd.png": "e07b45da9d5a8817990043eb1bced2203ba1eea87369f2446b0bbbd9d5c7710d",
+    "build.sh": "979f5edb5a88650491c09a972f1addf135ff069fc2eca83ec07232a8c58016c7",
+    "custom-shield-hd.png": "f90991e53db1abea7fe7bad95c49097b4c2a3e6be960c691be451ca7ce072014",
+    "default-shield-hd.png": "79733786223b0057b5f88205c05efd9b1584aef0a8d8517445334eafbc24a10d",
+    "forearms-hd.png": "49606b1447756362aed327392fdaf5a3f4aec6cfa667c83aa8b03f0616034aa6",
+    "formal-inputs.json": "6f7f03e9144e7bcf9065e59e293015390c026ec0c9ead75a9572a3cf495973f7",
+    "full-check-inputs-before-origin-bind.json": "af4ddc0c25fe4f382cdf13b5548affd9789b526f134e5d55e7a24147729ab417",
+    "gallery-check.json": "d545424b86a04656ccea46d628653ee0cc08b5cf42b752c1519bc70c039ca206",
+    "gallery-check.py": "9f99365182ab0b4b013ca2342ac69c74a2035d63ed39efc00d6064c663b0db5d",
+    "gallery.go.txt": "14e6b87eae3e6c8224177338a6793d2a9b3778809f5bbee7e1924be500ba5e97",
+    "gallery.sh": "8a7fbfab6b76eb8bca91af78125b6c159ec5a97d2698f7f022f06bd7f327da2d",
+    "gui-check.json": "289df42687ca1437fc91ff22ebb105bcf56189ed98126c050fdddd9216edb5b6",
+    "gui.py": "60d815ec93d0182c1baed8cd5e12fdf28cb52bb3c456cd5369df0ae0b298ee70",
+    "items-ega.png": "6e64437a26843b2db0616a09be09bf165c95bd6a00217168fff050ccd68b8405",
+    "items-hd.png": "66e908197ca6c8f8ec5a38336c3754ad1a24f78da24c6408822b8a37c432f813",
+    "leg-native-correction.json": "155e1d71da68e2d147a5bc8cab0c55f7fb32c03e228368e3d961197cf898bda9",
+    "manifest.json": "1d2a7277967ffd4b021ed1da27ee48c087de65ee634fed9a966d12f2ebe8d1d4",
+    "metadata-change.json": "da5fae303c0559f137ff6f89275ab8d218d759e53668292178eec9dc473bb618",
+    "normal-check.json": "7402b2234846d3774db4b84463514334918dc9f14c35388baa20cc77b5c17581",
+    "normal-check.py": "75ce75eedc7ec759b72af6e3b238542e374d284670737f003b8bc58361c4683c",
+    "normal.py": "006e3326d78bf5b5f99006160067fcd0a82a61265486225ab00dbf8795d64a84",
+    "origin-bind-check.json": "2b9cf0a8be4109d964d4fcc70cd4e18ea933cb823735ebafe37121c6e2397e44",
+    "origin-bind.sh": "75ad2417b4e58c0c1b99ecaa94e01f345af9759ab6b416ff9908e947003ee824",
+    "party-ega.png": "3a3e1933de2d0c3e19c62090b1f52403ed54a9e9fcdb82ac3287da40008ce855",
+    "party-hd.png": "b9aaae8aee72a68a6cb272910af069bb1a52fc7a4c68e4c2680a95fe1d8970f1",
+    "save-check.json": "a8b5f85632f7795872de0aa785b6ae5626edb96bf37d87d7bf739951f503bbd7",
+    "save.py": "30810065a52d4c87dfa9e51f8d2b7f3758e68360def570cbed0220b8a6efe745",
+    "source-fingerprint-correction.json": "5f1b2b0806fb3646aa38960dcbb3614e999b77ab98108ebc3b1142ea58de4819",
+    "review.html": "d5b988aae29a4ab14214b42bca4be988adbec2bcfd8af98d4a86d1c4b4da40db"
+  },
+  "scope": "Full CJK item/party pages and equipment, Linux Docker only; remaining HD categories open; release unchanged."
+}

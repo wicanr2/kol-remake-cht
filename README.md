@@ -138,19 +138,20 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [比較頁](docs/verification/hd-actions-runtime-20261015/review.html)另含正常旅店的繁中EGA／HD。遊戲內F10、兩種視窗與存讀檔已驗，圖示切換沿原控制器；來源與完整範圍見[正式驗收](docs/verification/hd-actions-runtime-20261015.md)。
 
-### 原型：完整物品與隊伍頁
+### 開發版：完整物品與隊伍頁
 
-隔離原型已加入六種體型、城鎮／野外手繪背板、28款武器、四盾及原生中文。下圖是在同一角色與隊伍狀態下用遊戲內F10切換的實際視窗；六人由旅店正常招募。
-這批尚未接入正式版。成套、混搭、卸裝與獨立護具已有受控合成抽樣。獨立動作圖示已正式接入；預設盾面的HD匹配已在隔離原型核對，裝備組的正式素材載入與v3仍在續作。
+完整物品17槽與六型隊伍已接入正式HD呈現，包含身體、裝備、武器、盾牌、手部遮擋與城鎮／野外背板。
+下圖來自正常標題操作，六人由旅店招募；兩側沿相同角色、裝備及隊伍狀態。尚未納入現行發行包。
 
-| 重製中文 EGA | 隔離 HD 原型 |
+| 重製中文 EGA | 正式 HD |
 |---|---|
-| ![女性精靈物品頁EGA](docs/verification/hd-equipment-pages-20261015/runtime-shyla-large-ega.png) | ![女性精靈物品頁HD原型與遊戲內畫面控制](docs/verification/hd-equipment-pages-20261015/runtime-shyla-large-hd.png) |
-| ![正常招募六人隊伍EGA](docs/verification/hd-equipment-pages-20261015/runtime-six-party-large-ega.png) | ![六種體型與六人隊伍HD原型](docs/verification/hd-equipment-pages-20261015/runtime-six-party-large-hd.png) |
+| ![女性精靈物品17槽EGA](docs/verification/hd-equipment-runtime-20261015/items-ega.png) | ![正式HD物品頁、完整裝備與原生中文](docs/verification/hd-equipment-runtime-20261015/items-hd.png) |
+| ![正常招募六型隊伍EGA](docs/verification/hd-equipment-runtime-20261015/party-ega.png) | ![正式HD六型隊伍與原遮擋順序](docs/verification/hd-equipment-runtime-20261015/party-hd.png) |
 
-[比較頁](docs/verification/hd-equipment-pages-20261015/body-runtime-review.html)另含六種體型的正常物品頁與小視窗切換。中文、控制器狀態、EGA畫格及兩種視窗的鍵鼠F10往返已核對，範圍見[原型紀錄](docs/verification/hd-equipment-pages-20261015.md)。
-翼族足部沿原圖保留紅色裸足與白爪，持握依實際手繪拳頭校準；角色資料與保存格式保持。
-另有[裝備合成檢視](docs/verification/hd-equipment-pages-20261015/matrix-review.html)，包含六型外觀、三款護具及盾面位置修正。這批是受控外觀驗證，正常操作與實際F10的範圍仍以原型紀錄為準。
+[比較頁](docs/verification/hd-equipment-runtime-20261015/review.html)另含卸裝前臂、固定腰帶與預設／自訂盾面。
+已知預設盾面匹配手繪HD，修改盾面保留原40×38點陣；原角色資料與v3格式保持。
+中文、EGA回歸、兩種視窗的鍵鼠F10及正常存讀檔已核對，範圍見[正式驗收](docs/verification/hd-equipment-runtime-20261015.md)。
+其他NPC、怪物、坐騎、地圖、戰場、天候與未驗操作分支仍續作。
 
 ### 事件畫面：原版與 HD
 

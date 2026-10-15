@@ -1080,6 +1080,7 @@ type game struct {
 	hdCanvas          *screen.Canvas
 	hdDir             string
 	hdLanguage        string
+	hdPortraitPath    string
 	displaySettings   ui.DisplaySettings
 	displayCanvas     *screen.Canvas
 	displayAwaitFrame bool
@@ -4110,6 +4111,7 @@ func main() {
 	if slots != nil {
 		g.remove = roster.NewDeleteFlow(slots)
 	}
+	g.hdPortraitPath = *portraitPath
 	if err := g.enableHD(*graphics, *hdAssets, *lang); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(2)

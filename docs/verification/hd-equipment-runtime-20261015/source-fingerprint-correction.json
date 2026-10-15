@@ -1,0 +1,51 @@
+{
+  "status": "corrected source fingerprint contract",
+  "before_manifest_sha256": "2d37160d95c22f581c7c63cfa4735b4a079b108f0176c202c9e37bb9aece1ec0",
+  "after_manifest_sha256": "428b23694d57c55f17e13a95adc51daa5cb5382ffd72dad790764b6d4c76ccb8",
+  "source_png_and_raw_rgb_unchanged": true,
+  "original_source_alpha_values": [
+    0,
+    255
+  ],
+  "sources": 216,
+  "differing": [
+    {
+      "archive": "HEADPICS",
+      "index": 27,
+      "source_png_sha256": "be196e319b30d54378644cdf17fe04388370ec58930317a895136d8707c530e6",
+      "raw_rgb": "85830fc8b773c5c70b904dee04543cf4d4d07bc9ea54a850f5571f916c7af285",
+      "rendered_rgb": "b66c41c8f58b7939a0a5680fc40dadd23d2aef3a8030a38e3b6e303f99178de6",
+      "hidden_colored_pixels": 2
+    },
+    {
+      "archive": "TORPICS",
+      "index": 4,
+      "source_png_sha256": "800f68a062e20fdf3d9b0a36d1adc7beb35d8e7a57b113c81ba6ae5e6fff7a11",
+      "raw_rgb": "a85db0a6fa9973b63edb8694bccc23d4f02577c75cb3916aac2590f66576cca4",
+      "rendered_rgb": "1324dec723da67c59532cd7402e7a1f80284afea0eeca15fc3576544c294db20",
+      "hidden_colored_pixels": 4
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 36,
+      "source_png_sha256": "971742e98ac1043337a2910a756d177669245ad7e844698b17b512926dfa859b",
+      "raw_rgb": "03510f37a7d7d2216f24162134ec15c11d799872cd68d874ef3edf5d4e161403",
+      "rendered_rgb": "68387dddbbd52867392224bd3ed91aa138b229d38e58c51a1694588170953200",
+      "hidden_colored_pixels": 1
+    },
+    {
+      "archive": "LEGSPICS",
+      "index": 49,
+      "source_png_sha256": "8c65171ba7bfc565590b5307627e11bd75f201256588f1bfca0181f7d4fecb97",
+      "raw_rgb": "438072df76f07ee244acc38e4a7a2e14dd021e7dc6a8f9820d81e80b2c47f0b2",
+      "rendered_rgb": "19367d4f3c8970d1747cedf9e1177b1a4b11856371ec920edb6178d1a0c9b4ff",
+      "hidden_colored_pixels": 1
+    }
+  ],
+  "contract": "Go1.26.7 image/color/color.go Color.RGBA: alpha-premultiplied; Ebitengine2.9.9 GPU ReadPixels uses premultiplied RGB. CPU validates both source hashes; GPU validates rendered hash.",
+  "failed_jobs": [
+    "equipment-formal-gallery",
+    "equipment-formal-normal",
+    "equipment-formal-save"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "status": "DRAFT correction accepted for prototype verification",
+  "tool": "image_gen built-in; transparent_background=true",
+  "source_file": "exec-4d11d9f4-23fe-4549-91a5-6d6813945a43.png",
+  "output_file": "legspics-build0-01-native-painted.png",
+  "sha256": "e591c5bfbd564908ab91bf28dd02ca48fc21daf0ba632edd6284b089ce69e3a7",
+  "size": [
+    1774,
+    887
+  ],
+  "prompt_file": "leg-native-correction-prompt.txt",
+  "prompt_sha256": "52674dfbc07a28f8e086a40375e4cd939a915542aec2053cf7ad1d4915aaeb68",
+  "parts": [
+    {
+      "key": "LEGSPICS:0",
+      "old_native_size": [
+        287,
+        346
+      ],
+      "new_native_size": [
+        680,
+        814
+      ],
+      "target": [
+        258,
+        354
+      ],
+      "rect": [
+        109,
+        29,
+        789,
+        843
+      ],
+      "world_unchanged": true
+    },
+    {
+      "key": "LEGSPICS:1",
+      "old_native_size": [
+        286,
+        342
+      ],
+      "new_native_size": [
+        682,
+        812
+      ],
+      "target": [
+        258,
+        348
+      ],
+      "rect": [
+        984,
+        32,
+        1666,
+        844
+      ],
+      "world_unchanged": true
+    }
+  ],
+  "other_167_parts_unchanged": true,
+  "all_169_parts_cover_native_target": true,
+  "rights": "project HD redraw; original source identity metadata private GitHub only"
+}

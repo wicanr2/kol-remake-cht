@@ -1,0 +1,461 @@
+{
+  "schema": "kol-hd-equipment-formal-gallery-check/1",
+  "frames": [
+    {
+      "id": "body0-set0",
+      "group": "set",
+      "reference": "leg-native-v12/body0-set0.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "5490751b1e104ac0dc2eb95bff0381dd106b2397a4c7b751fd5bb1aff337ed2d"
+    },
+    {
+      "id": "body0-set1",
+      "group": "set",
+      "reference": "leg-native-v12/body0-set1.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "99b32d225101ae6fd5919cd80b87145514b4a171e44de874415cbbe67b97a5f0"
+    },
+    {
+      "id": "body0-presence4",
+      "group": "presence",
+      "reference": "leg-native-v12/body0-presence4.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "49606b1447756362aed327392fdaf5a3f4aec6cfa667c83aa8b03f0616034aa6"
+    },
+    {
+      "id": "body0-presence6",
+      "group": "presence",
+      "reference": "leg-native-v12/body0-presence6.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "9da70d8da98dbb378bf3bac1791f59aa852a7e73433b6286549932c9abf089b0"
+    },
+    {
+      "id": "body0-mixed0",
+      "group": "mixed",
+      "reference": "leg-native-v12/body0-mixed0.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "b697908b16a7cbd036bd27f86e0566559aeee998e4ea6a7c268c7a14e66f308b"
+    },
+    {
+      "id": "body0-mixed4",
+      "group": "mixed",
+      "reference": "leg-native-v12/body0-mixed4.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "68408c1aea0701480f05f2eab7cdb6ba0022cbc2f5c9c46174c94f7db8cb3826"
+    },
+    {
+      "id": "body0-weapon00",
+      "group": "weapon",
+      "reference": "leg-native-v12/body0-weapon00.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "81b8d3d275c1665b697d6d5d5e7339900256aa1c3b24cc760b35e0f83b071c70"
+    },
+    {
+      "id": "body0-weapon03",
+      "group": "weapon",
+      "reference": "leg-native-v12/body0-weapon03.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "503738ce206c28f4a047b49de1881a2d44fdc0713f9574c8a1535ecd528a28ff"
+    },
+    {
+      "id": "body0-belt",
+      "group": "belt",
+      "reference": "belt-v13/body0-belt.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "7530ec6922cb8b175f202f55bcf3ef9256e3c319bfe24a22f43b28001fd88941"
+    },
+    {
+      "id": "body1-belt",
+      "group": "belt",
+      "reference": "belt-v13/body1-belt.png",
+      "max_channel_delta": 0,
+      "alpha_equal": true,
+      "actual_png_sha256": "37e4d8f9feb09b27d5e0dac82ea5dacb8661d87936ac5e67e49bd5d3b17e4fc7"
+    },
+    {
+      "id": "body2-belt",
+      "group": "belt",
+      "reference": "belt-v13/body2-belt.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "04af9e2dd01623d616c561122f0a552ea7539fdc5a2a7761004b528b658b97ab"
+    },
+    {
+      "id": "body3-belt",
+      "group": "belt",
+      "reference": "belt-v13/body3-belt.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "4cf08e168f3885a1c468bb8db76188f302818816ff2bbfd8419ac9a039f43c4c"
+    },
+    {
+      "id": "body4-belt",
+      "group": "belt",
+      "reference": "belt-v13/body4-belt.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "0c285f118b707ff97cb74c3c456bcec96b5fed0778707b0f1313eea1d35c22db"
+    },
+    {
+      "id": "body5-belt",
+      "group": "belt",
+      "reference": "belt-v13/body5-belt.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "e07b45da9d5a8817990043eb1bced2203ba1eea87369f2446b0bbbd9d5c7710d"
+    },
+    {
+      "id": "body0-shield-default",
+      "group": "default",
+      "reference": "action-runtime-v10/body0-shield-default.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "43ede9f13f3c8c535f99bda62072e70c6a2a6440dc19e52fc40c2a02b8dd70b2"
+    },
+    {
+      "id": "body0-shield-copied",
+      "group": "copied",
+      "reference": "action-runtime-v10/body0-shield-copied.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "b0d885ea3fd39ff2da86f9a0d6acde215035b4d624fdfe887879c36ed2bc6cb2"
+    },
+    {
+      "id": "body0-shield-changed",
+      "group": "changed",
+      "reference": "action-runtime-v10/body0-shield-changed.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "540a368fed1b08262b44dc147f93acda6afd38b9e9450be827979a07d9e58f6f"
+    },
+    {
+      "id": "body0-custom-shield",
+      "group": "striped",
+      "reference": "action-runtime-v10/body0-custom-shield.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "695c10fb2e090fa7b10c884c7ccdf9b513ab5f66e0c44015cd7f99def1dfdc7f"
+    },
+    {
+      "id": "body1-shield-default",
+      "group": "default",
+      "reference": "action-runtime-v10/body1-shield-default.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "72ad4a9c6032ca91f65ac1d51be9938fe4854474debdf31ad967c39efab76753"
+    },
+    {
+      "id": "body1-shield-copied",
+      "group": "copied",
+      "reference": "action-runtime-v10/body1-shield-copied.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "6e7bb5f933924c3089c7edbcfee483e0c6e0d37c363fe82d41249a1c237ca54b"
+    },
+    {
+      "id": "body1-shield-changed",
+      "group": "changed",
+      "reference": "action-runtime-v10/body1-shield-changed.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "9b4b473984c48c1b75fee870430e9555ba3522280c4047cbf3400988ce126725"
+    },
+    {
+      "id": "body1-custom-shield",
+      "group": "striped",
+      "reference": "action-runtime-v10/body1-custom-shield.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "51aafed90f4b0a1e3e15492ba4ac47d54cbc0876d6c593785493d95fa60da572"
+    },
+    {
+      "id": "body2-shield-default",
+      "group": "default",
+      "reference": "action-runtime-v10/body2-shield-default.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "972fb615165ebdb32bf6341dd4a094b45578dde55380737a89d7d6559da2e338"
+    },
+    {
+      "id": "body2-shield-copied",
+      "group": "copied",
+      "reference": "action-runtime-v10/body2-shield-copied.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "f713d1bfb0603fef7f56d09f1a2295a54d61faf368a0493af674e812aacb367e"
+    },
+    {
+      "id": "body2-shield-changed",
+      "group": "changed",
+      "reference": "action-runtime-v10/body2-shield-changed.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "486a7382a5a6d6735411c594547dc235fd4a539ec7411d433ca7d4d6e097ff9b"
+    },
+    {
+      "id": "body2-custom-shield",
+      "group": "striped",
+      "reference": "action-runtime-v10/body2-custom-shield.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "1286695997be7856a27dfbe1fc539e61c1918b9afabf18eab8341c45eebb556a"
+    },
+    {
+      "id": "body3-shield-default",
+      "group": "default",
+      "reference": "action-runtime-v10/body3-shield-default.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "08771442daa3f0159683648e288ebade8b3c9c5bd5df58af22a6ff8c1e3be820"
+    },
+    {
+      "id": "body3-shield-copied",
+      "group": "copied",
+      "reference": "action-runtime-v10/body3-shield-copied.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "d4bcedf9023b91914d23ab2e05657620a1d26272ef645615938e07167d2d0c14"
+    },
+    {
+      "id": "body3-shield-changed",
+      "group": "changed",
+      "reference": "action-runtime-v10/body3-shield-changed.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "0b6a0167ee92a696964882717133929731c1973904760db6499649c6944baecc"
+    },
+    {
+      "id": "body3-custom-shield",
+      "group": "striped",
+      "reference": "action-runtime-v10/body3-custom-shield.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "c88f6956c6210d6d8ea6ba51e3e471a69f2b6f560a302a57fe12070a6b9b7563"
+    },
+    {
+      "id": "body4-shield-default",
+      "group": "default",
+      "reference": "action-runtime-v10/body4-shield-default.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "b525c5792fb933edd53bbddf7c14d7fad6760505899cbb4a77415424bbaa476e"
+    },
+    {
+      "id": "body4-shield-copied",
+      "group": "copied",
+      "reference": "action-runtime-v10/body4-shield-copied.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "92d5aec4bdc163220df776bad8fd5ef3e12abd25b3d541bb6d8831194b6a5063"
+    },
+    {
+      "id": "body4-shield-changed",
+      "group": "changed",
+      "reference": "action-runtime-v10/body4-shield-changed.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "d41d6b63476ecd4facfb4fe06350aaaca7138e3938590efd57695c154aaca0ed"
+    },
+    {
+      "id": "body4-custom-shield",
+      "group": "striped",
+      "reference": "action-runtime-v10/body4-custom-shield.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "047d7ee19b71b9c9d26c0ead81a5974a84e9467b9bf4c254078aaf8760948ced"
+    },
+    {
+      "id": "body5-shield-default",
+      "group": "default",
+      "reference": "action-runtime-v10/body5-shield-default.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "79733786223b0057b5f88205c05efd9b1584aef0a8d8517445334eafbc24a10d"
+    },
+    {
+      "id": "body5-shield-copied",
+      "group": "copied",
+      "reference": "action-runtime-v10/body5-shield-copied.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "1202c1e9655bf9456edfed03483d41cae0b7d8c6ca56512ba409c4c1dab19eb1"
+    },
+    {
+      "id": "body5-shield-changed",
+      "group": "changed",
+      "reference": "action-runtime-v10/body5-shield-changed.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "46f8c680dbeda42f115b6f0d2ed23827cad6050a462e86498134f1dfa92f9470"
+    },
+    {
+      "id": "body5-custom-shield",
+      "group": "striped",
+      "reference": "action-runtime-v10/body5-custom-shield.png",
+      "max_channel_delta": 1,
+      "alpha_equal": true,
+      "actual_png_sha256": "f90991e53db1abea7fe7bad95c49097b4c2a3e6be960c691be451ca7ce072014"
+    }
+  ],
+  "text_records": 646,
+  "full_hd_max_delta": 1,
+  "literal_shields": [
+    {
+      "id": "body0-shield-changed",
+      "rect": [
+        864,
+        432,
+        1104,
+        660
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body0-custom-shield",
+      "rect": [
+        864,
+        432,
+        1104,
+        660
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body1-shield-changed",
+      "rect": [
+        828,
+        372,
+        1068,
+        600
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body1-custom-shield",
+      "rect": [
+        828,
+        372,
+        1068,
+        600
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body2-shield-changed",
+      "rect": [
+        817,
+        615,
+        1057,
+        843
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body2-custom-shield",
+      "rect": [
+        817,
+        615,
+        1057,
+        843
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body3-shield-changed",
+      "rect": [
+        873,
+        302,
+        1113,
+        530
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body3-custom-shield",
+      "rect": [
+        873,
+        302,
+        1113,
+        530
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body4-shield-changed",
+      "rect": [
+        876,
+        423,
+        1116,
+        651
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body4-custom-shield",
+      "rect": [
+        876,
+        423,
+        1116,
+        651
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body5-shield-changed",
+      "rect": [
+        877,
+        453,
+        1117,
+        681
+      ],
+      "original_v10_literal_grid_equal": true
+    },
+    {
+      "id": "body5-custom-shield",
+      "rect": [
+        877,
+        453,
+        1117,
+        681
+      ],
+      "original_v10_literal_grid_equal": true
+    }
+  ],
+  "default_matches": [
+    {
+      "body": 0,
+      "default_and_copied_viewport_max_delta": 0
+    },
+    {
+      "body": 1,
+      "default_and_copied_viewport_max_delta": 0
+    },
+    {
+      "body": 2,
+      "default_and_copied_viewport_max_delta": 0
+    },
+    {
+      "body": 3,
+      "default_and_copied_viewport_max_delta": 0
+    },
+    {
+      "body": 4,
+      "default_and_copied_viewport_max_delta": 0
+    },
+    {
+      "body": 5,
+      "default_and_copied_viewport_max_delta": 0
+    }
+  ],
+  "source_frames": 216,
+  "limits": "Controlled actual UI fixtures, not normal-player or original-executable evidence. Original PNG/rawRGB and GPU-rendered RGB independently verified."
+}

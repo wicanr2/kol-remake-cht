@@ -8,7 +8,9 @@
 
 | 層 | 套件 | 規則 |
 |---|---|---|
-| 資料與規則 | `assets` `battle` `bitmapedit` `book` `chardata` `ending` `input` `magic` `portrait` `rng` `roster` `save` `title` `world` | 彼此不依賴，不碰畫面與 Ebitengine |
+| 純呈現資料 | `hdart` | 只定義HD素材與校準型別，不依賴專案套件、GPU、時鐘、亂數或檔案載入 |
+| 資產載入 | `assets`→`hdart` | 讀PNG與manifest並回傳驗證後的純資料，不建立GPU圖片 |
+| 資料與規則 | `battle` `bitmapedit` `book` `chardata` `ending` `input` `magic` `portrait` `rng` `roster` `save` `title` `world` | 彼此不依賴，不碰畫面與 Ebitengine |
 | 規則（用到一兩個資料套件） | `charcreate`→`chardata`；`i18n`→`magic`；`town`→`magic`、`portrait` | 只能依賴括號裡的套件 |
 | 場景串接 | `flow`→`bitmapedit`、`charcreate`、`roster`、`town` | 只看規則，不看畫面 |
 | 對拍輔助 | `oracle`→`battle` | 只讀戰鬥規則 |
@@ -17,6 +19,11 @@
 
 依賴方向單向：`cmd/kol` → 畫面／場景串接 → 規則 → 資料。允許的邊寫在測試的 `allowed` 表裡，
 新增依賴要改那張表，改表就是一次看得見的決定；新增套件要先登記它在哪一層。
+
+[SPEC-039完整裝備接入](039-hd-art-ui.md#完整裝備頁正式接入)沿同一方向共用
+`internal/hdart/equipment.go`的純資料型別：`assets`負責檔案驗證，`ui`只接收型別與已解碼圖片，
+`cmd/kol`組裝既有typed版面推導的記憶體錨點。`ui`不依賴資產載入套件，`assets`不依賴UI；
+原始錨點的Binding欄位排除JSON序列化，規則與v3邊界保持。
 
 ## 固定步進
 

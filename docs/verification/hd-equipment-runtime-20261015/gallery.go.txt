@@ -1,0 +1,402 @@
+package ui
+
+// Local fixture overlay only. Calls the unchanged V7 CJK item renderer and
+// portrait.Compose. These fixtures are not normal-player-path evidence.
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"image"
+	"image/png"
+	"os"
+	"path/filepath"
+	"strings"
+	"testing"
+
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/wicanr2/kol-remake-cht/internal/assets"
+	"github.com/wicanr2/kol-remake-cht/internal/bitmapedit"
+	"github.com/wicanr2/kol-remake-cht/internal/font"
+	"github.com/wicanr2/kol-remake-cht/internal/hdart"
+	"github.com/wicanr2/kol-remake-cht/internal/i18n"
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
+	"github.com/wicanr2/kol-remake-cht/internal/town"
+)
+
+type matrixSpritesV7 struct {
+	lib  *assets.Library
+	pics map[string]*ebiten.Image
+}
+
+func (s *matrixSpritesV7) Get(archive string, index int) (*ebiten.Image, error) {
+	key := fmt.Sprintf("%s:%d", archive, index)
+	if p := s.pics[key]; p != nil {
+		return p, nil
+	}
+	var im image.Image
+	var e error
+	if archive == portrait.ArchiveDefaultShield {
+		im, e = s.lib.DecodeDefaultShield()
+	} else {
+		im, _, e = s.lib.Decode(archive, index)
+	}
+	if e != nil {
+		return nil, e
+	}
+	p := ebiten.NewImageFromImage(im)
+	s.pics[key] = p
+	return p, nil
+}
+
+type matrixCaseV7 struct {
+	ID     string           `json:"id"`
+	Group  string           `json:"group"`
+	Build  int              `json:"build"`
+	Figure portrait.Figure  `json:"figure"`
+	Pieces []portrait.Piece `json:"pieces"`
+	PNG    string           `json:"png"`
+	PNGSHA string           `json:"png_sha256"`
+	RGBA   string           `json:"rgba_sha256"`
+}
+type matrixGameV7 struct {
+	h        *HD
+	s        *matrixSpritesV7
+	f        *font.Font
+	t        *i18n.Table
+	rows     []string
+	cases    []matrixCaseV7
+	index    int
+	err      error
+	done     bool
+	dest     *ebiten.Image
+	dir      string
+	text     []string
+	coverage map[string]int
+}
+
+func (g *matrixGameV7) Update() error {
+	if g.err != nil {
+		return g.err
+	}
+	if g.done {
+		return ebiten.Termination
+	}
+	return nil
+}
+func (g *matrixGameV7) Layout(int, int) (int, int) { return 1920, 1200 }
+func (g *matrixGameV7) Draw(screen *ebiten.Image) {
+	if g.done || g.err != nil {
+		return
+	}
+	c := &g.cases[g.index]
+	g.dest.Clear()
+	p := &town.ItemPage{Rows: g.rows, Selected: 0, Figure: c.Pieces}
+	font.DrawObserver = func(_, text string) { g.text = append(g.text, text) }
+	g.err = g.h.RenderUI(g.dest, func() error { return drawItemPageCJK(g.dest, g.s, g.f, g.t, p, nil, false) })
+	font.DrawObserver = nil
+	if g.err != nil {
+		return
+	}
+	// Fixture identifier is outside the actual item-page image and text area.
+	g.h.style.label(g.dest, c.ID, image.Rect(100, 982, 1820, 1020), 24, hdGold, true)
+	pixels := make([]byte, 1920*1200*4)
+	g.dest.ReadPixels(pixels)
+	rgba := image.NewRGBA(image.Rect(0, 0, 1920, 1200))
+	copy(rgba.Pix, pixels)
+	c.PNG = c.ID + ".png"
+	path := filepath.Join(g.dir, c.PNG)
+	f, e := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
+	if e != nil {
+		g.err = e
+		return
+	}
+	enc := png.Encoder{CompressionLevel: png.BestSpeed}
+	e = enc.Encode(f, rgba)
+	ce := f.Close()
+	if e == nil {
+		e = ce
+	}
+	if e != nil {
+		g.err = e
+		return
+	}
+	raw, e := os.ReadFile(path)
+	if e != nil {
+		g.err = e
+		return
+	}
+	c.PNGSHA = fmt.Sprintf("%x", sha256.Sum256(raw))
+	c.RGBA = fmt.Sprintf("%x", sha256.Sum256(pixels))
+	for _, piece := range c.Pieces {
+		g.coverage[fmt.Sprintf("%s:%d", piece.Archive, piece.Index)]++
+	}
+	screen.DrawImage(g.dest, nil)
+	g.index++
+	if g.index%25 == 0 {
+		fmt.Printf("matrix-v7 rendered %d/%d\n", g.index, len(g.cases))
+	}
+	g.done = g.index == len(g.cases)
+}
+func TestHDEquipmentMatrixV7(t *testing.T) {
+	dir := "/out/equipment-formal-gallery"
+	if e := os.Mkdir(dir, 0755); e != nil {
+		t.Fatal(e)
+	}
+	layout, e := portrait.Load("/src/assets/original-derived-data/portrait-layout.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	lib, e := assets.Load("/src/assets/original-derived-png/ega")
+	if e != nil {
+		t.Fatal(e)
+	}
+	controls, e := assets.LoadHDInterface("/src/assets/hd/first-slice/interface")
+	if e != nil {
+		t.Fatal(e)
+	}
+	pages, e := assets.LoadHDPages("/src/assets/hd/first-slice/pages")
+	if e != nil {
+		t.Fatal(e)
+	}
+	translator, e := i18n.Load("/src/docs/i18n/newchar-zh-Hant.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	f, e := font.Load("/src/assets/ui-font", "zh-hant-16")
+	if e != nil {
+		t.Fatal(e)
+	}
+	var state struct {
+		Inside *town.Inn `json:"inside"`
+	}
+	raw, e := os.ReadFile("/out/gui-prototype-v7-shyla/items-large-state.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(raw, &state); e != nil {
+		t.Fatal(e)
+	}
+	if state.Inside == nil || state.Inside.ItemPage == nil || len(state.Inside.ItemPage.Rows) != 17 {
+		t.Fatal("normal item rows unavailable")
+	}
+	glyphs := map[string]HDGlyph{}
+	for ch, v := range controls.Font.Glyphs {
+		glyphs[ch] = HDGlyph{X: v.X, Y: v.Y, Advance: v.Advance}
+	}
+	h := &HD{keys: map[*ebiten.Image]string{}, matching: map[string]int{}}
+	h.AttachInterface(controls.Images, glyphs, controls.NPCKey, controls.CrestKey, translator)
+	books := map[string]int{}
+	for _, b := range pages.Manifest.Books {
+		books[b.SourceRGB] = b.Index
+	}
+	var sources []HDPageSource
+	for _, s := range pages.Sources() {
+		sources = append(sources, HDPageSource{Archive: s.Archive, Index: s.Index, RGB: s.SourceRGB})
+	}
+	h.AttachPages(pages.Book, pages.Portraits, books, pages.Manifest.Background.SourceRGB, sources)
+	equipment, e := assets.LoadHDEquipment("/src/assets/hd/first-slice/equipment")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = equipment.ValidateSources(lib); e != nil {
+		t.Fatal(e)
+	}
+	binding := hdart.Binding{}
+	for i, b := range layout.Body {
+		binding.BaseOrigins[i] = b.X
+	}
+	for i, h := range layout.Hands {
+		b := equipment.Manifest.HandPaint[fmt.Sprint(i)]
+		binding.SourceHands[i] = [4]int{h.X*8 + b[0], h.Y + b[1], h.X*8 + b[2], h.Y + b[3]}
+	}
+	for _, s := range equipment.Manifest.Sources {
+		if s.Archive == "BOOKDATA" {
+			binding.DefaultShieldRGB = s.RGB
+		}
+	}
+	if e = h.AttachEquipment(equipment.Images, equipment.Manifest, binding); e != nil {
+		t.Fatal(e)
+	}
+	actions, e := assets.LoadHDActions("/src/assets/hd/first-slice/actions")
+	if e != nil {
+		t.Fatal(e)
+	}
+	var actionSources []HDActionSource
+	for _, s := range actions.Manifest.Sources {
+		actionSources = append(actionSources, HDActionSource{HDPageSource: HDPageSource{Archive: s.Archive, Index: s.Index, RGB: s.SourceRGB}, Rect: image.Rect(s.Rect[0], s.Rect[1], s.Rect[2], s.Rect[3])})
+	}
+	if e = h.AttachActions(actions.Image, actionSources); e != nil {
+		t.Fatal(e)
+	}
+	g := &matrixGameV7{h: h, s: &matrixSpritesV7{lib: lib, pics: map[string]*ebiten.Image{}}, f: f, t: translator, rows: state.Inside.ItemPage.Rows, dir: dir, dest: ebiten.NewImage(1920, 1200), coverage: map[string]int{}}
+	add := func(id, group string, build int, styles [3]int, weapon, shield, belt *portrait.Item, custom *string) {
+		fig := portrait.Figure{Gender: build / 4, Race: build % 4, Styles: styles, Weapon: weapon, Shield: shield, Belt: belt, PersonalShield: custom}
+		pieces := layout.Compose(fig, 0)
+		if len(pieces) < 2 || pieces[0].Index != build {
+			t.Fatalf("fixture composition invalid %s", id)
+		}
+		if weapon != nil && weapon.TwoHand {
+			for _, p := range pieces {
+				if p.Archive == "SHLDPICS" {
+					t.Fatalf("two-hand fixture shield was not suppressed %s", id)
+				}
+			}
+		}
+		g.cases = append(g.cases, matrixCaseV7{ID: id, Group: group, Build: build, Figure: fig, Pieces: pieces})
+	}
+	weapon := func(index int, two bool) *portrait.Item {
+		for class := 0; class < 256; class += 32 {
+			for style := 0; style < 16; style++ {
+				w := portrait.Item{Class: class, Style: style, Kind: 1, TwoHand: two}
+				if two {
+					w.Class |= 2
+				}
+				if i, ok := layout.WeaponIndex(w); ok && i == index {
+					return &w
+				}
+			}
+		}
+		t.Fatalf("weapon %d has no typed mapping", index)
+		return nil
+	}
+	mixed := [][3]int{{0, 8, 1}, {8, 0, 3}, {1, 3, 8}, {4, 7, 6}, {6, 1, 0}, {7, 6, 2}}
+	for build := 0; build < 6; build++ {
+		for style := 0; style < 9; style++ {
+			add(fmt.Sprintf("body%d-set%d", build, style), "set", build, [3]int{style, style, style}, nil, nil, nil, nil)
+		}
+		for mask := 0; mask < 8; mask++ {
+			styles := [3]int{-1, -1, -1}
+			for j := 0; j < 3; j++ {
+				if mask&(1<<j) != 0 {
+					styles[j] = 0
+				}
+			}
+			add(fmt.Sprintf("body%d-presence%d", build, mask), "presence", build, styles, nil, nil, nil, nil)
+		}
+		for i, styles := range mixed {
+			add(fmt.Sprintf("body%d-mixed%d", build, i), "mixed", build, styles, nil, nil, nil, nil)
+		}
+	}
+	for _, style := range []int{0, 6, 8} {
+		for mask := 0; mask < 4; mask++ {
+			styles := [3]int{-1, -1, style}
+			if mask&1 != 0 {
+				styles[0] = style
+			}
+			if mask&2 != 0 {
+				styles[1] = style
+			}
+			add(fmt.Sprintf("body5-armor%d-upper%d", 45+style, mask), "armor-only", 5, styles, nil, nil, nil, nil)
+		}
+	}
+	for build := 0; build < 6; build++ {
+		for index := 0; index < 28; index++ {
+			two := index < 3 || index%4 == 0
+			w := weapon(index, two)
+			var shield *portrait.Item
+			if two {
+				shield = &portrait.Item{Style: 1}
+			}
+			add(fmt.Sprintf("body%d-weapon%02d", build, index), "weapon", build, [3]int{index % 9, index%10 - 1, index * 3 % 9}, w, shield, nil, nil)
+		}
+		for style := 0; style < 4; style++ {
+			add(fmt.Sprintf("body%d-shield%d", build, style), "shield", build, [3]int{style, style, style}, nil, &portrait.Item{Style: style}, nil, nil)
+		}
+		add(fmt.Sprintf("body%d-belt", build), "belt", build, [3]int{0, 0, 0}, nil, nil, weapon(18, false), nil)
+		custom := strings.Repeat("a5", 760)
+		add(fmt.Sprintf("body%d-custom-shield", build), "custom-shield", build, [3]int{8, 8, 8}, nil, &portrait.Item{Style: 3}, nil, &custom)
+	}
+	if len(g.cases) != 354 {
+		t.Fatalf("matrix cases=%d, wanted354", len(g.cases))
+	}
+	selectedIDs := map[string]bool{"body0-set0": true, "body0-set1": true, "body0-presence4": true, "body0-presence6": true, "body0-mixed0": true, "body0-mixed4": true, "body0-weapon00": true, "body0-weapon03": true}
+	selected := []matrixCaseV7{}
+	for _, c := range g.cases {
+		if selectedIDs[c.ID] || c.Group == "belt" {
+			selected = append(selected, c)
+		}
+	}
+	if len(selected) != 14 {
+		t.Fatal("need14 declared correction and belt cases")
+	}
+	g.cases = selected
+	original, e := lib.DecodeDefaultShield()
+	if e != nil {
+		t.Fatal(e)
+	}
+	bitmap, e := bitmapedit.FromImage(original)
+	if e != nil {
+		t.Fatal(e)
+	}
+	copied := bitmap.Hex()
+	modified := bitmap
+	modified.Set(0, 0, (modified.At(0, 0)+1)%16)
+	changed := modified.Hex()
+	striped := strings.Repeat("a5", 760)
+	for build := 0; build < 6; build++ {
+		for _, kind := range []string{"default", "copied", "changed", "striped"} {
+			var content *string
+			switch kind {
+			case "copied":
+				content = &copied
+			case "changed":
+				content = &changed
+			case "striped":
+				content = &striped
+			}
+			id := fmt.Sprintf("body%d-shield-%s", build, kind)
+			if kind == "striped" {
+				id = fmt.Sprintf("body%d-custom-shield", build)
+			}
+			add(id, kind, build, [3]int{8, 8, 8}, nil, &portrait.Item{Style: 3}, nil, content)
+		}
+	}
+	if len(g.cases) != 38 {
+		t.Fatal("need38 declared formal cases")
+	}
+	raw, e = json.MarshalIndent(g.cases, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(dir, "registered-cases.json"), append(raw, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+	// The ordinary HD source check runs in Draw, after the graphics context exists.
+	h.pages.validated = false
+	ebiten.SetWindowSize(960, 600)
+	ebiten.SetWindowTitle("KOL DRAFT equipment matrix V7")
+	// Validate once in the same RunGame draw context through the wrapper.
+	if e = ebiten.RunGame(&matrixValidatingV7{matrixGameV7: g}); e != nil {
+		t.Fatal(e)
+	}
+	if g.index != 38 || g.err != nil {
+		t.Fatalf("matrix incomplete: %d %v", g.index, g.err)
+	}
+	result := struct {
+		Status   string         `json:"status"`
+		Scope    string         `json:"scope"`
+		Cases    []matrixCaseV7 `json:"cases"`
+		Coverage map[string]int `json:"coverage"`
+		Text     []string       `json:"text"`
+	}{"DRAFT", "controlled synthetic fixtures through formal source-bound HD renderer; normal-controller and GUI checks separate; no normal-flow, save or original-executable parity claim", g.cases, g.coverage, g.text}
+	raw, e = json.MarshalIndent(result, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(dir, "results.json"), append(raw, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+	fmt.Printf("matrix-v7 complete: %d cases, %d source layers, %d text records\n", g.index, len(g.coverage), len(g.text))
+}
+
+type matrixValidatingV7 struct{ *matrixGameV7 }
+
+func (g *matrixValidatingV7) Draw(screen *ebiten.Image) {
+	if !g.h.pages.validated {
+		if e := g.h.ValidatePageSources(g.s); e != nil {
+			g.err = e
+			return
+		}
+	}
+	g.matrixGameV7.Draw(screen)
+}

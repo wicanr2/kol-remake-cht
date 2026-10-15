@@ -38,22 +38,30 @@ func drawItemPageCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transla
 		}
 	}
 	if !interactionBase {
-		b := town.SheetPageBack
-		for _, c := range town.SheetPageBackPieces(wild) {
-			pic, err := sprites.Get(b.Archive, c.Index)
-			if err != nil {
-				return err
+		if used, err := drawEquipmentBackdropHD(dst, wild); err != nil {
+			return err
+		} else if !used {
+			b := town.SheetPageBack
+			for _, c := range town.SheetPageBackPieces(wild) {
+				pic, err := sprites.Get(b.Archive, c.Index)
+				if err != nil {
+					return err
+				}
+				drawScaled(dst, pic, b.X*s, c.Y*s, s)
 			}
-			drawScaled(dst, pic, b.X*s, c.Y*s, s)
 		}
 
 		// SPEC-031第11節：與英文完整清單共用七層合成及遮擋順序。
-		for _, piece := range p.Figure {
-			pic, err := pieceImage(sprites, piece)
-			if err != nil {
-				return err
+		if used, err := drawEquipmentHD(dst, sprites, p.Figure, s); err != nil {
+			return err
+		} else if !used {
+			for _, piece := range p.Figure {
+				pic, err := pieceImage(sprites, piece)
+				if err != nil {
+					return err
+				}
+				drawScaled(dst, pic, piece.X*PixelsPerByte*s, piece.Y*s, s)
 			}
-			drawScaled(dst, pic, piece.X*PixelsPerByte*s, piece.Y*s, s)
 		}
 
 		right := scaleRect(l.RightPane, s)
@@ -174,23 +182,31 @@ func drawPartyPageCJK(dst *ebiten.Image, sprites Sprites, pieces []portrait.Piec
 		return err
 	}
 	drawScaled(dst, bg, 0, 0, s)
-	b := town.SheetPageBack
-	for _, c := range town.SheetPageBackPieces(wild) {
-		pic, err := sprites.Get(b.Archive, c.Index)
-		if err != nil {
-			return err
+	if used, err := drawEquipmentBackdropHD(dst, wild); err != nil {
+		return err
+	} else if !used {
+		b := town.SheetPageBack
+		for _, c := range town.SheetPageBackPieces(wild) {
+			pic, err := sprites.Get(b.Archive, c.Index)
+			if err != nil {
+				return err
+			}
+			drawScaled(dst, pic, b.X*s, c.Y*s, s)
 		}
-		drawScaled(dst, pic, b.X*s, c.Y*s, s)
 	}
 	r := scaleRect(town.PartyPageFrame, s)
 	frame(dst, r.X0, r.Y0, r.Width(), r.Height(), town.ColourSheetFrame)
 	shadow(dst, r.X0, r.Y0, r.Width(), r.Height())
-	for _, piece := range pieces {
-		pic, err := pieceImage(sprites, piece)
-		if err != nil {
-			return err
+	if used, err := drawEquipmentHD(dst, sprites, pieces, s); err != nil {
+		return err
+	} else if !used {
+		for _, piece := range pieces {
+			pic, err := pieceImage(sprites, piece)
+			if err != nil {
+				return err
+			}
+			drawScaled(dst, pic, piece.X*PixelsPerByte*s, piece.Y*s, s)
 		}
-		drawScaled(dst, pic, piece.X*PixelsPerByte*s, piece.Y*s, s)
 	}
 	return nil
 }

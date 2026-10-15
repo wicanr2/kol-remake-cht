@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-equipment-pages-20261015',
     'hd-character-templates-20261014',
     'hd-spell-scroll-runtime-20261014',
     'hd-spell-scroll-20261014',

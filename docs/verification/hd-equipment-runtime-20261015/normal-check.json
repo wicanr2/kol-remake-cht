@@ -1,0 +1,438 @@
+{
+  "schema": "kol-hd-equipment-normal-check/1",
+  "cases": [
+    {
+      "case": "human-slots",
+      "states": 31,
+      "trace_equal": true,
+      "text_equal": true,
+      "ega_rgb_and_alpha_equal": true,
+      "trace_sha256": "fd9d3b146481972f3974df5f6965df0158b6b972d9bc1b6caeee4aace6e706d5",
+      "text_sha256": "2854e3e660a16b9e9fce990b1d160bfd3b7872ce71a913724e1d5050dcc52825",
+      "intentional_hd_changes": [
+        {
+          "file": "step-002.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-003.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-004.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-005.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-006.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-007.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-008.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-009.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-010.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-011.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-012.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-013.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-014.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-015.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-016.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-017.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-018.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-019.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-020.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-021.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-022.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-023.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-024.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-025.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-026.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-027.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-028.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-029.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-030.png",
+          "max_delta": 255
+        }
+      ]
+    },
+    {
+      "case": "body5-slots",
+      "states": 35,
+      "trace_equal": true,
+      "text_equal": true,
+      "ega_rgb_and_alpha_equal": true,
+      "trace_sha256": "d83f2ac48c6cb4f053eea9bb799ec23890e970a9f671ae01660e1cf6b58e579b",
+      "text_sha256": "e3ead692c1a894a4bdc6cdc8e133208b6c993d0939eb6ca229f2dfee69bbee2e",
+      "intentional_hd_changes": [
+        {
+          "file": "step-003.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-004.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-005.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-006.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-007.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-008.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-009.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-010.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-011.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-012.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-013.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-014.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-015.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-016.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-017.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-018.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-019.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-020.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-021.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-022.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-023.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-024.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-025.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-026.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-027.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-028.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-029.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-030.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-031.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-032.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-033.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-034.png",
+          "max_delta": 255
+        }
+      ]
+    },
+    {
+      "case": "six-build-party",
+      "states": 40,
+      "trace_equal": true,
+      "text_equal": true,
+      "ega_rgb_and_alpha_equal": true,
+      "trace_sha256": "5de24b27698db4b05af4a511e70d52266a6efd9a5b298ce1f6494575b77f473e",
+      "text_sha256": "814225b648213eae37c6eac873560ff16f34c01eb496f2abe4b302dbfd2a46fc",
+      "intentional_hd_changes": [
+        {
+          "file": "step-002.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-003.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-004.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-005.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-006.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-007.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-008.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-009.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-010.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-011.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-012.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-013.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-014.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-015.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-016.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-017.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-018.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-019.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-020.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-021.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-022.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-023.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-024.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-025.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-026.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-027.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-028.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-029.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-030.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-031.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-032.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-033.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-034.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-035.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-036.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-037.png",
+          "max_delta": 1
+        },
+        {
+          "file": "step-038.png",
+          "max_delta": 255
+        },
+        {
+          "file": "step-039.png",
+          "max_delta": 1
+        }
+      ]
+    }
+  ],
+  "normal_from_title": true,
+  "seed": 1,
+  "source_original_seed": null,
+  "limits": "Remake normal-controller regression; no original oracle. Limited formal equipment regression, Linux container scope only."
+}

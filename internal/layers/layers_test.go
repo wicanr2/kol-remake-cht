@@ -20,7 +20,8 @@ const module = "github.com/wicanr2/kol-remake-cht/"
 // 而改表就是一次看得見的決定。`cmd/kol` 是最外層，可以依賴全部。
 var allowed = map[string][]string{
 	// 資料與規則：彼此獨立，沒有 UI、沒有 Ebitengine。
-	"internal/assets":     {},
+	"internal/assets":     {"internal/hdart"},
+	"internal/hdart":      {},
 	"internal/battle":     {},
 	"internal/bitmapedit": {},
 	"internal/book":       {},
@@ -47,7 +48,7 @@ var allowed = map[string][]string{
 	"internal/screen": {},
 	"internal/ui": {
 		"internal/battle", "internal/bitmapedit", "internal/book", "internal/charcreate",
-		"internal/ending", "internal/font", "internal/i18n", "internal/portrait",
+		"internal/ending", "internal/font", "internal/hdart", "internal/i18n", "internal/portrait",
 		"internal/roster", "internal/town", "internal/world",
 	},
 }

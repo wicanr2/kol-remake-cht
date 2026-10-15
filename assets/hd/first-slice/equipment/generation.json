@@ -1,0 +1,1117 @@
+{
+  "schema": "kol-hd-equipment-generation/1",
+  "status": "READY",
+  "images": [
+    {
+      "id": "head0",
+      "file": "headpics-build0-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-94ff80ea-6499-4675-9951-e6cbc54815de.png",
+      "prompt": "prompts/head0.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "51e9f79ef728be7a9431cc81cd0b71972cedce5e828c7415cd2af536c836b5ed",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "b6265018fefa58c5fa6651e0518943297db3810c0d8dda88a36e56f1c092ffd1"
+    },
+    {
+      "id": "headpics-build1",
+      "file": "headpics-build1-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-42c14e5e-5be9-40ef-824b-39a652f827a8.png",
+      "prompt": "prompts/headpics-build1.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "864f9cb14a68fc890b9661657b4976169abaabeb1397af7f0315bc30794dfbce",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "3ee1d1eeb415724fceb18b4546b5d23a2bfa1897ce713fc38b95c5399d04006c",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        89,
+        50,
+        1220,
+        1168
+      ]
+    },
+    {
+      "id": "headpics-build2",
+      "file": "headpics-build2-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-15781450-a89e-4045-9462-a2d230e94c31.png",
+      "prompt": "prompts/headpics-build2.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "f67e5d5a21b6ba1063a8fdd2ad4582063527aa9900526d8f3d84596d9786bfaf",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "bfa7e5c9b93cb2212aec42c12d8edd1478ae7276d614a08dcc5f3cf003b1110f",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        33,
+        75,
+        1224,
+        1235
+      ]
+    },
+    {
+      "id": "headpics-build3",
+      "file": "headpics-build3-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-232b476c-214e-41f9-9217-4e019d3d9f2c.png",
+      "prompt": "prompts/headpics-build3.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "cc7ae5cc1dee9c6824ca394963dee37cecc5e049c14f74c5f3a46d00d11f1e9a",
+      "size": [
+        1245,
+        1263
+      ],
+      "prompt_sha256": "63506065c0f8eb28fca9e8da3445ad82eaad0d184ea7160c4fe0abccda6df4fd",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        45,
+        26,
+        1191,
+        1212
+      ]
+    },
+    {
+      "id": "headpics-build4",
+      "file": "headpics-build4-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-a13a9f67-4f3c-41ec-a4ba-6e00a833a487.png",
+      "prompt": "prompts/headpics-build4.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "73d6c1347e2822e75296806d3e2e14915c637fe83b215a7c7db6ec49f90cb060",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "3127a6c0a0635c8281fee83a4fa3b9c1e66c672e3571ede85a1e76d78b3e7757",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        51,
+        44,
+        1206,
+        1220
+      ]
+    },
+    {
+      "id": "headpics-build5",
+      "file": "headpics-build5-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-8ea7a277-4da8-411a-b683-193156e837f5.png",
+      "prompt": "prompts/headpics-build5.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "71ce34be78810e2b6586ca341e3ce8a880ade495c63e126afec718dae5a8081e",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "bec552fe566f502c0005f05b4aa1d2f97e699dc1d08881c4a0f27e7724a959b2",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        55,
+        52,
+        1228,
+        1174
+      ]
+    },
+    {
+      "id": "leg-native-correction",
+      "file": "legspics-build0-01-native-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-4d11d9f4-23fe-4549-91a5-6d6813945a43.png",
+      "prompt": "prompts/leg-native-correction.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "e591c5bfbd564908ab91bf28dd02ca48fc21daf0ba632edd6284b089ce69e3a7",
+      "size": [
+        1774,
+        887
+      ],
+      "prompt_sha256": "52674dfbc07a28f8e086a40375e4cd939a915542aec2053cf7ad1d4915aaeb68",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        109,
+        29,
+        1666,
+        844
+      ]
+    },
+    {
+      "id": "legs0_complete",
+      "file": "legspics-build0-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-0496141c-b0b2-4bfa-81fc-b4d499305f69.png",
+      "prompt": "prompts/legs0_complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "203ae550c604a952bebb79efb445d104fafa3090ba05d42776e9f5b3080f66a3",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "8a4a062f5feaac73d7532bce8cc00241602c3b98831000b9a4684b04f590e859"
+    },
+    {
+      "id": "legspics-build1-complete",
+      "file": "legspics-build1-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-67e780a3-a9a4-444a-a998-580bf5553c6b.png",
+      "prompt": "prompts/legspics-build1-complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "6836ad382f4be1fd39eddcb580056e3b1170e6a590124a113468a680897d62d0",
+      "size": [
+        1173,
+        1341
+      ],
+      "prompt_sha256": "9bbc1d289ceec0a53888040570ab52197314be3996280fe7516a9b451bcbab7b",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        51,
+        8,
+        1124,
+        1300
+      ]
+    },
+    {
+      "id": "legspics-build2-complete",
+      "file": "legspics-build2-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-a1334793-9a65-4208-8c4c-82c4e4fc0779.png",
+      "prompt": "prompts/legspics-build2-complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "caab8230fd8f31ebe5708931eb35f53f000f029799212bb6779e33aba7b44e4d",
+      "size": [
+        1355,
+        1161
+      ],
+      "prompt_sha256": "dc1e8d2b7527da9b77431e706269b1a0a02c2653bd1528296f2bf0dcbb17938c",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        19,
+        28,
+        1328,
+        1094
+      ]
+    },
+    {
+      "id": "legspics-build3-detail-row0-bare-feet",
+      "file": "legspics-build3-detail-row0-bare-feet-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-7cf068b8-4d05-4df4-84b6-20194c7ae4f4.png",
+      "prompt": "prompts/legspics-build3-detail-row0-bare-feet.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "80a3923dbf2599de334332bc13084a28e54ed1b1026f535aea8b29e7b565e7a1",
+      "size": [
+        1536,
+        1024
+      ],
+      "prompt_sha256": "1ef173a89ea0291ee4b17132bdde9cafa54fdb6709626ba23fdf01c88cdb3c10",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "alpha_bbox_8": [
+        14,
+        36,
+        1523,
+        952
+      ]
+    },
+    {
+      "id": "legspics-build3-detail-row1",
+      "file": "legspics-build3-detail-row1-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-84070f66-65f9-46af-a3b5-242252d620d9.png",
+      "prompt": "prompts/legspics-build3-detail-row1.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "46414508f605cccf7e324741719b979e816702bd1225d3f9f1932a1bdb468eaf",
+      "size": [
+        1619,
+        971
+      ],
+      "prompt_sha256": "cbfda85e4831a43e2338a41858547a361c967d40cb2b9c043d11f75aa292c78f",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        43,
+        54,
+        1590,
+        909
+      ]
+    },
+    {
+      "id": "legspics-build3-detail-row2",
+      "file": "legspics-build3-detail-row2-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-3e05cf5b-759a-416c-a615-06f4f4065163.png",
+      "prompt": "prompts/legspics-build3-detail-row2.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "c3f23d628f53e7a2c5aeaa7f98ea802a32ac91a398ca28ca0a125f2e5b391900",
+      "size": [
+        1536,
+        1024
+      ],
+      "prompt_sha256": "c8cd60b6c9f5999a21a18762f1164032b633be15c3ee897f88c80e28da373863",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "alpha_bbox_8": [
+        27,
+        56,
+        1517,
+        972
+      ]
+    },
+    {
+      "id": "legspics-build4-complete",
+      "file": "legspics-build4-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-356caab9-9683-4af5-a08d-f015ad7446d1.png",
+      "prompt": "prompts/legspics-build4-complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "32d9c89e6346891bb80683b5f3c6f99ef44f36a893893a4d3431c13065fe4bdb",
+      "size": [
+        1163,
+        1353
+      ],
+      "prompt_sha256": "b59998542acdaa3ea79baca1acd2340169c33282dc4b8f8b771be267c1a09ea1",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        51,
+        0,
+        1114,
+        1300
+      ]
+    },
+    {
+      "id": "legspics-build5-armor-only",
+      "file": "legspics-build5-armor-only-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-e5afdbe9-1150-40a9-958d-cc38521a7b8e.png",
+      "prompt": "prompts/legspics-build5-armor-only.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "ce0db9036e70838f2ecdd60c3e8fe7017f844142f81d9c5fb8d37fcb7fc7f072",
+      "size": [
+        1499,
+        1049
+      ],
+      "prompt_sha256": "0daaf5ff1b01edd868f95524b4d0153ff26855109eede78b71eac51e45bfa74d",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        50,
+        108,
+        1485,
+        860
+      ]
+    },
+    {
+      "id": "legspics-build5-complete-initial",
+      "file": "legspics-build5-complete-initial-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-dfd3b26e-b9c9-4ab9-8c83-d94332724ae4.png",
+      "prompt": "prompts/legspics-build5-complete-initial.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "71175895dabc71386777998a0b09c2caa0eddb9bad955a070e463b0715d88719",
+      "size": [
+        1024,
+        1536
+      ],
+      "prompt_sha256": "aca9d97ce132d9981b49a966e152f8582eb90356973b524a74700dff652527c5",
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "initial_review": "REJECTED: painted background; transparency must be corrected",
+      "review": "Actual background samples alpha=0 and full RGB compositing check passed; preview displayed RGB of transparent pixels. Foreground alpha 253..254 is preserved unchanged; no background extraction needed.",
+      "alpha_composite_check": "composition/female-elf-legs-alpha-check.png",
+      "alpha_composite_check_sha256": "856c7055f8a1ef30b065fdd2ab5a7d516c660ca9aec21e3f658f77ecff931b22"
+    },
+    {
+      "id": "outdoorback",
+      "file": "outdoor-back-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-78b0f90f-8ad5-4672-abd4-500db19937db.png",
+      "prompt": "prompts/outdoorback.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "9d796cc22e16b8c877cafc3e1a7177b5f6cf674e49d5dcf04c8ef3789303b94a",
+      "size": [
+        1708,
+        921
+      ],
+      "prompt_sha256": "fc3542b9b53882c44600127c69d9ae2264dcdcb1df1b0c3d3c35e1672b0e9fe7"
+    },
+    {
+      "id": "000",
+      "file": "perpics-000-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-c920d985-cb31-40b9-8f95-e1bcdd472461.png",
+      "prompt": "prompts/000.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "4a4175f0a48d331d8a96747b3107d183fd9e35b4bb8a104f9c489ec5a5299a08",
+      "size": [
+        1049,
+        1500
+      ],
+      "prompt_sha256": "e139e7a2529c7eb4dfc0f59d2524cc465eb3c799c143844988ea105b94bf4a67"
+    },
+    {
+      "id": "001",
+      "file": "perpics-001-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-7ef1daf1-4da2-4fa2-8abc-96b53a054e12.png",
+      "prompt": "prompts/001.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "e74bfc2b648b985d473d5b3fc8bf3f2cbc520174d2dd51ed7eebcb9a3c0d24ae",
+      "size": [
+        953,
+        1651
+      ],
+      "prompt_sha256": "f50aac0d662ce45ca9dc30760b6581cb20048193a413b5e0f310e5b57f58e5b7"
+    },
+    {
+      "id": "002",
+      "file": "perpics-002-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-14dca6c3-eca9-405c-8331-46bcd4f08f28.png",
+      "prompt": "prompts/002.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "e50145df4b71d8d398398060462e572081a536531295c6c91439bec16632a7fb",
+      "size": [
+        1330,
+        1182
+      ],
+      "prompt_sha256": "635cd7b24bd2f87b930ad0e418bb517ad7c0c50d7f461e353f3ac9ccdf838484"
+    },
+    {
+      "id": "perpics-003-separate-layers",
+      "file": "perpics-003-separate-layers-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-cbf6a7fe-5b77-42a8-928e-9ef450e3bc19.png",
+      "prompt": "prompts/perpics-003-separate-layers.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "b1a4bfd4747dc5075058ea1a9e76ffae59b4ca1f986149d7328b3478eec80e49",
+      "size": [
+        1411,
+        1114
+      ],
+      "prompt_sha256": "6ca0fdccd0e268196eab406074754576f4091d62fafca565b5fdfb9578c26b13",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        74,
+        7,
+        1411,
+        1101
+      ]
+    },
+    {
+      "id": "004",
+      "file": "perpics-004-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-624d690a-8df0-43e8-bff9-9b3680cb7b42.png",
+      "prompt": "prompts/004.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "7dd6ef854add86384cb6532be07e29fa89ca9499bc84aa78b0ce712dc99e8e8d",
+      "size": [
+        1049,
+        1500
+      ],
+      "prompt_sha256": "860bb998cd31e22041226319175ec31bec8a6785780971a5a0b97866e3a69270"
+    },
+    {
+      "id": "005",
+      "file": "perpics-005-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-5757787f-9db8-4cb3-bc73-4e4c193b57a7.png",
+      "prompt": "prompts/005.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "1a323b9b1ca8428bd991700daeccf8b2fcc912bfa5db26f1940fa2e6a5375bfa",
+      "size": [
+        894,
+        1759
+      ],
+      "prompt_sha256": "89b60340c9c71ccf768ff89946a4efa85c2c3f120a7fa550924d24b6ba580dc7"
+    },
+    {
+      "id": "shields",
+      "file": "shldpics-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-bc39ff4d-901e-41c7-b7da-86e0fe5efbdc.png",
+      "prompt": "prompts/shields.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "20348ff763b75f999d0b8620c1b93cd2c965b1b869ee835a7c90a99bac82ffa0",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "29495276cd7d287b28e59664c658ffb2a6c4b8166776829479ce4eb4b0aef020"
+    },
+    {
+      "id": "torpics-036-waist-seam",
+      "file": "torpics-036-waist-seam-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-638eb6f5-0e61-431a-bb67-6ca120aed90e.png",
+      "prompt": "prompts/torpics-036-waist-seam.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "35e2a205e3f1679dba1120acf4bd3bb8e7e859bb89f50a64a0b5672475c4eccd",
+      "size": [
+        1402,
+        1122
+      ],
+      "prompt_sha256": "070dcf9d1d6faf9d2a90a0563d5d5f5cd22ea90c9f8db4fc76dda7675ccc31ee",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        84,
+        104,
+        1313,
+        1070
+      ]
+    },
+    {
+      "id": "torpics-037-skin-hands",
+      "file": "torpics-037-skin-hands-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-5119b1b1-bead-435d-9c42-d67f8758e59f.png",
+      "prompt": "prompts/torpics-037-skin-hands.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "ee96391ae0c66958eab5fa41fef9029a7af1200f8df108b13948396c682d8a11",
+      "size": [
+        1355,
+        1160
+      ],
+      "prompt_sha256": "caa2f6da225d6822d3d589d0149162387a1fca54249e683faf09e9aa86cb94e4",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        77,
+        121,
+        1276,
+        1117
+      ]
+    },
+    {
+      "id": "tor0_complete",
+      "file": "torpics-build0-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-a4a2dc7f-bdff-4695-869d-fcb72563d460.png",
+      "prompt": "prompts/tor0_complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "f1e8d454a097b29a049ead6cfaf354f700af63e9f47d373ddc5cd06fce929654",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "989b601c968e48d814ee6bfb567699ff74ea5bc2a9c4e15824a86d95feef8439"
+    },
+    {
+      "id": "torpics-build1-complete",
+      "file": "torpics-build1-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-cb9aa23d-7287-4b51-aa0d-d21e376021ea.png",
+      "prompt": "prompts/torpics-build1-complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "f80452e29d0a068cd398c939ba609adc325e562b6bfd7409ec45fa2544c7ffc5",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "b0bb5a26f3d3e781627c86122d92156e11522334f80f456b476cc9789234791f",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        18,
+        20,
+        1242,
+        1219
+      ]
+    },
+    {
+      "id": "torpics-build2-complete",
+      "file": "torpics-build2-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-73536272-c6f9-43c1-a088-ab7ec43c181e.png",
+      "prompt": "prompts/torpics-build2-complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "31fd3edfac23262fd564b6bda70ea0f74bb8e2ef6603ba4ada26a11188e220a4",
+      "size": [
+        1484,
+        1060
+      ],
+      "prompt_sha256": "91ef49fdf4f9071d6fa0c3a84c7256018172a826fc0cdff8f8661baf03f02d82",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        18,
+        34,
+        1467,
+        998
+      ]
+    },
+    {
+      "id": "torpics-build3-detail-row0",
+      "file": "torpics-build3-detail-row0-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-79a7a265-3bf2-42ef-a05a-5614e9c653a8.png",
+      "prompt": "prompts/torpics-build3-detail-row0.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "92055429376b768a139cc92607a26bba248a6a0d0b617ebd6d71b9c001b19a56",
+      "size": [
+        2004,
+        785
+      ],
+      "prompt_sha256": "d68f5b42a8f3c072e4941e4967b81e1e7c6c5f14c5ba35601e94d40abc3d3189",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        33,
+        61,
+        1973,
+        724
+      ]
+    },
+    {
+      "id": "torpics-build3-detail-row1",
+      "file": "torpics-build3-detail-row1-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-c615f435-61e5-4dbd-9686-822bf9c4e818.png",
+      "prompt": "prompts/torpics-build3-detail-row1.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "5e52df7bd73dcec80ed3d544811b2e9c6b83443fe11a13281477f38f68d900b8",
+      "size": [
+        2004,
+        785
+      ],
+      "prompt_sha256": "91f30579a36363d2f82c9c83820b06f308ae14da3bf3d5a155418a098e4bf173",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        28,
+        68,
+        1967,
+        692
+      ]
+    },
+    {
+      "id": "torpics-build3-detail-row2",
+      "file": "torpics-build3-detail-row2-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-da4dedbf-8cdf-4d1d-8da1-bbfb15dee5a6.png",
+      "prompt": "prompts/torpics-build3-detail-row2.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "805dd540c609b8d715c70cdab13dbb4ff740c377d6d39b7b08df814ceb3e7a6f",
+      "size": [
+        2004,
+        785
+      ],
+      "prompt_sha256": "2358d31a9e477736c147bceab20cd0766dedb9273d2cc6e026af38cf6cec3760",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        37,
+        69,
+        1958,
+        666
+      ]
+    },
+    {
+      "id": "torpics-build4-complete",
+      "file": "torpics-build4-complete-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-9500a332-ba6a-42e9-8725-a4910d025c8e.png",
+      "prompt": "prompts/torpics-build4-complete.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "10bdb065396f57bad439ac66613e71a17235180c57292d0b37f07e02f8f41615",
+      "size": [
+        1355,
+        1161
+      ],
+      "prompt_sha256": "65d0d5f4b9098b9f86997250fc5154b1f5ac73cf0595337edaa36a5c55232c62",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        27,
+        47,
+        1336,
+        1112
+      ]
+    },
+    {
+      "id": "torpics-build5-row0",
+      "file": "torpics-build5-row0-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-a587052f-6bfc-49e5-b352-086967ad8580.png",
+      "prompt": "prompts/torpics-build5-row0.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "e59cd199b9b2f54c9cb3edeadae4c54cb0dffc0afed59353602deeabf1d0b68c",
+      "size": [
+        2172,
+        724
+      ],
+      "prompt_sha256": "10a9ded707927f21619d6fa42538464c0ee030e36562a6845fb0675c57d51bbb",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        41,
+        33,
+        2131,
+        703
+      ]
+    },
+    {
+      "id": "torpics-build5-row1",
+      "file": "torpics-build5-row1-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-cc213b4d-30d1-4a4e-9133-d2fa7032fa67.png",
+      "prompt": "prompts/torpics-build5-row1.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "2a507c9482add13f354d78870fc0434902fd9dc190b2882a4ed59ec403a77f57",
+      "size": [
+        2172,
+        724
+      ],
+      "prompt_sha256": "84b42536b6af1799b6f8dfccbc9b2224aec2fa98bed38ee5a1bee0249a85420f",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        40,
+        45,
+        2130,
+        673
+      ]
+    },
+    {
+      "id": "torpics-build5-row2",
+      "file": "torpics-build5-row2-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-bf46cf9c-f7ec-460a-8026-c127c6514dd8.png",
+      "prompt": "prompts/torpics-build5-row2.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "e9191bf432ff32901eb12aabebc6a8c63d130c3e6cff1a89629cff1939de6d13",
+      "size": [
+        2172,
+        724
+      ],
+      "prompt_sha256": "d4d3818cfd9bc3d1950f3c9ceb5429d324db5a4e293c80112bef19dc3bb0fe42",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        59,
+        52,
+        2112,
+        686
+      ]
+    },
+    {
+      "id": "townback",
+      "file": "town-back-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-cf14f7d8-5cd5-4fd0-a383-600afb9e6281.png",
+      "prompt": "prompts/townback.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "2b6e4f05333a9fd60a7b0902108e2fb968543182af63cc4624def8d3a846f1c3",
+      "size": [
+        1708,
+        920
+      ],
+      "prompt_sha256": "335db70c7a67063c0b0dc9c9563442f52e61d816fd7c9eb735d0032c8cae8b24"
+    },
+    {
+      "id": "weapons-bows",
+      "file": "weapons-bows-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-1cb2b10e-afe8-43db-b300-1b61801aa7f6.png",
+      "prompt": "prompts/weapons-bows.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "99d4c563369198fe560a292cf6ff0303299b11781b89883cc6902f7d5160d674",
+      "size": [
+        1526,
+        1030
+      ],
+      "prompt_sha256": "21701f58d5e8443282f62cebb662cc9925255872155059c179b6b54476025c23",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        46,
+        107,
+        1482,
+        898
+      ]
+    },
+    {
+      "id": "weapons-club-mace-dagger",
+      "file": "weapons-club-mace-dagger-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-1eef8a75-5a9c-480f-a1f2-0bf16de670d6.png",
+      "prompt": "prompts/weapons-club-mace-dagger.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "e4e0d908ac4467d2ad3ffcd3f16cdd73dc4c185908ec99f1f83bc3070f721652",
+      "size": [
+        1478,
+        1064
+      ],
+      "prompt_sha256": "4960d3c5ba28e414619e11d8a2c354f528dafce117c9ebd35d683c71a38bc55b",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        221,
+        219,
+        1264,
+        947
+      ]
+    },
+    {
+      "id": "weapons-crossbows",
+      "file": "weapons-crossbows-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-ce15b8f7-32e1-4f4b-8832-90c625ec9707.png",
+      "prompt": "prompts/weapons-crossbows.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "7abd5534ea3e6efb4ae09485201bf8b2bcb1ab3a60b58afc920175b82fedf4fe",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "d526b9c0943567ba8a175dc5b23cb13dea79a553489302dc73810f1e7c54840a",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        194,
+        67,
+        1107,
+        1203
+      ]
+    },
+    {
+      "id": "weapons-flails",
+      "file": "weapons-flails-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-14807710-dac5-40ab-9e96-c0203bfd138c.png",
+      "prompt": "prompts/weapons-flails.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "09b825ce3d859df1500b66890116ef3e32170dd2dfb9de3a0dde5ad2eb6964d2",
+      "size": [
+        1635,
+        962
+      ],
+      "prompt_sha256": "cfe71da812e42393ade772d7da66589d2436a28624e8a2707a35760b5baf76d5",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        117,
+        91,
+        1549,
+        906
+      ]
+    },
+    {
+      "id": "weapons-hammers",
+      "file": "weapons-hammers-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-66585325-90c6-4d53-ad28-c86806e89f10.png",
+      "prompt": "prompts/weapons-hammers.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "9c6ff3eed543113ef84790c57f6a07237de86495c85a0f384e0470944c612c73",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "68ed8f4b16dbfa290bff0c5554544f78edc15504234291dbe5664f118a84eacd",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        65,
+        55,
+        1188,
+        1214
+      ]
+    },
+    {
+      "id": "weapons-long-shafts",
+      "file": "weapons-long-shafts-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-809cae85-80d7-4199-8a3b-e27cf70b3051.png",
+      "prompt": "prompts/weapons-long-shafts.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "7e7f07207013d9cd35f30a441d24941fd43eceaa2e15557769852ec876b29970",
+      "size": [
+        1724,
+        912
+      ],
+      "prompt_sha256": "92535cd4464e4be5968cd1c108b0836a057ae5afc080e1953a1d1a3a34ebfba3",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        37,
+        257,
+        1688,
+        642
+      ]
+    },
+    {
+      "id": "weapons-poleaxes-spear",
+      "file": "weapons-poleaxes-spear-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-011c14cc-ad1d-4027-bcf6-782855cd9cb0.png",
+      "prompt": "prompts/weapons-poleaxes-spear.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "1beb7855ef4cc29a237e8a3283b05ae3ea50d0194f797316067a493e0b8d5e84",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "badaf8d97ad389271e2ea49dec98fad15341ca00085735370aa37c00ee102f0d",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        56,
+        55,
+        1219,
+        1186
+      ]
+    },
+    {
+      "id": "weapons-swords-axes",
+      "file": "weapons-swords-axes-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-b9c8b8ee-38f8-489c-b1a2-6c856284cfeb.png",
+      "prompt": "prompts/weapons-swords-axes.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "79bffdd033434d4c6fefb98f592373323a8bb3993dd8bc442474da79892e4737",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "65efb1c0396e92cfcf12a79d4617deaf0b5e39d7b543e4803529455539fea69f",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        31,
+        79,
+        1225,
+        1195
+      ]
+    },
+    {
+      "id": "weapons-swords",
+      "file": "weapons-swords-painted.png",
+      "tool": "built-in image_gen",
+      "original_path": "/home/anr2/.codex/generated_images/01a12abd-f26b-7dc0-aea1-ac9d82212b12/exec-cb41d313-beb0-45c8-a722-0535a27c74f2.png",
+      "prompt": "prompts/weapons-swords.txt",
+      "status": "READY: verified native source for equipment group",
+      "sha256": "6b50a8aa2a4800676c5b932f98ec3325e99d027753af67bcc7116d8902785b0f",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt_sha256": "81cc35c587fe0e909b653257935dbe2b9a9b414a745526eb4303dc0f80d732eb",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_8": [
+        76,
+        96,
+        1202,
+        1172
+      ]
+    }
+  ],
+  "source_entries": {
+    "source_file": "Knights-of-legend.zip",
+    "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+    "count_basis": "existing verified extractor manifest for identical ZIP; actual 212 PNG inventory checked separately",
+    "entries": [
+      {
+        "entry": "Knights-of-legend/PERPICS.0",
+        "size": 14921,
+        "sha256": "a164492edc146880b5ba809d0898a19c4758fc1ea1e1c3966a7dce96871fb5bc",
+        "payload_count_from_verified_manifest": 12
+      },
+      {
+        "entry": "Knights-of-legend/WEAPPICS.0",
+        "size": 9169,
+        "sha256": "d3349075d7d8a886fb70a624f267e93bbd21bd7c915e82325884d95135f15533",
+        "payload_count_from_verified_manifest": 56
+      },
+      {
+        "entry": "Knights-of-legend/HANDPICS.0",
+        "size": 990,
+        "sha256": "cfd10a817e2e31c5ddd233385da9231f29d9f3b8e4937ace8481913b342b16e6",
+        "payload_count_from_verified_manifest": 24
+      },
+      {
+        "entry": "Knights-of-legend/SHLDPICS.0",
+        "size": 2614,
+        "sha256": "95f089d3c0d7b276c61676dfbd0ed577dce180d541b6603963060dd60e793190",
+        "payload_count_from_verified_manifest": 8
+      },
+      {
+        "entry": "Knights-of-legend/HEADPICS.0",
+        "size": 17354,
+        "sha256": "4e7bab933bac577de88898bb6960b0ec996b651b15fa23713113445a64e28643",
+        "payload_count_from_verified_manifest": 108
+      },
+      {
+        "entry": "Knights-of-legend/TORPICS.0",
+        "size": 56394,
+        "sha256": "73d07cb9be7045c3df6c3f58a2b9801031acd39b03c3707a47dd00f6199587e3",
+        "payload_count_from_verified_manifest": 108
+      },
+      {
+        "entry": "Knights-of-legend/LEGSPICS.0",
+        "size": 39694,
+        "sha256": "abd0829202046cba341e1477b887786e760187f9a1b16cd688f1eaa9ab2ce32f",
+        "payload_count_from_verified_manifest": 108
+      },
+      {
+        "entry": "Knights-of-legend/KOLPICS.0",
+        "size": 35201,
+        "sha256": "502367c613109eb326e57c54a727c8e3e414c1f8c3d73c9ad16497c453b8b402",
+        "payload_count_from_verified_manifest": 14
+      }
+    ]
+  },
+  "correction": {
+    "status": "DRAFT correction accepted for prototype verification",
+    "tool": "image_gen built-in; transparent_background=true",
+    "source_file": "exec-4d11d9f4-23fe-4549-91a5-6d6813945a43.png",
+    "output_file": "legspics-build0-01-native-painted.png",
+    "sha256": "e591c5bfbd564908ab91bf28dd02ca48fc21daf0ba632edd6284b089ce69e3a7",
+    "size": [
+      1774,
+      887
+    ],
+    "prompt_file": "leg-native-correction-prompt.txt",
+    "prompt_sha256": "52674dfbc07a28f8e086a40375e4cd939a915542aec2053cf7ad1d4915aaeb68",
+    "parts": [
+      {
+        "key": "LEGSPICS:0",
+        "old_native_size": [
+          287,
+          346
+        ],
+        "new_native_size": [
+          680,
+          814
+        ],
+        "target": [
+          258,
+          354
+        ],
+        "rect": [
+          109,
+          29,
+          789,
+          843
+        ],
+        "world_unchanged": true
+      },
+      {
+        "key": "LEGSPICS:1",
+        "old_native_size": [
+          286,
+          342
+        ],
+        "new_native_size": [
+          682,
+          812
+        ],
+        "target": [
+          258,
+          348
+        ],
+        "rect": [
+          984,
+          32,
+          1666,
+          844
+        ],
+        "world_unchanged": true
+      }
+    ],
+    "other_167_parts_unchanged": true,
+    "all_169_parts_cover_native_target": true,
+    "rights": "project HD redraw; original source identity metadata private GitHub only"
+  },
+  "rights": "Project HD redraws; source identities private GitHub only; no typed source anchors or original archives included"
+}

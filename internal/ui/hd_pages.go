@@ -70,6 +70,12 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 		if h.fingerprint(pic) != source.RGB {
 			return fmt.Errorf("HD頁面來源%s第%d圖指紋不符", source.Archive, source.Index)
 		}
+		if h.equipment != nil {
+			if size, ok := h.equipment.SourceSizes[fmt.Sprintf("%s:%d", source.Archive, source.Index)]; ok &&
+				(pic.Bounds().Dx() != size[0] || pic.Bounds().Dy() != size[1]) {
+				return fmt.Errorf("HD裝備來源%s第%d圖實際尺寸不符", source.Archive, source.Index)
+			}
+		}
 		if source.Archive == "CHARPICS" && (pic.Bounds().Dx() != 40 || pic.Bounds().Dy() != 38) {
 			return fmt.Errorf("HD角色來源第%d圖須為40×38", source.Index)
 		}

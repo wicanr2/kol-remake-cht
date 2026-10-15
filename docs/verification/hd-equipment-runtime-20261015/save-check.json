@@ -1,0 +1,15 @@
+{
+  "schema": "kol-hd-action-save-check/1",
+  "rest_script": "L R RET SPACE > > > > RET RET",
+  "rest_states": 11,
+  "reload_states": 5,
+  "normal_save_equal_except_saved_at": true,
+  "reload_file_unchanged": true,
+  "old_v3_from_baseline": {
+    "sha256": "613ccf3e385dd1a4cb59ff7c662f64585e955a8ced8cef048dd00a33d30a8b1d",
+    "trace_equal": true,
+    "text_equal": true,
+    "file_unchanged": true
+  },
+  "limits": "Normal play rest/reload only; no new completion or original parity claim."
+}

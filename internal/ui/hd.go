@@ -25,6 +25,7 @@ type HD struct {
 	endingKeys   map[int]string
 	pages        *hdPages
 	actions      *hdActions
+	equipment    *hdEquipment
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {

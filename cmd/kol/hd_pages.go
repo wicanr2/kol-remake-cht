@@ -60,7 +60,7 @@ func nativeInnPage(in *town.Inn) bool {
 		return true
 	}
 	if in.ItemPage != nil || len(in.PartyPage) > 0 {
-		return false
+		return true
 	}
 	if in.Sheet != nil || in.List != nil || in.Steed != nil || len(in.Detail) > 0 || in.DialogRow != 0 {
 		return true

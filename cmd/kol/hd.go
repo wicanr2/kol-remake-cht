@@ -63,6 +63,10 @@ func (g *game) setGraphics(mode string) error {
 		if err := actions.ValidateSources(g.sprites.lib); err != nil {
 			return fmt.Errorf("HD動作圖示來源驗證失敗：%w", err)
 		}
+		equipment, binding, err := g.loadHDEquipment()
+		if err != nil {
+			return fmt.Errorf("HD裝備載入失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -97,6 +101,9 @@ func (g *game) setGraphics(mode string) error {
 			actionSources = append(actionSources, ui.HDActionSource{HDPageSource: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, Rect: image.Rect(p.Rect[0], p.Rect[1], p.Rect[2], p.Rect[3])})
 		}
 		if err := hd.AttachActions(actions.Image, actionSources); err != nil {
+			return err
+		}
+		if err := hd.AttachEquipment(equipment.Images, equipment.Manifest, binding); err != nil {
 			return err
 		}
 		canvas := screen.NewCanvasScaled(6)

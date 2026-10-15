@@ -38,7 +38,7 @@ func TestGraphicsSwitchIsAtomicAndReusesPack(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	g := game{canvas: screen.NewCanvasScaled(3), sprites: &spriteCache{lib: lib, m: map[string]*ebiten.Image{}}}
+	g := game{canvas: screen.NewCanvasScaled(3), sprites: &spriteCache{lib: lib, m: map[string]*ebiten.Image{}}, hdPortraitPath: "../../assets/original-derived-data/portrait-layout.json"}
 	if err := g.enableHD("ega", "../../assets/hd/first-slice", "zh-Hant"); err != nil {
 		t.Fatal(err)
 	}

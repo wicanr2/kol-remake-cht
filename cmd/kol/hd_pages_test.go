@@ -3,6 +3,7 @@ package main
 import (
 	"testing"
 
+	"github.com/wicanr2/kol-remake-cht/internal/portrait"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
 
@@ -22,7 +23,8 @@ func TestNativeInnPageLimits(t *testing.T) {
 		{"character sheet", &town.Inn{Sheet: &town.SheetPage{}}, true},
 		{"service list", &town.Inn{List: &town.InnList{}}, true},
 		{"spell editor", &town.Inn{SpellEdit: &town.SpellEditPage{}}, true},
-		{"unvisited item page", &town.Inn{ItemPage: &town.ItemPage{}}, false},
+		{"complete item page", &town.Inn{ItemPage: &town.ItemPage{}}, true},
+		{"complete party page", &town.Inn{PartyPage: []portrait.Piece{{Archive: "PERPICS", Index: 0}}}, true},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			if got := nativeInnPage(tc.in); got != tc.want {

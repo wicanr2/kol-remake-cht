@@ -1,0 +1,95 @@
+{
+  "status": "DRAFT",
+  "character": "Shyla",
+  "rounds": [
+    {
+      "scene": "items-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "e50c581227bcf35ff3da01ea503a29d7b180b114d8df9f571888377c164770a3",
+      "files": [
+        "items-large-before.png",
+        "items-large-ega.png",
+        "items-large-restored.png"
+      ]
+    },
+    {
+      "scene": "items-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "e50c581227bcf35ff3da01ea503a29d7b180b114d8df9f571888377c164770a3",
+      "files": [
+        "items-small-before.png",
+        "items-small-ega.png",
+        "items-small-restored.png"
+      ]
+    },
+    {
+      "scene": "party-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "012a3172e60662bc69125323b60e5ca856f7675b9f44b8292f7ccb2da33c1646",
+      "files": [
+        "party-large-before.png",
+        "party-large-ega.png",
+        "party-large-restored.png"
+      ]
+    },
+    {
+      "scene": "party-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "012a3172e60662bc69125323b60e5ca856f7675b9f44b8292f7ccb2da33c1646",
+      "files": [
+        "party-small-before.png",
+        "party-small-ega.png",
+        "party-small-restored.png"
+      ]
+    }
+  ],
+  "display_events": [
+    "display action=toggle hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=ega hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=toggle hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=hd hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=toggle hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=ega hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=toggle hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=hd hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=toggle hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=ega hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=toggle hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=hd hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=toggle hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=ega hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=toggle hd=false state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=hd hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c",
+    "display action=back hd=true state=7fd10f7bbf4f3c3728a64a3a0a39c480147940e4fcd5b7fa1cca72afb9bc663c"
+  ],
+  "save_before": null,
+  "save_after": null,
+  "exit_code": 0
+}

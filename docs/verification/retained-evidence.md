@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| 完整物品／隊伍、裝備原型及正式接入、68圖示 | [正式裝備驗收](hd-equipment-runtime-20261015.md)與[圖示驗收](hd-actions-runtime-20261015.md) | [保存清冊](local/hd-equipment-pages-20261015/retention.json)；完整模型與原錨點只留本機 |
 | 全畫面HD盤點、原版七段事件與第0段手繪候選 | [盤點及事件比較](hd-completion-20261014.md) | [保存清冊](local/hd-completion-20261014/retention.json)，107檔與兩份可重建執行檔雜湊；候選待確認 |
 | HD跨平台一色階修正、首次失敗與取樣原型 | [交付與精度修正](release-v1.0.2-20261013.md) | [保存清冊](local/hd-pixel-consistency-20261013/retention.json)，1667檔與12份可重建執行檔雜湊；首次候選保留 |
 | HD操作介面、人物頭像與同主題對比候選 | [可操作原型](hd-ui-theme-20261012/review.html) | 小型原型直接保存於同目錄，[來源及逐檔雜湊](hd-ui-theme-20261012/manifest.json)；已核准接入 |
@@ -415,3 +416,14 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 `delete hd-character-templates-20261014`逐檔核對後只清理該工作區。
 原型fixture符號連結已另記於`fixture-links.json`，封存前只移除連結本身；來源未刪除。
 不同姓名牌修正階段的來源雜湊與替代單檔索引保存在`source-input-map.json`。
+
+## 完整物品與隊伍HD正式接入
+
+[正式裝備驗收](hd-equipment-runtime-20261015.md)、[圖示驗收](hd-actions-runtime-20261015.md)與
+[本機保存清冊](local/hd-equipment-pages-20261015/retention.json)保存本批所有原型、修正版、來源階段、生成提示、失敗輸出與正式驗證。
+正式391份Go／module、185份HD資產；38張GPU畫格、正常106狀態、24個F10及v3保存重載均保留各自範圍。
+本批保存7125份檔案，28份可重建執行檔只留雜湊；原4591404728 bytes壓縮為2863918172 bytes。
+壓縮SHA-256為`db7c87878ef2a15e71835a1ab4e221a20e173cd0d7f627636ed812a3542cd123`，已獨立唯讀核對全部7125份內容與入口副本。
+原模型、錨點、v3及完整GUI狀態只留本機，Git只保存經核對的PNG與精簡結果。
+核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-equipment-pages-20261015`；
+`delete hd-equipment-pages-20261015`再次逐檔核對後，只清理該工作區。其他任務保持。
