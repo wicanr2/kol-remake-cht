@@ -11711,3 +11711,5 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 
 - 最終封存2483檔、10份可重建執行檔只留雜湊；1246822781 bytes壓縮為682026404 bytes，SHA-256為6c73d66c5d8df34430c831f06452869722c5f794f82e3020d26d476d526a08d1。獨立核對全部壓縮內容及原工作區後精確刪除NPC工作區；README／CONTEXT／SPEC／正式收據相對連結、395來源與UID/GID抽查通過。工作清單核實16開放／92完成，兩個執行期防護訊息與歷史原型有精確認領，未重開已完成項。
 - 下一批怪物已建立32張不同RGB、不同尺寸與二值透明度的來源清冊及檢視圖，確認資訊框與遭遇群像消費端；仍DRAFT，沒有怪物圖進正式程式。GitHub認證與PRIVATE狀態已在主機回讀。
+
+- 正式NPC／坐騎程式、27張圖集、14張比較PNG與文件已提交157b5bb1d768f2752e60f11dcb6e49374558049b並推送origin/main。推送後工作樹乾淨，GitHub維持PRIVATE；現行v.1.0.2-20261013 tag固定46a01f11，沒有移動Release。Docker本批GUI、測試、封存與清理均已結束。後續32張怪物維持DRAFT及全畫面HD active。推送核對保存在[本機收尾](docs/verification/local/hd-npc-mounts-20261015/git-closeout.json)。
