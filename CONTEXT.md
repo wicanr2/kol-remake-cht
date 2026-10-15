@@ -27,9 +27,11 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 
 下一批為其他NPC與坐騎，再延伸怪物、城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件。全畫面HD保持active，依[13類覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)及[SPEC-039](docs/spec/039-hd-art-ui.md)續作，不把本批結案延伸為全HD完成。
 
-NPC／坐騎的[來源清冊](workplace/hd-npc-mounts-20261015/plan.json)與[同主題比較頁](workplace/hd-npc-mounts-20261015/review.html)保存目前DRAFT原型。實際102張88×64 NPC及四張40×38坐騎全部RGB不同；四張已核准NPC保持。已生成12個NPC與四坐騎候選，另86個NPC待繪；其中八位NPC及四種坐騎的對應場景、中文、來源與原生像素已驗，EGA保持、HD最多一色階。馬廄測試樣本英文標題已依正式譯文修正並重拍，舊樣本保留。
+NPC／坐騎的[來源清冊](workplace/hd-npc-mounts-20261015/plan.json)、[已驗場景比較](workplace/hd-npc-mounts-20261015/review.html)與[完整候選比較頁](workplace/hd-npc-mounts-20261015/complete-art-review.html)保存目前DRAFT原型。102張88×64 NPC及四張40×38坐騎全部RGB不同；四張原核准NPC保持，98位新NPC及四種坐騎候選均已生成。27張選用圖集涵蓋102個新裁切，NPC最小706×486，來源PNG／RGB、原生RGBA、實際尺寸、全部106身分及建築／馬廄對應已[核對](workplace/hd-npc-mounts-20261015/complete-source-geometry-check.json)。完整候選頁已由Chromium載入102圖及四個保留來源連結，僅作圖集裁切預覽。
 
-目前正式來源仍391份Go／module、185份HD資產，已提交推送`f5e62382`。NPC／坐騎原型沒有進正式程式；第三組四位NPC、坐騎人物資料頁、正常路徑／F10／v3及完整組載入繼續，範圍與下一步見[目前進度](workplace/hd-npc-mounts-20261015/progress.json)。裝備工作區已完成7125份封存與逐檔核對後清理；目前NPC工作區仍在使用。
+八位新NPC與四種坐騎馬廄場景保持先前限定驗收。四種坐騎的人物資料頁另已[通過](workplace/hd-npc-mounts-20261015/mount-sheet-check.json)，使用真實Kenneth顯示欄位與商品經OpenSheet建立樣本；16畫格的原生馬匹區與圖外最多一色階，EGA保持，四個中文名牌完整可讀。靜態樣本入口的三格圖示只在隔離工具處理，正式玩家路徑保持。
+
+目前正式來源仍391份Go／module、185份HD資產，已提交推送`f5e62382`。完整106來源組的遊戲載入、全母體GPU場景、正常路徑／F10／v3及正式原子載入繼續，範圍見[目前進度](workplace/hd-npc-mounts-20261015/progress.json)與[完整候選清冊](workplace/hd-npc-mounts-20261015/complete-creature-prototype.json)。NPC／坐騎新素材沒有進正式程式；裝備工作區已封存清理，目前NPC工作區仍在使用。
 
 現行交付與tag保持`v.1.0.2-20261013`，本批尚未進發行包。組隊與商店已有操作證據，受控七段結局能顯示；從新開局正常完成全部任務至結局仍未驗證。
 
