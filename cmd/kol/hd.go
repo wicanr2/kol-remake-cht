@@ -53,6 +53,16 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD角色模板載入失敗：%w", err)
 		}
+		actions, err := assets.LoadHDActions(filepath.Join(g.hdDir, "actions"))
+		if err != nil {
+			return fmt.Errorf("HD動作圖示載入失敗：%w", err)
+		}
+		if g.sprites == nil {
+			return fmt.Errorf("HD動作圖示缺少來源PNG庫")
+		}
+		if err := actions.ValidateSources(g.sprites.lib); err != nil {
+			return fmt.Errorf("HD動作圖示來源驗證失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -80,6 +90,13 @@ func (g *game) setGraphics(mode string) error {
 			portraitFrames = append(portraitFrames, ui.HDTemplatePortrait{HDPageSource: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, File: p.File, Rect: image.Rect(p.Rect[0], p.Rect[1], p.Rect[2], p.Rect[3])})
 		}
 		if err := hd.AttachTemplates(templates.Images, preserved, portraitFrames); err != nil {
+			return err
+		}
+		var actionSources []ui.HDActionSource
+		for _, p := range actions.Manifest.Sources {
+			actionSources = append(actionSources, ui.HDActionSource{HDPageSource: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, Rect: image.Rect(p.Rect[0], p.Rect[1], p.Rect[2], p.Rect[3])})
+		}
+		if err := hd.AttachActions(actions.Image, actionSources); err != nil {
 			return err
 		}
 		canvas := screen.NewCanvasScaled(6)

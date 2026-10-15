@@ -1,0 +1,77 @@
+{
+  "schema": "kol-hd-action-captures/1",
+  "images": [
+    {
+      "file": "source-symbols.png",
+      "sha256": "3e821e7d7796bb2ecf01566d4293d0b183d21a4bda010563ba5201794cd0aac5",
+      "size": [
+        1920,
+        1200
+      ],
+      "kind": "source-grid",
+      "frame": 0,
+      "source_file": "formal-action-gallery/source-symbols.png",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_entry": "Knights-of-legend/KOLMPICS.0",
+      "source_entry_sha256": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d",
+      "source_png_manifest": "../../../assets/hd/first-slice/actions/manifest.json",
+      "status": "verified remake rendering; not original DOS execution",
+      "rights": "private GitHub only verified source-derived PNG exception; no public distribution"
+    },
+    {
+      "file": "native-symbols.png",
+      "sha256": "8ce493b4a28dbcd622cf97c279ac6c85d103aa421a1b86b215590adb898eb736",
+      "size": [
+        1920,
+        1200
+      ],
+      "kind": "native-grid",
+      "frame": 1,
+      "source_file": "formal-action-gallery/native-symbols.png",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_entry": "Knights-of-legend/KOLMPICS.0",
+      "source_entry_sha256": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d",
+      "source_png_manifest": "../../../assets/hd/first-slice/actions/manifest.json",
+      "status": "verified remake rendering; not original DOS execution",
+      "rights": "private GitHub only verified source-derived PNG exception; no public distribution"
+    },
+    {
+      "file": "inn-ega.png",
+      "sha256": "2ec427b2ddee12097af7b853a6ebd19c6d0196b0f4113fb8c0b7532ed77dbdef",
+      "size": [
+        960,
+        600
+      ],
+      "kind": "normal-controller-ega",
+      "frame": 4,
+      "source_file": "formal-action-normal/six-build-party/prototype-ega/shots/step-004.png",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_entry": "Knights-of-legend/KOLMPICS.0",
+      "source_entry_sha256": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d",
+      "source_png_manifest": "../../../assets/hd/first-slice/actions/manifest.json",
+      "status": "verified remake rendering; not original DOS execution",
+      "rights": "private GitHub only verified source-derived PNG exception; no public distribution"
+    },
+    {
+      "file": "inn-hd.png",
+      "sha256": "78d4e8909132147aab02c9addce77a567cd1f9b9c819c6aaea59ddbf2e542cf0",
+      "size": [
+        1920,
+        1200
+      ],
+      "kind": "normal-controller-hd",
+      "frame": 4,
+      "source_file": "formal-action-normal/six-build-party/prototype-hd/shots/step-004.png",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "source_entry": "Knights-of-legend/KOLMPICS.0",
+      "source_entry_sha256": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d",
+      "source_png_manifest": "../../../assets/hd/first-slice/actions/manifest.json",
+      "status": "verified remake rendering; not original DOS execution",
+      "rights": "private GitHub only verified source-derived PNG exception; no public distribution"
+    }
+  ],
+  "tool": "Go1.26.7/Ebitengine2.9.9, kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "source_scope": "68 verified KOLMPICS source identities; inn additionally uses previously verified interface/portrait asset groups.",
+  "source_asset_inputs": "asset-inputs.json"
+}

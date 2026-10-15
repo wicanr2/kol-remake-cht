@@ -22,7 +22,7 @@ v7隔離遊戲已接入六種體型、28款武器及四盾。最新v9單檔覆�
 | 尚未驗收 | 全部動作圖示、預設盾面HD匹配、嚴格原子載入、正式接入與v3保存重載仍開放。沒有新增v9正常控制器、實際視窗F10、Windows／macOS或原版程式對拍聲明 |
 
 [本批收據](hd-equipment-pages-20261015/matrix-receipt.json)、[畫格雜湊索引](hd-equipment-pages-20261015/matrix-frames.json)、[381份v9輸入](hd-equipment-pages-20261015/matrix-inputs-v9.json)與[隔離呈現器](hd-equipment-pages-20261015/matrix-renderer-v9.go.txt)由本節索引。完整fixture、玩家模型、點陣內容與存檔只留本機。六張外觀接觸表中，前五型沿未改動的v7非網格／非盾面路徑，女性精靈、護具與修正後盾面使用v9；圖片各列保存來源版本。
-本機`body-matrix-v7_test.go.txt`、`prepare-shield-overlay-v8.py`、`prepare-stable-mesh-v9.py`、`run-body-stable-v9.sh`及`verify-stable-mesh-v9.py`保留重建與核對方法。KOLMPICS實際有69個動作圖號且不連續，後續圖示須依實際manifest列舉，不猜3…70連續範圍。
+本機`body-matrix-v7_test.go.txt`、`prepare-shield-overlay-v8.py`、`prepare-stable-mesh-v9.py`、`run-body-stable-v9.sh`及`verify-stable-mesh-v9.py`保留重建與核對方法。KOLMPICS動作圖示計數已訂正為68個非連續圖號。先前69項包含56×57的第28圖城鎮徽章AND遮罩，依RE-012保留資料用途；舊矩陣收據保持。圖示已[獨立正式接入](hd-actions-runtime-20261015.md)，完整裝備組仍DRAFT。
 
 ## 六種體型接入隔離遊戲
 
@@ -109,8 +109,13 @@ v7隔離遊戲已接入六種體型、28款武器及四盾。最新v9單檔覆�
 ## 下一閘門
 
 - 本批成套、混搭、卸裝及三款護具已有受控抽樣，不延伸為全部組合窮舉或正常玩家路徑。
-- 完成實際69個動作圖示及預設盾面的HD匹配；自訂盾面維持原40×38點陣內容。
+- 68個動作圖示已獨立正式接入；預設盾面的HD匹配已在V10隔離原型核對，正式裝備組續作。自訂盾面維持原40×38點陣內容。
 - 完成嚴格的來源／PNG／尺寸／圖號／透明度檢查及原子載入契約，升READY後才接正式路徑。
 - 正式接入另驗完整畫格、中文、F10、舊v3、正常住宿保存及新程序重載，再封存清理。
 
 圖片依目前private儲存庫的PNG保存例外保存，未取得公開散布權；不能加入公開Release。程式版本及發行tag保持。
+
+## 獨立圖示接入與V10盾面續作
+
+68個動作圖示已[接入正式程式](hd-actions-runtime-20261015.md)。正式來源由380增為384份Go／module，HD資產由88增為91份；既有v6／v7與V9收據保留原範圍。
+V10隔離呈現登記38畫面，其中14張為圖示／工具列，另24張是六型預設、複製預設、改一像素及自訂盾面。12張預設／複製預設使用原生HD盾牌，12張修改內容逐40×38像素核對一致；角色資料不變。這項盾面匹配尚未正式接入，不能與已接入的獨立圖示混稱。完整模型、測試圖與四份覆蓋檔留在未完成工作區。

@@ -1,0 +1,213 @@
+package ui
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/wicanr2/kol-remake-cht/internal/assets"
+	"github.com/wicanr2/kol-remake-cht/internal/i18n"
+	"image"
+	"image/color"
+	"image/png"
+	"os"
+	"path/filepath"
+	"testing"
+)
+
+type actionGallerySprites struct {
+	lib  *assets.Library
+	pics map[string]*ebiten.Image
+}
+
+func (s *actionGallerySprites) Get(a string, i int) (*ebiten.Image, error) {
+	k := fmt.Sprintf("%s:%d", a, i)
+	if p := s.pics[k]; p != nil {
+		return p, nil
+	}
+	p, _, e := s.lib.Decode(a, i)
+	if e != nil {
+		return nil, e
+	}
+	v := ebiten.NewImageFromImage(p)
+	s.pics[k] = v
+	return v, nil
+}
+
+type actionGalleryFrame struct {
+	ID      string
+	Indices []int
+	SHA256  string
+	Chinese []string
+}
+type actionGallery struct {
+	h      *HD
+	s      *actionGallerySprites
+	dst    *ebiten.Image
+	frames []actionGalleryFrame
+	n      int
+	err    error
+}
+
+func (g *actionGallery) Update() error {
+	if g.err != nil {
+		return g.err
+	}
+	if g.n == len(g.frames) {
+		return ebiten.Termination
+	}
+	return nil
+}
+func (g *actionGallery) Layout(int, int) (int, int) { return 1920, 1200 }
+func (g *actionGallery) Draw(screen *ebiten.Image) {
+	if g.err != nil || g.n == len(g.frames) {
+		return
+	}
+	if e := g.h.ValidatePageSources(g.s); e != nil {
+		g.err = e
+		return
+	}
+	if len(g.h.pages.icons) != 68 {
+		g.err = fmt.Errorf("expected68 native symbols")
+		return
+	}
+	f := &g.frames[g.n]
+	g.dst.Fill(color.RGBA{20, 17, 22, 255})
+	switch g.n {
+	case 0:
+		for i, id := range f.Indices {
+			p, e := g.s.Get("KOLMPICS", id)
+			if e != nil {
+				g.err = e
+				return
+			}
+			drawScaled(g.dst, p, 96+i%9*144, 36+i/9*120, 6)
+		}
+	case 1:
+		g.err = g.h.RenderUI(g.dst, func() error {
+			for i, id := range f.Indices {
+				p, e := g.s.Get("KOLMPICS", id)
+				if e != nil {
+					return e
+				}
+				drawScaled(g.dst, p, 48+i%9*72, 18+i/9*60, 3)
+			}
+			return nil
+		})
+	default:
+		g.dst.DrawImage(g.h.style.images["background.png"], nil)
+		g.err = g.h.toolbarHD(g.dst, g.s, f.Indices, 0, false, false)
+		g.h.style.label(g.dst, f.ID, image.Rect(100, 982, 1820, 1020), 24, hdGold, true)
+		for _, id := range f.Indices {
+			f.Chinese = append(f.Chinese, hdCommandFor(id-3, false).title)
+		}
+	}
+	if g.err != nil {
+		return
+	}
+	pix := make([]byte, 1920*1200*4)
+	g.dst.ReadPixels(pix)
+	im := image.NewRGBA(image.Rect(0, 0, 1920, 1200))
+	copy(im.Pix, pix)
+	path := filepath.Join("/out/formal-action-gallery", f.ID+".png")
+	file, e := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
+	if e != nil {
+		g.err = e
+		return
+	}
+	e = png.Encode(file, im)
+	ce := file.Close()
+	if e == nil {
+		e = ce
+	}
+	if e != nil {
+		g.err = e
+		return
+	}
+	b, e := os.ReadFile(path)
+	if e != nil {
+		g.err = e
+		return
+	}
+	f.SHA256 = fmt.Sprintf("%x", sha256.Sum256(b))
+	screen.DrawImage(g.dst, nil)
+	g.n++
+}
+func TestFormalHDActionGallery(t *testing.T) {
+	if e := os.Mkdir("/out/formal-action-gallery", 0755); e != nil {
+		t.Fatal(e)
+	}
+	lib, e := assets.Load("/src/assets/original-derived-png/ega")
+	if e != nil {
+		t.Fatal(e)
+	}
+	controls, e := assets.LoadHDInterface("/src/assets/hd/first-slice/interface")
+	if e != nil {
+		t.Fatal(e)
+	}
+	pages, e := assets.LoadHDPages("/src/assets/hd/first-slice/pages")
+	if e != nil {
+		t.Fatal(e)
+	}
+	actions, e := assets.LoadHDActions("/src/assets/hd/first-slice/actions")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = actions.ValidateSources(lib); e != nil {
+		t.Fatal(e)
+	}
+	tr, e := i18n.Load("/src/docs/i18n/newchar-zh-Hant.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	h := &HD{keys: map[*ebiten.Image]string{}, matching: map[string]int{}}
+	glyphs := map[string]HDGlyph{}
+	for k, v := range controls.Font.Glyphs {
+		glyphs[k] = HDGlyph{X: v.X, Y: v.Y, Advance: v.Advance}
+	}
+	h.AttachInterface(controls.Images, glyphs, controls.NPCKey, controls.CrestKey, tr)
+	books := map[string]int{}
+	for _, v := range pages.Manifest.Books {
+		books[v.SourceRGB] = v.Index
+	}
+	var sources []HDPageSource
+	for _, v := range pages.Sources() {
+		sources = append(sources, HDPageSource{Archive: v.Archive, Index: v.Index, RGB: v.SourceRGB})
+	}
+	h.AttachPages(pages.Book, pages.Portraits, books, pages.Manifest.Background.SourceRGB, sources)
+	var native []HDActionSource
+	ids := []int{}
+	for _, s := range actions.Manifest.Sources {
+		native = append(native, HDActionSource{HDPageSource: HDPageSource{Archive: s.Archive, Index: s.Index, RGB: s.SourceRGB}, Rect: image.Rect(s.Rect[0], s.Rect[1], s.Rect[2], s.Rect[3])})
+		ids = append(ids, s.Index)
+	}
+	if e = h.AttachActions(actions.Image, native); e != nil {
+		t.Fatal(e)
+	}
+	g := &actionGallery{h: h, s: &actionGallerySprites{lib: lib, pics: map[string]*ebiten.Image{}}, dst: ebiten.NewImage(1920, 1200)}
+	g.frames = append(g.frames, actionGalleryFrame{ID: "source-symbols", Indices: ids}, actionGalleryFrame{ID: "native-symbols", Indices: ids})
+	for first := 0; first < len(ids); first += 6 {
+		g.frames = append(g.frames, actionGalleryFrame{ID: fmt.Sprintf("toolbar-%02d", first/6), Indices: ids[first:min(first+6, len(ids))]})
+	}
+	raw, e := json.MarshalIndent(g.frames, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile("/out/formal-action-gallery/registered.json", raw, 0644); e != nil {
+		t.Fatal(e)
+	}
+	ebiten.SetWindowSize(960, 600)
+	if e = ebiten.RunGame(g); e != nil {
+		t.Fatal(e)
+	}
+	if g.n != 14 {
+		t.Fatalf("incomplete %d", g.n)
+	}
+	raw, e = json.MarshalIndent(g.frames, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile("/out/formal-action-gallery/results.json", raw, 0644); e != nil {
+		t.Fatal(e)
+	}
+}

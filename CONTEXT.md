@@ -19,15 +19,11 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 
 下一批為完整物品／隊伍頁與裝備合成。其他NPC、怪物、坐騎、城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件繼續，依[13類覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)及[SPEC-039](docs/spec/039-hd-art-ui.md)執行。全畫面HD尚未完成。
 
-目前物品／隊伍原型工作區為`workplace/hd-equipment-pages-20261015/`，仍DRAFT。最新為[受控合成比較](docs/verification/hd-equipment-pages-20261015/matrix-review.html)及[收據](docs/verification/hd-equipment-pages-20261015/matrix-receipt.json)。六型、162款裝備、獨立翼部、28武器與四盾已接入隔離呈現；正式380份runtime／385份稽核輸入、88份HD資產及381份v6／v7保持，v9只覆蓋一份呈現器。
+目前物品／隊伍原型工作區為`workplace/hd-equipment-pages-20261015/`，完整裝備組仍DRAFT。六型、162款裝備、獨立翼部、28武器、四盾與城鎮／野外背板已有隔離呈現；[受控合成比較](docs/verification/hd-equipment-pages-20261015/matrix-review.html)保留354案例與V9的84＋18畫格一色階結果。先前正常219狀態、48個F10及HD往返零差仍限v7，不擴大為新版本。
 
-預登354個實際中文物品頁，涵蓋成套、卸裝、混搭、三款護具、武器、盾牌、腰帶與個人盾面，6018筆文字為中文。LEGSPICS45、51、53各四種上身搭配，未覆蓋部位沿現有HD身體。翼族裸足三爪與完整拳頭沿已驗素材保持，圖集原像素不改。
+68個動作圖示已獨立正式接入，見[正式驗收](docs/verification/hd-actions-runtime-20261015.md)。先前69項誤含第28圖徽章AND遮罩，現訂正，舊收據保持。正式384份Go／module、91份HD資產，全套及sceneverify通過；14張完整GPU畫格最多一色階。兩條正常控制器路徑每側71狀態與中文紀錄相同，71張EGA RGB／alpha完全保持；兩視窗鍵鼠24個F10事件與HD往返零差。正常住宿11／重載5、舊v3及嚴格來源／缺件負例通過，README已加入同主題來源／原生HD對比。
 
-矩陣發現十個BOOKDATA盾面座標被六倍後再乘二，且未隨盾牌校準。v9按SHLDPICS3模板換算，保持40×38點陣與typed資料；預設點陣的原生HD匹配仍開放。未改動v7只換18案例順序也重現女性精靈上身兩色階。v9將網格輸入／輸出改為獨立紋理，原像素與頂點保持；84畫面與其中18個不同順序的完整HD最多一色階、alpha零差，1428及306筆文字已核對。67個未涉及盾面的新舊呈現器對照最多兩色階，只作修正診斷，不作同版閘門；原失敗保留。
-
-v9的UI、入口及sceneverify通過，實際原型SHA為`d11d6d10d059002cfb5179f479d6f9e90f4304b7b55702957ada1de6a3f6c4a3`。先前[正常操作與實際F10](docs/verification/hd-equipment-pages-20261015/body-runtime-review.html)仍限v7：219狀態、219張EGA RGB／alpha保持、48事件與HD往返零差。這批未重跑或擴大為v9正常操作、實際視窗、保存重載或跨平台聲明。
-
-下一步完成實際69個非連續KOLMPICS動作圖號、預設盾面HD匹配與嚴格原子載入，升READY後接正式路徑，再驗F10、舊v3與正常住宿重載。原型絕對路徑、原錨點、完整模型及診斷不進production；本批尚未正式接入，所有13類HD仍開放，見[SPEC-039](docs/spec/039-hd-art-ui.md)與[覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)。
+V10盾面匹配已有六型24張隔離畫格：12張預設及複製預設使用原生HD盾牌，12張修改盾面保持40×38點陣，模型不變。這項仍DRAFT。下一步將完整裝備素材與呈現校準改成正式分組契約，升READY後接入並驗F10及v3。原型絕對路徑、原錨點、完整模型與診斷不進production。全畫面HD保持active，其他NPC、怪物、坐騎、地圖、戰場、傷勢、天候、片頭及其他事件續作。
 
 現行交付與tag保持`v.1.0.2-20261013`，本批尚未進發行包。組隊與商店已有操作證據，受控七段結局能顯示；從新開局正常完成全部任務至結局仍未驗證。
 
@@ -36,8 +32,8 @@ v9的UI、入口及sceneverify通過，實際原型SHA為`d11d6d10d059002cfb5179
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 開發版380份Go／module；[角色模板來源與收據](docs/verification/hd-character-templates-20261014/receipt.json)。現行v.1.0.2來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 本批程式與最終原型逐位元相同；發行tag仍固定46a01f11，尚未重建新版封包 |
-| 最近測試 | 全套及sceneverify通過；原型80張頭像像素／回捲、正式每側98狀態及52畫格、16字元姓名、既有旅店／戶外、新角色第79張頭像v3保存與5狀態重載、24個正式F10事件通過；EGA保持，HD最多一色階 | Linux Docker範圍；資料與原版RNG／自然通關不作新聲明；正式完整建角欄位另由GUI診斷核對 |
+| 正式來源 | 開發版384份Go／module、91份HD資產；[正式圖示來源與收據](docs/verification/hd-actions-runtime-20261015/receipt.json)。現行v.1.0.2來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 獨立圖示已正式接入，裝備合成仍DRAFT；發行tag仍固定46a01f11，尚未重建新版封包 |
+| 最近測試 | 圖示接入全套及sceneverify通過；14張GPU最多一色階，正常71狀態／中文字相同、EGA RGB及alpha保持，24個F10與HD往返零差，住宿11／重載5及舊v3通過；見[正式驗收](docs/verification/hd-actions-runtime-20261015.md) | Linux Docker範圍；完整裝備合成、跨平台與自然通關不作新聲明 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
 | 跨平台 | [現行交付驗收](docs/verification/release-v1.0.2-20261013.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal六包通過；實際AppImage及Wine兩個ZIP啟動、F9／F10與音訊通過，遠端四附件大小及SHA相符 | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
@@ -50,7 +46,7 @@ v9的UI、入口及sceneverify通過，實際原型SHA為`d11d6d10d059002cfb5179
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | 現行發行含首批門面、六人、操作介面、F10及四首配樂／F9；開發版另完成七段結局、原生書頁／服務／編輯器、卷軸與80張角色模板，見[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋) | 完整物品／隊伍頁、其他NPC／怪物／坐騎／裝備、地圖、戰場、傷勢、天候、片頭及其餘事件仍開放；資料PNG不重繪 |
+| HD | 現行發行含首批門面、六人、操作介面、F10及四首配樂／F9；開發版另完成七段結局、原生書頁／服務／編輯器、卷軸、80張角色模板及68個動作圖示，見[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋) | 完整物品／隊伍頁、其他NPC／怪物／坐騎／裝備、地圖、戰場、傷勢、天候、片頭及其餘事件仍開放；資料PNG不重繪 |
 | 交付 | `v.1.0.2-20261013`：三平台full／release、76秒1080p影片；private Release已發布，四附件完整性與46a01f11 tag核對通過，入口[本版收據](docs/verification/release-v1.0.2-20261013.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
 | GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，16開放／92已核實完成不變 |
 

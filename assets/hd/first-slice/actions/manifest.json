@@ -1,0 +1,1338 @@
+{
+  "schema": "kol-hd-actions/1",
+  "rights": "Project-authored code-native icon redraw; source identities and original comparisons private GitHub only; Noto SIL OFL1.1",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "image": "actions.png",
+  "files": {
+    "actions.png": {
+      "sha256": "dde4e265352f8b0791f059425a8cbeddcaedfcf071a80acd2473c99b8ef02291",
+      "width": 1296,
+      "height": 960
+    }
+  },
+  "sources": [
+    {
+      "archive": "KOLMPICS",
+      "index": 3,
+      "source_rgb_sha256": "b30766ec1fc98536a01ca26b371da5f621b93534af7168f877467c109f384ec7",
+      "source_png_sha256": "72a75ed162ff338b82c069b880618c414372bef6fe7f8caef058e98e6d49f7ed",
+      "rect": [
+        0,
+        0,
+        144,
+        120
+      ],
+      "native_rgba_sha256": "a932a003c645f8097d9413377c3cb8556ed3f62f9fda8e5bd81f3a8642865c91",
+      "alpha_bbox": [
+        23,
+        18,
+        111,
+        105
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 4,
+      "source_rgb_sha256": "00a3e7d2155a0e30d0de81c8720c59f921ba2bb58437a7ede873375cf0a0cf50",
+      "source_png_sha256": "1db119649e367322ead20eeeeb62330d75bba8c440716607db32cffb2e212e3f",
+      "rect": [
+        144,
+        0,
+        288,
+        120
+      ],
+      "native_rgba_sha256": "9d9601184a4e8c0136d37d80f0be8ee54da51d0dd1fcf616d356f1fc0a272186",
+      "alpha_bbox": [
+        20,
+        26,
+        114,
+        99
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 5,
+      "source_rgb_sha256": "d4c2e6e4444dcfb5d878e43636712c89fcc011b23a6b65aa16cdb0702d71ce58",
+      "source_png_sha256": "7c1273cceeb4648df232cebeaebc756bb73f8abbdbbec58e26bc9ab3988b195a",
+      "rect": [
+        288,
+        0,
+        432,
+        120
+      ],
+      "native_rgba_sha256": "f4661e67d5b791dfe679a7714831857bfe2b0e4d873219bd5e64a44810b17698",
+      "alpha_bbox": [
+        33,
+        15,
+        101,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 6,
+      "source_rgb_sha256": "3613cb2a90c3b948032ef7def87dbaf62d922e8c95c6e1d16508daac5ebcb0cc",
+      "source_png_sha256": "03e991ba622fb18f41940b336a0c7d569de918ed05a1938797c716a5f4a56388",
+      "rect": [
+        432,
+        0,
+        576,
+        120
+      ],
+      "native_rgba_sha256": "2845170c94cafd710b656c9295151236c63bce808131b6287b59bb6413822317",
+      "alpha_bbox": [
+        21,
+        29,
+        113,
+        89
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 7,
+      "source_rgb_sha256": "358438f122dc730c586b652348cb0cf0b252ebbe2a14ea641c165ec9b19efc14",
+      "source_png_sha256": "6a41e06de41eebd4ca6a9e4f2b26011d9c1310ac825a77efc4e6e70955967002",
+      "rect": [
+        576,
+        0,
+        720,
+        120
+      ],
+      "native_rgba_sha256": "d3f8da1cccc8f663c5aa7ec0cd4d3f304ea68ea260151ab22fa51a41fffd8574",
+      "alpha_bbox": [
+        31,
+        13,
+        102,
+        100
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 8,
+      "source_rgb_sha256": "55043e6b239ffa70dce4d5b153e4818209a527967af0d1e9bad30bbca0e892eb",
+      "source_png_sha256": "6331e41f616bfb2a036be5875266cd8069b8deae1b15f38c9710f99e06c97225",
+      "rect": [
+        720,
+        0,
+        864,
+        120
+      ],
+      "native_rgba_sha256": "3305f1df32dcbdfb1d423fad1ff38750c16206f0d965ac11c1981278dfe6e7a5",
+      "alpha_bbox": [
+        26,
+        48,
+        111,
+        108
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 9,
+      "source_rgb_sha256": "565295291faecba64bb979816cdd06024500aa5df8d4fc0f23ad0db6f0b367a4",
+      "source_png_sha256": "14e8d5d4e0ebb6665a43d229c26d8797badb107fce47be9153505ab5974f6775",
+      "rect": [
+        864,
+        0,
+        1008,
+        120
+      ],
+      "native_rgba_sha256": "322f61a7f3a406e9a915420b90629e61bab176368280e76c64edc7baba8caa7b",
+      "alpha_bbox": [
+        36,
+        14,
+        98,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 10,
+      "source_rgb_sha256": "c95a1727279ffe2065a39cc4fe623e47c991b21a5979ea4b8038e26f638fe199",
+      "source_png_sha256": "5b1fd80fb51112509f390ec004e6c670f26cf050911af2c19f520d5f0a3ec4ed",
+      "rect": [
+        1008,
+        0,
+        1152,
+        120
+      ],
+      "native_rgba_sha256": "532ed29e0dfb421421527cfcfb61b0283cfb1ada647e8abb3d522f3b303a4db9",
+      "alpha_bbox": [
+        30,
+        17,
+        112,
+        105
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 11,
+      "source_rgb_sha256": "7ced1191fc753f7f8181d2f67e3c273f0f610a91670492998252e57b0b99f03c",
+      "source_png_sha256": "7cef032ad15b8e14fa8dc15c0d540de73ed0567098b79a24a54db7666914e90b",
+      "rect": [
+        1152,
+        0,
+        1296,
+        120
+      ],
+      "native_rgba_sha256": "ac432937509cae61e098b5a33adadb10b0ad575be3b66b0b378cb2a5b9b5404e",
+      "alpha_bbox": [
+        22,
+        15,
+        104,
+        103
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 12,
+      "source_rgb_sha256": "9b3e70906efd22d9466849675121df39715f117296c2105478620528d5737917",
+      "source_png_sha256": "88ab17d7d44ad73366c7ef760a3759d8eec2f0850d4353c55ab85413795245f7",
+      "rect": [
+        0,
+        120,
+        144,
+        240
+      ],
+      "native_rgba_sha256": "39e6729a7f1b476b9da9a97b612e572fa86600f234f36b41ba719757985dd9de",
+      "alpha_bbox": [
+        23,
+        27,
+        111,
+        102
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 13,
+      "source_rgb_sha256": "420a9739897b1872f26c7f2a63abcbf938acb1639e1d76d200368c0c9ea0fcd8",
+      "source_png_sha256": "c4585829f2be3762813f8b87f5b2f4396ecb77d5f7fe656e0bdf476f9945bb6f",
+      "rect": [
+        144,
+        120,
+        288,
+        240
+      ],
+      "native_rgba_sha256": "6b050c61b30440851b684f56b7e256e9a508119f7b7acf37db283a67701737df",
+      "alpha_bbox": [
+        20,
+        12,
+        109,
+        105
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 14,
+      "source_rgb_sha256": "2680b8ed32cfb363ea23ab37b99931aced8ca0c01b18f087ea039d746b781366",
+      "source_png_sha256": "2eed8294943acf2112a446c6faa148ae15f824bfc075e9521755fa114ba784ad",
+      "rect": [
+        288,
+        120,
+        432,
+        240
+      ],
+      "native_rgba_sha256": "0d299b5ebd0d4f874fc003a1fa137d523bad12a5461d8b46abab170e52652cc2",
+      "alpha_bbox": [
+        42,
+        14,
+        113,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 15,
+      "source_rgb_sha256": "5612d602ef0a7fefdd50a41d8023e4d2e37f2e35db3f5adfc0332406ab988fce",
+      "source_png_sha256": "fcb3af060ce688e2e2e3237735f9d184b0f284a3a7b388381e428e5192727c5e",
+      "rect": [
+        432,
+        120,
+        576,
+        240
+      ],
+      "native_rgba_sha256": "95f492e03e489ecc9a408c03539438a253b7f7ff9711702d346de838e98e6d8c",
+      "alpha_bbox": [
+        29,
+        25,
+        106,
+        94
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 16,
+      "source_rgb_sha256": "63163b6c3cac4e3f839325e1c857bb443ba32d59ec472de23429ac2d41f3e1e7",
+      "source_png_sha256": "de65fe259c7a26fe3792afd848cf48052966f09276dd3bbfba35d54e1d4a89fe",
+      "rect": [
+        576,
+        120,
+        720,
+        240
+      ],
+      "native_rgba_sha256": "d924f02e3638a55a86f999296b38fed84278895da223e61641ef911d0454e9ed",
+      "alpha_bbox": [
+        29,
+        6,
+        109,
+        99
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 17,
+      "source_rgb_sha256": "ddc00fb051cb5a38acb9c6b9961ad08041eb9fea41cacd5edb102a4c3d654d0c",
+      "source_png_sha256": "d43b48ecbc158c19cee02736aaf8eb2c39f28b418288e2842fc7aa4c194fda86",
+      "rect": [
+        720,
+        120,
+        864,
+        240
+      ],
+      "native_rgba_sha256": "ed49b8ff5c0a0d08b1ca27c5c0d3ffaa1d9241605f0522c8c9d9304d14593ea3",
+      "alpha_bbox": [
+        37,
+        12,
+        97,
+        111
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 18,
+      "source_rgb_sha256": "ebeff0336e9232c4f3a5bc44fb64fda9dd1d3ba3312d021eefdc56eb90c002a9",
+      "source_png_sha256": "0d04b035c4f147316e34bc3e73134c6851a9f2eaf44830723d19a148265069a9",
+      "rect": [
+        864,
+        120,
+        1008,
+        240
+      ],
+      "native_rgba_sha256": "00aaadabdd98dbdd73bc10d64ed79e39c56a6b7ffc909165012ea5b2ad1b706d",
+      "alpha_bbox": [
+        22,
+        27,
+        99,
+        105
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 19,
+      "source_rgb_sha256": "b6b712e86e4e59597b46e90ebe9275a0b7bdc415c88b7a0dc9e4b20e109d5481",
+      "source_png_sha256": "f7c8422a35db93d6ba4b753ebe00ad722fb5219ffc315882e61bf69d897ecb47",
+      "rect": [
+        1008,
+        120,
+        1152,
+        240
+      ],
+      "native_rgba_sha256": "f94c47377468d1904decce1754a4e2338410b6acad1d5be2b0d8f6587c6016e3",
+      "alpha_bbox": [
+        21,
+        15,
+        113,
+        110
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 20,
+      "source_rgb_sha256": "b021680718a53a527b0e0b20c006c930ddcca7efc29b77f499d9773f41ce2de2",
+      "source_png_sha256": "1bb46b97e0be3f0551f593038a48899a6680c364a37a9ed4f4307af344d52121",
+      "rect": [
+        1152,
+        120,
+        1296,
+        240
+      ],
+      "native_rgba_sha256": "82739eb9632d812ed411a234cc05a8e939c75fcbc664614182336dc74dfcfd34",
+      "alpha_bbox": [
+        27,
+        12,
+        105,
+        106
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 21,
+      "source_rgb_sha256": "ffd34ad200944b64f72382cc8240ae1709354e7cb2e905b8286de2da97a18852",
+      "source_png_sha256": "ffa430a61fc0e82524bfd22eb8b328ede0444c47fad3bc8fd46c3442b59517b6",
+      "rect": [
+        0,
+        240,
+        144,
+        360
+      ],
+      "native_rgba_sha256": "5ee0798732cc231cd673044fb0103112c03b124daa58fbf75ad8c7aa07afa594",
+      "alpha_bbox": [
+        20,
+        17,
+        112,
+        105
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 22,
+      "source_rgb_sha256": "dc1097753bbd401d79e55da23d02483f45bacb3d584e5b07514a1e0f756ad8e6",
+      "source_png_sha256": "15f5f457ac0e5fefd31997d8f4b48976af0206ff72522a352d40af780cc36a94",
+      "rect": [
+        144,
+        240,
+        288,
+        360
+      ],
+      "native_rgba_sha256": "4f2c1de0de7f3da2e2c03db5b4a866076c8f462c71dc1bb1f7874321f276ddf2",
+      "alpha_bbox": [
+        33,
+        13,
+        113,
+        103
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 23,
+      "source_rgb_sha256": "e1cefebf94864f8f1e5165a795ba5981714f8dacc54aa1492254a36f99849939",
+      "source_png_sha256": "e89fec44f67d2e147c2eebdecbaf0df4d4cfda9f97c672361b1ab05021df171b",
+      "rect": [
+        288,
+        240,
+        432,
+        360
+      ],
+      "native_rgba_sha256": "209e5cf8a80098b7cc8276a5ff10e9db1728407a4b3f7799186ec7deb4d80127",
+      "alpha_bbox": [
+        37,
+        8,
+        97,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 24,
+      "source_rgb_sha256": "72e871d50cca22d10c5a8492dee0048da17a9e45c317147e2f881440bea48fbe",
+      "source_png_sha256": "9af0b16c5a8dadc7ec6ec88521b5780f063992b53fde8ca4cc7910851c9fa0de",
+      "rect": [
+        432,
+        240,
+        576,
+        360
+      ],
+      "native_rgba_sha256": "051ded5e6bf4fa72749c2fd686b3e15601772e5a6596a5f71f57b9acfc41ab5f",
+      "alpha_bbox": [
+        35,
+        14,
+        103,
+        108
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 25,
+      "source_rgb_sha256": "54932259d70af846b4cdf89939ea849207555d76879e7edc8aef849c9c1dacc0",
+      "source_png_sha256": "f789e2560373a0606e19ea1aef3e5ccc3ce44b6af9f4e69c811f2b5a95155a19",
+      "rect": [
+        576,
+        240,
+        720,
+        360
+      ],
+      "native_rgba_sha256": "58ca99cdb9ba29b9ac05362f20f8c23ab69950ee1d03f50c9dde04921e9473e3",
+      "alpha_bbox": [
+        20,
+        16,
+        99,
+        106
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 26,
+      "source_rgb_sha256": "452053af2eadd7ce100c81ac3e48935077dd8905734624d2afe214ccc65b4cb4",
+      "source_png_sha256": "3e9f68416937fe1feed83b9747b50f1886cc4ef0b7836a35024452fda12a60ed",
+      "rect": [
+        720,
+        240,
+        864,
+        360
+      ],
+      "native_rgba_sha256": "f211ae0d5a8ed356094168addaac79783fe4dcc476799a2e0890d673f3c5b37b",
+      "alpha_bbox": [
+        22,
+        14,
+        113,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 27,
+      "source_rgb_sha256": "d73a358e7b5d6788e3d4dedea9fb1c2c08f5d551e4f5f70b487ae8dbb96cb11f",
+      "source_png_sha256": "926115a4f3462baac9d551b06ce1f61a33e3f941093213fe59a0998e20bcc9e3",
+      "rect": [
+        864,
+        240,
+        1008,
+        360
+      ],
+      "native_rgba_sha256": "ce2d8f8e1c43575291d942f34243e8002b79c46536d8adbf7d63e47f7052a015",
+      "alpha_bbox": [
+        23,
+        15,
+        110,
+        111
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 31,
+      "source_rgb_sha256": "d305e7a4904bbb87c3f26c05639bea99a0167fce6562eaf37f92ce416e68c700",
+      "source_png_sha256": "b99abd9d1f42bf9a8aa9ff3f6ec959f56d02b00b4f6ef5b24d15d8f1d916648c",
+      "rect": [
+        1008,
+        240,
+        1152,
+        360
+      ],
+      "native_rgba_sha256": "1aa93ccb4636bc26a9b52fb9164aef9c21503a21b07ee2d461cba3bdb1a5ea1f",
+      "alpha_bbox": [
+        20,
+        16,
+        99,
+        106
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 36,
+      "source_rgb_sha256": "28ef36585a0f9214464b269d9fc0dd8440b813af44faccb0e0041eac109f886d",
+      "source_png_sha256": "c61c8e28afbb370514c53101f4efbffb276f8fef534694b4d634659e5303483c",
+      "rect": [
+        1152,
+        240,
+        1296,
+        360
+      ],
+      "native_rgba_sha256": "54f3b3f5bb20f3d45a60dbce060dc32e6191a662c1757dd2ce4d551098f79681",
+      "alpha_bbox": [
+        30,
+        14,
+        110,
+        108
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 37,
+      "source_rgb_sha256": "6e60d2a5cf9f402ae6bdb35f0f29035f67622fe5168212c0dd0cbf27cef7adcd",
+      "source_png_sha256": "2c449a82de40083a65880487dd80cfa36eb8057e093a23e31f7b271c478a7969",
+      "rect": [
+        0,
+        360,
+        144,
+        480
+      ],
+      "native_rgba_sha256": "23517cf409ee5a02b75f738a14274bd89754fbab039ec62eb450d4a6a20dd0f2",
+      "alpha_bbox": [
+        27,
+        17,
+        107,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 38,
+      "source_rgb_sha256": "2d6762d85f0c7adcb5519d327e1b24e5d080bc79ebeb7aa2500759072eb77d4a",
+      "source_png_sha256": "420dbb18632953ed996c53c1868a08766af1dc8d311fd07d1d1c9a65fe3bd4df",
+      "rect": [
+        144,
+        360,
+        288,
+        480
+      ],
+      "native_rgba_sha256": "0d04b1873999e18770b112e6729006f5395bea494f97840444a9ffe4ec272d6f",
+      "alpha_bbox": [
+        25,
+        13,
+        113,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 39,
+      "source_rgb_sha256": "38594823f94ffd610046f30c688245139c37addbf4565c5b2ecdc304f798232a",
+      "source_png_sha256": "a0225d1082b41a3c2fa2f3d7e0855cc3bd50b546d2c313f208a976af85ab65be",
+      "rect": [
+        288,
+        360,
+        432,
+        480
+      ],
+      "native_rgba_sha256": "6a764adaf0954301b09c753b989281a54baa24965af63e6fa0726e9e9d6358c1",
+      "alpha_bbox": [
+        20,
+        16,
+        99,
+        106
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 40,
+      "source_rgb_sha256": "66d09ccc18efdc50f266893bb07ac6d352c90d62459094d834bcb5e1bc4c8ea6",
+      "source_png_sha256": "8afb5de60fceac745efd61c26e421c31a5d2c1295b6c98dae16a69587f613f65",
+      "rect": [
+        432,
+        360,
+        576,
+        480
+      ],
+      "native_rgba_sha256": "0d1304d3ec62e73993119f4576e5cab4ba9919ce8bac62d9d86e8f01a8634313",
+      "alpha_bbox": [
+        20,
+        16,
+        114,
+        108
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 41,
+      "source_rgb_sha256": "a605ecda8f2cfa7fd810ed690828fd221544d57346db248d7c2a71d06ffcf550",
+      "source_png_sha256": "a8412e1d848ca59bbf0f938de1cf4370c2f49028a673251c006a197d4fb2fb68",
+      "rect": [
+        576,
+        360,
+        720,
+        480
+      ],
+      "native_rgba_sha256": "aa369d3d310280649b3cbf9712363d48f870b1d4d01c629502a117065b373df6",
+      "alpha_bbox": [
+        32,
+        18,
+        101,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 42,
+      "source_rgb_sha256": "51c2a97b1938ccd8681c77c371d90ce9d27d097fcc781c83ea849518588d07b4",
+      "source_png_sha256": "b01ecdefa945c5ce6b60cd3de9b0a0e7b1ec0d5e6bfdad13503a64ed75324ef6",
+      "rect": [
+        720,
+        360,
+        864,
+        480
+      ],
+      "native_rgba_sha256": "6bf3819f176b662cf157ea8b9cd4badafb81a369dac03b8d6a1008b1ddd72f7e",
+      "alpha_bbox": [
+        35,
+        7,
+        96,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 43,
+      "source_rgb_sha256": "3f553dff20439c4381fe0e779da598b3c4469c2cbbfc39e61913bf1365847a94",
+      "source_png_sha256": "99d9374a6a4c639dd6332c4dba1b2de89f139f8c4c3cf5fa65118dac1ac9420c",
+      "rect": [
+        864,
+        360,
+        1008,
+        480
+      ],
+      "native_rgba_sha256": "2133cab0061a53c198ba6a917a2b540c7151fd569414d78a887d70d5f9aefb6b",
+      "alpha_bbox": [
+        9,
+        14,
+        125,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 44,
+      "source_rgb_sha256": "0df172986ac296ac288090554fa89cfd1baef15cac45d980bb9bbcb07983aea1",
+      "source_png_sha256": "fed193ef30a4c552c96ad0661d56fcb82d55f4a242802683e1823046fb294f12",
+      "rect": [
+        1008,
+        360,
+        1152,
+        480
+      ],
+      "native_rgba_sha256": "7a1c6aea3cda9367f3cf8edafef40f77247a3e07d1481fae8f83bcc64f8e976a",
+      "alpha_bbox": [
+        30,
+        24,
+        109,
+        101
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 45,
+      "source_rgb_sha256": "26db6a7fb18148bce05a2a215d434ccc7882aed8e4f7af913afd433d48eeb889",
+      "source_png_sha256": "db12f75259cef6d63966fa470c50b84cf0f8e4ac141123939187a09b14a346a8",
+      "rect": [
+        1152,
+        360,
+        1296,
+        480
+      ],
+      "native_rgba_sha256": "81cbce3367664ceac76b96f3df4b59c74fb76280c4fbaa9633fe59275a741cd9",
+      "alpha_bbox": [
+        25,
+        4,
+        114,
+        113
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 46,
+      "source_rgb_sha256": "c2d88c4a9ede414628eba27c34e08ef48d5a6f311ed1a83ba6148460bd4fff2b",
+      "source_png_sha256": "e819ed31a225d59a835ca9011b05aaa2cfa93e36f2770776b4fe821b7a6d8ceb",
+      "rect": [
+        0,
+        480,
+        144,
+        600
+      ],
+      "native_rgba_sha256": "cdcdb4601d3ade9784aa04327f75a945cd421ffbf902297d19867440aa685231",
+      "alpha_bbox": [
+        27,
+        12,
+        110,
+        113
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 47,
+      "source_rgb_sha256": "412319236556de7105c85d7bdc9f18e6071c87e4091d15901049cc3bc4019af8",
+      "source_png_sha256": "cf95b3fe6b69e832bfe02af46aeb077dc455984b8c5feb0bb3da5bdb93350852",
+      "rect": [
+        144,
+        480,
+        288,
+        600
+      ],
+      "native_rgba_sha256": "868a3cc85aafd32ea17219a143e51db2e67411e9c82f6f5a51a293334e10de34",
+      "alpha_bbox": [
+        26,
+        23,
+        113,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 48,
+      "source_rgb_sha256": "b92bf058e8ab60695a076da9ce282c65b55df9a6fd3346871c74dd68a8377241",
+      "source_png_sha256": "6b3ea6f4b2d1181ca4fbc18855a9ce58b8b6726f01f8d5597778fd59a815c5f0",
+      "rect": [
+        288,
+        480,
+        432,
+        600
+      ],
+      "native_rgba_sha256": "deaafb6b155939bd846cad58dbd1c01fe6b799750aa4b1a0120869262e0e8843",
+      "alpha_bbox": [
+        21,
+        23,
+        114,
+        82
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 49,
+      "source_rgb_sha256": "b39b8883e0e66f2651865595dd66e0aa59d36895a7c3a41ecf7ac11f116d8bac",
+      "source_png_sha256": "bb918906d98a3f6ea53c5977f8f3a438611dd5c2d844beb4cfd67d566045d96f",
+      "rect": [
+        432,
+        480,
+        576,
+        600
+      ],
+      "native_rgba_sha256": "532236d80ceed411776b38fce862f794ff63a6b01dd8ca7191c12bbe25209270",
+      "alpha_bbox": [
+        19,
+        23,
+        95,
+        101
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 50,
+      "source_rgb_sha256": "d9452eb8b54ea31e92df60acade3a8dfb7f1cba23209ac7961c09df779cfe721",
+      "source_png_sha256": "1245dd2c2ebf64f5225c3ea19f68b3116118230ac4cff90afae6053d137bb5ee",
+      "rect": [
+        576,
+        480,
+        720,
+        600
+      ],
+      "native_rgba_sha256": "9f81bb4dd671dfb6adf4425ddaf6a625b9bfaee773b5dc990572008ef9295db2",
+      "alpha_bbox": [
+        10,
+        14,
+        98,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 51,
+      "source_rgb_sha256": "22f145537c03891166f35666a28fa62732ac008ec6f949abdf0e9c4596bbc443",
+      "source_png_sha256": "5731057051091164f55de0e1406dd5a1416a1a03a4309bb543b00a046ea0b121",
+      "rect": [
+        720,
+        480,
+        864,
+        600
+      ],
+      "native_rgba_sha256": "f11b5bb48efe5f8ce24e10e847ad8d21f5c99db556ddb32f85301d64e0b92ab5",
+      "alpha_bbox": [
+        21,
+        38,
+        106,
+        110
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 52,
+      "source_rgb_sha256": "052317c8d3ff46891ea50da59a37208541e27d0ce942191ff9612fecf0b09c97",
+      "source_png_sha256": "ced8fb0a9391afd7e2d5a9887001e5db3fb892b7d0c465e5240512d7c3e11124",
+      "rect": [
+        864,
+        480,
+        1008,
+        600
+      ],
+      "native_rgba_sha256": "5971ddb010223b629089fab223c052dfa56fac69fca7ccb87dfb8fea8c528334",
+      "alpha_bbox": [
+        28,
+        14,
+        98,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 53,
+      "source_rgb_sha256": "37d550b61d20ba6b238ca57fd1c2304ebb97c424db37cd19ebb61a0416649498",
+      "source_png_sha256": "2f97049266b360aed602bd5a0e173b5f0277fdb33130450523fbe09f18a66a52",
+      "rect": [
+        1008,
+        480,
+        1152,
+        600
+      ],
+      "native_rgba_sha256": "3b3d713663fe3c34903fe5d6f67aa2da0a6e567ae1b7317a6a0fe81bbb84e0fb",
+      "alpha_bbox": [
+        27,
+        17,
+        110,
+        113
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 54,
+      "source_rgb_sha256": "8d679311247f2aebb878b66ad934075da6065862e7c4ca6c2bbaf141d5d2b126",
+      "source_png_sha256": "df4312c06dc1823c0547b1b93032a3e9dd35d07ae8e329540141a51a22077b39",
+      "rect": [
+        1152,
+        480,
+        1296,
+        600
+      ],
+      "native_rgba_sha256": "07971e62d9ac352274fe50fac4c268c24e0caa1cad133690aee8273fad21e225",
+      "alpha_bbox": [
+        23,
+        38,
+        107,
+        110
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 55,
+      "source_rgb_sha256": "df88c43032aa3289fa6fe314524df2c9e13c7f725008687f92d429b57c0cf137",
+      "source_png_sha256": "749cfc99c4627fde25645c7cf1cf9185f68b0d5ab81230146103bd59bc98e0ff",
+      "rect": [
+        0,
+        600,
+        144,
+        720
+      ],
+      "native_rgba_sha256": "ef561ee147e2889bbaf02970643df9565567fbf76d0e46e8cec8062bf119646e",
+      "alpha_bbox": [
+        20,
+        10,
+        116,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 56,
+      "source_rgb_sha256": "2f2619aec005200b7b1ead736c89f3f1d9e747ef8833c9ec9a08e929519a5646",
+      "source_png_sha256": "fce78624fc84799b23f31c69a351a4e37dd84cc8b7bf1484d37b4ab929dbc5ce",
+      "rect": [
+        144,
+        600,
+        288,
+        720
+      ],
+      "native_rgba_sha256": "c3a6cb5a6d0d9618403ad0357a218a996150dc38e1deee382d06ca75999e99a5",
+      "alpha_bbox": [
+        17,
+        25,
+        128,
+        103
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 57,
+      "source_rgb_sha256": "2cb0764778b65910f9688cf707e088ad2717011f486e8eba906a350a47f889e8",
+      "source_png_sha256": "1ef8a803540c15e038141a6743f2d158fc9ad1b9af61fa9512c01f6c28e0c4cc",
+      "rect": [
+        288,
+        600,
+        432,
+        720
+      ],
+      "native_rgba_sha256": "4e58c8419816313e23d7d2913d8f5a88f4663ded0d63279b7f329d9ba161bf47",
+      "alpha_bbox": [
+        19,
+        17,
+        108,
+        114
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 58,
+      "source_rgb_sha256": "c0b77e7a22a8c6e949fb4d9349884edb5f52bd00a9758ce5f4850c93540dc117",
+      "source_png_sha256": "7c5626273a0bfd43522dfa3b897c6d5adc5f57a89efaeefdc0cddf0578f483c4",
+      "rect": [
+        432,
+        600,
+        576,
+        720
+      ],
+      "native_rgba_sha256": "54a62b5d48725916f3f88a66335ad447eab4c0ef95ba6487c4574e7683049a2d",
+      "alpha_bbox": [
+        32,
+        12,
+        115,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 59,
+      "source_rgb_sha256": "28e9ecc5175fde8e5bd9ae40d5b8c4e5b3a82011640ac9c98904af9457c493a4",
+      "source_png_sha256": "bb3ef178b413df8ac7cb065fa6c555ade38eac470f87e4d61eb4df0437896603",
+      "rect": [
+        576,
+        600,
+        720,
+        720
+      ],
+      "native_rgba_sha256": "4296643c8ed31512e4ca19aec3a20b1785b20acc864b4a421dbf4ca92c3754c1",
+      "alpha_bbox": [
+        31,
+        13,
+        112,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 60,
+      "source_rgb_sha256": "fadf3b7669a0bb554af70ada5d6e9d03dfac51d5c98e05fe9b151f7d2a312c5b",
+      "source_png_sha256": "c6c27cb3543a8ca0d2e6d4912e4450e6939903ac1b4a89f5743c393893804e9b",
+      "rect": [
+        720,
+        600,
+        864,
+        720
+      ],
+      "native_rgba_sha256": "8d37b3b382b2cb9c6adf710bc91e2de0edcb5cf9a478f0a1da14c963302479f5",
+      "alpha_bbox": [
+        16,
+        16,
+        106,
+        114
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 61,
+      "source_rgb_sha256": "79525acf7ee5fa5074b576afbccf48ffab080fa69e7f49ee6ac654a4f6beeebe",
+      "source_png_sha256": "d5da3e0c8ab7918274dbd4fce5c4e62a9fc5d50bc691f47672a76bc5b7dbfa8b",
+      "rect": [
+        864,
+        600,
+        1008,
+        720
+      ],
+      "native_rgba_sha256": "677155a38bde01435ca31861a8829ceeeaad615db518218e0607b25156be49ae",
+      "alpha_bbox": [
+        20,
+        8,
+        109,
+        103
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 62,
+      "source_rgb_sha256": "2ec5bac810384e81c5013518a9bc06ba3f8453df609a6252ccc0a671cf527a85",
+      "source_png_sha256": "9738745d354df4f02d7b82698cf6c6ba19a460b25f1174f56bfffc8ac7582752",
+      "rect": [
+        1008,
+        600,
+        1152,
+        720
+      ],
+      "native_rgba_sha256": "66eeb80f4e8227848624873e52a36bd09050c912354cb0f4cf169d8bfefdee96",
+      "alpha_bbox": [
+        27,
+        19,
+        110,
+        113
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 63,
+      "source_rgb_sha256": "b84e6b8cba2a79d03522db97e586f0058e42ad3d1c204dde406f4eae284885b2",
+      "source_png_sha256": "90ee6a8820ba895336fbeb60837e8e200f280e0ca60a76c0ed0dae8154affec2",
+      "rect": [
+        1152,
+        600,
+        1296,
+        720
+      ],
+      "native_rgba_sha256": "010a465eb286878ed2f2ad4c7b26ab5e6e22ced530db33e20ed6c6ee4fb8ef1d",
+      "alpha_bbox": [
+        33,
+        14,
+        98,
+        110
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 64,
+      "source_rgb_sha256": "bcc7348b7ec7b545fff916f7aaf9e2befbf3078e0e4abf7c843cdca9b7f0374d",
+      "source_png_sha256": "db1c105841c256abfa95f32652537f84ed9fd5ac1a4067df58aeefe679fe729c",
+      "rect": [
+        0,
+        720,
+        144,
+        840
+      ],
+      "native_rgba_sha256": "4bfc71aa17f98cd219f9e7c96ae8c5f19b4d8a475550f0e8498969b350d9b12b",
+      "alpha_bbox": [
+        21,
+        13,
+        109,
+        109
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 65,
+      "source_rgb_sha256": "c4ad05516694900de040466bae086535d47a676f47a96238d44631812f27fe1e",
+      "source_png_sha256": "01dd9267babb25f4c4e20b966b2da4bb9abe9c2030bd649ad05a7d088c26fc3c",
+      "rect": [
+        144,
+        720,
+        288,
+        840
+      ],
+      "native_rgba_sha256": "e77821e5ff9314663118702893b5b6072f5a9a45d9eaf35a4997d60dd4f4801e",
+      "alpha_bbox": [
+        16,
+        22,
+        106,
+        107
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 66,
+      "source_rgb_sha256": "49c48280bde423ba5537c3cf0650197ed4ed675cef496ed1863d32a39b308cae",
+      "source_png_sha256": "ef2f72275490f9e5805f7f115c270cc5739570baf90f96910f08f315315b4a69",
+      "rect": [
+        288,
+        720,
+        432,
+        840
+      ],
+      "native_rgba_sha256": "c7eb5f0bea9b4d8350b119d4bd07df0b159576606cce80fdeb6f72f6224dc758",
+      "alpha_bbox": [
+        17,
+        26,
+        133,
+        103
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 67,
+      "source_rgb_sha256": "ffa32693fb02e8d8946f34e3b2f0bf6ce54d3088425827467f8b33beef9ad35b",
+      "source_png_sha256": "ab9074a8fe91ce1fc8a269ddb03d8383fcb1e6d1f772cfc463ff37bdb6d48fd8",
+      "rect": [
+        432,
+        720,
+        576,
+        840
+      ],
+      "native_rgba_sha256": "ac34653f03561150254b2ff5cfa416b424f680e4330b51e33db2262ed4f2f998",
+      "alpha_bbox": [
+        14,
+        18,
+        128,
+        98
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 68,
+      "source_rgb_sha256": "99193e240952f56ab068c1e6962d56bae6257a7022ff92b93e067db36b201261",
+      "source_png_sha256": "a8911f9720eb7b1ecfb8d4c936b85433078fd6bc5a616309eeaebab38e8e3dd3",
+      "rect": [
+        576,
+        720,
+        720,
+        840
+      ],
+      "native_rgba_sha256": "af33b0921faee0bf676e6da448fc6edd1656576045d2930447f623f11fa54310",
+      "alpha_bbox": [
+        7,
+        14,
+        98,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 69,
+      "source_rgb_sha256": "783274d18a61a57521bd917d1bfce35e99d5f0d4d04aff565189b21fc965bc73",
+      "source_png_sha256": "d96bfd3ecdb9943a1daf4ee443aaf6108ecd1b3b3a53423344f0f9ae72c7c3c2",
+      "rect": [
+        720,
+        720,
+        864,
+        840
+      ],
+      "native_rgba_sha256": "ed3ead415d1dc5d8940a930d9744fcdce02a278400a82fffe3719c0f5aed14bd",
+      "alpha_bbox": [
+        13,
+        14,
+        98,
+        112
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 74,
+      "source_rgb_sha256": "71d72ee487b9c21bddf6a3f1b36713f54d3abcc45ef4f47ec92425b66a94d176",
+      "source_png_sha256": "ee6785d42d56adb7605ce4f81df76973a52aa2dee005b0c371d794b63f64783e",
+      "rect": [
+        864,
+        720,
+        1008,
+        840
+      ],
+      "native_rgba_sha256": "571ab39f2089afd2189b5171c7f216f1aafccb2966771b8af0d303e5b9f12dd4",
+      "alpha_bbox": [
+        48,
+        17,
+        86,
+        103
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 75,
+      "source_rgb_sha256": "6a1c4a98510d20ec62308c4b5bf82f0f8e4344a570ddfe0e55118397d05a6314",
+      "source_png_sha256": "ca6d88d022b0f5b610c25c2d3cc103e05d6a58d90cfe04e62987f1c79ad7ac40",
+      "rect": [
+        1008,
+        720,
+        1152,
+        840
+      ],
+      "native_rgba_sha256": "cc42085378c1efcf86440ce834866df9eda10c32c7778638e2237a0e34882c1b",
+      "alpha_bbox": [
+        35,
+        28,
+        99,
+        92
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 76,
+      "source_rgb_sha256": "d82996edcb545b87c6783d4d84cd6168c424afbdba39e3a403375416cbe337a6",
+      "source_png_sha256": "46277ca1265ae0cad4805f492274b42e62b488634e71c314a4bae2dc0769ee8f",
+      "rect": [
+        1152,
+        720,
+        1296,
+        840
+      ],
+      "native_rgba_sha256": "58c7276405d43302ba90705d64398dcff1974ed6541723a42c6f8e1470dc45f4",
+      "alpha_bbox": [
+        24,
+        41,
+        110,
+        79
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 77,
+      "source_rgb_sha256": "6b16f9f6fe0a8ad602378b916836fe0286b9d8689f16c8d4a1cd14b5bec3f650",
+      "source_png_sha256": "bd6ccdab707a3c7586aff6c301b0f7b0c585e6ca0015abb2d1e74d5edae33024",
+      "rect": [
+        0,
+        840,
+        144,
+        960
+      ],
+      "native_rgba_sha256": "c9fe3abdd0be6dc903e3381145fbef63b022fce69bfe6708d004ca3e63a556ec",
+      "alpha_bbox": [
+        35,
+        28,
+        99,
+        92
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 78,
+      "source_rgb_sha256": "bb45b98c125f4c4868b4bf93b018e89242ac54d175ef282e2dbf18a27683f0c4",
+      "source_png_sha256": "29c461ac6f247b0e0bd2ca96eda7ab9feeef0a3e23788c49c6451badd1eeb345",
+      "rect": [
+        144,
+        840,
+        288,
+        960
+      ],
+      "native_rgba_sha256": "6a39a90a21cb64eadd986b429b6d73c2fa35c4c408a23e2a46831ffb67b16ba9",
+      "alpha_bbox": [
+        48,
+        17,
+        86,
+        103
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 79,
+      "source_rgb_sha256": "5bcbdbf57da087e31915a765845a10cbb1c6e8db214ed329fcd5ae8574670483",
+      "source_png_sha256": "45dc889d4bd13aabd9fa9cf18e76902ab1f8ffd44e1c901a3215c9220dbe9210",
+      "rect": [
+        288,
+        840,
+        432,
+        960
+      ],
+      "native_rgba_sha256": "bf2dafe37919868df5240c0b0fa78a634c026089472178dd3fa0af37a757b334",
+      "alpha_bbox": [
+        35,
+        28,
+        99,
+        92
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 80,
+      "source_rgb_sha256": "25bc9c80f484ad642c9aa5d2ea02022f4de1836a4959ef6f1b3fb7d5f549a9ef",
+      "source_png_sha256": "876618efbe6acb7ea2778d2a218c358e16d6e4e4cf8073727e8b285ef966d7fc",
+      "rect": [
+        432,
+        840,
+        576,
+        960
+      ],
+      "native_rgba_sha256": "010cd1a5eaa6b530425bbbb010322339785e46ac62c53595408eca07a0ec2a5b",
+      "alpha_bbox": [
+        24,
+        41,
+        110,
+        79
+      ]
+    },
+    {
+      "archive": "KOLMPICS",
+      "index": 81,
+      "source_rgb_sha256": "cb7cd2df4de374168b8091890689d2b120326be7c4709e32bd21fa5b3d2d7486",
+      "source_png_sha256": "0ca7535d46578bb5ef6534b02c4925e005af467bcb422b955c8d1a07e7244d3d",
+      "rect": [
+        576,
+        840,
+        720,
+        960
+      ],
+      "native_rgba_sha256": "1d43a686148e7c8bf183a36f21fbf6cbc3e6a5f918e22ea7f41bb08f7141ff1f",
+      "alpha_bbox": [
+        35,
+        28,
+        99,
+        92
+      ]
+    }
+  ],
+  "font_license_sha256": "5bb218343ded506b258d86186d460fc47d9b6b28f0e642cf32676c396b7df763",
+  "font_source_sha256": "a04178ec485dffdff7cc0c0c20e1fce9202d7e2160d805e8e44a4c8841c58481",
+  "source_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+  "generator": {
+    "code": "tools/hd_action_icons.js",
+    "code_sha256": "82142358e3d5fd9845d1d5bb8297d04606078df71edccc50e15eed05b549ad57",
+    "tool": "tools/build_hd_action_icons.py",
+    "tool_sha256": "4472876f880f9fa985f7bd07f5cce2ddeb50d7e50aea26691362956cedbbb41a",
+    "canonical_style": "docs/verification/hd-ui-theme-20261012/review.js",
+    "canonical_style_sha256": "ecab3ad4a8560f219c4e848b7526c36fd366a54ef6bffba8e739ab79ae88967e",
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/154.0.8037.92",
+      "revision": "@334b65d254ccc35df4fca82706d1753227b01039",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "jsVersion": "15.4.80.19"
+    }
+  },
+  "excluded_data_mask": {
+    "index": 28,
+    "size": [
+      56,
+      57
+    ],
+    "source_png_sha256": "01cd742cdefcf0b9f0815d519783c2164552e714cc2523880cc3a63f00ba009a",
+    "evidence": "RE-012; internal/town/outdoor.go Crest"
+  },
+  "mother_entry": {
+    "entry": "Knights-of-legend/KOLMPICS.0",
+    "sha256": "b1768c864bab065c2c59cc9d4d22ba33de1de7abe9d9d9f132472b497919756d"
+  }
+}

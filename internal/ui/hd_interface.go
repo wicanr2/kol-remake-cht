@@ -191,6 +191,11 @@ func (h *HD) toolbarHD(dst *ebiten.Image, sprites Sprites, indices []int, select
 			if err != nil {
 				return err
 			}
+			if h.pages != nil {
+				if icon, ok := h.pages.icons[h.fingerprint(pic)]; ok {
+					pic = icon
+				}
+			}
 			h.drawHD(dst, pic, hdRect(r.Min.X+24, r.Min.Y+8, 96, 80))
 		}
 		s.label(dst, command.title, hdRect(r.Min.X+10, r.Min.Y+96, 124, 30), 26, hdInk, true)

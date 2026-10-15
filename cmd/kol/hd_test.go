@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/wicanr2/kol-remake-cht/internal/assets"
 	"github.com/wicanr2/kol-remake-cht/internal/input"
 	"github.com/wicanr2/kol-remake-cht/internal/screen"
 	"github.com/wicanr2/kol-remake-cht/internal/ui"
@@ -32,7 +34,11 @@ func TestHDInputKeepsTargets(t *testing.T) {
 }
 
 func TestGraphicsSwitchIsAtomicAndReusesPack(t *testing.T) {
-	g := game{canvas: screen.NewCanvasScaled(3)}
+	lib, err := assets.Load("../../assets/original-derived-png/ega")
+	if err != nil {
+		t.Fatal(err)
+	}
+	g := game{canvas: screen.NewCanvasScaled(3), sprites: &spriteCache{lib: lib, m: map[string]*ebiten.Image{}}}
 	if err := g.enableHD("ega", "../../assets/hd/first-slice", "zh-Hant"); err != nil {
 		t.Fatal(err)
 	}

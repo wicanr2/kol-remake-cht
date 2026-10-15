@@ -11654,3 +11654,14 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - audit-equipment-matrix.py先沿原v7稽核，再核對本批十圖、456張雜湊索引、覆蓋來源與18組完整畫格通過。最初誤把items與acknowledged清單長度當成開放／完成數，已改用現有worklist.py的stats及out_of_sync契約，乾淨重跑退出0；實際維持16開放／92完成。387個文件連結無新增失效，原18個歷史缺項保持；全部輸出為1000:1000，無root-owned檔或*.md誤建目錄，本批Docker容器已回收。提交前diff檢查退出0，提交推送實際結果另存本機git-closeout-matrix.json。
 - 常規sandbox暫存Git檔案時因.git唯讀退出128；依既有commit／push授權改用主機Git權限，23個已稽核檔案成功暫存，staged diff檢查退出0。這是執行環境限制，沒有改動遊戲規則或驗收閘門。
 
+
+## 2026-10-15　68個HD動作圖示正式接入
+
+- 路由命中重製技能、畫面驗證、spec-gated及README標準，沿既有手繪／銅色Canvas／1920×1200授權。圖示子組先升READY，再接入正式PNG載入、來源驗證與頁面／工具列，沒有新增玩法或v3格式。來源與工具見[正式收據](docs/verification/hd-actions-runtime-20261015.md)。
+- 計數勘誤：先前69項誤含56×57的KOLMPICS28。RE-012與outdoor.Crest證實它是城鎮徽章AND遮罩，真正動作圖示68張24×20。現況、工作清單與覆蓋表已訂正；舊矩陣與coverage.json保持原雜湊。開工分類圖片748／結構遮罩6相應訂正747／7，總804不變。
+- 初次原型預檢遇到遮罩尺寸；獨立畫布檢查另發現45／46揮劍超格，修正繪圖幾何後重建，不裁切或放寬門檻。既有Chromium映像重建原生圖集逐位元相同。V10的六型24盾面抽樣通過，仍屬隔離裝備原型。
+- 正式首次測試被本機go.work外部掛載擋住；GOWORK=off後，錯用根目錄./...又納入歷史原型。改回既有internal／cmd範圍後，同一映像乾淨全套與sceneverify通過。這兩項是驗證入口問題，沒有修改產品規則。最終來源384、HD資產91；最後只新增素材數量／母體負例，受影響素材測試窄驗通過。
+- 正式14完整GPU畫格對V10最多一色階、alpha零差；兩條正常路徑71狀態、中文字及71張EGA RGB／alpha相同。素材14項及來源4項負例拒絕，UI五項原子替換負例保持既有組。最初核對把63個純圖示誤當必有文字標籤，訂正為核對原有五個非空標籤皆繁中；不新增推測名稱。
+- 首輪GUI四組24事件與HD往返已完成，短Ctrl+Q取樣成單獨Q後退出逾時。保持Control跨完整Draw再按Q，原產品未改；相同四組乾淨重跑24事件、兩視窗鍵鼠、完整Inn／隊伍保持、往返零差及退出0。正常住宿11／重載5，完整v3只差saved_at，修改前舊v3可讀且檔案SHA保持。
+- README增加同主題來源／原生HD圖示對比，四張已驗PNG只提交目前private repo，主機gh認證及PRIVATE狀態已核對。完整模型、存檔、錨點及原始資料只留本機。新文件已掛回README、SPEC-039、現況、工作清單與HD覆蓋入口。
+- 本輪採單一正式接入commit並推送；執行結果由工作區git-closeout-actions.json記錄。舊Release／tag保持。完整裝備仍DRAFT，工作區保留續作，凍結384份正式來源供後續重現；每批容器使用--rm，結束再核對容器與UID/GID。全HD目標及16開放／92完成不變。

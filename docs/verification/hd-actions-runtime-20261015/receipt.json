@@ -1,0 +1,75 @@
+{
+  "schema": "kol-hd-action-runtime/1",
+  "status": "limited CONFORMED",
+  "base_commit": "d4347ab9103ad82a4e15751f0f581f3fd5b641b5",
+  "formal_go_module_inputs": 384,
+  "hd_asset_files": 91,
+  "tests": {
+    "go-test-formal-actions.log": {
+      "sha256": "71ba0f58a98727da60aa93596cba10cff340c59f1a09df323f53764a8b989a49",
+      "exit_code": 0
+    },
+    "sceneverify-formal-actions.log": {
+      "sha256": "084493938c2a5c2244936173599d416759d775ea338181d949098db6520a1219",
+      "exit_code": 0
+    },
+    "negative-formal-actions-final.log": {
+      "sha256": "53ef512d35c02e620fef66837ca84d6fc7033f46718892c36cfbe991e622277b",
+      "exit_code": 0
+    },
+    "build-formal-actions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    "run-formal-action-gallery.log": {
+      "sha256": "380ea677163d840d2f17b2460f2770c9fa20ef88056d5ec6f0782947803f17a3",
+      "exit_code": 0
+    }
+  },
+  "binaries": {
+    "formal-actions": "79c3d00b164414230f74635660f9420822a8ba2605ed30d5749090ca036f4afe",
+    "formal-action-gallery.test": "32227e5ed1ea33d0c92349da728e43d3199254cb6f4a151d86e7c78a6a59dbde",
+    "gui-formal-actions": "d341d59636771c8948519e8701c4ba746aedce2a8861c7bcd5cadd7d74d1a29e",
+    "prototype-action-v10": "6b676e7471202f98b8ebb66988284383c50ced9c35101db1bf42028b4f0acd37"
+  },
+  "normal_states_per_variant": 71,
+  "ega_rgb_and_alpha_exact": true,
+  "full_hd_gallery_max_delta": 1,
+  "gui_events": 24,
+  "gui_full_roundtrip_max_delta": 0,
+  "save_check": "save-check.json",
+  "original_mask28_preserved": true,
+  "rebuild": {
+    "tool": "../../../tools/build_hd_action_icons.py",
+    "source": "../../../tools/hd_action_icons.js",
+    "atlas_sha256": "dde4e265352f8b0791f059425a8cbeddcaedfcf071a80acd2473c99b8ef02291",
+    "rebuilt_atlas_identical": true,
+    "manifest_identical": true
+  },
+  "runtime_scope": "68 native action symbols; full equipment renderer remains DRAFT. Linux Docker only. No new original oracle, natural completion, release or platform-machine claim.",
+  "local_workspace": "workplace/hd-equipment-pages-20261015",
+  "local_frozen_formal": "formal-action-source",
+  "files": {
+    "asset-inputs.json": "661dc28d9398dd4eed836d50bae3b5e0f127beb24c0df1af8aba0eeb6c37b3d1",
+    "formal-inputs.json": "1d3f6b61d3fca36bacc4591077b7efcc6780252d52358eb68cd915453a91457d",
+    "gallery-check.json": "1118a77ebc799ab5f9854b13d05e815c20a2f013094a62467cd7c801beb8fbe5",
+    "gallery-frames.json": "aa49fac114fc909a2773b43148c7109a1f5bd29478f6ed5c797f589c5fb2d3fb",
+    "gallery.go.txt": "7c5680914006c8683d345b1ea40ba1d53dc6838e8d7fd912f8e3e787a8d70b3f",
+    "gallery.sh": "1f72f5bb92bc344d22e235dfadf222650f28c154036583403b6562f25dc6d778",
+    "gui-check.json": "289df42687ca1437fc91ff22ebb105bcf56189ed98126c050fdddd9216edb5b6",
+    "gui.py": "5ce28f9e3ea715c71e368ad07337760ac118e9884b3f525f00208cc84800fb1b",
+    "inn-ega.png": "2ec427b2ddee12097af7b853a6ebd19c6d0196b0f4113fb8c0b7532ed77dbdef",
+    "inn-hd.png": "78d4e8909132147aab02c9addce77a567cd1f9b9c819c6aaea59ddbf2e542cf0",
+    "manifest.json": "a91169443c86983e7563b99fb8089a436db4b8a318ba890b7026b0bc9e9cc0d9",
+    "native-symbols.png": "8ce493b4a28dbcd622cf97c279ac6c85d103aa421a1b86b215590adb898eb736",
+    "normal-check.json": "fb0a53acc3cfcacced22256d73a0a66a68f02efbc51853034b69a65251369e85",
+    "normal-check.py": "1043c7dc908970f6a33b6ac83f586cb9816d064b9e5814d83d8f3b95b402dad1",
+    "normal.py": "cb973b7b76356bc6116e00c6da706c012ac451f79a5afb8c39f6a5f26dc6e86d",
+    "prototype-inputs-v10.json": "59d4df4439bd2a33ddbd292ad00c2daa23a39638ae38f4e7a0a93ae879165b89",
+    "save-check.json": "84f0e9165cfaef205c6df8bddee0e26335aa313b907319a7f796cee7c26dd971",
+    "save.py": "8f01862499410dec377d4990277b325e7c3b6b674e06099d7e711ff0d3c3c0bd",
+    "source-symbols.png": "3e821e7d7796bb2ecf01566d4293d0b183d21a4bda010563ba5201794cd0aac5",
+    "tests.sh": "a4ae8311e12b7a58b4c3b6d6ceb2b01ff43a1dd52912c475d1d27eb4c40d4729",
+    "review.html": "5ec40ad86085ba42fa69cd5069d519af900785caa1efc9e687c8524efcffb007"
+  }
+}

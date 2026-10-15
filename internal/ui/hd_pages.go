@@ -74,6 +74,9 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 			return fmt.Errorf("HD角色來源第%d圖須為40×38", source.Index)
 		}
 	}
+	if err := h.validateActions(sprites); err != nil {
+		return err
+	}
 	for i := 3; i < 71; i++ {
 		cmd := hdCommandFor(i-3, false)
 		if cmd.key == "" {
@@ -84,6 +87,11 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 			return err
 		}
 		p.icons[h.fingerprint(pic)] = h.style.images["icon-"+cmd.key+".png"]
+	}
+	if h.actions != nil {
+		for key, icon := range h.actions.icons {
+			p.icons[key] = icon
+		}
 	}
 	p.validated = true
 	return nil
