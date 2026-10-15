@@ -11640,3 +11640,17 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 本批仍DRAFT，完整成套／混搭／卸裝、三款獨立護具覆蓋、自訂盾面抽樣、所有動作圖示、正式原子載入與v3仍開放；正式380份runtime／385份稽核輸入、88份HD資產與現行Release保持。原型絕對路徑、原錨點、完整模型與診斷overlay不進production。工作區仍供續作用，不提前封存或清理，全畫面HD保持active。
 - audit-body-runtime-v7.py核對45張PNG、54份提示、21款原生裁取、381份v7來源、原正式／v6來源與固定收據通過。377個文件連結沒有新增失效，原18個歷史失效連結保持。所有輸出為1000:1000，全專案沒有root-owned檔案或誤建*.md目錄；相關Docker容器已回收，其他專案容器保持。主機gh憑證與private儲存庫已核對，提交前diff檢查退出0。提交推送實際結果另存本機git-closeout-body-runtime-v7.json。
 
+### 2026-10-15 受控裝備矩陣與盾面／取樣修正
+
+- 前輪為實際進展：23ebde19已推送六型原型與正常比較，工作樹乾淨。本輪重核AGENTS、WORKLIST、CONTEXT及remake／畫面幾何路由，沿重製技能與retro-remake-tactical-parity；文件工作另讀職責及README標準，不重新開啟舊分支。
+- body-matrix-v7_test.go.txt透過Go overlay呼叫未改動v7的portrait.Compose、中文物品頁、HD字型與來源驗證，預登354案例。原模組與資產唯讀，原型來源不寫入測試檔；所有fixture與自訂點陣只留本機。第一輪錯把town UI bank交給newchar字串表載入器，0畫格、退出1；空目錄與日誌另存，改用正式newchar表後同工具鏈重跑，354畫格、213來源、6018中文文字、68.17秒及退出0。這是受控合成，不作正常操作或原版程式對拍聲明。
+- review-body-matrix-v7.py核對354張PNG及RGBA雜湊、原尺寸與全部文字，產生14張接觸表。成套54、卸裝48、混搭36、護具12、武器168、盾24、腰帶六及自訂盾六均已檢視。三款獨立護具45／51／53實際覆蓋已有畫格；原翼族三爪、腰線、拳頭與美術原檔保持。發現五型的預設／自訂盾面十案例錯位，原畫格作已證實缺陷保存。
+- 原因為v7的一般BOOKDATA分支把六倍座標送進還會乘二的drawHDUI，並未跟隨已校準盾牌。prepare-shield-overlay-v8.py不改381份v7，另存單檔覆蓋，依所屬SHLDPICS3的轉換呈現完整40×38點陣。原354中的18案例窄驗退出0，Figure與Piece保持；原型修正不寫回typed、點陣或v3。
+- 初次獨立差分誤要求八個對照的完整畫格零差，實際差異只在工具標籤1／255，物品頁零差；原一色階閘門保持。verify-shield-overlay-v8.py進一步在女性精靈上身發現盾面區外2／255，保留失敗並重新載入幾何路由。未改動v7、同18案例順序的控制試驗也重現兩案例兩色階，證實繪製順序本身可觸發差異，並非盾面規則改變；結果見本機v7-subset-control-difference.json。
+- 依鎖版Ebitengine v2.9.9的image.go契約，NewImageOptions.Unmanaged不會進自動紋理圖集。prepare-stable-mesh-v9.py只把九款上身網格的來源及輸出改為獨立紋理，裁取以零原點保存並快取；輸入RGBA、頂點、腰線、手臂比例與其餘呈現保持。run-body-stable-v9.sh先以純呈現器overlay跑UI／入口／sceneverify，再獨立執行84案例與18個不同順序的新程序，全部退出0。沒有在同一RunGame結束後繼續跑其他UI測試。
+- verify-stable-mesh-v9.py核對兩側102張PNG、1428及306筆中文、完整RGBA與來源凍結，18組完整HD最大RGB1、alpha0。67個非盾面女性精靈畫面相對舊v7最多2，只是跨呈現器修正診斷，未用它放寬同版一色階。實際v9原型SHA為d11d6d10d059002cfb5179f479d6f9e90f4304b7b55702957ada1de6a3f6c4a3；先前v7的219正常狀態及48個實際F10不冒充新v9結果。
+- 盤點KOLMPICS manifest證實69個動作圖號非連續，原圖接觸表只留本機。完整動作圖示、預設盾面原生HD匹配、嚴格原子載入與正式v3仍開放；自訂盾面維持點陣例外。本批不作正式接入、平台真機、自然通關或原版parity聲明，全畫面HD保持active。
+- 主機gh auth status及repo view通過，儲存庫仍PRIVATE。publish-equipment-matrix.py保存十張已核對比較PNG、單檔隔離呈現器、381份輸入、只含雜湊的畫格索引及精簡收據；原模型、fixture、存檔、原錨點、音訊與圖集原檔不進Git。README、唯一目前狀態、規格、覆蓋表及工作清單同步，舊收據與現行Release保持，工作區仍供續作。
+- audit-equipment-matrix.py先沿原v7稽核，再核對本批十圖、456張雜湊索引、覆蓋來源與18組完整畫格通過。最初誤把items與acknowledged清單長度當成開放／完成數，已改用現有worklist.py的stats及out_of_sync契約，乾淨重跑退出0；實際維持16開放／92完成。387個文件連結無新增失效，原18個歷史缺項保持；全部輸出為1000:1000，無root-owned檔或*.md誤建目錄，本批Docker容器已回收。提交前diff檢查退出0，提交推送實際結果另存本機git-closeout-matrix.json。
+- 常規sandbox暫存Git檔案時因.git唯讀退出128；依既有commit／push授權改用主機Git權限，23個已稽核檔案成功暫存，staged diff檢查退出0。這是執行環境限制，沒有改動遊戲規則或驗收閘門。
+

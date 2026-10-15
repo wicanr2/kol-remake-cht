@@ -19,13 +19,15 @@ HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限C
 
 下一批為完整物品／隊伍頁與裝備合成。其他NPC、怪物、坐騎、城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件繼續，依[13類覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)及[SPEC-039](docs/spec/039-hd-art-ui.md)執行。全畫面HD尚未完成。
 
-目前物品／隊伍原型工作區為`workplace/hd-equipment-pages-20261015/`，仍DRAFT。[六型比較](docs/verification/hd-equipment-pages-20261015/body-runtime-review.html)與[收據](docs/verification/hd-equipment-pages-20261015/body-runtime-receipt.json)為最新入口。六種體型、162款裝備、獨立翼部、28武器及四盾已接入381份v7隔離來源；正式380份runtime／385份稽核輸入、88份HD資產與381份v6副本保持。
+目前物品／隊伍原型工作區為`workplace/hd-equipment-pages-20261015/`，仍DRAFT。最新為[受控合成比較](docs/verification/hd-equipment-pages-20261015/matrix-review.html)及[收據](docs/verification/hd-equipment-pages-20261015/matrix-receipt.json)。六型、162款裝備、獨立翼部、28武器與四盾已接入隔離呈現；正式380份runtime／385份稽核輸入、88份HD資產及381份v6／v7保持，v9只覆蓋一份呈現器。
 
-七張圖集21款補作通過實際透明裁取與參考尺寸；先前17項尺寸缺口已有對應素材，三款女性精靈護具使用現有HD身體。翼族九款腿部已依原PNG訂正為紅色裸足與三枚白爪，舊足甲候選不沿用。女性精靈中央腰線校準、外側手臂等比呈現，武器／盾牌依完整拳頭握點校準；typed座標、玩法與v3保持。
+預登354個實際中文物品頁，涵蓋成套、卸裝、混搭、三款護具、武器、盾牌、腰帶與個人盾面，6018筆文字為中文。LEGSPICS45、51、53各四種上身搭配，未覆蓋部位沿現有HD身體。翼族裸足三爪與完整拳頭沿已驗素材保持，圖集原像素不改。
 
-隔離UI、入口與sceneverify通過。六型各走正常物品17槽，另由旅店正常招募六人，七條路徑每側219狀態、中文紀錄及219張EGA的RGB／alpha保持；人類男性31張HD相對v6最多一色階。女性精靈及六人、物品／隊伍、兩視窗鍵鼠共48個F10設定事件，完整Inn與隊伍保持，完整HD往返色差0，六人獨立容器退出0。最初合併命令外層逾時的結果保留，沒有放寬閘門。
+矩陣發現十個BOOKDATA盾面座標被六倍後再乘二，且未隨盾牌校準。v9按SHLDPICS3模板換算，保持40×38點陣與typed資料；預設點陣的原生HD匹配仍開放。未改動v7只換18案例順序也重現女性精靈上身兩色階。v9將網格輸入／輸出改為獨立紋理，原像素與頂點保持；84畫面與其中18個不同順序的完整HD最多一色階、alpha零差，1428及306筆文字已核對。67個未涉及盾面的新舊呈現器對照最多兩色階，只作修正診斷，不作同版閘門；原失敗保留。
 
-下一步補驗成套／混搭／卸裝、三款獨立護具覆蓋與其餘握持；完成動作圖示及正式原子載入後，再接正式程式並驗v3保存重載。原型絕對路徑、原錨點與GUI診斷不進production。本批尚未正式接入或新增保存驗收；所有13類HD仍開放，範圍見[SPEC-039](docs/spec/039-hd-art-ui.md)與[覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)。
+v9的UI、入口及sceneverify通過，實際原型SHA為`d11d6d10d059002cfb5179f479d6f9e90f4304b7b55702957ada1de6a3f6c4a3`。先前[正常操作與實際F10](docs/verification/hd-equipment-pages-20261015/body-runtime-review.html)仍限v7：219狀態、219張EGA RGB／alpha保持、48事件與HD往返零差。這批未重跑或擴大為v9正常操作、實際視窗、保存重載或跨平台聲明。
+
+下一步完成實際69個非連續KOLMPICS動作圖號、預設盾面HD匹配與嚴格原子載入，升READY後接正式路徑，再驗F10、舊v3與正常住宿重載。原型絕對路徑、原錨點、完整模型及診斷不進production；本批尚未正式接入，所有13類HD仍開放，見[SPEC-039](docs/spec/039-hd-art-ui.md)與[覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)。
 
 現行交付與tag保持`v.1.0.2-20261013`，本批尚未進發行包。組隊與商店已有操作證據，受控七段結局能顯示；從新開局正常完成全部任務至結局仍未驗證。
 
