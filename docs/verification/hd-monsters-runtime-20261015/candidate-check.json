@@ -1,0 +1,3084 @@
+{
+  "status": "PASS formal vs isolated actual-game candidate",
+  "frames": 512,
+  "scenes": 128,
+  "ega_rgba_exact": true,
+  "hd_max": 0,
+  "records": [
+    {
+      "id": "monster-00-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-00-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-01-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-02-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-03-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-04-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-05-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-06-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-07-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-08-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-09-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-10-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-11-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-12-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-13-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-14-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-15-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-16-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-17-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-18-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-19-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-20-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-21-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-22-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-23-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-24-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-25-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-26-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-27-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-28-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-29-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-30-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-info-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-info-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-info-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-info-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-01",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-01",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-01",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-01",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-03",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-03",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-03",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-03",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-12",
+      "variant": "baseline-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-12",
+      "variant": "baseline-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-12",
+      "variant": "prototype-ega",
+      "max": 0,
+      "state_and_chinese_equal": true
+    },
+    {
+      "id": "monster-31-encounter-12",
+      "variant": "prototype-hd",
+      "max": 0,
+      "state_and_chinese_equal": true
+    }
+  ],
+  "source_inputs_sha256": "c910e503d75609fc2d47f9a76e7a0cc4a71d5ef555b971f3a8c44e8e4a6debe7",
+  "assets_sha256": "f628152a1ff391939c16b5dcaae8f7970e1460eb514d1d8aca2c44feb712b515",
+  "original_oracle": false
+}

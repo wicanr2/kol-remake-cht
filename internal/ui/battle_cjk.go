@@ -404,8 +404,11 @@ func drawBattleSheetCJK(dst *ebiten.Image, sprites Sprites, f *font.Font,
 		return fmt.Errorf("%s 肖像 %d 缺少圖片", archive, d.Portrait)
 	}
 	if d.Monster {
-		pw, ph := pic.Bounds().Dx(), pic.Bounds().Dy()
-		x, y = (3+(15-pw/8)/2)*8, 76-ph
+		origin, err := MonsterSheetOrigin(pic.Bounds().Size())
+		if err != nil {
+			return err
+		}
+		x, y = origin.X, origin.Y
 	}
 	drawScaled(dst, pic, x*sc, y*sc, sc)
 	return nil

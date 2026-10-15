@@ -1081,6 +1081,8 @@ type game struct {
 	hdDir             string
 	hdLanguage        string
 	hdPortraitPath    string
+	hdMonsterBlanks   map[image.Point]*ebiten.Image
+	hdMonsterUnderlay *screen.Canvas
 	displaySettings   ui.DisplaySettings
 	displayCanvas     *screen.Canvas
 	displayAwaitFrame bool

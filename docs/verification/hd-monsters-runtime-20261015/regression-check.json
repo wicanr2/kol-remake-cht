@@ -1,0 +1,128 @@
+{
+  "status": "PASS limited normal regression, prepared actual F10 GUI and v3",
+  "normal": [
+    {
+      "case": "winged-regression",
+      "states": 10,
+      "chinese_equal": true,
+      "controller_trace_equal": true,
+      "ega_rgba_exact": true,
+      "hd_max": 1
+    },
+    {
+      "case": "human-slots",
+      "states": 31,
+      "chinese_equal": true,
+      "controller_trace_equal": true,
+      "ega_rgba_exact": true,
+      "hd_max": 1
+    }
+  ],
+  "normal_states_per_variant": 41,
+  "gui": [
+    {
+      "case": "info",
+      "receipt_sha256": "17b70cf2c5bda40f7bf68f1cbcb0f932007ec283873e88df8be560a6cda63dd7",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "e21eaf99c9b8d6550997032eaa0b1b5861b291afd76da7adac3828175bbc0f48",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "e21eaf99c9b8d6550997032eaa0b1b5861b291afd76da7adac3828175bbc0f48",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "encounter",
+      "receipt_sha256": "b1b2930b2591b6fe7eff5371bdb7ed0e7058ea84be38bbeab7efe1eb1cd5bc15",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "5e75460a6ce0f50b85868263c4aa2bb718995b4ffd1398ab3099a4d75a12a7a4",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "5e75460a6ce0f50b85868263c4aa2bb718995b4ffd1398ab3099a4d75a12a7a4",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ]
+    }
+  ],
+  "F10_events": 24,
+  "window_sizes": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "serializable_battle_state_preserved": true,
+  "save_sha256": "521ac1840bd0b60848e37ee6f4c538e6cc74c791e7b5505b077da751c8584448",
+  "save": {
+    "schema": "kol-hd-action-save-check/1",
+    "rest_script": "L R RET SPACE > > > > RET RET",
+    "rest_states": 11,
+    "reload_states": 5,
+    "normal_save_equal_except_saved_at": true,
+    "reload_file_unchanged": true,
+    "old_v3_from_baseline": {
+      "sha256": "d2d9412c3346f66ad5cbf069436dd11f28990e45065d9c1cfc393a5512a10a6d",
+      "trace_equal": true,
+      "text_equal": true,
+      "file_unchanged": true
+    },
+    "limits": "Normal play rest/reload only; no new completion or original parity claim."
+  },
+  "original_oracle": false,
+  "normal_completion": false
+}

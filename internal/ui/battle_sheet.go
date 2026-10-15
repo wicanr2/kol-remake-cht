@@ -73,10 +73,11 @@ func (p *BattleSheet) Draw(dst *ebiten.Image, sprites Sprites, f *font.Font, s *
 		}
 		w, h := pic.Bounds().Dx(), pic.Bounds().Dy()
 		if d.Monster {
-			if w <= 0 || w%8 != 0 || w > 120 || h <= 0 || h > 74 {
-				return fmt.Errorf("MONPICS %d 尺寸無法放入原版資訊框：%d×%d", d.Portrait, w, h)
+			origin, err := MonsterSheetOrigin(pic.Bounds().Size())
+			if err != nil {
+				return err
 			}
-			x, y = (3+(15-w/8)/2)*8, 76-h
+			x, y = origin.X, origin.Y
 		} else if w != 40 || h != 38 {
 			return fmt.Errorf("CHARPICS %d 肖像尺寸須為 40×38", d.Portrait)
 		}

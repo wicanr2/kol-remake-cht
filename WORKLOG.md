@@ -11713,3 +11713,16 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 下一批怪物已建立32張不同RGB、不同尺寸與二值透明度的來源清冊及檢視圖，確認資訊框與遭遇群像消費端；仍DRAFT，沒有怪物圖進正式程式。GitHub認證與PRIVATE狀態已在主機回讀。
 
 - 正式NPC／坐騎程式、27張圖集、14張比較PNG與文件已提交157b5bb1d768f2752e60f11dcb6e49374558049b並推送origin/main。推送後工作樹乾淨，GitHub維持PRIVATE；現行v.1.0.2-20261013 tag固定46a01f11，沒有移動Release。Docker本批GUI、測試、封存與清理均已結束。後續32張怪物維持DRAFT及全畫面HD active。推送核對保存在[本機收尾](docs/verification/local/hd-npc-mounts-20261015/git-closeout.json)。
+
+## 2026-10-15 怪物資訊框與遭遇群像HD正式接入
+
+- 沿使用者go及已核准全HD、同手繪、1920×1200、原位置與F10續作，命中復古重製驗證及imagegen技能。32張MONPICS來源PNG／RGB／RGBA與實際尺寸、二值alpha核對，逐張生成並保存原始PNG與提示，前版來源395份／242資產保持基準。
+- 首四張16場景64畫格後延伸32種資訊框及1／3／12隻群像128場景512畫格。獨立NumPy預乘alpha契約最多一色階、圖外零差，EGA RGBA、中文與可序列化戰鬥狀態保持；錯圖號／反向遮擋差255／250拒絕。最初Pillow反預乘診斷不作GPU oracle，保留失敗。
+- 第2張補全頭髮。第10、13張alpha最大254曾被保存器要求255而誤判背景，實際有大量alpha0與透明邊界；追加勘誤並接受原始圖，不改像素或HD一色階。第10張既成背景修正版保留使用，初版保留。
+- SPEC039升READY後接完整32圖子組，驗PNG、RGBA、原生尺寸、來源與alpha，全部成功才換HD畫布；英文／中文／HD共用資訊框定位。正式底層另用畫布與物件私有透明快取，保持原遮擋順序及EGA畫布，錯誤也還原來源與觀察器。
+- 正式401份Go／module、276資產的全套及sceneverify通過。新增還原測試誤在RunGame前讀GPU；改成直接驗底層重畫函式，402份入口測試通過，資產／UI來源保持。初次Python3.11的tarfile filter不支援及驗證程式複製後執行權限遺失均分類為工具環境，修正後乾淨重跑；首次輸出保留。
+- 正式擷取前兩輪137退出保留，未宣稱已證實OOM。沿Ebitengine2.9.9 NewImage重用契約修正驗證工具：一個正式模型、固定擷取畫布、Go記憶體預算2GiB，正式128場景512畫格正常退出，容器峰值4611489792 bytes。正式程式與場景未因工具修正改動。
+- 最後正式402來源程式SHA9d8ff1a67025fec5eb7381c5cf970df5921c9a1f710f0d5e61c1661dcfc22980；正式／候選512畫格差0，獨立原生最多1，圖外0，EGA RGBA零差，2237實際字元缺字0。正常兩路每側41狀態、文字及EGA保持，HD正常圖保持；兩視窗鍵鼠24個F10事件與可序列化戰鬥狀態保持，HD往返最多1。住宿11、重載5及前版v3相容通過。
+- README加入資訊框與12隻群像，同主題正式比較與16張PNG、來源、工具及範圍由docs/verification/hd-monsters-runtime-20261015.md索引。全HD與原版oracle、自然通關、真機及新交付保持開放，v.1.0.2-20261013不可變tag保持。
+- 下一批workplace/hd-town-facades-20261015已DRAFT盤點102張門面及一張城門林地；原核准TWN7PICS13保留，101張門面及城門林地仍待續作。未生成新門面或改正式路徑。
+- 主機gh auth及repo核對為PRIVATE，遠端main d5cee3e5與既有tag／46a01f11保持。提交、推送與封存清理結果在後續追加；不關閉仍涵蓋其他HD缺口的Issue。

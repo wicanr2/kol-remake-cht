@@ -151,7 +151,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [比較頁](docs/verification/hd-equipment-runtime-20261015/review.html)另含卸裝前臂、固定腰帶與預設／自訂盾面。
 已知預設盾面匹配手繪HD，修改盾面保留原40×38點陣；原角色資料與v3格式保持。
 中文、EGA回歸、兩種視窗的鍵鼠F10及正常存讀檔已核對，範圍見[正式驗收](docs/verification/hd-equipment-runtime-20261015.md)。
-怪物、地圖、戰場、天候與未驗操作分支仍續作。
+地圖、戰場、天候與未驗操作分支仍續作。
 
 ### 開發版：七城 NPC 與四種坐騎
 
@@ -164,7 +164,19 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [七組比較](docs/verification/hd-npc-mounts-runtime-20261015/review.html)另含馬廄、雙人物及原構圖的橫置頭部。
 110個場景的中文、圖片、EGA回歸及HD一色階核對通過；遊戲內F10可在同一場景切換，兩種視窗、鍵鼠與正常存讀檔已驗。
-來源與完整範圍見[正式驗收](docs/verification/hd-npc-mounts-runtime-20261015.md)。怪物、地圖、戰場、傷勢、天候、片頭與其餘事件仍續作。
+來源與完整範圍見[正式驗收](docs/verification/hd-npc-mounts-runtime-20261015.md)。地圖、戰場、傷勢、天候、片頭與其餘事件仍續作。
+
+### 開發版：32種怪物
+
+32種怪物的資訊框與遭遇群像已接入手繪HD。下方由正式程式繪製，兩側使用同一受控狀態；尚未納入現行發行包。
+
+| 重製中文 EGA | 正式 HD |
+|---|---|
+| ![怪物資訊框EGA](docs/verification/hd-monsters-runtime-20261015/monster-10-info-01-ega.png) | ![手繪怪物資訊框HD](docs/verification/hd-monsters-runtime-20261015/monster-10-info-01-hd.png) |
+| ![霧地幼蟲遭遇群像EGA](docs/verification/hd-monsters-runtime-20261015/monster-31-encounter-12-ega.png) | ![12隻霧地幼蟲手繪HD與透明遮擋](docs/verification/hd-monsters-runtime-20261015/monster-31-encounter-12-hd.png) |
+
+[八組比較](docs/verification/hd-monsters-runtime-20261015/review.html)另含牛頭怪、獨眼巨人、小魔怪與火焰人形。128場景的中文、原生圖片、透明遮擋與EGA回歸已核對；遊戲內F10可在同一場景切換，兩種視窗、鍵鼠及正常存讀檔已驗。
+來源、完整提示與驗收範圍見[正式收據](docs/verification/hd-monsters-runtime-20261015.md)。戰場、傷勢、地圖、天候、片頭及其他HD仍續作。
 
 ### 事件畫面：原版與 HD
 

@@ -371,6 +371,25 @@ v7的BOOKDATA點陣被六倍座標再乘二，並未跟隨已校準盾牌。v9�
 
 ### 怪物續作
 
-狀態：**DRAFT**，來源盤點。入口為[清冊](../../workplace/hd-monsters-20261015/plan.json)及[原圖檢視](../../workplace/hd-monsters-20261015/source-contact.png)。固定來源的MONPICS實際有32張、32個不同RGB，尺寸不同，全部含透明像素；來源PNG／RGB／RGBA與實際尺寸已核對。
+現行接入契約見下一節；本節保留來源盤點歷史。
+
+狀態：**DRAFT**，來源盤點。入口為[清冊](../verification/local/hd-monsters-20261015/plan.json)及[保存原圖檢視](../verification/retained-evidence.md#怪物hd正式接入)。固定來源的MONPICS實際有32張、32個不同RGB，尺寸不同，全部含透明像素；來源PNG／RGB／RGBA與實際尺寸已核對。
 
 目前消費端為`internal/ui/battle_cjk.go`與`internal/ui/battle_sheet.go`的怪物資訊框，以及`internal/battle/state.go`的遭遇群像。沿核准同畫風、原位置與F10續作；六倍尺寸只作參考，實際顯示矩形、透明輪廓及群像遮擋須先複核，不把放大原圖當HD成果。手繪素材、完整組載入及中文場景、F10、EGA與v3驗收尚未完成，不進正式路徑。
+
+### 怪物正式接入審查
+
+狀態：本切片有限**CONFORMED**。實作前依下列契約升READY。沿已核准的全畫面HD、同手繪風格、原位置與F10授權，接入32種怪物的資訊框與遭遇群像；戰場圖塊、身體傷勢與其餘操作分支另續作。
+
+- 固定ZIP來源及實際MONPICS32張的PNG／RGB／RGBA、尺寸、二值alpha與透明像素RGB已核對。32張個別手繪PNG保存完整原始輸出，不裁alpha、不以程式補畫。來源及提示見[生成清冊](../../assets/hd/first-slice/monsters/generation.json)。第2張補全頭髮；第10、13張的最大alpha254曾被檢查器誤判，已以實際透明像素與邊界診斷撤回，不修改圖片或HD一色階閘門。
+- 隔離原型以實際game.render／presentHD完成資訊框與1／3／12隻群像，共128場景512畫格。完整可序列化戰鬥狀態及中文繪製紀錄一致，EGA RGBA零差，原生預乘alpha合成最多一色階、圖外零差。錯圖號及反向遮擋反例分別差255及250並拒絕。入口：[比較頁](../verification/hd-monsters-runtime-20261015/review.html)與[檢查收據](../verification/local/hd-monsters-20261015/all-monster-gallery-v1-check.json)。沒有原版oracle、正常全旅程或通關聲明。
+- 正式子組沿既有分組放在`assets/hd/first-slice/monsters/`，使用`kol-hd-monsters/1`。完整32張原生PNG、來源PNG／RGB／RGBA、來源尺寸、原生RGBA、alpha範圍及可見輪廓、生成提示與權利均有雜湊。每張至少涵蓋來源六倍矩形；alpha0須存在、前景最大alpha至少250、alpha≥8的可見輪廓不得碰邊。254上限有效，全部低alpha像素原樣保存。
+- 載入先驗完整組及實際32張來源庫，再交換HD快取與畫布。schema、數量、固定順序、檔名、重複、缺件、越界、原生尺寸、PNG／RGBA、來源與透明契約不符均拒絕整組。GPU首次呈現再驗來源指紋與尺寸；不把原型全域開關、絕對路徑及靜態測試特例放進正式路徑。
+- 英文、中文與HD共用資訊框原點計算。群像沿State.Spots的原順序。HD以相同尺寸透明圖暫代本次MONPICS，重畫既有底層後立即還原原圖，再按原位置等比合成完整原生PNG；不填黑矩形蓋住前一隻。快取由遊戲與HD物件各自持有，錯誤也還原來源與文字觀察器。規則、亂數、文字、鍵鼠命中及kol-save-v3保持。
+- 正式驗收另驗全母體GPU、中文及一色階、完整組負例與原子失敗、正常路徑最小回歸、兩視窗鍵鼠F10與完整可序列化戰鬥狀態、舊v3及住宿保存重載。僅Linux Docker；其餘HD類別與新三平台交付仍開放。
+
+正式402份來源、276份HD資產；128場景512畫格、2237字元、正常41狀態、24個F10與住宿11／重載5通過。全套401份與最後402份入口窄驗分開記錄，範圍見[正式怪物驗收](../verification/hd-monsters-runtime-20261015.md)。
+
+### 七城門面續作
+
+下一批來源入口為[七城門面清冊](../../workplace/hd-town-facades-20261015/plan.json)及[檢視圖](../../workplace/hd-town-facades-20261015/source-contact.png)。此批仍DRAFT，只完成102張門面與一張城門林地來源盤點，原核准旅店保留；沒有新門面接入。

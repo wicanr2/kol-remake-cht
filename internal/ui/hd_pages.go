@@ -74,6 +74,10 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 		if size, ok := p.npcMountSizes[source.RGB]; ok && pic.Bounds().Size() != size {
 			return fmt.Errorf("HD NPC與坐騎來源%s第%d圖實際尺寸不符", source.Archive, source.Index)
 		}
+		if source.Archive == "MONPICS" && h.monsters != nil &&
+			(source.Index < 0 || source.Index >= 32 || pic.Bounds().Size() != h.monsters.pictures[source.Index].size) {
+			return fmt.Errorf("HD怪物來源實際尺寸不符")
+		}
 		if h.equipment != nil {
 			if size, ok := h.equipment.SourceSizes[fmt.Sprintf("%s:%d", source.Archive, source.Index)]; ok &&
 				(pic.Bounds().Dx() != size[0] || pic.Bounds().Dy() != size[1]) {

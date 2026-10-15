@@ -1,0 +1,38 @@
+package main
+import("encoding/json";"fmt";"image/png";"os";"testing";"github.com/hajimehoshi/ebiten/v2";"github.com/wicanr2/kol-remake-cht/internal/assets";"github.com/wicanr2/kol-remake-cht/internal/battle";"github.com/wicanr2/kol-remake-cht/internal/font";"github.com/wicanr2/kol-remake-cht/internal/flow";"github.com/wicanr2/kol-remake-cht/internal/i18n";"github.com/wicanr2/kol-remake-cht/internal/screen";"github.com/wicanr2/kol-remake-cht/internal/town";"github.com/wicanr2/kol-remake-cht/internal/ui")
+type monsterGUIObserver struct{g *game}
+func(n *monsterGUIObserver)Update()error{return n.g.Update()}
+func(n *monsterGUIObserver)Layout(w,h int)(int,int){return n.g.Layout(w,h)}
+func(n *monsterGUIObserver)Draw(dst *ebiten.Image){n.g.Draw(dst);raw,_:=json.Marshal(map[string]any{"battle":n.g.quest.state,"hd":n.g.hd!=nil,"settings":n.g.displaySettings});fmt.Printf("equipment-frame %s\n",raw)}
+func TestHDMonsterGUI(t *testing.T){name:=os.Getenv("KOL_MONSTER_GUI_CASE");if name==""{t.Skip("explicit prepared GUI")}
+ root:="/src";dir:=""
+ must:=func(e error){if e!=nil{t.Fatal(e)}}
+ lib,e:=assets.Load(root+"/assets/original-derived-png/ega");must(e);f,e:=font.Load(root+"/assets/ui-font","zh-hant-16");must(e)
+ table,e:=i18n.Load(root+"/docs/i18n/newchar-zh-Hant.json");must(e);_,e=table.LoadBank(root+"/docs/i18n/ui-zh-Hant.json",town.BankBook);must(e);must(table.LoadDisplayNames(root+"/docs/i18n/display-names-zh-Hant.tsv"))
+ bank,e:=town.LoadUIText(root+"/assets/original-derived-data/ui-text.json");must(e);trans,e:=loadTranslations(root+"/docs/i18n/town-zh-Hant.json",root+"/docs/i18n/ui-zh-Hant.json");must(e)
+ file,e:=os.Open(root+"/assets/original-derived-png/ega/BATTLE/battle-tiles-08.png");must(e);atlas,e:=png.Decode(file);must(e);must(file.Close())
+ gallery:=&monsterGallery{dir:dir,before:map[string][]byte{},text:map[string][]string{}}
+ for i:=0;i<1;i++{
+  
+  model:=&game{canvas:screen.NewCanvasScaled(3),sprites:&spriteCache{lib:lib,m:map[string]*ebiten.Image{}},cjk:f,strings:table,hdPortraitPath:root+"/assets/original-derived-data/portrait-layout.json",scene:scenePlay,play:&town.Session{Outdoor:&town.Outdoor{}},quest:&questBattle{tiles:ui.NewBattleTiles(atlas),bank:bank,trans:trans}}
+  must(model.enableHD("hd",root+"/assets/hd/first-slice","zh-Hant"));gallery.models[i]=model;gallery.models[1]=model
+ }
+ monsters,e:=battle.LoadMonsters(root+"/assets/original-derived-data/monsters.json");must(e)
+ for index:=0;index<32;index++{for _,count:=range []int{0,1,3,12}{
+  n:=count;kind:="encounter";if n==0{n=1;kind="info"}
+  site:=&battle.Site{Index:-1,Monster:index,MonsterName:monsters.List[index].Name,Level:5,Count:n,PartyX:[]int{32},PartyY:[]int{32}}
+  for j:=0;j<n;j++{site.MonsterX=append(site.MonsterX,33+j/3);site.MonsterY=append(site.MonsterY,32+j%3)}
+  party:=[]battle.Member{{Name:"Theodoric",Portrait:47,Size:100,Health:80,Strength:80,Quickness:60,Foresight:60,Intellect:60,Race:3,Skills:[]int{8,6}}}
+  state:=battle.NewQuest(site,party,monsters.List[index],battle.NewField())
+  state.Stage=battle.StageEncounter
+  if kind=="info"{state.Stage=battle.StageField;state.Round.Order=[]int{0};state.Cursor=0;state.BeginTurn();state.Plan.BodyActor=battle.PartySlots+1;state.Plan.EquipmentPanel=false;state.Round.InspectionRoll=1;state.Actors[battle.PartySlots].Command=battle.CmdUnarmed;state.Actors[battle.PartySlots].Style=1;state.Actors[battle.PartySlots].Guard=1}
+  lines:=ambushLines(bank,trans,&battle.Ambush{Count:n,Level:5},table.DisplayName(monsters.List[index].Name),false)
+  id:=fmt.Sprintf("monster-%02d-%s-%02d",index,kind,n);gallery.cases=append(gallery.cases,monsterGalleryCase{ID:id,Kind:kind,Index:index,Count:n,State:state,Lines:lines})
+ }}
+g:=gallery.models[1];var chosen *monsterGalleryCase
+for i:=range gallery.cases {c:=&gallery.cases[i];if name=="info"&&c.Index==10&&c.Kind=="info"||name=="encounter"&&c.Index==31&&c.Count==12{chosen=c;break}}
+if chosen==nil{t.Fatal("unknown GUI case")};g.quest.state=chosen.State;g.quest.lines=chosen.Lines
+g.scene=sceneFlow;g.flow=&flow.Flow{Scene:flow.SceneTown,Town:g.play};g.interactive=true;g.logInput=true
+ebiten.SetWindowSize(1920,1200);ebiten.SetWindowTitle("怪物HD遊戲內切換驗收");ebiten.SetTPS(60)
+must(ebiten.RunGame(&monsterGUIObserver{g}));must(g.drawErr)
+}

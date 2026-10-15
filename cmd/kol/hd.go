@@ -74,6 +74,13 @@ func (g *game) setGraphics(mode string) error {
 		if err := npcMounts.ValidateSources(g.sprites.lib); err != nil {
 			return fmt.Errorf("HD NPC與坐騎來源驗證失敗：%w", err)
 		}
+		monsters, err := assets.LoadHDMonsters(filepath.Join(g.hdDir, "monsters"))
+		if err != nil {
+			return fmt.Errorf("HD怪物載入失敗：%w", err)
+		}
+		if err := monsters.ValidateSources(g.sprites.lib); err != nil {
+			return fmt.Errorf("HD怪物來源驗證失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -124,6 +131,13 @@ func (g *game) setGraphics(mode string) error {
 			return err
 		}
 		canvas := screen.NewCanvasScaled(6)
+		var monsterArts []ui.HDMonsterArt
+		for i, p := range monsters.Manifest.Pictures {
+			monsterArts = append(monsterArts, ui.HDMonsterArt{Source: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, Size: image.Pt(p.Size[0], p.Size[1]), Paint: monsters.Images[i]})
+		}
+		if err := hd.AttachMonsters(monsterArts); err != nil {
+			return err
+		}
 		g.hdCache, g.hdCanvas = hd, canvas
 	}
 	g.hd, g.presentation = g.hdCache, g.hdCanvas
@@ -161,6 +175,9 @@ func (g *game) presentHD() error {
 	}
 	if g.nativeUIPage() {
 		return g.renderNativeUI()
+	}
+	if used, err := g.presentMonsters(); used || err != nil {
+		return err
 	}
 	if g.endingReached() || g.scene == sceneEnding {
 		var segments []town.Segment
