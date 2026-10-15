@@ -1,6 +1,7 @@
 set -eu
 export PATH=/usr/local/go/bin:$PATH GOWORK=off GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local
 export GOMODCACHE=/tmp/mod GOCACHE=/tmp/monster-baseline-cache GOPATH=/tmp/monster-baseline-gopath GOMEMLIMIT=2GiB
+export KOL_PAGE_OUTPUT=monster-normal-v2 KOL_PAGE_RESULT=monster-normal-v2-results.json
 cp -a /go/pkg/mod /tmp/mod
 python3 - <<'PY'
 from pathlib import Path

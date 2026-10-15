@@ -59,7 +59,7 @@ func TestMonsterGallery(t *testing.T){
  file,e:=os.Open(root+"/assets/original-derived-png/ega/BATTLE/battle-tiles-08.png");must(e);atlas,e:=png.Decode(file);must(e);must(file.Close())
  gallery:=&monsterGallery{dir:dir,before:map[string][]byte{},text:map[string][]string{}}
  for i:=0;i<1;i++{
-  
+
   model:=&game{canvas:screen.NewCanvasScaled(3),sprites:&spriteCache{lib:lib,m:map[string]*ebiten.Image{}},cjk:f,strings:table,hdPortraitPath:root+"/assets/original-derived-data/portrait-layout.json",scene:scenePlay,play:&town.Session{},quest:&questBattle{tiles:ui.NewBattleTiles(atlas),bank:bank,trans:trans}}
   must(model.enableHD("hd",root+"/assets/hd/first-slice","zh-Hant"));gallery.models[i]=model;gallery.models[1]=model
  }

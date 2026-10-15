@@ -20,6 +20,17 @@
 
 正式擷取的前兩輪137退出保留為環境失敗。最後沿Ebitengine影像重用契約，改用單一正式模型、重用擷取畫布及2GiB Go記憶體預算，完整擷取正常退出；記憶體紀錄見memory-check.json。這些改動只在驗證工具，不改正式呈現或場景。
 
-重生時先依保存入口還原本批workspace，沿原檔名執行build.sh、run-regression.sh及兩個檢查器。Docker image為kol-package:1.26.7-ebiten2.9.9-20261011-r1，專案唯讀掛/src、本批工作區可寫掛/out，使用UID／GID1000、network none及相稱的資源上限。完整原始樣本、v3與失敗只留本機。
+重生時先依保存入口解開本批證據，唯讀掛`/evidence`，另將空輸出目錄可寫掛`/out`，專案唯讀掛`/src`。使用`kol-package:1.26.7-ebiten2.9.9-20261011-r1`、UID／GID1000、network none、8GiB／4CPU／512程序與相稱外層逾時，依序執行下列入口。歷史證據不覆寫，新畫格寫入空輸出目錄。
+
+```sh
+python3 /src/docs/verification/hd-monsters-runtime-20261015/replay-inputs.py
+sh /src/docs/verification/hd-monsters-runtime-20261015/build.sh
+python3 /out/check-gallery.py formal-monster-gallery-v3
+python3 /out/compare-formal.py
+sh /src/docs/verification/hd-monsters-runtime-20261015/run-regression.sh
+python3 /out/check-regression.py
+```
+
+[重跑輸入工具](hd-monsters-runtime-20261015/replay-inputs.py)核對空輸出與擁有權，複製32張原始候選及固定來源索引，候選畫格沿唯讀連結。build.sh另外重建正常回歸程式並保留執行權限。完整原始樣本、v3與失敗只留本機。
 
 這是受控重製畫面及最小正常回歸，沒有新增原版oracle、自然通關或跨平台真機聲明。戰場圖塊、傷勢、天候、地圖、片頭及其餘HD仍開放；現行v.1.0.2-20261013保持。

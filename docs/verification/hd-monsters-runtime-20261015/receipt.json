@@ -73,12 +73,12 @@
     "manifest.json": "62b299872ea0881b513e60c9d3be879cee3b2337b691950821a6834b6462f1d5",
     "scene-captures.json": "9e27a5d261484dd613f5ffb4f7541f8d7d32139318d0afa9d03507470f4d5470",
     "candidate-check.json": "54de592e24f43df18b883e3f64411962404a74ee064914f6b5fc54143f6f40c6",
-    "build.sh": "4ae763cf83d1aef14b4648472701d46cae8c1be2a66bc4c723850ca48a5340ce",
+    "build.sh": "4fe8cd40c4abd7fddaf962f3d4c4f9c8462f7761a776c9061403ea0425eec757",
     "prepare-regression.py": "5899a291591e2152bc81a7fade04738d1e1cc191060a4f92cfdfc1f1e2e2c7d1",
-    "gallery.go.txt": "6f2293e0105cd6baebda6a3eebd4029740379ecba7b41e89f80b2dae82a8fca3",
+    "gallery.go.txt": "ce9b732aa17157538950ab8a97ad06f5ce2626c3d5797e3a7ec27584ced3e576",
     "monster-13-encounter-12-ega.png": "6f5d06daca4740987c999c54434e2875e20c20e7917e481696d0c43562e40e9a",
     "monster-20-info-01-ega.png": "e12aa603619a6fd62389de35f545af889fb394f952dfc09021c723ca086ca44e",
-    "run-regression.sh": "fef3d16abc74c8b40ad69bb0f46bb89d3610712c8b8466ef0737e38de0217efe",
+    "run-regression.sh": "0fa17057b759b4bbdef57fd74816cb89a49f0e76266c127e67e3a332fd692bda",
     "final-cmd-tests.log": "d02f835903bb69b4666aa33b4977dc4ec9939fd86fe04209ea36c8cae692a9b0",
     "sceneverify.log": "eafc68b3e08dfcf22d1bb356c237d6c02258aef1a4e602808c638807355dbfb3",
     "monster-00-info-01-ega.png": "d6acab2b3e48d386bae4ce1372a59234110bef2c85ea33a89ab1527b6926abe3",
@@ -86,13 +86,36 @@
     "monster-00-encounter-12-ega.png": "7144e45b2b060e12731a00cff8bf3fefeaf98ab34b4df73d5e5b98f54276f6ee",
     "monster-10-info-01-hd.png": "a47947c058e3d49d2f528f6e6ca4c0cf3d7b3154ba0bfe2a2f6f99e0b5447e6b",
     "gallery-source-inputs.json": "bb007e7d7fc5e81051ed65422d6767434463b533c10c19c474f8d402807ffce7",
-    "gui.go.txt": "6f7108eebd69a8638a08b3d5292e9c233b6418253fbebb82abce1a84bc727a98",
+    "gui.go.txt": "bea7aa7078b30c9831a02b82a165bd82d00521bfd0f61eb5a3f4aea73908421e",
     "source-inputs.json": "c910e503d75609fc2d47f9a76e7a0cc4a71d5ef555b971f3a8c44e8e4a6debe7",
     "monster-31-encounter-12-hd.png": "2f15eb6083b1f4d085f62d94c798280e1a95f911873939a0d4ab2769d6bbb977",
     "monster-13-encounter-12-hd.png": "0c739c783db43c9ffe3a8154a195611c71ebb8788771b90de08d208324d2feea",
     "monster-31-encounter-12-ega.png": "70c657d425e86210d865a129626f654c4d644b4f698bf6af9984d90b0b1c45ef",
     "monitor-gallery.py": "e87c767e234d75ab45afe8ef8448f67c14f11ced1d4f6ed427c706e75d8db8cb",
     "monster-02-info-01-hd.png": "74c5784e1404ff1c697dd157ccd13370802c8db5f9e6c2e6a2f2e42ff835ef28",
-    "monster-20-info-01-hd.png": "a4ca5b8fccbbc9fd17d87dceed010c240f0b01ccf175228d76e099d95e1101a7"
+    "monster-20-info-01-hd.png": "a4ca5b8fccbbc9fd17d87dceed010c240f0b01ccf175228d76e099d95e1101a7",
+    "replay-inputs.py": "10d4484644066a25e2fe5aafa778ce778a10bf363e7390bef0869ace81c2b966"
+  },
+  "review_copy_normalization": {
+    "previous_receipt_sha256": "fe1f0425200634a9f7a0a5d534a8c8d9e15d3414c8c1f141451c20522345bf8e",
+    "source_commit": "09de4c06",
+    "changes": {
+      "gallery.go.txt": {
+        "original_sha256": "6f2293e0105cd6baebda6a3eebd4029740379ecba7b41e89f80b2dae82a8fca3",
+        "review_copy_sha256": "ce9b732aa17157538950ab8a97ad06f5ce2626c3d5797e3a7ec27584ced3e576"
+      },
+      "gui.go.txt": {
+        "original_sha256": "6f7108eebd69a8638a08b3d5292e9c233b6418253fbebb82abce1a84bc727a98",
+        "review_copy_sha256": "bea7aa7078b30c9831a02b82a165bd82d00521bfd0f61eb5a3f4aea73908421e"
+      }
+    },
+    "effect": "trailing spaces removed from review copies only; original fixture bytes remain in local archive; formatted compiler sources and runtime unchanged"
+  },
+  "replay_entry": {
+    "input": "replay-inputs.py",
+    "source": "immutable extracted local evidence mounted read-only",
+    "output": "fresh empty directory",
+    "normal_binary_mode_preserved": true,
+    "normal_output": "monster-normal-v2"
   }
 }

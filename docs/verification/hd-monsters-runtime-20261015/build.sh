@@ -23,6 +23,9 @@ print('Same402 formal sources; one model and reusable capture surface',flush=Tru
 PY
 cd /tmp/monster-gallery3-source
 gofmt -w cmd/kol/monster_gallery_test.go cmd/kol/monster_gui_test.go
+mkdir -p /out/bin
+go build -trimpath -buildvcs=false -o /out/bin/formal-monsters-v2 ./cmd/kol
+cp -p /out/bin/formal-monsters-v2 /out/bin/formal-monsters
 go test -c -o /out/bin/formal-monster-gui-v3 ./cmd/kol >/out/build-formal-gui-v3.log 2>&1
 Xvfb :99 -screen 0 2048x1536x24 -nolisten tcp >/out/xvfb-gallery-v3.log 2>&1 &
 xpid=$!

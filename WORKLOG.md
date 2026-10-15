@@ -11726,3 +11726,6 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - README加入資訊框與12隻群像，同主題正式比較與16張PNG、來源、工具及範圍由docs/verification/hd-monsters-runtime-20261015.md索引。全HD與原版oracle、自然通關、真機及新交付保持開放，v.1.0.2-20261013不可變tag保持。
 - 下一批workplace/hd-town-facades-20261015已DRAFT盤點102張門面及一張城門林地；原核准TWN7PICS13保留，101張門面及城門林地仍待續作。未生成新門面或改正式路徑。
 - 主機gh auth及repo核對為PRIVATE，遠端main d5cee3e5與既有tag／46a01f11保持。提交、推送與封存清理結果在後續追加；不關閉仍涵蓋其他HD缺口的Issue。
+
+怪物正式實作與README以09de4c06提交並推送private main。Git差分檢查發現兩份檢視用原型文字有行尾空白，修正檢視副本並更新收據雜湊；原始版本仍在封存及該commit。另補空輸出目錄的重生入口、正常程式重建與執行權限，正式Go／資產與驗證結果保持。
+2061份完整證據及11份可重建程式雜湊封存，588513617→266591304 bytes，SHA c8184744933c0482f2990b734f09bf4965c6f310161a29a47b89c577a75c195d；獨立唯讀重驗後逐檔刪除已完成怪物工作區，下一批門面保持。主機gh回讀13個OPEN，未誤關其他功能Issue，儲存庫仍PRIVATE。
