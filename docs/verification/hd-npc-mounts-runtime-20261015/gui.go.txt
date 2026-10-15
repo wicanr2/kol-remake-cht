@@ -1,0 +1,51 @@
+package main
+
+import (
+ "encoding/json"
+ "fmt"
+ "os"
+ "testing"
+ "github.com/hajimehoshi/ebiten/v2"
+ "github.com/wicanr2/kol-remake-cht/internal/assets"
+ "github.com/wicanr2/kol-remake-cht/internal/font"
+ "github.com/wicanr2/kol-remake-cht/internal/flow"
+ "github.com/wicanr2/kol-remake-cht/internal/i18n"
+ "github.com/wicanr2/kol-remake-cht/internal/screen"
+ "github.com/wicanr2/kol-remake-cht/internal/town"
+)
+type npcGUIObserver struct {g *game}
+func(n *npcGUIObserver)Update()error{return n.g.Update()}
+func(n *npcGUIObserver)Layout(w,h int)(int,int){return n.g.Layout(w,h)}
+func(n *npcGUIObserver)Draw(dst *ebiten.Image){
+ n.g.Draw(dst)
+ raw,_:=json.Marshal(map[string]any{"inside":n.g.inn,"hd":n.g.hd!=nil,"settings":n.g.displaySettings})
+ fmt.Printf("equipment-frame %s\n",raw)
+}
+func TestHDNPCGUI(t *testing.T){
+ name:=os.Getenv("KOL_NPC_GUI_CASE");if name==""{t.Skip("explicit controlled GUI only")}
+ must:=func(e error){if e!=nil{t.Fatal(e)}};root:="/src"
+ lib,e:=assets.Load(root+"/assets/original-derived-png/ega");must(e)
+ f,e:=font.Load(root+"/assets/ui-font","zh-hant-16");must(e)
+ table,e:=i18n.Load(root+"/docs/i18n/newchar-zh-Hant.json");must(e)
+ _,e=table.LoadBank(root+"/docs/i18n/ui-zh-Hant.json",town.BankBook);must(e)
+ must(table.LoadDisplayNames(root+"/docs/i18n/display-names-zh-Hant.tsv"))
+ var in *town.Inn
+ if name=="npc" || name=="native-npc" {
+  buildings,e:=town.LoadBuildings(root+"/assets/original-derived-data/town-buildings.json");must(e)
+  texts,e:=town.LoadText(root+"/assets/original-derived-data/town-text.json");must(e)
+  trans,e:=loadTranslations(root+"/docs/i18n/town-zh-Hant.json",root+"/docs/i18n/ui-zh-Hant.json");must(e)
+  sample,e:=town.LoadInn(root+"/docs/re/town-inn-sample.json");must(e)
+  door:=&buildings.Town(5).Doors[10]
+  in=town.EnterBuilding("TWN5PICS",door,texts.Building(5,door.Index),sample.Party);in.Apply(trans.Door(5,door.Index))
+  if in.Portrait.Index!=22{t.Fatal("wrong controlled NPC")}
+  if name=="native-npc" {in.DialogRow=86}
+ } else {
+  path:="/out/mount-3-inn.json";if name=="sheet"{path="/out/mount-sheet-3-inn.json"}else if name!="stable"{t.Fatal("unknown GUI case")}
+  raw,e:=os.ReadFile(path);must(e);in=&town.Inn{};must(json.Unmarshal(raw,in))
+ }
+ g:=&game{canvas:screen.NewCanvasScaled(3),sprites:&spriteCache{lib:lib,m:map[string]*ebiten.Image{}},cjk:f,strings:table,hdPortraitPath:root+"/assets/original-derived-data/portrait-layout.json",quest:&questBattle{},scene:sceneBuilding,inn:in,interactive:true,logInput:true}
+ g.flow=&flow.Flow{Scene:flow.SceneInn,Inn:in}
+ must(g.enableHD("hd",root+"/assets/hd/first-slice","zh-Hant"))
+ ebiten.SetWindowSize(1920,1200);ebiten.SetWindowTitle("NPC與坐騎F10驗收");ebiten.SetTPS(60)
+ must(ebiten.RunGame(&npcGUIObserver{g:g}));must(g.drawErr)
+}

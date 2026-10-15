@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| 七城102張NPC、四坐騎及完整組正式接入 | [正式驗收](hd-npc-mounts-runtime-20261015.md) | [保存清冊](local/hd-npc-mounts-20261015/retention.json)；完整樣本、v3與GUI狀態只留本機 |
 | 完整物品／隊伍、裝備原型及正式接入、68圖示 | [正式裝備驗收](hd-equipment-runtime-20261015.md)與[圖示驗收](hd-actions-runtime-20261015.md) | [保存清冊](local/hd-equipment-pages-20261015/retention.json)；完整模型與原錨點只留本機 |
 | 全畫面HD盤點、原版七段事件與第0段手繪候選 | [盤點及事件比較](hd-completion-20261014.md) | [保存清冊](local/hd-completion-20261014/retention.json)，107檔與兩份可重建執行檔雜湊；候選待確認 |
 | HD跨平台一色階修正、首次失敗與取樣原型 | [交付與精度修正](release-v1.0.2-20261013.md) | [保存清冊](local/hd-pixel-consistency-20261013/retention.json)，1667檔與12份可重建執行檔雜湊；首次候選保留 |
@@ -427,3 +428,16 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 原模型、錨點、v3及完整GUI狀態只留本機，Git只保存經核對的PNG與精簡結果。
 核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-equipment-pages-20261015`；
 `delete hd-equipment-pages-20261015`再次逐檔核對後，只清理該工作區。其他任務保持。
+
+
+## 七城NPC與坐騎HD正式接入
+
+[正式驗收](hd-npc-mounts-runtime-20261015.md)及[本機清冊](local/hd-npc-mounts-20261015/retention.json)保存27張選用PNG、全部生成與修正提示、完整來源及各階段失敗。
+正式395份Go／module、242份HD資產；110場景440畫格、正常41狀態、48個F10、住宿11／重載5及前版v3相容各保留自身範圍。
+完整模型、原始樣本、v3及GUI狀態只留本機，Git保存已驗PNG、來源雜湊與精簡結果。
+核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-npc-mounts-20261015`；
+`delete hd-npc-mounts-20261015`逐檔核對後只清理該工作區，完整重生工具沿壓縮檔中的原檔名使用。
+
+本批保存2483份檔案，10份可重建執行檔只留雜湊；1246822781 bytes壓縮為682026404 bytes。
+壓縮SHA-256為`6c73d66c5d8df34430c831f06452869722c5f794f82e3020d26d476d526a08d1`。
+封存後已獨立重驗全部內容與原工作區，精確刪除已完成NPC工作區；怪物工作區仍在使用。

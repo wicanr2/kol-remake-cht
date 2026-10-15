@@ -1974,7 +1974,7 @@
       "id": "hd-art-ui",
       "layer": "gap",
       "title": "遊戲圖片與操作畫面HD化",
-      "body": "全畫面HD保持active，v.1.0.2-20261013保持。七段結局、書頁／服務／編輯器、法術卷軸、80張角色模板、68個動作圖示及完整物品17槽／六型隊伍裝備已有限CONFORMED。最新391份Go／module、185份HD資產，全套及sceneverify通過；46張裝備PNG、169部件與32武器盾牌、216張來源PNG／原始RGB／呈現RGB完整驗證。38張完整GPU最多一色階，十二個自訂盾面顯示區零差；正常三條路徑每側106狀態／中文相同、106張EGA RGB／alpha保持。兩視窗鍵鼠24個F10與HD往返零差，住宿11／重載5及舊v3通過，最後原點綁定另驗UI／入口與31張HD。兩款護腿原生尺寸、卸裝前臂及腰帶固定層已修。原錨點只在記憶體由typed資料推導，不序列化；原型失敗及模型封存清理，README有正式同主題對比。其他NPC、怪物、坐騎、城鎮／世界地圖、戰場、傷勢、天候、翻書與其餘事件及未訪操作分支仍開放。下一批其他NPC／坐騎。入口docs/verification/hd-equipment-runtime-20261015.md、docs/spec/039-hd-art-ui.md與13類覆蓋表。",
+      "body": "全畫面HD保持active，v.1.0.2-20261013保持。七段結局、書頁／服務／編輯器、卷軸、80張角色模板、68動作圖示、完整裝備及七城NPC／四坐騎已有限CONFORMED。最新395份Go／module、242份HD資產，全套及sceneverify通過。NPC組27張PNG／102新裁切、四保留NPC及106來源完整驗證；110場景440畫格EGA RGBA零差、原生圖片／圖外／相對候選HD最多一色階，1194實際字元缺字0。正常兩路每側41狀態／中文與EGA保持；兩視窗鍵鼠48個F10、完整Inn及HD往返一色階，住宿11／重載5與前版v3相容通過。README有NPC及坐騎資料頁比較；完整樣本、v3與失敗封存後清理。其他怪物、城鎮／世界地圖、戰場、傷勢、天候、翻書與其餘事件及未訪操作分支仍開放，下一批怪物。入口docs/verification/hd-npc-mounts-runtime-20261015.md、docs/spec/039-hd-art-ui.md及13類覆蓋表。",
       "acceptance": "所有13類操作介面及可見圖形逐項完成HD，不以放大EGA或靜默回退算完成。各批樣張與素材契約確認並升READY；來源、權利、尺寸、索引及遮罩可追溯；依SPEC-040取得對應場景中文與正確畫格，鍵鼠及F10切換保持狀態，舊v3可讀；事件原版／HD截圖放README；最後驗各平台封包。",
       "verify": {
         "kind": "manual",
@@ -2460,8 +2460,18 @@
     },
     {
       "file": "docs/spec/039-hd-art-ui.md",
-      "match": "未驗法術編輯器|完整範圍及未完成圖形|原型未驗前不進正式入口|候選未驗前不進正式路徑",
+      "match": "未驗法術編輯器|完整範圍及未完成圖形|原型未驗前不進正式入口|候選未驗前不進正式路徑|手繪素材、完整組載入及中文場景、F10、EGA與v3驗收尚未完成",
       "why": "既有hd-art-ui手動項認領法術、物品及其餘圖形，沿同一READY閘門續作，不新增重複項。"
+    },
+    {
+      "file": "internal/ui/hd_equipment.go",
+      "match": "HD裝備素材尚未完整載入|HD預設盾面尚未核對",
+      "why": "完整載入與預設盾面來源防護的執行期拒絕訊息，正式裝備負例與正常操作已驗證；不是待辦。入口docs/verification/hd-equipment-runtime-20261015.md。"
+    },
+    {
+      "file": "docs/spec/039-hd-art-ui.md",
+      "match": "原型驗收沿SPEC-040對應場景；正式接入前升READY|135款候選已完成來源對應與透明裁取|靜態trace只記錄步數、場景與結局欄位",
+      "why": "完整裝備與NPC原型的歷史階段。後節正式接入均已有限CONFORMED，證據見hd-equipment-runtime-20261015及hd-npc-mounts-runtime-20261015；其餘HD仍由hd-art-ui開放項認領，不重新開啟已驗項目。"
     }
   ],
   "current_acceptance": "SPEC-040：受控場景，中文與畫面正確即可；完整原版對拍不阻擋HD。"

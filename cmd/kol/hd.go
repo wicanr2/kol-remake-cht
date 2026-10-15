@@ -67,6 +67,13 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD裝備載入失敗：%w", err)
 		}
+		npcMounts, err := assets.LoadHDNPCMounts(filepath.Join(g.hdDir, "npc-mounts"))
+		if err != nil {
+			return fmt.Errorf("HD NPC與坐騎載入失敗：%w", err)
+		}
+		if err := npcMounts.ValidateSources(g.sprites.lib); err != nil {
+			return fmt.Errorf("HD NPC與坐騎來源驗證失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -104,6 +111,16 @@ func (g *game) setGraphics(mode string) error {
 			return err
 		}
 		if err := hd.AttachEquipment(equipment.Images, equipment.Manifest, binding); err != nil {
+			return err
+		}
+		var npcPreserved, npcSources []ui.HDPageSource
+		for _, p := range npcMounts.Manifest.Preserved {
+			npcPreserved = append(npcPreserved, ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB})
+		}
+		for _, s := range npcMounts.Sources() {
+			npcSources = append(npcSources, ui.HDPageSource{Archive: s.Archive, Index: s.Index, RGB: s.SourceRGB})
+		}
+		if err := hd.AttachNPCMounts(npcMounts.Portraits, npcMounts.Mounts, npcPreserved, npcSources); err != nil {
 			return err
 		}
 		canvas := screen.NewCanvasScaled(6)

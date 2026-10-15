@@ -1,0 +1,326 @@
+{
+  "schema": "kol-hd-npc-mounts-generation/1",
+  "tool": "built-in image_gen",
+  "model_version": null,
+  "rights": "Project HD redraws; source identities private GitHub only; no public distribution claim",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "original_png_manifest_sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9",
+  "prototype_manifest_sha256": "b1c502b804c10c4f23b7aab6045ba5d559219e477812858e6069aad379ef4ea2",
+  "original_generation_journal_sha256": "d8a18203c2761c3980faf16c6fae463b48be5f65b7c637138202ad12ff15cb1a",
+  "original_output_map_sha256": "e60aee287293c0a9aec1af1eee9eef0daf228330e7a83965b9b5286163ac94d4",
+  "entries": [
+    {
+      "file": "twn1pics-02-04-06-08-painted-v1.png",
+      "sha256": "1921b799ff34264ae037644f2143d259092b65ee4c63b1585c002a2bdf8e8a40",
+      "size": [
+        1536,
+        1024
+      ],
+      "prompt": "prompts/npc-first-four-prompt.txt",
+      "prompt_sha256": "e7ed2794fd75a52aa76f724fbb8a6ebcf9e6126aef53cb22cd3ada4900c762b1",
+      "selected": false
+    },
+    {
+      "file": "twn1pics-02-04-06-08-painted-v2.png",
+      "sha256": "b379bbb09889c2a769d5f236e862a77cc16b0658e6c0b04267b07244293e3dbc",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-first-four-opaque-prompt.txt",
+      "prompt_sha256": "69b169f02cb92d4fe2e7fc2abdaac075e2aaf08ad011f4baaa7881e16079446c",
+      "selected": true
+    },
+    {
+      "file": "twn1pics-10-14-16-22-painted-v1.png",
+      "sha256": "ae20acf191fbb05a2b0b86860300d84b53970bce554dfaa5df85564149da237c",
+      "size": [
+        1536,
+        1024
+      ],
+      "prompt": "prompts/npc-second-four-prompt.txt",
+      "prompt_sha256": "9314fa03e445385239aa60def3952be6804d07a9facd47b66c8db120617359ad",
+      "selected": true
+    },
+    {
+      "file": "steeds-00-03-painted-v1.png",
+      "sha256": "e84e98bd337469b04a00b325745198b56786b7cad782745cee6c782a9d300074",
+      "size": [
+        1254,
+        1254
+      ],
+      "prompt": "prompts/mounts-prompt.txt",
+      "prompt_sha256": "51ecf3e24aae6d22ec5ba14d60ffa523d158eeaaf07326e139b7e78b70154033",
+      "selected": true
+    },
+    {
+      "file": "twn1pics-24-26-28-30-painted-v1.png",
+      "sha256": "489f6a9ed9b40bceffc203975622e3a65077867fed118c59b8260df4329b75ef",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-third-four-prompt.txt",
+      "prompt_sha256": "cf9fc935aa530f9eef2062b3f282a215125bc832439bb8b90d56fac6cdfff358",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-04-painted-v1.png",
+      "sha256": "399b8c1dc60c18f02b9fa9c068c99824934bb7ad45e48df0785e78043a2fdf18",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-04-prompt.txt",
+      "prompt_sha256": "a4f65ef0dd13c8549ed4900678c9d34555c8326a0f5821ec6237d1f58e0d4937",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-05-painted-v1.png",
+      "sha256": "e68a9486069b59303425b85344b723cfd6ed18d4adc8f69c8d6784fede8eb636",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-05-prompt.txt",
+      "prompt_sha256": "65255896f75522d3f9878c30716fe58d67ed9ef3c6230aea408ad274b17d8eeb",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-06-painted-v1.png",
+      "sha256": "2befa25362a5751c58f4a59415023c359896f2ec4b28a9d29e2602cfa9b46d0d",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-06-prompt.txt",
+      "prompt_sha256": "5494c68cfce2c6400f235994176f25ec2ec5723e664242d4c8915c3878c76f26",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-07-painted-v1.png",
+      "sha256": "d2193773fb85a2884b7df9d73ca87ef07b1c212f74fde212e3848535d8c5cf84",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-07-prompt.txt",
+      "prompt_sha256": "bc76881efc677c8251f611dc5be124056ef9692e50a8385dd7006a63c64ea8f6",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-08-painted-v1.png",
+      "sha256": "0de0b69b86cef01577baa4110a3764127dbf866638699ad9450029e126c8463d",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-08-prompt.txt",
+      "prompt_sha256": "f013df49fcc8e6f621ccaa9458d231c917a5bd20d2a82fa33c5cdcadf08a5995",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-09-painted-v1.png",
+      "sha256": "2df29e23f89d2dcba7192b1b40abbcd22edcd5a2a18cbd258b0d051787e041c0",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-09-prompt.txt",
+      "prompt_sha256": "82fb1a161c19b410cfddc783f31e7204ff76c90defeb60b87945bd1256d68c46",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-10-painted-v1.png",
+      "sha256": "4c0d0f27adba782c2e28e93213799e5a4c6b49df52df730b39d4c210736ee3a5",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-10-prompt.txt",
+      "prompt_sha256": "95f85d56a918f79e7c7632945bf8e2174b3e159f2b4f09b5e5736bea3d2244a3",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-11-painted-v1.png",
+      "sha256": "489acbc6ff605038038dd60f7ad2c988abeabaf800dff7ab8d26bdd9ca63ed04",
+      "size": [
+        1447,
+        1087
+      ],
+      "prompt": "prompts/npc-batch-11-prompt.txt",
+      "prompt_sha256": "2249342bf2f32f8e741c41e3c1232a96b9f33a17e82f79e0051182c0db566b57",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-12-painted-v1.png",
+      "sha256": "debdb22fd36c8de559cbc290e170ac743fe2baeb1d88a29f1deb1a8ecacdf680",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-12-prompt.txt",
+      "prompt_sha256": "88aca1bb3f2a4028368e27b46ed7d539046cf7b4c28f09f8445eb7a35745656f",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-13-painted-v1.png",
+      "sha256": "9c3bc5cc15f7f15cd8610e967187edee79bc2776df5b849d51f45e9625768dc3",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-13-prompt.txt",
+      "prompt_sha256": "ba2f2472edcce272b3668eafc56c55f6b527b5ae33da6546332af33a97384e68",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-14-painted-v1.png",
+      "sha256": "5228899dea0002213d72ccd703a10b4bf9a29b196e0fe0fb8c1856c6d1658c07",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-14-prompt.txt",
+      "prompt_sha256": "b4efe5124873d221df4acae90f5f8292cfe3508b0f79778b94e6690ebcd55cd0",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-15-painted-v1.png",
+      "sha256": "8ee3462297480786a309054c50171c82d13f77434ce755d07e078f80d2b3f4b8",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-15-prompt.txt",
+      "prompt_sha256": "5ec70803f2e0364cf411db884e74bbb450cce51f1034678daf4a3cb41d23ec02",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-16-painted-v1.png",
+      "sha256": "1df219f175f81ba5bd20159a6c9492ca22ff2ccabd6b7d623d39f268a5cd4b8a",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-16-prompt.txt",
+      "prompt_sha256": "e1767e916b6009346865e01b08728ee71ee5b6ca6c91bdce99dd2762742bc0f4",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-17-painted-v1.png",
+      "sha256": "04a7c2ff10724c0328548d8b719889edd8c072ff1c8480c614f2bcd4c30206ff",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-17-prompt.txt",
+      "prompt_sha256": "f08506cd5aef8ecd1e3a16e35d1cad52aeb2b64f3f9c83b430ecf2414c2f0d5f",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-18-painted-v1.png",
+      "sha256": "988129f181421e9248b3a6e671318be38d86267bd10fbc90f01417078a1b70c8",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-18-prompt.txt",
+      "prompt_sha256": "f48824b3f0682ce6e463f7f269d8f0589121a6710a6dee46878f898b8fb33d41",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-19-painted-v1.png",
+      "sha256": "8a8d645c8c6b8c29f41f2c5b761443cca5dacf8a10db533fb1a23c50db2d872d",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-19-prompt.txt",
+      "prompt_sha256": "12dae043cf57d4d89bb157b29582a4ee4221e4b994302102058427a479b3019b",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-20-painted-v1.png",
+      "sha256": "168a0c2c897e43bac74b4add6922a28e0c026140142856c11b98207c10a6933a",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-20-prompt.txt",
+      "prompt_sha256": "6ad4c99f8399d230d2f99ee6a1adacd5f3175c727a4e179d81aeb04ca2b08787",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-21-painted-v1.png",
+      "sha256": "6f18a6d0fa11eb52195fca75cf48b41d9713e0be5c14eac6cb89011b2c49af6e",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-21-prompt.txt",
+      "prompt_sha256": "650141b8e70dd1dd230406fda30f6a22b5249fc3e158f86d5325d5e5470386bc",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-22-painted-v1.png",
+      "sha256": "c5fc8687eb7851617275ec94849633679b7530d4e63370374589fd477283ba39",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-22-prompt.txt",
+      "prompt_sha256": "6a8c3bff2c46f4115990984ee5307d2de3708f22301fe40ad2b1290130fdcc89",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-23-painted-v1.png",
+      "sha256": "f8d09d836efe8d04188acd0ca418de727733726b895f3db03d881e9f9763905d",
+      "size": [
+        1536,
+        1024
+      ],
+      "prompt": "prompts/npc-batch-23-prompt.txt",
+      "prompt_sha256": "c8a28491671239aebe9a520ccc62c3fb796fda7848d49a5b2088679d292644e1",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-24-painted-v1.png",
+      "sha256": "f14fac9eee05d3294bb4fd0f409f696976032496b686af9fa7c01d75f66a1075",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-24-prompt.txt",
+      "prompt_sha256": "9e8fe8597c8c7964e63af51b980b97e9e9627b887832491bb971deaaecebc28d",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-25-painted-v1.png",
+      "sha256": "4fd5c36927cc9c1f47283ee5e4b7f6b2900fde046fa90d1cd115f1bbfd15ed3c",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-25-prompt.txt",
+      "prompt_sha256": "a74d5dee6605b4a1bf26279e045ceed8eadfc8d76d24fd13bf78b0d293beebf5",
+      "selected": true
+    },
+    {
+      "file": "npc-batch-21-ear-corrected-v2.png",
+      "sha256": "3ed73abde4386ebc73011ba11d977b696dae87c7b52497e252067cd42b893c51",
+      "size": [
+        1448,
+        1086
+      ],
+      "prompt": "prompts/npc-batch-21-ear-correction-prompt.txt",
+      "prompt_sha256": "c6950e12c94c0ef6fc1873d097ca5c768ad739b99724890d7497d25f6628afce",
+      "selected": true
+    }
+  ],
+  "corrections": [
+    "First translucent atlas rejected; only opaque v2 adopted.",
+    "Only TWN7PICS10 uses the corrected atlas; the other three cells retain v1 pixels.",
+    "TWN5PICS22 head is sideways. The dark mouth was initially misdescribed as an eye patch; actual source and painting preserve both eyes."
+  ]
+}

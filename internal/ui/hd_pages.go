@@ -19,17 +19,18 @@ type HDPageSource struct {
 	RGB     string
 }
 type hdPages struct {
-	book         *ebiten.Image
-	scroll       *ebiten.Image
-	scrollKey    string
-	portraits    map[string]*ebiten.Image
-	books        map[string]int
-	background   string
-	icons        map[string]*ebiten.Image
-	sources      []HDPageSource
-	validated    bool
-	editorImage  *ebiten.Image
-	editorPixels bitmapedit.Bitmap
+	book          *ebiten.Image
+	scroll        *ebiten.Image
+	scrollKey     string
+	portraits     map[string]*ebiten.Image
+	books         map[string]int
+	background    string
+	icons         map[string]*ebiten.Image
+	sources       []HDPageSource
+	validated     bool
+	npcMountSizes map[string]image.Point
+	editorImage   *ebiten.Image
+	editorPixels  bitmapedit.Bitmap
 }
 type hdNativeRender struct {
 	h     *HD
@@ -69,6 +70,9 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 		}
 		if h.fingerprint(pic) != source.RGB {
 			return fmt.Errorf("HD頁面來源%s第%d圖指紋不符", source.Archive, source.Index)
+		}
+		if size, ok := p.npcMountSizes[source.RGB]; ok && pic.Bounds().Size() != size {
+			return fmt.Errorf("HD NPC與坐騎來源%s第%d圖實際尺寸不符", source.Archive, source.Index)
 		}
 		if h.equipment != nil {
 			if size, ok := h.equipment.SourceSizes[fmt.Sprintf("%s:%d", source.Archive, source.Index)]; ok &&

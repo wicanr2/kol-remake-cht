@@ -111,7 +111,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 | ![EGA法術編輯頁](docs/verification/hd-spell-scroll-runtime-20261014/editor-ega.png) | ![HD法術卷軸與十三欄編輯](docs/verification/hd-spell-scroll-runtime-20261014/editor-hd.png) |
 
 [十五組比較頁](docs/verification/hd-native-ui-runtime-20261014/review.html)另含建角、編輯器、訓練、馬廄、法術與任務清單。
-遊戲內F10切換、鍵鼠、兩種視窗與存讀檔已驗證。自訂點陣圖保留內容與色值；其他NPC、坐騎、裝備及未重繪圖示仍待HD，
+遊戲內F10切換、鍵鼠、兩種視窗與存讀檔已驗證。自訂點陣圖保留內容與色值；NPC、坐騎、裝備及動作圖示的後續結果見下方各批驗收，
 範圍及來源見[正式驗收](docs/verification/hd-native-ui-runtime-20261014.md)。
 法術編輯頁亦已[接入並驗證](docs/verification/hd-spell-scroll-runtime-20261014.md)，名稱輸入、左右選單與遊戲內F10切換保持狀態。
 
@@ -125,12 +125,12 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 | ![EGA有翼角色頭像](docs/verification/hd-character-templates-20261014/portrait-044-ega.png) | ![HD有翼角色頭像](docs/verification/hd-character-templates-20261014/portrait-044-hd.png) |
 
 [五組對比](docs/verification/hd-character-templates-20261014/review.html)另含弓手與矮人。遊戲內F10可切換，16字元姓名完整縮放於原框；新增角色的頭像可隨v3保存重載。
-人物裝備合成仍在原型階段，其他NPC待HD；範圍、來源與限制見[本批驗收](docs/verification/hd-character-templates-20261014.md)。
+人物裝備及NPC／坐騎的後續接入見下方各批驗收；角色模板的範圍、來源與限制見[本批驗收](docs/verification/hd-character-templates-20261014.md)。
 
 ### 開發版：68個原生HD動作圖示
 
 68個動作圖示已沿同一銅色主題接入開發版。下方展示相同圖號的來源PNG與正式原生HD，來源展示由重製程式繪製。
-第28圖是城鎮徽章遮罩，保持資料用途。完整裝備頁仍在原型階段；這批尚未納入現行發行包。
+第28圖是城鎮徽章遮罩，保持資料用途。完整裝備頁的後續接入見下節；這批尚未納入現行發行包。
 
 | 來源PNG圖示展示 | 正式原生HD圖示 |
 |---|---|
@@ -151,7 +151,20 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [比較頁](docs/verification/hd-equipment-runtime-20261015/review.html)另含卸裝前臂、固定腰帶與預設／自訂盾面。
 已知預設盾面匹配手繪HD，修改盾面保留原40×38點陣；原角色資料與v3格式保持。
 中文、EGA回歸、兩種視窗的鍵鼠F10及正常存讀檔已核對，範圍見[正式驗收](docs/verification/hd-equipment-runtime-20261015.md)。
-其他NPC、怪物、坐騎、地圖、戰場、天候與未驗操作分支仍續作。
+怪物、地圖、戰場、天候與未驗操作分支仍續作。
+
+### 開發版：七城 NPC 與四種坐騎
+
+七城102張NPC與四種坐騎已補齊手繪HD，四張既有NPC保留。下方來自正式程式的相同受控狀態，包含繁中對話與坐騎資料頁；尚未納入現行發行包。
+
+| 重製中文 EGA | 正式 HD |
+|---|---|
+| ![七城NPC對話EGA](docs/verification/hd-npc-mounts-runtime-20261015/npc-t7-p10-ega.png) | ![手繪NPC與繁中對話HD](docs/verification/hd-npc-mounts-runtime-20261015/npc-t7-p10-hd.png) |
+| ![重型戰馬人物資料頁EGA](docs/verification/hd-npc-mounts-runtime-20261015/mount-sheet-3-ega.png) | ![完整馬身與中文名牌HD](docs/verification/hd-npc-mounts-runtime-20261015/mount-sheet-3-hd.png) |
+
+[七組比較](docs/verification/hd-npc-mounts-runtime-20261015/review.html)另含馬廄、雙人物及原構圖的橫置頭部。
+110個場景的中文、圖片、EGA回歸及HD一色階核對通過；遊戲內F10可在同一場景切換，兩種視窗、鍵鼠與正常存讀檔已驗。
+來源與完整範圍見[正式驗收](docs/verification/hd-npc-mounts-runtime-20261015.md)。怪物、地圖、戰場、傷勢、天候、片頭與其餘事件仍續作。
 
 ### 事件畫面：原版與 HD
 

@@ -11682,19 +11682,32 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 
 ## 2026-10-15　其他NPC與坐騎HD原型
 
-- 沿已核准同畫風、原比例與原位置續作。使用內建image_gen產生三組12位NPC及四坐騎，完整提示與原始輸出保存在`workplace/hd-npc-mounts-20261015/generation-journal.json`。四個既有NPC保持；另86個NPC待繪。來源與建築／商品圖號由實際已驗PNG及typed資料核對，沒有新增逆向猜測或原版oracle。
+- 沿已核准同畫風、原比例與原位置續作。使用內建image_gen產生三組12位NPC及四坐騎，完整提示與原始輸出現已封存，清冊位於`docs/verification/local/hd-npc-mounts-20261015/generation-journal.json`。四個既有NPC保持；當時另86個NPC待繪。來源與建築／商品圖號由實際已驗PNG及typed資料核對，沒有新增逆向猜測或原版oracle。
 - 首批四位NPC隔離版a6a1bbe9完成五場景20畫格。首輪腳本對既有旅店誤用完整HD零差條件，實際僅一色階；原腳本與20畫格保留，沿既定一色階修正後同映像／輸入乾淨重跑通過，沒有修改產品或放寬標準。四個原生頭像及錯人物反例、中文、批次trace與EGA保持通過。
 - 十二圖隔離版8957e590涵蓋八位NPC與四坐騎，新增四位NPC、四種馬廄及既有旅店九場景36畫格。批次trace與文字相同、EGA RGBA保持、圖外最多一色階；Pillow獨立雙線性取樣比八個新顯示區最多一色階，alpha零差，錯人物／坐騎反例拒絕。坐騎完整馬身等比置中，不加NPC描邊。靜態trace只有step／name／scene／ending，不含完整Inn控制器，相關措辭與收據已限定。
 - 目視發現馬廄受控Inn樣本手動帶英文標題，分類為驗證輸入錯誤；正常建築控制器會套城鎮譯文。保留四份舊輸入、16畫格與原收據，改用既有town1 door8中文名稱／人物後，在相同映像及候選重跑四場景16畫格通過。四種商品名稱本來已有中文，正式Go、規則、資料與v3未改。
-- [同主題比較頁](workplace/hd-npc-mounts-20261015/review.html)索引來源、提示、兩階段收據及13種場景。NPC八張與馬廄四張已目視，第三組四位NPC只完成生成。坐騎人物資料頁、正常路徑／F10／v3、剩餘NPC及完整組正式載入保持DRAFT，不能稱全HD完成。
+- [同主題比較頁](docs/verification/retained-evidence.md#七城npc與坐騎hd正式接入)索引來源、提示、兩階段收據及13種場景。NPC八張與馬廄四張已目視，第三組四位NPC只完成生成。坐騎人物資料頁、正常路徑／F10／v3、剩餘NPC及完整組正式載入保持DRAFT，不能稱全HD完成。
 - 本輪沒有新增正式程式測試需求，391正式來源與185HD資產保持原已驗雜湊；隔離版兩次建置及相關場景驗證各有記錄。完成裝備工作區已清理，NPC工作區仍在使用。所有一次性容器--rm且無殘留，輸出UID/GID1000:1000；交接後再抽查所有權及文件入口。全HD目標active，舊Release保持。
 
 ## 2026-10-15　七城NPC候選補齊及坐騎資料頁
 
 - 上一輪屬實作與驗證進展。開工核對ac1f1920乾淨工作樹、391正式來源及185HD資產；命中重製畫面驗證與文件職責路由，沿既有同畫風授權續作。剩餘86位NPC排成22個固定批次，使用內建image_gen補齊；另修藍膚人物新露尖耳，只採修正版單格，其他三張保持原PNG裁切。
-- 現有98位新NPC及四種坐騎全部有候選，四張原核准NPC保持。27張選用圖集／102個新裁切，NPC最小706×486；完整106身分、來源manifest／PNG／RGB、原生RGBA、尺寸及實際建築／馬廄消費端核對通過。原始生成、提示與來源索引見[完整候選清冊](workplace/hd-npc-mounts-20261015/complete-creature-prototype.json)及[生成清冊](workplace/hd-npc-mounts-20261015/generation-journal.json)。仍是DRAFT，沒有接入正式Go或新的Release。
+- 現有98位新NPC及四種坐騎全部有候選，四張原核准NPC保持。27張選用圖集／102個新裁切，NPC最小706×486；完整106身分、來源manifest／PNG／RGB、原生RGBA、尺寸及實際建築／馬廄消費端核對通過。原始生成、提示與來源索引見[完整候選清冊](docs/verification/local/hd-npc-mounts-20261015/complete-creature-prototype.json)及[生成清冊](docs/verification/local/hd-npc-mounts-20261015/generation-journal.json)。仍是DRAFT，沒有接入正式Go或新的Release。
 - 來源TWN5PICS22的黑色部位先誤解為眼罩；放大並做診斷旋轉後確認是齒列與張嘴、兩眼可見，原頭部橫置。勘誤保存在dwarf-source-orientation-correction.json，舊提示逐字保留。候選依來源保留橫置構圖，不把錯誤註記當作原版語意；雙人物、探門、擦額及交叉刀刃均保留各自來源構圖。
 - 坐騎資料頁樣本使用實際Kenneth顯示欄位、四筆馬廄Good與Session.OpenSheet。首次直接解析名冊Carried物件為runtime byte陣列被拒，改為明示顯示欄位；接著實際三格資料頁被舊靜態LoadInn六格限制擋下。兩種失敗及輸入保留，只在兩份隔離渲染副本接受Sheet非nil的1…6格樣本，正式入口及正常三格操作列不改。
 - 隔離比較來源經gofmt後各391／393份留雜湊。基底3a0f4582、候選192911ec完成四種資料頁16畫格，EGA RGBA保持、馬匹原生區及圖外最多一色階、alpha零差，批次trace／文字相同。完整重型戰馬頁與四個馬匹／中文名牌區已目視。這是受控圖像驗收，沒有購買、完整控制器、F10、v3或正常旅程聲明。
-- 完整候選組的商品消費端首輪因非商店省略goods而觸發KeyError，依實際馬廄旗標及可選列表修正後同命令重跑通過。比較頁連結初輪因/out別名被當成/src外部而拒絕，修正到實際HTML位置；不是缺圖或產品缺陷。Chromium154.0.8037.92實際載入102個候選canvas及四個保留來源連結，中文與第一畫面目視可讀，見[瀏覽器收據](workplace/hd-npc-mounts-20261015/complete-art-review-browser-check.json)。頁面只作圖集裁切預覽，不延伸GPU一色階或全場景證據。
+- 完整候選組的商品消費端首輪因非商店省略goods而觸發KeyError，依實際馬廄旗標及可選列表修正後同命令重跑通過。比較頁連結初輪因/out別名被當成/src外部而拒絕，修正到實際HTML位置；不是缺圖或產品缺陷。Chromium154.0.8037.92實際載入102個候選canvas及四個保留來源連結，中文與第一畫面目視可讀，見[瀏覽器收據](docs/verification/local/hd-npc-mounts-20261015/complete-art-review-browser-check.json)。頁面只作圖集裁切預覽，不延伸GPU一色階或全場景證據。
 - 下一步完整106來源組的遊戲載入、全母體GPU場景、正常子集／F10／v3及READY審查，再正式原子接入。工作區仍在使用，不封存或刪除；全HD保持active，16開放／92完成及舊Release保持。本輪保存新進度並commit／push，收據與清理結果由本機交接回讀。
+
+
+## 2026-10-15 七城NPC與坐騎完整組正式接入
+
+- 沿核准同畫風與原位置完成106來源組。27張選用PNG原樣接入，98位新NPC、四坐騎與四位保留NPC均驗來源PNG／RGB、尺寸、原生RGBA及八組實際數量。SPEC-039先升READY，再接入資產層完整驗證與UI原子掛接；沒有原型絕對路徑或測試旗標進正式程式。
+- 隔離完整組110場景440畫格通過後，正式395份Go／module及242份HD資產重建。全套、sceneverify、正式110場景440畫格、1194字元缺字0、完整Inn及中文相同，EGA RGBA零差，原生圖片／圖外／相對候選完整HD最多一色階。來源、程式與畫格見[正式驗收](docs/verification/hd-npc-mounts-runtime-20261015.md)。
+- 正常flow標題至Kenneth物品頁31狀態，加既有play旅店／資料頁10狀態，各側41狀態與中文、EGA保持；正常住宿11、另程序重載5及前版v3相容通過。標準／原生NPC、馬廄、坐騎資料頁經準備flow.SceneInn，實際game.Update及F10、兩視窗鍵鼠48事件完整Inn保持，HD往返最多一色階；原生NPC內框另驗最多一色階。沒有新的原版oracle或完整自然通關聲明。
+- 第一次正式測試的暫存來源缺少assets／docs／tools連結，已保留日誌並修正。兩個負例把最後NPC當坐騎，分別刪不到目標、寫回相同kind，改用實際STEEDS鍵與invalid種類後全套通過，正式產品程式保持。GUI樣本初次缺少flow而正常退出，補上準備的SceneInn；第二次首次載入超過15秒，保留逾時並改有界75秒後同程式通過。失敗均留本機，不放寬一色階。
+- README新增正式NPC與坐騎資料頁同主題比較，修掉角色／圖示段落的過期裝備原型敘述。13類覆蓋、CONTEXT與唯一工作清單同步；下一批怪物，其他地圖、戰場、傷勢、天候、片頭與事件繼續。現行tag及Release保持，沒有新封包或跨平台聲明。
+- Docker沿既有kol-package:1.26.7-ebiten2.9.9-20261011-r1，唯讀輸入、UID/GID1000、有界資源與trap清理。完整來源、樣本、v3、GUI及歷史失敗依[保存入口](docs/verification/retained-evidence.md#七城npc與坐騎hd正式接入)封存核對後，只清理本批已完成工作區。提交／推送與實際清理結果在後續交接補記。
+
+- 最終封存2483檔、10份可重建執行檔只留雜湊；1246822781 bytes壓縮為682026404 bytes，SHA-256為6c73d66c5d8df34430c831f06452869722c5f794f82e3020d26d476d526a08d1。獨立核對全部壓縮內容及原工作區後精確刪除NPC工作區；README／CONTEXT／SPEC／正式收據相對連結、395來源與UID/GID抽查通過。工作清單核實16開放／92完成，兩個執行期防護訊息與歷史原型有精確認領，未重開已完成項。
+- 下一批怪物已建立32張不同RGB、不同尺寸與二值透明度的來源清冊及檢視圖，確認資訊框與遭遇群像消費端；仍DRAFT，沒有怪物圖進正式程式。GitHub認證與PRIVATE狀態已在主機回讀。

@@ -1,0 +1,54 @@
+package main
+
+import (
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "image"
+ "image/png"
+ "os"
+ "path/filepath"
+ "reflect"
+ "testing"
+ "unicode"
+ "github.com/hajimehoshi/ebiten/v2"
+ "github.com/wicanr2/kol-remake-cht/internal/assets"
+ "github.com/wicanr2/kol-remake-cht/internal/font"
+ "github.com/wicanr2/kol-remake-cht/internal/i18n"
+ "github.com/wicanr2/kol-remake-cht/internal/screen"
+ "github.com/wicanr2/kol-remake-cht/internal/town"
+)
+type fullNPCScene struct {ID string `json:"id"`;Kind string `json:"kind"`;Archive string `json:"archive"`;Index int `json:"index"`;In *town.Inn `json:"-"`}
+type fullNPCFrame struct {ID string `json:"id"`;Kind string `json:"kind"`;Archive string `json:"archive"`;Index int `json:"index"`;Variant string `json:"variant"`;PNG string `json:"png"`;SHA string `json:"sha256"`;StateSHA string `json:"inn_sha256"`;Text []string `json:"text"`;Native bool `json:"native_ui"`;Han int `json:"han_characters"`}
+type fullNPCGallery struct {models [2]*game;cases []fullNPCScene;frames []fullNPCFrame;i,j int;err error;done bool;dir string;before map[string][]byte;text map[string][]string}
+func(g *fullNPCGallery)Update()error{if g.err!=nil{return g.err};if g.done{return ebiten.Termination};return nil}
+func(g *fullNPCGallery)Layout(int,int)(int,int){return 1920,1200}
+func(g *fullNPCGallery)Draw(dst *ebiten.Image){
+ if g.done||g.err!=nil{return};c:=g.cases[g.i];model:=g.models[g.j/2];theme:="ega";if g.j%2==1{theme="hd"};variant:="baseline-"+theme;if g.j>=2{variant="prototype-"+theme}
+ model.scene=sceneBuilding;model.inn=c.In;state,_:=json.Marshal(c.In)
+ if g.j==0{g.before[c.ID]=state}else if string(state)!=string(g.before[c.ID]){g.err=fmt.Errorf("initial state changed %s",c.ID);return}
+ if g.err=model.setGraphics(theme);g.err!=nil{return};var words []string
+ font.DrawObserver=func(_,s string){words=append(words,s)};g.err=model.render();font.DrawObserver=nil;if g.err!=nil{return}
+ if g.j==0{g.text[c.ID]=words}else if !reflect.DeepEqual(g.text[c.ID],words){g.err=fmt.Errorf("render text changed %s/%s",c.ID,variant);return}
+ if g.err=model.presentHD();g.err!=nil{return};after,_:=json.Marshal(c.In);if string(after)!=string(state){g.err=fmt.Errorf("render mutated Inn %s",c.ID);return}
+ im:=model.outputCanvas().Image();b:=im.Bounds();pixels:=make([]byte,b.Dx()*b.Dy()*4);im.ReadPixels(pixels);rgba:=image.NewRGBA(image.Rect(0,0,b.Dx(),b.Dy()));copy(rgba.Pix,pixels)
+ name:=c.ID+"-"+variant+".png";f,e:=os.OpenFile(filepath.Join(g.dir,name),os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);if e!=nil{g.err=e;return};encoder:=png.Encoder{CompressionLevel:png.BestSpeed};e=encoder.Encode(f,rgba);ce:=f.Close();if e==nil{e=ce};if e!=nil{g.err=e;return};raw,e:=os.ReadFile(filepath.Join(g.dir,name));if e!=nil{g.err=e;return}
+ han:=0;for _,s:=range words{for _,r:=range s{if unicode.Is(unicode.Han,r){han++}}};if han==0{g.err=fmt.Errorf("no Chinese %s",c.ID);return}
+ g.frames=append(g.frames,fullNPCFrame{ID:c.ID,Kind:c.Kind,Archive:c.Archive,Index:c.Index,Variant:variant,PNG:name,SHA:fmt.Sprintf("%x",sha256.Sum256(raw)),StateSHA:fmt.Sprintf("%x",sha256.Sum256(state)),Text:words,Native:model.nativeUIPage(),Han:han})
+ if theme=="hd"{dst.DrawImage(im,nil)}else{var op ebiten.DrawImageOptions;op.GeoM.Scale(2,2);dst.DrawImage(im,&op)}
+ g.j++;if g.j==4{g.j=0;g.i++;if g.i%10==0{fmt.Printf("full NPC gallery %d/%d scenes\n",g.i,len(g.cases))};g.done=g.i==len(g.cases)}
+}
+func TestFullNPCGallery(t *testing.T){
+ root:="/src";dir:="/out/full-gallery-v1";if e:=os.Mkdir(dir,0755);e!=nil{t.Fatal(e)}
+ must:=func(e error){if e!=nil{t.Fatal(e)}}
+ lib,e:=assets.Load(root+"/assets/original-derived-png/ega");must(e);f,e:=font.Load(root+"/assets/ui-font","zh-hant-16");must(e);table,e:=i18n.Load(root+"/docs/i18n/newchar-zh-Hant.json");must(e);_,e=table.LoadBank(root+"/docs/i18n/ui-zh-Hant.json",town.BankBook);must(e);must(table.LoadDisplayNames(root+"/docs/i18n/display-names-zh-Hant.tsv"))
+ gallery:=&fullNPCGallery{dir:dir,before:map[string][]byte{},text:map[string][]string{}}
+ for i:=0;i<2;i++{useNPCPrototype=i==1;model:=&game{canvas:screen.NewCanvasScaled(3),sprites:&spriteCache{lib:lib,m:map[string]*ebiten.Image{}},cjk:f,strings:table,hdPortraitPath:root+"/assets/original-derived-data/portrait-layout.json",quest:&questBattle{}};must(model.enableHD("hd",root+"/assets/hd/first-slice","zh-Hant"));gallery.models[i]=model}
+ buildings,e:=town.LoadBuildings(root+"/assets/original-derived-data/town-buildings.json");must(e);texts,e:=town.LoadText(root+"/assets/original-derived-data/town-text.json");must(e);trans,e:=loadTranslations(root+"/docs/i18n/town-zh-Hant.json",root+"/docs/i18n/ui-zh-Hant.json");must(e);sample,e:=town.LoadInn(root+"/docs/re/town-inn-sample.json");must(e)
+ for townID:=1;townID<=7;townID++{info:=buildings.Town(townID);if info==nil{t.Fatal("missing town")};for i:=range info.Doors{door:=&info.Doors[i];in:=town.EnterBuilding(fmt.Sprintf("TWN%dPICS",townID),door,texts.Building(townID,door.Index),sample.Party);in.Apply(trans.Door(townID,door.Index));if len(in.Title)!=2||len(in.DialogZh)==0||len(in.DialogZh)>9{t.Fatalf("unhandled actual entry %d/%d",townID,door.Index)};gallery.cases=append(gallery.cases,fullNPCScene{ID:fmt.Sprintf("npc-t%d-p%02d",townID,in.Portrait.Index),Kind:"npc",Archive:in.Portrait.Archive,Index:in.Portrait.Index,In:in})}}
+ if len(gallery.cases)!=102{t.Fatalf("NPC scene count %d",len(gallery.cases))}
+ for _,kind:=range []string{"stable","sheet"}{for i:=0;i<4;i++{path:=fmt.Sprintf("/out/mount-%d-inn.json",i);if kind=="sheet"{path=fmt.Sprintf("/out/mount-sheet-%d-inn.json",i)};raw,e:=os.ReadFile(path);must(e);var in town.Inn;must(json.Unmarshal(raw,&in));gallery.cases=append(gallery.cases,fullNPCScene{ID:fmt.Sprintf("mount-%s-%d",kind,i),Kind:kind,Archive:"STEEDS",Index:i,In:&in})}}
+ ebiten.SetWindowSize(960,600);ebiten.SetWindowTitle("NPC完整圖組受控驗收");ebiten.SetTPS(60);must(ebiten.RunGame(gallery));must(gallery.err)
+ if len(gallery.frames)!=440{t.Fatalf("frame count %d",len(gallery.frames))}
+ result:=map[string]any{"status":"rendered; pixel and visual checks pending","scenes":len(gallery.cases),"frames":gallery.frames,"source_identities":106,"method":"Actual game.render and game.presentHD in one controlled render process; actual EnterBuilding and Door translations; direct setGraphics for capture only","original_oracle":false,"normal_player_path":false,"gui_F10":false,"v3":false,"rng":"Static entries do not invoke gameplay RND; no original seed claim"};raw,e:=json.MarshalIndent(result,"","  ");must(e);must(os.WriteFile("/out/full-gallery-v1.json",append(raw,'\n'),0644))
+}

@@ -1,0 +1,2219 @@
+{
+  "status": "PASS formal complete NPC and mount scenes",
+  "go_module_inputs": 395,
+  "source_map_sha256": "b48ed4d0be2476a60701c12e0a06b0b34d765dbfb700f46e21f72e7870f52b35",
+  "scenes": 110,
+  "frames": 440,
+  "native_check_sha256": "e1355b8750ec99232f888da4cf16cd79899831cda19987b310247b9ea649f9d1",
+  "candidate_complete_frame_max": 1,
+  "ega_rgba_exact": true,
+  "full_Inn_and_chinese_equal": true,
+  "observed_font_characters": 1194,
+  "missing_hd_glyphs": 0,
+  "font_index_sha256": "53eb14bdfad268974088969a9cb826b23660e0901f6913af374a373f16428735",
+  "comparisons": [
+    {
+      "id": "npc-t1-p02",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p02",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p02",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p02",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p04",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p04",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p04",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p04",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p06",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p06",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p06",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p06",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p08",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p08",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p08",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p08",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p10",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p10",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p10",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p10",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p12",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p12",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p12",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p12",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p14",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p14",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p14",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p14",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p16",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p16",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p16",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p16",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p18",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p18",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p18",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p18",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p20",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p20",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p20",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p20",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p22",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p22",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p22",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p22",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p24",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p24",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p24",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p24",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p26",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p26",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p26",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p26",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p28",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p28",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p28",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p28",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p30",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p30",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p30",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p30",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p32",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p32",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t1-p32",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t1-p32",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p02",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p02",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p02",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p02",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p04",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p04",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p04",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p04",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p06",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p06",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p06",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p06",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p08",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p08",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p08",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p08",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p10",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p10",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p10",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p10",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p12",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p12",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p12",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p12",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p14",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p14",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p14",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p14",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p16",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p16",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p16",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p16",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p18",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p18",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p18",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p18",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p20",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p20",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p20",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p20",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p22",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p22",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p22",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p22",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p24",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p24",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p24",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p24",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p26",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p26",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p26",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p26",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p28",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p28",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t2-p28",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t2-p28",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p02",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p02",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p02",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p02",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p04",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p04",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p04",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p04",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p06",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p06",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p06",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p06",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p08",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p08",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p08",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p08",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p10",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p10",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p10",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p10",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p12",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p12",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p12",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p12",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p14",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p14",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p14",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p14",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p16",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p16",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p16",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p16",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p18",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p18",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p18",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p18",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p20",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p20",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p20",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p20",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p22",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p22",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p22",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p22",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p24",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p24",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t3-p24",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t3-p24",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p02",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p02",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p02",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p02",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p04",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p04",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p04",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p04",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p06",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p06",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p06",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p06",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p08",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p08",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p08",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p08",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p10",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p10",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p10",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p10",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p12",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p12",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p12",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p12",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p14",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p14",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p14",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p14",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p16",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p16",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p16",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p16",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p18",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p18",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p18",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p18",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p20",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p20",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p20",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p20",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p22",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p22",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p22",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p22",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p24",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p24",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t4-p24",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t4-p24",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p02",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p02",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p02",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p02",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p04",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p04",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p04",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p04",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p06",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p06",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p06",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p06",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p08",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p08",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p08",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p08",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p10",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p10",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p10",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p10",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p12",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p12",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p12",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p12",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p14",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p14",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p14",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p14",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p16",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p16",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p16",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p16",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p18",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p18",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p18",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p18",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p20",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p20",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p20",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p20",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p22",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p22",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p22",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p22",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p24",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p24",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p24",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p24",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p26",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p26",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p26",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p26",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p28",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p28",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t5-p28",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t5-p28",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p02",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p02",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p02",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p02",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p04",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p04",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p04",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p04",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p06",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p06",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p06",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p06",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p08",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p08",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p08",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p08",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p10",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p10",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p10",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p10",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p12",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p12",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p12",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p12",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p14",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p14",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p14",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p14",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p16",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p16",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p16",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p16",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p18",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p18",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p18",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p18",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p20",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p20",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p20",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p20",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p22",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p22",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p22",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p22",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p24",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p24",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t6-p24",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t6-p24",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p02",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p02",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p02",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p02",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p04",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p04",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p04",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p04",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p06",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p06",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p06",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p06",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p08",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p08",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p08",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p08",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p10",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p10",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p10",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p10",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p12",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p12",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p12",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p12",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p14",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p14",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p14",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p14",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p16",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p16",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p16",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p16",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p18",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p18",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p18",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p18",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p20",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p20",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p20",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p20",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p22",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p22",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p22",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p22",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p24",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p24",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p24",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p24",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p26",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p26",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p26",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p26",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p28",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p28",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p28",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p28",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p30",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p30",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p30",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p30",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p32",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p32",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p32",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p32",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p34",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p34",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p34",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p34",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p36",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p36",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p36",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p36",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p38",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p38",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p38",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p38",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p40",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p40",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p40",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p40",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p42",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p42",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p42",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p42",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p44",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p44",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "npc-t7-p44",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "npc-t7-p44",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-0",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-0",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-0",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-0",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-1",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-1",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-1",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-1",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-2",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-2",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-2",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-2",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-3",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-3",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-stable-3",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-stable-3",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-0",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-0",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-0",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-0",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-1",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-1",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-1",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-1",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-2",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-2",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-2",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-2",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-3",
+      "variant": "baseline-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-3",
+      "variant": "baseline-hd",
+      "max_channel_difference": 1
+    },
+    {
+      "id": "mount-sheet-3",
+      "variant": "prototype-ega",
+      "max_channel_difference": 0
+    },
+    {
+      "id": "mount-sheet-3",
+      "variant": "prototype-hd",
+      "max_channel_difference": 1
+    }
+  ],
+  "original_oracle": false,
+  "normal_player_path": false,
+  "platform": "Linux Docker"
+}

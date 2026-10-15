@@ -1,0 +1,179 @@
+{
+  "status": "PASS actual game.Update, F10 handler, render and presentation on prepared flow.SceneInn",
+  "cases": 4,
+  "rounds": 8,
+  "events": 48,
+  "window_sizes": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "full_Inn_preserved": true,
+  "hd_roundtrip_max": 1,
+  "native_service_npc_interior_max": 1,
+  "native_rectangle": [
+    48,
+    384,
+    576,
+    768
+  ],
+  "border_excluded": 2,
+  "results": [
+    {
+      "case": "npc",
+      "receipt_sha256": "e3881a604f33025aaf34b300b500bddf4462ef7af7042070fd9290d1fd5e8a9c",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "8d2c5ab859e659bd163ea8218cf4b097548428837973abdb983d6dc8a40758f0",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "8d2c5ab859e659bd163ea8218cf4b097548428837973abdb983d6dc8a40758f0",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "native-npc",
+      "receipt_sha256": "31bc4f69cb6a242033046078074392feaf53ff2160ad3637f89b59aa5476467c",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "0b915f17ba3de8827e6e5697a26925ca1ad0b5c3e4f45234acfa8ab195531c87",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "0b915f17ba3de8827e6e5697a26925ca1ad0b5c3e4f45234acfa8ab195531c87",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "stable",
+      "receipt_sha256": "ec987ec8ba603fd6efa8d86420de17f7043e67213e22064d51caaf1bffa9b66c",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "1aa1ec090eba01d9c4715807528b00d45efa48d9d10d12695aeed83ccd704d6d",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "1aa1ec090eba01d9c4715807528b00d45efa48d9d10d12695aeed83ccd704d6d",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "sheet",
+      "receipt_sha256": "e19d4d0ecdf11a6c0ffaa9b8f546aec31e96c93bf9dbba8fe001ab83c1dd3eb0",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "a4dda307a8f5f86e4c22f4ce7af0ff18e672983584be6b8a388f522ff0570013",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "a4dda307a8f5f86e4c22f4ce7af0ff18e672983584be6b8a388f522ff0570013",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ]
+    }
+  ],
+  "original_oracle": false,
+  "normal_player_path": false,
+  "limits": "Prepared real door and mount display state; GUI tests display controls only. Normal regression/save checks are separate."
+}

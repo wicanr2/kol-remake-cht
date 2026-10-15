@@ -1,0 +1,2835 @@
+{
+  "status": "PASS controlled actual-game complete NPC and mount pixel checks; visual review separate",
+  "method": "Actual game.render/game.presentHD; independent Pillow9.4 affine bilinear pixel-center oracle",
+  "scenes": 110,
+  "frames": 440,
+  "npc_scenes": 102,
+  "stable_scenes": 4,
+  "sheet_scenes": 4,
+  "source_identities": 106,
+  "new_npcs": 98,
+  "preserved_npcs": 4,
+  "mount_artworks": 4,
+  "max_channel_difference": 1,
+  "source_manifest_sha256": "b1c502b804c10c4f23b7aab6045ba5d559219e477812858e6069aad379ef4ea2",
+  "capture_receipt_sha256": "ea2109fa9bb6a21f9d2ec3847d0905367f5aba9d7559c13506ff50390279955c",
+  "original_oracle": false,
+  "normal_player_path": false,
+  "gui_F10": false,
+  "v3": false,
+  "rng": "Static building entries and prepared mount pages; gameplay RND not invoked",
+  "records": [
+    {
+      "id": "npc-t1-p02",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p04",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 4,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 67,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p06",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 6,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 46,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p08",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 8,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 54,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p10",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 10,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 67,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p12",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 12,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": true,
+      "complete_hd_max": 1
+    },
+    {
+      "id": "npc-t1-p14",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 14,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p16",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 16,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 63,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p18",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 18,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": true,
+      "complete_hd_max": 1
+    },
+    {
+      "id": "npc-t1-p20",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 20,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 62,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": true,
+      "complete_hd_max": 1
+    },
+    {
+      "id": "npc-t1-p22",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 22,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p24",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 24,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p26",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 26,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p28",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 28,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p30",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 30,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t1-p32",
+      "kind": "npc",
+      "archive": "TWN1PICS",
+      "index": 32,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p02",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 57,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p04",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 4,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 69,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p06",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 6,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p08",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 8,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 54,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p10",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 10,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 69,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p12",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 12,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p14",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 14,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 51,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p16",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 16,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p18",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 18,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p20",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 20,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p22",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 22,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 53,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p24",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 24,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 49,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p26",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 26,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t2-p28",
+      "kind": "npc",
+      "archive": "TWN2PICS",
+      "index": 28,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 54,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p02",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p04",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 4,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 69,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p06",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 6,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 63,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p08",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 8,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p10",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 10,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p12",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 12,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 44,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p14",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 14,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 57,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p16",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 16,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p18",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 18,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p20",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 20,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 61,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p22",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 22,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t3-p24",
+      "kind": "npc",
+      "archive": "TWN3PICS",
+      "index": 24,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 53,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p02",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 62,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p04",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 4,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p06",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 6,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 65,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p08",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 8,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 54,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p10",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 10,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p12",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 12,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 50,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p14",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 14,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p16",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 16,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 64,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p18",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 18,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p20",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 20,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p22",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 22,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 63,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t4-p24",
+      "kind": "npc",
+      "archive": "TWN4PICS",
+      "index": 24,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 57,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p02",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p04",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 4,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 59,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p06",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 6,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p08",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 8,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p10",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 10,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 65,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p12",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 12,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 53,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p14",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 14,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 57,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p16",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 16,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 64,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p18",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 18,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 49,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p20",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 20,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p22",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 22,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p24",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 24,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p26",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 26,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 59,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t5-p28",
+      "kind": "npc",
+      "archive": "TWN5PICS",
+      "index": 28,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 62,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p02",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 57,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p04",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 4,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 65,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p06",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 6,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 50,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p08",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 8,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p10",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 10,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 57,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p12",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 12,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 48,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p14",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 14,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p16",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 16,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 59,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p18",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 18,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 53,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p20",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 20,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 51,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p22",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 22,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 54,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t6-p24",
+      "kind": "npc",
+      "archive": "TWN6PICS",
+      "index": 24,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 62,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p02",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 61,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p04",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 4,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p06",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 6,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 63,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p08",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 8,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p10",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 10,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 53,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p12",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 12,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 63,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": true,
+      "complete_hd_max": 1
+    },
+    {
+      "id": "npc-t7-p14",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 14,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p16",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 16,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p18",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 18,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 46,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p20",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 20,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p22",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 22,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 64,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p24",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 24,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p26",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 26,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p28",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 28,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 58,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p30",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 30,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 53,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p32",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 32,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 59,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p34",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 34,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 62,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p36",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 36,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 48,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p38",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 38,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 55,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p40",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 40,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 52,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p42",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 42,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "npc-t7-p44",
+      "kind": "npc",
+      "archive": "TWN7PICS",
+      "index": 44,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 60,
+      "native_ui": false,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        62,
+        398,
+        560,
+        754
+      ],
+      "native_fit": [
+        498,
+        356
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-stable-0",
+      "kind": "stable",
+      "archive": "STEEDS",
+      "index": 0,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 15,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        672,
+        516,
+        912,
+        744
+      ],
+      "native_fit": [
+        239,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-stable-1",
+      "kind": "stable",
+      "archive": "STEEDS",
+      "index": 1,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 17,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        672,
+        516,
+        912,
+        744
+      ],
+      "native_fit": [
+        239,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-stable-2",
+      "kind": "stable",
+      "archive": "STEEDS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 17,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        672,
+        516,
+        912,
+        744
+      ],
+      "native_fit": [
+        218,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-stable-3",
+      "kind": "stable",
+      "archive": "STEEDS",
+      "index": 3,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 17,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        672,
+        516,
+        912,
+        744
+      ],
+      "native_fit": [
+        218,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-sheet-0",
+      "kind": "sheet",
+      "archive": "STEEDS",
+      "index": 0,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 54,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        1584,
+        12,
+        1824,
+        240
+      ],
+      "native_fit": [
+        239,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-sheet-1",
+      "kind": "sheet",
+      "archive": "STEEDS",
+      "index": 1,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        1584,
+        12,
+        1824,
+        240
+      ],
+      "native_fit": [
+        239,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-sheet-2",
+      "kind": "sheet",
+      "archive": "STEEDS",
+      "index": 2,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        1584,
+        12,
+        1824,
+        240
+      ],
+      "native_fit": [
+        218,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    },
+    {
+      "id": "mount-sheet-3",
+      "kind": "sheet",
+      "archive": "STEEDS",
+      "index": 3,
+      "ega_rgba_equal": true,
+      "full_inn_state_equal": true,
+      "chinese_draw_log_equal": true,
+      "han_characters": 56,
+      "native_ui": true,
+      "alpha_difference": 0,
+      "preserved": false,
+      "rectangle": [
+        1584,
+        12,
+        1824,
+        240
+      ],
+      "native_fit": [
+        218,
+        228
+      ],
+      "native_max": 1,
+      "outside_max": 1,
+      "wrong_identity_negative_rejected": true
+    }
+  ]
+}
