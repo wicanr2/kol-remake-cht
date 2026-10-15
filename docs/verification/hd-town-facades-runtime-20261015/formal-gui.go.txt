@@ -1,0 +1,36 @@
+package main
+import("encoding/json";"fmt";"image";"os";"testing";"github.com/hajimehoshi/ebiten/v2";"github.com/wicanr2/kol-remake-cht/internal/assets";"github.com/wicanr2/kol-remake-cht/internal/font";"github.com/wicanr2/kol-remake-cht/internal/i18n";"github.com/wicanr2/kol-remake-cht/internal/screen";"github.com/wicanr2/kol-remake-cht/internal/town";"github.com/wicanr2/kol-remake-cht/internal/flow")
+type facadeGUIObserver struct{g *game}
+func(n *facadeGUIObserver)Update()error{return n.g.Update()}
+func(n *facadeGUIObserver)Layout(w,h int)(int,int){return n.g.Layout(w,h)}
+func(n *facadeGUIObserver)Draw(dst *ebiten.Image){n.g.Draw(dst);raw,_:=json.Marshal(map[string]any{"Outdoor":n.g.play.Outdoor,"hd":n.g.hd!=nil,"settings":n.g.displaySettings});fmt.Printf("equipment-frame %s\n",raw)}
+func TestHDFacadeGUI(t *testing.T){name:=os.Getenv("KOL_FACADE_GUI_CASE");if name==""{t.Skip("explicit prepared GUI")};must:=func(e error){if e!=nil{t.Fatal(e)}};
+root:="/src";
+ lib,e:=assets.Load(root+"/assets/original-derived-png/ega");must(e);f,e:=font.Load(root+"/assets/ui-font","zh-hant-16");must(e);table,e:=i18n.Load(root+"/docs/i18n/newchar-zh-Hant.json");must(e)
+ _,e=table.LoadBank(root+"/docs/i18n/ui-zh-Hant.json",town.BankBook);must(e);must(table.LoadDisplayNames(root+"/docs/i18n/display-names-zh-Hant.tsv"))
+ buildings,e:=town.LoadBuildings(root+"/assets/original-derived-data/town-buildings.json");must(e)
+ raw,e:=os.ReadFile("/out/generation-plan.json");must(e);var plan struct{Entries []facadeEntry};must(json.Unmarshal(raw,&plan));plan.Entries=append(plan.Entries,facadeEntry{Key:"twn7pics-013",File:"/src/assets/hd/first-slice/inn-painted-v1.png",Archive:"TWN7PICS",Index:13,RGB:"fa303932f603303f694eb27795d2abaaccc8c15c252c57dd670b175ce1dd438a"})
+ m:=&game{scene:sceneOutdoor,canvas:screen.NewCanvasScaled(3),sprites:&spriteCache{lib:lib,m:map[string]*ebiten.Image{}},cjk:f,strings:table,hdPortraitPath:root+"/assets/original-derived-data/portrait-layout.json"};must(m.enableHD("hd",root+"/assets/hd/first-slice","zh-Hant"))
+ g:=&facadeGallery{g:m,states:map[string][]byte{},words:map[string][]string{}}
+ for _,row:=range plan.Entries{
+  if row.File==""{continue};key,index:=row.Key,row.Index
+  var paint image.Image
+  out,e:=town.LoadOutdoor(root+"/docs/re/town1-outdoor-sample.json");must(e)
+  townID:=1;if row.Archive!="MISCPICS"{_,e=fmt.Sscanf(row.Archive,"TWN%dPICS",&townID);must(e)}
+  out.Town=townID;out.Bounds.MinX=0;out.Bounds.MinY=0;out.Bounds.MaxX=63;out.Bounds.MaxY=63;out.SetBuildings(buildings.Town(townID))
+  if row.Archive=="MISCPICS"{out.AtEdge=true;out.AtDoorCell=false}else{
+   var door *town.Door;for i:=range buildings.Town(townID).Doors{d:=&buildings.Town(townID).Doors[i];if d.Picture==index{door=d;break}}
+   if door==nil{t.Fatalf("real door missing for %s",key)};out.PlaceParty(door.X,door.Y);out.AtDoorCell=true
+   if out.AtDoor()==nil||out.AtDoor().Picture!=index{t.Fatal("wrong prepared door")}
+  }
+  g.cases=append(g.cases,facadeCase{key,row.RGB,row.File,index,out,paint})
+ }
+ if len(g.cases)==0{t.Fatal("no generated candidates")};if os.Getenv("KOL_FACADE_REQUIRE_ALL")=="1"&&len(g.cases)!=103{t.Fatalf("expected103sources,got%d",len(g.cases))}
+
+var chosen *facadeCase;for i:=range g.cases{if g.cases[i].Key==name{chosen=&g.cases[i];break}};if chosen==nil{t.Fatal("unknown facade GUI case")}
+m.play=&town.Session{Outdoor:chosen.State,Party:chosen.State.Party};m.flow=&flow.Flow{Scene:flow.SceneTown,Town:m.play};m.scene=sceneFlow;m.interactive=true;m.logInput=true
+// Controlled static marker phase only. Production animation and rules are unchanged.
+m.walkTick=-1073741824
+ebiten.SetWindowSize(1920,1200);ebiten.SetWindowTitle("七城門面HD遊戲內切換驗收");ebiten.SetTPS(60)
+must(ebiten.RunGame(&facadeGUIObserver{m}));must(m.drawErr)
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "kol-hd-residence-sign-native/1",
+  "status": "DRAFT native32pixel Chinese, matching existing16pixel font at2x; narrow scene pending",
+  "source": "TWN5PICS19",
+  "png": "twn5pics-019-painted-v1.png",
+  "png_sha256": "f0470b724c455691f7bca6bc6f23d7c6b01a94b910895b57705f5357f9fd7147",
+  "native_size": [
+    1774,
+    887
+  ],
+  "lines": [
+    "請勿",
+    "踐踏草坪"
+  ],
+  "font_size": 32,
+  "line_height": 34,
+  "ink": [
+    85,
+    85,
+    85,
+    255
+  ],
+  "full": [
+    [
+      770,
+      519,
+      1100,
+      625
+    ],
+    [
+      -245,
+      626,
+      85,
+      740
+    ],
+    [
+      1716,
+      519,
+      2046,
+      625
+    ]
+  ],
+  "clip": [
+    [
+      770,
+      519,
+      1100,
+      625
+    ],
+    [
+      0,
+      626,
+      85,
+      740
+    ],
+    [
+      1716,
+      519,
+      1774,
+      625
+    ]
+  ],
+  "hd_clip": [
+    [
+      1124,
+      685,
+      1338,
+      754
+    ],
+    [
+      624,
+      755,
+      679,
+      829
+    ],
+    [
+      1738,
+      685,
+      1776,
+      754
+    ]
+  ],
+  "method": "Round native painting board corners to existing624,348,1152,576 viewport; draw native approved font on the existing board texture, no white replacement panel",
+  "side_hidden_origins": "strong inference retained from accepted EGA sign",
+  "ega_geometry_unchanged": true,
+  "v1_visual_failure": "full-group-gallery/twn5pics-019-prototype-hd.png; source EGA board rectangles cover the displaced hand-painted board"
+}

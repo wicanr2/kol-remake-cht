@@ -290,7 +290,11 @@ func (h *HD) outdoorHD(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) er
 	}
 	s.panel(dst, hdRect(618, 342, 1164, 588), false)
 	s.preserve(dst, hdRect(624, 348, 1152, 576))
-	if door := out.AtDoor(); door != nil && !out.AtEdge {
+	drawn, err := h.drawTownFacade(dst, sprites, out)
+	if err != nil {
+		return err
+	}
+	if door := out.AtDoor(); !drawn && door != nil && !out.AtEdge {
 		pic, err := sprites.Get(out.CrestArchive(), door.Picture)
 		if err != nil {
 			return err

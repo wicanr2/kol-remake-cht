@@ -1,0 +1,49 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"image";"image/png";"os";"path/filepath";"reflect";"testing";"unicode";
+ "github.com/hajimehoshi/ebiten/v2";"github.com/wicanr2/kol-remake-cht/internal/assets";"github.com/wicanr2/kol-remake-cht/internal/font";"github.com/wicanr2/kol-remake-cht/internal/i18n";"github.com/wicanr2/kol-remake-cht/internal/screen";"github.com/wicanr2/kol-remake-cht/internal/town")
+type facadeEntry struct{Key,File,Archive string;Index int;RGB string `json:"source_rgb_sha256"`}
+type facadeCase struct{Key,RGB,File string;Index int;State *town.Outdoor;Paint image.Image}
+type facadeFrame struct{Key,Variant,PNG,SHA,StateSHA string;Index,Han int;Text []string}
+type facadeGallery struct{g *game;cases []facadeCase;frames []facadeFrame;i,j int;done bool;err error;states map[string][]byte;words map[string][]string}
+func(g *facadeGallery)Update()error{if g.err!=nil{return g.err};if g.done{return ebiten.Termination};return nil}
+func(g *facadeGallery)Layout(int,int)(int,int){return 1920,1200}
+func facadePNG(path string,pic *ebiten.Image)(string,error){b:=pic.Bounds();im:=image.NewRGBA(image.Rect(0,0,b.Dx(),b.Dy()));pic.ReadPixels(im.Pix);f,e:=os.OpenFile(path,os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);if e!=nil{return"",e};encoder:=png.Encoder{CompressionLevel:png.BestSpeed};e=encoder.Encode(f,im);ce:=f.Close();if e==nil{e=ce};raw,re:=os.ReadFile(path);if e==nil{e=re};return fmt.Sprintf("%x",sha256.Sum256(raw)),e}
+func(g *facadeGallery)Draw(dst *ebiten.Image){
+ if g.done||g.err!=nil{return};c:=g.cases[g.i];m:=g.g;m.outdoor=c.State;mode:="ega";if g.j%2==1{mode="hd"};variant:="baseline-"+mode;if g.j>=2{variant="prototype-"+mode}
+ state,e:=json.Marshal(c.State);if e!=nil{g.err=e;return};if g.j==0{g.states[c.Key]=state}else if string(state)!=string(g.states[c.Key]){g.err=fmt.Errorf("state mismatch");return}
+ if g.err=m.setGraphics(mode);g.err!=nil{return};
+ var text []string;font.DrawObserver=func(_,s string){text=append(text,s)};g.err=m.render();font.DrawObserver=nil;if g.err!=nil{return}
+ if g.j==0{g.words[c.Key]=text}else if !reflect.DeepEqual(g.words[c.Key],text){g.err=fmt.Errorf("Chinese text mismatch");return}
+ if g.err=m.presentHD();g.err!=nil{return};after,e:=json.Marshal(c.State);if e!=nil||string(after)!=string(state){g.err=fmt.Errorf("renderer mutated Outdoor state");return}
+ han:=0;for _,word:=range text{for _,r:=range word{if unicode.Is(unicode.Han,r){han++}}};if han==0{g.err=fmt.Errorf("no Chinese");return}
+ name:=c.Key+"-"+variant+".png";sum,e:=facadePNG(filepath.Join("/out/formal-gallery-gallery",name),m.outputCanvas().Image());if e!=nil{g.err=e;return}
+ g.frames=append(g.frames,facadeFrame{c.Key,variant,name,sum,fmt.Sprintf("%x",sha256.Sum256(state)),c.Index,han,text})
+ var op ebiten.DrawImageOptions;if mode=="ega"{op.GeoM.Scale(2,2)};dst.DrawImage(m.outputCanvas().Image(),&op)
+ g.j++;if g.j==4{g.j=0;g.i++;fmt.Printf("facade %d/%d scenes\n",g.i,len(g.cases));g.done=g.i==len(g.cases)}
+}
+func TestFacadeGallery(t *testing.T){
+ if os.Getenv("KOL_FACADE_GALLERY")!="1"{t.Skip("explicit prepared gallery only")};must:=func(e error){if e!=nil{t.Fatal(e)}};root:="/src";must(os.Mkdir("/out/formal-gallery-gallery",0755))
+ lib,e:=assets.Load(root+"/assets/original-derived-png/ega");must(e);f,e:=font.Load(root+"/assets/ui-font","zh-hant-16");must(e);table,e:=i18n.Load(root+"/docs/i18n/newchar-zh-Hant.json");must(e)
+ _,e=table.LoadBank(root+"/docs/i18n/ui-zh-Hant.json",town.BankBook);must(e);must(table.LoadDisplayNames(root+"/docs/i18n/display-names-zh-Hant.tsv"))
+ buildings,e:=town.LoadBuildings(root+"/assets/original-derived-data/town-buildings.json");must(e)
+ raw,e:=os.ReadFile("/out/generation-plan.json");must(e);var plan struct{Entries []facadeEntry};must(json.Unmarshal(raw,&plan));plan.Entries=append(plan.Entries,facadeEntry{Key:"twn7pics-013",File:"/src/assets/hd/first-slice/inn-painted-v1.png",Archive:"TWN7PICS",Index:13,RGB:"fa303932f603303f694eb27795d2abaaccc8c15c252c57dd670b175ce1dd438a"})
+ m:=&game{scene:sceneOutdoor,canvas:screen.NewCanvasScaled(3),sprites:&spriteCache{lib:lib,m:map[string]*ebiten.Image{}},cjk:f,strings:table,hdPortraitPath:root+"/assets/original-derived-data/portrait-layout.json"};must(m.enableHD("hd",root+"/assets/hd/first-slice","zh-Hant"))
+ g:=&facadeGallery{g:m,states:map[string][]byte{},words:map[string][]string{}}
+ for _,row:=range plan.Entries{
+  if row.File==""{continue};key,index:=row.Key,row.Index
+  var paint image.Image
+  out,e:=town.LoadOutdoor(root+"/docs/re/town1-outdoor-sample.json");must(e)
+  townID:=1;if row.Archive!="MISCPICS"{_,e=fmt.Sscanf(row.Archive,"TWN%dPICS",&townID);must(e)}
+  out.Town=townID;out.Bounds.MinX=0;out.Bounds.MinY=0;out.Bounds.MaxX=63;out.Bounds.MaxY=63;out.SetBuildings(buildings.Town(townID))
+  if row.Archive=="MISCPICS"{out.AtEdge=true;out.AtDoorCell=false}else{
+   var door *town.Door;for i:=range buildings.Town(townID).Doors{d:=&buildings.Town(townID).Doors[i];if d.Picture==index{door=d;break}}
+   if door==nil{t.Fatalf("real door missing for %s",key)};out.PlaceParty(door.X,door.Y);out.AtDoorCell=true
+   if out.AtDoor()==nil||out.AtDoor().Picture!=index{t.Fatal("wrong prepared door")}
+  }
+  g.cases=append(g.cases,facadeCase{key,row.RGB,row.File,index,out,paint})
+ }
+ if len(g.cases)==0{t.Fatal("no generated candidates")};if os.Getenv("KOL_FACADE_REQUIRE_ALL")=="1"&&len(g.cases)!=103{t.Fatalf("expected103sources,got%d",len(g.cases))}
+ ebiten.SetWindowSize(960,600);ebiten.SetTPS(60);must(ebiten.RunGame(g));must(g.err);if len(g.frames)!=4*len(g.cases){t.Fatal("missing frames")}
+ result:=map[string]any{"status":"rendered; independent check pending","frames":g.frames,"scenes":len(g.cases),"method":"Actual OutdoorCJK and HD outdoorHD; real typed doors and town edge with prepared placement and full 0..63 bounds; no gameplay RNG","native_rect":[4]int{624,348,1776,924},"original_oracle":false,"normal_player_path":false,"gui_F10":false,"v3":false}
+ data,e:=json.MarshalIndent(result,"","  ");must(e);must(os.WriteFile("/out/formal-gallery-captures.json",append(data,'\n'),0644))
+}

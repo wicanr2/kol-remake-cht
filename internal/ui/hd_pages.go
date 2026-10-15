@@ -78,6 +78,11 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 			(source.Index < 0 || source.Index >= 32 || pic.Bounds().Size() != h.monsters.pictures[source.Index].size) {
 			return fmt.Errorf("HD怪物來源實際尺寸不符")
 		}
+		if h.facades != nil {
+			if _, ok := h.facades.pictures[townFacadeID(source.Archive, source.Index)]; ok && pic.Bounds().Size() != image.Pt(192, 96) {
+				return fmt.Errorf("HD城鎮門面來源實際尺寸不符")
+			}
+		}
 		if h.equipment != nil {
 			if size, ok := h.equipment.SourceSizes[fmt.Sprintf("%s:%d", source.Archive, source.Index)]; ok &&
 				(pic.Bounds().Dx() != size[0] || pic.Bounds().Dy() != size[1]) {

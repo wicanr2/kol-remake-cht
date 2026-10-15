@@ -81,6 +81,13 @@ func (g *game) setGraphics(mode string) error {
 		if err := monsters.ValidateSources(g.sprites.lib); err != nil {
 			return fmt.Errorf("HD怪物來源驗證失敗：%w", err)
 		}
+		facades, err := assets.LoadHDTownFacades(filepath.Join(g.hdDir, "town-facades"))
+		if err != nil {
+			return fmt.Errorf("HD城鎮門面載入失敗：%w", err)
+		}
+		if err := facades.ValidateSources(g.sprites.lib); err != nil {
+			return fmt.Errorf("HD城鎮門面來源驗證失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -136,6 +143,19 @@ func (g *game) setGraphics(mode string) error {
 			monsterArts = append(monsterArts, ui.HDMonsterArt{Source: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, Size: image.Pt(p.Size[0], p.Size[1]), Paint: monsters.Images[i]})
 		}
 		if err := hd.AttachMonsters(monsterArts); err != nil {
+			return err
+		}
+		var facadeArts []ui.HDTownFacadeArt
+		for i, p := range facades.Manifest.Pictures {
+			facadeArts = append(facadeArts, ui.HDTownFacadeArt{Source: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, Paint: facades.Images[i]})
+		}
+		sign := facades.Manifest.Sign
+		uiSign := ui.HDTownFacadeSign{NativeSize: image.Pt(sign.NativeSize[0], sign.NativeSize[1]), FontSize: sign.FontSize, LineHeight: sign.LineHeight}
+		for i := range sign.Full {
+			b, c := sign.Full[i], sign.Clip[i]
+			uiSign.Full[i], uiSign.Clip[i] = image.Rect(b[0], b[1], b[2], b[3]), image.Rect(c[0], c[1], c[2], c[3])
+		}
+		if err := hd.AttachTownFacades(facadeArts, uiSign); err != nil {
 			return err
 		}
 		g.hdCache, g.hdCanvas = hd, canvas

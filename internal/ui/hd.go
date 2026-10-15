@@ -27,6 +27,7 @@ type HD struct {
 	actions      *hdActions
 	equipment    *hdEquipment
 	monsters     *hdMonsters
+	facades      *hdTownFacades
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {
@@ -105,6 +106,9 @@ func (h *HD) Outdoor(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) erro
 		return h.outdoorHD(dst, sprites, out)
 	}
 	if err := h.party(dst, sprites, out.Party); err != nil {
+		return err
+	}
+	if drawn, err := h.drawTownFacade(dst, sprites, out); drawn || err != nil {
 		return err
 	}
 	if door := out.AtDoor(); door != nil && !out.AtEdge {

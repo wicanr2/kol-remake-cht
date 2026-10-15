@@ -1,0 +1,1324 @@
+{
+  "schema": "kol-hd-town-facades-runtime/1",
+  "status": "PASS limited CONFORMED",
+  "date": "2026-10-15",
+  "source_count": 407,
+  "asset_count": 381,
+  "runtime_sha256": "8e4429295384f69972407783305c61bf63b30d625b6295ed89a8edcade946ca3",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "source_inputs": "source-inputs.json",
+  "asset_inputs": "asset-inputs.json",
+  "baseline_commit": "571dec268a4f8145cbccf1cb9a7fa60f156ebcbd",
+  "scenes": {
+    "status": "PASS limited formal103facade/edge scenes",
+    "scenes": 103,
+    "frames": 412,
+    "native_painting_max": 1,
+    "full_candidate_hd_max": 1,
+    "outside_max": 0,
+    "ega_rgba_exact": true,
+    "complete_serializable_Outdoor_equal": true,
+    "chinese_equal": true,
+    "actual_han_characters": 2544,
+    "unique_han": 12,
+    "missing_glyphs": [],
+    "records": [
+      {
+        "key": "miscpics-000",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-003",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-005",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-007",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-009",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-011",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-013",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-015",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-017",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-019",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-021",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-023",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-025",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-027",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-029",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-031",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn1pics-033",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-003",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-005",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-007",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-009",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-011",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-013",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-015",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-017",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-019",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-021",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-023",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-025",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-027",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn2pics-029",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-003",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-005",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-007",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-009",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-011",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-013",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-015",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-017",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-019",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-021",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-023",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn3pics-025",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-003",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-005",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-007",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-009",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-011",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-013",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-015",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-017",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-019",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-021",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-023",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn4pics-025",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-003",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-005",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-007",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-009",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-011",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-013",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-015",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-017",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-019",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 1,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 24
+      },
+      {
+        "key": "twn5pics-021",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-023",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-025",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-027",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn5pics-029",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-003",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-005",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-007",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-009",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-011",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-013",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-015",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-017",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-019",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-021",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-023",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn6pics-025",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-003",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-005",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-007",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-009",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-011",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-013",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-015",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-017",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-019",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-021",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-023",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-025",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-027",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-029",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-031",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-033",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-035",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-037",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-039",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-041",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-043",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      },
+      {
+        "key": "twn7pics-045",
+        "native_painting_max": 1,
+        "full_candidate_hd_max": 0,
+        "outside_max": 0,
+        "ega_rgba_exact": true,
+        "complete_serializable_Outdoor_equal": true,
+        "chinese_equal": true,
+        "han_characters": 6
+      }
+    ],
+    "source_inputs_sha256": "fac600ce351f3d7d80783b6750cbd172472843e02da12ecd779fee7bc145b542",
+    "verification_source_inputs_sha256": "49e1bd66fd356c9348e426153ca199191f35728b463a96b261b606aef9c8f956",
+    "assets_inputs_sha256": "b073ad95bf81e7e0829fab5fb4f39417cd5170240d9a1e33d75a694808295b27",
+    "captures_sha256": "d0721cee838bc3903a8cb31de0558f8cb2daf6ab9445cec825d54af3833aeaa7",
+    "residence_note": "Whole HD matches the native32pixel candidate within1; painting-only CPU comparison excludes the three native text faces. Optional independent font-filter model remains unresolved and is not used as parity proof.",
+    "normal_player_path": false,
+    "original_oracle": false,
+    "platform": "Linux Docker only"
+  },
+  "regression": {
+    "status": "PASS limited normal, controlled F10 and v3 regression",
+    "normal": [
+      {
+        "case": "winged-regression",
+        "states": 10,
+        "chinese_equal": true,
+        "controller_trace_equal": true,
+        "ega_rgba_exact": true,
+        "hd_max": 1
+      },
+      {
+        "case": "human-slots",
+        "states": 31,
+        "chinese_equal": true,
+        "controller_trace_equal": true,
+        "ega_rgba_exact": true,
+        "hd_max": 1
+      }
+    ],
+    "states_per_variant": 41,
+    "gui": [
+      {
+        "case": "twn1pics-003",
+        "events": 12,
+        "rounds": [
+          {
+            "scene": "large",
+            "mouse": false,
+            "size": [
+              1920,
+              1200
+            ],
+            "hd_max_channel_delta": 1,
+            "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+            "files": [
+              "large-before.png",
+              "large-ega.png",
+              "large-restored.png"
+            ]
+          },
+          {
+            "scene": "small",
+            "mouse": true,
+            "size": [
+              960,
+              600
+            ],
+            "hd_max_channel_delta": 0,
+            "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+            "files": [
+              "small-before.png",
+              "small-ega.png",
+              "small-restored.png"
+            ]
+          }
+        ],
+        "receipt_sha256": "66bbdf933605808370405f042861494c1800908175a15d5cf2a44c1c62516f2d"
+      },
+      {
+        "case": "twn5pics-019",
+        "events": 12,
+        "rounds": [
+          {
+            "scene": "large",
+            "mouse": false,
+            "size": [
+              1920,
+              1200
+            ],
+            "hd_max_channel_delta": 1,
+            "state_sha256": "48469f16642bef958cda38bff4627dedd3914bb07bb660f22c957398ab037ab1",
+            "files": [
+              "large-before.png",
+              "large-ega.png",
+              "large-restored.png"
+            ]
+          },
+          {
+            "scene": "small",
+            "mouse": true,
+            "size": [
+              960,
+              600
+            ],
+            "hd_max_channel_delta": 0,
+            "state_sha256": "48469f16642bef958cda38bff4627dedd3914bb07bb660f22c957398ab037ab1",
+            "files": [
+              "small-before.png",
+              "small-ega.png",
+              "small-restored.png"
+            ]
+          }
+        ],
+        "receipt_sha256": "58fc913c0f4028bb4ec2bc0b57495ba6dd56eb242bdff0b970772a73802e536d"
+      },
+      {
+        "case": "twn7pics-013",
+        "events": 12,
+        "rounds": [
+          {
+            "scene": "large",
+            "mouse": false,
+            "size": [
+              1920,
+              1200
+            ],
+            "hd_max_channel_delta": 1,
+            "state_sha256": "9ed1c0f135db0d699d30a9f0028f9010b56eec5883671173c994bfcb42445894",
+            "files": [
+              "large-before.png",
+              "large-ega.png",
+              "large-restored.png"
+            ]
+          },
+          {
+            "scene": "small",
+            "mouse": true,
+            "size": [
+              960,
+              600
+            ],
+            "hd_max_channel_delta": 0,
+            "state_sha256": "9ed1c0f135db0d699d30a9f0028f9010b56eec5883671173c994bfcb42445894",
+            "files": [
+              "small-before.png",
+              "small-ega.png",
+              "small-restored.png"
+            ]
+          }
+        ],
+        "receipt_sha256": "c9e925d8c467edcce47b24e748ebf8daefa2876ff05f0212d87065230b14e0a8"
+      },
+      {
+        "case": "miscpics-000",
+        "events": 12,
+        "rounds": [
+          {
+            "scene": "large",
+            "mouse": false,
+            "size": [
+              1920,
+              1200
+            ],
+            "hd_max_channel_delta": 1,
+            "state_sha256": "07ebd67a2a4ec8176758a1bea3b87d8c4e8547329f19c588b894acb5f07989f0",
+            "files": [
+              "large-before.png",
+              "large-ega.png",
+              "large-restored.png"
+            ]
+          },
+          {
+            "scene": "small",
+            "mouse": true,
+            "size": [
+              960,
+              600
+            ],
+            "hd_max_channel_delta": 0,
+            "state_sha256": "07ebd67a2a4ec8176758a1bea3b87d8c4e8547329f19c588b894acb5f07989f0",
+            "files": [
+              "small-before.png",
+              "small-ega.png",
+              "small-restored.png"
+            ]
+          }
+        ],
+        "receipt_sha256": "a91e105bd892754b2e9ab48c2747e533253622c0f47780f6ba85bf1a78b0851b"
+      }
+    ],
+    "F10_events": 48,
+    "window_sizes": [
+      [
+        1920,
+        1200
+      ],
+      [
+        960,
+        600
+      ]
+    ],
+    "serializable_Outdoor_unchanged": true,
+    "prepared_GUI_marker_clock": "walkTick=-1073741824; static marker phase only; production rules unchanged",
+    "save": {
+      "schema": "kol-hd-action-save-check/1",
+      "rest_script": "L R RET SPACE > > > > RET RET",
+      "rest_states": 11,
+      "reload_states": 5,
+      "normal_save_equal_except_saved_at": true,
+      "reload_file_unchanged": true,
+      "old_v3_from_baseline": {
+        "sha256": "829ca881f94d2ef3044f4237ca1268f98ca47a1792e31fb2c143fb1eb72a92b6",
+        "trace_equal": true,
+        "text_equal": true,
+        "file_unchanged": true
+      },
+      "limits": "Normal play rest/reload only; no new completion or original parity claim."
+    },
+    "save_receipt_sha256": "e304137c29b2882a86726f6abeddb89ef25a46a97093ac97d8604975747e2837",
+    "original_oracle": false,
+    "normal_completion": false,
+    "platform": "Linux Docker only"
+  },
+  "tests": {
+    "full": "PASS",
+    "sceneverify": "PASS"
+  },
+  "toolchain": {
+    "image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+    "go": "1.26.7",
+    "ebitengine": "2.9.9",
+    "pillow": "9.4.0"
+  },
+  "limitations": [
+    "Linux Docker only",
+    "No new original oracle, normal full journey, platform hardware or release claim",
+    "Independent optional font-filter model remains unresolved; real six glyphs readable and formal/candidate whole-HD <=1",
+    "Six remaining town crests, maps, battlefields, injuries, weather, title and other events remain open"
+  ],
+  "attachments": {
+    "asset-inputs.json": "b073ad95bf81e7e0829fab5fb4f39417cd5170240d9a1e33d75a694808295b27",
+    "twn6pics-021-ega.png": "239684138dc3069b6e1dc72a1a40d7fa37bd063762f14de8ae341ac28e3305be",
+    "residence-sign.json": "504bf2f692a48f2e8ce84be1d0d22dd27cb0841b5ae9506a645fcdb4f53aab1a",
+    "prepare-formal-verification.py": "a67429cb35ade21b2b6dd38102a048642ed6a1899cbdd98e303fdf73e6f28ee1",
+    "regression-check.json": "f64fdbc320094720a73a534f3466ae4a9e14f3bdce31e372a5252993ce7bd1b9",
+    "verification-source-inputs.json": "49e1bd66fd356c9348e426153ca199191f35728b463a96b261b606aef9c8f956",
+    "scene-check.json": "058c86dcc35401a664644582600cbd4809c649c76ce40e8bb8efc40389adc1d4",
+    "review.html": "35607c70f5ad96b2c6a88520f5c5f64f231155ac36f9cd4d5cf2c76538ab7d7d",
+    "build-formal.sh": "34583844c8cffd9fde7815eddd260402093fc35277b96eb99d2382a1df4e7545",
+    "check-regression.py": "2e3434c7c8b503de9e5835751039c510ab6c77b13a28724bff4cc2ad56ab9de4",
+    "manifest.json": "b6a31355f28816ccc67a5a44a7ca2dc5b5a1d89e68a16c203beb47b8fff18628",
+    "check-formal-gallery.py": "03bf61f51a816c2e15275fd9d6146ccb8a3f5800be7e7b548254c9e1b27cab64",
+    "scene-captures.json": "d0721cee838bc3903a8cb31de0558f8cb2daf6ab9445cec825d54af3833aeaa7",
+    "formal-gallery.go.txt": "8e9da10a5c35259f780adead0dbe20088433886142db6fb6f61e7450bd7710c3",
+    "twn2pics-021-ega.png": "89c2236a5454976d3d0305f7ac7df70af9a169038575e80804112068f94267dc",
+    "twn5pics-019-hd.png": "77c6329ecdabcde881d2a7b8a17320d185dbb583769968f0d0fa63cf5e245e91",
+    "twn7pics-045-ega.png": "42a203f8e54bfebeb81ffc0998ef0e6846a20431ab1b7bfd3cd03149b33d8f01",
+    "twn5pics-019-ega.png": "5f835e94b1da1f797e1dd4bef689e05b0d434e73d8265e2e789c3e186eed6e06",
+    "miscpics-000-hd.png": "eb364de3b7ae471e03f008b9ed6a77cbb91fe311496eb4202f8d62bc9a2c876d",
+    "twn3pics-023-hd.png": "850c145b012c7b97fb6599852d16be8623f751e5a3563386c338f89078d80b33",
+    "twn3pics-023-ega.png": "441bf0b3efa2d1efc59d3f2290e5845663653c9141efba5319d7e9a61e8fa7ef",
+    "full-test.log": "62499de49ddd163290fea4735331c59b0c79988d78c218c99254a8a1b5726ade",
+    "sceneverify.log": "5f20e4df7d81726eaa30522451439f1fbd546bafadfe110d498f9c716cdf452f",
+    "twn1pics-003-ega.png": "ed9fac243fbeff03bbd6ae7485792d2047a4965354bb07c1ffff11ec9bcfbc85",
+    "twn6pics-021-hd.png": "55ea8071ae254d1d1752f36c96584562e47fbbb0a3347548425716739d9e9e65",
+    "twn7pics-045-hd.png": "eca7033cbd489c64ccabe8a69bf07365d2d9b1c5cd242f3dc1e61a6dfe9361b2",
+    "twn2pics-021-hd.png": "9ed4c0414b7c17baf46265a7003a3abed9a9c32a700a6109e46bf3499be5d14f",
+    "formal-gui.go.txt": "6b00ffa7501fc6aae69fdf4aa384ee936fe2039ce6944d223e67027e66a86f39",
+    "source-inputs.json": "fac600ce351f3d7d80783b6750cbd172472843e02da12ecd779fee7bc145b542",
+    "build-formal-verification.sh": "d6ff0bf67c98f646d1b7224146c68d3a9a93c3c90f31b2e13457a49fc6b4a323",
+    "twn4pics-015-ega.png": "a56bfe6c5351ec294e92c2d25b9641d6e3367641d2ba415777cc2d19b0f2c2ac",
+    "twn4pics-015-hd.png": "26d730407ebc0b0a3fe07eafdd46a1a9b4ddfdb20d5de186ae7d9bcea3e85177",
+    "regression-tools.json": "2e20ac9d193fa1c6cd7b51dbcf6508fb119fcd9ec82cbc68de1c1bd1e248069b",
+    "miscpics-000-ega.png": "ef5e9bd9d5a7426aeeeed53de3ea3af999813db3cd5c3d33a75f6f1610ffa457",
+    "optional-font-oracle.json": "70f68dfc0322547e7e6f135d3f2f9e14273d76302d787ec95dbb85d98f53b083",
+    "twn1pics-003-hd.png": "375d3242531e1555363c9ada206f7f20a3b5e812f097c75be940b582f7428c83"
+  }
+}

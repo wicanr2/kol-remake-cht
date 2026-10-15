@@ -1,0 +1,204 @@
+{
+  "status": "PASS limited normal, controlled F10 and v3 regression",
+  "normal": [
+    {
+      "case": "winged-regression",
+      "states": 10,
+      "chinese_equal": true,
+      "controller_trace_equal": true,
+      "ega_rgba_exact": true,
+      "hd_max": 1
+    },
+    {
+      "case": "human-slots",
+      "states": 31,
+      "chinese_equal": true,
+      "controller_trace_equal": true,
+      "ega_rgba_exact": true,
+      "hd_max": 1
+    }
+  ],
+  "states_per_variant": 41,
+  "gui": [
+    {
+      "case": "twn1pics-003",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "66bbdf933605808370405f042861494c1800908175a15d5cf2a44c1c62516f2d"
+    },
+    {
+      "case": "twn5pics-019",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "48469f16642bef958cda38bff4627dedd3914bb07bb660f22c957398ab037ab1",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "48469f16642bef958cda38bff4627dedd3914bb07bb660f22c957398ab037ab1",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "58fc913c0f4028bb4ec2bc0b57495ba6dd56eb242bdff0b970772a73802e536d"
+    },
+    {
+      "case": "twn7pics-013",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "9ed1c0f135db0d699d30a9f0028f9010b56eec5883671173c994bfcb42445894",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "9ed1c0f135db0d699d30a9f0028f9010b56eec5883671173c994bfcb42445894",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "c9e925d8c467edcce47b24e748ebf8daefa2876ff05f0212d87065230b14e0a8"
+    },
+    {
+      "case": "miscpics-000",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "07ebd67a2a4ec8176758a1bea3b87d8c4e8547329f19c588b894acb5f07989f0",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "07ebd67a2a4ec8176758a1bea3b87d8c4e8547329f19c588b894acb5f07989f0",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "a91e105bd892754b2e9ab48c2747e533253622c0f47780f6ba85bf1a78b0851b"
+    }
+  ],
+  "F10_events": 48,
+  "window_sizes": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "serializable_Outdoor_unchanged": true,
+  "prepared_GUI_marker_clock": "walkTick=-1073741824; static marker phase only; production rules unchanged",
+  "save": {
+    "schema": "kol-hd-action-save-check/1",
+    "rest_script": "L R RET SPACE > > > > RET RET",
+    "rest_states": 11,
+    "reload_states": 5,
+    "normal_save_equal_except_saved_at": true,
+    "reload_file_unchanged": true,
+    "old_v3_from_baseline": {
+      "sha256": "829ca881f94d2ef3044f4237ca1268f98ca47a1792e31fb2c143fb1eb72a92b6",
+      "trace_equal": true,
+      "text_equal": true,
+      "file_unchanged": true
+    },
+    "limits": "Normal play rest/reload only; no new completion or original parity claim."
+  },
+  "save_receipt_sha256": "e304137c29b2882a86726f6abeddb89ef25a46a97093ac97d8604975747e2837",
+  "original_oracle": false,
+  "normal_completion": false,
+  "platform": "Linux Docker only"
+}

@@ -1,0 +1,95 @@
+{
+  "status": "UNRESOLVED optional independent font-filter model; not a product failure or completion gate",
+  "native_picture_and_font_max": 53,
+  "wrong_character_order_max": 163,
+  "main_six_glyphs": [
+    {
+      "char": "請",
+      "rect": [
+        1194,
+        685,
+        1242,
+        719
+      ]
+    },
+    {
+      "char": "勿",
+      "rect": [
+        1226,
+        685,
+        1274,
+        719
+      ]
+    },
+    {
+      "char": "踐",
+      "rect": [
+        1162,
+        719,
+        1210,
+        753
+      ]
+    },
+    {
+      "char": "踏",
+      "rect": [
+        1194,
+        719,
+        1242,
+        753
+      ]
+    },
+    {
+      "char": "草",
+      "rect": [
+        1226,
+        719,
+        1274,
+        753
+      ]
+    },
+    {
+      "char": "坪",
+      "rect": [
+        1258,
+        719,
+        1306,
+        753
+      ]
+    }
+  ],
+  "lines": [
+    "請勿",
+    "踐踏草坪"
+  ],
+  "hd_clip": [
+    [
+      1124,
+      685,
+      1338,
+      754
+    ],
+    [
+      624,
+      755,
+      679,
+      829
+    ],
+    [
+      1738,
+      685,
+      1776,
+      754
+    ]
+  ],
+  "method": "Independent CPU font-filter model incomplete; raw measured difference retained",
+  "mipmap_contract": {
+    "module": "github.com/hajimehoshi/ebiten/v2@v2.9.9/internal/mipmap/mipmap.go",
+    "sha256": "0f2315d56695a27b9247d6d69f5d9e256540da36ba0764b7d4517f0da749f9f9",
+    "level": 0,
+    "scale": 0.5
+  },
+  "normal_player_path": false,
+  "original_oracle": false,
+  "stopline": "Three probes retained; no threshold change and no further font-filter research. Completion uses real readable glyphs and formal/candidate whole-HD <=1."
+}

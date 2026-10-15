@@ -178,6 +178,20 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [八組比較](docs/verification/hd-monsters-runtime-20261015/review.html)另含牛頭怪、獨眼巨人、小魔怪與火焰人形。128場景的中文、原生圖片、透明遮擋與EGA回歸已核對；遊戲內F10可在同一場景切換，兩種視窗、鍵鼠及正常存讀檔已驗。
 來源、完整提示與驗收範圍見[正式收據](docs/verification/hd-monsters-runtime-20261015.md)。戰場、傷勢、地圖、天候、片頭及其他HD仍續作。
 
+### 開發版：七城門面與城門林地
+
+七城102張門面及城門林地已接入手繪HD，原核准旅店保持。以下為正式重製程式在同一準備門位的EGA／HD，尚未納入現行發行包。
+
+| 重製中文 EGA | 正式 HD |
+|---|---|
+| ![石造門面EGA](docs/verification/hd-town-facades-runtime-20261015/twn1pics-003-ega.png) | ![手繪石造門面HD](docs/verification/hd-town-facades-runtime-20261015/twn1pics-003-hd.png) |
+| ![海邊樹屋EGA](docs/verification/hd-town-facades-runtime-20261015/twn2pics-021-ega.png) | ![海邊手繪樹屋HD](docs/verification/hd-town-facades-runtime-20261015/twn2pics-021-hd.png) |
+| ![住宅中文告示EGA](docs/verification/hd-town-facades-runtime-20261015/twn5pics-019-ega.png) | ![手繪住宅與原生中文告示HD](docs/verification/hd-town-facades-runtime-20261015/twn5pics-019-hd.png) |
+
+[八組比較](docs/verification/hd-town-facades-runtime-20261015/review.html)另含工坊、石塔、水車、城門與林地。
+103場景中文與畫面已核對；F10可在遊戲內切換，四場景兩種視窗的鍵鼠、完整城鎮狀態及v3存讀檔通過。
+圖中其餘六城徽章仍沿EGA，與地圖、戰場、天候等後續HD工作分開追蹤；完整範圍見[正式驗收](docs/verification/hd-town-facades-runtime-20261015.md)。
+
 ### 事件畫面：原版與 HD
 
 七段結局已接入開發版，沿用手繪、紅黑銅框與原生 HD 中文。現行 `v.1.0.2-20261013` 發行包保持，尚未包含本批。

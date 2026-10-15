@@ -37,7 +37,11 @@ README已加入正式NPC／坐騎資料頁同主題比較。完整模型、原�
 
 README已有怪物資訊框與12隻群像同主題比較。完整樣本與失敗由[保存入口](docs/verification/retained-evidence.md#怪物hd正式接入)封存後核對清理。第10、13張alpha254背景誤判已撤回；兩次擷取137、Python版本及複製執行權限問題保留為驗證環境紀錄，不列產品缺陷。本批限Linux Docker，沒有新增原版oracle或自然通關聲明。
 
-下一批為[七城門面清冊](workplace/hd-town-facades-20261015/plan.json)及[檢視圖](workplace/hd-town-facades-20261015/source-contact.png)：102張門面及一張城門林地，103個來源；原核准TWN7PICS13旅店保留，101張門面與城門林地待續作。目前僅DRAFT來源盤點，實際顯示矩形、住宅中文字與候選仍待複核。之後延伸城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件，全畫面HD依[13類覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)保持開放。
+七城102張門面與城門林地已[正式接入並有限驗收](docs/verification/hd-town-facades-runtime-20261015.md)，原核准旅店保持；102張新增原始不透明PNG均1774×887。完整103來源、八組實際數量、PNG／RGB／RGBA與原生RGBA均驗後才交換HD畫布，住宅兩行中文沿手繪板面原生32像素繪製，EGA及側板強推論保持。
+
+正式407份Go／module、381份HD資產，全套及sceneverify通過；103場景412畫格中文及完整可序列化Outdoor相同，EGA零差、相對候選整張HD及原生圖片最多一色階、圖外零差，2544觀測字元缺字0。正常兩路每側41狀態、四場景兩視窗鍵鼠48個F10及完整Outdoor保持，HD往返最多一色階；正常住宿11／重載5與前版v3通過。程式SHA為`8e4429295384f69972407783305c61bf63b30d625b6295ed89a8edcade946ca3`。
+
+README已加入同主題門面、樹屋與住宅中文比較。初版板面錯位、工具環境失敗與未解CPU字模濾波模型保留；後者屬可選oracle限制，不放寬正式整張HD一色階。完整證據沿[保存入口](docs/verification/retained-evidence.md#七城門面與城門林地hd正式接入)封存清理。下一批[六城其餘徽章](workplace/hd-town-crests-20261015/plan.json)已DRAFT盤點，沿原核准Canvas紋章畫法，之後城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件仍依[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋)續作；全畫面HD尚未完成。
 
 現行交付與tag保持`v.1.0.2-20261013`，本批尚未進發行包。組隊與商店已有操作證據，受控七段結局能顯示；從新開局正常完成全部任務至結局仍未驗證。
 
@@ -46,8 +50,8 @@ README已有怪物資訊框與12隻群像同主題比較。完整樣本與失敗
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 開發版402份Go／module、276份HD資產；[怪物正式收據](docs/verification/hd-monsters-runtime-20261015/receipt.json)。現行發行來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 發行tag仍固定46a01f11，尚未重建新封包 |
-| 最近測試 | 怪物128場景512畫格、2237字元，EGA零差／原生HD最多一色階；正常41狀態、24個F10與戰鬥狀態保持，住宿11／重載5及前版v3相容。全套401份及最後402份入口窄驗各有來源索引 | Linux Docker；其餘HD類別、跨平台與自然通關保持開放 |
+| 正式來源 | 開發版407份Go／module、381份HD資產；[門面正式收據](docs/verification/hd-town-facades-runtime-20261015/receipt.json)。現行發行來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 發行tag仍固定46a01f11，尚未重建新封包 |
+| 最近測試 | 門面103場景412畫格、2544觀測字元缺字0，EGA零差、原生及完整HD最多一色階；正常41狀態、48個F10及完整Outdoor保持，住宿11／重載5與前版v3通過，全套及sceneverify通過 | Linux Docker；六城其餘徽章、其餘HD類別、跨平台與自然通關保持開放 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
 | 跨平台 | [現行交付驗收](docs/verification/release-v1.0.2-20261013.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal六包通過；實際AppImage及Wine兩個ZIP啟動、F9／F10與音訊通過，遠端四附件大小及SHA相符 | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
@@ -60,7 +64,7 @@ README已有怪物資訊框與12隻群像同主題比較。完整樣本與失敗
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | 現行發行含首批門面、六人、操作介面、F10及四首配樂／F9；開發版另完成七段結局、原生書頁／服務／編輯器、卷軸、80張角色模板、68個動作圖示、完整裝備、七城NPC／四坐騎及32種怪物資訊／群像，見[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋) | 地圖、戰場、傷勢、天候、片頭、未訪操作分支及其餘事件仍開放；資料PNG不重繪 |
+| HD | 現行發行含首批門面、六人、操作介面、F10及四首配樂／F9；開發版另完成七段結局、原生書頁／服務／編輯器、卷軸、80張角色模板、68個動作圖示、完整裝備、七城NPC／四坐騎、32種怪物資訊／群像及七城102門面／城門林地，見[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋) | 六城其餘徽章、地圖、戰場、傷勢、天候、片頭、未訪操作分支及其餘事件仍開放；資料PNG不重繪 |
 | 交付 | `v.1.0.2-20261013`：三平台full／release、76秒1080p影片；private Release已發布，四附件完整性與46a01f11 tag核對通過，入口[本版收據](docs/verification/release-v1.0.2-20261013.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
 | GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，16開放／92已核實完成不變 |
 
