@@ -13,6 +13,9 @@ func (b BankNamer) TimeText(index int) string { return b.text(TimeRecordBase + i
 // TerrainText 回傳地形那一行。
 func (b BankNamer) TerrainText(code int) string { return b.text(TerrainRecordBase + code) }
 
+// CampingText uses the same UI-bank translation as the time and terrain labels.
+func (b BankNamer) CampingText() string { return b.text(CampRecord) }
+
 func (b BankNamer) text(record int) string {
 	if b.Zh != nil {
 		if zh := b.Zh(record); zh != "" {

@@ -1,0 +1,26 @@
+=== RUN   TestHDSceneEventsSources
+--- PASS: TestHDSceneEventsSources (0.81s)
+=== RUN   TestHDSceneEventsRejectIncomplete
+=== RUN   TestHDSceneEventsRejectIncomplete/partial-group
+=== RUN   TestHDSceneEventsRejectIncomplete/wrong-source-count
+=== RUN   TestHDSceneEventsRejectIncomplete/wrong-index
+=== RUN   TestHDSceneEventsRejectIncomplete/duplicate-rgb
+=== RUN   TestHDSceneEventsRejectIncomplete/unsafe-file
+=== RUN   TestHDSceneEventsRejectIncomplete/undersized-delivery
+=== RUN   TestHDSceneEventsRejectIncomplete/wrong-rgba
+=== RUN   TestHDSceneEventsRejectIncomplete/wrong-generation
+=== RUN   TestHDSceneEventsRejectIncomplete/missing-last-png
+=== RUN   TestHDSceneEventsRejectIncomplete/transparent
+--- PASS: TestHDSceneEventsRejectIncomplete (0.77s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/partial-group (0.00s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/wrong-source-count (0.00s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/wrong-index (0.00s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/duplicate-rgb (0.00s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/unsafe-file (0.00s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/undersized-delivery (0.00s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/wrong-rgba (0.03s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/wrong-generation (0.00s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/missing-last-png (0.70s)
+    --- PASS: TestHDSceneEventsRejectIncomplete/transparent (0.01s)
+PASS
+ok  	github.com/wicanr2/kol-remake-cht/internal/assets	1.592s

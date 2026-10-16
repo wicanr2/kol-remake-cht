@@ -1,0 +1,138 @@
+{
+  "status": "PASS controlled actual F10 GUI",
+  "case": "world-result-arena",
+  "rounds": [
+    {
+      "scene": "world-05-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 1,
+      "state_sha256": "e513cc30b6e58804771bce5f921c2f294f3f5a3faa6030f0c94507c050b4076f",
+      "files": [
+        "world-05-large-before.png",
+        "world-05-large-ega.png",
+        "world-05-large-restored.png"
+      ]
+    },
+    {
+      "scene": "world-05-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "e513cc30b6e58804771bce5f921c2f294f3f5a3faa6030f0c94507c050b4076f",
+      "files": [
+        "world-05-small-before.png",
+        "world-05-small-ega.png",
+        "world-05-small-restored.png"
+      ]
+    },
+    {
+      "scene": "combat-03-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "dc8b609615fba134f6a1df97b7f5cbbfff6f2cdd53313b30f2515b7d6026a2de",
+      "files": [
+        "combat-03-large-before.png",
+        "combat-03-large-ega.png",
+        "combat-03-large-restored.png"
+      ]
+    },
+    {
+      "scene": "combat-03-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "dc8b609615fba134f6a1df97b7f5cbbfff6f2cdd53313b30f2515b7d6026a2de",
+      "files": [
+        "combat-03-small-before.png",
+        "combat-03-small-ega.png",
+        "combat-03-small-restored.png"
+      ]
+    },
+    {
+      "scene": "arena-05-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "dec7e4abb3e572d2d4ce478b9695d3ab255ed36993c25d114555846edfa2cf68",
+      "files": [
+        "arena-05-large-before.png",
+        "arena-05-large-ega.png",
+        "arena-05-large-restored.png"
+      ]
+    },
+    {
+      "scene": "arena-05-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "dec7e4abb3e572d2d4ce478b9695d3ab255ed36993c25d114555846edfa2cf68",
+      "files": [
+        "arena-05-small-before.png",
+        "arena-05-small-ega.png",
+        "arena-05-small-restored.png"
+      ]
+    }
+  ],
+  "display_events": [
+    "display action=toggle hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=ega hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=hd hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=ega hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=hd hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=true state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=ega hd=false state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=back hd=false state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=toggle hd=false state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=hd hd=true state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=back hd=true state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=toggle hd=true state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=ega hd=false state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=back hd=false state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=toggle hd=false state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=hd hd=true state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=back hd=true state=c2b82e7cce1a454a7f877d9c705067fa23f8d1c6949e2798d72b4c6002e94899",
+    "display action=toggle hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=ega hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=toggle hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=hd hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=toggle hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=ega hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=toggle hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=hd hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d"
+  ],
+  "serializable_scene_state_unchanged": true,
+  "exit_code": 0,
+  "original_oracle": false,
+  "normal_player_path": false
+}

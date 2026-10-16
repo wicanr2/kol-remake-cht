@@ -1,0 +1,13 @@
+package ui
+
+// Verification-only, never production.
+func (h *HD) SuspendSceneEventsVerification() func() {
+	old := h.sceneEvents
+	h.sceneEvents = nil
+	return func() { h.sceneEvents = old }
+}
+func (h *HD) SuspendTownMapVerification() func() {
+	old := h.townMaps
+	h.townMaps = nil
+	return func() { h.townMaps = old }
+}

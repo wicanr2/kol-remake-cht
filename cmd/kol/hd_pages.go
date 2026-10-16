@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"strings"
 
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
@@ -20,8 +21,11 @@ func (g *game) nativeUIPage() bool {
 		return false
 	}
 	playPage := func(s *town.Session) bool {
-		if s == nil || g.quest != nil && g.quest.state != nil {
+		if s == nil {
 			return false
+		}
+		if g.quest != nil && g.quest.state != nil {
+			return g.quest.state.ResultPicture() != battle.ResultNone
 		}
 		if !s.InArena() && !s.ShowingSheetOutside() && s.LeftTown && g.worldState != nil {
 			return true

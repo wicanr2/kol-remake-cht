@@ -100,6 +100,18 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 圖片來源、畫格、SHA-256與權利分類見[正式介面截圖清冊](docs/verification/hd-interface-runtime-20261012/manifest.json)。
 新版旅店及設定畫面來自實際AppImage，來源見[新版截圖清冊](docs/verification/release-v1.0.2-20261013/manifest.json)。
 
+### 開發版：世界與戰鬥事件 HD
+
+世界地點與野營、戰鬥勝敗、競技場人物及訊息卷軸已接入手繪HD。下列為同一受控場景的重製中文EGA／HD，縮圖最長邊768，尚未納入現行發行包。
+
+| 重製中文 EGA | 手繪 HD |
+|---|---|
+| ![野營EGA](docs/verification/hd-scene-events-runtime-20261017/world-05-ega.png) | ![手繪野營HD與紮營中文](docs/verification/hd-scene-events-runtime-20261017/world-05-hd.png) |
+| ![戰鬥勝利EGA](docs/verification/hd-scene-events-runtime-20261017/combat-03-ega.png) | ![手繪戰鬥勝利HD與中文卷軸](docs/verification/hd-scene-events-runtime-20261017/combat-03-hd.png) |
+| ![競技場人物EGA](docs/verification/hd-scene-events-runtime-20261017/arena-05-ega.png) | ![競技場手繪人物HD](docs/verification/hd-scene-events-runtime-20261017/arena-05-hd.png) |
+
+[31場景驗收](docs/verification/hd-scene-events-runtime-20261017.md)確認中文、圖片與遊戲內F10；兩種視窗鍵鼠36事件保持狀態。原版DOS結局與HD對比見下方既有結局展示。天候、傷勢、戰場及片頭仍續作。
+
 ### 開發版：書本與操作子頁 HD
 
 開發版已接入手繪書頁、三個服務頭像、原生中文與編輯器控制。下列為同一程式、同一狀態的EGA／HD比較，尚未納入現行發行包。

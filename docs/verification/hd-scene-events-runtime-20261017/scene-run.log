@@ -1,0 +1,38 @@
+XGB: conn.go:47: Could not get authority info: open /home/hr/.Xauthority: no such file or directory
+XGB: conn.go:48: Trying connection without authority info...
+XGB: conn.go:47: Could not get authority info: open /home/hr/.Xauthority: no such file or directory
+XGB: conn.go:48: Trying connection without authority info...
+=== RUN   TestHDSceneEventGallery
+event1/31 arena-05
+event2/31 arena-06
+event3/31 combat-00
+event4/31 combat-01
+event5/31 combat-02
+event6/31 combat-03
+event7/31 combat-04
+event8/31 world-00
+event9/31 world-01
+event10/31 world-02
+event11/31 world-03
+event12/31 world-04
+event13/31 world-05
+event14/31 world-06
+event15/31 world-07
+event16/31 world-08
+event17/31 world-09
+event18/31 world-10
+event19/31 world-11
+event20/31 world-12
+event21/31 world-13
+event22/31 world-14
+event23/31 world-15
+event24/31 world-16
+event25/31 world-17
+event26/31 world-18
+event27/31 world-19
+event28/31 world-20
+event29/31 world-21
+event30/31 world-22
+event31/31 world-23
+--- PASS: TestHDSceneEventGallery (87.30s)
+PASS

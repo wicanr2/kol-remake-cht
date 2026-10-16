@@ -1,0 +1,403 @@
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/wicanr2/kol-remake-cht/internal/battle"
+	"github.com/wicanr2/kol-remake-cht/internal/font"
+	"github.com/wicanr2/kol-remake-cht/internal/town"
+	"github.com/wicanr2/kol-remake-cht/internal/ui"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
+	"image"
+	"image/png"
+	"os"
+	"path/filepath"
+	"reflect"
+	"sort"
+	"strings"
+	"testing"
+	"unicode"
+)
+
+type eventCase struct {
+	Name, Kind, Archive string
+	Index               int
+	World               *world.Screen
+	Session             *world.Session
+	Battle              *battle.State
+	Inn                 *town.Inn
+	Rect                image.Rectangle
+	PreparedTerrain     bool
+}
+type eventFrame struct {
+	Name, Kind, Archive, Variant, PNG, SHA, StateSHA string
+	Index, Han                                       int
+	Rect                                             [4]int
+	Text                                             []string
+}
+type eventGallery struct {
+	m      *game
+	cases  []eventCase
+	frames []eventFrame
+	i, j   int
+	err    error
+	done   bool
+	before map[string][]byte
+	words  map[string][]string
+}
+
+func eventApply(m *game, c eventCase) {
+	m.quest = nil
+	m.play = nil
+	m.inn = nil
+	m.worldState = nil
+	m.worldSession = nil
+	switch c.Kind {
+	case "world":
+		m.scene = sceneWorld
+		m.worldState = c.World
+		m.worldSession = c.Session
+	case "battle":
+		m.scene = scenePlay
+		m.play = &town.Session{Party: m.worldParty, Outdoor: eventOutdoor}
+		m.quest = eventQuest(m)
+		m.quest.state = c.Battle
+	case "inn":
+		m.scene = sceneInn
+		m.inn = c.Inn
+	}
+}
+
+var eventBank *town.UIText
+var eventTranslations *town.Translations
+var eventBattleAtlas image.Image
+var eventOutdoor *town.Outdoor
+
+func eventQuest(m *game) *questBattle {
+	return &questBattle{tiles: ui.NewBattleTiles(eventBattleAtlas), bank: eventBank, trans: eventTranslations}
+}
+func eventModel(m *game, c eventCase) any {
+	switch c.Kind {
+	case "world":
+		screen := *c.World
+		screen.Names = nil
+		return map[string]any{"Party": m.worldParty, "Screen": screen, "NamesType": fmt.Sprintf("%T", c.World.Names), "TimeLine": c.World.TimeLine(), "TerrainLine": c.World.TerrainLine(), "Mode": c.Session.Mode, "Cursor": c.Session.Cursor, "Direction": c.Session.Direction, "Excluded": c.Session.Excluded, "Camping": c.Session.Camping, "Town": c.Session.Town, "Prompt": c.Session.Prompt}
+	case "battle":
+		return map[string]any{"Battle": c.Battle, "Party": m.play.Party}
+	default:
+		return c.Inn
+	}
+}
+func eventSetup(t *testing.T) (*game, []eventCase) {
+	t.Helper()
+	must := func(e error) {
+		if e != nil {
+			t.Fatal(e)
+		}
+	}
+	m, _ := crestSetup(t)
+	var e error
+	eventBank, e = town.LoadUIText("/src/assets/original-derived-data/ui-text.json")
+	must(e)
+	eventTranslations, e = loadTranslations("/src/docs/i18n/town-zh-Hant.json", "/src/docs/i18n/ui-zh-Hant.json")
+	must(e)
+	f, e := os.Open("/src/assets/original-derived-png/ega/BATTLE/battle-tiles-08.png")
+	must(e)
+	eventBattleAtlas, e = png.Decode(f)
+	must(e)
+	must(f.Close())
+	sample, e := town.LoadOutdoor("/src/docs/re/town1-outdoor-sample.json")
+	must(e)
+	m.worldParty = sample.Party
+	eventOutdoor = sample
+	makeWorld := func(x, y int) *world.Screen {
+		s := fullWorld(t, m, x, y)
+		s.Date, s.DateZh = sample.Date, sample.DateZh
+		s.Names = world.BankNamer{Padded: func(index int) string { return eventBank.RecordPadded(town.BankUI, index) }, Zh: eventTranslations.UIRecord}
+		s.CampText = eventBank.RecordPadded(town.BankUI, world.CampRecord)
+		return s
+	}
+	var cases []eventCase
+	for code := 0; code < 8; code++ {
+		s := makeWorld(23, 29)
+		found := false
+		for y := 0; y < 64 && !found; y++ {
+			for x := 0; x < 64; x++ {
+				if s.Travel.Data.TerrainCode(s.Travel.Grid.At(x, y+1)) == code {
+					s.Travel.X, s.Travel.Y = x, y
+					found = true
+					break
+				}
+			}
+		}
+		sess := world.NewSession(s)
+		sess.Camping = true
+		s.Group = world.CampWeather
+		if !found {
+			s.TerrainCode = code
+		}
+		if s.TerrainCode != code {
+			t.Fatal("wrong prepared terrain")
+		}
+		cases = append(cases, eventCase{Name: fmt.Sprintf("world-%02d", code), Kind: "world", Archive: "TWN0PICS", Index: code, World: s, Session: sess, Rect: image.Rect(624, 348, 1776, 924), PreparedTerrain: !found})
+	}
+	raw, e := os.ReadFile("/src/assets/original-derived-data/world-map.json")
+	must(e)
+	var data struct{ Towns []struct{ Index, X, Y int } }
+	must(json.Unmarshal(raw, &data))
+	if len(data.Towns) != 16 {
+		t.Fatal("actual town entry count changed")
+	}
+	for _, entry := range data.Towns {
+		s := makeWorld(entry.X, entry.Y)
+		sess := world.NewSession(s)
+		sess.Sync()
+		if sess.TownPicture() != entry.Index+8 {
+			t.Fatal("wrong actual town entry picture")
+		}
+		cases = append(cases, eventCase{Name: fmt.Sprintf("world-%02d", entry.Index+8), Kind: "world", Archive: "TWN0PICS", Index: entry.Index + 8, World: s, Session: sess, Rect: image.Rect(624, 348, 1776, 924)})
+	}
+	monsters, e := battle.LoadMonsters("/src/assets/original-derived-data/monsters.json")
+	must(e)
+	for index := 0; index < 5; index++ {
+		site := &battle.Site{Index: -1, Monster: 0, MonsterName: monsters.List[0].Name, Level: 1, Count: 1, PartyX: []int{32}, PartyY: []int{32}, MonsterX: []int{33}, MonsterY: []int{32}}
+		party := []battle.Member{{Name: "Theodoric", Portrait: 47, Size: 100, Health: 80, Strength: 80, Quickness: 60, Foresight: 60, Intellect: 60, Race: 3, Skills: []int{8, 6}}}
+		s := battle.NewQuest(site, party, monsters.List[0], battle.NewField())
+		s.PrepareHDResultVerification(index)
+		m.quest = eventQuest(m)
+		m.quest.state = s
+		s.Exec.Text = m.battleVerdictLines()
+		if s.ResultPicture() != index || len(s.Exec.Text) == 0 {
+			t.Fatal("wrong actual battle result")
+		}
+		cases = append(cases, eventCase{Name: fmt.Sprintf("combat-%02d", index), Kind: "battle", Archive: "COMBPICS", Index: index, Battle: s, Rect: image.Rect(48, 48, 1824, 912)})
+	}
+	for index := 5; index < 7; index++ {
+		in, e := town.LoadInn("/src/docs/re/town-inn-sample.json")
+		must(e)
+		in.Portrait.Archive = "COMBPICS"
+		in.Portrait.Index = index
+		title, record := town.ArenaTitleRecord, town.ArenaWhichRecord
+		if index == 5 {
+			title, record = town.ArenaBoothRecord, town.ArenaBetTunnelRecord
+		}
+		in.Title = nil
+		for _, seg := range town.UISegments(eventBank, eventTranslations, town.BankUI, title) {
+			in.Title = append(in.Title, seg.Text)
+		}
+		in.Dialog = eventBank.Lines(town.BankUI, record)
+		in.DialogZh = nil
+		for _, seg := range town.UISegments(eventBank, eventTranslations, town.BankUI, record) {
+			in.DialogZh = append(in.DialogZh, seg.Text)
+		}
+		in.Icons = []int{4}
+		in.Selected = 0
+		cases = append(cases, eventCase{Name: fmt.Sprintf("arena-%02d", index), Kind: "inn", Archive: "COMBPICS", Index: index, Inn: in, Rect: image.Rect(62, 398, 560, 754)})
+	}
+	sort.Slice(cases, func(i, j int) bool { return cases[i].Name < cases[j].Name })
+	m.quest = nil
+	m.play = nil
+	m.inn = nil
+	return m, cases
+}
+func (g *eventGallery) Update() error {
+	if g.err != nil {
+		return g.err
+	}
+	if g.done {
+		return ebiten.Termination
+	}
+	return nil
+}
+func (g *eventGallery) Layout(int, int) (int, int) { return 1920, 1200 }
+func (g *eventGallery) Draw(dst *ebiten.Image) {
+	if g.done || g.err != nil {
+		return
+	}
+	m := g.m
+	c := g.cases[g.i]
+	eventApply(m, c)
+	if g.j < 2 {
+		restore := m.hdCache.SuspendSceneEventsVerification()
+		defer restore()
+	}
+	before, e := json.Marshal(eventModel(m, c))
+	if e != nil {
+		g.err = e
+		return
+	}
+	if g.j == 0 {
+		g.before[c.Name] = before
+	} else if !bytes.Equal(before, g.before[c.Name]) {
+		g.err = fmt.Errorf("event state changed %s", c.Name)
+		return
+	}
+	mode := "ega"
+	if g.j%2 == 1 {
+		mode = "hd"
+	}
+	variant := "baseline-" + mode
+	if g.j >= 2 {
+		variant = "formal-" + mode
+	}
+	if g.err = m.setGraphics(mode); g.err != nil {
+		return
+	}
+	var words []string
+	font.DrawObserver = func(_, s string) { words = append(words, s) }
+	g.err = m.render()
+	font.DrawObserver = nil
+	if g.err != nil {
+		return
+	}
+	if g.j == 0 {
+		g.words[c.Name] = words
+	} else if !reflect.DeepEqual(g.words[c.Name], words) {
+		g.err = fmt.Errorf("Chinese changed %s", c.Name)
+		return
+	}
+	if g.err = m.presentHD(); g.err != nil {
+		return
+	}
+	after, e := json.Marshal(eventModel(m, c))
+	if e != nil || !bytes.Equal(before, after) {
+		g.err = fmt.Errorf("render mutated event %s", c.Name)
+		return
+	}
+	han := 0
+	for _, s := range words {
+		for _, r := range s {
+			if unicode.Is(unicode.Han, r) {
+				han++
+			}
+		}
+	}
+	for _, word := range words {
+		if strings.Contains(word, "~H") || strings.Contains(word, "~V") {
+			g.err = fmt.Errorf("source markup visible %s: %s", c.Name, word)
+			return
+		}
+	}
+	if han == 0 {
+		g.err = fmt.Errorf("no Chinese %s", c.Name)
+		return
+	}
+	if c.Kind == "world" && c.Session.Camping {
+		for _, word := range words {
+			if strings.Contains(word, "CAMPING") {
+				g.err = fmt.Errorf("untranslated camping label %s", c.Name)
+				return
+			}
+		}
+	}
+	name := c.Name + "-" + variant + ".png"
+	sum, e := crestPNG(filepath.Join("/out/scene-events-runtime", name), m.outputCanvas().Image())
+	if e != nil {
+		g.err = e
+		return
+	}
+	g.frames = append(g.frames, eventFrame{c.Name, c.Kind, c.Archive, variant, name, sum, fmt.Sprintf("%x", sha256.Sum256(before)), c.Index, han, [4]int{c.Rect.Min.X, c.Rect.Min.Y, c.Rect.Max.X, c.Rect.Max.Y}, words})
+	var op ebiten.DrawImageOptions
+	if mode == "ega" {
+		op.GeoM.Scale(2, 2)
+	}
+	dst.DrawImage(m.outputCanvas().Image(), &op)
+	g.j++
+	if g.j == 4 {
+		g.j = 0
+		g.i++
+		g.done = g.i == len(g.cases)
+		fmt.Printf("event%d/%d %s\n", g.i, len(g.cases), c.Name)
+	}
+}
+func TestHDSceneEventGallery(t *testing.T) {
+	if os.Getenv("KOL_SCENE_EVENTS") != "1" {
+		t.Skip("explicit controlled event gallery")
+	}
+	m, cases := eventSetup(t)
+	g := &eventGallery{m: m, cases: cases, before: map[string][]byte{}, words: map[string][]string{}}
+	ebiten.SetWindowSize(960, 600)
+	ebiten.SetTPS(60)
+	if e := ebiten.RunGame(g); e != nil {
+		t.Fatal(e)
+	}
+	if g.err != nil {
+		t.Fatal(g.err)
+	}
+	if len(g.frames) != 124 {
+		t.Fatal("incomplete31-scene event capture")
+	}
+	var overrides []int
+	for _, c := range cases {
+		if c.PreparedTerrain {
+			overrides = append(overrides, c.Index)
+		}
+	}
+	raw, e := json.MarshalIndent(map[string]any{"prepared_terrain_overrides": overrides, "scenes": 31, "frames": g.frames, "status": "actual controlled world, battle-result and arena renders; independent check pending", "unused_source": "TWN0PICS24 has no current typed player route; generated asset validated, no invented production route", "gameplay_RND_calls": 0, "original_oracle": false, "normal_player_path": false}, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile("/out/scene-events-captures.json", append(raw, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+
+type eventGUI struct {
+	m     *game
+	cases []eventCase
+	at    int
+}
+
+func (g *eventGUI) Update() error {
+	if g.m.drawErr != nil {
+		return g.m.drawErr
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) && ebiten.IsKeyPressed(ebiten.KeyQ) {
+		return ebiten.Termination
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF8) && g.at+1 < len(g.cases) {
+		g.at++
+		eventApply(g.m, g.cases[g.at])
+	}
+	g.m.updateDisplaySettings()
+	return nil
+}
+func (g *eventGUI) Layout(w, h int) (int, int) { return g.m.Layout(w, h) }
+func (g *eventGUI) Draw(dst *ebiten.Image) {
+	g.m.Draw(dst)
+	raw, _ := json.Marshal(map[string]any{"case": g.cases[g.at].Name, "State": eventModel(g.m, g.cases[g.at]), "hd": g.m.hd != nil, "settings": g.m.displaySettings})
+	fmt.Printf("equipment-frame %s\n", raw)
+}
+func TestHDSceneEventGUI(t *testing.T) {
+	if os.Getenv("KOL_SCENE_EVENTS_GUI") != "1" {
+		t.Skip("explicit controlled actual GUI")
+	}
+	m, all := eventSetup(t)
+	var cases []eventCase
+	for _, name := range []string{"world-05", "combat-03", "arena-05"} {
+		for _, c := range all {
+			if c.Name == name {
+				cases = append(cases, c)
+			}
+		}
+	}
+	if len(cases) != 3 {
+		t.Fatal("missing GUI scene")
+	}
+	eventApply(m, cases[0])
+	m.interactive = true
+	m.logInput = true
+	ebiten.SetWindowSize(1920, 1200)
+	ebiten.SetWindowTitle("事件HD遊戲內切換驗收")
+	ebiten.SetTPS(60)
+	if e := ebiten.RunGame(&eventGUI{m: m, cases: cases}); e != nil {
+		t.Fatal(e)
+	}
+	if m.drawErr != nil {
+		t.Fatal(m.drawErr)
+	}
+}

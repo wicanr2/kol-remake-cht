@@ -1,0 +1,1325 @@
+{
+  "schema": "kol-hd-scene-events-generation/1",
+  "status": "READY smooth native scene illustrations and exact native parchment crop; controlled runtime acceptance pending",
+  "rights": "source-bound HD PNG; private repository preservation only; no public distribution rights asserted",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "tool": "built-in imagegen; original PNG retained locally; Pillow9.4.0 LANCZOS compact delivery",
+  "pictures": [
+    {
+      "id": "world-event-00",
+      "archive": "TWN0PICS",
+      "index": 0,
+      "source_file": "TWN0PICS/twn0pics-000.png",
+      "source_png_sha256": "3a755be924d385086deac9ef0e3b2925b25108829bda5d176b5040c741e3a042",
+      "source_rgb_sha256": "5bcfdaeeca05a85c72e1577812b74a3e6ca6c7dfa513ad9d0a7fcc07c0dbf623",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-00-reference.png",
+      "reference_sha256": "d7727f75d6f72b71e6b17b5a8a2a475f668dfa35341ad96383622f1ab76be886",
+      "references": [
+        "world-event-00-reference.png",
+        "world-event-00-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS0. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-00-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-00-native.png",
+      "native_sha256": "be9e5e8d7ae0c7652caea565cdab62ed54cfaadd0bf854e060cbe6819c834c1c",
+      "native_rgba_sha256": "04ea58da52fb9b4445d1fd73e891f10589118d13dd25dd097929f4a704d43dd5",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-00-delivery.png",
+      "delivery_sha256": "1911791501db30d5a3a5999a9bbd15994c869568fe8010e17107dc0ea63f070c",
+      "delivery_rgba_sha256": "47a1174371f400a733c454d40a4e8701dd80c38cbb4eb3207833d304ebb99855",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "3bdfb59f1f7fef34355d5cf0fa70b59a0c34f740816531d32d5abf76a9cd436c"
+    },
+    {
+      "id": "world-event-01",
+      "archive": "TWN0PICS",
+      "index": 1,
+      "source_file": "TWN0PICS/twn0pics-001.png",
+      "source_png_sha256": "03d25131590180452bafccc4674362f8e278e52809bacdb42f551226a8a76a9c",
+      "source_rgb_sha256": "e4c1fa684e475d56730636f03061c2d9b01356e62f841540daf7063438f086cf",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-01-reference.png",
+      "reference_sha256": "93c5e43c78d590196510b9fd5e5a252c8873537a048c4ccc8495cc71c53bed28",
+      "references": [
+        "world-event-01-reference.png",
+        "world-event-01-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS1. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-01-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-01-native.png",
+      "native_sha256": "025860aec94ecc0a12a09a4f5e1d1150838c76ea11dd0c473a495aafd2618cd2",
+      "native_rgba_sha256": "07d4bab42ab0ade4cf9097e486472ca1e896b11f55c4819553e555b93e0f795d",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-01-delivery.png",
+      "delivery_sha256": "421813e18e0bf916626cc745ebec8f41252fa4f2c1f7600f4847cd6f6dbd2445",
+      "delivery_rgba_sha256": "d5bac4765ae0cd1040a7d4690fea43e65077f329752def9ecb2f8aa709deaf0b",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "b963c6526f62d4789e5832e64d5ebca5144ce754ab8775a660631831161ea346"
+    },
+    {
+      "id": "world-event-02",
+      "archive": "TWN0PICS",
+      "index": 2,
+      "source_file": "TWN0PICS/twn0pics-002.png",
+      "source_png_sha256": "9b8c63a69a9d2894aebc46863bbc227a9736b0aecd3681c9cce2a8001e42ab9d",
+      "source_rgb_sha256": "ef7f1a64542828d7584289ea252490a5c134134fb63518265e2212e1fc86d5a2",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-02-reference.png",
+      "reference_sha256": "02fdc51d179bdf06f0c9e10aeeac885f6a4dc95f4833b5009701859e6a4640ba",
+      "references": [
+        "world-event-02-reference.png",
+        "world-event-02-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS2. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-02-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-02-native.png",
+      "native_sha256": "d3686cdc818193948b628c6af5fdabcd501b2fbc2e5d5cf0e3c0aeb5aefcf7e8",
+      "native_rgba_sha256": "00decf725791238e1ae49fb2247c77ba0c4d802c7cd813d2003bfcca5ba52a35",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-02-delivery.png",
+      "delivery_sha256": "5ed9068e230087277843fc12dc3bb0f7c887138fbd0739bb604b7cf94b3014e8",
+      "delivery_rgba_sha256": "c2fd74cc19ba5dc54cb7a5ef40cf77df9d4e40c8e245b62e2c60b28cefd941d2",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "da62759348b27e7272b6fceff87145a53c33675da9454e55021d2ee412bfa652"
+    },
+    {
+      "id": "world-event-03",
+      "archive": "TWN0PICS",
+      "index": 3,
+      "source_file": "TWN0PICS/twn0pics-003.png",
+      "source_png_sha256": "6174331acf3efd12fbc717291ded733c3016e183a0830c143a3115fe42a267ab",
+      "source_rgb_sha256": "63828044f7d900ed62fff72b978c2d894ac0b8b7301500fa7f059ffb0acd4a42",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-03-reference.png",
+      "reference_sha256": "a6ae9b2213ad12617939b88417635e6f711b3919c3036a059257e12539d0261e",
+      "references": [
+        "world-event-03-reference.png",
+        "world-event-03-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS3. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-03-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-03-native.png",
+      "native_sha256": "9d485fe2502ff70544a483ca96315435241e5d76efe8df6f1c3363035e71d1a3",
+      "native_rgba_sha256": "e980deefccb8fb8937d9bad3e3484d8a7177bd0e15af2b941b0a560fa13d78f8",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-03-delivery.png",
+      "delivery_sha256": "041ccd229c032c646b26c27c0215c4acaf8dc0e96964e02fb5d41d4ee6d0005f",
+      "delivery_rgba_sha256": "cb882bf02f46623a74d125fe50e79ae8501e5967b790a7bd2de507e06094c3e1",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "59d6407e888422f35809c7bbc10ec38faddbf51eb27af707ae8f50166dc5ec2f"
+    },
+    {
+      "id": "world-event-04",
+      "archive": "TWN0PICS",
+      "index": 4,
+      "source_file": "TWN0PICS/twn0pics-004.png",
+      "source_png_sha256": "2f46e727503a4ba0c6334cadfe1c2495cdf94fb28d3fa4ab09d17a53e39a0876",
+      "source_rgb_sha256": "77c5d13bcdbcf1ca494e7a505aa406129f7a39f55394e5a18bfe16465648a40f",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-04-reference.png",
+      "reference_sha256": "3388e023676c30e12fe308df71ed00dc7d44f1c5249c458446e46375495a1bf0",
+      "references": [
+        "world-event-04-reference.png",
+        "world-event-04-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS4. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-04-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-04-native.png",
+      "native_sha256": "62ad28cb74fe61495c382bb21a50e03de0e4b73dc4e9adb99021f444dfd99eaf",
+      "native_rgba_sha256": "07b9622a3819eeb90f7fce9deb1e062c01ba78a79d8081592c9f6ade472b9920",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-04-delivery.png",
+      "delivery_sha256": "6a0ea9c4744a025f32dcd5d4e797a5ba8d63a9be6ddb371ce7ff96439be60b8a",
+      "delivery_rgba_sha256": "6c3583d8d6019bed826896c73d6a63d8af7d7d9bd5a46feccf28a14e1f4691cd",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "972e82797b2400287319d7c4d903f973bfe9560b4263c46f066c1884d30ebf60"
+    },
+    {
+      "id": "world-event-05",
+      "archive": "TWN0PICS",
+      "index": 5,
+      "source_file": "TWN0PICS/twn0pics-005.png",
+      "source_png_sha256": "b0217ad057bc61b0ab31115c84e8bd221925bf92d0afc74165cc9a21b6849939",
+      "source_rgb_sha256": "272ffc18f795ec36e047ee74b50c7813e04292a1fe090b9d8c4a9e2f7bb61917",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-05-reference.png",
+      "reference_sha256": "29a775ca9785decd510991a75591dcced72c622d56b47d6c7a61d2414aca08ec",
+      "references": [
+        "world-event-05-reference.png",
+        "world-event-05-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS5. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-05-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-05-native.png",
+      "native_sha256": "f2151b3cf95edf1c015a5b4730bbc5fff3356d509cc3050d8e571c84f24b9bbb",
+      "native_rgba_sha256": "4a8f65577c3265775050bd15cf302c3919f2c13667aecc8f87843e24eea9dcab",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-05-delivery.png",
+      "delivery_sha256": "4d1baf527d9c2702baeaf80de5f7f9446359db070b45cabf2d668bd4e4e7eae7",
+      "delivery_rgba_sha256": "347aa0b198168cf8868701a524cf827d9b1392e951bca4524a773bfc9876e470",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "4b54383b7754abe95a52ba15fab38ea55ddcd91a8b9f6668663f45297b51a98e"
+    },
+    {
+      "id": "world-event-06",
+      "archive": "TWN0PICS",
+      "index": 6,
+      "source_file": "TWN0PICS/twn0pics-006.png",
+      "source_png_sha256": "f80363a2fb00bea75b7a103010dc7f44f4b0ff0d09965e22642e76857f4e9287",
+      "source_rgb_sha256": "34025394d1cd59d872592651530e8fc5ab5de08b87b958a9e0e1dd8128375f4a",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-06-reference.png",
+      "reference_sha256": "a0527e479dff3c670d8c78919ac80c8d8e808982ab7fffe2ea3bfca8e995d743",
+      "references": [
+        "world-event-06-reference.png",
+        "world-event-06-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS6. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-06-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-06-native.png",
+      "native_sha256": "370507220e3ffdff3fb19c3ef091ffc71087d887443bac6c0368a91b4bfe847f",
+      "native_rgba_sha256": "0235dd36fc18656aa01010f5125ec5d4f3bc9bd52d3f66e4709bf76650b89166",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-06-delivery.png",
+      "delivery_sha256": "59e21c19fdb44245d50b4b2f9f54239daeb64b03ff1fdb6fcf1d42179c2e849c",
+      "delivery_rgba_sha256": "c1af4d7d06a9f201deddee81df36244db025306471871bd6da4c504ee3537d28",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d664fb5371b53eb78acf1fee8c6c36d42062f23e475fbf68a9610975dbecbe9b"
+    },
+    {
+      "id": "world-event-07",
+      "archive": "TWN0PICS",
+      "index": 7,
+      "source_file": "TWN0PICS/twn0pics-007.png",
+      "source_png_sha256": "4a96ec9e6a06f0b56d9d3b922259fddefd2bda96232699e547cb70fd667cff8a",
+      "source_rgb_sha256": "6e71f740b7a4f9d0bd0b75eef931672949b04079b07de3d10f692136013526c5",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-07-reference.png",
+      "reference_sha256": "b56ff2a8c696de9d8b6666a3849a772e1dd136495999c65ba1b1a31e94dd4f67",
+      "references": [
+        "world-event-07-reference.png",
+        "world-event-07-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS7. A quiet night camping narrative illustration. Preserve people, fire, foreground and background locations and the night atmosphere. No additional figures. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-07-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-07-native.png",
+      "native_sha256": "b37e8aac6ebed7ad66b25f7cf42d787710257e67f1f10369dc22bf0113a11e0c",
+      "native_rgba_sha256": "2a5d5a51d3ebb61b44a09b9608dfd4b82524475bfd98905122f45e87aa16b0f0",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-07-delivery.png",
+      "delivery_sha256": "2dd86c57290bcfae5f9561c6b149e817ba2ef1b079dbf2c891d5dab105647780",
+      "delivery_rgba_sha256": "3ad074f24271299706500c3ddd8c48579650a452549c5ad02aff291d70710e60",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "0e3ba262c82434e5dc7e41fdbfa2c87f770c41994448789548b0ced14c3c447c"
+    },
+    {
+      "id": "world-event-08",
+      "archive": "TWN0PICS",
+      "index": 8,
+      "source_file": "TWN0PICS/twn0pics-008.png",
+      "source_png_sha256": "ecfa6c8eb692a49c438ed1b320ac157c19692cb062dad717ca32a30d47221ce4",
+      "source_rgb_sha256": "bcb5c5431966624f97f4421e71f93bfef88fa7ff78df2a6a5413221017ad6a97",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-08-reference.png",
+      "reference_sha256": "87f74e3579f2578800ee485c926f259841578f735abc4c833fe4137ba740ef3f",
+      "references": [
+        "world-event-08-reference.png",
+        "world-event-08-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS8. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-08-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-08-native.png",
+      "native_sha256": "b3280db927e78ba74b25904b80a109657393c9a093c6b8c236a1b1f7735a0869",
+      "native_rgba_sha256": "57e5d638a9e93f2a296e4c72b845ebda119b45729da14b422ab9ad2ce08073d5",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-08-delivery.png",
+      "delivery_sha256": "674f4a90aa013ae4821c3a33e0656602966d42b2756c1ad6e53f7bb2c6976f36",
+      "delivery_rgba_sha256": "b3b7c612ab18f68f14d492527b2f8659a7c830e003cb0ba1edb119222d5ab21e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "933f701968c7ef522c9480caa87619a54d86ea20e416e3e10d9aa97f152f64d8"
+    },
+    {
+      "id": "world-event-09",
+      "archive": "TWN0PICS",
+      "index": 9,
+      "source_file": "TWN0PICS/twn0pics-009.png",
+      "source_png_sha256": "741b7ae8c2d8242f26e7181ce1fb6348276947884ddcc037da676282a0a30b58",
+      "source_rgb_sha256": "86a60746b7c34b61d0656362650665def0a2fa4f5ee97d70d5d8dbd783c131c5",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-09-reference.png",
+      "reference_sha256": "37c39ffe672005477114a5b5b13672e94a457dad235e885407d8ca5b709f4a46",
+      "references": [
+        "world-event-09-reference.png",
+        "world-event-09-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS9. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-09-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-09-native.png",
+      "native_sha256": "d5179496c0c5a772bf762c34f2fbf594cc0c86bdf26c216ccb78b30f58da3e06",
+      "native_rgba_sha256": "0c1065502f380d419e594b6fff2f993ceb2f5077bcc332f1126c6071bba5edc9",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-09-delivery.png",
+      "delivery_sha256": "42b98e6cd6edee9467df779be1b236fda96dcae2e01e40bb3cf3bcb3e418946b",
+      "delivery_rgba_sha256": "ddffa4b7b6fb88413ab979eddd5f09f349ff399ba7359d19892f99db8831930e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "ad377f13135e07286799f36dd67e95ca3ed9d985514225eb43f9a52c706be0ac"
+    },
+    {
+      "id": "world-event-10",
+      "archive": "TWN0PICS",
+      "index": 10,
+      "source_file": "TWN0PICS/twn0pics-010.png",
+      "source_png_sha256": "bd498ed7fa716bcbb2d35e13050f63ff93e562224ddd6bdf9b8c92ef37380b08",
+      "source_rgb_sha256": "f56a0a97ea49d4d52e5fc26b70d77695c28c126974bbcdda96189d7ef9f446f8",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-10-reference.png",
+      "reference_sha256": "67b2d8f1cea3dcfc3b14eb0831857fd2f86c5fe4ef7fb17d398e34bbd2f34901",
+      "references": [
+        "world-event-10-reference.png",
+        "world-event-10-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS10. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-10-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-10-native.png",
+      "native_sha256": "4c993de8d4f26950dabd30e6377cb0998105051c070b7ae0a783c55eceed7a75",
+      "native_rgba_sha256": "02acf9520500aeb08c3b3355dfa13bb0e1fde1ce6877cd11b1e88b3bbd5c1a49",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-10-delivery.png",
+      "delivery_sha256": "ccdc73b843ca38d12b07b785c47bfbd3391d289a5a111a61ee88376e602766a2",
+      "delivery_rgba_sha256": "b441fd62803984120347ad8d2835a8f4d90768c07cac4b205efaad74ac088b87",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "f82465173657cb09f23582d9fea60413c98d21abeb796b84357fdf039293c8e6"
+    },
+    {
+      "id": "world-event-11",
+      "archive": "TWN0PICS",
+      "index": 11,
+      "source_file": "TWN0PICS/twn0pics-011.png",
+      "source_png_sha256": "e74503da30025ee3fba2bb6cb40e9463a33332bd766091095bbf46333b259651",
+      "source_rgb_sha256": "937c7d0eeea44eab788f56a3591082efcd7e12fd294a3ecbce678e262a55b862",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-11-reference.png",
+      "reference_sha256": "c3e105423891c559b686e9979fcadbf0979220b6f5120e5d174aa63d596fbb97",
+      "references": [
+        "world-event-11-reference.png",
+        "world-event-11-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS11. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-11-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-11-native.png",
+      "native_sha256": "a94641f65086bcb459f0835dc1d2125764dc95af8c5a18d32a4456a84fe54eb4",
+      "native_rgba_sha256": "bac460d1e4b6f7aa2de9df41cc948fda57fc2bf71003a51c52516861169e0450",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-11-delivery.png",
+      "delivery_sha256": "273aff57b252e260bb51494ab3c3ad9a4da76250540af4c45431b58e901fe18f",
+      "delivery_rgba_sha256": "27be88a1a6e12f9ee7c3cb7a72db778abe7f9e3ae37f6139938438c8806e6f25",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "48a82fd9069957537d58adc47c634d3bc526b764182d6e3c924b3d010c301103"
+    },
+    {
+      "id": "world-event-12",
+      "archive": "TWN0PICS",
+      "index": 12,
+      "source_file": "TWN0PICS/twn0pics-012.png",
+      "source_png_sha256": "8ce5d7d426b9e3e2389a168466ae39a5d60b0e166a4a9e7da90a8f710cd42583",
+      "source_rgb_sha256": "6909924fa9833ad88bbd6f1b3e9584758df70095a76117024c7f368e07438dff",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-12-reference.png",
+      "reference_sha256": "f0189e4c8ae96b84f9774725473411867c8d7d62e3bf89a2ca9e989235d62f8d",
+      "references": [
+        "world-event-12-reference.png",
+        "world-event-12-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS12. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-12-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-12-native.png",
+      "native_sha256": "11f1d6b38e56912bac33b9080c232599e771ede7883074464fe927099f38171b",
+      "native_rgba_sha256": "6cf2abab3a257ae239157b3e6620577e94ff3023741505b4da203e90503066cc",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-12-delivery.png",
+      "delivery_sha256": "3532704d15df85f1e496862561112c951be0e746fdd398c58a2dc87705a7ecf0",
+      "delivery_rgba_sha256": "eaa4d20c950237e6725529e01d208838f744b5cb635b375f04584c3af9a2d4c9",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "a55540864faac0b56230a20d3eb06a21fac09c307169361071c7ff372b4bd6ae"
+    },
+    {
+      "id": "world-event-13",
+      "archive": "TWN0PICS",
+      "index": 13,
+      "source_file": "TWN0PICS/twn0pics-013.png",
+      "source_png_sha256": "249dfaed5622d72929a2b1d356b6b228a913d41d9cac281d62bce2d13c28275a",
+      "source_rgb_sha256": "621676be0007745a17cd4b2b99c36087995654725f8d129ee49752eb03067593",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-13-reference.png",
+      "reference_sha256": "22d885811fa156e350b0ac318fdc1e4f2d24d569cfc4e99de9caed69c704974a",
+      "references": [
+        "world-event-13-reference.png",
+        "world-event-13-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS13. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-13-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-13-native.png",
+      "native_sha256": "bd5402c4d40cc2cedfdb144dd405289ae9e8a0e7f2824743b32f6fd30dcda067",
+      "native_rgba_sha256": "22bbb0bfe6e30dd24a32774b0cbc16ec6eb4c7dd64d37b98a6af375bc5b3d147",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-13-delivery.png",
+      "delivery_sha256": "6686f811fc5b49b00f929889183d7f652405ef3c03a747eb63a2026f346ece56",
+      "delivery_rgba_sha256": "3ee44ae6ca8aa476006d050e83831775658bd1a9c9433cc981d2be37abadb8b1",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d898f7aac3f8aa4df0b3a3417ae93b398e0f15511bb85e8f76e3be247130a10e"
+    },
+    {
+      "id": "world-event-14",
+      "archive": "TWN0PICS",
+      "index": 14,
+      "source_file": "TWN0PICS/twn0pics-014.png",
+      "source_png_sha256": "1b46b95a6740db3ff2c514c2705e84db8d9a72b23256653a5f18186ace719880",
+      "source_rgb_sha256": "dc00df583c6cc4b8baa42a789f13a9905c4bbf6b4eac02f6c2c5d56e836bc04a",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-14-reference.png",
+      "reference_sha256": "bb98a39afb94d7f7b7afb0b6f13ad5db7a18007ff1ab78182f5739c1d8c736d8",
+      "references": [
+        "world-event-14-reference.png",
+        "world-event-14-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS14. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-14-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-14-native.png",
+      "native_sha256": "c65d5b64684ad2e456efb7e125fbb54647ca7b5e6125203a833e5b3ba7c9e41c",
+      "native_rgba_sha256": "c547fd59d851464ad9f53ea6888db8b19b37f21b26762f5be3fa8076656be894",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-14-delivery.png",
+      "delivery_sha256": "442fab7d30a865d9466563dcdbdfa8d0ffe3537ba8598647e18dcf6a1a620a29",
+      "delivery_rgba_sha256": "cffeb8f0a6d9971627592747e08c9efe89574802bcf7e86535a38d524264a371",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "c69a333da79f3a147a109a217aff3d5efd198edb98bba4c07f22eae431d5791f"
+    },
+    {
+      "id": "world-event-15",
+      "archive": "TWN0PICS",
+      "index": 15,
+      "source_file": "TWN0PICS/twn0pics-015.png",
+      "source_png_sha256": "8ce54174d31060c58008a46ada37ee30690efbaaf2fb66ee91e8b7e6279ac17a",
+      "source_rgb_sha256": "43f45087f5e1247b8a4a59a63e2aa6925f415ade24a0645113d6f39afaaa0f08",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-15-reference.png",
+      "reference_sha256": "c39115c897aa9e7c5a458542b282d1942321c9cf108fac3add88d540aa8e0aa0",
+      "references": [
+        "world-event-15-reference.png",
+        "world-event-15-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS15. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-15-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-15-native.png",
+      "native_sha256": "48e0ccc2d428be961591029c1cd53940655e3bb037888d47c88f2d5b60ce2199",
+      "native_rgba_sha256": "08b4ffa706ff2c4623f2bc40057c0da8186ba01bdb870d741d7ce53f15ebeabb",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-15-delivery.png",
+      "delivery_sha256": "ca56867aee7fdd9f49068eb5ef82556665a10f44345fd1d0fdb94e1e8e3f162a",
+      "delivery_rgba_sha256": "0b21d56f17a6959878bf2b046251d8d1bc52c326b203d679528157269d149bb5",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "2ad8c430e06522a4cc2da7b090e5817cdf8cdd0c191ea2a04f14123df9863999"
+    },
+    {
+      "id": "world-event-16",
+      "archive": "TWN0PICS",
+      "index": 16,
+      "source_file": "TWN0PICS/twn0pics-016.png",
+      "source_png_sha256": "825539c90d51e483a8b46cdf6424742ea7748926f2f4e5d83fe9f0ba7b997d1a",
+      "source_rgb_sha256": "ba7019ce015cd93f01cc7111e80444aa29cf3dc8e91631697caf91c5a897dd5d",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-16-reference.png",
+      "reference_sha256": "d99a4e7f2afeff9f4dd9e02e0b8c4bb9fae996130fadfe833d21284dd58cd82d",
+      "references": [
+        "world-event-16-reference.png",
+        "world-event-16-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS16. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-16-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-16-native.png",
+      "native_sha256": "ad46407f32b8e9819fe29a589fd49069e19f680e84360aa7ac4ad7f0a822f9c0",
+      "native_rgba_sha256": "6b94b764eaa5bb4707e3492aeff20ef6d4466e2b5f4463560d224452ce8594ac",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-16-delivery.png",
+      "delivery_sha256": "244b9253317047986fba9c3cb6083177b2f45a30e7d662e78d908ec7c4425335",
+      "delivery_rgba_sha256": "4fc97811d8dc5aeb5ab710c7558a076cd36f3792d5064a2405e61098ab33fc01",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "e7416ee431bcf5c5e99b10ebe2b720dac62bd4860000e57203bbd7b198b905af"
+    },
+    {
+      "id": "world-event-17",
+      "archive": "TWN0PICS",
+      "index": 17,
+      "source_file": "TWN0PICS/twn0pics-017.png",
+      "source_png_sha256": "995da5c35a3d53c0bdf548bddad8ab9773b3539950fa4afae14bc179d164a519",
+      "source_rgb_sha256": "438d6ad54d565b656070817953d4b003a8bf813d32535a156f6e592b099ba882",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-17-reference.png",
+      "reference_sha256": "3b30218d7618531497e57cc52c2f2065a6595ce8a3a26f4f28c6aef6f4d0b9e3",
+      "references": [
+        "world-event-17-reference.png",
+        "world-event-17-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS17. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-17-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-17-native.png",
+      "native_sha256": "8458ea8bbba176865e2200a414e2fe817ddfb4f592e49716c3c3882bf3187cb1",
+      "native_rgba_sha256": "6a47d0dd3bc20258baeca0e2690c4bbb6f82eab56292ac434a1523510e519b9b",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-17-delivery.png",
+      "delivery_sha256": "b8e12e4479465bea729df5e696025e3cf91fbf0c4e762af9b34d443a39af78d7",
+      "delivery_rgba_sha256": "513d4f993c869e5c3df4f874c7ec4bb1e350d58ebc9aa81bc7dcfede0be03511",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "ab6e88ca7e631d168639fe2c607ed303e730c22776287e03a056cc63623fb3b6"
+    },
+    {
+      "id": "world-event-18",
+      "archive": "TWN0PICS",
+      "index": 18,
+      "source_file": "TWN0PICS/twn0pics-018.png",
+      "source_png_sha256": "c698dc7af0fbaa73239a9d95e86af88b56642cc135a0f1eae248984428345ce2",
+      "source_rgb_sha256": "91c612b49179c1bf346714b28df367444081249b6828a624201f21801f97b6e7",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-18-reference.png",
+      "reference_sha256": "abe628848f578bf6d0e993bd43d92ef55745a9330d8e273ce2ca9269c94b2aa5",
+      "references": [
+        "world-event-18-reference.png",
+        "world-event-18-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS18. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-18-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-18-native.png",
+      "native_sha256": "af70db983c1710466749561a7cdfc93f2a5884374b36c22683c9b273a7411ba3",
+      "native_rgba_sha256": "4a0ebe3ac1af20f30051348dbae7de18b3778f9e6d2be864702a2d7d74bde5cf",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-18-delivery.png",
+      "delivery_sha256": "9be450743cc44c3eeb18365b5c4a6e29ffefa80e247b93b098896142d57cc5b1",
+      "delivery_rgba_sha256": "4fabc224997005b368b12c288be0e60524e19706031838382cf37f7348809fd5",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "55255c9eba10e01bb9ce7ed1aaaad1865698538631f33664d82adc351f853cd8"
+    },
+    {
+      "id": "world-event-19",
+      "archive": "TWN0PICS",
+      "index": 19,
+      "source_file": "TWN0PICS/twn0pics-019.png",
+      "source_png_sha256": "1a089c9a814460d6ff0c5fee1fc613335e7db1a84471aefa3ad1a612a6aec255",
+      "source_rgb_sha256": "e3a76c61177a70461906110b7041c2cca3fc74dbce5a3ed92b6a66a3b45703f1",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-19-reference.png",
+      "reference_sha256": "75ab87152ac14affb56cce7fa53763c498028dcf7248f4e44a136f4e80c8e33f",
+      "references": [
+        "world-event-19-reference.png",
+        "world-event-19-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS19. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-19-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-19-native.png",
+      "native_sha256": "a7e90d165f1af96a5b82d3a4ea9e61ce11cce305c5e3e12c3985f2709a4665c9",
+      "native_rgba_sha256": "74e1192e768a97aa86347275796f09baaaf0743c0410a3482488acc86c50a578",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-19-delivery.png",
+      "delivery_sha256": "e6db5ad8f9afd665291d171e632f37bb6a6d951ce762a835e333befc6278cb5d",
+      "delivery_rgba_sha256": "4ae4f33435a4f1fc39f065ba530c0f3a591cd2c5ec206cd38655b9fc126c5729",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8ee09e27fd37dc92396808763da8df3d7db41aead525c6787d5da8fa5001a1ba"
+    },
+    {
+      "id": "world-event-20",
+      "archive": "TWN0PICS",
+      "index": 20,
+      "source_file": "TWN0PICS/twn0pics-020.png",
+      "source_png_sha256": "1fee2ee961cb4fae28598f4f6590302b95ea9b789d11dc2e0e1e033a65892dd8",
+      "source_rgb_sha256": "abe32ec21f0d93cc72900c088b01c311644a2cfc5a903ce74ac7120bc9cb0662",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-20-reference.png",
+      "reference_sha256": "b08be76aa27e05d3e12603b34fc91b972ba83208be623b7e9218533193a328da",
+      "references": [
+        "world-event-20-reference.png",
+        "world-event-20-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS20. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-20-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-20-native.png",
+      "native_sha256": "ee97753cb92442143b3a6f12b786e781ebee29dd66b9b939d84f35c628cdda1e",
+      "native_rgba_sha256": "363122439e2eb1db71bb2b1f48e47b9790158f22584abc5adc6a98ffb164f993",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-20-delivery.png",
+      "delivery_sha256": "a13f4162fe809c0340f5f83b1d83f515706738642983fb025e5ac92ca1199bbf",
+      "delivery_rgba_sha256": "b2dab54a85adf38d347d491857740f54633a5cda89bc6f0f83d6fbb3e1fe8b76",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d746cc369820d6c5bb526d6dde0eeee060b6cf369b09dee8c961e5598854c19a"
+    },
+    {
+      "id": "world-event-21",
+      "archive": "TWN0PICS",
+      "index": 21,
+      "source_file": "TWN0PICS/twn0pics-021.png",
+      "source_png_sha256": "30e1c9439b678fc1da9c6da67a7ceedcc4c5feb08aaa61a73e82e1fbf78aa956",
+      "source_rgb_sha256": "403b245d1c37b96ab80f741af6945f5369d40fcafcafc8d20240eac53cf750a1",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-21-reference.png",
+      "reference_sha256": "c9c5227320b08f3d0e1a101c9ddd07e20a0bc979ddb6434c4d16d045d0d70fca",
+      "references": [
+        "world-event-21-reference.png",
+        "world-event-21-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS21. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-21-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-21-native.png",
+      "native_sha256": "1044d369c16282ac757fa461874de177a710270efd0437d3efd7d0128155a308",
+      "native_rgba_sha256": "889c2ba4df285d931cf5a1653b00c5d96c87efb0849bdabefbd8a7b903f14898",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-21-delivery.png",
+      "delivery_sha256": "3dfff165b90fa431c8abee0f7c6c9aa5094c0f14092832fa7496f3c1e15f7879",
+      "delivery_rgba_sha256": "9014347557dd42bc2b8ad026770ed014b2470d6ded4f6f4583d98b8dc490548a",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "3d99f18dcc2bf438e4866bfb83179a3f4da35443e359604250faf91a8647f132"
+    },
+    {
+      "id": "world-event-22",
+      "archive": "TWN0PICS",
+      "index": 22,
+      "source_file": "TWN0PICS/twn0pics-022.png",
+      "source_png_sha256": "87d5f65dfde4f2458646de24b34ff4f287fcb12f24f0b1d906ff2ddb4aa4b9c9",
+      "source_rgb_sha256": "2a9390f1c61e8946d015e1cf7784795b47ec5b9a0b404ee37289eae0c78a31ed",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-22-reference.png",
+      "reference_sha256": "9fd8fc5090fd9734ea63805532d58aa5ffd2f678da4d4a6416b528e94741508b",
+      "references": [
+        "world-event-22-reference.png",
+        "world-event-22-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS22. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-22-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-22-native.png",
+      "native_sha256": "022cd925cf2156ff8363c91c83485d1ff200f63c3c99f76fad227c69e269d870",
+      "native_rgba_sha256": "bf9cd593ae842fd14d422290e19828a148b14ff4822e97397649eaa0e4286948",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-22-delivery.png",
+      "delivery_sha256": "ec4901c402bc59140b1d7f1c6bcbf50356201162b4f5676bc2956e5ae79b89f2",
+      "delivery_rgba_sha256": "08a09a036522fefb4ad8270097a47f811105fd239a97decf4480fb149aadc202",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "9c4abcecc1e34e431b29969375494819527838f1eaa5196cb88980d5f71a8700"
+    },
+    {
+      "id": "world-event-23",
+      "archive": "TWN0PICS",
+      "index": 23,
+      "source_file": "TWN0PICS/twn0pics-023.png",
+      "source_png_sha256": "1ddbfe3a7fc6c6eb7bccbda187a458b63bf3560c279b705a0b4fdf61b6f84683",
+      "source_rgb_sha256": "b74ad7f8f4e941c9f5d511d224ff98ed578ebf495df801873e1034134b74e499",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-23-reference.png",
+      "reference_sha256": "4ddda6140f5c04e5c5be50b3f6a4fe8cf80c78a5650d782083b3ab6cadd94d13",
+      "references": [
+        "world-event-23-reference.png",
+        "world-event-23-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS23. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-23-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-23-native.png",
+      "native_sha256": "9dfbd23f1af5200f857a8aa0a30a366c05fb9a5482cb91f695f91d4da5140662",
+      "native_rgba_sha256": "5418e0e7dbf077501bd483e96fff87fda87228b9ac7f2bd2a9796734e1285e58",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-23-delivery.png",
+      "delivery_sha256": "f7598257155ec92b894ccff867cf7958f46132703aded2046fd25bdfdabcff63",
+      "delivery_rgba_sha256": "9ccf4dd4adc2c4ff474056df7aaea8a752f1d8f7e48575097206da2716829b7f",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "1a32fa37931c8cea6ad162e00f515e240c7bff5fcd54a696307ff9e274ee9a27"
+    },
+    {
+      "id": "world-event-24",
+      "archive": "TWN0PICS",
+      "index": 24,
+      "source_file": "TWN0PICS/twn0pics-024.png",
+      "source_png_sha256": "7f3d2b74f125ff64e8b7ae2e783c6a8aecc737858e74d3f9e61f78f15f4fc745",
+      "source_rgb_sha256": "3517e1d19fddc921ed1a8698a1c9495f0b6b2eeb440a5154c07b23adaabfb722",
+      "source_size": [
+        192,
+        96
+      ],
+      "reference": "world-event-24-reference.png",
+      "reference_sha256": "7be9b8ff6f85a88766979d8d60d635cc6070f60586d8aedfbbc3d132892617b6",
+      "references": [
+        "world-event-24-reference.png",
+        "world-event-24-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Source TWN0PICS24. World location approach illustration. Preserve the actual gate, walls, forest or settlement and approach path. Blue source is sky or water as drawn, black is deep shadow. Do not add invented bridges, walls or buildings. Requested compact delivery dimensions 768x384. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "world-event-24-prompt.txt",
+      "delivery_size": [
+        768,
+        384
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "world-event-24-native.png",
+      "native_sha256": "84af7b8921f3e0bd74b645dfaad5b8d647be786c680e31fe62c648244faa77b6",
+      "native_rgba_sha256": "41fcd6745f4cadc127d0710ed8ebea89ac2efd8ea8d0620840d9dfb11ca2ad3e",
+      "native_size": [
+        1774,
+        887
+      ],
+      "delivery_file": "world-event-24-delivery.png",
+      "delivery_sha256": "1cfabf47c407d9e58383fb7e1b2c0586dce164dc1f1a22512013859ecd605de7",
+      "delivery_rgba_sha256": "9f9c52edfd11d382f104b1cded0fb39e0d2bf60e33be86e5e623048615bf7d10",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "604e84983137b2f66d1447ee25ebf6f938407f813afe97b107028bc41ab8eb17"
+    },
+    {
+      "id": "combat-event-00-smooth",
+      "archive": "COMBPICS",
+      "index": 0,
+      "source_file": "COMBPICS/combpics-000.png",
+      "source_png_sha256": "37d0b6bf3f6cfe25188db493787a072075bf52d478c104842da1f3eb690380cd",
+      "source_rgb_sha256": "1ce6babc852e34607101bf505f67c3f8cfd4ae15172c50ea1cdc1ec34053dc98",
+      "source_size": [
+        296,
+        144
+      ],
+      "reference": "combat-event-00-reference.png",
+      "reference_sha256": "afa87db07e9cc04b59f2c19633bd6f7038989e58b77f1c7c2665cb754be5ef6d",
+      "references": [
+        "combat-event-00-delivery.png",
+        "approved-event-style.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Preserve this exact scene: same figures, poses, locations, silhouettes, camera, cropped edges, weapons and outcome. Repaint skin, metal, fabric, foliage and ground with fine natural brushwork. The second reference supplies ONLY painting technique, never its doorway or characters. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 768x374.",
+      "prompt_file": "combat-event-00-smooth-prompt.txt",
+      "delivery_size": [
+        768,
+        374
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "combat-event-00",
+      "generation_needed": true,
+      "style_reference_sha256": "9eb52c512b08205b485d03e4e71c4fb7b723d3f38adc43454242ba4ddfc463fc",
+      "previous_delivery_sha256": "b77e23cc3a29fab4101091478df5e80bd6c5c4601274567ead8d047d3cb9d925",
+      "native_file": "combat-event-00-smooth-native.png",
+      "native_sha256": "b14ec83ea3568583ef864b4ae1452170c06f1b84d630099d9170e4b96cf4ac7b",
+      "native_rgba_sha256": "21a438ea81dcf9e407456cc2737a250213e27d2897fa6bb42ea28fc5a7ee984d",
+      "native_size": [
+        1798,
+        875
+      ],
+      "delivery_file": "combat-event-00-smooth-delivery.png",
+      "delivery_sha256": "7e2992f01c7cd0c7e1593b9c58b5df318998cb6a443ec8ae677eceb519456ef8",
+      "delivery_rgba_sha256": "0a7bc7970c13315c01325f9e0db5a4ee9a884d1ec99e44af53119d2e6862a312",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8c702d7a13f294bf4205c83ae8ebadab5f8ee5cda39c76dba449f02584cc416c"
+    },
+    {
+      "id": "combat-event-01-smooth",
+      "archive": "COMBPICS",
+      "index": 1,
+      "source_file": "COMBPICS/combpics-001.png",
+      "source_png_sha256": "b25c0ec74f1c3a7261789e01ffb912c11e76d581753dffbae3c3dbfda70479a8",
+      "source_rgb_sha256": "4456da515aacc2a4e791a9485574a502e296287d850ee154b74426862a7f7a71",
+      "source_size": [
+        296,
+        144
+      ],
+      "reference": "combat-event-01-reference.png",
+      "reference_sha256": "8ebe44dd7f4ba0ee4522588f1aed208b031a6bcec2ef3ade479179418106237c",
+      "references": [
+        "combat-event-01-delivery.png",
+        "approved-event-style.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Preserve this exact scene: same figures, poses, locations, silhouettes, camera, cropped edges, weapons and outcome. Repaint skin, metal, fabric, foliage and ground with fine natural brushwork. The second reference supplies ONLY painting technique, never its doorway or characters. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 768x374.",
+      "prompt_file": "combat-event-01-smooth-prompt.txt",
+      "delivery_size": [
+        768,
+        374
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "combat-event-01",
+      "generation_needed": true,
+      "style_reference_sha256": "9eb52c512b08205b485d03e4e71c4fb7b723d3f38adc43454242ba4ddfc463fc",
+      "previous_delivery_sha256": "8e09a0a40b2f10a9af7dc64d5fe3b618e6080e8148268d9cf65cb43d405b7387",
+      "native_file": "combat-event-01-smooth-native.png",
+      "native_sha256": "233dd12a807f8bb4b341d3c1d3eaaef89fb91a3377ed23bd8d2f70eb471f14fa",
+      "native_rgba_sha256": "6fd03f0c22ba4799120a0014a69f5ad595f77a99301749dade0129f45944e5c6",
+      "native_size": [
+        1798,
+        875
+      ],
+      "delivery_file": "combat-event-01-smooth-delivery.png",
+      "delivery_sha256": "72190136b146b57c5262415fe0904d94ffdec2f289d4a101555e4da1d691a950",
+      "delivery_rgba_sha256": "508b30b9ac30596d27e924bbf9ae0b2683b4cc01b869c34948b1d623b2cb34ff",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8c702d7a13f294bf4205c83ae8ebadab5f8ee5cda39c76dba449f02584cc416c"
+    },
+    {
+      "id": "combat-event-02-smooth",
+      "archive": "COMBPICS",
+      "index": 2,
+      "source_file": "COMBPICS/combpics-002.png",
+      "source_png_sha256": "4104bbe47df92ec8827278f257676cbfac0790e3b0947b1f5a23fe8d11cb3544",
+      "source_rgb_sha256": "63502ba2b68aa80c2ff38ca14ad059bf0f5c8b03221563004ec47a564e38ebac",
+      "source_size": [
+        296,
+        144
+      ],
+      "reference": "combat-event-02-reference.png",
+      "reference_sha256": "ac52789d18d4d3448c41c295a6fc7f37ba0c01ff586d2ea1263268f2d0640fc8",
+      "references": [
+        "combat-event-02-delivery.png",
+        "approved-event-style.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Preserve this exact scene: same figures, poses, locations, silhouettes, camera, cropped edges, weapons and outcome. Repaint skin, metal, fabric, foliage and ground with fine natural brushwork. The second reference supplies ONLY painting technique, never its doorway or characters. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 768x374.",
+      "prompt_file": "combat-event-02-smooth-prompt.txt",
+      "delivery_size": [
+        768,
+        374
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "combat-event-02",
+      "generation_needed": true,
+      "style_reference_sha256": "9eb52c512b08205b485d03e4e71c4fb7b723d3f38adc43454242ba4ddfc463fc",
+      "previous_delivery_sha256": "0807779981538f86573d1862bcadac892c3c77621545e42e6794390dee5bcea8",
+      "native_file": "combat-event-02-smooth-native.png",
+      "native_sha256": "3e90378ca06a5899d514d39e36f95d3f281698fdc1ed5bfd82c2dd4bd70c598c",
+      "native_rgba_sha256": "4e43c9704c241b40df2e2ebe68307103fb97caabbf9bce163382ad927090cc41",
+      "native_size": [
+        1798,
+        875
+      ],
+      "delivery_file": "combat-event-02-smooth-delivery.png",
+      "delivery_sha256": "177bcd4236e452a7d2e96d775b40b7acb044fb0ab347c825d595bf296f4adee0",
+      "delivery_rgba_sha256": "82720b801a4416af50da352322e95b6a8a5289185d150ccdcf392349b4e7f3f5",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8c702d7a13f294bf4205c83ae8ebadab5f8ee5cda39c76dba449f02584cc416c"
+    },
+    {
+      "id": "combat-event-03-smooth",
+      "archive": "COMBPICS",
+      "index": 3,
+      "source_file": "COMBPICS/combpics-003.png",
+      "source_png_sha256": "fa39c616cca81aa4cf0d03be1415bdfb7b1f4f598200fe339c9d260a315337a9",
+      "source_rgb_sha256": "a6e3651d47d7e6877a2963b1c995d5fd14a59104708e52ed1a84b423f442f397",
+      "source_size": [
+        296,
+        144
+      ],
+      "reference": "combat-event-03-reference.png",
+      "reference_sha256": "63a051bce9404b48c86f237d9bd3015bbe038db9bf86ab9f0d5ffb410b189313",
+      "references": [
+        "combat-event-03-delivery.png",
+        "approved-event-style.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Preserve this exact scene: same figures, poses, locations, silhouettes, camera, cropped edges, weapons and outcome. Repaint skin, metal, fabric, foliage and ground with fine natural brushwork. The second reference supplies ONLY painting technique, never its doorway or characters. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 768x374.",
+      "prompt_file": "combat-event-03-smooth-prompt.txt",
+      "delivery_size": [
+        768,
+        374
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "combat-event-03",
+      "generation_needed": true,
+      "style_reference_sha256": "9eb52c512b08205b485d03e4e71c4fb7b723d3f38adc43454242ba4ddfc463fc",
+      "previous_delivery_sha256": "eb5cb098ec78807ac6757630b87cbb1c3f6acca88318816424d87fdfaad066b9",
+      "native_file": "combat-event-03-smooth-native.png",
+      "native_sha256": "b122538d778ad8625126c553126243ae828ad5d79a5c347bce20aeeea763fd11",
+      "native_rgba_sha256": "2b8deaa743934e086e275478ae209302a412a9a55d5cd86ffab7aa910f061d58",
+      "native_size": [
+        1798,
+        875
+      ],
+      "delivery_file": "combat-event-03-smooth-delivery.png",
+      "delivery_sha256": "5f95bc9a8ba95cb9cad56e12c203e035ab26098314797b8b772c4dc12176f91e",
+      "delivery_rgba_sha256": "308ad3f3a6cf22a732c4443c39ab03b370e79d4b9f728d5929790f0f217ab0aa",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8c702d7a13f294bf4205c83ae8ebadab5f8ee5cda39c76dba449f02584cc416c"
+    },
+    {
+      "id": "combat-event-04-smooth",
+      "archive": "COMBPICS",
+      "index": 4,
+      "source_file": "COMBPICS/combpics-004.png",
+      "source_png_sha256": "ebf8a16f419aea9fb0fc66db64f1fc4b28a2380c128ccc25afb885c437572fa9",
+      "source_rgb_sha256": "dca039fdc3d37753c22e110d269a4f3bb0c1b8fdf772de1a14aa52a97e32a199",
+      "source_size": [
+        296,
+        144
+      ],
+      "reference": "combat-event-04-reference.png",
+      "reference_sha256": "783f5bf5084b0b019a632566efee17ca500e564f03785ff0b685d362f88a8add",
+      "references": [
+        "combat-event-04-delivery.png",
+        "approved-event-style.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Preserve this exact scene: same figures, poses, locations, silhouettes, camera, cropped edges, weapons and outcome. Repaint skin, metal, fabric, foliage and ground with fine natural brushwork. The second reference supplies ONLY painting technique, never its doorway or characters. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 768x374.",
+      "prompt_file": "combat-event-04-smooth-prompt.txt",
+      "delivery_size": [
+        768,
+        374
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "combat-event-04",
+      "generation_needed": true,
+      "style_reference_sha256": "9eb52c512b08205b485d03e4e71c4fb7b723d3f38adc43454242ba4ddfc463fc",
+      "previous_delivery_sha256": "4302445510ae7907f563ee59c298edeabeb89daed3345f3d2ac56c22fd6e3a0f",
+      "native_file": "combat-event-04-smooth-native.png",
+      "native_sha256": "31ab2e1327c06a5f32c7023016dd846865b2d85aef7644163239bec066d8febd",
+      "native_rgba_sha256": "fc4142dfb291b2fa82332402134f44df1b78f083b31c4971e5658dc71385deee",
+      "native_size": [
+        1798,
+        875
+      ],
+      "delivery_file": "combat-event-04-smooth-delivery.png",
+      "delivery_sha256": "d0ba63b8d91be3556c57072821fbb7fbb0beac72641a504415ecd9ab99768332",
+      "delivery_rgba_sha256": "903a45765c5b9f6c25b80e8a6cce4b9aacb341339138f562a12d0f2e6ef2543d",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8c702d7a13f294bf4205c83ae8ebadab5f8ee5cda39c76dba449f02584cc416c"
+    },
+    {
+      "id": "combat-event-05-smooth",
+      "archive": "COMBPICS",
+      "index": 5,
+      "source_file": "COMBPICS/combpics-005.png",
+      "source_png_sha256": "9a9a8cac65d61fa722036151b92029bf92b8c996a4e22f348936a09b35cee9e1",
+      "source_rgb_sha256": "2d1d991341c609ca93b15f4b46d4f9e6ff816339fd2522a477aa5ac4fb3b77ce",
+      "source_size": [
+        88,
+        64
+      ],
+      "reference": "combat-event-05-reference.png",
+      "reference_sha256": "68330a30ea4f1d063b7e38ba4ef6b8f1d874893dc182edf547969a34d0accfeb",
+      "references": [
+        "combat-event-05-delivery.png",
+        "approved-npc-style.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Preserve this exact man: same black hair, eyes, nose, brows, facial proportions, expression, clothing and camera. Repaint skin, hair, clothing and blue halo/background with fine natural brushwork. The second reference supplies ONLY painting technique, never its elderly man identity. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 384x280.",
+      "prompt_file": "combat-event-05-smooth-prompt.txt",
+      "delivery_size": [
+        384,
+        280
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "combat-event-05",
+      "generation_needed": true,
+      "style_reference_sha256": "07ba04b2330327245e6f12518e096c42252f70394dc43fb9c95186e1ffcf399b",
+      "previous_delivery_sha256": "ac666221dc350844cea2104412a5b2715996baa54e3eca25986a2dd1bfecab6b",
+      "native_file": "combat-event-05-smooth-native.png",
+      "native_sha256": "51203c64874b3c0efdfff41f34014a4de6ad025c07a4a364c6bf88f660916bee",
+      "native_rgba_sha256": "9754dfd23f0ae0f866e58b46859dc7702b260e83b6a9e8ee5ec0d6e517968e9a",
+      "native_size": [
+        1469,
+        1071
+      ],
+      "delivery_file": "combat-event-05-smooth-delivery.png",
+      "delivery_sha256": "cc1dba73efdd41e397caf3522273c1c7a883d0b960351e50286bee41e003ffed",
+      "delivery_rgba_sha256": "4d51a556e31b5e3df0334cf7e9a4629b7b230bdc2fd557766d71d0e6e45f5e0e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8b793f671e2a05892bcb96b2d7ff13bb936fb87228f0e99431234f22ffa87fe7"
+    },
+    {
+      "id": "combat-event-06-smooth",
+      "archive": "COMBPICS",
+      "index": 6,
+      "source_file": "COMBPICS/combpics-006.png",
+      "source_png_sha256": "e548d73f83513366a095d1f5f780684ac72e062cbafc8691532fe7c7cc9786f8",
+      "source_rgb_sha256": "c7ec0c78cd5e0876f99d656def0920139f64906b2cc2156076ac7632f6d2e7c4",
+      "source_size": [
+        88,
+        64
+      ],
+      "reference": "combat-event-06-reference.png",
+      "reference_sha256": "0b18c8071ba94c389f792b2a490b6ed2188550cf635621881d6fdb73249d34de",
+      "references": [
+        "combat-event-06-delivery.png",
+        "approved-npc-style.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Preserve this exact man: same black hair, eyes, nose, brows, facial proportions, expression, clothing and camera. Repaint skin, hair, clothing and blue halo/background with fine natural brushwork. The second reference supplies ONLY painting technique, never its elderly man identity. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 384x280.",
+      "prompt_file": "combat-event-06-smooth-prompt.txt",
+      "delivery_size": [
+        384,
+        280
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "combat-event-06",
+      "generation_needed": true,
+      "style_reference_sha256": "07ba04b2330327245e6f12518e096c42252f70394dc43fb9c95186e1ffcf399b",
+      "previous_delivery_sha256": "0b0199e99ca8fb04e2028425639f54b44dfb43908eeff599c588faccf2719e92",
+      "native_file": "combat-event-06-smooth-native.png",
+      "native_sha256": "84dfe2daa30be53a832f08e0e15f37be6a35b6198a856d77244c98307dab24cb",
+      "native_rgba_sha256": "adc29d7092912eecc4c2864f0e6da7363668d29a865881b25d19ccfb367808a6",
+      "native_size": [
+        1469,
+        1071
+      ],
+      "delivery_file": "combat-event-06-smooth-delivery.png",
+      "delivery_sha256": "c0d8e7b9f25b167d8d744590a5b494119d900ff5b83d324ad9db5f9b9c189385",
+      "delivery_rgba_sha256": "a5eda19a64c669b5710e0608dede3e545b3b2b0d3af72a37761478f075efb7ce",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "8b793f671e2a05892bcb96b2d7ff13bb936fb87228f0e99431234f22ffa87fe7"
+    },
+    {
+      "id": "battle-scroll-cropped",
+      "archive": "MISCPICS",
+      "index": 1,
+      "source_file": "MISCPICS/miscpics-001.png",
+      "source_png_sha256": "8b808451ee08b45e11521d4641558e029dfb2a5625ce17a89f1f459fa57d9186",
+      "source_rgb_sha256": "16cfc66245f7eb6d36aa5ad293b52537e8ad4b6fbf1e5883fe13a80b8e84d30f",
+      "source_size": [
+        296,
+        32
+      ],
+      "reference": "battle-scroll-reference.png",
+      "reference_sha256": "4a365eef9521055b2e9836e80a9b89e1e4dc4d4fbd2f959e694973acfc65c1a3",
+      "references": [
+        "battle-scroll-reference.png",
+        "battle-scroll-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. One long narrow horizontal blank ivory parchment message strip with restrained yellow brass rolled ends and pegs. Follow the exact source framing; blank writing area, no text. Requested compact delivery dimensions 768x83. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-scroll-prompt.txt",
+      "delivery_size": [
+        768,
+        83
+      ],
+      "transparent": false,
+      "status": "READY exact native artwork crop binding; scene verification pending",
+      "native_file": "battle-scroll-native.png",
+      "native_sha256": "6d68e02585bf0b035d9f15a721b9606dc9015cf8b219c822ccefc3fc6d0b2096",
+      "native_rgba_sha256": "3b67fc992e54961105447affdf67b4381a6daa5151438c2ab566c69665620182",
+      "native_size": [
+        2173,
+        724
+      ],
+      "delivery_file": "battle-scroll-cropped-delivery.png",
+      "delivery_sha256": "adf20ad21f5ea58998233af8ab61b4bf4c6e8d916cc552d24b57e4f439e93bf4",
+      "delivery_rgba_sha256": "9076366cb60b8c8ada94628ea120fc52784efd054b7d4e2945535ad160c61b7c",
+      "resize_tool": "Pillow9.4.0 exact original-native artwork crop(0,221,2173,464), then LANCZOS768x83; native PNG unchanged",
+      "prompt_sha256": "48b7c7a730dfec7ce346abba9bacf2b8f28b4f32013ff7f5fefda0fa76b6c73f",
+      "revises": "battle-scroll",
+      "native_crop_bounds": [
+        0,
+        221,
+        2173,
+        464
+      ],
+      "generation_needed": false
+    }
+  ]
+}

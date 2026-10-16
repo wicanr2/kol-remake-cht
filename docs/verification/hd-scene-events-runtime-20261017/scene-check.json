@@ -1,0 +1,328 @@
+{
+  "status": "PASS",
+  "controlled_scenes": 31,
+  "frames": 124,
+  "scenes": [
+    {
+      "name": "arena-05",
+      "kind": "inn",
+      "index": 5,
+      "han": 23,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "f0089cf39948a508b6201c807c9de211975bce91ac3d051d8b113900ab7e9a3c"
+    },
+    {
+      "name": "arena-06",
+      "kind": "inn",
+      "index": 6,
+      "han": 13,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "6c79030ed881873907df264e65b699e19a5a6c58a7cafd31ad0e16f7be749068"
+    },
+    {
+      "name": "combat-00",
+      "kind": "battle",
+      "index": 0,
+      "han": 6,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "0d9db318d4a2b466746e4c6ffc374619b5d1bb4d693f5d7fa8b30123267cec36"
+    },
+    {
+      "name": "combat-01",
+      "kind": "battle",
+      "index": 1,
+      "han": 8,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "46bf69bc071658c06d99376d256a4c588381f951db32120de11acc73d30e2711"
+    },
+    {
+      "name": "combat-02",
+      "kind": "battle",
+      "index": 2,
+      "han": 8,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "3e0ba8e57b905443ff4d8ff6069b4d771ad8a6d718767bf22fc6bd3694aaa66d"
+    },
+    {
+      "name": "combat-03",
+      "kind": "battle",
+      "index": 3,
+      "han": 8,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "05fa00ed81733ac1a4f79155182aa09cc53d8da3a55be43a8b352886a4b4c677"
+    },
+    {
+      "name": "combat-04",
+      "kind": "battle",
+      "index": 4,
+      "han": 8,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "ac390c62072f020a95b0547c7bca4a807bc6b3da3b88227d1ae55c7ddfef05bd"
+    },
+    {
+      "name": "world-00",
+      "kind": "world",
+      "index": 0,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "580427a5bcca42e2533288f0c452d7f5422fc867ed71d2a3fd4b3972229d1488"
+    },
+    {
+      "name": "world-01",
+      "kind": "world",
+      "index": 1,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "712d226b8233655ec0bfff42329edb8e142e58b2b7fa240179fff34f63d6f5f9"
+    },
+    {
+      "name": "world-02",
+      "kind": "world",
+      "index": 2,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "6a8de57a90fe089d112858c8bdf07a89ad169fb4aec5268790eb2b2f71243f88"
+    },
+    {
+      "name": "world-03",
+      "kind": "world",
+      "index": 3,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "761f79480d45dfa1dd91e6d9fe8a67ff1a0b816b2502e882d8daf0ee5682e5e1"
+    },
+    {
+      "name": "world-04",
+      "kind": "world",
+      "index": 4,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "47cc8d2f2f94f1e760a3d5adb60fe12d6e165448b8158b7beee42b5450aa3d4d"
+    },
+    {
+      "name": "world-05",
+      "kind": "world",
+      "index": 5,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "9bd0eeebf38de2b09df4cfd6ee74454abfa660f4055ba06cf3b09ceb9b9a1c69"
+    },
+    {
+      "name": "world-06",
+      "kind": "world",
+      "index": 6,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "b0fee060905c82c567e2bca390b1be2c19dbfed4179241c265497e02a7309650"
+    },
+    {
+      "name": "world-07",
+      "kind": "world",
+      "index": 7,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "201ba2f4b0c65b422a2dccdd5defcdd43bdb3910edc511c922764a732697938b"
+    },
+    {
+      "name": "world-08",
+      "kind": "world",
+      "index": 8,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "fc9556f92ff67c4369662b0836b53a6a7a0f02e8712fa6ac1a292e443e058279"
+    },
+    {
+      "name": "world-09",
+      "kind": "world",
+      "index": 9,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "9e23222ad7995392c92972e8fa20983fd4d03e6334470640a80a02f7fbfad65b"
+    },
+    {
+      "name": "world-10",
+      "kind": "world",
+      "index": 10,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "2e2bbf38bb85706ca7853ad828b81176095f087c3993a53f3d7609962fcbdb37"
+    },
+    {
+      "name": "world-11",
+      "kind": "world",
+      "index": 11,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "58adc22d5419697fdd55ef29c8f4d1c923ceeab9bbe52f0061075c95241be80f"
+    },
+    {
+      "name": "world-12",
+      "kind": "world",
+      "index": 12,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "24ecb5b5c843767af34e6cbd39c6706598f11573ad930d3db8bedad8a0e34869"
+    },
+    {
+      "name": "world-13",
+      "kind": "world",
+      "index": 13,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "bb193f89e042b21e8893b44077645788eeb703491d1096fad57a66506fb5962a"
+    },
+    {
+      "name": "world-14",
+      "kind": "world",
+      "index": 14,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "0f9af988694b3e9b45ec25790d100653c3e921e0b77a36bba80b345f1bfa6c57"
+    },
+    {
+      "name": "world-15",
+      "kind": "world",
+      "index": 15,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "3e0dc805d72448d680a760cf3038f4ecb70904c0cbf9d2983a90bd8d5aa122aa"
+    },
+    {
+      "name": "world-16",
+      "kind": "world",
+      "index": 16,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "1802075aae4e24d5fda47c648f56aff8ec11dfd873c4cefd5c1901bd33834695"
+    },
+    {
+      "name": "world-17",
+      "kind": "world",
+      "index": 17,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "197e2eb4c8cbc5c85faf1eeaae2e570fc01058c9374ac1ecb99cf80c147d428b"
+    },
+    {
+      "name": "world-18",
+      "kind": "world",
+      "index": 18,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "0e7102f974194e996125a8eada7d7dc3baaf654dee43ef387956b1f355b74070"
+    },
+    {
+      "name": "world-19",
+      "kind": "world",
+      "index": 19,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "7fbe04a4373a8f69ffbd1d3fc893dbe44515a18b1f2ce326bd5daa9b5320fd0a"
+    },
+    {
+      "name": "world-20",
+      "kind": "world",
+      "index": 20,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "e5f801799bd676591c0c4c2a8eb4829fd04cea7f4b1b0d330f9c36473c1460d9"
+    },
+    {
+      "name": "world-21",
+      "kind": "world",
+      "index": 21,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "35ab6f6edfbc45acd691bb27c81bcac289b7d33e20d9e247281c4382d1b34731"
+    },
+    {
+      "name": "world-22",
+      "kind": "world",
+      "index": 22,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "f31ad5b36e25da4c4894717a87c9eaf52adaf37915991d2c5f33258b438c20f3"
+    },
+    {
+      "name": "world-23",
+      "kind": "world",
+      "index": 23,
+      "han": 10,
+      "ega_delta": 0,
+      "outside_delta": 0,
+      "native_max_channel_delta": 1,
+      "state_sha256": "2253a52e00aa6e6a4cf2863b017cc349119777144e48b536f528ff3d40c63abd"
+    }
+  ],
+  "han": 314,
+  "missing_glyphs": 0,
+  "manifest_sha256": "12680d3039fca1f55fb27aca057bb5cb721698d3d186078dfbc081a58066e858",
+  "generation_sha256": "432ea9188c5b5daf8c86964582cc165ecc0701677a67599e0f997a684b3bfcc6",
+  "captures_sha256": "a8b3f05bea2399a6ec99dfb043e2430f23fd4a76bada63e4ea5d4c827b145e2b",
+  "original_oracle": false,
+  "normal_player_path": false,
+  "unused_source": "TWN0PICS24 generated and format-validated only",
+  "prepared_terrain_overrides": [
+    0
+  ]
+}

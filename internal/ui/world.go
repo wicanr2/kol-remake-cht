@@ -238,7 +238,16 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 
 	fill(dst, l.LabelX, l.LabelY, l.LabelW, l.LabelH, town.ColourBoxEdge)
 	fill(dst, l.LabelX+1, l.LabelY+1, l.LabelW-2, l.LabelH-2, town.ColourBoxFill)
-	for i, line := range []string{s.TimeLine(), s.TerrainLine()} {
+	labelLines := []string{s.TimeLine(), s.TerrainLine()}
+	if camping(sess) {
+		labelLines[0] = t.T(strings.TrimSpace(s.CampText))
+		if names, ok := s.Names.(interface{ CampingText() string }); ok {
+			if text := names.CampingText(); text != "" {
+				labelLines[0] = text
+			}
+		}
+	}
+	for i, line := range labelLines {
 		text := strings.TrimSpace(line)
 		w, _ := f.Measure(text)
 		x := l.LabelX + (l.LabelW-w)/2
@@ -248,7 +257,11 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 
 	fill(dst, l.MapX, l.MapY, l.MapW, l.MapH, town.ColourBoxEdge)
 	if sess != nil {
-		if index := sess.TownPicture(); index >= 0 {
+		index := sess.TownPicture()
+		if sess.Camping {
+			index = s.TerrainCode
+		}
+		if index >= 0 {
 			pic, err := sprites.Get(world.TownPictureArchive, index)
 			if err != nil {
 				return err

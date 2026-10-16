@@ -71,6 +71,11 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 		if h.fingerprint(pic) != source.RGB {
 			return fmt.Errorf("HD頁面來源%s第%d圖指紋不符", source.Archive, source.Index)
 		}
+		if h.sceneEvents != nil {
+			if art, ok := h.sceneEvents.byRGB[source.RGB]; ok && pic.Bounds().Size() != art.size {
+				return fmt.Errorf("HD事件來源實際尺寸不符")
+			}
+		}
 		if size, ok := p.npcMountSizes[source.RGB]; ok && pic.Bounds().Size() != size {
 			return fmt.Errorf("HD NPC與坐騎來源%s第%d圖實際尺寸不符", source.Archive, source.Index)
 		}
@@ -140,6 +145,11 @@ func (h *HD) pagePortrait(src *ebiten.Image) (*ebiten.Image, bool) {
 	if h.pages == nil {
 		return nil, false
 	}
+	if h.sceneEvents != nil {
+		if art, ok := h.sceneEvents.byRGB[h.fingerprint(src)]; ok && art.portrait {
+			return art.paint, true
+		}
+	}
 	pic, ok := h.pages.portraits[h.fingerprint(src)]
 	return pic, ok
 }
@@ -161,6 +171,10 @@ func fillHDUI(dst *ebiten.Image, x, y, w, height int, c [3]uint8) bool {
 		return true
 	}
 	ink := hdMuted
+	if n.paper && c == [3]uint8{255, 255, 255} {
+		vector.DrawFilledRect(dst, float32(x*2), float32(y*2), float32(w*2), float32(height*2), color.RGBA{238, 221, 185, 255}, false)
+		return true
+	}
 	switch c {
 	case [3]uint8{0, 0, 0}:
 		ink = color.RGBA{50, 24, 27, 255}
@@ -210,6 +224,14 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 		return true
 	}
 	painted := src
+	if h.sceneEvents != nil {
+		if art, ok := h.sceneEvents.byRGB[key]; ok {
+			painted = art.paint
+			if art.paper {
+				n.paper = true
+			}
+		}
+	}
 	if h.crests != nil {
 		if crest, ok := h.crests.byRGB[key]; ok {
 			painted = crest

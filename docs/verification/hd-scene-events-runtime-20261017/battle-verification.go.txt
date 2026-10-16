@@ -1,0 +1,16 @@
+package battle
+
+// Prepared display state only, no gameplay RNG or production flags.
+func (s *State) PrepareHDResultVerification(index int) {
+	s.Stage = StageDone
+	s.Plan.Prompt = PromptExecuting
+	s.fledFromBar = index == 0
+	s.RankFight = index == 1 || index == 4
+	s.Verdict = VerdictLost
+	if index == 0 {
+		s.Verdict = VerdictFled
+	}
+	if index == 3 || index == 4 {
+		s.Verdict = VerdictWon
+	}
+}
