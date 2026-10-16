@@ -479,3 +479,5 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 [正式驗收](hd-town2-maps-runtime-20261016.md)保存417份Go／module、478份HD資產、正式99場景396畫格、2376漢字與12個F10事件。隔離完整全城、三張修正前原稿、42張原生圖片、逐張提示、五段拼接診斷、14門位與工具腳本中止紀錄只留本機。
 
 保存清冊位於`local/hd-town2-maps-20261016/retention.json`。沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town2-maps-20261016`；`delete hd-town2-maps-20261016`逐檔核對後只清理本批。完整重生依[第二城驗收頁](hd-town2-maps-runtime-20261016.md)的固定來源、鎖版工具鏈、空輸出目錄及原腳本名稱，範圍限Linux Docker；執行檔只留雜湊並重建。
+
+本批保存1193份檔案，三份可重建程式只留雜湊；原1116339346 bytes壓縮為799077920 bytes，SHA-256為`8a8d24d8b1bf0d80869764a8d7da7f0c38573ad35a7dfadcaa3e3bf49809b9b9`。已在獨立唯讀容器逐檔驗證，[本機閱讀入口](local/hd-town2-maps-20261016/review.html)連到正式對比、保存清冊及完整提示。

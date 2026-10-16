@@ -11803,7 +11803,10 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 隔離417份來源由正式呈現器擷取99場景396畫格，84鏡頭覆蓋4096格。2376觀測漢字缺字0、完整Outdoor與中文相同、EGA RGBA零差、獨立原生合成最多一色階、視窗外零差。兩視窗鍵鼠12個實際F10保持完整Outdoor，HD往返最多一色階。
 - SPEC-039先升READY，再接42張正式PNG。正式仍417份Go／module、HD資產478份；只調整測試以覆核第二城缺區、缺PNG、後一城來源錯誤時整組不交換，UI合約fixture明確限定第一城。正式全套、sceneverify與全城畫布驗證進行中。
 - 正式驗證腳本預檢發現KOL_POSITION_CITY旗標會連帶啟動畫廊測試，於完整測試及擷取前主動中止，沒有正式畫格；保留中止紀錄後限定到明示畫廊命令，沿同image乾淨重跑。此為工具腳本問題，未改產品或驗收標準。
-- 主機gh登入成功，遠端仍private。v.1.0.2-20261013、tag、Release與封包保持。本批證據與腳本暫存於[第二城工作區](workplace/hd-town2-maps-20261016/)，正式結果、提交與封存清理另續記。
+- 主機gh登入成功，遠端仍private。v.1.0.2-20261013、tag、Release與封包保持。本批證據與腳本暫存於第二城工作區，完成後沿[本機保存入口](docs/verification/local/hd-town2-maps-20261016/review.html)取回；正式結果、提交與封存清理另續記。
 
 - 正式417份來源與478份HD資產完成全套及sceneverify。正式99場景396畫格覆蓋4096格、2376觀測漢字缺字0，EGA／完整Outdoor／中文保持，獨立原生最多一色階、視窗外零差；與候選整張RGBA零差。正式兩視窗鍵鼠12個F10保持完整Outdoor，HD往返最多一色階。程式SHA為`3771796a1ffbecaaed6d6d960ae6afb57791bbc5cfd5e980affe703b2128ecba`，正式收據SHA為`4eadc49c3841773234a3d2371068e348aaf54ce4b636ea953ad83424d88296f0`。
 - README加入湖岸、南門木橋與城堡三組正式同主題EGA／HD。25份附件與六張截圖尺寸、八個README引用及索引正對照通過。唯一現況表與13類覆蓋同步；工作清單首次發現一行未完成聲明未認領，補到既有hd-art-ui後render／verify通過，16開放／92完成保持。第二城畫稿限定CONFORMED，全畫面HD仍開放；沒有新增正常第二城住宿或原版parity聲明。
+
+- 提交`37e48c0190d0e6128639d24d040f2b5a1816f1f9`已推送private `origin/main`，遠端回讀相符；舊版tag仍固定46a01f11，Release與封包未改。本批1193檔封存為799077920 bytes，原1116339346 bytes，三份可重建程式只留雜湊；壓縮SHA為`8a8d24d8b1bf0d80869764a8d7da7f0c38573ad35a7dfadcaa3e3bf49809b9b9`。獨立唯讀容器重驗全部內容，delete再核對後只清理本批工作區；閱讀入口及Markdown引用已修正。
+- 本輪沿用既有image，沒有重建工具鏈。清理後root-owned檔案與`.md`目錄皆0，本專案容器無殘留。完整生成提示、45張原生圖含三張被替換稿、全城畫格、GUI狀態與腳本由本機壓縮證據保存；正式42張原圖與精簡驗收已入Git。
