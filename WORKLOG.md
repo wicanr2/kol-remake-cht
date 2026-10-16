@@ -11794,3 +11794,4 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 
 - 正式程式SHA-256為`a55bfa4d3669b2403edee3e2629b7c51da70f222cd921bdb7a4e0d81b82ab5f1`，正式收據為`865e3d445f1339f939e572c73fbc29b6a9ee75ea85d1335ab462804fe39acf91`。417份來源、436份HD資產與六張正式截圖逐檔相符，原版ZIP保持固定雜湊。工作清單兩條新範圍聲明認領至既有hd-art-ui，render／verify同步，16開放／92完成保持。
 - 本批1667檔封存為1253807628 bytes，11份可重建程式只留雜湊，壓縮SHA-256為`48966f91f9343c2f0f310c96c8d62a14ab347b9707cb2e1ed2d7b63935a8b305`。獨立唯讀容器重驗全部內容，delete再逐檔核對後只刪除本批工作區。原A／B頁與六張比較圖保留可閱讀入口；57個暫存別名已移除，目標位元組保持。其他任務與現行交付未動。
+- 提交`266f0015`已推送private `origin/main`，包含正式程式、42張原圖、README三組對比及驗收文件。29個新／移動引用、索引正對照與正式附件雜湊核對通過。工作區已清理，root-owned檔案與`.md`目錄皆0，本專案容器無殘留；本輪沿用既有image，未重建工具鏈。遠端舊tag仍為46a01f11，未更新Release或封包。
