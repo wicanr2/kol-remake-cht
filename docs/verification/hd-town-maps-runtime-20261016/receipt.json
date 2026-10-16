@@ -1,0 +1,337 @@
+{
+  "status": "PASS limited first-city position map, Chinese, F10 and save compatibility",
+  "scenes": 23,
+  "frames": 92,
+  "observed_Han_characters": 552,
+  "missing_glyphs": 0,
+  "source_count": 417,
+  "HD_asset_count": 436,
+  "verification_source_count": 420,
+  "records": [
+    {
+      "case": "camera-00-00",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 1,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "camera-11-35",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 1,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "camera-23-29",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 1,
+      "whole_candidate_HD_max": 1,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "camera-23-47",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 1,
+      "whole_candidate_HD_max": 1,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "camera-47-11",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 1,
+      "whole_candidate_HD_max": 1,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "camera-63-63",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 1,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-00",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-01",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-02",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-03",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-04",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-05",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-06",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-07",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-08",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-09",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-10",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-11",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-12",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-13",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-14",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "door-15",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    },
+    {
+      "case": "edge",
+      "EGA_RGBA_exact": true,
+      "serializable_Outdoor_equal": true,
+      "Chinese_equal": true,
+      "native_composite_max": 0,
+      "whole_candidate_HD_max": 0,
+      "outside_viewport_max": 0,
+      "comparator": "same execution and draw sequence; verification-only pointer suspension outside production"
+    }
+  ],
+  "program_sha256": "a55bfa4d3669b2403edee3e2629b7c51da70f222cd921bdb7a4e0d81b82ab5f1",
+  "gallery_sha256": "63916d54e7e70cf80e342bedcd56522d0a5424f5d11bd283411b290f2e71de63",
+  "source_index_sha256": "7e0415bc4365b4983a65e8f68cac2a05421d4d24c42be3e61113d7c75f551515",
+  "asset_index_sha256": "f9fd9a5551df02b93ab09a17ddfc7586d4e21c7f5a26e49b0bcb291d20cc1950",
+  "verification_index_sha256": "88514b2d62eb78682146b17d2bab8cb209bf828480d18f3bf4b06b7045939a90",
+  "captures_sha256": "2cc7aebf72ff121aad11fe72cec0d4f7c0000e9fa8112ff3545e1be2343665ef",
+  "source_manifest_sha256": "aa76341b1401c39a7f716e57577a4578288c11d5c631f26b5a4adfb989f05978",
+  "original_oracle": false,
+  "normal_player_path": false,
+  "limits": "Linux Docker only; TOWN1 painting group only; EGA walking marker, other towns, world map, battle terrain, injuries, weather, intro and remaining events stay open. No original oracle or new natural completion claim.",
+  "verified_on": "2026-10-16",
+  "formal_tests": {
+    "full_test_sha256": "9b091338319c9fdcee4b6170421e9dacfa30a3c6ab080b6e3e01c4f2d945a802",
+    "sceneverify_sha256": "8ac6e7933a64d4be2cdc5400b97bb32a838958b1daa7f7576fa51abda4c4d373"
+  },
+  "formal_GUI": {
+    "events": 12,
+    "views": [
+      [
+        1920,
+        1200
+      ],
+      [
+        960,
+        600
+      ]
+    ],
+    "max_HD_roundtrip": 1,
+    "complete_Outdoor_preserved": true,
+    "gallery_sha256": "fea66740a279f35b4b8111513b1fe16033577194587fe0ed226c54903167d81a",
+    "verification_source_count": 419,
+    "verification_index_sha256": "1c4231d324877c8a148937401005827f132fc7e8e78155941ceed4365cabb67d",
+    "receipt_sha256": "034af08465edd2a5ffca5f1cdd64dcb929d5dad4e90c64059dc51363082cfbde"
+  },
+  "normal_save_phase": {
+    "source_count": 415,
+    "program_sha256": "6b53309ba34f5c6f75112746fe398c75f121cc647946c193e0af09062db3ab77",
+    "rest_states": 11,
+    "reload_states": 5,
+    "old_v3_unchanged": true,
+    "receipt_sha256": "c0c6a0d49625fe2a849afc8497ecf6b1e737592e96009682b575fac99b07183d",
+    "scope": "Normal original rest/reload itinerary, not a normal journey to TOWN1 or ending. Final code removes only disposable comparison hooks and adds regression tests; full formal suite separately passed."
+  },
+  "prior_full_coverage": {
+    "cells": 4096,
+    "scenes": 101,
+    "frames": 404,
+    "receipt_sha256": "b2183180be92aa7611dfad52bb7b1bbbdba203e647e94615b0424ae89cd8e3b2"
+  },
+  "bridge_revision": {
+    "cells": 360,
+    "map_cameras": 6,
+    "scenes": 23,
+    "frames": 92,
+    "unchanged_native_files": 40,
+    "receipt_sha256": "7422227071992287ff32692deb4b84d08d5630cd528bd35ec9838ceae8b71102"
+  },
+  "initial_cross_process_compare": {
+    "max_outside_viewport": 1,
+    "area": "existing text glyphs",
+    "diagnostic_sha256": "233d4e068635686acdbc38239cc7b485d33f31671e29aba3b200b720f2e5518e",
+    "resolution": "same-execution before/after with equal draw order; outside viewport0, whole prior candidate HD<=1. First46 frames retained locally."
+  },
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "selected_north_png_sha256": "86224a04dd9578b13cecd972d88822406c506a0f10c18d99c86084a2e0f9bb6a",
+  "release_changed": false,
+  "all_HD_complete": false,
+  "attachments": {
+    "verification-helper.go.txt": "f190e5c63b8f5a15740548821d247eaca0fc04cbb070e067bc875f671cd25593",
+    "asset-inputs.json": "f9fd9a5551df02b93ab09a17ddfc7586d4e21c7f5a26e49b0bcb291d20cc1950",
+    "map-north-ega.png": "328c0d6e2963e23caeac8b3df86608ded86d855628f10af1651ce4aef55f4f95",
+    "captures.json": "2cc7aebf72ff121aad11fe72cec0d4f7c0000e9fa8112ff3545e1be2343665ef",
+    "bridge-revision-check.json": "7422227071992287ff32692deb4b84d08d5630cd528bd35ec9838ceae8b71102",
+    "gui-check.json": "034af08465edd2a5ffca5f1cdd64dcb929d5dad4e90c64059dc51363082cfbde",
+    "save-check.json": "c0c6a0d49625fe2a849afc8497ecf6b1e737592e96009682b575fac99b07183d",
+    "verification-source-inputs.json": "88514b2d62eb78682146b17d2bab8cb209bf828480d18f3bf4b06b7045939a90",
+    "review.html": "2be59e3363019b8b5b91636196c484476a574b8b63fcb3cbe2fc622280e9961c",
+    "map-bridge-ega.png": "470e5c96501d4b121f33f580a2c8538570de88c5eaaadb1b24c80bb62309aa04",
+    "prototype-full-check.json": "b2183180be92aa7611dfad52bb7b1bbbdba203e647e94615b0424ae89cd8e3b2",
+    "manifest.json": "4a3967a451cb98f7d3170a8bebef7c71bf25f1adb218c3475811985fa27ff4f3",
+    "visual-review.json": "6d8b9de33f2a26ef9b764c78bfa057463cab8fedb87afefc23f4fa2e1e7bbb6b",
+    "map-bridge-hd.png": "ba87d285de8e8e3fa34620015b47d03136ca95113d6b983236f136a80d169cea",
+    "loader-check.json": "e200b3192073bd9664feb6eaf7bc697623d45c34ac0ef1b772f8b93f3a02c562",
+    "gallery.go.txt": "7939c393f58e2e037e7c1ffa5a35614edc3c7c60c42a826b21da1add6db3035e",
+    "ui-contract-check.json": "190d35a679cb5c0a7261e0a3ca8c19d64f542eb6888c00b10f7ac3636390b2d7",
+    "full-test.log": "9b091338319c9fdcee4b6170421e9dacfa30a3c6ab080b6e3e01c4f2d945a802",
+    "check.py": "7bb83ab0cef1b039d6dcff6b074742cd4c694054fdee6df0d964a8e60c8fa996",
+    "sceneverify.log": "8ac6e7933a64d4be2cdc5400b97bb32a838958b1daa7f7576fa51abda4c4d373",
+    "initial-formal-diagnostic.json": "233d4e068635686acdbc38239cc7b485d33f31671e29aba3b200b720f2e5518e",
+    "map-castle-ega.png": "f2e02a78127f0d1e895889b0a863b5063866be0e20dcf098f8d447d116f7af54",
+    "check.json": "8f867d0f0f5f1d2684095a1874fb122e3d3570aa6ed090424bbce5bc1fc08484",
+    "source-inputs.json": "7e0415bc4365b4983a65e8f68cac2a05421d4d24c42be3e61113d7c75f551515",
+    "map-castle-hd.png": "de3c1c75fe1f674476b86ba819f577359e11bc492c8bee5f4eb91a3d15dd042f",
+    "map-north-hd.png": "341b9b2b6df0d2f24713baee87c74fec329b4afc0a5e8ffc9d02fd5f5cd4c124"
+  }
+}

@@ -29,6 +29,7 @@ type HD struct {
 	monsters     *hdMonsters
 	facades      *hdTownFacades
 	crests       *hdTownCrests
+	townMaps     *hdTownMaps
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {

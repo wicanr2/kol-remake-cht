@@ -1,0 +1,14 @@
+{
+  "status": "PASS isolated UI contracts only",
+  "synthetic_art": true,
+  "source": "actual readonly TOWN1 grid and atlas",
+  "attach_failure_cases": 6,
+  "render_failure_cases": 3,
+  "atomic_attach": true,
+  "no_partial_map_draw": true,
+  "edge_and_uncovered_town_bypass": true,
+  "verification_sources": 417,
+  "log_sha256": "e8ae4f55d135153d537502b176bdeb2820510514249462d020168ac29adfd67f",
+  "source_index_sha256": "a60e656c78e7804f087aac913941453a8e29e752cd00a1f5f0cc78a7825ac018",
+  "production_changed": false
+}

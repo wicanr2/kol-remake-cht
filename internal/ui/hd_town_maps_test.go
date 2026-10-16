@@ -1,0 +1,186 @@
+package ui
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/wicanr2/kol-remake-cht/internal/assets"
+	"github.com/wicanr2/kol-remake-cht/internal/town"
+	"image"
+	"image/color"
+	imagedraw "image/draw"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"testing"
+)
+
+type positionContractSprites struct{ images map[int]*ebiten.Image }
+
+func (s positionContractSprites) Get(_ string, index int) (*ebiten.Image, error) {
+	im := s.images[index]
+	if im == nil {
+		return nil, fmt.Errorf("missing source")
+	}
+	return im, nil
+}
+
+type positionContractGPU struct {
+	check func() error
+	done  bool
+	err   error
+}
+
+func (g *positionContractGPU) Update() error {
+	if g.done {
+		return ebiten.Termination
+	}
+	return nil
+}
+func (g *positionContractGPU) Draw(*ebiten.Image) {
+	if !g.done {
+		g.err = g.check()
+		g.done = true
+	}
+}
+func (g *positionContractGPU) Layout(int, int) (int, int) { return 1920, 1200 }
+
+func TestHDPositionMapContracts(t *testing.T) {
+	if os.Getenv("KOL_HD_TOWN_MAP_CHILD") != "1" {
+		cmd := exec.Command(os.Args[0], "-test.run=^TestHDPositionMapContracts$", "-test.v")
+		cmd.Env = append(os.Environ(), "KOL_HD_TOWN_MAP_CHILD=1")
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			t.Fatalf("地圖GPU子行程:%v\n%s", err, output)
+		}
+		t.Log(string(output))
+		return
+	}
+
+	raw, e := os.ReadFile(filepath.Join("..", "..", "assets", "hd", "first-slice", "town-maps", "manifest.json"))
+	if e != nil {
+		t.Fatal(e)
+	}
+	var m assets.HDTownMapsManifest
+	if e = json.Unmarshal(raw, &m); e != nil {
+		t.Fatal(e)
+	}
+	lib, e := assets.Load(filepath.Join("..", "..", "assets", "original-derived-png", "ega"))
+	if e != nil {
+		t.Fatal(e)
+	}
+	gridImage, _, e := lib.Decode("TOWN1", 0)
+	if e != nil {
+		t.Fatal(e)
+	}
+	atlas, _, e := lib.Decode("TOWN1", 1)
+	if e != nil {
+		t.Fatal(e)
+	}
+	source := m.Maps[0]
+	grid := gridImage.(*image.Gray)
+	sources := []HDTownMapSource{{GridSource: HDPageSource{Archive: "TOWN1", Index: 0, RGB: source.Grid.SourceRGB}, AtlasSource: HDPageSource{Archive: "TOWN1", Index: 1, RGB: source.Atlas.SourceRGB}, Grid: grid}}
+	paint := image.NewRGBA(image.Rect(0, 0, 1152, 1152))
+	imagedraw.Draw(paint, paint.Bounds(), &image.Uniform{C: color.RGBA{80, 90, 40, 255}}, image.Point{}, imagedraw.Src)
+	var arts []HDTownMapArt
+	for _, r := range m.Regions {
+		a, b := r.SourceBounds, r.VisibleBounds
+		arts = append(arts, HDTownMapArt{Archive: "TOWN1", SourceBounds: image.Rect(a[0], a[1], a[2], a[3]), VisibleBounds: image.Rect(b[0], b[1], b[2], b[3]), Paint: paint})
+	}
+	gpu := &positionContractGPU{check: func() error {
+		h := &HD{pages: &hdPages{}, style: &hdInterface{}, keys: map[*ebiten.Image]string{}}
+		if e := h.AttachTownMaps(sources, arts); e != nil {
+			return e
+		}
+		old := h.townMaps
+		oldSources := append([]HDPageSource{}, h.pages.sources...)
+		cases := []struct {
+			name   string
+			change func([]HDTownMapArt)
+		}{
+			{"gap", func(a []HDTownMapArt) { a[0].VisibleBounds.Max.X-- }},
+			{"overlap", func(a []HDTownMapArt) { a[0].VisibleBounds.Max.X++ }},
+			{"outside-source", func(a []HDTownMapArt) { a[0].VisibleBounds.Min.X = -1 }},
+			{"short-source", func(a []HDTownMapArt) { a[0].SourceBounds.Max.X-- }},
+			{"missing-paint", func(a []HDTownMapArt) { a[0].Paint = nil }},
+			{"small-native", func(a []HDTownMapArt) { a[0].Paint = image.NewRGBA(image.Rect(0, 0, 16, 16)) }},
+		}
+		for _, tc := range cases {
+			copy := append([]HDTownMapArt{}, arts...)
+			tc.change(copy)
+			if h.AttachTownMaps(sources, copy) == nil {
+				return fmt.Errorf("accepted %s", tc.name)
+			}
+			if h.townMaps != old || len(h.pages.sources) != len(oldSources) {
+				return fmt.Errorf("partial group replacement %s", tc.name)
+			}
+		}
+		sprites := positionContractSprites{map[int]*ebiten.Image{0: ebiten.NewImageFromImage(grid), 1: ebiten.NewImageFromImage(atlas)}}
+		actual, e := town.LoadGrid(grid)
+		if e != nil {
+			return e
+		}
+		out := &town.Outdoor{Town: 1}
+		out.Bounds.MaxX = 63
+		out.Bounds.MaxY = 63
+		out.Camera.X = 47
+		out.Camera.Y = 9
+		out.SetGrid(actual)
+		dst := ebiten.NewImage(1920, 1200)
+		dst.Fill(color.RGBA{1, 2, 3, 255})
+		if used, e := h.drawTownMap(dst, sprites, out); !used || e != nil {
+			return fmt.Errorf("complete source not drawn:%v", e)
+		}
+		rejected := func(label string, s positionContractSprites) error {
+			dst.Fill(color.RGBA{1, 2, 3, 255})
+			before := make([]byte, 1920*1200*4)
+			dst.ReadPixels(before)
+			used, e := h.drawTownMap(dst, s, out)
+			after := make([]byte, len(before))
+			dst.ReadPixels(after)
+			if e == nil || used || !bytes.Equal(before, after) {
+				return fmt.Errorf("accepted or partially drew %s", label)
+			}
+			return nil
+		}
+		changed := image.NewGray(grid.Bounds())
+		imagedraw.Draw(changed, changed.Bounds(), grid, grid.Bounds().Min, imagedraw.Src)
+		changed.SetGray(42, 7, color.Gray{Y: changed.GrayAt(42, 7).Y + 1})
+		different, e := town.LoadGrid(changed)
+		if e != nil {
+			return e
+		}
+		out.SetGrid(different)
+		if e := rejected("actual Outdoor Grid differs from sprite library", sprites); e != nil {
+			return e
+		}
+		out.SetGrid(actual)
+		wrong := positionContractSprites{map[int]*ebiten.Image{0: sprites.images[0], 1: ebiten.NewImage(256, 256)}}
+		if e := rejected("actual atlas fingerprint", wrong); e != nil {
+			return e
+		}
+		out.Bounds.MinX = -1
+		if e := rejected("invalid camera bounds", sprites); e != nil {
+			return e
+		}
+		out.Bounds.MinX = 0
+		out.AtEdge = true
+		if used, e := h.drawTownMap(dst, sprites, out); used || e != nil {
+			return fmt.Errorf("edge bypass failed")
+		}
+		out.AtEdge = false
+		out.Town = 2
+		if used, e := h.drawTownMap(dst, sprites, out); used || e != nil {
+			return fmt.Errorf("uncovered city bypass failed")
+		}
+		return nil
+	}}
+	ebiten.SetWindowSize(960, 600)
+	if e = ebiten.RunGame(gpu); e != nil {
+		t.Fatal(e)
+	}
+	if gpu.err != nil {
+		t.Fatal(gpu.err)
+	}
+}

@@ -172,6 +172,9 @@ func (g *game) setGraphics(mode string) error {
 		if err := hd.AttachTownCrests(crestArts); err != nil {
 			return err
 		}
+		if err := attachHDTownMaps(hd, g.hdDir, g.sprites.lib); err != nil {
+			return err
+		}
 		g.hdCache, g.hdCanvas = hd, canvas
 	}
 	g.hd, g.presentation = g.hdCache, g.hdCanvas

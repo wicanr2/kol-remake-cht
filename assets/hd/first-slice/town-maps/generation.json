@@ -1,0 +1,1182 @@
+{
+  "schema": "kol-hd-town-maps-generation/1",
+  "decision": "2026-10-16 user selected A position-bound continuous painting",
+  "status": "READY first-city position paintings; formal acceptance pending",
+  "rights": "source-bound HD PNG; private repository only; no public distribution rights asserted",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "maps": [
+    {
+      "archive": "TOWN1",
+      "archive_count": 2,
+      "grid": {
+        "archive": "TOWN1",
+        "index": 0,
+        "source_png_sha256": "a2e96a8921ad70c6a8254ae71fe4273033bfd60ea52efb483a2c57b03a6118f8",
+        "source_rgb_sha256": "7bee019ddc52019547a6ce83bf239925b9faabecef71599f005d67ec55781a09"
+      },
+      "grid_rgba_sha256": "69205759b1167ac3901aca55b61a27072d83da836cd26eca6e60f54ec05f414f",
+      "atlas": {
+        "archive": "TOWN1",
+        "index": 1,
+        "source_png_sha256": "926f97e7a2e019f02d2451b2b63f93ac9900078e20ce9c649d85f27d240365c5",
+        "source_rgb_sha256": "754737d8e0db7d3b9cb92b15497462f3fddfd2cd2eccf771ff81403d169fea2e"
+      },
+      "atlas_rgba_sha256": "43313f86a19387beeab624078623a02e81cd2f1305c0111bc378071f4c57c60a"
+    }
+  ],
+  "regions": [
+    {
+      "id": "town1-r00-c00",
+      "native_sha256": "fe6d7f952a9bacb03095e56f5f01da2882dbff059ec5cb89866c7587556447c1",
+      "native_rgba_sha256": "047b1470f1a917463dc21e1077659a27bd303112928386ebe014ca2cebf4460c",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r00-c00. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. This exact target has no red roof: draw no red-roof houses and never copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition.\n",
+      "prompt_sha256": "8fab5b7f8ae2c60ab032a204bee8bcb0a2c77a518d9c15efe138b488cc312aeb",
+      "reference_sha256": "2ef54c32be032a6cb653c1d627e16c03513b4140ca6be94d131b0c4f0903e197",
+      "source_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "visible_bounds": [
+        0,
+        0,
+        6,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r00-c01",
+      "native_sha256": "ea1beca1124513feec1522e5077103b1eb0d90bee484ed63bec7ee0f33c8d41a",
+      "native_rgba_sha256": "4d5867e64f9ef5b501e287a32a4fb5993078ce0662b3f28438664a1a59a34baf",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r00-c01. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. This exact target has no red roof: draw no red-roof houses and never copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition.\n",
+      "prompt_sha256": "ccd50564f6960861a456025a5beacb1a9e5e2e3c4ea363e75111e50df911eb6d",
+      "reference_sha256": "fc9e05e5a2484e48c2932f639a24972ea2f286381d640debefd1a50dd1b6142b",
+      "source_bounds": [
+        6,
+        0,
+        18,
+        12
+      ],
+      "visible_bounds": [
+        6,
+        0,
+        18,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r00-c02",
+      "native_sha256": "91de10c562895020ae68544d5a15288ccd9713ea4539281ab2e54135314cb20a",
+      "native_rgba_sha256": "f058dc9fbcf8bf8d3021bb45e47c768621e32cb5f4f0e05d3730b449d1543de4",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r00-c02. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition.\n",
+      "prompt_sha256": "c46267e01d669af2684a6f257e666760ef8028810138878b8d37bed10ce97cb4",
+      "reference_sha256": "4efa51b85a3e52a5c4bcb21801254bc45b04c702d523f4b1ef09d259701298b7",
+      "source_bounds": [
+        18,
+        0,
+        30,
+        12
+      ],
+      "visible_bounds": [
+        18,
+        0,
+        30,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r00-c03",
+      "native_sha256": "9a75d63f34b2e9df7d78c70fa6ed7b0f2e2a944341599b9e4d3a210674c5a709",
+      "native_rgba_sha256": "d04edeb1ba58ba35e585c02e371a761dc3cd1a79cf42754edb73e86700788332",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r00-c03. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition.\n",
+      "prompt_sha256": "ed37edfdbbefdd2e6066c7c9e52f322b905bf224cf8bfe7c8a743d8f93af6757",
+      "reference_sha256": "20575309dfeb71c666d9f8ddf00594ad46540bbc3bda8c16663abe4326817f05",
+      "source_bounds": [
+        30,
+        0,
+        42,
+        12
+      ],
+      "visible_bounds": [
+        30,
+        0,
+        42,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r00-c04",
+      "native_sha256": "0f0d63690f05e9b19ec9c6616dcdbafcaeced17dea2151f410d17b4c36b5dc8e",
+      "native_rgba_sha256": "ccc919230277c4d047b97720fd5ada91942dc1b80a9ccf045c0508ec4afc0e34",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r00-c04. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition.\n",
+      "prompt_sha256": "0dd28d0c318250eccd8f57c0a58483d940d9a04d17a3b3b03edb05b6d86cc2f0",
+      "reference_sha256": "8fa84f2131fa161c3d061b121a0a570b23783f3d8baceb0241415b4e1780c4b8",
+      "source_bounds": [
+        42,
+        0,
+        54,
+        12
+      ],
+      "visible_bounds": [
+        42,
+        0,
+        54,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r00-c05",
+      "native_sha256": "6d5a57801055e680858712cd0af6139b14a431374b247d3667dec8e93e7d755a",
+      "native_rgba_sha256": "22f51c725629fca62e1ec9cf7614711c6687a189250a4a54a34b645e2f83e3c8",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r00-c05. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition.\n",
+      "prompt_sha256": "67bf138dffebaf0177c72d062350b3702a7a7aa10712e0b30a9e32390910ea90",
+      "reference_sha256": "ca25ab3d18937a26c97f709fb4a330be7e430dc5e9237024f1251ef6e89562ff",
+      "source_bounds": [
+        52,
+        0,
+        64,
+        12
+      ],
+      "visible_bounds": [
+        54,
+        0,
+        64,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r01-c00",
+      "native_sha256": "4a8c9f58122fdbfd1100098f2479f1ff83b9d78c5a9c29a2791748feeaea2b21",
+      "native_rgba_sha256": "58a4260df8ec242034c38159f6f7c7b2168b0deb1c29fef42ec2bd7bf2df921a",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r01-c00. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. This exact target has no red roof: draw no red-roof houses and never copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition.\n",
+      "prompt_sha256": "c3536d872522dbbf0dcd1f33f261a9e5e97df6f78e751b20d672951c8551dd59",
+      "reference_sha256": "639aa4920354bcf35722fa0cc409f966376be945dcdbb85dd4b78cc5b186470e",
+      "source_bounds": [
+        0,
+        3,
+        12,
+        15
+      ],
+      "visible_bounds": [
+        0,
+        3,
+        6,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r01-c01",
+      "native_sha256": "1d43a54ec275d3178c5bac44ce05c654a80053d16130a524fc9c2a86b3a77219",
+      "native_rgba_sha256": "c53c3907bddfab25e3c44bc53e8554185cb72d5d7295ad726a84e61ce4c265ca",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Edit the first native painting only. Keep its1254x1254 framing, every cliff silhouette, tower, gray curtain-wall, tree, grass, footpath, light, palette and brushwork in the exact same positions. The second image is the exact source geometry. The original source contains NO blue water anywhere. The dark winding blue strip to the LEFT of the tower and wall was invented incorrectly. Repaint only that strip as very dark dry earthy ground and deep cliff shadow, with subtle muted brown gravel texture, not water. Remove all blue water sheen and reflections there. Keep the surrounding cliff boundaries, tower and wall completely unchanged. Do not add any other structures, paths, rivers, moats, props, text, border or grid. Opaque native painting; no geometric resizing or recomposition.\n",
+      "prompt_sha256": "c6f97856ff035b057c7ec7a992d7e2a420562e020dc92aa6247d8a1752461d02",
+      "reference_sha256": "5d9adcd5403e5d6b35e843c5427899d04b6cc5d4379001dcff29b944c5af904e",
+      "source_bounds": [
+        6,
+        3,
+        18,
+        15
+      ],
+      "visible_bounds": [
+        6,
+        3,
+        18,
+        15
+      ],
+      "revisions": [
+        {
+          "replaced_file": "town1-r01-c01-native.png",
+          "replacement": "town1-r01-c01-ground-corrected-native.png",
+          "reason": "Source has no blue water; initial art added water in black cliff-shadow strip."
+        }
+      ],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r01-c02",
+      "native_sha256": "dd0a6a2bbb679433a30f8cde382a02fb8a6f8d06f42deb56a5f0edc50e4f7c63",
+      "native_rgba_sha256": "47a91deef70b1ffe8cb2fc348a1ee5170a4a1f1cee41d306a8ef9224cf824163",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque. The source has cropped gray rocky ridges along the top and upper-right. A white plaster/dark timber building with a red terracotta roof occupies only the rightmost third, from approximately30% to72% of canvas height, and is deliberately clipped by the right edge. Scattered round green bushes/trees and grass fill the left and center. A narrow pale stone footpath crosses near the bottom, with diagonal branches along the lower-left. Keep its exact route. Do not complete the clipped house beyond the source frame.\n",
+      "prompt_sha256": "a5aca9a60a5e0ef5e1294f5b25b3daac1bc8efb482ee410531b564de3ee70058",
+      "reference_sha256": "4edf3b4a0d4c9450dfb064d29cda49a24ac4f815adf49dd5d98ce2ea07be473f",
+      "source_bounds": [
+        18,
+        3,
+        30,
+        15
+      ],
+      "visible_bounds": [
+        18,
+        3,
+        30,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r01-c03",
+      "native_sha256": "54dc54f671d57a2a582d59bc033051a1fd45462515b687732b436bc5a5f82901",
+      "native_rgba_sha256": "8182ceded644305f03d88e03ac0f44fa13691ad54cb776026a887c2ee2e8636c",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque. A long white plaster/dark timber building with a red terracotta roof runs down the LEFT half of the source, starting clipped at the left edge around30% canvas height and ending near78% canvas height. It has the exact repeated roof/dormer and wall geometry shown in the source. Gray rocky ridges are cropped along the top-left and top edge. Green round bushes/trees and grass occupy the right half. A narrow pale stone footpath crosses close to the lower edge and curves up slightly near the right. Follow this precise footprint rather than inventing a detached cottage.\n",
+      "prompt_sha256": "1c21baeea7cdfe17b505dbd154ead2fb2946dfda9d30faf9c3300636b7689028",
+      "reference_sha256": "525e32f426cef92073b6d464fba2ec013eefae806e43cf712c7d48c38413ca14",
+      "source_bounds": [
+        30,
+        3,
+        42,
+        15
+      ],
+      "visible_bounds": [
+        30,
+        3,
+        42,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r01-c04",
+      "native_sha256": "86224a04dd9578b13cecd972d88822406c506a0f10c18d99c86084a2e0f9bb6a",
+      "native_rgba_sha256": "cb0e003b8cbe51a1d013b3a7940b265094a15cfe31eae54c94179e8676e3fd50",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Edit the continuous hand-painted town scene in reference1 to align its building with the exact original map geometry in reference2. Reference3 is only a diagnostic pair with a 12x12 grid; DO NOT draw grid lines, text, labels or side-by-side images in the output. Return ONE square continuous scene matching reference1. Keep the same cross-shaped building, materials, cohesive terracotta tiles, perspective, rocks and vegetation. Correct the building's vertical position: in the current painting the entire cross-shaped building sits about half a map cell too high. Translate the ENTIRE building including main roof, both side wings and wall faces DOWN approximately 55 pixels on the 1254x1254 canvas, about 4.4% of total height. Do not translate the background or cliffs. Then extend the front facade slightly downward so the bottom wall/door threshold aligns near y=1150 to1160 pixels rather than current y=1085. Source map building main-roof upper edge is near y=280 pixels, both wing-roof upper edges near y=585, wing-wall lower edges near y=860, and front wall lower edge near y=1160 on a1254square canvas; preserve these source-aligned landmarks. Main roof is left x~555 and right x~935; left wing begins x~275 and right wing ends x~1200. Use reference2 to preserve source footprint and relative architectural sizes, and reference1 for the exact painting style. Repair ground only where needed when moving the building, keep other objects and source framing steady. No new roads, people, water, signs or architectural features. Maintain crisp playable silhouettes, original source camera, fully opaque native hand-painted detail. No borders, gutters, text or grid. Do not make a new composition or a tile sheet.\n",
+      "prompt_sha256": "6438cb4b9c2e3b3e851f664bc1dba916a1397200ebdeed1f0fd00c74a52f1cb2",
+      "reference_sha256": "e4b3978f5056a036d599dafe871c8bb8438a78a169c5b70a357446bf935fa36d",
+      "source_bounds": [
+        42,
+        3,
+        54,
+        15
+      ],
+      "visible_bounds": [
+        42,
+        3,
+        54,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r01-c05",
+      "native_sha256": "5c1c985b39c112b126e1635215f4231f7af85a4387cbfb1a3d1d0c83678c404f",
+      "native_rgba_sha256": "adc3fef6b5db1662bc043b8e462a947975712fcff5cfec23d2602f6f60161598",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r01-c05. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "96e717bcdda95190ffa70eb06068d2854ea78a19bb71df6b8f82c684c9cebaa8",
+      "reference_sha256": "ae836799f7f70d1e7bc665c4c6bd597e6b98c33ac99780baa98e5f0ae467553c",
+      "source_bounds": [
+        52,
+        3,
+        64,
+        15
+      ],
+      "visible_bounds": [
+        54,
+        3,
+        64,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r02-c00",
+      "native_sha256": "bb8cb9ee89f0a703564f38c9871a30982e6b9fbbd0de84c5fc3a558ea85fba3e",
+      "native_rgba_sha256": "89a2f2416f1ccdb906d1ec47a792aa2ded81c458eb5420ce1a414eb8d5ffd026",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r02-c00. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "bfb84bcf219142d0f454fb054d6a712fd65059a9493631f03b027fb9fd05f034",
+      "reference_sha256": "b726741a4f42cde8ce8f2956439316c2fa251adf9a806720b0cd1aa18940153d",
+      "source_bounds": [
+        0,
+        15,
+        12,
+        27
+      ],
+      "visible_bounds": [
+        0,
+        15,
+        6,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r02-c01",
+      "native_sha256": "026997459aad13b4b4871d1810b5e60cb38516ce35aa0cae7fcb77f563fc6620",
+      "native_rgba_sha256": "8c4bbb1fa8156d71c517e66a1426432fed216b74f9b2db804093fcf6ba564bc8",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The target is the precise source region town1-r02-c01. Preserve every riverbank, stone wall, bridge length, footpath, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures keep their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only in the exact source positions; preserve their clipped footprints and front-wall lower edge, never shorten or move them. Source coordinates0..192 map proportionally to native0..1254; object endpoints and path intersections must remain at the same normalized coordinates. Pay particular attention to structures clipped by any edge and the final visible row; do not shrink a long bridge or building to fit inside the frame.\n",
+      "prompt_sha256": "38318be20477b08ec47b6459608a751f58f9b79738e1f80df439e884888d569f",
+      "reference_sha256": "8bb38d0b4534916b8d9dddf99ee735c4231550cab68f92dccf05e5c1df048be9",
+      "source_bounds": [
+        6,
+        15,
+        18,
+        27
+      ],
+      "visible_bounds": [
+        6,
+        15,
+        18,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r02-c02",
+      "native_sha256": "02f2deb12c02912b88220cdfe4464b95aeb0dd860543108f9d2f7ea0c027ca61",
+      "native_rgba_sha256": "a4982c71763f3fbbe210b3d52ab719bbb1b257a3094f7e6eee0385facbab084d",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r02-c02. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "7cde91d942d96b7ca056168e8665d17ed93240d3ab3fb2a5b4324882bcbaaee7",
+      "reference_sha256": "3b664bcc177e36c8f51a4aa3ab786deffa7a457f2f4a5c6a3c9be29fdb1d46be",
+      "source_bounds": [
+        18,
+        15,
+        30,
+        27
+      ],
+      "visible_bounds": [
+        18,
+        15,
+        30,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r02-c03",
+      "native_sha256": "88786004651b123c2abd430e5f7d1b85201c99180a141cb66eda4341862a062d",
+      "native_rgba_sha256": "3bfd4f43fc076778bd4d9910966947a59875e1566a979ff494796b16bad79832",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r02-c03. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "70ea6ca29ca2b0739ec5771fc9ade99a77eeecd903d9f5cba5d659136a5c2aa9",
+      "reference_sha256": "265f7a7c324d919eca7403474bcda533c3aeae18903607d909e3d08dd686ccfe",
+      "source_bounds": [
+        30,
+        15,
+        42,
+        27
+      ],
+      "visible_bounds": [
+        30,
+        15,
+        42,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r02-c04",
+      "native_sha256": "f5994935414de1725d3b1be7c0fb0668c9a1b496744346e2e381da360f16b03b",
+      "native_rgba_sha256": "0d7cc0348a4bfac5f3327630bfe2d5796c8e4a8c7efef3ade56058e5c6879f57",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The target is the precise source region town1-r02-c04. Preserve every riverbank, stone wall, bridge length, footpath, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures keep their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only in the exact source positions; preserve their clipped footprints and front-wall lower edge, never shorten or move them. Source coordinates0..192 map proportionally to native0..1254; object endpoints and path intersections must remain at the same normalized coordinates. Pay particular attention to structures clipped by any edge and the final visible row; do not shrink a long bridge or building to fit inside the frame.\n",
+      "prompt_sha256": "1c5a1041682c6e59e5ae24143b9581e4f26eda33b80d3a2def2144776ec36297",
+      "reference_sha256": "54b02f25431f37ef8346905f946704256620b99a6195640b55ec3348b3e5a954",
+      "source_bounds": [
+        42,
+        15,
+        54,
+        27
+      ],
+      "visible_bounds": [
+        42,
+        15,
+        54,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r02-c05",
+      "native_sha256": "cac24a323868dc2b6207f4c8a5912ca778ade7e3489f2f5e6982d2bd3d25897d",
+      "native_rgba_sha256": "429310d85ef0ae01c3dcb0281502c22b72c33958b220f739b5e250a8f94219a4",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r02-c05. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "b28a6aea9c71a274499214764e98efaa3768abb020339edd5bcd4d8f404316cf",
+      "reference_sha256": "4f4a95488c516f8e6ca7ea831866b1a6681867050c962e8a72c1ec23818eefab",
+      "source_bounds": [
+        52,
+        15,
+        64,
+        27
+      ],
+      "visible_bounds": [
+        54,
+        15,
+        64,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r03-c00",
+      "native_sha256": "347f125937a00da178048b99e1dcd9353bbd3be62b7f96de9fd208598061d6cb",
+      "native_rgba_sha256": "12e4db66dd27e42eef99e2be9d2c01d603e53c5a3b0db2130d935bce5e5722d7",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r03-c00. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. This exact target has no red roof: draw no red-roof houses and never copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "33f0b2d72d05820570abc0b07aa8801c59f655b182057b2f0be8a9a1991484f4",
+      "reference_sha256": "b6ce7831ef762d4a27edbda6e8f9301fc411ec60bf063825f2cfc88314a72621",
+      "source_bounds": [
+        0,
+        27,
+        12,
+        39
+      ],
+      "visible_bounds": [
+        0,
+        27,
+        6,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r03-c01",
+      "native_sha256": "6ecd5059a90cf07622cafea05b12b9fc41455a02f77f57e37b80af619ebb22a4",
+      "native_rgba_sha256": "7eae81061e34f47ddd63d276264846b962df31f2e001d2e593bf965a3b92d5e4",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Correct the first1254-square native painting's bridge and southern riverbank using the second reference, the exact source192x192 image enlarged to768. Keep the same framing and all unrelated tree and building details. The central-left vertical bridge is currently too short at the bottom. Its outer footprint must match source x48..92 and source y32..176 of192, corresponding approximately x314..601 and y209..1150 of1254. Keep its simple straight brown planks with parallel gray stone side rails. Extend its lower deck and rails to source y176. The southern stone approach path begins only AFTER y176. Move the local southern blue-water/land boundary to its corresponding source positions rather than stopping the river and bridge one or two cells early. Northern endpoint stays at source y32. The tiny clipped house at top-left remains clipped; add no new buildings. Preserve all source framing, tree/grass silhouettes, bank contours, scale and style. No text, grid, border, props, extra bridge supports or unrelated recomposition. Opaque native art.\n",
+      "prompt_sha256": "848343255c9c9c2fc9900847b19aa6a06996faab18e38c96ec4630b19c770a2d",
+      "reference_sha256": "f5067ecef3bd9a5464c451fff56f1d01dc41426b4affc611b089f2c68371e6d1",
+      "source_bounds": [
+        6,
+        27,
+        18,
+        39
+      ],
+      "visible_bounds": [
+        6,
+        27,
+        18,
+        39
+      ],
+      "revisions": [
+        {
+          "replaced_file": "town1-r03-c01-native.png",
+          "replacement": "town1-r03-c01-bridge-corrected-native.png",
+          "reason": "Original source bridge extends through row11; initial native shortened the lower endpoint."
+        }
+      ],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r03-c02",
+      "native_sha256": "356beea6f9333221e3e60e8c64a71409872d023162879b440fcc82e21ecacbfc",
+      "native_rgba_sha256": "2b08e8620da5beca3cef02668326c89bc7b58c27b6ac81162ae23079105581b1",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque. The source shows a cropped gray crenellated fortified structure. Two square gray turrets lie near the center-left at the top and lower-middle, linked by gray stone walls. A large ochre-brown rectangular planked/slotted interior surface extends from those turrets to and beyond the RIGHT edge. Keep this exact simple brown surface and rectangular silhouette, with no new rooms, buildings, roofs, soldiers, furniture or courtyard objects. Blue water is along the leftmost edge and lower-left corner, with an irregular green vegetated bank between the water and gray structure. Preserve every cropped wall, turret and brown-surface boundary exactly. Do not copy the large red-roof house from style reference.\n",
+      "prompt_sha256": "bc114c8976d7f5c5c6dd1054f04c7bcc784040af89c5bcf0306fdfcd9d1836b2",
+      "reference_sha256": "8b20d2ffd5169861afdc04d79eb333628bf2428905cf523fb54282de5f54b494",
+      "source_bounds": [
+        18,
+        27,
+        30,
+        39
+      ],
+      "visible_bounds": [
+        18,
+        27,
+        30,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r03-c03",
+      "native_sha256": "a2838817388b1a00a575fe7f0e3104b563bd16b697b312f9784940eb39ead31a",
+      "native_rgba_sha256": "0035b34d49cccfad7ea2cdd9301c5e74cb17fa6da0f1e364666cd035d6b277c9",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The target is the precise source region town1-r03-c03. Preserve every riverbank, stone wall, bridge length, footpath, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures keep their simple brown surfaces and gray borders without new props. This exact target has no red roof: do not draw any red-roof houses or copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254; object endpoints and path intersections must remain at the same normalized coordinates. Pay particular attention to structures clipped by any edge and the final visible row; do not shrink a long bridge or building to fit inside the frame.\n",
+      "prompt_sha256": "e27658e4308d95be7d36c92860d64535d857d9b2e954e35652517bd605c97fff",
+      "reference_sha256": "e6804810184378fbc69418f28f2a98096a74fe1c15e4c4aad4313d3a808a668f",
+      "source_bounds": [
+        30,
+        27,
+        42,
+        39
+      ],
+      "visible_bounds": [
+        30,
+        27,
+        42,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r03-c04",
+      "native_sha256": "abc63833217d9006ee87718cbfc8f785cd73e9f5d09959c8d1e67e466280ee2a",
+      "native_rgba_sha256": "ba11dac72bdcdd102410d21d2137a7fc950c9ee2e19ff088399161845ef6b2dd",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r03-c04. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "36621bff0957cb3c9882b50e4300f2844dcb198f28bea679cf40938b398ab4b3",
+      "reference_sha256": "75d822df0d5a635b294ef44c32f7b3a4dcaadd5377dd8f6948a43da55e9d5b0a",
+      "source_bounds": [
+        42,
+        27,
+        54,
+        39
+      ],
+      "visible_bounds": [
+        42,
+        27,
+        54,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r03-c05",
+      "native_sha256": "2c84021efb950f37ef0681811322e4d8c1a1504627f737d52dd98ca22c8bf441",
+      "native_rgba_sha256": "38ffe390b928d59a249dcebb89f66104a2347adf74ab74dc57cdcf1f849cae5b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r03-c05. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. This exact target has no red roof: draw no red-roof houses and never copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "18cc64627db184cd6f887d79955af9f62a7ccd4865a5f29712da12adda10650d",
+      "reference_sha256": "02b2f2c6c220cee74444508d4ae0b8429b2780edc8fc9683a61f6817b75342b8",
+      "source_bounds": [
+        52,
+        27,
+        64,
+        39
+      ],
+      "visible_bounds": [
+        54,
+        27,
+        64,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r04-c00",
+      "native_sha256": "9bab3f909ab6fb2dc232078ef52756706b8faf5b53f836b2adc89ba9bc57b143",
+      "native_rgba_sha256": "87566d5026aba0c1c6d19166b778172553adf1e95a9cecc79805c570bb99060a",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r04-c00. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. This exact target has no red roof: draw no red-roof houses and never copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "12c5e30dd912c0484a772fe5ae9ef7f6220bb4af55f067290ee481bdd4cb6953",
+      "reference_sha256": "8b6225091e2727be3fedd10678235efef547aea1a6264a3bbbe2f57f443388df",
+      "source_bounds": [
+        0,
+        39,
+        12,
+        51
+      ],
+      "visible_bounds": [
+        0,
+        39,
+        6,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r04-c01",
+      "native_sha256": "5e3dd2fcd90cbcea2e4af0a1f7d173ec2321a0c67783168ff3aaba29b7d0487f",
+      "native_rgba_sha256": "77ed982e195407a31ad963ea69ad13ac2fcb0f77ba2f3ee0faab8b660650dc7c",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r04-c01. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "937defcc0b6ba8e981f0cefbe472905d202c060757c2b08923a8b54b1e095a8c",
+      "reference_sha256": "8c57ee8ebe95ba78aa9d019a661101456d04b7f4bef39f430ca0943873708ef0",
+      "source_bounds": [
+        6,
+        39,
+        18,
+        51
+      ],
+      "visible_bounds": [
+        6,
+        39,
+        18,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r04-c02",
+      "native_sha256": "9e9d64cfd3188ad0fc88c3858c00bd57e92d959cf6529d0810e2576c10fe80b7",
+      "native_rgba_sha256": "f329e7fe9b5e8f23c4e6049c93e49298f0575382c2ca00dd7d7802e671943bae",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Correct the geometry of the first continuous native painting using the second image, the exact192x192 source enlarged to768. Keep the same1254-square camera framing, native hand-painted style, colors and every unrelated object. The vertical bridge on the far right is too short. It must retain the exact original footprint: outer gray bridge spans source x144..188 and source y32..176 of192. In the1254-square output this means approximately x941..1228 and y209..1150. Keep it straight vertical, same width; extend the deck and parallel gray side rails to the correct lower endpoint, without adding arches or new props. The southern approach path starts AFTER source y176, not earlier. Respect the same source position of the clipped red-roof building near the bottom left: its roof starts near source y156 and continues below the bottom edge; do not pull it upward to show it completely. River shoreline follows source blue/land boundaries. No invented building, waterway, bridge, labels, text, grid, border or margins. Newly painted native details, fully opaque.\n",
+      "prompt_sha256": "529c8a94ec01461392389542ee3b7b3b1f7cad567c05dd56a69c8baa38c7a957",
+      "reference_sha256": "229fa7c86f7cd5e43f2218a4ebc2a4d5b45affb0c975414ae97c3ffc7c8f3d04",
+      "source_bounds": [
+        18,
+        39,
+        30,
+        51
+      ],
+      "visible_bounds": [
+        18,
+        39,
+        30,
+        51
+      ],
+      "revisions": [
+        {
+          "replaced_file": "town1-r04-c02-native.png",
+          "replacement": "town1-r04-c02-bridge-corrected-native.png",
+          "reason": "Original source bridge extends through row11; initial native shortened the lower endpoint."
+        }
+      ],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r04-c03",
+      "native_sha256": "f376146d14ff6a6405b71ea7d2e06d511af16c4dcfaaebb9819c7dd03779a5f3",
+      "native_rgba_sha256": "6add7e8305f153b1533b3a4d8da20b4721f240fbe28f1ed9a46d8861933cc9ac",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The target is the precise source region town1-r04-c03. Preserve every riverbank, stone wall, bridge length, footpath, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures keep their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only in the exact source positions; preserve their clipped footprints and front-wall lower edge, never shorten or move them. Source coordinates0..192 map proportionally to native0..1254; object endpoints and path intersections must remain at the same normalized coordinates. Pay particular attention to structures clipped by any edge and the final visible row; do not shrink a long bridge or building to fit inside the frame.\n",
+      "prompt_sha256": "38ab7d21af129fa24ed52d1dd93e52fa6f756b5204845420c7691d9a3a06d001",
+      "reference_sha256": "08fad99a66cb55e2370645edcf81825b315c42bfac9b4b82a3bffdcb73b4689b",
+      "source_bounds": [
+        30,
+        39,
+        42,
+        51
+      ],
+      "visible_bounds": [
+        30,
+        39,
+        42,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r04-c04",
+      "native_sha256": "45679ef3c0ebcebb4c281cf079c2dd0e4853dd1420f7806680e6cf1706f71e08",
+      "native_rgba_sha256": "7dd5de447e5fa091493fb68a4e46cfc449824475b60972dfebcaecc9bb7c56f4",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r04-c04. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "cc61395efd6f1bb97763a5cc49b5835077c6227457ce380cd3a217cbf06e9146",
+      "reference_sha256": "d2c3026b55ab049d612fcaf32cb1a0ffcd98e8cf5681c7ea27d604be0bd4bd71",
+      "source_bounds": [
+        42,
+        39,
+        54,
+        51
+      ],
+      "visible_bounds": [
+        42,
+        39,
+        54,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r04-c05",
+      "native_sha256": "f7e1b181fe4e13115b22a6a480717f5ec1501e384750184c6e92f27dd5045a27",
+      "native_rgba_sha256": "e3af1b51f13c817f285891adc1612bb1a0b8018b52af916f204fd381d173884e",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r04-c05. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "c2c9b57a6ac1153530e13734ba66a653c5389571426a4c56668bbfba05d928b3",
+      "reference_sha256": "604ff8724f76d5310084e0d6910bb0a037c86221a2af39946cda78bdf370b289",
+      "source_bounds": [
+        52,
+        39,
+        64,
+        51
+      ],
+      "visible_bounds": [
+        54,
+        39,
+        64,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r05-c00",
+      "native_sha256": "74da4e5846b5cd69b58c7f261d80f7d829fcfd974eac7c0f82e3380b170a7dd5",
+      "native_rgba_sha256": "16d6a533f967f105cc6d1541c1c9805003a75e5bb4ced1071f1e8f7ec4fc940b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r05-c00. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "01888f05636cc59b9b33d04354a6b4e65df72b3b3ed09f9805ee1e241ca142d6",
+      "reference_sha256": "ec8e8a1d94fb2aa9e94cc99f26582597c1b13e2f5d0098b9126f5bdc1422fcaa",
+      "source_bounds": [
+        0,
+        51,
+        12,
+        63
+      ],
+      "visible_bounds": [
+        0,
+        51,
+        6,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r05-c01",
+      "native_sha256": "7d169062528d1bef20613f0065997dc40eaba7211685ee991f675db28652989a",
+      "native_rgba_sha256": "1c1eaccc5b110bdcfec0b16a830b716eebc22605bdd79047aac2db7dd53ceb5d",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r05-c01. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "6617d366b965e13da2ef39d1762d1e04f40f0c9b3be2d29f2ddc6e5707551012",
+      "reference_sha256": "0a0659cbfee659a9e5afb2c13409de51148c24a09b67b7bc9a25f7acd2479721",
+      "source_bounds": [
+        6,
+        51,
+        18,
+        63
+      ],
+      "visible_bounds": [
+        6,
+        51,
+        18,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r05-c02",
+      "native_sha256": "4ea170c559f726bbb5a6a3421adcd3848d47d738f2266a84659db6a5601afab8",
+      "native_rgba_sha256": "423faa03a894b0ead771033219f84c3da3bd45237bab1b8f66e394c9bc300a9b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r05-c02. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "93ce73b7a79bd8c868e6387ad2d18077635ea16cee957616431113ad3a210334",
+      "reference_sha256": "5846dc2de10002fce8c95f4bbdb2d3c5b17cfe9990e0275ae89ea8f99689ac59",
+      "source_bounds": [
+        18,
+        51,
+        30,
+        63
+      ],
+      "visible_bounds": [
+        18,
+        51,
+        30,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r05-c03",
+      "native_sha256": "5989f7d6fdad26aedff1c662d8bcc4485c6c31fe6805972afd617e14c93968c1",
+      "native_rgba_sha256": "1556bb177a352ee3d487866227edb40b03a30235ab784f134692d5ff42fd6e26",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r05-c03. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "1139d7508031dc3f08689311af3d6b36ab6af8c47ecbb004db4a03c1dd2ed649",
+      "reference_sha256": "930edfe621ecd78497c98119c3823430eff0a4b431e53c171e8469e4be4dedaf",
+      "source_bounds": [
+        30,
+        51,
+        42,
+        63
+      ],
+      "visible_bounds": [
+        30,
+        51,
+        42,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r05-c04",
+      "native_sha256": "3de71ab7eaf2f8c43d082d15db9e4a0b0f2cb6bfd9a28e96edd750069b0aa918",
+      "native_rgba_sha256": "3d43a62a93807ced1aebfa060506acf958c711a4b12f64796a8eb9c6d651459b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r05-c04. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "aa0304667a61c7d387aa5b56af24d77d0d928c89db1b1cbf048757dfd693989a",
+      "reference_sha256": "09c0cdcb33b5fb2cb53f347ab1db9fa0f54d8ce2bc57c18baf2f95d510c80942",
+      "source_bounds": [
+        42,
+        51,
+        54,
+        63
+      ],
+      "visible_bounds": [
+        42,
+        51,
+        54,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r05-c05",
+      "native_sha256": "cfa60a2d68b5fa2871c94860759eb50645cb9bc9481e5c9354909f0e538360de",
+      "native_rgba_sha256": "b6f0f31e34716138618e2abf4dfcc0a25f67cc053c330b00439e94a3892c54f5",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r05-c05. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "9c49e597931b6ea9e8d85a237d06542f5ff088a3b73e77757853e604dc511ee1",
+      "reference_sha256": "2713486041b4ac9c5f7fc2422ec83998ce5a180201fbb3c9cef669a1a1ad755f",
+      "source_bounds": [
+        52,
+        51,
+        64,
+        63
+      ],
+      "visible_bounds": [
+        54,
+        51,
+        64,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r06-c00",
+      "native_sha256": "12f1acbe79480de807679f8889c7736a9967bb4a61805572cbf5a4b804f7bea3",
+      "native_rgba_sha256": "2f59340b76dcf62ac958f3ecef6634ba63d9bf63dde6568658acc7f68f05dd8c",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r06-c00. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "e437b31ec66557ca0138839434eed6c4180732a56e440fccb1214c3f2663ed74",
+      "reference_sha256": "7889980892026eb036c798787d727f0f043b8716a71cdc7ce669963262275a8e",
+      "source_bounds": [
+        0,
+        52,
+        12,
+        64
+      ],
+      "visible_bounds": [
+        0,
+        63,
+        6,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r06-c01",
+      "native_sha256": "7cfd802a3d6dd78622dcb414149e8b0df3943ecde5895bb7b67fe523e42fb097",
+      "native_rgba_sha256": "a12149655ad1ed821198ef349ce2164f1614e44d6dc32da8287baa1d364daa79",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r06-c01. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "c62480943af94f650acac22d8e5ecf83f1bf90673f82e0762826104ce06e7554",
+      "reference_sha256": "8adcd62cd6770ccc94ffb0cdb7e152a7bdec62200fd97e66ce730dc70a376995",
+      "source_bounds": [
+        6,
+        52,
+        18,
+        64
+      ],
+      "visible_bounds": [
+        6,
+        63,
+        18,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r06-c02",
+      "native_sha256": "2520a5e1a3c628fe3a9b218f301260f67da905ff21588ff62baa0515f93c19e8",
+      "native_rgba_sha256": "bfefceff44ddfbe299f9b7a75c9f61002b95b9ed145ea7c8a9f31c82ac55f7a7",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r06-c02. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. This exact target has no red roof: draw no red-roof houses and never copy the style-reference house. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "01f32c241eb09f768632f960e3dda0fce109de2b39f9216979179926c64b5ddb",
+      "reference_sha256": "59b3951090312c9379d21c272191bbfa96057a7a7f598bf8fcd4f04a2723fcb9",
+      "source_bounds": [
+        18,
+        52,
+        30,
+        64
+      ],
+      "visible_bounds": [
+        18,
+        63,
+        30,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r06-c03",
+      "native_sha256": "496d41985292e06a72154b94f02c03c5a53e397d70e238dcd187b2b628941b90",
+      "native_rgba_sha256": "393f94df09644ebb9e34e7be9e2ac5afa63a0f384aadc90da6425550ae2d96a2",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r06-c03. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "f7c906eb90ede61dd8c3d902183c2856dffb6d7b3a082f78ef5863a5526ac325",
+      "reference_sha256": "dfb9b842b318ef2490fdeeb490a5b4494ce609243513977d9b8224c4860ff58f",
+      "source_bounds": [
+        30,
+        52,
+        42,
+        64
+      ],
+      "visible_bounds": [
+        30,
+        63,
+        42,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r06-c04",
+      "native_sha256": "705a09989cf47b93f1db0e5a309984f2210c79e0f4589ff188021b73a877afea",
+      "native_rgba_sha256": "d2f290076b1d60000d60346418af9d9a91e3c2236956df753bfdfdddabef0e46",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r06-c04. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "686460d05e13b42ae3f34a49786b0d00af73e75b0592100a54e9ac5be826ac4e",
+      "reference_sha256": "d4c1cc638628fbc44f5139044f44d0d78c990cb3c63b2a0eaff6f183fac801b1",
+      "source_bounds": [
+        42,
+        52,
+        54,
+        64
+      ],
+      "visible_bounds": [
+        42,
+        63,
+        54,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town1-r06-c05",
+      "native_sha256": "8c1fc6bef64592a5e9842bd0eb29cd24448732effa65cd312bea3f7615bda055",
+      "native_rgba_sha256": "cfcc0deb055b2483076a022f964d557f692f505ebcc5debdc40abc860394a9a1",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint ONE coherent continuous HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is ONLY the user-selected continuous painting style: fine restrained brushwork, consistent terracotta, gray stone, white plaster/dark timber, small rounded green canopies and grassy ground. DO NOT copy its cross-shaped building layout into this different scene. Follow the first source image's camera, framing, silhouettes, relative coordinates, paths and boundaries strictly; the painting will be sampled by the unchanged underlying12x12 map-cell coordinates, so shifting any major object by a map cell is unacceptable. Keep partial structures clipped by the frame exactly as the source. Newly paint native details, no old pixel upscale. Keep ground and roof materials continuous across imaginary cell boundaries; this is NOT a tile sheet or collage. Black source pixels express deep shadows/separation; retain dark footprint edges with natural vegetation shadows, not rectangular black holes. No grid, labels, text, border, gutters, UI, people or added props. Fully opaque.  The exact target is source region town1-r06-c05. Preserve every riverbank, stone wall, bridge length, footpath intersection, building footprint, cliff and tree position exactly as the source. Brown planked/slotted structures retain their simple brown surfaces and gray borders without new props. Red roofs and white timber faces appear only at the exact source positions. Preserve their clipped footprints and front-wall lower edges; never shorten or move a building to fit the frame. Source coordinates0..192 map proportionally to native0..1254. Object endpoints and intersections must keep the same normalized coordinates. Pay particular attention to all clipped edges and final rows: do not shrink a bridge, wall or building to show it completely. Paint only the source framing, not a prettier new composition. Water is present only in source blue areas. Where the source contains no blue, do not introduce any water, moats, canals or blue shadow paths.\n",
+      "prompt_sha256": "d5a89e28aeac5bed6ed03799c7a512ac88eef655db18949a6c638d547fc43465",
+      "reference_sha256": "6c0ba983414aac0d10efaf89c82ebed2ce65ef31e121b9b09cd84b7424af0a94",
+      "source_bounds": [
+        52,
+        52,
+        64,
+        64
+      ],
+      "visible_bounds": [
+        54,
+        63,
+        64,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    }
+  ],
+  "evidence": "101 prepared scenes404 frames; bridge revisions23 scenes92 frames; typed doors and map/Chinese/F10/save contracts verified. Hand-painted interpretation, not original pixel parity."
+}

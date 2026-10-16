@@ -1,0 +1,92 @@
+{
+  "schema": "kol-hd-town-maps-verification/1",
+  "screenshots": {
+    "map-north-ega.png": {
+      "sha256": "328c0d6e2963e23caeac8b3df86608ded86d855628f10af1651ce4aef55f4f95",
+      "size": [
+        960,
+        600
+      ],
+      "case": "camera-47-11",
+      "variant": "candidate-ega",
+      "state_sha256": "606bddfa7ba70152bacb44033d3cc9a5af3e31b133c6271288d8272954db77e1",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "producer": "formal Go/Ebitengine renderer; Linux Docker",
+      "rights": "private GitHub validated original-derived runtime screenshot PNG; no public distribution rights asserted",
+      "original_DOS_oracle": false
+    },
+    "map-north-hd.png": {
+      "sha256": "341b9b2b6df0d2f24713baee87c74fec329b4afc0a5e8ffc9d02fd5f5cd4c124",
+      "size": [
+        1920,
+        1200
+      ],
+      "case": "camera-47-11",
+      "variant": "candidate-hd",
+      "state_sha256": "606bddfa7ba70152bacb44033d3cc9a5af3e31b133c6271288d8272954db77e1",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "producer": "formal Go/Ebitengine renderer; Linux Docker",
+      "rights": "private GitHub validated original-derived runtime screenshot PNG; no public distribution rights asserted",
+      "original_DOS_oracle": false
+    },
+    "map-castle-ega.png": {
+      "sha256": "f2e02a78127f0d1e895889b0a863b5063866be0e20dcf098f8d447d116f7af54",
+      "size": [
+        960,
+        600
+      ],
+      "case": "camera-23-29",
+      "variant": "candidate-ega",
+      "state_sha256": "3f6256297e495ed071ba37a44dd17049340c64cb4fa667836582180254c956ff",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "producer": "formal Go/Ebitengine renderer; Linux Docker",
+      "rights": "private GitHub validated original-derived runtime screenshot PNG; no public distribution rights asserted",
+      "original_DOS_oracle": false
+    },
+    "map-castle-hd.png": {
+      "sha256": "de3c1c75fe1f674476b86ba819f577359e11bc492c8bee5f4eb91a3d15dd042f",
+      "size": [
+        1920,
+        1200
+      ],
+      "case": "camera-23-29",
+      "variant": "candidate-hd",
+      "state_sha256": "3f6256297e495ed071ba37a44dd17049340c64cb4fa667836582180254c956ff",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "producer": "formal Go/Ebitengine renderer; Linux Docker",
+      "rights": "private GitHub validated original-derived runtime screenshot PNG; no public distribution rights asserted",
+      "original_DOS_oracle": false
+    },
+    "map-bridge-ega.png": {
+      "sha256": "470e5c96501d4b121f33f580a2c8538570de88c5eaaadb1b24c80bb62309aa04",
+      "size": [
+        960,
+        600
+      ],
+      "case": "camera-23-47",
+      "variant": "candidate-ega",
+      "state_sha256": "4db0ceac1d7dba9b485a5cc752db120f6d94c45845fea31f226142f171489c36",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "producer": "formal Go/Ebitengine renderer; Linux Docker",
+      "rights": "private GitHub validated original-derived runtime screenshot PNG; no public distribution rights asserted",
+      "original_DOS_oracle": false
+    },
+    "map-bridge-hd.png": {
+      "sha256": "ba87d285de8e8e3fa34620015b47d03136ca95113d6b983236f136a80d169cea",
+      "size": [
+        1920,
+        1200
+      ],
+      "case": "camera-23-47",
+      "variant": "candidate-hd",
+      "state_sha256": "4db0ceac1d7dba9b485a5cc752db120f6d94c45845fea31f226142f171489c36",
+      "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+      "producer": "formal Go/Ebitengine renderer; Linux Docker",
+      "rights": "private GitHub validated original-derived runtime screenshot PNG; no public distribution rights asserted",
+      "original_DOS_oracle": false
+    }
+  },
+  "program_sha256": "a55bfa4d3669b2403edee3e2629b7c51da70f222cd921bdb7a4e0d81b82ab5f1",
+  "source_index_sha256": "7e0415bc4365b4983a65e8f68cac2a05421d4d24c42be3e61113d7c75f551515",
+  "evidence": "controlled remake same-state EGA/HD; no original parity claim"
+}

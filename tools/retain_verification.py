@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-town-maps-20261016',
     'hd-town-crests-20261015',
     'hd-town-facades-20261015',
     'hd-monsters-20261015',
@@ -141,7 +142,8 @@ def archive(name):
             omitted[path] = files[path]
     retained = {k: v for k, v in files.items() if k not in omitted}
     dest.mkdir()
-    with tarfile.open(dest / 'evidence.tar.xz', 'w:xz', preset=3) as packed:
+    # source_files已拒絕符號連結；硬連結各存一般檔，符合verify的逐檔契約。
+    with tarfile.open(dest / 'evidence.tar.xz', 'w:xz', preset=3, dereference=True) as packed:
         for path in retained:
             packed.add(source / path, arcname=path, recursive=False)
     # 小型入口可直接閱讀；完整紀錄及歷史腳本只保存一份壓縮副本。

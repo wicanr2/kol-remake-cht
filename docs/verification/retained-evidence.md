@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| 第一城連續手繪地圖、A／B選案與完整原型 | [正式驗收](hd-town-maps-runtime-20261016.md) | [保存清冊](local/hd-town-maps-20261016/retention.json)；完整模型、v3及失敗只留本機 |
 | 七城102張NPC、四坐騎及完整組正式接入 | [正式驗收](hd-npc-mounts-runtime-20261015.md) | [保存清冊](local/hd-npc-mounts-20261015/retention.json)；完整樣本、v3與GUI狀態只留本機 |
 | 完整物品／隊伍、裝備原型及正式接入、68圖示 | [正式裝備驗收](hd-equipment-runtime-20261015.md)與[圖示驗收](hd-actions-runtime-20261015.md) | [保存清冊](local/hd-equipment-pages-20261015/retention.json)；完整模型與原錨點只留本機 |
 | 全畫面HD盤點、原版七段事件與第0段手繪候選 | [盤點及事件比較](hd-completion-20261014.md) | [保存清冊](local/hd-completion-20261014/retention.json)，107檔與兩份可重建執行檔雜湊；候選待確認 |
@@ -464,3 +465,11 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 本機保存清冊位於`local/hd-town-crests-20261015/retention.json`。沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town-crests-20261015`；`delete hd-town-crests-20261015`逐檔核對後只清理本批，地圖工作區保持。完整重生沿本批`verify.sh`及正式驗收頁的鎖版工具鏈與掛載契約。
 
 本批保存360份檔案，四份可重建程式只留雜湊；290010634 bytes壓縮為151506540 bytes，SHA-256為`ccb0a855318421fe59aa7921b57600d1704d560dd3813286c9fe4fe4c7b1dd4b`。已在獨立唯讀容器逐檔驗證。新清冊原沿用工具的舊日期，已單獨修正為2026-10-16；壓縮檔與原封存收據保持。
+
+## 第一城連續手繪地圖HD正式接入
+
+[正式驗收](hd-town-maps-runtime-20261016.md)保存417份Go／module、436份HD資產、正式23場景92畫格、552漢字、12個F10事件與保存相容結果。完整原型101場景404畫格、兩橋修正版23場景92畫格、A／B選案、圖塊接縫失敗、跨程序字形一色階及工具環境紀錄分開保留。原始生成PNG、完整模型、v3與GUI狀態只留本機。
+
+保存清冊位於`local/hd-town-maps-20261016/retention.json`。沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town-maps-20261016`；`delete hd-town-maps-20261016`逐檔核對後只清理本批。正式重生沿[第一城驗收頁](hd-town-maps-runtime-20261016.md)的固定來源、鎖版工具鏈及原腳本名稱，支援範圍限Linux Docker。硬連結以獨立一般檔封存，符號連結仍拒絕；暫存來源別名已移除並保存重建方法。
+
+本批保存1667份檔案，11份可重建程式只留雜湊；原1731586218 bytes壓縮為1253807628 bytes，SHA-256為`48966f91f9343c2f0f310c96c8d62a14ab347b9707cb2e1ed2d7b63935a8b305`。已在獨立唯讀容器逐檔驗證；原A／B選案頁及六張對照圖片另保存可閱讀入口。

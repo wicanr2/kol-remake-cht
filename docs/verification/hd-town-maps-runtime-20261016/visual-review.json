@@ -1,0 +1,42 @@
+{
+  "status": "PASS limited first-city visual review",
+  "method": "manual source/painted whole-city rows and actual full game canvases;16 typed door coordinate diagnostic pairs",
+  "source_map_and_rules_unchanged": true,
+  "reviewed_files": [
+    "position-city-row0-diagnostic.png",
+    "position-city-row1-diagnostic.png",
+    "position-city-row2-diagnostic.png",
+    "position-city-row3-diagnostic.png",
+    "position-city-row4-diagnostic.png",
+    "position-door-art-1.png",
+    "position-door-art-2.png",
+    "position-door-art-3.png",
+    "position-door-art-4.png",
+    "position-city-runtime/camera-11-05-candidate-hd.png",
+    "position-city-runtime/camera-23-29-candidate-hd.png",
+    "position-city-v2/position-city-runtime/camera-23-47-candidate-hd.png"
+  ],
+  "resolved": [
+    "invented dark blue moat corrected to dark earth",
+    "short west and south bridges revised and affected views retested"
+  ],
+  "limits": [
+    "hand-painted interpretation, not original pixel geometry parity",
+    "original EGA walking marker retained",
+    "other towns and world map are separate open groups"
+  ],
+  "files": {
+    "position-city-row0-diagnostic.png": "af8b22e5ef6530045918a5084e76cc8c46f2a26e1ba7a1cbe9b3a1e178250daa",
+    "position-city-row1-diagnostic.png": "92a4bc274e2adbd8c97197b9fadc5c440f715dbba2412933b883be9e49d6224f",
+    "position-city-row2-diagnostic.png": "b181f4cb363cdfba016a2eb4c23822027af7b275e4ef4c15800f056eaa970c54",
+    "position-city-row3-diagnostic.png": "7d4e73cc7454add140cc546474cb37e98c32f06b3b6717e82970106d3e90f25a",
+    "position-city-row4-diagnostic.png": "4df5b2417cd374fa3e90a490b35aac977d56a3790e14de9b617ddc11e459c5d6",
+    "position-door-art-1.png": "3ac4c085f83fb38d6c4a2f28282a4fb777691a58efe601bf9f949bd02a1ffa3a",
+    "position-door-art-2.png": "2822742e708b9a57d24cb0cc5b2329e654b039ce17b50343e8bde4e4cc20c5c5",
+    "position-door-art-3.png": "b1f5916572f1f0342fdf794a473fc678a09b1b09af7725470641f8234bf87965",
+    "position-door-art-4.png": "130f69acbd784661fa568e26f1267c15d866fda42d6c99cd17806cca87c173ee",
+    "position-city-runtime/camera-11-05-candidate-hd.png": "73886acec9d18a590b25b714b6a6563b0620ef802b5c12f89d02ae58f1a80db9",
+    "position-city-runtime/camera-23-29-candidate-hd.png": "4f2edb5c71b4c702b923fa56f4bd5518ff2b2621ffdd29f5644e6c5c5154b105",
+    "position-city-v2/position-city-runtime/camera-23-47-candidate-hd.png": "d7c0f60d569520d7b96a0b9114929b3b5f7edeb06cb02fb520dc09ff9fdcbd2f"
+  }
+}

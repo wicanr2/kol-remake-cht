@@ -205,6 +205,18 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [七組比較](docs/verification/hd-town-crests-runtime-20261015/review.html)另含樹木、城門、雙色紋章與保留的霍布城。
 七城中文與圖形已核對，F10可在同一場景切換；兩種視窗的鍵鼠、完整城鎮狀態與v3存讀檔已驗。來源及限制見[正式驗收](docs/verification/hd-town-crests-runtime-20261015.md)。地圖、戰場、天候及其餘HD工作繼續。
 
+### 開發版：第一城連續手繪地圖
+
+第一城已依原地圖位置呈現連續手繪，涵蓋城牆、街區、城堡與河橋。F10可在同一場景切換，隊伍與保存保持。下方為正式重製程式的同狀態比較，尚未納入現行發行包；走路標記與其餘城鎮、世界地圖仍待HD化。
+
+| 重製中文 EGA | 正式 HD |
+|---|---|
+| ![第一城北側街區EGA](docs/verification/hd-town-maps-runtime-20261016/map-north-ega.png) | ![第一城連續手繪街區HD](docs/verification/hd-town-maps-runtime-20261016/map-north-hd.png) |
+| ![第一城城堡與河岸EGA](docs/verification/hd-town-maps-runtime-20261016/map-castle-ega.png) | ![第一城手繪城堡與河岸HD](docs/verification/hd-town-maps-runtime-20261016/map-castle-hd.png) |
+| ![第一城南側河橋EGA](docs/verification/hd-town-maps-runtime-20261016/map-bridge-ega.png) | ![第一城連續手繪河橋HD](docs/verification/hd-town-maps-runtime-20261016/map-bridge-hd.png) |
+
+[比較頁](docs/verification/hd-town-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town-maps-runtime-20261016.md)記錄42個區塊、中文、F10及存讀檔範圍。
+
 ### 事件畫面：原版與 HD
 
 七段結局已接入開發版，沿用手繪、紅黑銅框與原生 HD 中文。現行 `v.1.0.2-20261013` 發行包保持，尚未包含本批。

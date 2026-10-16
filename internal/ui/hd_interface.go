@@ -298,6 +298,9 @@ func (h *HD) outdoorHD(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) er
 	if err != nil {
 		return err
 	}
+	if _, err := h.drawTownMap(dst, sprites, out); err != nil {
+		return err
+	}
 	if door := out.AtDoor(); !drawn && door != nil && !out.AtEdge {
 		pic, err := sprites.Get(out.CrestArchive(), door.Picture)
 		if err != nil {
