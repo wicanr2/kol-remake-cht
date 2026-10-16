@@ -23,10 +23,13 @@ func (g *game) nativeUIPage() bool {
 		if s == nil || g.quest != nil && g.quest.state != nil {
 			return false
 		}
+		if !s.InArena() && !s.ShowingSheetOutside() && s.LeftTown && g.worldState != nil {
+			return true
+		}
 		return (s.InArena() || s.ShowingSheetOutside() || s.Mode == town.ModeInside) && nativeInnPage(s.Inside)
 	}
 	switch g.scene {
-	case sceneContents, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneScriptCJK:
+	case sceneContents, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneScriptCJK, sceneWorld:
 		return true
 	case sceneInn, sceneBuilding:
 		return nativeInnPage(g.inn)

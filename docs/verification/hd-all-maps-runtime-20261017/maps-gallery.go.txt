@@ -1,0 +1,76 @@
+package main
+
+import (
+ "bytes"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "image"
+ "image/png"
+ "os"
+ "path/filepath"
+ "reflect"
+ "testing"
+ "unicode"
+ "github.com/hajimehoshi/ebiten/v2"
+ "github.com/wicanr2/kol-remake-cht/internal/font"
+ "github.com/wicanr2/kol-remake-cht/internal/town"
+ "github.com/wicanr2/kol-remake-cht/internal/world"
+)
+
+type fullMapNames struct{}
+func(fullMapNames)TimeText(int)string{return "中午"}
+func(fullMapNames)TerrainText(int)string{return "原野"}
+type fullMapCase struct{Name string;Town,X,Y int;Outdoor *town.Outdoor;World *world.Screen}
+type fullMapFrame struct{Name string;Town,X,Y int;StateSHA,EGASHA,HDSHA,ViewportPNG,ViewportSHA string;Text []string;Han,OutsideMax,RoundtripMax int}
+type fullMapGallery struct{m *game;cases []fullMapCase;frames []fullMapFrame;at int;done bool;err error}
+func(g *fullMapGallery)Update()error{if g.err!=nil{return g.err};if g.done{return ebiten.Termination};return nil}
+func(g *fullMapGallery)Layout(int,int)(int,int){return 1920,1200}
+func mapBytes(im *ebiten.Image)[]byte{b:=make([]byte,im.Bounds().Dx()*im.Bounds().Dy()*4);im.ReadPixels(b);return b}
+func mapSum(b []byte)string{return fmt.Sprintf("%x",sha256.Sum256(b))}
+func mapWrite(path string,im image.Image)(string,error){f,e:=os.Create(path);if e!=nil{return "",e};enc:=png.Encoder{CompressionLevel:png.BestSpeed};e=enc.Encode(f,im);ce:=f.Close();if e==nil{e=ce};b,re:=os.ReadFile(path);if e==nil{e=re};return mapSum(b),e}
+func(g *fullMapGallery)Draw(dst *ebiten.Image){
+ if g.done||g.err!=nil{return};m:=g.m;c:=g.cases[g.at];m.outdoor=c.Outdoor;m.scene=sceneOutdoor
+ var state any=c.Outdoor
+ if c.Town==0{m.scene=sceneWorld;m.worldState=c.World;m.worldParty=c.Outdoor.Party;state=c.World}
+ before,e:=json.Marshal(state);if e!=nil{g.err=e;return}
+ var firstWords []string
+ render:=func(mode string)([]byte,error){if e:=m.setGraphics(mode);e!=nil{return nil,e};var words []string;font.DrawObserver=func(_,s string){words=append(words,s)};e:=m.render();font.DrawObserver=nil;if e!=nil{return nil,e};if firstWords==nil{firstWords=words}else if !reflect.DeepEqual(words,firstWords){return nil,fmt.Errorf("Chinese changed: %s",c.Name)};if e:=m.presentHD();e!=nil{return nil,e};return mapBytes(m.outputCanvas().Image()),nil}
+ ega,e:=render("ega");if e!=nil{g.err=e;return}
+ restore:=m.hdCache.SuspendTownMapVerification();base,e:=render("hd");restore();if e!=nil{g.err=e;return}
+ hd,e:=render("hd");if e!=nil{g.err=e;return}
+ outside:=0
+ for y:=0;y<1200;y++{for x:=0;x<1920;x++{if x>=624&&x<1776&&y>=348&&y<924{continue};p:=(y*1920+x)*4;for k:=0;k<4;k++{a:=int(hd[p+k])-int(base[p+k]);if a<0{a=-a};if a>outside{outside=a}}}}
+ if outside!=0{g.err=fmt.Errorf("map escaped viewport %s:%d",c.Name,outside);return}
+ again,e:=render("ega");if e!=nil||!bytes.Equal(ega,again){g.err=fmt.Errorf("EGA roundtrip changed %s:%v",c.Name,e);return}
+ hdAgain,e:=render("hd");if e!=nil{g.err=e;return};delta:=0;for i,a:=range hd{d:=int(a)-int(hdAgain[i]);if d<0{d=-d};if d>delta{delta=d}};if delta>1{g.err=fmt.Errorf("HD roundtrip %s:%d",c.Name,delta);return}
+ after,e:=json.Marshal(state);if e!=nil||!bytes.Equal(before,after){g.err=fmt.Errorf("state changed %s",c.Name);return}
+ han:=0;for _,s:=range firstWords{for _,ch:=range s{if unicode.Is(unicode.Han,ch){han++}}};if han==0{g.err=fmt.Errorf("no Chinese %s",c.Name);return}
+ full:=&image.RGBA{Pix:hd,Stride:1920*4,Rect:image.Rect(0,0,1920,1200)}
+ name:=c.Name+"-viewport.png";sum,e:=mapWrite(filepath.Join("/out/maps-runtime",name),full.SubImage(image.Rect(624,348,1776,924)));if e!=nil{g.err=e;return}
+ if c.X==23&&c.Y==29||c.X==47&&c.Y==11||c.X==11&&c.Y==53{
+  if _,e=mapWrite(filepath.Join("/out/maps-runtime",c.Name+"-hd.png"),full);e!=nil{g.err=e;return}
+  original:=&image.RGBA{Pix:ega,Stride:960*4,Rect:image.Rect(0,0,960,600)};if _,e=mapWrite(filepath.Join("/out/maps-runtime",c.Name+"-ega.png"),original);e!=nil{g.err=e;return}
+ }
+ g.frames=append(g.frames,fullMapFrame{c.Name,c.Town,c.X,c.Y,mapSum(before),mapSum(ega),mapSum(hd),name,sum,firstWords,han,outside,delta})
+ dst.DrawImage(m.outputCanvas().Image(),nil);g.at++;g.done=g.at==len(g.cases);fmt.Printf("map %d/%d %s\n",g.at,len(g.cases),c.Name)
+}
+func fullMapOutdoor(t *testing.T,m *game,townID,x,y int)*town.Outdoor{
+ t.Helper();must:=func(e error){if e!=nil{t.Fatal(e)}};out,e:=town.LoadOutdoor("/src/docs/re/town1-outdoor-sample.json");must(e)
+ archive:=fmt.Sprintf("TOWN%d",townID);im,_,e:=m.sprites.lib.Decode(archive,0);must(e);grid,e:=town.LoadGrid(im);must(e);out.SetGrid(grid)
+ marker,_,e:=m.sprites.lib.Decode(town.MarkerArchive,0);must(e);markers,e:=town.LoadMarkers(marker);must(e);out.SetMarkers(markers)
+ buildings,e:=town.LoadBuildings("/src/assets/original-derived-data/town-buildings.json");must(e);if townID>0{out.SetBuildings(buildings.Town(townID))}
+ out.Town=townID;out.Bounds.MinX=0;out.Bounds.MinY=0;out.Bounds.MaxX=63;out.Bounds.MaxY=63;out.Camera.X=x;out.Camera.Y=y;out.Marker.Row=0;out.Marker.Col=0;out.Marker.Frame=1;out.AtDoorCell=false;out.AtEdge=false;return out
+}
+func fullWorld(t *testing.T,m *game,x,y int)*world.Screen{
+ t.Helper();must:=func(e error){if e!=nil{t.Fatal(e)}};im,_,e:=m.sprites.lib.Decode("TOWN0",0);must(e);grid,e:=world.LoadGrid(im);must(e);data,e:=world.LoadData("/src/assets/original-derived-data/world-map.json");must(e)
+ weather,e:=world.LoadWeatherGroups(func(index int)(image.Image,error){p,_,e:=m.sprites.lib.Decode("WEATPICS",index);return p,e});must(e)
+ return &world.Screen{Travel:world.New(data,grid,x,y),Weather:weather,Group:0,Phase:7,DateZh:[]string{"第一日","第一年"},TimeIndex:2,Icons:[]int{3,4,5},Names:fullMapNames{}}
+}
+func TestHDFullMaps(t *testing.T){
+ if os.Getenv("KOL_FULL_MAPS")!="1"{t.Skip("explicit controlled full map acceptance")};m,_:=crestSetup(t);g:=&fullMapGallery{m:m}
+ ids:=[]int{3,4,5,6,7,0};if os.Getenv("KOL_MAP_WORLD_ONLY")=="1"{ids=[]int{0}}
+ for _,id:=range ids{for _,y:=range []int{0,5,11,17,23,29,35,41,47,53,59,63}{for _,x:=range []int{0,11,23,35,47,59,63}{c:=fullMapCase{Name:fmt.Sprintf("town%d-%02d-%02d",id,x,y),Town:id,X:x,Y:y,Outdoor:fullMapOutdoor(t,m,id,x,y)};if id==0{c.World=fullWorld(t,m,x,y)};g.cases=append(g.cases,c)}}}
+ ebiten.SetWindowSize(960,600);ebiten.SetTPS(60);if e:=ebiten.RunGame(g);e!=nil{t.Fatal(e)};if g.err!=nil{t.Fatal(g.err)}
+ raw,e:=json.MarshalIndent(map[string]any{"status":"actual production controlled scenes captured; independent delivery-image composite check pending","scenes":len(g.cases),"frames":g.frames,"regions":252,"maps":6,"original_oracle":false,"normal_player_path":false,"GUI_F10":false,"scope":"remaining five town maps and world position background; weather and original markers are separate unfinished HD slices"},"","  ");if e!=nil{t.Fatal(e)};if e=os.WriteFile("/out/maps-captures.json",append(raw,'\n'),0644);e!=nil{t.Fatal(e)}
+}

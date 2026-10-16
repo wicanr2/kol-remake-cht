@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/wicanr2/kol-remake-cht/internal/assets"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
 	"image"
 	"image/color"
 	imagedraw "image/draw"
@@ -107,7 +108,7 @@ func TestHDPositionMapContracts(t *testing.T) {
 			{"outside-source", func(a []HDTownMapArt) { a[0].VisibleBounds.Min.X = -1 }},
 			{"short-source", func(a []HDTownMapArt) { a[0].SourceBounds.Max.X-- }},
 			{"missing-paint", func(a []HDTownMapArt) { a[0].Paint = nil }},
-			{"small-native", func(a []HDTownMapArt) { a[0].Paint = image.NewRGBA(image.Rect(0, 0, 16, 16)) }},
+			{"small-native", func(a []HDTownMapArt) { a[0].Paint = image.NewRGBA(image.Rect(0, 0, 767, 767)) }},
 		}
 		for _, tc := range cases {
 			copy := append([]HDTownMapArt{}, arts...)
@@ -176,6 +177,47 @@ func TestHDPositionMapContracts(t *testing.T) {
 		out.Town = 2
 		if used, e := h.drawTownMap(dst, sprites, out); used || e != nil {
 			return fmt.Errorf("uncovered city bypass failed")
+		}
+		// The world path uses the same position group, but validates its actual typed Grid before drawing.
+		worldSources := append([]HDTownMapSource{}, sources...)
+		worldSources[0].GridSource.Archive = "TOWN0"
+		worldSources[0].AtlasSource.Archive = "TOWN0"
+		worldArts := append([]HDTownMapArt{}, arts...)
+		delivery := image.NewRGBA(image.Rect(0, 0, 768, 768))
+		imagedraw.Draw(delivery, delivery.Bounds(), &image.Uniform{C: color.RGBA{80, 90, 40, 255}}, image.Point{}, imagedraw.Src)
+		for i := range worldArts {
+			worldArts[i].Archive = "TOWN0"
+			worldArts[i].Paint = delivery
+		}
+		if e := h.AttachTownMaps(worldSources, worldArts); e != nil {
+			return e
+		}
+		worldGrid, e := world.LoadGrid(grid)
+		if e != nil {
+			return e
+		}
+		state := &world.Screen{Travel: &world.Travel{Grid: worldGrid, X: 47, Y: 9, SubX: 3, SubY: 3}}
+		previous := activeHDUI
+		activeHDUI = &hdNativeRender{h: h, dst: dst}
+		defer func() { activeHDUI = previous }()
+		if used, e := drawHDWorldMap(dst, sprites, state); !used || e != nil {
+			return fmt.Errorf("world group not drawn: %v", e)
+		}
+		if got := color.RGBAModel.Convert(dst.At(624+516, 348+324)).(color.RGBA); got != (color.RGBA{175, 165, 215, 255}) {
+			return fmt.Errorf("world marker invisible against non-EGA paint: %v", got)
+		}
+		state.Travel.Grid, e = world.LoadGrid(changed)
+		if e != nil {
+			return e
+		}
+		dst.Fill(color.RGBA{1, 2, 3, 255})
+		beforeWorld := make([]byte, 1920*1200*4)
+		dst.ReadPixels(beforeWorld)
+		used, e := drawHDWorldMap(dst, sprites, state)
+		afterWorld := make([]byte, len(beforeWorld))
+		dst.ReadPixels(afterWorld)
+		if e == nil || used || !bytes.Equal(beforeWorld, afterWorld) {
+			return fmt.Errorf("world accepted or partially drew a different typed grid")
 		}
 		return nil
 	}}

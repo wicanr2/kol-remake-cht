@@ -220,12 +220,16 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 		if len(pixels) != world.WeatherWidth*world.WeatherHeight {
 			return fmt.Errorf("無效天候組 %d", s.Group)
 		}
+		weatherScale := 1
+		if activeHDUI != nil && activeHDUI.dst == dst {
+			weatherScale = 2
+		}
 		for y := 0; y < world.WeatherHeight; y++ {
 			for x := 0; x < world.WeatherWidth; x++ {
 				c := pixels[y*world.WeatherWidth+x]
-				for dy := 0; dy < l.Scale; dy++ {
-					for dx := 0; dx < l.Scale; dx++ {
-						dst.Set(l.WeatherPicX+x*l.Scale+dx, l.WeatherPicY+y*l.Scale+dy, c)
+				for dy := 0; dy < l.Scale*weatherScale; dy++ {
+					for dx := 0; dx < l.Scale*weatherScale; dx++ {
+						dst.Set((l.WeatherPicX+x*l.Scale)*weatherScale+dx, (l.WeatherPicY+y*l.Scale)*weatherScale+dy, c)
 					}
 				}
 			}
@@ -256,6 +260,15 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 			return drawWorldIconsCJK(dst, sprites, s)
 		}
 	}
+	if drawn, err := drawHDWorldMap(dst, sprites, s); drawn || err != nil {
+		if err != nil {
+			return err
+		}
+		if err := drawWorldPromptCJK(dst, f, t, sess); err != nil {
+			return err
+		}
+		return drawWorldIconsCJK(dst, sprites, s)
+	}
 	atlas, err := sprites.Get("TOWN0", town.TileAtlas.Index)
 	if err != nil {
 		return err
@@ -271,9 +284,13 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 	}
 	if !s.MarkerOff {
 		mx, my := s.Travel.MarkerPixel(l.Tile / l.Scale)
-		x0, y0 := l.ViewX+mx*l.Scale, l.ViewY+my*l.Scale
-		for y := 0; y < l.MarkerSide; y++ {
-			for x := 0; x < l.MarkerSide; x++ {
+		markerScale := 1
+		if activeHDUI != nil && activeHDUI.dst == dst {
+			markerScale = 2
+		}
+		x0, y0 := (l.ViewX+mx*l.Scale)*markerScale, (l.ViewY+my*l.Scale)*markerScale
+		for y := 0; y < l.MarkerSide*markerScale; y++ {
+			for x := 0; x < l.MarkerSide*markerScale; x++ {
 				px, py := x0+x, y0+y
 				r, g, b, a := dst.At(px, py).RGBA()
 				dst.Set(px, py, world.InvertEGA(color.RGBA{

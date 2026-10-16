@@ -1,0 +1,54 @@
+{
+  "status": "PASS controlled actual F10 GUI",
+  "case": "full-map-town",
+  "rounds": [
+    {
+      "scene": "large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 1,
+      "state_sha256": "ba9565d2f4e16ccd0989d5a6496458d3a497543feda7efe4c21cf899beeb8c69",
+      "files": [
+        "large-before.png",
+        "large-ega.png",
+        "large-restored.png"
+      ]
+    },
+    {
+      "scene": "small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "ba9565d2f4e16ccd0989d5a6496458d3a497543feda7efe4c21cf899beeb8c69",
+      "files": [
+        "small-before.png",
+        "small-ega.png",
+        "small-restored.png"
+      ]
+    }
+  ],
+  "display_events": [
+    "display action=toggle hd=true state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=ega hd=false state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=back hd=false state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=toggle hd=false state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=hd hd=true state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=back hd=true state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=toggle hd=true state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=ega hd=false state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=back hd=false state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=toggle hd=false state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=hd hd=true state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a",
+    "display action=back hd=true state=f45711a16caa13a3bd553531f308a497ded8e88c0c9bc160e7a1de52163d5f6a"
+  ],
+  "serializable_Outdoor_unchanged": true,
+  "exit_code": 0,
+  "original_oracle": false,
+  "normal_player_path": false
+}

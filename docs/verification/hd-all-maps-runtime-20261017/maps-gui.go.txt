@@ -1,0 +1,15 @@
+package main
+import("encoding/json";"fmt";"os";"testing";"github.com/hajimehoshi/ebiten/v2")
+type fullMapGUI struct{m *game}
+func(g *fullMapGUI)Update()error{
+ if g.m.drawErr!=nil{return g.m.drawErr}
+ if (ebiten.IsKeyPressed(ebiten.KeyControlLeft)||ebiten.IsKeyPressed(ebiten.KeyControlRight))&&ebiten.IsKeyPressed(ebiten.KeyQ){return ebiten.Termination}
+ g.m.updateDisplaySettings();return nil
+}
+func(g *fullMapGUI)Layout(w,h int)(int,int){return g.m.Layout(w,h)}
+func(g *fullMapGUI)Draw(dst *ebiten.Image){g.m.Draw(dst);var state any=g.m.outdoor;if g.m.scene==sceneWorld{state=g.m.worldState};raw,_:=json.Marshal(map[string]any{"State":state,"hd":g.m.hd!=nil,"settings":g.m.displaySettings});fmt.Printf("equipment-frame %s\n",raw)}
+func TestHDFullMapGUI(t *testing.T){
+ kind:=os.Getenv("KOL_MAP_GUI_KIND");if kind==""{t.Skip("explicit controlled GUI")};m,_:=crestSetup(t);m.outdoor=fullMapOutdoor(t,m,3,23,29);m.scene=sceneOutdoor
+ if kind=="world"{m.scene=sceneWorld;m.worldState=fullWorld(t,m,23,29);m.worldParty=m.outdoor.Party}
+ m.interactive=true;m.logInput=true;ebiten.SetWindowSize(1920,1200);ebiten.SetWindowTitle("完整地圖HD遊戲內切換驗收");ebiten.SetTPS(60);if e:=ebiten.RunGame(&fullMapGUI{m});e!=nil{t.Fatal(e)};if m.drawErr!=nil{t.Fatal(m.drawErr)}
+}

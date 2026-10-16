@@ -207,7 +207,7 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 ### 開發版：第一城連續手繪地圖
 
-第一城已依原地圖位置呈現連續手繪，涵蓋城牆、街區、城堡與河橋。F10可在同一場景切換，隊伍與保存保持。下方為正式重製程式的同狀態比較，尚未納入現行發行包；走路標記與其餘城鎮、世界地圖仍待HD化。
+第一城已依原地圖位置呈現連續手繪，涵蓋城牆、街區、城堡與河橋。F10可在同一場景切換，隊伍與保存保持。下方為正式重製程式的同狀態比較，尚未納入現行發行包；走路標記另行續作，全部城鎮及世界背景見下方全地圖入口。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -227,7 +227,19 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 | ![第二城南門木橋EGA](docs/verification/hd-town2-maps-runtime-20261016/map-gate-ega.png) | ![第二城手繪南門木橋HD](docs/verification/hd-town2-maps-runtime-20261016/map-gate-hd.png) |
 | ![第二城城堡與湖岸EGA](docs/verification/hd-town2-maps-runtime-20261016/map-keep-ega.png) | ![第二城手繪城堡與湖岸HD](docs/verification/hd-town2-maps-runtime-20261016/map-keep-hd.png) |
 
-[比較頁](docs/verification/hd-town2-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town2-maps-runtime-20261016.md)記錄全4096格、中文及鍵鼠F10驗證。原地圖、門位、通行與存檔格式保持；走路標記、其餘城鎮及世界地圖仍待HD化。本批為受控場景驗收。
+[比較頁](docs/verification/hd-town2-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town2-maps-runtime-20261016.md)記錄全4096格、中文及鍵鼠F10驗證。原地圖、門位、通行與存檔格式保持；走路標記另行續作，其餘五城及世界背景見下節。本批為受控場景驗收。
+
+### 開發版：七城與世界連續手繪地圖
+
+七座城鎮與世界地圖背景已補齊，沿原地圖座標呈現。新地圖素材採768×768以降低容量，遊戲畫布維持1920×1200。以下是同一受控場景的繁中EGA／HD縮圖，尚未納入現行發行包。
+
+| 重製中文 EGA | 手繪 HD |
+|---|---|
+| ![第三城街區EGA](docs/verification/hd-all-maps-runtime-20261017/town3-23-29-ega.png) | ![第三城連續手繪街區HD](docs/verification/hd-all-maps-runtime-20261017/town3-23-29-hd.png) |
+| ![第六城木橋EGA](docs/verification/hd-all-maps-runtime-20261017/town6-11-53-ega.png) | ![第六城手繪木橋與河岸HD](docs/verification/hd-all-maps-runtime-20261017/town6-11-53-hd.png) |
+| ![世界山脈與河岸EGA](docs/verification/hd-all-maps-runtime-20261017/town0-23-29-ega.png) | ![世界手繪山脈與河岸HD](docs/verification/hd-all-maps-runtime-20261017/town0-23-29-hd.png) |
+
+[六組比較頁](docs/verification/hd-all-maps-runtime-20261017/review.html)另含城堡、高地與霍布城。遊戲內F10可在同一位置切換；中文、全部地圖格、鍵鼠及狀態保持見[驗收範圍](docs/verification/hd-all-maps-runtime-20261017.md)。圖中的天候與城鎮頭盔仍沿既有圖形，後續一併HD化；世界事件、戰場、傷勢及片頭繼續。
 
 ### 事件畫面：原版與 HD
 

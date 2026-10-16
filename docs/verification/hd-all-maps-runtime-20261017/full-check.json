@@ -1,0 +1,4591 @@
+{
+  "status": "PASS controlled five-town and world position backgrounds",
+  "scenes": 504,
+  "regions": 252,
+  "maps": {
+    "TOWN3": {
+      "cameras": 84,
+      "source_cells": 4096,
+      "regions": 42
+    },
+    "TOWN4": {
+      "cameras": 84,
+      "source_cells": 4096,
+      "regions": 42
+    },
+    "TOWN5": {
+      "cameras": 84,
+      "source_cells": 4096,
+      "regions": 42
+    },
+    "TOWN6": {
+      "cameras": 84,
+      "source_cells": 4096,
+      "regions": 42
+    },
+    "TOWN7": {
+      "cameras": 84,
+      "source_cells": 4096,
+      "regions": 42
+    },
+    "TOWN0": {
+      "cameras": 84,
+      "source_cells": 4096,
+      "regions": 42
+    }
+  },
+  "observed_Han_characters": 3360,
+  "missing_glyphs": 0,
+  "delivery_composite_max": 1,
+  "outside_viewport_max": 0,
+  "HD_roundtrip_max": 0,
+  "previous84_native_bytes_and_bindings_unchanged": true,
+  "source_count": 417,
+  "source_index_sha256": "cce67e5b266a648e9d68a5769852a1d63200b0c8c27d4d0d0a2643c765cceeae",
+  "captures_sha256": "fd1b2d1caaca88d9c232f8650db9f1a640f27246a7b2d6ced59236f15ca76208",
+  "gallery_sha256": "67dedee1f8c6786174cdb8db954f68820ab7ca4e65e32004d79987d50e38aeed",
+  "manifest_sha256": "548e61306031cfc4fa4f62d98b24e24c639eec034d49f72b8dee3791751adb7c",
+  "generation_sha256": "182526161050640e8a1b4abb920f2d91e2f62df8f3176b8946d54681be9fb4d2",
+  "records": [
+    {
+      "case": "town3-00-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-00-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-11-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-23-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-35-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-47-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-59-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town3-63-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-00-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-11-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-23-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-35-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-47-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-59-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town4-63-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-00-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-11-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-23-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-35-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-47-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-59-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town5-63-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-00-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-11-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-23-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-35-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-47-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-59-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town6-63-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-00-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-11-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-23-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-35-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-47-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-59-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town7-63-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-00",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-05",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-11",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-17",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-23",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-29",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-35",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-41",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-47",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-53",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-59",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-00-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-11-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-23-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-35-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-47-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-59-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    },
+    {
+      "case": "town0-63-63",
+      "source_cells": 72,
+      "delivery_composite_max": 1,
+      "outside_viewport_max": 0,
+      "HD_roundtrip_max": 0,
+      "Chinese_present": true,
+      "missing_glyphs": 0
+    }
+  ],
+  "original_oracle": false,
+  "normal_player_path": false,
+  "GUI_F10": false,
+  "scope": "Position backgrounds only; original walking/world markers and weather not counted as HD; independent Pillow composition ignores only world marker12x12 rectangle; prepared scenes do not prove original parity."
+}

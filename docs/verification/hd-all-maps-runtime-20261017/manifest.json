@@ -1,0 +1,269 @@
+{
+  "schema": "kol-hd-all-maps-evidence/1",
+  "rights": "private GitHub preservation only; no public distribution rights asserted",
+  "files": {
+    "assemble-maps.py": "ad6baa2930508507714260c62a797ee5a3f24674e8644ca84d3cb4923403fd9d",
+    "check-maps.py": "ad64b41bc36d268ec21da41548fbb5c4614070e62217a42473f852a433264d20",
+    "full-captures.json": "fd1b2d1caaca88d9c232f8650db9f1a640f27246a7b2d6ced59236f15ca76208",
+    "full-check.json": "49f03cb1bda4dcfff6f5914d508a1fc78c2f9f752e8e3bbe5ba4a538fd64bed3",
+    "full-tests.log": "228e5fa8bfdfbdad65da1c4a1d63933d4a2c59288f58a22635bad111cbaaef14",
+    "gui-town.json": "48494706aa955a3a4201953f3cf34f6b09eaadc87f688aea41ce6ccb465bc7c9",
+    "gui-world.json": "4c16881dafb93dfe696336021b4c23541953be26a65240166511f0d6f4db5140",
+    "install-maps.py": "ecc70422173b0f5fc2c50ba52f806f6567d957560ea61ba68d72b356d76390d3",
+    "maps-gallery.go.txt": "f32d65dfe606f2c3c4bfe70571fea9d225576814a24ba8ff49c9babcf3745b6b",
+    "maps-gui.go.txt": "2aadaf35a8c40bb0ed68e98aa9ed578544476ef7a3896a4765a8061b34668be5",
+    "maps-gui.py": "58548a34ea9268a4e3d0660bb7aaceecf3c1a9632694841a3ddcfbecb30709af",
+    "persist-maps.py": "b2fe0e08ef708c6bc517871975a603fb376c0b67852b22f0d1338ebccf907bbd",
+    "pre-marker-hd_town_maps.go.txt": "9d68d7e5dec428f5d25707f3903b28b5ed3c58cc6628f4167413dfe220173f4e",
+    "pre-marker-hd_town_maps_test.go.txt": "a67a4fdc9d7a1b7ab68e92430dada541ed1f50db664e6d14704ac7ea124e3018",
+    "pre-marker-production-inputs.json": "cce67e5b266a648e9d68a5769852a1d63200b0c8c27d4d0d0a2643c765cceeae",
+    "prepare-maps.py": "4a2d6a364935ec3bcf4e5f3e268a366d0a1493b6f9bac208694ce1d4ca595e6c",
+    "previous-manifest.json": "7540283c87170ce680f89016ef2c1b0406bb2173b3b8d2575bdd7435d3f0d141",
+    "production-inputs.json": "15f43d80a31e7ff7f5474f7f465e3966457f4e7b49e6ca91ed4c46abf44c757c",
+    "publish-maps-evidence.py": "7105d7d8ca82b5778e9b034644d70f6ed8761326b35dcc45075859bea1c9fa68",
+    "receipt.json": "126171159ab0eabff7ff390c60c6e1c092e3a0a4fe9ac32d5d0503b4d0b78704",
+    "resize-maps.py": "17b74b6bad7ee92592f9ef698f5a0685ee8f14bedf41b411e5cdcd06249c9f27",
+    "resize-receipt.json": "112d7f5c7103d5dd1bf073266b8eea9a828347b88b85b0527a3c9b2bf4eacfd1",
+    "review.html": "58aba8524f83f4d06c32c30b10a39045cb6297f390da9075f41c53e84a551a0d",
+    "run-map-gallery.sh": "7a791eb850dbcb2cc8f151d86a61b21f5f2719664142c0b0e71669b01f236f24",
+    "sceneverify.log": "e614265796d99e233615f04479f602660ddb9d4d88e26b91e172f564c4e8d5c9",
+    "town-large-state.json": "f74f667ed23914786964aa08aa034c3e9600c1740b907d83d5e67c8e9fb22d6c",
+    "town-small-state.json": "f74f667ed23914786964aa08aa034c3e9600c1740b907d83d5e67c8e9fb22d6c",
+    "town0-23-29-ega.png": "f061ef725d444c9357865e52caf901965345a787b327377b8567d6ee95549227",
+    "town0-23-29-hd.png": "8038dec17b4bc6da01c8cfb7b1f8ca6bc54e05625574b9244c5f9d6a4acf8b2a",
+    "town2-formal-gui.py": "573bb97475d37e2dd7437af87d92a163da859755dd09104cc5540106fd151d3e",
+    "town3-23-29-ega.png": "eb842a79e7142cf9b047ce4fff2639997b3018a50c80a0e0fe939ef113970235",
+    "town3-23-29-hd.png": "011f2f10b05a375a4f4dbc70d6595460777ff447034febec5aca1642a7b7fd80",
+    "town4-23-29-ega.png": "24e589278abf85eec74e483e13476c3eabe5e9cf6904a2e531b14c28e7db74a4",
+    "town4-23-29-hd.png": "654adf9fb73971aca93a09c357bfe9ca4e396d1c4601ef553f2102f009a34e74",
+    "town5-23-29-ega.png": "ecfd570f4a7d65308f58a2a084f06a892a3675d0cf57b112018431a176c6894e",
+    "town5-23-29-hd.png": "86109533d42fb9fd27e5243bf86c5b445053cbceecdb848a823f70b539773520",
+    "town6-11-53-ega.png": "8ed6ea61706310832c6c4c5c97027f5173777c8ae487b50ebc3648da3401cc95",
+    "town6-11-53-hd.png": "5da05a367dc2e8f78fc0ba654c519cb4240387df1cdead13297a65922ba2cd9d",
+    "town7-47-11-ega.png": "f61c2a76a82d4fe9ee8d394037c4ad9431ee7f394ae1f5dfe5306aefee3bbce2",
+    "town7-47-11-hd.png": "a418e318af6b0c7aec916dcb99217cea96831f7696b564bd555d37e7dcb962b6",
+    "world-large-state.json": "b02c21f1ab49ce6d7902fe89b0b4bad6f58980da2cbf7cc5618afee63b1c69c6",
+    "world-point-captures.json": "0dedff7dd7c2b0239d55e505db5f5b9f36e24a69f8253b9572269bf620791d72",
+    "world-point-check.json": "4b3a1ae16c774a88aeb6396309db66c9b06588d5b04e0f30d6f5ff96835462fb",
+    "world-small-state.json": "b02c21f1ab49ce6d7902fe89b0b4bad6f58980da2cbf7cc5618afee63b1c69c6",
+    "world-ui-tests.log": "4caeb5aab096ed7e885c4df717c78307e4cbb73d933bdb05b7c20574b2bd23bc"
+  },
+  "comparisons": [
+    {
+      "case": "town3-23-29",
+      "label": "第三城街區",
+      "images": {
+        "ega": {
+          "file": "town3-23-29-ega.png",
+          "sha256": "eb842a79e7142cf9b047ce4fff2639997b3018a50c80a0e0fe939ef113970235",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town3-23-29-ega.png",
+          "source_sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220",
+          "source_size": [
+            960,
+            600
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        },
+        "hd": {
+          "file": "town3-23-29-hd.png",
+          "sha256": "011f2f10b05a375a4f4dbc70d6595460777ff447034febec5aca1642a7b7fd80",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town3-23-29-hd.png",
+          "source_sha256": "dd9431cbc635fa4706340d1fc0dc38e238988eb50650ded911959c31cbf46e9f",
+          "source_size": [
+            1920,
+            1200
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        }
+      }
+    },
+    {
+      "case": "town4-23-29",
+      "label": "第四城高地",
+      "images": {
+        "ega": {
+          "file": "town4-23-29-ega.png",
+          "sha256": "24e589278abf85eec74e483e13476c3eabe5e9cf6904a2e531b14c28e7db74a4",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town4-23-29-ega.png",
+          "source_sha256": "737700672440a6eb8ade625d39716249b6a109c6731873c599f8f950bbf5e70c",
+          "source_size": [
+            960,
+            600
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        },
+        "hd": {
+          "file": "town4-23-29-hd.png",
+          "sha256": "654adf9fb73971aca93a09c357bfe9ca4e396d1c4601ef553f2102f009a34e74",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town4-23-29-hd.png",
+          "source_sha256": "bef1d495a2a83696b2a6dd24ef52dd359fdbc2c6024b634ee71ee8f804dcee09",
+          "source_size": [
+            1920,
+            1200
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        }
+      }
+    },
+    {
+      "case": "town5-23-29",
+      "label": "第五城城堡",
+      "images": {
+        "ega": {
+          "file": "town5-23-29-ega.png",
+          "sha256": "ecfd570f4a7d65308f58a2a084f06a892a3675d0cf57b112018431a176c6894e",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town5-23-29-ega.png",
+          "source_sha256": "0ddd8d764df03095a6ecb931931f3b0b5e7455cfe22b1e55c93b08378bf8b2f2",
+          "source_size": [
+            960,
+            600
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        },
+        "hd": {
+          "file": "town5-23-29-hd.png",
+          "sha256": "86109533d42fb9fd27e5243bf86c5b445053cbceecdb848a823f70b539773520",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town5-23-29-hd.png",
+          "source_sha256": "c54f80744134067b5bfff16a6c809c9e6df0f7a6b4e496115e3345e9bafe86e0",
+          "source_size": [
+            1920,
+            1200
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        }
+      }
+    },
+    {
+      "case": "town6-11-53",
+      "label": "第六城木橋",
+      "images": {
+        "ega": {
+          "file": "town6-11-53-ega.png",
+          "sha256": "8ed6ea61706310832c6c4c5c97027f5173777c8ae487b50ebc3648da3401cc95",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town6-11-53-ega.png",
+          "source_sha256": "e63c7034a2880bc54f3410379fda9ee09fcbe457855a4cbaa2b42f76e944a95f",
+          "source_size": [
+            960,
+            600
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        },
+        "hd": {
+          "file": "town6-11-53-hd.png",
+          "sha256": "5da05a367dc2e8f78fc0ba654c519cb4240387df1cdead13297a65922ba2cd9d",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town6-11-53-hd.png",
+          "source_sha256": "766baec9358da1d77e6930bf36401a67af5a6fb65e4c33f9f68b86f7cdaa692b",
+          "source_size": [
+            1920,
+            1200
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        }
+      }
+    },
+    {
+      "case": "town7-47-11",
+      "label": "霍布城建築",
+      "images": {
+        "ega": {
+          "file": "town7-47-11-ega.png",
+          "sha256": "f61c2a76a82d4fe9ee8d394037c4ad9431ee7f394ae1f5dfe5306aefee3bbce2",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town7-47-11-ega.png",
+          "source_sha256": "bf9470a3c2fc3e9d8b908bdbc107707448a3dc4487ecbada42d0315afe170a13",
+          "source_size": [
+            960,
+            600
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        },
+        "hd": {
+          "file": "town7-47-11-hd.png",
+          "sha256": "a418e318af6b0c7aec916dcb99217cea96831f7696b564bd555d37e7dcb962b6",
+          "source_file": "workplace/hd-full-20261016/maps-runtime/town7-47-11-hd.png",
+          "source_sha256": "90c79cbf907c14090eab86c7fdba83740c1753604912a5b9ab344574611a8d87",
+          "source_size": [
+            1920,
+            1200
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        }
+      }
+    },
+    {
+      "case": "town0-23-29",
+      "label": "世界山脈與河岸",
+      "images": {
+        "ega": {
+          "file": "town0-23-29-ega.png",
+          "sha256": "f061ef725d444c9357865e52caf901965345a787b327377b8567d6ee95549227",
+          "source_file": "workplace/hd-full-20261016/maps-world-runtime/town0-23-29-ega.png",
+          "source_sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9",
+          "source_size": [
+            960,
+            600
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        },
+        "hd": {
+          "file": "town0-23-29-hd.png",
+          "sha256": "8038dec17b4bc6da01c8cfb7b1f8ca6bc54e05625574b9244c5f9d6a4acf8b2a",
+          "source_file": "workplace/hd-full-20261016/maps-world-runtime/town0-23-29-hd.png",
+          "source_sha256": "b7eb77248219344ec9e128d5d379ea55bb2cf15986d10b49da6fc39e1efb20a8",
+          "source_size": [
+            1920,
+            1200
+          ],
+          "preview_size": [
+            768,
+            480
+          ],
+          "tool": "Pillow9.4.0 LANCZOS"
+        }
+      }
+    }
+  ]
+}

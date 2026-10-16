@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
 	"image"
+	"image/color"
 	imagedraw "image/draw"
 )
 
@@ -52,7 +54,7 @@ func (h *HD) AttachTownMaps(sources []HDTownMapSource, arts []HDTownMapArt) erro
 	}
 	for i, a := range arts {
 		city := next.cities[a.Archive]
-		if city == nil || a.Paint == nil || a.Paint.Bounds().Dx() != a.Paint.Bounds().Dy() || a.Paint.Bounds().Dx() < 1152 || a.Paint.Bounds().Dx() > 4096 || a.SourceBounds.Dx() != 12 || a.SourceBounds.Dy() != 12 || !a.SourceBounds.In(image.Rect(0, 0, 64, 64)) || a.VisibleBounds.Empty() || !a.VisibleBounds.In(a.SourceBounds) {
+		if city == nil || a.Paint == nil || a.Paint.Bounds().Dx() != a.Paint.Bounds().Dy() || a.Paint.Bounds().Dx() < 768 || a.Paint.Bounds().Dx() > 4096 || a.SourceBounds.Dx() != 12 || a.SourceBounds.Dy() != 12 || !a.SourceBounds.In(image.Rect(0, 0, 64, 64)) || a.VisibleBounds.Empty() || !a.VisibleBounds.In(a.SourceBounds) {
 			return fmt.Errorf("HD城鎮地圖畫稿尺寸或覆蓋範圍不符")
 		}
 		for y := a.VisibleBounds.Min.Y; y < a.VisibleBounds.Max.Y; y++ {
@@ -174,6 +176,83 @@ func (h *HD) drawTownMap(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) 
 						dst.Set(l.ViewX*2+col*side+x*6+dx, l.ViewY*2+row*side+y*6+dy, c)
 					}
 				}
+			}
+		}
+	}
+	return true, nil
+}
+
+// drawHDWorldMap runs inside the native UI pass, before prompts and controls.
+func drawHDWorldMap(dst *ebiten.Image, sprites Sprites, s *world.Screen) (bool, error) {
+	n := activeHDUI
+	if n == nil || n.dst != dst || n.h.townMaps == nil {
+		return false, nil
+	}
+	h := n.h
+	city := h.townMaps.cities["TOWN0"]
+	if city == nil {
+		return false, nil
+	}
+	if s == nil || s.Travel == nil || s.Travel.Grid == nil {
+		return false, fmt.Errorf("HD世界地圖缺少目前旅行狀態")
+	}
+	for _, source := range []struct {
+		p    HDPageSource
+		size image.Point
+	}{{city.source.GridSource, image.Pt(64, 64)}, {city.source.AtlasSource, image.Pt(256, 256)}} {
+		pic, err := sprites.Get(source.p.Archive, source.p.Index)
+		if err != nil {
+			return false, err
+		}
+		if pic == nil || pic.Bounds().Size() != source.size || h.fingerprint(pic) != source.p.RGB {
+			return false, fmt.Errorf("HD世界地圖實際來源尺寸或指紋不符")
+		}
+	}
+	clamp := func(v int) int {
+		if v < 0 {
+			return 0
+		}
+		if v > 63 {
+			return 63
+		}
+		return v
+	}
+	type cell struct{ owner, x, y, col, row int }
+	var cells []cell
+	cx, cy := s.Travel.Camera()
+	for row, line := range s.View() {
+		for col, index := range line {
+			x, y := clamp(cx+world.ColBias+col), clamp(cy+world.RowBias+row)
+			if int(city.source.Grid.GrayAt(x, y).Y) != index {
+				return false, fmt.Errorf("HD世界地圖目前格子與驗證來源不符")
+			}
+			owner := city.owners[y*64+x]
+			if owner < 0 || owner >= len(h.townMaps.regions) {
+				return false, fmt.Errorf("HD世界地圖目前格子缺少畫稿")
+			}
+			cells = append(cells, cell{owner, x, y, col, row})
+		}
+	}
+	l := world.CJK
+	side := l.Tile * 2
+	for _, c := range cells {
+		region := h.townMaps.regions[c.owner]
+		whole := h.sampledHD(region.paint, side*12, side*12)
+		x, y := (c.x-region.source.Min.X)*side, (c.y-region.source.Min.Y)*side
+		tile := whole.SubImage(image.Rect(x, y, x+side, y+side)).(*ebiten.Image)
+		var op ebiten.DrawImageOptions
+		op.GeoM.Translate(float64(l.ViewX*2+c.col*side), float64(l.ViewY*2+c.row*side))
+		dst.DrawImage(tile, &op)
+	}
+	// Preserve the point's size, sub-cell position and blink. EGAIndex cannot invert hand-painted RGB colors.
+	if !s.MarkerOff {
+		mx, my := s.Travel.MarkerPixel(l.Tile / l.Scale)
+		x0, y0 := (l.ViewX+mx*l.Scale)*2, (l.ViewY+my*l.Scale)*2
+		for y := 0; y < l.MarkerSide*2; y++ {
+			for x := 0; x < l.MarkerSide*2; x++ {
+				c := dst.At(x0+x, y0+y)
+				r, g, b, a := c.RGBA()
+				dst.Set(x0+x, y0+y, color.RGBA{255 - uint8(r>>8), 255 - uint8(g>>8), 255 - uint8(b>>8), uint8(a >> 8)})
 			}
 		}
 	}

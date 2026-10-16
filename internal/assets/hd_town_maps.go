@@ -81,7 +81,7 @@ func LoadHDTownMaps(dir string) (*HDTownMaps, error) {
 		cells, ok := coverage[region.Archive]
 		source, visible := townMapRect(region.SourceBounds), townMapRect(region.VisibleBounds)
 		info, fileOK := m.Files[region.File]
-		if !ok || !hdTownMapRegionID.MatchString(region.ID) || region.ID[:5] != fmt.Sprintf("town%c", region.Archive[4]) || seen[region.ID] || region.File != region.ID+".png" || !fileOK || !validHDHash(region.NativeRGBA) || !validHDHash(info.SHA256) || !townMapOrdered(region.SourceBounds) || !townMapOrdered(region.VisibleBounds) || source.Dx() != 12 || source.Dy() != 12 || !source.In(image.Rect(0, 0, 64, 64)) || !visible.In(source) || info.Width != info.Height || info.Width < 1152 || info.Width > 4096 {
+		if !ok || !hdTownMapRegionID.MatchString(region.ID) || region.ID[:5] != fmt.Sprintf("town%c", region.Archive[4]) || seen[region.ID] || region.File != region.ID+".png" || !fileOK || !validHDHash(region.NativeRGBA) || !validHDHash(info.SHA256) || !townMapOrdered(region.SourceBounds) || !townMapOrdered(region.VisibleBounds) || source.Dx() != 12 || source.Dy() != 12 || !source.In(image.Rect(0, 0, 64, 64)) || !visible.In(source) || info.Width != info.Height || info.Width < 768 || info.Width > 4096 {
 			return nil, fmt.Errorf("HD城鎮地圖位置、原生尺寸、檔名或來源範圍不符")
 		}
 		seen[region.ID] = true

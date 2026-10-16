@@ -1,0 +1,61 @@
+{
+  "State": {
+    "schema": "kol-town-outdoor-sample-v1",
+    "town": 3,
+    "party": [
+      {
+        "portrait": 47,
+        "name": "Theodoric",
+        "speaker": false,
+        "female": false,
+        "spellcaster": false,
+        "renown": 0,
+        "wounds": 0,
+        "worn": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "camera": {
+      "X": 23,
+      "Y": 29
+    },
+    "bounds": {
+      "MinX": 0,
+      "MaxX": 63,
+      "MinY": 0,
+      "MaxY": 63
+    },
+    "date": [
+      " Apr 1",
+      "AD  1100"
+    ],
+    "date_zh": [
+      "四月一日",
+      "西元 1100"
+    ],
+    "icons": [
+      5
+    ],
+    "selected": 0,
+    "marker": {
+      "Base": 0,
+      "Frame": 1,
+      "Row": 0,
+      "Col": 0
+    },
+    "at_door": false,
+    "door_cursor": 0,
+    "entry_point": 0,
+    "at_edge": false
+  }
+}

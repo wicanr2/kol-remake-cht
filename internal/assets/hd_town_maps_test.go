@@ -23,7 +23,7 @@ func TestHDTownMapsRealSources(t *testing.T) {
 	if err = m.ValidateSources(lib); err != nil {
 		t.Fatal(err)
 	}
-	if len(m.Images) != 84 || len(m.Grids) != 2 || m.Grids["TOWN2"] == nil {
+	if len(m.Images) != 336 || len(m.Grids) != 8 || m.Grids["TOWN2"] == nil || m.Grids["TOWN0"] == nil {
 		t.Fatal("incomplete city")
 	}
 	before := m.Grids["TOWN1"]
@@ -115,11 +115,18 @@ func TestHDTownMapsRejectPartial(t *testing.T) {
 			p.Height = 1152
 			m.Files[n] = p
 		}},
+		{"below-approved-delivery-size", func(m *HDTownMapsManifest) {
+			n := m.Regions[0].File
+			p := m.Files[n]
+			p.Width, p.Height = 767, 767
+			m.Files[n] = p
+		}},
 		{"wrong-source-index", func(m *HDTownMapsManifest) { m.Maps[0].Grid.Index = 1 }},
 		{"wrong-source-count", func(m *HDTownMapsManifest) { m.Maps[0].Count = 256 }},
 		{"wrong-generation", func(m *HDTownMapsManifest) { m.GenerationSHA = strings.Repeat("0", 64) }},
 		{"missing-last-png", func(m *HDTownMapsManifest) {}},
-		{"missing-second-city-region", func(m *HDTownMapsManifest) { m.Regions = m.Regions[:len(m.Regions)-1] }},
+		{"missing-second-city-region", func(m *HDTownMapsManifest) { m.Regions = append(m.Regions[:42], m.Regions[43:]...) }},
+		{"missing-world-region", func(m *HDTownMapsManifest) { m.Regions = m.Regions[:len(m.Regions)-1] }},
 		{"missing-second-city-png", func(m *HDTownMapsManifest) {}},
 		{"transparent-native", func(m *HDTownMapsManifest) {}},
 	}
