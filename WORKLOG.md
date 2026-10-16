@@ -11741,3 +11741,18 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 同日文件收尾：工作清單先核對指出摘要尚未重生及兩處原型的現在式；改成明確歷史範圍後render／verify通過，維持16開放／92完成。封存前已grep回查門面工作區引用，現行規格連到本機保存及正式素材；前文原workplace路徑保留為歷史定位，當前入口為docs/verification/retained-evidence.md的七城門面小節。
 
 同日保存：門面批次2047份內容已封存，8份可重建程式保留hash；原1708364195 bytes壓縮為1035168992 bytes，SHA-256 0656435c43ce680711719d000f872450b61f2a9b5ef55abee4652ce5565a589b。獨立唯讀重驗全部內容通過，精確刪除已完成門面工作區。新徽章工作區沿路由另建，僅DRAFT盤點7張56×57來源、保留原核准320×320圖，正式來源407／381保持。
+
+## 2026-10-16 七城徽章正式接入與下一批地圖
+
+- 上批門面提交bc309434b479e2785ba99fdd70ae088044584d40已push origin/main，遠端同SHA；舊v.1.0.2-20261013與tag保持。
+- 使用者GO與新版AGENTS重申SPEC-040受控場景優先；沿已核准Canvas紋章風格補六城，霍布城核准PNG保持。原生320×320、七來源56×57及完整archive數量、PNG／RGB／RGBA驗證；整組成功才換畫布，缺件與錯誤保持舊呈現。KOLMPICS28仍為結構資料。
+- 正式412來源／390 HD資產，全套、sceneverify及執行檔建置通過。七城28畫格的中文、完整Outdoor保持；EGA零差，獨立透明合成最多一色階，舊框外零差，168實際漢字、6種字缺字0。正常兩路每側41狀態相同；住宿11／重載5、舊v3可讀且檔案未變。兩城兩視窗鍵鼠24個實際F10，HD往返最多一色階。正式SHA7a1dfaa7eae9dbccab12ade81065402a2756f12eeacc537eac2e43b7f52080a8，buildvcs=false／trimpath。
+- 跨回合工具session失效，回讀持久結果確認已通過全套、七城畫面、正常操作與第一城GUI；最後一城停在large-ega.ppm擷取中，原輸出移至interrupted-gui-twn7pics-000-v1，僅同工具鏈補跑該城通過。這是中止的驗證流程，沒有證據指向產品缺陷。修正腳本建立時的patch標頭；未執行的Python集合表達式已先修。
+- README新增三組正式EGA／HD，七組比較與來源、清單、SPEC-039及13類覆蓋同步；本批只限Linux Docker，不新增原版oracle、自然通關或真機聲明。
+- 新地圖工作區已列入SPEC-039，盤點TOWN0…7實際各兩張PNG。256×256圖塊集共2048位置、1184不同RGBA；64×64索引圖是資料。runtime Grid使用集合尚待驗，不以PNG mode猜格式。一次猜讀不存在grid.go失敗，後續改查定義檔，不影響產品。
+- 本批正式與本機收據、封存及清理將依docs/verification/retained-evidence.md完成；執行容器均--rm、UID/GID1000:1000、無網路及有界資源，未建立新image。
+
+- 徽章封存360份，四執行檔只留雜湊，151506540 bytes／SHA ccb0a855318421fe59aa7921b57600d1704d560dd3813286c9fe4fe4c7b1dd4b；獨立唯讀逐檔核對通過。工具缺日期時的舊2026-10-07 fallback造成新清冊日期不實，改採completed_date或當日；只修正新清冊date為2026-10-16，原封存與歷史清冊未改。
+
+- 地圖盤點依LoadGrid實際契約核對8-bit灰階IHDR：1661使用位置／1076不同RGBA；這是來源資料盤點，尚無新Go地圖runtime收據。內建image_gen首張TOWN1候選已複製至地圖工作區，SHA5badf888a701094326ecdb099d90f36bb9ba711066853a7a729b683554c17f9b，原始1254×1254完整不透明。三處按真實格子重建，屋頂／牆面接縫不準且每格78／79小於96，標FAIL原型、不接production。提示保存map-atlas-first-prompt.txt；下一張拆左半8×16，集中核對形狀及接縫，不放寬正式一色階或圖形契約。
+- 徽章360份封存重驗後已精確清理workplace/hd-town-crests-20261015；地圖工作區保持。

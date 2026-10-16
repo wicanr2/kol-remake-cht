@@ -190,7 +190,20 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [八組比較](docs/verification/hd-town-facades-runtime-20261015/review.html)另含工坊、石塔、水車、城門與林地。
 103場景中文與畫面已核對；F10可在遊戲內切換，四場景兩種視窗的鍵鼠、完整城鎮狀態及v3存讀檔通過。
-圖中其餘六城徽章仍沿EGA，與地圖、戰場、天候等後續HD工作分開追蹤；完整範圍見[正式驗收](docs/verification/hd-town-facades-runtime-20261015.md)。
+本組門面截圖中的其餘六城徽章沿EGA，七城原生HD徽章見下節；門面驗收範圍見[正式驗收](docs/verification/hd-town-facades-runtime-20261015.md)。
+
+### 開發版：七城原生 HD 徽章
+
+七城徽章已沿核准銅框與紋章風格接入，霍布城核准圖保留。以下為正式程式在相同受控城鎮狀態下的比較，尚未納入現行發行包。
+
+| 重製中文 EGA | 正式 HD |
+|---|---|
+| ![第一城徽章與門面EGA](docs/verification/hd-town-crests-runtime-20261015/twn1pics-000-ega.png) | ![第一城原生日輪條紋徽章HD](docs/verification/hd-town-crests-runtime-20261015/twn1pics-000-hd.png) |
+| ![第二城帆船徽章EGA](docs/verification/hd-town-crests-runtime-20261015/twn2pics-000-ega.png) | ![第二城原生帆船與波浪徽章HD](docs/verification/hd-town-crests-runtime-20261015/twn2pics-000-hd.png) |
+| ![第四城新月拱橋徽章EGA](docs/verification/hd-town-crests-runtime-20261015/twn4pics-000-ega.png) | ![第四城原生新月拱橋徽章HD](docs/verification/hd-town-crests-runtime-20261015/twn4pics-000-hd.png) |
+
+[七組比較](docs/verification/hd-town-crests-runtime-20261015/review.html)另含樹木、城門、雙色紋章與保留的霍布城。
+七城中文與圖形已核對，F10可在同一場景切換；兩種視窗的鍵鼠、完整城鎮狀態與v3存讀檔已驗。來源及限制見[正式驗收](docs/verification/hd-town-crests-runtime-20261015.md)。地圖、戰場、天候及其餘HD工作繼續。
 
 ### 事件畫面：原版與 HD
 

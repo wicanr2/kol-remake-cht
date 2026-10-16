@@ -1,0 +1,32 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"image";"image/png";"os";"path/filepath";"reflect";"testing";"unicode";
+"github.com/hajimehoshi/ebiten/v2";"github.com/wicanr2/kol-remake-cht/internal/assets";"github.com/wicanr2/kol-remake-cht/internal/font";"github.com/wicanr2/kol-remake-cht/internal/flow";"github.com/wicanr2/kol-remake-cht/internal/i18n";"github.com/wicanr2/kol-remake-cht/internal/screen";"github.com/wicanr2/kol-remake-cht/internal/town")
+type crestCase struct{Key string;State *town.Outdoor}
+type crestFrame struct{Key,Variant,PNG,SHA,StateSHA string;Han int;Text []string}
+type crestGallery struct{g *game;cases []crestCase;frames []crestFrame;i,j int;done bool;err error;states map[string][]byte;words map[string][]string}
+func crestSetup(t *testing.T)(*game,[]crestCase){t.Helper();must:=func(e error){if e!=nil{t.Fatal(e)}};root:="/src"
+ lib,e:=assets.Load(root+"/assets/original-derived-png/ega");must(e);f,e:=font.Load(root+"/assets/ui-font","zh-hant-16");must(e);table,e:=i18n.Load(root+"/docs/i18n/newchar-zh-Hant.json");must(e)
+ _,e=table.LoadBank(root+"/docs/i18n/ui-zh-Hant.json",town.BankBook);must(e);must(table.LoadDisplayNames(root+"/docs/i18n/display-names-zh-Hant.tsv"));buildings,e:=town.LoadBuildings(root+"/assets/original-derived-data/town-buildings.json");must(e)
+ m:=&game{scene:sceneOutdoor,canvas:screen.NewCanvasScaled(3),sprites:&spriteCache{lib:lib,m:map[string]*ebiten.Image{}},cjk:f,strings:table,hdPortraitPath:root+"/assets/original-derived-data/portrait-layout.json"};must(m.enableHD("hd",root+"/assets/hd/first-slice","zh-Hant"))
+ var cases []crestCase
+ for townID:=1;townID<=7;townID++{out,e:=town.LoadOutdoor(root+"/docs/re/town1-outdoor-sample.json");must(e);out.Town=townID;out.Bounds.MinX=0;out.Bounds.MinY=0;out.Bounds.MaxX=63;out.Bounds.MaxY=63;out.SetBuildings(buildings.Town(townID));var door *town.Door
+ for i:=range buildings.Town(townID).Doors{d:=&buildings.Town(townID).Doors[i];if d.Picture==3{door=d;break}};if door==nil{t.Fatal("missing real door3")};out.PlaceParty(door.X,door.Y);out.AtDoorCell=true;if out.AtDoor()==nil||out.AtDoor().Picture!=3{t.Fatal("wrong prepared door")};cases=append(cases,crestCase{fmt.Sprintf("twn%dpics-000",townID),out})}
+ return m,cases
+}
+func(g *crestGallery)Update()error{if g.err!=nil{return g.err};if g.done{return ebiten.Termination};return nil}
+func(g *crestGallery)Layout(int,int)(int,int){return 1920,1200}
+func crestPNG(path string,pic *ebiten.Image)(string,error){b:=pic.Bounds();im:=image.NewRGBA(image.Rect(0,0,b.Dx(),b.Dy()));pic.ReadPixels(im.Pix);f,e:=os.OpenFile(path,os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);if e!=nil{return"",e};enc:=png.Encoder{CompressionLevel:png.BestSpeed};e=enc.Encode(f,im);ce:=f.Close();if e==nil{e=ce};raw,re:=os.ReadFile(path);if e==nil{e=re};return fmt.Sprintf("%x",sha256.Sum256(raw)),e}
+func(g *crestGallery)Draw(dst *ebiten.Image){if g.done||g.err!=nil{return};c:=g.cases[g.i];m:=g.g;m.outdoor=c.State;mode:="ega";if g.j==1{mode="hd"};variant:=os.Getenv("KOL_CREST_VARIANT")+"-"+mode
+ state,e:=json.Marshal(c.State);if e!=nil{g.err=e;return};if g.j==0{g.states[c.Key]=state}else if string(state)!=string(g.states[c.Key]){g.err=fmt.Errorf("Outdoor state mismatch");return}
+ if g.err=m.setGraphics(mode);g.err!=nil{return};var text []string;font.DrawObserver=func(_,s string){text=append(text,s)};g.err=m.render();font.DrawObserver=nil;if g.err!=nil{return}
+ if g.j==0{g.words[c.Key]=text}else if !reflect.DeepEqual(text,g.words[c.Key]){g.err=fmt.Errorf("Chinese mismatch");return};if g.err=m.presentHD();g.err!=nil{return}
+ after,e:=json.Marshal(c.State);if e!=nil||string(after)!=string(state){g.err=fmt.Errorf("renderer mutated Outdoor");return};han:=0;for _,word:=range text{for _,r:=range word{if unicode.Is(unicode.Han,r){han++}}};if han==0{g.err=fmt.Errorf("no Chinese");return}
+ name:=c.Key+"-"+variant+".png";sum,e:=crestPNG(filepath.Join("/out/gallery",name),m.outputCanvas().Image());if e!=nil{g.err=e;return};g.frames=append(g.frames,crestFrame{c.Key,variant,name,sum,fmt.Sprintf("%x",sha256.Sum256(state)),han,text})
+ var op ebiten.DrawImageOptions;if mode=="ega"{op.GeoM.Scale(2,2)};dst.DrawImage(m.outputCanvas().Image(),&op);g.j++;if g.j==2{g.j=0;g.i++;fmt.Printf("crest %d/7\n",g.i);g.done=g.i==7}}
+func TestCrestGallery(t *testing.T){if os.Getenv("KOL_CREST_GALLERY")!="1"{t.Skip("explicit controlled gallery")};m,cases:=crestSetup(t);g:=&crestGallery{g:m,cases:cases,states:map[string][]byte{},words:map[string][]string{}};ebiten.SetWindowSize(960,600);ebiten.SetTPS(60);if e:=ebiten.RunGame(g);e!=nil{t.Fatal(e)};if g.err!=nil{t.Fatal(g.err)};if len(g.frames)!=14{t.Fatal("incomplete capture")}
+ result:=map[string]any{"status":"captured; independent check pending","frames":g.frames,"scenes":7,"native_rect":[4]int{130,502,450,822},"old_retained_rect":[4]int{120,490,550,940},"original_oracle":false,"normal_player_path":false,"method":"actual OutdoorCJK/outdoorHD; real typed doors prepared at picture3; no gameplay RNG"};data,e:=json.MarshalIndent(result,"","  ");if e!=nil{t.Fatal(e)};if e=os.WriteFile("/out/"+os.Getenv("KOL_CREST_VARIANT")+"-captures.json",append(data,'\n'),0644);e!=nil{t.Fatal(e)}}
+type crestGUIObserver struct{g *game}
+func(n *crestGUIObserver)Update()error{return n.g.Update()}
+func(n *crestGUIObserver)Layout(w,h int)(int,int){return n.g.Layout(w,h)}
+func(n *crestGUIObserver)Draw(dst *ebiten.Image){n.g.Draw(dst);raw,_:=json.Marshal(map[string]any{"Outdoor":n.g.play.Outdoor,"hd":n.g.hd!=nil,"settings":n.g.displaySettings});fmt.Printf("equipment-frame %s\n",raw)}
+func TestHDCrestGUI(t *testing.T){name:=os.Getenv("KOL_CREST_GUI_CASE");if name==""{t.Skip("explicit controlled GUI")};m,cases:=crestSetup(t);var chosen *crestCase;for i:=range cases{if cases[i].Key==name{chosen=&cases[i];break}};if chosen==nil{t.Fatal("unknown crest")};m.play=&town.Session{Outdoor:chosen.State,Party:chosen.State.Party};m.flow=&flow.Flow{Scene:flow.SceneTown,Town:m.play};m.scene=sceneFlow;m.interactive=true;m.logInput=true;m.walkTick=-1073741824;ebiten.SetWindowSize(1920,1200);ebiten.SetWindowTitle("七城徽章HD遊戲內切換驗收");ebiten.SetTPS(60);if e:=ebiten.RunGame(&crestGUIObserver{m});e!=nil{t.Fatal(e)};if m.drawErr!=nil{t.Fatal(m.drawErr)}}

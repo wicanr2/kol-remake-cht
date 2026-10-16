@@ -283,9 +283,13 @@ func (h *HD) outdoorHD(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) er
 	if err != nil {
 		return err
 	}
-	if h.fingerprint(crest) == s.crestKey {
+	crestDrawn, err := h.drawTownCrest(dst, sprites, out)
+	if err != nil {
+		return err
+	}
+	if !crestDrawn && h.fingerprint(crest) == s.crestKey {
 		h.drawHD(dst, s.images["crest.png"], hdRect(130, 502, 320, 320))
-	} else {
+	} else if !crestDrawn {
 		s.preserve(dst, hdRect(120, 490, 430, 450))
 	}
 	s.panel(dst, hdRect(618, 342, 1164, 588), false)

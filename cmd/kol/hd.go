@@ -88,6 +88,13 @@ func (g *game) setGraphics(mode string) error {
 		if err := facades.ValidateSources(g.sprites.lib); err != nil {
 			return fmt.Errorf("HD城鎮門面來源驗證失敗：%w", err)
 		}
+		crests, err := assets.LoadHDTownCrests(filepath.Join(g.hdDir, "town-crests"))
+		if err != nil {
+			return fmt.Errorf("HD七城徽章載入失敗：%w", err)
+		}
+		if err := crests.ValidateSources(g.sprites.lib); err != nil {
+			return fmt.Errorf("HD七城徽章來源驗證失敗：%w", err)
+		}
 		hd := ui.NewHD(lib.Facade, lib.Party, lib.Manifest.FacadeRGB, lib.Manifest.PortraitRGB)
 		glyphs := make(map[string]ui.HDGlyph, len(controls.Font.Glyphs))
 		for ch, g := range controls.Font.Glyphs {
@@ -156,6 +163,13 @@ func (g *game) setGraphics(mode string) error {
 			uiSign.Full[i], uiSign.Clip[i] = image.Rect(b[0], b[1], b[2], b[3]), image.Rect(c[0], c[1], c[2], c[3])
 		}
 		if err := hd.AttachTownFacades(facadeArts, uiSign); err != nil {
+			return err
+		}
+		var crestArts []ui.HDTownCrestArt
+		for i, p := range crests.Manifest.Pictures {
+			crestArts = append(crestArts, ui.HDTownCrestArt{Source: ui.HDPageSource{Archive: p.Archive, Index: p.Index, RGB: p.SourceRGB}, Paint: crests.Images[i]})
+		}
+		if err := hd.AttachTownCrests(crestArts); err != nil {
 			return err
 		}
 		g.hdCache, g.hdCanvas = hd, canvas

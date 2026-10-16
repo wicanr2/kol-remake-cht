@@ -89,6 +89,11 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 				return fmt.Errorf("HD裝備來源%s第%d圖實際尺寸不符", source.Archive, source.Index)
 			}
 		}
+		if h.crests != nil && source.Index == 0 {
+			if _, ok := h.crests.pictures[source.Archive]; ok && pic.Bounds().Size() != image.Pt(56, 57) {
+				return fmt.Errorf("HD七城徽章來源實際尺寸不符")
+			}
+		}
 		if source.Archive == "CHARPICS" && (pic.Bounds().Dx() != 40 || pic.Bounds().Dy() != 38) {
 			return fmt.Errorf("HD角色來源第%d圖須為40×38", source.Index)
 		}
@@ -205,6 +210,11 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 		return true
 	}
 	painted := src
+	if h.crests != nil {
+		if crest, ok := h.crests.byRGB[key]; ok {
+			painted = crest
+		}
+	}
 	if i, ok := h.matching[key]; ok {
 		painted = h.portraits[i]
 	} else if key == h.style.npcKey {

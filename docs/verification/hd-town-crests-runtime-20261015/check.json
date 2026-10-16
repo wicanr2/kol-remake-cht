@@ -1,0 +1,212 @@
+{
+  "status": "PASS limited seven-crest native render, Chinese, normal operations, F10 and v3",
+  "scenes": 7,
+  "frames": 28,
+  "records": [
+    {
+      "key": "twn1pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn2pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn3pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn4pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn5pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn6pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 231,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn7pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 0,
+      "preserved_whole_hd_checked": true
+    }
+  ],
+  "native_composite_max": 1,
+  "outside_max": 0,
+  "actual_han_characters": 168,
+  "unique_han": 6,
+  "missing_glyphs": [],
+  "normal": [
+    {
+      "case": "winged-regression",
+      "states": 10,
+      "trace_equal": true,
+      "chinese_equal": true,
+      "ega_max": 0,
+      "hd_max": 1
+    },
+    {
+      "case": "human-slots",
+      "states": 31,
+      "trace_equal": true,
+      "chinese_equal": true,
+      "ega_max": 0,
+      "hd_max": 1
+    }
+  ],
+  "states_per_variant": 41,
+  "gui": [
+    {
+      "case": "twn1pics-000",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "d70c8ebe47cb4bd649b79bffb401e2b1ca4d6c8dd1130276bafa1bab466a1e83"
+    },
+    {
+      "case": "twn7pics-000",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "481de83b806fb32721b541144cbacfcae611ce9d70867b84759b1fbdd46df6b8",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "481de83b806fb32721b541144cbacfcae611ce9d70867b84759b1fbdd46df6b8",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "3d380867e286f700d6d63e97486fcb91920b4f2474baae14aa944719257ecf80"
+    }
+  ],
+  "F10_events": 24,
+  "window_sizes": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "saved": {
+    "schema": "kol-hd-action-save-check/1",
+    "rest_script": "L R RET SPACE > > > > RET RET",
+    "rest_states": 11,
+    "reload_states": 5,
+    "normal_save_equal_except_saved_at": true,
+    "reload_file_unchanged": true,
+    "old_v3_from_baseline": {
+      "sha256": "5b2ae233edb78eea8646c75df45914ce136ca54185894f5eae3438b2539fcd73",
+      "trace_equal": true,
+      "text_equal": true,
+      "file_unchanged": true
+    },
+    "limits": "Normal play rest/reload only; no new completion or original parity claim."
+  },
+  "source_inputs_sha256": "cd880573f2dcce009ea6c47285dc7d87a0adbb706d20820943f0bcdcb47ae9e8",
+  "asset_inputs_sha256": "fa08ca23a558271906514a1319854911b89a402bc677069da5d0c655e6ffa9d0",
+  "verification_source_inputs_sha256": "a36c134eed0dc5fd20d889a2ad882d1a44fad5b7901136d15a4a51c397e3c9cc",
+  "formal_binary_sha256": "7a1dfaa7eae9dbccab12ade81065402a2756f12eeacc537eac2e43b7f52080a8",
+  "baseline_commit": "bc309434b479e2785ba99fdd70ae088044584d40",
+  "platform": "Linux Docker only",
+  "original_oracle": false,
+  "natural_completion": false,
+  "prepared_GUI_marker_clock": "walkTick=-1073741824; production rules unchanged"
+}

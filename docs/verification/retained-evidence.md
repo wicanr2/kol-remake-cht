@@ -457,3 +457,10 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 核對沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town-facades-20261015`；`delete hd-town-facades-20261015`逐檔核對後只清理本批。完整重生沿壓縮檔中的`build-formal.sh`及`build-formal-verification.sh`，將固定來源407份及素材381份所在專案掛`/src`、解開的證據掛`/out`，使用`kol-package:1.26.7-ebiten2.9.9-20261011-r1`、UID/GID1000:1000、無網路、8GiB、4CPU、512程序與1200秒外層逾時；先核對來源索引，支援範圍限Linux Docker，執行檔需重建。
 
 本批保存2047份檔案，8份可重建執行檔只留雜湊；1708364195 bytes壓縮為1035168992 bytes。壓縮SHA-256為`0656435c43ce680711719d000f872450b61f2a9b5ef55abee4652ce5565a589b`。已在獨立唯讀容器重驗全部保存內容；精確清理門面工作區，下一批徽章工作區保持。
+
+## 七城徽章HD正式接入
+
+[正式驗收](hd-town-crests-runtime-20261015.md)保存七城28張畫格、168觀測漢字、每側41個正常狀態、24個F10事件、住宿11／重載5及前版v3。412份Go／module與390份HD資產各有索引；原生Canvas程式及來源保留，完整模型與中止GUI輸出僅本機。
+本機保存清冊位於`local/hd-town-crests-20261015/retention.json`。沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town-crests-20261015`；`delete hd-town-crests-20261015`逐檔核對後只清理本批，地圖工作區保持。完整重生沿本批`verify.sh`及正式驗收頁的鎖版工具鏈與掛載契約。
+
+本批保存360份檔案，四份可重建程式只留雜湊；290010634 bytes壓縮為151506540 bytes，SHA-256為`ccb0a855318421fe59aa7921b57600d1704d560dd3813286c9fe4fe4c7b1dd4b`。已在獨立唯讀容器逐檔驗證。新清冊原沿用工具的舊日期，已單獨修正為2026-10-16；壓縮檔與原封存收據保持。

@@ -5,12 +5,14 @@ import hashlib
 import json
 import shutil
 import tarfile
+from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-town-crests-20261015',
     'hd-town-facades-20261015',
     'hd-monsters-20261015',
     'hd-npc-mounts-20261015',
@@ -149,7 +151,7 @@ def archive(name):
         shutil.copy2(source / path, dest / path)
     index = {
         'schema': 'kol-retained-verification/1',
-        'date': receipt.get('verified_on', receipt.get('date', '2026-10-07')),
+        'date': receipt.get('verified_on', receipt.get('completed_date', receipt.get('date', date.today().isoformat()))),
         'source': 'workplace/' + name,
         'rights': 'local-only original-derived evidence; no publication',
         'receipt_sha256': files['receipt.json']['sha256'],

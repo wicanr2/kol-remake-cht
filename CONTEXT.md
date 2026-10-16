@@ -1,6 +1,6 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-10-15。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
+更新日期：2026-10-16。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
 現行交付為`v.1.0.2-20261013`，三平台六包與76秒影片完成，[private GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)已發布。使用者維持一色階，固定整數雙線性取樣修正後，正式三環境三十組及實際封包二十組皆EGA零差、HD最多一色階。正常1046狀態及13新程序重載、F9／F10、實際音訊與六包完整性通過。使用者最終以go解除暫緩，四個遠端附件大小及SHA-256相符；tag固定指向46a01f11。首次兩色階失敗保留，完整版與影片留本機。入口：[交付收據](docs/verification/release-v1.0.2-20261013.md)。
 HD 首批門面與六人肖像已核准並接入1920×1200遊戲，首批有限CONFORMED；尚未接入的美術維持DRAFT。
 遊戲內「畫面 F10」設定已核准並接入正式遊戲，切換與正常住宿存讀檔驗收通過。
@@ -41,7 +41,13 @@ README已有怪物資訊框與12隻群像同主題比較。完整樣本與失敗
 
 正式407份Go／module、381份HD資產，全套及sceneverify通過；103場景412畫格中文及完整可序列化Outdoor相同，EGA零差、相對候選整張HD及原生圖片最多一色階、圖外零差，2544觀測字元缺字0。正常兩路每側41狀態、四場景兩視窗鍵鼠48個F10及完整Outdoor保持，HD往返最多一色階；正常住宿11／重載5與前版v3通過。程式SHA為`8e4429295384f69972407783305c61bf63b30d625b6295ed89a8edcade946ca3`。
 
-README已加入同主題門面、樹屋與住宅中文比較。初版板面錯位、工具環境失敗與未解CPU字模濾波模型保留；後者屬可選oracle限制，不放寬正式整張HD一色階。完整證據沿[保存入口](docs/verification/retained-evidence.md#七城門面與城門林地hd正式接入)封存清理。下一批[六城其餘徽章](workplace/hd-town-crests-20261015/plan.json)已DRAFT盤點，沿原核准Canvas紋章畫法，之後城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件仍依[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋)續作；全畫面HD尚未完成。
+README已加入同主題門面、樹屋與住宅中文比較。初版板面錯位、工具環境失敗與未解CPU字模濾波模型保留；後者屬可選oracle限制，不放寬正式整張HD一色階。完整證據沿[保存入口](docs/verification/retained-evidence.md#七城門面與城門林地hd正式接入)封存清理。七城徽章後續接入見下段；城鎮／世界地圖、戰場、傷勢、天候、片頭與其餘事件仍依[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋)續作，全畫面HD尚未完成。
+
+七城原生徽章已[正式接入並有限驗收](docs/verification/hd-town-crests-runtime-20261015.md)，六張新Canvas圖沿核准紋章風格，霍布城核准PNG位元組保持。來源56×57、原生320×320及七城實際archive數量／PNG／RGB／RGBA完整驗後才交換畫布；AND遮罩仍為資料。
+
+正式412份Go／module、390份HD資產，全套及sceneverify通過；七城28張畫格的中文與完整可序列化Outdoor相同，EGA零差、獨立透明合成最多一色階、舊徽章框外零差，168觀測漢字缺字0。兩條正常操作每側41狀態保持，兩城兩視窗鍵鼠24個實際F10、HD往返最多一色階；住宿11／重載5與前版v3通過。正式執行檔SHA為`7a1dfaa7eae9dbccab12ade81065402a2756f12eeacc537eac2e43b7f52080a8`。
+
+README已加入同主題日輪、帆船及拱橋比較。最後一城GUI中止的原輸出保留，只補跑該城通過。完整證據沿[保存入口](docs/verification/retained-evidence.md#七城徽章hd正式接入)封存清理。下一批[城鎮與世界地圖盤點](workplace/hd-town-maps-20261016/plan.json)為DRAFT，八組共2048圖塊位置、1184個不同RGBA圖塊；64×64索引地圖保持資料，實際1661個使用位置對應1076個不同RGBA。首張手繪圖塊集重建三處地圖時屋頂接縫不準，維持DRAFT；較小圖塊組候選續驗，尚未接入HD。
 
 現行交付與tag保持`v.1.0.2-20261013`，本批尚未進發行包。組隊與商店已有操作證據，受控七段結局能顯示；從新開局正常完成全部任務至結局仍未驗證。
 
@@ -50,8 +56,8 @@ README已加入同主題門面、樹屋與住宅中文比較。初版板面錯�
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 開發版407份Go／module、381份HD資產；[門面正式收據](docs/verification/hd-town-facades-runtime-20261015/receipt.json)。現行發行來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 發行tag仍固定46a01f11，尚未重建新封包 |
-| 最近測試 | 門面103場景412畫格、2544觀測字元缺字0，EGA零差、原生及完整HD最多一色階；正常41狀態、48個F10及完整Outdoor保持，住宿11／重載5與前版v3通過，全套及sceneverify通過 | Linux Docker；六城其餘徽章、其餘HD類別、跨平台與自然通關保持開放 |
+| 正式來源 | 開發版412份Go／module、390份HD資產；[徽章正式收據](docs/verification/hd-town-crests-runtime-20261015/receipt.json)。現行發行來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 發行tag仍固定46a01f11，尚未重建新封包 |
+| 最近測試 | 七城徽章28畫格、168觀測漢字缺字0，EGA零差、獨立透明合成一色階；正常41狀態、24個F10及完整Outdoor保持，住宿11／重載5與前版v3通過，全套及sceneverify通過 | Linux Docker；地圖、其餘HD類別與平台真機保持開放 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
 | 跨平台 | [現行交付驗收](docs/verification/release-v1.0.2-20261013.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal六包通過；實際AppImage及Wine兩個ZIP啟動、F9／F10與音訊通過，遠端四附件大小及SHA相符 | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
@@ -64,7 +70,7 @@ README已加入同主題門面、樹屋與住宅中文比較。初版板面錯�
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | 現行發行含首批門面、六人、操作介面、F10及四首配樂／F9；開發版另完成七段結局、原生書頁／服務／編輯器、卷軸、80張角色模板、68個動作圖示、完整裝備、七城NPC／四坐騎、32種怪物資訊／群像及七城102門面／城門林地，見[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋) | 六城其餘徽章、地圖、戰場、傷勢、天候、片頭、未訪操作分支及其餘事件仍開放；資料PNG不重繪 |
+| HD | 現行發行含首批門面、六人、操作介面、F10及四首配樂／F9；開發版另完成七段結局、原生書頁／服務／編輯器、卷軸、80張角色模板、68個動作圖示、完整裝備、七城NPC／四坐騎、32種怪物資訊／群像、七城102門面／城門林地及七城原生徽章，見[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋) | 地圖、戰場、傷勢、天候、片頭、未訪操作分支及其餘事件仍開放；資料PNG不重繪 |
 | 交付 | `v.1.0.2-20261013`：三平台full／release、76秒1080p影片；private Release已發布，四附件完整性與46a01f11 tag核對通過，入口[本版收據](docs/verification/release-v1.0.2-20261013.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
 | GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，16開放／92已核實完成不變 |
 
@@ -130,10 +136,10 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 | ui-details-unverified | 補五處UI未驗邊界及RE-295紮營確認；送禮選人版面、空白法術名、類型0明細與[馬廄確認原型](workplace/steed-trade-normal-20261006/review.html)仍待原問題回答 |
 | mouse-original-semantics | 回答兩次點擊、右鍵、世界點擊三處原有取捨，依選擇實作與驗收 |
 | character-creation-boundary-parity | 重名政策及滿槽／名稱邊界確認，SPEC-005／023 審查後正式修正 |
-| hd-art-ui | 怪物本批已有限驗收，下一批七城門面；地圖、戰場、傷勢、天候、片頭與其餘事件依[SPEC-039](docs/spec/039-hd-art-ui.md)續作，新平台封包／真機仍開放 |
+| hd-art-ui | 七城門面及徽章已有限驗收，下一批地圖；地圖、戰場、傷勢、天候、片頭與其餘事件依[SPEC-039](docs/spec/039-hd-art-ui.md)續作，新平台封包／真機仍開放 |
 
 HD採已核准的1920×1200原比例，各批完成範圍以目前狀態表及正式收據為準。
-下一批門面仍DRAFT，後續依[SPEC-039](docs/spec/039-hd-art-ui.md)審查素材，不重新開啟已確認選項。
+下一批地圖仍DRAFT，後續依[SPEC-039](docs/spec/039-hd-art-ui.md)審查素材，不重新開啟已確認選項。
 [送禮選人](workplace/gift-recipient-layout-20261005/review.html)仍依原DRAFT閘門處理；
 [住宅告示](docs/re/20261006-residence-sign-prototype.md)的兩行「請勿／踐踏草坪」已核准並接入本版。
 

@@ -1,0 +1,261 @@
+{
+  "status": "PASS limited seven-crest native render, Chinese, normal operations, F10 and v3",
+  "scenes": 7,
+  "frames": 28,
+  "records": [
+    {
+      "key": "twn1pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn2pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn3pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn4pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn5pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 238,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn6pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 231,
+      "preserved_whole_hd_checked": false
+    },
+    {
+      "key": "twn7pics-000",
+      "ega_rgba_exact": true,
+      "complete_serializable_Outdoor_equal": true,
+      "chinese_equal": true,
+      "native_composite_max": 1,
+      "outside_old_crest_rect_max": 0,
+      "whole_baseline_hd_max": 0,
+      "preserved_whole_hd_checked": true
+    }
+  ],
+  "native_composite_max": 1,
+  "outside_max": 0,
+  "actual_han_characters": 168,
+  "unique_han": 6,
+  "missing_glyphs": [],
+  "normal": [
+    {
+      "case": "winged-regression",
+      "states": 10,
+      "trace_equal": true,
+      "chinese_equal": true,
+      "ega_max": 0,
+      "hd_max": 1
+    },
+    {
+      "case": "human-slots",
+      "states": 31,
+      "trace_equal": true,
+      "chinese_equal": true,
+      "ega_max": 0,
+      "hd_max": 1
+    }
+  ],
+  "states_per_variant": 41,
+  "gui": [
+    {
+      "case": "twn1pics-000",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "b9302ae9f2ca3a3789a216cf70c4f6ba77d09e02f3df9a23bdf1e1e422662ff8",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "d70c8ebe47cb4bd649b79bffb401e2b1ca4d6c8dd1130276bafa1bab466a1e83"
+    },
+    {
+      "case": "twn7pics-000",
+      "events": 12,
+      "rounds": [
+        {
+          "scene": "large",
+          "mouse": false,
+          "size": [
+            1920,
+            1200
+          ],
+          "hd_max_channel_delta": 1,
+          "state_sha256": "481de83b806fb32721b541144cbacfcae611ce9d70867b84759b1fbdd46df6b8",
+          "files": [
+            "large-before.png",
+            "large-ega.png",
+            "large-restored.png"
+          ]
+        },
+        {
+          "scene": "small",
+          "mouse": true,
+          "size": [
+            960,
+            600
+          ],
+          "hd_max_channel_delta": 0,
+          "state_sha256": "481de83b806fb32721b541144cbacfcae611ce9d70867b84759b1fbdd46df6b8",
+          "files": [
+            "small-before.png",
+            "small-ega.png",
+            "small-restored.png"
+          ]
+        }
+      ],
+      "receipt_sha256": "3d380867e286f700d6d63e97486fcb91920b4f2474baae14aa944719257ecf80"
+    }
+  ],
+  "F10_events": 24,
+  "window_sizes": [
+    [
+      1920,
+      1200
+    ],
+    [
+      960,
+      600
+    ]
+  ],
+  "saved": {
+    "schema": "kol-hd-action-save-check/1",
+    "rest_script": "L R RET SPACE > > > > RET RET",
+    "rest_states": 11,
+    "reload_states": 5,
+    "normal_save_equal_except_saved_at": true,
+    "reload_file_unchanged": true,
+    "old_v3_from_baseline": {
+      "sha256": "5b2ae233edb78eea8646c75df45914ce136ca54185894f5eae3438b2539fcd73",
+      "trace_equal": true,
+      "text_equal": true,
+      "file_unchanged": true
+    },
+    "limits": "Normal play rest/reload only; no new completion or original parity claim."
+  },
+  "source_inputs_sha256": "cd880573f2dcce009ea6c47285dc7d87a0adbb706d20820943f0bcdcb47ae9e8",
+  "asset_inputs_sha256": "fa08ca23a558271906514a1319854911b89a402bc677069da5d0c655e6ffa9d0",
+  "verification_source_inputs_sha256": "a36c134eed0dc5fd20d889a2ad882d1a44fad5b7901136d15a4a51c397e3c9cc",
+  "formal_binary_sha256": "7a1dfaa7eae9dbccab12ade81065402a2756f12eeacc537eac2e43b7f52080a8",
+  "baseline_commit": "bc309434b479e2785ba99fdd70ae088044584d40",
+  "platform": "Linux Docker only",
+  "original_oracle": false,
+  "natural_completion": false,
+  "prepared_GUI_marker_clock": "walkTick=-1073741824; production rules unchanged",
+  "schema": "kol-hd-town-crests-runtime/1",
+  "completed_date": "2026-10-16",
+  "rights": "private/local only; not included in existing Release",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "production_source_count": 412,
+  "hd_asset_count": 390,
+  "harness_source_count": 413,
+  "full_test": "PASS",
+  "sceneverify": "PASS",
+  "formal_binary_flags": "-trimpath -buildvcs=false",
+  "attachments": {
+    "asset-inputs.json": "fa08ca23a558271906514a1319854911b89a402bc677069da5d0c655e6ffa9d0",
+    "save.py": "79de65c8e7126c303d7d30f7d9e294d68780c15698492252d0423cfd409d9b53",
+    "native-check.json": "2e8240cff126adc787fb06af939c464ba802922f647b8a10312639fcd76f83bb",
+    "twn3pics-000-hd.png": "bd63a2b8998ac25f2a37f11c6a66cc3621b27879f142247574521ae80969f6c5",
+    "twn5pics-000-hd.png": "80e22564b2caa47275959ec37f6c375e778b87daaf97ecf540033d8603de278c",
+    "verification-source-inputs.json": "a36c134eed0dc5fd20d889a2ad882d1a44fad5b7901136d15a4a51c397e3c9cc",
+    "review.html": "4ec601cceb0601ed25a4a71e3a2ede771e002d39b5e35888f87abc488b52f1fe",
+    "manifest.json": "d71920f073eea2e9d823235a44243860363751abbe382bf874288dafc2e6382d",
+    "twn4pics-000-hd.png": "098c1c4b35aa97183ca92cea483f6637ae2136c9414376f4b8e3c799dbf6abb7",
+    "twn1pics-000-ega.png": "ed9fac243fbeff03bbd6ae7485792d2047a4965354bb07c1ffff11ec9bcfbc85",
+    "gallery.go.txt": "f13cb116ce6359bd87779b369788567bab1f57b366caa0ccf2d4315f72a25ca0",
+    "twn2pics-000-hd.png": "1beb3ff2e9c5b31d97a9be82b418cd4348527adfd94b9169ce23a39190513014",
+    "normal.py": "b9fad74f1e51c87c880a12fe817fed022312d063df67607d656d1e7748f6d305",
+    "gui.py": "099be2f987ac99e2b35c0e87c9f4ff8acdc414dcc2ae77a6e49fbb0f502b6ac1",
+    "twn6pics-000-ega.png": "f3d205c5c910b728c687e723de28131b2554df32b2202d0360c25d745a8d550c",
+    "full-test.log": "2c201d0fd92621ca166fd3036ca581cdc673f026393a1a02d296a684a9d915da",
+    "check.py": "f056bd1deba570b6daceb7c01561333a5d8955097e47b974bbefd65b22e27702",
+    "sceneverify.log": "fa11af738bea66da27c155f9cb8bdadbbfd176dc0a19f6c58176f0072b4e23dd",
+    "twn3pics-000-ega.png": "69abd42882fb4058bad8b4b4a755e7277fb91b40e6f16c8b1d8b57fc9bd6e715",
+    "twn5pics-000-ega.png": "9c21812607f5a7d8e567629286716d162fb3733cca7b1244f4198e5fdb6497cd",
+    "twn1pics-000-hd.png": "049277e36300a49b67602ff002ff5092f1da2ea520d72f0badf74633550a2902",
+    "crests.js": "d4ef6aa2b4d2a3af7ec91414ced453bf91578f8223e6e2585f5d40ae8167f0f1",
+    "formal-captures.json": "a04b235e41e9932926f317a8b492e1006bab815d5a7ab5326e7c750819dec320",
+    "baseline-captures.json": "8ca6016f7ab2971baa5c13a3ba98164cc74f966646983b787f754a4397a0ed01",
+    "twn6pics-000-hd.png": "5f5c9cc31e5ad0d4219d5e9f8730f260bb00fc3c6929a3147adb59608a6d2cbf",
+    "twn2pics-000-ega.png": "bae9fda1165ce061ed2197fa5a4f689fc5f4b7b8daf99c4f3a2baa6f80b53992",
+    "check.json": "82f0d0d725812f61af0dc9c45903bb17838c9b5cd8be4173c9fc8f1034d8c789",
+    "export.py": "e4d3fd5f32d5ef2e81d2565cd2d60ace723d022c419444d7271e52eae23104d3",
+    "plan.json": "0f859624dd731f729aa6d561b8c5ed5562478c6c65eba36cc4252bc18568e28a",
+    "source-inputs.json": "cd880573f2dcce009ea6c47285dc7d87a0adbb706d20820943f0bcdcb47ae9e8",
+    "canvas-export.json": "eb7209415dc843616621ba9a27b84810463d7d3ae00cd9d0ed3b7d4d52abcb42",
+    "twn7pics-000-hd.png": "85d2e47a69cb3f49481b83db173a9693e0debd2b82f293b73c5b1491a7478778",
+    "verify.sh": "57028540e4b6675b25f3a189ee1ec6f80f2f9cf9f7454762dabe1ac0bca6f666",
+    "twn4pics-000-ega.png": "ca5c3c91f28de9b6c5ac7aea123f4f3be060291735e8eba73e84ae3b9ab36e6a",
+    "generation.json": "20187f4af467c1d8428523d91f197c3bb1c7cf1d36cc8848ee7e16f7db3354d9",
+    "twn7pics-000-ega.png": "c21ee65f77ca73744b260a900cae63dbdfde8693a69dac2437722e553c7aebab"
+  },
+  "visual_review": "all seven formal HD scenes and full-size ship scene inspected; Chinese date, copper frame and native crests correct"
+}

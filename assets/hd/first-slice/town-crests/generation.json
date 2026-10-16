@@ -1,0 +1,33 @@
+{
+  "schema": "kol-hd-town-crests-canvas/1",
+  "command": [
+    "chromium",
+    "--headless",
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--user-data-dir=/tmp/kol-town-crests-chromium",
+    "--allow-file-access-from-files",
+    "--dump-dom",
+    "file:///repo/workplace/hd-town-crests-20261015/review.html"
+  ],
+  "browser": "Chromium 154.0.8037.92 built on Debian GNU/Linux 12 (bookworm)",
+  "creator": "code-native Canvas extension of approved crest()",
+  "rights": "private-source-bound PNG; local/private only; no public grant",
+  "source_count": 7,
+  "new_count": 6,
+  "preserved": "twn7pics-000.png",
+  "creator_sha256": "d4ef6aa2b4d2a3af7ec91414ced453bf91578f8223e6e2585f5d40ae8167f0f1",
+  "files": {
+    "twn1pics-000.png": "920750443829db98c0f4223c95595a99bf06952f6c87abfbf344e9abbe844b31",
+    "twn2pics-000.png": "5d5b80e6d211a857eb7cc3e77d4a5ead3f50f4ea9f6fc438f453d19e37c0c8d2",
+    "twn3pics-000.png": "0f6d5f2ea0e1a104cc441449486571ec0b00eecfc6b2c3784ccacfd534b9244a",
+    "twn4pics-000.png": "db62d961fe19a4dce71b3d96acd5d4b0d773594a84a2b2637625e9b58fddf030",
+    "twn5pics-000.png": "aa40d6fd35d6b7bd173ded3ed439ccd3bae366d6bb956d3e50a32bb731ce4432",
+    "twn6pics-000.png": "0f60931e56296b1c25e9e860189834a2060360dd76d1ffa007bb7de527c61b20",
+    "twn7pics-000.png": "3e9fa444a362271b2978c508f7a40c04ba9a14cf212d55cd2ff5fcf9683d30f4"
+  },
+  "creator_source": "docs/verification/hd-town-crests-runtime-20261015/crests.js",
+  "original_style_source": "docs/verification/hd-ui-theme-20261012/review.js",
+  "original_style_sha256": "ecab3ad4a8560f219c4e848b7526c36fd366a54ef6bffba8e739ab79ae88967e"
+}
