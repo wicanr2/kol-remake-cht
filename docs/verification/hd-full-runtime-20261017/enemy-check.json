@@ -1,0 +1,691 @@
+{
+  "status": "PASS",
+  "controlled_scenes": 34,
+  "frames": 136,
+  "cross_stage_model_unchanged_for33_field_scenes": true,
+  "Chinese_unchanged": true,
+  "result_scene_inactive_title_cache_differs": true,
+  "within_stage_model_unchanged": true,
+  "ega_delta": 0,
+  "hd_roundtrip_max_delta": 1,
+  "changed_asset": "battle-sprite-6.png",
+  "other64_assets_unchanged": true,
+  "changed_pixels_confined_to_enemy_cell": true,
+  "checks": [
+    {
+      "name": "event-combat-03",
+      "variant": "first-hd",
+      "enemy_change_bounds": null
+    },
+    {
+      "name": "event-combat-03",
+      "variant": "restored-hd",
+      "enemy_change_bounds": null
+    },
+    {
+      "name": "body-0-0",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-0-0",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-0-1",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-0-1",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-0-2",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-0-2",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-1-0",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-1-0",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-1-1",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-1-1",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-1-2",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-1-2",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-2-0",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-2-0",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-2-1",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-2-1",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-2-2",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "body-2-2",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-08-map-00",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-08-map-00",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-08-map-08",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        615
+      ]
+    },
+    {
+      "name": "battle-08-map-08",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        615
+      ]
+    },
+    {
+      "name": "battle-08-map-16",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-08-map-16",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-08-map-24",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-08-map-24",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-12-map-00",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-12-map-00",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-12-map-08",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        615
+      ]
+    },
+    {
+      "name": "battle-12-map-08",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        615
+      ]
+    },
+    {
+      "name": "battle-12-map-16",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-12-map-16",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-12-map-24",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-12-map-24",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-0",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-0",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-1",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-1",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-2",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-2",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-3",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-3",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-4",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "target-4",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-08",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-08",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-10",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-10",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-06",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-06",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-07",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-07",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-02",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-02",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-03",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-03",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-04",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-04",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-05",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-05",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-09",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-09",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-11",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-prompt-11",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-spoils",
+      "variant": "first-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    },
+    {
+      "name": "battle-spoils",
+      "variant": "restored-hd",
+      "enemy_change_bounds": [
+        1297,
+        539,
+        1390,
+        614
+      ]
+    }
+  ],
+  "manifest_sha256": "e065f4468fe3711aeed58ac5692242fb37d1101df911a62d97ded4e0fabdf6bb",
+  "generation_sha256": "efafd965937524f64c38d28c2434b3554d5ad6e1bb2454c39da162ac99c7d332",
+  "source_index_sha256": "e82ae8695df46eff86c11488951927149e56f641cfefc7e6f873bc32a4c91b89",
+  "original_oracle": false,
+  "normal_player_path": false
+}

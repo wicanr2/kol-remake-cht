@@ -1,0 +1,519 @@
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/wicanr2/kol-remake-cht/internal/battle"
+	"github.com/wicanr2/kol-remake-cht/internal/book"
+	"github.com/wicanr2/kol-remake-cht/internal/font"
+	"github.com/wicanr2/kol-remake-cht/internal/title"
+	"github.com/wicanr2/kol-remake-cht/internal/town"
+	"github.com/wicanr2/kol-remake-cht/internal/ui"
+	"github.com/wicanr2/kol-remake-cht/internal/world"
+	"image/png"
+	"os"
+	"path/filepath"
+	"reflect"
+	"strings"
+	"testing"
+	"unicode"
+)
+
+type motionCase struct {
+	Name, Kind  string
+	Apply       func(*game) error
+	State       func(*game) any
+	HanRequired bool
+}
+type motionFrame struct {
+	Name, Kind, Variant, PNG, SHA, StateSHA string
+	Text                                    []string
+	Han                                     int
+}
+type motionGallery struct {
+	m      *game
+	cases  []motionCase
+	frames []motionFrame
+	i, j   int
+	err    error
+	done   bool
+	state  []byte
+	words  []string
+}
+
+func motionClear(m *game) {
+	m.quest = nil
+	m.play = nil
+	m.inn = nil
+	m.worldState = nil
+	m.worldSession = nil
+	m.flow = nil
+	m.book = nil
+	m.hdBook = nil
+	m.hdBookOriginal = nil
+	m.notice = nil
+}
+func motionState(m *game) any {
+	r := map[string]any{"Scene": m.scene, "Frame": m.frame, "Party": m.worldParty, "BookWait": m.bookWait}
+	if m.book != nil {
+		r["BookIndex"] = m.book.Index()
+	}
+	if m.quest != nil {
+		r["Battle"] = m.quest.state
+	}
+	if m.outdoor != nil && m.scene == sceneOutdoor {
+		r["Outdoor"] = m.outdoor
+	}
+	if m.inn != nil {
+		r["Inn"] = m.inn
+	}
+	if m.worldState != nil {
+		s := *m.worldState
+		s.Names = nil
+		r["World"] = s
+		if m.worldSession != nil {
+			ss := m.worldSession
+			r["WorldSession"] = map[string]any{"Mode": ss.Mode, "Cursor": ss.Cursor, "Direction": ss.Direction, "Excluded": ss.Excluded, "Camping": ss.Camping, "Town": ss.Town, "Prompt": ss.Prompt}
+		}
+	}
+	return r
+}
+func motionSetup(t *testing.T) (*game, []motionCase) {
+	t.Helper()
+	m, events := eventSetup(t)
+	must := func(e error) {
+		if e != nil {
+			t.Fatal(e)
+		}
+	}
+	var e error
+	m.sequence, e = title.Load("/src/docs/re/title-sequence.json")
+	must(e)
+	m.titleSubs, e = loadTitleSubtitles("/src/docs/i18n/title-zh-Hant.json")
+	must(e)
+	m.bookAnim, e = book.LoadOpenAnimation("/src/assets/original-derived-data/book-open-animation.json")
+	must(e)
+	var cases []motionCase
+	add := func(name, kind string, han bool, f func(*game) error) {
+		cases = append(cases, motionCase{name, kind, f, motionState, han})
+	}
+	for _, event := range events {
+		if event.Name != "world-05" && event.Name != "combat-03" && event.Name != "arena-05" {
+			continue
+		}
+		c := event
+		add("event-"+c.Name, c.Kind, true, func(m *game) error { eventApply(m, c); return nil })
+	}
+	for group := 0; group < 6; group++ {
+		phases := []int{0, 1, 2, 63}
+		if group == 3 || group == 4 {
+			phases = phases[:3]
+		}
+		for _, phase := range phases {
+			gg, pp := group, phase
+			add(fmt.Sprintf("weather-%d-%02d", gg, pp), "weather", true, func(m *game) error {
+				s := fullWorld(t, m, 23, 29)
+				s.Group, s.Phase = gg, pp
+				m.scene = sceneWorld
+				m.worldState = s
+				m.worldSession = world.NewSession(s)
+				return nil
+			})
+		}
+	}
+	frames, e := m.sequence.Expand(newRand(1))
+	must(e)
+	seen := map[string]bool{}
+	for _, frame := range frames {
+		key := fmt.Sprintf("%02d-%s-%02d", frame.Back, frame.Archive, frame.Overlay)
+		if seen[key] {
+			continue
+		}
+		seen[key] = true
+		f := frame
+		add("title-"+key, "title", f.Back >= 7, func(m *game) error { m.scene = sceneTitle; m.frame = f; return nil })
+	}
+	for _, archive := range []string{"SET0PICS", "SET1PICS", "SET2PICS", "FACEPICS"} {
+		for i := 0; i < 6; i++ {
+			found := false
+			for _, f := range frames {
+				if f.Archive == archive && f.Overlay == i {
+					found = true
+				}
+			}
+			if found {
+				continue
+			}
+			aa, ii := archive, i
+			back := 0
+			if i >= 4 {
+				back = i - 3
+			}
+			if archive == "FACEPICS" {
+				back = 3
+			}
+			bb := back
+			add(fmt.Sprintf("prepared-%s-%d", aa, ii), "title", false, func(m *game) error {
+				m.scene = sceneTitle
+				m.frame = title.Frame{Back: bb, Archive: aa, Overlay: ii}
+				return nil
+			})
+		}
+	}
+	add("credit-13", "title", true, func(m *game) error { m.scene = sceneTitle; m.frame = title.Frame{Back: 13, Overlay: -1}; return nil })
+	add("book-cover", "cover", true, func(m *game) error { m.scene = sceneCover; return nil })
+	for _, index := range []int{0, len(m.bookAnim.Steps) / 2, len(m.bookAnim.Steps)} {
+		at := index
+		add(fmt.Sprintf("book-open-%03d", at), "book", false, func(m *game) error {
+			m.scene = sceneBookOpen
+			m.bookFrom, m.bookTarget = "cover", "contents"
+			if e := m.ensureBookPlayer(); e != nil {
+				return e
+			}
+			for m.book.Index() < at {
+				m.book.Step()
+			}
+			return nil
+		})
+	}
+	markersSource, _, e := m.sprites.lib.Decode("KOLPICS-MARKERS", 0)
+	must(e)
+	markers, e := town.LoadMarkers(markersSource)
+	must(e)
+	for phase := 0; phase < 5; phase++ {
+		pp := phase
+		add(fmt.Sprintf("helmet-%d", pp), "helmet", true, func(m *game) error {
+			out, e := town.LoadOutdoor("/src/docs/re/town1-outdoor-sample.json")
+			if e != nil {
+				return e
+			}
+			out.Bounds.MinX, out.Bounds.MinY, out.Bounds.MaxX, out.Bounds.MaxY = 0, 0, 63, 63
+			out.Town = 1
+			gridSource, _, e := m.sprites.lib.Decode("TOWN1", 0)
+			if e != nil {
+				return e
+			}
+			grid, e := town.LoadGrid(gridSource)
+			if e != nil {
+				return e
+			}
+			out.SetGrid(grid)
+			out.PlaceParty(48, 9)
+			out.SetMarkers(markers)
+			out.Marker.Base, out.Marker.Frame = 0, pp
+			m.scene = sceneOutdoor
+			m.outdoor = out
+			return nil
+		})
+	}
+	monsters, e := battle.LoadMonsters("/src/assets/original-derived-data/monsters.json")
+	must(e)
+	makeBattle := func(kind, damage, atlas int) *battle.State {
+		members := []battle.Member{{Name: "Theodoric", Portrait: 47, Female: kind == 1, Size: 100, Health: 80, Strength: 80, Quickness: 60, Foresight: 60, Intellect: 60, Race: 3, Skills: []int{8, 6}}}
+		site := &battle.Site{Index: -1, Monster: 0, MonsterName: monsters.List[0].Name, Level: 1, Count: 1, PartyX: []int{32}, PartyY: []int{32}, MonsterX: []int{33}, MonsterY: []int{32}}
+		s := battle.NewQuest(site, members, monsters.List[0], battle.NewField())
+		s.Stage = battle.StageField
+		s.Round.Order = []int{0, 6}
+		s.Cursor = 0
+		s.BeginTurn()
+		s.Plan.EquipmentPanel = true
+		who := 0
+		if kind == 2 {
+			who = 6
+		}
+		s.Plan.BodyActor = who + 1
+		a := &s.Actors[who]
+		if damage > 0 {
+			a.Head /= damage + 1
+			a.Chest /= damage + 1
+			a.RightArm /= damage + 1
+			a.LeftArm /= damage + 1
+			a.RightLeg /= damage + 1
+			a.LeftLeg /= damage + 1
+		}
+		a.Fatigue = damage * 10
+		return s
+	}
+	setupBattle := func(m *game, s *battle.State, atlas int) error {
+		m.scene = scenePlay
+		m.play = &town.Session{Outdoor: eventOutdoor, Party: m.worldParty}
+		m.quest = eventQuest(m)
+		m.quest.state = s
+		f, e := os.Open(fmt.Sprintf("/src/assets/original-derived-png/ega/BATTLE/battle-tiles-%02d.png", atlas))
+		if e != nil {
+			return e
+		}
+		im, e := png.Decode(f)
+		f.Close()
+		if e != nil {
+			return e
+		}
+		m.quest.tiles = ui.NewBattleTiles(im)
+		return nil
+	}
+	for kind := 0; kind < 3; kind++ {
+		for damage := 0; damage < 3; damage++ {
+			k, d := kind, damage
+			add(fmt.Sprintf("body-%d-%d", k, d), "body", true, func(m *game) error { return setupBattle(m, makeBattle(k, d, 8), 8) })
+		}
+	}
+	for _, atlas := range []int{8, 12} {
+		for _, mapID := range []int{0, 8, 16, 24} {
+			aa, mm := atlas, mapID
+			add(fmt.Sprintf("battle-%02d-map-%02d", aa, mm), "battle", true, func(m *game) error {
+				s := makeBattle(0, 0, aa)
+				f, e := os.Open(fmt.Sprintf("/src/assets/original-derived-png/ega/BATTLE/battle-map-%02d.png", mm))
+				if e != nil {
+					return e
+				}
+				im, e := png.Decode(f)
+				f.Close()
+				if e != nil {
+					return e
+				}
+				s.Field, e = battle.LoadField(im)
+				if e != nil {
+					return e
+				}
+				s.Site.Index = mm
+				return setupBattle(m, s, aa)
+			})
+		}
+	}
+	for phase := 0; phase < 5; phase++ {
+		pp := phase
+		add(fmt.Sprintf("target-%d", pp), "target", true, func(m *game) error {
+			s := makeBattle(0, 1, 8)
+			s.Plan.Prompt = battle.PromptTarget
+			s.Plan.Cursor.Row, s.Plan.Cursor.Col = 4, 5
+			if e := setupBattle(m, s, 8); e != nil {
+				return e
+			}
+			m.quest.tiles.PrepareMotionRingVerification(pp)
+			return nil
+		})
+	}
+	for _, prompt := range []battle.Prompt{battle.PromptNextRound, battle.PromptExecuting, battle.PromptSpell, battle.PromptAffect, battle.PromptWeaponForm, battle.PromptUnarmedForm, battle.PromptMoveForm, battle.PromptGuardForm, battle.PromptFlee, battle.PromptPickUp} {
+		p := prompt
+		add(fmt.Sprintf("battle-prompt-%02d", p), "prompt", true, func(m *game) error {
+			s := makeBattle(0, 0, 8)
+			s.Plan.Prompt = p
+			s.Exec.Text = []string{"傷勢與疲勞會影響戰鬥。"}
+			s.Plan.List = []string{"Alar", "Ugo"}
+			return setupBattle(m, s, 8)
+		})
+	}
+	add("battle-spoils", "spoils", true, func(m *game) error {
+		s := makeBattle(0, 0, 8)
+		s.Ground[0] = battle.GroundItem{Name: "War Hammer"}
+		s.Ground[1] = battle.GroundItem{Name: "Black Choker"}
+		s.BeginSpoils()
+		s.Stage = battle.StageSpoils
+		return setupBattle(m, s, 8)
+	})
+	add("long-inn", "long-inn", true, func(m *game) error {
+		in, e := town.LoadInn("/src/docs/re/town-inn-sample.json")
+		if e != nil {
+			return e
+		}
+		in.Title = []string{"旅店", "冒險隊", "準備出發"}
+		in.DialogZh = nil
+		for i := 0; i < 10; i++ {
+			in.DialogZh = append(in.DialogZh, "旅店提供住宿與消息。")
+		}
+		m.scene = sceneInn
+		m.inn = in
+		return nil
+	})
+	if os.Getenv("KOL_MOTION_SMOKE") == "1" {
+		var small []motionCase
+		for _, c := range cases {
+			if c.Name == "weather-0-01" || c.Name == "weather-4-01" || c.Name == "body-0-1" || c.Name == "battle-prompt-12" || c.Name == "book-cover" || c.Name == "credit-13" || strings.HasPrefix(c.Name, "title-13-") || c.Kind == "book" || c.Name == "long-inn" {
+				small = append(small, c)
+			}
+		}
+		cases = small
+	}
+	return m, cases
+}
+func (g *motionGallery) Update() error {
+	if g.err != nil {
+		return g.err
+	}
+	if g.done {
+		return ebiten.Termination
+	}
+	return nil
+}
+func (g *motionGallery) Layout(int, int) (int, int) { return 1920, 1200 }
+func (g *motionGallery) Draw(dst *ebiten.Image) {
+	if g.err != nil || g.done {
+		return
+	}
+	m := g.m
+	c := g.cases[g.i]
+	if g.j == 0 {
+		motionClear(m)
+		if g.err = c.Apply(m); g.err != nil {
+			return
+		}
+		g.state = nil
+		g.words = nil
+	}
+	before, e := json.Marshal(c.State(m))
+	if e != nil {
+		g.err = e
+		return
+	}
+	if g.j == 0 {
+		g.state = before
+	} else if !bytes.Equal(g.state, before) {
+		g.err = fmt.Errorf("prepared state changed %s", c.Name)
+		return
+	}
+	theme := "ega"
+	if g.j%2 == 1 {
+		theme = "hd"
+	}
+	variant := []string{"first-ega", "first-hd", "restored-ega", "restored-hd"}[g.j]
+	if g.err = m.setGraphics(theme); g.err != nil {
+		return
+	}
+	var words []string
+	font.DrawObserver = func(_, s string) { words = append(words, s) }
+	g.err = m.render()
+	font.DrawObserver = nil
+	if g.err != nil {
+		return
+	}
+	if g.j == 0 {
+		g.words = words
+	} else if !reflect.DeepEqual(g.words, words) {
+		g.err = fmt.Errorf("Chinese changed %s", c.Name)
+		return
+	}
+	if g.err = m.presentHD(); g.err != nil {
+		return
+	}
+	after, e := json.Marshal(c.State(m))
+	if e != nil || !bytes.Equal(before, after) {
+		g.err = fmt.Errorf("render changed formal state %s", c.Name)
+		return
+	}
+	han := 0
+	for _, s := range words {
+		for _, r := range s {
+			if unicode.Is(unicode.Han, r) {
+				han++
+			}
+		}
+	}
+	if c.HanRequired && han == 0 {
+		g.err = fmt.Errorf("no Chinese %s", c.Name)
+		return
+	}
+	name := c.Name + "-" + variant + ".png"
+	sum, e := crestPNG(filepath.Join("/out/motion-runtime", name), m.outputCanvas().Image())
+	if e != nil {
+		g.err = e
+		return
+	}
+	g.frames = append(g.frames, motionFrame{c.Name, c.Kind, variant, name, sum, fmt.Sprintf("%x", sha256.Sum256(before)), words, han})
+	var op ebiten.DrawImageOptions
+	if theme == "ega" {
+		op.GeoM.Scale(2, 2)
+	}
+	dst.DrawImage(m.outputCanvas().Image(), &op)
+	g.j++
+	if g.j == 4 {
+		g.i++
+		g.j = 0
+		g.done = g.i == len(g.cases)
+		fmt.Printf("motion%d/%d %s\n", g.i, len(g.cases), c.Name)
+	}
+}
+func TestHDMotionGallery(t *testing.T) {
+	if os.Getenv("KOL_MOTION") != "1" {
+		t.Skip("explicit controlled motion gallery")
+	}
+	m, cases := motionSetup(t)
+	g := &motionGallery{m: m, cases: cases}
+	ebiten.SetWindowSize(960, 600)
+	if e := ebiten.RunGame(g); e != nil {
+		t.Fatal(e)
+	}
+	if g.err != nil {
+		t.Fatal(g.err)
+	}
+	raw, e := json.MarshalIndent(map[string]any{"scenes": len(cases), "frames": g.frames, "controlled": true, "original_oracle": false, "normal_player_path": false, "remake_title_seed": 1, "original_seed": nil, "gameplay_RND_calls": 0}, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile("/out/motion-captures.json", append(raw, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+
+type motionGUI struct {
+	m     *game
+	cases []motionCase
+	at    int
+}
+
+func (g *motionGUI) Update() error {
+	if g.m.drawErr != nil {
+		return g.m.drawErr
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyControlLeft) && ebiten.IsKeyPressed(ebiten.KeyQ) {
+		return ebiten.Termination
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyF8) && g.at+1 < len(g.cases) {
+		g.at++
+		motionClear(g.m)
+		if e := g.cases[g.at].Apply(g.m); e != nil {
+			return e
+		}
+	}
+	g.m.updateDisplaySettings()
+	return nil
+}
+func (g *motionGUI) Layout(w, h int) (int, int) { return g.m.Layout(w, h) }
+func (g *motionGUI) Draw(dst *ebiten.Image) {
+	g.m.Draw(dst)
+	raw, _ := json.Marshal(map[string]any{"case": g.cases[g.at].Name, "State": motionState(g.m), "hd": g.m.hd != nil, "settings": g.m.displaySettings})
+	fmt.Printf("equipment-frame %s\n", raw)
+}
+func TestHDMotionGUI(t *testing.T) {
+	if os.Getenv("KOL_MOTION_GUI") != "1" {
+		t.Skip("explicit controlled native motion GUI")
+	}
+	m, all := motionSetup(t)
+	var cases []motionCase
+	for _, name := range []string{"weather-4-01", "body-0-1", "target-2", "book-cover", "long-inn"} {
+		for _, c := range all {
+			if c.Name == name {
+				cases = append(cases, c)
+			}
+		}
+	}
+	if len(cases) != 5 {
+		t.Fatal("missing GUI scene")
+	}
+	motionClear(m)
+	if e := cases[0].Apply(m); e != nil {
+		t.Fatal(e)
+	}
+	m.interactive, m.logInput = true, true
+	ebiten.SetWindowSize(1920, 1200)
+	ebiten.SetWindowTitle("全量HD遊戲內切換驗收")
+	if e := ebiten.RunGame(&motionGUI{m: m, cases: cases}); e != nil {
+		t.Fatal(e)
+	}
+	if m.drawErr != nil {
+		t.Fatal(m.drawErr)
+	}
+}

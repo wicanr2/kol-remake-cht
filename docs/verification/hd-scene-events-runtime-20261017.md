@@ -17,4 +17,4 @@ TWN0PICS24目前沒有typed玩家路由，只完成來源及素材格式核對�
 
 6GB初次重跑被訊號9終止，12GB有界容器重跑通過，峰值約8.43GiB且oom_kill為0。第一次GUI在世界12事件後，戰鬥fixture因漏設Session.Outdoor而使既有snapshot紀錄崩潰；補齊fixture後同命令重跑。兩次失敗及更早初稿在全量工作區保留，不列產品缺陷。
 
-本批只驗Linux Docker，沒有新增Windows／macOS真機或原版oracle。完整場景PNG、原稿及GUI完整模型留在[全量工作入口](../../workplace/hd-full-20261016/plan.json)，全量HD完成後依[保存契約](retained-evidence.md)封存及清理。正式收據、工具、來源索引與縮圖由本目錄[manifest](hd-scene-events-runtime-20261017/manifest.json)核對。
+本批只驗Linux Docker，沒有新增Windows／macOS真機或原版oracle。完整場景PNG、原稿及GUI完整模型留在[全量工作入口](local/hd-full-20261016/plan.json)，依[保存契約](retained-evidence.md)封存並逐檔核對後清理。正式收據、工具、來源索引與縮圖由本目錄[manifest](hd-scene-events-runtime-20261017/manifest.json)核對。

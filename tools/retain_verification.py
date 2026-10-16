@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-full-20261016',
     'hd-town2-maps-20261016',
     'hd-town-maps-20261016',
     'hd-town-crests-20261015',
@@ -125,7 +126,7 @@ def source_files(source):
     return result
 
 
-def archive(name):
+def archive(name, xz_preset=3):
     source, dest = ROOT / 'workplace' / name, OUT / name
     assert OUT.is_dir() and OUT.stat().st_uid == OUT.stat().st_gid == 1000
     assert not dest.exists(), dest
@@ -144,7 +145,7 @@ def archive(name):
     retained = {k: v for k, v in files.items() if k not in omitted}
     dest.mkdir()
     # source_files已拒絕符號連結；硬連結各存一般檔，符合verify的逐檔契約。
-    with tarfile.open(dest / 'evidence.tar.xz', 'w:xz', preset=3, dereference=True) as packed:
+    with tarfile.open(dest / 'evidence.tar.xz', 'w:xz', preset=xz_preset, dereference=True) as packed:
         for path in retained:
             packed.add(source / path, arcname=path, recursive=False)
     # 小型入口可直接閱讀；完整紀錄及歷史腳本只保存一份壓縮副本。
@@ -159,6 +160,7 @@ def archive(name):
         'rights': 'local-only original-derived evidence; no publication',
         'receipt_sha256': files['receipt.json']['sha256'],
         'archive': record(dest / 'evidence.tar.xz'),
+        'xz_preset': xz_preset,
         'retained': retained, 'readable_copies': visible,
         'removed_rebuildable_executables': omitted,
         'original_bytes': sum(v['size'] for v in files.values()),
@@ -250,12 +252,14 @@ def main():
     parser.add_argument('stage', choices=['archive', 'verify', 'delete', 'extract'])
     parser.add_argument('names', nargs='+', choices=NAMES)
     parser.add_argument('--destination', type=Path)
+    parser.add_argument('--xz-preset', type=int, choices=range(10), default=3,
+                        help='無損XZ壓縮強度；已壓縮PNG批次可用0加快，預設3')
     args = parser.parse_args()
     if args.stage == 'extract':
         assert len(args.names) == 1
     for name in args.names:
         if args.stage == 'archive':
-            archive(name)
+            archive(name, args.xz_preset)
         elif args.stage == 'delete':
             delete(name)
         elif args.stage == 'extract':

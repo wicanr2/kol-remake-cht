@@ -1,0 +1,348 @@
+{
+  "status": "PASS controlled actual F10 GUI",
+  "case": "full-HD-motion",
+  "rounds": [
+    {
+      "scene": "weather-4-01-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 1,
+      "state_sha256": "e4ac56aaec6fb769483da2338b7965bdfcbe30033b26af9de5dba94aeb727ae8",
+      "files": [
+        "weather-4-01-large-before.png",
+        "weather-4-01-large-ega.png",
+        "weather-4-01-large-restored.png"
+      ]
+    },
+    {
+      "scene": "weather-4-01-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "e4ac56aaec6fb769483da2338b7965bdfcbe30033b26af9de5dba94aeb727ae8",
+      "files": [
+        "weather-4-01-small-before.png",
+        "weather-4-01-small-ega.png",
+        "weather-4-01-small-restored.png"
+      ]
+    },
+    {
+      "scene": "body-0-1-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "86735359824f1ce7ef37393025a39debf64713c0014ff5e644b7cd0d62229777",
+      "files": [
+        "body-0-1-large-before.png",
+        "body-0-1-large-ega.png",
+        "body-0-1-large-restored.png"
+      ]
+    },
+    {
+      "scene": "body-0-1-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "86735359824f1ce7ef37393025a39debf64713c0014ff5e644b7cd0d62229777",
+      "files": [
+        "body-0-1-small-before.png",
+        "body-0-1-small-ega.png",
+        "body-0-1-small-restored.png"
+      ]
+    },
+    {
+      "scene": "target-2-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "aa5f027c09c57bae670d310b9927bd4ef8c321911aad0267bdb2730175c6dabb",
+      "files": [
+        "target-2-large-before.png",
+        "target-2-large-ega.png",
+        "target-2-large-restored.png"
+      ]
+    },
+    {
+      "scene": "target-2-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "aa5f027c09c57bae670d310b9927bd4ef8c321911aad0267bdb2730175c6dabb",
+      "files": [
+        "target-2-small-before.png",
+        "target-2-small-ega.png",
+        "target-2-small-restored.png"
+      ]
+    },
+    {
+      "scene": "book-cover-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "ed514fd7e34bf1d37f212a95240568af7703515c41b3dba2546a96c2f7affd70",
+      "files": [
+        "book-cover-large-before.png",
+        "book-cover-large-ega.png",
+        "book-cover-large-restored.png"
+      ]
+    },
+    {
+      "scene": "book-cover-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "ed514fd7e34bf1d37f212a95240568af7703515c41b3dba2546a96c2f7affd70",
+      "files": [
+        "book-cover-small-before.png",
+        "book-cover-small-ega.png",
+        "book-cover-small-restored.png"
+      ]
+    },
+    {
+      "scene": "book-open-018-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "0833fefabdb91d8bf56f240bae3a799dc03a447ddbc214f4ce0993bf377a1699",
+      "files": [
+        "book-open-018-large-before.png",
+        "book-open-018-large-ega.png",
+        "book-open-018-large-restored.png"
+      ]
+    },
+    {
+      "scene": "book-open-018-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "0833fefabdb91d8bf56f240bae3a799dc03a447ddbc214f4ce0993bf377a1699",
+      "files": [
+        "book-open-018-small-before.png",
+        "book-open-018-small-ega.png",
+        "book-open-018-small-restored.png"
+      ]
+    },
+    {
+      "scene": "title-01-SET2PICS-04-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "b56262bdf854635d5b949fdd315c0bcb8d80f6c798f2cf9e08ae809f6cc0ac55",
+      "files": [
+        "title-01-SET2PICS-04-large-before.png",
+        "title-01-SET2PICS-04-large-ega.png",
+        "title-01-SET2PICS-04-large-restored.png"
+      ]
+    },
+    {
+      "scene": "title-01-SET2PICS-04-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "b56262bdf854635d5b949fdd315c0bcb8d80f6c798f2cf9e08ae809f6cc0ac55",
+      "files": [
+        "title-01-SET2PICS-04-small-before.png",
+        "title-01-SET2PICS-04-small-ega.png",
+        "title-01-SET2PICS-04-small-restored.png"
+      ]
+    },
+    {
+      "scene": "credit-13-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "7f8c5be863f5102608c85b66105615ccbf23832fe698d8a633bef864d902b5ff",
+      "files": [
+        "credit-13-large-before.png",
+        "credit-13-large-ega.png",
+        "credit-13-large-restored.png"
+      ]
+    },
+    {
+      "scene": "credit-13-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "7f8c5be863f5102608c85b66105615ccbf23832fe698d8a633bef864d902b5ff",
+      "files": [
+        "credit-13-small-before.png",
+        "credit-13-small-ega.png",
+        "credit-13-small-restored.png"
+      ]
+    },
+    {
+      "scene": "long-inn-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "fdef286e8a46af35a201d64a564803ba32965054d7779f186a66db3abd3081dd",
+      "files": [
+        "long-inn-large-before.png",
+        "long-inn-large-ega.png",
+        "long-inn-large-restored.png"
+      ]
+    },
+    {
+      "scene": "long-inn-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "fdef286e8a46af35a201d64a564803ba32965054d7779f186a66db3abd3081dd",
+      "files": [
+        "long-inn-small-before.png",
+        "long-inn-small-ega.png",
+        "long-inn-small-restored.png"
+      ]
+    }
+  ],
+  "display_events": [
+    "display action=toggle hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=ega hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=hd hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=ega hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=false state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=hd hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=back hd=true state=90475e88604caf09024e33faae429b2f4c6231133326aca0ff1c63efd13e34f0",
+    "display action=toggle hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=ega hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=hd hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=ega hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=hd hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=ega hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=toggle hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=hd hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=toggle hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=ega hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=toggle hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=hd hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=toggle hd=true state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=ega hd=false state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=back hd=false state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=toggle hd=false state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=hd hd=true state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=back hd=true state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=toggle hd=true state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=ega hd=false state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=back hd=false state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=toggle hd=false state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=hd hd=true state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=back hd=true state=b47b1742ee427c0548f183c9c3e97fb7b22f5aedb064ea8b7aae8ff57ca0e538",
+    "display action=toggle hd=true state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=ega hd=false state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=back hd=false state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=toggle hd=false state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=hd hd=true state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=back hd=true state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=toggle hd=true state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=ega hd=false state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=back hd=false state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=toggle hd=false state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=hd hd=true state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=back hd=true state=3c0441bd81a2dbf8e49baa62d68498f3214a891eddcc4de3cdcd922dcb581dea",
+    "display action=toggle hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=ega hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=hd hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=ega hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=hd hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=ega hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=hd hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=ega hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=false state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=hd hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=back hd=true state=378196951c96703e4b1f7fb72b51ab3f6ef9c0e2d2203cf027967f1bd5fee6bc",
+    "display action=toggle hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=ega hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=toggle hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=hd hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=toggle hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=ega hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=toggle hd=false state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=hd hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d",
+    "display action=back hd=true state=6a08a78ea7ba714b263e159193aac4e48e2169dfbba37a48a72bf0dc1d59867d"
+  ],
+  "serializable_scene_state_unchanged": true,
+  "exit_code": 0,
+  "original_oracle": false,
+  "normal_player_path": false
+}

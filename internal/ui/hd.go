@@ -31,6 +31,7 @@ type HD struct {
 	crests       *hdTownCrests
 	townMaps     *hdTownMaps
 	sceneEvents  *hdSceneEvents
+	motion       *hdMotion
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {
@@ -58,7 +59,12 @@ func (h *HD) fingerprint(img *ebiten.Image) string {
 	}
 	sum := sha256.Sum256(rgb)
 	key := hex.EncodeToString(sum[:])
-	h.keys[img] = key
+	if img.Bounds().Min == (image.Point{}) {
+		if len(h.keys) >= 4096 {
+			h.keys = map[*ebiten.Image]string{}
+		}
+		h.keys[img] = key
+	}
 	return key
 }
 

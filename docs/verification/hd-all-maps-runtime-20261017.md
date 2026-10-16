@@ -1,6 +1,6 @@
 # 七城與世界連續手繪地圖
 
-狀態：地圖背景與世界點位限定範圍 **CONFORMED**。沿使用者核准的手繪、1920×1200、原位置與F10；新素材縮小以降低容量。全量工作入口為[目前計畫](../../workplace/hd-full-20261016/plan.json)，其餘HD繼續。正式入口：[收據](hd-all-maps-runtime-20261017/receipt.json)、[來源與截圖清冊](hd-all-maps-runtime-20261017/manifest.json)、[六組比較](hd-all-maps-runtime-20261017/review.html)。
+狀態：地圖背景與世界點位限定範圍 **CONFORMED**。沿使用者核准的手繪、1920×1200、原位置與F10；新素材縮小以降低容量。全量工作入口為[目前計畫](local/hd-full-20261016/plan.json)，其餘HD繼續。正式入口：[收據](hd-all-maps-runtime-20261017/receipt.json)、[來源與截圖清冊](hd-all-maps-runtime-20261017/manifest.json)、[六組比較](hd-all-maps-runtime-20261017/review.html)。
 
 本批來源為TOWN3至TOWN7及世界TOWN0的六張64×64索引地圖與六張256×256圖集。240張不同畫稿及12個來源RGB完全相同的霍布城區塊形成252個位置綁定。第一、二城84張1254×1254原圖及綁定保持；八組共336區。原通行、門位、鏡頭、規則與v3保持。
 

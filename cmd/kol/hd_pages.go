@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/wicanr2/kol-remake-cht/internal/battle"
 	"strings"
 
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
@@ -25,7 +24,7 @@ func (g *game) nativeUIPage() bool {
 			return false
 		}
 		if g.quest != nil && g.quest.state != nil {
-			return g.quest.state.ResultPicture() != battle.ResultNone
+			return true
 		}
 		if !s.InArena() && !s.ShowingSheetOutside() && s.LeftTown && g.worldState != nil {
 			return true
@@ -33,7 +32,7 @@ func (g *game) nativeUIPage() bool {
 		return (s.InArena() || s.ShowingSheetOutside() || s.Mode == town.ModeInside) && nativeInnPage(s.Inside)
 	}
 	switch g.scene {
-	case sceneContents, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneScriptCJK, sceneWorld:
+	case sceneTitle, sceneCover, sceneOpenSpread, sceneBookOpen, sceneNewChar, sceneContents, sceneMenu, sceneRoster, sceneDelete, sceneHarbor, sceneScriptCJK, sceneWorld:
 		return true
 	case sceneInn, sceneBuilding:
 		return nativeInnPage(g.inn)
@@ -44,7 +43,7 @@ func (g *game) nativeUIPage() bool {
 			return false
 		}
 		switch g.flow.Scene {
-		case flow.SceneContents, flow.SceneMenu, flow.SceneRoster, flow.SceneNewChar, flow.SceneDelete,
+		case flow.SceneTitle, flow.SceneCover, flow.SceneContents, flow.SceneMenu, flow.SceneRoster, flow.SceneNewChar, flow.SceneDelete,
 			flow.SceneHarbor, flow.SceneSelect, flow.SceneEditPick, flow.SceneEditor:
 			return true
 		case flow.SceneInn:
@@ -77,7 +76,7 @@ func nativeInnPage(in *town.Inn) bool {
 		lines = in.Dialog
 	}
 	if len(in.Title) > 2 || len(lines) > 9 {
-		// 多行及其他標題版面仍待獨立驗收，沿原呈現。
+		// 長對話沿HD面板自適應字級，完整保留內容。
 		return false
 	}
 	for _, group := range [][]string{in.Dialog, in.DialogZh} {

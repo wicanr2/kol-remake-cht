@@ -178,6 +178,9 @@ func (g *game) setGraphics(mode string) error {
 		if err := attachHDSceneEvents(hd, g.hdDir, g.sprites.lib); err != nil {
 			return err
 		}
+		if err := attachHDMotion(hd, g.hdDir, g.sprites.lib); err != nil {
+			return err
+		}
 		g.hdCache, g.hdCanvas = hd, canvas
 	}
 	g.hd, g.presentation = g.hdCache, g.hdCanvas
@@ -274,12 +277,7 @@ func (g *game) drawPresentationNotice(dst *ebiten.Image) {
 		g.drawNotice(dst)
 		return
 	}
-	if g.noticeCanvas == nil {
-		g.noticeCanvas = screen.NewCanvasScaled(3)
+	if e := g.hd.RenderUI(dst, func() error { g.drawNotice(dst); return nil }); e != nil {
+		g.drawErr = e
 	}
-	g.drawNotice(g.noticeCanvas.Image())
-	var op ebiten.DrawImageOptions
-	op.GeoM.Scale(2, 2)
-	op.Filter = ebiten.FilterNearest
-	dst.DrawImage(g.noticeCanvas.Image(), &op)
 }

@@ -1,0 +1,120 @@
+{
+  "controlled": true,
+  "frames": [
+    {
+      "Name": "monster-native-info",
+      "Kind": "native-monster",
+      "Variant": "first-ega",
+      "PNG": "monster-native-info-first-ega.png",
+      "SHA": "627914d8ae7e8964a08d00a779b8f841eefee3138ad063373cd57dd05bcfdb8e",
+      "StateSHA": "dd45244dc11866fee848d0553d59776a88c982a42f02eec23c09f2a595964a71",
+      "Text": [
+        "招式",
+        "方向"
+      ],
+      "Han": 4
+    },
+    {
+      "Name": "monster-native-info",
+      "Kind": "native-monster",
+      "Variant": "first-hd",
+      "PNG": "monster-native-info-first-hd.png",
+      "SHA": "7b83c92070f2bf2f184f862acb89090f04f265b0abcacac6367c5f87aab0aeb6",
+      "StateSHA": "dd45244dc11866fee848d0553d59776a88c982a42f02eec23c09f2a595964a71",
+      "Text": [
+        "招式",
+        "方向"
+      ],
+      "Han": 4
+    },
+    {
+      "Name": "monster-native-info",
+      "Kind": "native-monster",
+      "Variant": "restored-ega",
+      "PNG": "monster-native-info-restored-ega.png",
+      "SHA": "627914d8ae7e8964a08d00a779b8f841eefee3138ad063373cd57dd05bcfdb8e",
+      "StateSHA": "dd45244dc11866fee848d0553d59776a88c982a42f02eec23c09f2a595964a71",
+      "Text": [
+        "招式",
+        "方向"
+      ],
+      "Han": 4
+    },
+    {
+      "Name": "monster-native-info",
+      "Kind": "native-monster",
+      "Variant": "restored-hd",
+      "PNG": "monster-native-info-restored-hd.png",
+      "SHA": "7b83c92070f2bf2f184f862acb89090f04f265b0abcacac6367c5f87aab0aeb6",
+      "StateSHA": "dd45244dc11866fee848d0553d59776a88c982a42f02eec23c09f2a595964a71",
+      "Text": [
+        "招式",
+        "方向"
+      ],
+      "Han": 4
+    },
+    {
+      "Name": "monster-native-encounter",
+      "Kind": "native-monster",
+      "Variant": "first-ega",
+      "PNG": "monster-native-encounter-first-ega.png",
+      "SHA": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31",
+      "StateSHA": "36cba5a805b3881d75d6e1f3da58e5f6bcbf4b79edcabc49f4b18146d117148a",
+      "Text": [
+        "你遇上了任務中",
+        "那些可怕的",
+        "生物！"
+      ],
+      "Han": 14
+    },
+    {
+      "Name": "monster-native-encounter",
+      "Kind": "native-monster",
+      "Variant": "first-hd",
+      "PNG": "monster-native-encounter-first-hd.png",
+      "SHA": "baaba11b0ddfd78099db61af619c67714ae77b5ff33c454d07ab63e42bab7c78",
+      "StateSHA": "36cba5a805b3881d75d6e1f3da58e5f6bcbf4b79edcabc49f4b18146d117148a",
+      "Text": [
+        "你遇上了任務中",
+        "那些可怕的",
+        "生物！"
+      ],
+      "Han": 14
+    },
+    {
+      "Name": "monster-native-encounter",
+      "Kind": "native-monster",
+      "Variant": "restored-ega",
+      "PNG": "monster-native-encounter-restored-ega.png",
+      "SHA": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31",
+      "StateSHA": "36cba5a805b3881d75d6e1f3da58e5f6bcbf4b79edcabc49f4b18146d117148a",
+      "Text": [
+        "你遇上了任務中",
+        "那些可怕的",
+        "生物！"
+      ],
+      "Han": 14
+    },
+    {
+      "Name": "monster-native-encounter",
+      "Kind": "native-monster",
+      "Variant": "restored-hd",
+      "PNG": "monster-native-encounter-restored-hd.png",
+      "SHA": "baaba11b0ddfd78099db61af619c67714ae77b5ff33c454d07ab63e42bab7c78",
+      "StateSHA": "36cba5a805b3881d75d6e1f3da58e5f6bcbf4b79edcabc49f4b18146d117148a",
+      "Text": [
+        "你遇上了任務中",
+        "那些可怕的",
+        "生物！"
+      ],
+      "Han": 14
+    }
+  ],
+  "gameplay_RND_calls": 0,
+  "normal_player_path": false,
+  "original_oracle": false,
+  "original_seed": null,
+  "remake_title_seed": 1,
+  "scenes": 2,
+  "scope": "native-monsters"
+}

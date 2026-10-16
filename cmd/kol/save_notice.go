@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/wicanr2/kol-remake-cht/internal/ui"
 	"image/color"
 )
 
@@ -33,14 +34,19 @@ func (g *game) drawNotice(dst *ebiten.Image) {
 	if g.cjk == nil {
 		cell, lineHeight, gap, left, top = 8, 12, 4, 16, 16
 	}
-	columns := (dst.Bounds().Dx() - 2*left) / cell
+	width, height := dst.Bounds().Dx(), dst.Bounds().Dy()
+	if ui.NativeRendering(dst) {
+		width /= 2
+		height /= 2
+	}
+	columns := (width - 2*left) / cell
 	if columns < 1 {
 		return
 	}
 	y := top
 	for _, line := range g.notice {
 		runes := []rune(line)
-		for len(runes) > 0 && y+cell < dst.Bounds().Dy()-left {
+		for len(runes) > 0 && y+cell < height-left {
 			n := len(runes)
 			if n > columns {
 				n = columns

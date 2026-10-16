@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| 全量HD地圖、98個小圖來源、全部原稿及受控驗收 | [完整HD驗收](hd-full-runtime-20261017.md)、[全地圖](hd-all-maps-runtime-20261017.md)與[事件](hd-scene-events-runtime-20261017.md) | [保存清冊](local/hd-full-20261016/retention.json)及[工具／原稿索引](local/hd-full-20261016/plan.json)，原稿與完整模型只留本機 |
 | 第一城連續手繪地圖、A／B選案與完整原型 | [正式驗收](hd-town-maps-runtime-20261016.md) | [保存清冊](local/hd-town-maps-20261016/retention.json)；完整模型、v3及失敗只留本機 |
 | 七城102張NPC、四坐騎及完整組正式接入 | [正式驗收](hd-npc-mounts-runtime-20261015.md) | [保存清冊](local/hd-npc-mounts-20261015/retention.json)；完整樣本、v3與GUI狀態只留本機 |
 | 完整物品／隊伍、裝備原型及正式接入、68圖示 | [正式裝備驗收](hd-equipment-runtime-20261015.md)與[圖示驗收](hd-actions-runtime-20261015.md) | [保存清冊](local/hd-equipment-pages-20261015/retention.json)；完整模型與原錨點只留本機 |
@@ -481,3 +482,11 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 保存清冊位於`local/hd-town2-maps-20261016/retention.json`。沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town2-maps-20261016`；`delete hd-town2-maps-20261016`逐檔核對後只清理本批。完整重生依[第二城驗收頁](hd-town2-maps-runtime-20261016.md)的固定來源、鎖版工具鏈、空輸出目錄及原腳本名稱，範圍限Linux Docker；執行檔只留雜湊並重建。
 
 本批保存1193份檔案，三份可重建程式只留雜湊；原1116339346 bytes壓縮為799077920 bytes，SHA-256為`8a8d24d8b1bf0d80869764a8d7da7f0c38573ad35a7dfadcaa3e3bf49809b9b9`。已在獨立唯讀容器逐檔驗證，[本機閱讀入口](local/hd-town2-maps-20261016/review.html)連到正式對比、保存清冊及完整提示。
+
+## 全量HD圖形與操作頁正式接入
+
+[完整驗收](hd-full-runtime-20261017.md)、[全地圖](hd-all-maps-runtime-20261017.md)及[事件](hd-scene-events-runtime-20261017.md)保存各階段來源與受控結果。完整生成稿、縮圖、精確裁取、132個生成／修稿項、全部場景PNG、GUI模型、失敗與腳本由[工具索引](local/hd-full-20261016/plan.json)及[本機保存清冊](local/hd-full-20261016/retention.json)追蹤，正式98張小圖與252個新地圖區塊另存Git。完整階段執行檔曾被後續fixture替換，僅保存已知執行檔雜湊與可重建來源，不補造歷史二進位雜湊。
+
+核對沿本頁Docker工具鏈及掛載執行 `tools/retain_verification.py verify hd-full-20261016`；`delete hd-full-20261016`再逐檔核對原工作區才精確清理。解開使用同工具 `extract hd-full-20261016 --destination <不存在的絕對路徑>`，輸出需另掛可寫目錄。完整重生沿索引內的build／run腳本，先核對各階段來源清單；完整圖形階段430份來源、832份HD資產，Linux Docker、12GiB、4CPU、512程序及有界逾時。這份封存不新增遊戲執行、平台真機或原版oracle聲明。
+
+已壓縮PNG占多數的批次，可在上述工具的`archive`命令加`--xz-preset 0`降低封存成本，輸出仍為無損tar.xz，逐檔驗證契約保持；預設3供既有批次沿用。本批首次強度3輸出未封口，主動停止後只移除已確認的不完整壓縮檔，原輸入保持；紀錄見[封存嘗試](local/hd-full-20261016-archive-attempts.json)。

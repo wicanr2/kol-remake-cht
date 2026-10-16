@@ -19,25 +19,30 @@ type HDPageSource struct {
 	RGB     string
 }
 type hdPages struct {
-	book          *ebiten.Image
-	scroll        *ebiten.Image
-	scrollKey     string
-	portraits     map[string]*ebiten.Image
-	books         map[string]int
-	background    string
-	icons         map[string]*ebiten.Image
-	sources       []HDPageSource
-	validated     bool
-	npcMountSizes map[string]image.Point
-	editorImage   *ebiten.Image
-	editorPixels  bitmapedit.Bitmap
+	backgroundCrops    map[image.Rectangle]*ebiten.Image
+	backgroundCropKeys map[image.Rectangle]string
+	book               *ebiten.Image
+	scroll             *ebiten.Image
+	scrollKey          string
+	portraits          map[string]*ebiten.Image
+	books              map[string]int
+	background         string
+	backgroundImage    *ebiten.Image
+	icons              map[string]*ebiten.Image
+	sources            []HDPageSource
+	validated          bool
+	npcMountSizes      map[string]image.Point
+	editorImage        *ebiten.Image
+	editorPixels       bitmapedit.Bitmap
 }
 type hdNativeRender struct {
-	h     *HD
-	dst   *ebiten.Image
-	book  bool
-	paper bool
-	err   error
+	clips     map[*ebiten.Image]image.Rectangle
+	h         *HD
+	dst       *ebiten.Image
+	book      bool
+	paper     bool
+	paperRect image.Rectangle
+	err       error
 }
 
 var activeHDUI *hdNativeRender
@@ -68,8 +73,16 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 		if err != nil {
 			return err
 		}
+		if source.RGB == p.background {
+			p.backgroundImage = pic
+		}
 		if h.fingerprint(pic) != source.RGB {
 			return fmt.Errorf("HD頁面來源%s第%d圖指紋不符", source.Archive, source.Index)
+		}
+		if h.motion != nil {
+			if size, ok := h.motion.sourceSizes[source.RGB]; ok && pic.Bounds().Size() != size {
+				return fmt.Errorf("HD動畫實際來源尺寸不符")
+			}
 		}
 		if h.sceneEvents != nil {
 			if art, ok := h.sceneEvents.byRGB[source.RGB]; ok && pic.Bounds().Size() != art.size {
@@ -171,7 +184,7 @@ func fillHDUI(dst *ebiten.Image, x, y, w, height int, c [3]uint8) bool {
 		return true
 	}
 	ink := hdMuted
-	if n.paper && c == [3]uint8{255, 255, 255} {
+	if n.paper && image.Pt(x*2, y*2).In(n.paperRect) && c == [3]uint8{255, 255, 255} {
 		vector.DrawFilledRect(dst, float32(x*2), float32(y*2), float32(w*2), float32(height*2), color.RGBA{238, 221, 185, 255}, false)
 		return true
 	}
@@ -201,12 +214,20 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 		return true
 	}
 	key := h.fingerprint(src)
+	if h.motion != nil {
+		if index, ok := h.motion.cards[key]; ok {
+			h.drawNativeTitleCard(dst, index)
+			return true
+		}
+	}
 	if h.pages.scroll != nil && key == h.pages.scrollKey {
 		n.paper = true
+		n.paperRect = image.Rect(0, 0, 1920, 1200)
 		h.drawHD(dst, h.pages.scroll, image.Rect(0, 0, 1920, 1200))
 		return true
 	}
 	if key == h.pages.background {
+		n.paper = false
 		dst.DrawImage(h.style.images["background.png"], nil)
 		return true
 	}
@@ -224,11 +245,35 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 		return true
 	}
 	painted := src
+	monsterPaint := false
+	if h.motion != nil {
+		if id, ok := h.motion.byRGB[key]; ok {
+			for _, placement := range []struct {
+				prefix string
+				x, y   int
+			}{{"set0pics-", 112, 53}, {"set1pics-", 96, 53}, {"set2pics-", 48, 53}, {"facepics-", 104, 80}} {
+				if len(id) >= len(placement.prefix) && id[:len(placement.prefix)] == placement.prefix && (x != placement.x*3 || y != placement.y*3 || scale != 3) {
+					n.err = fmt.Errorf("HD片頭覆蓋座標不符")
+					return true
+				}
+			}
+			painted = h.motion.images[id]
+		}
+	}
 	if h.sceneEvents != nil {
 		if art, ok := h.sceneEvents.byRGB[key]; ok {
 			painted = art.paint
 			if art.paper {
 				n.paper = true
+			}
+		}
+	}
+	if h.monsters != nil {
+		for _, art := range h.monsters.pictures {
+			if key == art.source.RGB {
+				painted = art.paint
+				monsterPaint = true
+				break
 			}
 		}
 	}
@@ -245,6 +290,34 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 		painted = h.style.images["crest.png"]
 	}
 	r := image.Rect(x*2, y*2, (x+src.Bounds().Dx()*scale)*2, (y+src.Bounds().Dy()*scale)*2)
+	if n.paper && h.sceneEvents != nil {
+		if art, ok := h.sceneEvents.byRGB[key]; ok && art.paper {
+			n.paperRect = r
+		}
+	}
+	if parent := h.pages.backgroundImage; parent != nil && src.Bounds().Min != (image.Point{}) && src.Bounds().In(parent.Bounds()) {
+		b := src.Bounds()
+		if h.pages.backgroundCropKeys == nil {
+			h.pages.backgroundCropKeys = map[image.Rectangle]string{}
+			h.pages.backgroundCrops = map[image.Rectangle]*ebiten.Image{}
+		}
+		expected := h.pages.backgroundCropKeys[b]
+		if expected == "" {
+			expected = h.fingerprint(parent.SubImage(b).(*ebiten.Image))
+			h.pages.backgroundCropKeys[b] = expected
+		}
+		if expected == key {
+			b := src.Bounds()
+			paint := h.pages.backgroundCrops[b]
+			if paint == nil {
+				paint = h.style.images["background.png"].SubImage(image.Rect(b.Min.X*6, b.Min.Y*6, b.Max.X*6, b.Max.Y*6)).(*ebiten.Image)
+				h.pages.backgroundCrops[b] = paint
+			}
+			h.drawHD(dst, paint, r)
+			n.paper = false
+			return true
+		}
+	}
 	if pic, ok := h.pages.portraits[key]; ok {
 		h.drawHD(dst, pic, r)
 		vector.StrokeRect(dst, float32(r.Min.X), float32(r.Min.Y), float32(r.Dx()), float32(r.Dy()), 2, hdGold, false)
@@ -254,7 +327,13 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 		painted = icon
 	}
 	if painted != src {
+		if monsterPaint {
+			r = fitHDPortrait(painted.Bounds(), r)
+		}
 		h.drawHD(dst, painted, r)
+		if h.motion != nil && h.motion.byRGB[key] == "book-cover" {
+			h.drawNativeCoverTitle(dst)
+		}
 		return true
 	}
 	var op ebiten.DrawImageOptions
@@ -267,8 +346,12 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 
 func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, text string, foreground color.RGBA, background *color.RGBA) (int, bool) {
 	r, g, b := foreground.R, foreground.G, foreground.B
-	if dst != n.dst {
+	clipRect, clipped := n.clips[dst]
+	if dst != n.dst && !clipped {
 		return 0, false
+	}
+	if clipped {
+		dst = n.dst
 	}
 	ink := hdInk
 	switch [3]uint8{r, g, b} {
@@ -279,7 +362,7 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 	case [3]uint8{255, 85, 85}, [3]uint8{170, 0, 0}:
 		ink = color.RGBA{255, 133, 125, 255}
 	}
-	if n.book || n.paper {
+	if n.book || n.paper && image.Pt(x*2, y*2).In(n.paperRect) {
 		ink = color.RGBA{48, 36, 29, 255}
 		switch [3]uint8{r, g, b} {
 		case [3]uint8{0, 170, 170}:
@@ -330,7 +413,12 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 			op.GeoM.Translate(pen-10*scaleX, baseline-76*.5*textScale)
 			op.ColorScale.ScaleWithColor(ink)
 			op.Filter = ebiten.FilterLinear
-			dst.SubImage(cell).(*ebiten.Image).DrawImage(n.h.style.images["font-atlas.png"].SubImage(hdRect(glyph.X, glyph.Y, 96, 96)).(*ebiten.Image), &op)
+			if clipped {
+				cell = cell.Intersect(clipRect)
+			}
+			if !cell.Empty() {
+				dst.SubImage(cell).(*ebiten.Image).DrawImage(n.h.style.images["font-atlas.png"].SubImage(hdRect(glyph.X, glyph.Y, 96, 96)).(*ebiten.Image), &op)
+			}
 		}
 		drawn++
 		pen += advance

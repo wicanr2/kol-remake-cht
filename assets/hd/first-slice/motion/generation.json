@@ -1,0 +1,2797 @@
+{
+  "schema": "kol-hd-motion-generation/1",
+  "rights": "Private GitHub PNG exception and local full build only; no public redistribution rights inferred",
+  "status": "READY source and compact asset group; runtime acceptance pending",
+  "pictures": [
+    {
+      "id": "intro-00-smooth",
+      "archive": "BACKPICS",
+      "index": 0,
+      "source_file": "BACKPICS/backpics-000.png",
+      "source_png_sha256": "774dbf81459f8fe4241e60f047a0cd7daa2848e1df1578d8ccde9164e8673446",
+      "source_rgb_sha256": "00b70b7d7ddb40ff758e164a236d407128aadd944df04d85117b99f0371d2e0c",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "intro-00-reference.png",
+      "reference_sha256": "f3ccdc6eeb75587fba0b17032962b7043d0bc918980c0b7f320b4e962b627e7a",
+      "references": [
+        "intro-00-delivery.png"
+      ],
+      "prompt": "Repaint this exact night landscape into smooth fine-brush gouache fantasy illustration. Preserve the precise mountain silhouettes, valley, river/ground curve, forest borders, camera, framing and dark-blue/black palette. Remove ALL pixel-art texture, checkerboard dither, square pebbles, stepped pixel contours, repetitive short stripe marks and mosaic. Interpret those as continuous subtle brush shading, natural grass/earth, flowing low-contrast clouds and soft mountain ridges. Keep it a very dark blue night. No knight, figure, castle, doorway, stars, sun, moon, lightning, text, label, border or new object. Fully opaque. This is the exact background underneath existing knight animations; geometry must stay fixed. Compact final game delivery768x480.",
+      "prompt_file": "intro-00-smooth-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "intro-00",
+      "previous_delivery_sha256": "ebda20d6d0e9db768dd0ee8cd7d80bfe2bff88fbe48c43c653dba13714e3e4fb",
+      "native_file": "intro-00-smooth-native.png",
+      "native_sha256": "bc0541bf52b5b79191284548c8400e2218e22781ec3eb6e7221dec00f304567a",
+      "native_rgba_sha256": "bc8e9f30de5e261dd7b080f211667a46881072304bc04569af5874277906fb16",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "intro-00-smooth-delivery.png",
+      "delivery_sha256": "08157ad4e1e99b3675fcd2cd6b55163acffc20f221544ef236a3e7c7e2ee5ebd",
+      "delivery_rgba_sha256": "ad0aed4eecfc5ab6a59ecfc52e928a229e001786de1a41ead335210ddf24161d",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "73452b6e813b9acd0e8650c881f120a6f0f40e4fd10b8c1dbe623d7fba558c44"
+    },
+    {
+      "id": "intro-01",
+      "archive": "BACKPICS",
+      "index": 1,
+      "source_file": "BACKPICS/backpics-001.png",
+      "source_png_sha256": "5661ac9a2717ba225cab59bedb19cc979c137ce90d23efa1e6f5ef65b6679f67",
+      "source_rgb_sha256": "e275d157c01dd36c6c4e78ff5eaa3063892c6c4293b3c0f1bb1193d73f2b7017",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "intro-01-reference.png",
+      "reference_sha256": "51c49682a76b4c3425d5cc786883bc103baa01f79948b0b43789b1221367b906",
+      "references": [
+        "intro-01-reference.png",
+        "intro-01-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exact title animation frame BACKPICS1. Preserve the blue night, mountains, lightning placement and helmet camera/scale when present. This is one existing timed animation state; never substitute a logo or text. Keep the deep dark visor black. Requested compact delivery dimensions 768x480. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "intro-01-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "intro-01-native.png",
+      "native_sha256": "48493dd86fb4d0fd74501d9ead2e054f1c97e8f690cc016731a2ae73e145d1a6",
+      "native_rgba_sha256": "a12da04cc98da11af6984369afefd3cff0c1de11e22681c904a1b90ddd0caa78",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "intro-01-delivery.png",
+      "delivery_sha256": "a10de8ddc6a54d935d14f8ccd2be0ea224acf03d3c3ed553f1f0027e28c5b08c",
+      "delivery_rgba_sha256": "880597d740f051b6422cc411c894a8bc7d2e8ae38aaec0dfe9a72bd201ebd074",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "16274babc3c84b8d806c7d35a180bb09e0464229c4c478ad713f7ff8de6e557f"
+    },
+    {
+      "id": "intro-02",
+      "archive": "BACKPICS",
+      "index": 2,
+      "source_file": "BACKPICS/backpics-002.png",
+      "source_png_sha256": "243f27f3d201b6c962bd101803131ea0500c8b74c426a7f2dd8c55107b7e0698",
+      "source_rgb_sha256": "dfd1fe04c42363c80b20fa9fa2ea731c9e3d09f6d47698a30de5275fa7c2abed",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "intro-02-reference.png",
+      "reference_sha256": "5891c8048d8700581ea9e512e6b49019c2bbdaf32552c2f814b79ab213c4beb7",
+      "references": [
+        "intro-02-reference.png",
+        "intro-02-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exact title animation frame BACKPICS2. Preserve the blue night, mountains, lightning placement and helmet camera/scale when present. This is one existing timed animation state; never substitute a logo or text. Keep the deep dark visor black. Requested compact delivery dimensions 768x480. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "intro-02-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "intro-02-native.png",
+      "native_sha256": "cbf22daec6fed69e2fa559a579334255e10ad7240307d6bcb29f5b1ebfa23b71",
+      "native_rgba_sha256": "8dcd7d4d424bf704c5a7299fb643a3f081121c52b0d24a11f735f6a801b37fa5",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "intro-02-delivery.png",
+      "delivery_sha256": "13e164b7d60b5ed3a57be7576b3ef5b6ae3015c1d61a7062aef62d6edb5d48d4",
+      "delivery_rgba_sha256": "cdf2ab33917b89529fe6d631abbf24aa1d466d79025aae4d3ecf628fd67c95f5",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "1354550387c3611be0add44d2b7f68d73f85091c281b0014e09f25184c1e7803"
+    },
+    {
+      "id": "intro-03",
+      "archive": "BACKPICS",
+      "index": 3,
+      "source_file": "BACKPICS/backpics-003.png",
+      "source_png_sha256": "a103c839bc1fb65c9d656e02a378c99821a1e9c860012d7d766dcf02e340dcb6",
+      "source_rgb_sha256": "7f6014da3f064ab8fcb63bdcead07114899739bd883b301ac10ce1fd81f8226c",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "intro-03-reference.png",
+      "reference_sha256": "86d2dcdc0ef96f1ee8a91486e53e4eeabed9f44891c23ad0ef069bcbf2faab43",
+      "references": [
+        "intro-03-reference.png",
+        "intro-03-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exact title animation frame BACKPICS3. Preserve the blue night, mountains, lightning placement and helmet camera/scale when present. This is one existing timed animation state; never substitute a logo or text. Keep the deep dark visor black. Requested compact delivery dimensions 768x480. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "intro-03-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "intro-03-native.png",
+      "native_sha256": "da97a70575b923cb8e8e7ad3b9185f397f860ad5fe8060e89fd42c35ce16fb21",
+      "native_rgba_sha256": "a41fc095fe19cad2183f920b276b8884238e168566586a26c474735dbe0eb26a",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "intro-03-delivery.png",
+      "delivery_sha256": "58188878f4e9dc6e81e9a40b073199ce5d0d6a8240d48954356aca88b0e53b34",
+      "delivery_rgba_sha256": "8dda85957cd42b6ba4dec848bd7f94500294664969803648c3f012d0b5552d3a",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "7547601fcdfc0aaa27d9b926535c8467cee5b3d07fdcd756668990f875293500"
+    },
+    {
+      "id": "intro-04",
+      "archive": "BACKPICS",
+      "index": 4,
+      "source_file": "BACKPICS/backpics-004.png",
+      "source_png_sha256": "3976b3419a0d78f993972176d4dcbc3d963de676dff8259db1cc2889b020bd22",
+      "source_rgb_sha256": "0503bc8ea27c085d125bd703af8a0b7ed335faaa3047c9b68312e64d168c41e4",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "intro-04-reference.png",
+      "reference_sha256": "13ba0457ed2292946025f4ef5f320480fe510f582556a16ada5686ae88a23a30",
+      "references": [
+        "intro-04-reference.png",
+        "intro-04-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exact title animation frame BACKPICS4. Preserve the blue night, mountains, lightning placement and helmet camera/scale when present. This is one existing timed animation state; never substitute a logo or text. Keep the deep dark visor black. Requested compact delivery dimensions 768x480. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "intro-04-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "intro-04-native.png",
+      "native_sha256": "8b82670cd1ce150568e9ce49474b25f8104488565baaff955a10e9bb8db5af1e",
+      "native_rgba_sha256": "7f32daeee900604ddf8dd52f431cf34fdcd88ec737b8dd019bdbd3420cf2bda0",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "intro-04-delivery.png",
+      "delivery_sha256": "2205b520fe5cc3cb4a10b6492fb297b4a26589d313109cc75071f44e749cd72c",
+      "delivery_rgba_sha256": "c89342905d4fbb107b6905ed87f3ef7500db8e48a5f7360ce099a1c7356571f1",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d40aa93584844e529c02736f45a5c541b9ae45620853917ff9d09c633760572e"
+    },
+    {
+      "id": "intro-05",
+      "archive": "BACKPICS",
+      "index": 5,
+      "source_file": "BACKPICS/backpics-005.png",
+      "source_png_sha256": "979479cd4878b83dfc25c85fe027c367b717712f8a94e710465444618fa91ac8",
+      "source_rgb_sha256": "45c58a1e3dc7ca19a5f7d48b09dd8f279f13f4e2613fa2be794af6cb44d0bea5",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "intro-05-reference.png",
+      "reference_sha256": "cbe14534fa3002ed24bd2353a36cb569cc4980e7e52514faa58bd77474154267",
+      "references": [
+        "intro-05-reference.png",
+        "intro-05-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exact title animation frame BACKPICS5. Preserve the blue night, mountains, lightning placement and helmet camera/scale when present. This is one existing timed animation state; never substitute a logo or text. Keep the deep dark visor black. Requested compact delivery dimensions 768x480. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "intro-05-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "intro-05-native.png",
+      "native_sha256": "1441ac257ef0c1aaf553d530b547ebe8aadcd953153882422936ea67295d7b78",
+      "native_rgba_sha256": "1edd41a3910d41430da7a5b75aee9d8d6ff695f9b33f581af1eb851092ded9d9",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "intro-05-delivery.png",
+      "delivery_sha256": "f007d512c2827e850758fc22f8bdc11e0ad7e9a57e7d92b69d66f3968f8aaad0",
+      "delivery_rgba_sha256": "990d7623e37c1e87e85c08104bf950ca5b8e8a66392a10fdc6a632a1494ba4ba",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "a9e436e91df8fb6fd9c7451e3bff741a0eaeb5e6a28ffa135259f1cac45a6b05"
+    },
+    {
+      "id": "intro-06-corrected",
+      "archive": "BACKPICS",
+      "index": 6,
+      "source_file": "BACKPICS/backpics-006.png",
+      "source_png_sha256": "b47d4b513b67208544e4ccbfc1a508280c6e50d0d14d236499421e03a17c0306",
+      "source_rgb_sha256": "ed9b040bf3fca6f7791d8f9863a3c36fab548ee3170e373cfe7b4b65c08314c3",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "intro-06-reference.png",
+      "reference_sha256": "c9c3ae699b71fcf2a4b6bbefaf5b0e56dd72d5b2e51634079f8d8f84a914a59a",
+      "references": [
+        "intro-06-reference-enlarged.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. ONE huge electric-blue/white diagonal lightning flash filling the source canvas. Preserve the lightning path, direction, branching, dark-blue edges and normalized color-band locations. Smooth the square steps and jagged dither into naturally painted light and soft blue glow. No landscape, person, building or props. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 768x480.",
+      "prompt_file": "intro-06-corrected-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "intro-06",
+      "previous_delivery_sha256": "3a73b511f5f571540e7f2c570bf326bb0090be7eec8c39b1baf3cc1ee9c46e09",
+      "native_file": "intro-06-corrected-native.png",
+      "native_sha256": "59cf6eea9de2b49c227d06544b65131982153e27d0db80444a7821c401325c19",
+      "native_rgba_sha256": "3b8cff85969ca4eeb5c9a4d2c7d472ba354fb9c119da840de5573b90250bc1b0",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "intro-06-corrected-delivery.png",
+      "delivery_sha256": "363d7d5f7dc7d6baecd24061067c726416c60948c64332a2c461c84744ed1c3e",
+      "delivery_rgba_sha256": "c7f30f0f8d24d6717a0b9226f1de54cee71d8750888b84afb1223aaf4b89e8c7",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "91f6fd3315bf6b731ef96ce7ee8f73965d12f7f999207cb9463242b9e7938d92"
+    },
+    {
+      "id": "book-cover",
+      "archive": "BOOKPICS",
+      "index": 0,
+      "source_file": "BOOKPICS/bookpics-000.png",
+      "source_png_sha256": "d3666b9d54c7427b247d8d31d3c6e64dddde8988ca6a9fb94c4fae5b077a484f",
+      "source_rgb_sha256": "ba3d8186428cb04421b102006a29f825cefa065bc736ef911c0fe31e500e90d8",
+      "source_size": [
+        320,
+        200
+      ],
+      "reference": "book-cover-reference.png",
+      "reference_sha256": "ce48e4cef712e5c6659fa1968af2185c74ec7b97b444b47a93d37692ef2b5107",
+      "references": [
+        "book-cover-reference.png",
+        "book-cover-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. The original closed dark blue, silver-edged ornamented medieval book on red wood. Keep its right-side placement. Leave the title panel blank for native Traditional Chinese lettering; retain the silver and gold ornament geometry. No English words. Requested compact delivery dimensions 768x480. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "book-cover-prompt.txt",
+      "delivery_size": [
+        768,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "book-cover-native.png",
+      "native_sha256": "93c993dcbd06155d527c7acf62cd7ef87ece0f14bc36cfe08290ebc9d3d73542",
+      "native_rgba_sha256": "dd950fce1369502782c265e055f941b7b4a2a8f02898a3a5d450530c4bc3d1fc",
+      "native_size": [
+        1586,
+        992
+      ],
+      "delivery_file": "book-cover-delivery.png",
+      "delivery_sha256": "a864eb9d9648cf291dd8bbee74d613627823035056b05938dfc2ce6765f01ae7",
+      "delivery_rgba_sha256": "aaf9b4ae257178ed4f19d25633421c06b13752e26df208cbe02c377d86825f06",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "3ed5c773ba3797e31bf6d45daa3a304e19a9eae36ecb633ed435348e868f6a3c"
+    },
+    {
+      "id": "body-3",
+      "archive": "MISCPICS",
+      "index": 3,
+      "source_file": "MISCPICS/miscpics-003.png",
+      "source_png_sha256": "602513f7b3e9208605d0c383c9ae7baa0141d187d4aa86de754a8a7bef44e9d8",
+      "source_rgb_sha256": "9cdc4b6266b1562d6e03b8b3c48f7fada2e2594a19b4370f46ca04aee4a3693c",
+      "source_size": [
+        56,
+        70
+      ],
+      "reference": "body-3-reference.png",
+      "reference_sha256": "fb260f466d8ec6bda105234ec5f30d612a9061d55775ff46f3e23aaea8cd340c",
+      "references": [
+        "body-3-reference.png",
+        "body-3-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. An anatomical game wound diagram, same complete front-facing masculine/feminine/body-type silhouette, arms and leg positions as source. Grayscale ivory and graphite shading, blue waist cloth. Keep head, chest, each arm and each leg aligned to source because damage regions are overlaid independently. Solid near-black background. No blood, labels, skin color, extra anatomy or armor. Requested compact delivery dimensions 336x420. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "body-3-prompt.txt",
+      "delivery_size": [
+        336,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "body-3-native.png",
+      "native_sha256": "c4247634954a2a881c641f93a686155b4f5ad6f39c0984a9ba026ccf69c38a32",
+      "native_rgba_sha256": "2dc075872f2b6857fe3fbd8992971fb9dc288d12c89e8534eecdffee91630d49",
+      "native_size": [
+        1122,
+        1402
+      ],
+      "delivery_file": "body-3-delivery.png",
+      "delivery_sha256": "b865fae4826e4e4e006eebb310ebaf7664b6e517b510d103915a1396d4c81384",
+      "delivery_rgba_sha256": "707d0661ecb8f9d3b65ac6aae3572ae5fa0101b830d4f0732cf7d9df00efbad3",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "e5cbdaed129a507b372e627d6f4080c2db0b511e758dcfaa183ea4fc1e60ac83"
+    },
+    {
+      "id": "body-4",
+      "archive": "MISCPICS",
+      "index": 4,
+      "source_file": "MISCPICS/miscpics-004.png",
+      "source_png_sha256": "4de5c39ca3c4b744df8648c6fa1b70746feb37de62e4b6bddc408b8b5abd25a2",
+      "source_rgb_sha256": "a814d73f270ef1adbcf7786c76ffb7a3e174d9ef76f3b66e42e34d74fe5c6538",
+      "source_size": [
+        56,
+        70
+      ],
+      "reference": "body-4-reference.png",
+      "reference_sha256": "a6373b55c39c09c6f8d8056638f8b3f962dd75f0563b64c51ebf8c317fc3dfea",
+      "references": [
+        "body-4-reference.png",
+        "body-4-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. An anatomical game wound diagram, same complete front-facing masculine/feminine/body-type silhouette, arms and leg positions as source. Grayscale ivory and graphite shading, blue waist cloth. Keep head, chest, each arm and each leg aligned to source because damage regions are overlaid independently. Solid near-black background. No blood, labels, skin color, extra anatomy or armor. Requested compact delivery dimensions 336x420. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "body-4-prompt.txt",
+      "delivery_size": [
+        336,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "body-4-native.png",
+      "native_sha256": "7f805746cdc6dbff986ab4e7738354eee64469ecbb8de070ea01eaeef4ffc109",
+      "native_rgba_sha256": "638564b88fd89cb1af4a539eef7c066855df359c4189c2c3ac5a441418e8b128",
+      "native_size": [
+        1122,
+        1402
+      ],
+      "delivery_file": "body-4-delivery.png",
+      "delivery_sha256": "85386f94f3e2b9b38182b7c47b58ab335eef17bbac2f4c722799106ee48e373a",
+      "delivery_rgba_sha256": "7f49b529db4860e5a73d9ce6f3faae3e6cd2d01a5ec5acb340cd15c04fdba2dd",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "e5cbdaed129a507b372e627d6f4080c2db0b511e758dcfaa183ea4fc1e60ac83"
+    },
+    {
+      "id": "body-5",
+      "archive": "MISCPICS",
+      "index": 5,
+      "source_file": "MISCPICS/miscpics-005.png",
+      "source_png_sha256": "72488de77fc4ca51626ef78e85fd5874339ec8c8790f08125aa182a43325c8e4",
+      "source_rgb_sha256": "d301df6bfe32f8bdab126438e1b1d13f966e4e77f270bf5b7d49c694c6607205",
+      "source_size": [
+        56,
+        70
+      ],
+      "reference": "body-5-reference.png",
+      "reference_sha256": "43fb6c640141c72fb5fb7f062ffb759812e03e791e2ee19ffc6bf261db54f98e",
+      "references": [
+        "body-5-reference.png",
+        "body-5-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. An anatomical game wound diagram, same complete front-facing masculine/feminine/body-type silhouette, arms and leg positions as source. Grayscale ivory and graphite shading, blue waist cloth. Keep head, chest, each arm and each leg aligned to source because damage regions are overlaid independently. Solid near-black background. No blood, labels, skin color, extra anatomy or armor. Requested compact delivery dimensions 336x420. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "body-5-prompt.txt",
+      "delivery_size": [
+        336,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "body-5-native.png",
+      "native_sha256": "1088fa9a8a49d50a0ecc58b20cfa9d1578811bb228d4cdfadcecf71b940f9f60",
+      "native_rgba_sha256": "39d692f15dd221a591bccc3b48c4753e54a7e77523d5fb55b15c6a42633ddec9",
+      "native_size": [
+        1122,
+        1402
+      ],
+      "delivery_file": "body-5-delivery.png",
+      "delivery_sha256": "633ba0e8d443859c80f40c8004e0f296c223c2095e4a6177b2a3cb359fbaa986",
+      "delivery_rgba_sha256": "fbdff00bf4927b49ee57abc85f91168f016d4cfd9bb9c40da98a673d7ae3a294",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "e5cbdaed129a507b372e627d6f4080c2db0b511e758dcfaa183ea4fc1e60ac83"
+    },
+    {
+      "id": "weather-base-0-smooth",
+      "archive": "WEATPICS",
+      "index": 0,
+      "source_file": "WEATPICS/weatpics-000-base_color.png",
+      "source_png_sha256": "9e366c5c6ae36f43d24650bac20212f1d3988c22b045bdd93b177d05a2912fbc",
+      "source_rgb_sha256": "5c3964037de8be5a5cc7942a4cefae5914b40cd83755881993369b36a851a379",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-base-0-reference.png",
+      "reference_sha256": "840ca4eac7edcfb43c1922bc40f84254b3aef736a385ff5cd9049bb684fc3e7a",
+      "references": [
+        "weather-base-0-delivery.png",
+        "world-event-22-delivery.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Edit ONLY the sky: reinterpret every dither/checker pixel as continuous hand-painted sky shading. Same overall dark-blue top, cerulean/cyan horizon gradient, horizon, distant castle silhouette, hills and ground. No new clouds, stars, sun or objects. Clouds are a separate animation layer. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 384x372.",
+      "prompt_file": "weather-base-0-smooth-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "weather-base-0",
+      "generation_needed": true,
+      "style_reference_sha256": "ec4901c402bc59140b1d7f1c6bcbf50356201162b4f5676bc2956e5ae79b89f2",
+      "previous_delivery_sha256": "3dd26fd69f0b912496f3edc1ce7a4ffe3d763e5af78c1407a517687f19f6773c",
+      "native_file": "weather-base-0-smooth-native.png",
+      "native_sha256": "0cf3340276bf17b1e6a5d0c45ff7ea9bae6a115e49786f84a90b774716847940",
+      "native_rgba_sha256": "0acf7c60d886b27ef5f648922e4a14f8c5b6e4fe808c5e39a409aab3e3f5bb74",
+      "native_size": [
+        1274,
+        1234
+      ],
+      "delivery_file": "weather-base-0-smooth-delivery.png",
+      "delivery_sha256": "5c2095304ecafa282f2d886b2cdfd65e561c3c9ea7a01dee7edb6cad7c79fbc7",
+      "delivery_rgba_sha256": "48b417fe4234e460efada892d7cb9558454eae22cb8c8a4a5495327f90f6bc9f",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d9803c71b8b8b0fb092e6310662ef3dd68368e7593c559ecf1cbdc79caf22780"
+    },
+    {
+      "id": "weather-cloud-0",
+      "archive": "WEATPICS",
+      "index": 1,
+      "source_file": "WEATPICS/weatpics-001-or_color.png",
+      "source_png_sha256": "8705585acc6425fb1cd0156b52e0d91256537505dd3008dbf2211c425ad3a06b",
+      "source_rgb_sha256": "8e430d18b702d0349f1f35f056aea3e702cdd0990e26df5b2c04475469c383e7",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-cloud-0-reference.png",
+      "reference_sha256": "dd9ffca78868dcfc99878007bb7b3b4e0c1cc7454ce65e117acd7b060b5d7d57",
+      "references": [
+        "weather-cloud-0-reference.png",
+        "weather-cloud-0-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. A horizontal cloud layer corresponding exactly to the source cloud distribution on a solid black background. Preserve the bright white/pale blue or dark blue cloud shapes and their positions. This 128x31 logical layer scrolls horizontally over the matching landscape; do not paint a landscape, horizon, moon, stars or extra clouds. Requested compact delivery dimensions 768x186. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "weather-cloud-0-prompt.txt",
+      "delivery_size": [
+        768,
+        186
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "logical_shape": [
+        128,
+        31
+      ],
+      "native_file": "weather-cloud-0-native.png",
+      "native_sha256": "471b69828400e34de5ccd2c8d1882a9f9e3c63154eb58559c57ef2eda77a99d6",
+      "native_rgba_sha256": "771b50ad8d7c2ae2cd9007031837451fa8d66d2d73a13ad4de5a2268e3002217",
+      "native_size": [
+        2181,
+        721
+      ],
+      "delivery_file": "weather-cloud-0-bound-delivery.png",
+      "delivery_sha256": "76258a9f0589472464bb5591d73dfec3343011102c124cb61864f5e6955557ef",
+      "delivery_rgba_sha256": "51d118290ad91f47c3bf8c0c40e4211a73e1cbd7e23d863103431532d6d5bf57",
+      "resize_tool": "Pillow9.4.0 exact central atlas canvas crop, then LANCZOS; complete native unchanged",
+      "prompt_sha256": "bbc233d78bbdab44954cee1affa4cc1eb9f11226f27613680f9566cfda86fa8b",
+      "native_crop_bounds": [
+        0,
+        96,
+        2181,
+        624
+      ]
+    },
+    {
+      "id": "weather-base-1-smooth",
+      "archive": "WEATPICS",
+      "index": 3,
+      "source_file": "WEATPICS/weatpics-003-base_color.png",
+      "source_png_sha256": "95b339001950b6361b7fbb61fbc5f4d04a65871f689898e820aff793dcf8add6",
+      "source_rgb_sha256": "ffa705668c35e5c5b33d1dff70ec81a181077bfc5cffba7d7db9e2cfb4fe2c26",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-base-1-reference.png",
+      "reference_sha256": "24050fb3c7794df69ccf3d9a76340ab2c799308d77424193bb84acd3779d117c",
+      "references": [
+        "weather-base-1-delivery.png",
+        "world-event-22-delivery.png"
+      ],
+      "prompt": "Repaint the FIRST image into the already approved hand-painted illustration style shown in the SECOND image. Edit ONLY the sky: reinterpret every dither/checker pixel as continuous hand-painted sky shading. Same overall dark-blue top, cerulean/cyan horizon gradient, horizon, distant castle silhouette, hills and ground. No new clouds, stars, sun or objects. Clouds are a separate animation layer. Remove ALL pixel-art texture, square pixels, checkerboard, mosaic, dot-dither, jagged pixel edges and discrete color steps. This must be smooth fine-brush gouache/oil fantasy illustration with continuous shading and natural contours, absolutely not pixel-art restoration or enlarged retro pixels. Keep geometry and source scene meaning intact. No extra props, labels, borders or text. Fully opaque. Compact final game delivery 384x372.",
+      "prompt_file": "weather-base-1-smooth-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "weather-base-1",
+      "generation_needed": true,
+      "style_reference_sha256": "ec4901c402bc59140b1d7f1c6bcbf50356201162b4f5676bc2956e5ae79b89f2",
+      "previous_delivery_sha256": "30df93236162ef18bc959224e1109a11713aac2f55afa25c10ca95605471dad8",
+      "native_file": "weather-base-1-smooth-native.png",
+      "native_sha256": "e6c215f32b7fec469389b37d11cf92cc0d332601fad83d0956c57bb9d786470c",
+      "native_rgba_sha256": "b924bd5211f383943f92bb1c0107db7b3f2bbf3a0d91ffcaa0ea91a551cdec36",
+      "native_size": [
+        1274,
+        1234
+      ],
+      "delivery_file": "weather-base-1-smooth-delivery.png",
+      "delivery_sha256": "4a2ada0157376f9e7332c5ebefcc7634ff54f48704e2d22f0dc8479a3b0aef81",
+      "delivery_rgba_sha256": "9f177a205452df5abe86563f3f6e460eff10bfa17adfb8b29c53e0507cde385a",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d9803c71b8b8b0fb092e6310662ef3dd68368e7593c559ecf1cbdc79caf22780"
+    },
+    {
+      "id": "weather-cloud-1",
+      "archive": "WEATPICS",
+      "index": 4,
+      "source_file": "WEATPICS/weatpics-004-or_color.png",
+      "source_png_sha256": "7934420c2ecc8197adae9bd6b1c6ce5109f6e9c650895a6661c9f6b1f23a8882",
+      "source_rgb_sha256": "375cac7ad12220478f4f4c29056076b0db58be0678e4c4b5557ca5ae3c7b3d97",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-cloud-1-reference.png",
+      "reference_sha256": "1e3dac585f4e62dd0db46e9751f53e238e3d4ee9a444aae02fc4b0a23df3c13d",
+      "references": [
+        "weather-cloud-1-reference.png",
+        "weather-cloud-1-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. A horizontal cloud layer corresponding exactly to the source cloud distribution on a solid black background. Preserve the bright white/pale blue or dark blue cloud shapes and their positions. This 128x31 logical layer scrolls horizontally over the matching landscape; do not paint a landscape, horizon, moon, stars or extra clouds. Requested compact delivery dimensions 768x186. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "weather-cloud-1-prompt.txt",
+      "delivery_size": [
+        768,
+        186
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "logical_shape": [
+        128,
+        31
+      ],
+      "native_file": "weather-cloud-1-native.png",
+      "native_sha256": "146079ce4df6937ebf816913a8e0ced2798af820809daaa0be91f1f495a858b1",
+      "native_rgba_sha256": "d01b0c5415491ccb09490bdad8c4c238c925a8753655b82d53c0d912a2483fb2",
+      "native_size": [
+        2172,
+        724
+      ],
+      "delivery_file": "weather-cloud-1-bound-delivery.png",
+      "delivery_sha256": "fce54e91812f10368b7cd39f7d91ff64103f1283d3015646b87193ac551b76c5",
+      "delivery_rgba_sha256": "830d90cb1d8c1f26c25e3ef7ace90eb110dbabbb2b3c82826bfd1e10200b6e21",
+      "resize_tool": "Pillow9.4.0 exact central atlas canvas crop, then LANCZOS; complete native unchanged",
+      "prompt_sha256": "bbc233d78bbdab44954cee1affa4cc1eb9f11226f27613680f9566cfda86fa8b",
+      "native_crop_bounds": [
+        0,
+        99,
+        2172,
+        625
+      ]
+    },
+    {
+      "id": "weather-base-2",
+      "archive": "WEATPICS",
+      "index": 6,
+      "source_file": "WEATPICS/weatpics-006-base_color.png",
+      "source_png_sha256": "50a5f1f5b6a215ed939b34e05a6ce8bb70349a98cda27926de189ac073be9cfe",
+      "source_rgb_sha256": "e63cde6de2975db090787a22e53196b353e61c545544744a429e633a2bc254d8",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-base-2-reference.png",
+      "reference_sha256": "951cdf5c8801eef6cdb16e308ff1b75836cc6c0d00ac9dd33a83c7f9a2fbe850",
+      "references": [
+        "weather-base-2-reference.png",
+        "weather-base-2-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Small weather-panel landscape. Preserve the actual sky color, horizon, moon if present, distant hills and silhouette. Do not add cloud patches from another frame; moving clouds are a separate layer. Requested compact delivery dimensions 384x372. This is a game asset, not a presentation mockup. Fully opaque. Interpret source sky dithering ONLY as a color gradient: remove every large square, zigzag raster dot, checkerboard or stair-step. Paint a smooth brushed sky with the same overall lighting colors and horizon. Keep stars as small soft round points and retain the original moon when present. Clouds are a separate moving layer, so do not add new cloud patches.",
+      "prompt_file": "weather-base-2-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "weather-base-2-native.png",
+      "native_sha256": "c30d397db3bd3489c96f9a475989047ed83c8d871bcb7b5d9722502b23151f80",
+      "native_rgba_sha256": "999f856c59540c8907ca292b12ef09729b31fba5db43c008c935ec63e6f6320f",
+      "native_size": [
+        1274,
+        1234
+      ],
+      "delivery_file": "weather-base-2-delivery.png",
+      "delivery_sha256": "39b6c841b0efb091dad55b5548c686f081a74aab811f9ce384306b2f69d61433",
+      "delivery_rgba_sha256": "b61375967244db477ba1c099218847e97c7de59add4523266210d1bdd3867da6",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "e74db3844daf957b743787f4f6a78db5d11a9a6eb9ab12deb5b3be9b595311de"
+    },
+    {
+      "id": "weather-cloud-2",
+      "archive": "WEATPICS",
+      "index": 7,
+      "source_file": "WEATPICS/weatpics-007-or_color.png",
+      "source_png_sha256": "3ddd741dc8961208a0044fe74ccf9cd0c799d44be57bf608aff40b5b359aa81d",
+      "source_rgb_sha256": "49ef10e5dcd4b4b249ff7af7ebbb4ea648896e7fb858a0ce87ca9ab2f927a582",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-cloud-2-reference.png",
+      "reference_sha256": "3869d5b6493731c0a8092cb96380047e71515950b3148d188f1366b9f99ff1ef",
+      "references": [
+        "weather-cloud-2-reference.png",
+        "weather-cloud-2-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. A horizontal cloud layer corresponding exactly to the source cloud distribution on a solid black background. Preserve the bright white/pale blue or dark blue cloud shapes and their positions. This 128x31 logical layer scrolls horizontally over the matching landscape; do not paint a landscape, horizon, moon, stars or extra clouds. Requested compact delivery dimensions 768x186. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "weather-cloud-2-prompt.txt",
+      "delivery_size": [
+        768,
+        186
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "logical_shape": [
+        128,
+        31
+      ],
+      "native_file": "weather-cloud-2-native.png",
+      "native_sha256": "ca49a68e28c13b1ad64419e7a69d90442d0a2b782926845617499766cb8f70c8",
+      "native_rgba_sha256": "03b1c9172c12e1158608512fc2309d50424bc6679a87838841f7b2c784e51ccd",
+      "native_size": [
+        2061,
+        763
+      ],
+      "delivery_file": "weather-cloud-2-bound-delivery.png",
+      "delivery_sha256": "4331f7a0183826cb350922fb49b5421aeaf8ab8baf1c840e6932173eb60fec3a",
+      "delivery_rgba_sha256": "1e0c8a7446511722be237e95b6c21f0f55f2ebe6e41faab341bb2432c8679a85",
+      "resize_tool": "Pillow9.4.0 exact central atlas canvas crop, then LANCZOS; complete native unchanged",
+      "prompt_sha256": "bbc233d78bbdab44954cee1affa4cc1eb9f11226f27613680f9566cfda86fa8b",
+      "native_crop_bounds": [
+        0,
+        132,
+        2061,
+        631
+      ]
+    },
+    {
+      "id": "weather-base-5",
+      "archive": "WEATPICS",
+      "index": 15,
+      "source_file": "WEATPICS/weatpics-015-base_color.png",
+      "source_png_sha256": "b3d502b81df8a3f457b05f4b295692dc57fd312d3f51b75d26b4fb59179fe4a7",
+      "source_rgb_sha256": "8fa8dd8c9dafe7b4e3abecd1bea11356a6e5c4dff91703c11963ba045cec440a",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-base-5-reference.png",
+      "reference_sha256": "1cc95f393f33761b38402f9a16ba7b1ef5ec173d1cd745d2096b5684ddaf3521",
+      "references": [
+        "weather-base-5-reference.png",
+        "weather-base-5-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Small weather-panel landscape. Preserve the actual sky color, horizon, moon if present, distant hills and silhouette. Do not add cloud patches from another frame; moving clouds are a separate layer. Requested compact delivery dimensions 384x372. This is a game asset, not a presentation mockup. Fully opaque. Interpret source sky dithering ONLY as a color gradient: remove every large square, zigzag raster dot, checkerboard or stair-step. Paint a smooth brushed sky with the same overall lighting colors and horizon. Keep stars as small soft round points and retain the original moon when present. Clouds are a separate moving layer, so do not add new cloud patches.",
+      "prompt_file": "weather-base-5-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "weather-base-5-native.png",
+      "native_sha256": "cd18896b2bbe716e09a1a92df412fb92c847ae40bcb2dc3e0587460194f32713",
+      "native_rgba_sha256": "b7815422ceb1b21ce89e045186cfda0e94f8d673b3fe70eb64b038e3a60cf5a0",
+      "native_size": [
+        1274,
+        1234
+      ],
+      "delivery_file": "weather-base-5-delivery.png",
+      "delivery_sha256": "b120b13e99f28df2957a9ecc4f849e5734ccbf786f5356ea84c4faa1a61cd815",
+      "delivery_rgba_sha256": "7c7f6a169430b6220c31073f1c18070a6ebbb9f414beaf5a4b2eadb75cc41ac1",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "e74db3844daf957b743787f4f6a78db5d11a9a6eb9ab12deb5b3be9b595311de"
+    },
+    {
+      "id": "weather-cloud-5",
+      "archive": "WEATPICS",
+      "index": 16,
+      "source_file": "WEATPICS/weatpics-016-or_color.png",
+      "source_png_sha256": "e8389bbd5ea29ff9f0a6d13ae00308b0db743864c6fa3840b09515632368c86a",
+      "source_rgb_sha256": "6bdfc5c01aa1f63c9c749748ebf8adc69df7c7049b0f21e362848dd8dfe491f7",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-cloud-5-reference.png",
+      "reference_sha256": "6c0ae3ce35fa5a82509271625614df65c048d05b55a57ab99560a7d321f82f75",
+      "references": [
+        "weather-cloud-5-reference.png",
+        "weather-cloud-5-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. A horizontal cloud layer corresponding exactly to the source cloud distribution on a solid black background. Preserve the bright white/pale blue or dark blue cloud shapes and their positions. This 128x31 logical layer scrolls horizontally over the matching landscape; do not paint a landscape, horizon, moon, stars or extra clouds. Requested compact delivery dimensions 768x186. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "weather-cloud-5-prompt.txt",
+      "delivery_size": [
+        768,
+        186
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "logical_shape": [
+        128,
+        31
+      ],
+      "native_file": "weather-cloud-5-native.png",
+      "native_sha256": "40aefea88b93519944d777b3f36613199698238244e31c013ca90bb4a4f8019f",
+      "native_rgba_sha256": "03e86ce76f6b533833cda58497eaf4b4bcd973681c9902963068a138ffa2329b",
+      "native_size": [
+        2172,
+        724
+      ],
+      "delivery_file": "weather-cloud-5-bound-delivery.png",
+      "delivery_sha256": "1194b81540e88cc6ecfe68a97267e6457551e53d57f0ffba883f1f897ed578bc",
+      "delivery_rgba_sha256": "8491c5a2ac0e398b78249eb17c0184fee493c2f2101367819a294655693bfbdf",
+      "resize_tool": "Pillow9.4.0 exact central atlas canvas crop, then LANCZOS; complete native unchanged",
+      "prompt_sha256": "bbc233d78bbdab44954cee1affa4cc1eb9f11226f27613680f9566cfda86fa8b",
+      "native_crop_bounds": [
+        0,
+        99,
+        2172,
+        625
+      ]
+    },
+    {
+      "id": "weather-3-0",
+      "archive": "WEATPICS",
+      "index": 9,
+      "source_file": "WEATPICS/weatpics-009-base_color.png",
+      "source_png_sha256": "583bec5e50e8bf36ee4605398a5ad296a5db2c32656279148c617bde717fce62",
+      "source_rgb_sha256": "9900303ffdf7aef7547e636dbcd208b23da5937223c6a4f8a694a55b6597b017",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-3-0-reference.png",
+      "reference_sha256": "eb807c68640f38f812008526463813ac655a79e2bd34be4ce5cb1796fd938f87",
+      "references": [
+        "weather-3-0-reference.png",
+        "weather-3-0-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exact complete rain animation frame. Match source streak/flurry distribution, background, hills if present and sky lighting. Preserve this frame phase; no people or new objects. Requested compact delivery dimensions 384x372. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "weather-3-0-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "weather-3-0-native.png",
+      "native_sha256": "63060302bc0e087d9a92e279ccf51810363f2b1b0a542571c7f128afcf2d16cf",
+      "native_rgba_sha256": "4d38b89eff29fab9d9fabe74b11975082c4dce8826ba0f3bdb9d7cab18fa4065",
+      "native_size": [
+        1274,
+        1234
+      ],
+      "delivery_file": "weather-3-0-delivery.png",
+      "delivery_sha256": "3fc73c694f833ef6a4855dcc09e06a44d3c9cf81ad721d5783efd2950baa9b43",
+      "delivery_rgba_sha256": "d28e05fcccdf46dcd7567e45cecad87b02d729ed5b4602679dc9e1adb79a1dd4",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "1193c9ff6762e3ad96a836dec03abf6371ae2ebf53dcd78978aadb6d9e40c779"
+    },
+    {
+      "id": "weather-3-1",
+      "archive": "WEATPICS",
+      "index": 10,
+      "source_file": "WEATPICS/weatpics-010-or_color.png",
+      "source_png_sha256": "2f9a661aaa4fc5c00e0bbbd805f76337ddc05b6dd06ffa27a8d0f8a8852eb71a",
+      "source_rgb_sha256": "8b682faf6952ff68f111ed217ff635a680444994df83cf97b808be89c93d9035",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-3-1-reference.png",
+      "reference_sha256": "a32efcbe8640418aa7fb67aee80d1f79ca59f1d45318b6d69e1db91c51ab0939",
+      "references": [
+        "weather-3-1-reference.png",
+        "weather-3-1-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exact complete rain animation frame. Match source streak/flurry distribution, background, hills if present and sky lighting. Preserve this frame phase; no people or new objects. Requested compact delivery dimensions 384x372. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "weather-3-1-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "weather-3-1-native.png",
+      "native_sha256": "3002d257fed50aacbcdee1e640b6edc916364decf2954418522f363dc3fa62ca",
+      "native_rgba_sha256": "5277cfaf13fff5ba1948174486bfb3118e49533bca534abfad1b3898e38ac9dd",
+      "native_size": [
+        1275,
+        1234
+      ],
+      "delivery_file": "weather-3-1-delivery.png",
+      "delivery_sha256": "17630d754b7b6aed2ab601dca414949f870b6e60caf91060d26e38a9f7c2ff55",
+      "delivery_rgba_sha256": "177b9a10c0986d793c5cd750ec00572caa598dd5e98a788c051ab68ed19aec37",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "1193c9ff6762e3ad96a836dec03abf6371ae2ebf53dcd78978aadb6d9e40c779"
+    },
+    {
+      "id": "weather-3-2-corrected",
+      "archive": "WEATPICS",
+      "index": 11,
+      "source_file": "WEATPICS/weatpics-011-and_mask_4plane.png",
+      "source_png_sha256": "6c66f5a979243f98e0070f71277c246cbd975455b61b69f189ed82ecc3b1b242",
+      "source_rgb_sha256": "cce74b7b593ed5a968ce44195a485aa5ce5bd26828ccf834cadd60ceaeb0ae22",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-3-2-reference.png",
+      "reference_sha256": "ac96648ed7733e2cb627a2bf2cce702ff5ed1ac5963765ca3cabe90116560ed6",
+      "references": [
+        "weather-3-2-reference-enlarged.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. Only diagonal blue rain streaks on a completely black background, same source direction, spacing, length and animation phase. Paint smooth tapered fine-brush streaks rather than square dots. No landscape, buildings, clouds or new objects. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 384x372.",
+      "prompt_file": "weather-3-2-corrected-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "weather-3-2",
+      "previous_delivery_sha256": "19cffa07fa7091351437c7572ba38acdf8825bec95220f9889b96100253ea2c1",
+      "native_file": "weather-3-2-corrected-native.png",
+      "native_sha256": "ab37956c74523bba32c966a172ead75a938de1511432a5103f5c1b5bbe5da8a9",
+      "native_rgba_sha256": "91e9e85283ded4a2f36627f66d87381311601fae38a337a22113c9be404c4216",
+      "native_size": [
+        1275,
+        1234
+      ],
+      "delivery_file": "weather-3-2-corrected-delivery.png",
+      "delivery_sha256": "cce093665355fb3da68deb7db5e4976bb1a20da1a14d63de9b4ee68ffeb0cefd",
+      "delivery_rgba_sha256": "e185999dd06fc5cd1ef57b9a732326df9fdf0966a80d0a8fc8660166fd9681fa",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "778216ac1fc32140cbd41a063affb1e0863fbca8a641d32ef0b99e0436adf7d4"
+    },
+    {
+      "id": "weather-4-0-corrected",
+      "archive": "WEATPICS",
+      "index": 12,
+      "source_file": "WEATPICS/weatpics-012-base_color.png",
+      "source_png_sha256": "6cbdc988868771a88e7a1d1b8b73c8962ca2bb8a654e45700465bc14be4a6696",
+      "source_rgb_sha256": "2576bf072a98eeddda8cd2139d4e81a3f693c076c44ddcadea1bc8a5df6dd07a",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-4-0-reference.png",
+      "reference_sha256": "505491cfa93406eccfa05413964f688fb5efb628e351d354e7ef7438035cc4b1",
+      "references": [
+        "weather-4-0-reference-enlarged.png"
+      ],
+      "prompt": "Repaint ONLY the single attached exact source as compact smooth hand-painted medieval game art. Exact snow animation phase from this source: dark blue sky, flowing white snowflakes in the same distribution, two snow-covered mountain peaks at bottom. Snowflakes can be round natural brush dabs, never square dither. Replace the checkerboard sky with smooth dark-blue gradients. Keep peaks, horizon and flurry placement. Fully opaque. Preserve normalized composition and source meaning. Continuous fine natural gouache brush shading; absolutely NO pixel art, square mosaic, checkerboard, discrete color steps, blocky edge or copied retro pixels. No text, labels or border. Delivery 384x372.",
+      "prompt_file": "weather-4-0-corrected-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "weather-4-0",
+      "previous_delivery_sha256": "610efb2a23ed645f89c8165cffcba55d840e6f92bc1b3836c953af1d0c159698",
+      "native_file": "weather-4-0-corrected-native.png",
+      "native_sha256": "6f5250a530629cb6d92bd028d22b9d3e396b51866fbe75666fb116129e5713b5",
+      "native_rgba_sha256": "77d7b44a71cf5c0863a4b5e006c741c463ada9e0bc29bdb09629acf08c3491be",
+      "native_size": [
+        1274,
+        1234
+      ],
+      "delivery_file": "weather-4-0-corrected-delivery.png",
+      "delivery_sha256": "df8f6d3e0dc2c7455c35465d15d302e9529da699da518084354030c377615ba0",
+      "delivery_rgba_sha256": "042c95c72d9b18e3783a2a32e5be67bc8228da0d642f12898a2b67576628b113",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "f3f03f4eb74514677ea6ecf8a8e95180be9112c4b82c6479839d4a425f5f4010"
+    },
+    {
+      "id": "weather-4-1-corrected",
+      "archive": "WEATPICS",
+      "index": 13,
+      "source_file": "WEATPICS/weatpics-013-or_color.png",
+      "source_png_sha256": "65e210aea65bdcdf006ed9f7784a5e6d7630a3224061ad3f784c06f83b544d88",
+      "source_rgb_sha256": "7a0904005ff0769023521114cddd1d582b0e13fd8476d7acbd9526ca46ee6747",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-4-1-reference.png",
+      "reference_sha256": "32a068803c577d52f1a1b3ec8a47f940e0b18661b57d9df97a37323f25872dc1",
+      "references": [
+        "weather-4-1-reference-enlarged.png"
+      ],
+      "prompt": "Repaint ONLY the single attached exact source as compact smooth hand-painted medieval game art. Exact snow animation phase from this source: dark blue sky, flowing white snowflakes in the same distribution, two snow-covered mountain peaks at bottom. Snowflakes can be round natural brush dabs, never square dither. Replace the checkerboard sky with smooth dark-blue gradients. Keep peaks, horizon and flurry placement. Fully opaque. Preserve normalized composition and source meaning. Continuous fine natural gouache brush shading; absolutely NO pixel art, square mosaic, checkerboard, discrete color steps, blocky edge or copied retro pixels. No text, labels or border. Delivery 384x372.",
+      "prompt_file": "weather-4-1-corrected-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "weather-4-1",
+      "previous_delivery_sha256": "ce008b4d4b8b981b209fe957db31c399e47ddd79d98814d232861b5c9e41d0c6",
+      "native_file": "weather-4-1-corrected-native.png",
+      "native_sha256": "444656d75b477fcdd93fa55807d0d7ff2210cc7fbc66d44b1c499c85f30eeef2",
+      "native_rgba_sha256": "203a9f5a7580580e22853b5b0a0b9adef926b7aabdb0adf9a66bd568eb3e9474",
+      "native_size": [
+        1274,
+        1234
+      ],
+      "delivery_file": "weather-4-1-corrected-delivery.png",
+      "delivery_sha256": "b836360bd35e3674f5d3a67d13726ebccab7fd40a44307c111034c9bd16fcb9f",
+      "delivery_rgba_sha256": "919781fa41fb7213caa5f367e6cd82f4433e303181ddc9f9dd2f13e1b0c0f0e8",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "f3f03f4eb74514677ea6ecf8a8e95180be9112c4b82c6479839d4a425f5f4010"
+    },
+    {
+      "id": "weather-4-2-corrected",
+      "archive": "WEATPICS",
+      "index": 14,
+      "source_file": "WEATPICS/weatpics-014-and_mask_4plane.png",
+      "source_png_sha256": "5cfcceb27a95a68838bf2028454365d0f878097c6ce9c2ccdb74f75ef2a43e5f",
+      "source_rgb_sha256": "f903cfcddf42f97871a81867f1785d5f4102ae1da07662381743344a042e0d0b",
+      "source_size": [
+        64,
+        62
+      ],
+      "reference": "weather-4-2-reference.png",
+      "reference_sha256": "1b8dc6e46fc4a3fcdb135775b45505b9f0ad31599795ead3f30a7c58d8d1b5b1",
+      "references": [
+        "weather-4-2-reference-enlarged.png"
+      ],
+      "prompt": "Repaint ONLY the single attached exact source as compact smooth hand-painted medieval game art. Exact snow animation phase from this source: dark blue sky, flowing white snowflakes in the same distribution, two snow-covered mountain peaks at bottom. Snowflakes can be round natural brush dabs, never square dither. Replace the checkerboard sky with smooth dark-blue gradients. Keep peaks, horizon and flurry placement. Fully opaque. Preserve normalized composition and source meaning. Continuous fine natural gouache brush shading; absolutely NO pixel art, square mosaic, checkerboard, discrete color steps, blocky edge or copied retro pixels. No text, labels or border. Delivery 384x372.",
+      "prompt_file": "weather-4-2-corrected-prompt.txt",
+      "delivery_size": [
+        384,
+        372
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "revises": "weather-4-2",
+      "previous_delivery_sha256": "ba78279c67f98a501c3f3f8b502a7ce42809b4ec4ee12360a3e928ca407eb869",
+      "native_file": "weather-4-2-corrected-native.png",
+      "native_sha256": "048e44f5190c765353098a8ec83572eeaa537baf99ec086618d26cc1061ee231",
+      "native_rgba_sha256": "6cbf52eb28785568039b9f4f2fba07ba1c3f28150c6f3d2f01847b9b955a2565",
+      "native_size": [
+        1275,
+        1234
+      ],
+      "delivery_file": "weather-4-2-corrected-delivery.png",
+      "delivery_sha256": "e704c2452804f297ade05eb99faf598e0ea88dc44cf75602826f1beb7f613266",
+      "delivery_rgba_sha256": "c0504a43913f7b10589cccd491b15700ebe02799440ae4a380a78ca06988ff1c",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "f3f03f4eb74514677ea6ecf8a8e95180be9112c4b82c6479839d4a425f5f4010"
+    },
+    {
+      "id": "walking-helmets",
+      "archive": "KOLPICS-MARKERS",
+      "index": 0,
+      "source_file": "KOLPICS-MARKERS/kolpics-markers.png",
+      "source_png_sha256": "112c03fc64c96499989ef312749b898a3d59a96bce520cfbc2d3308f4c49ff17",
+      "source_rgb_sha256": "64f8d57befed0f41b0647f0b47df1af7792163a245222368f2dd3c33d3848872",
+      "source_size": [
+        16,
+        160
+      ],
+      "reference": "walking-helmets-reference.png",
+      "reference_sha256": "a89542441ac4a3306309330198f60b38ba21075de20ddb9d80f0959ba6531fbe",
+      "references": [
+        "walking-helmets-reference.png",
+        "walking-helmets-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly FIVE helmet-head marker frames in ONE horizontal row of FIVE equal square cells, no gutters or margins. Each cell is one silver/ivory knight helmet with small red plume, preserving the corresponding source frame orientation and idle bob. Transparent everywhere behind the five helmets. Keep every helmet within its cell; no numbers or people bodies. Requested compact delivery dimensions 640x128. This is a game asset, not a presentation mockup. Transparent background; preserve complete foreground, no checkerboard.",
+      "prompt_file": "walking-helmets-prompt.txt",
+      "delivery_size": [
+        640,
+        128
+      ],
+      "transparent": true,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        1
+      ],
+      "native_file": "walking-helmets-native.png",
+      "native_sha256": "c0d356154d253b41bfb0dbed2ec3c9a4138ec890fd5868f5760c4a367cc4196e",
+      "native_rgba_sha256": "88c6f4d1166df8164ca1fedff4f187fbf5d1345b8fa80f672f9c3997e48a3d1b",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "walking-helmets-bound-delivery.png",
+      "delivery_sha256": "2b10a222803661da9f7142aba7f4d89a4324f7ce19385c83ac6f917459d7a7fd",
+      "delivery_rgba_sha256": "7bb8feab59fcdb45a9deb31fd7522045a42b0575db26505ae429263891042da1",
+      "resize_tool": "Pillow9.4.0 exact central atlas canvas crop, then LANCZOS; complete native unchanged",
+      "prompt_sha256": "58c4250ff8fd90280783fa56e82fbe01a3edadc4d5d0ac233c2998f18e3849e9",
+      "native_crop_bounds": [
+        0,
+        198,
+        1983,
+        595
+      ]
+    },
+    {
+      "id": "battle-terrain-10",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-terrain-10-reference.png",
+      "reference_sha256": "984bc519febed57ea68aef448c15cf81e6bc89810f5c78257caac592b7a7f1a9",
+      "references": [
+        "battle-terrain-10-reference.png",
+        "battle-terrain-10-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly TEN terrain cells, FIVE columns and TWO rows, equal square cells, no gutters, labels or border. Preserve each cell source edge and interior topology independently. Continuous wall/cliff edges must meet the same normalized cell edge positions; grass, water, stone and shadows match source colors and meanings. No figures added. Requested compact delivery dimensions 640x256. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-terrain-10-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-terrain-10-native.png",
+      "native_sha256": "451db2273de799701f44cdda7369f53d38e693e057b7a72b3f3745d05bdf1ad8",
+      "native_rgba_sha256": "5f311332eb0fac8e2a5dfd5d6b6ff58631f0c258da99427b4b2e64ca1079cdb7",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-terrain-10-delivery.png",
+      "delivery_sha256": "2332f2ec933311be8df8b0e421d00eb45d7e0c869eb62261e26618f3bc3ebd94",
+      "delivery_rgba_sha256": "c0d8eb3a4810ca99e5388d22c4c9c2266b56bdcb92d3cb4df532f3e55ba7412e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "13508fe8759f661061b4eb06b4fc326e8d158b72034d41773932cc1a91b8a9c7"
+    },
+    {
+      "id": "battle-terrain-20",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-terrain-20-reference.png",
+      "reference_sha256": "1fcbcca4354e6063b346d01f77146fdfe3e5b6efd570711a8e9696d94bc252fc",
+      "references": [
+        "battle-terrain-20-reference.png",
+        "battle-terrain-20-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly TEN terrain cells, FIVE columns and TWO rows, equal square cells, no gutters, labels or border. Preserve each cell source edge and interior topology independently. Continuous wall/cliff edges must meet the same normalized cell edge positions; grass, water, stone and shadows match source colors and meanings. No figures added. Requested compact delivery dimensions 640x256. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-terrain-20-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-terrain-20-native.png",
+      "native_sha256": "7bf7c10cad50adde6ab1408d1021d85f4bfc8d53a466e5cc4d45b1da82b55f24",
+      "native_rgba_sha256": "b5ba3406ca7a8b31d037897ceff83dc7ab04fa5ec273f64041ed0c92e02f9b85",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-terrain-20-delivery.png",
+      "delivery_sha256": "817b35cbf4aade41b5ca4120301a0f784d597d90ad7aad555ff0de1847046caa",
+      "delivery_rgba_sha256": "c1e146777d10ce7582f0ac8f33a8eeb8150dec4b3e2ffb5809b1db296f5d8635",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "13508fe8759f661061b4eb06b4fc326e8d158b72034d41773932cc1a91b8a9c7"
+    },
+    {
+      "id": "battle-terrain-30",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-terrain-30-reference.png",
+      "reference_sha256": "e8e66f5fcf7fcac58e4b3921fa4955893feb5cf458c0ecb726e6bd7883290136",
+      "references": [
+        "battle-terrain-30-reference.png",
+        "battle-terrain-30-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly TEN terrain cells, FIVE columns and TWO rows, equal square cells, no gutters, labels or border. Preserve each cell source edge and interior topology independently. Continuous wall/cliff edges must meet the same normalized cell edge positions; grass, water, stone and shadows match source colors and meanings. No figures added. Requested compact delivery dimensions 640x256. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-terrain-30-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-terrain-30-native.png",
+      "native_sha256": "11b98bf4f371c76ae76f406819efa9826ede78c7eaed1d9be22a735a4f37d3e8",
+      "native_rgba_sha256": "ec550a2034414eee853de114036d0fe59b0776c9b77a7a1a4d1f2fef6f4128c8",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-terrain-30-delivery.png",
+      "delivery_sha256": "67188d77412c0ca5ce2f5e59db829891be52c040da6b97127358e61bb878cc9b",
+      "delivery_rgba_sha256": "b667026071f7e453d514fa413526e8b735caa1a7f847e5a6b4feb35c4def6072",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "13508fe8759f661061b4eb06b4fc326e8d158b72034d41773932cc1a91b8a9c7"
+    },
+    {
+      "id": "battle-terrain-40",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-terrain-40-reference.png",
+      "reference_sha256": "224cb80a3f06940da4d33dd7ca4455455bf40bb64ccaa1eb1adb42fb0014a7b0",
+      "references": [
+        "battle-terrain-40-reference.png",
+        "battle-terrain-40-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly TEN terrain cells, FIVE columns and TWO rows, equal square cells, no gutters, labels or border. Preserve each cell source edge and interior topology independently. Continuous wall/cliff edges must meet the same normalized cell edge positions; grass, water, stone and shadows match source colors and meanings. No figures added. Requested compact delivery dimensions 640x256. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-terrain-40-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-terrain-40-native.png",
+      "native_sha256": "2fe743474b0ad93bea3b7f9a1d399104649bd028e087067353b0e135f74fd12d",
+      "native_rgba_sha256": "cde0ac76af79ceac93cd8003b1399ff55120b9d143d74eeb486386a3e327c134",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-terrain-40-delivery.png",
+      "delivery_sha256": "a9c08e66ccca9ede478929d5bc6aeb1d6c624844fed1fbb158ae5c8840376d55",
+      "delivery_rgba_sha256": "df3031377da794f3cdf5f19b9ced17fe2b55df2197be5e672c3597d8aed4aeb4",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "13508fe8759f661061b4eb06b4fc326e8d158b72034d41773932cc1a91b8a9c7"
+    },
+    {
+      "id": "battle-terrain-50",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-terrain-50-reference.png",
+      "reference_sha256": "0f6d8ad112ac7b12c7b226aade76010ad93ce423c12cde024e958d5c032cd12f",
+      "references": [
+        "battle-terrain-50-reference.png",
+        "battle-terrain-50-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly TEN terrain cells, FIVE columns and TWO rows, equal square cells, no gutters, labels or border. Preserve each cell source edge and interior topology independently. Continuous wall/cliff edges must meet the same normalized cell edge positions; grass, water, stone and shadows match source colors and meanings. No figures added. Requested compact delivery dimensions 640x256. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-terrain-50-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-terrain-50-native.png",
+      "native_sha256": "2cee764e4b0584a4bb86a9fa6146781e34d975ace304943da25f404347b4b488",
+      "native_rgba_sha256": "b54e05a740f487322a4707bae0ea316cb3dcb4f1f81442c80b503a19afaed290",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-terrain-50-delivery.png",
+      "delivery_sha256": "7eee0dfa20d3c28d47ca52538c47e757df048c7edb270e6936e9c538b43d038a",
+      "delivery_rgba_sha256": "8b0142c794ab0fcd8d67785dca9511653ba58bd5de58a141d6aa93d7cc3d9d36",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "13508fe8759f661061b4eb06b4fc326e8d158b72034d41773932cc1a91b8a9c7"
+    },
+    {
+      "id": "battle-terrain-60",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-terrain-60-reference.png",
+      "reference_sha256": "5a418db62227a1538b5b15f0d104d3a61d748c753b974bd67269e1f72acc52c5",
+      "references": [
+        "battle-terrain-60-reference.png",
+        "battle-terrain-60-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly TEN terrain cells, FIVE columns and TWO rows, equal square cells, no gutters, labels or border. Preserve each cell source edge and interior topology independently. Continuous wall/cliff edges must meet the same normalized cell edge positions; grass, water, stone and shadows match source colors and meanings. No figures added. Requested compact delivery dimensions 640x256. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-terrain-60-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-terrain-60-native.png",
+      "native_sha256": "6651e05c5cbed910120c4bd78127867303c6d7d7ef366cf219b14f76475e6e84",
+      "native_rgba_sha256": "14ee3800e67c1816cda575d397e81ff6815af45a23a1c93ba217dc586bcad4f5",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-terrain-60-delivery.png",
+      "delivery_sha256": "1dd53208f4ae13e212a525893f6cd15d5679070ea511e664f8b4f07b7f7b7cc2",
+      "delivery_rgba_sha256": "21718c6db951913945f4292601383dacab7709c980452feebaf6069a9441fc0e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "13508fe8759f661061b4eb06b4fc326e8d158b72034d41773932cc1a91b8a9c7"
+    },
+    {
+      "id": "battle-terrain-70",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-terrain-70-reference.png",
+      "reference_sha256": "ac4284159d60f2e255405ceaa42631b59758e6ec18ea14db9fc900d6ab09a759",
+      "references": [
+        "battle-terrain-70-reference.png",
+        "battle-terrain-70-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. Exactly TEN terrain cells, FIVE columns and TWO rows, equal square cells, no gutters, labels or border. Preserve each cell source edge and interior topology independently. Continuous wall/cliff edges must meet the same normalized cell edge positions; grass, water, stone and shadows match source colors and meanings. No figures added. Requested compact delivery dimensions 640x256. This is a game asset, not a presentation mockup. Fully opaque.",
+      "prompt_file": "battle-terrain-70-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-terrain-70-native.png",
+      "native_sha256": "47d337c7d436b9161f22ee7ab13037b3fc58d3610f4cf46b53f3f0311ff5197c",
+      "native_rgba_sha256": "7d890174341b53d9219327eb8e2ed687d7d83d39056b649a79fe9a1f53e61276",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-terrain-70-delivery.png",
+      "delivery_sha256": "de9a05fe4410c06a39f65a235a1f3d4fab7a2c2a69eead3ec675d6f1c71c5bd8",
+      "delivery_rgba_sha256": "935f5009a1a3714248f556f5120c3872c985f918e80179e6faa674e4bf0a5006",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "13508fe8759f661061b4eb06b4fc326e8d158b72034d41773932cc1a91b8a9c7"
+    },
+    {
+      "id": "battle-sprite-0-corrected",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-sprite-0-reference.png",
+      "reference_sha256": "fc54efc9d3f6e26509a2f927f6b98544f8f9189b99d49cdd8044b00514158d44",
+      "references": [
+        "battle-sprite-0-reference-enlarged.png"
+      ],
+      "prompt": "Repaint ONLY the single attached exact source as compact smooth hand-painted medieval game art. One standing blue-clad knight marker with steel helmet, exact reference tiny body pose and proportions. Remove the white digit at top, keep his head at its source position. Smooth hand-painted natural armor and cloth, no blocky contours. Transparent background. No ground, buildings or other objects. Preserve normalized composition and source meaning. Continuous fine natural gouache brush shading; absolutely NO pixel art, square mosaic, checkerboard, discrete color steps, blocky edge or copied retro pixels. No text, labels or border. Delivery 128x128.",
+      "prompt_file": "battle-sprite-0-corrected-prompt.txt",
+      "delivery_size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "tile_id": 0,
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "revises": "battle-sprite-0",
+      "previous_delivery_sha256": "14d0e7215c3b58170b10fa346bdcb0e6c6c7d3410e10d5a7938cbf1597a605ff",
+      "native_file": "battle-sprite-0-corrected-native.png",
+      "native_sha256": "7cb075924c9470902561c1d503b11d141b3a2612a08063a99a1157149e0f4d86",
+      "native_rgba_sha256": "48b74610c1ffd785d101c657898ddc02ef8db8669050bb4e3fc65c4ce89b8d66",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "delivery_file": "battle-sprite-0-corrected-delivery.png",
+      "delivery_sha256": "fbfac13b88a9ac2fcba1c487eef1c49bc6e32a0fd57ebb6b890780877ce4117e",
+      "delivery_rgba_sha256": "ccdcbcf3d0536428c2bc5cd951ba4e9b27c1dd4f69b20ab6dcea3e14e27818b4",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "40ba0eb193fdcaf8de30c78210ba7d6e599d42447ea3dd9c786bc7bcb4228c9d"
+    },
+    {
+      "id": "battle-sprite-6-consistent",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-sprite-6-reference.png",
+      "reference_sha256": "5e2b1d8a750b6fa7648f6be4fae441720a7ff8c296b86365534b69ac0858307f",
+      "references": [
+        "battle-sprite-7-delivery.png",
+        "battle-sprite-6-reference-enlarged.png"
+      ],
+      "prompt": "Create the STANDING counterpart of the exact creature in the FIRST image, following the standing silhouette/pose and normalized placement in the SECOND original retro marker. This is one generic enemy tactical marker, not a new monster species. Preserve the first creature's identity: humanoid red muscular/scaly torso and limbs, green face and curved green horns, green clawed hands and feet, fierce small yellow eyes. Stand in the original second image's three-quarter left-facing hunched pose, with the same head position, body mass and limbs. Match the same smooth hand-painted gouache technique as the fallen counterpart. No feathers, wings, beak, bird, clothes, weapon, building, ground, shadow rectangle, border, digit or text. Keep the whole standing creature inside its square cell. Real transparent background. Compact final game delivery128x128.",
+      "prompt_file": "battle-sprite-6-consistent-prompt.txt",
+      "delivery_size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "tile_id": 6,
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "revises": "battle-sprite-6",
+      "previous_delivery_sha256": "ccb83379011b9be552801df55f6c932c94407c4619ebdf57cb695e4152c08587",
+      "native_file": "battle-sprite-6-consistent-native.png",
+      "native_sha256": "08688fdbf9d8c95f0870ec3f93d9dd5d95ba640f25ecaed978415861ca56189e",
+      "native_rgba_sha256": "67579c27647afb933876965ae4b7ca29f6d0a06d67ce5ae9cd902b884b4cb7f3",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "delivery_file": "battle-sprite-6-consistent-delivery.png",
+      "delivery_sha256": "6d94de870de5582116eb97ee66a0703a634f82597b41324956ab841e53d33d89",
+      "delivery_rgba_sha256": "d8af5dc704380a9406a1e93c1aae196b0b109c437afe72961d0a5df94559bf2a",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "47c6f53c212c7ec37be8a77454ccfb0aa3778969951aa157db3ec693db3fa7c8"
+    },
+    {
+      "id": "battle-sprite-7",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-sprite-7-reference.png",
+      "reference_sha256": "bc2ac34413dc464fa4e7b3c11751597266c94cc2ec82fe2eb9df006ff0a50d90",
+      "references": [
+        "battle-sprite-7-reference.png",
+        "battle-sprite-7-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. One tactical marker: fallen red/green hostile creature. Preserve the exact source pose and proportions. Transparent background; no ground, shadow rectangle, digit, frame or extra objects. Requested compact delivery dimensions 128x128. This is a game asset, not a presentation mockup. Transparent background; preserve complete foreground, no checkerboard.",
+      "prompt_file": "battle-sprite-7-prompt.txt",
+      "delivery_size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "tile_id": 7,
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-sprite-7-native.png",
+      "native_sha256": "18ea2f10c292a552276ef567d2cb6bc2a1fc2e0085e1711ff3110ff942ff0d7d",
+      "native_rgba_sha256": "38060ca7da749f0f8f51f574e0e0c2595b82a8fa1e0d899225b88fc9d43c5871",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "delivery_file": "battle-sprite-7-delivery.png",
+      "delivery_sha256": "76ca967ca5260681eb6ddcbf3e0a37d024f638c26d47a59d2f1faa05460bb0a4",
+      "delivery_rgba_sha256": "9bba67bedb2248f8b00cfbd0aea79669ee627ac2d7b3768f158f96d2ba4e605e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "1dd095aa1b2e01a388a0c57bee708a9f4a5c275a53f4cb2e25dba2d287e4aabd"
+    },
+    {
+      "id": "battle-sprite-8",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-sprite-8-reference.png",
+      "reference_sha256": "ab6f63116520b59ed03375d229ead1798ca35dfac186aece779c68ee3ecde211",
+      "references": [
+        "battle-sprite-8-reference.png",
+        "battle-sprite-8-reference-enlarged.png",
+        "approved-town-style.png"
+      ],
+      "prompt": "Create a new compact hand-painted medieval RPG game asset in the established approved illustration style. First two references are the exact source, original and enlarged; third reference supplies ONLY brushwork and material treatment, never its objects or layout. Preserve source camera, framing, object count, silhouettes, normalized coordinates, pose, lighting state, and clipped edges. Newly paint fine natural contours and restrained texture, no old pixel enlargement. No added props, grid, labels, border, UI or text. Keep original scene meaning. One tactical marker: fallen blue-clad party knight. Preserve the exact source pose and proportions. Transparent background; no ground, shadow rectangle, digit, frame or extra objects. Requested compact delivery dimensions 128x128. This is a game asset, not a presentation mockup. Transparent background; preserve complete foreground, no checkerboard.",
+      "prompt_file": "battle-sprite-8-prompt.txt",
+      "delivery_size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "tile_id": 8,
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "native_file": "battle-sprite-8-native.png",
+      "native_sha256": "d5ec33c9459c1ca30e9e75098317d1bd424c5d05e29172fe62cb668782325662",
+      "native_rgba_sha256": "d321d023520a3bc94d44098a1d39a5085f13cb0c83e104a17b042d2be7b257c4",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "delivery_file": "battle-sprite-8-delivery.png",
+      "delivery_sha256": "63aa8027a36b92323821657885db81d22d2db238e211a60a76c6947ac40a2ad7",
+      "delivery_rgba_sha256": "3c4efe750d801400c123b2d8c821737637c7b1758bfa220598bd9ee69035b1ea",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "eed99ace46462b95b9afe740012cc22d9d68152087460802382f136e10e8de2f"
+    },
+    {
+      "id": "battle-sprite-38-corrected",
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-sprite-38-reference.png",
+      "reference_sha256": "2c334307af442962cac289a548c27ce803bdabe2909151f12bb14b985fec9dbe",
+      "references": [
+        "battle-sprite-38-reference-enlarged.png"
+      ],
+      "prompt": "Repaint ONLY the single attached exact source as compact smooth hand-painted medieval game art. One small single steel sword diagonally pointing from bottom left to top right, brown hilt at lower left, silver double-edged straight blade, thin gold crossguard. Preserve exact reference silhouette and position. No roof, building, terrain, people, other weapon or shadow. Transparent background. Preserve normalized composition and source meaning. Continuous fine natural gouache brush shading; absolutely NO pixel art, square mosaic, checkerboard, discrete color steps, blocky edge or copied retro pixels. No text, labels or border. Delivery 128x128.",
+      "prompt_file": "battle-sprite-38-corrected-prompt.txt",
+      "delivery_size": [
+        128,
+        128
+      ],
+      "transparent": true,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "tile_id": 38,
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "revises": "battle-sprite-38",
+      "previous_delivery_sha256": "5489f620f1a6888e00d7435c1e223eb1db32dfed3f3497d77a43ca10e419e5df",
+      "native_file": "battle-sprite-38-corrected-native.png",
+      "native_sha256": "4aafc9382627e7891de5729de771616ecf4c2bca49d1f50efa45a783088b1a9c",
+      "native_rgba_sha256": "22c0e73106359c329803e1e7de7bd9acdf47e8a69bd98212ed4628c9a3636bdc",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "delivery_file": "battle-sprite-38-corrected-delivery.png",
+      "delivery_sha256": "57e2348eedde5722697990df1b74be3c06c8456d3994524b340a31386c616bde",
+      "delivery_rgba_sha256": "6a26e6eb615d886bdaecd33fc9e0e803fc67c192f49d69ed3c1deac7ad32cd7e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "5af78c5985359cdb8a8284710a1a002d6eba11394106507767544089d20b0d57"
+    },
+    {
+      "id": "battle-alternate-0-corrected",
+      "archive": "KOLPICS",
+      "index": 12,
+      "source_file": "KOLPICS/kolpics-012.png",
+      "source_png_sha256": "7a7ecd59dba535d3db3829da3a44f1c19ddef8494f20ec17ccf2db5bccb3c35d",
+      "source_rgb_sha256": "62be753a611d81949a09aef1f836ff3ab07cbc4e6ac62a57f0c827b966854a08",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-alternate-0-reference.png",
+      "reference_sha256": "7107b3185cfeecdd384acd3be6ca1121509d803dd7040b12f9b67424d39cd7a5",
+      "references": [
+        "battle-alternate-0-reference-enlarged.png"
+      ],
+      "prompt": "Repaint ONLY the single attached exact source as compact smooth hand-painted medieval game art. An atlas with exactly FIVE equal columns and TWO equal rows, TEN square cells, no gutters. Preserve each source cell separately. The first eight cells are small multicolored low terrain mounds or dropped piles against black; do not interpret them as people or buildings. Last two cells are right-angled white/gray wall geometry on black. Preserve each cell silhouette, colored areas and position exactly. Fully opaque black background, no doors, knights or extraneous terrain. Preserve normalized composition and source meaning. Continuous fine natural gouache brush shading; absolutely NO pixel art, square mosaic, checkerboard, discrete color steps, blocky edge or copied retro pixels. No text, labels or border. Delivery 640x256.",
+      "prompt_file": "battle-alternate-0-corrected-prompt.txt",
+      "delivery_size": [
+        640,
+        256
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        5,
+        2
+      ],
+      "tile_ids": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-12.png",
+      "source_atlas_sha256": "6617265036b93bac7b433e1040c4dae5bb28f92990686360f38ae296206365c8",
+      "revises": "battle-alternate-0",
+      "previous_delivery_sha256": "8d08f1f7ff432da6c0c83af780aa3b6a19e5f0f3c2af5854f7469b2001f1db54",
+      "native_file": "battle-alternate-0-corrected-native.png",
+      "native_sha256": "3d50d835b3cd32611138cb6f352eff72483a68de2f1e60cba4a33bab56116381",
+      "native_rgba_sha256": "56b94beaacd1de0330d54c2dd4d9632d9151edefadcb1deafe38d14a7a06f413",
+      "native_size": [
+        1983,
+        793
+      ],
+      "delivery_file": "battle-alternate-0-corrected-delivery.png",
+      "delivery_sha256": "825e898f1a173ca8f33b50c42b9c16d27406480943a578ce4f92132eb43e84a0",
+      "delivery_rgba_sha256": "8eea67869095a2d324be27514b947e8beb471687be89f0eb6b70418e55a79b37",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "043158df461d372f3058d2096052ca70ef0f0a1872e57ca8e2eab0757a406c7f"
+    },
+    {
+      "id": "battle-alternate-1-corrected",
+      "archive": "KOLPICS",
+      "index": 12,
+      "source_file": "KOLPICS/kolpics-012.png",
+      "source_png_sha256": "7a7ecd59dba535d3db3829da3a44f1c19ddef8494f20ec17ccf2db5bccb3c35d",
+      "source_rgb_sha256": "62be753a611d81949a09aef1f836ff3ab07cbc4e6ac62a57f0c827b966854a08",
+      "source_size": [
+        64,
+        160
+      ],
+      "reference": "battle-alternate-1-reference.png",
+      "reference_sha256": "97a77774a885563d91419b2d9c2ac2ee13d7615f8e4cf3d295508b631cd7cc16",
+      "references": [
+        "battle-alternate-1-reference-enlarged.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. Exactly FOUR equal square cells in ONE horizontal row. First three cells are white/gray right-angled walls on black, preserving each cell topology, corners and edge positions. Fourth is the small round ivory stone on black at its exact source position. No people, doorways, colored mounds, rooms or new objects. No gutters or labels. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 512x128.",
+      "prompt_file": "battle-alternate-1-corrected-prompt.txt",
+      "delivery_size": [
+        512,
+        128
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "cells": [
+        4,
+        1
+      ],
+      "tile_ids": [
+        33,
+        34,
+        35,
+        73
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-12.png",
+      "source_atlas_sha256": "6617265036b93bac7b433e1040c4dae5bb28f92990686360f38ae296206365c8",
+      "revises": "battle-alternate-1",
+      "previous_delivery_sha256": "af7764210a01ea01e5f980d565721ae96f52ab8761dba4cc84c3b8747f9fe9c5",
+      "native_file": "battle-alternate-1-corrected-native.png",
+      "native_sha256": "c7974b6aa7078fc6ad298ed1fdb1863a0628722dac9d129e57f27fa07c20ac3c",
+      "native_rgba_sha256": "13de41bce662d6064dc6aa2b11ab0bf114f1958b406abcd17e043d5ca379afb6",
+      "native_size": [
+        2172,
+        724
+      ],
+      "delivery_file": "battle-alternate-1-bound-delivery.png",
+      "delivery_sha256": "c58485a36bc2ed7e8cbc3e82356d0cebbd9bee2c30dd07a359df214a74676c6b",
+      "delivery_rgba_sha256": "19a3dc252ec25c0b38d4a2124095dc00f543b2a6be2670fd3f08ca32bf62d326",
+      "resize_tool": "Pillow9.4.0 exact central atlas canvas crop, then LANCZOS; complete native unchanged",
+      "prompt_sha256": "b5783175cd60df9d976b698ca67dfa563460d6b1bbe8182addcb985e8c4b2a04",
+      "native_crop_bounds": [
+        0,
+        90,
+        2172,
+        633
+      ]
+    },
+    {
+      "id": "set0pics-0-corrected",
+      "archive": "SET0PICS",
+      "index": 0,
+      "source_file": "SET0PICS/set0pics-000.png",
+      "source_png_sha256": "616536f42a42f4c6c21e7f7ce9f98df73265393353475ca8b0dae7bf74b24748",
+      "source_rgb_sha256": "2fec658f0eac4b754181c395c0d7a11065ad3612e9215003cce4b09b3f9a1a36",
+      "source_size": [
+        88,
+        70
+      ],
+      "reference": "set0pics-0-reference.png",
+      "reference_sha256": "5fd745778fcac8558d696ac1a3cbd203a70a7d9f2df3a49ca5cbd3d0805d178b",
+      "references": [
+        "set0pics-0-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 528x420.",
+      "prompt_file": "set0pics-0-corrected-prompt.txt",
+      "delivery_size": [
+        528,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set0pics-0",
+      "previous_delivery_sha256": "02cf86e992f6d8b36f4622330ad7a28bce190735f2771908c17eb154223de202",
+      "native_file": "set0pics-0-corrected-native.png",
+      "native_sha256": "2133a7edbfc0ea0e4145d16638e83bbc0fdda3aeb27f5723b8afa406a8e520ec",
+      "native_rgba_sha256": "4a9f6053e02f10091b2d68ed0fdd773eda489f404612cc8343eefb5f71fbc555",
+      "native_size": [
+        1406,
+        1119
+      ],
+      "delivery_file": "set0pics-0-corrected-delivery.png",
+      "delivery_sha256": "3578ae5e237b1b1e7e3f1e6c079e137d90e4ee02b8562443bbe39a4c6fec7ac0",
+      "delivery_rgba_sha256": "00f481964a15d6670e3d31aaa18cc0999178d03b33b00c87d44483ccce0811b1",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "b4e788e573458b7c8a3cbfbb7960211bca9b51ea847c71167e006dc1c07a59fa"
+    },
+    {
+      "id": "set0pics-1-corrected",
+      "archive": "SET0PICS",
+      "index": 1,
+      "source_file": "SET0PICS/set0pics-001.png",
+      "source_png_sha256": "fa630185eadaa3b912d97e7b003bf380750252bd33227daac4fcd0d8c2935de0",
+      "source_rgb_sha256": "aada3cb7d6aabc83cb31e17713833b313c2f9854ecb044b843d10f8e96d3c5d7",
+      "source_size": [
+        88,
+        70
+      ],
+      "reference": "set0pics-1-reference.png",
+      "reference_sha256": "5a70012a1947b3432b07466cebaff440e07950e462670ca8dbb1f28bf4496158",
+      "references": [
+        "set0pics-1-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 528x420.",
+      "prompt_file": "set0pics-1-corrected-prompt.txt",
+      "delivery_size": [
+        528,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set0pics-1",
+      "previous_delivery_sha256": "75a7c764ec1c566bcbe03a6b5c1a4009e2c5b2d8469f1523ed918f99debb24f5",
+      "native_file": "set0pics-1-corrected-native.png",
+      "native_sha256": "eee53aa6776d3b382e4af761ea91ef5295d24a7f92a22ecd88c5438305d114d1",
+      "native_rgba_sha256": "0515c4d23f2e896ebb304967151360786ce45c4380af68167421bf918532ca60",
+      "native_size": [
+        1407,
+        1118
+      ],
+      "delivery_file": "set0pics-1-corrected-delivery.png",
+      "delivery_sha256": "b7605d073208a3a3d4e47f6e24aad219fb984130d5174338fda7136ff308e3d3",
+      "delivery_rgba_sha256": "3d02ba3d5375c5739ddff47a960aeaff41cf9ab85f591def882b4ed830e87cd3",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "b4e788e573458b7c8a3cbfbb7960211bca9b51ea847c71167e006dc1c07a59fa"
+    },
+    {
+      "id": "set0pics-2-corrected",
+      "archive": "SET0PICS",
+      "index": 2,
+      "source_file": "SET0PICS/set0pics-002.png",
+      "source_png_sha256": "d0779f9366ae2f60021bfd67c90eb22ed2c348b35eb0d49e3ae50f3722a87df6",
+      "source_rgb_sha256": "810b2de19d51e0859636fcf7631a49055d92ffbbeb22162aedb7abbf9c81d943",
+      "source_size": [
+        88,
+        70
+      ],
+      "reference": "set0pics-2-reference.png",
+      "reference_sha256": "08c115b8ce5970011565a769ee4d550636824c14603982a84ff448803b6b46b8",
+      "references": [
+        "set0pics-2-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 528x420.",
+      "prompt_file": "set0pics-2-corrected-prompt.txt",
+      "delivery_size": [
+        528,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set0pics-2",
+      "previous_delivery_sha256": "792924768020042e5603ca2cc790d2ebd07bf83ca752b1c0eb0904e89a6d1ea9",
+      "native_file": "set0pics-2-corrected-native.png",
+      "native_sha256": "e9a67c8e9196521c9cfc7c183d6696845661fdbf6d2f9b603883ea96bb248c64",
+      "native_rgba_sha256": "01f93a6a324a1c9fd3dfd231689193ea650eb95768a264ea047e08703a140485",
+      "native_size": [
+        1407,
+        1118
+      ],
+      "delivery_file": "set0pics-2-corrected-delivery.png",
+      "delivery_sha256": "86efdc1212d3d77b9812c268cba15c0cf055230b98376a66be358a63ba654941",
+      "delivery_rgba_sha256": "3ca69b3b0722c0950391cdc09f65bf5caa1950e1399ccaaf7824103aed1555f8",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "b4e788e573458b7c8a3cbfbb7960211bca9b51ea847c71167e006dc1c07a59fa"
+    },
+    {
+      "id": "set0pics-3-corrected",
+      "archive": "SET0PICS",
+      "index": 3,
+      "source_file": "SET0PICS/set0pics-003.png",
+      "source_png_sha256": "3f17bcdb7620a366dc9840d3fa5b6d07f5522539f7e7227583de4d2bd6c1ef2c",
+      "source_rgb_sha256": "3b3c66dc9992a237fcc24cbe4a680c2cf40fc894049498b392779de7e8b2b0fc",
+      "source_size": [
+        88,
+        70
+      ],
+      "reference": "set0pics-3-reference.png",
+      "reference_sha256": "2135998972467fbb4b8c3f8174f2f7f34efc1240856aee2f14d52f51cf2266da",
+      "references": [
+        "set0pics-3-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 528x420.",
+      "prompt_file": "set0pics-3-corrected-prompt.txt",
+      "delivery_size": [
+        528,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set0pics-3",
+      "previous_delivery_sha256": "afea3bbdd9c869650880a297660773d757af9b08bef116030280b97c13c79ddc",
+      "native_file": "set0pics-3-corrected-native.png",
+      "native_sha256": "54e2d3413d23f6cebbb1251ed3edd1b4a54b67400a830035cc44b5199a9e2e0d",
+      "native_rgba_sha256": "3a12b2a9691d9fb790789575820eeed853dd86ac65567cc9385ad182d01a6a9d",
+      "native_size": [
+        1407,
+        1118
+      ],
+      "delivery_file": "set0pics-3-corrected-delivery.png",
+      "delivery_sha256": "5e7da4ed38421f46958077ecd9cf93a6994dde9a07f09b8b9dbbaf25f3847d3d",
+      "delivery_rgba_sha256": "d6d971523896e7b12649a45d502b14c774d25249f5f072c27698406678625d2e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "b4e788e573458b7c8a3cbfbb7960211bca9b51ea847c71167e006dc1c07a59fa"
+    },
+    {
+      "id": "set0pics-4-corrected",
+      "archive": "SET0PICS",
+      "index": 4,
+      "source_file": "SET0PICS/set0pics-004.png",
+      "source_png_sha256": "bf2d9b7d32d0dd99d1b2765992abe347ffb5a12008092991bc6ec0f193d04be7",
+      "source_rgb_sha256": "a5773c96bc98726132428fcda2b4e1ae0c61f7d46af84d47e5e1d1d2e826efc6",
+      "source_size": [
+        88,
+        70
+      ],
+      "reference": "set0pics-4-reference.png",
+      "reference_sha256": "f952a4cc9c92b879c977fd4aca557e8cb986393f6ce66be6a5830faa9faf2fc8",
+      "references": [
+        "set0pics-4-reference-enlarged.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. Keep the blue lightning illumination exactly as shown. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 528x420.",
+      "prompt_file": "set0pics-4-corrected-prompt.txt",
+      "delivery_size": [
+        528,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set0pics-4",
+      "previous_delivery_sha256": "6277ee9934629966ee3a6d5bae02267a32e0e175ee74ccbe0a464b752553e1ce",
+      "native_file": "set0pics-4-corrected-native.png",
+      "native_sha256": "1a5f5036c410fbb1bf3b7abc2daf3cf7e3ac8e2fd643299ea27f6519fed8dae0",
+      "native_rgba_sha256": "9d96e4274b9d490c9e8d24e8389588574fccbb547b505a5fd510a3ad0823737c",
+      "native_size": [
+        1407,
+        1118
+      ],
+      "delivery_file": "set0pics-4-corrected-delivery.png",
+      "delivery_sha256": "78fcdd790b30870e8a48f4474e15011b8fe2b941828c04c057a0c9e83eddf9d3",
+      "delivery_rgba_sha256": "e18b29a38512302de751b41de4030d8740804f7533536b82e3f83ce9efa89c31",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "01fd43b17ac5e6c1e5669bfddf3936a072a75e4b61417f4845fdcaccd692cbf5"
+    },
+    {
+      "id": "set0pics-5-corrected",
+      "archive": "SET0PICS",
+      "index": 5,
+      "source_file": "SET0PICS/set0pics-005.png",
+      "source_png_sha256": "cf7ee9f2f3f93b8304d21da942e7ecd3df9e72fa0bc6f10eca4d3506744fa344",
+      "source_rgb_sha256": "df845434b2d07a7ada82f239135c626d064621d3a3eac36286fa6fc28b9857e3",
+      "source_size": [
+        88,
+        70
+      ],
+      "reference": "set0pics-5-reference.png",
+      "reference_sha256": "f17187a675ec79a603a1b9208edec4b088976e7adfc76beb8a4075f5e49cd097",
+      "references": [
+        "set0pics-5-reference-enlarged.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. Keep the blue lightning illumination exactly as shown. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 528x420.",
+      "prompt_file": "set0pics-5-corrected-prompt.txt",
+      "delivery_size": [
+        528,
+        420
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set0pics-5",
+      "previous_delivery_sha256": "93f77055e0ab6fb3b9d275bb6d7931d9bca74c3246856d64eae1036971a2179a",
+      "native_file": "set0pics-5-corrected-native.png",
+      "native_sha256": "f1ff08c752572228563a433e16d0730464c3bfae4ee41eb4dfb96057924a79a6",
+      "native_rgba_sha256": "7bac64ffb9326e80a4478cb06bdbdb1ad35641cf0525e4520276b43c82b5246a",
+      "native_size": [
+        1407,
+        1118
+      ],
+      "delivery_file": "set0pics-5-corrected-delivery.png",
+      "delivery_sha256": "c1af99dfe5501bddf4e9c4582aaa1eb250c03ba0b2d59831fd8879c2a34931a4",
+      "delivery_rgba_sha256": "7c26fd8c13d47931c8365702bfb36ce6e5f4bee248a543b9312ff713459c661e",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "01fd43b17ac5e6c1e5669bfddf3936a072a75e4b61417f4845fdcaccd692cbf5"
+    },
+    {
+      "id": "set1pics-0-corrected",
+      "archive": "SET1PICS",
+      "index": 0,
+      "source_file": "SET1PICS/set1pics-000.png",
+      "source_png_sha256": "e89f7eeb5c0517247d97d4b0cdc9c8596d760cf341588213fef5eae288b162d7",
+      "source_rgb_sha256": "a97a9ab24825383d78b0dce40f390ad5a33a5927697c89fa9aaf49fe720d988e",
+      "source_size": [
+        104,
+        84
+      ],
+      "reference": "set1pics-0-reference.png",
+      "reference_sha256": "29b98f14103a8090124877ddf283e0d0e47786a2e8c5f6727d92745a00614990",
+      "references": [
+        "set1pics-0-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 624x504.",
+      "prompt_file": "set1pics-0-corrected-prompt.txt",
+      "delivery_size": [
+        624,
+        504
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set1pics-0",
+      "previous_delivery_sha256": "07dfc01cf495fcc91ee8f266ab065352ae90b83f1e07f281a84f4b0523671780",
+      "native_file": "set1pics-0-corrected-native.png",
+      "native_sha256": "4c5257cdb13e1c396c85cb015bcb24e3ce84b9fe82f0b481b6c934dda112960d",
+      "native_rgba_sha256": "41b92b9c1439cfa4df6df56e9b1caef0638882b665b708ec5f98bdd951a5cf30",
+      "native_size": [
+        1396,
+        1127
+      ],
+      "delivery_file": "set1pics-0-corrected-delivery.png",
+      "delivery_sha256": "0749450155059d0c82cb06ab838d46a001460b3a6b2c22bf013cbbf398143ec4",
+      "delivery_rgba_sha256": "57dd8ba112d6b45e1bb06d223ef6d0cabdc4d612ba9caa4aabb0afb47420bf94",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "98763b73a8408227bd2d38fb1f12b84c955dcab3b8b6d1b6e1514354eac12690"
+    },
+    {
+      "id": "set1pics-1-corrected",
+      "archive": "SET1PICS",
+      "index": 1,
+      "source_file": "SET1PICS/set1pics-001.png",
+      "source_png_sha256": "0c0fba092b4bde709f83149cbba0c0b06eee1d697f582ed93ccb809d769513d2",
+      "source_rgb_sha256": "bdc58c3a37113ed6ffb18766ba18bf2e6aba78f02e7497a4814501b3d634ae15",
+      "source_size": [
+        104,
+        84
+      ],
+      "reference": "set1pics-1-reference.png",
+      "reference_sha256": "c444cf34dc12b1ad5ada6623f700bed823d2f80809d77b94adc37cdcd0c01510",
+      "references": [
+        "set1pics-1-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 624x504.",
+      "prompt_file": "set1pics-1-corrected-prompt.txt",
+      "delivery_size": [
+        624,
+        504
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set1pics-1",
+      "previous_delivery_sha256": "2307f8b81ea817fa5e8edf5122bd8f6df019b9a3e5412a06dd57a0fd6f0d76d3",
+      "native_file": "set1pics-1-corrected-native.png",
+      "native_sha256": "f4ce9d994dffe21c12e4ad4e4915db80322e01dcf87b21ec358ff1fb7b2a3ef6",
+      "native_rgba_sha256": "d28a5643ea24c788588704b8705f8cbb6ce1e0dbdea70e77b9352056372057df",
+      "native_size": [
+        1396,
+        1127
+      ],
+      "delivery_file": "set1pics-1-corrected-delivery.png",
+      "delivery_sha256": "5c264ebe3572ec74d8c99067e6bdddb67633c97dacfe72b134b7883f157efc54",
+      "delivery_rgba_sha256": "47ef3e2c0484365ad3fc5f65d84f0310aaa258276cd21c9fd83b18386d84d8cb",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "98763b73a8408227bd2d38fb1f12b84c955dcab3b8b6d1b6e1514354eac12690"
+    },
+    {
+      "id": "set1pics-2-corrected",
+      "archive": "SET1PICS",
+      "index": 2,
+      "source_file": "SET1PICS/set1pics-002.png",
+      "source_png_sha256": "6d22df59401ff7cb980d27086515b553804404aeac4c3b559e0639457fa7db10",
+      "source_rgb_sha256": "9d21e0e6bf3c4c18b2382fb4502b41b5fcc9c3606c8220bcc06b90ebcdb64ead",
+      "source_size": [
+        104,
+        84
+      ],
+      "reference": "set1pics-2-reference.png",
+      "reference_sha256": "87a75f16ab1719f10c70ac9b60a4bc98f1257c00096230ea2bad314e14d23fb4",
+      "references": [
+        "set1pics-2-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 624x504.",
+      "prompt_file": "set1pics-2-corrected-prompt.txt",
+      "delivery_size": [
+        624,
+        504
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set1pics-2",
+      "previous_delivery_sha256": "29334ffe2a7fa57c02bca8bfed25974314ff466fae6efabfc902ee9b54f57596",
+      "native_file": "set1pics-2-corrected-native.png",
+      "native_sha256": "489c912c1106cd81b3ba8527720f1b0962c7b9415d8b075a12d6bf3a484dc00a",
+      "native_rgba_sha256": "d5e4faf2cfe14697a522988d4d5bd8c112f2469bb118cb58e14c42259880dc17",
+      "native_size": [
+        1396,
+        1127
+      ],
+      "delivery_file": "set1pics-2-corrected-delivery.png",
+      "delivery_sha256": "c462a76138cc4fc626f018b3cd187e44d49d733e85becdc7b7cf3e30aa135537",
+      "delivery_rgba_sha256": "73b36d8d32fa93feeaf0913ac05e9fe56faa3fe4dbf49678beacd5f570db2e61",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "98763b73a8408227bd2d38fb1f12b84c955dcab3b8b6d1b6e1514354eac12690"
+    },
+    {
+      "id": "set1pics-3-corrected",
+      "archive": "SET1PICS",
+      "index": 3,
+      "source_file": "SET1PICS/set1pics-003.png",
+      "source_png_sha256": "13e1b710fb11af6cf049f7511500400f3fd4885de95ab86a32a2cbe6815f44b6",
+      "source_rgb_sha256": "199fdd0d2f2d0d183b10800438a78aeecd682053e2d3cd7f90beb11a8dd1cc2f",
+      "source_size": [
+        104,
+        84
+      ],
+      "reference": "set1pics-3-reference.png",
+      "reference_sha256": "4973520c5ad44d31bcbf8ace7d01ff1543850d69e3740fa67310e1cc7583b0fc",
+      "references": [
+        "set1pics-3-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 624x504.",
+      "prompt_file": "set1pics-3-corrected-prompt.txt",
+      "delivery_size": [
+        624,
+        504
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set1pics-3",
+      "previous_delivery_sha256": "a5847d42f77647d977a0884eb932c9ccca9faaafd5a248acb1b6dcf651254057",
+      "native_file": "set1pics-3-corrected-native.png",
+      "native_sha256": "eb793328d9d3c6dea6d904af834c4e7a8085f740091070f1b7bf8c840f6fe1ec",
+      "native_rgba_sha256": "ab687932cb41b27467779d604b92cfdc969fb13a5d5debfae08e0620e16748f4",
+      "native_size": [
+        1396,
+        1127
+      ],
+      "delivery_file": "set1pics-3-corrected-delivery.png",
+      "delivery_sha256": "2f686da111f318b14b73a86527d612560e56ecb2f108870ad08c9b04b976fc8f",
+      "delivery_rgba_sha256": "ca1a025fdb80a26770a8ed577f4f4392ab03a7cd8c3e7fa346733856f9f84064",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "98763b73a8408227bd2d38fb1f12b84c955dcab3b8b6d1b6e1514354eac12690"
+    },
+    {
+      "id": "set1pics-4-corrected",
+      "archive": "SET1PICS",
+      "index": 4,
+      "source_file": "SET1PICS/set1pics-004.png",
+      "source_png_sha256": "f826b4d694d6eb6c77e81795df4e2e63799ac17baaf42178050731f6c754f967",
+      "source_rgb_sha256": "22338698b8e3eb6c28f30face999116520ef0a62b42f5e506cd195c68bd05467",
+      "source_size": [
+        104,
+        84
+      ],
+      "reference": "set1pics-4-reference.png",
+      "reference_sha256": "4a583a4abd6fbfeca172849e62d13180b60fdb83414c7d894e35138b1dad7b7a",
+      "references": [
+        "set1pics-4-reference-enlarged.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. Keep the blue lightning illumination exactly as shown. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 624x504.",
+      "prompt_file": "set1pics-4-corrected-prompt.txt",
+      "delivery_size": [
+        624,
+        504
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set1pics-4",
+      "previous_delivery_sha256": "bf0e233878e61c4186ba64243dc4edeace00b782c1a6eb35e9ab8699844fee63",
+      "native_file": "set1pics-4-corrected-native.png",
+      "native_sha256": "469f9ea8a7c62e8f1ad5b684718701312259ae35fac20da9880eea5af0b184eb",
+      "native_rgba_sha256": "f824af3ff93cb536bbcf2fd06d7aeed5688aade34934b6c3ab060f52a247b890",
+      "native_size": [
+        1396,
+        1127
+      ],
+      "delivery_file": "set1pics-4-corrected-delivery.png",
+      "delivery_sha256": "ae7e9238eaa4bdbec4d14e4b13b6aa54a1112db4699e63f466d12992afecde4b",
+      "delivery_rgba_sha256": "ef615a2f31d71f535a5cfb74ec74e02c0bce27bea91406ea23c7d21f68fab732",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d48d06015fc8d10aa127063c2feb9c8372eb346ae8427cdb09873828a102c62f"
+    },
+    {
+      "id": "set1pics-5-corrected",
+      "archive": "SET1PICS",
+      "index": 5,
+      "source_file": "SET1PICS/set1pics-005.png",
+      "source_png_sha256": "a7f38c4a1a37dc2f663153e0e7d653ab4b45e36452df2ffd09b4976b72cb12e5",
+      "source_rgb_sha256": "ae49068b031249f6404aa3407dd04d698a394197907b3a2f01b8fd647c4dc258",
+      "source_size": [
+        104,
+        84
+      ],
+      "reference": "set1pics-5-reference.png",
+      "reference_sha256": "093ead15aaec57c64b2c106dd07ecadae677e3c3fdec089415780ee5925eb11a",
+      "references": [
+        "set1pics-5-reference-enlarged.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. Keep the blue lightning illumination exactly as shown. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 624x504.",
+      "prompt_file": "set1pics-5-corrected-prompt.txt",
+      "delivery_size": [
+        624,
+        504
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set1pics-5",
+      "previous_delivery_sha256": "ec463329ff57e3de8958fe1774d83a3afde95bb7f9827ab9b6ec17fb8b14208e",
+      "native_file": "set1pics-5-corrected-native.png",
+      "native_sha256": "d15fe143fcaaba20e20e3367a3d3a0a0113ae21b543b61e00b35c9896005de62",
+      "native_rgba_sha256": "080e7e793cf800f1a5f9dda8560af845f2af23cc8ae97875e6b7c636d4d6388a",
+      "native_size": [
+        1396,
+        1127
+      ],
+      "delivery_file": "set1pics-5-corrected-delivery.png",
+      "delivery_sha256": "373d4dab6b0f0924aa34b2e8a88b6d1e8c26fc9ea95ced69283d4441f561c982",
+      "delivery_rgba_sha256": "e1061fdb5e7ea554701c8cdb70615f96fb08fc1391f2781afe2a4d55b9b1eaf9",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d48d06015fc8d10aa127063c2feb9c8372eb346ae8427cdb09873828a102c62f"
+    },
+    {
+      "id": "set2pics-0-corrected",
+      "archive": "SET2PICS",
+      "index": 0,
+      "source_file": "SET2PICS/set2pics-000.png",
+      "source_png_sha256": "bfa3d5117e38f0cb1e33c68c3a5aa48765446d890fe85cbd86ed0f9f8aed4cad",
+      "source_rgb_sha256": "2037736d2b5a56909f89cb973add358c7c2a105a312650bd050169e481786f6f",
+      "source_size": [
+        160,
+        125
+      ],
+      "reference": "set2pics-0-reference.png",
+      "reference_sha256": "bafbdff62590c846f2f597907e3c578a9fda9101a36fbd1f118016212e3b5751",
+      "references": [
+        "set2pics-0-reference-enlarged.png",
+        "set2pics-1-delivery.png"
+      ],
+      "prompt": "Repaint the attached FIRST exact retro source into continuous smooth fine-brush gouache fantasy game art. A very close rear view of ONE helmeted knight, his dark cloak stretching toward the LEFT across night mountains and his back/helmet cropped at the RIGHT. Keep the exact FIRST source silhouette, angle of cape and sword, mountain edges and normalized coordinates. Black foreground is very dark armor/cape, never a doorway. NO other people, buildings, doorways, sun, moon or new props. The SECOND image is this same knight painted smoothly. Use its brush technique and knight identity only; FIRST source retains precise crop, geometry and very dark pre-lightning exposure. Keep almost-black armor/cape with subtle blue rim; no invented light. Absolutely no pixel art, mosaic, checkerboard, dot dither or jagged block edges. No text, labels or border. Fully opaque. Compact game delivery 768x600.",
+      "prompt_file": "set2pics-0-corrected-prompt.txt",
+      "delivery_size": [
+        768,
+        600
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "revises": "set2pics-0",
+      "previous_delivery_sha256": "9b299e8f6095f47ec292d28c914e7587b3f9beef603760bfb8a745f098d9212e",
+      "native_file": "set2pics-0-corrected-native.png",
+      "native_sha256": "b9f8d2f687b886f9cce293e0f60289f764ede1830ab22ba3035fd455c0737174",
+      "native_rgba_sha256": "0c681df19a5bd9321e3b1e1d0adced6b784c72d4cee177df89d3b2db5bb84b4a",
+      "native_size": [
+        1419,
+        1108
+      ],
+      "delivery_file": "set2pics-0-corrected-delivery.png",
+      "delivery_sha256": "39282267c62dda87b716b40f6b6498f4cc371def039d9678164f265aa2280ff8",
+      "delivery_rgba_sha256": "a73bedcdebe1fc3838a5ba8980e896f5a7fe8c32d74ef21d02614dfa92ac4cd2",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "0c8f2cce7066f2a3e407b8adfa8cd09041238e65eecbf4144b9138ae5448e8fb"
+    },
+    {
+      "id": "set2pics-1",
+      "archive": "SET2PICS",
+      "index": 1,
+      "source_file": "SET2PICS/set2pics-001.png",
+      "source_png_sha256": "e79aef66989ad262711e7f896504e7bf20b1d93f457d4b9afae8e633fa39741f",
+      "source_rgb_sha256": "433cb9088a07bd07c9a4b45d8dc7e89bf84f6fdf154020f956a90bc5f4d4297b",
+      "source_size": [
+        160,
+        125
+      ],
+      "reference": "set2pics-1-reference.png",
+      "reference_sha256": "261366ad2aa3fe072ae0b1193b2497b48313979657fd44594faa455d2eeb6e0b",
+      "references": [
+        "set2pics-1-reference-enlarged.png"
+      ],
+      "prompt": "Repaint only the single attached retro title animation crop as continuous smooth hand-painted dark fantasy illustration. Exact composition and pose: a very close view from behind a helmeted medieval knight on the RIGHT edge, black cloak extending diagonally across the LEFT, mountain ridges and night sky behind. Preserve every silhouette, sword angle, cropped body edge and normalized position. This rectangle overlays a larger background, so geometry must stay fixed. Black foreground is dark armor and cloak, not a doorway or empty area. NO buildings, doorways, new people, new props, text or borders. Reinterpret all square pixels and checker dither as fine natural brushwork and continuous smooth shading. Dark source stays dark; lightning source stays blue-lit. No pixel art or mosaic. Compact delivery 768x600. Fully opaque.",
+      "prompt_file": "set2pics-1-prompt.txt",
+      "delivery_size": [
+        768,
+        600
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "set2pics-1-native.png",
+      "native_sha256": "4849a157e5376ea9da7862e49e9ba05fc02c1b3b33f99641866b70a6e3c3a4e8",
+      "native_rgba_sha256": "d40422b3f82928b248d595dbff685eeecc1a3fa6cf2b728263634dd9b1f0c7a0",
+      "native_size": [
+        1419,
+        1108
+      ],
+      "delivery_file": "set2pics-1-delivery.png",
+      "delivery_sha256": "7d1433d6c27e6c45e58e68e611580e0b8be3cc820c351f2b2a8c961b0826dfe5",
+      "delivery_rgba_sha256": "51753f346227ff28fa179c74fd25af48fbdabf7f49a6035ee0a65d5241552a89",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d0f53f806d0530416595923d90372ca29201a87dece4a5873fc83c60871eda12"
+    },
+    {
+      "id": "set2pics-2",
+      "archive": "SET2PICS",
+      "index": 2,
+      "source_file": "SET2PICS/set2pics-002.png",
+      "source_png_sha256": "5ee139a874f6ff94c9c6d3c58765e78e47e508f0f98538dce67da3c77eabb945",
+      "source_rgb_sha256": "9771e7b214b045cf7ab5abf342dff534e65479bc5886e8c58d5d8eff4a39e934",
+      "source_size": [
+        160,
+        125
+      ],
+      "reference": "set2pics-2-reference.png",
+      "reference_sha256": "33c4d3086971f85c1816f389afff11800bc8e994c346da1e319bb28cd3694558",
+      "references": [
+        "set2pics-2-reference-enlarged.png"
+      ],
+      "prompt": "Repaint only the single attached retro title animation crop as continuous smooth hand-painted dark fantasy illustration. Exact composition and pose: a very close view from behind a helmeted medieval knight on the RIGHT edge, black cloak extending diagonally across the LEFT, mountain ridges and night sky behind. Preserve every silhouette, sword angle, cropped body edge and normalized position. This rectangle overlays a larger background, so geometry must stay fixed. Black foreground is dark armor and cloak, not a doorway or empty area. NO buildings, doorways, new people, new props, text or borders. Reinterpret all square pixels and checker dither as fine natural brushwork and continuous smooth shading. Dark source stays dark; lightning source stays blue-lit. No pixel art or mosaic. Compact delivery 768x600. Fully opaque.",
+      "prompt_file": "set2pics-2-prompt.txt",
+      "delivery_size": [
+        768,
+        600
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "set2pics-2-native.png",
+      "native_sha256": "3956313350cb3bad0df1432756e670b64c7bea9a734bfe26aa22cd2baa7f6041",
+      "native_rgba_sha256": "3be5dcb3ffba7ee5b267e06ad7a57c5deb6b67473d7f20ef6b04f82872a9cacb",
+      "native_size": [
+        1419,
+        1109
+      ],
+      "delivery_file": "set2pics-2-delivery.png",
+      "delivery_sha256": "9d811e714139cd769ae40aea1643a7d95cd67d17b94f5793cb1e78c2583ac00f",
+      "delivery_rgba_sha256": "dd7c1501d4792343e07ba105709e4b5acf49f90e91f01f228f9dd6a3013d3edd",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d0f53f806d0530416595923d90372ca29201a87dece4a5873fc83c60871eda12"
+    },
+    {
+      "id": "set2pics-3",
+      "archive": "SET2PICS",
+      "index": 3,
+      "source_file": "SET2PICS/set2pics-003.png",
+      "source_png_sha256": "2a2c8fb280502cb164c70e58e122ff111c07cd511a097b823693ecd8b3cb39b2",
+      "source_rgb_sha256": "a430146daded238c47d6bfbd42befdff3883ba7466a956a023090edb9f6fa508",
+      "source_size": [
+        160,
+        125
+      ],
+      "reference": "set2pics-3-reference.png",
+      "reference_sha256": "3e62cc21659f555d20e6487b05c8df20749694aea5223429f03aab70b71d3688",
+      "references": [
+        "set2pics-3-reference-enlarged.png"
+      ],
+      "prompt": "Repaint only the single attached retro title animation crop as continuous smooth hand-painted dark fantasy illustration. Exact composition and pose: a very close view from behind a helmeted medieval knight on the RIGHT edge, black cloak extending diagonally across the LEFT, mountain ridges and night sky behind. Preserve every silhouette, sword angle, cropped body edge and normalized position. This rectangle overlays a larger background, so geometry must stay fixed. Black foreground is dark armor and cloak, not a doorway or empty area. NO buildings, doorways, new people, new props, text or borders. Reinterpret all square pixels and checker dither as fine natural brushwork and continuous smooth shading. Dark source stays dark; lightning source stays blue-lit. No pixel art or mosaic. Compact delivery 768x600. Fully opaque.",
+      "prompt_file": "set2pics-3-prompt.txt",
+      "delivery_size": [
+        768,
+        600
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "set2pics-3-native.png",
+      "native_sha256": "b53293c3c8771156483615b6cd3fef8c626c378b09b09ac37b04e029f3ce8bd5",
+      "native_rgba_sha256": "e5ee3c599a33cd0d3b027c2a657d2500f6c0f470c5f10fce0e45bff76980f079",
+      "native_size": [
+        1419,
+        1108
+      ],
+      "delivery_file": "set2pics-3-delivery.png",
+      "delivery_sha256": "4fe7e48a0c496e98a19beeb053a4d2b05685a377d8690d7fa068d8311e0bb9fc",
+      "delivery_rgba_sha256": "2f12fddc8c10b97594c565baea9e256a1ee18765f91622bef39aaa706e19fcdc",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d0f53f806d0530416595923d90372ca29201a87dece4a5873fc83c60871eda12"
+    },
+    {
+      "id": "set2pics-4",
+      "archive": "SET2PICS",
+      "index": 4,
+      "source_file": "SET2PICS/set2pics-004.png",
+      "source_png_sha256": "e3202cc7c3a98a5a8704ea15eb01155c7370987ece43ccea6bc03474e37dbb47",
+      "source_rgb_sha256": "58fdb50b64f71473f700b226a5ccacb68d524e8ff8937830f7aaafe77ec38f55",
+      "source_size": [
+        160,
+        125
+      ],
+      "reference": "set2pics-4-reference.png",
+      "reference_sha256": "0baa36f90e13aefe69ec36d147a64839417fade77c2bad537d37fb4b1a47c338",
+      "references": [
+        "set2pics-4-reference-enlarged.png"
+      ],
+      "prompt": "Repaint only the single attached retro title animation crop as continuous smooth hand-painted dark fantasy illustration. Exact composition and pose: a very close view from behind a helmeted medieval knight on the RIGHT edge, black cloak extending diagonally across the LEFT, mountain ridges and night sky behind. Preserve every silhouette, sword angle, cropped body edge and normalized position. This rectangle overlays a larger background, so geometry must stay fixed. Black foreground is dark armor and cloak, not a doorway or empty area. NO buildings, doorways, new people, new props, text or borders. Reinterpret all square pixels and checker dither as fine natural brushwork and continuous smooth shading. Dark source stays dark; lightning source stays blue-lit. No pixel art or mosaic. Compact delivery 768x600. Fully opaque.",
+      "prompt_file": "set2pics-4-prompt.txt",
+      "delivery_size": [
+        768,
+        600
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "set2pics-4-native.png",
+      "native_sha256": "c25f1cae6453549296f2d65cb25746a6af94b3a70bff962dd89a39ad65b91603",
+      "native_rgba_sha256": "2039c37f807b1b5ee61f8cbd1321533b3166ef15437acefce18ed50e36c01015",
+      "native_size": [
+        1419,
+        1108
+      ],
+      "delivery_file": "set2pics-4-delivery.png",
+      "delivery_sha256": "ee2359c466da7ece84d68e7895d87f93c2ea81d2260876941821130a98f5126f",
+      "delivery_rgba_sha256": "d73bd82be2912394c9212a964f0f58dc60c93c7e6ccfdb1883f117b33372ec61",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d0f53f806d0530416595923d90372ca29201a87dece4a5873fc83c60871eda12"
+    },
+    {
+      "id": "set2pics-5",
+      "archive": "SET2PICS",
+      "index": 5,
+      "source_file": "SET2PICS/set2pics-005.png",
+      "source_png_sha256": "5a32d908926d5aac08aa1ad017918edbdd556705ac0471656d34a2ead88f3e73",
+      "source_rgb_sha256": "b8838a04304c8d0c281824ab1caec35729b2635bb0f357c5e4ae9d88e81cc986",
+      "source_size": [
+        160,
+        125
+      ],
+      "reference": "set2pics-5-reference.png",
+      "reference_sha256": "121230fc89746d17bc1b8514420bf3b4b8fce56e81cdc33577f51ca20ea84027",
+      "references": [
+        "set2pics-5-reference-enlarged.png"
+      ],
+      "prompt": "Repaint only the single attached retro title animation crop as continuous smooth hand-painted dark fantasy illustration. Exact composition and pose: a very close view from behind a helmeted medieval knight on the RIGHT edge, black cloak extending diagonally across the LEFT, mountain ridges and night sky behind. Preserve every silhouette, sword angle, cropped body edge and normalized position. This rectangle overlays a larger background, so geometry must stay fixed. Black foreground is dark armor and cloak, not a doorway or empty area. NO buildings, doorways, new people, new props, text or borders. Reinterpret all square pixels and checker dither as fine natural brushwork and continuous smooth shading. Dark source stays dark; lightning source stays blue-lit. No pixel art or mosaic. Compact delivery 768x600. Fully opaque.",
+      "prompt_file": "set2pics-5-prompt.txt",
+      "delivery_size": [
+        768,
+        600
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "set2pics-5-native.png",
+      "native_sha256": "d29dfb3e598ee63b20e3ce91759f436026907892dfe4f441da42cdeb237b4895",
+      "native_rgba_sha256": "d8c2ab9fa8d4b1684a8193ebc0d34c46e889584f6a556583813b3dbcace4c632",
+      "native_size": [
+        1419,
+        1108
+      ],
+      "delivery_file": "set2pics-5-delivery.png",
+      "delivery_sha256": "6d9de59747325babce4758d8f8723e5cbfe85dc18bc35b8748ec1b44c4db739b",
+      "delivery_rgba_sha256": "40536d70bffe55b95c2e6e63e72fbd3b8864d6a47c761461f39d0b0a54b26978",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "d0f53f806d0530416595923d90372ca29201a87dece4a5873fc83c60871eda12"
+    },
+    {
+      "id": "facepics-0",
+      "archive": "FACEPICS",
+      "index": 0,
+      "source_file": "FACEPICS/facepics-000.png",
+      "source_png_sha256": "367c052562b9a9b8568619560de6a08856132ac19e3145f35d9b4e5b440b4933",
+      "source_rgb_sha256": "e040875ac5caf1b1a0e51dfe9239ecca648ecf6349e2327dcca4edd8b4138a80",
+      "source_size": [
+        112,
+        80
+      ],
+      "reference": "facepics-0-reference.png",
+      "reference_sha256": "1c67e5c0496b5041f4fe72dd195c39ee5d2299a8bffd2b574ac6b629366ddbf0",
+      "references": [
+        "facepics-0-reference.png",
+        "approved-event-style.png"
+      ],
+      "prompt": "Paint ONE compact hand-painted medieval RPG title-animation asset. First two references are this exact source and enlargement. Third is ONLY the already established dark-blue steel/night painting style, never its camera or geometry. Exact cropped face animation frame of one middle-aged male knight: strong nose, thick dark mustache and beard, visible eyes and blue/silver helmet edges. Preserve eye, nose and mouth positions and the exact mouth/teeth expression in this source phase. Same person across the six phases; no changing eye/skin/face identity. Replace old pixel dithering with natural continuous brush shading, no square pixels or checkerboards. No labels, text, grid, borders or added objects. Fully opaque. Requested compact delivery 672x480. Keep the same normalized coordinates because the unchanged title sequence places this rectangle directly over the full background. The first reference supplies composition only. The second reference supplies ONLY smooth natural brush technique. Completely REMOVE any pixel pattern, checkerboard, dot dither, jagged steps or mosaic. This is continuous fine-brush gouache painting, never pixel art. Keep dark night silhouettes dark and source animation pose exact; no new lighting, props, doorway, buildings or people from the style example.",
+      "prompt_file": "facepics-0-prompt.txt",
+      "delivery_size": [
+        672,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "facepics-0-native.png",
+      "native_sha256": "1f69612eaadaa20d4d427568a3ffa63b88c1a768158e1ce0d37f283cfb5f2990",
+      "native_rgba_sha256": "162d789cf81ee105dca89035fd0b6139c9bf77522bc91c6ee05211069205283e",
+      "native_size": [
+        1484,
+        1060
+      ],
+      "delivery_file": "facepics-0-delivery.png",
+      "delivery_sha256": "d1079250dc6c6e1cb19d4e761846713d417aa19b5ed6cbd494c3281f137dc2cf",
+      "delivery_rgba_sha256": "29a2d622d4ddf4bea1bbc5ada9cd1d4c7e5a83ba49cf3a6544cd041c7fc32e97",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "42a2eefe199f82155a021a968ff8e91a1e20ca01812a505088fb6e1142f8c895"
+    },
+    {
+      "id": "facepics-1",
+      "archive": "FACEPICS",
+      "index": 1,
+      "source_file": "FACEPICS/facepics-001.png",
+      "source_png_sha256": "1f794f6a790f6e46cb5e22f65e2043d64bceb157576f48bb22817b2d03406e2c",
+      "source_rgb_sha256": "4c5d331129bb43b6cb712b1ceca78a700d3ff7704cdfbf456c052f8ac3befc8e",
+      "source_size": [
+        112,
+        80
+      ],
+      "reference": "facepics-1-reference.png",
+      "reference_sha256": "4046595877de118468ac350eddbc63cf451b05ecef6c3bd15b682fdd7688ac0d",
+      "references": [
+        "facepics-0-delivery.png",
+        "facepics-1-reference-enlarged.png"
+      ],
+      "prompt": "Edit the FIRST image, preserving exactly this same man, framing, helmet, hair, nose, eyes, beard, colors and smooth hand-painted style. Change ONLY his mouth and the tiny nearby beard contours to match the mouth/expression phase shown in the SECOND retro source frame. The second image defines only the mouth state and original animation phase; never copy its square pixels, dithering or mosaic. Keep continuous natural brush shading. No text, new objects, extra face, border or shift. Compact final delivery672x480, fully opaque.",
+      "prompt_file": "facepics-1-prompt.txt",
+      "delivery_size": [
+        672,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "facepics-1-native.png",
+      "native_sha256": "3261d388b6202eed773a0503a086393f07804757b615afe2b01c1bc523eed420",
+      "native_rgba_sha256": "2088231ebbdcdf905bf31a1125ba6ec2160ba2ee68bf5f4dc9e2ca064961c81c",
+      "native_size": [
+        1484,
+        1060
+      ],
+      "delivery_file": "facepics-1-delivery.png",
+      "delivery_sha256": "5a585e6aaeb8cd5c6a5ec46fa7f22fc841c3b89ce250de1ffaefd87f0f22c2cf",
+      "delivery_rgba_sha256": "cbe9d27ead904306108abd0571fd85baba41d6c2f741cc2f09a443fe1748d537",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "23a2db30c5ca45e7487acd43af8831522331e2e5513a00cd5f38e2802e0739ad"
+    },
+    {
+      "id": "facepics-2",
+      "archive": "FACEPICS",
+      "index": 2,
+      "source_file": "FACEPICS/facepics-002.png",
+      "source_png_sha256": "4a522716042bfc30ced1b8409d795ee3c508e7db6234e72e455624e33810cdc2",
+      "source_rgb_sha256": "b5933cc8d84e6ed1e2abe9783b1dc7760d7ee82219969ed8d625673f69afbcfe",
+      "source_size": [
+        112,
+        80
+      ],
+      "reference": "facepics-2-reference.png",
+      "reference_sha256": "d21ed73878c3cd4ea2906ea03f8407dc845fbd21b1b9ac37d191f715a12ecbb6",
+      "references": [
+        "facepics-0-delivery.png",
+        "facepics-2-reference-enlarged.png"
+      ],
+      "prompt": "Edit the FIRST image, preserving exactly this same man, framing, helmet, hair, nose, eyes, beard, colors and smooth hand-painted style. Change ONLY his mouth and the tiny nearby beard contours to match the mouth/expression phase shown in the SECOND retro source frame. The second image defines only the mouth state and original animation phase; never copy its square pixels, dithering or mosaic. Keep continuous natural brush shading. No text, new objects, extra face, border or shift. Compact final delivery672x480, fully opaque.",
+      "prompt_file": "facepics-2-prompt.txt",
+      "delivery_size": [
+        672,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "facepics-2-native.png",
+      "native_sha256": "8ee80fa9d4724c4c58f94bcc50ab3ed3367b7dec1a19c84584aa796c08375ac5",
+      "native_rgba_sha256": "d6461e64893cf4e304f60924c0368e9acba554ba2e1f0d3d5e5ca7d966193f77",
+      "native_size": [
+        1484,
+        1060
+      ],
+      "delivery_file": "facepics-2-delivery.png",
+      "delivery_sha256": "978f3bb67d766fe1f1fb5147b47bc8b7f8865d9e781d8c2d5166dde6c02ddc8f",
+      "delivery_rgba_sha256": "e613a10c702ce60e4e5a8e540341bff427443ba989c5d914edbfde0d2c747e1f",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "23a2db30c5ca45e7487acd43af8831522331e2e5513a00cd5f38e2802e0739ad"
+    },
+    {
+      "id": "facepics-3",
+      "archive": "FACEPICS",
+      "index": 3,
+      "source_file": "FACEPICS/facepics-003.png",
+      "source_png_sha256": "c3ad2df5875fee119cbe4bf2bc5a5dd036989b3604b3fd8b2a89e8bae1b2f0ac",
+      "source_rgb_sha256": "8b0311ed280b34e2b74392ee0b41c065cc482256b4e89261f34fc38f7e4653df",
+      "source_size": [
+        112,
+        80
+      ],
+      "reference": "facepics-3-reference.png",
+      "reference_sha256": "a9b3405e2075f74472dcbc11e52f193c2d6450c99f3b36e8a1adff8992d9226a",
+      "references": [
+        "facepics-0-delivery.png",
+        "facepics-3-reference-enlarged.png"
+      ],
+      "prompt": "Edit the FIRST image, preserving exactly this same man, framing, helmet, hair, nose, eyes, beard, colors and smooth hand-painted style. Change ONLY his mouth and the tiny nearby beard contours to match the mouth/expression phase shown in the SECOND retro source frame. The second image defines only the mouth state and original animation phase; never copy its square pixels, dithering or mosaic. Keep continuous natural brush shading. No text, new objects, extra face, border or shift. Compact final delivery672x480, fully opaque.",
+      "prompt_file": "facepics-3-prompt.txt",
+      "delivery_size": [
+        672,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "facepics-3-native.png",
+      "native_sha256": "cd1403e2ee286153aa828774304d2ffff1dd3adaa889737234f5094f23977016",
+      "native_rgba_sha256": "408c6dfc3bb33a35b6cc7c69f375a77055b44ecb9e7534bf56774b371d2b918b",
+      "native_size": [
+        1484,
+        1060
+      ],
+      "delivery_file": "facepics-3-delivery.png",
+      "delivery_sha256": "a7fb245b763afac1dade7a09c66847d18d8d935236df42b9b7d25502358ab82f",
+      "delivery_rgba_sha256": "be13e27cf3735c102a1bfd6b850282ed09f947fb29e45bd435424feb20b8b814",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "23a2db30c5ca45e7487acd43af8831522331e2e5513a00cd5f38e2802e0739ad"
+    },
+    {
+      "id": "facepics-4",
+      "archive": "FACEPICS",
+      "index": 4,
+      "source_file": "FACEPICS/facepics-004.png",
+      "source_png_sha256": "68b91a3e8170a7838c2fadc0dcc9589780f8f83ec10d1f404080f3ff18f4e00e",
+      "source_rgb_sha256": "93b4cb740fd3bba4220d07ae501f3a81c7e6e16398f3072acf4e2d51f13922af",
+      "source_size": [
+        112,
+        80
+      ],
+      "reference": "facepics-4-reference.png",
+      "reference_sha256": "980cb773e0d368408b1a90b82b0ebc7d168e73762b65ca36e0a9c12fc4e6412c",
+      "references": [
+        "facepics-0-delivery.png",
+        "facepics-4-reference-enlarged.png"
+      ],
+      "prompt": "Edit the FIRST image, preserving exactly this same man, framing, helmet, hair, nose, eyes, beard, colors and smooth hand-painted style. Change ONLY his mouth and the tiny nearby beard contours to match the mouth/expression phase shown in the SECOND retro source frame. The second image defines only the mouth state and original animation phase; never copy its square pixels, dithering or mosaic. Keep continuous natural brush shading. No text, new objects, extra face, border or shift. Compact final delivery672x480, fully opaque.",
+      "prompt_file": "facepics-4-prompt.txt",
+      "delivery_size": [
+        672,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "facepics-4-native.png",
+      "native_sha256": "a48455e9b80ca1f5532f93b0ada5f7dc5bad54c92951a5601ac0312240901743",
+      "native_rgba_sha256": "9f4c9dbf50df787c3f1ea3b1818ec5a3e930d95ed85bb8edecb53538140cbe7b",
+      "native_size": [
+        1484,
+        1060
+      ],
+      "delivery_file": "facepics-4-delivery.png",
+      "delivery_sha256": "0933452bb8848e0e7d4701b85b5942b4df458dc6ad6504cb8db8eed278cc8712",
+      "delivery_rgba_sha256": "164cac2cb545a7c4cb1e4f6ad7b39e435224adb427112e88f7defc9694f4bfa1",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "23a2db30c5ca45e7487acd43af8831522331e2e5513a00cd5f38e2802e0739ad"
+    },
+    {
+      "id": "facepics-5",
+      "archive": "FACEPICS",
+      "index": 5,
+      "source_file": "FACEPICS/facepics-005.png",
+      "source_png_sha256": "38cfcdec4c1b8a82cef3b02f9fe14086a6abe0cc8d5c8e1955fe99741e7ceda7",
+      "source_rgb_sha256": "1801ff090731c720be605e8fa8767d24eb0ce30d5e34166e3e3a30f63a43a25f",
+      "source_size": [
+        112,
+        80
+      ],
+      "reference": "facepics-5-reference.png",
+      "reference_sha256": "52efad93d8631f9ef244ab2e6efaf5951cd6dbebb95d49dbbdc19b6baea6d4f7",
+      "references": [
+        "facepics-0-delivery.png",
+        "facepics-5-reference-enlarged.png"
+      ],
+      "prompt": "Edit the FIRST image, preserving exactly this same man, framing, helmet, hair, nose, eyes, beard, colors and smooth hand-painted style. Change ONLY his mouth and the tiny nearby beard contours to match the mouth/expression phase shown in the SECOND retro source frame. The second image defines only the mouth state and original animation phase; never copy its square pixels, dithering or mosaic. Keep continuous natural brush shading. No text, new objects, extra face, border or shift. Compact final delivery672x480, fully opaque.",
+      "prompt_file": "facepics-5-prompt.txt",
+      "delivery_size": [
+        672,
+        480
+      ],
+      "transparent": false,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "generation_needed": true,
+      "native_file": "facepics-5-native.png",
+      "native_sha256": "859f123b630d66ceed6616b81e9852b8cdc037bf71a2d47278e039d2aed44371",
+      "native_rgba_sha256": "6c8d3a97dfa18514c3621cac3fffb3fda4bdae15e46b90b7709aa5465bf73549",
+      "native_size": [
+        1484,
+        1060
+      ],
+      "delivery_file": "facepics-5-delivery.png",
+      "delivery_sha256": "d5352f33c5d5746173158ea8c633dba83d5bbc12079c5d50f48020be9f3f65be",
+      "delivery_rgba_sha256": "231d2a738343de534692b4dc536445125a0fb6c5c3194e82531b7f1aab49e692",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "23a2db30c5ca45e7487acd43af8831522331e2e5513a00cd5f38e2802e0739ad"
+    },
+    {
+      "archive": "KOLPICS",
+      "index": 8,
+      "source_file": "KOLPICS/kolpics-008.png",
+      "source_png_sha256": "1e3ecde940046d8008935b0cac1c883c4b7c3082ebaa90a42bb15013bbf3af99",
+      "source_rgb_sha256": "5ab31a166ce671bdfbcfdbd510106365489dfdf447ae783149b018d84fe1ecf9",
+      "source_size": [
+        64,
+        160
+      ],
+      "source_atlas_file": "BATTLE/battle-tiles-08.png",
+      "source_atlas_sha256": "51d83c983ff621dae991111af5ce8ce4601cd6ed14c05a73da76700eb6b08d3b",
+      "id": "battle-ground-9",
+      "reference": "battle-ground9-reference.png",
+      "references": [
+        "battle-ground9-reference.png"
+      ],
+      "reference_sha256": "2568c6f2e652ee64a1a85b72947a34bada1d97d4e55f41017bd4be983c7f5159",
+      "prompt": "Paint ONE compact seamless tactical RPG ground tile, top-down flat view, based only on this attached exact source color distribution. Smooth hand-painted fine natural gouache: dark nearly black brown earth with scattered restrained green grass tufts and a few warm brown patches. Preserve the overall very dark ground and sparse green/brown coverage. Interpret source square marks as natural grass blades, never square pixels, mosaic, dotted checkerboard or discrete blocks. No rock, tree, path, water, wall, building, knight, item, label, border or text. Cover the complete square edge to edge, same dark ground at all four sides so repeating cells join softly. Fully opaque. Compact game delivery128x128.",
+      "prompt_file": "battle-ground-9-prompt.txt",
+      "delivery_size": [
+        128,
+        128
+      ],
+      "transparent": false,
+      "tile_ids": [
+        9
+      ],
+      "generation_needed": true,
+      "status": "DRAFT generated and resized; visual, source and runtime acceptance pending",
+      "native_file": "battle-ground-9-native.png",
+      "native_sha256": "81550fbbbf9a3f7878ad9dc9e3f5e4cd8da616800bb053b263ff8bb27ced0ee4",
+      "native_rgba_sha256": "388f63d7688726f7c611139bccda4a9750e594c7af12da1198f4885886a66b8b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "delivery_file": "battle-ground-9-delivery.png",
+      "delivery_sha256": "622db4b81adb817de123d14f88dd0e9c7d16ce7df1771ac1bbf40d76d49e5b45",
+      "delivery_rgba_sha256": "a55cc80862faa6e2b2559fe4f6109ed95383cdcb2415ee6ab88c83d6041298dd",
+      "resize_tool": "Pillow 9.4.0 LANCZOS optimize=True",
+      "prompt_sha256": "c8f87297f763cbc764818c1d929f568d12d8af00b3e5e5f43ee204f4a8b14792"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+XGB: conn.go:47: Could not get authority info: open /home/hr/.Xauthority: no such file or directory
+XGB: conn.go:48: Trying connection without authority info...
+XGB: conn.go:47: Could not get authority info: open /home/hr/.Xauthority: no such file or directory
+XGB: conn.go:48: Trying connection without authority info...
+=== RUN   TestHDMotionGallery
+motion1/2 monster-native-info
+motion2/2 monster-native-encounter
+--- PASS: TestHDMotionGallery (49.34s)
+PASS

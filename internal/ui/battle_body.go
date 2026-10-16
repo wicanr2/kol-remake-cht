@@ -41,26 +41,28 @@ func (b *BattleBody) DrawScaled(dst *ebiten.Image, sprites Sprites, s *battle.St
 	if src == nil || src.Bounds().Dx() != bodyWidth || src.Bounds().Dy() != bodyHeight {
 		return fmt.Errorf("MISCPICS %d 人形尺寸須為 %d×%d", 3+data.Kind, bodyWidth, bodyHeight)
 	}
-	if b.source[data.Kind] != src {
-		b.source[data.Kind] = src
-		b.base[data.Kind] = make([]byte, bodyWidth*bodyHeight*4)
-		src.ReadPixels(b.base[data.Kind])
-		b.valid = false
-	}
-	if b.image == nil {
-		b.image = ebiten.NewImage(bodyWidth, bodyHeight)
-		b.pixels = make([]byte, bodyWidth*bodyHeight*4)
-	}
-	if !b.valid || b.key != data {
-		copy(b.pixels, b.base[data.Kind])
-		shadeBody(b.pixels, rects)
-		b.image.WritePixels(b.pixels)
-		b.key, b.valid = data, true
-	}
-	if scale == 1 {
-		draw(dst, b.image, bodyX, bodyY)
-	} else {
-		drawScaled(dst, b.image, bodyX*scale, bodyY*scale, scale)
+	if !drawHDMotionBody(dst, data, rects, scale) {
+		if b.source[data.Kind] != src {
+			b.source[data.Kind] = src
+			b.base[data.Kind] = make([]byte, bodyWidth*bodyHeight*4)
+			src.ReadPixels(b.base[data.Kind])
+			b.valid = false
+		}
+		if b.image == nil {
+			b.image = ebiten.NewImage(bodyWidth, bodyHeight)
+			b.pixels = make([]byte, bodyWidth*bodyHeight*4)
+		}
+		if !b.valid || b.key != data {
+			copy(b.pixels, b.base[data.Kind])
+			shadeBody(b.pixels, rects)
+			b.image.WritePixels(b.pixels)
+			b.key, b.valid = data, true
+		}
+		if scale == 1 {
+			draw(dst, b.image, bodyX, bodyY)
+		} else {
+			drawScaled(dst, b.image, bodyX*scale, bodyY*scale, scale)
+		}
 	}
 	if !data.FatigueBar {
 		return nil
@@ -68,6 +70,9 @@ func (b *BattleBody) DrawScaled(dst *ebiten.Image, sprites Sprites, s *battle.St
 	boundary, err := battle.BodyFatigueBoundary(data.Stamina, data.Fatigue)
 	if err != nil {
 		return err
+	}
+	if drawHDMotionFatigue(dst, boundary, scale) {
+		return nil
 	}
 	// 原版兩個矩形包含端點；後畫的藍色蓋住共同分界列。
 	fill(dst, 132*scale, 84*scale, 7*scale, (boundary-84+1)*scale, [3]uint8{255, 85, 85})

@@ -33,28 +33,34 @@ func BattleFieldCJK(dst *ebiten.Image, sprites Sprites, tiles *BattleTiles,
 	shadow(dst, w.X*sc, w.Y*sc, w.Width*sc, w.Height*sc)
 	fill(dst, w.X*sc, w.Y*sc, w.Width*sc, w.Height*sc, town.ColourBoxEdge)
 
-	cx, cy := s.Camera()
-	mounted := false
-	if a, ok := s.ViewActor(); ok {
-		mounted = a.Flag1E != 0
+	drawn, err := drawHDBattleField(dst, tiles, s, sc)
+	if err != nil {
+		return err
 	}
-	sight := s.Field.Visible(cx, cy, mounted)
-	v := battle.FieldView
-	for r := 0; r < battle.ViewRows; r++ {
-		for c := 0; c < battle.ViewCols; c++ {
-			row := clampField(cx - battle.ViewCentre.Row + r)
-			col := clampField(cy - battle.ViewCentre.Col + c)
-			centre := r == battle.ViewCentre.Row && c == battle.ViewCentre.Col
-			img := tiles.Tile(battle.TileUnseen)
-			if sight[r][c] || centre {
-				tile := s.Field.At(row, col)
-				if sprite := s.SpriteAt(row, col); sprite >= 0 {
-					img = tiles.WithSprite(tile, sprite)
-				} else {
-					img = tiles.Tile(tile)
+	if !drawn {
+		cx, cy := s.Camera()
+		mounted := false
+		if a, ok := s.ViewActor(); ok {
+			mounted = a.Flag1E != 0
+		}
+		sight := s.Field.Visible(cx, cy, mounted)
+		v := battle.FieldView
+		for r := 0; r < battle.ViewRows; r++ {
+			for c := 0; c < battle.ViewCols; c++ {
+				row := clampField(cx - battle.ViewCentre.Row + r)
+				col := clampField(cy - battle.ViewCentre.Col + c)
+				centre := r == battle.ViewCentre.Row && c == battle.ViewCentre.Col
+				img := tiles.Tile(battle.TileUnseen)
+				if sight[r][c] || centre {
+					tile := s.Field.At(row, col)
+					if sprite := s.SpriteAt(row, col); sprite >= 0 {
+						img = tiles.WithSprite(tile, sprite)
+					} else {
+						img = tiles.Tile(tile)
+					}
 				}
+				drawScaled(dst, img, (v.X+c*battle.TileSide)*sc, (v.Y+r*battle.TileSide)*sc, sc)
 			}
-			drawScaled(dst, img, (v.X+c*battle.TileSide)*sc, (v.Y+r*battle.TileSide)*sc, sc)
 		}
 	}
 	cur := battle.FieldCursor

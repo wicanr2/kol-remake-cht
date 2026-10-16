@@ -182,6 +182,9 @@ func drawBattleTargetMarker(dst *ebiten.Image, sprites Sprites, tiles *BattleTil
 	if err != nil {
 		return err
 	}
+	if drawHDTargetRing(dst, tiles, src, c.Row, c.Col, scale) {
+		return nil
+	}
 	ring, err := tiles.TargetRing(src)
 	if err != nil {
 		return err

@@ -118,7 +118,7 @@ func (g *game) drawNextRoundQuestion(dst *ebiten.Image, f *font.Font, scale int)
 	}
 	b := battle.SheetBox
 	safe := image.Rect((b.X+1)*scale, (b.Y+1)*scale, (b.X+b.Width-1)*scale, (b.Y+b.Height-1)*scale)
-	clip := dst.SubImage(safe).(*ebiten.Image)
+	clip := ui.ClipNativeText(dst, safe)
 	for _, seg := range segments {
 		x, y := seg.Col*town.CellWidth*scale, seg.Row*scale
 		w, h := f.Measure(seg.Text)

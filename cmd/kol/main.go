@@ -1075,33 +1075,34 @@ type game struct {
 	markerStep int
 	canvas     *screen.Canvas
 	// hd只控制最後呈現；規則、文字及保存沿既有畫布。
-	hd                *ui.HD
-	hdCache           *ui.HD
-	hdCanvas          *screen.Canvas
-	hdDir             string
-	hdLanguage        string
-	hdPortraitPath    string
-	hdMonsterBlanks   map[image.Point]*ebiten.Image
-	hdMonsterUnderlay *screen.Canvas
-	displaySettings   ui.DisplaySettings
-	displayCanvas     *screen.Canvas
-	displayAwaitFrame bool
-	presentation      *screen.Canvas
-	noticeCanvas      *screen.Canvas
-	state             *charcreate.State
-	sequence          *title.Sequence
-	player            *title.Player
-	titleSound        *titleSound
-	titleAudioPath    string
-	music             *musicSound
-	musicPath         string
-	musicEnabled      bool
-	book              *book.OpenPlayer
-	bookAnim          *book.OpenAnimation
-	bookWait          float64
-	bookFrom          string // 動畫的起始畫面
-	bookTarget        string // 動畫的目標畫面
-	bookLib           *assets.Library
+	hd                     *ui.HD
+	hdCache                *ui.HD
+	hdCanvas               *screen.Canvas
+	hdDir                  string
+	hdLanguage             string
+	hdPortraitPath         string
+	hdMonsterBlanks        map[image.Point]*ebiten.Image
+	hdMonsterUnderlay      *screen.Canvas
+	displaySettings        ui.DisplaySettings
+	displayCanvas          *screen.Canvas
+	displayAwaitFrame      bool
+	presentation           *screen.Canvas
+	noticeCanvas           *screen.Canvas
+	state                  *charcreate.State
+	sequence               *title.Sequence
+	player                 *title.Player
+	titleSound             *titleSound
+	titleAudioPath         string
+	music                  *musicSound
+	musicPath              string
+	musicEnabled           bool
+	book                   *book.OpenPlayer
+	hdBook, hdBookOriginal *book.OpenPlayer
+	bookAnim               *book.OpenAnimation
+	bookWait               float64
+	bookFrom               string // 動畫的起始畫面
+	bookTarget             string // 動畫的目標畫面
+	bookLib                *assets.Library
 
 	// ending 是結局播到第幾段（RE-106）；endBank／endTrans 是敘事的文字庫與譯文。
 	ending   *ending.State
@@ -1496,6 +1497,9 @@ func (g *game) renderScene(sc scene) error {
 //
 // 封面、空白書頁與角色立繪在這裡縮放；圖片內的目錄英文由 ContentsCJK 另行替換。
 func (g *game) drawPage(img *ebiten.Image, x, y int) {
+	if ui.DrawNativePage(g.canvas.Image(), img, x*3, y*3, 3) {
+		return
+	}
 	if g.strings == nil {
 		g.canvas.DrawAt(img, x, y)
 		return
@@ -1628,6 +1632,9 @@ func (g *game) render() error {
 		if err := g.ensureBookPlayer(); err != nil {
 			return err
 		}
+		if ui.NativeRendering(g.canvas.Image()) {
+			return g.renderHDBook(g.canvas.Image())
+		}
 		g.canvas.Image().WritePixels(g.book.Image().Pix)
 		return nil
 	case sceneEnding:
@@ -1688,7 +1695,13 @@ func (g *game) ensureBookPlayer() error {
 	if err != nil {
 		return err
 	}
-	player, err := book.NewOpenPlayer(g.bookAnim, start, source)
+	animation := *g.bookAnim
+	if g.strings != nil {
+		animation.Geometry.FirstRow *= 3
+		animation.Geometry.RowCount *= 3
+		animation.Geometry.ColumnPixels *= 3
+	}
+	player, err := book.NewOpenPlayer(&animation, start, source)
 	if err != nil {
 		return err
 	}
@@ -1699,6 +1712,9 @@ func (g *game) ensureBookPlayer() error {
 // renderPage 把一頁畫進離屏畫布再讀回。翻書動畫的起點與來源都是「畫好的那一頁」，
 // 而這一步只能在繪圖環境就緒之後做，所以延後到第一次繪製時。
 func (g *game) renderPage(name string) (*image.RGBA, error) {
+	if g.strings != nil {
+		return g.renderCJKBookPage(name)
+	}
 	aux := screen.NewCanvas()
 	switch name {
 	case "cover", "contents":
@@ -2611,13 +2627,24 @@ func (g *game) updateBattle() {
 }
 
 func (g *game) Draw(dst *ebiten.Image) {
-	if err := g.render(); err != nil {
-		g.drawErr = err
-		return
-	}
-	if err := g.presentHD(); err != nil {
-		g.drawErr = err
-		return
+	if g.hd != nil && g.nativeUIPage() {
+		if err := g.hd.ValidatePageSources(g.sprites); err != nil {
+			g.drawErr = err
+			return
+		}
+		if err := g.renderNativeUI(); err != nil {
+			g.drawErr = err
+			return
+		}
+	} else {
+		if err := g.render(); err != nil {
+			g.drawErr = err
+			return
+		}
+		if err := g.presentHD(); err != nil {
+			g.drawErr = err
+			return
+		}
 	}
 	op := &ebiten.DrawImageOptions{}
 	op.Filter = ebiten.FilterNearest

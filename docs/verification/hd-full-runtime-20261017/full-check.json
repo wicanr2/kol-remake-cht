@@ -1,0 +1,874 @@
+{
+  "status": "PASS",
+  "controlled_scenes": 102,
+  "frames": 408,
+  "han": 837,
+  "missing_glyphs": 0,
+  "ega_max_delta": 0,
+  "hd_roundtrip_max_delta": 1,
+  "unpainted_EGA_fallbacks": 0,
+  "native_picture_checks": [
+    {
+      "name": "weather-3-00",
+      "maximum": 0
+    },
+    {
+      "name": "weather-3-01",
+      "maximum": 0
+    },
+    {
+      "name": "weather-3-02",
+      "maximum": 0
+    },
+    {
+      "name": "weather-4-00",
+      "maximum": 0
+    },
+    {
+      "name": "weather-4-01",
+      "maximum": 0
+    },
+    {
+      "name": "weather-4-02",
+      "maximum": 0
+    },
+    {
+      "name": "body-0-0",
+      "maximum": 0
+    },
+    {
+      "name": "body-1-0",
+      "maximum": 0
+    },
+    {
+      "name": "body-2-0",
+      "maximum": 0
+    }
+  ],
+  "scenes": [
+    {
+      "name": "event-arena-05",
+      "kind": "inn",
+      "han": 23,
+      "state_sha256": "b8eff5f065099e53b4f39f3d876bbe4d15dbf5eb7435476bee5625766bf4e228",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "event-combat-03",
+      "kind": "battle",
+      "han": 8,
+      "state_sha256": "612b37757515cf0da871978c0e76cfacbf64677c186dd64677a21068e91bb399",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "event-world-05",
+      "kind": "world",
+      "han": 10,
+      "state_sha256": "424e098598ff0e49f235dad0a550bb67b3b9f79718577d3f1fa6ea1437dc7d8c",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-0-00",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "ca0bb4680ec3871c450ea0972762ed04727bec52d88319047e405d4c626022ce",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-0-01",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "3277bf7dd377e5e5d75b3794bc2c13285bba160796fd6f7cb391c13decc6fea7",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-0-02",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "bf4be526960c41251bddb23937278ff5b50931f936849ce21300ae99d6e906c6",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-0-63",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "973e1b233acb3061429400cf77e4a90f5ed0f12fb77f9d5b00c68fdf7d45cc93",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-1-00",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "0c8266427af29c0ce8108854d6369244ce74c5f73c073ca39630fa2baa0cbf15",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-1-01",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "7dfad37349d313f3cd222e05c0ae700b2dc7e0a970ceac8617c3961a3c235808",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-1-02",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "8264e055d272e24c348f71c9f964acd81abc85fdfa0a808635e7772ca2b13874",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-1-63",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "4ebe7a2752148f88e32809a787d78c4846ecdce534d7cb39b3acf0942aacf74c",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-2-00",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "727685957738abcb5002896a3bf5081fd866b72174c38a3a13032dda4ce8ffbd",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-2-01",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "ddeb6544841c532583eaf32dccbd17187df5c65a22f44fa473a53ff2256ac918",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-2-02",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "60a60af4e6eef492f9ab6a6a42e3a50055ad314d8e69749599043750d3192767",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-2-63",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "5d632fd9672ab313871a245a7d958716f9fba02a1c23dd805a5724d6e4021858",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-3-00",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "8cc0275b02487094ae2c6353d22e75194e6a15391574ca6696256e06f5b099a9",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-3-01",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "0d60ae127eb7243b627392836a3df6c937bc2a898284f7735b6aae5b9da261ef",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-3-02",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "a63a74ac2591fc8fc34b9374e44984e90575a3a446ffab5c06c6d8e5f87c762b",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-4-00",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "cac3299723f3f6a4e3c20687c943efc21039b19fb4e0194b958e23229709f249",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-4-01",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "d00141af302a185e7c838068435b5fc36f1e8b7c51437d67f9fee4eab05611b5",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-4-02",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "f60d46dbd0278468faf9c17ffac8efd527c89b05ea92c1fcca00666c54ff2f08",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-5-00",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "56e2f98a11423e1378d3cbb51f1dd661b1b579e5c7840f630c6540c1cc1b7fcd",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-5-01",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "4c0059394e25460080f8cfd16e397a57ac6d625175b2f6f936ca9d4241154a6f",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-5-02",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "bd0dd42bebf936e9eda9f35649aeab41258f1ca9d8cc603dbae76c46c761fa11",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "weather-5-63",
+      "kind": "weather",
+      "han": 10,
+      "state_sha256": "88aba387669fe56dd1b9fa750360370e0ccb07a0463a2631d85b17824b7a76b4",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-06---1",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "0fd021ceab2a82849f935a6824cdf71d2f1421bfb788760f102274e454129804",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET0PICS-00",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "7d112e735672ceb9bb466a85d6db4e2f0d18f537f11fea765cf5efbef51c1ef6",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET0PICS-01",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "f23a52c60cc7b0f400b1539187dd79bebf256e43f374a986ab9aa9bc89cb10fc",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET0PICS-02",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "ff10f4fe53abd9eb8d16ed7e14302b3021f839c91cce0670b2d6f78247b0b091",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET0PICS-03",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "483ba7adc4147dd149fa8f0d1c5a72b8ae3b262eb2c2d64aed8e4d3973c6499f",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-02-SET0PICS-05",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "f364b1cd0023ed6464de9d0aa6f9769147865a9c530b82bd14359298e975758c",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-01-SET0PICS-04",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "d513d1ea16cd0b9b3ce18747f73369c9e83f717724de43404fb1f454ba0a8d0b",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-07---1",
+      "kind": "title",
+      "han": 2,
+      "state_sha256": "bb18a819660c60f4a0604a093631022a506fb1854c66643c17e329be6f2b1c55",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-08---1",
+      "kind": "title",
+      "han": 3,
+      "state_sha256": "1de8091b335f3d809165e9ae96b6ab780acbf02a08a57dbc11ea0f626f7faa74",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET1PICS-00",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "7589f95b9f86271769c2dade450855b34484399a03ad09e44ed23753241c55ce",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET1PICS-01",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "a93403f08e750267506c501b857b3dd467b6af5bfff670fe4618b66d155038e5",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET1PICS-02",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "199c7069248fbe2e811b0c18a8da0c0440799673182cee70159d39e00134d75e",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET1PICS-03",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "a9955907c5b0e7ef0d2932e83c0e74a46302351affef019608ee70d0290f9b0a",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-02-SET1PICS-05",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "77b47f38af2745f597fccee102230f2acd77ee2b6381290a53d5822fd16f8233",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-01-SET1PICS-04",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "897fe8497db6958121e360b7f85c7da64eeb72ef12620933d4b5e69cc97b73de",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-09---1",
+      "kind": "title",
+      "han": 10,
+      "state_sha256": "0ea7e45a7822ea4cf6062e02c460f2f33d51e34ba96f0547d91e3deefa2764d2",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-10---1",
+      "kind": "title",
+      "han": 4,
+      "state_sha256": "eff49875b224110c12a8320041247f0ee1cdef3294bc95cc0108b777605813c5",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET2PICS-00",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "eeee4635b2b99611f3ac43aaff39484faa66842fa393d433eee4fcaa1ae626a1",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET2PICS-01",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "a2532918a23d2160e9db90c6633adf8842f97fd7ecec15dc042edc6b008b980e",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET2PICS-02",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "a185b2586c896c2abc3f92b67adf757c390422f0b6d34efe4be52035d1b64ac6",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-00-SET2PICS-03",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "93f6199d3d526ef5367e1aff12ee410aabcbb848ec0811b38f061296db8c6723",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-01-SET2PICS-04",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "cb0e74030989cebc756b3734bedce990a46e9e92b8fced19f830b207746c06a1",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-02-SET2PICS-05",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "e25eb29cdf9fb9991eeaada93a58652a605a0b51af85007a033c3195aed449a9",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-11---1",
+      "kind": "title",
+      "han": 4,
+      "state_sha256": "c4c8180d0d32709d20bcd3e3a086a168d3907fd4138beccc0932c8564b26bcd0",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-12---1",
+      "kind": "title",
+      "han": 2,
+      "state_sha256": "186cbf753e56ed0124990980746289dee0c23141452f46565f17e93e26833e83",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-03-FACEPICS-00",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "a34123c5d852e60cefb91f4cfa65d459fad59db0a436111fcfdb4d2b16157d5a",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-03-FACEPICS-01",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "b8e6abb1499b1ff1863e92e49a73a1fb483e0f6547b0ac55553fa72b28563cae",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-03-FACEPICS-04",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "1cce71f571821acb56245876377cc1670fee4e9b8244a2638c8aca7fb7f7134c",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-03-FACEPICS-05",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "93dc8ff7bd17ded82041a45a1adbf20dfb00bc46a23aa9d5048c6e4d08650bee",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-04---1",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "bd9447d83391a930e479a9a364798e7262470aeca14f5a1f692a4454911e1676",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-03-FACEPICS-03",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "52b6d573f6c8d3a459b9d08e172776246c64d6a4baf52564f8ac407a0288914f",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-05---1",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "c4c16ef1f24af526004a1ce53c272671f03ce48bcf304f7bd9dee6e2da8d02ad",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "title-03-FACEPICS-02",
+      "kind": "title",
+      "han": 0,
+      "state_sha256": "fe6b8cc7cea4169487088bdfd0754089926d1ea836e195dbf7d05fccd06f2958",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "credit-13",
+      "kind": "title",
+      "han": 4,
+      "state_sha256": "e16cecf145a979c1b1f6ebbfbf6349cfa7cccd48f906a14bb405868c448e4031",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "book-cover",
+      "kind": "cover",
+      "han": 4,
+      "state_sha256": "3053090a858813ce4528f9a69f5c994dfc3e73a8310344d5a6820607eb6a3802",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "book-open-000",
+      "kind": "book",
+      "han": 0,
+      "state_sha256": "4f17ef9e10b2dd16ccd2093ce1d0779ed28b8aaefa657beee192acbf6a8ba8ef",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "book-open-018",
+      "kind": "book",
+      "han": 0,
+      "state_sha256": "457c0782a6c3453b64731305ed24224432d301ab236c4c0f4c9825b18e2bc7a7",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "book-open-036",
+      "kind": "book",
+      "han": 0,
+      "state_sha256": "20f27370e3363283b88bbd83e3ad5d47c91cba7851f43e4988187e6f6fe2cf47",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "helmet-0",
+      "kind": "helmet",
+      "han": 6,
+      "state_sha256": "68722f8191bebf00a6d1666aa2d88be3c49906b0aad1a6f5de499bd494fbe7ca",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "helmet-1",
+      "kind": "helmet",
+      "han": 6,
+      "state_sha256": "9137477661b22c5f6a2c79501c0e1631307d828c8dde2410eaee21f35a39ae1c",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 1
+    },
+    {
+      "name": "helmet-2",
+      "kind": "helmet",
+      "han": 6,
+      "state_sha256": "6f63fde850e8234f7773094965de5c54dcaeffe6a77f17642a2dd0c410c2cf75",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "helmet-3",
+      "kind": "helmet",
+      "han": 6,
+      "state_sha256": "642c2ff47b570a009767fcc595a9ba545b4c2b7776eb35090d609c090691dbfb",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "helmet-4",
+      "kind": "helmet",
+      "han": 6,
+      "state_sha256": "8472f8c962c28d84d81bf4f7e954c359aeac617fd9fdb1b18a8a8f3f8e43ce59",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-0-0",
+      "kind": "body",
+      "han": 12,
+      "state_sha256": "72d8431ae7bc719299b394d375ba2ecc40c1e4ea465145fe1c069503263518ab",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-0-1",
+      "kind": "body",
+      "han": 12,
+      "state_sha256": "cb70995424053cabc3132e0c3cb1d7b25cf83f43e80c16da41fd7033382ad3e4",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-0-2",
+      "kind": "body",
+      "han": 12,
+      "state_sha256": "a296b065e9810d11d2bdf261d055847c5f3b8272fdfd63198dbeb51979a90c01",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-1-0",
+      "kind": "body",
+      "han": 12,
+      "state_sha256": "0688d86e7fe45ed051f1120f5e4b7b047fef979b275141f0ebacd7c205c019a6",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-1-1",
+      "kind": "body",
+      "han": 12,
+      "state_sha256": "5ebbf61e395396b1ca7ce18631dcb71f5a4cad4011d11b55c9fce4170b72c659",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-1-2",
+      "kind": "body",
+      "han": 12,
+      "state_sha256": "8b3f3413be7542da1c0da05794f5ed31f6acfac62aa793fe160fe57b447bd0a7",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-2-0",
+      "kind": "body",
+      "han": 18,
+      "state_sha256": "f43c15f8af6630bc2c293f64769de0ca521e0e30a8d369a759f0af43eb906af2",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-2-1",
+      "kind": "body",
+      "han": 18,
+      "state_sha256": "b07746acaccd1b38319819a4069efc6bd1fe05ebbf00c554fd183153c650d6f8",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "body-2-2",
+      "kind": "body",
+      "han": 18,
+      "state_sha256": "7124dd28f188683bc3e99fdd086996af7d1268218c15a9e6fd8166830504b839",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-08-map-00",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "5c3e7d6b1afadbd7a59ed049810157ce2ff7d9437b9b70e8cc9565c0aa66ce65",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-08-map-08",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "4df76cad47421d1e8bca81a00e6f2fb595e35d8198ed8a7f74454e8f95b9fed2",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-08-map-16",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "aadc48571cca67bac5aea565dd4681b378df9e92e2b65581ba1c0f254897914b",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-08-map-24",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "b2684bad7223ae448ef0dd15efddd9af4a719595adcc71e2e92473126ca2480f",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-12-map-00",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "5c3e7d6b1afadbd7a59ed049810157ce2ff7d9437b9b70e8cc9565c0aa66ce65",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-12-map-08",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "4df76cad47421d1e8bca81a00e6f2fb595e35d8198ed8a7f74454e8f95b9fed2",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-12-map-16",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "aadc48571cca67bac5aea565dd4681b378df9e92e2b65581ba1c0f254897914b",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-12-map-24",
+      "kind": "battle",
+      "han": 12,
+      "state_sha256": "b2684bad7223ae448ef0dd15efddd9af4a719595adcc71e2e92473126ca2480f",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "target-0",
+      "kind": "target",
+      "han": 12,
+      "state_sha256": "90a96b4de4c42801d244df7a1ac5c44c5ee61b4fc76c2a46b2c8e6eb67c8ba85",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "target-1",
+      "kind": "target",
+      "han": 12,
+      "state_sha256": "90a96b4de4c42801d244df7a1ac5c44c5ee61b4fc76c2a46b2c8e6eb67c8ba85",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "target-2",
+      "kind": "target",
+      "han": 12,
+      "state_sha256": "90a96b4de4c42801d244df7a1ac5c44c5ee61b4fc76c2a46b2c8e6eb67c8ba85",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "target-3",
+      "kind": "target",
+      "han": 12,
+      "state_sha256": "90a96b4de4c42801d244df7a1ac5c44c5ee61b4fc76c2a46b2c8e6eb67c8ba85",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "target-4",
+      "kind": "target",
+      "han": 12,
+      "state_sha256": "90a96b4de4c42801d244df7a1ac5c44c5ee61b4fc76c2a46b2c8e6eb67c8ba85",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-08",
+      "kind": "prompt",
+      "han": 6,
+      "state_sha256": "471ca1ea8f74f29af090678b5c1bad00917879cf38298025ef800cd8e45f1c93",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-10",
+      "kind": "prompt",
+      "han": 10,
+      "state_sha256": "33b21860839493c55ed8150892a7c0c954c7eb5e958aea0b30ea5110068cb80a",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-06",
+      "kind": "prompt",
+      "han": 17,
+      "state_sha256": "c52335d5ee6a9b95150f062a007d8216994f4ae435e47ef67cb5963854712e7c",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-07",
+      "kind": "prompt",
+      "han": 20,
+      "state_sha256": "4bfd04483bb2492fb22026e55e98c8c3b61779fec10d18a4763dcdbbd5b8a131",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-02",
+      "kind": "prompt",
+      "han": 12,
+      "state_sha256": "2b6908d673547e89d981e59891a63484d01aac708be98700164a0eec3d79a367",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-03",
+      "kind": "prompt",
+      "han": 12,
+      "state_sha256": "fc99b9679c857b762b20a038a4dfa215fa67b28059745784cd5043f9358251fa",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-04",
+      "kind": "prompt",
+      "han": 12,
+      "state_sha256": "6f000d0b53e85a307b6c91de7b41f21ffcc524ded5bc28498606affdae663dda",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-05",
+      "kind": "prompt",
+      "han": 12,
+      "state_sha256": "bbc5a77f9dca510c54f276d85d88c929365cd53b5cca1acb41f0b62ea77acfa3",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-09",
+      "kind": "prompt",
+      "han": 10,
+      "state_sha256": "162756e7d1e373df370fc277f02a73edce026320568663fbb89eac4795665ab2",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-prompt-11",
+      "kind": "prompt",
+      "han": 10,
+      "state_sha256": "2865d34b4fe4b875a7c2e101f00468b6c50afd60e2626bac35edf8a234d5dca1",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "battle-spoils",
+      "kind": "spoils",
+      "han": 11,
+      "state_sha256": "5e3de6cf8f66af61d549f5ba88307830de769d3083fd0922fc3229ef45e8dd68",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    },
+    {
+      "name": "long-inn",
+      "kind": "long-inn",
+      "han": 99,
+      "state_sha256": "8b49328aaacf0ce8861ae9ea4f8fc7afc60f0377b0e2286a916f3b8fb8a06a51",
+      "ega_max_delta": 0,
+      "hd_roundtrip_max_delta": 0
+    }
+  ],
+  "manifest_sha256": "d79ee0a93af24853a67f1979662975321f1500198416bd987387fe3c3c4848cf",
+  "generation_sha256": "816c56e5e9615d9e9b116470753fffbaecc7c597c9f6e629cdaed49c2a057235",
+  "source_index_sha256": "e82ae8695df46eff86c11488951927149e56f641cfefc7e6f873bc32a4c91b89",
+  "original_oracle": false,
+  "normal_player_path": false,
+  "remake_title_seed": 1,
+  "original_seed": null,
+  "gameplay_RND_calls": 0
+}

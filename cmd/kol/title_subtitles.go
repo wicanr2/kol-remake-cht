@@ -10,6 +10,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 
 	"github.com/wicanr2/kol-remake-cht/internal/font"
+	"github.com/wicanr2/kol-remake-cht/internal/ui"
 )
 
 // titleSubtitles 是開場字幕卡與書本封面的中文字幕（docs/i18n/title-zh-Hant.json）。
@@ -52,6 +53,9 @@ const subtitleScale = 2
 
 // plate 在 (cx, cy) 置中畫一塊黑底字幕板；framed 時外加白框。
 func plate(dst *ebiten.Image, f *font.Font, cx, cy int, text string, framed bool) {
+	if ui.DrawNativeSubtitle(dst, f, cx, cy, text, framed) {
+		return
+	}
 	w, h := f.Measure(text)
 	if w == 0 {
 		return
@@ -88,7 +92,11 @@ func drawTitleSubtitle(dst *ebiten.Image, f *font.Font, t *titleSubtitles, back 
 		plate(dst, f, b.Dx()*790/960, b.Dy()*278/600, s.Zh, true)
 		return
 	}
-	plate(dst, f, b.Dx()/2, b.Dy()-30, s.Zh, false)
+	bottom := b.Dy() - 30
+	if ui.NativeRendering(dst) {
+		bottom = b.Dy() - 60
+	}
+	plate(dst, f, b.Dx()/2, bottom, s.Zh, false)
 }
 
 // drawCoverSubtitle 在書本封面書名板正下方畫中文副標。
@@ -101,6 +109,9 @@ func drawCoverSubtitle(dst *ebiten.Image, f *font.Font, t *titleSubtitles) {
 }
 
 func fillRect(dst *ebiten.Image, x, y, w, h int, c [3]uint8) {
+	if ui.FillNativeRect(dst, x, y, w, h, c) {
+		return
+	}
 	img := ebiten.NewImage(w, h)
 	img.Fill(color.RGBA{c[0], c[1], c[2], 0xFF})
 	op := &ebiten.DrawImageOptions{}

@@ -1,0 +1,96 @@
+{
+  "status": "PASS controlled actual F10 GUI",
+  "case": "full-HD-motion",
+  "rounds": [
+    {
+      "scene": "body-0-1-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 1,
+      "state_sha256": "86735359824f1ce7ef37393025a39debf64713c0014ff5e644b7cd0d62229777",
+      "files": [
+        "body-0-1-large-before.png",
+        "body-0-1-large-ega.png",
+        "body-0-1-large-restored.png"
+      ]
+    },
+    {
+      "scene": "body-0-1-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "86735359824f1ce7ef37393025a39debf64713c0014ff5e644b7cd0d62229777",
+      "files": [
+        "body-0-1-small-before.png",
+        "body-0-1-small-ega.png",
+        "body-0-1-small-restored.png"
+      ]
+    },
+    {
+      "scene": "target-2-large",
+      "mouse": false,
+      "size": [
+        1920,
+        1200
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "aa5f027c09c57bae670d310b9927bd4ef8c321911aad0267bdb2730175c6dabb",
+      "files": [
+        "target-2-large-before.png",
+        "target-2-large-ega.png",
+        "target-2-large-restored.png"
+      ]
+    },
+    {
+      "scene": "target-2-small",
+      "mouse": true,
+      "size": [
+        960,
+        600
+      ],
+      "hd_max_channel_delta": 0,
+      "state_sha256": "aa5f027c09c57bae670d310b9927bd4ef8c321911aad0267bdb2730175c6dabb",
+      "files": [
+        "target-2-small-before.png",
+        "target-2-small-ega.png",
+        "target-2-small-restored.png"
+      ]
+    }
+  ],
+  "display_events": [
+    "display action=toggle hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=ega hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=hd hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=ega hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=false state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=hd hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=back hd=true state=a3541accebf559ef52f62f13d4ef8c9bad2ad92335f290fc95d056cfe0353954",
+    "display action=toggle hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=ega hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=toggle hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=hd hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=toggle hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=ega hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=toggle hd=false state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=hd hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be",
+    "display action=back hd=true state=f5e21fc5e9fcdd99f2a782f8dc17c3903db0dce99b415d206a74160ce23181be"
+  ],
+  "serializable_scene_state_unchanged": true,
+  "exit_code": 0,
+  "original_oracle": false,
+  "normal_player_path": false
+}

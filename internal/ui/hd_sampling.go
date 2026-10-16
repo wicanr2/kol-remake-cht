@@ -12,6 +12,11 @@ type hdSampleKey struct {
 }
 
 func (h *HD) sampledHD(src *ebiten.Image, width, height int) *ebiten.Image {
+	// Equal-size draws need no resampling. Dynamic weather/body images must
+	// retain their latest pixels rather than an immutable cached copy.
+	if src.Bounds().Size() == image.Pt(width, height) {
+		return src
+	}
 	key := hdSampleKey{src, width, height}
 	if result := h.samples[key]; result != nil {
 		return result

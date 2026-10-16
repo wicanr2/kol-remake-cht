@@ -216,20 +216,26 @@ func WorldCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Translator,
 
 	fill(dst, l.WeatherX, l.WeatherY, l.WeatherW, l.WeatherH, town.ColourBoxEdge)
 	if s.Weather != nil {
-		pixels := s.Weather.CompositeGroup(s.Group, s.Phase)
-		if len(pixels) != world.WeatherWidth*world.WeatherHeight {
-			return fmt.Errorf("無效天候組 %d", s.Group)
+		drawn, err := drawHDWeather(dst, s)
+		if err != nil {
+			return err
 		}
-		weatherScale := 1
-		if activeHDUI != nil && activeHDUI.dst == dst {
-			weatherScale = 2
-		}
-		for y := 0; y < world.WeatherHeight; y++ {
-			for x := 0; x < world.WeatherWidth; x++ {
-				c := pixels[y*world.WeatherWidth+x]
-				for dy := 0; dy < l.Scale*weatherScale; dy++ {
-					for dx := 0; dx < l.Scale*weatherScale; dx++ {
-						dst.Set((l.WeatherPicX+x*l.Scale)*weatherScale+dx, (l.WeatherPicY+y*l.Scale)*weatherScale+dy, c)
+		if !drawn {
+			pixels := s.Weather.CompositeGroup(s.Group, s.Phase)
+			if len(pixels) != world.WeatherWidth*world.WeatherHeight {
+				return fmt.Errorf("無效天候組 %d", s.Group)
+			}
+			weatherScale := 1
+			if activeHDUI != nil && activeHDUI.dst == dst {
+				weatherScale = 2
+			}
+			for y := 0; y < world.WeatherHeight; y++ {
+				for x := 0; x < world.WeatherWidth; x++ {
+					c := pixels[y*world.WeatherWidth+x]
+					for dy := 0; dy < l.Scale*weatherScale; dy++ {
+						for dx := 0; dx < l.Scale*weatherScale; dx++ {
+							dst.Set((l.WeatherPicX+x*l.Scale)*weatherScale+dx, (l.WeatherPicY+y*l.Scale)*weatherScale+dy, c)
+						}
 					}
 				}
 			}

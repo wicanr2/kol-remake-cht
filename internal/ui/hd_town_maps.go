@@ -163,6 +163,9 @@ func (h *HD) drawTownMap(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) 
 		op.Filter = ebiten.FilterNearest
 		dst.DrawImage(tile, &op)
 	}
+	if h.drawMotionTownMarker(dst, out) {
+		return true, nil
+	}
 	if overlay := out.MarkerOverlay(); overlay != nil {
 		row, col := out.MarkerCell()
 		for y := 0; y < town.MarkerSide; y++ {

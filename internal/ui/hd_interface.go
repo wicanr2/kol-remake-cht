@@ -208,9 +208,7 @@ func (h *HD) innHD(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 	if len(lines) == 0 {
 		lines = in.Dialog
 	}
-	if len(lines) > 9 || len(in.Title) > 2 {
-		return h.party(dst, sprites, sheetVisibleParty(in))
-	}
+
 	// 輸入游標子頁仍用現有文字引擎，避免改變哨符或遮蔽游標。
 	for _, line := range append(append([]string{}, in.Dialog...), in.DialogZh...) {
 		if strings.Contains(line, town.TextCaret) {
@@ -235,27 +233,55 @@ func (h *HD) innHD(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 		h.drawHD(dst, pic, hdRect(62, 398, 498, 356))
 	}
 	s.panel(dst, hdRect(612, 350, 1166, 118), false)
-	for i, line := range in.Title {
-		if i > 1 {
-			break
+	if len(in.Title) <= 2 {
+		for i, line := range in.Title {
+			size, ink, y, height := 34.0, hdGold, 360, 44
+			if i == 1 {
+				size, ink, y, height = 28, hdMuted, 412, 38
+			}
+			s.label(dst, s.word(line), hdRect(642, y, 1106, height), size, ink, true)
 		}
-		size, ink, y, height := 34.0, hdGold, 360, 44
-		if i == 1 {
-			size, ink, y, height = 28, hdMuted, 412, 38
+	} else {
+		titleStep := 52
+		if len(in.Title) > 2 {
+			titleStep = 108 / len(in.Title)
 		}
-		s.label(dst, s.word(line), hdRect(642, y, 1106, height), size, ink, true)
+		if titleStep < 22 {
+			return fmt.Errorf("HD標題超出安全矩形")
+		}
+		for i, line := range in.Title {
+			size := 34.0
+			ink := hdGold
+			if i > 0 {
+				size = 28
+				ink = hdMuted
+			}
+			if size > float64(titleStep-4) {
+				size = float64(titleStep - 4)
+			}
+			s.label(dst, s.word(line), hdRect(642, 360+i*titleStep, 1106, titleStep-4), size, ink, true)
+		}
+
 	}
 	s.panel(dst, hdRect(612, 504, 1166, 406), false)
 	size, step := 34.0, 50
 	if len(lines) > 7 {
 		size, step = 30, 42
 	}
-	for i, line := range lines {
-		if i >= 9 {
-			break
+	if len(lines) > 9 {
+		step = 374 / len(lines)
+		size = float64(step - 6)
+		if size > 30 {
+			size = 30
 		}
+	}
+	if size < 18 {
+		return fmt.Errorf("HD對話超出安全矩形")
+	}
+	for i, line := range lines {
 		s.label(dst, line, hdRect(650, 526+i*step, 1090, step-6), size, hdInk, false)
 	}
+
 	return h.toolbarHD(dst, sprites, in.Icons, in.Selected, false, true)
 }
 func (h *HD) outdoorHD(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) error {
