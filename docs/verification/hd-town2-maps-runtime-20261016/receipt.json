@@ -1,0 +1,932 @@
+{
+  "status": "PASS limited formal second-city map, Chinese and F10",
+  "scenes": 99,
+  "frames": 396,
+  "map_cameras": 84,
+  "source_cells": 4096,
+  "regions": 42,
+  "doors": 14,
+  "observed_Han_characters": 2376,
+  "missing_glyphs": 0,
+  "first_city_native_bytes_and_bindings_unchanged": true,
+  "source_count": 417,
+  "source_index_sha256": "5fd1468020eb5163effa283eb952224d0eb18fce8b996e3d46024447f7fa1fe8",
+  "asset_index_sha256": "9ae9a6bf923cbf164253aee6558508a157133a498d01e4c38af3a4d39487607d",
+  "captures_sha256": "12e54a2e9639b7eaad1a5775115d83e2625e31e6749423de7fa1887b09875e8f",
+  "gallery_sha256": "60cf28081731cbaf5f0695a4399beef58a17c490322e11fd2854943b14a82c23",
+  "records": [
+    {
+      "case": "camera-00-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-17",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-23",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-29",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-35",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-41",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-47",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-53",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-59",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-00-63",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-17",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-23",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-29",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-35",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-41",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-47",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-53",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-59",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-11-63",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-17",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-23",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-29",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-35",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-41",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-47",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-53",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-59",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-23-63",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-17",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-23",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-29",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-35",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-41",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-47",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-53",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-59",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-35-63",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-17",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-23",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-29",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-35",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-41",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-47",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-53",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-59",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-47-63",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-17",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-23",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-29",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-35",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-41",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-47",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-53",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-59",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-59-63",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-17",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-23",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-29",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-35",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-41",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-47",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-53",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-59",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "camera-63-63",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 1,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-00",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-01",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-02",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-03",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-04",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-05",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-06",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-07",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-08",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-09",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-10",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-11",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-12",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "door-13",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    },
+    {
+      "case": "edge",
+      "EGA_RGBA_exact": true,
+      "Chinese_equal": true,
+      "serializable_Outdoor_equal": true,
+      "native_composite_max": 0,
+      "outside_viewport_max": 0
+    }
+  ],
+  "original_oracle": false,
+  "normal_player_path": false,
+  "GUI_F10": true,
+  "whole_preview_max": 0,
+  "formal_asset_index_sha256": "cf278f62346ab8ae6f7ef45feb1ba45404049a36380a332f20ee8ef876185160",
+  "scope": "Prepared TOWN2 complete map, typed doors and edge, actual production rendering; original EGA walking marker retained; other HD remains open.",
+  "date": "2026-10-16",
+  "HD_asset_count": 478,
+  "verification_source_count": 420,
+  "GUI_display_events": 12,
+  "GUI_roundtrip_max": 1,
+  "program_sha256": "3771796a1ffbecaaed6d6d960ae6afb57791bbc5cfd5e980affe703b2128ecba",
+  "formal_gallery_sha256": "60cf28081731cbaf5f0695a4399beef58a17c490322e11fd2854943b14a82c23",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "manifest_sha256": "7540283c87170ce680f89016ef2c1b0406bb2173b3b8d2575bdd7435d3f0d141",
+  "generation_sha256": "7b122b1e0f2ec6e7c3ad7cc9c1c0b243fe198e10a0d4f4538c30c5e80ca49287",
+  "rights": "source-bound PNG accepted for current private repository only; no public distribution rights asserted",
+  "save_scope": "Production map data, rules and v3 code unchanged. Complete serializable Outdoor kept by rendering and F10. Existing v3 unit regressions run in full suite; no new normal TOWN2 save journey claimed.",
+  "limits": "Linux Docker controlled scenes only; EGA walking marker retained; other town/world maps and all-HD goal open; old Release/tag unchanged; no original oracle or native-platform acceptance.",
+  "attachments": {
+    "asset-inputs.json": {
+      "size": 60795,
+      "sha256": "cf278f62346ab8ae6f7ef45feb1ba45404049a36380a332f20ee8ef876185160"
+    },
+    "build-formal.sh": {
+      "size": 3125,
+      "sha256": "70d05ee1f4b95e14f056b0c266c9f22cb795afa1352905e836dfa581cc136ccf"
+    },
+    "captures.json": {
+      "size": 155032,
+      "sha256": "12e54a2e9639b7eaad1a5775115d83e2625e31e6749423de7fa1887b09875e8f"
+    },
+    "check.json": {
+      "size": 21677,
+      "sha256": "817a6092ab333e4db8f15973239efbd374aa6e1a7271dbac0639555474ea3e5f"
+    },
+    "check.py": {
+      "size": 5078,
+      "sha256": "ab98f88ceb91a1a6a89e608670dd797a9a03f6cb4fb47f1cac63d3aa77ff4919"
+    },
+    "door-review.json": {
+      "size": 2459,
+      "sha256": "a42d6ea39a69d6e9d773e47ec19fd5283590483d81caae71297ee6594eb62320"
+    },
+    "gallery.go.txt": {
+      "size": 6384,
+      "sha256": "e0d692453c20a7a2be9ff2b308a61ab7617c0dd4480514b9bc9892ece1ca4972"
+    },
+    "gallery.log": {
+      "size": 2267,
+      "sha256": "9c1acd6c45d1acaa6a2e76e13edd21d5376ec34718a6ca16eb62e65bf3b589d0"
+    },
+    "gui-check.json": {
+      "size": 2196,
+      "sha256": "818855b99cc61cdda1ebb0b6ede502a3653c79457cdf9fd58d7c9bdec44df809"
+    },
+    "gui.py": {
+      "size": 7164,
+      "sha256": "573bb97475d37e2dd7437af87d92a163da859755dd09104cc5540106fd151d3e"
+    },
+    "map-gate-ega.png": {
+      "size": 25616,
+      "sha256": "c411d5a46ea0fa177560a3cd692794b69ac1bddc7185298d767648123859fec5"
+    },
+    "map-gate-hd.png": {
+      "size": 2050262,
+      "sha256": "2f2e421132cd896c1fcf16480490f4afb749bd596e708bf999572c220f6b68b0"
+    },
+    "map-keep-ega.png": {
+      "size": 23615,
+      "sha256": "da59b8b5bb4db6d8b8174200a2b0888bdeb5607537d346f285ae53836f4ce4b7"
+    },
+    "map-keep-hd.png": {
+      "size": 1810003,
+      "sha256": "e117721480906192f856f3d82aca720be639c788404b20d9feb839721f36c3a7"
+    },
+    "map-lake-ega.png": {
+      "size": 28782,
+      "sha256": "0457c82f435a0974f3250a9a8ef2424d5f5b1523844a0e6e0b10015cff16cad5"
+    },
+    "map-lake-hd.png": {
+      "size": 2117932,
+      "sha256": "8d6f5848784e9709389bf5ed719e6b87b755ba0e1b90f0f90cee746757fc2bc6"
+    },
+    "preview-check.json": {
+      "size": 21552,
+      "sha256": "0bd948d13d8d3fdae4d5f5abc842285cc3f10bc21c6914ef20c2fbcefb9b3013"
+    },
+    "review.html": {
+      "size": 1167,
+      "sha256": "04655142a2665752406bff233b03800b34d652450be98c31a8531fdd6e429e54"
+    },
+    "sceneverify.log": {
+      "size": 56,
+      "sha256": "2192feec882c62d6e3cffa5ff38b3ec4efc324a405ad7c1294602a166105d3a6"
+    },
+    "source-inputs.json": {
+      "size": 43152,
+      "sha256": "5fd1468020eb5163effa283eb952224d0eb18fce8b996e3d46024447f7fa1fe8"
+    },
+    "tests.log": {
+      "size": 1580,
+      "sha256": "38b63d21c5e38120cef4fa84a8744bf201be9f7702af8e3c5d2ba354756bf01f"
+    },
+    "town-maps-generation.json": {
+      "size": 226264,
+      "sha256": "7b122b1e0f2ec6e7c3ad7cc9c1c0b243fe198e10a0d4f4538c30c5e80ca49287"
+    },
+    "town-maps-manifest.json": {
+      "size": 45577,
+      "sha256": "7540283c87170ce680f89016ef2c1b0406bb2173b3b8d2575bdd7435d3f0d141"
+    },
+    "verification-helper.go.txt": {
+      "size": 177,
+      "sha256": "f8fcb0b66c35bd141469ff8acfca3a564348cc566a7cf7da7f2a49b3df4b53a5"
+    },
+    "verification-source-inputs.json": {
+      "size": 43486,
+      "sha256": "61e9e1fcdb895ed90b507d8a72b34d5db3c629cf53cbb80c705ff8900eb446fa"
+    }
+  }
+}

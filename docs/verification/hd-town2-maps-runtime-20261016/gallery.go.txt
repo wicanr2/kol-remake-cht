@@ -1,0 +1,64 @@
+package main
+
+import (
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "image"
+ "os"
+ "path/filepath"
+ "reflect"
+ "testing"
+ "unicode"
+ "github.com/hajimehoshi/ebiten/v2"
+ "github.com/wicanr2/kol-remake-cht/internal/assets"
+ "github.com/wicanr2/kol-remake-cht/internal/font"
+ "github.com/wicanr2/kol-remake-cht/internal/flow"
+ "github.com/wicanr2/kol-remake-cht/internal/town"
+ "github.com/wicanr2/kol-remake-cht/internal/ui"
+)
+
+func attachPositionCity(m *game)error{
+ lib,e:=assets.LoadHDTownMaps("/out/candidate-assets");if e!=nil{return e};if e=lib.ValidateSources(m.sprites.lib);e!=nil{return e}
+ var sources []ui.HDTownMapSource;var arts []ui.HDTownMapArt
+ for _,s:=range lib.Manifest.Maps{sources=append(sources,ui.HDTownMapSource{GridSource:ui.HDPageSource{Archive:s.Archive,Index:0,RGB:s.Grid.SourceRGB},AtlasSource:ui.HDPageSource{Archive:s.Archive,Index:1,RGB:s.Atlas.SourceRGB},Grid:lib.Grids[s.Archive]})}
+ for i,r:=range lib.Manifest.Regions{a,b:=r.SourceBounds,r.VisibleBounds;arts=append(arts,ui.HDTownMapArt{Archive:r.Archive,SourceBounds:image.Rect(a[0],a[1],a[2],a[3]),VisibleBounds:image.Rect(b[0],b[1],b[2],b[3]),Paint:lib.Images[i]})}
+ return m.hdCache.AttachTownMaps(sources,arts)
+}
+type positionCityFrame struct {Case,Variant,PNG,SHA,StateSHA string;Text []string;Han int}
+type positionCityCase struct {Name string;State *town.Outdoor}
+type positionCityGallery struct {base,candidate *game;cases []positionCityCase;frames []positionCityFrame;i,j int;done bool;err error;states map[string][]byte;words map[string][]string}
+func(g *positionCityGallery)Update()error{if g.err!=nil{return g.err};if g.done{return ebiten.Termination};return nil}
+func(g *positionCityGallery)Layout(int,int)(int,int){return 1920,1200}
+func(g *positionCityGallery)Draw(dst *ebiten.Image){
+ if g.done||g.err!=nil{return};if g.j<2{restore:=g.base.hdCache.SuspendTownMapVerification();defer restore()};c:=g.cases[g.i];m:=g.base;if g.j>=2{m=g.candidate};m.outdoor=c.State;mode:="ega";if g.j%2==1{mode="hd"};variant:="baseline-"+mode;if g.j>=2{variant="candidate-"+mode}
+ before,e:=json.Marshal(c.State);if e!=nil{g.err=e;return};if g.j==0{g.states[c.Name]=before}else if string(before)!=string(g.states[c.Name]){g.err=fmt.Errorf("Outdoor changed");return}
+ if g.err=m.setGraphics(mode);g.err!=nil{return}
+ var words []string;font.DrawObserver=func(_,s string){words=append(words,s)};g.err=m.render();font.DrawObserver=nil;if g.err!=nil{return}
+ if g.j==0{g.words[c.Name]=words}else if !reflect.DeepEqual(words,g.words[c.Name]){g.err=fmt.Errorf("Chinese changed");return}
+ if g.err=m.presentHD();g.err!=nil{return};after,e:=json.Marshal(c.State);if e!=nil||string(after)!=string(before){g.err=fmt.Errorf("renderer changed state");return}
+ han:=0;for _,s:=range words{for _,r:=range s{if unicode.Is(unicode.Han,r){han++}}};if han==0{g.err=fmt.Errorf("missing Chinese");return}
+ name:=c.Name+"-"+variant+".png";sum,e:=crestPNG(filepath.Join("/out/formal-city-runtime",name),m.outputCanvas().Image());if e!=nil{g.err=e;return};g.frames=append(g.frames,positionCityFrame{c.Name,variant,name,sum,fmt.Sprintf("%x",sha256.Sum256(before)),words,han})
+ var op ebiten.DrawImageOptions;if mode=="ega"{op.GeoM.Scale(2,2)};dst.DrawImage(m.outputCanvas().Image(),&op)
+ g.j++;if g.j==4{g.j=0;g.i++;g.done=g.i==len(g.cases);fmt.Printf("position city%d/%d\n",g.i,len(g.cases))}
+}
+func positionCityOutdoor(t *testing.T,m *game,cx,cy int)*town.Outdoor{
+ t.Helper();must:=func(e error){if e!=nil{t.Fatal(e)}};out,e:=town.LoadOutdoor("/src/docs/re/town1-outdoor-sample.json");must(e);im,_,e:=m.sprites.lib.Decode("TOWN2",0);must(e);grid,e:=town.LoadGrid(im);must(e);out.SetGrid(grid)
+ marker,_,e:=m.sprites.lib.Decode(town.MarkerArchive,0);must(e);markers,e:=town.LoadMarkers(marker);must(e);out.SetMarkers(markers);buildings,e:=town.LoadBuildings("/src/assets/original-derived-data/town-buildings.json");must(e);out.SetBuildings(buildings.Town(2))
+ out.Town=2;out.Bounds.MinX=0;out.Bounds.MaxX=63;out.Bounds.MinY=0;out.Bounds.MaxY=63;out.Camera.X=cx;out.Camera.Y=cy;out.Marker.Row=0;out.Marker.Col=0;out.Marker.Frame=1;out.AtDoorCell=false;out.AtEdge=false;return out
+}
+func TestHDPositionCity(t *testing.T){
+ if os.Getenv("KOL_POSITION_CITY")!="1"{t.Skip("isolated complete city capture")};must:=func(e error){if e!=nil{t.Fatal(e)}}
+ base,_:=crestSetup(t);candidate:=base;raw,e:=os.ReadFile("/out/formal-city-cameras.json");must(e);var conf struct{Centers [][2]int};must(json.Unmarshal(raw,&conf))
+ g:=&positionCityGallery{base:base,candidate:candidate,states:map[string][]byte{},words:map[string][]string{}}
+ for _,c:=range conf.Centers{g.cases=append(g.cases,positionCityCase{fmt.Sprintf("camera-%02d-%02d",c[0],c[1]),positionCityOutdoor(t,candidate,c[0],c[1])})}
+ edge:=positionCityOutdoor(t,candidate,0,0);edge.AtEdge=true;g.cases=append(g.cases,positionCityCase{"edge",edge})
+ buildings,e:=town.LoadBuildings("/src/assets/original-derived-data/town-buildings.json");must(e)
+ for _,d:=range buildings.Town(2).Doors{out:=positionCityOutdoor(t,candidate,d.X,d.Y);out.AtDoorCell=true;if out.AtDoor()==nil{t.Fatal("door not found")};g.cases=append(g.cases,positionCityCase{fmt.Sprintf("door-%02d",d.Index),out})}
+ ebiten.SetWindowSize(960,600);ebiten.SetTPS(60);must(ebiten.RunGame(g));must(g.err)
+ data,e:=json.MarshalIndent(map[string]any{"status":"formal same-execution before/after capture; independent check pending","frames":g.frames,"scenes":len(g.cases),"map_scenes":len(conf.Centers),"source_cells":4096,"regions":42,"original_oracle":false,"normal_player_path":false,"GUI_F10":false,"scope":"Actual OutdoorCJK/presentHD/outdoorHD position rendering; prepared real TOWN2 map/cameras/markers/doors. Other towns and whole HD goal remain open."},"","  ");must(e);must(os.WriteFile("/out/formal-city-captures.json",append(data,'\n'),0644))
+}
+func TestHDPositionCityGUI(t *testing.T){
+ if os.Getenv("KOL_POSITION_CITY_GUI")!="1"{t.Skip("explicit controlled GUI")};m,_:=crestSetup(t);out:=positionCityOutdoor(t,m,37,45);m.play=&town.Session{Outdoor:out,Party:out.Party};m.flow=&flow.Flow{Scene:flow.SceneTown,Town:m.play};m.scene=sceneFlow;m.interactive=true;m.logInput=true;m.walkTick=-1073741824
+ ebiten.SetWindowSize(1920,1200);ebiten.SetWindowTitle("第二城連續手繪HD切換驗收");ebiten.SetTPS(60);if e:=ebiten.RunGame(&crestGUIObserver{m});e!=nil{t.Fatal(e)};if m.drawErr!=nil{t.Fatal(m.drawErr)}
+}

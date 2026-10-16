@@ -1,0 +1,3 @@
+package ui
+// Disposable verification only. Never enters production.
+func(h *HD)SuspendTownMapVerification()func(){old:=h.townMaps;h.townMaps=nil;return func(){h.townMaps=old}}

@@ -217,6 +217,18 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [比較頁](docs/verification/hd-town-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town-maps-runtime-20261016.md)記錄42個區塊、中文、F10及存讀檔範圍。
 
+### 開發版：第二城連續手繪地圖
+
+第二城已接入42區連續手繪地圖，涵蓋環水城牆、城內湖岸、城堡與南門木橋。以下為正式重製程式在同一受控狀態下的比較，遊戲內可用F10切換EGA／HD；尚未納入現行發行包。
+
+| 重製中文 EGA | 正式 HD |
+|---|---|
+| ![第二城湖岸EGA](docs/verification/hd-town2-maps-runtime-20261016/map-lake-ega.png) | ![第二城連續手繪湖岸HD](docs/verification/hd-town2-maps-runtime-20261016/map-lake-hd.png) |
+| ![第二城南門木橋EGA](docs/verification/hd-town2-maps-runtime-20261016/map-gate-ega.png) | ![第二城手繪南門木橋HD](docs/verification/hd-town2-maps-runtime-20261016/map-gate-hd.png) |
+| ![第二城城堡與湖岸EGA](docs/verification/hd-town2-maps-runtime-20261016/map-keep-ega.png) | ![第二城手繪城堡與湖岸HD](docs/verification/hd-town2-maps-runtime-20261016/map-keep-hd.png) |
+
+[比較頁](docs/verification/hd-town2-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town2-maps-runtime-20261016.md)記錄全4096格、中文及鍵鼠F10驗證。原地圖、門位、通行與存檔格式保持；走路標記、其餘城鎮及世界地圖仍待HD化。本批為受控場景驗收。
+
 ### 事件畫面：原版與 HD
 
 七段結局已接入開發版，沿用手繪、紅黑銅框與原生 HD 中文。現行 `v.1.0.2-20261013` 發行包保持，尚未包含本批。

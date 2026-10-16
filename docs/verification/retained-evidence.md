@@ -473,3 +473,9 @@ Book 五／Town 17 仍有 22 函式、21161 CODE bytes 未還原；DATA 來源�
 保存清冊位於`local/hd-town-maps-20261016/retention.json`。沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town-maps-20261016`；`delete hd-town-maps-20261016`逐檔核對後只清理本批。正式重生沿[第一城驗收頁](hd-town-maps-runtime-20261016.md)的固定來源、鎖版工具鏈及原腳本名稱，支援範圍限Linux Docker。硬連結以獨立一般檔封存，符號連結仍拒絕；暫存來源別名已移除並保存重建方法。
 
 本批保存1667份檔案，11份可重建程式只留雜湊；原1731586218 bytes壓縮為1253807628 bytes，SHA-256為`48966f91f9343c2f0f310c96c8d62a14ab347b9707cb2e1ed2d7b63935a8b305`。已在獨立唯讀容器逐檔驗證；原A／B選案頁及六張對照圖片另保存可閱讀入口。
+
+## 第二城連續手繪地圖HD正式接入
+
+[正式驗收](hd-town2-maps-runtime-20261016.md)保存417份Go／module、478份HD資產、正式99場景396畫格、2376漢字與12個F10事件。隔離完整全城、三張修正前原稿、42張原生圖片、逐張提示、五段拼接診斷、14門位與工具腳本中止紀錄只留本機。
+
+保存清冊位於`local/hd-town2-maps-20261016/retention.json`。沿本頁Docker掛載執行`tools/retain_verification.py verify hd-town2-maps-20261016`；`delete hd-town2-maps-20261016`逐檔核對後只清理本批。完整重生依[第二城驗收頁](hd-town2-maps-runtime-20261016.md)的固定來源、鎖版工具鏈、空輸出目錄及原腳本名稱，範圍限Linux Docker；執行檔只留雜湊並重建。

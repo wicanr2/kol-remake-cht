@@ -23,7 +23,7 @@ func TestHDTownMapsRealSources(t *testing.T) {
 	if err = m.ValidateSources(lib); err != nil {
 		t.Fatal(err)
 	}
-	if len(m.Images) != 42 || len(m.Grids) != 1 {
+	if len(m.Images) != 84 || len(m.Grids) != 2 || m.Grids["TOWN2"] == nil {
 		t.Fatal("incomplete city")
 	}
 	before := m.Grids["TOWN1"]
@@ -51,6 +51,13 @@ func TestHDTownMapsRealSources(t *testing.T) {
 		})
 	}
 	m.Manifest.Maps[0] = original
+	second := m.Manifest.Maps[1]
+	beforeSecond := m.Grids["TOWN2"]
+	m.Manifest.Maps[1].Count = 3
+	if m.ValidateSources(lib) == nil || m.Grids["TOWN1"] != before || m.Grids["TOWN2"] != beforeSecond {
+		t.Fatal("invalid second city partially replaced the complete group")
+	}
+	m.Manifest.Maps[1] = second
 	changedLib := *lib
 	changedLib.index = map[string]map[int]Image{}
 	for a, entries := range lib.index {
@@ -112,6 +119,8 @@ func TestHDTownMapsRejectPartial(t *testing.T) {
 		{"wrong-source-count", func(m *HDTownMapsManifest) { m.Maps[0].Count = 256 }},
 		{"wrong-generation", func(m *HDTownMapsManifest) { m.GenerationSHA = strings.Repeat("0", 64) }},
 		{"missing-last-png", func(m *HDTownMapsManifest) {}},
+		{"missing-second-city-region", func(m *HDTownMapsManifest) { m.Regions = m.Regions[:len(m.Regions)-1] }},
+		{"missing-second-city-png", func(m *HDTownMapsManifest) {}},
 		{"transparent-native", func(m *HDTownMapsManifest) {}},
 	}
 	for _, tc := range cases {
@@ -140,6 +149,9 @@ func TestHDTownMapsRejectPartial(t *testing.T) {
 					continue
 				}
 				if tc.name == "missing-last-png" && name == "town1-r06-c05.png" {
+					continue
+				}
+				if tc.name == "missing-second-city-png" && name == "town2-r06-c05.png" {
 					continue
 				}
 				if err := os.Symlink(filepath.Join(root, name), filepath.Join(dir, name)); err != nil {

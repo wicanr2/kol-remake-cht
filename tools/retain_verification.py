@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path('/src')
 OUT = Path('/out')
 NAMES = (
+    'hd-town2-maps-20261016',
     'hd-town-maps-20261016',
     'hd-town-crests-20261015',
     'hd-town-facades-20261015',

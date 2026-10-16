@@ -20,6 +20,24 @@
         "source_rgb_sha256": "754737d8e0db7d3b9cb92b15497462f3fddfd2cd2eccf771ff81403d169fea2e"
       },
       "atlas_rgba_sha256": "43313f86a19387beeab624078623a02e81cd2f1305c0111bc378071f4c57c60a"
+    },
+    {
+      "archive": "TOWN2",
+      "archive_count": 2,
+      "grid": {
+        "archive": "TOWN2",
+        "index": 0,
+        "source_png_sha256": "587b386b4ba90f2fa2294a6000f9446c249e454d74f213b4cf60c3e97f331667",
+        "source_rgb_sha256": "241db8ca4589f2162f3b13d84e100aadd785e9fb70e0ae3a80c3a8aa66ce1f2f"
+      },
+      "grid_rgba_sha256": "64e3ce52694d4c5ca0c6d04dce9a5f2dca4c8b53c740dc235b011b9c56c257c4",
+      "atlas": {
+        "archive": "TOWN2",
+        "index": 1,
+        "source_png_sha256": "89bfb849436711796d99e0429cb1540cfdebc5f6538b07946dca6a47056bd668",
+        "source_rgb_sha256": "5638bcadf5c4eae5a5e564dd9b3e287f385e853c3f6c7cbbc2e16f01ab56ae62"
+      },
+      "atlas_rgba_sha256": "b50618bdd18a0aa19d3ea938eb5e9a9462c41a2e328d7aba92cc264cb498d031"
     }
   ],
   "regions": [
@@ -778,6 +796,762 @@
       ],
       "file": "town1-r06-c05.png",
       "native_rgba_sha256": "cfcc0deb055b2483076a022f964d557f692f505ebcc5debdc40abc860394a9a1"
+    },
+    {
+      "id": "town2-r00-c00",
+      "archive": "TOWN2",
+      "source_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "visible_bounds": [
+        0,
+        0,
+        6,
+        3
+      ],
+      "file": "town2-r00-c00.png",
+      "native_rgba_sha256": "850ddf7fe77e7dd355c9b3a14d3f5cb42c672a5f98bac563f687b97700a27089"
+    },
+    {
+      "id": "town2-r00-c01",
+      "archive": "TOWN2",
+      "source_bounds": [
+        6,
+        0,
+        18,
+        12
+      ],
+      "visible_bounds": [
+        6,
+        0,
+        18,
+        3
+      ],
+      "file": "town2-r00-c01.png",
+      "native_rgba_sha256": "9919fc96bc21218fd439dada02dd86e1e86a947638af1422f02da2e350940217"
+    },
+    {
+      "id": "town2-r00-c02",
+      "archive": "TOWN2",
+      "source_bounds": [
+        18,
+        0,
+        30,
+        12
+      ],
+      "visible_bounds": [
+        18,
+        0,
+        30,
+        3
+      ],
+      "file": "town2-r00-c02.png",
+      "native_rgba_sha256": "861c74a4d97351e68d77b1eaa0e9c0cc56bd9a2c6701e5f30a9934f001052cd5"
+    },
+    {
+      "id": "town2-r00-c03",
+      "archive": "TOWN2",
+      "source_bounds": [
+        30,
+        0,
+        42,
+        12
+      ],
+      "visible_bounds": [
+        30,
+        0,
+        42,
+        3
+      ],
+      "file": "town2-r00-c03.png",
+      "native_rgba_sha256": "65f1125e07cf869c3ecfa85d0291df0ad9d86d1f4368879e26e1b44456bb2041"
+    },
+    {
+      "id": "town2-r00-c04",
+      "archive": "TOWN2",
+      "source_bounds": [
+        42,
+        0,
+        54,
+        12
+      ],
+      "visible_bounds": [
+        42,
+        0,
+        54,
+        3
+      ],
+      "file": "town2-r00-c04.png",
+      "native_rgba_sha256": "667a8da4513a9aea0c378fd392cf29ec12ef2bf0ccc51306af91736f2b5fa2e2"
+    },
+    {
+      "id": "town2-r00-c05",
+      "archive": "TOWN2",
+      "source_bounds": [
+        52,
+        0,
+        64,
+        12
+      ],
+      "visible_bounds": [
+        54,
+        0,
+        64,
+        3
+      ],
+      "file": "town2-r00-c05.png",
+      "native_rgba_sha256": "0d58a5a3bb989d369517205a6af4c5fb801e917c19716d7267320c754f411b9b"
+    },
+    {
+      "id": "town2-r01-c00",
+      "archive": "TOWN2",
+      "source_bounds": [
+        0,
+        3,
+        12,
+        15
+      ],
+      "visible_bounds": [
+        0,
+        3,
+        6,
+        15
+      ],
+      "file": "town2-r01-c00.png",
+      "native_rgba_sha256": "71c78fb4d5e67bc9ff3f3d60641cc6e30399abe899e9402e3a97074c99ba36dc"
+    },
+    {
+      "id": "town2-r01-c01",
+      "archive": "TOWN2",
+      "source_bounds": [
+        6,
+        3,
+        18,
+        15
+      ],
+      "visible_bounds": [
+        6,
+        3,
+        18,
+        15
+      ],
+      "file": "town2-r01-c01.png",
+      "native_rgba_sha256": "b444f2f2aff386b22fe39a0f72323374db2100be5476103023d7417865e399ff"
+    },
+    {
+      "id": "town2-r01-c02",
+      "archive": "TOWN2",
+      "source_bounds": [
+        18,
+        3,
+        30,
+        15
+      ],
+      "visible_bounds": [
+        18,
+        3,
+        30,
+        15
+      ],
+      "file": "town2-r01-c02.png",
+      "native_rgba_sha256": "b5b8d026854f9356cc0e2361f7a78f2abbe7be99ab5b9fda9e35597ffeda374f"
+    },
+    {
+      "id": "town2-r01-c03",
+      "archive": "TOWN2",
+      "source_bounds": [
+        30,
+        3,
+        42,
+        15
+      ],
+      "visible_bounds": [
+        30,
+        3,
+        42,
+        15
+      ],
+      "file": "town2-r01-c03.png",
+      "native_rgba_sha256": "00bc48e017fb7cbdb24b7b4baf7a6ffbd06471583e42cbf3eb7aa967602d0e0a"
+    },
+    {
+      "id": "town2-r01-c04",
+      "archive": "TOWN2",
+      "source_bounds": [
+        42,
+        3,
+        54,
+        15
+      ],
+      "visible_bounds": [
+        42,
+        3,
+        54,
+        15
+      ],
+      "file": "town2-r01-c04.png",
+      "native_rgba_sha256": "f5b6e7735e67df50265a942e244ea02b7902f115445df8970abf2a9fe7b7663a"
+    },
+    {
+      "id": "town2-r01-c05",
+      "archive": "TOWN2",
+      "source_bounds": [
+        52,
+        3,
+        64,
+        15
+      ],
+      "visible_bounds": [
+        54,
+        3,
+        64,
+        15
+      ],
+      "file": "town2-r01-c05.png",
+      "native_rgba_sha256": "ec406e91457ac825ea1ddb7c95aae18d8978d87f1f58dde86cf51520593f4eff"
+    },
+    {
+      "id": "town2-r02-c00",
+      "archive": "TOWN2",
+      "source_bounds": [
+        0,
+        15,
+        12,
+        27
+      ],
+      "visible_bounds": [
+        0,
+        15,
+        6,
+        27
+      ],
+      "file": "town2-r02-c00.png",
+      "native_rgba_sha256": "8cd267addab3fbf7aa0a410b4805a35f47306b1079861335af19c350b66f486b"
+    },
+    {
+      "id": "town2-r02-c01",
+      "archive": "TOWN2",
+      "source_bounds": [
+        6,
+        15,
+        18,
+        27
+      ],
+      "visible_bounds": [
+        6,
+        15,
+        18,
+        27
+      ],
+      "file": "town2-r02-c01.png",
+      "native_rgba_sha256": "3b54b32516b445eaf10c4d95c58b7ff3b53306baad7bf8423c5ed085f6957b3e"
+    },
+    {
+      "id": "town2-r02-c02",
+      "archive": "TOWN2",
+      "source_bounds": [
+        18,
+        15,
+        30,
+        27
+      ],
+      "visible_bounds": [
+        18,
+        15,
+        30,
+        27
+      ],
+      "file": "town2-r02-c02.png",
+      "native_rgba_sha256": "a6b38d5f270a0ba627aa52010df331a813bda6b2912a7560e2db56fb958e740e"
+    },
+    {
+      "id": "town2-r02-c03",
+      "archive": "TOWN2",
+      "source_bounds": [
+        30,
+        15,
+        42,
+        27
+      ],
+      "visible_bounds": [
+        30,
+        15,
+        42,
+        27
+      ],
+      "file": "town2-r02-c03.png",
+      "native_rgba_sha256": "5dab16bdbea86590e7b9648c0e850d2b04f4ef7e52f9f8d20f2608ae947d509e"
+    },
+    {
+      "id": "town2-r02-c04",
+      "archive": "TOWN2",
+      "source_bounds": [
+        42,
+        15,
+        54,
+        27
+      ],
+      "visible_bounds": [
+        42,
+        15,
+        54,
+        27
+      ],
+      "file": "town2-r02-c04.png",
+      "native_rgba_sha256": "e849cdff033832fc7b8ba1cb081a7cbbb11afd7b70390f5086e7176077afdd38"
+    },
+    {
+      "id": "town2-r02-c05",
+      "archive": "TOWN2",
+      "source_bounds": [
+        52,
+        15,
+        64,
+        27
+      ],
+      "visible_bounds": [
+        54,
+        15,
+        64,
+        27
+      ],
+      "file": "town2-r02-c05.png",
+      "native_rgba_sha256": "c41715b5a481835db12eeadb5faf33c906d0091709b3abfd33d59298f2258e77"
+    },
+    {
+      "id": "town2-r03-c00",
+      "archive": "TOWN2",
+      "source_bounds": [
+        0,
+        27,
+        12,
+        39
+      ],
+      "visible_bounds": [
+        0,
+        27,
+        6,
+        39
+      ],
+      "file": "town2-r03-c00.png",
+      "native_rgba_sha256": "499b5ba51559af708a4b920f3caa0dfaf3a12f465a7872ac07ca9d44a736cd96"
+    },
+    {
+      "id": "town2-r03-c01",
+      "archive": "TOWN2",
+      "source_bounds": [
+        6,
+        27,
+        18,
+        39
+      ],
+      "visible_bounds": [
+        6,
+        27,
+        18,
+        39
+      ],
+      "file": "town2-r03-c01.png",
+      "native_rgba_sha256": "68d86f0e234680c25be42b53c5c549344972d77704c9e4ad786e8cd59db8830a"
+    },
+    {
+      "id": "town2-r03-c02",
+      "archive": "TOWN2",
+      "source_bounds": [
+        18,
+        27,
+        30,
+        39
+      ],
+      "visible_bounds": [
+        18,
+        27,
+        30,
+        39
+      ],
+      "file": "town2-r03-c02.png",
+      "native_rgba_sha256": "33a3cec361a82f640dd943063f1beb5ccef5f0882272a43e85ac629c084cda2e"
+    },
+    {
+      "id": "town2-r03-c03",
+      "archive": "TOWN2",
+      "source_bounds": [
+        30,
+        27,
+        42,
+        39
+      ],
+      "visible_bounds": [
+        30,
+        27,
+        42,
+        39
+      ],
+      "file": "town2-r03-c03.png",
+      "native_rgba_sha256": "74a8f61a4e14a8e56254856a39bafe98c085165e4cadfa7c5bea1f057c3b89d0"
+    },
+    {
+      "id": "town2-r03-c04",
+      "archive": "TOWN2",
+      "source_bounds": [
+        42,
+        27,
+        54,
+        39
+      ],
+      "visible_bounds": [
+        42,
+        27,
+        54,
+        39
+      ],
+      "file": "town2-r03-c04.png",
+      "native_rgba_sha256": "d20de8a03b95fdcc500a210cf21c8381466d80522296eef4e890ff9bba0fd842"
+    },
+    {
+      "id": "town2-r03-c05",
+      "archive": "TOWN2",
+      "source_bounds": [
+        52,
+        27,
+        64,
+        39
+      ],
+      "visible_bounds": [
+        54,
+        27,
+        64,
+        39
+      ],
+      "file": "town2-r03-c05.png",
+      "native_rgba_sha256": "f2eefb1c35977b15c90027bdda13b16f224cc852e2f347f1f9a3ffe3af705aa2"
+    },
+    {
+      "id": "town2-r04-c00",
+      "archive": "TOWN2",
+      "source_bounds": [
+        0,
+        39,
+        12,
+        51
+      ],
+      "visible_bounds": [
+        0,
+        39,
+        6,
+        51
+      ],
+      "file": "town2-r04-c00.png",
+      "native_rgba_sha256": "d39aa096e843493f6af270b938a9f5b6e07ca914602973e3dc7276190d21ce67"
+    },
+    {
+      "id": "town2-r04-c01",
+      "archive": "TOWN2",
+      "source_bounds": [
+        6,
+        39,
+        18,
+        51
+      ],
+      "visible_bounds": [
+        6,
+        39,
+        18,
+        51
+      ],
+      "file": "town2-r04-c01.png",
+      "native_rgba_sha256": "d8b500eaa0c6b867ccfcc280e70f1b06e4f811c92fedd243886e4b1086ff574d"
+    },
+    {
+      "id": "town2-r04-c02",
+      "archive": "TOWN2",
+      "source_bounds": [
+        18,
+        39,
+        30,
+        51
+      ],
+      "visible_bounds": [
+        18,
+        39,
+        30,
+        51
+      ],
+      "file": "town2-r04-c02.png",
+      "native_rgba_sha256": "2a801afd5444ee54edefd2ad1cf959160146447660422d625af15603a45036de"
+    },
+    {
+      "id": "town2-r04-c03",
+      "archive": "TOWN2",
+      "source_bounds": [
+        30,
+        39,
+        42,
+        51
+      ],
+      "visible_bounds": [
+        30,
+        39,
+        42,
+        51
+      ],
+      "file": "town2-r04-c03.png",
+      "native_rgba_sha256": "bcea2f02d1f27d41618c95c28523ed33c333d908f04412b10728e18ac7e9c01b"
+    },
+    {
+      "id": "town2-r04-c04",
+      "archive": "TOWN2",
+      "source_bounds": [
+        42,
+        39,
+        54,
+        51
+      ],
+      "visible_bounds": [
+        42,
+        39,
+        54,
+        51
+      ],
+      "file": "town2-r04-c04.png",
+      "native_rgba_sha256": "90f82e26fdf21e279a9b040d7d28f2fbe3f9ec6711c057776fd2bce052599688"
+    },
+    {
+      "id": "town2-r04-c05",
+      "archive": "TOWN2",
+      "source_bounds": [
+        52,
+        39,
+        64,
+        51
+      ],
+      "visible_bounds": [
+        54,
+        39,
+        64,
+        51
+      ],
+      "file": "town2-r04-c05.png",
+      "native_rgba_sha256": "eea3ff4d9b9747aa08f551689f2d58a401737001561d405fd9e0c0f2c9a4c6e8"
+    },
+    {
+      "id": "town2-r05-c00",
+      "archive": "TOWN2",
+      "source_bounds": [
+        0,
+        51,
+        12,
+        63
+      ],
+      "visible_bounds": [
+        0,
+        51,
+        6,
+        63
+      ],
+      "file": "town2-r05-c00.png",
+      "native_rgba_sha256": "cab9ca8b1a10877b1ddb3cdeaf3f5fc7b274b751d54b884dd60321ce39f9416b"
+    },
+    {
+      "id": "town2-r05-c01",
+      "archive": "TOWN2",
+      "source_bounds": [
+        6,
+        51,
+        18,
+        63
+      ],
+      "visible_bounds": [
+        6,
+        51,
+        18,
+        63
+      ],
+      "file": "town2-r05-c01.png",
+      "native_rgba_sha256": "3e5b812a8b6611821b18d83a45350ee74e87696596cde2501225f4ab2f8d6864"
+    },
+    {
+      "id": "town2-r05-c02",
+      "archive": "TOWN2",
+      "source_bounds": [
+        18,
+        51,
+        30,
+        63
+      ],
+      "visible_bounds": [
+        18,
+        51,
+        30,
+        63
+      ],
+      "file": "town2-r05-c02.png",
+      "native_rgba_sha256": "3ae145fa701e64a784d42f186b17138d650d58cc020983b8c01e902e477503ea"
+    },
+    {
+      "id": "town2-r05-c03",
+      "archive": "TOWN2",
+      "source_bounds": [
+        30,
+        51,
+        42,
+        63
+      ],
+      "visible_bounds": [
+        30,
+        51,
+        42,
+        63
+      ],
+      "file": "town2-r05-c03.png",
+      "native_rgba_sha256": "bacb2ec6a005751892cd55c0fabce710cb2a2e5fa3250ff602175e46241c5f6d"
+    },
+    {
+      "id": "town2-r05-c04",
+      "archive": "TOWN2",
+      "source_bounds": [
+        42,
+        51,
+        54,
+        63
+      ],
+      "visible_bounds": [
+        42,
+        51,
+        54,
+        63
+      ],
+      "file": "town2-r05-c04.png",
+      "native_rgba_sha256": "7409a863148d0ad6820aa639e7d7dac0ce414983edec13aa13b9262607ca2c4d"
+    },
+    {
+      "id": "town2-r05-c05",
+      "archive": "TOWN2",
+      "source_bounds": [
+        52,
+        51,
+        64,
+        63
+      ],
+      "visible_bounds": [
+        54,
+        51,
+        64,
+        63
+      ],
+      "file": "town2-r05-c05.png",
+      "native_rgba_sha256": "fe9a3f139a41c3edff5c91404d8a3bb4610dc4bc94b9748b363b28b3f6e05895"
+    },
+    {
+      "id": "town2-r06-c00",
+      "archive": "TOWN2",
+      "source_bounds": [
+        0,
+        52,
+        12,
+        64
+      ],
+      "visible_bounds": [
+        0,
+        63,
+        6,
+        64
+      ],
+      "file": "town2-r06-c00.png",
+      "native_rgba_sha256": "326d861bfc5e6b1cedd988cc5250594ad9039916edc685a2382551e61b60fb19"
+    },
+    {
+      "id": "town2-r06-c01",
+      "archive": "TOWN2",
+      "source_bounds": [
+        6,
+        52,
+        18,
+        64
+      ],
+      "visible_bounds": [
+        6,
+        63,
+        18,
+        64
+      ],
+      "file": "town2-r06-c01.png",
+      "native_rgba_sha256": "b47c7bcbe9819e5543ecbe812551df1fc96a7c56807b51f79575db879f416d84"
+    },
+    {
+      "id": "town2-r06-c02",
+      "archive": "TOWN2",
+      "source_bounds": [
+        18,
+        52,
+        30,
+        64
+      ],
+      "visible_bounds": [
+        18,
+        63,
+        30,
+        64
+      ],
+      "file": "town2-r06-c02.png",
+      "native_rgba_sha256": "5d999939bbd8d85aca9f2a0e21359a18b52835f79de923d4e0978edea0cd034a"
+    },
+    {
+      "id": "town2-r06-c03",
+      "archive": "TOWN2",
+      "source_bounds": [
+        30,
+        52,
+        42,
+        64
+      ],
+      "visible_bounds": [
+        30,
+        63,
+        42,
+        64
+      ],
+      "file": "town2-r06-c03.png",
+      "native_rgba_sha256": "6c68ed088f79236d20360ba5acae07ed66d9ec8f4fcabea85a6dd69ae31ad634"
+    },
+    {
+      "id": "town2-r06-c04",
+      "archive": "TOWN2",
+      "source_bounds": [
+        42,
+        52,
+        54,
+        64
+      ],
+      "visible_bounds": [
+        42,
+        63,
+        54,
+        64
+      ],
+      "file": "town2-r06-c04.png",
+      "native_rgba_sha256": "8dbd58b1a4801e042edec37b3c324f76c5684d1ce4ed0a9ad0bed3633efd137b"
+    },
+    {
+      "id": "town2-r06-c05",
+      "archive": "TOWN2",
+      "source_bounds": [
+        52,
+        52,
+        64,
+        64
+      ],
+      "visible_bounds": [
+        54,
+        63,
+        64,
+        64
+      ],
+      "file": "town2-r06-c05.png",
+      "native_rgba_sha256": "63ced90e9f93838c92982e2fa9e5be389d979545694bfdd7906711cd9013d066"
     }
   ],
   "files": {
@@ -990,7 +1764,217 @@
       "sha256": "8c1fc6bef64592a5e9842bd0eb29cd24448732effa65cd312bea3f7615bda055",
       "width": 1254,
       "height": 1254
+    },
+    "town2-r00-c00.png": {
+      "sha256": "45a0f1daf801d79fe3cbd738ffe88f42507d831cd78f0cd7ae68e697514bf706",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r00-c01.png": {
+      "sha256": "f5f2f492f03fb4f9cbdff04f9a16769d64ea33ecaf8819ea54fe7d6a56f248cd",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r00-c02.png": {
+      "sha256": "4797c8edd49bac91efe020c92bc63165977d60194d0f0e3bf26053eadf2f8cc5",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r00-c03.png": {
+      "sha256": "420d133674e20455cb285a861acba4f53fbff2f0f35666175034cf06c972f3be",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r00-c04.png": {
+      "sha256": "89590eef0903560823dfe3796b27447bf571de62df9a9a89909ccc998d03db23",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r00-c05.png": {
+      "sha256": "71d363e59efaae265668bdf065257b6f9c288aacb47af5e5eee2d8dd8f94d879",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r01-c00.png": {
+      "sha256": "106bd1cf6e142513e0ac44f5e4d72bf8bde118fabc6971689549187545feec8e",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r01-c01.png": {
+      "sha256": "1cbaf3650ff078bb56e92c5ee38589a291c44074fe682d633a14c8975c530dab",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r01-c02.png": {
+      "sha256": "aa6df250308ed0a6ebebbf2645199fcfe0da839cf75966b941c73c8d17a64714",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r01-c03.png": {
+      "sha256": "d781d56ac2c4ca74ceabf96c371710341b690c090740292e093f91ca5c5e6269",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r01-c04.png": {
+      "sha256": "4889b1dd60c96bd467e7dcb4d991e65311df779c3db2a930a01aef7e1fd9432f",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r01-c05.png": {
+      "sha256": "75d6ff7dcc2d6df45193ac2428daefe75068f55bdb76a2cfe39a6d2109ae77ba",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r02-c00.png": {
+      "sha256": "b6120587320101545e56dc8bc375968ea0c906874ba6b22f91cf95bf22479997",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r02-c01.png": {
+      "sha256": "978370a6b01c06ac35f3fb2ddd9481ae30b74a15d86246e2d54248561b0c6f51",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r02-c02.png": {
+      "sha256": "05ea97a8b7a7fa25cd7111319567f7d84ac975998f0460fc73a0ea5ea1bd2d0f",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r02-c03.png": {
+      "sha256": "515e62a9c4ecf04ba86c3d7a66457cb560b74b397526a0675883082780da3707",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r02-c04.png": {
+      "sha256": "67d8090b298b5c2ff2022a6502330bcd20b1d749b25b47a452b790bd1c7be7cb",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r02-c05.png": {
+      "sha256": "5d6cc9318a50f08a411838f9ecf56fb545f852959c5abff79e0a07668fe1cb06",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r03-c00.png": {
+      "sha256": "7901ae18d82076545549a400faa6e4db31db1ddf2022eed726661475058ff39c",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r03-c01.png": {
+      "sha256": "9178a1f5c0ded8d0596699651d456860339261d18842823ec63d79389eb0b34a",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r03-c02.png": {
+      "sha256": "a5317d89d36beb5d840c3cf5a3f8518a7f7a0c97d3acde2b595d3dc27db56976",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r03-c03.png": {
+      "sha256": "1b1de73843669025d4108c642369294455767f6bd9cf62d97624e949d0e252c5",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r03-c04.png": {
+      "sha256": "ec16cd9c568557e1a1202954a915e8dff11156aebbc64ddc8f5811aade57e56c",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r03-c05.png": {
+      "sha256": "1a6f24283d985ace483d9b8c6db5f846259763fad84d4163b74fe5d23b355932",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r04-c00.png": {
+      "sha256": "8793933e3ff8de6d2b6ae7f8e159c31e70b0e96a1f5b8400fd4b123bc29121e3",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r04-c01.png": {
+      "sha256": "7fdbdee124cb8662156aad4fbc1f27a5d3dde37af0c9ef4bb6ad3b9e9d8ea916",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r04-c02.png": {
+      "sha256": "a14331feed8269eef2d869f5d959c9659596d3eaab7525ae593878e7ff3ec6f1",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r04-c03.png": {
+      "sha256": "e15b3e2e3b21edffbe3b4ad349e86b6ec70d56bfae9d23aa8f7fb22ab81f791f",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r04-c04.png": {
+      "sha256": "5b9c5dc8531a190e18e2ac9d6a23d16d6ce383aa72d49f5240aa1680cc00b119",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r04-c05.png": {
+      "sha256": "a59698a97bc24deffff7dcf506bbb89e24123f60a9ef9b22841382058710ce90",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r05-c00.png": {
+      "sha256": "0af92c433064c774d1e774737412dffb5792559d62d4a02b0e0dd8094be9a18e",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r05-c01.png": {
+      "sha256": "9add4b86e6bf8234f82e3cc9cdab577f8f0b70324d3d1ac4de4a4ed7c19c2bc1",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r05-c02.png": {
+      "sha256": "99655b90613bb96398b3469581654db932e7d2dd2c49b847535e4121f7d563c4",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r05-c03.png": {
+      "sha256": "41ef62cbce11acb5df5a0efc4fedfefc9a1de2425e2386dd91b1bbd84b214589",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r05-c04.png": {
+      "sha256": "ebbe6b7bb67f6b08ae8bc2d10c3ee06ab4f9464a71a08fd248fca4e548b1cc08",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r05-c05.png": {
+      "sha256": "83cfeeda6c0880cc8bcb770595664f213f28d3ac0f460fa0af0a2b50d1029ab7",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r06-c00.png": {
+      "sha256": "7a5978e8715e3bf3f9595a6e2fe84268ea13d09f61b9874cc15f6896758eecc3",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r06-c01.png": {
+      "sha256": "53892ba9d2dcd0073db79b20139a29dbbb11bd38ba74a11258a259c57f405380",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r06-c02.png": {
+      "sha256": "d1e9913e4bbf9529eb22ea6162c413e65e8f3947b7a2a6d581d5c39291c40559",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r06-c03.png": {
+      "sha256": "32c266e1cea66db8452b4c1b816d1e4733515b77b63c10ee26c889268162770a",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r06-c04.png": {
+      "sha256": "ad8b95de9ab797aa5bd5b959c1e7269673d6c98574427cb5dcc02790b1381e4d",
+      "width": 1254,
+      "height": 1254
+    },
+    "town2-r06-c05.png": {
+      "sha256": "fab3ce83337a7c7649e74ce5ad6063104df44f582887ba67be480ee5e3f55c93",
+      "width": 1254,
+      "height": 1254
     }
   },
-  "generation_sha256": "a27e1cacb8aa61266f267f247b260e05015b73cb11663f9bf43bf9d41c1b519b"
+  "generation_sha256": "7b122b1e0f2ec6e7c3ad7cc9c1c0b243fe198e10a0d4f4538c30c5e80ca49287"
 }

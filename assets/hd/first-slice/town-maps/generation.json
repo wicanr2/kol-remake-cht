@@ -1,7 +1,7 @@
 {
   "schema": "kol-hd-town-maps-generation/1",
   "decision": "2026-10-16 user selected A position-bound continuous painting",
-  "status": "READY first-city position paintings; formal acceptance pending",
+  "status": "READY first and second-city position paintings; second-city formal acceptance pending",
   "rights": "source-bound HD PNG; private repository only; no public distribution rights asserted",
   "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
   "maps": [
@@ -22,6 +22,24 @@
         "source_rgb_sha256": "754737d8e0db7d3b9cb92b15497462f3fddfd2cd2eccf771ff81403d169fea2e"
       },
       "atlas_rgba_sha256": "43313f86a19387beeab624078623a02e81cd2f1305c0111bc378071f4c57c60a"
+    },
+    {
+      "archive": "TOWN2",
+      "archive_count": 2,
+      "grid": {
+        "archive": "TOWN2",
+        "index": 0,
+        "source_png_sha256": "587b386b4ba90f2fa2294a6000f9446c249e454d74f213b4cf60c3e97f331667",
+        "source_rgb_sha256": "241db8ca4589f2162f3b13d84e100aadd785e9fb70e0ae3a80c3a8aa66ce1f2f"
+      },
+      "grid_rgba_sha256": "64e3ce52694d4c5ca0c6d04dce9a5f2dca4c8b53c740dc235b011b9c56c257c4",
+      "atlas": {
+        "archive": "TOWN2",
+        "index": 1,
+        "source_png_sha256": "89bfb849436711796d99e0429cb1540cfdebc5f6538b07946dca6a47056bd668",
+        "source_rgb_sha256": "5638bcadf5c4eae5a5e564dd9b3e287f385e853c3f6c7cbbc2e16f01ab56ae62"
+      },
+      "atlas_rgba_sha256": "b50618bdd18a0aa19d3ea938eb5e9a9462c41a2e328d7aba92cc264cb498d031"
     }
   ],
   "regions": [
@@ -1176,7 +1194,1163 @@
       "revisions": [],
       "tool": "built-in imagegen; native PNG copied unchanged",
       "evidence": "native format/source position reviewed; full and changed-region renderer receipts retained"
+    },
+    {
+      "id": "town2-r00-c00",
+      "native_sha256": "45a0f1daf801d79fe3cbd738ffe88f42507d831cd78f0cd7ae68e697514bf706",
+      "native_rgba_sha256": "850ddf7fe77e7dd355c9b3a14d3f5cb42c672a5f98bac563f687b97700a27089",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r00-c00.\n",
+      "prompt_sha256": "8856f29ad112ee36f7a6aa778352925bca47e8fd9c9ccb264d8d160b07c0f451",
+      "reference_sha256": "cb818d04f70ff7ed624b361e94f3edc9856ed91b161428b0022f0750399629a9",
+      "source_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "visible_bounds": [
+        0,
+        0,
+        6,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r00-c01",
+      "native_sha256": "f5f2f492f03fb4f9cbdff04f9a16769d64ea33ecaf8819ea54fe7d6a56f248cd",
+      "native_rgba_sha256": "9919fc96bc21218fd439dada02dd86e1e86a947638af1422f02da2e350940217",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r00-c01.\n",
+      "prompt_sha256": "80ca6e2d70bc2416933ab5f494cfe323fdab844a9ce500cd0cf8530879b2adc3",
+      "reference_sha256": "c0387d5ac797d6079638d259b4b1e808398402dc340b6b5d46568a33c5b31d8d",
+      "source_bounds": [
+        6,
+        0,
+        18,
+        12
+      ],
+      "visible_bounds": [
+        6,
+        0,
+        18,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r00-c02",
+      "native_sha256": "4797c8edd49bac91efe020c92bc63165977d60194d0f0e3bf26053eadf2f8cc5",
+      "native_rgba_sha256": "861c74a4d97351e68d77b1eaa0e9c0cc56bd9a2c6701e5f30a9934f001052cd5",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r00-c02.\n",
+      "prompt_sha256": "31474b95070d155928cd738b52446efe9bb31d4f9c665a8755ec93dca058a3a4",
+      "reference_sha256": "f8f1fe94bc25d10c90f31849cca609208a2a7a724f728b1996dc36c4491d05ca",
+      "source_bounds": [
+        18,
+        0,
+        30,
+        12
+      ],
+      "visible_bounds": [
+        18,
+        0,
+        30,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r00-c03",
+      "native_sha256": "420d133674e20455cb285a861acba4f53fbff2f0f35666175034cf06c972f3be",
+      "native_rgba_sha256": "65f1125e07cf869c3ecfa85d0291df0ad9d86d1f4368879e26e1b44456bb2041",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r00-c03.\n",
+      "prompt_sha256": "0251577008d9b77008a757455a74c9f25e93b03d8a7b15c5d2d0c96b15b2e733",
+      "reference_sha256": "62f171b24ca7b5c5c43b4015a4ba6a149275275bf84574d271c569a709633675",
+      "source_bounds": [
+        30,
+        0,
+        42,
+        12
+      ],
+      "visible_bounds": [
+        30,
+        0,
+        42,
+        3
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r00-c04",
+      "native_sha256": "89590eef0903560823dfe3796b27447bf571de62df9a9a89909ccc998d03db23",
+      "native_rgba_sha256": "667a8da4513a9aea0c378fd392cf29ec12ef2bf0ccc51306af91736f2b5fa2e2",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint a native square1254x1254 opaque RPG overhead map painting matching the first exact192x192 source image, enlarged in second reference. The THIRD reference supplies ONLY calm muted blue-green water color and brush texture. This target is almost entirely EMPTY LAKE WATER. Keep the entire top95 percent of the canvas plain uninterrupted water. The tiny land fragment, if any, is clipped by the very bottom edge exactly as shown in source. Preserve its normalized position. No walls, no towers, no bridge, no buildings, no islands, no boats, no objects, no text, no grid. Do not copy any land from the third reference. No compositional reframing. Newly painted fine restrained texture, fully opaque, edge to edge. Target town2-r00-c04.\n",
+      "prompt_sha256": "678429e630323883eb338ec1df2b61da97f98e56e814b617d45e881c63edb200",
+      "reference_sha256": "f9bc8646a17b2b229f7c353804b4c890f80e9accd612835a76ab77114825291f",
+      "source_bounds": [
+        42,
+        0,
+        54,
+        12
+      ],
+      "visible_bounds": [
+        42,
+        0,
+        54,
+        3
+      ],
+      "revisions": [
+        {
+          "replaced_file": "town2-r00-c04-native.png",
+          "replaced_sha256": "642aab8a944aa9f2eb5032a495e216d23c2513d885ff25430adbfb0f9ac053f4",
+          "replacement": "town2-r00-c04-revision-native.png",
+          "reason": "remove invented walls from source plain-water region"
+        }
+      ],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r00-c05",
+      "native_sha256": "71d363e59efaae265668bdf065257b6f9c288aacb47af5e5eee2d8dd8f94d879",
+      "native_rgba_sha256": "0d58a5a3bb989d369517205a6af4c5fb801e917c19716d7267320c754f411b9b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Paint a native square1254x1254 opaque RPG overhead map painting matching the first exact192x192 source image, enlarged in second reference. The THIRD reference supplies ONLY calm muted blue-green water color and brush texture. This target is almost entirely EMPTY LAKE WATER. Keep the entire top95 percent of the canvas plain uninterrupted water. The tiny land fragment, if any, is clipped by the very bottom edge exactly as shown in source. Preserve its normalized position. No walls, no towers, no bridge, no buildings, no islands, no boats, no objects, no text, no grid. Do not copy any land from the third reference. No compositional reframing. Newly painted fine restrained texture, fully opaque, edge to edge. Target town2-r00-c05.\n",
+      "prompt_sha256": "7f7d5db76fdbe7ee82868d52eb96d5f24055aa494c9fd5bb3c0fd67df8238bb9",
+      "reference_sha256": "a49396c61c3381f0b48cf7c84ae718f383d5d0eff50e8bf1b711460b382b4f14",
+      "source_bounds": [
+        52,
+        0,
+        64,
+        12
+      ],
+      "visible_bounds": [
+        54,
+        0,
+        64,
+        3
+      ],
+      "revisions": [
+        {
+          "replaced_file": "town2-r00-c05-native.png",
+          "replaced_sha256": "f7d82dccf1a84d5c5f79f5f06cfc192a081beb8ec86365cfc8e720ad06d71d0f",
+          "replacement": "town2-r00-c05-revision-native.png",
+          "reason": "remove invented walls from source plain-water region"
+        }
+      ],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r01-c00",
+      "native_sha256": "106bd1cf6e142513e0ac44f5e4d72bf8bde118fabc6971689549187545feec8e",
+      "native_rgba_sha256": "71c78fb4d5e67bc9ff3f3d60641cc6e30399abe899e9402e3a97074c99ba36dc",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r01-c00.\n",
+      "prompt_sha256": "479d8e0f237d9ef99dfa8e038651d930dde07cd5c9370ffba80f1fa5af1b0d6b",
+      "reference_sha256": "d32df5026828aac743d553d3b772377f6e36cbf44863764ee12f70fe9ee085aa",
+      "source_bounds": [
+        0,
+        3,
+        12,
+        15
+      ],
+      "visible_bounds": [
+        0,
+        3,
+        6,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r01-c01",
+      "native_sha256": "1cbaf3650ff078bb56e92c5ee38589a291c44074fe682d633a14c8975c530dab",
+      "native_rgba_sha256": "b444f2f2aff386b22fe39a0f72323374db2100be5476103023d7417865e399ff",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r01-c01.\n",
+      "prompt_sha256": "8d3c6cfe299e24231570e155cdcd4ff25964c37b1f8afa456354e15880453059",
+      "reference_sha256": "42c10e80f3a06632960d701fb98e0c7988f08be4f74f98178a268b858fa06f4c",
+      "source_bounds": [
+        6,
+        3,
+        18,
+        15
+      ],
+      "visible_bounds": [
+        6,
+        3,
+        18,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r01-c02",
+      "native_sha256": "aa6df250308ed0a6ebebbf2645199fcfe0da839cf75966b941c73c8d17a64714",
+      "native_rgba_sha256": "b5b8d026854f9356cc0e2361f7a78f2abbe7be99ab5b9fda9e35597ffeda374f",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r01-c02.\n",
+      "prompt_sha256": "402dcb5c6dfd267340dc7ce9c1f548149f5b3924b3beb9b24c26d370e9b764fa",
+      "reference_sha256": "b33817a48e732e64f203d3ca81a77a9fd0b3ffa0dba4441d94ae23a33fd3ded1",
+      "source_bounds": [
+        18,
+        3,
+        30,
+        15
+      ],
+      "visible_bounds": [
+        18,
+        3,
+        30,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r01-c03",
+      "native_sha256": "d781d56ac2c4ca74ceabf96c371710341b690c090740292e093f91ca5c5e6269",
+      "native_rgba_sha256": "00bc48e017fb7cbdb24b7b4baf7a6ffbd06471583e42cbf3eb7aa967602d0e0a",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r01-c03.\n",
+      "prompt_sha256": "7cf85d98154c1afc471089b640cc12f115462dd63166bb58e58ed90c94ced5a0",
+      "reference_sha256": "c0890f6c8b6636be817ec3ba3fc86a86599f4ae3a4e81efdf433eb25738a4d14",
+      "source_bounds": [
+        30,
+        3,
+        42,
+        15
+      ],
+      "visible_bounds": [
+        30,
+        3,
+        42,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r01-c04",
+      "native_sha256": "4889b1dd60c96bd467e7dcb4d991e65311df779c3db2a930a01aef7e1fd9432f",
+      "native_rgba_sha256": "f5b6e7735e67df50265a942e244ea02b7902f115445df8970abf2a9fe7b7663a",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r01-c04.\n",
+      "prompt_sha256": "568bd560aa85a5a15b20b83128e38929386f51273ba489b430326ed5c7baa505",
+      "reference_sha256": "56fc4ad4968fca24d7b36f4f0d5bb99900ebdda383ae0c049cb96edb740c7196",
+      "source_bounds": [
+        42,
+        3,
+        54,
+        15
+      ],
+      "visible_bounds": [
+        42,
+        3,
+        54,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r01-c05",
+      "native_sha256": "75d6ff7dcc2d6df45193ac2428daefe75068f55bdb76a2cfe39a6d2109ae77ba",
+      "native_rgba_sha256": "ec406e91457ac825ea1ddb7c95aae18d8978d87f1f58dde86cf51520593f4eff",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r01-c05.\n",
+      "prompt_sha256": "09f7fda66831f07a377153257533e68e0fe7c8e89b0ce73f33e99a8c21619b73",
+      "reference_sha256": "2ae8d41052342b845de637b4ab46a9240ed661b41ab6f6a6b9e2fbff7a47d0b6",
+      "source_bounds": [
+        52,
+        3,
+        64,
+        15
+      ],
+      "visible_bounds": [
+        54,
+        3,
+        64,
+        15
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r02-c00",
+      "native_sha256": "b6120587320101545e56dc8bc375968ea0c906874ba6b22f91cf95bf22479997",
+      "native_rgba_sha256": "8cd267addab3fbf7aa0a410b4805a35f47306b1079861335af19c350b66f486b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r02-c00.\n",
+      "prompt_sha256": "41b67c2d4f1883022dca0ede803e7552c824726dcdf0f04062b660057ce6d3fc",
+      "reference_sha256": "89004e0a3087ee420944b30253c576db79d11b91843f27182df5387e027348e4",
+      "source_bounds": [
+        0,
+        15,
+        12,
+        27
+      ],
+      "visible_bounds": [
+        0,
+        15,
+        6,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r02-c01",
+      "native_sha256": "978370a6b01c06ac35f3fb2ddd9481ae30b74a15d86246e2d54248561b0c6f51",
+      "native_rgba_sha256": "3b54b32516b445eaf10c4d95c58b7ff3b53306baad7bf8423c5ed085f6957b3e",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r02-c01.\n",
+      "prompt_sha256": "b37b8e9c130eb6183d6b43e9dcf884a6aee00565615401f8b97ed76287ad6ace",
+      "reference_sha256": "9a4cf990dde6fe32e73c53a702ac85c38e30c8a458c9b1dfb4f94bd8af4b8b35",
+      "source_bounds": [
+        6,
+        15,
+        18,
+        27
+      ],
+      "visible_bounds": [
+        6,
+        15,
+        18,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r02-c02",
+      "native_sha256": "05ea97a8b7a7fa25cd7111319567f7d84ac975998f0460fc73a0ea5ea1bd2d0f",
+      "native_rgba_sha256": "a6b38d5f270a0ba627aa52010df331a813bda6b2912a7560e2db56fb958e740e",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r02-c02.\n",
+      "prompt_sha256": "cdf3b3eef9ab75e52b6b6ebcefac45fa1542bee395f6b29d9898dada3f318a41",
+      "reference_sha256": "ffc575bf882bdf54b0208e07aa828ceff135eb4a653eff35b34d820ae21026db",
+      "source_bounds": [
+        18,
+        15,
+        30,
+        27
+      ],
+      "visible_bounds": [
+        18,
+        15,
+        30,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r02-c03",
+      "native_sha256": "515e62a9c4ecf04ba86c3d7a66457cb560b74b397526a0675883082780da3707",
+      "native_rgba_sha256": "5dab16bdbea86590e7b9648c0e850d2b04f4ef7e52f9f8d20f2608ae947d509e",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r02-c03.\n",
+      "prompt_sha256": "be0c6071a5dd555dc462fea78a2b9c1d5c5e30a8947b84858e7a3d80e78295d6",
+      "reference_sha256": "d3600e3e888a19d01e9d28b1439922fcdaec503af2558141c4abcfaf8eb5a053",
+      "source_bounds": [
+        30,
+        15,
+        42,
+        27
+      ],
+      "visible_bounds": [
+        30,
+        15,
+        42,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r02-c04",
+      "native_sha256": "67d8090b298b5c2ff2022a6502330bcd20b1d749b25b47a452b790bd1c7be7cb",
+      "native_rgba_sha256": "e849cdff033832fc7b8ba1cb081a7cbbb11afd7b70390f5086e7176077afdd38",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Precise object edit. FIRST reference is the HD target, next two are exact original source192x192 region and its enlargement. Change ONLY ALL blue water in the first HD target into very dark grassy ground and natural black vegetation/wall shadows. The exact original contains ZERO blue water pixels. There is no moat, no canal, no lake anywhere in this square. Preserve the current wall, tower, timber keep roof, path and tree coordinates, shapes, clipping, framing and overall painting style. In the narrow spaces between the walls use dark land shadow, never blue. Native opaque square1254x1254. No new structures, no text, no border.\n",
+      "prompt_sha256": "a7e5ab79afc6ab31dc25c3848279c13910f5829abf69b655c7c21c17d401d4eb",
+      "reference_sha256": "61c9ad52109373dccdbcd60f5eface389f520a822610f2190d6d93fef9863757",
+      "source_bounds": [
+        42,
+        15,
+        54,
+        27
+      ],
+      "visible_bounds": [
+        42,
+        15,
+        54,
+        27
+      ],
+      "revisions": [
+        {
+          "replaced_file": "town2-r02-c04-native.png",
+          "replaced_sha256": "3bd35756380164d08f0bdb2041db987f86eaacaa8eabba98c4d38f55d0742ff2",
+          "replacement": "town2-r02-c04-revision-native.png",
+          "reason": "replace invented moat with original dark land shadows"
+        }
+      ],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r02-c05",
+      "native_sha256": "5d6cc9318a50f08a411838f9ecf56fb545f852959c5abff79e0a07668fe1cb06",
+      "native_rgba_sha256": "c41715b5a481835db12eeadb5faf33c906d0091709b3abfd33d59298f2258e77",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r02-c05.\n",
+      "prompt_sha256": "7ca45bf98b413856db0f1d0c3dd53e4c5f4410ea15ce053eedebb50ad6def03b",
+      "reference_sha256": "96f4bc7c0e5f50d9c01d82113efd2c45f6779ae4d02026da3741152f0bff98d2",
+      "source_bounds": [
+        52,
+        15,
+        64,
+        27
+      ],
+      "visible_bounds": [
+        54,
+        15,
+        64,
+        27
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r03-c00",
+      "native_sha256": "7901ae18d82076545549a400faa6e4db31db1ddf2022eed726661475058ff39c",
+      "native_rgba_sha256": "499b5ba51559af708a4b920f3caa0dfaf3a12f465a7872ac07ca9d44a736cd96",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r03-c00.\n",
+      "prompt_sha256": "6f971346067c037aa7719b82aed70b8aad4428b400619c4a7fe9a02162743c74",
+      "reference_sha256": "8bcd30610774c5021c94273469e63bae927110926fd2b2ac75a378bb538c5c6e",
+      "source_bounds": [
+        0,
+        27,
+        12,
+        39
+      ],
+      "visible_bounds": [
+        0,
+        27,
+        6,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r03-c01",
+      "native_sha256": "9178a1f5c0ded8d0596699651d456860339261d18842823ec63d79389eb0b34a",
+      "native_rgba_sha256": "68d86f0e234680c25be42b53c5c549344972d77704c9e4ad786e8cd59db8830a",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r03-c01.\n",
+      "prompt_sha256": "b2bf91e38e11e89a8a96a65d48c81ec0df14c41ce4338679c09f30563647bca8",
+      "reference_sha256": "9c339d440b15d5c919e525f0496281529a706cee184e420389797b8a1f58b9a6",
+      "source_bounds": [
+        6,
+        27,
+        18,
+        39
+      ],
+      "visible_bounds": [
+        6,
+        27,
+        18,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r03-c02",
+      "native_sha256": "a5317d89d36beb5d840c3cf5a3f8518a7f7a0c97d3acde2b595d3dc27db56976",
+      "native_rgba_sha256": "33a3cec361a82f640dd943063f1beb5ccef5f0882272a43e85ac629c084cda2e",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r03-c02.\n",
+      "prompt_sha256": "46e8c083994a01ee4a7d7513874f2544c145b2103f49f91f2732c360b498635f",
+      "reference_sha256": "053d2df5df94b46241ddf24086815d0d68673096e256f089c333fbb2a5772a45",
+      "source_bounds": [
+        18,
+        27,
+        30,
+        39
+      ],
+      "visible_bounds": [
+        18,
+        27,
+        30,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r03-c03",
+      "native_sha256": "1b1de73843669025d4108c642369294455767f6bd9cf62d97624e949d0e252c5",
+      "native_rgba_sha256": "74a8f61a4e14a8e56254856a39bafe98c085165e4cadfa7c5bea1f057c3b89d0",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r03-c03.\n",
+      "prompt_sha256": "901e5eaa71dd63b0c8581a5bb540cb19dddda8b4f313378b25735fa67c3b336c",
+      "reference_sha256": "9b42619c3cc64b05f107571cdc8c8f0261e71108d6b1610d53f10767ef1c0811",
+      "source_bounds": [
+        30,
+        27,
+        42,
+        39
+      ],
+      "visible_bounds": [
+        30,
+        27,
+        42,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r03-c04",
+      "native_sha256": "ec16cd9c568557e1a1202954a915e8dff11156aebbc64ddc8f5811aade57e56c",
+      "native_rgba_sha256": "d20de8a03b95fdcc500a210cf21c8381466d80522296eef4e890ff9bba0fd842",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r03-c04. This exact source region contains ZERO blue water pixels. Paint no lake, no moat, no blue canal, and no blue reflection anywhere. All black is dark land shadow. Dry grassy ground continues between stone walls.\n",
+      "prompt_sha256": "b03f3f9083021f1a73984e78e2cee9f7856ff8b7a1e8db6c386a8995ba3f5ae7",
+      "reference_sha256": "35292d17e2462ca0ed3c41a005c823df5783c7080a9dc99f3ff04878a31bc773",
+      "source_bounds": [
+        42,
+        27,
+        54,
+        39
+      ],
+      "visible_bounds": [
+        42,
+        27,
+        54,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r03-c05",
+      "native_sha256": "1a6f24283d985ace483d9b8c6db5f846259763fad84d4163b74fe5d23b355932",
+      "native_rgba_sha256": "f2eefb1c35977b15c90027bdda13b16f224cc852e2f347f1f9a3ffe3af705aa2",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r03-c05.\n",
+      "prompt_sha256": "91db34087e710c007b6d88f1bc2735918663bc2200971465007d4ff470a54c3a",
+      "reference_sha256": "de8552fe25615d01290552b4c635b84048dbe465c8ccaeab336b2e60fe86fb33",
+      "source_bounds": [
+        52,
+        27,
+        64,
+        39
+      ],
+      "visible_bounds": [
+        54,
+        27,
+        64,
+        39
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r04-c00",
+      "native_sha256": "8793933e3ff8de6d2b6ae7f8e159c31e70b0e96a1f5b8400fd4b123bc29121e3",
+      "native_rgba_sha256": "d39aa096e843493f6af270b938a9f5b6e07ca914602973e3dc7276190d21ce67",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r04-c00.\n",
+      "prompt_sha256": "b5f0d67620f5516d0d71220f8b74df4c210bd8ed1ccfb0e419ffc27f72ca1e62",
+      "reference_sha256": "1533ad3c167f8df2875212bed5df960319fcdfb396fdfbf810b3c4be43f4801c",
+      "source_bounds": [
+        0,
+        39,
+        12,
+        51
+      ],
+      "visible_bounds": [
+        0,
+        39,
+        6,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r04-c01",
+      "native_sha256": "7fdbdee124cb8662156aad4fbc1f27a5d3dde37af0c9ef4bb6ad3b9e9d8ea916",
+      "native_rgba_sha256": "d8b500eaa0c6b867ccfcc280e70f1b06e4f811c92fedd243886e4b1086ff574d",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r04-c01.\n",
+      "prompt_sha256": "d68b1ecac858a1a52d5dbdf3645d2fa4165823f49a0428f3c437082bc749983d",
+      "reference_sha256": "74defd6c6ec1d41b51556331912ba0024183c90f8f5e47c4700bdc9edd7b34b4",
+      "source_bounds": [
+        6,
+        39,
+        18,
+        51
+      ],
+      "visible_bounds": [
+        6,
+        39,
+        18,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r04-c02",
+      "native_sha256": "a14331feed8269eef2d869f5d959c9659596d3eaab7525ae593878e7ff3ec6f1",
+      "native_rgba_sha256": "2a801afd5444ee54edefd2ad1cf959160146447660422d625af15603a45036de",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r04-c02.\n",
+      "prompt_sha256": "812e15ab58384b12714ff8fff937630ba95cb55a2e9c23d7a1cb9cbdfd6d50d5",
+      "reference_sha256": "538a1ca93fa2e9ec1af6e03c8bb3c370534a3346c0622799fcee6012d687de0b",
+      "source_bounds": [
+        18,
+        39,
+        30,
+        51
+      ],
+      "visible_bounds": [
+        18,
+        39,
+        30,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r04-c03",
+      "native_sha256": "e15b3e2e3b21edffbe3b4ad349e86b6ec70d56bfae9d23aa8f7fb22ab81f791f",
+      "native_rgba_sha256": "bcea2f02d1f27d41618c95c28523ed33c333d908f04412b10728e18ac7e9c01b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r04-c03.\n",
+      "prompt_sha256": "cb11c8f52f763bbb2aeb45a27c6755e87b6454c99ff4ece756cbfba9fabd9a5e",
+      "reference_sha256": "953daa5f929d770369ade7c4070e0f90fa5fa4f1995cab1730b29b77a2e4bcf1",
+      "source_bounds": [
+        30,
+        39,
+        42,
+        51
+      ],
+      "visible_bounds": [
+        30,
+        39,
+        42,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r04-c04",
+      "native_sha256": "5b9c5dc8531a190e18e2ac9d6a23d16d6ce383aa72d49f5240aa1680cc00b119",
+      "native_rgba_sha256": "90f82e26fdf21e279a9b040d7d28f2fbe3f9ec6711c057776fd2bce052599688",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r04-c04.\n",
+      "prompt_sha256": "7b6880931a80fe42f28a98f9dd46dd1fe86ebb8fc8f2c781b47b41019655cc7f",
+      "reference_sha256": "dbf282a835156a08c87e62ec3227afcbcbd1f726f7e4322078b4a9926f6d7264",
+      "source_bounds": [
+        42,
+        39,
+        54,
+        51
+      ],
+      "visible_bounds": [
+        42,
+        39,
+        54,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r04-c05",
+      "native_sha256": "a59698a97bc24deffff7dcf506bbb89e24123f60a9ef9b22841382058710ce90",
+      "native_rgba_sha256": "eea3ff4d9b9747aa08f551689f2d58a401737001561d405fd9e0c0f2c9a4c6e8",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r04-c05.\n",
+      "prompt_sha256": "4312209f0f6c0d72facb45efdc55410f473aefd61b29ea48d7efe409bb6b0904",
+      "reference_sha256": "f31761c47924ff95107f410610379e7b653b701def94d6598425ee6696dceaf8",
+      "source_bounds": [
+        52,
+        39,
+        64,
+        51
+      ],
+      "visible_bounds": [
+        54,
+        39,
+        64,
+        51
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r05-c00",
+      "native_sha256": "0af92c433064c774d1e774737412dffb5792559d62d4a02b0e0dd8094be9a18e",
+      "native_rgba_sha256": "cab9ca8b1a10877b1ddb3cdeaf3f5fc7b274b751d54b884dd60321ce39f9416b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r05-c00.\n",
+      "prompt_sha256": "bb46acc26df98da65242991469d770a2568066508e3999ea1baefd94c97aa57d",
+      "reference_sha256": "988eae22f1a19336f3dc112e06382609f7dc7df1d2990126210d830a34882ee2",
+      "source_bounds": [
+        0,
+        51,
+        12,
+        63
+      ],
+      "visible_bounds": [
+        0,
+        51,
+        6,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r05-c01",
+      "native_sha256": "9add4b86e6bf8234f82e3cc9cdab577f8f0b70324d3d1ac4de4a4ed7c19c2bc1",
+      "native_rgba_sha256": "3e5b812a8b6611821b18d83a45350ee74e87696596cde2501225f4ab2f8d6864",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r05-c01.\n",
+      "prompt_sha256": "23517c57ecb89f0a2dce8a68b68702c93426289fd0e9f600459faa69f89f933d",
+      "reference_sha256": "7f8dfd338d089db4e8b28ab9c322ae83c7873ea2aaa1350017f22faf15211e3a",
+      "source_bounds": [
+        6,
+        51,
+        18,
+        63
+      ],
+      "visible_bounds": [
+        6,
+        51,
+        18,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r05-c02",
+      "native_sha256": "99655b90613bb96398b3469581654db932e7d2dd2c49b847535e4121f7d563c4",
+      "native_rgba_sha256": "3ae145fa701e64a784d42f186b17138d650d58cc020983b8c01e902e477503ea",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r05-c02.\n",
+      "prompt_sha256": "7b9ffad249adda2c3d4c3a9e79d9beb96bf10b49275d0e3694731799158bb2e0",
+      "reference_sha256": "4aa4256baca3eb883e0e2b648a2a0fe3493eebf09ad81b0744cd2e7ea4558b63",
+      "source_bounds": [
+        18,
+        51,
+        30,
+        63
+      ],
+      "visible_bounds": [
+        18,
+        51,
+        30,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r05-c03",
+      "native_sha256": "41ef62cbce11acb5df5a0efc4fedfefc9a1de2425e2386dd91b1bbd84b214589",
+      "native_rgba_sha256": "bacb2ec6a005751892cd55c0fabce710cb2a2e5fa3250ff602175e46241c5f6d",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r05-c03.\n",
+      "prompt_sha256": "959a725259d0a597d7bc6a5ee710352ebe9a6677b2721fe1ccd119ceec77aa77",
+      "reference_sha256": "4ce1de7ba376f2eea17dfb5230907a8204bb56eaca3f5601afb0ee85371482ef",
+      "source_bounds": [
+        30,
+        51,
+        42,
+        63
+      ],
+      "visible_bounds": [
+        30,
+        51,
+        42,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r05-c04",
+      "native_sha256": "ebbe6b7bb67f6b08ae8bc2d10c3ee06ab4f9464a71a08fd248fca4e548b1cc08",
+      "native_rgba_sha256": "7409a863148d0ad6820aa639e7d7dac0ce414983edec13aa13b9262607ca2c4d",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r05-c04.\n",
+      "prompt_sha256": "cf3e56d64d86934d19972612f29fe9893297ad2f94ba8c133a421f717f3fbfb0",
+      "reference_sha256": "e55ccd6343f0aee44f2657723bcdcd320a3d0c2fbe1fe5d22c82cce8181cc3a3",
+      "source_bounds": [
+        42,
+        51,
+        54,
+        63
+      ],
+      "visible_bounds": [
+        42,
+        51,
+        54,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r05-c05",
+      "native_sha256": "83cfeeda6c0880cc8bcb770595664f213f28d3ac0f460fa0af0a2b50d1029ab7",
+      "native_rgba_sha256": "fe9a3f139a41c3edff5c91404d8a3bb4610dc4bc94b9748b363b28b3f6e05895",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r05-c05.\n",
+      "prompt_sha256": "829c9f59c33e2d0125a19dac4c1836d002fdeacfaa32c3302a57a7232bb1f597",
+      "reference_sha256": "5c17fc754fcbe88a8d49eba9f8d22ccd7c8a200d9e467be4999cea630449b7a2",
+      "source_bounds": [
+        52,
+        51,
+        64,
+        63
+      ],
+      "visible_bounds": [
+        54,
+        51,
+        64,
+        63
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r06-c00",
+      "native_sha256": "7a5978e8715e3bf3f9595a6e2fe84268ea13d09f61b9874cc15f6896758eecc3",
+      "native_rgba_sha256": "326d861bfc5e6b1cedd988cc5250594ad9039916edc685a2382551e61b60fb19",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r06-c00.\n",
+      "prompt_sha256": "3dde5852e756735ce7e3b0ed83e8bb604009319bc45cf3e0129a77eb32ed19f2",
+      "reference_sha256": "254beeaca50f6baa63c519c7ddb3fe71974d9186241ed4fc29f9a5253df838c7",
+      "source_bounds": [
+        0,
+        52,
+        12,
+        64
+      ],
+      "visible_bounds": [
+        0,
+        63,
+        6,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r06-c01",
+      "native_sha256": "53892ba9d2dcd0073db79b20139a29dbbb11bd38ba74a11258a259c57f405380",
+      "native_rgba_sha256": "b47c7bcbe9819e5543ecbe812551df1fc96a7c56807b51f79575db879f416d84",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r06-c01.\n",
+      "prompt_sha256": "1bab7d93192ea5ed6f95957c8cb255e737a930e11b27b1bcfe62719adf64ffef",
+      "reference_sha256": "dad7335c6a0f6164c998d3480d3ec21909f1f6bef318836f4e18c6dd03492a4d",
+      "source_bounds": [
+        6,
+        52,
+        18,
+        64
+      ],
+      "visible_bounds": [
+        6,
+        63,
+        18,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r06-c02",
+      "native_sha256": "d1e9913e4bbf9529eb22ea6162c413e65e8f3947b7a2a6d581d5c39291c40559",
+      "native_rgba_sha256": "5d999939bbd8d85aca9f2a0e21359a18b52835f79de923d4e0978edea0cd034a",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r06-c02. This exact source region contains ZERO blue water pixels. Paint no lake, no moat, no blue canal, and no blue reflection anywhere. All black is dark land shadow. Dry grassy ground continues between stone walls.\n",
+      "prompt_sha256": "f5c0872836aa83fddf8c89f9aa4a22ea00c4a7d5340b27a75bdaf63eb847f1f0",
+      "reference_sha256": "5108a30744f526e3f182fa1903538cb460b0dc4396c148e5b92f5d5f6b76ac77",
+      "source_bounds": [
+        18,
+        52,
+        30,
+        64
+      ],
+      "visible_bounds": [
+        18,
+        63,
+        30,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r06-c03",
+      "native_sha256": "32c266e1cea66db8452b4c1b816d1e4733515b77b63c10ee26c889268162770a",
+      "native_rgba_sha256": "6c68ed088f79236d20360ba5acae07ed66d9ec8f4fcabea85a6dd69ae31ad634",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. Red roofs and white timber faces occur only at the exact source positions; keep their clipped footprints. Exact target: town2-r06-c03.\n",
+      "prompt_sha256": "741a0e330d5b3bd0ba6e585f58bcf65dd02087cfaaa87d5065a1f9b2e1740208",
+      "reference_sha256": "932d3656109150a9f69f72f857f817e26fc4ad6ee6493bf4fb4bcf8238eea5fa",
+      "source_bounds": [
+        30,
+        52,
+        42,
+        64
+      ],
+      "visible_bounds": [
+        30,
+        63,
+        42,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r06-c04",
+      "native_sha256": "ad8b95de9ab797aa5bd5b959c1e7269673d6c98574427cb5dcc02790b1381e4d",
+      "native_rgba_sha256": "8dbd58b1a4801e042edec37b3c324f76c5684d1ce4ed0a9ad0bed3633efd137b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r06-c04.\n",
+      "prompt_sha256": "8eab67a9ad8c06b20f5a00e08a3522304b5b35ea336308f91859922e4e090ef2",
+      "reference_sha256": "a23378f92d803614beffc2311f7e4c07a9b0c25c04d76e864a5aa15a6dbf85f2",
+      "source_bounds": [
+        42,
+        52,
+        54,
+        64
+      ],
+      "visible_bounds": [
+        42,
+        63,
+        54,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
+    },
+    {
+      "id": "town2-r06-c05",
+      "native_sha256": "fab3ce83337a7c7649e74ce5ad6063104df44f582887ba67be480ee5e3f55c93",
+      "native_rgba_sha256": "63ced90e9f93838c92982e2fa9e5be389d979545694bfdd7906711cd9013d066",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "prompt": "Use case: stylized-concept. Paint ONE continuous native HD overhead-isometric medieval RPG map scene, square canvas at least1152x1152, fully opaque. The first two references are the exact same192x192 source map region, unscaled and enlarged. The third reference is STYLE ONLY: restrained fine hand-painted brushwork, terracotta tiles, gray stone, white plaster/dark timber, small rounded canopies, grassy ground. Do not copy its building composition. Follow the FIRST reference camera, framing, silhouettes, relative coordinates, paths, shorelines, walls and boundaries strictly. The unchanged game samples12x12 map cells, so shifting any object by a cell is unacceptable. Preserve clipped objects at every frame edge; never shorten a bridge or wall to fit it inside. Source coordinates0..192 map proportionally to native0..1254. Gray crenellated walls with round towers stay walls, brown planks stay wooden bridge decks or roofs as shown, and thin pebbled paths stay continuous. Blue is actual water: use calm evenly lit muted blue-green lake water ONLY in source blue areas, with no invented islands, rocks, boats, waves, reflections or objects in plain water. Water crossing a frame edge must continue straight through that edge. Black around walls and trees is shadow, not new water. Land shorelines must keep source footprints without narrowing a bridge or widening a canal. Newly paint native detail, no pixel-art enlargement. Continuous ground/roof/water materials across imaginary cell boundaries. No grid, labels, text, border, gutters, UI, people or added props. There are no red roofs in this target: add no red-roof house and never copy the style-reference house. Exact target: town2-r06-c05.\n",
+      "prompt_sha256": "9f11afed114b9cd478f0c946dfffdc5b60b75f6a2468e25aaf9059152022f550",
+      "reference_sha256": "b71bc989b73124824b0f2f909028184c94c0cf86665fb3433e68be57ed4461ac",
+      "source_bounds": [
+        52,
+        52,
+        64,
+        64
+      ],
+      "visible_bounds": [
+        54,
+        63,
+        64,
+        64
+      ],
+      "revisions": [],
+      "tool": "built-in imagegen; native PNG copied unchanged",
+      "evidence": "second-city DRAFT candidate; formal acceptance pending"
     }
   ],
-  "evidence": "101 prepared scenes404 frames; bridge revisions23 scenes92 frames; typed doors and map/Chinese/F10/save contracts verified. Hand-painted interpretation, not original pixel parity."
+  "evidence": "101 prepared scenes404 frames; bridge revisions23 scenes92 frames; typed doors and map/Chinese/F10/save contracts verified. Hand-painted interpretation, not original pixel parity.",
+  "previous_generation_sha256": "a27e1cacb8aa61266f267f247b260e05015b73cb11663f9bf43bf9d41c1b519b"
 }

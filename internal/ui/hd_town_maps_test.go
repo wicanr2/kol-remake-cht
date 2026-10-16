@@ -85,6 +85,9 @@ func TestHDPositionMapContracts(t *testing.T) {
 	imagedraw.Draw(paint, paint.Bounds(), &image.Uniform{C: color.RGBA{80, 90, 40, 255}}, image.Point{}, imagedraw.Src)
 	var arts []HDTownMapArt
 	for _, r := range m.Regions {
+		if r.Archive != "TOWN1" {
+			continue
+		}
 		a, b := r.SourceBounds, r.VisibleBounds
 		arts = append(arts, HDTownMapArt{Archive: "TOWN1", SourceBounds: image.Rect(a[0], a[1], a[2], a[3]), VisibleBounds: image.Rect(b[0], b[1], b[2], b[3]), Paint: paint})
 	}
