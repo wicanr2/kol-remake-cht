@@ -1,46 +1,39 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-10-17。
+更新日期：2026-10-18。
 
-Windows `v.1.0.4-20261017` 已完成純 EGA 及 EGA＋HD 兩個完整版與對應引擎包驗收，
-見[Windows 修復收據](docs/verification/windows-memory-20261017.md)。圖片改為按需讀取，
-原生紋理及縮放快取設容量上限，久未使用者淘汰；回到EGA時釋放HD圖片及裝備合成。
-沒有完整HD素材組時不能切換HD，壞圖片會回到EGA並顯示中文，預設Windows啟動寫kol.log。
+三平台完整版現為`v.1.0.5-20261018`，各有純EGA及EGA＋HD，共六包，見[完整版驗收](docs/verification/repack-v1.0.5-20261018.md)。
+435份正式Go／module與[Windows記憶體修正](docs/verification/windows-memory-20261017/receipt.json)完全相同，1744份資源與v3相同，僅重新編譯、注入新版號及分裝。
+三平台均按需讀圖、限制快取及回EGA釋放HD；缺完整HD素材不能切換，壞圖回到EGA。純EGA保留912份資源，移除832份HD圖像與配套；兩版均保留四首配樂及獨立F9。
 
-使用者回報16 GB Windows在開場後及切換HD直接關閉。舊版曾一次保留全部HD紋理，
-Wine峰值約14.3 GiB；本版四個實際ZIP、正常開場、選單、組隊、F9、F10及壞圖恢復
-已在4 GiB上限通過，無OOM。玩家原先開場閃退未取得同一失敗收據，Windows真機待回測。
-正式435份Go／module及1744份資源由新收據鎖定；原素材、規則、配樂與v3保存保持。
+六包manifest、逐檔SHA、內容、平台與版本通過。Linux實際AppImage解包後經AppRun、Wine實際Windows ZIP正常開場、建角選單、組隊、旅店、F9／F10及缺HD停用通過；四個流程共24張圖，EGA零差、HD最多一色階，中文與模型保持。
+兩平台4 GiB無交換空間，OOM皆0；macOS雙架構、arm64簽章結構、最低11.0及系統動態庫通過，尚無真機執行。
+規則、圖稿、配樂與kol-save-v3保持，單元與素材深驗沿前輪435份同來源收據。本輪未重跑完整套件、原版oracle或自然全任務通關。
 
-Linux、macOS及76秒影片沿用`v.1.0.3-20261017`。Windows新版兩個引擎包及SHA256SUMS.txt已發布並回讀大小／SHA-256相符，
-完整版與影片只留本機；舊tag與Release保持。[原發行收據](docs/verification/release-v1.0.3-20261017.md)
-保留當時private狀態。儲存庫現為public，832份HD圖像與配套、6份HD配樂及授權全量收錄，
-見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)。
-
-收尾採SPEC-040受控場景，不宣稱自然全任務通關或新增原版parity。README保留故事背景、
-原版DOS／重製中文EGA／HD差異、事件對照及12格HD總覽，畫稿位元組未改。
+六個完整版只留本機`dist-all/v.1.0.5-20261018/full/`。公開Windows引擎包仍v.1.0.4，公開Linux／macOS引擎包及76秒影片仍v.1.0.3，舊tag／Release保持；本輪未重做引擎Release或影片。
+儲存庫保持public，832份HD圖像配套與6份配樂授權全量收錄，見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)。
+README保留故事背景、原版DOS／中文EGA／HD差異、事件對照及12格總覽；截圖沿既有驗收來源，素材位元組保持。
 本檔保存目前真相；歷程見[WORKLOG.md](WORKLOG.md)，可執行項目以[工作清單](docs/worklist.json)為準。
 
 ## 目前作業方向
 
-Windows記憶體修復、雙版本交付及三附件發布均完成，tag固定8c091425；[發布回讀](docs/verification/windows-memory-20261017/publication.json)與[保存清冊](docs/verification/windows-memory-20261017/retention.json)已核對，本輪工作區已清理。
+六包與實際封包驗收完成，75份證據與3份可重建程式雜湊已封存核對；本輪工作區已清理，提交推送進行中。
 採已核准的手繪、1920×1200、遊戲內F10及獨立F9；新圖最長邊768，既有832份HD素材保持。
-原生紋理192 MiB及縮放96 MiB是快取預算，不包含驅動與畫布；首次HD仍需載入。
-
-完整HD基準仍見[全量驗收](docs/verification/hd-full-runtime-20261017.md)、
-[全地圖](docs/verification/hd-all-maps-runtime-20261017.md)及[事件](docs/verification/hd-scene-events-runtime-20261017.md)。
-原版C matching保持暫停。嚴格原版未知與平台真機沿原工作項追蹤，不重新開啟已完成美術或另改玩法。
+原生紋理192 MiB及縮放96 MiB是快取預算，不含驅動與畫布；首次HD仍需載入。
+Windows原先開場閃退未取得同一失敗收據，Windows／macOS真機及Linux主機FUSE沿原限制。
+完整HD基準見[全量驗收](docs/verification/hd-full-runtime-20261017.md)、[全地圖](docs/verification/hd-all-maps-runtime-20261017.md)及[事件](docs/verification/hd-scene-events-runtime-20261017.md)。
+收尾依SPEC-040受控場景，原版C matching保持暫停，不重新開啟已完成美術或另改玩法。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 435份Go／module、1744份資源；[Windows修復收據](docs/verification/windows-memory-20261017/receipt.json)鎖定 | 832份HD素材及規則／v3保持，捕捉後單句缺字提示另驗 |
-| 最近測試 | Windows四ZIP正常操作、104受控畫格及24流程畫格通過；EGA零差、HD最多一色階，中文／模型保持；新增快取、讀圖及分層回歸通過，素材補驗796秒通過 | 分階段測試，首次逾時及候選失敗保留；不宣稱自然全旅程或新原版parity |
+| 正式來源 | 435份Go／module、1744份資源；[本輪收據](docs/verification/repack-v1.0.5-20261018/receipt.json)鎖定 | 程式沿已驗記憶體修正，832份HD圖像配套及規則／v3保持 |
+| 最近測試 | 六包逐檔通過；Linux／Wine四個實際完整版正常開場、建角選單、組隊、F9／F10及24圖通過；EGA零差、HD最多一色階，文字／模型保持，4 GiB無OOM | 單元、分層、快取與素材深驗沿前輪同435來源收據；本輪未重跑全套或自然全旅程 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
-| 跨平台 | Windows v.1.0.4兩種完整版及兩引擎包已用Wine實際驗收；Linux／macOS與影片仍v.1.0.3 | Windows真機、macOS執行與FUSE沿原限制；本版Wine程序RSS取樣最高約2.74 GB |
+| 跨平台 | 三平台v.1.0.5各兩個完整版；Linux／Wine實際操作，macOS雙架構與結構通過 | Windows／macOS真機及主機FUSE未驗；公開引擎包仍Windows v4、Linux／macOS v3 |
 | 正常 AI 抽樣 | [反制掃描](docs/re/20261006-ai-counter-normal.md)、[成功側翼](docs/re/20261006-clockwise-flank-normal.md)、[成功撤退](docs/re/20261006-flee-normal.md) 已有有限正常案例 | 其他戰局、困住撤退及成功怪物拾取仍開放 |
 | 最新原版試驗 | RE-295 真保存角色正常出城，seed1、169延伸鍵、170狀態；與現行首次紮營及111個同期世界標籤／日期框相符 | 本上限內沒有自然騎走問答；紮營後26個方向鍵原版忽略、現行換日，完整野外對拍未通過 |
 | 怪物拾取證據 | [RE-292](docs/re/20261006-monster-pickup-low-strike.md)：883狀態、10回合、2264次自然亂數；完整16-byte掉物1筆 | 未取得站立空手怪物或成功拾取，不延長同場挑結果 |

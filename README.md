@@ -4,8 +4,8 @@
 Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用 Ogg Vorbis。標題雷聲已通過人耳驗收與[正常播放驗證](docs/verification/audio/README.md)。
 
 目前提供書本與建角、組隊、城鎮與世界探索、戰鬥、任務、結局及 kol-save-v3 保存。
-Windows 修正版為 `v.1.0.4-20261017`，提供純 EGA 與 EGA＋HD 兩種完整版。
-Linux、macOS 與推廣影片沿用 `v.1.0.3-20261017`；release 引擎包需自行匯入合法資料。
+完整版為 `v.1.0.5-20261018`，Linux、Windows、macOS 各提供純 EGA 與 EGA＋HD，共六包。
+三平台均採按需讀圖及動態釋放；公開引擎包與影片沿用既有版本，引擎包需自行匯入合法資料。
 目前採[受控場景驗收](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血與提高攻擊，
 抵達指定場景後確認中文與畫面。登記場景已通過，結果見[驗收收據](docs/verification/controlled-scenes-20261011.md)。
 本版包含住宅告示、中文目錄、結局排版修正、HD介面與頭像、四首原創室內樂，以及遊戲內F9配樂與F10畫面切換。
@@ -35,19 +35,18 @@ Linux、macOS 與推廣影片沿用 `v.1.0.3-20261017`；release 引擎包需自
 
 ## 開始遊玩
 
-Windows `v.1.0.4-20261017` 改為需要圖片時才讀取，並限制快取容量。
+三平台完整版均改為需要圖片時才讀取，並限制快取容量。
 久未使用的圖片會釋放；回到 EGA 時釋放 HD 圖片，再切回時重新載入目前場景。
 沒有完整 HD 素材組時不能切換 HD。兩種版本均保留中文、四首配樂、F9 與相同存檔格式。
-首次 HD 仍需載入；Wine 軟體繪圖測試約十多至二十多秒，Windows 真機時間尚未量測。
-Windows 封包與驗證見[修正版收據](docs/verification/windows-memory-20261017.md)；
-Linux、macOS 與影片見[原交付收據](docs/verification/release-v1.0.3-20261017.md)。
+首次 HD 仍需載入；先前 Wine 軟體繪圖測試約十多至二十多秒，Windows 真機時間尚未量測。
+六包逐檔核對、Linux／Wine 正常操作及中文畫格比較見[完整版驗收](docs/verification/repack-v1.0.5-20261018.md)。
+記憶體修正依[原驗收](docs/verification/windows-memory-20261017.md)，macOS 仍只有結構驗證。
 
-| 平台 | 檔案 | 開啟方式 |
-|---|---|---|
-| Linux | [完整版 AppImage](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-linux-x86_64.AppImage) | `chmod +x` 後執行；沒有 FUSE 可加 `--appimage-extract-and-run` |
-| Windows AMD64，純 EGA | [完整版 ZIP，約 19 MB](dist-all/v.1.0.4-20261017/full/kol-v.1.0.4-20261017-full-ega-windows-amd64.zip) | 解壓後開啟 `kol.exe`；不含 HD 圖像，HD 選項停用 |
-| Windows AMD64，EGA＋HD | [完整版 ZIP，約 1.29 GB](dist-all/v.1.0.4-20261017/full/kol-v.1.0.4-20261017-full-ega-hd-windows-amd64.zip) | 解壓後開啟 `kol.exe`；F10 在同一場景切換 |
-| macOS ARM64／Intel | [完整版 universal ZIP](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-macos-universal.zip) | 開啟 `武士傳說.app`；只完成建置與結構驗收 |
+| 平台 | 純 EGA | EGA＋HD | 開啟方式 |
+|---|---|---|---|
+| Linux x86_64 | [AppImage，約 20 MB](dist-all/v.1.0.5-20261018/full/kol-v.1.0.5-20261018-full-ega-linux-x86_64.AppImage) | [AppImage，約 1.27 GB](dist-all/v.1.0.5-20261018/full/kol-v.1.0.5-20261018-full-ega-hd-linux-x86_64.AppImage) | `chmod +x` 後執行；沒有 FUSE 可加 `--appimage-extract-and-run` |
+| Windows AMD64 | [ZIP，約 19 MB](dist-all/v.1.0.5-20261018/full/kol-v.1.0.5-20261018-full-ega-windows-amd64.zip) | [ZIP，約 1.29 GB](dist-all/v.1.0.5-20261018/full/kol-v.1.0.5-20261018-full-ega-hd-windows-amd64.zip) | 解壓後開啟 `kol.exe` |
+| macOS ARM64／Intel | [universal ZIP，約 26 MB](dist-all/v.1.0.5-20261018/full/kol-v.1.0.5-20261018-full-ega-macos-universal.zip) | [universal ZIP，約 1.30 GB](dist-all/v.1.0.5-20261018/full/kol-v.1.0.5-20261018-full-ega-hd-macos-universal.zip) | 開啟 `武士傳說.app`；只有建置與結構驗收 |
 
 `full` 已含對應圖像版本的遊戲及配樂資料，只留本機。[Windows release](dist-all/v.1.0.4-20261017/release/) 也分兩種資料匯入清單；
 純 EGA 匯入不複製手繪圖像。[Linux、macOS release](dist-all/v.1.0.3-20261017/release/) 沿用前版。引擎包
@@ -90,6 +89,8 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 都還沒有真機驗收。
 
 ## 目前畫面
+
+以下截圖沿用各批已驗證畫格，來源版本依各圖清冊。本次重建保持全部圖稿與配樂位元組。
 
 ### HD 總覽
 

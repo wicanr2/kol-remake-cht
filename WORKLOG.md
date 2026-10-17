@@ -11891,3 +11891,15 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 Windows v.1.0.4-20261017兩種完整版分別18,860,390與1,292,965,557 bytes，只留本機；兩個無素材引擎包8,628,426與8,672,021 bytes及SHA256SUMS.txt為發布範圍。Linux、macOS與76秒影片沿v.1.0.3，舊tag／Release保持。正式通過收據及本機保存清冊已掛索引；本輪原工作區只在逐檔核對封存後清理。提交、遠端發布與最終清理回讀續記於下。
 
 提交8c091425已push，tag v.1.0.4-20261017固定同一提交；GitHub Release已公開發布，三附件大小及遠端SHA-256全符，台北發行日期2026-10-17。362份證據封存、6份可重建執行檔只留SHA後逐檔核對，已清理workplace/windows-crash-20261017；全專案root-owned檔案及誤建.md目錄檢查0。主機GitHub認證有效，repo保持public；保留使用者原有未追蹤文字檔。發布回讀與交接文件以後續文件提交記錄，不移動tag。
+
+## 2026-10-18 三平台雙版本完整版重建
+
+使用者要求重新打包三平台完整版。沿用先前純EGA及EGA＋HD決定，建立v.1.0.5-20261018六包，只交付本機完整版，不重做影片或上傳原作衍生資料。435份正式Go／module與Windows記憶體收據完全相同，1744份資源與v3清冊相同。工具入口為tools/repack_full_build.sh及tools/repack_full_variants.py；工作區workplace/repack-20261018，完成證據將由docs/verification/repack-v1.0.5-20261018.md索引。建置與實際封包驗證進行中。
+
+六包從乾淨來源重建完成，工具映像檔沿用，未新增映像檔。Linux／Windows／macOS雙架構全部重新編譯，純EGA資源912、完整1744。六包逐檔manifest／SHA／版本／架構與必要內容全過。實際Linux AppRun及Wine四包正常開場、建角選單進入／取消、組隊、旅店、F9、F10、純EGA禁止HD及釋放重載通過；4 GiB且無交換空間，OOM0。固定seed1短流程24張跨平台EGA零差、HD最大1，文字與模型相同。音訊非靜音、峰值14031、退出末秒靜音；素材不變，未重做人耳驗收。macOS兩包只有雙架構、簽章結構、最低11.0及系統依賴核對，真機未驗。
+
+工具finish首次誤要求HD的武士傳說副標出現在點陣文字紀錄而失敗。起初將原因推測為圖片字標，核對cmd/kol/title_subtitles.go及實際書封後更正：plate先以DrawNativeSubtitle繪製並返回，沒有點陣f.Draw事件。修正腳本預期，像素門檻不變、正式遊戲不改，驗證資料重算通過，未重跑遊戲抽樣。調整收據及768像素縮圖保留本機證據。README更新六包入口，背景、比較圖與總覽保持，來源版本補註。公開引擎包與76秒影片沿舊版，本輪未上傳完整版或另建GitHub Release。
+
+工作清單首次核對抓出新版封包真機限制及SPEC-039開場閃退未重現兩行缺少認領，已直接接回既有windows-macos-real-machine開放項的來源與pattern，未新增或關閉玩法工作。render後verify通過，15開放／94完成保持。75份證據及3份可重建程式雜湊已封存並逐檔核對；原工作區清理續記。
+
+workplace/repack-20261018已核對封存後刪除。441個本機文件入口、工具語法、六包UID／GID及全專案root-owned／誤建.md目錄檢查通過，本輪標記容器0。既有工具映像檔保留，無新增或被取代映像檔。保留使用者未追蹤TXT，未加入本次提交。完成後的文件與工具將連同新tag提交推送；遠端回讀續記。

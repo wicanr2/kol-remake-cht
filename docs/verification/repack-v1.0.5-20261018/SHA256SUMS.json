@@ -1,0 +1,65 @@
+{
+  "version": "v.1.0.5-20261018",
+  "files": [
+    {
+      "path": "full/kol-v.1.0.5-20261018-full-ega-windows-amd64.zip",
+      "bytes": 18859981,
+      "sha256": "93cd04f046ebcd6d58a277d82b799364ced04106abfa3fd353c9362606fdc931",
+      "graphics": "ega",
+      "platform": "windows-amd64",
+      "bundle": "full",
+      "resource_files": 912,
+      "local_only": true
+    },
+    {
+      "path": "full/kol-v.1.0.5-20261018-full-ega-linux-x86_64.AppImage",
+      "bytes": 19732984,
+      "sha256": "e77a2a9000cd0a0b39f2a0386a746d00a71a4d85369ecde41f18318259e99f02",
+      "graphics": "ega",
+      "platform": "linux-x86_64",
+      "bundle": "full",
+      "resource_files": 912,
+      "local_only": true
+    },
+    {
+      "path": "full/kol-v.1.0.5-20261018-full-ega-macos-universal.zip",
+      "bytes": 26369876,
+      "sha256": "76ebb0fccd4132fe7c5fc28cb3ff4294cf26d97f9232d695099e91d3d7689ff0",
+      "graphics": "ega",
+      "platform": "macos-universal",
+      "bundle": "full",
+      "resource_files": 912,
+      "local_only": true
+    },
+    {
+      "path": "full/kol-v.1.0.5-20261018-full-ega-hd-windows-amd64.zip",
+      "bytes": 1292965138,
+      "sha256": "cbe83628df41b067a6b0fb622b322701096f1892e1ef3d993f99be00c5f150e4",
+      "graphics": "ega-hd",
+      "platform": "windows-amd64",
+      "bundle": "full",
+      "resource_files": 1744,
+      "local_only": true
+    },
+    {
+      "path": "full/kol-v.1.0.5-20261018-full-ega-hd-linux-x86_64.AppImage",
+      "bytes": 1270413816,
+      "sha256": "3e0a4c4dad09e356113c62e8ae0866c9481d39e60c1253553d865e23c5ed9d9f",
+      "graphics": "ega-hd",
+      "platform": "linux-x86_64",
+      "bundle": "full",
+      "resource_files": 1744,
+      "local_only": true
+    },
+    {
+      "path": "full/kol-v.1.0.5-20261018-full-ega-hd-macos-universal.zip",
+      "bytes": 1300538361,
+      "sha256": "243a35556165a4b913847f839a42bdf8a7a5843b5c7ef5b42d692dbe32d51f08",
+      "graphics": "ega-hd",
+      "platform": "macos-universal",
+      "bundle": "full",
+      "resource_files": 1744,
+      "local_only": true
+    }
+  ]
+}

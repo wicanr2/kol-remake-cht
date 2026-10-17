@@ -1,0 +1,14 @@
+{
+  "classification": "驗收腳本預期錯誤，正式遊戲未改",
+  "initial_assertion": "兩種畫面都須在點陣文字紀錄包含武士傳說",
+  "observed": "EGA有此文字事件，HD沒有；兩平台紀錄一致，實際HD書封已目視確認中文",
+  "cause": "cmd/kol/title_subtitles.go:plate先呼叫ui.DrawNativeSubtitle，HD成功後直接返回，不執行點陣f.Draw紀錄",
+  "source": "cmd/kol/title_subtitles.go",
+  "source_sha256": "ca12319888a4c750ccd1cec56c101a2d1b1b699d99a21ec0473ea0aa6bc1b726",
+  "correction": "兩版共同檢查目錄、建立角色、新角色、人類；EGA另檢查武士傳說文字事件，HD副標由實際畫格及既有原生字型驗收確認",
+  "pixel_thresholds_unchanged": {
+    "ega": 0,
+    "hd": 1
+  },
+  "game_rerun": false
+}

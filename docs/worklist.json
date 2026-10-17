@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-10-17",
+  "updated": "2026-10-18",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -836,15 +836,17 @@
       "id": "windows-macos-real-machine",
       "layer": "release",
       "title": "Windows／macOS 真機驗收",
-      "body": "Linux 容器 smoke 不冒充真機結果。macOS 的 bundle 沒有簽章（_CodeSignature 在 Linux 上做不出來），首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。 2026-10-01 現行工作樹三平台中間建置續核：Linux／Windows各編譯兩次雜湊一致，Linux仍f969a63f；Windows304890ea在Wine9實際啟動，預設繁中與APPDATA保存、正常標題／六人招募／購買／住宿198個互動按鍵及重載15鍵通過。兩平台199／16筆批次狀態與既有收據完全相同，40組整圖比較0差；保存除saved_at外一致、重載未改檔。macOS universal兩架構、最低11.0、arm64簽章區塊與系統相依核實通過，但尚未實際啟動；Wine不是Windows真機。收據docs/verification/platform-smoke-20261001/receipt.json。只驗當前source資源入口，未建正式封包或版號，本項不結案。 RE-279現行342來源／Linuxd43a6385有限回歸通過：11944長任務／26新程序重載、完整trace與40PNG符合RE-274，完整v3只差saved_at。Windows AMD64與macOS雙架構／universal建置，Wine正常772／重載26狀態及18PNG符合現行Linux。明示遭遇控制、真機、正式交付與原完成條件保持。入口docs/re/20261006-move-current-regression.md。 RE-291現行342來源／Linux991046ab有限回歸：雙語11976長任務／26新程序重載、每語言5001映射非訊息狀態與完整v3相符。40PNG中38相同，兩張逃離戰場視圖差異完整保留。Windows AMD64及macOS雙架構／universal建置、Wine772正常／26重載及18PNG符合現行Linux。原版完整UI、明示遭遇控制、真機、正式交付與原完成條件保持。入口docs/re/20261006-visibility-current-regression.md。",
+      "body": "Linux 容器 smoke 不冒充真機結果。macOS 的 bundle 沒有簽章（_CodeSignature 在 Linux 上做不出來），首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。 2026-10-01 現行工作樹三平台中間建置續核：Linux／Windows各編譯兩次雜湊一致，Linux仍f969a63f；Windows304890ea在Wine9實際啟動，預設繁中與APPDATA保存、正常標題／六人招募／購買／住宿198個互動按鍵及重載15鍵通過。兩平台199／16筆批次狀態與既有收據完全相同，40組整圖比較0差；保存除saved_at外一致、重載未改檔。macOS universal兩架構、最低11.0、arm64簽章區塊與系統相依核實通過，但尚未實際啟動；Wine不是Windows真機。收據docs/verification/platform-smoke-20261001/receipt.json。只驗當前source資源入口，未建正式封包或版號，本項不結案。 RE-279現行342來源／Linuxd43a6385有限回歸通過：11944長任務／26新程序重載、完整trace與40PNG符合RE-274，完整v3只差saved_at。Windows AMD64與macOS雙架構／universal建置，Wine正常772／重載26狀態及18PNG符合現行Linux。明示遭遇控制、真機、正式交付與原完成條件保持。入口docs/re/20261006-move-current-regression.md。 RE-291現行342來源／Linux991046ab有限回歸：雙語11976長任務／26新程序重載、每語言5001映射非訊息狀態與完整v3相符。40PNG中38相同，兩張逃離戰場視圖差異完整保留。Windows AMD64及macOS雙架構／universal建置、Wine772正常／26重載及18PNG符合現行Linux。原版完整UI、明示遭遇控制、真機、正式交付與原完成條件保持。入口docs/re/20261006-visibility-current-regression.md。 三平台v.1.0.5六個完整版通過Linux／Wine及macOS結構驗證，見docs/verification/repack-v1.0.5-20261018.md；Windows原先開場直接關閉未取得同一失敗收據，待真機回測，本項保持開放。",
       "acceptance": "兩個平台各在真機上啟動並走一次正常路徑。",
       "verify": {
         "kind": "present",
         "paths": [
-          "tools/verify_dist.sh"
+          "tools/verify_dist.sh",
+          "tools/repack_full_variants.py",
+          "docs/spec/039-hd-art-ui.md"
         ],
-        "pattern": "macOS 要真機",
-        "note": "驗收腳本自己寫明這一段還沒做；真機驗收接上時會改寫。"
+        "pattern": "macOS 要真機|Windows 使用 Wine 驗證.*尚無真機驗收|玩家回報的開場閃退尚未重現",
+        "note": "實際封包與SPEC-039仍明示真機待驗及玩家開場閃退未重現，由本項認領；容器驗收不結案。"
       },
       "issue": 42,
       "blocking_for_current_closeout": false
@@ -1992,7 +1994,7 @@
       "layer": "gap",
       "title": "Windows 按需讀取、快取釋放與雙版本封包",
       "body": "Windows按需讀取、動態釋放及純EGA／EGA＋HD兩種完整版與引擎包完成。Wine四個實際ZIP正常開場、書本、選單、組隊、F9、F10及壞圖退回EGA通過，4 GiB上限無OOM。104受控畫格、24流程畫格中文與模型保持，EGA零差、HD最多一色階。素材與規則／v3不變，真機與玩家原先開場原因仍有證據限制。入口docs/verification/windows-memory-20261017.md。",
-      "acceptance": "按需解碼、紋理與縮放快取容量及淘汰／重載通過；Wine 實際四個 ZIP 的正常開場、書本、選單、組隊、F9、F10 及缺 HD 停用通過；13 類場景中文、模型、一色階與前版不變；完整版留本機、引擎包發布，舊版保持。",
+      "acceptance": "按需解碼、紋理與縮放快取容量及淘汰／重載通過；Wine 實際四個 ZIP 的正常開場、書本、選單、組隊、F9、F10 及缺 HD 停用通過；13 個受控場景中文、模型、一色階與前版不變；完整版留本機、引擎包發布，舊版保持。",
       "verify": {
         "kind": "absent",
         "paths": [
