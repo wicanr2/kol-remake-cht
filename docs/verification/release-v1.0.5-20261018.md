@@ -1,6 +1,6 @@
 # v.1.0.5-20261018 三平台雙版本引擎發布
 
-驗收狀態：**PASS**。正式發布進行中。
+驗收及正式發布：**PASS**。Release ID415941791已公開並設為最新版，七附件大小及SHA-256全符。
 
 Release入口：[v.1.0.5-20261018](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.5-20261018)。
 本機交付與公開附件以[六包校驗清冊](release-v1.0.5-20261018/SHA256SUMS.json)為準。
@@ -13,8 +13,8 @@ Release入口：[v.1.0.5-20261018](https://github.com/wicanr2/kol-remake-cht/rel
 封裝入口為[pack_release_variants.py](../../tools/pack_release_variants.py)，
 實際匯入操作沿[封包驗證工具](../../tools/verify_full_variants_runtime.py)的`--bundle release`。
 來源與輸出集中於`dist-all/v.1.0.5-20261018/`，
-本輪工作區為`workplace/release-v1.0.5-20261018/`。
-來源、正式收據與遠端回讀將放在[本版證據目錄](release-v1.0.5-20261018/)。
+本輪原工作區為`workplace/release-v1.0.5-20261018/`，封存核對後已清理。
+來源、正式收據與遠端回讀保存於[本版證據目錄](release-v1.0.5-20261018/)。
 [發布說明](release-v1.0.5-20261018/release-notes.md)沿同一版號與發布範圍。
 [遠端核對工具](release-v1.0.5-20261018/recipe/check_publication.py)檢查七附件與匿名下載SHA-256。
 
@@ -44,3 +44,10 @@ macOS兩包實際匯入912／1744份資料通過，沿已驗universal執行檔�
 工作清單及文件核對見[檢查紀錄](release-v1.0.5-20261018/worklist-check.log)。
 原始畫格、錄音與失敗紀錄由[保存工具](release-v1.0.5-20261018/recipe/retain.py)封存，見[保存清冊](release-v1.0.5-20261018/retention.json)。
 71份驗收檔案與3份可重建程式雜湊已逐檔核對，原工作區已清理；460個本機入口、工具語法、擁有權與專案衛生通過，見[交接檢查](release-v1.0.5-20261018/hygiene.json)。本輪容器無殘留。
+
+## 遠端發布
+
+[草稿回讀](release-v1.0.5-20261018/draft-remote.json)先核對七個授權附件的名稱、大小及GitHub digest。
+公開後[完整回讀](release-v1.0.5-20261018/publication-remote.json)與[匿名下載驗證](release-v1.0.5-20261018/publication.json)核對全部HTTP200、大小與SHA-256，說明文字亦與本機相同。
+台北發行日2026-10-18符合版號，正式tag仍固定bc087d31；沒有上傳完整版或影片，舊tag／Release保持。
+發布後465個本機入口、新增遠端證據擁有權及專案衛生再次核對通過；本輪容器仍為0。

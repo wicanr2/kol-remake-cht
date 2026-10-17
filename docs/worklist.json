@@ -856,8 +856,8 @@
       "id": "github-release",
       "layer": "release",
       "title": "發 GitHub Release",
-      "body": "v.1.0.3-20261017六包與76秒影片完成。Release三平台引擎包與SHA256SUMS.txt已發布，四附件大小與雜湊相符，tag固定3f1ae7c2。2026-10-17依使用者新決定將儲存庫轉public，838份HD／配樂全量收錄；原作權利聲明保持。完整版、手冊及影片仍留本機；舊版本保持。入口docs/verification/release-v1.0.3-20261017.md與docs/verification/public-repository-20261017.json。",
-      "acceptance": "明確核准目的地與附件範圍，正式Release發布，四附件完整性與tag來源核對通過。",
+      "body": "v.1.0.5-20261018三平台純EGA／EGA＋HD六個無素材引擎包與SHA256SUMS.txt已公開發布，Release ID415941791。七附件GitHub digest、匿名下載HTTP200、大小及SHA全符，tag固定bc087d31且已設為最新版。完整版及影片只留本機，舊版與838份HD／配樂Git收錄保持，原作權利不變。入口docs/verification/release-v1.0.5-20261018.md及publication.json。",
+      "acceptance": "使用者明確授權發布；六個無素材引擎包及校驗碼共七附件公開，大小／SHA及來源tag回讀相符，完整版未上傳。",
       "verify": {
         "kind": "required_in_all",
         "paths": [
@@ -870,7 +870,7 @@
       "issue": 43,
       "blocking_for_current_closeout": false,
       "status": "done",
-      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。 2026-10-17：v.1.0.3-20261017 private Release ID415516344，四附件與授權清單完全相符，tag 3f1ae7c2；本機入口保護改綁新版，未修改遠端Issue。 2026-10-17：使用者明確指定儲存庫公開，遠端已public；HD目錄832檔及配樂6檔完整收錄，三個匿名樣本HTTP200且雜湊相符。既有四Release附件及tag保持，未修改Issue。"
+      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。 2026-10-17：v.1.0.3-20261017 private Release ID415516344，四附件與授權清單完全相符，tag 3f1ae7c2；本機入口保護改綁新版，未修改遠端Issue。 2026-10-17：使用者明確指定儲存庫公開，遠端已public；HD目錄832檔及配樂6檔完整收錄，三個匿名樣本HTTP200且雜湊相符。既有四Release附件及tag保持，未修改Issue。 2026-10-18：使用者要求更新README並發布v.1.0.5，Release ID415941791已公開、七附件及匿名下載全符，tag bc087d31保持；本機導航保護綁新版，未修改遠端Issue。"
     },
     {
       "id": "v01-remaining-battle-chain",
