@@ -1,5 +1,20 @@
 # 發行前的權利審查
 
+## 儲存庫公開化與HD全量收錄
+
+2026-10-17使用者明確指定「github repo 變成 public , hd 素材都要進入 github repo」。本次依此新決定將`wicanr2/kol-remake-cht`由private轉為public，取代先前僅private保存的操作限制。準備與遠端結果見[公開化清冊](verification/public-repository-20261017.json)。
+遠端已回讀為public，Git tree完整列出832份HD檔案與6份配樂檔案。無憑證容器抽取HD圖像、清冊及OGG皆HTTP 200，SHA-256與本機相符；既有Release四附件的大小與digest保持。
+
+- 範圍為既有儲存庫及其可達歷史，包含程式、HD、已收錄原版衍生PNG、研究截圖及譯文。GitHub既有Release亦隨儲存庫可見度公開，附件位元組及tag保持。
+- 正式HD目錄832份檔案，包含727張PNG；HD音樂目錄6份檔案，包含4首OGG及清冊／音色庫授權。全部已在Git，逐檔與現行封包輸入雜湊相符，沒有補入生成原稿或未驗證素材。
+- 原始ZIP、EXE、PDF、WAV等本機研究輸入不加入Git。完整版與推廣影片仍只留本機，不新增Release附件。
+- 公開收錄不改變原作或第三方權利。原作散布授權仍未確認；RRSAL-1.0不授予原作素材權利，字型與音色庫依既有第三方授權。HD中自有重繪部分與原作衍生成分分開理解，不將公開指示改寫成已取得原作授權。
+- 舊素材manifest與驗收收據保留原雜湊。其中private字樣記錄當時保存分類；目前的儲存庫可見度以本節與遠端回讀為準，來源和權利限制不因改名而消失。
+
+重現入口為[公開化稽核工具](../tools/audit_public_repository.py)：沿既有Go封包image，專案唯讀掛/src，明確輸出目錄可寫，以目前UID/GID、無網路、有界資源執行。工具逐檔核對Git blob、現行封包資源雜湊與全部可達歷史的指定檔名／憑證樣式；不輸出疑似憑證內容。
+
+可見度閘門[check_repo_visibility.sh](../tools/check_repo_visibility.sh)改為核對已決定的public狀態。查詢失敗、空輸出、private或internal皆停止；[六個隔離案例](../tools/test_check_repo_visibility.sh)核對這項行為。以下發行審查保留當時private狀態，不反向改寫歷史。
+
 ## v.1.0.3-20261017 發行審查
 
 本版延伸既有private發行範圍，納入已核准的13類HD、同場景F10與四首室內樂。主機gh已回讀儲存庫為private。交付、素材檢查與發布狀態見[本版收據](verification/release-v1.0.3-20261017.md)。

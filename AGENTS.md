@@ -44,6 +44,15 @@
 轉為 public、建立 public fork、GitHub Release 或公開 `dist-all/.../release/`，必須先停止
 並重新做權利審查；不得把 private repo 決策自動延伸成公開授權。
 
+2026-10-17使用者另明確要求儲存庫轉為public，正式遊戲用HD素材全部收錄GitHub。
+此新決定取代先前僅private保存的操作限制，範圍包含既有儲存庫及其歷史。
+目前公開方式、逐檔清冊與遠端回讀以[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)
+及[公開化清冊](docs/verification/public-repository-20261017.json)為準。
+舊素材manifest與收據的private文字及原雜湊保留。此決定不授予原作權利，原作散布
+授權仍未確認；RRSAL-1.0與第三方條款保持。原始ZIP、EXE、PDF、WAV及生成原稿
+不因此加入Git，完整版與影片仍留本機。可見度核對入口為`tools/check_repo_visibility.sh`，
+依本次決定接受public，查詢失敗或其他可見度即停止。
+
 ## 專案起源與玩家觀點研究
 
 建立或更新 `README.md` 的「專案起源」時，必須先查詢並閱讀魔旅士及其他華人老遊戲
@@ -78,9 +87,9 @@
   palette 規則、輸出 manifest 與 PNG SHA-256。
 - 用 archive count、offset、尺寸、色盤、透明色與 atlas／接觸表驗證素材；檔案存在或
   大小可整除不等於解碼正確。越界、格式不符或缺檔必須失敗即關閉。
-- 已驗證的原作衍生 PNG 可依上述專案特例提交至 private GitHub 的
-  `assets/original-derived-png/`；未驗證 PNG 仍只留本機。公開 `release/` 只可包含另有
-  散布權的素材，或提供合法資料匯入／抽取流程。
+- 已驗證的原作衍生PNG依上述現行公開化決定及來源清冊保存於
+  `assets/original-derived-png/`；未驗證PNG仍只留本機。`release/`維持引擎包與合法
+  資料匯入／抽取流程，不因儲存庫可見度改變而加入原始資料或完整版。
 
 ### 音樂與音效
 

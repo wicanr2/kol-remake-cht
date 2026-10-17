@@ -853,7 +853,7 @@
       "id": "github-release",
       "layer": "release",
       "title": "發 GitHub Release",
-      "body": "v.1.0.3-20261017六包與76秒影片完成。指定private Release只發布三平台引擎包與SHA256SUMS.txt，遠端四附件大小與SHA-256完全相符，tag固定指向3f1ae7c2。完整版、完整手冊及影片留本機；舊版保持。入口docs/verification/release-v1.0.3-20261017.md。",
+      "body": "v.1.0.3-20261017六包與76秒影片完成。Release三平台引擎包與SHA256SUMS.txt已發布，四附件大小與雜湊相符，tag固定3f1ae7c2。2026-10-17依使用者新決定將儲存庫轉public，838份HD／配樂全量收錄；原作權利聲明保持。完整版、手冊及影片仍留本機；舊版本保持。入口docs/verification/release-v1.0.3-20261017.md與docs/verification/public-repository-20261017.json。",
       "acceptance": "明確核准目的地與附件範圍，正式Release發布，四附件完整性與tag來源核對通過。",
       "verify": {
         "kind": "required_in_all",
@@ -867,7 +867,7 @@
       "issue": 43,
       "blocking_for_current_closeout": false,
       "status": "done",
-      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。 2026-10-17：v.1.0.3-20261017 private Release ID415516344，四附件與授權清單完全相符，tag 3f1ae7c2；本機入口保護改綁新版，未修改遠端Issue。"
+      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。 2026-10-17：v.1.0.3-20261017 private Release ID415516344，四附件與授權清單完全相符，tag 3f1ae7c2；本機入口保護改綁新版，未修改遠端Issue。 2026-10-17：使用者明確指定儲存庫公開，遠端已public；HD目錄832檔及配樂6檔完整收錄，三個匿名樣本HTTP200且雜湊相符。既有四Release附件及tag保持，未修改Issue。"
     },
     {
       "id": "v01-remaining-battle-chain",
@@ -2477,6 +2477,11 @@
       "file": "docs/spec/039-hd-art-ui.md",
       "match": "原型驗收沿SPEC-040對應場景；正式接入前升READY|135款候選已完成來源對應與透明裁取|靜態trace只記錄步數、場景與結局欄位",
       "why": "完整裝備與NPC原型的歷史階段。後節正式接入均已有限CONFORMED，證據見hd-equipment-runtime-20261015及hd-npc-mounts-runtime-20261015；其餘HD仍由hd-art-ui開放項認領，不重新開啟已驗項目。"
+    },
+    {
+      "file": "docs/RELEASE-RIGHTS-REVIEW.md",
+      "match": "全部已在Git.*沒有補入生成原稿或未驗證素材",
+      "why": "公開化範圍的明示排除條款；838份正式HD／配樂已全量核對，未驗證素材未加入，本句不是待辦。"
     }
   ],
   "current_acceptance": "SPEC-040：受控場景，中文與畫面正確即可；完整原版對拍不阻擋HD。"

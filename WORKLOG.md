@@ -11867,3 +11867,12 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 工具環境曾有兩次SVG呈現失敗：既有ImageMagick缺rsvg-convert，亦無MSVG解碼器。兩次均未產生總覽成品；重查路由與實際共享庫後，確認同一image已有librsvg2.54.7與Cairo，依官方公開介面直接渲染。沿kol-package image及UID/GID1000:1000、無網路、有界資源，未新增或重建image，也未在主機執行工作負載。成圖461183 bytes，來源與標籤目視完成；最終清冊、連結及清理核對續記。
 - 成圖12格皆不同，來源與既有manifest雜湊全符；中文缺字0，尺寸768×768，比例、標籤、版本及頁尾目視通過。README及畫面入口共207個本機連結、139列表格結構核對通過，故事背景及五個主要名詞／時間／事件回查手冊相符。清冊已記錄目視、故事來源、README與工具雜湊。工作清單verify通過，15開放／93完成保持；本輪無需重跑遊戲或另打封包。
 - 最終root-owned檔案與`.md`目錄皆0，沒有新增比較工作區或遺留容器；SVG只在記憶體中組成。主機gh推送前確認PRIVATE，本輪只提交README、總覽PNG／JSON、可重現工具及文件交接，現行版本、tag、Release與六包保持。
+
+## 2026-10-17 儲存庫public與HD素材全量收錄
+
+- 使用者明確要求「github repo 變成 public , hd 素材都要進入 github repo」。起始遠端private、main為82f94fbe，任務路徑乾淨。路由命中授權／公開範圍，載入grilling及RRSAL契約；依使用者新決定記錄公開操作，原作散布授權未確認與第三方權利聲明保持，不改LICENSE。
+- 832份HD檔案包含727張PNG、78份TXT及27份JSON，另有4首OGG、音樂清冊與音色庫授權，共838檔、1299147970 bytes。全部已在Git與遠端main，無漏檔；每個Git blob及SHA-256與v.1.0.3-20261017現行封包輸入相符。沒有改素材位元組、加入生成原稿、重新打包或增加Release附件。
+- 可達歷史的指定原始ZIP／EXE／PDF／WAV等檔名0；7028個歷史文字blob、519142485 bytes未命中四類指定憑證樣式。這是明示範圍的檢查，不宣稱完整秘密掃描。主機gh查Actions執行紀錄0。原始研究輸入仍不加入Git，公開範圍包含既有歷史中的原版衍生PNG、研究截圖與譯文；本次public指示不改寫成已取得原作授權。
+- `gh repo edit wicanr2/kol-remake-cht --visibility public --accept-visibility-change-consequences`成功，Repository ID1351991972回讀private=false、visibility=public。遠端Git tree未截斷，HD832及配樂6檔完整；無憑證容器下載actions.png、首批manifest及combat-chamber.ogg皆HTTP200且SHA相符。Release ID415516344的四附件大小與digest保持；tag保持原提交。
+- AGENTS與其CLAUDE符號連結、README、CONTEXT、畫面入口及權利審查同步新決定；原素材manifest與歷史收據保留當時private字樣及原雜湊。可見度閘門改public，public放行、private／internal／空輸出／API錯誤／無gh六案例全過；未加入略過旗標。未新增或重建工具image。
+- 首輪worklist將公開範圍的「未加入未驗證素材」排除條款誤判為待辦，依既有acknowledged機制登記原因後verify通過，15開放／93完成保持。311個現行本機入口、工具語法、公開化清冊與匿名存取皆通過，root-owned檔案及`.md`目錄0，本輪容器無殘留。未新增比較工作區。任務期間另出現一份任務外未追蹤TXT，保持原樣並排除於本次提交；本段與公開化紀錄一併提交推送。

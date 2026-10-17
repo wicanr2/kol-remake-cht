@@ -1,13 +1,15 @@
 # 《武士傳說》重製目前狀態
 
 更新日期：2026-10-17。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
-現行交付為`v.1.0.3-20261017`，三平台六包與76秒1080p影片驗收完成，private Release四附件已發布，遠端大小與SHA-256相符。tag固定指向`3f1ae7c2`，入口：[本版交付](docs/verification/release-v1.0.3-20261017.md)與[發布回讀](docs/verification/release-v1.0.3-20261017/publication.json)。舊版tag與Release保持。
+現行交付為`v.1.0.3-20261017`，三平台六包與76秒1080p影片驗收完成，Release四附件大小與SHA-256相符。儲存庫已依使用者明確決定轉為public，HD圖像與配套832份、HD配樂與授權6份全部收錄，見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)與[逐檔清冊](docs/verification/public-repository-20261017.json)。tag仍固定`3f1ae7c2`；[原發行收據](docs/verification/release-v1.0.3-20261017.md)保留當時private狀態，舊tag與Release位元組保持。
 本版包含目前玩家路徑13類HD圖形及操作頁、四首原創室內樂、F9與F10。正式430份Go／module及832份HD資產保持完整HD驗收來源；中文與場景依SPEC-040，不宣稱自然全任務通關或新增原版parity。
 README已補12格[HD總覽](docs/screenshots/hd-overview.png)、原版DOS／重製中文EGA／HD差異表及逐圖說明。故事背景依原版手冊核對，來源與圖片工具見[總覽清冊](docs/screenshots/hd-overview.json)及[畫面入口](docs/screenshots/README.md)。本次只更新文件與展示圖，既有封包、tag與Release保持。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
 ## 目前作業方向
+
+儲存庫公開化已依使用者新決定完成，原作散布授權仍未確認，RRSAL-1.0與第三方權利保持。既有原版衍生PNG、截圖及譯文隨儲存庫歷史公開；舊manifest保留原雜湊與當時分類。838份正式HD／配樂檔案與現行封包輸入完全相符，沒有修改遊戲素材位元組。完整版與影片仍留本機，沒有新增Release附件。
 
 新版六包、76秒影片及資料匯入驗收通過；唯一現行交付根目錄為`dist-all/v.1.0.3-20261017/`。完整版與影片只留本機，發布範圍限private repo的三平台引擎包及SHA256SUMS.txt。
 
@@ -41,7 +43,7 @@ README已補12格[HD總覽](docs/screenshots/hd-overview.png)、原版DOS／重�
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
 | HD | 目前玩家路徑13類圖形及操作介面已接入並限定CONFORMED，含地圖、天候、戰場、傷勢、標記、片頭、翻書、事件及所有共用操作頁；[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋)、[完整驗收](docs/verification/hd-full-runtime-20261017.md) | 本版六包通過；原版oracle未知及未抽測玩法邊界另列，不阻塞已驗HD圖形；自訂點陣與資料PNG保持 |
-| 交付 | `v.1.0.3-20261017`：三平台full／release、76秒1080p影片；private Release四附件大小及SHA相符；[交付收據](docs/verification/release-v1.0.3-20261017.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片本機；無真機驗收 |
+| 交付 | `v.1.0.3-20261017`：三平台full／release、76秒1080p影片；Release四附件大小及SHA相符，目前隨public儲存庫公開；[交付收據](docs/verification/release-v1.0.3-20261017.md)及[公開化清冊](docs/verification/public-repository-20261017.json) | 完整版及影片本機；無真機驗收 |
 | GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，本輪HD本機項結案；遠端Issue不變 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：
@@ -117,6 +119,7 @@ HD採已核准的1920×1200原比例，各批完成範圍以目前狀態表及�
 
 | 日期 | 議題 | 已確認決定 |
 |---|---|---|
+| 2026-10-17 | 儲存庫公開與HD全量收錄 | 使用者明確要求現有repo轉public；838份正式HD圖像／配套／配樂已全在Git，既有歷史一併公開。原作散布授權未確認，RRSAL與第三方權利保持；舊tag、Release及素材雜湊不改 |
 | 2026-10-16至17 | 全量HD及縮圖 | 核准同一手繪風格，連續完成並commit＋push至private repo；遊戲素材也縮小，後續新圖最長邊768；畫布1920×1200及F10保持 |
 | 2026-10-13 | HD配樂及控制 | 接受標題／旅店與探索／戰鬥四首室內樂；採A獨立開關、預設開啟，F9與下緣按鈕，EGA／HD切換持續播放；已接開發版並有限驗收 |
 | 2026-10-12 | 新版交付及發布 | 三平台完整版、Release與推廣影片；v.1.0.1-20261012包含首批HD及切換，舊版保持；使用者明確核准wicanr2/kol-remake-cht的private Release，只上傳三個引擎包與SHA256SUMS.txt，完整版與影片留本機 |

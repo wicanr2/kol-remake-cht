@@ -19,7 +19,7 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 目前收尾改採 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血、提高攻擊及準備場景，
 抵達後確認中文與畫面即可。登記場景[已通過](docs/verification/controlled-scenes-20261011.md)。
 嚴格原版 parity 與真機仍列後續，保留證據，不作HD開工門檻。
-matching 維持暫停。公開發行另行審查。
+matching維持暫停。儲存庫依使用者新決定公開，見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)；新增封包附件仍逐版審查。
 
 後續一次中文／功能核查與 README 更新見[本輪收據](docs/verification/cjk-closeout-20261011.md)。
 住宅告示與目錄已修，未訪分支、缺輸入、長任務逾時及競技場舊里程碑差異仍保留。
@@ -207,7 +207,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **spec-ready-before-implement** — 每份玩法 spec 經證據審查升 READY 後才實作，同狀態驗證後才標 CONFORMED：已完成
 - **terminology-and-safe-rects** — 統一遊戲與說明書術語；每個 CJK 欄位定義文字安全矩形與 overflow policy：已完成
 - **parity-sampling-registry** — 預先登記近似完成／嚴格 parity 的抽樣母體、硬失敗與平台矩陣：已完成
-- **github-release** — 發 GitHub Release：2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。 2026-10-17：v.1.0.3-20261017 private Release ID415516344，四附件與授權清單完全相符，tag 3f1ae7c2；本機入口保護改綁新版，未修改遠端Issue。
+- **github-release** — 發 GitHub Release：2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。 2026-10-17：v.1.0.3-20261017 private Release ID415516344，四附件與授權清單完全相符，tag 3f1ae7c2；本機入口保護改綁新版，未修改遠端Issue。 2026-10-17：使用者明確指定儲存庫公開，遠端已public；HD目錄832檔及配樂6檔完整收錄，三個匿名樣本HTTP200且雜湊相符。既有四Release附件及tag保持，未修改Issue。
 - **appimage-rebuild-latest-fixes** — 把最新怪物初始化與面板修正重建到新的本機 AppImage：2026-09-25 從 commit 5a0c0ad 重建 v.0.2.4-20260925，含 SPEC-029 怪物初始化、面板與本輪繁中修正；完整保存 GUI、封包 851 筆雜湊與兩種預設存檔位置通過，README 交付入口已指向它。封包內戰鬥勝利未重跑。
 - **train-forge-entry-condition** — TRAIN 的鍛造（旗標 byte 1 的 bit3）：已決定不做：2026-09-11 依 RE-134 結案：**原版走不到**。判準是物品記錄 +0x0F 的 bit5，而三個母體（八座城商品表、ITEM.LST 60 筆、任務物品 24 筆）逐筆掃過之後，唯一叫 Ingot 的東西（城 5 的 Copper Ingot）bit5 是零，有 bit5 的全是 Cloth Pants 與 Leather Hood。說明書寫的是設計意圖，資料沒跟上。remake 維持不實作，理由從「條件不明」變成「原版走不到」。
 - **dist-rebuild-version-number** — 由乾淨輸入重建 `dist-all/<版本>/{full,release,promo}` 的正式版本號：2026-10-12本機新版驗收通過；不關閉原版parity或真機項。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。

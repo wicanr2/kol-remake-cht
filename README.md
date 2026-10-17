@@ -46,10 +46,12 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 
 `full` 已含遊戲、HD介面與配樂必要資料，只留本機。[release](dist-all/v.1.0.3-20261017/release/) 是三平台引擎包，
 需先以包內工具匯入合法持有、已抽取且符合雜湊的資料；說明見各包 `README.txt`。
-三平台引擎包及校驗碼已發布至 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.3-20261017)，儲存庫維持 private。
+三平台引擎包及校驗碼已發布至 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.3-20261017)，儲存庫現為public。
 [前版 Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)保留。
 [76 秒推廣影片](dist-all/v.1.0.3-20261017/promo/kol-v.1.0.3-20261017-promo.mp4)
 使用本版旅店、遊戲內切換及明示受控HD場景的新畫格，也只留本機。檔案與 SHA-256 見交付根目錄的 `SHA256SUMS.json`。
+
+[HD圖像與配套檔案](assets/hd/)已完整加入GitHub，共832份，包含727張PNG；[HD配樂](assets/audio/hd/)另有4首OGG與2份清冊／授權文件。全數與本版封包輸入雜湊相符。[公開範圍與權利說明](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)及[逐檔清冊](docs/verification/public-repository-20261017.json)保留來源、Git blob與SHA-256。既有素材manifest沿用驗收時文字，公開收錄不變更原作或第三方權利。
 嚴格原版一致性與平台真機驗收另列後續研究，
 目前狀態以 [CONTEXT.md](CONTEXT.md) 與 [工作清單](WORKLIST.md) 為準。
 
@@ -377,13 +379,11 @@ HD採1920×1200原比例。預設使用EGA；點下緣「畫面F10」或按F10�
 |---|---|
 | [![《武士傳說》逃跑戰鬥畫面](https://morrisjfwong.com/blog/wp-content/uploads/2010/03/kol-flee-001a-s.jpg)](https://morrisjfwong.com/blog/knights-of-legend-%E6%AD%A6%E5%A3%AB%E5%82%B3%E8%AA%AA-dos-game/) | [![《武士傳說》競技場戰敗畫面](https://morrisjfwong.com/blog/wp-content/uploads/2010/04/war-lose-001a-s.jpg)](https://morrisjfwong.com/blog/knights-of-legend-%E6%AD%A6%E5%A3%AB%E5%82%B3%E8%AA%AA-dos-game/) |
 
-圖片著作權屬原權利人；此處只作研究來源標示與外部引用，不授予再利用或散布權。本專案
-另允許已驗證、可重生且有 manifest 的原版衍生 PNG 保存於目前的 private GitHub；這項
-專案例外不包含原版 raw 檔，也不授權 GitHub Release 或公開散布。
+圖片著作權屬原權利人；此處作研究來源標示與外部引用，不授予再利用或散布權。本儲存庫依使用者明確決定公開，收錄已驗證且有來源清冊的原版衍生PNG及HD。原作散布授權仍未確認；RRSAL-1.0不授予原作素材權利。現行範圍見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)，原始ZIP、EXE、PDF及音訊輸入仍不加入Git。
 
 ## 現況與入口
 
-- 私有 GitHub 儲存庫：[wicanr2/kol-remake-cht](https://github.com/wicanr2/kol-remake-cht)
+- 公開 GitHub 儲存庫：[wicanr2/kol-remake-cht](https://github.com/wicanr2/kol-remake-cht)
 - 專案規則：[AGENTS.md](AGENTS.md)
 - 目前真相與交接：[CONTEXT.md](CONTEXT.md)
 - 唯一工作清單：[WORKLIST.md](WORKLIST.md)

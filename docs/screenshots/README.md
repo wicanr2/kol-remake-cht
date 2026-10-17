@@ -6,7 +6,7 @@
 
 圖為768×768。逐格來源、畫格與證據清冊SHA-256、拼版工具、字模及輸出SHA-256見[總覽清冊](hd-overview.json)。重現入口為[總覽工具](../../tools/build_readme_overview.py)：在`kol-package:1.26.7-ebiten2.9.9-20261011-r1`容器內，專案唯讀掛`/src`，本目錄可寫掛`/out`，執行`python3 /src/tools/build_readme_overview.py --output /out`。使用UID/GID1000:1000、無網路及有界時間、記憶體、CPU與程序數。
 
-README的EGA／HD比較來自重製程式；原版DOS畫面另標出來源。總覽只展示畫面，不宣稱自然全程通關或原版parity。圖片只適用目前private repo的保存授權。
+README的EGA／HD比較來自重製程式；原版DOS畫面另標出來源。總覽只展示畫面，不宣稱自然全程通關或原版parity。儲存庫現依使用者決定公開，圖像來源及第三方權利保持；[現行公開化審查](../RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)記錄新決定，舊清冊的private文字保留驗收時分類。
 
 ## 早期 EGA 畫廊與產生流程
 

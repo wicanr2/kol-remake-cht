@@ -27,11 +27,11 @@ run() { # 名稱 期望結束碼 [環境變數…]
   fi
 }
 
-run "private 放行" 0 FAKE_GH_OUT=private FAKE_GH_RC=0
-run "public 擋下" 4 FAKE_GH_OUT=public FAKE_GH_RC=0
+run "public 放行" 0 FAKE_GH_OUT=public FAKE_GH_RC=0
+run "private 擋下" 4 FAKE_GH_OUT=private FAKE_GH_RC=0
 run "internal 擋下" 4 FAKE_GH_OUT=internal FAKE_GH_RC=0
 run "空輸出擋下" 4 FAKE_GH_OUT= FAKE_GH_RC=0
-run "gh 出錯擋下" 4 FAKE_GH_OUT=private FAKE_GH_RC=1
+run "gh 出錯擋下" 4 FAKE_GH_OUT=public FAKE_GH_RC=1
 
 # 沒有 gh：PATH 只放腳本自己要用的 dirname，確認訊息是「找不到 gh」而不是別的錯誤。
 mkdir -p "$TMP/nogh"

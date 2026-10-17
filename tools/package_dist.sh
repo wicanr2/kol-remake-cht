@@ -168,7 +168,7 @@ fi
 VERSION="${1:?用法：package_dist.sh <版本>}"
 check_version "$VERSION"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-# 儲存庫可見度閘門：不是 private 或查不到就停（失敗即關閉，`docs/RELEASE-RIGHTS-REVIEW.md`）。
+# 儲存庫可見度閘門：不符合目前public決定或查不到就停（docs/RELEASE-RIGHTS-REVIEW.md）。
 "$REPO_ROOT/tools/check_repo_visibility.sh" || exit $?
 IMAGE="${KOL_PACKAGE_IMAGE:-kol-package:20260907}"
 TOOL="${KOL_APPIMAGETOOL:-$REPO_ROOT/workplace/tools/appimagetool}"

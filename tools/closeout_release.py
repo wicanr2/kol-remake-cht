@@ -181,7 +181,7 @@ macOS 未經 Apple 公證，首次開啟可能須於系統設定的隱私權與�
           program_matches_precision_receipt=precision is not None,
           packaging_tools={str(p.relative_to(SRC)): sha(p) for p in
             [SRC / 'tools/closeout_release.py', SRC / 'tools/import_game_data.py', SRC / 'docker/Dockerfile.package']},
-          visibility='private; verified by host gh',
+          visibility='public; current decision in docs/verification/public-repository-20261017.json; host gh verification required',
           accepted_source_receipt_sha256=sha(accepted / 'receipt.json'),
           accepted_source_archive_sha256=sha(SRC / 'docs/verification/local/hd-music-runtime-20261013/evidence.tar.xz'),
           previous_receipt_sha256=sha(baseline / 'receipt.json'),
@@ -421,7 +421,7 @@ def verify():
                  for p in sorted((OUT / bundle).rglob('*'))
                  if p.is_file() and p != OUT / bundle / 'manifest.json']
         write(OUT / bundle / 'manifest.json', dict(schema='kol-dist-manifest-v1', version=VERSION,
-              bundle=bundle, rights=('引擎包；可上傳目前private GitHub；公開散布另行審查'
+              bundle=bundle, rights=('公開引擎包；RRSAL-1.0；原作資料需合法匯入，不授予原作素材權利'
                                      if bundle == 'release' else '僅本機；不得上傳或公開散布'),
               platform=['linux/amd64','windows/amd64','darwin/amd64','darwin/arm64'],
               file_count=len(files), files=files))
