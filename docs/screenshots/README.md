@@ -1,5 +1,15 @@
 # remake 目前的畫面
 
+## 現行 HD 總覽
+
+首頁的[HD總覽圖](hd-overview.png)使用12張完整遊戲畫格，涵蓋書本、旅店、商店、裝備、城鎮、世界、戰場、傷勢、怪物、天候、事件及F10設定。來源為v.1.0.3-20261017實際AppImage與各批已驗證HD畫格；縮圖保持原比例，不裁掉操作介面。
+
+圖為768×768。逐格來源、畫格與證據清冊SHA-256、拼版工具、字模及輸出SHA-256見[總覽清冊](hd-overview.json)。重現入口為[總覽工具](../../tools/build_readme_overview.py)：在`kol-package:1.26.7-ebiten2.9.9-20261011-r1`容器內，專案唯讀掛`/src`，本目錄可寫掛`/out`，執行`python3 /src/tools/build_readme_overview.py --output /out`。使用UID/GID1000:1000、無網路及有界時間、記憶體、CPU與程序數。
+
+README的EGA／HD比較來自重製程式；原版DOS畫面另標出來源。總覽只展示畫面，不宣稱自然全程通關或原版parity。圖片只適用目前private repo的保存授權。
+
+## 早期 EGA 畫廊與產生流程
+
 更新日期：2026-09-02
 
 **看圖請到 [GALLERY.md](GALLERY.md)**——42 張全部在那裡，英文與中文並排。

@@ -81,6 +81,23 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 
 ## 目前畫面
 
+### HD 總覽
+
+![武士傳說HD總覽：書本、旅店、商店、人物裝備、城鎮、世界、戰場、傷勢、怪物、天候、事件與遊戲內畫面設定](docs/screenshots/hd-overview.png)
+
+這12格涵蓋本版的主要圖形與操作介面，整張總覽為768×768。畫格來自本版實際AppImage與各批正式HD驗收，逐格來源見[總覽清冊](docs/screenshots/hd-overview.json)。小圖方便看整體風格，細節與同場景比較見下方。
+
+### 原版、中文 EGA 與 HD 的差異
+
+| 項目 | 原版 DOS | 重製中文 EGA | 重製 HD |
+|---|---|---|---|
+| 畫布 | 320×200 | 960×600 | 1920×1200，保持原比例 |
+| 美術 | 原版EGA像素圖 | 原版圖像以最近鄰放大 | 依核准風格重繪人物、場景、圖示與面板 |
+| 文字 | 原版英文與點陣字型 | 繁體中文點陣字 | 原生HD繁體中文，採Noto Serif CJK TC |
+| 比較來源 | 下方結局圖由dosgolem執行原版擷取 | 下方EGA圖由重製程式繪製 | 同場景HD圖由重製程式繪製 |
+
+原版沒有繁體中文模式。下方「重製中文EGA／HD」比較的是同一場景切換前後的呈現；「原版DOS／HD」結局比較才包含原版執行畫面。HD改換美術與文字呈現，原地圖、規則和v3存檔格式保持。按F10即可在遊戲內切換並立即比較。
+
 ### HD 畫面
 
 HD採1920×1200原比例，包含核准的操作介面、原生中文字、六人肖像與旅店老闆頭像。
@@ -92,9 +109,11 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 ![本版HD旅店頭像、原生中文字與配樂控制](docs/verification/release-v1.0.3-20261017/inn-hd-controls.png)
 
-| HD 戰場、傷勢與操作介面 | 遊戲內 HD 畫面設定 |
+| 同一旅店的 EGA 畫面設定 | 同一旅店的 HD 畫面設定 |
 |---|---|
-| ![HD戰場、傷勢與操作圖示](docs/verification/release-v1.0.3-20261017/battle-hd.png) | ![本版遊戲內HD畫面設定](docs/verification/release-v1.0.3-20261017/game-menu-hd.png) |
+| ![本版實際封包的EGA畫面設定](docs/verification/release-v1.0.3-20261017/game-menu-ega.png) | ![本版實際封包的HD畫面設定](docs/verification/release-v1.0.3-20261017/game-menu-hd.png) |
+
+兩圖是同一隊伍、同一旅店。HD使用手繪隊員與老闆頭像、原生中文字及銅框面板；EGA保留像素美術與點陣文字。設定選項、人物狀態與操作位置保持，F10切換後可立即返回遊戲。
 
 按 F10 或點下緣「畫面 F10」，即可在同一場景切換 EGA／HD；Esc 返回遊戲。
 三組[同主題、同場景比較](docs/verification/hd-interface-runtime-20261012.md#同主題比較)沿用相同人物與門面。
@@ -105,16 +124,16 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 目前玩家路徑使用的13類圖形及操作介面已接入同一手繪主題，包含片頭與翻書、天候、傷勢、走路與戰鬥標記、戰場及各操作子頁。新遊戲圖片及下方縮圖最長邊768，遊戲畫布保持1920×1200。下圖是同一受控場景的重製中文EGA／HD，已納入本版。
 
-| 重製中文 EGA | 手繪 HD |
-|---|---|
-| ![片頭EGA](docs/verification/hd-full-runtime-20261017/title-02-SET2PICS-05-ega.png) | ![片頭HD](docs/verification/hd-full-runtime-20261017/title-02-SET2PICS-05-hd.png) |
-| ![書封EGA](docs/verification/hd-full-runtime-20261017/book-cover-ega.png) | ![書封HD](docs/verification/hd-full-runtime-20261017/book-cover-hd.png) |
-| ![翻書EGA](docs/verification/hd-full-runtime-20261017/book-open-018-ega.png) | ![翻書HD](docs/verification/hd-full-runtime-20261017/book-open-018-hd.png) |
-| ![雪景EGA](docs/verification/hd-full-runtime-20261017/weather-4-01-ega.png) | ![雪景HD](docs/verification/hd-full-runtime-20261017/weather-4-01-hd.png) |
-| ![戰場EGA](docs/verification/hd-full-runtime-20261017/battle-08-map-16-ega.png) | ![戰場HD](docs/verification/hd-full-runtime-20261017/battle-08-map-16-hd.png) |
-| ![傷勢EGA](docs/verification/hd-full-runtime-20261017/body-1-1-ega.png) | ![傷勢HD](docs/verification/hd-full-runtime-20261017/body-1-1-hd.png) |
-| ![怪物群像EGA](docs/verification/hd-full-runtime-20261017/monster-native-encounter-ega.png) | ![怪物群像HD](docs/verification/hd-full-runtime-20261017/monster-native-encounter-hd.png) |
-| ![長對話排版EGA](docs/verification/hd-full-runtime-20261017/long-inn-ega.png) | ![長對話排版HD](docs/verification/hd-full-runtime-20261017/long-inn-hd.png) |
+| 重製中文 EGA | 手繪 HD | 可見差異 |
+|---|---|---|
+| ![片頭EGA](docs/verification/hd-full-runtime-20261017/title-02-SET2PICS-05-ega.png) | ![片頭HD](docs/verification/hd-full-runtime-20261017/title-02-SET2PICS-05-hd.png) | 像素片頭改為手繪背景與覆蓋幀，保留原序列。 |
+| ![書封EGA](docs/verification/hd-full-runtime-20261017/book-cover-ega.png) | ![書封HD](docs/verification/hd-full-runtime-20261017/book-cover-hd.png) | 書封重繪材質與字標，畫布保持原比例。 |
+| ![翻書EGA](docs/verification/hd-full-runtime-20261017/book-open-018-ega.png) | ![翻書HD](docs/verification/hd-full-runtime-20261017/book-open-018-hd.png) | 書頁改用手繪底圖與原生中文，保留翻頁進度。 |
+| ![雪景EGA](docs/verification/hd-full-runtime-20261017/weather-4-01-ega.png) | ![雪景HD](docs/verification/hd-full-runtime-20261017/weather-4-01-hd.png) | 地景、雪幕與介面換成HD，天候及所在位置相同。 |
+| ![本版戰場EGA](docs/verification/release-v1.0.3-20261017/battle-ega.png) | ![本版戰場HD](docs/verification/release-v1.0.3-20261017/battle-hd.png) | 地形、單位、身體圖與操作圖示重繪，格位及戰鬥狀態相同。 |
+| ![傷勢EGA](docs/verification/hd-full-runtime-20261017/body-1-1-ega.png) | ![傷勢HD](docs/verification/hd-full-runtime-20261017/body-1-1-hd.png) | 像素身體改為手繪身體與部位遮罩，傷勢數值相同。 |
+| ![怪物群像EGA](docs/verification/hd-full-runtime-20261017/monster-native-encounter-ega.png) | ![怪物群像HD](docs/verification/hd-full-runtime-20261017/monster-native-encounter-hd.png) | 怪物改為手繪群像，保留數量、比例與前後遮擋。 |
+| ![長對話排版EGA](docs/verification/hd-full-runtime-20261017/long-inn-ega.png) | ![長對話排版HD](docs/verification/hd-full-runtime-20261017/long-inn-hd.png) | 頭像、面板及中文字型改為HD，沿用相同對話內容。 |
 
 [完整驗收](docs/verification/hd-full-runtime-20261017.md)分階段核對104種場景，中文缺字0、EGA往返零差、HD最多一色階；實際鍵鼠F10共120事件保持狀態。[比較頁](docs/verification/hd-full-runtime-20261017/review.html)及[截圖清冊](docs/verification/hd-full-runtime-20261017/manifest.json)保存來源與雜湊。自訂點陣內容、地圖索引與結構遮罩保持資料用途。結果依受控場景規則，不代表自然全程通關。
 
@@ -275,19 +294,20 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 七段結局已納入本版，沿用手繪、紅黑銅框與原生 HD 中文。下方保留正式接入時的同主題比較與來源。
 下方包含結局內容。原版由 dosgolem 受控執行擷取；HD 來自正式重製程式的受控場景入口。
+原版以320×200像素圖搭配英文敘事；HD將相同事件重繪為手繪場景，改用繁中與1920×1200版面。保留段號與敘事順序，畫面配色、材質與文字排版會不同。
 
 <details>
 <summary>展開七段結局的原版／HD 截圖</summary>
 
-| 原版 DOS，320×200 | 重製 HD，1920×1200 |
-|---|---|
-| ![原版第0段：巨石門](docs/verification/hd-completion-20261014/original-ending-0.png) | ![HD第0段：巨石門](docs/verification/hd-ending-runtime-20261014/ending-0-hd.png) |
-| ![原版第1段：火炬洞窟](docs/verification/hd-completion-20261014/original-ending-1.png) | ![HD第1段：火炬洞窟](docs/verification/hd-ending-runtime-20261014/ending-1-hd.png) |
-| ![原版第2段：牢門](docs/verification/hd-completion-20261014/original-ending-2.png) | ![HD第2段：牢門](docs/verification/hd-ending-runtime-20261014/ending-2-hd.png) |
-| ![原版第3段：受囚的騎士](docs/verification/hd-completion-20261014/original-ending-3.png) | ![HD第3段：受囚的騎士](docs/verification/hd-ending-runtime-20261014/ending-3-hd.png) |
-| ![原版第4段：獲救](docs/verification/hd-completion-20261014/original-ending-4.png) | ![HD第4段：獲救](docs/verification/hd-ending-runtime-20261014/ending-4-hd.png) |
-| ![原版第5段：陰影](docs/verification/hd-completion-20261014/original-ending-5.png) | ![HD第5段：陰影](docs/verification/hd-ending-runtime-20261014/ending-5-hd.png) |
-| ![原版第6段：離開牢房](docs/verification/hd-completion-20261014/original-ending-6.png) | ![HD第6段：離開牢房](docs/verification/hd-ending-runtime-20261014/ending-6-hd.png) |
+| 原版 DOS，320×200 | 重製 HD，1920×1200 | HD重繪重點 |
+|---|---|---|
+| ![原版第0段：巨石門](docs/verification/hd-completion-20261014/original-ending-0.png) | ![HD第0段：巨石門](docs/verification/hd-ending-runtime-20261014/ending-0-hd.png) | 保留石門與人物構圖，補足岩壁、披風及金屬材質，英文改繁中。 |
+| ![原版第1段：火炬洞窟](docs/verification/hd-completion-20261014/original-ending-1.png) | ![HD第1段：火炬洞窟](docs/verification/hd-ending-runtime-20261014/ending-1-hd.png) | 相同洞窟事件改為手繪，敘事使用HD中文字型。 |
+| ![原版第2段：牢門](docs/verification/hd-completion-20261014/original-ending-2.png) | ![HD第2段：牢門](docs/verification/hd-ending-runtime-20261014/ending-2-hd.png) | 相同牢門場景改為手繪，圖文維持該段敘事順序。 |
+| ![原版第3段：受囚的騎士](docs/verification/hd-completion-20261014/original-ending-3.png) | ![HD第3段：受囚的騎士](docs/verification/hd-ending-runtime-20261014/ending-3-hd.png) | 像素人物改為手繪，補足表情、鎖鏈與石牆細節。 |
+| ![原版第4段：獲救](docs/verification/hd-completion-20261014/original-ending-4.png) | ![HD第4段：獲救](docs/verification/hd-ending-runtime-20261014/ending-4-hd.png) | 相同獲救事件重繪，英文對話改為原生繁中排版。 |
+| ![原版第5段：陰影](docs/verification/hd-completion-20261014/original-ending-5.png) | ![HD第5段：陰影](docs/verification/hd-ending-runtime-20261014/ending-5-hd.png) | 相同陰影事件改為手繪，沿用統一紅黑銅框。 |
+| ![原版第6段：離開牢房](docs/verification/hd-completion-20261014/original-ending-6.png) | ![HD第6段：離開牢房](docs/verification/hd-ending-runtime-20261014/ending-6-hd.png) | 重繪人物、手持鐐銬與門外暗處，段號及結尾敘事保持。 |
 
 </details>
 
@@ -296,9 +316,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 正常住宿保存與新程序重載通過。本批不代表正常通關或整頁原版一致；
 來源、畫格、權利、雜湊與限制見[結局驗收](docs/verification/hd-ending-runtime-20261014.md)。
 
-### EGA 畫面
+### 早期中文 EGA 畫面
 
-以下畫面由鎖定的 Docker 工具鏈重新擷取。繁中畫面為 960×600，使用 16×18 字模格。
+以下保留中文化收尾時的畫格，由當時鎖定的Docker工具鏈擷取。繁中畫面為960×600，使用16×18字模格。
 圖片來源、輸入、畫格編號、SHA-256 與權利分類見[截圖清冊](docs/verification/cjk-closeout-20261011/manifest.json)。
 城鎮及戰鬥來自正常標題、六人組隊與自然遭遇；建角畫面為展示入口。
 
@@ -315,24 +335,16 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 ## HD 範圍與驗收
 
-開發版已接入核准的四首原創中世紀室內樂：[標題與旅店](docs/verification/hd-music-20261012/review.html)、
+本版已納入核准的四首原創中世紀室內樂：[標題與旅店](docs/verification/hd-music-20261012/review.html)、
 [探索與戰鬥](docs/verification/hd-adventure-music-20261013/review.html)。試聽頁附OGG、分軌、三輪循環與來源授權。
 配樂預設開啟，按F9或點下緣「配樂」獨立切換；切換EGA／HD時持續播放，開關只在本次遊玩有效。
 接入與驗證見[配樂收據](docs/verification/hd-music-runtime-20261013.md)。現行發行包包含四首配樂及已驗收雷聲。
 
-首批手繪旅店門面與六人肖像已接入實際遊戲，採 1920×1200 原比例。
-點下緣「畫面 F10」或按 F10，選擇 EGA／HD 即可在同一場景比較；Esc 返回遊戲。
-預設使用 EGA，切換在本次遊玩有效。三平台完整版已含首批素材。
-角色按實際圖像匹配，自訂肖像沿用原圖；戰鬥資訊框顯示目前選中的人物。
-中文、滑鼠點選、舊 v3 與住宿存讀檔已通過[首批驗收](docs/verification/hd-runtime-20261011.md)。
-遊戲內切換的核准版面、中文、鍵鼠、縮放及正常住宿存讀檔已通過[正式驗收](docs/verification/display-switch-runtime-20261012.md)。
+三平台完整版`v.1.0.3-20261017`已納入[13類圖形與操作介面](docs/verification/hd-completion-20261014.md#目前覆蓋)，包括書本、建角、商店與服務子頁、人物裝備、七城與世界地圖、戰鬥、傷勢、天候及事件。各批依受控場景核對中文、畫面與F10，資料及自訂點陣保留既有用途。
 
-首批素材位於 [assets/hd/first-slice/manifest.json](assets/hd/first-slice/manifest.json)，
-核准樣張保存在[比較原型](docs/verification/hd-first-slice-20261011/review.html)。
-核准的[操作介面與NPC原型](docs/verification/hd-ui-theme-20261012/review.html)已接入開發版，
-[正式驗收](docs/verification/hd-interface-runtime-20261012.md)包含HD中文、面板、操作列、頭像、F10及正常住宿存讀檔。
-開發版已完成[13類圖形及操作介面](docs/verification/hd-completion-20261014.md#目前覆蓋)的HD接入，包括書本、建角、商店與服務子頁、人物裝備、七城與世界地圖、戰鬥、傷勢、天候及事件。各批均依受控場景核對中文、畫面與F10，資料及自訂點陣保留既有用途。
-[完整接入驗收](docs/verification/hd-full-runtime-20261017.md)列出目前來源、分階段測試與限制；[素材契約](docs/spec/039-hd-art-ui.md)保存尺寸、透明、來源與取樣規則。現行發行包仍為v.1.0.2-20261013，新版三平台封包為下一交付閘門。
+HD採1920×1200原比例。預設使用EGA；點下緣「畫面F10」或按F10選HD，即可在同一場景比較，Esc返回遊戲。切換在本次遊玩有效。鍵鼠、縮放、舊v3及正常住宿存讀檔的驗收見[遊戲內切換](docs/verification/display-switch-runtime-20261012.md)與[本版封包驗收](docs/verification/release-v1.0.3-20261017.md)。
+
+[完整接入驗收](docs/verification/hd-full-runtime-20261017.md)列出來源與限制；[素材契約](docs/spec/039-hd-art-ui.md)保存尺寸、透明、索引與取樣規則。圖片展示、正常操作抽樣與原版一致性各依自己的收據範圍判讀。
 
 ## 專案起源
 

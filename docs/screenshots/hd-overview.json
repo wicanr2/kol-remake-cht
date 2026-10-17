@@ -1,0 +1,295 @@
+{
+  "schema": "kol-readme-hd-overview/1",
+  "version": "v.1.0.3-20261017",
+  "status": "PASS",
+  "output": "hd-overview.png",
+  "dimensions": [
+    768,
+    768
+  ],
+  "sha256": "fda59c4f9bdb67e266ddf950afe7ccedb211e8748421d02ec4d1bf6571766fb5",
+  "bytes": 461183,
+  "panels": [
+    {
+      "panel": 1,
+      "title": "書本與翻頁",
+      "source": "docs/verification/hd-full-runtime-20261017/book-open-018-hd.png",
+      "sha256": "a11e722d98f6b16de35ec6e462359386004bc8fe50afe4b0e1ce4403cebb77ed",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "受控場景",
+      "receipt": "docs/verification/hd-full-runtime-20261017/manifest.json",
+      "receipt_sha256": "742f625a232ebd70c137701d79f2b9efb4dc2773bbb11668ed1fe01a4780a1c8",
+      "frame_rectangle": [
+        19,
+        69,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 2,
+      "title": "六人隊伍與旅店",
+      "source": "docs/verification/release-v1.0.3-20261017/inn-hd-controls.png",
+      "sha256": "ce1725175bb51d0b7a2ce70a48be56b09994ccde63e6ab3345d31c0c42c8e06a",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "本版實際AppImage",
+      "receipt": "docs/verification/release-v1.0.3-20261017/manifest.json",
+      "receipt_sha256": "5882c7be4720c1d3a0906af20fbf16210c99d5eda58ad19e7c627a53858c6e4c",
+      "frame_rectangle": [
+        267,
+        69,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 3,
+      "title": "商店與服務子頁",
+      "source": "docs/verification/hd-native-ui-runtime-20261014/town-shop-hd.png",
+      "sha256": "eec96ee623e52b4a7e81932c0930896462cdf197ebc2f8a1618610b00e74612a",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "evidence_scope": "既有正式HD驗收",
+      "receipt": "docs/verification/hd-native-ui-runtime-20261014/manifest.json",
+      "receipt_sha256": "70e69adf0c09dbbf5e7c257333fa6db4d749955631393d92bcea82cb7107d86c",
+      "frame_rectangle": [
+        515,
+        69,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 4,
+      "title": "人物裝備與隊伍",
+      "source": "docs/verification/hd-equipment-runtime-20261015/party-hd.png",
+      "sha256": "b9aaae8aee72a68a6cb272910af069bb1a52fc7a4c68e4c2680a95fe1d8970f1",
+      "dimensions": [
+        1920,
+        1200
+      ],
+      "evidence_scope": "既有正式HD驗收",
+      "receipt": "docs/verification/hd-equipment-runtime-20261015/manifest.json",
+      "receipt_sha256": "1d2a7277967ffd4b021ed1da27ee48c087de65ee634fed9a966d12f2ebe8d1d4",
+      "frame_rectangle": [
+        19,
+        235,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 5,
+      "title": "城鎮連續地圖",
+      "source": "docs/verification/release-v1.0.3-20261017/town3-hd.png",
+      "sha256": "8bf46f2dc40f3535fe3d3471f32ee1a19154a3e2d859e3ea9ea7564429e1dc95",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "本版受控場景",
+      "receipt": "docs/verification/release-v1.0.3-20261017/manifest.json",
+      "receipt_sha256": "5882c7be4720c1d3a0906af20fbf16210c99d5eda58ad19e7c627a53858c6e4c",
+      "frame_rectangle": [
+        267,
+        235,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 6,
+      "title": "世界探索",
+      "source": "docs/verification/release-v1.0.3-20261017/world-hd.png",
+      "sha256": "9b0cc0ae798eb1a824171b0a266fcbef507a2ccdd85c117585fd8d4f8628c2c0",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "本版受控場景",
+      "receipt": "docs/verification/release-v1.0.3-20261017/manifest.json",
+      "receipt_sha256": "5882c7be4720c1d3a0906af20fbf16210c99d5eda58ad19e7c627a53858c6e4c",
+      "frame_rectangle": [
+        515,
+        235,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 7,
+      "title": "戰場與操作介面",
+      "source": "docs/verification/release-v1.0.3-20261017/battle-hd.png",
+      "sha256": "1fb47dfbd43dda3556b92214b56b4c429bd0d16ff481943ea379d98c717324af",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "本版受控場景",
+      "receipt": "docs/verification/release-v1.0.3-20261017/manifest.json",
+      "receipt_sha256": "5882c7be4720c1d3a0906af20fbf16210c99d5eda58ad19e7c627a53858c6e4c",
+      "frame_rectangle": [
+        19,
+        401,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 8,
+      "title": "人物與傷勢",
+      "source": "docs/verification/hd-full-runtime-20261017/body-1-1-hd.png",
+      "sha256": "2bf99fd90e937905fd1535784c349361cc630d452281c53cdef7dd6ed33b9d9c",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "受控場景",
+      "receipt": "docs/verification/hd-full-runtime-20261017/manifest.json",
+      "receipt_sha256": "742f625a232ebd70c137701d79f2b9efb4dc2773bbb11668ed1fe01a4780a1c8",
+      "frame_rectangle": [
+        267,
+        401,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 9,
+      "title": "怪物遭遇",
+      "source": "docs/verification/hd-full-runtime-20261017/monster-native-encounter-hd.png",
+      "sha256": "140af717f44146d4f6eacec9e43f0d2a1e829daca159d4f7d782b50634aba0a4",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "受控場景",
+      "receipt": "docs/verification/hd-full-runtime-20261017/manifest.json",
+      "receipt_sha256": "742f625a232ebd70c137701d79f2b9efb4dc2773bbb11668ed1fe01a4780a1c8",
+      "frame_rectangle": [
+        515,
+        401,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 10,
+      "title": "雪景與天候",
+      "source": "docs/verification/hd-full-runtime-20261017/weather-4-01-hd.png",
+      "sha256": "4b3b64984513225e55bc55fc6147c1363a7b7629f9b0ad76326f1965db2ce5b5",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "受控場景",
+      "receipt": "docs/verification/hd-full-runtime-20261017/manifest.json",
+      "receipt_sha256": "742f625a232ebd70c137701d79f2b9efb4dc2773bbb11668ed1fe01a4780a1c8",
+      "frame_rectangle": [
+        19,
+        567,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 11,
+      "title": "世界事件",
+      "source": "docs/verification/hd-scene-events-runtime-20261017/world-05-hd.png",
+      "sha256": "53a5411fc8bb846c9cd7f5a8566e8d4cfb8f8588d6208d9f173c621f9ad95e74",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "既有正式HD驗收",
+      "receipt": "docs/verification/hd-scene-events-runtime-20261017/manifest.json",
+      "receipt_sha256": "89d9845c7b7be9b929d6a4776294b53904bb3df2854f0dc7971ac522c0318702",
+      "frame_rectangle": [
+        267,
+        567,
+        234,
+        146.25
+      ],
+      "crop": false
+    },
+    {
+      "panel": 12,
+      "title": "遊戲內畫面切換",
+      "source": "docs/verification/release-v1.0.3-20261017/game-menu-hd.png",
+      "sha256": "b228bd5fc4942cf1ea71c9653954189e2a7d970ce10ea9d37d95a5b521fb1f28",
+      "dimensions": [
+        768,
+        480
+      ],
+      "evidence_scope": "本版實際AppImage",
+      "receipt": "docs/verification/release-v1.0.3-20261017/manifest.json",
+      "receipt_sha256": "5882c7be4720c1d3a0906af20fbf16210c99d5eda58ad19e7c627a53858c6e4c",
+      "frame_rectangle": [
+        515,
+        567,
+        234,
+        146.25
+      ],
+      "crop": false
+    }
+  ],
+  "panel_count": 12,
+  "missing_glyphs": [],
+  "svg_sha256": "e4fcc98fadd3e3d6b20a568a3fa1e3657541b5184d4819b2ae075f7d37ff499d",
+  "font": {
+    "metadata": "assets/hd/first-slice/interface/font-atlas.json",
+    "sha256": "53eb14bdfad268974088969a9cb826b23660e0901f6913af374a373f16428735",
+    "atlas_sha256": "83d4cb8b6d83ba32cf4b893b594e707dc352c9f1231b117bdcc746a15eb750a7",
+    "method": "native SVG paths from approved glyph alpha; cutoff 96"
+  },
+  "tool": {
+    "path": "tools/build_readme_overview.py",
+    "sha256": "905d995f54720b7cdc1f181717d5db871dec6e4d08c228d540d97e11fe8111e9",
+    "image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+    "image_id": "sha256:0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f",
+    "renderer": "librsvg 2.54.7 / Cairo 1.16.0",
+    "command": "python3 /src/tools/build_readme_overview.py --output /out",
+    "svg_api": "rsvg_handle_render_document"
+  },
+  "composition": "12 complete screenshots, proportional SVG layout, no crop or artwork replacement",
+  "visual_review": "PASS",
+  "normal_full_playthrough": false,
+  "original_parity_claimed": false,
+  "rights": "private GitHub 可保存；含原作衍生截圖及核准HD，無公開散布權",
+  "visual_review_notes": "12完整畫面、中文字標、版本、比例與頁尾來源說明目視通過；無裁切或漏格。",
+  "validation": {
+    "status": "PASS",
+    "local_links": 207,
+    "markdown_table_rows": 139,
+    "distinct_panels": 12,
+    "readme_sha256": "a2df5a36f7172624d713919733f82aeed7ff74889fe966dea7d77d407696509a",
+    "story": {
+      "present": true,
+      "source": "docs/manual/chapters/08-realm-of-ashtalarea.md",
+      "source_sha256": "1f240cce8d7f8d47373bb796745c7d06f0c873795580cb6d95c20d70071d6126",
+      "claims_checked": [
+        "黑暗戰爭與黑塔",
+        "戰後十五年",
+        "Seggallion失蹤"
+      ]
+    }
+  }
+}

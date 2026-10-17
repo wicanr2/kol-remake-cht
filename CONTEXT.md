@@ -3,6 +3,7 @@
 更新日期：2026-10-17。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
 現行交付為`v.1.0.3-20261017`，三平台六包與76秒1080p影片驗收完成，private Release四附件已發布，遠端大小與SHA-256相符。tag固定指向`3f1ae7c2`，入口：[本版交付](docs/verification/release-v1.0.3-20261017.md)與[發布回讀](docs/verification/release-v1.0.3-20261017/publication.json)。舊版tag與Release保持。
 本版包含目前玩家路徑13類HD圖形及操作頁、四首原創室內樂、F9與F10。正式430份Go／module及832份HD資產保持完整HD驗收來源；中文與場景依SPEC-040，不宣稱自然全任務通關或新增原版parity。
+README已補12格[HD總覽](docs/screenshots/hd-overview.png)、原版DOS／重製中文EGA／HD差異表及逐圖說明。故事背景依原版手冊核對，來源與圖片工具見[總覽清冊](docs/screenshots/hd-overview.json)及[畫面入口](docs/screenshots/README.md)。本次只更新文件與展示圖，既有封包、tag與Release保持。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
