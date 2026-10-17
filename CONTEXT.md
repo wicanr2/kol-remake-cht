@@ -1,7 +1,7 @@
 # 《武士傳說》重製目前狀態
 
 更新日期：2026-10-17。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
-現行本機交付為`v.1.0.3-20261017`，三平台六包與76秒1080p影片驗收完成，private Release四附件待發布。入口：[本版交付](docs/verification/release-v1.0.3-20261017.md)。舊版tag與Release保持。
+現行交付為`v.1.0.3-20261017`，三平台六包與76秒1080p影片驗收完成，private Release四附件已發布，遠端大小與SHA-256相符。tag固定指向`3f1ae7c2`，入口：[本版交付](docs/verification/release-v1.0.3-20261017.md)與[發布回讀](docs/verification/release-v1.0.3-20261017/publication.json)。舊版tag與Release保持。
 本版包含目前玩家路徑13類HD圖形及操作頁、四首原創室內樂、F9與F10。正式430份Go／module及832份HD資產保持完整HD驗收來源；中文與場景依SPEC-040，不宣稱自然全任務通關或新增原版parity。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
@@ -40,7 +40,7 @@
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
 | HD | 目前玩家路徑13類圖形及操作介面已接入並限定CONFORMED，含地圖、天候、戰場、傷勢、標記、片頭、翻書、事件及所有共用操作頁；[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋)、[完整驗收](docs/verification/hd-full-runtime-20261017.md) | 本版六包通過；原版oracle未知及未抽測玩法邊界另列，不阻塞已驗HD圖形；自訂點陣與資料PNG保持 |
-| 交付 | `v.1.0.3-20261017`：三平台full／release、76秒1080p影片；[交付收據](docs/verification/release-v1.0.3-20261017.md)及[收尾工具](tools/closeout_release.py) | private四附件待發布；完整版及影片本機；無真機驗收 |
+| 交付 | `v.1.0.3-20261017`：三平台full／release、76秒1080p影片；private Release四附件大小及SHA相符；[交付收據](docs/verification/release-v1.0.3-20261017.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片本機；無真機驗收 |
 | GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，本輪HD本機項結案；遠端Issue不變 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：

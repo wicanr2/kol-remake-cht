@@ -2,7 +2,7 @@
   "schema": "kol-release-receipt/3",
   "version": "v.1.0.3-20261017",
   "technical_status": "PASS",
-  "publication_status": "READY",
+  "publication_status": "PUBLISHED",
   "packages": [
     {
       "path": "full/kol-v.1.0.3-20261017-full-linux-x86_64.AppImage",
@@ -83,5 +83,10 @@
     "首次HD載入在限3CPU、軟體顯示容器約194秒；非真機效能或最低需求。",
     "Windows首次12GiB容器的F10冷載入等待逾時，保留原紀錄；16GiB無swap重新驗證。",
     "vet兩則既有book.Label未具名欄位警示保留；完整cmd/internal測試通過。"
-  ]
+  ],
+  "release_id": 415516344,
+  "tag_object": "afb13e357680d78b2f017ca53c374e192fe54b37",
+  "tag_commit": "3f1ae7c2e3f1f596a7a9e57bec40c891df9fcb98",
+  "remote_attachments_verified": true,
+  "publication_receipt": "publication.json"
 }

@@ -853,21 +853,21 @@
       "id": "github-release",
       "layer": "release",
       "title": "發 GitHub Release",
-      "body": "v.1.0.2-20261013六包、76秒影片與權利審查完成。使用者維持一色階，修正通過後以go明確解除暫緩並核准指定private儲存庫的三個引擎包與SHA256SUMS.txt。GitHub Release已發布，四個遠端附件大小與SHA-256全部相符，tag固定指向46a01f116f579806187bd7fbbfa6d0a5f7f6ce7d。完整版、完整手冊譯文及影片留本機。入口docs/verification/release-v1.0.2-20261013.md，前版保持。",
+      "body": "v.1.0.3-20261017六包與76秒影片完成。指定private Release只發布三平台引擎包與SHA256SUMS.txt，遠端四附件大小與SHA-256完全相符，tag固定指向3f1ae7c2。完整版、完整手冊及影片留本機；舊版保持。入口docs/verification/release-v1.0.3-20261017.md。",
       "acceptance": "明確核准目的地與附件範圍，正式Release發布，四附件完整性與tag來源核對通過。",
       "verify": {
         "kind": "required_in_all",
         "paths": [
           "README.md",
-          "docs/verification/release-v1.0.2-20261013.md"
+          "docs/verification/release-v1.0.3-20261017.md"
         ],
-        "pattern": "https://github\\.com/wicanr2/kol-remake-cht/releases/tag/v\\.1\\.0\\.2-20261013",
+        "pattern": "https://github\\.com/wicanr2/kol-remake-cht/releases/tag/v\\.1\\.0\\.3-20261017",
         "note": "已發布並讀回遠端狀態、附件digest及tag；本機回歸訊號只保護入口與證據，不代替GitHub現況查詢。"
       },
       "issue": 43,
       "blocking_for_current_closeout": false,
       "status": "done",
-      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。"
+      "resolved": "2026-10-12：使用者明確同意目的地與四附件；https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.1-20261012 已發布，Release ID409856002，draft=false、prerelease=false；四附件遠端雜湊與大小相符，tag已取回並核對為6d98fb00，儲存庫維持private。未修改遠端Issue。 2026-10-14收尾：v.1.0.2-20261013已於2026-10-13發布，Release ID411748020、四附件digest及46a01f11 tag已核對；README入口與本機回歸訊號改綁新版，前版歷史保留。 2026-10-14：遠端Issue已附驗收收據並以completed關閉，回讀確認；見docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json。 2026-10-17：v.1.0.3-20261017 private Release ID415516344，四附件與授權清單完全相符，tag 3f1ae7c2；本機入口保護改綁新版，未修改遠端Issue。"
     },
     {
       "id": "v01-remaining-battle-chain",

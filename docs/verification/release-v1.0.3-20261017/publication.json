@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "repository": "wicanr2/kol-remake-cht",
+  "visibility": "private",
+  "release_id": 415516344,
+  "url": "https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.3-20261017",
+  "tag": "v.1.0.3-20261017",
+  "tag_object": "afb13e357680d78b2f017ca53c374e192fe54b37",
+  "tag_commit": "3f1ae7c2e3f1f596a7a9e57bec40c891df9fcb98",
+  "draft": false,
+  "prerelease": false,
+  "published_at": "2026-10-17T01:33:44Z",
+  "verification_tool": "host gh api releases/tags and git ls-remote including peeled tag",
+  "assets": [
+    {"id": 649187700, "name": "kol-v.1.0.3-20261017-release-linux-x86_64.AppImage", "size": 9501176, "state": "uploaded", "sha256": "098126a46bb56bbd77c2b2e160448231e31411d3d4953de1750bde056641e057"},
+    {"id": 649187698, "name": "kol-v.1.0.3-20261017-release-macos-universal.zip", "size": 16036297, "state": "uploaded", "sha256": "3dda9197139da9706c5bbbe4ac34e9969da160e73344bb4c9e41ba257614a3fb"},
+    {"id": 649187701, "name": "kol-v.1.0.3-20261017-release-windows-amd64.zip", "size": 8595972, "state": "uploaded", "sha256": "d9b40e29ddad2a10581232d2fa5b2c2f8296555be57297365bb36698acadd3e8"},
+    {"id": 649187699, "name": "SHA256SUMS.txt", "size": 345, "state": "uploaded", "sha256": "ce1dbd38834b4616235c3aa4d11e6a0bf15f5a2f6809eb9b11bec5eec10f5caa"}
+  ],
+  "attachment_count": 4,
+  "full_packages_uploaded": false,
+  "promo_uploaded": false,
+  "old_tags": {
+    "v.1.0.1-20261012": "6d98fb0002029ab834f74f3297c6b03a8d9b8f9b",
+    "v.1.0.2-20261013": "e0b03e2d12d8846ed7e12c1d1efe3fb26e921d8a"
+  },
+  "old_tags_unchanged": true
+}

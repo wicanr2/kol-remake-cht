@@ -11,7 +11,7 @@
 - 76秒影片使用本版實際AppImage旅店／F10畫格及明示受控HD展示。影片含原作衍生畫面，只留本機。
 - 使用者本輪要求完成後打包完整版、release與推廣影片，既有發布授權持續適用。只上傳wicanr2/kol-remake-cht的三平台引擎包及SHA256SUMS.txt；舊tag與Release不移動、不覆寫、不刪除。
 
-本次審查只適用上述內容與目前private儲存庫。實際附件雜湊與遠端回讀另存於本版正式證據。
+本次審查只適用上述內容與目前private儲存庫。private Release已發布，四附件大小及SHA-256與本機授權清單相符，沒有上傳完整版或影片；[遠端回讀](verification/release-v1.0.3-20261017/publication.json)另存正式證據。
 
 ## v.1.0.2-20261013 發行審查
 

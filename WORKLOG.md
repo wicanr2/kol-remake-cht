@@ -11856,3 +11856,5 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 16GiB重驗兩個Windows ZIP的EGA／HD啟動、資料匯入、正常六人旅店、預設配樂、F9、F10往返、完整狀態雜湊及無存檔寫入皆通過，正常Ctrl+Q退出；cgroup峰值15369453568 bytes，max／oom／oom_kill皆0。實際AppImage對兩個ZIP二十組畫格EGA零差、HD最多1／255，Wine實際音訊非靜音、末段靜音通過。數值閘門未放寬，正式Go及資產未改。
 - 六包最終逐檔驗證通過，1744必要資源、版本、架構、ZIP CRC、LICENSE及引擎包素材deny-list合格；三個引擎包與SHA256SUMS.txt授權清單已固定。正式收據保存於release-v1.0.3-20261017，八張預覽縮至最長邊768並保留來源雜湊。HD工作項結案，工作清單改15開放／93完成，原版未知及真機項保持。首輪文件核實因README移除前版網址而觸發既有Release入口保護，補保留前版連結，不是產品回歸；重新核實及發布結果續記。
 - 工作清單重新verify通過，15開放／93完成及產生區塊同步。54份正式附件、八張縮圖、430份程式來源與本輪文件連結核對通過；十份工作腳本逐檔確認已保存後，只移除本輪release工作區與過期Pulse socket。root-owned檔案與`.md`目錄皆0，本輪Docker容器無殘留，沒有重建映像檔或清理其他專案資源。提交與private發布續記。
+- 全量HD交付工具、README及正式證據提交`3f1ae7c2e3f1f596a7a9e57bec40c891df9fcb98`並推送origin/main。新annotated tag `v.1.0.3-20261017`為`afb13e357680d78b2f017ca53c374e192fe54b37`，遠端peeled commit為3f1ae7c2。發布前主機gh再次確認private；Release ID415516344於2026-10-17T01:33:44Z發布，draft／prerelease皆false。
+- 四個遠端附件的名稱、大小與SHA-256均和授權清單及本機檔案相符，沒有上傳完整版或影片。舊v.1.0.1及v.1.0.2 tag物件回讀保持；不覆寫舊版。發布收據、README現行入口與工作清單同步，55份正式附件、八張縮圖、430份程式及58個新入口核對通過，15開放／93完成保持。發布後文件與本段一併提交推送，tag保持3f1ae7c2，不移動到文件提交。
