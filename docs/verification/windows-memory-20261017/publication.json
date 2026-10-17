@@ -1,0 +1,42 @@
+{
+  "status": "PUBLISHED_VERIFIED",
+  "version": "v.1.0.4-20261017",
+  "source_commit": "8c0914255dc533309f49b76d047baf1c08415122",
+  "visibility": "PUBLIC",
+  "release": {
+    "assets": [
+      {
+        "browser_download_url": "https://github.com/wicanr2/kol-remake-cht/releases/download/v.1.0.4-20261017/kol-v.1.0.4-20261017-release-ega-hd-windows-amd64.zip",
+        "digest": "sha256:9cb23e794afbb0e5c911d57f5ccc56c12926f70def6948890540e6d9f7a7a4fd",
+        "id": 650885939,
+        "name": "kol-v.1.0.4-20261017-release-ega-hd-windows-amd64.zip",
+        "size": 8672021
+      },
+      {
+        "browser_download_url": "https://github.com/wicanr2/kol-remake-cht/releases/download/v.1.0.4-20261017/kol-v.1.0.4-20261017-release-ega-windows-amd64.zip",
+        "digest": "sha256:b40be1812cd9514cfd0db1651b44a677ce41b51150da61f8e233d50c818b5a25",
+        "id": 650885940,
+        "name": "kol-v.1.0.4-20261017-release-ega-windows-amd64.zip",
+        "size": 8628426
+      },
+      {
+        "browser_download_url": "https://github.com/wicanr2/kol-remake-cht/releases/download/v.1.0.4-20261017/SHA256SUMS.txt",
+        "digest": "sha256:30d07fe5941654cef22b4451033c52941540231997184f9a6b145d3667a34566",
+        "id": 650885938,
+        "name": "SHA256SUMS.txt",
+        "size": 237
+      }
+    ],
+    "draft": false,
+    "html_url": "https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.4-20261017",
+    "id": 415904702,
+    "name": "v.1.0.4-20261017 Windows 記憶體修復與 EGA 雙版本",
+    "prerelease": false,
+    "published_at": "2026-10-17T15:57:56Z",
+    "tag_name": "v.1.0.4-20261017",
+    "target_commitish": "main"
+  },
+  "only_asset_free_engine_packages_uploaded": true,
+  "full_and_promo_uploaded": false,
+  "immutable_previous_releases": true
+}

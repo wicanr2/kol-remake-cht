@@ -12,7 +12,7 @@ Wine峰值約14.3 GiB；本版四個實際ZIP、正常開場、選單、組隊�
 已在4 GiB上限通過，無OOM。玩家原先開場閃退未取得同一失敗收據，Windows真機待回測。
 正式435份Go／module及1744份資源由新收據鎖定；原素材、規則、配樂與v3保存保持。
 
-Linux、macOS及76秒影片沿用`v.1.0.3-20261017`。Windows新版引擎包發布檢核中，
+Linux、macOS及76秒影片沿用`v.1.0.3-20261017`。Windows新版兩個引擎包及SHA256SUMS.txt已發布並回讀大小／SHA-256相符，
 完整版與影片只留本機；舊tag與Release保持。[原發行收據](docs/verification/release-v1.0.3-20261017.md)
 保留當時private狀態。儲存庫現為public，832份HD圖像與配套、6份HD配樂及授權全量收錄，
 見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)。
@@ -23,7 +23,7 @@ Linux、macOS及76秒影片沿用`v.1.0.3-20261017`。Windows新版引擎包發�
 
 ## 目前作業方向
 
-Windows記憶體修復與雙版本交付已通過本輪驗收，下一步僅剩引擎包發布、遠端回讀及清理交接。
+Windows記憶體修復、雙版本交付及三附件發布均完成，tag固定8c091425；[發布回讀](docs/verification/windows-memory-20261017/publication.json)與[保存清冊](docs/verification/windows-memory-20261017/retention.json)已核對，本輪工作區已清理。
 採已核准的手繪、1920×1200、遊戲內F10及獨立F9；新圖最長邊768，既有832份HD素材保持。
 原生紋理192 MiB及縮放96 MiB是快取預算，不包含驅動與畫布；首次HD仍需載入。
 

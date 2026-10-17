@@ -55,3 +55,5 @@ Wine 不等於 Windows 真機；受控畫面不宣稱新增原版 parity 或自�
 封包為`dist-all/v.1.0.4-20261017/`下兩個完整版與兩個無素材引擎包。
 完整版分別18,860,390及1,292,965,557位元組；公開引擎包分別8,628,426及8,672,021位元組。
 完整SHA-256見[正式收據](windows-memory-20261017/receipt.json)。
+
+公開Release已發布，兩個引擎ZIP與SHA256SUMS.txt的遠端大小及SHA-256全符，見[發布回讀](windows-memory-20261017/publication.json)。tag固定8c091425，完整版未上傳，舊版保持。
