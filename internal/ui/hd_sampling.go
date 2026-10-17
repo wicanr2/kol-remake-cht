@@ -12,12 +12,17 @@ type hdSampleKey struct {
 }
 
 func (h *HD) sampledHD(src *ebiten.Image, width, height int) *ebiten.Image {
+	src = h.paint(src)
 	// Equal-size draws need no resampling. Dynamic weather/body images must
 	// retain their latest pixels rather than an immutable cached copy.
 	if src.Bounds().Size() == image.Pt(width, height) {
 		return src
 	}
 	key := hdSampleKey{src, width, height}
+	if h.sampleFrames == nil {
+		h.sampleFrames = map[hdSampleKey]uint64{}
+	}
+	h.sampleFrames[key] = h.imageCache().frame
 	if result := h.samples[key]; result != nil {
 		return result
 	}
@@ -27,6 +32,29 @@ func (h *HD) sampledHD(src *ebiten.Image, width, height int) *ebiten.Image {
 	result := ebiten.NewImageFromImage(resampleHD(raw, width, height))
 	if h.samples == nil {
 		h.samples = make(map[hdSampleKey]*ebiten.Image)
+	}
+	const sampleBudget = 96 << 20
+	var used int64
+	for k := range h.samples {
+		used += int64(k.width) * int64(k.height) * 4
+	}
+	for used+int64(width)*int64(height)*4 > sampleBudget {
+		var oldest hdSampleKey
+		var age uint64
+		found := false
+		for k := range h.samples {
+			when := h.sampleFrames[k]
+			if when != h.imageCache().frame && (!found || when < age) {
+				oldest, age, found = k, when, true
+			}
+		}
+		if !found {
+			break
+		}
+		h.samples[oldest].Dispose()
+		delete(h.samples, oldest)
+		delete(h.sampleFrames, oldest)
+		used -= int64(oldest.width) * int64(oldest.height) * 4
 	}
 	h.samples[key] = result
 	return result

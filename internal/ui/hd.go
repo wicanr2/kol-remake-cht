@@ -13,6 +13,8 @@ import (
 
 // HD 在最後1920×1200畫布呈現核准圖片與介面，不改動原畫布、字型與規則狀態。
 type HD struct {
+	cache        *hdImageCache
+	sampleFrames map[hdSampleKey]uint64
 	facade       *ebiten.Image
 	portraits    [80]*ebiten.Image
 	portraitFit  map[*ebiten.Image]bool
@@ -35,12 +37,13 @@ type HD struct {
 }
 
 func NewHD(facade, party image.Image, facadeKey string, portraitKeys []string) *HD {
-	h := &HD{facade: ebiten.NewImageFromImage(facade), matching: map[string]int{},
+	h := &HD{matching: map[string]int{},
 		facadeKey: facadeKey, keys: map[*ebiten.Image]string{}}
-	atlas := ebiten.NewImageFromImage(party)
+	h.facade = h.newPaint(facade)
+	atlas := h.newPaint(party)
 	for i, key := range portraitKeys {
 		x, y := i%3*512, i/3*512
-		h.portraits[i] = atlas.SubImage(image.Rect(x, y, x+512, y+512)).(*ebiten.Image)
+		h.portraits[i] = h.paintSubImage(atlas, image.Rect(x, y, x+512, y+512))
 		h.matching[key] = i
 	}
 	return h

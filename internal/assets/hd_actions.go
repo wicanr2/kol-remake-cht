@@ -1,13 +1,11 @@
 package assets
 
 import (
-	"bytes"
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"image"
 	"image/color"
-	"image/png"
 	"os"
 	"path/filepath"
 )
@@ -44,7 +42,7 @@ func HDActionIndices() []int {
 }
 
 // LoadHDActions 全組驗證後才回傳；不提供部分圖集。
-func LoadHDActions(dir string) (*HDActions, error) {
+func LoadHDActions(dir string, options ...HDLoadOption) (*HDActions, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -67,23 +65,15 @@ func LoadHDActions(dir string) (*HDActions, error) {
 	if !ok || info.Width != 1296 || info.Height != 960 || !validHDHash(info.SHA256) {
 		return nil, fmt.Errorf("HD動作圖集尺寸或雜湊宣告無效")
 	}
-	data, err := os.ReadFile(filepath.Join(dir, m.Image))
+	pic, err := openHDImage(dir, m.Image, info)
 	if err != nil {
 		return nil, err
 	}
-	if fmt.Sprintf("%x", sha256.Sum256(data)) != info.SHA256 {
-		return nil, fmt.Errorf("HD動作圖集雜湊不符")
-	}
-	cfg, err := png.DecodeConfig(bytes.NewReader(data))
-	if err != nil {
-		return nil, err
-	}
-	if cfg.Width != info.Width || cfg.Height != info.Height {
-		return nil, fmt.Errorf("HD動作圖集實際尺寸不符")
-	}
-	pic, err := png.Decode(bytes.NewReader(data))
-	if err != nil {
-		return nil, err
+	if !deferHDPixels(options) {
+		pic, err = ReadHDImage(pic)
+		if err != nil {
+			return nil, err
+		}
 	}
 	ids := HDActionIndices()
 	seen := map[string]bool{}
@@ -93,6 +83,9 @@ func LoadHDActions(dir string) (*HDActions, error) {
 			return nil, fmt.Errorf("HD動作第%d格圖號、來源或矩形無效", i)
 		}
 		seen[s.SourceRGB] = true
+		if deferHDPixels(options) {
+			continue
+		}
 		rgba := make([]byte, 0, 144*120*4)
 		bb := image.Rectangle{}
 		for py := 0; py < 120; py++ {

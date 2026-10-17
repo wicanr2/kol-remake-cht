@@ -46,7 +46,7 @@ func sceneEventExpected(i int) (string, int, [2]int, [2]int) {
 	}
 	return "COMBPICS", i, [2]int{88, 64}, [2]int{384, 280}
 }
-func LoadHDSceneEvents(dir string) (*HDSceneEvents, error) {
+func LoadHDSceneEvents(dir string, options ...HDLoadOption) (*HDSceneEvents, error) {
 	raw, e := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if e != nil {
 		return nil, e
@@ -78,6 +78,14 @@ func LoadHDSceneEvents(dir string) (*HDSceneEvents, error) {
 	result := &HDSceneEvents{Manifest: m}
 	for _, p := range m.Pictures {
 		info := m.Files[p.File]
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, p.File, m.Files[p.File])
+			if err != nil {
+				return nil, err
+			}
+			result.Images = append(result.Images, pic)
+			continue
+		}
 		data, e := os.ReadFile(filepath.Join(dir, p.File))
 		if e != nil {
 			return nil, e

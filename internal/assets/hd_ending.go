@@ -34,7 +34,7 @@ type HDEnding struct {
 }
 
 // LoadHDEnding 驗證七段的完整子組，不交回部分圖片。
-func LoadHDEnding(dir string) (*HDEnding, error) {
+func LoadHDEnding(dir string, options ...HDLoadOption) (*HDEnding, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -58,6 +58,14 @@ func LoadHDEnding(dir string) (*HDEnding, error) {
 		info, ok := m.Files[p.File]
 		if !ok || !validHDHash(info.SHA256) || info.Width < 1 || info.Height < 1 || info.Width > 4096 || info.Height > 4096 {
 			return nil, fmt.Errorf("HD結局 %s 宣告尺寸或雜湊無效", p.File)
+		}
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, p.File, m.Files[p.File])
+			if err != nil {
+				return nil, err
+			}
+			h.Images[p.Index], h.SourceRGB[p.Index] = pic, p.SourceRGB
+			continue
 		}
 		data, e := os.ReadFile(filepath.Join(dir, p.File))
 		if e != nil {

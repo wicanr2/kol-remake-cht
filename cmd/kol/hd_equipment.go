@@ -14,7 +14,7 @@ import (
 
 func (g *game) loadHDEquipment() (*assets.HDEquipment, hdart.Binding, error) {
 	var binding hdart.Binding
-	pack, err := assets.LoadHDEquipment(filepath.Join(g.hdDir, "equipment"))
+	pack, err := assets.LoadHDEquipment(filepath.Join(g.hdDir, "equipment"), assets.DeferHDPixels)
 	if err != nil {
 		return nil, binding, err
 	}

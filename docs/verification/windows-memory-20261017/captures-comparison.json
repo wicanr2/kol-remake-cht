@@ -1,0 +1,1627 @@
+{
+  "status": "PASS",
+  "scenes": 13,
+  "frames_per_platform": 52,
+  "cross_platform": [
+    {
+      "name": "battle-08-map-16",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "battle-08-map-16",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 774
+    },
+    {
+      "name": "battle-08-map-16",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "battle-08-map-16",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 774
+    },
+    {
+      "name": "body-1-1",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "body-1-1",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 774
+    },
+    {
+      "name": "body-1-1",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "body-1-1",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 774
+    },
+    {
+      "name": "book-cover",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "book-cover",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 536
+    },
+    {
+      "name": "book-cover",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "book-cover",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 536
+    },
+    {
+      "name": "book-open-018",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "book-open-018",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 2916
+    },
+    {
+      "name": "book-open-018",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "book-open-018",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 2916
+    },
+    {
+      "name": "credit-13",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "credit-13",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 2371
+    },
+    {
+      "name": "credit-13",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "credit-13",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 2371
+    },
+    {
+      "name": "event-combat-03",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "event-combat-03",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 751
+    },
+    {
+      "name": "event-combat-03",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "event-combat-03",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 751
+    },
+    {
+      "name": "event-world-05",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "event-world-05",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 539
+    },
+    {
+      "name": "event-world-05",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "event-world-05",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 539
+    },
+    {
+      "name": "long-inn",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "long-inn",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 14173
+    },
+    {
+      "name": "long-inn",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "long-inn",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 14173
+    },
+    {
+      "name": "map-town3",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "map-town3",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 764
+    },
+    {
+      "name": "map-town3",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "map-town3",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 764
+    },
+    {
+      "name": "map-world",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "map-world",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 454
+    },
+    {
+      "name": "map-world",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "map-world",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 454
+    },
+    {
+      "name": "monster-native-encounter",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "monster-native-encounter",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 589
+    },
+    {
+      "name": "monster-native-encounter",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "monster-native-encounter",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 589
+    },
+    {
+      "name": "title-02-SET2PICS-05",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "title-02-SET2PICS-05",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "title-02-SET2PICS-05",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "title-02-SET2PICS-05",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "weather-4-01",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "weather-4-01",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 454
+    },
+    {
+      "name": "weather-4-01",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "name": "weather-4-01",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 454
+    }
+  ],
+  "previous_release": [
+    {
+      "platform": "scenes-linux",
+      "name": "battle-08-map-16",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "battle-08-map-16",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "battle-08-map-16",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 3
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "battle-08-map-16",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "battle-08-map-16",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "battle-08-map-16",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "battle-08-map-16",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 3
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "battle-08-map-16",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "body-1-1",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "body-1-1",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "body-1-1",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 3
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "body-1-1",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "body-1-1",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "body-1-1",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "body-1-1",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 3
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "body-1-1",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-cover",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-cover",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-cover",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 458
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-cover",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 272
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-cover",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-cover",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-cover",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 458
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-cover",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 272
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-open-018",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-open-018",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-open-018",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-open-018",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-open-018",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-open-018",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-open-018",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-open-018",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "credit-13",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "credit-13",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "credit-13",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 381
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "credit-13",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 899
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "credit-13",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "credit-13",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "credit-13",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 381
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "credit-13",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 899
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-combat-03",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-combat-03",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-combat-03",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-combat-03",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-combat-03",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-combat-03",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-combat-03",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-combat-03",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-world-05",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-world-05",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-world-05",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-world-05",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-world-05",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-world-05",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-world-05",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-world-05",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "long-inn",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "long-inn",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "long-inn",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1725
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "long-inn",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 2742
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "long-inn",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "long-inn",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "long-inn",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1725
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "long-inn",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 2742
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-town3",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-town3",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-town3",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 155
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-town3",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 156
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-town3",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-town3",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-town3",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 158
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-town3",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 290
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-world",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-world",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-world",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-world",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-world",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-world",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-world",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-world",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "monster-native-encounter",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "monster-native-encounter",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "monster-native-encounter",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "monster-native-encounter",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "monster-native-encounter",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "monster-native-encounter",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "monster-native-encounter",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "monster-native-encounter",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "title-02-SET2PICS-05",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "title-02-SET2PICS-05",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "title-02-SET2PICS-05",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "title-02-SET2PICS-05",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "title-02-SET2PICS-05",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "title-02-SET2PICS-05",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "title-02-SET2PICS-05",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "title-02-SET2PICS-05",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "weather-4-01",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "weather-4-01",
+      "variant": "first-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "weather-4-01",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "weather-4-01",
+      "variant": "first-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "weather-4-01",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "weather-4-01",
+      "variant": "restored-ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "weather-4-01",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 1,
+      "different_pixels": 1
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "weather-4-01",
+      "variant": "restored-hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    }
+  ],
+  "roundtrips": [
+    {
+      "platform": "scenes-linux",
+      "name": "battle-08-map-16",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "battle-08-map-16",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "body-1-1",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "body-1-1",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-cover",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-cover",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-open-018",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "book-open-018",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "credit-13",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "credit-13",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-combat-03",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-combat-03",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-world-05",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "event-world-05",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "long-inn",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "long-inn",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-town3",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-town3",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-world",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "map-world",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "monster-native-encounter",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "monster-native-encounter",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "title-02-SET2PICS-05",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "title-02-SET2PICS-05",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "weather-4-01",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-linux",
+      "name": "weather-4-01",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "battle-08-map-16",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "battle-08-map-16",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "body-1-1",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "body-1-1",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-cover",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-cover",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-open-018",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "book-open-018",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "credit-13",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "credit-13",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-combat-03",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-combat-03",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-world-05",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "event-world-05",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "long-inn",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "long-inn",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-town3",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-town3",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-world",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "map-world",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "monster-native-encounter",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "monster-native-encounter",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "title-02-SET2PICS-05",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "title-02-SET2PICS-05",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "weather-4-01",
+      "theme": "ega",
+      "limit": 0,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    },
+    {
+      "platform": "scenes-windows",
+      "name": "weather-4-01",
+      "theme": "hd",
+      "limit": 1,
+      "max_channel_delta": 0,
+      "different_pixels": 0
+    }
+  ],
+  "missing_glyphs": [],
+  "model_and_chinese_unchanged": true,
+  "original_parity": false,
+  "real_windows_machine": false
+}

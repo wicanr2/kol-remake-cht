@@ -36,7 +36,7 @@ type HDTemplates struct {
 }
 
 // LoadHDTemplates 先驗證80個來源的完整覆蓋，再原子載入74張新增手繪畫格。
-func LoadHDTemplates(dir string) (*HDTemplates, error) {
+func LoadHDTemplates(dir string, options ...HDLoadOption) (*HDTemplates, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -90,6 +90,14 @@ func LoadHDTemplates(dir string) (*HDTemplates, error) {
 	for i := 0; i < 20; i++ {
 		name := fmt.Sprintf("quartet-%02d.png", i)
 		info := m.Files[name]
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, name, info)
+			if err != nil {
+				return nil, err
+			}
+			result.Images[name] = pic
+			continue
+		}
 		data, err := os.ReadFile(filepath.Join(dir, name))
 		if err != nil {
 			return nil, err
@@ -115,6 +123,9 @@ func LoadHDTemplates(dir string) (*HDTemplates, error) {
 		result.Images[name] = pic
 	}
 	for _, p := range m.Portraits {
+		if deferHDPixels(options) {
+			continue
+		}
 		pic := result.Images[p.File]
 		buf := make([]byte, 0, (p.Rect[2]-p.Rect[0])*(p.Rect[3]-p.Rect[1])*3)
 		for y := p.Rect[1]; y < p.Rect[3]; y++ {

@@ -41,7 +41,7 @@ type HDMonsters struct {
 func monsterHash(data []byte) string { return fmt.Sprintf("%x", sha256.Sum256(data)) }
 
 // LoadHDMonsters 驗完整32張原生透明圖片後才回傳，不提供部分組。
-func LoadHDMonsters(dir string) (*HDMonsters, error) {
+func LoadHDMonsters(dir string, options ...HDLoadOption) (*HDMonsters, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -73,6 +73,14 @@ func LoadHDMonsters(dir string) (*HDMonsters, error) {
 		info, ok := m.Files[p.File]
 		if !ok || !validHDHash(info.SHA256) || info.Width < p.Size[0]*6 || info.Height < p.Size[1]*6 || info.Width > 4096 || info.Height > 4096 {
 			return nil, fmt.Errorf("HD怪物原生尺寸不足或雜湊無效")
+		}
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, p.File, m.Files[p.File])
+			if err != nil {
+				return nil, err
+			}
+			result.Images[i] = pic
+			continue
 		}
 		data, err := os.ReadFile(filepath.Join(dir, p.File))
 		if err != nil {

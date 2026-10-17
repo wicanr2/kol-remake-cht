@@ -84,10 +84,10 @@ func (h *HD) AttachNPCMounts(portraits, mounts map[string]image.Image, preserved
 		nextFit[pic] = fit
 	}
 	for key, pic := range portraits {
-		nextPortraits[key] = ebiten.NewImageFromImage(pic)
+		nextPortraits[key] = h.newPaint(pic)
 	}
 	for key, pic := range mounts {
-		painted := ebiten.NewImageFromImage(pic)
+		painted := h.newPaint(pic)
 		nextIcons[key] = painted
 		nextFit[painted] = true
 	}

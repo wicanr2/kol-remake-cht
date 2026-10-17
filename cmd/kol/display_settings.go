@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"image"
 	"os"
+	"path/filepath"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -73,6 +74,11 @@ func (g *game) updateDisplaySettings() bool {
 		g.displaySettings.Open = false
 		g.displayEvent("back")
 	} else if choice >= 0 {
+		if choice == 1 && !g.hdInstalled() {
+			g.displaySettings.Problem = true
+			g.displayEvent("hd-unavailable")
+			return true
+		}
 		mode := [2]string{"ega", "hd"}[choice]
 		g.displaySettings.Cursor = choice
 		err := g.setGraphics(mode)
@@ -94,6 +100,7 @@ func (g *game) drawDisplaySettings(dst *ebiten.Image) error {
 	}
 	g.displayCanvas.Clear()
 	g.displaySettings.HD = g.hd != nil
+	g.displaySettings.HDUnavailable = !g.hdInstalled()
 	if g.hd != nil {
 		g.hd.DrawDisplaySettings(g.displayCanvas.Image(), g.displaySettings)
 		g.hd.DrawMusicControl(g.displayCanvas.Image(), g.musicEnabled)
@@ -110,4 +117,22 @@ func (g *game) drawDisplaySettings(dst *ebiten.Image) error {
 		g.displayAwaitFrame = false
 	}
 	return nil
+}
+
+func (g *game) hdInstalled() bool {
+	if available, checked := g.hdInstallCache[g.hdDir]; checked {
+		return available
+	}
+	if g.hdInstallCache == nil {
+		g.hdInstallCache = map[string]bool{}
+	}
+	for _, dir := range []string{"", "interface", "pages", "events", "scroll", "templates", "actions", "equipment", "npc-mounts", "monsters", "town-facades", "town-crests", "town-maps", "scene-events", "motion"} {
+		info, err := os.Stat(filepath.Join(g.hdDir, dir, "manifest.json"))
+		if err != nil || !info.Mode().IsRegular() {
+			g.hdInstallCache[g.hdDir] = false
+			return false
+		}
+	}
+	g.hdInstallCache[g.hdDir] = true
+	return true
 }

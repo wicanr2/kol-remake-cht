@@ -4,7 +4,8 @@
 Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用 Ogg Vorbis。標題雷聲已通過人耳驗收與[正常播放驗證](docs/verification/audio/README.md)。
 
 目前提供書本與建角、組隊、城鎮與世界探索、戰鬥、任務、結局及 kol-save-v3 保存。
-現行交付為 `v.1.0.3-20261017`，含三平台完整版、需匯入合法資料的 release 與本機推廣影片。
+Windows 修正版為 `v.1.0.4-20261017`，提供純 EGA 與 EGA＋HD 兩種完整版。
+Linux、macOS 與推廣影片沿用 `v.1.0.3-20261017`；release 引擎包需自行匯入合法資料。
 目前採[受控場景驗收](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血與提高攻擊，
 抵達指定場景後確認中文與畫面。登記場景已通過，結果見[驗收收據](docs/verification/controlled-scenes-20261011.md)。
 本版包含住宅告示、中文目錄、結局排版修正、HD介面與頭像、四首原創室內樂，以及遊戲內F9配樂與F10畫面切換。
@@ -34,22 +35,28 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 
 ## 開始遊玩
 
-現行版本為 `v.1.0.3-20261017`，包含完整HD圖形與操作介面、四首原創室內樂、F9配樂及F10畫面切換。
-封包與限制見 [交付收據](docs/verification/release-v1.0.3-20261017.md)。
-正式交付根目錄為 [dist-all/v.1.0.3-20261017/](dist-all/v.1.0.3-20261017/)：
+Windows `v.1.0.4-20261017` 改為需要圖片時才讀取，並限制快取容量。
+久未使用的圖片會釋放；回到 EGA 時釋放 HD 圖片，再切回時重新載入目前場景。
+沒有完整 HD 素材組時不能切換 HD。兩種版本均保留中文、四首配樂、F9 與相同存檔格式。
+首次 HD 仍需載入；Wine 軟體繪圖測試約十多至二十多秒，Windows 真機時間尚未量測。
+Windows 封包與驗證見[修正版收據](docs/verification/windows-memory-20261017.md)；
+Linux、macOS 與影片見[原交付收據](docs/verification/release-v1.0.3-20261017.md)。
 
 | 平台 | 檔案 | 開啟方式 |
 |---|---|---|
 | Linux | [完整版 AppImage](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-linux-x86_64.AppImage) | `chmod +x` 後執行；沒有 FUSE 可加 `--appimage-extract-and-run` |
-| Windows AMD64 | [完整版 ZIP](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-windows-amd64.zip) | 解壓後開啟 `kol.exe`；已通過 Wine 啟動與切換 |
+| Windows AMD64，純 EGA | [完整版 ZIP，約 19 MB](dist-all/v.1.0.4-20261017/full/kol-v.1.0.4-20261017-full-ega-windows-amd64.zip) | 解壓後開啟 `kol.exe`；不含 HD 圖像，HD 選項停用 |
+| Windows AMD64，EGA＋HD | [完整版 ZIP，約 1.29 GB](dist-all/v.1.0.4-20261017/full/kol-v.1.0.4-20261017-full-ega-hd-windows-amd64.zip) | 解壓後開啟 `kol.exe`；F10 在同一場景切換 |
 | macOS ARM64／Intel | [完整版 universal ZIP](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-macos-universal.zip) | 開啟 `武士傳說.app`；只完成建置與結構驗收 |
 
-`full` 已含遊戲、HD介面與配樂必要資料，只留本機。[release](dist-all/v.1.0.3-20261017/release/) 是三平台引擎包，
+`full` 已含對應圖像版本的遊戲及配樂資料，只留本機。[Windows release](dist-all/v.1.0.4-20261017/release/) 也分兩種資料匯入清單；
+純 EGA 匯入不複製手繪圖像。[Linux、macOS release](dist-all/v.1.0.3-20261017/release/) 沿用前版。引擎包
 需先以包內工具匯入合法持有、已抽取且符合雜湊的資料；說明見各包 `README.txt`。
-三平台引擎包及校驗碼已發布至 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.3-20261017)，儲存庫現為public。
+Windows 修正版引擎包與校驗碼入口為 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.4-20261017)；
+[三平台前版 Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.3-20261017)保留。儲存庫現為public。
 [前版 Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)保留。
 [76 秒推廣影片](dist-all/v.1.0.3-20261017/promo/kol-v.1.0.3-20261017-promo.mp4)
-使用本版旅店、遊戲內切換及明示受控HD場景的新畫格，也只留本機。檔案與 SHA-256 見交付根目錄的 `SHA256SUMS.json`。
+使用 `v.1.0.3-20261017` 的旅店、遊戲內切換及明示受控HD場景，也只留本機。各版本檔案與 SHA-256 見對應交付根目錄的 `SHA256SUMS.json`。
 
 [HD圖像與配套檔案](assets/hd/)已完整加入GitHub，共832份，包含727張PNG；[HD配樂](assets/audio/hd/)另有4首OGG與2份清冊／授權文件。全數與本版封包輸入雜湊相符。[公開範圍與權利說明](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)及[逐檔清冊](docs/verification/public-repository-20261017.json)保留來源、Git blob與SHA-256。既有素材manifest沿用驗收時文字，公開收錄不變更原作或第三方權利。
 嚴格原版一致性與平台真機驗收另列後續研究，
@@ -65,7 +72,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 | Enter | 執行 |
 | Esc | 回上一頁 |
 | F9 | 獨立開關配樂，預設開啟 |
-| F10 | 開啟畫面設定，切換 EGA／HD |
+| F10 | 開啟畫面設定；附 HD 素材的版本可切換 EGA／HD |
 | Ctrl+Q | 離開 |
 
 滑鼠可以直接點選單、清單與圖示列，右鍵等於 Esc，滾輪上下移動游標。點某一列
@@ -76,6 +83,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 設定目錄（Linux `~/.config/kol-remake-cht/`、macOS
 `~/Library/Application Support/kol-remake-cht/`、Windows `%AppData%\kol-remake-cht\`），
 用 `-load <路徑>` 讀回來。
+Windows 雙擊啟動後的錯誤日誌位於 `%AppData%\kol-remake-cht\kol.log`，前次紀錄為 `kol-previous.log`。
 
 macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設定 → 隱私權與安全性」
 按「仍要打開」，或先執行 `xattr -dr com.apple.quarantine`。Windows 與 macOS

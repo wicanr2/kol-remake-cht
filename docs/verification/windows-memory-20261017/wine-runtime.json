@@ -1,0 +1,150 @@
+{
+  "status": "PASS",
+  "runs": [
+    {
+      "theme": "ega",
+      "bundle": "full",
+      "package": "kol-v.1.0.4-20261017-full-ega-windows-amd64.zip",
+      "sha256": "9f952103feb3efa1ccb29835163d0f6aff01ecb5693de68e78efdfa7df70201a",
+      "version": "v.1.0.4-20261017",
+      "exit_code": 0,
+      "rss_samples": [
+        {
+          "stage": "title",
+          "rss": 536670208
+        },
+        {
+          "stage": "party-inn",
+          "rss": 1391878144
+        }
+      ],
+      "hd_seconds": [],
+      "no_save_written": true,
+      "normal_intro": true,
+      "hd_disabled": true,
+      "f10_state_unchanged": true
+    },
+    {
+      "theme": "ega-hd",
+      "bundle": "full",
+      "package": "kol-v.1.0.4-20261017-full-ega-hd-windows-amd64.zip",
+      "sha256": "23fa53614c9a89399c9a089829e57ba311f81b9236d80b79026046a9b5a03c43",
+      "version": "v.1.0.4-20261017",
+      "exit_code": 0,
+      "rss_samples": [
+        {
+          "stage": "title",
+          "rss": 548020224
+        },
+        {
+          "stage": "first-hd",
+          "rss": 1487728640
+        },
+        {
+          "stage": "ega-0",
+          "rss": 1917063168
+        },
+        {
+          "stage": "hd-0",
+          "rss": 2602426368
+        },
+        {
+          "stage": "ega-1",
+          "rss": 2433675264
+        },
+        {
+          "stage": "hd-1",
+          "rss": 2494107648
+        },
+        {
+          "stage": "ega-2",
+          "rss": 2444697600
+        },
+        {
+          "stage": "hd-2",
+          "rss": 2740834304
+        },
+        {
+          "stage": "party-inn",
+          "rss": 2685362176
+        }
+      ],
+      "hd_seconds": [
+        15.769732570741326,
+        1.9506798787042499,
+        1.6379981832578778,
+        1.7530524181202054
+      ],
+      "no_save_written": true,
+      "normal_intro": true,
+      "hd_disabled": false,
+      "f10_state_unchanged": true
+    },
+    {
+      "theme": "ega",
+      "bundle": "release",
+      "package": "kol-v.1.0.4-20261017-release-ega-windows-amd64.zip",
+      "sha256": "b40be1812cd9514cfd0db1651b44a677ce41b51150da61f8e233d50c818b5a25",
+      "version": "v.1.0.4-20261017",
+      "exit_code": 0,
+      "rss_samples": [
+        {
+          "stage": "title",
+          "rss": 522076160
+        },
+        {
+          "stage": "party-inn",
+          "rss": 1373163520
+        }
+      ],
+      "hd_seconds": [],
+      "no_save_written": true,
+      "normal_intro": true,
+      "hd_disabled": true,
+      "f10_state_unchanged": true
+    },
+    {
+      "theme": "ega-hd",
+      "bundle": "release",
+      "package": "kol-v.1.0.4-20261017-release-ega-hd-windows-amd64.zip",
+      "sha256": "9cb23e794afbb0e5c911d57f5ccc56c12926f70def6948890540e6d9f7a7a4fd",
+      "version": "v.1.0.4-20261017",
+      "exit_code": 0,
+      "rss_samples": [
+        {
+          "stage": "title",
+          "rss": 557592576
+        },
+        {
+          "stage": "first-hd",
+          "rss": 1484709888
+        },
+        {
+          "stage": "ega-0",
+          "rss": 1801723904
+        },
+        {
+          "stage": "hd-0",
+          "rss": 2534727680
+        },
+        {
+          "stage": "party-inn",
+          "rss": 2410610688
+        }
+      ],
+      "hd_seconds": [
+        22.78022576775402,
+        3.675893264822662
+      ],
+      "no_save_written": true,
+      "normal_intro": true,
+      "hd_disabled": false,
+      "f10_state_unchanged": true
+    }
+  ],
+  "memory_events": "low 0\nhigh 0\nmax 4395\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+  "memory_peak": 4294979584,
+  "default_logging": true,
+  "corrupt_hd_returns_to_ega": true,
+  "real_windows_machine": false
+}

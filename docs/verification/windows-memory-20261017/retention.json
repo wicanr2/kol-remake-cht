@@ -1,0 +1,1539 @@
+{
+  "schema": "kol-retained-verification/1",
+  "date": "2026-10-17",
+  "source": "workplace/windows-crash-20261017",
+  "rights": "local-only original-derived evidence; no publication",
+  "receipt_sha256": "7fe3c98a47c83b2ebafbe706cc9f24a2ce041f29871daaf654f19fa011401715",
+  "archive": {
+    "size": 243140188,
+    "sha256": "fbab7c1f903c7ffc5c8a819b30a66c5b0cada1e09c42a76f77dddb2f93380bc5"
+  },
+  "xz_preset": 0,
+  "retained": {
+    "assets-recheck.log": {
+      "size": 64,
+      "sha256": "813dc54c7123a98a31d94850dbe668a290f43b38f0ca80095df61c1e2097f5cc"
+    },
+    "audio-runtime.json": {
+      "size": 277,
+      "sha256": "8e74efd8b4cb64eccbbe0e75d91b50922e1099331933cfaf6c9c945974126d2a"
+    },
+    "build-delivery.log": {
+      "size": 296,
+      "sha256": "21520cd7f93603a29b09fe72ea989958b904a6923d4312509bfa039ff526f93e"
+    },
+    "build-final.log": {
+      "size": 182,
+      "sha256": "62b9c5b8c16da04bc38fa754cb29a420d006d19f6578649717ab93e39e1f9e94"
+    },
+    "build-scenes.sh": {
+      "size": 5836,
+      "sha256": "c17d973bd14836514a5f54965dc88cdab6f2883eaf4693837bb4fc3b20ef9b26"
+    },
+    "build.sh": {
+      "size": 881,
+      "sha256": "7696ed7bc0145b19bd8cb3e3e3fdbce3138ec4379159242f128a1bded69415d6"
+    },
+    "candidate1/build-inputs.json": {
+      "size": 377150,
+      "sha256": "2c579a1e3b988d52a21e2cafdf74c94c8d3dc20df9399ea0a620925f7df50a50"
+    },
+    "candidate1/captures-comparison.json": {
+      "size": 36702,
+      "sha256": "b87c468950bb1f1ded8aa1246fefb7183615a16d16886050c191b815b402adfe"
+    },
+    "candidate1/full-ega-flow/step-000.png": {
+      "size": 8707,
+      "sha256": "88727bc55ac41fac0af8500cdf13fa4880b144b67e110d32cddf3a88054a5f08"
+    },
+    "candidate1/full-ega-flow/step-001.png": {
+      "size": 17505,
+      "sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e"
+    },
+    "candidate1/full-ega-flow.log": {
+      "size": 88,
+      "sha256": "ec5c4542686837d03517365115af1c9d172220dbb8e032542a2e8cc9955bb746"
+    },
+    "candidate1/full-ega-gui.log": {
+      "size": 1806,
+      "sha256": "789918547216bc57780849456723315f2b5cc8fb4e0e8d8a34811b8dc4492a02"
+    },
+    "candidate1/full-ega-text.jsonl": {
+      "size": 618,
+      "sha256": "a9025072b38ae5367de6ec90b964aa9f04318588c3c182b8dbfe2a5498e4fc69"
+    },
+    "candidate1/packages.json": {
+      "size": 1161,
+      "sha256": "61a1cba4bab2072dfa1cc882331bf8e4b38904510827e1164105c5e42e41dd21"
+    },
+    "candidate1/scenes-linux/build-linux.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate1/scenes-linux/build-windows.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate1/scenes-linux/fixture-inputs.json": {
+      "size": 2656,
+      "sha256": "4e675160ed5ba6a7cbb24813beff03094e60c426eca0f692f5c4773af289d4b7"
+    },
+    "candidate1/scenes-linux/memory-peak.txt": {
+      "size": 11,
+      "sha256": "a3df26f2ff116d8ffda2f40948ee671858725752510d62c37cd78e18655b96f7"
+    },
+    "candidate1/scenes-linux/motion-captures.json": {
+      "size": 23720,
+      "sha256": "fe56f4e1fd30ee77c7f3f8feab0c08d711af5f8405e47f0f9596bd49f3263f30"
+    },
+    "candidate1/scenes-linux/motion-gallery.go.txt": {
+      "size": 16741,
+      "sha256": "2dac5fce11890475749433a3e875cc94bc4c2f7a4668fc32438d5d539b0117f7"
+    },
+    "candidate1/scenes-linux/motion-runtime/battle-08-map-16-first-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "candidate1/scenes-linux/motion-runtime/battle-08-map-16-first-hd.png": {
+      "size": 1106225,
+      "sha256": "f4c9a3b348d20de79ca44d483b9bddba1f5aca778e4742e099597faa4ed20b05"
+    },
+    "candidate1/scenes-linux/motion-runtime/battle-08-map-16-restored-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "candidate1/scenes-linux/motion-runtime/battle-08-map-16-restored-hd.png": {
+      "size": 1106225,
+      "sha256": "f4c9a3b348d20de79ca44d483b9bddba1f5aca778e4742e099597faa4ed20b05"
+    },
+    "candidate1/scenes-linux/motion-runtime/body-1-1-first-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "candidate1/scenes-linux/motion-runtime/body-1-1-first-hd.png": {
+      "size": 697476,
+      "sha256": "10bdcb5a119b2e05110615df51d6c5eddbf235e5663eeb99dffccda98a89233b"
+    },
+    "candidate1/scenes-linux/motion-runtime/body-1-1-restored-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "candidate1/scenes-linux/motion-runtime/body-1-1-restored-hd.png": {
+      "size": 697476,
+      "sha256": "10bdcb5a119b2e05110615df51d6c5eddbf235e5663eeb99dffccda98a89233b"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-cover-first-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-cover-first-hd.png": {
+      "size": 3015303,
+      "sha256": "72b58d96e2bfc89953de6bbb51ef85f13bf01f34f09bb49f06caca23f5ca6b24"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-cover-restored-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-cover-restored-hd.png": {
+      "size": 3015303,
+      "sha256": "72b58d96e2bfc89953de6bbb51ef85f13bf01f34f09bb49f06caca23f5ca6b24"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-open-018-first-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-open-018-first-hd.png": {
+      "size": 2877377,
+      "sha256": "4ac1f7beb826c1d57366c79af847aef57684e01ec7d293fe9295277bbb73b6a8"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-open-018-restored-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "candidate1/scenes-linux/motion-runtime/book-open-018-restored-hd.png": {
+      "size": 2877377,
+      "sha256": "4ac1f7beb826c1d57366c79af847aef57684e01ec7d293fe9295277bbb73b6a8"
+    },
+    "candidate1/scenes-linux/motion-runtime/credit-13-first-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "candidate1/scenes-linux/motion-runtime/credit-13-first-hd.png": {
+      "size": 120929,
+      "sha256": "170de1e973d7445c4410154dba5b9673f0ff84656101a98930450e163a7adc33"
+    },
+    "candidate1/scenes-linux/motion-runtime/credit-13-restored-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "candidate1/scenes-linux/motion-runtime/credit-13-restored-hd.png": {
+      "size": 120929,
+      "sha256": "170de1e973d7445c4410154dba5b9673f0ff84656101a98930450e163a7adc33"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-combat-03-first-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-combat-03-first-hd.png": {
+      "size": 3184117,
+      "sha256": "ca36e1b05083511fe734a0857d22e6aac0ddd461074a1b77ba141cd4f735037f"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-combat-03-restored-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-combat-03-restored-hd.png": {
+      "size": 3184117,
+      "sha256": "ca36e1b05083511fe734a0857d22e6aac0ddd461074a1b77ba141cd4f735037f"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-world-05-first-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-world-05-first-hd.png": {
+      "size": 1907425,
+      "sha256": "385189680e2e80073e88548e55ea81695424218c3b1abea65383721b65ad52ba"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-world-05-restored-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "candidate1/scenes-linux/motion-runtime/event-world-05-restored-hd.png": {
+      "size": 1907425,
+      "sha256": "385189680e2e80073e88548e55ea81695424218c3b1abea65383721b65ad52ba"
+    },
+    "candidate1/scenes-linux/motion-runtime/long-inn-first-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "candidate1/scenes-linux/motion-runtime/long-inn-first-hd.png": {
+      "size": 1246307,
+      "sha256": "615318212b4b5ae1451fc4a03fd466a93209e061cf9358df9436282ab80c7a54"
+    },
+    "candidate1/scenes-linux/motion-runtime/long-inn-restored-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "candidate1/scenes-linux/motion-runtime/long-inn-restored-hd.png": {
+      "size": 1246307,
+      "sha256": "615318212b4b5ae1451fc4a03fd466a93209e061cf9358df9436282ab80c7a54"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-town3-first-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-town3-first-hd.png": {
+      "size": 2115208,
+      "sha256": "045ca2ac4e180017101be8a901f9ff9dd72f1e687e431a2372482d3e12604588"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-town3-restored-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-town3-restored-hd.png": {
+      "size": 2115208,
+      "sha256": "045ca2ac4e180017101be8a901f9ff9dd72f1e687e431a2372482d3e12604588"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-world-first-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-world-first-hd.png": {
+      "size": 2319867,
+      "sha256": "c22121c7ed404f4b7fe4928bfe130e212a09a4dea10849c29a7fcf74fcf4cf55"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-world-restored-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "candidate1/scenes-linux/motion-runtime/map-world-restored-hd.png": {
+      "size": 2319867,
+      "sha256": "c22121c7ed404f4b7fe4928bfe130e212a09a4dea10849c29a7fcf74fcf4cf55"
+    },
+    "candidate1/scenes-linux/motion-runtime/monster-native-encounter-first-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "candidate1/scenes-linux/motion-runtime/monster-native-encounter-first-hd.png": {
+      "size": 769401,
+      "sha256": "baaba11b0ddfd78099db61af619c67714ae77b5ff33c454d07ab63e42bab7c78"
+    },
+    "candidate1/scenes-linux/motion-runtime/monster-native-encounter-restored-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "candidate1/scenes-linux/motion-runtime/monster-native-encounter-restored-hd.png": {
+      "size": 769401,
+      "sha256": "baaba11b0ddfd78099db61af619c67714ae77b5ff33c454d07ab63e42bab7c78"
+    },
+    "candidate1/scenes-linux/motion-runtime/title-02-SET2PICS-05-first-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "candidate1/scenes-linux/motion-runtime/title-02-SET2PICS-05-first-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "candidate1/scenes-linux/motion-runtime/title-02-SET2PICS-05-restored-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "candidate1/scenes-linux/motion-runtime/title-02-SET2PICS-05-restored-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "candidate1/scenes-linux/motion-runtime/weather-4-01-first-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "candidate1/scenes-linux/motion-runtime/weather-4-01-first-hd.png": {
+      "size": 2282253,
+      "sha256": "eca4a4c2fbcecc605593f7ca85445d12c3f3c6b242eb485b94cfdcf54c92c450"
+    },
+    "candidate1/scenes-linux/motion-runtime/weather-4-01-restored-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "candidate1/scenes-linux/motion-runtime/weather-4-01-restored-hd.png": {
+      "size": 2282253,
+      "sha256": "eca4a4c2fbcecc605593f7ca85445d12c3f3c6b242eb485b94cfdcf54c92c450"
+    },
+    "candidate1/scenes-linux/release-driver.go.txt": {
+      "size": 1423,
+      "sha256": "ad12f59110c9f4368052db936fa774ff40653dac987692d2d2c814d4ae197cb1"
+    },
+    "candidate1/scenes-linux/run-linux.log": {
+      "size": 708,
+      "sha256": "876c37f4adb0abb4c666cf704cc1b2c5b5ebf9b792233fd6f25dba11d9c58862"
+    },
+    "candidate1/scenes-linux/source-inputs.json": {
+      "size": 45000,
+      "sha256": "a68fcdd42275f4accdc07751321120bf1fd32436b862705ba0ad126f14814d48"
+    },
+    "candidate1/scenes-linux/xvfb-linux.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "candidate1/scenes-windows/memory-events.txt": {
+      "size": 73,
+      "sha256": "32bea1534eadac6a761acd5bc9be4d9fcab02867ad552af186832bcec0e17e96"
+    },
+    "candidate1/scenes-windows/memory-peak.txt": {
+      "size": 11,
+      "sha256": "3cc45f6daaf2b588a75a515785fe5815d135630d4cccbe7c923bbcb6bc2b87cb"
+    },
+    "candidate1/scenes-windows/motion-captures.json": {
+      "size": 23720,
+      "sha256": "499757e7afae1d0979f1400f9f0cf6dc958c464939e9b9c70c804b1da104c66c"
+    },
+    "candidate1/scenes-windows/motion-runtime/battle-08-map-16-first-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "candidate1/scenes-windows/motion-runtime/battle-08-map-16-first-hd.png": {
+      "size": 1106264,
+      "sha256": "9134696781618b9c7813add2f000e5580c88f4c6c04d30d2ca8fc549b6711fd9"
+    },
+    "candidate1/scenes-windows/motion-runtime/battle-08-map-16-restored-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "candidate1/scenes-windows/motion-runtime/battle-08-map-16-restored-hd.png": {
+      "size": 1106264,
+      "sha256": "9134696781618b9c7813add2f000e5580c88f4c6c04d30d2ca8fc549b6711fd9"
+    },
+    "candidate1/scenes-windows/motion-runtime/body-1-1-first-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "candidate1/scenes-windows/motion-runtime/body-1-1-first-hd.png": {
+      "size": 697534,
+      "sha256": "b17f7a8bd1e5a803a0147713f2546f8b5e2791d576240c50f6051fe3c4ef03f9"
+    },
+    "candidate1/scenes-windows/motion-runtime/body-1-1-restored-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "candidate1/scenes-windows/motion-runtime/body-1-1-restored-hd.png": {
+      "size": 697534,
+      "sha256": "b17f7a8bd1e5a803a0147713f2546f8b5e2791d576240c50f6051fe3c4ef03f9"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-cover-first-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-cover-first-hd.png": {
+      "size": 3015390,
+      "sha256": "73fd0c0a90b9eb5cbe60cd292b8c8b87a3d4a04b85cadd28e2da702ab1ac7ad6"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-cover-restored-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-cover-restored-hd.png": {
+      "size": 3015390,
+      "sha256": "73fd0c0a90b9eb5cbe60cd292b8c8b87a3d4a04b85cadd28e2da702ab1ac7ad6"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-open-018-first-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-open-018-first-hd.png": {
+      "size": 2877694,
+      "sha256": "910e80a22c21220b21440e96c64ada6c0e48c30deed987283f73893375dbdbe2"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-open-018-restored-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "candidate1/scenes-windows/motion-runtime/book-open-018-restored-hd.png": {
+      "size": 2877694,
+      "sha256": "910e80a22c21220b21440e96c64ada6c0e48c30deed987283f73893375dbdbe2"
+    },
+    "candidate1/scenes-windows/motion-runtime/credit-13-first-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "candidate1/scenes-windows/motion-runtime/credit-13-first-hd.png": {
+      "size": 121059,
+      "sha256": "1fb11aec0c640532bf610feca61bb67af68d917eab2f413b1c2d130b64e68af0"
+    },
+    "candidate1/scenes-windows/motion-runtime/credit-13-restored-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "candidate1/scenes-windows/motion-runtime/credit-13-restored-hd.png": {
+      "size": 121059,
+      "sha256": "1fb11aec0c640532bf610feca61bb67af68d917eab2f413b1c2d130b64e68af0"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-combat-03-first-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-combat-03-first-hd.png": {
+      "size": 3184038,
+      "sha256": "1b8d6ad2299fd23eaae36b30b115ec0823ca4ecacbc011c3701d43a377313dba"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-combat-03-restored-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-combat-03-restored-hd.png": {
+      "size": 3184038,
+      "sha256": "1b8d6ad2299fd23eaae36b30b115ec0823ca4ecacbc011c3701d43a377313dba"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-world-05-first-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-world-05-first-hd.png": {
+      "size": 1907570,
+      "sha256": "168c35f82f5c4852f835855964890f178ee5b69ed2378f736d8d8aa3a3defb46"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-world-05-restored-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "candidate1/scenes-windows/motion-runtime/event-world-05-restored-hd.png": {
+      "size": 1907570,
+      "sha256": "168c35f82f5c4852f835855964890f178ee5b69ed2378f736d8d8aa3a3defb46"
+    },
+    "candidate1/scenes-windows/motion-runtime/long-inn-first-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "candidate1/scenes-windows/motion-runtime/long-inn-first-hd.png": {
+      "size": 1246335,
+      "sha256": "4f317964b26c9cc5516b7b4f43bd5e22d2686904b7dfdc864bf21facf3d7cc20"
+    },
+    "candidate1/scenes-windows/motion-runtime/long-inn-restored-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "candidate1/scenes-windows/motion-runtime/long-inn-restored-hd.png": {
+      "size": 1246335,
+      "sha256": "4f317964b26c9cc5516b7b4f43bd5e22d2686904b7dfdc864bf21facf3d7cc20"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-town3-first-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-town3-first-hd.png": {
+      "size": 2115172,
+      "sha256": "8b2cfd1e40935939e9e421cdad3964ef678be2bea39e9823d9cc3780ddce93f3"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-town3-restored-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-town3-restored-hd.png": {
+      "size": 2115172,
+      "sha256": "8b2cfd1e40935939e9e421cdad3964ef678be2bea39e9823d9cc3780ddce93f3"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-world-first-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-world-first-hd.png": {
+      "size": 2319771,
+      "sha256": "70f858f46150768bd3e3564638bbce63dd6b593045ee2553bd7ac127862ecc3e"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-world-restored-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "candidate1/scenes-windows/motion-runtime/map-world-restored-hd.png": {
+      "size": 2319771,
+      "sha256": "70f858f46150768bd3e3564638bbce63dd6b593045ee2553bd7ac127862ecc3e"
+    },
+    "candidate1/scenes-windows/motion-runtime/monster-native-encounter-first-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "candidate1/scenes-windows/motion-runtime/monster-native-encounter-first-hd.png": {
+      "size": 769443,
+      "sha256": "fea5ead4a5485b0f052aba7b5bee3828eae529c7c482a25460867a96e18dc8db"
+    },
+    "candidate1/scenes-windows/motion-runtime/monster-native-encounter-restored-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "candidate1/scenes-windows/motion-runtime/monster-native-encounter-restored-hd.png": {
+      "size": 769443,
+      "sha256": "fea5ead4a5485b0f052aba7b5bee3828eae529c7c482a25460867a96e18dc8db"
+    },
+    "candidate1/scenes-windows/motion-runtime/title-02-SET2PICS-05-first-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "candidate1/scenes-windows/motion-runtime/title-02-SET2PICS-05-first-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "candidate1/scenes-windows/motion-runtime/title-02-SET2PICS-05-restored-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "candidate1/scenes-windows/motion-runtime/title-02-SET2PICS-05-restored-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "candidate1/scenes-windows/motion-runtime/weather-4-01-first-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "candidate1/scenes-windows/motion-runtime/weather-4-01-first-hd.png": {
+      "size": 2282138,
+      "sha256": "d766e30995c2e62132756840b82ce2703d67942cdfb01dd1ac802ac994f950f1"
+    },
+    "candidate1/scenes-windows/motion-runtime/weather-4-01-restored-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "candidate1/scenes-windows/motion-runtime/weather-4-01-restored-hd.png": {
+      "size": 2282138,
+      "sha256": "d766e30995c2e62132756840b82ce2703d67942cdfb01dd1ac802ac994f950f1"
+    },
+    "candidate1/scenes-windows/run.log": {
+      "size": 519,
+      "sha256": "546303df80a5a933939d34ae5ccdcef138a85e75b80006a58f4e9233b5463c35"
+    },
+    "candidate1/scenes-windows/xvfb.log": {
+      "size": 2429,
+      "sha256": "6d73d78138c41bea466314919237a4fe998e5b670a356ab2012f328fff769a7b"
+    },
+    "candidate1/smoke/windows-audio-capture.log": {
+      "size": 209,
+      "sha256": "0782be88e9f0f78d9e9b9eb4430217f06d96de697def5e20eb8d611a3772f6e1"
+    },
+    "candidate1/smoke/windows-audio.wav": {
+      "size": 16777216,
+      "sha256": "0a7017a623c06eab1f55019209381dbd1f0fa1fe72f93ecd3c3ed09f7b848b33"
+    },
+    "candidate1/smoke/wine-audio-ready": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate1/smoke/wine-pulse-info.txt": {
+      "size": 402,
+      "sha256": "6747c1b65be35392544ccd44f9a9a8d536025b5322bff3c9e9994fbfdb544e10"
+    },
+    "candidate1/smoke/wine-pulse.log": {
+      "size": 3055,
+      "sha256": "b182c07caff6a6dc9c8dd0933a64a588343d6481299120e2a6b1a63de127dd37"
+    },
+    "candidate1/source-format-proof.json": {
+      "size": 311,
+      "sha256": "2cbff37db9278db01b3313d3303b8e9beaf7bf782397372b84ca04d00d6bd96e"
+    },
+    "candidate1/source-inputs.json": {
+      "size": 45000,
+      "sha256": "521356bad55a6457a6825297c9a547220e6925e3fbd081de4114db3c9a0cd212"
+    },
+    "candidate1/source.tar.xz": {
+      "size": 782260,
+      "sha256": "c952a338289c3389a773ed1146c81fef027119cbd5bbc93e2bcdf6ce665ff6d4"
+    },
+    "captures-comparison.json": {
+      "size": 36702,
+      "sha256": "b87c468950bb1f1ded8aa1246fefb7183615a16d16886050c191b815b402adfe"
+    },
+    "check_captures.py": {
+      "size": 3171,
+      "sha256": "452a878eb6d2b17b41bbd00e40f3de5fa6c3f6af0baa9ec9805e9313fc0bc9ea"
+    },
+    "contents-hd.png": {
+      "size": 2827649,
+      "sha256": "a3b1e97863e423a796d633669eccdf79d23b6629a4bef86b38d893725f4991b5"
+    },
+    "corrupt-hd-gui.log": {
+      "size": 978,
+      "sha256": "7ba21fae37b19fb714f5c67f4d3868995bc3246db549241de969d7591e409a07"
+    },
+    "corrupt-hd-text.jsonl": {
+      "size": 1613,
+      "sha256": "0e369d5f868a9ec9ade88078ee1222ca286129bfe18b4a1c08c6def64aa3283b"
+    },
+    "cover-hd.png": {
+      "size": 2591686,
+      "sha256": "c6a1aa4609a28e7a0d3320b9a914278f3f22eee56e4cf6a8f48f612e06b20375"
+    },
+    "default-kol.log": {
+      "size": 65,
+      "sha256": "7801df219038b6b76839768a00f84f2441a58a2158a417e72cb2f2d7af79a692"
+    },
+    "default-stdout.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "defer_loaders.py": {
+      "size": 4253,
+      "sha256": "96879982151137d14882f7731999f03b4f83ecfe50754eae61a5dcd2d04e3901"
+    },
+    "defer_render.py": {
+      "size": 6893,
+      "sha256": "3c3a392d57f422c84a47ef7338a8ca0d41556e5b6679fb81507372f04d061e38"
+    },
+    "finish_proof.py": {
+      "size": 6790,
+      "sha256": "033e9c8bd18e910022f4e9e1d9b4da8cf023144f42335b9f3d59e9a98112d495"
+    },
+    "full-ega-flow/step-000.png": {
+      "size": 8707,
+      "sha256": "88727bc55ac41fac0af8500cdf13fa4880b144b67e110d32cddf3a88054a5f08"
+    },
+    "full-ega-flow/step-001.png": {
+      "size": 17505,
+      "sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e"
+    },
+    "full-ega-flow/step-002.png": {
+      "size": 18031,
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd"
+    },
+    "full-ega-flow/step-003.png": {
+      "size": 18655,
+      "sha256": "bd99c42bc62b5105ca04b9c700f4bc1125cc74c8efbf9cbb795e543bca9e9f27"
+    },
+    "full-ega-flow/step-004.png": {
+      "size": 18634,
+      "sha256": "d409b7864a024261d668db96dcd5e3f73a81c80719b836387650e8cfe130f950"
+    },
+    "full-ega-flow/step-005.png": {
+      "size": 20547,
+      "sha256": "e26ceb6293270299f0f0159287adfba4d92a04feb7787f30e670a02a3c8bc1b2"
+    },
+    "full-ega-flow.log": {
+      "size": 264,
+      "sha256": "4a8d83840e9cf3e07f063fd34dff65190f806c63a5856b0250850fcd176bc5e0"
+    },
+    "full-ega-gui.log": {
+      "size": 1751,
+      "sha256": "c50a541536986bd4ff332facfee3967cc68edb795c58b3ee151ecbe44ed719c0"
+    },
+    "full-ega-hd-flow/step-000.png": {
+      "size": 1835656,
+      "sha256": "c5cd42f6ac70d71741ceeb9b9e50013afbf3a91019c67f988a955af251772d69"
+    },
+    "full-ega-hd-flow/step-001.png": {
+      "size": 2591706,
+      "sha256": "851352afc182a24562aa8e421ec208cc38bc4bff76136c07bbd4ec3507ab511a"
+    },
+    "full-ega-hd-flow/step-002.png": {
+      "size": 2827714,
+      "sha256": "b0f8165ea873fada09359f5cb9bf06a560b874c7584246c15da7cbd93459d02e"
+    },
+    "full-ega-hd-flow/step-003.png": {
+      "size": 2807294,
+      "sha256": "2a637c5eee3e196343904354c2fb92cc2f6d4b446e8aceb592b9c918f0d1daef"
+    },
+    "full-ega-hd-flow/step-004.png": {
+      "size": 2807310,
+      "sha256": "615333b3bc54122544a3b3ab1ed3b3cc74bb3cd472480e98d31f859d798c05d4"
+    },
+    "full-ega-hd-flow/step-005.png": {
+      "size": 2822219,
+      "sha256": "4f57885a64cefa95dede55d5da76f1a8693dc64b33657d6688fc046b875c2604"
+    },
+    "full-ega-hd-flow.log": {
+      "size": 282,
+      "sha256": "cc56cde0fa8388007e30ac63da5587518c252a06e317740849f1e381cede5684"
+    },
+    "full-ega-hd-gui.log": {
+      "size": 2900,
+      "sha256": "4d103e5f7e39701c7fd6fc69b6a0eeff2ffd73a49a2742241d538c330469409b"
+    },
+    "full-ega-hd-text.jsonl": {
+      "size": 1561,
+      "sha256": "0a0df9ebd7c69ce71b7284d32f6a626563e342946fa7ff8b262116bce3e6409e"
+    },
+    "full-ega-hd-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "full-ega-text.jsonl": {
+      "size": 1605,
+      "sha256": "0a138c979d7d8410850fed71958b4721458421dcfd69d385ed4b0ae4d29467ca"
+    },
+    "full-ega-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "native-contents.log": {
+      "size": 352,
+      "sha256": "0543330a4aa6d6cca937001e52852837d8be9ce50432387252afc56db7fec100"
+    },
+    "native-cover.log": {
+      "size": 346,
+      "sha256": "90e0a569faa79281f62a8a85451741754309bbd3239fedf274ba50919ac054f3"
+    },
+    "native-memory-peak.txt": {
+      "size": 11,
+      "sha256": "a960bbe025c5558d2ae926bff3a9b3642e0e67b16d1e3334c53f6d7ff13b4876"
+    },
+    "native-xvfb.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "old-intro.json": {
+      "size": 177,
+      "sha256": "88092fd2bb037ee2b57aa21568f9bc028b1cc88a47edd446fed177444f9ddd04"
+    },
+    "old-intro.log": {
+      "size": 1792,
+      "sha256": "dad8170de7ca4d55238576d6951742959434b5075d57bd91dba79b5ca8acb101"
+    },
+    "package-attempt2/full-ega-flow/step-000.png": {
+      "size": 8707,
+      "sha256": "88727bc55ac41fac0af8500cdf13fa4880b144b67e110d32cddf3a88054a5f08"
+    },
+    "package-attempt2/full-ega-flow/step-001.png": {
+      "size": 17505,
+      "sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e"
+    },
+    "package-attempt2/full-ega-flow/step-002.png": {
+      "size": 18031,
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd"
+    },
+    "package-attempt2/full-ega-flow/step-003.png": {
+      "size": 18655,
+      "sha256": "bd99c42bc62b5105ca04b9c700f4bc1125cc74c8efbf9cbb795e543bca9e9f27"
+    },
+    "package-attempt2/full-ega-flow/step-004.png": {
+      "size": 18634,
+      "sha256": "d409b7864a024261d668db96dcd5e3f73a81c80719b836387650e8cfe130f950"
+    },
+    "package-attempt2/full-ega-flow.log": {
+      "size": 2543,
+      "sha256": "76e670969334847aef7837070ed4d9ebb902443a5f207fa0a305efab4ea02be4"
+    },
+    "package-attempt2/full-ega-gui.log": {
+      "size": 1745,
+      "sha256": "5e8e173cb368681daffc31209fb8572bfc932b62a1bbabfcaeb7fb44f4235e37"
+    },
+    "package-attempt2/full-ega-text.jsonl": {
+      "size": 879,
+      "sha256": "67e1b3eb00efd73a1aa40e2504c1f50bcfdd4852e38de72944faf98eed19d073"
+    },
+    "package-attempt3/full-ega-gui.log": {
+      "size": 1108,
+      "sha256": "489b816abe937524ef4b59fe63ff3913b39540c17be5b0ad47f4e9393751fd4e"
+    },
+    "package-flow-comparison.json": {
+      "size": 1444,
+      "sha256": "84970d07c32fdae92d831b8c1fdb47b9921073ff62a5e62e6b6e6604ae23d3f9"
+    },
+    "post-scene-notice-fix.json": {
+      "size": 441,
+      "sha256": "961b160151ac0e5c0efc00af9f4e1b6897d4563ac3e56c1c597647848426daff"
+    },
+    "receipt.json": {
+      "size": 55498,
+      "sha256": "7fe3c98a47c83b2ebafbe706cc9f24a2ce041f29871daaf654f19fa011401715"
+    },
+    "release-ega-flow/step-000.png": {
+      "size": 8707,
+      "sha256": "88727bc55ac41fac0af8500cdf13fa4880b144b67e110d32cddf3a88054a5f08"
+    },
+    "release-ega-flow/step-001.png": {
+      "size": 17505,
+      "sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e"
+    },
+    "release-ega-flow/step-002.png": {
+      "size": 18031,
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd"
+    },
+    "release-ega-flow/step-003.png": {
+      "size": 18655,
+      "sha256": "bd99c42bc62b5105ca04b9c700f4bc1125cc74c8efbf9cbb795e543bca9e9f27"
+    },
+    "release-ega-flow/step-004.png": {
+      "size": 18634,
+      "sha256": "d409b7864a024261d668db96dcd5e3f73a81c80719b836387650e8cfe130f950"
+    },
+    "release-ega-flow/step-005.png": {
+      "size": 20547,
+      "sha256": "e26ceb6293270299f0f0159287adfba4d92a04feb7787f30e670a02a3c8bc1b2"
+    },
+    "release-ega-flow.log": {
+      "size": 282,
+      "sha256": "2d2a68b3386908ad90e37fdcac508b8f6ea8d10b4fa1aa4115ba881657539e08"
+    },
+    "release-ega-gui.log": {
+      "size": 1751,
+      "sha256": "cb96cb3bdee6a4ffc9e347182a792f14a40e83b5c7914e3f7be55373045f269f"
+    },
+    "release-ega-hd-flow/step-000.png": {
+      "size": 1835656,
+      "sha256": "c5cd42f6ac70d71741ceeb9b9e50013afbf3a91019c67f988a955af251772d69"
+    },
+    "release-ega-hd-flow/step-001.png": {
+      "size": 2591706,
+      "sha256": "851352afc182a24562aa8e421ec208cc38bc4bff76136c07bbd4ec3507ab511a"
+    },
+    "release-ega-hd-flow/step-002.png": {
+      "size": 2827714,
+      "sha256": "b0f8165ea873fada09359f5cb9bf06a560b874c7584246c15da7cbd93459d02e"
+    },
+    "release-ega-hd-flow/step-003.png": {
+      "size": 2807294,
+      "sha256": "2a637c5eee3e196343904354c2fb92cc2f6d4b446e8aceb592b9c918f0d1daef"
+    },
+    "release-ega-hd-flow/step-004.png": {
+      "size": 2807310,
+      "sha256": "615333b3bc54122544a3b3ab1ed3b3cc74bb3cd472480e98d31f859d798c05d4"
+    },
+    "release-ega-hd-flow/step-005.png": {
+      "size": 2822219,
+      "sha256": "4f57885a64cefa95dede55d5da76f1a8693dc64b33657d6688fc046b875c2604"
+    },
+    "release-ega-hd-flow.log": {
+      "size": 300,
+      "sha256": "0f471b2782542bb87846c6ae1a38f987cd8a0dc3cd3ffff44fe9ff8c890256b0"
+    },
+    "release-ega-hd-gui.log": {
+      "size": 2118,
+      "sha256": "f020e573e39b87cbcf55ba822b2668f60333f07e386771855f8027e6b119d030"
+    },
+    "release-ega-hd-text.jsonl": {
+      "size": 1561,
+      "sha256": "0a0df9ebd7c69ce71b7284d32f6a626563e342946fa7ff8b262116bce3e6409e"
+    },
+    "release-ega-hd-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "release-ega-text.jsonl": {
+      "size": 1605,
+      "sha256": "0a138c979d7d8410850fed71958b4721458421dcfd69d385ed4b0ae4d29467ca"
+    },
+    "release-ega-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "repro.py": {
+      "size": 1723,
+      "sha256": "64b27e95e3df92cab115a6b509a0a5ede89dc63778d6df2a01b2d191aeb04808"
+    },
+    "scenes-linux/build-linux.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "scenes-linux/build-windows.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "scenes-linux/fixture-inputs.json": {
+      "size": 2656,
+      "sha256": "4e675160ed5ba6a7cbb24813beff03094e60c426eca0f692f5c4773af289d4b7"
+    },
+    "scenes-linux/memory-peak.txt": {
+      "size": 11,
+      "sha256": "746bf630ef05aa1a29a7563f3cc101f669888d369b2c45e9640dea11b03b52db"
+    },
+    "scenes-linux/motion-captures.json": {
+      "size": 23720,
+      "sha256": "fe56f4e1fd30ee77c7f3f8feab0c08d711af5f8405e47f0f9596bd49f3263f30"
+    },
+    "scenes-linux/motion-gallery.go.txt": {
+      "size": 16741,
+      "sha256": "2dac5fce11890475749433a3e875cc94bc4c2f7a4668fc32438d5d539b0117f7"
+    },
+    "scenes-linux/motion-runtime/battle-08-map-16-first-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "scenes-linux/motion-runtime/battle-08-map-16-first-hd.png": {
+      "size": 1106225,
+      "sha256": "f4c9a3b348d20de79ca44d483b9bddba1f5aca778e4742e099597faa4ed20b05"
+    },
+    "scenes-linux/motion-runtime/battle-08-map-16-restored-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "scenes-linux/motion-runtime/battle-08-map-16-restored-hd.png": {
+      "size": 1106225,
+      "sha256": "f4c9a3b348d20de79ca44d483b9bddba1f5aca778e4742e099597faa4ed20b05"
+    },
+    "scenes-linux/motion-runtime/body-1-1-first-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "scenes-linux/motion-runtime/body-1-1-first-hd.png": {
+      "size": 697476,
+      "sha256": "10bdcb5a119b2e05110615df51d6c5eddbf235e5663eeb99dffccda98a89233b"
+    },
+    "scenes-linux/motion-runtime/body-1-1-restored-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "scenes-linux/motion-runtime/body-1-1-restored-hd.png": {
+      "size": 697476,
+      "sha256": "10bdcb5a119b2e05110615df51d6c5eddbf235e5663eeb99dffccda98a89233b"
+    },
+    "scenes-linux/motion-runtime/book-cover-first-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "scenes-linux/motion-runtime/book-cover-first-hd.png": {
+      "size": 3015303,
+      "sha256": "72b58d96e2bfc89953de6bbb51ef85f13bf01f34f09bb49f06caca23f5ca6b24"
+    },
+    "scenes-linux/motion-runtime/book-cover-restored-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "scenes-linux/motion-runtime/book-cover-restored-hd.png": {
+      "size": 3015303,
+      "sha256": "72b58d96e2bfc89953de6bbb51ef85f13bf01f34f09bb49f06caca23f5ca6b24"
+    },
+    "scenes-linux/motion-runtime/book-open-018-first-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "scenes-linux/motion-runtime/book-open-018-first-hd.png": {
+      "size": 2877377,
+      "sha256": "4ac1f7beb826c1d57366c79af847aef57684e01ec7d293fe9295277bbb73b6a8"
+    },
+    "scenes-linux/motion-runtime/book-open-018-restored-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "scenes-linux/motion-runtime/book-open-018-restored-hd.png": {
+      "size": 2877377,
+      "sha256": "4ac1f7beb826c1d57366c79af847aef57684e01ec7d293fe9295277bbb73b6a8"
+    },
+    "scenes-linux/motion-runtime/credit-13-first-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "scenes-linux/motion-runtime/credit-13-first-hd.png": {
+      "size": 120929,
+      "sha256": "170de1e973d7445c4410154dba5b9673f0ff84656101a98930450e163a7adc33"
+    },
+    "scenes-linux/motion-runtime/credit-13-restored-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "scenes-linux/motion-runtime/credit-13-restored-hd.png": {
+      "size": 120929,
+      "sha256": "170de1e973d7445c4410154dba5b9673f0ff84656101a98930450e163a7adc33"
+    },
+    "scenes-linux/motion-runtime/event-combat-03-first-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "scenes-linux/motion-runtime/event-combat-03-first-hd.png": {
+      "size": 3184117,
+      "sha256": "ca36e1b05083511fe734a0857d22e6aac0ddd461074a1b77ba141cd4f735037f"
+    },
+    "scenes-linux/motion-runtime/event-combat-03-restored-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "scenes-linux/motion-runtime/event-combat-03-restored-hd.png": {
+      "size": 3184117,
+      "sha256": "ca36e1b05083511fe734a0857d22e6aac0ddd461074a1b77ba141cd4f735037f"
+    },
+    "scenes-linux/motion-runtime/event-world-05-first-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "scenes-linux/motion-runtime/event-world-05-first-hd.png": {
+      "size": 1907425,
+      "sha256": "385189680e2e80073e88548e55ea81695424218c3b1abea65383721b65ad52ba"
+    },
+    "scenes-linux/motion-runtime/event-world-05-restored-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "scenes-linux/motion-runtime/event-world-05-restored-hd.png": {
+      "size": 1907425,
+      "sha256": "385189680e2e80073e88548e55ea81695424218c3b1abea65383721b65ad52ba"
+    },
+    "scenes-linux/motion-runtime/long-inn-first-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "scenes-linux/motion-runtime/long-inn-first-hd.png": {
+      "size": 1246307,
+      "sha256": "615318212b4b5ae1451fc4a03fd466a93209e061cf9358df9436282ab80c7a54"
+    },
+    "scenes-linux/motion-runtime/long-inn-restored-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "scenes-linux/motion-runtime/long-inn-restored-hd.png": {
+      "size": 1246307,
+      "sha256": "615318212b4b5ae1451fc4a03fd466a93209e061cf9358df9436282ab80c7a54"
+    },
+    "scenes-linux/motion-runtime/map-town3-first-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "scenes-linux/motion-runtime/map-town3-first-hd.png": {
+      "size": 2115208,
+      "sha256": "045ca2ac4e180017101be8a901f9ff9dd72f1e687e431a2372482d3e12604588"
+    },
+    "scenes-linux/motion-runtime/map-town3-restored-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "scenes-linux/motion-runtime/map-town3-restored-hd.png": {
+      "size": 2115208,
+      "sha256": "045ca2ac4e180017101be8a901f9ff9dd72f1e687e431a2372482d3e12604588"
+    },
+    "scenes-linux/motion-runtime/map-world-first-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "scenes-linux/motion-runtime/map-world-first-hd.png": {
+      "size": 2319867,
+      "sha256": "c22121c7ed404f4b7fe4928bfe130e212a09a4dea10849c29a7fcf74fcf4cf55"
+    },
+    "scenes-linux/motion-runtime/map-world-restored-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "scenes-linux/motion-runtime/map-world-restored-hd.png": {
+      "size": 2319867,
+      "sha256": "c22121c7ed404f4b7fe4928bfe130e212a09a4dea10849c29a7fcf74fcf4cf55"
+    },
+    "scenes-linux/motion-runtime/monster-native-encounter-first-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "scenes-linux/motion-runtime/monster-native-encounter-first-hd.png": {
+      "size": 769401,
+      "sha256": "baaba11b0ddfd78099db61af619c67714ae77b5ff33c454d07ab63e42bab7c78"
+    },
+    "scenes-linux/motion-runtime/monster-native-encounter-restored-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "scenes-linux/motion-runtime/monster-native-encounter-restored-hd.png": {
+      "size": 769401,
+      "sha256": "baaba11b0ddfd78099db61af619c67714ae77b5ff33c454d07ab63e42bab7c78"
+    },
+    "scenes-linux/motion-runtime/title-02-SET2PICS-05-first-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "scenes-linux/motion-runtime/title-02-SET2PICS-05-first-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "scenes-linux/motion-runtime/title-02-SET2PICS-05-restored-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "scenes-linux/motion-runtime/title-02-SET2PICS-05-restored-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "scenes-linux/motion-runtime/weather-4-01-first-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "scenes-linux/motion-runtime/weather-4-01-first-hd.png": {
+      "size": 2282253,
+      "sha256": "eca4a4c2fbcecc605593f7ca85445d12c3f3c6b242eb485b94cfdcf54c92c450"
+    },
+    "scenes-linux/motion-runtime/weather-4-01-restored-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "scenes-linux/motion-runtime/weather-4-01-restored-hd.png": {
+      "size": 2282253,
+      "sha256": "eca4a4c2fbcecc605593f7ca85445d12c3f3c6b242eb485b94cfdcf54c92c450"
+    },
+    "scenes-linux/release-driver.go.txt": {
+      "size": 1423,
+      "sha256": "ad12f59110c9f4368052db936fa774ff40653dac987692d2d2c814d4ae197cb1"
+    },
+    "scenes-linux/run-linux.log": {
+      "size": 708,
+      "sha256": "876c37f4adb0abb4c666cf704cc1b2c5b5ebf9b792233fd6f25dba11d9c58862"
+    },
+    "scenes-linux/source-inputs.json": {
+      "size": 45000,
+      "sha256": "ca9e0bfc983781d2aa9764b4c5c0946de0f0761b690b6f7e673221ae954f3a92"
+    },
+    "scenes-linux/xvfb-linux.log": {
+      "size": 81,
+      "sha256": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690"
+    },
+    "scenes-windows/memory-events.txt": {
+      "size": 73,
+      "sha256": "f7b6f4151793547bbaf260a67f9497b51c2975bb62c513c01d54f82daf547de1"
+    },
+    "scenes-windows/memory-peak.txt": {
+      "size": 11,
+      "sha256": "3cc45f6daaf2b588a75a515785fe5815d135630d4cccbe7c923bbcb6bc2b87cb"
+    },
+    "scenes-windows/motion-captures.json": {
+      "size": 23720,
+      "sha256": "499757e7afae1d0979f1400f9f0cf6dc958c464939e9b9c70c804b1da104c66c"
+    },
+    "scenes-windows/motion-runtime/battle-08-map-16-first-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "scenes-windows/motion-runtime/battle-08-map-16-first-hd.png": {
+      "size": 1106264,
+      "sha256": "9134696781618b9c7813add2f000e5580c88f4c6c04d30d2ca8fc549b6711fd9"
+    },
+    "scenes-windows/motion-runtime/battle-08-map-16-restored-ega.png": {
+      "size": 22835,
+      "sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3"
+    },
+    "scenes-windows/motion-runtime/battle-08-map-16-restored-hd.png": {
+      "size": 1106264,
+      "sha256": "9134696781618b9c7813add2f000e5580c88f4c6c04d30d2ca8fc549b6711fd9"
+    },
+    "scenes-windows/motion-runtime/body-1-1-first-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "scenes-windows/motion-runtime/body-1-1-first-hd.png": {
+      "size": 697534,
+      "sha256": "b17f7a8bd1e5a803a0147713f2546f8b5e2791d576240c50f6051fe3c4ef03f9"
+    },
+    "scenes-windows/motion-runtime/body-1-1-restored-ega.png": {
+      "size": 21653,
+      "sha256": "ecbf0f7dbd38a67bed57ca566f5ea532fc2706d357139f9e78effc793c0c1392"
+    },
+    "scenes-windows/motion-runtime/body-1-1-restored-hd.png": {
+      "size": 697534,
+      "sha256": "b17f7a8bd1e5a803a0147713f2546f8b5e2791d576240c50f6051fe3c4ef03f9"
+    },
+    "scenes-windows/motion-runtime/book-cover-first-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "scenes-windows/motion-runtime/book-cover-first-hd.png": {
+      "size": 3015390,
+      "sha256": "73fd0c0a90b9eb5cbe60cd292b8c8b87a3d4a04b85cadd28e2da702ab1ac7ad6"
+    },
+    "scenes-windows/motion-runtime/book-cover-restored-ega.png": {
+      "size": 25619,
+      "sha256": "be2e5d46c9f103ca88cbc9d5f4bbfcf8e44e045fc630fcb0f7d8e70011a665af"
+    },
+    "scenes-windows/motion-runtime/book-cover-restored-hd.png": {
+      "size": 3015390,
+      "sha256": "73fd0c0a90b9eb5cbe60cd292b8c8b87a3d4a04b85cadd28e2da702ab1ac7ad6"
+    },
+    "scenes-windows/motion-runtime/book-open-018-first-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "scenes-windows/motion-runtime/book-open-018-first-hd.png": {
+      "size": 2877694,
+      "sha256": "910e80a22c21220b21440e96c64ada6c0e48c30deed987283f73893375dbdbe2"
+    },
+    "scenes-windows/motion-runtime/book-open-018-restored-ega.png": {
+      "size": 23729,
+      "sha256": "03d9853997187105148ca73a6b8f330a401dac50621da6b372f6a6ffc1b4e1a4"
+    },
+    "scenes-windows/motion-runtime/book-open-018-restored-hd.png": {
+      "size": 2877694,
+      "sha256": "910e80a22c21220b21440e96c64ada6c0e48c30deed987283f73893375dbdbe2"
+    },
+    "scenes-windows/motion-runtime/credit-13-first-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "scenes-windows/motion-runtime/credit-13-first-hd.png": {
+      "size": 121059,
+      "sha256": "1fb11aec0c640532bf610feca61bb67af68d917eab2f413b1c2d130b64e68af0"
+    },
+    "scenes-windows/motion-runtime/credit-13-restored-ega.png": {
+      "size": 11398,
+      "sha256": "070f6fd4c312c76c7d5501f588d7b35aaf9e601edf4f447b6ba169c6e26b5ca8"
+    },
+    "scenes-windows/motion-runtime/credit-13-restored-hd.png": {
+      "size": 121059,
+      "sha256": "1fb11aec0c640532bf610feca61bb67af68d917eab2f413b1c2d130b64e68af0"
+    },
+    "scenes-windows/motion-runtime/event-combat-03-first-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "scenes-windows/motion-runtime/event-combat-03-first-hd.png": {
+      "size": 3184038,
+      "sha256": "1b8d6ad2299fd23eaae36b30b115ec0823ca4ecacbc011c3701d43a377313dba"
+    },
+    "scenes-windows/motion-runtime/event-combat-03-restored-ega.png": {
+      "size": 34342,
+      "sha256": "c921995cfaa201cd1e2bea4730ff473ece9a0150701999dfad1f3be57a329ccb"
+    },
+    "scenes-windows/motion-runtime/event-combat-03-restored-hd.png": {
+      "size": 3184038,
+      "sha256": "1b8d6ad2299fd23eaae36b30b115ec0823ca4ecacbc011c3701d43a377313dba"
+    },
+    "scenes-windows/motion-runtime/event-world-05-first-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "scenes-windows/motion-runtime/event-world-05-first-hd.png": {
+      "size": 1907570,
+      "sha256": "168c35f82f5c4852f835855964890f178ee5b69ed2378f736d8d8aa3a3defb46"
+    },
+    "scenes-windows/motion-runtime/event-world-05-restored-ega.png": {
+      "size": 23021,
+      "sha256": "8e9bf40971be9303581d410ef41915c9490e7e91d5a5792766d8c11e7367fdc6"
+    },
+    "scenes-windows/motion-runtime/event-world-05-restored-hd.png": {
+      "size": 1907570,
+      "sha256": "168c35f82f5c4852f835855964890f178ee5b69ed2378f736d8d8aa3a3defb46"
+    },
+    "scenes-windows/motion-runtime/long-inn-first-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "scenes-windows/motion-runtime/long-inn-first-hd.png": {
+      "size": 1246335,
+      "sha256": "4f317964b26c9cc5516b7b4f43bd5e22d2686904b7dfdc864bf21facf3d7cc20"
+    },
+    "scenes-windows/motion-runtime/long-inn-restored-ega.png": {
+      "size": 28137,
+      "sha256": "a8a96ff51c34043ba591301a8ee11c9af95a927e17ee46fd33f9261dd94fef5b"
+    },
+    "scenes-windows/motion-runtime/long-inn-restored-hd.png": {
+      "size": 1246335,
+      "sha256": "4f317964b26c9cc5516b7b4f43bd5e22d2686904b7dfdc864bf21facf3d7cc20"
+    },
+    "scenes-windows/motion-runtime/map-town3-first-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "scenes-windows/motion-runtime/map-town3-first-hd.png": {
+      "size": 2115172,
+      "sha256": "8b2cfd1e40935939e9e421cdad3964ef678be2bea39e9823d9cc3780ddce93f3"
+    },
+    "scenes-windows/motion-runtime/map-town3-restored-ega.png": {
+      "size": 27170,
+      "sha256": "ebe51e8d4878859b48d8476f0c34a5e3804fce25b4ee572aa3273f62aeced220"
+    },
+    "scenes-windows/motion-runtime/map-town3-restored-hd.png": {
+      "size": 2115172,
+      "sha256": "8b2cfd1e40935939e9e421cdad3964ef678be2bea39e9823d9cc3780ddce93f3"
+    },
+    "scenes-windows/motion-runtime/map-world-first-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "scenes-windows/motion-runtime/map-world-first-hd.png": {
+      "size": 2319771,
+      "sha256": "70f858f46150768bd3e3564638bbce63dd6b593045ee2553bd7ac127862ecc3e"
+    },
+    "scenes-windows/motion-runtime/map-world-restored-ega.png": {
+      "size": 27719,
+      "sha256": "e3af83f9769fae268e1cc78530fe6188c48ed42204c6f8e8353e07b0d2d5f1a9"
+    },
+    "scenes-windows/motion-runtime/map-world-restored-hd.png": {
+      "size": 2319771,
+      "sha256": "70f858f46150768bd3e3564638bbce63dd6b593045ee2553bd7ac127862ecc3e"
+    },
+    "scenes-windows/motion-runtime/monster-native-encounter-first-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "scenes-windows/motion-runtime/monster-native-encounter-first-hd.png": {
+      "size": 769443,
+      "sha256": "fea5ead4a5485b0f052aba7b5bee3828eae529c7c482a25460867a96e18dc8db"
+    },
+    "scenes-windows/motion-runtime/monster-native-encounter-restored-ega.png": {
+      "size": 18721,
+      "sha256": "31e5728837dc1bbbfec78caa6348790e2edee124f0116d72fa495e14045a7b31"
+    },
+    "scenes-windows/motion-runtime/monster-native-encounter-restored-hd.png": {
+      "size": 769443,
+      "sha256": "fea5ead4a5485b0f052aba7b5bee3828eae529c7c482a25460867a96e18dc8db"
+    },
+    "scenes-windows/motion-runtime/title-02-SET2PICS-05-first-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "scenes-windows/motion-runtime/title-02-SET2PICS-05-first-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "scenes-windows/motion-runtime/title-02-SET2PICS-05-restored-ega.png": {
+      "size": 25934,
+      "sha256": "5de46a77420a27c13705bfbf4e2e6d91991a1a9eab89fe2be42d3fc7ae2a7067"
+    },
+    "scenes-windows/motion-runtime/title-02-SET2PICS-05-restored-hd.png": {
+      "size": 3238739,
+      "sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d"
+    },
+    "scenes-windows/motion-runtime/weather-4-01-first-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "scenes-windows/motion-runtime/weather-4-01-first-hd.png": {
+      "size": 2282138,
+      "sha256": "d766e30995c2e62132756840b82ce2703d67942cdfb01dd1ac802ac994f950f1"
+    },
+    "scenes-windows/motion-runtime/weather-4-01-restored-ega.png": {
+      "size": 27190,
+      "sha256": "8a2b35e830d34fdb69f1010f4785a3a72e51905f694abda9f79048748d69c963"
+    },
+    "scenes-windows/motion-runtime/weather-4-01-restored-hd.png": {
+      "size": 2282138,
+      "sha256": "d766e30995c2e62132756840b82ce2703d67942cdfb01dd1ac802ac994f950f1"
+    },
+    "scenes-windows/run.log": {
+      "size": 519,
+      "sha256": "546303df80a5a933939d34ae5ccdcef138a85e75b80006a58f4e9233b5463c35"
+    },
+    "scenes-windows/xvfb.log": {
+      "size": 2429,
+      "sha256": "6d73d78138c41bea466314919237a4fe998e5b670a356ab2012f328fff769a7b"
+    },
+    "smoke/windows-audio-capture.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke/windows-audio.wav": {
+      "size": 78975642,
+      "sha256": "e779df9050e6f220b77f2e06affc45f689ba8304af90c2867ec6d0471904feb6"
+    },
+    "smoke/wine-audio-done": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke/wine-audio-ready": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke/wine-pulse-info.txt": {
+      "size": 402,
+      "sha256": "99d8d606587c483c09798f9effedb8b9bfcaf3fe3920b8fb2e90f0508965f4ec"
+    },
+    "smoke/wine-pulse.log": {
+      "size": 3055,
+      "sha256": "b182c07caff6a6dc9c8dd0933a64a588343d6481299120e2a6b1a63de127dd37"
+    },
+    "smoke-attempt1/windows-audio-capture.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt1/windows-audio.wav": {
+      "size": 9765510,
+      "sha256": "e4b974022af9bffab1b6f062479531eecfd4ae2c64b9f281957e98b0b6fe1781"
+    },
+    "smoke-attempt1/wine-audio-done": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt1/wine-audio-ready": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt1/wine-pulse-info.txt": {
+      "size": 402,
+      "sha256": "3e5a3e49b085aee3fad009022297760e6a7d28af25eb06276b24a2c29c788bd1"
+    },
+    "smoke-attempt1/wine-pulse.log": {
+      "size": 3055,
+      "sha256": "b182c07caff6a6dc9c8dd0933a64a588343d6481299120e2a6b1a63de127dd37"
+    },
+    "smoke-attempt2/windows-audio-capture.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt2/windows-audio.wav": {
+      "size": 10013854,
+      "sha256": "bc5a9b51d555e88eb1dd3b383749ef75a479d7fa542de6c5be98da2da28bd209"
+    },
+    "smoke-attempt2/wine-audio-done": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt2/wine-audio-ready": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt2/wine-pulse-info.txt": {
+      "size": 402,
+      "sha256": "03709e6db5e64ea8af657386994e8149f2228c5e1b85a2947da0c80d515c3226"
+    },
+    "smoke-attempt2/wine-pulse.log": {
+      "size": 3055,
+      "sha256": "b182c07caff6a6dc9c8dd0933a64a588343d6481299120e2a6b1a63de127dd37"
+    },
+    "smoke-attempt3/windows-audio-capture.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt3/windows-audio.wav": {
+      "size": 16927226,
+      "sha256": "57996997ad0362b01d8843ba79fe37052718c19e8dcc281c1f7dd78859961312"
+    },
+    "smoke-attempt3/wine-audio-done": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt3/wine-audio-ready": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke-attempt3/wine-pulse-info.txt": {
+      "size": 402,
+      "sha256": "f3c5e6a8944f4f21f89956f52c6ead871139ff952a00d0cab87e346d85a57479"
+    },
+    "smoke-attempt3/wine-pulse.log": {
+      "size": 3055,
+      "sha256": "b182c07caff6a6dc9c8dd0933a64a588343d6481299120e2a6b1a63de127dd37"
+    },
+    "source-inputs.json": {
+      "size": 45000,
+      "sha256": "47bac83755f87f4ec20a92b48d47c9e2be0da88944446f7f0c78733561637027"
+    },
+    "tests.log": {
+      "size": 5392,
+      "sha256": "0879c58be9244db4fe6d610a6444cf01dbadae679d9e6b5e88d17c5b7b6af3fa"
+    },
+    "update_docs.py": {
+      "size": 10444,
+      "sha256": "8713ba04bc56c3820df55babe9a30410fdf35a11cb0181e3b5eef8d8b44d48f0"
+    },
+    "verify_windows.py": {
+      "size": 9414,
+      "sha256": "3ef2df90bce912908efd3b635ab8d6ea139b73d604bb9e1d552745307eb2dfed"
+    },
+    "wine-package-attempt1.json": {
+      "size": 164,
+      "sha256": "13533558beba12178e7bc1a3a4b02c9c1dbc6194ebe6a98d0150ac80bc24efa3"
+    },
+    "wine-package-attempt2.json": {
+      "size": 299,
+      "sha256": "13fdd2ec3bdfa1b43332b16f6ddc5009149d0087efd86fc39630c83c3ea05539"
+    },
+    "wine-package-attempt3.json": {
+      "size": 274,
+      "sha256": "f07beefe981890932dd39c640262ba6bb059bcfbf4f879f4d3f4bcc7d3ea19a9"
+    },
+    "wine-runtime.json": {
+      "size": 3652,
+      "sha256": "40cbe6f936f3beca64dc87990293a7ee29e45ce57e6e0f7e2a0aa82cecf797ae"
+    }
+  },
+  "readable_copies": [
+    "assets-recheck.log",
+    "audio-runtime.json",
+    "build-delivery.log",
+    "build-final.log",
+    "build-scenes.sh",
+    "build.sh",
+    "captures-comparison.json",
+    "check_captures.py",
+    "corrupt-hd-gui.log",
+    "default-kol.log",
+    "default-stdout.log",
+    "defer_loaders.py",
+    "defer_render.py",
+    "finish_proof.py",
+    "full-ega-flow.log",
+    "full-ega-gui.log",
+    "full-ega-hd-flow.log",
+    "full-ega-hd-gui.log",
+    "full-ega-hd-trace.json",
+    "full-ega-trace.json",
+    "native-contents.log",
+    "native-cover.log",
+    "native-memory-peak.txt",
+    "native-xvfb.log",
+    "old-intro.json",
+    "old-intro.log",
+    "package-flow-comparison.json",
+    "post-scene-notice-fix.json",
+    "receipt.json",
+    "release-ega-flow.log",
+    "release-ega-gui.log",
+    "release-ega-hd-flow.log",
+    "release-ega-hd-gui.log",
+    "release-ega-hd-trace.json",
+    "release-ega-trace.json",
+    "repro.py",
+    "source-inputs.json",
+    "tests.log",
+    "update_docs.py",
+    "verify_windows.py",
+    "wine-package-attempt1.json",
+    "wine-package-attempt2.json",
+    "wine-package-attempt3.json",
+    "wine-runtime.json"
+  ],
+  "removed_rebuildable_executables": {
+    "candidate1/scenes-linux/bin/hd-scenes": {
+      "size": 15916112,
+      "sha256": "c75bcf3b700785abdb8dd0e521ee7d8f4c8061d1934d611b6889045392e18f0f"
+    },
+    "candidate1/scenes-linux/bin/hd-scenes.exe": {
+      "size": 15687168,
+      "sha256": "84180ce10abf8a9e45658e503ee3886ce2b8c6b427c966008b37045ed162ba5e"
+    },
+    "kol": {
+      "size": 15143984,
+      "sha256": "73d429beaeebe02600b336340c7cfc3b2a3875ea4a1aead1df5ede88f9870bbb"
+    },
+    "kol.exe": {
+      "size": 14614016,
+      "sha256": "d1e1991da4eaacef60086b5ce8a9b69aeadfd6da487d736f2e112239bc3eca3d"
+    },
+    "scenes-linux/bin/hd-scenes": {
+      "size": 15917504,
+      "sha256": "2896e83875e5fd9d1690c799a19d1a67d083ea3a0ae682ae8e291809382426d7"
+    },
+    "scenes-linux/bin/hd-scenes.exe": {
+      "size": 15689216,
+      "sha256": "77611db56cc9b7e682147c10c2af96de2a0298ddc17bbe82272712719d8a22c8"
+    }
+  },
+  "original_bytes": 465856573,
+  "old_receipt_modified": false,
+  "new_game_execution": false,
+  "limits": "Historical receipts retain their original paths and hashes. Executable bytes were removed; their hashes remain. This checks retained evidence integrity, not a new game run.",
+  "local_archive_path": "docs/verification/local/windows-crash-20261017/evidence.tar.xz"
+}

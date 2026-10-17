@@ -48,15 +48,15 @@ type hdNativeRender struct {
 var activeHDUI *hdNativeRender
 
 func (h *HD) AttachPages(book image.Image, portraits map[string]image.Image, books map[string]int, background string, sources []HDPageSource) {
-	p := &hdPages{book: ebiten.NewImageFromImage(book), portraits: map[string]*ebiten.Image{}, books: books, background: background, icons: map[string]*ebiten.Image{}, sources: sources}
+	p := &hdPages{book: h.newPaint(book), portraits: map[string]*ebiten.Image{}, books: books, background: background, icons: map[string]*ebiten.Image{}, sources: sources}
 	for key, pic := range portraits {
-		p.portraits[key] = ebiten.NewImageFromImage(pic)
+		p.portraits[key] = h.newPaint(pic)
 	}
 	h.pages = p
 }
 
 func (h *HD) AttachScroll(pic image.Image, source HDPageSource) {
-	h.pages.scroll = ebiten.NewImageFromImage(pic)
+	h.pages.scroll = h.newPaint(pic)
 	h.pages.scrollKey = source.RGB
 	h.pages.sources = append(h.pages.sources, source)
 	h.pages.validated = false
@@ -128,7 +128,7 @@ func (h *HD) ValidatePageSources(sprites Sprites) error {
 		if err != nil {
 			return err
 		}
-		p.icons[h.fingerprint(pic)] = h.style.images["icon-"+cmd.key+".png"]
+		p.icons[h.fingerprint(pic)] = h.style.image("icon-" + cmd.key + ".png")
 	}
 	if h.actions != nil {
 		for key, icon := range h.actions.icons {
@@ -228,7 +228,7 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 	}
 	if key == h.pages.background {
 		n.paper = false
-		dst.DrawImage(h.style.images["background.png"], nil)
+		dst.DrawImage(h.style.image("background.png"), nil)
 		return true
 	}
 	if page, ok := h.pages.books[key]; ok {
@@ -256,6 +256,13 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 					n.err = fmt.Errorf("HD片頭覆蓋座標不符")
 					return true
 				}
+			}
+			if !h.motion.titleReady && (len(id) >= 8 && (id[:8] == "set0pics" || id[:8] == "set1pics" || id[:8] == "set2pics")) {
+				if err := h.motion.prepareTitleMattes(); err != nil {
+					n.err = err
+					return true
+				}
+				h.motion.titleReady = true
 			}
 			painted = h.motion.images[id]
 		}
@@ -285,9 +292,9 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 	if i, ok := h.matching[key]; ok {
 		painted = h.portraits[i]
 	} else if key == h.style.npcKey {
-		painted = h.style.images["innkeeper-cropped.png"]
+		painted = h.style.image("innkeeper-cropped.png")
 	} else if key == h.style.crestKey {
-		painted = h.style.images["crest.png"]
+		painted = h.style.image("crest.png")
 	}
 	r := image.Rect(x*2, y*2, (x+src.Bounds().Dx()*scale)*2, (y+src.Bounds().Dy()*scale)*2)
 	if n.paper && h.sceneEvents != nil {
@@ -310,7 +317,7 @@ func drawHDUI(dst, src *ebiten.Image, x, y, scale int) bool {
 			b := src.Bounds()
 			paint := h.pages.backgroundCrops[b]
 			if paint == nil {
-				paint = h.style.images["background.png"].SubImage(image.Rect(b.Min.X*6, b.Min.Y*6, b.Max.X*6, b.Max.Y*6)).(*ebiten.Image)
+				paint = h.paintSubImage(h.style.image("background.png"), image.Rect(b.Min.X*6, b.Min.Y*6, b.Max.X*6, b.Max.Y*6))
 				h.pages.backgroundCrops[b] = paint
 			}
 			h.drawHD(dst, paint, r)
@@ -417,7 +424,7 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 				cell = cell.Intersect(clipRect)
 			}
 			if !cell.Empty() {
-				dst.SubImage(cell).(*ebiten.Image).DrawImage(n.h.style.images["font-atlas.png"].SubImage(hdRect(glyph.X, glyph.Y, 96, 96)).(*ebiten.Image), &op)
+				dst.SubImage(cell).(*ebiten.Image).DrawImage(n.h.style.image("font-atlas.png").SubImage(hdRect(glyph.X, glyph.Y, 96, 96)).(*ebiten.Image), &op)
 			}
 		}
 		drawn++
@@ -428,7 +435,7 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 
 func (n *hdNativeRender) drawEditor(e *bitmapedit.Editor, blink bool) error {
 	dst, h := n.dst, n.h
-	dst.DrawImage(h.style.images["background.png"], nil)
+	dst.DrawImage(h.style.image("background.png"), nil)
 	panel := func(x, y, w, height int, active bool) {
 		ink := color.RGBA{120, 104, 87, 255}
 		if active {
@@ -484,7 +491,7 @@ func (n *hdNativeRender) drawEditor(e *bitmapedit.Editor, blink bool) error {
 			if i == 2 {
 				key = "yes"
 			}
-			h.drawHD(dst, h.style.images["icon-"+key+".png"], image.Rect(x+35, y+12, x+109, y+86))
+			h.drawHD(dst, h.style.image("icon-"+key+".png"), image.Rect(x+35, y+12, x+109, y+86))
 		} else {
 			c := hdGold
 			switch i {

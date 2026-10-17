@@ -16,7 +16,7 @@ func (h *HD) AttachEnding(images map[int]image.Image, sourceRGB map[int]string) 
 	h.endingImages = make(map[int]*ebiten.Image, len(images))
 	h.endingKeys = make(map[int]string, len(sourceRGB))
 	for i, im := range images {
-		h.endingImages[i] = ebiten.NewImageFromImage(im)
+		h.endingImages[i] = h.newPaint(im)
 		h.endingKeys[i] = sourceRGB[i]
 	}
 }

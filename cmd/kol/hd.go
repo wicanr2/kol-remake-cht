@@ -22,6 +22,9 @@ func (g *game) enableHD(mode, dir, lang string) error {
 // setGraphics 完整載入成功後才換呈現；只交換畫布，不重建遊戲或觸碰保存。
 func (g *game) setGraphics(mode string) error {
 	if mode == "ega" {
+		if g.hdCache != nil {
+			g.hdCache.ReleaseHDMemory()
+		}
 		g.hd, g.presentation = nil, nil
 		return nil
 	}
@@ -29,31 +32,31 @@ func (g *game) setGraphics(mode string) error {
 		return fmt.Errorf("graphics須為ega或hd；HD首批只支援zh-Hant")
 	}
 	if g.hdCache == nil {
-		lib, err := assets.LoadHD(g.hdDir)
+		lib, err := assets.LoadHD(g.hdDir, assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD素材載入失敗：%w", err)
 		}
-		controls, err := assets.LoadHDInterface(filepath.Join(g.hdDir, "interface"))
+		controls, err := assets.LoadHDInterface(filepath.Join(g.hdDir, "interface"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD介面載入失敗：%w", err)
 		}
-		events, err := assets.LoadHDEnding(filepath.Join(g.hdDir, "events"))
+		events, err := assets.LoadHDEnding(filepath.Join(g.hdDir, "events"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD結局載入失敗：%w", err)
 		}
-		pages, err := assets.LoadHDPages(filepath.Join(g.hdDir, "pages"))
+		pages, err := assets.LoadHDPages(filepath.Join(g.hdDir, "pages"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD頁面載入失敗：%w", err)
 		}
-		scroll, err := assets.LoadHDScroll(filepath.Join(g.hdDir, "scroll"))
+		scroll, err := assets.LoadHDScroll(filepath.Join(g.hdDir, "scroll"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD法術卷軸載入失敗：%w", err)
 		}
-		templates, err := assets.LoadHDTemplates(filepath.Join(g.hdDir, "templates"))
+		templates, err := assets.LoadHDTemplates(filepath.Join(g.hdDir, "templates"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD角色模板載入失敗：%w", err)
 		}
-		actions, err := assets.LoadHDActions(filepath.Join(g.hdDir, "actions"))
+		actions, err := assets.LoadHDActions(filepath.Join(g.hdDir, "actions"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD動作圖示載入失敗：%w", err)
 		}
@@ -67,28 +70,28 @@ func (g *game) setGraphics(mode string) error {
 		if err != nil {
 			return fmt.Errorf("HD裝備載入失敗：%w", err)
 		}
-		npcMounts, err := assets.LoadHDNPCMounts(filepath.Join(g.hdDir, "npc-mounts"))
+		npcMounts, err := assets.LoadHDNPCMounts(filepath.Join(g.hdDir, "npc-mounts"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD NPC與坐騎載入失敗：%w", err)
 		}
 		if err := npcMounts.ValidateSources(g.sprites.lib); err != nil {
 			return fmt.Errorf("HD NPC與坐騎來源驗證失敗：%w", err)
 		}
-		monsters, err := assets.LoadHDMonsters(filepath.Join(g.hdDir, "monsters"))
+		monsters, err := assets.LoadHDMonsters(filepath.Join(g.hdDir, "monsters"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD怪物載入失敗：%w", err)
 		}
 		if err := monsters.ValidateSources(g.sprites.lib); err != nil {
 			return fmt.Errorf("HD怪物來源驗證失敗：%w", err)
 		}
-		facades, err := assets.LoadHDTownFacades(filepath.Join(g.hdDir, "town-facades"))
+		facades, err := assets.LoadHDTownFacades(filepath.Join(g.hdDir, "town-facades"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD城鎮門面載入失敗：%w", err)
 		}
 		if err := facades.ValidateSources(g.sprites.lib); err != nil {
 			return fmt.Errorf("HD城鎮門面來源驗證失敗：%w", err)
 		}
-		crests, err := assets.LoadHDTownCrests(filepath.Join(g.hdDir, "town-crests"))
+		crests, err := assets.LoadHDTownCrests(filepath.Join(g.hdDir, "town-crests"), assets.DeferHDPixels)
 		if err != nil {
 			return fmt.Errorf("HD七城徽章載入失敗：%w", err)
 		}

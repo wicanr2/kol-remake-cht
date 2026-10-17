@@ -17,6 +17,7 @@ type HDGlyph struct {
 	Advance float64
 }
 type hdInterface struct {
+	owner            *HD
 	images           map[string]*ebiten.Image
 	glyphs           map[string]HDGlyph
 	t                Translator
@@ -31,13 +32,15 @@ var hdMuted = color.RGBA{182, 169, 154, 255}
 func hdRect(x, y, w, h int) image.Rectangle { return image.Rect(x, y, x+w, y+h) }
 
 func (h *HD) AttachInterface(images map[string]image.Image, glyphs map[string]HDGlyph, npcKey, crestKey string, t Translator) {
-	s := &hdInterface{images: map[string]*ebiten.Image{}, glyphs: glyphs, t: t, npcKey: npcKey, crestKey: crestKey, scratch: ebiten.NewImage(1920, 1200)}
+	s := &hdInterface{owner: h, images: map[string]*ebiten.Image{}, glyphs: glyphs, t: t, npcKey: npcKey, crestKey: crestKey, scratch: ebiten.NewImage(1920, 1200)}
 	for n, img := range images {
-		s.images[n] = ebiten.NewImageFromImage(img)
+		s.images[n] = h.newPaint(img)
 	}
-	s.images["innkeeper-cropped.png"] = s.images["innkeeper-painted-v1.png"].SubImage(image.Rect(0, 90, 1254, 1084)).(*ebiten.Image)
+	s.images["innkeeper-cropped.png"] = h.paintSubImage(s.images["innkeeper-painted-v1.png"], image.Rect(0, 90, 1254, 1084))
 	h.style = s
 }
+func (s *hdInterface) image(name string) *ebiten.Image { return s.owner.paint(s.images[name]) }
+
 func (s *hdInterface) word(text string) string {
 	if s.t != nil {
 		return s.t.T(text)
@@ -49,7 +52,7 @@ func (s *hdInterface) panel(dst *ebiten.Image, r image.Rectangle, active bool) {
 	if active {
 		n = 1
 	}
-	pic := s.images[fmt.Sprintf("panel-%d-%d-%d.png", r.Dx(), r.Dy(), n)]
+	pic := s.image(fmt.Sprintf("panel-%d-%d-%d.png", r.Dx(), r.Dy(), n))
 	var op ebiten.DrawImageOptions
 	op.GeoM.Translate(float64(r.Min.X-4), float64(r.Min.Y-4))
 	dst.DrawImage(pic, &op)
@@ -100,14 +103,14 @@ func (s *hdInterface) label(dst *ebiten.Image, text string, r image.Rectangle, s
 		op.GeoM.Translate(x-10*scale, baseline-76*scale)
 		op.ColorScale.ScaleWithColor(c)
 		op.Filter = ebiten.FilterLinear
-		target.DrawImage(s.images["font-atlas.png"].SubImage(hdRect(g.X, g.Y, 96, 96)).(*ebiten.Image), &op)
+		target.DrawImage(s.image("font-atlas.png").SubImage(hdRect(g.X, g.Y, 96, 96)).(*ebiten.Image), &op)
 		x += g.Advance * scale
 	}
 }
 func (s *hdInterface) begin(dst *ebiten.Image) {
 	s.scratch.Clear()
 	s.scratch.DrawImage(dst, nil)
-	dst.DrawImage(s.images["background.png"], nil)
+	dst.DrawImage(s.image("background.png"), nil)
 }
 func (s *hdInterface) preserve(dst *ebiten.Image, r image.Rectangle) {
 	var op ebiten.DrawImageOptions
@@ -185,7 +188,7 @@ func (h *HD) toolbarHD(dst *ebiten.Image, sprites Sprites, indices []int, select
 			command.title = "返回"
 		}
 		if command.key != "" {
-			h.drawHD(dst, s.images["icon-"+command.key+".png"], hdRect(r.Min.X+35, r.Min.Y+12, 74, 74))
+			h.drawHD(dst, s.image("icon-"+command.key+".png"), hdRect(r.Min.X+35, r.Min.Y+12, 74, 74))
 		} else {
 			pic, err := sprites.Get("KOLMPICS", index)
 			if err != nil {
@@ -226,7 +229,7 @@ func (h *HD) innHD(dst *ebiten.Image, sprites Sprites, in *town.Inn) error {
 			return err
 		}
 		if h.fingerprint(pic) == s.npcKey {
-			pic = s.images["innkeeper-cropped.png"]
+			pic = s.image("innkeeper-cropped.png")
 		} else if painted, ok := h.pagePortrait(pic); ok {
 			pic = painted
 		}
@@ -314,7 +317,7 @@ func (h *HD) outdoorHD(dst *ebiten.Image, sprites Sprites, out *town.Outdoor) er
 		return err
 	}
 	if !crestDrawn && h.fingerprint(crest) == s.crestKey {
-		h.drawHD(dst, s.images["crest.png"], hdRect(130, 502, 320, 320))
+		h.drawHD(dst, s.image("crest.png"), hdRect(130, 502, 320, 320))
 	} else if !crestDrawn {
 		s.preserve(dst, hdRect(120, 490, 430, 450))
 	}

@@ -56,7 +56,7 @@ func npcMountCounts() map[string]int {
 func npcMountHash(data []byte) string { return fmt.Sprintf("%x", sha256.Sum256(data)) }
 
 // LoadHDNPCMounts 驗完整106個來源及102個新裁切；錯誤只回傳nil組。
-func LoadHDNPCMounts(dir string) (*HDNPCMounts, error) {
+func LoadHDNPCMounts(dir string, options ...HDLoadOption) (*HDNPCMounts, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -132,6 +132,14 @@ func LoadHDNPCMounts(dir string) (*HDNPCMounts, error) {
 		if !namePattern.MatchString(name) || !validHDHash(info.SHA256) || info.Width < 1 || info.Height < 1 || info.Width > 4096 || info.Height > 4096 {
 			return nil, fmt.Errorf("HD NPC圖集檔名、尺寸或雜湊無效")
 		}
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, name, info)
+			if err != nil {
+				return nil, err
+			}
+			images[name] = pic
+			continue
+		}
 		data, err := os.ReadFile(filepath.Join(dir, name))
 		if err != nil {
 			return nil, err
@@ -168,18 +176,20 @@ func LoadHDNPCMounts(dir string) (*HDNPCMounts, error) {
 		if pic == nil || p.Rect[0] >= p.Rect[2] || p.Rect[1] >= p.Rect[3] || !r.In(pic.Bounds()) || r.Dx() < minSize.X || r.Dy() < minSize.Y {
 			return nil, fmt.Errorf("HD NPC與坐騎裁切越界、缺件或原生尺寸不足")
 		}
-		rgba := make([]byte, 0, r.Dx()*r.Dy()*4)
-		for y := r.Min.Y; y < r.Max.Y; y++ {
-			for x := r.Min.X; x < r.Max.X; x++ {
-				c := color.NRGBAModel.Convert(pic.At(x, y)).(color.NRGBA)
-				if c.A != 255 {
-					return nil, fmt.Errorf("HD NPC與坐騎畫格必須不透明")
+		if !deferHDPixels(options) {
+			rgba := make([]byte, 0, r.Dx()*r.Dy()*4)
+			for y := r.Min.Y; y < r.Max.Y; y++ {
+				for x := r.Min.X; x < r.Max.X; x++ {
+					c := color.NRGBAModel.Convert(pic.At(x, y)).(color.NRGBA)
+					if c.A != 255 {
+						return nil, fmt.Errorf("HD NPC與坐騎畫格必須不透明")
+					}
+					rgba = append(rgba, c.R, c.G, c.B, c.A)
 				}
-				rgba = append(rgba, c.R, c.G, c.B, c.A)
 			}
-		}
-		if npcMountHash(rgba) != p.RGBA {
-			return nil, fmt.Errorf("HD NPC與坐騎原生裁切RGBA不符")
+			if npcMountHash(rgba) != p.RGBA {
+				return nil, fmt.Errorf("HD NPC與坐騎原生裁切RGBA不符")
+			}
 		}
 		crop := pic.(interface {
 			SubImage(image.Rectangle) image.Image

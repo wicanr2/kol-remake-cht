@@ -1079,6 +1079,7 @@ type game struct {
 	hdCache                *ui.HD
 	hdCanvas               *screen.Canvas
 	hdDir                  string
+	hdInstallCache         map[string]bool
 	hdLanguage             string
 	hdPortraitPath         string
 	hdMonsterBlanks        map[image.Point]*ebiten.Image
@@ -2627,6 +2628,22 @@ func (g *game) updateBattle() {
 }
 
 func (g *game) Draw(dst *ebiten.Image) {
+	if hd := g.hd; hd != nil {
+		hd.BeginHDFrame()
+		defer func() {
+			if err := hd.EndHDFrame(); err != nil {
+				g.drawErr = err
+			}
+			if g.drawErr != nil && g.interactive {
+				fmt.Fprintln(os.Stderr, "HD畫面載入失敗，返回EGA：", g.drawErr)
+				g.setGraphics("ega")
+				g.drawErr = nil
+				g.drawn = false
+				g.displaySettings.Problem = true
+				g.notice = []string{"手繪圖片讀取失敗，已回到經典畫面。"}
+			}
+		}()
+	}
 	if g.hd != nil && g.nativeUIPage() {
 		if err := g.hd.ValidatePageSources(g.sprites); err != nil {
 			g.drawErr = err
@@ -2966,6 +2983,7 @@ func main() {
 	}
 	if interactive {
 		*sceneName = string(sceneFlow)
+		startRuntimeLog(true, *logInput, time.Now())
 		// 這是繁體中文重製版，玩的時候預設就走中文模式；`-lang en` 切回原版
 		// 字模的英文版面。對拍腳本一律明寫 `-scene`，不會走到這裡。
 		langSet := false

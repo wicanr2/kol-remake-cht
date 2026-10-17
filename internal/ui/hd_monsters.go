@@ -60,7 +60,7 @@ func (h *HD) AttachMonsters(arts []HDMonsterArt) error {
 	}
 	next := &hdMonsters{}
 	for i, a := range arts {
-		next.pictures[i] = hdMonsterArt{a.Source, a.Size, ebiten.NewImageFromImage(a.Paint)}
+		next.pictures[i] = hdMonsterArt{a.Source, a.Size, h.newPaint(a.Paint)}
 	}
 	h.monsters = next
 	h.pages.sources = nextSources

@@ -10,7 +10,7 @@ import (
 
 // 完整來源與畫稿驗後才接入；呼叫端最後交換整個HD快取。
 func attachHDTownMaps(hd *ui.HD, dir string, original *assets.Library) error {
-	maps, e := assets.LoadHDTownMaps(filepath.Join(dir, "town-maps"))
+	maps, e := assets.LoadHDTownMaps(filepath.Join(dir, "town-maps"), assets.DeferHDPixels)
 	if e != nil {
 		return fmt.Errorf("HD城鎮地圖載入失敗：%w", e)
 	}

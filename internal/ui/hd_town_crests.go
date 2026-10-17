@@ -51,7 +51,7 @@ func (h *HD) AttachTownCrests(arts []HDTownCrestArt) error {
 	}
 	next := &hdTownCrests{pictures: map[string]hdTownCrestArt{}, byRGB: map[string]*ebiten.Image{}}
 	for _, a := range arts {
-		paint := ebiten.NewImageFromImage(a.Paint)
+		paint := h.newPaint(a.Paint)
 		next.pictures[a.Source.Archive] = hdTownCrestArt{a.Source, paint}
 		next.byRGB[a.Source.RGB] = paint
 	}

@@ -57,7 +57,7 @@ func townMapRect(a [4]int) image.Rectangle {
 func townMapOrdered(a [4]int) bool { return a[0] < a[2] && a[1] < a[3] }
 
 // LoadHDTownMaps returns nothing unless all declared cities are fully covered.
-func LoadHDTownMaps(dir string) (*HDTownMaps, error) {
+func LoadHDTownMaps(dir string, options ...HDLoadOption) (*HDTownMaps, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -110,6 +110,14 @@ func LoadHDTownMaps(dir string) (*HDTownMaps, error) {
 	}
 	result := &HDTownMaps{Manifest: m}
 	for _, region := range m.Regions {
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, region.File, m.Files[region.File])
+			if err != nil {
+				return nil, err
+			}
+			result.Images = append(result.Images, pic)
+			continue
+		}
 		data, err := os.ReadFile(filepath.Join(dir, region.File))
 		if err != nil {
 			return nil, err

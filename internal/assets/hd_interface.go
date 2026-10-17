@@ -29,7 +29,7 @@ type HDInterface struct {
 }
 
 // LoadHDInterface 驗整組、字格邊界與固定檔名後才交給GPU，不接受部分套件。
-func LoadHDInterface(dir string) (*HDInterface, error) {
+func LoadHDInterface(dir string, options ...HDLoadOption) (*HDInterface, error) {
 	var m struct {
 		Schema, Rights string
 		Files          map[string]HDImageInfo
@@ -82,6 +82,14 @@ func LoadHDInterface(dir string) (*HDInterface, error) {
 		info, ok := m.Files[name]
 		if !ok || info.Width != size.X || info.Height != size.Y {
 			return nil, fmt.Errorf("HD介面 %s 宣告尺寸不符", name)
+		}
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, name, info)
+			if err != nil {
+				return nil, err
+			}
+			h.Images[name] = pic
+			continue
 		}
 		data, e := read(name, info.SHA256)
 		if e != nil {

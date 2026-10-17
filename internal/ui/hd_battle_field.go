@@ -146,7 +146,7 @@ func (h *HD) motionBattleTileUncached(id, atlas int) (*ebiten.Image, error) {
 					sheet = h.motion.images["battle-alternate-1"]
 					x, y = (i-10)*128, 0
 				}
-				return sheet.SubImage(image.Rect(x, y, x+128, y+128)).(*ebiten.Image), nil
+				return h.paintSubImage(sheet, image.Rect(x, y, x+128, y+128)), nil
 			}
 		}
 	}
@@ -154,7 +154,7 @@ func (h *HD) motionBattleTileUncached(id, atlas int) (*ebiten.Image, error) {
 	sheet := h.motion.images[fmt.Sprintf("battle-terrain-%d", start)]
 	i := id - start
 	x, y := i%5*128, i/5*128
-	return sheet.SubImage(image.Rect(x, y, x+128, y+128)).(*ebiten.Image), nil
+	return h.paintSubImage(sheet, image.Rect(x, y, x+128, y+128)), nil
 }
 func drawHDTargetRing(dst *ebiten.Image, tiles *BattleTiles, source *ebiten.Image, row, col, scale int) bool {
 	n := activeHDUI

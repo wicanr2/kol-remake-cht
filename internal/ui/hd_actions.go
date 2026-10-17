@@ -34,10 +34,10 @@ func (h *HD) AttachActions(atlas image.Image, sources []HDActionSource) error {
 		}
 		seen[s.RGB] = true
 	}
-	pic := ebiten.NewImageFromImage(atlas)
+	pic := h.newPaint(atlas)
 	a := &hdActions{icons: map[string]*ebiten.Image{}}
 	for _, s := range sources {
-		a.icons[s.RGB] = pic.SubImage(s.Rect).(*ebiten.Image)
+		a.icons[s.RGB] = h.paintSubImage(pic, s.Rect)
 		a.sources = append(a.sources, s.HDPageSource)
 	}
 	h.actions = a

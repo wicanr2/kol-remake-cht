@@ -1,38 +1,46 @@
 # 《武士傳說》重製目前狀態
 
-更新日期：2026-10-17。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
-現行交付為`v.1.0.3-20261017`，三平台六包與76秒1080p影片驗收完成，Release四附件大小與SHA-256相符。儲存庫已依使用者明確決定轉為public，HD圖像與配套832份、HD配樂與授權6份全部收錄，見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)與[逐檔清冊](docs/verification/public-repository-20261017.json)。tag仍固定`3f1ae7c2`；[原發行收據](docs/verification/release-v1.0.3-20261017.md)保留當時private狀態，舊tag與Release位元組保持。
-本版包含目前玩家路徑13類HD圖形及操作頁、四首原創室內樂、F9與F10。正式430份Go／module及832份HD資產保持完整HD驗收來源；中文與場景依SPEC-040，不宣稱自然全任務通關或新增原版parity。
-README已補12格[HD總覽](docs/screenshots/hd-overview.png)、原版DOS／重製中文EGA／HD差異表及逐圖說明。故事背景依原版手冊核對，來源與圖片工具見[總覽清冊](docs/screenshots/hd-overview.json)及[畫面入口](docs/screenshots/README.md)。本次只更新文件與展示圖，既有封包、tag與Release保持。
-本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
-可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
+更新日期：2026-10-17。
+
+Windows `v.1.0.4-20261017` 已完成純 EGA 及 EGA＋HD 兩個完整版與對應引擎包驗收，
+見[Windows 修復收據](docs/verification/windows-memory-20261017.md)。圖片改為按需讀取，
+原生紋理及縮放快取設容量上限，久未使用者淘汰；回到EGA時釋放HD圖片及裝備合成。
+沒有完整HD素材組時不能切換HD，壞圖片會回到EGA並顯示中文，預設Windows啟動寫kol.log。
+
+使用者回報16 GB Windows在開場後及切換HD直接關閉。舊版曾一次保留全部HD紋理，
+Wine峰值約14.3 GiB；本版四個實際ZIP、正常開場、選單、組隊、F9、F10及壞圖恢復
+已在4 GiB上限通過，無OOM。玩家原先開場閃退未取得同一失敗收據，Windows真機待回測。
+正式435份Go／module及1744份資源由新收據鎖定；原素材、規則、配樂與v3保存保持。
+
+Linux、macOS及76秒影片沿用`v.1.0.3-20261017`。Windows新版引擎包發布檢核中，
+完整版與影片只留本機；舊tag與Release保持。[原發行收據](docs/verification/release-v1.0.3-20261017.md)
+保留當時private狀態。儲存庫現為public，832份HD圖像與配套、6份HD配樂及授權全量收錄，
+見[公開化審查](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)。
+
+收尾採SPEC-040受控場景，不宣稱自然全任務通關或新增原版parity。README保留故事背景、
+原版DOS／重製中文EGA／HD差異、事件對照及12格HD總覽，畫稿位元組未改。
+本檔保存目前真相；歷程見[WORKLOG.md](WORKLOG.md)，可執行項目以[工作清單](docs/worklist.json)為準。
 
 ## 目前作業方向
 
-儲存庫公開化已依使用者新決定完成，原作散布授權仍未確認，RRSAL-1.0與第三方權利保持。既有原版衍生PNG、截圖及譯文隨儲存庫歷史公開；舊manifest保留原雜湊與當時分類。838份正式HD／配樂檔案與現行封包輸入完全相符，沒有修改遊戲素材位元組。完整版與影片仍留本機，沒有新增Release附件。
+Windows記憶體修復與雙版本交付已通過本輪驗收，下一步僅剩引擎包發布、遠端回讀及清理交接。
+採已核准的手繪、1920×1200、遊戲內F10及獨立F9；新圖最長邊768，既有832份HD素材保持。
+原生紋理192 MiB及縮放96 MiB是快取預算，不包含驅動與畫布；首次HD仍需載入。
 
-新版六包、76秒影片及資料匯入驗收通過；唯一現行交付根目錄為`dist-all/v.1.0.3-20261017/`。完整版與影片只留本機，發布範圍限private repo的三平台引擎包及SHA256SUMS.txt。
-
-全量HD及新版平台封包已完成本輪驗收。**13類圖形與操作介面已接入本版**，工作清單的HD交付項結案。沿使用者核准的手繪、1920×1200、原位置及遊戲內F10，不重新開啟已確認風格。正式規則、角色數值與kol-save-v3保持。
-
-使用者要求HD素材commit＋push至目前private儲存庫，並決定遊戲素材也縮小，所有後續新圖最長邊768。全地圖八組336區已完成，新增252個768×768區塊減少57.87%容量，既有第一、二城84張原圖保持。事件33圖與最後65張天候、傷勢、標記、戰場、片頭及書封均已接入；完整生成稿與縮圖分開記錄，原稿只留本機。
-
-目前430份Go／module、832份HD資產，程式SHA-256為`c1b5969e75604926a9dead27d65de6db1923b2923d2b81f211254e5e9a7634ff`。[完整驗收](docs/verification/hd-full-runtime-20261017.md)涵蓋102場景408畫格、敵方修稿34場景136畫格及原生怪物補驗2場景8畫格。837觀測漢字缺字0、圖形EGA回退0、EGA往返零差、HD往返最多一色階。八場景兩種視窗鍵鼠96個F10事件及修稿後24事件均保持完整模型。internal、cmd、UI及最終素材分階段通過；最後怪物比例修正只改一份呈現檔，UI及GPU另補驗。
-
-[全地圖](docs/verification/hd-all-maps-runtime-20261017.md)、[世界與戰鬥事件](docs/verification/hd-scene-events-runtime-20261017.md)及[13類覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)保存各批範圍。README加入八組768×480正式同場景對比，原版DOS／HD七段結局比較保持。自訂點陣、地圖索引、資料遮罩不重繪；TWN0PICS24沒有目前typed顯示路由，只驗素材，不新增玩法。
-
-舊版`v.1.0.2-20261013`的交付、tag與Release保持。從新開局正常完成全部任務至結局未驗，本輪受控驗收不宣稱新增原版parity或平台真機。完整原稿、全部畫格與失敗紀錄由[全量工作入口](docs/verification/local/hd-full-20261016/plan.json)追蹤，完整證據沿[保存契約](docs/verification/retained-evidence.md)封存並核對，原工作區清理。
+完整HD基準仍見[全量驗收](docs/verification/hd-full-runtime-20261017.md)、
+[全地圖](docs/verification/hd-all-maps-runtime-20261017.md)及[事件](docs/verification/hd-scene-events-runtime-20261017.md)。
+原版C matching保持暫停。嚴格原版未知與平台真機沿原工作項追蹤，不重新開啟已完成美術或另改玩法。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 430份Go／module、832份HD資產；程式SHA c1b5969e…，本版與[完整HD收據](docs/verification/hd-full-runtime-20261017/receipt.json)相同；[封包輸入](docs/verification/release-v1.0.3-20261017/build-inputs.json) | 正式規則與v3未改；收尾工具另有版本快照 |
-| 最近測試 | 全cmd／internal通過；一次正常1046狀態與13新程序重載，trace及完整v3排除saved_at相同；13場景跨平台52畫格與實際封包20組EGA零差、HD最多一色階；F9／F10與實際音訊通過 | SPEC-040受控場景、Linux容器與Wine；vet兩則原有警示保留 |
+| 正式來源 | 435份Go／module、1744份資源；[Windows修復收據](docs/verification/windows-memory-20261017/receipt.json)鎖定 | 832份HD素材及規則／v3保持，捕捉後單句缺字提示另驗 |
+| 最近測試 | Windows四ZIP正常操作、104受控畫格及24流程畫格通過；EGA零差、HD最多一色階，中文／模型保持；新增快取、讀圖及分層回歸通過，素材補驗796秒通過 | 分階段測試，首次逾時及候選失敗保留；不宣稱自然全旅程或新原版parity |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
-| 跨平台 | [本版六包驗收](docs/verification/release-v1.0.3-20261017.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal；實際AppImage及Wine兩個ZIP的啟動、匯入、F9／F10與音訊通過 | macOS未執行、Wine不是真機、主機FUSE未驗；首次HD載入成本見本版收據 |
+| 跨平台 | Windows v.1.0.4兩種完整版及兩引擎包已用Wine實際驗收；Linux／macOS與影片仍v.1.0.3 | Windows真機、macOS執行與FUSE沿原限制；本版Wine程序RSS取樣最高約2.74 GB |
 | 正常 AI 抽樣 | [反制掃描](docs/re/20261006-ai-counter-normal.md)、[成功側翼](docs/re/20261006-clockwise-flank-normal.md)、[成功撤退](docs/re/20261006-flee-normal.md) 已有有限正常案例 | 其他戰局、困住撤退及成功怪物拾取仍開放 |
 | 最新原版試驗 | RE-295 真保存角色正常出城，seed1、169延伸鍵、170狀態；與現行首次紮營及111個同期世界標籤／日期框相符 | 本上限內沒有自然騎走問答；紮營後26個方向鍵原版忽略、現行換日，完整野外對拍未通過 |
 | 怪物拾取證據 | [RE-292](docs/re/20261006-monster-pickup-low-strike.md)：883狀態、10回合、2264次自然亂數；完整16-byte掉物1筆 | 未取得站立空手怪物或成功拾取，不延長同場挑結果 |
@@ -83,7 +91,7 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
 - 目前 **15 條未完成**（11 條沒有機器訊號、標 `manual`），
-  另有 93 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  另有 94 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
   未完成項的 verify 種類：`manual` 11、`present` 4。
 <!-- worklist:stats:end -->
 

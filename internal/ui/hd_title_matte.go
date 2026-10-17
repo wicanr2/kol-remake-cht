@@ -2,8 +2,8 @@ package ui
 
 import (
 	"fmt"
-	"github.com/hajimehoshi/ebiten/v2"
 	"image"
+	imagedraw "image/draw"
 	"math"
 )
 
@@ -37,17 +37,22 @@ func (m *hdMotion) prepareTitleMattes() error {
 		mask := closeAndFillTitleMask(union, g.w, g.h)
 		for phase := 0; phase < 6; phase++ {
 			id := fmt.Sprintf("%s-%d", g.name, phase)
-			original := m.cpu[id]
-			out := image.NewNRGBA(original.Bounds())
-			copy(out.Pix, original.Pix)
-			for y := 0; y < out.Bounds().Dy(); y++ {
-				for x := 0; x < out.Bounds().Dx(); x++ {
-					sx := (float64(x)+.5)*float64(g.w)/float64(out.Bounds().Dx()) - .5
-					sy := (float64(y)+.5)*float64(g.h)/float64(out.Bounds().Dy()) - .5
-					out.Pix[out.PixOffset(x, y)+3] = titleMatteAlpha(mask, g.w, g.h, sx, sy)
+			m.images[id] = m.owner.newPaintLoader(m.paints[id].Bounds(), func() (image.Image, error) {
+				original, err := readPaintImage(m.paints[id])
+				if err != nil {
+					return nil, err
 				}
-			}
-			m.images[id] = ebiten.NewImageFromImage(out)
+				out := image.NewNRGBA(image.Rect(0, 0, original.Bounds().Dx(), original.Bounds().Dy()))
+				imagedraw.Draw(out, out.Bounds(), original, original.Bounds().Min, imagedraw.Src)
+				for y := 0; y < out.Bounds().Dy(); y++ {
+					for x := 0; x < out.Bounds().Dx(); x++ {
+						sx := (float64(x)+.5)*float64(g.w)/float64(out.Bounds().Dx()) - .5
+						sy := (float64(y)+.5)*float64(g.h)/float64(out.Bounds().Dy()) - .5
+						out.Pix[out.PixOffset(x, y)+3] = titleMatteAlpha(mask, g.w, g.h, sx, sy)
+					}
+				}
+				return out, nil
+			})
 		}
 	}
 	return nil

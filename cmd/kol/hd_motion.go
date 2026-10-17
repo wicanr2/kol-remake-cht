@@ -9,7 +9,7 @@ import (
 )
 
 func attachHDMotion(h *ui.HD, dir string, lib *assets.Library) error {
-	group, e := assets.LoadHDMotionArt(filepath.Join(dir, "motion"))
+	group, e := assets.LoadHDMotionArt(filepath.Join(dir, "motion"), assets.DeferHDPixels)
 	if e != nil {
 		return fmt.Errorf("HD動畫載入失敗：%w", e)
 	}

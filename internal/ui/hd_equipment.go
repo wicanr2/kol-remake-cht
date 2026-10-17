@@ -14,6 +14,7 @@ import (
 )
 
 type hdEquipment struct {
+	usedFrame        uint64
 	SourceSizes      map[string][2]int
 	Parts            map[string]hdart.Part
 	Props            map[string]hdart.Prop
@@ -93,13 +94,13 @@ func (h *HD) AttachEquipment(images map[string]image.Image, m hdart.Equipment, b
 	}
 	sort.Strings(names)
 	for _, name := range names {
-		p.Images[name] = ebiten.NewImageFromImage(images[name])
+		p.Images[name] = h.newPaint(images[name])
 	}
 	for key, part := range p.Parts {
-		p.Sources[key] = p.Images[part.File].SubImage(image.Rect(part.Rect[0], part.Rect[1], part.Rect[2], part.Rect[3])).(*ebiten.Image)
+		p.Sources[key] = h.paintSubImage(p.Images[part.File], image.Rect(part.Rect[0], part.Rect[1], part.Rect[2], part.Rect[3]))
 	}
 	for key, part := range p.Props {
-		p.Sources[key] = p.Images[part.File].SubImage(image.Rect(part.Rect[0], part.Rect[1], part.Rect[2], part.Rect[3])).(*ebiten.Image)
+		p.Sources[key] = h.paintSubImage(p.Images[part.File], image.Rect(part.Rect[0], part.Rect[1], part.Rect[2], part.Rect[3]))
 	}
 	p.Base, p.Figure = ebiten.NewImage(1920, 1200), ebiten.NewImage(1920, 1200)
 	for _, s := range m.Sources {
@@ -114,6 +115,7 @@ func equipmentFor(n *hdNativeRender) (*hdEquipment, error) {
 	if n.h.equipment == nil {
 		return nil, fmt.Errorf("HD裝備素材尚未完整載入")
 	}
+	n.h.equipment.usedFrame = n.h.imageCache().frame
 	return n.h.equipment, nil
 }
 func (p *hdEquipment) part(n *hdNativeRender, dst *ebiten.Image, key string) {
@@ -264,7 +266,7 @@ func (p *hdEquipment) torso(n *hdNativeRender, key string) *ebiten.Image {
 		return pic
 	}
 	part := p.Parts[key]
-	src := p.Sources[key]
+	src := n.h.paint(p.Sources[key])
 	b := src.Bounds()
 	// Cache both input and output outside the automatic texture atlas. Their
 	// normalized origins keep the same mesh independent of atlas placement.

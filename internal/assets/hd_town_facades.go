@@ -64,7 +64,7 @@ func hdTownFacadeSignContract() HDTownFacadeSign {
 }
 
 // LoadHDTownFacades validates all103 bindings before decoding or returning a group.
-func LoadHDTownFacades(dir string) (*HDTownFacades, error) {
+func LoadHDTownFacades(dir string, options ...HDLoadOption) (*HDTownFacades, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -113,6 +113,14 @@ func LoadHDTownFacades(dir string) (*HDTownFacades, error) {
 	result := &HDTownFacades{Manifest: m}
 	for _, p := range m.Pictures {
 		info := m.Files[p.File]
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, p.File, m.Files[p.File])
+			if err != nil {
+				return nil, err
+			}
+			result.Images = append(result.Images, pic)
+			continue
+		}
 		data, err := os.ReadFile(filepath.Join(dir, p.File))
 		if err != nil {
 			return nil, err

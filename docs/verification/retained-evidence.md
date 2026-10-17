@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| Windows 按需讀取、快取釋放與純 EGA／EGA＋HD 雙版本 | [Windows 修復驗收](windows-memory-20261017.md) | [保存清冊](windows-memory-20261017/retention.json)，原工作區完成後清理 |
 | 全量HD地圖、98個小圖來源、全部原稿及受控驗收 | [完整HD驗收](hd-full-runtime-20261017.md)、[全地圖](hd-all-maps-runtime-20261017.md)與[事件](hd-scene-events-runtime-20261017.md) | [保存清冊](local/hd-full-20261016/retention.json)及[工具／原稿索引](local/hd-full-20261016/plan.json)，原稿與完整模型只留本機 |
 | 第一城連續手繪地圖、A／B選案與完整原型 | [正式驗收](hd-town-maps-runtime-20261016.md) | [保存清冊](local/hd-town-maps-20261016/retention.json)；完整模型、v3及失敗只留本機 |
 | 七城102張NPC、四坐騎及完整組正式接入 | [正式驗收](hd-npc-mounts-runtime-20261015.md) | [保存清冊](local/hd-npc-mounts-20261015/retention.json)；完整樣本、v3與GUI狀態只留本機 |

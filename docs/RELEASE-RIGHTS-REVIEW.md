@@ -15,6 +15,15 @@
 
 可見度閘門[check_repo_visibility.sh](../tools/check_repo_visibility.sh)改為核對已決定的public狀態。查詢失敗、空輸出、private或internal皆停止；[六個隔離案例](../tools/test_check_repo_visibility.sh)核對這項行為。以下發行審查保留當時private狀態，不反向改寫歷史。
 
+## v.1.0.4-20261017 Windows 修復發行審查
+
+沿目前public儲存庫及既有引擎包發行範圍，新增純EGA與EGA＋HD兩個Windows引擎包。
+[正式收據](verification/windows-memory-20261017.md)核對四個本機ZIP、來源、正常操作與畫面。
+兩個引擎ZIP只有本專案kol.exe、工具、必要譯文、授權及資料雜湊清單，沒有assets、PNG、OGG、
+PDF、原版EXE或完整手冊。純EGA清單912份，EGA＋HD清單1744份，均須自行匯入合法資料。
+公開上傳只限兩個`release-*.zip`及SHA256SUMS.txt，完整版含遊戲資料，留在本機`full/`。
+HD／配樂位元組及838份Git收錄保持。Linux、macOS、影片與舊tag／Release保持，授權仍RRSAL-1.0。
+
 ## v.1.0.3-20261017 發行審查
 
 本版延伸既有private發行範圍，納入已核准的13類HD、同場景F10與四首室內樂。主機gh已回讀儲存庫為private。交付、素材檢查與發布狀態見[本版收據](verification/release-v1.0.3-20261017.md)。

@@ -1986,6 +1986,24 @@
       "blocking_for_current_closeout": false,
       "status": "done",
       "resolved": "2026-10-17：13類HD接入與本版三平台六包完成，固定seed1正常保存重載、Linux／Wine實際F9／F10、52受控畫格跨平台及20個封包畫格一色階通過。真機與原版未知仍由原工作項追蹤。"
+    },
+    {
+      "id": "windows-hd-memory",
+      "layer": "gap",
+      "title": "Windows 按需讀取、快取釋放與雙版本封包",
+      "body": "Windows按需讀取、動態釋放及純EGA／EGA＋HD兩種完整版與引擎包完成。Wine四個實際ZIP正常開場、書本、選單、組隊、F9、F10及壞圖退回EGA通過，4 GiB上限無OOM。104受控畫格、24流程畫格中文與模型保持，EGA零差、HD最多一色階。素材與規則／v3不變，真機與玩家原先開場原因仍有證據限制。入口docs/verification/windows-memory-20261017.md。",
+      "acceptance": "按需解碼、紋理與縮放快取容量及淘汰／重載通過；Wine 實際四個 ZIP 的正常開場、書本、選單、組隊、F9、F10 及缺 HD 停用通過；13 類場景中文、模型、一色階與前版不變；完整版留本機、引擎包發布，舊版保持。",
+      "verify": {
+        "kind": "absent",
+        "paths": [
+          "docs/spec/039-hd-art-ui.md"
+        ],
+        "pattern": "狀態：本記憶體子切片限定 \\*\\*CONFORMED\\*\\*",
+        "note": "已完成項回歸訊號：本記憶體子切片的CONFORMED與正式收據入口須保持；Wine不等於真機。"
+      },
+      "blocking_for_current_closeout": true,
+      "status": "done",
+      "resolved": "2026-10-17：SPEC-039記憶體子切片限定CONFORMED，最終cmd／UI／分層及新讀圖／快取回歸通過，素材補驗796秒通過；舊失敗保留。"
     }
   ],
   "acknowledged_note": "這裡列的是產品碼裡「看起來像待辦、其實不是」的句子。`scan` 會掃出每一個自承還沒做的說法，不是被某個條目的 verify 綁著，就要在這裡寫明為什麼它不是待辦——沒有第三種。這樣「所有未解工作都在 items 裡」才有機械保證，不必靠人記得。",

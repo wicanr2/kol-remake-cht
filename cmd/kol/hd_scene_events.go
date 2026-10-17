@@ -9,7 +9,7 @@ import (
 )
 
 func attachHDSceneEvents(hd *ui.HD, dir string, original *assets.Library) error {
-	events, e := assets.LoadHDSceneEvents(filepath.Join(dir, "scene-events"))
+	events, e := assets.LoadHDSceneEvents(filepath.Join(dir, "scene-events"), assets.DeferHDPixels)
 	if e != nil {
 		return fmt.Errorf("HD事件載入失敗：%w", e)
 	}

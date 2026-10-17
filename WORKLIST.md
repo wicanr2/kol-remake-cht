@@ -2,6 +2,8 @@
 
 更新日期：2026-10-17
 
+Windows按需讀取、快取釋放及純EGA／EGA＋HD雙版本已通過[本輪驗收](docs/verification/windows-memory-20261017.md)。四個實際ZIP、正常開場與組隊、F9／F10、壞圖回退及104受控畫格通過；真機待回測。發布與清理狀態以`CONTEXT.md`頂部為準。
+
 ## 這份檔案怎麼讀
 
 **未完成項的權威是 `docs/worklist.json`**，不是這裡的 checkbox。下面「未完成項」
@@ -14,7 +16,7 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 
 目前狀態與現行交接見 `CONTEXT.md` 頂部。2026-10-11 使用者授權判斷收尾，
 最多補一次抽樣後製作 v1.0.0 完整版、release 與推廣影片。
-最新交付入口為 `dist-all/v.1.0.3-20261017/`，包含13類HD圖形與操作頁、四首配樂及F9／F10，驗收範圍見
+Windows最新交付為`dist-all/v.1.0.4-20261017/`；Linux、macOS與影片入口為 `dist-all/v.1.0.3-20261017/`，包含13類HD圖形與操作頁、四首配樂及F9／F10，驗收範圍見
 [本版收據](docs/verification/release-v1.0.3-20261017.md)。前版保持。
 目前收尾改採 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血、提高攻擊及準備場景，
 抵達後確認中文與畫面即可。登記場景[已通過](docs/verification/controlled-scenes-20261011.md)。
@@ -263,6 +265,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **sheet-digit-outside** — 城鎮戶外與野外按 1…6 打開角色資料頁：已完成
 - **building-portrait-click-speaker** — 點隊伍肖像換發言者（滑鼠）：已完成
 - **hd-art-ui** — 遊戲圖片與操作畫面HD化：2026-10-17：13類HD接入與本版三平台六包完成，固定seed1正常保存重載、Linux／Wine實際F9／F10、52受控畫格跨平台及20個封包畫格一色階通過。真機與原版未知仍由原工作項追蹤。
+- **windows-hd-memory** — Windows 按需讀取、快取釋放與雙版本封包：2026-10-17：SPEC-039記憶體子切片限定CONFORMED，最終cmd／UI／分層及新讀圖／快取回歸通過，素材補驗796秒通過；舊失敗保留。
 
 <!-- worklist:end -->
 

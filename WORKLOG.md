@@ -11876,3 +11876,16 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - `gh repo edit wicanr2/kol-remake-cht --visibility public --accept-visibility-change-consequences`成功，Repository ID1351991972回讀private=false、visibility=public。遠端Git tree未截斷，HD832及配樂6檔完整；無憑證容器下載actions.png、首批manifest及combat-chamber.ogg皆HTTP200且SHA相符。Release ID415516344的四附件大小與digest保持；tag保持原提交。
 - AGENTS與其CLAUDE符號連結、README、CONTEXT、畫面入口及權利審查同步新決定；原素材manifest與歷史收據保留當時private字樣及原雜湊。可見度閘門改public，public放行、private／internal／空輸出／API錯誤／無gh六案例全過；未加入略過旗標。未新增或重建工具image。
 - 首輪worklist將公開範圍的「未加入未驗證素材」排除條款誤判為待辦，依既有acknowledged機制登記原因後verify通過，15開放／93完成保持。311個現行本機入口、工具語法、公開化清冊與匿名存取皆通過，root-owned檔案及`.md`目錄0，本輪容器無殘留。未新增比較工作區。任務期間另出現一份任務外未追蹤TXT，保持原樣並排除於本次提交；本段與公開化紀錄一併提交推送。
+
+
+## 2026-10-17 Windows 按需讀取與雙版本修復
+
+使用者回報16 GB Windows開場後及切換手繪直接關閉，核准按需讀取、動態釋放與Wine驗證，另要求純EGA／EGA＋HD兩版及缺HD停用。舊setGraphics一次載入全部圖片與GPU紋理，約2.9 GB RGBA像素，前次Wine峰值14.3 GiB；玩家原先開場閃退未重現，不宣稱同一原因。
+
+正式圖片改索引及使用時SHA驗證／解碼，紋理192 MiB與縮放96 MiB快取，當幀保留、久未使用淘汰；回EGA釋放HD，離開裝備頁釋放合成。圖片損壞回EGA並顯示完整中文，Windows預設寫kol.log。使用圖片提供介面保持UI分層，日誌時間由main注入。素材、規則、配樂與v3保持。
+
+本輪四個實際Windows ZIP均經Wine正常開場、書本、選單、建角進入／取消、組隊、F9及F10，純EGA禁止HD；4 GiB上限無OOM，程序RSS取樣最高約2.74 GB。最終104受控畫格與前版／跨平台／釋放重載通過，EGA零差、HD最多一色階；24流程圖、中文與完整模型保持。實際音訊非靜音、無裁切、退出末秒靜音；預設日誌及破壞測試副本後退EGA通過。cmd／UI／分層、新讀圖及快取回歸通過，其他核心與素材深驗分階段通過。來源435份Go／module；捕捉後僅將失敗提示缺字「已返回」換為現有字集的「已回到」，反向替換SHA與實際負例另驗。入口docs/verification/windows-memory-20261017.md。
+
+保留失敗分類：Wine前綴及go.work環境問題已修；驗證腳本曾聚焦未顯示視窗、漏-scene flow而遇批次nil名冊，以及固定延遲按鍵合併，改逐步輸入收據後通過。初版UI資產依賴與日誌time.Now被分層檢查攔下，改介面與外層時鐘後通過；缺字提示亦修正。像素檢查初設60秒逾時後以相同一色階門檻完成；素材首次600秒逾時，單獨補驗796秒通過。初版候選來源、畫格及封包雜湊保留，未發布的候選ZIP已清除後乾淨重建。
+
+Windows v.1.0.4-20261017兩種完整版分別18,860,390與1,292,965,557 bytes，只留本機；兩個無素材引擎包8,628,426與8,672,021 bytes及SHA256SUMS.txt為發布範圍。Linux、macOS與76秒影片沿v.1.0.3，舊tag／Release保持。正式通過收據及本機保存清冊已掛索引；本輪原工作區只在逐檔核對封存後清理。提交、遠端發布與最終清理回讀續記於下。

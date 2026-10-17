@@ -38,12 +38,12 @@ func (h *HD) AttachTemplates(images map[string]image.Image, preserved []HDPageSo
 	h.pages.validated = false
 	atlases := map[string]*ebiten.Image{}
 	for name, pic := range images {
-		atlases[name] = ebiten.NewImageFromImage(pic)
+		atlases[name] = h.newPaint(pic)
 	}
 	h.portraitFit = map[*ebiten.Image]bool{}
 	for j, p := range portraits {
 		i := j + 6
-		h.portraits[i] = atlases[p.File].SubImage(p.Rect).(*ebiten.Image)
+		h.portraits[i] = h.paintSubImage(atlases[p.File], p.Rect)
 		h.matching[p.RGB] = i
 		h.portraitFit[h.portraits[i]] = true
 	}

@@ -52,7 +52,7 @@ func (p *HDPages) Sources() []HDPageSource {
 }
 
 // LoadHDPages 原子載入本批書頁及三個服務頭像。原始圖像指紋在繪製前另核對。
-func LoadHDPages(dir string) (*HDPages, error) {
+func LoadHDPages(dir string, options ...HDLoadOption) (*HDPages, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -95,6 +95,9 @@ func LoadHDPages(dir string) (*HDPages, error) {
 		info, ok := m.Files[name]
 		if !ok || !validHDHash(info.SHA256) || info.Width < 1 || info.Height < 1 || info.Width > 4096 || info.Height > 4096 {
 			return nil, fmt.Errorf("HD頁面 %s 宣告尺寸或雜湊無效", name)
+		}
+		if deferHDPixels(options) {
+			return openHDImage(dir, name, info)
 		}
 		data, err := os.ReadFile(filepath.Join(dir, name))
 		if err != nil {

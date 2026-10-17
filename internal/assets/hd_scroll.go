@@ -27,7 +27,7 @@ type HDScroll struct {
 }
 
 // LoadHDScroll 驗證單張完整不透明卷軸；來源PNG指紋在繪製前另核對。
-func LoadHDScroll(dir string) (*HDScroll, error) {
+func LoadHDScroll(dir string, options ...HDLoadOption) (*HDScroll, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -45,6 +45,13 @@ func LoadHDScroll(dir string) (*HDScroll, error) {
 	info, ok := m.Files[m.Image]
 	if !ok || !validHDHash(info.SHA256) || info.Width < 1 || info.Height < 1 || info.Width > 4096 || info.Height > 4096 {
 		return nil, fmt.Errorf("HD法術卷軸宣告尺寸或雜湊無效")
+	}
+	if deferHDPixels(options) {
+		pic, err := openHDImage(dir, m.Image, info)
+		if err != nil {
+			return nil, err
+		}
+		return &HDScroll{Image: pic, Manifest: m}, nil
 	}
 	data, err := os.ReadFile(filepath.Join(dir, m.Image))
 	if err != nil {

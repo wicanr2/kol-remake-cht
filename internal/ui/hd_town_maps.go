@@ -92,7 +92,7 @@ func (h *HD) AttachTownMaps(sources []HDTownMapSource, arts []HDTownMapArt) erro
 		}
 	}
 	for _, a := range arts {
-		next.regions = append(next.regions, hdTownMapRegion{a.SourceBounds, ebiten.NewImageFromImage(a.Paint)})
+		next.regions = append(next.regions, hdTownMapRegion{a.SourceBounds, h.newPaint(a.Paint)})
 	}
 	h.townMaps = next
 	h.pages.sources = allSources

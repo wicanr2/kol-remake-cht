@@ -35,6 +35,9 @@ type hdMotion struct {
 	cards                      map[string]int
 	images                     map[string]*ebiten.Image
 	cpu                        map[string]*image.NRGBA
+	paints                     map[string]image.Image
+	titleReady                 bool
+	owner                      *HD
 	originals                  map[string]image.Image
 	byRGB                      map[string]string
 	masks                      map[int]*image.Alpha
@@ -77,13 +80,10 @@ func (h *HD) AttachMotion(arts []HDMotionImage, masks map[int]image.Image) error
 			return fmt.Errorf("HD雲層來源遮罩不符")
 		}
 	}
-	next := &hdMotion{images: map[string]*ebiten.Image{}, cpu: map[string]*image.NRGBA{}, originals: map[string]image.Image{}, byRGB: map[string]string{}, masks: map[int]*image.Alpha{}, clouds: map[int]*image.NRGBA{}}
+	next := &hdMotion{owner: h, paints: map[string]image.Image{}, images: map[string]*ebiten.Image{}, cpu: map[string]*image.NRGBA{}, originals: map[string]image.Image{}, byRGB: map[string]string{}, masks: map[int]*image.Alpha{}, clouds: map[int]*image.NRGBA{}}
 	for _, a := range arts {
-		b := a.Paint.Bounds()
-		pic := image.NewNRGBA(image.Rect(0, 0, b.Dx(), b.Dy()))
-		imagedraw.Draw(pic, pic.Bounds(), a.Paint, b.Min, imagedraw.Src)
-		next.cpu[a.Name] = pic
-		next.images[a.Name] = ebiten.NewImageFromImage(a.Paint)
+		next.paints[a.Name] = a.Paint
+		next.images[a.Name] = h.newPaint(a.Paint)
 		next.originals[a.Name] = a.Original
 		if next.sourceSizes == nil {
 			next.sourceSizes = map[string]image.Point{}
@@ -105,15 +105,8 @@ func (h *HD) AttachMotion(arts []HDMotionImage, masks map[int]image.Image) error
 			}
 		}
 		next.masks[g] = mask
-		texture, e := cloudMaterial(next.cpu[fmt.Sprintf("weather-cloud-%d", g)])
-		if e != nil {
-			return e
-		}
-		next.clouds[g] = texture
 	}
-	if err := next.prepareTitleMattes(); err != nil {
-		return err
-	}
+
 	h.motion = next
 	h.pages.sources = sources
 	h.pages.validated = false
@@ -122,6 +115,22 @@ func (h *HD) AttachMotion(arts []HDMotionImage, masks map[int]image.Image) error
 
 // Black in an overlay PNG is carrier data. Extend only painted cloud color
 // beneath the separately validated source stencil, keeping black out of the sky.
+func (m *hdMotion) cpuImage(name string) *image.NRGBA {
+	if pic := m.cpu[name]; pic != nil {
+		return pic
+	}
+	raw, err := readPaintImage(m.paints[name])
+	if err != nil {
+		m.owner.imageCache().err = err
+		return image.NewNRGBA(image.Rect(0, 0, 1, 1))
+	}
+	b := raw.Bounds()
+	pic := image.NewNRGBA(image.Rect(0, 0, b.Dx(), b.Dy()))
+	imagedraw.Draw(pic, pic.Bounds(), raw, b.Min, imagedraw.Src)
+	m.cpu[name] = pic
+	return pic
+}
+
 func cloudMaterial(src *image.NRGBA) (*image.NRGBA, error) {
 	out := image.NewNRGBA(src.Bounds())
 	copy(out.Pix, src.Pix)
@@ -189,16 +198,27 @@ func (m *hdMotion) weatherFrame(group, phase int) (*ebiten.Image, error) {
 		return nil, fmt.Errorf("無效HD天候組")
 	}
 	if group == 3 || group == 4 {
-		return m.images[fmt.Sprintf("weather-%d-%d", group, ((phase%3)+3)%3)], nil
+		return m.owner.paint(m.images[fmt.Sprintf("weather-%d-%d", group, ((phase%3)+3)%3)]), nil
 	}
 	phase = ((phase % 128) + 128) % 128
 	if m.weatherValid && m.weatherGroup == group && m.weatherPhase == phase {
 		return m.weather, nil
 	}
-	base := m.cpu[fmt.Sprintf("weather-base-%d", group)]
+	base := m.cpuImage(fmt.Sprintf("weather-base-%d", group))
+	if err := m.owner.imageCache().err; err != nil {
+		return nil, err
+	}
 	out := image.NewNRGBA(base.Bounds())
 	copy(out.Pix, base.Pix)
 	cloud := m.clouds[group]
+	if cloud == nil {
+		var err error
+		cloud, err = cloudMaterial(m.cpuImage(fmt.Sprintf("weather-cloud-%d", group)))
+		if err != nil {
+			return nil, err
+		}
+		m.clouds[group] = cloud
+	}
 	for y := 0; y < 186; y++ {
 		for x := 0; x < 384; x++ {
 			sx := ((x-phase*6)%768 + 768) % 768
@@ -236,7 +256,11 @@ func drawHDMotionBody(dst *ebiten.Image, data battle.BodyPanelData, rects [6]bat
 	}
 	m := n.h.motion
 	id := fmt.Sprintf("body-%d", 3+data.Kind)
-	base := m.cpu[id]
+	base := m.cpuImage(id)
+	if err := n.h.imageCache().err; err != nil {
+		n.err = err
+		return true
+	}
 	source := m.originals[id]
 	if base == nil || source == nil {
 		n.err = fmt.Errorf("HD傷勢人形缺件")
@@ -294,7 +318,7 @@ func (h *HD) drawMotionTownMarker(dst *ebiten.Image, out *town.Outdoor) bool {
 	x, y := l.ViewX*2+col*l.Tile*2, l.ViewY*2+row*l.Tile*2
 	pic := h.motion.helmets[index]
 	if pic == nil {
-		pic = atlas.SubImage(image.Rect(index*128, 0, (index+1)*128, 128)).(*ebiten.Image)
+		pic = h.paintSubImage(atlas, image.Rect(index*128, 0, (index+1)*128, 128))
 		h.motion.helmets[index] = pic
 	}
 	h.drawHD(dst, pic, image.Rect(x, y, x+96, y+96))

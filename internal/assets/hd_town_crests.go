@@ -36,7 +36,7 @@ type HDTownCrests struct {
 const preservedTownCrestSHA = "3e9fa444a362271b2978c508f7a40c04ba9a14cf212d55cd2ff5fcf9683d30f4"
 
 // LoadHDTownCrests rejects an incomplete group before returning any image.
-func LoadHDTownCrests(dir string) (*HDTownCrests, error) {
+func LoadHDTownCrests(dir string, options ...HDLoadOption) (*HDTownCrests, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -69,6 +69,14 @@ func LoadHDTownCrests(dir string) (*HDTownCrests, error) {
 	}
 	result := &HDTownCrests{Manifest: m}
 	for _, p := range m.Pictures {
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, p.File, m.Files[p.File])
+			if err != nil {
+				return nil, err
+			}
+			result.Images = append(result.Images, pic)
+			continue
+		}
 		data, err := os.ReadFile(filepath.Join(dir, p.File))
 		if err != nil {
 			return nil, err

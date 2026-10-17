@@ -59,7 +59,7 @@ func (h *HD) AttachSceneEvents(arts []HDSceneEventArt) error {
 	}
 	next := &hdSceneEvents{byRGB: map[string]hdSceneEventArt{}}
 	for _, a := range arts {
-		next.byRGB[a.Source.RGB] = hdSceneEventArt{a.Size, ebiten.NewImageFromImage(a.Paint), a.Source.Archive == "COMBPICS" && a.Source.Index >= 5, a.Source.Archive == "MISCPICS" && a.Source.Index == 1}
+		next.byRGB[a.Source.RGB] = hdSceneEventArt{a.Size, h.newPaint(a.Paint), a.Source.Archive == "COMBPICS" && a.Source.Index >= 5, a.Source.Archive == "MISCPICS" && a.Source.Index == 1}
 	}
 	h.sceneEvents = next
 	h.pages.sources = sources

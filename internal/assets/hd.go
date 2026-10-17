@@ -41,7 +41,7 @@ func validHDHash(s string) bool {
 }
 
 // LoadHD 驗完整組後才交給呈現層；不讀原版archive，也不改既有Library。
-func LoadHD(dir string) (*HDLibrary, error) {
+func LoadHD(dir string, options ...HDLoadOption) (*HDLibrary, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -70,6 +70,9 @@ func LoadHD(dir string) (*HDLibrary, error) {
 		info, ok := m.Files[name]
 		if !ok || !validHDHash(info.SHA256) || info.Width != width || info.Height != height {
 			return nil, fmt.Errorf("HD %s 宣告尺寸不符", name)
+		}
+		if deferHDPixels(options) {
+			return openHDImage(dir, name, info)
 		}
 		data, err := os.ReadFile(filepath.Join(dir, name))
 		if err != nil {

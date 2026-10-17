@@ -82,7 +82,7 @@ func (h *HD) AttachTownFacades(arts []HDTownFacadeArt, sign HDTownFacadeSign) er
 	}
 	next := &hdTownFacades{pictures: map[string]hdTownFacadeArt{}, sign: sign}
 	for _, a := range arts {
-		next.pictures[townFacadeID(a.Source.Archive, a.Source.Index)] = hdTownFacadeArt{a.Source, ebiten.NewImageFromImage(a.Paint)}
+		next.pictures[townFacadeID(a.Source.Archive, a.Source.Index)] = hdTownFacadeArt{a.Source, h.newPaint(a.Paint)}
 	}
 	h.facades = next
 	h.pages.sources = sources

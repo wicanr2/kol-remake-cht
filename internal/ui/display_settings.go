@@ -22,10 +22,11 @@ var DisplayControls = struct {
 }
 
 type DisplaySettings struct {
-	Open    bool
-	HD      bool
-	Cursor  int
-	Problem bool
+	Open          bool
+	HD            bool
+	Cursor        int
+	Problem       bool
+	HDUnavailable bool
 }
 
 var MusicControl = image.Rect(744, 576, 840, 600)
@@ -99,10 +100,18 @@ func DrawDisplaySettings(dst *ebiten.Image, f *font.Font, t Translator, s Displa
 			if i == active {
 				edge = gold
 			}
+			if i == 1 && s.HDUnavailable {
+				edge = color.RGBA{67, 80, 88, 255}
+			}
 			box(r, edge, color.RGBA{28, 39, 47, 255})
 			titles := [2]string{"EGA Classic", "HD Painted"}
 			details := [2]string{"Original pixel artwork", "Inn and six characters"}
-			if err := label(image.Rect(r.Min.X+16, r.Min.Y+10, r.Max.X-76, r.Min.Y+32), t.T(titles[i]), ink, false); err != nil {
+			titleInk := ink
+			if i == 1 && s.HDUnavailable {
+				details[i] = "HD images are unavailable."
+				titleInk = muted
+			}
+			if err := label(image.Rect(r.Min.X+16, r.Min.Y+10, r.Max.X-76, r.Min.Y+32), t.T(titles[i]), titleInk, false); err != nil {
 				return err
 			}
 			if err := label(image.Rect(r.Min.X+16, r.Min.Y+39, r.Max.X-16, r.Max.Y-10), t.T(details[i]), muted, false); err != nil {
@@ -119,6 +128,9 @@ func DrawDisplaySettings(dst *ebiten.Image, f *font.Font, t Translator, s Displa
 		if s.Problem {
 			message, message2 = "HD images are unavailable.", "Current display retained. Try again later."
 			c = color.RGBA{255, 166, 140, 255}
+		}
+		if s.HDUnavailable {
+			message, message2 = "HD images are unavailable.", ""
 		}
 		for i, k := range []string{message, message2} {
 			if k != "" {

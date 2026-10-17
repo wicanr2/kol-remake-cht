@@ -26,7 +26,7 @@ func equipmentBounds(r [4]int) image.Rectangle { return image.Rect(r[0], r[1], r
 func equipmentHash(data []byte) string         { return fmt.Sprintf("%x", sha256.Sum256(data)) }
 
 // LoadHDEquipment 驗完整圖集及校準；任何缺件或錯誤只回傳nil組。
-func LoadHDEquipment(dir string) (*HDEquipment, error) {
+func LoadHDEquipment(dir string, options ...HDLoadOption) (*HDEquipment, error) {
 	raw, err := os.ReadFile(filepath.Join(dir, "manifest.json"))
 	if err != nil {
 		return nil, err
@@ -80,6 +80,14 @@ func LoadHDEquipment(dir string) (*HDEquipment, error) {
 		if !namePattern.MatchString(name) || !validHDHash(info.SHA256) || info.Width < 1 || info.Height < 1 || info.Width > 4096 || info.Height > 4096 {
 			return nil, fmt.Errorf("HD裝備圖集檔名、尺寸或雜湊無效：%s", name)
 		}
+		if deferHDPixels(options) {
+			pic, err := openHDImage(dir, name, HDImageInfo{SHA256: info.SHA256, Width: info.Width, Height: info.Height})
+			if err != nil {
+				return nil, err
+			}
+			images[name] = pic
+			continue
+		}
 		data, err := os.ReadFile(filepath.Join(dir, name))
 		if err != nil {
 			return nil, err
@@ -110,17 +118,19 @@ func LoadHDEquipment(dir string) (*HDEquipment, error) {
 		if r.Empty() || rect[0] >= rect[2] || rect[1] >= rect[3] || !r.In(pic.Bounds()) || !validHDHash(hash) {
 			return fmt.Errorf("HD裝備裁取越界或指紋無效：%s", file)
 		}
-		pixels := make([]byte, 0, r.Dx()*r.Dy()*4)
-		visible := false
-		for y := r.Min.Y; y < r.Max.Y; y++ {
-			for x := r.Min.X; x < r.Max.X; x++ {
-				c := color.NRGBAModel.Convert(pic.At(x, y)).(color.NRGBA)
-				pixels = append(pixels, c.R, c.G, c.B, c.A)
-				visible = visible || c.A >= 8
+		if !deferHDPixels(options) {
+			pixels := make([]byte, 0, r.Dx()*r.Dy()*4)
+			visible := false
+			for y := r.Min.Y; y < r.Max.Y; y++ {
+				for x := r.Min.X; x < r.Max.X; x++ {
+					c := color.NRGBAModel.Convert(pic.At(x, y)).(color.NRGBA)
+					pixels = append(pixels, c.R, c.G, c.B, c.A)
+					visible = visible || c.A >= 8
+				}
 			}
-		}
-		if !visible || equipmentHash(pixels) != hash {
-			return fmt.Errorf("HD裝備裁取空白或RGBA指紋不符：%s", file)
+			if !visible || equipmentHash(pixels) != hash {
+				return fmt.Errorf("HD裝備裁取空白或RGBA指紋不符：%s", file)
+			}
 		}
 		used[file] = true
 		return nil
@@ -183,9 +193,11 @@ func LoadHDEquipment(dir string) (*HDEquipment, error) {
 		if pic == nil {
 			return nil, fmt.Errorf("HD裝備背板缺漏")
 		}
-		opaque, ok := pic.(interface{ Opaque() bool })
-		if !ok || !opaque.Opaque() {
-			return nil, fmt.Errorf("HD裝備背板須不透明")
+		if !deferHDPixels(options) {
+			opaque, ok := pic.(interface{ Opaque() bool })
+			if !ok || !opaque.Opaque() {
+				return nil, fmt.Errorf("HD裝備背板須不透明")
+			}
 		}
 		used[name] = true
 	}
