@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.5-20261018",
+  "runs": [
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-linux-x86_64.AppImage",
+      "bundle": "release",
+      "sha256": "b06ecb552866d203ebfdb31fa0ea6934f0eec5f5afa5804a81f0ab088261fbbe",
+      "graphics": "ega",
+      "version": "v.1.0.5-20261018",
+      "exit_code": 0,
+      "normal_intro": true,
+      "party_inn": true,
+      "create_menu_enter_cancel": true,
+      "f9": true,
+      "f10_state_unchanged": true,
+      "hd_disabled": true,
+      "hd_release_reload": false,
+      "no_save_written": true,
+      "flow_frames": 6
+    },
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-hd-linux-x86_64.AppImage",
+      "bundle": "release",
+      "sha256": "754bf57cb03680c21dca0cdb933d1595ab25b374e771360ef9b812bca1ce7930",
+      "graphics": "ega-hd",
+      "version": "v.1.0.5-20261018",
+      "exit_code": 0,
+      "normal_intro": true,
+      "party_inn": true,
+      "create_menu_enter_cancel": true,
+      "f9": true,
+      "f10_state_unchanged": true,
+      "hd_disabled": false,
+      "hd_release_reload": true,
+      "no_save_written": true,
+      "flow_frames": 6
+    }
+  ],
+  "memory_limit": "4294967296",
+  "memory_peak": 4294967296,
+  "memory_events": "low 0\nhigh 0\nmax 173\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+  "real_windows_machine": false,
+  "host_fuse": false
+}

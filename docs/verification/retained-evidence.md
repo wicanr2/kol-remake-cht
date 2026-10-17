@@ -6,6 +6,7 @@
 
 | 比較或驗證 | 現行入口 | 本機壓縮證據 |
 |---|---|---|
+| 同版三平台雙版本引擎包、實際資料匯入與F9時序失敗 | [引擎發布驗收](release-v1.0.5-20261018.md) | [保存清冊](release-v1.0.5-20261018/retention.json)，原始畫格、錄音與失敗只留本機 |
 | 三平台純EGA／EGA＋HD六個完整版、正常操作與中文畫格 | [完整版重建驗收](repack-v1.0.5-20261018.md) | [保存清冊](repack-v1.0.5-20261018/retention.json)，原始畫格與錄音只留本機 |
 | Windows 按需讀取、快取釋放與純 EGA／EGA＋HD 雙版本 | [Windows 修復驗收](windows-memory-20261017.md) | [保存清冊](windows-memory-20261017/retention.json)，原工作區完成後清理 |
 | 全量HD地圖、98個小圖來源、全部原稿及受控驗收 | [完整HD驗收](hd-full-runtime-20261017.md)、[全地圖](hd-all-maps-runtime-20261017.md)與[事件](hd-scene-events-runtime-20261017.md) | [保存清冊](local/hd-full-20261016/retention.json)及[工具／原稿索引](local/hd-full-20261016/plan.json)，原稿與完整模型只留本機 |

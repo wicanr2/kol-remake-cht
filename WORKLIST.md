@@ -18,7 +18,7 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 
 目前狀態與現行交接見 `CONTEXT.md` 頂部。2026-10-11 使用者授權判斷收尾，
 最多補一次抽樣後製作 v1.0.0 完整版、release 與推廣影片。
-三平台完整版最新交付為`dist-all/v.1.0.5-20261018/full/`；公開Windows引擎包仍`v.1.0.4-20261017`，公開Linux／macOS引擎包與影片仍`v.1.0.3-20261017`。既有13類HD圖形與操作頁、四首配樂及F9／F10驗收範圍見
+三平台完整版最新交付為`dist-all/v.1.0.5-20261018/full/`；同版六個引擎包已完成驗收、發布進行中，見[發布入口](docs/verification/release-v1.0.5-20261018.md)；影片仍`v.1.0.3-20261017`。既有13類HD圖形與操作頁、四首配樂及F9／F10驗收範圍見
 [本版收據](docs/verification/release-v1.0.3-20261017.md)。前版保持。
 目前收尾改採 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血、提高攻擊及準備場景，
 抵達後確認中文與畫面即可。登記場景[已通過](docs/verification/controlled-scenes-20261011.md)。
@@ -169,7 +169,7 @@ tools/run_python_tool.sh tools/worklist.py verify
 - **windows-macos-real-machine**（#42） — Windows／macOS 真機驗收
   Linux 容器 smoke 不冒充真機結果。macOS 的 bundle 沒有簽章（_CodeSignature 在 Linux 上做不出來），首次開啟要右鍵→打開；執行檔本身的 ad-hoc 簽章有驗過。 2026-10-01 現行工作樹三平台中間建置續核：Linux／Windows各編譯兩次雜湊一致，Linux仍f969a63f；Windows304890ea在Wine9實際啟動，預設繁中與APPDATA保存、正常標題／六人招募／購買／住宿198個互動按鍵及重載15鍵通過。兩平台199／16筆批次狀態與既有收據完全相同，40組整圖比較0差；保存除saved_at外一致、重載未改檔。macOS universal兩架構、最低11.0、arm64簽章區塊與系統相依核實通過，但尚未實際啟動；Wine不是Windows真機。收據docs/verification/platform-smoke-20261001/receipt.json。只驗當前source資源入口，未建正式封包或版號，本項不結案。 RE-279現行342來源／Linuxd43a6385有限回歸通過：11944長任務／26新程序重載、完整trace與40PNG符合RE-274，完整v3只差saved_at。Windows AMD64與macOS雙架構／universal建置，Wine正常772／重載26狀態及18PNG符合現行Linux。明示遭遇控制、真機、正式交付與原完成條件保持。入口docs/re/20261006-move-current-regression.md。 RE-291現行342來源／Linux991046ab有限回歸：雙語11976長任務／26新程序重載、每語言5001映射非訊息狀態與完整v3相符。40PNG中38相同，兩張逃離戰場視圖差異完整保留。Windows AMD64及macOS雙架構／universal建置、Wine772正常／26重載及18PNG符合現行Linux。原版完整UI、明示遭遇控制、真機、正式交付與原完成條件保持。入口docs/re/20261006-visibility-current-regression.md。 三平台v.1.0.5六個完整版通過Linux／Wine及macOS結構驗證，見docs/verification/repack-v1.0.5-20261018.md；Windows原先開場直接關閉未取得同一失敗收據，待真機回測，本項保持開放。
   完成條件：兩個平台各在真機上啟動並走一次正常路徑。
-  核實：`tools/verify_dist.sh`、`tools/repack_full_variants.py`、`docs/spec/039-hd-art-ui.md` 找得到 `macOS 要真機|Windows 使用 Wine 驗證.*尚無真機驗收|玩家回報的開場閃退尚未重現` 就是還沒完
+  核實：`tools/verify_dist.sh`、`tools/repack_full_variants.py`、`docs/spec/039-hd-art-ui.md`、`tools/pack_release_variants.py` 找得到 `macOS 要真機|Windows\s*使用\s*Wine\s*驗證.*尚無真機驗收|玩家回報的開場閃退尚未重現` 就是還沒完
 
 
 ### 本輪核實為已完成（原本掛在未完成清單上）

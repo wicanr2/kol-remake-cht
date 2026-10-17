@@ -11905,3 +11905,15 @@ Windows v.1.0.4-20261017兩種完整版分別18,860,390與1,292,965,557 bytes，
 workplace/repack-20261018已核對封存後刪除。441個本機文件入口、工具語法、六包UID／GID及全專案root-owned／誤建.md目錄檢查通過，本輪標記容器0。既有工具映像檔保留，無新增或被取代映像檔。保留使用者未追蹤TXT，未加入本次提交。完成後的文件與工具將連同新tag提交推送；遠端回讀續記。
 
 已提交並atomic push `bc087d31183407907c754e252727b195d860aa9f`及新tag `v.1.0.5-20261018`，遠端main與tag peeled均回讀為同一提交，annotated tag物件為`0c2fc1fa9777bb0bffbc8eff4a618af8e9d2835e`。沒有移動舊tag、建立新GitHub Release或上傳完整版；只新增三平台雙版本重建工具、正式收據與文件。推送後工作樹只有使用者原有未追蹤TXT；本段及目前交接狀態另作文件提交。
+
+## 2026-10-18 更新README並發布三平台雙版本引擎包
+
+使用者明確要求更新README並發布Release。主機gh認證有效，repo回讀PUBLIC，既有v.1.0.5 tag已存在而Release尚無。沿用固定bc087d31及已驗完整版執行檔，補建三平台純EGA／EGA＋HD六個無素材引擎包，保留完整包與舊tag／Release。工具tools/pack_release_variants.py、驗證tools/verify_full_variants_runtime.py --bundle release；入口docs/verification/release-v1.0.5-20261018.md，工作區workplace/release-v1.0.5-20261018。封裝與匯入驗證進行中。
+
+六個公開引擎包已完成逐檔manifest／SHA／版本／deny-list核對，資料清單912／1744，Linux自製app圖示與macOS ICNS沿既有例外。實際macOS兩包資料匯入通過，執行檔與已驗universal相同，沒有真機執行。Windows／Linux四個實際引擎包匯入後正常開場、建角選單進入／取消、組隊、旅店、F9／F10及純EGA禁止HD通過，4 GiB無交換空間、OOM0。Linux以KOL_DATA_DIR使用外部合法資料目錄。固定seed1短流程24張與同版完整版整圖零差，文字與模型逐位元組相同，六個完整版雜湊保持。實際音訊非靜音、未裁切且退出末秒靜音，未重做人耳驗收。
+
+首次Wine腳本在HD旅店首次繪圖時以固定延遲連送兩次F9，只收到music-false及完成畫面，等待music-true逾時時程序仍存活。保存失敗腳本、日誌及EGA流程，改為每次F9等待操作及畫面回條後釋鍵，再以同容器、版本、seed與同一組案例乾淨重跑通過。正式435份Go／module與素材完全不改，沒有重編或新增原版parity。README新增六個公開下載、Python3.11及資料匯入要求、按需讀圖／回EGA釋放，並修正舊全量載入描述；故事、對比圖與總覽保持。
+
+工作清單首次核對仍要求README的v3 Release字樣，與新版入口不符。保留既有完成與發布歷史，將本機導航保護改綁v5 README及收據；正式發布另依API回讀，不以文字當作已發布。render／verify通過，15開放／94完成保持，真機限制已接回原開放項。
+
+71份本輪證據及3份可重建程式雜湊封存、逐檔核對後，已刪除workplace/release-v1.0.5-20261018。460個本機入口、工具語法、套件擁有權與全專案root-owned／誤建.md目錄檢查通過，本輪容器0，無新增或被取代工具image。保留使用者未追蹤TXT，未加入提交。六個公開引擎包及校驗碼待上傳，既有tag固定bc087d31。

@@ -1,0 +1,18 @@
+{
+  "package": {
+    "tag": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+    "sha256": "0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f"
+  },
+  "macos": {
+    "tag": "kol-osxcross-go:20261007-r1",
+    "sha256": "27a0d789783b1f88670b5023b42ec7f7471b973c5fb0b560fb99f89ef052f6ea"
+  },
+  "wine": {
+    "tag": "eob-remake-wine-verify:ubuntu-noble-20261008-r2",
+    "sha256": "c047a6a259a1fc9a90babf7c937310fa9df4b3465bf75f3fcaad1bc640099c2f"
+  },
+  "audio": {
+    "tag": "eob-audio-capture:20261009-r3",
+    "sha256": "d831720f8dfa388af8ad175fa8adeae8f2814dd4637be1e3db6a43274b26f36c"
+  }
+}

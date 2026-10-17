@@ -843,9 +843,10 @@
         "paths": [
           "tools/verify_dist.sh",
           "tools/repack_full_variants.py",
-          "docs/spec/039-hd-art-ui.md"
+          "docs/spec/039-hd-art-ui.md",
+          "tools/pack_release_variants.py"
         ],
-        "pattern": "macOS 要真機|Windows 使用 Wine 驗證.*尚無真機驗收|玩家回報的開場閃退尚未重現",
+        "pattern": "macOS 要真機|Windows\\s*使用\\s*Wine\\s*驗證.*尚無真機驗收|玩家回報的開場閃退尚未重現",
         "note": "實際封包與SPEC-039仍明示真機待驗及玩家開場閃退未重現，由本項認領；容器驗收不結案。"
       },
       "issue": 42,
@@ -861,10 +862,10 @@
         "kind": "required_in_all",
         "paths": [
           "README.md",
-          "docs/verification/release-v1.0.3-20261017.md"
+          "docs/verification/release-v1.0.5-20261018.md"
         ],
-        "pattern": "https://github\\.com/wicanr2/kol-remake-cht/releases/tag/v\\.1\\.0\\.3-20261017",
-        "note": "已發布並讀回遠端狀態、附件digest及tag；本機回歸訊號只保護入口與證據，不代替GitHub現況查詢。"
+        "pattern": "https://github\\.com/wicanr2/kol-remake-cht/releases/tag/v\\.1\\.0\\.5-20261018",
+        "note": "保護最新README入口與收據，不代替遠端發布核對；本次發布結果以publication.json及GitHub回讀為準，既有Release事實保持。"
       },
       "issue": 43,
       "blocking_for_current_closeout": false,

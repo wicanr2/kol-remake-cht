@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.5-20261018",
+  "packages": [
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-linux-x86_64.AppImage",
+      "status": "PASS",
+      "asset_free": true,
+      "binary_equal_to_full": true,
+      "required_resource_files": 912,
+      "macos_import_verified": false
+    },
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-windows-amd64.zip",
+      "status": "PASS",
+      "asset_free": true,
+      "binary_equal_to_full": true,
+      "required_resource_files": 912,
+      "macos_import_verified": false
+    },
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-macos-universal.zip",
+      "status": "PASS",
+      "asset_free": true,
+      "binary_equal_to_full": true,
+      "required_resource_files": 912,
+      "macos_import_verified": true
+    },
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-hd-linux-x86_64.AppImage",
+      "status": "PASS",
+      "asset_free": true,
+      "binary_equal_to_full": true,
+      "required_resource_files": 1744,
+      "macos_import_verified": false
+    },
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-hd-windows-amd64.zip",
+      "status": "PASS",
+      "asset_free": true,
+      "binary_equal_to_full": true,
+      "required_resource_files": 1744,
+      "macos_import_verified": false
+    },
+    {
+      "package": "kol-v.1.0.5-20261018-release-ega-hd-macos-universal.zip",
+      "status": "PASS",
+      "asset_free": true,
+      "binary_equal_to_full": true,
+      "required_resource_files": 1744,
+      "macos_import_verified": true
+    }
+  ]
+}

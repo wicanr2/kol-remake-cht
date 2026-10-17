@@ -15,6 +15,20 @@
 
 可見度閘門[check_repo_visibility.sh](../tools/check_repo_visibility.sh)改為核對已決定的public狀態。查詢失敗、空輸出、private或internal皆停止；[六個隔離案例](../tools/test_check_repo_visibility.sh)核對這項行為。以下發行審查保留當時private狀態，不反向改寫歷史。
 
+## v.1.0.5-20261018 三平台雙版本引擎發行審查
+
+使用者明確要求更新README並發布Release，沿目前public儲存庫及既有引擎包範圍。
+從[同版已驗完整版](verification/repack-v1.0.5-20261018.md)取得相同Linux、Windows及macOS雙架構執行檔，
+不改程式、素材、授權或既有tag。三平台各有純EGA、EGA＋HD，共六個公開引擎包，
+驗收與發布回讀見[本版入口](verification/release-v1.0.5-20261018.md)。
+
+- 公開包只含本專案程式、已核准工具、必要譯文、RRSAL-1.0與資料匯入雜湊清單。
+- 逐包拒絕`assets/`、完整手冊、原版EXE、OGG、WAV、PDF、DAT等資料。Linux自製幾何app圖示及macOS同圖標的ICNS沿既有例外，來源為封裝腳本。
+- 純EGA要求912份合法抽取資料，EGA＋HD要求1744份；實際匯入由包內工具驗證大小與SHA-256。
+- 公開上傳清單僅六個`release-*`引擎包及`SHA256SUMS.txt`。六個完整版及76秒影片留本機，不新增公開附件。
+- `v.1.0.5-20261018`既有tag固定`bc087d31`，首次建立該版Release，不移動或覆寫任何舊tag／Release。
+- 832份HD圖像配套及6份配樂授權的Git收錄保持；公開收錄不授予原作或第三方素材權利。
+
 ## v.1.0.4-20261017 Windows 修復發行審查
 
 沿目前public儲存庫及既有引擎包發行範圍，新增純EGA與EGA＋HD兩個Windows引擎包。

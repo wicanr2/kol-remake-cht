@@ -15,6 +15,7 @@ def main():
     assert Path('/.dockerenv').exists()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--platform', choices=('linux', 'windows'), required=True)
+    parser.add_argument('--bundle', choices=('full', 'release'), default='full')
     parser.add_argument('--out', type=Path, default=Path('/out'))
     parser.add_argument('--work', type=Path, default=Path('/work'))
     args = parser.parse_args()
@@ -57,6 +58,17 @@ def main():
             xdo('keyup', '--window', window, name)
         time.sleep(1)
 
+    def displaykey(window, name, action, log):
+        count = log.read_text(errors='replace').count(action)
+        frames = log.read_text(errors='replace').count('display-frame ')
+        xdo('keydown', '--window', window, name)
+        try:
+            wait(lambda: log.read_text(errors='replace').count(action) > count, log, 90)
+        finally:
+            xdo('keyup', '--window', window, name)
+        wait(lambda: log.read_text(errors='replace').count('display-frame ') > frames, log, 90)
+        time.sleep(1)
+
     def patharg(path):
         return 'Z:' + str(path).replace('/', '\\') if windows else str(path)
 
@@ -67,7 +79,7 @@ def main():
             subprocess.run(['/usr/lib/wine/wine64', 'reg', 'add', r'HKCU\Software\Wine\Drivers', '/v', 'Audio', '/t', 'REG_SZ', '/d', 'pulse', '/f'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True, timeout=90)
         for theme in ('ega', 'ega-hd'):
             suffix = 'windows-amd64.zip' if windows else 'linux-x86_64.AppImage'
-            package = out / 'full' / f'kol-{version}-full-{theme}-{suffix}'
+            package = out / args.bundle / f'kol-{version}-{args.bundle}-{theme}-{suffix}'
             dest = Path('/tmp') / ('game-' + theme)
             dest.mkdir()
             if windows:
@@ -79,7 +91,16 @@ def main():
                 subprocess.run([str(package), '--appimage-extract'], cwd=dest, check=True, stdout=subprocess.DEVNULL, timeout=120)
                 root = dest / 'squashfs-root'
                 command = [str(root / 'AppRun')]
-            assert (root / 'assets/hd').exists() == (theme == 'ega-hd')
+            if args.bundle == 'release':
+                target = root if windows else Path('/tmp') / ('data-' + theme)
+                subprocess.run(['python3', str(root / 'tools/import_game_data.py'), '--source', '/src',
+                                '--target', str(target)], check=True, timeout=180)
+                if not windows:
+                    env['KOL_DATA_DIR'] = str(target)
+                assert (target / 'assets/hd').exists() == (theme == 'ega-hd')
+            else:
+                target = root
+            assert (target / 'assets/hd').exists() == (theme == 'ega-hd')
             actual_version = subprocess.check_output([*command, '-version'], cwd=root, env=env, text=True, timeout=30).strip()
             assert actual_version == version, actual_version
             name = args.platform + '-' + theme
@@ -128,8 +149,8 @@ def main():
                 inputkey(window, 'Escape', 'menu', log)
                 inputkey(window, '6', 'contents', log)
                 inputkey(window, 'Return', 'select', log)
-                key(window, 'F9')
-                key(window, 'F9')
+                displaykey(window, 'F9', 'display action=music-false', log)
+                displaykey(window, 'F9', 'display action=music-true', log)
                 wait(lambda: 'display action=music-true' in text(), log)
                 wait(lambda: 'music cue=inn' in text(), log)
                 xdo('keydown', '--window', window, 'ctrl')
@@ -146,7 +167,7 @@ def main():
                     '-trace', patharg(work / (name + '-trace.json')), '-text-log', patharg(work / (name + '-text.jsonl'))],
                     cwd=root, env=env, stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=120)
             assert len(list(shots.glob('*.png'))) == 6
-            runs.append(dict(package=package.name, sha256=hashlib.file_digest(package.open('rb'), 'sha256').hexdigest(),
+            runs.append(dict(package=package.name, bundle=args.bundle, sha256=hashlib.file_digest(package.open('rb'), 'sha256').hexdigest(),
                 graphics=theme, version=actual_version, exit_code=code, normal_intro=True, party_inn=True,
                 create_menu_enter_cancel=True, f9=True, f10_state_unchanged=True, hd_disabled=theme == 'ega',
                 hd_release_reload=theme == 'ega-hd', no_save_written=True, flow_frames=6))

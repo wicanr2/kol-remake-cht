@@ -1,0 +1,342 @@
+{
+  "schema": "kol-retained-verification/1",
+  "date": "2026-10-18",
+  "source": "workplace/release-v1.0.5-20261018",
+  "rights": "local-only original-derived evidence; no publication",
+  "receipt_sha256": "4ff3e0a14b337ffffb8f06feabead646fea727b34cd97ae5636aabe2d338b695",
+  "archive": {
+    "size": 34080440,
+    "sha256": "da7580622df425317e2a7cf102a8f8d64a28b0d44cfa732f96819c369356ae3c"
+  },
+  "xz_preset": 0,
+  "retained": {
+    "SHA256SUMS.json": {
+      "size": 2208,
+      "sha256": "1b327081ff31ba45ea8030f688642e44e8a9411db3b80e346cb48348b8251302"
+    },
+    "SHA256SUMS.txt": {
+      "size": 723,
+      "sha256": "4314b3d637e5057420d85dc811dcef1734f9ece6891d0ff34093ea873cabb3d4"
+    },
+    "comparisons.json": {
+      "size": 4949,
+      "sha256": "c52133ec0e1eefca767eb445ac4659815065b4922780d164d8e2c6e0e57e48cc"
+    },
+    "failed-fixed-delay-f9/classification.json": {
+      "size": 636,
+      "sha256": "a5ebff9d5b319e932ed3aa12c89353c364505ad93e941e1aeda98f5dec1db530"
+    },
+    "failed-fixed-delay-f9/verify_full_variants_runtime.py": {
+      "size": 9462,
+      "sha256": "8c70f863ddc850e294dac020e01882b77a14fe89db9323232aeec46788971634"
+    },
+    "failed-fixed-delay-f9/windows-ega-flow/step-000.png": {
+      "size": 8707,
+      "sha256": "88727bc55ac41fac0af8500cdf13fa4880b144b67e110d32cddf3a88054a5f08"
+    },
+    "failed-fixed-delay-f9/windows-ega-flow/step-001.png": {
+      "size": 17505,
+      "sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e"
+    },
+    "failed-fixed-delay-f9/windows-ega-flow/step-002.png": {
+      "size": 18031,
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd"
+    },
+    "failed-fixed-delay-f9/windows-ega-flow/step-003.png": {
+      "size": 18655,
+      "sha256": "bd99c42bc62b5105ca04b9c700f4bc1125cc74c8efbf9cbb795e543bca9e9f27"
+    },
+    "failed-fixed-delay-f9/windows-ega-flow/step-004.png": {
+      "size": 18634,
+      "sha256": "d409b7864a024261d668db96dcd5e3f73a81c80719b836387650e8cfe130f950"
+    },
+    "failed-fixed-delay-f9/windows-ega-flow/step-005.png": {
+      "size": 20547,
+      "sha256": "e26ceb6293270299f0f0159287adfba4d92a04feb7787f30e670a02a3c8bc1b2"
+    },
+    "failed-fixed-delay-f9/windows-ega-flow.log": {
+      "size": 282,
+      "sha256": "ecc34f69d42ece97795e67edab772a9b6d3562c5c8ed6c1b38575d32b6faf29d"
+    },
+    "failed-fixed-delay-f9/windows-ega-gui.log": {
+      "size": 1806,
+      "sha256": "92b5e1e79899612dc7f45f718b9691ed0e46182d05e18d9681f94c3fb1dc2a9b"
+    },
+    "failed-fixed-delay-f9/windows-ega-hd-gui.log": {
+      "size": 1905,
+      "sha256": "d7db7b1bd33d4093973c1aa3cd70ae3f8d3c368c3aaaccbe51534f771badd7d2"
+    },
+    "failed-fixed-delay-f9/windows-ega-text.jsonl": {
+      "size": 1605,
+      "sha256": "0a138c979d7d8410850fed71958b4721458421dcfd69d385ed4b0ae4d29467ca"
+    },
+    "failed-fixed-delay-f9/windows-ega-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "images.json": {
+      "size": 605,
+      "sha256": "30a5b77ecd5d1acf6e3a74f5125513efabbab620b618f0ce75a0e98cd30dd3d8"
+    },
+    "kol-v.1.0.5-20261018-release-ega-hd-linux-x86_64-squashfs.log": {
+      "size": 1049,
+      "sha256": "6e62b4acf531dbcfade2754d8957ededfc2fef37b1027c7baa9ac1055484bde0"
+    },
+    "kol-v.1.0.5-20261018-release-ega-linux-x86_64-squashfs.log": {
+      "size": 1049,
+      "sha256": "0cc45b167202d4b064a0a7216793956f0305a3e7e7b8b6b46199f0647de6c228"
+    },
+    "kol.png": {
+      "size": 6168,
+      "sha256": "cbfeba1e4c5ac124247e1bb2ce7deb6872929340f655838acf6716ff8b2dde25"
+    },
+    "linux-ega-flow/step-000.png": {
+      "size": 8707,
+      "sha256": "88727bc55ac41fac0af8500cdf13fa4880b144b67e110d32cddf3a88054a5f08"
+    },
+    "linux-ega-flow/step-001.png": {
+      "size": 17505,
+      "sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e"
+    },
+    "linux-ega-flow/step-002.png": {
+      "size": 18031,
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd"
+    },
+    "linux-ega-flow/step-003.png": {
+      "size": 18655,
+      "sha256": "bd99c42bc62b5105ca04b9c700f4bc1125cc74c8efbf9cbb795e543bca9e9f27"
+    },
+    "linux-ega-flow/step-004.png": {
+      "size": 18634,
+      "sha256": "d409b7864a024261d668db96dcd5e3f73a81c80719b836387650e8cfe130f950"
+    },
+    "linux-ega-flow/step-005.png": {
+      "size": 20547,
+      "sha256": "e26ceb6293270299f0f0159287adfba4d92a04feb7787f30e670a02a3c8bc1b2"
+    },
+    "linux-ega-flow.log": {
+      "size": 572,
+      "sha256": "b0c2652904df804edebdedde9bd9d49f6ffe924e7341fc90fe2f4e51e2118088"
+    },
+    "linux-ega-gui.log": {
+      "size": 2061,
+      "sha256": "5d824cca5fb3cf707fd22e708c6e06878cf85eb99f2f8aa44d975bf6c4d89136"
+    },
+    "linux-ega-hd-flow/step-000.png": {
+      "size": 1835656,
+      "sha256": "c5cd42f6ac70d71741ceeb9b9e50013afbf3a91019c67f988a955af251772d69"
+    },
+    "linux-ega-hd-flow/step-001.png": {
+      "size": 2591689,
+      "sha256": "ec25593e01589471d85ac16d9020ef61cc1ed939172ed62b8a1a2f1be9b30049"
+    },
+    "linux-ega-hd-flow/step-002.png": {
+      "size": 2827649,
+      "sha256": "a3b1e97863e423a796d633669eccdf79d23b6629a4bef86b38d893725f4991b5"
+    },
+    "linux-ega-hd-flow/step-003.png": {
+      "size": 2807274,
+      "sha256": "9f8e1842b0e85e5a8a50343bf1e8ab84d9af8da389dd8d20747dd48539eec80a"
+    },
+    "linux-ega-hd-flow/step-004.png": {
+      "size": 2807280,
+      "sha256": "8f7ce8e58d94bb69c0f1602a82e3fea89e978b0e50f8be2159a3f24037b16f3a"
+    },
+    "linux-ega-hd-flow/step-005.png": {
+      "size": 2822248,
+      "sha256": "986b9f09f846b2e8935a81954dba59d783e3904eab4150ee08a863492f2f0786"
+    },
+    "linux-ega-hd-flow.log": {
+      "size": 590,
+      "sha256": "9175e964cdad8e2d13fc1cf2016216426b29952fc6cb170b40fd3ef2accd755c"
+    },
+    "linux-ega-hd-gui.log": {
+      "size": 2426,
+      "sha256": "be44a3d34a65028a251aa0a3079096a9be8e36be951c0cf78fe1e8e855db3703"
+    },
+    "linux-ega-hd-text.jsonl": {
+      "size": 1561,
+      "sha256": "0a0df9ebd7c69ce71b7284d32f6a626563e342946fa7ff8b262116bce3e6409e"
+    },
+    "linux-ega-hd-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "linux-ega-text.jsonl": {
+      "size": 1605,
+      "sha256": "0a138c979d7d8410850fed71958b4721458421dcfd69d385ed4b0ae4d29467ca"
+    },
+    "linux-ega-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "linux-runtime.json": {
+      "size": 1384,
+      "sha256": "18b587d154aa524f8b5506837a82db4ab40b241c37cdce908ad3ffcbee573439"
+    },
+    "package-content.json": {
+      "size": 1568,
+      "sha256": "ceb94c912c422980922419f9b620ae9766ac1c07af5d696328ca353d90dcbdba"
+    },
+    "receipt.json": {
+      "size": 64167,
+      "sha256": "4ff3e0a14b337ffffb8f06feabead646fea727b34cd97ae5636aabe2d338b695"
+    },
+    "release-inputs.json": {
+      "size": 411145,
+      "sha256": "f00133b86bca101a9ac4e128390b53283c60500641a76faa6aa226f327dec96d"
+    },
+    "smoke/windows-audio-capture.log": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke/windows-audio.wav": {
+      "size": 129000438,
+      "sha256": "48bd40995b3b7e9c304d5bd6ac809264e4c09ab1e45bfdc86ca157b852d0b1c5"
+    },
+    "smoke/wine-audio-done": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke/wine-audio-ready": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "smoke/wine-pulse-info.txt": {
+      "size": 402,
+      "sha256": "dc6200e1053ce784ada9a0385379aa7bc8e80bee727976cd564fea2b953268dd"
+    },
+    "smoke/wine-pulse.log": {
+      "size": 3039,
+      "sha256": "4bd1a2ccc59891ebdf2a3ffd9c6e72ac1ea3b4e42e4ea2aa720db0d6bd07f852"
+    },
+    "windows-ega-flow/step-000.png": {
+      "size": 8707,
+      "sha256": "88727bc55ac41fac0af8500cdf13fa4880b144b67e110d32cddf3a88054a5f08"
+    },
+    "windows-ega-flow/step-001.png": {
+      "size": 17505,
+      "sha256": "530a20d22f67cd69a8bbdb8378e73e7e1bcd2e1421df1ce481721a3a9119751e"
+    },
+    "windows-ega-flow/step-002.png": {
+      "size": 18031,
+      "sha256": "7367c4dc4fe012208135297ba05c8b92fc2979f94d2a195ab92db2da1b6098dd"
+    },
+    "windows-ega-flow/step-003.png": {
+      "size": 18655,
+      "sha256": "bd99c42bc62b5105ca04b9c700f4bc1125cc74c8efbf9cbb795e543bca9e9f27"
+    },
+    "windows-ega-flow/step-004.png": {
+      "size": 18634,
+      "sha256": "d409b7864a024261d668db96dcd5e3f73a81c80719b836387650e8cfe130f950"
+    },
+    "windows-ega-flow/step-005.png": {
+      "size": 20547,
+      "sha256": "e26ceb6293270299f0f0159287adfba4d92a04feb7787f30e670a02a3c8bc1b2"
+    },
+    "windows-ega-flow.log": {
+      "size": 282,
+      "sha256": "ecc34f69d42ece97795e67edab772a9b6d3562c5c8ed6c1b38575d32b6faf29d"
+    },
+    "windows-ega-gui.log": {
+      "size": 1746,
+      "sha256": "7a448e4d49a331992fc1b26201895b2be6bba84f9ea706bfe3f98069b9ffc924"
+    },
+    "windows-ega-hd-flow/step-000.png": {
+      "size": 1835656,
+      "sha256": "c5cd42f6ac70d71741ceeb9b9e50013afbf3a91019c67f988a955af251772d69"
+    },
+    "windows-ega-hd-flow/step-001.png": {
+      "size": 2591706,
+      "sha256": "851352afc182a24562aa8e421ec208cc38bc4bff76136c07bbd4ec3507ab511a"
+    },
+    "windows-ega-hd-flow/step-002.png": {
+      "size": 2827714,
+      "sha256": "b0f8165ea873fada09359f5cb9bf06a560b874c7584246c15da7cbd93459d02e"
+    },
+    "windows-ega-hd-flow/step-003.png": {
+      "size": 2807294,
+      "sha256": "2a637c5eee3e196343904354c2fb92cc2f6d4b446e8aceb592b9c918f0d1daef"
+    },
+    "windows-ega-hd-flow/step-004.png": {
+      "size": 2807310,
+      "sha256": "615333b3bc54122544a3b3ab1ed3b3cc74bb3cd472480e98d31f859d798c05d4"
+    },
+    "windows-ega-hd-flow/step-005.png": {
+      "size": 2822219,
+      "sha256": "4f57885a64cefa95dede55d5da76f1a8693dc64b33657d6688fc046b875c2604"
+    },
+    "windows-ega-hd-flow.log": {
+      "size": 300,
+      "sha256": "6f5aadb7df10f7f08f26561fd63e6d16f073061875931560753fc614c7cd3a49"
+    },
+    "windows-ega-hd-gui.log": {
+      "size": 2112,
+      "sha256": "5d8ff97f182625fe993662ee156727df4d026448d903827d849b848447901dcc"
+    },
+    "windows-ega-hd-text.jsonl": {
+      "size": 1561,
+      "sha256": "0a0df9ebd7c69ce71b7284d32f6a626563e342946fa7ff8b262116bce3e6409e"
+    },
+    "windows-ega-hd-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "windows-ega-text.jsonl": {
+      "size": 1605,
+      "sha256": "0a138c979d7d8410850fed71958b4721458421dcfd69d385ed4b0ae4d29467ca"
+    },
+    "windows-ega-trace.json": {
+      "size": 929,
+      "sha256": "f850b19c22427e3596f7a29ec2a544a9a0bd1574eef83abf8ee4047ac98d4318"
+    },
+    "windows-runtime.json": {
+      "size": 1377,
+      "sha256": "78e392b63d3db1c3b3f2257876406e5d5d31ba75b50906ee32fa662bc38d0fa9"
+    }
+  },
+  "readable_copies": [
+    "SHA256SUMS.json",
+    "SHA256SUMS.txt",
+    "comparisons.json",
+    "images.json",
+    "kol-v.1.0.5-20261018-release-ega-hd-linux-x86_64-squashfs.log",
+    "kol-v.1.0.5-20261018-release-ega-linux-x86_64-squashfs.log",
+    "linux-ega-flow.log",
+    "linux-ega-gui.log",
+    "linux-ega-hd-flow.log",
+    "linux-ega-hd-gui.log",
+    "linux-ega-hd-trace.json",
+    "linux-ega-trace.json",
+    "linux-runtime.json",
+    "package-content.json",
+    "receipt.json",
+    "release-inputs.json",
+    "windows-ega-flow.log",
+    "windows-ega-gui.log",
+    "windows-ega-hd-flow.log",
+    "windows-ega-hd-gui.log",
+    "windows-ega-hd-trace.json",
+    "windows-ega-trace.json",
+    "windows-runtime.json"
+  ],
+  "removed_rebuildable_executables": {
+    "kol": {
+      "size": 15143984,
+      "sha256": "a9bceb29ee38da52f79b32fe594dad3601169df02deed092ebac82f1a8cea8b2"
+    },
+    "kol-macos": {
+      "size": 28226882,
+      "sha256": "abbb6d14de4748d9898a168443a03ebd53ddb73fe0a06b7ef88053f061706234"
+    },
+    "kol.exe": {
+      "size": 14614016,
+      "sha256": "7640165752d9799f32bbff26290828fbf297e0fd99fee85e5e13a0b038e4f1ea"
+    }
+  },
+  "original_bytes": 219211847,
+  "old_receipt_modified": false,
+  "new_game_execution": false,
+  "limits": "Historical receipts retain their original paths and hashes. Executable bytes were removed; their hashes remain. This checks retained evidence integrity, not a new game run.",
+  "local_archive_path": "docs/verification/local/release-v1.0.5-20261018/evidence.tar.xz"
+}

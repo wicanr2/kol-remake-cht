@@ -1,0 +1,17 @@
+{
+  "classification": "驗證腳本輸入時序",
+  "failure": "等待music-true逾時；wait持續確認程序存活",
+  "observed": "HD首次旅店繪圖期間兩次固定延遲F9只取得music-false及一筆完成畫面回條",
+  "correction": "每次F9等待操作及畫面回條，釋鍵後再送下一次",
+  "game_source_changed": false,
+  "seed": 1,
+  "script_sha256": "8c70f863ddc850e294dac020e01882b77a14fe89db9323232aeec46788971634",
+  "preserved": [
+    "windows-ega-text.jsonl",
+    "windows-ega-flow",
+    "windows-ega-flow.log",
+    "windows-ega-trace.json",
+    "windows-ega-gui.log",
+    "windows-ega-hd-gui.log"
+  ]
+}

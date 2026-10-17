@@ -1,0 +1,65 @@
+{
+  "version": "v.1.0.5-20261018",
+  "files": [
+    {
+      "path": "release/kol-v.1.0.5-20261018-release-ega-linux-x86_64.AppImage",
+      "bytes": 9521656,
+      "sha256": "b06ecb552866d203ebfdb31fa0ea6934f0eec5f5afa5804a81f0ab088261fbbe",
+      "platform": "linux-x86_64",
+      "graphics": "ega",
+      "bundle": "release",
+      "required_resource_files": 912,
+      "assets_included": false
+    },
+    {
+      "path": "release/kol-v.1.0.5-20261018-release-ega-windows-amd64.zip",
+      "bytes": 8628586,
+      "sha256": "03341c6d719b8d0e1c0c918f3c509a3f0beef6d7f5cafa3b05084e313758b87b",
+      "platform": "windows-amd64",
+      "graphics": "ega",
+      "bundle": "release",
+      "required_resource_files": 912,
+      "assets_included": false
+    },
+    {
+      "path": "release/kol-v.1.0.5-20261018-release-ega-macos-universal.zip",
+      "bytes": 16088431,
+      "sha256": "964ffebc246c8dada85cdddf0249878015bcf20fb6a8f2117826f8d0a02b26b5",
+      "platform": "macos-universal",
+      "graphics": "ega",
+      "bundle": "release",
+      "required_resource_files": 912,
+      "assets_included": false
+    },
+    {
+      "path": "release/kol-v.1.0.5-20261018-release-ega-hd-linux-x86_64.AppImage",
+      "bytes": 9562616,
+      "sha256": "754bf57cb03680c21dca0cdb933d1595ab25b374e771360ef9b812bca1ce7930",
+      "platform": "linux-x86_64",
+      "graphics": "ega-hd",
+      "bundle": "release",
+      "required_resource_files": 1744,
+      "assets_included": false
+    },
+    {
+      "path": "release/kol-v.1.0.5-20261018-release-ega-hd-windows-amd64.zip",
+      "bytes": 8672173,
+      "sha256": "4a69411a638d420e784c2875c5960a5655b3673f28f314f820cd3bd9eef3349d",
+      "platform": "windows-amd64",
+      "graphics": "ega-hd",
+      "bundle": "release",
+      "required_resource_files": 1744,
+      "assets_included": false
+    },
+    {
+      "path": "release/kol-v.1.0.5-20261018-release-ega-hd-macos-universal.zip",
+      "bytes": 16132044,
+      "sha256": "6ef49f8dde9bef102bc7103223ba4f8a7c03f628c5bcb2bd2eaa23a67fa38d3a",
+      "platform": "macos-universal",
+      "graphics": "ega-hd",
+      "bundle": "release",
+      "required_resource_files": 1744,
+      "assets_included": false
+    }
+  ]
+}
