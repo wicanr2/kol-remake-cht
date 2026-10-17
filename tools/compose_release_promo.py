@@ -8,15 +8,21 @@ import re
 import shutil
 import subprocess
 import sys
+import math
+from PIL import Image
 from png_io import write_png_rgb
 
 ROOT, OUT = Path('/src'), Path('/out')
 P = OUT / 'promo'
 W, H, FPS = 1920, 1080, 25
 VERSION = json.loads((OUT / 'build-inputs.json').read_text())['version']
+FULL_HD = json.loads((OUT / 'build-inputs.json').read_text()).get('program_matches_full_hd_receipt', False)
 assert re.fullmatch(r'v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}', VERSION)
 FONT = json.loads((ROOT / 'assets/ui-font/manifest.json').read_text())['fonts'][0]
 GLYPHS = {g['character']: g for g in FONT['glyphs']}
+HD_FONT_DIR = ROOT / 'assets/hd/first-slice/interface'
+HD_FONT = json.loads((HD_FONT_DIR / 'font-atlas.json').read_text()) if FULL_HD else None
+HD_ATLAS = Image.open(HD_FONT_DIR / 'font-atlas.png').convert('RGBA') if FULL_HD else None
 
 
 def sha(p):
@@ -32,6 +38,33 @@ def run(cmd, log=None):
 
 
 def label(text, scale, color, name):
+    if FULL_HD:
+        ratio = {7: 116, 3: 42, 2: 30}[scale] / HD_FONT['size']
+        missing = set(text) - set(HD_FONT['glyphs'])
+        assert not missing, ('HD caption glyphs missing', ''.join(sorted(missing)))
+        width = math.ceil(sum(HD_FONT['glyphs'][c]['advance'] for c in text) * ratio) + 24
+        height = math.ceil(HD_FONT['cell'] * ratio) + 24
+        canvas = Image.new('RGBA', (width, height))
+        pen = 12.0
+        for c in text:
+            g = HD_FONT['glyphs'][c]
+            cell = HD_FONT['cell']
+            alpha = HD_ATLAS.crop((g['x'], g['y'], g['x']+cell, g['y']+cell)).getchannel('A')
+            extent = round(cell * ratio)
+            alpha = alpha.resize((extent, extent), Image.Resampling.LANCZOS)
+            glyph = Image.new('RGBA', (extent, extent), (*color, 255))
+            glyph.putalpha(alpha)
+            canvas.alpha_composite(glyph, (round(pen-HD_FONT['xpad']*ratio), 12))
+            pen += g['advance'] * ratio
+        bounds = canvas.getbbox()
+        assert bounds, text
+        canvas = canvas.crop(bounds)
+        assert canvas.width <= W-160 and canvas.height <= 180, (text, canvas.size)
+        result = Image.new('RGB', canvas.size, (32, 20, 20))
+        result.paste(canvas, mask=canvas.getchannel('A'))
+        path = P / (name + '.png')
+        result.save(path)
+        return path
     advances = [8 if c == ' ' else GLYPHS[c]['advance'] for c in text]
     width, height = sum(advances) * scale, 18 * scale
     assert width <= W - 160 and height <= 180, (text, width, height)
@@ -76,6 +109,25 @@ def main():
         dict(kind='card', title='武士傳說', sub=VERSION,
              caption='Linux  Windows  macOS', seconds=10),
     ]
+    if FULL_HD:
+        def hd(name, caption, seconds):
+            return dict(kind='runtime', file='smoke/hd-scenes-linux/motion-runtime/'+name+'-first-hd.png',
+                        caption=caption, seconds=seconds, controlled=True)
+        scenes = [
+            dict(kind='card', title='武士傳說', sub='Knights of Legend', caption='繁體中文與手繪HD', seconds=6),
+            hd('title-02-SET2PICS-05', '手繪片頭與繁體中文', 7),
+            dict(kind='runtime', file='smoke/linux-full-controls/inn-hd.png', caption='從旅店開始六人冒險', seconds=7),
+            hd('map-world', '世界探索與原有地圖', 6),
+            hd('map-town3', '七座城鎮的手繪風景', 6),
+            hd('weather-4-01', '原有天候，手繪呈現', 6),
+            hd('battle-08-map-16', '逐人規劃，逐手結算', 7),
+            hd('body-1-1', '體力與傷勢，保留原有規則', 5),
+            hd('monster-native-encounter', '手繪怪物，保留原有位置', 6),
+            hd('event-combat-03', '戰鬥事件與中文訊息', 6),
+            dict(kind='split', files=['smoke/linux-full-controls/menu-ega.png','smoke/linux-full-controls/menu-hd.png'],
+                 caption='遊戲內 F10 切換 EGA 與 HD', seconds=6),
+            dict(kind='card', title='武士傳說', sub=VERSION, caption='Linux  Windows  macOS', seconds=8),
+        ]
     total = sum(s['seconds'] for s in scenes)
     assert total == 76
     reuse = '--review-existing' in sys.argv
@@ -95,6 +147,18 @@ def main():
             if i == len(scenes)-1:
                 d = label('需自備合法遊戲資料', 2, (240, 230, 207), name + '-data')
                 command += [str(d), '-geometry', '+0+310', '-composite']
+        elif scene['kind'] == 'split':
+            source_files = [OUT/n for n in scene['files']]
+            for n, shot in enumerate(source_files):
+                assert shot.is_file(), shot
+                fitted = tmp / f'fit-{i}-{n}.png'
+                run(['convert', str(shot), '-filter', 'point', '-resize', '824x720',
+                     '-bordercolor', '#c8992e', '-border', '3', str(fitted)])
+                command += [str(fitted), '-gravity', 'center', '-geometry', ('-440-25' if n == 0 else '+440-25'), '-composite']
+            a = label(scene['caption'], 3, (240,230,207), name+'-caption')
+            command += [str(a), '-gravity', 'south', '-geometry', '+0+100', '-composite']
+            scene['source_sha256'] = {str(p.relative_to(OUT)):sha(p) for p in source_files}
+            scene['trace_state'] = 'actual full AppImage F10 settings; same normal inn state'
         else:
             shot = OUT / scene['file'] if scene['kind'] == 'runtime' else OUT / 'smoke/normal' / f'step-{scene["step"]:03d}.png'
             assert shot.exists(), shot
@@ -106,7 +170,12 @@ def main():
                         str(a), '-gravity', 'south', '-geometry', '+0+100', '-composite']
             scene['source'] = str(shot.relative_to(OUT))
             scene['source_sha256'] = sha(shot)
-            scene['trace_state'] = trace[scene['step']]['scene'] if 'step' in scene else '正式封包，遊戲內畫面設定'
+            scene['trace_state'] = (trace[scene['step']]['scene'] if 'step' in scene else
+                                    'SPEC-040 controlled scene, same accepted production renderer' if scene.get('controlled') else
+                                    '正式封包，遊戲內畫面設定')
+        if FULL_HD and scene.get('controlled'):
+            note = label('受控場景展示', 2, (240,230,207), name+'-scope')
+            command += [str(note), '-gravity', 'south', '-geometry', '+0+37', '-composite']
         command += ['-type', 'TrueColor', str(canvas)]
         run(command)
         clip = tmp / f'{i:02d}.mp4'
@@ -130,9 +199,32 @@ def main():
     music_sections=[dict(track='title',start=0,seconds=13),dict(track='inn',start=13,seconds=19),
                     dict(track='exploration',start=32,seconds=8),dict(track='combat',start=40,seconds=18),
                     dict(track='inn',start=58,seconds=8),dict(track='title',start=66,seconds=10)]
+    if FULL_HD:
+        music_sections = [dict(track='title',start=0,seconds=13),dict(track='inn',start=13,seconds=7),
+                          dict(track='exploration',start=20,seconds=18),dict(track='combat',start=38,seconds=24),
+                          dict(track='inn',start=62,seconds=6),dict(track='title',start=68,seconds=8)]
     video = P / f'kol-{VERSION}-promo.mp4'
     if not reuse:
-        run(['ffmpeg', '-y', '-v', 'error', '-i', str(silent), '-i', str(cue),
+        if FULL_HD:
+            tracks = {'title':'2:a','inn':'3:a','exploration':'4:a','combat':'5:a'}
+            filters = ['[1:a]asplit=2[x][y]', '[x]adelay=900|900,volume=0.7[a]',
+                       '[y]adelay=6500|6500,volume=0.5[b]', '[2:a]asplit=2[t0][t1]', '[3:a]asplit=2[i0][i1]']
+            labels = ['t0','i0','4:a','5:a','i1','t1']
+            mixed = ['a','b']
+            for j,(section,source) in enumerate(zip(music_sections,labels)):
+                duration,offset=section['seconds'],section['start']
+                filters.append(f'[{source}]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.8,'
+                               f'afade=t=in:d=0.3,afade=t=out:st={duration-.5}:d=0.5,'
+                               f'adelay={offset*1000}|{offset*1000}[m{j}]')
+                mixed.append('m'+str(j))
+            filters.append(''.join('['+x+']' for x in mixed)+'[6:a]amix=inputs=9:duration=longest:normalize=0[s]')
+            run(['ffmpeg','-y','-v','error','-i',str(silent),'-i',str(cue),
+                 *sum((['-i',str(path)] for path in music.values()),[]),
+                 '-f','lavfi','-t',str(total),'-i','anullsrc=r=44100:cl=stereo',
+                 '-filter_complex',';'.join(filters),'-map','0:v','-map','[s]',
+                 '-c:v','copy','-c:a','aac','-b:a','160k','-t',str(total),'-movflags','+faststart',str(video)])
+        else:
+            run(['ffmpeg', '-y', '-v', 'error', '-i', str(silent), '-i', str(cue),
          *sum((['-i',str(path)] for path in music.values()),[]),
          '-f', 'lavfi', '-t', str(total), '-i', 'anullsrc=r=44100:cl=stereo',
          '-filter_complex', '[1:a]asplit=2[x][y];[x]adelay=900|900,volume=0.7[a];'
@@ -170,8 +262,13 @@ def main():
         run(['ffmpeg', '-y', '-v', 'error', '-ss', str(scene['center']), '-i', str(video),
              '-frames:v', '1', '-threads', '2', str(f)])
         frames.append(str(f))
+    assert len({sha(Path(f)) for f in frames}) == len(frames), 'duplicate decoded scene centers'
+    if FULL_HD:
+        freeze_durations = [float(x) for x in re.findall(r'freeze_duration: ([\d.]+)', (P/'freeze.log').read_text())]
+        assert all(x <= max(s['seconds'] for s in scenes)+.2 for x in freeze_durations), freeze_durations
+    rows = math.ceil(len(frames)/2)
     run(['ffmpeg', '-y', '-v', 'error', '-framerate', '1', '-i', str(P / 'frame-%02d.png'),
-         '-vf', 'scale=640:360,tile=2x5:nb_frames=10:padding=8:margin=8',
+         '-vf', f'scale=640:360,tile=2x{rows}:nb_frames={len(frames)}:padding=8:margin=8',
          '-frames:v', '1', '-threads', '2', str(P / 'contact-sheet.png')])
     metadata = dict(schema='kol-promo/2', version=VERSION, seconds=total, fps=FPS,
        dimensions=[W,H], video_sha256=sha(video), sources=sources,
@@ -186,6 +283,13 @@ def main():
        volume_peak_db=peak, black_detect='PASS: no interval >=0.3 seconds at specified thresholds',
        rights='原作衍生畫面，僅本機保存，不得當成已取得公開素材權利。',
        visual_review='pending')
+    if FULL_HD:
+        metadata.update(picture_policy='本版實際AppImage正常旅店／F10設定及同一正式來源的SPEC-040受控展示器；每幕明示範圍，沒有原版oracle或自然通關聲明。',
+                        font_source='assets/hd/first-slice/interface/font-atlas.json', font_sha256=sha(HD_FONT_DIR/'font-atlas.json'),
+                        font_atlas_sha256=sha(HD_FONT_DIR/'font-atlas.png'),theme='遊戲赤黑銅框與原生HD中文字',
+                        freeze_policy='12幕靜態展示，各幕5至8秒；解碼中心皆不同，freeze_duration不得跨越最長分鏡，非連續實機錄影。',
+                        source_acceptance_receipt_sha256=sha(ROOT/'docs/verification/hd-full-runtime-20261017/receipt.json'),
+                        differences_from_previous=['完整手繪片頭、地圖、天候與戰場','原生HD襯線字','同一場景EGA／HD並排','受控展示逐幕標示'])
     (P / 'sources.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n')
     shutil.copy2(Path(__file__), P / 'compose_release_promo.py')
     print('PROMO PASS technical:', total, 'seconds', W, H, 'peak', peak, flush=True)

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "scenario_count": 1,
+  "seed": 1,
+  "runs": [
+    {
+      "purpose": "normal",
+      "states": 1046,
+      "pngs": 40,
+      "trace_equal": true,
+      "semantic_trace_equal": true
+    },
+    {
+      "purpose": "reload",
+      "states": 13,
+      "pngs": 3,
+      "trace_equal": true,
+      "semantic_trace_equal": true
+    }
+  ],
+  "appimage_sha256": "6527ca24e606516c919fd3237ca26bd83709c45fcfe4b47866efed93f90ba18b",
+  "save_sha256": "3eb7542d07175749111787c16d41d668436e0ed3687270fa330b9a5edb951395",
+  "full_v3_equal_except_saved_at": true,
+  "original_new_execution": false,
+  "whole_game_parity": false
+}

@@ -1,0 +1,173 @@
+{
+  "status": "PASS",
+  "comparisons": [
+    {
+      "bundle": "full",
+      "graphics": "ega",
+      "frame": "step-000.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "ega",
+      "frame": "step-001.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "ega",
+      "frame": "step-002.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "ega",
+      "frame": "step-003.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "ega",
+      "frame": "step-004.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "ega",
+      "frame": "step-000.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "ega",
+      "frame": "step-001.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "ega",
+      "frame": "step-002.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "ega",
+      "frame": "step-003.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "ega",
+      "frame": "step-004.png",
+      "max_channel_delta": 0,
+      "different_pixels": 0,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "hd",
+      "frame": "step-000.png",
+      "max_channel_delta": 1,
+      "different_pixels": 1701,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "hd",
+      "frame": "step-001.png",
+      "max_channel_delta": 1,
+      "different_pixels": 1701,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "hd",
+      "frame": "step-002.png",
+      "max_channel_delta": 1,
+      "different_pixels": 2087,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "hd",
+      "frame": "step-003.png",
+      "max_channel_delta": 1,
+      "different_pixels": 3236,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "full",
+      "graphics": "hd",
+      "frame": "step-004.png",
+      "max_channel_delta": 1,
+      "different_pixels": 2500,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "hd",
+      "frame": "step-000.png",
+      "max_channel_delta": 1,
+      "different_pixels": 1701,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "hd",
+      "frame": "step-001.png",
+      "max_channel_delta": 1,
+      "different_pixels": 1701,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "hd",
+      "frame": "step-002.png",
+      "max_channel_delta": 1,
+      "different_pixels": 2087,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "hd",
+      "frame": "step-003.png",
+      "max_channel_delta": 1,
+      "different_pixels": 3615,
+      "predeclared_numeric_bound_met": true
+    },
+    {
+      "bundle": "release",
+      "graphics": "hd",
+      "frame": "step-004.png",
+      "max_channel_delta": 1,
+      "different_pixels": 2729,
+      "predeclared_numeric_bound_met": true
+    }
+  ],
+  "reference_appimage_sha256": "6527ca24e606516c919fd3237ca26bd83709c45fcfe4b47866efed93f90ba18b",
+  "audio": {
+    "device": "isolated PulseAudio null sink; actual Windows PE via Wine9",
+    "sha256": "3621a19c7bc27c2e6926b705b25e32e2c2d90fd7ab3e463ef03a3906463f68ea",
+    "peak": 15934,
+    "last_second_peak": 0
+  },
+  "windows_real_machine": false
+}

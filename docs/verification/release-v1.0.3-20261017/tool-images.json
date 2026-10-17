@@ -1,0 +1,16 @@
+{
+  "version": "v.1.0.3-20261017",
+  "user": "1000:1000",
+  "network": "none",
+  "images": [
+    {"name": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "id": "sha256:0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f", "role": "Go 1.26.7, Ebitengine 2.9.9, package build, tests, Python/Pillow/NumPy, movie and pixel verification"},
+    {"name": "kol-osxcross-go:20261007-r1", "id": "sha256:27a0d789783b1f88670b5023b42ec7f7471b973c5fb0b560fb99f89ef052f6ea", "role": "macOS Intel/ARM64 universal cross-build and structure checks"},
+    {"name": "eob-remake-wine-verify:ubuntu-noble-20261008-r2", "id": "sha256:c047a6a259a1fc9a90babf7c937310fa9df4b3465bf75f3fcaad1bc640099c2f", "role": "Wine9 / Xvfb / xdotool, actual Windows package and controlled renderer"},
+    {"name": "eob-audio-capture:20261009-r3", "id": "sha256:d831720f8dfa388af8ad175fa8adeae8f2814dd4637be1e3db6a43274b26f36c", "role": "actual Linux package F9/F10 and isolated PulseAudio capture for Wine"}
+  ],
+  "runtime_environment": {"GOMEMLIMIT": "3GiB", "GOMAXPROCS": "3", "cpus": 3, "pids_limit": 512, "linux_memory": "12GiB", "controlled_wine_memory": "12GiB", "actual_package_wine_memory": "16GiB", "actual_package_wine_swap": "disabled"},
+  "source_mount": "/src:ro",
+  "delivery_mount": "/out:rw",
+  "retained_failures": ["smoke/linux-environment-attempt1", "smoke/hd-startup-diagnosis", "smoke/hd-scenes-linux-attempt1", "smoke/hd-scenes-linux-attempt2", "smoke/hd-scenes-windows-attempt1", "smoke/hd-scenes-windows-attempt2", "smoke/hd-scenes-windows-attempt3", "smoke/wine-package-attempt1"],
+  "new_image_builds": false
+}

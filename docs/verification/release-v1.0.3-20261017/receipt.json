@@ -1,0 +1,87 @@
+{
+  "schema": "kol-release-receipt/3",
+  "version": "v.1.0.3-20261017",
+  "technical_status": "PASS",
+  "publication_status": "READY",
+  "packages": [
+    {
+      "path": "full/kol-v.1.0.3-20261017-full-linux-x86_64.AppImage",
+      "bytes": 1270303224,
+      "sha256": "6527ca24e606516c919fd3237ca26bd83709c45fcfe4b47866efed93f90ba18b"
+    },
+    {
+      "path": "full/kol-v.1.0.3-20261017-full-macos-universal.zip",
+      "bytes": 1300365343,
+      "sha256": "8c4b7b8edd82779fbadcdc7e590572ab459edd0af960c9c0230d027b4fcb61e4"
+    },
+    {
+      "path": "full/kol-v.1.0.3-20261017-full-windows-amd64.zip",
+      "bytes": 1292806203,
+      "sha256": "5b582f316eaba567067cdfed26d45744f0d7fdda0aaef446f25dd7bf439625c2"
+    },
+    {
+      "path": "release/kol-v.1.0.3-20261017-release-linux-x86_64.AppImage",
+      "bytes": 9501176,
+      "sha256": "098126a46bb56bbd77c2b2e160448231e31411d3d4953de1750bde056641e057"
+    },
+    {
+      "path": "release/kol-v.1.0.3-20261017-release-macos-universal.zip",
+      "bytes": 16036297,
+      "sha256": "3dda9197139da9706c5bbbe4ac34e9969da160e73344bb4c9e41ba257614a3fb"
+    },
+    {
+      "path": "release/kol-v.1.0.3-20261017-release-windows-amd64.zip",
+      "bytes": 8595972,
+      "sha256": "d9b40e29ddad2a10581232d2fa5b2c2f8296555be57297365bb36698acadd3e8"
+    }
+  ],
+  "movie": {
+    "path": "promo/kol-v.1.0.3-20261017-promo.mp4",
+    "bytes": 3688525,
+    "sha256": "2ebc3fbb47ece1a6c62dc2f5c3a1fb2a59eea59e9eec88cc05ea63ad8f910331"
+  },
+  "source_base": "6efba84926cecaf7bbc1b90db8d4cee1522fc589",
+  "program_files": 430,
+  "program_sha256": "c1b5969e75604926a9dead27d65de6db1923b2923d2b81f211254e5e9a7634ff",
+  "hd_asset_files": 832,
+  "imported_resource_files": 1744,
+  "controlled_scenes": 13,
+  "frames_per_platform": 52,
+  "cross_platform_ega_bound": 0,
+  "cross_platform_hd_bound": 1,
+  "actual_package_pixel_comparisons": 20,
+  "normal_sample_states": 1046,
+  "new_process_reload_states": 13,
+  "normal_sample_count": 1,
+  "original_oracle": false,
+  "whole_game_parity": false,
+  "natural_all_quests_to_ending": false,
+  "windows_real_machine": false,
+  "macos_execution": false,
+  "host_fuse": false,
+  "local_output": "dist-all/v.1.0.3-20261017",
+  "release_url": "https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.3-20261017",
+  "rights": {
+    "full": "僅本機",
+    "promo": "僅本機",
+    "release": "只上傳目前 private repo 的三平台引擎包及 SHA256SUMS.txt"
+  },
+  "verification": {
+    "complete": "packages.json",
+    "controlled_hd": "hd-scenes-comparison.json",
+    "actual_package_pixels": "windows-pixels.json",
+    "linux_controls": "linux-controls.json",
+    "windows_controls": "windows-smoke.json",
+    "normal_save_reload": "sampling.json",
+    "promo_sources": "promo-sources.json",
+    "promo_visual": "promo-visual-review.json",
+    "inputs": "build-inputs.json",
+    "images": "screenshots.json",
+    "toolchain": "tool-images.json"
+  },
+  "environment_limits": [
+    "首次HD載入在限3CPU、軟體顯示容器約194秒；非真機效能或最低需求。",
+    "Windows首次12GiB容器的F10冷載入等待逾時，保留原紀錄；16GiB無swap重新驗證。",
+    "vet兩則既有book.Label未具名欄位警示保留；完整cmd/internal測試通過。"
+  ]
+}

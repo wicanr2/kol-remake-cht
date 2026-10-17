@@ -29,7 +29,7 @@ def check(bundle,command,fixture,base):
         states=re.findall(r'display action=\S+ hd=\S+ state=([0-9a-f]+)',text());assert len(states)==8 and len(set(states))==1
         action(lambda:player.key(w,'F9'),'display action=music-false');time.sleep(3.5)
         markers.append(dict(default_music_on=True,normal_inn=True,f9=True,f10=True,resized_mouse=True,state_sha256=states[0],original_parity_claimed=False))
-    report,samples,log=player.record('package-'+bundle,body,dest/'inputs/save.json')
+    report,samples,log=player.record('package-'+bundle,body,dest/'inputs/save.json',ready_seconds=300,ready_frame=True)
     assert np.max(np.abs(samples.astype(np.int32)))>100 and np.max(np.abs(samples[-44100:].astype(np.int32)))==0
     report.update(status='PASS',bundle=bundle,version=json.loads((OUT/'build-inputs.json').read_text())['version'])
     (dest/'controls.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

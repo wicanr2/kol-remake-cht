@@ -1,0 +1,249 @@
+{
+  "schema": "kol-promo/2",
+  "version": "v.1.0.3-20261017",
+  "seconds": 76,
+  "fps": 25,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "video_sha256": "2ebc3fbb47ece1a6c62dc2f5c3a1fb2a59eea59e9eec88cc05ea63ad8f910331",
+  "sources": [
+    {
+      "kind": "card",
+      "title": "武士傳說",
+      "sub": "Knights of Legend",
+      "caption": "繁體中文與手繪HD",
+      "seconds": 6,
+      "start": 0,
+      "end": 6,
+      "center": 3.0,
+      "composition_sha256": "a0542675d28f935e07b1e117b8eede5c1bb284e9d36c96df243679658858a0ce"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/title-02-SET2PICS-05-first-hd.png",
+      "caption": "手繪片頭與繁體中文",
+      "seconds": 7,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/title-02-SET2PICS-05-first-hd.png",
+      "source_sha256": "7444e757b8c14ea662bcdeb01a158e4c99c139f43c7d00bcfa8b9e47f445fe8d",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 6,
+      "end": 13,
+      "center": 9.5,
+      "composition_sha256": "fde8bf3b86aa6cd8211f2a4711bd52f9db8903b35ca9542eeebeef35b3899788"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/linux-full-controls/inn-hd.png",
+      "caption": "從旅店開始六人冒險",
+      "seconds": 7,
+      "source": "smoke/linux-full-controls/inn-hd.png",
+      "source_sha256": "5f971351fd99bc4b69872e82f28a14a653ef0861bb8235d45fa43c5920c85f35",
+      "trace_state": "正式封包，遊戲內畫面設定",
+      "start": 13,
+      "end": 20,
+      "center": 16.5,
+      "composition_sha256": "d4abfd312659af6e8e7d741dd32cc0ce5ef4e70586c2bb0da3cc23b9d1ccde25"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/map-world-first-hd.png",
+      "caption": "世界探索與原有地圖",
+      "seconds": 6,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/map-world-first-hd.png",
+      "source_sha256": "03afda31b555581490af3aaf9af388a28f89727107f925a0e275a51a19e6891a",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 20,
+      "end": 26,
+      "center": 23.0,
+      "composition_sha256": "54db3f57240ca844774862919e9b9791bc6230bbd9dd87eb0d98e1046b055ac0"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/map-town3-first-hd.png",
+      "caption": "七座城鎮的手繪風景",
+      "seconds": 6,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/map-town3-first-hd.png",
+      "source_sha256": "dc420dbfca8f090aa694be43bd6c952bd4fd026dbc6121b57c84e318917c020f",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 26,
+      "end": 32,
+      "center": 29.0,
+      "composition_sha256": "150aa3f2249fa06e1fdf7786a4081c4bf35aa38fad1fdbc28ab8a73d658d2454"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/weather-4-01-first-hd.png",
+      "caption": "原有天候，手繪呈現",
+      "seconds": 6,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/weather-4-01-first-hd.png",
+      "source_sha256": "a46b5662da24ff8843b462541f9d3f5940aea07debe09392e7ce74d4e459e6c8",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 32,
+      "end": 38,
+      "center": 35.0,
+      "composition_sha256": "01543cff06dc567a1c0ed2741b6fb915a2a75e79d27a58e5e7d6fa85603e993b"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/battle-08-map-16-first-hd.png",
+      "caption": "逐人規劃，逐手結算",
+      "seconds": 7,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/battle-08-map-16-first-hd.png",
+      "source_sha256": "514e66bec47ff4ccd5e4d2cc7a69a095524ce7c10bd2167a1c42d49bd97d5f6f",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 38,
+      "end": 45,
+      "center": 41.5,
+      "composition_sha256": "08fc74da00695c16dbdf308eb9ab5ad161b94beaaafbd67d3b88c881bc5161a7"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/body-1-1-first-hd.png",
+      "caption": "體力與傷勢，保留原有規則",
+      "seconds": 5,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/body-1-1-first-hd.png",
+      "source_sha256": "126060abdd05ca3da727a38d81ceb52d8cc6650e544afa8bd977c2427c44ddc7",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 45,
+      "end": 50,
+      "center": 47.5,
+      "composition_sha256": "d26a5a68bde60fc04d7978d0fd1f2a3dcfeb08ac1610ef6ffbab4edd507fd3dd"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/monster-native-encounter-first-hd.png",
+      "caption": "手繪怪物，保留原有位置",
+      "seconds": 6,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/monster-native-encounter-first-hd.png",
+      "source_sha256": "baaba11b0ddfd78099db61af619c67714ae77b5ff33c454d07ab63e42bab7c78",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 50,
+      "end": 56,
+      "center": 53.0,
+      "composition_sha256": "51ca43ec10bc6046c013391ad280cc0502948302b51f7caecd7ec5d2b61ed862"
+    },
+    {
+      "kind": "runtime",
+      "file": "smoke/hd-scenes-linux/motion-runtime/event-combat-03-first-hd.png",
+      "caption": "戰鬥事件與中文訊息",
+      "seconds": 6,
+      "controlled": true,
+      "source": "smoke/hd-scenes-linux/motion-runtime/event-combat-03-first-hd.png",
+      "source_sha256": "ca36e1b05083511fe734a0857d22e6aac0ddd461074a1b77ba141cd4f735037f",
+      "trace_state": "SPEC-040 controlled scene, same accepted production renderer",
+      "start": 56,
+      "end": 62,
+      "center": 59.0,
+      "composition_sha256": "239259d09d0d5b3ffa4bb377f779297066e7466c757364b91dc80bebb13878cd"
+    },
+    {
+      "kind": "split",
+      "files": [
+        "smoke/linux-full-controls/menu-ega.png",
+        "smoke/linux-full-controls/menu-hd.png"
+      ],
+      "caption": "遊戲內 F10 切換 EGA 與 HD",
+      "seconds": 6,
+      "source_sha256": {
+        "smoke/linux-full-controls/menu-ega.png": "bb57726eac0019ee4c5ae3abb24de8bc0f8dfae3d238650d5f41bc6dec9343ac",
+        "smoke/linux-full-controls/menu-hd.png": "017f349b6a69429c57d8003ad7e87268d9f98aabf180de52e7337aa9f2b80138"
+      },
+      "trace_state": "actual full AppImage F10 settings; same normal inn state",
+      "start": 62,
+      "end": 68,
+      "center": 65.0,
+      "composition_sha256": "9dad5238453135f22455825c096ce13cc795587e8379c34ac8ebf6a33d8a11cf"
+    },
+    {
+      "kind": "card",
+      "title": "武士傳說",
+      "sub": "v.1.0.3-20261017",
+      "caption": "Linux  Windows  macOS",
+      "seconds": 8,
+      "start": 68,
+      "end": 76,
+      "center": 72.0,
+      "composition_sha256": "448db7ba610aca17d916dbac739145e25db7d0fd0599a106119638751b1ff3b0"
+    }
+  ],
+  "picture_policy": "本版實際AppImage正常旅店／F10設定及同一正式來源的SPEC-040受控展示器；每幕明示範圍，沒有原版oracle或自然通關聲明。",
+  "audio_source": "assets/audio/title-thunder.ogg",
+  "audio_sha256": "0e95e887d2513161a4f07d85fad3c64d7fc538d3b61864256f787d98db85d362",
+  "audio_policy": "已核准的四首重製版原創室內樂與雷聲，依分鏡節錄並淡入淡出；沒有原版音樂取樣。",
+  "music_sources": {
+    "title": {
+      "path": "assets/audio/hd/title-chamber.ogg",
+      "sha256": "45f84293d4fb2d81a73a2f2da6e1bb3578e2279085b7592ebbcd5fea64e462ec"
+    },
+    "inn": {
+      "path": "assets/audio/hd/inn-chamber.ogg",
+      "sha256": "d4743aafeff42a31a90c6b75953250894a35d0b3c46ae41862af0d2166a35a24"
+    },
+    "exploration": {
+      "path": "assets/audio/hd/exploration-chamber.ogg",
+      "sha256": "0695b2f91be0005fb7a0e6b1b4e7aab49a778c39395439bf10ef9b3b04718dec"
+    },
+    "combat": {
+      "path": "assets/audio/hd/combat-chamber.ogg",
+      "sha256": "26af77efbda1046b1e1988964e93e4e4c9cf5dca7d3f73b6670989ae3c0380a3"
+    }
+  },
+  "music_sections": [
+    {
+      "track": "title",
+      "start": 0,
+      "seconds": 13
+    },
+    {
+      "track": "inn",
+      "start": 13,
+      "seconds": 7
+    },
+    {
+      "track": "exploration",
+      "start": 20,
+      "seconds": 18
+    },
+    {
+      "track": "combat",
+      "start": 38,
+      "seconds": 24
+    },
+    {
+      "track": "inn",
+      "start": 62,
+      "seconds": 6
+    },
+    {
+      "track": "title",
+      "start": 68,
+      "seconds": 8
+    }
+  ],
+  "font_source": "assets/hd/first-slice/interface/font-atlas.json",
+  "font_sha256": "53eb14bdfad268974088969a9cb826b23660e0901f6913af374a373f16428735",
+  "theme": "遊戲赤黑銅框與原生HD中文字",
+  "freeze_policy": "12幕靜態展示，各幕5至8秒；解碼中心皆不同，freeze_duration不得跨越最長分鏡，非連續實機錄影。",
+  "volume_peak_db": -5.6,
+  "black_detect": "PASS: no interval >=0.3 seconds at specified thresholds",
+  "rights": "原作衍生畫面，僅本機保存，不得當成已取得公開素材權利。",
+  "visual_review": "PASS",
+  "font_atlas_sha256": "83d4cb8b6d83ba32cf4b893b594e707dc352c9f1231b117bdcc746a15eb750a7",
+  "source_acceptance_receipt_sha256": "a0129b354e5f5a5c55cd8189c47758c23090b1795f09b13a5e6779dbbcbd0a0c",
+  "differences_from_previous": [
+    "完整手繪片頭、地圖、天候與戰場",
+    "原生HD襯線字",
+    "同一場景EGA／HD並排",
+    "受控展示逐幕標示"
+  ],
+  "visual_review_notes": "Reviewed all12 decoded scene centers, contact sheet, full inn and end card; captions, controlled labels, aspect, six people and version readable without crop."
+}

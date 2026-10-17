@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "workspace": "workplace/release-v1.0.3-20261017",
+  "retained": "docs/verification/release-v1.0.3-20261017/recipe/workspace",
+  "files": [
+    {
+      "path": "audit-evidence.py",
+      "sha256": "c125c34eb373b29db4be4c4eeae6b0e4378dfaab051abf9bd11bf12ea6611be0",
+      "bytes": 2260
+    },
+    {
+      "path": "build-hd-scenes.sh",
+      "sha256": "643692ceff258d4ffdfddd87de6b80aed255eef3591cd10c2339690b97cf5bca",
+      "bytes": 5523
+    },
+    {
+      "path": "check-hd-scenes.py",
+      "sha256": "bc569e871f7604bc53984da7a47e015b31ea8de01a864138623ec743af08196f",
+      "bytes": 3698
+    },
+    {
+      "path": "diagnose-hd-startup.py",
+      "sha256": "ded7e8aabe5777e7583313dd47dc53f72d6abc87742d748d4f281257cc13f5dc",
+      "bytes": 1097
+    },
+    {
+      "path": "finalize-evidence.py",
+      "sha256": "c1dbb3139510a92af68361d88be2639a475d8755f2ac7703e6c0577328cb980c",
+      "bytes": 8108
+    },
+    {
+      "path": "plan.json",
+      "sha256": "ad879b8a058295e9f21cae1a0e3cd9854fd5f6a232c1cf07d6f062739b0eb7d3",
+      "bytes": 612
+    },
+    {
+      "path": "reproduction.json",
+      "sha256": "9e43ae879e70db65cd7262cfc49ac598cac7e7851a103e3b9e36ea673e1b731e",
+      "bytes": 4061
+    },
+    {
+      "path": "run-hd-scenes-wine.sh",
+      "sha256": "17cb498be6e6bd2ec7cb7c4d77777937473e678af7a4ea769119565768979d59",
+      "bytes": 749
+    },
+    {
+      "path": "run-package-pixels.sh",
+      "sha256": "9f05818be5e40787b9e4e73ea403e005fe381c12887ef6b96a35de07e54662f6",
+      "bytes": 404
+    },
+    {
+      "path": "update-docs.py",
+      "sha256": "cdae1008edb241729ce48f347946295a6c5f01622f3d2ba436c4e814880480ca",
+      "bytes": 11340
+    }
+  ],
+  "hashes_verified_before_delete": true,
+  "workspace_removed": true,
+  "root_owned_files_or_md_directories": 0,
+  "pulse_ipc_removed": true,
+  "raw_evidence": "dist-all/v.1.0.3-20261017/smoke",
+  "other_workspaces_untouched": true
+}

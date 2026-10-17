@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.3-20261017",
+  "checks": [
+    {
+      "bundle": "full",
+      "package_sha256": "5b582f316eaba567067cdfed26d45744f0d7fdda0aaef446f25dd7bf439625c2",
+      "ega_hd_rendered": true,
+      "in_game_switch": true,
+      "f9": true,
+      "music_default_on": true,
+      "normal_inn_music": true,
+      "save_unchanged": true
+    },
+    {
+      "bundle": "release",
+      "package_sha256": "d9b40e29ddad2a10581232d2fa5b2c2f8296555be57297365bb36698acadd3e8",
+      "ega_hd_rendered": true,
+      "in_game_switch": true,
+      "f9": true,
+      "music_default_on": true,
+      "normal_inn_music": true,
+      "save_unchanged": true
+    }
+  ],
+  "windows_real_machine": false,
+  "runtime": "Wine9 / Xvfb"
+}

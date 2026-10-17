@@ -11843,3 +11843,16 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 程式、65張新素材、八組比較與正式附件提交`f2b5b8486c8f4d964a28b1d1060b9d976ab07b05`並推送origin/main，遠端回讀一致，推送前主機gh確認PRIVATE。新README21個入口、33個目前引用、46個正式附件雜湊與430份來源均通過；root-owned檔案及`.md`目錄為0。工作清單render／verify通過，16開放／92完成，HD項只保留新版平台封包。
 - 全量比較工作區封存4091份檔案，9份可重建執行檔只留雜湊。原3699709268 bytes，壓縮檔3446085832 bytes，SHA-256 `8c369a26329f94ea582efa02518954057ceb1b5c26e029902a6d30e0a942e04c`。已壓縮PNG多，預設XZ強度3封存成本偏高，主動停止首次未封口輸出，僅移除已確認的676984460 bytes不完整檔案；原輸入保持。工具新增可選`--xz-preset 0`，既有預設3及逐檔雜湊契約保持，本批改用0完成內建重驗。歷史來源與失敗收據不覆寫，原稿仍完整本機保存。
 - 獨立唯讀容器重驗4091份保存內容通過；46個目前引用及430份程式來源再次核對，舊工作區連結為0。delete重驗壓縮檔及原工作區逐檔雜湊後，只清理本批全量工作區，其他任務不動。最終工作清單verify通過，root-owned檔案與`.md`目錄皆0，本批容器無殘留。沿用既有image，沒有重建工具鏈。完整HD已推送，新版平台封包仍為下一交付閘門，現行tag、Release與影片保持。
+
+## 2026-10-17 全量HD三平台交付與影片
+
+- 使用者要求接續完成並打包完整版、release與推廣影片。路由命中版號、dist-all、影片及文件職責，沿復古重製技能與既有Go／macOS／Wine工具鏈；主機gh登入成功，遠端PRIVATE，工作樹起始乾淨。採v.1.0.3-20261017，保留舊版，依本專案既有full／release／promo／smoke契約。
+- 收尾工具增加完整HD正式收據的430份來源身分閘門，核對最後素材manifest／generation及832份資產數量；保留舊音樂與四檔精度修正的來源驗證分支。更新封包說明為13類HD，新圖長邊768，原規則與v3保持。
+- Linux／Windows執行檔及macOS universal完成，全cmd／internal回歸通過，vet保留兩則原有未具名欄位警示。六包組裝完成，固定seed1正常1046狀態／40PNG與前版完整trace相同；新程序重載13狀態／3PNG相同，完整v3只排除saved_at。原正常抽樣只執行一次，不新增原版oracle或自然全通關聲明。
+- 補本版同來源13個受控展示，另含世界與第三城地圖。首次展示器引用較早事件fixture，缺eventOutdoor；改用已保存的GUI最後fixture，沒有修改正式Go。最小kol-wine工具鏈缺xdpyinfo及xdotool，兩次均在遊戲執行前停止；依前版tool-images.json及實際能力檢查改用既有eob-remake-wine-verify:ubuntu-noble-20261008-r2，音訊沿eob-audio-capture:20261009-r3，沒有另建重複image。
+- 第一輪Linux引擎包HD啟動超過舊120秒驗證期限。35秒SIGQUIT堆疊位於PNG解碼／LoadHDTownFacades；正式程式仍430份不變。Wine展示初輪52畫格均產生，首HD花200.6秒，記憶體峰值觸及12GiB，結束時GLFW DestroyWindow Access denied。核對鎖定Ebitengine2.9.9的run.go明定RunGame須在main thread，展示器改由TestMain在主執行緒執行，沒有忽略關窗錯誤。驗證環境採GOMEMLIMIT=3GiB留驅動空間，冷載入期限依全量素材放寬，數值一色階及狀態閘門保持。Linux新展示13場景52畫格主執行緒通過，Windows及實際封包續驗；所有先前輸出保留於smoke各attempt目錄。
+- 修正後兩側13場景各52畫格及全部還原通過，EGA零差、HD最大1／255，模型與中文相同、缺字0。Linux實際full／release兩包的正常六人旅店、F9、F10、縮放、狀態與實際音訊／關閉後靜音通過；首次完整HD畫格就緒在受限容器量得約194秒，之後沿用快取。76秒1080p／25fps影片完成，12幕、原生HD字模、四首既有室內樂與雷聲，峰值−5.6dB，無指定長黑／長靜音，逐幕比例、中文、受控標記與版本目視通過。
+- 實際Windows ZIP首輪EGA／HD五狀態圖片及F9通過，但冷F10完成畫格前觸及12GiB cgroup上限，max256、oom_kill0，300秒事件等待中止。全部輸出保存為wine-package-attempt1；同一image、同一命令及同一封包，以16GiB且禁用swap乾淨重跑，不修改正式來源或一色階數值標準。此為容器資源驗證限制，尚不作Windows真機故障或硬體最低需求聲明。
+- 16GiB重驗兩個Windows ZIP的EGA／HD啟動、資料匯入、正常六人旅店、預設配樂、F9、F10往返、完整狀態雜湊及無存檔寫入皆通過，正常Ctrl+Q退出；cgroup峰值15369453568 bytes，max／oom／oom_kill皆0。實際AppImage對兩個ZIP二十組畫格EGA零差、HD最多1／255，Wine實際音訊非靜音、末段靜音通過。數值閘門未放寬，正式Go及資產未改。
+- 六包最終逐檔驗證通過，1744必要資源、版本、架構、ZIP CRC、LICENSE及引擎包素材deny-list合格；三個引擎包與SHA256SUMS.txt授權清單已固定。正式收據保存於release-v1.0.3-20261017，八張預覽縮至最長邊768並保留來源雜湊。HD工作項結案，工作清單改15開放／93完成，原版未知及真機項保持。首輪文件核實因README移除前版網址而觸發既有Release入口保護，補保留前版連結，不是產品回歸；重新核實及發布結果續記。
+- 工作清單重新verify通過，15開放／93完成及產生區塊同步。54份正式附件、八張縮圖、430份程式來源與本輪文件連結核對通過；十份工作腳本逐檔確認已保存後，只移除本輪release工作區與過期Pulse socket。root-owned檔案與`.md`目錄皆0，本輪Docker容器無殘留，沒有重建映像檔或清理其他專案資源。提交與private發布續記。

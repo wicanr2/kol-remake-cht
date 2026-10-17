@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "packages": [
+    {
+      "bundle": "full",
+      "platform": "linux-x86_64",
+      "status": "PASS",
+      "full_payload_hashes_checked": true
+    },
+    {
+      "bundle": "full",
+      "platform": "windows-amd64",
+      "entries": 1859,
+      "status": "PASS"
+    },
+    {
+      "bundle": "full",
+      "platform": "macos-universal",
+      "entries": 1867,
+      "status": "PASS"
+    },
+    {
+      "bundle": "release",
+      "platform": "linux-x86_64",
+      "status": "PASS",
+      "full_payload_hashes_checked": false
+    },
+    {
+      "bundle": "release",
+      "platform": "windows-amd64",
+      "entries": 295,
+      "status": "PASS"
+    },
+    {
+      "bundle": "release",
+      "platform": "macos-universal",
+      "entries": 303,
+      "status": "PASS"
+    }
+  ],
+  "windows_real_machine": false,
+  "macos_execution": false,
+  "host_fuse": false,
+  "cross_platform_numeric_status": "PASS",
+  "numeric_gate_met": true,
+  "technical_gate_met": true,
+  "publication_authorized": true,
+  "ready_for_publication": true
+}

@@ -26,7 +26,7 @@ def quitgame(proc,w):
     proc.wait(timeout=10)
     subprocess.run(['xdotool','keyup','q','ctrl'],check=True,timeout=10)
     assert proc.returncode==0
-def record(name,body,load=None,missing=False,scene='game',extra=()):
+def record(name,body,load=None,missing=False,scene='game',extra=(),ready_seconds=30,ready_frame=False):
     log=OUT/(name+'.log');wav=OUT/(name+'.wav');argv=[str(OUT/'kol'),'-scene','game','-lang','zh-Hant','-graphics','ega' if name=='title' else 'hd','-scale','1','-seed','1','-log-input','-text-log',str(OUT/(name+'-text.jsonl')),'-save',str(OUT/(name+'-save.json'))]
     argv[argv.index('-scene')+1]=scene
     argv+=list(map(str,extra))
@@ -35,10 +35,23 @@ def record(name,body,load=None,missing=False,scene='game',extra=()):
     commands=[]
     with (OUT/(name+'-capture.log')).open('w') as stream,log.open('w') as glog:
         recorder=subprocess.Popen(['ffmpeg','-y','-nostdin','-v','error','-f','pulse','-sample_rate','44100','-channels','2','-i','kol_music.monitor','-c:a','pcm_s16le',str(wav)],stdout=stream,stderr=stream)
-        time.sleep(.3);proc=subprocess.Popen(argv,cwd=ROOT,stdout=glog,stderr=subprocess.STDOUT)
+        time.sleep(.3);started=time.monotonic();proc=subprocess.Popen(argv,cwd=ROOT,stdout=glog,stderr=subprocess.STDOUT)
         def text():return log.read_text()
         try:
-            w=waitfor(lambda: window(proc,text),30)
+            w=waitfor(lambda: window(proc,text),ready_seconds)
+            window_ready=time.monotonic()-started
+            if ready_frame:
+                def painted():
+                    assert proc.poll() is None,text()
+                    geometry=subprocess.check_output(['xdotool','getwindowgeometry','--shell',str(w)],text=True)
+                    fields=dict(re.findall(r'^(X|Y|WIDTH|HEIGHT)=(-?\d+)$',geometry,re.M))
+                    cmd=['ffmpeg','-v','error','-f','x11grab','-video_size',fields['WIDTH']+'x'+fields['HEIGHT'],
+                         '-i',os.environ['DISPLAY']+'+'+fields['X']+','+fields['Y'],'-frames:v','1',
+                         '-vf','scale=64:40','-pix_fmt','rgb24','-threads','1','-f','rawvideo','pipe:1']
+                    pixels=np.frombuffer(subprocess.check_output(cmd,stderr=subprocess.DEVNULL,timeout=15),dtype=np.uint8)
+                    return len(pixels)==64*40*3 and np.count_nonzero(pixels.reshape(-1,3).max(1)>8)>64*40*.01
+                waitfor(painted,ready_seconds)
+            first_frame=time.monotonic()-started
             xdo('windowfocus','--sync',w);body(proc,w,text,commands)
             time.sleep(1.7);quitgame(proc,w);time.sleep(.4)
         finally:
@@ -49,7 +62,7 @@ def record(name,body,load=None,missing=False,scene='game',extra=()):
         assert f.getnchannels()==2 and f.getframerate()==44100 and f.getsampwidth()==2
         samples=np.frombuffer(f.readframes(f.getnframes()),dtype='<i2').reshape(-1,2)
     peak=int(np.max(np.abs(samples.astype(np.int32))));assert peak<32767
-    report=dict(name=name,command=argv,markers=commands,seconds=len(samples)/44100,peak=peak,sha256=hashlib.sha256(wav.read_bytes()).hexdigest(),no_save_written=True)
+    report=dict(name=name,command=argv,markers=commands,seconds=len(samples)/44100,peak=peak,sha256=hashlib.sha256(wav.read_bytes()).hexdigest(),no_save_written=True,window_ready_seconds=window_ready,first_frame_ready_seconds=first_frame)
     (OUT/(name+'-record.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     checks.append(report);return report,samples,log.read_text()
 

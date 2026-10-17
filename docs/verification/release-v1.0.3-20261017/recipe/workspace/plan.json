@@ -1,0 +1,19 @@
+{
+  "version": "v.1.0.3-20261017",
+  "source_base": "6efba84926cecaf7bbc1b90db8d4cee1522fc589",
+  "scope": "three-platform full and engine packages, one normal sample, 13 controlled HD classes, original chamber-music promo",
+  "tools": [
+    "audit-evidence.py",
+    "build-hd-scenes.sh",
+    "check-hd-scenes.py",
+    "diagnose-hd-startup.py",
+    "finalize-evidence.py",
+    "reproduction.json",
+    "run-hd-scenes-wine.sh",
+    "run-package-pixels.sh",
+    "update-docs.py"
+  ],
+  "formal_entry": "docs/verification/release-v1.0.3-20261017.md",
+  "output": "dist-all/v.1.0.3-20261017",
+  "status": "sealed"
+}

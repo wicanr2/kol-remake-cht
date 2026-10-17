@@ -25,7 +25,7 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n')
 
 
-def run(argv, cwd, log, timeout=120):
+def run(argv, cwd, log, timeout=360):
     with log.open('w') as stream:
         subprocess.run(list(map(str, argv)), cwd=cwd, stdout=stream,
                        stderr=subprocess.STDOUT, check=True, timeout=timeout)
@@ -96,7 +96,7 @@ def linux():
     write(base / 'release-smoke.json', dict(status='PASS', version=VERSION, imported_files=len(required),
           source=sha(image), invalid_import_rejected_before_writing=True, ega_hd_startup=True))
     # 同一容器內使用剛匯入的引擎包，錄製full／release的實際音訊與控制。
-    run(['python3', ROOT/'tools/verify_package_controls.py'], ROOT, base/'linux-controls.log', timeout=180)
+    run(['python3', ROOT/'tools/verify_package_controls.py'], ROOT, base/'linux-controls.log', timeout=1300)
 
 
 def winpath(path):
@@ -137,7 +137,7 @@ def windows():
                 '-save', winpath(Path('/tmp') / f'{bundle}-gui-save.json'), '-log-input'],
                 cwd=engine, stdout=stream, stderr=subprocess.STDOUT)
             def wait_for(text):
-                for _ in range(150):
+                for _ in range(3000):
                     if text in log.read_text():
                         return
                     assert proc.poll() is None, log.read_text()

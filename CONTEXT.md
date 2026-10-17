@@ -1,17 +1,16 @@
 # 《武士傳說》重製目前狀態
 
 更新日期：2026-10-17。收尾改採 SPEC-040 受控場景與中文畫面驗收，指定場景已通過。
-現行交付為`v.1.0.2-20261013`，三平台六包與76秒影片完成，[private GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)已發布。使用者維持一色階，固定整數雙線性取樣修正後，正式三環境三十組及實際封包二十組皆EGA零差、HD最多一色階。正常1046狀態及13新程序重載、F9／F10、實際音訊與六包完整性通過。使用者最終以go解除暫緩，四個遠端附件大小及SHA-256相符；tag固定指向46a01f11。首次兩色階失敗保留，完整版與影片留本機。入口：[交付收據](docs/verification/release-v1.0.2-20261013.md)。
-開發版目前13類圖形及操作介面已接入1920×1200 HD，限定CONFORMED；來源、場景及限制見[完整HD驗收](docs/verification/hd-full-runtime-20261017.md)。
-遊戲內「畫面 F10」設定已核准並接入正式遊戲，切換與正常住宿存讀檔驗收通過。
-操作介面及人物頭像已獲使用者「ok 同意開工」核准並[接入正式Go呈現](docs/verification/hd-interface-runtime-20261012.md)，SPEC-039此批有限CONFORMED。此批已隨v.1.0.2-20261013交付，前版保持。
-四首原創室內樂已由使用者接受並接入開發版；[配樂收據](docs/verification/hd-music-runtime-20261013.md)為有限CONFORMED。配樂預設開啟，F9及下緣按鈕獨立切換，換EGA／HD持續播放；本次遊玩有效，不改v3。標題／旅店跨輪、準備世界至戰鬥、缺件、正常住宿保存及七狀態重載通過。已隨v.1.0.2-20261013交付。
+現行本機交付為`v.1.0.3-20261017`，三平台六包與76秒1080p影片驗收完成，private Release四附件待發布。入口：[本版交付](docs/verification/release-v1.0.3-20261017.md)。舊版tag與Release保持。
+本版包含目前玩家路徑13類HD圖形及操作頁、四首原創室內樂、F9與F10。正式430份Go／module及832份HD資產保持完整HD驗收來源；中文與場景依SPEC-040，不宣稱自然全任務通關或新增原版parity。
 本檔保存目前狀態、有效決策與下一閘門；歷程見 [WORKLOG.md](WORKLOG.md)，
 可執行項目及完成條件以 [docs/worklist.json](docs/worklist.json) 為準。
 
 ## 目前作業方向
 
-目前目標為完成全量HD。**13類圖形與操作介面的開發版接入已通過受控驗收**，新版平台封包為下一交付閘門，工作清單保留該項。沿使用者核准的手繪、1920×1200、原位置及遊戲內F10，不重新開啟已確認風格。正式規則、角色數值與kol-save-v3保持。
+新版六包、76秒影片及資料匯入驗收通過；唯一現行交付根目錄為`dist-all/v.1.0.3-20261017/`。完整版與影片只留本機，發布範圍限private repo的三平台引擎包及SHA256SUMS.txt。
+
+全量HD及新版平台封包已完成本輪驗收。**13類圖形與操作介面已接入本版**，工作清單的HD交付項結案。沿使用者核准的手繪、1920×1200、原位置及遊戲內F10，不重新開啟已確認風格。正式規則、角色數值與kol-save-v3保持。
 
 使用者要求HD素材commit＋push至目前private儲存庫，並決定遊戲素材也縮小，所有後續新圖最長邊768。全地圖八組336區已完成，新增252個768×768區塊減少57.87%容量，既有第一、二城84張原圖保持。事件33圖與最後65張天候、傷勢、標記、戰場、片頭及書封均已接入；完整生成稿與縮圖分開記錄，原稿只留本機。
 
@@ -19,18 +18,18 @@
 
 [全地圖](docs/verification/hd-all-maps-runtime-20261017.md)、[世界與戰鬥事件](docs/verification/hd-scene-events-runtime-20261017.md)及[13類覆蓋表](docs/verification/hd-completion-20261014.md#目前覆蓋)保存各批範圍。README加入八組768×480正式同場景對比，原版DOS／HD七段結局比較保持。自訂點陣、地圖索引、資料遮罩不重繪；TWN0PICS24沒有目前typed顯示路由，只驗素材，不新增玩法。
 
-現行交付、tag與Release保持`v.1.0.2-20261013`。從新開局正常完成全部任務至結局未驗，本輪受控驗收不宣稱新增原版parity或平台真機。完整原稿、全部畫格與失敗紀錄由[全量工作入口](docs/verification/local/hd-full-20261016/plan.json)追蹤，完整證據沿[保存契約](docs/verification/retained-evidence.md)封存並核對，原工作區清理。
+舊版`v.1.0.2-20261013`的交付、tag與Release保持。從新開局正常完成全部任務至結局未驗，本輪受控驗收不宣稱新增原版parity或平台真機。完整原稿、全部畫格與失敗紀錄由[全量工作入口](docs/verification/local/hd-full-20261016/plan.json)追蹤，完整證據沿[保存契約](docs/verification/retained-evidence.md)封存並核對，原工作區清理。
 
 ## 目前狀態表
 
 | 項目 | 現況與證據 | 限制 |
 |---|---|---|
 | 匹配原版來源 | [持續來源還原](docs/re/matching-decompilation.md#持續c來源還原)：228純C74428、378 LIB44396、182混合75345 bytes。圖像／人物選擇／事件／分頁新增四函式4203，分列3701 C／502 ASM；十一個真實CODE物件、36項乾淨產物、116反例及原生packed雜湊通過 | 尚10函式、4999 CODE bytes，含41函式外bytes；DATA來源完整，12個未匹配試驗另列。原始C宣告／語意不唯一，四支完整來源保持 |
-| 正式來源 | 開發版430份Go／module、832份HD資產；[完整HD收據](docs/verification/hd-full-runtime-20261017/receipt.json)。現行發行來源另見[交付收據](docs/verification/release-v1.0.2-20261013/receipt.json) | 發行tag仍固定46a01f11，新版封包尚未重建 |
-| 最近測試 | 全internal與cmd／UI分階段通過，最終UI與素材補驗通過；完整102場景、敵方修稿34場景及原生怪物2場景，中文缺字0、EGA往返零差、HD最多一色階、圖形回退0；實際120個F10保持模型 | SPEC-040受控場景及Linux Docker範圍；各階段來源分開記錄 |
+| 正式來源 | 430份Go／module、832份HD資產；程式SHA c1b5969e…，本版與[完整HD收據](docs/verification/hd-full-runtime-20261017/receipt.json)相同；[封包輸入](docs/verification/release-v1.0.3-20261017/build-inputs.json) | 正式規則與v3未改；收尾工具另有版本快照 |
+| 最近測試 | 全cmd／internal通過；一次正常1046狀態與13新程序重載，trace及完整v3排除saved_at相同；13場景跨平台52畫格與實際封包20組EGA零差、HD最多一色階；F9／F10與實際音訊通過 | SPEC-040受控場景、Linux容器與Wine；vet兩則原有警示保留 |
 | 長任務與保存 | 前版 [RE-291](docs/re/20261006-visibility-current-regression.md) 雙語11976長任務狀態及26新程序重載；完整v3只差saved_at | 屬前版來源，本輪未重跑；固定seed1、明示遭遇骰100，不是自然全旅程 |
 | 長任務畫面 | 40 張中 38 張保持；兩張逃離頁的差異只在戰場視圖，原圖保留 | 與移動快取修正的關係為強推論；沒有本頁原版 oracle |
-| 跨平台 | [現行交付驗收](docs/verification/release-v1.0.2-20261013.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal六包通過；實際AppImage及Wine兩個ZIP啟動、F9／F10與音訊通過，遠端四附件大小及SHA相符 | macOS未執行，Wine不是真機；主機FUSE與平台真機保持未驗 |
+| 跨平台 | [本版六包驗收](docs/verification/release-v1.0.3-20261017.md)：Linux AMD64、Windows AMD64、macOS Intel／ARM universal；實際AppImage及Wine兩個ZIP的啟動、匯入、F9／F10與音訊通過 | macOS未執行、Wine不是真機、主機FUSE未驗；首次HD載入成本見本版收據 |
 | 正常 AI 抽樣 | [反制掃描](docs/re/20261006-ai-counter-normal.md)、[成功側翼](docs/re/20261006-clockwise-flank-normal.md)、[成功撤退](docs/re/20261006-flee-normal.md) 已有有限正常案例 | 其他戰局、困住撤退及成功怪物拾取仍開放 |
 | 最新原版試驗 | RE-295 真保存角色正常出城，seed1、169延伸鍵、170狀態；與現行首次紮營及111個同期世界標籤／日期框相符 | 本上限內沒有自然騎走問答；紮營後26個方向鍵原版忽略、現行換日，完整野外對拍未通過 |
 | 怪物拾取證據 | [RE-292](docs/re/20261006-monster-pickup-low-strike.md)：883狀態、10回合、2264次自然亂數；完整16-byte掉物1筆 | 未取得站立空手怪物或成功拾取，不延長同場挑結果 |
@@ -40,9 +39,9 @@
 | 首版資產 | [EGA 重建收據](docs/verification/finish-audit-20261003/receipt.json)：30 組邏輯 archive、1022 payload 已分類；40 組 manifest、773 PNG 雜湊符合現行 | CGA／Hercules 是已決定的後續選項，不重新開啟 EGA 完成項 |
 | 中文與版面 | [受控場景驗收](docs/verification/controlled-scenes-20261011.md)通過目前登記畫面，含商店、訓練、馬廄、法術、任務與七段結局；翻譯缺項0，6115字串缺字0 | 姓名、玩家輸入與精靈語法術名依現行契約保留；未聲明所有動態分支已驗 |
 | 正常購馬 | [RE-293](docs/re/20261006-steed-trade-normal.md)：合法名冊單人、輕型戰馬400換馱馬50、住宿60與真正保存重載，兩版終值2490；坐騎16-byte、移動率10及中文名牌已核對 | 正式版仍合併韁繩訊息、先換馬並回清單；原版分段確認與回招呼頁的原型待選，DRAFT未接正式 |
-| HD | 目前玩家路徑13類圖形及操作介面已接入並限定CONFORMED，含地圖、天候、戰場、傷勢、標記、片頭、翻書、事件及所有共用操作頁；[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋)、[完整驗收](docs/verification/hd-full-runtime-20261017.md) | 新版平台封包下一閘門；原版oracle未知及未抽測玩法邊界另列，不阻塞已驗HD圖形；自訂點陣與資料PNG保持 |
-| 交付 | `v.1.0.2-20261013`：三平台full／release、76秒1080p影片；private Release已發布，四附件完整性與46a01f11 tag核對通過，入口[本版收據](docs/verification/release-v1.0.2-20261013.md)及[收尾工具](tools/closeout_release.py) | 完整版及影片僅本機；release需匯入合法資料；無真機驗收 |
-| GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，16開放／92已核實完成不變 |
+| HD | 目前玩家路徑13類圖形及操作介面已接入並限定CONFORMED，含地圖、天候、戰場、傷勢、標記、片頭、翻書、事件及所有共用操作頁；[13類覆蓋](docs/verification/hd-completion-20261014.md#目前覆蓋)、[完整驗收](docs/verification/hd-full-runtime-20261017.md) | 本版六包通過；原版oracle未知及未抽測玩法邊界另列，不阻塞已驗HD圖形；自訂點陣與資料PNG保持 |
+| 交付 | `v.1.0.3-20261017`：三平台full／release、76秒1080p影片；[交付收據](docs/verification/release-v1.0.3-20261017.md)及[收尾工具](tools/closeout_release.py) | private四附件待發布；完整版及影片本機；無真機驗收 |
+| GitHub Issue | 2026-10-14關閉十一個已有完成證據的Issue，回讀皆completed；[收尾收據](docs/verification/release-v1.0.2-20261013/issue-closeout-20261014.json) | 遠端十三項保持開放；本機另含未建Issue項，本輪HD本機項結案；遠端Issue不變 |
 
 上一輪開發候選 Linux 執行檔 SHA-256：
 `2a885b9a37e884d1830010f7ccb1051b030fe4b14c678fbb71a25955a745fd66`。
@@ -80,9 +79,9 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 - **未完成項的權威是 `docs/worklist.json`**，不是 `WORKLIST.md` 的 checkbox。
   核實用 `tools/run_python_tool.sh tools/worklist.py verify`；`WORKLIST.md` 的
   那一節與這幾行數字都由 `render` 產生。
-- 目前 **16 條未完成**（12 條沒有機器訊號、標 `manual`），
-  另有 92 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
-  未完成項的 verify 種類：`manual` 12、`present` 4。
+- 目前 **15 條未完成**（11 條沒有機器訊號、標 `manual`），
+  另有 93 條已核實完成——後者跑的是回歸檢查，訊號不見了就開口。
+  未完成項的 verify 種類：`manual` 11、`present` 4。
 <!-- worklist:stats:end -->
 
 下表列出仍開放的工作。本機封包、登記中文場景及GitHub Release已依各自收據結案。
@@ -106,10 +105,10 @@ RE-290 組合候選的雙語 753 點、13554 角色記錄、50 語意欄及 seed
 | ui-details-unverified | 補五處UI未驗邊界及RE-295紮營確認；送禮選人版面、空白法術名、類型0明細與[馬廄確認原型](workplace/steed-trade-normal-20261006/review.html)仍待原問題回答 |
 | mouse-original-semantics | 回答兩次點擊、右鍵、世界點擊三處原有取捨，依選擇實作與驗收 |
 | character-creation-boundary-parity | 重名政策及滿槽／名稱邊界確認，SPEC-005／023 審查後正式修正 |
-| hd-art-ui | 13類圖形及操作頁已限定CONFORMED；依[完整HD收據](docs/verification/hd-full-runtime-20261017.md)重建並驗證新版平台封包，真機仍依獨立項目 |
+| hd-art-ui | 已完成13類HD、中文、F10、保存回歸及本版六包驗收；真機仍依獨立項目 |
 
 HD採已核准的1920×1200原比例，各批完成範圍以目前狀態表及正式收據為準。
-全量圖形接入已通過；新版封包依[SPEC-039](docs/spec/039-hd-art-ui.md)交付閘門，不重新開啟已確認選項。
+全量圖形與新版封包已依[SPEC-039](docs/spec/039-hd-art-ui.md)交付閘門通過，不重新開啟已確認選項。
 [送禮選人](workplace/gift-recipient-layout-20261005/review.html)仍依原DRAFT閘門處理；
 [住宅告示](docs/re/20261006-residence-sign-prototype.md)的兩行「請勿／踐踏草坪」已核准並接入本版。
 

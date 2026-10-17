@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "linux": "ELF64",
+  "windows": "AMD64 PE",
+  "macos": [
+    "arm64",
+    "x86_64"
+  ],
+  "arm64_ad_hoc_signature": true,
+  "macos_execution": false
+}

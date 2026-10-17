@@ -1,0 +1,141 @@
+{
+  "version": "v.1.0.3-20261017",
+  "files": [
+    {
+      "path": "inn-hd-controls.png",
+      "source": "dist-all/v.1.0.3-20261017/smoke/linux-full-controls/inn-hd.png",
+      "source_sha256": "5f971351fd99bc4b69872e82f28a14a653ef0861bb8235d45fa43c5920c85f35",
+      "source_dimensions": [
+        1920,
+        1200
+      ],
+      "dimensions": [
+        768,
+        480
+      ],
+      "sha256": "ce1725175bb51d0b7a2ce70a48be56b09994ccde63e6ab3345d31c0c42c8e06a",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "actual package",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "path": "game-menu-ega.png",
+      "source": "dist-all/v.1.0.3-20261017/smoke/linux-full-controls/menu-ega.png",
+      "source_sha256": "bb57726eac0019ee4c5ae3abb24de8bc0f8dfae3d238650d5f41bc6dec9343ac",
+      "source_dimensions": [
+        1920,
+        1200
+      ],
+      "dimensions": [
+        768,
+        480
+      ],
+      "sha256": "276ba741accfcbab7ab27c8599ca39e735142a67db055fad23a0823dbde46b18",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "actual package",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "path": "game-menu-hd.png",
+      "source": "dist-all/v.1.0.3-20261017/smoke/linux-full-controls/menu-hd.png",
+      "source_sha256": "017f349b6a69429c57d8003ad7e87268d9f98aabf180de52e7337aa9f2b80138",
+      "source_dimensions": [
+        1920,
+        1200
+      ],
+      "dimensions": [
+        768,
+        480
+      ],
+      "sha256": "b228bd5fc4942cf1ea71c9653954189e2a7d970ce10ea9d37d95a5b521fb1f28",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "actual package",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "path": "battle-ega.png",
+      "source": "dist-all/v.1.0.3-20261017/smoke/hd-scenes-linux/motion-runtime/battle-08-map-16-first-ega.png",
+      "source_sha256": "3b00bf9272a3232371074f49d86eb21ee599b2f7bf141bce6f289fa2e9a646b3",
+      "source_dimensions": [
+        960,
+        600
+      ],
+      "dimensions": [
+        768,
+        480
+      ],
+      "sha256": "1680f6065d9c80101ca19c7dceb618ad25ef2129b5e346b9a4b91d6b126cb832",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "controlled renderer",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "path": "battle-hd.png",
+      "source": "dist-all/v.1.0.3-20261017/smoke/hd-scenes-linux/motion-runtime/battle-08-map-16-first-hd.png",
+      "source_sha256": "514e66bec47ff4ccd5e4d2cc7a69a095524ce7c10bd2167a1c42d49bd97d5f6f",
+      "source_dimensions": [
+        1920,
+        1200
+      ],
+      "dimensions": [
+        768,
+        480
+      ],
+      "sha256": "1fb47dfbd43dda3556b92214b56b4c429bd0d16ff481943ea379d98c717324af",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "controlled renderer",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "path": "world-hd.png",
+      "source": "dist-all/v.1.0.3-20261017/smoke/hd-scenes-linux/motion-runtime/map-world-first-hd.png",
+      "source_sha256": "03afda31b555581490af3aaf9af388a28f89727107f925a0e275a51a19e6891a",
+      "source_dimensions": [
+        1920,
+        1200
+      ],
+      "dimensions": [
+        768,
+        480
+      ],
+      "sha256": "9b0cc0ae798eb1a824171b0a266fcbef507a2ccdd85c117585fd8d4f8628c2c0",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "controlled renderer",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "path": "town3-hd.png",
+      "source": "dist-all/v.1.0.3-20261017/smoke/hd-scenes-linux/motion-runtime/map-town3-first-hd.png",
+      "source_sha256": "dc420dbfca8f090aa694be43bd6c952bd4fd026dbc6121b57c84e318917c020f",
+      "source_dimensions": [
+        1920,
+        1200
+      ],
+      "dimensions": [
+        768,
+        480
+      ],
+      "sha256": "8bf46f2dc40f3535fe3d3471f32ee1a19154a3e2d859e3ea9ea7564429e1dc95",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "controlled renderer",
+      "rights": "private GitHub 可保存；無公開散布權"
+    },
+    {
+      "path": "promo-poster.png",
+      "source": "dist-all/v.1.0.3-20261017/promo/frame-02.png",
+      "source_sha256": "941647549c3108e09ce12cb1f81283dd07b934f9b4360352b9542e5763415109",
+      "source_dimensions": [
+        1920,
+        1080
+      ],
+      "dimensions": [
+        768,
+        432
+      ],
+      "sha256": "645542e55f28600698a1638b10f8f5104513d443b6ecbfe481bf9c6aa8c511b0",
+      "tool": "Pillow 9.4.0 / LANCZOS",
+      "evidence": "decoded promo frame",
+      "rights": "private GitHub 可保存；無公開散布權"
+    }
+  ]
+}

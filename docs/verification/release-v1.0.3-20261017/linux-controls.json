@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.3-20261017",
+  "runs": [
+    {
+      "name": "package-full",
+      "command": [
+        "/out/smoke/linux-full-controls/kol",
+        "-scene",
+        "game",
+        "-lang",
+        "zh-Hant",
+        "-graphics",
+        "hd",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-log-input",
+        "-text-log",
+        "/out/smoke/linux-full-controls/package-full-text.jsonl",
+        "-save",
+        "/out/smoke/linux-full-controls/package-full-save.json",
+        "-load",
+        "/out/smoke/linux-full-controls/inputs/save.json"
+      ],
+      "markers": [
+        {
+          "default_music_on": true,
+          "normal_inn": true,
+          "f9": true,
+          "f10": true,
+          "resized_mouse": true,
+          "state_sha256": "881faa0d2a44c4fb0cddac5a6242ca1f3da0c91b38892ccdf084e091e2d6305b",
+          "original_parity_claimed": false
+        }
+      ],
+      "seconds": 224.95006802721088,
+      "peak": 12894,
+      "sha256": "dd7711cc9f4cfbe5a173b4c07fa7541474bf430d319826989e33e4073e9333d5",
+      "no_save_written": true,
+      "window_ready_seconds": 157.90679461183026,
+      "first_frame_ready_seconds": 193.91295816376805,
+      "status": "PASS",
+      "bundle": "full",
+      "version": "v.1.0.3-20261017"
+    },
+    {
+      "name": "package-release",
+      "command": [
+        "/out/smoke/linux-release-controls/kol",
+        "-scene",
+        "game",
+        "-lang",
+        "zh-Hant",
+        "-graphics",
+        "hd",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-log-input",
+        "-text-log",
+        "/out/smoke/linux-release-controls/package-release-text.jsonl",
+        "-save",
+        "/out/smoke/linux-release-controls/package-release-save.json",
+        "-load",
+        "/out/smoke/linux-release-controls/inputs/save.json"
+      ],
+      "markers": [
+        {
+          "default_music_on": true,
+          "normal_inn": true,
+          "f9": true,
+          "f10": true,
+          "resized_mouse": true,
+          "state_sha256": "881faa0d2a44c4fb0cddac5a6242ca1f3da0c91b38892ccdf084e091e2d6305b",
+          "original_parity_claimed": false
+        }
+      ],
+      "seconds": 178.1902947845805,
+      "peak": 12297,
+      "sha256": "fa551dba4f676fad2aaf3061709b2ce3cdaa0c84e5a7559b9f7daa9541bc8036",
+      "no_save_written": true,
+      "window_ready_seconds": 137.4487577038817,
+      "first_frame_ready_seconds": 152.10566410701722,
+      "status": "PASS",
+      "bundle": "release",
+      "version": "v.1.0.3-20261017"
+    }
+  ],
+  "host_fuse": false,
+  "device": "PulseAudio null sink monitor; actual package Ebitengine/Oto output"
+}

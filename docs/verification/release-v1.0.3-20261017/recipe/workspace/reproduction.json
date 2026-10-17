@@ -1,0 +1,30 @@
+{
+  "version": "v.1.0.3-20261017",
+  "source_base": "6efba84926cecaf7bbc1b90db8d4cee1522fc589",
+  "production_program_sha256": "c1b5969e75604926a9dead27d65de6db1923b2923d2b81f211254e5e9a7634ff",
+  "instructions": [
+    "Read docs/verification/release-v1.0.3-20261017.md and tool-images.json. Use the final release tag for the checked-in tools. Program inputs remain identical to source_base; build-inputs.json lists every hash.",
+    "Use a fresh output directory owned by UID/GID 1000:1000. Keep original inputs read-only. Mount the project at /src:ro and the new output at /out:rw. All Docker calls use --rm --network none, bounded outer timeout, memory, CPU and pids limits.",
+    "The original staged release tools were copied during prepare. Their hashes are stored separately as staged_release_tool_snapshots in build-inputs.json; final tool snapshots are in recipe/.",
+    "Controlled capture helpers are in recipe/workspace/. Pass build-hd-scenes.sh to bash inside the package image; it reads the retained fixtures referenced by the formal HD receipts. Run native and Wine capture using the generated main-thread driver, then check-hd-scenes.py. These helpers do not ship in packages.",
+    "The normal sample is predeclared with seed 1 and runs once. Do not replace failed samples with a different seed. Full trace and v3 equality are checked by the existing sampler.",
+    "After both actual package controls finish, run pixels, compose the movie, inspect all twelve decoded frames, create the four-attachment authorization manifest, then run closeout_release.py verify.",
+    "The authoritative raw evidence, failures, capture audio, full frame sets and all exact commands recorded by runtime scripts remain local under dist-all/v.1.0.3-20261017/smoke/. Compact receipts and preview provenance are checked in.",
+    "This records a reproducible workflow and pinned inputs. ZIP timestamps and container run times are not a claim of byte-identical archives."
+  ],
+  "phases": [
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "python3 /src/tools/closeout_release.py prepare --version v.1.0.3-20261017 --git-head 6efba84926cecaf7bbc1b90db8d4cee1522fc589"},
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "python3 /src/tools/closeout_release.py native --version v.1.0.3-20261017"},
+    {"image": "kol-osxcross-go:20261007-r1", "command": "bash /src/tools/closeout_macos.sh"},
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "python3 /src/tools/closeout_release.py tests --version v.1.0.3-20261017"},
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "python3 /src/tools/closeout_release.py assemble --version v.1.0.3-20261017"},
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "bash /src/tools/run_release_sample.sh"},
+    {"image": "eob-audio-capture:20261009-r3", "command": "bash /src/tools/run_release_linux.sh", "memory": "12GiB"},
+    {"image": "eob-audio-capture:20261009-r3", "command": "bash /src/tools/capture_wine_audio.sh", "memory": "1GiB", "concurrent_with": "run_release_wine.sh"},
+    {"image": "eob-remake-wine-verify:ubuntu-noble-20261008-r2", "command": "bash /src/tools/run_release_wine.sh", "memory": "16GiB", "memory_swap": "16GiB", "env": {"GOMEMLIMIT": "3GiB", "GOMAXPROCS": "3"}},
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "python3 /src/tools/verify_release_runtime.py pixels", "requires": "bounded Xvfb owner and ready display", "memory": "12GiB", "env": {"GOMEMLIMIT": "3GiB", "GOMAXPROCS": "3"}},
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "python3 /src/tools/compose_release_promo.py"},
+    {"image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1", "command": "python3 /src/tools/closeout_release.py verify --version v.1.0.3-20261017"}
+  ],
+  "publication": {"repo": "wicanr2/kol-remake-cht", "visibility": "private", "upload": "three release engine packages and release/SHA256SUMS.txt only", "local_only": ["full", "promo"], "old_tags_immutable": true}
+}

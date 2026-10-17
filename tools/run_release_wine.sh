@@ -3,8 +3,8 @@
 set -euo pipefail
 test -f /.dockerenv
 export DISPLAY=:99 WINEPREFIX=/tmp/kol-wine WINEDEBUG=-all WINEDLLOVERRIDES='mscoree,mshtml=' PULSE_SERVER=unix:/out/smoke/wine-pulse/native PULSE_SINK=kol_wine
-mkdir -p /tmp/kol-home "$WINEPREFIX"
-export HOME=/tmp/kol-home
+export XDG_CACHE_HOME=/tmp/kol-wine-cache
+mkdir -p "$XDG_CACHE_HOME" "$WINEPREFIX"
 Xvfb :99 -screen 0 1920x1200x24 -nolisten tcp >/out/smoke/xvfb-wine.log 2>&1 & xvfb=$!
 test ! -f /sys/fs/cgroup/memory.events || cat /sys/fs/cgroup/memory.events >/out/smoke/wine-memory-before.txt
 trap 'test ! -f /sys/fs/cgroup/memory.events || cat /sys/fs/cgroup/memory.events >/out/smoke/wine-memory-after.txt; test ! -f /sys/fs/cgroup/memory.peak || cat /sys/fs/cgroup/memory.peak >/out/smoke/wine-memory-peak.txt; touch /out/smoke/wine-audio-done; wineserver -k 2>/dev/null || true; kill "$xvfb" 2>/dev/null || true' EXIT

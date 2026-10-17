@@ -4,12 +4,12 @@
 Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用 Ogg Vorbis。標題雷聲已通過人耳驗收與[正常播放驗證](docs/verification/audio/README.md)。
 
 目前提供書本與建角、組隊、城鎮與世界探索、戰鬥、任務、結局及 kol-save-v3 保存。
-現行交付為 `v.1.0.2-20261013`，含三平台完整版、需匯入合法資料的 release 與本機推廣影片。
+現行交付為 `v.1.0.3-20261017`，含三平台完整版、需匯入合法資料的 release 與本機推廣影片。
 目前採[受控場景驗收](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血與提高攻擊，
 抵達指定場景後確認中文與畫面。登記場景已通過，結果見[驗收收據](docs/verification/controlled-scenes-20261011.md)。
 本版包含住宅告示、中文目錄、結局排版修正、HD介面與頭像、四首原創室內樂，以及遊戲內F9配樂與F10畫面切換。
 建立隊伍與[商店購買](docs/verification/player-path/town-shop-receipt.json)已有操作收據；七段結局已通過受控展示，
-從新開局正常完成全部任務至結局仍未驗證。開發版已完成13類畫面與操作介面的HD接入，見[完整驗收](docs/verification/hd-full-runtime-20261017.md)；新版三平台封包尚未重建。
+從新開局正常完成全部任務至結局仍未驗證。13類畫面與操作介面的HD已納入本版，見[完整HD驗收](docs/verification/hd-full-runtime-20261017.md)與[封包驗收](docs/verification/release-v1.0.3-20261017.md)。
 
 ## 遊戲背景
 
@@ -34,21 +34,22 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 
 ## 開始遊玩
 
-現行版本為 `v.1.0.2-20261013`，包含HD操作介面與頭像、四首原創室內樂、F9配樂及F10畫面切換。
-封包與限制見 [交付收據](docs/verification/release-v1.0.2-20261013.md)。
-正式交付根目錄為 [dist-all/v.1.0.2-20261013/](dist-all/v.1.0.2-20261013/)：
+現行版本為 `v.1.0.3-20261017`，包含完整HD圖形與操作介面、四首原創室內樂、F9配樂及F10畫面切換。
+封包與限制見 [交付收據](docs/verification/release-v1.0.3-20261017.md)。
+正式交付根目錄為 [dist-all/v.1.0.3-20261017/](dist-all/v.1.0.3-20261017/)：
 
 | 平台 | 檔案 | 開啟方式 |
 |---|---|---|
-| Linux | [完整版 AppImage](dist-all/v.1.0.2-20261013/full/kol-v.1.0.2-20261013-full-linux-x86_64.AppImage) | `chmod +x` 後執行；沒有 FUSE 可加 `--appimage-extract-and-run` |
-| Windows AMD64 | [完整版 ZIP](dist-all/v.1.0.2-20261013/full/kol-v.1.0.2-20261013-full-windows-amd64.zip) | 解壓後開啟 `kol.exe`；已通過 Wine 啟動與切換 |
-| macOS ARM64／Intel | [完整版 universal ZIP](dist-all/v.1.0.2-20261013/full/kol-v.1.0.2-20261013-full-macos-universal.zip) | 開啟 `武士傳說.app`；只完成建置與結構驗收 |
+| Linux | [完整版 AppImage](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-linux-x86_64.AppImage) | `chmod +x` 後執行；沒有 FUSE 可加 `--appimage-extract-and-run` |
+| Windows AMD64 | [完整版 ZIP](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-windows-amd64.zip) | 解壓後開啟 `kol.exe`；已通過 Wine 啟動與切換 |
+| macOS ARM64／Intel | [完整版 universal ZIP](dist-all/v.1.0.3-20261017/full/kol-v.1.0.3-20261017-full-macos-universal.zip) | 開啟 `武士傳說.app`；只完成建置與結構驗收 |
 
-`full` 已含遊戲、HD介面與配樂必要資料，只留本機。[release](dist-all/v.1.0.2-20261013/release/) 是三平台引擎包，
+`full` 已含遊戲、HD介面與配樂必要資料，只留本機。[release](dist-all/v.1.0.3-20261017/release/) 是三平台引擎包，
 需先以包內工具匯入合法持有、已抽取且符合雜湊的資料；說明見各包 `README.txt`。
-三平台引擎包及校驗碼已發布至 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)，儲存庫維持 private。
-[76 秒推廣影片](dist-all/v.1.0.2-20261013/promo/kol-v.1.0.2-20261013-promo.mp4)
-使用本版抽樣與遊戲內切換的新畫格，也只留本機。檔案與 SHA-256 見交付根目錄的 `SHA256SUMS.json`。
+三平台引擎包及校驗碼的發布入口為 [GitHub Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.3-20261017)，儲存庫維持 private。
+[前版 Release](https://github.com/wicanr2/kol-remake-cht/releases/tag/v.1.0.2-20261013)保留。
+[76 秒推廣影片](dist-all/v.1.0.3-20261017/promo/kol-v.1.0.3-20261017-promo.mp4)
+使用本版旅店、遊戲內切換及明示受控HD場景的新畫格，也只留本機。檔案與 SHA-256 見交付根目錄的 `SHA256SUMS.json`。
 嚴格原版一致性與平台真機驗收另列後續研究，
 目前狀態以 [CONTEXT.md](CONTEXT.md) 與 [工作清單](WORKLIST.md) 為準。
 
@@ -83,26 +84,26 @@ macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設�
 ### HD 畫面
 
 HD採1920×1200原比例，包含核准的操作介面、原生中文字、六人肖像與旅店老闆頭像。
-旅店與設定截圖來自現行發行包。開發版另已補齊地圖、戰場、傷勢、天候、片頭及事件，以下對比分別標明來源。
+旅店與設定截圖來自本版實際AppImage，縮圖最長邊768。13類圖形及操作頁均已納入本版；下方各批對比保留原驗收來源。首次載入完整HD素材需要較長時間，之後切換沿用快取。
 
 手繪旅店門面與六人隊伍：
 
 ![HD 旅店門面、六人肖像與操作介面，1920×1200](docs/verification/hd-interface-runtime-20261012/door-hd.png)
 
-![本版HD旅店頭像、原生中文字與配樂控制](docs/verification/release-v1.0.2-20261013/inn-hd-controls.png)
+![本版HD旅店頭像、原生中文字與配樂控制](docs/verification/release-v1.0.3-20261017/inn-hd-controls.png)
 
-| 戰鬥資訊框的 HD 人物 | 遊戲內 HD 畫面設定 |
+| HD 戰場、傷勢與操作介面 | 遊戲內 HD 畫面設定 |
 |---|---|
-| ![戰鬥資訊框與七個HD指令](docs/verification/hd-interface-runtime-20261012/battle-hd.png) | ![本版遊戲內HD畫面設定](docs/verification/release-v1.0.2-20261013/game-menu-hd.png) |
+| ![HD戰場、傷勢與操作圖示](docs/verification/release-v1.0.3-20261017/battle-hd.png) | ![本版遊戲內HD畫面設定](docs/verification/release-v1.0.3-20261017/game-menu-hd.png) |
 
 按 F10 或點下緣「畫面 F10」，即可在同一場景切換 EGA／HD；Esc 返回遊戲。
 三組[同主題、同場景比較](docs/verification/hd-interface-runtime-20261012.md#同主題比較)沿用相同人物與門面。
 圖片來源、畫格、SHA-256與權利分類見[正式介面截圖清冊](docs/verification/hd-interface-runtime-20261012/manifest.json)。
-新版旅店及設定畫面來自實際AppImage，來源見[新版截圖清冊](docs/verification/release-v1.0.2-20261013/manifest.json)。
+新版旅店及設定畫面來自實際AppImage，來源見[新版截圖清冊](docs/verification/release-v1.0.3-20261017/screenshots.json)。
 
-### 開發版：完整 HD
+### 完整 HD
 
-目前玩家路徑使用的13類圖形及操作介面已接入同一手繪主題，包含片頭與翻書、天候、傷勢、走路與戰鬥標記、戰場及各操作子頁。新遊戲圖片及下方縮圖最長邊768，遊戲畫布保持1920×1200。下圖是同一受控場景的重製中文EGA／HD，尚未納入現行發行包。
+目前玩家路徑使用的13類圖形及操作介面已接入同一手繪主題，包含片頭與翻書、天候、傷勢、走路與戰鬥標記、戰場及各操作子頁。新遊戲圖片及下方縮圖最長邊768，遊戲畫布保持1920×1200。下圖是同一受控場景的重製中文EGA／HD，已納入本版。
 
 | 重製中文 EGA | 手繪 HD |
 |---|---|
@@ -117,9 +118,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [完整驗收](docs/verification/hd-full-runtime-20261017.md)分階段核對104種場景，中文缺字0、EGA往返零差、HD最多一色階；實際鍵鼠F10共120事件保持狀態。[比較頁](docs/verification/hd-full-runtime-20261017/review.html)及[截圖清冊](docs/verification/hd-full-runtime-20261017/manifest.json)保存來源與雜湊。自訂點陣內容、地圖索引與結構遮罩保持資料用途。結果依受控場景規則，不代表自然全程通關。
 
-### 開發版：世界與戰鬥事件 HD
+### 世界與戰鬥事件 HD
 
-世界地點與野營、戰鬥勝敗、競技場人物及訊息卷軸已接入手繪HD。下列為同一受控場景的重製中文EGA／HD，縮圖最長邊768，尚未納入現行發行包。
+世界地點與野營、戰鬥勝敗、競技場人物及訊息卷軸已接入手繪HD。下列為同一受控場景的重製中文EGA／HD，縮圖最長邊768，已納入本版。
 
 | 重製中文 EGA | 手繪 HD |
 |---|---|
@@ -129,9 +130,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [31場景驗收](docs/verification/hd-scene-events-runtime-20261017.md)確認中文、圖片與遊戲內F10；兩種視窗鍵鼠36事件保持狀態。原版DOS結局與HD對比見下方既有結局展示。天候、傷勢、戰場及片頭已完成上述完整HD驗收。
 
-### 開發版：書本與操作子頁 HD
+### 書本與操作子頁 HD
 
-開發版已接入手繪書頁、三個服務頭像、原生中文與編輯器控制。下列為同一程式、同一狀態的EGA／HD比較，尚未納入現行發行包。
+本版已接入手繪書頁、三個服務頭像、原生中文與編輯器控制。下列為同一程式、同一狀態的EGA／HD比較，已納入本版。
 
 | EGA | HD |
 |---|---|
@@ -144,9 +145,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 範圍及來源見[正式驗收](docs/verification/hd-native-ui-runtime-20261014.md)。
 法術編輯頁亦已[接入並驗證](docs/verification/hd-spell-scroll-runtime-20261014.md)，名稱輸入、左右選單與遊戲內F10切換保持狀態。
 
-### 開發版：八十張角色頭像
+### 八十張角色頭像
 
-八十張角色模板已補齊手繪HD，原核准六圖保留。以下為正式重製程式在同一角色狀態下的比較，尚未納入現行發行包。
+八十張角色模板已補齊手繪HD，原核准六圖保留。以下為正式重製程式在同一角色狀態下的比較，已納入本版。
 
 | 重製中文 EGA | 手繪 HD |
 |---|---|
@@ -156,10 +157,10 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [五組對比](docs/verification/hd-character-templates-20261014/review.html)另含弓手與矮人。遊戲內F10可切換，16字元姓名完整縮放於原框；新增角色的頭像可隨v3保存重載。
 人物裝備及NPC／坐騎的後續接入見下方各批驗收；角色模板的範圍、來源與限制見[本批驗收](docs/verification/hd-character-templates-20261014.md)。
 
-### 開發版：68個原生HD動作圖示
+### 68個原生HD動作圖示
 
-68個動作圖示已沿同一銅色主題接入開發版。下方展示相同圖號的來源PNG與正式原生HD，來源展示由重製程式繪製。
-第28圖是城鎮徽章遮罩，保持資料用途。完整裝備頁的後續接入見下節；這批尚未納入現行發行包。
+68個動作圖示已沿同一銅色主題接入本版。下方展示相同圖號的來源PNG與正式原生HD，來源展示由重製程式繪製。
+第28圖是城鎮徽章遮罩，保持資料用途。完整裝備頁的後續接入見下節；這批已納入本版。
 
 | 來源PNG圖示展示 | 正式原生HD圖示 |
 |---|---|
@@ -167,10 +168,10 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [比較頁](docs/verification/hd-actions-runtime-20261015/review.html)另含正常旅店的繁中EGA／HD。遊戲內F10、兩種視窗與存讀檔已驗，圖示切換沿原控制器；來源與完整範圍見[正式驗收](docs/verification/hd-actions-runtime-20261015.md)。
 
-### 開發版：完整物品與隊伍頁
+### 完整物品與隊伍頁
 
 完整物品17槽與六型隊伍已接入正式HD呈現，包含身體、裝備、武器、盾牌、手部遮擋與城鎮／野外背板。
-下圖來自正常標題操作，六人由旅店招募；兩側沿相同角色、裝備及隊伍狀態。尚未納入現行發行包。
+下圖來自正常標題操作，六人由旅店招募；兩側沿相同角色、裝備及隊伍狀態。已納入本版。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -180,11 +181,11 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [比較頁](docs/verification/hd-equipment-runtime-20261015/review.html)另含卸裝前臂、固定腰帶與預設／自訂盾面。
 已知預設盾面匹配手繪HD，修改盾面保留原40×38點陣；原角色資料與v3格式保持。
 中文、EGA回歸、兩種視窗的鍵鼠F10及正常存讀檔已核對，範圍見[正式驗收](docs/verification/hd-equipment-runtime-20261015.md)。
-地圖、戰場、天候與未驗操作分支仍續作。
+地圖、戰場與天候已納入本版；未抽測玩法邊界仍依工作清單處理。
 
-### 開發版：七城 NPC 與四種坐騎
+### 七城 NPC 與四種坐騎
 
-七城102張NPC與四種坐騎已補齊手繪HD，四張既有NPC保留。下方來自正式程式的相同受控狀態，包含繁中對話與坐騎資料頁；尚未納入現行發行包。
+七城102張NPC與四種坐騎已補齊手繪HD，四張既有NPC保留。下方來自正式程式的相同受控狀態，包含繁中對話與坐騎資料頁；已納入本版。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -193,11 +194,11 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [七組比較](docs/verification/hd-npc-mounts-runtime-20261015/review.html)另含馬廄、雙人物及原構圖的橫置頭部。
 110個場景的中文、圖片、EGA回歸及HD一色階核對通過；遊戲內F10可在同一場景切換，兩種視窗、鍵鼠與正常存讀檔已驗。
-來源與完整範圍見[正式驗收](docs/verification/hd-npc-mounts-runtime-20261015.md)。地圖、戰場、傷勢、天候、片頭與其餘事件仍續作。
+來源與完整範圍見[正式驗收](docs/verification/hd-npc-mounts-runtime-20261015.md)。地圖、戰場、傷勢、天候、片頭與事件均已納入本版。
 
-### 開發版：32種怪物
+### 32種怪物
 
-32種怪物的資訊框與遭遇群像已接入手繪HD。下方由正式程式繪製，兩側使用同一受控狀態；尚未納入現行發行包。
+32種怪物的資訊框與遭遇群像已接入手繪HD。下方由正式程式繪製，兩側使用同一受控狀態；已納入本版。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -205,11 +206,11 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 | ![霧地幼蟲遭遇群像EGA](docs/verification/hd-monsters-runtime-20261015/monster-31-encounter-12-ega.png) | ![12隻霧地幼蟲手繪HD與透明遮擋](docs/verification/hd-monsters-runtime-20261015/monster-31-encounter-12-hd.png) |
 
 [八組比較](docs/verification/hd-monsters-runtime-20261015/review.html)另含牛頭怪、獨眼巨人、小魔怪與火焰人形。128場景的中文、原生圖片、透明遮擋與EGA回歸已核對；遊戲內F10可在同一場景切換，兩種視窗、鍵鼠及正常存讀檔已驗。
-來源、完整提示與驗收範圍見[正式收據](docs/verification/hd-monsters-runtime-20261015.md)。其餘圖形已接入上述完整HD開發版。
+來源、完整提示與驗收範圍見[正式收據](docs/verification/hd-monsters-runtime-20261015.md)。其餘圖形已接入上述完整HD。
 
-### 開發版：七城門面與城門林地
+### 七城門面與城門林地
 
-七城102張門面及城門林地已接入手繪HD，原核准旅店保持。以下為正式重製程式在同一準備門位的EGA／HD，尚未納入現行發行包。
+七城102張門面及城門林地已接入手繪HD，原核准旅店保持。以下為正式重製程式在同一準備門位的EGA／HD，已納入本版。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -221,9 +222,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 103場景中文與畫面已核對；F10可在遊戲內切換，四場景兩種視窗的鍵鼠、完整城鎮狀態及v3存讀檔通過。
 本組門面截圖中的其餘六城徽章沿EGA，七城原生HD徽章見下節；門面驗收範圍見[正式驗收](docs/verification/hd-town-facades-runtime-20261015.md)。
 
-### 開發版：七城原生 HD 徽章
+### 七城原生 HD 徽章
 
-七城徽章已沿核准銅框與紋章風格接入，霍布城核准圖保留。以下為正式程式在相同受控城鎮狀態下的比較，尚未納入現行發行包。
+七城徽章已沿核准銅框與紋章風格接入，霍布城核准圖保留。以下為正式程式在相同受控城鎮狀態下的比較，已納入本版。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -234,9 +235,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 [七組比較](docs/verification/hd-town-crests-runtime-20261015/review.html)另含樹木、城門、雙色紋章與保留的霍布城。
 七城中文與圖形已核對，F10可在同一場景切換；兩種視窗的鍵鼠、完整城鎮狀態與v3存讀檔已驗。來源及限制見[正式驗收](docs/verification/hd-town-crests-runtime-20261015.md)。地圖、戰場與天候已完成上述完整HD驗收。
 
-### 開發版：第一城連續手繪地圖
+### 第一城連續手繪地圖
 
-第一城已依原地圖位置呈現連續手繪，涵蓋城牆、街區、城堡與河橋。F10可在同一場景切換，隊伍與保存保持。下方為正式重製程式的同狀態比較，尚未納入現行發行包；走路標記已完成完整HD驗收，全部城鎮及世界背景見下方全地圖入口。
+第一城已依原地圖位置呈現連續手繪，涵蓋城牆、街區、城堡與河橋。F10可在同一場景切換，隊伍與保存保持。下方為正式重製程式的同狀態比較，已納入本版；走路標記已完成完整HD驗收，全部城鎮及世界背景見下方全地圖入口。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -246,9 +247,9 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 
 [比較頁](docs/verification/hd-town-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town-maps-runtime-20261016.md)記錄42個區塊、中文、F10及存讀檔範圍。
 
-### 開發版：第二城連續手繪地圖
+### 第二城連續手繪地圖
 
-第二城已接入42區連續手繪地圖，涵蓋環水城牆、城內湖岸、城堡與南門木橋。以下為正式重製程式在同一受控狀態下的比較，遊戲內可用F10切換EGA／HD；尚未納入現行發行包。
+第二城已接入42區連續手繪地圖，涵蓋環水城牆、城內湖岸、城堡與南門木橋。以下為正式重製程式在同一受控狀態下的比較，遊戲內可用F10切換EGA／HD；已納入本版。
 
 | 重製中文 EGA | 正式 HD |
 |---|---|
@@ -256,11 +257,11 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 | ![第二城南門木橋EGA](docs/verification/hd-town2-maps-runtime-20261016/map-gate-ega.png) | ![第二城手繪南門木橋HD](docs/verification/hd-town2-maps-runtime-20261016/map-gate-hd.png) |
 | ![第二城城堡與湖岸EGA](docs/verification/hd-town2-maps-runtime-20261016/map-keep-ega.png) | ![第二城手繪城堡與湖岸HD](docs/verification/hd-town2-maps-runtime-20261016/map-keep-hd.png) |
 
-[比較頁](docs/verification/hd-town2-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town2-maps-runtime-20261016.md)記錄全4096格、中文及鍵鼠F10驗證。原地圖、門位、通行與存檔格式保持；走路標記另行續作，其餘五城及世界背景見下節。本批為受控場景驗收。
+[比較頁](docs/verification/hd-town2-maps-runtime-20261016/review.html)與[正式驗收](docs/verification/hd-town2-maps-runtime-20261016.md)記錄全4096格、中文及鍵鼠F10驗證。原地圖、門位、通行與存檔格式保持；走路標記已納入完整HD，其餘五城及世界背景見下節。本批為受控場景驗收。
 
-### 開發版：七城與世界連續手繪地圖
+### 七城與世界連續手繪地圖
 
-七座城鎮與世界地圖背景已補齊，沿原地圖座標呈現。新地圖素材採768×768以降低容量，遊戲畫布維持1920×1200。以下是同一受控場景的繁中EGA／HD縮圖，尚未納入現行發行包。
+七座城鎮與世界地圖背景已補齊，沿原地圖座標呈現。新地圖素材採768×768以降低容量，遊戲畫布維持1920×1200。以下是同一受控場景的繁中EGA／HD縮圖，已納入本版。
 
 | 重製中文 EGA | 手繪 HD |
 |---|---|
@@ -268,17 +269,17 @@ HD採1920×1200原比例，包含核准的操作介面、原生中文字、六�
 | ![第六城木橋EGA](docs/verification/hd-all-maps-runtime-20261017/town6-11-53-ega.png) | ![第六城手繪木橋與河岸HD](docs/verification/hd-all-maps-runtime-20261017/town6-11-53-hd.png) |
 | ![世界山脈與河岸EGA](docs/verification/hd-all-maps-runtime-20261017/town0-23-29-ega.png) | ![世界手繪山脈與河岸HD](docs/verification/hd-all-maps-runtime-20261017/town0-23-29-hd.png) |
 
-[六組比較頁](docs/verification/hd-all-maps-runtime-20261017/review.html)另含城堡、高地與霍布城。遊戲內F10可在同一位置切換；中文、全部地圖格、鍵鼠及狀態保持見[驗收範圍](docs/verification/hd-all-maps-runtime-20261017.md)。圖中的天候與城鎮頭盔仍沿既有圖形，後續一併HD化；世界事件、戰場、傷勢及片頭繼續。
+[六組比較頁](docs/verification/hd-all-maps-runtime-20261017/review.html)另含城堡、高地與霍布城。遊戲內F10可在同一位置切換；中文、全部地圖格、鍵鼠及狀態保持見[驗收範圍](docs/verification/hd-all-maps-runtime-20261017.md)。這批歷史截圖的天候與城鎮頭盔沿當時圖形；本版已補齊HD，見上方完整HD對比。
 
 ### 事件畫面：原版與 HD
 
-七段結局已接入開發版，沿用手繪、紅黑銅框與原生 HD 中文。現行 `v.1.0.2-20261013` 發行包保持，尚未包含本批。
+七段結局已納入本版，沿用手繪、紅黑銅框與原生 HD 中文。下方保留正式接入時的同主題比較與來源。
 下方包含結局內容。原版由 dosgolem 受控執行擷取；HD 來自正式重製程式的受控場景入口。
 
 <details>
 <summary>展開七段結局的原版／HD 截圖</summary>
 
-| 原版 DOS，320×200 | 開發版 HD，1920×1200 |
+| 原版 DOS，320×200 | 重製 HD，1920×1200 |
 |---|---|
 | ![原版第0段：巨石門](docs/verification/hd-completion-20261014/original-ending-0.png) | ![HD第0段：巨石門](docs/verification/hd-ending-runtime-20261014/ending-0-hd.png) |
 | ![原版第1段：火炬洞窟](docs/verification/hd-completion-20261014/original-ending-1.png) | ![HD第1段：火炬洞窟](docs/verification/hd-ending-runtime-20261014/ending-1-hd.png) |

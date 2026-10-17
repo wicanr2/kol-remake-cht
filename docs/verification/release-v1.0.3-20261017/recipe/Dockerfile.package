@@ -1,0 +1,13 @@
+# 取代已缺失的 kol-package:20260907。建置、影片及封裝工具全在 image 內。
+# docker build --network none -f docker/Dockerfile.package \
+#   -t kol-package:1.26.7-ebiten2.9.9-20261011-r1 .
+# 兩個來源均為 Debian12；不搬運主機 runtime 或函式庫。
+ARG KOL_RUNTIME_IMAGE=hr-appimage:runtime-recovery-r1@sha256:e961c807e7810d5fca6b2e880e9ebed49207074e9871683de926f646c28d41fa
+FROM ${KOL_RUNTIME_IMAGE} AS runtime
+FROM eob-remake-release:1.26.7-ebiten2.9.9-20261008-r2@sha256:a7c1001218f195867205b5f87d49d79c4cf4f183a465dcee89db6c96a260ea4e
+COPY --from=runtime /usr/bin/mksquashfs /usr/bin/unsquashfs /usr/local/bin/
+COPY --from=runtime /lib/x86_64-linux-gnu/liblzo2.so.2.0.0 /lib/x86_64-linux-gnu/liblzo2.so.2
+COPY --from=runtime /opt/runtime-x86_64 /opt/runtime-x86_64
+RUN echo '1cc49bcf1e2ccd593c379adb17c9f85a36d619088296504de95b1d06215aebbf  /opt/runtime-x86_64' | sha256sum -c - \
+ && ! ldd /usr/local/bin/mksquashfs | grep 'not found' \
+ && mksquashfs -version && ffmpeg -version && convert -version

@@ -1,0 +1,9 @@
+{
+  "tests": "PASS",
+  "vet_exit": 1,
+  "vet_warnings": [
+    "internal/ui/bitmap_editor.go:56:4: github.com/wicanr2/kol-remake-cht/internal/book.Label struct literal uses unkeyed fields",
+    "internal/ui/bitmap_editor.go:57:4: github.com/wicanr2/kol-remake-cht/internal/book.Label struct literal uses unkeyed fields"
+  ],
+  "classification": "既有未具名欄位警示；保留正式來源，不宣稱 vet 全綠"
+}

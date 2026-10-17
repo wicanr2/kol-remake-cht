@@ -16,13 +16,15 @@ import zipfile
 
 SRC, OUT = Path('/src'), Path('/out')
 VERSION = None  # 必須由 --version 指定，拒絕覆寫既有版本。
-LIMITS = '''本版包含已核准 HD 介面、頭像、四首原創配樂及遊戲內 EGA／HD 切換。
+LIMITS = '''本版包含13類圖形與操作介面的手繪HD、四首原創配樂及遊戲內 EGA／HD 切換。
 這是有限場景驗收，不宣稱完整原版 parity。
 完整戰鬥與全程通關的原版同狀態仍未驗完。
 已登記場景按 SPEC-040 通過中文與畫面驗收，其他動態分支仍有未驗項。
-HD 涵蓋旅店、六人肖像、旅店頭像、中文字、面板及已核准操作列；其他美術沿 EGA。
+HD 涵蓋片頭、書本、人物、裝備、七城與世界地圖、戰場、天候、傷勢、事件及操作頁。
+後續新增圖最長邊768，遊戲HD畫布1920×1200；既有素材保持原尺寸。
+自訂點陣內容、地圖索引與結構遮罩保留資料用途。
 配樂預設開啟，F9獨立切換；換EGA／HD持續播放，開關只在本次遊玩有效。
-三項加速細則、戰鬥中途保存與後續 HD 美術仍未定版。
+三項加速細則與戰鬥中途保存仍未定版。
 Windows 僅容器 Wine 驗證；macOS 僅交叉編譯與結構驗證，均無真機驗收。
 Linux 容器以 AppImage 解包執行驗證，主機 FUSE 未驗。
 原版 C matching 工作暫停，未納入本次封包。
@@ -71,9 +73,18 @@ def prepare():
     acceptance = read(accepted / 'receipt.json')
     assert acceptance['status'] == 'PASS'
     matches_music = program == acceptance['program_inputs']
+    full_hd = SRC / 'docs/verification/hd-full-runtime-20261017'
+    full_hd_acceptance = read(full_hd / 'receipt.json') if full_hd.exists() else None
+    matches_full_hd = bool(full_hd_acceptance and full_hd_acceptance['status'] == 'PASS'
+                           and program == full_hd_acceptance['program_inputs'])
+    if matches_full_hd:
+        motion = SRC / 'assets/hd/first-slice/motion'
+        assert sha(motion / 'manifest.json') == full_hd_acceptance['manifest_sha256']
+        assert sha(motion / 'generation.json') == full_hd_acceptance['generation_sha256']
+        assert sum(p.is_file() for p in (SRC / 'assets/hd').rglob('*')) == full_hd_acceptance['asset_files']
     precision_path = SRC / 'docs/verification' / ('release-' + VERSION.replace('v.', 'v', 1)) / 'precision-fix.json'
     precision = None
-    if not matches_music:
+    if not matches_music and not matches_full_hd:
         precision = read(precision_path)
         assert precision['status'] == 'PASS' and precision['production'] is True
         assert precision['base_music_receipt_sha256'] == sha(accepted / 'receipt.json')
@@ -134,7 +145,8 @@ Linux AppImage 請先 --appimage-extract，從 squashfs-root/tools 匯入至新�
 滑鼠點選、右鍵返回、滾輪移動游標。Ctrl+Q 離開。
 介面預設繁中，-lang en 切英文。住宿會保存。
 按 F10 或下緣「畫面」開啟設定，即時切換 EGA／HD；Esc 返回原場景。
-HD 為 1920×1200，含已核准介面與人物頭像，其他場景沿原畫；切換不改存檔。
+HD 為1920×1200，含13類圖形與操作介面；片頭、地圖、天候、戰場、傷勢及事件均已接入。
+新圖最長邊768，自訂點陣及資料遮罩保持；切換不改存檔。
 四首原創室內樂預設開啟。按F9或下緣「配樂」獨立切換，換EGA／HD持續播放。
 Linux：~/.config/kol-remake-cht/save.dat
 Windows：%AppData%\\kol-remake-cht\\save.dat
@@ -162,6 +174,9 @@ macOS 未經 Apple 公證，首次開啟可能須於系統設定的隱私權與�
         dest.write_bytes(archive.extractfile('formal-save-zh-Hant/complete.json').read())
     write(OUT / 'build-inputs.json', dict(version=VERSION, git_head=args.git_head,
           program_inputs=program, resources=resources, program_matches_accepted_receipt=matches_music,
+          program_matches_full_hd_receipt=matches_full_hd,
+          full_hd_receipt_sha256=sha(full_hd / 'receipt.json') if matches_full_hd else None,
+          full_hd_receipt_path=str((full_hd / 'receipt.json').relative_to(SRC)) if matches_full_hd else None,
           precision_source_receipt_sha256=sha(precision_path) if precision else None,
           program_matches_precision_receipt=precision is not None,
           packaging_tools={str(p.relative_to(SRC)): sha(p) for p in
@@ -437,6 +452,8 @@ def verify():
     assert read(OUT / 'smoke/checks.json')['tests'] == 'PASS'
     assert read(OUT / 'promo/sources.json')['visual_review'] == 'PASS'
     inputs = read(OUT / 'build-inputs.json')
+    if inputs.get('program_matches_full_hd_receipt'):
+        assert read(OUT / 'smoke/hd-scenes-comparison.json')['status'] == 'PASS'
     assert all(sha(SRC / n) == h for n,h in inputs['program_inputs'].items())
     inputs['final_packaging_tools'] = {str(p.relative_to(SRC)): sha(p) for p in
         [SRC/'tools/closeout_release.py', SRC/'tools/import_game_data.py',

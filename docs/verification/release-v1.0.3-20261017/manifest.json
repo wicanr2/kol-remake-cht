@@ -1,0 +1,277 @@
+{
+  "schema": "kol-verification-manifest/1",
+  "version": "v.1.0.3-20261017",
+  "rights": "private GitHub 可保存；截圖與原作衍生內容無公開散布權",
+  "files": [
+    {
+      "path": "battle-ega.png",
+      "bytes": 212345,
+      "sha256": "1680f6065d9c80101ca19c7dceb618ad25ef2129b5e346b9a4b91d6b126cb832"
+    },
+    {
+      "path": "battle-hd.png",
+      "bytes": 297670,
+      "sha256": "1fb47dfbd43dda3556b92214b56b4c429bd0d16ff481943ea379d98c717324af"
+    },
+    {
+      "path": "build-inputs.json",
+      "bytes": 408247,
+      "sha256": "14c936b88f93d9b47604e89bcdc8378e47523b52d61a1a86e41cbf50bdb36600"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 420,
+      "sha256": "bc788dbbee90dfeba157b8c8a0b1177c520987d435584b80bf4914b0222f4b11"
+    },
+    {
+      "path": "cleanup.json",
+      "bytes": 1926,
+      "sha256": "199fcd68d8ac1cfdb483972169e37f1151d179d61383b463fb0ee4660a3e2aa2"
+    },
+    {
+      "path": "game-menu-ega.png",
+      "bytes": 203602,
+      "sha256": "276ba741accfcbab7ab27c8599ca39e735142a67db055fad23a0823dbde46b18"
+    },
+    {
+      "path": "game-menu-hd.png",
+      "bytes": 195344,
+      "sha256": "b228bd5fc4942cf1ea71c9653954189e2a7d970ce10ea9d37d95a5b521fb1f28"
+    },
+    {
+      "path": "hd-scenes-comparison.json",
+      "bytes": 20109,
+      "sha256": "5c3c0717e08c3fbb1e6b0d3a387e752c8fbc5039ac7740b4cabe6e783695b744"
+    },
+    {
+      "path": "inn-hd-controls.png",
+      "bytes": 230833,
+      "sha256": "ce1725175bb51d0b7a2ce70a48be56b09994ccde63e6ab3345d31c0c42c8e06a"
+    },
+    {
+      "path": "linux-controls.json",
+      "bytes": 2678,
+      "sha256": "8cbc4c6a4a291bca65a42a548710be577c60348fea6bfc1f2227f196cfafd2d0"
+    },
+    {
+      "path": "packages.json",
+      "bytes": 1052,
+      "sha256": "3ec27c114c65a375a4c307b560176d5f480e87b3093f96b616e28698b81f17ed"
+    },
+    {
+      "path": "promo-ffprobe.json",
+      "bytes": 3354,
+      "sha256": "bc0cb69562d68825b8917c7d2f8b7e7d19ef02a493f04c2d0c59a886d011b981"
+    },
+    {
+      "path": "promo-poster.png",
+      "bytes": 127316,
+      "sha256": "645542e55f28600698a1638b10f8f5104513d443b6ecbfe481bf9c6aa8c511b0"
+    },
+    {
+      "path": "promo-sources.json",
+      "bytes": 9897,
+      "sha256": "33bf749ad9f24846cc7968218f444298ea03bdf42ef93c814d0162e28734568c"
+    },
+    {
+      "path": "promo-visual-review.json",
+      "bytes": 1298,
+      "sha256": "3a797ddb3fa508217fac72a1c69ff0fa138f562a2acf66550cf4bbaaa7a7d476"
+    },
+    {
+      "path": "publication-authorization.json",
+      "bytes": 778,
+      "sha256": "384b3fa8ced79179c898c0bcc1e4abf035c75bb9a913e8339de606202c6524c6"
+    },
+    {
+      "path": "receipt.json",
+      "bytes": 3274,
+      "sha256": "7fdbc1e7ca9d41053ba96d74761a1b46411bd14ad43c67521e27637ca8b159e5"
+    },
+    {
+      "path": "recipe/Dockerfile.package",
+      "bytes": 1035,
+      "sha256": "4b6749ee147e3036f147e869af431aada543e6108ca712670412b59e43b00e1e"
+    },
+    {
+      "path": "recipe/capture_wine_audio.sh",
+      "bytes": 1199,
+      "sha256": "12b13505ef61d88789565cc6312176ee136db27ee6829535703ec47d3c8205b0"
+    },
+    {
+      "path": "recipe/closeout_macos.sh",
+      "bytes": 1442,
+      "sha256": "c004231cb345742f41c98b61f2ee83ec789d021d8716ca40312d722b3ab32d11"
+    },
+    {
+      "path": "recipe/closeout_release.py",
+      "bytes": 29417,
+      "sha256": "1cea61e676dc152d64966a89b7f606e2ad782696d2e1e44cb1ccaa09deef8cce"
+    },
+    {
+      "path": "recipe/compose_release_promo.py",
+      "bytes": 19124,
+      "sha256": "8ed1437859f11a851219e0a8565a655f923589dcd40984300d84b432b14eb256"
+    },
+    {
+      "path": "recipe/import_game_data.py",
+      "bytes": 2980,
+      "sha256": "058165b46e243f353984f549ea0aa3606b178c8ecf3a833df0dfbf2be7882898"
+    },
+    {
+      "path": "recipe/png_io.py",
+      "bytes": 4307,
+      "sha256": "0295c62847b9e66e9a997940224c1d4c04bf5e0acbeab2d820bfecd0fd020c9c"
+    },
+    {
+      "path": "recipe/run_release_linux.sh",
+      "bytes": 810,
+      "sha256": "0d23c27986e9fa3ec36a5d792ecc4d064cf311756297c0dcd327d05324fa2cc6"
+    },
+    {
+      "path": "recipe/run_release_sample.sh",
+      "bytes": 488,
+      "sha256": "3f8fba89398780838a69f01a17c4ab6669a6701bf1e18a8304de1de173f44284"
+    },
+    {
+      "path": "recipe/run_release_wine.sh",
+      "bytes": 1198,
+      "sha256": "b00205e3a7808a07b3435e93fc25826f02c87c52c0b42187c122b9b768aeb2c2"
+    },
+    {
+      "path": "recipe/verify_music_runtime.py",
+      "bytes": 8952,
+      "sha256": "b436e702c5c63b7cd5076083438e6603eff794af6fd2a08c1126274587c8b4a6"
+    },
+    {
+      "path": "recipe/verify_package_controls.py",
+      "bytes": 3444,
+      "sha256": "c66f1a33fd3d8634bf72b0c05444ae5ddd3f97f34500b6b10c817a852434b485"
+    },
+    {
+      "path": "recipe/verify_release_runtime.py",
+      "bytes": 12460,
+      "sha256": "8387f0b585fb11091bbb8d0eb4986c89eb5dcba2bda3fc5b69c95f3543d7df1c"
+    },
+    {
+      "path": "recipe/workspace/audit-evidence.py",
+      "bytes": 2260,
+      "sha256": "c125c34eb373b29db4be4c4eeae6b0e4378dfaab051abf9bd11bf12ea6611be0"
+    },
+    {
+      "path": "recipe/workspace/build-hd-scenes.sh",
+      "bytes": 5523,
+      "sha256": "643692ceff258d4ffdfddd87de6b80aed255eef3591cd10c2339690b97cf5bca"
+    },
+    {
+      "path": "recipe/workspace/check-hd-scenes.py",
+      "bytes": 3698,
+      "sha256": "bc569e871f7604bc53984da7a47e015b31ea8de01a864138623ec743af08196f"
+    },
+    {
+      "path": "recipe/workspace/diagnose-hd-startup.py",
+      "bytes": 1097,
+      "sha256": "ded7e8aabe5777e7583313dd47dc53f72d6abc87742d748d4f281257cc13f5dc"
+    },
+    {
+      "path": "recipe/workspace/finalize-evidence.py",
+      "bytes": 8108,
+      "sha256": "c1dbb3139510a92af68361d88be2639a475d8755f2ac7703e6c0577328cb980c"
+    },
+    {
+      "path": "recipe/workspace/plan.json",
+      "bytes": 612,
+      "sha256": "ad879b8a058295e9f21cae1a0e3cd9854fd5f6a232c1cf07d6f062739b0eb7d3"
+    },
+    {
+      "path": "recipe/workspace/reproduction.json",
+      "bytes": 4061,
+      "sha256": "9e43ae879e70db65cd7262cfc49ac598cac7e7851a103e3b9e36ea673e1b731e"
+    },
+    {
+      "path": "recipe/workspace/run-hd-scenes-wine.sh",
+      "bytes": 749,
+      "sha256": "17cb498be6e6bd2ec7cb7c4d77777937473e678af7a4ea769119565768979d59"
+    },
+    {
+      "path": "recipe/workspace/run-package-pixels.sh",
+      "bytes": 404,
+      "sha256": "9f05818be5e40787b9e4e73ea403e005fe381c12887ef6b96a35de07e54662f6"
+    },
+    {
+      "path": "recipe/workspace/update-docs.py",
+      "bytes": 11340,
+      "sha256": "cdae1008edb241729ce48f347946295a6c5f01622f3d2ba436c4e814880480ca"
+    },
+    {
+      "path": "release-smoke.json",
+      "bytes": 238,
+      "sha256": "b3aaeb53528bbe42c4d558e1a923bafce076bb55e0f4fa4e855f5f50270ebf93"
+    },
+    {
+      "path": "sampling.json",
+      "bytes": 636,
+      "sha256": "a7afac9cd9285b1089d57cb30db0b2a336ef16a6b70eaa5dff7420284811d8e0"
+    },
+    {
+      "path": "screenshots.json",
+      "bytes": 4679,
+      "sha256": "ff3022b949fb4600939555e36b2ac23e4b50fc12f2d26e91fa173790f8b16f4f"
+    },
+    {
+      "path": "structures.json",
+      "bytes": 174,
+      "sha256": "e225671f76828590755730d4f24e9cd7e7332518fc2f2476b10ad2e42627743c"
+    },
+    {
+      "path": "tests.log",
+      "bytes": 1580,
+      "sha256": "a4676e9d1c0d70bcba1eeeed0987a6ec1f5286b8045bff294dc052d7d2e47338"
+    },
+    {
+      "path": "tool-images.json",
+      "bytes": 1609,
+      "sha256": "12e6c1a473e31930baa032b192301e5bc861148cb0b00cea26fccdc684fee24f"
+    },
+    {
+      "path": "town3-hd.png",
+      "bytes": 376117,
+      "sha256": "8bf46f2dc40f3535fe3d3471f32ee1a19154a3e2d859e3ea9ea7564429e1dc95"
+    },
+    {
+      "path": "vet.log",
+      "bytes": 248,
+      "sha256": "29d1dc572395222c7832cc6f59e0f324f5a8ba31e27f378e51fd0b1d68161c3b"
+    },
+    {
+      "path": "windows-pixels.json",
+      "bytes": 4369,
+      "sha256": "e233ab9ade4d87bcf21e8834dc247dae107c2f7254b59698b4331b7aa1ff46ea"
+    },
+    {
+      "path": "windows-smoke.json",
+      "bytes": 741,
+      "sha256": "33f4b9c43c3c65084d2c1b13339174e681c149ba6e996a810fe9865027a3ef76"
+    },
+    {
+      "path": "wine-memory-after.txt",
+      "bytes": 70,
+      "sha256": "0a2d4e7982066cc7dc914627e7b195ccba88b82a5a996201809e529142d2f380"
+    },
+    {
+      "path": "wine-memory-before.txt",
+      "bytes": 70,
+      "sha256": "0a2d4e7982066cc7dc914627e7b195ccba88b82a5a996201809e529142d2f380"
+    },
+    {
+      "path": "wine-memory-peak.txt",
+      "bytes": 12,
+      "sha256": "d03a7e8cffeb228466ef20ac82e116a8811f3a4fb902b29d846643b2f9d08cda"
+    },
+    {
+      "path": "world-hd.png",
+      "bytes": 411012,
+      "sha256": "9b0cc0ae798eb1a824171b0a266fcbef507a2ccdd85c117585fd8d4f8628c2c0"
+    }
+  ]
+}
