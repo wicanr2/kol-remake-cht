@@ -293,6 +293,10 @@ def main() -> int:
                     door["name"] = name
                     door["person"] = person
                     door["price"] = be16(body, PRICE_OFFSET)
+                    # SPEC-041：收購上限為 +0x37..+0x39，固定輸入高位均為零。
+                    # runtime 沿用現有 price 欄，遇到其他版本不得截斷高位。
+                    if body[ICON_FLAGS] & 4 and body[PRICE_OFFSET - 1] != 0:
+                        raise SystemExit(f"{root} 門 {i} 收購上限超出現有 price 欄位")
                     door["heal_rate"] = body[PRICE_OFFSET + 1]
                     door["record_id"] = be16(body, RECORD_ID_OFFSET)
                     door["dislikes"] = packed_name(bytes(body[DISLIKE_OFFSET:DISLIKE_OFFSET + LIKE_BYTES]))

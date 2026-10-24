@@ -105,6 +105,19 @@ type SpellFieldCell struct {
 	Color int    `json:"color"`
 }
 
+// SpellMenuGeometry 是選項文字的安全矩形與列距，繪製及點選共用。
+// 英文沿 RE-128 的 (0x67,0x55)..(0x127,0x96)，繁中沿 SPEC-035。
+func SpellMenuGeometry(p *SpellEditPage, cjk bool) (x, y, width, step int) {
+	if !cjk {
+		return 104, 86, 184, 8
+	}
+	x = 532
+	if p.Cursor >= 0 && p.Cursor < len(p.Fields) && p.Fields[p.Cursor].Col*CellWidth*3 >= 480 {
+		x = 162
+	}
+	return x, 198, 256, 18
+}
+
 // spellRules 是 `sub_1874E` 畫的六條線：標題底下兩段、下半部四段。
 var spellRules = []SpellRule{
 	{0x38, 0x3E, 0xA0}, {0xA8, 0x3E, 0x108},

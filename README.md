@@ -97,6 +97,8 @@ Linux／Wine實際封包開場、組隊與F10已在4 GiB記憶體上限驗證；
 設定目錄（Linux `~/.config/kol-remake-cht/`、macOS
 `~/Library/Application Support/kol-remake-cht/`、Windows `%AppData%\kol-remake-cht\`），
 用 `-load <路徑>` 讀回來。
+開發版已加入自動讀回既有存檔，並修正試玩回報的選項、販賣與攻擊部位操作，
+見[驗證範圍](docs/verification/player-feedback-20261024.md)。目前下載的 v1.0.5 仍需明確 `-load`。
 Windows 雙擊啟動後的錯誤日誌位於 `%AppData%\kol-remake-cht\kol.log`，前次紀錄為 `kol-previous.log`。
 
 macOS 那一份沒有 Apple 開發者簽章，第一次開啟要在「系統設定 → 隱私權與安全性」

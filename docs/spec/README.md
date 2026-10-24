@@ -1,6 +1,6 @@
 # 規格索引
 
-目前共有 40 個 ID、41 份規格，SPEC-002 分為抽取契約與 EGA 集合。
+目前共有 41 個 ID、42 份規格，SPEC-002 分為抽取契約與 EGA 集合。
 目前收尾與 HD 場景驗收採 [SPEC-040：受控場景驗收](040-controlled-scene-acceptance.md)。
 目前程式、驗收範圍及待決事項見 [CONTEXT](../../CONTEXT.md)，
 未完成工作的完成條件見 [WORKLIST](../../WORKLIST.md)。
@@ -20,6 +20,7 @@
 
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
+| SPEC-041 | [試玩回報修正](041-player-feedback-fixes.md) | READY | 自動續玩、輸入、人物切換、販賣與攻擊部位已接線；[限定驗證](../verification/player-feedback-20261024.md)通過，未宣稱原版動態對拍 |
 | SPEC-040 | [受控場景與中文畫面驗收](040-controlled-scene-acceptance.md) | CONFORMED | 本輪收尾改採受控場景；指定畫面、獨立驗收模式及中文結局排版已驗 |
 | SPEC-039 | [HD 手繪美術與介面工作計畫](039-hd-art-ui.md) | 13類圖形及操作頁限定CONFORMED；新版平台封包下一閘門 | [完整HD驗收](../verification/hd-full-runtime-20261017.md)含天候、傷勢、標記、戰場、片頭、翻書與事件；F10及中文分階段通過 |
 | SPEC-038 | [套件邊界、固定步進與注入點](038-package-boundaries.md) | READY | remake 工程契約；`internal/layers` 四項守門測試擋依賴方向、Ebitengine 越界、規則層讀時鐘與全域亂數 |
@@ -121,3 +122,5 @@ RE-174當時76清單畫格未通過、動作後有692像素殘留；後續第10�
 SPEC-032：[戰鬥戰利品與法術清單的繁中版面](032-cjk-battle-list-pages.md) CONFORMED。
 本規格只處理 Issue #90 指出的兩個 CJK 清單頁；原版沒有中文 oracle，中文畫面不作
 原版像素 parity 宣稱。
+本次試玩修正入口：[SPEC-041](041-player-feedback-fixes.md)，涵蓋自動續玩、清單點選、
+人物切換、販賣及攻擊部位選單。狀態與限制以該規格為準。

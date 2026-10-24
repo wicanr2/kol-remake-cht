@@ -1,0 +1,96 @@
+{
+  "input_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "extractor": "tools/extract_town_buildings.py",
+  "extractor_sha256": "4ed63fd3d81b32319b779ad140b9e705b8a6fa6ef92f7cbb85174cb610a85ca1",
+  "address_space": "decoded TOWNn building payload byte offset",
+  "checked_shops": [
+    {
+      "town": 1,
+      "door": 7,
+      "payload": 11,
+      "payload_sha256": "4d77b894887e5aaed75df3a54f47e0e1c0156d6fa1c8f305adaaaa4365bd3519",
+      "high_byte": 0,
+      "budget": 3000
+    },
+    {
+      "town": 1,
+      "door": 9,
+      "payload": 13,
+      "payload_sha256": "b702d62b4ca8b3aeed2a1adb2063522febc059b4141555bd6dcdc2ca214a1bc8",
+      "high_byte": 0,
+      "budget": 4240
+    },
+    {
+      "town": 1,
+      "door": 11,
+      "payload": 15,
+      "payload_sha256": "9de00d2e98d97936398eb4ae98770affcc8cf94037caf2394fa07be46be5baa9",
+      "high_byte": 0,
+      "budget": 5170
+    },
+    {
+      "town": 2,
+      "door": 3,
+      "payload": 7,
+      "payload_sha256": "00e8d4157c0c9015304e14f0cf31634ba6eac2dcecdbcd2924a2432a6dfccc10",
+      "high_byte": 0,
+      "budget": 2720
+    },
+    {
+      "town": 2,
+      "door": 7,
+      "payload": 11,
+      "payload_sha256": "610ecd1731d3394867aefdbc59b1d6ed1211e3a272b864249a0c2f258a5a5d6c",
+      "high_byte": 0,
+      "budget": 3250
+    },
+    {
+      "town": 4,
+      "door": 1,
+      "payload": 5,
+      "payload_sha256": "5f82a31d185ef10c33e667e9a8e6262368ac8c93bb9f926ecbef3f5b6cf41f78",
+      "high_byte": 0,
+      "budget": 8740
+    },
+    {
+      "town": 4,
+      "door": 8,
+      "payload": 12,
+      "payload_sha256": "bb9655473de018580ae145d4572c36b89447f596f7de21ee47f5b224da22569d",
+      "high_byte": 0,
+      "budget": 1060
+    },
+    {
+      "town": 5,
+      "door": 4,
+      "payload": 8,
+      "payload_sha256": "593f74ef561f51d6b8c140564240374b5deea537966747c76904dfae9a786c94",
+      "high_byte": 0,
+      "budget": 200
+    },
+    {
+      "town": 6,
+      "door": 1,
+      "payload": 5,
+      "payload_sha256": "91ba6f58df5be3bb767aca74f0d4bbcc0e03b565f9cf8d2d518005b17ca8812c",
+      "high_byte": 0,
+      "budget": 4630
+    },
+    {
+      "town": 6,
+      "door": 8,
+      "payload": 12,
+      "payload_sha256": "e2da4f77e6b39e5ea86f8b3888daf10d9e049ddb348c942aef67c8406a28ca44",
+      "high_byte": 0,
+      "budget": 1800
+    },
+    {
+      "town": 7,
+      "door": 12,
+      "payload": 16,
+      "payload_sha256": "aa91a84a3b889550b9498ad3690f6716717d012e24927cf3fbba9f5daf61d7ac",
+      "high_byte": 0,
+      "budget": 3110
+    }
+  ]
+}

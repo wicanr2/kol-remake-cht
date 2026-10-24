@@ -30,6 +30,9 @@ func TestBodyPanelFollowsPlanningInspection(t *testing.T) {
 	selectIcon(t, s, 0x2D)
 	s.Choose()
 	check(2, true)
+	selectIcon(t, s, IconAttackMiddle)
+	s.Choose()
+	check(2, true)
 	selectIcon(t, s, 0x32)
 	s.Choose()
 	check(1, true) // 寫回後停在同一名，人形框回到自己（`0x1F16A`）。

@@ -51,6 +51,23 @@ func drawSpellEdit(dst *ebiten.Image, sprites Sprites, large *font.Font,
 		over(dst, large, town.SpellNameInputTextCol, town.SpellNameInputTextRow,
 			*p.Typing, town.ColourSpellField)
 	}
+	if p.Menu != nil {
+		x, y, w, step := town.SpellMenuGeometry(p, false)
+		h := town.ListRows*step + 2
+		shadow(dst, x-1, y-1, w+2, h)
+		frame(dst, x-1, y-1, w+2, h, town.ColourBoxEdge)
+		fill(dst, x, y, w, h-2, town.ColourBoxFill)
+		for i, row := range p.Menu.Rows {
+			if i >= town.ListRows {
+				break
+			}
+			c := town.ColourListIdle
+			if i == p.Menu.Selected {
+				c = town.ColourText
+			}
+			large.Draw(dst, x, y+i*step, row, c[0], c[1], c[2])
+		}
+	}
 	return nil
 }
 

@@ -437,6 +437,8 @@ func (s *Session) acceptInside() {
 		s.OpenSheet()
 	case id == IconTrade:
 		s.StartShop()
+	case id == IconSell:
+		s.StartSell()
 	case id == IconTrain:
 		s.StartTrain()
 	case id == IconScroll:
@@ -466,11 +468,11 @@ func iconName(id int) string {
 	case IconRest:
 		return "REST/SAVE/HEAL"
 	case IconTrade:
-		return "BUY/SELL"
+		return "BUY"
 	case IconTrain:
 		return "TRAIN"
-	case IconHeal:
-		return "HEAL"
+	case IconSell:
+		return "SELL"
 	case IconAward:
 		return "AWARD"
 	case IconScroll:

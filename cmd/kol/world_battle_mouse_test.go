@@ -49,7 +49,7 @@ func TestWorldIconsSilentWhileCampingOrAsking(t *testing.T) {
 		t.Fatalf("露營時不該有可點區域，得到 %d 個", len(got))
 	}
 	asking := base()
-	asking.Prompt = &world.Prompt{}
+	asking.Prompt = &world.Prompt{Kind: world.PromptNotice}
 	if got := worldTargets(asking, false); got != nil {
 		t.Fatalf("問句時不該有可點區域，得到 %d 個", len(got))
 	}

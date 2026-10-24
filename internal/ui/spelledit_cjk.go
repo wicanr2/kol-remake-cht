@@ -60,11 +60,8 @@ func drawSpellEditCJK(dst *ebiten.Image, sprites Sprites, f *font.Font, t Transl
 	}
 	if p.Menu != nil {
 		// 選單開在被編輯欄位的另一側、欄名列下方：正在改的那一欄與欄名都看得到。
-		x := 520
-		if p.Cursor >= 0 && p.Cursor < len(p.Fields) && p.Fields[p.Cursor].Col*town.CellWidth*s >= 480 {
-			x = 150
-		}
-		drawSpellMenuCJK(dst, f, t, p.Menu, x, 186)
+		x, y, _, _ := town.SpellMenuGeometry(p, true)
+		drawSpellMenuCJK(dst, f, t, p.Menu, x-12, y-12)
 	}
 	return nil
 }

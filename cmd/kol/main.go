@@ -32,6 +32,7 @@ import (
 	"github.com/wicanr2/kol-remake-cht/internal/flow"
 	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/i18n"
+	"github.com/wicanr2/kol-remake-cht/internal/input"
 	magicdata "github.com/wicanr2/kol-remake-cht/internal/magic"
 	portraitdata "github.com/wicanr2/kol-remake-cht/internal/portrait"
 	"github.com/wicanr2/kol-remake-cht/internal/rng"
@@ -483,9 +484,9 @@ func (g *game) applyBattleToken(s *battle.State, token string,
 	}
 	if s.Plan.Prompt == battle.PromptNextRound {
 		switch token {
-		case ">":
+		case ">", "R", "D":
 			s.MoveSelection(1)
-		case "<":
+		case "<", "L", "U":
 			s.MoveSelection(-1)
 		case "RET", "SPACE":
 			if g.chooseNextRound(s) {
@@ -965,6 +966,16 @@ func applyWorldToken(s *world.Session, token string) error {
 		s.DismissNotice()
 		return nil
 	}
+	if s.Prompt != nil || s.Mode != world.ModeMap {
+		switch token {
+		case "L", "U":
+			s.MoveCursor(-1)
+			return nil
+		case "R", "D":
+			s.MoveCursor(1)
+			return nil
+		}
+	}
 	switch token {
 	case "L":
 		s.Walk(-1, 0)
@@ -1063,17 +1074,18 @@ type game struct {
 	large     *font.Font
 	cjk       *font.Font
 	// titleSubs 是中文模式的開場字幕與封面副標；英文模式為 nil。
-	titleSubs  *titleSubtitles
-	strings    *i18n.Table
-	roster     *roster.Roster
-	remove     *roster.DeleteFlow
-	inn        *town.Inn
-	outdoor    *town.Outdoor
-	play       *town.Session
-	flow       *flow.Flow
-	walkTick   int
-	markerStep int
-	canvas     *screen.Canvas
+	titleSubs    *titleSubtitles
+	strings      *i18n.Table
+	roster       *roster.Roster
+	remove       *roster.DeleteFlow
+	inn          *town.Inn
+	outdoor      *town.Outdoor
+	play         *town.Session
+	flow         *flow.Flow
+	walkTick     int
+	movementGate input.MovementGate
+	markerStep   int
+	canvas       *screen.Canvas
 	// hd只控制最後呈現；規則、文字及保存沿既有畫布。
 	hd                     *ui.HD
 	hdCache                *ui.HD
@@ -1984,7 +1996,8 @@ func (g *game) updateInteractive() error {
 	if typingSpellName {
 		typingName = true
 	}
-	tokens := append(keyboardTokens(typingName, typingSpellName), g.mouseTokens(targets, "RET")...)
+	repeatMovement := g.movementGate.Ready(g.walkingInput(), movementHeld())
+	tokens := append(keyboardTokens(typingName, typingSpellName, repeatMovement), g.mouseTokens(targets, "RET")...)
 	if g.flow.Scene == flow.SceneEditor {
 		g.editBlink++
 		tokens = g.editorTokens()
@@ -2004,13 +2017,22 @@ func (g *game) updateInteractive() error {
 			g.flow.Scene, g.flow.MenuCursor, mx, my, len(targets), tokens)
 	}
 	for _, tok := range tokens {
+		wasWalking := g.walkingInput()
 		if g.leftTown() || g.endingReached() {
 			// 這一層認不得的鍵在原版也不做事；玩家亂按不該中斷遊戲。
 			_ = g.playToken(tok)
+			if wasWalking && !g.walkingInput() {
+				g.movementGate.Ready(false, movementHeld())
+				break
+			}
 			continue
 		}
 		full := g.flow.Scene == flow.SceneMenu && g.flow.MenuCursor == flow.MenuCreate && g.roster.Full() && tok == "RET"
 		g.flow.Key(tok)
+		if wasWalking && !g.walkingInput() {
+			g.movementGate.Ready(false, movementHeld())
+			break
+		}
 		if full {
 			g.notice = g.saveNotice("full")
 		}
@@ -3010,14 +3032,18 @@ func main() {
 		// 存檔要寫在使用者自己的資料目錄。互動模式沒有這一段的話住宿存檔會靜默
 		// 跳過（`-save` 空字串就不寫），而 AppImage 的工作目錄是唯讀掛載點，
 		// 寫回程式旁邊也不行。
-		if *savePath == "" {
-			if p, err := defaultSavePath(); err == nil {
-				*savePath = p
-			} else {
-				fmt.Fprintln(os.Stderr, "找不到可寫的存檔目錄，無法開始可保存的遊戲：", err)
-				os.Exit(1)
+		loadSet := false
+		flag.Visit(func(f *flag.Flag) {
+			if f.Name == "load" {
+				loadSet = true
 			}
+		})
+		writePath, readPath, err := interactiveSavePaths(*savePath, *loadPath, loadSet)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "無法使用存檔：", err)
+			os.Exit(1)
 		}
+		*savePath, *loadPath = writePath, readPath
 	}
 
 	// 旗標預設維持 `en`：沒寫 `-lang` 的對拍計畫要照舊產出 320×200 英文畫格。

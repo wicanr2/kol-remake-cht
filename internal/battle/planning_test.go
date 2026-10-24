@@ -44,16 +44,18 @@ func TestPlanningWeaponAttack(t *testing.T) {
 	if s.Choose() {
 		t.Fatal("選攻擊式不該結束這一輪")
 	}
-	if s.Plan.Prompt != PromptGuardForm {
-		t.Fatalf("選完攻擊式應該進防禦方式，得到 %d", s.Plan.Prompt)
+	if s.Plan.Prompt != PromptAttackArea {
+		t.Fatalf("選完攻擊式應該先選部位，得到 %d", s.Plan.Prompt)
 	}
+	selectIcon(t, s, IconAttackMiddle) // 空格目標原版只提供中段；5+1=6。
+	s.Choose()
 	selectIcon(t, s, 0x32) // 防禦選項 3
 	if !commitThenYes(t, s) {
 		t.Fatal("只有一名隊員，選完防禦式這一輪就該結束")
 	}
 	a := s.Actors[0]
-	if a.Command != CmdWeapon || a.Style != 5 || a.Guard != 3 {
-		t.Fatalf("寫回的三個值是 %#x／%d／%d，應該是 %#x／5／3",
+	if a.Command != CmdWeapon || a.Style != 6 || a.Guard != 3 {
+		t.Fatalf("寫回的三個值是 %#x／%d／%d，應該是 %#x／6／3",
 			a.Command, a.Style, a.Guard, CmdWeapon)
 	}
 	if s.Plan.Prompt != PromptNextRound {
@@ -357,6 +359,8 @@ func TestPlanningSummaryMarksTarget(t *testing.T) {
 	s.Choose()
 	s.Choose() // 面向上方那一格
 	selectIcon(t, s, 0x2D)
+	s.Choose()
+	selectIcon(t, s, IconAttackMiddle)
 	s.Choose()
 	selectIcon(t, s, 0x32)
 	s.Choose()

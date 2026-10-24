@@ -67,6 +67,10 @@ const (
 	IconShoveWeak = 0x2F
 	IconShove     = 0x41
 	IconShoveHard = 0x42
+	// SPEC-041：舊 Shove 名稱保留供定位，實際為武器攻擊部位。
+	IconAttackHigh   = IconShoveWeak
+	IconAttackMiddle = IconShove
+	IconAttackLow    = IconShoveHard
 )
 
 // PartLost 是部位被打到廢掉的門檻：現值超過 0x7F 就算沒了。

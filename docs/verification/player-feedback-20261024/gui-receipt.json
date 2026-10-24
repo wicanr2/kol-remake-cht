@@ -1,0 +1,664 @@
+{
+  "status": "PASS",
+  "spec": "docs/spec/041-player-feedback-fixes.md",
+  "seed": 1,
+  "binary_sha256": "b062f9b5ae7c522a2095324f244e42808c085ece8ea786221a1cbd3340ab96f3",
+  "verifier_sha256": "57dc04820683b559ba0ec8b5b0c116a4f04e39dbf6bcde62d4b7ce69120b5fe9",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "scope": [
+    "名稱大小寫",
+    "建角與住宿預設存檔",
+    "兩次無-load新程序續玩",
+    "人物及裝備數字切換",
+    "方向長按",
+    "雙語販賣清單與鐵砧",
+    "雙語法術編輯清單",
+    "壞檔拒絕啟動"
+  ],
+  "original_parity_claimed": false,
+  "real_platform": "Linux Docker/Xvfb",
+  "controlled_inputs": "shop-fixture.json 與 magic-fixture.json；位置、隊伍、金冠、背包、過大護甲、教派及法術",
+  "actions": [
+    {
+      "start": "creation",
+      "command": [
+        "/repo/workplace/player-feedback-20261024/kol",
+        "-lang",
+        "en",
+        "-scale",
+        "3",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input"
+      ]
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "5",
+      "log": "creation.log"
+    },
+    {
+      "key": "Down",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "a",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+b",
+      "log": "creation.log"
+    },
+    {
+      "key": "c",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+d",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Down",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+z",
+      "log": "creation.log"
+    },
+    {
+      "key": "y",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+x",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Down",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "start": "automatic-reload",
+      "command": [
+        "/repo/workplace/player-feedback-20261024/kol",
+        "-lang",
+        "en",
+        "-scale",
+        "3",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input"
+      ]
+    },
+    {
+      "key": "Escape",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "6",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "space",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "less",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "less",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "less",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "start": "automatic-party-reload",
+      "command": [
+        "/repo/workplace/player-feedback-20261024/kol",
+        "-lang",
+        "en",
+        "-scale",
+        "3",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input"
+      ]
+    },
+    {
+      "key": "1",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "2",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "period",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "1",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "period",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "start": "shop-en",
+      "command": [
+        "/repo/workplace/player-feedback-20261024/kol",
+        "-lang",
+        "en",
+        "-scale",
+        "3",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/repo/workplace/player-feedback-20261024/gui/shop-fixture.json"
+      ]
+    },
+    {
+      "key": "Left",
+      "log": "shop-en.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-en.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-en.log"
+    },
+    {
+      "click": [
+        612,
+        540
+      ],
+      "log": "shop-en.log"
+    },
+    {
+      "click": [
+        330,
+        282
+      ],
+      "log": "shop-en.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-en.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-en.log"
+    },
+    {
+      "click": [
+        708,
+        540
+      ],
+      "log": "shop-en.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-en.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-en.log"
+    },
+    {
+      "click": [
+        228,
+        540
+      ],
+      "log": "shop-en.log"
+    },
+    {
+      "key": "period",
+      "log": "shop-en.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-en.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-en.log"
+    },
+    {
+      "start": "shop-zh-Hant",
+      "command": [
+        "/repo/workplace/player-feedback-20261024/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/repo/workplace/player-feedback-20261024/gui/shop-fixture.json"
+      ]
+    },
+    {
+      "key": "Left",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        612,
+        540
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        330,
+        280
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        708,
+        540
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        228,
+        540
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "period",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "start": "magic-en",
+      "command": [
+        "/repo/workplace/player-feedback-20261024/kol",
+        "-lang",
+        "en",
+        "-scale",
+        "3",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/repo/workplace/player-feedback-20261024/gui/magic-fixture.json"
+      ]
+    },
+    {
+      "key": "Up",
+      "log": "magic-en.log"
+    },
+    {
+      "key": "Return",
+      "log": "magic-en.log"
+    },
+    {
+      "key": "space",
+      "log": "magic-en.log"
+    },
+    {
+      "click": [
+        516,
+        540
+      ],
+      "log": "magic-en.log"
+    },
+    {
+      "click": [
+        330,
+        282
+      ],
+      "log": "magic-en.log"
+    },
+    {
+      "key": "Return",
+      "log": "magic-en.log"
+    },
+    {
+      "click": [
+        180,
+        195
+      ],
+      "log": "magic-en.log"
+    },
+    {
+      "click": [
+        330,
+        357
+      ],
+      "log": "magic-en.log"
+    },
+    {
+      "start": "magic-zh-Hant",
+      "command": [
+        "/repo/workplace/player-feedback-20261024/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/repo/workplace/player-feedback-20261024/gui/magic-fixture.json"
+      ]
+    },
+    {
+      "key": "Up",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        516,
+        540
+      ],
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        330,
+        280
+      ],
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        180,
+        195
+      ],
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        540,
+        273
+      ],
+      "log": "magic-zh-Hant.log"
+    }
+  ],
+  "outputs_sha256": {
+    "automatic-reload-menu.png": "a00665ae067020655b534614c68757f15dd741502bc94d73fc111c287cfe2f4c",
+    "armour-adjusted-zh-Hant.png": "b73eec9cf9fd2c0eebcdf12e0caf09ea439b5e5b6a9becc0ba948ecdcbb21596",
+    "magic-editor-en.png": "8d1c6b69ff30376590d98b66f9ade7a8ca505292c4375b0b8e5966eafc5ec9d2",
+    "magic-selected-zh-Hant.png": "f411704aa5b367b5cc1f522f070a986dee8a882d1ec44c2ca3900b50299a578c",
+    "recruited-second-character.png": "08f513b37319d8d1efb8802e144eb6252213cb341af58cb4177abf3617403340",
+    "created-menu.png": "04eedf5862e4102a9dc46aac9559567ee848d92c9a98e63991dfb128de27c635",
+    "typing-10.png": "9e530cda88f2f78e1be17417eebd15c93ea0e908a386aba48d44686d63f41d72",
+    "sell-offer-en.png": "e9e4f18c60f9dc60b6e2bedce5295cae471efa1d83e0a09441f3d28b935686c2",
+    "magic-en.log": "0e5ca048bc74f1eecbe9d9e5f4c1c17d9deb92f73534dffff5413375b689fee8",
+    "shop-zh-Hant.log": "dc91260949ede83c73af3f47980131d2511c1ff6c7b339045c94f0816835b6eb",
+    "sell-offer-zh-Hant.png": "4d962af6a1eb27cf9780773114b36b053bfa39f1065af62d35aecbc2935f0ab5",
+    "automatic-party-reload.log": "02c8283b6c2623e515b2262a37305721ba84132714d1de1a43229789b119d101",
+    "anvil-en.png": "1466a5642d71bf6d09149693036ff5e3b502cf5439f191c5ec5fa39a72db3529",
+    "magic-editor-zh-Hant.png": "e6cb5dc17804c7377246620028723269c9e0257fec678f43d0e41ac8e5beea8a",
+    "created-character-inn.png": "2bbe82d37b433efac4a3952d63927d8940632157192155b50d5c2765e27e6926",
+    "sell-list-zh-Hant.png": "385d774b70fd2236c6134e8a3f8628dac665a1ea247a184b25a51f25ef294941",
+    "shop-fixture.json": "4d36a771b3b4c67430ceffb39d9821a24a7d91e9c0e66a0dd505e0e07b982edf",
+    "magic-fixture.json": "d86cc265f5bdbf901c0654b42aed6495b57d70db8abeb1d4eb8010b046916623",
+    "sell-done-en.png": "d11fd75ecff10c8c429080a15c07d6e828d9f70560ca9c65305a96e37a1f6c6f",
+    "shop-en.log": "8615bb839cb910c5caf2625d338c3e10d6518a60b6bed651d6f2a3cc0e5c582c",
+    "paid-and-saved.png": "a1ea7fb87c0699c9239522c38c86abd0cb6e12fa7b29758532e3e6b0eda9ed62",
+    "equipment-first-character.png": "5e093fb2fcbefd6b5cca0b8a58e61941a085299ced4e3feb55fcdfbc0f5aaad0",
+    "automatic-reload.log": "90b09ae563672ab57797c86e1b7235065f77973de1942e281495c80bf3adefdb",
+    "anvil-offer-en.png": "99c236aa688ecb0eb57ccf7ca2a7e6bbb405d92e31b759071aa91b163a08de6a",
+    "sell-list-en.png": "1833f394164a48d9d06f0278840d9db17aaa95a72edff6512c6b8a8537ac933c",
+    "magic-zh-Hant.log": "40697c3a17a83c06d924fd1abbee01e34d7908d6f9750ad253cecac34fe92c39",
+    "bad-save.log": "3471134c9ef409013ea6e71473b368bbe68b716c38a0e348f0882eb194402572",
+    "xvfb.log": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690",
+    "magic-options-en.png": "d8048e37d06a2beb23dd4f92e5bb4995d0039e98e66281e211f2cd15c5e101e4",
+    "automatic-party-reload.png": "8ef439d404c597aa804ca917ce26a49c30ba2432df187eff03de9e6b3e0fb531",
+    "typing-21.png": "45dcaad2061b5a44f3e821c567c01bde42184f8a9247d4c5794fef245c5de220",
+    "held-map-movement.png": "8ef439d404c597aa804ca917ce26a49c30ba2432df187eff03de9e6b3e0fb531",
+    "sell-done-zh-Hant.png": "f0799f2ca1472a00e719cabe3b2a511bfa4d6d65e1f54d680be358d15b376b1a",
+    "creation.log": "40c90f57ffe43d5f177793cb9591037a3d126dac2d89e870a76144aed9ea3616",
+    "magic-selected-en.png": "84312f1a52dc1dbd1f6f873df5620973246a03b3d6820743ab3c1c345b5411f4",
+    "armour-adjusted-en.png": "c8f1a6542a829e6c6c4b8a7d76de6e6ddc934cba76e82e6dc705bb9fa25b6b38",
+    "anvil-zh-Hant.png": "858681fbd96a7c5b77aa6886cde11e8deb3bcdaa3cd657a12c5c1c5b9a4aed8a",
+    "sheet-second-character.png": "46a04f8655b60ccfb258ffd3f6c118680fd110e9dfd42aa26743098008648457",
+    "asound.conf": "d4451aaf42879c7ace71e5262265e76943efe5179d9d4b62470486a1851a2cf7",
+    "anvil-offer-zh-Hant.png": "f10e3ec2b9c477f1b81e7354124a863e055260e8698ffdaca5629deefaa47357",
+    "magic-options-zh-Hant.png": "3ab57b7a94c040bdaf43d4719231b3da9126562c0c4823494e7a9a27ca39d53d",
+    "config/kol-remake-cht/save.dat": "e5c2bdc173a2a8eb66a40203052a9582844a055c69402a864688e594db9cf98f"
+  }
+}

@@ -54,24 +54,46 @@ var digitKeys = [10][2]ebiten.Key{
 	{ebiten.KeyDigit8, ebiten.KeyNumpad8}, {ebiten.KeyDigit9, ebiten.KeyNumpad9},
 }
 
-// keyboardTokens 回傳這一幀按下的鍵。只認「剛按下」，不認持續按住——原版的
-// 讀入迴圈也是一次一個鍵，按住不會連走。
-func keyboardTokens(typingName ...bool) []string {
+// keyboardTokens 在文字模式收作業系統字元事件；只有地圖移動使用長按節拍。
+func keyboardTokens(typingName, typingSpell, repeatMovement bool) []string {
 	var out []string
 	for _, k := range keyTokens {
-		if len(typingName) > 0 && typingName[0] && (k.key == ebiten.KeyArrowUp || k.key == ebiten.KeyArrowDown || k.key == ebiten.KeyArrowLeft || k.key == ebiten.KeyArrowRight) {
+		if typingName && (k.key == ebiten.KeyArrowUp || k.key == ebiten.KeyArrowDown || k.key == ebiten.KeyArrowLeft || k.key == ebiten.KeyArrowRight) {
 			// 法術名稱的Left與退格同義（RE-212）；建角文字模式保持既有處理。
-			if len(typingName) > 1 && typingName[1] && k.key == ebiten.KeyArrowLeft && inpututil.IsKeyJustPressed(k.key) {
+			if typingSpell && k.key == ebiten.KeyArrowLeft && inpututil.IsKeyJustPressed(k.key) {
 				out = append(out, "BS")
 			}
 			continue
 		}
-		if inpututil.IsKeyJustPressed(k.key) {
+		if typingName && (k.key == ebiten.KeySpace || !typingSpell && (k.key == ebiten.KeyComma || k.key == ebiten.KeyPeriod)) {
+			continue
+		}
+		pressed := inpututil.IsKeyJustPressed(k.key)
+		if repeatMovement && (k.token == "U" || k.token == "D" || k.token == "L" || k.token == "R") {
+			pressed = input.RepeatMovement(inpututil.KeyPressDuration(k.key))
+		}
+		if pressed {
 			out = append(out, k.token)
 		}
 	}
+	if typingName {
+		for _, r := range ebiten.AppendInputChars(nil) {
+			if r >= 32 && r <= 126 && (!typingSpell || r != ',' && r != '.' && r != '<' && r != '>') {
+				if r == ' ' {
+					out = append(out, "SPACE")
+				} else {
+					out = append(out, string(r))
+				}
+			}
+		}
+		return out
+	}
 	for i, k := range letterKeys {
-		if inpututil.IsKeyJustPressed(k) {
+		pressed := inpututil.IsKeyJustPressed(k)
+		if repeatMovement && (k == ebiten.KeyA || k == ebiten.KeyS || k == ebiten.KeyZ || k == ebiten.KeyX) {
+			pressed = input.RepeatMovement(inpututil.KeyPressDuration(k))
+		}
+		if pressed {
 			out = append(out, string(rune('A'+i)))
 		}
 	}
@@ -88,7 +110,7 @@ func keyboardTokens(typingName ...bool) []string {
 // 鍵盤走的是同一條路徑。
 func (g *game) mouseTokens(targets []input.Target, fallback string) []string {
 	var out []string
-	if _, dy := ebiten.Wheel(); dy != 0 {
+	if _, dy := ebiten.Wheel(); dy != 0 && g.wheelAllowed() {
 		if dy > 0 {
 			out = append(out, "U")
 		} else {
@@ -144,7 +166,7 @@ func (g *game) flowTargets() []input.Target {
 		if g.leftTown() {
 			if g.play != nil && g.play.ShowingSheetOutside() {
 				in := g.play.Inside
-				return iconTargets(len(in.Icons), in.Selected, cjk)
+				return insideTargets(in, cjk)
 			}
 			targets := worldTargets(g.worldSession, cjk)
 			// 野外走路的輸入迴圈也收「點肖像＝按數字」（`sub_29004:0x29105`）。
@@ -158,10 +180,7 @@ func (g *game) flowTargets() []input.Target {
 		}
 		if g.flow.Town.Mode == town.ModeInside {
 			in := g.flow.Town.Inside
-			targets := iconTargets(len(in.Icons), in.Selected, cjk)
-			if g.flow.Town.Recruiting() && in.List != nil {
-				targets = append(targets, recruitTargets(in, cjk)...)
-			}
+			targets := insideTargets(in, cjk)
 			if g.flow.Town.PortraitClicks() {
 				targets = append(targets, portraitTargets(len(g.flow.Town.Party), cjk)...)
 			}
@@ -212,11 +231,110 @@ func worldTargets(s *world.Session, cjk bool) []input.Target {
 	if s == nil || s.Screen == nil || len(s.Screen.Icons) == 0 {
 		return nil
 	}
-	// 露營與問句那幾頁蓋在圖示列上，點下去不該還去搬白框。
-	if s.Camping || s.Prompt != nil {
+	// 問句已有自己的 YES／NO 列；露營與通知仍只等確認。
+	if s.Camping || s.Prompt != nil && s.Prompt.Kind == world.PromptNotice {
 		return nil
 	}
 	return iconTargets(len(s.Screen.Icons), s.Screen.Selected, cjk)
+}
+
+// wheelAllowed 只在可捲清單與地圖收滾輪。等待頁不把動量當成確認。
+func (g *game) wheelAllowed() bool {
+	if g.flow == nil || len(g.notice) > 0 {
+		return false
+	}
+	if g.flow.Scene != flow.SceneTown {
+		return g.flow.Scene == flow.SceneMenu || g.flow.Scene == flow.SceneRoster || g.flow.Scene == flow.SceneSelect
+	}
+	if g.quest != nil && g.quest.state != nil {
+		s := g.quest.state
+		return s.Stage == battle.StageSpoils || s.Stage == battle.StageField && (s.Plan.Prompt == battle.PromptSpell || s.Plan.Prompt == battle.PromptAffect)
+	}
+	if g.play == nil {
+		return false
+	}
+	if g.play.ShowingItemPage() {
+		p := g.play.Inside.ItemPage
+		return !p.Acting && len(p.Message) == 0 && len(p.DropMessage) == 0
+	}
+	if g.leftTown() && !g.play.ShowingSheetOutside() {
+		return g.worldSession != nil && !g.worldSession.Camping && g.worldSession.Prompt == nil
+	}
+	in := g.play.Inside
+	return g.play.Mode == town.ModeMap || g.play.Mode == town.ModeInside && in != nil && (in.List != nil || in.SpellEdit != nil && in.SpellEdit.Typing == nil)
+}
+
+func (g *game) walkingInput() bool {
+	if g.flow == nil || g.flow.Scene != flow.SceneTown || g.play == nil || len(g.notice) > 0 || g.endingReached() || g.quest != nil && g.quest.state != nil {
+		return false
+	}
+	if g.leftTown() {
+		return !g.play.ShowingSheetOutside() && g.worldSession != nil && g.worldSession.Mode == world.ModeMap && !g.worldSession.Camping && g.worldSession.Prompt == nil
+	}
+	return g.play.Mode == town.ModeMap
+}
+
+func movementHeld() bool {
+	for _, key := range []ebiten.Key{ebiten.KeyArrowUp, ebiten.KeyArrowDown, ebiten.KeyArrowLeft, ebiten.KeyArrowRight, ebiten.KeyA, ebiten.KeyS, ebiten.KeyZ, ebiten.KeyX} {
+		if ebiten.IsKeyPressed(key) {
+			return true
+		}
+	}
+	return false
+}
+
+func insideTargets(in *town.Inn, cjk bool) []input.Target {
+	if in == nil {
+		return nil
+	}
+	out := iconTargets(len(in.Icons), in.Selected, cjk)
+	if in.List != nil {
+		out = append(out, recruitTargets(in, cjk)...)
+	}
+	if p := in.SpellEdit; p != nil && p.Typing == nil {
+		if p.Menu != nil {
+			x, y, w, step := town.SpellMenuGeometry(p, cjk)
+			for i := range p.Menu.Rows {
+				row := input.Row(x, y, w, step, i, p.Menu.Selected, "U", "D")
+				out = append(out, confirmRow(row, in.Selected))
+			}
+		} else {
+			for i, field := range p.Fields {
+				scale, h := 1, 8
+				if cjk {
+					scale, h = book.CJKScale, 18
+				}
+				w := len([]rune(field.Text)) * town.CellWidth * scale
+				if w < 24*scale {
+					w = 24 * scale
+				}
+				row := input.Row(field.Col*town.CellWidth*scale, field.Row*scale, w, h, 0, 0, "U", "D")
+				row.Tokens = input.Row(0, 0, 0, 0, i, p.Cursor, "U", "D").Tokens
+				out = append(out, confirmRow(row, in.Selected))
+			}
+		}
+	}
+	if p := in.ItemPage; p != nil && !p.Acting && len(p.Message) == 0 && len(p.DropMessage) == 0 {
+		l := town.ItemPageLayout
+		scale := 1
+		if cjk {
+			scale = book.CJKScale
+		}
+		for i := range p.Rows {
+			row := input.Row(l.ListCol*town.CellWidth*scale, l.ListRow*scale, 48*scale, l.ListStep*scale, i, p.Selected, "U", "D")
+			out = append(out, confirmRow(row, in.Selected))
+		}
+	}
+	return out
+}
+
+func confirmRow(row input.Target, selected int) input.Target {
+	row.Tokens = row.Tokens[:len(row.Tokens)-1]
+	for n := 0; n < selected; n++ {
+		row.Tokens = append(row.Tokens, "<")
+	}
+	row.Tokens = append(row.Tokens, "RET")
+	return row
 }
 
 // battleTargets 是戰鬥那一層。規劃段與戰利品段各有一列圖示，兩列都走 `<`／`>`

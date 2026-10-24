@@ -1,0 +1,231 @@
+{
+  "source_zip": {
+    "name": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_entry": "EGA runtime composition; source PNG archive/entry index in referenced asset manifest",
+  "source_png_manifest": {
+    "path": "assets/original-derived-png/ega/manifest.json",
+    "sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9"
+  },
+  "renderer": "Go 1.26.7 / Ebitengine 2.9.9",
+  "tools": [
+    "tools/verify_feedback_gui.py",
+    "tools/verify_feedback_battle.py"
+  ],
+  "seed": 1,
+  "evidence": "remake UI and controlled scene verification; original parity not claimed",
+  "rights": "original-derived PNG; repository decision 2026-10-17; original distribution rights unconfirmed",
+  "frames": [
+    {
+      "file": "anvil-en.png",
+      "source": "gui/anvil-en.png",
+      "frame": 0,
+      "png_sha256": "1466a5642d71bf6d09149693036ff5e3b502cf5439f191c5ec5fa39a72db3529"
+    },
+    {
+      "file": "anvil-offer-en.png",
+      "source": "gui/anvil-offer-en.png",
+      "frame": 1,
+      "png_sha256": "99c236aa688ecb0eb57ccf7ca2a7e6bbb405d92e31b759071aa91b163a08de6a"
+    },
+    {
+      "file": "anvil-offer-zh-Hant.png",
+      "source": "gui/anvil-offer-zh-Hant.png",
+      "frame": 2,
+      "png_sha256": "f10e3ec2b9c477f1b81e7354124a863e055260e8698ffdaca5629deefaa47357"
+    },
+    {
+      "file": "anvil-zh-Hant.png",
+      "source": "gui/anvil-zh-Hant.png",
+      "frame": 3,
+      "png_sha256": "858681fbd96a7c5b77aa6886cde11e8deb3bcdaa3cd657a12c5c1c5b9a4aed8a"
+    },
+    {
+      "file": "armour-adjusted-en.png",
+      "source": "gui/armour-adjusted-en.png",
+      "frame": 4,
+      "png_sha256": "c8f1a6542a829e6c6c4b8a7d76de6e6ddc934cba76e82e6dc705bb9fa25b6b38"
+    },
+    {
+      "file": "armour-adjusted-zh-Hant.png",
+      "source": "gui/armour-adjusted-zh-Hant.png",
+      "frame": 5,
+      "png_sha256": "b73eec9cf9fd2c0eebcdf12e0caf09ea439b5e5b6a9becc0ba948ecdcbb21596"
+    },
+    {
+      "file": "automatic-party-reload.png",
+      "source": "gui/automatic-party-reload.png",
+      "frame": 6,
+      "png_sha256": "8ef439d404c597aa804ca917ce26a49c30ba2432df187eff03de9e6b3e0fb531"
+    },
+    {
+      "file": "automatic-reload-menu.png",
+      "source": "gui/automatic-reload-menu.png",
+      "frame": 7,
+      "png_sha256": "a00665ae067020655b534614c68757f15dd741502bc94d73fc111c287cfe2f4c"
+    },
+    {
+      "file": "created-character-inn.png",
+      "source": "gui/created-character-inn.png",
+      "frame": 8,
+      "png_sha256": "2bbe82d37b433efac4a3952d63927d8940632157192155b50d5c2765e27e6926"
+    },
+    {
+      "file": "created-menu.png",
+      "source": "gui/created-menu.png",
+      "frame": 9,
+      "png_sha256": "04eedf5862e4102a9dc46aac9559567ee848d92c9a98e63991dfb128de27c635"
+    },
+    {
+      "file": "equipment-first-character.png",
+      "source": "gui/equipment-first-character.png",
+      "frame": 10,
+      "png_sha256": "5e093fb2fcbefd6b5cca0b8a58e61941a085299ced4e3feb55fcdfbc0f5aaad0"
+    },
+    {
+      "file": "held-map-movement.png",
+      "source": "gui/held-map-movement.png",
+      "frame": 11,
+      "png_sha256": "8ef439d404c597aa804ca917ce26a49c30ba2432df187eff03de9e6b3e0fb531"
+    },
+    {
+      "file": "magic-editor-en.png",
+      "source": "gui/magic-editor-en.png",
+      "frame": 12,
+      "png_sha256": "8d1c6b69ff30376590d98b66f9ade7a8ca505292c4375b0b8e5966eafc5ec9d2"
+    },
+    {
+      "file": "magic-editor-zh-Hant.png",
+      "source": "gui/magic-editor-zh-Hant.png",
+      "frame": 13,
+      "png_sha256": "e6cb5dc17804c7377246620028723269c9e0257fec678f43d0e41ac8e5beea8a"
+    },
+    {
+      "file": "magic-options-en.png",
+      "source": "gui/magic-options-en.png",
+      "frame": 14,
+      "png_sha256": "d8048e37d06a2beb23dd4f92e5bb4995d0039e98e66281e211f2cd15c5e101e4"
+    },
+    {
+      "file": "magic-options-zh-Hant.png",
+      "source": "gui/magic-options-zh-Hant.png",
+      "frame": 15,
+      "png_sha256": "3ab57b7a94c040bdaf43d4719231b3da9126562c0c4823494e7a9a27ca39d53d"
+    },
+    {
+      "file": "magic-selected-en.png",
+      "source": "gui/magic-selected-en.png",
+      "frame": 16,
+      "png_sha256": "84312f1a52dc1dbd1f6f873df5620973246a03b3d6820743ab3c1c345b5411f4"
+    },
+    {
+      "file": "magic-selected-zh-Hant.png",
+      "source": "gui/magic-selected-zh-Hant.png",
+      "frame": 17,
+      "png_sha256": "f411704aa5b367b5cc1f522f070a986dee8a882d1ec44c2ca3900b50299a578c"
+    },
+    {
+      "file": "paid-and-saved.png",
+      "source": "gui/paid-and-saved.png",
+      "frame": 18,
+      "png_sha256": "a1ea7fb87c0699c9239522c38c86abd0cb6e12fa7b29758532e3e6b0eda9ed62"
+    },
+    {
+      "file": "recruited-second-character.png",
+      "source": "gui/recruited-second-character.png",
+      "frame": 19,
+      "png_sha256": "08f513b37319d8d1efb8802e144eb6252213cb341af58cb4177abf3617403340"
+    },
+    {
+      "file": "sell-done-en.png",
+      "source": "gui/sell-done-en.png",
+      "frame": 20,
+      "png_sha256": "d11fd75ecff10c8c429080a15c07d6e828d9f70560ca9c65305a96e37a1f6c6f"
+    },
+    {
+      "file": "sell-done-zh-Hant.png",
+      "source": "gui/sell-done-zh-Hant.png",
+      "frame": 21,
+      "png_sha256": "f0799f2ca1472a00e719cabe3b2a511bfa4d6d65e1f54d680be358d15b376b1a"
+    },
+    {
+      "file": "sell-list-en.png",
+      "source": "gui/sell-list-en.png",
+      "frame": 22,
+      "png_sha256": "1833f394164a48d9d06f0278840d9db17aaa95a72edff6512c6b8a8537ac933c"
+    },
+    {
+      "file": "sell-list-zh-Hant.png",
+      "source": "gui/sell-list-zh-Hant.png",
+      "frame": 23,
+      "png_sha256": "385d774b70fd2236c6134e8a3f8628dac665a1ea247a184b25a51f25ef294941"
+    },
+    {
+      "file": "sell-offer-en.png",
+      "source": "gui/sell-offer-en.png",
+      "frame": 24,
+      "png_sha256": "e9e4f18c60f9dc60b6e2bedce5295cae471efa1d83e0a09441f3d28b935686c2"
+    },
+    {
+      "file": "sell-offer-zh-Hant.png",
+      "source": "gui/sell-offer-zh-Hant.png",
+      "frame": 25,
+      "png_sha256": "4d962af6a1eb27cf9780773114b36b053bfa39f1065af62d35aecbc2935f0ab5"
+    },
+    {
+      "file": "sheet-second-character.png",
+      "source": "gui/sheet-second-character.png",
+      "frame": 26,
+      "png_sha256": "46a04f8655b60ccfb258ffd3f6c118680fd110e9dfd42aa26743098008648457"
+    },
+    {
+      "file": "typing-10.png",
+      "source": "gui/typing-10.png",
+      "frame": 27,
+      "png_sha256": "9e530cda88f2f78e1be17417eebd15c93ea0e908a386aba48d44686d63f41d72"
+    },
+    {
+      "file": "typing-21.png",
+      "source": "gui/typing-21.png",
+      "frame": 28,
+      "png_sha256": "45dcaad2061b5a44f3e821c567c01bde42184f8a9247d4c5794fef245c5de220"
+    },
+    {
+      "file": "attack-area-en.png",
+      "source": "battle/area-en/step-009.png",
+      "frame": 29,
+      "png_sha256": "2e7e662241a6600850453988a5b4fa2caee7a31290fb02337e55b23562ee4b92"
+    },
+    {
+      "file": "attack-guard-en.png",
+      "source": "battle/guard-en/step-012.png",
+      "frame": 30,
+      "png_sha256": "98dbd48c5dcee4c920c1900c68abcc25246ae75a7a9e25b203cd9ec7547a1235"
+    },
+    {
+      "file": "attack-committed-en.png",
+      "source": "battle/committed-en/step-016.png",
+      "frame": 31,
+      "png_sha256": "41a232b497eeadad69f5424e5a67c2e9b4e74ab3943e31d1806b408d344675a6"
+    },
+    {
+      "file": "attack-area-zh-Hant.png",
+      "source": "battle/area-zh-Hant/step-009.png",
+      "frame": 32,
+      "png_sha256": "bfe31dff483e2592754fe5d991c7d6261a4ab752a12e7a46208213c1d93c001f"
+    },
+    {
+      "file": "attack-guard-zh-Hant.png",
+      "source": "battle/guard-zh-Hant/step-012.png",
+      "frame": 33,
+      "png_sha256": "8f5a24c4f6e9ada63ca564472a93747071572a9950cac1f394160f51d1de1472"
+    },
+    {
+      "file": "attack-committed-zh-Hant.png",
+      "source": "battle/committed-zh-Hant/step-016.png",
+      "frame": 34,
+      "png_sha256": "6061fa07a5e5377cf3f6d6f98a9f15df26d9cf4828f9d485f42c27c8a2e2c15b"
+    }
+  ]
+}

@@ -61,7 +61,7 @@ type BodyPanelData struct {
 // `sub_27E20` 畫人形（隊員 0x47＋性別、敵人 0x49），畫完再換回來（RE-153）。
 func (s *State) BodyPanel() (BodyPanelData, bool) {
 	i := s.Plan.BodyActor - 1
-	planning := s.Stage == StageField && s.Plan.Prompt < PromptNextRound
+	planning := s.Stage == StageField && (s.Plan.Prompt < PromptNextRound || s.Plan.Prompt == PromptAttackArea)
 	if s.Plan.Prompt == PromptArea && s.Area != nil {
 		i, planning = s.Area.Target, true
 	}

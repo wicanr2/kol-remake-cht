@@ -840,6 +840,10 @@ const (
 // candidateAt 是 `sub_24C35`：依索引順序找站在 (x, y) 而且通過全部條件的參戰者，沒有回 -1。
 // 空槽、自己與已經倒下的都不算；同一格上排在前面但沒通過的不會擋住後面的。
 func (s *State) candidateAt(i, x, y, mask int) int {
+	return s.candidateAtRoll(i, x, y, mask, s.aiRoll)
+}
+
+func (s *State) candidateAtRoll(i, x, y, mask, roll int) int {
 	for t := range s.Actors {
 		o := s.Actors[t]
 		if o.Side == SideEmpty || t == i || o.X != x || o.Y != y || o.Down() {
@@ -851,7 +855,7 @@ func (s *State) candidateAt(i, x, y, mask int) int {
 		if mask&maskOnFoot != 0 && o.Flag1E != 0 {
 			continue
 		}
-		if mask&maskHidden != 0 && s.hiddenFrom(i, t, nil) {
+		if mask&maskHidden != 0 && o.Flag05 != 0 && EnemyIntellectCheck(s.Actors[i].Intellect, s.Actors[i].Level, roll) {
 			continue
 		}
 		if mask&maskCaster != 0 && o.Command != CmdCast && o.Command != CmdMissile {

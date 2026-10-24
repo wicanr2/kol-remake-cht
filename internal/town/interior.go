@@ -13,7 +13,8 @@ const (
 	IconCompanion = 6
 	IconTrade     = 9
 	IconTrain     = 10
-	IconHeal      = 11
+	IconSell      = 11
+	IconHeal      = IconSell // 舊名稱保留供定位；原版圖示 11 為販賣。
 	IconAward     = 12
 	IconScroll    = 13
 	IconMirror    = 17

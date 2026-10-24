@@ -1,6 +1,10 @@
 # 《武士傳說》重製工作清單
 
-更新日期：2026-10-18
+更新日期：2026-10-24
+
+本次 [SPEC-041 試玩回報修正](docs/spec/041-player-feedback-fixes.md)已完成開發版接線及
+[限定驗證](docs/verification/player-feedback-20261024.md)。下一交付閘門為新版打包與平台抽測，
+本次沒有建立版號或發布。原版動態 oracle 未知與既有未完成項保持分開。
 
 三平台純EGA／EGA＋HD六個完整版已重建為`v.1.0.5-20261018`，見[本輪驗收](docs/verification/repack-v1.0.5-20261018.md)。正式程式與前輪記憶體修正相同，Linux／Wine實際封包操作通過，macOS為結構驗證；六包只留本機。
 

@@ -124,7 +124,11 @@ func (s *Session) Key(token string) bool {
 			s.MoveItemSelection(1)
 			return true
 		case "1", "2", "3", "4", "5", "6":
-			s.Digit(int(token[0] - '1'))
+			if p.Giving {
+				s.Digit(int(token[0] - '1'))
+			} else if !p.Acting {
+				s.SwitchSheet(int(token[0] - '1'))
+			}
 			return true
 		}
 	case s.InArena():
@@ -145,7 +149,7 @@ func (s *Session) Key(token string) bool {
 			s.MoveList(1)
 			return true
 		}
-	case s.Shopping():
+	case s.Shopping() && s.Inside.List != nil:
 		switch token {
 		case "U":
 			s.MoveShop(-1)
@@ -154,7 +158,7 @@ func (s *Session) Key(token string) bool {
 			s.MoveShop(1)
 			return true
 		}
-	case s.Scrolling():
+	case s.Scrolling() && (s.Inside.List != nil || s.SpellEditing()):
 		switch token {
 		case "U":
 			s.MoveScroll(-1)
@@ -166,14 +170,23 @@ func (s *Session) Key(token string) bool {
 	case s.Training():
 		switch token {
 		case "U":
-			s.MoveTrain(-1)
-			return true
+			if s.Inside.List != nil {
+				s.MoveTrain(-1)
+				return true
+			}
 		case "D":
-			s.MoveTrain(1)
-			return true
+			if s.Inside.List != nil {
+				s.MoveTrain(1)
+				return true
+			}
 		case "1", "2", "3", "4", "5":
 			s.TrainCount(int(token[0] - '0'))
 			return true
+		}
+	}
+	if s.ShowingSheet() && !s.ShowingItemPage() && !s.ShowingPartyPage() && !s.ShowingQuestList() && !s.ShowingSpellList() {
+		if n, ok := sheetDigit(token); ok {
+			return s.SwitchSheet(n)
 		}
 	}
 	// 城鎮戶外按 1…6 打開第 n 名的資料頁（`sub_10000:loc_10DA4`，RE-150）。
@@ -187,6 +200,14 @@ func (s *Session) Key(token string) bool {
 		return s.ChooseSpeaker(n)
 	}
 	if d, ok := walkKeys[token]; ok {
+		if s.Mode != ModeMap && (token == "L" || token == "R" || token == "U" || token == "D") {
+			step := 1
+			if token == "L" || token == "U" {
+				step = -1
+			}
+			s.MoveCursor(step)
+			return true
+		}
 		s.Walk(d[0], d[1])
 		return true
 	}

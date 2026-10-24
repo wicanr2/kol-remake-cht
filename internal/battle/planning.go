@@ -4,9 +4,7 @@ package battle
 // 之後依圖號走到選目標格與子選單，最後把指令碼、攻擊選項與防禦選項寫回那一名。
 // 整輪決定完才問記錄 0x108「Begin next round?」。
 //
-// 沒接的兩塊：背包（0x0D）要兩層清單，體型那一列（`sub_24A02`）要判斷面前那一格
-// 有沒有符合遮罩 0x18 的人，而遮罩用到語意未定的 +0x05。兩者按下去都記進
-// Unimplemented，不默默吞掉。
+// 武器的攻擊部位等待層依 SPEC-041 補齊，沿用既有目標篩選與檢視骰。
 
 // Prompt 是規劃段停在哪一層。
 type Prompt int
@@ -41,6 +39,8 @@ const (
 	// （記錄 0x184 ＋ 0x186／0x185 ＋ 0x16C，`0x2845E`，RE-100）。**只認 1…6**。
 	// 要選目標格的法術不問，直接擲 `rand(6) − 1`。
 	PromptArea
+	// PromptAttackArea 是武器攻擊的上／中／下段，與法術的六部位問句分開。
+	PromptAttackArea
 )
 
 // Planning 是規劃段那一名走到哪裡。
@@ -148,7 +148,7 @@ func (s *State) planSummary(i int) (Cell, bool) {
 func (s *State) TargetMarker() (Cell, bool) {
 	var c Cell
 	switch s.Plan.Prompt {
-	case PromptTarget, PromptWeaponForm, PromptUnarmedForm, PromptMoveForm, PromptGuardForm:
+	case PromptTarget, PromptWeaponForm, PromptUnarmedForm, PromptMoveForm, PromptGuardForm, PromptAttackArea:
 		c = Cell{Row: s.Plan.Cursor.Row, Col: s.Plan.Cursor.Col}
 	case PromptCommand:
 		if !s.Plan.SummaryShown {
@@ -191,6 +191,9 @@ func (s *State) MoveCursor(dRow, dCol int, mouse bool) {
 		return
 	}
 	if s.Plan.Prompt != PromptTarget {
+		if !mouse && (dRow == 0 || dCol == 0) {
+			s.MoveSelection(dRow + dCol)
+		}
 		return
 	}
 	s.Plan.Cursor.Move(dRow, dCol, mouse)
@@ -212,6 +215,8 @@ func (s *State) Choose() bool {
 		return s.chooseTarget(i)
 	case PromptWeaponForm, PromptUnarmedForm:
 		return s.chooseAttackForm(i)
+	case PromptAttackArea:
+		return s.chooseAttackArea(i)
 	case PromptMoveForm:
 		return s.chooseMoveForm(i)
 	case PromptGuardForm:
@@ -332,12 +337,48 @@ func (s *State) chooseAttackForm(i int) bool {
 		if s.Plan.Style == 1 {
 			return s.commit(i, s.Plan.Command, s.Plan.Style, 2)
 		}
+		if s.Plan.Style != 0 {
+			s.Plan.Prompt = PromptAttackArea
+			s.Plan.Bar = s.attackAreaForms(i)
+			s.Plan.Selected = 0
+			return false
+		}
 	} else {
 		s.Plan.Style = UnarmedFormOption(icon)
 	}
 	s.Plan.Prompt = PromptGuardForm
 	s.Plan.Bar = GuardForms()
 	s.Plan.Selected = 0
+	return false
+}
+
+// attackAreaForms 對應 sub_24A02；選目標後 Facing 已由 TargetCursor.Confirm 更新。
+func (s *State) attackAreaForms(i int) []int {
+	a := s.Actors[i]
+	c := FacingCell(a.Facing)
+	t := s.candidateAtRoll(i, a.X+c/3-1, a.Y+c%3-1, maskOnFoot|maskHidden, s.Round.InspectionRoll)
+	forms := []int{CmdCancel}
+	if t < 0 {
+		return append(forms, IconAttackMiddle)
+	}
+	if s.Actors[t].Size-a.Size < 100 {
+		forms = append(forms, IconAttackHigh)
+	}
+	return append(forms, IconAttackMiddle, IconAttackLow)
+}
+
+func (s *State) chooseAttackArea(i int) bool {
+	icon := s.icon()
+	if icon == CmdCancel {
+		s.Plan.Prompt, s.Plan.Bar, s.Plan.Selected = PromptWeaponForm, WeaponForms(), 0
+		return false
+	}
+	if icon == IconAttackMiddle {
+		s.Plan.Style++
+	} else if icon == IconAttackLow {
+		s.Plan.Style += 2
+	}
+	s.Plan.Prompt, s.Plan.Bar, s.Plan.Selected = PromptGuardForm, GuardForms(), 0
 	return false
 }
 

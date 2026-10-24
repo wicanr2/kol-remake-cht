@@ -297,6 +297,34 @@ func (s *Session) closeSheet() {
 // ShowingSheet 回報現在是不是停在角色資料頁。
 func (s *Session) ShowingSheet() bool { return s.Inside != nil && s.Inside.Sheet != nil }
 
+// SwitchSheet 在資料頁及未開動作的裝備清單切換隊員，保留返回宿主。
+func (s *Session) SwitchSheet(n int) bool {
+	if !s.ShowingSheet() || n < 0 || n >= len(s.Party) {
+		return false
+	}
+	if p := s.Inside.ItemPage; p != nil && (p.Acting || len(p.Message) > 0 || len(p.DropMessage) > 0) {
+		return false
+	}
+	items := s.ShowingItemPage()
+	selected := 0
+	if items {
+		selected = s.Inside.ItemPage.Selected
+	}
+	page := s.buildSheet(s.Party[n])
+	if page == nil {
+		return false
+	}
+	s.setSpeaker(n)
+	s.Inside.Sheet, s.Inside.ItemPage, s.Inside.Detail = page, nil, nil
+	s.restoreSpeaker()
+	s.setInsideIcons(sheetIcons(s.Party[n]))
+	if items {
+		s.OpenItemPage()
+		s.MoveItemSelection(selected)
+	}
+	return true
+}
+
 // upperWeapons 把武器名轉大寫。資料裡存的是 `Greatsword`（5-bit 解碼器的 mode 1），
 // 資料頁整段走大寫旗標，所以畫出來是 `GREATSWORD`（RE-074／RE-075）。
 func upperWeapons(rows []WeaponRow) []WeaponRow {

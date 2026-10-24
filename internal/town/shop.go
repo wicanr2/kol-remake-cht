@@ -114,6 +114,8 @@ const (
 	shopFit
 	// shopAdjust 是 TRAIN 的甲冑調整。
 	shopAdjust
+	shopSellList
+	shopSellConfirm
 )
 
 // shopState 是一次逛商店的狀態。
@@ -128,6 +130,7 @@ type shopState struct {
 	// 甲冑調整時 fit 是總價、adjust 是要改的那幾件。
 	member, slot, fit int
 	adjust            []adjustEntry
+	sellSlots         []int
 }
 
 // Shopping 回報現在是不是停在商店的畫面。
@@ -175,7 +178,7 @@ func (s *Session) shopView() *InnList {
 // MoveShop 是清單上的方向鍵。兩端夾住不繞回，視窗跟著捲。
 func (s *Session) MoveShop(delta int) {
 	sh := s.shop
-	if sh == nil || sh.stage != shopList || len(sh.goods) == 0 {
+	if sh == nil || (sh.stage != shopList && sh.stage != shopSellList) || len(sh.goods) == 0 {
 		return
 	}
 	sh.cursor += delta
@@ -198,6 +201,10 @@ func (s *Session) MoveShop(delta int) {
 func (s *Session) shopAnswer(id int) {
 	sh := s.shop
 	if sh == nil {
+		return
+	}
+	if sh.stage == shopSellList || sh.stage == shopSellConfirm {
+		s.sellAnswer(id)
 		return
 	}
 	switch sh.stage {

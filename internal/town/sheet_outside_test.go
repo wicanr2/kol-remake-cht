@@ -74,3 +74,31 @@ func TestSheetOutsideSubPages(t *testing.T) {
 		t.Fatalf("城裡背板應該是第 5、13 張，得到 %v", got)
 	}
 }
+
+func TestDigitsSwitchSheetAndEquipmentKeepOutsideReturn(t *testing.T) {
+	for _, wild := range []bool{false, true} {
+		s := outsideSheetSession(t)
+		s.OpenSheetOutside(0, wild)
+		s.Key("2")
+		if s.speakerIndex() != 1 || !s.Inside.Party[1].Speaker || !s.ShowingSheetOutside() {
+			t.Fatal("資料頁沒有切換人物")
+		}
+		openItems(s)
+		s.Key("D")
+		s.Key("3")
+		if s.speakerIndex() != 2 || !s.ShowingItemPage() || s.Inside.ItemPage.Selected != 1 || s.Inside.Wild != wild {
+			t.Fatal("裝備切換遺失頁面狀態")
+		}
+		s.Key("6")
+		if s.speakerIndex() != 2 {
+			t.Fatal("越界人物改變發言者")
+		}
+		s.Inside.Selected = 1
+		s.Key("RET")
+		s.Inside.Selected = 0
+		s.Key("RET")
+		if s.Mode != ModeMap || s.ShowingSheetOutside() || s.Inside != nil {
+			t.Fatal("切換後返回宿主失敗")
+		}
+	}
+}
