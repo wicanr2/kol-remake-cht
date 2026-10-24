@@ -1,0 +1,12 @@
+=== RUN   TestFlinchCheck
+--- PASS: TestFlinchCheck (0.00s)
+=== RUN   TestFatigueRisesWhenAllowanceIsNegative
+--- PASS: TestFatigueRisesWhenAllowanceIsNegative (0.00s)
+=== RUN   TestFlinchKeepsCommand
+--- PASS: TestFlinchKeepsCommand (0.00s)
+=== RUN   TestCastFatigueEffect
+--- PASS: TestCastFatigueEffect (0.00s)
+=== RUN   TestRestRecoversFatigue
+--- PASS: TestRestRecoversFatigue (0.00s)
+PASS
+ok  	github.com/wicanr2/kol-remake-cht/internal/battle	0.009s

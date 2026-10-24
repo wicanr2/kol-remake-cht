@@ -236,8 +236,16 @@ func (s *State) Cast(caster, target, area int, rng Rand) CastResult {
 // 這一條也不掛倒數：效果 5 走的是自己的分支，不碰 `+0x30`。
 func (s *State) castFatigue(target, power int, negative bool) {
 	t := &s.Actors[target]
+	if t.Side == SideParty && s.Assistance.NoFatigue {
+		t.Fatigue = 0
+		return
+	}
 	if negative {
-		t.Fatigue += power * 2
+		mult := 1
+		if t.Side == SideMonster {
+			mult = s.Assistance.Multiplier()
+		}
+		t.Fatigue += power * 2 * mult
 		return
 	}
 	t.Fatigue -= power * 2

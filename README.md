@@ -71,13 +71,49 @@ Linux／Wine實際封包開場、組隊與F10已在4 GiB記憶體上限驗證；
 
 [83秒操作推廣影片](dist-all/v.1.0.6-20261024/promo/kol-v.1.0.6-20261024-feedback-promo-1080p.mp4)
 展示建角、住宿重啟、人物切換、販賣、鐵砧、法術修改、連走、騎馬選項與攻擊部位，也只留本機。
-[既有Release](https://github.com/wicanr2/kol-remake-cht/releases)與舊版檔案保持。
+[既有Release](https://github.com/wicanr2/kol-remake-cht/releases)與tag保持；本機交付只保留本頁最新版。
 
 [HD圖像與配套檔案](assets/hd/)已完整加入GitHub，共832份，包含727張PNG；[HD配樂](assets/audio/hd/)另有4首OGG與2份清冊／授權文件。全數與本版封包輸入雜湊相符。[公開範圍與權利說明](docs/RELEASE-RIGHTS-REVIEW.md#儲存庫公開化與hd全量收錄)及[逐檔清冊](docs/verification/public-repository-20261017.json)保留來源、Git blob與SHA-256。既有素材manifest沿用驗收時文字，公開收錄不變更原作或第三方權利。
 嚴格原版一致性與平台真機驗收另列後續研究，
 目前狀態以 [CONTEXT.md](CONTEXT.md) 與 [工作清單](WORKLIST.md) 為準。
 
-操作照原版參考卡：
+## 工具列與可選輔助
+
+目前原始碼另有上方工具列與可選輔助。下列功能尚未加入上方的既有下載與
+`v.1.0.6-20261024` 本機完整版；規格見 [SPEC-042](docs/spec/042-assist-toolbar.md)。
+[操作與保存驗收](docs/verification/assist-toolbar-20261024.md)附正式程式截圖及測試範圍。
+
+![正式遊戲的工具列與輔助控制](docs/verification/assist-toolbar-20261024/quick-controls.png)
+
+| 工具列 | 快捷鍵 | 操作 |
+|---|---|---|
+| 原貌／HD畫面 | 畫面設定內選取 | 直接切換圖像；純EGA版沒有HD素材時會提示 |
+| 輔助 | F8 | 展開第二列，直接設定玩家不疲勞、敵疲勞倍率、免怯戰與角色強化 |
+| 配樂 | F9 | 開關配樂 |
+| 畫面 | F10 | 開啟既有畫面設定 |
+| 暫停 | F7 | 暫停或繼續遊戲 |
+| 快捷鍵 | 點選 | 查看工具列按鍵說明 |
+| 收起 | F12 | 隱藏或顯示工具列，保留完整遊戲畫面 |
+
+設定頁開啟時遊戲暫停。方向鍵或Tab移動焦點，Enter執行，Esc返回。
+戰鬥輔助每次啟動都關閉。敵疲勞可選1、2、3、6倍，只增加疲勞累積量，休息回復保持。
+免怯戰避免隊員因恐懼取消行動；不疲勞不會復活角色或免除傷害。「戰鬥輔助歸零」關閉這些效果。
+
+![正式遊戲的永久角色強化面板](docs/verification/assist-toolbar-20261024/character-controls.png)
+
+角色強化先選「目前發言者」或「全隊」，輸入下限，再按該列「套用」或「補足」。
+欄位可用Ctrl+A清空，Backspace刪字。屬性下限使用人物頁單位，範圍1至170；
+已學技能範圍1至200，預填200；金幣預填9000，只補不足部分。既有較高數值不降低，
+也不增加未學武器技能。戰鬥結束後才能永久修改角色。
+
+強化立即改變角色，住宿時隨正常存檔保存。關閉輔助不會還原已改的數值。
+`toolbar.json`另存輸入偏好，不保存戰鬥輔助啟用狀態，也不改變`save.dat`格式。
+本功能依玩家提供的修改說明實作；對方倉庫為空，沒有合併對方程式碼。
+
+工具列字型使用粉圓2.1，離線轉為PNG後內嵌；[來源與雜湊](cmd/kol/toolbarfont/source.json)
+及[OFL授權](cmd/kol/toolbarfont/OFL.txt)隨程式保存。
+
+原有遊戲按鍵依原版參考卡：
 
 | 鍵 | 作用 |
 |---|---|

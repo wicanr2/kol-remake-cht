@@ -4,20 +4,24 @@
 
 | 項目 | 目前狀態與入口 |
 |---|---|
-| 正式程式 | 試玩修正已提交推送，來源`a091378`；[SPEC-041](docs/spec/041-player-feedback-fixes.md)及[測試](docs/verification/player-feedback-20261024.md) |
+| 正式程式 | 試玩修正後新增已核准的工具列與永久強化；[SPEC-042](docs/spec/042-assist-toolbar.md)、[驗收](docs/verification/assist-toolbar-20261024.md)及README正式截圖已完成；前版修正來源`a091378` |
 | 本機交付 | `v.1.0.6-20261024`，三平台×純EGA／EGA＋HD六包及83秒操作影片；[驗收](docs/verification/repack-v1.0.6-20261024.md) |
 | 平台 | Linux實際AppImage解包執行、Windows ZIP經Wine9均通過操作與無-load續玩；macOS僅雙架構及結構驗證 |
-| 資源與存檔 | 443份Go／module對應修正驗收；1744份資源沿用。純EGA912份，HD完整1744份；四首配樂及kol-save-v3保持 |
+| 資源與存檔 | 工具列驗收453份Go／module／內嵌字模輸入；既有封包443份Go／module、1744份資源保持。工具列偏好獨立toolbar.json，戰鬥輔助每次啟動關閉；永久角色值沿用kol-save-v3 |
 | 範圍限制 | 無新增原版parity或自然全任務通關；Windows／macOS未真機驗收，Linux未驗主機FUSE |
 | 遠端 | `main`已推送修正；public儲存庫與已發布v.1.0.5引擎Release保持。六個完整版與影片僅本機，沒有新Release或移動tag |
 | 工作區 | 完整封存及清理方式見[保存入口](docs/verification/retained-evidence.md)；C35候選保留，matching仍暫停 |
 
 本輪影片為實際鍵鼠剪輯，準備資料的場景明示標記。原始素材、原始輸入及歷史收據保持。
 唯一交付根目錄為`dist-all/v.1.0.6-20261024/`；歷程只寫[WORKLOG](WORKLOG.md)。
+使用者於2026-10-24明確要求只留最新版；舊版本機交付已刪除，歷史清冊及遠端Release／tag保留。
 
 ## 目前作業方向
 
-使用者要求的修正、commit／push、操作影片及三平台雙版本完整版已完成。
+已將使用者確認的工具列與永久強化原型接入正式遊戲，依[SPEC-042](docs/spec/042-assist-toolbar.md)實作並驗收。
+網友倉庫為空，使用者已同意依文字說明處理，沒有合併對方程式碼。
+工具列、戰鬥規則測試、正常角色修改與住宿重載、README正式截圖已通過；現有v.1.0.6封包不含本次新增功能。
+先前要求的修正、commit／push、操作影片及三平台雙版本完整版已完成。
 現行交付見本頁狀態表。公開引擎Release仍為v.1.0.5，沒有把本機完整版或影片上傳。
 目前不重開matching、原版未知分支或真機驗收。清理後需要舊研究時，依保存入口還原指定目錄。
 

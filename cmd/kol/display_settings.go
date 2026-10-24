@@ -24,6 +24,7 @@ func (g *game) displayEvent(action string) {
 		fmt.Printf("display action=%s hd=%t state=%x\n", action, g.hd != nil, sha256.Sum256(data))
 		g.musicDiagnostics()
 		g.displayAwaitFrame = true
+		g.toolbar.awaitFrame = true
 	}
 }
 

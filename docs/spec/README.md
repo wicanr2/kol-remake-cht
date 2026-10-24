@@ -20,6 +20,7 @@
 
 | ID | 規格 | 狀態 | 是否授權實作 |
 |---|---|---|---|
+| SPEC-042 | [工具列與可選輔助](042-assist-toolbar.md) | 限定CONFORMED | 工具列、預設關閉的戰鬥輔助、永久角色強化及住宿重載已[驗收](../verification/assist-toolbar-20261024.md)；既有六包未重建，無新增原版parity |
 | SPEC-041 | [試玩回報修正](041-player-feedback-fixes.md) | READY | 自動續玩、輸入、人物切換、販賣與攻擊部位已接線；[限定驗證](../verification/player-feedback-20261024.md)通過，未宣稱原版動態對拍 |
 | SPEC-040 | [受控場景與中文畫面驗收](040-controlled-scene-acceptance.md) | CONFORMED | 本輪收尾改採受控場景；指定畫面、獨立驗收模式及中文結局排版已驗 |
 | SPEC-039 | [HD 手繪美術與介面工作計畫](039-hd-art-ui.md) | 13類圖形及操作頁限定CONFORMED；新版平台封包下一閘門 | [完整HD驗收](../verification/hd-full-runtime-20261017.md)含天候、傷勢、標記、戰場、片頭、翻書與事件；F10及中文分階段通過 |

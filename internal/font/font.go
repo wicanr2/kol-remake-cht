@@ -10,6 +10,7 @@ import (
 	"image"
 	"image/color"
 	_ "image/png"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
@@ -63,7 +64,12 @@ type Font struct {
 
 // Load 讀取字型目錄下的指定字型。
 func Load(root, name string) (*Font, error) {
-	raw, err := os.ReadFile(filepath.Join(root, "manifest.json"))
+	return LoadFS(os.DirFS(root), name)
+}
+
+// LoadFS 也接受編入程式的 PNG 字模，避免工具列依賴外部字型安裝。
+func LoadFS(root fs.FS, name string) (*Font, error) {
+	raw, err := fs.ReadFile(root, "manifest.json")
 	if err != nil {
 		return nil, fmt.Errorf("讀取字型 manifest 失敗：%w", err)
 	}
@@ -85,11 +91,11 @@ func Load(root, name string) (*Font, error) {
 	if !found {
 		return nil, fmt.Errorf("字型 manifest 沒有 %s", name)
 	}
-	path := filepath.Join(root, meta.File)
+	path := meta.File
 	if strings.ToLower(filepath.Ext(path)) != ".png" {
 		return nil, fmt.Errorf("拒絕載入非 PNG 字模表：%s", meta.File)
 	}
-	f, err := os.Open(path)
+	f, err := root.Open(path)
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,8 @@
 # 完成比較後的證據保存與清理
 
 新版[六包及操作影片驗收](repack-v1.0.6-20261024.md)已納入此入口。
+追加的[工具列與永久強化驗收](assist-toolbar-20261024.md)及
+[本機保存清冊](local/assist-toolbar-20261024/retention.json)亦由本頁索引。
 
 2026-10-24依使用者要求完整清理工作區。舊研究保存於
 [完整清冊](local/workspace-cleanup-20261024/retention.json)及同目錄`evidence.tar.xz`；

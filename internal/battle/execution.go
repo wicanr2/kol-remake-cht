@@ -126,7 +126,7 @@ func FlinchThreshold(strength, intellect, level int) int {
 // 記錄時寫入——也就是**最後一隻被設定的怪物**的那一位。一場戰鬥只放同一種怪物
 // （RE-090），所以這裡直接讀 `State.Monster`。
 func (s *State) checkFlinch(i int, rng Rand) {
-	if !s.Monster.Fearsome {
+	if !s.Monster.Fearsome || s.Assistance.FearImmune {
 		return
 	}
 	a := &s.Actors[i]
@@ -417,6 +417,8 @@ func (s *State) Act(rng Rand) (ActResult, bool) {
 }
 
 func (s *State) nextAct(rng Rand, phased bool) (ActResult, bool) {
+	s.ApplyAssistance()
+	defer s.ApplyAssistance()
 	if s.Exec.pendingKnock != nil {
 		wait := *s.Exec.pendingKnock
 		s.Exec.pendingKnock = nil

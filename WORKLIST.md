@@ -2,6 +2,10 @@
 
 更新日期：2026-10-24
 
+使用者追加核准的[SPEC-042工具列與可選輔助](docs/spec/042-assist-toolbar.md)已接入正式遊戲，
+[規則、工具列、永久角色值及住宿重載驗收](docs/verification/assist-toolbar-20261024.md)與README截圖完成。
+目前六個v.1.0.6完整版仍對應前版修正，不包含本次新增功能；沒有新增Release。
+
 [SPEC-041試玩修正](docs/spec/041-player-feedback-fixes.md)、commit／push、83秒操作影片及
 `v.1.0.6-20261024`三平台雙版本六個完整版已完成，[驗收入口](docs/verification/repack-v1.0.6-20261024.md)。
 Linux／Wine實際封包與續玩抽測通過，macOS為結構驗證。原版未知與平台真機保持分開。

@@ -1057,6 +1057,7 @@ type shotJob struct {
 }
 
 type game struct {
+	toolbar             toolbarState
 	monsterReloadMemory *battle.MonsterReloadMemory
 	notice              []string
 	worldState          *world.Screen
@@ -1803,10 +1804,16 @@ func (g *game) Update() error {
 			inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 			return ebiten.Termination
 		}
+		if consumed, err := g.updateToolbar(); consumed || err != nil {
+			return err
+		}
 		if g.updateMusicControls() {
 			return nil
 		}
 		if g.updateDisplaySettings() {
+			if !g.displaySettings.Open {
+				g.toolbar.release = true
+			}
 			return nil
 		}
 		g.advanceBattleMarker()
@@ -2649,7 +2656,7 @@ func (g *game) updateBattle() {
 	}
 }
 
-func (g *game) Draw(dst *ebiten.Image) {
+func (g *game) drawGame(dst *ebiten.Image) {
 	if hd := g.hd; hd != nil {
 		hd.BeginHDFrame()
 		defer func() {
@@ -2699,6 +2706,9 @@ func (g *game) Draw(dst *ebiten.Image) {
 }
 
 func (g *game) Layout(int, int) (int, int) {
+	if g.interactive {
+		return g.desktopSize()
+	}
 	b := g.outputCanvas().Image().Bounds()
 	return b.Dx(), b.Dy()
 }
@@ -4636,7 +4646,11 @@ func main() {
 	}
 
 	bounds := g.outputCanvas().Image().Bounds()
-	ebiten.SetWindowSize(bounds.Dx()**scaleFlag, bounds.Dy()**scaleFlag)
+	windowHeight := bounds.Dy() * *scaleFlag
+	if g.interactive {
+		windowHeight += 48 * bounds.Dx() * *scaleFlag / 960
+	}
+	ebiten.SetWindowSize(bounds.Dx()**scaleFlag, windowHeight)
 	ebiten.SetWindowTitle("武士傳說")
 	err = ebiten.RunGame(g)
 	if g.music != nil {

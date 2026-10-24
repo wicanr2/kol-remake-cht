@@ -120,6 +120,7 @@ type Member struct {
 
 // State 是一場戰鬥。
 type State struct {
+	Assistance          Assistance `json:"-"`
 	MonsterReloadMemory *MonsterReloadMemory
 	// ReturnScratch是原版word_39A54的戰鬥內暫存，按實際寫入階段覆寫。
 	// 不加入人物／存檔，也不在第一個寫入之前推定原版初值。

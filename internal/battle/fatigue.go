@@ -187,6 +187,7 @@ func ClampEffort(allow, cost int) (int, int) {
 // 呼叫點要在清掉 `Hurt` **之前**——休息那一條與挨傷那一項都要讀它。
 func (s *State) EndTurnFatigue(i int) int {
 	a := &s.Actors[i]
+	before := a.Fatigue
 	if a.Hurt == 0 && a.Command == CmdRest {
 		// 休息那一條跳過額度那一整段。
 		a.Fatigue = a.Fatigue * RestRecoveryNum / RestRecoveryDen
@@ -203,6 +204,12 @@ func (s *State) EndTurnFatigue(i int) int {
 		if a.Fatigue -= left / fatigueDivide; a.Fatigue < 0 {
 			a.Fatigue = 0
 		}
+	}
+	if a.Side == SideParty && s.Assistance.NoFatigue {
+		a.Fatigue = 0
+	} else if a.Side != SideParty && a.Fatigue > before {
+		mult := s.Assistance.Multiplier()
+		a.Fatigue = before + (a.Fatigue-before)*mult
 	}
 	if a.FatigueRatio() < ExhaustedRatio {
 		return 0

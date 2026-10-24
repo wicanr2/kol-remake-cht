@@ -206,6 +206,9 @@ func (g *game) logicalPoint(x, y int) (int, int) {
 
 func (g *game) cursorPosition() (int, int) {
 	x, y := ebiten.CursorPosition()
+	if g.interactive {
+		x, y = g.gamePoint(x, y)
+	}
 	return g.logicalPoint(x, y)
 }
 
