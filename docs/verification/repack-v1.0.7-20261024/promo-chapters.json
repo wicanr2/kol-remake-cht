@@ -1,0 +1,211 @@
+[
+  {
+    "name": "intro",
+    "caption": "修正與新增功能實錄",
+    "start": 0,
+    "seconds": 5,
+    "section": "card",
+    "controlled": false,
+    "source_start": null,
+    "source_duration": null,
+    "sha256": "e34bfb510f343f57d96c46971078ad7094c7cf9cb0e4791ed2f7acdb03f98f16"
+  },
+  {
+    "name": "name",
+    "caption": "角色命名：Shift 大小寫輸入",
+    "start": 5,
+    "seconds": 5,
+    "section": "v1.0.6",
+    "controlled": false,
+    "source_start": 3.9945086548104882,
+    "source_duration": 4.780412087216973,
+    "sha256": "6a3014d74c54f0932f72a5e1295d2ce1bcd8405a5019ce4ccfff83743753192d"
+  },
+  {
+    "name": "save",
+    "caption": "旅店住宿：每人扣款並保存",
+    "start": 10,
+    "seconds": 5,
+    "section": "v1.0.6",
+    "controlled": false,
+    "source_start": 24.651802722830325,
+    "source_duration": 1.6592029579915106,
+    "sha256": "692154693942b6253948e41fa1281c39fbf56be7d14e38f984171e5185b481c5"
+  },
+  {
+    "name": "resume",
+    "caption": "重新開啟：自動讀回角色與金幣",
+    "start": 15,
+    "seconds": 5,
+    "section": "v1.0.6",
+    "controlled": false,
+    "source_start": 28.069389814976603,
+    "source_duration": 1.3759312578476965,
+    "sha256": "6abf35736e0981bdd6dc06470517071cbe887e4761e412164ebb1847c7101648"
+  },
+  {
+    "name": "switch",
+    "caption": "人物與裝備頁：數字鍵切換隊員",
+    "start": 20,
+    "seconds": 5,
+    "section": "v1.0.6",
+    "controlled": false,
+    "source_start": 29.4453316568397,
+    "source_duration": 3.0020528649911284,
+    "sha256": "89879de8d50db0e76d29b17acec3d466595912fad8fe90bbd64e0febc3209a21"
+  },
+  {
+    "name": "sell",
+    "caption": "商店販賣：點選物品、確認換取金幣",
+    "start": 25,
+    "seconds": 6,
+    "section": "v1.0.6",
+    "controlled": true,
+    "source_start": 35.97916313493624,
+    "source_duration": 2.2694176081568003,
+    "sha256": "ddaae3bdfd0e171ceb68a7496c1ec64fb94f3487c137d9ec19f4a08b64b4495d"
+  },
+  {
+    "name": "armour",
+    "caption": "鐵砧調整護甲：負重 200 變為 6",
+    "start": 31,
+    "seconds": 7,
+    "section": "v1.0.6",
+    "controlled": true,
+    "source_start": 38.49290809268132,
+    "source_duration": 2.8822690243832767,
+    "sha256": "e739683884614116ee3629a2744bf17b2bcf86155555155efe0799cd7851f335"
+  },
+  {
+    "name": "magic",
+    "caption": "法術修改：直接點選欄位與選項",
+    "start": 38,
+    "seconds": 7,
+    "section": "v1.0.6",
+    "controlled": true,
+    "source_start": 43.61454890295863,
+    "source_duration": 2.531003652140498,
+    "sha256": "2da2a90fdd886bd6c9bb3fc56ce5e08434da92741334f832197b23c6c47685df"
+  },
+  {
+    "name": "walk",
+    "caption": "野外移動：方向鍵長按連走",
+    "start": 45,
+    "seconds": 5,
+    "section": "v1.0.6",
+    "controlled": true,
+    "source_start": 48.13411813788116,
+    "source_duration": 5.513872210867703,
+    "sha256": "a22445ae1dd98cfa8de3cade54ec129d2b6e147620738506a5892b9343c4e5b9"
+  },
+  {
+    "name": "ride",
+    "caption": "騎馬遇敵：方向鍵選擇，再按 Enter",
+    "start": 50,
+    "seconds": 6,
+    "section": "v1.0.6",
+    "controlled": true,
+    "source_start": 56.147263132967055,
+    "source_duration": 3.3616195977665484,
+    "sha256": "1679aaf7030d3cb634cfe711e3d4dc5335504b883e8de7b0730a7f63f6fab81e"
+  },
+  {
+    "name": "attack",
+    "caption": "武器攻擊：攻擊方式、上中下、防禦方式",
+    "start": 56,
+    "seconds": 8,
+    "section": "v1.0.6",
+    "controlled": true,
+    "source_start": 62.17591137578711,
+    "source_duration": 4.976005275268108,
+    "sha256": "7f96f25982abde7dbb062a0ec5ddef2329596cb0345e43e5a0fd263deec859d0"
+  },
+  {
+    "name": "hd",
+    "caption": "EGA 與 HD：保留同一套操作修正",
+    "start": 64,
+    "seconds": 6,
+    "section": "v1.0.6",
+    "controlled": true,
+    "source_start": 67.15192270372063,
+    "source_duration": 13.852407908067107,
+    "sha256": "03f91d279ce5e75142950b2edfef0c529cd384c15ac21a07dc2ff19f9fe343aa"
+  },
+  {
+    "name": "assist",
+    "caption": "v1.0.7 輔助工具列：不疲勞、敵疲勞6倍、免怯戰",
+    "start": 70,
+    "seconds": 8,
+    "section": "v1.0.7",
+    "controlled": false,
+    "source_start": 0.20024975202977657,
+    "source_duration": 4.234440009109676,
+    "sha256": "ebe3b3238a56e66603d9f9671918472a5f58ae0eb3f96ad3e2c398feb7599a38"
+  },
+  {
+    "name": "permanent",
+    "caption": "v1.0.7 永久強化：屬性、已學技能200、金幣9000",
+    "start": 78,
+    "seconds": 12,
+    "section": "v1.0.7",
+    "controlled": false,
+    "source_start": 4.434698936063796,
+    "source_duration": 9.819643358234316,
+    "sha256": "d263662bdc2592f6b65d9fa74a1f55814ee107e20658e7e312adf6f70a247b2e"
+  },
+  {
+    "name": "assist-save",
+    "caption": "v1.0.7 選定角色或全隊，住宿保存永久數值",
+    "start": 90,
+    "seconds": 6,
+    "section": "v1.0.7",
+    "controlled": false,
+    "source_start": 14.25434754230082,
+    "source_duration": 3.043069137725979,
+    "sha256": "aec017593f7fa3ee67f24e4758cbcf7fe3ce04468c545db546f6aea09f5428d1"
+  },
+  {
+    "name": "assist-resume",
+    "caption": "v1.0.7 重開保留強化，戰鬥輔助預設關閉",
+    "start": 96,
+    "seconds": 7,
+    "section": "v1.0.7",
+    "controlled": false,
+    "source_start": 19.261369036044925,
+    "source_duration": 4.904238000046462,
+    "sha256": "6c6a82537d198011cc408cb0c4e8e5b4819ac91ae29d700ff281009199fcf376"
+  },
+  {
+    "name": "toolbar-hd",
+    "caption": "v1.0.7 工具列切換原貌與HD，遊戲狀態保持",
+    "start": 103,
+    "seconds": 7,
+    "section": "v1.0.7",
+    "controlled": false,
+    "source_start": 26.34177923714742,
+    "source_duration": 6.480220480822027,
+    "sha256": "37bddb80c468cfc48c19afcd06b02f72076de6b20a3c5e7886d9687d4b4d200b"
+  },
+  {
+    "name": "shortcuts",
+    "caption": "v1.0.7 F7暫停、F9配樂、F10畫面、F12收合",
+    "start": 110,
+    "seconds": 8,
+    "section": "v1.0.7",
+    "controlled": false,
+    "source_start": 32.82201005704701,
+    "source_duration": 5.54478549817577,
+    "sha256": "6d8bd339a4e61ae3555523e4850a148e3b72dae5858fe07586304d92fec9fdfa"
+  },
+  {
+    "name": "end",
+    "caption": "三平台、純EGA與EGA＋HD兩類完整版",
+    "start": 118,
+    "seconds": 6,
+    "section": "card",
+    "controlled": false,
+    "source_start": null,
+    "source_duration": null,
+    "sha256": "f2b32343a10a68e63fd693afc6c7f4a31400d08033874d229657607c4a32e5f9"
+  }
+]

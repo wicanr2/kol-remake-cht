@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.7-20261024",
+  "moves": [
+    {
+      "old": "full/kol-v.1.0.7-20261024-full-ega-windows-amd64.zip",
+      "new": "full/ega/kol-v.1.0.7-20261024-full-ega-windows-amd64.zip",
+      "sha256": "e9ace03a89b3e87ee6f8d12b87ffecf0bea418c87b7a7921c5bd6ea5377339b6"
+    },
+    {
+      "old": "full/kol-v.1.0.7-20261024-full-ega-linux-x86_64.AppImage",
+      "new": "full/ega/kol-v.1.0.7-20261024-full-ega-linux-x86_64.AppImage",
+      "sha256": "894b65683f4d3f4dc41670c680b2ed05007e25b5b63b4e628e6590480d153818"
+    },
+    {
+      "old": "full/kol-v.1.0.7-20261024-full-ega-macos-universal.zip",
+      "new": "full/ega/kol-v.1.0.7-20261024-full-ega-macos-universal.zip",
+      "sha256": "cd5a89c7505ae7d9b3ff22933f5aa230bc24d8ff22c89766ec96beb5e85c27b3"
+    },
+    {
+      "old": "full/kol-v.1.0.7-20261024-full-ega-hd-windows-amd64.zip",
+      "new": "full/ega-hd/kol-v.1.0.7-20261024-full-ega-hd-windows-amd64.zip",
+      "sha256": "a4582a963091230c4907f6e8d38056dc7f8bddbe2dc501e0cbf5d92b2a20da9a"
+    },
+    {
+      "old": "full/kol-v.1.0.7-20261024-full-ega-hd-linux-x86_64.AppImage",
+      "new": "full/ega-hd/kol-v.1.0.7-20261024-full-ega-hd-linux-x86_64.AppImage",
+      "sha256": "c248a0981e0cf2578e1437d59aa877c0a61b430515511c67d6c9d34ecda2ccdd"
+    },
+    {
+      "old": "full/kol-v.1.0.7-20261024-full-ega-hd-macos-universal.zip",
+      "new": "full/ega-hd/kol-v.1.0.7-20261024-full-ega-hd-macos-universal.zip",
+      "sha256": "ca5afe312840c5a4553e696054527d363ea19207234a6183e3f083d62b25f9d9"
+    }
+  ],
+  "package_bytes_unchanged": true
+}

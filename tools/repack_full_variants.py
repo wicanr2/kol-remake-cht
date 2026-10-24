@@ -79,13 +79,17 @@ def instructions(version, theme, platform):
 EGA＋HD 可在遊戲中以 F10 切換；圖片按需讀取，久未使用的快取自動釋放。
 回到 EGA 時釋放 HD 圖片。首次切換 HD 仍需等候載入。
 兩版均保留四首配樂，F9 獨立開關，預設開啟。
+上方工具列：F8輔助、F7暫停、F10畫面、F12收合；支援滑鼠及方向／Tab／Enter。
+戰鬥輔助每次啟動關閉；可選玩家不疲勞、敵疲勞1／2／3／6倍、免怯戰。
+角色強化可選目前發言者或全隊，永久補足屬性、已學技能或金幣下限，住宿時保存。
+強化不會因關閉輔助而還原；戰鬥中不能永久修改角色。數字偏好另存toolbar.json。
 方向鍵移動及選擇選項，逗號／句號移動圖示白框，Enter 執行，Esc 返回，Ctrl+Q 離開。
 地圖方向鍵可長按連走，遇到問句後須放開再按；滾輪不會跳過遭遇與戰鬥訊息。
 人物／裝備頁按1至6切換隊員。名稱支援Shift及Caps Lock大小寫。
 住宿會保存，重新開啟會自動讀回。另讀指定存檔可使用 -load 路徑；-load "" 開始新遊戲。
 存檔：{save}
 Windows 雙擊啟動日誌：%AppData%\\kol-remake-cht\\kol.log。
-遊戲規則及 kol-save-v3 存檔格式保持。原版完整 parity 與自然全任務通關未宣稱。
+輔助關閉時沿原規則；kol-save-v3 存檔格式保持。原版完整 parity 與自然全任務通關未宣稱。
 Windows 使用 Wine 驗證；macOS 僅結構驗證，尚無真機驗收。Linux 主機 FUSE 未驗。
 含原作衍生資料，僅本機保存，不得上傳或散布。引擎授權見 LICENSE。
 '''
@@ -179,7 +183,9 @@ exec "$HERE/usr/bin/kol" "$@"
                       platform=platform, graphics=theme, bundle='full', local_only=True,
                       resource_files=len(selected), files=rows))
                 suffix = '.AppImage' if platform == 'linux-x86_64' else '.zip'
-                target = args.out / 'full' / (stem + suffix)
+                category = args.out / 'full' / theme
+                category.mkdir(exist_ok=True)
+                target = category / (stem + suffix)
                 assert not target.exists()
                 if suffix == '.AppImage':
                     squash = Path(tmp) / 'data.squashfs'
@@ -197,7 +203,7 @@ exec "$HERE/usr/bin/kol" "$@"
                     resource_files=len(selected), local_only=True))
                 print('PACKAGED', target.name, target.stat().st_size, flush=True)
     write(args.out / 'SHA256SUMS.json', dict(version=args.version, files=packages))
-    (args.out / 'full/SHA256SUMS.txt').write_text(''.join(f"{p['sha256']}  {Path(p['path']).name}\n" for p in packages))
+    (args.out / 'full/SHA256SUMS.txt').write_text(''.join(f"{p['sha256']}  {Path(p['path']).relative_to('full')}\n" for p in packages))
 
 
 def verify(args):
@@ -312,7 +318,8 @@ def finish(args):
         version=args.version, source_commit=inputs['source_commit'], program_inputs=inputs['program_inputs'],
         program_files=len(inputs['program_inputs']), resource_files=len(inputs['resources']),
         resources_unchanged=True, memory_fix_reused=True, save_format_unchanged=True,
-        player_feedback_fixes_included='player-feedback-' in inputs['acceptance_receipt'],
+        player_feedback_fixes_included=True,
+        assistance_toolbar_included='assist-toolbar-' in inputs['acceptance_receipt'],
         prior_acceptance=inputs['acceptance_receipt'], prior_acceptance_sha256=inputs['acceptance_sha256'],
         packages=json.loads((args.out / 'SHA256SUMS.json').read_text())['files'],
         runtime=runtimes, compared_frames=len(comparisons)*2,

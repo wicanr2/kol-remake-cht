@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.7-20261024",
+  "video": "kol-v.1.0.7-20261024-updates-promo-1080p.mp4",
+  "video_sha256": "9d191ea5d32da74f0e8035ea03a15074b9a9fa03e811efa07b39a6ff90f42cef",
+  "seconds": 124,
+  "fps": 25,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "source_recordings": [
+    {
+      "section": "v1.0.6",
+      "recording_sha256": "e00cdb7faa316c8d43cd0b05b0f06430a01c1ca50a06c390cad7e393122ffc29",
+      "receipt_sha256": "4ab8921772a61783dc1cd2617c59c7da2b958110b9351ca207f70b5ec52db2f0",
+      "chapters_sha256": "a3c56c4fc894c8ff78d01cbb84bb23cf0ecb94d131d7424ab3b4bd05261cdbae"
+    },
+    {
+      "section": "v1.0.7",
+      "recording_sha256": "9760508e5711754c92dc6540b0c12e085d850159c4ef3709babdf1a69f46a535",
+      "receipt_sha256": "bc851e31351e53e987a392a522455a8728c8b2efded50ac5f55b634ba9ec7880",
+      "chapters_sha256": "f847ab6f2473cfab2002c0ede5aae52c0d32eecdd19784f438ea32b440b3fb48"
+    }
+  ],
+  "binary_sha256": "54f0a73da095d61e0e4e17111ea785188b7361a43c84ea97e2ec6a94debde266",
+  "audio": {
+    "source": "assets/audio/hd/title-chamber.ogg",
+    "sha256": "45f84293d4fb2d81a73a2f2da6e1bb3578e2279085b7592ebbcd5fea64e462ec",
+    "rights": "Project-authored MIDI/rendered OGG: RRSAL-1.0; FluidR3 GM MIT attribution in soundfont-LICENSE.txt. No original game music sampled.",
+    "peak": 12585,
+    "rms": 1543.8997767267265,
+    "human_listening": "已驗收：2026-10-13 使用者：這樣ok 那就繼續",
+    "relistened_this_run": false
+  },
+  "original_parity_claimed": false,
+  "remake_capture": true,
+  "controlled_scene_labels": true,
+  "window_close_tails_removed": [],
+  "font": {
+    "source": "jf-openhuninn-2.1",
+    "sha256": "9d5bf4932d31fe94c18cd8cfddc98bc1b14ce10f4e354c682179db290a99c825",
+    "license": "OFL-1.1"
+  },
+  "subtitle_bounds_checked": true,
+  "differences_from_previous": [
+    "v1.0.6修正與v1.0.7新增分段標示",
+    "保留完整工具列與遊戲視口等比呈現",
+    "新增永久強化、住宿重載與輔助啟動狀態實錄"
+  ],
+  "limits": "靜態字卡、暫停與閱讀頁會觸發凍結偵測；各操作章節五張抽樣及操作紀錄另核對。平台真機範圍未擴大。",
+  "tool_sha256": "9d04697ae3e5cddd7c31fa5cd63cc7ea9a07158af762949ad194df7639a4ac2a"
+}

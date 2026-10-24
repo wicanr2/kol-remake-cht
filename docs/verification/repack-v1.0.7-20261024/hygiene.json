@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "program_inputs_verified": 453,
+  "packages_verified": 6,
+  "promo_verified": true,
+  "categories": {
+    "ega": 3,
+    "ega-hd": 3
+  },
+  "tools": {
+    "repack_full_build.sh": "27f70ed63cb8146c42515de178b654d69d450abeaafb814c711d292cbcc42775",
+    "repack_full_variants.py": "e07cc8cc4a05bf688e14229b717f9d2a0422ab351f1192cec963216d5ef07176",
+    "verify_full_variants_runtime.py": "be5ffd625d0b30a68e63489d5da8132bf4c3c3311dde190c2b9f514ebe2862fd",
+    "verify_feedback_gui.py": "8e439df917a42a93ec9f7c2d09990b20824310c3d36d0da18ab2193989e27877",
+    "verify_assist_toolbar.py": "4365ef66c6752d69262d51116dae178b07d10b4615588559532b9aaadc0238c4",
+    "compose_update_promo.py": "9d04697ae3e5cddd7c31fa5cd63cc7ea9a07158af762949ad194df7639a4ac2a",
+    "capture_wine_audio.sh": "12b13505ef61d88789565cc6312176ee136db27ee6829535703ec47d3c8205b0"
+  },
+  "full_local_only": true,
+  "remote_release_unchanged": true,
+  "prior_local_removed": true,
+  "uid": 1000,
+  "gid": 1000,
+  "workspace_empty": true,
+  "retention_verified": true
+}

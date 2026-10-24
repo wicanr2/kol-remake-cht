@@ -83,6 +83,11 @@ def start(name, *extra, language=None):
             return False
     waitfor(find_window)
     xdo('windowmove', window, 0, 0)
+    # 新版預設有工具列；此輪專門驗證舊操作，收合後沿原960×600視口錄製。
+    before=log.read_text().count('toolbar-frame ')
+    xdo('keydown','--window',window,'F12')
+    waitfor(lambda:log.read_text().count('toolbar-frame ')>before)
+    xdo('keyup','--window',window,'F12')
     xdo('windowsize', window, 960, 600)
     xdo('windowfocus', window)
     time.sleep(.6)

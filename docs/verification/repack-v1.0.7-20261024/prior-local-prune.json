@@ -1,0 +1,334 @@
+{
+  "status": "PASS",
+  "authorization": "使用者：只留最新版，刪除舊版交付",
+  "removed_version": "v.1.0.6-20261024",
+  "retained_version": "v.1.0.7-20261024",
+  "file_bytes": 3982801302,
+  "files": [
+    {
+      "path": "SHA256SUMS.json",
+      "bytes": 2074,
+      "sha256": "2eb9589b111392042f935e4c0716ff2206f68d5045472d0590ea43c46500b97b"
+    },
+    {
+      "path": "build-inputs.json",
+      "bytes": 378587,
+      "sha256": "88f7ebeebc514273b59db29e277f264f51f3591fa7dabb009e8fac8e730fe1a0"
+    },
+    {
+      "path": "full/SHA256SUMS.txt",
+      "bytes": 705,
+      "sha256": "9d5f9c6ec71e72452c9b974a5531e53ab00b33b179efd6afede4c816ac7399d5"
+    },
+    {
+      "path": "full/kol-v.1.0.6-20261024-full-ega-hd-linux-x86_64.AppImage",
+      "bytes": 1270434296,
+      "sha256": "6248f150156f20cc60bfbb0f89e1f86fee15dd74fea3de489796e1a2ec962a5f"
+    },
+    {
+      "path": "full/kol-v.1.0.6-20261024-full-ega-hd-macos-universal.zip",
+      "bytes": 1300581003,
+      "sha256": "f378ae20a3fad77f3202f2137a219978d21610bf36fe91cc32158277234b1618"
+    },
+    {
+      "path": "full/kol-v.1.0.6-20261024-full-ega-hd-windows-amd64.zip",
+      "bytes": 1292988359,
+      "sha256": "533fbe9a15b4acf36fd6b839a005f197f2cd6cb937125271ef7794a1efde212d"
+    },
+    {
+      "path": "full/kol-v.1.0.6-20261024-full-ega-linux-x86_64.AppImage",
+      "bytes": 19753464,
+      "sha256": "8ec6ab5a167306ed20a962aaf2cbd4956ab6eb9f03414a2a6b365caa5ba425e9"
+    },
+    {
+      "path": "full/kol-v.1.0.6-20261024-full-ega-macos-universal.zip",
+      "bytes": 26412522,
+      "sha256": "50343332cadca0bd1393ad6287528e0a2da1d6cd9bba129628e2e25e07dd3568"
+    },
+    {
+      "path": "full/kol-v.1.0.6-20261024-full-ega-windows-amd64.zip",
+      "bytes": 18883182,
+      "sha256": "dcdc3c7418d99bbefd357fe9c7cf7e207986f7bacbecc5770adfe9fc396f45e0"
+    },
+    {
+      "path": "promo/SHA256SUMS.txt",
+      "bytes": 112,
+      "sha256": "fba3654d3ae338acd6a25f1574192a45ddf547a7d226407c8cfaff7b30de85a3"
+    },
+    {
+      "path": "promo/armour-0.png",
+      "bytes": 932489,
+      "sha256": "02c40598002297b5cf13c4addc9d240cca71ee06e484340a673049cf0eea3562"
+    },
+    {
+      "path": "promo/armour-1.png",
+      "bytes": 1023124,
+      "sha256": "2043d3e2c3d6b56cfc7e18158d463b7886c7629f2be234135b97cbf9c27e1dd6"
+    },
+    {
+      "path": "promo/armour-2.png",
+      "bytes": 1028062,
+      "sha256": "22e5fefe78d8704e8e85144f6ceb0387f179041c3395a6cb0875d652b0d3ac59"
+    },
+    {
+      "path": "promo/attack-0.png",
+      "bytes": 1190735,
+      "sha256": "470d782baf4965ba780af3afb72f8d727d92d58ab2537c9c05e242434b7526d4"
+    },
+    {
+      "path": "promo/attack-1.png",
+      "bytes": 1175380,
+      "sha256": "8eb1acde2af1234b462d653f9b3313427c15b37017ff8b287554bb9160d3fbdf"
+    },
+    {
+      "path": "promo/attack-2.png",
+      "bytes": 1207968,
+      "sha256": "81d07042af87af51c3ede18ef68b523bbbdeda5921a5f6984d885e21750635b3"
+    },
+    {
+      "path": "promo/chapters.json",
+      "bytes": 5015,
+      "sha256": "5874da0cbbd39e8bb6196e2021e391ff081923cdf9693d6edbf303a68851088e"
+    },
+    {
+      "path": "promo/contact-sheet.png",
+      "bytes": 1571843,
+      "sha256": "f28f39a682ac7ef5970838de64ccf0dc49c0996ed43fa1679f45fc285e013ef6"
+    },
+    {
+      "path": "promo/end-0.png",
+      "bytes": 810958,
+      "sha256": "215fefefb663623792bb151ce49cecb6f9dcef1681534fe9e687c8de5e3e6ff4"
+    },
+    {
+      "path": "promo/end-1.png",
+      "bytes": 810970,
+      "sha256": "1c91c52bd7072099b780aee2752a56a90c8df24617a8433540806c16a16fe2d4"
+    },
+    {
+      "path": "promo/end-2.png",
+      "bytes": 810957,
+      "sha256": "25f46c1de2c2282a278d3b03f8a31b00a3872d1f06a9b2556fc774831a3f7b8f"
+    },
+    {
+      "path": "promo/ffprobe.json",
+      "bytes": 3372,
+      "sha256": "34d26c34e4a451dd0d5cd389380bec2b904fad2e6c60fdd97373363fb71b21c0"
+    },
+    {
+      "path": "promo/frame-analysis.log",
+      "bytes": 6556,
+      "sha256": "db585ae0c2d71796634fd87ce0ad2ca9f1cdb55787d4181cbc7c7db62103ee33"
+    },
+    {
+      "path": "promo/hd-0.png",
+      "bytes": 854865,
+      "sha256": "6d97b32d902f9b2756d4a150a65c9d20de965419eac737faf44ef99fd38e2e2d"
+    },
+    {
+      "path": "promo/hd-1.png",
+      "bytes": 854061,
+      "sha256": "ce647f3c7963c3c790c8aa47cac82997c05776a9a93a9eb92a5e95b8c78a6f1b"
+    },
+    {
+      "path": "promo/hd-2.png",
+      "bytes": 1607003,
+      "sha256": "60af13663cb2edc4e4f674b70d5b492327c0895fe255e22f5c7fb0e5de7b6fed"
+    },
+    {
+      "path": "promo/intro-0.png",
+      "bytes": 936157,
+      "sha256": "ece1ac672337484b44d086e911fe6fdebb3938436963eb51dd5c69393d341f6b"
+    },
+    {
+      "path": "promo/intro-1.png",
+      "bytes": 935844,
+      "sha256": "31bd2a5cfd5fab9ec28b71a8eb132254812f45ae5171f2355e8615669ac23164"
+    },
+    {
+      "path": "promo/intro-2.png",
+      "bytes": 936104,
+      "sha256": "ba724220eaf491919bfab2d113cd3900c1fa21600e4bbdb0b3415c270f9f92ba"
+    },
+    {
+      "path": "promo/kol-v.1.0.6-20261024-feedback-promo-1080p.mp4",
+      "bytes": 9135836,
+      "sha256": "e15d4aafe89226e95d4ea6c4cbc7b4b153a5da814e5b29598314bfd1263c02bd"
+    },
+    {
+      "path": "promo/magic-0.png",
+      "bytes": 953942,
+      "sha256": "6139d22948db77c060728b797cacc80d539c97a19bdf090df9a310033c3de095"
+    },
+    {
+      "path": "promo/magic-1.png",
+      "bytes": 1204919,
+      "sha256": "72879d33a6212ddc3a178aeb3d95b79358d3106704e4f2fd4b770e3c849771fe"
+    },
+    {
+      "path": "promo/magic-2.png",
+      "bytes": 1170884,
+      "sha256": "6c09ca7f5f43f8b37b8c9a51a6fe6f2ee42b4ceb4cd7b877998efe40f834dc87"
+    },
+    {
+      "path": "promo/metadata.json",
+      "bytes": 2363,
+      "sha256": "54f10f929ca45ebbc48c692391289659fec45ef64ec61b8904cb8ecc42f5624d"
+    },
+    {
+      "path": "promo/name-0.png",
+      "bytes": 1818755,
+      "sha256": "99698311087c80c7f20445d6ecfeaaf3c02a594c980400ab7ca4261c3b485f42"
+    },
+    {
+      "path": "promo/name-1.png",
+      "bytes": 1827749,
+      "sha256": "cba07ebd903aacd8b91e409d0ef4152dfa9f60ca9068ef003867ed9bcb8b536c"
+    },
+    {
+      "path": "promo/name-2.png",
+      "bytes": 1840912,
+      "sha256": "0d731942fec172aff4d95a3d4b89e858ee0fe72754c0bfe9b9f510f12e9e0bb5"
+    },
+    {
+      "path": "promo/resume-0.png",
+      "bytes": 1257782,
+      "sha256": "ed19d4f4e6bb0d511046397de01e894c95085e3e77a3cd3e4390735297a6da50"
+    },
+    {
+      "path": "promo/resume-1.png",
+      "bytes": 629105,
+      "sha256": "385a05752daedb02ae245936e767ecfee99e554117c1eff7137588917d27976b"
+    },
+    {
+      "path": "promo/resume-2.png",
+      "bytes": 628999,
+      "sha256": "b167b49c79f45608de60952cd5f9d4968a62896dc80d34ed6ea9ffa61600da83"
+    },
+    {
+      "path": "promo/ride-0.png",
+      "bytes": 819571,
+      "sha256": "2f89143126dd34db1af707182ac83669e82669d573bfa5500865dac83d179c58"
+    },
+    {
+      "path": "promo/ride-1.png",
+      "bytes": 821854,
+      "sha256": "81c07bf20afd121b37ea076becd8a415e397b0faf9c9b1be80133171667c78ef"
+    },
+    {
+      "path": "promo/ride-2.png",
+      "bytes": 789147,
+      "sha256": "1a5855f0fe7f7abcf4b1dee0d06718115f9736a7924d7f9cf6e6a5b3ddd60cb3"
+    },
+    {
+      "path": "promo/save-0.png",
+      "bytes": 947360,
+      "sha256": "ad08f50465fe4cbc2e3c88583f87ccf5be5c019c3e3ce377bf50ae1f95c1ee37"
+    },
+    {
+      "path": "promo/save-1.png",
+      "bytes": 889730,
+      "sha256": "817761ce7ebc972cbb66cd0782b56349be603732bdbcfce09701e0eece142101"
+    },
+    {
+      "path": "promo/save-2.png",
+      "bytes": 951457,
+      "sha256": "8960e9a773275296e37a12539d50272dc7f886ef9a9f78b19cf6dd6191d64e34"
+    },
+    {
+      "path": "promo/sell-0.png",
+      "bytes": 949354,
+      "sha256": "4a364c99efb6559de993a07e2af9f26116a370476ac31ea58efae13a78f9132f"
+    },
+    {
+      "path": "promo/sell-1.png",
+      "bytes": 964719,
+      "sha256": "0ee5facda67bf606a2e8080b389f2d6f2581cd22539451e82ef570df7a51713c"
+    },
+    {
+      "path": "promo/sell-2.png",
+      "bytes": 932238,
+      "sha256": "06a806af61e20f125a6457d2d8e3cc0855ca09196720dfba3c9a26eaf9636a75"
+    },
+    {
+      "path": "promo/switch-0.png",
+      "bytes": 1329002,
+      "sha256": "d86f1a53f644ccbd4b7a6b728147102ddd51af023c99f00c1888c75b907fc79f"
+    },
+    {
+      "path": "promo/switch-1.png",
+      "bytes": 1328992,
+      "sha256": "110c74c79ac0073df08aecfd9e87493a7be969728caa7ca3a0268c1f70e1fec6"
+    },
+    {
+      "path": "promo/switch-2.png",
+      "bytes": 1328869,
+      "sha256": "f22970e42f7f3a68fec47766e200b6498b379a2082fb9ff5be1790dc07f60b80"
+    },
+    {
+      "path": "promo/walk-0.png",
+      "bytes": 1338880,
+      "sha256": "04e5c9ffe52159c15bd8fd9ba549fbe2306587dd1a0d3a16beb475e3473237a1"
+    },
+    {
+      "path": "promo/walk-1.png",
+      "bytes": 1341454,
+      "sha256": "c4606d10fa32f881c3761dad0c2388b41ef865ca7de7768f9f1f16c853c6c91e"
+    },
+    {
+      "path": "promo/walk-2.png",
+      "bytes": 1342994,
+      "sha256": "56d65b78134499ef0ba7980129031eff592a816c0689c01217e319227e41bdef"
+    },
+    {
+      "path": "smoke/audio-check.json",
+      "bytes": 211,
+      "sha256": "14c3c4a6562671f0deaf2937eab952f4495f801a4e2ef07a865d70010a2cce82"
+    },
+    {
+      "path": "smoke/comparisons.json",
+      "bytes": 3331,
+      "sha256": "e2ae3b143ef4c2e741b561b2165150aa47bd8e034cd56b647137c085da43c46e"
+    },
+    {
+      "path": "smoke/kol-v.1.0.6-20261024-full-ega-hd-linux-x86_64-squashfs.log",
+      "bytes": 1142,
+      "sha256": "11002a2d7c9b333a1ad8f9af47c2fb7e63e90682c9453fdb82d2f6a56c8783d1"
+    },
+    {
+      "path": "smoke/kol-v.1.0.6-20261024-full-ega-linux-x86_64-squashfs.log",
+      "bytes": 1129,
+      "sha256": "727190bbd781dea91b7fb2813d9df647c5521315a97e640b3496df6ba2d798b2"
+    },
+    {
+      "path": "smoke/linux-runtime.json",
+      "bytes": 1696,
+      "sha256": "03e282facdd59bdbf704c2d7b5463f507e4b35477cd47b8a7df1269822b404c2"
+    },
+    {
+      "path": "smoke/macos-structure.json",
+      "bytes": 1799,
+      "sha256": "00cbbe9a3d4a899879833cb76850df56bddda917e575473e2b614b80d7c51ade"
+    },
+    {
+      "path": "smoke/package-content.json",
+      "bytes": 1471,
+      "sha256": "cad5bbe1d898ad1a334af0d6abc46f2f45b3a645f2be68233b81a1abf518fe7d"
+    },
+    {
+      "path": "smoke/receipt.json",
+      "bytes": 106203,
+      "sha256": "d6f7ab8bc9c3f9a550e6107272a682ee8ff861a035f3874eb210ac1eec5dd8a2"
+    },
+    {
+      "path": "smoke/windows-runtime.json",
+      "bytes": 1686,
+      "sha256": "7f6215aa01e2545757e8e253e3c2b3d8a9c936dbc41ba7b0d30cef0d5d18e3fa"
+    }
+  ],
+  "free_before": 371899043840,
+  "free_after": 375876943872,
+  "latest_verified_packages": 6,
+  "latest_promo_verified": true,
+  "remote_releases_untouched": true
+}

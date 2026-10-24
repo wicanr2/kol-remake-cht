@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.7-20261024",
+  "runs": [
+    {
+      "package": "kol-v.1.0.7-20261024-full-ega-windows-amd64.zip",
+      "bundle": "full",
+      "sha256": "e9ace03a89b3e87ee6f8d12b87ffecf0bea418c87b7a7921c5bd6ea5377339b6",
+      "graphics": "ega",
+      "version": "v.1.0.7-20261024",
+      "exit_code": 0,
+      "normal_intro": true,
+      "party_inn": true,
+      "create_menu_enter_cancel": true,
+      "f9": true,
+      "f10_state_unchanged": true,
+      "hd_disabled": true,
+      "assistance_toolbar": true,
+      "assistance_startup_off": true,
+      "assistance_toggles_and_reset": true,
+      "hd_release_reload": false,
+      "no_save_written": true,
+      "flow_frames": 6,
+      "automatic_resume_no_load": true,
+      "resume_party": [
+        "aBcD",
+        "ZyX"
+      ],
+      "resume_gold": [
+        1440,
+        1440
+      ]
+    },
+    {
+      "package": "kol-v.1.0.7-20261024-full-ega-hd-windows-amd64.zip",
+      "bundle": "full",
+      "sha256": "a4582a963091230c4907f6e8d38056dc7f8bddbe2dc501e0cbf5d92b2a20da9a",
+      "graphics": "ega-hd",
+      "version": "v.1.0.7-20261024",
+      "exit_code": 0,
+      "normal_intro": true,
+      "party_inn": true,
+      "create_menu_enter_cancel": true,
+      "f9": true,
+      "f10_state_unchanged": true,
+      "hd_disabled": false,
+      "assistance_toolbar": true,
+      "assistance_startup_off": true,
+      "assistance_toggles_and_reset": true,
+      "hd_release_reload": true,
+      "no_save_written": true,
+      "flow_frames": 6,
+      "automatic_resume_no_load": true,
+      "resume_party": [
+        "aBcD",
+        "ZyX"
+      ],
+      "resume_gold": [
+        1440,
+        1440
+      ]
+    }
+  ],
+  "memory_limit": "4294967296",
+  "memory_peak": 4294975488,
+  "memory_events": "low 0\nhigh 0\nmax 3108\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+  "real_windows_machine": false,
+  "host_fuse": false
+}

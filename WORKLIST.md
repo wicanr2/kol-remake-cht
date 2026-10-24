@@ -2,11 +2,15 @@
 
 更新日期：2026-10-24
 
+本輪`v.1.0.7-20261024`三平台×純EGA／EGA＋HD六包與124秒新影片已完成，見
+[最新交付與驗收](docs/verification/repack-v1.0.7-20261024.md)。影片重新錄製v1.0.6修正及v1.0.7新增功能。
+兩類目錄為`full/ega/`與`full/ega-hd/`；公開引擎Release仍為v1.0.5，完整版與影片僅本機。
+
 使用者追加核准的[SPEC-042工具列與可選輔助](docs/spec/042-assist-toolbar.md)已接入正式遊戲，
 [規則、工具列、永久角色值及住宿重載驗收](docs/verification/assist-toolbar-20261024.md)與README截圖完成。
-目前六個v.1.0.6完整版仍對應前版修正，不包含本次新增功能；沒有新增Release。
+本次新增功能已納入v.1.0.7六個完整版；沒有新增Release。
 
-[SPEC-041試玩修正](docs/spec/041-player-feedback-fixes.md)、commit／push、83秒操作影片及
+前版[SPEC-041試玩修正](docs/spec/041-player-feedback-fixes.md)、commit／push、83秒操作影片及
 `v.1.0.6-20261024`三平台雙版本六個完整版已完成，[驗收入口](docs/verification/repack-v1.0.6-20261024.md)。
 Linux／Wine實際封包與續玩抽測通過，macOS為結構驗證。原版未知與平台真機保持分開。
 工作區完整封存、核對及清理見[保存入口](docs/verification/retained-evidence.md)。
@@ -23,7 +27,7 @@ tools/run_python_tool.sh tools/worklist.py verify    # 逐條核實，抓過期�
 
 目前狀態與現行交接見 `CONTEXT.md` 頂部。2026-10-11 使用者授權判斷收尾，
 最多補一次抽樣後製作 v1.0.0 完整版、release 與推廣影片。
-三平台完整版最新交付為`dist-all/v.1.0.6-20261024/full/`；公開v.1.0.5的六個引擎包與校驗碼已正式發布、七附件匿名下載及SHA全符，見[發布入口](docs/verification/release-v1.0.5-20261018.md)；本機操作影片為`v.1.0.6-20261024`。既有13類HD圖形與操作頁、四首配樂及F9／F10驗收範圍見
+三平台完整版最新交付為`dist-all/v.1.0.7-20261024/full/`；公開v.1.0.5的六個引擎包與校驗碼已正式發布、七附件匿名下載及SHA全符，見[發布入口](docs/verification/release-v1.0.5-20261018.md)；本機操作影片為`v.1.0.7-20261024`。既有13類HD圖形與操作頁、四首配樂及F9／F10驗收範圍見
 [本版收據](docs/verification/release-v1.0.3-20261017.md)。前版保持。
 目前收尾改採 [SPEC-040](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血、提高攻擊及準備場景，
 抵達後確認中文與畫面即可。登記場景[已通過](docs/verification/controlled-scenes-20261011.md)。

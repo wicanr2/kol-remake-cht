@@ -25,6 +25,8 @@ def main():
     version = json.loads((out / 'build-inputs.json').read_text())['version']
     windows = args.platform == 'windows'
     env = dict(os.environ, DISPLAY=':99', PULSE_SERVER='unix:/work/smoke/wine-pulse/native', PULSE_SINK='kol_wine')
+    env.update(HOME='/tmp/kol-home',XDG_CONFIG_HOME='/tmp/kol-config')
+    Path(env['HOME']).mkdir();Path(env['XDG_CONFIG_HOME']).mkdir()
     if windows:
         env.update(WINEPREFIX='/tmp/kol-repack-wine', WINEDEBUG='-all', WINEDLLOVERRIDES='mscoree,mshtml=')
         Path(env['WINEPREFIX']).mkdir()
@@ -86,7 +88,8 @@ def main():
             subprocess.run(['/usr/lib/wine/wine64', 'reg', 'add', r'HKCU\Software\Wine\Drivers', '/v', 'Audio', '/t', 'REG_SZ', '/d', 'pulse', '/f'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True, timeout=90)
         for theme in ('ega', 'ega-hd'):
             suffix = 'windows-amd64.zip' if windows else 'linux-x86_64.AppImage'
-            package = out / args.bundle / f'kol-{version}-{args.bundle}-{theme}-{suffix}'
+            entries=json.loads((out/'SHA256SUMS.json').read_text())['files']
+            package=out/next(row['path'] for row in entries if row['bundle']==args.bundle and row['graphics']==theme and row['platform']==('windows-amd64' if windows else 'linux-x86_64'))
             dest = Path('/tmp') / ('game-' + theme)
             dest.mkdir()
             if windows:
@@ -131,6 +134,16 @@ def main():
                 inputkey(window, 'space', 'title', log)
                 inputkey(window, 'Return', 'cover', log)
                 inputkey(window, '5', 'contents', log)
+                displaykey(window,'F8','display action=toolbar-2',log)
+                assert 'no_fatigue=false enemy_multiplier=1 fear_immune=false' in text()
+                displaykey(window,'Return','display action=toolbar-8',log)
+                key(window,'Right');displaykey(window,'Return','display action=toolbar-9',log)
+                key(window,'Right');displaykey(window,'Return','display action=toolbar-10',log)
+                assert 'no_fatigue=true enemy_multiplier=6 fear_immune=true' in text()
+                key(window,'Right');key(window,'Right')
+                displaykey(window,'Return','display action=toolbar-12',log)
+                assert re.findall(r'toolbar action=12[^\n]*',text())[-1].endswith('no_fatigue=false enemy_multiplier=1 fear_immune=false')
+                displaykey(window,'Escape','display action=toolbar-back',log)
                 key(window, 'F10')
                 wait(lambda: 'display-frame hd=false open=true' in text(), log)
                 key(window, 'Down')
@@ -199,6 +212,7 @@ def main():
             runs.append(dict(package=package.name, bundle=args.bundle, sha256=hashlib.file_digest(package.open('rb'), 'sha256').hexdigest(),
                 graphics=theme, version=actual_version, exit_code=code, normal_intro=True, party_inn=True,
                 create_menu_enter_cancel=True, f9=True, f10_state_unchanged=True, hd_disabled=theme == 'ega',
+                assistance_toolbar=True,assistance_startup_off=True,assistance_toggles_and_reset=True,
                 hd_release_reload=theme == 'ega-hd', no_save_written=True, flow_frames=6))
             if args.resume_save:
                 runs[-1]['automatic_resume_no_load']=True
