@@ -3,7 +3,7 @@
 日期：2026-10-06。狀態：素材與靜態依賴核對通過；手繪媒材已確認，版面與正式整合仍待確認。
 
 本輪整理現行 PNG 與繪圖程式的依賴，接續 [RE-229](20261004-hd-art-ui-prototype.md)。
-輸出入口為 [HD 工作批次](../../workplace/hd-art-dependencies-20261006/review.html)。
+輸出入口為 [HD 工作批次](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-dependencies-20261006/review.html)。
 批次只安排已授權的查證與原型，不核准尚未選定的解析度、造型或素材契約。
 
 ## 現行輸入與結果
@@ -47,16 +47,16 @@ FACEPICS不在固定圖組字串中，另從`docs/re/title-sequence.json`找到2
 | 組合人物 | 身體、裝備及手部分層 | 造型、透明邊、疊圖順序與對齊 |
 
 固定尺寸及逐像素依賴均可由
-[dependencies.json](../../workplace/hd-art-dependencies-20261006/dependencies.json)
+[dependencies.json](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-dependencies-20261006/dependencies.json)
 的`constraints`查回現行程式行號。本輪不選新的圖集格式或更改保存契約。
 正式替換前，依既有版面選擇及各組可丟棄原型確認，再走規格閘門與正常玩家驗收。
 
 ## 重生與驗證
 
 腳本入口為
-[prepare.py](../../workplace/hd-art-dependencies-20261006-prepare.py)、
-[片頭資料補充](../../workplace/hd-art-dependencies-20261006/add-title-data.py)與
-[唯讀驗證](../../workplace/hd-art-dependencies-20261006/verify.py)。
+[prepare.py](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-dependencies-20261006-prepare.py)、
+[片頭資料補充](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-dependencies-20261006/add-title-data.py)與
+[唯讀驗證](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-dependencies-20261006/verify.py)。
 初次清冊與HTML保存在同目錄`initial-*`，保留FACEPICS資料依賴補充前的結果。
 
 工具鏈為`eob-remake-go:1.26.7-ebiten2.9.9-audio`，映像ID

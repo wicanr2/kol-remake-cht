@@ -1,0 +1,729 @@
+{
+  "status": "PASS",
+  "spec": "docs/spec/041-player-feedback-fixes.md",
+  "seed": 1,
+  "binary_sha256": "e0f5bce1dff0d0c6d06c5e6bce26efb920d7f99200df07c2f6ce5e5bc9e66c83",
+  "verifier_sha256": "17db6f0211528effacd1d9960355a1bf2e73c26702cbafeeb345ca645ff77f70",
+  "source_zip_sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46",
+  "scope": [
+    "名稱大小寫",
+    "建角與住宿預設保存",
+    "無-load重啟續玩",
+    "數字切換人物及裝備",
+    "繁中販賣、鐵砧與法術修改",
+    "野外方向長按",
+    "騎馬遭遇選項",
+    "武器攻擊部位及防禦",
+    "HD切換",
+    "壞檔拒絕啟動"
+  ],
+  "original_parity_claimed": false,
+  "real_platform": "Linux Docker/Xvfb",
+  "controlled_inputs": "shop-fixture.json 與 magic-fixture.json；位置、隊伍、金冠、背包、過大護甲、教派及法術",
+  "actions": [
+    {
+      "start": "creation",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input"
+      ]
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "5",
+      "log": "creation.log"
+    },
+    {
+      "key": "Down",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "a",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+b",
+      "log": "creation.log"
+    },
+    {
+      "key": "c",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+d",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Down",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+z",
+      "log": "creation.log"
+    },
+    {
+      "key": "y",
+      "log": "creation.log"
+    },
+    {
+      "key": "shift+x",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Down",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "key": "Return",
+      "log": "creation.log"
+    },
+    {
+      "start": "automatic-reload",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input"
+      ]
+    },
+    {
+      "key": "Escape",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "6",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "space",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "less",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Down",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "less",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "less",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-reload.log"
+    },
+    {
+      "start": "automatic-party-reload",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input"
+      ]
+    },
+    {
+      "key": "1",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "2",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "period",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "1",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "2",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "1",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "period",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "period",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "key": "Return",
+      "log": "automatic-party-reload.log"
+    },
+    {
+      "start": "shop-zh-Hant",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/work/promo-runtime/gui/shop-fixture.json"
+      ]
+    },
+    {
+      "key": "Left",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        612,
+        540
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        330,
+        280
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        708,
+        540
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "click": [
+        228,
+        540
+      ],
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "period",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "shop-zh-Hant.log"
+    },
+    {
+      "start": "magic-zh-Hant",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/work/promo-runtime/gui/magic-fixture.json"
+      ]
+    },
+    {
+      "key": "Up",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "key": "space",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        516,
+        540
+      ],
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        330,
+        280
+      ],
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "key": "Return",
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        180,
+        195
+      ],
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "click": [
+        540,
+        273
+      ],
+      "log": "magic-zh-Hant.log"
+    },
+    {
+      "start": "held-travel",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/work/promo-runtime/gui/travel-fixture.json",
+        "-ambush-rolls",
+        "100,100"
+      ]
+    },
+    {
+      "start": "riding",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/work/promo-runtime/gui/ride-fixture.json",
+        "-ambush-rolls",
+        "1,100,16,1,1,1,1,1"
+      ]
+    },
+    {
+      "key": "Right",
+      "log": "riding.log"
+    },
+    {
+      "key": "Right",
+      "log": "riding.log"
+    },
+    {
+      "key": "Down",
+      "log": "riding.log"
+    },
+    {
+      "key": "Up",
+      "log": "riding.log"
+    },
+    {
+      "key": "Return",
+      "log": "riding.log"
+    },
+    {
+      "start": "attack",
+      "command": [
+        "/work/kol",
+        "-lang",
+        "zh-Hant",
+        "-scale",
+        "1",
+        "-seed",
+        "1",
+        "-music",
+        "off",
+        "-log-input",
+        "-load",
+        "/work/promo-runtime/gui/fight-fixture.json",
+        "-quest-sites",
+        "/work/promo-runtime/gui/sites-fixture.json",
+        "-ambush-rolls",
+        "100,100"
+      ]
+    },
+    {
+      "key": "Up",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "space",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "Down",
+      "log": "attack.log"
+    },
+    {
+      "key": "Down",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "Down",
+      "log": "attack.log"
+    },
+    {
+      "key": "Down",
+      "log": "attack.log"
+    },
+    {
+      "key": "Down",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "period",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    },
+    {
+      "key": "Down",
+      "log": "attack.log"
+    },
+    {
+      "key": "Down",
+      "log": "attack.log"
+    },
+    {
+      "key": "Return",
+      "log": "attack.log"
+    }
+  ],
+  "outputs_sha256": {
+    "automatic-reload-menu.png": "88df5318a8bb8365d8ea8e7622b7d7273c6d98324cfc2fa16fd940025352c478",
+    "chapters.json": "1b759c43011049e9462c0fceee3efb2978f8e562ef513fc5e607534f14b9df25",
+    "armour-adjusted-zh-Hant.png": "b73eec9cf9fd2c0eebcdf12e0caf09ea439b5e5b6a9becc0ba948ecdcbb21596",
+    "magic-selected-zh-Hant.png": "f411704aa5b367b5cc1f522f070a986dee8a882d1ec44c2ca3900b50299a578c",
+    "recruited-second-character.png": "6e59e04c217e7a6ce41b76d4e090cb1479e1f50902f67e5c95faa9a3ff7f506d",
+    "riding.log": "202fbee03607ebfecf0ea901ea7006541d84a1184cc4e71d1c8ec0e0ecffd47a",
+    "created-menu.png": "d17044c4b15b45df968c6c7b7e7a5c3a893e0a7d8f17399e4aab15501d995fe3",
+    "typing-10.png": "7fd20fb1c83be9b79adc04fbdc07a9e879f727895a26485c52e11c18f2ab1521",
+    "ride-answer.png": "4fd1009699ca724ca7858522a74704ed0cf786c3c93d69708cdeac09d1a30549",
+    "shop-zh-Hant.log": "dc91260949ede83c73af3f47980131d2511c1ff6c7b339045c94f0816835b6eb",
+    "sell-offer-zh-Hant.png": "4d962af6a1eb27cf9780773114b36b053bfa39f1065af62d35aecbc2935f0ab5",
+    "automatic-party-reload.log": "e4ed79d6df6bb9f48e74d3c09a841e1d24982f784941f89b995ce1ad7193a2d8",
+    "travel-fixture.json": "bf7a8c2f3c1254ba9c91b65e245c5a4dd4daa2ca4f86b65a983f8736d9fecf61",
+    "magic-editor-zh-Hant.png": "e6cb5dc17804c7377246620028723269c9e0257fec678f43d0e41ac8e5beea8a",
+    "created-character-inn.png": "49e195dcebe3ffce6a455e655780d1a42c3b87384b6fd3ec69fd4fb3cc9c71f0",
+    "held-world-travel.png": "a209aaedb4b6fecafb21c3b93803072cc8ecdb16f90bad7b8f8d4a02f1b62500",
+    "sell-list-zh-Hant.png": "385d774b70fd2236c6134e8a3f8628dac665a1ea247a184b25a51f25ef294941",
+    "shop-fixture.json": "94714afa5eec967c0b6b51c6c495f14297ae0a0d35b9ff7996011c4add3a2eb0",
+    "sites-fixture.json": "e8f18fe498c40976544419b502cb579dd8e1045cee9ec1c2fb84bdf004b96cf4",
+    "ride-question.png": "8fc798922c6b1f57a57b447e0c6209b11354b2cfde63c51abc76cd449aa5c980",
+    "magic-fixture.json": "9dda472e189756a07254ee65a0ceaed95ae44471d2b5b6cf280068c25f252e36",
+    "ride-fixture.json": "70ab4edef526e668ffe524c57d5b2d9b0242f5307d713cafd560e92d71f3b99e",
+    "paid-and-saved.png": "eeb533268beadaccae5ebc47a675965d2471db091d540d88776d15d77884a92c",
+    "equipment-first-character.png": "136fc2af3770805201979b3960400a1aed26c1bf2a94c7bb288f6924bd921744",
+    "automatic-reload.log": "6cca0cc16c4e440b4524b418326d6cb6b431b1a9fd9256891c99316a36dc1569",
+    "magic-zh-Hant.log": "80f9b9bfd75e043f61304e62682f95c1643eebc6801590e87b6c36263a408932",
+    "bad-save.log": "3471134c9ef409013ea6e71473b368bbe68b716c38a0e348f0882eb194402572",
+    "xvfb.log": "e2861dbf17c9cb74d57668ceaa0ec8111c014cd26d10d2d0dffdf37188dac690",
+    "held-travel.log": "e8c1b3dc9139d244f3474ca471bfd11196a79c67c13da5452156a7720fd49e45",
+    "live.mp4": "0d9179ac1650d973e65c8f7a0b2373a6395bf4b72a9ccfaf119ecd3d6fed6124",
+    "attack-guard-live.png": "18be28f33975c2146482281aaf72903fbb8aea6f28ef3f2f8b3b8fb6b91e14ba",
+    "automatic-party-reload.png": "841ed35b8a803434c26585b559085f516e52e2caf9cddb82643918016dd1b507",
+    "fight-fixture.json": "0f1f479c3bb2e35c3f0917a7d0267d62c50a54ba15f57273b781bbaefa98fd46",
+    "attack-area-hd-live.png": "553bf5950d8d720fe3953a301e1f521fd03df0a3390665a9cf795346f67d7ee5",
+    "typing-21.png": "5ba69b74d49f081a4c204989f93a6398bbd7070fce0f76f19a7e79b0f1e0c152",
+    "sell-done-zh-Hant.png": "f0799f2ca1472a00e719cabe3b2a511bfa4d6d65e1f54d680be358d15b376b1a",
+    "attack.log": "e9422c38e96915bc04b9ff7b47f02efb498408e1c6dae4cf15d4ed51cd7dddec",
+    "attack-area-live.png": "432676840b596b6ddc40260559513858ec32716be24636759334278197371d34",
+    "creation.log": "8e60cf14dd87aa04e661d5d0ae0f6683f2ef0a03ed63ea6f2976c2ee18e5389b",
+    "anvil-zh-Hant.png": "858681fbd96a7c5b77aa6886cde11e8deb3bcdaa3cd657a12c5c1c5b9a4aed8a",
+    "recording.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sheet-second-character.png": "75f64b091763d8d88eb4ec3cee85e99ddb59d32341aee5da38c571adfdcc06c9",
+    "asound.conf": "d4451aaf42879c7ace71e5262265e76943efe5179d9d4b62470486a1851a2cf7",
+    "anvil-offer-zh-Hant.png": "f10e3ec2b9c477f1b81e7354124a863e055260e8698ffdaca5629deefaa47357",
+    "magic-options-zh-Hant.png": "3ab57b7a94c040bdaf43d4719231b3da9126562c0c4823494e7a9a27ca39d53d",
+    "config/kol-remake-cht/save.dat": "b4842bd781804af2844c40b61698cdd766a3d44564cad337fe3905a80304deb2"
+  },
+  "verifier_source": "recording-verifier-executed.py",
+  "receipt_scope_correction": "錄製後更正為繁中操作範圍；不修改操作、畫格或程式。雙語結果另見player-feedback-20261024。"
+}

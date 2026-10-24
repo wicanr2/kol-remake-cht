@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "docker_only": true,
+  "uid": 1000,
+  "gid": 1000,
+  "root_owned_or_md_directories": [],
+  "workspace_empty": true,
+  "program_inputs_rechecked": 443,
+  "package_hashes_rechecked": 6,
+  "promo_hash_rechecked": true,
+  "original_zip_hash_preserved": true,
+  "original_input_files_preserved": true,
+  "user_text_file_preserved": true,
+  "original_parity_claimed": false,
+  "tools_rebuilt": false,
+  "containers_check": "另由主機Docker控制面核對本專案掛載。",
+  "readable_pages_checked": 12,
+  "readable_dependencies_sha256_checked": 10151
+}

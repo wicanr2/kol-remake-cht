@@ -1,0 +1,172 @@
+[
+  {
+    "name": "intro",
+    "caption": "武士傳說：操作修正實錄",
+    "start": 0.0,
+    "seconds": 4,
+    "source": "title card",
+    "sha256": "1f63364c7e24f40af37082d3373e681e0f28da813791564b2a73698d3e1fa939"
+  },
+  {
+    "name": "name",
+    "caption": "角色命名：Shift 大小寫輸入",
+    "start": 4.0,
+    "seconds": 6,
+    "source": {
+      "name": "name",
+      "caption": "角色命名：Shift 大小寫輸入",
+      "controlled": false,
+      "start": 5.937050267122686,
+      "duration": 6.645774950738996
+    },
+    "sha256": "9d0fcbb5c273febb6c2c8147bd570e40e4cc59903528c8001962643513f3812a"
+  },
+  {
+    "name": "save",
+    "caption": "旅店住宿：每人扣款並保存",
+    "start": 10.0,
+    "seconds": 6,
+    "source": {
+      "name": "save",
+      "caption": "旅店住宿：每人扣款並保存",
+      "controlled": false,
+      "start": 45.701394914183766,
+      "duration": 2.329052390065044
+    },
+    "sha256": "5172692656a755dc0e5fdd0166f2e582e41a1c43f87fe2003bef1face2ff0b85"
+  },
+  {
+    "name": "resume",
+    "caption": "重新開啟：自動讀回角色與金幣",
+    "start": 16.0,
+    "seconds": 6,
+    "source": {
+      "name": "resume",
+      "caption": "重新開啟：自動讀回角色與金幣",
+      "controlled": false,
+      "start": 50.430342935957015,
+      "duration": 2.1598421251401305
+    },
+    "sha256": "fe45284c1f25f5172af0a2110de8ced4ff0109b6261e691d91a09a7f124bfbbf"
+  },
+  {
+    "name": "switch",
+    "caption": "人物與裝備頁：數字鍵切換隊員",
+    "start": 22.0,
+    "seconds": 6,
+    "source": {
+      "name": "switch",
+      "caption": "人物與裝備頁：數字鍵切換隊員",
+      "controlled": false,
+      "start": 52.59019425418228,
+      "duration": 4.910705428104848
+    },
+    "sha256": "24edee4dbf9c9b786f82c2c5644f75d3deb9b17ce366cf46a4f5dd7a22555731"
+  },
+  {
+    "name": "sell",
+    "caption": "商店出售：點選物品、確認換取金幣",
+    "start": 28.0,
+    "seconds": 6,
+    "source": {
+      "name": "sell",
+      "caption": "商店販賣：點選物品、確認換取金幣",
+      "controlled": true,
+      "start": 62.642942326143384,
+      "duration": 4.021917684935033
+    },
+    "sha256": "db5c6669f57cb6935cd3fc3ee9166b7a63f6cb2bdbad59194cf9b47c3957c8b9"
+  },
+  {
+    "name": "armour",
+    "caption": "鐵砧調整護甲：負重 200 變為 6",
+    "start": 34.0,
+    "seconds": 8,
+    "source": {
+      "name": "armour",
+      "caption": "鐵砧調整護甲：負重 200 變為 6",
+      "controlled": true,
+      "start": 66.91726681916043,
+      "duration": 6.347747303079814
+    },
+    "sha256": "df7520841962f6e8acc57981853b7eead785f637bb8a87a2fd66d94f8f08d981"
+  },
+  {
+    "name": "magic",
+    "caption": "法術修改：直接點選欄位與選項",
+    "start": 42.0,
+    "seconds": 8,
+    "source": {
+      "name": "magic",
+      "caption": "法術修改：直接點選欄位與選項",
+      "controlled": true,
+      "start": 77.68967301119119,
+      "duration": 5.657941500656307
+    },
+    "sha256": "8a517711c83f07b94c4cba11ee61bcf66e03e3ebd2a97c28813f71d716d07c70"
+  },
+  {
+    "name": "walk",
+    "caption": "野外移動：方向鍵長按連走",
+    "start": 50.0,
+    "seconds": 5,
+    "source": {
+      "name": "walk",
+      "caption": "野外移動：方向鍵長按連走",
+      "controlled": true,
+      "start": 85.45704017719254,
+      "duration": 12.342700856737792
+    },
+    "sha256": "d193625262c5aa4b100945c74fc5942fa91bee53b990e3d8b21af862864a96e5"
+  },
+  {
+    "name": "ride",
+    "caption": "騎馬遇敵：方向鍵選擇，再按 Enter",
+    "start": 55.0,
+    "seconds": 7,
+    "source": {
+      "name": "ride",
+      "caption": "騎馬遇敵：方向鍵選擇，再按 Enter",
+      "controlled": true,
+      "start": 101.18121748324484,
+      "duration": 4.463525370694697
+    },
+    "sha256": "b6c19e0764655522c96ad38f6fa64dadf75861844f1a315f1998adecb7135a33"
+  },
+  {
+    "name": "attack",
+    "caption": "武器攻擊：攻擊方式、上中下、防禦方式",
+    "start": 62.0,
+    "seconds": 9,
+    "source": {
+      "name": "attack",
+      "caption": "武器攻擊：攻擊方式、上中下、防禦方式",
+      "controlled": true,
+      "start": 109.46714123897254,
+      "duration": 14.623610330279917
+    },
+    "sha256": "816c078384d0ed967e3649ff92dcfcc384d19c38f22c457030b419c06a7dc84f"
+  },
+  {
+    "name": "hd",
+    "caption": "EGA 與 HD：保留同一套操作修正",
+    "start": 71.0,
+    "seconds": 7,
+    "source": {
+      "name": "hd",
+      "caption": "EGA 與 HD：保留同一套操作修正",
+      "controlled": true,
+      "start": 124.09075851226225,
+      "duration": 30.579894437920302
+    },
+    "sha256": "fbd4ae30ec4c64ad0924255791dfbddfd25ff7286d1f92a9fd7900c587bdac57"
+  },
+  {
+    "name": "end",
+    "caption": "v.1.0.6-20261024 三平台完整版",
+    "start": 78.0,
+    "seconds": 5,
+    "source": "title card",
+    "sha256": "253551753abad15a58c5a96b2a78294b07c669c4538d3b4b0374ba696c528260"
+  }
+]

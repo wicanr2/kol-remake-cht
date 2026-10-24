@@ -79,5 +79,5 @@ Docker 掛載 `/src` 唯讀、研究輸出 `/out` 可寫，UID/GID 1000:1000、�
 保持。沒有新增保存、平台或封包驗收，也沒有新的美術與發行決定。
 HD 仍只確認手繪媒材，其他既有問題保持。
 
-收據：[receipt.json](../../workplace/stale-ground-name-20261006/receipt.json)。
-重驗：[verify.py](../../workplace/stale-ground-name-20261006/verify.py)。
+收據：[receipt.json](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/stale-ground-name-20261006/receipt.json)。
+重驗：[verify.py](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/stale-ground-name-20261006/verify.py)。

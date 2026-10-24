@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.6-20261024",
+  "runs": [
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-linux-x86_64.AppImage",
+      "bundle": "full",
+      "sha256": "8ec6ab5a167306ed20a962aaf2cbd4956ab6eb9f03414a2a6b365caa5ba425e9",
+      "graphics": "ega",
+      "version": "v.1.0.6-20261024",
+      "exit_code": 0,
+      "normal_intro": true,
+      "party_inn": true,
+      "create_menu_enter_cancel": true,
+      "f9": true,
+      "f10_state_unchanged": true,
+      "hd_disabled": true,
+      "hd_release_reload": false,
+      "no_save_written": true,
+      "flow_frames": 6,
+      "automatic_resume_no_load": true,
+      "resume_party": [
+        "aBcD",
+        "ZyX"
+      ],
+      "resume_gold": [
+        1440,
+        1440
+      ]
+    },
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-hd-linux-x86_64.AppImage",
+      "bundle": "full",
+      "sha256": "6248f150156f20cc60bfbb0f89e1f86fee15dd74fea3de489796e1a2ec962a5f",
+      "graphics": "ega-hd",
+      "version": "v.1.0.6-20261024",
+      "exit_code": 0,
+      "normal_intro": true,
+      "party_inn": true,
+      "create_menu_enter_cancel": true,
+      "f9": true,
+      "f10_state_unchanged": true,
+      "hd_disabled": false,
+      "hd_release_reload": true,
+      "no_save_written": true,
+      "flow_frames": 6,
+      "automatic_resume_no_load": true,
+      "resume_party": [
+        "aBcD",
+        "ZyX"
+      ],
+      "resume_gold": [
+        1440,
+        1440
+      ]
+    }
+  ],
+  "memory_limit": "4294967296",
+  "memory_peak": 4294967296,
+  "memory_events": "low 0\nhigh 0\nmax 538\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+  "real_windows_machine": false,
+  "host_fuse": false
+}

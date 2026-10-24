@@ -14,7 +14,7 @@
 - 由同一來源建置 Windows AMD64、macOS AMD64／ARM64／universal，檢查架構、依賴與最低系統版本。Wine 正常操作與實際任務保存重載必須符合現行 Linux。
 - 重用 RE-290 已封存的十九套件測試，不重跑未變來源。不把明示遭遇控制、Wine 或交叉建置稱為自然全旅程、原版完整任務 parity 或平台真機驗收。
 
-工作區入口：[prepare.py](../../workplace/visibility-current-regression-20261006/prepare.py)。
+工作區入口：[prepare.py](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/visibility-current-regression-20261006/prepare.py)。
 基準：[RE-279](20261006-move-current-regression.md)。現行修正：[RE-290](20261006-move-message-visibility.md)。
 同輪新增本檔並掛入逆向索引；驗證結果、輸入雜湊與清理紀錄將封存於工作區。
 

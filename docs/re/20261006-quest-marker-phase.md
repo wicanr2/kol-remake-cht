@@ -10,7 +10,7 @@
 重複末端畫格只算一個獨立呈現案例，現行共用renderer另核六案、英文及繁中各六框。
 本輪不解除九個語意差分列，不改任務亂數DRAFT、正式來源或原完成條件。
 
-入口：[準備腳本](../../workplace/quest-marker-phase-20261006-prepare.py)。
+入口：[準備腳本](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/quest-marker-phase-20261006-prepare.py)。
 同名工作區保存來源與預登記、analyze.py、呈現測試、封存收據與獨立核對。
 來源唯讀、輸出UID/GID1000，既有Docker映像，network none及有界資源。
 原版與衍生證據僅本機，不提交、推送或發行。

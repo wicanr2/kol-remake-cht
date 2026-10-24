@@ -34,11 +34,16 @@ def program_inputs():
 
 def prepare(args):
     assert not args.out.exists(), '拒絕覆寫交付'
-    proof_path = ROOT / 'docs/verification/windows-memory-20261017/receipt.json'
+    proof_path = args.acceptance or ROOT / 'docs/verification/windows-memory-20261017/receipt.json'
     proof = json.loads(proof_path.read_text())
     assert proof['status'] == 'PASS'
     program = program_inputs()
-    assert program == proof['program_inputs'], '正式程式已改變，須重新驗收'
+    accepted_program = proof.get('program_inputs')
+    if accepted_program is None:
+        source = proof_path.parent / 'program-inputs.json'
+        assert sha(source) == proof['artifacts']['program-inputs.json'], '驗收來源清冊雜湊不符'
+        accepted_program = json.loads(source.read_text())['program']
+    assert program == accepted_program, '正式程式已改變，須重新驗收'
     baseline = ROOT / 'docs/verification/release-v1.0.3-20261017/build-inputs.json'
     resources = json.loads(baseline.read_text())['resources']
     for row in resources:
@@ -71,7 +76,10 @@ def instructions(version, theme, platform):
 EGA＋HD 可在遊戲中以 F10 切換；圖片按需讀取，久未使用的快取自動釋放。
 回到 EGA 時釋放 HD 圖片。首次切換 HD 仍需等候載入。
 兩版均保留四首配樂，F9 獨立開關，預設開啟。
-方向鍵移動，Enter 執行，Esc 返回，Ctrl+Q 離開。住宿會保存。
+方向鍵移動及選擇選項，逗號／句號移動圖示白框，Enter 執行，Esc 返回，Ctrl+Q 離開。
+地圖方向鍵可長按連走，遇到問句後須放開再按；滾輪不會跳過遭遇與戰鬥訊息。
+人物／裝備頁按1至6切換隊員。名稱支援Shift及Caps Lock大小寫。
+住宿會保存，重新開啟會自動讀回。另讀指定存檔可使用 -load 路徑；-load "" 開始新遊戲。
 存檔：{save}
 Windows 雙擊啟動日誌：%AppData%\\kol-remake-cht\\kol.log。
 遊戲規則及 kol-save-v3 存檔格式保持。原版完整 parity 與自然全任務通關未宣稱。
@@ -299,14 +307,15 @@ def finish(args):
     receipt = dict(schema='kol-full-repack/1', status='PASS', verified_on=args.version[-8:-4]+'-'+args.version[-4:-2]+'-'+args.version[-2:],
         version=args.version, source_commit=inputs['source_commit'], program_inputs=inputs['program_inputs'],
         program_files=len(inputs['program_inputs']), resource_files=len(inputs['resources']),
-        resources_unchanged=True, memory_fix_reused=True, rules_and_save_format_unchanged=True,
+        resources_unchanged=True, memory_fix_reused=True, save_format_unchanged=True,
+        player_feedback_fixes_included='player-feedback-' in inputs['acceptance_receipt'],
         prior_acceptance=inputs['acceptance_receipt'], prior_acceptance_sha256=inputs['acceptance_sha256'],
         packages=json.loads((args.out / 'SHA256SUMS.json').read_text())['files'],
         runtime=runtimes, compared_frames=len(comparisons)*2,
         ega_max=max(r['maximum'] for r in comparisons if r['graphics']=='ega'),
         hd_max=max(r['maximum'] for r in comparisons if r['graphics']=='ega-hd'),
         text_and_model_equal=True, macos=mac, macos_real_machine=False,
-        windows_real_machine=False, audio=audio, publication_scope='六個完整版僅本機，未上傳；本輪未重做引擎Release或影片。',
+        windows_real_machine=False, audio=audio, publication_scope='六個完整版僅本機，未上傳；影片另有獨立驗收。',
         tools={n: sha(ROOT/'tools'/n) for n in ('repack_full_build.sh','repack_full_variants.py','verify_full_variants_runtime.py')})
     receipt['attachments'] = {str(p.relative_to(args.work)): dict(size=p.stat().st_size, sha256=sha(p))
         for p in sorted(args.work.rglob('*')) if p.is_file() and p.name != 'receipt.json'}
@@ -324,6 +333,7 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--work', type=Path, required=True)
     parser.add_argument('--git-head')
+    parser.add_argument('--acceptance', type=Path, help='已通過且鎖定程式來源的驗收收據')
     args = parser.parse_args()
     assert re.fullmatch(r'v\.\d+\.\d+\.\d+-\d{8}', args.version)
     globals()[args.phase](args)

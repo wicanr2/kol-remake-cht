@@ -71,4 +71,4 @@ Xvfb 有 socket 檢查及 trap；每個玩家程序有獨立終態收據，容�
 
 原型仍DRAFT，等待既有受阻持物規則確認。原版仍十四回合戰敗，勝利S結尾、完整50-byte、跨場H、戰鬥中途保存、完整UI及正式交付仍未完成。
 
-收據：[receipt.json](../../workplace/stale-ground-prototype-20261006/receipt.json)。並列原圖：[review.html](../../workplace/stale-ground-prototype-20261006/review.html)。唯讀重驗：[verify.py](../../workplace/stale-ground-prototype-20261006/verify.py)。
+收據：[receipt.json](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/stale-ground-prototype-20261006/receipt.json)。並列原圖：[review.html](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/stale-ground-prototype-20261006/review.html)。唯讀重驗：[verify.py](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/stale-ground-prototype-20261006/verify.py)。

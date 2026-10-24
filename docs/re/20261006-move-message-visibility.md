@@ -7,7 +7,7 @@
 正式move在位移前求messageSeen；原版實際訊息及讀寫順序另用IDA9.4核對。
 不把捕捉相位當既定成因，不修改原圖、滑鼠區或原始差分數。
 
-入口：[準備腳本](../../workplace/move-message-visibility-20261006-prepare.py)。
+入口：[準備腳本](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/move-message-visibility-20261006-prepare.py)。
 同名工作區保存預登記、唯讀IDA來源、隔離候選、正常回放及比較。
 怪物v2、人物v3、任務亂數DRAFT及原完成條件保持；未提交、推送或發行。
 

@@ -83,10 +83,10 @@ RE-256追加勘誤：上句原圖名稱誤記。正常第432格顯示CYCLOPES，
 
 受阻持物候選的返回暫存及這條正常戰後保存限制已由本輪有限證據解除。
 正式規則仍DRAFT，待確認是否採原版受阻持物保持，再做READY審查與正式回歸。
-可檢閱本機[同狀態原型](../../workplace/blocked-knockback-return-20261005/review.html)。
+可檢閱本機[同狀態原型](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/blocked-knockback-return-20261005/review.html)。
 歷史RE-253封存收據維持，不回寫其當輪限制。
 
-封存入口：[有限收據](../../workplace/blocked-knockback-return-20261005/receipt.json)、
-[完整重驗](../../workplace/blocked-knockback-return-20261005/verify.py)。
+封存入口：[有限收據](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/blocked-knockback-return-20261005/receipt.json)、
+[完整重驗](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/blocked-knockback-return-20261005/verify.py)。
 PNG逐檔保存來源、程序、畫格、雜湊、尺寸與僅本機權利分類。
 現行及舊SPEC-008／RE-253的不可變鍵勘誤由backlink-review.json與重驗器核對。

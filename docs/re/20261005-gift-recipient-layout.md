@@ -32,7 +32,7 @@
 
 ## 比較與重生入口
 
-[本機比較頁](../../workplace/gift-recipient-layout-20261005/review.html)可切換繁中／英文與四個操作步驟，
+[本機比較頁](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/gift-recipient-layout-20261005/review.html)可切換繁中／英文與四個操作步驟，
 並列現行完整姓名清單、原版明細版面及同狀態原版圖。點圖可查看原尺寸。
 使用者選定前保持DRAFT；HD手繪媒材已定，HD比例仍是另一個待選分支。
 

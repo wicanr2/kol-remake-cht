@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.6-20261024",
+  "seconds": 83.0,
+  "fps": 25,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "video": "kol-v.1.0.6-20261024-feedback-promo-1080p.mp4",
+  "video_sha256": "e15d4aafe89226e95d4ea6c4cbc7b4b153a5da814e5b29598314bfd1263c02bd",
+  "source_recording_sha256": "0d9179ac1650d973e65c8f7a0b2373a6395bf4b72a9ccfaf119ecd3d6fed6124",
+  "source_receipt_sha256": "6967df152c121de205d2053a5656b6efe3b367b721df00d38bdb34cdaee6489e",
+  "program": "/out/build-inputs.json",
+  "audio": {
+    "source": "assets/audio/hd/title-chamber.ogg",
+    "sha256": "45f84293d4fb2d81a73a2f2da6e1bb3578e2279085b7592ebbcd5fea64e462ec",
+    "rights": "Project-authored MIDI/rendered OGG: RRSAL-1.0; FluidR3 GM MIT attribution in soundfont-LICENSE.txt. No original game music sampled.",
+    "peak": 12585,
+    "rms": 1569.1762723935806,
+    "human_listening": "已驗收：2026-10-13 使用者：這樣ok 那就繼續",
+    "relistened_this_run": false
+  },
+  "remake_capture": true,
+  "controlled_scene_labels": true,
+  "original_parity_claimed": false,
+  "window_close_tails_removed": [
+    {
+      "chapter": "save",
+      "black_tail": [
+        5.6,
+        5.96,
+        0.36
+      ],
+      "last_game_frame_held_seconds": 0.4400000000000004,
+      "source_sha256": "2f00d212ac34824025d7cdc8cefb965fe0e10ee54d7676878fcdad539abdf545"
+    },
+    {
+      "chapter": "magic",
+      "black_tail": [
+        7.72,
+        7.96,
+        0.24
+      ],
+      "last_game_frame_held_seconds": 0.3200000000000003,
+      "source_sha256": "bba91ccb2a92cbecfb3df7087d2470c28addf70c115b8c14fb66bd1ca00f4108"
+    },
+    {
+      "chapter": "ride",
+      "black_tail": [
+        6.8,
+        6.96,
+        0.16
+      ],
+      "last_game_frame_held_seconds": 0.2400000000000002,
+      "source_sha256": "5b8de685eccbccdd5a45246c3646aadc5b2992ade4052ad6f2a72180d5e814ad"
+    }
+  ],
+  "theme": "原影像、紅磚暗底、金色字幕線；實際鍵鼠動作剪輯",
+  "differences_from_previous": [
+    "實錄操作取代靜態場景巡禮",
+    "11項操作章節與受控場景標示",
+    "展示存檔重啟及實際滑鼠選項"
+  ],
+  "limits": "字卡與停留閱讀頁會觸發凍結偵測；逐段三個抽樣與操作紀錄另核對，平台真機未擴大宣稱。",
+  "tool_sha256": "81b14ba30b9b866863212dcc96fce158a3dddcc2ec3e8fe07b48301c5d8b5a63"
+}

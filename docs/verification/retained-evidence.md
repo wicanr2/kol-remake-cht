@@ -1,5 +1,23 @@
 # 完成比較後的證據保存與清理
 
+新版[六包及操作影片驗收](repack-v1.0.6-20261024.md)已納入此入口。
+
+2026-10-24依使用者要求完整清理工作區。舊研究保存於
+[完整清冊](local/workspace-cleanup-20261024/retention.json)及同目錄`evidence.tar.xz`；
+所有檔案均保留，包含C35候選、原始執行檔與工具，不沿用舊工具的執行檔省略規則。
+12份比較頁的圖片與資料另保存可讀副本，見[依賴與雜湊](local/workspace-cleanup-20261024/readable-dependencies.json)。
+HTML若需調整相對連結，同列記錄原始及可讀副本雜湊；原始封存保持。
+既有Markdown連結另保存可讀副本並改路徑，歷史命令及不可變收據保持原定位。
+本輪工作區另見[完整清冊](local/release-v1.0.6-20261024/retention.json)。
+
+核對及還原工具為[retain_workspace.py](../../tools/retain_workspace.py)，只在Docker執行。
+既有映像`kol-package:1.26.7-ebiten2.9.9-20261011-r1`，UID/GID1000、無網路、2GiB、2CPU、96程序、1800秒上限；
+把儲存庫唯讀掛`/src`、保存目錄唯讀掛`/saved`，空的還原目錄可寫掛`/restore`。
+執行`python3 -B /src/tools/retain_workspace.py verify --source /restore --out /saved`核對全部。
+需接續C35時，把phase改為`restore`並加`--name matching-c35-20261010`，完整恢復至`/restore/matching-c35-20261010/`。
+先確認三個host掛載來源皆存在；還原目的地不可已有同名目錄。
+
+
 2026-10-24 試玩回報修正的[驗證入口](player-feedback-20261024.md)及
 [本機清冊](local/player-feedback-20261024/retention.json)已納入本頁。
 核對名稱為 `player-feedback-20261024`，使用下方同一保存工具的 `verify`。

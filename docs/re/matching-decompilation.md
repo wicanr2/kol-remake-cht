@@ -1582,7 +1582,7 @@ LINK4.07／EXEMOD4.02／EXEPACK4.06 兩次原生重生 133679-byte 核心，再�
 近指標差、長整數、無號常數、參數型別與運算式求值的字型候選仍不符。QuickC1 候選拒絕測過的 `_asm` 源碼；其純 C 前綴也不符。
 QuickC251 可接受本次 `_segment`／`_based` 宣告，但測過的完整字型與遠指標葉函式仍未匹配。只限這些源碼／參數，不推定其他寫法不可能。
 正式重建仍使用原九項工具／錯誤資源；替代工具另有固定 commit、Git blob 與 SHA-256，只作研究。
-另有[接續 C35 試驗](../../workplace/matching-c35-20261010/PLAN.json)的五個先行候選，尚未取得完整匹配或整合；目前還原量以 C34 為準。
+另有[接續 C35 試驗](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/matching-c35-20261010/PLAN.json)的五個先行候選，尚未取得完整匹配或整合；目前還原量以 C34 為準。
 342 份正式輸入、全部 DATA、Book 五函式與遊戲對拍暫停保持；完整 matching 尚未完成。
 
 ## 第三十三批來源還原紀錄

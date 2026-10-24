@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "archives": [
+    {
+      "name": "workspace-cleanup-20261024",
+      "entries": 120524,
+      "original_bytes": 12902908955,
+      "archive_bytes": 1417500976,
+      "archive_sha256": "5fd5083e1cd517afed4b478b1eb71214fe738cb953d371c19a3d566a1150b2bf",
+      "retention_sha256": "11abf0e37a64499c5faf185c51be11365c980a5b63e6b2513ce0fdf1faee84ed",
+      "omitted_files": []
+    },
+    {
+      "name": "release-v1.0.6-20261024",
+      "entries": 432,
+      "original_bytes": 330144008,
+      "archive_bytes": 117055504,
+      "archive_sha256": "3d453242a04c0a1d847a46712b3d239e4ef31392826db005e8085b539fa6d21e",
+      "retention_sha256": "a351457a7c80be21cc901de7dc3e88210890d0b6fc94b54eb085fbbf9a7db4a8",
+      "omitted_files": []
+    }
+  ],
+  "workspace_allocated_before": 13555486720,
+  "workspace_allocated_after": 32768,
+  "workspace_allocated_removed": 13555453952,
+  "retained_allocated_bytes": 1836843008,
+  "net_workspace_saving_bytes": 11718610944,
+  "space_measurement": "du配置差額；未隔離共用主機其他工作或跨目錄共用區塊，不宣稱同量filesystem-free增幅",
+  "all_original_bytes_retained": true,
+  "source_rechecked_before_deletion": true,
+  "restore_test": "restore-smoke.json",
+  "links_migrated": 51,
+  "original_inputs_and_dist_preserved": true,
+  "workspace_empty": true,
+  "readable_pages": 12,
+  "readable_dependency_files": 10151
+}

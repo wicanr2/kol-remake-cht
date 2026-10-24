@@ -684,7 +684,7 @@ Giving期間在整頁底圖後畫全隊肖像，改走既有明細分支，把No
 10812組完整16-byte物品槽含空槽逐位元組相同，沒有省略空槽尾端。
 這是可丟棄原型證據，不能取代後續READY審查、正式接線及正常GUI驗收。
 
-[雙語操作比較頁](../../workplace/gift-recipient-layout-20261005/review.html)可選不同操作步驟；
+[雙語操作比較頁](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/gift-recipient-layout-20261005/review.html)可選不同操作步驟；
 [RE-234](../re/20261005-gift-recipient-layout.md)保存工具、範圍與限制。
 只核鍵盤原型，滑鼠語意仍由原有分支追蹤。滿背包、內層取消、其他物品、野外及HD未新增驗收。
 生成工具確認HTML引用的所有PNG存在；尚未在瀏覽器實際操作比較頁。

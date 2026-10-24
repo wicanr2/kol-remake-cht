@@ -1,6 +1,6 @@
 {
   "schema": "kol-worklist/1",
-  "updated": "2026-10-18",
+  "updated": "2026-10-24",
   "note": "未完成項的權威在這裡；WORKLIST.md 的那一節由 tools/worklist.py render 產生。每一條的 verify 跑起來為真＝仍然未完成。",
   "layers": {
     "gap": "玩家會撞到的功能缺口",
@@ -18,7 +18,7 @@
       "acceptance": "固定原版KOLTOWN.EXE SHA-256 c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221由可重現建置重生；header、資料、段配置、relocation及EXEPACK全部逐byte相同。每個code範圍登記C編譯、library、assembly或原始未匹配bytes，不以原版blob包裝或未宣告fixtures稱為C還原。匹配工具、參數、源檔、objects及完整差分均有固定hash。",
       "verify": {
         "kind": "manual",
-        "note": "仍有10原始函式與4999 CODE bytes未還原；Book五與Town5，總量含41函式外bytes及部分CRT的1 byte。依matching-c34-20261010/seed-compiler-units.json保留全部真實CODE來源、純C／混合分類、DATA核對鏈與未匹配試驗。普通C差異不可用ASM補完。workplace/matching-c35-20261010/PLAN.json的五個先行候選與兩份pilot收據已保留，完整C34基準已恢復；另一次無號左值字型候選仍未匹配。依使用者要求先commit與push，目標暫停，來源完成量維持C34。"
+        "note": "仍有10原始函式與4999 CODE bytes未還原；Book五與Town5，總量含41函式外bytes及部分CRT的1 byte。依matching-c34-20261010/seed-compiler-units.json保留全部真實CODE來源、純C／混合分類、DATA核對鏈與未匹配試驗。普通C差異不可用ASM補完。docs/verification/local/workspace-cleanup-20261024/browse/workplace/matching-c35-20261010/PLAN.json的五個先行候選與兩份pilot收據已保留，完整C34基準已恢復；另一次無號左值字型候選仍未匹配。依使用者要求先commit與push，目標暫停，來源完成量維持C34。 2026-10-24工作區已完整封存；接續時依docs/verification/retained-evidence.md還原。"
       },
       "status": "open",
       "blocking_for_current_closeout": false

@@ -68,6 +68,6 @@ title-thunder.json保留最初技術量測，其當時人耳尚未執行由此�
 [RE-230](../../re/20261005-title-audio-platform.md)以同來源重建Windows及macOS候選。
 Wine9預設DirectX正常啟動，雙語各23次cue，首格雙聲完整；第23聲中正常SPACE離開，
 實際有效聲長21.35415／21.35701秒，尾端一秒為零，正常Ctrl-Q退出0。
-收據為[windows-review.json](../../../workplace/title-audio-platform-20261005/windows-review.json)。
+收據為[windows-review.json](../../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/title-audio-platform-20261005/windows-review.json)。
 錄音須先確認已寫出靜音PCM才啟動遊戲，舊開頭截斷的兩份錄音均由首格完整性閘門拒絕。
 這是實際Wine輸出驗證，Windows真機聆聽與macOS啟動仍待驗，現有封包未更新。

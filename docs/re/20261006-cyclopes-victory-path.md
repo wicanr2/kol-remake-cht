@@ -106,7 +106,7 @@ ReturnScratch 為 6，舊 H 為 2，與上次 Olear 精靈弓樣本的 H=0 不�
 
 ## 重現、工具失敗與封存
 
-[本機完整畫面比較頁](../../workplace/cyclopes-victory-path-20261006/review.html)
+[本機完整畫面比較頁](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/cyclopes-victory-path-20261006/review.html)
 包含原版、正式版及候選的受阻／選單／結果畫格。
 重製入口為 `run-remake.sh`／`run-remake.py`；候選入口為
 `prepare-candidate.py`、`build-candidate.sh`、`run-candidate.sh`／`run-candidate.py`。

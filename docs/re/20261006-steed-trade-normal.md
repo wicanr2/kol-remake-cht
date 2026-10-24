@@ -22,8 +22,8 @@
 HD素材、平台真機或正式封包驗收。原版沒有中文畫面；繁中另驗字模、安全矩形及正常操作。
 若兩側資料更新時點不同，保留原始差異，不能以最後值一致冒稱全部逐步同狀態。
 
-準備入口：[腳本](../../workplace/steed-trade-normal-20261006-prepare.py)。
-工作區：[預先計畫](../../workplace/steed-trade-normal-20261006/plan.json)；
+準備入口：[腳本](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006-prepare.py)。
+工作區：[預先計畫](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/plan.json)；
 原版 run-native.sh／run_case.sh、現行 build.sh／run-formal.sh／run-formal.py 在同區。
 來源與全部新產物僅本機，沒有新增散布權或資料格式決定。
 
@@ -94,18 +94,18 @@ HD素材、平台真機或正式封包驗收。原版沒有中文畫面；繁中
 完整v3終值相同，變更可撤回；目前仍等待玩家路徑取捨。
 若選原版，後續依DRAFT→審查→READY→正式接線→同狀態驗證流程處理。
 
-入口：[三方並列畫面](../../workplace/steed-trade-normal-20261006/review.html)、
-[核對結果](../../workplace/steed-trade-normal-20261006/comparison.json)、
-[逐格映射](../../workplace/steed-trade-normal-20261006/mapped-states.json)、
-[修訂計畫](../../workplace/steed-trade-normal-20261006/corrected-plan.json)、
-[原型準備](../../workplace/steed-trade-normal-20261006/prepare-prototype.py)、
-[唯讀原始與現行資料核對](../../workplace/steed-trade-normal-20261006/analyze.py)。
+入口：[三方並列畫面](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/review.html)、
+[核對結果](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/comparison.json)、
+[逐格映射](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/mapped-states.json)、
+[修訂計畫](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/corrected-plan.json)、
+[原型準備](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/prepare-prototype.py)、
+[唯讀原始與現行資料核對](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/analyze.py)。
 執行分析時使用既有 `eob-remake-go:1.26.7-ebiten2.9.9-audio`、
 專案 `/src:ro`、本工作區 `/out:rw`，命令 `python3 -B /out/analyze.py`。
 UID/GID1000:1000、無網路、1GiB／1CPU／64程序、外層180秒。
 
-封存後使用[唯讀核對](../../workplace/steed-trade-normal-20261006/verify.py)檢查
-[收據](../../workplace/steed-trade-normal-20261006/receipt.json)的全部附件、外部來源及
+封存後使用[唯讀核對](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/verify.py)檢查
+[收據](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/receipt.json)的全部附件、外部來源及
 原始映射重算。專案仍掛`/src:ro`，工作區改掛`/out:ro`，
 Codex技能目錄唯讀掛`/codex:ro`，命令`python3 -B /out/verify.py`。
 資源與UID/GID沿上段；需要保存稽核JSON時，只開放指定`audit.json`檔。

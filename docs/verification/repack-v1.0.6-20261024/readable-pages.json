@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "pages": 12,
+  "files": 10151,
+  "bytes": 244717377,
+  "adapted_html": [
+    {
+      "path": "cyclopes-victory-path-20261006/review.html",
+      "original_sha256": "bf1c7cdf42f95308d053934cd1307f7ced4cac67439c13ac5fff0b9bb50904e8",
+      "readable_sha256": "8dc0cf59ce0984aff73b4d397fa1a9563eb374ec6cec79941e71cd6c9da211d3",
+      "relative_links": {
+        "../../docs/re/20261006-cyclopes-victory-path.md": "../../../../../../re/20261006-cyclopes-victory-path.md"
+      }
+    },
+    {
+      "path": "gift-recipient-layout-20261005/review.html",
+      "original_sha256": "d23bed454899d1b47d9fff7dfe2986487804d4a005c31fdb0dcffebb0b4f18e5",
+      "readable_sha256": "b4445a5149a1e0ff37556bb1a657d6c96c0df01c864e450588853b75026e92d5",
+      "relative_links": {
+        "../../docs/re/20261005-gift-recipient-layout.md": "../../../../../../re/20261005-gift-recipient-layout.md"
+      }
+    },
+    {
+      "path": "steed-trade-normal-20261006/review.html",
+      "original_sha256": "f9d5a20a6bd72b2579ab1f18c3ebf391f5049a2627b53658be328a55e9877be9",
+      "readable_sha256": "2113ce3fdc5ff09801bccaddd97215a7d0d23572a2394ea96c84fccdd4130ea7",
+      "relative_links": {
+        "../../docs/re/20261006-steed-trade-normal.md": "../../../../../../re/20261006-steed-trade-normal.md"
+      }
+    },
+    {
+      "path": "rideaway-normal-20261006/review.html",
+      "original_sha256": "a5cac8737266547b31a962b107673e0dd521687d6b8932db87673fcd68c2806f",
+      "readable_sha256": "aee2dae5e89572656add591141fe34b6c21c7f0499f61dd90c72ad4303e0878a",
+      "relative_links": {
+        "../../docs/re/20261006-rideaway-normal.md": "../../../../../../re/20261006-rideaway-normal.md"
+      }
+    },
+    {
+      "path": "blocked-knockback-return-20261005/review.html",
+      "original_sha256": "34eaef97be9805f58c7647f54232866d66f08a7abad1a77fe00508396673a1ea",
+      "readable_sha256": "ba14aeefeefc7d407666b63bb26d0389a403d8e2a9de934f91e76799acedb408",
+      "relative_links": {
+        "../../docs/re/20261005-blocked-knockback-return.md": "../../../../../../re/20261005-blocked-knockback-return.md"
+      }
+    },
+    {
+      "path": "hd-art-dependencies-20261006/review.html",
+      "original_sha256": "6ae9ebc9707cbfbf07584f0da9feaa23c439978e2a3906e178fe5387ec12b746",
+      "readable_sha256": "33d2456c14c43a26714405d4767ef57ab45355312a6c4d8ec6b3f2c779c471e8",
+      "relative_links": {
+        "../../docs/re/20261006-hd-render-dependencies.md": "../../../../../../re/20261006-hd-render-dependencies.md",
+        "../../cmd/kol/main.go": "../../../../../../../cmd/kol/main.go",
+        "../../internal/ui/bitmap_editor.go": "../../../../../../../internal/ui/bitmap_editor.go",
+        "../../internal/ui/delete.go": "../../../../../../../internal/ui/delete.go",
+        "../../internal/town/layout.go": "../../../../../../../internal/town/layout.go",
+        "../../internal/ui/battle.go": "../../../../../../../internal/ui/battle.go",
+        "../../internal/ui/battle_cjk.go": "../../../../../../../internal/ui/battle_cjk.go",
+        "../../internal/town/questlist.go": "../../../../../../../internal/town/questlist.go",
+        "../../internal/ending/ending.go": "../../../../../../../internal/ending/ending.go",
+        "../../internal/title/title.go": "../../../../../../../internal/title/title.go",
+        "../../docs/re/title-sequence.json": "../../../../../../re/title-sequence.json",
+        "../../cmd/kol/bitmap_edit.go": "../../../../../../../cmd/kol/bitmap_edit.go",
+        "../../internal/ui/battle_sheet.go": "../../../../../../../internal/ui/battle_sheet.go",
+        "../../internal/ui/custom_bitmap.go": "../../../../../../../internal/ui/custom_bitmap.go",
+        "../../internal/ui/newcharacter.go": "../../../../../../../internal/ui/newcharacter.go",
+        "../../internal/ui/newcharacter_cjk.go": "../../../../../../../internal/ui/newcharacter_cjk.go",
+        "../../internal/portrait/portrait.go": "../../../../../../../internal/portrait/portrait.go",
+        "../../internal/assets/assets.go": "../../../../../../../internal/assets/assets.go",
+        "../../internal/town/uitext.go": "../../../../../../../internal/town/uitext.go",
+        "../../internal/battle/state.go": "../../../../../../../internal/battle/state.go",
+        "../../internal/ui/sheet.go": "../../../../../../../internal/ui/sheet.go",
+        "../../internal/ui/sheet_cjk.go": "../../../../../../../internal/ui/sheet_cjk.go",
+        "../../internal/ui/town.go": "../../../../../../../internal/ui/town.go",
+        "../../internal/world/session.go": "../../../../../../../internal/world/session.go",
+        "../../internal/town/outdoor.go": "../../../../../../../internal/town/outdoor.go",
+        "../../internal/ui/world.go": "../../../../../../../internal/ui/world.go",
+        "../../internal/battle/result.go": "../../../../../../../internal/battle/result.go",
+        "../../internal/town/arena.go": "../../../../../../../internal/town/arena.go",
+        "../../internal/battle/message.go": "../../../../../../../internal/battle/message.go",
+        "../../internal/town/session.go": "../../../../../../../internal/town/session.go",
+        "../../internal/ui/battle_body.go": "../../../../../../../internal/ui/battle_body.go",
+        "../../internal/town/spelledit_page.go": "../../../../../../../internal/town/spelledit_page.go",
+        "../../internal/town/marker.go": "../../../../../../../internal/town/marker.go",
+        "../../internal/world/weather.go": "../../../../../../../internal/world/weather.go"
+      }
+    },
+    {
+      "path": "hd-art-dependencies-20261006/initial-review.html",
+      "original_sha256": "4c15eab000066f628a377d6cda8fb177639800fa1570f9b4f9653aa0c85a5eb1",
+      "readable_sha256": "6ea55f6f3a1aace01e0584dabddc3114306e448ca46d99e4ac0b85f84ccfd418",
+      "relative_links": {
+        "../../docs/re/20261006-hd-render-dependencies.md": "../../../../../../re/20261006-hd-render-dependencies.md",
+        "../../cmd/kol/main.go": "../../../../../../../cmd/kol/main.go",
+        "../../internal/ui/bitmap_editor.go": "../../../../../../../internal/ui/bitmap_editor.go",
+        "../../internal/ui/delete.go": "../../../../../../../internal/ui/delete.go",
+        "../../internal/town/layout.go": "../../../../../../../internal/town/layout.go",
+        "../../internal/ui/battle.go": "../../../../../../../internal/ui/battle.go",
+        "../../internal/ui/battle_cjk.go": "../../../../../../../internal/ui/battle_cjk.go",
+        "../../internal/town/questlist.go": "../../../../../../../internal/town/questlist.go",
+        "../../internal/ending/ending.go": "../../../../../../../internal/ending/ending.go",
+        "../../internal/title/title.go": "../../../../../../../internal/title/title.go",
+        "../../cmd/kol/bitmap_edit.go": "../../../../../../../cmd/kol/bitmap_edit.go",
+        "../../internal/ui/battle_sheet.go": "../../../../../../../internal/ui/battle_sheet.go",
+        "../../internal/ui/custom_bitmap.go": "../../../../../../../internal/ui/custom_bitmap.go",
+        "../../internal/ui/newcharacter.go": "../../../../../../../internal/ui/newcharacter.go",
+        "../../internal/ui/newcharacter_cjk.go": "../../../../../../../internal/ui/newcharacter_cjk.go",
+        "../../internal/portrait/portrait.go": "../../../../../../../internal/portrait/portrait.go",
+        "../../internal/assets/assets.go": "../../../../../../../internal/assets/assets.go",
+        "../../internal/town/uitext.go": "../../../../../../../internal/town/uitext.go",
+        "../../internal/battle/state.go": "../../../../../../../internal/battle/state.go",
+        "../../internal/ui/sheet.go": "../../../../../../../internal/ui/sheet.go",
+        "../../internal/ui/sheet_cjk.go": "../../../../../../../internal/ui/sheet_cjk.go",
+        "../../internal/ui/town.go": "../../../../../../../internal/ui/town.go",
+        "../../internal/world/session.go": "../../../../../../../internal/world/session.go",
+        "../../internal/town/outdoor.go": "../../../../../../../internal/town/outdoor.go",
+        "../../internal/ui/world.go": "../../../../../../../internal/ui/world.go",
+        "../../internal/battle/result.go": "../../../../../../../internal/battle/result.go",
+        "../../internal/town/arena.go": "../../../../../../../internal/town/arena.go",
+        "../../internal/battle/message.go": "../../../../../../../internal/battle/message.go",
+        "../../internal/town/session.go": "../../../../../../../internal/town/session.go",
+        "../../internal/ui/battle_body.go": "../../../../../../../internal/ui/battle_body.go",
+        "../../internal/town/spelledit_page.go": "../../../../../../../internal/town/spelledit_page.go",
+        "../../internal/town/marker.go": "../../../../../../../internal/town/marker.go",
+        "../../internal/world/weather.go": "../../../../../../../internal/world/weather.go"
+      }
+    }
+  ],
+  "original_archive_unchanged": true,
+  "archive_sha256": "5fd5083e1cd517afed4b478b1eb71214fe738cb953d371c19a3d566a1150b2bf",
+  "extraction": "1MiB LZMA reader to GNU tar, explicit members plus canonical hardlink targets",
+  "checked_static_links": 271,
+  "preexisting_missing_links": []
+}

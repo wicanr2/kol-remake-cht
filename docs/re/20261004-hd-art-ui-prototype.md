@@ -18,7 +18,7 @@ PNG 格式，建立 inventory.json；replay.sh／replay.py 從正常標題按鍵
 先比較 HD 像素重繪與 HD 手繪方向，使用者選擇手繪媒材。操作名稱、數值、物件數量、
 城鎮與戰場格子位置用原型來源核對，生成圖的變動明列，不能當作正式規則或可點擊介面。
 
-比較入口為[離線頁](../../workplace/hd-art-ui-20261004/review.html)。內建image_gen提示保存在
+比較入口為[離線頁](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-ui-20261004/review.html)。內建image_gen提示保存在
 prompts.json及painted-revision-prompt.txt，原始生成圖未改尺寸。review.py驗PNG標頭、CRC及資源入口，
 prototype-review.json記錄圖像來源、尺寸與差異。手繪初版媒材不足，保留為迭代記錄。
 
@@ -34,7 +34,7 @@ prototype-review.json記錄圖像來源、尺寸與差異。手繪初版媒材�
 
 ## 目前前沿：解析度與版面
 
-比較入口為[比例及版面原型](../../workplace/hd-art-ui-20261004/layout-review.html)。
+比較入口為[比例及版面原型](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-ui-20261004/layout-review.html)。
 layout-review.html以正常來源PNG作SVG介面原型，沒有重繪或覆寫來源PNG。
 
 | 選項 | 原型行為 | 代價 |

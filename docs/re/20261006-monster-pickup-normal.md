@@ -29,7 +29,7 @@ Theodoric手持為空時先用正常切換指令取腰帶武器，再走既有�
 成功須見怪物實際搬入完整16-byte物品、地面槽清除與後續正常規劃／畫面；
 只有呼叫入口或手持首byte非零不足以通過。
 
-工作入口：[準備腳本](../../workplace/monster-pickup-normal-20261006-prepare.py)。
+工作入口：[準備腳本](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/monster-pickup-normal-20261006-prepare.py)。
 同名工作區保存predeclared.json、來源SHA、probe.go、plan.json、build-original.sh與run-original.sh。
 所有原版payload與PNG僅本機；未提交、推送、修改版號或發布。
 Docker沿eob-remake-go:1.26.7-ebiten2.9.9-audio，network none、UID/GID1000；

@@ -10488,7 +10488,7 @@ RE-286封存勘誤：首次唯讀稽核拒絕畫格計數，實際12張而非文
 修正SPEC-005／023／025／030／033／035六列敘述，連回已存在的原版建角、自然競技場、人物v3、六人肖像、名稱母體及法術住宿保存證據。
 父規格狀態、DRAFT子分支、未完成18項與正式342來源保持，沒有新玩法、圖片或保存格式。
 在主機完成gh auth status及遠端唯讀核對：儲存庫private，24 OPEN／82 CLOSED，全部Issue無留言，沒有新的決策可套用。未提交、推送、Issue寫入、版號或發行。
-入口：[有限核對腳本](workplace/spec-index-current-20261006/review.py)，同區receipt.json保存連結、現行來源、文件與清單核對結果。
+入口：[有限核對腳本](docs/verification/local/workspace-cleanup-20261024/browse/workplace/spec-index-current-20261006/review.py)，同區receipt.json保存連結、現行來源、文件與清單核對結果。
 沿既有Docker image，UID/GID1000:1000、network none、資源與外層逾時有界；專案唯讀掛載，輸出限同工作區。不重跑未改動的產品測試；容器清理與擁有權終檢另記audit.json。
 
 ## 2026-10-06 RE-287 正常怪物拾取案例預登記
@@ -10592,7 +10592,7 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 對十八項逐一抄錄原 acceptance、verify 與 Issue，再附現行證據及下一閘門。docs/worklist.json、WORKLIST.md、所有 spec 與 README 完整雜湊保持。18未完成、89完成、14人工；不以有限切片結案整場，也不把 CGA／Hercules 當 EGA 首版阻塞。
 - 補入已確認的送禮 ENTER／SPACE 及標題雷聲決策，HD 手繪只核准媒材。解析度／介面與原有共同決策問題保持；任務共用亂數、受阻／舊H、法術空白等 DRAFT 不進正式路徑。
 - 正式342輸入／340Go與Linux991046ab完整SHA保持；最新平台／長任務沿 RE-291。不重跑未變來源的十九套件，沒有新遊戲、原版、保存或平台執行。遠端Issue沿最近快照標明日期範圍，本輪未存取遠端。
-- 稽核入口為 [準備腳本](workplace/current-handoff-audit-20261006-prepare.py)、[逐項契約](workplace/current-handoff-audit-20261006/gate-audit.json)、[唯讀重驗](workplace/current-handoff-audit-20261006/verify.py)及同區 receipt.json。新增工作區只有文件快照、JSON與核對腳本，不建新交付目錄或第二份權威工作清單。
+- 稽核入口為 [準備腳本](docs/verification/local/workspace-cleanup-20261024/browse/workplace/current-handoff-audit-20261006-prepare.py)、[逐項契約](docs/verification/local/workspace-cleanup-20261024/browse/workplace/current-handoff-audit-20261006/gate-audit.json)、[唯讀重驗](docs/verification/local/workspace-cleanup-20261024/browse/workplace/current-handoff-audit-20261006/verify.py)及同區 receipt.json。新增工作區只有文件快照、JSON與核對腳本，不建新交付目錄或第二份權威工作清單。
 - 讀取工具第一次以所有條目必有status處理，遇到開放條目省略status而退出1；改用get判斷後在同映像乾淨重讀通過。草稿一個RE-261檔名引用已在回寫前改正。這些是文件工具問題，沒有產品修正。
 - 本輪無提交、推送、Issue寫入、版號、封包或發行；Docker、有界資源、擁有權與暫存終檢在本輪收據及後續核對補充，目標尚未完成。
 
@@ -10609,7 +10609,7 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 六份正式／觀察／原型完整v3除saved_at相同；怪物v2及人物v3保持。四頁馱馬圖各1520像素符合來源，四頁繁中馱馬名牌字模零差；所驗四段繁中文字log缺字0。單人單城，不結案全部坐騎、全隊騎走、野外、全部中文、HD或平台真機。
 - 正常保存相對原始CHARDATA第13槽改13個byte；+0x97差分0→1保留，不猜正式v3欄位。正常Quit的第78格已切BOOK，舊TOWN DS欄位失效；保留PNG及raw但不解讀隊伍數54783。映射限有效城鎮0…77格，不冒稱全部768-byte或全畫面parity。
 - 父收據附件物件SHA比較、正式trace非每格都有party的包裝器KeyError，以及只讀列印路徑錯誤均為工具問題；保留首次產物，修訂後沿同映像乾淨重跑。原版正常執行103.22秒、新程序重載32.77秒均退出0；正式／原型各程序退出0。未重跑未變十九套件或整條長任務。
-- 新研究檔同輪掛逆向索引，六份修改前文件先保存；CONTEXT只補目前表與下一閘門，工作清單只追加兩既有項內文。原acceptance、verify、status、Issue及18未完成／89完成／14人工保持。入口[RE-293](docs/re/20261006-steed-trade-normal.md)、[操作比較](workplace/steed-trade-normal-20261006/review.html)及同區comparison.json；封存與唯讀終檢另附收據。
+- 新研究檔同輪掛逆向索引，六份修改前文件先保存；CONTEXT只補目前表與下一閘門，工作清單只追加兩既有項內文。原acceptance、verify、status、Issue及18未完成／89完成／14人工保持。入口[RE-293](docs/re/20261006-steed-trade-normal.md)、[操作比較](docs/verification/local/workspace-cleanup-20261024/browse/workplace/steed-trade-normal-20261006/review.html)及同區comparison.json；封存與唯讀終檢另附收據。
 - HEAD1384e508f70e8a5d81bc050ea79f66d3f0d38fe6；沒有提交、推送、Issue寫入、版號、封包或發行。正式馬廄流程未改，原版確認原型待共同決策，完整目標尚未完成。
 
 - RE-293唯讀封存初次重算在矩形tuple與JSON陣列比對時退出1，屬序列化驗證器問題；來源、附件與逐格比較已通過。第一份收據8910f72d與當時工具、文件原文保存於failed-readonly-audit-v1，其他初版與正常產物保持。修訂只將重算結果依JSON契約正規化，同映像／同唯讀命令乾淨重跑；不調比較值或正式程式。
@@ -10624,7 +10624,7 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 初次唯讀顯示腳本對整數欄位呼叫len而退出1，修正顯示後讀取通過；不是素材或產品缺陷。未建立新映像，未重跑來源未變的遊戲測試或假稱瀏覽器、HD正常操作及平台驗收。
 - 新研究檔同輪掛docs/re/README.md，CONTEXT維持唯一目前表，docs/worklist.json只追加hd-art-ui內文並render。原acceptance、verify、status、Issue與18未完成／89完成／14人工保持。worklist verify及scan通過，1922行自承均有認領，git diff --check退出0。
 - Docker全部有界、無網路、UID/GID1000:1000，研究輸入及程式唯讀，只開必要輸出與文件可寫。kol-re294一次性容器均移除；輸出根find未見root-owned檔案或.md目錄。沒有提交、推送、Issue寫入、版號、封包或發行；本輪收據保存文件快照，不回寫舊RE收據。
-- 入口[RE-294](docs/re/20261006-hd-render-dependencies.md)、[HD工作批次](workplace/hd-art-dependencies-20261006/review.html)與同區verify.py。正式HD替換仍依既有layout-review.html選擇與後續素材契約；完整重製目標保持開放。
+- 入口[RE-294](docs/re/20261006-hd-render-dependencies.md)、[HD工作批次](docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-dependencies-20261006/review.html)與同區verify.py。正式HD替換仍依既有layout-review.html選擇與後續素材契約；完整重製目標保持開放。
 
 
 ## 2026-10-06 RE-295：真保存騎乘出城的移動率
@@ -11267,7 +11267,7 @@ READY後只接execution.go、state.go與既有execution_test.go；task-source.di
 - 兩次完整 133760-byte KOLTOWN 的 SHA-256 均為 `c2442c8438ce8812926d61555626f67f918a5c9ed9c42939d98938535fddb221`。[C34 收據](docs/verification/local/matching-c34-20261010/receipt.json)與[來源清冊](docs/verification/local/matching-c34-20261010/source-ledger.json)已從壓縮證據全唯讀獨立核對，另核所有試驗、替代工具雜湊與正式輸入；沒有執行遊戲。
 - 累計 228 純 C／74428 bytes、378 LIB／44396 實際 bytes、182 混合／75345 bytes，混合分列 61350 C／13995 ASM。全六支仍 10 函式／4999 CODE 未還原，DATA 未還原為 0，完整目標仍開放。
 - 已更新目前狀態、研究入口與唯一 JSON 工作清單，原驗收條件與開放狀態保持。接續保留十一個 seed、68 個後續純 C／84 混合分類、106 純 C 基準、完整 DATA 鏈、剩餘範圍與試驗清冊。未提交、推送、寫 Issue、建立正式交付封包、發行或恢復 Go 對拍。
-- 封存期間另開始 [C35 先行工作](workplace/matching-c35-20261010/PLAN.json)，以 C34 唯讀輸入與容器暫存檔案系統跑五個 C 候選，兩份收據及來源／物件／命令已保存。逗號運算式恢復遠指標讀取後為 26 bytes，仍只差載入順序；其餘候選也未匹配。C35 批次尚未整合，工作區保留供接續；目前來源計數仍以 C34 為準。恢復完整 C35 前先核兩份 pilot 收據，保留既有 pilot 與 PLAN.json。
+- 封存期間另開始 [C35 先行工作](docs/verification/local/workspace-cleanup-20261024/browse/workplace/matching-c35-20261010/PLAN.json)，以 C34 唯讀輸入與容器暫存檔案系統跑五個 C 候選，兩份收據及來源／物件／命令已保存。逗號運算式恢復遠指標讀取後為 26 bytes，仍只差載入順序；其餘候選也未匹配。C35 批次尚未整合，工作區保留供接續；目前來源計數仍以 C34 為準。恢復完整 C35 前先核兩份 pilot 收據，保留既有 pilot 與 PLAN.json。
 - 保存 59003 份檔案，26 份可重建或按固定 Git blob 重取的執行檔只留 hash；原始證據 7077133575 bytes，壓縮為 446953976 bytes，SHA-256 為 `b89bcf54287983fae8b5580eb11919307d6f38e806a565eea72d2fc63063852c`。只刪除本批已保存工作區，約釋放 6293 MiB；衍生來源與工具仍僅本機保存。
 - 工作清單為 19 開放、89 已核實完成，掃描 2041 行全部有入口。C34 工作區已刪除，C35 的 pilot 與兩份收據保留且雜湊已核對；本專案容器清單為空，其他專案資源未動。UID/GID 1000:1000，沒有 root-owned 檔案或誤建 `.md` 目錄；九份主機暫存腳本已刪除，`git diff --check` 通過。
 
@@ -11953,3 +11953,26 @@ workplace/repack-20261018已核對封存後刪除。441個本機文件入口、�
 再次核對來源工作目錄與保存清冊一致後，只刪除 `workplace/player-feedback-20261024/`。
 規格索引42列一致，新文件連結及既有SPEC-040正對照通過；全專案root-owned與誤建.md目錄
 檢查無輸出，抽查UID/GID1000:1000。本輪容器已結束並移除，未新增image，原有TXT保持。
+
+
+## 2026-10-24：修正版操作影片、三平台雙版本及工作區清理
+
+依使用者要求，先把試玩修正提交並推送main，來源`a091378b1e20ba9be760b98c272e2236926cd3dd`，再製作本機`v.1.0.6-20261024`交付。
+路由命中三平台打包、版號、推廣影片、試玩與文件職責；已載入對應入口及專案現行收據，沒有新玩法或美術決策。
+
+- 三平台編譯沿四個既有映像，Go1.26.7／Ebitengine2.9.9；443份程式輸入與試玩修正驗收一致，1744份資源保持。
+- 六個完整版逐檔manifest、SHA、版號與架構通過。Linux實際AppImage、Wine實際Windows ZIP兩種圖形版均通過開場、選單、組隊、旅店、F9／F10及無-load續玩。
+- 兩平台均限4GiB、無交換空間且OOM kill0。固定seed1共24圖，EGA零差、HD最多一色階，文字與模型相同；實際Wine音訊非靜音、未裁切且退出末秒靜音。macOS僅雙架構與結構驗證，無真機聲明。
+- 83秒1080p／25fps影片以實際鍵鼠錄影剪輯，涵蓋11段操作。受控資料場景明示，沿已核准配樂。整片音軌、峰值、黑幀、凍結、字幕與逐段抽樣通過，已目視接觸表及關鍵畫格。
+- 錄影初期漏鍵、文字重複、Linux ALSA、驗證讀到正在重寫的保存，以及三段關窗黑尾，均歸驗證／剪輯環境。改按鍵同步、固定保存及剪除黑尾，同封包重跑通過，正式程式不改。
+- 鍵鼠工具另以封包內執行檔完整重跑雙語，通過。工作台帳仍15項未完成、94項已完成，產生區塊與JSON同步。
+- 舊工作區120524項及本輪432項全部封存，不省略任何執行檔。跨目錄去重、不同權限與符號連結測試及本輪完整還原通過；還原改為串流，避免xz硬連結反覆倒帶。
+- 51個既有Markdown連結保存逐檔雜湊相同的可讀副本並遷移，C35入口正對照通過。歷史命令及不可變收據保持原定位；2026-10-10所記C35工作區現已完整封存，接續時依保存入口還原，matching狀態不變。
+- 刪除前再核對來源與封存一致。workplace已清空，原目錄配置12.62GiB，完整封存及可讀副本約1.46GiB；此目錄差額不作共用主機free空間增幅。原始ZIP／PDF／圖片、舊交付、新六包、影片及使用者TXT保留。
+- 所有工作在有界容器、原始輸入唯讀、UID/GID1000、無網路執行。全專案root-owned與誤建.md目錄檢查無輸出，抽查擁有權通過；沒有新映像。主機另核本專案容器已清理。
+
+入口：[交付驗收](docs/verification/repack-v1.0.6-20261024.md)、[完整保存](docs/verification/retained-evidence.md)。
+本輪文件與工具另提交推送main；遠端SHA回讀保存在`docs/verification/local/release-v1.0.6-20261024/publication.json`。
+六個完整版與影片只留本機，沒有建立Release或移動舊tag。沒有新增原版parity、自然全任務通關或平台真機聲明。
+
+清理後再補存12份比較頁的10151份圖片及資料依賴，逐檔雜湊通過，核對271個靜態連結。HTML相對連結另留原始及可讀副本雜湊，完整封存保持。補存後完整封存及可讀副本合計約1.71GiB，最新目錄統計見cleanup-summary.json。

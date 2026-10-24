@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import time
 import zipfile
@@ -18,6 +19,7 @@ def main():
     parser.add_argument('--bundle', choices=('full', 'release'), default='full')
     parser.add_argument('--out', type=Path, default=Path('/out'))
     parser.add_argument('--work', type=Path, default=Path('/work'))
+    parser.add_argument('--resume-save', type=Path, help='實際建角及住宿產生的保存，用來核對無-load續玩')
     args = parser.parse_args()
     out, work = args.out, args.work
     version = json.loads((out / 'build-inputs.json').read_text())['version']
@@ -26,6 +28,11 @@ def main():
     if windows:
         env.update(WINEPREFIX='/tmp/kol-repack-wine', WINEDEBUG='-all', WINEDLLOVERRIDES='mscoree,mshtml=')
         Path(env['WINEPREFIX']).mkdir()
+    else:
+        # Linux操作驗收使用虛擬ALSA；實際音訊另由Wine／PulseAudio錄製核對。
+        alsa=work/'linux-asound.conf'
+        alsa.write_text('pcm.!default { type null }\n')
+        env['ALSA_CONFIG_PATH']=str(alsa)
     x = subprocess.Popen(['Xvfb', ':99', '-screen', '0', '1920x1200x24', '-nolisten', 'tcp'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     proc = None
     runs = []
@@ -159,6 +166,28 @@ def main():
                 xdo('keyup', 'q', 'ctrl')
                 assert code == 0 and not save.exists()
                 assert 'panic:' not in text() and 'HD畫面載入失敗' not in text()
+            if args.resume_save:
+                fixture = json.loads(args.resume_save.read_text())
+                assert fixture['party'] == [14, 15]
+                assert [fixture['characters'][i]['gold'] for i in (14,15)] == [1440,1440]
+                shutil.copy2(args.resume_save, save)
+                before = save.read_bytes()
+                resume_log = work/(name+'-resume.log')
+                with resume_log.open('w') as stream:
+                    proc = subprocess.Popen([*command,'-seed','1','-music','off','-log-input',
+                        '-save',patharg(save)],cwd=root,env=env,stdout=stream,stderr=subprocess.STDOUT)
+                    win.clear()
+                    wait(find,resume_log)
+                    window=win[0]
+                    xdo('windowfocus','--sync',window)
+                    inputkey(window,'1','town',resume_log)
+                    inputkey(window,'2','town',resume_log)
+                    assert 'input scene=title' not in resume_log.read_text(errors='replace')
+                    xdo('keydown','--window',window,'ctrl')
+                    xdo('keydown','--window',window,'q')
+                    assert proc.wait(timeout=20)==0
+                    xdo('keyup','q','ctrl')
+                assert save.read_bytes()==before, '檢視角色改變了保存'
             shots = work / (name + '-flow')
             shots.mkdir()
             with (work / (name + '-flow.log')).open('w') as stream:
@@ -171,6 +200,10 @@ def main():
                 graphics=theme, version=actual_version, exit_code=code, normal_intro=True, party_inn=True,
                 create_menu_enter_cancel=True, f9=True, f10_state_unchanged=True, hd_disabled=theme == 'ega',
                 hd_release_reload=theme == 'ega-hd', no_save_written=True, flow_frames=6))
+            if args.resume_save:
+                runs[-1]['automatic_resume_no_load']=True
+                runs[-1]['resume_party']=['aBcD','ZyX']
+                runs[-1]['resume_gold']=[1440,1440]
             print('RUNTIME PASS', package.name, flush=True)
         (work / (args.platform + '-runtime.json')).write_text(json.dumps(dict(status='PASS', version=version,
             runs=runs, memory_limit=Path('/sys/fs/cgroup/memory.max').read_text().strip(),

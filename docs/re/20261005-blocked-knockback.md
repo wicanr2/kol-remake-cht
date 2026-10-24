@@ -66,8 +66,8 @@ run-blocked-normal.py、review-native.py、review-blocked-normal.py與seal.py／
 完整重生應用新的研究輸出，腳本拒絕覆寫已存在的案例。所有原版payload僅本機。
 本輪沒有新的正式原版規則、HD版面決定、平台驗收、版號、封包或發布。
 
-封存入口：[有限收據](../../workplace/blocked-knockback-20261005/receipt.json)、
-[完整重驗](../../workplace/blocked-knockback-20261005/verify.py)。
+封存入口：[有限收據](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/blocked-knockback-20261005/receipt.json)、
+[完整重驗](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/blocked-knockback-20261005/verify.py)。
 
 ## RE-254 有限勘誤
 

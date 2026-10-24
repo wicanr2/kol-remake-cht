@@ -36,7 +36,7 @@
 
 手繪媒材、首批造型與下方素材契約已確認，其他批次的造型與分層契約維持 DRAFT。
 既有方向板實際為 1122×1402，只供比較，不作正式 HD 資產。
-解析度的可丟棄原型見 [比例及版面比較](../../workplace/hd-art-ui-20261004/layout-review.html)。
+解析度的可丟棄原型見 [比例及版面比較](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/hd-art-ui-20261004/layout-review.html)。
 使用者於 2026-10-11 選定 A：1920×1200，保持原比例。此決定不包含尚未展示的造型或素材契約。
 [決策記錄](../verification/cjk-closeout-20261011/hd-decision.json)保存原型雜湊與核准範圍。
 

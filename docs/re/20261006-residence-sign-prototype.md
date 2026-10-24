@@ -2,8 +2,8 @@
 
 日期：2026-10-06。狀態：**DRAFT**，限可丟棄介面原型。
 
-入口：[比較頁](../../workplace/cjk-residence-sign-prototype-20261006/review.html)、
-[來源及字模清冊](../../workplace/cjk-residence-sign-prototype-20261006/prototype.json)。
+入口：[比較頁](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/cjk-residence-sign-prototype-20261006/review.html)、
+[來源及字模清冊](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/cjk-residence-sign-prototype-20261006/prototype.json)。
 本項屬 `cjk-remaining-screens`，HD 工作仍依已確認的手繪媒材與待確認版面處理。
 
 ## 已知事實

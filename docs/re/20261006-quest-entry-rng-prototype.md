@@ -12,7 +12,7 @@
 驗收先核4096格地形，再核首次規劃種子、十八角色的五十語意欄與十二完整手持。
 英文與繁中各執行候選／唯讀觀測，觀測資料深複製，不寫回遊戲狀態。
 
-來源入口：[準備腳本](../../workplace/quest-entry-rng-prototype-20261006-prepare.py)。
+來源入口：[準備腳本](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/quest-entry-rng-prototype-20261006-prepare.py)。
 同名工作區保存預登記、eligibility.json、單檔候選、overlay、建置與正常回放。
 正式342來源、Linuxd43a6385、怪物v2／人物v3、既有DRAFT與完成條件保持。
 原版與衍生證據只留本機；沒有提交、推送、版號或發行。

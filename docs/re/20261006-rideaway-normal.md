@@ -37,8 +37,8 @@ trace在移除新增觀察欄後相同。原版170格與雙語原型各188步以
 原版第143格、原型第161步為同一延伸輸入，均首次紮營。此前版第124步就紮營。
 原版第33至143格，共111個世界時段／地形標籤與日期框符合原型；前版只有24個標籤符合。
 直接量測320×200原圖的標籤矩形14,142,67,15及日期矩形14,57,67,15，沒有縮放、補圖或重繪。
-比較表在[comparison.json](../../workplace/rideaway-normal-20261006/comparison.json)，
-畫面在[有限路徑比較](../../workplace/rideaway-normal-20261006/review.html)。
+比較表在[comparison.json](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/rideaway-normal-20261006/comparison.json)，
+畫面在[有限路徑比較](../../docs/verification/local/workspace-cleanup-20261024/browse/workplace/rideaway-normal-20261006/review.html)。
 
 既有已證實隊伍最慢移動率規則沒有改變。本輪先登記DRAFT、做隔離原型、審查升READY，
 才在正式`playSession.OnLeaveTown`增加一行`worldScreenState.Movement = partyMovement(playSession.Party)`。

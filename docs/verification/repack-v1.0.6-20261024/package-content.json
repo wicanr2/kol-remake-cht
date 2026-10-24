@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "version": "v.1.0.6-20261024",
+  "packages": [
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-windows-amd64.zip",
+      "status": "PASS",
+      "manifest_files": 951,
+      "resource_files": 912,
+      "hashes_checked": true,
+      "binary_hash_verified": true
+    },
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-linux-x86_64.AppImage",
+      "status": "PASS",
+      "manifest_files": 955,
+      "resource_files": 912,
+      "hashes_checked": true,
+      "binary_hash_verified": true
+    },
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-macos-universal.zip",
+      "status": "PASS",
+      "manifest_files": 956,
+      "resource_files": 912,
+      "hashes_checked": true,
+      "binary_hash_verified": true
+    },
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-hd-windows-amd64.zip",
+      "status": "PASS",
+      "manifest_files": 1783,
+      "resource_files": 1744,
+      "hashes_checked": true,
+      "binary_hash_verified": true
+    },
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-hd-linux-x86_64.AppImage",
+      "status": "PASS",
+      "manifest_files": 1787,
+      "resource_files": 1744,
+      "hashes_checked": true,
+      "binary_hash_verified": true
+    },
+    {
+      "package": "kol-v.1.0.6-20261024-full-ega-hd-macos-universal.zip",
+      "status": "PASS",
+      "manifest_files": 1788,
+      "resource_files": 1744,
+      "hashes_checked": true,
+      "binary_hash_verified": true
+    }
+  ]
+}
