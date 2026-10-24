@@ -9,7 +9,7 @@
 | 平台 | Linux實際AppImage解包執行、Windows ZIP經Wine9均通過操作與無-load續玩；macOS僅雙架構及結構驗證 |
 | 資源與存檔 | 工具列驗收453份Go／module／內嵌字模輸入；既有封包443份Go／module、1744份資源保持。工具列偏好獨立toolbar.json，戰鬥輔助每次啟動關閉；永久角色值沿用kol-save-v3 |
 | 範圍限制 | 無新增原版parity或自然全任務通關；Windows／macOS未真機驗收，Linux未驗主機FUSE |
-| 遠端 | `main`已推送修正；public儲存庫與已發布v.1.0.5引擎Release保持。六個完整版與影片僅本機，沒有新Release或移動tag |
+| 遠端 | 功能提交`d6f10464`已推送main並回讀相符；public儲存庫與已發布v.1.0.5引擎Release保持。六個完整版與影片僅本機，沒有新Release或移動tag |
 | 工作區 | 完整封存及清理方式見[保存入口](docs/verification/retained-evidence.md)；C35候選保留，matching仍暫停 |
 
 本輪影片為實際鍵鼠剪輯，準備資料的場景明示標記。原始素材、原始輸入及歷史收據保持。
