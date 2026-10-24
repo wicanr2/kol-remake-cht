@@ -6,10 +6,10 @@
 |---|---|
 | 正式程式 | 開發版已接入使用者核准的[SPEC-043字型設定](docs/spec/043-rounded-game-font.md)，[正式GUI與保存驗收](docs/verification/rounded-font-20261024.md)及README截圖完成；既有SPEC-041／042修正與輔助保持 |
 | 本機交付 | `v.1.0.7-20261024`六包及124秒新影片全部通過，分為`full/ega/`與`full/ega-hd/`；[驗收入口](docs/verification/repack-v1.0.7-20261024.md) |
-| 平台 | Linux實際AppImage解包執行、Windows ZIP經Wine9均通過操作與無-load續玩；macOS僅雙架構及結構驗證 |
+| 平台 | 既有v1.0.7封包的Linux AppImage與Windows Wine9操作通過、macOS為結構驗證；本輪字型為Linux GUI及Windows編譯，未新增真機驗收 |
 | 資源與存檔 | 開發版461份Go／module／內嵌字模輸入已核對，既有v1.0.7封包為453份；資源仍為純EGA912份／HD1744份。字型與工具列偏好獨立toolbar.json；角色值仍用kol-save-v3 |
 | 範圍限制 | 無新增原版parity或自然全任務通關；Windows／macOS未真機驗收，Linux未驗主機FUSE |
-| 遠端 | v1.0.7打包、影片工具及驗收提交`b97dcd12`已推送main並回讀相符；public儲存庫與已發布v.1.0.5引擎Release保持。六個完整版與影片僅本機，沒有新Release或移動tag |
+| 遠端 | 字型功能提交`2a268057`已推送main並回讀相符；public儲存庫與已發布v.1.0.5引擎Release保持。六個完整版與影片僅本機，沒有新Release或移動tag |
 | 工作區 | 字型原型與驗證共154項已完整封存並清空workplace，見[保存入口](docs/verification/retained-evidence.md)；既有C35候選保留，matching仍暫停 |
 
 本輪影片為實際鍵鼠剪輯，準備資料的場景明示標記。原始素材、原始輸入及歷史收據保持。
