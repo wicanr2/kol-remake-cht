@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "metrics": {
+    "ega_restore": {
+      "max_channel_difference": 0,
+      "changed_pixels": 0,
+      "limit": 0
+    },
+    "ega_sheet_restore": {
+      "max_channel_difference": 0,
+      "changed_pixels": 0,
+      "limit": 0
+    },
+    "hd_restore": {
+      "max_channel_difference": 0,
+      "changed_pixels": 0,
+      "limit": 1
+    },
+    "hd_sheet_restore": {
+      "max_channel_difference": 0,
+      "changed_pixels": 0,
+      "limit": 1
+    },
+    "english_preserved": {
+      "max_channel_difference": 0,
+      "changed_pixels": 0,
+      "limit": 0
+    },
+    "ega_font_change": {
+      "changed_pixels": 10272
+    },
+    "hd_font_change": {
+      "changed_pixels": 40273
+    },
+    "ega_sheet_font_change": {
+      "changed_pixels": 12622
+    },
+    "hd_sheet_font_change": {
+      "changed_pixels": 40261
+    },
+    "stat_digits": {
+      "rect": [
+        282,
+        218,
+        355,
+        411
+      ],
+      "max_channel_difference": 0
+    },
+    "ascii_name": {
+      "rect": [
+        210,
+        60,
+        750,
+        90
+      ],
+      "max_channel_difference": 0
+    }
+  }
+}

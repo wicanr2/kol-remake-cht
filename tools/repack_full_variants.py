@@ -29,9 +29,11 @@ def program_inputs():
     result = {str(p.relative_to(ROOT)): sha(p) for d in ('cmd', 'internal')
               for p in sorted((ROOT / d).rglob('*.go'))}
     result.update({n: sha(ROOT / n) for n in ('go.mod', 'go.sum')})
-    # 工具列字模編入執行檔，須與Go來源一起接受驗收及追蹤。
+    # 工具列及可選遊戲字模編入執行檔，須與Go來源一起接受驗收及追蹤。
     result.update({str(p.relative_to(ROOT)): sha(p)
                    for p in sorted((ROOT / 'cmd/kol/toolbarfont').glob('*')) if p.is_file()})
+    result.update({str(p.relative_to(ROOT)): sha(p)
+                   for p in sorted((ROOT / 'cmd/kol/roundedfont').glob('*')) if p.is_file()})
     return result
 
 
@@ -158,6 +160,7 @@ exec "$HERE/usr/bin/kol" "$@"
                 else:
                     shutil.copy2(binary, base / 'kol.exe')
                 for name in ('LICENSE', 'cmd/kol/toolbarfont/OFL.txt', 'cmd/kol/toolbarfont/source.json',
+                             'cmd/kol/roundedfont/source.json',
                              'docs/i18n', 'docs/manual', 'docs/re/title-sequence.json',
                              'docs/re/town-inn-sample.json', 'docs/re/town-outdoor-sample.json',
                              'docs/re/ida-fingerprints/KOLBOOK-character-writer-summary.json'):

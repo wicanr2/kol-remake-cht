@@ -4,19 +4,27 @@
 
 | 項目 | 目前狀態與入口 |
 |---|---|
-| 正式程式 | 試玩修正後新增已核准的工具列與永久強化；[SPEC-042](docs/spec/042-assist-toolbar.md)、[驗收](docs/verification/assist-toolbar-20261024.md)及README正式截圖已完成；前版修正來源`a091378` |
+| 正式程式 | 開發版已接入使用者核准的[SPEC-043字型設定](docs/spec/043-rounded-game-font.md)，[正式GUI與保存驗收](docs/verification/rounded-font-20261024.md)及README截圖完成；既有SPEC-041／042修正與輔助保持 |
 | 本機交付 | `v.1.0.7-20261024`六包及124秒新影片全部通過，分為`full/ega/`與`full/ega-hd/`；[驗收入口](docs/verification/repack-v1.0.7-20261024.md) |
 | 平台 | Linux實際AppImage解包執行、Windows ZIP經Wine9均通過操作與無-load續玩；macOS僅雙架構及結構驗證 |
-| 資源與存檔 | 新版453份Go／module／內嵌字模輸入、1744份資源均已核對。純EGA912份、HD完整1744份。工具列偏好獨立toolbar.json，戰鬥輔助每次啟動關閉；永久角色值沿用kol-save-v3 |
+| 資源與存檔 | 開發版461份Go／module／內嵌字模輸入已核對，既有v1.0.7封包為453份；資源仍為純EGA912份／HD1744份。字型與工具列偏好獨立toolbar.json；角色值仍用kol-save-v3 |
 | 範圍限制 | 無新增原版parity或自然全任務通關；Windows／macOS未真機驗收，Linux未驗主機FUSE |
 | 遠端 | v1.0.7打包、影片工具及驗收提交`b97dcd12`已推送main並回讀相符；public儲存庫與已發布v.1.0.5引擎Release保持。六個完整版與影片僅本機，沒有新Release或移動tag |
-| 工作區 | 完整封存及清理方式見[保存入口](docs/verification/retained-evidence.md)；C35候選保留，matching仍暫停 |
+| 工作區 | 字型原型與驗證共154項已完整封存並清空workplace，見[保存入口](docs/verification/retained-evidence.md)；既有C35候選保留，matching仍暫停 |
 
 本輪影片為實際鍵鼠剪輯，準備資料的場景明示標記。原始素材、原始輸入及歷史收據保持。
 新版交付根目錄為`dist-all/v.1.0.7-20261024/`；歷程只寫[WORKLOG](WORKLOG.md)。
 使用者於2026-10-24明確要求只留最新版；舊版本機交付已刪除，歷史清冊及遠端Release／tag保留。
 
 ## 目前作業方向
+
+新增字型設定需求：使用者要求參考`~/cht/zeliard`的圓潤字型。
+已查證工具列本來使用粉圓2.1，遊戲中文使用現有Noto字模；Zeliard字級僅控制工具列及設定頁。
+使用者已核准[字型比較與F10設定原型](docs/verification/rounded-font-20261024/review/index.html)，
+現有字型／粉圓柔邊切換、保留字距與英數字、偏好獨立保存，依[SPEC-043](docs/spec/043-rounded-game-font.md)接入。
+正式程式、完整Go回歸、EGA／HD人物頁與旅店、住宿及新程序偏好重載均已[驗收](docs/verification/rounded-font-20261024.md)。
+字型往返、英文畫面及人物姓名／數字抽樣均為像素差0；既有六包與影片保持。
+重生入口為[原型工具](tools/prototype_rounded_font.py)與[正式字模工具](tools/bake_rounded_game_font.py)。
 
 使用者已要求重新錄製同時介紹v1.0.6修正與v1.0.7新增功能的影片，並重建三平台純EGA／EGA＋HD六包。
 本輪交付版本為`v.1.0.7-20261024`，453份程式輸入及1744份素材已核對，六包及124秒新影片全部通過。

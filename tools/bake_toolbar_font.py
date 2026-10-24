@@ -22,7 +22,7 @@ out = a.root/'cmd/kol/toolbarfont'
 assert out.parent.stat().st_uid == os.getuid()
 out.mkdir(exist_ok=True)
 chars = set(chr(i) for i in range(32,127))
-for name in ('cmd/kol/toolbar.go','internal/town/assistance.go'):
+for name in ('cmd/kol/toolbar.go','cmd/kol/game_font.go','internal/town/assistance.go'):
     for literal in re.findall(r'"(?:[^"\\]|\\.)*"',(a.root/name).read_text()):
         chars.update(c for c in json.loads(literal) if ord(c) >= 0x3000)
 chars.add('…')

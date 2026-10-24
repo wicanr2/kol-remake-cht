@@ -187,6 +187,7 @@ func (g *game) setGraphics(mode string) error {
 		g.hdCache, g.hdCanvas = hd, canvas
 	}
 	g.hd, g.presentation = g.hdCache, g.hdCanvas
+	g.hd.SetTextFont(g.cjk)
 	return nil
 }
 

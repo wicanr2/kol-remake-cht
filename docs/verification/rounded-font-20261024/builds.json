@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "docker_image": "kol-package:1.26.7-ebiten2.9.9-20261011-r1",
+  "image_sha256": "0b933af1238ab5839ad7a64b6ae05f069f57cb85da5917dfbe59730f6d7ba53f",
+  "linux": {
+    "sha256": "862ab3d6aa1f09c33c36bef3faf922b38a818ef627a9e750e6c31d92c55c544d",
+    "bytes": 19307752,
+    "format": "ELF x86_64",
+    "runtime": "Docker/Xvfb GUI passed"
+  },
+  "windows": {
+    "sha256": "8c7e68e29c66de6b01d63acf51856ffab65efdb8b4a16a534b8e83e516c571ba",
+    "bytes": 18810880,
+    "format": "PE amd64",
+    "runtime": "not run this task"
+  },
+  "program_files": 461,
+  "screenshots": 33,
+  "limits": "No new bundles, video or Release. macOS not built or run this task."
+}

@@ -7,6 +7,7 @@ Ebitengine，執行期只讀經可重現流程抽出的 PNG；正式音訊使用
 本機完整版為 `v.1.0.7-20261024`，Linux、Windows、macOS 各提供純 EGA 與 EGA＋HD，共六包。
 三平台引擎包與完整版均採按需讀圖及動態釋放；引擎包須自行匯入合法資料。
 本機新版已含[v1.0.6修正、v1.0.7工具列與可選輔助](docs/verification/repack-v1.0.7-20261024.md)，並重新錄製操作影片。
+開發版另提供[可切換的粉圓中文字型](#遊戲中文字型設定)，可從工具列「畫面F10」設定。
 目前採[受控場景驗收](docs/spec/040-controlled-scene-acceptance.md)：允許鎖血與提高攻擊，
 抵達指定場景後確認中文與畫面。登記場景已通過，結果見[驗收收據](docs/verification/controlled-scenes-20261011.md)。
 本版包含住宅告示、中文目錄、結局排版修正、HD介面與頭像、四首原創室內樂，以及遊戲內F9配樂與F10畫面切換。
@@ -146,6 +147,22 @@ Linux／Wine實際封包開場、組隊與F10已在4 GiB記憶體上限驗證；
 
 工具列字型使用粉圓2.1，離線轉為PNG後內嵌；[來源與雜湊](cmd/kol/toolbarfont/source.json)
 及[OFL授權](cmd/kol/toolbarfont/OFL.txt)隨程式保存。
+
+### 遊戲中文字型設定
+
+開發版新增「畫面 F10 → 字型」，可選擇「現有字型」或「粉圓柔邊」。
+這項功能尚未納入上方的v.1.0.7六個完整版及影片。
+
+![遊戲內粉圓字型設定](docs/verification/rounded-font-20261024/font-settings-ega.png)
+
+- 用滑鼠點選「字型」分頁，再點選字型；鍵盤可用左右鍵切分頁、上下鍵或Tab移焦、Enter套用。
+- 切換後立即預覽。預設使用現有字型，選擇另存於使用者設定目錄的`kol-remake-cht/toolbar.json`，重開遊戲仍保留。
+- EGA與HD都能切換。中文及全形標點可用粉圓，英數字、字距與操作位置沿原設定；粉圓缺字時沿用現有字模。
+- 工具列及設定頁原本就使用粉圓。英文遊戲保留原字型。Esc返回遊戲，返回後先放開按鍵。
+
+字型偏好不改角色存檔，也不需要住宿保存。來源採用與Zeliard相同的jf open粉圓2.1，
+離線產生兩種尺寸的PNG後內嵌，不需安裝字型。[來源與雜湊](cmd/kol/roundedfont/source.json)、
+[規格](docs/spec/043-rounded-game-font.md)與[實際畫面及驗收範圍](docs/verification/rounded-font-20261024.md)另列。
 
 原有遊戲按鍵依原版參考卡：
 

@@ -407,6 +407,15 @@ func (n *hdNativeRender) DrawFont(dst *ebiten.Image, f *font.Font, x, y int, tex
 			if !cell.In(dst.Bounds()) {
 				n.err = fmt.Errorf("HD介面文字超界：%q at %v", text, cell)
 			}
+			clip := cell
+			if clipped {
+				clip = clip.Intersect(clipRect)
+			}
+			if f.DrawAlternative(dst, ch, pen, float64(y*2), 2*textScale, 2*textScale, ink, clip) {
+				drawn++
+				pen += advance
+				continue
+			}
 			scaleX := .5 * textScale
 			if glyph.Advance*scaleX > advance {
 				scaleX = advance / glyph.Advance

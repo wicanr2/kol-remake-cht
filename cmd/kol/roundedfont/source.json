@@ -1,0 +1,21 @@
+{
+  "font": "jf open 粉圓 2.1",
+  "source_sha256": "9d5bf4932d31fe94c18cd8cfddc98bc1b14ce10f4e354c682179db290a99c825",
+  "source_url": "https://github.com/justfont/open-huninn-font/releases/download/v2.1/jf-openhuninn-2.1.ttf",
+  "license": "OFL-1.1",
+  "license_path": "cmd/kol/toolbarfont/OFL.txt",
+  "license_sha256": "5df6de36ba2fe26119ac161edbed97c62a9da3c1493f6930b9d9af7f5c93004b",
+  "original_manifest_sha256": "2a526c5b1d59d0689bfe3d6b3378f78ef7a6b6e32898d0c9504fe5e152fb690c",
+  "generator": "tools/bake_rounded_game_font.py",
+  "generator_sha256": "ae9f969430ab01231e1e5019f31d773f65aca1106a6062cc2edc854e254392a2",
+  "outputs": {
+    "rounded-16.png": "d5b2464d3820be6965c48d1ba0cbe0ce1c3d4a40a3659c20b2cddf63c9eca520",
+    "rounded-32.png": "bfc0bb30861986826ab40d3cd946c8646131dec309f8f868dc8e765fafda330a",
+    "manifest.json": "3b2c4cd2e219b0389b57fb81ac1f188ff30770d4b3de4f7b712853fd0d6373b0"
+  },
+  "method": "4x supersampling; fixed original baseline/advance; grayscale alpha; PNG only at runtime",
+  "fallback_codepoints": [
+    22367
+  ],
+  "glyph_count": 2505
+}

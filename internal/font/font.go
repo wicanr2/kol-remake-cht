@@ -56,10 +56,11 @@ var DrawObserver func(font, text string)
 
 // Font 是一套已載入的原版點陣字型。
 type Font struct {
-	meta   entry
-	sheet  *ebiten.Image
-	glyphs map[rune]*ebiten.Image
-	mapped map[rune]glyphEntry
+	meta                          entry
+	sheet                         *ebiten.Image
+	glyphs                        map[rune]*ebiten.Image
+	mapped                        map[rune]glyphEntry
+	alternative, alternativeLarge *Font
 }
 
 // Load 讀取字型目錄下的指定字型。
@@ -216,7 +217,7 @@ func (f *Font) Draw(dst *ebiten.Image, x, y int, text string, r, g, b uint8) int
 	drawn, pen := 0, x
 	for _, ch := range []rune(text) {
 		width := f.advance(ch)
-		img, ok := f.glyph(ch)
+		img, ok := f.glyphForDraw(ch)
 		if !ok {
 			pen += width
 			continue

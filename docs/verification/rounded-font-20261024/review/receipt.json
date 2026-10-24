@@ -1,0 +1,23 @@
+{
+  "status": "PROTOTYPE_ONLY",
+  "reference": "~/cht/zeliard/tools/prepare_rounded_font.py",
+  "font_sha256": "9d5bf4932d31fe94c18cd8cfddc98bc1b14ce10f4e354c682179db290a99c825",
+  "original_background": {
+    "path": "docs/verification/assist-toolbar-20261024/toolbar.png",
+    "sha256": "cfa015810e605c295a249181bc63241283a2a535f38f31f8a45433205a82d564"
+  },
+  "generator_sha256": "43b974e7d0d30a5a1867d1dcffab20f2a7eb3fe531766a526afe5dd77b0c56d8",
+  "outputs": {
+    "index.html": "38891e3dc42b5d22d55a2440d4a07a266e1a730262051bb3df7209f77f9602b9",
+    "settings-current.png": "d74acf6f68365dc85fca1b452fae383d929cc67ab2e9aa6f871adbad1ab0ae17",
+    "comparison.png": "83cc572bcbeb363ef802c6b3b7b80bb80ec98e540039dd6a49724dad0d5db420",
+    "settings-rounded.png": "9241d73eed2365fdd179871117b6a7150beabd0c752f526a8049a59a228123c2"
+  },
+  "samples": [
+    "武士傳說　角色與裝備",
+    "生命值　疲勞　金幣 9000",
+    "攻擊部位：上段、中段、下段。",
+    "住宿保存隊伍，重開繼續遊戲。"
+  ],
+  "production_changed": false
+}

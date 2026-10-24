@@ -9,6 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/wicanr2/kol-remake-cht/internal/battle"
+	"github.com/wicanr2/kol-remake-cht/internal/font"
 	"github.com/wicanr2/kol-remake-cht/internal/town"
 )
 
@@ -23,7 +24,11 @@ type hdInterface struct {
 	t                Translator
 	npcKey, crestKey string
 	scratch          *ebiten.Image
+	textFont         *font.Font
 }
+
+// SetTextFont 沿原HD量測及字距，只在字型啟用替代呈現時換中文字模。
+func (h *HD) SetTextFont(f *font.Font) { h.style.textFont = f }
 
 var hdInk = color.RGBA{238, 225, 202, 255}
 var hdGold = color.RGBA{212, 176, 112, 255}
@@ -97,6 +102,11 @@ func (s *hdInterface) label(dst *ebiten.Image, text string, r image.Rectangle, s
 		g, ok := s.glyphs[string(ch)]
 		if !ok {
 			g = s.glyphs["?"]
+		}
+		if s.textFont != nil && s.textFont.DrawAlternative(dst, ch, x,
+			float64(r.Min.Y)+(float64(r.Dy())-size)/2, size/16, size/18, c, r) {
+			x += g.Advance * scale
+			continue
 		}
 		var op ebiten.DrawImageOptions
 		op.GeoM.Scale(scale, scale)

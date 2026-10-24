@@ -1,0 +1,222 @@
+{
+  "source_zip": {
+    "file": "Knights-of-legend.zip",
+    "sha256": "2b455e3c13ec7ecb727c918eefbe261fe741a460285bdd0e638a6aeb6ec49f46"
+  },
+  "source_entry": "EGA runtime composition; archive and entry index in source PNG manifest; HD paintings from current HD manifests",
+  "source_png_manifest": {
+    "path": "assets/original-derived-png/ega/manifest.json",
+    "sha256": "cc1af2dac32198d4682b937143bdd88d290d5d940567f84f1ad20befe704aeb9"
+  },
+  "hd_resource_baseline": {
+    "path": "docs/verification/release-v1.0.3-20261017/build-inputs.json",
+    "sha256": "14c936b88f93d9b47604e89bcdc8378e47523b52d61a1a86e41cbf50bdb36600"
+  },
+  "renderer": "Go 1.26.7 / Ebitengine 2.9.9",
+  "tool": "tools/verify_rounded_game_font.py",
+  "tool_sha256": "e986a0ccc5b961c14908983e3461d64e1615e6aaad26da949ef7ec66725930a9",
+  "seed": 1,
+  "evidence": "normal remake GUI verification; original parity not claimed",
+  "rights": "original-derived PNG; repository decision 2026-10-17; original rights unconfirmed",
+  "frames": [
+    {
+      "file": "ega-current-inn.png",
+      "frame_action_index": 52,
+      "log": "normal-player-path.log",
+      "sha256": "2ff7cf1ef3d999bb786e8e1908c5ebbbb6f7c9ef4e7c1641428e3bca5920d28c"
+    },
+    {
+      "file": "rounded-settings-56.png",
+      "frame_action_index": 56,
+      "log": "normal-player-path.log",
+      "sha256": "20e830cc84e6248ac82e8c790507b02d68062a867bfc0b725d76b1877d890830"
+    },
+    {
+      "file": "ega-rounded-inn.png",
+      "frame_action_index": 58,
+      "log": "normal-player-path.log",
+      "sha256": "d73da89d2aa14e2b7d44e980c674a736238240fbe2ba5877bc3d3cfb889cae09"
+    },
+    {
+      "file": "font-settings-ega.png",
+      "frame_action_index": 65,
+      "log": "normal-player-path.log",
+      "sha256": "8945dcd207f5702f1606a398f6db9129fe8db5f02ca267152ac47660de9433a2"
+    },
+    {
+      "file": "current-settings-70.png",
+      "frame_action_index": 70,
+      "log": "normal-player-path.log",
+      "sha256": "ac9994275ddc9fb73f866248b368245e509b04b17e75d81d60be37cb550f7c0f"
+    },
+    {
+      "file": "ega-restored-inn.png",
+      "frame_action_index": 72,
+      "log": "normal-player-path.log",
+      "sha256": "2ff7cf1ef3d999bb786e8e1908c5ebbbb6f7c9ef4e7c1641428e3bca5920d28c"
+    },
+    {
+      "file": "rounded-settings-76.png",
+      "frame_action_index": 76,
+      "log": "normal-player-path.log",
+      "sha256": "8945dcd207f5702f1606a398f6db9129fe8db5f02ca267152ac47660de9433a2"
+    },
+    {
+      "file": "hd-rounded-inn.png",
+      "frame_action_index": 84,
+      "log": "normal-player-path.log",
+      "sha256": "01982b4b583a809ad74141b90cee97ea0f20b7cc1a3aaea1c309cd88c8abf128"
+    },
+    {
+      "file": "current-settings-88.png",
+      "frame_action_index": 88,
+      "log": "normal-player-path.log",
+      "sha256": "bca3f2900a71cfb9c33e330dbf557467f6deb438c7d4e8cd2622bf2f686b5065"
+    },
+    {
+      "file": "hd-current-inn.png",
+      "frame_action_index": 90,
+      "log": "normal-player-path.log",
+      "sha256": "71a9ea695f5047ddce2922ed600d599f371823e6cd148555a2da54e48dce2894"
+    },
+    {
+      "file": "rounded-settings-94.png",
+      "frame_action_index": 94,
+      "log": "normal-player-path.log",
+      "sha256": "14c9fbcd916869abb9f451964a43fc9ac45a78a844a833db1d2ffa59f3943135"
+    },
+    {
+      "file": "hd-rounded-restored-inn.png",
+      "frame_action_index": 96,
+      "log": "normal-player-path.log",
+      "sha256": "01982b4b583a809ad74141b90cee97ea0f20b7cc1a3aaea1c309cd88c8abf128"
+    },
+    {
+      "file": "font-settings-hd.png",
+      "frame_action_index": 99,
+      "log": "normal-player-path.log",
+      "sha256": "e19eca58f723c3bae45598a8b82908a1245e9a541639c27875609327a7689dbd"
+    },
+    {
+      "file": "font-settings-hidden.png",
+      "frame_action_index": 107,
+      "log": "normal-player-path.log",
+      "sha256": "e057b3ba581acbfc64bc047fd822fba21b147169fd71b963aeed8768b1397f38"
+    },
+    {
+      "file": "current-settings-117.png",
+      "frame_action_index": 117,
+      "log": "normal-player-path.log",
+      "sha256": "77d5d4fbbe2bedd377d22e1e66c78eaa3f75c954e92b75a03385e70e1bbd4fa4"
+    },
+    {
+      "file": "rounded-settings-122.png",
+      "frame_action_index": 122,
+      "log": "normal-player-path.log",
+      "sha256": "5f3d41e4ecd7c3ae437fec63384a363ff3102f9e30236ff9b10d9041aca51578"
+    },
+    {
+      "file": "reloaded-rounded-party.png",
+      "frame_action_index": 131,
+      "log": "cold-reload.log",
+      "sha256": "9a734042641615accc20aeedea8fced959a9a36e451a754196460711ffec0e0e"
+    },
+    {
+      "file": "font-settings-reloaded.png",
+      "frame_action_index": 134,
+      "log": "cold-reload.log",
+      "sha256": "ffd073e990b00d3021c83ca424546ecbfbfe3cf64c83cdf4842c03e7b44db522"
+    },
+    {
+      "file": "ega-rounded-sheet.png",
+      "frame_action_index": 137,
+      "log": "cold-reload.log",
+      "sha256": "e0b93668985f95bb00fa4569ed507eb8bbaff80b69582e9bf65384e579f393cd"
+    },
+    {
+      "file": "current-settings-141.png",
+      "frame_action_index": 141,
+      "log": "cold-reload.log",
+      "sha256": "d97248274792ef4bacea1238322e5cf47544334307e15cd8bf329ca214c7307d"
+    },
+    {
+      "file": "ega-current-sheet.png",
+      "frame_action_index": 143,
+      "log": "cold-reload.log",
+      "sha256": "549554a83fc3ad790af5e5e34f5a00ff4acbd1b1a27c8df1f15f2b2aa761bc0c"
+    },
+    {
+      "file": "rounded-settings-147.png",
+      "frame_action_index": 147,
+      "log": "cold-reload.log",
+      "sha256": "d74a1a459ae4d92972205c7455101ddc22ed306e46eb71182f44e1abd0620e89"
+    },
+    {
+      "file": "ega-rounded-restored-sheet.png",
+      "frame_action_index": 149,
+      "log": "cold-reload.log",
+      "sha256": "e0b93668985f95bb00fa4569ed507eb8bbaff80b69582e9bf65384e579f393cd"
+    },
+    {
+      "file": "ega-rounded-second-sheet.png",
+      "frame_action_index": 151,
+      "log": "cold-reload.log",
+      "sha256": "3a47c1eb1aa5502382f20248bb2c760f6f6734216ba7cda5c4aae7f56e7aeba0"
+    },
+    {
+      "file": "hd-rounded-sheet.png",
+      "frame_action_index": 156,
+      "log": "cold-reload.log",
+      "sha256": "aedd1dc8a3609dba6c42d2832776939aca3aabc346acde4302dff39681705710"
+    },
+    {
+      "file": "current-settings-160.png",
+      "frame_action_index": 160,
+      "log": "cold-reload.log",
+      "sha256": "e8a86eb27db130c326b60e0294253400df930c7b54cd0c55aeb1567fde642d8b"
+    },
+    {
+      "file": "hd-current-sheet.png",
+      "frame_action_index": 162,
+      "log": "cold-reload.log",
+      "sha256": "dce4f1457ba0f4581f98a4c6c615fde14e87c528a0f278bba9c30ea5edef41ed"
+    },
+    {
+      "file": "rounded-settings-166.png",
+      "frame_action_index": 166,
+      "log": "cold-reload.log",
+      "sha256": "690f179f142c06106b58349af6458ae1033812b6898e1ea8564d2fe9770058fa"
+    },
+    {
+      "file": "hd-rounded-restored-sheet.png",
+      "frame_action_index": 168,
+      "log": "cold-reload.log",
+      "sha256": "aedd1dc8a3609dba6c42d2832776939aca3aabc346acde4302dff39681705710"
+    },
+    {
+      "file": "english-current.png",
+      "frame_action_index": 170,
+      "log": "english.log",
+      "sha256": "dd42971355c09fe4bac881960fd519724f3656484438b2e05031062761bd66fc"
+    },
+    {
+      "file": "current-settings-174.png",
+      "frame_action_index": 174,
+      "log": "english.log",
+      "sha256": "820ac205b2552d3a3c88e5b5500e95f09e692e978e40658ee286e3692187679c"
+    },
+    {
+      "file": "english-font-change.png",
+      "frame_action_index": 176,
+      "log": "english.log",
+      "sha256": "dd42971355c09fe4bac881960fd519724f3656484438b2e05031062761bd66fc"
+    },
+    {
+      "file": "rounded-settings-180.png",
+      "frame_action_index": 180,
+      "log": "english.log",
+      "sha256": "c47308757d10acad509bacede8586cbba134b471abc021d3a05d8b7fb9473a86"
+    }
+  ],
+  "contact_sheet_sha256": "8350020abc81272010521612ca2dff821c5d6660094855fd05462a43e67c2488"
+}

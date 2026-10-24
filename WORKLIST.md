@@ -2,6 +2,10 @@
 
 更新日期：2026-10-24
 
+目前新增：參考Zeliard的圓潤字型設定；[比較與設定原型](docs/verification/rounded-font-20261024/review/index.html)
+已獲使用者核准，依[SPEC-043](docs/spec/043-rounded-game-font.md)接入並[正式驗收](docs/verification/rounded-font-20261024.md)。
+README設定截圖完成；目前僅開發版新增，既有六包與影片保持。
+
 本輪`v.1.0.7-20261024`三平台×純EGA／EGA＋HD六包與124秒新影片已完成，見
 [最新交付與驗收](docs/verification/repack-v1.0.7-20261024.md)。影片重新錄製v1.0.6修正及v1.0.7新增功能。
 兩類目錄為`full/ega/`與`full/ega-hd/`；公開引擎Release仍為v1.0.5，完整版與影片僅本機。

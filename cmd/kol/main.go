@@ -1098,6 +1098,7 @@ type game struct {
 	hdMonsterBlanks        map[image.Point]*ebiten.Image
 	hdMonsterUnderlay      *screen.Canvas
 	displaySettings        ui.DisplaySettings
+	gameFont               gameFontSettings
 	displayCanvas          *screen.Canvas
 	displayAwaitFrame      bool
 	presentation           *screen.Canvas

@@ -28,9 +28,12 @@ type toolbarPreferences struct {
 	Stats           string `json:"stats_floor"`
 	Skills          string `json:"skills_floor"`
 	Gold            string `json:"gold_floor"`
+	GameFont        string `json:"game_font"`
 }
 
-func defaultToolbarPreferences() toolbarPreferences { return toolbarPreferences{6, "", "200", "9000"} }
+func defaultToolbarPreferences() toolbarPreferences {
+	return toolbarPreferences{6, "", "200", "9000", "current"}
+}
 
 func toolbarPreferencesPath() (string, error) {
 	dir, err := os.UserConfigDir()
@@ -51,6 +54,9 @@ func loadToolbarPreferences(path string) (toolbarPreferences, error) {
 	}
 	if err = json.Unmarshal(raw, &p); err != nil {
 		return defaultToolbarPreferences(), err
+	}
+	if p.GameFont != "current" && p.GameFont != "rounded" {
+		return defaultToolbarPreferences(), fmt.Errorf("無效的遊戲字型")
 	}
 	if p.EnemyMultiplier != 1 && p.EnemyMultiplier != 2 && p.EnemyMultiplier != 3 && p.EnemyMultiplier != 6 {
 		return defaultToolbarPreferences(), fmt.Errorf("無效的疲勞倍率")
@@ -199,11 +205,7 @@ func (g *game) toolbarAction(i int) {
 	case 4:
 		t.character, t.help, t.paused = false, false, false
 		t.quick = false
-		if g.strings != nil {
-			g.displaySettings.Open = !g.displaySettings.Open
-		} else {
-			t.help = !t.help
-		}
+		g.toggleDisplayPanel()
 	case 5:
 		t.paused = !t.paused
 	case 6:
@@ -321,6 +323,11 @@ func (g *game) updateToolbar() (bool, error) {
 		}
 		if err != nil {
 			t.message = "偏好無法讀取，已回預設"
+			t.help = true
+		}
+		if err := g.setGameFont(t.prefs.GameFont); err != nil {
+			t.prefs.GameFont = "current"
+			t.message = "字模無法載入，保留目前字型。"
 			t.help = true
 		}
 		t.ready = true
@@ -534,6 +541,7 @@ func (g *game) drawToolbar(dst *ebiten.Image) {
 			}
 		}
 	}
+	g.drawDesktopDisplay(dst)
 }
 func toolbarOn(on bool) string {
 	if on {

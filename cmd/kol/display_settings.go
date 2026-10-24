@@ -30,19 +30,11 @@ func (g *game) displayEvent(action string) {
 
 // 開啟設定時先攔截輸入與自動動畫，返回的那一幀也不送給遊戲。
 func (g *game) updateDisplaySettings() bool {
-	if g.strings == nil {
-		return false
-	}
 	toggle := inpututil.IsKeyJustPressed(ebiten.KeyF10)
 	x, y := g.cursorPosition()
 	clicked := inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
 	if toggle || clicked && image.Pt(x, y).In(ui.DisplayControls.Button) {
-		g.displaySettings.Open = !g.displaySettings.Open
-		g.displaySettings.Cursor = 0
-		if g.hd != nil {
-			g.displaySettings.Cursor = 1
-		}
-		g.displaySettings.Problem = false
+		g.toggleDisplayPanel()
 		g.displayEvent("toggle")
 		return true
 	}
@@ -54,41 +46,9 @@ func (g *game) updateDisplaySettings() bool {
 		g.displayEvent("back")
 		return true
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) || inpututil.IsKeyJustPressed(ebiten.KeyTab) {
-		g.displaySettings.Cursor = (g.displaySettings.Cursor + 1) % 3
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
-		g.displaySettings.Cursor = (g.displaySettings.Cursor + 2) % 3
-	}
-	choice := -1
-	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) || inpututil.IsKeyJustPressed(ebiten.KeyNumpadEnter) {
-		choice = g.displaySettings.Cursor
-	}
-	if clicked {
-		for i, rect := range []image.Rectangle{ui.DisplayControls.Modes[0], ui.DisplayControls.Modes[1], ui.DisplayControls.Back} {
-			if image.Pt(x, y).In(rect) {
-				choice = i
-			}
-		}
-	}
-	if choice == 2 {
-		g.displaySettings.Open = false
-		g.displayEvent("back")
-	} else if choice >= 0 {
-		if choice == 1 && !g.hdInstalled() {
-			g.displaySettings.Problem = true
-			g.displayEvent("hd-unavailable")
-			return true
-		}
-		mode := [2]string{"ega", "hd"}[choice]
-		g.displaySettings.Cursor = choice
-		err := g.setGraphics(mode)
-		g.displaySettings.Problem = err != nil
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-		}
-		g.displayEvent(mode)
-	}
+	x, y = ebiten.CursorPosition()
+	w, _ := g.desktopSize()
+	g.updateDesktopDisplay(image.Pt(x*960/w, y*960/w), clicked)
 	return true
 }
 
@@ -102,10 +62,13 @@ func (g *game) drawDisplaySettings(dst *ebiten.Image) error {
 	g.displayCanvas.Clear()
 	g.displaySettings.HD = g.hd != nil
 	g.displaySettings.HDUnavailable = !g.hdInstalled()
+	// 桌面面板統一由工具列呈現；遊戲層只保留下緣的既有入口。
+	state := g.displaySettings
+	state.Open = false
 	if g.hd != nil {
-		g.hd.DrawDisplaySettings(g.displayCanvas.Image(), g.displaySettings)
+		g.hd.DrawDisplaySettings(g.displayCanvas.Image(), state)
 		g.hd.DrawMusicControl(g.displayCanvas.Image(), g.musicEnabled)
-	} else if err := ui.DrawDisplaySettings(g.displayCanvas.Image(), g.cjk, g.strings, g.displaySettings); err != nil {
+	} else if err := ui.DrawDisplaySettings(g.displayCanvas.Image(), g.cjk, g.strings, state); err != nil {
 		return err
 	} else if err := ui.DrawMusicControl(g.displayCanvas.Image(), g.cjk, g.musicEnabled); err != nil {
 		return err
