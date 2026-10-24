@@ -12029,3 +12029,6 @@ FFmpeg時間參數由不接受的`.1`改為`0.1`，並增加錄影程序提早�
 本輪[驗收入口](docs/verification/repack-v1.0.7-20261024.md)保存正式收據、兩份錄影來源、章節與影音metadata。
 381項本輪資料271014253 bytes完整封存為101410092 bytes，SHA-256
 `eae7cb32b0fc8462be128c1faedb00ba31f8894aa0d518cffb29751695d12406`；逐檔驗證後清空workspace，沒有省略檔案。
+打包／影片工具及驗收提交`b97dcd1252a59ac15463d8d994d1ea77dd31d17d`已push至main，遠端回讀相符。
+新六包、影片、README連結、兩類目錄、工具語法及453份程式輸入最終核對通過；無root-owned產物或遺留容器。
+原有未追蹤文字檔保持，未加入提交。正式Go程式未變更，沒有新增Release或移動tag。
